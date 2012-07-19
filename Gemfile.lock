@@ -29,6 +29,8 @@ GEM
       activesupport (= 3.2.6)
       arel (~> 3.0.2)
       tzinfo (~> 0.3.29)
+    activerecord-postgresql-adapter (0.0.1)
+      pg
     activeresource (3.2.6)
       activemodel (= 3.2.6)
       activesupport (= 3.2.6)
@@ -95,6 +97,7 @@ GEM
     mime-types (1.19)
     multi_json (1.3.6)
     nokogiri (1.5.5)
+    pg (0.14.0)
     polyglot (0.3.3)
     rack (1.4.1)
     rack-cache (1.2)
@@ -170,6 +173,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  activerecord-postgresql-adapter
   capybara
   coffee-rails (~> 3.2.1)
   cucumber-rails
@@ -180,6 +184,7 @@ DEPENDENCIES
   json
   launchy
   linecache19!
+  pg
   rails (= 3.2.6)
   ruby-debug-base19x (~> 0.11.30.pre4)
   ruby-debug19
