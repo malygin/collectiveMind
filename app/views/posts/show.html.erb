@@ -1,15 +1,15 @@
 <p>
-	<strong> Title: </strong>
+	<strong> Заголовок: </strong>
 	<%= @post.title %>
 </p>
 <p>
-	<strong>Text:</strong>
+	<strong>СОдержание:</strong>
 	<%= @post.text %>
 </p>
-<h2> Comments </h2>
+<h2> Комментарии </h2>
 <% @post.comments.each do |comment| %>
 	<p>
-		<strong> Commenter: </strong>
+		<strong> АВтор: </strong>
 		<%= comment.commenter %>		
 	</p>
 	<p>
@@ -17,7 +17,7 @@
 	</p>
 <% end %>
 
-<h2>Add a comment:</h2>
+<h2>Добавить комментарий:</h2>
 <%= form_for([@post, @post.comments.build]) do |f| %>
   <p>
     <%= f.label :commenter %><br />
