@@ -1,0 +1,9 @@
+%p 
+	%strong Автор:
+	= comment.commenter
+
+%p
+	%strong Комментарий
+	= comment.body
+= link_to 'Удалить комментарий', [comment.post, comment], :confirm => 'Точно?', :method => :delete 
+%hr

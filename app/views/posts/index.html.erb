@@ -1,4 +1,4 @@
-<h1>POSTS</h1>
+<h1>Неудовлетворенности</h1>
 
 <table>
 	<tr>
@@ -10,9 +10,9 @@
 	<tr>
 		<td> <%= post.title %></td>
 		<td> <%= post.text %></td>
-		<td> <%= link_to 'Show', :action => :show, :id => post.id %>  </td>
-		<td> <%= link_to 'Edit', :action => :edit, :id => post.id %> </td>
-		<td> <%= link_to 'Destroy', {:action => :destroy, :id => post.id}, :method => :delete, :confirm => 'Are you sure?' %></td>
+		<td> <%= link_to 'Посмотреть', :action => :show, :id => post.id %>  </td>
+		<td> <%= link_to 'Отредактивроть', :action => :edit, :id => post.id %> </td>
+		<td> <%= link_to 'Удалить', {:action => :destroy, :id => post.id}, :method => :delete, :confirm => 'Точно?' %></td>
 	</tr>
 	<% end %>
 </table>

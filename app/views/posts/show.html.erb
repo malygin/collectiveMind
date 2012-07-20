@@ -6,32 +6,13 @@
 	<strong>СОдержание:</strong>
 	<%= @post.text %>
 </p>
+<hr/>
 <h2> Комментарии </h2>
-<% @post.comments.each do |comment| %>
-	<p>
-		<strong> АВтор: </strong>
-		<%= comment.commenter %>		
-	</p>
-	<p>
-		<%= comment.body %>
-	</p>
-<% end %>
+<%= render @post.comments %>
 
 <h2>Добавить комментарий:</h2>
-<%= form_for([@post, @post.comments.build]) do |f| %>
-  <p>
-    <%= f.label :commenter %><br />
-    <%= f.text_field :commenter %>
-  </p>
-  <p>
-    <%= f.label :body %><br />
-    <%= f.text_area :body %>
-  </p>
-  <p>
-    <%= f.submit %>
-  </p>
-<% end %>
+<%= render 'comments/form' %>
  
 
-<%= link_to 'Back', :action => :index %>
-<%= link_to 'Edit', :action => :edit, :id => @post.id %>
+<%= link_to 'К неудволетворенностям', posts_path %>
+<%= link_to 'Редактировать', edit_post_path(@post) %>
