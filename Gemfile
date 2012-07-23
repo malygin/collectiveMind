@@ -13,16 +13,25 @@ group :development, :test do
   gem 'linecache19', :git => 'git://github.com/mark-moseley/linecache'
   gem 'ruby-debug-base19x', '~> 0.11.30.pre4'
   gem 'ruby-debug19'
-  gem 'cucumber-rails'
-  gem 'cucumber-rails-training-wheels'
+
   gem 'database_cleaner'
   gem 'capybara'
   gem 'launchy'
+
 end
 
 group :production do
   gem 'pg'
   gem 'activerecord-postgresql-adapter'
+end
+
+group :test do
+  gem 'rspec-rails'
+  gem 'rspec'
+  gem 'guard-rspec'
+  gem 'cucumber-rails'
+  gem 'cucumber-rails-training-wheels'
+
 end
 
 # Gems used only for assets and not required
@@ -38,6 +47,7 @@ group :assets do
 end
 
 gem 'haml'
+gem "haml-rails"
 gem 'jquery-rails'
 
 # To use ActiveModel has_secure_password

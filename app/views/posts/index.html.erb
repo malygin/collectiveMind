@@ -10,8 +10,8 @@
 	<tr>
 		<td> <%= post.title %></td>
 		<td> <%= post.text %></td>
-		<td> <%= link_to 'Посмотреть', :action => :show, :id => post.id %>  </td>
-		<td> <%= link_to 'Отредактивроть', :action => :edit, :id => post.id %> </td>
+		<td> <%= link_to 'Посмотреть | ', :action => :show, :id => post.id %>  </td>
+		<td> <%= link_to 'Отредактировать  | ', :action => :edit, :id => post.id %> </td>
 		<td> <%= link_to 'Удалить', {:action => :destroy, :id => post.id}, :method => :delete, :confirm => 'Точно?' %></td>
 	</tr>
 	<% end %>

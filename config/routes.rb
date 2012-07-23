@@ -1,4 +1,6 @@
 CollectiveMind::Application.routes.draw do
+  get "users/new"
+
   get "welcome/index"
   
   resources :posts do
