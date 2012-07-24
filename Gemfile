@@ -7,7 +7,7 @@ gem 'rails', '3.2.6'
 
 #gem 'sqlite3'
 gem 'json'
-
+gem 'gravatar_image_tag'
 group :development, :test do
   gem 'sqlite3'
   gem 'linecache19', :git => 'git://github.com/mark-moseley/linecache'
@@ -31,6 +31,7 @@ group :test do
   gem 'guard-rspec'
   gem 'cucumber-rails'
   gem 'cucumber-rails-training-wheels'
+  gem 'factory_girl_rails'
 
 end
 
