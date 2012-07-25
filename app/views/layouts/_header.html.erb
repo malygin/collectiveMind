@@ -4,7 +4,11 @@
     <ul>
       <li><%= link_to "На главную", '/' %></li>
       <li><%= link_to "Помощь", help_path %></li>
-      <li><%= link_to "Войти", '/signup' %></li>
+      <% if signed_in? %>
+      	 <li>(<%= link_to current_user.surname, user_path(current_user) %>) <%= link_to "Выйти", "/signout" %></li>
+      <% else %>
+     	 <li><%= link_to "Войти", '/signin' %></li>
+      <% end %>
     </ul>
   </nav>
 </header>

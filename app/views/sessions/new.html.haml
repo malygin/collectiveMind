@@ -1,0 +1,17 @@
+%h1 Пора авторизоваться
+
+= form_for(:session, :url => sessions_path) do |f|
+	.field
+		= f.label :email, "Электронная почта"
+		%br
+		= f.text_field :email
+	.field
+		= f.label :password, "Пароль"
+		%br
+		= f.text_field :password
+	.actions
+		=f.submit "Авторизоваться"
+
+%p
+	Еще не зарегистрованы? 
+	= link_to "Зарегистрироваться сейчас!", signup_path

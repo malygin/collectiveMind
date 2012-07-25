@@ -1,1 +1,26 @@
-%h1 Авторизация
+%h1 Давайте зарегистрируем вас!
+
+= form_for @user do |f|
+	= render 'shared/error_messages'
+	.field 
+		= f.label :name, "Имя, сестра!"
+		%br
+		= f.text_field :name
+	.field 
+		= f.label :surname, "Фамилия"
+		%br
+		= f.text_field :surname 
+	.field 
+		= f.label :email , "Электронная почта" 
+		%br
+		= f.text_field :email
+	.field 
+		= f.label :password, "Пароль"
+		%br
+		= f.password_field :password
+	.field 
+		=f.label :password_confirmation , "подтвердите пароль"
+		%br
+		=f.password_field :password_confirmation
+	.action
+		=f.submit "Зарегистрироваться!"

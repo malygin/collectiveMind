@@ -1,5 +1,10 @@
 <h1>Неудовлетворенности</h1>
-<%= link_to 'Добавить неудовлетворенность', new_post_path %><br/>
+<% if signed_in? %>
+ <%= link_to "+добавить", new_post_path %> 
+<% else %>
+Вы не можете добавить свою неудовлетворенность, пока не войдете в систему!! <br/>
+
+<% end %>
 <table>
 	<tr>
 		<th> Заголовок</th>
@@ -9,7 +14,6 @@
 	<% @posts.each do |post| %>
 	<tr>
 		<td> <%= post.title %></td>
-		<td> <%= post.text %></td>
 		<td> <%= link_to 'Посмотреть | ', :action => :show, :id => post.id %>  </td>
 		<td> <%= link_to 'Отредактировать  | ', :action => :edit, :id => post.id %> </td>
 		<td> <%= link_to 'Удалить', {:action => :destroy, :id => post.id}, :method => :delete, :confirm => 'Точно?' %></td>
