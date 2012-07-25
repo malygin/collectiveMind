@@ -20,8 +20,19 @@ describe UsersController do
 
 	describe "GET 'new'" do
 	    it "should be successful" do
-	      get 'new'
+	      get :new
 	      response.should be_success
 	    end
+	end
+
+	describe "POST 'create'" do
+		describe "failure" do
+			before(:each) do
+				@attr = { :name=>"", :surname=>"", :password=>"", :password_confirmation =>""}
+			end
+
+			it "should not create a user" do
+				lambda 
+		end
 	end
 end
