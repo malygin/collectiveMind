@@ -8,7 +8,7 @@ gem 'rails', '3.2.6'
 #gem 'sqlite3'
 gem 'json'
 gem 'gravatar_image_tag'
-gem 'magic_encoding'
+#gem 'magic_encoding'
 
 group :development, :test do
   gem 'sqlite3'
