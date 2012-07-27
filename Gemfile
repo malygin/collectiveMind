@@ -14,10 +14,6 @@ group :development, :test do
   gem 'ruby-debug-base19x', '~> 0.11.30.pre4'
   gem 'ruby-debug19'
 
-  gem 'database_cleaner'
-  gem 'capybara'
-  gem 'launchy'
-
 end
 
 group :production do
@@ -29,10 +25,10 @@ group :test do
   gem 'rspec-rails'
   gem 'rspec'
   gem 'guard-rspec'
-  gem 'cucumber-rails'
-  gem 'cucumber-rails-training-wheels'
+  gem 'capybara', :git => 'git://github.com/jnicklas/capybara.git'
+  gem 'launchy'
+  gem 'database_cleaner'
   gem 'factory_girl_rails'
-
 end
 
 # Gems used only for assets and not required
