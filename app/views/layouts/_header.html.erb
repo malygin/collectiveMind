@@ -5,7 +5,9 @@
       <li><%= link_to "На главную", '/' %></li>
       <li><%= link_to "Помощь", help_path %></li>
       <% if signed_in? %>
-      	 <li>(<%= link_to current_user.surname, user_path(current_user) %>) <%= link_to "Выйти", "/signout" %></li>
+      	 <li>(<%= link_to current_user.surname, user_path(current_user) %>
+          <%= link_to "ред.", edit_user_path(current_user) %>)
+          <%= link_to "Выйти", "/signout" %></li>
       <% else %>
      	 <li><%= link_to "Войти", '/signin' %></li>
       <% end %>

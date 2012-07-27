@@ -1,0 +1,7 @@
+%h1 Все пользователи
+
+%ul{:class=>'users'}
+	- @users.each do |user|
+		%li
+			=gravatar_for user, :size =>30
+			=link_to user.name, user
