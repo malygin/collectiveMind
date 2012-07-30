@@ -9,6 +9,7 @@ gem 'rails', '3.2.6'
 gem 'json'
 gem 'gravatar_image_tag'
 gem 'will_paginate', '~> 3.0.0'
+gem 'faker'
 #gem 'magic_encoding'
 
 group :development, :test do
@@ -16,7 +17,7 @@ group :development, :test do
   gem 'linecache19', :git => 'git://github.com/mark-moseley/linecache'
   gem 'ruby-debug-base19x', '~> 0.11.30.pre4'
   gem 'ruby-debug19'
-  gem 'faker'
+
 
 end
 
