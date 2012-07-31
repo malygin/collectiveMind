@@ -154,3 +154,57 @@ ul.users {
 .users li {
   list-style: none;
 }
+h1.frustration {
+  margin-bottom: 0.3em;
+}
+
+table.frustrations {
+  margin-top: 1em;
+}
+
+table.frustrations tr {
+  height: 70px;
+}
+
+table.frustrations tr td.gravatar {
+  border-top: 1px solid #ccc;
+  vertical-align: top;
+  width: 50px;
+}
+
+table.frustrations tr td.frustration {
+  border-top: 1px solid #ccc;
+  vertical-align: top;
+  padding-top: 10px;
+}
+
+table.frustrations tr td.frustration span.timestamp {
+  display: block;
+  font-size: 85%;
+  color: #666;
+}
+
+div.user_info img {
+  padding-right: 0.1em;
+}
+
+div.user_info a {
+  text-decoration: none;
+}
+
+div.user_info span.user_name {
+  position: absolute;
+}
+
+div.user_info span.frustrations {
+  font-size: 80%;
+}
+
+form.new_frustration {
+  margin-bottom: 2em;
+}
+
+form.new_frustration textarea {
+  height: 4em;
+  margin-bottom: 0;
+}

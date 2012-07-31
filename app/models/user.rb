@@ -6,6 +6,8 @@ class User < ActiveRecord::Base
    :dateActivation, :dateLastEnter, :dateRegistration, :email, :faculty, :group,
     :name, :string, :string, :surname, :validate, :vkid
 
+  has_many :frustrations, :dependent => :destroy
+
   email_regex = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
   validates :name, :presence => true,
   				   :length => { :maximum => 50 }

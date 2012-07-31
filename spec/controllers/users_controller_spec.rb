@@ -4,7 +4,7 @@ describe UsersController do
 	render_views
 	describe "GET 'show'" do
 		before(:each) do
-			@user = Factory(:user)
+			@user = FactoryGirl.create(:user)
 		end
 
 		it "should be successful" do
@@ -15,6 +15,14 @@ describe UsersController do
 		it "should find the right user" do
 			get :show, :id => @user
 			assigns(:user).should == @user
+		end
+		it "should show the user's frustrations" do
+			fr1 = FactoryGirl.create(:frustration, :user => @user, :content => "Foo bar")
+			fr2 = FactoryGirl.create(:frustration, :user => @user, :content => "Baz quxx")
+			get :show, :id => @user
+			#puts response.body
+			response.should have_selector("span.content", :content => fr1.content)
+			response.should have_selector("span.content", :content => fr2.content)
 		end
 	end
 
@@ -40,17 +48,7 @@ describe UsersController do
 		end
 	end
 
-	describe "GET 'edit'" do
+	
 
-		before(:each) do
-			@user = Factory(:user)
-			test_sign_in(@user)
-		end
 
-		it "should have a link to achnge the Gravatar" do
-			get :edit, :id =>@user
-			gravatar_url = "http://gravatar.com/emails"
-			response.should have_selector("a", :href => gravatar_url, :content =>"change")
-		end
-	end
 end

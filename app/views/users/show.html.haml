@@ -2,5 +2,10 @@
 	= gravatar_for @user
 	= @user.name
 	= @user.surname
-%p
-	= link_to "Добавить неудовлетворенность", new_post_path
+Добавлено  неудовлетворенностей - 
+= @user.frustrations.count
+
+- unless @user.frustrations.empty?
+	%table{:class => "frustrations"}
+		= render @frustrations
+	= will_paginate @frustrations
