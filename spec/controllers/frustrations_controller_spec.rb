@@ -16,4 +16,49 @@ describe FrustrationsController do
 		 end
 	end
 
+	describe "POST 'create'" do
+
+		before (:each) do
+			@user = test_sign_in(FactoryGirl.create(:user))
+		end
+
+		describe "failure" do
+
+			before(:each) do 
+				@attr = { :content => ""}
+			end
+
+			it "should not create frustration" do
+				lambda do
+					post :create, :frustration => @attr 
+				end.should_not change(Frustration, :count)
+			end
+
+			it "should render  the home page" do
+				post :create, :frustration => @attr
+				response.should render_template('pages/home')
+			end
+		end
+
+		describe "success" do
+			
+			before(:each) do
+				@attr = { :content => "Lorem ipsum"}
+			end
+
+			it "should create frustration" do
+				lambda do
+					post :create, :frustration => @attr
+				end.should change(Frustration, :count).by(1)
+			end
+
+			it "should redirect to the home page" do
+				post :create, :frustration => @attr
+				response.should redirect_to(root_path)
+			end
+
+		end
+
+	end
+
 end

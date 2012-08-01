@@ -7,4 +7,8 @@ class PagesController < ApplicationController
 
   def help
   end
+
+  def home
+  	@frustration = Frustration.new if signed_in?
+  end
 end
