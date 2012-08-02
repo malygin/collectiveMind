@@ -1,0 +1,17 @@
+%tr 
+	%td{:class => "gravatar"}
+		= link_to gravatar_for(feed_item.user), feed_item.user
+	%td{:class => "frustration"}
+		%span{:class => "user"}
+			= link_to feed_item.user.name, feed_item.user
+		%span{:class => "content"}= feed_item.content
+		%span{:class => "timestamp"} 
+			Добавлено
+			= time_ago_in_words(feed_item.created_at)
+			назад
+		- if !feed_item.structure
+			%b Неуструктурирована 
+	- if current_user?(feed_item.user)
+		%td
+			=link_to "cнять?", feed_item, :method => :delete, :confirm => "Точно?", :title => feed_item.content
+

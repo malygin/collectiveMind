@@ -10,6 +10,7 @@ gem 'json'
 gem 'gravatar_image_tag'
 gem 'will_paginate', '~> 3.0.0'
 gem 'faker'
+gem 'russian'
 #gem 'magic_encoding'
 
 group :development, :test do

@@ -7,5 +7,19 @@ class Frustration < ActiveRecord::Base
   validates :user_id, :presence => true
 
   default_scope :order => 'frustrations.created_at DESC'
+
+  def self.feed_all 
+  	Frustration.all
+  end
+
+  def self.feed_structure
+  	Frustration.where(:structure => true)
+
+  end
+
+  def self.feed_unstructure
+  	Frustration.where(:structure => false)
+  end
+
   
 end

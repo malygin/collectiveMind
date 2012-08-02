@@ -3,4 +3,4 @@
 		%span{:class => "content"}= frustration.content
 		%span{:class => "timestamp"} 
 			Добавлено
-			= frustration.created_at
+			= Russian::strftime(frustration.created_at,  "%A, %1d %B %T")

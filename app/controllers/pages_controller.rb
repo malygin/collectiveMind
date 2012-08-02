@@ -9,6 +9,28 @@ class PagesController < ApplicationController
   end
 
   def home
-  	@frustration = Frustration.new if signed_in?
+  	if signed_in?
+  		@frustration = Frustration.new 
+  		@frustrations_feed = Frustration.paginate(:page => params[:page])
+  	end
   end
+
+  #TODO
+  def structure_frustrations
+    if signed_in?
+      @frustration = Frustration.new 
+      @frustrations_feed = Frustration.feed_structure.paginate(:page => params[:page])
+      render 'home'
+    end
+  end
+
+  def unstructure_frustrations
+    if signed_in?
+      @frustration = Frustration.new 
+      @frustrations_feed = Frustration.feed_unstructure.paginate(:page => params[:page])
+      render 'home'
+    end
+  end
+
+
 end

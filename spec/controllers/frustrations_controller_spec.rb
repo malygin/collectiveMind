@@ -61,4 +61,52 @@ describe FrustrationsController do
 
 	end
 
+	describe "frustrations feed all" do
+		before(:each) do
+			@user = FactoryGirl.create(:user)
+			@fr1 = FactoryGirl.create(:frustration, :user => @user, :created_at => 1.day.ago)
+			@fr2 = FactoryGirl.create(:frustration, :user => @user, :created_at => 1.hour.ago)			
+		end
+
+		it "should include in feed" do
+			Frustration.feed_all.include?(@fr1).should be_true
+			Frustration.feed_all.include?(@fr2).should be_true
+		end	
+	end
+
+	describe "DELETE 'destroy'" do
+
+		describe "for an unauthorized user" do
+
+			before(:each) do
+				@user = FactoryGirl.create(:user)
+				@wrong_user = FactoryGirl.create(:user, :email => FactoryGirl.generate(:email))
+				test_sign_in(@wrong_user)
+				@fr = FactoryGirl.create(:frustration, :user => @user)
+			end
+
+			it "should deny access" do
+				delete :destroy, :id => @fr
+				response.should redirect_to root_path
+			end
+		end
+
+		describe "for authorized user" do
+
+			before(:each) do
+				@user = test_sign_in(FactoryGirl.create(:user))
+				@fr = FactoryGirl.create(:frustration, :user => @user)
+			end
+
+			it "should destroy frustration" do
+				lambda do
+					delete :destroy, :id => @fr
+				end.should change(Frustration, :count).by(-1)
+			end
+		end
+
+	end
+
+	
+
 end

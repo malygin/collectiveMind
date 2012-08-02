@@ -5,7 +5,8 @@
 			%td
 				%h1{:class => "frustration"} Добавить неудовлетворенность
 				= render "shared/frustration_form"
-			%td
+				= render "shared/feed_frustrations"
+			%td{:class => "td_top"}
 				= render "shared/user_info"
 - else
 	%h1 Система превращения ваших неудовлетворенностей в удовлетворенности

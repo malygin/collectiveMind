@@ -3,7 +3,9 @@
   <nav class="round">
     <ul>
       <li><%= link_to "На главную", '/' %></li>
-      <li><%= link_to "Помощь", help_path %></li>
+      <li><%= link_to "структ.", "/structure" %></li>
+      <li><%= link_to "НЕструкт.", "/unstructure" %></li>
+
       <% if signed_in? %>
       	 <li>(<%= link_to current_user.surname, user_path(current_user) %>
           <%= link_to "ред.", edit_user_path(current_user) %>)

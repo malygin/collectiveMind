@@ -8,9 +8,8 @@ FactoryGirl.define do
 		password_confirmation "foobar"
 	end
 
-    sequence :email do 
-	   "persob-#{n}@exmaple.com"
-	end
+   
+	sequence(:email) {|n| "persob-#{n}@exmaple.com"}
 
     factory :frustration  do
 		content "Foo bar"

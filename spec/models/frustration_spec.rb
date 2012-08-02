@@ -3,7 +3,7 @@ require 'spec_helper'
 describe Frustration do
 
 	before(:each) do
-		@user = Factory (:user)
+		@user = FactoryGirl.create(:user)
 		@attr = {
 			:content => "value for content",
 		}
@@ -68,6 +68,36 @@ describe Frustration do
 			@user.frustrations.build(:content => "a"*1000).should_not be_valid
 		end
 
+	end
+	describe "showing" do
+			
+			before(:each) do
+				#@user = FactoryGirl.create(:user)
+				@fr_struct= FactoryGirl.create(:frustration, :user => @user, :structure => true)
+				@fr_unstruct= FactoryGirl.create(:frustration, :user => @user, :structure => false)
+			end
+
+			describe "structure feed" do
+
+				it "should show structure fructions" do
+					Frustration.feed_structure.include?(@fr_struct).should be_true  
+				end
+				it "shouldn't show unstructure fructions" do
+					Frustration.feed_structure.include?(@fr_unstruct).should be_false  
+				end
+
+			end
+
+			describe "unstructure feed" do
+
+				it "should show unstructure fructions" do
+					Frustration.feed_unstructure.include?(@fr_unstruct).should be_true  
+				end
+				it "shouldn't show structure fructions" do
+					Frustration.feed_unstructure.include?(@fr_struct).should be_false  
+				end
+
+			end
 	end
 
 end

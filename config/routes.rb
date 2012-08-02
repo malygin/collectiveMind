@@ -8,6 +8,8 @@ CollectiveMind::Application.routes.draw do
 
   match "/signin", :to => "sessions#new"
   match "/signout", :to => "sessions#destroy"
+  match "/structure", :to => "pages#structure_frustrations"
+  match "/unstructure", :to => "pages#unstructure_frustrations"
 
   #get "users/new"
   resources :users
