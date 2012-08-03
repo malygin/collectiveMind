@@ -19,7 +19,9 @@ class FrustrationsController < ApplicationController
 		redirect_back_or root_path
 	end
 
-	
+	def show
+		@frustration = Frustration.find(params[:id])
+	end
 
 	private 
 		def authorized_user

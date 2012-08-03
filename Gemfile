@@ -11,6 +11,7 @@ gem 'gravatar_image_tag'
 gem 'will_paginate', '~> 3.0.0'
 gem 'faker'
 gem 'russian'
+gem 'thin'
 #gem 'magic_encoding'
 
 group :development, :test do
@@ -18,7 +19,7 @@ group :development, :test do
   gem 'linecache19', :git => 'git://github.com/mark-moseley/linecache'
   gem 'ruby-debug-base19x', '~> 0.11.30.pre4'
   gem 'ruby-debug19'
-
+  gem 'quiet_assets'
 
 end
 

@@ -4,11 +4,13 @@
 	%td{:class => "frustration"}
 		%span{:class => "user"}
 			= link_to feed_item.user.name, feed_item.user
-		%span{:class => "content"}= feed_item.content
+		%span{:class => "content"}
+			= link_to feed_item.content, feed_item
 		%span{:class => "timestamp"} 
 			Добавлено
 			= time_ago_in_words(feed_item.created_at)
-			назад
+			назад. Комментариев - 
+			= feed_item.comment_frustrations.count
 		- if !feed_item.structure
 			%b Неуструктурирована 
 	- if current_user?(feed_item.user)

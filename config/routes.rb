@@ -1,6 +1,8 @@
 CollectiveMind::Application.routes.draw do
 
 
+
+
   match "/about", :to => "pages#about"
   match "/contacts", :to => "pages#contacts"
   match "/help", :to => "pages#help"
@@ -14,7 +16,9 @@ CollectiveMind::Application.routes.draw do
   #get "users/new"
   resources :users
   resources :sessions, :only => [:new, :create, :destroy]
-  resources :frustrations, :only => [:create, :destroy]
+  resources :frustrations  do
+      resources :comment_frustrations
+  end
 
   match "/signup", :to =>"users#new"
 
