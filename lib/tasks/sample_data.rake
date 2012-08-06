@@ -21,7 +21,7 @@ namespace :db  do
 				:password_confirmation => password)
 		end
 		User.all(:limit => 6).each do |user|
-			3.times do
+			2.times do
 				user.frustrations.create!(:content => Faker::Lorem.sentence(10),:structure => [true, false][rand(2)])
 			end
 		end

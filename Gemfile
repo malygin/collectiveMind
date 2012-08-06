@@ -12,6 +12,7 @@ gem 'will_paginate', '~> 3.0.0'
 gem 'faker'
 gem 'russian'
 gem 'thin'
+gem 'settingslogic'
 #gem 'magic_encoding'
 
 group :development, :test do

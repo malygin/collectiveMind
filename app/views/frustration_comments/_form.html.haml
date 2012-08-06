@@ -1,0 +1,10 @@
+
+= form_for [@frustration, @frustration.frustration_comments.build] do 
+	%p
+		= label :frustration_comment, :content,  'Текст'
+		%br
+		= text_area :frustration_comment,:content
+	%p
+		= submit_tag 'Добавить комментарий'
+
+

@@ -6,7 +6,7 @@ class Frustration < ActiveRecord::Base
   validates :content, :presence => true, :length => {:maximum => 800}
   validates :user_id, :presence => true
 
-  has_many :comment_frustrations, :dependent => :destroy
+  has_many :frustration_comments, :dependent => :destroy
 
   default_scope :order => 'frustrations.created_at DESC'
 

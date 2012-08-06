@@ -7,7 +7,7 @@ class User < ActiveRecord::Base
     :name, :string, :string, :surname, :validate, :vkid
 
   has_many :frustrations, :dependent => :destroy
-  has_many :comment_frustrations, :dependent => :destroy
+  has_many :frustration_comments, :dependent => :destroy
 
   email_regex = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
   validates :name, :presence => true,

@@ -1,5 +1,5 @@
 %table{:class => "frustrations"}
 	= render 'shared/feed_item', :feed_item => @frustration
 
-= render @frustration.comment_frustrations
-= render 'comment_frustrations/form'
+= render @frustration.frustration_comments
+= render 'frustration_comments/form'

@@ -17,7 +17,7 @@ CollectiveMind::Application.routes.draw do
   resources :users
   resources :sessions, :only => [:new, :create, :destroy]
   resources :frustrations  do
-      resources :comment_frustrations
+      resources :frustration_comments
   end
 
   match "/signup", :to =>"users#new"

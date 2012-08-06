@@ -1,0 +1,11 @@
+%p 
+	= link_to frustration_comment.user.surname, frustration_comment.user
+
+%p
+	= frustration_comment.content
+
+%span{:class=>"timestamp"}
+	= time_ago_in_words(frustration_comment.created_at)
+
+/ = link_to 'Удалить комментарий', [comment_frustration.frustration, comment_frustration], :confirm => 'Точно?', :method => :delete 
+%hr

@@ -10,7 +10,7 @@
 			Добавлено
 			= time_ago_in_words(feed_item.created_at)
 			назад. Комментариев - 
-			= feed_item.comment_frustrations.count
+			= feed_item.frustration_comments.count
 		- if !feed_item.structure
 			%b Неуструктурирована 
 	- if current_user?(feed_item.user)
