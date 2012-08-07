@@ -4,7 +4,7 @@ class User < ActiveRecord::Base
   attr_accessor :password
   attr_accessible :login, :password, :password_confirmation, :encrypted_password,
    :dateActivation, :dateLastEnter, :dateRegistration, :email, :faculty, :group,
-    :name, :string, :string, :surname, :validate, :vkid
+    :name, :string, :string, :surname, :validate, :vkid, :score
 
   has_many :frustrations, :dependent => :destroy
   has_many :frustration_comments, :dependent => :destroy

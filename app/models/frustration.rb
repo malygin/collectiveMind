@@ -1,5 +1,5 @@
 class Frustration < ActiveRecord::Base
-  attr_accessible :content, :structure
+  attr_accessible :content, :structure, :archive
 
   belongs_to :user
 
@@ -11,16 +11,23 @@ class Frustration < ActiveRecord::Base
   default_scope :order => 'frustrations.created_at DESC'
 
   def self.feed_all 
-  	Frustration.all
+  	Frustration.where(:archive => false)
+  end
+
+  def self.feed_archive
+    Frustration.where(:archive => true)
   end
 
   def self.feed_structure
-  	Frustration.where(:structure => true)
-
+  	Frustration.where(:structure => true).where(:archive => false)
   end
 
   def self.feed_unstructure
-  	Frustration.where(:structure => false)
+  	Frustration.where(:structure => false).where(:archive => false)
+  end
+
+  def negative_comments
+    FrustrationComment.where(:negative => true)
   end
 
   

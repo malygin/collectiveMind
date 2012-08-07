@@ -1,11 +1,14 @@
-%p 
-	= link_to frustration_comment.user.surname, frustration_comment.user
-
-%p
-	= frustration_comment.content
-
+%br= link_to frustration_comment.user.surname, frustration_comment.user
+= frustration_comment.content
+- if frustration_comment.negative
+	%i негативный
+	-if current_user == @frustration.user
+		%br=link_to "в архив сославшись на этот коммент", archive_frustration_path(@frustration.id,:author_comment =>frustration_comment.user),   :method => :put, :confirm => "Точно?", :title => @frustration.content
+- else 
+	%i структурирующий
 %span{:class=>"timestamp"}
 	= time_ago_in_words(frustration_comment.created_at)
+
 
 / = link_to 'Удалить комментарий', [comment_frustration.frustration, comment_frustration], :confirm => 'Точно?', :method => :delete 
 %hr

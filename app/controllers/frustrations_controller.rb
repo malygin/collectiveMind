@@ -19,7 +19,24 @@ class FrustrationsController < ApplicationController
 		redirect_back_or root_path
 	end
 
+#todo check author of comment - true?
+
+	def archive
+		#puts "_______"
+		@user = User.where(:id => (params[:author_comment])).first
+		puts @user.score
+		new_score = @user.score+Settings.scores.unstructure.denial_for_negative_comment
+		puts new_score
+		@user.update_attribute(:score, new_score)
+		@frustration = Frustration.find(params[:id])
+		@frustration.update_attribute(:archive,true) 
+		flash[:success] = "Отправлена в архив!"
+		redirect_to root_path
+	end
+
 	def show
+		@negative = params[:negative].nil? ? true : to_bool(params[:negative]) 
+		#puts  @negative
 		@frustration = Frustration.find(params[:id])
 	end
 
@@ -28,4 +45,9 @@ class FrustrationsController < ApplicationController
 			@frustration = current_user.frustrations.find_by_id(params[:id])
 			redirect_to root_path if @frustration.nil?
 		end
+		def to_bool(arg)
+		    return true if arg =~ (/^(true|t|yes|y|1)$/i)
+		    return false if arg.empty? || arg =~ (/^(false|f|no|n|0)$/i)
+		    raise ArgumentError.new "invalid value: #{arg}"
+	    end
 end

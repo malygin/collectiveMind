@@ -1,5 +1,13 @@
+- if current_user?(@frustration.user) and @frustration.frustration_comments.where(:negative => false).count == 0
+	Вы автор этой неудовлетворенности  и у нее нет структурирующих комментов
+	=link_to "хотите убрать в архив?", archive_frustration_path(@frustration.id), :method => :put, :confirm => "Точно?", :title => @frustration.content
+
 %table{:class => "frustrations"}
 	= render 'shared/feed_item', :feed_item => @frustration
 
 = render @frustration.frustration_comments
-= render 'frustration_comments/form'
+- if @frustration.user == current_user
+	%br
+	%i Вы автор этой неудовлетворенности, вы не можете ее комментировать
+- else
+	= render 'frustration_comments/form'

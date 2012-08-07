@@ -1,6 +1,6 @@
 %tr
 	%td{:class => "frustration"}
-		%span{:class => "content"}= frustration.content
+		= link_to frustration.content, frustration
 		%span{:class => "timestamp"} 
 			Добавлено
 			= Russian::strftime(frustration.created_at,  "%A, %1d %B %T")

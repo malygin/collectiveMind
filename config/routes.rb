@@ -12,14 +12,18 @@ CollectiveMind::Application.routes.draw do
   match "/signout", :to => "sessions#destroy"
   match "/structure", :to => "pages#structure_frustrations"
   match "/unstructure", :to => "pages#unstructure_frustrations"
+  match "/archive", :to => "pages#archive_frustrations"
 
   #get "users/new"
   resources :users
   resources :sessions, :only => [:new, :create, :destroy]
   resources :frustrations  do
       resources :frustration_comments
-  end
 
+       put :archive, :on => :member
+
+  end
+  #match "frustrations/archive/:id/", :to =>"frustrations#archive"
   match "/signup", :to =>"users#new"
 
   get "welcome/index"

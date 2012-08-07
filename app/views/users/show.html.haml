@@ -2,6 +2,10 @@
 	= gravatar_for @user
 	= @user.name
 	= @user.surname
+	%br= @user.email
+	%br
+	набрано балов - 
+	= @user.score
 Добавлено  неудовлетворенностей - 
 = @user.frustrations.count
 
