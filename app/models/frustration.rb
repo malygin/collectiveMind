@@ -1,7 +1,9 @@
 class Frustration < ActiveRecord::Base
-  attr_accessible :content, :structure, :archive
+  attr_accessible :content, :structure, :archive, :old_content
 
   belongs_to :user
+  belongs_to :negative_user, :class_name => "User", :foreign_key => "negative_user_id"
+
 
   validates :content, :presence => true, :length => {:maximum => 800}
   validates :user_id, :presence => true

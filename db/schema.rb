@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120807121408) do
+ActiveRecord::Schema.define(:version => 20120808064105) do
 
   create_table "comment_frustrations", :force => true do |t|
     t.string   "content"
@@ -47,10 +47,12 @@ ActiveRecord::Schema.define(:version => 20120807121408) do
   create_table "frustrations", :force => true do |t|
     t.string   "content"
     t.integer  "user_id"
-    t.boolean  "structure",  :default => false
-    t.datetime "created_at",                    :null => false
-    t.datetime "updated_at",                    :null => false
-    t.boolean  "archive",    :default => false
+    t.boolean  "structure",        :default => false
+    t.datetime "created_at",                          :null => false
+    t.datetime "updated_at",                          :null => false
+    t.boolean  "archive",          :default => false
+    t.string   "old_content"
+    t.integer  "negative_user_id"
   end
 
   create_table "posts", :force => true do |t|

@@ -2,13 +2,13 @@
   <%= image_tag("logo.jpg", :alt => "Colleсtive mind", :class => "round", :width =>"150") %>
   <nav class="round">
     <ul>
-      <li><%= link_to "На главную", '/' %></li>
+      <li><%= link_to "главная", '/' %></li>
       <li><%= link_to "aрхив", "/archive" %></li>
       <li><%= link_to "структ.", "/structure" %></li>
-      <li><%= link_to "НЕструкт.", "/unstructure" %></li>
+      <li><%= link_to "неструкт.", "/unstructure" %></li>
 
       <% if signed_in? %>
-      	 <li>(<%= link_to current_user.surname, user_path(current_user) %>
+      	 <li>(<%= link_to current_user.name, user_path(current_user) %>
           <%= link_to "ред.", edit_user_path(current_user) %>)
           <%= link_to "Выйти", "/signout" %></li>
       <% else %>

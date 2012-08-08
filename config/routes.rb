@@ -21,6 +21,8 @@ CollectiveMind::Application.routes.draw do
       resources :frustration_comments
 
        put :archive, :on => :member
+       get :edit_to_struct, :on => :member
+       put :update_to_struct, :on => :member
 
   end
   #match "frustrations/archive/:id/", :to =>"frustrations#archive"

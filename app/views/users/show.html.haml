@@ -6,10 +6,27 @@
 	%br
 	набрано балов - 
 	= @user.score
+
 Добавлено  неудовлетворенностей - 
 = @user.frustrations.count
 
+- if signed_in? and current_user.frustrations.count<Settings.max_frustration and current_user == @user 
+	%h2{:class => "frustration"} Добавить неудовлетворенность
+	= render "shared/frustration_form"
+
 - unless @user.frustrations.empty?
 	%table{:class => "frustrations"}
-		= render @frustrations
-	= will_paginate @frustrations
+		= render :partial => 'shared/feed_item', :collection => @user.frustrations
+-else 
+	%br
+	%i Ни одной не добавлено
+%br
+Неудовлетворенности, которые были отправлены в архив из за комментариев пользователя
+- unless @user.negatived_frustrations.empty?
+	%table{:class => "frustrations"}
+		= render :partial => 'shared/feed_item', :collection => @user.negatived_frustrations
+-else
+	%br
+	%i Их пока нет
+
+

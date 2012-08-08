@@ -24,14 +24,27 @@ class FrustrationsController < ApplicationController
 	def archive
 		#puts "_______"
 		@user = User.where(:id => (params[:author_comment])).first
-		puts @user.score
+		#puts @user.score
 		new_score = @user.score+Settings.scores.unstructure.denial_for_negative_comment
 		puts new_score
 		@user.update_attribute(:score, new_score)
 		@frustration = Frustration.find(params[:id])
 		@frustration.update_attribute(:archive,true) 
+		@frustration.update_attribute(:negative_user, @user)
 		flash[:success] = "Отправлена в архив!"
 		redirect_to root_path
+	end
+
+	def edit_to_struct
+		@frustration = Frustration.find(params[:id])
+	end
+
+	def update_to_struct
+		@frustration = Frustration.find(params[:id])
+		@frustration.update_attributes(:old_content => @frustration.content, :content => params[:frustration][:content], :structure => true ) 
+		flash[:success] = "Неудовлетворенность переведена в структурированные"
+		@frustrations_feed=[]
+		render "pages/home"
 	end
 
 	def show

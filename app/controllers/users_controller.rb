@@ -12,6 +12,7 @@ class UsersController < ApplicationController
 	def show 
 		@user = User.find(params[:id])
 		@frustrations = @user.frustrations.paginate(:page => params[:page])
+		@frustration = Frustration.new 
 	end
 
 	def edit 

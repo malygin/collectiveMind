@@ -9,6 +9,9 @@ class User < ActiveRecord::Base
   has_many :frustrations, :dependent => :destroy
   has_many :frustration_comments, :dependent => :destroy
 
+# list of frustrations which was denied for user's comment
+  has_many :negatived_frustrations, :class_name => "Frustration", :foreign_key =>"negative_user_id"
+
   email_regex = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
   validates :name, :presence => true,
   				   :length => { :maximum => 50 }
@@ -36,9 +39,9 @@ class User < ActiveRecord::Base
   	(user && user.salt == cookie_salt)? user : nil
   end
 
-  # def name_title
-  #   self.name + " "+self.surname
-  # end
+  def name_title
+    self.name + " "+self.surname+"("+self.score.to_s+")"
+  end
 
   private 
 

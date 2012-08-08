@@ -3,9 +3,17 @@
 		= link_to gravatar_for(feed_item.user), feed_item.user
 	%td{:class => "frustration"}
 		%span{:class => "user"}
-			%i= link_to feed_item.user.name, feed_item.user
+			%i= link_to feed_item.user.name_title, feed_item.user
 		%span{:class => "content"}
-			= link_to feed_item.content, feed_item
+			- unless feed_item.archive
+				= link_to feed_item.content, feed_item
+			-else 
+				= feed_item.content
+			- unless feed_item.old_content.nil?
+				%br
+				%small текст неструктурированной -
+				%span{:class => "timestamp"}=feed_item.old_content
+
 		%span{:class => "timestamp"} 
 			Добавлено
 			= time_ago_in_words(feed_item.created_at)
@@ -14,5 +22,5 @@
 			Структурных -
 			= feed_item.frustration_comments.where(:negative => false).count
 		- if !feed_item.structure
-			%b Неуструктурирована 
+			%i Неуструктурирована 
 

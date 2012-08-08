@@ -1,0 +1,11 @@
+%b Сделаем же структурированную из неструктурированной
+
+= form_for @frustration, :url => update_to_struct_frustration_path(@frustration.id) do |f|
+	=render 'shared/error_messages', :object =>f.object
+	.field
+		=f.text_area :content
+	.action
+		=f.submit 'Сделать структурированной'
+
+
+

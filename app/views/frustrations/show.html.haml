@@ -1,12 +1,20 @@
-- if current_user?(@frustration.user) and @frustration.frustration_comments.where(:negative => false).count == 0
+- if current_user?(@frustration.user) and !have_structure_comments?(@frustration)
 	Вы автор этой неудовлетворенности  и у нее нет структурирующих комментов
-	=link_to "хотите убрать в архив?", archive_frustration_path(@frustration.id), :method => :put, :confirm => "Точно?", :title => @frustration.content
+	=link_to "хотите снять ее с рассмотрения?", archive_frustration_path(@frustration.id), :method => :put, :confirm => "Точно?", :title => @frustration.content
+-else
+	%li Есть структурирующие комменты, нельзя снять с рассмотрения
+%br
+- if current_user?(@frustration.user) and !have_structure_comments?(@frustration) and (@frustration.created_at < Settings.days_accept_unstracture.day.ago)
+	Уже прошел день, как неудовлетворенность была создана, а структурирующих комментов таки нет
+	=link_to "Сделать ее структуриванной?", edit_to_struct_frustration_path(@frustration.id)
+- else 
+	%li Время чтбы сделать структурированной еще не пришло
 
 %table{:class => "frustrations"}
 	= render 'shared/feed_item', :feed_item => @frustration
 
 = render @frustration.frustration_comments
-- if @frustration.user == current_user
+- if current_user?(@frustration.user)
 	%br
 	%i Вы автор этой неудовлетворенности, вы не можете ее комментировать
 - else
