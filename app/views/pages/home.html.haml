@@ -8,6 +8,7 @@
 			- if signed_in? and current_user.frustrations.count<Settings.max_frustration 
 				%h1{:class => "frustration"} Добавить неудовлетворенность
 				= render "shared/frustration_form"
+		%h2= @title
 		= render "shared/feed_frustrations"
 		%td{:class => "td_top"}
 

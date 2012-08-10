@@ -1,3 +1,4 @@
+# encoding: utf-8
 class PagesController < ApplicationController
   def contacts
   end
@@ -22,6 +23,7 @@ class PagesController < ApplicationController
 
   def archive_frustrations
     @frustration = Frustration.new
+    @title = "Неудовлетворенности, снятые с рассмотрения"
     @frustrations_feed = Frustration.feed_archive.paginate(:page => params[:page]) 
     render 'home'
   end
