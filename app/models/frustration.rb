@@ -1,8 +1,12 @@
+# encoding: utf-8
 class Frustration < ActiveRecord::Base
-  attr_accessible :content, :structure, :archive, :old_content
+  attr_accessible :content, :structure, :archive, :old_content, :struct_user
 
   belongs_to :user
+  # user, who negative comment was used for archiving frustration
   belongs_to :negative_user, :class_name => "User", :foreign_key => "negative_user_id"
+  # user, who structure comment was used for structuring frustration
+  belongs_to :struct_user, :class_name => "User", :foreign_key => "struct_user_id"
 
 
   validates :content, :presence => true, :length => {:maximum => 800}
@@ -30,6 +34,16 @@ class Frustration < ActiveRecord::Base
 
   def negative_comments
     FrustrationComment.where(:negative => true)
+  end
+
+  def type
+    if self.archive 
+      return "В архиве"
+    elsif self.structure 
+      return "Структурирована"
+    else 
+      return "Неструктурирована"
+    end
   end
 
   

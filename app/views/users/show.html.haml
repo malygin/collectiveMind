@@ -10,21 +10,32 @@
 Добавлено  неудовлетворенностей - 
 = @user.frustrations.count
 
-- if signed_in? and current_user.frustrations.count<Settings.max_frustration and current_user == @user 
+- if available_form_adding_frustration?(@user)
 	%h2{:class => "frustration"} Добавить неудовлетворенность
 	= render "shared/frustration_form"
 
+%br Пока что не структурированные
 - unless @user.frustrations.empty?
 	%table{:class => "frustrations"}
-		= render :partial => 'shared/feed_item', :collection => @user.frustrations
+		= render @user.frustrations
 -else 
 	%br
 	%i Ни одной не добавлено
 %br
-Неудовлетворенности, которые были отправлены в архив из за комментариев пользователя
+
+Неудовлетворенности, которые были отправлены в архив из за комментариев пользователя -
 - unless @user.negatived_frustrations.empty?
 	%table{:class => "frustrations"}
 		= render :partial => 'shared/feed_item', :collection => @user.negatived_frustrations
+-else
+	%br
+	%i Их пока нет
+
+%br
+%br Неудовлетворенности, к которым были добавлены полезные структурирующие комменты -
+- unless @user.structured_frustrations.empty?
+	%table{:class => "frustrations"}
+		= render :partial => 'shared/feed_item', :collection => @user.structured_frustrations
 -else
 	%br
 	%i Их пока нет

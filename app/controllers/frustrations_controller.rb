@@ -37,11 +37,16 @@ class FrustrationsController < ApplicationController
 
 	def edit_to_struct
 		@frustration = Frustration.find(params[:id])
+		@author_comment = params[:author_comment]
 	end
 
 	def update_to_struct
 		@frustration = Frustration.find(params[:id])
-		@frustration.update_attributes(:old_content => @frustration.content, :content => params[:frustration][:content], :structure => true ) 
+		@user = User.where(:id => (params[:author_comment])).first
+		puts @user
+		@frustration.update_attributes(:old_content => @frustration.content, 
+			:struct_user => @user, 
+			:content => params[:frustration][:content], :structure => true )
 		flash[:success] = "Неудовлетворенность переведена в структурированные"
 		@frustrations_feed=[]
 		render "pages/home"

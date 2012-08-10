@@ -11,6 +11,7 @@ class User < ActiveRecord::Base
 
 # list of frustrations which was denied for user's comment
   has_many :negatived_frustrations, :class_name => "Frustration", :foreign_key =>"negative_user_id"
+  has_many :structured_frustrations, :class_name => "Frustration", :foreign_key =>"struct_user_id"
 
   email_regex = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
   validates :name, :presence => true,
@@ -28,8 +29,6 @@ class User < ActiveRecord::Base
 
   def self.authenticate(email, submitted_password)
   	user = find_by_email(email)
-  	#puts email, user.encrypted_password
-  	#puts submitted_password, encrypt(submitted_password)
   	return  nil if user.nil?
   	return user if user.has_password?(submitted_password)
   end

@@ -10,7 +10,7 @@ class PagesController < ApplicationController
 
   def home
   		@frustration = Frustration.new 
-  		@frustrations_feed = Frustration.feed_all.paginate(:page => params[:page])
+  		@frustrations_feed = Frustration.feed_unstructure.paginate(:page => params[:page])
   end
 
   #TODO

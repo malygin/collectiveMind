@@ -17,10 +17,9 @@
 		%span{:class => "timestamp"} 
 			Добавлено
 			= time_ago_in_words(feed_item.created_at)
-			назад. Негатива - 
+			назад. Негативных - 
 			= feed_item.frustration_comments.where(:negative => true).count
 			Структурных -
 			= feed_item.frustration_comments.where(:negative => false).count
-		- if !feed_item.structure
-			%i Неуструктурирована 
+
 

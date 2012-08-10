@@ -4,8 +4,8 @@
 -else
 	%li Есть структурирующие комменты, нельзя снять с рассмотрения
 %br
-- if current_user?(@frustration.user) and !have_structure_comments?(@frustration) and (@frustration.created_at < Settings.days_accept_unstracture.day.ago)
-	Уже прошел день, как неудовлетворенность была создана, а структурирующих комментов таки нет
+- if current_user?(@frustration.user)  and (@frustration.created_at < Settings.days_accept_unstracture.day.ago)
+	Уже прошел день, как неудовлетворенность была создана
 	=link_to "Сделать ее структуриванной?", edit_to_struct_frustration_path(@frustration.id)
 - else 
 	%li Время чтбы сделать структурированной еще не пришло
@@ -17,5 +17,5 @@
 - if current_user?(@frustration.user)
 	%br
 	%i Вы автор этой неудовлетворенности, вы не можете ее комментировать
-- else
+- elsif signed_in?
 	= render 'frustration_comments/form'

@@ -1,6 +1,6 @@
 %b Сделаем же структурированную из неструктурированной
-
-= form_for @frustration, :url => update_to_struct_frustration_path(@frustration.id) do |f|
+= @author_comment
+= form_for @frustration, :url => update_to_struct_frustration_path(@frustration.id,:author_comment => @author_comment) do |f|
 	=render 'shared/error_messages', :object =>f.object
 	.field
 		=f.text_area :content

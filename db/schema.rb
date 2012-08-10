@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120808064105) do
+ActiveRecord::Schema.define(:version => 20120810102051) do
 
   create_table "comment_frustrations", :force => true do |t|
     t.string   "content"
@@ -53,6 +53,7 @@ ActiveRecord::Schema.define(:version => 20120808064105) do
     t.boolean  "archive",          :default => false
     t.string   "old_content"
     t.integer  "negative_user_id"
+    t.integer  "struct_user_id"
   end
 
   create_table "posts", :force => true do |t|
@@ -81,6 +82,7 @@ ActiveRecord::Schema.define(:version => 20120808064105) do
     t.string   "salt"
     t.boolean  "admin",              :default => false
     t.integer  "score",              :default => 0
+    t.integer  "struct_user_id"
   end
 
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true
