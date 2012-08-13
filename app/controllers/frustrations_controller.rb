@@ -23,11 +23,13 @@ class FrustrationsController < ApplicationController
 
 	def archive
 		#puts "_______"
-		@user = User.where(:id => (params[:author_comment])).first
-		#puts @user.score
-		new_score = @user.score+Settings.scores.unstructure.denial_for_negative_comment
-		puts new_score
-		@user.update_attribute(:score, new_score)
+		if not params[:author_comment].nil?
+			@user = User.where(:id => (params[:author_comment])).first
+			#puts @user.score
+			new_score = @user.score+Settings.scores.unstructure.denial_for_negative_comment
+			#puts new_score
+			@user.update_attribute(:score, new_score)
+		end
 		@frustration = Frustration.find(params[:id])
 		@frustration.update_attribute(:archive,true) 
 		@frustration.update_attribute(:negative_user, @user)
