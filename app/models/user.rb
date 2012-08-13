@@ -39,7 +39,7 @@ class User < ActiveRecord::Base
   end
 
   def name_title
-    self.name + " "+self.surname+"("+self.score.to_s+")"
+    self.name + " "+self.surname+" ("+self.score.to_s+")"
   end
 
   private 

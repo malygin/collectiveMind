@@ -6,4 +6,5 @@ module FrustrationsHelper
 		frustration.frustration_comments.where(:negative => false).count != 0
 	end
 
+
 end

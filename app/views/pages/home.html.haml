@@ -2,14 +2,15 @@
 	= render "shared/user_info"
 - else
 	= link_to "Зарегистрироваться, чтобы участвовать", signup_path,  :class =>"signup_button round"
+=@title
+- if signed_in? and current_user.frustrations.count<Settings.max_frustration 
+	%h1{:class => "frustration"} Добавить неудовлетворенность
+	= render "shared/frustration_form"
 %table{:class => "front"}
 	%tr
-		%td
-			- if signed_in? and current_user.frustrations.count<Settings.max_frustration 
-				%h1{:class => "frustration"} Добавить неудовлетворенность
-				= render "shared/frustration_form"
-		%h2= @title
-		= render "shared/feed_frustrations"
+		%td= render "shared/feed_frustrations"
 		%td{:class => "td_top"}
+			%h2 Лучшие пользователи
+			= render @users
 
 
