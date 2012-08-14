@@ -8,9 +8,9 @@
 - else 
 	%i структурирующий
 
-	- if current_user?(@frustration.user) and @frustration.created_at < Settings.days_accept_unstracture.day.ago
+	- if show_link_to_structuring?(@frustration)
 		%br
-		=link_to "Сделать неуд структуриванной сославшись на этот коммент?", edit_to_struct_frustration_path(@frustration.id,  :author_comment =>frustration_comment.user)
+		=link_to "Сделать структуриванной сославшись на этот коммент?", edit_to_struct_frustration_path(@frustration.id,  :author_comment =>frustration_comment.user)
 %span{:class=>"timestamp"}
 	= time_ago_in_words(frustration_comment.created_at)
 

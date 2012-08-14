@@ -12,7 +12,7 @@ updateCountdownAttributes = (toRemove, toAdd = null) ->
       $("input.btn.btn-large.btn-primary").removeAttr("disabled")
 
 updateCountdown = ->
-  remaining = 140 - $("#frustration_content").val().length
+  remaining = 400 - $("#frustration_what").val().length - $("#frustration_wherin").val().length - $("#frustration_when").val().length
   toRemove = ["nearlimit", "almostlimit", "overlimit"]
   if remaining > 19
     updateCountdownAttributes(toRemove)
@@ -28,8 +28,18 @@ updateCountdown = ->
   $(".countdown").text remaining
 
 $(document).ready ->
-  $(".countdown").text 140
-  $("#frustration_content").change updateCountdown
-  $("#frustration_content").keyup updateCountdown
-  $("#frustration_content").keydown updateCountdown
-  $("#frustration_content").keypress updateCountdown
+  $(".countdown").text 400
+  $("#frustration_what").change updateCountdown
+  $("#frustration_what").keyup updateCountdown
+  $("#frustration_what").keydown updateCountdown
+  $("#frustration_what").keypress updateCountdown  
+
+  $("#frustration_wherin").change updateCountdown
+  $("#frustration_wherin").keyup updateCountdown
+  $("#frustration_wherin").keydown updateCountdown
+  $("#frustration_wherin").keypress updateCountdown
+
+  $("#frustration_when").change updateCountdown
+  $("#frustration_when").keyup updateCountdown
+  $("#frustration_when").keydown updateCountdown
+  $("#frustration_when").keypress updateCountdown

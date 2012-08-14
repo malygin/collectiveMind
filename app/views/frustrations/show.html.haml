@@ -4,16 +4,27 @@
 -else
 	%li Есть структурирующие комменты, нельзя снять с рассмотрения
 %br
-- if current_user?(@frustration.user)  and (@frustration.created_at < Settings.days_accept_unstracture.day.ago)
-	Уже прошел день, как неудовлетворенность была создана
+
+- if show_link_to_structuring?(@frustration)
 	=link_to "Сделать ее структуриванной?", edit_to_struct_frustration_path(@frustration.id)
-- else 
-	%li Время чтбы сделать структурированной еще не пришло
+- elsif show_link_to_expert?(@frustration)
+	=link_to "Отправить эксперту?", root_path
+-else 
+	%li Время  еще не пришло!
 
 %table{:class => "frustrations"}
 	= render 'shared/feed_item', :feed_item => @frustration
 
-= render @frustration.frustration_comments
+
+- unless @frustration.comments_after_structuring.empty?
+	%h2 Комментарии после структуризации
+	= render @frustration.comments_after_structuring
+
+- unless @frustration.comments_before_structuring.empty?
+	%h2 Комментарии до структуризации
+	= render @frustration.comments_before_structuring
+
+
 - if current_user?(@frustration.user)
 	%br
 	%i Вы автор этой неудовлетворенности, вы не можете ее комментировать

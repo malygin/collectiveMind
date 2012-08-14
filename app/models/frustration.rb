@@ -1,6 +1,8 @@
 # encoding: utf-8
 class Frustration < ActiveRecord::Base
-  attr_accessible :content, :structure, :archive, :old_content, :struct_user
+  #status 0 -unstructed, 1 -archive, 2 - structed, 3 -to expert, 
+  #4 -allow expert, 5 -deny expert
+  attr_accessible  :status, :struct_user,:structuring_date, :what, :wherin, :when, :what_old, :wherin_old, :when_old 
 
   belongs_to :user
   # user, who negative comment was used for archiving frustration
@@ -9,40 +11,79 @@ class Frustration < ActiveRecord::Base
   belongs_to :struct_user, :class_name => "User", :foreign_key => "struct_user_id"
 
 
-  validates :content, :presence => true, :length => {:maximum => 800}
+  validates :what, :presence => true, :length => {:maximum => 300}
+  validates :wherin, :presence => true, :length => {:maximum => 300}
+  validates :when, :presence => true, :length => {:maximum => 300}
   validates :user_id, :presence => true
 
   has_many :frustration_comments, :dependent => :destroy
 
   default_scope :order => 'frustrations.created_at DESC'
 
+
   def self.feed_all 
-  	Frustration.where(:archive => false)
+  	Frustration.all
   end
 
   def self.feed_archive
-    Frustration.where(:archive => true)
+    Frustration.where(:status => 1)
   end
 
   def self.feed_structure
-  	Frustration.where(:structure => true).where(:archive => false)
+  	Frustration.where(:status => 2)
   end
 
   def self.feed_unstructure
-  	Frustration.where(:structure => false).where(:archive => false)
+  	Frustration.where(:status => 0)
   end
+
 
   def negative_comments
     FrustrationComment.where(:negative => true)
   end
 
+  def comments_before_structuring
+    if self.structuring_date.nil?
+      return self.frustration_comments
+    else
+      self.frustration_comments.where('created_at < ?', self.structuring_date)
+    end
+  end
+
+  def comments_after_structuring
+    self.frustration_comments.where('created_at > ?', self.structuring_date)
+  end
+
+
+  def archive?
+    self.status == 1
+  end
+
+  def structured?
+    self.status ==2
+  end
+  
+  def content
+    self.what + " " +self.wherin + " " + self.when
+  end
+
+  def old_content
+    if self.what_old.nil?
+      return nil
+    else   
+      self.what_old + " " +self.wherin_old + " " + self.when_old
+    end
+  end
+
+
   def type
-    if self.archive 
-      return "В архиве"
-    elsif self.structure 
-      return "Структурирована"
-    else 
-      return "Неструктурирована"
+    case self.status
+      when 0
+        return "Неструктурирована"
+      when 1
+        return "В архиве"
+      when 2
+        return "Структурирована"
     end
   end
 

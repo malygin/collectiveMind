@@ -42,6 +42,10 @@ class User < ActiveRecord::Base
     self.name + " "+self.surname+" ("+self.score.to_s+")"
   end
 
+  def structured_and_unstructured
+    self.frustrations.where(:status => [0,2])
+  end
+
   private 
 
   	def encrypt_password

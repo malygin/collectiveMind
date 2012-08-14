@@ -31,7 +31,7 @@ class FrustrationsController < ApplicationController
 			@user.update_attribute(:score, new_score)
 		end
 		@frustration = Frustration.find(params[:id])
-		@frustration.update_attribute(:archive,true) 
+		@frustration.update_attribute(:status,1) 
 		@frustration.update_attribute(:negative_user, @user)
 		flash[:success] = "Отправлена в архив!"
 		redirect_to root_path
@@ -46,12 +46,16 @@ class FrustrationsController < ApplicationController
 		@frustration = Frustration.find(params[:id])
 		@user = User.where(:id => (params[:author_comment])).first
 		puts @user
-		@frustration.update_attributes(:old_content => @frustration.content, 
+		@frustration.update_attributes(:what_old => @frustration.what,
+			:wherin_old => @frustration.wherin,
+			:when_old => @frustration.when, 
 			:struct_user => @user, 
-			:content => params[:frustration][:content], :structure => true )
+			:what => params[:frustration][:what],
+			:wherin => params[:frustration][:wherin],
+			:when => params[:frustration][:when],
+			:structuring_date => Time.now, :status => 2 )
 		flash[:success] = "Неудовлетворенность переведена в структурированные"
-		@frustrations_feed=[]
-		render "pages/home"
+		redirect_to root_path
 	end
 
 	def show

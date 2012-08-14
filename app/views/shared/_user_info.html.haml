@@ -5,9 +5,10 @@
 	%br
 	%b 
 		=current_user.frustrations.count
-	неструктурированные
+	
 	%span{:class => "frustrations"}
 		= Russian::pluralize(current_user.frustrations.count, "неудовлетворенность", "неудовлетворенности", "неудовлетворенностей")
-	внесено. Вы можете добавить еще 
+	добавлена. Вы можете добавить еще
 	%b
 		= Settings.max_frustration-current_user.frustrations.count
+	, когда у вас не будет ни одной неструктурированной или структурированной

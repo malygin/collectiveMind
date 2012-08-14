@@ -1,11 +1,23 @@
 %b Сделаем же структурированную из неструктурированной
-= @author_comment
+
 = form_for @frustration, :url => update_to_struct_frustration_path(@frustration.id,:author_comment => @author_comment) do |f|
 	=render 'shared/error_messages', :object =>f.object
+	%label ЧТО
 	.field
-		=f.text_area :content
+		=f.text_area :what
+	%br
+	%label В ЧЕМ
+	.field
+		=f.text_area :wherin
+	%br
+	%label КОГДА
+	.field
+		=f.text_area :when
+
 	.action
 		=f.submit 'Сделать структурированной'
+
+=@frustration.content
 
 
 

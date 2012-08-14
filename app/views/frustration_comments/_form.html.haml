@@ -1,12 +1,11 @@
 %br
 - if @negative
-	%b
-		добавление негативного комментария |
+	%b добавление негативного комментария |
+	- if !@frustration.structured?
 		= link_to 'добавить структурирующий', frustration_path(@frustration, :negative => false)
 - else
-	%b
-		добавление структурирующего |
-		= link_to 'добавить негативный', frustration_path(@frustration, :negative => true)
+	%b добавление структурирующего |
+	= link_to 'добавить негативный', frustration_path(@frustration, :negative => true)
 
 = form_for [@frustration, @frustration.frustration_comments.build] do 
 	%p

@@ -1,8 +1,17 @@
 = form_for @frustration do |f|
 	= render 'shared/error_messages', :object => f.object
-	%div Максимальная длина 140 символов
+	%div Максимальная длина 400 символов
+	%label ЧТО &nbsp;&nbsp;&nbsp;
 	%field
-		= f.text_area :content
+		= f.text_area :what
+	%br
+	%label В ЧЕМ	
+	%field
+		= f.text_area :wherin
+	%br
+	%label КОГДА
+	%field
+		= f.text_area :when
 	%br
 	%actions
 		= f.submit "Послать",  class: "btn btn-large btn-primary"

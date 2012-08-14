@@ -3,7 +3,7 @@
 - else
 	= link_to "Зарегистрироваться, чтобы участвовать", signup_path,  :class =>"signup_button round"
 =@title
-- if signed_in? and current_user.frustrations.count<Settings.max_frustration 
+- if active_form_frustration?
 	%h1{:class => "frustration"} Добавить неудовлетворенность
 	= render "shared/frustration_form"
 %table{:class => "front"}
