@@ -19,7 +19,7 @@ class User < ActiveRecord::Base
   validates :email, :format => { :with => email_regex }
   validates :password, :presence => true,
   						:confirmation => true,
-  						:length => { :within => 6..40 }
+  						:length => { :within => 3..40 }
 
   before_save :encrypt_password
 
@@ -40,6 +40,10 @@ class User < ActiveRecord::Base
 
   def name_title
     self.name + " "+self.surname+" ("+self.score.to_s+")"
+  end
+
+  def self.only_simple_users
+    User.where(:admin => false).where(:expert => false)
   end
 
   def structured_and_unstructured

@@ -1,15 +1,19 @@
 = form_for @frustration do |f|
 	= render 'shared/error_messages', :object => f.object
 	%div Максимальная длина 400 символов
-	%label ЧТО &nbsp;&nbsp;&nbsp;
+	ЧТО? - отрицательное действие, явление, установление, черта...
+	%br
 	%field
 		= f.text_area :what
 	%br
-	%label В ЧЕМ	
+	%label В ЧЕМ - 
+	регулярное нужное или неизбежно случающееся событие, мероприятие, процесс, ситуация...	
 	%field
 		= f.text_area :wherin
 	%br
-	%label КОГДА
+	%label ГДЕ -
+	место, организация, общность, в которой это происходит.
+	%br
 	%field
 		= f.text_area :when
 	%br

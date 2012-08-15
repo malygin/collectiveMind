@@ -1,17 +1,23 @@
 - if current_user?(@frustration.user) and !have_structure_comments?(@frustration)
 	Вы автор этой неудовлетворенности  и у нее нет структурирующих комментов
 	=link_to "хотите снять ее с рассмотрения?", archive_frustration_path(@frustration.id), :method => :put, :confirm => "Точно?", :title => @frustration.content
--else
+-elsif current_user?(@frustration.user)
 	%li Есть структурирующие комменты, нельзя снять с рассмотрения
 %br
 
 - if show_link_to_structuring?(@frustration)
 	=link_to "Сделать ее структуриванной?", edit_to_struct_frustration_path(@frustration.id)
+- elsif show_link_to_expert_with_negative_comments?(@frustration)
+	=link_to "Отправить эксперту - В случае неуспеха получите штраф в 50 балов!", to_expert_frustration_path(@frustration),:method => :post, :confirm => "50 балов ведь потеряете!" 
 - elsif show_link_to_expert?(@frustration)
-	=link_to "Отправить эксперту?", root_path
--else 
+	=link_to "Отправить эксперту", to_expert_frustration_path(@frustration),:method => :put, :confirm => "Уверены?" 
+-elsif current_user?(@frustration.user) 
 	%li Время  еще не пришло!
 
+- if expert? and not frustration_after_expert?(@frustration)
+	= link_to "принять", expert_accept_frustration_path(@frustration),:method => :put, :confirm => "Точно принять?"
+	или
+	= link_to "отклонить", expert_decline_frustration_path(@frustration),:method => :put, :confirm => "Точно отклонить?"
 %table{:class => "frustrations"}
 	= render 'shared/feed_item', :feed_item => @frustration
 
@@ -25,8 +31,8 @@
 	= render @frustration.comments_before_structuring
 
 
-- if current_user?(@frustration.user)
+- if current_user?(@frustration.user) or frustration_in_expert_status?(@frustration) or expert?
 	%br
-	%i Вы автор этой неудовлетворенности, вы не можете ее комментировать
+	%i Нет возможности для комментирования
 - elsif signed_in?
 	= render 'frustration_comments/form'

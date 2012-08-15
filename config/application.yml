@@ -7,7 +7,7 @@ defaults: &defaults
 # дней лежит в архиве неструктурированная
   days_archive_unstracure: 5
 # дней для принятия структурированной 
-  days_accept_stracture: 3
+  days_accept_stracture: 1
 # баллы
   scores:
     unstructure:
@@ -22,6 +22,10 @@ defaults: &defaults
       violation_frustration: -10
       abuse_frustration: -20
       denial_for_negative_comment: 10
+    expert:
+      allow: 100
+      deny_with_negative: -50
+
 
 
 

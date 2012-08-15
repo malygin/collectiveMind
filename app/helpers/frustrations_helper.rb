@@ -17,14 +17,26 @@ module FrustrationsHelper
 
 	# available only if frustrations<max and user hasnot structured and unstructured
 	def active_form_frustration?
-		signed_in? and current_user.frustrations.count < Settings.max_frustration and current_user.structured_and_unstructured.count == 0
+		not expert? and signed_in? and current_user.frustrations.count < Settings.max_frustration and current_user.structured_and_unstructured.count == 0
 	end
 
 	def show_link_to_structuring?(frustration)
-		current_user?(frustration.user) and (frustration.created_at < Settings.days_accept_unstracture.day.ago) and (frustration.status!=2)
+		current_user?(frustration.user) and (frustration.created_at > Settings.days_accept_unstracture.day.ago) and (frustration.status!=2)
 	end
+
+	def show_link_to_expert_with_negative_comments?(frustration)
+		current_user?(frustration.user) and (frustration.created_at > Settings.days_accept_stracture.day.ago) and not @frustration.comments_after_structuring.empty?
+	end
+
 	def show_link_to_expert?(frustration)
-		current_user?(frustration.user) and (frustration.created_at < Settings.days_accept_stracture.day.ago)
+		current_user?(frustration.user) and (frustration.created_at > Settings.days_accept_stracture.day.ago)
+	end
+	
+	def frustration_in_expert_status?(frustration)
+		frustration.status.between?(3,5) 
+	end
+	def frustration_after_expert?(frustration)
+		frustration.status.between?(4,5)
 	end
 
 end

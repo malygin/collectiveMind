@@ -10,11 +10,9 @@
 Добавлено  неудовлетворенностей - 
 = @user.frustrations.count
 
-- if available_form_adding_frustration?(@user)
+- if active_form_frustration?
 	%h2{:class => "frustration"} Добавить неудовлетворенность
 	= render "shared/frustration_form"
-
-%br Пока что не структурированные
 - unless @user.frustrations.empty?
 	%table{:class => "frustrations"}
 		= render @user.frustrations

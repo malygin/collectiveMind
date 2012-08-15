@@ -2,6 +2,7 @@
 class FrustrationsController < ApplicationController
 	before_filter :authenticate, :only => [:create, :destroy]
 	before_filter :authorized_user, :only => :destroy
+	#todo method only for expert
 
 	def create
 		@frustration = current_user.frustrations.build(params[:frustration])
@@ -28,13 +29,39 @@ class FrustrationsController < ApplicationController
 			#puts @user.score
 			new_score = @user.score+Settings.scores.unstructure.denial_for_negative_comment
 			#puts new_score
-			@user.update_attribute(:score, new_score)
+			@user.update_column(:score, new_score)
 		end
 		@frustration = Frustration.find(params[:id])
 		@frustration.update_attribute(:status,1) 
 		@frustration.update_attribute(:negative_user, @user)
 		flash[:success] = "Отправлена в архив!"
 		redirect_to root_path
+	end
+
+	def to_expert
+		@frustration = Frustration.find(params[:id])
+		@frustration.update_column(:status, 3)
+		flash[:success] = "Отправлена эксперту"
+		redirect_to root_path
+	end
+
+	def expert_accept
+		@frustration = Frustration.find(params[:id])
+		@frustration.update_column(:status, 4)
+		#unless @frustration.struct_user.nil?
+		@frustration.user.update_column(:score, @frustration.user.score + Settings.scores.expert.allow)
+		flash[:success] = "Неудовлетворенность принята"
+		redirect_to user_path(current_user)
+	end
+
+	def expert_decline
+		@frustration = Frustration.find(params[:id])
+		@frustration.update_column(:status, 5)
+		unless @frustration.comments_after_structuring.empty?
+			@frustration.user.update_column(:score, @frustration.user.score + Settings.scores.expert.deny_with_negative)
+		end
+		flash[:success] = "Неудовлетворенность отклонена"
+		redirect_to user_path(current_user)
 	end
 
 	def edit_to_struct
@@ -45,7 +72,7 @@ class FrustrationsController < ApplicationController
 	def update_to_struct
 		@frustration = Frustration.find(params[:id])
 		@user = User.where(:id => (params[:author_comment])).first
-		puts @user
+
 		@frustration.update_attributes(:what_old => @frustration.what,
 			:wherin_old => @frustration.wherin,
 			:when_old => @frustration.when, 
@@ -65,13 +92,5 @@ class FrustrationsController < ApplicationController
 	end
 
 	private 
-		def authorized_user
-			@frustration = current_user.frustrations.find_by_id(params[:id])
-			redirect_to root_path if @frustration.nil?
-		end
-		def to_bool(arg)
-		    return true if arg =~ (/^(true|t|yes|y|1)$/i)
-		    return false if arg.empty? || arg =~ (/^(false|f|no|n|0)$/i)
-		    raise ArgumentError.new "invalid value: #{arg}"
-	    end
+
 end

@@ -37,10 +37,21 @@ class Frustration < ActiveRecord::Base
   	Frustration.where(:status => 0)
   end
 
-
-  def negative_comments
-    FrustrationComment.where(:negative => true)
+  def self.feed_to_expert
+    Frustration.where(:status => 3)
   end
+
+  def self.feed_accepted
+    Frustration.where(:status => 4)
+  end
+
+  def self.feed_declined
+    Frustration.where(:status => 5)
+  end
+
+  # def negative_comments
+  #   FrustrationComment.where(:negative => true)
+  # end
 
   def comments_before_structuring
     if self.structuring_date.nil?
@@ -84,6 +95,12 @@ class Frustration < ActiveRecord::Base
         return "В архиве"
       when 2
         return "Структурирована"
+      when 3 
+        return "На рассмотрении эксперта"
+      when 4 
+        return "Принята экспертом"
+      when 5
+        return "Отклонена экспертом"
     end
   end
 

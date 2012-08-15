@@ -1,0 +1,10 @@
+%h1
+	= gravatar_for @user
+	= @user.name
+	= @user.surname
+	%br= @user.email
+	%br
+%h1 На экспертизу - 
+
+-unless @frustrations.nil?
+	=render @frustrations

@@ -1,11 +1,10 @@
-- if signed_in?
+- if signed_in? and not expert?
 	= render "shared/user_info"
-- else
-	= link_to "Зарегистрироваться, чтобы участвовать", signup_path,  :class =>"signup_button round"
+
 =@title
-- if active_form_frustration?
-	%h1{:class => "frustration"} Добавить неудовлетворенность
-	= render "shared/frustration_form"
+/ - if active_form_frustration?
+/ 	%h1{:class => "frustration"} Добавить неудовлетворенность
+/ 	= render "shared/frustration_form"
 %table{:class => "front"}
 	%tr
 		%td= render "shared/feed_frustrations"

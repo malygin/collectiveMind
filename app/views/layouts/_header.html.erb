@@ -1,11 +1,13 @@
 <header>
-  <%= image_tag("logo.jpg", :alt => "Colleсtive mind", :class => "round", :width =>"150") %>
+
   <nav class="round">
     <ul>
       <li><%= link_to "главная", '/' %></li>
       <li><%= link_to "aрхив", "/archive" %></li>
       <li><%= link_to "структурированные", "/structure" %></li>
-<!--       <li><%= link_to "неструкт.", "/unstructure" %></li> -->
+      <li><%= link_to "принятые", "/accepted" %></li>
+      <li><%= link_to "отклоненные", "/declined" %></li>
+
 
       <% if signed_in? %>
       	 <li>(<%= link_to current_user.name, user_path(current_user) %>

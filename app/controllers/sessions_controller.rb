@@ -1,3 +1,4 @@
+# encoding: utf-8
 class SessionsController < ApplicationController
   
   def new
@@ -6,9 +7,8 @@ class SessionsController < ApplicationController
   def create
     #puts params
   	user = User.authenticate(params[:session][:email], params[:session][:password])
-
   	if user.nil?
-  		flash.now[:error] = "Error!"
+  		flash.now[:error] = "Ошибка авторизации!"
   		render 'new'
   	else
   		sign_in user
