@@ -11,6 +11,164 @@
  *= require_self
  *= require_tree .
  */
+
+* {
+  margin: 0;
+  padding: 0;
+}
+html {
+  height: 100%;
+}
+body {
+  font: 13pt Helvetica;
+  width: 100%;
+  height: 100%;
+  color: #676767;
+}
+a {
+  color: blue;
+  outline: none;
+  text-decoration: underline;
+}
+a:hover {
+  text-decoration: none;
+}
+p {
+  margin: 0 0 18px
+}
+img {
+  border: none;
+}
+input {
+  vertical-align: middle;
+}
+#wrapper {
+  width: 1280px;
+  margin: 0 auto;
+  min-height: 100%;
+  height: auto !important;
+  height: 100%;
+}
+
+
+/* Header
+-----------------------------------------------------------------------------*/
+#header {
+  height: 150px;
+  background: url(top.jpg) ;
+  background-repeat:no-repeat;
+  img {
+    padding-top: 20px;
+   }
+   a:link, a:active, a:visited {
+    font-family: Helvetica;
+    font-size: 11pt;
+    font-weight: bold;
+    color: #676767;
+    text-decoration: underline;
+  }
+  a:hover {
+  color: #248ec5;
+  }
+  ul.username{
+    float: right;
+    padding-right:20px;
+    li{
+    list-style-type: none;
+    display: inline-block;
+    padding: 0px 0px 0px 0px !important;
+  
+   }
+   a:link, a:active, a:visited {
+    font-size: 10pt;
+     color: white;
+   } 
+   a:hover {
+      color: #468800;
+   }
+  }
+}
+
+
+/* Middle
+-----------------------------------------------------------------------------*/
+#middle {
+  width: 100%;
+  padding: 0 0 100px;
+  height: 1%;
+  position: relative;
+}
+#middle:after {
+  content: '.';
+  display: block;
+  clear: both;
+  visibility: hidden;
+  height: 0;
+}
+#container {
+  width: 100%;
+  float: left;
+  overflow: hidden;
+}
+#content {
+  padding: 0 270px 0 10px;
+}
+
+
+/* Sidebar Right
+-----------------------------------------------------------------------------*/
+#sideRight {
+  float: left;
+  margin-right: -3px;
+  width: 250px;
+  margin-left: -250px;
+  position: relative;
+
+}
+
+
+/* Footer
+-----------------------------------------------------------------------------*/
+#footer {
+  width: 1280px;
+  margin: -100px auto 0;
+  height: 100px;
+  background: url(footer.jpg);
+  position: relative;
+  text-align: center;
+
+  a:link, a:active, a:visited, a:hover {
+    font-family: Helvetica;
+    font-size: 13pt;
+    color: #ffffff;
+    text-decoration: underline;
+  }
+}
+
+nav {
+  float: right;
+}
+
+nav {
+ 
+  padding: 0 0.7em;
+  white-space: nowrap;
+}
+
+nav ul {
+  margin: 0;
+  padding: 0;
+}
+
+nav ul li {
+  list-style-type: none;
+  display: inline-block;
+  padding: 45px 20px 10px 20px;
+}
+
+
+
+
 .container {
   width: 810px;
 }
@@ -19,18 +177,9 @@ body {
   background: #fff;
 }
 
-header {
-  padding-top: 20px;
-  
-}
-
-header img {
-  padding: 1em;
-  background: #fff;
-}
 
 footer {
-  text-align: center;
+
   margin-top: 10px;
   width: 710px;
   margin-left: auto;
@@ -78,39 +227,7 @@ h1{
 }
 /* Navigation */
 
-nav {
-  float: right;
-}
 
-nav {
-  background-color: white;
-  padding: 0 0.7em;
-  white-space: nowrap;
-}
-
-nav ul {
-  margin: 0;
-  padding: 0;
-}
-
-nav ul li {
-  list-style-type: none;
-  display: inline-block;
-  padding: 0.2em 0;
-}
-
-nav ul li a {
-  padding: 0 5px;
-  font-weight: bold;
-}
-
-nav ul li a:visited {
-  color: #a71a5b;
-}
-
-nav ul li a:hover {
-  text-decoration: underline;
-}
 div.field, div.actions {
   margin-bottom: 10px;
 }

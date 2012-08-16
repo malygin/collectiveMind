@@ -1,6 +1,7 @@
 - if signed_in? and user?
 	= render "shared/user_info"
 
+
 =@title
 / - if active_form_frustration?
 / 	%h1{:class => "frustration"} Добавить неудовлетворенность
@@ -8,8 +9,6 @@
 %table{:class => "front"}
 	%tr
 		%td= render "shared/feed_frustrations"
-		%td{:class => "td_top"}
-			%h2 Лучшие пользователи
-			= render @users
+
 
 

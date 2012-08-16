@@ -4,14 +4,13 @@
 	= @user.surname
 	%br= @user.email
 	%br
-	набрано балов - 
+	набрано балов
 	= @user.score
 
 Добавлено  неудовлетворенностей - 
 = @user.frustrations.count
 
 - if active_form_frustration?
-	%h2{:class => "frustration"} Добавить неудовлетворенность
 	= render "shared/frustration_form"
 - unless @user.frustrations.empty?
 	%table{:class => "frustrations"}
