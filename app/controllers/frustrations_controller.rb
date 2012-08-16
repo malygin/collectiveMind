@@ -23,12 +23,9 @@ class FrustrationsController < ApplicationController
 #todo check author of comment - true?
 
 	def archive
-		#puts "_______"
 		if not params[:author_comment].nil?
 			@user = User.where(:id => (params[:author_comment])).first
-			#puts @user.score
 			new_score = @user.score+Settings.scores.unstructure.denial_for_negative_comment
-			#puts new_score
 			@user.update_column(:score, new_score)
 		end
 		@frustration = Frustration.find(params[:id])
@@ -48,8 +45,12 @@ class FrustrationsController < ApplicationController
 	def expert_accept
 		@frustration = Frustration.find(params[:id])
 		@frustration.update_column(:status, 4)
-		#unless @frustration.struct_user.nil?
-		@frustration.user.update_column(:score, @frustration.user.score + Settings.scores.expert.allow)
+		unless @frustration.struct_user.nil?
+			@frustration.user.update_column(:score, @frustration.user.score + Settings.scores.expert.allow*0.6)
+			@frustration.struct_user.update_column(:score, @frustration.struct_user.score + Settings.scores.expert.allow*0.4)
+		else
+			@frustration.user.update_column(:score, @frustration.user.score + Settings.scores.expert.allow)
+		end
 		flash[:success] = "Неудовлетворенность принята"
 		redirect_to user_path(current_user)
 	end
@@ -57,6 +58,7 @@ class FrustrationsController < ApplicationController
 	def expert_decline
 		@frustration = Frustration.find(params[:id])
 		@frustration.update_column(:status, 5)
+		#if we have negative comments - ban 
 		unless @frustration.comments_after_structuring.empty?
 			@frustration.user.update_column(:score, @frustration.user.score + Settings.scores.expert.deny_with_negative)
 		end
@@ -67,6 +69,15 @@ class FrustrationsController < ApplicationController
 	def edit_to_struct
 		@frustration = Frustration.find(params[:id])
 		@author_comment = params[:author_comment]
+	end
+
+	def to_archive_by_admin
+		@frustration = Frustration.find(params[:id])
+		@frustration.update_attributes(:status => 1, :trash => true)
+		@frustration.user.update_column(:score, @frustration.user.score + Settings.scores.unstructure.violation_frustration) 
+
+		flash[:success] = "Отправлена в архив cо штрафом пользователю!"
+		redirect_to root_path
 	end
 
 	def update_to_struct

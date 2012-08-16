@@ -2,7 +2,7 @@
 class Frustration < ActiveRecord::Base
   #status 0 -unstructed, 1 -archive, 2 - structed, 3 -to expert, 
   #4 -allow expert, 5 -deny expert
-  attr_accessible  :status, :struct_user,:structuring_date, :what, :wherin, :when, :what_old, :wherin_old, :when_old 
+  attr_accessible  :status, :struct_user,:structuring_date, :trash, :what, :wherin, :when, :what_old, :wherin_old, :when_old 
 
   belongs_to :user
   # user, who negative comment was used for archiving frustration
@@ -49,20 +49,24 @@ class Frustration < ActiveRecord::Base
     Frustration.where(:status => 5)
   end
 
-  # def negative_comments
-  #   FrustrationComment.where(:negative => true)
-  # end
+  def negative
+    self.frustration_comments.where(:negative => true).where(:trash => false)
+  end
+
+  def structure
+    self.frustration_comments.where(:negative => false).where(:trash => false)
+  end
 
   def comments_before_structuring
     if self.structuring_date.nil?
-      return self.frustration_comments
+      return self.frustration_comments.where(:trash => false)
     else
-      self.frustration_comments.where('created_at < ?', self.structuring_date)
+      self.frustration_comments.where('created_at < ?', self.structuring_date).where(:trash => false)
     end
   end
 
   def comments_after_structuring
-    self.frustration_comments.where('created_at > ?', self.structuring_date)
+    self.frustration_comments.where('created_at > ?', self.structuring_date).where(:trash => false)
   end
 
 

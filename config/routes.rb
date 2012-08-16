@@ -22,7 +22,13 @@ CollectiveMind::Application.routes.draw do
   resources :users
   resources :sessions, :only => [:new, :create, :destroy]
   resources :frustrations  do
-      resources :frustration_comments
+      
+      resources :frustration_comments do
+        member do
+          put :to_trash_by_admin
+        end
+      end
+
       member do
        put :archive
        put :to_expert
@@ -30,6 +36,7 @@ CollectiveMind::Application.routes.draw do
        put :expert_decline
        get :edit_to_struct
        put :update_to_struct
+       put :to_archive_by_admin
       end
   end
   #match "frustrations/archive/:id/", :to =>"frustrations#archive"

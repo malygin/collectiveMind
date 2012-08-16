@@ -43,6 +43,14 @@ module SessionsHelper
 
 	def expert?
 		current_user.expert unless current_user.nil?
+	end	
+
+	def admin?
+		current_user.admin unless current_user.nil?
+	end
+
+	def user?
+		not (current_user.admin? or current_user.expert?)
 	end
 
 	def authorized_user

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120815071218) do
+ActiveRecord::Schema.define(:version => 20120816092004) do
 
   create_table "comments", :force => true do |t|
     t.string   "commenter"
@@ -27,9 +27,11 @@ ActiveRecord::Schema.define(:version => 20120815071218) do
     t.string   "content"
     t.integer  "user_id"
     t.integer  "frustration_id"
-    t.datetime "created_at",                       :null => false
-    t.datetime "updated_at",                       :null => false
+    t.datetime "created_at",                        :null => false
+    t.datetime "updated_at",                        :null => false
     t.boolean  "negative",       :default => true
+    t.string   "comment_admin"
+    t.boolean  "trash",          :default => false
   end
 
   add_index "frustration_comments", ["created_at"], :name => "index_frustration_comments_on_created_at"
@@ -51,6 +53,8 @@ ActiveRecord::Schema.define(:version => 20120815071218) do
     t.integer  "negative_user_id"
     t.integer  "struct_user_id"
     t.datetime "structuring_date"
+    t.string   "comment_admin"
+    t.boolean  "trash"
   end
 
   add_index "frustrations", ["created_at"], :name => "index_frustrations_on_created_at"

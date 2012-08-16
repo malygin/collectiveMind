@@ -19,8 +19,8 @@
 			Добавлено
 			= time_ago_in_words(feed_item.created_at)
 			назад. Негативных - 
-			= feed_item.frustration_comments.where(:negative => true).count
+			= feed_item.negative.count
 			Структурных -
-			= feed_item.frustration_comments.where(:negative => false).count
+			= feed_item.structure.count
 
 
