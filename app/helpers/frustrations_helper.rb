@@ -38,5 +38,8 @@ module FrustrationsHelper
 	def frustration_after_expert?(frustration)
 		frustration.status.between?(4,5)
 	end
+	def frustration_for_expert?(frustration)
+		frustration.status == 3
+	end
 
 end

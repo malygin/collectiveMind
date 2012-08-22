@@ -16,7 +16,7 @@
 	%li Время  еще не пришло!
 
 
-- if expert? and not frustration_after_expert?(@frustration)
+- if expert? and  frustration_for_expert?(@frustration) 
 	= link_to "принять", expert_accept_frustration_path(@frustration),:method => :put, :confirm => "Точно принять?"
 	или
 	= link_to "отклонить", expert_decline_frustration_path(@frustration),:method => :put, :confirm => "Точно отклонить?"

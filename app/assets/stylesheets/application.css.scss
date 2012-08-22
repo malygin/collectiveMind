@@ -65,12 +65,14 @@ input {
 /* Header
 -----------------------------------------------------------------------------*/
 #header {
+
   height: 150px;
   background: url(top.jpg) ;
   background-repeat:no-repeat;
 
   img {
-    padding-top: 50px;
+    padding-top: 20px;
+    margin-left: 60px;
    }
 
    a:link, a:active, a:visited {
@@ -92,7 +94,7 @@ input {
     li{
     list-style-type: none;
     display: inline-block;
-    padding: 0px 0px 0px 0px !important;
+    padding: 4px 0px 0px 0px !important;
   
    }
 
@@ -231,6 +233,9 @@ a:visited {
 
 div.field, div.actions {
   margin-bottom: 10px;
+}
+div.flash{
+  color:red;
 }
 .field_with_errors {
   margin-top: 10px;

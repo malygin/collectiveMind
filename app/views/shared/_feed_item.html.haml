@@ -6,9 +6,10 @@
 			%i= link_to feed_item.user.name_title, feed_item.user
 		%span{:class =>"timestamp"}
 			= Russian::strftime(feed_item.created_at,  "%A, %1d %B %T")
+		=signed_in? 
 
 		%span{:class => "content"}
-			- unless feed_item.archive?
+			- if not feed_item.archive? and  signed_in?
 				= feed_item.content
 				= link_to 'подробнее', feed_item
 			-else 
