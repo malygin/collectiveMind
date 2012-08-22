@@ -1,14 +1,10 @@
+%h1=@title
 - if signed_in? and user?
-	= render "shared/user_info"
-
-
-=@title
+	= link_to "+Добавить неудовлетворенность", current_user
 / - if active_form_frustration?
 / 	%h1{:class => "frustration"} Добавить неудовлетворенность
 / 	= render "shared/frustration_form"
-%table{:class => "front"}
-	%tr
-		%td= render "shared/feed_frustrations"
+= render "shared/feed_frustrations"
 
 
 

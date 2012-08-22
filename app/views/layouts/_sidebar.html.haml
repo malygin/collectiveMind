@@ -1,4 +1,10 @@
 
+%h1 Новости
+.news_title
+	Портал запущен!
+Мы рады сообщить что портал запущен
+
 -unless @users.nil?
-	%h2 Лучшие пользователи
-	= render @users
+	%h1 Лучшие пользователи
+	%ul{:class => 'top_users'}
+		= render @users

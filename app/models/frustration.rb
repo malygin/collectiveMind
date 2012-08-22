@@ -91,6 +91,8 @@ class Frustration < ActiveRecord::Base
   end
 
 
+
+
   def type
     case self.status
       when 0

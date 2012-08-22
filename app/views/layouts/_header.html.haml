@@ -4,7 +4,7 @@
   %ul.username
     - if signed_in?
       %li= link_to current_user.name, user_path(current_user)
-      = link_to "ред.", edit_user_path(current_user) 
+      = link_to "(редактировать)", edit_user_path(current_user) 
       = link_to "Выйти", "/signout" 
     - else
       %li= link_to "Войти", '/signin' 

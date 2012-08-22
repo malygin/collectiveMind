@@ -4,11 +4,16 @@
 	%td{:class => "frustration"}
 		%span{:class => "user"}
 			%i= link_to feed_item.user.name_title, feed_item.user
+		%span{:class =>"timestamp"}
+			= Russian::strftime(feed_item.created_at,  "%A, %1d %B %T")
+
 		%span{:class => "content"}
 			- unless feed_item.archive?
-				= link_to feed_item.content, feed_item
+				= feed_item.content
+				= link_to 'подробнее', feed_item
 			-else 
 				= feed_item.content
+
 			- unless feed_item.old_content.nil?
 				%br
 				%small текст неструктурированной -
@@ -16,11 +21,9 @@
 
 
 		%span{:class => "timestamp"} 
-			Добавлено
-			= time_ago_in_words(feed_item.created_at)
-			назад. Негативных - 
+			негативные - 
 			= feed_item.negative.count
-			Структурных -
+			структурирующие -
 			= feed_item.structure.count
 
 
