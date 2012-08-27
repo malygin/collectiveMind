@@ -73,10 +73,12 @@ class FrustrationsController < ApplicationController
 
 	def to_archive_by_admin
 		@frustration = Frustration.find(params[:id])
+		#puts params
 		@frustration.update_attributes(:status => 1, :trash => true)
-		@frustration.user.update_column(:score, @frustration.user.score + Settings.scores.unstructure.violation_frustration) 
-
-		flash[:success] = "Отправлена в архив cо штрафом пользователю!"
+		if to_bool(params[:del])
+			@frustration.user.update_column(:score, @frustration.user.score + Settings.scores.unstructure.violation_frustration) 
+		end
+		flash[:success] = "Отправлена в архив"
 		redirect_to root_path
 	end
 

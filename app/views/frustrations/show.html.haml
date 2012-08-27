@@ -22,7 +22,9 @@
 	= link_to "отклонить", expert_decline_frustration_path(@frustration),:method => :put, :confirm => "Точно отклонить?"
 
 - if admin? 
-	= link_to "удалить ?", to_archive_by_admin_frustration_path(@frustration),:method => :put, :confirm => "удаляем со штрафом 10 балов?"
+	= link_to "удалить со штрафом?", to_archive_by_admin_frustration_path(@frustration,:del => true),:method => :put, :confirm => "удаляем со штрафом 10 балов?"
+	|
+	= link_to "удалить без штрафа?", to_archive_by_admin_frustration_path(@frustration, :del =>false),:method => :put, :confirm => "удаляем без штрафа?"
 
 
 %table{:class => "frustrations"}

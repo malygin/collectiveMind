@@ -12,7 +12,9 @@
 		%br
 		=link_to "Сделать структуриванной сославшись на этот коммент?", edit_to_struct_frustration_path(@frustration.id,  :author_comment =>frustration_comment.user)
 - if admin? 
-	= link_to "удалить?", to_trash_by_admin_frustration_frustration_comment_path(frustration_comment),:method => :put, :confirm => "Удалить со штрафом 1 балл?"
+	= link_to "удалить?", to_trash_by_admin_frustration_frustration_comment_path(@frustration, frustration_comment, :del => true),:method => :put, :confirm => "Удалить со штрафом 1 балл?"
+	|
+	= link_to "удалить без штрафа?", to_trash_by_admin_frustration_frustration_comment_path(@frustration, frustration_comment, :del => false),:method => :put, :confirm => "Удалить без штрафа?"	
 %span{:class=>"timestamp"}
 	= time_ago_in_words(frustration_comment.created_at)
 

@@ -11,8 +11,10 @@ class FrustrationCommentsController < ApplicationController
   def to_trash_by_admin
   	#puts params
   	@comment = FrustrationComment.find(params[:id])
-  	@comment.user.update_column(:score, @comment.user.score + Settings.scores.unstructure.violation_comment )
-  	@comment.update_column(:trash, true)
+  	if to_bool(params[:del])
+      @comment.user.update_column(:score, @comment.user.score + Settings.scores.unstructure.violation_comment )
+  	end
+    @comment.update_column(:trash, true)
   	flash[:success] = "Комментарий удален!"
   	redirect_to frustration_path(params[:frustration_id])
   end
