@@ -1,7 +1,8 @@
 %li
-	= gravatar_for user, :size =>30
-	= link_to user.name_title, user, :class => 'username'	
-	%b= user.score
+	%div
+		= gravatar_for user, :size =>50
+		= link_to user.name_title, user	
+		%span{:class => 'rate'}= user.score
 
 / - if current_user.admin? 
 / 	= link_to "| удалить", user, :method => :delete, :confirm =>"Точно?"

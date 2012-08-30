@@ -2,24 +2,25 @@
 %br
 = form_for @frustration do |f|
 	= render 'shared/error_messages', :object => f.object
-	ЧТО? - отрицательное действие, явление, установление, черта...
+	%label ЧТО?
 	%br
 	%field
 		= f.text_area :what
+	%div{:class=>'timestamp'} - отрицательное действие, явление, установление, черта...
+	
+	%label В ЧЕМ
 	%br
-	%label В ЧЕМ - 
-	регулярное нужное или неизбежно случающееся событие, мероприятие, процесс, ситуация...	
 	%field
 		= f.text_area :wherin
-	%br
-	%label ГДЕ -
-	место, организация, общность, в которой это происходит.
+	%div{:class=>'timestamp'} - регулярное нужное или неизбежно случающееся событие, мероприятие, процесс, ситуация...	
+	
+	%label ГДЕ
 	%br
 	%field
 		= f.text_area :when
-	%br
+	%div{:class=>'timestamp'} -	место, организация, общность, в которой это происходит.
 	%actions
-		= f.submit "Послать",  class: "btn btn-large btn-primary"
+		= f.submit "",  class: "btn"
 	%span
 		.remaining  &nbsp;осталось
 		.countdown

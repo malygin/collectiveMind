@@ -1,14 +1,15 @@
-%h2
-	= gravatar_for @user
-	= @user.name
-	= @user.surname
-	%br= @user.email
+.user_info
+	= gravatar_for @user, :size => 120 
+	%span{:class => 'name'}
+		= @user.name
+		= @user.surname
 	%br
 	набрано балов
-	= @user.score
+	%span{:class => 'rate'}= @user.score
 
-Добавлено  неудовлетворенностей - 
-= @user.frustrations.count
+%h1 
+	Добавлено  неудовлетворенностей - 
+	= @user.frustrations.count
 
 - if active_form_frustration?
 	= render "shared/frustration_form"
@@ -19,8 +20,16 @@
 	%br
 	%i Ни одной не добавлено
 %br
-
-Неудовлетворенности, которые были отправлены в архив из за комментариев пользователя -
+%h1 Неудовлетворенности, к которым были добавлены полезные структурирующие комменты
+- unless @user.structured_frustrations.empty?
+	%table{:class => "frustrations"}
+		= render :partial => 'shared/feed_item', :collection => @user.structured_frustrations
+-else
+	%br
+	%i Их пока нет
+	%br
+	%br
+%h1 Неудовлетворенности, которые были отправлены в архив из за комментариев пользователя
 - unless @user.negatived_frustrations.empty?
 	%table{:class => "frustrations"}
 		= render :partial => 'shared/feed_item', :collection => @user.negatived_frustrations
@@ -28,13 +37,7 @@
 	%br
 	%i Их пока нет
 
-%br
-%br Неудовлетворенности, к которым были добавлены полезные структурирующие комменты -
-- unless @user.structured_frustrations.empty?
-	%table{:class => "frustrations"}
-		= render :partial => 'shared/feed_item', :collection => @user.structured_frustrations
--else
-	%br
-	%i Их пока нет
+
+
 
 

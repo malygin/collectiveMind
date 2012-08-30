@@ -23,13 +23,14 @@ class PagesController < ApplicationController
       @frustration = Frustration.new 
       @frustrations_feed = Frustration.feed_structure.paginate(:page => params[:page])
       @users = User.only_simple_users.order('users.score DESC').limit(5) 
+      @title = "Cтруктурированные неудовлетворенности" 
 
       render 'home'
   end
 
   def archive_frustrations
     @frustration = Frustration.new
-    @title = "Неудовлетворенности, снятые с рассмотрения"
+    @title = "Неудовлетворенности снятые с рассмотрения"
     @frustrations_feed = Frustration.feed_archive.paginate(:page => params[:page]) 
     @users = User.only_simple_users.order('users.score DESC').limit(5) 
     render 'home'
