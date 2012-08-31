@@ -9,13 +9,16 @@
 		%div{:class => "content"}
 			- if not feed_item.archive? and  signed_in?
 				= feed_item.content
-				= link_to 'подробнее', feed_item
 			-else 
 				= feed_item.content
+
+			- if  (not current_page?(frustration_path(feed_item)) and signed_in?)				
+				= link_to 'подробнее', feed_item
 			- unless feed_item.old_content.nil?
 				%br
 				%small текст неструктурированной -
 				%span{:class => "timestamp"}=feed_item.old_content
+
 
 
 		%span{:class => "comments"} 

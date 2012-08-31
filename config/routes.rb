@@ -21,14 +21,12 @@ CollectiveMind::Application.routes.draw do
   #get "users/new"
   resources :users
   resources :sessions, :only => [:new, :create, :destroy]
-  resources :frustrations  do
-      
+  resources :frustrations  do      
       resources :frustration_comments do
         member do
           put :to_trash_by_admin
         end
       end
-
       member do
        put :archive
        put :to_expert

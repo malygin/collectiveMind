@@ -1,4 +1,4 @@
-%b Сделаем же структурированную из неструктурированной
+%h1 Сделаем же структурированную из неструктурированной
 
 = form_for @frustration, :url => update_to_struct_frustration_path(@frustration.id,  :author_comment => @author_comment) do |f|
 	=render 'shared/error_messages', :object =>f.object
@@ -15,9 +15,9 @@
 		=f.text_area :when
 
 	.action
-		=f.submit 'Сделать структурированной'
+		=f.submit '', class: 'btn'
 
-=@frustration.content
+
 
 
 

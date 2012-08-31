@@ -1,9 +1,11 @@
-%h1
-	= gravatar_for @user
-	= @user.name
-	= @user.surname
-	%br= @user.email
-	%br
+%h1 Вы эксперт системы
+
+.user_info
+	= gravatar_for @user, :size => 120 
+	%span{:class => 'name'}
+		= @user.name
+		= @user.surname
+
 %h1 На экспертизу - 
 
 -unless @frustrations.nil?

@@ -13,6 +13,12 @@
 
 - if active_form_frustration?
 	= render "shared/frustration_form"
+-else
+	-if @user.frustrations.count == Settings.max_frustration 
+		.notification Вы не можете добавить, потому что добавили уже максимальное количество
+	-else
+		.notification У вас есть неудовлетворенность, не отправленная в архив или эксперту
+
 - unless @user.frustrations.empty?
 	%table{:class => "frustrations"}
 		= render @user.frustrations
@@ -20,7 +26,7 @@
 	%br
 	%i Ни одной не добавлено
 %br
-%h1 Неудовлетворенности, к которым были добавлены полезные структурирующие комменты
+%h1 Неудовлетворенности, структурированный с помощью моих комментариев
 - unless @user.structured_frustrations.empty?
 	%table{:class => "frustrations"}
 		= render :partial => 'shared/feed_item', :collection => @user.structured_frustrations
@@ -29,7 +35,7 @@
 	%i Их пока нет
 	%br
 	%br
-%h1 Неудовлетворенности, которые были отправлены в архив из за комментариев пользователя
+%h1 Неудовлетворенности, отправленные в архив благодаря моему комментарию
 - unless @user.negatived_frustrations.empty?
 	%table{:class => "frustrations"}
 		= render :partial => 'shared/feed_item', :collection => @user.negatived_frustrations

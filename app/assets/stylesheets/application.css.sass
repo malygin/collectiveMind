@@ -44,8 +44,13 @@ div.news_title
   font-size: 13px
   font-style: italic
 
-input 
+input
   vertical-align: middle
+  width: 180px
+  height: 22px
+  padding: 5px 3px 5px 3px
+  border: 1px solid #666666
+
 
 
 #wrapper 
@@ -337,6 +342,14 @@ div.user_info
 
   span.frustrations 
 
+.btn
+  height: 31px
+  border: none
+
+form#auth
+  .btn
+    background: url(login.png) no-repeat
+    padding-bottom: 40px
 
 
 form.new_frustration
@@ -356,11 +369,16 @@ form.new_frustration
   div.timestamp
     margin-bottom: 10px
     width: 350px
+
   .btn
     background: url(add.png) no-repeat
     width: 95px
-    height: 31px
-    border: none
+ 
+
+form.new_frustration_comment, form.edit_frustration, form.edit_user
+  .btn
+    margin-top: 10px
+    background: url(save.png) no-repeat
 
 
 form.edit_frustration 
@@ -373,6 +391,23 @@ form.edit_frustration
     font-size: 12px
     font-family: Helvetica
     color: #0079D7
+
+.notification
+  background: url(yellowbg.png)
+  border: 1px solid #fab418
+  padding: 3px 8px 3px 8px
+
+.success
+  background: url(greenbg.png)
+  border: 1px solid #98c700
+  padding: 3px 8px 3px 8px
+  margin-bottom: 10px
+
+.error
+  background: url(redbg.png)
+  border: 1px solid #eb5439
+  padding: 3px 8px 3px 8px
+  margin-bottom: 10px
 
 .nameinfo
   background: url(grey.jpg) repeat-x

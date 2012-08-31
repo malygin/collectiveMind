@@ -1,30 +1,39 @@
 - if current_user?(@frustration.user) and !have_structure_comments?(@frustration) 
-	Вы автор этой неудовлетворенности  и у нее нет структурирующих комментов
-	=link_to "хотите снять ее с рассмотрения?", archive_frustration_path(@frustration.id), :method => :put, :confirm => "Точно?", :title => @frustration.content
+	.notification 
+		Вы автор этой неудовлетворенности  и у нее нет структурирующих комментов
+		=link_to "хотите снять ее с рассмотрения?", archive_frustration_path(@frustration), :method => :put, :confirm => "Точно?", :title => @frustration.content
 -elsif current_user?(@frustration.user)
-	%li Есть структурирующие комменты, нельзя снять с рассмотрения
+	.error Есть структурирующие комменты, нельзя снять с рассмотрения
 %br
 
 
 - if show_link_to_structuring?(@frustration)
-	=link_to "Сделать ее структуриванной?", edit_to_struct_frustration_path(@frustration.id)
+	.notification 
+		Пришло время и вы можете 
+		=link_to "сделать ее структуриванной?", edit_to_struct_frustration_path(@frustration.id)
 - elsif show_link_to_expert_with_negative_comments?(@frustration)
-	=link_to "Отправить эксперту - В случае неуспеха получите штраф в 50 балов!", to_expert_frustration_path(@frustration),:method => :post, :confirm => "50 балов ведь потеряете!" 
+	.error 
+		Есть негативные комментарии, в случае неуспеха получите штраф в 50 балов! Все равно 
+		=link_to "Отправить эксперту ", to_expert_frustration_path(@frustration),:method => :post, :confirm => "50 балов ведь потеряете!" 
 - elsif show_link_to_expert?(@frustration)
-	=link_to "Отправить эксперту", to_expert_frustration_path(@frustration),:method => :put, :confirm => "Уверены?" 
+	.success
+		Прошло положенное время и вы можете свою неудовлетворенность 
+		=link_to "отправить эксперту", to_expert_frustration_path(@frustration),:method => :put, :confirm => "Уверены?" 
 - elsif current_user?(@frustration.user) 
 	%li Время  еще не пришло!
 
 
-- if expert? and  frustration_for_expert?(@frustration) 
-	= link_to "принять", expert_accept_frustration_path(@frustration),:method => :put, :confirm => "Точно принять?"
-	или
-	= link_to "отклонить", expert_decline_frustration_path(@frustration),:method => :put, :confirm => "Точно отклонить?"
+- if expert? and  frustration_for_expert?(@frustration)
+	.notification 
+		= link_to "принять", expert_accept_frustration_path(@frustration),:method => :put, :confirm => "Точно принять?"
+		или
+		= link_to "отклонить", expert_decline_frustration_path(@frustration),:method => :put, :confirm => "Точно отклонить?"
 
-- if admin? 
-	= link_to "удалить со штрафом?", to_archive_by_admin_frustration_path(@frustration,:del => true),:method => :put, :confirm => "удаляем со штрафом 10 балов?"
-	|
-	= link_to "удалить без штрафа?", to_archive_by_admin_frustration_path(@frustration, :del =>false),:method => :put, :confirm => "удаляем без штрафа?"
+- if admin?
+	.error 
+		= link_to "удалить со штрафом?", to_archive_by_admin_frustration_path(@frustration,:del => true),:method => :put, :confirm => "удаляем со штрафом 10 балов?"
+		|
+		= link_to "удалить без штрафа?", to_archive_by_admin_frustration_path(@frustration, :del =>false),:method => :put, :confirm => "удаляем без штрафа?"
 
 
 %table{:class => "frustrations"}
@@ -42,6 +51,6 @@
 
 - if current_user?(@frustration.user) or frustration_in_expert_status?(@frustration) or not user?
 	%br
-	%i Нет возможности для комментирования
+	.error Нет возможности для комментирования
 - elsif signed_in?
 	= render 'frustration_comments/form'

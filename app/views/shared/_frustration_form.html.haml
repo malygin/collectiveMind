@@ -2,19 +2,19 @@
 %br
 = form_for @frustration do |f|
 	= render 'shared/error_messages', :object => f.object
-	%label ЧТО?
+	%label что?
 	%br
 	%field
 		= f.text_area :what
 	%div{:class=>'timestamp'} - отрицательное действие, явление, установление, черта...
 	
-	%label В ЧЕМ
+	%label в чем?
 	%br
 	%field
 		= f.text_area :wherin
 	%div{:class=>'timestamp'} - регулярное нужное или неизбежно случающееся событие, мероприятие, процесс, ситуация...	
 	
-	%label ГДЕ
+	%label где?
 	%br
 	%field
 		= f.text_area :when

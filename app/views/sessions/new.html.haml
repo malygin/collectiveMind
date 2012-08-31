@@ -1,6 +1,6 @@
 %h1 Пора авторизоваться
 
-= form_for(:session, :url => sessions_path) do |f|
+= form_for(:session, :url => sessions_path, :html => { :id => 'auth' } ) do |f|
 	.field
 		= f.label :email, "Электронная почта"
 		%br
@@ -10,7 +10,7 @@
 		%br
 		= f.password_field :password
 	.actions
-		=f.submit "Авторизоваться"
+		=f.submit "", class: "btn"
 
 %p
 	Еще не зарегистрованы? 
