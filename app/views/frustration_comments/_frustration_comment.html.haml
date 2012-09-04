@@ -1,23 +1,28 @@
-%br= link_to frustration_comment.user.surname, frustration_comment.user
+= link_to gravatar_for frustration_comment.user, :size => 20
+= link_to frustration_comment.user.name_title, frustration_comment.user
+- if frustration_comment.negative
+	= image_tag("bad.png", :alt => "Colleсtive mind", :height => 20 ) 
+- else
+	= image_tag("good.png", :alt => "Colleсtive mind", :height => 20 ) 
+
+%br
+%span{:class=>"timestamp"}
+	= Russian::strftime(frustration_comment.created_at,  "%T")
 = frustration_comment.content
 - if frustration_comment.negative
-	%i негативный
 	-if current_user?(@frustration.user)
-		%br=link_to "снять с рассмотрения сославшись на этот коммент", archive_frustration_path(@frustration.id,:author_comment =>frustration_comment.user),   :method => :put, :confirm => "Точно?", :title => @frustration.content
+		%br=link_to " в архив", archive_frustration_path(@frustration.id,:author_comment =>frustration_comment.user),   :method => :put, :confirm => "Точно?", :title => @frustration.content
 
 - else 
-	%i структурирующий
-
 	- if show_link_to_structuring?(@frustration)
-		%br
-		=link_to "Сделать структуриванной сославшись на этот коммент?", edit_to_struct_frustration_path(@frustration.id,  :author_comment =>frustration_comment.user)
+		%br=link_to "структуризовать", edit_to_struct_frustration_path(@frustration.id,  :author_comment =>frustration_comment.user)
 - if admin? 
 	= link_to "удалить?", to_trash_by_admin_frustration_frustration_comment_path(@frustration, frustration_comment, :del => true),:method => :put, :confirm => "Удалить со штрафом 1 балл?"
 	|
 	= link_to "удалить без штрафа?", to_trash_by_admin_frustration_frustration_comment_path(@frustration, frustration_comment, :del => false),:method => :put, :confirm => "Удалить без штрафа?"	
-%span{:class=>"timestamp"}
-	= time_ago_in_words(frustration_comment.created_at)
+
 
 
 / = link_to 'Удалить комментарий', [comment_frustration.frustration, comment_frustration], :confirm => 'Точно?', :method => :delete 
-%hr
+%br
+%br
