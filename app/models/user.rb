@@ -9,6 +9,9 @@ class User < ActiveRecord::Base
   has_many :frustrations, :dependent => :destroy
   has_many :frustration_comments, :dependent => :destroy
 
+  has_many :question, :dependent => :destroy
+  has_many :answer, :dependent => :destroy
+
 # list of frustrations which was denied for user's comment
   has_many :negatived_frustrations, :class_name => "Frustration", :foreign_key =>"negative_user_id"
   has_many :structured_frustrations, :class_name => "Frustration", :foreign_key =>"struct_user_id"

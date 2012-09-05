@@ -6,6 +6,14 @@
 %br
 %br
 %br
+%h1 Тех поддержка
+.news_title
+	Что то непонятно? 
+	= link_to 'Задайте вопрос', questions_path
+%br
+%br
+%br
+
 -unless @users.nil?
 	%h1 Лучшие пользователи
 	%ul{:class => 'top_users'}

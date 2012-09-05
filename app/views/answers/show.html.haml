@@ -1,0 +1,18 @@
+%p#notice= notice
+
+%p
+  %b Text:
+  = @answer.text
+%p
+  %b Raiting:
+  = @answer.raiting
+%p
+  %b User:
+  = @answer.user_id
+%p
+  %b Question:
+  = @answer.question_id
+
+= link_to 'Edit', edit_answer_path(@answer)
+\|
+= link_to 'Back', answers_path

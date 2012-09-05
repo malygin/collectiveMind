@@ -3,6 +3,12 @@ CollectiveMind::Application.routes.draw do
 
 
 
+
+
+  resources :questions do
+    resources :answers
+  end
+
   match "/about", :to => "pages#about"
   match "/contacts", :to => "pages#contacts"
   match "/help", :to => "pages#help"

@@ -1,0 +1,16 @@
+%p#notice= notice
+
+= link_to gravatar_for(@question.user), @question.user
+=link_to @question.user.name_title, @question.user, :class => 'username'
+%p
+  = @question.text
+= render  @question.answers
+%br
+%br
+- if signed_in?
+  =render 'answers/form'
+
+- if current_user?(@question.user) 
+  = link_to 'Редактировать', edit_question_path(@question)
+
+= link_to 'Назад', questions_path

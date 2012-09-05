@@ -21,11 +21,11 @@ module FrustrationsHelper
 	end
 
 	def show_link_to_structuring?(frustration)
-		current_user?(frustration.user) and (frustration.created_at > Settings.days_accept_unstracture.day.ago) and (frustration.status!=2)
+		current_user?(frustration.user) and (frustration.created_at < Settings.days_accept_unstracture.day.ago) and (frustration.status!=2)
 	end
 
 	def show_link_to_expert_with_negative_comments?(frustration)
-		current_user?(frustration.user) and (frustration.created_at > Settings.days_accept_stracture.day.ago) and not @frustration.comments_after_structuring.empty?
+		current_user?(frustration.user) and (frustration.created_at < Settings.days_accept_stracture.day.ago) and not @frustration.comments_after_structuring.empty?
 	end
 
 	def show_link_to_expert?(frustration)

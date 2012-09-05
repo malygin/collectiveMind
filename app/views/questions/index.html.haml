@@ -1,0 +1,20 @@
+= link_to 'Задать вопрос!', new_question_path
+%br
+
+%table
+
+  - @questions.each do |question|
+    %tr
+      %td{:class => "gravatar"}
+        = link_to gravatar_for(question.user), question.user
+      %td 
+        =link_to question.user.name_title, question.user, :class => 'username'
+        %br
+        =question.text
+        =link_to 'подробнее', question
+      / %td= link_to 'Edit', edit_question_path(question)
+      / %td= link_to 'Destroy', question, :confirm => 'Are you sure?', :method => :delete
+
+%br
+
+

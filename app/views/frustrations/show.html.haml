@@ -14,7 +14,7 @@
 - elsif show_link_to_expert_with_negative_comments?(@frustration)
 	.error 
 		Есть негативные комментарии, в случае неуспеха получите штраф в 50 балов! Все равно 
-		=link_to "Отправить эксперту ", to_expert_frustration_path(@frustration),:method => :post, :confirm => "50 балов ведь потеряете!" 
+		=link_to "Отправить эксперту ", to_expert_frustration_path(@frustration),:method => :put, :confirm => "50 балов ведь потеряете!" 
 - elsif show_link_to_expert?(@frustration)
 	.success
 		Прошло положенное время и вы можете свою неудовлетворенность 
