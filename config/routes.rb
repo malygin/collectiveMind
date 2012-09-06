@@ -7,6 +7,10 @@ CollectiveMind::Application.routes.draw do
 
   resources :questions do
     resources :answers
+    member do
+      put :plus
+      put :minus
+    end
   end
 
   match "/about", :to => "pages#about"

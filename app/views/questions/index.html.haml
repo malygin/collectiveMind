@@ -1,19 +1,29 @@
-= link_to 'Задать вопрос!', new_question_path
+-if signed_in?
+  = link_to 'Задать вопрос!', new_question_path
 %br
-
+%br
+%br
 %table
-
   - @questions.each do |question|
     %tr
+      %td
+        = link_to '+', plus_question_path(question), :method => :put
+        = question.raiting
+        = link_to '―', minus_question_path(question), :method => :put
       %td{:class => "gravatar"}
-        = link_to gravatar_for(question.user), question.user
+        = link_to gravatar_for(question.user,  :size =>30), question.user
       %td 
         =link_to question.user.name_title, question.user, :class => 'username'
         %br
         =question.text
         =link_to 'подробнее', question
+        %br
+        Ответов 
+        %b=question.answers.count
       / %td= link_to 'Edit', edit_question_path(question)
-      / %td= link_to 'Destroy', question, :confirm => 'Are you sure?', :method => :delete
+      %td
+        -if admin?
+          = link_to 'Удалить', question, :confirm => 'Are you sure?', :method => :delete
 
 %br
 

@@ -1,4 +1,37 @@
+# encoding: utf-8
 class QuestionsController < ApplicationController
+  
+  def plus
+    @question = Question.find(params[:id])
+    if @question.users.include?(current_user)
+      flash[:success] = "Вы уже голосовали за этот вопрос"
+      redirect_to questions_path
+    else
+      @question.users << current_user
+      @question.raiting+=1
+      if @question.save
+        flash[:success] = "Голос За то, что вопрос полезен"
+        redirect_to questions_path
+      end
+    end
+  end 
+
+
+  def minus
+    @question = Question.find(params[:id])
+    if @question.users.include?(current_user)
+      flash[:success] = "Вы уже голосовали за этот вопрос"
+      redirect_to questions_path
+    else
+      @question.users << current_user
+      @question.raiting-=1
+      if @question.save
+        flash[:success] = "Голос За то, что вопрос бесполезен"
+        redirect_to questions_path
+      end
+    end
+  end
+  
   # GET /questions
   # GET /questions.json
   def index
@@ -41,11 +74,13 @@ class QuestionsController < ApplicationController
   # POST /questions.json
   def create
     @question = Question.new(params[:question])
+    #puts params[:question]
     @question.user = current_user
+    @question.raiting = 0
 
     respond_to do |format|
       if @question.save
-        format.html { redirect_to @question, notice: 'Question was successfully created.' }
+        format.html { redirect_to @question, notice: 'Вопрос задан, ждем ответа!' }
         format.json { render json: @question, status: :created, location: @question }
       else
         format.html { render action: "new" }
