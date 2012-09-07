@@ -51,6 +51,9 @@ ActiveRecord::Schema.define(:version => 20120806064221) do
     t.datetime "updated_at",                    :null => false
   end
 
+  add_index "frustrations", ["created_at"], :name => "index_frustrations_on_created_at"
+  add_index "frustrations", ["user_id"], :name => "index_frustrations_on_user_id"
+
   create_table "posts", :force => true do |t|
     t.string   "title"
     t.text     "text"
