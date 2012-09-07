@@ -15,11 +15,11 @@ ActiveRecord::Schema.define(:version => 20120907091835) do
 
   create_table "answers", :force => true do |t|
     t.string   "text"
-    t.integer  "raiting",     :default => 0
+    t.integer  "raiting"
     t.integer  "user_id"
     t.integer  "question_id"
-    t.datetime "created_at",                 :null => false
-    t.datetime "updated_at",                 :null => false
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
   end
 
   add_index "answers", ["created_at"], :name => "index_answers_on_created_at"
@@ -32,14 +32,6 @@ ActiveRecord::Schema.define(:version => 20120907091835) do
 
   add_index "answers_users", ["answer_id"], :name => "index_answers_users_on_answer_id"
   add_index "answers_users", ["user_id"], :name => "index_answers_users_on_user_id"
-
-  create_table "comment_frustrations", :force => true do |t|
-    t.string   "content"
-    t.integer  "user_id"
-    t.datetime "created_at",     :null => false
-    t.datetime "updated_at",     :null => false
-    t.integer  "frustration_id"
-  end
 
   create_table "comments", :force => true do |t|
     t.string   "commenter"
@@ -67,20 +59,26 @@ ActiveRecord::Schema.define(:version => 20120907091835) do
   add_index "frustration_comments", ["user_id"], :name => "index_frustration_comments_on_user_id"
 
   create_table "frustrations", :force => true do |t|
-    t.string   "content"
+    t.string   "what"
+    t.string   "wherin"
+    t.string   "when"
+    t.string   "what_old"
+    t.string   "wherin_old"
+    t.string   "when_old"
     t.integer  "user_id"
-    t.boolean  "structure",        :default => false
-    t.datetime "created_at",                          :null => false
-    t.datetime "updated_at",                          :null => false
+    t.integer  "status",           :default => 0
+    t.datetime "created_at",                      :null => false
+    t.datetime "updated_at",                      :null => false
     t.string   "old_content"
     t.integer  "negative_user_id"
     t.integer  "struct_user_id"
     t.datetime "structuring_date"
     t.string   "comment_admin"
-    t.boolean  "trash",            :default => false
+    t.boolean  "trash"
   end
 
   add_index "frustrations", ["created_at"], :name => "index_frustrations_on_created_at"
+  add_index "frustrations", ["status"], :name => "index_frustrations_on_status"
   add_index "frustrations", ["user_id"], :name => "index_frustrations_on_user_id"
 
   create_table "posts", :force => true do |t|
@@ -92,10 +90,10 @@ ActiveRecord::Schema.define(:version => 20120907091835) do
 
   create_table "questions", :force => true do |t|
     t.string   "text"
-    t.integer  "raiting",    :default => 0
+    t.integer  "raiting"
     t.integer  "user_id"
-    t.datetime "created_at",                :null => false
-    t.datetime "updated_at",                :null => false
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
   add_index "questions", ["created_at"], :name => "index_questions_on_created_at"
@@ -105,9 +103,6 @@ ActiveRecord::Schema.define(:version => 20120907091835) do
     t.integer "question_id"
     t.integer "user_id"
   end
-
-  add_index "questions_users", ["question_id"], :name => "index_questions_users_on_question_id"
-  add_index "questions_users", ["user_id"], :name => "index_questions_users_on_user_id"
 
   create_table "users", :force => true do |t|
     t.string   "name"
