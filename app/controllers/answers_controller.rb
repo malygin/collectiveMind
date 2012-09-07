@@ -1,4 +1,37 @@
+# encoding: utf-8
 class AnswersController < ApplicationController
+  
+  def plus
+    @answer = Answer.find(params[:question_id])
+    if @answer.users.include?(current_user)
+      flash[:success] = "Вы уже голосовали за этот ответ"
+      redirect_to @answer.question
+    else
+      @answer.users << current_user
+      @answer.raiting+=1
+      if @answer.save
+        flash[:success] = "Голос За то, что ответ полезен"
+        redirect_to @answer.question
+      end
+    end
+  end 
+
+
+  def minus
+    @answer = Answer.find(params[:question_id])
+    if @answer.users.include?(current_user)
+      flash[:success] = "Вы уже голосовали за этот ответ"
+      redirect_to @answer.question
+    else
+      @answer.users << current_user
+      @answer.raiting-=1
+      if @answer.save
+        flash[:success] = "Голос За то, что ответ бесполезен"
+        redirect_to @answer.question
+      end
+    end
+  end
+
   # GET /answers
   # GET /answers.json
   def index
@@ -43,7 +76,7 @@ class AnswersController < ApplicationController
     @question = Question.find(params[:question_id])
     #puts "_________"
     #puts params[:negative]
-    @answer = @question.answers.create(:user_id => current_user.id, :text =>params[:answer][:text])
+    @answer = @question.answers.create(:user_id => current_user.id, :text =>params[:answer][:text], :raiting => 0)
     redirect_to @question
   end
 

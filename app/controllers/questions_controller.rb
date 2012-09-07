@@ -31,12 +31,11 @@ class QuestionsController < ApplicationController
       end
     end
   end
-  
+
   # GET /questions
   # GET /questions.json
   def index
-    @questions = Question.all
-
+    @questions = Question.find(:all, :order => ' raiting DESC')
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @questions }

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120906112320) do
+ActiveRecord::Schema.define(:version => 20120907091835) do
 
   create_table "answers", :force => true do |t|
     t.string   "text"
@@ -24,6 +24,14 @@ ActiveRecord::Schema.define(:version => 20120906112320) do
 
   add_index "answers", ["created_at"], :name => "index_answers_on_created_at"
   add_index "answers", ["user_id"], :name => "index_answers_on_user_id"
+
+  create_table "answers_users", :id => false, :force => true do |t|
+    t.integer "answer_id"
+    t.integer "user_id"
+  end
+
+  add_index "answers_users", ["answer_id"], :name => "index_answers_users_on_answer_id"
+  add_index "answers_users", ["user_id"], :name => "index_answers_users_on_user_id"
 
   create_table "comments", :force => true do |t|
     t.string   "commenter"

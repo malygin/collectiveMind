@@ -6,7 +6,12 @@ CollectiveMind::Application.routes.draw do
 
 
   resources :questions do
-    resources :answers
+    resources :answers do
+      member do
+        put :plus
+        put :minus
+      end
+    end
     member do
       put :plus
       put :minus

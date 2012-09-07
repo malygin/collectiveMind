@@ -13,6 +13,7 @@ class User < ActiveRecord::Base
   has_many :answer, :dependent => :destroy
 
   has_and_belongs_to_many :questions
+  has_and_belongs_to_many :answers
 
 # list of frustrations which was denied for user's comment
   has_many :negatived_frustrations, :class_name => "Frustration", :foreign_key =>"negative_user_id"

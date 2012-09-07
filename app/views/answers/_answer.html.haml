@@ -1,5 +1,23 @@
-= link_to gravatar_for answer.user, :size => 20
-= link_to answer.user.name_title, answer.user
-= answer.text
-%br
-%br
+%table
+	%tr
+		%td.raiting
+			- if allow_vote?(answer)
+				= link_to '+', plus_question_answer_path(answer), :method => :put
+			-else
+				+
+
+			-if answer.raiting>0
+				%span.good_raiting= answer.raiting
+			-elsif answer.raiting<0
+				%span.bad_raiting= answer.raiting
+			-else
+				=answer.raiting
+			          
+			- if answer_allow_vote?(answer)
+				= link_to '―', minus_question_answer_path(answer), :method => :put
+			- else
+				―
+		%td.answer
+			= link_to gravatar_for answer.user, :size => 20
+			= link_to answer.user.name_title, answer.user, :class => 'username'
+			%br= answer.text

@@ -7,6 +7,10 @@ class Question < ActiveRecord::Base
 
   has_many :answers
 
+  def answers_order
+  	self.answers.find(:all, :order => "raiting DESC")
+  end
+
 
 
 
