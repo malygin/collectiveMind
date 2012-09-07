@@ -1,6 +1,12 @@
-%tr
-	%td{:class => "frustration"}
-		%span{:class => "content"}= frustration.content
-		%span{:class => "timestamp"} 
-			Добавлено
-			= Russian::strftime(frustration.created_at,  "%A, %1d %B %T")
+
+%span{:class=>"nameinfo"}= frustration.type 
+%span{:class=>"dateinfo"}= Russian::strftime(frustration.created_at,  "%A, %1d %B %T")
+%span{:class=>"showinfo"}=link_to 'просмотреть', frustration, :class=>"showthis"
+%br
+=frustration.content
+%div{:class => "comments"} 
+	негативные - 
+	= frustration.negative.count
+	структурирующие -
+	= frustration.structure.count
+%br

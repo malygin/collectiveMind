@@ -11,7 +11,27 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120806064221) do
+ActiveRecord::Schema.define(:version => 20120907091835) do
+
+  create_table "answers", :force => true do |t|
+    t.string   "text"
+    t.integer  "raiting",     :default => 0
+    t.integer  "user_id"
+    t.integer  "question_id"
+    t.datetime "created_at",                 :null => false
+    t.datetime "updated_at",                 :null => false
+  end
+
+  add_index "answers", ["created_at"], :name => "index_answers_on_created_at"
+  add_index "answers", ["user_id"], :name => "index_answers_on_user_id"
+
+  create_table "answers_users", :id => false, :force => true do |t|
+    t.integer "answer_id"
+    t.integer "user_id"
+  end
+
+  add_index "answers_users", ["answer_id"], :name => "index_answers_users_on_answer_id"
+  add_index "answers_users", ["user_id"], :name => "index_answers_users_on_user_id"
 
   create_table "comment_frustrations", :force => true do |t|
     t.string   "content"
@@ -35,8 +55,11 @@ ActiveRecord::Schema.define(:version => 20120806064221) do
     t.string   "content"
     t.integer  "user_id"
     t.integer  "frustration_id"
-    t.datetime "created_at",     :null => false
-    t.datetime "updated_at",     :null => false
+    t.datetime "created_at",                        :null => false
+    t.datetime "updated_at",                        :null => false
+    t.boolean  "negative",       :default => true
+    t.string   "comment_admin"
+    t.boolean  "trash",          :default => false
   end
 
   add_index "frustration_comments", ["created_at"], :name => "index_frustration_comments_on_created_at"
@@ -46,9 +69,15 @@ ActiveRecord::Schema.define(:version => 20120806064221) do
   create_table "frustrations", :force => true do |t|
     t.string   "content"
     t.integer  "user_id"
-    t.boolean  "structure",  :default => false
-    t.datetime "created_at",                    :null => false
-    t.datetime "updated_at",                    :null => false
+    t.boolean  "structure",        :default => false
+    t.datetime "created_at",                          :null => false
+    t.datetime "updated_at",                          :null => false
+    t.string   "old_content"
+    t.integer  "negative_user_id"
+    t.integer  "struct_user_id"
+    t.datetime "structuring_date"
+    t.string   "comment_admin"
+    t.boolean  "trash",            :default => false
   end
 
   add_index "frustrations", ["created_at"], :name => "index_frustrations_on_created_at"
@@ -60,6 +89,25 @@ ActiveRecord::Schema.define(:version => 20120806064221) do
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end
+
+  create_table "questions", :force => true do |t|
+    t.string   "text"
+    t.integer  "raiting",    :default => 0
+    t.integer  "user_id"
+    t.datetime "created_at",                :null => false
+    t.datetime "updated_at",                :null => false
+  end
+
+  add_index "questions", ["created_at"], :name => "index_questions_on_created_at"
+  add_index "questions", ["user_id"], :name => "index_questions_on_user_id"
+
+  create_table "questions_users", :id => false, :force => true do |t|
+    t.integer "question_id"
+    t.integer "user_id"
+  end
+
+  add_index "questions_users", ["question_id"], :name => "index_questions_users_on_question_id"
+  add_index "questions_users", ["user_id"], :name => "index_questions_users_on_user_id"
 
   create_table "users", :force => true do |t|
     t.string   "name"
@@ -79,6 +127,8 @@ ActiveRecord::Schema.define(:version => 20120806064221) do
     t.string   "login"
     t.string   "salt"
     t.boolean  "admin",              :default => false
+    t.integer  "score",              :default => 0
+    t.boolean  "expert",             :default => false
   end
 
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true

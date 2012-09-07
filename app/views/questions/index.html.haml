@@ -1,0 +1,43 @@
+-if signed_in?
+  = link_to 'Задать вопрос!', new_question_path
+%br
+%br
+%br
+%table
+  - @questions.each do |question|
+    %tr
+      %td{:class => 'raiting'}
+        - if allow_vote?(question)
+          = link_to '+', plus_question_path(question), :method => :put
+        -else
+          +
+
+        -if question.raiting>0
+          %span.good_raiting= question.raiting
+        -elsif question.raiting<0
+          %span.bad_raiting= question.raiting
+        -else
+          =question.raiting
+          
+        - if allow_vote?(question)
+          = link_to '―', minus_question_path(question), :method => :put
+        - else
+          ―
+      %td{:class => "gravatar"}
+        = link_to gravatar_for(question.user,  :size =>30), question.user
+      %td 
+        =link_to question.user.name_title, question.user, :class => 'username'
+        %br
+        =question.text
+        =link_to 'подробнее', question
+        %br
+        Ответов 
+        %b=question.answers.count
+      / %td= link_to 'Edit', edit_question_path(question)
+      %td
+        -if admin?
+          = link_to 'Удалить', question, :confirm => 'Are you sure?', :method => :delete
+
+%br
+
+

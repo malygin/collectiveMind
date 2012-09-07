@@ -1,0 +1,27 @@
+%html
+  %head
+    %meta(http-equiv = "Content-Type" content= "text/html; charset=utf-8")
+    = stylesheet_link_tag    "application", :media => "all" 
+    = javascript_include_tag "application"
+    = csrf_meta_tags
+
+  %body
+    #wrapper
+      #top
+        = render 'layouts/top'
+      #header
+        = render 'layouts/header'
+
+      #middle
+        #container
+          #content
+            - flash.each do |key, value| 
+              .error
+                =value
+            = yield 
+        #sideRight.sidebar
+          = render 'layouts/sidebar' 
+    #footer
+      = render 'layouts/footer' 
+
+

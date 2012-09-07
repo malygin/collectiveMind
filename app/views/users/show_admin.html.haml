@@ -1,0 +1,10 @@
+
+%h1 Вы администратор системы
+.user_info
+	= gravatar_for @user, :size => 120 
+	%span{:class => 'name'}
+		= @user.name
+		= @user.surname
+
+
+

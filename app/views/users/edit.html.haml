@@ -23,9 +23,9 @@
 		%br
 		= f.password_field :password_confirmation
 	.action
-		= f.submit
-
-.div
+		= f.submit '', class: 'btn'
+%br
+%div
 	=gravatar_for @user
 	=link_to "Изменить", 'http://gravatar.com/emails'
 

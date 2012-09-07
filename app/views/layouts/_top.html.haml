@@ -1,0 +1,8 @@
+- if signed_in?
+  = link_to image_tag('/assets/edit.png'), edit_user_path(current_user)
+  = link_to current_user.name, user_path(current_user)
+  %img{:src => '/assets/exit.png'} 
+  = link_to "Выйти", "/signout" 
+- else
+  %img{:src => '/assets/enter.png'}
+  = link_to "Войти", '/signin' 

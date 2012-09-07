@@ -11,7 +11,14 @@ class UsersController < ApplicationController
 
 	def show 
 		@user = User.find(params[:id])
+		if @user.expert?
+			@frustrations = Frustration.feed_to_expert.paginate(:page => params[:page])
+			render 'show_expert'
+		elsif @user.admin?
+			render 'show_admin'			
+ 		end
 		@frustrations = @user.frustrations.paginate(:page => params[:page])
+		@frustration = Frustration.new 
 	end
 
 	def edit 
@@ -20,7 +27,6 @@ class UsersController < ApplicationController
 
 	def index 
 		@users = User.paginate(:page =>params[:page])
-
 	end
 
 	def update

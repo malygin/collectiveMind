@@ -3,6 +3,21 @@ CollectiveMind::Application.routes.draw do
 
 
 
+
+
+  resources :questions do
+    resources :answers do
+      member do
+        put :plus
+        put :minus
+      end
+    end
+    member do
+      put :plus
+      put :minus
+    end
+  end
+
   match "/about", :to => "pages#about"
   match "/contacts", :to => "pages#contacts"
   match "/help", :to => "pages#help"
@@ -12,14 +27,32 @@ CollectiveMind::Application.routes.draw do
   match "/signout", :to => "sessions#destroy"
   match "/structure", :to => "pages#structure_frustrations"
   match "/unstructure", :to => "pages#unstructure_frustrations"
+  match "/archive", :to => "pages#archive_frustrations"  
+  match "/to_expert", :to => "pages#to_expert_frustrations"
+  match "/accepted", :to => "pages#accepted_frustrations"  
+  match "/declined", :to => "pages#declined_frustrations"    
+
 
   #get "users/new"
   resources :users
   resources :sessions, :only => [:new, :create, :destroy]
-  resources :frustrations  do
-      resources :frustration_comments
+  resources :frustrations  do      
+      resources :frustration_comments do
+        member do
+          put :to_trash_by_admin
+        end
+      end
+      member do
+       put :archive
+       put :to_expert
+       put :expert_accept
+       put :expert_decline
+       get :edit_to_struct
+       put :update_to_struct
+       put :to_archive_by_admin
+      end
   end
-
+  #match "frustrations/archive/:id/", :to =>"frustrations#archive"
   match "/signup", :to =>"users#new"
 
   get "welcome/index"

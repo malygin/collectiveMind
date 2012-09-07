@@ -1,11 +1,49 @@
-%h1
-	= gravatar_for @user
-	= @user.name
-	= @user.surname
-Добавлено  неудовлетворенностей - 
-= @user.frustrations.count
+.user_info
+	= gravatar_for @user, :size => 120 
+	%span{:class => 'name'}
+		= @user.name
+		= @user.surname
+	%br
+	набрано балов
+	%span{:class => 'rate'}= @user.score
+
+%h1 
+	Добавлено  неудовлетворенностей - 
+	= @user.frustrations.count
+
+- if active_form_frustration?
+	= render "shared/frustration_form"
+-else
+	-if @user.frustrations.count == Settings.max_frustration 
+		.notification Вы не можете добавить, потому что добавили уже максимальное количество
+	-else
+		.notification У вас есть неудовлетворенность, не отправленная в архив или эксперту
 
 - unless @user.frustrations.empty?
 	%table{:class => "frustrations"}
-		= render @frustrations
-	= will_paginate @frustrations
+		= render @user.frustrations
+-else 
+	%br
+	%i Ни одной не добавлено
+%br
+%h1 Неудовлетворенности, структурированный с помощью моих комментариев
+- unless @user.structured_frustrations.empty?
+	%table{:class => "frustrations"}
+		= render :partial => 'shared/feed_item', :collection => @user.structured_frustrations
+-else
+	%br
+	%i Их пока нет
+	%br
+	%br
+%h1 Неудовлетворенности, отправленные в архив благодаря моему комментарию
+- unless @user.negatived_frustrations.empty?
+	%table{:class => "frustrations"}
+		= render :partial => 'shared/feed_item', :collection => @user.negatived_frustrations
+-else
+	%br
+	%i Их пока нет
+
+
+
+
+

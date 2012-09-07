@@ -1,16 +1,10 @@
-%h1 Система превращения ваших неудовлетворенностей в удовлетворенности 
+%h1=@title
+- if signed_in? and user?
+	= link_to image_tag('/assets/add_dissatisfaction.png'), current_user
+/ - if active_form_frustration?
+/ 	%h1{:class => "frustration"} Добавить неудовлетворенность
+/ 	= render "shared/frustration_form"
+= render "shared/feed_frustrations"
 
-- if signed_in?
-	= render "shared/user_info"
-- else
-	= link_to "Зарегистрироваться, чтобы участвовать", signup_path,  :class =>"signup_button round"
-%table{:class => "front"}
-	%tr
-		%td
-			- if signed_in? and current_user.frustrations.count<Settings.max_frustration 
-				%h1{:class => "frustration"} Добавить неудовлетворенность
-				= render "shared/frustration_form"
-		= render "shared/feed_frustrations"
-		%td{:class => "td_top"}
 
 

@@ -41,6 +41,29 @@ module SessionsHelper
 	    user == current_user
 	end
 
+	def expert?
+		current_user.expert unless current_user.nil?
+	end	
+
+	def admin?
+		current_user.admin unless current_user.nil?
+	end
+
+	def user?
+		not (current_user.admin? or current_user.expert?)
+	end
+
+	def authorized_user
+			@frustration = current_user.frustrations.find_by_id(params[:id])
+			redirect_to root_path if @frustration.nil?
+	end
+
+	def to_bool(arg)
+		    return true if arg =~ (/^(true|t|yes|y|1)$/i)
+		    return false if arg.empty? || arg =~ (/^(false|f|no|n|0)$/i)
+		    raise ArgumentError.new "invalid value: #{arg}"
+    end
+
   private
     
 	    def store_location

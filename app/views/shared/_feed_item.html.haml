@@ -2,18 +2,29 @@
 	%td{:class => "gravatar"}
 		= link_to gravatar_for(feed_item.user), feed_item.user
 	%td{:class => "frustration"}
-		%span{:class => "user"}
-			= link_to feed_item.user.name, feed_item.user
-		%span{:class => "content"}
-			= link_to feed_item.content, feed_item
-		%span{:class => "timestamp"} 
-			Добавлено
-			= time_ago_in_words(feed_item.created_at)
-			назад. Комментариев - 
-			= feed_item.frustration_comments.count
-		- if !feed_item.structure
-			%b Неуструктурирована 
-	- if current_user?(feed_item.user)
-		%td
-			=link_to "cнять?", feed_item, :method => :delete, :confirm => "Точно?", :title => feed_item.content
+		= link_to feed_item.user.name_title, feed_item.user, :class => 'username'
+		%span{:class =>"timestamp"}
+			= Russian::strftime(feed_item.created_at,  "%A, %1d %B %T")
+		
+		%div{:class => "content"}
+			- if not feed_item.archive? and  signed_in?
+				= feed_item.content
+			-else 
+				= feed_item.content
+
+			- if  (not current_page?(frustration_path(feed_item)) and signed_in? and not feed_item.archive?)				
+				= link_to 'подробнее', feed_item
+			- unless feed_item.old_content.nil?
+				%br
+				%small текст неструктурированной -
+				%span{:class => "timestamp"}=feed_item.old_content
+
+
+
+		%span{:class => "comments"} 
+			негативные - 
+			= feed_item.negative.count
+			структурирующие -
+			= feed_item.structure.count
+
 
