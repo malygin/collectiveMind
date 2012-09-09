@@ -1,26 +1,42 @@
-%br
-%br
-= form_for @frustration do |f|
-	= render 'shared/error_messages', :object => f.object
-	%label что?
-	%br
-	%field
-		= f.text_area :what
-	%div{:class=>'timestamp'} - отрицательное действие, явление, установление, черта...
-	
-	%label в чем?
-	%br
-	%field
-		= f.text_area :wherin
-	%div{:class=>'timestamp'} - регулярное нужное или неизбежно случающееся событие, мероприятие, процесс, ситуация...	
-	
-	%label где?
-	%br
-	%field
-		= f.text_area :when
-	%div{:class=>'timestamp'} -	место, организация, общность, в которой это происходит.
-	%actions
-		= f.submit "",  class: "btn"
-	%span
-		.remaining  &nbsp;осталось
-		.countdown
+
+%table
+	%tr
+		%td
+			= form_for @frustration do |f|
+				= render 'shared/error_messages', :object => f.object
+				%label что?
+				%br
+				%field
+					= f.text_area :what
+				%div{:class=>'timestamp'} - отрицательное действие, явление, установление, черта...
+				
+				%label в чем?
+				%br
+				%field
+					= f.text_area :wherin
+				%div{:class=>'timestamp'} - регулярное нужное или неизбежно случающееся событие, мероприятие, процесс, ситуация...	
+				
+				%label где?
+				%br
+				%field
+					= f.text_area :when
+				%div{:class=>'timestamp'} -	место, организация, общность, в которой это происходит.
+				%actions
+					= f.submit "",  class: "btn"
+				%span
+					.remaining  &nbsp;осталось
+					.countdown
+		%td
+			= form_for @frustration do |f|
+				= render 'shared/error_messages', :object => f.object
+
+				%label текст вашего недовольства
+				%br
+				%field
+					= f.text_area :content_text
+				%div{:class=>'timestamp'} -	Впишите сюда, то - что вас не устраивает в свободной форме.
+				%actions
+					= f.submit "",  class: "btn"
+				%span
+					.remaining  &nbsp;осталось
+					.countdown

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120907091835) do
+ActiveRecord::Schema.define(:version => 20120907202727) do
 
   create_table "answers", :force => true do |t|
     t.string   "text"
@@ -75,6 +75,9 @@ ActiveRecord::Schema.define(:version => 20120907091835) do
     t.datetime "structuring_date"
     t.string   "comment_admin"
     t.boolean  "trash"
+    t.string   "content"
+    t.string   "content_text"
+    t.string   "old_content_text"
   end
 
   add_index "frustrations", ["created_at"], :name => "index_frustrations_on_created_at"
