@@ -2,18 +2,20 @@
 class Frustration < ActiveRecord::Base
   #status 0 -unstructed, 1 -archive, 2 - structed, 3 -to expert, 
   #4 -allow expert, 5 -deny expert
-  attr_accessible  :status, :struct_user,:structuring_date, :trash, :what, :wherin, :when, :what_old, :wherin_old, :when_old 
+  attr_accessible  :status, :struct_user,:structuring_date, :trash, 
+  :what, :wherin, :when, :what_old, :wherin_old, :when_old,
+  :content_text, :content_text_old 
 
   belongs_to :user
   # user, who negative comment was used for archiving frustration
   belongs_to :negative_user, :class_name => "User", :foreign_key => "negative_user_id"
   # user, who structure comment was used for structuring frustration
   belongs_to :struct_user, :class_name => "User", :foreign_key => "struct_user_id"
+  belongs_to :project
 
-
-  validates :what, :presence => true, :length => {:maximum => 300}
-  validates :wherin, :presence => true, :length => {:maximum => 300}
-  validates :when, :presence => true, :length => {:maximum => 300}
+  validates :what, :length => {:maximum => 300}
+  validates :wherin, :length => {:maximum => 300}
+  validates :when, :length => {:maximum => 300}
   validates :user_id, :presence => true
 
   has_many :frustration_comments, :dependent => :destroy
@@ -79,11 +81,17 @@ class Frustration < ActiveRecord::Base
   end
   
   def content
-    self.what + " " +self.wherin + " " + self.when
+    if self.content_text.nil?
+      return self.what + " " +self.wherin + " " + self.when
+    else
+      return self.content_text
+    end
   end
 
   def old_content
-    if self.what_old.nil?
+    if not self.content_text_old.nil?
+      return self.content_text_old
+    elsif self.what_old.nil?
       return nil
     else   
       self.what_old + " " +self.wherin_old + " " + self.when_old

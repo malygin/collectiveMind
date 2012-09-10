@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120907091835) do
+ActiveRecord::Schema.define(:version => 20120910082709) do
 
   create_table "answers", :force => true do |t|
     t.string   "text"
@@ -75,6 +75,9 @@ ActiveRecord::Schema.define(:version => 20120907091835) do
     t.datetime "structuring_date"
     t.string   "comment_admin"
     t.boolean  "trash"
+    t.string   "content_text"
+    t.string   "content_text_old"
+    t.integer  "project_id",       :default => 1
   end
 
   add_index "frustrations", ["created_at"], :name => "index_frustrations_on_created_at"
@@ -86,6 +89,17 @@ ActiveRecord::Schema.define(:version => 20120907091835) do
     t.text     "text"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
+  end
+
+  create_table "projects", :force => true do |t|
+    t.string   "name"
+    t.string   "description"
+    t.datetime "begin1st"
+    t.datetime "end1st"
+    t.datetime "begin1stvote"
+    t.datetime "end1stvote"
+    t.datetime "created_at",   :null => false
+    t.datetime "updated_at",   :null => false
   end
 
   create_table "questions", :force => true do |t|

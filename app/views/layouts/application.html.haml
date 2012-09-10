@@ -15,9 +15,13 @@
       #middle
         #container
           #content
-            - flash.each do |key, value| 
-              .error
-                =value
+            - flash.each do |key, value|
+              -if key == :success
+                .success
+                  =value
+              -else 
+                .error
+                  =value
             = yield 
         #sideRight.sidebar
           = render 'layouts/sidebar' 

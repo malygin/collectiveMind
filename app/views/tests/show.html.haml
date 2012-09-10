@@ -1,0 +1,15 @@
+%p#notice= notice
+
+%p
+  %b Name:
+  = @test.name
+%p
+  %b Description:
+  = @test.description
+%p
+  %b Project:
+  = @test.project_id
+
+= link_to 'Edit', edit_test_path(@test)
+\|
+= link_to 'Back', tests_path

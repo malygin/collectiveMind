@@ -15,7 +15,7 @@ class PagesController < ApplicationController
   		@frustration = Frustration.new 
   		@frustrations_feed = Frustration.feed_unstructure.paginate(:page => params[:page])
       @users = User.only_simple_users.order('users.score DESC').limit(5)
-      @title = "Неструктурированные неудовлетворенности" 
+      @title = "Добавленные недовольства" 
   end
 
   #TODO
@@ -23,14 +23,14 @@ class PagesController < ApplicationController
       @frustration = Frustration.new 
       @frustrations_feed = Frustration.feed_structure.paginate(:page => params[:page])
       @users = User.only_simple_users.order('users.score DESC').limit(5) 
-      @title = "Cтруктурированные неудовлетворенности" 
+      @title = "Cформулированные недовольства" 
 
       render 'home'
   end
 
   def archive_frustrations
     @frustration = Frustration.new
-    @title = "Неудовлетворенности снятые с рассмотрения"
+    @title = "Недовольства снятые с рассмотрения"
     @frustrations_feed = Frustration.feed_archive.paginate(:page => params[:page]) 
     @users = User.only_simple_users.order('users.score DESC').limit(5) 
     render 'home'
@@ -45,19 +45,19 @@ class PagesController < ApplicationController
 
   def to_expert_frustrations
     @frustrations_feed = Frustration.feed_to_expert.paginate(:page => params[:page])
-    @title = "Неудовлетворенности на рассмотрении"
+    @title = "Недовольства на рассмотрении"
     render 'expert'
   end
 
   def accepted_frustrations
     @frustrations_feed = Frustration.feed_accepted.paginate(:page => params[:page])
-    @title = "Принятые неудовлетворенности"
+    @title = "Принятые недовольства"
     render 'expert'
   end   
 
    def declined_frustrations
     @frustrations_feed = Frustration.feed_declined.paginate(:page => params[:page])
-    @title = "Отклоненные неудовлетворенности"
+    @title = "Отклоненные недовольства"
     render 'expert'
   end       
 

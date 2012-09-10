@@ -4,6 +4,8 @@ namespace :db  do
 	task :populate => :environment do
 		#require 'faker'
 		Rake::Task['db:reset'].invoke
+		project = Project.create(:id=>1, 
+			:name => "Стратегия развития ДО в СГУ на 2012-2013 год")
 		user1 = User.create!(:name => "Андрей",
 			:surname => "Малыгин",
 			:email =>"anmalygin@gmail.com",
@@ -15,10 +17,10 @@ namespace :db  do
 			:email =>"anmalygin@yandex.ru",
 			:password => "pascal2003",
 			:password_confirmation => "pascal2003")
-		admin = User.create!(:name => "Семен",
-			:surname => "Админов",
-			:email =>"admin@admin.com",
-			:password => "admin",
+		admin = User.create!(:name => "Олег",
+			:surname => "Савельзон",
+			:email =>"pprsgu@gmail.com",
+			:password => "adminsavelzon",
 			:password_confirmation => "admin")
 		admin.toggle!(:admin)
 		expert = User.create!(:name => "Поликарп",

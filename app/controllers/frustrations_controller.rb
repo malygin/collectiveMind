@@ -5,9 +5,10 @@ class FrustrationsController < ApplicationController
 	#todo method only for expert
 
 	def create
+
 		@frustration = current_user.frustrations.build(params[:frustration])
 		if @frustration.save
-			flash[:success] = "Неудовлетворенность будет удовлетворена"
+			flash[:success] = "Недовольство добавлено в список!"
 			redirect_to root_path
 		else
 			@frustrations_feed=[]
@@ -51,7 +52,7 @@ class FrustrationsController < ApplicationController
 		else
 			@frustration.user.update_column(:score, @frustration.user.score + Settings.scores.expert.allow)
 		end
-		flash[:success] = "Неудовлетворенность принята"
+		flash[:success] = "Недовольство принято"
 		redirect_to user_path(current_user)
 	end
 
@@ -62,7 +63,7 @@ class FrustrationsController < ApplicationController
 		unless @frustration.comments_after_structuring.empty?
 			@frustration.user.update_column(:score, @frustration.user.score + Settings.scores.expert.deny_with_negative)
 		end
-		flash[:success] = "Неудовлетворенность отклонена"
+		flash[:success] = "Недовольство отклонено"
 		redirect_to user_path(current_user)
 	end
 
@@ -78,7 +79,7 @@ class FrustrationsController < ApplicationController
 		if to_bool(params[:del])
 			@frustration.user.update_column(:score, @frustration.user.score + Settings.scores.unstructure.violation_frustration) 
 		end
-		flash[:success] = "Отправлена в архив"
+		flash[:success] = "Отправлено в архив"
 		redirect_to root_path
 	end
 
@@ -94,7 +95,7 @@ class FrustrationsController < ApplicationController
 			:wherin => params[:frustration][:wherin],
 			:when => params[:frustration][:when],
 			:structuring_date => Time.now, :status => 2 )
-		flash[:success] = "Неудовлетворенность переведена в структурированные"
+		flash[:success] = "Недовольство  формализовано"
 		redirect_to root_path
 	end
 

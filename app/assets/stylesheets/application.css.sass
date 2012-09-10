@@ -71,6 +71,13 @@ input
   height: 38px
   text-align: right
   padding-right: 40px
+  .theme
+    float: left
+    color: white
+    font-size: 14px
+    font-weight: bold
+    margin-top: 10px
+    margin-left: 10px
 
   img
     padding: 10px 0px 0px 15px
@@ -378,7 +385,7 @@ form#auth
     padding-bottom: 40px
 
 textarea
-  width: 350px
+  width: 250px
   height: 70px
   border: 1px solid #666666
   padding: 5px
@@ -401,13 +408,23 @@ form.new_frustration
     font-size: 12px
     font-family: Helvetica
     color: #0079D7
+  textarea.big_field
+    height: 343px
+    margin-bottom: 40px
   div.timestamp
     margin-bottom: 10px
     width: 350px
 
-  .btn
+  .btn 
     background: url(add.png) no-repeat
     width: 95px
+
+.savebtn
+  width: 95px
+  height: 31px
+  border: none
+  margin-top: 10px
+  background: url(save.png) no-repeat
  
 
 form.new_frustration_comment, form.edit_frustration, form.edit_user, form.new_question, form.new_answer

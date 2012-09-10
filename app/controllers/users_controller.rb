@@ -15,6 +15,7 @@ class UsersController < ApplicationController
 			@frustrations = Frustration.feed_to_expert.paginate(:page => params[:page])
 			render 'show_expert'
 		elsif @user.admin?
+			@frustration = Frustration.new 
 			render 'show_admin'			
  		end
 		@frustrations = @user.frustrations.paginate(:page => params[:page])
@@ -64,9 +65,7 @@ class UsersController < ApplicationController
 			redirect_to(root_path) unless current_user?(@user)
 		end
 
-		def admin_user
-			redirect_to(root_path) unless current_user.admin?
-		end
+
 
 
 end
