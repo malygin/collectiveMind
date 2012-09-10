@@ -64,6 +64,10 @@ module SessionsHelper
 		    raise ArgumentError.new "invalid value: #{arg}"
     end
 
+    def admin_user
+		redirect_to(root_path) if current_user.nil? or not current_user.admin?
+	end
+
   private
     
 	    def store_location

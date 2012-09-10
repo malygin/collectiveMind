@@ -1,4 +1,5 @@
-
+%br
+%br
 %table
 	%tr
 		%td
@@ -9,6 +10,12 @@
 				%field
 					= f.text_area :what
 				%div{:class=>'timestamp'} - отрицательное действие, явление, установление, черта...
+
+				%label где?
+				%br
+				%field
+					= f.text_area :when
+				%div{:class=>'timestamp'} -	место, организация, общность, в которой это происходит.
 				
 				%label в чем?
 				%br
@@ -16,27 +23,21 @@
 					= f.text_area :wherin
 				%div{:class=>'timestamp'} - регулярное нужное или неизбежно случающееся событие, мероприятие, процесс, ситуация...	
 				
-				%label где?
-				%br
-				%field
-					= f.text_area :when
-				%div{:class=>'timestamp'} -	место, организация, общность, в которой это происходит.
 				%actions
 					= f.submit "",  class: "btn"
 				%span
 					.remaining  &nbsp;осталось
 					.countdown
-		%td
-			= form_for @frustration do |f|
-				= render 'shared/error_messages', :object => f.object
 
-				%label текст вашего недовольства
+		%td
+			=form_for @frustration do |f|
+				= render 'shared/error_messages', :object => f.object
+				%label Опишите свое недовольство
 				%br
 				%field
-					= f.text_area :content_text
-				%div{:class=>'timestamp'} -	Впишите сюда, то - что вас не устраивает в свободной форме.
+					= f.text_area :content_text, :class => 'big_field'
 				%actions
-					= f.submit "",  class: "btn"
+					= f.submit "", class: "btn"
 				%span
-					.remaining  &nbsp;осталось
+					.remaining &nbsp; осталось
 					.countdown

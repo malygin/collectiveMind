@@ -1,0 +1,16 @@
+%h1 Социологические тесты
+
+
+- @tests.each do |test|
+  %div
+    %div
+      %b= test.name
+      %br=test.description 
+
+    %div= link_to 'Пройти тест', test
+    / %td= link_to 'Edit', edit_test_path(test)
+    / %td= link_to 'Destroy', test, :confirm => 'Are you sure?', :method => :delete
+
+%br
+
+/ = link_to 'New Test', new_test_path

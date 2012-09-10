@@ -5,6 +5,10 @@ CollectiveMind::Application.routes.draw do
 
 
 
+  resources :tests
+
+  resources :projects
+
   resources :questions do
     resources :answers do
       member do

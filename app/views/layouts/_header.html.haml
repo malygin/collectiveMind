@@ -1,11 +1,16 @@
 %header
   = image_tag("logo.png", :alt => "Colleсtive mind", :class => "round", ) 
-      
-  %nav.round
-    %ul
-      %li= link_to "главная", '/' 
-      %li= link_to "aрхив", "/archive" 
-      %li= link_to "структурированные", "/structure" 
-      %li= link_to "принятые", "/accepted"
-      %li= link_to "отклоненные", "/declined"
-      %li= link_to "форум", "/questions" 
+  %ul.main_menu
+    %li
+      %ul.top
+        %li= link_to "ГЛАВНАЯ", '/' 
+        %li.no_bg= link_to "НЕДОВОЛЬСТВА", "/" 
+        %li= link_to "СОЦ. ОПРОС", "/tests"
+        %li= link_to "ФОРУМ", "/questions" 
+    %li
+      %ul.bottom
+        %li= link_to "произвольные", '/' 
+        %li= link_to "сформулированные", "/structure" 
+        %li= link_to "принятые", "/accepted"
+        %li= link_to "отклоненные", "/declined"
+        %li= link_to "архив", "/archive"

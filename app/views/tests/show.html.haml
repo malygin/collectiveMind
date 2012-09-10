@@ -1,0 +1,14 @@
+%p#notice= notice
+
+%b= @test.name
+%br
+%i= @test.description
+%br
+%br
+
+
+= render @test.test_questions
+
+
+
+= link_to 'Назад', tests_path
