@@ -14,7 +14,6 @@ class TestsController < ApplicationController
   # GET /tests/1.json
   def show
     @test = Test.find(params[:id])
-
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @test }

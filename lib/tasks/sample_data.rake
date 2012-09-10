@@ -6,6 +6,25 @@ namespace :db  do
 		Rake::Task['db:reset'].invoke
 		project = Project.create(:id=>1, 
 			:name => "Стратегия развития ДО в СГУ на 2012-2013 год")
+		test = Test.create(:id=>1, :name => "Начальный тест", :description =>"социологический тест")
+		quest1 = TestQuestion.create(:name => "Работаете ли Вы?", :type_question => 0)
+		quest1.test = test
+
+		quest2 = TestQuestion.create(:name => "Как чаще всего Вы принимаете решения?", :type_question => 0)
+		quest2.test = test
+		quest1.test_answers << TestAnswer.create(:name =>"Да, на постоянной основе", :type_answer =>0)
+		quest1.test_answers << TestAnswer.create(:name =>"Да, имею временные подработки", :type_answer =>0)
+		quest1.test_answers << TestAnswer.create(:name =>"Нет", :type_answer =>0)
+		
+		quest2.test_answers << TestAnswer.create(:name =>"Я знаком(а) с моделями и техниками принятия грамотного решения и всегда их использую", :type_answer =>0)
+		quest2.test_answers << TestAnswer.create(:name =>"Я знаком(а) с моделями и техниками принятия грамотного решения и стремлюсь их использовать как можно чаще", :type_answer =>0)
+		quest2.test_answers << TestAnswer.create(:name =>"Использую техники принятия грамотных решений в отдельных особо значимых случаях", :type_answer =>0)
+		quest2.test_answers << TestAnswer.create(:name =>"Я не склонен использовать какие – либо способы и правила в принятии решений", :type_answer =>0)
+		quest2.test_answers << TestAnswer.create(:name =>"Я ничего не знаю о существовании каких – либо технологий принятия решений", :type_answer =>0)
+		quest1.save!
+		quest2.save!
+
+
 		user1 = User.create!(:name => "Андрей",
 			:surname => "Малыгин",
 			:email =>"anmalygin@gmail.com",
@@ -20,7 +39,7 @@ namespace :db  do
 		admin = User.create!(:name => "Олег",
 			:surname => "Савельзон",
 			:email =>"pprsgu@gmail.com",
-			:password => "adminsavelzon",
+			:password => "admin",
 			:password_confirmation => "admin")
 		admin.toggle!(:admin)
 		expert = User.create!(:name => "Поликарп",

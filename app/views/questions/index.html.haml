@@ -8,9 +8,10 @@
     %tr
       %td{:class => 'raiting'}
         - if allow_vote?(question)
-          = link_to '+', plus_question_path(question), :method => :put
+          = link_to image_tag('up.png'), plus_question_path(question), :method => :put
         -else
-          +
+          =image_tag('up.png')
+        %br
 
         -if question.raiting>0
           %span.good_raiting= question.raiting
@@ -18,11 +19,12 @@
           %span.bad_raiting= question.raiting
         -else
           =question.raiting
+        %br
           
         - if allow_vote?(question)
-          = link_to '―', minus_question_path(question), :method => :put
+          = link_to image_tag('down.png'), minus_question_path(question), :method => :put
         - else
-          ―
+          =image_tag('down.png')
       %td{:class => "gravatar"}
         = link_to gravatar_for(question.user,  :size =>30), question.user
       %td 

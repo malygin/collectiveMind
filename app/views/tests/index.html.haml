@@ -1,23 +1,16 @@
-%h1 Listing tests
+%h1 Социологические тесты
 
-%table
-  %tr
-    %th Name
-    %th Description
-    %th Project
-    %th
-    %th
-    %th
 
-  - @tests.each do |test|
-    %tr
-      %td= test.name
-      %td= test.description
-      %td= test.project_id
-      %td= link_to 'Show', test
-      %td= link_to 'Edit', edit_test_path(test)
-      %td= link_to 'Destroy', test, :confirm => 'Are you sure?', :method => :delete
+- @tests.each do |test|
+  %div
+    %div
+      %b= test.name
+      %br=test.description 
+
+    %div= link_to 'Пройти тест', test
+    / %td= link_to 'Edit', edit_test_path(test)
+    / %td= link_to 'Destroy', test, :confirm => 'Are you sure?', :method => :delete
 
 %br
 
-= link_to 'New Test', new_test_path
+/ = link_to 'New Test', new_test_path

@@ -121,10 +121,42 @@ input
     a:hover 
       color: $main_link
 
-  nav
+  ul.main_menu
+    white-space: nowrap
+    margin-top: 30px 
+    padding: 0
+    width: 522px
+    li
+      list-style-type: none
+    ul.top
+      background: url(menu_bg.png)
+      height: 39px
+      li
+        padding-top: 10px
+        padding-right: 10px
+
+      li.no_bg
+        background: url(blue.jpg)
+        height: 39px
+        a
+          color: white 
+          text-shadow: none
+
+    ul.bottom
+      background: url(blue.jpg)
+      height: 39px
+      paddint-right: 10px
+      li
+        padding-top: 10px
+      a
+        color: white 
+        text-shadow: none
+
+    li ul li
+      list-style-type: none
+      display: inline-block
     float: right
-    ul li
-      padding: 65px 10px 10px 10px
+
 
 
 /* Middle
@@ -291,11 +323,11 @@ h1.frustration
   font-size: 16px
 
 span.good_raiting
-  color: green
+  color: #209ff0
   font-weight: bold
 
 span.bad_raiting
-  color: red
+  color: #ea3c40
   font-weight: bold
 
 div.question 
@@ -316,6 +348,7 @@ table
       width: 50px
       font-size: 15px
       vertical-align: top
+      text-align: center
     td.gravatar
       vertical-align: top
       width: 30px

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120910082709) do
+ActiveRecord::Schema.define(:version => 20120910124922) do
 
   create_table "answers", :force => true do |t|
     t.string   "text"
@@ -117,6 +117,39 @@ ActiveRecord::Schema.define(:version => 20120910082709) do
     t.integer "question_id"
     t.integer "user_id"
   end
+
+  create_table "test_answers", :force => true do |t|
+    t.string   "name"
+    t.integer  "type_answer"
+    t.integer  "test_question_id"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+  end
+
+  add_index "test_answers", ["test_question_id"], :name => "index_test_answers_on_question_id"
+
+  create_table "test_questions", :force => true do |t|
+    t.string   "name"
+    t.integer  "type_question"
+    t.integer  "test_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  add_index "test_questions", ["test_id"], :name => "index_test_questions_on_test_id"
+
+  create_table "tests", :force => true do |t|
+    t.string   "name"
+    t.string   "description"
+    t.integer  "project_id"
+    t.datetime "begin_date"
+    t.datetime "end_date"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+  end
+
+  add_index "tests", ["begin_date"], :name => "index_tests_on_begin_date"
+  add_index "tests", ["end_date"], :name => "index_tests_on_end_date"
 
   create_table "users", :force => true do |t|
     t.string   "name"
