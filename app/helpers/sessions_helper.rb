@@ -25,7 +25,7 @@ module SessionsHelper
 
 	def deny_access 
 	    store_location
-	    redirect_to signin_path, :notice => "Войди сначала!"
+	    redirect_to signin_path, :notice => "Авторизуйтесь пожалуйста!"
 	end
 
 	def authenticate

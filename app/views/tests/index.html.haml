@@ -5,9 +5,13 @@
   %div
     %div
       %b= test.name
-      %br=test.description 
+      %br=test.description
 
-    %div= link_to 'Пройти тест', test
+    -unless current_user.test_attempts.empty?
+      %div 
+      %b Вы уже прошли этот тест
+    -else
+      %div= link_to 'Пройти тест', test
     / %td= link_to 'Edit', edit_test_path(test)
     / %td= link_to 'Destroy', test, :confirm => 'Are you sure?', :method => :delete
 

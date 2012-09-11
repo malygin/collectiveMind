@@ -6,8 +6,20 @@
 %br
 %br
 
+= form_for @test, :url => save_attempt_test_path, :method => :put do |f|
+	-for question in @test.test_questions
+		%br
+		%b=question.name
+		%br
+		-for answer in question.test_answers
+			=f.fields_for question do |q|
+				=radio_button_tag "test_questions["+question.id.to_s+"]", answer.id, false
+				=answer.name
+				%br
 
-= render @test.test_questions
+	=f.submit "", class: 'savebtn'
+
+/ = render @test.test_questions
 
 
 

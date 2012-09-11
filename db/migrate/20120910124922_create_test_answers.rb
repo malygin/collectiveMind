@@ -6,6 +6,6 @@ class CreateTestAnswers < ActiveRecord::Migration
       t.integer :test_question_id
       t.timestamps
     end
-    add_index :test_answers, :question_id
+    add_index :test_answers, :test_question_id
   end
 end

@@ -1,6 +1,29 @@
+# encoding: utf-8
 class TestsController < ApplicationController
+  before_filter :authenticate
   # GET /tests
   # GET /tests.json
+
+  def save_attempt
+    test_questions = params[:test_questions]
+    puts "______"
+    @test = Test.find(params[:id])
+    test_attempt = TestAttempt.create()
+    test_attempt.user = current_user
+    test_attempt.test = @test
+    test_attempt.save!
+    @test.test_questions.each  do |q|
+      question_attempt =TestQuestionAttempt.create(:test_attempt => test_attempt, :test_question => q)
+     
+      unless test_questions.nil? or test_questions[q.id.to_s].nil? 
+        question_attempt.answer = test_questions[q.id.to_s]
+        question_attempt.save!
+      end
+    end
+    flash[:success] = "Спасибо за участие в опросе!"
+    redirect_to user_path(current_user)
+  end
+  
   def index
     @tests = Test.all
 

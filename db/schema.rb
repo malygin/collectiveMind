@@ -11,14 +11,15 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
+ActiveRecord::Schema.define(:version => 20120911092411) do
 
   create_table "answers", :force => true do |t|
     t.string   "text"
-    t.integer  "raiting"
+    t.integer  "raiting",     :default => 0
     t.integer  "user_id"
     t.integer  "question_id"
-    t.datetime "created_at",  :null => false
-    t.datetime "updated_at",  :null => false
+    t.datetime "created_at",                 :null => false
+    t.datetime "updated_at",                 :null => false
   end
 
   add_index "answers", ["created_at"], :name => "index_answers_on_created_at"
@@ -66,18 +67,18 @@
     t.string   "when_old"
     t.integer  "user_id"
     t.integer  "status",           :default => 0
-    t.datetime "created_at",                      :null => false
-    t.datetime "updated_at",                      :null => false
+    t.datetime "created_at",                          :null => false
+    t.datetime "updated_at",                          :null => false
     t.string   "old_content"
     t.integer  "negative_user_id"
     t.integer  "struct_user_id"
     t.datetime "structuring_date"
     t.string   "comment_admin"
-    t.boolean  "trash"
+    t.boolean  "trash",            :default => false
     t.string   "content_text"
     t.string   "content_text_old"
     t.integer  "project_id",       :default => 1
-
+  end
 
   add_index "frustrations", ["created_at"], :name => "index_frustrations_on_created_at"
   add_index "frustrations", ["status"], :name => "index_frustrations_on_status"
@@ -103,10 +104,10 @@
 
   create_table "questions", :force => true do |t|
     t.string   "text"
-    t.integer  "raiting"
+    t.integer  "raiting",    :default => 0
     t.integer  "user_id"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at",                :null => false
+    t.datetime "updated_at",                :null => false
   end
 
   add_index "questions", ["created_at"], :name => "index_questions_on_created_at"
@@ -117,22 +118,46 @@
     t.integer "user_id"
   end
 
+  add_index "questions_users", ["question_id"], :name => "index_questions_users_on_question_id"
+  add_index "questions_users", ["user_id"], :name => "index_questions_users_on_user_id"
+
   create_table "test_answers", :force => true do |t|
     t.string   "name"
     t.integer  "type_answer"
     t.integer  "test_question_id"
-    t.datetime "created_at",  :null => false
-    t.datetime "updated_at",  :null => false
+    t.datetime "created_at",       :null => false
+    t.datetime "updated_at",       :null => false
   end
 
-  add_index "test_answers", ["test_question_id"], :name => "index_test_answers_on_question_id"
+  add_index "test_answers", ["test_question_id"], :name => "index_test_answers_on_test_question_id"
+
+  create_table "test_attempts", :force => true do |t|
+    t.integer  "test_id"
+    t.integer  "user_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  add_index "test_attempts", ["test_id"], :name => "index_test_attempts_on_test_id"
+  add_index "test_attempts", ["user_id"], :name => "index_test_attempts_on_user_id"
+
+  create_table "test_question_attempts", :force => true do |t|
+    t.integer  "test_attempt_id"
+    t.integer  "test_question_id"
+    t.string   "answer"
+    t.datetime "created_at",       :null => false
+    t.datetime "updated_at",       :null => false
+  end
+
+  add_index "test_question_attempts", ["test_attempt_id"], :name => "index_test_question_attempts_on_test_attempt_id"
+  add_index "test_question_attempts", ["test_question_id"], :name => "index_test_question_attempts_on_test_question_id"
 
   create_table "test_questions", :force => true do |t|
     t.string   "name"
     t.integer  "type_question"
     t.integer  "test_id"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at",    :null => false
+    t.datetime "updated_at",    :null => false
   end
 
   add_index "test_questions", ["test_id"], :name => "index_test_questions_on_test_id"

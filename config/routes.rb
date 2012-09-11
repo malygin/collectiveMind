@@ -5,7 +5,11 @@ CollectiveMind::Application.routes.draw do
 
 
 
-  resources :tests
+  resources :tests do
+    member do
+      put :save_attempt
+    end
+  end
 
   resources :projects
 
