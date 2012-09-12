@@ -1,16 +1,18 @@
-%h1 Сделаем же структурированную из неструктурированной
+%h1 Создаем оформленное недовольство
 
+.notification На основе своего недовольства попытайтесь оформить его в окончательном виде. Внимание! Именно в таком виде оно попадет к эксперту. Будьте внимательны.
+%br
 = form_for @frustration, :url => update_to_struct_frustration_path(@frustration.id,  :author_comment => @author_comment) do |f|
 	=render 'shared/error_messages', :object =>f.object
-	%label ЧТО
+	%label Чем вы недовольны?
 	.field
 		=f.text_area :what
 	%br
-	%label В ЧЕМ
+	%label Где это происходит?
 	.field
 		=f.text_area :wherin
 	%br
-	%label КОГДА
+	%label Во время чего?
 	.field
 		=f.text_area :when
 

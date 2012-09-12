@@ -1,23 +1,28 @@
 %br
 %br
-%table
+%h3 
+	Чтобы добавить недовольство 
+	%span.blue_undeline опишите его в колонках слева
+	или 
+	%span.blue_undeline	опишите своими словами в поле справа
+%table.new_frustration
 	%tr
 		%td
 			= form_for @frustration do |f|
 				= render 'shared/error_messages', :object => f.object
-				%label Что?
+				%label Чем вы недовольны?
 				%br
 				%field
 					= f.text_area :what
 				%div{:class=>'timestamp'} - отрицательное действие, явление, установление, черта...
 
-				%label Где?
+				%label Где это происходит?
 				%br
 				%field
 					= f.text_area :when
 				%div{:class=>'timestamp'} -	место, организация, общность, в которой это происходит.
 				
-				%label Когда? 
+				%label Во время чего? 
 				%br
 				%field
 					= f.text_area :wherin
@@ -28,11 +33,13 @@
 				%span
 					.remaining  &nbsp;осталось
 					.countdown
+		%td
 
 		%td
+
 			=form_for @frustration do |f|
 				= render 'shared/error_messages', :object => f.object
-				%label Опишите свое недовольство
+				%label Опишите своими словами
 				%br
 				%field
 					= f.text_area :content_text, :class => 'big_field'

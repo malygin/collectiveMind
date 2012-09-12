@@ -11,15 +11,15 @@ class UsersController < ApplicationController
 
 	def show 
 		@user = User.find(params[:id])
-		puts "ahow"
-		@user.test_attempts.each do |a|
-			puts a.test_question_attempts
-			a.test_question_attempts.each do |q|
-				puts q
-				puts q.test_question.id
-				puts q.answer
-			end
-		end
+		# puts "ahow"
+		# @user.test_attempts.each do |a|
+		# 	puts a.test_question_attempts
+		# 	a.test_question_attempts.each do |q|
+		# 		puts q
+		# 		puts q.test_question.id
+		# 		puts q.answer
+		# 	end
+		# end
 		if @user.expert?
 			@frustrations = Frustration.feed_to_expert.paginate(:page => params[:page])
 			render 'show_expert'

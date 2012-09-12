@@ -82,7 +82,7 @@ class Frustration < ActiveRecord::Base
   end
   
   def content
-    if self.content_text.nil?
+    unless self.what.nil?
       return self.what + " " +self.wherin + " " + self.when
     else
       return self.content_text

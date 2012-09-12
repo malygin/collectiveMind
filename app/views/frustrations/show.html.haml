@@ -1,6 +1,9 @@
-- if current_user?(@frustration.user) and !have_structure_comments?(@frustration) 
+- if not expert? and  frustration_for_expert?(@frustration)
+	.notification
+		Недовольство на рассмотрении эксперта, скоро по нему будет вынесено решение 
+- elsif current_user?(@frustration.user) and !have_structure_comments?(@frustration) 
 	.notification 
-		Вы автор этой неудовлетворенности  и у нее нет структурирующих комментов
+		У недовольства нет оформляющих комментариев
 		=link_to "хотите снять ее с рассмотрения?", archive_frustration_path(@frustration), :method => :put, :confirm => "Точно?", :title => @frustration.content
 -elsif current_user?(@frustration.user)
 	.error Есть структурирующие комменты, нельзя снять с рассмотрения
@@ -10,7 +13,7 @@
 - if show_link_to_structuring?(@frustration)
 	.notification 
 		Пришло время и вы можете 
-		=link_to "сделать ее структуриванной?", edit_to_struct_frustration_path(@frustration.id)
+		=link_to "сделать недовольство оформленным", edit_to_struct_frustration_path(@frustration.id)
 - elsif show_link_to_expert_with_negative_comments?(@frustration)
 	.error 
 		Есть негативные комментарии, в случае неуспеха получите штраф в 50 балов! Все равно 
@@ -20,7 +23,7 @@
 		Прошло положенное время и вы можете свою неудовлетворенность 
 		=link_to "отправить эксперту", to_expert_frustration_path(@frustration),:method => :put, :confirm => "Уверены?" 
 - elsif current_user?(@frustration.user) 
-	%li Время  еще не пришло!
+	/ %li Время  еще не пришло!
 
 
 - if expert? and  frustration_for_expert?(@frustration)
@@ -41,11 +44,11 @@
 
 
 - unless @frustration.comments_after_structuring.empty?
-	%h2 Комментарии после структуризации
+	%h2 Комментарии после оформления
 	= render @frustration.comments_after_structuring
 
 - unless @frustration.comments_before_structuring.empty?
-	%h2 Комментарии до структуризации
+	%h2 Комментарии до оформления
 	= render @frustration.comments_before_structuring
 
 

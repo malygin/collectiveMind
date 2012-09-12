@@ -6,10 +6,9 @@
 	%br
 	набрано балов
 	%span{:class => 'rate'}= @user.score
-
-%h1 
-	Добавлено  неудовлетворенностей - 
-	= @user.frustrations.count
+	%h1 
+		Добавлено  неудовлетворенностей - 
+		= @user.frustrations.count
 
 - if active_form_frustration?
 	= render "shared/frustration_form"

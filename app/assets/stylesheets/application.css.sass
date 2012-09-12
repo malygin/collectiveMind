@@ -125,7 +125,7 @@ input
     white-space: nowrap
     margin-top: 30px 
     padding: 0
-    width: 522px
+    width: 590px
     li
       list-style-type: none
     ul.top
@@ -134,13 +134,13 @@ input
       li
         padding-top: 10px
         padding-right: 10px
-
       li.no_bg
         background: url(blue.jpg)
         height: 39px
         a
           color: white 
           text-shadow: none
+          text-decoration: none
 
     ul.bottom
       background: url(blue.jpg)
@@ -158,7 +158,13 @@ input
     float: right
 
 
-
+#banner
+  background: url(blue.jpg)
+  table
+    margin-top: 0px
+    color: white
+    font-size: 22px
+    line-height: 22px
 /* Middle
 /*-----------------------------------------------------------------------------*/
 #middle
@@ -461,6 +467,17 @@ form.new_frustration
 
 input[type=radio]
   width: 22px
+
+table.new_frustration
+  td:nth-child(2)
+    padding-left: 3px
+    background-color: #0079D7
+  td:ntn-child(3)
+    padding-left: 20px 
+
+span.blue_undeline
+  color: #0079D7
+  border-bottom: 1px dashed #0079D7
 
 form.new_frustration_comment, form.edit_frustration, form.edit_user, form.new_question, form.new_answer
   input[type=submit]

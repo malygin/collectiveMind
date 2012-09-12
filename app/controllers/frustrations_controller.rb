@@ -89,7 +89,8 @@ class FrustrationsController < ApplicationController
 
 		@frustration.update_attributes(:what_old => @frustration.what,
 			:wherin_old => @frustration.wherin,
-			:when_old => @frustration.when, 
+			:when_old => @frustration.when,
+			:content_text_old => @frustration.content_text,
 			:struct_user => @user, 
 			:what => params[:frustration][:what],
 			:wherin => params[:frustration][:wherin],
