@@ -5,14 +5,19 @@ class FrustrationsController < ApplicationController
 	#todo method only for expert
 
 	def create
-
-		@frustration = current_user.frustrations.build(params[:frustration])
-		if @frustration.save
-			flash[:success] = "Недовольство добавлено в список!"
-			redirect_to root_path
+		fr = params[:frustration]
+		if fr[:content_text].nil? and fr[:what].nil? and  fr[:when].nil? and fr[:wherein].nil?
+			flash[:error] = "Поля не заполнены"
+			redirect_to current_user
 		else
-			@frustrations_feed=[]
-			render "pages/home"
+			@frustration = current_user.frustrations.build(params[:frustration])
+			if @frustration.save
+				flash[:success] = "Недовольство добавлено в список!"
+				redirect_to root_path
+			else
+				@frustrations_feed=[]
+				render "pages/home"
+			end
 		end
 	end
 

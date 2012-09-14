@@ -1,10 +1,11 @@
 %table
 	%tr
 		%td.raiting
-			- if allow_vote?(answer)
-				= link_to '+', plus_question_answer_path(answer), :method => :put
+			- if answer_allow_vote?(answer)
+				= link_to image_tag('up.png'), plus_question_answer_path(answer), :method => :put
 			-else
-				+
+				=image_tag('up.png')
+			%br
 
 			-if answer.raiting>0
 				%span.good_raiting= answer.raiting
@@ -12,11 +13,11 @@
 				%span.bad_raiting= answer.raiting
 			-else
 				=answer.raiting
-			          
+			%br      
 			- if answer_allow_vote?(answer)
-				= link_to '―', minus_question_answer_path(answer), :method => :put
+				= link_to image_tag('down.png'), minus_question_answer_path(answer), :method => :put
 			- else
-				―
+				=image_tag('down.png')
 		%td.answer
 			= link_to gravatar_for answer.user, :size => 20
 			= link_to answer.user.name_title, answer.user, :class => 'username'
