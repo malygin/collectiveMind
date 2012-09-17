@@ -1,7 +1,7 @@
 class CreateTestQuestions < ActiveRecord::Migration
   def change
     create_table :test_questions do |t|
-      t.string :name
+      t.text :name
       t.integer :type_question
       t.integer :test_id
       t.timestamps

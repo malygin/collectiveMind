@@ -122,7 +122,7 @@ ActiveRecord::Schema.define(:version => 20120911092411) do
   add_index "questions_users", ["user_id"], :name => "index_questions_users_on_user_id"
 
   create_table "test_answers", :force => true do |t|
-    t.string   "name"
+    t.text   "name"
     t.integer  "type_answer"
     t.integer  "test_question_id"
     t.datetime "created_at",       :null => false
@@ -153,7 +153,7 @@ ActiveRecord::Schema.define(:version => 20120911092411) do
   add_index "test_question_attempts", ["test_question_id"], :name => "index_test_question_attempts_on_test_question_id"
 
   create_table "test_questions", :force => true do |t|
-    t.string   "name"
+    t.text   "name"
     t.integer  "type_question"
     t.integer  "test_id"
     t.datetime "created_at",    :null => false
