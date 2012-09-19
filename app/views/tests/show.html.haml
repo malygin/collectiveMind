@@ -7,7 +7,7 @@
 %br
 
 = form_for @test, :url => save_attempt_test_path, :method => :put do |f|
-	-for question in @test.test_questions
+	-for question in @test.ordering_questions
 		%br
 		%b=question.name
 		%br
