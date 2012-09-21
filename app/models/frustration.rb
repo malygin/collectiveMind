@@ -105,11 +105,11 @@ class Frustration < ActiveRecord::Base
   def type
     case self.status
       when 0
-        return "Неструктурирована"
+        return "Произвольное"
       when 1
         return "В архиве"
       when 2
-        return "Структурирована"
+        return "Оформленое"
       when 3 
         return "На рассмотрении эксперта"
       when 4 
