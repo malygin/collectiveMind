@@ -1,10 +1,14 @@
 # encoding: utf-8
 class FrustrationCommentsController < ApplicationController
   def create
+    puts params
     @frustration = Frustration.find(params[:frustration_id])
-    #puts "_________"
-    #puts params[:negative]
-    @comment = @frustration.frustration_comments.create(:user_id => current_user.id, :content =>params[:frustration_comment][:content],  :negative => params[:negative])
+    unless params[:frustration_comment][:comment_id].nil?
+      frustration_comment = FrustrationComment.find(params[:frustration_comment][:comment_id])
+      @comment = @frustration.frustration_comments.create(:user_id => current_user.id, :frustration_comment =>frustration_comment, :content =>params[:frustration_comment][:content],  :negative => params[:negative])
+    else
+      @comment = @frustration.frustration_comments.create(:user_id => current_user.id, :content =>params[:frustration_comment][:content],  :negative => params[:negative])
+    end
     redirect_to frustration_path(@frustration)
   end
 

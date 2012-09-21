@@ -62,14 +62,14 @@ class Frustration < ActiveRecord::Base
 
   def comments_before_structuring
     if self.structuring_date.nil?
-      return self.frustration_comments.where(:trash => false)
+      return self.frustration_comments.where(:trash => false).where('frustration_comment_id' => nil)
     else
-      self.frustration_comments.where('created_at < ?', self.structuring_date).where(:trash => false)
+      self.frustration_comments.where('created_at < ?', self.structuring_date).where(:trash => false).where('frustration_comment_id' => nil)
     end
   end
 
   def comments_after_structuring
-    self.frustration_comments.where('created_at > ?', self.structuring_date).where(:trash => false)
+    self.frustration_comments.where('created_at > ?', self.structuring_date).where(:trash => false).where('frustration_comment_id' => nil)
   end
 
 

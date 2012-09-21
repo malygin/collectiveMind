@@ -1,10 +1,4 @@
 CollectiveMind::Application.routes.draw do
-
-
-
-
-
-
   resources :tests do
     member do
       put :save_attempt

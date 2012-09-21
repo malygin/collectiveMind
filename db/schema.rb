@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120920111631) do
+ActiveRecord::Schema.define(:version => 20120921074732) do
 
   create_table "answers", :force => true do |t|
     t.string   "text"
@@ -47,11 +47,12 @@ ActiveRecord::Schema.define(:version => 20120920111631) do
     t.string   "content"
     t.integer  "user_id"
     t.integer  "frustration_id"
-    t.datetime "created_at",                        :null => false
-    t.datetime "updated_at",                        :null => false
-    t.boolean  "negative",       :default => true
+    t.datetime "created_at",                                :null => false
+    t.datetime "updated_at",                                :null => false
+    t.boolean  "negative",               :default => true
     t.string   "comment_admin"
-    t.boolean  "trash",          :default => false
+    t.boolean  "trash",                  :default => false
+    t.integer  "frustration_comment_id"
   end
 
   add_index "frustration_comments", ["created_at"], :name => "index_frustration_comments_on_created_at"
@@ -122,7 +123,7 @@ ActiveRecord::Schema.define(:version => 20120920111631) do
   add_index "questions_users", ["user_id"], :name => "index_questions_users_on_user_id"
 
   create_table "test_answers", :force => true do |t|
-    t.text     "name",  :limit => nil
+    t.text     "name"
     t.integer  "type_answer"
     t.integer  "test_question_id"
     t.datetime "created_at",       :null => false
@@ -153,7 +154,7 @@ ActiveRecord::Schema.define(:version => 20120920111631) do
   add_index "test_question_attempts", ["test_question_id"], :name => "index_test_question_attempts_on_test_question_id"
 
   create_table "test_questions", :force => true do |t|
-    t.text     "name",  :limit => nil
+    t.text     "name"
     t.integer  "type_question"
     t.integer  "test_id"
     t.datetime "created_at",     :null => false
