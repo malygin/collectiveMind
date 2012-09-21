@@ -1,5 +1,5 @@
-= link_to gravatar_for frustration_comment.user, :size => 20
-= link_to frustration_comment.user.name_title, frustration_comment.user
+/ = link_to gravatar_for frustration_comment.user, :size => 20
+= link_to frustration_comment.user.name_title, frustration_comment.user,  :class=>'username'
 - if frustration_comment.negative and frustration_comment.user!=@frustration.user
 	= image_tag("bad.png", :alt => "Colleсtive mind", :height => 20 ) 
 - elsif frustration_comment.user!=@frustration.user

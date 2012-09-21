@@ -200,6 +200,7 @@ DEPENDENCIES
   activerecord-postgresql-adapter
   coffee-rails (~> 3.2.1)
   database_cleaner
+  execjs
   factory_girl_rails
   faker
   gravatar_image_tag

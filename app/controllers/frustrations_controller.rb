@@ -11,6 +11,10 @@ class FrustrationsController < ApplicationController
 			redirect_to current_user
 		else
 			@frustration = current_user.frustrations.build(params[:frustration])
+			unless fr[:what].nil? and  fr[:when].nil? and fr[:wherein].nil?
+				#create structirung fr
+				@frustration.status = 2
+			end
 			if @frustration.save
 				flash[:success] = "Недовольство добавлено в список!"
 				redirect_to root_path

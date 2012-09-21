@@ -13,6 +13,7 @@ gem 'faker'
 gem 'russian'
 gem 'thin'
 gem 'settingslogic'
+gem 'execjs'
 #gem 'magic_encoding'
 
 group :development, :test do

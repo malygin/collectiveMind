@@ -158,6 +158,7 @@ namespace :db  do
 		user2 = User.create!(:name => "Иван",
 			:surname => "Дорошин",
 			:email =>"anmalygin@yandex.ru",
+			:login => "pisynka",
 			:password => "pascal2003",
 			:password_confirmation => "pascal2003")
 		admin = User.create!(:name => "Олег",
