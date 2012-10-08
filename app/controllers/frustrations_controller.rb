@@ -14,6 +14,7 @@ class FrustrationsController < ApplicationController
 			unless fr[:what].nil? and  fr[:when].nil? and fr[:wherein].nil?
 				#create structirung fr
 				@frustration.status = 2
+				@frustration.structuring_date = Time.now
 			end
 			if @frustration.save
 				flash[:success] = "Недовольство добавлено в список!"
@@ -65,11 +66,13 @@ class FrustrationsController < ApplicationController
 		redirect_to user_path(current_user)
 	end
 
-	def expert_decline
+	def expert_decline()
+		penalty =  to_bool(params[:penalty])
+		# puts penalty
 		@frustration = Frustration.find(params[:id])
 		@frustration.update_column(:status, 5)
 		#if we have negative comments - ban 
-		unless @frustration.comments_after_structuring.empty?
+		if  not @frustration.comments_after_structuring.empty? and penalty
 			@frustration.user.update_column(:score, @frustration.user.score + Settings.scores.expert.deny_with_negative)
 		end
 		flash[:success] = "Недовольство отклонено"
@@ -77,6 +80,11 @@ class FrustrationsController < ApplicationController
 	end
 
 	def edit_to_struct
+		@frustration = Frustration.find(params[:id])
+		@author_comment = params[:author_comment]
+	end
+
+	def edit_to_expert
 		@frustration = Frustration.find(params[:id])
 		@author_comment = params[:author_comment]
 	end
@@ -106,6 +114,24 @@ class FrustrationsController < ApplicationController
 			:when => params[:frustration][:when],
 			:structuring_date => Time.now, :status => 2 )
 		flash[:success] = "Недовольство  формализовано"
+		redirect_to root_path
+	end	
+
+	def update_to_expert
+		@frustration = Frustration.find(params[:id])
+		puts params
+		# @user = User.where(:id => (params[:author_comment])).first
+
+		# @frustration.update_attributes(:what_old => @frustration.what,
+		# 	:wherin_old => @frustration.wherin,
+		# 	:when_old => @frustration.when,
+		# 	:content_text_old => @frustration.content_text,
+		# 	:struct_user => @user, 
+		# 	:what => params[:frustration][:what],
+		# 	:wherin => params[:frustration][:wherin],
+		# 	:when => params[:frustration][:when],
+		# 	:structuring_date => Time.now, :status => 2 )
+		# flash[:success] = "Недовольство  формализовано"
 		redirect_to root_path
 	end
 

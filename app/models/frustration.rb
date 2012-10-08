@@ -3,8 +3,8 @@ class Frustration < ActiveRecord::Base
   #status 0 -unstructed, 1 -archive, 2 - structed, 3 -to expert, 
   #4 -allow expert, 5 -deny expert
   attr_accessible  :status, :struct_user,:structuring_date, :trash, 
-  :what, :wherin, :when, :what_old, :wherin_old, :when_old,
-  :content_text, :content_text_old 
+  :what, :wherin, :when, :what_old, :wherin_old, :when_old, :what_expert, :wherin_expert, 
+  :when_expert, :content_text, :content_text_old 
 
 
   belongs_to :user
@@ -20,6 +20,8 @@ class Frustration < ActiveRecord::Base
   validates :user_id, :presence => true
 
   has_many :frustration_comments, :dependent => :destroy
+  has_many :frustration_useful_comments, :class_name =>'frustration_comment',
+  :foreign_key => 'useful_frustration_id',  :dependent => :destroy
 
   default_scope :order => 'frustrations.created_at DESC'
 
@@ -96,6 +98,12 @@ class Frustration < ActiveRecord::Base
       return nil
     else   
       self.what_old + " " +self.wherin_old + " " + self.when_old
+    end
+  end
+
+  def expert_content
+    unless self.what_expert.nil?
+      self.what_expert + " " + self.wherin_expert + " " + self.when_expert
     end
   end
 

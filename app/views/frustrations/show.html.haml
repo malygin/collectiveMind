@@ -1,12 +1,15 @@
 - if not expert? and  frustration_for_expert?(@frustration)
 	.notification
 		Недовольство на рассмотрении эксперта, скоро по нему будет вынесено решение 
+
 - elsif current_user?(@frustration.user) and !have_structure_comments?(@frustration) 
 	.notification 
 		У недовольства нет оформляющих комментариев
 		=link_to "хотите снять ее с рассмотрения?", archive_frustration_path(@frustration), :method => :put, :confirm => "Точно?", :title => @frustration.content
+
 -elsif current_user?(@frustration.user)
-	.error Есть структурирующие комменты, нельзя снять с рассмотрения
+	.error Есть оформляющие комментарии, нельзя снять с рассмотрения
+
 %br
 
 
@@ -14,14 +17,19 @@
 	.notification 
 		Пришло время и вы можете 
 		=link_to "сделать недовольство оформленным", edit_to_struct_frustration_path(@frustration.id)
+
 - elsif show_link_to_expert_with_negative_comments?(@frustration)
 	.error 
 		Есть негативные комментарии, в случае неуспеха получите штраф в 50 балов! Все равно 
 		=link_to "Отправить эксперту ", to_expert_frustration_path(@frustration),:method => :put, :confirm => "50 балов ведь потеряете!" 
+
 - elsif show_link_to_expert?(@frustration)
 	.success
 		Прошло положенное время и вы можете свою неудовлетворенность 
-		=link_to "отправить эксперту", to_expert_frustration_path(@frustration),:method => :put, :confirm => "Уверены?" 
+		=link_to "отправить эксперту", to_expert_frustration_path(@frustration),:method => :put, :confirm => "Уверены?"
+		или
+		=link_to "отправить эксперту, предварительно отредактировав", edit_to_expert_frustration_path(@frustration),:method => :get, :confirm => "Уверены?"  
+
 - elsif current_user?(@frustration.user) 
 	/ %li Время  еще не пришло!
 
@@ -30,7 +38,10 @@
 	.notification 
 		= link_to "принять", expert_accept_frustration_path(@frustration),:method => :put, :confirm => "Точно принять?"
 		или
-		= link_to "отклонить", expert_decline_frustration_path(@frustration),:method => :put, :confirm => "Точно отклонить?"
+		= link_to "отклонить c штрафом", expert_decline_frustration_path(@frustration, :penalty => true),:method => :put, :confirm => "Точно отклонить?"
+		или
+		= link_to "отклонить без штрафа", expert_decline_frustration_path(@frustration, :penalty => false),:method => :put, :confirm => "Точно отклонить?"
+
 
 - if admin?
 	.error 

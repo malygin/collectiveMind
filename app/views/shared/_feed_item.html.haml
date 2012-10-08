@@ -11,6 +11,7 @@
 				= feed_item.content
 			-else 
 				= feed_item.content
+			=feed_item.expert_content
 
 			- if  (not current_page?(frustration_path(feed_item)) and signed_in? and not feed_item.archive?)				
 				= link_to 'подробнее', feed_item

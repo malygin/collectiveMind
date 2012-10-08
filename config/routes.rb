@@ -39,18 +39,22 @@ CollectiveMind::Application.routes.draw do
   resources :users
   resources :sessions, :only => [:new, :create, :destroy]
   resources :frustrations  do      
+     
       resources :frustration_comments do
         member do
           put :to_trash_by_admin
         end
       end
+
       member do
        put :archive
        put :to_expert
        put :expert_accept
        put :expert_decline
        get :edit_to_struct
+       get :edit_to_expert
        put :update_to_struct
+       put :update_to_expert
        put :to_archive_by_admin
       end
   end

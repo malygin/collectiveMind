@@ -1,7 +1,7 @@
 # encoding: utf-8
 class FrustrationCommentsController < ApplicationController
   def create
-    puts params
+    # puts params
     @frustration = Frustration.find(params[:frustration_id])
     unless params[:frustration_comment][:comment_id].nil?
       frustration_comment = FrustrationComment.find(params[:frustration_comment][:comment_id])

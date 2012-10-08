@@ -1,0 +1,39 @@
+%h1 Редактирование недовольства перед отправкой эксперту
+
+.notification На основе своего недовольства попытайтесь оформить его в окончательном виде. Внимание! Именно в таком виде оно попадет к эксперту. Будьте внимательны.
+%br
+/ = render 'frustrations/form', :url => update_to_struct_frustration_path(@frustration.id,  :author_comment => @author_comment)
+
+= form_for @frustration, :url => update_to_expert_frustration_path(@frustration.id,  :author_comment => @author_comment) do |f|
+	=render 'shared/error_messages', :object =>f.object
+	%label Чем вы недовольны?
+	.field
+		=f.text_area :what
+	%br
+	%label Где это происходит?
+	.field
+		=f.text_area :wherin
+	%br
+	%label Во время чего?
+	.field
+		=f.text_area :when
+
+	.notification Комментарии, которые вы можете указать, как оказавшие вам помощь
+
+	- @frustration.comments_after_structuring.each do |comment|
+		=check_box_tag 'comment_'+comment.id.to_s, comment.id 
+		=comment.content
+		%br
+
+
+	.action
+		=f.submit '', class: 'btn'
+
+
+= @frustration.content
+
+
+
+
+
+

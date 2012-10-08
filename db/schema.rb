@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120921074732) do
+ActiveRecord::Schema.define(:version => 20121008120756) do
 
   create_table "answers", :force => true do |t|
     t.string   "text"
@@ -53,10 +53,12 @@ ActiveRecord::Schema.define(:version => 20120921074732) do
     t.string   "comment_admin"
     t.boolean  "trash",                  :default => false
     t.integer  "frustration_comment_id"
+    t.integer  "useful_frustration_id"
   end
 
   add_index "frustration_comments", ["created_at"], :name => "index_frustration_comments_on_created_at"
   add_index "frustration_comments", ["frustration_id"], :name => "index_frustration_comments_on_frustration_id"
+  add_index "frustration_comments", ["useful_frustration_id"], :name => "index_frustration_comments_on_useful_frustration_id"
   add_index "frustration_comments", ["user_id"], :name => "index_frustration_comments_on_user_id"
 
   create_table "frustrations", :force => true do |t|
@@ -79,6 +81,9 @@ ActiveRecord::Schema.define(:version => 20120921074732) do
     t.string   "content_text"
     t.string   "content_text_old"
     t.integer  "project_id",       :default => 1
+    t.string   "what_expert"
+    t.string   "wherin_expert"
+    t.string   "when_expert"
   end
 
   add_index "frustrations", ["created_at"], :name => "index_frustrations_on_created_at"

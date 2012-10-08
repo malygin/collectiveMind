@@ -5,6 +5,7 @@ class FrustrationComment < ActiveRecord::Base
   belongs_to :frustration_comment
   belongs_to :user
   belongs_to :frustration
+  belongs_to :useful_frustration
 
   
 end
