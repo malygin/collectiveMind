@@ -1,5 +1,5 @@
 class Test < ActiveRecord::Base
-  attr_accessible :description, :name
+  attr_accessible :description, :name, :preview
   belongs_to :project
   has_many :test_questions
   has_many :test_attempts

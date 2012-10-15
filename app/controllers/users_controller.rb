@@ -1,7 +1,7 @@
 # encoding: utf-8
 class UsersController < ApplicationController
-	before_filter :authenticate, :only => [:edit, :update]
-	before_filter :correct_user, :only => [:edit, :update]
+	before_filter :authenticate, :only => [:edit, :update, :show]
+	before_filter :correct_user, :only => [:edit, :update, :show]
 	before_filter :admin_user, :only => [:destroy]
 
 	def new

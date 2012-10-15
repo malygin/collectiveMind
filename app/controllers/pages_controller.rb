@@ -52,7 +52,7 @@ class PagesController < ApplicationController
   def accepted_frustrations
     @frustrations_feed = Frustration.feed_accepted.paginate(:page => params[:page])
     @title = "Принятые недовольства"
-    render 'expert'
+    render 'home'
   end   
 
    def declined_frustrations

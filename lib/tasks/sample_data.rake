@@ -6,134 +6,240 @@ namespace :db  do
 		Rake::Task['db:reset'].invoke
 		project = Project.create(:id=>1, 
 			:name => "Стратегия развития ДО в СГУ на 2012-2013 год")
-		test = Test.create(:id=>1, :name => "Начальный тест", :description =>"социологический тест")
-	  quest2 = TestQuestion.create(:name => "I. Как до ознакомления с информацией о курсе по рациональному принятию
-решений Вы считали правильным принимать важные решения?", :type_question => 0, :order_question =>1)
-		quest2.test = test
-		quest2.test_answers << TestAnswer.create(:name =>"При помощи своих интуиции, опыта и здравого смысла и(или) советов авторитетных для меня людей, так как мне не было известно о рациональном принятия решений.", :type_answer =>0)
-		quest2.test_answers << TestAnswer.create(:name =>"Основываясь на своих интуиции, опыте и здравом смысл и(или) советах авторитетных для меня людей, так как считал(а) рациональные модели и техники принятия решений не эффективными.", :type_answer =>0)
-		quest2.test_answers << TestAnswer.create(:name =>"Применяя рациональные модели и техники принятия решений в отдельных особо значимых случаях.", :type_answer =>0)
-		quest2.test_answers << TestAnswer.create(:name =>"Используя рациональные модели и техники принятия решений для большинства важных проблем.", :type_answer =>0)
-		quest2.test_answers << TestAnswer.create(:name =>"При помощи рациональных моделей и техник принятия решений в каждой важной", :type_answer =>0)
-		
-			quest1 = TestQuestion.create(:name => "II. Представьте себе, что в том месте, где Вы работаете, либо учитесь, либо
+		test = Test.create(:id=>1, :name => "Описание собственного стиля принятия решений", :description =>"Опрос до начала процедуры принятия решений",
+			:preview => "Ответьте, пожалуйста, на вопросы о принятии Вами важных решений. Важным
+			называется решение, которое в значительной мере определяет дальнейшую жизнь или
+			деятельность – Вашу либо группы, коллектива, сообщества, к которому Вы принадлежите.
+			Помните, пожалуйста, что ниже Вас спрашивают только о таких решениях. По каждому
+			вопросу выберите тот вариант ответа, который больше всего подходит Вам. Если
+			выбран «Другой ответ», то Вам следует его сформулировать. Ваши ответы не будут
+			разглашены и послужат только для статистической подготовки общих выводов.")
+
+	  quest1 = TestQuestion.create(:name => "I. Как ДО ознакомления с информацией о курсе по рациональному принятию
+решений Вы считали правильным принимать решения?", :type_question => 0, :order_question =>1)
+		quest1.test = test
+		quest1.test_answers << TestAnswer.create(:name =>"При помощи своих интуиции, опыта и здравого смысла и(или) советов авторитетных
+для меня людей, так как мне не было известно о рациональном принятия решений.", :type_answer =>0)
+		quest1.test_answers << TestAnswer.create(:name =>"Основываясь на своих интуиции, опыте и здравом смысл и(или) советах авторитетных
+для меня людей, так как считал(а) рациональные модели и техники принятия решений не эффективными.", :type_answer =>0)
+		quest1.test_answers << TestAnswer.create(:name =>"Применяя рациональные модели и техники принятия решений в отдельных особо
+значимых случаях.", :type_answer =>0)
+		quest1.test_answers << TestAnswer.create(:name =>"Используя рациональные модели и техники принятия решений для большинства важных проблем.", :type_answer =>0)
+		quest1.test_answers << TestAnswer.create(:name =>"При помощи рациональных моделей и техник принятия решений в каждой важной проблеме", :type_answer =>0)
+		quest1.test_answers << TestAnswer.create(:name =>"Другой ответ", :type_answer =>1)
+
+			quest2 = TestQuestion.create(:name => "II-III. Представьте себе, что в том месте, где Вы работаете, либо учитесь, либо
 занимаетесь общественной деятельностью, коллективно принимается решение по
-какому-то общему для всех вопросу. И каждый может в этом участвовать или не
+какой-то общей для всех проблеме. И каждый может в этом участвовать или не
 участвовать по своей воле. Насколько Вы были бы склонны вкладывать в принятие
-решения Ваши силы и время?", :order_question =>2, :type_question => 0)
-		quest1.test = test	
-		quest1.test_answers << TestAnswer.create(:name =>"Ни в малейшей степени", :type_answer =>0)
-		quest1.test_answers << TestAnswer.create(:name =>"В небольшой мере", :type_answer =>0)
-		quest1.test_answers << TestAnswer.create(:name =>"Отчасти.", :type_answer =>0)
-		quest1.test_answers << TestAnswer.create(:name =>"В значительной степени.", :type_answer =>0)
-		quest1.test_answers << TestAnswer.create(:name =>"В полной мере.", :type_answer =>0)
+решения Ваши силы и время --
+<br/><br/>
+II -- в случае, когда эта проблема существенно затрагивает лично Вас?", :order_question =>2, :type_question => 0)
+		quest2.test = test	
+		quest2.test_answers << TestAnswer.create(:name =>"Вообще не интересовался(ась) бы этим.", :type_answer =>0)
+		quest2.test_answers << TestAnswer.create(:name =>"Ни в малейшей степени", :type_answer =>0)
+		quest2.test_answers << TestAnswer.create(:name =>"В небольшой мере", :type_answer =>0)
+		quest2.test_answers << TestAnswer.create(:name =>"В значительной степени.", :type_answer =>0)
+		quest2.test_answers << TestAnswer.create(:name =>"В полной мере.", :type_answer =>0)
+		quest2.test_answers << TestAnswer.create(:name =>"Другой ответ.", :type_answer =>1)
 	   
-	   	quest3 = TestQuestion.create(:name => "III. Предположим, что в том месте, где Вы работаете, либо учитесь, либо занимаетесь
-общественной деятельностью, принято коллективное решение по какому-то общему
-для всех вопросу. Сколь настойчиво Вы бы добивались воплощения этого решения в
-жизнь?", :order_question =>3, :type_question => 0)
+	   	quest3 = TestQuestion.create(:name => "III -- в случае, когда эта проблема НЕ затрагивает существенно лично Вас?", :order_question =>3, :type_question => 0)
 		quest3.test = test	
-		quest3.test_answers << TestAnswer.create(:name =>"Вообще не добивался(ась) бы.", :type_answer =>0)
-		quest3.test_answers << TestAnswer.create(:name =>"Мог(ла) бы что-то сделать в поддержку, если это не потребовало бы сил и времени.", :type_answer =>0)
-		quest3.test_answers << TestAnswer.create(:name =>"Потратил(а) бы немного сил и времени.", :type_answer =>0)
-		quest3.test_answers << TestAnswer.create(:name =>"Приложил(а) бы большие усилия.", :type_answer =>0)
-		quest3.test_answers << TestAnswer.create(:name =>"Стал(а) бы настойчиво добиваться этого до тех пор, пока решение не было бы воплощено в жизнь.", :type_answer =>0)
+		quest3.test_answers << TestAnswer.create(:name =>"Вообще не интересовался(ась) бы этим.", :type_answer =>0)
+		quest3.test_answers << TestAnswer.create(:name =>"Ни в малейшей степени", :type_answer =>0)
+		quest3.test_answers << TestAnswer.create(:name =>"В небольшой мере", :type_answer =>0)
+		quest3.test_answers << TestAnswer.create(:name =>"В значительной степени.", :type_answer =>0)
+		quest3.test_answers << TestAnswer.create(:name =>"В полной мере.", :type_answer =>0)
+		quest3.test_answers << TestAnswer.create(:name =>"Другой ответ.", :type_answer =>1)
 	   
-	   	quest4 = TestQuestion.create(:name => "IV. Когда Вы определили для себя очень важную цель, в какой мере считаете
-правильным  стремиться достичь ее как можно быстрее и полнее, не тратя времени на
-то, чтобы пытаться спрогнозировать, не повредит ли эта быстрота и полнота
-поддержанию целевого положения в дальнейшем?", :order_question =>4, :type_question => 0)
+	   	quest4 = TestQuestion.create(:name => "IV-V. Предположим, что в том месте, где Вы работаете, либо учитесь, либо
+занимаетесь общественной деятельностью, принято коллективное решение по какому-то общему для всех вопросу. Сколь настойчиво Вы бы добивались
+воплощения этого решения в жизнь --
+<br/><br/>
+IV -- в случае, когда это решение существенно затрагивает лично Вас?", :order_question =>4, :type_question => 0)
 		quest4.test = test	
-		quest4.test_answers << TestAnswer.create(:name =>"Ни в малейшей степени.", :type_answer =>0)
-		quest4.test_answers << TestAnswer.create(:name =>"В небольшой мере.", :type_answer =>0)
-		quest4.test_answers << TestAnswer.create(:name =>"Отчасти.", :type_answer =>0)
+		quest4.test_answers << TestAnswer.create(:name =>"Вообще не интересовался(ась) бы этим.", :type_answer =>0)
+		quest4.test_answers << TestAnswer.create(:name =>"Ни в малейшей степени", :type_answer =>0)
+		quest4.test_answers << TestAnswer.create(:name =>"В небольшой мере", :type_answer =>0)
 		quest4.test_answers << TestAnswer.create(:name =>"В значительной степени.", :type_answer =>0)
 		quest4.test_answers << TestAnswer.create(:name =>"В полной мере.", :type_answer =>0)
- 		
- 		quest5 = TestQuestion.create(:name => "V. Решая, как достичь данную цель, пытаться прогнозировать, обеспечит ли тот
-или иной путь ее достижения прочное целевое положение в дальнейшем?", :order_question =>5, :type_question => 0)
-		quest5.test = test	
-		quest5.test_answers << TestAnswer.create(:name =>"Ни в малейшей степени.", :type_answer =>0)
-		quest5.test_answers << TestAnswer.create(:name =>"В небольшой мере.", :type_answer =>0)
-		quest5.test_answers << TestAnswer.create(:name =>"Отчасти.", :type_answer =>0)
+		quest4.test_answers << TestAnswer.create(:name =>"Другой ответ.", :type_answer =>1)
+
+ 		quest5 = TestQuestion.create(:name => "V -- в случае, когда это решение НЕ затрагивает существенно лично Вас?", :order_question =>5, :type_question => 0)
+		quest5.test = test
+
+		quest5.test_answers << TestAnswer.create(:name =>"Вообще не интересовался(ась) бы этим.", :type_answer =>0)
+		quest5.test_answers << TestAnswer.create(:name =>"Ни в малейшей степени", :type_answer =>0)
+		quest5.test_answers << TestAnswer.create(:name =>"В небольшой мере", :type_answer =>0)
 		quest5.test_answers << TestAnswer.create(:name =>"В значительной степени.", :type_answer =>0)
 		quest5.test_answers << TestAnswer.create(:name =>"В полной мере.", :type_answer =>0)
+		quest5.test_answers << TestAnswer.create(:name =>"Другой ответ.", :type_answer =>1)
  		
- 		quest6 = TestQuestion.create(:name => "VI. Если Вы оказываетесь в очень не устраивающем Вас положении, в какой мере
-считаете правильным поставить перед собой цель просто выйти из этого негативного положения?", :order_question =>6,:type_question => 0)
+ 		quest6 = TestQuestion.create(:name => "VI-VII. Представьте себе, что Вы наметили для себя очень важную цель. Избирая
+путь ее достижения, в какой мере Вы считаете правильным --
+<br/><br/>
+VI -- руководствоваться принципом «чем быстрее, тем лучше», не размышляя,
+как самый быстрый путь достижения намеченной цели повлияет на сохранение
+достигнутого в долгосрочной перспективе?", :order_question =>6,:type_question => 0)
 		quest6.test = test	
-		quest6.test_answers << TestAnswer.create(:name =>"Ни в малейшей степени.", :type_answer =>0)
-		quest6.test_answers << TestAnswer.create(:name =>"В небольшой мере.", :type_answer =>0)
-		quest6.test_answers << TestAnswer.create(:name =>"Отчасти.", :type_answer =>0)
+
+		quest6.test_answers << TestAnswer.create(:name =>"Вообще не ставил(а) перед собой такой вопрос.", :type_answer =>0)
+		quest6.test_answers << TestAnswer.create(:name =>"Ни в малейшей степени", :type_answer =>0)
+		quest6.test_answers << TestAnswer.create(:name =>"В небольшой мере", :type_answer =>0)
 		quest6.test_answers << TestAnswer.create(:name =>"В значительной степени.", :type_answer =>0)
 		quest6.test_answers << TestAnswer.create(:name =>"В полной мере.", :type_answer =>0)
-	   
- 		quest7 = TestQuestion.create(:name => "VII. Если Вы оказываетесь в очень не устраивающем Вас положении, в какой мере
-считаете правильным нарисовать конкретное позитивное положение, к которому Вы хотели бы
-прийти, чтобы затем выбирать путь к этой определенной цели?", :order_question =>7,:type_question => 0)
+		quest6.test_answers << TestAnswer.create(:name =>"Другой ответ.", :type_answer =>1)
+ 	   
+ 		quest7 = TestQuestion.create(:name => "VII -- пытаться прогнозировать, обеспечит ли тот или иной путь достижения
+намеченной цели сохранение достигнутого в долгосрочной перспективе?", :order_question =>7,:type_question => 0)
 		quest7.test = test	
-		quest7.test_answers << TestAnswer.create(:name =>"Ни в малейшей степени.", :type_answer =>0)
-		quest7.test_answers << TestAnswer.create(:name =>"В небольшой мере.", :type_answer =>0)
-		quest7.test_answers << TestAnswer.create(:name =>"Отчасти.", :type_answer =>0)
+		
+		quest7.test_answers << TestAnswer.create(:name =>"Вообще не ставил(а) перед собой такой вопрос.", :type_answer =>0)
+		quest7.test_answers << TestAnswer.create(:name =>"Ни в малейшей степени", :type_answer =>0)
+		quest7.test_answers << TestAnswer.create(:name =>"В небольшой мере", :type_answer =>0)
 		quest7.test_answers << TestAnswer.create(:name =>"В значительной степени.", :type_answer =>0)
 		quest7.test_answers << TestAnswer.create(:name =>"В полной мере.", :type_answer =>0)
+		quest7.test_answers << TestAnswer.create(:name =>"Другой ответ.", :type_answer =>1)
 	 	
-	 	quest8 = TestQuestion.create(:name => "VIII. Если Вы занимаетесь детальным формулированием важной цели, подробно
-вырисовывая образ желаемого будущего (т.е. в цель), в какой мере считаете
-правильным рисовать только то позитивное, чего Вы желаете достичь в будущем?",:order_question =>8, :type_question => 0)
+	 	quest8 = TestQuestion.create(:name => "VIII-IX. Если Вы оказываетесь в очень не устраивающем Вас положении, в какой
+мере считаете правильным --
+<br/><br/>
+VIII -- поставить перед собой цель просто выйти из этого негативного положения?",:order_question =>8, :type_question => 0)
 		quest8.test = test	
-		quest8.test_answers << TestAnswer.create(:name =>"Я не формулирую таким образом важные цели.", :type_answer =>0)
-		quest8.test_answers << TestAnswer.create(:name =>"Ни в малейшей степени.", :type_answer =>0)
-		quest8.test_answers << TestAnswer.create(:name =>"В небольшой мере.", :type_answer =>0)
-		quest8.test_answers << TestAnswer.create(:name =>"Отчасти.", :type_answer =>0)
+		quest8.test_answers << TestAnswer.create(:name =>"Вообще не размышляю на эту тему.", :type_answer =>0)
+		quest8.test_answers << TestAnswer.create(:name =>"Ни в малейшей степени", :type_answer =>0)
+		quest8.test_answers << TestAnswer.create(:name =>"В небольшой мере", :type_answer =>0)
 		quest8.test_answers << TestAnswer.create(:name =>"В значительной степени.", :type_answer =>0)
 		quest8.test_answers << TestAnswer.create(:name =>"В полной мере.", :type_answer =>0)
+		quest8.test_answers << TestAnswer.create(:name =>"Другой ответ.", :type_answer =>1)
 	   	
-	   	quest9 = TestQuestion.create(:name => "IX. Если Вы занимаетесь детальным формулированием важной цели, подробно
-вырисовывая образ желаемого будущего (т.е. в цель), в какой мере считаете
-правильным уделять много внимания еще и обрисовыванию того возможного негативного,
-чего Вы желали бы избежать в будущем?", :order_question =>9, :type_question => 0)
+	   	quest9 = TestQuestion.create(:name => "IX -- нарисовать конкретное позитивное положение, к которому Вы хотели бы
+прийти, чтобы затем выбирать путь к этой определенной цели?", :order_question =>9, :type_question => 0)
 		quest9.test = test	
-		quest9.test_answers << TestAnswer.create(:name =>"Я не формулирую таким образом важные цели.", :type_answer =>0)
-		quest9.test_answers << TestAnswer.create(:name =>"Ни в малейшей степени.", :type_answer =>0)
-		quest9.test_answers << TestAnswer.create(:name =>"В небольшой мере.", :type_answer =>0)
-		quest9.test_answers << TestAnswer.create(:name =>"Отчасти.", :type_answer =>0)
+		quest9.test_answers << TestAnswer.create(:name =>"Вообще не размышляю на эту тему.", :type_answer =>0)
+		quest9.test_answers << TestAnswer.create(:name =>"Ни в малейшей степени", :type_answer =>0)
+		quest9.test_answers << TestAnswer.create(:name =>"В небольшой мере", :type_answer =>0)
 		quest9.test_answers << TestAnswer.create(:name =>"В значительной степени.", :type_answer =>0)
 		quest9.test_answers << TestAnswer.create(:name =>"В полной мере.", :type_answer =>0)
+		quest9.test_answers << TestAnswer.create(:name =>"Другой ответ.", :type_answer =>1)
 	   	
-	   	quest10 = TestQuestion.create(:name => "X. Когда Вы планируете, какими методами и средствами будете разрешать
-важные задачи, которые стоят перед Вами, в какой степени считаете правильным
-анализировать то негативное, что может произойти на пути разрешения этих задач,
-а также другие возможные препятствия на нем, чтобы заранее принять меры для преодоления этого?", :order_question =>10,:type_question => 0)
+	   	quest10 = TestQuestion.create(:name => "X-XI. Если Вы занимаетесь детальным формулированием важной цели, подробно
+вырисовывая образ желаемого будущего (т.е. цель), в какой мере считаете
+правильным --
+<br/><br/>
+X -- рисовать только то позитивное, чего Вы желаете достичь в будущем?", :order_question =>10,:type_question => 0)
 		quest10.test = test	
-		quest10.test_answers << TestAnswer.create(:name =>"Я не планирую таким образом разрешение важных задач.", :type_answer =>0)
-		quest10.test_answers << TestAnswer.create(:name =>"Ни в малейшей степени.", :type_answer =>0)
-		quest10.test_answers << TestAnswer.create(:name =>"В небольшой мере.", :type_answer =>0)
-		quest10.test_answers << TestAnswer.create(:name =>"Отчасти.", :type_answer =>0)
+
+		quest10.test_answers << TestAnswer.create(:name =>"ВВообще не размышляю на эту тему.", :type_answer =>0)
+		quest10.test_answers << TestAnswer.create(:name =>"Ни в малейшей степени", :type_answer =>0)
+		quest10.test_answers << TestAnswer.create(:name =>"В небольшой мере", :type_answer =>0)
 		quest10.test_answers << TestAnswer.create(:name =>"В значительной степени.", :type_answer =>0)
 		quest10.test_answers << TestAnswer.create(:name =>"В полной мере.", :type_answer =>0)
+		quest10.test_answers << TestAnswer.create(:name =>"Другой ответ.", :type_answer =>1)
+
 	   	
-	   	quest11 = TestQuestion.create(:name => "XI. Если Вы ищете решение важной проблемы, в какой мере считаете
-правильным  останавливаться на первом же оказавшемся у Вас в распоряжении удовлетворительном варианте
-решения, чтобы не «тратить» время, силы и средства на поиски и изучение других
-возможных вариантов?", :order_question =>11, :type_question => 0)
+	   	quest11 = TestQuestion.create(:name => "XI -- уделять много внимания еще и обрисовыванию того возможного негативного,
+чего Вы желали бы избежать в будущем?", :order_question =>11, :type_question => 0)
 		quest11.test = test	
-		quest11.test_answers << TestAnswer.create(:name =>"Ни в малейшей степени.", :type_answer =>0)
-		quest11.test_answers << TestAnswer.create(:name =>"В небольшой мере.", :type_answer =>0)
-		quest11.test_answers << TestAnswer.create(:name =>"Отчасти.", :type_answer =>0)
+
+		quest11.test_answers << TestAnswer.create(:name =>"Вообще не размышляю на эту тему.", :type_answer =>0)
+		quest11.test_answers << TestAnswer.create(:name =>"Ни в малейшей степени", :type_answer =>0)
+		quest11.test_answers << TestAnswer.create(:name =>"В небольшой мере", :type_answer =>0)
 		quest11.test_answers << TestAnswer.create(:name =>"В значительной степени.", :type_answer =>0)
 		quest11.test_answers << TestAnswer.create(:name =>"В полной мере.", :type_answer =>0)
+		quest11.test_answers << TestAnswer.create(:name =>"Другой ответ.", :type_answer =>1)
 	   	
-	   	quest12 = TestQuestion.create(:name => "XII. Если Вы ищете решение важной проблемы, в какой мере считаете
-правильным  набирать множество разных резонных вариантов решения, чтобы потом
-сравнить их и выбрать лучший?",:order_question =>12, :type_question => 0)
+	   	quest12 = TestQuestion.create(:name => "XII. Когда Вы планируете, какими методами и средствами будете разрешать
+важные задачи, которые стоят перед Вами, в какой степени считаете правильным
+анализировать то негативное, что может произойти на пути разрешения этих задач,
+а также другие возможные препятствия на нем, чтобы заранее принять меры для
+преодоления этого?",:order_question =>12, :type_question => 0)
 		quest12.test = test	
-		quest12.test_answers << TestAnswer.create(:name =>"Ни в малейшей степени.", :type_answer =>0)
-		quest12.test_answers << TestAnswer.create(:name =>"В небольшой мере.", :type_answer =>0)
-		quest12.test_answers << TestAnswer.create(:name =>"Отчасти.", :type_answer =>0)
+        quest12.test_answers << TestAnswer.create(:name =>"Вообще не размышляю на эту тему.", :type_answer =>0)
+		quest12.test_answers << TestAnswer.create(:name =>"Ни в малейшей степени", :type_answer =>0)
+		quest12.test_answers << TestAnswer.create(:name =>"В небольшой мере", :type_answer =>0)
 		quest12.test_answers << TestAnswer.create(:name =>"В значительной степени.", :type_answer =>0)
 		quest12.test_answers << TestAnswer.create(:name =>"В полной мере.", :type_answer =>0)
+		quest12.test_answers << TestAnswer.create(:name =>"Другой ответ.", :type_answer =>1)
 
+	   	quest13 = TestQuestion.create(:name => "XIII-XIV. Если Вы ищете решение важной проблемы, в какой мере считаете
+правильным --
+<br/><br/>
+XIII -- останавливаться на первом же оказавшемся у Вас в распоряжении
+удовлетворительном варианте решения, чтобы не «тратить» время, силы и средства
+на поиски и изучение других возможных вариантов?",:order_question =>13, :type_question => 0)
+		quest13.test = test	
+        quest13.test_answers << TestAnswer.create(:name =>"Вообще не размышляю на эту тему.", :type_answer =>0)
+		quest13.test_answers << TestAnswer.create(:name =>"Ни в малейшей степени", :type_answer =>0)
+		quest13.test_answers << TestAnswer.create(:name =>"В небольшой мере", :type_answer =>0)
+		quest13.test_answers << TestAnswer.create(:name =>"В значительной степени.", :type_answer =>0)
+		quest13.test_answers << TestAnswer.create(:name =>"В полной мере.", :type_answer =>0)
+		quest13.test_answers << TestAnswer.create(:name =>"Другой ответ.", :type_answer =>1)
+
+	   	quest14 = TestQuestion.create(:name => "XIV -- набирать множество разных резонных вариантов решения, чтобы потом
+сравнить их и выбрать лучший?",:order_question =>14, :type_question => 0)
+		quest14.test = test	
+        quest14.test_answers << TestAnswer.create(:name =>"Вообще не размышляю на эту тему.", :type_answer =>0)
+		quest14.test_answers << TestAnswer.create(:name =>"Ни в малейшей степени", :type_answer =>0)
+		quest14.test_answers << TestAnswer.create(:name =>"В небольшой мере", :type_answer =>0)
+		quest14.test_answers << TestAnswer.create(:name =>"В значительной степени.", :type_answer =>0)
+		quest14.test_answers << TestAnswer.create(:name =>"В полной мере.", :type_answer =>0)
+		quest14.test_answers << TestAnswer.create(:name =>"Другой ответ.", :type_answer =>1)
+
+	   	quest15 = TestQuestion.create(:name => "XV-XVI. Представьте себе, что в том месте, где Вы работаете, либо учитесь, либо
+занимаетесь общественной деятельностью, коллективно принимается решение по
+какому-то общему для всех вопросу. И в коллективе есть разные отношения к этому
+вопросу. Участвуя в принятии решения, считаете ли Вы правильным НЕ «тратить»
+время и силы на освоение других взглядов и согласование позиций?
+<br/><br/>
+XV -- в случае, когда это решение существенно затрагивает лично Вас?",:order_question =>15, :type_question => 0)
+		quest15.test = test	
+        quest15.test_answers << TestAnswer.create(:name =>"Вообще не интересовался(ась) бы этим.", :type_answer =>0)
+		quest15.test_answers << TestAnswer.create(:name =>"Ни в малейшей степени", :type_answer =>0)
+		quest15.test_answers << TestAnswer.create(:name =>"В небольшой мере", :type_answer =>0)
+		quest15.test_answers << TestAnswer.create(:name =>"В значительной степени.", :type_answer =>0)
+		quest15.test_answers << TestAnswer.create(:name =>"В полной мере.", :type_answer =>0)
+		quest15.test_answers << TestAnswer.create(:name =>"Другой ответ.", :type_answer =>1)
+
+	   	quest16 = TestQuestion.create(:name => "XVI -- в случае, когда это решение НЕ затрагивает существенно лично Вас?",:order_question =>16, :type_question => 0)
+		quest16.test = test	
+        quest16.test_answers << TestAnswer.create(:name =>"Вообще не интересовался(ась) бы этим.", :type_answer =>0)
+		quest16.test_answers << TestAnswer.create(:name =>"Ни в малейшей степени", :type_answer =>0)
+		quest16.test_answers << TestAnswer.create(:name =>"В небольшой мере", :type_answer =>0)
+		quest16.test_answers << TestAnswer.create(:name =>"В значительной степени.", :type_answer =>0)
+		quest16.test_answers << TestAnswer.create(:name =>"В полной мере.", :type_answer =>0)
+		quest16.test_answers << TestAnswer.create(:name =>"Другой ответ.", :type_answer =>1)
+
+
+	   	quest17 = TestQuestion.create(:name => "XVII. Участвуя в принятии решения, считаете ли Вы правильным НЕ «тратить»
+время и силы на попытки анализировать процесс выработки решения и свои
+действия в нем как бы со стороны?",:order_question =>17, :type_question => 0)
+		quest17.test = test	
+        quest17.test_answers << TestAnswer.create(:name =>"Вообще не размышляю на эту тему", :type_answer =>0)
+		quest17.test_answers << TestAnswer.create(:name =>"Да, так как это отвлекает от самого принятия решения.", :type_answer =>0)
+		quest17.test_answers << TestAnswer.create(:name =>"Да, так как мне не известны эффективные методы оценки процесса выработки решения
+и своих действий в нем как бы со стороны.", :type_answer =>0)
+		quest17.test_answers << TestAnswer.create(:name =>"Нет, я бы предпочел(ла) время от времени анализировать процесс выработки решения и
+свои действия в нем как бы со стороны, однако не знаю, как это эффективно делать..", :type_answer =>0)
+		quest17.test_answers << TestAnswer.create(:name =>"Нет, я бы использовал(а) для этого известные мне рациональные методы.", :type_answer =>0)
+		quest17.test_answers << TestAnswer.create(:name =>"Другой ответ.", :type_answer =>1)
+
+	   	quest18 = TestQuestion.create(:name => "XVIII. В какой мере Вас интересует вопрос благополучия Института Открытого
+Образования?",:order_question =>18, :type_question => 0)
+		quest18.test = test	
+        quest18.test_answers << TestAnswer.create(:name =>"Вообще не ставил(а) перед собой такой вопрос.", :type_answer =>0)
+		quest18.test_answers << TestAnswer.create(:name =>"Ни в малейшей степени", :type_answer =>0)
+		quest18.test_answers << TestAnswer.create(:name =>"В небольшой мере", :type_answer =>0)
+		quest18.test_answers << TestAnswer.create(:name =>"В значительной степени.", :type_answer =>0)
+		quest18.test_answers << TestAnswer.create(:name =>"В полной мере.", :type_answer =>0)
+		quest18.test_answers << TestAnswer.create(:name =>"Другой ответ.", :type_answer =>1)
+		
+		quest18.save!
+		quest17.save!
+		quest16.save!
+		quest15.save!
+		quest14.save!
+		quest13.save!
 		quest12.save!
 		quest11.save!
 		quest10.save!

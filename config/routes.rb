@@ -50,6 +50,7 @@ CollectiveMind::Application.routes.draw do
        put :archive
        put :to_expert
        put :expert_accept
+       put :expert_accept_with_replacement
        put :expert_decline
        get :edit_to_struct
        get :edit_to_expert

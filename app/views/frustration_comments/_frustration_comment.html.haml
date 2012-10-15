@@ -1,4 +1,7 @@
 / = link_to gravatar_for frustration_comment.user, :size => 20
+- if  @frustration.frustration_useful_comments.include? frustration_comment 
+	= image_tag('check.png')
+
 = link_to frustration_comment.user.name_title, frustration_comment.user,  :class=>'username'
 - if frustration_comment.negative and frustration_comment.user!=@frustration.user
 	= image_tag("bad.png", :alt => "Colleсtive mind", :height => 20 ) 
@@ -13,12 +16,13 @@
 	-if current_user?(@frustration.user)
 		%br=link_to " в архив, с помощью этого комментария", archive_frustration_path(@frustration.id,:author_comment =>frustration_comment.user),   :method => :put, :confirm => "Точно?", :title => @frustration.content
 		-if frustration_comment.replies.empty?
-			%i ответить
-			= form_for [@frustration, @frustration.frustration_comments.build], :html => { :id => 'form_reply' } do |f|
-				= f.text_area :content
-				= f.hidden_field :comment_id,{:value => frustration_comment.id}
-				.actions
-					= f.submit '',   class: "savebtn"
+			%div{:style=> 'margin-left:40px;'}
+				%i ответить
+				= form_for [@frustration, @frustration.frustration_comments.build], :html => { :id => 'form_reply' } do |f|
+					= f.text_area :content
+					= f.hidden_field :comment_id,{:value => frustration_comment.id}
+					.actions
+						= f.submit '',   class: "savebtn"
 	%div{:style=> 'margin-left:40px;'}
 		= render frustration_comment.replies
 			

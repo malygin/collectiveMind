@@ -16,9 +16,12 @@ class FrustrationsController < ApplicationController
 				@frustration.status = 2
 				@frustration.structuring_date = Time.now
 			end
+			if current_user.admin?
+				@frustration.status =4
+			end
 			if @frustration.save
 				flash[:success] = "Недовольство добавлено в список!"
-				redirect_to root_path
+				redirect_to current_user
 			else
 				@frustrations_feed=[]
 				render "pages/home"
@@ -56,12 +59,35 @@ class FrustrationsController < ApplicationController
 	def expert_accept
 		@frustration = Frustration.find(params[:id])
 		@frustration.update_column(:status, 4)
+		update_scores_for_comments(Settings.scores.expert.allow, Settings.scores.expert )
+		flash[:success] = "Недовольство принято"
+		redirect_to user_path(current_user)
+	end
+
+	def update_scores_for_comments( score_max, scores)
 		unless @frustration.struct_user.nil?
-			@frustration.user.update_column(:score, @frustration.user.score + Settings.scores.expert.allow*0.6)
-			@frustration.struct_user.update_column(:score, @frustration.struct_user.score + Settings.scores.expert.allow*0.4)
-		else
-			@frustration.user.update_column(:score, @frustration.user.score + Settings.scores.expert.allow)
+			@frustration.struct_user.update_column(:score, @frustration.struct_user.score + score_max*scores.ratio_for_structuring_comment)
+			score_max = score_max - score_max * scores.ratio_for_structuring_comment
 		end
+		unless @frustration.frustration_useful_comments.nil?
+			length = @frustration.frustration_useful_comments.length
+			for comment in @frustration.frustration_useful_comments
+				comment.user.update_column(:score, comment.user.score + (score_max*scores.ratio_for_negative_comment)/length)
+			end
+			score_max = score_max - score_max * scores.ratio_for_negative_comment
+		end
+		@frustration.user.update_column(:score, @frustration.user.score + score_max)
+	end
+
+
+	def expert_accept_with_replacement
+		# remove existing frustrations
+		@frustration_for_remove = Frustration.find(params[:accepted_frustrations])
+		@frustration_for_remove.update_column(:status, 5)
+		# add scores and move frustration to accepted
+		@frustration = Frustration.find(params[:id])
+		@frustration.update_column(:status, 4)
+		update_scores_for_comments(Settings.scores.expert.allow_with_replacement, Settings.scores.expert )
 		flash[:success] = "Недовольство принято"
 		redirect_to user_path(current_user)
 	end
@@ -113,32 +139,39 @@ class FrustrationsController < ApplicationController
 			:wherin => params[:frustration][:wherin],
 			:when => params[:frustration][:when],
 			:structuring_date => Time.now, :status => 2 )
-		flash[:success] = "Недовольство  формализовано"
-		redirect_to root_path
+		flash[:success] = "Недовольство  оформлено"
+		redirect_to '/structure'
 	end	
 
 	def update_to_expert
 		@frustration = Frustration.find(params[:id])
-		puts params
-		# @user = User.where(:id => (params[:author_comment])).first
-
-		# @frustration.update_attributes(:what_old => @frustration.what,
-		# 	:wherin_old => @frustration.wherin,
-		# 	:when_old => @frustration.when,
-		# 	:content_text_old => @frustration.content_text,
-		# 	:struct_user => @user, 
-		# 	:what => params[:frustration][:what],
-		# 	:wherin => params[:frustration][:wherin],
-		# 	:when => params[:frustration][:when],
-		# 	:structuring_date => Time.now, :status => 2 )
-		# flash[:success] = "Недовольство  формализовано"
-		redirect_to root_path
+		unless params[:comment].nil?
+			for comment_id in params[:comment].keys
+				useful_comment = FrustrationComment.find(comment_id)
+				useful_comment.useful_frustration_id = @frustration.id
+				useful_comment.save
+			end
+		end
+		@frustration.update_attributes(
+			:what_expert => params[:frustration][:what],
+			:wherin_expert => params[:frustration][:wherin],
+			:when_expert => params[:frustration][:when], :status => 3 )
+		flash[:success] = "Недовольство  отправлено эксперту"
+		redirect_to '/accepted'
 	end
 
 	def show
 		@negative = params[:negative].nil? ? true : to_bool(params[:negative]) 
 		#puts  @negative
 		@frustration = Frustration.find(params[:id])
+		if expert?
+			@accepted_frustrations = Frustration.feed_accepted
+			render 'show_for_expert'
+		elsif admin?
+			render 'show_for_admin'
+		else
+			render 'show'
+		end
 	end
 
 	private 

@@ -10,13 +10,17 @@
 		Добавлено  недовольств - 
 		= @user.frustrations.count
 
-- if active_form_frustration?
-	= render "shared/frustration_form"
+-if @user.frustrations.count == Settings.max_frustration 
+	.notification Вы не можете добавить, потому что добавили уже максимальное количество
+-elsif @user.structured_and_unstructured.count != 0
+	.notification У вас есть недовольство, не отправленная в архив или эксперту
+-elsif @user.test_attempts.empty?
+	.notification 
+		Сначала пройдите социологический опрос
+		=link_to " по ссылке", '/tests'
 -else
-	-if @user.frustrations.count == Settings.max_frustration 
-		.notification Вы не можете добавить, потому что добавили уже максимальное количество
-	-else
-		.notification У вас есть недовольство, не отправленная в архив или эксперту
+	= render "shared/frustration_form"
+
 
 - unless @user.frustrations.empty?
 	%table{:class => "frustrations"}

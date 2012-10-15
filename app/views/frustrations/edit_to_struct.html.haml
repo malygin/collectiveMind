@@ -2,23 +2,25 @@
 
 .notification На основе своего недовольства попытайтесь оформить его в окончательном виде. Внимание! Именно в таком виде оно попадет к эксперту. Будьте внимательны.
 %br
-= form_for @frustration, :url => update_to_struct_frustration_path(@frustration.id,  :author_comment => @author_comment) do |f|
-	=render 'shared/error_messages', :object =>f.object
-	%label Чем вы недовольны?
-	.field
-		=f.text_area :what
-	%br
-	%label Где это происходит?
-	.field
-		=f.text_area :wherin
-	%br
-	%label Во время чего?
-	.field
-		=f.text_area :when
+= render 'frustrations/form', :url  => update_to_struct_frustration_path(@frustration.id,  :author_comment => @author_comment)
+/ = form_for @frustration, :url =>  do |f|
+/ 	=render 'shared/error_messages', :object =>f.object
+/ 	%label Чем вы недовольны?
+/ 	.field
+/ 		=f.text_area :what
+/ 	%br
+/ 	%label Где это происходит?
+/ 	.field
+/ 		=f.text_area :wherin
+/ 	%br
+/ 	%label Во время чего?
+/ 	.field
+/ 		=f.text_area :when
 
-	.action
-		=f.submit '', class: 'btn'
+/ 	.action
+/ 		=f.submit '', class: 'btn'
 
+%b Текст вашего недовольства
 = @frustration.content
 
 

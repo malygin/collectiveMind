@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121008120756) do
+ActiveRecord::Schema.define(:version => 20121015105112) do
 
   create_table "answers", :force => true do |t|
     t.string   "text"
@@ -178,6 +178,7 @@ ActiveRecord::Schema.define(:version => 20121008120756) do
     t.datetime "end_date"
     t.datetime "created_at",  :null => false
     t.datetime "updated_at",  :null => false
+    t.text     "preview"
   end
 
   add_index "tests", ["begin_date"], :name => "index_tests_on_begin_date"

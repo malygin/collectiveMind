@@ -4,7 +4,7 @@ class Frustration < ActiveRecord::Base
   #4 -allow expert, 5 -deny expert
   attr_accessible  :status, :struct_user,:structuring_date, :trash, 
   :what, :wherin, :when, :what_old, :wherin_old, :when_old, :what_expert, :wherin_expert, 
-  :when_expert, :content_text, :content_text_old 
+  :when_expert, :content_text, :content_text_old, :frustration_useful_comments
 
 
   belongs_to :user
@@ -20,7 +20,7 @@ class Frustration < ActiveRecord::Base
   validates :user_id, :presence => true
 
   has_many :frustration_comments, :dependent => :destroy
-  has_many :frustration_useful_comments, :class_name =>'frustration_comment',
+  has_many :frustration_useful_comments, :class_name =>'FrustrationComment',
   :foreign_key => 'useful_frustration_id',  :dependent => :destroy
 
   default_scope :order => 'frustrations.created_at DESC'
@@ -84,10 +84,12 @@ class Frustration < ActiveRecord::Base
   end
   
   def content
-    unless self.what.nil?
-      return self.what + " " +self.wherin + " " + self.when
+    if not self.what_expert.nil?
+     'что: '+ self.what_expert + "; когда: " + self.wherin_expert + "; где: " + self.when_expert
+    elsif not self.what.nil?
+      'что: '+self.what + "; когда: " +self.when + "; где: " + self.wherin
     else
-      return self.content_text
+      self.content_text
     end
   end
 
@@ -97,8 +99,11 @@ class Frustration < ActiveRecord::Base
     elsif self.what_old.nil?
       return nil
     else   
-      self.what_old + " " +self.wherin_old + " " + self.when_old
+      'что: '+self.what_old + "; когда: " +self.when_old + "; где: " + self.wherin_old
     end
+  end
+  def content_before_expert 
+    'что: '+self.what + "; когда: " +self.when + "; где: " + self.wherin
   end
 
   def expert_content

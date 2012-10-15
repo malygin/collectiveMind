@@ -23,7 +23,10 @@ defaults: &defaults
       abuse_frustration: -20
       denial_for_negative_comment: 10
     expert:
-      allow: 100
+      allow: 50
+      ratio_for_structuring_comment: 0.4
+      ratio_for_negative_comment: 0.2
+      allow_with_replacement: 100
       deny_with_negative: -50
 
 

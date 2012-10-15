@@ -11,13 +11,17 @@
 				= feed_item.content
 			-else 
 				= feed_item.content
-			=feed_item.expert_content
 
 			- if  (not current_page?(frustration_path(feed_item)) and signed_in? and not feed_item.archive?)				
 				= link_to 'подробнее', feed_item
+			- unless feed_item.what_expert.nil?
+				%br
+				%small текст до отправки эксперту
+				%span{:class => "timestamp"}=feed_item.content_before_expert
+
 			- unless feed_item.old_content.nil?
 				%br
-				%small текст неструктурированной -
+				%small текст неоформленной -
 				%span{:class => "timestamp"}=feed_item.old_content
 
 

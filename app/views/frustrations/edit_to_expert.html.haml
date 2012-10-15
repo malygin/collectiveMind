@@ -21,7 +21,7 @@
 	.notification Комментарии, которые вы можете указать, как оказавшие вам помощь
 
 	- @frustration.comments_after_structuring.each do |comment|
-		=check_box_tag 'comment_'+comment.id.to_s, comment.id 
+		=check_box_tag "comment[#{comment.id}]" 
 		=comment.content
 		%br
 
