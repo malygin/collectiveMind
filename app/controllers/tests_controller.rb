@@ -6,7 +6,9 @@ class TestsController < ApplicationController
 
   def save_attempt
     test_questions = params[:test_questions]
-    puts "______"
+    text_questions = params[:text_questions]
+    #puts params[:text_questions]
+    #puts params[:test_questions]
     @test = Test.find(params[:id])
     test_attempt = TestAttempt.create()
     test_attempt.user = current_user
@@ -14,9 +16,17 @@ class TestsController < ApplicationController
     test_attempt.save!
     @test.test_questions.each  do |q|
       question_attempt =TestQuestionAttempt.create(:test_attempt => test_attempt, :test_question => q)
-     
-      unless test_questions.nil? or test_questions[q.id.to_s].nil? 
-        question_attempt.answer = test_questions[q.id.to_s]
+      if test_questions[q.id.to_s].nil? and text_questions[q.id.to_s]== ''
+          flash[:error] = "Вы ответили не на Все вопросы, будьте внимательны"
+          test_attempt.destroy
+          return redirect_to @test
+      else
+        if  text_questions[q.id.to_s]!= ''
+          question_attempt.answer = text_questions[q.id.to_s]
+        else
+          question_attempt.answer = test_questions[q.id.to_s]
+        end
+        #puts question_attempt.answer
         question_attempt.save!
       end
     end
@@ -36,10 +46,14 @@ class TestsController < ApplicationController
   # GET /tests/1
   # GET /tests/1.json
   def show
-    @test = Test.find(params[:id])
-    respond_to do |format|
-      format.html # show.html.erb
-      format.json { render json: @test }
+    if current_user.test_attempts.empty?
+      @test = Test.find(params[:id])
+      respond_to do |format|
+        format.html # show.html.erb
+        format.json { render json: @test }
+      end
+    else
+      redirect_to '/tests'
     end
   end
 

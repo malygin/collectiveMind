@@ -5,7 +5,7 @@
 	Также прочитайте документ как заработать балы 
 	=link_to 'здесь', '/about'
 %ul
-	%li=link_to 'Авторизация в системе', :anchor => "01"
+	%li=link_to 'Авторизация в системе', :anchor => "01", :name => 'top'
 	%li=link_to 'Добавление недовольства', :anchor => "02"
 	%li=link_to 'Произвольное недовольство собирает комментарии', :anchor => "03"
 	%li=link_to 'Через три дня оформляем недовольство', :anchor => "04"
@@ -18,9 +18,16 @@
 %br
 
 =link_to image_tag( 'help/01.jpg', :width => '700px'), '/assets/help/01.jpg', :name =>'01'
+=link_to 'наверх', '/help#top'
 =link_to image_tag( 'help/02.jpg', :width => '700px'), '/assets/help/02.jpg', :name =>'02'
+=link_to 'наверх', '/help#top'
 =link_to image_tag( 'help/03.jpg', :width => '700px'), '/assets/help/03.jpg', :name =>'03'
+=link_to 'наверх', '/help#top'
 =link_to image_tag( 'help/04.jpg', :width => '700px'), '/assets/help/04.jpg', :name =>'04'
+=link_to 'наверх', '/help#top'
 =link_to image_tag( 'help/05.jpg', :width => '700px'), '/assets/help/05.jpg', :name =>'05'
+=link_to 'наверх', '/help#top'
 =link_to image_tag( 'help/06.jpg', :width => '700px'), '/assets/help/06.jpg', :name =>'06'
+=link_to 'наверх', '/help#top'
 =link_to image_tag( 'help/07.jpg', :width => '700px'), '/assets/help/07.jpg', :name =>'07'
+=link_to 'наверх', '/help#top'

@@ -1,6 +1,6 @@
 %h1=@title
-- if signed_in? and (user? or admin?)
-	= link_to image_tag('/assets/add_dissatisfaction.png'), current_user
+/ - if signed_in? and (user? or admin?)
+/ 	= link_to image_tag('/assets/add_dissatisfaction.png'), current_user
 / - if active_form_frustration?
 / 	%h1{:class => "frustration"} Добавить неудовлетворенность
 / 	= render "shared/frustration_form"
