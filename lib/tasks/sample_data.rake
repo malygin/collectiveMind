@@ -235,7 +235,7 @@ XV -- в случае, когда это решение существенно �
 		quest18.test_answers << TestAnswer.create(:name =>"В полной мере.", :type_answer =>0)
 		quest18.test_answers << TestAnswer.create(:name =>"Другой ответ.", :type_answer =>1)
 
-	   	quest19 = TestQuestion.create(:name => "XIX. С кем из ближайшего окружения Вы обычно обсуждаете волнующие Вас
+	   	quest19 = TestQuestion.create(:name => "XIX. С кем из ближайшего окружения Вы чаще всего обсуждаете волнующие Вас
 проблемы? ",:order_question =>19, :type_question => 0)
 		quest19.test = test	
         quest19.test_answers << TestAnswer.create(:name =>"С членами семьи, родственниками.", :type_answer =>0)
@@ -306,12 +306,21 @@ XV -- в случае, когда это решение существенно �
 			:login => "pisynka",
 			:password => "pascal2003",
 			:password_confirmation => "pascal2003")
+		
 		admin = User.create!(:name => "Олег",
 			:surname => "Савельзон",
 			:email =>"pprsgu@gmail.com",
 			:password => "admin",
 			:password_confirmation => "admin")
 		admin.toggle!(:admin)
+
+		admin2 = User.create!(:name => "Илья",
+			:surname => "Шугурин",
+			:email =>"ilbazer@gmail.com",
+			:password => "mass45",
+			:password_confirmation => "mass45")
+		admin2.toggle!(:admin)
+
 		expert = User.create!(:name => "Поликарп",
 			:surname => "Экспертов",
 			:email =>"expert@expert.com",

@@ -11,14 +11,14 @@ defaults: &defaults
 # баллы
   scores:
     unstructure:
-      violation_comment: -1
-      abuse_comment: -10
+      violation_comment: -5
+      abuse_comment: -20
       violation_frustration: -10
       abuse_frustration: -20
       denial_for_negative_comment: 10
     structure:
-      violation_comment: -1
-      abuse_comment: -10
+      violation_comment: -5
+      abuse_comment: -20
       violation_frustration: -10
       abuse_frustration: -20
       denial_for_negative_comment: 10
