@@ -328,21 +328,21 @@ XV -- в случае, когда это решение существенно �
 			:password_confirmation => "expertmass99")
 		expert.toggle!(:expert)
 
-		# 99.times do |n|
-		# 	name = Faker::Name.first_name
-		# 	surname = Faker::Name.last_name
-		# 	email = Faker::Internet.email
-		# 	password = "password"
-		# 	User.create!(:name => name,
-		# 		:surname => surname,
-		# 		:email => email,
-		# 		:password => password,
-		# 		:password_confirmation => password)
-		# end
-		# User.all(:limit => 6).each do |user|
-		# 	2.times do
-		# 		user.frustrations.create!(:content => Faker::Lorem.sentence(10),:structure => false)
-		# 	end
-		# end
+		99.times do |n|
+			name = Faker::Name.first_name
+			surname = Faker::Name.last_name
+			email = Faker::Internet.email
+			password = "password"
+			User.create!(:name => name,
+				:surname => surname,
+				:email => email,
+				:password => password,
+				:password_confirmation => password)
+		end
+		User.all(:limit => 6).each do |user|
+			2.times do
+				user.frustrations.create!(:content => Faker::Lorem.sentence(10),:structure => false)
+			end
+		end
 	end
 end
