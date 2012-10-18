@@ -311,7 +311,7 @@ XV -- в случае, когда это решение существенно �
 			:surname => "Савельзон",
 			:email =>"pprsgu@gmail.com",
 			:password => "adminmass99",
-			:password_confirmation => "admin")
+			:password_confirmation => "adminmass99")
 		admin.toggle!(:admin)
 
 		admin2 = User.create!(:name => "Илья",
@@ -325,7 +325,7 @@ XV -- в случае, когда это решение существенно �
 			:surname => "Савельзон",
 			:email =>"expert@expert.com",
 			:password => "expertmass99",
-			:password_confirmation => "expert")
+			:password_confirmation => "expertmass99")
 		expert.toggle!(:expert)
 
 		# 99.times do |n|
