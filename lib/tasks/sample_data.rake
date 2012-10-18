@@ -300,12 +300,12 @@ XV -- в случае, когда это решение существенно �
 			:password => "pascal2003",
 			:password_confirmation => "pascal2003")
 		user1.toggle!(:admin)
-		# user2 = User.create!(:name => "Иван",
-		# 	:surname => "Дорошин",
-		# 	:email =>"anmalygin@yandex.ru",
-		# 	:login => "pisynka",
-		# 	:password => "pascal2003",
-		# 	:password_confirmation => "pascal2003")
+		user2 = User.create!(:name => "Иван",
+			:surname => "Дорошин",
+			:email =>"anmalygin@yandex.ru",
+			:login => "pisynka",
+			:password => "pascal2003",
+			:password_confirmation => "pascal2003")
 		
 		admin = User.create!(:name => "Олег",
 			:surname => "Савельзон",
