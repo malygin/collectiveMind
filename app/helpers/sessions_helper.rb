@@ -5,6 +5,10 @@ module SessionsHelper
 		cookies.permanent.signed[:remember_token] = [user.id, user.salt]
 		self.current_user = user
 	end
+	
+	def journal_enter
+  		current_user.journals.build(:type=>'enter').save!
+  	end
 
 	def sign_out
 		cookies.delete(:remember_token)

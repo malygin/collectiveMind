@@ -299,18 +299,18 @@ XV -- в случае, когда это решение существенно �
 			:login => "malyginav",
 			:password => "pascal2003",
 			:password_confirmation => "pascal2003")
-		#user1.toggle!(:admin)
-		user2 = User.create!(:name => "Иван",
-			:surname => "Дорошин",
-			:email =>"anmalygin@yandex.ru",
-			:login => "pisynka",
-			:password => "pascal2003",
-			:password_confirmation => "pascal2003")
+		user1.toggle!(:admin)
+		# user2 = User.create!(:name => "Иван",
+		# 	:surname => "Дорошин",
+		# 	:email =>"anmalygin@yandex.ru",
+		# 	:login => "pisynka",
+		# 	:password => "pascal2003",
+		# 	:password_confirmation => "pascal2003")
 		
 		admin = User.create!(:name => "Олег",
 			:surname => "Савельзон",
 			:email =>"pprsgu@gmail.com",
-			:password => "admin",
+			:password => "adminmass99",
 			:password_confirmation => "admin")
 		admin.toggle!(:admin)
 
@@ -321,10 +321,10 @@ XV -- в случае, когда это решение существенно �
 			:password_confirmation => "mass45")
 		admin2.toggle!(:admin)
 
-		expert = User.create!(:name => "Поликарп",
-			:surname => "Экспертов",
+		expert = User.create!(:name => "Олег",
+			:surname => "Савельзон",
 			:email =>"expert@expert.com",
-			:password => "expert",
+			:password => "expertmass99",
 			:password_confirmation => "expert")
 		expert.toggle!(:expert)
 

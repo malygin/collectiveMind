@@ -5,7 +5,7 @@
 - elsif current_user?(@frustration.user) and !have_negative_comments?(@frustration)
 	.notification 
 		У недовольства нет негативных комментариев, но вы все равно можете
-		=link_to " снять его с рассмотрения?", archive_frustration_path(@frustration), :method => :put, :confirm => "Точно?", :title => @frustration.content
+		=link_to " снять его с рассмотрения?", archive_frustration_path(@frustration), :method => :put, :confirm => "Уверены?"
 
 -elsif current_user?(@frustration.user)
 	.error Есть негативные  комментарии, чтобы снять с рассмотрения - воспользуйтесь ими
@@ -32,7 +32,7 @@
 		=link_to "отправить эксперту, предварительно отредактировав", edit_to_expert_frustration_path(@frustration),:method => :get, :confirm => "Уверены?"  
 
 - elsif current_user?(@frustration.user) 
-	/ %li Время  еще не пришло!
+	.notification Три дня еще не прошло, следите за состоянием своих недовольств в личном аккаунте.
 
 
 %table{:class => "frustrations"}

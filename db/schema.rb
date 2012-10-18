@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121015105112) do
+ActiveRecord::Schema.define(:version => 20121018081047) do
 
   create_table "answers", :force => true do |t|
     t.string   "text"
@@ -89,6 +89,18 @@ ActiveRecord::Schema.define(:version => 20121015105112) do
   add_index "frustrations", ["created_at"], :name => "index_frustrations_on_created_at"
   add_index "frustrations", ["status"], :name => "index_frustrations_on_status"
   add_index "frustrations", ["user_id"], :name => "index_frustrations_on_user_id"
+
+  create_table "journals", :force => true do |t|
+    t.integer  "user_id"
+    t.string   "type"
+    t.string   "body"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  add_index "journals", ["created_at"], :name => "index_journals_on_created_at"
+  add_index "journals", ["type"], :name => "index_journals_on_type"
+  add_index "journals", ["user_id"], :name => "index_journals_on_user_id"
 
   create_table "posts", :force => true do |t|
     t.string   "title"

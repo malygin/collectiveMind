@@ -3,11 +3,11 @@ defaults: &defaults
 # количество неудовлетворенностей на 1 человека
   max_frustration: 3
 # дней для принятия неструктурированной
-  days_accept_unstracture: 1
+  days_accept_unstracture: 3
 # дней лежит в архиве неструктурированная
   days_archive_unstracure: 5
 # дней для принятия структурированной 
-  days_accept_stracture: 1
+  days_accept_stracture: 3
 # баллы
   scores:
     unstructure:

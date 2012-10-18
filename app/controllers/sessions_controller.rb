@@ -12,9 +12,12 @@ class SessionsController < ApplicationController
   		render 'new'
   	else
   		sign_in user
+      journal_enter 
   		redirect_back_or '/accepted'
   	end
   end
+
+
 
   def destroy
   	sign_out

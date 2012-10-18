@@ -1,4 +1,6 @@
 CollectiveMind::Application.routes.draw do
+  get "journal/enter"
+
   resources :tests do
     member do
       put :save_attempt
