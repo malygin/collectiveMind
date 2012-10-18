@@ -26,6 +26,7 @@ CollectiveMind::Application.routes.draw do
   match "/contacts", :to => "pages#contacts"
   match "/help", :to => "pages#help"
   match "/home", :to => "pages#home"
+  match "/donot", :to => "pages#donot"
 
   match "/signin", :to => "sessions#new"
   match "/signout", :to => "sessions#destroy"
