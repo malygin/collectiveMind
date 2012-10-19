@@ -10,11 +10,11 @@
         %li.no_bg= link_to "НЕДОВОЛЬСТВА", "/"  
     %li
       %ul.bottom
-        %li= link_to "произвольные", '/unstructure' 
-        %li= link_to "оформленные", "/structure" 
-        %li= link_to "принятые", "/accepted"
-        %li= link_to "отклоненные", "/declined"
-        %li= link_to "архив", "/archive"
+        %li= link_to "произвольные", '/unstructure', class: cp('/unstructure') 
+        %li= link_to "оформленные", "/structure" , class: cp('/structure') 
+        %li= link_to "принятые", "/accepted", class: cp('/accepted') 
+        %li= link_to "отклоненные", "/declined", class: cp('/declined') 
+        %li= link_to "архив", "/archive", class: cp('/archive') 
   
 
 

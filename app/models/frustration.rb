@@ -79,6 +79,10 @@ class Frustration < ActiveRecord::Base
     self.status == 1
   end
 
+  def accepted? 
+    self.status == 4
+  end
+  
   def structured?
     self.status ==2
   end

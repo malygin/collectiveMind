@@ -25,11 +25,11 @@
 				%span{:class => "timestamp"}=feed_item.old_content
 
 
-
-		%span{:class => "comments"} 
-			негативные - 
-			= feed_item.negative.count
-			оформляющие -
-			= feed_item.structure.count
+		-unless feed_item.accepted?	
+			%span{:class => "comments"} 
+				негативные - 
+				= feed_item.negative.count
+				оформляющие -
+				= feed_item.structure.count
 
 
