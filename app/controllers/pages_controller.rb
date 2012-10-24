@@ -12,6 +12,9 @@ class PagesController < ApplicationController
   end
 
   def help
+  end  
+
+  def articles
   end
 
   def home
