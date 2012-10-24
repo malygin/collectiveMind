@@ -11,7 +11,7 @@
 	%p
 		= label :frustration_comment, :content, 'впишите его сюда' 
 		%br
-		= text_area :frustration_comment,:content
+		= text_area :frustration_comment,:content, :maxlength => 250
 		= hidden_field_tag :negative,  @negative
 	%p
 		= submit_tag '', class: 'btn'

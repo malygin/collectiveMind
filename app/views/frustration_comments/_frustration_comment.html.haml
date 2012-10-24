@@ -19,7 +19,7 @@
 			%div{:style=> 'margin-left:40px;'}
 				%i ответить
 				= form_for [@frustration, @frustration.frustration_comments.build], :html => { :id => 'form_reply' } do |f|
-					= f.text_area :content
+					= f.text_area :content, :maxlength => 250
 					= f.hidden_field :comment_id,{:value => frustration_comment.id}
 					.actions
 						= f.submit '',   class: "savebtn"

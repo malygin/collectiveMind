@@ -3,7 +3,7 @@
 %span{:class=>"dateinfo"}= Russian::strftime(frustration.created_at,  "%A, %1d %B %T")
 %span{:class=>"showinfo"}=link_to 'просмотреть', frustration, :class=>"showthis"
 %br
-=frustration.content
+=frustration.content.html_safe
 %div{:class => "comments"} 
 	негативные - 
 	= frustration.negative.count

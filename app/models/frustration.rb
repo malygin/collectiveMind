@@ -89,9 +89,9 @@ class Frustration < ActiveRecord::Base
   
   def content
     if not self.what_expert.nil?
-     'что: '+ self.what_expert + "; когда: " + self.wherin_expert + "; где: " + self.when_expert
+     '<b>что:</b> '+ self.what_expert + " <b> когда: </b>" + self.when_expert + " <b> где: </b>" + self.wherin_expert
     elsif not self.what.nil?
-      'что: '+self.what + "; когда: " +self.when + "; где: " + self.wherin
+      '<b>что:</b> '+self.what + " <b> когда:</b> " +self.when + " <b> где: </b>" + self.wherin
     else
       self.content_text
     end
@@ -103,11 +103,12 @@ class Frustration < ActiveRecord::Base
     elsif self.what_old.nil?
       return nil
     else   
-      'что: '+self.what_old + "; когда: " +self.when_old + "; где: " + self.wherin_old
+      '<b>что:</b> '+self.what_old + " <b> когда: </b>" +self.when_old + " <b> где: </b>" + self.wherin_old
     end
   end
+
   def content_before_expert 
-    'что: '+self.what + "; когда: " +self.when + "; где: " + self.wherin
+    ' <b> что: </b> '+self.what + " <b> когда:  </b>" +self.when + " <b> где: </b>" + self.wherin
   end
 
   def expert_content

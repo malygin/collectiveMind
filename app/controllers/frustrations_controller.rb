@@ -59,7 +59,7 @@ class FrustrationsController < ApplicationController
 	def expert_accept
 		@frustration = Frustration.find(params[:id])
 		@frustration.update_column(:status, 4)
-		update_scores_for_comments(Settings.scores.expert.allow, Settings.scores.expert )
+		update_scores_for_comments(Settings.scores.expert.allow, Settings.scores.expert) 
 		flash[:success] = "Недовольство принято"
 		redirect_to user_path(current_user)
 	end
@@ -69,13 +69,14 @@ class FrustrationsController < ApplicationController
 			@frustration.struct_user.update_column(:score, @frustration.struct_user.score + score_max*scores.ratio_for_structuring_comment)
 			score_max = score_max - score_max * scores.ratio_for_structuring_comment
 		end
-		unless @frustration.frustration_useful_comments.nil?
+		unless @frustration.frustration_useful_comments.nil? or @frustration.frustration_useful_comments.empty?
 			length = @frustration.frustration_useful_comments.length
 			for comment in @frustration.frustration_useful_comments
 				comment.user.update_column(:score, comment.user.score + (score_max*scores.ratio_for_negative_comment)/length)
 			end
 			score_max = score_max - score_max * scores.ratio_for_negative_comment
 		end
+		puts score_max
 		@frustration.user.update_column(:score, @frustration.user.score + score_max)
 	end
 
@@ -130,7 +131,7 @@ class FrustrationsController < ApplicationController
 		@frustration = Frustration.find(params[:id])
 		@user = User.where(:id => (params[:author_comment])).first
 
-		@frustration.update_attributes(:what_old => @frustration.what,
+		if @frustration.update_attributes(:what_old => @frustration.what,
 			:wherin_old => @frustration.wherin,
 			:when_old => @frustration.when,
 			:content_text_old => @frustration.content_text,
@@ -139,8 +140,13 @@ class FrustrationsController < ApplicationController
 			:wherin => params[:frustration][:wherin],
 			:when => params[:frustration][:when],
 			:structuring_date => Time.now, :status => 2 )
-		flash[:success] = "Недовольство  оформлено"
-		redirect_to '/structure'
+			flash[:success] = "Недовольство  оформлено"
+			redirect_to '/structure'
+		else 
+			flash[:error] = "Ошибка сохранения недовольства, следите за размером вашего недовольства!"
+			redirect_to :action => :edit_to_struct, :id => @frustration.id
+		end
+
 	end	
 
 	def update_to_expert
