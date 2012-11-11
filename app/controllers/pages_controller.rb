@@ -47,7 +47,6 @@ class PagesController < ApplicationController
       @frustrations_feed = Frustration.feed_unstructure.paginate(:page => params[:page])
       @users = User.only_simple_users.order('users.score DESC').limit(5) 
       @title = "Произвольные недовольства" 
-
       render 'home'
   end
 
@@ -60,6 +59,12 @@ class PagesController < ApplicationController
   def accepted_frustrations
     @frustrations_feed = Frustration.feed_accepted.paginate(:page => params[:page])
     @title = "Принятые на данный момент недовольства"
+    render 'home'
+  end    
+
+   def voted_frustrations
+    @frustrations_feed = Frustration.feed_voted.paginate(:page => params[:page])
+    @title = "Недовольства на голосовании"
     render 'home'
   end   
 

@@ -21,6 +21,9 @@ class User < ActiveRecord::Base
   has_many :negatived_frustrations, :class_name => "Frustration", :foreign_key =>"negative_user_id"
   has_many :structured_frustrations, :class_name => "Frustration", :foreign_key =>"struct_user_id"
 
+  has_many :voitings
+  has_many :voited_frustrations, :class_name =>'Frustration', :through => :voitings
+
   email_regex = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
   validates :name, :presence => true,
   				   :length => { :maximum => 50 }

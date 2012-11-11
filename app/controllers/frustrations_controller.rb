@@ -17,8 +17,13 @@ class FrustrationsController < ApplicationController
 				@frustration.structuring_date = Time.now
 			end
 			if current_user.admin?
-				@frustration.status =4
+				@frustration.status = 4
 			end
+			
+			if current_user.expert?
+				@frustration.status = 6 
+			end
+
 			if @frustration.save
 				flash[:success] = "Недовольство добавлено в список!"
 				redirect_to current_user

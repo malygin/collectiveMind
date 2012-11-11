@@ -22,6 +22,8 @@ class UsersController < ApplicationController
 		# end
 		if @user.expert?
 			@frustrations = Frustration.feed_to_expert.paginate(:page => params[:page])
+			@frustration = Frustration.new 
+
 			render 'show_expert'
 		elsif @user.admin?
 			@frustration = Frustration.new 

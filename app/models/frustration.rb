@@ -1,7 +1,7 @@
 # encoding: utf-8
 class Frustration < ActiveRecord::Base
   #status 0 -unstructed, 1 -archive, 2 - structed, 3 -to expert, 
-  #4 -allow expert, 5 -deny expert
+  #4 -allow expert, 5 -deny expert, 6 - for voiting
   attr_accessible  :status, :struct_user,:structuring_date, :trash, 
   :what, :wherin, :when, :what_old, :wherin_old, :when_old, :what_expert, :wherin_expert, 
   :when_expert, :content_text, :content_text_old, :frustration_useful_comments
@@ -22,6 +22,9 @@ class Frustration < ActiveRecord::Base
   has_many :frustration_comments, :dependent => :destroy
   has_many :frustration_useful_comments, :class_name =>'FrustrationComment',
   :foreign_key => 'useful_frustration_id',  :dependent => :destroy
+
+  has_many :voitings
+  has_many :voited_users, :class_name =>'User', :through => :voitings
 
   default_scope :order => 'frustrations.created_at DESC'
 
@@ -52,6 +55,10 @@ class Frustration < ActiveRecord::Base
 
   def self.feed_declined
     Frustration.where(:status => 5)
+  end 
+
+  def self.feed_voted
+    Frustration.where(:status => 6)
   end
 
   def negative
@@ -84,8 +91,14 @@ class Frustration < ActiveRecord::Base
   end
   
   def structured?
-    self.status ==2
+    self.status == 2
   end
+
+  def voted?
+    self.status == 6
+  end
+  
+
   
   def content
     if not self.what_expert.nil?
