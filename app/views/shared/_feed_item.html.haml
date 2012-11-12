@@ -31,5 +31,9 @@
 				= feed_item.negative.count
 				оформляющие -
 				= feed_item.structure.count
-
+		-if feed_item.voted?
+			%br
+			= link_to 'за', ''
+			= link_to 'против', ''
+			= link_to 'все равно', ''
 

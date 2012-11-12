@@ -210,6 +210,7 @@ DEPENDENCIES
   jquery-rails
   json
   launchy
+  libv8 (= 3.3.10.4)
   linecache19!
   pg
   quiet_assets

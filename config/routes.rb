@@ -37,6 +37,7 @@ CollectiveMind::Application.routes.draw do
   match "/to_expert", :to => "pages#to_expert_frustrations"
   match "/accepted", :to => "pages#accepted_frustrations"  
   match "/declined", :to => "pages#declined_frustrations"    
+  match "/voted", :to => "pages#voted_frustrations"    
 
 
   #get "users/new"
