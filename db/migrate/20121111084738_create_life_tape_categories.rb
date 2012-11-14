@@ -7,5 +7,6 @@ class CreateLifeTapeCategories < ActiveRecord::Migration
 
       t.timestamps
     end
+
   end
 end

@@ -5,8 +5,11 @@ class CreateLifeTapePosts < ActiveRecord::Migration
       t.integer :user_id
       t.integer :post_id
       t.integer :category_id
-
       t.timestamps
     end
+    add_index :life_tape_posts, :user_id
+    add_index :life_tape_posts, :category_id
+    add_index :life_tape_posts, :post_id
+    add_index :life_tape_posts, :created_at
   end
 end

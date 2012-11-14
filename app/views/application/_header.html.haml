@@ -1,0 +1,49 @@
+= link_to image_tag("logo.png", :alt => "Colleсtive mind", :class => "round", ), root_path
+= image_tag("improve.png")    
+- if signed_in?
+
+  .blackbut
+    = image_tag('exit.png')
+    = link_to "Выйти", "/signout", class: "exit"
+  .greybut
+    = link_to image_tag('edit.png'), edit_user_path(current_user)
+    = link_to current_user.name+" "+current_user.surname, user_path(current_user), class: "username"
+-else
+  %span.blackbut
+    = image_tag('exit.png')
+    = link_to "Войти", "/signin", class: "exit"
+
+.stages
+  %ul
+    %li{ :class => cp('/accepted')}
+      = image_tag image_for_stages("1", '/accepted'), :class => 'numbers'
+      = link_to "Недовольства", "/accepted", class: "lstages"  
+    = image_tag "space.png"  
+    %li{ :class => cp('/life_tape/posts')}
+      = image_tag image_for_stages("2", '/life_tape/posts'), :class => 'numbers'
+      = link_to "Сбор сведений и идей", "/life_tape/posts/", class: "lstages" 
+    = image_tag "space.png"  
+    %li
+      = image_tag "3disabled.png", :class => 'numbers'
+      %span.lstagesdisabled  Концепции
+    = image_tag "space.png"  
+
+    %li
+      = image_tag "4disabled.png", :class => 'numbers'
+      %span.lstagesdisabled Проекты
+    = image_tag "space.png"  
+
+    %li
+      = image_tag "5disabled.png", :class => 'numbers'
+      %span.lstagesdisabled Оценивание и выбор
+
+.menu
+  %ul
+    %li= link_to "Помощь", "/help" , class: "lmenu"
+    %li= image_tag "separator.png", :class => "separator" 
+    %li= link_to "Опрос", "/tests" , class:  "lmenu"
+    %li= image_tag "separator.png", :class => "separator"
+    %li= link_to "Вопросы-ответы", "/questions" , class:  "lmenu"
+    %li= image_tag "separator.png", :class => "separator"
+    %li= link_to "Комментарии эксперта", "/articles" , class:  "lmenu"
+

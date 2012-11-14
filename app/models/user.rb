@@ -1,3 +1,4 @@
+# encoding: utf-8
 require 'digest'
 
 class User < ActiveRecord::Base
@@ -58,6 +59,19 @@ class User < ActiveRecord::Base
   def name_title
     self.name + " "+self.surname
   end
+
+  def role_name
+    if self.admin
+      "модератор"
+    elsif self.expert
+      "эксперт"
+    else 
+      "студент"
+    end
+  end
+ 
+      
+
 
   def self.only_simple_users
     User.where(:admin => false).where(:expert => false)

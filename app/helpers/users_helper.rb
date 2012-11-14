@@ -14,7 +14,7 @@ module UsersHelper
 		# 	end
 		# end
 		gravatar_image_tag(user.email.downcase, :alt => user.name, :align => 'left',
-			:class =>'gravatar', :gravatar => options)
+			:class =>'avatar', :gravatar => options)
 	end
 
 	def available_form_adding_frustration?(user)

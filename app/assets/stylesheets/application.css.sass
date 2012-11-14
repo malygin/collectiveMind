@@ -1,29 +1,16 @@
-$main_color:  #676767
-$main_link: #468800
-$link: #7d9f00
-$header: #248EC5
 
 *
   margin: 0
   padding: 0
 
-html
-  height: 100%
-
 body
-  font: 12px Helvetica, Arial, Tahoma, Verdana, sans-serif
-  color: #666666
-  height: 100%
-  border: 0
-  margin: 0
-  outline: 0
-  padding: 0
-  vertical-align: baseline
-  line-height: 18px
-  text-align: justify
+  font: 12px/18px Helvetica, Arial, sans-serif
+  width: 100%
+  background: #e7e7e7
+  color: #474747
 
 a
-  color: blue
+  color: 029cc4
   outline: none
   text-decoration: underline
 
@@ -31,11 +18,12 @@ a:hover
   text-decoration: none
 
 p
-  margin: 0 0 18px
+  margin: 0px
+  padding: 5px 0px 0px 0px
+  text-align: justify
  
 img 
   border: none
-  margin: 3px
   .gravatar
     float: left
     vertical-align: middle
@@ -55,127 +43,147 @@ input
 
 
 #wrapper 
-  width: 1000px
+  width: 1160px
   margin: 0 auto
-  min-height: 100%
-  height: auto !important
-  height: 100%
 
 
 
 /* Header
 /*-----------------------------------------------------------------------------*/
 
-#top 
-  background: url(bluetop.jpg) repeat-x
-  height: 38px
-  text-align: right
-  padding-right: 40px
-  .theme
-    float: left
-    color: white
-    font-size: 14px
-    font-weight: bold
-    margin-top: 10px
-    margin-left: 10px
-
-  img
-    padding: 10px 0px 0px 15px
-    align: left
-  a
-    color: white
-    font-size: 13px
-    text-decoration: none
 
 #header
-  height: 144px
-  background: url(greyheader.jpg)
-  padding-right: 27px 
+  height: 200px
+  padding: 20px 0px 0px 0px
 
-  img 
-    padding-top: 5px
-    margin-left: 60px
-   
-  a:link, a:active, a:visited 
-    color: #535353
-    font-size: 14px
-    text-align: right
-    text-shadow: 1px 1px white
-    text-decoration: underline
-    vertical-align: middle
-    padding: 0px 0px 0px 15px
+.login 
+  vertical-align: top
+  display: inline-block
+  padding: 0px 0px 0px 0px
 
-  a:hover
-    color: #0079d7
-  
-  ul.username
-    float: right
-    padding-right: 10px
-    li
-      list-style-type: none
+
+
+.greybut 
+  background: url(loginbg.png) 
+  height: 30px
+  vertical-align: top
+  display: inline-block
+  padding: 0px 10px 0px 10px
+  text-align:right
+  position: relative
+  float: right
+  img
+    padding-top: 4px
+
+
+
+.blackbut 
+  background: url(black_but.png)no-repeat
+  height: 30px
+  width: 84px
+  vertical-align: top
+  display: inline-block
+  position: relative
+  float: right
+  padding: 4px 10px 0px 10px
+ 
+a.username 
+  color: #474747
+  text-decoration: none
+  font-size: 13px
+  padding: 0px 0px 6px 3px
+
+a.exit 
+  color: #c6c6c6
+  text-decoration: none
+  font-size: 13px
+  padding: 8px
+
+div.stages
+  background: url(stages.png) no-repeat
+  width: 1160px
+  height: 52px
+  padding: 0px 0px 15px 30px
+  margin: 30px 0px 0px 0px
+  ul 
+    list-style-type: none
+    margin-left: 0
+    padding-left: 0
+    width: 100%
+    li 
       display: inline-block
-      padding: 4px 0px 0px 0px !important
-
-    a:link, a:active, a:visited 
-      color: white
-    a:hover 
-      color: $main_link
-
-  ul.main_menu
-    white-space: nowrap
-    margin-top: 30px 
-    padding: 0
-    width: 600px
-    li
-      list-style-type: none
-    ul.top
-      background: url(menu_bg.png)
-      height: 39px
-      li
-        padding-top: 10px
-        padding-right: 10px
-      li.no_bg
-        background: url(blue.jpg)
-        height: 39px
-        a
-          color: white 
-          text-shadow: none
-          text-decoration: none
-
-    ul.bottom
-      background: url(blue.jpg)
-      height: 39px
-      paddint-right: 10px
-      li
-        padding-top: 10px
-      a
-        color: white 
-        text-shadow: none
-      a.current
-        text-decoration: none
-        font-weight: bold
-
-    li ul li
-      list-style-type: none
-      display: inline-block
-    float: right
+      padding: 12px 12px 0px 12px
+    li.current 
+      background: #50ba88
+      height: 40px
 
 
-#banner
-  background: url(blue.jpg)
-  table
-    margin-top: 0px
-    color: white
-    font-size: 22px
-    line-height: 22px
+.menu ul
+  list-style-type: none
+  margin-left: 0
+  padding-left: 0
+  width: 100%
+  li 
+    display: inline
+
+
+
+a.lstages 
+  font-family: 'Ubuntu', sans-serif
+  color: #f9f9f9
+  font-size: 14px
+  font-weight: 100
+  text-decoration: none
+  padding: 0px 0px 0px 5px
+
+span.lstagesdisabled 
+  font-family: 'Ubuntu', sans-serif
+  color: #9e9e9e
+  font-size: 14px
+  font-weight: 100
+  text-decoration: none
+  padding: 0px 0px 0px 5px
+
+
+.numbers 
+  vertical-align: middle
+
+
+
+.menu 
+  background: url(menu.png) no-repeat
+  width: 1160px
+  height: 39px
+  padding: 0px 0px 0px 30px
+
+
+
+a.lmenu 
+  color: white
+  font-size: 13px
+  font-weight: normal
+  text-decoration: none
+  text-shadow: #177e9a 1px 1px
+  letter-spacing: 1px
+  vertical-align: top
+
+a.lmenu:hover 
+  color: #005477
+  text-shadow: #77c9df 1px 1px
+  text-decoration: none
+  padding-top: 10px
+
+
+.separator 
+  padding: 0px 15px 0px 15px
+
+
 /* Middle
 /*-----------------------------------------------------------------------------*/
 #middle
   width: 100%
-  padding: 0 0 100px
-  //height: 1%
+  height: 1%
   position: relative
-  margin-top: 30px
 
 #middle:after
   content: '.'
@@ -190,65 +198,190 @@ input
   overflow: hidden
 
 #content 
-  padding: 0 270px 0 40px
+  padding: 25px 290px 0px 290px
+
+img.avatar 
+  padding: 10px 0px 0px 0px
+
+
+.role 
+  color: #797979
+  font-size: 11px
+
+
+div.wholePost
+  display: table
+  padding: 0px 0px 10px 0px
+  width: 561px
+
+div.avatar
+  display: table-cell
+
+div.posts 
+  display: table-cell
+  vertical-align: top
+  padding: 10px 0px 0px 10px
+
+
+.namedate 
+  color: #029cc4
+  font-size: 14px
+  font-style: italic
+
+
+.tags 
+  color: #a1a1a1
+
+
+.social 
+  padding: 10px 0px 0px 296px
+
+
+a.counter 
+  color: #029cc4
+  font-size: 11px
+  font-weight: bold
+  text-shadow: #edf6f8 1px 1px
+  padding: 0px 2px 0px 16px
+  vertical-align: top
+  text-decoration: none
+
+
+a.counter:hover 
+  color: #474747
+
+
+a.more 
+  color: #e6605a
+  font-style: italic
+  font-weight: bold
+  text-decoration: underline
+ 
+
+a.more:hover 
+  color: #50ba88
+  font-style: italic
+  font-weight: bold
+  text-decoration: underline
+ 
+
+/* Sidebar Left -----------------------------------------------------------------------------*/
+#sideLeft 
+  float: left
+  width: 260px
+  margin-left: -100%
+  position: relative
+  margin-top: 25px
+  background: #dbdbdb
+
+
+.greentitle 
+  font-family: 'Ubuntu', sans-serif
+  color: #50ba88
+  font-size: 15px
+  font-style: italic
+  font-weight: bold
+  text-shadow: #f6f6f6 1px 1px
+  padding: 15px 10px 5px 10px
+
+
+.bluetitlehover 
+  font-family: 'Ubuntu', sans-serif
+  color: #029cc4
+  font-size: 15px
+  font-style: italic
+  font-weight: bold
+  text-shadow: #f6f6f6 1px 1px
+  padding: 15px 10px 5px 10px
+
+
+.topics 
+  background: url(pattern.png) repeat
+  border: #50ba88 1px dashed
+  margin: 0px 0px 20px 0px
+
+
+.topicsactive 
+  background: url(pattern.png) repeat
+  border: #b8b8b8 1px solid
+  margin: 0px 0px 20px 0px
+
+
+.topicshover 
+  background: url(pattern.png) repeat
+  border: #029cc4 1px solid
+  margin: 0px 0px 20px 0px
+
+ul.leftlink
+  padding: 10px 0px 0px 0px
+  list-style-type: none
+  li
+    padding: 5px 0px 25px 0px
+
+    a
+      color: #474747
+      font-size: 13px
+      text-shadow: #ececec 1px 1px
+      text-decoration: none
+      padding: 15px 40px 15px 10px 
+
+    a:hover, a.current
+      color: #007b9b
+      background: #d5d2d2
+      border-bottom: #b8b8b8 1px dashed
+    
+.righttext 
+  padding: 10px
+  line-height: 16px
+  align: left
 
 
 
-/* Sidebar Right
-/*-----------------------------------------------------------------------------*/
+/* Sidebar Right -----------------------------------------------------------------------------*/
 #sideRight 
   float: left
   margin-right: -3px
-  width: 250px
-  margin-left: -250px
+  width: 280px
+  margin-left: -280px
   position: relative
+  background: #dbdbdb
+  margin-top: 25px
 
 
+.redtitle 
+  font-family: 'Ubuntu', sans-serif
+  color: #e6605a
+  font-size: 15px
+  font-style: italic
+  font-weight: bold
+  text-shadow: #f6f6f6 1px 1px
+  padding: 15px 10px 5px 10px
 
 
-/* Footer
-/*-----------------------------------------------------------------------------*/
-#footer
-  width: 1000px
-  margin: -55px auto 0
-  height: 55px
-  background: url(bluefooter.jpg)
-  position: relative
-  text-align: center
-
-  a:link, a:active, a:visited, a:hover
-    color: white
-    font-size: 13px
-    text-decoration: none
-
-  nav 
-    float: left
-    ul
-      padding-left: 20px
-      li
-        padding: 15px 20px 10px 20px
+.righttext 
+  padding: 10px
+  line-height: 16px
 
 
+.topusers 
+  vertical-align: top
+  padding: 20px 0px 0px 5px
 
-nav 
-  white-space: nowrap
-  ul 
-    margin: 0
-    padding: 0
 
-    li
-      list-style-type: none
-      display: inline-block
+/* Footer -----------------------------------------------------------------------------*/
+#footer 
+  height: 100px
+
+
 
 h1
-  background: url(blue.jpg) repeat-x
-  height: 28px
-  padding: 5px 10px 5px 10px
-  color: white
+  font-family: 'Ubuntu', sans-serif
+  color: #e6605a
   font-size: 15px
-  font-weight: normal
-
-  display: table
+  font-style: italic
+  font-weight: bold
+  text-shadow: #f6f6f6 1px 1px
+  padding: 15px 10px 5px 10px
 h2
   color: #0079D7
   margin-bottom: 20px
@@ -275,7 +408,9 @@ a
     text-decoration: underline
 
 
-
+textarea.life_tape_post
+  width: 500px
+  height: 400px
 
 /* Navigation */
 
@@ -383,23 +518,38 @@ table
   font-style: italic
   font-size: 12px
 
-a.username
-  color: #408f00
-  font-size: 13px
-  font-style: italic
-  text-decoration: none
 
-a.username:hover
-  text-decoration: underline
 
 div.content
   font-size: 14px
 
-.comments 
-  color: #8f8f8f
-  font-size: 12px
-  font-style: italic
-  text-decoration: none
+.comments
+  display: table
+  padding: 0px 0px 10px 70px
+  width: 490px
+
+
+p.comments 
+  color: #747474
+  padding: 0px 0px 10px 0px
+
+
+img.comments 
+  padding: 0px 0px 0px 70px
+
+form.new_life_tape_comment 
+  textarea 
+    color: #747474
+    width: 490px
+    height: 60px
+    border: #a1a1a1 1px solid
+  input[type=submit]
+    margin-top: 10px
+    background: url(send.png) no-repeat
+    border: 0px
+  label
+    font-weight: bold
+
 
 
 
@@ -442,7 +592,7 @@ textarea
   vertical-align: top
   font-size: 12px
   font-family: Helvetica
-  color: #0079D7
+
 
 form.new_frustration
   margin-bottom: 10px
@@ -450,20 +600,19 @@ form.new_frustration
     font-size: 18px
     color: #4d4d4d
   textarea
-    width: 350px
+    width: 250px
     height: 70px
     border: 1px solid #666666
     padding: 5px
     vertical-align: top
     font-size: 12px
     font-family: Helvetica
-    color: #0079D7
   textarea.big_field
     height: 343px
     margin-bottom: 40px
   div.timestamp
     margin-bottom: 10px
-    width: 350px
+    width: 250px
 
   .btn 
     background: url(add.png) no-repeat

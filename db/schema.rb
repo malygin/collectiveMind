@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121108132211) do
+ActiveRecord::Schema.define(:version => 20121114110111) do
 
   create_table "answers", :force => true do |t|
     t.string   "text"
@@ -101,6 +101,40 @@ ActiveRecord::Schema.define(:version => 20121108132211) do
   add_index "journals", ["created_at"], :name => "index_journals_on_created_at"
   add_index "journals", ["type"], :name => "index_journals_on_type"
   add_index "journals", ["user_id"], :name => "index_journals_on_user_id"
+
+  create_table "life_tape_categories", :force => true do |t|
+    t.string   "name"
+    t.text     "short_desc"
+    t.text     "long_desc"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "life_tape_comments", :force => true do |t|
+    t.text     "content"
+    t.integer  "user_id"
+    t.integer  "post_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  add_index "life_tape_comments", ["created_at"], :name => "index_life_tape_comments_on_created_at"
+  add_index "life_tape_comments", ["post_id"], :name => "index_life_tape_comments_on_post_id"
+  add_index "life_tape_comments", ["user_id"], :name => "index_life_tape_comments_on_user_id"
+
+  create_table "life_tape_posts", :force => true do |t|
+    t.text     "content"
+    t.integer  "user_id"
+    t.integer  "post_id"
+    t.integer  "category_id"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+  end
+
+  add_index "life_tape_posts", ["category_id"], :name => "index_life_tape_posts_on_category_id"
+  add_index "life_tape_posts", ["created_at"], :name => "index_life_tape_posts_on_created_at"
+  add_index "life_tape_posts", ["post_id"], :name => "index_life_tape_posts_on_post_id"
+  add_index "life_tape_posts", ["user_id"], :name => "index_life_tape_posts_on_user_id"
 
   create_table "posts", :force => true do |t|
     t.string   "title"

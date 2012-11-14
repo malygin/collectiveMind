@@ -1,0 +1,28 @@
+%ul.leftlink
+	%li= link_to "Произвольные", '/unstructure', class: cp('/unstructure') 
+	%li= link_to "Оформленные", "/structure" , class: cp('/structure') 
+	%li= link_to "Принятые", "/accepted", class: cp('/accepted') 
+	%li= link_to "Отклоненные", "/declined", class: cp('/declined') 
+	%li= link_to "Архив", "/archive", class: cp('/archive') 
+	/ %li= link_to "на голосовании", "/voted", class: cp('/vote') 
+=image_tag("shortdots.png")
+%h1 Комментарии эксперта
+
+%p.righttext 
+	обратите внимание
+	= link_to 'на комментарии эксперта по поводу контрольных!', '/articles'
+
+=image_tag("shortdots.png")
+
+%h1 Новости
+%p.righttext
+	Мы запускаем новую версию портала! Новые возможности будут добавляться  и мы будем оповещать вас об этом.
+	= link_to 'на днях добавим новый раздео в Помощь по сбору сведений и идей', '/help'
+
+
+=image_tag("shortdots.png")
+
+%h1 Тех. поддержка
+%p.righttext
+	Что-то непонятно? 
+	= link_to 'Задайте вопрос', questions_path
