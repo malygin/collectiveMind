@@ -3,13 +3,15 @@ class LifeTape::PostsController < ApplicationController
   # GET /life_tape/posts
   # GET /life_tape/posts.json
   def index
-    @life_tape_posts = LifeTape::Post.all
+    @life_tape_posts = LifeTape::Post.paginate(:page => params[:page])
     @categories = LifeTape::Category.all
+  end
 
-    respond_to do |format|
-      format.html # index.html.erb
-      format.json { render json: @life_tape_posts }
-    end
+  def category
+    @category = LifeTape::Category.find(params[:cat_id])
+    @life_tape_posts = LifeTape::Post.where(:category_id => params[:cat_id]).paginate(:page => params[:page])
+    @categories = LifeTape::Category.all
+    render 'index'
   end
 
   # GET /life_tape/posts/1

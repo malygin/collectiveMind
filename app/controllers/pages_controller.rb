@@ -14,6 +14,12 @@ class PagesController < ApplicationController
   def help
   end  
 
+  def help1
+  end  
+
+  def help2
+  end 
+  
   def articles
   end
 

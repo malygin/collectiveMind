@@ -22,14 +22,16 @@
 			=image_tag "dislike.png"
 			=link_to @life_tape_post.comments.count, "#", class: "counter"
 			=image_tag "comment.png"
-.comments
-	= form_for @comment, :url => add_comment_life_tape_post_path(@life_tape_post.id), :method => :put do |f|
-		=render 'shared/error_messages', :object =>f.object
-		%label Ваш комментарий
-		.field
-			=f.text_area :content
-		.action
-			=f.submit ''
+- if signed_in?
+	.comments
+		= form_for @comment, :url => add_comment_life_tape_post_path(@life_tape_post.id), :method => :put do |f|
+			=render 'shared/error_messages', :object =>f.object
+			%label Ваш комментарий
+			.field
+				=f.text_area :content
+			.action
+				=f.submit ''
+				
 - @life_tape_post.comments.each do |comment|
 	.comments
 		.avatar

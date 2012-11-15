@@ -24,7 +24,11 @@ CollectiveMind::Application.routes.draw do
 
   match "/about", :to => "pages#about"
   match "/contacts", :to => "pages#contacts"
+ 
   match "/help", :to => "pages#help"
+  match "/help1", :to => "pages#help1"
+  match "/help2", :to => "pages#help2"
+
   match "/home", :to => "pages#home"
   match "/donot", :to => "pages#donot"  
   match "/articles", :to => "pages#articles"
@@ -120,8 +124,11 @@ CollectiveMind::Application.routes.draw do
     namespace :life_tape do
       # Directs /admin/products/* to Admin::ProductsController
       # (app/controllers/admin/products_controller.rb)
+      get "category/:cat_id" => 'posts#category'
       resources :posts do
+
         member do
+
           put :add_comment
         end
       end

@@ -1,5 +1,7 @@
 - if signed_in?
 	= link_to image_tag("add_record.png"), new_life_tape_post_path
+- unless @category.nil?
+	=@category.long_desc
 - @life_tape_posts.each do |post|
 	.wholePost
 		.avatar
@@ -30,10 +32,11 @@
 				=link_to post.comments.count, post, class: "counter"
 				=image_tag "comment.png"
 	.dotline=image_tag('dotline.png')
+= will_paginate @life_tape_posts
 
 			
 
-	/ = link_to 'Destroy', post, :confirm => 'Are you sure?', :method => :delete
+/ = link_to 'Destroy', post, :confirm => 'Are you sure?', :method => :delete
 %br
 
 

@@ -1,11 +1,9 @@
-%h1 Новости
-%p.righttext
-	как вы, наверное, заметили, мы тут переделали дизайн приложения, да и вообще много всего переработали
-	= link_to 'на днях добавим новый раздео в Помощь по сбору сведений и идей', '/help'
+
 - @categories.each do |category|
-	%div.topics
-		%p.greentitle= category.name
-		%p.righttext= category.short_desc
+	%a{:href  => life_tape_path(category.id), :class => 'topic'}
+		%div.topics
+			%p.greentitle= category.name
+			%p.righttext= category.short_desc
 
 
 
