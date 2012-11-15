@@ -1,7 +1,7 @@
 - if signed_in?
 	= link_to image_tag("add_record.png"), new_life_tape_post_path
 - unless @category.nil?
-	%h1 @category.name
+	%h1=@category.name
 	=simple_format(@category.long_desc)
 - @life_tape_posts.each do |post|
 	.wholePost
