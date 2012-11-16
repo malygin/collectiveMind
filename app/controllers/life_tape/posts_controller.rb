@@ -29,9 +29,13 @@ class LifeTape::PostsController < ApplicationController
 
   def add_comment
     post = LifeTape::Post.find(params[:id])
-    post.comments.create(:content => params[:life_tape_comment][:content], :user =>current_user)
-    puts params
-    flash[:success] = "Комментарий добавлен"
+    unless  params[:life_tape_comment][:content]==""
+      post.comments.create(:content => params[:life_tape_comment][:content], :user =>current_user)
+      puts params
+      flash[:success] = "Комментарий добавлен"
+    else
+      flash[:success] = "Введите текст комментария"
+    end
     redirect_to post
 
   end
