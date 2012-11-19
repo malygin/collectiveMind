@@ -18,6 +18,9 @@ class User < ActiveRecord::Base
   has_and_belongs_to_many :questions
   has_and_belongs_to_many :answers
 
+  has_many :life_type_comment_voitings
+  has_many :life_type_comments, :through => :life_type_comment_voitings
+
 # list of frustrations which was denied for user's comment
   has_many :negatived_frustrations, :class_name => "Frustration", :foreign_key =>"negative_user_id"
   has_many :structured_frustrations, :class_name => "Frustration", :foreign_key =>"struct_user_id"

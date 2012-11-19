@@ -3,5 +3,8 @@ class LifeTape::Comment < ActiveRecord::Base
   belongs_to :user
   belongs_to :post
   default_scope :order => 'life_tape_comments.created_at DESC'
+  has_many :comment_voitings
+  has_many :users, :through => :comment_voitings
+
 
 end

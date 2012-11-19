@@ -1,0 +1,2 @@
+module LifeTape::CommentsControllerHelper
+end

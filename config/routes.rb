@@ -126,11 +126,14 @@ CollectiveMind::Application.routes.draw do
       # (app/controllers/admin/products_controller.rb)
       get "category/:cat_id" => 'posts#category'
       resources :posts do
-
         member do
-
-          put :add_comment
+            put :add_comment
         end
+      end
+      resources :comments do
+          member do
+            put :plus
+          end  
       end
     end
 

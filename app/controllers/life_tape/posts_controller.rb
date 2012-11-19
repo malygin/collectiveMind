@@ -40,6 +40,7 @@ class LifeTape::PostsController < ApplicationController
 
   end
 
+
   # GET /life_tape/posts/new
   # GET /life_tape/posts/new.json
   def new

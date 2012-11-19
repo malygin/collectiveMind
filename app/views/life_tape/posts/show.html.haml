@@ -42,9 +42,14 @@
 			%span.namedate= comment.user.name_title
 			%br
 			%p.comments= comment.content
-			.like
-				=link_to "0", "#", class: "counter"
-				=image_tag "like.png"
+			-if signed_in? and not comment.users.include?(current_user)
+				.like
+					=link_to "#{comment.users.count}",  plus_life_tape_comment_path(comment), :id => comment.id,:remote => true, :method => :put, class: "counter"
+					=image_tag "like.png"
+			-else
+				.like
+					= comment.users.count
+					= image_tag "like.png"
 	=image_tag "shortdotline.png" , :class => "comments"
 
 

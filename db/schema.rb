@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121114110111) do
+ActiveRecord::Schema.define(:version => 20121119094341) do
 
   create_table "answers", :force => true do |t|
     t.string   "text"
@@ -110,6 +110,15 @@ ActiveRecord::Schema.define(:version => 20121114110111) do
     t.datetime "updated_at", :null => false
   end
 
+  create_table "life_tape_comment_voitings", :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "comment_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  add_index "life_tape_comment_voitings", ["user_id", "comment_id"], :name => "index_life_tape_comment_voitings_on_user_id_and_comment_id"
+
   create_table "life_tape_comments", :force => true do |t|
     t.text     "content"
     t.integer  "user_id"
@@ -121,6 +130,14 @@ ActiveRecord::Schema.define(:version => 20121114110111) do
   add_index "life_tape_comments", ["created_at"], :name => "index_life_tape_comments_on_created_at"
   add_index "life_tape_comments", ["post_id"], :name => "index_life_tape_comments_on_post_id"
   add_index "life_tape_comments", ["user_id"], :name => "index_life_tape_comments_on_user_id"
+
+  create_table "life_tape_comments_users", :id => false, :force => true do |t|
+    t.integer "life_tape_comment_id"
+    t.integer "user_id"
+  end
+
+  add_index "life_tape_comments_users", ["life_tape_comment_id", "user_id"], :name => "lt_user"
+  add_index "life_tape_comments_users", ["user_id", "life_tape_comment_id"], :name => "user_lt"
 
   create_table "life_tape_posts", :force => true do |t|
     t.text     "content"
