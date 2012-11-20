@@ -20,7 +20,7 @@
 			=link_to @life_tape_post.childs.count, "#", class: "counter"
 			=image_tag "tree.png"
 			- if signed_in? and not @life_tape_post.users.include?(current_user)
-				=link_to "#{@life_tape_post.users.count}",  plus_life_tape_post_path(@life_tape_post), :id => post.id,:remote => true, :method => :put, class: "counter"
+				=link_to "#{@life_tape_post.users.count}",  plus_life_tape_post_path(@life_tape_post), :id => @life_tape_post.id,:remote => true, :method => :put, class: "counter"
 			-else
 				=@life_tape_post.users.count
 			=image_tag "like.png"

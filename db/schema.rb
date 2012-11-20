@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121120083317) do
+ActiveRecord::Schema.define(:version => 20121120074946) do
 
   create_table "answers", :force => true do |t|
     t.string   "text"
@@ -131,25 +131,6 @@ ActiveRecord::Schema.define(:version => 20121120083317) do
   add_index "life_tape_comments", ["post_id"], :name => "index_life_tape_comments_on_post_id"
   add_index "life_tape_comments", ["user_id"], :name => "index_life_tape_comments_on_user_id"
 
-  create_table "life_tape_comments_users", :id => false, :force => true do |t|
-    t.integer "life_tape_comment_id"
-    t.integer "user_id"
-  end
-
-  add_index "life_tape_comments_users", ["life_tape_comment_id", "user_id"], :name => "lt_user"
-  add_index "life_tape_comments_users", ["user_id", "life_tape_comment_id"], :name => "user_lt"
-
-  create_table "life_tape_post_inspirings", :force => true do |t|
-    t.integer  "post_id"
-    t.integer  "inspired_post_id"
-    t.datetime "created_at",       :null => false
-    t.datetime "updated_at",       :null => false
-  end
-
-  add_index "life_tape_post_inspirings", ["inspired_post_id", "post_id"], :name => "index_life_tape_post_inspirings_on_inspired_post_id_and_post_id"
-  add_index "life_tape_post_inspirings", ["inspired_post_id"], :name => "index_life_tape_post_inspirings_on_inspired_post_id"
-  add_index "life_tape_post_inspirings", ["post_id"], :name => "index_life_tape_post_inspirings_on_post_id"
-
   create_table "life_tape_post_voitings", :force => true do |t|
     t.integer  "user_id"
     t.integer  "post_id"
@@ -167,9 +148,9 @@ ActiveRecord::Schema.define(:version => 20121120083317) do
     t.integer  "user_id"
     t.integer  "post_id"
     t.integer  "category_id"
-    t.datetime "created_at",  :null => false
-    t.datetime "updated_at",  :null => false
-    t.integer  "number_views"
+    t.datetime "created_at",                  :null => false
+    t.datetime "updated_at",                  :null => false
+    t.integer  "number_views", :default => 0
   end
 
   add_index "life_tape_posts", ["category_id"], :name => "index_life_tape_posts_on_category_id"
