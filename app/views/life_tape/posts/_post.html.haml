@@ -1,0 +1,32 @@
+.wholePost
+	.avatar
+		= link_to gravatar_for(post.user), post.user
+		%br
+		%span.role= post.user.role_name
+	.posts
+		%span.namedate= post.user.name_title
+		%br
+		=image_tag("tag.png")
+		-unless post.category.nil?
+			%span.tags= post.category.name
+		-else
+			%span.tags без категории
+
+
+		%p
+			= trim_string(post.content)
+			= link_to "Подробнее", post, class: "more"
+
+		.social 
+			=link_to post.childs.count, "#", class: "counter"
+			=image_tag "tree.png"
+			- if signed_in? and not post.users.include?(current_user)
+				=link_to "#{post.users.count}",  plus_life_tape_post_path(post), :id => post.id,:remote => true, :method => :put, class: "counter"
+			-else
+				=post.users.count
+			=image_tag "like.png"
+			=link_to "0", post, class: "counter"
+			=image_tag "views.png"
+			=link_to post.comments.count, post, class: "counter"
+			=image_tag "comment.png"
+.dotline=image_tag('dotline.png')

@@ -1,3 +1,6 @@
+.inspire= link_to image_tag('inspire.png'),  new_child_life_tape_post_path
+
+
 .wholePost
 	.avatar
 		= link_to gravatar_for(@life_tape_post.user), @life_tape_post.user
@@ -14,13 +17,16 @@
 		%p 
 			= simple_format(@life_tape_post.content)
 		.social 
-			=link_to "0", "#", class: "counter"
+			=link_to @life_tape_post.childs.count, "#", class: "counter"
 			=image_tag "tree.png"
-			=link_to "0", "#", class: "counter"
+			- if signed_in? and not @life_tape_post.users.include?(current_user)
+				=link_to "#{@life_tape_post.users.count}",  plus_life_tape_post_path(@life_tape_post), :id => post.id,:remote => true, :method => :put, class: "counter"
+			-else
+				=@life_tape_post.users.count
 			=image_tag "like.png"
-			=link_to "0", "#", class: "counter"
-			=image_tag "dislike.png"
-			=link_to @life_tape_post.comments.count, "#", class: "counter"
+			=link_to "0", @life_tape_post, class: "counter"
+			=image_tag "views.png"
+			=link_to @life_tape_post.comments.count, @life_tape_post, class: "counter"
 			=image_tag "comment.png"
 - if signed_in?
 	.comments
@@ -31,7 +37,6 @@
 				=f.text_area :content
 			.action
 				=f.submit ''
-				
 - @life_tape_post.comments.each do |comment|
 	.comments
 		.avatar
@@ -50,6 +55,14 @@
 				.like
 					= comment.users.count
 					= image_tag "like.png"
-	=image_tag "shortdotline.png" , :class => "comments"
+
+- unless @life_tape_post.post.nil?
+	.redtitle Этой запись вдохновлена следующей записью
+	= render @life_tape_post.post
+
+- unless @life_tape_post.childs.empty?
+	.redtitle Этой записью были вдохновлены следующие записи
+	- @life_tape_post.childs.each do |post|
+		=render post
 
 

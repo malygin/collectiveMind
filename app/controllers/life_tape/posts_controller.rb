@@ -5,6 +5,7 @@ class LifeTape::PostsController < ApplicationController
   def index
     @life_tape_posts = LifeTape::Post.paginate(:page => params[:page])
     @categories = LifeTape::Category.all
+    @top = LifeTape::Post.order(:users)
   end
 
   def category
@@ -40,6 +41,11 @@ class LifeTape::PostsController < ApplicationController
 
   end
 
+  def plus
+    post = LifeTape::Post.find(params[:id])
+    post.post_voitings.create(:user => current_user, :post => post, :against => false)
+    render json:post.users.count 
+  end
 
   # GET /life_tape/posts/new
   # GET /life_tape/posts/new.json
@@ -53,6 +59,20 @@ class LifeTape::PostsController < ApplicationController
     end
   end
 
+  def new_child
+    @life_tape_post = LifeTape::Post.new
+    @categories = LifeTape::Category.all
+    @ancestor_id = params[:id]
+
+    respond_to do |format|
+      format.html # new.html.erb
+      format.json { render json: @life_tape_post }
+    end
+
+  end
+
+  def create_child
+  end
   # GET /life_tape/posts/1/edit
   def edit
     @life_tape_post = LifeTape::Post.find(params[:id])
@@ -64,9 +84,10 @@ class LifeTape::PostsController < ApplicationController
     @life_tape_post = LifeTape::Post.new(params[:life_tape_post])
     @life_tape_post.user = current_user
     @life_tape_post.category_id =  params[:category]
+    puts params[:id]
     respond_to do |format|
       if @life_tape_post.save
-        format.html { redirect_to action: "index" , notice: 'Post was successfully created.' }
+        format.html { redirect_to action: "index" , notice: 'Запись успешно создана!' }
         format.json { render json: @life_tape_post, status: :created, location: @life_tape_post }
       else
         format.html { render action: "new" }

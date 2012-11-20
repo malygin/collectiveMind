@@ -4,35 +4,7 @@
 	%h1=@category.name
 	=simple_format(@category.long_desc)
 - @life_tape_posts.each do |post|
-	.wholePost
-		.avatar
-			= link_to gravatar_for(post.user), post.user
-			%br
-			%span.role= post.user.role_name
-		.posts
-			%span.namedate= post.user.name_title
-			%br
-			=image_tag("tag.png")
-			-unless post.category.nil?
-				%span.tags= post.category.name
-			-else
-				%span.tags без категории
-
-
-			%p
-				= trim_string(post.content)
-				= link_to "Подробнее", post, class: "more"
-
-			.social 
-				=link_to "0", "#", class: "counter"
-				=image_tag "tree.png"
-				=link_to "0", "#", class: "counter"
-				=image_tag "like.png"
-				=link_to "0", "#", class: "counter"
-				=image_tag "dislike.png"
-				=link_to post.comments.count, post, class: "counter"
-				=image_tag "comment.png"
-	.dotline=image_tag('dotline.png')
+	= render post
 = will_paginate @life_tape_posts
 
 			

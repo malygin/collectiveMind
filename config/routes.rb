@@ -128,6 +128,10 @@ CollectiveMind::Application.routes.draw do
       resources :posts do
         member do
             put :add_comment
+            get :new_child
+            put :create_child
+            put :plus
+
         end
       end
       resources :comments do
