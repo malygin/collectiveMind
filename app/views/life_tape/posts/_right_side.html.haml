@@ -6,7 +6,11 @@
 	= link_to 'комментарий эксперта на эту тему', '/articles#06'
 
 .redtitle Топ записей
-
+- @top_posts.each do |post|
+	%p.righttext
+		=trim_string(post.content)
+		= link_to "Подробнее", '/life_tape/posts/9', class: 'more'
+	=image_tag('dots.png')
 
 .redtitle Рекомендованные вам
 

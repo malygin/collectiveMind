@@ -25,7 +25,7 @@
 			-else
 				=post.users.count
 			=image_tag "like.png"
-			=link_to "0", post, class: "counter"
+			=link_to post.number_views, post, class: "counter"
 			=image_tag "views.png"
 			=link_to post.comments.count, post, class: "counter"
 			=image_tag "comment.png"
