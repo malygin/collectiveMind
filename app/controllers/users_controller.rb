@@ -38,7 +38,7 @@ class UsersController < ApplicationController
 	end
 
 	def index 
-		@users = User.paginate(:page =>params[:page])
+		@users = User.order('score DESC').paginate(:page =>params[:page])
 	end
 
 	def update

@@ -15,9 +15,9 @@
 
 .stages
   %ul
-    %li{ :class => cp('/accepted')}
-      = image_tag image_for_stages("1", '/accepted'), :class => 'numbers'
-      = link_to "Недовольства", "/accepted", class: "lstages"  
+    %li{ :class => cp('/frustrations/accepted')}
+      = image_tag image_for_stages("1", '/frustrations/accepted'), :class => 'numbers'
+      = link_to "Недовольства", "/frustrations/accepted", class: "lstages"  
     = image_tag "space.png"  
     %li{ :class => cp('/life_tape/posts')}
       = image_tag image_for_stages("2", '/life_tape/posts'), :class => 'numbers'
@@ -45,5 +45,7 @@
     %li= image_tag "separator.png", :class => "separator"
     %li= link_to "Вопросы-ответы", "/questions" , class:  "lmenu"
     %li= image_tag "separator.png", :class => "separator"
-    %li= link_to "Комментарии эксперта", "/articles" , class:  "lmenu"
+    %li= link_to "Комментарии эксперта", "/articles" , class:  "lmenu"  
+    %li= image_tag "separator.png", :class => "separator"
+    %li= link_to "Топ пользователей", "/users" , class:  "lmenu"
 

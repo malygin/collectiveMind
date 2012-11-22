@@ -1,11 +1,12 @@
-%ul.leftlink
-	%li= link_to "Произвольные", '/unstructure', class: cp('/unstructure') 
-	%li= link_to "Оформленные", "/structure" , class: cp('/structure') 
-	%li= link_to "Принятые", "/accepted", class: cp('/accepted') 
-	%li= link_to "Отклоненные", "/declined", class: cp('/declined') 
-	%li= link_to "Архив", "/archive", class: cp('/archive') 
-	/ %li= link_to "на голосовании", "/voted", class: cp('/vote') 
-=image_tag("shortdots.png")
+- if frustration_path?
+	%ul.leftlink
+		%li= link_to "Произвольные", '/frustrations/unstructure', class: cp('/frustrations/unstructure') 
+		%li= link_to "Оформленные", "/frustrations/structure" , class: cp('/frustrations/structure') 
+		%li= link_to "Принятые", "/frustrations/accepted", class: cp('/frustrations/accepted') 
+		%li= link_to "Отклоненные", "/frustrations/declined", class: cp('/frustrations/declined') 
+		%li= link_to "Архив", "/frustrations/archive", class: cp('/frustrations/archive') 
+		/ %li= link_to "на голосовании", "/voted", class: cp('/vote') 
+	=image_tag("shortdots.png")
 %h1 Комментарии эксперта
 
 %p.righttext 

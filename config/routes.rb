@@ -35,13 +35,13 @@ CollectiveMind::Application.routes.draw do
 
   match "/signin", :to => "sessions#new"
   match "/signout", :to => "sessions#destroy"
-  match "/structure", :to => "pages#structure_frustrations"
-  match "/unstructure", :to => "pages#unstructure_frustrations"
-  match "/archive", :to => "pages#archive_frustrations"  
-  match "/to_expert", :to => "pages#to_expert_frustrations"
-  match "/accepted", :to => "pages#accepted_frustrations"  
-  match "/declined", :to => "pages#declined_frustrations"    
-  match "/voted", :to => "pages#voted_frustrations"    
+  match "/frustrations/structure", :to => "pages#structure_frustrations"
+  match "/frustrations/unstructure", :to => "pages#unstructure_frustrations"
+  match "/frustrations/archive", :to => "pages#archive_frustrations"  
+  match "/frustrations/to_expert", :to => "pages#to_expert_frustrations"
+  match "/frustrations/accepted", :to => "pages#accepted_frustrations"  
+  match "/frustrations/declined", :to => "pages#declined_frustrations"    
+  match "/frustrations/voted", :to => "pages#voted_frustrations"    
 
 
   #get "users/new"

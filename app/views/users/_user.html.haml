@@ -1,9 +1,14 @@
-%li
-	%div
-		= gravatar_for user, :size =>50
-		= link_to user.name_title, user	
-		%span{:class => 'rate'}= user.score
+.wholePost
+	.avatar
+		= link_to gravatar_for(user), user
+		%br
+		%span.role= user.role_name
+	.posts
+		%span.namedate= user.name_title
+		%br
+		Набрано балов - 
+		%span.rate= user.score
 
-/ - if current_user.admin? 
-/ 	= link_to "| удалить", user, :method => :delete, :confirm =>"Точно?"
-%br
+		.social 
+			
+.dotline=image_tag('dotline.png')

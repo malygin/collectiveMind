@@ -15,4 +15,11 @@ module ApplicationHelper
 		  return  image+'.png' 
 		end
 	end
+
+	def frustration_path?
+		cur_path = request.env['REQUEST_PATH']
+		cur_path.include?('frustrations')
+	end
+
+
 end
