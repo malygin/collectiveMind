@@ -26,6 +26,10 @@ class LifeTape::PostsController < ApplicationController
     @comment = LifeTape::Comment.new
     puts @life_tape_post.number_views
     @life_tape_post.update_column(:number_views, @life_tape_post.number_views+1)
+    #todo - improve it too slowly
+    top_posts = LifeTape::Post.find(:all, :include => :users).sort_by { |p| p.users.size }
+    #@top_posts = LifeTape::Post.joins(:post_voitings).select('life_tape_post_voitings.*, count(user_id) as "user_count"').group(:user_id).order(' user_count desc').limit(3)
+    @top_posts = top_posts.reverse[0..3]
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @life_tape_post }
