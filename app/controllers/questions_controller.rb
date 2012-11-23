@@ -35,7 +35,7 @@ class QuestionsController < ApplicationController
   # GET /questions
   # GET /questions.json
   def index
-    @questions = Question.find(:all, :order => ' raiting DESC')
+    @questions = Question.paginate(:page => params[:page])
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @questions }
@@ -79,7 +79,7 @@ class QuestionsController < ApplicationController
 
     respond_to do |format|
       if @question.save
-        format.html { redirect_to @question, notice: 'Вопрос задан, ждем ответа!' }
+        format.html { redirect_to questions_path, notice: 'Вопрос задан, ждем ответа!' }
         format.json { render json: @question, status: :created, location: @question }
       else
         format.html { render action: "new" }

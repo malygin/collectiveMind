@@ -1,0 +1,13 @@
+.wholePost
+	.avatar
+		= link_to gravatar_for(question.user), question.user
+		%br
+		%span.role= question.user.role_name
+	.posts
+		%span.namedate= question.user.name_title
+		%br
+		%p
+			=question.text
+			=link_to 'подробнее', question, class: 'more'			
+		=link_to "ответов - #{question.answers.count}", question, class: 'tags' 
+		

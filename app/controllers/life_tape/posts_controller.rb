@@ -9,6 +9,7 @@ class LifeTape::PostsController < ApplicationController
     top_posts = LifeTape::Post.find(:all, :include => :users).sort_by { |p| p.users.size }
     #@top_posts = LifeTape::Post.joins(:post_voitings).select('life_tape_post_voitings.*, count(user_id) as "user_count"').group(:user_id).order(' user_count desc').limit(3)
     @top_posts = top_posts.reverse[0..3]
+    @journals = Journal.where(:type_event => 'life_tape_comment_save').limit(5)
   end
 
   def category
@@ -40,7 +41,7 @@ class LifeTape::PostsController < ApplicationController
     post = LifeTape::Post.find(params[:id])
     unless  params[:life_tape_comment][:content]==""
       post.comments.create(:content => params[:life_tape_comment][:content], :user =>current_user)
-      puts params
+      current_user.journals.build(:type_event=>'life_tape_comment_save', :body=>post.id).save!
       flash[:success] = "Комментарий добавлен"
     else
       flash[:success] = "Введите текст комментария"

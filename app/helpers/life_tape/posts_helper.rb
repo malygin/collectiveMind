@@ -1,7 +1,7 @@
 module LifeTape::PostsHelper
-	def trim_string(content)
-		if content.length > 500
-			return content[0..500]+" ..."
+	def trim_string(content, size = 500)
+		if content.length > size
+			return content[0..size]+" ..."
 		end
 		return content
 	end

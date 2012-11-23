@@ -7,7 +7,7 @@ module SessionsHelper
 	end
 	
 	def journal_enter
-  		current_user.journals.build(:type=>'enter').save!
+  		current_user.journals.build(:type_event=>'enter').save!
   	end
 
 	def sign_out
