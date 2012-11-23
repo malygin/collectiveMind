@@ -8,7 +8,7 @@
 .redtitle Топ записей
 - @top_posts.each do |post|
 	%p.righttext
-		= trim_string(post.content, 150)
+		= trim_string(post.content, 100)
 		= link_to "подробнее", post
 	=image_tag('dots.png')
 
