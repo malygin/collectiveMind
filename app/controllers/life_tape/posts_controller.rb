@@ -16,6 +16,10 @@ class LifeTape::PostsController < ApplicationController
     @category = LifeTape::Category.find(params[:cat_id])
     @life_tape_posts = LifeTape::Post.where(:category_id => params[:cat_id]).paginate(:page => params[:page])
     @categories = LifeTape::Category.all
+    top_posts = LifeTape::Post.find(:all, :include => :users).sort_by { |p| p.users.size }
+    #@top_posts = LifeTape::Post.joins(:post_voitings).select('life_tape_post_voitings.*, count(user_id) as "user_count"').group(:user_id).order(' user_count desc').limit(3)
+    @top_posts = top_posts.reverse[0..3]
+    @journals = Journal.where(:type_event => 'life_tape_comment_save').limit(5)
     render 'index'
   end
 
@@ -31,6 +35,8 @@ class LifeTape::PostsController < ApplicationController
     top_posts = LifeTape::Post.find(:all, :include => :users).sort_by { |p| p.users.size }
     #@top_posts = LifeTape::Post.joins(:post_voitings).select('life_tape_post_voitings.*, count(user_id) as "user_count"').group(:user_id).order(' user_count desc').limit(3)
     @top_posts = top_posts.reverse[0..3]
+    @journals = Journal.where(:type_event => 'life_tape_comment_save').limit(5)
+
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @life_tape_post }
