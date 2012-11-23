@@ -9,7 +9,7 @@ class Question < ActiveRecord::Base
   default_scope :order => 'questions.created_at DESC'
 
   def answers_order
-  	self.answers.find(:all, :order => "created_at ASC")
+  	self.answers.find(:all, :order => "created_at DESC")
   end
 
 

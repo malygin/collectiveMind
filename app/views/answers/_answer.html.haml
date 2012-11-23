@@ -1,24 +1,27 @@
-%table
-	%tr
-		%td.raiting
-			- if answer_allow_vote?(answer)
-				= link_to image_tag('up.png'), plus_question_answer_path(answer), :method => :put
-			-else
-				=image_tag('up.png')
-			%br
 
+.comments
+	.rating
+		- if answer_allow_vote?(answer)
+			= link_to image_tag('up.png'), plus_question_answer_path(answer), :method => :put
+		-else
+			=image_tag('up.png')
+		%p
 			-if answer.raiting>0
 				%span.good_raiting= answer.raiting
 			-elsif answer.raiting<0
 				%span.bad_raiting= answer.raiting
 			-else
 				=answer.raiting
-			%br      
-			- if answer_allow_vote?(answer)
-				= link_to image_tag('down.png'), minus_question_answer_path(answer), :method => :put
-			- else
-				=image_tag('down.png')
-		%td.answer
-			= link_to gravatar_for answer.user, :size => 20
-			= link_to answer.user.name_title, answer.user, :class => 'username'
-			%br= answer.text
+		- if answer_allow_vote?(answer)
+			= link_to image_tag('down.png'), minus_question_answer_path(answer), :method => :put
+		-else
+			=image_tag('down.png')
+
+	.avatar
+		= link_to gravatar_for(answer.user, :size => 40),answer.user
+		%br
+		%span.role= answer.user.role_name
+	.posts
+		%span.namedate= answer.user.name_title
+		%br
+		%p.comments= answer.text

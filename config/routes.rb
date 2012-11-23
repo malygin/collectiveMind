@@ -1,4 +1,6 @@
 CollectiveMind::Application.routes.draw do
+  namespace :expert_news do resources :posts end
+
   get "journal/enter"
 
   resources :tests do

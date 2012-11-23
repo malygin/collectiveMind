@@ -1,0 +1,12 @@
+.wholePost
+
+	.posts
+		%span.namedate= @expert_news_post.title
+		%br
+		%p
+			= @expert_news_post.content
+- if current_user.expert? or current_user.admin?
+	= link_to 'Редактировать', edit_expert_news_post_path(@expert_news_post)
+	= link_to 'Удалить', @expert_news_post, :confirm => 'Уверены, Олег?', :method => :delete
+
+

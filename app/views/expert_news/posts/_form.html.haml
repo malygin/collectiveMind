@@ -1,0 +1,21 @@
+= form_for @expert_news_post do |f|
+  -if @expert_news_post.errors.any?
+    #error_explanation
+      %h2= "#{pluralize(@expert_news_post.errors.count, "error")} prohibited this expert_news_post from being saved:"
+      %ul
+        - @expert_news_post.errors.full_messages.each do |msg|
+          %li= msg
+
+  %label Заголовок
+  .field
+    = f.text_field :title
+  %label Анонс
+
+  .field
+    = f.text_area :anons
+
+  %label Основной текст
+  .field
+    = f.text_area :content
+  .actions
+    = f.submit ''

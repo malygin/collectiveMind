@@ -1,6 +1,23 @@
 .wholePost
+	.rating
+		- if allow_vote?(question)
+			= link_to image_tag('up.png'), plus_question_path(question), :method => :put
+		-else
+			=image_tag('up.png')
+		%p
+			-if question.raiting>0
+				%span.good_raiting= question.raiting
+			-elsif question.raiting<0
+				%span.bad_raiting= question.raiting
+			-else
+				=question.raiting
+		- if allow_vote?(question)
+			= link_to image_tag('down.png'), minus_question_path(question), :method => :put
+		-else
+			=image_tag('down.png')
+
 	.avatar
-		= link_to gravatar_for(question.user), question.user
+		= link_to gravatar_for(question.user, :size =>40), question.user
 		%br
 		%span.role= question.user.role_name
 	.posts
@@ -8,6 +25,7 @@
 		%br
 		%p
 			=question.text
-			=link_to 'подробнее', question, class: 'more'			
-		=link_to "ответов - #{question.answers.count}", question, class: 'tags' 
+	
+		=link_to "ответов", question, class: 'answer'
+		%b=link_to " #{question.answers.count}", question, class: 'answer' 
 		

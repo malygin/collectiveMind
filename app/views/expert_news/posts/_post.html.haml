@@ -1,0 +1,13 @@
+.wholePost
+
+	.posts
+		%span.namedate= post.title
+		%br
+		%p
+			= post.anons
+			= link_to "Подробнее", post, class: "more"
+- if current_user.expert? or current_user.admin?
+	= link_to 'Редактировать', edit_expert_news_post_path(post)
+	= link_to 'Удалить', post, :confirm => 'Уверены, Олег?', :method => :delete
+
+.dotline=image_tag('dotline.png')
