@@ -8,8 +8,8 @@ class LifeTape::PostsController < ApplicationController
     #todo - improve it too slowly
     top_posts = LifeTape::Post.find(:all, :include => :users).sort_by { |p| p.users.size }
     #@top_posts = LifeTape::Post.joins(:post_voitings).select('life_tape_post_voitings.*, count(user_id) as "user_count"').group(:user_id).order(' user_count desc').limit(3)
-    @top_posts = top_posts.reverse[0..9]
-    @journals = Journal.where(:type_event => 'life_tape_comment_save').limit(5)
+    @top_posts = top_posts.reverse[0..3]
+    @journals = Journal.where(:type_event => 'life_tape_comment_save').limit(9)
   end
 
   def category
@@ -35,7 +35,7 @@ class LifeTape::PostsController < ApplicationController
     top_posts = LifeTape::Post.find(:all, :include => :users).sort_by { |p| p.users.size }
     #@top_posts = LifeTape::Post.joins(:post_voitings).select('life_tape_post_voitings.*, count(user_id) as "user_count"').group(:user_id).order(' user_count desc').limit(3)
     @top_posts = top_posts.reverse[0..3]
-    @journals = Journal.where(:type_event => 'life_tape_comment_save').limit(5)
+    @journals = Journal.where(:type_event => 'life_tape_comment_save').limit(9)
 
     respond_to do |format|
       format.html # show.html.erb
@@ -70,7 +70,7 @@ class LifeTape::PostsController < ApplicationController
     top_posts = LifeTape::Post.find(:all, :include => :users).sort_by { |p| p.users.size }
     #@top_posts = LifeTape::Post.joins(:post_voitings).select('life_tape_post_voitings.*, count(user_id) as "user_count"').group(:user_id).order(' user_count desc').limit(3)
     @top_posts = top_posts.reverse[0..3]
-    @journals = Journal.where(:type_event => 'life_tape_comment_save').limit(5)
+    @journals = Journal.where(:type_event => 'life_tape_comment_save').limit(9)
     respond_to do |format|
       format.html # new.html.erb
       format.json { render json: @life_tape_post }
@@ -83,8 +83,8 @@ class LifeTape::PostsController < ApplicationController
     @ancestor_id = params[:id]
     top_posts = LifeTape::Post.find(:all, :include => :users).sort_by { |p| p.users.size }
     #@top_posts = LifeTape::Post.joins(:post_voitings).select('life_tape_post_voitings.*, count(user_id) as "user_count"').group(:user_id).order(' user_count desc').limit(3)
-    @top_posts = top_posts.reverse[0..9]
-    @journals = Journal.where(:type_event => 'life_tape_comment_save').limit(5)
+    @top_posts = top_posts.reverse[0..3]
+    @journals = Journal.where(:type_event => 'life_tape_comment_save').limit(9)
     respond_to do |format|
       format.html # new.html.erb
       format.json { render json: @life_tape_post }
