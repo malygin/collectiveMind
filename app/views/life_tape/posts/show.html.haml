@@ -44,7 +44,10 @@
 			%br
 			%span.role= comment.user.role_name
 		.posts
-			%span.namedate= comment.user.name_title
+			%span.namedate
+				= comment.user.name_title
+				,
+				= Russian::strftime(comment.created_at,"%d %B %k:%M:%S ")
 			%br
 			%p.comments= comment.content
 			-if signed_in? and not comment.users.include?(current_user)

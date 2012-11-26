@@ -4,7 +4,10 @@
 		%br
 		%span.role= post.user.role_name
 	.posts
-		%span.namedate= post.user.name_title
+		%span.namedate
+			= post.user.name_title
+			,
+			= Russian::strftime(post.created_at,"%d %B %k:%M:%S ")
 		%br
 		=image_tag("tag.png")
 		-unless post.category.nil?
