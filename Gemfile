@@ -14,6 +14,7 @@ gem 'russian'
 gem 'thin'
 gem 'settingslogic'
 gem 'execjs'
+gem 'rest-client'
 #gem 'magic_encoding'
 
 group :development, :test do

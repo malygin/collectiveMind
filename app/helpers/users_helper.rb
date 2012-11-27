@@ -1,5 +1,4 @@
-require "net/http"
-require "uri"
+
 module UsersHelper
 	def gravatar_for(user, options = {:size =>58})
 
@@ -13,8 +12,10 @@ module UsersHelper
 		# 		return image_tag('http://oec-static.main.sgu.ru/storage/oec-j2ee6/ROOT/userFiles/avatars/'+user.login+'_small.jpg')
 		# 	end
 		# end
-		gravatar_image_tag(user.email.downcase, :alt => user.name, :align => 'left',
-			:class =>'avatar', :gravatar => options)
+		# gravatar_image_tag(user.email.downcase, :alt => user.name, :align => 'left',
+		# 	:class =>'avatar', :gravatar => options)
+
+		image_tag('http://oecdo.sgu.ru/ImageServlet?user='+user.login, :class =>'avatar')
 	end
 
 	def available_form_adding_frustration?(user)
