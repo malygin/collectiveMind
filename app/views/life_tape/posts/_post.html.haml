@@ -1,11 +1,5 @@
 .wholePost
-	.avatar
-		= link_to gravatar_for(post.user), post.user
-		%br
-		%span.role= post.user.role_name
-
-		-post.user.awards.each do |award|
-			= image_tag award.url, :title => award.name
+	= render 'users/user_post', :user => post.user
 	.posts
 		%span.namedate
 			= post.user.name_title

@@ -2,10 +2,7 @@
 
 
 .wholePost
-	.avatar
-		= link_to gravatar_for(@life_tape_post.user), @life_tape_post.user
-		%br
-		%span.role= @life_tape_post.user.role_name
+	= render 'users/user_post', :user => @life_tape_post.user
 	.posts
 		%span.namedate= @life_tape_post.user.name_title
 		%br
