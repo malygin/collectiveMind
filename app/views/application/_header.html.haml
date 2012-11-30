@@ -1,7 +1,6 @@
 = link_to image_tag("logo.png", :alt => "Colleсtive mind", :class => "round", ), root_path
 = image_tag("improve.png")    
 - if signed_in?
-
   .blackbut
     = image_tag('exit.png')
     = link_to "Выйти", "/signout", class: "exit"
@@ -45,7 +44,7 @@
     %li= image_tag "separator.png", :class => "separator"
     %li= link_to "Вопросы-ответы", "/questions" , class:  "lmenu"
     %li= image_tag "separator.png", :class => "separator"
-    %li= link_to "Комментарии эксперта", "/articles" , class:  "lmenu"  
+    %li= link_to "Новости и комментарии эксперта", "/expert_news/posts/" , class:  "lmenu"  
     %li= image_tag "separator.png", :class => "separator"
     %li= link_to "Топ пользователей", "/users" , class:  "lmenu"
 

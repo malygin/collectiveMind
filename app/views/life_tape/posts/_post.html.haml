@@ -3,6 +3,9 @@
 		= link_to gravatar_for(post.user), post.user
 		%br
 		%span.role= post.user.role_name
+
+		-post.user.awards.each do |award|
+			= image_tag award.url, :title => award.name
 	.posts
 		%span.namedate
 			= post.user.name_title

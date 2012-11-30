@@ -28,6 +28,9 @@ class User < ActiveRecord::Base
   has_many :voitings
   has_many :voited_frustrations, :class_name =>'Frustration', :through => :voitings
 
+  has_many :user_awards
+  has_many :awards, :through => :user_awards
+
   email_regex = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
   validates :name, :presence => true,
   				   :length => { :maximum => 50 }

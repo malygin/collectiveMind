@@ -329,6 +329,10 @@ namespace :db  do
 			:password_confirmation => "expertmass99")
 		expert.toggle!(:expert)
 
+		award = Award.create(:name => 'Выбор эксперта', :url =>'prize1.png')
+
+		user1.awards << award
+
 		# 99.times do |n|
 		# 	name = Faker::Name.first_name
 		# 	surname = Faker::Name.last_name
