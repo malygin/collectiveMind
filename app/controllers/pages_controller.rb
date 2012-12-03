@@ -59,7 +59,7 @@ class PagesController < ApplicationController
   def to_expert_frustrations
     @frustrations_feed = Frustration.feed_to_expert.paginate(:page => params[:page])
     @title = "Недовольства на рассмотрении"
-    render 'expert'
+    render 'home'
   end
 
   def accepted_frustrations
@@ -77,7 +77,7 @@ class PagesController < ApplicationController
    def declined_frustrations
     @frustrations_feed = Frustration.feed_declined.paginate(:page => params[:page])
     @title = "Отклоненные недовольства"
-    render 'expert'
+    render 'home'
   end       
 
 

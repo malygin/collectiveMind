@@ -4,7 +4,7 @@
 	%h1=@category.name
 	=simple_format(@category.long_desc)
 - @life_tape_posts.each do |post|
-	= render post
+	= render post, :more => true
 = will_paginate @life_tape_posts
 
 			

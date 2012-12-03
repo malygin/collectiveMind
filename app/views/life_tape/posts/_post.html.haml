@@ -12,10 +12,14 @@
 		-else
 			%span.tags без категории
 
-
-		%p
-			= trim_string(post.content)
-			= link_to "Подробнее", post, class: "more"
+		
+		- if more 
+			%p
+				= trim_string(post.content)
+				= link_to "Подробнее", post, class: "more"
+		-else
+			%p
+				= post.content
 
 		.social 
 			=link_to post.childs.count, "#", class: "counter"
