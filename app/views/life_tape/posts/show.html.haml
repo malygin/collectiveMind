@@ -36,10 +36,7 @@
 				=f.submit ''
 - @life_tape_post.comments.each do |comment|
 	.comments
-		.avatar
-			= link_to gravatar_for(comment.user),comment.user
-			%br
-			%span.role= comment.user.role_name
+		= render 'users/user_post', :user => comment.user
 		.posts
 			%span.namedate
 				= comment.user.name_title
