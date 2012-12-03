@@ -68,6 +68,24 @@ class UsersController < ApplicationController
 		redirect_to users_path
 	end
 
+	def forecast
+		forecast = params[:forecast]
+		fkeys = forecast.keys
+		fkeys.each do |f|
+			if  forecast[f]==''
+				flash[:error] = 'Вы не выбрали все места!'
+			end
+		end
+		if flash[:error].nil?
+			for key in forecast.keys 
+				frustration = Frustration.find(forecast[key])
+				current_user.frustration_forecasts.create(:frustration => frustration, :order => key)
+			end
+			flash[:success] = "Вы успешно сделали прогноз, теперь можно голосовать"
+		end
+		redirect_to :back
+	end
+
 	private
 
 

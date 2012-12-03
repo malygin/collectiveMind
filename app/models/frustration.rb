@@ -26,6 +26,9 @@ class Frustration < ActiveRecord::Base
   has_many :voitings
   has_many :voited_users, :class_name =>'User', :through => :voitings
 
+  has_many :frustration_forecasts
+  has_many :forecast_users, :class_name => 'User', :through => :frustration_forecasts
+
   default_scope :order => 'frustrations.created_at DESC'
 
 

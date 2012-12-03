@@ -69,6 +69,7 @@ class FrustrationsController < ApplicationController
 		redirect_to user_path(current_user)
 	end
 
+
 	def update_scores_for_comments( score_max, scores)
 		unless @frustration.struct_user.nil?
 			@frustration.struct_user.update_column(:score, @frustration.struct_user.score + score_max*scores.ratio_for_structuring_comment)
@@ -172,11 +173,13 @@ class FrustrationsController < ApplicationController
 	end
 	
 	def vote_for
-		puts params
+		#puts params
 		@frustration = Frustration.find(params[:id])
 		@frustration.voitings.create(:user => current_user, :score => params[:score].to_f-1)
 		render json: @frustration.voiting_score
 	end
+
+	
 
 	def show
 		@negative = params[:negative].nil? ? true : to_bool(params[:negative]) 

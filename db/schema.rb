@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121130095559) do
+ActiveRecord::Schema.define(:version => 20121203112110) do
 
   create_table "answers", :force => true do |t|
     t.string   "text"
@@ -79,6 +79,17 @@ ActiveRecord::Schema.define(:version => 20121130095559) do
   add_index "frustration_comments", ["frustration_id"], :name => "index_frustration_comments_on_frustration_id"
   add_index "frustration_comments", ["useful_frustration_id"], :name => "index_frustration_comments_on_useful_frustration_id"
   add_index "frustration_comments", ["user_id"], :name => "index_frustration_comments_on_user_id"
+
+  create_table "frustration_forecasts", :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "frustration_id"
+    t.integer  "order"
+    t.datetime "created_at",     :null => false
+    t.datetime "updated_at",     :null => false
+  end
+
+  add_index "frustration_forecasts", ["frustration_id"], :name => "index_frustration_forecasts_on_frustration_id"
+  add_index "frustration_forecasts", ["user_id"], :name => "index_frustration_forecasts_on_user_id"
 
   create_table "frustrations", :force => true do |t|
     t.string   "what"

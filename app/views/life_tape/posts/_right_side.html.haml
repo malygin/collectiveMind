@@ -1,7 +1,8 @@
-%h1 Новости
-%p.righttext
-	= @news.anons
-	= link_to 'подробнее', @news
+- unless @news.nil?
+	%h1 Новости
+	%p.righttext
+		= @news.anons
+		= link_to 'подробнее', @news
 
 
 .redtitle Топ записей

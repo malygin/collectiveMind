@@ -47,10 +47,14 @@ CollectiveMind::Application.routes.draw do
 
 
   #get "users/new"
-  resources :users
+  resources :users do
+    member do
+      put :forecast
+    end
+  end
 
   
-  match 'vote_for/:id/:score' => 'frustrations#vote_for',  :constraints => { :score => /[0-2]/ }
+  match 'vote_for/:id/:score' => 'frustrations#vote_for',  :constraints => { :score => /[0-3]/ }
   resources :sessions, :only => [:new, :create, :destroy]
   resources :frustrations  do      
      
@@ -71,12 +75,11 @@ CollectiveMind::Application.routes.draw do
        put :update_to_struct
        put :update_to_expert
        put :to_archive_by_admin
-       put :vote_for 
-       put :vote_against
 
 
       end
   end
+  
   #match "frustrations/archive/:id/", :to =>"frustrations#archive"
   match "/signup", :to =>"users#new"
 

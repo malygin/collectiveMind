@@ -4,6 +4,17 @@
 / - if active_form_frustration?
 / 	%h1{:class => "frustration"} Добавить неудовлетворенность
 / 	= render "shared/frustration_form"
+-if @voted and !current_user.nil? and  current_user.frustration_forecasts.empty?
+	Перед началом голосования сделайте свой прогноз!
+	= form_for current_user, :url => forecast_user_path(current_user) do |f|
+		= select_tag 'forecast[1]', options_from_collection_for_select(@frustrations_feed, "id", "what"), :prompt => "Выберите первое место"
+		%br
+		= select_tag 'forecast[2]', options_from_collection_for_select(@frustrations_feed, "id", "what"), :prompt => "Выберите второе место"
+		%br
+		= select_tag 'forecast[3]', options_from_collection_for_select(@frustrations_feed, "id", "what"), :prompt => "Выберите третье место"
+		%br
+		%actions
+			=f.submit "", class: 'btn'
 = render "frustrations/feed_frustrations"
 
 

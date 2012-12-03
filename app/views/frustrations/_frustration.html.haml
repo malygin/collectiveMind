@@ -25,10 +25,15 @@
 			=link_to "негативные - #{frustration.negative.count}", frustration, class: 'tags' 
 			=link_to "оформляющие - #{frustration.structure.count}", frustration, class: 'tags'
 		-if frustration.voted?				
-			Набрано очков:
-			%span.greentitle= frustration.voiting_score
-			- if can_vote?(frustration)
+			- if expert? or admin? 
+				Набрано очков:
+				%span.greentitle= frustration.voiting_score
+			- if current_user.frustration_forecasts.empty?
+				%br
+				%span.red сделайте прогноз, чтобы начать голосование
+			- elsif can_vote?(frustration)
 				.voteBar
+					=link_to "категорически за",  '/vote_for/'+frustration.id.to_s+'/3', :id => frustration.id, :remote => true, :method => :put, class: "voteCounter"
 					=link_to "за",  '/vote_for/'+frustration.id.to_s+'/2', :id => frustration.id, :remote => true, :method => :put, class: "voteCounter"
 					=link_to "все равно",  '/vote_for/'+frustration.id.to_s+'/1', :id => frustration.id, :remote => true, :method => :put, class: "voteCounter"
 					=link_to "против",  '/vote_for/'+frustration.id.to_s+'/0', :id => frustration.id, :remote => true, :method => :put, class: "voteCounter"
