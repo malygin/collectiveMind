@@ -170,6 +170,13 @@ class FrustrationsController < ApplicationController
 		flash[:success] = "Недовольство  отправлено эксперту"
 		redirect_to '/accepted'
 	end
+	
+	def vote_for
+		puts params
+		@frustration = Frustration.find(params[:id])
+		@frustration.voitings.create(:user => current_user, :score => params[:score].to_f-1)
+		render json: @frustration.voiting_score
+	end
 
 	def show
 		@negative = params[:negative].nil? ? true : to_bool(params[:negative]) 

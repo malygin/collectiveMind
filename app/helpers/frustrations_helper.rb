@@ -14,6 +14,14 @@ module FrustrationsHelper
 			return frustration.comments_before_structuring.where(:negative => false).count != 0
 		end
 	end
+	def can_vote?(frustration)
+		frustration.voitings.each do |fr|
+			if fr.user == current_user	
+				return false
+			end
+		end
+		return true
+	end
 
 	# available only if frustrations<max and user hasnot structured and unstructured
 	def active_form_frustration?

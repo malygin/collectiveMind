@@ -13,10 +13,7 @@
 			%actions
 				=f.submit "", class: 'btn'
 
-/ = render @accepted_frustrations
-
-%table{:class => "frustrations"}
-	= render 'shared/feed_item', :feed_item => @frustration
+= render @frustration
 
 - unless @frustration.comments_after_structuring.empty?
 	%h2 Комментарии после оформления

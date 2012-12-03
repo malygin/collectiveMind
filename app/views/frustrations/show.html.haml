@@ -1,3 +1,5 @@
+
+
 - if frustration_for_expert?(@frustration)
 	.notification
 		Недовольство на рассмотрении эксперта, скоро по нему будет вынесено решение 
@@ -35,8 +37,7 @@
 	.notification Три дня еще не прошло, следите за состоянием своих недовольств в личном аккаунте.
 
 
-%table{:class => "frustrations"}
-	= render 'shared/feed_item', :feed_item => @frustration
+= render  @frustration
 
 
 - unless @frustration.comments_after_structuring.empty?

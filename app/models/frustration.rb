@@ -81,6 +81,14 @@ class Frustration < ActiveRecord::Base
     self.frustration_comments.where('created_at > ?', self.structuring_date).where(:trash => false).where('frustration_comment_id' => nil)
   end
 
+  def voiting_score
+    score = 0
+    self.voitings.each do |v|
+      score += v.score
+    end
+    return score
+  end
+
 
   def archive?
     self.status == 1
