@@ -14,12 +14,12 @@
 
 .stages
   %ul
-    %li{ :class => cp('/frustrations/accepted')}
-      = image_tag image_for_stages("1", '/frustrations/accepted'), :class => 'numbers'
+    %li{ :class => cp('/frustrations/accepted', 'frustrations')}
+      = image_tag image_for_stages("1", '/frustrations/accepted','frustrations'), :class => 'numbers'
       = link_to "Недовольства", "/frustrations/accepted", class: "lstages"  
     = image_tag "space.png"  
-    %li{ :class => cp('/life_tape/posts')}
-      = image_tag image_for_stages("2", '/life_tape/posts'), :class => 'numbers'
+    %li{ :class => cp('/life_tape/posts', 'life_tape')}
+      = image_tag image_for_stages("2", '/life_tape/posts', 'life_tape'), :class => 'numbers'
       = link_to "Сбор сведений и идей", "/life_tape/posts/", class: "lstages" 
     = image_tag "space.png"  
     %li

@@ -28,7 +28,11 @@
 			- if expert? or admin? 
 				Набрано очков:
 				%span.greentitle= frustration.voiting_score
-			- if current_user.frustration_forecasts.empty?
+
+
+			- if current_user.nil?
+				
+			- elsif !current_user.nil? and current_user.frustration_forecasts.empty?
 				%br
 				%span.red сделайте прогноз, чтобы начать голосование
 			- elsif can_vote?(frustration)

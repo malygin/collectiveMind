@@ -81,6 +81,10 @@ class UsersController < ApplicationController
 				frustration = Frustration.find(forecast[key])
 				current_user.frustration_forecasts.create(:frustration => frustration, :order => key)
 			end
+			unless params[:essay]==''
+				puts 'save!!'
+				current_user.create_frustration_essay(:content => params[:essay])
+			end
 			flash[:success] = "Вы успешно сделали прогноз, теперь можно голосовать"
 		end
 		redirect_to :back

@@ -152,7 +152,7 @@ CollectiveMind::Application.routes.draw do
 
   # You can have the root of your site routed with "root"
   # just remember to delete public/index.html.
-  root :to => 'life_tape/posts#index'
+  root :to => 'pages#voted_frustrations'
 
   # See how all your routes lay out with "rake routes"
 

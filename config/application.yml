@@ -2,6 +2,7 @@
 defaults: &defaults
 # количество неудовлетворенностей на 1 человека
   max_frustration: 3
+  current_stage: 'frustrations'
 # дней для принятия неструктурированной
   days_accept_unstracture: 3
 # дней лежит в архиве неструктурированная

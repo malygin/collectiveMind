@@ -35,6 +35,7 @@ class User < ActiveRecord::Base
   has_many :frustration_forecasts
   has_many :forecasts , :class_name => 'Frustration', :through => :frustration_forecasts
 
+  has_one :frustration_essay
 
   email_regex = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
   validates :name, :presence => true,
