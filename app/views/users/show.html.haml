@@ -29,10 +29,9 @@
 	%br
 	%i Ни одной не добавлено
 %br
-%h1 Недовольства, сформулированные с помощью моих комментариев
+%h1 Записи
 - unless @user.structured_frustrations.empty?
-	%table{:class => "frustrations"}
-		= render :partial => 'shared/feed_item', :collection => @user.structured_frustrations
+	= render @user
 -else
 	%br
 	%i Их пока нет

@@ -14,6 +14,7 @@ gem 'russian'
 gem 'thin'
 gem 'settingslogic'
 gem 'execjs'
+
 gem 'rest-client'
 #gem 'magic_encoding'
 
@@ -24,6 +25,7 @@ group :development, :test do
   gem 'ruby-debug19'
   gem 'quiet_assets'
 
+
 end
 
 group :production do
@@ -32,14 +34,8 @@ group :production do
 end
 
 group :test do
-  gem 'rspec-rails'
-  gem 'rspec'
-  gem 'guard-rspec'
-  gem 'webrat'
-  #gem 'capybara', :git => 'git://github.com/jnicklas/capybara.git'
-  gem 'launchy'
-  gem 'database_cleaner'
-  gem 'factory_girl_rails'
+gem "rspec-rails", "~> 2.0"
+
 end
 
 # Gems used only for assets and not required

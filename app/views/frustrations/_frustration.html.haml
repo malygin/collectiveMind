@@ -32,15 +32,15 @@
 
 			- if current_user.nil?
 				
-			- elsif !current_user.nil? and current_user.frustration_forecasts.empty?
-				%br
-				%span.red сделайте прогноз, чтобы начать голосование
 			- elsif can_vote?(frustration)
 				.voteBar
-					=link_to "категорически за",  '/vote_for/'+frustration.id.to_s+'/3', :id => frustration.id, :remote => true, :method => :put, class: "voteCounter"
-					=link_to "за",  '/vote_for/'+frustration.id.to_s+'/2', :id => frustration.id, :remote => true, :method => :put, class: "voteCounter"
-					=link_to "все равно",  '/vote_for/'+frustration.id.to_s+'/1', :id => frustration.id, :remote => true, :method => :put, class: "voteCounter"
-					=link_to "против",  '/vote_for/'+frustration.id.to_s+'/0', :id => frustration.id, :remote => true, :method => :put, class: "voteCounter"
+					=link_to "очень недоволен",  '/vote_for/'+frustration.id.to_s+'/3', :id => frustration.id, :remote => true, :method => :put, class: "voteCounter"
+					|
+					=link_to "недоволен",  '/vote_for/'+frustration.id.to_s+'/2', :id => frustration.id, :remote => true, :method => :put, class: "voteCounter"
+					|
+					=link_to "безразлично",  '/vote_for/'+frustration.id.to_s+'/1', :id => frustration.id, :remote => true, :method => :put, class: "voteCounter"
+					|
+					=link_to "меня устраивает",  '/vote_for/'+frustration.id.to_s+'/0', :id => frustration.id, :remote => true, :method => :put, class: "voteCounter"
 			-else
 				%br
 				%span.red Вы уже проголосовали за это недовольство

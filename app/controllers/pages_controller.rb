@@ -70,7 +70,7 @@ class PagesController < ApplicationController
 
    def voted_frustrations
     @frustrations_feed = Frustration.feed_voted.paginate(:page => params[:page])
-    @title = "Недовольства на голосовании"
+    @title = "Голосование за недовольства"
     @voted = true
     render 'home'
   end   

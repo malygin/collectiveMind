@@ -1,4 +1,5 @@
 # encoding: utf-8
+
 class Frustration < ActiveRecord::Base
   #status 0 -unstructed, 1 -archive, 2 - structed, 3 -to expert, 
   #4 -allow expert, 5 -deny expert, 6 - for voiting
@@ -91,7 +92,9 @@ class Frustration < ActiveRecord::Base
     end
     return score
   end
-
+  def what_short
+    self.what[0..70]+" ..."
+  end
 
   def archive?
     self.status == 1
@@ -115,7 +118,14 @@ class Frustration < ActiveRecord::Base
     if not self.what_expert.nil?
      '<b>что:</b> '+ self.what_expert + " <b> когда: </b>" + self.when_expert + " <b> где: </b>" + self.wherin_expert
     elsif not self.what.nil?
-      '<b>что:</b> '+self.what + " <b> когда:</b> " +self.when + " <b> где: </b>" + self.wherin
+      result = '<b>что:</b> '+self.what
+      unless self.when == ''
+        result+=" <b> когда:</b> " +self.when 
+      end
+      unless self.wherin == ''
+        result += " <b> где: </b>" + self.wherin        
+      end
+      result      
     else
       self.content_text
     end

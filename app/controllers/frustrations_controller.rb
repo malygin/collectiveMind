@@ -179,6 +179,11 @@ class FrustrationsController < ApplicationController
 		render json: @frustration.voiting_score
 	end
 
+	def new 
+		@frustration = Frustration.new 
+
+	end
+
 	
 
 	def show
