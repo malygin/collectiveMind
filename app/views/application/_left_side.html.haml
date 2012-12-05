@@ -8,11 +8,6 @@
 		%li= link_to "На голосовании", "/frustrations/voted", class: cp_frustration('/frustrations/voted') 
 	=image_tag("shortdots.png")
 
-- unless @news.nil?
-	%h1 Новости
-	%p.righttext
-		= @news.anons
-		= link_to 'подробнее', @news
 
 
 =image_tag("shortdots.png")
