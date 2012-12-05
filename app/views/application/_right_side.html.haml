@@ -1,3 +1,9 @@
+- unless @news.nil?
+	%h1 Новости
+	%p.righttext
+		= @news.anons
+		= link_to 'подробнее', @news
+
 / %h1 Что вы можете сделать сейчас
 / -if current_user.nil?
 / 	%p.righttext 

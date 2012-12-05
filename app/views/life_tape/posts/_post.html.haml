@@ -13,7 +13,7 @@
 			%span.tags без категории
 
 		
-		- if more 
+		- if link_more 
 			%p
 				= trim_string(post.content)
 				= link_to "Подробнее", post, class: "more"
