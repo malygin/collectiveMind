@@ -43,7 +43,7 @@ class Concept::PostsController < ApplicationController
   # POST /concept/posts.json
   def create
     @concept_post = Concept::Post.new(params[:concept_post])
-    @concept_posts.user = current_user
+    @concept_post.user = current_user
     respond_to do |format|
       if @concept_post.save
         format.html { redirect_to  action: "index" , notice: 'Концепция добавлена!' }

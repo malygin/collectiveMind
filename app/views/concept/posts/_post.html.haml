@@ -10,6 +10,8 @@
 		-else
 			%p
 				= post.goal
+		- if post.user == current_user
+			= link_to 'Редактировать', edit_concept_post_path(post)
 
 		/ .social 
 		/ 	=link_to post.childs.count, "#", class: "counter"
