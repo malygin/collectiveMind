@@ -152,6 +152,22 @@ CollectiveMind::Application.routes.draw do
       end
     end
 
+    namespace :concept do
+
+      resources :posts do
+        member do
+            put :add_comment
+            put :plus
+
+        end
+      end
+      resources :comments do
+          member do
+            put :plus
+          end  
+      end
+    end
+
   # You can have the root of your site routed with "root"
   # just remember to delete public/index.html.
   root :to => 'pages#voted_frustrations'
