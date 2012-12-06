@@ -14,24 +14,7 @@
 				=f.text_area :content
 			.action
 				=f.submit ''
-- @life_tape_post.comments.each do |comment|
-	.comments
-		= render 'users/user_post', :user => comment.user
-		.posts
-			%span.namedate
-				= comment.user.name_title
-				,
-				= Russian::strftime(comment.created_at,"%d %B %k:%M:%S ")
-			%br
-			%p.comments= comment.content
-			-if signed_in? and not comment.users.include?(current_user)
-				.like
-					=link_to "#{comment.users.count}",  plus_life_tape_comment_path(comment), :id => comment.id,:remote => true, :method => :put, class: "counter"
-					=image_tag "like.png"
-			-else
-				.like
-					= comment.users.count
-					= image_tag "like.png"
+= render :partial => 'shared/comment',:collection => @life_tape_post.comments, :locals => { :path_link => '/life_tape/comments/'}
 
 - unless @life_tape_post.post.nil?
 	.redtitle Этой запись вдохновлена следующей записью

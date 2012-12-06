@@ -53,12 +53,12 @@ ActiveRecord::Schema.define(:version => 20121206125521) do
 
   create_table "concept_comment_voitings", :force => true do |t|
     t.integer  "user_id"
-    t.integer  "post_id"
+    t.integer  "comment_id"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end
 
-  add_index "concept_comment_voitings", ["created_at", "post_id"], :name => "index_concept_comment_voitings_on_created_at_and_post_id"
+  add_index "concept_comment_voitings", ["created_at", "comment_id"], :name => "index_concept_comment_voitings_on_created_at_and_comment_id"
 
   create_table "concept_comments", :force => true do |t|
     t.text     "content"
