@@ -77,6 +77,8 @@ class PagesController < ApplicationController
     @frustrations_feed = Frustration.feed_voted.paginate(:page => params[:page])
     @title = "Голосование за недовольства"
     @voted = true
+    @news = ExpertNews::Post.first
+
     render 'home'
   end   
 
