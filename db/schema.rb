@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121206113235) do
+ActiveRecord::Schema.define(:version => 20121206125521) do
 
   create_table "answers", :force => true do |t|
     t.string   "text"
@@ -50,6 +50,15 @@ ActiveRecord::Schema.define(:version => 20121206113235) do
   end
 
   add_index "comments", ["post_id"], :name => "index_comments_on_post_id"
+
+  create_table "concept_comment_voitings", :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "post_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  add_index "concept_comment_voitings", ["created_at", "post_id"], :name => "index_concept_comment_voitings_on_created_at_and_post_id"
 
   create_table "concept_comments", :force => true do |t|
     t.text     "content"
