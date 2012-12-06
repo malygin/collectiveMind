@@ -23,6 +23,11 @@
       #middle
         #container
           #content
+            -if current_user.test_attempts.empty?
+              .notification 
+                Пройдите, пожалуйста, социологический опрос
+                =link_to " по ссылке", '/tests'
+              %br
             - flash.each do |key, value|
               -if key == :success
                 .success

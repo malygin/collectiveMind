@@ -1,49 +1,44 @@
-.user_info
-	= gravatar_for @user, :size => 120 
-	%span{:class => 'name'}
-		= @user.name
-		= @user.surname
-	%br
-	набрано балов
-	%span{:class => 'rate'}= @user.score
-	%h1 
-		Добавлено  недовольств - 
-		= @user.frustrations.count
 
--if @user.frustrations.count == Settings.max_frustration 
-	.notification Вы не можете добавить, потому что добавили уже максимальное количество
--elsif @user.structured_and_unstructured.count != 0
-	.notification У вас есть недовольство, не отправленная в архив или эксперту
--elsif @user.test_attempts.empty?
-	.notification 
-		Сначала пройдите социологический опрос
-		=link_to " по ссылке", '/tests'
--else
-	= render "shared/frustration_form"
+.wholePost
+	= render 'users/user_post', :user =>  @user
+	.posts
+		%span.namedate
+			=  @user.name_title
+			- if current_user == @user
+				(это вы)
+		%br
+		Недовольств -
+		%span.rate_small= @user.frustrations.count		
+		%br
+		Идей  -
+		%span.rate_small= @user.life_tape_posts.count
+		%br
+		Концепций  -
+		%span.rate_small= 0
+		%br
+		Проектов  -
+		%span.rate_small= 0
 
-
-- unless @user.frustrations.empty?
-	%table{:class => "frustrations"}
+- unless @user.expert? 
+	%h1 Недовольства
+	- unless @user.frustrations.empty?
 		= render @user.frustrations
--else 
-	%br
-	%i Ни одной не добавлено
+	-else 
+		%i Ни одного не добавлено
+		%br
+		%br
+		.dotline=image_tag('dotline.png')
+
 %br
-%h1 Записи
-- unless @user.structured_frustrations.empty?
-	= render @user
+%h1 Идеи
+- unless @user.life_tape_posts.empty?
+	= render @user.life_tape_posts
 -else
-	%br
-	%i Их пока нет
-	%br
-	%br
-%h1 Недовольства, отправленные в архив благодаря моему комментарию
-- unless @user.negatived_frustrations.empty?
-	%table{:class => "frustrations"}
-		= render :partial => 'shared/feed_item', :collection => @user.negatived_frustrations
--else
-	%br
-	%i Их пока нет
+	Пока не добавлено
+%h1 Концепции
+Пока не добавлено
+%h1 Проекты
+Пока не добавлено
 
 
 

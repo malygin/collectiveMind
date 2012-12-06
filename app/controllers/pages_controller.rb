@@ -1,7 +1,7 @@
 # encoding: utf-8
 class PagesController < ApplicationController
     before_filter :expert?, :only => :to_expert_frustrations
-
+    before_filter :get_news
   def contacts
   end
 
@@ -23,11 +23,16 @@ class PagesController < ApplicationController
   def articles
   end
 
+  def get_news
+    @news = ExpertNews::Post.first
+  end
+  
   def home
   		@frustration = Frustration.new 
   		@frustrations_feed = Frustration.feed_unstructure.paginate(:page => params[:page])
       @users = User.only_simple_users.order('users.score DESC').limit(5)
       @title = "Произвольные недовольства" 
+
   end
 
   #TODO

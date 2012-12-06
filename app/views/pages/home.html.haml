@@ -7,7 +7,7 @@
 - if current_user.nil?
 	Авторизуйтесь, пожалуйста, чтобы начать голосование!
 - elsif not @voted
-	= link_to image_tag('add_discontent.png'), new_frustration_path
+	/ = link_to image_tag('add_discontent.png'), new_frustration_path
 - elsif @voted and !current_user.nil? and  current_user.frustration_forecasts.empty?
 	Перед началом голосования вы можете, если захотите, сделать свой прогноз! Если вы угадаете недовольство, которое по итогам голосования попадет в тройку набравших наибольшее число голосов, то получите 5 призовых баллов, а если вы угадаете еще и его точное место, то еще  + 5 баллов. 
 	= form_for current_user, :url => forecast_user_path(current_user) do |f|

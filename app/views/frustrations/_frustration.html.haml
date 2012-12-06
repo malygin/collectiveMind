@@ -2,8 +2,8 @@
 	.avatar
 		= render 'users/user_post', :user => frustration.user
 	.posts
-		%span.namedate= frustration.user.name_title
-		%br
+		= render 'users/user_name', :user => frustration.user, :created_at => frustration.created_at
+
 		%p
 			- if not frustration.archive? and  signed_in?
 				= frustration.content.html_safe
@@ -25,7 +25,7 @@
 			=link_to "негативные - #{frustration.negative.count}", frustration, class: 'tags' 
 			=link_to "оформляющие - #{frustration.structure.count}", frustration, class: 'tags'
 		-if frustration.voted?				
-			- if expert? or admin? 
+			- if current_user.id == 1 or current_user.id == 2 
 				Набрано очков:
 				%span.greentitle= frustration.voiting_score
 

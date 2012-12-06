@@ -3,5 +3,10 @@
 	%br
 	%span.role= user.role_name
 	%br
-	-user.awards.each do |award|
-		= image_tag award.url, :title => award.name
+
+	- unless user.expert? or user.admin?
+		%span.rate_small= user.score
+		%span.role балов
+		%br
+		-user.awards.each do |award|
+			= image_tag award.url, :title => award.name

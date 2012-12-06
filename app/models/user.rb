@@ -18,8 +18,8 @@ class User < ActiveRecord::Base
   has_and_belongs_to_many :questions
   has_and_belongs_to_many :answers
 
-  has_many :life_type_comment_voitings
-  has_many :life_type_comments, :through => :life_type_comment_voitings
+  has_many :life_tape_comment_voitings
+  has_many :life_tape_comments, :through => :life_type_comment_voitings
 
 # list of frustrations which was denied for user's comment
   has_many :negatived_frustrations, :class_name => "Frustration", :foreign_key =>"negative_user_id"
@@ -27,6 +27,8 @@ class User < ActiveRecord::Base
 
   has_many :voitings
   has_many :voited_frustrations, :class_name =>'Frustration', :through => :voitings
+
+  has_many :life_tape_posts, :class_name => "LifeTape::Post"
 
   has_many :user_awards
   has_many :awards, :through => :user_awards
@@ -81,6 +83,8 @@ class User < ActiveRecord::Base
       "студент"
     end
   end
+
+
  
       
 
