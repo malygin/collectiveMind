@@ -1,0 +1,44 @@
+= form_for @concept_post do |f|
+  %label 
+    %b Цель концепции 
+    образ желаемого будущего
+  %br
+  %field
+    = f.text_area :goal
+  %div{:class=>'timestamp'} -опишите каким вы видите желаемое будущее кратко и сочно!
+  %br
+  %field
+    %b Задача &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp;  Ресурсы
+    %br
+    = text_area_tag 'task', '', :class =>'task'
+    &nbsp; ===>
+    = text_area_tag 'task', '', :class =>'task'
+  %br
+  %field
+    %b Задача &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp;  Ресурсы
+    %br
+    = text_area_tag 'task', '', :class =>'task'
+    &nbsp; ===>
+    = text_area_tag 'task', '', :class =>'task'
+  %br
+  %field
+    %b Задача &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp;  Ресурсы
+    %br
+    = text_area_tag 'task', '', :class =>'task'
+    &nbsp; ===>
+    = text_area_tag 'task', '', :class =>'task'
+  %div{:class=>'timestamp'} - опишите кажду задачу в отдельной колонке и укажите в правой колонке что за ресурсы там нужны
+
+  %br
+  %br
+  %label 
+    %b Реалистичность 
+    это возможно в принципе? 
+  %br
+  %field
+    = f.text_area :reality
+  %div{:class=>'timestamp'} - привидите аргументы, что ваши идеи имеют место быть в этом мире
+
+
+  %actions
+    = f.submit "",  class: "btn"

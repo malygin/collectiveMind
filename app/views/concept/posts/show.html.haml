@@ -1,0 +1,21 @@
+%p#notice= notice
+
+%p
+  %b Goal:
+  = @concept_post.goal
+%p
+  %b Reality:
+  = @concept_post.reality
+%p
+  %b User:
+  = @concept_post.user_id
+%p
+  %b Number views:
+  = @concept_post.number_views
+%p
+  %b Life tape post:
+  = @concept_post.life_tape_post_id
+
+= link_to 'Edit', edit_concept_post_path(@concept_post)
+\|
+= link_to 'Back', concept_posts_path

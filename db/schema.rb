@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121204071244) do
+ActiveRecord::Schema.define(:version => 20121206090553) do
 
   create_table "answers", :force => true do |t|
     t.string   "text"
@@ -51,10 +51,24 @@ ActiveRecord::Schema.define(:version => 20121204071244) do
 
   add_index "comments", ["post_id"], :name => "index_comments_on_post_id"
 
+  create_table "concept_posts", :force => true do |t|
+    t.text     "goal"
+    t.text     "reality"
+    t.integer  "user_id"
+    t.integer  "number_views"
+    t.integer  "life_tape_post_id"
+    t.datetime "created_at",        :null => false
+    t.datetime "updated_at",        :null => false
+  end
+
+  add_index "concept_posts", ["created_at"], :name => "index_concept_posts_on_created_at"
+  add_index "concept_posts", ["life_tape_post_id"], :name => "index_concept_posts_on_life_tape_post_id"
+  add_index "concept_posts", ["user_id"], :name => "index_concept_posts_on_user_id"
+
   create_table "expert_news_posts", :force => true do |t|
     t.string   "title"
-    t.text     "anons"
-    t.text     "content"
+    t.string   "anons"
+    t.string   "content"
     t.integer  "user_id"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
