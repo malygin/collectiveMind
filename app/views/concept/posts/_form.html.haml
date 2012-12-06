@@ -1,43 +1,48 @@
 = form_for @concept_post do |f|
   %label 
-    %b Цель концепции 
+    %b Цель -
     образ желаемого будущего
   %br
   %field
     = f.text_area :goal
-  %div{:class=>'timestamp'} -опишите каким вы видите желаемое будущее кратко и сочно!
+  %div{:class=>'timestamp'} Что, в главном, представляет собой предлагаемое нововведение и каковы его желаемые результаты.
   %br
   %field
-    %b Задача &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp;  Ресурсы
+    %label
+      %b Задачи -
+      направления работы в будущем
+      %b Ресурсы -
+      методы и средства работы в будущем
+
     %br
     = text_area_tag 'task', '', :class =>'task'
     &nbsp; ===>
     = text_area_tag 'task', '', :class =>'task'
   %br
   %field
-    %b Задача &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp;  Ресурсы
+    
     %br
     = text_area_tag 'task', '', :class =>'task'
     &nbsp; ===>
     = text_area_tag 'task', '', :class =>'task'
   %br
-  %field
-    %b Задача &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp;  Ресурсы
+  %field 
     %br
     = text_area_tag 'task', '', :class =>'task'
     &nbsp; ===>
     = text_area_tag 'task', '', :class =>'task'
-  %div{:class=>'timestamp'} - опишите кажду задачу в отдельной колонке и укажите в правой колонке что за ресурсы там нужны
+  %div{:class=>'timestamp'} - какие конкретные практические вопросы должны разрешаться 
+  %div.timestamp   - посредством каких ресурсов это  предлагается делать
 
   %br
   %br
   %label 
-    %b Реалистичность 
-    это возможно в принципе? 
+    %b Реалистичность -
+    возможно ли это осуществить на практике? 
   %br
   %field
     = f.text_area :reality
-  %div{:class=>'timestamp'} - привидите аргументы, что ваши идеи имеют место быть в этом мире
+  %div{:class=>'timestamp'} - Каким образом и в какие сроки реалистично ввести в действие в ДО СГУ данное нововведение, в частности, задействовать ресурсы для него, и почему осуществить это реалистично?
 
 
   %actions

@@ -50,12 +50,5 @@
         = Russian::strftime(comment.created_at,"%d %B %k:%M:%S ")
       %br
       %p.comments= comment.content
-      -if signed_in? and not comment.users.include?(current_user)
-        .like
-          =link_to "#{comment.users.count}",  plus_concept_comment_path(comment), :id => comment.id,:remote => true, :method => :put, class: "counter"
-          =image_tag "like.png"
-      -else
-        .like
-          = comment.users.count
-          = image_tag "like.png"
+
 

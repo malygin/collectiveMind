@@ -16,11 +16,24 @@ class Concept::PostsController < ApplicationController
   # GET /concept/posts/1.json
   def show
     @concept_post = Concept::Post.find(params[:id])
-
+    @comment = Concept::Comment.new
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @concept_post }
     end
+  end
+  #todo union method for all comments and partials
+  def add_comment
+    post = Concept::Post.find(params[:id])
+    unless  params[:concept_comment][:content]==""
+      post.comments.create(:content => params[:concept_comment][:content], :user =>current_user)
+      current_user.journals.build(:type_event=>'concept_comment_save', :body=>post.id).save!
+      flash[:success] = "Комментарий добавлен"
+    else
+      flash[:success] = "Введите текст комментария"
+    end
+    redirect_to post
+
   end
 
   # GET /concept/posts/new
