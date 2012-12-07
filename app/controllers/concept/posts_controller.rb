@@ -57,15 +57,16 @@ class Concept::PostsController < ApplicationController
   def create
     @concept_post = Concept::Post.new(params[:concept_post])
     @concept_post.user = current_user
-    respond_to do |format|
-      if @concept_post.save
-        format.html { redirect_to  action: "index" , notice: 'Концепция добавлена!' }
-        format.json { render json: @concept_post, status: :created, location: @concept_post }
-      else
-        format.html { render action: "new" }
-        format.json { render json: @concept_post.errors, status: :unprocessable_entity }
-      end
-    end
+    puts params
+    # respond_to do |format|
+    #   if @concept_post.save
+    #     format.html { redirect_to  action: "index" , notice: 'Концепция добавлена!' }
+    #     format.json { render json: @concept_post, status: :created, location: @concept_post }
+    #   else
+    #     format.html { render action: "new" }
+    #     format.json { render json: @concept_post.errors, status: :unprocessable_entity }
+    #   end
+    # end
   end
 
   # PUT /concept/posts/1
