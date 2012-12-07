@@ -1,0 +1,8 @@
+.comments
+	= form_for comment, :url => url_link, :method => :put do |f|
+		= render 'shared/error_messages', :object =>f.object
+		%label Ваш комментарий
+		.field
+			=f.text_area :content
+		.action
+			=f.submit ''

@@ -32,14 +32,8 @@
 = link_to 'Назад', concept_posts_path
 
 - if signed_in?
-  .comments
-    = form_for @comment, :url => add_comment_concept_post_path(@concept_post.id), :method => :put do |f|
-      = render 'shared/error_messages', :object =>f.object
-      %label Ваш комментарий
-      .field
-        =f.text_area :content
-      .action
-        =f.submit ''
+  = render :partial => 'shared/comment_form', :locals => { :comment => @comment, :url_link => add_comment_concept_post_path(@concept_post.id)}
+
 = render :partial => 'shared/comment',:collection => @concept_post.comments, :locals => { :path_link => '/concept/comments/'}
   
 
