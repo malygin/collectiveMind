@@ -3,5 +3,5 @@ class Concept::Post < ActiveRecord::Base
   belongs_to :user
   belongs_to :life_tape_post
   has_many :comments
-
+  has_many :task_supply_pairs
 end
