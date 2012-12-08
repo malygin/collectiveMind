@@ -2,6 +2,8 @@
 class LifeTape::PostsController < ApplicationController
   # GET /life_tape/posts
   # GET /life_tape/posts.json
+  before_filter :authenticate, :only => [:create, :new]
+
   def index
     @life_tape_posts = LifeTape::Post.paginate(:page => params[:page])
     @categories = LifeTape::Category.all
