@@ -6,6 +6,12 @@
 		%li= link_to "Отклоненные", "/frustrations/declined", class: cp_frustration('/frustrations/declined') 
 		%li= link_to "Архив", "/frustrations/archive", class: cp_frustration('/frustrations/archive') 
 		%li= link_to "На голосовании", "/frustrations/voted", class: cp_frustration('/frustrations/voted') 
+		- if expert? or admin?
+			%li= link_to "Результаты голосования", "/frustrations/show_forecast", class: cp_frustration('/frustrations/show_forecast') 
+
+
+
+
 	=image_tag("shortdots.png")
 
 

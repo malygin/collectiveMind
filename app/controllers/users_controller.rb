@@ -30,7 +30,7 @@ class UsersController < ApplicationController
 		# 	render 'show_admin'			
  	# 	end
 		# @frustrations = @user.frustrations.paginate(:page => params[:page])
-		# @frustration = Frustration.new 
+		@frustration = Frustration.new 
 		@news = ExpertNews::Post.first
 
 	end

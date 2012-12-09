@@ -44,6 +44,7 @@ CollectiveMind::Application.routes.draw do
   match "/frustrations/accepted", :to => "pages#accepted_frustrations"  
   match "/frustrations/declined", :to => "pages#declined_frustrations"    
   match "/frustrations/voted", :to => "pages#voted_frustrations"    
+  match "/frustrations/show_forecast", :to => "frustrations#show_forecast"    
 
 
   #get "users/new"

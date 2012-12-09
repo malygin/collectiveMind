@@ -33,6 +33,11 @@ class FrustrationsController < ApplicationController
 			end
 		end
 	end
+	
+	def show_forecast
+		@frustrations = Frustration.feed_voted.sort{|x, y| y.voiting_score <=> x.voiting_score}[0..2]
+		@forecasts = FrustrationForecast.order(:user_id).all
+	end
 
 	def destroy
 		@frustration.destroy
