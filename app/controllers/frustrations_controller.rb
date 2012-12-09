@@ -36,7 +36,15 @@ class FrustrationsController < ApplicationController
 	
 	def show_forecast
 		@frustrations = Frustration.feed_voted.sort{|x, y| y.voiting_score <=> x.voiting_score}[0..2]
-		@forecasts = FrustrationForecast.find(:all, :order => "user_id")
+		forecasts = FrustrationForecast.find(:all, :order => "user_id")
+		@fres={}
+		forecasts.each do |f|
+			if @fres[f.user].nil?
+				@fres[f.user]=[[f.frustration, f.order]]
+			else
+				@fres[f.user]<<[f.frustration, f.order]
+			end
+		end
 	end
 
 	def destroy
