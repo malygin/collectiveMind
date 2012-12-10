@@ -1,0 +1,36 @@
+- unless @news.nil?
+	%h1 Новости
+	%p.righttext
+		= @news.anons
+		= link_to 'подробнее', @news
+
+%h1 Тех. поддержка
+%p.righttext
+	Что-то непонятно? 
+	= link_to 'Задайте вопрос', questions_path
+
+.redtitle Топ записей
+- @top_posts.each do |post|
+	%p.righttext
+		= trim_string(post.goal, 100)
+		= link_to "подробнее", post
+	=image_tag('dots.png')
+
+.redtitle Рекомендованные вам
+
+%p.righttext
+
+
+
+-unless @journals.nil?
+	.redtitle Активность
+	- @journals.each do |journal|
+		%p.righttext
+			=Russian::strftime(journal.created_at,"%d %B %k:%M:%S ")
+			%b= journal.user.name_title
+			добавил комментарий к 
+			=link_to 'записи', concept_post_path(journal.body)
+		=image_tag('dots.png')
+
+
+

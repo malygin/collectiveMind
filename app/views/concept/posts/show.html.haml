@@ -1,3 +1,5 @@
+- if @concept_post.user == current_user
+  = link_to 'Редактировать', edit_concept_post_path(@concept_post)
 .wholePost
   = render 'users/user_post', :user => @concept_post.user
   .posts
@@ -29,23 +31,19 @@
       %br= @concept_post.reality
 
 
-    / .social 
-    /   =link_to post.childs.count, "#", class: "counter"
-    /   =image_tag "tree.png"
-    /   - if signed_in? and not post.users.include?(current_user)
-    /     =link_to "#{post.users.count}",  plus_life_tape_post_path(post), :id => post.id,:remote => true, :method => :put, class: "counter"
-    /   -else
-    /     =post.users.count
-    /   =image_tag "like.png"
-    /   =link_to post.number_views, post, class: "counter"
-    /   =image_tag "views.png"
-    /   =link_to post.comments.count, post, class: "counter"
-    /   =image_tag "comment.png"
+    .social 
+      - if signed_in? and not  @concept_post.users.include?(current_user)
+        =link_to "#{post.users.count}",  plus_concept_post_path( @concept_post), :id =>  @concept_post.id,:remote => true, :method => :put, class: "counter"
+      -else
+        = @concept_post.users.count
+      =image_tag "like.png"
+      =link_to  @concept_post.number_views,  @concept_post, class: "counter"
+      =image_tag "views.png"
+      =link_to  @concept_post.comments.count,  @concept_post, class: "counter"
+      =image_tag "comment.png"
 
-- if @concept_post.user == current_user
-  = link_to 'Редактировать', edit_concept_post_path(@concept_post)
-\|
-= link_to 'Назад', concept_posts_path
+
+
 
 - if signed_in?
   = render :partial => 'shared/comment_form', :locals => { :comment => @comment, :url_link => add_comment_concept_post_path(@concept_post.id)}
