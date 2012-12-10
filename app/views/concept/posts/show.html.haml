@@ -4,13 +4,29 @@
     = render 'users/user_name', :user => @concept_post.user, :created_at => @concept_post.created_at
     %p
       %b Цели (образ желаемого будущего)
-      = @concept_post.goal
-    %p
-      %b Задачи => Ресурсы
-      Пример задачи ->  и ресурса
+      %br= @concept_post.goal
+    %table.tasks
+      %tr
+        %td
+          %label.small
+            %b Задачи -
+            направления работы в будущем
+        %td &nbsp;
+        %td
+          %label.small
+            %b Ресурсы -
+            методы и средства работы в будущем
+      - @concept_post.task_supply_pairs.each_with_index do |p, index|
+        %tr.ts
+          %td= p.task
+          %td= image_tag('arrow.png')
+          %td= p.supply
+          %td
+
+ 
     %p
       %b Реалистичность
-      = @concept_post.reality
+      %br= @concept_post.reality
 
 
     / .social 

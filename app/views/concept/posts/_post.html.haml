@@ -13,16 +13,11 @@
 		- if post.user == current_user
 			= link_to 'Редактировать', edit_concept_post_path(post)
 
-		/ .social 
-		/ 	=link_to post.childs.count, "#", class: "counter"
-		/ 	=image_tag "tree.png"
-		/ 	- if signed_in? and not post.users.include?(current_user)
-		/ 		=link_to "#{post.users.count}",  plus_life_tape_post_path(post), :id => post.id,:remote => true, :method => :put, class: "counter"
-		/ 	-else
-		/ 		=post.users.count
-		/ 	=image_tag "like.png"
-		/ 	=link_to post.number_views, post, class: "counter"
-		/ 	=image_tag "views.png"
-		/ 	=link_to post.comments.count, post, class: "counter"
-		/ 	=image_tag "comment.png"
+		.social 
+			=link_to "#{post.comments.count}",  '', :id => post.id,:remote => true, :method => :put, class: "counter"	
+			=image_tag "like.png"
+			=link_to post.number_views, post, class: "counter"
+			=image_tag "views.png"
+			=link_to post.comments.count, post, class: "counter"
+			=image_tag "comment.png"
 .dotline=image_tag('dotline.png')

@@ -7,32 +7,35 @@
     = f.text_area :goal
   %div{:class=>'timestamp'} Что, в главном, представляет собой предлагаемое нововведение и каковы его желаемые результаты.
   %br
-  %field
-    %label
-      %b Задачи -
-      направления работы в будущем
-      %b Ресурсы -
-      методы и средства работы в будущем
-
-    %br
-    = text_area_tag 'task_supply[1][1]', '', :class =>'task'
-    &nbsp; ===>
-    = text_area_tag 'task_supply[1][2]', '', :class =>'task'
-  %br
-  %field
+  %table.tasks
+    %tr
+      %td
+        %label.small
+          %b Задачи -
+          направления работы в будущем
+      %td &nbsp;
+      %td
+        %label.small
+          %b Ресурсы -
+          методы и средства работы в будущем
+    - @concept_post.task_supply_pairs.each_with_index do |p, index|
+      %tr.ts
+        %td= text_area_tag 'task_supply['+index.to_s+'][1]', p.task, :class =>'task'
+        %td= image_tag('arrow.png')
+        %td= text_area_tag 'task_supply['+index.to_s+'][2]', p.supply, :class =>'task'
+        %td=link_to_function image_tag('close.png'), ' $(this).parent().parent().remove()'
     
-    %br
-    = text_area_tag 'task_supply[2][1]', '', :class =>'task'
-    &nbsp; ===>
-    = text_area_tag 'task_supply[2][2]', '', :class =>'task'
-  %br
-  %field 
-    %br
-    = text_area_tag 'task_supply[3][1]', '', :class =>'task'
-    &nbsp; ===>
-    = text_area_tag 'task_supply[3][2]', '', :class =>'task'
-  %div{:class=>'timestamp'} - какие конкретные практические вопросы должны разрешаться 
-  %div.timestamp   - посредством каких ресурсов это  предлагается делать
+
+    %tr.links
+      %td{:colspan=>'3'}= link_to_function 'Добавить задачу', 'addTask($(".ts").length+20)'
+
+
+    %tr
+      %td
+        %div.timestamp.short - какие конкретные практические вопросы должны разрешаться
+      %td= image_tag('arrow.png')
+      %td 
+        %div.timestamp.short - посредством каких ресурсов это  предлагается делать
 
   %br
   %br
