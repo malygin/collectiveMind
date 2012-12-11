@@ -5,13 +5,21 @@ class Concept::PostsController < ApplicationController
   # GET /concept/posts.json
     before_filter :authenticate, :only => [:create, :new]
 
-  def index
-    @concept_posts = Concept::Post.where(:status => '0').paginate(:page => params[:page])
-    top_posts = Concept::Post.find(:all, :include => :users).sort_by { |p| p.users.size }
+  def prepare_data
+    top_posts = Concept::Post.where(:status => '0').sort_by { |p| p.users.size }
     #@top_posts = LifeTape::Post.joins(:post_voitings).select('life_tape_post_voitings.*, count(user_id) as "user_count"').group(:user_id).order(' user_count desc').limit(3)
     @top_posts = top_posts.reverse[0..3]
     @journals = Journal.where(:type_event => 'concept_comment_save').limit(9)
     @news = ExpertNews::Post.first    
+  end
+
+  def index
+    status = params['status_id']
+    if status.nil?
+      status ='0'
+    end
+    @concept_posts = Concept::Post.where(:status => status).paginate(:page => params[:page])
+    prepare_data
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @concept_posts }
@@ -25,11 +33,8 @@ class Concept::PostsController < ApplicationController
     @concept_post.update_column(:number_views, @concept_post.number_views+1)
 
     @comment = Concept::Comment.new
-    top_posts = Concept::Post.find(:all, :include => :users).sort_by { |p| p.users.size }
-    #@top_posts = LifeTape::Post.joins(:post_voitings).select('life_tape_post_voitings.*, count(user_id) as "user_count"').group(:user_id).order(' user_count desc').limit(3)
-    @top_posts = top_posts.reverse[0..3]
-    @journals = Journal.where(:type_event => 'concept_comment_save').limit(9)
-    @news = ExpertNews::Post.first   
+    prepare_data
+  
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @concept_post }
@@ -54,11 +59,7 @@ class Concept::PostsController < ApplicationController
   def new
     @concept_post = Concept::Post.new
     @concept_post.task_supply_pairs << Concept::TaskSupplyPair.new(:task =>'', :supply => '')
-     top_posts = Concept::Post.find(:all, :include => :users).sort_by { |p| p.users.size }
-    #@top_posts = LifeTape::Post.joins(:post_voitings).select('life_tape_post_voitings.*, count(user_id) as "user_count"').group(:user_id).order(' user_count desc').limit(3)
-    @top_posts = top_posts.reverse[0..3]
-    @journals = Journal.where(:type_event => 'concept_comment_save').limit(9)
-    @news = ExpertNews::Post.first   
+    prepare_data
     respond_to do |format|
       format.html # new.html.erb
       format.json { render json: @concept_post }
@@ -68,12 +69,7 @@ class Concept::PostsController < ApplicationController
   # GET /concept/posts/1/edit
   def edit
     @concept_post = Concept::Post.find(params[:id])
-    @task_supply = @concept_post.task_supply_pairs
-    top_posts = Concept::Post.find(:all, :include => :users).sort_by { |p| p.users.size }
-    #@top_posts = LifeTape::Post.joins(:post_voitings).select('life_tape_post_voitings.*, count(user_id) as "user_count"').group(:user_id).order(' user_count desc').limit(3)
-    @top_posts = top_posts.reverse[0..3]
-    @journals = Journal.where(:type_event => 'concept_comment_save').limit(9)
-    @news = ExpertNews::Post.first   
+    prepare_data
   end
 
   def plus
@@ -135,10 +131,11 @@ class Concept::PostsController < ApplicationController
   # DELETE /concept/posts/1.json
   def destroy
     @concept_post = Concept::Post.find(params[:id])
-    @concept_post.destroy
+    @concept_post.status = 1
+    @concept_post.save
 
     respond_to do |format|
-      format.html { redirect_to concept_posts_url }
+      format.html { redirect_to  action: "index", notice: "Концепция перемещена в архив" }
       format.json { head :no_content }
     end
   end

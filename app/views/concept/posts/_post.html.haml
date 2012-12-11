@@ -10,8 +10,12 @@
 		-else
 			%p
 				= post.goal
-		- if post.user == current_user
+		- if post.user == current_user and post.status ==0
+			%br
 			= link_to 'Редактировать', edit_concept_post_path(post)
+			= link_to 'Отправить в архив', {:action => :destroy, :id => post.id}, :method => :delete, :confirm => 'Точно?'
+
+
 
 		.social 
 			- if signed_in? and not post.users.include?(current_user)
