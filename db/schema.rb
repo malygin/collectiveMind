@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121204071244) do
+ActiveRecord::Schema.define(:version => 20121210105826) do
 
   create_table "answers", :force => true do |t|
     t.string   "text"
@@ -50,6 +50,67 @@ ActiveRecord::Schema.define(:version => 20121204071244) do
   end
 
   add_index "comments", ["post_id"], :name => "index_comments_on_post_id"
+
+  create_table "concept_comment_voitings", :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "comment_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  add_index "concept_comment_voitings", ["created_at", "comment_id"], :name => "index_concept_comment_voitings_on_created_at_and_comment_id"
+
+  create_table "concept_comments", :force => true do |t|
+    t.text     "content"
+    t.integer  "user_id"
+    t.integer  "post_id"
+    t.boolean  "useful"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  add_index "concept_comments", ["created_at"], :name => "index_concept_comments_on_created_at"
+  add_index "concept_comments", ["post_id"], :name => "index_concept_comments_on_post_id"
+  add_index "concept_comments", ["user_id"], :name => "index_concept_comments_on_user_id"
+
+  create_table "concept_post_voitings", :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "post_id"
+    t.boolean  "against"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  add_index "concept_post_voitings", ["post_id", "user_id"], :name => "index_concept_post_voitings_on_post_id_and_user_id"
+  add_index "concept_post_voitings", ["post_id"], :name => "index_concept_post_voitings_on_post_id"
+  add_index "concept_post_voitings", ["user_id"], :name => "index_concept_post_voitings_on_user_id"
+
+  create_table "concept_posts", :force => true do |t|
+    t.text     "goal"
+    t.text     "reality"
+    t.integer  "user_id"
+    t.integer  "number_views"
+    t.integer  "life_tape_post_id"
+    t.datetime "created_at",        :null => false
+    t.datetime "updated_at",        :null => false
+    t.integer  "status"
+  end
+
+  add_index "concept_posts", ["created_at"], :name => "index_concept_posts_on_created_at"
+  add_index "concept_posts", ["life_tape_post_id"], :name => "index_concept_posts_on_life_tape_post_id"
+  add_index "concept_posts", ["status"], :name => "index_concept_posts_on_status"
+  add_index "concept_posts", ["user_id"], :name => "index_concept_posts_on_user_id"
+
+  create_table "concept_task_supply_pairs", :force => true do |t|
+    t.text     "task"
+    t.text     "supply"
+    t.integer  "post_id"
+    t.integer  "order"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  add_index "concept_task_supply_pairs", ["post_id"], :name => "index_concept_task_supply_pairs_on_post_id"
 
   create_table "expert_news_posts", :force => true do |t|
     t.string   "title"

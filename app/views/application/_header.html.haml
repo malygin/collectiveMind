@@ -22,10 +22,10 @@
       = image_tag image_for_stages("2", '/life_tape/posts', 'life_tape'), :class => 'numbers'
       = link_to "Сбор сведений и идей", "/life_tape/posts/", class: "lstages" 
     = image_tag "space.png"  
-    %li
-      = image_tag "3disabled.png", :class => 'numbers'
-      %span.lstagesdisabled  Концепции
-    = image_tag "space.png"  
+    %li{ :class => cp('/concept/posts', 'concept')}
+      = image_tag image_for_stages("3", '/concept/posts', 'concept'), :class => 'numbers'
+      = link_to "Концепции", "/concept/posts/", class: "lstages" 
+    = image_tag "space.png" 
 
     %li
       = image_tag "4disabled.png", :class => 'numbers'
@@ -44,7 +44,7 @@
     %li= image_tag "separator.png", :class => "separator"
     %li= link_to "Вопросы-ответы", "/questions" , class:  "lmenu"
     %li= image_tag "separator.png", :class => "separator"
-    %li= link_to "Новости и комментарии эксперта", "/expert_news/posts/" , class:  "lmenu"  
+    %li= link_to "Новости и комментарии  ведущего-эксперта", "/expert_news/posts/" , class:  "lmenu"  
     %li= image_tag "separator.png", :class => "separator"
     %li= link_to "Топ пользователей", "/users" , class:  "lmenu"
 

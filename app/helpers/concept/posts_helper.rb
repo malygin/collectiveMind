@@ -1,0 +1,2 @@
+module Concept::PostsHelper
+end

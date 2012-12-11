@@ -1,0 +1,55 @@
+- if @concept_post.user == current_user and @concept_post.id == 0
+  = link_to 'Редактировать', edit_concept_post_path(@concept_post)
+  = link_to 'Отправить в архив', {:action => :destroy, :id => @concept_post.id}, :method => :delete, :confirm => 'Точно?'
+.wholePost
+  = render 'users/user_post', :user => @concept_post.user
+  .posts
+    = render 'users/user_name', :user => @concept_post.user, :created_at => @concept_post.created_at
+    %p
+      %b Цели (образ желаемого будущего)
+      %br= @concept_post.goal
+    %table.tasks
+      %tr
+        %td
+          %label.small
+            %b Задачи -
+            направления работы в будущем
+        %td &nbsp;
+        %td
+          %label.small
+            %b Ресурсы -
+            методы и средства работы в будущем
+      - @concept_post.task_supply_pairs.each_with_index do |p, index|
+        %tr.ts
+          %td= p.task
+          %td= image_tag('arrow.png')
+          %td= p.supply
+          %td
+
+ 
+    %p
+      %b Реалистичность
+      %br= @concept_post.reality
+
+
+    .social 
+      - if signed_in? and not  @concept_post.users.include?(current_user)
+        =link_to "#{@concept_post.users.count}",  plus_concept_post_path(@concept_post), :id =>  @concept_post.id,:remote => true, :method => :put, class: "counter"
+      -else
+        = @concept_post.users.count
+      =image_tag "like.png"
+      =link_to  @concept_post.number_views,  @concept_post, class: "counter"
+      =image_tag "views.png"
+      =link_to  @concept_post.comments.count,  @concept_post, class: "counter"
+      =image_tag "comment.png"
+
+
+
+
+- if signed_in? and @concept_post.status == 0
+  = render :partial => 'shared/comment_form', :locals => { :comment => @comment, :url_link => add_comment_concept_post_path(@concept_post.id)}
+
+= render :partial => 'shared/comment',:collection => @concept_post.comments, :locals => { :path_link => '/concept/comments/'}
+  
+
+
