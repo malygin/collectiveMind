@@ -12,7 +12,7 @@ class LifeTape::Post < ActiveRecord::Base
   # # has_many :inspired_by, :through => :post_inspired, :source => :use
   has_many :post_voitings
   has_many :users, :through => :post_voitings
-
+  has_many :concept_posts
   has_many :comments
   default_scope :order => 'life_tape_posts.created_at DESC'
 

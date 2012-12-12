@@ -1,8 +1,8 @@
 class Concept::Post < ActiveRecord::Base
  # 0 - new,  1 - archiv, 2 - to expert, 3 - accepted 
-  attr_accessible :goal, :life_tape_post, :number_views, :reality, :user, :status
+  attr_accessible :goal, :life_tape_post_id, :number_views, :reality, :user, :status
   belongs_to :user
-  belongs_to :life_tape_post
+  belongs_to :life_tape_post,  :class_name => "LifeTape::Post"
   has_many :comments
   has_many :task_supply_pairs
 

@@ -45,11 +45,15 @@
 
 
 
-
 - if signed_in? and @concept_post.status == 0
   = render :partial => 'shared/comment_form', :locals => { :comment => @comment, :url_link => add_comment_concept_post_path(@concept_post.id)}
 
 = render :partial => 'shared/comment',:collection => @concept_post.comments, :locals => { :path_link => '/concept/comments/'}
-  
+%br
+%br
+%br
+- unless @concept_post.life_tape_post.nil?
+  .redtitle Идея, которой вдохновлена концепция
+  = render :partial => 'life_tape/posts/post', :object  => @concept_post.life_tape_post
 
 

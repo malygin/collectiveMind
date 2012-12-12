@@ -57,7 +57,10 @@ class Concept::PostsController < ApplicationController
   # GET /concept/posts/new
   # GET /concept/posts/new.json
   def new
-    puts params
+    #puts params
+    unless params['idea'].nil?
+      @ltpost = params['idea']
+    end
     @concept_post = Concept::Post.new
     @concept_post.task_supply_pairs << Concept::TaskSupplyPair.new(:task =>'', :supply => '')
     prepare_data
@@ -83,6 +86,9 @@ class Concept::PostsController < ApplicationController
   # POST /concept/posts.json
   def create
     @concept_post = Concept::Post.new(params[:concept_post])
+    unless params['idea'].nil?
+      @concept_post.life_tape_post_id3 = params['idea']
+    end
     @concept_post.number_views =0
     @concept_post.user = current_user
     @concept_post.status = 0

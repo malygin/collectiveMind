@@ -5,9 +5,9 @@
 
 - if signed_in?
 	%br
-	= link_to image_tag("concept.png"), new_life_tape_post_path
+	= link_to image_tag("concept.png"),  '/concept/posts/new?idea='+ @life_tape_post.id.to_s
 	%br
-	
+
 - if signed_in?
 	= render :partial => 'shared/comment_form', :locals => { :comment => @comment, :url_link => add_comment_life_tape_post_path(@life_tape_post.id)}
 	

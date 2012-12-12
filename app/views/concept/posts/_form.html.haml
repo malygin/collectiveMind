@@ -46,6 +46,8 @@
   %field
     = f.text_area :reality
   %div{:class=>'timestamp'} - Каким образом и в какие сроки реалистично ввести в действие в ДО СГУ данное нововведение, в частности, задействовать ресурсы для него, и почему осуществить это реалистично?
+  - unless @ltpost.nil?
+    = hidden_field_tag 'idea', @ltpost 
 
 
   %actions
