@@ -3,28 +3,26 @@ class LifeTape::PostsController < ApplicationController
   # GET /life_tape/posts
   # GET /life_tape/posts.json
   before_filter :authenticate, :only => [:create, :new]
+ def prepare_data
+    @categories = LifeTape::Category.all
+    top_posts = LifeTape::Post.find(:all).sort_by { |p| p.users.size }
+    #@top_posts = LifeTape::Post.joins(:post_voitings).select('life_tape_post_voitings.*, count(user_id) as "user_count"').group(:user_id).order(' user_count desc').limit(3)
+    @top_posts = top_posts.reverse[0..3]
+    @journals = Journal.events_for_user_feed
+    @news = ExpertNews::Post.first    
+  end
 
   def index
     @life_tape_posts = LifeTape::Post.paginate(:page => params[:page])
-    @categories = LifeTape::Category.all
     #todo - improve it too slowly
-    top_posts = LifeTape::Post.find(:all, :include => :users).sort_by { |p| p.users.size }
-    #@top_posts = LifeTape::Post.joins(:post_voitings).select('life_tape_post_voitings.*, count(user_id) as "user_count"').group(:user_id).order(' user_count desc').limit(3)
-    @top_posts = top_posts.reverse[0..3]
-    @journals = Journal.where(:type_event => 'life_tape_comment_save').limit(9)
+    prepare_data
     @news = ExpertNews::Post.first
   end
 
   def category
     @category = LifeTape::Category.find(params[:cat_id])
     @life_tape_posts = LifeTape::Post.where(:category_id => params[:cat_id]).paginate(:page => params[:page])
-    @categories = LifeTape::Category.all
-    top_posts = LifeTape::Post.find(:all, :include => :users).sort_by { |p| p.users.size }
-    #@top_posts = LifeTape::Post.joins(:post_voitings).select('life_tape_post_voitings.*, count(user_id) as "user_count"').group(:user_id).order(' user_count desc').limit(3)
-    @top_posts = top_posts.reverse[0..3]
-    @journals = Journal.where(:type_event => 'life_tape_comment_save').limit(5)
-    @news = ExpertNews::Post.first
-
+    prepare_data
     render 'index'
   end
 
@@ -32,16 +30,10 @@ class LifeTape::PostsController < ApplicationController
   # GET /life_tape/posts/1.json
   def show
     @life_tape_post = LifeTape::Post.find(params[:id])
-    @categories = LifeTape::Category.all
     @comment = LifeTape::Comment.new
     puts @life_tape_post.number_views
     @life_tape_post.update_column(:number_views, @life_tape_post.number_views+1)
-    #todo - improve it too slowly
-    top_posts = LifeTape::Post.find(:all, :include => :users).sort_by { |p| p.users.size }
-    #@top_posts = LifeTape::Post.joins(:post_voitings).select('life_tape_post_voitings.*, count(user_id) as "user_count"').group(:user_id).order(' user_count desc').limit(3)
-    @top_posts = top_posts.reverse[0..3]
-    @journals = Journal.where(:type_event => 'life_tape_comment_save').limit(9)
-    @news = ExpertNews::Post.first
+    prepare_data
 
     respond_to do |format|
       format.html # show.html.erb
@@ -72,13 +64,7 @@ class LifeTape::PostsController < ApplicationController
   # GET /life_tape/posts/new.json
   def new
     @life_tape_post = LifeTape::Post.new
-    @categories = LifeTape::Category.all
-    top_posts = LifeTape::Post.find(:all, :include => :users).sort_by { |p| p.users.size }
-    #@top_posts = LifeTape::Post.joins(:post_voitings).select('life_tape_post_voitings.*, count(user_id) as "user_count"').group(:user_id).order(' user_count desc').limit(3)
-    @top_posts = top_posts.reverse[0..3]
-    @journals = Journal.where(:type_event => 'life_tape_comment_save').limit(9)
-    @news = ExpertNews::Post.first
-
+    prepare_data
     respond_to do |format|
       format.html # new.html.erb
       format.json { render json: @life_tape_post }
@@ -87,14 +73,8 @@ class LifeTape::PostsController < ApplicationController
 
   def new_child
     @life_tape_post = LifeTape::Post.new
-    @categories = LifeTape::Category.all
     @ancestor_id = params[:id]
-    top_posts = LifeTape::Post.find(:all, :include => :users).sort_by { |p| p.users.size }
-    #@top_posts = LifeTape::Post.joins(:post_voitings).select('life_tape_post_voitings.*, count(user_id) as "user_count"').group(:user_id).order(' user_count desc').limit(3)
-    @top_posts = top_posts.reverse[0..3]
-    @journals = Journal.where(:type_event => 'life_tape_comment_save').limit(9)
-    @news = ExpertNews::Post.first
-
+    prepare_data
     respond_to do |format|
       format.html # new.html.erb
       format.json { render json: @life_tape_post }
@@ -118,6 +98,7 @@ class LifeTape::PostsController < ApplicationController
     puts params[:id]
     respond_to do |format|
       if @life_tape_post.save
+        current_user.journals.build(:type_event=>'life_tape_post_save', :body=>@life_tape_post.id).save!
         format.html { redirect_to action: "index" , notice: 'Запись успешно создана!' }
         format.json { render json: @life_tape_post, status: :created, location: @life_tape_post }
       else

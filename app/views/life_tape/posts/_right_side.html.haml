@@ -29,8 +29,7 @@
 		%p.righttext
 			=Russian::strftime(journal.created_at,"%d %B %k:%M:%S ")
 			%b= journal.user.name_title
-			добавил комментарий к 
-			=link_to 'записи', life_tape_post_path(journal.body)
+			= journal_parser(journal).html_safe
 		=image_tag('dots.png')
 
 

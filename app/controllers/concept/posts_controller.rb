@@ -9,7 +9,7 @@ class Concept::PostsController < ApplicationController
     top_posts = Concept::Post.where(:status => '0').sort_by { |p| p.users.size }
     #@top_posts = LifeTape::Post.joins(:post_voitings).select('life_tape_post_voitings.*, count(user_id) as "user_count"').group(:user_id).order(' user_count desc').limit(3)
     @top_posts = top_posts.reverse[0..3]
-    @journals = Journal.where(:type_event => 'concept_comment_save').limit(9)
+    @journals = Journal.events_for_user_feed
     @news = ExpertNews::Post.first    
   end
 
@@ -57,6 +57,7 @@ class Concept::PostsController < ApplicationController
   # GET /concept/posts/new
   # GET /concept/posts/new.json
   def new
+    puts params
     @concept_post = Concept::Post.new
     @concept_post.task_supply_pairs << Concept::TaskSupplyPair.new(:task =>'', :supply => '')
     prepare_data
@@ -65,6 +66,7 @@ class Concept::PostsController < ApplicationController
       format.json { render json: @concept_post }
     end
   end
+
 
   # GET /concept/posts/1/edit
   def edit
@@ -95,6 +97,7 @@ class Concept::PostsController < ApplicationController
 
     respond_to do |format|
       if @concept_post.save
+         current_user.journals.build(:type_event=>'concept_post_save', :body=>@concept_post.id).save!
         format.html { redirect_to  action: "index" , notice: 'Концепция добавлена!' }
         format.json { render json: @concept_post, status: :created, location: @concept_post }
       else
