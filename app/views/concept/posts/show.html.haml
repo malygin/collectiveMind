@@ -10,15 +10,15 @@
       %br= @concept_post.goal
     %table.tasks
       %tr
-        %td
+        %td.size50
+          %br
           %label.small
-            %b Задачи -
-            направления работы в будущем
+            %b Задачи - направления работы в будущем
         %td &nbsp;
         %td
+          %br
           %label.small
-            %b Ресурсы -
-            методы и средства работы в будущем
+            %b Ресурсы - методы и средства работы в будущем
       - @concept_post.task_supply_pairs.each_with_index do |p, index|
         %tr.ts
           %td= p.task
