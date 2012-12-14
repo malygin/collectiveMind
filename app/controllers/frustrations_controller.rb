@@ -65,6 +65,11 @@ class FrustrationsController < ApplicationController
 				end
 			end
 		end
+		@fres.each do |k,v|
+			puts k
+			puts v[0]
+			puts '____________'
+		end
 	end
 
 	def destroy
