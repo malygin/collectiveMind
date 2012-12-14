@@ -65,11 +65,14 @@ class FrustrationsController < ApplicationController
 				end
 			end
 		end
+
 		@fres.each do |k,v|
-			puts k
-			puts v[0]
-			puts '____________'
+			k.update_column(:score, k.score + v[0])
+			# puts v[0]
+			# puts '____________'
+			# @frustration.user.update_column(:score, @frustration.user.score + score_max)
 		end
+
 	end
 
 	def destroy
