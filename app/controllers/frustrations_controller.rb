@@ -39,7 +39,7 @@ class FrustrationsController < ApplicationController
 		
 		fr_with_orders = {@frustrations[0] => '1', @frustrations[1] => '2', @frustrations[2] => '3'}
 
-		forecasts = FrustrationForecast.find(:all, :order => "user_id")
+		forecasts = FrustrationForecast.find(:all, :order => "user_id, order")
 		@fres={}
 		forecasts.each do |f|
 			if @fres[f.user].nil?
@@ -54,13 +54,15 @@ class FrustrationsController < ApplicationController
 				end	
 				@fres[f.user]=[score, dic]
 			else
-				if fr_with_orders.keys.include?  f.frustration 
-					@fres[f.user][0] += 5
+				if @fres[f.user][1][f.frustration].nil?
+					if fr_with_orders.keys.include?  f.frustration 
+						@fres[f.user][0] += 5
+					end
+					if fr_with_orders[f.frustration] == f.order
+						@fres[f.user][0] += 5
+					end	
+					@fres[f.user][1][f.frustration] = f.order
 				end
-				if fr_with_orders[f.frustration] == f.order
-					@fres[f.user][0] += 5
-				end	
-				@fres[f.user][1][f.frustration] = f.order
 			end
 		end
 	end
