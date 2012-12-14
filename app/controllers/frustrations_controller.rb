@@ -39,39 +39,39 @@ class FrustrationsController < ApplicationController
 		
 		fr_with_orders = {@frustrations[0] => '1', @frustrations[1] => '2', @frustrations[2] => '3'}
 
-		forecasts = FrustrationForecast.find(:all, :order => "user_id")
-		@fres={}
-		forecasts.each do |f|
-			if @fres[f.user].nil?
-				dic = {}
-				score = 0
-				dic[f.frustration] = f.order
-				if fr_with_orders.keys.include?  f.frustration 
-					score +=5
-				end
-				if fr_with_orders[f.frustration] == f.order.to_s
-					score += 5
-				end	
-				@fres[f.user]=[score, dic]
-			else
-				if @fres[f.user][1][f.frustration].nil?
-					if fr_with_orders.keys.include?  f.frustration 
-						@fres[f.user][0] += 5
-					end
-					if fr_with_orders[f.frustration] == f.order.to_s
-						@fres[f.user][0] += 5
-					end	
-					@fres[f.user][1][f.frustration] = f.order.to_s
-				end
-			end
-		end
+		# forecasts = FrustrationForecast.find(:all, :order => "user_id")
+		# @fres={}
+		# forecasts.each do |f|
+		# 	if @fres[f.user].nil?
+		# 		dic = {}
+		# 		score = 0
+		# 		dic[f.frustration] = f.order
+		# 		if fr_with_orders.keys.include?  f.frustration 
+		# 			score +=5
+		# 		end
+		# 		if fr_with_orders[f.frustration] == f.order.to_s
+		# 			score += 5
+		# 		end	
+		# 		@fres[f.user]=[score, dic]
+		# 	else
+		# 		if @fres[f.user][1][f.frustration].nil?
+		# 			if fr_with_orders.keys.include?  f.frustration 
+		# 				@fres[f.user][0] += 5
+		# 			end
+		# 			if fr_with_orders[f.frustration] == f.order.to_s
+		# 				@fres[f.user][0] += 5
+		# 			end	
+		# 			@fres[f.user][1][f.frustration] = f.order.to_s
+		# 		end
+		# 	end
+		# end
 
-		@fres.each do |k,v|
-			k.update_column(:score, k.score + v[0])
-			# puts v[0]
-			# puts '____________'
-			# @frustration.user.update_column(:score, @frustration.user.score + score_max)
-		end
+		# @fres.each do |k,v|
+		# 	k.update_column(:score, k.score + v[0])
+		# 	# puts v[0]
+		# 	# puts '____________'
+		# 	# @frustration.user.update_column(:score, @frustration.user.score + score_max)
+		# end
 
 	end
 
