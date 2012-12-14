@@ -39,7 +39,7 @@ class FrustrationsController < ApplicationController
 		
 		fr_with_orders = {@frustrations[0] => '1', @frustrations[1] => '2', @frustrations[2] => '3'}
 
-		forecasts = FrustrationForecast.find(:all, :order => "user_id, 'order'")
+		forecasts = FrustrationForecast.find(:all, :order => "user_id, `order`")
 		@fres={}
 		forecasts.each do |f|
 			if @fres[f.user].nil?
