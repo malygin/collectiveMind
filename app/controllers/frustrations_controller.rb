@@ -35,14 +35,31 @@ class FrustrationsController < ApplicationController
 	end
 	
 	def show_forecast
-		@frustrations = Frustration.feed_voted.sort{|x, y| y.voiting_score <=> x.voiting_score}[0..16]
+		@frustrations = Frustration.feed_voted.sort{|x, y| y.voiting_score <=> x.voiting_score}[0..2]
+		fr_with_orders = {@frustration[0] => '1', @frustration[1] => '2', @frustration [2] => '3']
+
 		forecasts = FrustrationForecast.find(:all, :order => "user_id")
 		@fres={}
 		forecasts.each do |f|
 			if @fres[f.user].nil?
-				@fres[f.user]=[[f.frustration, f.order]]
+				dic = {}
+				score = 0
+				dic[f.frustration] = f.order
+				if f.frustration in fr_with_orders.keys
+					score +=5
+				end
+				if fr_with_orders[f.frustration] == f.order
+					score += 5
+				end	
+				@fres[f.user]=[score, dic]
 			else
-				@fres[f.user]<<[f.frustration, f.order]
+				if f.frustration in fr_with_orders.keys
+					@fres[f.user][0] += 5
+				end
+				if fr_with_orders[f.frustration] == f.order
+					@fres[f.user][0] += 5
+				end	
+				@fres[f.user][1][f.frustration] = f.order
 			end
 		end
 	end
