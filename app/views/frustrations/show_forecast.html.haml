@@ -2,12 +2,11 @@
 
 -  @fres.each do |k,v| 
 	%b= k.name_title
-	=v
-	/ = v[0]
-	/ - v[1].each do |f, l|
-	/ 	%br= l
-	/ 	= f.content.html_safe
-	/ .dotline=image_tag('dotline.png')
+	= v[0]
+	- v[1].each do |f, l|
+		%br= l
+		= f.content.html_safe
+	.dotline=image_tag('dotline.png')
 
 
 
