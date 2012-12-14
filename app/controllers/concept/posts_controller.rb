@@ -120,13 +120,18 @@ class Concept::PostsController < ApplicationController
     respond_to do |format|
       if @concept_post.update_attributes(params[:concept_post])
          @concept_post.task_supply_pairs =[]
-         params['task_supply'].each do |k,v|
-          if v['1']!= '' or v['2']!= ''
-            pair = Concept::TaskSupplyPair.new(:task => v['1'], :supply => v['2']) 
-            @concept_post.task_supply_pairs << pair
-          end
-        end
+         unless params['task_supply'].nil?
+          params['task_supply'].each do |k,v|
+            if v['1']!= '' or v['2']!= ''
+              pair = Concept::TaskSupplyPair.new(:task => v['1'], :supply => v['2']) 
+              @concept_post.task_supply_pairs << pair
+            end
+          end           
+         end
+         
         @concept_post.save
+        current_user.journals.build(:type_event=>'concept_post_update', :body=>@concept_post.id).save!
+
         format.html { redirect_to @concept_post, notice: 'Концепция успешно изменена!' }
         format.json { head :no_content }
       else

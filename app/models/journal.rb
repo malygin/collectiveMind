@@ -3,7 +3,7 @@ class Journal < ActiveRecord::Base
   belongs_to :user
 
   def self.events_for_user_feed(lim = 9)
-		types = ['concept_comment_save', 'concept_post_save', 'life_tape_post_save', 'life_tape_comment_save']
+		types = ['concept_comment_save', 'concept_post_save', 'life_tape_post_save', 'life_tape_comment_save', 'concept_post_update', 'question_save']
 		Journal.find(:all, :conditions => ["type_event IN (?)", types ], :limit => lim, :order => 'created_at DESC')
 	end	
 end

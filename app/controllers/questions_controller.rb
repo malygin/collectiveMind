@@ -79,6 +79,8 @@ class QuestionsController < ApplicationController
 
     respond_to do |format|
       if @question.save
+        current_user.journals.build(:type_event=>'question_save', :body=>@question.id).save!
+
         format.html { redirect_to questions_path, notice: 'Вопрос задан, ждем ответа!' }
         format.json { render json: @question, status: :created, location: @question }
       else
