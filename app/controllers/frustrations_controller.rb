@@ -49,7 +49,7 @@ class FrustrationsController < ApplicationController
 				if fr_with_orders.keys.include?  f.frustration 
 					score +=5
 				end
-				if fr_with_orders[f.frustration] == f.order
+				if fr_with_orders[f.frustration] == f.order.to_s
 					score += 5
 				end	
 				@fres[f.user]=[score, dic]
@@ -58,10 +58,10 @@ class FrustrationsController < ApplicationController
 					if fr_with_orders.keys.include?  f.frustration 
 						@fres[f.user][0] += 5
 					end
-					if fr_with_orders[f.frustration] == f.order
+					if fr_with_orders[f.frustration] == f.order.to_s
 						@fres[f.user][0] += 5
 					end	
-					@fres[f.user][1][f.frustration] = f.order
+					@fres[f.user][1][f.frustration] = f.order.to_s
 				end
 			end
 		end
