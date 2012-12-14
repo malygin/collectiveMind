@@ -46,7 +46,7 @@ class FrustrationsController < ApplicationController
 				dic = {}
 				score = 0
 				dic[f.frustration] = f.order
-				if fr_with_orders.keys.includes?  f.frustration 
+				if fr_with_orders.keys.include?  f.frustration 
 					score +=5
 				end
 				if fr_with_orders[f.frustration] == f.order
@@ -54,7 +54,7 @@ class FrustrationsController < ApplicationController
 				end	
 				@fres[f.user]=[score, dic]
 			else
-				if fr_with_orders.keys.includes?  f.frustration 
+				if fr_with_orders.keys.include?  f.frustration 
 					@fres[f.user][0] += 5
 				end
 				if fr_with_orders[f.frustration] == f.order
