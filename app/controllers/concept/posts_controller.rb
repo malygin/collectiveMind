@@ -87,7 +87,7 @@ class Concept::PostsController < ApplicationController
   def create
     @concept_post = Concept::Post.new(params[:concept_post])
     unless params['idea'].nil?
-      @concept_post.life_tape_post_id3 = params['idea']
+      @concept_post.life_tape_post_id = params['idea']
     end
     @concept_post.number_views =0
     @concept_post.user = current_user
