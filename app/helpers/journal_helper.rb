@@ -1,4 +1,4 @@
-# encoding: utf-8ы
+# encoding: utf-8
 module JournalHelper
 
 	def journal_parser(j)

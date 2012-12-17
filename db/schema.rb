@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121210105826) do
+ActiveRecord::Schema.define(:version => 20121217102153) do
 
   create_table "answers", :force => true do |t|
     t.string   "text"
@@ -72,6 +72,16 @@ ActiveRecord::Schema.define(:version => 20121210105826) do
   add_index "concept_comments", ["created_at"], :name => "index_concept_comments_on_created_at"
   add_index "concept_comments", ["post_id"], :name => "index_concept_comments_on_post_id"
   add_index "concept_comments", ["user_id"], :name => "index_concept_comments_on_user_id"
+
+  create_table "concept_post_notes", :force => true do |t|
+    t.integer  "post_id"
+    t.integer  "user_id"
+    t.text     "content"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  add_index "concept_post_notes", ["post_id"], :name => "index_concept_post_notes_on_post_id"
 
   create_table "concept_post_voitings", :force => true do |t|
     t.integer  "user_id"

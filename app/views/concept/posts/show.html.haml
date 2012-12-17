@@ -1,6 +1,7 @@
 - if @concept_post.user == current_user and @concept_post.id == 0
   = link_to 'Редактировать', edit_concept_post_path(@concept_post)
   = link_to 'Отправить в архив', {:action => :destroy, :id => @concept_post.id}, :method => :delete, :confirm => 'Точно?'
+/ - if current_user?(@concept_post.user) and @concept_post == 0 and @concept_post.created_at < 3
 .wholePost
   = render 'users/user_post', :user => @concept_post.user
   .posts

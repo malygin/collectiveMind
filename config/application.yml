@@ -9,6 +9,8 @@ defaults: &defaults
   days_archive_unstracure: 5
 # дней для принятия структурированной 
   days_accept_stracture: 3
+# дней для принятия структурированной 
+  days_accept_concept: 3
 # баллы
   scores:
     unstructure:
