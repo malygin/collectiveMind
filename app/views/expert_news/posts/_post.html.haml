@@ -6,7 +6,7 @@
 		%p
 			= post.anons
 			= link_to "Подробнее", post, class: "more"
-- if current_user.expert? or current_user.admin?
+- if not current_user.nil? and (current_user.expert? or current_user.admin?)
 	= link_to 'Редактировать', edit_expert_news_post_path(post)
 	= link_to 'Удалить', post, :confirm => 'Уверены, Олег?', :method => :delete
 
