@@ -1,7 +1,16 @@
 - if @concept_post.user == current_user and @concept_post.id == 0
   = link_to 'Редактировать', edit_concept_post_path(@concept_post)
   = link_to 'Отправить в архив', {:action => :destroy, :id => @concept_post.id}, :method => :delete, :confirm => 'Точно?'
-/ - if current_user?(@concept_post.user) and @concept_post == 0 and @concept_post.created_at < 3
+
+- if @concept_post.status == 2 and expert?
+  = link_to 'Принять', ''
+  |
+  = link_to ' Отправить на доработку', ''
+  |
+  = link_to ' Отклонить', ''
+
+- if current_user?(@concept_post.user) and @concept_post.status == 0 and @concept_post.created_at < 3.days.ago
+  = link_to 'послать эксперту', to_expert_concept_post_path(@concept_post)
 .wholePost
   = render 'users/user_post', :user => @concept_post.user
   .posts
@@ -30,6 +39,7 @@
       %b Реалистичность
       %br= @concept_post.reality
 
+  
 
     .social 
       - if signed_in? and not  @concept_post.users.include?(current_user)
@@ -41,6 +51,11 @@
       =image_tag "views.png"
       =link_to  @concept_post.comments.count,  @concept_post, class: "counter"
       =image_tag "comment.png"
+
+- unless @concept_post.post_notes.empty?
+  .redtitle Переписка эксперта и автора 
+  = render :partial => 'post_note', :collection => @concept_post.post_notes
+  =image_tag('dots.png')
 
 
 

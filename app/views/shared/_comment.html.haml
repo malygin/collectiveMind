@@ -7,6 +7,8 @@
       = Russian::strftime(comment.created_at,"%d %B %k:%M:%S ")
     %br
     %p.comments=simple_format(comment.content)
+    - if comment.users.include?(comment.user)
+      %b полезный комментарий
     -if signed_in? and not comment.users.include?(current_user)
       .like
         =link_to "#{comment.users.count}",  path_link+comment.id.to_s+'/plus', :id => comment.id,:remote => true, :method => :put, class: "counter"

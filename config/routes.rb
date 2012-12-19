@@ -160,6 +160,9 @@ CollectiveMind::Application.routes.draw do
         member do
             put :add_comment
             put :plus
+            get :to_expert
+            put :to_expert_save
+
 
         end
       end

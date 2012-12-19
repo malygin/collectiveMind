@@ -70,6 +70,30 @@ class Concept::PostsController < ApplicationController
     end
   end
 
+  def to_expert
+    prepare_data
+    @note = Concept::PostNote.new
+  end 
+
+  def to_expert_save
+    concept = Concept::Post.find(params[:id])
+    @note = Concept::PostNote.new(params[:concept_post_note])
+    @note.post = concept
+    @note.user = current_user
+    concept.status = 2
+    concept.save
+    respond_to do |format|
+      if @note.save
+          current_user.journals.build(:type_event=>'concept_post_to_expert', :body=>concept.id).save!
+          format.html { redirect_to  action: "index" , notice: 'Концепция отправлена эксперту!' }
+          format.json { render json: @concept_post, status: :created, location: @concept_post }
+      else
+          format.html { render action: "new" }
+          format.json { render json: @concept_post.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+
 
   # GET /concept/posts/1/edit
   def edit
