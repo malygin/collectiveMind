@@ -23,7 +23,7 @@
       #middle
         #container
           #content
-            -if not current_user.nil? and current_user.test_attempts.empty?
+            -if not current_user.nil? and current_user.test_attempts.empty? and not expert?
               .notification 
                 Пройдите, пожалуйста, социологический опрос
                 =link_to " по ссылке", '/tests'

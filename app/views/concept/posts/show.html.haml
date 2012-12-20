@@ -3,11 +3,11 @@
   = link_to 'Отправить в архив', {:action => :destroy, :id => @concept_post.id}, :method => :delete, :confirm => 'Точно?'
 
 - if @concept_post.status == 2 and expert?
-  = link_to 'Принять', ''
+  = link_to 'Принять', expert_acceptance_save_concept_post_path(@concept_post), :confirm => 'Точно?'
   |
-  = link_to ' Отправить на доработку', ''
+  = link_to ' Отправить на доработку', expert_revision_concept_post_path(@concept_post)
   |
-  = link_to ' Отклонить', ''
+  = link_to ' Отклонить', expert_rejection_concept_post_path(@concept_post)
 
 - if current_user?(@concept_post.user) and @concept_post.status == 0 and @concept_post.created_at < 3.days.ago
   = link_to 'послать эксперту', to_expert_concept_post_path(@concept_post)

@@ -7,7 +7,7 @@
       = Russian::strftime(comment.created_at,"%d %B %k:%M:%S ")
     %br
     %p.comments=simple_format(comment.content)
-    - if comment.users.include?(comment.user)
+    - if comment.users.include?(comment.post.user) and comment.user!= comment.post.user
       %b полезный комментарий
     -if signed_in? and not comment.users.include?(current_user)
       .like

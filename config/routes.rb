@@ -161,9 +161,12 @@ CollectiveMind::Application.routes.draw do
             put :add_comment
             put :plus
             get :to_expert
-            put :to_expert_save
-
-
+            put :to_expert_save  
+            get :expert_rejection
+            put :expert_rejection_save 
+            get :expert_revision
+            put :expert_revision_save
+            get :expert_acceptance_save
         end
       end
       resources :comments do
