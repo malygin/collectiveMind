@@ -130,7 +130,7 @@ class Concept::PostsController < ApplicationController
     concept.user.update_column(:score, concept.user.score + 200)
     respond_to do |format|
       if @note.save
-          current_user.journals.build(:type_event=>'concept_post_revision', :body=>concept.id).save!
+          current_user.journals.build(:type_event=>'concept_post_acceptance', :body=>concept.id).save!
           format.html { redirect_to  action: "index" , notice: 'Концепция принята!' }
           format.json { render json: @concept_post, status: :created, location: @concept_post }
       else
