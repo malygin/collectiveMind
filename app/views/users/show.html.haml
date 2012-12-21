@@ -36,7 +36,8 @@
 -else
 	Пока не добавлено
 %h1 Концепции
-Пока не добавлено
+- unless @user.concept_posts.empty?
+	= render @user.concept_posts
 %h1 Проекты
 Пока не добавлено
 
