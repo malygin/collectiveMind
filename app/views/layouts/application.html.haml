@@ -23,6 +23,8 @@
       #middle
         #container
           #content
+            .error Обратите внимание, что истекает срок отправления концепций эксперту
+
             -if not current_user.nil? and current_user.test_attempts.empty? and not expert?
               .notification 
                 Пройдите, пожалуйста, социологический опрос
