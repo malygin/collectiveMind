@@ -29,6 +29,7 @@ class User < ActiveRecord::Base
   has_many :voited_frustrations, :class_name =>'Frustration', :through => :voitings
 
   has_many :life_tape_posts, :class_name => "LifeTape::Post"
+  has_many :concept_posts, :class_name => "Concept::Post"
 
   has_many :user_awards
   has_many :awards, :through => :user_awards
