@@ -1,11 +1,11 @@
 - if post_note.content!=''
 	.comments
-	  = render 'users/user_post', :user => post_note.user
-	  .posts
-	    %span.namedate
-	      = post_note.user.name_title
-	      ,
-	      = Russian::strftime(post_note.created_at,"%d %B %k:%M:%S ")
-	    %br
-	    %p.comments=simple_format(post_note.content)
+		= render 'users/user_post', :user => post_note.user
+		.posts
+			%span.namedate
+				= post_note.user.name_title
+				,
+				= Russian::strftime(post_note.created_at,"%d %B %k:%M:%S ")
+			%br
+			%p.comments=simple_format(post_note.content)
     
