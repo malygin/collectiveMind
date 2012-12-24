@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121217102153) do
+ActiveRecord::Schema.define(:version => 20121224085106) do
 
   create_table "answers", :force => true do |t|
     t.string   "text"
@@ -72,6 +72,36 @@ ActiveRecord::Schema.define(:version => 20121217102153) do
   add_index "concept_comments", ["created_at"], :name => "index_concept_comments_on_created_at"
   add_index "concept_comments", ["post_id"], :name => "index_concept_comments_on_post_id"
   add_index "concept_comments", ["user_id"], :name => "index_concept_comments_on_user_id"
+
+  create_table "concept_final_voitings", :force => true do |t|
+    t.integer  "score"
+    t.integer  "forecast_task_id"
+    t.integer  "user_id"
+    t.datetime "created_at",       :null => false
+    t.datetime "updated_at",       :null => false
+  end
+
+  add_index "concept_final_voitings", ["forecast_task_id"], :name => "index_concept_final_voitings_on_forecast_task_id"
+  add_index "concept_final_voitings", ["user_id"], :name => "index_concept_final_voitings_on_user_id"
+
+  create_table "concept_forecast_tasks", :force => true do |t|
+    t.integer  "user_id"
+    t.text     "content"
+    t.text     "description"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+  end
+
+  create_table "concept_forecasts", :force => true do |t|
+    t.integer  "forecast_task_id"
+    t.integer  "position"
+    t.integer  "user_id"
+    t.datetime "created_at",       :null => false
+    t.datetime "updated_at",       :null => false
+  end
+
+  add_index "concept_forecasts", ["forecast_task_id"], :name => "index_concept_forecasts_on_forecast_task_id"
+  add_index "concept_forecasts", ["user_id"], :name => "index_concept_forecasts_on_user_id"
 
   create_table "concept_post_notes", :force => true do |t|
     t.integer  "post_id"

@@ -1,0 +1,11 @@
+- if !current_user.nil? and (expert? or admin?)
+	= form_for @forecast_task  do |f|
+		%label Задача
+		.field
+			=f.text_area :content	
+		%label Описание, если нужно
+		.field
+			=f.text_area :description
+		.action
+			=f.submit '',  class: "btn"
+=render @forecast_tasks

@@ -155,6 +155,10 @@ CollectiveMind::Application.routes.draw do
     end
 
     namespace :concept do
+      get 'forecast' => "posts#forecast"
+      get 'vote_for/:id/:score' => 'posts#vote_for',  :constraints => { :score => /[0-3]/ }
+
+      resources :forecast_tasks
       get 'posts/status/:status_id' => "posts#index"
       resources :posts do
         member do

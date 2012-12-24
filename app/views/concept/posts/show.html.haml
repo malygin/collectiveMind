@@ -9,7 +9,7 @@
   |
   = link_to ' Отклонить', expert_rejection_concept_post_path(@concept_post)
 
-- if current_user?(@concept_post.user) and @concept_post.status == 0 and @concept_post.created_at < 3.days.ago
+- if current_user?(@concept_post.user) and @concept_post.status == 0 #and @concept_post.created_at < 1.days.ago
   = link_to 'послать эксперту', to_expert_concept_post_path(@concept_post)
 .wholePost
   = render 'users/user_post', :user => @concept_post.user

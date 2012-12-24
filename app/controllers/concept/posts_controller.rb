@@ -85,78 +85,39 @@ class Concept::PostsController < ApplicationController
     @note = Concept::PostNote.new
   end 
 
-  def to_expert_save
+  def save_note(params, status, message, type_event)
     concept = Concept::Post.find(params[:id])
-    @note = Concept::PostNote.new(params[:concept_post_note])
-    @note.post = concept
-    @note.user = current_user
-    concept.update_column(:status, 2)
-    respond_to do |format|
-      if @note.save
-          current_user.journals.build(:type_event=>'concept_post_to_expert', :body=>concept.id).save!
-          format.html { redirect_to  action: "index" , notice: 'Концепция отправлена эксперту!' }
-          format.json { render json: @concept_post, status: :created, location: @concept_post }
-      else
-          format.html { render action: "new" }
-          format.json { render json: @concept_post.errors, status: :unprocessable_entity }
-      end
+    if !params[:concept_post_note].nil? and params[:concept_post_note][:content]!= ''
+      @note = Concept::PostNote.new(params[:concept_post_note])
+      @note.post = concept
+      @note.user = current_user
+      @note.save
     end
+    concept.update_column(:status, status)
+    current_user.journals.build(:type_event=>type_event, :body=>concept.id).save!
+    flash[:notice]=message
+    concept
+  end
+
+  def to_expert_save
+    save_note(params, 2, 'Концепция отправлена эксперту!','concept_post_to_expert' )
+    redirect_to  action: "index"    
   end
 
   def expert_rejection_save
-    concept = Concept::Post.find(params[:id])
-    @note = Concept::PostNote.new(params[:concept_post_note])
-    @note.post = concept
-    @note.user = current_user
-    concept.update_column(:status, 1)
-    respond_to do |format|
-      if @note.save
-          current_user.journals.build(:type_event=>'concept_post_rejection', :body=>concept.id).save!
-          format.html { redirect_to  action: "index" , notice: 'Концепция отклонена!' }
-          format.json { render json: @concept_post, status: :created, location: @concept_post }
-      else
-          format.html { render action: "new" }
-          format.json { render json: @concept_post.errors, status: :unprocessable_entity }
-      end
-    end
+    save_note(params, 1, 'Концепция отклонена!','concept_post_rejection' )
+    redirect_to  action: "index"
   end
 
- def expert_acceptance_save
-    concept = Concept::Post.find(params[:id])
-    @note = Concept::PostNote.new(params[:concept_post_note])
-    @note.post = concept
-    @note.user = current_user
-    concept.update_column(:status, 3)
+  def expert_acceptance_save
+    concept = save_note(params, 3, 'Концепция принята!','concept_post_acceptance' )
     concept.user.update_column(:score, concept.user.score + 200)
-    respond_to do |format|
-      if @note.save
-          current_user.journals.build(:type_event=>'concept_post_acceptance', :body=>concept.id).save!
-          format.html { redirect_to  action: "index" , notice: 'Концепция принята!' }
-          format.json { render json: @concept_post, status: :created, location: @concept_post }
-      else
-          format.html { render action: "new" }
-          format.json { render json: @concept_post.errors, status: :unprocessable_entity }
-      end
-    end
+    redirect_to  action: "index"
   end
 
   def expert_revision_save
-    concept = Concept::Post.find(params[:id])
-    @note = Concept::PostNote.new(params[:concept_post_note])
-    @note.post = concept
-    @note.user = current_user
-    concept.update_column(:status, 0)
-
-    respond_to do |format|
-      if @note.save
-          current_user.journals.build(:type_event=>'concept_post_revision', :body=>concept.id).save!
-          format.html { redirect_to  action: "index" , notice: 'Концепция отправлена на доработку!' }
-          format.json { render json: @concept_post, status: :created, location: @concept_post }
-      else
-          format.html { render action: "new" }
-          format.json { render json: @concept_post.errors, status: :unprocessable_entity }
-      end
-    end
+    save_note(params, 0, 'Концепция отправлена на доработку!','concept_post_revision' )
+    redirect_to  action: "index"
   end
 
 
@@ -242,4 +203,11 @@ class Concept::PostsController < ApplicationController
       format.json { head :no_content }
     end
   end
+
+  def forecast
+    prepare_data
+    @forecast_task = Concept::ForecastTask.new
+    @forecast_tasks = Concept::ForecastTask.all
+  end
+
 end

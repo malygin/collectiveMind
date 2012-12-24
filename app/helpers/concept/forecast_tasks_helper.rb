@@ -1,0 +1,2 @@
+module Concept::ForecastTasksHelper
+end
