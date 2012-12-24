@@ -210,4 +210,11 @@ class Concept::PostsController < ApplicationController
     @forecast_tasks = Concept::ForecastTask.all
   end
 
+  def vote_for
+    #puts params
+    @forecast_task = Concept::ForecastTask.find(params[:id])
+    @forecast_task.voitings.create(:user => current_user, :score => params[:score].to_f-1)
+    render json: @forecast_task.voiting_score
+  end
+  
 end

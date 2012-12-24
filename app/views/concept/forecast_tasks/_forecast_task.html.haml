@@ -1,18 +1,22 @@
 %br
 %b=forecast_task.content
 %br=forecast_task.description
+- if boss?
+	=forecast_task.voiting_score
 - if current_user.nil?
 				
 - elsif can_vote_for_task?(forecast_task)
 	.voteBar
-	=link_to "очень недоволен",  '/concept/vote_for/'+forecast_task.id.to_s+'/3', :id => forecast_task.id, :remote => true, :method => :put, class: "voteCounter"
-	|
-	=link_to "недоволен",  '/concept/vote_for/'+forecast_task.id.to_s+'/2', :id => forecast_task.id, :remote => true, :method => :put, class: "voteCounter"
-	|
-	=link_to "безразлично",  '/concept/vote_for/'+forecast_task.id.to_s+'/1', :id => forecast_task.id, :remote => true, :method => :put, class: "voteCounter"
-	|
-	=link_to "меня устраивает",  '/concept/vote_for/'+forecast_task.id.to_s+'/0', :id => forecast_task.id, :remote => true, :method => :put, class: "voteCounter"
+		=link_to "очень недоволен",  '/concept/vote_for/'+forecast_task.id.to_s+'/3', :id => forecast_task.id, :remote => true, :method => :put, class: "voteCounter"
+		|
+		=link_to "недоволен",  '/concept/vote_for/'+forecast_task.id.to_s+'/2', :id => forecast_task.id, :remote => true, :method => :put, class: "voteCounter"
+		|
+		=link_to "безразлично",  '/concept/vote_for/'+forecast_task.id.to_s+'/1', :id => forecast_task.id, :remote => true, :method => :put, class: "voteCounter"
+		|
+		=link_to "меня устраивает",  '/concept/vote_for/'+forecast_task.id.to_s+'/0', :id => forecast_task.id, :remote => true, :method => :put, class: "voteCounter"
+	%br
 -else
 	%br
 	%span.red Вы уже проголосовали за эту задачу
+%br	
 =image_tag('dots.png')
