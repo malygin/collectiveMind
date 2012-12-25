@@ -49,6 +49,7 @@ GEM
     coffee-script-source (1.3.3)
     columnize (0.3.6)
     daemons (1.1.8)
+    dalli (2.6.0)
     diff-lcs (1.1.3)
     erubis (2.7.0)
     eventmachine (0.12.10)
@@ -172,6 +173,7 @@ PLATFORMS
 DEPENDENCIES
   activerecord-postgresql-adapter
   coffee-rails (~> 3.2.1)
+  dalli
   execjs
   faker
   gravatar_image_tag
