@@ -12,4 +12,8 @@ class Concept::ForecastTask < ActiveRecord::Base
     return score
   end
 
+  def content_short
+    self.content[0..70]+" ..."
+  end
+
 end

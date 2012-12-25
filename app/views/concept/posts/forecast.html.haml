@@ -1,4 +1,4 @@
-- if !current_user.nil? and (expert? or admin?)
+- if boss?
 	= form_for @forecast_task  do |f|
 		%label Задача
 		.field
@@ -8,4 +8,28 @@
 			=f.text_area :description
 		.action
 			=f.submit '',  class: "btn"
+- if !current_user.nil? and current_user.concept_forecasts.empty? and not(expert? or admin?)
+	Перед началом голосования вы можете, если захотите, сделать свой прогноз! Если вы угадаете задачу, которая по итогам голосования попадет в тройку набравших наибольшее число голосов, то получите 30 призовых баллов, а если вы угадаете еще и ее точное место, то еще  + 20 баллов. 
+	= form_for current_user, :url => forecast_concept_user_path(current_user) do |f|
+		= select_tag 'forecast[1]', options_from_collection_for_select(@forecast_tasks, "id", "content_short"), :prompt => "Выберите первое место"
+		%br
+		%br
+		= select_tag 'forecast[2]', options_from_collection_for_select(@forecast_tasks, "id", "content_short"), :prompt => "Выберите второе место"
+		%br
+		%br
+		= select_tag 'forecast[3]', options_from_collection_for_select(@forecast_tasks, "id", "content_short"), :prompt => "Выберите третье место"
+		%br
+		%label 
+			%b Вы можете, если захотите, написать краткое эссе об этапе формулирования концепций, отвечая на следующие 
+			= link_to 'вопросы:', '/help#01'
+			%b Заметьте, что это задание из контрольной работы и его все равно придется выполнить, но если вы сделаете это сейчас и интересно, то  можете получить 80 баллов от эксперта!
+		%br
+		%field
+			= text_area_tag :essay
+		%div.timestamp - не обязательно
+
+
+		%actions
+			=f.submit "", class: 'btn'
+
 =render @forecast_tasks

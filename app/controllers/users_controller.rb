@@ -92,6 +92,48 @@ class UsersController < ApplicationController
 		redirect_to :back
 	end
 
+	def forecast
+		forecast = params[:forecast]
+		fkeys = forecast.keys
+		fkeys.each do |f|
+			if  forecast[f]==''
+				flash[:error] = 'Вы не выбрали все места!'
+			end
+		end
+		if flash[:error].nil?
+			for key in forecast.keys 
+				frustration = Frustration.find(forecast[key])
+				current_user.frustration_forecasts.create(:frustration => frustration, :order => key)
+			end
+			unless params[:essay]==''
+				current_user.create_frustration_essay(:content => params[:essay])
+			end
+			flash[:success] = "Вы успешно сделали прогноз, теперь можно голосовать"
+		end
+		redirect_to :back
+	end
+
+	def forecast_concept
+		forecast = params[:forecast]
+		fkeys = forecast.keys
+		fkeys.each do |f|
+			if  forecast[f]==''
+				flash[:error] = 'Вы не выбрали все места!'
+			end
+		end
+		if flash[:error].nil?
+			for key in forecast.keys 
+				task = Concept::ForecastTask.find(forecast[key])
+				current_user.concept_forecasts.create(:forecast_task => task, :position => key)
+			end
+			unless params[:essay]==''				
+				current_user.create_concept_essay(:content => params[:essay])
+			end
+			flash[:success] = "Вы успешно сделали прогноз, теперь можно голосовать"
+		end
+		redirect_to :back
+	end
+
 	private
 
 

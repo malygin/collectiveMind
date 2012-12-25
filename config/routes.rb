@@ -54,6 +54,7 @@ CollectiveMind::Application.routes.draw do
   resources :users do
     member do
       put :forecast
+      put :forecast_concept
     end
   end
 
