@@ -55,6 +55,7 @@ CollectiveMind::Application.routes.draw do
     member do
       put :forecast
       put :forecast_concept
+      match 'add_score/:score' => 'users#add_score'
     end
   end
 

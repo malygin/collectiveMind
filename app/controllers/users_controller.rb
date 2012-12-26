@@ -33,6 +33,7 @@ class UsersController < ApplicationController
 		@frustration = Frustration.new 
 		@news = ExpertNews::Post.first
 
+
 	end
 
 	def edit 
@@ -132,6 +133,17 @@ class UsersController < ApplicationController
 			flash[:success] = "Вы успешно сделали прогноз, теперь можно голосовать"
 		end
 		redirect_to :back
+	end
+
+	def add_score
+		puts params
+		user = User.find(params[:id])
+		if boss?
+			user.update_column(:score, user.score + params[:score].to_i)
+		end
+		render json: user.score
+
+
 	end
 
 	private

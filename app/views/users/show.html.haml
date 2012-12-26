@@ -1,3 +1,9 @@
+- if boss?
+	.scoreBar
+		=link_to "+20 баллов",  "/users/"+@user.id.to_s+"/add_score/20", :remote => true, :method => :put, class: "voteCounter"
+		|
+		=link_to "+40 баллов",  "/users/"+@user.id.to_s+"/add_score/40", :remote => true, :method => :put, class: "voteCounter"
+		|
 
 .wholePost
 	= render 'users/user_post', :user =>  @user

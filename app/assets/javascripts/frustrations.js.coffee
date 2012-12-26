@@ -47,9 +47,11 @@ $(document).ready ->
 $(document).ready ->
     $(".voteBar")
       .bind "ajax:success", (event, resp) ->
-        console.log(resp)
         $(this).replaceWith "Вы проголосовали, спасибо!"    
       .bind "ajax:error", (event, resp) ->
-        console.log(resp)
-        console.log('error')
+        $(this).replaceWith ""+resp 
+    $(".scoreBar")
+      .bind "ajax:success", (event, resp) ->
+        $(this).replaceWith "Вы выдали баллы, спасибо!"    
+      .bind "ajax:error", (event, resp) ->
         $(this).replaceWith ""+resp
