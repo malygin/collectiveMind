@@ -209,7 +209,11 @@ class Concept::PostsController < ApplicationController
   def forecast
     prepare_data
     @forecast_task = Concept::ForecastTask.new
-    @forecast_tasks = Concept::ForecastTask.all
+    if boss?
+      @forecast_tasks = Concept::ForecastTask.all.sort{|x, y| y.voiting_score <=> x.voiting_score}
+    else
+      @forecast_tasks = Concept::ForecastTask.all
+    end
   end
 
   def vote_for
