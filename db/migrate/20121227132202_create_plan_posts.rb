@@ -10,5 +10,8 @@ class CreatePlanPosts < ActiveRecord::Migration
 
       t.timestamps
     end
+    add_index :plan_posts, :user_id
+
+    add_index :plan_posts, :created_at
   end
 end
