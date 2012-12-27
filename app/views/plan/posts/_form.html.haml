@@ -1,0 +1,28 @@
+= form_for @plan_post do |f|
+  -if @plan_post.errors.any?
+    #error_explanation
+      %h2= "#{pluralize(@plan_post.errors.count, "error")} prohibited this plan_post from being saved:"
+      %ul
+        - @plan_post.errors.full_messages.each do |msg|
+          %li= msg
+
+  .field
+    = f.label :user_id
+    = f.number_field :user_id
+  .field
+    = f.label :goal
+    = f.text_area :goal
+  .field
+    = f.label :first_step
+    = f.text_area :first_step
+  .field
+    = f.label :other_steps
+    = f.text_area :other_steps
+  .field
+    = f.label :status
+    = f.number_field :status
+  .field
+    = f.label :number_views
+    = f.number_field :number_views
+  .actions
+    = f.submit 'Save'

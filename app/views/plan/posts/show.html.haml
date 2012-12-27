@@ -1,0 +1,24 @@
+%p#notice= notice
+
+%p
+  %b User:
+  = @plan_post.user_id
+%p
+  %b Goal:
+  = @plan_post.goal
+%p
+  %b First step:
+  = @plan_post.first_step
+%p
+  %b Other steps:
+  = @plan_post.other_steps
+%p
+  %b Status:
+  = @plan_post.status
+%p
+  %b Number views:
+  = @plan_post.number_views
+
+= link_to 'Edit', edit_plan_post_path(@plan_post)
+\|
+= link_to 'Back', plan_posts_path

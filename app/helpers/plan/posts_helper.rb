@@ -1,0 +1,2 @@
+module Plan::PostsHelper
+end

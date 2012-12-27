@@ -1,0 +1,29 @@
+%h1 Listing plan_posts
+
+%table
+  %tr
+    %th User
+    %th Goal
+    %th First step
+    %th Other steps
+    %th Status
+    %th Number views
+    %th
+    %th
+    %th
+
+  - @plan_posts.each do |plan_post|
+    %tr
+      %td= plan_post.user_id
+      %td= plan_post.goal
+      %td= plan_post.first_step
+      %td= plan_post.other_steps
+      %td= plan_post.status
+      %td= plan_post.number_views
+      %td= link_to 'Show', plan_post
+      %td= link_to 'Edit', edit_plan_post_path(plan_post)
+      %td= link_to 'Destroy', plan_post, :confirm => 'Are you sure?', :method => :delete
+
+%br
+
+= link_to 'New Post', new_plan_post_path
