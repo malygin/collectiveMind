@@ -35,6 +35,10 @@ module SessionsHelper
 	def authenticate
 		deny_access unless signed_in?
 	end
+	def boss_authenticate
+		deny_access unless boss?
+	end
+
 
 	def redirect_back_or(default)
 	    redirect_to(session[:return_to] || default)

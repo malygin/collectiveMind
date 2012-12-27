@@ -4,6 +4,8 @@ class Concept::PostsController < ApplicationController
   # GET /concept/posts
   # GET /concept/posts.json
     before_filter :authenticate, :only => [:create, :new]
+    before_filter :boss_authenticate, :only => [ :new]
+
 
   def prepare_data
     top_posts = Concept::Post.where(:status => '0').sort_by { |p| p.users.size }
