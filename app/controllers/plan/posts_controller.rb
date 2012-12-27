@@ -1,50 +1,158 @@
+# encoding: utf-8
+
 class Plan::PostsController < ApplicationController
   # GET /plan/posts
   # GET /plan/posts.json
+  def prepare_data
+    top_posts = Plan::Post.where(:status => '0').sort_by { |p| p.users.size }
+    #@top_posts = LifeTape::Post.joins(:post_voitings).select('life_tape_post_voitings.*, count(user_id) as "user_count"').group(:user_id).order(' user_count desc').limit(3)
+    @top_posts = top_posts.reverse[0..3]
+    @journals = Journal.events_for_user_feed
+    @news = ExpertNews::Post.first    
+  end
+ 
   def index
-    @plan_posts = Plan::Post.all
-
+    status = params['status_id']
+    if status.nil?
+      status ='0'
+    end
+    @plan_posts = Plan::Post.where(:status => status).paginate(:page => params[:page])
+    prepare_data
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @plan_posts }
     end
   end
 
-  # GET /plan/posts/1
-  # GET /plan/posts/1.json
+  # GET /Plan/posts/1
+  # GET /Plan/posts/1.json
   def show
     @plan_post = Plan::Post.find(params[:id])
+    @plan_post.update_column(:number_views, @plan_post.number_views+1)
 
+    @comment = Plan::Comment.new
+    prepare_data
+  
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @plan_post }
     end
   end
+  #todo union method for all comments and partials
+  def add_comment
+    post = Plan::Post.find(params[:id])
+    unless  params[:plan_comment][:content]==""
+      post.comments.create(:content => params[:plan_comment][:content], :user =>current_user)
+      current_user.journals.build(:type_event=>'plan_comment_save', :body=>post.id).save!
+      flash[:success] = "Комментарий добавлен"
+    else
+      flash[:success] = "Введите текст комментария"
+    end
+    redirect_to post
 
-  # GET /plan/posts/new
-  # GET /plan/posts/new.json
+  end
+
+  # GET /Plan/posts/new
+  # GET /Plan/posts/new.json
   def new
+    #puts params
+    unless params['idea'].nil?
+      @ltpost = params['idea']
+    end
     @plan_post = Plan::Post.new
-
+    #@plan_post.task_supply_pairs << Plan::TaskSupplyPair.new(:task =>'', :supply => '')
+    prepare_data
     respond_to do |format|
       format.html # new.html.erb
       format.json { render json: @plan_post }
     end
   end
 
-  # GET /plan/posts/1/edit
-  def edit
-    @plan_post = Plan::Post.find(params[:id])
+  def to_expert
+    prepare_data
+    @note = Plan::PostNote.new
+  end 
+
+  def expert_rejection
+    prepare_data
+    @note = Plan::PostNote.new
+  end 
+  
+  def expert_revision
+    prepare_data
+    @note = Plan::PostNote.new
+  end 
+
+  def save_note(params, status, message, type_event)
+    Plan = Plan::Post.find(params[:id])
+    if !params[:plan_post_note].nil? and params[:plan_post_note][:content]!= ''
+      @note = Plan::PostNote.new(params[:plan_post_note])
+      @note.post = Plan
+      @note.user = current_user
+      @note.save
+    end
+    Plan.update_column(:status, status)
+    current_user.journals.build(:type_event=>type_event, :body=>Plan.id).save!
+    flash[:notice]=message
+    Plan
   end
 
-  # POST /plan/posts
-  # POST /plan/posts.json
+  def to_expert_save
+    save_note(params, 2, 'Проект отправлен эксперту!','plan_post_to_expert' )
+    redirect_to  action: "index"    
+  end
+
+  def expert_rejection_save
+    save_note(params, 1, 'Проект отклонен!','plan_post_rejection' )
+    redirect_to  action: "index"
+  end
+
+  def expert_acceptance_save
+    Plan = save_note(params, 3, 'Проект принят!','plan_post_acceptance' )
+    Plan.user.update_column(:score, Plan.user.score + 200)
+    redirect_to  action: "index"
+  end
+
+  def expert_revision_save
+    save_note(params, 0, 'Проект отправлен на доработку!','plan_post_revision' )
+    redirect_to  action: "index"
+  end
+
+
+  # GET /Plan/posts/1/edit
+  def edit
+    @plan_post = Plan::Post.find(params[:id])
+    prepare_data
+  end
+
+  def plus
+    post = Plan::Post.find(params[:id])
+    post.post_voitings.create(:user => current_user, :post => post, :against => false)
+    render json:post.users.count 
+  end
+  # POST /Plan/posts
+  # POST /Plan/posts.json
   def create
     @plan_post = Plan::Post.new(params[:plan_post])
+    unless params['idea'].nil?
+      @plan_post.life_tape_post_id = params['idea']
+    end
+    @plan_post.number_views =0
+    @plan_post.user = current_user
+    @plan_post.status = 0
+    #@plan_post.task_supply_pairs = nil
+    #puts params['task_supply']
+    # params['task_supply'].each do |k,v|
+    #   if v['1']!= '' or v['2']!= ''
+    #     pair = Plan::TaskSupplyPair.new(:task => v['1'], :supply => v['2']) 
+    #     @plan_post.task_supply_pairs << pair
+    #   end
+    # end
 
     respond_to do |format|
       if @plan_post.save
-        format.html { redirect_to @plan_post, notice: 'Post was successfully created.' }
+         current_user.journals.build(:type_event=>'plan_post_save', :body=>@plan_post.id).save!
+        format.html { redirect_to  action: "index" , notice: 'Проект добавлен!' }
         format.json { render json: @plan_post, status: :created, location: @plan_post }
       else
         format.html { render action: "new" }
@@ -53,14 +161,26 @@ class Plan::PostsController < ApplicationController
     end
   end
 
-  # PUT /plan/posts/1
-  # PUT /plan/posts/1.json
+  # PUT /Plan/posts/1
+  # PUT /Plan/posts/1.json
   def update
     @plan_post = Plan::Post.find(params[:id])
-
     respond_to do |format|
       if @plan_post.update_attributes(params[:plan_post])
-        format.html { redirect_to @plan_post, notice: 'Post was successfully updated.' }
+         @plan_post.task_supply_pairs =[]
+         # unless params['task_supply'].nil?
+         #  params['task_supply'].each do |k,v|
+         #    if v['1']!= '' or v['2']!= ''
+         #      pair = Plan::TaskSupplyPair.new(:task => v['1'], :supply => v['2']) 
+         #      @plan_post.task_supply_pairs << pair
+         #    end
+         #  end           
+         # end
+         
+        @plan_post.save
+        current_user.journals.build(:type_event=>'plan_post_update', :body=>@plan_post.id).save!
+
+        format.html { redirect_to @plan_post, notice: 'Проект успешно изменен!' }
         format.json { head :no_content }
       else
         format.html { render action: "edit" }
@@ -69,15 +189,17 @@ class Plan::PostsController < ApplicationController
     end
   end
 
-  # DELETE /plan/posts/1
-  # DELETE /plan/posts/1.json
+  # DELETE /Plan/posts/1
+  # DELETE /Plan/posts/1.json
   def destroy
     @plan_post = Plan::Post.find(params[:id])
-    @plan_post.destroy
+    @plan_post.status = 1
+    @plan_post.save
 
     respond_to do |format|
-      format.html { redirect_to plan_posts_url }
+      format.html { redirect_to  action: "index", notice: "Проект перемещен в архив" }
       format.json { head :no_content }
     end
   end
+
 end

@@ -8,5 +8,8 @@
 - if expert? or admin?
 	= link_to 'Редактировать', edit_expert_news_post_path(@expert_news_post)
 	= link_to 'Удалить', @expert_news_post, :confirm => 'Уверены, Олег?', :method => :delete
+- if signed_in? 
+	= render :partial => 'shared/comment_form', :locals => { :comment => @comment, :url_link => add_comment_expert_news_post_path(@expert_news_post.id)}
 
+= render :partial => 'shared/comment',:collection => @expert_news_post.comments, :locals => { :path_link => '/expert_news/comments/'}
 

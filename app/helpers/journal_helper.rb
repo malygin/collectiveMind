@@ -7,6 +7,10 @@ module JournalHelper
 				'добавил  '+ link_to('концепцию', concept_post_path(j.body))
 			when 'concept_comment_save'
 				'добавил комментарий к '+  link_to('концепции', concept_post_path(j.body))
+			when 'news_post_save'
+				'добавил  '+ link_to('новость', expert_news_post_path(j.body))
+			when 'news_comment_save'
+				'добавил комментарий к '+  link_to('новости', expert_news_post_path(j.body))
 			when 'life_tape_comment_save'
 				'добавил комментарий к '+  link_to('идее', life_tape_post_path(j.body))
 			when 'life_tape_post_save'

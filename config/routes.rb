@@ -182,6 +182,20 @@ CollectiveMind::Application.routes.draw do
             put :plus
           end  
       end
+    end    
+    namespace :expert_news do
+     
+      resources :posts do
+        member do
+            put :add_comment
+            put :plus
+        end
+      end
+      resources :comments do
+          member do
+            put :plus
+          end  
+      end
     end
 
   # You can have the root of your site routed with "root"

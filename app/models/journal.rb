@@ -6,7 +6,7 @@ class Journal < ActiveRecord::Base
 		types = ['concept_post_revision','concept_post_acceptance','concept_post_rejection',
 			'concept_post_to_expert','concept_comment_save', 'concept_post_save',
 		 'life_tape_post_save', 'life_tape_comment_save', 'concept_post_update', 
-		 'question_save']
+		 'question_save','news_comment_save','news_post_save']
 		Journal.find(:all, :conditions => ["type_event IN (?)", types ], :limit => lim, :order => 'created_at DESC')
 	end	
 end
