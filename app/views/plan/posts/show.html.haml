@@ -18,23 +18,31 @@
     %p
       %b Цели (образ желаемого будущего)
       %br= @plan_post.goal
-    / %table.tasks
-    /   %tr
-    /     %td.size50
-    /       %br
-    /       %label.small
-    /         %b Задачи - направления работы в будущем
-    /     %td &nbsp;
-    /     %td
-    /       %br
-    /       %label.small
-    /         %b Ресурсы - методы и средства работы в будущем
-    /   - @plan_post.task_supply_pairs.each_with_index do |p, index|
-    /     %tr.ts
-    /       %td= p.task
-    /       %td= image_tag('arrow.png')
-    /       %td= p.supply
-    /       %td
+    %table.tasks_for_plan
+      %tr
+        %td
+          %br
+          %label.small
+            %b Задачи
+        %td &nbsp;
+        %td
+          %br
+          %label.small
+            %b Ресурсы
+        %td
+        %td
+          %br
+          %label.small
+            %b Как достичь
+        %td 
+      - @plan_post.task_triplets.each_with_index do |p, index|
+        %tr.ts
+          %td= p.task
+          %td= image_tag('arrow.png')
+          %td= p.supply          
+          %td= image_tag('arrow.png')
+          %td= p.howto
+          %td
     %p
       %b Первый шаг
       %br= @plan_post.first_step

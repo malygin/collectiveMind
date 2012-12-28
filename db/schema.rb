@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121228074335) do
+ActiveRecord::Schema.define(:version => 20121228092853) do
 
   create_table "answers", :force => true do |t|
     t.string   "text"
@@ -373,6 +373,17 @@ ActiveRecord::Schema.define(:version => 20121228074335) do
 
   add_index "plan_posts", ["created_at"], :name => "index_plan_posts_on_created_at"
   add_index "plan_posts", ["user_id"], :name => "index_plan_posts_on_user_id"
+
+  create_table "plan_task_triplets", :force => true do |t|
+    t.integer  "post_id"
+    t.integer  "position"
+    t.boolean  "compulsory"
+    t.text     "task"
+    t.text     "supply"
+    t.text     "howto"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
 
   create_table "posts", :force => true do |t|
     t.string   "title"

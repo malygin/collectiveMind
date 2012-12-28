@@ -5,6 +5,7 @@ class Plan::Post < ActiveRecord::Base
   has_many :post_voitings
   has_many :users, :through => :post_voitings
   has_many :post_notes
+  has_many :task_triplets
 
   default_scope :order => 'plan_posts.created_at DESC'
 end

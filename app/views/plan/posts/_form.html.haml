@@ -7,7 +7,36 @@
     = f.text_area :goal
   %div{:class=>'timestamp'} Что, в главном, представляет собой предлагаемое нововведение и каковы его желаемые результаты.
   %br
- 
+  %table.tasks
+    %tr
+      %td
+        %label.small
+          %b Задачи -
+          направления работы в будущем
+      %td &nbsp;
+      %td
+        %label.small
+          %b Ресурсы -
+          методы и средства работы в будущем
+      %td &nbsp;
+      %td
+        %label.small
+          %b Средства создания ресурсов
+    - @plan_post.task_triplets.each_with_index do |p, index|
+      %tr.ts
+        %td= text_area_tag 'task_triplet['+index.to_s+'][1]', p.task, :class =>'taskplan'
+        %td= image_tag('arrow.png')
+        %td= text_area_tag 'task_triplet['+index.to_s+'][2]', p.supply, :class =>'taskplan'        
+        %td= image_tag('arrow.png')
+        %td= text_area_tag 'task_triplet['+index.to_s+'][3]', p.howto, :class =>'taskplan'
+        %td=link_to_function image_tag('close.png'), ' $(this).parent().parent().remove()'
+    
+
+    %tr.links
+      %td{:colspan=>'5'}= link_to_function 'Добавить задачу', 'addTaskPlan($(".ts").length+20)'
+
+
+
   %br
   %br
   %label 

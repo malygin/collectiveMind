@@ -56,11 +56,9 @@ class Plan::PostsController < ApplicationController
   # GET /Plan/posts/new.json
   def new
     #puts params
-    unless params['idea'].nil?
-      @ltpost = params['idea']
-    end
+
     @plan_post = Plan::Post.new
-    #@plan_post.task_supply_pairs << Plan::TaskSupplyPair.new(:task =>'', :supply => '')
+    @plan_post.task_triplets << Plan::TaskTriplet.new(:task =>'', :supply => '', :howto => '')
     prepare_data
     respond_to do |format|
       format.html # new.html.erb
@@ -134,20 +132,20 @@ class Plan::PostsController < ApplicationController
   # POST /Plan/posts.json
   def create
     @plan_post = Plan::Post.new(params[:plan_post])
-    unless params['idea'].nil?
-      @plan_post.life_tape_post_id = params['idea']
-    end
+    # unless params['idea'].nil?
+    #   @plan_post.life_tape_post_id = params['idea']
+    # end
     @plan_post.number_views =0
     @plan_post.user = current_user
     @plan_post.status = 0
-    #@plan_post.task_supply_pairs = nil
+    @plan_post.task_triplets = []
     #puts params['task_supply']
-    # params['task_supply'].each do |k,v|
-    #   if v['1']!= '' or v['2']!= ''
-    #     pair = Plan::TaskSupplyPair.new(:task => v['1'], :supply => v['2']) 
-    #     @plan_post.task_supply_pairs << pair
-    #   end
-    # end
+    params['task_triplet'].each do |k,v|
+      if v['1']!= '' or v['2']!= ''
+        triplet = Plan::TaskTriplet.new(:task => v['1'], :supply => v['2'], :howto => v['3']) 
+        @plan_post.task_triplets << triplet
+      end
+    end
 
     respond_to do |format|
       if @plan_post.save
@@ -167,15 +165,16 @@ class Plan::PostsController < ApplicationController
     @plan_post = Plan::Post.find(params[:id])
     respond_to do |format|
       if @plan_post.update_attributes(params[:plan_post])
-         #@plan_post.task_supply_pairs =[]
-         # unless params['task_supply'].nil?
-         #  params['task_supply'].each do |k,v|
-         #    if v['1']!= '' or v['2']!= ''
-         #      pair = Plan::TaskSupplyPair.new(:task => v['1'], :supply => v['2']) 
-         #      @plan_post.task_supply_pairs << pair
-         #    end
-         #  end           
-         # end
+         @plan_post.task_triplets =[]
+         unless params['task_triplet'].nil?
+          
+          params['task_triplet'].each do |k,v|
+            if v['1']!= '' or v['2']!= ''
+              triplet = Plan::TaskTriplet.new(:task => v['1'], :supply => v['2'], :howto => v['3']) 
+              @plan_post.task_triplets << triplet
+            end
+          end   
+         end
          
         @plan_post.save
         current_user.journals.build(:type_event=>'plan_post_update', :body=>@plan_post.id).save!
