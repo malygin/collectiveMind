@@ -1,24 +1,76 @@
-%p#notice= notice
+- if @plan_post.user == current_user and @plan_post.id == 0
+  = link_to 'Редактировать', edit_plan_post_path(@plan_post)
+  = link_to 'Отправить в архив', {:action => :destroy, :id => @plan_post.id}, :method => :delete, :confirm => 'Точно?'
 
-%p
-  %b User:
-  = @plan_post.user_id
-%p
-  %b Goal:
-  = @plan_post.goal
-%p
-  %b First step:
-  = @plan_post.first_step
-%p
-  %b Other steps:
-  = @plan_post.other_steps
-%p
-  %b Status:
-  = @plan_post.status
-%p
-  %b Number views:
-  = @plan_post.number_views
+- if @plan_post.status == 2 and expert?
+  = link_to 'Принять', expert_acceptance_save_plan_post_path(@plan_post), :confirm => 'Точно?'
+  |
+  = link_to ' Отправить на доработку', expert_revision_plan_post_path(@plan_post)
+  |
+  = link_to ' Отклонить', expert_rejection_plan_post_path(@plan_post)
 
-= link_to 'Edit', edit_plan_post_path(@plan_post)
-\|
-= link_to 'Back', plan_posts_path
+- if current_user?(@plan_post.user) and @plan_post.status == 0 #and @plan_post.created_at < 1.days.ago
+  = link_to 'послать эксперту', to_expert_plan_post_path(@plan_post)
+.wholePost
+  = render 'users/user_post', :user => @plan_post.user
+  .posts
+    = render 'users/user_name', :user => @plan_post.user, :created_at => @plan_post.created_at
+    %p
+      %b Цели (образ желаемого будущего)
+      %br= @plan_post.goal
+    / %table.tasks
+    /   %tr
+    /     %td.size50
+    /       %br
+    /       %label.small
+    /         %b Задачи - направления работы в будущем
+    /     %td &nbsp;
+    /     %td
+    /       %br
+    /       %label.small
+    /         %b Ресурсы - методы и средства работы в будущем
+    /   - @plan_post.task_supply_pairs.each_with_index do |p, index|
+    /     %tr.ts
+    /       %td= p.task
+    /       %td= image_tag('arrow.png')
+    /       %td= p.supply
+    /       %td
+    %p
+      %b Первый шаг
+      %br= @plan_post.first_step
+    %p
+      %b Дальнейшие шаги
+      %br= @plan_post.other_steps
+
+  
+
+    .social 
+      - if signed_in? and not  @plan_post.users.include?(current_user)
+        =link_to "#{@plan_post.users.count}",  plus_plan_post_path(@plan_post), :id =>  @plan_post.id,:remote => true, :method => :put, class: "counter"
+      -else
+        = @plan_post.users.count
+      =image_tag "like.png"
+      =link_to  @plan_post.number_views,  @plan_post, class: "counter"
+      =image_tag "views.png"
+      =link_to  @plan_post.comments.count,  @plan_post, class: "counter"
+      =image_tag "comment.png"
+
+- unless @plan_post.post_notes.empty?
+  .redtitle Переписка эксперта и автора 
+  = render :partial => 'post_note', :collection => @plan_post.post_notes
+  =image_tag('dots.png')
+
+
+
+- if signed_in? and @plan_post.status == 0
+  = render :partial => 'shared/comment_form', :locals => { :comment => @comment, :url_link => add_comment_plan_post_path(@plan_post.id)}
+
+= render :partial => 'shared/comment',:collection => @plan_post.comments, :locals => { :path_link => '/plan/comments/'}
+%br
+%br
+/ %br
+/ - unless @plan_post.life_tape_post.nil?
+/   .redtitle Идея, которой вдохновлена концепция
+/   = render :partial => 'life_tape/posts/post', :object  => @plan_post.life_tape_post
+
+

@@ -1,28 +1,32 @@
-= form_for @plan_post do |f|
-  -if @plan_post.errors.any?
-    #error_explanation
-      %h2= "#{pluralize(@plan_post.errors.count, "error")} prohibited this plan_post from being saved:"
-      %ul
-        - @plan_post.errors.full_messages.each do |msg|
-          %li= msg
-
-  .field
-    = f.label :user_id
-    = f.number_field :user_id
-  .field
-    = f.label :goal
+= form_for @plan_post, :html => {:class =>'new_concept_post'} do |f|
+  %label 
+    %b Цель -
+    образ желаемого будущего
+  %br
+  %field
     = f.text_area :goal
-  .field
-    = f.label :first_step
+  %div{:class=>'timestamp'} Что, в главном, представляет собой предлагаемое нововведение и каковы его желаемые результаты.
+  %br
+ 
+  %br
+  %br
+  %label 
+    %b Первый этап 
+  %br
+  %field
     = f.text_area :first_step
-  .field
-    = f.label :other_steps
+  %div{:class=>'timestamp'} - Каким образом и в какие сроки реалистично ввести в действие в ДО СГУ данное нововведение, в частности, задействовать ресурсы для него, и почему осуществить это реалистично?
+  %br
+  %label 
+    %b Дальнейшие шаги 
+  %br
+  %field
     = f.text_area :other_steps
-  .field
-    = f.label :status
-    = f.number_field :status
-  .field
-    = f.label :number_views
-    = f.number_field :number_views
-  .actions
-    = f.submit 'Save'
+  %div{:class=>'timestamp'} - Каким образом и в какие сроки реалистично ввести в действие в ДО СГУ данное нововведение, в частности, задействовать ресурсы для него, и почему осуществить это реалистично?
+
+  / - unless @ltpost.nil?
+  /   = hidden_field_tag 'idea', @ltpost 
+
+
+  %actions
+    = f.submit "",  class: "btn"

@@ -1,5 +1,5 @@
 class Plan::Comment < ActiveRecord::Base
-  attr_accessible :content
+  attr_accessible :content, :user, :post
   belongs_to :user
   belongs_to :post
   default_scope :order => 'plan_comments.created_at ASC'

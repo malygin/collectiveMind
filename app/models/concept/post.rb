@@ -1,4 +1,4 @@
-class Concept::Post < ActiveRecord::Base
+ class Concept::Post < ActiveRecord::Base
  # 0 - new,  1 - archiv, 2 - to expert, 3 - accepted 
   attr_accessible :goal, :life_tape_post_id, :number_views, :reality, :user, :status
   belongs_to :user

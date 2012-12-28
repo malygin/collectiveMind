@@ -15,6 +15,7 @@ module JournalHelper
 				'добавил комментарий к '+  link_to('идее', life_tape_post_path(j.body))
 			when 'life_tape_post_save'
 				'добавил '+  link_to('идею', life_tape_post_path(j.body))				
+			
 			when 'concept_post_update'
 				'отредактировал '+  link_to('концепцию', concept_post_path(j.body))
 			when 'question_save'
@@ -27,6 +28,21 @@ module JournalHelper
 				'отклонил ' +link_to('концепцию', concept_post_path(j.body))
 			when 'concept_post_to_expert'	
 				'отправил эксперту ' +link_to('концепцию', concept_post_path(j.body))
+			
+			when 'plan_post_save'
+				'добавил  '+ link_to('проект', plan_post_path(j.body))
+			when 'plan_comment_save'
+				'добавил комментарий к '+  link_to('проекту', plan_post_path(j.body))
+			when 'plan_post_update'
+				'отредактировал '+  link_to('проект', plan_post_path(j.body))
+			when 'plan_post_revision'
+				'отправил на доработку ' +link_to('проект', plan_post_path(j.body))
+			when 'plan_post_acceptance'
+				'принял ' +link_to('проект', plan_post_path(j.body))
+			when 'plan_post_rejection'
+				'отклонил ' +link_to('проект', plan_post_path(j.body))
+			when 'plan_post_to_expert'	
+				'отправил эксперту ' +link_to('проект', plan_post_path(j.body))
 
 			else
 				'что то другое'

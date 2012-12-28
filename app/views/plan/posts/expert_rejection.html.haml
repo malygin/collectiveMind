@@ -1,0 +1,7 @@
+.redtitle Отклонение
+= form_for @note, :url => expert_rejection_save_plan_post_path, :method => :put  do |f|
+	Добавьте причину отклонения и нажмите отправить
+	.field
+		=f.text_area :content
+	.action
+		=f.submit '', class: 'btn'

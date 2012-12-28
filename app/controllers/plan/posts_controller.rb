@@ -84,17 +84,17 @@ class Plan::PostsController < ApplicationController
   end 
 
   def save_note(params, status, message, type_event)
-    Plan = Plan::Post.find(params[:id])
+    plan = Plan::Post.find(params[:id])
     if !params[:plan_post_note].nil? and params[:plan_post_note][:content]!= ''
       @note = Plan::PostNote.new(params[:plan_post_note])
-      @note.post = Plan
+      @note.post = plan
       @note.user = current_user
       @note.save
     end
-    Plan.update_column(:status, status)
-    current_user.journals.build(:type_event=>type_event, :body=>Plan.id).save!
+    plan.update_column(:status, status)
+    current_user.journals.build(:type_event=>type_event, :body=>plan.id).save!
     flash[:notice]=message
-    Plan
+    plan
   end
 
   def to_expert_save
@@ -108,8 +108,8 @@ class Plan::PostsController < ApplicationController
   end
 
   def expert_acceptance_save
-    Plan = save_note(params, 3, 'Проект принят!','plan_post_acceptance' )
-    Plan.user.update_column(:score, Plan.user.score + 200)
+    plan = save_note(params, 3, 'Проект принят!','plan_post_acceptance' )
+    Plan.user.update_column(:score, plan.user.score + 400)
     redirect_to  action: "index"
   end
 
@@ -127,7 +127,7 @@ class Plan::PostsController < ApplicationController
 
   def plus
     post = Plan::Post.find(params[:id])
-    post.post_voitings.create(:user => current_user, :post => post, :against => false)
+    post.post_voitings.create(:user => current_user, :post => post)
     render json:post.users.count 
   end
   # POST /Plan/posts
@@ -167,7 +167,7 @@ class Plan::PostsController < ApplicationController
     @plan_post = Plan::Post.find(params[:id])
     respond_to do |format|
       if @plan_post.update_attributes(params[:plan_post])
-         @plan_post.task_supply_pairs =[]
+         #@plan_post.task_supply_pairs =[]
          # unless params['task_supply'].nil?
          #  params['task_supply'].each do |k,v|
          #    if v['1']!= '' or v['2']!= ''
