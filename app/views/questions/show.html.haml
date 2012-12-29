@@ -21,7 +21,10 @@
 		%br
 		%span.role= @question.user.role_name
 	.posts
-		%span.namedate= @question.user.name_title
+		%span.namedate
+			= @question.user.name_title
+			,
+			= Russian::strftime(@question.created_at,"%d %B %k:%M:%S ")
 		%br
 		%p
 			=@question.text

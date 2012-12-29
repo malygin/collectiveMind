@@ -1,4 +1,7 @@
-= link_to image_tag('concept.png'), new_plan_post_path
+- if signed_in?
+	= link_to image_tag('add_project.png'), new_plan_post_path
+-else
+	Авторизуйтесь, чтобы добавить проект
 
 = render @plan_posts
 = will_paginate @plan_posts

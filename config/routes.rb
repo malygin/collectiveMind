@@ -35,6 +35,7 @@ CollectiveMind::Application.routes.draw do
   match "/help1", :to => "pages#help1"
   match "/help2", :to => "pages#help2"
   match "/help3", :to => "pages#help3"
+  match "/help4", :to => "pages#help4"
 
   match "/home", :to => "pages#home"
   match "/donot", :to => "pages#donot"  
@@ -226,7 +227,7 @@ CollectiveMind::Application.routes.draw do
 
   # You can have the root of your site routed with "root"
   # just remember to delete public/index.html.
-  root :to => 'concept/posts#forecast'
+  root :to => 'plan/posts#index'
 
   # See how all your routes lay out with "rake routes"
 

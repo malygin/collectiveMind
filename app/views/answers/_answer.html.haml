@@ -22,6 +22,9 @@
 		%br
 		%span.role= answer.user.role_name
 	.posts
-		%span.namedate= answer.user.name_title
+		%span.namedate
+			= answer.user.name_title
+			,
+			= Russian::strftime(answer.created_at,"%d %B %k:%M:%S ")
 		%br
 		%p.comments= answer.text
