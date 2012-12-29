@@ -58,7 +58,13 @@ class Plan::PostsController < ApplicationController
     #puts params
 
     @plan_post = Plan::Post.new
-    @plan_post.task_triplets << Plan::TaskTriplet.new(:task =>'', :supply => '', :howto => '')
+    @plan_post.task_triplets << Plan::TaskTriplet.new(:task =>'1. Оценивание студентами качества образования:  ', :supply => '', :howto => '')
+    @plan_post.task_triplets << Plan::TaskTriplet.new(:task =>'2. «Горячая линия»:  ', :supply => '', :howto => '')
+    @plan_post.task_triplets << Plan::TaskTriplet.new(:task =>'3. Видео лекций: ', :supply => '', :howto => '')
+    @plan_post.task_triplets << Plan::TaskTriplet.new(:task =>'4. Содействие в устройстве на практику, стажировку и работу: ', :supply => '', :howto => '')
+    @plan_post.task_triplets << Plan::TaskTriplet.new(:task =>'5. Представление студентов перед потенциальными работодателями: ', :supply => '', :howto => '')
+    @plan_post.task_triplets << Plan::TaskTriplet.new(:task =>'6. Видеоконференции с малыми группами: ', :supply => '', :howto => '')
+    @plan_post.task_triplets << Plan::TaskTriplet.new(:task =>'7. Разбор материала на жизненных примерах: ', :supply => '', :howto => '')
     prepare_data
     respond_to do |format|
       format.html # new.html.erb
