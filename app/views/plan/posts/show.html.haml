@@ -26,10 +26,10 @@
       %b #{index+1} Задача:
       = simple_format(p.task)
       %br
-      %b Ресурсы
+      %b Ресурсы для #{index+1} задачи
       = simple_format(p.supply) 
       %br
-      %b Cредства создания ресурсов         
+      %b Cредства создания ресурсов для #{index+1} задачи        
       = simple_format(p.howto)
       =image_tag('dots.png')
       %br
