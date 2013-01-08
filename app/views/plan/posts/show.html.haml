@@ -17,38 +17,30 @@
     = render 'users/user_name', :user => @plan_post.user, :created_at => @plan_post.created_at
     %p
       %b Цели (образ желаемого будущего)
-      %br= @plan_post.goal
-    %table.tasks_for_plan
-      %tr
-        %td
-          %br
-          %label.small
-            %b Разбиения задач на подзадачи
-        %td &nbsp;
-        %td
-          %br
-          %label.small
-            %b Ресурсы
-        %td
-        %td
-          %br
-          %label.small
-            %b Средства создания ресурсов
-        %td 
-      - @plan_post.task_triplets.each_with_index do |p, index|
-        %tr.ts
-          %td= p.task
-          %td= image_tag('arrow.png')
-          %td= p.supply          
-          %td= image_tag('arrow.png')
-          %td= p.howto
-          %td
+      %br= simple_format(@plan_post.goal)
+
+    %b Список решаемых задач
+    %br
+    %br
+    - @plan_post.task_triplets.each_with_index do |p, index|
+      %b #{index+1} Задача:
+      = simple_format(p.task)
+      %br
+      %b Ресурсы
+      = simple_format(p.supply) 
+      %br
+      %b Cредства создания ресурсов         
+      = simple_format(p.howto)
+      =image_tag('dots.png')
+      %br
+
+      
     %p
       %b Первый шаг
-      %br= @plan_post.first_step
+      %br= simple_format(@plan_post.first_step)
     %p
       %b Дальнейшие шаги
-      %br= @plan_post.other_steps
+      %br= simple_format(@plan_post.other_steps)
 
   
 
