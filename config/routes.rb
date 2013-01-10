@@ -178,7 +178,7 @@ CollectiveMind::Application.routes.draw do
             get :expert_revision
             put :expert_revision_save
             get :expert_acceptance_save
-        endss
+        end
       end
       resources :comments do
           member do
