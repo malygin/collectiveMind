@@ -249,13 +249,18 @@ class Concept::PostsController < ApplicationController
       end
     end
 
-    # @fres.each do |k,v|
-    #   k.update_column(:score, k.score + v[0])
-    #   # puts v[0]
-    #   # puts '____________'
-    #   # @frustration.user.update_column(:score, @frustration.user.score + score_max)
-    # end
+    @fres.each do |k,v|
+      k.update_column(:score, k.score + v[0])
+      # puts v[0]
+      # puts '____________'
+      # @frustration.user.update_column(:score, @frustration.user.score + score_max)
+    end
 
+  end
+  
+  def essay
+    prepare_data
+    @essays = Concept::Essay.all
   end
 
   def vote_for
