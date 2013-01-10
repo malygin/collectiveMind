@@ -214,6 +214,48 @@ class Concept::PostsController < ApplicationController
     else
       @forecast_tasks = Concept::ForecastTask.all
     end
+
+  end
+  def result
+    prepare_data
+    @forecast_tasks = Concept::ForecastTask.all.sort{|x, y| y.voiting_score <=> x.voiting_score}[0..2]
+    
+    fr_with_orders = {@forecast_tasks[0] => '1', @forecast_tasks[1] => '2', @forecast_tasks[2] => '3'}
+
+    forecasts = Concept::Forecast.find(:all, :order => "user_id, position")
+    @fres={}
+    forecasts.each do |f|
+      if @fres[f.user].nil?
+        dic = {}
+        score = 0
+        dic[f.forecast_task] = f.position
+        if fr_with_orders.keys.include?  f.forecast_task 
+          score +=10
+        end
+        if fr_with_orders[f.forecast_task] == f.position.to_s
+          score += 10
+        end 
+        @fres[f.user]=[score, dic]
+      else
+        if @fres[f.user][1][f.forecast_task].nil?
+          if fr_with_orders.keys.include?  f.forecast_task 
+            @fres[f.user][0] += 10
+          end
+          if fr_with_orders[f.forecast_task] == f.position.to_s
+            @fres[f.user][0] += 10
+          end 
+          @fres[f.user][1][f.forecast_task] = f.position.to_s
+        end
+      end
+    end
+
+    # @fres.each do |k,v|
+    #   k.update_column(:score, k.score + v[0])
+    #   # puts v[0]
+    #   # puts '____________'
+    #   # @frustration.user.update_column(:score, @frustration.user.score + score_max)
+    # end
+
   end
 
   def vote_for

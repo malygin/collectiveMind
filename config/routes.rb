@@ -161,6 +161,8 @@ CollectiveMind::Application.routes.draw do
 
     namespace :concept do
       get 'forecast' => "posts#forecast"
+      get 'result' => "posts#result"
+
       match 'vote_for/:id/:score' => 'posts#vote_for',  :constraints => { :score => /[0-3]/ }
 
       resources :forecast_tasks
@@ -176,7 +178,7 @@ CollectiveMind::Application.routes.draw do
             get :expert_revision
             put :expert_revision_save
             get :expert_acceptance_save
-        end
+        endss
       end
       resources :comments do
           member do
@@ -186,7 +188,7 @@ CollectiveMind::Application.routes.draw do
     end
 
     namespace :plan do
-      # get 'forecast' => "posts#forecast"
+      get 'forecast' => "posts#forecast"
       # match 'vote_for/:id/:score' => 'posts#vote_for',  :constraints => { :score => /[0-3]/ }
 
       # resources :forecast_tasks

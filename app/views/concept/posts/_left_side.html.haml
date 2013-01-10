@@ -6,6 +6,9 @@
 	- if admin? or expert?
 		%li= link_to "На рассмотрении", "/concept/posts/status/2", class: cp_frustration('/concept/posts/status/3')
 	%li= link_to "На голосовании", "/concept/forecast", class: cp_frustration('/concept/forecast')
+	- if boss?
+		%li= link_to "Результаты прогнозов", "/concept/result", class: cp_frustration('/concept/forecast')
+		%li= link_to "Эссе", "/concept/essay", class: cp_frustration('/concept/essay')
 
 .redtitle Результаты голосования 
 %div.topics
