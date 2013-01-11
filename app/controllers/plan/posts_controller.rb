@@ -146,9 +146,11 @@ class Plan::PostsController < ApplicationController
     @plan_post.status = 0
     @plan_post.task_triplets = []
     #puts params['task_supply']
+    position=1
     params['task_triplet'].each do |k,v|
       if v['1']!= '' or v['2']!= ''
-        triplet = Plan::TaskTriplet.new(:task => v['1'], :supply => v['2'], :howto => v['3']) 
+        triplet = Plan::TaskTriplet.new(:task => v['1'], :supply => v['2'], :howto => v['3'], :position => position) 
+        position+=1
         @plan_post.task_triplets << triplet
       end
     end
@@ -173,10 +175,12 @@ class Plan::PostsController < ApplicationController
       if @plan_post.update_attributes(params[:plan_post])
          @plan_post.task_triplets =[]
          unless params['task_triplet'].nil?
-          
+          position=1
+
           params['task_triplet'].each do |k,v|
             if v['1']!= '' or v['2']!= ''
-              triplet = Plan::TaskTriplet.new(:task => v['1'], :supply => v['2'], :howto => v['3']) 
+              triplet = Plan::TaskTriplet.new(:task => v['1'], :supply => v['2'], :howto => v['3'], :position => position) 
+              position+=1
               @plan_post.task_triplets << triplet
             end
           end   

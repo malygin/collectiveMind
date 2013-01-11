@@ -385,8 +385,6 @@ ActiveRecord::Schema.define(:version => 20121228092853) do
     t.datetime "updated_at", :null => false
   end
 
-  add_index "plan_task_triplets", ["post_id"], :name => "index_plan_task_triplets_on_post_id"
-
   create_table "posts", :force => true do |t|
     t.string   "title"
     t.text     "text"
