@@ -32,7 +32,7 @@ class ExpertNews::PostsController < ApplicationController
   # GET /expert_news/posts/new
   # GET /expert_news/posts/new.json
   def new
-    prepare_data
+    prepare_data    
     @expert_news_post = ExpertNews::Post.new
 
     respond_to do |format|

@@ -1,3 +1,4 @@
+= tinymce 
 = form_for @plan_post, :html => {:class =>'new_concept_post'} do |f|
   %label 
     %b Цель -
@@ -43,14 +44,14 @@
     %b Первый этап 
   %br
   %field
-    = f.text_area :first_step
+    = f.text_area :first_step, :class => "tinymce"
   %div{:class=>'timestamp'} - Подготовительная стадия -согласование новшества  со всем контингентом студентов и администрацией ДО. Начало осуществления проекта - самые простые и дешевые действия по созданию ресурсов, дающих наиболее быстрый и ощутимый эффект.
   %br
   %label 
     %b Дальнейшие шаги 
   %br
   %field
-    = f.text_area :other_steps
+    = f.text_area :other_steps, :class => "tinymce"
   %div{:class=>'timestamp'} - Набросок плана действий вплоть до завершения проекта.
 
   / - unless @ltpost.nil?

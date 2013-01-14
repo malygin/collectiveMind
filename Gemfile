@@ -15,6 +15,7 @@ gem 'thin'
 gem 'settingslogic'
 gem 'execjs'
 gem 'dalli'
+gem 'tinymce-rails'
 
 gem 'rest-client'
 #gem 'magic_encoding'
