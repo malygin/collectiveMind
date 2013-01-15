@@ -1,4 +1,6 @@
 CollectiveMind::Application.routes.draw do
+  namespace :estimate do resources :posts end
+
   namespace :plan do resources :posts end
 
   namespace :concept do resources :posts end

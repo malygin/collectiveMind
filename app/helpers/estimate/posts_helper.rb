@@ -1,0 +1,2 @@
+module Estimate::PostsHelper
+end

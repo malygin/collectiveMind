@@ -1,0 +1,65 @@
+%h1 Listing estimate_posts
+
+%table
+  %tr
+    %th User
+    %th Post
+    %th Content
+    %th Oppsh1
+    %th Oppsh2
+    %th Oppsh3
+    %th Oppsh
+    %th Ozpshf1
+    %th Ozpshf2
+    %th Ozpshf3
+    %th Ozpshf
+    %th Ozpshs1
+    %th Ozpshs2
+    %th Ozpshs3
+    %th Ozpshs
+    %th Onpsh1
+    %th Onpsh2
+    %th Onpsh3
+    %th Onpsh
+    %th Nepr1
+    %th Nepr2
+    %th Nepr3
+    %th Nepr4
+    %th Nepr
+    %th
+    %th
+    %th
+
+  - @estimate_posts.each do |estimate_post|
+    %tr
+      %td= estimate_post.user_id
+      %td= estimate_post.post_id
+      %td= estimate_post.content
+      %td= estimate_post.oppsh1
+      %td= estimate_post.oppsh2
+      %td= estimate_post.oppsh3
+      %td= estimate_post.oppsh
+      %td= estimate_post.ozpshf1
+      %td= estimate_post.ozpshf2
+      %td= estimate_post.ozpshf3
+      %td= estimate_post.ozpshf
+      %td= estimate_post.ozpshs1
+      %td= estimate_post.ozpshs2
+      %td= estimate_post.ozpshs3
+      %td= estimate_post.ozpshs
+      %td= estimate_post.onpsh1
+      %td= estimate_post.onpsh2
+      %td= estimate_post.onpsh3
+      %td= estimate_post.onpsh
+      %td= estimate_post.nepr1
+      %td= estimate_post.nepr2
+      %td= estimate_post.nepr3
+      %td= estimate_post.nepr4
+      %td= estimate_post.nepr
+      %td= link_to 'Show', estimate_post
+      %td= link_to 'Edit', edit_estimate_post_path(estimate_post)
+      %td= link_to 'Destroy', estimate_post, :confirm => 'Are you sure?', :method => :delete
+
+%br
+
+= link_to 'New Post', new_estimate_post_path

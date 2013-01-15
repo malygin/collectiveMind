@@ -1,0 +1,78 @@
+= form_for @estimate_post do |f|
+  -if @estimate_post.errors.any?
+    #error_explanation
+      %h2= "#{pluralize(@estimate_post.errors.count, "error")} prohibited this estimate_post from being saved:"
+      %ul
+        - @estimate_post.errors.full_messages.each do |msg|
+          %li= msg
+  .field
+    = f.label :content
+    = f.text_area :content
+
+  .field
+    = f.label "ОППШ"
+    = f.select :oppsh1, [["не очень вероятно", 1], ["вероятно", 2], ["очень вероятно", 3]]
+
+
+  .field
+    = f.label :oppsh2
+    = f.select :oppsh2, [["не очень вероятно", 1], ["вероятно", 2], ["очень вероятно", 3]]
+  .field
+    = f.label :oppsh3
+    = f.select :oppsh3, [["не очень вероятно", 1], ["вероятно", 2], ["очень вероятно", 3]]
+  .field
+    = f.label :oppsh
+    = f.text_area :oppsh
+  .field
+    = f.label :ozpshf1
+    = f.number_field :ozpshf1
+  .field
+    = f.label :ozpshf2
+    = f.number_field :ozpshf2
+  .field
+    = f.label :ozpshf3
+    = f.number_field :ozpshf3
+  .field
+    = f.label :ozpshf
+    = f.text_area :ozpshf
+  .field
+    = f.label :ozpshs1
+    = f.number_field :ozpshs1
+  .field
+    = f.label :ozpshs2
+    = f.number_field :ozpshs2
+  .field
+    = f.label :ozpshs3
+    = f.number_field :ozpshs3
+  .field
+    = f.label :ozpshs
+    = f.text_area :ozpshs
+  .field
+    = f.label :onpsh1
+    = f.number_field :onpsh1
+  .field
+    = f.label :onpsh2
+    = f.number_field :onpsh2
+  .field
+    = f.label :onpsh3
+    = f.number_field :onpsh3
+  .field
+    = f.label :onpsh
+    = f.text_area :onpsh
+  .field
+    = f.label :nepr1
+    = f.number_field :nepr1
+  .field
+    = f.label :nepr2
+    = f.number_field :nepr2
+  .field
+    = f.label :nepr3
+    = f.number_field :nepr3
+  .field
+    = f.label :nepr4
+    = f.number_field :nepr4
+  .field
+    = f.label :nepr
+    = f.text_area :nepr
+  .actions
+    = f.submit 'Save'
