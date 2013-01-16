@@ -1,5 +1,4 @@
 %h1 Оценка проектов
 
-= render plan_posts
+= render :partial => '/plan/posts/post_estimate', :collection => @plan_posts
 
-= link_to 'New Post', new_estimate_post_path

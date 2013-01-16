@@ -1,78 +1,90 @@
 = form_for @estimate_post do |f|
-  -if @estimate_post.errors.any?
-    #error_explanation
-      %h2= "#{pluralize(@estimate_post.errors.count, "error")} prohibited this estimate_post from being saved:"
-      %ul
-        - @estimate_post.errors.full_messages.each do |msg|
-          %li= msg
+
   .field
-    = f.label :content
+    = f.label 'Общая оценка'
     = f.text_area :content
+  %p
+    %b Первый шаг
+    %br= simple_format(@plan_post.first_step)
+  %b Ожидаемая полезность первого шага
 
   .field
-    = f.label "ОППШ"
+    = f.label "очень ощутимое улучшение ДО СГУ"
     = f.select :oppsh1, [["не очень вероятно", 1], ["вероятно", 2], ["очень вероятно", 3]]
-
-
   .field
-    = f.label :oppsh2
+    = f.label "ощутимое"
     = f.select :oppsh2, [["не очень вероятно", 1], ["вероятно", 2], ["очень вероятно", 3]]
   .field
-    = f.label :oppsh3
+    = f.label "не очень ощутимое"
     = f.select :oppsh3, [["не очень вероятно", 1], ["вероятно", 2], ["очень вероятно", 3]]
   .field
-    = f.label :oppsh
+    = f.label 'Обоснуйте свою оценку'
     = f.text_area :oppsh
+  %br
+  %b 1-е ожидаемые затраты первого шага
   .field
-    = f.label :ozpshf1
-    = f.number_field :ozpshf1
+    = f.label 'большие'
+    = f.select :ozpshf1, [["не очень вероятно", 1], ["вероятно", 2], ["очень вероятно", 3]]
   .field
-    = f.label :ozpshf2
-    = f.number_field :ozpshf2
+    = f.label "средние"
+    = f.select :ozpshf2, [["не очень вероятно", 1], ["вероятно", 2], ["очень вероятно", 3]]
   .field
-    = f.label :ozpshf3
-    = f.number_field :ozpshf3
+    = f.label "малые"
+    = f.select :ozpshf3, [["не очень вероятно", 1], ["вероятно", 2], ["очень вероятно", 3]]
   .field
-    = f.label :ozpshf
+    = f.label 'Обоснуйте свою оценку'
     = f.text_area :ozpshf
+  %br
+  %b  ожидаемая надежность первого шага
+
   .field
-    = f.label :ozpshs1
-    = f.number_field :ozpshs1
+    = f.label "ресурсы будут созданы в полной мере"
+    = f.select :onpsh1, [["не очень вероятно", 1], ["вероятно", 2], ["очень вероятно", 3]]
   .field
-    = f.label :ozpshs2
-    = f.number_field :ozpshs2
+    = f.label "ресурсы будут созданы в значительной мере"
+    = f.select :onpsh2, [["не очень вероятно", 1], ["вероятно", 2], ["очень вероятно", 3]]
   .field
-    = f.label :ozpshs3
-    = f.number_field :ozpshs3
+    = f.label "ресурсы будут созданы в небольшой мере"
+    = f.select :onpsh3, [["не очень вероятно", 1], ["вероятно", 2], ["очень вероятно", 3]]
   .field
-    = f.label :ozpshs
-    = f.text_area :ozpshs
-  .field
-    = f.label :onpsh1
-    = f.number_field :onpsh1
-  .field
-    = f.label :onpsh2
-    = f.number_field :onpsh2
-  .field
-    = f.label :onpsh3
-    = f.number_field :onpsh3
-  .field
-    = f.label :onpsh
+    = f.label 'Обоснуйте свою оценку'
     = f.text_area :onpsh
+
+  %br
+  %b 2-е ожидаемые затраты первого шага
   .field
-    = f.label :nepr1
-    = f.number_field :nepr1
+    = f.label 'большие'
+    = f.select :ozpshs1, [["не очень вероятно", 1], ["вероятно", 2], ["очень вероятно", 3]]
   .field
-    = f.label :nepr2
-    = f.number_field :nepr2
+    = f.label "средние"
+    = f.select :ozpshs2, [["не очень вероятно", 1], ["вероятно", 2], ["очень вероятно", 3]]
   .field
-    = f.label :nepr3
-    = f.number_field :nepr3
+    = f.label "малые"
+    = f.select :ozpshs3, [["не очень вероятно", 1], ["вероятно", 2], ["очень вероятно", 3]]
   .field
-    = f.label :nepr4
-    = f.number_field :nepr4
+    = f.label 'Обоснуйте свою оценку'
+    = f.text_area :ozpshs
+  %br
+
+  %br
+  %b ожидаемые неприятности в связи с осуществлением проекта
   .field
-    = f.label :nepr
+    = f.label 'большие'
+    = f.select :nepr1, [["не очень вероятно", 1], ["вероятно", 2], ["очень вероятно", 3]]
+  .field
+    = f.label "средние"
+    = f.select :nepr2, [["не очень вероятно", 1], ["вероятно", 2], ["очень вероятно", 3]]
+  .field
+    = f.label "малые"
+    = f.select :nepr3, [["не очень вероятно", 1], ["вероятно", 2], ["очень вероятно", 3]]  
+  .field
+    = f.label "никакие"
+    = f.select :nepr4, [["не очень вероятно", 1], ["вероятно", 2], ["очень вероятно", 3]]
+  .field
+    = f.label 'Обоснуйте свою оценку'
     = f.text_area :nepr
+  %br
+  
+
   .actions
-    = f.submit 'Save'
+    = f.submit ''

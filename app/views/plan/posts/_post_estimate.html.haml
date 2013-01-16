@@ -1,0 +1,15 @@
+.wholePost
+	= render 'users/user_post', :user => post_estimate.user
+	.posts
+		= render 'users/user_name', :user => post_estimate.user, :created_at => post_estimate.created_at
+		
+		- if not current_page?(plan_post_path(post_estimate)) 
+			%p
+				= trim_string(post_estimate.goal)
+				= link_to "Подробнее", post_estimate, class: "more"
+		-else
+			%p
+				= post_estimate.goal
+		= link_to 'Добавить оценку', 'new/'+post_estimate.id.to_s
+
+		

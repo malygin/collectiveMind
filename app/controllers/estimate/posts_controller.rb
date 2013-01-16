@@ -3,7 +3,7 @@ class Estimate::PostsController < ApplicationController
   # GET /estimate/posts.json
   def index
     @estimate_posts = Estimate::Post.all
-    @plan_posts = Plan::Post.find(:status => '3')
+    @plan_posts = Plan::Post.where(:status => '3')
 
     respond_to do |format|
       format.html # index.html.erb
