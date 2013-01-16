@@ -1,5 +1,4 @@
 CollectiveMind::Application.routes.draw do
-  namespace :estimate do resources :posts end
 
   namespace :plan do resources :posts end
 
@@ -229,6 +228,11 @@ CollectiveMind::Application.routes.draw do
           end  
       end
     end
+  namespace :estimate do 
+    resources :posts 
+    get 'posts/new/:post_id' => "posts#new"
+
+  end
 
   # You can have the root of your site routed with "root"
   # just remember to delete public/index.html.

@@ -113,7 +113,7 @@ class Plan::PostsController < ApplicationController
 
   def expert_acceptance_save
     plan = save_note(params, 3, 'Проект принят!','plan_post_acceptance' )
-    Plan.user.update_column(:score, plan.user.score + 400)
+    plan.user.update_column(:score, plan.user.score + 400)
     redirect_to  action: "index"
   end
 

@@ -3,6 +3,7 @@ class Estimate::PostsController < ApplicationController
   # GET /estimate/posts.json
   def index
     @estimate_posts = Estimate::Post.all
+    @plan_posts = Plan::Post.find(:status => '3')
 
     respond_to do |format|
       format.html # index.html.erb
@@ -25,6 +26,7 @@ class Estimate::PostsController < ApplicationController
   # GET /estimate/posts/new.json
   def new
     @estimate_post = Estimate::Post.new
+    @plan_post = Plan::Post.find(params[:post_id])
 
     respond_to do |format|
       format.html # new.html.erb
