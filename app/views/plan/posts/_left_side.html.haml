@@ -2,7 +2,7 @@
 %ul.leftlink
 	%li= link_to "Обсуждаются", '/plan/posts/status/0', class: cp_frustration('/plan/posts/status/0') 
 	%li= link_to "Архив", "/plan/posts/status/1" , class: cp_frustration('/plan/posts/status/1') 
-	%li= link_to "Принятые", "/plan/posts", class: cp_frustration('/plan/posts')
+	%li= link_to "Принятые", "/plan/posts/status/3", class: cp_frustration('/plan/posts/status/3')
 	- if admin? or expert?
 		%li= link_to "На рассмотрении", "/plan/posts/status/2", class: cp_frustration('/plan/posts/status/2')
 

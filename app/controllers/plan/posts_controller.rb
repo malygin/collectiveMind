@@ -14,7 +14,7 @@ class Plan::PostsController < ApplicationController
   def index
     status = params['status_id']
     if status.nil?
-      status ='0'
+      status ='3'
     end
     @plan_posts = Plan::Post.where(:status => status).paginate(:page => params[:page])
     prepare_data
