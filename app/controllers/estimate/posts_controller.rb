@@ -27,6 +27,10 @@ class Estimate::PostsController < ApplicationController
   def new
     @estimate_post = Estimate::Post.new
     @plan_post = Plan::Post.find(params[:post_id])
+    @triplet_estimates = {}
+    @plan_post.task_triplets.each do |p|
+      @triplet_estimates[p] = Estimate::TaskTriplet.new
+    end
 
     respond_to do |format|
       format.html # new.html.erb

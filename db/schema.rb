@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130115182023) do
+ActiveRecord::Schema.define(:version => 20130117093730) do
 
   create_table "answers", :force => true do |t|
     t.string   "text"
@@ -191,6 +191,31 @@ ActiveRecord::Schema.define(:version => 20130115182023) do
   add_index "estimate_posts", ["created_at"], :name => "index_estimate_posts_on_created_at"
   add_index "estimate_posts", ["post_id"], :name => "index_estimate_posts_on_post_id"
   add_index "estimate_posts", ["user_id"], :name => "index_estimate_posts_on_user_id"
+
+  create_table "estimate_task_triplets", :force => true do |t|
+    t.integer  "post_id"
+    t.integer  "task_triplet_id"
+    t.integer  "op1"
+    t.integer  "op2"
+    t.integer  "op3"
+    t.text     "op"
+    t.integer  "ozf1"
+    t.integer  "ozf2"
+    t.integer  "ozf3"
+    t.text     "ozf"
+    t.integer  "ozs1"
+    t.integer  "ozs2"
+    t.integer  "ozs3"
+    t.text     "ozs"
+    t.integer  "on1"
+    t.integer  "on2"
+    t.integer  "on3"
+    t.text     "on"
+    t.datetime "created_at",      :null => false
+    t.datetime "updated_at",      :null => false
+  end
+
+  add_index "estimate_task_triplets", ["post_id"], :name => "index_estimate_task_triplets_on_post_id"
 
   create_table "expert_news_comment_voitings", :force => true do |t|
     t.integer  "user_id"
@@ -417,6 +442,8 @@ ActiveRecord::Schema.define(:version => 20130115182023) do
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end
+
+  add_index "plan_task_triplets", ["post_id"], :name => "index_plan_task_triplets_on_post_id"
 
   create_table "posts", :force => true do |t|
     t.string   "title"
