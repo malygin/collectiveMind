@@ -236,7 +236,7 @@ CollectiveMind::Application.routes.draw do
 
   # You can have the root of your site routed with "root"
   # just remember to delete public/index.html.
-  root :to => 'plan/posts#index'
+  root :to => 'plan/posts#index', :status => 3
 
   # See how all your routes lay out with "rake routes"
 

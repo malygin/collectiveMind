@@ -1,7 +1,7 @@
-- if signed_in?
-	= link_to image_tag('add_project.png'), new_plan_post_path
--else
-	Авторизуйтесь, чтобы добавить проект
+/ - if signed_in?
+/ 	= link_to image_tag('add_project.png'), new_plan_post_path
+/ -else
+/ 	Авторизуйтесь, чтобы добавить проект
 
 = render @plan_posts
 = will_paginate @plan_posts
