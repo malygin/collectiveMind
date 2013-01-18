@@ -3,7 +3,13 @@
 class Estimate::PostsController < ApplicationController
   # GET /estimate/posts
   # GET /estimate/posts.json
+  def prepare_data
+
+    @journals = Journal.events_for_user_feed
+    @news = ExpertNews::Post.first    
+  end
   def index
+    prepare_data
     @estimate_posts = Estimate::Post.all
     @plan_posts = Plan::Post.where(:status => '3')
 
@@ -16,6 +22,7 @@ class Estimate::PostsController < ApplicationController
   # GET /estimate/posts/1
   # GET /estimate/posts/1.json
   def show
+    prepare_data
     @estimate_post = Estimate::Post.find(params[:id])
 
     respond_to do |format|
@@ -27,6 +34,7 @@ class Estimate::PostsController < ApplicationController
   # GET /estimate/posts/new
   # GET /estimate/posts/new.json
   def new
+    prepare_data
     @estimate_post = Estimate::Post.new
     @plan_post = Plan::Post.find(params[:post_id])
     @triplet_estimates = {}
@@ -41,6 +49,7 @@ class Estimate::PostsController < ApplicationController
 
   # GET /estimate/posts/1/edit
   def edit
+    prepare_data
     @estimate_post = Estimate::Post.find(params[:id])
     @plan_post = @estimate_post.post
     @triplet_estimates = {}
