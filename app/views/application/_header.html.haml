@@ -32,9 +32,9 @@
       = link_to "Проекты", "/plan/posts/", class: "lstages" 
     = image_tag "space.png" 
 
-    %li
-      = image_tag "5disabled.png", :class => 'numbers'
-      %span.lstagesdisabled Оценивание и выбор
+    %li{ :class => cp('/plan/estimate', 'estimate')}
+      = image_tag image_for_stages("5", '/estimate/posts', 'estimate'), :class => 'numbers'
+      = link_to "Оценивание и выбор", "/estimate/posts/", class: "lstages" 
 
 .menu
   %ul
