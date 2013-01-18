@@ -1,3 +1,5 @@
+- if current_user == @estimate_post.user
+  = link_to 'Редактировать', edit_estimate_post_path(@estimate_post)
 .wholePost
   = render 'users/user_post', :user => @estimate_post.user
   .posts
@@ -83,82 +85,82 @@
       %br
 
 
+    %b Предположим, что предлагаемые для первого шага ресурсы будут созданы. Какова вероятность, что они обеспечат разрешение  задачи первого шага
+    %br
+    В полной мере -
+    = estimate_trans(@estimate_post.oppsh1)   
+    %br
+    В значительно мере -
+    = estimate_trans(@estimate_post.oppsh2)   
+    %br
+    В небольшой мере - 
+    = estimate_trans(@estimate_post.oppsh3)
+    %br
+    %b пояснение:
+    = @estimate_post.oppsh
 
-%p#notice= notice
+    %br
+    %b Функционирование ресурсов, которые будут обеспечивать разрешение задач первого шага в будущем потребует  материальных и трудовых затрат. Какая вероятность, что потребуются
+    %br
+    большие затраты -
+    = estimate_trans(@estimate_post.ozpshf1)   
+    %br
+    средние  затраты -
+    = estimate_trans(@estimate_post.ozpshf2)   
+    %br
+    малые затраты - 
+    = estimate_trans(@estimate_post.ozpshf3)
+    %br
+    %b пояснение:
+    = @estimate_post.ozpshf
+    %br
 
-%p
-  %b User:
-  = @estimate_post.user_id
-%p
-  %b Post:
-  = @estimate_post.post_id
-%p
-  %b Content:
-  = @estimate_post.content
-%p
-  %b Oppsh1:
-  = @estimate_post.oppsh1
-%p
-  %b Oppsh2:
-  = @estimate_post.oppsh2
-%p
-  %b Oppsh3:
-  = @estimate_post.oppsh3
-%p
-  %b Oppsh:
-  = @estimate_post.oppsh
-%p
-  %b Ozpshf1:
-  = @estimate_post.ozpshf1
-%p
-  %b Ozpshf2:
-  = @estimate_post.ozpshf2
-%p
-  %b Ozpshf3:
-  = @estimate_post.ozpshf3
-%p
-  %b Ozpshf:
-  = @estimate_post.ozpshf
-%p
-  %b Ozpshs1:
-  = @estimate_post.ozpshs1
-%p
-  %b Ozpshs2:
-  = @estimate_post.ozpshs2
-%p
-  %b Ozpshs3:
-  = @estimate_post.ozpshs3
-%p
-  %b Ozpshs:
-  = @estimate_post.ozpshs
-%p
-  %b Onpsh1:
-  = @estimate_post.onpsh1
-%p
-  %b Onpsh2:
-  = @estimate_post.onpsh2
-%p
-  %b Onpsh3:
-  = @estimate_post.onpsh3
-%p
-  %b Onpsh:
-  = @estimate_post.onpsh
-%p
-  %b Nepr1:
-  = @estimate_post.nepr1
-%p
-  %b Nepr2:
-  = @estimate_post.nepr2
-%p
-  %b Nepr3:
-  = @estimate_post.nepr3
-%p
-  %b Nepr4:
-  = @estimate_post.nepr4
-%p
-  %b Nepr:
-  = @estimate_post.nepr
+    %b Для создания ресурсов разрешения данной задачи в проекте предлагаются вышеперечисленные средства, методы и кадры. Какова вероятность , что ресурсы будут действительно созданы 
+    %br
+    в полном объеме -
+    = estimate_trans(@estimate_post.onpsh1)   
+    %br
+    в значительном объеме -
+    = estimate_trans(@estimate_post.onpsh2)   
+    %br
+    в небольшом объеме - 
+    = estimate_trans(@estimate_post.onpsh3)
+    %br
+    %b пояснение:
+    = @estimate_post.onpsh
+    %br
+    %b  Использование вышеозначенных средств, методов и кадров создания ресурсов потребует  материальных и трудовых затрат. Какова вероятность, что потребуются
+    %br
+    большие затраты -
+    = estimate_trans(@estimate_post.ozpshs1)   
+    %br
+    средние  затраты -
+    = estimate_trans(@estimate_post.ozpshs2)   
+    %br
+    малые затраты - 
+    = estimate_trans(@estimate_post.ozpshs3)
+    %br
+    %b пояснение:
+    = @estimate_post.ozpshs    
+    %b  При осуществлении проекта возможны негативные явления. Какова веростояность , что они будут -
+    %br
+    большие  -
+    = estimate_trans(@estimate_post.nepr1)   
+    %br
+    средние   -
+    = estimate_trans(@estimate_post.nepr2)   
+    %br
+    малые  - 
+    = estimate_trans(@estimate_post.nepr3)
+    %br   
+    никакие  - 
+    = estimate_trans(@estimate_post.nepr4)
+    %br
+    %b пояснение:
+    = @estimate_post.nepr
 
-= link_to 'Edit', edit_estimate_post_path(@estimate_post)
+
+- if current_user == @estimate_post.user
+  = link_to 'Редактировать', edit_estimate_post_path(@estimate_post)
 \|
-= link_to 'Back', estimate_posts_path
+= link_to 'Назад', estimate_posts_path

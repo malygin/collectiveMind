@@ -106,16 +106,41 @@ class Estimate::PostsController < ApplicationController
   # PUT /estimate/posts/1.json
   def update
     @estimate_post = Estimate::Post.find(params[:id])
-    respond_to do |format|
-      if @estimate_post.update_attributes(params[:estimate_post])
-        format.html { redirect_to @estimate_post, notice: 'Post was successfully updated.' }
-        format.json { head :no_content }
-      else
-        format.html { render action: "edit" }
-        format.json { render json: @estimate_post.errors, status: :unprocessable_entity }
-      end
+    @estimate_post.task_triplets=[]
+    @estimate_post.post.task_triplets.each do |tr|
+      est_tr = Estimate::TaskTriplet.new
+      est_tr.task_triplet = tr
+      op = params[:op][tr.id.to_s]
+      est_tr.op1 = op['1']
+      est_tr.op2 = op['2']
+      est_tr.op3 = op['3']
+      est_tr.op = params[:op_text][tr.id.to_s]      
+
+      ozf = params[:ozf][tr.id.to_s]
+      est_tr.ozf1 = ozf['1']
+      est_tr.ozf2 = ozf['2']
+      est_tr.ozf3 = ozf['3']
+      est_tr.ozf = params[:ozf_text][tr.id.to_s]
+
+      ozs = params[:ozs][tr.id.to_s]
+      est_tr.ozs1 = ozs['1']
+      est_tr.ozs2 = ozs['2']
+      est_tr.ozs3 = ozs['3']
+      est_tr.ozs = params[:ozs_text][tr.id.to_s]
+
+      on = params[:on][tr.id.to_s]
+      est_tr.on1 = on['1']
+      est_tr.on2 = on['2']
+      est_tr.on3 = on['3']
+      est_tr.on = params[:on_text][tr.id.to_s]
+
+      @estimate_post.task_triplets << est_tr
+
     end
-  end
+    @estimate_post.update_attributes(params[:estimate_post])
+    redirect_to @estimate_post, notice: 'Оценка успешно обновлена.' 
+
+end
 
   # DELETE /estimate/posts/1
   # DELETE /estimate/posts/1.json

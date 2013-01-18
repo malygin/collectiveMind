@@ -13,7 +13,7 @@ class SessionsController < ApplicationController
   	else
   		sign_in user
       journal_enter 
-  		redirect_back_or '/plan/posts'
+  		redirect_back_or '/estimate/posts'
   	end
   end
 
