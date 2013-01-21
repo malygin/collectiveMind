@@ -43,6 +43,8 @@ module JournalHelper
 				'отклонил ' +link_to('проект', plan_post_path(j.body))
 			when 'plan_post_to_expert'	
 				'отправил эксперту ' +link_to('проект', plan_post_path(j.body))
+			when 'estimate_post_save'	
+				'добавил к проекту ' +link_to('оценку', estimate_post_path(j.body))
 
 			else
 				'что то другое'

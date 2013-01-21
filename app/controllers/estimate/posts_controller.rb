@@ -66,6 +66,13 @@ class Estimate::PostsController < ApplicationController
     plan_post = Plan::Post.find(params[:post_id])
     @estimate_post.post = plan_post
     @estimate_post.user = current_user
+    #puts "__________",boss?
+    if expert? or admin?
+      @estimate_post.status = 1
+    else
+      @estimate_post.status = 0
+    end
+    #puts "__________", @estimate_post.status
     @estimate_post.task_triplets=[]
 
     plan_post.task_triplets.each do |tr|
@@ -102,6 +109,8 @@ class Estimate::PostsController < ApplicationController
 
     respond_to do |format|
       if @estimate_post.save
+        current_user.journals.build(:type_event=>'estimate_post_save', :body=>@estimate_post.id).save!
+
         format.html { redirect_to @estimate_post, notice: 'Оценка добавлена' }
         format.json { render json: @estimate_post, status: :created, location: @estimate_post }
       else

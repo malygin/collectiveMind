@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130117093730) do
+ActiveRecord::Schema.define(:version => 20130121104835) do
 
   create_table "answers", :force => true do |t|
     t.string   "text"
@@ -186,10 +186,12 @@ ActiveRecord::Schema.define(:version => 20130117093730) do
     t.text     "nepr"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
+    t.integer  "status"
   end
 
   add_index "estimate_posts", ["created_at"], :name => "index_estimate_posts_on_created_at"
   add_index "estimate_posts", ["post_id"], :name => "index_estimate_posts_on_post_id"
+  add_index "estimate_posts", ["status"], :name => "index_estimate_posts_on_status"
   add_index "estimate_posts", ["user_id"], :name => "index_estimate_posts_on_user_id"
 
   create_table "estimate_task_triplets", :force => true do |t|
