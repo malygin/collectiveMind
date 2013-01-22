@@ -11,4 +11,15 @@ module Estimate::PostsHelper
 				'очень вероятно'
 		end
 	end
+
+	def css_class_estimate(e)
+		case e
+			when 1
+				'red_est'
+			when 2
+				'orange_est'
+			else
+				'green_est'
+		end
+	end
 end

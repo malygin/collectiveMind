@@ -23,30 +23,32 @@
       %b Предположим, что предлагаемые для этой задачи ресурсы будут созданы. Какова вероятность, что они обеспечат разрешение данной задачи
       %br
       В полной мере -
-      = estimate_trans(tr.op1)   
+      %span{:class=>css_class_estimate(tr.op1)}= estimate_trans(tr.op1)   
       %br
       В значительно мере -
-      = estimate_trans(tr.op2)   
+      %span{:class=>css_class_estimate(tr.op2)}= estimate_trans(tr.op2)   
       %br
       В небольшой мере - 
-      = estimate_trans(tr.op3)
+      %span{:class=>css_class_estimate(tr.op3)}= estimate_trans(tr.op3)
       %br
-      %b пояснение:
-      = tr.op
+      %br
+      %b ПОЯСНЕНИЕ:
+      %br= tr.op
       %br
       %br
       %b Функционирование ресурсов, которые будут обеспечивать разрешение данной задачи в будущем потребует  материальных и трудовых затрат. Какая вероятность, что потребуются
       %br
       большие затраты -
-      = estimate_trans(tr.ozf1)   
+      %span{:class=>css_class_estimate(tr.ozf1)}= estimate_trans(tr.ozf1)   
       %br
       средние  затраты -
-      = estimate_trans(tr.ozf2)   
+      %span{:class=>css_class_estimate(tr.ozf2)}= estimate_trans(tr.ozf2)   
       %br
       малые затраты - 
-      = estimate_trans(tr.ozf3)
+      %span{:class=>css_class_estimate(tr.ozf3)}= estimate_trans(tr.ozf3)
       %br
-      %b пояснение:
+      %br
+      %b ПОЯСНЕНИЕ:
       = tr.ozf
       %br
       %br
@@ -57,30 +59,32 @@
       %b Для создания ресурсов разрешения данной задачи в проекте предлагаются вышеперечисленные средства, методы и кадры. Какова вероятность , что ресурсы будут действительно созданы 
       %br
       в полном объеме -
-      = estimate_trans(tr.on1)   
+      %span{:class=>css_class_estimate(tr.on1)}= estimate_trans(tr.on1)   
       %br
       в значительном объеме -
-      = estimate_trans(tr.on2)   
+      %span{:class=>css_class_estimate(tr.on2)}= estimate_trans(tr.on2)   
       %br
       в небольшом объеме - 
-      = estimate_trans(tr.on3)
+      %span{:class=>css_class_estimate(tr.on3)}= estimate_trans(tr.on3)
       %br
-      %b пояснение:
+      %br
+      %b ПОЯСНЕНИЕ:
       = tr.on
       %br
       %br
       %b  Использование вышеозначенных средств, методов и кадров создания ресурсов потребует  материальных и трудовых затрат. Какова вероятность, что потребуются
       %br
       большие затраты -
-      = estimate_trans(tr.ozs1)   
+      %span{:class=>css_class_estimate(tr.ozs1)}= estimate_trans(tr.ozs1)   
       %br
       средние  затраты -
-      = estimate_trans(tr.ozs2)   
+      %span{:class=>css_class_estimate(tr.ozs2)}= estimate_trans(tr.ozs2)   
       %br
       малые затраты - 
-      = estimate_trans(tr.ozs3)
+      %span{:class=>css_class_estimate(tr.ozs3)}= estimate_trans(tr.ozs3)
       %br
-      %b пояснение:
+      %br
+      %b ПОЯСНЕНИЕ:
       = tr.ozs
       %br
       =image_tag('dots.png')
@@ -92,75 +96,80 @@
     %b  Выше описана та часть новых ресурсов будущего ДО СГУ, которую планируется создать и запустить в работу на первом шаге осуществления проекта. Какова вероятность (выберите ее для каждого из трех вариантов ниже), что уже сразу после создания их работа улучшит ДО
     %br
     Очень ощутимо -
-    = estimate_trans(@estimate_post.oppsh1)   
+    %span{:class=>css_class_estimate(@estimate_post.oppsh1)}= estimate_trans(@estimate_post.oppsh1)   
     %br
     Ощутимо -
-    = estimate_trans(@estimate_post.oppsh2)   
+    %span{:class=>css_class_estimate(@estimate_post.oppsh2)}= estimate_trans(@estimate_post.oppsh2)   
     %br
     Не очень ощутимо - 
-    = estimate_trans(@estimate_post.oppsh3)
+    %span{:class=>css_class_estimate(@estimate_post.oppsh3)}= estimate_trans(@estimate_post.oppsh3)
     %br
-    %b пояснение:
+    %br
+    %b ПОЯСНЕНИЕ:
     = @estimate_post.oppsh
 
     %br
     %b После того, как на первом шаге будет создана эта часть новых ресурсов, их функционирование в ДО потребует материальных и трудовых затрат. Какова вероятность (выберите ее для каждого из трех вариантов ниже), что потребуются
     %br
     большие затраты -
-    = estimate_trans(@estimate_post.ozpshf1)   
+    %span{:class=>css_class_estimate(@estimate_post.ozpshf1)}= estimate_trans(@estimate_post.ozpshf1)   
     %br
     средние  затраты -
-    = estimate_trans(@estimate_post.ozpshf2)   
+    %span{:class=>css_class_estimate(@estimate_post.ozpshf2)}= estimate_trans(@estimate_post.ozpshf2)   
     %br
     малые затраты - 
-    = estimate_trans(@estimate_post.ozpshf3)
+    %span{:class=>css_class_estimate(@estimate_post.ozpshf3)}= estimate_trans(@estimate_post.ozpshf3)
     %br
-    %b пояснение:
+    %br
+    %b ПОЯСНЕНИЕ:
     = @estimate_post.ozpshf
     %br
 
     %b  Для создания на первом шаге данной части новых ресурсов ДО в проекте предлагаются определенные средства, методы и кадры. Какова вероятность (выберите ее для каждого из трех вариантов ниже), что при помощи этих средств, методов и кадров планируемые ресурсы будут действительно созданы --
     %br
     в полном объеме -
-    = estimate_trans(@estimate_post.onpsh1)   
+    %span{:class=>css_class_estimate(@estimate_post.onpsh1)}= estimate_trans(@estimate_post.onpsh1)   
     %br
     в значительном объеме -
-    = estimate_trans(@estimate_post.onpsh2)   
+    %span{:class=>css_class_estimate(@estimate_post.onpsh2)}= estimate_trans(@estimate_post.onpsh2)   
     %br
     в небольшом объеме - 
-    = estimate_trans(@estimate_post.onpsh3)
+    %span{:class=>css_class_estimate(@estimate_post.onpsh3)}= estimate_trans(@estimate_post.onpsh3)
     %br
-    %b пояснение:
+    %br
+    %b ПОЯСНЕНИЕ:
     = @estimate_post.onpsh
     %br
     %b  Использование на первом шаге средств, методов и кадров для создания вышеозначенной части новых ресурсов потребует материальных и трудовых затрат. Какова вероятность (выберите ее для каждого из трех вариантов ниже), что потребуются --
     %br
     большие затраты -
-    = estimate_trans(@estimate_post.ozpshs1)   
+    %span{:class=>css_class_estimate(@estimate_post.ozpshs1)}= estimate_trans(@estimate_post.ozpshs1)   
     %br
     средние  затраты -
-    = estimate_trans(@estimate_post.ozpshs2)   
+    %span{:class=>css_class_estimate(@estimate_post.ozpshs2)}= estimate_trans(@estimate_post.ozpshs2)   
     %br
     малые затраты - 
-    = estimate_trans(@estimate_post.ozpshs3)
+    %span{:class=>css_class_estimate(@estimate_post.ozpshs3)}= estimate_trans(@estimate_post.ozpshs3)
     %br
-    %b пояснение:
+    %br
+    %b ПОЯСНЕНИЕ:
     = @estimate_post.ozpshs    
     %b  При осуществлении проекта возможны негативные явления. Какова веростояность , что они будут -
     %br
     большие  -
-    = estimate_trans(@estimate_post.nepr1)   
+    %span{:class=>css_class_estimate(@estimate_post.nepr1)}= estimate_trans(@estimate_post.nepr1)   
     %br
     средние   -
-    = estimate_trans(@estimate_post.nepr2)   
+    %span{:class=>css_class_estimate(@estimate_post.nepr2)}= estimate_trans(@estimate_post.nepr2)   
     %br
     малые  - 
-    = estimate_trans(@estimate_post.nepr3)
+    %span{:class=>css_class_estimate(@estimate_post.nepr3)}= estimate_trans(@estimate_post.nepr3)
     %br   
     никакие  - 
-    = estimate_trans(@estimate_post.nepr4)
+    %span{:class=>css_class_estimate(@estimate_post.nepr4)}= estimate_trans(@estimate_post.nepr4)
     %br
-    %b пояснение:
+    %br
+    %b ПОЯСНЕНИЕ:
     = @estimate_post.nepr
 
 
