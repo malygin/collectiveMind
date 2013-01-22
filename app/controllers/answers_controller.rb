@@ -77,6 +77,8 @@ class AnswersController < ApplicationController
     #puts "_________"
     #puts params[:negative]
     @answer = @question.answers.create(:user_id => current_user.id, :text =>params[:answer][:text], :raiting => 0)
+    current_user.journals.build(:type_event=>'answer_save', :body=>@question.id).save!
+
     redirect_to @question
   end
 

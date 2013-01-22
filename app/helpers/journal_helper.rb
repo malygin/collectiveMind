@@ -19,7 +19,9 @@ module JournalHelper
 			when 'concept_post_update'
 				'отредактировал '+  link_to('концепцию', concept_post_path(j.body))
 			when 'question_save'
-				'задал '+  link_to('вопрос', question_path(j.body))	
+				'задал '+  link_to('вопрос', question_path(j.body))		
+			when 'answer_save'
+				'ответил на  '+  link_to('вопрос', question_path(j.body))	
 			when 'concept_post_revision'
 				'отправил на доработку ' +link_to('концепцию', concept_post_path(j.body))
 			when 'concept_post_acceptance'
