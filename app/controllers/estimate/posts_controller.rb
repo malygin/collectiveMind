@@ -24,7 +24,7 @@ class Estimate::PostsController < ApplicationController
   def show
     prepare_data
     @estimate_post = Estimate::Post.find(params[:id])
-    @estimate_post.task_triplets.sort_by { |f| [-f.task_triplet.position] }
+    @estimate_post.task_triplets.sort_by { |f| f.task_triplet.position }
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @estimate_post }
