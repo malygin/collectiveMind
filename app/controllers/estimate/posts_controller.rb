@@ -157,6 +157,8 @@ class Estimate::PostsController < ApplicationController
 
     end
     @estimate_post.update_attributes(params[:estimate_post])
+    current_user.journals.build(:type_event=>'estimate_post_update', :body=>@estimate_post.id).save!
+
     redirect_to @estimate_post, notice: 'Оценка успешно обновлена.' 
 
 end
