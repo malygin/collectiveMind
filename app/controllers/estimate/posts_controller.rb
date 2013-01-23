@@ -54,7 +54,7 @@ class Estimate::PostsController < ApplicationController
     @plan_post = @estimate_post.post
     @triplet_estimates = {}
     @plan_post.task_triplets.each do |p|
-      @triplet_estimates[p] = @estimate_post.task_triplets.select{|x| x.task_triplet = p }.first
+      @triplet_estimates[p] = @estimate_post.task_triplets.select{|x| x.task_triplet == p }.first
     end
 
   end
@@ -124,6 +124,7 @@ class Estimate::PostsController < ApplicationController
   # PUT /estimate/posts/1.json
   def update
     @estimate_post = Estimate::Post.find(params[:id])
+    @estimate_post.task_triplets.destroy_all
     @estimate_post.task_triplets=[]
     @estimate_post.post.task_triplets.each do |tr|
       est_tr = Estimate::TaskTriplet.new
