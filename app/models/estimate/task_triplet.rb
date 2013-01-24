@@ -7,6 +7,6 @@ class Estimate::TaskTriplet < ActiveRecord::Base
 	on_i=(3*on1+2*on2+1*on3)/(on1+on2+on3).to_f
 	ozf_i=(3*ozf1+2*ozf2+1*ozf3)/(ozf1+ozf2+ozf3).to_f
 	ozs_i=(3*ozs1+2*ozs2+1*ozs3)/(ozs1+ozs2+ozs3).to_f
-	(op_i*on_i)/(ozf_i*ozs_i).to_f
+	((op_i*on_i)/(ozf_i*ozs_i).to_f*100).round/100
   end
 end
