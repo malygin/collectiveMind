@@ -14,7 +14,7 @@ class Estimate::Post < ActiveRecord::Base
   	onpsh_i=(3*onpsh1+2*onpsh2+1*onpsh3)/(onpsh1+onpsh2+onpsh3).to_f
   	ozpshf_i=(3*ozpshf1+2*ozpshf2+1*ozpshf3)/(ozpshf1+ozpshf2+ozpshf3).to_f
   	ozpshs_i=(3*ozpshs1+2*ozpshs2+1*ozpshs3)/(ozpshs1+ozpshs2+ozpshs3).to_f
-  	@second_c=(oppsh_i*onpsh_i)/(ozpshf_i*ozpshs_i).to_f
+  	@second_c=((oppsh_i*onpsh_i)/(ozpshf_i*ozpshs_i).to_f*100).round /100.0
   	sum_tr=0.0
   	task_triplets.each do |tr|
 	  	op_i=(3*tr.op1+2*tr.op2+1*tr.op3)/(tr.op1+tr.op2+tr.op3).to_f
