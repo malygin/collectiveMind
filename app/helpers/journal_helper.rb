@@ -49,6 +49,8 @@ module JournalHelper
 				'добавил к проекту ' +link_to('оценку', estimate_post_path(j.body))
 			when 'estimate_post_update'	
 				'отредактировал ' +link_to('оценку', estimate_post_path(j.body))
+			when 'estimate_comment_save'	
+				'добавил комментарий к ' +link_to('оценке', estimate_post_path(j.body))
 
 			else
 				'что то другое'
