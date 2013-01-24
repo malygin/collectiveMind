@@ -27,7 +27,7 @@ class Estimate::Post < ActiveRecord::Base
   	end
   	#puts "__________", sum_tr
   	@first_c = (sum_tr*100).round / 100.0
-  	@third_c = ((4*nepr1 + 3*nepr2 + 2*nepr3 + 1*nepr4)/(nepr1+nepr2+nepr3+nepr4).to_f*100).round/100
+  	@third_c = ((4*nepr1 + 3*nepr2 + 2*nepr3 + 1*nepr4)/(nepr1+nepr2+nepr3+nepr4).to_f*100).round/100.0
   	((@second_c+@first_c-@third_c)*100).round / 100.0
 
   	# oppsh_i=(1*oppsh1+2*oppsh2+3*oppsh3)/(oppsh1+oppsh2+oppsh3)
