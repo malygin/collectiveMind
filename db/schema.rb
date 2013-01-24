@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130121104835) do
+ActiveRecord::Schema.define(:version => 20130124074757) do
 
   create_table "answers", :force => true do |t|
     t.string   "text"
@@ -158,6 +158,25 @@ ActiveRecord::Schema.define(:version => 20130121104835) do
   end
 
   add_index "concept_task_supply_pairs", ["post_id"], :name => "index_concept_task_supply_pairs_on_post_id"
+
+  create_table "estimate_comment_voitings", :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "comment_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  add_index "estimate_comment_voitings", ["comment_id"], :name => "index_estimate_comment_voitings_on_comment_id"
+
+  create_table "estimate_comments", :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "post_id"
+    t.text     "content"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  add_index "estimate_comments", ["post_id"], :name => "index_estimate_comments_on_post_id"
 
   create_table "estimate_posts", :force => true do |t|
     t.integer  "user_id"

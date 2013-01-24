@@ -9,7 +9,21 @@
     %p
       %b Общая оценка проекта
       %br= simple_format(@estimate_post.content)
-
+   
+    Общая оценка проекта 
+    %span.red_est #{@estimate_post.score}
+    ( = #{@estimate_post.first_c} + #{@estimate_post.second_c} - #{@estimate_post.third_c})
+    %br 
+    1) ожидаемая эффективность всего проекта в целом 
+    %span.red_est #{@estimate_post.first_c}
+    %br 
+    2) ожидаемая эффективность его первого шага 
+    %span.red_est #{@estimate_post.second_c}
+    %br 
+    3) ожидаемые неприятности в связи с осуществлением проекта 
+    %span.red_est #{@estimate_post.third_c}
+    %br
+    %br
     %b Список решаемых задач
     %br
     %br
@@ -20,6 +34,9 @@
       %b Ресурсы для задачи
       = simple_format(tr.task_triplet.supply) 
       %br
+      ожидаемая эффективность это задачи
+      %span.red_est=tr.score
+      %br 
       %b Предположим, что предлагаемые для этой задачи ресурсы будут созданы. Какова вероятность, что они обеспечат разрешение данной задачи
       %br
       В полной мере -
@@ -180,3 +197,9 @@
   = link_to 'Редактировать', edit_estimate_post_path(@estimate_post)
 \|
 = link_to 'Назад', estimate_posts_path
+- if signed_in? 
+  = render :partial => 'shared/comment_form', :locals => { :comment => @comment, :url_link => add_comment_estimate_post_path(@estimate_post.id)}
+
+= render :partial => 'shared/comment',:collection => @estimate_post.comments, :locals => { :path_link => '/estimate/comments/'}
+%br
+%br

@@ -230,7 +230,20 @@ CollectiveMind::Application.routes.draw do
       end
     end
   namespace :estimate do 
-    resources :posts 
+     resources :posts do
+        member do
+            put :add_comment
+            put :plus
+            get :expert_rejection_save 
+            get :expert_rejection_save
+            get :expert_acceptance_save
+        end
+      end
+      resources :comments do
+          member do
+            put :plus
+          end  
+      end
     get 'posts/new/:post_id' => "posts#new"
 
   end

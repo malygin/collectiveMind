@@ -23,6 +23,8 @@ class Estimate::PostsController < ApplicationController
   # GET /estimate/posts/1.json
   def show
     prepare_data
+    @comment = Estimate::Comment.new
+
     @estimate_post = Estimate::Post.find(params[:id])
     @estimate_post.task_triplets.sort_by { |f| f.task_triplet.position }
     respond_to do |format|
@@ -173,5 +175,19 @@ end
       format.html { redirect_to estimate_posts_url }
       format.json { head :no_content }
     end
+  end
+
+    #todo union method for all comments and partials
+  def add_comment
+    post = Estimate::Post.find(params[:id])
+    unless  params[:estimate_comment][:content]==""
+      #logger.error current_user
+      post.comments.create(:content => params[:estimate_comment][:content], :user =>current_user)
+      current_user.journals.build(:type_event=>'estimate_comment_save', :body=>post.id).save!
+      flash[:success] = "Комментарий добавлен"
+    else
+      flash[:success] = "Введите текст комментария"
+    end
+    redirect_to post
   end
 end
