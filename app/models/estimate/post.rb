@@ -22,7 +22,7 @@ class Estimate::Post < ActiveRecord::Base
 	  	on_i=(3*tr.on1+2*tr.on2+1*tr.on3)/(tr.on1+tr.on2+tr.on3).to_f
 	  	ozf_i=(3*tr.ozf1+2*tr.ozf2+1*tr.ozf3)/(tr.ozf1+tr.ozf2+tr.ozf3).to_f
 	  	ozs_i=(3*tr.ozs1+2*tr.ozs2+1*tr.ozs3)/(tr.ozs1+tr.ozs2+tr.ozs3).to_f
-	  	sum_tr = sum_tr +  (op_i*on_i)/(ozf_i*ozs_i).to_f
+	  	sum_tr = sum_tr +  2*(op_i*on_i)/(ozf_i*ozs_i).to_f
 	  	#puts "__________", sum_tr, op_i, on_i, ozf_i, ozs_i
 
   	end
