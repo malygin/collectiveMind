@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130124074757) do
+ActiveRecord::Schema.define(:version => 20130125115958) do
 
   create_table "answers", :force => true do |t|
     t.string   "text"
@@ -177,6 +177,24 @@ ActiveRecord::Schema.define(:version => 20130124074757) do
   end
 
   add_index "estimate_comments", ["post_id"], :name => "index_estimate_comments_on_post_id"
+
+  create_table "estimate_final_voitings", :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "post_id"
+    t.integer  "score"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  add_index "estimate_final_voitings", ["user_id"], :name => "index_estimate_final_voitings_on_user_id"
+
+  create_table "estimate_forecasts", :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "best_student_post_id"
+    t.integer  "best_jury_post_id"
+    t.datetime "created_at",           :null => false
+    t.datetime "updated_at",           :null => false
+  end
 
   create_table "estimate_posts", :force => true do |t|
     t.integer  "user_id"
