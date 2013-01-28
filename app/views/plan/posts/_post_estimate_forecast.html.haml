@@ -1,0 +1,35 @@
+.wholePost
+	= render 'users/user_post', :user => post_estimate_forecast.user
+	.posts
+		= render 'users/user_name', :user => post_estimate_forecast.user, :created_at => post_estimate_forecast.created_at
+		
+		- if not current_page?(plan_post_path(post_estimate_forecast)) 
+			%p
+				= trim_string(post_estimate_forecast.goal)
+				= link_to "Подробнее", post_estimate_forecast, class: "more"
+		-else
+			%p
+				= post_estimate_forecast.goal
+		- if signed_in? and not current_user==post_estimate_forecast.user
+			= link_to 'Добавить оценку', '/estimate/posts/new/'+post_estimate_forecast.id.to_s
+- if boss?
+	= post_estimate_forecast.voiting_score
+- if current_user.nil?
+				
+- elsif can_vote_for_task?(post_estimate_forecast)
+	Отношение к проекту
+	.voteBar
+		=link_to "очень позитивное",  '/estimate/vote_for/'+post_estimate_forecast.id.to_s+'/3', :id => post_estimate_forecast.id, :remote => true, :method => :put, class: "voteCounter"
+		|
+		=link_to "позитивное",  '/estimate/vote_for/'+post_estimate_forecast.id.to_s+'/2', :id => post_estimate_forecast.id, :remote => true, :method => :put, class: "voteCounter"
+		|
+		=link_to "нейтральное",  '/estimate/vote_for/'+post_estimate_forecast.id.to_s+'/1', :id => post_estimate_forecast.id, :remote => true, :method => :put, class: "voteCounter"
+		|
+		=link_to "негативное",  '/estimate/vote_for/'+post_estimate_forecast.id.to_s+'/0', :id => post_estimate_forecast.id, :remote => true, :method => :put, class: "voteCounter"
+	%br
+-else
+	%br
+	%span.red Вы уже проголосовали за проект
+= render post_estimate_forecast.estimates
+
+		

@@ -135,6 +135,18 @@ class UsersController < ApplicationController
 		redirect_to :back
 	end
 
+	def forecast_plan
+		if params[:forecast_student]=='' or params[:forecast_jury]==''
+			flash[:error] = 'Вы не выбрали проекты для каждой категории!'
+		else
+			plan_student = Plan::Post.find(params[:forecast_student])
+			plan_jury = Plan::Post.find(params[:forecast_jury])
+			current_user.plan_forecasts.create(:best_jury_post => plan_jury, :best_student_post => plan_student)
+			flash[:success] = "Вы успешно сделали прогноз, теперь можно голосовать"
+		end		
+		redirect_to :back
+	end
+
 	def add_score
 		puts params
 		user = User.find(params[:id])

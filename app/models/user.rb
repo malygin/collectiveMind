@@ -40,6 +40,10 @@ class User < ActiveRecord::Base
 
   has_many :concept_forecasts, :class_name => 'Concept::Forecast'
   has_many :forecast_tasks, :class_name => 'Concept::ForecastTask', :through => :concept_forecasts
+  
+  has_many :plan_forecasts, :class_name => 'Estimate::Forecast'
+  #has_many :forecast_tasks, :class_name => 'Plan::ForecastTask', :through => :concept_forecasts
+  
   has_one :frustration_essay
   has_one :concept_essay, :class_name => 'Concept::Essay'
 

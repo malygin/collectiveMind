@@ -60,6 +60,7 @@ CollectiveMind::Application.routes.draw do
     member do
       put :forecast
       put :forecast_concept
+      put :forecast_plan
       match 'add_score/:score' => 'users#add_score'
     end
   end
@@ -244,7 +245,11 @@ CollectiveMind::Application.routes.draw do
             put :plus
           end  
       end
+    match 'vote_for/:id/:score' => 'posts#vote_for',  :constraints => { :score => /[0-3]/ }
+
     get 'posts/new/:post_id' => "posts#new"
+    get 'vote' => "posts#vote"
+
 
   end
 

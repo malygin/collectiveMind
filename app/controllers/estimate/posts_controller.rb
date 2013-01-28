@@ -19,6 +19,17 @@ class Estimate::PostsController < ApplicationController
     end
   end
 
+  def vote
+    prepare_data
+    #@estimate_posts = Estimate::Post.all
+    @plan_posts = Plan::Post.where(:status => '3')
+
+    respond_to do |format|
+      format.html # index.html.erb
+      format.json { render json: @estimate_posts }
+    end
+  end
+
   # GET /estimate/posts/1
   # GET /estimate/posts/1.json
   def show
@@ -217,4 +228,12 @@ end
     end
     redirect_to post
   end
+
+  def vote_for
+    #puts params
+    @plan = Plan::Post.find(params[:id])
+    @plan.voitings.create(:user => current_user, :score => params[:score].to_f-1)
+    render json: @plan.voiting_score
+  end
+  
 end
