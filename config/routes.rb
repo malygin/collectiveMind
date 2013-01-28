@@ -235,7 +235,7 @@ CollectiveMind::Application.routes.draw do
             put :add_comment
             put :plus
             get :expert_rejection_save 
-            get :expert_rejection_save
+            get :expert_rejection_with_penalty_save
             get :expert_acceptance_save
         end
       end

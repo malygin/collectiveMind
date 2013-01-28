@@ -122,6 +122,33 @@ class Estimate::PostsController < ApplicationController
     end
   end
 
+ def save_note(params, status, message, type_event)
+    est = Estimate::Post.find(params[:id])
+    est.update_column(:status, status)
+    current_user.journals.build(:type_event=>type_event, :body=>est.id).save!
+    flash[:notice]=message
+    est
+  end
+
+
+
+  def expert_rejection_save
+    save_note(params, 2, 'Оценка успешно отклонена','estimate_post_rejection' )
+    redirect_to  action: "index" 
+  end
+
+  def expert_rejection_with_penalty_save
+    est = save_note(params, 2, 'Оценка успешно отклонена','estimate_post_rejection' )
+    est.user.update_column(:score, est.user.score - 200)
+    redirect_to  action: "index" 
+  end
+
+  def expert_acceptance_save
+    est = save_note(params, 1, 'Оценка успешно принята','estimate_post_acceptance' )
+    est.user.update_column(:score, est.user.score + 400)
+    redirect_to  action: "index" 
+  end
+
   # PUT /estimate/posts/1
   # PUT /estimate/posts/1.json
   def update

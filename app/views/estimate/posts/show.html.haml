@@ -1,4 +1,13 @@
 = link_to 'Назад', estimate_posts_path
+%br
+- if @estimate_post.status == 0 and boss?
+  = link_to 'Принять', expert_acceptance_save_estimate_post_path(@estimate_post), :confirm => 'Точно?'
+  |
+  = link_to 'Отклонить без штрафа', expert_rejection_save_estimate_post_path(@estimate_post), :confirm => 'Точно?'
+  |
+  = link_to 'Отклонить со штрафом', expert_rejection_with_penalty_save_estimate_post_path(@estimate_post), :confirm => 'Точно?'
+
+
 
 - if current_user == @estimate_post.user
   = link_to 'Редактировать', edit_estimate_post_path(@estimate_post)

@@ -51,6 +51,10 @@ module JournalHelper
 				'отредактировал ' +link_to('оценку', estimate_post_path(j.body))
 			when 'estimate_comment_save'	
 				'добавил комментарий к ' +link_to('оценке', estimate_post_path(j.body))
+			when 'estimate_post_rejection'	
+				'отклонил ' +link_to('оценку', estimate_post_path(j.body))
+			when 'estimate_post_acceptance'	
+				'принял ' +link_to('оценку', estimate_post_path(j.body))
 
 			else
 				'что то другое'
