@@ -13,7 +13,8 @@
 		- if signed_in? and not current_user==post_estimate_forecast.user
 			= link_to 'Добавить оценку', '/estimate/posts/new/'+post_estimate_forecast.id.to_s
 - if boss?
-	= post_estimate_forecast.voiting_score
+	%b= post_estimate_forecast.voiting_score
+	%br
 - if current_user.nil?
 				
 - elsif can_vote_for_task?(post_estimate_forecast)

@@ -18,6 +18,14 @@ class Estimate::PostsController < ApplicationController
       format.json { render json: @estimate_posts }
     end
   end
+  
+  def jury_index
+    prepare_data
+    #@estimate_posts = Estimate::Post.all
+    @plan_posts = Plan::Post.where(:status => '3')
+
+
+  end
 
   def vote
     prepare_data
@@ -82,42 +90,45 @@ class Estimate::PostsController < ApplicationController
     #puts "__________",boss?
     if expert? or admin?
       @estimate_post.status = 1
+    elsif jury?
+      @estimate_post.status = 3
     else
       @estimate_post.status = 0
     end
     #puts "__________", @estimate_post.status
     @estimate_post.task_triplets=[]
+    if not jury?
+        plan_post.task_triplets.each do |tr|
+          est_tr = Estimate::TaskTriplet.new
+          est_tr.task_triplet = tr
+          op = params[:op][tr.id.to_s]
+          est_tr.op1 = op['1']
+          est_tr.op2 = op['2']
+          est_tr.op3 = op['3']
+          est_tr.op = params[:op_text][tr.id.to_s]      
 
-    plan_post.task_triplets.each do |tr|
-      est_tr = Estimate::TaskTriplet.new
-      est_tr.task_triplet = tr
-      op = params[:op][tr.id.to_s]
-      est_tr.op1 = op['1']
-      est_tr.op2 = op['2']
-      est_tr.op3 = op['3']
-      est_tr.op = params[:op_text][tr.id.to_s]      
+          ozf = params[:ozf][tr.id.to_s]
+          est_tr.ozf1 = ozf['1']
+          est_tr.ozf2 = ozf['2']
+          est_tr.ozf3 = ozf['3']
+          est_tr.ozf = params[:ozf_text][tr.id.to_s]
 
-      ozf = params[:ozf][tr.id.to_s]
-      est_tr.ozf1 = ozf['1']
-      est_tr.ozf2 = ozf['2']
-      est_tr.ozf3 = ozf['3']
-      est_tr.ozf = params[:ozf_text][tr.id.to_s]
+          ozs = params[:ozs][tr.id.to_s]
+          est_tr.ozs1 = ozs['1']
+          est_tr.ozs2 = ozs['2']
+          est_tr.ozs3 = ozs['3']
+          est_tr.ozs = params[:ozs_text][tr.id.to_s]
 
-      ozs = params[:ozs][tr.id.to_s]
-      est_tr.ozs1 = ozs['1']
-      est_tr.ozs2 = ozs['2']
-      est_tr.ozs3 = ozs['3']
-      est_tr.ozs = params[:ozs_text][tr.id.to_s]
+          on = params[:on][tr.id.to_s]
+          est_tr.on1 = on['1']
+          est_tr.on2 = on['2']
+          est_tr.on3 = on['3']
+          est_tr.on = params[:on_text][tr.id.to_s]
 
-      on = params[:on][tr.id.to_s]
-      est_tr.on1 = on['1']
-      est_tr.on2 = on['2']
-      est_tr.on3 = on['3']
-      est_tr.on = params[:on_text][tr.id.to_s]
+          @estimate_post.task_triplets << est_tr
 
-      @estimate_post.task_triplets << est_tr
-
-    end
+          end
+      end
 
 
     respond_to do |format|

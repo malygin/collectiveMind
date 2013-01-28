@@ -249,6 +249,7 @@ CollectiveMind::Application.routes.draw do
 
     get 'posts/new/:post_id' => "posts#new"
     get 'vote' => "posts#vote"
+    get 'jury' => "posts#jury_index"
 
 
   end

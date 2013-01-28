@@ -1,0 +1,14 @@
+- if post_jury.status==3
+	.wholePost.margin30
+		= render 'users/user_post', :user => post_jury.user
+		.posts
+			= render 'users/user_name', :user => post_jury.user, :created_at => post_jury.created_at			
+			- if not current_page?(estimate_post_path(post_jury)) 
+				%p
+					= trim_string(post_jury.content)
+					= link_to "Подробнее", post_jury, class: "more"
+			-else
+				%p
+					= post_jury.goal
+
+		

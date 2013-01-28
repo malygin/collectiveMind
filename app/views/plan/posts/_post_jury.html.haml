@@ -1,0 +1,17 @@
+.wholePost
+	= render 'users/user_post', :user => post_jury.user
+	.posts
+		= render 'users/user_name', :user => post_jury.user, :created_at => post_jury.created_at
+		
+		- if not current_page?(plan_post_path(post_jury)) 
+			%p
+				= trim_string(post_jury.goal)
+				= link_to "Подробнее", post_jury, class: "more"
+		-else
+			%p
+				= post_jury.goal
+		- if signed_in? and not current_user==post_jury.user
+			= link_to 'Добавить отзыв жюри', '/estimate/posts/new/'+post_jury.id.to_s
+= render :partial => '/estimate/posts/post_jury', :collection => post_jury.estimates
+
+		

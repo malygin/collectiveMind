@@ -55,12 +55,15 @@ module SessionsHelper
 
 	def admin?
 		current_user.admin unless current_user.nil?
+	end	
+
+	def jury?
+		current_user.jury unless current_user.nil?
 	end
 
 	def boss?
-		current_user.expert or current_user.admin unless current_user.nil?
-			
-		end
+		current_user.expert or current_user.admin or current_user.jury unless current_user.nil?			
+	end
 
 	def user?
 		not (current_user.admin? or current_user.expert?)

@@ -86,7 +86,9 @@ class User < ActiveRecord::Base
     if self.admin
       "модератор"
     elsif self.expert
-      "эксперт"
+      "эксперт"    
+    elsif self.jury
+      "жюри"
     else 
       "студент"
     end

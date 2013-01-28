@@ -1,7 +1,10 @@
 
 %ul.leftlink
 	%li= link_to "Проекты с оценками", '/estimate/posts', class: cp_frustration('/estimate/posts') 
-	%li= link_to "Голосование", "/estimate/vote" , class: cp_frustration('/estimate/vote') 
+	%li= link_to "Голосование", "/estimate/vote" , class: cp_frustration('/estimate/vote')
+	- if boss?
+		%li= link_to "Выбор жюри", "/estimate/jury" , class: cp_frustration('/estimate/jury')
+
 
 
 

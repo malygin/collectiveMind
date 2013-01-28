@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130125115958) do
+ActiveRecord::Schema.define(:version => 20130128181934) do
 
   create_table "answers", :force => true do |t|
     t.string   "text"
@@ -195,6 +195,8 @@ ActiveRecord::Schema.define(:version => 20130125115958) do
     t.datetime "created_at",           :null => false
     t.datetime "updated_at",           :null => false
   end
+
+  add_index "estimate_forecasts", ["user_id"], :name => "index_estimate_forecasts_on_user_id"
 
   create_table "estimate_posts", :force => true do |t|
     t.integer  "user_id"
@@ -606,6 +608,7 @@ ActiveRecord::Schema.define(:version => 20130125115958) do
     t.integer  "score",              :default => 0
     t.boolean  "expert",             :default => false
     t.string   "user_type"
+    t.boolean  "jury",               :default => false
   end
 
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true
