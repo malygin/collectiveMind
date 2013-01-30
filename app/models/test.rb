@@ -7,7 +7,7 @@ class Test < ActiveRecord::Base
   def ordering_questions
   	self.test_questions.find(:all, :order => "order_question ASC")
   end
-  def avialable?
+  def avialable?(current_user)
   	if test_attempts.empty?
   		return true
   	end
