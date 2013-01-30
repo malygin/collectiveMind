@@ -7,7 +7,7 @@
       %b= test.name
       %br=test.description
 
-    -unless current_user.test_attempts.empty?
+    -unless  test.avialable?
       %div 
       %b Вы уже прошли этот тест
     -else
