@@ -46,15 +46,15 @@ class TestsController < ApplicationController
   # GET /tests/1
   # GET /tests/1.json
   def show
-    if current_user.test_attempts.empty?
+    #if current_user.test_attempts.empty?
       @test = Test.find(params[:id])
       respond_to do |format|
         format.html # show.html.erb
         format.json { render json: @test }
       end
-    else
-      redirect_to '/tests'
-    end
+    #else
+    #  redirect_to '/tests'
+    #end
   end
 
   # GET /tests/new
