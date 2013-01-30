@@ -12,7 +12,7 @@ class Test < ActiveRecord::Base
   		return true
   	end
   	test_attempts.each do |a|
-  		if a.user == curent_user
+  		if a.user == current_user
   			return false
   		end
   	end
