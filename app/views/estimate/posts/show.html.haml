@@ -10,7 +10,7 @@
 
 
 - if current_user == @estimate_post.user
-  = link_to 'Редактировать', edit_estimate_post_path(@estimate_post)
+  / = link_to 'Редактировать', edit_estimate_post_path(@estimate_post)
 .wholePost
   = render 'users/user_post', :user => @estimate_post.user
   .posts
@@ -203,7 +203,7 @@
 
 
 - if current_user == @estimate_post.user
-  = link_to 'Редактировать', edit_estimate_post_path(@estimate_post)
+  / = link_to 'Редактировать', edit_estimate_post_path(@estimate_post)
 \|
 = link_to 'Назад', estimate_posts_path
 - if signed_in? 

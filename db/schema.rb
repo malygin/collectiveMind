@@ -196,6 +196,8 @@ ActiveRecord::Schema.define(:version => 20130128181934) do
     t.datetime "updated_at",           :null => false
   end
 
+  add_index "estimate_forecasts", ["user_id"], :name => "index_estimate_forecasts_on_user_id"
+
   create_table "estimate_posts", :force => true do |t|
     t.integer  "user_id"
     t.integer  "post_id"
