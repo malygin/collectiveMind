@@ -39,6 +39,7 @@ CollectiveMind::Application.routes.draw do
   match "/help4", :to => "pages#help4"
   match "/help5", :to => "pages#help5"
 
+  match "/estimate/result", :to => "pages#result"
   match "/home", :to => "pages#home"
   match "/donot", :to => "pages#donot"  
   match "/articles", :to => "pages#articles"
@@ -248,15 +249,16 @@ CollectiveMind::Application.routes.draw do
     match 'vote_for/:id/:score' => 'posts#vote_for',  :constraints => { :score => /[0-3]/ }
 
     get 'posts/new/:post_id' => "posts#new"
-    get 'vote' => "posts#vote"
+    # get 'vote' => "posts#vote"
     get 'jury' => "posts#jury_index"
 
 
   end
 
+
   # You can have the root of your site routed with "root"
   # just remember to delete public/index.html.
-  root :to => 'estimate/posts#vote'
+  root :to => 'pages#result'
 
   # See how all your routes lay out with "rake routes"
 

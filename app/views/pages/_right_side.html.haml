@@ -1,0 +1,24 @@
+
+- unless @news.nil?
+	%h1 Новости
+	%p.righttext
+		= @news.anons
+		= link_to 'подробнее', @news
+
+%h1 Тех. поддержка
+%p.righttext
+	Что-то непонятно? 
+	= link_to 'Задайте вопрос', questions_path
+
+
+-unless @journals.nil?
+	.redtitle Активность
+	- @journals.each do |journal|
+		%p.righttext
+			=Russian::strftime(journal.created_at,"%d %B %k:%M:%S ")
+			%b= journal.user.name_title
+			= journal_parser(journal).html_safe
+		=image_tag('dots.png')
+
+
+

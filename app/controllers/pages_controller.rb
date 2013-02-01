@@ -2,28 +2,47 @@
 class PagesController < ApplicationController
     before_filter :expert?, :only => :to_expert_frustrations
     before_filter :get_news
+
+  def prepare_data
+
+    @journals = Journal.events_for_user_feed
+    @news = ExpertNews::Post.first    
+  end
+
+  def result
+    prepare_data
+  end 
+
   def contacts
+    prepare_data
   end
 
   def about
+    prepare_data
   end 
 
   def donot
+    prepare_data
   end
 
   def help
+    prepare_data
   end  
 
   def help1
+    prepare_data
   end  
 
   def help2
+    prepare_data
   end 
   
   def help3
+    prepare_data
   end 
 
   def articles
+    prepare_data
   end
 
   def get_news
