@@ -14,7 +14,7 @@
 				= link_to 'подробнее', frustration, class: 'more'
 			- unless frustration.what_expert.nil?
 				%br
-				%small текст до отправки эксперту
+				%b текст до отправки эксперту
 				%span{:class => "timestamp"}=frustration.content_before_expert.html_safe
 
 			- unless frustration.old_content.nil?

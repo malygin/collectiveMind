@@ -24,6 +24,8 @@ class Plan::PostsController < ApplicationController
     end
   end
 
+
+
   # GET /Plan/posts/1
   # GET /Plan/posts/1.json
   def show

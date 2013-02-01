@@ -5,7 +5,7 @@
 / 	%h1{:class => "frustration"} Добавить неудовлетворенность
 / 	= render "shared/frustration_form"
 - if current_user.nil?
-	Авторизуйтесь, пожалуйста, чтобы начать голосование!
+
 - elsif not @voted
 	/ = link_to image_tag('add_discontent.png'), new_frustration_path
 - elsif @voted and !current_user.nil? and  current_user.frustration_forecasts.empty?
