@@ -55,28 +55,28 @@ class Estimate::PostsController < ApplicationController
   # GET /estimate/posts/new
   # GET /estimate/posts/new.json
   def new
-    prepare_data
-    @estimate_post = Estimate::Post.new
-    @plan_post = Plan::Post.find(params[:post_id])
-    @triplet_estimates = {}
-    @plan_post.task_triplets.each do |p|
-      @triplet_estimates[p] = Estimate::TaskTriplet.new
-    end
-    respond_to do |format|
-      format.html # new.html.erb
-      format.json { render json: @estimate_post }
-    end
+    # prepare_data
+    # @estimate_post = Estimate::Post.new
+    # @plan_post = Plan::Post.find(params[:post_id])
+    # @triplet_estimates = {}
+    # @plan_post.task_triplets.each do |p|
+    #   @triplet_estimates[p] = Estimate::TaskTriplet.new
+    # end
+    # respond_to do |format|
+    #   format.html # new.html.erb
+    #   format.json { render json: @estimate_post }
+    # end
   end
 
   # GET /estimate/posts/1/edit
   def edit
-    prepare_data
-    @estimate_post = Estimate::Post.find(params[:id])
-    @plan_post = @estimate_post.post
-    @triplet_estimates = {}
-    @plan_post.task_triplets.each do |p|
-      @triplet_estimates[p] = @estimate_post.task_triplets.select{|x| x.task_triplet == p }.first
-    end
+    # prepare_data
+    # @estimate_post = Estimate::Post.find(params[:id])
+    # @plan_post = @estimate_post.post
+    # @triplet_estimates = {}
+    # @plan_post.task_triplets.each do |p|
+    #   @triplet_estimates[p] = @estimate_post.task_triplets.select{|x| x.task_triplet == p }.first
+    # end
 
   end
 
