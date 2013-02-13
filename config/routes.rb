@@ -1,9 +1,7 @@
 CollectiveMind::Application.routes.draw do
 
   namespace :plan do resources :posts end
-
   namespace :concept do resources :posts end
-
   namespace :expert_news do resources :posts end
 
   get "journal/enter"
@@ -66,31 +64,8 @@ CollectiveMind::Application.routes.draw do
   end
 
   
-  match 'vote_for/:id/:score' => 'frustrations#vote_for',  :constraints => { :score => /[0-3]/ }
   resources :sessions, :only => [:new, :create, :destroy]
-  resources :frustrations  do      
-     
-      resources :frustration_comments do
-        member do
-          put :to_trash_by_admin
-        end
-      end
 
-      member do
-       put :archive
-       put :to_expert
-       put :expert_accept
-       put :expert_accept_with_replacement
-       put :expert_decline
-       get :edit_to_struct
-       get :edit_to_expert
-       put :update_to_struct
-       put :update_to_expert
-       put :to_archive_by_admin
-
-
-      end
-  end
   
   #match "frustrations/archive/:id/", :to =>"frustrations#archive"
   match "/signup", :to =>"users#new"
@@ -215,7 +190,8 @@ CollectiveMind::Application.routes.draw do
             put :plus
           end  
       end
-    end       
+    end 
+          
     namespace :expert_news do
      
       resources :posts do
@@ -230,6 +206,7 @@ CollectiveMind::Application.routes.draw do
           end  
       end
     end
+
   namespace :estimate do 
      resources :posts do
         member do
