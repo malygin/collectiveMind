@@ -1,5 +1,9 @@
 CollectiveMind::Application.routes.draw do
 
+  namespace :discontent do
+   resources :posts 
+ end
+
   namespace :plan do resources :posts end
   namespace :concept do resources :posts end
   namespace :expert_news do resources :posts end

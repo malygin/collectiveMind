@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130128181934) do
+ActiveRecord::Schema.define(:version => 20130214091653) do
 
   create_table "answers", :force => true do |t|
     t.string   "text"
@@ -158,6 +158,24 @@ ActiveRecord::Schema.define(:version => 20130128181934) do
   end
 
   add_index "concept_task_supply_pairs", ["post_id"], :name => "index_concept_task_supply_pairs_on_post_id"
+
+  create_table "discontent_comments", :force => true do |t|
+    t.text     "content"
+    t.integer  "user_id"
+    t.integer  "post_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "discontent_posts", :force => true do |t|
+    t.text     "content"
+    t.text     "when"
+    t.text     "where"
+    t.integer  "user_id"
+    t.integer  "status"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
 
   create_table "estimate_comment_voitings", :force => true do |t|
     t.integer  "user_id"
