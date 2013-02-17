@@ -1,0 +1,30 @@
+.wholePost
+	= render 'users/user_post', :user => post.user
+	.posts
+		= render 'users/user_name', :user => post.user, :created_at => post.created_at
+		
+		- if not current_page?(url_for(post)) 
+			%p
+				= trim_string(post.content)
+				= link_to "Подробнее", post, class: "more"
+		-else
+			%p
+				= post.content
+		- if post.user == current_user and post.status ==0
+			%br
+			= link_to 'Редактировать', edit_polymorphic_url(post)
+			= link_to 'Отправить в архив', {:action => :destroy, :id => post.id}, :method => :delete, :confirm => 'Точно?'
+
+
+
+		/ .social 
+		/ 	- if signed_in? and not post.users.include?(current_user)
+		/ 		=link_to "#{post.users.count}",  plus_discontent_post_path(post), :id => post.id,:remote => true, :method => :put, class: "counter"
+		/ 	-else
+		/ 		=post.users.count
+		/ 	=image_tag "like.png"
+		/ 	=link_to post.number_views, post, class: "counter"
+		/ 	=image_tag "views.png"
+		/ 	=link_to post.comments.count, post, class: "counter"
+		/ 	=image_tag "comment.png"
+.dotline=image_tag('dotline.png')

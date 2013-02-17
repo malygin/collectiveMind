@@ -16,6 +16,7 @@ gem 'settingslogic'
 gem 'execjs'
 gem 'dalli'
 gem 'tinymce-rails'
+#gem 'wiselinks'
 
 gem 'rest-client'
 #gem 'magic_encoding'
