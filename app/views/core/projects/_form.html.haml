@@ -1,0 +1,22 @@
+= form_for @core_project do |f|
+  -if @core_project.errors.any?
+    #error_explanation
+      %h2= "#{pluralize(@core_project.errors.count, "error")} prohibited this core_project from being saved:"
+      %ul
+        - @core_project.errors.full_messages.each do |msg|
+          %li= msg
+
+  .field
+    = f.label :name
+    = f.text_field :name
+  .field
+    = f.label :desc
+    = f.text_area :desc
+  .field
+    = f.label :short_desc
+    = f.text_area :short_desc
+  .field
+    = f.label :status
+    = f.number_field :status
+  .actions
+    = f.submit 'Save'

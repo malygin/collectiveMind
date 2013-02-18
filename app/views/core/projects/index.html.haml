@@ -1,0 +1,25 @@
+%h1 Listing core_projects
+
+%table
+  %tr
+    %th Name
+    %th Desc
+    %th Short desc
+    %th Status
+    %th
+    %th
+    %th
+
+  - @core_projects.each do |core_project|
+    %tr
+      %td= core_project.name
+      %td= core_project.desc
+      %td= core_project.short_desc
+      %td= core_project.status
+      %td= link_to 'Show', core_project
+      %td= link_to 'Edit', edit_core_project_path(core_project)
+      %td= link_to 'Destroy', core_project, :confirm => 'Are you sure?', :method => :delete
+
+%br
+
+= link_to 'New Project', new_core_project_path

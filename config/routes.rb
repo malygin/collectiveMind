@@ -1,5 +1,7 @@
 CollectiveMind::Application.routes.draw do
 
+  namespace :core do resources :projects end
+
   namespace :discontent do
    resources :posts do
         member do
