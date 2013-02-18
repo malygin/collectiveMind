@@ -53,7 +53,6 @@ class Concept::PostsController < ApplicationController
       flash[:success] = "Введите текст комментария"
     end
     redirect_to post
-
   end
 
   # GET /concept/posts/new

@@ -1,3 +1,3 @@
 class Discontent::Comment < ActiveRecord::Base
-  include CommentBase
+  include BaseComment
 end

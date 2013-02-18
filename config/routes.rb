@@ -1,7 +1,13 @@
 CollectiveMind::Application.routes.draw do
 
   namespace :discontent do
-   resources :posts 
+   resources :posts do
+        member do
+            put :add_comment
+            put :plus
+            put :plus_comment
+        end
+      end
  end
 
   namespace :plan do resources :posts end

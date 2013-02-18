@@ -1,4 +1,4 @@
 class Discontent::Post < ActiveRecord::Base
-  include PostBase
+  include BasePost
   attr_accessible :when, :where
 end

@@ -1,0 +1,10 @@
+.social 
+	- if signed_in? and not post.users.include?(current_user)
+		=link_to "#{post.users.count}",  {:action => :plus, :id => post.id}, :id => post.id,:remote => true, :method => :put, class: "counter"
+	-else
+		=post.users.count
+	=image_tag "like.png"
+	=link_to post.number_views, post, class: "counter"
+	=image_tag "views.png"
+	=link_to post.comments.count, post, class: "counter"
+	=image_tag "comment.png"

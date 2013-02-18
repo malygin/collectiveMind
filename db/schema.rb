@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130214091653) do
+ActiveRecord::Schema.define(:version => 20130218081940) do
 
   create_table "answers", :force => true do |t|
     t.string   "text"
@@ -159,6 +159,15 @@ ActiveRecord::Schema.define(:version => 20130214091653) do
 
   add_index "concept_task_supply_pairs", ["post_id"], :name => "index_concept_task_supply_pairs_on_post_id"
 
+  create_table "discontent_comment_voitings", :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "comment_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  add_index "discontent_comment_voitings", ["comment_id"], :name => "index_discontent_comment_voitings_on_comment_id"
+
   create_table "discontent_comments", :force => true do |t|
     t.text     "content"
     t.integer  "user_id"
@@ -167,14 +176,26 @@ ActiveRecord::Schema.define(:version => 20130214091653) do
     t.datetime "updated_at", :null => false
   end
 
+  create_table "discontent_post_voitings", :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "post_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  add_index "discontent_post_voitings", ["post_id", "user_id"], :name => "index_discontent_post_voitings_on_post_id_and_user_id"
+  add_index "discontent_post_voitings", ["post_id"], :name => "index_discontent_post_voitings_on_post_id"
+  add_index "discontent_post_voitings", ["user_id"], :name => "index_discontent_post_voitings_on_user_id"
+
   create_table "discontent_posts", :force => true do |t|
     t.text     "content"
     t.text     "when"
     t.text     "where"
     t.integer  "user_id"
     t.integer  "status"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at",                  :null => false
+    t.datetime "updated_at",                  :null => false
+    t.integer  "number_views", :default => 0
   end
 
   create_table "estimate_comment_voitings", :force => true do |t|
@@ -213,6 +234,8 @@ ActiveRecord::Schema.define(:version => 20130214091653) do
     t.datetime "created_at",           :null => false
     t.datetime "updated_at",           :null => false
   end
+
+  add_index "estimate_forecasts", ["user_id"], :name => "index_estimate_forecasts_on_user_id"
 
   create_table "estimate_posts", :force => true do |t|
     t.integer  "user_id"

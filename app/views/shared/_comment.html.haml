@@ -10,10 +10,10 @@
     - if comment.users.include?(comment.post.user) and comment.user!= comment.post.user
       %b полезный комментарий
     -if signed_in? and not comment.users.include?(current_user)
-      .like
-        =link_to "#{comment.users.count}",  path_link+comment.id.to_s+'/plus', :id => comment.id,:remote => true, :method => :put, class: "counter"
+      .social
+        =link_to "#{comment.users.count}",   {:action => :plus_comment, :id => comment.id}, :id => comment.id,:remote => true, :method => :put, class: "counter"
         =image_tag "like.png"
     -else
-      .like
+      .social
         = comment.users.count
         = image_tag "like.png"

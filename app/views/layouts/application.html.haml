@@ -22,11 +22,6 @@
       #middle
         #container
           #content
-            -if not current_user.nil? and not expert?
-              .error 
-                Пройдите, пожалуйста, заключительный социологический опрос
-                =link_to " по ссылке", '/tests/2'
-              %br
             - flash.each do |key, value|
               -if key == :success
                 .success

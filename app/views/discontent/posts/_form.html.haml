@@ -1,22 +1,20 @@
-= form_for @discontent_post do |f|
-  -if @discontent_post.errors.any?
+= form_for @post , :html => { :class => 'new_or_edit' }do |f|
+  -if @post.errors.any?
     #error_explanation
       %h2= "#{pluralize(@discontent_post.errors.count, "error")} prohibited this discontent_post from being saved:"
       %ul
-        - @discontent_post.errors.full_messages.each do |msg|
+        - @ost.errors.full_messages.each do |msg|
           %li= msg
 
   .field
-    = f.label :content
+    = f.label 'что'
     = f.text_area :content
   .field
-    = f.label :when
+    = f.label 'когда'
     = f.text_area :when
   .field
-    = f.label :where
+    = f.label 'где'
     = f.text_area :where
-  .field
-    = f.label :status
-    = f.number_field :status
+
   .actions
-    = f.submit 'Save'
+    = f.submit ''
