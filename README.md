@@ -1,4 +1,4 @@
 collectiveMind
 ==============
 
-project for collective disicion makong
+project for collective disicion making
