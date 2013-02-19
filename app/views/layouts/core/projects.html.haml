@@ -1,16 +1,13 @@
 %html
   %head
-    = render 'meta'
-
+    =render 'meta'
   %body
     #wrapper
       #header
-        = render 'header'
-        = render 'stages'
-        = render 'top_menu'
+        =render 'header'
       #middle
         #container
-          #content
+          #content_wider
             - flash.each do |key, value|
               -if key == :success
                 .success
@@ -19,10 +16,7 @@
                 .error
                   =value
             = yield 
-        #sideLeft.sidebar
-          = render 'left_side'
-        #sideRight.sidebar
-          = render 'right_side' 
+ 
     #footer
       = render 'footer' 
 

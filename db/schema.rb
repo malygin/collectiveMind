@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130218143802) do
+ActiveRecord::Schema.define(:version => 20130219092743) do
 
   create_table "answers", :force => true do |t|
     t.string   "text"
@@ -160,12 +160,14 @@ ActiveRecord::Schema.define(:version => 20130218143802) do
   add_index "concept_task_supply_pairs", ["post_id"], :name => "index_concept_task_supply_pairs_on_post_id"
 
   create_table "core_projects", :force => true do |t|
-    t.string   "name",       :limit => 500
+    t.string   "name",        :limit => 500
     t.text     "desc"
     t.text     "short_desc"
     t.integer  "status"
-    t.datetime "created_at",                :null => false
-    t.datetime "updated_at",                :null => false
+    t.datetime "created_at",                 :null => false
+    t.datetime "updated_at",                 :null => false
+    t.string   "url_logo"
+    t.integer  "type_access"
   end
 
   add_index "core_projects", ["status"], :name => "index_core_projects_on_status"
@@ -207,7 +209,10 @@ ActiveRecord::Schema.define(:version => 20130218143802) do
     t.datetime "created_at",                  :null => false
     t.datetime "updated_at",                  :null => false
     t.integer  "number_views", :default => 0
+    t.integer  "project_id"
   end
+
+  add_index "discontent_posts", ["project_id"], :name => "index_discontent_posts_on_project_id"
 
   create_table "estimate_comment_voitings", :force => true do |t|
     t.integer  "user_id"

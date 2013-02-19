@@ -1,6 +1,9 @@
 CollectiveMind::Application.routes.draw do
 
-  namespace :core do resources :projects end
+ namespace :core do resources :projects end
+  scope :module => "core" do
+  resources :projects
+end
 
   namespace :discontent do
    resources :posts do
@@ -247,7 +250,7 @@ CollectiveMind::Application.routes.draw do
 
   # You can have the root of your site routed with "root"
   # just remember to delete public/index.html.
-  root :to => 'pages#result'
+  root :to => 'core_projects#index'
 
   # See how all your routes lay out with "rake routes"
 

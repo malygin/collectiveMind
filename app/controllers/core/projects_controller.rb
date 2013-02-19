@@ -24,7 +24,7 @@ class Core::ProjectsController < ApplicationController
   # GET /core/projects/new
   # GET /core/projects/new.json
   def new
-    @core_project = Core::Project.new
+    @project = Core::Project.new
 
     respond_to do |format|
       format.html # new.html.erb
@@ -44,7 +44,7 @@ class Core::ProjectsController < ApplicationController
 
     respond_to do |format|
       if @core_project.save
-        format.html { redirect_to @core_project, notice: 'Project was successfully created.' }
+        format.html { redirect_to '/projects', notice: 'Project was successfully created.' }
         format.json { render json: @core_project, status: :created, location: @core_project }
       else
         format.html { render action: "new" }
