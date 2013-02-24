@@ -1,1 +1,0 @@
-equire 'spec_helper'

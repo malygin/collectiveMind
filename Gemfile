@@ -29,6 +29,15 @@ group :development, :test do
   gem 'quiet_assets'
   gem 'grizzled-rails-logger'
 
+gem 'rspec'
+gem 'rspec-rails'
+ #  gem 'capybara', :git => 'git://github.com/jnicklas/capybara.git'
+ #  gem 'launchy'
+ #  gem 'database_cleaner'
+ # gem 'rb-inotify', '~> 0.9'
+ #  gem 'guard-rspec'
+ #  gem 'guard-livereload'
+
 end
 
 group :production do
@@ -37,9 +46,11 @@ group :production do
 end
 
 group :test do
-gem "rspec-rails", "~> 2.0"
-
+  gem "factory_girl_rails"
+  gem "capybara"
+  gem "guard-rspec"
 end
+
 
 # Gems used only for assets and not required
 # in production environments by default.
