@@ -31,12 +31,10 @@ group :development, :test do
 
 gem 'rspec'
 gem 'rspec-rails'
- #  gem 'capybara', :git => 'git://github.com/jnicklas/capybara.git'
- #  gem 'launchy'
- #  gem 'database_cleaner'
- # gem 'rb-inotify', '~> 0.9'
- #  gem 'guard-rspec'
- #  gem 'guard-livereload'
+  gem 'spork'
+  gem 'spork-rails'
+
+  gem 'guard-spork'
 
 end
 
@@ -49,6 +47,8 @@ group :test do
   gem "factory_girl_rails"
   gem "capybara"
   gem "guard-rspec"
+  gem 'rb-inotify', '~> 0.9'
+gem 'database_cleaner'
 end
 
 

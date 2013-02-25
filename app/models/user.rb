@@ -5,7 +5,7 @@ class User < ActiveRecord::Base
   attr_accessor :password
   attr_accessible :login, :password, :password_confirmation, :encrypted_password,
    :dateActivation, :dateLastEnter, :dateRegistration, :email, :faculty, :group,
-    :name, :string, :string, :surname, :validate, :vkid, :score
+    :name, :string, :string, :surname, :validate, :vkid, :score, :admin
 
   has_many :frustrations, :dependent => :destroy
   has_many :frustration_comments, :dependent => :destroy
@@ -47,14 +47,19 @@ class User < ActiveRecord::Base
   has_one :frustration_essay
   has_one :concept_essay, :class_name => 'Concept::Essay'
 
-  email_regex = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
+
   validates :name, :presence => true,
   				   :length => { :maximum => 50 }
-  validates :email, :format => { :with => email_regex }
+
+
+  VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
+  validates :email, presence: true, format: { with: VALID_EMAIL_REGEX },
+                    uniqueness: { case_sensitive: false }
+
   validates :password, :presence => true,
   						:confirmation => true,
-  						:length => { :within => 3..40 }
-
+  						:length => { :within => 6..40 }
+  validates :password_confirmation, presence: true, :length => { :within => 6..40 }
   before_save :encrypt_password
 
   def has_password?(submitted_password)
