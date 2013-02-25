@@ -1,20 +1,24 @@
 CollectiveMind::Application.routes.draw do
 
- namespace :core do resources :projects end
-  scope :module => "core" do
+namespace :core do 
+  resources :projects 
+end
+
+scope :module => "core" do
   resources :projects
 end
 
+scope "/project/:project" do
   namespace :discontent do
-   resources :posts do
-        member do
-            put :add_comment
-            put :plus
-            put :plus_comment
+     resources :posts do
+          member do
+              put :add_comment
+              put :plus
+              put :plus_comment
+          end
         end
-      end
- end
-
+   end
+end
   namespace :plan do resources :posts end
   namespace :concept do resources :posts end
   namespace :expert_news do resources :posts end
