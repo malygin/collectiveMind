@@ -15,21 +15,22 @@
     %tr
       %td= image_tag core_project.url_logo, :height => 70
       %td
-        = core_project.name
+        = link_to core_project.name, discontent_posts_path(core_project.id)
         %br    
         Cтатус:
         %span.rate завершен
         %br
         Уровень доступа
         %span.rate открыт для всех пользователей
-      %td= link_to 'Show', core_project
-      %td= link_to 'Edit', edit_core_project_path(core_project)
-      %td= link_to 'Destroy', core_project, :confirm => 'Are you sure?', :method => :delete
+      - if boss?
+        %td= link_to 'Show', core_project
+        %td= link_to 'Edit', edit_core_project_path(core_project)
+        %td= link_to 'Destroy', core_project, :confirm => 'Are you sure?', :method => :delete
 
 %br
 
 - if boss?
-  = link_to 'Добавить проект', new_project_path
+  = link_to 'Добавить проект', new_core_project_path
 %br
 %br
 %h3 Отзывы пользователей

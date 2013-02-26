@@ -34,7 +34,7 @@ class Core::ProjectsController < ApplicationController
 
   # GET /core/projects/1/edit
   def edit
-    @core_project = Core::Project.find(params[:id])
+    @project = Core::Project.find(params[:id])
   end
 
   # POST /core/projects
@@ -44,7 +44,7 @@ class Core::ProjectsController < ApplicationController
 
     respond_to do |format|
       if @core_project.save
-        format.html { redirect_to '/projects', notice: 'Project was successfully created.' }
+        format.html { redirect_to root_path, notice: 'Project was successfully created.' }
         format.json { render json: @core_project, status: :created, location: @core_project }
       else
         format.html { render action: "new" }

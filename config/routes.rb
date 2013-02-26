@@ -1,12 +1,9 @@
 CollectiveMind::Application.routes.draw do
 
-namespace :core do 
+namespace :core, :shallow => true do 
   resources :projects 
 end
 
-scope :module => "core" do
-  resources :projects
-end
 
 scope "/project/:project" do
   namespace :discontent do

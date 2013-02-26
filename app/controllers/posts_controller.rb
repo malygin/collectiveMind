@@ -41,8 +41,7 @@ def add_comment
  end 
 
 def index
-    @posts = current_model.all
-
+    @posts = current_model.where(:project_id => @project)
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @posts }
@@ -83,10 +82,14 @@ def index
   # POST /discontent/posts.json
   def create
     @post = current_model.new(params[name_of_model_for_param])
+    @project = Core::Project.find(params[:project]) 
+    @post.project = @project
     @post.user = current_user
     respond_to do |format|
       if @post.save
-        format.html { redirect_to @post, notice: 'Post was successfully created.' }
+        format.html {
+          flash[:notice] = 'Success!'
+          redirect_to  :action=>'show', :id => @post.id, :project => @project  }
         format.json { render json: @post, status: :created, location: @post }
       else
         format.html { render action: "new" }
@@ -99,11 +102,14 @@ def index
   # PUT /discontent/posts/1.json
   def update
     @post = current_model.find(params[:id])
+    @project = Core::Project.find(params[:project]) 
 
     respond_to do |format|
       if @post.update_attributes(params[name_of_model_for_param])
 
-        format.html { redirect_to @post, notice: 'Post was successfully updated.' }
+        format.html { 
+          flash[:notice] = 'Success!'
+          redirect_to  :action=>'show', :project => @project }
         format.json { head :no_content }
       else
         format.html { render action: "edit" }

@@ -1,5 +1,5 @@
 .comments
-	= form_for comment, :html => {:class => 'new_concept_comment'}, :url => url_link, :method => :put do |f|
+	= form_for comment, :html => {:class => 'new_or_edit'}, :url => url_link, :method => :put do |f|
 		= render 'shared/error_messages', :object =>f.object
 		%label Ваш комментарий
 		.field
