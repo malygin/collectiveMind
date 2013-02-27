@@ -15,6 +15,24 @@ scope "/project/:project" do
           end
         end
    end
+
+  namespace :life_tape do
+    # Directs /admin/products/* to Admin::ProductsController
+    # (app/controllers/admin/products_controller.rb)
+    # get "category/:cat_id" => 'posts#category'
+    resources :posts do
+      member do
+          # get :new_child
+          # put :create_child
+
+          put :add_comment
+          put :plus
+          put :plus_comment
+
+      end
+    end
+  end
+  
 end
   namespace :plan do resources :posts end
   namespace :concept do resources :posts end
@@ -134,25 +152,7 @@ end
   #   end
 
   # Sample resource route within a namespace:
-    namespace :life_tape do
-      # Directs /admin/products/* to Admin::ProductsController
-      # (app/controllers/admin/products_controller.rb)
-      get "category/:cat_id" => 'posts#category'
-      resources :posts do
-        member do
-            put :add_comment
-            get :new_child
-            put :create_child
-            put :plus
-
-        end
-      end
-      resources :comments do
-          member do
-            put :plus
-          end  
-      end
-    end
+ 
 
     namespace :concept do
       get 'forecast' => "posts#forecast"

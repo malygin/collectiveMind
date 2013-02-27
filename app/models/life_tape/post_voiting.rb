@@ -1,6 +1,4 @@
 class LifeTape::PostVoiting < ActiveRecord::Base
-  attr_accessible :against, :post, :user
+	include BasePostVoiting
 
-    belongs_to :user
-	belongs_to :post
 end

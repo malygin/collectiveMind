@@ -1,0 +1,27 @@
+%html
+  %head
+    = render 'meta'
+
+  %body
+    #wrapper
+      #header
+        = render 'header'
+        = render 'stages'
+        = render 'top_menu'
+      #middle
+        #container
+          #content_wider2
+            - flash.each do |key, value|
+              -if key == :success
+                .success
+                  =value
+              -else 
+                .error
+                  =value
+            = yield 
+        #sideRight.sidebar
+          = render 'right_side' 
+    #footer
+      = render 'footer' 
+
+

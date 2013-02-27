@@ -1,36 +1,47 @@
-- unless @news.nil?
-	%h1 Новости
-	%p.righttext
-		= @news.anons
-		= link_to 'подробнее', @news
 
-%h1 Тех. поддержка
+%h1 Список аспектов
 %p.righttext
-	Что-то непонятно? 
-	= link_to 'Задайте вопрос', questions_path
-
-.redtitle Топ записей
-- @top_posts.each do |post|
-	%p.righttext
-		= trim_string(post.content, 100)
-		= link_to "подробнее", post
-	=image_tag('dots.png')
-
-.redtitle Рекомендованные вам
-
+	1. Кадровая политика
+	= link_to 'Удалить', questions_path
 %p.righttext
-	Я думаю мы недостаточно внимания уделяем возможности привлечения преподавателей не из СГУ. Ведь мы обучаемся дистанционно и могли бы иметь возможность работать с преподавателями из любой точки мира.
-	= link_to "подробнее", '/life_tape/posts/61'
+	2. Проблемы професиональной ориентации
+	= link_to 'Удалить', questions_path
+%p.righttext
+	3.  Проблемы внедрения инноваций
+	= link_to 'Удалить', questions_path
+/ - unless @news.nil?
+/ 	%h1 Новости
+/ 	%p.righttext
+/ 		= @news.anons
+/ 		= link_to 'подробнее', @news
+
+/ %h1 Тех. поддержка
+/ %p.righttext
+/ 	Что-то непонятно? 
+/ 	= link_to 'Задайте вопрос', questions_path
+
+/ .redtitle Топ записей
+/ - @top_posts.each do |post|
+/ 	%p.righttext
+/ 		= trim_string(post.content, 100)
+/ 		= link_to "подробнее", post
+/ 	=image_tag('dots.png')
+
+/ .redtitle Рекомендованные вам
+
+/ %p.righttext
+/ 	Я думаю мы недостаточно внимания уделяем возможности привлечения преподавателей не из СГУ. Ведь мы обучаемся дистанционно и могли бы иметь возможность работать с преподавателями из любой точки мира.
+/ 	= link_to "подробнее", '/life_tape/posts/61'
 
 
--unless @journals.nil?
-	.redtitle Активность
-	- @journals.each do |journal|
-		%p.righttext
-			=Russian::strftime(journal.created_at,"%d %B %k:%M:%S ")
-			%b= journal.user.name_title
-			= journal_parser(journal).html_safe
-		=image_tag('dots.png')
+/ -unless @journals.nil?
+/ 	.redtitle Активность
+/ 	- @journals.each do |journal|
+/ 		%p.righttext
+/ 			=Russian::strftime(journal.created_at,"%d %B %k:%M:%S ")
+/ 			%b= journal.user.name_title
+/ 			= journal_parser(journal).html_safe
+/ 		=image_tag('dots.png')
 
 
 
