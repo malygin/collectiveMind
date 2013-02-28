@@ -5,10 +5,7 @@ class User < ActiveRecord::Base
   attr_accessor :password
   attr_accessible :login, :password, :password_confirmation, :encrypted_password,
    :dateActivation, :dateLastEnter, :dateRegistration, :email, :faculty, :group,
-    :name, :string, :string, :surname, :validate, :vkid, :score, :admin
-
-  has_many :frustrations, :dependent => :destroy
-  has_many :frustration_comments, :dependent => :destroy
+    :name, :string, :string, :surname, :validate, :vkid, :score, :admin 
 
   has_many :question, :dependent => :destroy
   has_many :answer, :dependent => :destroy
@@ -21,32 +18,11 @@ class User < ActiveRecord::Base
   has_many :life_tape_comment_voitings
   has_many :life_tape_comments, :through => :life_type_comment_voitings
 
-# list of frustrations which was denied for user's comment
-  has_many :negatived_frustrations, :class_name => "Frustration", :foreign_key =>"negative_user_id"
-  has_many :structured_frustrations, :class_name => "Frustration", :foreign_key =>"struct_user_id"
-
-  has_many :voitings
-  has_many :voited_frustrations, :class_name =>'Frustration', :through => :voitings
-
   has_many :life_tape_posts, :class_name => "LifeTape::Post"
   has_many :concept_posts, :class_name => "Concept::Post"
 
   has_many :user_awards
-  has_many :awards, :through => :user_awards
-
-
-  has_many :frustration_forecasts
-  has_many :forecasts , :class_name => 'Frustration', :through => :frustration_forecasts
-
-  has_many :concept_forecasts, :class_name => 'Concept::Forecast'
-  has_many :forecast_tasks, :class_name => 'Concept::ForecastTask', :through => :concept_forecasts
-  
-  has_many :plan_forecasts, :class_name => 'Estimate::Forecast'
-  #has_many :forecast_tasks, :class_name => 'Plan::ForecastTask', :through => :concept_forecasts
-  
-  has_one :frustration_essay
-  has_one :concept_essay, :class_name => 'Concept::Essay'
-
+  has_many :awards, :through => :user_awards  
 
   validates :name, :presence => true,
   				   :length => { :maximum => 50 }
@@ -98,19 +74,8 @@ class User < ActiveRecord::Base
       "студент"
     end
   end
-
-
- 
       
 
-
-  def self.only_simple_users
-    User.where(:admin => false).where(:expert => false)
-  end
-
-  def structured_and_unstructured
-    self.frustrations.where(:status => [0,2])
-  end
 
   private 
 

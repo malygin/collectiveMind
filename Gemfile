@@ -19,7 +19,7 @@ gem 'tinymce-rails'
 #gem 'wiselinks'
 
 gem 'rest-client'
-#gem 'magic_encoding'
+gem 'magic_encoding'
 
 group :development, :test do
   gem 'sqlite3'

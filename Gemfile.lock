@@ -106,6 +106,7 @@ GEM
     libv8 (3.3.10.4)
     listen (0.7.3)
     lumberjack (1.0.2)
+    magic_encoding (0.0.2)
     mail (2.4.4)
       i18n (>= 0.4.0)
       mime-types (~> 1.16)
@@ -249,6 +250,7 @@ DEPENDENCIES
   json
   libv8 (= 3.3.10.4)
   linecache19!
+  magic_encoding
   pg
   quiet_assets
   rails (= 3.2.6)

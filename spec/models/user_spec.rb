@@ -1,9 +1,9 @@
+# encoding: utf-8
 require 'spec_helper'
-
 describe User do
 
   before do
-   @user = User.new(name: "Example User", email: "user@example.com",
+   @user = User.new(name: "Andrey", surname: "Malygin", email: "user@example.com",
                     password: "foobar", password_confirmation: "foobar")
   end
 
@@ -21,6 +21,10 @@ describe User do
 
   it { should be_valid }
   it { should_not be_admin }
+  its(:role_name) { should == 'студент'}
+  its(:name_title) { should == 'Andrey Malygin'}
+  
+
 
   # describe "accessible attributes" do
   #   it "should not allow access to admin" do
@@ -29,11 +33,18 @@ describe User do
   #     end.should raise_error(ActiveModel::MassAssignmentSecurity::Error)
   #   end
   # end
+describe "with jury attribute set to 'true'" do
+  before {@user.toggle!(:jury)}
+
+  it {should be_jury}
+  its(:role_name) {should == "жюри"}
+end
 
   describe "with admin attribute set to 'true'" do
     before { @user.toggle!(:admin) }
 
     it { should be_admin }
+    its(:role_name) { should == 'модератор'} 
   end
 
   describe "when name is not present" do
