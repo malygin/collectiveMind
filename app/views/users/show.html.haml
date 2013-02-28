@@ -13,39 +13,20 @@
 			- if current_user == @user
 				(это вы)
 		%br
-		Недовольств -
-		%span.rate_small= @user.frustrations.count		
-		%br
-		Идей  -
-		%span.rate_small= @user.life_tape_posts.count
-		%br
-		Концепций  -
-		%span.rate_small= 0
-		%br
-		Проектов  -
-		%span.rate_small= 0
+		
 
-- unless @user.expert? 
-	%h1 Недовольства
-	- unless @user.frustrations.empty?
-		= render @user.frustrations
-	-else 
-		%i Ни одного не добавлено
-		%br
-		%br
-		.dotline=image_tag('dotline.png')
 
-%br
-%h1 Идеи
-- unless @user.life_tape_posts.empty?
-	= render @user.life_tape_posts
--else
-	Пока не добавлено
-%h1 Концепции
-- unless @user.concept_posts.empty?
-	= render @user.concept_posts
-%h1 Проекты
-Пока не добавлено
+/ %br
+/ %h1 Идеи
+/ - unless @user.life_tape_posts.empty?
+/ 	= render @user.life_tape_posts
+/ -else
+/ 	Пока не добавлено
+/ %h1 Концепции
+/ - unless @user.concept_posts.empty?
+/ 	= render @user.concept_posts
+/ %h1 Проекты
+/ Пока не добавлено
 
 
 

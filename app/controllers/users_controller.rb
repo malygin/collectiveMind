@@ -1,5 +1,6 @@
 # encoding: utf-8
 class UsersController < ApplicationController
+	layout 'core/projects'
 	before_filter :authenticate, :only => [:edit, :update, :show]
 	before_filter :correct_user, :only => [:edit, :update]
 	before_filter :admin_user, :only => [:destroy]
@@ -11,29 +12,6 @@ class UsersController < ApplicationController
 
 	def show 
 		@user = User.find(params[:id])
-		# puts "ahow"
-		# @user.test_attempts.each do |a|
-		# 	puts a.test_question_attempts
-		# 	a.test_question_attempts.each do |q|
-		# 		puts q
-		# 		puts q.test_question.id
-		# 		puts q.answer
-		# 	end
-		# end
-		# if @user.expert?
-		# 	@frustrations = Frustration.feed_to_expert.paginate(:page => params[:page])
-		# 	@frustration = Frustration.new 
-
-		# 	render 'show_expert'
-		# elsif @user.admin?
-		# 	@frustration = Frustration.new 
-		# 	render 'show_admin'			
- 	# 	end
-		# @frustrations = @user.frustrations.paginate(:page => params[:page])
-		@frustration = Frustration.new 
-		@news = ExpertNews::Post.first
-
-
 	end
 
 	def edit 
