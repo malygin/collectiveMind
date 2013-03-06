@@ -22,12 +22,16 @@ class LifeTape::PostsController < PostsController
  #    @news = ExpertNews::Post.first    
  #  end
 
- #  def index
- #    @life_tape_posts = LifeTape::Post.paginate(:page => params[:page])
- #    #todo - improve it too slowly
- #    prepare_data
- #    @news = ExpertNews::Post.first
- #  end
+  def index
+  	prepare_data
+    @posts_user = LifeTape::Post.includes(:user).where("users.admin = ? and users.expert = ?", false, false)
+    @posts_facil = LifeTape::Post.includes(:user).where("users.admin = ? or users.expert = ?", true, true)
+
+    respond_to do |format|
+      format.html # index.html.erb
+      format.json { render json: @posts }
+    end
+  end
 
  #  def category
  #    @category = LifeTape::Category.find(params[:cat_id])

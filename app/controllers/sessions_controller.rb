@@ -1,6 +1,7 @@
 # encoding: utf-8
 class SessionsController < ApplicationController
-  
+    layout 'core/projects'
+
   def new
   end
 

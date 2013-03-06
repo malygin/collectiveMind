@@ -48,7 +48,7 @@ group :test do
   gem "capybara"
   gem "guard-rspec"
   gem 'rb-inotify', '~> 0.9'
-gem 'database_cleaner'
+  gem 'database_cleaner'
 end
 
 

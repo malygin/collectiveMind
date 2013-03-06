@@ -13,8 +13,8 @@
 		%th Посты пользователей
 		%th Посты экспертов
 	%tr
-		%td= render :partial => 'shared/post', :collection => @posts
-		%td= render :partial => 'shared/post', :collection => @posts
+		%td= render :partial => 'shared/post', :collection => @posts_user
+		%td= render :partial => 'shared/post', :collection => @posts_facil
 			
 
 / = link_to 'Destroy', post, :confirm => 'Are you sure?', :method => :delete

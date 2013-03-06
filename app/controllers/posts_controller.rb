@@ -85,6 +85,9 @@ def index
     @project = Core::Project.find(params[:project]) 
     @post.project = @project
     @post.user = current_user
+    if current_model.column_names.include? status
+      @post.status = 0
+    end
     respond_to do |format|
       if @post.save
         format.html {

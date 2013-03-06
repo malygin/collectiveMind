@@ -15,11 +15,12 @@ Spork.prefork do
     config.fixture_path = "#{::Rails.root}/spec/fixtures"
     config.include(SessionsHelper, :type => :controller)
     config.infer_base_class_for_anonymous_controllers = false
+    config.include Capybara::DSL
   end
 end
  
 Spork.each_run do
- 
+  CollectiveMind::Application.reload_routes!
 end
 
 RSpec.configure do |config|
