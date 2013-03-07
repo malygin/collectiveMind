@@ -20,7 +20,7 @@ Spork.prefork do
 end
  
 Spork.each_run do
-  CollectiveMind::Application.reload_routes!
+  # CollectiveMind::Application.reload_routes!
 end
 
 RSpec.configure do |config|

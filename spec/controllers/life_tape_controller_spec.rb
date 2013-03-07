@@ -26,11 +26,36 @@ describe LifeTape::PostsController do
         assigns(:posts_facil).should include(admin_post)
         assigns(:posts_facil).should_not include(user_post)
       end 
-      # it "renders the :index view" do
-      #   get :index 
-      #   response.should render_template :index 
-      # end
     end 
+
+    describe "POST create" do 
+       before { sign_in user }
+
+        it "with valid attributes" do 
+          expect{
+             post :create, :project => project, :life_tape_post => { :content => "Foo" }
+          }.to change(LifeTape::Post,:count).by(1)
+        end
+
+        it "with invalid attributes" do 
+          expect{
+             post :create, :project => project, :life_tape_post => { :content => "" }
+          }.to_not change(LifeTape::Post,:count)
+        end
+    end 
+
+    describe "GET #show" do 
+      before { sign_in user }
+
+
+      it "renders the #show view" do 
+        get :show, :project => project, id: user_post.id
+        response.should render_template :show 
+   
+
+      end 
+    end 
+
 
 
 end

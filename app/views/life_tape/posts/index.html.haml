@@ -6,8 +6,9 @@
 
 - if signed_in?
 	= link_to image_tag("add_record.png"), new_life_tape_post_path
+	add_record.png
 	%br
-/ = render @posts
+
 %table
 	%tr
 		%th Посты пользователей
@@ -16,8 +17,6 @@
 		%td= render :partial => 'shared/post', :collection => @posts_user
 		%td= render :partial => 'shared/post', :collection => @posts_facil
 			
-
-/ = link_to 'Destroy', post, :confirm => 'Are you sure?', :method => :delete
 %br
 
 

@@ -3,10 +3,6 @@
 	.posts
 		= render 'users/user_name', :user => post.user, :created_at => post.created_at
 		=image_tag("tag.png")
-		/ -unless post.category.nil?
-		/ 	%span.tags= post.category.name
-		/ -else
-		/ 	%span.tags без категории
 
 		- if not current_page?(life_tape_post_path(post)) 
 			%p

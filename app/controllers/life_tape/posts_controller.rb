@@ -24,8 +24,8 @@ class LifeTape::PostsController < PostsController
 
   def index
   	prepare_data
-    @posts_user = LifeTape::Post.includes(:user).where("users.admin = ? and users.expert = ?", false, false)
-    @posts_facil = LifeTape::Post.includes(:user).where("users.admin = ? or users.expert = ?", true, true)
+    @posts_user = LifeTape::Post.includes(:user).where(:project_id => @project).where("users.admin = ? and users.expert = ?", false, false)
+    @posts_facil = LifeTape::Post.includes(:user).where(:project_id => @project).where("users.admin = ? or users.expert = ?", true, true)
 
     respond_to do |format|
       format.html # index.html.erb

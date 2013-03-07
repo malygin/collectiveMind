@@ -24,7 +24,6 @@ end
 def prepare_data
     @journals = Journal.events_for_user_feed
     @news = ExpertNews::Post.first 
-    puts params
     @project = Core::Project.find(params[:project]) 
 end
 

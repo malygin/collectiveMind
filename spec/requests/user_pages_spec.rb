@@ -6,7 +6,7 @@ describe "index page" do
   describe "GET root_path" do
 
     let(:user) { FactoryGirl.create(:user) }
-    before(:all) { 30.times { FactoryGirl.create(:core_project) } }
+    before(:all) { 30.times { FactoryGirl.create(:project) } }
 
     before(:each) do
       visit root_path

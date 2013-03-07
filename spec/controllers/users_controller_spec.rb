@@ -11,7 +11,7 @@ describe UsersController do
     describe "GET #index" do 
       it "populates an array of users" do
         get :index
-        assigns(:users).should eq([user])
+        assigns(:users).should include(user)
       end 
       it "renders the :index view" do
         get :index 

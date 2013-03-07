@@ -16,19 +16,11 @@ FactoryGirl.define do
       sequence(:surname)  { |n| "Surname #{n}" }
       sequence(:email) { |n| "person_#{n}@example.com" }
       password "foobar1"
-      password_confirmation "foobar"
-
-      
-    end
-
-    
+      password_confirmation "foobar"      
+    end    
   end
 
-  
- factory :core_project,  class: Core::Project do
-      sequence(:name)  { |n| "Project #{n}" }
-      sequence(:short_desc)  { |n| "Short desc for #{n} project" }    
- end
+
 
 factory :life_tape_post, class: LifeTape::Post do
   content "Bla bla bla"
