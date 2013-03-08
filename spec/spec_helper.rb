@@ -16,26 +16,21 @@ Spork.prefork do
     config.include(SessionsHelper, :type => :controller)
     config.infer_base_class_for_anonymous_controllers = false
     config.include Capybara::DSL
+      config.before(:suite) do
+        DatabaseCleaner.strategy = :transaction
+        # DatabaseCleaner.clean_with(:truncation)
+      end
+
+      config.before(:each) do
+        DatabaseCleaner.start
+      end
+
+      config.after(:each) do
+        DatabaseCleaner.clean
+      end
   end
 end
  
 Spork.each_run do
   # CollectiveMind::Application.reload_routes!
-end
-
-RSpec.configure do |config|
-
-  config.before(:suite) do
-    DatabaseCleaner.strategy = :transaction
-    DatabaseCleaner.clean_with(:truncation)
-  end
-
-  config.before(:each) do
-    DatabaseCleaner.start
-  end
-
-  config.after(:each) do
-    DatabaseCleaner.clean
-  end
-
 end

@@ -25,7 +25,8 @@
 
 = render 'shared/post', :post => @post
 
-= link_to 'Edit', edit_life_tape_post_path(@post)
+- if boss? or @post.user == current_user
+  = link_to 'Edit', edit_life_tape_post_path(@post)
 \|
 = link_to 'Back', life_tape_posts_path
 

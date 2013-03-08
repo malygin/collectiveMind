@@ -14,7 +14,7 @@ FactoryGirl.define do
     factory :invalid_user do
       sequence(:name)  { |n| "Name #{n}" }
       sequence(:surname)  { |n| "Surname #{n}" }
-      sequence(:email) { |n| "person_#{n}@example.com" }
+      sequence(:email) { |n| "person_b#{n}@example.com" }
       password "foobar1"
       password_confirmation "foobar"      
     end    
