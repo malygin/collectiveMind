@@ -22,13 +22,23 @@ describe "pages: " do
     it { should have_selector('h1',    text: 'Список аспектов') }
 
     it "should have not button for add" do
-      should_not have_content("add_record")
+      should_not have_css('a#add_record')  
     end
+
     it "should have  button for add if user sign in" do
       sign_in user
       visit life_tape_posts_path(project)
-      should have_content("add_record")
+      click_link "add_record"
+      fill_in "life_tape_post_content",  with: "new foo"
+      expect{
+        click_button "Send"
+      }.to change(project.life_tape_posts, :count).by(1)
+      should have_content("new foo")
+
+
     end
+
+    
 
   end
 
@@ -46,12 +56,35 @@ describe "pages: " do
     end
 
     it "should not leave a comment if not sign_in" do
-      # let(:post){FactoryGirl.create(:life_tape_post, user: user, project: project)}
-
       visit life_tape_post_path(project, post)
       should_not have_selector('form#new_life_tape_comment')
     end
+
+    it "should leave a comment if sign_in " do
+      sign_in user
+      visit life_tape_post_path(project, post)
+      fill_in "life_tape_comment_content",  with: "foo"
+      expect{
+         click_button "Send"
+       }.to change(post.comments, :count).by(1)        
+      should have_content("foo")
+    end
   end
+
+  describe "edit  post" do
+    
+    it "should by owner" do
+      sign_in user
+      visit edit_life_tape_post_path( project, post)
+      fill_in "life_tape_post_content", with: "woo-hoo"
+      click_button "Send"
+      current_path.should == life_tape_post_path(project, post)
+      should have_content "woo-hoo"
+    end
+
+  end
+
+
 
 end
 

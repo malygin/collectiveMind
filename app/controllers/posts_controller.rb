@@ -24,6 +24,7 @@ end
 def prepare_data
     @journals = Journal.events_for_user_feed
     @news = ExpertNews::Post.first 
+    
     @project = Core::Project.find(params[:project]) 
 end
 
@@ -111,7 +112,7 @@ def index
 
         format.html { 
           flash[:notice] = 'Success!'
-          redirect_to  :action=>'show', :project => @project }
+          redirect_to  :action=>'show', :project => @project, :id => @post.id}
         format.json { head :no_content }
       else
         format.html { render action: "edit" }
