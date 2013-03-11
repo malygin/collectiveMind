@@ -25,7 +25,7 @@ describe "pages: " do
       should_not have_css('a#add_record')  
     end
 
-    it "should have  button for add if user sign in" do
+    it "should create new post if user sign in" do
       sign_in user
       visit life_tape_posts_path(project)
       click_link "add_record"
@@ -34,11 +34,7 @@ describe "pages: " do
         click_button "Send"
       }.to change(project.life_tape_posts, :count).by(1)
       should have_content("new foo")
-
-
-    end
-
-    
+    end   
 
   end
 
@@ -75,7 +71,9 @@ describe "pages: " do
     
     it "should by owner" do
       sign_in user
-      visit edit_life_tape_post_path( project, post)
+      visit life_tape_post_path( project, post)
+      click_link "edit_post"
+      # puts page.body
       fill_in "life_tape_post_content", with: "woo-hoo"
       click_button "Send"
       current_path.should == life_tape_post_path(project, post)
