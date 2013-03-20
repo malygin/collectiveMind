@@ -51,11 +51,11 @@ def index
   # GET /discontent/posts/1
   # GET /discontent/posts/1.json
   def show
-  	prepare_data
     @post = current_model.find(params[:id])
-    @post.update_column(:number_views, @post.number_views+1)
-    @comment = comment_model.new
-  
+    if current_model.column_names.include? :number_views
+      @post.update_column(:number_views, @post.number_views+1)
+    end
+    @comment = comment_model.new  
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @post }

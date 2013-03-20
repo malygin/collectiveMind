@@ -8,6 +8,8 @@ describe LifeTape::PostsController do
   let(:project) { FactoryGirl.create(:project) }
   let(:user_post) { FactoryGirl.create(:life_tape_post, user: user, project: project)}
   let(:admin_post) { FactoryGirl.create(:life_tape_post, user: admin, project: project)}
+  let(:aspect) {FactoryGirl.create(:aspect, project: project)}
+
   # let(:other_user) { FactoryGirl.create(:user) }
 
    # before { 
@@ -26,6 +28,11 @@ describe LifeTape::PostsController do
         assigns(:posts_facil).should include(admin_post)
         assigns(:posts_facil).should_not include(user_post)
       end 
+
+      it "list of aspects" do
+        get :index, :project => project
+        assigns(:aspects).should include(aspect)
+      end
     end 
 
     describe "POST create" do 

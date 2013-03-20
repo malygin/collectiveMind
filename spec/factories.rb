@@ -21,14 +21,18 @@ FactoryGirl.define do
   end
 
 
+  factory :aspect, class: Discontent::Aspect do
+    sequence(:content) {|n| "Aspect #{n}"}
+    sequence(:position) {|n| "#{n}"}
+  end
 
-factory :life_tape_post, class: LifeTape::Post do
-  content "Bla bla bla"
- end
+  factory :life_tape_post, class: LifeTape::Post do
+    content "Bla bla bla"
+  end
 
- factory :project, class: Core::Project do
-  name "Bla bla bla"
- end
+  factory :project, class: Core::Project do
+    name "Bla bla bla"
+  end
 
 
 end

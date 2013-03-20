@@ -70,8 +70,8 @@ module SessionsHelper
 	end
 
 	def authorized_user
-			@frustration = current_user.frustrations.find_by_id(params[:id])
-			redirect_to root_path if @frustration.nil?
+			# @frustration = current_user.frustrations.find_by_id(params[:id])
+			redirect_to root_path
 	end
 
 	def to_bool(arg)

@@ -1,5 +1,6 @@
 CollectiveMind::Application.routes.draw do
 
+
 namespace :core, :shallow => true do 
   resources :projects 
 end
@@ -7,13 +8,15 @@ end
 
 scope "/project/:project" do
   namespace :discontent do
-     resources :posts do
+    resources :aspects
+    
+    resources :posts do
           member do
               put :add_comment
               put :plus
               put :plus_comment
           end
-        end
+    end
    end
 
   namespace :life_tape do
@@ -34,6 +37,9 @@ scope "/project/:project" do
   end
   
 end
+
+
+############
   namespace :plan do resources :posts end
   namespace :concept do resources :posts end
   namespace :expert_news do resources :posts end
