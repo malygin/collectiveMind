@@ -1,0 +1,12 @@
+%p#notice= notice
+
+%p
+  %b Content:
+  = @discontent_aspect.content
+%p
+  %b User:
+  = @discontent_aspect.user_id
+
+= link_to 'Edit', edit_discontent_aspect_path(@discontent_aspect)
+\|
+= link_to 'Back', discontent_aspects_path
