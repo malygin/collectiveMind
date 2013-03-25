@@ -1,12 +1,8 @@
-%p#notice= notice
 
 %p
-  %b Content:
-  = @discontent_aspect.content
-%p
-  %b User:
-  = @discontent_aspect.user_id
+  %b Аспект:
+  = @post.content
 
-= link_to 'Edit', edit_discontent_aspect_path(@discontent_aspect)
+= link_to 'Ред.', edit_discontent_aspect_path(@post)
 \|
-= link_to 'Back', discontent_aspects_path
+= link_to 'К списку', life_tape_posts_path(@project)

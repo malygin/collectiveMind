@@ -1,14 +1,9 @@
 
 %h1 Список аспектов
-%p.righttext
-	1. Кадровая политика
-	= link_to 'Удалить', questions_path
-%p.righttext
-	2. Проблемы професиональной ориентации
-	= link_to 'Удалить', questions_path
-%p.righttext
-	3.  Проблемы внедрения инноваций
-	= link_to 'Удалить', questions_path
+= render :partial => 'discontent/aspects/aspect', :collection => @aspects
+-if boss? 
+	%p.righttext= link_to 'добавить аспект', new_discontent_aspect_path, id: "add_aspect"
+
 / - unless @news.nil?
 / 	%h1 Новости
 / 	%p.righttext

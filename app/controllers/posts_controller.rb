@@ -111,7 +111,7 @@ def index
       if @post.update_attributes(params[name_of_model_for_param])
 
         format.html { 
-          flash[:notice] = 'Success!'
+          flash[:success] = 'Успешно добавлено!'
           redirect_to  :action=>'show', :project => @project, :id => @post.id}
         format.json { head :no_content }
       else
@@ -124,6 +124,7 @@ def index
   # DELETE /discontent/posts/1
   # DELETE /discontent/posts/1.json
   def destroy
+    puts "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
     @post = current_model.find(params[:id])
     @post.destroy
 

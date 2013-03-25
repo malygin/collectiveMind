@@ -1,16 +1,14 @@
-= form_for @discontent_aspect do |f|
-  -if @discontent_aspect.errors.any?
+= form_for @post,:url => {:project => @project.id, :action => @post.persisted? ? 'update' : 'create'},  :html => { :class => 'new_or_edit' } do |f|
+  -if @post.errors.any?
     #error_explanation
-      %h2= "#{pluralize(@discontent_aspect.errors.count, "error")} prohibited this discontent_aspect from being saved:"
+      %h2= "#{pluralize(@post.errors.count, "error")} prohibited this discontent_aspect from being saved:"
       %ul
-        - @discontent_aspect.errors.full_messages.each do |msg|
+        - @post.errors.full_messages.each do |msg|
           %li= msg
 
   .field
     = f.label :content
     = f.text_area :content
-  .field
-    = f.label :user_id
-    = f.number_field :user_id
+
   .actions
-    = f.submit 'Save'
+    = f.submit "",   id: "Send"

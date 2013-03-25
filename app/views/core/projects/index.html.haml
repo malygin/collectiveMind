@@ -25,7 +25,7 @@
       - if boss?
         %td= link_to 'Show', core_project
         %td= link_to 'Edit', edit_core_project_path(core_project)
-        %td= link_to 'Destroy', core_project, :confirm => 'Are you sure?', :method => :delete
+        %td= link_to 'Destroy', core_project, :data => { :confirm => 'Text' }, :method => :delete
 
 %br
 
