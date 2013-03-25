@@ -44,6 +44,7 @@ describe "Discontent::Aspects" do
     end 
 
     it "should edit aspect by boss" do
+      FactoryGirl.create(:aspect, project: project)
       sign_in admin
       visit life_tape_posts_path(project)
       should have_css('a#edit_aspect')
@@ -54,11 +55,13 @@ describe "Discontent::Aspects" do
     end 
 
     it "should delete aspect by boss" do
+      FactoryGirl.create(:aspect, project: project)
+
       sign_in admin
       visit life_tape_posts_path(project)
       should have_css('a#delete_aspect')
       expect{
-         click_link "delete_link"
+         click_link "delete_aspect"
        }.to change(project.aspects, :count).by(-1)   
     end 
 
