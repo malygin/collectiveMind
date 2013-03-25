@@ -1,23 +1,23 @@
 .stages
   %ul
-    %li{ :class => cp('/life_tape/posts', 'life_tape')}
-      = image_tag image_for_stages("1", '/life_tape/posts','life_tape'), :class => 'numbers'
+    %li{ :class => cp('life_tape')}
+      = image_tag image_for_stages('1', 'life_tape'), :class => 'numbers'
       = link_to "Начало процедуры", life_tape_posts_path(@project), class: "lstages"  
     = image_tag "space.png"  
-    %li{ :class => cp('/discontent/posts', 'discontent')}
-      = image_tag image_for_stages("2", '/discontent/posts', 'discontent'), :class => 'numbers'
+    %li{ :class => cp('discontent')}
+      = image_tag image_for_stages('2', 'discontent'), :class => 'numbers'
       = link_to "Несовершенства", discontent_posts_path(@project), class: "lstages" 
     = image_tag "space.png"  
-    %li{ :class => cp('/concept/posts', 'concept')}
-      = image_tag image_for_stages("3", '/concept/posts', 'concept'), :class => 'numbers'
+    %li{ :class => cp('concept')}
+      = image_tag image_for_stages('3', 'concept'), :class => 'numbers'
       = link_to "Концепции", "/concept/forecast/", class: "lstages" 
     = image_tag "space.png" 
 
-    %li{ :class => cp('/plan/posts', 'plan')}
-      = image_tag image_for_stages("4", '/plan/posts', 'plan'), :class => 'numbers'
+    %li{ :class => cp('plan')}
+      = image_tag image_for_stages('4', 'plan'), :class => 'numbers'
       = link_to "Проекты", "/plan/posts/", class: "lstages" 
     = image_tag "space.png" 
 
-    %li{ :class => cp('/plan/estimate', 'estimate')}
-      = image_tag image_for_stages("5", '/estimate/posts', 'estimate'), :class => 'numbers'
+    %li{ :class => cp('estimate')}
+      = image_tag image_for_stages('5', 'estimate'), :class => 'numbers'
       = link_to "Оценивание и выбор", "/estimate/posts/", class: "lstages" 

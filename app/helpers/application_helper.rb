@@ -1,7 +1,7 @@
 module ApplicationHelper
 	
-	def cp(path, stage)
-		if current_page?(path)
+	def cp( stage)
+		if stage =='life_tape' and (@project.status==0 or @project.status==1)
 			'current'
   		end
 	end
@@ -9,8 +9,9 @@ module ApplicationHelper
 
 
 
-	def image_for_stages(image, path, stage)
-		if current_page?(path)    
+
+	def image_for_stages(image,  stage)
+		if stage =='life_tape' and (@project.status==0 or @project.status==1)    
 		    return image+'green.png'  
 		else
 		  return  image+'.png' 
