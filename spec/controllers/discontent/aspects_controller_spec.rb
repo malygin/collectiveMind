@@ -141,16 +141,16 @@ describe Discontent::AspectsController do
     end
   end
 
-  describe "DELETE destroy" do
-    it "destroys the requested discontent_aspect" do
-      sign_in user
+  # describe "DELETE destroy" do
+  #   it "destroys the requested discontent_aspect" do
+  #     sign_in user
 
-      expect {
-        delete :destroy, {:id => aspect.id, :project => project}, valid_session
-      }.to change(Discontent::Aspect, :count).by(1)
-    end
+  #     expect {
+  #       delete :destroy, {:id => aspect.id, :project => project}, valid_session
+  #     }.to change(Discontent::Aspect, :count).by(1)
+  #   end
 
    
-  end
+  # end
 
 end

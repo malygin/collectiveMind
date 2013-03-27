@@ -1,3 +1,8 @@
+-if boss? 
+	текущий статус проекта
+	%br
+	%span.rate= status_title(@project.status)
+
 
 %h1 Список аспектов
 = render :partial => 'discontent/aspects/aspect', :collection => @aspects

@@ -3,7 +3,7 @@ class PostsController < ApplicationController
   before_filter :authenticate, :only => [:new, :create, :edit, :update, 
     :plus, :plus_comment, :add_comment, :destroy]
   before_filter :prepare_data, :only => [:index, :new, :edit, :show]
-  before_filter :authorized_user, :only => :destroy
+  # before_filter :authorized_user, :only => :destroy
 
 def current_model
 	Post
@@ -19,6 +19,10 @@ end
 
 def name_of_comment_for_param
 	comment_model.table_name.singularize
+end
+
+def root_model_path(project)
+    life_tape_posts_path(project)
 end
 
 def prepare_data
@@ -124,12 +128,12 @@ def index
   # DELETE /discontent/posts/1
   # DELETE /discontent/posts/1.json
   def destroy
-    puts "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
     @post = current_model.find(params[:id])
     @post.destroy
+    @project = Core::Project.find(params[:project]) 
 
     respond_to do |format|
-      format.html { redirect_to posts_url }
+      format.html { redirect_to root_model_path(@project) }
       format.json { head :no_content }
     end
   end

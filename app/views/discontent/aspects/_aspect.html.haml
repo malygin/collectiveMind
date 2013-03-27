@@ -2,5 +2,5 @@
 	=aspect.content
 	-if boss?
 		=link_to 'ред.', edit_discontent_aspect_path(@project, aspect), id: "edit_aspect"
-		=link_to 'уд.', discontent_aspect_path(@project, aspect),  :method => :delete, :data => { :confirm => 'Text' }, id: 'delete_aspect'
+		=link_to 'уд.', discontent_aspect_path(@project.id, aspect.id),  :method => :delete, :data => { :confirm => 'Уверены?' }, id: 'delete_aspect'
  

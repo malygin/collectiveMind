@@ -1,5 +1,5 @@
 = link_to image_tag("logo.png", :alt => "Colleсtive mind", :class => "round", ), root_path
-= @project.name
+%span.project_name= @project.name
 / = image_tag("improve.png")    
 - if signed_in?
   .blackbut

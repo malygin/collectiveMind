@@ -10,6 +10,17 @@ class Core::ProjectsController < ApplicationController
     end
   end
 
+  def to_project
+    @project = Core::Project.find(params[:project]) 
+    if [0,1,2].include? @project.status 
+      redirect_to life_tape_posts_path(@project)
+    elsif @project.status == 3
+      redirect_to discontent_posts_path(@project)
+
+    end
+
+  end
+
   # GET /core/projects/1
   # GET /core/projects/1.json
   def show

@@ -5,6 +5,7 @@ namespace :core, :shallow => true do
   resources :projects 
 end
 
+match "/project/:project", :to => "core/projects#to_project"
 
 scope "/project/:project" do
   namespace :discontent do
