@@ -2,7 +2,7 @@
 class PostsController < ApplicationController
   before_filter :authenticate, :only => [:new, :create, :edit, :update, 
     :plus, :plus_comment, :add_comment, :destroy, :vote_list]
-  before_filter :prepare_data, :only => [:index, :new, :edit, :show, :vote_list]
+  before_filter :prepare_data, :only => [:index, :new, :edit, :show, :show_essay, :vote_list, :essay_list]
   # before_filter :authorized_user, :only => :destroy
 
 def current_model
@@ -70,6 +70,17 @@ def index
     end
   end
 
+  def show_essay
+    @post = Essay::Post.find(params[:id])
+     @post.update_column(:number_views, @post.number_views+1)
+
+    @comment = Essay::Comment.new  
+    respond_to do |format|
+      format.html # show.html.erb
+      format.json { render json: @post }
+    end
+  end
+
   # GET /discontent/posts/new
   # GET /discontent/posts/new.json
   def new
@@ -89,24 +100,28 @@ def index
   # POST /discontent/posts
   # POST /discontent/posts.json
   def create
-    @post = current_model.new(params[name_of_model_for_param])
-    @project = Core::Project.find(params[:project]) 
-    @post.project = @project
-    @post.user = current_user
-    if current_model.column_names.include? status
-      @post.status = 0
-    end
-    respond_to do |format|
-      if @post.save
-        format.html {
-          flash[:notice] = 'Success!'
-          redirect_to  :action=>'show', :id => @post.id, :project => @project  }
-        format.json { render json: @post, status: :created, location: @post }
-      else
-        format.html { render action: "new" }
-        format.json { render json: @post.errors, status: :unprocessable_entity }
+      @project = Core::Project.find(params[:project]) 
+      @post = current_model.new(params[name_of_model_for_param])
+      @post.project = @project
+      @post.user = current_user
+      unless params[:stage].nil?
+        @post.stage = params[:stage]
       end
-    end
+      if current_model.column_names.include? status
+        @post.status = 0
+      end
+      respond_to do |format|
+        if @post.save
+          format.html {
+            flash[:succes] = 'Успешно добавлено!'
+            redirect_to  :action=>'show', :id => @post.id, :project => @project  }
+          format.json { render json: @post, status: :created, location: @post }
+        else
+          format.html { render action: "new" }
+          format.json { render json: @post.errors, status: :unprocessable_entity }
+        end
+      end
+    
   end
 
   # PUT /discontent/posts/1
@@ -159,6 +174,12 @@ def index
   def vote_list
     @posts = voting_model.where(:project_id => @project)
   end
+
+  def essay_list
+    @posts = Essay::Post.where(:stage => 1)
+    @post = Essay::Post.new
+  end
+
   #write fact of voting in db
   def vote
     v = voting_model.find(params[:post_id])

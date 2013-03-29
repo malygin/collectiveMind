@@ -24,9 +24,21 @@ scope "/project/:project" do
           end
     end
    end
+   scope "/stage/:stage" do
+     namespace :essay do    
+      resources :posts do
+            member do
+                put :add_comment
+                put :plus
+                put :plus_comment
+            end
+      end
+     end
+  end
 
   namespace :life_tape do
     get 'vote_list'  => "posts#vote_list"
+
     put 'vote/:post_id'  => "posts#vote"
     resources :posts do    
       member do

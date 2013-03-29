@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130327075235) do
+ActiveRecord::Schema.define(:version => 20130329090527) do
 
   create_table "answers", :force => true do |t|
     t.string   "text"
@@ -224,6 +224,45 @@ ActiveRecord::Schema.define(:version => 20130327075235) do
   end
 
   add_index "discontent_posts", ["project_id"], :name => "index_discontent_posts_on_project_id"
+
+  create_table "essay_comment_voitings", :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "comment_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  add_index "essay_comment_voitings", ["comment_id"], :name => "index_essay_comment_voitings_on_comment_id"
+
+  create_table "essay_comments", :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "post_id"
+    t.text     "content"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  add_index "essay_comments", ["post_id"], :name => "index_essay_comments_on_post_id"
+
+  create_table "essay_post_voitings", :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "post_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  add_index "essay_post_voitings", ["post_id"], :name => "index_essay_post_voitings_on_post_id"
+
+  create_table "essay_posts", :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "project_id"
+    t.text     "content"
+    t.integer  "status"
+    t.integer  "stage"
+    t.datetime "created_at",                  :null => false
+    t.datetime "updated_at",                  :null => false
+    t.integer  "number_views", :default => 0
+  end
 
   create_table "estimate_comment_voitings", :force => true do |t|
     t.integer  "user_id"

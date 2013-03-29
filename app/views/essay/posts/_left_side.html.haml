@@ -1,0 +1,10 @@
+/ -#.redtitle Cферы недовольств
+/ - @categories.each do |category|
+/ 	%a{:href  => life_tape_path(category.id), :class => 'topic'}
+/ 		%div.topics
+/ 			%p.greentitle= "#{category.name} (#{category.posts.count})"			
+/ 			%p.righttext= category.short_desc
+
+
+
+

@@ -1,0 +1,31 @@
+
+/ .inspire= link_to image_tag('inspire.png'),  new_child_life_tape_post_path
+
+/ = render @life_tape_post
+
+/ / - if signed_in?
+/ / 	%br
+/ / 	= link_to image_tag("concept.png"),  '/concept/posts/new?idea='+ @life_tape_post.id.to_s
+/ / 	%br
+
+/ - if signed_in?
+/ 	= render :partial => 'shared/comment_form', :locals => { :comment => @comment, :url_link => add_comment_life_tape_post_path(@life_tape_post.id)}
+	
+/ = render :partial => 'shared/comment',:collection => @life_tape_post.comments, :locals => { :path_link => '/life_tape/comments/'}
+
+/ - unless @life_tape_post.post.nil?
+/ 	.redtitle Этой запись вдохновлена следующей записью
+/ 	= render @life_tape_post.post
+
+/ - unless @life_tape_post.childs.empty?
+/ 	.redtitle Этой записью были вдохновлены следующие записи
+/ 	- @life_tape_post.childs.each do |post|
+/ 		=render post
+
+
+= render 'shared/post', :post => @post
+
+- if signed_in?
+  = render :partial => 'shared/comment_form', :locals => { :comment => @comment, :url_link => add_comment_life_tape_post_path(@post.id)}
+
+= render :partial => 'shared/comment',:collection => @post.comments, :locals => { :path_link => '/life_tape/comments/'}

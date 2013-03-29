@@ -1,0 +1,18 @@
+= form_for @post,:url => {:project => @project.id, :action => @post.persisted? ? 'update' : 'create'},  :html => { :class => 'new_or_edit' } do |f|
+  / -if @post.errors.any?
+  /   #error_explanation
+  /     %h2= "#{pluralize(@post.errors.count, "error")} prohibited this post from being saved:"
+  /     %ul
+  /       - @post.errors.full_messages.each do |msg|
+  /         %li= msg
+
+  %field
+    = f.text_area :content, class: "post"
+    / = f.hidden_field :project, :value=> @project.id
+    / = select_tag 'category', options_from_collection_for_select(@categories, "id", "name"), :prompt => "Выберите категорию"
+
+    %br
+
+  %br
+  .actions
+    = f.submit "",   id: "Send"

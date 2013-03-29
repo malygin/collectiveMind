@@ -1,3 +1,4 @@
+- show_post||=:show
 .wholePost
 	= render 'users/user_post', :user => post.user
 	.posts
@@ -5,7 +6,7 @@
 		- if not current_page?(url_for(params.merge(:project => @project, :id => post.id))) 
 			%p
 				= trim_string(post.content)
-				= link_to "Подробнее",  {:action => :show, :project => @project, :id => post.id}, class: "more"
+				= link_to "Подробнее",  {:action => show_post, :project => @project, :id => post.id}, class: "more"
 		-else
 			%p= post.content
 			
