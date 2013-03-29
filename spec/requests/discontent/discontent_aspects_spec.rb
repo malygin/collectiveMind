@@ -6,7 +6,7 @@ describe "Discontent::Aspects" do
   subject {page}
   let(:user) { FactoryGirl.create(:user) }
   let(:admin) { FactoryGirl.create(:admin) }
-  let(:project) { FactoryGirl.create(:project) }
+  let(:project) { FactoryGirl.create(:project, status: 1) }
   let(:aspect) {FactoryGirl.create(:aspect, project: project)}
   
   describe "GET index" do

@@ -20,7 +20,9 @@ class User < ActiveRecord::Base
 
   has_many :life_tape_posts, :class_name => "LifeTape::Post"
   has_many :concept_posts, :class_name => "Concept::Post"
-
+  
+  has_many :aspect_voitings, :class_name => "LifeTape::Voiting"
+  has_many :voted_aspects, :through => :aspect_voitings, :source => :discontent_aspect, :class_name => "Discontent::Aspect"
   has_many :user_awards
   has_many :awards, :through => :user_awards  
 

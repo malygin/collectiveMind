@@ -2,7 +2,12 @@ CollectiveMind::Application.routes.draw do
 
 
 namespace :core, :shallow => true do 
-  resources :projects 
+  resources :projects do
+    member do
+      get :next_stage
+      get :pr_stage
+    end
+  end 
 end
 
 match "/project/:project", :to => "core/projects#to_project"
@@ -21,18 +26,13 @@ scope "/project/:project" do
    end
 
   namespace :life_tape do
-    # Directs /admin/products/* to Admin::ProductsController
-    # (app/controllers/admin/products_controller.rb)
-    # get "category/:cat_id" => 'posts#category'
-    resources :posts do
+    get 'vote_list'  => "posts#vote_list"
+    put 'vote/:post_id'  => "posts#vote"
+    resources :posts do    
       member do
-          # get :new_child
-          # put :create_child
-
           put :add_comment
           put :plus
           put :plus_comment
-
       end
     end
   end

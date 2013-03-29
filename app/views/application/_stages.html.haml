@@ -6,10 +6,10 @@
     = image_tag "space.png", :class => "space" 
    
     %li{ :class => 'vote_active'}
-      - unless stage_vote?('life_tape_post')
+      - unless stage_vote?('life_tape')
         = image_tag "vote_dis.png", class: "lstages", :title => 'Голосование за аспекты'
       -else
-        = link_to image_tag("vote.png", class: 'lstages', :title => 'Голосование за аспекты'), life_tape_posts_path(@project)
+        = link_to image_tag("vote.png", class: 'lstages', :title => 'Голосование за аспекты'), life_tape_vote_list_path(@project), id: 'vote_stage'
    
     = image_tag "space.png" , :class => "space" 
     %li{ :class => cp('discontent')}

@@ -1,8 +1,8 @@
 # encoding: utf-8
 class PostsController < ApplicationController
   before_filter :authenticate, :only => [:new, :create, :edit, :update, 
-    :plus, :plus_comment, :add_comment, :destroy]
-  before_filter :prepare_data, :only => [:index, :new, :edit, :show]
+    :plus, :plus_comment, :add_comment, :destroy, :vote_list]
+  before_filter :prepare_data, :only => [:index, :new, :edit, :show, :vote_list]
   # before_filter :authorized_user, :only => :destroy
 
 def current_model
@@ -23,6 +23,10 @@ end
 
 def root_model_path(project)
     life_tape_posts_path(project)
+end
+
+def voting_model  
+  Discontent::Post
 end
 
 def prepare_data
@@ -150,4 +154,16 @@ def index
     render json:comment.users.count 
   end
   
+### function for voiting
+  #return list model for voiting, check stages
+  def vote_list
+    @posts = voting_model.where(:project_id => @project)
+  end
+  #write fact of voting in db
+  def vote
+    v = voting_model.find(params[:post_id])
+    v.final_voitings.create(:user => current_user)
+    render json: 5
+  end
+
 end

@@ -1,0 +1,7 @@
+%h1 Голосование за аспекты
+
+Количество имеющихся голосов - 
+%span.rate
+	%span#count_vote=count_available_voiting(current_user.voted_aspects.size)
+
+= render :partial => 'shared/post_for_vote', :collection => @posts,  :locals => { :path_for_voting => "/project/#{@project.id}/life_tape/vote/", :count_voted => current_user.voted_aspects.size}

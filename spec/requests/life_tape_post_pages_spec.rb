@@ -6,7 +6,7 @@ describe "pages: " do
 
   let(:user) { FactoryGirl.create(:user) }
   let(:admin) { FactoryGirl.create(:admin) }
-  let(:project) { FactoryGirl.create(:project) }
+  let(:project) { FactoryGirl.create(:project, status: 1) }
   let(:post){FactoryGirl.create(:life_tape_post, user: user, project: project)}
   let(:post_admin){FactoryGirl.create(:life_tape_post, user: admin, project: project)}
   
@@ -82,6 +82,61 @@ describe "pages: " do
 
   end
 
+  describe "change stage by admin" do
+
+    it "should not have link for change stage for unknown and ordinary user" do
+      visit life_tape_posts_path(project)
+      should_not have_css('a#change_stage')
+      sign_in user
+      visit life_tape_posts_path(project)
+      should_not have_css('a#change_stage')
+    end
+
+    it "should have link and othe stuff for admin" do
+      sign_in admin
+      visit life_tape_posts_path(project)
+      click_link "change_stage"
+      click_link "vote_stage"
+      should have_content "Голосование за аспекты"
+
+    end
+  end
+
+  describe "vote for aspects" do
+    before do
+      sign_in admin
+      visit life_tape_posts_path(project)
+      click_link "change_stage"
+      click_link "vote_stage"
+       aspect1 = FactoryGirl.create(:aspect, project: project)
+       aspect2  = FactoryGirl.create(:aspect, project: project)
+
+    end
+
+    it "should not have opportunity for vote for unknown user" do
+      sign_out
+      visit life_tape_posts_path(project)
+      click_link "vote_stage"
+      should_not have_css 'a.voteCounter'
+
+    end
+    it "should have opportunity for vote for ordinary user" do
+      sign_in user
+      visit life_tape_posts_path(project)
+      click_link "vote_stage"
+      should have_css 'a.voteCounter'
+    end
+
+    it "should have normal process of voting" , :js=>true do
+      sign_in user
+      visit life_tape_posts_path(project)
+      click_link "vote_stage"
+      should have_content('голосов - 5')
+      click_link "aspect_1"
+      should_not have_css "a#aspect_1"
+      should have_content('голосов - 4')
+    end
+  end
 
 
 end

@@ -44,14 +44,3 @@ $(document).ready ->
   $("#frustration_when").keydown updateCountdown
   $("#frustration_when").keypress updateCountdown
 
-$(document).ready ->
-    $(".voteBar")
-      .bind "ajax:success", (event, resp) ->
-        $(this).replaceWith "Вы проголосовали, спасибо!"    
-      .bind "ajax:error", (event, resp) ->
-        $(this).replaceWith ""+resp 
-    $(".scoreBar")
-      .bind "ajax:success", (event, resp) ->
-        $(this).replaceWith "Вы выдали баллы, спасибо!"    
-      .bind "ajax:error", (event, resp) ->
-        $(this).replaceWith ""+resp

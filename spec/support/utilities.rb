@@ -10,3 +10,8 @@ def sign_in(user)
   # Sign in when not using Capybara.
   cookies[:remember_token] = [user.id, user.salt]
 end
+
+def sign_out
+  visit signout_path
+  
+end

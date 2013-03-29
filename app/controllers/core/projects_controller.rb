@@ -1,6 +1,8 @@
 class Core::ProjectsController < ApplicationController
   # GET /core/projects
   # GET /core/projects.json
+  before_filter :boss_authenticate, :only => [:next_stage, :pr_stage]
+  
   def index
     @core_projects = Core::Project.all
 
@@ -91,4 +93,17 @@ class Core::ProjectsController < ApplicationController
       format.json { head :no_content }
     end
   end
+
+  def next_stage
+    @core_project = Core::Project.find(params[:id])
+    @core_project.update_column(:status, @core_project.status + 1)
+    redirect_to :back
+  end  
+
+  def pr_stage
+    @core_project = Core::Project.find(params[:id])
+    @core_project.update_column(:status, @core_project.status - 1)
+    redirect_to :back
+  end
+
 end

@@ -10,6 +10,10 @@ class LifeTape::PostsController < PostsController
     LifeTape::Comment
   end
 
+  def voting_model
+    Discontent::Aspect
+  end
+
  #  # GET /life_tape/posts
  #  # GET /life_tape/posts.json
  #  before_filter :authenticate, :only => [:create, :new]
@@ -23,7 +27,6 @@ class LifeTape::PostsController < PostsController
  #  end
 
   def index
-  	prepare_data
     @posts_user = LifeTape::Post.includes(:user).where(:project_id => @project).where("users.admin = ? and users.expert = ?", false, false)
     @posts_facil = LifeTape::Post.includes(:user).where(:project_id => @project).where("users.admin = ? or users.expert = ?", true, true)
     @aspects = Discontent::Aspect.where(:project_id => @project)
