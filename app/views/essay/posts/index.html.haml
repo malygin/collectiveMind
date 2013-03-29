@@ -1,3 +1,4 @@
 
-
+- unless current_user.have_essay_for_stage(@stage)
+	=link_to 'Добавить свой отзыв об этапе', new_essay_post_path(@project, @stage)
 =render :partial => 'shared/post', :collection => @posts

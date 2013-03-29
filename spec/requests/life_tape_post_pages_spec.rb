@@ -110,6 +110,9 @@ describe "pages: " do
       click_link "vote_stage"
        aspect1 = FactoryGirl.create(:aspect, project: project)
        aspect2  = FactoryGirl.create(:aspect, project: project)
+       aspect3  = FactoryGirl.create(:aspect, project: project)
+       aspect4  = FactoryGirl.create(:aspect, project: project)
+       aspect5  = FactoryGirl.create(:aspect, project: project)
 
     end
 
@@ -118,6 +121,7 @@ describe "pages: " do
       visit life_tape_posts_path(project)
       click_link "vote_stage"
       should_not have_css 'a.voteCounter'
+      should_not have_css 'a#essay_list'
 
     end
     it "should have opportunity for vote for ordinary user" do
@@ -134,7 +138,36 @@ describe "pages: " do
       should have_content('голосов - 5')
       click_link "aspect_1"
       should_not have_css "a#aspect_1"
-      should have_content('голосов - 4')
+      should have_content('голосов - 4')      
+      should_not have_css 'a#essay_list'
+    
+      click_link "aspect_2"
+      should_not have_css "a#aspect_2"
+      should have_content('голосов - 3')
+      should_not have_css 'a#essay_list'
+
+      click_link "aspect_3"
+      should_not have_css "a#aspect_3"
+      should have_content('голосов - 2')      
+      should_not have_css 'a#essay_list'
+
+      click_link "aspect_4"
+      should_not have_css "a#aspect_4"
+      should have_content('голосов - 1')
+      should_not have_css 'a#essay_list'
+
+      click_link "aspect_5"
+      should_not have_css "a#aspect_5"
+      should have_content('голосов - 0')
+
+      should have_content 'Спасибо за участие в голосовании!'
+
+      click_link 'essay_list'
+      should have_content 'Добавить свое эссе'
+
+      
+
+
     end
   end
 

@@ -17,8 +17,13 @@ class User < ActiveRecord::Base
 
   has_many :life_tape_comment_voitings
   has_many :life_tape_comments, :through => :life_type_comment_voitings
-
   has_many :life_tape_posts, :class_name => "LifeTape::Post"
+
+  has_many :essay_posts, :class_name => "Essay::Post"
+
+
+
+
   has_many :concept_posts, :class_name => "Concept::Post"
   
   has_many :aspect_voitings, :class_name => "LifeTape::Voiting"
@@ -75,6 +80,11 @@ class User < ActiveRecord::Base
     else 
       "студент"
     end
+  end
+
+  def have_essay_for_stage(stage)
+    # puts self.essay_posts.where(:stage => stage)
+    !self.essay_posts.where(:stage => stage).empty?
   end
       
 

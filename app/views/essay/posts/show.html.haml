@@ -24,7 +24,7 @@
 
 
 = render 'shared/post', :post => @post
-
+= link_to 'К списку', essay_posts_path(@project, @stage)
 - if signed_in?
   = render :partial => 'shared/comment_form', :locals => { :comment => @comment, :url_link => add_comment_essay_post_path(@post.id)}
 
