@@ -13,18 +13,8 @@ end
 match "/project/:project", :to => "core/projects#to_project"
 
 scope "/project/:project" do
-  namespace :discontent do
-    resources :aspects
-    
-    resources :posts do
-          member do
-              put :add_comment
-              put :plus
-              put :plus_comment
-          end
-    end
-   end
-   scope "/stage/:stage" do
+
+  scope "/stage/:stage" do
      namespace :essay do    
       resources :posts do
             member do
@@ -36,9 +26,30 @@ scope "/project/:project" do
      end
   end
 
+  namespace :discontent do
+    resources :aspects
+    get 'vote_list'  => "posts#vote_list"
+    put 'vote/:post_id'  => "posts#vote"    
+    scope "/status/:status/aspect/:aspect",  :defaults => {:status => 0, :aspect => 0} do
+      resources :posts do
+            member do
+                put :add_comment
+                put :plus
+                put :plus_comment
+                get :to_expert
+                put :to_expert_save  
+                get :expert_rejection
+                put :expert_rejection_save 
+                get :expert_revision
+                put :expert_revision_save
+                get :expert_acceptance_save
+            end
+      end
+    end
+   end
+
   namespace :life_tape do
     get 'vote_list'  => "posts#vote_list"
-
     put 'vote/:post_id'  => "posts#vote"
     resources :posts do    
       member do

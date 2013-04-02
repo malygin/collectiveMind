@@ -131,39 +131,39 @@ describe "pages: " do
       should have_css 'a.voteCounter'
     end
 
-    it "should have normal process of voting" , :js=>true do
+    it "should have normal process of voting" do
       sign_in user
       visit life_tape_posts_path(project)
       click_link "vote_stage"
       should have_content('голосов - 5')
-      click_link "aspect_1"
+      click_link "aspect_1",  :js=>true 
       should_not have_css "a#aspect_1"
       should have_content('голосов - 4')      
-      should_not have_css 'a#essay_list'
+      # should_not have_css 'a#essay_list'
     
-      click_link "aspect_2"
+      click_link "aspect_2", :js=>true 
       should_not have_css "a#aspect_2"
       should have_content('голосов - 3')
-      should_not have_css 'a#essay_list'
+      # should_not have_css 'a#essay_list'
 
-      click_link "aspect_3"
+      click_link "aspect_3", :js=>true 
       should_not have_css "a#aspect_3"
       should have_content('голосов - 2')      
-      should_not have_css 'a#essay_list'
+      # should_not have_css 'a#essay_list'
 
-      click_link "aspect_4"
+      click_link "aspect_4", :js=>true 
       should_not have_css "a#aspect_4"
       should have_content('голосов - 1')
-      should_not have_css 'a#essay_list'
+      # should_not have_css 'a#essay_list'
 
-      click_link "aspect_5"
+      click_link "aspect_5", :js=>true 
       should_not have_css "a#aspect_5"
       should have_content('голосов - 0')
 
-      should have_content 'Спасибо за участие в голосовании!'
-
+      should have_content 'Вы проголосовали, спасибо!'
+      should_not have_content 'проголосовать'
       click_link 'essay_list'
-      should have_content 'Добавить свое эссе'
+      should have_content 'Добавить свой отзыв об этапе'
 
       
 

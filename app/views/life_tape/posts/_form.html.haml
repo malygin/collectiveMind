@@ -8,8 +8,7 @@
 
   %field
     = f.text_area :content, class: "post"
-    / = f.hidden_field :project, :value=> @project.id
-    / = select_tag 'category', options_from_collection_for_select(@categories, "id", "name"), :prompt => "Выберите категорию"
+
 
     %br
 

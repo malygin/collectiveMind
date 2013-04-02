@@ -17,5 +17,6 @@
     = f.label 'где'
     = f.text_area :where
 
+  = select_tag 'aspect_select', options_from_collection_for_select(@aspects, "id", "content"), :prompt => "Выберите аспект"
   .actions
     = f.submit ''

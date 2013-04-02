@@ -14,24 +14,34 @@ module ApplicationHelper
 # 9 - estimate
 # 10 - final vote
 # 11 - wait for	
+	def menu_status(st)
+		if request.fullpath.include? "status/#{st}" 
+			'current'
+		end
+	end
+	
 	def cp( stage)
 		if stage =='life_tape' and ( [0,1].include? @project.status)
 			'current'
+  		elsif stage == 'discontent' and (@project.status == 3)
+  			'current'
   		end
 	end
 
 	def stage_vote?(stage)
 		if stage =='life_tape' and (@project.status==2)
 			true
+		elsif stage =='discontent' and (@project.status==4)
+			true
 		else
 			false
-		end
-
-  		
+		end 		
 	end
 
 	def image_for_stages(image,  stage)
 		if stage =='life_tape' and ([0,1].include? @project.status)    
+		    return image+'green.png'  
+		 elsif stage == 'discontent' and (@project.status == 3)
 		    return image+'green.png'  
 		else
 		  return  image+'.png' 
@@ -45,11 +55,14 @@ def  status_title(pr)
 			when 1
 				'сбор информации'
 			when 2
-				'голосование за аспекты и рефлексия'
+				'голосование за аспекты и рефлексия'			
+			when 3
+				'сбор недовольств'			
+			when 4
+				'голосование за недовольства и рефлексия'
 			when 20
 				'завершена'
-		
-
+	
 			else
 				'завершена'
 		end 

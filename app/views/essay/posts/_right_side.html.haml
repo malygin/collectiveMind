@@ -3,20 +3,20 @@
 	%br
 	%span.rate= status_title(@project.status)
 	%br
-	-if @project.status == 1
-		=link_to 'Начать голосование',  next_stage_core_project_path(@project), id: 'change_stage'
-	-if @project.status == 2
-		=link_to 'Остановить голосование',  pr_stage_core_project_path(@project), id: 'change_stage'
+	/ -if @project.status == 1
+	/ 	=link_to 'Начать голосование',  next_stage_core_project_path(@project), id: 'change_stage'
+	/ -if @project.status == 2
+	/ 	=link_to 'Остановить голосование',  pr_stage_core_project_path(@project), id: 'change_stage'
 
-%br
-- if @project.status == 2
-	.error срочно идите голосовать и рефлексировать
+/ %br
+/ - if @project.status == 2
+/ 	.error срочно идите голосовать и рефлексировать
 
-- if @project.status == 1
-	%h1 Список аспектов
-	= render :partial => 'discontent/aspects/aspect', :collection => @aspects
-	-if boss? 
-		%p.righttext= link_to 'добавить аспект', new_discontent_aspect_path, id: "add_aspect"
+/ - if @project.status == 1
+/ 	%h1 Список аспектов
+/ 	= render :partial => 'discontent/aspects/aspect', :collection => @aspects
+/ 	-if boss? 
+/ 		%p.righttext= link_to 'добавить аспект', new_discontent_aspect_path, id: "add_aspect"
 
 / - unless @news.nil?
 / 	%h1 Новости

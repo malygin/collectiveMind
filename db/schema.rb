@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130329090527) do
+ActiveRecord::Schema.define(:version => 20130402082007) do
 
   create_table "answers", :force => true do |t|
     t.string   "text"
@@ -200,6 +200,16 @@ ActiveRecord::Schema.define(:version => 20130329090527) do
     t.datetime "updated_at", :null => false
   end
 
+  create_table "discontent_post_notes", :force => true do |t|
+    t.integer  "post_id"
+    t.integer  "user_id"
+    t.text     "content"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  add_index "discontent_post_notes", ["post_id"], :name => "index_discontent_post_notes_on_post_id"
+
   create_table "discontent_post_voitings", :force => true do |t|
     t.integer  "user_id"
     t.integer  "post_id"
@@ -221,8 +231,10 @@ ActiveRecord::Schema.define(:version => 20130329090527) do
     t.datetime "updated_at",                  :null => false
     t.integer  "number_views", :default => 0
     t.integer  "project_id"
+    t.integer  "aspect_id"
   end
 
+  add_index "discontent_posts", ["aspect_id"], :name => "index_discontent_posts_on_aspect_id"
   add_index "discontent_posts", ["project_id"], :name => "index_discontent_posts_on_project_id"
 
   create_table "essay_comment_voitings", :force => true do |t|

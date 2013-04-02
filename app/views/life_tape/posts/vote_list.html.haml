@@ -1,5 +1,5 @@
 %h1 Голосование за аспекты
-%br=link_to 'Вы можете оставить свое мнение или почитать другие', essay_posts_path(@project, 1)
+%br=link_to 'Вы можете оставить свое мнение или почитать другие', essay_posts_path(@project, 1), :id => 'essay_list'
 
 - unless count_available_voiting(current_user.voted_aspects.size)<1
 	Количество имеющихся голосов - 

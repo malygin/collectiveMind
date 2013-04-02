@@ -3,8 +3,7 @@
     %li{ :class => cp('life_tape')}
       = image_tag image_for_stages('1', 'life_tape'), :class => 'numbers'
       = link_to "Начало процедуры", life_tape_posts_path(@project), class: "lstages"  
-    = image_tag "space.png", :class => "space" 
-   
+    = image_tag "space.png", :class => "space"    
     %li{ :class => 'vote_active'}
       - unless stage_vote?('life_tape')
         = image_tag "vote_dis.png", class: "lstages", :title => 'Голосование за аспекты'
@@ -12,15 +11,19 @@
         = link_to image_tag("vote.png", class: 'lstages', :title => 'Голосование за аспекты'), life_tape_vote_list_path(@project), id: 'vote_stage'
    
     = image_tag "space.png" , :class => "space" 
+
     %li{ :class => cp('discontent')}
       = image_tag image_for_stages('2', 'discontent'), :class => 'numbers'
       = link_to "Несовершенства", discontent_posts_path(@project), class: "lstages" 
-    = image_tag "space.png", :class => "space" 
-   
+    = image_tag "space.png", :class => "space"    
     %li{ :class => 'vote_active'}
-      = image_tag "vote_dis.png", class: "lstages"  
+      - unless stage_vote?('discontent')
+        = image_tag "vote_dis.png", class: "lstages"
+      -else
+        = link_to image_tag("vote.png", class: 'lstages', :title => 'Сбор недовольств'), discontent_vote_list_path(@project), id: 'vote2_stage'  
 
     = image_tag "space.png", :class => "space"   
+
     %li{ :class => cp('concept')}
       = image_tag image_for_stages('3', 'concept'), :class => 'numbers'
       = link_to "Концепции", "/concept/forecast/", class: "lstages" 

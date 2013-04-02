@@ -107,7 +107,10 @@ def index
       unless params[:stage].nil?
         @post.stage = params[:stage]
       end
-      if current_model.column_names.include? status
+      unless params[:aspect_select].nil?
+        @post.aspect_id = params[:aspect_select]        
+      end
+      if current_model.column_names.include? 'status'
         @post.status = 0
       end
       respond_to do |format|
