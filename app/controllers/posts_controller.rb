@@ -9,6 +9,10 @@ def current_model
 	Post
 end
 
+def note_model
+  PostNote
+end
+
 def comment_model
 	Comment
 end
@@ -189,5 +193,59 @@ def index
     v.final_voitings.create(:user => current_user)
     render json: 5
   end
+
+### function for dialog with expert
+
+
+  def to_expert
+    prepare_data
+    @note = Concept::PostNote.new
+  end 
+
+  def expert_rejection
+    prepare_data
+    @note = Concept::PostNote.new
+  end 
+  
+  def expert_revision
+    prepare_data
+    @note = Concept::PostNote.new
+  end 
+
+  def save_note(params, status, message, type_event)
+    post = current_model.find(params[:id])
+    if !params[:post_note].nil? and params[:post_note][:content]!= ''
+      @note = note_model.new(params[:post_note])
+      @note.post = post
+      @note.user = current_user
+      @note.save
+    end
+    post.update_column(:status, status)
+    # current_user.journals.build(:type_event=>type_event, :body=>concept.id).save!
+    flash[:notice]=message
+    post
+  end
+
+  def to_expert_save
+    save_note(params, 1, 'Концепция отправлена эксперту!','concept_post_to_expert' )
+    redirect_to  action: "index"    
+  end
+
+  def expert_rejection_save
+    save_note(params, 3, 'Концепция отклонена!','concept_post_rejection' )
+    redirect_to  action: "index"
+  end
+
+  def expert_acceptance_save
+    concept = save_note(params, 2, 'Концепция принята!','concept_post_acceptance' )
+    # concept.user.update_column(:score, concept.user.score + 200)
+    redirect_to  action: "index"
+  end
+
+  def expert_revision_save
+    save_note(params, 0, 'Концепция отправлена на доработку!','concept_post_revision' )
+    redirect_to  action: "index"
+  end
+
 
 end

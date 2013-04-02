@@ -1,0 +1,6 @@
+= form_for @note, :url => to_expert_save_concept_post_path, :method => :put  do |f|
+	Добавьте, если нужно комментарий для эксперта и нажмите отправить
+	.field
+		=f.text_area :content
+	.action
+		=f.submit '', class: 'btn'

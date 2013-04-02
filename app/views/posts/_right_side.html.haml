@@ -1,0 +1,58 @@
+-if boss? 
+	текущий статус проекта
+	%br
+	%span.rate= status_title(@project.status)
+	%br
+	-if @project.status == 1
+		=link_to 'Начать голосование',  next_stage_core_project_path(@project), id: 'change_stage'
+	-if @project.status == 2
+		=link_to 'Вернуться к началу процедуры',  pr_stage_core_project_path(@project), id: 'change_stage'
+		%br
+		=link_to 'Начать сбор недовольств',  next_stage_core_project_path(@project), id: 'change_stage'
+
+%br
+- if @project.status == 2
+	.error срочно идите голосовать и рефлексировать
+
+- if @project.status == 1
+	%h1 Список аспектов
+	= render :partial => 'discontent/aspects/aspect', :collection => @aspects
+	-if boss? 
+		%p.righttext= link_to 'добавить аспект', new_discontent_aspect_path, id: "add_aspect"
+
+/ - unless @news.nil?
+/ 	%h1 Новости
+/ 	%p.righttext
+/ 		= @news.anons
+/ 		= link_to 'подробнее', @news
+
+/ %h1 Тех. поддержка
+/ %p.righttext
+/ 	Что-то непонятно? 
+/ 	= link_to 'Задайте вопрос', questions_path
+
+/ .redtitle Топ записей
+/ - @top_posts.each do |post|
+/ 	%p.righttext
+/ 		= trim_string(post.content, 100)
+/ 		= link_to "подробнее", post
+/ 	=image_tag('dots.png')
+
+/ .redtitle Рекомендованные вам
+
+/ %p.righttext
+/ 	Я думаю мы недостаточно внимания уделяем возможности привлечения преподавателей не из СГУ. Ведь мы обучаемся дистанционно и могли бы иметь возможность работать с преподавателями из любой точки мира.
+/ 	= link_to "подробнее", '/life_tape/posts/61'
+
+
+/ -unless @journals.nil?
+/ 	.redtitle Активность
+/ 	- @journals.each do |journal|
+/ 		%p.righttext
+/ 			=Russian::strftime(journal.created_at,"%d %B %k:%M:%S ")
+/ 			%b= journal.user.name_title
+/ 			= journal_parser(journal).html_safe
+/ 		=image_tag('dots.png')
+
+
+

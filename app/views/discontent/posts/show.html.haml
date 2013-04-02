@@ -10,7 +10,7 @@
     = render 'shared/post_social_bar', :post => @post
 
 
-= link_to 'Edit', edit_discontent_post_path(@post)
+= link_to 'Edit', edit_discontent_post_path(@project, @post)
 \|
 = link_to 'Back', discontent_posts_path
 
