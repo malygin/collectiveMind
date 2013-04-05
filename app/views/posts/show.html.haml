@@ -1,13 +1,43 @@
+%p#notice= notice
 
-= render 'shared/post', :post => @post
+-unless @post.post.nil?
+  = link_to 'Замещаем', :action => 'show', :project => @project, :id => @post.post.id
+- if @post.status == 2 
+  = link_to 'Переопределяем', :action => 'new', :project => @project, :replace_id => @post.id
 
-- if boss? or @post.user == current_user
-  = @project.id
-  = link_to 'Редактировать', edit_polymorphic_url([@project, @post]), id: "edit_post"
-\|
+.wholePost
+  = render 'users/user_post', :user => @post.user
+  .posts
+    = render 'users/user_name', :user => @post.user, :created_at => @post.created_at
+    %p
+      %br= @post.content
+   
+    = render 'shared/post_social_bar', :post => @post
+
+- if current_user?(@post.user) and @post.status == 0
+  = link_to 'Послать эксперту', url_for(:action => 'to_expert')
+- if boss? and @post.status == 1
+  = link_to 'Отправить на доработку', url_for(:action => 'expert_revision')
+  \|
+  = link_to 'Отклонить', url_for(:action => 'expert_rejection')
+  \|
+  = link_to 'Принять', url_for(:action => 'expert_acceptance_save')
+
+%br
+- if (current_user?(@post.user) or boss?) and @post.status == 0
+  = link_to 'Редактировать', :action => 'edit', :project => @project, :id => @post.id
+  \|
+  = link_to 'В архив', {:action => :to_archive, :id => @post.id}, :method => :put, :confirm => 'Точно?'
+%br
 = link_to 'Назад', url_for(:action => 'index')
 
-- if signed_in?
-  = render :partial => 'shared/comment_form', :locals => { :comment => @comment, :url_link => add_comment_life_tape_post_path(@post.id)}
+-unless @post.post_notes.empty?
+  %h1 Переписка с экспертом
+  =render :partial => 'shared/post_note', :collection => @post.post_notes
 
-= render :partial => 'shared/comment',:collection => @post.comments, :locals => { :path_link => '/life_tape/comments/'}
+
+
+- if signed_in?
+  = render :partial => 'shared/comment_form', :locals => { :comment => @comment, :url_link => add_comment_discontent_post_path(@post.id)}
+
+= render :partial => 'shared/comment',:collection => @post.comments, :locals => { :path_link => '/discontent/comments/'}

@@ -1,4 +1,4 @@
-= form_for @note, :url => to_expert_save_concept_post_path, :method => :put  do |f|
+= form_for @note, :url => url_for(:action => 'to_expert_save'), :method => :put  do |f|
 	Добавьте, если нужно комментарий для эксперта и нажмите отправить
 	.field
 		=f.text_area :content

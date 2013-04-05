@@ -1,5 +1,5 @@
 .redtitle Отклонение
-= form_for @note, :url => expert_rejection_save_concept_post_path, :method => :put  do |f|
+= form_for @note, :url => url_for(:action => 'expert_rejection_save'), :method => :put  do |f|
 	Добавьте причину отклонения и нажмите отправить
 	.field
 		=f.text_area :content

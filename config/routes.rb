@@ -31,11 +31,14 @@ scope "/project/:project" do
     get 'vote_list'  => "posts#vote_list"
     put 'vote/:post_id'  => "posts#vote"    
     scope "/status/:status/aspect/:aspect",  :defaults => {:status => 0, :aspect => 0} do
+      get 'replace/:replace_id/posts/new'  => "posts#new"    
+
       resources :posts do
             member do
                 put :add_comment
                 put :plus
                 put :plus_comment
+                put :to_archive
                 get :to_expert
                 put :to_expert_save  
                 get :expert_rejection

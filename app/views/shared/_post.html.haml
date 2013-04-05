@@ -12,8 +12,8 @@
 			
 		- if post.user == current_user 
 			%br
-			= link_to 'Редактировать', {:action => :edit, :project => @project, :id => post.id}
-			= link_to 'Отправить в архив', {:action => :destroy, :project => @project, :id => post.id}, :method => :delete, :data => { :confirm => 'Точно?' }
+			/ = link_to 'Редактировать', {:action => :edit, :project => @project, :id => post.id}
+			/ = link_to 'Отправить в архив', {:action => :destroy, :project => @project, :id => post.id}, :method => :delete, :data => { :confirm => 'Точно?' }
 
 		= render 'shared/post_social_bar', :post => post
 

@@ -111,9 +111,16 @@ def index
       unless params[:stage].nil?
         @post.stage = params[:stage]
       end
-      unless params[:aspect_select].nil?
-        @post.aspect_id = params[:aspect_select]        
+      
+      unless params[:aspect_id].nil?
+        @post.aspect_id = params[:aspect_id]        
       end
+
+      unless params[:replace_id].nil?
+        @post.replace_id = params[:replace_id]
+        
+      end
+
       if current_model.column_names.include? 'status'
         @post.status = 0
       end
@@ -139,7 +146,9 @@ def index
 
     respond_to do |format|
       if @post.update_attributes(params[name_of_model_for_param])
-
+        unless params[:aspect_id].nil?
+          @post.update_attribute(:aspect_id,params[:aspect_id])        
+        end
         format.html { 
           flash[:success] = 'Успешно добавлено!'
           redirect_to  :action=>'show', :project => @project, :id => @post.id}
@@ -163,6 +172,19 @@ def index
       format.json { head :no_content }
     end
   end
+
+  def to_archive
+    @post = current_model.find(params[:id])
+    @post.update_column(:status, 3)
+
+    @project = Core::Project.find(params[:project]) 
+
+    respond_to do |format|
+      format.html { redirect_to root_model_path(@project) }
+      format.json { head :no_content }
+    end
+  end
+
 #todo check if user already voted
   def plus
     post = current_model.find(params[:id])
@@ -213,9 +235,11 @@ def index
   end 
 
   def save_note(params, status, message, type_event)
+    puts '______________________________'
+    puts params
     post = current_model.find(params[:id])
-    if !params[:post_note].nil? and params[:post_note][:content]!= ''
-      @note = note_model.new(params[:post_note])
+    if !params[:concept_post_note].nil? and params[:concept_post_note][:content]!= ''
+      @note = note_model.new(params[:concept_post_note])
       @note.post = post
       @note.user = current_user
       @note.save

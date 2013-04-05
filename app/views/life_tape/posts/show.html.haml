@@ -1,0 +1,12 @@
+
+= render 'shared/post', :post => @post
+
+- if boss? or @post.user == current_user
+  = link_to 'Редактировать', :action => 'edit', :project => @project, :id => @post, id: "edit_post"
+\|
+= link_to 'Назад', url_for(:action => 'index')
+
+- if signed_in?
+  = render :partial => 'shared/comment_form', :locals => { :comment => @comment, :url_link => add_comment_life_tape_post_path(@post.id)}
+
+= render :partial => 'shared/comment',:collection => @post.comments, :locals => { :path_link => '/life_tape/comments/'}

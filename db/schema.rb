@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130402082007) do
+ActiveRecord::Schema.define(:version => 20130405151342) do
 
   create_table "answers", :force => true do |t|
     t.string   "text"
@@ -232,6 +232,7 @@ ActiveRecord::Schema.define(:version => 20130402082007) do
     t.integer  "number_views", :default => 0
     t.integer  "project_id"
     t.integer  "aspect_id"
+    t.integer  "replace_id"
   end
 
   add_index "discontent_posts", ["aspect_id"], :name => "index_discontent_posts_on_aspect_id"
