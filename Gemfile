@@ -29,8 +29,8 @@ group :development, :test do
   gem 'quiet_assets'
   gem 'grizzled-rails-logger'
 
-gem 'rspec'
-gem 'rspec-rails'
+  gem 'rspec'
+  gem 'rspec-rails'
   gem 'spork'
   gem 'spork-rails'
 

@@ -2,7 +2,7 @@
 #= require jquery_ujs
 #= require_tree .
 #= require tinymce
-#= require wymeditor/jquery.wymeditor.min
+#= require ../../../vendor/assets/javascripts/wymeditor/jquery.wymeditor.min
 
 #$(document).ready ->
 #  window.wiselinks = new Wiselinks()
