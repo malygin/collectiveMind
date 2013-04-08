@@ -18,6 +18,8 @@ class Core::ProjectsController < ApplicationController
       redirect_to life_tape_posts_path(@project)
     elsif @project.status == 3
       redirect_to discontent_posts_path(@project)
+    elsif @project.status ==4
+      redirect_to discontent_vote_list_path(@project)
 
     end
 

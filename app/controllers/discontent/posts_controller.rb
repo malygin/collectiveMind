@@ -13,6 +13,10 @@ class Discontent::PostsController < PostsController
     Discontent::PostNote
   end
 
+  def voting_model  
+    Discontent::Post
+  end
+
   def prepare_data
     @journals = Journal.events_for_user_feed
     @news = ExpertNews::Post.first  
@@ -42,6 +46,15 @@ end
       format.html # new.html.erb
       format.json { render json: @post }
     end
+  end
+
+  def vote_list
+    @posts = current_model.where(:project_id => @project, :status => 2)
+    # i have votes now
+    @number_v = @project.stage2 - current_user.voted_discontent_posts.size
+    @path_for_voting = "/project/#{@project.id}/discontent/vote/"
+    #all number of votes
+    @votes = @project.stage2
   end
 
 end

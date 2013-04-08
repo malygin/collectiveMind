@@ -205,14 +205,14 @@ def index
   end
 
   def essay_list
-    @posts = Essay::Post.where(:stage => 1)
+    @posts = Essay::Post.where(params[:stage])
     @post = Essay::Post.new
   end
 
   #write fact of voting in db
   def vote
     v = voting_model.find(params[:post_id])
-    v.final_voitings.create(:user => current_user)
+    v.final_votings.create(:user => current_user)
     render json: 5
   end
 

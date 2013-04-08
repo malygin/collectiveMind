@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130405151342) do
+ActiveRecord::Schema.define(:version => 20130408164135) do
 
   create_table "answers", :force => true do |t|
     t.string   "text"
@@ -164,10 +164,15 @@ ActiveRecord::Schema.define(:version => 20130405151342) do
     t.text     "desc"
     t.text     "short_desc"
     t.integer  "status"
-    t.datetime "created_at",                 :null => false
-    t.datetime "updated_at",                 :null => false
+    t.datetime "created_at",                                :null => false
+    t.datetime "updated_at",                                :null => false
     t.string   "url_logo"
     t.integer  "type_access"
+    t.integer  "stage1",                     :default => 5
+    t.integer  "stage2",                     :default => 5
+    t.integer  "stage3",                     :default => 5
+    t.integer  "stage4",                     :default => 5
+    t.integer  "stage5",                     :default => 5
   end
 
   add_index "core_projects", ["status"], :name => "index_core_projects_on_status"
@@ -237,6 +242,16 @@ ActiveRecord::Schema.define(:version => 20130405151342) do
 
   add_index "discontent_posts", ["aspect_id"], :name => "index_discontent_posts_on_aspect_id"
   add_index "discontent_posts", ["project_id"], :name => "index_discontent_posts_on_project_id"
+
+  create_table "discontent_votings", :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "discontent_post_id"
+    t.datetime "created_at",         :null => false
+    t.datetime "updated_at",         :null => false
+  end
+
+  add_index "discontent_votings", ["discontent_post_id"], :name => "index_discontent_votings_on_discontent_post_id"
+  add_index "discontent_votings", ["user_id"], :name => "index_discontent_votings_on_user_id"
 
   create_table "essay_comment_voitings", :force => true do |t|
     t.integer  "user_id"

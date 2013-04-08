@@ -23,5 +23,12 @@ class LifeTape::PostsController < PostsController
       format.json { render json: @posts }
     end
   end
+  def vote_list
+    @posts = voting_model.where(:project_id => @project)
+    @number_v = @project.stage1 - current_user.voted_aspects.size
+    @path_for_voiting = "/project/#{@project.id}/life_tape/vote/"
+     @votes = @project.stage1
+
+  end
 
 end
