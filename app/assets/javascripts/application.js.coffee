@@ -2,6 +2,7 @@
 #= require jquery_ujs
 #= require_tree .
 #= require tinymce
+#= require wymeditor/jquery.wymeditor.min
 
 #$(document).ready ->
 #  window.wiselinks = new Wiselinks()
@@ -23,3 +24,7 @@ $(document).ready ->
         $(this).replaceWith "Вы выдали баллы, спасибо!"    
       .bind "ajax:error", (event, resp) ->
         $(this).replaceWith ""+resp
+
+    $('.wymeditor').wymeditor
+      stylesheet: 'styles.css'
+

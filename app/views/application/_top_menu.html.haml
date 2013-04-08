@@ -1,11 +1,14 @@
 .menu
   %ul
+    %li= link_to "Тех. поддержка ", "/questions" , class:  "lmenu"
+    %li= image_tag "separator.png", :class => "separator"
+
     %li= link_to "Помощь", "/help" , class: "lmenu"
     %li= image_tag "separator.png", :class => "separator" 
-    %li= link_to "Опрос", "/tests" , class:  "lmenu"
+    / %li= link_to "Опрос", "/tests" , class:  "lmenu"
+    / %li= image_tag "separator.png", :class => "separator"
+    %li= link_to "Новости", "/expert_news/posts/" , class:  "lmenu"  
     %li= image_tag "separator.png", :class => "separator"
-    %li= link_to "Вопросы-ответы", "/questions" , class:  "lmenu"
+    %li= link_to "Лучшие участники", "/users" , class:  "lmenu"    
     %li= image_tag "separator.png", :class => "separator"
-    %li= link_to "Новости и комментарии  ведущего-эксперта", "/expert_news/posts/" , class:  "lmenu"  
-    %li= image_tag "separator.png", :class => "separator"
-    %li= link_to "Топ пользователей", "/users" , class:  "lmenu"
+    %li= link_to "База знаний процедуры", "/users" , class:  "lmenu"
