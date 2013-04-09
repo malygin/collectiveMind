@@ -2,7 +2,8 @@
 class PostsController < ApplicationController
   before_filter :authenticate, :only => [:new, :create, :edit, :update, 
     :plus, :plus_comment, :add_comment, :destroy, :vote_list]
-  before_filter :prepare_data, :only => [:index, :new, :edit, :show, :show_essay, :vote_list, :essay_list]
+  before_filter :prepare_data, :only => [:index, :new, :edit, :show, :show_essay, 
+    :vote_list, :essay_list]
   # before_filter :authorized_user, :only => :destroy
 
 def current_model

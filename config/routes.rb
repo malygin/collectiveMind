@@ -11,9 +11,9 @@ namespace :core, :shallow => true do
 end
 
 match "/project/:project", :to => "core/projects#to_project"
+match '/savelzon', :to =>'pages#savelzon'
 
 scope "/project/:project" do
-
   scope "/stage/:stage" do
      namespace :essay do    
       resources :posts do
@@ -31,8 +31,7 @@ scope "/project/:project" do
     get 'vote_list'  => "posts#vote_list"
     put 'vote/:post_id'  => "posts#vote"    
     scope "/status/:status/aspect/:aspect",  :defaults => {:status => 0, :aspect => 0} do
-      get 'replace/:replace_id/posts/new'  => "posts#new"    
-
+      get 'replace/:replace_id/posts/new'  => "posts#new" 
       resources :posts do
             member do
                 put :add_comment

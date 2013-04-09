@@ -1,5 +1,6 @@
 # encoding: utf-8
 class PagesController < ApplicationController
+   layout "core/projects"
     before_filter :expert?, :only => :to_expert_frustrations
     before_filter :get_news
 
@@ -9,41 +10,7 @@ class PagesController < ApplicationController
     @news = ExpertNews::Post.first    
   end
 
-  def result
-    prepare_data
-  end 
-
-  def contacts
-    prepare_data
-  end
-
-  def about
-    prepare_data
-  end 
-
-  def donot
-    prepare_data
-  end
-
-  def help
-    prepare_data
-  end  
-
-  def help1
-    prepare_data
-  end  
-
-  def help2
-    prepare_data
-  end 
-  
-  def help3
-    prepare_data
-  end 
-
-  def articles
-    prepare_data
-  end
+ 
 
   def get_news
     @news = ExpertNews::Post.first
