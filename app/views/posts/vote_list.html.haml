@@ -1,0 +1,12 @@
+%h1 Голосование по итогам этапа
+%br=link_to 'Вы можете оставить свое мнение или почитать другие', essay_posts_path(@project, @project.status), :id => 'essay_list'
+
+- unless @number_v<1
+	Количество имеющихся голосов - 
+	%span.rate
+		%span#count_vote=@number_v
+
+	= render :partial => 'shared/post_for_vote', :collection => @posts,  :locals => { :path_for_voting => @path_for_voting, :count_voted => @number_v, :votes => @votes}
+- else
+	%b Спасибо за участие в голосовании!
+	%br

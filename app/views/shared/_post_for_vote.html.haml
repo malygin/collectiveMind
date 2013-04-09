@@ -2,9 +2,8 @@
 	=post_for_vote.content
 	- if boss?
 		=post_for_vote.voted_users.size
-
-
+		
 	.voteBar
-		- if can_vote?(post_for_vote.voted_users.size, count_voted)
+		- if can_vote?(post_for_vote.voted_users.size, count_voted, votes)
 			=link_to "проголосовать", path_for_voting+post_for_vote.id.to_s , :remote => true, :method => :put, class: "voteCounter", :id => "aspect_#{post_for_vote.id}"
 		

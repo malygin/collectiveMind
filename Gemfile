@@ -16,6 +16,7 @@ gem 'settingslogic'
 gem 'execjs'
 gem 'dalli'
 gem 'tinymce-rails'
+gem 'redactor-rails', '0.3.2'
 #gem 'wiselinks'
 
 gem 'rest-client'

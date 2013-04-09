@@ -87,8 +87,8 @@ def  status_title(pr)
 		5-n
 	end
 
-	def can_vote?(this_v, all_v)
-		this_v<1 and all_v<5
+	def can_vote?(this_v, all_v, all)
+		this_v<1 and all_v<(all+1)
 	end
 
 end

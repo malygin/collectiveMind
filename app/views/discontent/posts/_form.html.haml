@@ -1,5 +1,5 @@
 
-= form_for  @post, :url => {:project => @project.id, :replace_id => @replace_post.id, :action => @post.persisted? ? 'update' : 'create'},   :html => { :class => 'new_or_edit' }do |f|
+= form_for  @post, :url => {:project => @project.id, :replace_id => @replace_post.nil? ? nil : @replace_post.id , :action => @post.persisted? ? 'update' : 'create'},   :html => { :class => 'new_or_edit' }do |f|
   -if @post.errors.any?
     #error_explanation
       %h2= "#{pluralize(@discontent_post.errors.count, "error")} prohibited this discontent_post from being saved:"

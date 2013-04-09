@@ -18,7 +18,7 @@ class Core::Project < ActiveRecord::Base
 # 1 open for everyone but participant may be only with rights
 # 2  closed, only for participant
 
-  attr_accessible :desc, :name, :short_desc, :status, :type_access, :url_logo
+  attr_accessible :desc, :name, :short_desc, :status, :type_access, :url_logo, :stage1, :stage2, :stage3, :stage4, :stage5
 
   has_many :life_tape_posts, :class_name => "LifeTape::Post"
   has_many :aspects, :class_name => "Discontent::Aspect"

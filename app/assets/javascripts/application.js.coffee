@@ -1,8 +1,6 @@
 #= require jquery
 #= require jquery_ujs
-#= require_tree .
-#= require tinymce
-#= require ../../../vendor/assets/javascripts/wymeditor/jquery.wymeditor.min
+#= require redactor-rails
 
 #$(document).ready ->
 #  window.wiselinks = new Wiselinks()
@@ -25,6 +23,4 @@ $(document).ready ->
       .bind "ajax:error", (event, resp) ->
         $(this).replaceWith ""+resp
 
-    $('.wymeditor').wymeditor
-      stylesheet: 'styles.css'
 

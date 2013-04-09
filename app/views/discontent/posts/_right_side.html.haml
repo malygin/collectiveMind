@@ -1,3 +1,17 @@
+-if boss? 
+	%p.righttext
+		текущий статус проекта
+		%br
+		%span.rate= status_title(@project.status)
+	%br
+	-if @project.status == 3
+		=link_to 'Начать голосование',  next_stage_core_project_path(@project), id: 'change_stage'
+	-if @project.status == 4
+		=link_to 'Вернуться к началу процедуры',  pr_stage_core_project_path(@project), id: 'change_stage'
+		%br
+		=link_to 'Начать сбор недовольств',  next_stage_core_project_path(@project), id: 'change_stage'
+
+%br
 .redtitle Аспекты
 - @aspects.each do |asp|
 	%a{:href  => discontent_posts_path(:aspect => asp.id), :class => 'topic'}
