@@ -1,3 +1,4 @@
+# encoding: utf-8
 class Core::ProjectsController < ApplicationController
   # GET /core/projects
   # GET /core/projects.json
@@ -59,7 +60,7 @@ class Core::ProjectsController < ApplicationController
 
     respond_to do |format|
       if @core_project.save
-        format.html { redirect_to root_path, notice: 'Project was successfully created.' }
+        format.html { redirect_to root_path, success: 'Project was successfully created.' }
         format.json { render json: @core_project, status: :created, location: @core_project }
       else
         format.html { render action: "new" }
@@ -75,7 +76,7 @@ class Core::ProjectsController < ApplicationController
 
     respond_to do |format|
       if @core_project.update_attributes(params[:core_project])
-        format.html { redirect_to @core_project, notice: 'Project was successfully updated.' }
+        format.html { redirect_to @core_project, success: 'Процедура успешно отредактирована' }
         format.json { head :no_content }
       else
         format.html { render action: "edit" }
@@ -106,6 +107,10 @@ class Core::ProjectsController < ApplicationController
     @core_project = Core::Project.find(params[:id])
     @core_project.update_column(:status, @core_project.status - 1)
     redirect_to :back
+  end
+   def knowledge
+    @core_project = Core::Project.find(params[:project])
+
   end
 
 end

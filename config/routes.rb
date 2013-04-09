@@ -14,6 +14,8 @@ match "/project/:project", :to => "core/projects#to_project"
 match '/savelzon', :to =>'pages#savelzon'
 
 scope "/project/:project" do
+  match '/knowledge', :to =>'core/projects#knowledge'
+
   scope "/stage/:stage" do
      namespace :essay do    
       resources :posts do

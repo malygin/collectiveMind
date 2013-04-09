@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130408164135) do
+ActiveRecord::Schema.define(:version => 20130409103338) do
 
   create_table "answers", :force => true do |t|
     t.string   "text"
@@ -173,6 +173,7 @@ ActiveRecord::Schema.define(:version => 20130408164135) do
     t.integer  "stage3",                     :default => 5
     t.integer  "stage4",                     :default => 5
     t.integer  "stage5",                     :default => 5
+    t.text     "knowledge"
   end
 
   add_index "core_projects", ["status"], :name => "index_core_projects_on_status"
