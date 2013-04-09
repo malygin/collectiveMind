@@ -18,9 +18,10 @@ class Discontent::PostsController < PostsController
   end
 
   def prepare_data
-    @journals = Journal.events_for_user_feed
-    @news = ExpertNews::Post.first  
     @project = Core::Project.find(params[:project]) 
+
+    @journals = Journal.events_for_user_feed @project.id
+    @news = ExpertNews::Post.first  
     @status = params[:status]
     @aspect = params[:aspect]
     @aspects = Discontent::Aspect.all
@@ -41,7 +42,9 @@ end
  def new
     prepare_data
     @post = current_model.new
-    @replace_post = current_model.find(params[:replace_id])
+    unless params[:replace_id].nil?
+      @replace_post = current_model.find(params[:replace_id])
+    end
     respond_to do |format|
       format.html # new.html.erb
       format.json { render json: @post }

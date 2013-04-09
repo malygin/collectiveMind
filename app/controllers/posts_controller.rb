@@ -35,22 +35,24 @@ def voting_model
 end
 
 def prepare_data
-    @journals = Journal.events_for_user_feed
+    @project = Core::Project.find(params[:project]) 
+
+    @journals = Journal.events_for_user_feed @project.id
     @news = ExpertNews::Post.first 
     
-    @project = Core::Project.find(params[:project]) 
 end
 
 def add_comment
+    @project = Core::Project.find(params[:project]) 
     post = current_model.find(params[:id])
     unless  params[name_of_comment_for_param][:content]==""
       post.comments.create(:content => params[name_of_comment_for_param][:content], :user =>current_user)
-      current_user.journals.build(:type_event=>name_of_comment_for_param+"_save", :body=>post.id).save!
+      current_user.journals.build(:type_event=>name_of_comment_for_param+"_save", :project => @project, :body=>post.id).save!
       flash[:success] = "Комментарий добавлен"
     else
       flash[:success] = "Введите текст комментария"
     end
-    redirect_to post
+    redirect_to polymorphic_path(post, :project => @project.id)
  end 
 
 def index
@@ -64,7 +66,8 @@ def index
   # GET /discontent/posts/1
   # GET /discontent/posts/1.json
   def show
-    @post = current_model.find(params[:id])
+    @post = current_model.where(:id => params[:id], :project_id => params[:project]).first
+    # puts '+++++++++++++++++++', @post.id
     if current_model.column_names.include? :number_views
       @post.update_column(:number_views, @post.number_views+1)
     end
@@ -129,6 +132,8 @@ def index
         if @post.save
           format.html {
             flash[:succes] = 'Успешно добавлено!'
+            current_user.journals.build(:type_event=>name_of_model_for_param+"_save", :project => @project, :body=>@post.id).save!
+
             redirect_to  :action=>'show', :id => @post.id, :project => @project  }
           format.json { render json: @post, status: :created, location: @post }
         else

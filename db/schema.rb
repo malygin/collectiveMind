@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130409103338) do
+ActiveRecord::Schema.define(:version => 20130409133125) do
 
   create_table "answers", :force => true do |t|
     t.string   "text"
@@ -495,9 +495,11 @@ ActiveRecord::Schema.define(:version => 20130409103338) do
     t.string   "body"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
+    t.integer  "project_id"
   end
 
   add_index "journals", ["created_at"], :name => "index_journals_on_created_at"
+  add_index "journals", ["project_id"], :name => "index_journals_on_project_id"
   add_index "journals", ["type_event"], :name => "index_journals_on_type"
   add_index "journals", ["user_id"], :name => "index_journals_on_user_id"
 

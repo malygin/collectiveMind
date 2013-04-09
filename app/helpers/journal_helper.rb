@@ -1,7 +1,7 @@
 # encoding: utf-8
 module JournalHelper
 
-	def journal_parser(j)
+	def journal_parser(j, project)
 		case j.type_event
 			when 'concept_post_save'
 				'добавил  '+ link_to('концепцию', concept_post_path(j.body))
@@ -11,10 +11,16 @@ module JournalHelper
 				'добавил  '+ link_to('новость', expert_news_post_path(j.body))
 			when 'news_comment_save'
 				'добавил комментарий к '+  link_to('новости', expert_news_post_path(j.body))
+			
 			when 'life_tape_comment_save'
-				'добавил комментарий к '+  link_to('идее', life_tape_post_path(j.body))
+				'добавил комментарий к '+  link_to('идее', life_tape_post_path(project, j.body))
 			when 'life_tape_post_save'
-				'добавил '+  link_to('идею', life_tape_post_path(j.body))				
+				'добавил '+  link_to('идею', life_tape_post_path(project, j.body))				
+            
+            when 'discontent_comment_save'
+				'добавил комментарий к '+  link_to('недовольству', discontent_post_path(project, j.body))
+			when 'discontent_post_save'
+				'добавил '+  link_to('недовольство', discontent_post_path(project, j.body))				
 			
 			when 'concept_post_update'
 				'отредактировал '+  link_to('концепцию', concept_post_path(j.body))
