@@ -72,6 +72,16 @@ scope "/project/:project" do
           put :plus_comment
       end
     end
+  end  
+
+  namespace :question do
+    resources :posts do    
+      member do
+          put :add_comment
+          put :plus
+          put :plus_comment
+      end
+    end
   end
   
 end
@@ -90,20 +100,6 @@ end
     end
   end
 
-  resources :projects
-
-  resources :questions do
-    resources :answers do
-      member do
-        put :plus
-        put :minus
-      end
-    end
-    member do
-      put :plus
-      put :minus
-    end
-  end
 
   match "/about", :to => "pages#about"
   match "/contacts", :to => "pages#contacts"

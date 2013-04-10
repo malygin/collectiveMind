@@ -1,7 +1,7 @@
-=link_to image_tag('fb.png'),'/'
-=link_to image_tag('tw.png'),'/'
-=link_to image_tag('vk.png'),'/'
-=link_to image_tag('ok.png'),'/'
+=link_to image_tag('fb.png'),'http://www.facebook.com/massdecision'
+=link_to image_tag('tw.png'),'https://twitter.com/massdecision'
+=link_to image_tag('vk.png'),'https://vk.com/massdecision'
+=link_to image_tag('ok.png'),'http://odnoklassniki.ru/group/56725703557182'
 %br
 %br
 .aboutpeople
@@ -43,7 +43,7 @@
 %br
 %h3 Процедуры:
 .strtable
-  .strcolumns= image_tag 'oecdo.png', :height => 60, class: 'project_logo'
+  .strcolumns= image_tag 'oecdo.png', :width => 60, class: 'project_logo'
   .strcolumns
     %span.strname СТРАТЕГИЯ РАЗВИТИЯ ДО В СГУ НА 2012-2013 ГОД
     %br
@@ -55,7 +55,7 @@
     %br
 - @core_projects.each do |core_project|
   .strtable
-    .strcolumns= image_tag core_project.url_logo, :height => 70, class: 'project_logo'
+    .strcolumns= image_tag core_project.url_logo, :width => 60, class: 'project_logo'
     .strcolumns
       = link_to core_project.name, '/project/'+core_project.id.to_s,  class: 'strname'
       %br

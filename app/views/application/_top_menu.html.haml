@@ -1,6 +1,6 @@
 .menu
   %ul
-    %li= link_to "Тех. поддержка ", "/questions" , class:  "lmenu"
+    %li= link_to "Тех. поддержка ", "/project/#{@project.id}/question/posts/" , class:  "lmenu"
     %li= image_tag "separator.png", :class => "separator"
 
     %li= link_to "Помощь", "/help" , class: "lmenu"

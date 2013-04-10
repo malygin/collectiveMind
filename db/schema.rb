@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130410094503) do
+ActiveRecord::Schema.define(:version => 20130410153932) do
 
   create_table "answers", :force => true do |t|
     t.string   "text"
@@ -662,6 +662,46 @@ ActiveRecord::Schema.define(:version => 20130410094503) do
     t.datetime "created_at",   :null => false
     t.datetime "updated_at",   :null => false
   end
+
+  create_table "question_comment_votings", :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "comment_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  add_index "question_comment_votings", ["comment_id"], :name => "index_question_comment_votings_on_comment_id"
+
+  create_table "question_comments", :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "post_id"
+    t.text     "content"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  add_index "question_comments", ["post_id"], :name => "index_question_comments_on_post_id"
+
+  create_table "question_post_votings", :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "post_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  add_index "question_post_votings", ["post_id"], :name => "index_question_post_votings_on_post_id"
+
+  create_table "question_posts", :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "project_id"
+    t.text     "content"
+    t.integer  "status"
+    t.datetime "created_at",                  :null => false
+    t.datetime "updated_at",                  :null => false
+    t.integer  "number_views", :default => 0
+  end
+
+  add_index "question_posts", ["project_id"], :name => "index_questions_posts_on_project_id"
 
   create_table "questions", :force => true do |t|
     t.string   "text"

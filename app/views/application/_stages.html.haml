@@ -14,7 +14,10 @@
 
     %li{ :class => cp('discontent')}
       = image_tag image_for_stages('2', 'discontent'), :class => 'numbers'
-      = link_to "Несовершенства", discontent_posts_path(@project), class: "lstages" 
+      - if @project.status>1
+        = link_to "Несовершенства", discontent_posts_path(@project), class: "lstages" 
+      -else
+        %span.lstagesdisabled Несовершенства
     = image_tag "space.png", :class => "space"    
     %li{ :class => 'vote_active'}
       - unless stage_vote?('discontent')
@@ -26,7 +29,10 @@
 
     %li{ :class => cp('concept')}
       = image_tag image_for_stages('3', 'concept'), :class => 'numbers'
-      = link_to "Концепции", "/concept/forecast/", class: "lstages" 
+      - if @project.status > 3
+        = link_to "Концепции", "/concept/forecast/", class: "lstages" 
+      -else
+        %span.lstagesdisabled Концепции
     = image_tag "space.png", :class => "space" 
    
     %li{ :class => 'vote_active'}
@@ -35,7 +41,10 @@
     = image_tag "space.png", :class => "space"  
     %li{ :class => cp('plan')}
       = image_tag image_for_stages('4', 'plan'), :class => 'numbers'
-      = link_to "Проекты", "/plan/posts/", class: "lstages" 
+      -if @project.status >5
+        = link_to "Проекты", "/plan/posts/", class: "lstages" 
+      -else
+        %span.lstagesdisabled Проекты
     = image_tag "space.png", :class => "space" 
     
     %li{ :class => 'vote_active'}
@@ -44,7 +53,10 @@
     = image_tag "space.png" , :class => "space" 
     %li{ :class => cp('estimate')}
       = image_tag image_for_stages('5', 'estimate'), :class => 'numbers'
-      = link_to "Оценивание и выбор", "/estimate/posts/", class: "lstages"
+      - if @project.status >7
+        = link_to "Оценивание и выбор", "/estimate/posts/", class: "lstages"
+      -else
+        %span.lstagesdisabled Оценивание и выбор
     = image_tag "space.png", :class => "space" 
     
     %li{ :class => 'vote_active'}

@@ -11,4 +11,11 @@
 		= @news.anons
 		= link_to 'подробнее', :action => 'show', :project => @project, :id => @news.id
 
-
+-unless @journals.nil?
+	.redtitle Активность
+	- @journals.each do |journal|
+		%p.righttext
+			=Russian::strftime(journal.created_at,"%d %B %k:%M:%S ")
+			%b= journal.user.name_title
+			= journal_parser(journal, @project.id).html_safe
+		=image_tag('dots.png')
