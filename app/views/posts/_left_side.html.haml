@@ -9,7 +9,7 @@
 	%h1 Новости
 	%p.righttext
 		= @news.anons
-		= link_to 'подробнее', :action => 'show', :project => @project, :id => @news.id
+		= link_to 'подробнее', expert_news_post_path(@project, @news)
 
 -unless @journals.nil?
 	.redtitle Активность
