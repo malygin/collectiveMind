@@ -1,9 +1,9 @@
 %h3 Новости и комментарии эксперта 
-- if admin? or expert?
-	= link_to '+ Добавить новость или комментарий', new_expert_news_post_path
+- if boss?
+	= link_to '+ Добавить новость или комментарий',  url_for(:action => 'new')
 
 
-= render @expert_news_posts
+= render @posts
 
 
 %br

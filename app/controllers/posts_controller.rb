@@ -194,13 +194,13 @@ def index
 #todo check if user already voted
   def plus
     post = current_model.find(params[:id])
-    post.post_voitings.create(:user => current_user, :post => post)
+    post.post_votings.create(:user => current_user, :post => post)
     render json:post.users.count 
   end
 
   def plus_comment
     comment = comment_model.find(params[:id])
-    comment.comment_voitings.create(:user => current_user, :comment => comment)
+    comment.comment_votings.create(:user => current_user, :comment => comment)
     render json:comment.users.count 
   end
   

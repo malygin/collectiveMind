@@ -64,6 +64,16 @@ scope "/project/:project" do
     end
   end
   
+  namespace :expert_news do
+    resources :posts do    
+      member do
+          put :add_comment
+          put :plus
+          put :plus_comment
+      end
+    end
+  end
+  
 end
 
 
@@ -243,20 +253,7 @@ end
       end
     end 
           
-    namespace :expert_news do
-     
-      resources :posts do
-        member do
-            put :add_comment
-            put :plus
-        end
-      end
-      resources :comments do
-          member do
-            put :plus
-          end  
-      end
-    end
+    
 
   namespace :estimate do 
      resources :posts do

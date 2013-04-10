@@ -1,4 +1,3 @@
-
 %h1 Цели и задачи нашей процедуры
 %p=simple_format(@project.desc)
 
@@ -7,14 +6,6 @@
 	= link_to image_tag("add_record.png"), new_life_tape_post_path, id: "add_record"
 	%br
 
-%table
-	%tr
-		%th Посты пользователей
-		%th Посты экспертов
-	%tr
-		%td= render :partial => 'shared/post', :collection => @posts_user
-		%td= render :partial => 'shared/post', :collection => @posts_facil
-			
-%br
+= render :partial => 'shared/post', :collection => @posts_user
 
 

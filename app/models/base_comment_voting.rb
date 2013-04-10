@@ -1,4 +1,4 @@
-module BaseCommentVoiting extend ActiveSupport::Concern
+module BaseCommentVoting extend ActiveSupport::Concern
   	included do
 	  	attr_accessible :comment, :user
 	    belongs_to :user

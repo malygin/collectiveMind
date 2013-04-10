@@ -7,7 +7,7 @@
     %li= image_tag "separator.png", :class => "separator" 
     / %li= link_to "Опрос", "/tests" , class:  "lmenu"
     / %li= image_tag "separator.png", :class => "separator"
-    %li= link_to "Новости", "/expert_news/posts/" , class:  "lmenu"  
+    %li= link_to "Новости", "/project/#{@project.id}/expert_news/posts/" , class:  "lmenu"  
     %li= image_tag "separator.png", :class => "separator"
     %li= link_to "Лучшие участники", "/users" , class:  "lmenu"    
     %li= image_tag "separator.png", :class => "separator"

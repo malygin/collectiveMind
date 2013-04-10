@@ -1,7 +1,6 @@
 class ExpertNews::Post < ActiveRecord::Base
-  attr_accessible :anons, :content, :title, :user
-  has_many :comments
+  include BasePost
 
-  belongs_to :user
+  attr_accessible :anons,:title
   default_scope :order => 'expert_news_posts.created_at DESC'
 end

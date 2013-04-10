@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130409133125) do
+ActiveRecord::Schema.define(:version => 20130410094503) do
 
   create_table "answers", :force => true do |t|
     t.string   "text"
@@ -189,14 +189,14 @@ ActiveRecord::Schema.define(:version => 20130409133125) do
 
   add_index "discontent_aspects", ["project_id"], :name => "index_discontent_aspects_on_project_id"
 
-  create_table "discontent_comment_voitings", :force => true do |t|
+  create_table "discontent_comment_votings", :force => true do |t|
     t.integer  "user_id"
     t.integer  "comment_id"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end
 
-  add_index "discontent_comment_voitings", ["comment_id"], :name => "index_discontent_comment_voitings_on_comment_id"
+  add_index "discontent_comment_votings", ["comment_id"], :name => "index_discontent_comment_voitings_on_comment_id"
 
   create_table "discontent_comments", :force => true do |t|
     t.text     "content"
@@ -216,16 +216,16 @@ ActiveRecord::Schema.define(:version => 20130409133125) do
 
   add_index "discontent_post_notes", ["post_id"], :name => "index_discontent_post_notes_on_post_id"
 
-  create_table "discontent_post_voitings", :force => true do |t|
+  create_table "discontent_post_votings", :force => true do |t|
     t.integer  "user_id"
     t.integer  "post_id"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end
 
-  add_index "discontent_post_voitings", ["post_id", "user_id"], :name => "index_discontent_post_voitings_on_post_id_and_user_id"
-  add_index "discontent_post_voitings", ["post_id"], :name => "index_discontent_post_voitings_on_post_id"
-  add_index "discontent_post_voitings", ["user_id"], :name => "index_discontent_post_voitings_on_user_id"
+  add_index "discontent_post_votings", ["post_id", "user_id"], :name => "index_discontent_post_voitings_on_post_id_and_user_id"
+  add_index "discontent_post_votings", ["post_id"], :name => "index_discontent_post_voitings_on_post_id"
+  add_index "discontent_post_votings", ["user_id"], :name => "index_discontent_post_voitings_on_user_id"
 
   create_table "discontent_posts", :force => true do |t|
     t.text     "content"
@@ -254,14 +254,14 @@ ActiveRecord::Schema.define(:version => 20130409133125) do
   add_index "discontent_votings", ["discontent_post_id"], :name => "index_discontent_votings_on_discontent_post_id"
   add_index "discontent_votings", ["user_id"], :name => "index_discontent_votings_on_user_id"
 
-  create_table "essay_comment_voitings", :force => true do |t|
+  create_table "essay_comment_votings", :force => true do |t|
     t.integer  "user_id"
     t.integer  "comment_id"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end
 
-  add_index "essay_comment_voitings", ["comment_id"], :name => "index_essay_comment_voitings_on_comment_id"
+  add_index "essay_comment_votings", ["comment_id"], :name => "index_essay_comment_voitings_on_comment_id"
 
   create_table "essay_comments", :force => true do |t|
     t.integer  "user_id"
@@ -273,14 +273,14 @@ ActiveRecord::Schema.define(:version => 20130409133125) do
 
   add_index "essay_comments", ["post_id"], :name => "index_essay_comments_on_post_id"
 
-  create_table "essay_post_voitings", :force => true do |t|
+  create_table "essay_post_votings", :force => true do |t|
     t.integer  "user_id"
     t.integer  "post_id"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end
 
-  add_index "essay_post_voitings", ["post_id"], :name => "index_essay_post_voitings_on_post_id"
+  add_index "essay_post_votings", ["post_id"], :name => "index_essay_post_voitings_on_post_id"
 
   create_table "essay_posts", :force => true do |t|
     t.integer  "user_id"
@@ -392,14 +392,14 @@ ActiveRecord::Schema.define(:version => 20130409133125) do
 
   add_index "estimate_task_triplets", ["post_id"], :name => "index_estimate_task_triplets_on_post_id"
 
-  create_table "expert_news_comment_voitings", :force => true do |t|
+  create_table "expert_news_comment_votings", :force => true do |t|
     t.integer  "user_id"
     t.integer  "comment_id"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end
 
-  add_index "expert_news_comment_voitings", ["comment_id"], :name => "index_expert_news_comment_voitings_on_comment_id"
+  add_index "expert_news_comment_votings", ["comment_id"], :name => "index_expert_news_comment_voitings_on_comment_id"
 
   create_table "expert_news_comments", :force => true do |t|
     t.integer  "user_id"
@@ -411,6 +411,15 @@ ActiveRecord::Schema.define(:version => 20130409133125) do
 
   add_index "expert_news_comments", ["post_id"], :name => "index_expert_news_comments_on_post_id"
 
+  create_table "expert_news_post_votings", :force => true do |t|
+    t.integer  "post_id"
+    t.integer  "user_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  add_index "expert_news_post_votings", ["post_id"], :name => "index_expert_news_post_votings_on_post_id"
+
   create_table "expert_news_posts", :force => true do |t|
     t.string   "title"
     t.text     "anons"
@@ -418,9 +427,11 @@ ActiveRecord::Schema.define(:version => 20130409133125) do
     t.integer  "user_id"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
+    t.integer  "project_id"
   end
 
   add_index "expert_news_posts", ["created_at"], :name => "index_expert_news_posts_on_created_at"
+  add_index "expert_news_posts", ["project_id"], :name => "index_expert_news_posts_on_project_id"
 
   create_table "frustration_comments", :force => true do |t|
     t.string   "content"
@@ -511,14 +522,14 @@ ActiveRecord::Schema.define(:version => 20130409133125) do
     t.datetime "updated_at", :null => false
   end
 
-  create_table "life_tape_comment_voitings", :force => true do |t|
+  create_table "life_tape_comment_votings", :force => true do |t|
     t.integer  "user_id"
     t.integer  "comment_id"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end
 
-  add_index "life_tape_comment_voitings", ["user_id", "comment_id"], :name => "index_life_tape_comment_voitings_on_user_id_and_comment_id"
+  add_index "life_tape_comment_votings", ["user_id", "comment_id"], :name => "index_life_tape_comment_voitings_on_user_id_and_comment_id"
 
   create_table "life_tape_comments", :force => true do |t|
     t.text     "content"
@@ -532,7 +543,7 @@ ActiveRecord::Schema.define(:version => 20130409133125) do
   add_index "life_tape_comments", ["post_id"], :name => "index_life_tape_comments_on_post_id"
   add_index "life_tape_comments", ["user_id"], :name => "index_life_tape_comments_on_user_id"
 
-  create_table "life_tape_post_voitings", :force => true do |t|
+  create_table "life_tape_post_votings", :force => true do |t|
     t.integer  "user_id"
     t.integer  "post_id"
     t.boolean  "against",    :default => true
@@ -540,9 +551,9 @@ ActiveRecord::Schema.define(:version => 20130409133125) do
     t.datetime "updated_at",                   :null => false
   end
 
-  add_index "life_tape_post_voitings", ["post_id", "user_id"], :name => "index_life_tape_post_voitings_on_post_id_and_user_id"
-  add_index "life_tape_post_voitings", ["post_id"], :name => "index_life_tape_post_voitings_on_post_id"
-  add_index "life_tape_post_voitings", ["user_id"], :name => "index_life_tape_post_voitings_on_user_id"
+  add_index "life_tape_post_votings", ["post_id", "user_id"], :name => "index_life_tape_post_voitings_on_post_id_and_user_id"
+  add_index "life_tape_post_votings", ["post_id"], :name => "index_life_tape_post_voitings_on_post_id"
+  add_index "life_tape_post_votings", ["user_id"], :name => "index_life_tape_post_voitings_on_user_id"
 
   create_table "life_tape_posts", :force => true do |t|
     t.text     "content"

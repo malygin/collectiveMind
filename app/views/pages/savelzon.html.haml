@@ -1,19 +1,40 @@
-%table
-  %tr
-    %td
-      = image_tag 'savelzon.jpg'
-  
-      %br 
-      %span.rate
-    %td
-      %h1  Олег Савельзон
-      %p.righttext 
-        Доктор философии, руководитель исследовательского проекта в Высшей школе технологии в Иерусалиме. 
-        %br
-        Занимается развитием теории принятия решений и ее приложениями в политико-философских, социокультурных, управленческих и маркетинговых исследованиях, а также в практическом менеджменте.
-        %br
-        %br
-        %b Избранные статьи:
-        %br
-        1. 
-        =link_to 'Проекты постороннего', 'http://www.promegalit.ru/publics.php?id=4891'
+=link_to image_tag('fb.png'),'/'
+=link_to image_tag('tw.png'),'/'
+=link_to image_tag('vk.png'),'/'
+=link_to image_tag('ok.png'),'/'
+%br
+%br
+.aboutpeople
+  .phototext
+    = image_tag 'savelzon.jpg'
+    %br
+    %br
+    =link_to 'ОЛЕГ САВЕЛЬЗОН','/savelzon', class: 'name'
+    %br
+    %p.about
+      %span.post Президент клуба.
+      %br
+      
+  .phototext
+    %p.promotext 
+      Доктор философии, руководитель исследовательского проекта в Высшей школе технологии в Иерусалиме.
+      %br
+      Занимается развитием теории принятия решений и ее приложениями в политико-философских, социокультурных, управленческих и маркетинговых исследованиях, а также в практическом менеджменте.
+      %br
+      %br
+      %b Избранные статьи:
+      %br
+      1. 
+      =link_to 'ПРОЕКТЫ ПОСТОРОННЕГО', 'https://sites.google.com/site/raopsoc/dvoemyslie'
+      %br
+      2. 
+      =link_to 'ЭКСПЕРИМЕНТ ПО ИННОВАЦИОННОМУ РАЗВИТИЮ ГРАЖДАНСКОГО ОБЩЕСТВА В РОССИИ', 'https://sites.google.com/site/raopsoc/e' 
+      %br     
+      3. 
+      =link_to 'В ПРОТИВОВЕС ГЛУПОСТИ', 'https://sites.google.com/site/raopsoc/g'
+      %br
+      4. 
+      =link_to 'О РАЦИОНАЛЬНЫХ ОБЩЕНАЦИОНАЛЬНЫХ ПРОЦЕДУРАХ ПРИНЯТИЯ РЕШЕНИЙ', 'https://sites.google.com/site/raopsoc/gkr'     
+      %br
+      5. 
+      =link_to 'ОБ АКТУАЛЬНОСТИ КАРДИНАЛЬНОГО ПОВЫШЕНИЯ РАЦИОНАЛЬНОСТИ КУЛЬТУРЫ ПРИНЯТИЯ РЕШЕНИЙ В РОССИИ', 'https://sites.google.com/site/raopsoc/prognoz'

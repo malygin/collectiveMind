@@ -5,6 +5,10 @@
 / 			%p.greentitle= "#{category.name} (#{category.posts.count})"			
 / 			%p.righttext= category.short_desc
 
-ыфвывыфвфыв
+- unless @news.nil?
+	%h1 Новости
+	%p.righttext
+		= @news.anons
+		= link_to 'подробнее', :action => 'show', :project => @project, :id => @news.id
 
 
