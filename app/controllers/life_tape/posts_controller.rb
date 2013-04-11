@@ -13,6 +13,14 @@ class LifeTape::PostsController < PostsController
   def voting_model
     Discontent::Aspect
   end
+  
+def prepare_data
+    @project = Core::Project.find(params[:project]) 
+ @aspects = Discontent::Aspect.where(:project_id => @project)
+    @journals = Journal.events_for_user_feed @project.id
+    @news = ExpertNews::Post.first 
+    
+end
 
   # def index
   #   @posts_user = LifeTape::Post.includes(:user).where(:project_id => @project).where("users.admin = ? and users.expert = ?", false, false)
