@@ -5,5 +5,7 @@ module BaseComment  extend ActiveSupport::Concern
     belongs_to :post
     has_many :comment_votings
     has_many :users, :through => :comment_votings
+        default_scope :order => 'created_at ASC'
+
   end
 end
