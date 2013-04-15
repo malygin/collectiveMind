@@ -48,6 +48,8 @@
     Уровень доступа:
     %span.namedate закрыта
     %br
+    .desc Процедура прошла в 2012 году в Институте открытого образования Cаратовского государственного университета. Целью стало выработка статегии модернизации институа на ближайший год. Жюри присудило победу проекту С.Мертиковой, голосование среди студентов выбрало проект Э. Овсейцева как лучший.
+    %br
 - @core_projects.each do |core_project|
   .strtable
     .strcolumns= image_tag core_project.url_logo, :width => 60, class: 'project_logo'
@@ -59,6 +61,8 @@
       %br
       Уровень доступа:
       %span.namedate= type_title(core_project.type_access)
+      %br
+      .desc= core_project.short_desc
       %br
       = link_to 'Show', core_project
       = link_to 'Edit', edit_core_project_path(core_project)
