@@ -12,6 +12,9 @@ end
 
 match "/project/:project", :to => "core/projects#to_project"
 match '/savelzon', :to =>'pages#savelzon'
+match '/vayntrub', :to =>'pages#savelzon'
+match '/reviews', :to =>'pages#reviews'
+
 
 scope "/project/:project" do
   match '/knowledge', :to =>'core/projects#knowledge'
