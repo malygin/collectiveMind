@@ -1,4 +1,10 @@
-= form_for @concept_post do |f|
+= form_for @post do |f|
+  %label 
+    О чем концепция
+  %br
+  %field
+    = f.text_area :content
+  %div{:class=>'timestamp'} Вкратце опишите свою концепцию, укажите какие недовольства будут разрешены.  
   %label 
     %b Цель -
     образ желаемого будущего
@@ -14,15 +20,10 @@
           %b Задачи -
           направления работы в будущем
       %td &nbsp;
-      %td
-        %label.small
-          %b Ресурсы -
-          методы и средства работы в будущем
-    - @concept_post.task_supply_pairs.each_with_index do |p, index|
+     
+    - @post.task_supply_pairs.each_with_index do |p, index|
       %tr.ts
         %td= text_area_tag 'task_supply['+index.to_s+'][1]', p.task, :class =>'task'
-        %td= image_tag('arrow.png')
-        %td= text_area_tag 'task_supply['+index.to_s+'][2]', p.supply, :class =>'task'
         %td=link_to_function image_tag('close.png'), ' $(this).parent().parent().remove()'
     
 
@@ -33,10 +34,7 @@
     %tr
       %td
         %div.timestamp.short - какие конкретные практические вопросы должны будут разрешаться
-      %td= image_tag('arrow.png')
-      %td 
-        %div.timestamp.short - с помощью каких ресурсов это  будет делаться
-
+     
   %br
   %br
   %label 

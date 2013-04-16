@@ -1,6 +1,5 @@
 # encoding: utf-8
 class Essay::PostsController < PostsController
-layout "life_tape/posts"
 
   def current_model
     Essay::Post
@@ -10,11 +9,10 @@ layout "life_tape/posts"
     Essay::Comment
   end
 
-def prepare_data
-    @journals = Journal.events_for_user_feed
-    @news = ExpertNews::Post.first 
-    
+def prepare_data      
     @project = Core::Project.find(params[:project]) 
+    @journals = Journal.events_for_user_feed @project.id
+    @news = ExpertNews::Post.first 
     @stage = params[:stage]
 end
 

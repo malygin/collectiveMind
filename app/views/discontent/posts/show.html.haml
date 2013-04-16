@@ -1,0 +1,7 @@
+%p#notice= notice
+
+-unless @post.post.nil?
+  = link_to 'Замещаем', :action => 'show', :project => @project, :id => @post.post.id
+- if @post.status == 2 
+  = link_to 'Переопределяем', :action => 'new', :project => @project, :replace_id => @post.id
+= render 'shared/post_show', :post => @post

@@ -55,6 +55,28 @@ scope "/project/:project" do
     end
    end
 
+  namespace :concept do
+    get 'vote_list'  => "posts#vote_list"
+    put 'vote/:post_id'  => "posts#vote"
+    scope "/status/:status/",  :defaults => {:status => 0} do   
+      resources :posts do
+            member do
+                put :add_comment
+                put :plus
+                put :plus_comment
+                put :to_archive
+                get :to_expert
+                put :to_expert_save  
+                get :expert_rejection
+                put :expert_rejection_save 
+                get :expert_revision
+                put :expert_revision_save
+                get :expert_acceptance_save
+            end
+      end
+    end
+   end
+
   namespace :life_tape do
     get 'vote_list'  => "posts#vote_list"
     put 'vote/:post_id'  => "posts#vote"
@@ -92,8 +114,6 @@ end
 
 ############
   namespace :plan do resources :posts end
-  namespace :concept do resources :posts end
-  namespace :expert_news do resources :posts end
 
   get "journal/enter"
 
@@ -197,34 +217,7 @@ end
   # Sample resource route within a namespace:
  
 
-    namespace :concept do
-      get 'forecast' => "posts#forecast"
-      get 'result' => "posts#result"
-      get 'essay' => "posts#essay"
-
-      match 'vote_for/:id/:score' => 'posts#vote_for',  :constraints => { :score => /[0-3]/ }
-
-      resources :forecast_tasks
-      get 'posts/status/:status_id' => "posts#index"
-      resources :posts do
-        member do
-            put :add_comment
-            put :plus
-            get :to_expert
-            put :to_expert_save  
-            get :expert_rejection
-            put :expert_rejection_save 
-            get :expert_revision
-            put :expert_revision_save
-            get :expert_acceptance_save
-        end
-      end
-      resources :comments do
-          member do
-            put :plus
-          end  
-      end
-    end
+   
 
     namespace :plan do
       get 'forecast' => "posts#forecast"

@@ -1,61 +1,16 @@
-
+	
 %ul.leftlink
-	%li= link_to "Обсуждаются", '/concept/posts', class: cp_frustration('/concept/posts') 
-	%li= link_to "Архив", "/concept/posts/status/1" , class: cp_frustration('/concept/posts/status/1') 
-	%li= link_to "Принятые", "/concept/posts/status/3", class: cp_frustration('/concept/posts/status/3')
-	- if admin? or expert?
-		%li= link_to "На рассмотрении", "/concept/posts/status/2", class: cp_frustration('/concept/posts/status/3')
-	%li= link_to "На голосовании", "/concept/forecast", class: cp_frustration('/concept/forecast')
+	%li= link_to "Обсуждаются", concept_posts_path(@project,:status => 0), class: menu_status(0) 
+	%li= link_to "Архив", concept_posts_path(@project,:status =>3), class: menu_status(3) 
+	%li= link_to "Принятые", concept_posts_path(@project,:status =>2), class: menu_status(2)
 	- if boss?
-		%li= link_to "Эссе", "/concept/essay", class: cp_frustration('/concept/essay')
+		%li= link_to "На рассмотрении", concept_posts_path(@project,:status =>1), class: menu_status(1)
 
-.redtitle Результаты голосования 
-%div.topics
-	%p.greentitle 50 голосов
-	%p.righttext  Сбои в работе портала во время тестов.
-
-%div.topics
-	%p.greentitle 33 голоса
-	%p.righttext Нехватка записи видеоконференций.
-%div.topics
-	%p.greentitle 32 голоса
-	%p.righttext Нехватка помощи ИОО в трудоустройстве, в поисках мест для прохождения практики, встречах с потенциальными работодателями.
-%div.topics
-	%p.greentitle  28 голосов
-	%p.righttext Студенты не имеют возможности формировать и представлять кафедрам СГУ коллективное отношение к учебной программе, уровню преподавания, к качеству ДО.
-%div.topics
-	%p.greentitle  28 голосов
-	%p.righttext Нехватка иллюстраций, презентаций и других средств, делающих изложение материала нескучным.
-%div.topics
-	%p.greentitle  28 голосов
-	%p.righttext Нехватка семинарских занятий, разборов задач, отработки знаний на конкретных примерах.
-%div.topics
-	%p.greentitle  23 голоса
-	%p.righttext Неоптимальность графика видеоконференций и размещения учебных материалов.
-%div.topics
-	%p.greentitle  17 голосов
-	%p.righttext Нетребовательность студентов к качеству образования.
-%div.topics
-	%p.greentitle  13 голосов
-	%p.righttext Недостаточное вырабатывание у студентов необходимых для практической деятельности профессиональных компетенций.
-%div.topics
-	%p.greentitle  9 голосов
-	%p.righttext Недостаточная подготовка преподавателей к работе в ДО.
-
-
-.redtitle Плодотворные, по мнению эксперта идеи:
-
-%div.topics 
-	%p.righttext Выборный студенческий орган, который организовывал бы и проводил оценивание студентами качества учебных курсов и преподавания в ДО, публично оглашал эти оценки и предоставлял форум для их обсуждения, тем самым способствуя созданию широко известных репутаций учебных курсов и преподавателей ДО и таким образом влияя на качество (содержание и методику) образования.
-%div.topics 
-	%p.righttext "Горячая линия" с бесплатным телефонным или он-лайн консультантом – сотрудником ИОО, оперативно реагирующим на запросы студентов по проблемам, возникающим в процессе обучения.
-%div.topics
-	%p.righttext  Оригинальные курсы или отдельные лекции преподавателей не из СГУ, читающиеся дистанционно (может быть из других городов и даже стран), бесплатные для студентов ДО и, возможно, студентов-очников СГУ, а для остальных желающих их послушать предоставляемые за небольшую плату.
-%div.topics 
-	%p.righttext Сайт, на котором студенты могли бы взаимодействовать с потенциальными работодателями в поисках будущей работы. 
-%div.topics 
-	%p.righttext Возможность заходить на сайт с видеоконференциями с планшета.
-%div.topics
-	%p.righttext Орган который отстаивал бы интересы студентов и, возможно, взял бы на себя часть работы администрации ДО по напоминанию преподавателям о своевременном предоставлении материала.
-%div.topics 
-	%p.righttext  Возможность просматривать видеоконференции в любой момент.
+-unless @journals.nil?
+	.redtitle Активность
+	- @journals.each do |journal|
+		%p.righttext
+			=Russian::strftime(journal.created_at,"%d %B %k:%M:%S ")
+			%b= journal.user.name_title
+			= journal_parser(journal, @project.id).html_safe
+		=image_tag('dots.png')

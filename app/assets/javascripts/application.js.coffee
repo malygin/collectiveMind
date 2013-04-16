@@ -1,6 +1,5 @@
 #= require jquery
 #= require jquery_ujs
-#= require redactor-rails
 
 #$(document).ready ->
 #  window.wiselinks = new Wiselinks()
@@ -26,5 +25,15 @@ $(document).ready ->
       .bind "ajax:success", (event, resp) ->
         console.log(resp)
         $(this).replaceWith ""+resp
+root = exports ? this
 
+root.addTask =  (x) -> 
+  $('.links').before('<tr class="ts">  <td><textarea class="wymeditor" id="task_supply_'+x+'_1" name="task_supply['+x+'][1]"></textarea></td>    <td><a href="#" onclick=" $(this).parent().parent().remove(); return false;"><img alt="Close" src="/assets/close.png"></a></td></tr>')
+
+  $(".wymeditor").wymeditor ->
+    stylesheet: 'styles.css',
+    postInit: (wym) ->
+      $(wym._box).removeClass("wym_area_right")
+      $(wym._box).find(wym._options.iframeSelector).css('height', '800px')
+      
 

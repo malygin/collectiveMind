@@ -24,6 +24,8 @@ module ApplicationHelper
 		if stage =='life_tape' and ( [0,1].include? @project.status)
 			'current'
   		elsif stage == 'discontent' and (@project.status == 3)
+  			'current'  		
+  		elsif stage == 'concept' and (@project.status == 5)
   			'current'
   		end
 	end
@@ -42,6 +44,8 @@ module ApplicationHelper
 		if stage =='life_tape' and ([0,1].include? @project.status)    
 		    return image+'green.png'  
 		 elsif stage == 'discontent' and (@project.status == 3)
+		    return image+'green.png' 		 
+		elsif stage == 'concept' and (@project.status == 5)
 		    return image+'green.png'  
 		else
 		  return  image+'.png' 
@@ -59,7 +63,12 @@ def  status_title(pr)
 			when 3
 				'сбор недовольств'			
 			when 4
-				'голосование за недовольства и рефлексия'
+				'голосование за недовольства и рефлексия'	
+			when 5
+				'формулирование концепций'			
+			when 6
+				'голосование за концепции и рефлексия'
+
 			when 20
 				'завершена'
 	

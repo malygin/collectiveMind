@@ -21,6 +21,10 @@ class Core::ProjectsController < ApplicationController
       redirect_to discontent_posts_path(@project)
     elsif @project.status ==4
       redirect_to discontent_vote_list_path(@project)
+    elsif @project.status == 5
+      redirect_to concept_posts_path(@project)
+    elsif @project.status ==6
+      redirect_to concept_vote_list_path(@project)
 
     end
 

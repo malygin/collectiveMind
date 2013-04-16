@@ -27,7 +27,7 @@ class User < ActiveRecord::Base
   has_many :concept_posts, :class_name => "Concept::Post"
   
   has_many :aspect_votings, :class_name => "LifeTape::Voiting"
-  has_many :voted_aspects, :through => :aspect_voitings, :source => :discontent_aspect, :class_name => "Discontent::Aspect"
+  has_many :voted_aspects, :through => :aspect_votings, :source => :discontent_aspect, :class_name => "Discontent::Aspect"
   
   has_many :post_votings, :class_name => "Discontent::Voting"
   has_many :voted_discontent_posts, :through => :post_votings, :source => :discontent_post, :class_name => "Discontent::Post"

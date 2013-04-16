@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130410153932) do
+ActiveRecord::Schema.define(:version => 20130415152558) do
 
   create_table "answers", :force => true do |t|
     t.string   "text"
@@ -51,14 +51,14 @@ ActiveRecord::Schema.define(:version => 20130410153932) do
 
   add_index "comments", ["post_id"], :name => "index_comments_on_post_id"
 
-  create_table "concept_comment_voitings", :force => true do |t|
+  create_table "concept_comment_votings", :force => true do |t|
     t.integer  "user_id"
     t.integer  "comment_id"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end
 
-  add_index "concept_comment_voitings", ["created_at", "comment_id"], :name => "index_concept_comment_voitings_on_created_at_and_comment_id"
+  add_index "concept_comment_votings", ["created_at", "comment_id"], :name => "index_concept_comment_voitings_on_created_at_and_comment_id"
 
   create_table "concept_comments", :force => true do |t|
     t.text     "content"
@@ -120,7 +120,7 @@ ActiveRecord::Schema.define(:version => 20130410153932) do
 
   add_index "concept_post_notes", ["post_id"], :name => "index_concept_post_notes_on_post_id"
 
-  create_table "concept_post_voitings", :force => true do |t|
+  create_table "concept_post_votings", :force => true do |t|
     t.integer  "user_id"
     t.integer  "post_id"
     t.boolean  "against"
@@ -128,9 +128,9 @@ ActiveRecord::Schema.define(:version => 20130410153932) do
     t.datetime "updated_at", :null => false
   end
 
-  add_index "concept_post_voitings", ["post_id", "user_id"], :name => "index_concept_post_voitings_on_post_id_and_user_id"
-  add_index "concept_post_voitings", ["post_id"], :name => "index_concept_post_voitings_on_post_id"
-  add_index "concept_post_voitings", ["user_id"], :name => "index_concept_post_voitings_on_user_id"
+  add_index "concept_post_votings", ["post_id", "user_id"], :name => "index_concept_post_voitings_on_post_id_and_user_id"
+  add_index "concept_post_votings", ["post_id"], :name => "index_concept_post_voitings_on_post_id"
+  add_index "concept_post_votings", ["user_id"], :name => "index_concept_post_voitings_on_user_id"
 
   create_table "concept_posts", :force => true do |t|
     t.text     "goal"
@@ -141,10 +141,13 @@ ActiveRecord::Schema.define(:version => 20130410153932) do
     t.datetime "created_at",        :null => false
     t.datetime "updated_at",        :null => false
     t.integer  "status"
+    t.integer  "project_id"
+    t.text     "content"
   end
 
   add_index "concept_posts", ["created_at"], :name => "index_concept_posts_on_created_at"
   add_index "concept_posts", ["life_tape_post_id"], :name => "index_concept_posts_on_life_tape_post_id"
+  add_index "concept_posts", ["project_id"], :name => "index_concept_posts_on_project_id"
   add_index "concept_posts", ["status"], :name => "index_concept_posts_on_status"
   add_index "concept_posts", ["user_id"], :name => "index_concept_posts_on_user_id"
 
@@ -158,6 +161,16 @@ ActiveRecord::Schema.define(:version => 20130410153932) do
   end
 
   add_index "concept_task_supply_pairs", ["post_id"], :name => "index_concept_task_supply_pairs_on_post_id"
+
+  create_table "concept_votings", :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "concept_post_id"
+    t.datetime "created_at",      :null => false
+    t.datetime "updated_at",      :null => false
+  end
+
+  add_index "concept_votings", ["concept_post_id"], :name => "index_concept_votings_on_concept_post_id"
+  add_index "concept_votings", ["user_id"], :name => "index_concept_votings_on_user_id"
 
   create_table "core_projects", :force => true do |t|
     t.string   "name",        :limit => 500
