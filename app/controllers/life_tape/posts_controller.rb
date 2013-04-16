@@ -33,7 +33,7 @@ end
   # end
   def vote_list
     @posts = voting_model.where(:project_id => @project)
-    @number_v = @project.stage1 - current_user.voted_aspects.size
+    @number_v = @project.stage1.to_i - current_user.voted_aspects.size
     @path_for_voting = "/project/#{@project.id}/life_tape/vote/"
      @votes = @project.stage1
 
