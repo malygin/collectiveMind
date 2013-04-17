@@ -12,5 +12,9 @@ module BasePost  extend ActiveSupport::Concern
  	validates :content, :presence => true
     default_scope :order => 'created_at DESC'
 
+    def show_content
+    	content
+  	end
+
   end
 end

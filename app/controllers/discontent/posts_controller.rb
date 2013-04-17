@@ -19,19 +19,18 @@ class Discontent::PostsController < PostsController
 
   def prepare_data
     @project = Core::Project.find(params[:project]) 
-
     @journals = Journal.events_for_user_feed @project.id
-    @news = ExpertNews::Post.first  
+    @news = ExpertNews::Post.where(:project_id => @project).first 
     @status = params[:status]
     @aspect = params[:aspect]
-    @aspects = Discontent::Aspect.all
+    @aspects = Discontent::Aspect.where(:project_id => @project)
 end
 
   def index
   	if @aspect!='0'
-    	@posts = current_model.where(:project_id => @project, :status => 0, :aspect_id => params[:aspect])
+    	@posts = current_model.where(:project_id => @project, :status => 0, :aspect_id => params[:aspect]).paginate(:page => params[:page])
     else
-    	@posts = current_model.where(:project_id => @project, :status => @status)
+    	@posts = current_model.where(:project_id => @project, :status => @status).paginate(:page => params[:page])
     end
     respond_to do |format|
       format.html # index.html.erb

@@ -18,7 +18,7 @@ def prepare_data
     @project = Core::Project.find(params[:project]) 
  @aspects = Discontent::Aspect.where(:project_id => @project)
     @journals = Journal.events_for_user_feed @project.id
-    @news = ExpertNews::Post.first 
+    @news = ExpertNews::Post.where(:project_id => @project).first 
     
 end
 

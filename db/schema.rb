@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130417135931) do
+ActiveRecord::Schema.define(:version => 20130417163242) do
 
   create_table "answers", :force => true do |t|
     t.string   "text"
@@ -439,9 +439,10 @@ ActiveRecord::Schema.define(:version => 20130417135931) do
     t.text     "anons"
     t.text     "content"
     t.integer  "user_id"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at",                  :null => false
+    t.datetime "updated_at",                  :null => false
     t.integer  "project_id"
+    t.integer  "number_views", :default => 0
   end
 
   add_index "expert_news_posts", ["created_at"], :name => "index_expert_news_posts_on_created_at"

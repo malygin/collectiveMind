@@ -38,7 +38,7 @@ def prepare_data
     @project = Core::Project.find(params[:project]) 
 
     @journals = Journal.events_for_user_feed @project.id
-    @news = ExpertNews::Post.first 
+    @news = ExpertNews::Post.where(:project_id => @project).first 
     
 end
 
@@ -67,6 +67,7 @@ def index
   # GET /discontent/posts/1.json
   def show
     @post = current_model.where(:id => params[:id], :project_id => params[:project]).first
+    # @path_link ='/'+ self.class.to_s.split("::").first.tableize.singularize+'/comments/'
     # puts '+++++++++++++++++++', @post.id
     if current_model.column_names.include? :number_views
       @post.update_column(:number_views, @post.number_views+1)

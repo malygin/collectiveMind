@@ -8,7 +8,13 @@
 				= trim_string(post.content)
 				= link_to "Подробнее",  {:action => show_post, :project => @project, :id => post.id}, class: "more"
 		-else
-			%p= post.content
+			
+			%p= simple_format(post.show_content)
+			- if boss? or @post.user == current_user
+				= link_to 'Редактировать', :action => 'edit', :project => @project, :id => @post, id: "edit_post"
+				\|
+				= link_to 'Назад', url_for(:action => 'index')
+
 			
 		- if post.user == current_user 
 			%br
@@ -18,3 +24,8 @@
 		= render 'shared/post_social_bar', :post => post
 
 .dotline=image_tag('dotline.png')
+- if current_page?(url_for(params.merge(:project => @project, :id => post.id)))  
+	- if signed_in?
+		= render :partial => 'shared/comment_form', :locals => { :comment => @comment, :url_link => url_for(:action => 'add_comment')}
+
+	= render :partial => 'shared/comment',:collection => @post.comments
