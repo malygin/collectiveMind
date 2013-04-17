@@ -56,7 +56,7 @@ def add_comment
  end 
 
 def index
-    @posts = current_model.where(:project_id => @project)
+    @posts = current_model.where(:project_id => @project).paginate(:page => params[:page])
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @posts }

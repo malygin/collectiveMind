@@ -1,6 +1,6 @@
 class Discontent::Aspect < ActiveRecord::Base
   include BasePost
-  attr_accessible :position 
+  attr_accessible :position, :short_desc
   has_many :posts
   
   has_many :voted_users, :through => :final_votings, :source => :user

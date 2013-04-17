@@ -37,19 +37,7 @@
 %br
 %br
 %h3 Процедуры:
-.strtable
-  .strcolumns= image_tag 'oecdo.png', :width => 60, class: 'project_logo'
-  .strcolumns
-    %span.strname СТРАТЕГИЯ РАЗВИТИЯ ДО В СГУ НА 2012-2013 ГОД
-    %br
-    Статус: 
-    %span.namedate завершена
-    %br
-    Уровень доступа:
-    %span.namedate закрыта
-    %br
-    .desc Процедура прошла в 2012 году в Институте открытого образования Cаратовского государственного университета. Целью стало выработка статегии модернизации институа на ближайший год. Жюри присудило победу проекту С.Мертиковой, голосование среди студентов выбрало проект Э. Овсейцева как лучший.
-    %br
+%br
 - @core_projects.each do |core_project|
   .strtable
     .strcolumns= image_tag core_project.url_logo, :width => 60, class: 'project_logo'
