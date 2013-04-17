@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130417163242) do
+ActiveRecord::Schema.define(:version => 20130417180046) do
 
   create_table "answers", :force => true do |t|
     t.string   "text"
@@ -374,10 +374,12 @@ ActiveRecord::Schema.define(:version => 20130417163242) do
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
     t.integer  "status"
+    t.integer  "project_id"
   end
 
   add_index "estimate_posts", ["created_at"], :name => "index_estimate_posts_on_created_at"
   add_index "estimate_posts", ["post_id"], :name => "index_estimate_posts_on_post_id"
+  add_index "estimate_posts", ["project_id"], :name => "index_estimate_posts_on_project_id"
   add_index "estimate_posts", ["status"], :name => "index_estimate_posts_on_status"
   add_index "estimate_posts", ["user_id"], :name => "index_estimate_posts_on_user_id"
 
@@ -642,9 +644,11 @@ ActiveRecord::Schema.define(:version => 20130417163242) do
     t.integer  "number_views"
     t.datetime "created_at",   :null => false
     t.datetime "updated_at",   :null => false
+    t.integer  "project_id"
   end
 
   add_index "plan_posts", ["created_at"], :name => "index_plan_posts_on_created_at"
+  add_index "plan_posts", ["project_id"], :name => "index_plan_posts_on_project_id"
   add_index "plan_posts", ["user_id"], :name => "index_plan_posts_on_user_id"
 
   create_table "plan_task_triplets", :force => true do |t|
