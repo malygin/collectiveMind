@@ -23,7 +23,7 @@
      
     - @post.task_supply_pairs.each_with_index do |p, index|
       %tr.ts
-        %td= text_area_tag 'task_supply['+index.to_s+'][0]', p.task, :class =>'wymeditor'
+        %td= text_area_tag 'task_supply['+index.to_s+']', p.task, :class =>'wymeditor'
         %td=link_to_function image_tag('close.png'), ' $(this).parent().parent().remove()'
     
 

@@ -81,9 +81,10 @@ class Concept::PostsController < PostsController
       if @concept_post.update_attributes(params[:concept_post])
          @concept_post.task_supply_pairs =[]
          unless params['task_supply'].nil?
-          params['task_supply'].each do |k,v|
-            if v['1']!= '' or v['2']!= ''
-              pair = Concept::TaskSupplyPair.new(:task => v['1'], :supply => v['2']) 
+          params['task_supply'].each do |v,k|
+            if k!= ''
+              puts '!!!!!!!!!!!!!'+k
+              pair = Concept::TaskSupplyPair.new(:task => k) 
               @concept_post.task_supply_pairs << pair
             end
           end           
