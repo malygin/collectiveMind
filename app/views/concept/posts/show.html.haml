@@ -7,10 +7,12 @@
       %b Общее описание проекта
       %br=simple_format(@post.show_content)
     %p
-      %b Цель -
-      образ желаемого будущего
+      %b Образ желаемого будущего     
       %br
       = @post.goal
+    %br
+    %b Задачи:
+    %br
     - @post.task_supply_pairs.each do |tp|
       .task_supply=simple_format(tp.task)     
       %p=simple_format(tp.supply)
