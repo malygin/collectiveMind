@@ -40,7 +40,6 @@ class Concept::PostsController < PostsController
     @project = Core::Project.find(params[:project]) 
 
     @concept_post = Concept::Post.new(params[:concept_post])
-    puts '__________-', params
     unless params['idea'].nil?
       @concept_post.life_tape_post_id = params['idea']
     end
