@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130417180046) do
+ActiveRecord::Schema.define(:version => 20130418083641) do
 
   create_table "answers", :force => true do |t|
     t.string   "text"
@@ -307,14 +307,14 @@ ActiveRecord::Schema.define(:version => 20130417180046) do
     t.integer  "number_views", :default => 0
   end
 
-  create_table "estimate_comment_voitings", :force => true do |t|
+  create_table "estimate_comment_votings", :force => true do |t|
     t.integer  "user_id"
     t.integer  "comment_id"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end
 
-  add_index "estimate_comment_voitings", ["comment_id"], :name => "index_estimate_comment_voitings_on_comment_id"
+  add_index "estimate_comment_votings", ["comment_id"], :name => "index_estimate_comment_voitings_on_comment_id"
 
   create_table "estimate_comments", :force => true do |t|
     t.integer  "user_id"
@@ -599,14 +599,14 @@ ActiveRecord::Schema.define(:version => 20130417180046) do
   add_index "life_tape_voitings", ["discontent_aspect_id"], :name => "index_life_tape_voitings_on_discontent_aspect_id"
   add_index "life_tape_voitings", ["user_id"], :name => "index_life_tape_voitings_on_user_id"
 
-  create_table "plan_comment_voitings", :force => true do |t|
+  create_table "plan_comment_votings", :force => true do |t|
     t.integer  "user_id"
     t.integer  "comment_id"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end
 
-  add_index "plan_comment_voitings", ["comment_id"], :name => "index_plan_comment_voitings_on_comment_id"
+  add_index "plan_comment_votings", ["comment_id"], :name => "index_plan_comment_voitings_on_comment_id"
 
   create_table "plan_comments", :force => true do |t|
     t.integer  "user_id"
@@ -626,14 +626,14 @@ ActiveRecord::Schema.define(:version => 20130417180046) do
     t.datetime "updated_at", :null => false
   end
 
-  create_table "plan_post_voitings", :force => true do |t|
+  create_table "plan_post_votings", :force => true do |t|
     t.integer  "user_id"
     t.integer  "post_id"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end
 
-  add_index "plan_post_voitings", ["post_id"], :name => "index_plan_post_voitings_on_post_id"
+  add_index "plan_post_votings", ["post_id"], :name => "index_plan_post_voitings_on_post_id"
 
   create_table "plan_posts", :force => true do |t|
     t.integer  "user_id"

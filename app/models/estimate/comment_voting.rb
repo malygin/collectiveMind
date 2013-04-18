@@ -1,4 +1,4 @@
-class Plan::CommentVoiting < ActiveRecord::Base
+class Estimate::CommentVoting < ActiveRecord::Base
     attr_accessible :comment, :user
 
     belongs_to :user

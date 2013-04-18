@@ -23,7 +23,7 @@
 
 /*HIDDEN BY DEFAULT*/
         .wym_skin_default .wym_area_left          { display: none; }
-        .wym_skin_default .wym_area_right         { display: block; }
+        .wym_skin_default .wym_area_right         { display: none; }
 
 
 /*TYPO*/    
@@ -34,7 +34,7 @@
 
 
 /*WYM_BOX*/
-        .wym_skin_default                { border: 1px solid gray; background: #f2f2f2; padding: 5px}
+        .wym_skin_default                { border: 1px solid gray; width: 800px; background: #f2f2f2; padding: 5px}
 
     /*auto-clear the wym_box*/
         .wym_skin_default:after 	        { content: "."; display: block; height: 0; clear: both; visibility: hidden; }
@@ -53,9 +53,9 @@
 
 /*AREAS*/
         .wym_skin_default .wym_area_left          { width: 150px; float: left;}
-        .wym_skin_default .wym_area_right         { width: 150px; float: right;}
+        .wym_skin_default .wym_area_right         { width: 0px; float: right;}
         .wym_skin_default .wym_area_bottom        { height: 1%; clear: both;}
- * html .wym_skin_default .wym_area_main          { height: 1%;}
+ * html .wym_skin_default .wym_area_main          { height: 1%; margin-right: 0px !important;}
  * html .wym_skin_default .wym_area_top           { height: 1%;}
  *+html .wym_skin_default .wym_area_top           { height: 1%;}
 

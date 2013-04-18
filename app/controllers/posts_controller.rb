@@ -68,8 +68,8 @@ def index
   def show
     @post = current_model.where(:id => params[:id], :project_id => params[:project]).first
     # @path_link ='/'+ self.class.to_s.split("::").first.tableize.singularize+'/comments/'
-    # puts '+++++++++++++++++++', @post.id
-    if current_model.column_names.include? :number_views
+
+    if current_model.column_names.include? 'number_views'
       @post.update_column(:number_views, @post.number_views+1)
     end
     @comment = comment_model.new  

@@ -11,7 +11,8 @@
 
 
 - if signed_in?
-	= render :partial => 'shared/comment_form', :locals => { :comment => @comment, :url_link => add_comment_expert_news_post_path(@project, @post.id)}
+	= render :partial => 'shared/comment_form', :locals => { :comment => @comment, :url_link => url_for(:action => 'add_comment')}
+
 
 = render :partial => 'shared/comment',:collection => @post.comments, :locals => { :path_link => '/expert_news/comments/'}
 

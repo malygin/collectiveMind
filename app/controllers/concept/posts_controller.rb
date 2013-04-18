@@ -22,12 +22,20 @@ class Concept::PostsController < PostsController
 
   def prepare_data
     @project = Core::Project.find(params[:project]) 
-
     @journals = Journal.events_for_user_feed @project.id
     @news = ExpertNews::Post.first  
     @status = params[:status]
-    @aspects = Discontent::Aspect.all
-end
+  end
+
+
+  def index
+    @posts = current_model.where(:project_id => @project, :status => @status).paginate(:page => params[:page])
+    respond_to do |format|
+      format.html # index.html.erb
+      format.json { render json: @posts }
+    end
+  end
+
   def create
     @project = Core::Project.find(params[:project]) 
 
