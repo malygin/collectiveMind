@@ -12,7 +12,7 @@
       %br
       = @post.goal
     - @post.task_supply_pairs.each do |tp|
-      %p=simple_format(tp.task)     
+      .task_supply=simple_format(tp.task)     
       %p=simple_format(tp.supply)
       %br
     %p

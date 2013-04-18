@@ -75,6 +75,8 @@ class Concept::PostsController < PostsController
   # PUT /concept/posts/1
   # PUT /concept/posts/1.json
   def update
+    @project = Core::Project.find(params[:project]) 
+
     @concept_post = Concept::Post.find(params[:id])
     respond_to do |format|
       if @concept_post.update_attributes(params[:concept_post])
@@ -91,7 +93,7 @@ class Concept::PostsController < PostsController
         @concept_post.save
         current_user.journals.build(:type_event=>'concept_post_update', :body=>@concept_post.id).save!
 
-        format.html { redirect_to @concept_post, notice: 'Концепция успешно изменена!' }
+        format.html { redirect_to action: "show", :project => @project, :id => @concept_post.id , notice: 'Концепция успешно изменена!' }
         format.json { head :no_content }
       else
         format.html { render action: "edit" }
