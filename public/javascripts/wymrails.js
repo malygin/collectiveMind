@@ -1,4 +1,4 @@
 $(function() {
-	$(".wymeditor").wymeditor();
-	$('input[type=submit]').addClass('wymupdate');
+	// $(".wymeditor").wymeditor();
+	// $('input[type=submit]').addClass('wymupdate');
 });

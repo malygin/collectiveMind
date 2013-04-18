@@ -25,17 +25,17 @@ $(document).ready ->
       .bind "ajax:success", (event, resp) ->
         console.log(resp)
         $(this).replaceWith ""+resp
-    # $('.wymeditor').wymeditor(
-    #   skin: 'compact'
-    #   logoHtml: '',
-    #   toolsItems: [
-    #       {'name': 'InsertOrderedList', 'title': 'Ordered_List', 'css': 'wym_tools_ordered_list'},
-    #       {'name': 'InsertUnorderedList', 'title': 'Unordered_List', 'css': 'wym_tools_unordered_list'},
-    #       {'name': 'Indent', 'title': 'Indent', 'css': 'wym_tools_indent'},
-    #       {'name': 'Outdent', 'title': 'Outdent', 'css': 'wym_tools_outdent'},
-    #       {'name': 'Undo', 'title': 'Undo', 'css': 'wym_tools_undo'},
-    #       {'name': 'Redo', 'title': 'Redo', 'css': 'wym_tools_redo'}
-    #   ])
+    $('.wymeditor').wymeditor(
+      skin: 'compact'
+      logoHtml: '',
+      toolsItems: [
+          {'name': 'InsertOrderedList', 'title': 'Ordered_List', 'css': 'wym_tools_ordered_list'},
+          {'name': 'InsertUnorderedList', 'title': 'Unordered_List', 'css': 'wym_tools_unordered_list'},
+          {'name': 'Indent', 'title': 'Indent', 'css': 'wym_tools_indent'},
+          {'name': 'Outdent', 'title': 'Outdent', 'css': 'wym_tools_outdent'},
+          {'name': 'Undo', 'title': 'Undo', 'css': 'wym_tools_undo'},
+          {'name': 'Redo', 'title': 'Redo', 'css': 'wym_tools_redo'}
+      ])
 root = exports ? this
 
 root.addTask =  (x) -> 

@@ -1,16 +1,16 @@
 = form_for  @post, :url => {:project => @project.id, :action => @post.persisted? ? 'update' : 'create'},   :html => { :class => 'new_or_edit' }do |f|
   %label 
     О чем концепция
-  %br
   %field
-    = f.text_area :content
+    = f.text_area :content, class: "wider_area"
   %div{:class=>'timestamp'} Вкратце опишите свою концепцию, укажите какие недовольства будут разрешены.  
+  %br
   %label 
     %b Цель -
     образ желаемого будущего
-  %br
+  
   %field
-    = f.text_area :goal
+    = f.text_area :goal, class: "wider_area"
   %div{:class=>'timestamp'} Что, в главном, представляет собой предлагаемое нововведение и каковы его желаемые результаты.
   %br
   %table.tasks
@@ -42,7 +42,7 @@
     возможно ли это осуществить на практике? 
   %br
   %field
-    = f.text_area :reality
+    = f.text_area :reality, class: "wider_area"
   %div{:class=>'timestamp'} - Каким образом и в какие сроки реалистично ввести в действие в ДО СГУ данное нововведение, в частности, задействовать ресурсы для него, и почему осуществить это реалистично?
   - unless @ltpost.nil?
     = hidden_field_tag 'idea', @ltpost 
