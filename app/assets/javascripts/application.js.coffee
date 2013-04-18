@@ -25,10 +25,12 @@ $(document).ready ->
       .bind "ajax:success", (event, resp) ->
         console.log(resp)
         $(this).replaceWith ""+resp
+    $('.task_supply ol li ul ').before('<br/><span class="task_supply_resource">Ресурсы:</span>')
    
 root = exports ? this
 
 root.addTask =  (x) -> 
+
   $('.links').before('<tr class="ts">  <td><textarea class="wymeditor" id="task_supply_'+x+'" name="task_supply['+x+']"></textarea></td>    <td><a href="#" onclick=" $(this).parent().parent().remove(); return false;"><img alt="Close" src="/assets/close.png"></a></td></tr>')
 
   $('#task_supply_'+x).wymeditor(

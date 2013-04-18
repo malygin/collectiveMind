@@ -15,7 +15,7 @@
     %li{ :class => cp('discontent')}
       = image_tag image_for_stages('2', 'discontent'), :class => 'numbers'
       - if @project.status>1
-        = link_to "Несовершенства", discontent_posts_path(@project), class: "lstages" 
+        = link_to "Несовершенства", discontent_posts_path(@project, :status => 2), class: "lstages" 
       -else
         %span.lstagesdisabled Несовершенства
     = image_tag "space.png", :class => "space"    
@@ -30,7 +30,7 @@
     %li{ :class => cp('concept')}
       = image_tag image_for_stages('3', 'concept'), :class => 'numbers'
       - if @project.status > 3
-        = link_to "Концепции", concept_posts_path(@project), class: "lstages" 
+        = link_to "Концепции", concept_posts_path(@project, :status => 2), class: "lstages" 
       -else
         %span.lstagesdisabled Концепции
     = image_tag "space.png", :class => "space" 
