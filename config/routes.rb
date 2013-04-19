@@ -14,6 +14,8 @@ match "/project/:project", :to => "core/projects#to_project"
 match '/savelzon', :to =>'pages#savelzon'
 match '/vayntrub', :to =>'pages#savelzon'
 match '/reviews', :to =>'pages#reviews'
+match '/contacts', :to =>'pages#contacts'
+match '/description', :to =>'pages#description'
 
 
 scope "/project/:project" do
