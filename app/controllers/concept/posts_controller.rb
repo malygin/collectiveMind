@@ -102,6 +102,14 @@ class Concept::PostsController < PostsController
     end
   end
 
+  def vote_list
+    @posts = current_model.where(:project_id => @project, :status => 2)
+    # i have votes now
+    @number_v = @project.stage3 - current_user.voted_concept_posts.size
+    @path_for_voting = "/project/#{@project.id}/concept/vote/"
+    #all number of votes
+    @votes = @project.stage3
+  end
  
   
 end

@@ -27,6 +27,10 @@ module ApplicationHelper
   			'current'  		
   		elsif stage == 'concept' and (@project.status == 5)
   			'current'
+  		elsif stage == 'plan' and (@project.status == 7)
+  			'current' 		
+  		elsif stage == 'estimate' and (@project.status == 9)
+  			'current'
   		end
 	end
 
@@ -34,6 +38,10 @@ module ApplicationHelper
 		if stage =='life_tape' and (@project.status==2)
 			true
 		elsif stage =='discontent' and (@project.status==4)
+			true
+		elsif stage =='concept' and (@project.status==6)
+			true	
+		elsif stage =='plan' and (@project.status==8)
 			true
 		else
 			false
@@ -46,6 +54,10 @@ module ApplicationHelper
 		 elsif stage == 'discontent' and (@project.status == 3)
 		    return image+'green.png' 		 
 		elsif stage == 'concept' and (@project.status == 5)
+		    return image+'green.png'  
+		elsif stage == 'plan' and (@project.status == 7)
+		    return image+'green.png'  		
+		elsif stage == 'estimate' and (@project.status == 9)
 		    return image+'green.png'  
 		else
 		  return  image+'.png' 
@@ -68,6 +80,14 @@ def  status_title(pr)
 				'формулирование концепций'			
 			when 6
 				'голосование за концепции и рефлексия'
+			when 7 
+				'создание проектов'
+			when 8
+				'голосование за проекты'
+			when 9
+				'выставление оценок'
+			when 10 
+				'итоговое голосование'
 
 			when 20
 				'завершена'

@@ -31,6 +31,9 @@ class User < ActiveRecord::Base
   
   has_many :post_votings, :class_name => "Discontent::Voting"
   has_many :voted_discontent_posts, :through => :post_votings, :source => :discontent_post, :class_name => "Discontent::Post"
+    
+  has_many :concept_post_votings, :class_name => "Concept::Voting"
+  has_many :voted_concept_posts, :through => :concept_post_votings, :source => :concept_post, :class_name => "Concept::Post"
   
   has_many :user_awards
   has_many :awards, :through => :user_awards  
