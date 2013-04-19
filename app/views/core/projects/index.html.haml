@@ -69,9 +69,10 @@
       %br
       .desc= core_project.short_desc
       %br
-      = link_to 'Show', core_project
-      = link_to 'Edit', edit_core_project_path(core_project)
-      = link_to 'Destroy', core_project, :data => { :confirm => 'Text' }, :method => :delete
+      - if boss?
+        = link_to 'Show', core_project
+        = link_to 'Edit', edit_core_project_path(core_project)
+        = link_to 'Destroy', core_project, :data => { :confirm => 'Text' }, :method => :delete
 
 %br
 
@@ -79,7 +80,7 @@
   = link_to 'Добавить проект', new_core_project_path
 %br
 %br
-%h3 Отзывы пользователей
+%h3 Отзывы пользователей после первой процедуры
 %br
 
 .strtable
