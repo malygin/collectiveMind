@@ -1,35 +1,29 @@
-= tinymce 
-= form_for @plan_post, :html => {:class =>'new_concept_post'} do |f|
+= form_for  @post, :url => {:project => @project.id, :action => @post.persisted? ? 'update' : 'create'},   :html => { :class => 'new_or_edit' }do |f|
+  %label 
+    О чем проект
+  %field
+    = f.text_area :content, class: "wider_area"
+  %div{:class=>'timestamp'} Вкратце опишите свой проект.  
+  %br
   %label 
     %b Цель -
     образ желаемого будущего
   %br
   %field
-    = f.text_area :goal
+    = f.text_area :goal, class: "wider_area"
   %div{:class=>'timestamp'} Что, в главном, представляет собой предлагаемое нововведение и каковы его желаемые результаты.
   %br
   %table.tasks
     %tr
       %td
         %label.small
-          %b Разбиения задач на подзадачи
+          %b Задачи
           
-      %td &nbsp;
-      %td
-        %label.small
-          %b Ресурсы -
-          методы и средства работы в будущем
-      %td &nbsp;
-      %td
-        %label.small
-          %b Средства создания ресурсов
-    - @plan_post.task_triplets.each_with_index do |p, index|
+
+    - @post.task_triplets.each_with_index do |p, index|
       %tr.ts
-        %td= text_area_tag 'task_triplet['+index.to_s+'][1]', p.task, :class =>'taskplan'
-        %td= image_tag('arrow.png')
-        %td= text_area_tag 'task_triplet['+index.to_s+'][2]', p.supply, :class =>'taskplan'        
-        %td= image_tag('arrow.png')
-        %td= text_area_tag 'task_triplet['+index.to_s+'][3]', p.howto, :class =>'taskplan'
+        %td= text_area_tag 'task_triplet['+index.to_s+']', p.task, :class =>'wymeditor'
+     
         %td=link_to_function image_tag('close.png'), ' $(this).parent().parent().remove()'
     
 
@@ -44,14 +38,14 @@
     %b Первый этап 
   %br
   %field
-    = f.text_area :first_step, :class => "tinymce"
+    = f.text_area :first_step, class: "wider_area"
   %div{:class=>'timestamp'} - Подготовительная стадия -согласование новшества  со всем контингентом студентов и администрацией ДО. Начало осуществления проекта - самые простые и дешевые действия по созданию ресурсов, дающих наиболее быстрый и ощутимый эффект.
   %br
   %label 
     %b Дальнейшие шаги 
   %br
   %field
-    = f.text_area :other_steps, :class => "tinymce"
+    = f.text_area :other_steps,class: "wider_area"
   %div{:class=>'timestamp'} - Набросок плана действий вплоть до завершения проекта.
 
   / - unless @ltpost.nil?

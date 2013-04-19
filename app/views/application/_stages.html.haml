@@ -31,7 +31,7 @@
 
     %li{ :class => cp('concept')}
       = image_tag image_for_stages('3', 'concept'), :class => 'numbers'
-      - if @project.status == 5 or @project.status == 6
+      - if @project.status >4
         = link_to "Концепции", concept_posts_path(@project, :status => 2), class: "lstages" 
       -else
         %span.lstagesdisabled Концепции

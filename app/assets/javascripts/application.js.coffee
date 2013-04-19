@@ -32,7 +32,6 @@ root = exports ? this
 root.addTask =  (x) -> 
 
   $('.links').before('<tr class="ts">  <td><textarea class="wymeditor" id="task_supply_'+x+'" name="task_supply['+x+']"></textarea></td>    <td><a href="#" onclick=" $(this).parent().parent().remove(); return false;"><img alt="Close" src="/assets/close.png"></a></td></tr>')
-
   $('#task_supply_'+x).wymeditor(
     skin: 'compact'
     logoHtml: '',
@@ -44,6 +43,18 @@ root.addTask =  (x) ->
         {'name': 'Undo', 'title': 'Undo', 'css': 'wym_tools_undo'},
         {'name': 'Redo', 'title': 'Redo', 'css': 'wym_tools_redo'}
     ])
-
+root.addTaskPlan =  (x) -> 
+  $('.links').before('<tr class="ts"> <td><textarea class="taskplan" id="task_triplet_'+x+'" name="task_triplet['+x+']"></textarea></td><td><a href="#" onclick=" $(this).parent().parent().remove(); return false;"><img alt="Close" src="/assets/close.png"></a></td></tr>')
+  $('#task_triplet_'+x).wymeditor(
+    skin: 'compact'
+    logoHtml: '',
+    toolsItems: [
+        {'name': 'InsertOrderedList', 'title': 'Ordered_List', 'css': 'wym_tools_ordered_list'},
+        {'name': 'InsertUnorderedList', 'title': 'Unordered_List', 'css': 'wym_tools_unordered_list'},
+        {'name': 'Indent', 'title': 'Indent', 'css': 'wym_tools_indent'},
+        {'name': 'Outdent', 'title': 'Outdent', 'css': 'wym_tools_outdent'},
+        {'name': 'Undo', 'title': 'Undo', 'css': 'wym_tools_undo'},
+        {'name': 'Redo', 'title': 'Redo', 'css': 'wym_tools_redo'}
+    ])
       
 

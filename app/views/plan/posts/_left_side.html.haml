@@ -1,25 +1,16 @@
-
-%ul.leftlink
-	%li= link_to "Обсуждаются", '/plan/posts/status/0', class: cp_frustration('/plan/posts/status/0') 
-	%li= link_to "Архив", "/plan/posts/status/1" , class: cp_frustration('/plan/posts/status/1') 
-	%li= link_to "Принятые", "/plan/posts/status/3", class: cp_frustration('/plan/posts/status/3')
-	- if admin? or expert?
-		%li= link_to "На рассмотрении", "/plan/posts/status/2", class: cp_frustration('/plan/posts/status/2')
-
-
-.redtitle Задачи, обязательные для каждого проекта
-%div.topics
-	%p.greentitle 1. Оценивание студентами качества образования 
-%div.topics
-	%p.greentitle 2. «Горячая линия» 
-%div.topics
-	%p.greentitle 3. Видео лекций 	
-%div.topics
-	%p.greentitle 4. Содействие в устройстве на практику, стажировку и работу 
-%div.topics
-	%p.greentitle 5. Представление студентов перед потенциальными работодателями 
-%div.topics
-	%p.greentitle 6. Видеоконференции с малыми группами 
 	
-%div.topics
-	%p.greentitle 7. Разбор материала на жизненных примерах 
+%ul.leftlink
+	%li= link_to "Обсуждаются", plan_posts_path(@project,:status => 0), class: menu_status(0) 
+	%li= link_to "Архив", plan_posts_path(@project,:status =>3), class: menu_status(3) 
+	%li= link_to "Принятые", plan_posts_path(@project,:status =>2), class: menu_status(2)
+	- if boss?
+		%li= link_to "На рассмотрении", plan_posts_path(@project,:status =>1), class: menu_status(1)
+
+-unless @journals.nil?
+	.redtitle Активность
+	- @journals.each do |journal|
+		%p.righttext
+			=Russian::strftime(journal.created_at,"%d %B %k:%M:%S ")
+			%b= journal.user.name_title
+			= journal_parser(journal, @project.id).html_safe
+		=image_tag('dots.png')

@@ -1,6 +1,4 @@
 class Plan::PostVoting < ActiveRecord::Base
-  attr_accessible :against, :post, :user
+	include BasePostVoting
 
-    belongs_to :user
-	belongs_to :post
 end
