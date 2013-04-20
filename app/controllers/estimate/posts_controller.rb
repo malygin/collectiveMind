@@ -4,9 +4,9 @@ class Estimate::PostsController < ApplicationController
   # GET /estimate/posts
   # GET /estimate/posts.json
   def prepare_data
-
-    @journals = Journal.events_for_user_feed
-    @news = ExpertNews::Post.first    
+    @project = Core::Project.find(2) 
+    @journals = Journal.events_for_user_feed @project.id
+    @news = ExpertNews::Post.where(:project_id => @project).first  
   end
   def index
     prepare_data

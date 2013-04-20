@@ -23,10 +23,10 @@
 
 
 
-/ %h1 Тех. поддержка
-/ %p.righttext
-/ 	Что-то непонятно? 
-/ 	= link_to 'Задайте вопрос', questions_path
+%h1 Тех. поддержка
+%p.righttext
+	Что-то непонятно? 
+	= link_to 'Задайте вопрос', question_posts_path(@project)
 
 / .redtitle Топ записей
 / - @top_posts.each do |post|
