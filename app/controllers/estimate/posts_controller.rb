@@ -11,7 +11,7 @@ class Estimate::PostsController < ApplicationController
   def index
     prepare_data
     @estimate_posts = Estimate::Post.all
-    @plan_posts = Plan::Post.where(:status => '0')
+    @plan_posts = Plan::Post.where(:status => '2')
 
     respond_to do |format|
       format.html # index.html.erb

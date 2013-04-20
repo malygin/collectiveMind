@@ -3,9 +3,7 @@
   = render 'users/user_post', :user => @post.user
   .posts
     = render 'users/user_name', :user => @post.user, :created_at => @post.created_at
-    %p
-      %b Общее описание проекта
-      %br=simple_format(@post.show_content)
+
     %p
       %b Образ желаемого будущего     
       %br
@@ -14,8 +12,10 @@
     %b Задачи:
     %br
     - @post.task_triplets.each do |tp|
-      .task_supply=simple_format(tp.task)     
-      %p=simple_format(tp.supply)  
+      .task_supply=simple_format(tp.task) 
+      %b Ресурсы:    
+      %p=simple_format(tp.supply) 
+      %b Средства достижения: 
       %p= simple_format(tp.howto)
     %p
       %b Первый шаг
