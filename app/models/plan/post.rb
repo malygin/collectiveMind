@@ -4,7 +4,7 @@ class Plan::Post < ActiveRecord::Base
 
   has_many :task_triplets, :order => 'position'
   has_many :estimates, :class_name => 'Estimate::Post'
-    def show_content
+  def content
   	self.goal
   end
 end
