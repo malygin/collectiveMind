@@ -11,7 +11,7 @@ class Estimate::PostsController < ApplicationController
   def index
     prepare_data
     @estimate_posts = Estimate::Post.all
-    @plan_posts = Plan::Post.where(:status => '3')
+    @plan_posts = Plan::Post.where(:status => '2')
 
     respond_to do |format|
       format.html # index.html.erb
@@ -22,7 +22,7 @@ class Estimate::PostsController < ApplicationController
   def jury_index
     prepare_data
     #@estimate_posts = Estimate::Post.all
-    @plan_posts = Plan::Post.where(:status => '3')
+    @plan_posts = Plan::Post.where(:status => '2')
 
 
   end
@@ -30,7 +30,7 @@ class Estimate::PostsController < ApplicationController
   def vote
     prepare_data
     #@estimate_posts = Estimate::Post.all
-    @plan_posts = Plan::Post.where(:status => '3')
+    @plan_posts = Plan::Post.where(:status => '2')
 
     respond_to do |format|
       format.html # index.html.erb
