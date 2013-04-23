@@ -8,15 +8,11 @@
       %b Образ желаемого будущего     
       %br
       = @post.goal
-    %br
-    %b Задачи:
+
     %br
     - @post.task_triplets.each do |tp|
       .task_supply=simple_format(tp.task) 
-      %b Ресурсы:    
-      %p=simple_format(tp.supply) 
-      %b Средства достижения: 
-      %p= simple_format(tp.howto)
+
     %p
       %b Первый шаг
       %br= simple_format(@post.first_step)

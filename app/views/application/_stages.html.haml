@@ -49,7 +49,7 @@
 
     %li{ :class => cp('plan')}
       = image_tag image_for_stages('4', 'plan'), :class => 'numbers'
-      -if @project.status > 7
+      -if @project.status > 6
         = link_to "Проекты", plan_posts_path(@project, :status => 2), class: "lstages" 
       -else
         %span.lstagesdisabled Проекты

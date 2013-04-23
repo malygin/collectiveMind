@@ -49,8 +49,8 @@ class Plan::PostsController < PostsController
     #puts params['task_supply']
     position=1
     params['task_triplet'].each do |k,v|
-      if k!= ''
-        triplet = Plan::TaskTriplet.new(:task => k, :position => position) 
+      if v!= ''
+        triplet = Plan::TaskTriplet.new(:task => v, :position => position) 
         position+=1
         @plan_post.task_triplets << triplet
       end
@@ -71,6 +71,8 @@ class Plan::PostsController < PostsController
   # PUT /Plan/posts/1
   # PUT /Plan/posts/1.json
   def update
+    @project = Core::Project.find(params[:project]) 
+
     @plan_post = Plan::Post.find(params[:id])
     respond_to do |format|
       if @plan_post.update_attributes(params[:plan_post])
@@ -80,7 +82,7 @@ class Plan::PostsController < PostsController
 
           params['task_triplet'].each do |k,v|
             if k!= ''
-              triplet = Plan::TaskTriplet.new(:task => k, :position => position) 
+              triplet = Plan::TaskTriplet.new(:task => v, :position => position) 
               position+=1
               @plan_post.task_triplets << triplet
             end
@@ -90,7 +92,7 @@ class Plan::PostsController < PostsController
         @plan_post.save
         current_user.journals.build(:type_event=>'plan_post_update', :body=>@plan_post.id).save!
 
-        format.html { redirect_to @plan_post, notice: 'Проект успешно изменен!' }
+        format.html {  redirect_to action: "show", :project => @project, :id => @plan_post.id, notice: 'Проект успешно изменен!' }
         format.json { head :no_content }
       else
         format.html { render action: "edit" }
