@@ -10,8 +10,13 @@ $(function() {
           {'name': 'Undo', 'title': 'Undo', 'css': 'wym_tools_undo'},
           {'name': 'Redo', 'title': 'Redo', 'css': 'wym_tools_redo'},
           {'name': 'Paste', 'title': 'Paste_From_Word', 'css': 'wym_tools_paste'},
-          {'name': 'ToggleHtml', 'title': 'HTML', 'css': 'wym_tools_html'}
-      ]
+          {'name': 'ToggleHtml', 'title': 'HTML', 'css': 'wym_tools_html'},
+              {'name': 'Preview', 'title': 'Preview', 'css': 'wym_tools_preview'}
+
+      ],
+      postInit: function(wym){
+         wym.resizable({handles: "s,e", maxHeight: 800})}
       })
+
 	$('input[type=submit]').addClass('wymupdate');
 });

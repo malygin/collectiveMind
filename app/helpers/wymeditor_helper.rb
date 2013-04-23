@@ -8,6 +8,7 @@ module WymeditorHelper
 		# end
 	    output << javascript_include_tag('/javascripts/wymeditor/wymeditor/jquery.wymeditor.min.js')
 		output << javascript_include_tag('/javascripts/wymrails.js')
+		output << javascript_include_tag('/javascripts/wymeditor/wymeditor/plugins/resizable/jquery.wymeditor.resizable.js')
 		output.join("\n")
 	end
 end
