@@ -11,7 +11,9 @@
 
     %br
     - @post.task_triplets.each do |tp|
-      .task_supply=simple_format(tp.task) 
+      .task_supply=simple_format(tp.task)
+      = tp.supply
+      = tp.howto 
 
     %p
       %b Первый шаг
