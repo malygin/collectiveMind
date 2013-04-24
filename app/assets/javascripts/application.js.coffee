@@ -42,7 +42,10 @@ root.addTask =  (x) ->
         {'name': 'Indent', 'title': 'Indent', 'css': 'wym_tools_indent'},
         {'name': 'Outdent', 'title': 'Outdent', 'css': 'wym_tools_outdent'},
         {'name': 'Undo', 'title': 'Undo', 'css': 'wym_tools_undo'},
-        {'name': 'Redo', 'title': 'Redo', 'css': 'wym_tools_redo'}
+        {'name': 'Redo', 'title': 'Redo', 'css': 'wym_tools_redo'},
+        {'name': 'Paste', 'title': 'Paste_From_Word', 'css': 'wym_tools_paste'},
+        {'name': 'ToggleHtml', 'title': 'HTML', 'css': 'wym_tools_html'},
+        {'name': 'Preview', 'title': 'Preview', 'css': 'wym_tools_preview'}
     ])
 root.addTaskPlan =  (x) -> 
   $('.links').before('<tr class="ts"> <td><textarea class="taskplan" id="task_triplet_'+x+'" name="task_triplet['+x+']"></textarea></td><td><a href="#" onclick=" $(this).parent().parent().remove(); return false;"><img alt="Close" src="/assets/close.png"></a></td></tr>')
@@ -55,7 +58,10 @@ root.addTaskPlan =  (x) ->
         {'name': 'Indent', 'title': 'Indent', 'css': 'wym_tools_indent'},
         {'name': 'Outdent', 'title': 'Outdent', 'css': 'wym_tools_outdent'},
         {'name': 'Undo', 'title': 'Undo', 'css': 'wym_tools_undo'},
-        {'name': 'Redo', 'title': 'Redo', 'css': 'wym_tools_redo'}
+        {'name': 'Redo', 'title': 'Redo', 'css': 'wym_tools_redo'},
+        {'name': 'Paste', 'title': 'Paste_From_Word', 'css': 'wym_tools_paste'},
+        {'name': 'ToggleHtml', 'title': 'HTML', 'css': 'wym_tools_html'},
+        {'name': 'Preview', 'title': 'Preview', 'css': 'wym_tools_preview'}
     ])
       
 
