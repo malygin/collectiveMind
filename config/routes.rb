@@ -156,6 +156,8 @@ end
   match "/help3", :to => "pages#help3"
   match "/help4", :to => "pages#help4"
   match "/help5", :to => "pages#help5"
+  match "/help6", :to => "pages#help6"
+  match "/help7", :to => "pages#help7"
 
   match "/estimate/result", :to => "pages#result"
   match "/home", :to => "pages#home"

@@ -10,7 +10,7 @@ module BasePost  extend ActiveSupport::Concern
  	has_many :users, :through => :post_votings
  
  	validates :content, :presence => true
-    default_scope :order => 'created_at DESC'
+    default_scope :order => 'created_at ASC'
 
     def show_content
     	content
