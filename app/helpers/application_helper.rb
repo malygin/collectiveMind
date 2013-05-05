@@ -112,6 +112,17 @@ def  status_title(pr)
 		end 
 	end
 
+	def  type_project(pr)
+		case pr
+			when 0
+				''
+			when 1
+				'(демонстрационная)'
+
+		end 
+	end
+
+
 	def count_available_voiting(n)
 		5-n
 	end

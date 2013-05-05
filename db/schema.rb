@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130419191827) do
+ActiveRecord::Schema.define(:version => 20130505172845) do
 
   create_table "answers", :force => true do |t|
     t.string   "text"
@@ -173,20 +173,22 @@ ActiveRecord::Schema.define(:version => 20130419191827) do
   add_index "concept_votings", ["user_id"], :name => "index_concept_votings_on_user_id"
 
   create_table "core_projects", :force => true do |t|
-    t.string   "name",        :limit => 500
+    t.string   "name",         :limit => 500
     t.text     "desc"
     t.text     "short_desc"
     t.integer  "status"
-    t.datetime "created_at",                                :null => false
-    t.datetime "updated_at",                                :null => false
+    t.datetime "created_at",                                 :null => false
+    t.datetime "updated_at",                                 :null => false
     t.string   "url_logo"
     t.integer  "type_access"
-    t.integer  "stage1",                     :default => 5
-    t.integer  "stage2",                     :default => 5
-    t.integer  "stage3",                     :default => 5
-    t.integer  "stage4",                     :default => 5
-    t.integer  "stage5",                     :default => 5
+    t.integer  "stage1",                      :default => 5
+    t.integer  "stage2",                      :default => 5
+    t.integer  "stage3",                      :default => 5
+    t.integer  "stage4",                      :default => 5
+    t.integer  "stage5",                      :default => 5
     t.text     "knowledge"
+    t.integer  "type_project",                :default => 0
+    t.integer  "position",                    :default => 0
   end
 
   add_index "core_projects", ["status"], :name => "index_core_projects_on_status"

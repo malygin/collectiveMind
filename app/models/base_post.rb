@@ -6,15 +6,17 @@ module BasePost  extend ActiveSupport::Concern
     belongs_to :project, :class_name => "Core::Project"
     has_many :post_notes
     has_many :comments
- 	has_many :post_votings
- 	has_many :users, :through => :post_votings
+   	has_many :post_votings
+   	has_many :users, :through => :post_votings
  
- 	validates :content, :presence => true
-    default_scope :order => 'created_at ASC'
+ 	  validates :content, :presence => true
+    default_scope  :order => 'created_at DESC' 
 
     def show_content
     	content
   	end
+
+ 
 
   end
 end
