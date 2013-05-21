@@ -1,2 +1,5 @@
 module Discontent::PostsHelper
+
+
+
 end

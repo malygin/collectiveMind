@@ -115,12 +115,11 @@ def index
       @post.user = current_user
       unless params[:stage].nil?
         @post.stage = params[:stage]
-      end
-      
+      end     
       unless params[:aspect_id].nil?
         @post.aspect_id = params[:aspect_id]        
+        @post.style = params[:style]        
       end
-
       unless params[:replace_id].nil?
         @post.replace_id = params[:replace_id]
         

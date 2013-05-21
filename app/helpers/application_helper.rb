@@ -130,5 +130,14 @@ def  status_title(pr)
 	def can_vote?(this_v, all_v, all)
 		this_v<1 and all_v<(all+1)
 	end
-
+def discontent_style_name(dis)
+	case dis
+		when 0 		
+			'отсутствующий позитив'
+		when 1
+			'имеющийся негатив'
+		else 
+			'не определена'
+		end
+	end
 end

@@ -17,6 +17,7 @@
     = f.label 'где'
     = f.text_area :where
 
-  = select_tag 'aspect_id', options_from_collection_for_select(@aspects, "id", "content", @post.aspect.nil? ? 0 :@post.aspect.id), :prompt => "Выберите аспект"
+  = select_tag 'aspect_id', options_from_collection_for_select(@aspects, "id", "content", @post.aspect.nil? ? 0 :@post.aspect.id), :prompt => "Выберите фрагмент"  
+  = select_tag 'style', options_for_select({ "отсутствующий позитив" => "0", "имеющийся негатив" => "1" }, @post.style), :prompt => "Выберите тип"
   .actions
     = f.submit ''

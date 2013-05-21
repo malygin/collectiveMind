@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130505172845) do
+ActiveRecord::Schema.define(:version => 20130517084833) do
 
   create_table "answers", :force => true do |t|
     t.string   "text"
@@ -255,6 +255,7 @@ ActiveRecord::Schema.define(:version => 20130505172845) do
     t.integer  "project_id"
     t.integer  "aspect_id"
     t.integer  "replace_id"
+    t.integer  "style"
   end
 
   add_index "discontent_posts", ["aspect_id"], :name => "index_discontent_posts_on_aspect_id"
