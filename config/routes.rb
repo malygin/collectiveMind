@@ -151,6 +151,7 @@ end
   match "/contacts", :to => "pages#contacts"
  
   match "/help", :to => "pages#help"
+  match "/help0", :to => "pages#help0"
   match "/help1", :to => "pages#help1"
   match "/help2", :to => "pages#help2"
   match "/help3", :to => "pages#help3"
