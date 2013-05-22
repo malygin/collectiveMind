@@ -67,6 +67,8 @@ def index
   # GET /discontent/posts/1.json
   def show
     @post = current_model.where(:id => params[:id], :project_id => params[:project]).first
+    puts "___________"
+    puts @post
     # @path_link ='/'+ self.class.to_s.split("::").first.tableize.singularize+'/comments/'
 
     if current_model.column_names.include? 'number_views'
@@ -153,7 +155,8 @@ def index
     respond_to do |format|
       if @post.update_attributes(params[name_of_model_for_param])
         unless params[:aspect_id].nil?
-          @post.update_attribute(:aspect_id,params[:aspect_id])        
+          @post.update_attribute(:aspect_id,params[:aspect_id]) 
+          @post.update_attribute(:style,params[:style])              
         end
         format.html { 
           flash[:success] = 'Успешно добавлено!'
@@ -257,23 +260,23 @@ def index
   end
 
   def to_expert_save
-    save_note(params, 1, 'Концепция отправлена эксперту!','concept_post_to_expert' )
+    save_note(params, 1, 'Отправлено эксперту!','concept_post_to_expert' )
     redirect_to  action: "index"    
   end
 
   def expert_rejection_save
-    save_note(params, 3, 'Концепция отклонена!','concept_post_rejection' )
+    save_note(params, 3, 'Отклонено!','concept_post_rejection' )
     redirect_to  action: "index"
   end
 
   def expert_acceptance_save
-    concept = save_note(params, 2, 'Концепция принята!','concept_post_acceptance' )
+    concept = save_note(params, 2, 'Принято!','concept_post_acceptance' )
     # concept.user.update_column(:score, concept.user.score + 200)
     redirect_to  action: "index"
   end
 
   def expert_revision_save
-    save_note(params, 0, 'Концепция отправлена на доработку!','concept_post_revision' )
+    save_note(params, 0, 'Отправлена на доработку!','concept_post_revision' )
     redirect_to  action: "index"
   end
 

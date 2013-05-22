@@ -32,9 +32,10 @@ end
     else
     	@posts = current_model.where(:project_id => @project, :status => @status).paginate(:page => params[:page])
     end
-    respond_to do |format|
-      format.html # index.html.erb
-      format.json { render json: @posts }
+    if @status == '2'
+      render 'table', :layout => 'application_two_column'
+    else
+      render 'index'
     end
   end
 

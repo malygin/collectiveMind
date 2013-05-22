@@ -17,7 +17,7 @@ def prepare_data
 end
 
   def index
-    @posts = Essay::Post.where(:stage => params[:stage])    
+    @posts = Essay::Post.where(:project_id => @project, :stage => @stage )    
   end
 
 end

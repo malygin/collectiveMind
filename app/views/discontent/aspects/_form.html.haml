@@ -8,7 +8,10 @@
 
   .field
     = f.label :content
-    = f.text_area :content
+    = f.text_area :content  
+  .field
+    = f.label :short_desc
+    = f.text_area :short_desc
 
   .actions
     = f.submit "",   id: "Send"

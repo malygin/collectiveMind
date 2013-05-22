@@ -8,7 +8,7 @@
   = link_to 'Принять', url_for(:action => 'expert_acceptance_save')
 
 %br
-- if (current_user?(post.user) or boss?) and post.status == 0
+- if (current_user?(post.user) and post.status  == 0) or boss?
   = link_to 'Редактировать', :action => 'edit', :project => @project, :id => post.id
   \|
   = link_to 'В архив', {:action => :to_archive, :id => post.id}, :method => :put, :confirm => 'Точно?'

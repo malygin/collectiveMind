@@ -1,0 +1,22 @@
+%table
+	%tr
+		%th Фрагменты
+		%th Позитивные
+		%th Негативные
+	-@aspects.each do |aspect| 
+		%tr
+			%td=aspect.content
+			%td
+				-aspect.positive_posts.each do |post|
+					=post.show_content.html_safe
+					%br
+					=link_to  'подробнее',  {:action => "show", :project => @project, :id => post.id}
+					%br			
+			%td
+				-aspect.negative_posts.each do |post|
+					=post.show_content.html_safe
+					%br
+					=link_to  'подробнее',  {:action => "show", :project => @project, :id => post.id}
+					%br
+
+

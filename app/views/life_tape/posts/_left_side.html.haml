@@ -1,0 +1,12 @@
+- if stage_vote?('life_tape')
+	.error срочно идите голосовать и рефлексировать
+
+	%p.righttext
+		= link_to 'Голосование за актуальные фрагменты', life_tape_vote_list_path(@project), id: 'vote_stage'
+		=link_to 'Добавить мнение о прошедшем этапе', essay_posts_path(@project, @project.status), :id => 'essay_list'
+
+- unless @news.nil?
+	%h1 Новости
+	%p.righttext
+		= @news.anons
+		= link_to 'подробнее',  expert_news_post_path(@project, @news)

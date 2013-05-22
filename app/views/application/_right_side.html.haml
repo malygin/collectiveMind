@@ -1,3 +1,4 @@
+
 - unless @news.nil?
 	%h1 Новости
 	%p.righttext
@@ -5,45 +6,11 @@
 		= link_to 'подробнее', @news
 
 .redtitle Активность
-/ -unless @journals.nil?
-/ 	.redtitle Активность
-/ 	- @journals.each do |journal|
-/ 		%p.righttext
-/ 			=Russian::strftime(journal.created_at,"%d %B %k:%M:%S ")
-/ 			%b= journal.user.name_title
-/ 			= journal_parser(journal).html_safe
-/ 		=image_tag('dots.png')
-/ %h1 Что вы можете сделать сейчас
-/ -if current_user.nil?
-/ 	%p.righttext 
-/ 		%b= link_to '1. Авторизуйтесь, чтобы начать работу', '/signin'
-/ 		%br
-/ 		%small авторизовавшись с помощью логина-пароля с портала ДО вы получите доступ ко всем возможностям нового портала
-/ 	%br
-
-/ -elsif not current_user.test_attempts.empty?
-/ 	%p.righttext 
-/ 		%b= link_to '1. Добавить произвольное недовольство', current_user
-/ 	= link_to '(узнать, как это сделать)', '/help#02'
-/ 	%br
-/ 	%br 
-/ 		%b= link_to '2. Добавить оформленное недовольство', current_user
-/ 	= link_to '(узнать, как это сделать)', '/help#02'
-/ 	%br
-/ 	%br 
-/ 		%b= link_to '3. Добавить негативный комментарий ', "/unstructure"
-/ 	= link_to '(узнать, как это сделать)', '/help#03'
-/ 	%br
-/ 	%br 
-/ 		%b= link_to '4. Добавить оформляющий комментарий', "/unstructure"
-/ 	= link_to '(узнать, как это сделать)', '/help#03'
-/ 	%br
-/ -else
-/ 	%p.righttext 
-/ 		%b= link_to '1. Пройти опрос', '/tests'
-/ 		%br
-/ 		%small Поможет вам лучше понять как вы принимаете решения сейчас
-/ 	%br
-
-
-
+-unless @journals.nil?
+	.redtitle Активность
+	- @journals.each do |journal|
+		%p.righttext
+			=Russian::strftime(journal.created_at,"%d %B %k:%M:%S ")
+			%b= journal.user.name_title
+			= journal_parser(journal).html_safe
+		=image_tag('dots.png')

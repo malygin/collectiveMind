@@ -1,10 +1,10 @@
-/ -#.redtitle Cферы недовольств
-/ - @categories.each do |category|
-/ 	%a{:href  => life_tape_path(category.id), :class => 'topic'}
-/ 		%div.topics
-/ 			%p.greentitle= "#{category.name} (#{category.posts.count})"			
-/ 			%p.righttext= category.short_desc
+- if stage_vote?('life_tape')
+	%p.righttext
+		= link_to 'Вернуться к голосованию', :back
 
 
-
-
+- unless @news.nil?
+	%h1 Новости
+	%p.righttext
+		= @news.anons
+		= link_to 'подробнее',  expert_news_post_path(@project, @news)

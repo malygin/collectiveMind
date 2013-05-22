@@ -4,18 +4,13 @@
       = image_tag image_for_stages('1', 'life_tape'), :class => 'numbers'
       = link_to "Начало процедуры", life_tape_posts_path(@project), class: "lstages"  
     = image_tag "space.png", :class => "space"    
-    %li{ :class => 'vote_active'}
-      - unless stage_vote?('life_tape')
-        = image_tag "vote_dis.png", class: "lstages", :title => 'Голосование за аспекты'
-      -else
-        = link_to image_tag("vote.png", class: 'lstages', :title => 'Голосование за аспекты'), life_tape_vote_list_path(@project), id: 'vote_stage'
-   
-    = image_tag "space.png" , :class => "space" 
+  
+
 
     %li{ :class => cp('discontent')}
       = image_tag image_for_stages('2', 'discontent'), :class => 'numbers'
-      - if @project.status>1
-        = link_to "Несовершенства", discontent_posts_path(@project, :status => 2), class: "lstages" 
+      - if @project.status>2
+        = link_to "Анализ ситуации", discontent_posts_path(@project, :status => 2), class: "lstages" 
       -else
         %span.lstagesdisabled Несовершенства
     

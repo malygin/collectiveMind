@@ -11,15 +11,12 @@
 			%br
 			=link_to 'Начать сбор недовольств',  next_stage_core_project_path(@project), id: 'change_stage'
 
-%br
-- if @project.status == 2
-	.error срочно идите голосовать и рефлексировать
 
-- if @project.status == 1
-	%h1 Список аспектов
-	= render :partial => 'discontent/aspects/aspect', :collection => @aspects
-	-if boss? 
-		%p.righttext= link_to 'добавить аспект', new_discontent_aspect_path, id: "add_aspect"
+
+%h1 Список фрагментов
+= render :partial => 'discontent/aspects/aspect', :collection => @aspects
+-if boss? 
+	%p.righttext= link_to 'добавить фрагмент', new_discontent_aspect_path, id: "add_aspect"
 
 
 
@@ -27,19 +24,6 @@
 %p.righttext
 	Что-то непонятно? 
 	= link_to 'Задайте вопрос', question_posts_path(@project)
-
-/ .redtitle Топ записей
-/ - @top_posts.each do |post|
-/ 	%p.righttext
-/ 		= trim_string(post.content, 100)
-/ 		= link_to "подробнее", post
-/ 	=image_tag('dots.png')
-
-/ .redtitle Рекомендованные вам
-
-/ %p.righttext
-/ 	Я думаю мы недостаточно внимания уделяем возможности привлечения преподавателей не из СГУ. Ведь мы обучаемся дистанционно и могли бы иметь возможность работать с преподавателями из любой точки мира.
-/ 	= link_to "подробнее", '/life_tape/posts/61'
 
 
 
