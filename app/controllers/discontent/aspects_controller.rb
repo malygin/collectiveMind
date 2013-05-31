@@ -4,6 +4,6 @@ class Discontent::AspectsController  < PostsController
   def current_model
     Discontent::Aspect
   end 
-  
+
  
 end

@@ -34,7 +34,8 @@ scope "/project/:project" do
   end
 
   namespace :discontent do
-    resources :aspects
+    resources :aspects 
+
     get 'vote_list'  => "posts#vote_list"
     put 'vote/:post_id'  => "posts#vote"    
     scope "/status/:status/aspect/:aspect",  :defaults => {:status => 0, :aspect => 0} do
@@ -104,6 +105,8 @@ scope "/project/:project" do
   namespace :life_tape do
     get 'vote_list'  => "posts#vote_list"
     put 'vote/:post_id'  => "posts#vote"
+    put 'up/:post_id'  => "posts#up"    
+    put 'down/:post_id'  => "posts#down"  
     resources :posts do    
       member do
           put :add_comment

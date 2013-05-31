@@ -1,22 +1,45 @@
-%table
-	%tr
-		%th Фрагменты
-		%th Позитивные
-		%th Негативные
-	-@aspects.each do |aspect| 
-		%tr
-			%td=aspect.content
-			%td
-				-aspect.positive_posts.each do |post|
-					=post.show_content.html_safe
-					%br
-					=link_to  'подробнее',  {:action => "show", :project => @project, :id => post.id}
-					%br			
-			%td
-				-aspect.negative_posts.each do |post|
-					=post.show_content.html_safe
-					%br
-					=link_to  'подробнее',  {:action => "show", :project => @project, :id => post.id}
-					%br
+%table.disColumns
 
+	%tr
+		%td 
+			=image_tag 'column1.png'
+		%td 
+			=image_tag 'column2.png'
+		%td 
+			=image_tag 'column3.png'
+
+	-@aspects.each_with_index do |aspect, index2| 
+		%tr
+			%td{ :class => "#{((index2+1) % 2 !=0) ? 'disText' : 'disText2'}" }
+				%span.disName=aspect.content
+				%br
+				=aspect.short_desc
+				- ind = (index2+1) % 2
+			%td
+	
+				%table
+					-aspect.positive_posts.each_with_index do |post, index|
+						%tr
+							%td{ :class => "#{((index+1) % 2 !=0) ? 'firstline'+ind.to_s : 'secondline'}" }
+								.gear
+									=link_to image_tag('gear.png'), :action => 'new', :project => @project, :replace_id => post.id
+		
+								.previewtext
+
+									=post.show_content.html_safe
+									%br
+									=link_to  'подробнее',  {:action => "show", :project => @project, :id => post.id}
+							
+			%td
+				%table
+					-aspect.negative_posts.each_with_index do |post,  index|
+						%tr
+							%td{ :class => "#{((index+1) % 2!=0) ? 'firstline'+ind.to_s : 'secondline'}" }
+								.gear
+									=link_to image_tag('redgear.png'), :action => 'new', :project => @project, :replace_id => post.id
+
+								.previewtext
+									=post.show_content.html_safe
+									%br
+									=link_to  'подробнее',  {:action => "show", :project => @project, :id => post.id}
 

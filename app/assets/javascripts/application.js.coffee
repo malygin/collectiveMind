@@ -11,9 +11,11 @@ $(document).ready ->
         console.log( $('span#count_vote').text(), i)
         if (i < 1)
           $('a.voteCounter').each (i, element)  =>
-            $(element).replaceWith ""
-
-        $('span#count_vote').text(i+"")   
+            $(element).replaceWith ""    
+    $(".adminVoteBar")
+      .bind "ajax:success", (event, resp) ->
+        $(this).replaceWith "Выбрано!"
+     
       .bind "ajax:error", (event, resp) ->
         $(this).replaceWith ""+resp 
     $(".scoreBar")

@@ -225,6 +225,20 @@ def index
     render json: 5
   end
 
+   def up
+    v = voting_model.find(params[:post_id])
+    v.update_column(:status, v.status+1)
+    render json: 5
+
+   end
+
+   def down
+    v = voting_model.find(params[:post_id])
+    v.update_column(:status, v.status-1)
+    render json: 5
+
+   end
+
 ### function for dialog with expert
 
 
