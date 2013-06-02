@@ -1,21 +1,13 @@
-/ -#.redtitle Cферы недовольств
-/ - @categories.each do |category|
-/ 	%a{:href  => life_tape_path(category.id), :class => 'topic'}
-/ 		%div.topics
-/ 			%p.greentitle= "#{category.name} (#{category.posts.count})"			
-/ 			%p.righttext= category.short_desc
-
 - unless @news.nil?
 	%h1 Новости
 	%p.righttext
 		= @news.anons
-		= link_to 'подробнее', expert_news_post_path(@project, @news)
-
-/ -unless @journals.nil?
-/ 	.redtitle Активность
-/ 	- @journals.each do |journal|
-/ 		%p.righttext
-/ 			=Russian::strftime(journal.created_at,"%d %B %k:%M:%S ")
-/ 			%b= journal.user.name_title
-/ 			= journal_parser(journal, @project.id).html_safe
-/ 		=image_tag('dots.png')
+		= link_to 'подробнее',  expert_news_post_path(@project, @news)
+-unless @journals.nil?
+	.redtitle Активность
+	- @journals.each do |journal|
+		%p.righttext
+			=Russian::strftime(journal.created_at,"%d %B %k:%M:%S ")
+			%b= journal.user.name_title
+			= journal_parser(journal, @project.id).html_safe
+		=image_tag 'dots.png', :width => '260px'

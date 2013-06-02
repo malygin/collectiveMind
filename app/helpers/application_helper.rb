@@ -67,7 +67,7 @@ module ApplicationHelper
 def  status_title(pr)
 		case pr
 			when 0
-				'готовится к процедуре'
+				'подготовка к процедуре'
 			when 1
 				'сбор информации'
 			when 2

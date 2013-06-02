@@ -58,23 +58,24 @@
 %h3 Процедуры:
 %br
 - @core_projects.each do |core_project|
-  .strtable
-    .strcolumns= image_tag core_project.url_logo, :width => 60, class: 'project_logo'
-    .strcolumns
-      = link_to core_project.name, '/project/'+core_project.id.to_s,  class: 'strname'
-      %br
-      Статус: 
-      %span.namedate= status_title(core_project.status)
-      %br
-      Уровень доступа:
-      %span.namedate= type_title(core_project.type_access)
-      %br
-      .desc= core_project.short_desc
-      %br
-      - if boss?
-        = link_to 'Show', core_project
-        = link_to 'Edit', edit_core_project_path(core_project)
-        = link_to 'Destroy', core_project, :data => { :confirm => 'Text' }, :method => :delete
+  -if core_project.type_project !=1
+    .strtable
+      .strcolumns= image_tag core_project.url_logo, :width => 60, class: 'project_logo'
+      .strcolumns
+        = link_to core_project.name, '/project/'+core_project.id.to_s,  class: 'strname'
+        %br
+        Статус: 
+        %span.namedate= status_title(core_project.status)
+        %br
+        Уровень доступа:
+        %span.namedate= type_title(core_project.type_access)
+        %br
+        .desc= core_project.short_desc
+        %br
+        - if boss?
+          = link_to 'Show', core_project
+          = link_to 'Edit', edit_core_project_path(core_project)
+          = link_to 'Destroy', core_project, :data => { :confirm => 'Text' }, :method => :delete
 
 %br
 

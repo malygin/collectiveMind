@@ -11,7 +11,7 @@
 			
 			%p= simple_format(post.show_content)
 			- if boss? or @post.user == current_user
-				= link_to 'Редактировать', :action => 'edit', :project => @project, :id => @post, id: "edit_post"
+				= link_to 'Редактировать', :action => 'edit', :project => @project, :id => @post
 				\|
 				= link_to 'Назад', url_for(:action => 'index')
 

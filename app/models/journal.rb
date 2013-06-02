@@ -11,7 +11,7 @@ class Journal < ActiveRecord::Base
 
 		 'discontent_post_save', 'discontent_comment_save', 'discontent_post_update', 
 		 'life_tape_post_save', 'life_tape_comment_save', 'concept_post_update', 
-		 'question_save','news_comment_save','news_post_save','estimate_post_save',
+		 'question_post_save','question_comment_save', 'news_comment_save','news_post_save','estimate_post_save',
 		  'estimate_post_update','estimate_comment_save', 'answer_save', 'estimate_post_rejection', 'estimate_post_acceptance']
 		Journal.where(" project_id = (?) AND type_event IN (?)",project_id, types).limit(lim).order('created_at DESC')
 	end	

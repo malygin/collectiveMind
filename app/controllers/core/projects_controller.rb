@@ -64,7 +64,9 @@ class Core::ProjectsController < ApplicationController
   # POST /core/projects.json
   def create
     @core_project = Core::Project.new(params[:core_project])
-
+    @core_project.type_project  =  0
+    @core_project.type_access  =  2
+    @core_project.type_access  =  0
     respond_to do |format|
       if @core_project.save
         format.html { redirect_to root_path, success: 'Project was successfully created.' }

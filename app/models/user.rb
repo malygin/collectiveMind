@@ -2,8 +2,8 @@
 require 'digest'
 
 class User < ActiveRecord::Base
-  attr_accessor :password
-  attr_accessible :login, :password, :password_confirmation, :encrypted_password,
+  attr_accessor :password, :secret
+  attr_accessible :login, :password, :password_confirmation, :encrypted_password, :secret,
    :dateActivation, :dateLastEnter, :dateRegistration, :email, :faculty, :group,
     :name, :string, :string, :surname, :validate, :vkid, :score, :admin, :expert 
 
@@ -34,6 +34,9 @@ class User < ActiveRecord::Base
     
   has_many :concept_post_votings, :class_name => "Concept::Voting"
   has_many :voted_concept_posts, :through => :concept_post_votings, :source => :concept_post, :class_name => "Concept::Post"
+  
+  has_many :core_project_users, :class_name => "Core::ProjectUser"
+  has_many :projects, :through => :core_project_users, :source => :core_project, :class_name => "Core::Project"
   
   has_many :user_awards
   has_many :awards, :through => :user_awards  
@@ -85,7 +88,7 @@ class User < ActiveRecord::Base
     elsif self.jury
       "жюри"
     else 
-      "студент"
+      "сотрудник"
     end
   end
 

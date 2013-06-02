@@ -34,11 +34,23 @@ class UsersController < ApplicationController
 
 	def create 
 		@user = User.new(params[:user])
-		if @user.save
+		cp = nil
+		Core::Project.find(:all) do |pr|
+
+			if @user.secret == pr.secret
+
+				@user.projects << pr
+			end
+		end
+
+		if !@user.projects.empty? and @user.save
 			sign_in @user
-			flash[:success] = "Привет!"
-			redirect_to @user
+			flash[:success] = "Добро пожаловать!"
+			redirect_to root_path
 		else
+			if  @user.projects.empty? 
+				flash[:error] = "Кодовое слово введено неверно!"
+			end
 			render 'new'
 		end
 	end

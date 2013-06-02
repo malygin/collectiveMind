@@ -9,7 +9,11 @@
 	.field 
 		= f.label :surname, "Фамилия"
 		%br
-		= f.text_field :surname 
+		= f.text_field :surname 	
+	.field 
+		= f.label :secret, "Кодовое слово"
+		%br
+		= f.text_field :secret 
 	.field 
 		= f.label :email , "Электронная почта" 
 		%br
@@ -19,7 +23,7 @@
 		%br
 		= f.password_field :password
 	.field 
-		=f.label :password_confirmation , "подтвердите пароль"
+		=f.label :password_confirmation , "Подтвердите пароль"
 		%br
 		=f.password_field :password_confirmation
 	.action

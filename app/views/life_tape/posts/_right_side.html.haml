@@ -13,7 +13,8 @@
 
 
 
-%h1 Список фрагментов
+- unless @aspects.empty?
+	%h1 Список фрагментов
 = render :partial => 'discontent/aspects/aspect', :collection => @aspects
 -if boss? 
 	%p.righttext= link_to 'добавить фрагмент', new_discontent_aspect_path, id: "add_aspect"
@@ -22,7 +23,7 @@
 
 %h1 Тех. поддержка
 %p.righttext
-	Что-то непонятно? 
+	Возникли проблемы с сайтом? 
 	= link_to 'Задайте вопрос', question_posts_path(@project)
 
 

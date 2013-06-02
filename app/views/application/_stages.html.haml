@@ -12,15 +12,9 @@
       - if @project.status>2
         = link_to "Анализ ситуации", discontent_posts_path(@project, :status => 2), class: "lstages" 
       -else
-        %span.lstagesdisabled Несовершенства
+        %span.lstagesdisabled Анализ ситуации
     
-    = image_tag "space.png", :class => "space"  
 
-    %li{ :class => 'vote_active'}
-      - unless stage_vote?('discontent')
-        = image_tag "vote_dis.png", class: "lstages"
-      -else
-        = link_to image_tag("vote.png", class: 'lstages', :title => 'Сбор недовольств'), discontent_vote_list_path(@project), id: 'vote2_stage'  
 
     = image_tag "space.png", :class => "space"   
 
@@ -31,14 +25,7 @@
       -else
         %span.lstagesdisabled Концепции
 
-    = image_tag "space.png", :class => "space" 
-   
-      
-    %li{ :class => 'vote_active'}
-      - unless stage_vote?('concept')
-        = image_tag "vote_dis.png", class: "lstages"
-      -else
-        = link_to image_tag("vote.png", class: 'lstages', :title => 'Сбор недовольств'), concept_vote_list_path(@project), id: 'vote3_stage'  
+
 
     = image_tag "space.png", :class => "space"
 
@@ -50,8 +37,7 @@
         %span.lstagesdisabled Проекты
     = image_tag "space.png", :class => "space" 
     
-    %li{ :class => 'vote_active'}
-      = image_tag "vote_dis.png", class: "lstages"  
+ 
 
     = image_tag "space.png" , :class => "space" 
     %li{ :class => cp('estimate')}
@@ -61,6 +47,4 @@
       -else
         %span.lstagesdisabled Оценивание и выбор
     = image_tag "space.png", :class => "space" 
-    
-    %li{ :class => 'vote_active'}
-      = image_tag "vote_dis.png", class: "lstages"  
+

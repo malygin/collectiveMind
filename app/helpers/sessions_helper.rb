@@ -35,6 +35,13 @@ module SessionsHelper
 	def authenticate
 		deny_access unless signed_in?
 	end
+	def have_rights
+		# puts "_________________"+params[:project]
+		project = Core::Project.find(params[:project])
+		if current_user.nil?  or (project.type_access == 2 and   not (current_user.projects.include? project))
+			redirect_to root_path, :notice => "У вас нет прав просматривать этот проект!"
+		end
+	end
 	def boss_authenticate
 		deny_access unless boss?
 	end
