@@ -15,7 +15,7 @@
 				%br
 				=aspect.short_desc
 				- ind = (index2+1) % 2
-			%td
+			%td{ :class => "#{((index2+1) % 2 !=0) ? '' : 'disText3'}" }
 	
 				%table
 					-aspect.positive_posts.each_with_index do |post, index|
@@ -30,7 +30,7 @@
 									%br
 									=link_to  'подробнее',  {:action => "show", :project => @project, :id => post.id}
 							
-			%td
+			%td{ :class => "#{((index2+1) % 2 !=0) ? '' : 'disText3'}" }
 				%table
 					-aspect.negative_posts.each_with_index do |post,  index|
 						%tr
