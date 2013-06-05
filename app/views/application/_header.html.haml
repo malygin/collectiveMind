@@ -1,18 +1,19 @@
-= link_to image_tag("logo.png", :alt => "Colleсtive mind", :class => "round", ), root_path
-%span.project_name= @project.name
-=type_project(@project.type_project)
-/ = image_tag("improve.png")    
-- if signed_in?
-  .blackbut
-    = image_tag('exit.png')
-    = link_to "Выйти", "/signout", class: "exit"
-  .greybut
-    = link_to image_tag('edit.png'), edit_user_path(current_user)
-    = link_to current_user.name+" "+current_user.surname, user_path(current_user), class: "username"
--else
-  %span.blackbut
-    = image_tag('exit.png')
-    = link_to "Войти", "/signin", class: "exit"
+.logo= link_to image_tag("logo.png", :alt => "Colleсtive mind", :class => "round", ), root_path
+.project_name
+  .child 
+    %span.project_name= @project.name
+.top_buttons  
+  - if signed_in?
+    .blackbut
+      = image_tag('exit.png')
+      = link_to "Выйти", "/signout", class: "exit"
+    .greybut
+      = link_to image_tag('edit.png'), edit_user_path(current_user)
+      = link_to current_user.name+" "+current_user.surname, user_path(current_user), class: "username"
+  -else
+    %span.blackbut
+      = image_tag('exit.png')
+      = link_to "Войти", "/signin", class: "exit"
 
 
 
