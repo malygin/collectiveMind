@@ -1,14 +1,13 @@
 .stages
   %ul
     %li{ :class => cp('life_tape')}
-      = image_tag image_for_stages('1', 'life_tape'), :class => 'numbers'
-      = link_to "Начало процедуры", life_tape_posts_path(@project), class: "lstages"  
+      = link_to "Сбор Информации", life_tape_posts_path(@project), class: "lstages"  
     = image_tag "space.png", :class => "space"    
   
 
 
     %li{ :class => cp('discontent')}
-      = image_tag image_for_stages('2', 'discontent'), :class => 'numbers'
+      = image_tag image_for_stages('1', 'discontent'), :class => 'numbers'
       - if @project.status>2
         = link_to "Анализ ситуации", discontent_posts_path(@project, :status => 2), class: "lstages" 
       -else
@@ -19,18 +18,18 @@
     = image_tag "space.png", :class => "space"   
 
     %li{ :class => cp('concept')}
-      = image_tag image_for_stages('3', 'concept'), :class => 'numbers'
+      = image_tag image_for_stages('2', 'concept'), :class => 'numbers'
       - if @project.status >4
-        = link_to "Концепции", concept_posts_path(@project, :status => 2), class: "lstages" 
+        = link_to "Формулирование проблемы", concept_posts_path(@project, :status => 2), class: "lstages" 
       -else
-        %span.lstagesdisabled Концепции
+        %span.lstagesdisabled Формулирование проблемы
 
 
 
     = image_tag "space.png", :class => "space"
 
     %li{ :class => cp('plan')}
-      = image_tag image_for_stages('4', 'plan'), :class => 'numbers'
+      = image_tag image_for_stages('3', 'plan'), :class => 'numbers'
       -if @project.status > 6
         = link_to "Проекты", plan_posts_path(@project, :status => 2), class: "lstages" 
       -else
@@ -41,7 +40,7 @@
 
     = image_tag "space.png" , :class => "space" 
     %li{ :class => cp('estimate')}
-      = image_tag image_for_stages('5', 'estimate'), :class => 'numbers'
+      = image_tag image_for_stages('4', 'estimate'), :class => 'numbers'
       - if @project.status  > 7
         = link_to "Оценивание и выбор", "/estimate/posts/", class: "lstages"
       -else
