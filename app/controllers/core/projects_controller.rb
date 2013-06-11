@@ -66,7 +66,7 @@ class Core::ProjectsController < ApplicationController
     @core_project = Core::Project.new(params[:core_project])
     @core_project.type_project  =  0
     @core_project.type_access  =  2
-    @core_project.type_access  =  0
+    @core_project.status  =  1
     respond_to do |format|
       if @core_project.save
         format.html { redirect_to root_path, success: 'Project was successfully created.' }
