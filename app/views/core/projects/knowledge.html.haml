@@ -1,6 +1,6 @@
 %h1 База знаний процедуры "#{@core_project.name}"
 =link_to 'вернуться к процедуре', '/project/'+@core_project.id.to_s
 
-=simple_format(@core_project.knowledge)
+=raw(@core_project.knowledge)
 
 =link_to 'вернуться к процедуре', '/project/'+@core_project.id.to_s
