@@ -8,9 +8,9 @@ module JournalHelper
 			when 'concept_comment_save'
 				'добавил комментарий к '+  link_to('концепции', concept_post_path(j.body))
 			when 'expert_news_post_save'
-				'добавил  '+ link_to('новость', expert_news_post_path(j.body))
+				'добавил  '+ link_to('новость', expert_news_post_path(project, j.body))
 			when 'expert_news_comment_save'
-				'добавил комментарий к '+  link_to('новости', expert_news_post_path(j.body))
+				'добавил комментарий к '+  link_to('новости', expert_news_post_path(project, j.body))
 			
 			when 'life_tape_comment_save'
 				'добавил комментарий к '+  link_to('записи', life_tape_post_path(project, j.body))
