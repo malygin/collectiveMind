@@ -54,7 +54,7 @@ module CollectiveMind
     # parameters by using an attr_accessible or attr_protected declaration.
     config.active_record.whitelist_attributes = true
     config.time_zone = 'Moscow'
-    config.active_record.default_timezone = 'Moscow'
+    # config.active_record.default_timezone = 'Moscow'
     # Enable the asset pipeline
     config.assets.enabled = true
     config.assets.initialize_on_precompile = false
