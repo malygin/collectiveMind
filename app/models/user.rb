@@ -94,7 +94,7 @@ class User < ActiveRecord::Base
 
   def have_essay_for_stage(project, stage)
     # puts self.essay_posts.where(:stage => stage)
-    !self.essay_posts.where(:project => project, :stage => stage).empty?
+    !self.essay_posts.where(:project_id => project, :stage => stage).empty?
   end
       
 

@@ -23,9 +23,9 @@ module ApplicationHelper
 	def cp( stage)
 		if stage =='life_tape' and ( [0,1,2].include? @project.status)
 			'current'
-  		elsif stage == 'discontent' and (@project.status == 3)
+  		elsif stage == 'discontent' and ([3,4].include? @project.status)
   			'current'  		
-  		elsif stage == 'concept' and (@project.status == 5)
+  		elsif stage == 'concept' and ([5,6].include? @project.status)
   			'current'
   		elsif stage == 'plan' and (@project.status == 7)
   			'current' 		
@@ -51,9 +51,9 @@ module ApplicationHelper
 	def image_for_stages(image,  stage)
 		if stage =='life_tape' and ([0,1,2].include? @project.status)    
 		    return image+'green.png'  
-		 elsif stage == 'discontent' and (@project.status == 3)
+		 elsif stage == 'discontent' and ([3,4].include? @project.status)
 		    return image+'green.png' 		 
-		elsif stage == 'concept' and (@project.status == 5)
+		elsif stage == 'concept' and ([5,6].include? @project.status)
 		    return image+'green.png'  
 		elsif stage == 'plan' and (@project.status == 7)
 		    return image+'green.png'  		

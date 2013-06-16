@@ -33,6 +33,10 @@ end
     	@posts = current_model.where(:project_id => @project, :status => @status).paginate(:page => params[:page])
     end
     if @status == '2'
+      if @project.status == 4
+          @number_v = @project.stage2 - current_user.voted_discontent_posts.size
+          @votes = @project.stage2
+      end
       render 'table', :layout => 'application_two_column'
     else
       render 'index'
@@ -55,7 +59,7 @@ end
     @posts = current_model.where(:project_id => @project, :status => 2)
     # i have votes now
     @number_v = @project.stage2 - current_user.voted_discontent_posts.size
-    @path_for_voting = "/project/#{@project.id}/discontent/vote/"
+    @path_for_voting = "/project/#{@project.id}/discontent/"
     #all number of votes
     @votes = @project.stage2
   end

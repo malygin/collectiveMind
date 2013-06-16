@@ -8,7 +8,7 @@ $(document).ready ->
       .bind "ajax:success", (event, resp) ->
         $(this).replaceWith "Вы проголосовали, спасибо!"
         i = $('span#count_vote').text() - 1
-        console.log( $('span#count_vote').text(), i)
+        $('span#count_vote').text(i)
         if (i < 1)
           $('a.voteCounter').each (i, element)  =>
             $(element).replaceWith ""    

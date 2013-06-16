@@ -1,3 +1,10 @@
+-if @project.status == 4
+	%br=link_to 'Вы можете оставить свое мнение или почитать другие', essay_posts_path(@project, @project.status), :id => 'essay_list'
+	- unless @number_v<1
+		Количество имеющихся голосов - 
+		%span.rate
+			%span#count_vote=@number_v
+
 %table.disColumns
 
 	%tr
@@ -23,6 +30,12 @@
 							%td{ :class => "#{((index+1) % 2!=0) ? 'firstline'+ind.to_s : 'secondline'}" }
 								.gear
 									=link_to image_tag('redgear.png'), :action => 'new', :project => @project, :replace_id => post.id
+								-if @project.status == 4
+									.voteBar 
+										-if admin?
+											%span.number=post.voted_users.count
+										- if can_vote?(post.voted_users.size, @number_v, @votes)
+											=link_to "+", "/project/#{@project.id}/discontent/vote/#{post.id}", :remote => true, :method => :put, class: "voteCounter", :id => "aspect_#{post.id}"
 
 								.previewtext
 									=post.show_content.html_safe
@@ -37,7 +50,13 @@
 							%td{ :class => "#{((index+1) % 2 !=0) ? 'firstline'+ind.to_s : 'secondline'}" }
 								.gear
 									=link_to image_tag('gear.png'), :action => 'new', :project => @project, :replace_id => post.id
-		
+								-if @project.status == 4
+									-if @project.status == 4
+										.voteBar 
+											-if admin?
+												%span.number=post.voted_users.count
+											- if can_vote?(post.voted_users.size, @number_v, @votes)
+												=link_to "+", "/project/#{@project.id}/discontent/vote/#{post.id}", :remote => true, :method => :put, class: "voteCounter", :id => "aspect_#{post.id}"
 								.previewtext
 
 									=post.show_content.html_safe

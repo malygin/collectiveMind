@@ -1,52 +1,73 @@
 = form_for  @post, :url => {:project => @project.id, :action => @post.persisted? ? 'update' : 'create'},   :html => { :class => 'new_or_edit' }do |f|
+  %p.fimage Образ желаемого будущего
+  %br
   %label 
-    О чем концепция
+    Краткое описание образа
   %field
     = f.text_area :content, class: "wider_area"
-  %div{:class=>'timestamp'} Вкратце опишите свою концепцию, укажите какие недовольства будут разрешены.  
+  %div{:class=>'timestamp'} Вкратце опишите свой образ, укажите ключевые идеи.  
   %br
   %label 
-    %b Цель -
-    образ желаемого будущего
-  
+    %b Эссе об образе:  
   %field
     = f.text_area :goal, class: "wider_area"
-  %div{:class=>'timestamp'} Что, в главном, представляет собой предлагаемое нововведение и каковы его желаемые результаты.
+  %div{:class=>'timestamp'} Что, в главном, представляет собой ваш образ.
   %br
-  %table.tasks
-    %tr
-      %td
-        %label.small
-          %b Задачи -
-          направления работы в будущем
-      %td &nbsp;
-     
-    - @post.task_supply_pairs.each_with_index do |p, index|
-      %tr.ts
-        %td= text_area_tag 'task_supply['+index.to_s+']', p.task, :class =>'wymeditor'
-        %td=link_to_function image_tag('close.png'), ' $(this).parent().parent().remove()'
-    
-
-    %tr.links
-      %td{:colspan=>'3'}= link_to_function 'Добавить задачу', 'addTask($(".ts").length+20)'
-
-
-    %tr
-      %td
-        %div.timestamp.short - какие конкретные практические вопросы должны будут разрешаться
-     
+  %p.fimage Фрагменты образа
   %br
-  %br
-  %label 
-    %b Реалистичность -
-    возможно ли это осуществить на практике? 
-  %br
-  %field
-    = f.text_area :reality, class: "wider_area"
-  %div{:class=>'timestamp'} - Каким образом и в какие сроки реалистично ввести в действие в ДО СГУ данное нововведение, в частности, задействовать ресурсы для него, и почему осуществить это реалистично?
-  - unless @ltpost.nil?
-    = hidden_field_tag 'idea', @ltpost 
-
+  - @aspects.each_with_index do |as, index|
+    %p.fbig.fline #{index+1}. #{as.content}
+    -as.posts.each_with_index do |p, index2|
+      %p.ftable.fcolor
+        =p.show_content.html_safe
+      %p.ftable.fline
+        %span.bigtext Название решения:
+        =text_field_tag 'name'
+      %p.ftable.fline.bigtext Кратко как будет решено недовольство:
+      %p.ftable
+        =text_area_tag 'name',nil, :class => "concept_cond"
+      %p.ftable.fback
+        %span.fline.bigtext 1. Позитивные условия 
+        %br
+        %span.funderline Текст условия:
+        %br
+        =text_area_tag 'name',nil, :class => "concept_cond"
+        %br
+        %span.funderline При помощи чего:
+        %br
+        =text_area_tag 'name',nil, :class => "concept_cond"
+        %br
+        %span.funderline Вероятные помехи и как с ними бороться: 
+        %br
+        =text_area_tag 'name',nil, :class => "concept_cond"
+      %p.ftable.fback
+        %span.fline.bigtext 2. Контрнегативные условия 
+        %br
+        %span.funderline Текст условия:
+        %br
+        =text_area_tag 'name',nil, :class => "concept_cond"
+        %br
+        %span.funderline При помощи чего:
+        %br
+        =text_area_tag 'name',nil, :class => "concept_cond"
+        %br
+        %span.funderline Вероятные помехи и как с ними бороться: 
+        %br
+        =text_area_tag 'name',nil, :class => "concept_cond"
+      %p.ftable.fback
+        %span.fline.bigtext 1. Контролирующие условия 
+        %br
+        %span.funderline Текст условия:
+        %br
+        =text_area_tag 'name',nil, :class => "concept_cond"
+        %br
+        %span.funderline При помощи чего:
+        %br
+        =text_area_tag 'name',nil, :class => "concept_cond"
+        %br
+        %span.funderline Вероятные помехи и как с ними бороться: 
+        %br
+        =text_area_tag 'name',nil, :class => "concept_cond"
 
   %actions
     = f.submit "",  class: "btn"

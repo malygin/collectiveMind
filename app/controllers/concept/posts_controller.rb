@@ -109,6 +109,15 @@ class Concept::PostsController < PostsController
     #all number of votes
     @votes = @project.stage3
   end
- 
+
+  def new
+    @post = current_model.new
+    @aspects = Discontent::Aspect.where(:project_id => @project)
+
+    respond_to do |format|
+      format.html # new.html.erb
+      format.json { render json: @post }
+    end
+  end
   
 end

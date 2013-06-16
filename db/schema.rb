@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130602094116) do
+ActiveRecord::Schema.define(:version => 20130616111732) do
 
   create_table "answers", :force => true do |t|
     t.string   "text"
@@ -109,6 +109,25 @@ ActiveRecord::Schema.define(:version => 20130602094116) do
 
   add_index "concept_forecasts", ["forecast_task_id"], :name => "index_concept_forecasts_on_forecast_task_id"
   add_index "concept_forecasts", ["user_id"], :name => "index_concept_forecasts_on_user_id"
+
+  create_table "concept_post_aspect_discontents", :force => true do |t|
+    t.integer  "post_aspect_id"
+    t.string   "name"
+    t.text     "content"
+    t.integer  "discontent_post_id"
+    t.text     "positive"
+    t.text     "negative"
+    t.text     "control"
+    t.datetime "created_at",         :null => false
+    t.datetime "updated_at",         :null => false
+  end
+
+  create_table "concept_post_aspects", :force => true do |t|
+    t.integer  "discontent_aspect_id"
+    t.integer  "concept_post_id"
+    t.datetime "created_at",           :null => false
+    t.datetime "updated_at",           :null => false
+  end
 
   create_table "concept_post_notes", :force => true do |t|
     t.integer  "post_id"
