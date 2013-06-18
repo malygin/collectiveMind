@@ -1,17 +1,19 @@
 %h1 Что нужно сделать в первую очередь?
 %p.righttext 
-	1. Ознакомьтесь с темой нашей процедуры
+	1. Ознакомьтесь с 
+	= link_to 'темой', 'project/8/expert_news/posts/38'
+	нашей процедуры
 	%br
 	2. Прочитайте раздел 
 	= link_to 'помощь', "/project/#{@project.id}/help"
-	(там вы узнаете больше о нашем рациональных процедурах)
+	(там вы узнаете больше о рациональных процедурах)
 	%br
 	3. Изучите 
 	= link_to 'базу знаний', "/project/#{@project.id}/knowledge"
 	, в которой подробно рассказывается о том, как сейчас рабоает "ИРБИС" и идеи по работе заочки
 	%br
 	4. Примите участие в обсуждении (делитесь идеями, задавайте вопросы)
-	
+
 %h1 Избранные записи
 %br
 
@@ -22,7 +24,11 @@
 
 - unless @aspects.empty?
 	%h1 Список фрагментов
-= render :partial => 'discontent/aspects/aspect', :collection => @aspects
+- @aspects.each do |asp|
+	%a{:href  => discontent_posts_path(:aspect => asp.id), :class => 'topic'}
+		.topics
+			%p.greentitle= "#{asp.content}"	
+/ = render :partial => 'discontent/aspects/aspect', :collection => @aspects
 -if boss? 
 	%p.righttext= link_to 'добавить фрагмент', new_discontent_aspect_path, id: "add_aspect"
 
