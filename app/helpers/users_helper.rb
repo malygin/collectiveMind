@@ -14,7 +14,8 @@ module UsersHelper
 		# end
 		# gravatar_image_tag(user.email.downcase, :alt => user.name, :align => 'left',
 		# 	:class =>'avatar', :gravatar => options)
-		unless user.avatar.nil? 
+		
+		if user.avatar.file? 
 			image_tag user.avatar.url(:thumb)
 		else
 			if user.login.nil?
