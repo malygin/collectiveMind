@@ -1,4 +1,4 @@
-%h1 Отредактировать пользователя
+%h1 Отредактируйте информацию о себе
 
 = form_for @user do |f|
 	=render 'shared/error_messages', :object => f.object
@@ -9,7 +9,11 @@
 	.field
 		= f.label :surname, "Фамилия"
 		%br
-		= f.text_field :surname
+		= f.text_field :surname	
+	.field
+		= f.label :surname, "Ник (используется, если вы поставить галочку на 'Участвовать анонимно')"
+		%br
+		= f.text_field :nickname
 	.field 
 		= f.label :email, "Почта"
 		%br
@@ -21,7 +25,15 @@
 	.fieild
 		= f.label :password_confirmation
 		%br
-		= f.password_field :password_confirmation
+		= f.password_field :password_confirmation	
+	.fieild
+		= f.label :anonym, 'Участвовать анонимно'
+		= f.check_box :anonym
+	.field
+		%br
+		= f.label :avatar, "Выберите файл для аватара"
+		%br
+		= f.file_field :avatar
 	.action
 		= f.submit '', class: 'btn'
 %br

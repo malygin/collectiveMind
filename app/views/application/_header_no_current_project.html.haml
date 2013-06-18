@@ -2,12 +2,12 @@
 / = @project.name
 / = image_tag("improve.png")    
 - if signed_in?
-  .blackbut
-    = image_tag('exit.png')
-    = link_to "Выйти", "/signout", class: "exit"
+
   .greybut
     = link_to image_tag('edit.png'), edit_user_path(current_user)
-    = link_to current_user.name+" "+current_user.surname, user_path(current_user), class: "username"
+    = link_to current_user.name_title, user_path(current_user), class: "username"
+    = link_to " - Выйти", "/signout" , class: "username"
+
 -else
   %span.blackbut
     = image_tag('exit.png')

@@ -2,8 +2,8 @@
 require 'digest'
 
 class User < ActiveRecord::Base
-  attr_accessor :password, :secret
-  attr_accessible :login, :password, :password_confirmation, :encrypted_password, :secret,
+  attr_accessor :password, :secret, :secret2, :secret3
+  attr_accessible :login, :nickname, :anonym, :password, :password_confirmation, :encrypted_password, :secret,
    :dateActivation, :dateLastEnter, :dateRegistration, :email, :faculty, :group,
     :name, :string, :string, :surname, :validate, :vkid, :score, :admin, :expert 
 
@@ -41,7 +41,7 @@ class User < ActiveRecord::Base
   has_many :user_awards
   has_many :awards, :through => :user_awards  
 
-  validates :name, :presence => true,
+  validates :name, 
   				   :length => { :maximum => 50 }
 
 
@@ -51,9 +51,18 @@ class User < ActiveRecord::Base
 
   validates :password, :presence => true,
   						:confirmation => true,
-  						:length => { :within => 6..40 }
-  validates :password_confirmation, presence: true, :length => { :within => 6..40 }
-  before_save :encrypt_password
+  						:length => { :within => 6..40 },
+              :on => :create
+  validates :password_confirmation, presence: true,
+   :length => { :within => 6..40 }, :on => :create
+before_save :encrypt_password
+  attr_accessible :avatar
+
+  # This method associates the attribute ":avatar" with a file attachment
+  has_attached_file :avatar, styles: {
+    thumb: '57x74>',
+    normal: '300x300>'
+  }
 
   def has_password?(submitted_password)
     # encrypted_password == encrypt(submitted_password)
@@ -77,7 +86,11 @@ class User < ActiveRecord::Base
   end
 
   def name_title
-    self.name + " "+self.surname
+    if self.anonym
+      self.nickname
+    else
+      self.name + " "+self.surname
+    end
   end
 
   def role_name

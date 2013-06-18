@@ -10,9 +10,12 @@
 	.posts
 		%span.namedate
 			=  @user.name_title
+
 			- if current_user == @user
 				(это вы)
 		%br
+		- if current_user == @user
+			=link_to 'редактировать информацию о себе', edit_user_path(current_user), class: "name"
 		
 
 

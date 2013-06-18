@@ -67,6 +67,15 @@ config.static_cache_control = "public, max-age=2592000"
 
   # Send deprecation notices to registered listeners
   config.active_support.deprecation = :notify
+config.paperclip_defaults = {
+  :storage => :s3,
+  :s3_credentials => {
+    :bucket => 'stuff_bucket',
+    :access_key_id => 'AKIAIUXUHQCN45FUQ2UQ',
+    :secret_access_key => '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'
+  }
+}
+ 
 
   # Log the query plan for queries taking more than this (works
   # with SQLite, MySQL, and PostgreSQL)

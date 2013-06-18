@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130616111732) do
+ActiveRecord::Schema.define(:version => 20130618081138) do
 
   create_table "answers", :force => true do |t|
     t.string   "text"
@@ -220,6 +220,8 @@ ActiveRecord::Schema.define(:version => 20130616111732) do
     t.integer  "type_project",                :default => 0
     t.integer  "position",                    :default => 0
     t.string   "secret"
+    t.string   "secret2"
+    t.string   "secret3"
   end
 
   add_index "core_projects", ["status"], :name => "index_core_projects_on_status"
@@ -612,10 +614,11 @@ ActiveRecord::Schema.define(:version => 20130616111732) do
     t.integer  "user_id"
     t.integer  "post_id"
     t.integer  "category_id"
-    t.datetime "created_at",                  :null => false
-    t.datetime "updated_at",                  :null => false
+    t.datetime "created_at",                      :null => false
+    t.datetime "updated_at",                      :null => false
     t.integer  "number_views", :default => 0
     t.integer  "project_id"
+    t.boolean  "important",    :default => false
   end
 
   add_index "life_tape_posts", ["category_id"], :name => "index_life_tape_posts_on_category_id"
@@ -853,16 +856,22 @@ ActiveRecord::Schema.define(:version => 20130616111732) do
     t.date     "dateActivation"
     t.date     "dateLastEnter"
     t.string   "vkid"
-    t.datetime "created_at",                            :null => false
-    t.datetime "updated_at",                            :null => false
+    t.datetime "created_at",                             :null => false
+    t.datetime "updated_at",                             :null => false
     t.string   "encrypted_password"
     t.string   "login"
     t.string   "salt"
-    t.boolean  "admin",              :default => false
-    t.integer  "score",              :default => 0
-    t.boolean  "expert",             :default => false
+    t.boolean  "admin",               :default => false
+    t.integer  "score",               :default => 0
+    t.boolean  "expert",              :default => false
     t.string   "user_type"
-    t.boolean  "jury",               :default => false
+    t.boolean  "jury",                :default => false
+    t.string   "avatar_file_name"
+    t.string   "avatar_content_type"
+    t.integer  "avatar_file_size"
+    t.datetime "avatar_updated_at"
+    t.string   "nickname"
+    t.boolean  "anonym",              :default => false
   end
 
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true
