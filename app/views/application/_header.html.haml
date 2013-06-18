@@ -6,7 +6,7 @@
   - if signed_in?
     .greybut
       = link_to image_tag('edit.png'), edit_user_path(current_user)
-      = link_to current_user.name, user_path(current_user), class: "username"
+      = link_to current_user.name_title, user_path(current_user), class: "username"
       = link_to " - Выйти", "/signout" , class: "username"
   -else
     %span.blackbut
