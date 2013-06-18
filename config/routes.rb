@@ -20,6 +20,9 @@ match '/description', :to =>'pages#description'
 
 scope "/project/:project" do
   match '/knowledge', :to =>'core/projects#knowledge'
+  match "/help", :to => "core/projects#help"
+  match "/help_0", :to => "core/projects#help_0"
+  match "/help_d0", :to => "core/projects#help_d0"
 
   scope "/stage/:stage" do
      namespace :essay do    
@@ -155,6 +158,7 @@ end
  
   match "/help", :to => "pages#help"
   match "/help0", :to => "pages#help0"
+  match "/help_0", :to => "pages#help_0"
   match "/help1", :to => "pages#help1"
   match "/help2", :to => "pages#help2"
   match "/help3", :to => "pages#help3"

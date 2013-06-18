@@ -3,7 +3,7 @@
     %li= link_to "Тех. поддержка ", "/project/#{@project.id}/question/posts/" , class:  "lmenu"
     %li= image_tag "separator.png", :class => "separator"
 
-    %li= link_to "Помощь", "/help" , class: "lmenu"
+    %li= link_to "Помощь", "/project/#{@project.id}/help" , class: "lmenu"
     %li= image_tag "separator.png", :class => "separator" 
     / %li= link_to "Опрос", "/tests" , class:  "lmenu"
     / %li= image_tag "separator.png", :class => "separator"

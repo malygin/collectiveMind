@@ -3,7 +3,14 @@ class Core::ProjectsController < ApplicationController
   # GET /core/projects
   # GET /core/projects.json
   before_filter :boss_authenticate, :only => [:next_stage, :pr_stage]
+  before_filter :project_by_id
   
+  def  project_by_id
+      unless params[:project].nil?
+        @core_project = Core::Project.find(params[:project])
+      end
+  end
+
   def index
     @core_projects = Core::Project.all
 
@@ -117,9 +124,6 @@ class Core::ProjectsController < ApplicationController
     @core_project.update_column(:status, @core_project.status - 1)
     redirect_to :back
   end
-   def knowledge
-    @core_project = Core::Project.find(params[:project])
 
-  end
 
 end

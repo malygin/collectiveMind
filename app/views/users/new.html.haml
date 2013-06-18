@@ -10,6 +10,10 @@
 		= f.label :surname, "Фамилия"
 		%br
 		= f.text_field :surname 	
+	.field
+		= f.label :surname, "Ник (используется, если вы поставить галочку на 'Участвовать анонимно')"
+		%br
+		= f.text_field :nickname
 	.field 
 		= f.label :secret, "Кодовое слово"
 		%br
@@ -26,5 +30,8 @@
 		=f.label :password_confirmation , "Подтвердите пароль"
 		%br
 		=f.password_field :password_confirmation
+	.fieild
+		= f.label :anonym, 'Участвовать анонимно'
+		= f.check_box :anonym
 	.action
 		=f.submit '',   class: "savebtn"

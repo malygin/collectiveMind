@@ -27,5 +27,6 @@ class Core::Project < ActiveRecord::Base
 
   has_many :life_tape_posts, :class_name => "LifeTape::Post"
   has_many :aspects, :class_name => "Discontent::Aspect"
-  has_many :users
+  has_many :project_users
+  has_many :users, :through => :project_users
 end

@@ -64,6 +64,9 @@
       .strcolumns
         = link_to core_project.name, '/project/'+core_project.id.to_s,  class: 'strname'
         %br
+        - if core_project.users.include? current_user
+          %span.rate у вас есть права на этот проект
+          %br
         Статус: 
         %span.namedate= status_title(core_project.status)
         %br
