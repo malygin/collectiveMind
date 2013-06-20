@@ -1,8 +1,9 @@
 .avatar
 	= link_to gravatar_for(user), user
 	%br
-	%span.role= user.role_name
-	%br
+	- if user.expert? or user.admin?
+		%span.role= user.role_name
+		%br
 
 	- unless user.expert? or user.admin?
 		%span.rate_small= user.score

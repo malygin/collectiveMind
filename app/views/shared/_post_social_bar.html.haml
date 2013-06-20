@@ -4,7 +4,7 @@
 	-else
 		=post.users.count
 	=image_tag "like.png"
-	=link_to post.number_views,  {:action => :show, :project => @project, :id => post.id}, class: "counter"
+	=post.number_views
 	=image_tag "views.png"
-	=link_to post.comments.count,  {:action => :show, :project => @project, :id => post.id}, class: "counter"
+	=post.comments.count
 	=image_tag "comment.png"

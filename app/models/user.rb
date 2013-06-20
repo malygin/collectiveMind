@@ -101,7 +101,7 @@ before_save :encrypt_password
     elsif self.jury
       "жюри"
     else 
-      "сотрудник"
+      ""
     end
   end
 
