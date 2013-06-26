@@ -21,6 +21,9 @@ match '/description', :to =>'pages#description'
 scope "/project/:project" do
   match '/knowledge', :to =>'core/projects#knowledge'
   match "/help", :to => "core/projects#help"
+  match "/article1", :to => "core/projects#article1"
+  match "/article2", :to => "core/projects#article2"
+
   match "/help_0", :to => "core/projects#help_0"
   match "/help_d0", :to => "core/projects#help_d0"
 
