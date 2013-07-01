@@ -1,0 +1,34 @@
+%p.fbig.fline
+  = @aspect.content
+-@aspect.posts.each_with_index do |p, index2|
+
+  %div{id: "discontent_#{p.id}"}
+    %p.ftable.fline
+      %a{onclick: "remove_discontent('discontent_#{p.id}')"} Не хочу решать недовольство
+    %p.ftable.fline
+      %span.bigtext Корректируемое несовершенство:
+    %p.ftable.fcolor
+      =p.show_content.html_safe
+    %p.ftable.fline
+      %span.bigtext Название корректировки:
+      %br
+      =text_field_tag 'name',nil, :class => 'concept_name'
+    %p.ftable.fline.bigtext Краткое описание корректировки:
+    %p.ftable
+      =text_area_tag 'name',nil, :class => "concept_cond"
+    %p.ftable.fback
+      %span.fline.bigtext 1. Какие в будущем должны быть созданы и поддерживаться УСЛОВИЯ, чтобы данная корректировка работала
+      %br
+      =text_area_tag 'name',nil, :class => "wymeditor"
+
+    %p.ftable.fback
+      %span.fline.bigtext 2. Если будут созданы и поддерживаться вышеозначенные УСЛОВИЯ, какие из-за этого вероятны НЕЖЕЛАТЕЛЬНЫЕ ПОБОЧНЫЕ ЭФФЕКТЫ в будущем 
+
+      %br
+      =text_area_tag 'name',nil, :class => "wymeditor"
+
+    %p.ftable.fback
+      %span.fline.bigtext 3. Кем и как будет контролироваться создание и поддержание вышеозначенных УСЛОВИЙ и предотвращаться НЕЖЕЛАТЕЛЬНЫЕ ПОБОЧНЫЕ ЭФФЕКТЫ в будущем 
+
+      %br
+      =text_area_tag 'name',nil, :class => "wymeditor"

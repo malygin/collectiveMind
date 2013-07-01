@@ -1,8 +1,6 @@
 #= require jquery
 #= require jquery_ujs
-
-#$(document).ready ->
-#  window.wiselinks = new Wiselinks()
+#= require_tree
 $(document).ready ->
     $(".voteBar")
       .bind "ajax:success", (event, resp) ->

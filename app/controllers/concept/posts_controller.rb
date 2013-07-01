@@ -120,4 +120,13 @@ class Concept::PostsController < PostsController
     end
   end
   
+  def add_aspect
+    
+    @aspect = Discontent::Aspect.find(params[:aspect_id]) 
+    respond_to do |format|
+      format.html # new.html.erb
+      format.js
+    end
+  end
+  
 end
