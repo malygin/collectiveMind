@@ -30,9 +30,15 @@ class Concept::PostsController < PostsController
 
   def index
     @posts = current_model.where(:project_id => @project, :status => @status).paginate(:page => params[:page])
-    respond_to do |format|
-      format.html # index.html.erb
-      format.json { render json: @posts }
+    if @status == '2'
+      #if @project.status == 6
+        @number_v = @project.stage3 - current_user.voted_discontent_posts.size
+        @votes = @project.stage3
+        @discontents = Discontent::Post.where(:project_id => @project)
+      #end
+      render 'table', :layout => 'application_two_column'
+    else
+      render 'index'
     end
   end
 
@@ -40,29 +46,29 @@ class Concept::PostsController < PostsController
     @project = Core::Project.find(params[:project]) 
 
     @concept_post = Concept::Post.new(params[:concept_post])
-    unless params['idea'].nil?
-      @concept_post.life_tape_post_id = params['idea']
-    end
+    #unless params['idea'].nil?
+    #  @concept_post.life_tape_post_id = params['idea']
+    #end
     @concept_post.number_views =0
     @concept_post.user = current_user
     @concept_post.status = 0
-          @concept_post.project = @project
-
-    #@concept_post.task_supply_pairs = nil
-    #puts params['task_supply']
-    unless params['task_supply'].nil?
-      params['task_supply'].each do |k,v|
+    @concept_post.project = @project
+    #
+    #@concept_post.post_aspects = nil
+    ##puts params['task_supply']
+    unless params['correct_disc'].nil?
+      params['correct_disc'].each do |v|
         if v!= ''
-          pair = Concept::TaskSupplyPair.new(:task => v) 
-          @concept_post.task_supply_pairs << pair
+          @concept_post.post_aspects.build(v[1].merge :discontent_aspect_id=> v[0])
+
         end
       end
     end
-
+    #
     respond_to do |format|
       if @concept_post.save!
          current_user.journals.build(:type_event=>'concept_post_save', :body=>@concept_post.id).save!
-        format.html { redirect_to  action: "index" , notice: 'Концепция добавлена!' }
+        format.html { redirect_to  action: "index" , notice: 'Образ добавлен!' }
         format.json { render json: @concept_post, status: :created, location: @concept_post }
       else
         format.html { render action: "new" }

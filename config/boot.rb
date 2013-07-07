@@ -1,6 +1,5 @@
 require 'rubygems'
-require 'execjs'
-require 'v8'
+
 
 
 # Set up gems listed in the Gemfile.

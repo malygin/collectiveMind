@@ -1,5 +1,44 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-  <component name="DataSourceManagerImpl" compressed="false" hash="2747314763" />
+  <component name="DataSourceManagerImpl" format="xml" hash="2365920156">
+    <data-source source="LOCAL" name="Rails collectiveMind: test" product="" version="" jdbc-version="" driver-name="" driver-version="" uuid="25e2bfec-7a3b-475c-b710-9be87ad63fd9">
+      <jdbc-driver>org.sqlite.JDBC</jdbc-driver>
+      <jdbc-url>jdbc:sqlite:/home/malygin/projects/collectiveMind/db/test.sqlite3</jdbc-url>
+      <libraries>
+        <library>
+          <url>file://$USER_HOME$/.RubyMine40/config/jdbc-drivers/xerial-sqlite-license.txt</url>
+        </library>
+        <library>
+          <url>jar://$USER_HOME$/.RubyMine40/config/jdbc-drivers/sqlite-jdbc-3.7.2.jar!/</url>
+        </library>
+      </libraries>
+    </data-source>
+    <data-source source="LOCAL" name="Rails collectiveMind: development" product="" version="" jdbc-version="" driver-name="" driver-version="" uuid="df732f98-cb73-4553-8f11-ff81e17cc22c">
+      <jdbc-driver>org.sqlite.JDBC</jdbc-driver>
+      <jdbc-url>jdbc:sqlite:/home/malygin/projects/collectiveMind/db/development.sqlite3</jdbc-url>
+      <libraries>
+        <library>
+          <url>file://$USER_HOME$/.RubyMine40/config/jdbc-drivers/xerial-sqlite-license.txt</url>
+        </library>
+        <library>
+          <url>jar://$USER_HOME$/.RubyMine40/config/jdbc-drivers/sqlite-jdbc-3.7.2.jar!/</url>
+        </library>
+      </libraries>
+    </data-source>
+    <data-source source="LOCAL" name="Rails collectiveMind: production" product="" version="" jdbc-version="" driver-name="" driver-version="" uuid="3dd1d1e7-4918-4c18-9477-db2949d009d6">
+      <jdbc-driver>org.postgresql.Driver</jdbc-driver>
+      <jdbc-url>jdbc:postgresql://ec2-50-17-201-242.compute-1.amazonaws.com:5942/d85el5orjiroa2</jdbc-url>
+      <user-name>ubsmskf2jlj95t</user-name>
+      <user-password>dfdadfccdfd9dfd9dfc2dfdcdfc1dfc0dfdbdfc0dfdedfcbdf9cdfcedf9adfdfdfcbdfdbdfcfdfc9dfc6dfc3dfcddf9cdfdadfc6</user-password>
+      <libraries>
+        <library>
+          <url>file://$USER_HOME$/Library/Preferences/RubyMine50/jdbc-drivers/postgresql-driver-license.txt</url>
+        </library>
+        <library>
+          <url>jar://$USER_HOME$/Library/Preferences/RubyMine50/jdbc-drivers/postgresql-9.1-901.jdbc3.jar!/</url>
+        </library>
+      </libraries>
+    </data-source>
+  </component>
 </project>
 

@@ -36,10 +36,8 @@ class UsersController < ApplicationController
 	def create 
 		@user = User.new(params[:user])
 		cp = nil
-		Core::Project.find(:all) do |pr|
-
+		Core::Project.all do |pr|
 			if @user.secret == pr.secret
-
 				@user.projects << pr
 			end
 		end
@@ -49,7 +47,7 @@ class UsersController < ApplicationController
 			flash[:success] = "Добро пожаловать!"
 			redirect_to root_path
 		else
-			if  @user.projects.empty? 
+			if  @user.projects.empty?
 				flash[:error] = "Кодовое слово введено неверно!"
 			end
 			render 'new'

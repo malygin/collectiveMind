@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130618081138) do
+ActiveRecord::Schema.define(:version => 20130707110023) do
 
   create_table "answers", :force => true do |t|
     t.string   "text"
@@ -73,43 +73,6 @@ ActiveRecord::Schema.define(:version => 20130618081138) do
   add_index "concept_comments", ["post_id"], :name => "index_concept_comments_on_post_id"
   add_index "concept_comments", ["user_id"], :name => "index_concept_comments_on_user_id"
 
-  create_table "concept_essays", :force => true do |t|
-    t.integer  "user_id"
-    t.text     "content"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
-  end
-
-  create_table "concept_final_voitings", :force => true do |t|
-    t.integer  "score"
-    t.integer  "forecast_task_id"
-    t.integer  "user_id"
-    t.datetime "created_at",       :null => false
-    t.datetime "updated_at",       :null => false
-  end
-
-  add_index "concept_final_voitings", ["forecast_task_id"], :name => "index_concept_final_voitings_on_forecast_task_id"
-  add_index "concept_final_voitings", ["user_id"], :name => "index_concept_final_voitings_on_user_id"
-
-  create_table "concept_forecast_tasks", :force => true do |t|
-    t.integer  "user_id"
-    t.text     "content"
-    t.text     "description"
-    t.datetime "created_at",  :null => false
-    t.datetime "updated_at",  :null => false
-  end
-
-  create_table "concept_forecasts", :force => true do |t|
-    t.integer  "forecast_task_id"
-    t.integer  "position"
-    t.integer  "user_id"
-    t.datetime "created_at",       :null => false
-    t.datetime "updated_at",       :null => false
-  end
-
-  add_index "concept_forecasts", ["forecast_task_id"], :name => "index_concept_forecasts_on_forecast_task_id"
-  add_index "concept_forecasts", ["user_id"], :name => "index_concept_forecasts_on_user_id"
-
   create_table "concept_post_aspect_discontents", :force => true do |t|
     t.integer  "post_aspect_id"
     t.string   "name"
@@ -127,6 +90,11 @@ ActiveRecord::Schema.define(:version => 20130618081138) do
     t.integer  "concept_post_id"
     t.datetime "created_at",           :null => false
     t.datetime "updated_at",           :null => false
+    t.text     "positive"
+    t.text     "negative"
+    t.text     "control"
+    t.string   "name"
+    t.string   "content"
   end
 
   create_table "concept_post_notes", :force => true do |t|
@@ -710,17 +678,6 @@ ActiveRecord::Schema.define(:version => 20130618081138) do
     t.datetime "updated_at", :null => false
   end
 
-  create_table "projects", :force => true do |t|
-    t.string   "name"
-    t.string   "description"
-    t.datetime "begin1st"
-    t.datetime "end1st"
-    t.datetime "begin1stvote"
-    t.datetime "end1stvote"
-    t.datetime "created_at",   :null => false
-    t.datetime "updated_at",   :null => false
-  end
-
   create_table "question_comment_votings", :force => true do |t|
     t.integer  "user_id"
     t.integer  "comment_id"
@@ -779,63 +736,6 @@ ActiveRecord::Schema.define(:version => 20130618081138) do
 
   add_index "questions_users", ["question_id"], :name => "index_questions_users_on_question_id"
   add_index "questions_users", ["user_id"], :name => "index_questions_users_on_user_id"
-
-  create_table "test_answers", :force => true do |t|
-    t.text     "name"
-    t.integer  "type_answer"
-    t.integer  "test_question_id"
-    t.datetime "created_at",       :null => false
-    t.datetime "updated_at",       :null => false
-  end
-
-  add_index "test_answers", ["test_question_id"], :name => "index_test_answers_on_test_question_id"
-
-  create_table "test_attempts", :force => true do |t|
-    t.integer  "test_id"
-    t.integer  "user_id"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
-  end
-
-  add_index "test_attempts", ["test_id"], :name => "index_test_attempts_on_test_id"
-  add_index "test_attempts", ["user_id"], :name => "index_test_attempts_on_user_id"
-
-  create_table "test_question_attempts", :force => true do |t|
-    t.integer  "test_attempt_id"
-    t.integer  "test_question_id"
-    t.string   "answer"
-    t.datetime "created_at",       :null => false
-    t.datetime "updated_at",       :null => false
-  end
-
-  add_index "test_question_attempts", ["test_attempt_id"], :name => "index_test_question_attempts_on_test_attempt_id"
-  add_index "test_question_attempts", ["test_question_id"], :name => "index_test_question_attempts_on_test_question_id"
-
-  create_table "test_questions", :force => true do |t|
-    t.text     "name"
-    t.integer  "type_question"
-    t.integer  "test_id"
-    t.datetime "created_at",     :null => false
-    t.datetime "updated_at",     :null => false
-    t.integer  "order_question"
-  end
-
-  add_index "test_questions", ["order_question"], :name => "index_test_questions_on_order_question"
-  add_index "test_questions", ["test_id"], :name => "index_test_questions_on_test_id"
-
-  create_table "tests", :force => true do |t|
-    t.string   "name"
-    t.string   "description"
-    t.integer  "project_id"
-    t.datetime "begin_date"
-    t.datetime "end_date"
-    t.datetime "created_at",  :null => false
-    t.datetime "updated_at",  :null => false
-    t.text     "preview"
-  end
-
-  add_index "tests", ["begin_date"], :name => "index_tests_on_begin_date"
-  add_index "tests", ["end_date"], :name => "index_tests_on_end_date"
 
   create_table "user_awards", :force => true do |t|
     t.integer  "user_id"

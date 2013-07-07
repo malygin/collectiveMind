@@ -1,7 +1,7 @@
 class Concept::PostAspect < ActiveRecord::Base
-  attr_accessible :discontent_aspect_id, :concept_post_id
-  has_many :post_aspect_discontents
-  belongs_to :discontent_aspect
-  belongs_to :post
+  attr_accessible :discontent_aspect_id, :concept_post_id, :content, :control, :name, :negative, :positive
+
+  belongs_to :concept_post, :class_name => 'Concept::Post', :foreign_key => :concept_post_id
+  belongs_to :discontent, :class_name => 'Discontent::Post', :foreign_key => :discontent_aspect_id
 
 end

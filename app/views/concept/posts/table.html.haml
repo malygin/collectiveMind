@@ -1,0 +1,40 @@
+-if @project.status == 6
+    %br=link_to 'Вы можете оставить свое мнение или почитать другие', essay_posts_path(@project, @project.status), :id => 'essay_list'
+    - unless @number_v<1
+        Количество имеющихся голосов -
+        %span.rate
+            %span#count_vote=@number_v
+
+%table.disColumns
+
+    %tr
+        %td
+            %h1 Недовольства
+        %td
+            %h1 Варианты решений
+
+    -@discontents.each_with_index do |dis, index2|
+        %tr
+            %td{ :class => "#{((index2+1) % 2 !=0) ? 'disText' : 'disText2'}" }
+                =dis.show_content.html_safe
+                %br
+
+
+            %td{ :class => "#{((index2+1) % 2 !=0) ? '' : 'disText3'}" }
+                %table
+                    -dis.concept_conditions.each_with_index do |cond,  index|
+
+                        %tr
+                            %td
+                                - if cond.concept_post.status ==2
+                                    .fback
+                                        -if @project.status == 6
+                                            .voteBar2
+                                                -if admin?
+                                                    %span.number=cond.concept_post.voted_users.count
+                                                - if can_vote?(cond.concept_post.voted_users.size, @number_v, @votes)
+                                                    =link_to "+", "/project/#{@project.id}/discontent/vote/#{cond.concept_post.id}", :remote => true, :method => :put, class: "voteCounter", :id => "aspect_#{cond.concept_post.id}"
+
+                                        .condition
+                                            =cond.name
+                                            =link_to 'подробнее', "/project/#{@project.id}/concept/status/2/posts/#{cond.concept_post_id}##{cond.id}"
