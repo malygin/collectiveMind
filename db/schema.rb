@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130707110023) do
+ActiveRecord::Schema.define(:version => 20130713111618) do
 
   create_table "answers", :force => true do |t|
     t.string   "text"
@@ -95,6 +95,8 @@ ActiveRecord::Schema.define(:version => 20130707110023) do
     t.text     "control"
     t.string   "name"
     t.string   "content"
+    t.text     "reality"
+    t.text     "problems"
   end
 
   create_table "concept_post_notes", :force => true do |t|

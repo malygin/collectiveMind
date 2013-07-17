@@ -26,7 +26,7 @@ $(document).ready ->
         console.log(resp)
         $(this).replaceWith ""+resp
     $('.task_supply > ol > li > ul ').before('<br/><span class="task_supply_resource">Ресурсы:</span>')
-    $('.task_supply > ol > li > ul > li > ul ').before('<br/><span class="task_supply_resource">Средства создания:</span>')
+#    $('.task_supply > ol > li > ul > li > ul ').before('<br/><span class="task_supply_resource">Средства создания:</span>')
    
 root = exports ? this
 

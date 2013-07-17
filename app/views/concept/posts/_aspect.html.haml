@@ -32,3 +32,13 @@
 
       %br
       =text_area_tag "correct_disc[#{p.id}][control]",nil, :class => "wymeditor"
+    %p.ftable.fback
+      %span.fline.bigtext Возможные помехи
+
+      %br
+      =text_area_tag "correct_disc[#{p.id}][problems]",nil
+    %p.ftable.fback
+      %span.fline.bigtext Это вообще реалистично?
+
+      %br
+      =text_area_tag "correct_disc[#{p.id}][reality]",nil

@@ -10,7 +10,7 @@ namespace :core, :shallow => true do
   end 
 end
 
-match "/project/:project", :to => "core/projects#to_project"
+match '/project/:project', :to => 'core/projects#to_project'
 match '/savelzon', :to =>'pages#savelzon'
 match '/vayntrub', :to =>'pages#vayntrub'
 match '/reviews', :to =>'pages#reviews'
@@ -18,16 +18,16 @@ match '/contacts', :to =>'pages#contacts'
 match '/description', :to =>'pages#description'
 
 
-scope "/project/:project" do
+scope '/project/:project' do
   match '/knowledge', :to =>'core/projects#knowledge'
-  match "/help", :to => "core/projects#help"
-  match "/article1", :to => "core/projects#article1"
-  match "/article2", :to => "core/projects#article2"
+  match '/help', :to => 'core/projects#help'
+  match '/article1', :to => 'core/projects#article1'
+  match '/article2', :to => 'core/projects#article2'
 
-  match "/help_0", :to => "core/projects#help_0"
-  match "/help_d0", :to => "core/projects#help_d0"
+  match '/help_0', :to => 'core/projects#help_0'
+  match '/help_d0', :to => 'core/projects#help_d0'
 
-  scope "/stage/:stage" do
+  scope '/stage/:stage' do
      namespace :essay do    
       resources :posts do
             member do
@@ -42,10 +42,10 @@ scope "/project/:project" do
   namespace :discontent do
     resources :aspects 
 
-    get 'vote_list'  => "posts#vote_list"
-    put 'vote/:post_id'  => "posts#vote"    
-    scope "/status/:status/aspect/:aspect",  :defaults => {:status => 0, :aspect => 0} do
-      get 'replace/:replace_id/posts/new'  => "posts#new" 
+    get 'vote_list'  => 'posts#vote_list'
+    put 'vote/:post_id'  => 'posts#vote'    
+    scope '/status/:status/aspect/:aspect',  :defaults => {:status => 0, :aspect => 0} do
+      get 'replace/:replace_id/posts/new'  => 'posts#new' 
       resources :posts do
             member do
                 put :add_comment
@@ -65,10 +65,10 @@ scope "/project/:project" do
    end
 
   namespace :concept do
-    get 'vote_list'  => "posts#vote_list"
-    put 'vote/:post_id'  => "posts#vote"
+    get 'vote_list'  => 'posts#vote_list'
+    put 'vote/:post_id'  => 'posts#vote'
 
-    scope "/status/:status/",  :defaults => {:status => 0} do   
+    scope '/status/:status/',  :defaults => {:status => 0} do   
       resources :posts do
             member do
                 get :add_aspect
@@ -89,9 +89,9 @@ scope "/project/:project" do
    end  
 
    namespace :plan do
-    get 'vote_list'  => "posts#vote_list"
-    put 'vote/:post_id'  => "posts#vote"
-    scope "/status/:status/",  :defaults => {:status => 0} do   
+    get 'vote_list'  => 'posts#vote_list'
+    put 'vote/:post_id'  => 'posts#vote'
+    scope '/status/:status/',  :defaults => {:status => 0} do   
       resources :posts do
             member do
                 put :add_comment
@@ -111,10 +111,10 @@ scope "/project/:project" do
    end
 
   namespace :life_tape do
-    get 'vote_list'  => "posts#vote_list"
-    put 'vote/:post_id'  => "posts#vote"
-    put 'up/:post_id'  => "posts#up"    
-    put 'down/:post_id'  => "posts#down"  
+    get 'vote_list'  => 'posts#vote_list'
+    put 'vote/:post_id'  => 'posts#vote'
+    put 'up/:post_id'  => 'posts#up'    
+    put 'down/:post_id'  => 'posts#down'  
     resources :posts do    
       member do
           put :add_comment
@@ -149,7 +149,7 @@ end
 
 ############
 
-  get "journal/enter"
+  get 'journal/enter'
 
   resources :tests do
     member do
@@ -158,38 +158,38 @@ end
   end
 
 
-  match "/about", :to => "pages#about"
-  match "/contacts", :to => "pages#contacts"
+  match '/about', :to => 'pages#about'
+  match '/contacts', :to => 'pages#contacts'
  
-  match "/help", :to => "pages#help"
-  match "/help0", :to => "pages#help0"
-  match "/help_0", :to => "pages#help_0"
-  match "/help1", :to => "pages#help1"
-  match "/help2", :to => "pages#help2"
-  match "/help3", :to => "pages#help3"
-  match "/help4", :to => "pages#help4"
-  match "/help5", :to => "pages#help5"
-  match "/help6", :to => "pages#help6"
-  match "/help7", :to => "pages#help7"
+  match '/help', :to => 'pages#help'
+  match '/help0', :to => 'pages#help0'
+  match '/help_0', :to => 'pages#help_0'
+  match '/help1', :to => 'pages#help1'
+  match '/help2', :to => 'pages#help2'
+  match '/help3', :to => 'pages#help3'
+  match '/help4', :to => 'pages#help4'
+  match '/help5', :to => 'pages#help5'
+  match '/help6', :to => 'pages#help6'
+  match '/help7', :to => 'pages#help7'
 
-  match "/estimate/result", :to => "pages#result"
-  match "/home", :to => "pages#home"
-  match "/donot", :to => "pages#donot"  
-  match "/articles", :to => "pages#articles"
+  match '/estimate/result', :to => 'pages#result'
+  match '/home', :to => 'pages#home'
+  match '/donot', :to => 'pages#donot'  
+  match '/articles', :to => 'pages#articles'
 
-  match "/signin", :to => "sessions#new"
-  match "/signout", :to => "sessions#destroy"
-  match "/frustrations/structure", :to => "pages#structure_frustrations"
-  match "/frustrations/unstructure", :to => "pages#unstructure_frustrations"
-  match "/frustrations/archive", :to => "pages#archive_frustrations"  
-  match "/frustrations/to_expert", :to => "pages#to_expert_frustrations"
-  match "/frustrations/accepted", :to => "pages#accepted_frustrations"  
-  match "/frustrations/declined", :to => "pages#declined_frustrations"    
-  match "/frustrations/voted", :to => "pages#voted_frustrations"    
-  match "/frustrations/show_forecast", :to => "frustrations#show_forecast"    
+  match '/signin', :to => 'sessions#new'
+  match '/signout', :to => 'sessions#destroy'
+  match '/frustrations/structure', :to => 'pages#structure_frustrations'
+  match '/frustrations/unstructure', :to => 'pages#unstructure_frustrations'
+  match '/frustrations/archive', :to => 'pages#archive_frustrations'  
+  match '/frustrations/to_expert', :to => 'pages#to_expert_frustrations'
+  match '/frustrations/accepted', :to => 'pages#accepted_frustrations'  
+  match '/frustrations/declined', :to => 'pages#declined_frustrations'    
+  match '/frustrations/voted', :to => 'pages#voted_frustrations'    
+  match '/frustrations/show_forecast', :to => 'frustrations#show_forecast'    
 
 
-  #get "users/new"
+  #get 'users/new'
   resources :users do
     member do
       put :forecast
@@ -203,10 +203,10 @@ end
   resources :sessions, :only => [:new, :create, :destroy]
 
   
-  #match "frustrations/archive/:id/", :to =>"frustrations#archive"
-  match "/signup", :to =>"users#new"
+  #match 'frustrations/archive/:id/', :to =>'frustrations#archive'
+  match '/signup', :to =>'users#new'
 
-  get "welcome/index"
+  get 'welcome/index'
   
   resources :posts do
     resources :comments
@@ -277,19 +277,19 @@ end
       end
     match 'vote_for/:id/:score' => 'posts#vote_for',  :constraints => { :score => /[0-3]/ }
 
-    get 'posts/new/:post_id' => "posts#new"
-    # get 'vote' => "posts#vote"
-    get 'jury' => "posts#jury_index"
+    get 'posts/new/:post_id' => 'posts#new'
+    # get 'vote' => 'posts#vote'
+    get 'jury' => 'posts#jury_index'
 
 
   end
 
 
-  # You can have the root of your site routed with "root"
+  # You can have the root of your site routed with 'root'
   # just remember to delete public/index.html.
   root :to => 'core/projects#index'
 
-  # See how all your routes lay out with "rake routes"
+  # See how all your routes lay out with 'rake routes'
 
   # This is a legacy wild controller route that's not recommended for RESTful applications.
   # Note: This route will make all actions in every controller accessible via GET requests.
