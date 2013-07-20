@@ -31,7 +31,7 @@ class Core::ProjectsController < ApplicationController
     elsif @project.status == 5
       redirect_to concept_posts_path(@project, :status => 2)
     elsif @project.status ==6
-      redirect_to concept_vote_list_path(@project)
+      redirect_to concept_posts_path(@project, :status => 2)
     elsif @project.status == 7
       redirect_to plan_posts_path(@project, :status => 2)
     elsif @project.status ==8

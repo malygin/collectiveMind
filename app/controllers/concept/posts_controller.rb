@@ -6,7 +6,7 @@ class Concept::PostsController < PostsController
    layout 'life_tape/posts2', :only => [:new, :edit, :show]
   def current_model
     Concept::Post
-  end 
+  end
   
   def comment_model
     Concept::Comment
@@ -43,19 +43,13 @@ class Concept::PostsController < PostsController
   end
 
   def create
-    @project = Core::Project.find(params[:project]) 
-
+    @project = Core::Project.find(params[:project])
     @concept_post = Concept::Post.new(params[:concept_post])
-    #unless params['idea'].nil?
-    #  @concept_post.life_tape_post_id = params['idea']
-    #end
     @concept_post.number_views =0
     @concept_post.user = current_user
     @concept_post.status = 0
     @concept_post.project = @project
-    #
-    #@concept_post.post_aspects = nil
-    ##puts params['task_supply']
+
     unless params['correct_disc'].nil?
       params['correct_disc'].each do |v|
         if v!= ''
@@ -80,22 +74,22 @@ class Concept::PostsController < PostsController
   # PUT /concept/posts/1
   # PUT /concept/posts/1.json
   def update
-    @project = Core::Project.find(params[:project]) 
+    @project = Core::Project.find(params[:project])
 
     @concept_post = Concept::Post.find(params[:id])
+    @concept_post.update_attributes(params[:concept_post])
+    @concept_post.post_aspects.destroy_all
+    unless params['correct_disc'].nil?
+      params['correct_disc'].each do |v|
+        if v!= ''
+          @concept_post.post_aspects.build(v[1].merge :discontent_aspect_id=> v[0])
+
+        end
+      end
+    end
+
     respond_to do |format|
-      if @concept_post.update_attributes(params[:concept_post])
-         @concept_post.task_supply_pairs =[]
-         unless params['task_supply'].nil?
-          params['task_supply'].each do |v,k|
-            if k!= ''
-              pair = Concept::TaskSupplyPair.new(:task => k) 
-              @concept_post.task_supply_pairs << pair
-            end
-          end           
-         end
-         
-        @concept_post.save
+      if @concept_post.save!
         current_user.journals.build(:type_event=>'concept_post_update', :body=>@concept_post.id).save!
 
         format.html { redirect_to action: "show", :project => @project, :id => @concept_post.id , notice: 'Концепция успешно изменена!' }
@@ -125,7 +119,13 @@ class Concept::PostsController < PostsController
       format.json { render json: @post }
     end
   end
-  
+
+   def edit
+     @post = current_model.find(params[:id])
+     @aspects = Discontent::Aspect.where(:project_id => @project)
+
+   end
+
   def add_aspect
     
     @aspect = Discontent::Aspect.find(params[:aspect_id]) 
