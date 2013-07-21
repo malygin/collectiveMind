@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130713111618) do
+ActiveRecord::Schema.define(:version => 20130721105148) do
 
   create_table "answers", :force => true do |t|
     t.string   "text"
@@ -625,6 +625,21 @@ ActiveRecord::Schema.define(:version => 20130713111618) do
   end
 
   add_index "plan_comments", ["post_id"], :name => "index_plan_comments_on_post_id"
+
+  create_table "plan_post_aspects", :force => true do |t|
+    t.integer  "discontent_aspect_id"
+    t.integer  "concept_post_id"
+    t.text     "positive"
+    t.text     "negative"
+    t.text     "control"
+    t.text     "problems"
+    t.text     "reality"
+    t.boolean  "first_stage"
+    t.string   "name"
+    t.string   "content"
+    t.datetime "created_at",           :null => false
+    t.datetime "updated_at",           :null => false
+  end
 
   create_table "plan_post_notes", :force => true do |t|
     t.integer  "post_id"

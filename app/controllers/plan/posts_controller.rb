@@ -24,6 +24,8 @@ class Plan::PostsController < PostsController
     @journals = Journal.events_for_user_feed @project.id
     @news = ExpertNews::Post.first  
     @status = params[:status]
+    @aspects = Discontent::Aspect.where(:project_id => @project)
+
   end
 
 
@@ -101,6 +103,18 @@ class Plan::PostsController < PostsController
     end
   end
 
+ def add_aspect
+   @aspect = Discontent::Aspect.find(params[:aspect_id])
+   if params[:plan_stage]
+     @div_for_aspects = 'aspects2'
+   else
+     @div_for_aspects = 'aspects'
+   end
+   respond_to do |format|
+     format.html # new.html.erb
+     format.js
+   end
+ end
 
 
 end

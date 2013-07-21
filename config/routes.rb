@@ -94,6 +94,7 @@ scope '/project/:project' do
     scope '/status/:status/',  :defaults => {:status => 0} do   
       resources :posts do
             member do
+                get :add_aspect
                 put :add_comment
                 put :plus
                 put :plus_comment

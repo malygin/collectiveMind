@@ -1,51 +1,42 @@
 = form_for  @post, :url => {:project => @project.id, :action => @post.persisted? ? 'update' : 'create'},   :html => { :class => 'new_or_edit' }do |f|
-  %label 
-    О чем проект
+  %label
+    Краткое описание проекта
   %field
-    = f.text_area :content, class: "wider_area"
-  %div{:class=>'timestamp'} Вкратце опишите свой проект.  
+    = f.text_area :content, class: 'wider_area'
+  %div{:class=>'timestamp'} Вкратце опишите свой проект, укажите ключевые идеи.
   %br
-  %label 
-    %b Цель -
-    образ желаемого будущего
-  %br
+  %label
+    %b Эссе о проекте:
   %field
-    = f.text_area :goal, class: "wider_area"
-  %div{:class=>'timestamp'} Что, в главном, представляет собой предлагаемое нововведение и каковы его желаемые результаты.
+    = f.text_area :goal, class: 'wider_area'
+  %div{:class=>'timestamp'} Что, в главном, представляет собой ваш проект.
   %br
-  %table.tasks
-    %tr
-      %td
-        %label.small
-          %b Задачи
-          
-
-    - @post.task_triplets.each_with_index do |p, index|
-      %tr.ts
-        %td= text_area_tag 'task_triplet['+index.to_s+']', p.task, :class =>'wymeditor'
-     
-        %td=link_to_function image_tag('close.png'), ' $(this).parent().parent().remove()'
-    
-
-    %tr.links
-      %td{:colspan=>'5'}= link_to_function 'Добавить задачу', 'addTaskPlan($(".ts").length+20)'
-
-
+  = select_tag 'aspect_id', options_from_collection_for_select(@aspects, 'id', 'content'), :prompt => 'Выберите фрагмент'
+  = link_to 'добавить недовольства из фрагмента для первого этапа', add_aspect_plan_post_path(@project, @status, 1), :remote => true, :id => 'add_aspect_for_plan1'
+  %br
+  = select_tag 'aspect_id2', options_from_collection_for_select(@aspects, 'id', 'content'), :prompt => 'Выберите фрагмент'
+  = link_to 'добавить недовольства из фрагмента для дальнейшего проекта', add_aspect_plan_post_path(@project, @status, 1), :remote => true, :id => 'add_aspect_for_plan2'
+  %br
 
   %br
   %br
-  %label 
-    %b Первый этап 
+  %h1 Корректировки 1 этапа
+  #aspects
+  %b План первого этапа
   %br
   %field
-    = f.text_area :first_step, class: "wider_area"
+    = f.text_area :first_step, class: 'wider_area'
   %div{:class=>'timestamp'} - Подготовительная стадия -согласование новшества  со всем контингентом студентов и администрацией ДО. Начало осуществления проекта - самые простые и дешевые действия по созданию ресурсов, дающих наиболее быстрый и ощутимый эффект.
   %br
-  %label 
-    %b Дальнейшие шаги 
+  %br
+  %h1 Остальные корректировки
+  #aspects2
+  -#=render :partial => 'post_aspect_form', :collection => @post.post_aspects
+
+  %b Дальнейшие шаги
   %br
   %field
-    = f.text_area :other_steps,class: "wider_area"
+    = f.text_area :other_steps,class: 'wider_area'
   %div{:class=>'timestamp'} - Набросок плана действий вплоть до завершения проекта.
 
   / - unless @ltpost.nil?
@@ -53,4 +44,4 @@
 
 
   %actions
-    = f.submit "",  class: "btn"
+    = f.submit '',  class: 'btn'
