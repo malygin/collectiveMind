@@ -1,6 +1,6 @@
 %p.fbig.fline
   = @aspect.content
--@aspect.posts.each_with_index do |p, index2|
+-@aspect.posts.each do |p|
 
   %div{id: "discontent_#{p.id}"}
     %p.ftable.fline
@@ -12,29 +12,30 @@
     %p.ftable.fline
       %span.bigtext Название корректировки:
       %br
-      =text_field_tag "correct_disc[#{p.id}][name]",nil, :class => 'concept_name'
+      =text_field_tag "correct_disc[#{@div_for_aspects}][#{p.id}][name]",nil, :class => 'concept_name'
     %p.ftable.fline.bigtext Краткое описание корректировки:
     %p.ftable
-      =text_area_tag "correct_disc[#{p.id}][content]",nil, :class => "concept_cond"
+      =text_area_tag "correct_disc[#{@div_for_aspects}][#{p.id}][content]",nil, :class => 'concept_cond'
     %p.ftable.fbackPositive
       %span.fline.bigtext 1. Какие в будущем должны быть созданы и поддерживаться УСЛОВИЯ, чтобы данная корректировка работала
       %br
-      =text_area_tag "correct_disc[#{p.id}][positive]",nil, :class => "wymeditor"
+      =text_area_tag "correct_disc[#{@div_for_aspects}][#{p.id}][positive]",nil, :class => 'wymeditor'
 
     %p.ftable.fbackNegative
-      %span.fline.bigtext 2. Если будут созданы и поддерживаться вышеозначенные УСЛОВИЯ, какие из-за этого вероятны НЕЖЕЛАТЕЛЬНЫЕ ПОБОЧНЫЕ ЭФФЕКТЫ в будущем 
-
+      %span.fline.bigtext 2. Если будут созданы и поддерживаться вышеозначенные УСЛОВИЯ, какие из-за этого вероятны НЕЖЕЛАТЕЛЬНЫЕ ПОБОЧНЫЕ ЭФФЕКТЫ в будущем
       %br
-      =text_area_tag "correct_disc[#{p.id}][negative]",nil, :class => "wymeditor"
+      =text_area_tag "correct_disc[#{@div_for_aspects}][#{p.id}][negative]",nil, :class => 'wymeditor'
 
+    %p.ftable.fbackControl
+      %span.fline.bigtext 3.Кем и как будет контролироваться создание и поддержание вышеозначенных УСЛОВИЙ и предотвращаться НЕЖЕЛАТЕЛЬНЫЕ ПОБОЧНЫЕ ЭФФЕКТЫ в будущем
+      %br
+      =text_area_tag "correct_disc[#{@div_for_aspects}][#{p.id}][control]",nil, :class => 'wymeditor'
 
     %p.ftable.fback
-      %span.fline.bigtext 3. Возможные помехи во время функционирования этой корректировки
-
+      %span.fline.bigtext 4. Возможные помехи во время функционирования этой корректировки
       %br
-      =text_area_tag "correct_disc[#{p.id}][problems]",nil, :class => 'concept_cond2'
+      =text_area_tag "correct_disc[#{@div_for_aspects}][#{p.id}][problems]",nil, :class => 'concept_cond2'
     %p.ftable.fback
-      %span.fline.bigtext 4. Реалистичность этой корректировки
-
+      %span.fline.bigtext 5. Реалистичность этой корректировки
       %br
-      =text_area_tag "correct_disc[#{p.id}][reality]",nil, :class => 'concept_cond2'
+      =text_area_tag "correct_disc[#{@div_for_aspects}][#{p.id}][reality]",nil, :class => 'concept_cond2'

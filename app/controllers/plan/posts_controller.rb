@@ -37,34 +37,34 @@ class Plan::PostsController < PostsController
     end
   end
   def create
-        @project = Core::Project.find(params[:project]) 
-
+    @project = Core::Project.find(params[:project])
     @plan_post = Plan::Post.new(params[:plan_post])
-    # unless params['idea'].nil?
-    #   @plan_post.life_tape_post_id = params['idea']
-    # end
     @plan_post.number_views =0
     @plan_post.project = @project
     @plan_post.user = current_user
     @plan_post.status = 0
-    @plan_post.task_triplets = []
-    #puts params['task_supply']
-    position=1
-    params['task_triplet'].each do |k,v|
-      if v!= ''
-        triplet = Plan::TaskTriplet.new(:task => v, :position => position) 
-        position+=1
-        @plan_post.task_triplets << triplet
+
+
+    unless params['correct_disc'].nil?
+      params['correct_disc'].each do |asp|
+        asp[1].each do |v|
+          if v!= ''
+            @plan_post.post_aspects.build(v[1].merge(:discontent_aspect_id=> v[0], :first_stage => (asp[0]=='aspects' ? 1 : 0)))
+
+          end
+        end
+
       end
     end
+
 
     respond_to do |format|
       if @plan_post.save!
          current_user.journals.build(:type_event=>'plan_post_save', :body=>@plan_post.id).save!
-        format.html { redirect_to  action: "index" , notice: 'Проект добавлен!' }
+        format.html { redirect_to  action: 'index' , notice: 'Проект добавлен!' }
         format.json { render json: @plan_post, status: :created, location: @plan_post }
       else
-        format.html { render action: "new" }
+        format.html { render action: 'new' }
         format.json { render json: @plan_post.errors, status: :unprocessable_entity }
       end
     end
