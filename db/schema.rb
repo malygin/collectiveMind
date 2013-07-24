@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130722105054) do
+ActiveRecord::Schema.define(:version => 20130723104213) do
 
   create_table "answers", :force => true do |t|
     t.string   "text"
@@ -352,6 +352,29 @@ ActiveRecord::Schema.define(:version => 20130722105054) do
   end
 
   add_index "estimate_forecasts", ["user_id"], :name => "index_estimate_forecasts_on_user_id"
+
+  create_table "estimate_post_aspects", :force => true do |t|
+    t.integer  "post_id"
+    t.integer  "plan_post_aspect_id"
+    t.integer  "op1"
+    t.integer  "op2"
+    t.integer  "op3"
+    t.text     "op"
+    t.integer  "ozf1"
+    t.integer  "ozf2"
+    t.integer  "ozf3"
+    t.text     "ozf"
+    t.integer  "ozs1"
+    t.integer  "ozs2"
+    t.integer  "ozs3"
+    t.text     "ozs"
+    t.integer  "on1"
+    t.integer  "on2"
+    t.integer  "on3"
+    t.text     "on"
+    t.datetime "created_at",          :null => false
+    t.datetime "updated_at",          :null => false
+  end
 
   create_table "estimate_posts", :force => true do |t|
     t.integer  "user_id"

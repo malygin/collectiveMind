@@ -111,6 +111,29 @@ scope '/project/:project' do
     end
    end
 
+  namespace :estimate do
+    get 'vote_list'  => 'posts#vote_list'
+    put 'vote/:post_id'  => 'posts#vote'
+    scope '/status/:status/',  :defaults => {:status => 0} do
+      resources :posts do
+        member do
+          get :add_aspect
+          put :add_comment
+          put :plus
+          put :plus_comment
+          put :to_archive
+          get :to_expert
+          put :to_expert_save
+          get :expert_rejection
+          put :expert_rejection_save
+          get :expert_revision
+          put :expert_revision_save
+          get :expert_acceptance_save
+        end
+      end
+    end
+  end
+
   namespace :life_tape do
     get 'vote_list'  => 'posts#vote_list'
     put 'vote/:post_id'  => 'posts#vote'
@@ -213,86 +236,6 @@ end
     resources :comments
   end
 
-  # The priority is based upon order of creation:
-  # first created -> highest priority.
-
-  # Sample of regular route:
-  #   match 'products/:id' => 'catalog#view'
-  # Keep in mind you can assign values other than :controller and :action
-
-  # Sample of named route:
-  #   match 'products/:id/purchase' => 'catalog#purchase', :as => :purchase
-  # This route can be invoked with purchase_url(:id => product.id)
-
-  # Sample resource route (maps HTTP verbs to controller actions automatically):
-  #   resources :products
-
-  # Sample resource route with options:
-  #   resources :products do
-  #     member do
-  #       get 'short'
-  #       post 'toggle'
-  #     end
-  #
-  #     collection do
-  #       get 'sold'
-  #     end
-  #   end
-
-  # Sample resource route with sub-resources:
-  #   resources :products do
-  #     resources :comments, :sales
-  #     resource :seller
-  #   end
-
-  # Sample resource route with more complex sub-resources
-  #   resources :products do
-  #     resources :comments
-  #     resources :sales do
-  #       get 'recent', :on => :collection
-  #     end
-  #   end
-
-  # Sample resource route within a namespace:
- 
-
-   
-
-          
-    
-
-  namespace :estimate do 
-     resources :posts do
-        member do
-            put :add_comment
-            put :plus
-            get :expert_rejection_save 
-            get :expert_rejection_with_penalty_save
-            get :expert_acceptance_save
-        end
-      end
-      resources :comments do
-          member do
-            put :plus
-          end  
-      end
-    match 'vote_for/:id/:score' => 'posts#vote_for',  :constraints => { :score => /[0-3]/ }
-
-    get 'posts/new/:post_id' => 'posts#new'
-    # get 'vote' => 'posts#vote'
-    get 'jury' => 'posts#jury_index'
-
-
-  end
-
-
-  # You can have the root of your site routed with 'root'
-  # just remember to delete public/index.html.
   root :to => 'core/projects#index'
 
-  # See how all your routes lay out with 'rake routes'
-
-  # This is a legacy wild controller route that's not recommended for RESTful applications.
-  # Note: This route will make all actions in every controller accessible via GET requests.
-  # match ':controller(/:action(/:id))(.:format)'
 end

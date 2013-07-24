@@ -1,87 +1,54 @@
 # encoding: utf-8
 
-class Estimate::PostsController < ApplicationController
-  # GET /estimate/posts
-  # GET /estimate/posts.json
-  def prepare_data
-    @project = Core::Project.find(2) 
-    @journals = Journal.events_for_user_feed @project.id
-    @news = ExpertNews::Post.where(:project_id => @project).first  
+class Estimate::PostsController < PostsController
+
+
+  layout 'life_tape/posts2', :only => [:new, :edit, :show]
+  def current_model
+    Estimate::Post
   end
+  def comment_model
+    Estimate::Comment
+  end
+
+  def note_model
+    Estimate::PostNote
+  end
+
+  def voting_model
+    Estimate::Post
+  end
+
   def index
-    prepare_data
-    @estimate_posts = Estimate::Post.all
-    @plan_posts = Plan::Post.where(:status => '2')
-
+    @posts = Plan::Post.where(:project_id => @project, :status => 2).paginate(:page => params[:page])
     respond_to do |format|
       format.html # index.html.erb
-      format.json { render json: @estimate_posts }
+      format.json { render json: @posts }
     end
   end
-  
-  def jury_index
-    prepare_data
-    #@estimate_posts = Estimate::Post.all
-    @plan_posts = Plan::Post.where(:status => '2')
-
-
-  end
-
-  def vote
-    prepare_data
-    #@estimate_posts = Estimate::Post.all
-    @plan_posts = Plan::Post.where(:status => '2')
-
-    respond_to do |format|
-      format.html # index.html.erb
-      format.json { render json: @estimate_posts }
-    end
-  end
-
-  # GET /estimate/posts/1
-  # GET /estimate/posts/1.json
-  def show
-    prepare_data
-    @comment = Estimate::Comment.new
-
-    @estimate_post = Estimate::Post.find(params[:id])
-    @estimate_post.task_triplets.sort_by { |f| f.task_triplet.position }
-    respond_to do |format|
-      format.html # show.html.erb
-      format.json { render json: @estimate_post }
-    end
-  end
-
-  # GET /estimate/posts/new
-  # GET /estimate/posts/new.json
   def new
-    # prepare_data
-    # @estimate_post = Estimate::Post.new
-    # @plan_post = Plan::Post.find(params[:post_id])
-    # @triplet_estimates = {}
-    # @plan_post.task_triplets.each do |p|
-    #   @triplet_estimates[p] = Estimate::TaskTriplet.new
-    # end
-    # respond_to do |format|
-    #   format.html # new.html.erb
-    #   format.json { render json: @estimate_post }
-    # end
-  end
+    @post = current_model.new
+    @plan_post = Plan::Post.find(params[:plan_id])
 
-  # GET /estimate/posts/1/edit
-  def edit
-    # prepare_data
-    # @estimate_post = Estimate::Post.find(params[:id])
-    # @plan_post = @estimate_post.post
-    # @triplet_estimates = {}
-    # @plan_post.task_triplets.each do |p|
-    #   @triplet_estimates[p] = @estimate_post.task_triplets.select{|x| x.task_triplet == p }.first
-    # end
+
+    @pair_estimates = {}
+    @plan_post.post_aspects.each do |p|
+      @pair_estimates[p] = Estimate::PostAspect.new
+    end
+
+    respond_to do |format|
+      format.html # new.html.erb
+      format.json { render json: @post }
+    end
+  end
+  def prepare_data
+    @project = Core::Project.find(params[:project])
+    @journals = Journal.events_for_user_feed @project.id
+    @news = ExpertNews::Post.first
+    @status = params[:status]
+    @aspects = Discontent::Aspect.where(:project_id => @project)
 
   end
-
-  # POST /estimate/posts
-  # POST /estimate/posts.json
   def create
     @estimate_post = Estimate::Post.new(params[:estimate_post])
     plan_post = Plan::Post.find(params[:post_id])
@@ -144,32 +111,7 @@ class Estimate::PostsController < ApplicationController
     end
   end
 
- def save_note(params, status, message, type_event)
-    est = Estimate::Post.find(params[:id])
-    est.update_column(:status, status)
-    current_user.journals.build(:type_event=>type_event, :body=>est.id).save!
-    flash[:notice]=message
-    est
-  end
 
-
-
-  def expert_rejection_save
-    save_note(params, 2, 'Оценка успешно отклонена','estimate_post_rejection' )
-    redirect_to  action: "index" 
-  end
-
-  def expert_rejection_with_penalty_save
-    est = save_note(params, 2, 'Оценка успешно отклонена','estimate_post_rejection' )
-    est.user.update_column(:score, est.user.score - 200)
-    redirect_to  action: "index" 
-  end
-
-  def expert_acceptance_save
-    est = save_note(params, 1, 'Оценка успешно принята','estimate_post_acceptance' )
-    est.user.update_column(:score, est.user.score + 400)
-    redirect_to  action: "index" 
-  end
 
   # PUT /estimate/posts/1
   # PUT /estimate/posts/1.json
@@ -214,37 +156,5 @@ class Estimate::PostsController < ApplicationController
 
 end
 
-  # DELETE /estimate/posts/1
-  # DELETE /estimate/posts/1.json
-  def destroy
-    @estimate_post = Estimate::Post.find(params[:id])
-    @estimate_post.destroy
-
-    respond_to do |format|
-      format.html { redirect_to estimate_posts_url }
-      format.json { head :no_content }
-    end
-  end
-
-    #todo union method for all comments and partials
-  def add_comment
-    post = Estimate::Post.find(params[:id])
-    unless  params[:estimate_comment][:content]==""
-      #logger.error current_user
-      post.comments.create(:content => params[:estimate_comment][:content], :user =>current_user)
-      current_user.journals.build(:type_event=>'estimate_comment_save', :body=>post.id).save!
-      flash[:success] = "Комментарий добавлен"
-    else
-      flash[:success] = "Введите текст комментария"
-    end
-    redirect_to post
-  end
-
-  def vote_for
-    #puts params
-    @plan = Plan::Post.find(params[:id])
-    @plan.voitings.create(:user => current_user, :score => params[:score].to_f-1)
-    render json: @plan.voiting_score
-  end
   
 end
