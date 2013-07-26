@@ -19,8 +19,9 @@
   %br
   %p.fimage Фрагменты образа
   %br
-  #aspects
-  =render :partial => 'post_aspect_form', :collection => @post.post_aspects
+
+  #accordion_concept
+    =render :partial => 'post_aspect_form', :collection => @post.post_aspects
 
   %actions
     = f.submit "",  class: "btn"

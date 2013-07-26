@@ -1,6 +1,8 @@
 #= require jquery
 #= require jquery_ujs
 #= require_tree
+#= require jquery.ui.all
+
 $(document).ready ->
     $(".voteBar")
       .bind "ajax:success", (event, resp) ->

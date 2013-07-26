@@ -35,7 +35,7 @@
 
 
 /*WYM_BOX*/
-        .wym_skin_compact                { border: 1px solid gray; width: 800px; padding: 5px}
+        .wym_skin_compact                {width: 750px; padding: 5px}
 
     /*auto-clear the wym_box*/
         .wym_skin_compact:after 	 { content: "."; display: block; height: 0; clear: both; visibility: hidden; }

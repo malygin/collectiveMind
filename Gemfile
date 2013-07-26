@@ -43,6 +43,7 @@ end
 gem 'haml'
 gem 'haml-rails'
 gem 'jquery-rails'
+gem 'jquery-ui-rails'
 gem 'paperclip'
 gem 'aws-sdk'
 
