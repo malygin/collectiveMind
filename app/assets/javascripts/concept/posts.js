@@ -18,5 +18,7 @@ function change_name_concept(id){
 
 }
 function remove_discontent(id){
-	$("#"+id).remove();
+	$("#discontent_"+id).remove();
+	$("#name_"+id).remove();
+    $('#accordion_concept').accordion("refresh");
 }

@@ -1,10 +1,10 @@
 
-= form_for  @post, :url => {:project => @project.id, :replace_id => @replace_post.nil? ? nil : @replace_post.id , :action => @post.persisted? ? 'update' : 'create'},   :html => { :class => 'new_or_edit' }do |f|
-  -if @post.errors.any?
+= form_for (@discontent_post,  :url => {:action => @discontent_post.persisted? ? 'update' : 'create', :project => @project.id, :replace_id => @replace_post.nil? ? nil : @replace_post.id },  :html => { :class => 'new_or_edit' }) do |f|
+  -if @discontent_post.errors.any?
     #error_explanation
-      %h2= "#{pluralize(@discontent_post.errors.count, "error")} prohibited this discontent_post from being saved:"
+      %h2= "#{pluralize(@discontent_post.errors.count, 'error')} prohibited this discontent_post from being saved:"
       %ul
-        - @ost.errors.full_messages.each do |msg|
+        - @discontent_post.errors.full_messages.each do |msg|
           %li= msg
 
   .field
@@ -17,7 +17,7 @@
     = f.label 'где'
     = f.text_area :where
 
-  = select_tag 'aspect_id', options_from_collection_for_select(@aspects, "id", "content", @post.aspect.nil? ? 0 :@post.aspect.id), :prompt => "Выберите фрагмент"  
-  = select_tag 'style', options_for_select({ "отсутствующий позитив" => "0", "имеющийся негатив" => "1" }, @post.style), :prompt => "Выберите тип"
+  = select_tag 'aspect_id', options_from_collection_for_select(@aspects, 'id', 'content', @discontent_post.aspect.nil? ? 0 :@discontent_post.aspect.id), :prompt => "Выберите фрагмент"
+  = select_tag 'style', options_for_select({ 'отсутствующий позитив' =>'0', 'имеющийся негатив' => '1' }, @discontent_post.style), :prompt => "Выберите тип"
   .actions
     = f.submit ''

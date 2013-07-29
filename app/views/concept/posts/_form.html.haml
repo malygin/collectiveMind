@@ -4,24 +4,31 @@
   %label 
     Краткое описание образа
   %field
-    = f.text_area :content, class: "wider_area"
+    = f.text_area :content, class: 'wider_area'
   %div{:class=>'timestamp'} Вкратце опишите свой образ, укажите ключевые идеи.  
   %br
   %label 
     %b Эссе об образе:  
   %field
-    = f.text_area :goal, class: "wider_area"
+    = f.text_area :goal, class: 'wider_area'
   %div{:class=>'timestamp'} Что, в главном, представляет собой ваш образ.
   %br
-  = select_tag "aspect_id", options_from_collection_for_select(@aspects, "id", "content"), :prompt => "Выберите фрагмент"
-  = link_to "добавить недовольства из фрагмента", add_aspect_concept_post_path(@project, @status, 1), :remote => true, :id => "add_aspect_for_concept"
+  = select_tag 'aspect_id', options_from_collection_for_select(@aspects, 'id', 'content'), :prompt => 'Выберите фрагмент'
+  = link_to 'добавить недовольства из фрагмента', add_aspect_concept_post_path(@project, @status, 1), :remote => true, :id => 'add_aspect_for_concept'
   %br
+  = link_to 'добавить свое недовольство', add_new_discontent_concept_post_path(@project, @status, 1), :remote => true, :id => 'add_new_discontent_for_concept'
+
+
   %br
-  %p.fimage Фрагменты образа
+  %p.fimage Корректировки образа
   %br
 
   #accordion_concept
     =render :partial => 'post_aspect_form', :collection => @post.post_aspects
 
   %actions
-    = f.submit "",  class: "btn"
+    = f.submit '',  class: 'btn'
+
+
+
+

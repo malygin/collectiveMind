@@ -112,6 +112,7 @@ class Concept::PostsController < PostsController
 
   def new
     @post = current_model.new
+    @discontent_post = Discontent::Post.new
     @aspects = Discontent::Aspect.where(:project_id => @project)
 
     respond_to do |format|
@@ -134,5 +135,16 @@ class Concept::PostsController < PostsController
       format.js
     end
   end
+
+   def add_new_discontent
+     @discontent = Discontent::Post.new
+     @discontent.id = (0..10).map{rand(0..10)}.join
+
+     respond_to do |format|
+       format.js
+     end
+
+   end
+
   
 end

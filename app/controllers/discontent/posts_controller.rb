@@ -45,7 +45,7 @@ end
 
  def new
     prepare_data
-    @post = current_model.new
+    @discontent_post = current_model.new
     unless params[:replace_id].nil?
       @replace_post = current_model.find(params[:replace_id])
     end
