@@ -12,15 +12,18 @@
     %p.ftable.fback
       %span.bigtext что
       %br
-      = text_field_tag "correct_disc[#{p.id}][disc_content]",nil
+      = text_field_tag "correct_disc[#{p.id}][disc][content]",nil, :class => 'concept_name2'
       %br
       %span.bigtext когда
       %br
-      = text_field_tag "correct_disc[#{p.id}][disc_when]",nil
+      = text_field_tag "correct_disc[#{p.id}][disc][when]",nil, :class => 'concept_name2'
       %br
       %span.bigtext где
       %br
-      = text_field_tag "correct_disc[#{p.id}][disc_where]",nil
+      = text_field_tag "correct_disc[#{p.id}][disc][where]",nil,:class => 'concept_name2'
+      = select_tag "correct_disc[#{p.id}][disc][aspect_id]", options_from_collection_for_select(@aspects, 'id', 'content'), :prompt => 'Выберите фрагмент'
+      = select_tag "correct_disc[#{p.id}][disc][style]", options_for_select({ 'отсутствующий позитив' =>'0', 'имеющийся негатив' => '1' }), :prompt => 'Выберите тип'
+
 
   %p.ftable.fline
     %span.bigtext Название корректировки:

@@ -49,7 +49,18 @@ class Plan::PostsController < PostsController
       params['correct_disc'].each do |asp|
         asp[1].each do |v|
           if v!= ''
-            @plan_post.post_aspects.build(v[1].merge(:discontent_aspect_id=> v[0], :first_stage => (asp[0]=='aspects' ? 1 : 0)))
+            unless Discontent::Post.exists?(v[0])
+              disc = Discontent::Post.new(v[1]['disc'])
+              disc.status = 5
+              disc.project = @project
+              disc.user = current_user
+              disc.save!
+              v[1].delete :disc
+              @plan_post.post_aspects.build(v[1].merge(:discontent_aspect_id=> disc.id,:first_stage => (asp[0]=='accordion_concept1' ? 1 : 0)))
+            else
+              v[1].delete :disc
+              @plan_post.post_aspects.build(v[1].merge(:discontent_aspect_id=> v[0],:first_stage => (asp[0]=='accordion_concept1' ? 1 : 0)))
+            end
 
           end
         end
@@ -106,9 +117,9 @@ class Plan::PostsController < PostsController
  def add_aspect
    @aspect = Discontent::Aspect.find(params[:aspect_id])
    if params[:plan_stage]
-     @div_for_aspects = 'aspects2'
+     @div_for_aspects = 'accordion_concept2'
    else
-     @div_for_aspects = 'aspects'
+     @div_for_aspects = 'accordion_concept1'
    end
    respond_to do |format|
      format.html # new.html.erb
@@ -116,5 +127,19 @@ class Plan::PostsController < PostsController
    end
  end
 
+ def add_new_discontent
+   @discontent = Discontent::Post.new
+   @discontent.id = (0..10).map{rand(0..10)}.join
+   @aspects = Discontent::Aspect.where(:project_id =>params[:project])
+   if params[:plan_stage]
+     @div_for_aspects = 'accordion_concept2'
+   else
+     @div_for_aspects = 'accordion_concept1'
+   end
+   respond_to do |format|
+     format.js
+   end
+
+ end
 
 end

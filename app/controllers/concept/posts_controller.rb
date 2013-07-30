@@ -34,7 +34,7 @@ class Concept::PostsController < PostsController
       #if @project.status == 6
         @number_v = @project.stage3 - current_user.voted_discontent_posts.size
         @votes = @project.stage3
-        @discontents = Discontent::Post.where(:project_id => @project)
+        @discontents = Discontent::Post.where(:project_id => @project, :status =>[2,5])
       #end
       render 'table', :layout => 'application_two_column'
     else
@@ -53,7 +53,19 @@ class Concept::PostsController < PostsController
     unless params['correct_disc'].nil?
       params['correct_disc'].each do |v|
         if v!= ''
-          @concept_post.post_aspects.build(v[1].merge :discontent_aspect_id=> v[0])
+
+          unless Discontent::Post.exists?(v[0])
+            disc = Discontent::Post.new(v[1]['disc'])
+            disc.status = 5
+            disc.project = params[:project]
+            disc.user = current_user
+            disc.save!
+            v[1].delete :disc
+            @concept_post.post_aspects.build(v[1].merge :discontent_aspect_id=> disc.id)
+          else
+            v[1].delete :disc
+            @concept_post.post_aspects.build(v[1].merge :discontent_aspect_id=> v[0])
+          end
 
         end
       end
@@ -139,7 +151,7 @@ class Concept::PostsController < PostsController
    def add_new_discontent
      @discontent = Discontent::Post.new
      @discontent.id = (0..10).map{rand(0..10)}.join
-
+     @aspects = Discontent::Aspect.where(:project_id =>params[:project])
      respond_to do |format|
        format.js
      end

@@ -13,15 +13,17 @@
     = f.text_area :goal, class: 'wider_area'
   %div{:class=>'timestamp'} Что, в главном, представляет собой ваш образ.
   %br
+
+  %p.fimage Корректировки образа
+  %br
   = select_tag 'aspect_id', options_from_collection_for_select(@aspects, 'id', 'content'), :prompt => 'Выберите фрагмент'
   = link_to 'добавить недовольства из фрагмента', add_aspect_concept_post_path(@project, @status, 1), :remote => true, :id => 'add_aspect_for_concept'
+  %br
   %br
   = link_to 'добавить свое недовольство', add_new_discontent_concept_post_path(@project, @status, 1), :remote => true, :id => 'add_new_discontent_for_concept'
 
 
-  %br
-  %p.fimage Корректировки образа
-  %br
+
 
   #accordion_concept
     =render :partial => 'post_aspect_form', :collection => @post.post_aspects

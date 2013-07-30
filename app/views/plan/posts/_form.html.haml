@@ -10,37 +10,46 @@
   %field
     = f.text_area :goal, class: 'wider_area'
   %div{:class=>'timestamp'} Что, в главном, представляет собой ваш проект.
-  %br
-  = select_tag 'aspect_id', options_from_collection_for_select(@aspects, 'id', 'content'), :prompt => 'Выберите фрагмент'
-  = link_to 'добавить недовольства из фрагмента для первого этапа', add_aspect_plan_post_path(@project, @status, 1), :remote => true, :id => 'add_aspect_for_plan1'
-  %br
-  = select_tag 'aspect_id2', options_from_collection_for_select(@aspects, 'id', 'content'), :prompt => 'Выберите фрагмент'
-  = link_to 'добавить недовольства из фрагмента для дальнейшего проекта', add_aspect_plan_post_path(@project, @status, 1), :remote => true, :id => 'add_aspect_for_plan2'
-  %br
 
   %br
   %br
   %h1 Корректировки 1 этапа
-  #aspects
+  %br
+  = select_tag 'aspect_id', options_from_collection_for_select(@aspects, 'id', 'content'), :prompt => 'Выберите фрагмент'
+  = link_to 'добавить недовольства из фрагмента для первого этапа', add_aspect_plan_post_path(@project, @status, 1), :remote => true, :id => 'add_aspect_for_plan1'
+  %br
+  = link_to 'добавить свое недовольство', add_new_discontent_plan_post_path(@project, @status, 1), :remote => true, :id => 'add_new_discontent_for_concept'
+
+  %br
+
+  #accordion_concept1
+  %br
   %b План первого этапа
   %br
   %field
     = f.text_area :first_step, class: 'wider_area'
   %div{:class=>'timestamp'} - Подготовительная стадия -согласование новшества  со всем контингентом студентов и администрацией ДО. Начало осуществления проекта - самые простые и дешевые действия по созданию ресурсов, дающих наиболее быстрый и ощутимый эффект.
   %br
+
   %br
   %h1 Остальные корректировки
-  #aspects2
-  -#=render :partial => 'post_aspect_form', :collection => @post.post_aspects
 
+  %br
+  = select_tag 'aspect_id2', options_from_collection_for_select(@aspects, 'id', 'content'), :prompt => 'Выберите фрагмент'
+  = link_to 'добавить недовольства из фрагмента для дальнейшего проекта', add_aspect_plan_post_path(@project, @status, 1), :remote => true, :id => 'add_aspect_for_plan2'
+  %br
+  = link_to 'добавить свое недовольство', add_new_discontent_plan_post_path(@project, @status, 1, :plan_stage => 1), :remote => true, :id => 'add_new_discontent_for_concept'
+
+  %br
+  %br
+  #accordion_concept2
+  %br
   %b Дальнейшие шаги
   %br
   %field
     = f.text_area :other_steps,class: 'wider_area'
   %div{:class=>'timestamp'} - Набросок плана действий вплоть до завершения проекта.
 
-  / - unless @ltpost.nil?
-  /   = hidden_field_tag 'idea', @ltpost 
 
 
   %actions

@@ -67,7 +67,6 @@ scope '/project/:project' do
   namespace :concept do
     get 'vote_list'  => 'posts#vote_list'
     put 'vote/:post_id'  => 'posts#vote'
-
     scope '/status/:status/',  :defaults => {:status => 0} do   
       resources :posts do
             member do
@@ -96,6 +95,8 @@ scope '/project/:project' do
       resources :posts do
             member do
                 get :add_aspect
+                get :add_new_discontent
+
                 put :add_comment
                 put :plus
                 put :plus_comment

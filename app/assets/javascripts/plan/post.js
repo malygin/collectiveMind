@@ -8,4 +8,12 @@ $(document).ready(
             .bind("ajax:beforeSend",function(event, xhr, settings){
                 settings.url += "?plan_stage=1&aspect_id="+$('#aspect_id2').val();
             });
+        $( "#accordion_concept1" ).accordion({
+            collapsible: true,
+            heightStyle: "content"
+        });
+        $( "#accordion_concept2" ).accordion({
+            collapsible: true,
+            heightStyle: "content"
+        });
     });
