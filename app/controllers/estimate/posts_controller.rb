@@ -31,9 +31,14 @@ class Estimate::PostsController < PostsController
     @plan_post = Plan::Post.find(params[:plan_id])
 
 
-    @pair_estimates = {}
-    @plan_post.post_aspects.each do |p|
-      @pair_estimates[p] = Estimate::PostAspect.new
+    @pair_estimates1 = {}
+    @plan_post.post_aspects_first.each do |p|
+      @pair_estimates1[p] = Estimate::PostAspect.new
+    end
+
+    @pair_estimates2 = {}
+    @plan_post.post_aspects_other.each do |p|
+      @pair_estimates2[p] = Estimate::PostAspect.new
     end
 
     respond_to do |format|
