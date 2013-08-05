@@ -8,6 +8,13 @@ class Estimate::Post < ActiveRecord::Base
   belongs_to :post, :class_name => 'Plan::Post'
   has_many :post_aspects
   has_many :plan_post_aspects, :class_name => 'Plan::PostAspect'
+  #scope :by_firts_stage , lambda do |stage|
+  #  joins(:plan_post_aspects).where('plan_post_aspects.first_stage = ?', stage)
+  #end
+  has_many :post_aspects_first, :foreign_key => 'post_id', :class_name => 'Estimate::PostAspect',
+           :conditions => [' join plan_post_aspect on (estimate_post_aspect.plan_post_aspect = plan_post_aspect.id)  plan_post_aspect.first_stage = ?',1]
+  has_many :post_aspects_other, :foreign_key => 'post_id', :class_name => 'Estimate::PostAspect',
+           :conditions =>  {:first_stage => 0}
 
   
 

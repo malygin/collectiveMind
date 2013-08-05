@@ -2,6 +2,9 @@ class Estimate::PostAspect < ActiveRecord::Base
   attr_accessible :imp, :on, :on1, :on2, :on3, :op, :op1, :op2, :op3, :ozf, :ozf1, :ozf2, :ozf3, :ozs, :ozs1, :ozs2, :ozs3
   belongs_to :post
   belongs_to :plan_post_aspect, :class_name => 'Plan::PostAspect'
+  scope :by_firts_stage , lambda { |stage|
+    joins(:plan_post_aspect).where('plan_post_aspects.first_stage = ?', stage)
+  }
   def score
     op_i=(3*op1+2*op2+1*op3)/(op1+op2+op3).to_f
     on_i=(3*on1+2*on2+1*on3)/(on1+on2+on3).to_f

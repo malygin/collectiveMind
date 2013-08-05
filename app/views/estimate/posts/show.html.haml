@@ -33,11 +33,102 @@
       -#%span.red_est #{ @post.third_c}
       %br
       %br
-      %b Список решаемых задач
+      %b Оценка корректировок первого этапа
       %br
       %div(id="accordion-resizer" class="ui-widget-content")
         #accordion_concept1
-          -  @post.post_aspects.each_with_index do |tr, index|
+          -  @post.post_aspects.by_firts_stage(1).each_with_index do |tr, index|
+            %h1="Оценивание #{tr.plan_post_aspect.name}, -  #{tr.score} "
+            %div
+              ожидаемая эффективность это задачи
+              %span.red_est=tr.score
+              %br
+              %b Предположим, что предлагаемые для этой задачи ресурсы будут созданы. Какова вероятность, что они обеспечат разрешение данной задачи
+              %br
+              В полной мере -
+              %span{:class=>css_class_estimate(tr.op1)}= estimate_trans(tr.op1)
+              %br
+              В значительно мере -
+              %span{:class=>css_class_estimate(tr.op2)}= estimate_trans(tr.op2)
+              %br
+              В небольшой мере -
+              %span{:class=>css_class_estimate(tr.op3)}= estimate_trans(tr.op3)
+              %br
+
+              %br
+              %b Функционирование ресурсов, которые будут обеспечивать разрешение данной задачи в будущем потребует  материальных и трудовых затрат. Какая вероятность, что потребуются
+              %br
+              большие затраты -
+              %span{:class=>css_class_estimate(tr.ozf1)}= estimate_trans(tr.ozf1)
+              %br
+              средние  затраты -
+              %span{:class=>css_class_estimate(tr.ozf2)}= estimate_trans(tr.ozf2)
+              %br
+              малые затраты -
+              %span{:class=>css_class_estimate(tr.ozf3)}= estimate_trans(tr.ozf3)
+              %br
+              %br
+
+              %br
+              %b Для создания ресурсов разрешения данной задачи в проекте предлагаются вышеперечисленные средства, методы и кадры. Какова вероятность , что ресурсы будут действительно созданы
+              %br
+              в полном объеме -
+              %span{:class=>css_class_estimate(tr.on1)}= estimate_trans(tr.on1)
+              %br
+              в значительном объеме -
+              %span{:class=>css_class_estimate(tr.on2)}= estimate_trans(tr.on2)
+              %br
+              в небольшом объеме -
+              %span{:class=>css_class_estimate(tr.on3)}= estimate_trans(tr.on3)
+              %br
+              %br
+
+              %br
+              %b  Использование вышеозначенных средств, методов и кадров создания ресурсов потребует  материальных и трудовых затрат. Какова вероятность, что потребуются
+              %br
+              большие затраты -
+              %span{:class=>css_class_estimate(tr.ozs1)}= estimate_trans(tr.ozs1)
+              %br
+              средние  затраты -
+              %span{:class=>css_class_estimate(tr.ozs2)}= estimate_trans(tr.ozs2)
+              %br
+              малые затраты -
+              %span{:class=>css_class_estimate(tr.ozs3)}= estimate_trans(tr.ozs3)
+              %br
+              %br
+              %b ПОЯСНЕНИЕ:
+              = simple_format(tr.ozs)
+              %p.ftable.fline
+                %span.bigtext Корректируемое несовершенство:
+              %p.ftable.fcolor=tr.plan_post_aspect.discontent.show_content.html_safe
+
+
+              %p.ftable.fline
+                %span.bigtext Краткое описание корректировки:
+                =tr.plan_post_aspect.content
+              .ftable.fbackPositive
+                %span.fline.bigtext 1. Какие в будущем должны быть созданы и поддерживаться УСЛОВИЯ, чтобы данная корректировка работала
+                .task_supply=simple_format(tr.plan_post_aspect.positive)
+              .ftable.fbackNegative
+                %span.fline.bigtext 2. Если будут созданы и поддерживаться вышеозначенные УСЛОВИЯ, какие из-за этого вероятны НЕЖЕЛАТЕЛЬНЫЕ ПОБОЧНЫЕ ЭФФЕКТЫ в будущем
+                .task_supply=simple_format(tr.plan_post_aspect.negative)
+              .ftable.fbackControl
+                %span.fline.bigtext 3. Кем и как будет контролироваться создание и поддержание вышеозначенных УСЛОВИЙ и предотвращаться НЕЖЕЛАТЕЛЬНЫЕ ПОБОЧНЫЕ ЭФФЕКТЫ в будущем
+                .task_supply=simple_format(tr.plan_post_aspect.control)
+              .ftable.fback
+                %span.fline.bigtext 4. Возможные помехи во время функционирования этой корректировки
+                ( например что может припятствовать  эффективной работе ресурсов)
+                =tr.plan_post_aspect.problems
+              .ftable.fback
+                %span.fline.bigtext 5. Реалистичность этой корректировки ( какие методы и средства способны создать требуемые ресурсы и достпуны ли эти методы и средства )
+                =tr.plan_post_aspect.reality
+
+
+      %b Оценка остальных корректировок
+      %br
+      %div(id="accordion-resizer" class="ui-widget-content")
+        #accordion_concept2
+          -  @post.post_aspects.by_firts_stage(0).each_with_index do |tr, index|
             %h1="Оценивание #{tr.plan_post_aspect.name}"
             %div
               ожидаемая эффективность это задачи
@@ -125,72 +216,7 @@
 
 
 
-      %p
-        %b Первый шаг
-        %br= simple_format( @post.post.first_step)
-      %b  Выше описана та часть новых ресурсов будущего ДО СГУ, которую планируется создать и запустить в работу на первом шаге осуществления проекта. Какова вероятность (выберите ее для каждого из трех вариантов ниже), что уже сразу после создания их работа улучшит ДО
-      %br
-      Очень ощутимо -
-      %span{:class=>css_class_estimate( @post.oppsh1)}= estimate_trans( @post.oppsh1)   
-      %br
-      Ощутимо -
-      %span{:class=>css_class_estimate( @post.oppsh2)}= estimate_trans( @post.oppsh2)   
-      %br
-      Не очень ощутимо - 
-      %span{:class=>css_class_estimate( @post.oppsh3)}= estimate_trans( @post.oppsh3)
-      %br
-      %br
-      %b ПОЯСНЕНИЕ:
-      = simple_format( @post.oppsh)
-      %br
-      %br
-      %b После того, как на первом шаге будет создана эта часть новых ресурсов, их функционирование в ДО потребует материальных и трудовых затрат. Какова вероятность (выберите ее для каждого из трех вариантов ниже), что потребуются
-      %br
-      большие затраты -
-      %span{:class=>css_class_estimate( @post.ozpshf1)}= estimate_trans( @post.ozpshf1)   
-      %br
-      средние  затраты -
-      %span{:class=>css_class_estimate( @post.ozpshf2)}= estimate_trans( @post.ozpshf2)   
-      %br
-      малые затраты - 
-      %span{:class=>css_class_estimate( @post.ozpshf3)}= estimate_trans( @post.ozpshf3)
-      %br
-      %br
-      %b ПОЯСНЕНИЕ:
-      = simple_format( @post.ozpshf)
-      %br
-      %br
-      %b  Для создания на первом шаге данной части новых ресурсов ДО в проекте предлагаются определенные средства, методы и кадры. Какова вероятность (выберите ее для каждого из трех вариантов ниже), что при помощи этих средств, методов и кадров планируемые ресурсы будут действительно созданы --
-      %br
-      в полном объеме -
-      %span{:class=>css_class_estimate( @post.onpsh1)}= estimate_trans( @post.onpsh1)   
-      %br
-      в значительном объеме -
-      %span{:class=>css_class_estimate( @post.onpsh2)}= estimate_trans( @post.onpsh2)   
-      %br
-      в небольшом объеме - 
-      %span{:class=>css_class_estimate( @post.onpsh3)}= estimate_trans( @post.onpsh3)
-      %br
-      %br
-      %b ПОЯСНЕНИЕ:
-      = simple_format( @post.onpsh)
-      %br
-      %br
-      %b  Использование на первом шаге средств, методов и кадров для создания вышеозначенной части новых ресурсов потребует материальных и трудовых затрат. Какова вероятность (выберите ее для каждого из трех вариантов ниже), что потребуются --
-      %br
-      большие затраты -
-      %span{:class=>css_class_estimate( @post.ozpshs1)}= estimate_trans( @post.ozpshs1)   
-      %br
-      средние  затраты -
-      %span{:class=>css_class_estimate( @post.ozpshs2)}= estimate_trans( @post.ozpshs2)   
-      %br
-      малые затраты - 
-      %span{:class=>css_class_estimate( @post.ozpshs3)}= estimate_trans( @post.ozpshs3)
-      %br
-      %br
-      %b ПОЯСНЕНИЕ:
-      = simple_format( @post.ozpshs)
-      %br 
+
       %br  
       %b  При осуществлении проекта возможны негативные явления. Какова веростояность , что они будут -
       %br
