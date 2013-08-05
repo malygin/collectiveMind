@@ -1,42 +1,42 @@
 = link_to 'Назад', estimate_posts_path
 %br
-- if @estimate_post.status == 0 and boss?
-  = link_to 'Принять', expert_acceptance_save_estimate_post_path(@estimate_post), :confirm => 'Точно?'
-  |
-  = link_to 'Отклонить без штрафа', expert_rejection_save_estimate_post_path(@estimate_post), :confirm => 'Точно?'
-  |
-  = link_to 'Отклонить со штрафом', expert_rejection_with_penalty_save_estimate_post_path(@estimate_post), :confirm => 'Точно?'
+-#- if  @post.status == 0 and boss?
+-#  = link_to 'Принять', expert_acceptance_save_estimate_post_path( @post), :confirm => 'Точно?'
+-#  |
+-#  = link_to 'Отклонить без штрафа', expert_rejection_save_estimate_post_path( @post), :confirm => 'Точно?'
+-#  |
+-#  = link_to 'Отклонить со штрафом', expert_rejection_with_penalty_save_estimate_post_path( @post), :confirm => 'Точно?'
 
 
 
-- if current_user == @estimate_post.user
-  / = link_to 'Редактировать', edit_estimate_post_path(@estimate_post)
+- if current_user ==  @post.user
+  / = link_to 'Редактировать', edit_estimate_post_path( @post)
 .wholePost
-  = render 'users/user_post', :user => @estimate_post.user
+  = render 'users/user_post', :user =>  @post.user
   .posts
-    = render 'users/user_name', :user => @estimate_post.user, :created_at => @estimate_post.created_at
+    = render 'users/user_name', :user =>  @post.user, :created_at =>  @post.created_at
     %p
       %b Общая оценка проекта
-      %br= simple_format(@estimate_post.content)
-    -if not @estimate_post.user.jury? 
-      Общая оценка проекта 
-      %span.red_est #{@estimate_post.score}
-      ( = #{@estimate_post.first_c} + #{@estimate_post.second_c} - #{@estimate_post.third_c})
-      %br 
-      1) ожидаемая эффективность всего проекта в целом 
-      %span.red_est #{@estimate_post.first_c}
-      %br 
-      2) ожидаемая эффективность его первого шага 
-      %span.red_est #{@estimate_post.second_c}
-      %br 
-      3) ожидаемые неприятности в связи с осуществлением проекта 
-      %span.red_est #{@estimate_post.third_c}
+      %br= simple_format( @post.content)
+    -if not  @post.user.jury?
+      -#Общая оценка проекта
+      -#%span.red_est #{ @post.score}
+      -#( = #{ @post.first_c} + #{ @post.second_c} - #{ @post.third_c})
+      -#%br
+      -#1) ожидаемая эффективность всего проекта в целом
+      -#%span.red_est #{ @post.first_c}
+      -#%br
+      -#2) ожидаемая эффективность его первого шага
+      -#%span.red_est #{ @post.second_c}
+      -#%br
+      -#3) ожидаемые неприятности в связи с осуществлением проекта
+      -#%span.red_est #{ @post.third_c}
       %br
       %br
       %b Список решаемых задач
       %br
       %br
-      - @estimate_post.task_triplets.each_with_index do |tr, index|
+      -  @post.post_aspects.each_with_index do |tr, index|
         %b  Задача:
         = simple_format(tr.task_triplet.task)
         %br
@@ -118,97 +118,97 @@
 
       %p
         %b Первый шаг
-        %br= simple_format(@estimate_post.post.first_step)
+        %br= simple_format( @post.post.first_step)
       %b  Выше описана та часть новых ресурсов будущего ДО СГУ, которую планируется создать и запустить в работу на первом шаге осуществления проекта. Какова вероятность (выберите ее для каждого из трех вариантов ниже), что уже сразу после создания их работа улучшит ДО
       %br
       Очень ощутимо -
-      %span{:class=>css_class_estimate(@estimate_post.oppsh1)}= estimate_trans(@estimate_post.oppsh1)   
+      %span{:class=>css_class_estimate( @post.oppsh1)}= estimate_trans( @post.oppsh1)   
       %br
       Ощутимо -
-      %span{:class=>css_class_estimate(@estimate_post.oppsh2)}= estimate_trans(@estimate_post.oppsh2)   
+      %span{:class=>css_class_estimate( @post.oppsh2)}= estimate_trans( @post.oppsh2)   
       %br
       Не очень ощутимо - 
-      %span{:class=>css_class_estimate(@estimate_post.oppsh3)}= estimate_trans(@estimate_post.oppsh3)
+      %span{:class=>css_class_estimate( @post.oppsh3)}= estimate_trans( @post.oppsh3)
       %br
       %br
       %b ПОЯСНЕНИЕ:
-      = simple_format(@estimate_post.oppsh)
+      = simple_format( @post.oppsh)
       %br
       %br
       %b После того, как на первом шаге будет создана эта часть новых ресурсов, их функционирование в ДО потребует материальных и трудовых затрат. Какова вероятность (выберите ее для каждого из трех вариантов ниже), что потребуются
       %br
       большие затраты -
-      %span{:class=>css_class_estimate(@estimate_post.ozpshf1)}= estimate_trans(@estimate_post.ozpshf1)   
+      %span{:class=>css_class_estimate( @post.ozpshf1)}= estimate_trans( @post.ozpshf1)   
       %br
       средние  затраты -
-      %span{:class=>css_class_estimate(@estimate_post.ozpshf2)}= estimate_trans(@estimate_post.ozpshf2)   
+      %span{:class=>css_class_estimate( @post.ozpshf2)}= estimate_trans( @post.ozpshf2)   
       %br
       малые затраты - 
-      %span{:class=>css_class_estimate(@estimate_post.ozpshf3)}= estimate_trans(@estimate_post.ozpshf3)
+      %span{:class=>css_class_estimate( @post.ozpshf3)}= estimate_trans( @post.ozpshf3)
       %br
       %br
       %b ПОЯСНЕНИЕ:
-      = simple_format(@estimate_post.ozpshf)
+      = simple_format( @post.ozpshf)
       %br
       %br
       %b  Для создания на первом шаге данной части новых ресурсов ДО в проекте предлагаются определенные средства, методы и кадры. Какова вероятность (выберите ее для каждого из трех вариантов ниже), что при помощи этих средств, методов и кадров планируемые ресурсы будут действительно созданы --
       %br
       в полном объеме -
-      %span{:class=>css_class_estimate(@estimate_post.onpsh1)}= estimate_trans(@estimate_post.onpsh1)   
+      %span{:class=>css_class_estimate( @post.onpsh1)}= estimate_trans( @post.onpsh1)   
       %br
       в значительном объеме -
-      %span{:class=>css_class_estimate(@estimate_post.onpsh2)}= estimate_trans(@estimate_post.onpsh2)   
+      %span{:class=>css_class_estimate( @post.onpsh2)}= estimate_trans( @post.onpsh2)   
       %br
       в небольшом объеме - 
-      %span{:class=>css_class_estimate(@estimate_post.onpsh3)}= estimate_trans(@estimate_post.onpsh3)
+      %span{:class=>css_class_estimate( @post.onpsh3)}= estimate_trans( @post.onpsh3)
       %br
       %br
       %b ПОЯСНЕНИЕ:
-      = simple_format(@estimate_post.onpsh)
+      = simple_format( @post.onpsh)
       %br
       %br
       %b  Использование на первом шаге средств, методов и кадров для создания вышеозначенной части новых ресурсов потребует материальных и трудовых затрат. Какова вероятность (выберите ее для каждого из трех вариантов ниже), что потребуются --
       %br
       большие затраты -
-      %span{:class=>css_class_estimate(@estimate_post.ozpshs1)}= estimate_trans(@estimate_post.ozpshs1)   
+      %span{:class=>css_class_estimate( @post.ozpshs1)}= estimate_trans( @post.ozpshs1)   
       %br
       средние  затраты -
-      %span{:class=>css_class_estimate(@estimate_post.ozpshs2)}= estimate_trans(@estimate_post.ozpshs2)   
+      %span{:class=>css_class_estimate( @post.ozpshs2)}= estimate_trans( @post.ozpshs2)   
       %br
       малые затраты - 
-      %span{:class=>css_class_estimate(@estimate_post.ozpshs3)}= estimate_trans(@estimate_post.ozpshs3)
+      %span{:class=>css_class_estimate( @post.ozpshs3)}= estimate_trans( @post.ozpshs3)
       %br
       %br
       %b ПОЯСНЕНИЕ:
-      = simple_format(@estimate_post.ozpshs)
+      = simple_format( @post.ozpshs)
       %br 
       %br  
       %b  При осуществлении проекта возможны негативные явления. Какова веростояность , что они будут -
       %br
       большие  -
-      %span{:class=>css_class_estimate(@estimate_post.nepr1)}= estimate_trans(@estimate_post.nepr1)   
+      %span{:class=>css_class_estimate( @post.nepr1)}= estimate_trans( @post.nepr1)   
       %br
       средние   -
-      %span{:class=>css_class_estimate(@estimate_post.nepr2)}= estimate_trans(@estimate_post.nepr2)   
+      %span{:class=>css_class_estimate( @post.nepr2)}= estimate_trans( @post.nepr2)   
       %br
       малые  - 
-      %span{:class=>css_class_estimate(@estimate_post.nepr3)}= estimate_trans(@estimate_post.nepr3)
+      %span{:class=>css_class_estimate( @post.nepr3)}= estimate_trans( @post.nepr3)
       %br   
       никакие  - 
-      %span{:class=>css_class_estimate(@estimate_post.nepr4)}= estimate_trans(@estimate_post.nepr4)
+      %span{:class=>css_class_estimate( @post.nepr4)}= estimate_trans( @post.nepr4)
       %br
       %br
       %b ПОЯСНЕНИЕ:
-      = simple_format(@estimate_post.nepr)
+      = simple_format( @post.nepr)
 
 
-- if current_user == @estimate_post.user
-  / = link_to 'Редактировать', edit_estimate_post_path(@estimate_post)
+- if current_user ==  @post.user
+  / = link_to 'Редактировать', edit_estimate_post_path( @post)
 \|
 = link_to 'Назад', estimate_posts_path
 - if signed_in? 
-  = render :partial => 'shared/comment_form', :locals => { :comment => @comment, :url_link => add_comment_estimate_post_path(@estimate_post.id)}
+  = render :partial => 'shared/comment_form', :locals => { :comment => @comment, :url_link => add_comment_estimate_post_path( @post.id)}
 
-= render :partial => 'shared/comment',:collection => @estimate_post.comments, :locals => { :path_link => '/estimate/comments/'}
+= render :partial => 'shared/comment',:collection =>  @post.comments, :locals => { :path_link => '/estimate/comments/'}
 %br
 %br

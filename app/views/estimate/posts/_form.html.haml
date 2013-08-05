@@ -5,6 +5,7 @@
   %label Общая оценка
   %field= f.text_area :content, class: 'wider_area'
 
+
   - if not jury?
     %h1 Список корректировок первого этапа
     #accordion_concept1
@@ -13,7 +14,8 @@
         %div
           - if pa.discontent.status == 5
             %p.ftable.fline
-              %b Необязательное
+              = select_tag "imp[#{pa.id}]", options_for_select({ 'лишнее' => '0','маловажное' => '30','важное' => '60','очень важное' => '90'  },"imp[#{pa.id}]"), :prompt => 'Выберите важность'
+
           %p.ftable.fline
             %span.bigtext Корректируемое несовершенство:
           %p.ftable.fcolor=pa.discontent.show_content.html_safe
