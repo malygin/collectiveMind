@@ -56,9 +56,11 @@ class Estimate::PostsController < PostsController
   end
   def create
     @estimate_post = Estimate::Post.new(params[:estimate_post])
+    @project = Core::Project.find(params[:project])
+
     plan_post = Plan::Post.find(params[:post_id])
     @estimate_post.post = plan_post
-    @estimate_post.project = params[:project]
+    @estimate_post.project = @project
     @estimate_post.user = current_user
     #puts "__________",boss?
     if expert? or admin?
@@ -104,11 +106,12 @@ class Estimate::PostsController < PostsController
       end
 
 
+
     respond_to do |format|
       if @estimate_post.save
         current_user.journals.build(:type_event=>'estimate_post_save', :body=>@estimate_post.id).save!
 
-        format.html { redirect_to @estimate_post, notice: 'Оценка добавлена' }
+        format.html { redirect_to  action: "index" , notice: 'Оценка добавлена' }
         format.json { render json: @estimate_post, status: :created, location: @estimate_post }
       else
         format.html { render action: "new" }
@@ -158,7 +161,7 @@ class Estimate::PostsController < PostsController
     @estimate_post.update_attributes(params[:estimate_post])
     current_user.journals.build(:type_event=>'estimate_post_update', :body=>@estimate_post.id).save!
 
-    redirect_to @estimate_post, notice: 'Оценка успешно обновлена.' 
+    redirect_to @estimate_post, notice: 'Оценка успешно обновлена.'
 
 end
 

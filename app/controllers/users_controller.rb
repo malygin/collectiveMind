@@ -36,7 +36,8 @@ class UsersController < ApplicationController
 	def create 
 		@user = User.new(params[:user])
 		cp = nil
-		Core::Project.all do |pr|
+		Core::Project.all.each do |pr|
+      puts 'aaa'
 			if @user.secret == pr.secret
 				@user.projects << pr
 			end
