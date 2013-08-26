@@ -1,20 +1,20 @@
 - if @project.id == 8
 
-	%h1 Что нужно сделать в первую очередь?
-	%p.righttext 
-		1. Ознакомьтесь с 
-		= link_to 'темой', expert_news_post_path(@project, @news)
-		нашей процедуры
-		%br
-		2. Прочитайте раздел 
-		= link_to 'помощь', "/project/#{@project.id}/help"
-		(там вы узнаете больше о рациональных процедурах)
-		%br
-		3. Изучите 
-		= link_to 'базу знаний', "/project/#{@project.id}/knowledge"
-		, в которой подробно рассказывается о том, как сейчас рабоает "ИРБИС" и идеи по работе заочки
-		%br
-		4. Примите участие в обсуждении (делитесь идеями, задавайте вопросы)
+    %h1 Что нужно сделать в первую очередь?
+    %p.righttext
+        1. Ознакомьтесь с
+        = link_to 'темой', expert_news_post_path(@project, @news)
+        нашей процедуры
+        %br
+        2. Прочитайте раздел
+        = link_to 'помощь', "/project/#{@project.id}/help"
+        (там вы узнаете больше о рациональных процедурах)
+        %br
+        3. Изучите
+        = link_to 'базу знаний', "/project/#{@project.id}/knowledge"
+        , в которой подробно рассказывается о том, как сейчас рабоает "ИРБИС" и идеи по работе заочки
+        %br
+        4. Примите участие в обсуждении (делитесь идеями, задавайте вопросы)
 
 %h1 Избранные записи
 %br
@@ -25,28 +25,30 @@
 
 
 - unless @aspects.empty?
-	%h1 Список фрагментов
+    %h1 Список фрагментов
 - @aspects.each do |asp|
-	%a{:href  => discontent_posts_path(:aspect => asp.id), :class => 'topic'}
-		.topics
-			%p.greentitle= "#{asp.content}"	
+    %a{:href  => discontent_posts_path(:aspect => asp.id), :class => 'topic'}
+        .topics
+            - if  asp.user_add
+                %p.redtitle Новый
+            %p.greentitle= "#{asp.content}"
 / = render :partial => 'discontent/aspects/aspect', :collection => @aspects
 -if boss? 
-	%p.righttext= link_to 'добавить фрагмент', new_discontent_aspect_path, id: "add_aspect"
+    %p.righttext= link_to 'добавить фрагмент', new_discontent_aspect_path, id: "add_aspect"
 
 
 -if boss?
-	%p.righttext 
-		текущий статус проекта
-		%br
-		%span.rate= status_title(@project.status)
-		%br
-		-if @project.status == 1
-			=link_to 'Начать голосование',  next_stage_core_project_path(@project), id: 'change_stage'
-		-if @project.status == 2
-			=link_to 'Вернуться к началу процедуры',  pr_stage_core_project_path(@project), id: 'change_stage'
-			%br
-			=link_to 'Начать сбор недовольств',  next_stage_core_project_path(@project), id: 'change_stage'
+    %p.righttext
+        текущий статус проекта
+        %br
+        %span.rate= status_title(@project.status)
+        %br
+        -if @project.status == 1
+            =link_to 'Начать голосование',  next_stage_core_project_path(@project), id: 'change_stage'
+        -if @project.status == 2
+            =link_to 'Вернуться к началу процедуры',  pr_stage_core_project_path(@project), id: 'change_stage'
+            %br
+            =link_to 'Начать сбор недовольств',  next_stage_core_project_path(@project), id: 'change_stage'
 
 
 

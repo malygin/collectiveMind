@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130805090704) do
+ActiveRecord::Schema.define(:version => 20130826191328) do
 
   create_table "answers", :force => true do |t|
     t.string   "text"
@@ -205,6 +205,7 @@ ActiveRecord::Schema.define(:version => 20130805090704) do
     t.integer  "project_id"
     t.text     "short_desc"
     t.integer  "status",     :default => 0
+    t.boolean  "user_add"
   end
 
   add_index "discontent_aspects", ["project_id"], :name => "index_discontent_aspects_on_project_id"
@@ -614,6 +615,7 @@ ActiveRecord::Schema.define(:version => 20130805090704) do
     t.integer  "number_views", :default => 0
     t.integer  "project_id"
     t.boolean  "important",    :default => false
+    t.integer  "aspect_id"
   end
 
   add_index "life_tape_posts", ["category_id"], :name => "index_life_tape_posts_on_category_id"

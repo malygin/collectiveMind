@@ -1,31 +1,37 @@
 - show_post||=:show
 .wholePost
-	= render 'users/user_post', :user => post.user
-	.posts
-		= render 'users/user_name', :user => post.user, :created_at => post.created_at
-		- if not current_page?(url_for(params.merge(:project => @project, :id => post.id))) 
-			%p
-				= trim_string(raw(post.content))
-				= link_to "Подробнее",  {:action => show_post, :project => @project, :id => post.id}, class: "more"
-		-else
-			
-			%p= simple_format(post.show_content)
-			- if boss? or @post.user == current_user
-				= link_to 'Редактировать', :action => 'edit', :project => @project, :id => @post
-				\|
-				= link_to 'Назад', url_for(:action => 'index')
+    = render 'users/user_post', :user => post.user
+    .posts
+        = render 'users/user_name', :user => post.user, :created_at => post.created_at
+        - if not current_page?(url_for(params.merge(:project => @project, :id => post.id)))
+            %p
+                = trim_string(raw(post.content))
+                - unless post.aspect.nil?
+                    %br
+                    %b="#{post.aspect.content}  фрагмент"
+                = link_to 'Подробнее',  {:action => show_post, :project => @project, :id => post.id}, class: "more"
+        -else
 
-			
-		- if post.user == current_user 
-			%br
-			/ = link_to 'Редактировать', {:action => :edit, :project => @project, :id => post.id}
-			/ = link_to 'Отправить в архив', {:action => :destroy, :project => @project, :id => post.id}, :method => :delete, :data => { :confirm => 'Точно?' }
+            %p= simple_format(post.show_content)
+            - unless post.aspect.nil?
+                %b="#{post.aspect.content}  фрагмент"
+            %br
+            - if boss? or @post.user == current_user
+                = link_to 'Редактировать', :action => 'edit', :project => @project, :id => @post
+                \|
+                = link_to 'Назад', url_for(:action => 'index')
 
-		= render 'shared/post_social_bar', :post => post
+
+        - if post.user == current_user
+            %br
+            / = link_to 'Редактировать', {:action => :edit, :project => @project, :id => post.id}
+            / = link_to 'Отправить в архив', {:action => :destroy, :project => @project, :id => post.id}, :method => :delete, :data => { :confirm => 'Точно?' }
+
+        = render 'shared/post_social_bar', :post => post
 
 .dotline=image_tag('dotline.png')
 - if current_page?(url_for(params.merge(:project => @project, :id => post.id)))  
-	- if signed_in?
-		= render :partial => 'shared/comment_form', :locals => { :comment => @comment, :url_link => url_for(:action => 'add_comment')}
+    - if signed_in?
+        = render :partial => 'shared/comment_form', :locals => { :comment => @comment, :url_link => url_for(:action => 'add_comment')}
 
-	= render :partial => 'shared/comment',:collection => @post.comments
+    = render :partial => 'shared/comment',:collection => @post.comments

@@ -1,6 +1,6 @@
 class Discontent::Aspect < ActiveRecord::Base
   include BasePost
-  attr_accessible :position, :short_desc
+  attr_accessible :position, :short_desc, :user_add
    has_many :posts
    has_many :positive_posts, :class_name => 'Discontent::Post',
            :conditions => ['discontent_posts.style = ? and discontent_posts.status = ?',0,2]   

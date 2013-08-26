@@ -7,10 +7,11 @@
   /         %li= msg
 
   %field
-    = f.text_area :content, class: "post"
+    = f.text_area :content, class: 'post'
+  = select_tag 'aspect_id', options_from_collection_for_select(@aspects, 'id', 'content', @post.aspect.nil? ? 0 :@post.aspect.id), :prompt => 'Выберите фрагмент'
 
 
-    %br
+  %br
 
   %br
   .actions

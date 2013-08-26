@@ -121,8 +121,10 @@ def index
         @post.stage = params[:stage]
       end     
       unless params[:aspect_id].nil?
-        @post.aspect_id = params[:aspect_id]        
-        @post.style = params[:style]        
+        @post.aspect_id = params[:aspect_id]
+      end
+      unless params[:style].nil?
+        @post.style = params[:style]
       end
       unless params[:replace_id].nil?
         @post.replace_id = params[:replace_id]
@@ -158,7 +160,9 @@ def index
       if @post.update_attributes(params[name_of_model_for_param])
         unless params[:aspect_id].nil?
           @post.update_attribute(:aspect_id,params[:aspect_id]) 
-          @post.update_attribute(:style,params[:style])              
+        end
+        unless params[:style].nil?
+          @post.update_attribute(:style,params[:style])
         end
         format.html { 
           flash[:success] = 'Успешно добавлено!'
