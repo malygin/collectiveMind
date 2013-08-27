@@ -1,15 +1,13 @@
 %p.righttext
-	=post_for_vote.content
-	- if boss?
-		.adminVoteBar
-			(
-			%b=post_for_vote.status
-
-			=post_for_vote.voted_users.size
-			
-			-if post_for_vote.status ==0 
-				=link_to "сделать обязательной", path_for_voting+"up/"+post_for_vote.id.to_s , :remote => true, :method => :put, class: "voteCounter", :id => "aspect_#{post_for_vote.id}"
-			)
+	%b=post_for_vote.content
+	-#- if boss?
+	-#	.adminVoteBar
+	-#		(
+	-#		%b=post_for_vote.status
+	-#		=post_for_vote.voted_users.size
+	-#		-if post_for_vote.status ==0
+	-#			=link_to "сделать обязательной", path_for_voting+"up/"+post_for_vote.id.to_s , :remote => true, :method => :put, class: "voteCounter", :id => "aspect_#{post_for_vote.id}"
+	-#		)
 
 		
 	.voteBar

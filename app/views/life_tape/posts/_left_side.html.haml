@@ -1,25 +1,25 @@
 %p.righttext
-	Возникли проблемы с сайтом? 
-	= link_to 'Задайте вопрос', question_posts_path(@project)
+    Возникли проблемы с сайтом?
+    = link_to 'Задайте вопрос', question_posts_path(@project)
 
 - if stage_vote?('life_tape')
-	.error срочно идите голосовать и рефлексировать
+    .error срочно идите голосовать и рефлексировать
 
-	%p.righttext
-		= link_to 'Голосование за актуальные фрагменты', life_tape_vote_list_path(@project), id: 'vote_stage'
-		%br
-		=link_to 'Добавить мнение о прошедшем этапе', essay_posts_path(@project, @project.status), :id => 'essay_list'
+
+    = link_to 'Голосование за актуальные фрагменты', life_tape_vote_list_path(@project), id: 'vote_stage'
+    %br
+    =link_to 'Добавить мнение о прошедшем этапе', essay_posts_path(@project, @project.status), :id => 'essay_list'
 
 - unless @news.nil?
-	%h1 Новости
-	%p.righttext
-		= @news.anons
-		= link_to 'подробнее',  expert_news_post_path(@project, @news)
+    %h1 Новости
+    %p.righttext
+        = @news.anons
+        = link_to 'подробнее',  expert_news_post_path(@project, @news)
 -unless @journals.nil?
-	.redtitle Активность
-	- @journals.each do |journal|
-		%p.righttext
-			=Russian::strftime(journal.created_at,"%d %B %k:%M:%S ")
-			%b= journal.user.name_title
-			= journal_parser(journal, @project.id).html_safe
-		=image_tag 'dots.png', :width => '260px'
+    .redtitle Активность
+    - @journals.each do |journal|
+        %p.righttext
+            =Russian::strftime(journal.created_at,"%d %B %k:%M:%S ")
+            %b= journal.user.name_title
+            = journal_parser(journal, @project.id).html_safe
+        =image_tag 'dots.png', :width => '260px'
