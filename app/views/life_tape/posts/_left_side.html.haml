@@ -7,6 +7,7 @@
 
 	%p.righttext
 		= link_to 'Голосование за актуальные фрагменты', life_tape_vote_list_path(@project), id: 'vote_stage'
+		%br
 		=link_to 'Добавить мнение о прошедшем этапе', essay_posts_path(@project, @project.status), :id => 'essay_list'
 
 - unless @news.nil?

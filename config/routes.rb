@@ -39,6 +39,22 @@ scope '/project/:project' do
      end
   end
 
+  namespace :life_tape do
+    get 'vote_list'  => 'posts#vote_list'
+    put 'vote/:post_id'  => 'posts#vote'
+    put 'up/:post_id'  => 'posts#up'
+    put 'down/:post_id'  => 'posts#down'
+    get 'aspect/:aspect/posts/'  => 'posts#index'
+
+    resources :posts do
+      member do
+        put :add_comment
+        put :plus
+        put :plus_comment
+      end
+    end
+  end
+
   namespace :discontent do
     resources :aspects 
 
@@ -136,19 +152,7 @@ scope '/project/:project' do
     end
   end
 
-  namespace :life_tape do
-    get 'vote_list'  => 'posts#vote_list'
-    put 'vote/:post_id'  => 'posts#vote'
-    put 'up/:post_id'  => 'posts#up'    
-    put 'down/:post_id'  => 'posts#down'  
-    resources :posts do    
-      member do
-          put :add_comment
-          put :plus
-          put :plus_comment
-      end
-    end
-  end
+
   
   namespace :expert_news do
     resources :posts do    

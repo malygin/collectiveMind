@@ -6,14 +6,14 @@
         - if not current_page?(url_for(params.merge(:project => @project, :id => post.id)))
             %p
                 = trim_string(raw(post.content))
-                - unless post.aspect.nil?
+                - if post.attributes.has_key? 'aspect_id' and !post.aspect.nil?
                     %br
                     %b="#{post.aspect.content}  фрагмент"
                 = link_to 'Подробнее',  {:action => show_post, :project => @project, :id => post.id}, class: "more"
         -else
 
             %p= simple_format(post.show_content)
-            - unless post.aspect.nil?
+            - if post.attributes.has_key? 'aspect_id' and !post.aspect.nil?
                 %b="#{post.aspect.content}  фрагмент"
             %br
             - if boss? or @post.user == current_user

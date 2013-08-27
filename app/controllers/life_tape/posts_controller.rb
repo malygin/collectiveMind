@@ -22,15 +22,19 @@ def prepare_data
     
 end
 
-  # def index
-  #   @posts_user = LifeTape::Post.includes(:user).where(:project_id => @project).where("users.admin = ? and users.expert = ?", false, false)
-  #   @posts_facil = LifeTape::Post.includes(:user).where(:project_id => @project).where("users.admin = ? or users.expert = ?", true, true)
-  #   @aspects = Discontent::Aspect.where(:project_id => @project)
-  #   respond_to do |format|
-  #     format.html # index.html.erb
-  #     format.json { render json: @posts }
-  #   end
-  # end
+  def index
+    if params[:aspect].nil?
+      @posts = current_model.where(:project_id => @project).paginate(:page => params[:page])
+
+    else
+      @posts = current_model.where(:project_id => @project, :aspect_id => params[:aspect]).paginate(:page => params[:page])
+
+    end
+    respond_to do |format|
+      format.html # index.html.erb
+      format.json { render json: @posts }
+    end
+  end
   def vote_list
     @posts = voting_model.where(:project_id => @project)
     @number_v = @project.stage1.to_i - current_user.voted_aspects.size

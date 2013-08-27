@@ -27,11 +27,12 @@
 - unless @aspects.empty?
     %h1 Список фрагментов
 - @aspects.each do |asp|
-    %a{:href  => discontent_posts_path(:aspect => asp.id), :class => 'topic'}
+    %a{:href  => "/project/#{@project.id}/life_tape/aspect/#{asp.id}/posts/", :class => 'topic'}
         .topics
-            - if  asp.user_add
-                %p.redtitle Новый
-            %p.greentitle= "#{asp.content}"
+            %p.greentitle
+                - if  asp.user_add
+                    (new)
+                = "#{asp.content}"
 / = render :partial => 'discontent/aspects/aspect', :collection => @aspects
 -if boss? 
     %p.righttext= link_to 'добавить фрагмент', new_discontent_aspect_path, id: "add_aspect"
