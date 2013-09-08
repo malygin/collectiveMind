@@ -1,3 +1,15 @@
+
+%p.righttext
+    =link_to image_tag('fb.png'),'http://www.facebook.com/massdecision'
+    =link_to image_tag('tw.png'),'https://twitter.com/massdecision'
+    =link_to image_tag('vk.png'),'https://vk.com/massdecision'
+    =link_to image_tag('ok.png'),'http://odnoklassniki.ru/group/56725703557182'
+    =mail_to 'suslova@mass-decision.ru', image_tag('mail.png')
+    %br
+    %b По всем вопросам   suslova@mass-decision.ru, тел. 77-01-82 (Татьяна Суслова)
+
+
+%br
 - if @project.id == 8
 
     %h1 Что нужно сделать в первую очередь?
@@ -12,7 +24,7 @@
         %br
         3. Изучите
         = link_to 'базу знаний', "/project/#{@project.id}/knowledge"
-        , в которой подробно рассказывается о том, как сейчас рабоает "ИРБИС" и идеи по работе заочки
+        , в которой подробно рассказывается о том, как сейчас работает "ИРБИС" и идеи по работе заочки
         %br
         4. Примите участие в обсуждении (делитесь идеями, задавайте вопросы)
 

@@ -43,12 +43,12 @@ class UsersController < ApplicationController
 			end
 		end
 
-		if !@user.projects.empty? and @user.save
+		if @user.secret!='' and !@user.projects.empty? and @user.save
 			sign_in @user
 			flash[:success] = "Добро пожаловать!"
 			redirect_to root_path
 		else
-			if  @user.projects.empty?
+			if   @user.secret=='' or @user.projects.empty?
 				flash[:error] = "Кодовое слово введено неверно!"
 			end
 			render 'new'
