@@ -2,18 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="aa6a5015-3a56-4a58-9b19-a0ad2e76ab80" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/dataSources.ids" afterPath="$PROJECT_DIR$/.idea/dataSources.ids" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/life_tape/posts/_right_side.html.haml" afterPath="$PROJECT_DIR$/app/views/life_tape/posts/_right_side.html.haml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/dataSources.xml" afterPath="$PROJECT_DIR$/.idea/dataSources.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/config/database.yml" afterPath="$PROJECT_DIR$/config/database.yml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/life_tape/posts/index.html.haml" afterPath="$PROJECT_DIR$/app/views/life_tape/posts/index.html.haml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/models/life_tape/post.rb" afterPath="$PROJECT_DIR$/app/models/life_tape/post.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/controllers/life_tape/posts_controller.rb" afterPath="$PROJECT_DIR$/app/controllers/life_tape/posts_controller.rb" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/models/base_comment.rb" afterPath="$PROJECT_DIR$/app/models/base_comment.rb" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="collectiveMind.iws" />
     <ignored path=".idea/workspace.xml" />
-    <file path="/Dummy.txt" changelist="aa6a5015-3a56-4a58-9b19-a0ad2e76ab80" time="1378975034722" ignored="false" />
+    <file path="/Dummy.txt" changelist="aa6a5015-3a56-4a58-9b19-a0ad2e76ab80" time="1378980647919" ignored="false" />
     <file path="/boot.rb" changelist="aa6a5015-3a56-4a58-9b19-a0ad2e76ab80" time="1372798651996" ignored="false" />
     <file path="/Gemfile" changelist="aa6a5015-3a56-4a58-9b19-a0ad2e76ab80" time="1374341578097" ignored="false" />
     <file path="/users_controller.rb" changelist="aa6a5015-3a56-4a58-9b19-a0ad2e76ab80" time="1378673850854" ignored="false" />
@@ -52,7 +46,7 @@
     <file path="/_post_for_vote.html.haml" changelist="aa6a5015-3a56-4a58-9b19-a0ad2e76ab80" time="1377630855080" ignored="false" />
     <file path="/base_post.rb" changelist="aa6a5015-3a56-4a58-9b19-a0ad2e76ab80" time="1378232864945" ignored="false" />
     <file path="/description.html.haml" changelist="aa6a5015-3a56-4a58-9b19-a0ad2e76ab80" time="1378196429233" ignored="false" />
-    <file path="/base_comment.rb" changelist="aa6a5015-3a56-4a58-9b19-a0ad2e76ab80" time="1378403001114" ignored="false" />
+    <file path="/base_comment.rb" changelist="aa6a5015-3a56-4a58-9b19-a0ad2e76ab80" time="1378980709067" ignored="false" />
     <file path="$PROJECT_DIR$/../stuff/spec/requests/users_spec.rb" changelist="aa6a5015-3a56-4a58-9b19-a0ad2e76ab80" time="1378582695174" ignored="false" />
     <file path="$PROJECT_DIR$/../stuff/spec/requests/catalog/product_images_spec.rb" changelist="aa6a5015-3a56-4a58-9b19-a0ad2e76ab80" time="1378582695174" ignored="false" />
     <file path="/reviews.html.haml" changelist="aa6a5015-3a56-4a58-9b19-a0ad2e76ab80" time="1378674342213" ignored="false" />
@@ -91,15 +85,6 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="database.yml" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/config/database.yml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="6" column="0" selection-start="133" selection-end="186" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="_right_side.html.haml" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/views/life_tape/posts/_right_side.html.haml">
           <provider selected="true" editor-type-id="text-editor">
@@ -118,10 +103,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="posts_controller.rb" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="posts_controller.rb" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/controllers/life_tape/posts_controller.rb">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="31" column="0" selection-start="924" selection-end="924" vertical-scroll-proportion="0.3254973">
+            <state line="31" column="0" selection-start="924" selection-end="924" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -130,7 +115,16 @@
       <file leaf-file-name="comment.rb" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/models/life_tape/comment.rb">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
+            <state line="1" column="15" selection-start="60" selection-end="60" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="base_comment.rb" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/app/models/base_comment.rb">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="7" column="47" selection-start="269" selection-end="269" vertical-scroll-proportion="0.18987341">
               <folding />
             </state>
           </provider>
@@ -198,7 +192,6 @@
         <option value="$PROJECT_DIR$/app/views/discontent/posts/table.html.haml" />
         <option value="$PROJECT_DIR$/app/views/pages/description.html.haml" />
         <option value="$PROJECT_DIR$/app/models/base_post.rb" />
-        <option value="$PROJECT_DIR$/app/models/base_comment.rb" />
         <option value="$PROJECT_DIR$/app/controllers/users_controller.rb" />
         <option value="$PROJECT_DIR$/app/views/pages/reviews.html.haml" />
         <option value="$PROJECT_DIR$/app/views/layouts/core/projects.html.haml" />
@@ -211,6 +204,7 @@
         <option value="$PROJECT_DIR$/app/models/life_tape/post.rb" />
         <option value="$PROJECT_DIR$/app/controllers/life_tape/posts_controller.rb" />
         <option value="$PROJECT_DIR$/app/views/life_tape/posts/_right_side.html.haml" />
+        <option value="$PROJECT_DIR$/app/models/base_comment.rb" />
       </list>
     </option>
   </component>
@@ -1019,7 +1013,11 @@
       <created>1378748102952</created>
       <updated>1378748102952</updated>
     </task>
-    <option name="localTasksCounter" value="24" />
+    <task id="LOCAL-00024" summary="top posts and star posts for life_tape">
+      <created>1378980653026</created>
+      <updated>1378980653026</updated>
+    </task>
+    <option name="localTasksCounter" value="25" />
     <servers />
   </component>
   <component name="TodoView" selected-index="0">
@@ -1046,6 +1044,7 @@
     <frame x="0" y="22" width="1280" height="701" extended-state="0" />
     <editor active="true" />
     <layout>
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32781458" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32838285" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3294702" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32901135" sideWeight="0.4884106" order="3" side_tool="false" content_ui="tabs" />
@@ -1060,7 +1059,6 @@
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32838285" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32781458" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.39966273" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
@@ -1108,7 +1106,7 @@
     <option name="WRAP_WHEN_TYPING_REACHES_RIGHT_MARGIN" value="false" />
     <option name="FORCE_NON_EMPTY_COMMENT" value="false" />
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="false" />
-    <option name="LAST_COMMIT_MESSAGE" value="pagination for comments" />
+    <option name="LAST_COMMIT_MESSAGE" value="top posts and star posts for life_tape" />
     <option name="MAKE_NEW_CHANGELIST_ACTIVE" value="false" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_FILES_UP_TO_DATE_BEFORE_COMMIT" value="false" />
@@ -1145,6 +1143,7 @@
     <MESSAGE value="revert order for comment" />
     <MESSAGE value="new instruction fix bug with support" />
     <MESSAGE value="pagination for comments" />
+    <MESSAGE value="top posts and star posts for life_tape" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1164,13 +1163,6 @@
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/app/controllers/posts_controller.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="71" column="13" selection-start="1926" selection-end="1935" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/views/shared/_comment.html.haml">
       <provider selected="true" editor-type-id="text-editor">
         <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
@@ -1226,20 +1218,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/models/life_tape/comment.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/models/base_post.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="7" column="22" selection-start="323" selection-end="331" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/models/life_tape/post.rb">
       <provider selected="true" editor-type-id="text-editor">
         <state line="2" column="12" selection-start="83" selection-end="83" vertical-scroll-proportion="0.0">
@@ -1277,7 +1255,28 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/controllers/life_tape/posts_controller.rb">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="31" column="0" selection-start="924" selection-end="924" vertical-scroll-proportion="0.3254973">
+        <state line="31" column="0" selection-start="924" selection-end="924" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/models/base_post.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="7" column="22" selection-start="323" selection-end="331" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/models/life_tape/comment.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="1" column="15" selection-start="60" selection-end="60" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/models/base_comment.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="7" column="47" selection-start="269" selection-end="269" vertical-scroll-proportion="0.18987341">
           <folding />
         </state>
       </provider>
