@@ -18,7 +18,18 @@ def prepare_data
     @project = Core::Project.find(params[:project]) 
     @aspects = Discontent::Aspect.unscoped.order("position").where(:project_id => @project)
     @journals = Journal.events_for_user_feed @project.id
-    @news = ExpertNews::Post.where(:project_id => @project).first 
+    @news = ExpertNews::Post.where(:project_id => @project).first
+    @post_star = LifeTape::Post.where(:project_id => @project, :important => 't' ).limit(3)
+
+    @post_dis = LifeTape::Post.joins(:comments).
+        where(:project_id => @project).
+        #reorder('count DESC').
+        group('"life_tape_posts"."id"').
+        select('"life_tape_posts".*, count(life_tape_comments.id) as count_comment ').
+        #reorder('').
+        reorder('count_comment DESC').
+        limit(3)
+
     
 end
 

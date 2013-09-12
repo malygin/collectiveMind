@@ -29,10 +29,24 @@
         4. Примите участие в обсуждении (делитесь идеями, задавайте вопросы)
 
 %h1 Избранные записи
+- unless @post_star.empty?
+    -@post_star.each do |st|
+        = trim_string(st.content)
+        = link_to 'Подробнее',  {:action => :show, :project => @project, :id => st.id}, class: "more"
+        %br
+        %br
+
+
+
 %br
 
 %h1 Самые обсуждаемые
-%br
+-#- unless @post_dis.empty?
+-@post_dis.each do |st|
+    = trim_string(st.content)
+    = link_to 'Подробнее',  {:action => :show, :project => @project, :id => st.id}, class: "more"
+    %br
+    %br
 
 
 
