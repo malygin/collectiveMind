@@ -31,10 +31,11 @@
 %h1 Избранные записи
 - unless @post_star.empty?
     -@post_star.each do |st|
-        = trim_string(st.content)
-        = link_to 'Подробнее',  {:action => :show, :project => @project, :id => st.id}, class: "more"
-        %br
-        %br
+        %p.righttext
+            = trim_string(st.content,150)
+            = link_to 'Подробнее',  {:action => :show, :project => @project, :id => st.id}, class: "more"
+            %br
+            %br
 
 
 
@@ -43,10 +44,11 @@
 %h1 Самые обсуждаемые
 -#- unless @post_dis.empty?
 -@post_dis.each do |st|
-    = trim_string(st.content)
-    = link_to 'Подробнее',  {:action => :show, :project => @project, :id => st.id}, class: "more"
-    %br
-    %br
+    %p.righttext
+        = trim_string(st.content, 150)
+        = link_to 'Подробнее',  {:action => :show, :project => @project, :id => st.id}, class: "more"
+        %br
+        %br
 
 
 
