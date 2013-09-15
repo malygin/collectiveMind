@@ -4,7 +4,7 @@ class Journal < ActiveRecord::Base
   belongs_to :project, :class_name => 'Core::Project', :foreign_key => "project_id"
 
   def self.events_for_user_feed(project_id, lim = 9)
-		types = ['concept_post_revision','concept_post_acceptance','concept_post_rejection',
+		types = ['add_score','concept_post_revision','concept_post_acceptance','concept_post_rejection',
 			'concept_post_to_expert','concept_comment_save', 'concept_post_save',
 			'plan_post_revision','plan_post_acceptance','plan_post_rejection',
 			'plan_post_to_expert','plan_comment_save', 'plan_post_save','plan_post_update',

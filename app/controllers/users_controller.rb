@@ -12,7 +12,8 @@ class UsersController < ApplicationController
 
 	def show 
 		@user = User.find(params[:id])
-	end
+    @project = Core::Project.find(params[:project])
+  end
 
 	def edit 
 		#@user = User.find(params[:id])
@@ -142,7 +143,12 @@ class UsersController < ApplicationController
 		user = User.find(params[:id])
 		if boss?
 			user.update_column(:score, user.score + params[:score].to_i)
-		end
+      @project = Core::Project.find(params[:project])
+
+      user.journals.build(:type_event=>'add_score', :project => @project, :body=>params[:score]).save!
+
+
+    end
 		render json: user.score
 
 

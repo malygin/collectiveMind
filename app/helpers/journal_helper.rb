@@ -3,7 +3,9 @@ module JournalHelper
 
 	def journal_parser(j, project)
 		case j.type_event
-			when 'concept_post_save'
+			when 'add_score'
+				'получил  '+j.body+' балов за участие в сборе информации'
+      when 'concept_post_save'
 				'добавил  '+ link_to('концепцию', concept_post_path(j.body))
 			when 'concept_comment_save'
 				'добавил комментарий к '+  link_to('концепции', concept_post_path(j.body))

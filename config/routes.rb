@@ -26,6 +26,14 @@ scope '/project/:project' do
 
   match '/help_0', :to => 'core/projects#help_0'
   match '/help_d0', :to => 'core/projects#help_d0'
+  resources :users do
+    member do
+      put :forecast
+      put :forecast_concept
+      put :forecast_plan
+      match 'add_score/:score' => 'users#add_score'
+    end
+  end
 
   scope '/stage/:stage' do
      namespace :essay do    
@@ -220,14 +228,7 @@ end
 
 
   #get 'users/new'
-  resources :users do
-    member do
-      put :forecast
-      put :forecast_concept
-      put :forecast_plan
-      match 'add_score/:score' => 'users#add_score'
-    end
-  end
+
 
   
   resources :sessions, :only => [:new, :create, :destroy]

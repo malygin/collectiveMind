@@ -1,5 +1,5 @@
 %span.namedate
-	= link_to user.name_title, user
+	= link_to user.name_title, user_path( @project, user)
 	,
 	= Russian::strftime(created_at,"%d %B %k:%M:%S ")
 %br

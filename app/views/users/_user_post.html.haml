@@ -1,5 +1,5 @@
 .avatar
-	= link_to gravatar_for(user), user
+	= link_to gravatar_for(user), user_path( @project, user)
 	%br
 	- if user.expert? or user.admin?
 		%span.role= user.role_name
