@@ -69,7 +69,7 @@ def index
   # GET /discontent/posts/1.json
   def show
     @post = current_model.where(:id => params[:id], :project_id => params[:project]).first
-    @comments = @post.comments.paginate(:page => params[:page], :per_page => 20)
+    @comments = @post.comments.paginate(:page => params[:page], :per_page => 30)
     #puts "___________"
     #puts @post
     # @path_link ='/'+ self.class.to_s.split("::").first.tableize.singularize+'/comments/'

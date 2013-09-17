@@ -1,24 +1,29 @@
 - if boss?
-	.scoreBar
-		=link_to "+20 баллов",  "/project/"+@project.id.to_s+"/users/"+@user.id.to_s+"/add_score/20", :remote => true, :method => :put, class: "voteCounter"
-		|
-		=link_to "+40 баллов",  "/project/"+@project.id.to_s+"/users/"+@user.id.to_s+"/add_score/40", :remote => true, :method => :put, class: "voteCounter"
-		|
+    .scoreBar
+        =link_to "+20 баллов",  "/project/"+@project.id.to_s+"/users/"+@user.id.to_s+"/add_score/20", :remote => true, :method => :put, class: "voteCounter"
+        |
+        =link_to "+40 баллов",  "/project/"+@project.id.to_s+"/users/"+@user.id.to_s+"/add_score/40", :remote => true, :method => :put, class: "voteCounter"
+        |
 
 .wholePost
-	= render 'users/user_post', :user =>  @user
-	.posts
-		%span.namedate
-			=  @user.name_title
+    = render 'users/user_post', :user =>  @user
+    .posts
+        %span.namedate
+            =  @user.name_title
 
-			- if current_user == @user
-				(это вы)
-		%br
-		- if current_user == @user
-			=link_to 'редактировать информацию о себе', edit_user_path(@project, current_user), class: "name"
-		
+            - if current_user == @user
+                (это вы)
+        %br
+        - if current_user == @user
+            =link_to 'редактировать информацию о себе', edit_user_path(@project, current_user), class: "name"
 
 
+.redtitle Активность
+- @journals.each do |journal|
+    %p.righttext
+        =Russian::strftime(journal.created_at,"%d %B %k:%M:%S ")
+        %b= journal.user.name_title
+        = journal_parser(journal, @project.id).html_safe
 / %br
 / %h1 Идеи
 / - unless @user.life_tape_posts.empty?

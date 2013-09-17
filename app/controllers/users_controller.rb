@@ -13,14 +13,18 @@ class UsersController < ApplicationController
 	def show 
 		@user = User.find(params[:id])
     @project = Core::Project.find(params[:project])
+    @journals = Journal.events_for_user_show @project.id, @user.id, 30
+
   end
 
 	def edit 
 		#@user = User.find(params[:id])
 	end
 
-	def index 
-		@users = User.order('score DESC').paginate(:page =>params[:page])
+	def index
+    @project = Core::Project.find(params[:project])
+
+    @users = User.where('score>0').order('score DESC').paginate(:page =>params[:page])
 	end
 
 	def update

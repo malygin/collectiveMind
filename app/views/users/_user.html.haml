@@ -1,14 +1,14 @@
 .wholePost
-	.avatar
-		= link_to gravatar_for(user), user_path( @project, user)
-		%br
-		%span.role= user.role_name
-	.posts
-		%span.namedate= user.name_title
-		%br
-		Набрано балов - 
-		%span.rate= user.score
+    .avatar
+        = link_to gravatar_for(user), user_path( @project, user)
+        -#%br
+        -#%span.role= user.role_name
+    .posts
+        %span.namedate= user.name_title
+        %br
+        Набрано балов -
+        %span.rate= user.score
 
-		.social 
-			
+        .social
+
 .dotline=image_tag('dotline.png')
