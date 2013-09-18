@@ -1,6 +1,7 @@
 .comments
   = render 'users/user_post', :user => comment.user
   .posts
+    %a(name="comment_#{comment.id}")
     %span.namedate
       = comment.user.name_title
       ,

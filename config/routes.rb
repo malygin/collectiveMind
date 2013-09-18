@@ -23,6 +23,7 @@ scope '/project/:project' do
   match '/help', :to => 'core/projects#help'
   match '/article1', :to => 'core/projects#article1'
   match '/article2', :to => 'core/projects#article2'
+  match '/article3', :to => 'core/projects#article3'
 
   match '/help_0', :to => 'core/projects#help_0'
   match '/help_d0', :to => 'core/projects#help_d0'

@@ -15,7 +15,7 @@ module JournalHelper
 				'добавил комментарий к '+  link_to('новости', expert_news_post_path(project, j.body))
 			
 			when 'life_tape_comment_save'
-				'добавил комментарий к '+  link_to('записи', life_tape_post_path(project, j.body))
+				'добавил комментарий к '+  link_to('записи', "/project/#{project}/life_tape/posts/#{j.body}" )
 			when 'life_tape_post_save'
 				'добавил '+  link_to('запись', life_tape_post_path(project, j.body))				
             
