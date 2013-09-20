@@ -1,6 +1,6 @@
 %p.righttext
     .voteBar
-        - if can_vote?(post_for_vote.voted_users.size, count_voted, votes)
+        - if can_vote?(post_for_vote.voted(current_user).size, count_voted, votes)
             =link_to "выбрать", path_for_voting+"vote/"+post_for_vote.id.to_s , :remote => true, :method => :put, class: "voteCounter", :id => "aspect_#{post_for_vote.id}"
 
 

@@ -11,5 +11,7 @@ class Discontent::Aspect < ActiveRecord::Base
 
   has_many :voted_users, :through => :final_votings, :source => :user
   has_many :final_votings,:foreign_key => 'discontent_aspect_id', :class_name => "LifeTape::Voiting"
- 
+  def voted(user)
+    self.voted_users.where(:id => user)
+  end
 end
