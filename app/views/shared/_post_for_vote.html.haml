@@ -1,16 +1,19 @@
 %p.righttext
-	%b=post_for_vote.content
-	-#- if boss?
-	-#	.adminVoteBar
-	-#		(
-	-#		%b=post_for_vote.status
-	-#		=post_for_vote.voted_users.size
-	-#		-if post_for_vote.status ==0
-	-#			=link_to "сделать обязательной", path_for_voting+"up/"+post_for_vote.id.to_s , :remote => true, :method => :put, class: "voteCounter", :id => "aspect_#{post_for_vote.id}"
-	-#		)
+    .voteBar
+        - if can_vote?(post_for_vote.voted_users.size, count_voted, votes)
+            =link_to "выбрать", path_for_voting+"vote/"+post_for_vote.id.to_s , :remote => true, :method => :put, class: "voteCounter", :id => "aspect_#{post_for_vote.id}"
 
-		
-	.voteBar
-		- if can_vote?(post_for_vote.voted_users.size, count_voted, votes)
-			=link_to "проголосовать", path_for_voting+"vote/"+post_for_vote.id.to_s , :remote => true, :method => :put, class: "voteCounter", :id => "aspect_#{post_for_vote.id}"
-		
+
+    %b=post_for_vote.content
+    -
+    =post_for_vote.short_desc
+    - if boss?
+        .adminVoteBar
+            (
+            -#%b=post_for_vote.status
+            =post_for_vote.voted_users.size
+            -if post_for_vote.status ==0
+                =link_to "сделать обязательной", path_for_voting+"up/"+post_for_vote.id.to_s , :remote => true, :method => :put, class: "voteCounter", :id => "aspect_#{post_for_vote.id}"
+            )
+
+

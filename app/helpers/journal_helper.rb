@@ -43,6 +43,10 @@ module JournalHelper
 				'добавил  '+ link_to('проект', plan_post_path(j.body))
 			when 'plan_comment_save'
 				'добавил комментарий к '+  link_to('проекту', plan_post_path(j.body))
+			when 'essay_post_save'
+				'добавил  '+ link_to('эссе', essay_post_path(project, 2, j.body))
+			when 'essay_comment_save'
+				'добавил комментарий к '+  link_to('эссе',"/project/#{project}/stage/2/essay/posts/#{j.body}")
 			when 'plan_post_update'
 				'отредактировал '+  link_to('проект', plan_post_path(j.body))
 			when 'plan_post_revision'

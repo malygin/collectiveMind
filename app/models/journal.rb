@@ -2,7 +2,7 @@ class Journal < ActiveRecord::Base
   attr_accessible :body, :type_event, :user, :project
   belongs_to :user
   belongs_to :project, :class_name => 'Core::Project', :foreign_key => "project_id"
-  @types = ['add_score','concept_post_revision','concept_post_acceptance','concept_post_rejection',
+  @types = ['essay_post_save','essay_comment_save', 'add_score','concept_post_revision','concept_post_acceptance','concept_post_rejection',
            'concept_post_to_expert','concept_comment_save', 'concept_post_save',
            'plan_post_revision','plan_post_acceptance','plan_post_rejection',
            'plan_post_to_expert','plan_comment_save', 'plan_post_save','plan_post_update',

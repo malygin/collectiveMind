@@ -3,12 +3,12 @@
     = link_to 'Задайте вопрос', question_posts_path(@project)
 
 - if stage_vote?('life_tape')
-    .error срочно идите голосовать и рефлексировать
+    .success
 
 
-    = link_to 'Голосование за актуальные фрагменты', life_tape_vote_list_path(@project), id: 'vote_stage'
-    %br
-    =link_to 'Добавить мнение о прошедшем этапе', essay_posts_path(@project, @project.status), :id => 'essay_list'
+        = link_to 'Начался этап голосования за актуальные фрагменты (перейти)', life_tape_vote_list_path(@project), id: 'vote_stage'
+        -#%br
+        -#=link_to 'Добавить мнение о прошедшем этапе', essay_posts_path(@project, @project.status), :id => 'essay_list'
 
 - unless @news.nil?
     %h1 Новости
