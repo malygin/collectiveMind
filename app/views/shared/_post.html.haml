@@ -9,6 +9,10 @@
                 - if post.attributes.has_key? 'aspect_id' and !post.aspect.nil?
                     %br
                     %b="#{post.aspect.content}  фрагмент"
+                - if  post.instance_of? Question::Post
+                    - if post.comments.size>0
+                        %br
+                        %b Есть ответ!
                 = link_to 'Подробнее',  {:action => show_post, :project => @project, :id => post.id}, class: "more"
         -else
 
