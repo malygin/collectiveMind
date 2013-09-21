@@ -24,9 +24,13 @@ scope '/project/:project' do
   match '/article1', :to => 'core/projects#article1'
   match '/article2', :to => 'core/projects#article2'
   match '/article3', :to => 'core/projects#article3'
+  match '/article4', :to => 'core/projects#article4'
+  match '/article5', :to => 'core/projects#article5'
 
   match '/help_0', :to => 'core/projects#help_0'
   match '/help_d0', :to => 'core/projects#help_d0'
+  match '/help_t0', :to => 'core/projects#help_t0'
+  match '/help_s0', :to => 'core/projects#help_s0'
   resources :users do
     member do
       put :forecast
