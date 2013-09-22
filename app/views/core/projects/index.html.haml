@@ -69,7 +69,7 @@
 %h3 Процедуры:
 %br
 - @core_projects.each do |core_project|
-  -if core_project.type_project !=1
+  -if core_project.type_project !=1 or boss?
     .strtable
       .strcolumns= image_tag core_project.url_logo, :width => 60, class: 'project_logo'
       .strcolumns
