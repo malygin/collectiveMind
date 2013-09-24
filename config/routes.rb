@@ -1,5 +1,6 @@
 CollectiveMind::Application.routes.draw do
 
+resources :users
 
 namespace :core, :shallow => true do 
   resources :projects do
@@ -241,7 +242,6 @@ end
   
   #match 'frustrations/archive/:id/', :to =>'frustrations#archive'
   match '/signup', :to =>'users#new'
-
   get 'welcome/index'
   
   resources :posts do
