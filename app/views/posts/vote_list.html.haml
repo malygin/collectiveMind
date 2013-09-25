@@ -3,14 +3,24 @@
 %small Фрагменты, которые наберут менее 10% голосов (электоральный барьер), будут исключены из дальнейшего рассмотрения.
 %br
 %small
-	Участники, получат 10 баллов за каждый выбранный фрагмент, который преодолеет электоральный барьер, то есть максимум - 50 баллов.
+    Участники, получат 10 баллов за каждый выбранный фрагмент, который преодолеет электоральный барьер, то есть максимум - 50 баллов.
 %br
-- unless @number_v<1  and not boss?
-	Количество имеющихся голосов - 
-	%span.rate
-		%span#count_vote=@number_v
+- if boss?
+    %b
+        проголосовало
+        =@voted_people
+        из
+        =@all_people
+        Отдано голосов
+        =@votes
+        %br
 
-	= render :partial => 'shared/post_for_vote', :collection => @posts,  :locals => { :path_for_voting => @path_for_voting, :count_voted => @number_v, :votes => @votes}
+- unless @number_v<1  and not boss?
+    Количество имеющихся голосов -
+    %span.rate
+        %span#count_vote=@number_v
+
+    = render :partial => 'shared/post_for_vote', :collection => @posts,  :locals => { :path_for_voting => @path_for_voting, :count_voted => @number_v, :votes => @votes}
 - else
-	%b Спасибо за участие в голосовании!
-	%br
+    %b Спасибо за участие в голосовании!
+    %br
