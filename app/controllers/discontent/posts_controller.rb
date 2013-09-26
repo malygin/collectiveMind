@@ -23,7 +23,7 @@ class Discontent::PostsController < PostsController
     @news = ExpertNews::Post.where(:project_id => @project).first 
     @status = params[:status]
     @aspect = params[:aspect]
-    @aspects = Discontent::Aspect.where(:project_id => @project)
+    @aspects = Discontent::Aspect.where(:project_id => @project, :status => 1)
 end
 
   def index
