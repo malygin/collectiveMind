@@ -19,8 +19,8 @@ module JournalHelper
 			when 'life_tape_post_save'
 				'добавил '+  link_to('запись', life_tape_post_path(project, j.body))				
             
-            when 'discontent_comment_save'
-				'добавил комментарий к '+  link_to('несовершенству', discontent_post_path(project, j.body))
+      when 'discontent_comment_save'
+				'добавил комментарий к '+  link_to('несовершенству', "/project/#{project}/discontent/status/0/aspect/0/posts/#{j.body}")
 			when 'discontent_post_save'
 				'добавил '+  link_to('несовершенство', discontent_post_path(project, j.body))
 			
