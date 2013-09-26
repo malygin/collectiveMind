@@ -17,5 +17,5 @@
 			=Russian::strftime(journal.created_at,"%d %B %k:%M:%S ")
 			%b= journal.user.name_title
 			= journal_parser(journal, @project.id).html_safe
-		=image_tag('dots.png')
+		=image_tag 'dots.png', :width =>'250px;'
 
