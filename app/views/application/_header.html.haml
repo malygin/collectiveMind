@@ -5,8 +5,8 @@
 .top_buttons  
   - if signed_in?
     .greybut
-      = link_to image_tag('edit.png'), edit_user_path(@project, current_user)
-      = link_to current_user.name_title, user_path(@project, current_user), class: "username"
+      = link_to image_tag('edit.png'), "/project/#{@project.id}/users/#{current_user.id}/edit"
+      = link_to current_user.name_title, "/project/#{@project.id}/users/#{current_user.id}", class: "username"
       = link_to " - Выйти", "/signout" , class: "username"
   -else
     %span.blackbut

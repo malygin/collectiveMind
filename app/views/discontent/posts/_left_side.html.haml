@@ -1,14 +1,14 @@
 %ul.leftlink
-	%li= link_to 'Обсуждаются', discontent_posts_path(@project,:status => 0), class: menu_status(0)
+	%li= link_to "Обсуждаются (#{@project.discontent_ongoing_post.count})", discontent_posts_path(@project,:status => 0), class: menu_status(0)
 	%li= link_to 'Архив', discontent_posts_path(@project,:status =>3), class: menu_status(3)
 	-if @project.status == 4
 		%li= link_to 'Голосование', discontent_posts_path(@project,:status =>2), class: menu_status(2)
 	-else
-		%li= link_to 'Принятые', discontent_posts_path(@project,:status =>2), class: menu_status(2)
+		%li= link_to "Принятые (#{@project.discontent_accepted_post.count})", discontent_posts_path(@project,:status =>2), class: menu_status(2)
 
 	- if boss?
 		%li= link_to 'Из проектов и концепций', discontent_posts_path(@project,:status =>5), class: menu_status(5)
-		%li= link_to 'На рассмотрении', discontent_posts_path(@project,:status =>1), class: menu_status(1)
+		%li= link_to "На рассмотрении (#{@project.discontent_for_admin_post.count})", discontent_posts_path(@project,:status =>1), class: menu_status(1)
 
 -unless @journals.nil?
 	.redtitle Активность

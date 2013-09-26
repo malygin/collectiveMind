@@ -2,15 +2,28 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="aa6a5015-3a56-4a58-9b19-a0ad2e76ab80" name="Default" comment="">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/views/core/projects/help_s1.html.haml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/views/core/projects/help_t1.html.haml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/dataSources.ids" afterPath="$PROJECT_DIR$/.idea/dataSources.ids" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/shared/_comment_form.html.haml" afterPath="$PROJECT_DIR$/app/views/shared/_comment_form.html.haml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/discontent/posts/_form.html.haml" afterPath="$PROJECT_DIR$/app/views/discontent/posts/_form.html.haml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/application/_header.html.haml" afterPath="$PROJECT_DIR$/app/views/application/_header.html.haml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/application/_header_no_current_project.html.haml" afterPath="$PROJECT_DIR$/app/views/application/_header_no_current_project.html.haml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/discontent/posts/_left_side.html.haml" afterPath="$PROJECT_DIR$/app/views/discontent/posts/_left_side.html.haml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/assets/stylesheets/application.css.sass" afterPath="$PROJECT_DIR$/app/assets/stylesheets/application.css.sass" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/dataSources.xml" afterPath="$PROJECT_DIR$/.idea/dataSources.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/config/database.yml" afterPath="$PROJECT_DIR$/config/database.yml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/controllers/life_tape/posts_controller.rb" afterPath="$PROJECT_DIR$/app/controllers/life_tape/posts_controller.rb" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/core/projects/help.html.haml" afterPath="$PROJECT_DIR$/app/views/core/projects/help.html.haml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/core/projects/help_t0.html.haml" afterPath="$PROJECT_DIR$/app/views/core/projects/help_t0.html.haml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/helpers/journal_helper.rb" afterPath="$PROJECT_DIR$/app/helpers/journal_helper.rb" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/models/core/project.rb" afterPath="$PROJECT_DIR$/app/models/core/project.rb" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/config/routes.rb" afterPath="$PROJECT_DIR$/config/routes.rb" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/discontent/posts/table.html.haml" afterPath="$PROJECT_DIR$/app/views/discontent/posts/table.html.haml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="collectiveMind.iws" />
     <ignored path=".idea/workspace.xml" />
-    <file path="/Dummy.txt" changelist="aa6a5015-3a56-4a58-9b19-a0ad2e76ab80" time="1380101088274" ignored="false" />
+    <file path="/Dummy.txt" changelist="aa6a5015-3a56-4a58-9b19-a0ad2e76ab80" time="1380124486063" ignored="false" />
     <file path="/boot.rb" changelist="aa6a5015-3a56-4a58-9b19-a0ad2e76ab80" time="1372798651996" ignored="false" />
     <file path="/Gemfile" changelist="aa6a5015-3a56-4a58-9b19-a0ad2e76ab80" time="1374341578097" ignored="false" />
     <file path="/users_controller.rb" changelist="aa6a5015-3a56-4a58-9b19-a0ad2e76ab80" time="1379448985478" ignored="false" />
@@ -21,14 +34,14 @@
     <file path="/post_aspect.rb" changelist="aa6a5015-3a56-4a58-9b19-a0ad2e76ab80" time="1375730129988" ignored="false" />
     <file path="/post.rb" changelist="aa6a5015-3a56-4a58-9b19-a0ad2e76ab80" time="1378975745650" ignored="false" />
     <file path="/show.html.haml" changelist="aa6a5015-3a56-4a58-9b19-a0ad2e76ab80" time="1379274958030" ignored="false" />
-    <file path="/table.html.haml" changelist="aa6a5015-3a56-4a58-9b19-a0ad2e76ab80" time="1373226582471" ignored="false" />
+    <file path="/table.html.haml" changelist="aa6a5015-3a56-4a58-9b19-a0ad2e76ab80" time="1380127384263" ignored="false" />
     <file path="/aspect.rb" changelist="aa6a5015-3a56-4a58-9b19-a0ad2e76ab80" time="1379708114154" ignored="false" />
-    <file path="/application.css.sass" changelist="aa6a5015-3a56-4a58-9b19-a0ad2e76ab80" time="1379789575418" ignored="false" />
+    <file path="/application.css.sass" changelist="aa6a5015-3a56-4a58-9b19-a0ad2e76ab80" time="1380132819418" ignored="false" />
     <file path="/help4.html.haml" changelist="aa6a5015-3a56-4a58-9b19-a0ad2e76ab80" time="1374049565833" ignored="false" />
     <file path="/routes.rb" changelist="aa6a5015-3a56-4a58-9b19-a0ad2e76ab80" time="1379786480689" ignored="false" />
     <file path="/application.rb" changelist="aa6a5015-3a56-4a58-9b19-a0ad2e76ab80" time="1374340905862" ignored="false" />
     <file path="/projects_controller.rb" changelist="aa6a5015-3a56-4a58-9b19-a0ad2e76ab80" time="1374831596131" ignored="false" />
-    <file path="/_form.html.haml" changelist="aa6a5015-3a56-4a58-9b19-a0ad2e76ab80" time="1379693622996" ignored="false" />
+    <file path="/_form.html.haml" changelist="aa6a5015-3a56-4a58-9b19-a0ad2e76ab80" time="1380127145565" ignored="false" />
     <file path="/_post_aspect_form.html.haml" changelist="aa6a5015-3a56-4a58-9b19-a0ad2e76ab80" time="1374349292631" ignored="false" />
     <file path="/20130721105148_create_plan_post_aspects.rb" changelist="aa6a5015-3a56-4a58-9b19-a0ad2e76ab80" time="1374405243513" ignored="false" />
     <file path="/add_aspect.js.haml" changelist="aa6a5015-3a56-4a58-9b19-a0ad2e76ab80" time="1375190721465" ignored="false" />
@@ -41,7 +54,7 @@
     <file path="/posts.js" changelist="aa6a5015-3a56-4a58-9b19-a0ad2e76ab80" time="1374854932842" ignored="false" />
     <file path="/add_new_discontent.js.haml" changelist="aa6a5015-3a56-4a58-9b19-a0ad2e76ab80" time="1375200121269" ignored="false" />
     <file path="/_resolve_discontent.html.haml" changelist="aa6a5015-3a56-4a58-9b19-a0ad2e76ab80" time="1375172377162" ignored="false" />
-    <file path="/_left_side.html.haml" changelist="aa6a5015-3a56-4a58-9b19-a0ad2e76ab80" time="1379694710657" ignored="false" />
+    <file path="/_left_side.html.haml" changelist="aa6a5015-3a56-4a58-9b19-a0ad2e76ab80" time="1380128373649" ignored="false" />
     <file path="/_post_estimate.html.haml" changelist="aa6a5015-3a56-4a58-9b19-a0ad2e76ab80" time="1375388070483" ignored="false" />
     <file path="/20130805085158_add_important_for_estimate_post.rb" changelist="aa6a5015-3a56-4a58-9b19-a0ad2e76ab80" time="1375692789200" ignored="false" />
     <file path="/20130805090704_add_important_for_estimate_post_aspect.rb" changelist="aa6a5015-3a56-4a58-9b19-a0ad2e76ab80" time="1375694198464" ignored="false" />
@@ -57,20 +70,24 @@
     <file path="/index.html.haml" changelist="aa6a5015-3a56-4a58-9b19-a0ad2e76ab80" time="1379843474611" ignored="false" />
     <file path="/knowledge.html.haml" changelist="aa6a5015-3a56-4a58-9b19-a0ad2e76ab80" time="1379186055384" ignored="false" />
     <file path="/journal.rb" changelist="aa6a5015-3a56-4a58-9b19-a0ad2e76ab80" time="1379695010368" ignored="false" />
-    <file path="/journal_helper.rb" changelist="aa6a5015-3a56-4a58-9b19-a0ad2e76ab80" time="1379695260438" ignored="false" />
+    <file path="/journal_helper.rb" changelist="aa6a5015-3a56-4a58-9b19-a0ad2e76ab80" time="1380132021538" ignored="false" />
     <file path="/_user_name.html.haml" changelist="aa6a5015-3a56-4a58-9b19-a0ad2e76ab80" time="1379274098226" ignored="false" />
-    <file path="/_header.html.haml" changelist="aa6a5015-3a56-4a58-9b19-a0ad2e76ab80" time="1379324681225" ignored="false" />
+    <file path="/_header.html.haml" changelist="aa6a5015-3a56-4a58-9b19-a0ad2e76ab80" time="1380128849364" ignored="false" />
     <file path="/_header_no_current_project.html.haml" changelist="aa6a5015-3a56-4a58-9b19-a0ad2e76ab80" time="1379325177203" ignored="false" />
     <file path="/_top_menu.html.haml" changelist="aa6a5015-3a56-4a58-9b19-a0ad2e76ab80" time="1379448763416" ignored="false" />
-    <file path="/help.html.haml" changelist="aa6a5015-3a56-4a58-9b19-a0ad2e76ab80" time="1379947665343" ignored="false" />
+    <file path="/help.html.haml" changelist="aa6a5015-3a56-4a58-9b19-a0ad2e76ab80" time="1380185437337" ignored="false" />
     <file path="/article3.html.haml" changelist="aa6a5015-3a56-4a58-9b19-a0ad2e76ab80" time="1379498796370" ignored="false" />
     <file path="/_comment.html.haml" changelist="aa6a5015-3a56-4a58-9b19-a0ad2e76ab80" time="1379500149670" ignored="false" />
     <file path="/to_expert.html.haml" changelist="aa6a5015-3a56-4a58-9b19-a0ad2e76ab80" time="1379514060255" ignored="false" />
     <file path="/vote_list.html.haml" changelist="aa6a5015-3a56-4a58-9b19-a0ad2e76ab80" time="1380100795397" ignored="false" />
     <file path="/article5.html.haml" changelist="aa6a5015-3a56-4a58-9b19-a0ad2e76ab80" time="1379843713091" ignored="false" />
-    <file path="/help_t0.html.haml" changelist="aa6a5015-3a56-4a58-9b19-a0ad2e76ab80" time="1379843665008" ignored="false" />
+    <file path="/help_t0.html.haml" changelist="aa6a5015-3a56-4a58-9b19-a0ad2e76ab80" time="1380133521214" ignored="false" />
     <file path="/help_s0.html.haml" changelist="aa6a5015-3a56-4a58-9b19-a0ad2e76ab80" time="1379789703865" ignored="false" />
     <file path="/_user.html.haml" changelist="aa6a5015-3a56-4a58-9b19-a0ad2e76ab80" time="1380049960394" ignored="false" />
+    <file path="/project.rb" changelist="aa6a5015-3a56-4a58-9b19-a0ad2e76ab80" time="1380128243635" ignored="false" />
+    <file path="/_comment_form.html.haml" changelist="aa6a5015-3a56-4a58-9b19-a0ad2e76ab80" time="1380132760922" ignored="false" />
+    <file path="/help_t1.html.haml" changelist="aa6a5015-3a56-4a58-9b19-a0ad2e76ab80" time="1380137528306" ignored="false" />
+    <file path="/help_s1.html.haml" changelist="aa6a5015-3a56-4a58-9b19-a0ad2e76ab80" time="1380185171261" ignored="false" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -95,37 +112,19 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="posts_controller.rb" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/controllers/posts_controller.rb">
+      <file leaf-file-name="_header.html.haml" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/views/application/_header.html.haml">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="218" column="6" selection-start="6282" selection-end="6282" vertical-scroll-proportion="0.0">
+            <state line="7" column="96" selection-start="243" selection-end="298" vertical-scroll-proportion="-4.375">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="posts_controller.rb" pinned="false" current="true" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/app/controllers/life_tape/posts_controller.rb">
+      <file leaf-file-name="journal_helper.rb" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/helpers/journal_helper.rb">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="58" column="260" selection-start="2148" selection-end="2148" vertical-scroll-proportion="0.8007737">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="voiting.rb" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/models/life_tape/voiting.rb">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="3" column="4" selection-start="96" selection-end="96" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="vote_list.html.haml" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/views/posts/vote_list.html.haml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="22" column="41" selection-start="775" selection-end="775" vertical-scroll-proportion="-13.75">
+            <state line="24" column="44" selection-start="1079" selection-end="1079" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -134,52 +133,70 @@
       <file leaf-file-name="routes.rb" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/config/routes.rb">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="2" column="0" selection-start="44" selection-end="44" vertical-scroll-proportion="0.0">
+            <state line="35" column="49" selection-start="1174" selection-end="1174" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="_post_for_vote.html.haml" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/views/shared/_post_for_vote.html.haml">
+      <file leaf-file-name="help.html.haml" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/app/views/core/projects/help.html.haml">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="14" column="64" selection-start="550" selection-end="550" vertical-scroll-proportion="-8.75">
+            <state line="34" column="65" selection-start="1414" selection-end="1414" vertical-scroll-proportion="0.20892495">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="_user.html.haml" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/views/users/_user.html.haml">
+      <file leaf-file-name="_error_messages.html.haml" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/views/shared/_error_messages.html.haml">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="2" column="40" selection-start="63" selection-end="63" vertical-scroll-proportion="-1.25">
+            <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="-0.0">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="_user_post.html.haml" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/views/users/_user_post.html.haml">
+      <file leaf-file-name="_comment_form.html.haml" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/views/shared/_comment_form.html.haml">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="1" column="36" selection-start="41" selection-end="41" vertical-scroll-proportion="-0.625">
+            <state line="5" column="53" selection-start="241" selection-end="241" vertical-scroll-proportion="-3.125">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="database.yml" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/config/database.yml">
+      <file leaf-file-name="help_t0.html.haml" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/views/core/projects/help_t0.html.haml">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="6" column="0" selection-start="134" selection-end="188" vertical-scroll-proportion="0.0">
+            <state line="6" column="23" selection-start="255" selection-end="255" vertical-scroll-proportion="-3.75">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="_user_name.html.haml" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/views/users/_user_name.html.haml">
+      <file leaf-file-name="help_t1.html.haml" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/views/core/projects/help_t1.html.haml">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="1" column="33" selection-start="45" selection-end="45" vertical-scroll-proportion="0.0">
+            <state line="47" column="28" selection-start="1890" selection-end="1890" vertical-scroll-proportion="-8.666667">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="help_s1.html.haml" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/views/core/projects/help_s1.html.haml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="14" column="32" selection-start="3016" selection-end="3016" vertical-scroll-proportion="-6.7916665">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="help_s0.html.haml" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/views/core/projects/help_s0.html.haml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="-0.0">
               <folding />
             </state>
           </provider>
@@ -208,22 +225,22 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/app/assets/stylesheets/application.css.sass" />
-        <option value="$PROJECT_DIR$/app/views/core/projects/index.html.haml" />
-        <option value="$PROJECT_DIR$/app/views/core/projects/help_t0.html.haml" />
-        <option value="$PROJECT_DIR$/app/views/core/projects/article5.html.haml" />
-        <option value="$PROJECT_DIR$/app/views/core/projects/help_s0.html.haml" />
-        <option value="$PROJECT_DIR$/app/views/core/projects/help.html.haml" />
-        <option value="$PROJECT_DIR$/app/views/pages/reviews.html.haml" />
-        <option value="$PROJECT_DIR$/config/routes.rb" />
-        <option value="$PROJECT_DIR$/app/views/users/_user_name.html.haml" />
-        <option value="$PROJECT_DIR$/app/views/users/_user.html.haml" />
-        <option value="$PROJECT_DIR$/app/views/users/_user_post.html.haml" />
-        <option value="$PROJECT_DIR$/app/models/life_tape/voiting.rb" />
-        <option value="$PROJECT_DIR$/app/views/posts/vote_list.html.haml" />
-        <option value="$PROJECT_DIR$/app/views/shared/_post_for_vote.html.haml" />
-        <option value="$PROJECT_DIR$/config/database.yml" />
         <option value="$PROJECT_DIR$/app/controllers/life_tape/posts_controller.rb" />
+        <option value="$PROJECT_DIR$/config/database.yml" />
+        <option value="$PROJECT_DIR$/app/views/discontent/posts/_form.html.haml" />
+        <option value="$PROJECT_DIR$/app/views/discontent/posts/table.html.haml" />
+        <option value="$PROJECT_DIR$/app/models/core/project.rb" />
+        <option value="$PROJECT_DIR$/app/views/discontent/posts/_left_side.html.haml" />
+        <option value="$PROJECT_DIR$/app/views/application/_header.html.haml" />
+        <option value="$PROJECT_DIR$/app/views/application/_header_no_current_project.html.haml" />
+        <option value="$PROJECT_DIR$/app/helpers/journal_helper.rb" />
+        <option value="$PROJECT_DIR$/app/views/shared/_comment_form.html.haml" />
+        <option value="$PROJECT_DIR$/app/assets/stylesheets/application.css.sass" />
+        <option value="$PROJECT_DIR$/app/views/core/projects/help_t0.html.haml" />
+        <option value="$PROJECT_DIR$/app/views/core/projects/help_t1.html.haml" />
+        <option value="$PROJECT_DIR$/config/routes.rb" />
+        <option value="$PROJECT_DIR$/app/views/core/projects/help_s1.html.haml" />
+        <option value="$PROJECT_DIR$/app/views/core/projects/help.html.haml" />
       </list>
     </option>
   </component>
@@ -265,6 +282,34 @@
       <sortByType />
     </navigator>
     <panes>
+      <pane id="RailsProjectView">
+        <subPane>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="collectiveMind" />
+              <option name="myItemType" value="org.jetbrains.plugins.ruby.rails.projectView.v2.nodes.RailsProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="collectiveMind" />
+              <option name="myItemType" value="org.jetbrains.plugins.ruby.rails.projectView.v2.nodes.RailsModuleNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="collectiveMind" />
+              <option name="myItemType" value="org.jetbrains.plugins.ruby.rails.projectView.v2.nodes.RailsProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="collectiveMind" />
+              <option name="myItemType" value="org.jetbrains.plugins.ruby.rails.projectView.v2.nodes.RailsModuleNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Views" />
+              <option name="myItemType" value="org.jetbrains.plugins.ruby.rails.projectView.v2.nodes.folders.UnclassifiedViewsFolderNode" />
+            </PATH_ELEMENT>
+          </PATH>
+        </subPane>
+      </pane>
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -307,11 +352,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="config" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="environments" />
+              <option name="myItemId" value="app" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -326,6 +367,36 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="views" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="collectiveMind" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="collectiveMind" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="views" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="core" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="projects" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -345,34 +416,6 @@
             <PATH_ELEMENT>
               <option name="myItemId" value="assets" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-        </subPane>
-      </pane>
-      <pane id="RailsProjectView">
-        <subPane>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="collectiveMind" />
-              <option name="myItemType" value="org.jetbrains.plugins.ruby.rails.projectView.v2.nodes.RailsProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="collectiveMind" />
-              <option name="myItemType" value="org.jetbrains.plugins.ruby.rails.projectView.v2.nodes.RailsModuleNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="collectiveMind" />
-              <option name="myItemType" value="org.jetbrains.plugins.ruby.rails.projectView.v2.nodes.RailsProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="collectiveMind" />
-              <option name="myItemType" value="org.jetbrains.plugins.ruby.rails.projectView.v2.nodes.RailsModuleNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Views" />
-              <option name="myItemType" value="org.jetbrains.plugins.ruby.rails.projectView.v2.nodes.folders.UnclassifiedViewsFolderNode" />
             </PATH_ELEMENT>
           </PATH>
         </subPane>
@@ -443,15 +486,15 @@
     <property name="FileHistory.git4idea.history.GitHistoryProvider_flatWidth0" value="108" />
     <property name="FileHistory.git4idea.history.GitHistoryProvider_flatWidth1" value="109" />
     <property name="options.splitter.main.proportions" value="0.3" />
-    <property name="recentsLimit" value="5" />
-    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatOrder1" value="1" />
     <property name="FileHistory.git4idea.history.GitHistoryProvider_treeWidth0" value="108" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatOrder1" value="1" />
+    <property name="recentsLimit" value="5" />
     <property name="FileHistory.git4idea.history.GitHistoryProvider_flatOrder0" value="0" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/../stuff" />
-    <property name="RakeTaksPopup.undocumentedIncluded" value="false" />
     <property name="FileHistory.git4idea.history.GitHistoryProvider_flatWidth2" value="113" />
-    <property name="FileHistory.git4idea.history.GitHistoryProvider_treeWidth3" value="907" />
+    <property name="RakeTaksPopup.undocumentedIncluded" value="false" />
     <property name="FileHistory.git4idea.history.GitHistoryProvider_flatWidth3" value="907" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_treeWidth3" value="907" />
     <property name="FileHistory.git4idea.history.GitHistoryProvider_treeWidth2" value="113" />
     <property name="GoToClass.includeJavaFiles" value="false" />
     <property name="FileHistory.git4idea.history.GitHistoryProvider_treeWidth1" value="109" />
@@ -465,9 +508,9 @@
     <property name="FileHistory.git4idea.history.GitHistoryProvider_treeOrder1" value="1" />
     <property name="FileHistory.git4idea.history.GitHistoryProvider_treeOrder2" value="2" />
     <property name="options.lastSelected" value="fileTemplates" />
-    <property name="dynamic.classpath" value="false" />
-    <property name="options.searchVisible" value="true" />
     <property name="Ruby.ViewRefParam.DefaultExtension" value="html.erb" />
+    <property name="options.searchVisible" value="true" />
+    <property name="dynamic.classpath" value="false" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
@@ -506,28 +549,6 @@
       <ConfigurationWrapper RunnerId="RubyRunner" />
       <method />
     </configuration>
-    <configuration default="true" type="CommandRunConfigurationType" factoryName="Gem Command">
-      <module name="" />
-      <COMMAND_RUN_CONFIGURATION NAME="RUBY_ARGS" VALUE="-e $stdout.sync=true;$stderr.sync=true;load($0=ARGV.shift)" />
-      <COMMAND_RUN_CONFIGURATION NAME="WORK DIR" VALUE="" />
-      <COMMAND_RUN_CONFIGURATION NAME="SHOULD_USE_SDK" VALUE="false" />
-      <COMMAND_RUN_CONFIGURATION NAME="ALTERN_SDK_NAME" VALUE="" />
-      <COMMAND_RUN_CONFIGURATION NAME="myPassParentEnvs" VALUE="true" />
-      <envs />
-      <EXTENSION ID="BundlerRunConfigurationExtension" bundleExecEnabled="false" />
-      <EXTENSION ID="JRubyRunConfigurationExtension" />
-      <EXTENSION ID="RubyCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" track_test_folders="true" runner="rcov">
-        <COVERAGE_PATTERN ENABLED="true">
-          <PATTERN REGEXPS="/.rvm/" INCLUDED="false" />
-        </COVERAGE_PATTERN>
-      </EXTENSION>
-      <EXTENSION ID="org.jetbrains.plugins.ruby.motion.run.MotionSimulatorRunExtension" />
-      <COMMAND_CONFIG_SETTINGS_ID NAME="GEM_NAME" VALUE="" />
-      <COMMAND_CONFIG_SETTINGS_ID NAME="EXECUTABLE_NAME" VALUE="" />
-      <COMMAND_CONFIG_SETTINGS_ID NAME="EXECUTABLE_ARGS" VALUE="" />
-      <COMMAND_CONFIG_SETTINGS_ID NAME="WORKING_DIR" VALUE="" />
-      <method />
-    </configuration>
     <configuration default="true" type="RakeRunConfigurationType" factoryName="Rake">
       <module name="" />
       <RAKE_RUN_CONFIG_SETTINGS_ID NAME="RUBY_ARGS" VALUE="-e $stdout.sync=true;$stderr.sync=true;load($0=ARGV.shift)" />
@@ -550,6 +571,28 @@
       <RAKE_RUN_CONFIG_SETTINGS_ID NAME="RAKE_TASK_OPTION_TRACE" VALUE="false" />
       <RAKE_RUN_CONFIG_SETTINGS_ID NAME="RAKE_TASK_OPTION_DRYRUN" VALUE="false" />
       <RAKE_RUN_CONFIG_SETTINGS_ID NAME="RAKE_TASK_OPTION_PREREQS" VALUE="false" />
+      <method />
+    </configuration>
+    <configuration default="true" type="CommandRunConfigurationType" factoryName="Gem Command">
+      <module name="" />
+      <COMMAND_RUN_CONFIGURATION NAME="RUBY_ARGS" VALUE="-e $stdout.sync=true;$stderr.sync=true;load($0=ARGV.shift)" />
+      <COMMAND_RUN_CONFIGURATION NAME="WORK DIR" VALUE="" />
+      <COMMAND_RUN_CONFIGURATION NAME="SHOULD_USE_SDK" VALUE="false" />
+      <COMMAND_RUN_CONFIGURATION NAME="ALTERN_SDK_NAME" VALUE="" />
+      <COMMAND_RUN_CONFIGURATION NAME="myPassParentEnvs" VALUE="true" />
+      <envs />
+      <EXTENSION ID="BundlerRunConfigurationExtension" bundleExecEnabled="false" />
+      <EXTENSION ID="JRubyRunConfigurationExtension" />
+      <EXTENSION ID="RubyCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" track_test_folders="true" runner="rcov">
+        <COVERAGE_PATTERN ENABLED="true">
+          <PATTERN REGEXPS="/.rvm/" INCLUDED="false" />
+        </COVERAGE_PATTERN>
+      </EXTENSION>
+      <EXTENSION ID="org.jetbrains.plugins.ruby.motion.run.MotionSimulatorRunExtension" />
+      <COMMAND_CONFIG_SETTINGS_ID NAME="GEM_NAME" VALUE="" />
+      <COMMAND_CONFIG_SETTINGS_ID NAME="EXECUTABLE_NAME" VALUE="" />
+      <COMMAND_CONFIG_SETTINGS_ID NAME="EXECUTABLE_ARGS" VALUE="" />
+      <COMMAND_CONFIG_SETTINGS_ID NAME="WORKING_DIR" VALUE="" />
       <method />
     </configuration>
     <configuration default="true" type="RailsRunConfigurationType" factoryName="Rails">
@@ -675,13 +718,6 @@
       <RTEST_RUN_CONFIG_SETTINGS_ID NAME="RUNNER_OPTIONS" VALUE="" />
       <method />
     </configuration>
-    <configuration default="true" type="JavascriptDebugSession" factoryName="Remote" singleton="true">
-      <JSRemoteDebuggerConfigurationSettings>
-        <option name="engineId" value="embedded" />
-        <option name="fileUrl" />
-      </JSRemoteDebuggerConfigurationSettings>
-      <method />
-    </configuration>
     <configuration default="true" type="CucumberRunConfigurationType" factoryName="Cucumber">
       <predefined_log_file id="RUBY_CUCUMBER" enabled="true" />
       <module name="" />
@@ -715,6 +751,13 @@
       <CUCUMBER_RUN_CONFIG_SETTINGS_ID NAME="CUCUMBER_RUNNER_PATH" VALUE="" />
       <CUCUMBER_RUN_CONFIG_SETTINGS_ID NAME="USE_CUSTOM_RUNNER" VALUE="false" />
       <CUCUMBER_RUN_CONFIG_SETTINGS_ID NAME="SETTINGS_VERSION" VALUE="2" />
+      <method />
+    </configuration>
+    <configuration default="true" type="JavascriptDebugSession" factoryName="Remote" singleton="true">
+      <JSRemoteDebuggerConfigurationSettings>
+        <option name="engineId" value="embedded" />
+        <option name="fileUrl" />
+      </JSRemoteDebuggerConfigurationSettings>
       <method />
     </configuration>
     <configuration default="true" type="com.intellij.persistence.run.ConsoleRunConfigurationType" factoryName="Query Language Console">
@@ -1037,7 +1080,11 @@
       <created>1380101090684</created>
       <updated>1380101090684</updated>
     </task>
-    <option name="localTasksCounter" value="42" />
+    <task id="LOCAL-00042" summary="voting information for boss">
+      <created>1380101623055</created>
+      <updated>1380101623055</updated>
+    </task>
+    <option name="localTasksCounter" value="43" />
     <servers />
   </component>
   <component name="TodoView" selected-index="0">
@@ -1064,13 +1111,12 @@
     <frame x="0" y="22" width="1280" height="701" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32781458" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32838285" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3294702" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32901135" sideWeight="0.49006623" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="true" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.2974068" sideWeight="0.49006623" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.50993377" sideWeight="0.49957302" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.30226904" sideWeight="0.4884106" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.5115894" sideWeight="0.49957302" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3979764" sideWeight="0.500427" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4240924" sideWeight="0.49699572" order="2" side_tool="false" content_ui="tabs" />
@@ -1079,6 +1125,7 @@
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32838285" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32781458" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.39966273" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
@@ -1180,101 +1227,10 @@
           <option name="timeStamp" value="15" />
         </line-breakpoint>
       </breakpoints>
-      <option name="time" value="78" />
+      <option name="time" value="79" />
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/app/views/core/projects/help_s0.html.haml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="4" column="0" selection-start="115" selection-end="115" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/assets/stylesheets/application.css.sass">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="33" column="71" selection-start="481" selection-end="481" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/views/pages/result.html.haml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/views/pages/reviews.html.haml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="10" column="0" selection-start="1090" selection-end="1090" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/controllers/users_controller.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="8" column="0" selection-start="265" selection-end="265" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/views/users/new.html.haml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="2" column="0" selection-start="33" selection-end="33" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/config/routes.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="2" column="0" selection-start="44" selection-end="44" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/views/users/_user_name.html.haml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="1" column="33" selection-start="45" selection-end="45" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/views/users/_user_post.html.haml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="1" column="36" selection-start="41" selection-end="41" vertical-scroll-proportion="-0.625">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/controllers/posts_controller.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="218" column="6" selection-start="6282" selection-end="6282" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/models/life_tape/voiting.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="3" column="4" selection-start="96" selection-end="96" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/views/users/_user.html.haml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="2" column="40" selection-start="63" selection-end="63" vertical-scroll-proportion="-1.25">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/views/shared/_post_for_vote.html.haml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="14" column="64" selection-start="550" selection-end="550" vertical-scroll-proportion="-8.75">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/views/posts/vote_list.html.haml">
       <provider selected="true" editor-type-id="text-editor">
         <state line="22" column="41" selection-start="775" selection-end="775" vertical-scroll-proportion="-13.75">
@@ -1282,16 +1238,107 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/config/database.yml">
+    <entry file="file://$PROJECT_DIR$/app/views/shared/_post.html.haml">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="6" column="0" selection-start="134" selection-end="188" vertical-scroll-proportion="0.0">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/controllers/life_tape/posts_controller.rb">
+    <entry file="file://$PROJECT_DIR$/app/views/users/_user_post.html.haml">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="58" column="260" selection-start="2148" selection-end="2148" vertical-scroll-proportion="0.8007737">
+        <state line="1" column="78" selection-start="39" selection-end="81" vertical-scroll-proportion="-0.625">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/views/application/_header_no_current_project.html.haml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="17" column="101" selection-start="570" selection-end="570" vertical-scroll-proportion="-10.625">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/views/application/_left_side.html.haml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/views/application/_header.html.haml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="7" column="96" selection-start="243" selection-end="298" vertical-scroll-proportion="-4.375">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/helpers/journal_helper.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="24" column="44" selection-start="1079" selection-end="1079" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/views/shared/_error_messages.html.haml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/assets/stylesheets/application.css.sass">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="735" column="16" selection-start="11316" selection-end="11316" vertical-scroll-proportion="0.51619434">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/views/shared/_comment_form.html.haml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="5" column="53" selection-start="241" selection-end="241" vertical-scroll-proportion="-3.125">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/views/core/projects/help_s0.html.haml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/views/core/projects/help_t0.html.haml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="6" column="23" selection-start="255" selection-end="255" vertical-scroll-proportion="-3.75">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/views/core/projects/help_t1.html.haml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="47" column="28" selection-start="1890" selection-end="1890" vertical-scroll-proportion="-8.666667">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/config/routes.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="35" column="49" selection-start="1174" selection-end="1174" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/views/core/projects/help_s1.html.haml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="14" column="32" selection-start="3016" selection-end="3016" vertical-scroll-proportion="-6.7916665">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/views/core/projects/help.html.haml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="34" column="65" selection-start="1414" selection-end="1414" vertical-scroll-proportion="0.20892495">
           <folding />
         </state>
       </provider>

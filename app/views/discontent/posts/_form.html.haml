@@ -1,3 +1,9 @@
+- unless @replace_post.nil?
+  %br
+  =@replace_post.show_content.html_safe
+  %br
+  %br
+.success Если вы затрудняетесь правильно разбить ваше несовершенство, - добавляейте его так, как вам подсказывает интуиция. Если вы ошибетесь - наши модераторы помогут вам его исправить.
 = form_for  @post, :url => {:project => @project.id, :replace_id => @replace_post.nil? ? nil : @replace_post.id , :action => @post.persisted? ? 'update' : 'create'},   :html => { :class => 'new_or_edit' }do |f|
   -if @post.errors.any?
     #error_explanation
@@ -7,14 +13,19 @@
           %li= msg
 
   .field
-    = f.label 'что'
+    = f.label 'ЧТО вас не устраивает?'
     = f.text_area :content
+    .timestamp - отрицательное действие, явление, установление, черта...
   .field
-    = f.label 'когда'
+    = f.label 'КОГДА это происходит?'
     = f.text_area :when
+    .timestamp - во время какого события, мероприятия, процесса, ситуации...
+
   .field
-    = f.label 'где'
+    = f.label 'ГДЕ?'
     = f.text_area :where
+    .timestamp -	место, организация, общность, в которой это происходит.
+
 
   = select_tag 'aspect_id', options_from_collection_for_select(@aspects, "id", "content", @post.aspect.nil? ? 0 :@post.aspect.id), :prompt => "Выберите фрагмент"  
   = select_tag 'style', options_for_select({ "отсутствующий позитив" => "0", "имеющийся негатив" => "1" }, @post.style), :prompt => "Выберите тип"

@@ -20,9 +20,9 @@ module JournalHelper
 				'добавил '+  link_to('запись', life_tape_post_path(project, j.body))				
             
             when 'discontent_comment_save'
-				'добавил комментарий к '+  link_to('недовольству', discontent_post_path(project, j.body))
+				'добавил комментарий к '+  link_to('несовершенству', discontent_post_path(project, j.body))
 			when 'discontent_post_save'
-				'добавил '+  link_to('недовольство', discontent_post_path(project, j.body))				
+				'добавил '+  link_to('несовершенство', discontent_post_path(project, j.body))
 			
 			when 'concept_post_update'
 				'отредактировал '+  link_to('концепцию', concept_post_path(j.body))

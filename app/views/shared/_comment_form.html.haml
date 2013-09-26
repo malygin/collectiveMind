@@ -3,6 +3,6 @@
 		= render 'shared/error_messages', :object =>f.object
 		%label Ваш комментарий
 		.field
-			=f.text_area :content
+			=f.text_area :content, :class => 'comment'
 		.action
 			=f.submit '', :id  => "Send"
