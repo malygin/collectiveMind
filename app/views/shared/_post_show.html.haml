@@ -5,7 +5,15 @@
     = render 'users/user_name', :user => post.user, :created_at => post.created_at
     %p
       %br=simple_format(post.show_content)
+      -if post.class.method_defined? :style
+        Тип:
+        %b=discontent_style_name(post.style)
+        %br
+        Фрагмент:
+        %b=post.aspect.content
+
    
     = render 'shared/post_social_bar', :post => post
 
 = render 'shared/post_edit_bar', :post => post
+

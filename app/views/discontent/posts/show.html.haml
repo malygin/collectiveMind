@@ -5,5 +5,6 @@
 - if @post.status == 2 
   = link_to 'Переопределяем', :action => 'new', :project => @project, :replace_id => @post.id
 = render 'shared/post_show', :post => @post
+%b= discontent_style_name(@post.style)
 
 
