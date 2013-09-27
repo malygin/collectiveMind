@@ -6,6 +6,7 @@
     %p
       %br=simple_format(post.show_content)
       -if post.class.method_defined? :style
+
         Тип:
         %b=discontent_style_name(post.style)
         %br

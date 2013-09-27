@@ -7,6 +7,9 @@
             = trim_string(post.content)
             %br
             %br
+            -unless post.post.nil?
+                %span.rate Замещает принятое
+            %br
             Тип:
             %b=discontent_style_name(post.style)
             %br
