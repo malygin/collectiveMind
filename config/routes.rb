@@ -40,6 +40,7 @@ scope '/project/:project' do
       put :forecast_concept
       put :forecast_plan
       match 'add_score/:score' => 'users#add_score'
+      match 'add_score_essay/:score' => 'users#add_score_essay'
     end
   end
 
