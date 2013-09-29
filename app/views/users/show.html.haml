@@ -31,7 +31,8 @@
 %br
 %h1 Идеи
 - unless @user.life_tape_posts.empty?
-    = render @user.life_tape_posts
+    -#= render :partial => 'shared/post', :collection =>  @user.life_tape_posts
+
 -else
     Пока не добавлено
 %h1 Концепции
