@@ -28,17 +28,17 @@
         =Russian::strftime(journal.created_at,"%d %B %k:%M:%S ")
         %b= journal.user.name_title
         = journal_parser(journal, @project.id).html_safe
-/ %br
-/ %h1 Идеи
-/ - unless @user.life_tape_posts.empty?
-/ 	= render @user.life_tape_posts
-/ -else
-/ 	Пока не добавлено
-/ %h1 Концепции
-/ - unless @user.concept_posts.empty?
-/ 	= render @user.concept_posts
-/ %h1 Проекты
-/ Пока не добавлено
+%br
+%h1 Идеи
+- unless @user.life_tape_posts.empty?
+    = render @user.life_tape_posts
+-else
+    Пока не добавлено
+%h1 Концепции
+- unless @user.concept_posts.empty?
+    = render @user.concept_posts
+%h1 Проекты
+Пока не добавлено
 
 
 

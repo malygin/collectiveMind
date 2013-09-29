@@ -25,8 +25,16 @@ module JournalHelper
 				'добавил комментарий к '+  link_to('несовершенству', "/project/#{project}/discontent/status/0/aspect/0/posts/#{j.body}")
 			when 'discontent_post_save'
 				'добавил '+  link_to('несовершенство', discontent_post_path(project, j.body))
-			
-			when 'concept_post_update'
+      when 'discontent_post_revision'
+        'отправил на доработку ' +link_to('несовершенство', discontent_post_path(project,j.body))
+      when 'discontent_post_acceptance'
+        'принял ' +link_to('несовершенство', discontent_post_path(project,j.body))
+      when 'discontent_post_rejection'
+        'отклонил ' +link_to('несовершенство', discontent_post_path(project,j.body))
+      when 'discontent_post_to_expert'
+        'отправил эксперту ' +link_to('несовершенство', discontent_post_path(project,j.body))
+
+      when 'concept_post_update'
 				'отредактировал '+  link_to('концепцию', concept_post_path(j.body))
 			when 'question_post_save'
 				'задал '+  link_to('вопрос', question_post_path(project, j.body))		

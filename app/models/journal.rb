@@ -22,6 +22,7 @@ class Journal < ActiveRecord::Base
  discontent_post_save
  discontent_comment_save
  discontent_post_update
+ discontent_post_to_expert
  life_tape_post_save
  life_tape_comment_save
  concept_post_update

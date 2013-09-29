@@ -6,15 +6,15 @@
         %p
             = trim_string(post.content)
             %br
-            %br
             -unless post.post.nil?
                 %span.rate Замещает принятое
             %br
             Тип:
             %b=discontent_style_name(post.style)
-            %br
-            Фрагмент:
-            %b=post.aspect.content
+            - unless post.aspect.nil?
+                %br
+                Фрагмент:
+                %b=post.aspect.content
             = link_to "Подробнее",  {:action => "show", :project => @project, :id => post.id}, class: "more"
         - if post.user == current_user
             %br

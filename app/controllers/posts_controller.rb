@@ -265,8 +265,7 @@ def index
   end 
 
   def save_note(params, status, message, type_event)
-    puts '______________________________'
-    puts params
+
     post = current_model.find(params[:id])
     if !params[:concept_post_note].nil? and params[:concept_post_note][:content]!= ''
       @note = note_model.new(params[:concept_post_note])
@@ -275,29 +274,29 @@ def index
       @note.save
     end
     post.update_column(:status, status)
-    # current_user.journals.build(:type_event=>type_event, :body=>concept.id).save!
+    current_user.journals.build(:type_event=>type_event,  :project => Core::Project.find(params[:project]), :body=>post.id).save!
     flash[:notice]=message
     post
   end
 
   def to_expert_save
-    save_note(params, 1, 'Отправлено эксперту!','concept_post_to_expert' )
+    save_note(params, 1, 'Отправлено эксперту!','discontent_post_to_expert' )
     redirect_to  action: "index"    
   end
 
   def expert_rejection_save
-    save_note(params, 3, 'Отклонено!','concept_post_rejection' )
+    save_note(params, 3, 'Отклонено!','discontent_post_rejection' )
     redirect_to  action: "index"
   end
 
   def expert_acceptance_save
-    concept = save_note(params, 2, 'Принято!','concept_post_acceptance' )
+    concept = save_note(params, 2, 'Принято!','discontent_post_acceptance' )
     # concept.user.update_column(:score, concept.user.score + 200)
     redirect_to  action: "index"
   end
 
   def expert_revision_save
-    save_note(params, 0, 'Отправлена на доработку!','concept_post_revision' )
+    save_note(params, 0, 'Отправлена на доработку!','discontent_post_revision' )
     redirect_to  action: "index"
   end
 

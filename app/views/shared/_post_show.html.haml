@@ -9,9 +9,10 @@
 
         Тип:
         %b=discontent_style_name(post.style)
-        %br
-        Фрагмент:
-        %b=post.aspect.content
+        - unless post.aspect.nil?
+          %br
+          Фрагмент:
+          %b=post.aspect.content
 
    
     = render 'shared/post_social_bar', :post => post
