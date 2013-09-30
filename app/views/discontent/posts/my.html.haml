@@ -1,0 +1,22 @@
+-#= link_to image_tag('add_discontent.png'), url_for(:action => 'new')
+%h1 Несовершенства, которые можно оптравлять эксперту
+-if @posts.empty?
+ Таких пока нет
+= render  @posts
+
+%h1 Несовершенства, которые еще нельзя отправлять
+-if @posts2.empty?
+ Таких пока нет
+= render  @posts2
+
+%h1 Несовершенства на рассмотрении
+-if @review_posts.empty?
+ Таких пока нет
+= render  @review_posts
+
+%h1 Принятые Несовершенства
+-if @accepted_posts.empty?
+ Таких пока нет
+= render  @accepted_posts
+
+-#= will_paginate @posts

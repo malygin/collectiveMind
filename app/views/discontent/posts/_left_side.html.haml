@@ -5,6 +5,8 @@
         = link_to 'подробнее',  expert_news_post_path(@project, @news)
 %ul.leftlink
     %li
+        = link_to "Добавлены мной (#{current_user.discontent_posts.for_project(@project.id).count})", discontent_my_path(@project,:status => 6), class: menu_status(6)
+    %li
         %b
             = link_to "Обсуждаются (#{@project.discontent_ongoing_post.count})", discontent_posts_path(@project,:status => 0), class: menu_status(0)
     %li= link_to 'Архив', discontent_posts_path(@project,:status =>3), class: menu_status(3)

@@ -76,9 +76,11 @@ scope '/project/:project' do
     resources :aspects 
 
     get 'vote_list'  => 'posts#vote_list'
-    put 'vote/:post_id'  => 'posts#vote'    
+    put 'vote/:post_id'  => 'posts#vote'
+
     scope '/status/:status/aspect/:aspect',  :defaults => {:status => 0, :aspect => 0} do
-      get 'replace/:replace_id/posts/new'  => 'posts#new' 
+      get 'replace/:replace_id/posts/new'  => 'posts#new'
+      get 'my'   => 'posts#my'
       resources :posts do
             member do
                 put :add_comment

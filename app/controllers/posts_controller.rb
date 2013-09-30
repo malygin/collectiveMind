@@ -290,8 +290,13 @@ def index
   end
 
   def expert_acceptance_save
-    concept = save_note(params, 2, 'Принято!','discontent_post_acceptance' )
-    # concept.user.update_column(:score, concept.user.score + 200)
+    post = save_note(params, 2, 'Принято!','discontent_post_acceptance' )
+    if post.post.nil?
+      post.user.update_column(:score, post.user.score + 100)
+    else
+      post.user.update_column(:score, post.user.score + 200)
+      post.post.update_column(:status, 3)
+    end
     redirect_to  action: "index"
   end
 

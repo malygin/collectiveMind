@@ -23,6 +23,9 @@ class Journal < ActiveRecord::Base
  discontent_comment_save
  discontent_post_update
  discontent_post_to_expert
+ discontent_post_acceptance
+ discontent_post_rejection
+ discontent_post_revision
  life_tape_post_save
  life_tape_comment_save
  concept_post_update
