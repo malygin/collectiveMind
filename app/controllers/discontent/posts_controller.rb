@@ -71,5 +71,7 @@ end
     @posts2 = current_model.where(:project_id => @project, :status => 0, :user_id => current_user).where("created_at >= ?", 2.day.ago)
     @review_posts = current_model.where(:project_id => @project, :status => 1, :user_id => current_user)
     @accepted_posts = current_model.where(:project_id => @project, :status => 2, :user_id => current_user)
+    render 'my', :layout => 'application_two_column'
+
   end
 end

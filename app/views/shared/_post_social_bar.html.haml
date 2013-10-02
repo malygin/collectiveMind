@@ -1,6 +1,6 @@
 .social 
 	- if signed_in? and not post.users.include?(current_user)
-		=link_to "#{post.users.count}",  {:action => :plus, :project => @project, :id => post.id}, :id => post.id,:remote => true, :method => :put, class: "counter"
+		=link_to "#{post.users.count}",  {:controller => post.class.name.underscore.pluralize ,:action => :plus, :project => @project,:status=>0, :aspect=>0, :id => post.id}, :id => post.id,:remote => true, :method => :put, class: "counter"
 	-else
 		=post.users.count
 	=image_tag "like.png"

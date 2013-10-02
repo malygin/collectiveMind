@@ -15,7 +15,7 @@
                 %br
                 Фрагмент:
                 %b=post.aspect.content
-            = link_to "Подробнее",  {:action => "show", :project => @project, :id => post.id}, class: "more"
+            = link_to "Подробнее",  {:controller => post.class.name.underscore.pluralize, :status=>0, :aspect=>0, :action => "show", :project => @project, :id => post.id}, class: "more"
         - if post.user == current_user
             %br
             / = link_to 'Редактировать', {:action => :edit, :project => @project, :id => post.id}

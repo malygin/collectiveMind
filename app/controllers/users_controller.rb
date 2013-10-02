@@ -14,7 +14,8 @@ class UsersController < ApplicationController
 		@user = User.find(params[:id])
     @project = Core::Project.find(params[:project])
     @journals = Journal.events_for_user_show @project.id, @user.id, 30
-
+    @status = 0
+    @aspect =0
   end
 
 	def edit 

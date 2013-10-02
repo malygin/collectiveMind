@@ -8,8 +8,9 @@ module BasePost  extend ActiveSupport::Concern
     has_many :comments
    	has_many :post_votings
    	has_many :users, :through => :post_votings
- 
- 	  validates :content, :presence => true
+    scope :for_project, lambda { |project| where(:project_id => project) }
+
+    validates :content, :presence => true
     default_scope  :order => 'created_at DESC'
 
     def show_content

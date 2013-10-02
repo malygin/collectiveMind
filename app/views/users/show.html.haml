@@ -21,25 +21,27 @@
         - if current_user == @user
             =link_to 'редактировать информацию о себе', edit_user_path(@project, current_user), class: "name"
 
+#tabs
+    %ul
+        %li=link_to "Активность",'#tabs-1'
+        %li=link_to "Идеи  (#{@user.life_tape_posts.for_project(@project.id).count})",'#tabs-2'
+        %li=link_to "Несовершенства (#{@user.discontent_posts.for_project(@project.id).count})",'#tabs-3'
+    #tabs-1
+        - @journals.each do |journal|
+            %p.righttext
+                =Russian::strftime(journal.created_at,"%d %B %k:%M:%S ")
+                %b= journal.user.name_title
+                = journal_parser(journal, @project.id).html_safe
+    #tabs-2
+        - unless @user.life_tape_posts.for_project(@project.id).empty?
+            = render :partial => 'shared/post', :collection =>  @user.life_tape_posts.for_project(@project.id)
 
-.redtitle Активность
-- @journals.each do |journal|
-    %p.righttext
-        =Russian::strftime(journal.created_at,"%d %B %k:%M:%S ")
-        %b= journal.user.name_title
-        = journal_parser(journal, @project.id).html_safe
-%br
-%h1 Идеи
-- unless @user.life_tape_posts.empty?
-    -#= render :partial => 'shared/post', :collection =>  @user.life_tape_posts
+    #tabs-3
+        - unless @user.discontent_posts.for_project(@project.id).empty?
+            = render   @user.discontent_posts.for_project(@project.id)
 
--else
-    Пока не добавлено
-%h1 Концепции
-- unless @user.concept_posts.empty?
-    = render @user.concept_posts
-%h1 Проекты
-Пока не добавлено
+
+
 
 
 
