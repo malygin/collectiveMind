@@ -46,7 +46,7 @@ gem 'jquery-rails'
 gem 'jquery-ui-rails'
 gem 'paperclip'
 gem 'aws-sdk'
-
+gem "highcharts-rails", "~> 3.0.0"
 gem 'json'
 gem 'will_paginate', '~> 3.0.0'
 gem 'faker'

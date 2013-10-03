@@ -150,6 +150,8 @@ class UsersController < ApplicationController
 		user = User.find(params[:id])
 		if boss?
 			user.update_column(:score, user.score + params[:score].to_i)
+      user.update_column(:score_a, user.score_a + params[:score].to_i)
+
       @project = Core::Project.find(params[:project])
       user.journals.build(:type_event=>'add_score', :project => @project, :body=>params[:score]).save
     end
@@ -160,6 +162,7 @@ class UsersController < ApplicationController
 		user = User.find(params[:id])
 		if boss?
 			user.update_column(:score, user.score + params[:score].to_i)
+			user.update_column(:score_a, user.score_a + params[:score].to_i)
       @project = Core::Project.find(params[:project])
       user.journals.build(:type_event=>'add_score_essay', :project => @project, :body=>params[:score]).save
     end

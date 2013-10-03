@@ -20,6 +20,26 @@
         %br
         - if current_user == @user
             =link_to 'редактировать информацию о себе', edit_user_path(@project, current_user), class: "name"
+%table
+    %tr
+        %td
+            #pie_chart(style="width: 500px;")
+        %td
+            Всего очков:
+            %span.rate#score=@user.score
+            %br
+            Как аналитик:
+            %span.rate#score_a=@user.score_a
+            %br
+            Как генератор идей:
+            %span.rate#score_g=@user.score_g
+            %br
+            Как оценщик:
+            %span.rate#score_o=@user.score_o
+            %br
+            %br
+            %b Награды:
+            пока нет ни одной
 
 #tabs
     %ul
