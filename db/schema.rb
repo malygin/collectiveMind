@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130826191328) do
+ActiveRecord::Schema.define(:version => 20131003084735) do
 
   create_table "answers", :force => true do |t|
     t.string   "text"
@@ -816,6 +816,9 @@ ActiveRecord::Schema.define(:version => 20130826191328) do
     t.datetime "avatar_updated_at"
     t.string   "nickname"
     t.boolean  "anonym",              :default => false
+    t.integer  "score_a",             :default => 0
+    t.integer  "score_g",             :default => 0
+    t.integer  "score_o",             :default => 0
   end
 
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true

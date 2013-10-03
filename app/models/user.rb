@@ -5,7 +5,9 @@ class User < ActiveRecord::Base
   attr_accessor :password, :secret, :secret2, :secret3
   attr_accessible :login, :nickname, :anonym, :password, :password_confirmation, :encrypted_password, :secret,
    :dateActivation, :dateLastEnter, :dateRegistration, :email, :faculty, :group,
-    :name, :string, :string, :surname, :validate, :vkid, :score, :admin, :expert 
+    :name, :string, :string, :surname, :validate, :vkid,
+    :score,  :score_a, :score_g, :score_o,
+    :admin, :expert
 
   has_many :question, :dependent => :destroy
   has_many :answer, :dependent => :destroy

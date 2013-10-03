@@ -26,6 +26,9 @@ class UsersController < ApplicationController
     @project = Core::Project.find(params[:project])
 
     @users = User.where('score>0').order('score DESC').paginate(:page =>params[:page])
+    @users1 = User.where('score_g>0').order('score_g DESC').paginate(:page =>params[:page])
+    @users2 = User.where('score_a>0').order('score_a DESC').paginate(:page =>params[:page])
+    @users3 = User.where('score_o>0').order('score_o DESC').paginate(:page =>params[:page])
 	end
 
 	def update

@@ -7,7 +7,11 @@
         %span.namedate= user.name_title
         %br
         Набрано балов -
-        %span.rate= user.score
+
+        -unless local_assigns[:score_name].nil?
+            %span.rate= user.send(score_name)
+        -else
+            %span.rate= user.score
 
         .social
 

@@ -293,8 +293,10 @@ def index
     post = save_note(params, 2, 'Принято!','discontent_post_acceptance' )
     if post.post.nil?
       post.user.update_column(:score, post.user.score + 100)
+      post.user.update_column(:score_g, post.user.score_g + 100)
     else
       post.user.update_column(:score, post.user.score + 200)
+      post.user.update_column(:score_g, post.user.score_g + 200)
       post.post.update_column(:status, 3)
     end
     redirect_to  action: "index"
