@@ -9,5 +9,5 @@
 		%span.rate_small= user.score
 		%span.role балов
 		%br
-		-user.awards.each do |award|
+		-user.awards.for_project(@project.id).each do |award|
 			= image_tag award.url, :title => award.name

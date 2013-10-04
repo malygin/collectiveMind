@@ -43,8 +43,7 @@ class User < ActiveRecord::Base
   
   has_many :user_awards
   has_many :awards, :through => :user_awards  
-
-  validates :name, 
+  validates :name,
   				   :length => { :maximum => 50 }
 
 
@@ -107,7 +106,9 @@ before_save :encrypt_password
       ""
     end
   end
-
+  def boss?
+    self.admin or self.expert
+  end
   def have_essay_for_stage(project, stage)
     # puts self.essay_posts.where(:stage => stage)
     !self.essay_posts.where(:project_id => project, :stage => stage).empty?

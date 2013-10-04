@@ -9,6 +9,9 @@ module BasePost  extend ActiveSupport::Concern
    	has_many :post_votings
    	has_many :users, :through => :post_votings
     scope :for_project, lambda { |project| where(:project_id => project) }
+    scope :for_expert, lambda {  where(:status => 1) }
+    scope :accepted, lambda {  where(:status => 2) }
+    scope :archive, lambda { where(:status => 3) }
 
     validates :content, :presence => true
     default_scope  :order => 'created_at DESC'

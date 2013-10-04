@@ -55,6 +55,7 @@
     <orderEntry type="library" scope="PROVIDED" name="guard-spork (v1.4.2, RVM: ruby-1.9.3-p392) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="haml (v3.1.6, RVM: ruby-1.9.3-p392) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="haml-rails (v0.3.4, RVM: ruby-1.9.3-p392) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="highcharts-rails (v3.0.5, RVM: ruby-1.9.3-p392) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="hike (v1.2.3, RVM: ruby-1.9.3-p392) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="i18n (v0.6.1, RVM: ruby-1.9.3-p392) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="journey (v1.0.4, RVM: ruby-1.9.3-p392) [gem]" level="application" />

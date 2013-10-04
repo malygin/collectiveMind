@@ -71,6 +71,12 @@ end
     @posts2 = current_model.where(:project_id => @project, :status => 0, :user_id => current_user).where("created_at >= ?", 2.day.ago)
     @review_posts = current_model.where(:project_id => @project, :status => 1, :user_id => current_user)
     @accepted_posts = current_model.where(:project_id => @project, :status => 2, :user_id => current_user)
+
+    @posts = current_user.discontent_posts.for_project(@project.id).ready_for_post
+    @posts2 =  current_user.discontent_posts.for_project(@project.id).not_ready_for_post
+    @review_posts = current_user.discontent_posts.for_project(@project.id).for_expert
+    @accepted_posts = current_user.discontent_posts.for_project(@project.id).accepted
+    @achived_posts =current_user.discontent_posts.for_project(@project.id).archive
     render 'my', :layout => 'application_two_column'
 
   end

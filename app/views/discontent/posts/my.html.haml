@@ -7,6 +7,7 @@
     %li=link_to "Рано отправлять  (#{@posts2.count})",'#tabs-2'
     %li=link_to "На рассмотрении  (#{@review_posts.count})",'#tabs-3'
     %li=link_to "Принятые  (#{@accepted_posts.count})",'#tabs-4'
+    %li=link_to "Архив  (#{@achived_posts.count})",'#tabs-5'
   #tabs-1
     -if @posts.empty?
       Таких пока нет
@@ -23,5 +24,9 @@
     -if @accepted_posts.empty?
       Таких пока нет
     = render  @accepted_posts
+  #tabs-5
+    -if @achived_posts.empty?
+      Таких пока нет
+    = render  @achived_posts
 
 
