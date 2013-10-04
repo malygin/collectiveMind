@@ -24,7 +24,7 @@
     - @journals.each do |journal|
         %p.righttext
             =Russian::strftime(journal.created_at,"%d %B %k:%M:%S ")
-            %b= journal.user.name_title
+            =link_to journal.user.name_title,  "/project/#{@project.id}/users/#{journal.user.id}"
             = journal_parser(journal, @project.id).html_safe
         =image_tag 'dots.png', :width =>'250px;'
 

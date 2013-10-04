@@ -1,3 +1,5 @@
+=link_to 'вернуться к процедуре', '/project/'+@project.id.to_s
+%br
 - if boss?
     .scoreBar
         =link_to "+20 баллов",  "/project/"+@project.id.to_s+"/users/"+@user.id.to_s+"/add_score/20", :remote => true, :method => :put, class: "voteCounter"
@@ -10,49 +12,48 @@
         |
 
 
-- unless  @user.boss?
-    %table
-        %tr
-            %td
-                #pie_chart(style="width: 300px;")
-            %td(style="padding-left: 20px;")
-                .wholePost
-                    = render 'users/user_post', :user =>  @user
-                    .posts
-                        %span.namedate
-                            =  @user.name_title
+%table
+    %tr
+        %td
+            #pie_chart(style="width: 300px;")
+        %td(style="padding-left: 20px;")
+            .wholePost
+                = render 'users/user_post', :user =>  @user
+                .posts
+                    %span.namedate
+                        =  @user.name_title
 
-                            - if current_user == @user
-                                (это вы)
-                        %br
                         - if current_user == @user
-                            =link_to 'редактировать информацию о себе', edit_user_path(@project, current_user), class: "name"
-                Всего очков:
-                %span.rate#score=@user.score
-                %br
-                Как аналитик:
-                %span.rate#score_a=@user.score_a
-                %br
-                Как генератор идей:
-                %span.rate#score_g=@user.score_g
-                %br
-                Как оценщик:
-                %span.rate#score_o=@user.score_o
-                %br
-                %br
-                %b Достижения:
-                %br
-                - if @user.awards.for_project(@project.id).empty?
-                    пока нет ни одного
+                            (это вы)
+                    %br
+                    - if current_user == @user
+                        =link_to 'редактировать информацию о себе', edit_user_path(@project, current_user), class: "name"
+            Всего очков:
+            %span.rate#score=@user.score
+            %br
+            Как аналитик:
+            %span.rate#score_a=@user.score_a
+            %br
+            Как генератор идей:
+            %span.rate#score_g=@user.score_g
+            %br
+            Как оценщик:
+            %span.rate#score_o=@user.score_o
+            %br
+            %br
+            %b Достижения:
+            %br
+            - if @user.awards.for_project(@project.id).empty?
+                пока нет ни одного
 
-                -else
-                %br
-                    -@user.awards.for_project(@project.id).each do |award|
-                        = image_tag award.url, :title => award.name
-                        = award.name
-                        %br
-                        %small= award.desc
-                        %br
+            -else
+            %br
+                -@user.awards.for_project(@project.id).each do |award|
+                    = image_tag award.url, :title => award.name
+                    = award.name
+                    %br
+                    %small= award.desc
+                    %br
 
 #tabs
     %ul
