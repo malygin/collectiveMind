@@ -179,10 +179,14 @@ scope '/project/:project' do
 
   
   namespace :expert_news do
+    get 'censored/:post_id'  => 'posts#censored'
+
     resources :posts do    
       member do
           put :add_comment
           put :plus
+          put :censored_comment
+
           put :plus_comment
       end
     end
