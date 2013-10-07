@@ -10,7 +10,7 @@
                     .error
                         Пост удален модератором
                 -else
-                    = trim_string(simple_format(post.content))
+                    = trim_string(raw(post.content))
                 - if post.attributes.has_key? 'aspect_id' and !post.aspect.nil?
                     %br
                     %b="#{post.aspect.content}  фрагмент"
