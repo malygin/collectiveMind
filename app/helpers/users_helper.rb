@@ -16,7 +16,7 @@ module UsersHelper
 		# 	:class =>'avatar', :gravatar => options)
 		
 		if user.avatar.file? 
-			image_tag user.avatar.url(:thumb)
+			image_tag user.avatar.url(:thumb), :class =>'avatar'
 		else
 			if user.login.nil?
 				image_tag('http://oec-static.main.sgu.ru/storage/oec-j2ee6/ROOT/userFiles/avatars/defaultAvatarSmall.jpg', :class =>'avatar')

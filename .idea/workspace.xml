@@ -2,7 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="aa6a5015-3a56-4a58-9b19-a0ad2e76ab80" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/shared/_post.html.haml" afterPath="$PROJECT_DIR$/app/views/shared/_post.html.haml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/assets/stylesheets/application.css.sass" afterPath="$PROJECT_DIR$/app/assets/stylesheets/application.css.sass" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/helpers/users_helper.rb" afterPath="$PROJECT_DIR$/app/helpers/users_helper.rb" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="collectiveMind.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -19,7 +21,7 @@
     <file path="/show.html.haml" changelist="aa6a5015-3a56-4a58-9b19-a0ad2e76ab80" time="1380900167007" ignored="false" />
     <file path="/table.html.haml" changelist="aa6a5015-3a56-4a58-9b19-a0ad2e76ab80" time="1380649198366" ignored="false" />
     <file path="/aspect.rb" changelist="aa6a5015-3a56-4a58-9b19-a0ad2e76ab80" time="1379708114154" ignored="false" />
-    <file path="/application.css.sass" changelist="aa6a5015-3a56-4a58-9b19-a0ad2e76ab80" time="1380132819418" ignored="false" />
+    <file path="/application.css.sass" changelist="aa6a5015-3a56-4a58-9b19-a0ad2e76ab80" time="1381159810103" ignored="false" />
     <file path="/help4.html.haml" changelist="aa6a5015-3a56-4a58-9b19-a0ad2e76ab80" time="1374049565833" ignored="false" />
     <file path="/routes.rb" changelist="aa6a5015-3a56-4a58-9b19-a0ad2e76ab80" time="1381157026489" ignored="false" />
     <file path="/application.rb" changelist="aa6a5015-3a56-4a58-9b19-a0ad2e76ab80" time="1374340905862" ignored="false" />
@@ -77,7 +79,7 @@
     <file path="/user.rb" changelist="aa6a5015-3a56-4a58-9b19-a0ad2e76ab80" time="1380899245648" ignored="false" />
     <file path="/_post_social_bar.html.haml" changelist="aa6a5015-3a56-4a58-9b19-a0ad2e76ab80" time="1380705059330" ignored="false" />
     <file path="/application_helper.rb" changelist="aa6a5015-3a56-4a58-9b19-a0ad2e76ab80" time="1380894172244" ignored="false" />
-    <file path="/_user_post.html.haml" changelist="aa6a5015-3a56-4a58-9b19-a0ad2e76ab80" time="1380897671432" ignored="false" />
+    <file path="/_user_post.html.haml" changelist="aa6a5015-3a56-4a58-9b19-a0ad2e76ab80" time="1381159688252" ignored="false" />
     <file path="/award.rb" changelist="aa6a5015-3a56-4a58-9b19-a0ad2e76ab80" time="1380899031763" ignored="false" />
     <file path="/20131007135803_add_censored_to_life_tape_posts.rb" changelist="aa6a5015-3a56-4a58-9b19-a0ad2e76ab80" time="1381154383842" ignored="false" />
     <file path="/censored.js.haml" changelist="aa6a5015-3a56-4a58-9b19-a0ad2e76ab80" time="1381157438483" ignored="false" />
@@ -133,10 +135,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="_post.html.haml" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="_post.html.haml" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/views/shared/_post.html.haml">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="12" column="20" selection-start="463" selection-end="463" vertical-scroll-proportion="0.71428573">
+            <state line="2" column="18" selection-start="49" selection-end="49" vertical-scroll-proportion="-0.0">
               <folding />
             </state>
           </provider>
@@ -169,28 +171,28 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="censored.js.haml" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/views/posts/censored.js.haml">
+      <file leaf-file-name="_user_post.html.haml" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/views/users/_user_post.html.haml">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="0" column="20" selection-start="20" selection-end="20" vertical-scroll-proportion="-0.0">
+            <state line="1" column="23" selection-start="28" selection-end="28" vertical-scroll-proportion="-0.625">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="vote_list.html.haml" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/views/posts/vote_list.html.haml">
+      <file leaf-file-name="users_helper.rb" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/helpers/users_helper.rb">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="-0.0">
+            <state line="18" column="40" selection-start="852" selection-end="852" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="_post_for_vote.html.haml" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/views/shared/_post_for_vote.html.haml">
+      <file leaf-file-name="application.css.sass" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/app/assets/stylesheets/application.css.sass">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="-0.0">
+            <state line="311" column="17" selection-start="4785" selection-end="4785" vertical-scroll-proportion="0.39071566">
               <folding />
             </state>
           </provider>
@@ -219,9 +221,6 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/db/migrate/20131004143029_add_core_project_to_user_award.rb" />
-        <option value="$PROJECT_DIR$/app/views/users/_user_post.html.haml" />
-        <option value="$PROJECT_DIR$/app/models/user_award.rb" />
         <option value="$PROJECT_DIR$/app/models/award.rb" />
         <option value="$PROJECT_DIR$/app/models/user.rb" />
         <option value="$PROJECT_DIR$/app/views/discontent/posts/_left_side.html.haml" />
@@ -235,6 +234,9 @@
         <option value="$PROJECT_DIR$/app/models/base_comment.rb" />
         <option value="$PROJECT_DIR$/app/views/shared/_comment.html.haml" />
         <option value="$PROJECT_DIR$/app/views/shared/_post.html.haml" />
+        <option value="$PROJECT_DIR$/app/views/users/_user_post.html.haml" />
+        <option value="$PROJECT_DIR$/app/helpers/users_helper.rb" />
+        <option value="$PROJECT_DIR$/app/assets/stylesheets/application.css.sass" />
       </list>
     </option>
   </component>
@@ -382,7 +384,91 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="models" />
+              <option name="myItemId" value="views" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="collectiveMind" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="collectiveMind" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="views" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="shared" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="collectiveMind" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="collectiveMind" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="views" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="posts" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="collectiveMind" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="collectiveMind" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="assets" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="stylesheets" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="collectiveMind" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="collectiveMind" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="assets" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -1127,7 +1213,7 @@
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32901135" sideWeight="0.49006623" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="true" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.31604537" sideWeight="0.49174917" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.50825083" sideWeight="0.49957302" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.50825083" sideWeight="0.49957302" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3979764" sideWeight="0.500427" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4240924" sideWeight="0.49699572" order="2" side_tool="false" content_ui="tabs" />
@@ -1246,27 +1332,6 @@
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/app/models/user.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="109" column="29" selection-start="3433" selection-end="3433" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/views/users/_user_name.html.haml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="1" column="74" selection-start="42" selection-end="85" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/models/award.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="4" column="70" selection-start="208" selection-end="208" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/db/migrate/20131004143029_add_core_project_to_user_award.rb">
       <provider selected="true" editor-type-id="text-editor">
         <state line="2" column="30" selection-start="101" selection-end="101" vertical-scroll-proportion="0.0">
@@ -1353,7 +1418,28 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/views/shared/_post.html.haml">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="12" column="20" selection-start="463" selection-end="463" vertical-scroll-proportion="0.71428573">
+        <state line="2" column="18" selection-start="49" selection-end="49" vertical-scroll-proportion="-0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/views/users/_user_post.html.haml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="1" column="23" selection-start="28" selection-end="28" vertical-scroll-proportion="-0.625">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/helpers/users_helper.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="18" column="40" selection-start="852" selection-end="852" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/assets/stylesheets/application.css.sass">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="311" column="17" selection-start="4785" selection-end="4785" vertical-scroll-proportion="0.39071566">
           <folding />
         </state>
       </provider>
