@@ -79,6 +79,7 @@ scope '/project/:project' do
 
     get 'vote_list'  => 'posts#vote_list'
     put 'vote/:post_id'  => 'posts#vote'
+    get 'censored/:post_id'  => 'posts#censored'
 
     scope '/status/:status/aspect/:aspect',  :defaults => {:status => 0, :aspect => 0} do
       get 'replace/:replace_id/posts/new'  => 'posts#new'
@@ -88,6 +89,8 @@ scope '/project/:project' do
                 put :add_comment
                 put :plus
                 put :plus_comment
+                put :censored_comment
+
                 put :to_archive
                 get :to_expert
                 put :to_expert_save  
