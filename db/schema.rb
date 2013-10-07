@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131004143029) do
+ActiveRecord::Schema.define(:version => 20131007135803) do
 
   create_table "answers", :force => true do |t|
     t.string   "text"
@@ -223,8 +223,9 @@ ActiveRecord::Schema.define(:version => 20131004143029) do
     t.text     "content"
     t.integer  "user_id"
     t.integer  "post_id"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at",                    :null => false
+    t.datetime "updated_at",                    :null => false
+    t.boolean  "censored",   :default => false
   end
 
   create_table "discontent_post_notes", :force => true do |t|
@@ -254,13 +255,14 @@ ActiveRecord::Schema.define(:version => 20131004143029) do
     t.text     "where"
     t.integer  "user_id"
     t.integer  "status"
-    t.datetime "created_at",                  :null => false
-    t.datetime "updated_at",                  :null => false
+    t.datetime "created_at",                      :null => false
+    t.datetime "updated_at",                      :null => false
     t.integer  "number_views", :default => 0
     t.integer  "project_id"
     t.integer  "aspect_id"
     t.integer  "replace_id"
     t.integer  "style"
+    t.boolean  "censored",     :default => false
   end
 
   add_index "discontent_posts", ["aspect_id"], :name => "index_discontent_posts_on_aspect_id"
@@ -585,8 +587,9 @@ ActiveRecord::Schema.define(:version => 20131004143029) do
     t.text     "content"
     t.integer  "user_id"
     t.integer  "post_id"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at",                    :null => false
+    t.datetime "updated_at",                    :null => false
+    t.boolean  "censored",   :default => false
   end
 
   add_index "life_tape_comments", ["created_at"], :name => "index_life_tape_comments_on_created_at"
@@ -616,6 +619,7 @@ ActiveRecord::Schema.define(:version => 20131004143029) do
     t.integer  "project_id"
     t.boolean  "important",    :default => false
     t.integer  "aspect_id"
+    t.boolean  "censored",     :default => false
   end
 
   add_index "life_tape_posts", ["category_id"], :name => "index_life_tape_posts_on_category_id"

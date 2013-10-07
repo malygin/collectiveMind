@@ -307,5 +307,18 @@ def index
     redirect_to  action: "index"
   end
 
+  def censored
+    if boss?
+      post = current_model.find(params[:post_id])
+      post.update_column(:censored, true)
+    end
+  end
+
+  def censored_comment
+    if boss?
+      comment = comment_model.find(params[:id])
+      comment.update_column(:censored, true)
+    end
+  end
 
 end

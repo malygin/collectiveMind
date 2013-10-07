@@ -5,7 +5,12 @@
         = render 'users/user_name', :user => post.user, :created_at => post.created_at
         - if not current_page?(url_for(params.merge(:project => @project, :id => post.id)))
             %p
-                = trim_string(raw(post.content))
+                - if post.censored
+                    %br
+                    .error
+                        Пост удален модератором
+                -else
+                    = trim_string(simple_format(post.content))
                 - if post.attributes.has_key? 'aspect_id' and !post.aspect.nil?
                     %br
                     %b="#{post.aspect.content}  фрагмент"
@@ -16,10 +21,17 @@
                 = link_to 'Подробнее',  {:controller => post.class.name.underscore.pluralize, :action => show_post, :project => @project, :id => post.id}, class: "more"
         -else
 
-            %p= simple_format(post.show_content)
+            - if post.censored
+                %br
+                .error
+                    Пост удален модератором
+            - else
+                %p= simple_format(post.show_content)
             - if post.attributes.has_key? 'aspect_id' and !post.aspect.nil?
                 %b="#{post.aspect.content}  фрагмент"
             %br
+            - if boss?
+                = link_to 'Цензурировать', :controller => post.class.name.underscore.pluralize, :action => 'censored', :project => @project, :post_id => post, :remote=>:true
             - if boss? or post.user == current_user
                 = link_to 'Редактировать',:controller => post.class.name.underscore.pluralize, :action => 'edit', :project => @project, :id => post
                 \|

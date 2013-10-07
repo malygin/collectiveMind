@@ -59,6 +59,7 @@ scope '/project/:project' do
   namespace :life_tape do
     get 'vote_list'  => 'posts#vote_list'
     put 'vote/:post_id'  => 'posts#vote'
+    get 'censored/:post_id'  => 'posts#censored'
     put 'up/:post_id'  => 'posts#up'
     put 'down/:post_id'  => 'posts#down'
     get 'aspect/:aspect/posts/'  => 'posts#index'
@@ -66,6 +67,7 @@ scope '/project/:project' do
     resources :posts do
       member do
         put :add_comment
+        put :censored_comment
         put :plus
         put :plus_comment
       end
