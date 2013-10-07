@@ -6,7 +6,7 @@
 		%p
 			= simple_format(@post.content)
 - if boss?
-	= link_to 'Редактировать', edit_expert_news_post_path(@post)
+	= link_to 'Редактировать', edit_expert_news_post_path(@project, @post)
 	= link_to 'Удалить', @post, :confirm => 'Уверены, Олег?', :method => :delete
 
 

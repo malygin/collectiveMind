@@ -12,10 +12,10 @@
   %label Анонс
 
   .field
-    = f.text_area :anons
+    = f.text_area :anons, class: 'post', style: "height: 260px;"
 
   %label Основной текст
   .field
-    = f.text_area :content, :class => "redactor"
+    = f.text_area :content, :class => "post",  style: "height: 260px;"
   .actions
     = f.submit ''
