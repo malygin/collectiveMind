@@ -193,9 +193,13 @@ scope '/project/:project' do
   end  
 
   namespace :question do
+    get 'censored/:post_id'  => 'posts#censored'
+
     resources :posts do    
       member do
-          put :add_comment
+        put :censored_comment
+
+        put :add_comment
           put :plus
           put :plus_comment
       end
