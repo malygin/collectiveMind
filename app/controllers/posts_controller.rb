@@ -211,7 +211,14 @@ def index
   def plus_comment
     comment = comment_model.find(params[:id])
     comment.comment_votings.create(:user => current_user, :comment => comment)
-    render json:comment.users.count 
+    if  self.current_model  == Discontent::Post
+      if comment.comment_votings.count == 3 or current_user.boss?
+        comment.user.add_score(20,:score_a)
+        @project = Core::Project.find(params[:project])
+        comment.user.journals.build(:type_event=>'add_score_anal', :project => @project, :body=>"#{comment.post.id}#comment_#{comment.id}").save!
+      end
+    end
+    render json:comment.users.count
   end
   
 ### function for voiting
@@ -292,11 +299,14 @@ def index
   def expert_acceptance_save
     post = save_note(params, 2, 'Принято!','discontent_post_acceptance' )
     if post.post.nil?
-      post.user.update_column(:score, post.user.score + 100)
-      post.user.update_column(:score_g, post.user.score_g + 100)
+      post.user.add_score(100)
+      #post.user.update_column(:score, post.user.score + 100)
+      #post.user.update_column(:score_g, post.user.score_g + 100)
     else
-      post.user.update_column(:score, post.user.score + 200)
-      post.user.update_column(:score_g, post.user.score_g + 200)
+      post.user.add_score(200)
+
+      #post.user.update_column(:score, post.user.score + 200)
+      #post.user.update_column(:score_g, post.user.score_g + 200)
       post.post.update_column(:status, 3)
     end
     redirect_to  action: "index"

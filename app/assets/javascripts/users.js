@@ -12,6 +12,9 @@ $(function () {
     });
 
     // Build the chart
+    if ($('#pie_chart').length>0) {
+
+
     $('#pie_chart').highcharts({
         chart: {
             plotBackgroundColor: null,
@@ -54,5 +57,6 @@ $(function () {
             ]
         }]
     });
+    }
 });
 

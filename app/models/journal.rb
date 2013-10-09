@@ -6,6 +6,7 @@ class Journal < ActiveRecord::Base
  essay_comment_save
  add_score
  add_score_essay
+ add_score_anal
  concept_post_revision
  concept_post_acceptance
  concept_post_rejection

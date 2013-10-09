@@ -66,6 +66,11 @@ before_save :encrypt_password
     normal: '300x300>'
   }
 
+  def add_score(score, type=:score_g)
+    self.update_column(:score, self.score + score)
+    self.update_column(type.to_sym, self.attributes[type.to_s] + score)
+  end
+
   def has_password?(submitted_password)
     # encrypted_password == encrypt(submitted_password)
   	encrypted_password == submitted_password
