@@ -49,7 +49,7 @@ def add_comment
     post = current_model.find(params[:id])
     unless  params[name_of_comment_for_param][:content]==''
       comment = post.comments.create(:content => params[name_of_comment_for_param][:content], :user =>current_user)
-      current_user.journals.build(:type_event=>name_of_comment_for_param+'_save', :project => @project, :body=>"#{post.id}#comment_#{comment.id}").save!
+      current_user.journals.build(:type_event=>name_of_comment_for_param+'_save', :project => @project, :body=>"#{comment.content[0..12]}:#{post.id}#comment_#{comment.id}").save!
       flash[:success] = 'Комментарий добавлен'
     else
       flash[:success] = 'Введите текст комментария'

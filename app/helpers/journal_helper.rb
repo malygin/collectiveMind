@@ -15,17 +15,34 @@ module JournalHelper
 				'добавил комментарий к '+  link_to('концепции', concept_post_path(j.body))
 			when 'expert_news_post_save'
 				'добавил  '+ link_to('новость', expert_news_post_path(project, j.body))
-			when 'expert_news_comment_save'
+      when 'expert_news_comment_save'
+        s = j.body.split(':')
+        if s.length == 1
 				'добавил комментарий к '+  link_to('новости', expert_news_post_path(project, j.body))
+        else
+          "добавил комментарий '#{s[0]}...' к "+  link_to('новости', expert_news_post_path(project, s[1]))
+        end
 			
-			when 'life_tape_comment_save'
+      when 'life_tape_comment_save'
+        s = j.body.split(':')
+        if s.length == 1
 				'добавил комментарий к '+  link_to('записи', "/project/#{project}/life_tape/posts/#{j.body}" )
+        else
+          "добавил комментарий '#{s[0]}...' к "+  link_to('записи', "/project/#{project}/life_tape/posts/#{s[1]}" )
+
+        end
 			when 'life_tape_post_save'
 				'добавил '+  link_to('запись', life_tape_post_path(project, j.body))				
             
       when 'discontent_comment_save'
-				'добавил комментарий к '+  link_to('несовершенству', "/project/#{project}/discontent/status/0/aspect/0/posts/#{j.body}")
-			when 'discontent_post_save'
+        s = j.body.split(':')
+         if s.length == 1
+           'добавил комментарий к '+  link_to('несовершенству', "/project/#{project}/discontent/status/0/aspect/0/posts/#{j.body}")
+         else
+           "добавил комментарий '#{s[0]}...' к "+  link_to('несовершенству', "/project/#{project}/discontent/status/0/aspect/0/posts/#{s[1]}")
+
+         end
+      when 'discontent_post_save'
 				'добавил '+  link_to('несовершенство', discontent_post_path(project, j.body))
       when 'discontent_post_revision'
         'отправил на доработку ' +link_to('несовершенство', discontent_post_path(project,j.body))
@@ -40,8 +57,15 @@ module JournalHelper
 				'отредактировал '+  link_to('концепцию', concept_post_path(j.body))
 			when 'question_post_save'
 				'задал '+  link_to('вопрос', question_post_path(project, j.body))		
-			when 'question_comment_save'
-				'ответил на  '+  link_to('вопрос', question_post_path(project, j.body))	
+      when 'question_comment_save'
+        s = j.body.split(':')
+        if s.length == 1
+				'ответил на  '+  link_to('вопрос', question_post_path(project, j.body))
+        else
+          "ответил на '#{s[0]}...' "+  link_to('вопрос', question_post_path(project, s[1]))
+
+        end
+
 			when 'concept_post_revision'
 				'отправил на доработку ' +link_to('концепцию', concept_post_path(j.body))
 			when 'concept_post_acceptance'
