@@ -22,6 +22,8 @@ match '/description', :to =>'pages#description'
 scope '/project/:project' do
   match '/knowledge', :to =>'core/projects#knowledge'
   match '/help', :to => 'core/projects#help'
+  match '/journal', :to => 'journal#index'
+
   match '/article1', :to => 'core/projects#article1'
   match '/article2', :to => 'core/projects#article2'
   match '/article3', :to => 'core/projects#article3'

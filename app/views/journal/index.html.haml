@@ -1,0 +1,6 @@
+- @journals.each do |journal|
+    %p.righttext
+        =Russian::strftime(journal.created_at,"%d %B %k:%M:%S ")
+        %b= journal.user.name_title
+        = journal_parser(journal, @project.id).html_safe
+= will_paginate @journals

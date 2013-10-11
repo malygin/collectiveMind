@@ -1,1 +1,5 @@
-wqeqweqweqw
+- unless @news.nil?
+	%h1 Новости
+	%p.righttext
+		= @news.anons
+		= link_to 'подробнее',  expert_news_post_path(@project, @news)
