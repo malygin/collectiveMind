@@ -6,7 +6,7 @@
         %p
             = trim_string(post.content)
             %br
-            -unless post.post.nil?
+            -unless post.post_replaces.empty?
                 %span.rate Замещает принятое
             %br
             Тип:

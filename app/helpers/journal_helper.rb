@@ -60,9 +60,9 @@ module JournalHelper
       when 'question_comment_save'
         s = j.body.split(':')
         if s.length == 1
-				'ответил на  '+  link_to('вопрос', question_post_path(project, j.body))
+				'ответил   '+  link_to(' на вопрос', question_post_path(project, j.body))
         else
-          "ответил на '#{s[0]}...' "+  link_to('вопрос', question_post_path(project, s[1]))
+          "ответил '#{s[0]}...' "+  link_to('на вопрос', question_post_path(project, s[1]))
 
         end
 

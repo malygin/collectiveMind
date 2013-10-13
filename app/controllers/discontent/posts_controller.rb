@@ -46,8 +46,10 @@ end
  def new
     prepare_data
     @post = current_model.new
+    @accepted_posts = Discontent::Post.where(status: 2, project_id:  @project)
     unless params[:replace_id].nil?
-      @replace_post = current_model.find(params[:replace_id])
+      @replace_posts =[]
+      @replace_posts << current_model.find(params[:replace_id])
     end
     respond_to do |format|
       format.html # new.html.erb
@@ -55,6 +57,12 @@ end
     end
   end
 
+  # GET /discontent/posts/1/edit
+  def edit
+    @post = current_model.find(params[:id])
+    @replace_posts = @post.post_replaced
+    @accepted_posts = Discontent::Post.where(status: 2, project_id:  @project )
+  end
 
 
   def vote_list

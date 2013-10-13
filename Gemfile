@@ -40,6 +40,7 @@ group :assets do
   gem 'therubyracer', '>=0.11.4'
 end
 
+gem "selectize-rails"
 gem 'haml'
 gem 'haml-rails'
 gem 'jquery-rails'

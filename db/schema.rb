@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131007135803) do
+ActiveRecord::Schema.define(:version => 20131013103831) do
 
   create_table "answers", :force => true do |t|
     t.string   "text"
@@ -238,6 +238,16 @@ ActiveRecord::Schema.define(:version => 20131007135803) do
 
   add_index "discontent_post_notes", ["post_id"], :name => "index_discontent_post_notes_on_post_id"
 
+  create_table "discontent_post_replaces", :force => true do |t|
+    t.integer  "post_id"
+    t.integer  "replace_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  add_index "discontent_post_replaces", ["post_id"], :name => "index_discontent_post_replaces_on_post_id"
+  add_index "discontent_post_replaces", ["replace_id"], :name => "index_discontent_post_replaces_on_replace_id"
+
   create_table "discontent_post_votings", :force => true do |t|
     t.integer  "user_id"
     t.integer  "post_id"
@@ -456,8 +466,9 @@ ActiveRecord::Schema.define(:version => 20131007135803) do
     t.integer  "user_id"
     t.integer  "post_id"
     t.text     "content"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at",                    :null => false
+    t.datetime "updated_at",                    :null => false
+    t.boolean  "censored",   :default => false
   end
 
   add_index "expert_news_comments", ["post_id"], :name => "index_expert_news_comments_on_post_id"
@@ -476,10 +487,11 @@ ActiveRecord::Schema.define(:version => 20131007135803) do
     t.text     "anons"
     t.text     "content"
     t.integer  "user_id"
-    t.datetime "created_at",                  :null => false
-    t.datetime "updated_at",                  :null => false
+    t.datetime "created_at",                      :null => false
+    t.datetime "updated_at",                      :null => false
     t.integer  "project_id"
     t.integer  "number_views", :default => 0
+    t.boolean  "censored",     :default => false
   end
 
   add_index "expert_news_posts", ["created_at"], :name => "index_expert_news_posts_on_created_at"
@@ -739,8 +751,9 @@ ActiveRecord::Schema.define(:version => 20131007135803) do
     t.integer  "user_id"
     t.integer  "post_id"
     t.text     "content"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at",                    :null => false
+    t.datetime "updated_at",                    :null => false
+    t.boolean  "censored",   :default => false
   end
 
   add_index "question_comments", ["post_id"], :name => "index_question_comments_on_post_id"
@@ -759,9 +772,10 @@ ActiveRecord::Schema.define(:version => 20131007135803) do
     t.integer  "project_id"
     t.text     "content"
     t.integer  "status"
-    t.datetime "created_at",                  :null => false
-    t.datetime "updated_at",                  :null => false
+    t.datetime "created_at",                      :null => false
+    t.datetime "updated_at",                      :null => false
     t.integer  "number_views", :default => 0
+    t.boolean  "censored",     :default => false
   end
 
   add_index "question_posts", ["project_id"], :name => "index_questions_posts_on_project_id"

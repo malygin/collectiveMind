@@ -4,6 +4,7 @@
 #= require jquery.ui.all
 #= require highcharts
 #= require highcharts/highcharts-more
+#= require selectize
 $(document).ready ->
     $(".voteBar")
       .bind "ajax:success", (event, resp) ->

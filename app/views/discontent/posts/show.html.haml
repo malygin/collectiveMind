@@ -7,7 +7,6 @@
   %br
   %br
   =image_tag 'dots.png', :width =>'450px;'
-
 - if @post.status == 2
   %b
     = link_to 'Переопределить', :action => 'new', :project => @project, :replace_id => @post.id

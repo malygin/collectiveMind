@@ -1,8 +1,8 @@
-- unless @replace_post.nil?
-  %br
-  =@replace_post.show_content.html_safe
-  %br
-  %br
+-#- unless @replace_post.nil?
+-#  %br
+-#  =@replace_post.show_content.html_safe
+-#  %br
+-#  %br
 .success Если вы затрудняетесь правильно разбить ваше несовершенство, - добавляейте его так, как вам подсказывает интуиция. Если вы ошибетесь - наши модераторы помогут вам его исправить.
 = form_for  @post, :url => {:project => @project.id, :replace_id => @replace_post.nil? ? nil : @replace_post.id , :action => @post.persisted? ? 'update' : 'create'},   :html => { :class => 'new_or_edit' }do |f|
   -if @post.errors.any?
@@ -29,5 +29,18 @@
 
   = select_tag 'aspect_id', options_from_collection_for_select(@aspects, "id", "content", @post.aspect.nil? ? 0 :@post.aspect.id), :prompt => "Выберите фрагмент"  
   = select_tag 'style', options_for_select({ "отсутствующий позитив" => "0", "имеющийся негатив" => "1" }, @post.style), :prompt => "Выберите тип"
+  %br
+  %br
+  %b Переопределяемы несовершенства:
+  %br
+  .discontents
+    -@replace_posts.each do |rp|
+      %div{:id => "dis_#{rp.id}"}
+        =rp.show_content.html_safe
+        = hidden_field_tag "replace[#{rp.id}]",rp.id
+        %a{onclick: "remove_dis(#{rp.id})"} Удалить
+
+  = select_tag 'select-discontent', options_from_collection_for_select(@accepted_posts, "id", "show_content",0), :prompt => "Выберите Несовершенство"
+
   .actions
     = f.submit ''

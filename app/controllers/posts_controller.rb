@@ -127,10 +127,7 @@ def index
       unless params[:style].nil?
         @post.style = params[:style]
       end
-      unless params[:replace_id].nil?
-        @post.replace_id = params[:replace_id]
-        
-      end
+
 
       if current_model.column_names.include? 'status'
         @post.status = 0
@@ -138,6 +135,11 @@ def index
       respond_to do |format|
         if @post.save
           format.html {
+            unless params[:replace].nil?
+              params[:replace].each do |k,v|
+                @post.post_replaces.build(:replace_id => k).save
+              end
+            end
             flash[:succes] = 'Успешно добавлено!'
             current_user.journals.build(:type_event=>name_of_model_for_param+"_save", :project => @project, :body=>@post.id).save!
 
@@ -164,6 +166,14 @@ def index
         end
         unless params[:style].nil?
           @post.update_attribute(:style,params[:style])
+        end
+        unless params[:replace].nil?
+          @post.post_replaces.destroy_all
+          params[:replace].each do |k,v|
+            @post.post_replaces.build(:replace_id => k).save
+          end
+          #@post.replace_id = params[:replace_id]
+
         end
         format.html { 
           flash[:success] = 'Успешно добавлено!'
@@ -298,16 +308,14 @@ def index
 
   def expert_acceptance_save
     post = save_note(params, 2, 'Принято!','discontent_post_acceptance' )
-    if post.post.nil?
+    if post.post_replaced.empty?
       post.user.add_score(100)
-      #post.user.update_column(:score, post.user.score + 100)
-      #post.user.update_column(:score_g, post.user.score_g + 100)
     else
       post.user.add_score(200)
+      post.post_replaced.each do |rp|
+        rp.update_column(:status, 3)
+      end
 
-      #post.user.update_column(:score, post.user.score + 200)
-      #post.user.update_column(:score_g, post.user.score_g + 200)
-      post.post.update_column(:status, 3)
     end
     redirect_to  action: "index"
   end

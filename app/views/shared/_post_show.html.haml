@@ -13,6 +13,15 @@
           %br
           Фрагмент:
           %b=post.aspect.content
+        %br
+        %br
+
+        %b Переопределяемые несовершенства:
+        -post.post_replaced.each do |rp|
+          %div{:id => "dis_#{rp.id}"}
+            =rp.show_content.html_safe
+            %br
+
 
    
     = render 'shared/post_social_bar', :post => post
