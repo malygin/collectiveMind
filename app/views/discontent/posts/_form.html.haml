@@ -34,12 +34,12 @@
   %b Переопределяемы несовершенства:
   %br
   .discontents
-    -unless @replace_post.nil?
-      -@replace_posts.each do |rp|
-        %div{:id => "dis_#{rp.id}"}
-          =rp.show_content.html_safe
-          = hidden_field_tag "replace[#{rp.id}]",rp.id
-          %a{onclick: "remove_dis(#{rp.id})"} Удалить
+
+    -@replace_posts.each do |rp|
+      %div{:id => "dis_#{rp.id}"}
+        =rp.show_content.html_safe
+        = hidden_field_tag "replace[#{rp.id}]",rp.id
+        %a{onclick: "remove_dis(#{rp.id})"} Удалить
 
   = select_tag 'select-discontent', options_from_collection_for_select(@accepted_posts, "id", "show_content",0), :prompt => "Выберите Несовершенство"
 
