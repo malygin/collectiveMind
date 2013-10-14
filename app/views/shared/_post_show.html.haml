@@ -15,12 +15,12 @@
           %b=post.aspect.content
         %br
         %br
-
-        %b Переопределяемые несовершенства:
-        -post.post_replaced.each do |rp|
-          %div{:id => "dis_#{rp.id}"}
-            =rp.show_content.html_safe
-            %br
+        - unless post.post_replaced.empty?
+          %b Переопределяемые несовершенства:
+          -post.post_replaced.each do |rp|
+            %div{:id => "dis_#{rp.id}"}
+              =rp.show_content.html_safe
+              %br
 
 
    
