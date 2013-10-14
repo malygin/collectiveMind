@@ -11,9 +11,9 @@ class Discontent::Post < ActiveRecord::Base
   has_many :post_replaces, :class_name => 'Discontent::PostReplace', :foreign_key => 'post_id'
   has_many :post_it_replaces, :class_name => 'Discontent::PostReplace', :foreign_key => 'replace_id'
 
-  has_many :post_replaced, :through => :post_replaces, :source => :replace_post, :class_name =>  "Discontent::Post"
+  has_many :post_replaced, :through => :post_replaces, :source => :replace_post, :class_name =>  'Discontent::Post'
 
-  has_many :post_replaced_it, :through => :post_it_replaces, :source => :replace_post, :class_name =>  "Discontent::Post"
+  has_many :post_replaced_it, :through => :post_it_replaces, :source => :replace_post, :class_name =>  'Discontent::Post'
 
   has_many :voted_users, :through => :final_votings, :source => :user
   has_many :final_votings,:foreign_key => 'discontent_post_id', :class_name => 'Discontent::Voting'

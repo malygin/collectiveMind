@@ -1,21 +1,29 @@
--if boss? 
-	%p.righttext
-		текущий статус проекта
-		%br
-		%span.rate= status_title(@project.status)
-	%br
-	-if @project.status == 3
-		=link_to 'Начать голосование',  next_stage_core_project_path(@project), id: 'change_stage'
-	-if @project.status == 4
-		=link_to 'Вернуться к началу процедуры',  pr_stage_core_project_path(@project), id: 'change_stage'
-		%br
-		=link_to 'Начать сбор концепций',  next_stage_core_project_path(@project), id: 'change_stage'
+%h1 Вы хотите добавить несовершенство? На что нужно обратить внимание
+%p.righttext
+    1. Самые ценные несовершенства - те, которые заменяют одно или несколько из уже принятых, предлагая более общие формулировки
+    %br
+    2. Указать переопределяемые несовершенства можно и после создания, нажав на ссылку "Редактировать"
+    %br
+    3. Активнее "лайкайте" те комментарии, которые помогают сделать ваше несовершенство более правильно оформленным или просто наводит вас на интересные мысли (авторы таких комментариев получают балыы)
+    %br
+-if boss?
+    %p.righttext
+        текущий статус проекта
+        %br
+        %span.rate= status_title(@project.status)
+    %br
+    -if @project.status == 3
+        =link_to 'Начать голосование',  next_stage_core_project_path(@project), id: 'change_stage'
+    -if @project.status == 4
+        =link_to 'Вернуться к началу процедуры',  pr_stage_core_project_path(@project), id: 'change_stage'
+        %br
+        =link_to 'Начать сбор концепций',  next_stage_core_project_path(@project), id: 'change_stage'
 
 %br
 .redtitle Фрагменты
 -if boss? 
-	%p.righttext= link_to 'добавить фрагмент', new_discontent_aspect_path, id: "add_aspect"
+    %p.righttext= link_to 'добавить фрагмент', new_discontent_aspect_path, id: "add_aspect"
 - @aspects.each do |asp|
-	%a{:href  => discontent_posts_path(:aspect => asp.id), :class => 'topic'}
-		.topics
-			%p.greentitle= "#{asp.content}"		
+    %a{:href  => discontent_posts_path(:aspect => asp.id), :class => 'topic'}
+        .topics
+            %p.greentitle= "#{asp.content}"
