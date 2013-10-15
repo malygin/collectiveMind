@@ -74,6 +74,8 @@ end
     #all number of votes
     @votes = @project.stage2
   end
+
+
   def my
     prepare_data
     @posts = current_model.where(:project_id => @project, :status => 0, :user_id => current_user).where("created_at < ?", 2.day.ago)

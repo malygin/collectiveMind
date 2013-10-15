@@ -4,7 +4,7 @@ $(document).ready(
     $( "#tabs" ).tabs();
     $( "#tabs2" ).tabs();
 
-    $('#select-discontent').selectize({
+    $('#select_discontent_').selectize({
 
         valueField: 'value',
         labelField: 'text',

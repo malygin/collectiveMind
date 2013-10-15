@@ -41,7 +41,8 @@
         = hidden_field_tag "replace[#{rp.id}]",rp.id
         %a{onclick: "remove_dis(#{rp.id})"} Удалить
 
-  = select_tag 'select-discontent', options_from_collection_for_select(@accepted_posts, "id", "show_content",0), :prompt => "Выберите Несовершенство"
+  -#= select_tag 'select-discontentа', grouped_collection_select(:city, :country_id, @aspects,:negative_posts, "id", "show_content",:show_content), :prompt => "Выберите Несовершенство"
+  = grouped_collection_select(:select_discontent, "", @aspects,:accepted_posts, :content, :id,:show_content)
 
   .actions
     = f.submit ''
