@@ -19,6 +19,9 @@ class Discontent::Post < ActiveRecord::Base
   has_many :final_votings,:foreign_key => 'discontent_post_id', :class_name => 'Discontent::Voting'
   scope :ready_for_post, lambda {  where(:status => 0).where("created_at < ?", 2.day.ago) }
   scope :not_ready_for_post, lambda {  where(:status => 0).where("created_at > ?", 2.day.ago) }
+    def voted(user)
+    self.voted_users.where(:id => user)
+  end
 
   def show_content
   	'<b>что:</b>'+self.content + '<br/> <b> когда:</b>'+ self.when + '<br/> <b>где:</b> ' +self.where+'<br/>'
