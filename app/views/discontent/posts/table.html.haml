@@ -46,7 +46,7 @@
                                     .voteBar
                                         -if boss?
                                             %span.number=post.voted_users.count
-                                        - if can_vote?(post.voted_users.size, @number_v, @votes)
+                                        - if can_vote?(post.voted(current_user).size, @number_v, @votes)
                                             =link_to 'отдать голос', "/project/#{@project.id}/discontent/vote/#{post.id}", :remote => true, :method => :put, class: "voteCounter", :id => "aspect_#{post.id}"
 
                                 .previewtext
