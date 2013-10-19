@@ -39,8 +39,9 @@
                     -aspect.negative_posts.each_with_index do |post,  index|
                         %tr
                             %td{ :class => "#{((index+1) % 2!=0) ? 'firstline'+ind.to_s : 'secondline'}" }
-                                .gear
-                                    =link_to image_tag('redgear.png'), :action => 'new', :project => @project, :replace_id => post.id
+                                -if  @project.status == 3
+                                    .gear
+                                        =link_to image_tag('redgear.png'), :action => 'new', :project => @project, :replace_id => post.id
                                 -if @project.status == 4
                                     .voteBar
                                         -if boss?
@@ -50,9 +51,9 @@
 
                                 .previewtext
                                     =post.show_content.html_safe
-                                    - if post.post_replaced_it.count >0
-                                        текущих попыток переопределения:
-                                        %b=post.post_replaced_it.count
+                                    -#- if post.post_replaced_it.count >0
+                                    -#    текущих попыток переопределения:
+                                    -#    %b=post.post_replaced_it.count
 
 
                                     %br
@@ -64,8 +65,9 @@
                     -aspect.positive_posts.each_with_index do |post, index|
                         %tr
                             %td{ :class => "#{((index+1) % 2 !=0) ? 'firstline'+ind.to_s : 'secondline'}" }
-                                .gear
-                                    =link_to image_tag('gear.png'), :action => 'new', :project => @project, :replace_id => post.id
+                                -if  @project.status == 3
+                                    .gear
+                                        =link_to image_tag('gear.png'), :action => 'new', :project => @project, :replace_id => post.id
                                 -if @project.status == 4
                                     -if @project.status == 4
                                         .voteBar
@@ -76,8 +78,8 @@
                                 .previewtext
 
                                     =post.show_content.html_safe
-                                    - if post.post_replaced_it.count >0
-                                        текущих попыток переопределения:
-                                        %b=post.post_replaced_it.count
+                                    -#- if post.post_replaced_it.count >0
+                                    -#    текущих попыток переопределения:
+                                    -#    %b=post.post_replaced_it.count
                                     %br
                                     =link_to  'подробнее',  {:action => "show", :project => @project, :id => post.id}
