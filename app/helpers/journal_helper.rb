@@ -89,7 +89,6 @@ module JournalHelper
           "добавил комментарий  '#{s[0]}...' "+  link_to('к эссе', "/project/#{project}/stage/2/essay/posts/#{s[1]}")
 
         end
-				'добавил комментарий к '+  link_to('эссе',"/project/#{project}/stage/2/essay/posts/#{j.body}")
 			when 'plan_post_update'
 				'отредактировал '+  link_to('проект', plan_post_path(j.body))
 			when 'plan_post_revision'
