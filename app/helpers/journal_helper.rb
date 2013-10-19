@@ -81,7 +81,14 @@ module JournalHelper
 				'добавил комментарий к '+  link_to('проекту', plan_post_path(j.body))
 			when 'essay_post_save'
 				'добавил  '+ link_to('эссе', essay_post_path(project, 2, j.body))
-			when 'essay_comment_save'
+      when 'essay_comment_save'
+        s = j.body.split(':')
+        if s.length == 1
+          'добавил комментарий   '+  link_to(' к эссе', question_post_path(project, j.body))
+        else
+          "добавил комментарий  '#{s[0]}...' "+  link_to('к эссе', "/project/#{project}/stage/2/essay/posts/#{s[1]}")
+
+        end
 				'добавил комментарий к '+  link_to('эссе',"/project/#{project}/stage/2/essay/posts/#{j.body}")
 			when 'plan_post_update'
 				'отредактировал '+  link_to('проект', plan_post_path(j.body))
