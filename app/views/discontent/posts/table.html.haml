@@ -1,18 +1,20 @@
 -if @project.status == 4
     %br=link_to 'Вы можете оставить свое мнение или почитать другие', essay_posts_path(@project, @project.status), :id => 'essay_list'
+    Выберите те несовершенства, которые считаете наиболее актуальными и нажмите "голосовать" рядом с ними
+    %br
     - unless @number_v<1
         Количество имеющихся голосов -
         %span.rate
             %span#count_vote=@number_v
-
-Вы можете добавить свое несовершенство (если оно будет принято, вы получите 100 баллов),
-либо переопределить существующее на более максимальное
-=link_to ' (чтобы узнать, как это сделать, см. раздел «Помощь»).', "/project/#{@project.id}/help"
-Для этого щелкните по иконке шестеренки в углу несовершенства, которое хотите переопределить, и если ваше определение будет принято, вы получите 200 баллов.
-%br
-%b В итоге мы должны получить таблицу, которая кратко, но исчерпывающе, отображает ситуацию по исследуемой теме
-%br
--#= link_to image_tag('add_discontent.png'), url_for(:action => 'new')
+-if  @project.status == 3
+    Вы можете добавить свое несовершенство (если оно будет принято, вы получите 100 баллов),
+    либо переопределить существующее на более максимальное
+    =link_to ' (чтобы узнать, как это сделать, см. раздел «Помощь»).', "/project/#{@project.id}/help"
+    Для этого щелкните по иконке шестеренки в углу несовершенства, которое хотите переопределить, и если ваше определение будет принято, вы получите 200 баллов.
+    %br
+    %b В итоге мы должны получить таблицу, которая кратко, но исчерпывающе, отображает ситуацию по исследуемой теме
+    %br
+    -#= link_to image_tag('add_discontent.png'), url_for(:action => 'new')
 %br
 %table.disColumns
 
@@ -41,10 +43,10 @@
                                     =link_to image_tag('redgear.png'), :action => 'new', :project => @project, :replace_id => post.id
                                 -if @project.status == 4
                                     .voteBar
-                                        -if admin?
+                                        -if boss?
                                             %span.number=post.voted_users.count
                                         - if can_vote?(post.voted_users.size, @number_v, @votes)
-                                            =link_to "+", "/project/#{@project.id}/discontent/vote/#{post.id}", :remote => true, :method => :put, class: "voteCounter", :id => "aspect_#{post.id}"
+                                            =link_to 'отдать голос', "/project/#{@project.id}/discontent/vote/#{post.id}", :remote => true, :method => :put, class: "voteCounter", :id => "aspect_#{post.id}"
 
                                 .previewtext
                                     =post.show_content.html_safe
@@ -70,7 +72,7 @@
                                             -if admin?
                                                 %span.number=post.voted_users.count
                                             - if can_vote?(post.voted_users.size, @number_v, @votes)
-                                                =link_to "+", "/project/#{@project.id}/discontent/vote/#{post.id}", :remote => true, :method => :put, class: "voteCounter", :id => "aspect_#{post.id}"
+                                                =link_to 'отдать голос', "/project/#{@project.id}/discontent/vote/#{post.id}", :remote => true, :method => :put, class: "voteCounter", :id => "aspect_#{post.id}"
                                 .previewtext
 
                                     =post.show_content.html_safe

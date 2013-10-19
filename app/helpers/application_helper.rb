@@ -128,7 +128,7 @@ def  status_title(pr)
 	end
 
 	def can_vote?(this_v, all_v, all)
-		this_v<1 and all_v<(all+1)
+		this_v<1 and all_v!=0
 	end
 def discontent_style_name(dis)
 	case dis

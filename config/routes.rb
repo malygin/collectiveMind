@@ -47,10 +47,14 @@ scope '/project/:project' do
   end
 
   scope '/stage/:stage' do
-     namespace :essay do    
-      resources :posts do
+     namespace :essay do
+       get 'censored/:post_id'  => 'posts#censored'
+
+       resources :posts do
             member do
                 put :add_comment
+                put :censored_comment
+
                 put :plus
                 put :plus_comment
             end
