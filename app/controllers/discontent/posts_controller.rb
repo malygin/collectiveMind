@@ -36,6 +36,12 @@ end
       if @project.status == 4
           @number_v = @project.stage2 - current_user.voted_discontent_posts.size
           @votes = @project.stage2
+          if boss?
+            @all_people = @project.users.size
+
+            @voted_people = ActiveRecord::Base.connection.execute("select count(*) as r from (select distinct v.user_id from discontent_votings v  left join   discontent_posts asp on (v.discontent_post_id = asp.id) where asp.project_id = #{@project.id}) as dm").first["r"]
+            @votes = ActiveRecord::Base.connection.execute("select count(*) as r from (select  v.user_id from discontent_votings v  left join   discontent_posts asp on (v.discontent_post_id = asp.id) where asp.project_id = #{@project.id}) as dm").first["r"].to_i
+          end
       end
       render 'table', :layout => 'application_two_column'
     else

@@ -3,6 +3,8 @@
     %p.righttext
         = @news.anons
         = link_to 'подробнее',  expert_news_post_path(@project, @news)
+- if @project.status>3
+    %p.righttext=link_to 'Посмотреть эссе этапа', essay_posts_path(@project,4), :id => 'essay_list'
 %ul.leftlink
     %li
         = link_to "Добавлены мной (#{current_user.discontent_posts.for_project(@project.id).count})", discontent_my_path(@project,:status => 6), class: menu_status(6)
