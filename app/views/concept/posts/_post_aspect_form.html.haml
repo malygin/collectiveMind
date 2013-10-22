@@ -1,6 +1,7 @@
-%div{id: "discontent_#{post_aspect_form.discontent.id}"}
+%h3(id ="name_#{post_aspect_form.id}")=post_aspect_form.name
+%div{id: "discontent_#{post_aspect_form.id}"}
   %p.ftable.fline
-    %a{onclick: "remove_discontent('discontent_#{post_aspect_form.discontent.id}')"} Не хочу решать недовольство
+    %a{onclick: "remove_discontent('#{post_aspect_form.id}')"} Не хочу решать несовершенство
   %p.ftable.fline
     %span.bigtext Корректируемое несовершенство:
   %p.ftable.fcolor

@@ -27,9 +27,15 @@ class Core::Project < ActiveRecord::Base
 
   has_many :life_tape_posts, :class_name => "LifeTape::Post"
   has_many :aspects, :class_name => "Discontent::Aspect"
+
   has_many :discontent_ongoing_post, :conditions =>"status = 0  ", :class_name => "Discontent::Post"
   has_many :discontent_accepted_post, :conditions =>"status = 2  ", :class_name => "Discontent::Post"
   has_many :discontent_for_admin_post, :conditions =>"status = 1  ", :class_name => "Discontent::Post"
+
+  has_many :concept_ongoing_post, :conditions =>"status = 0  ", :class_name => "Concept::Post"
+  has_many :concept_accepted_post, :conditions =>"status = 2  ", :class_name => "Concept::Post"
+  has_many :concept_for_admin_post, :conditions =>"status = 1  ", :class_name => "Concept::Post"
+
   has_many :project_users
   has_many :users, :through => :project_users
 end

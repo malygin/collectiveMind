@@ -10,9 +10,14 @@ module JournalHelper
       when 'add_score_anal'
 				'получил 20 балов за аналитику '+ link_to('за комментарий к несовершенству', "/project/#{project}/discontent/status/0/aspect/0/posts/#{j.body}")
       when 'concept_post_save'
-				'добавил  '+ link_to('концепцию', concept_post_path(j.body))
-			when 'concept_comment_save'
-				'добавил комментарий к '+  link_to('концепции', concept_post_path(j.body))
+				'добавил  '+ link_to('образ', concept_post_path(project,j.body))
+      when 'concept_comment_save'
+        s = j.body.split(':')
+        if s.length == 1
+          'добавил комментарий к '+  link_to('образу', concept_post_path(project, j.body))
+        else
+          "добавил комментарий '#{s[0]}...' к "+  link_to('образу', concept_post_path(project, s[1]))
+        end
 			when 'expert_news_post_save'
 				'добавил  '+ link_to('новость', expert_news_post_path(project, j.body))
       when 'expert_news_comment_save'
@@ -54,7 +59,7 @@ module JournalHelper
         'отправил эксперту ' +link_to('несовершенство', discontent_post_path(project,j.body))
 
       when 'concept_post_update'
-				'отредактировал '+  link_to('концепцию', concept_post_path(j.body))
+				'отредактировал '+  link_to('концепцию', concept_post_path(project,j.body))
 			when 'question_post_save'
 				'задал '+  link_to('вопрос', question_post_path(project, j.body))		
       when 'question_comment_save'
@@ -67,13 +72,13 @@ module JournalHelper
         end
 
 			when 'concept_post_revision'
-				'отправил на доработку ' +link_to('концепцию', concept_post_path(j.body))
+				'отправил на доработку ' +link_to('образ', concept_post_path(project,j.body))
 			when 'concept_post_acceptance'
-				'принял ' +link_to('концепцию', concept_post_path(j.body))
+				'принял ' +link_to('образ', concept_post_path(project,j.body))
 			when 'concept_post_rejection'
-				'отклонил ' +link_to('концепцию', concept_post_path(j.body))
+				'отклонил ' +link_to('образ', concept_post_path(project,j.body))
 			when 'concept_post_to_expert'	
-				'отправил эксперту ' +link_to('концепцию', concept_post_path(j.body))
+				'отправил эксперту ' +link_to('образ', concept_post_path(project,j.body))
 			
 			when 'plan_post_save'
 				'добавил  '+ link_to('проект', plan_post_path(j.body))

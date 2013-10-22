@@ -1,16 +1,28 @@
-	
 %ul.leftlink
-	%li= link_to "Обсуждаются", concept_posts_path(@project,:status => 0), class: menu_status(0) 
-	%li= link_to "Архив", concept_posts_path(@project,:status =>3), class: menu_status(3) 
-	%li= link_to "Принятые", concept_posts_path(@project,:status =>2), class: menu_status(2)
-	- if boss?
-		%li= link_to "На рассмотрении", concept_posts_path(@project,:status =>1), class: menu_status(1)
+    %li
+        -#= link_to "Добавлены мной (#{current_user.concept_posts.for_project(@project.id).count})", concept_my_path(@project,:status => 6), class: menu_status(6)
+    %li
+        %b
+            = link_to "Обсуждаются (#{@project.concept_ongoing_post.count})", concept_posts_path(@project,:status => 0), class: menu_status(0)
+    %li= link_to 'Архив', concept_posts_path(@project,:status =>3), class: menu_status(3)
+    -if @project.status == 4
+        %li= link_to 'Голосование', concept_posts_path(@project,:status =>2), class: menu_status(2)
+    -else
+        %li= link_to "Принятые (#{@project.concept_accepted_post.count})", concept_posts_path(@project,:status =>2), class: menu_status(2)
+
+    - if boss?
+        %li= link_to 'Из проектов и концепций', concept_posts_path(@project,:status =>5), class: menu_status(5)
+        %li= link_to "На рассмотрении (#{@project.concept_for_admin_post.count})", concept_posts_path(@project,:status =>1), class: menu_status(1)
+
+
 
 -unless @journals.nil?
-	.redtitle Активность
-	- @journals.each do |journal|
-		%p.righttext
-			=Russian::strftime(journal.created_at,"%d %B %k:%M:%S ")
-			%b= journal.user.name_title
-			= journal_parser(journal, @project.id).html_safe
-		=image_tag('dots.png')
+    .redtitle Активность
+    - @journals.each do |journal|
+        %p.righttext
+            =Russian::strftime(journal.created_at,"%d %B %k:%M:%S ")
+            =link_to journal.user.name_title,  "/project/#{@project.id}/users/#{journal.user.id}"
+            = journal_parser(journal, @project.id).html_safe
+        =image_tag 'dots.png', :width =>'250px;'
+    %br
+    %b=link_to 'смотреть все события', "/project/#{@project.id}/journal"

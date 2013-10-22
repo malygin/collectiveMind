@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131019073550) do
+ActiveRecord::Schema.define(:version => 20131022091050) do
 
   create_table "answers", :force => true do |t|
     t.string   "text"
@@ -65,8 +65,9 @@ ActiveRecord::Schema.define(:version => 20131019073550) do
     t.integer  "user_id"
     t.integer  "post_id"
     t.boolean  "useful"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at",                    :null => false
+    t.datetime "updated_at",                    :null => false
+    t.boolean  "censored",   :default => false
   end
 
   add_index "concept_comments", ["created_at"], :name => "index_concept_comments_on_created_at"
@@ -127,11 +128,12 @@ ActiveRecord::Schema.define(:version => 20131019073550) do
     t.integer  "user_id"
     t.integer  "number_views"
     t.integer  "life_tape_post_id"
-    t.datetime "created_at",        :null => false
-    t.datetime "updated_at",        :null => false
+    t.datetime "created_at",                           :null => false
+    t.datetime "updated_at",                           :null => false
     t.integer  "status"
     t.integer  "project_id"
     t.text     "content"
+    t.boolean  "censored",          :default => false
   end
 
   add_index "concept_posts", ["created_at"], :name => "index_concept_posts_on_created_at"

@@ -24,7 +24,7 @@ class Discontent::Post < ActiveRecord::Base
   end
 
   def show_content
-  	'<b>что:</b>'+self.content + '<br/> <b> когда:</b>'+ self.when + '<br/> <b>где:</b> ' +self.where+'<br/>'
+  	'<b>что: </b>'+self.content + '<br/> <b> когда: </b>'+ self.when + '<br/> <b>где: </b> ' +self.where+'<br/>'
 
   end
 end

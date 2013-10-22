@@ -21,7 +21,9 @@ class Concept::PostsController < PostsController
   end
 
   def prepare_data
-    @project = Core::Project.find(params[:project]) 
+    @project = Core::Project.find(params[:project])
+    @aspects = Discontent::Aspect.where(:project_id => @project, :status => 1)
+
     @journals = Journal.events_for_user_feed @project.id
     @news = ExpertNews::Post.first  
     @status = params[:status]
@@ -53,13 +55,8 @@ class Concept::PostsController < PostsController
     unless params['correct_disc'].nil?
       params['correct_disc'].each do |v|
         if v!= ''
-
           unless Discontent::Post.exists?(v[0])
-            disc = Discontent::Post.new(v[1]['disc'])
-            disc.status = 5
-            disc.project = params[:project]
-            disc.user = current_user
-            disc.save!
+            disc =new_disc(v[1])
             v[1].delete :disc
             @concept_post.post_aspects.build(v[1].merge :discontent_aspect_id=> disc.id)
           else
@@ -94,7 +91,13 @@ class Concept::PostsController < PostsController
     unless params['correct_disc'].nil?
       params['correct_disc'].each do |v|
         if v!= ''
-          @concept_post.post_aspects.build(v[1].merge :discontent_aspect_id=> v[0])
+          unless Discontent::Post.exists?(v[0])
+            disc =new_disc(v[1])
+            v[1].delete :disc
+            @concept_post.post_aspects.build(v[1].merge :discontent_aspect_id=> disc.id)
+          else
+            @concept_post.post_aspects.build(v[1].merge :discontent_aspect_id=> v[0])
+          end
 
         end
       end
@@ -158,5 +161,22 @@ class Concept::PostsController < PostsController
 
    end
 
+   def expert_acceptance_save
+     post = save_note(params, 2, 'Принято!',name_of_model_for_param+'_acceptance' )
+     post.user.add_score(200)
+     redirect_to  action: "index"
+   end
+
+  private
+  def new_disc(param)
+    disc = Discontent::Post.new(param['disc'])
+    disc.status = 5
+    project = Core::Project.find(params[:project])
+
+    disc.project = project
+    disc.user = current_user
+    disc.save!
+    disc
+  end
   
 end

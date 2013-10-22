@@ -50,13 +50,15 @@
                                 -if  @project.status == 3
                                     .gear
                                         =link_to image_tag('redgear.png'), :action => 'new', :project => @project, :replace_id => post.id
-                                -if @project.status == 4
+                                -if @project.status >3
                                     .voteBar
-                                        -if boss?
-
-                                            %b="#{(post.voted_users.size*100)/@votes}%"
-                                            %span.number=post.voted_users.count
-                                        - if can_vote?(post.voted(current_user).size, @number_v, @votes)
+                                        -if admin?
+                                            - if post.status == 2
+                                                =link_to 'обяз.', "/project/#{@project.id}/discontent/make_mandatory/"+post.id.to_s , :remote => true, :method => :put, class: "voteCounter", :id => "aspect_#{post.id}"
+                                            - else
+                                                %i обяз.
+                                            %span="#{post.voted_users.count}(#{(post.voted_users.size*100)/@votes}%)"
+                                        - if @project.status == 4 and can_vote?(post.voted(current_user).size, @number_v, @votes)
                                             =link_to 'отдать голос', "/project/#{@project.id}/discontent/vote/#{post.id}", :remote => true, :method => :put, class: "voteCounter", :id => "aspect_#{post.id}"
 
                                 .previewtext
@@ -78,14 +80,18 @@
                                 -if  @project.status == 3
                                     .gear
                                         =link_to image_tag('gear.png'), :action => 'new', :project => @project, :replace_id => post.id
-                                -if @project.status == 4
-                                    -if @project.status == 4
-                                        .voteBar
-                                            -if admin?
-                                                %b="#{(post.voted_users.size*100)/@votes}%"
-                                                %span.number=post.voted_users.count
-                                            - if can_vote?(post.voted(current_user).size, @number_v, @votes)
-                                                =link_to 'отдать голос', "/project/#{@project.id}/discontent/vote/#{post.id}", :remote => true, :method => :put, class: "voteCounter", :id => "aspect_#{post.id}"
+                                -if @project.status >3
+                                    .voteBar
+                                        -if admin?
+                                            - if post.status == 2
+                                                =link_to 'обяз.', "/project/#{@project.id}/discontent/make_mandatory/"+post.id.to_s , :remote => true, :method => :put, class: "voteCounter", :id => "aspect_#{post.id}"
+                                            - else
+                                                %i обяз.
+                                            %span="#{post.voted_users.count}(#{(post.voted_users.size*100)/@votes}%)"
+
+
+                                        - if @project.status == 4 and can_vote?(post.voted(current_user).size, @number_v, @votes)
+                                            =link_to 'отдать голос', "/project/#{@project.id}/discontent/vote/#{post.id}", :remote => true, :method => :put, class: "voteCounter", :id => "aspect_#{post.id}"
                                 .previewtext
 
                                     =post.show_content.html_safe

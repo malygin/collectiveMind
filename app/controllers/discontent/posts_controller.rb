@@ -33,7 +33,7 @@ end
     	@posts = current_model.where(:project_id => @project, :status => @status).paginate(:page => params[:page])
     end
     if @status == '2'
-      if @project.status == 4
+      if @project.status > 3
           @number_v = @project.stage2 - current_user.voted_discontent_posts.size
           @votes = @project.stage2
           if boss?

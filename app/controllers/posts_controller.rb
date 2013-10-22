@@ -253,16 +253,19 @@ def index
     v = voting_model.find(params[:post_id])
     v.update_column(:status, v.status+1)
     render json: 5
-
    end
 
    def down
     v = voting_model.find(params[:post_id])
     v.update_column(:status, v.status-1)
     render json: 5
-
    end
 
+  def make_mandatory
+    v = voting_model.find(params[:post_id])
+    v.update_column(:status, 4)
+    render json: 5
+  end
 ### function for dialog with expert
 
 
@@ -297,17 +300,17 @@ def index
   end
 
   def to_expert_save
-    save_note(params, 1, 'Отправлено эксперту!','discontent_post_to_expert' )
+    save_note(params, 1, 'Отправлено эксперту!',name_of_model_for_param+'_to_expert' )
     redirect_to  action: "index"    
   end
 
   def expert_rejection_save
-    save_note(params, 3, 'Отклонено!','discontent_post_rejection' )
+    save_note(params, 3, 'Отклонено!',name_of_model_for_param+'_rejection' )
     redirect_to  action: "index"
   end
 
   def expert_acceptance_save
-    post = save_note(params, 2, 'Принято!','discontent_post_acceptance' )
+    post = save_note(params, 2, 'Принято!',name_of_model_for_param+'_acceptance' )
     if post.post_replaced.empty?
       post.user.add_score(100)
     else
@@ -315,7 +318,6 @@ def index
       post.post_replaced.each do |rp|
         rp.update_column(:status, 3)
       end
-
     end
     redirect_to  action: "index"
   end
