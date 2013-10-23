@@ -2,12 +2,22 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="aa6a5015-3a56-4a58-9b19-a0ad2e76ab80" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/discontent/posts/table.html.haml" afterPath="$PROJECT_DIR$/app/views/discontent/posts/table.html.haml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/views/core/projects/help_s2.html.haml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/views/core/projects/help_t2.html.haml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/concept/posts/_form.html.haml" afterPath="$PROJECT_DIR$/app/views/concept/posts/_form.html.haml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/concept/posts/_post_aspect_form.html.haml" afterPath="$PROJECT_DIR$/app/views/concept/posts/_post_aspect_form.html.haml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/concept/posts/_resolve_discontent.html.haml" afterPath="$PROJECT_DIR$/app/views/concept/posts/_resolve_discontent.html.haml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/concept/posts/add_aspect.js.haml" afterPath="$PROJECT_DIR$/app/views/concept/posts/add_aspect.js.haml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/concept/posts/add_new_discontent.js.haml" afterPath="$PROJECT_DIR$/app/views/concept/posts/add_new_discontent.js.haml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/core/projects/help.html.haml" afterPath="$PROJECT_DIR$/app/views/core/projects/help.html.haml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/config/routes.rb" afterPath="$PROJECT_DIR$/config/routes.rb" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/concept/posts/show.html.haml" afterPath="$PROJECT_DIR$/app/views/concept/posts/show.html.haml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/concept/posts/table.html.haml" afterPath="$PROJECT_DIR$/app/views/concept/posts/table.html.haml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="collectiveMind.iws" />
     <ignored path=".idea/workspace.xml" />
-    <file path="/Dummy.txt" changelist="aa6a5015-3a56-4a58-9b19-a0ad2e76ab80" time="1382508878307" ignored="false" />
+    <file path="/Dummy.txt" changelist="aa6a5015-3a56-4a58-9b19-a0ad2e76ab80" time="1382509019544" ignored="false" />
     <file path="/boot.rb" changelist="aa6a5015-3a56-4a58-9b19-a0ad2e76ab80" time="1372798651996" ignored="false" />
     <file path="/Gemfile" changelist="aa6a5015-3a56-4a58-9b19-a0ad2e76ab80" time="1374341578097" ignored="false" />
     <file path="/users_controller.rb" changelist="aa6a5015-3a56-4a58-9b19-a0ad2e76ab80" time="1380793607255" ignored="false" />
@@ -17,18 +27,18 @@
     <file path="/posts_controller.rb" changelist="aa6a5015-3a56-4a58-9b19-a0ad2e76ab80" time="1382435832427" ignored="false" />
     <file path="/post_aspect.rb" changelist="aa6a5015-3a56-4a58-9b19-a0ad2e76ab80" time="1375730129988" ignored="false" />
     <file path="/post.rb" changelist="aa6a5015-3a56-4a58-9b19-a0ad2e76ab80" time="1381691541072" ignored="false" />
-    <file path="/show.html.haml" changelist="aa6a5015-3a56-4a58-9b19-a0ad2e76ab80" time="1381940332838" ignored="false" />
-    <file path="/table.html.haml" changelist="aa6a5015-3a56-4a58-9b19-a0ad2e76ab80" time="1382508868676" ignored="false" />
+    <file path="/show.html.haml" changelist="aa6a5015-3a56-4a58-9b19-a0ad2e76ab80" time="1382517158354" ignored="false" />
+    <file path="/table.html.haml" changelist="aa6a5015-3a56-4a58-9b19-a0ad2e76ab80" time="1382515189318" ignored="false" />
     <file path="/aspect.rb" changelist="aa6a5015-3a56-4a58-9b19-a0ad2e76ab80" time="1382367116167" ignored="false" />
     <file path="/application.css.sass" changelist="aa6a5015-3a56-4a58-9b19-a0ad2e76ab80" time="1382109479402" ignored="false" />
     <file path="/help4.html.haml" changelist="aa6a5015-3a56-4a58-9b19-a0ad2e76ab80" time="1374049565833" ignored="false" />
     <file path="/routes.rb" changelist="aa6a5015-3a56-4a58-9b19-a0ad2e76ab80" time="1381516740083" ignored="false" />
     <file path="/application.rb" changelist="aa6a5015-3a56-4a58-9b19-a0ad2e76ab80" time="1374340905862" ignored="false" />
     <file path="/projects_controller.rb" changelist="aa6a5015-3a56-4a58-9b19-a0ad2e76ab80" time="1380207669579" ignored="false" />
-    <file path="/_form.html.haml" changelist="aa6a5015-3a56-4a58-9b19-a0ad2e76ab80" time="1382433701326" ignored="false" />
+    <file path="/_form.html.haml" changelist="aa6a5015-3a56-4a58-9b19-a0ad2e76ab80" time="1382515545734" ignored="false" />
     <file path="/_post_aspect_form.html.haml" changelist="aa6a5015-3a56-4a58-9b19-a0ad2e76ab80" time="1382437055507" ignored="false" />
     <file path="/20130721105148_create_plan_post_aspects.rb" changelist="aa6a5015-3a56-4a58-9b19-a0ad2e76ab80" time="1374405243513" ignored="false" />
-    <file path="/add_aspect.js.haml" changelist="aa6a5015-3a56-4a58-9b19-a0ad2e76ab80" time="1375190721465" ignored="false" />
+    <file path="/add_aspect.js.haml" changelist="aa6a5015-3a56-4a58-9b19-a0ad2e76ab80" time="1382516412204" ignored="false" />
     <file path="/20130722090550_fix_name_column_for_plan_post_aspect.rb" changelist="aa6a5015-3a56-4a58-9b19-a0ad2e76ab80" time="1374484021103" ignored="false" />
     <file path="/20130722105054_fix_type_column_for_plan_post_aspect_first_stage.rb" changelist="aa6a5015-3a56-4a58-9b19-a0ad2e76ab80" time="1374490314986" ignored="false" />
     <file path="/20130723104213_create_estimate_post_aspects.rb" changelist="aa6a5015-3a56-4a58-9b19-a0ad2e76ab80" time="1374576567354" ignored="false" />
@@ -37,7 +47,7 @@
     <file path="/application.js.coffee" changelist="aa6a5015-3a56-4a58-9b19-a0ad2e76ab80" time="1381662697108" ignored="false" />
     <file path="/posts.js" changelist="aa6a5015-3a56-4a58-9b19-a0ad2e76ab80" time="1382436891101" ignored="false" />
     <file path="/add_new_discontent.js.haml" changelist="aa6a5015-3a56-4a58-9b19-a0ad2e76ab80" time="1375200121269" ignored="false" />
-    <file path="/_resolve_discontent.html.haml" changelist="aa6a5015-3a56-4a58-9b19-a0ad2e76ab80" time="1382437063327" ignored="false" />
+    <file path="/_resolve_discontent.html.haml" changelist="aa6a5015-3a56-4a58-9b19-a0ad2e76ab80" time="1382516061241" ignored="false" />
     <file path="/_left_side.html.haml" changelist="aa6a5015-3a56-4a58-9b19-a0ad2e76ab80" time="1381518288851" ignored="false" />
     <file path="/_post_estimate.html.haml" changelist="aa6a5015-3a56-4a58-9b19-a0ad2e76ab80" time="1375388070483" ignored="false" />
     <file path="/20130805085158_add_important_for_estimate_post.rb" changelist="aa6a5015-3a56-4a58-9b19-a0ad2e76ab80" time="1375692789200" ignored="false" />
@@ -59,7 +69,7 @@
     <file path="/_header.html.haml" changelist="aa6a5015-3a56-4a58-9b19-a0ad2e76ab80" time="1380128849364" ignored="false" />
     <file path="/_header_no_current_project.html.haml" changelist="aa6a5015-3a56-4a58-9b19-a0ad2e76ab80" time="1379325177203" ignored="false" />
     <file path="/_top_menu.html.haml" changelist="aa6a5015-3a56-4a58-9b19-a0ad2e76ab80" time="1379448763416" ignored="false" />
-    <file path="/help.html.haml" changelist="aa6a5015-3a56-4a58-9b19-a0ad2e76ab80" time="1380185437337" ignored="false" />
+    <file path="/help.html.haml" changelist="aa6a5015-3a56-4a58-9b19-a0ad2e76ab80" time="1382514677772" ignored="false" />
     <file path="/article3.html.haml" changelist="aa6a5015-3a56-4a58-9b19-a0ad2e76ab80" time="1379498796370" ignored="false" />
     <file path="/_comment.html.haml" changelist="aa6a5015-3a56-4a58-9b19-a0ad2e76ab80" time="1381157646124" ignored="false" />
     <file path="/to_expert.html.haml" changelist="aa6a5015-3a56-4a58-9b19-a0ad2e76ab80" time="1379514060255" ignored="false" />
@@ -92,6 +102,7 @@
     <file path="/20131013103831_create_discontent_post_replaces.rb" changelist="aa6a5015-3a56-4a58-9b19-a0ad2e76ab80" time="1381660867341" ignored="false" />
     <file path="/20131019073550_add_censored_to_essay.rb" changelist="aa6a5015-3a56-4a58-9b19-a0ad2e76ab80" time="1382168179925" ignored="false" />
     <file path="/20131022091050_add_censored_to_concept.rb" changelist="aa6a5015-3a56-4a58-9b19-a0ad2e76ab80" time="1382433121100" ignored="false" />
+    <file path="/help_t2.html.haml" changelist="aa6a5015-3a56-4a58-9b19-a0ad2e76ab80" time="1382514882346" ignored="false" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -116,73 +127,64 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="posts_controller.rb" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/controllers/posts_controller.rb">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="311" column="0" selection-start="8836" selection-end="9183" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="journal_helper.rb" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/helpers/journal_helper.rb">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="80" column="73" selection-start="3656" selection-end="3656" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="_post_edit_bar.html.haml" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/views/shared/_post_edit_bar.html.haml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="1" column="24" selection-start="75" selection-end="75" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="table.html.haml" pinned="false" current="true" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/app/views/discontent/posts/table.html.haml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="84" column="48" selection-start="4375" selection-end="4375" vertical-scroll-proportion="0.5436106">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="_left_side.html.haml" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/views/discontent/posts/_left_side.html.haml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="22" column="0" selection-start="1289" selection-end="1750" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="project.rb" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/models/core/project.rb">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="36" column="89" selection-start="1411" selection-end="1411" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="posts_controller.rb" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/controllers/concept/posts_controller.rb">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="164" column="83" selection-start="4867" selection-end="4867" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="table.html.haml" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/views/concept/posts/table.html.haml">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="1" column="0" selection-start="58" selection-end="58" vertical-scroll-proportion="0.0">
+            <state line="7" column="3" selection-start="466" selection-end="466" vertical-scroll-proportion="-4.375">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="_form.html.haml" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/views/concept/posts/_form.html.haml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="16" column="1" selection-start="546" selection-end="576" vertical-scroll-proportion="-10.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="show.html.haml" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/app/views/concept/posts/show.html.haml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="15" column="7" selection-start="362" selection-end="362" vertical-scroll-proportion="0.45638946">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="_resolve_discontent.html.haml" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/views/concept/posts/_resolve_discontent.html.haml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="52" column="114" selection-start="2300" selection-end="2388" vertical-scroll-proportion="-31.875">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="_post_aspect_form.html.haml" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/views/concept/posts/_post_aspect_form.html.haml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="32" column="116" selection-start="1781" selection-end="1868" vertical-scroll-proportion="-16.875">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="add_new_discontent.js.haml" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/views/concept/posts/add_new_discontent.js.haml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="4" column="38" selection-start="650" selection-end="650" vertical-scroll-proportion="-2.5">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="add_aspect.js.haml" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/views/concept/posts/add_aspect.js.haml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="1" column="377" selection-start="153" selection-end="625" vertical-scroll-proportion="-0.625">
               <folding />
             </state>
           </provider>
@@ -197,10 +199,19 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="index.html.haml" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/views/concept/posts/index.html.haml">
+      <file leaf-file-name="help_t2.html.haml" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/views/core/projects/help_t2.html.haml">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="0" column="24" selection-start="0" selection-end="58" vertical-scroll-proportion="0.0">
+            <state line="2" column="33" selection-start="108" selection-end="108" vertical-scroll-proportion="21.333334">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="routes.rb" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/config/routes.rb">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="39" column="49" selection-start="1320" selection-end="1320" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -229,22 +240,22 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/db/migrate/20131022091050_add_censored_to_concept.rb" />
-        <option value="$PROJECT_DIR$/app/views/concept/posts/_form.html.haml" />
-        <option value="$PROJECT_DIR$/config/routes.rb" />
-        <option value="$PROJECT_DIR$/app/assets/javascripts/concept/posts.js" />
-        <option value="$PROJECT_DIR$/app/views/concept/posts/_post_aspect_form.html.haml" />
-        <option value="$PROJECT_DIR$/app/views/concept/posts/_resolve_discontent.html.haml" />
-        <option value="$PROJECT_DIR$/app/models/discontent/post.rb" />
-        <option value="$PROJECT_DIR$/app/controllers/users_controller.rb" />
-        <option value="$PROJECT_DIR$/app/views/shared/_post_edit_bar.html.haml" />
         <option value="$PROJECT_DIR$/app/controllers/posts_controller.rb" />
         <option value="$PROJECT_DIR$/app/controllers/concept/posts_controller.rb" />
         <option value="$PROJECT_DIR$/app/helpers/journal_helper.rb" />
-        <option value="$PROJECT_DIR$/app/views/concept/posts/table.html.haml" />
         <option value="$PROJECT_DIR$/app/models/core/project.rb" />
         <option value="$PROJECT_DIR$/app/views/concept/posts/_left_side.html.haml" />
         <option value="$PROJECT_DIR$/app/views/discontent/posts/table.html.haml" />
+        <option value="$PROJECT_DIR$/app/views/core/projects/help.html.haml" />
+        <option value="$PROJECT_DIR$/app/views/core/projects/help_t2.html.haml" />
+        <option value="$PROJECT_DIR$/config/routes.rb" />
+        <option value="$PROJECT_DIR$/app/views/concept/posts/table.html.haml" />
+        <option value="$PROJECT_DIR$/app/views/concept/posts/_form.html.haml" />
+        <option value="$PROJECT_DIR$/app/views/concept/posts/_resolve_discontent.html.haml" />
+        <option value="$PROJECT_DIR$/app/views/concept/posts/add_aspect.js.haml" />
+        <option value="$PROJECT_DIR$/app/views/concept/posts/add_new_discontent.js.haml" />
+        <option value="$PROJECT_DIR$/app/views/concept/posts/_post_aspect_form.html.haml" />
+        <option value="$PROJECT_DIR$/app/views/concept/posts/show.html.haml" />
       </list>
     </option>
   </component>
@@ -356,6 +367,20 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
+              <option name="myItemId" value="config" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="collectiveMind" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="collectiveMind" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
               <option name="myItemId" value="app" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
@@ -396,33 +421,11 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="discontent" />
+              <option name="myItemId" value="concept" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="posts" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="collectiveMind" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="collectiveMind" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="app" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="views" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="discontent" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -522,9 +525,9 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/app/views/core/projects" />
       <recent name="$PROJECT_DIR$/app/views/posts" />
       <recent name="$PROJECT_DIR$/app/views/discontent/posts" />
-      <recent name="$PROJECT_DIR$/app/views/core/projects" />
       <recent name="$PROJECT_DIR$/app/views/plan/posts" />
     </key>
   </component>
@@ -1242,7 +1245,11 @@
       <created>1382508881951</created>
       <updated>1382508881952</updated>
     </task>
-    <option name="localTasksCounter" value="80" />
+    <task id="LOCAL-00080" summary="concept ready.. almost">
+      <created>1382509022947</created>
+      <updated>1382509022947</updated>
+    </task>
+    <option name="localTasksCounter" value="81" />
     <servers />
   </component>
   <component name="TodoView" selected-index="0">
@@ -1274,8 +1281,8 @@
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3294702" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32901135" sideWeight="0.49006623" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="true" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.3273906" sideWeight="0.49669966" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.5033003" sideWeight="0.49957302" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.3273906" sideWeight="0.49834436" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.50165564" sideWeight="0.49957302" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3979764" sideWeight="0.500427" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4240924" sideWeight="0.49699572" order="2" side_tool="false" content_ui="tabs" />
@@ -1404,86 +1411,6 @@
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/app/models/discontent/aspect.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="9" column="58" selection-start="642" selection-end="642" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/controllers/discontent/posts_controller.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="25" column="28" selection-start="565" selection-end="644" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/models/discontent/post.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="26" column="86" selection-start="1546" selection-end="1546" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/controllers/essay/posts_controller.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/controllers/users_controller.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="163" column="58" selection-start="4623" selection-end="4623" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/views/concept/posts/show.html.haml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="49" column="20" selection-start="1915" selection-end="1915" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/views/shared/_post_edit_bar.html.haml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="1" column="24" selection-start="75" selection-end="75" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/controllers/posts_controller.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="311" column="0" selection-start="8836" selection-end="9183" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/controllers/concept/posts_controller.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="164" column="83" selection-start="4867" selection-end="4867" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/helpers/journal_helper.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="80" column="73" selection-start="3656" selection-end="3656" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/views/concept/posts/index.html.haml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="24" selection-start="0" selection-end="58" vertical-scroll-proportion="-0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/views/concept/posts/table.html.haml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="1" column="0" selection-start="58" selection-end="58" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/models/core/project.rb">
       <provider selected="true" editor-type-id="text-editor">
         <state line="36" column="89" selection-start="1411" selection-end="1411" vertical-scroll-proportion="0.0">
@@ -1498,6 +1425,62 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/app/views/discontent/posts/table.html.haml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="16" column="0" selection-start="539" selection-end="1111" vertical-scroll-proportion="-10.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/views/discontent/posts/_form.html.haml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/views/core/projects/help.html.haml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="49" column="96" selection-start="1941" selection-end="1941" vertical-scroll-proportion="-16.875">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/views/core/projects/help_s2.html.haml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/views/core/projects/help_t2.html.haml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="2" column="33" selection-start="108" selection-end="108" vertical-scroll-proportion="21.333334">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/config/routes.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="39" column="49" selection-start="1320" selection-end="1320" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/views/concept/posts/add_aspect.js.haml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="1" column="377" selection-start="153" selection-end="625" vertical-scroll-proportion="-0.625">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/views/concept/posts/add_new_discontent.js.haml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="4" column="38" selection-start="650" selection-end="650" vertical-scroll-proportion="-2.5">
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/app/views/concept/posts/_left_side.html.haml">
       <provider selected="true" editor-type-id="text-editor">
         <state line="14" column="60" selection-start="902" selection-end="902" vertical-scroll-proportion="-8.75">
@@ -1505,9 +1488,37 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/views/discontent/posts/table.html.haml">
+    <entry file="file://$PROJECT_DIR$/app/views/concept/posts/_form.html.haml">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="84" column="48" selection-start="4375" selection-end="4375" vertical-scroll-proportion="0.5436106">
+        <state line="16" column="1" selection-start="546" selection-end="576" vertical-scroll-proportion="-10.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/views/concept/posts/table.html.haml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="7" column="3" selection-start="466" selection-end="466" vertical-scroll-proportion="-4.375">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/views/concept/posts/_resolve_discontent.html.haml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="52" column="114" selection-start="2300" selection-end="2388" vertical-scroll-proportion="-31.875">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/views/concept/posts/_post_aspect_form.html.haml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="32" column="116" selection-start="1781" selection-end="1868" vertical-scroll-proportion="-16.875">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/views/concept/posts/show.html.haml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="15" column="7" selection-start="362" selection-end="362" vertical-scroll-proportion="0.45638946">
           <folding />
         </state>
       </provider>

@@ -32,19 +32,25 @@
 
             %br
     %li
-        %b Стадия 1) – анализ ситуации (обязательно ознакомьтесь!)
+        %b Стадия 1) – анализ ситуации
         %br
         %ul.help
             %li=link_to 'Описание стадии', "/project/#{@core_project.id}/help_s1"
             %li=link_to 'Как участвовать на этой стадии?', "/project/#{@core_project.id}/help_t1"
 
             %br
-    -#%li
-    -#    %b Первый этап - анализ ситуации - здесь мы начинаем собирать и обощать несовершенства
-    -#    %br
-    -#    %ul.help
-    -#        %li=link_to 'Техническая помощь ', ""
-    -#        %li=link_to 'Подробнее о несовершенствах ', ""
+
+    %li
+        %b
+            Стадия 2) – формулирование проблемы
+            %span(style="color:red;")новый раздел
+        %br
+        %ul.help
+            %li=link_to 'Описание стадии', "/project/#{@core_project.id}/help_s2"
+            %li=link_to 'Как участвовать на этой стадии?', "/project/#{@core_project.id}/help_t2"
+
+            %br
+
 
 
 %br
