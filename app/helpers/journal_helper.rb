@@ -59,7 +59,7 @@ module JournalHelper
         'отправил эксперту ' +link_to('несовершенство', discontent_post_path(project,j.body))
 
       when 'concept_post_update'
-				'отредактировал '+  link_to('концепцию', concept_post_path(project,j.body))
+				'отредактировал '+  link_to('образ', concept_post_path(project,j.body))
 			when 'question_post_save'
 				'задал '+  link_to('вопрос', question_post_path(project, j.body))		
       when 'question_comment_save'
