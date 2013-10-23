@@ -70,7 +70,7 @@ class Concept::PostsController < PostsController
     #
     respond_to do |format|
       if @concept_post.save!
-         current_user.journals.build(:type_event=>'concept_post_save', :body=>@concept_post.id).save!
+         current_user.journals.build(:type_event=>'concept_post_save', :body=>@concept_post.id,  :project => @project).save!
         format.html { redirect_to  action: "index" , notice: 'Образ добавлен!' }
         format.json { render json: @concept_post, status: :created, location: @concept_post }
       else
@@ -105,7 +105,7 @@ class Concept::PostsController < PostsController
 
     respond_to do |format|
       if @concept_post.save!
-        current_user.journals.build(:type_event=>'concept_post_update', :body=>@concept_post.id).save!
+        current_user.journals.build(:type_event=>'concept_post_update', :body=>@concept_post.id,  :project => @project).save!
 
         format.html { redirect_to action: "show", :project => @project, :id => @concept_post.id , notice: 'Концепция успешно изменена!' }
         format.json { head :no_content }
