@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-  <component name="DataSourceManagerImpl" format="xml" hash="3277147439">
+  <component name="DataSourceManagerImpl" format="xml" hash="2128097558">
     <data-source source="LOCAL" name="Rails collectiveMind: test" product="" version="" jdbc-version="" driver-name="" driver-version="" uuid="25e2bfec-7a3b-475c-b710-9be87ad63fd9">
       <jdbc-driver>org.sqlite.JDBC</jdbc-driver>
       <jdbc-url>jdbc:sqlite:$PROJECT_DIR$/db/test.sqlite3</jdbc-url>
@@ -27,17 +27,15 @@
         </library>
       </libraries>
     </data-source>
-    <data-source source="LOCAL" name="Rails collectiveMind: development" product="" version="" jdbc-version="" driver-name="" driver-version="" uuid="d6bbf214-9978-4bfd-a301-9c20cc836aa6">
-      <jdbc-driver>org.postgresql.Driver</jdbc-driver>
-      <jdbc-url>jdbc:postgresql://ec2-50-17-201-242.compute-1.amazonaws.com:5942/d85el5orjiroa2</jdbc-url>
-      <user-name>ubsmskf2jlj95t</user-name>
-      <user-password>dfdadfccdfd9dfd9dfc2dfdcdfc1dfc0dfdbdfc0dfdedfcbdf9cdfcedf9adfdfdfcbdfdbdfcfdfc9dfc6dfc3dfcddf9cdfdadfc6</user-password>
+    <data-source source="LOCAL" name="Rails collectiveMind: development" product="SQLite" version="3.7.2" jdbc-version="2.1" driver-name="SQLiteJDBC" driver-version="native" uuid="dd473867-e3e6-435a-a108-d91fc6711ace">
+      <jdbc-driver>org.sqlite.JDBC</jdbc-driver>
+      <jdbc-url>jdbc:sqlite:$PROJECT_DIR$/db/development.sqlite3</jdbc-url>
       <libraries>
         <library>
-          <url>file://$USER_HOME$/Library/Preferences/RubyMine50/jdbc-drivers/postgresql-driver-license.txt</url>
+          <url>file://$USER_HOME$/Library/Preferences/RubyMine50/jdbc-drivers/xerial-sqlite-license.txt</url>
         </library>
         <library>
-          <url>file://$USER_HOME$/Library/Preferences/RubyMine50/jdbc-drivers/postgresql-9.1-901.jdbc3.jar</url>
+          <url>file://$USER_HOME$/Library/Preferences/RubyMine50/jdbc-drivers/sqlite-jdbc-3.7.2.jar</url>
         </library>
       </libraries>
     </data-source>
