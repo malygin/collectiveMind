@@ -46,7 +46,8 @@
             %span(style="color:red;")новый раздел
         %br
         %ul.help
-            %li=link_to 'Описание стадии', "/project/#{@core_project.id}/help_s2"
+            %li=link_to 'Описание стадии (краткое)', "/project/#{@core_project.id}/help_s2"
+            %li=link_to 'Описание стадии (подробное)', "/project/#{@core_project.id}/help_s2_1"
             %li=link_to 'Как участвовать на этой стадии?', "/project/#{@core_project.id}/help_t2"
 
             %br

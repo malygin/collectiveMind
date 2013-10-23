@@ -38,6 +38,7 @@ scope '/project/:project' do
   match '/help_s0', :to => 'core/projects#help_s0'
   match '/help_s1', :to => 'core/projects#help_s1'
   match '/help_s2', :to => 'core/projects#help_s2'
+  match '/help_s2_1', :to => 'core/projects#help_s2_1'
   resources :users do
     member do
       put :forecast
