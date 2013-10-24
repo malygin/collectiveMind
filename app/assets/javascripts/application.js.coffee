@@ -29,8 +29,8 @@ $(document).ready ->
       .bind "ajax:success", (event, resp) ->
         console.log(resp)
         $(this).replaceWith ""+resp
-    $('.fbackPositive > .task_supply > ol > li > ul ').before('<br/><span class="task_supply_resource">Какие методы, средства и другие ресурсы должны иметься и применяться в будущем для осуществления условия?:</span>')
-    $('.fbackNegative > .task_supply > ol > li > ul ').before('<br/><span class="task_supply_resource">Какие методы, средства и другие ресурсы должны иметься и применяться в будущем, чтобы предотвратить данные нежелательные побочные эффекты?:</span>')
+    $('.fbackPositive > .task_supply > ol > li > ul ').before('<br/><span class="task_supply_resource">Какие ресурсы должны иметься и применяться в будущем для обеспечения условия?:</span>')
+    $('.fbackNegative > .task_supply > ol > li > ul ').before('<br/><span class="task_supply_resource">Какие ресурсы должны иметься и применяться в будущем, чтобы предотвратить данные нежелательные побочные эффекты?:</span>')
 #    $('.task_supply > ol > li > ul > li > ul ').before('<br/><span class="task_supply_resource">Средства создания:</span>')
    
 root = exports ? this

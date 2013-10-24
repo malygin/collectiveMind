@@ -33,24 +33,18 @@
   %p.ftable
     =text_area_tag "correct_disc[#{p.id}][content]",nil, :class => 'concept_cond'
   %p.ftable.fbackPositive
-    %span.fline.bigtext 1. Какие в будущем должны быть созданы и поддерживаться УСЛОВИЯ, чтобы данное нововведение работало?
+    %span.fline.bigtext A. Какие в будущем должны быть созданы и поддерживаться УСЛОВИЯ, чтобы данное нововведение работало?
     %br
     =text_area_tag "correct_disc[#{p.id}][positive]",nil, :class => 'wymeditor'
-
   %p.ftable.fbackNegative
-    %span.fline.bigtext 2. Если будут созданы и поддерживаться вышеозначенные УСЛОВИЯ, какие из-за этого вероятны НЕЖЕЛАТЕЛЬНЫЕ ПОБОЧНЫЕ ЭФФЕКТЫ в будущем?
-
+    %span.fline.bigtext B. Если будут созданы и поддерживаться вышеозначенные УСЛОВИЯ, какие из-за этого вероятны НЕЖЕЛАТЕЛЬНЫЕ ПОБОЧНЫЕ ЭФФЕКТЫ в будущем?
     %br
     =text_area_tag "correct_disc[#{p.id}][negative]",nil, :class => "wymeditor"
-
-
   %p.ftable.fback
-    %span.fline.bigtext 3. Что, вероятно, может помешать в будущем должной работе всех перечисленных методов, средств и других ресурсов и как с этим предлагается бороться?
-
+    %span.fline.bigtext C. Что, вероятно, может помешать в будущем должной работе всех перечисленных ресурсов и как с этим предлагается бороться?
     %br
     =text_area_tag "correct_disc[#{p.id}][problems]",nil, :class => 'concept_cond2'
   %p.ftable.fback
-    %span.fline.bigtext 4. Аргументы в пользу реалистичности и практичности формирования перечисленных ресурсов
-
+    %span.fline.bigtext D. Реалистичность и практичность: предложить средства формирования перечисленных ресурсов, обосновать их доступность и эффективность
     %br
-    =text_area_tag "correct_disc[#{p.id}][reality]","Каковы средства формирования перечисленных ресурсов и имеются ли они в распоряжении? \r\n ... \r\nЧто, вероятно, может помешать должной работе этих средств и как с этим предлагается бороться:\r\n ... ", :class => 'concept_cond2'
+    =text_area_tag "correct_disc[#{p.id}][reality]",nil, :class => 'concept_cond2'
