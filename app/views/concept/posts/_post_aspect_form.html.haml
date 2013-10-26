@@ -17,12 +17,14 @@
     %span.fline.bigtext A. Какие в будущем должны быть созданы и поддерживаться УСЛОВИЯ, чтобы данное нововведение работало?
     %br
     =text_area_tag "correct_disc[#{post_aspect_form.discontent.id}][positive]",post_aspect_form.positive, :class => "wymeditor"
-
+    %br
+    %small  * если вам нужно добавить новое условие или ресурс, просто нажмите ENTER в конце строки (вообще, редактор работает как  WORD, в случае проблем смотрите раздел "помощь")
   %p.ftable.fbackNegative
     %span.fline.bigtext B. Если будут созданы и поддерживаться вышеозначенные УСЛОВИЯ, какие из-за этого вероятны НЕЖЕЛАТЕЛЬНЫЕ ПОБОЧНЫЕ ЭФФЕКТЫ в будущем?
 
     %br
     =text_area_tag "correct_disc[#{post_aspect_form.discontent.id}][negative]",post_aspect_form.negative, :class => "wymeditor2"
+    %small  * если вам нужно добавить новое условие или ресурс, просто нажмите ENTER в конце строки (вообще, редактор работает как  WORD, в случае проблем смотрите раздел "помощь")
 
 
   %p.ftable.fback
