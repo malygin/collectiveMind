@@ -101,5 +101,9 @@ color: #3c78d8;
 body.wym_iframe ul li{
 color: #666666;
 }
+body.wym_iframe ol  ol
+{
+    list-style-type:lower-alpha;
+}
 
 
