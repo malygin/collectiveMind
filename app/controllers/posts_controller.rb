@@ -221,7 +221,7 @@ def index
   def plus_comment
     comment = comment_model.find(params[:id])
     comment.comment_votings.create(:user => current_user, :comment => comment)
-    if  self.current_model  == Discontent::Post
+    if  (self.current_model  == Discontent::Post) or (self.current_model  == Concept::Post)
       if comment.comment_votings.count == 3 or current_user.boss?
         comment.user.add_score(20,:score_a)
         @project = Core::Project.find(params[:project])

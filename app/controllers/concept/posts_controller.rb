@@ -163,7 +163,7 @@ class Concept::PostsController < PostsController
 
    def expert_acceptance_save
      post = save_note(params, 2, 'Принято!',name_of_model_for_param+'_acceptance' )
-     post.user.add_score(200)
+     post.user.add_score(200*post.post_aspects.size)
      redirect_to  action: "index"
    end
 
