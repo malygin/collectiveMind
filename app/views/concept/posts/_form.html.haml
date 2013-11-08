@@ -23,8 +23,9 @@
   = link_to 'добавить свое несовершенство', add_new_discontent_concept_post_path(@project, @status, 1), :remote => true, :id => 'add_new_discontent_for_concept'
 
 
-
-
+  %br
+  %br
+  *для просмотра нововведения щелкните по нему мышью
   #accordion_concept
     =render :partial => 'post_aspect_form', :collection => @post.post_aspects
 
