@@ -30,6 +30,7 @@ $(document).ready ->
         console.log(resp)
         $(this).replaceWith ""+resp
     $('.fbackPositive > .task_supply > ol > li > ul ').before('<br/><span class="task_supply_resource">Какие ресурсы должны иметься и применяться в будущем для обеспечения условия?</span>')
+    $('.fbackPositive > .task_supply > ol > li > ol > li > ul ').before('<br/><span class="task_supply_resource">Какие ресурсы должны иметься и применяться в будущем для обеспечения условия?</span>')
     $('.fbackNegative > .task_supply > ol > li > ul ').before('<br/><span class="task_supply_resource">Какие ресурсы должны иметься и применяться в будущем, чтобы предотвратить данные нежелательные побочные эффекты?</span>')
 #    $('.task_supply > ol > li > ul > li > ul ').before('<br/><span class="task_supply_resource">Средства создания:</span>')
    
