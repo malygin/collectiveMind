@@ -225,7 +225,7 @@ def index
       if comment.comment_votings.count == 3 or current_user.boss?
         comment.user.add_score(20,:score_a)
         @project = Core::Project.find(params[:project])
-        comment.user.journals.build(:type_event=>'add_score_anal', :project => @project, :body=>"#{comment.post.id}#comment_#{comment.id}").save!
+        comment.user.journals.build(:type_event=>'add_score_anal_'+name_of_model_for_param, :project => @project, :body=>"#{comment.post.id}#comment_#{comment.id}").save!
       end
     end
     render json:comment.users.count
@@ -323,7 +323,7 @@ def index
   end
 
   def expert_revision_save
-    save_note(params, 0, 'Отправлена на доработку!','discontent_post_revision' )
+    save_note(params, 0, 'Отправлена на доработку!',name_of_model_for_param+'_revision' )
     redirect_to  action: "index"
   end
 

@@ -9,6 +9,8 @@ module JournalHelper
 				'получил  '+j.body+' балов за участие в сборе информации'
       when 'add_score_anal'
 				'получил 20 балов за аналитику '+ link_to('за комментарий к несовершенству', "/project/#{project}/discontent/status/0/aspect/0/posts/#{j.body}")
+      when 'add_score_anal_concept'
+				'получил 20 балов за аналитику '+ link_to('за комментарий к образу', "/project/#{project}/concept/status/0/posts/#{j.body}")
       when 'concept_post_save'
 				'добавил  '+ link_to('образ', concept_post_path(project,j.body))
       when 'concept_comment_save'
