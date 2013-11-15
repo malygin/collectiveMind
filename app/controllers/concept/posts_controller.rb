@@ -17,7 +17,7 @@ class Concept::PostsController < PostsController
   end
 
   def voting_model  
-    Concept::Post
+    Concept::PostAspect
   end
 
   def prepare_data
@@ -33,11 +33,15 @@ class Concept::PostsController < PostsController
   def index
     @posts = current_model.where(:project_id => @project, :status => @status).paginate(:page => params[:page])
     if @status == '2'
-      #if @project.status == 6
-        @number_v = @project.stage3 - current_user.voted_discontent_posts.size
+      if @project.status == 6
+        @number_v = @project.stage3 - current_user.concept_post_votings.size
         @votes = @project.stage3
-        @discontents = Discontent::Post.where(:project_id => @project, :status =>[2,5])
-      #end
+        if boss?
+          @all_people = @project.users.size
+
+          @voted_people = ActiveRecord::Base.connection.execute("select count(*) as r from (select distinct v.user_id from concept_votings v  left join   concept_post_aspects asp on (v.concept_post_aspect_id = asp.id) ) as dm").first["r"]
+          @votes = ActiveRecord::Base.connection.execute("select count(*) as r from (select  v.user_id from concept_votings v  left join   concept_post_aspects asp on (v.concept_post_aspect_id = asp.id) ) as dm").first["r"].to_i
+        end      end
       render 'table', :layout => 'application_two_column'
     else
       render 'index'
@@ -165,6 +169,12 @@ class Concept::PostsController < PostsController
      post = save_note(params, 2, 'Принято!',name_of_model_for_param+'_acceptance' )
      post.user.add_score(200*post.post_aspects.size)
      redirect_to  action: "index"
+   end
+  #write fact of voting in db
+   def vote
+     v = voting_model.find(params[:post_id])
+     v.final_votings.create(:user => current_user)
+     render json: v.discontent.id
    end
 
   private

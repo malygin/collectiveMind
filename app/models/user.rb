@@ -36,7 +36,7 @@ class User < ActiveRecord::Base
   has_many :voted_discontent_posts, :through => :post_votings, :source => :discontent_post, :class_name => "Discontent::Post"
     
   has_many :concept_post_votings, :class_name => "Concept::Voting"
-  has_many :voted_concept_posts, :through => :concept_post_votings, :source => :concept_post, :class_name => "Concept::Post"
+  has_many :voted_concept_post_aspects, :through => :concept_post_votings, :source => :concept_post_aspect, :class_name => "Concept::PostAspect"
   
   has_many :core_project_users, :class_name => "Core::ProjectUser"
   has_many :projects, :through => :core_project_users, :source => :core_project, :class_name => "Core::Project"

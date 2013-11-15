@@ -129,7 +129,13 @@ def  status_title(pr)
 
 	def can_vote?(this_v, all_v, all)
 		this_v<1 and all_v!=0
-	end
+  end
+
+	def can_vote_cond?(this_v, all_v, all, dis)
+		this_v<1 and all_v!=0  and dis.not_vote_for_other_post_aspects(current_user)
+  end
+
+
 def discontent_style_name(dis)
 	case dis
 		when 0 		

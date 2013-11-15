@@ -19,12 +19,22 @@ class Discontent::Post < ActiveRecord::Base
   has_many :final_votings,:foreign_key => 'discontent_post_id', :class_name => 'Discontent::Voting'
   scope :ready_for_post, lambda {  where(:status => 0).where("created_at < ?", 2.day.ago) }
   scope :not_ready_for_post, lambda {  where(:status => 0).where("created_at > ?", 2.day.ago) }
-    def voted(user)
+
+  def voted(user)
     self.voted_users.where(:id => user)
   end
 
   def show_content
   	'<b>что: </b>'+self.content + '<br/> <b> когда: </b>'+ self.when + '<br/> <b>где: </b> ' +self.where+'<br/>'
-
   end
+
+  def not_vote_for_other_post_aspects(user)
+    self.concept_conditions.each  do |asp|
+      if asp.voted(user).size>0
+        return false
+      end
+    end
+    return true
+  end
+
 end

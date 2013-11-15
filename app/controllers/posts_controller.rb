@@ -246,7 +246,7 @@ def index
   def vote
     v = voting_model.find(params[:post_id])
     v.final_votings.create(:user => current_user)
-    render json: 5
+    render json: params[:post_id]
   end
 
    def up

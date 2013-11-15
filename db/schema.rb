@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131022091050) do
+ActiveRecord::Schema.define(:version => 20131115185818) do
 
   create_table "answers", :force => true do |t|
     t.string   "text"
@@ -155,12 +155,12 @@ ActiveRecord::Schema.define(:version => 20131022091050) do
 
   create_table "concept_votings", :force => true do |t|
     t.integer  "user_id"
-    t.integer  "concept_post_id"
-    t.datetime "created_at",      :null => false
-    t.datetime "updated_at",      :null => false
+    t.integer  "concept_post_aspect_id"
+    t.datetime "created_at",             :null => false
+    t.datetime "updated_at",             :null => false
   end
 
-  add_index "concept_votings", ["concept_post_id"], :name => "index_concept_votings_on_concept_post_id"
+  add_index "concept_votings", ["concept_post_aspect_id"], :name => "index_concept_votings_on_concept_post_id"
   add_index "concept_votings", ["user_id"], :name => "index_concept_votings_on_user_id"
 
   create_table "core_project_users", :force => true do |t|

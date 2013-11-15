@@ -11,6 +11,8 @@ $(document).ready ->
         $(this).replaceWith "Вы проголосовали, спасибо!"
         i = $('span#count_vote').text() - 1
         $('span#count_vote').text(i)
+        $('a#aspect_'+resp).each (i, element)  =>
+          $(element).replaceWith ""
         if (i < 1)
           $('a.voteCounter').each (i, element)  =>
             $(element).replaceWith ""    
