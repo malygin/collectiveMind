@@ -12,7 +12,7 @@
         #container
           #content
             - flash.each do |key, value|
-              -if key == :success
+              -if key == :success or key == :notice
                 .success
                   =value
               -else 

@@ -1,8 +1,9 @@
 
-%h3(id ="name_#{p.id}" )  Корректировка  не определена
+%h3(id ="name_#{p.id}" )
+  = @cond.nil? ? "Нововведние  не определено" : @cond.name
 %div{id: "discontent_#{p.id}"}
   %p.ftable.fline
-    %a{onclick: "remove_discontent(#{p.id})"} Не хочу решать недовольство
+    %a{onclick: "remove_discontent(#{p.id})"} Удалить нововведение
   %p.ftable.fline
     %span.bigtext Корректируемое несовершенство:
   -unless p.new_record?
@@ -12,52 +13,45 @@
     %p.ftable.fback
       %span.bigtext что
       %br
-      = text_field_tag "correct_disc[#{@div_for_aspects}][#{p.id}][disc][content]",nil, :class => 'concept_name2'
+      = text_field_tag "post_aspects[#{p.id}][disc][content]",nil, :class => 'concept_name2'
       %br
       %span.bigtext когда
       %br
-      = text_field_tag "correct_disc[#{@div_for_aspects}][#{p.id}][disc][when]",nil, :class => 'concept_name2'
+      = text_field_tag "post_aspects[#{p.id}][disc][when]",nil, :class => 'concept_name2'
       %br
       %span.bigtext где
       %br
-      = text_field_tag "correct_disc[#{@div_for_aspects}][#{p.id}][disc][where]",nil,:class => 'concept_name2'
-      = select_tag "correct_disc[#{@div_for_aspects}][#{p.id}][disc][aspect_id]", options_from_collection_for_select(@aspects, 'id', 'content'), :prompt => 'Выберите фрагмент'
-      = select_tag "correct_disc[#{@div_for_aspects}][#{p.id}][disc][style]", options_for_select({ 'отсутствующий позитив' =>'0', 'имеющийся негатив' => '1' }), :prompt => 'Выберите тип'
+      = text_field_tag "post_aspects[#{p.id}][disc][where]",nil,:class => 'concept_name2'
+      = select_tag "post_aspects[#{p.id}][disc][aspect_id]", options_from_collection_for_select(@aspects, 'id', 'content'), :prompt => 'Выберите фрагмент'
+      = select_tag "post_aspects[#{p.id}][disc][style]", options_for_select({ 'отсутствующий позитив' =>'0', 'имеющийся негатив' => '1' }), :prompt => 'Выберите тип'
 
 
   %p.ftable.fline
     %span.bigtext Название корректировки:
     %br
-    =text_field_tag "correct_disc[#{@div_for_aspects}][#{p.id}][name]",nil, :class => 'concept_name', onchange: "change_name_concept(#{p.id});"
+    =text_field_tag "post_aspects[#{p.id}][name]",@cond.nil? ? nil : @cond.name, :class => 'concept_name', onchange: "change_name_concept(#{p.id});"
+
   %p.ftable.fline.bigtext Краткое описание корректировки:
   %p.ftable
-    =text_area_tag "correct_disc[#{@div_for_aspects}][#{p.id}][content]",nil, :class => 'concept_cond'
+    =text_area_tag "post_aspects[#{p.id}][content]",@cond.nil? ? nil : @cond.content, :class => 'concept_cond'
+
   %p.ftable.fbackPositive
-    %span.fline.bigtext 1. Какие в будущем должны быть созданы и поддерживаться УСЛОВИЯ, чтобы данная корректировка работала
+    %span.fline.bigtext A. Какие в будущем должны быть созданы и поддерживаться УСЛОВИЯ, чтобы данная корректировка работала
     %br
-    =text_area_tag "correct_disc[#{@div_for_aspects}][#{p.id}][positive]",nil, :class => 'wymeditor'
+    =text_area_tag "post_aspects[#{p.id}][positive]",@cond.nil? ? nil : @cond.positive, :class => 'wymeditor'
 
   %p.ftable.fbackNegative
-    %span.fline.bigtext 2. Если будут созданы и поддерживаться вышеозначенные УСЛОВИЯ, какие из-за этого вероятны НЕЖЕЛАТЕЛЬНЫЕ ПОБОЧНЫЕ ЭФФЕКТЫ в будущем
+    %span.fline.bigtext B. Если будут созданы и поддерживаться вышеозначенные УСЛОВИЯ, какие из-за этого вероятны НЕЖЕЛАТЕЛЬНЫЕ ПОБОЧНЫЕ ЭФФЕКТЫ в будущем
 
     %br
-    =text_area_tag "correct_disc[#{@div_for_aspects}][#{p.id}][negative]",nil, :class => "wymeditor"
-
-
-  %p.ftable.fbackControl
-    %span.fline.bigtext 3.Кем и как будет контролироваться создание и поддержание вышеозначенных УСЛОВИЙ и предотвращаться НЕЖЕЛАТЕЛЬНЫЕ ПОБОЧНЫЕ ЭФФЕКТЫ в будущем
-    %br
-    =text_area_tag "correct_disc[#{@div_for_aspects}][#{p.id}][control]",nil, :class => 'wymeditor'
+    =text_area_tag "post_aspects[#{p.id}][negative]",@cond.nil? ? nil : @cond.negative, :class => "wymeditor"
 
   %p.ftable.fback
-    %span.fline.bigtext 4. Возможные помехи во время функционирования этой корректировки
+    %span.fline.bigtext C. Что, вероятно, может помешать в будущем должной работе всех перечисленных ресурсов и как с этим предлагается бороться?
     %br
-    =text_area_tag "correct_disc[#{@div_for_aspects}][#{p.id}][problems]",nil, :class => 'concept_cond2'
+    =text_area_tag "post_aspects[#{p.id}][problems]",@cond.nil? ? nil : @cond.problems, :class => 'concept_cond2'
+
   %p.ftable.fback
-    %span.fline.bigtext 5. Реалистичность этой корректировки
+    %span.fline.bigtext D. Реалистичность и практичность: предложить средства формирования перечисленных ресурсов, обосновать их доступность и эффективность
     %br
-    =text_area_tag "correct_disc[#{@div_for_aspects}][#{p.id}][reality]",nil, :class => 'concept_cond2'
-  %p.ftable.fback
-    %span.fline.bigtext 6. Какие возможны помехи на пути работы методов и средств создания ресурсов и как их предотвратить
-    %br
-    =text_area_tag "correct_disc[#{@div_for_aspects}][#{p.id}][reality]",nil, :class => 'concept_cond2'
+    =text_area_tag "post_aspects[#{p.id}][reality]",@cond.nil? ? nil : @cond.reality, :class => 'concept_cond2'

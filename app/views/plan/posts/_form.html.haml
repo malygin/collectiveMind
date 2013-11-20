@@ -1,54 +1,77 @@
 = form_for  @post, :url => {:project => @project.id, :action => @post.persisted? ? 'update' : 'create'},   :html => { :class => 'new_or_edit' }do |f|
-  %label
-    Краткое описание проекта
-  %field
-    = f.text_area :content, class: 'wider_area'
-  %div{:class=>'timestamp'} Вкратце опишите свой проект, укажите ключевые идеи.
-  %br
-  %label
-    %b Эссе о проекте:
-  %field
-    = f.text_area :goal, class: 'wider_area'
-  %div{:class=>'timestamp'} Что, в главном, представляет собой ваш проект.
 
+  %h1
+    =@post.step
+    шаг из 5
   %br
   %br
-  %h1 Корректировки 1 этапа
-  %br
-  = select_tag 'aspect_id', options_from_collection_for_select(@aspects, 'id', 'content'), :prompt => 'Выберите фрагмент'
-  = link_to 'добавить недовольства из фрагмента для первого этапа', add_aspect_plan_post_path(@project, @status, 1), :remote => true, :id => 'add_aspect_for_plan1'
-  %br
-  = link_to 'добавить свое недовольство', add_new_discontent_plan_post_path(@project, @status, 1), :remote => true, :id => 'add_new_discontent_for_concept'
+  - if @post.step == 1
+    %label
+      %b Набросок эссе о проекте:
+    %field
+      = f.text_area :goal, class: 'wider_area'
+    %div{:class=>'timestamp'} Эскизно концепция проекта, в которой главное - то, что автор считает основным для решения вопросов процедуры
+    %br
+  - if @post.step == 2
+    %b Выберите нововведения для каждого несовершенства:
+    %br
+    %br
+    -@aspects.each do |asp|
+      -unless asp.accepted_posts.empty?
+        %i=asp.content
+        %br
+        -asp.accepted_posts.each do |dis|
+          =dis.show_content.html_safe
+          = select_tag "aspect_#{dis.id}", options_from_collection_for_select(dis.concept_conditions, 'id', 'name'), :prompt => 'Выберите нововведение', :onchange => "load_new_aspect(#{dis.id});"
+          %br
+          = link_to 'либо добавьте свое нововведение по этому несовершенству', add_aspect_plan_post_path(@project, @status, dis.id), :remote => true, :id => "add_new_cond_for_plan_#{dis.id}"
+          .accordion(id= "accordion_concept_#{dis.id}")
+          %br
 
-  %br
 
-  #accordion_concept1
-  %br
-  %b План первого этапа
-  %br
-  %field
-    = f.text_area :first_step, class: 'wider_area'
-  %div{:class=>'timestamp'} - Подготовительная стадия -согласование новшества  со всем контингентом студентов и администрацией ДО. Начало осуществления проекта - самые простые и дешевые действия по созданию ресурсов, дающих наиболее быстрый и ощутимый эффект.
-  %br
 
-  %br
-  %h1 Остальные корректировки
 
-  %br
-  = select_tag 'aspect_id2', options_from_collection_for_select(@aspects, 'id', 'content'), :prompt => 'Выберите фрагмент'
-  = link_to 'добавить недовольства из фрагмента для дальнейшего проекта', add_aspect_plan_post_path(@project, @status, 1), :remote => true, :id => 'add_aspect_for_plan2'
-  %br
-  = link_to 'добавить свое недовольство', add_new_discontent_plan_post_path(@project, @status, 1, :plan_stage => 1), :remote => true, :id => 'add_new_discontent_for_concept'
+  -#
+  -#%br
+  -#%br
+  -#-#%h1 Корректировки 1 этапа
+  -#%br
+  -#= select_tag 'aspect_id', options_from_collection_for_select(@aspects, 'id', 'content'), :prompt => 'Выберите фрагмент'
+  -#= link_to 'добавить недовольства из фрагмента для первого этапа', add_aspect_plan_post_path(@project, @status, 1), :remote => true, :id => 'add_aspect_for_plan1'
+  -#%br
+  -#= link_to 'добавить свое недовольство', add_new_discontent_plan_post_path(@project, @status, 1), :remote => true, :id => 'add_new_discontent_for_concept'
 
-  %br
-  %br
-  #accordion_concept2
-  %br
-  %b Дальнейшие шаги
-  %br
-  %field
-    = f.text_area :other_steps,class: 'wider_area'
-  %div{:class=>'timestamp'} - Набросок плана действий вплоть до завершения проекта.
+
+
+  -#%br
+  -#
+  -##accordion_concept1
+  -#%br
+  -#%b План первого этапа
+  -#%br
+  -#%field
+  -#  = f.text_area :first_step, class: 'wider_area'
+  -#%div{:class=>'timestamp'} - Подготовительная стадия -согласование новшества  со всем контингентом студентов и администрацией ДО. Начало осуществления проекта - самые простые и дешевые действия по созданию ресурсов, дающих наиболее быстрый и ощутимый эффект.
+  -#%br
+  -#
+  -#%br
+  -#%h1 Остальные корректировки
+  -#
+  -#%br
+  -#= select_tag 'aspect_id2', options_from_collection_for_select(@aspects, 'id', 'content'), :prompt => 'Выберите фрагмент'
+  -#= link_to 'добавить недовольства из фрагмента для дальнейшего проекта', add_aspect_plan_post_path(@project, @status, 1), :remote => true, :id => 'add_aspect_for_plan2'
+  -#%br
+  -#= link_to 'добавить свое недовольство', add_new_discontent_plan_post_path(@project, @status, 1, :plan_stage => 1), :remote => true, :id => 'add_new_discontent_for_concept'
+  -#
+  -#%br
+  -#%br
+  -##accordion_concept2
+  -#%br
+  -#%b Дальнейшие шаги
+  -#%br
+  -#%field
+  -#  = f.text_area :other_steps,class: 'wider_area'
+  -#%div{:class=>'timestamp'} - Набросок плана действий вплоть до завершения проекта.
 
 
 

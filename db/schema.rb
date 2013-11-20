@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131115185818) do
+ActiveRecord::Schema.define(:version => 20131120095704) do
 
   create_table "answers", :force => true do |t|
     t.string   "text"
@@ -667,8 +667,9 @@ ActiveRecord::Schema.define(:version => 20131115185818) do
     t.integer  "user_id"
     t.integer  "post_id"
     t.text     "content"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at",                    :null => false
+    t.datetime "updated_at",                    :null => false
+    t.boolean  "censored",   :default => false
   end
 
   add_index "plan_comments", ["post_id"], :name => "index_plan_comments_on_post_id"
@@ -684,8 +685,9 @@ ActiveRecord::Schema.define(:version => 20131115185818) do
     t.integer  "first_stage"
     t.string   "name"
     t.string   "content"
-    t.datetime "created_at",           :null => false
-    t.datetime "updated_at",           :null => false
+    t.datetime "created_at",             :null => false
+    t.datetime "updated_at",             :null => false
+    t.integer  "concept_post_aspect_id"
   end
 
   create_table "plan_post_notes", :force => true do |t|
@@ -712,10 +714,12 @@ ActiveRecord::Schema.define(:version => 20131115185818) do
     t.text     "other_steps"
     t.integer  "status"
     t.integer  "number_views"
-    t.datetime "created_at",   :null => false
-    t.datetime "updated_at",   :null => false
+    t.datetime "created_at",                      :null => false
+    t.datetime "updated_at",                      :null => false
     t.integer  "project_id"
     t.text     "content"
+    t.integer  "step",         :default => 1
+    t.boolean  "censored",     :default => false
   end
 
   add_index "plan_posts", ["created_at"], :name => "index_plan_posts_on_created_at"
