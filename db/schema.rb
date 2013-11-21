@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131120095704) do
+ActiveRecord::Schema.define(:version => 20131121162405) do
 
   create_table "answers", :force => true do |t|
     t.string   "text"
@@ -690,6 +690,21 @@ ActiveRecord::Schema.define(:version => 20131120095704) do
     t.integer  "concept_post_aspect_id"
   end
 
+  create_table "plan_post_first_conds", :force => true do |t|
+    t.integer  "plan_post_id"
+    t.integer  "post_aspect_id"
+    t.text     "positive"
+    t.text     "negative"
+    t.text     "control"
+    t.text     "problems"
+    t.text     "problems_with_resources"
+    t.text     "reality"
+    t.string   "name"
+    t.string   "content"
+    t.datetime "created_at",              :null => false
+    t.datetime "updated_at",              :null => false
+  end
+
   create_table "plan_post_notes", :force => true do |t|
     t.integer  "post_id"
     t.integer  "user_id"
@@ -720,6 +735,9 @@ ActiveRecord::Schema.define(:version => 20131120095704) do
     t.text     "content"
     t.integer  "step",         :default => 1
     t.boolean  "censored",     :default => false
+    t.text     "plan_first"
+    t.text     "plan_other"
+    t.text     "plan_control"
   end
 
   add_index "plan_posts", ["created_at"], :name => "index_plan_posts_on_created_at"

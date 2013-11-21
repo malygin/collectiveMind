@@ -1,30 +1,54 @@
+- show_post||=:show
 .wholePost
-	= render 'users/user_post', :user => post.user
-	.posts
-		= render 'users/user_name', :user => post.user, :created_at => post.created_at
-		
-		- if not current_page?(plan_post_path(post)) 
-			%p
-				= trim_string(post.goal)
-				= link_to "Подробнее", post, class: "more"
-		-else
-			%p
-				= post.goal
-		- if post.user == current_user and post.status ==0
-			%br
-			= link_to 'Редактировать', edit_plan_post_path(post)
-			= link_to 'Отправить в архив', {:action => :destroy, :id => post.id}, :method => :delete, :confirm => 'Точно?'
+    = render 'users/user_post', :user => post.user
+    .posts
+        = render 'users/user_name', :user => post.user, :created_at => post.created_at
+        - if not current_page?(url_for(params.merge(:project => @project, :id => post.id)))
+            %p
+                - if post.censored
+                    %br
+                    .error
+                        Пост удален модератором
+                -else
+                    - if post.step > 5
+                        = trim_string(raw(post.content))
+                    -else
+                        Проект в процессе разработки
+                        %b="(#{post.step} шаг из 5)"
 
 
 
-		.social 
-			- if signed_in? and not post.users.include?(current_user)
-				=link_to "#{post.users.count}",  plus_plan_post_path(post), :id => post.id,:remote => true, :method => :put, class: "counter"
-			-else
-				=post.users.count
-			=image_tag "like.png"
-			=link_to post.number_views, post, class: "counter"
-			=image_tag "views.png"
-			=link_to post.comments.count, post, class: "counter"
-			=image_tag "comment.png"
+                = link_to 'Подробнее',  {:controller => post.class.name.underscore.pluralize, :action => show_post, :project => @project, :id => post.id}, class: "more"
+        -else
+
+            - if post.censored
+                %br
+                .error
+                    Пост удален модератором
+            - else
+                %p= simple_format(post.show_content)
+            - if post.attributes.has_key? 'aspect_id' and !post.aspect.nil?
+                %b="#{post.aspect.content}  фрагмент"
+            %br
+            - if boss?
+                = link_to 'Цензурировать', :controller => post.class.name.underscore.pluralize, :action => 'censored', :project => @project, :post_id => post, :remote=>:true
+            - if boss? or post.user == current_user
+                = link_to 'Редактировать',:controller => post.class.name.underscore.pluralize, :action => 'edit', :project => @project, :id => post
+                \|
+                = link_to 'Назад', url_for(:action => 'index')
+
+
+        - if post.user == current_user
+            %br
+            / = link_to 'Редактировать', {:action => :edit, :project => @project, :id => post.id}
+            / = link_to 'Отправить в архив', {:action => :destroy, :project => @project, :id => post.id}, :method => :delete, :data => { :confirm => 'Точно?' }
+
+        = render 'shared/post_social_bar', :post => post
+
 .dotline=image_tag('dotline.png')
+- if current_page?(url_for(params.merge(:project => @project, :id => post.id)))
+    - if signed_in?
+        = render :partial => 'shared/comment_form', :locals => { :comment => @comment, :url_link => url_for(:controller => post.class.name.underscore.pluralize, :action => 'add_comment')}
+
+    = render :partial => 'shared/comment',:collection => @comments
+    = will_paginate @comments

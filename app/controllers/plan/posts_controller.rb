@@ -89,7 +89,7 @@ class Plan::PostsController < PostsController
     @project = Core::Project.find(params[:project])
     @plan_post = Plan::Post.find(params[:id])
 
-    if @plan_post.step == 2
+    if @plan_post.step == 2  or @plan_post.step == 6
       @plan_post.post_aspects.destroy_all
       unless params['post_aspects'].nil?
         params['post_aspects'].each do |k,v|
@@ -103,11 +103,41 @@ class Plan::PostsController < PostsController
       end
     end
 
-    @plan_post.step = @plan_post.step + 1
+    if @plan_post.step == 3   or @plan_post.step == 6
+      @plan_post.first_step = params[:plan_post][:first_step]
+    end
+
+    if @plan_post.step == 4   or @plan_post.step == 6
+      @plan_post.post_first_conds.destroy_all
+      @plan_post.plan_first = params[:plan_post][:plan_first]
+      unless params['first_cond'].nil?
+        params['first_cond'].each do |k,v|
+          if k!= ''
+            cond = Plan::PostAspect.find(k)
+            pa = Plan::PostFirstCond.new(v)
+            pa.post_aspect = cond
+            @plan_post.post_first_conds << pa
+          end
+        end
+      end
+    end
+
+    if @plan_post.step == 5   or @plan_post.step == 6
+      @plan_post.plan_other = params[:plan_post][:plan_other]
+      @plan_post.plan_control = params[:plan_post][:plan_control]
+    end
+
+    if  @plan_post.step < 6
+      @plan_post.step = @plan_post.step + 1
+    end
     respond_to do |format|
         @plan_post.save
         current_user.journals.build(:type_event=>'plan_post_update', :body=>@plan_post.id).save!
-        format.html { redirect_to edit_plan_post_path(project: @project, id: @plan_post), notice: "Шаг № #{@plan_post.step - 1 }  успешно пройден" }
+        if @plan_post.step>5
+          format.html { redirect_to plan_post_path(project: @project, id: @plan_post), notice: "Проект успешно добавлен!" }
+        else
+         format.html { redirect_to edit_plan_post_path(project: @project, id: @plan_post), notice: "Шаг № #{@plan_post.step - 1 }  успешно пройден" }
+        end
       end
 
   end
@@ -118,6 +148,10 @@ class Plan::PostsController < PostsController
    @cond = params[:cond_id]
    unless params[:cond_id].nil?
     @cond = Concept::PostAspect.find(@cond)
+   else
+     @cond = Concept::PostAspect.new
+     @cond.discontent = @discontent
+     @cond.save
    end
 
    respond_to do |format|
@@ -125,6 +159,19 @@ class Plan::PostsController < PostsController
      format.js
    end
  end
+
+def add_first_cond
+  @post = Plan::Post.find(params[:id])
+  @cond2 = Plan::PostAspect.find(params[:cond_id])
+  @cond = Plan::PostFirstCond.new
+  @cond.post_aspect = @cond2
+  @cond.save
+
+  respond_to do |format|
+    format.html # new.html.erb
+    format.js
+  end
+end
 
  def add_new_discontent
    @discontent = Discontent::Post.new

@@ -54,7 +54,7 @@
 
                                     %tr
                                         %td
-                                            - if cond.concept_post.status ==2
+                                            - if !cond.concept_post.nil? and  cond.concept_post.status ==2
                                                 .fback
                                                     -if @project.status == 6
                                                         .voteBar

@@ -7,6 +7,8 @@ class Discontent::Post < ActiveRecord::Base
   has_many :childs, :class_name => 'Discontent::Post', :foreign_key => 'replace_id'
   belongs_to :post, :class_name => 'Discontent::Post', :foreign_key => 'replace_id'
   has_many :concept_conditions, :class_name => 'Concept::PostAspect', :foreign_key => 'discontent_aspect_id'
+  has_many :plan_conditions, :class_name => 'Plan::PostAspect', :foreign_key => 'discontent_aspect_id'
+
   has_many :concept_posts, :through => :concept_conditions, :foreign_key => 'concept_post_id', :class_name => "Concept::Post"
   has_many :post_replaces, :class_name => 'Discontent::PostReplace', :foreign_key => 'post_id'
   has_many :post_it_replaces, :class_name => 'Discontent::PostReplace', :foreign_key => 'replace_id'
@@ -22,6 +24,14 @@ class Discontent::Post < ActiveRecord::Base
 
   def voted(user)
     self.voted_users.where(:id => user)
+  end
+
+  def conditions_for_plan(plan)
+    plan_conditions.where(:plan_post_id => plan)
+  end
+
+  def pure_conditions()
+    concept_conditions.where("concept_post_id IS NOT NULL")
   end
 
   def show_content

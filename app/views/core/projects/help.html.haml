@@ -43,12 +43,21 @@
     %li
         %b
             Стадия 2) – формулирование проблемы
-            %span(style="color:red;")новый раздел
         %br
         %ul.help
             %li=link_to 'Описание стадии (краткое)', "/project/#{@core_project.id}/help_s2"
             %li=link_to 'Описание стадии (подробное)', "/project/#{@core_project.id}/help_s2_1"
             %li=link_to 'Как участвовать на этой стадии?', "/project/#{@core_project.id}/help_t2"
+
+            %br
+    %li
+        %b
+            Стадия 3) – проекты
+            %span(style="color:red;")новый раздел
+        %br
+        %ul.help
+            %li=link_to 'Описание стадии (краткое)', "/project/#{@core_project.id}/help_s3"
+            %li=link_to 'РЕКОМЕНДАЦИИ ПО СОСТАВЛЕНИЮ ПРОЕКТА', "/project/#{@core_project.id}/help_s3_1"
 
             %br
 

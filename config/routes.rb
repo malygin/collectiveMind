@@ -39,6 +39,9 @@ scope '/project/:project' do
   match '/help_s1', :to => 'core/projects#help_s1'
   match '/help_s2', :to => 'core/projects#help_s2'
   match '/help_s2_1', :to => 'core/projects#help_s2_1'
+  match '/help_s3', :to => 'core/projects#help_s3'
+  match '/help_s3_1', :to => 'core/projects#help_s3_1'
+
   resources :users do
     member do
       put :forecast
@@ -147,6 +150,7 @@ scope '/project/:project' do
       resources :posts do
             member do
                 get :add_aspect
+                get :add_first_cond
                 get :add_new_discontent
 
                 put :add_comment

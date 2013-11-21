@@ -10,7 +10,11 @@
 
 %br
 - if (current_user?(post.user) and post.status  == 0) or boss?
-  = link_to 'Редактировать', :action => 'edit', :project => @project, :id => post.id
+  - if  post.instance_of? Plan::Post and post.step < 6
+    = link_to 'Продолжить работу над проектом', :action => 'edit', :project => @project, :id => post.id
+
+  - else
+    = link_to 'Редактировать', :action => 'edit', :project => @project, :id => post.id
   \|
   = link_to 'В архив', {:action => :to_archive, :id => post.id}, :method => :put, :confirm => 'Точно?'
 %br

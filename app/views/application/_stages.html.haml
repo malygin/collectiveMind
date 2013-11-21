@@ -31,7 +31,7 @@
     %li{ :class => cp('plan')}
       = image_tag image_for_stages('3', 'plan'), :class => 'numbers'
       -if @project.status > 6
-        = link_to "Проекты", plan_posts_path(@project, :status => 2), class: "lstages" 
+        = link_to "Проекты", plan_posts_path(@project, :status => 0), class: "lstages"
       -else
         %span.lstagesdisabled Проекты
     = image_tag "space.png", :class => "space" 
