@@ -1,15 +1,20 @@
+- unless @news.nil?
+    %h1 Новости
+    %p.righttext
+        = @news.anons
+        = link_to 'подробнее',  expert_news_post_path(@project, @news)
 %ul.leftlink
-	%li= link_to "Обсуждаются", plan_posts_path(@project,:status => 0), class: menu_status(0) 
-	%li= link_to "Архив", plan_posts_path(@project,:status =>3), class: menu_status(3) 
-	%li= link_to "Принятые", plan_posts_path(@project,:status =>2), class: menu_status(2)
-	- if boss?
-		%li= link_to "На рассмотрении", plan_posts_path(@project,:status =>1), class: menu_status(1)
+    %li= link_to "Обсуждаются", plan_posts_path(@project,:status => 0), class: menu_status(0)
+    %li= link_to "Архив", plan_posts_path(@project,:status =>3), class: menu_status(3)
+    %li= link_to "Принятые", plan_posts_path(@project,:status =>2), class: menu_status(2)
+    - if boss?
+        %li= link_to "На рассмотрении", plan_posts_path(@project,:status =>1), class: menu_status(1)
 
 -unless @journals.nil?
-	.redtitle Активность
-	- @journals.each do |journal|
-		%p.righttext
-			=Russian::strftime(journal.created_at,"%d %B %k:%M:%S ")
-			%b= journal.user.name_title
-			= journal_parser(journal, @project.id).html_safe
-		=image_tag('dots.png')
+    .redtitle Активность
+    - @journals.each do |journal|
+        %p.righttext
+            =Russian::strftime(journal.created_at,"%d %B %k:%M:%S ")
+            %b= journal.user.name_title
+            = journal_parser(journal, @project.id).html_safe
+        =image_tag('dots.png')
