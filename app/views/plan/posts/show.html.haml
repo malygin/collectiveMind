@@ -11,10 +11,11 @@
     - else
 
       %p
-        %b Эссе:
+        %h1 1. Эссе о проекте в целом:
         %br
         = @post.goal
 
+      %h1 2. Конечный образ желаемого будушего
       %br
       %div(id="accordion-resizer" class="ui-widget-content")
         .accordion
@@ -50,10 +51,11 @@
 
 
 
-      %h1 Первый этап
+      %h1 3. Подробное описание промежуточного будущего (итоги первого этапа)
       %b Эссе
       %br
       =@post.first_step
+
       %div(id="accordion-resizer" class="ui-widget-content")
         .accordion
           - @post.post_first_conds.each do |tp|
@@ -92,17 +94,15 @@
                 =tp.problems_with_resources
 
       %br
-      %b План первого этапа
+      %h1 4. Подробный  план первого этапа
       %br
       =@post.plan_first
       %br
-      %b Общий план работ по проекту
+      %h1 5. Набросок плана последующих этапов проекта
       %br
       =@post.plan_other
       %br
-      %b Общий план работ по проекту
-      %br
-      =@post.plan_control
+l
    
     = render 'shared/post_social_bar', :post => @post
 
