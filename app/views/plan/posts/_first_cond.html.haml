@@ -30,7 +30,8 @@
     =text_area_tag "first_cond[#{p.post_aspect.id}][negative]",p.plan_post.nil? ? p.post_aspect.negative  : p.negative, :class => "wymeditor"
 
   %p.ftable.fbackControl
-    %span.fline.bigtext C. Кем и как будет контролироваться создание и поддержание вышеозначенных УСЛОВИЙ и предотвращаться НЕЖЕЛАТЕЛЬНЫЕ ПОБОЧНЫЕ ЭФФЕКТЫ в будущем
+    %span.fline.bigtext C. Какими ресурсами будет контролироваться создание и поддержание этих УСЛОВИЙ и предотвращение  НЕЖЕЛАТЕЛЬНЫХ ПОБОЧНЫХ ЭФФЕКТОВ?
+
     %br
     =text_area_tag "first_cond[#{p.post_aspect.id}][control]",p.control, :class => 'wymeditor'
 

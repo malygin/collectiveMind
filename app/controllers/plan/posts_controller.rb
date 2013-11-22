@@ -124,7 +124,7 @@ class Plan::PostsController < PostsController
 
     if @plan_post.step == 5   or @plan_post.step == 6
       @plan_post.plan_other = params[:plan_post][:plan_other]
-      @plan_post.plan_control = params[:plan_post][:plan_control]
+      #@plan_post.plan_control = params[:plan_post][:plan_control]
     end
 
     if  @plan_post.step < 6
