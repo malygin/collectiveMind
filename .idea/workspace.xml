@@ -7,7 +7,7 @@
     </list>
     <ignored path="collectiveMind.iws" />
     <ignored path=".idea/workspace.xml" />
-    <file path="/Dummy.txt" changelist="aa6a5015-3a56-4a58-9b19-a0ad2e76ab80" time="1385112791311" ignored="false" />
+    <file path="/Dummy.txt" changelist="aa6a5015-3a56-4a58-9b19-a0ad2e76ab80" time="1385113783466" ignored="false" />
     <file path="/boot.rb" changelist="aa6a5015-3a56-4a58-9b19-a0ad2e76ab80" time="1372798651996" ignored="false" />
     <file path="/Gemfile" changelist="aa6a5015-3a56-4a58-9b19-a0ad2e76ab80" time="1374341578097" ignored="false" />
     <file path="/users_controller.rb" changelist="aa6a5015-3a56-4a58-9b19-a0ad2e76ab80" time="1380793607255" ignored="false" />
@@ -186,7 +186,7 @@
       <file leaf-file-name="show.html.haml" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/views/plan/posts/show.html.haml">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="100" column="54" selection-start="4237" selection-end="4237" vertical-scroll-proportion="0.41811848">
+            <state line="104" column="0" selection-start="4282" selection-end="4282" vertical-scroll-proportion="0.6271777">
               <folding />
             </state>
           </provider>
@@ -1412,7 +1412,11 @@
       <created>1385112793135</created>
       <updated>1385112793135</updated>
     </task>
-    <option name="localTasksCounter" value="117" />
+    <task id="LOCAL-00117" summary="fix show plan">
+      <created>1385113785637</created>
+      <updated>1385113785637</updated>
+    </task>
+    <option name="localTasksCounter" value="118" />
     <servers />
   </component>
   <component name="TodoView" selected-index="0">
@@ -1501,7 +1505,7 @@
     <option name="WRAP_WHEN_TYPING_REACHES_RIGHT_MARGIN" value="false" />
     <option name="FORCE_NON_EMPTY_COMMENT" value="false" />
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="false" />
-    <option name="LAST_COMMIT_MESSAGE" value="fix help" />
+    <option name="LAST_COMMIT_MESSAGE" value="fix show plan" />
     <option name="MAKE_NEW_CHANGELIST_ACTIVE" value="false" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_FILES_UP_TO_DATE_BEFORE_COMMIT" value="false" />
@@ -1515,7 +1519,6 @@
     <option name="UPDATE_FILTER_BY_SCOPE" value="false" />
     <option name="SHOW_FILE_HISTORY_AS_TREE" value="false" />
     <option name="FILE_HISTORY_SPLITTER_PROPORTION" value="0.6" />
-    <MESSAGE value="css fix2" />
     <MESSAGE value="fix css3" />
     <MESSAGE value="ruby 1 9 3 on heroku" />
     <MESSAGE value="fix journal for concept" />
@@ -1540,6 +1543,7 @@
     <MESSAGE value="new plan form complete" />
     <MESSAGE value="fix news for plans" />
     <MESSAGE value="fix help" />
+    <MESSAGE value="fix show plan" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1666,7 +1670,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/views/plan/posts/show.html.haml">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="100" column="54" selection-start="4237" selection-end="4237" vertical-scroll-proportion="0.41811848">
+        <state line="104" column="0" selection-start="4282" selection-end="4282" vertical-scroll-proportion="0.6271777">
           <folding />
         </state>
       </provider>
