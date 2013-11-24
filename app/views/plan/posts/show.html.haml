@@ -20,9 +20,15 @@
       %div(id="accordion-resizer" class="ui-widget-content")
         .accordion
           - @post.post_aspects.each do |tp|
-            %h3=tp.name
+            %h3
+              =tp.name
+              %b
+                =tp.compare_text
+
             %div
               %a{:name => tp.id}
+
+
               %p.ftable.fline
                 %span.bigtext Устраняемое несовершенство:
               %p.ftable.fcolor=tp.discontent.show_content.html_safe

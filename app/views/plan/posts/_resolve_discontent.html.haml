@@ -55,3 +55,4 @@
     %span.fline.bigtext D. Реалистичность и практичность: предложить средства формирования перечисленных ресурсов, обосновать их доступность и эффективность
     %br
     =text_area_tag "post_aspects[#{p.discontent.id}][reality]",p.nil? ? nil : p.reality, :class => 'concept_cond2'
+  =hidden_field_tag "post_aspects[#{p.discontent.id}][concept_post_aspect_id]",p.nil? ? @cond.id :  p.concept_post_aspect.id

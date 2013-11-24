@@ -208,6 +208,7 @@ GEM
       rubyzip
       websocket (~> 1.0.4)
     settingslogic (2.0.8)
+    similar_text (0.0.4)
     slop (3.4.3)
     spork (1.0.0rc3)
     spork-rails (3.2.1)
@@ -280,6 +281,7 @@ DEPENDENCIES
   sass-rails (~> 3.2.3)
   selectize-rails
   settingslogic
+  similar_text
   spork
   spork-rails
   sqlite3

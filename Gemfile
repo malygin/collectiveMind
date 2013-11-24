@@ -59,4 +59,5 @@ gem 'wymeditor'
 gem 'rest-client'
 gem 'magic_encoding'
 gem 'dalli'
+gem 'similar_text'
 

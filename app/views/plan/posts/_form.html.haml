@@ -43,18 +43,20 @@
       -unless asp.accepted_posts.empty?
         %i=asp.content
         %br
+        %br
         -asp.accepted_posts.each do |dis|
           =dis.show_content.html_safe
           = select_tag "aspect_#{dis.id}", options_from_collection_for_select(dis.pure_conditions, 'id', 'name'), :prompt => 'Выберите нововведение', :onchange => "load_new_aspect(#{dis.id});"
           %br
           = link_to 'либо добавьте свое нововведение по этому несовершенству', add_aspect_plan_post_path(@project, @status, dis.id), :remote => true, :id => "add_new_cond_for_plan_#{dis.id}"
           %br
-          %i Кликните на название нововведения, чтобы раскрыть его
+          -#%i Кликните на название нововведения, чтобы раскрыть его
           .accordion(id= "accordion_concept_#{dis.id}")
             -unless dis.conditions_for_plan(@post).empty?
               -dis.conditions_for_plan(@post).each do |pc|
                 =render partial: 'plan/posts/resolve_discontent', :object => pc, as: :p
 
+          %br
           %br
 
   - if @post.step == 3  or @post.step == 6

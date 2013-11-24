@@ -88,16 +88,27 @@ class Plan::PostsController < PostsController
   def update
     @project = Core::Project.find(params[:project])
     @plan_post = Plan::Post.find(params[:id])
-
+    pa_save ={}
+    pa_save2 ={}
     if @plan_post.step == 2  or @plan_post.step == 6
-      @plan_post.post_aspects.destroy_all
+
+      @plan_post.post_aspects.each do |pa|
+         unless params['post_aspects'].keys.include? pa.discontent.id.to_s
+             pa.destroy
+          end
+      end
+
       unless params['post_aspects'].nil?
         params['post_aspects'].each do |k,v|
           if k!= ''
-            dis = Discontent::Post.find(k)
-            pa = Plan::PostAspect.new(v)
-            pa.discontent = dis
-            @plan_post.post_aspects << pa
+            unless @plan_post.post_aspects.find_by_discontent_aspect_id(k).nil?
+              @plan_post.post_aspects.find_by_discontent_aspect_id(k).update_attributes(v)
+            else
+              dis = Discontent::Post.find(k)
+              pa = Plan::PostAspect.new(v)
+              pa.discontent = dis
+              @plan_post.post_aspects << pa
+            end
           end
         end
       end
@@ -108,6 +119,8 @@ class Plan::PostsController < PostsController
     end
 
     if @plan_post.step == 4   or @plan_post.step == 6
+
+
       @plan_post.post_first_conds.destroy_all
       @plan_post.plan_first = params[:plan_post][:plan_first]
       unless params['first_cond'].nil?

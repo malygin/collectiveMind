@@ -1,3 +1,4 @@
+
 class Concept::PostAspect < ActiveRecord::Base
   attr_accessible :discontent_aspect_id, :concept_post_id, :content, :control,
                   :name, :negative, :positive, :reality, :problems
@@ -17,4 +18,10 @@ class Concept::PostAspect < ActiveRecord::Base
     end
     return true
   end
+
+   def discontent_id
+     self.discontent.id
+   end
+
+
 end
