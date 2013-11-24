@@ -2,14 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="aa6a5015-3a56-4a58-9b19-a0ad2e76ab80" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/404.html" afterPath="$PROJECT_DIR$/public/404.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/plan/posts/_form.html.haml" afterPath="$PROJECT_DIR$/app/views/plan/posts/_form.html.haml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/plan/posts/add_first_cond.js.haml" afterPath="$PROJECT_DIR$/app/views/plan/posts/add_first_cond.js.haml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/assets/javascripts/application.js.coffee" afterPath="$PROJECT_DIR$/app/assets/javascripts/application.js.coffee" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="collectiveMind.iws" />
     <ignored path=".idea/workspace.xml" />
-    <file path="/Dummy.txt" changelist="aa6a5015-3a56-4a58-9b19-a0ad2e76ab80" time="1385326884017" ignored="false" />
+    <file path="/Dummy.txt" changelist="aa6a5015-3a56-4a58-9b19-a0ad2e76ab80" time="1385328791931" ignored="false" />
     <file path="/boot.rb" changelist="aa6a5015-3a56-4a58-9b19-a0ad2e76ab80" time="1372798651996" ignored="false" />
     <file path="/Gemfile" changelist="aa6a5015-3a56-4a58-9b19-a0ad2e76ab80" time="1385318412261" ignored="false" />
     <file path="/users_controller.rb" changelist="aa6a5015-3a56-4a58-9b19-a0ad2e76ab80" time="1380793607255" ignored="false" />
@@ -36,7 +34,7 @@
     <file path="/20130723104213_create_estimate_post_aspects.rb" changelist="aa6a5015-3a56-4a58-9b19-a0ad2e76ab80" time="1374576567354" ignored="false" />
     <file path="/_right_side.html.haml" changelist="aa6a5015-3a56-4a58-9b19-a0ad2e76ab80" time="1385140227794" ignored="false" />
     <file path="/_stages.html.haml" changelist="aa6a5015-3a56-4a58-9b19-a0ad2e76ab80" time="1374591506628" ignored="false" />
-    <file path="/application.js.coffee" changelist="aa6a5015-3a56-4a58-9b19-a0ad2e76ab80" time="1384549496623" ignored="false" />
+    <file path="/application.js.coffee" changelist="aa6a5015-3a56-4a58-9b19-a0ad2e76ab80" time="1385329782734" ignored="false" />
     <file path="/posts.js" changelist="aa6a5015-3a56-4a58-9b19-a0ad2e76ab80" time="1385073476428" ignored="false" />
     <file path="/add_new_discontent.js.haml" changelist="aa6a5015-3a56-4a58-9b19-a0ad2e76ab80" time="1382901330491" ignored="false" />
     <file path="/_resolve_discontent.html.haml" changelist="aa6a5015-3a56-4a58-9b19-a0ad2e76ab80" time="1385324580513" ignored="false" />
@@ -178,19 +176,19 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="404.html" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/public/404.html">
+      <file leaf-file-name="application.js.coffee" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/app/assets/javascripts/application.js.coffee">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="21" column="35" selection-start="607" selection-end="607" vertical-scroll-proportion="-5.0833335">
+            <state line="35" column="20" selection-start="1425" selection-end="1425" vertical-scroll-proportion="0.6557377">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="500.html" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/public/500.html">
+      <file leaf-file-name="404.html" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/public/404.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="24" column="43" selection-start="766" selection-end="794" vertical-scroll-proportion="-10.0">
+            <state line="21" column="35" selection-start="607" selection-end="607" vertical-scroll-proportion="-5.0833335">
               <folding />
             </state>
           </provider>
@@ -223,10 +221,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="add_new_discontent.js.haml" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="add_new_discontent.js.haml" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/views/plan/posts/add_new_discontent.js.haml">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="4" column="18" selection-start="1342" selection-end="1342" vertical-scroll-proportion="0.21352313">
+            <state line="4" column="18" selection-start="1342" selection-end="1342" vertical-scroll-proportion="-2.5">
               <folding />
             </state>
           </provider>
@@ -255,7 +253,6 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/app/views/plan/posts/_first_cond.html.haml" />
         <option value="$PROJECT_DIR$/app/views/core/projects/help.html.haml" />
         <option value="$PROJECT_DIR$/app/views/plan/posts/_right_side.html.haml" />
         <option value="$PROJECT_DIR$/app/views/core/projects/help_s3_1.html.haml" />
@@ -271,6 +268,7 @@
         <option value="$PROJECT_DIR$/public/404.html" />
         <option value="$PROJECT_DIR$/app/views/plan/posts/_form.html.haml" />
         <option value="$PROJECT_DIR$/app/views/plan/posts/add_first_cond.js.haml" />
+        <option value="$PROJECT_DIR$/app/assets/javascripts/application.js.coffee" />
       </list>
     </option>
   </component>
@@ -436,15 +434,51 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="views" />
+              <option name="myItemId" value="assets" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="plan" />
+              <option name="myItemId" value="stylesheets" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="collectiveMind" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="collectiveMind" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="posts" />
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="assets" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="javascripts" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="collectiveMind" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="collectiveMind" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="assets" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -1424,7 +1458,11 @@
       <created>1385326886464</created>
       <updated>1385326886464</updated>
     </task>
-    <option name="localTasksCounter" value="128" />
+    <task id="LOCAL-00128" summary="show cool tables in form">
+      <created>1385328794610</created>
+      <updated>1385328794610</updated>
+    </task>
+    <option name="localTasksCounter" value="129" />
     <servers />
   </component>
   <component name="TodoView" selected-index="0">
@@ -1576,13 +1614,6 @@
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/app/models/plan/post.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="11" column="82" selection-start="604" selection-end="604" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/helpers/journal_helper.rb">
       <provider selected="true" editor-type-id="text-editor">
         <state line="0" column="0" selection-start="0" selection-end="17" vertical-scroll-proportion="0.0">
@@ -1685,7 +1716,14 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/views/plan/posts/add_new_discontent.js.haml">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="4" column="18" selection-start="1342" selection-end="1342" vertical-scroll-proportion="0.21352313">
+        <state line="4" column="18" selection-start="1342" selection-end="1342" vertical-scroll-proportion="-2.5">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/assets/javascripts/application.js.coffee">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="35" column="20" selection-start="1425" selection-end="1425" vertical-scroll-proportion="0.6557377">
           <folding />
         </state>
       </provider>
