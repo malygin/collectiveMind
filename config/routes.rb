@@ -152,7 +152,7 @@ scope '/project/:project' do
                 get :add_aspect
                 get :add_first_cond
                 get :add_new_discontent
-
+                put :censored_comment
                 put :add_comment
                 put :plus
                 put :plus_comment
