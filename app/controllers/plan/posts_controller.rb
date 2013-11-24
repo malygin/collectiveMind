@@ -158,11 +158,20 @@ class Plan::PostsController < PostsController
  def add_aspect
    @id=params[:id]
    @discontent = Discontent::Post.find(@id)
-   @cond = params[:cond_id]
+   @concept_id = params[:cond_id]
    unless params[:cond_id].nil?
-    @cond = Concept::PostAspect.find(@cond)
+    @concept = Concept::PostAspect.find(@concept_id)
+    @cond = Plan::PostAspect.new
+    @cond.name= @concept.name
+     @cond.content = @concept.content
+     @cond.positive = @concept.positive
+     @cond.negative = @concept.negative
+     @cond.reality = @concept.reality
+     @cond.problems = @concept.problems
+     @cond.discontent = @concept.discontent
+     @cond.concept_post_aspect = @concept
    else
-     @cond = Concept::PostAspect.new
+     @cond = Plan::PostAspect.new
      @cond.discontent = @discontent
      @cond.save
    end

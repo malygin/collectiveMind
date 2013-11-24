@@ -10,7 +10,7 @@ class Plan::PostAspect  < ActiveRecord::Base
   has_many :plan_post_first_conds, :class_name => 'Plan::PostFirstCond'
 
   def compare_text
-    unless self.concept_post_aspect.nil? or self.concept_post_aspect.name.nil?
+    unless self.concept_post_aspect.nil?
       score = ((self.content.similar(self.concept_post_aspect.content) +
           self.positive.similar(self.concept_post_aspect.positive) +
           self.negative.similar(self.concept_post_aspect.negative) +
@@ -32,7 +32,7 @@ class Plan::PostAspect  < ActiveRecord::Base
         "(сильно переработано = #{score}%)"
       end
     else
-      ""
+      "(новое)"
     end
 
   end
