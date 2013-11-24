@@ -10,27 +10,30 @@ class Plan::PostAspect  < ActiveRecord::Base
   has_many :plan_post_first_conds, :class_name => 'Plan::PostFirstCond'
 
   def compare_text
-    score = ((self.content.similar(self.concept_post_aspect.content) +
-        self.positive.similar(self.concept_post_aspect.positive) +
-        self.negative.similar(self.concept_post_aspect.negative) +
-        self.reality.similar(self.concept_post_aspect.reality) +
-        self.problems.similar(self.concept_post_aspect.problems)) /5).round(1)
-    if score.nan?
-      nil
-    elsif score ==100
-      "(идентично исходному)"
-    elsif score > 90
-      "(небольшие изменения = #{score}%)"
+    unless self.concept_post_aspect.nil? or self.concept_post_aspect.name.nil?
+      score = ((self.content.similar(self.concept_post_aspect.content) +
+          self.positive.similar(self.concept_post_aspect.positive) +
+          self.negative.similar(self.concept_post_aspect.negative) +
+          self.reality.similar(self.concept_post_aspect.reality) +
+          self.problems.similar(self.concept_post_aspect.problems)) /5).round(1)
+      if score.nan?
+        nil
+      elsif score ==100
+        "(идентично исходному)"
+      elsif score > 90
+        "(небольшие изменения = #{score}%)"
 
-    elsif score >70
-      "(существенные  изменения = #{score}%)"
+      elsif score >70
+        "(существенные  изменения = #{score}%)"
 
-    elsif score > 40
-      "(сильно переработано = #{score}%)"
+      elsif score > 40
+        "(сильно переработано = #{score}%)"
+      else
+        "(сильно переработано = #{score}%)"
+      end
     else
-      "(сильно переработано = #{score}%)"
+      ""
     end
-
 
   end
 

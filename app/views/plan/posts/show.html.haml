@@ -22,8 +22,9 @@
           - @post.post_aspects.each do |tp|
             %h3
               =tp.name
-              %b
-                =tp.compare_text
+              -unless tp.compare_text.nil?
+                %b
+                  -#=tp.compare_text
 
             %div
               %a{:name => tp.id}
