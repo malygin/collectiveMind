@@ -127,7 +127,7 @@
     %br
     %i Кликните на название нововведения, чтобы раскрыть его и редактировать
 
-    .accordion
+    .accordion#first_cond
       -unless @post.post_first_conds.empty?
         -@post.post_first_conds.each do |fc|
           =render partial: 'plan/posts/first_cond', :object => fc, as: :p
