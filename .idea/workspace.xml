@@ -2,12 +2,14 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="aa6a5015-3a56-4a58-9b19-a0ad2e76ab80" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/assets/javascripts/application.js.coffee" afterPath="$PROJECT_DIR$/app/assets/javascripts/application.js.coffee" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/plan/posts/_post_estimate.html.haml" afterPath="$PROJECT_DIR$/app/views/plan/posts/_post_estimate.html.haml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/collectiveMind.iml" afterPath="$PROJECT_DIR$/.idea/collectiveMind.iml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/plan/posts/show.html.haml" afterPath="$PROJECT_DIR$/app/views/plan/posts/show.html.haml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="collectiveMind.iws" />
     <ignored path=".idea/workspace.xml" />
-    <file path="/Dummy.txt" changelist="aa6a5015-3a56-4a58-9b19-a0ad2e76ab80" time="1385328791931" ignored="false" />
+    <file path="/Dummy.txt" changelist="aa6a5015-3a56-4a58-9b19-a0ad2e76ab80" time="1386343951381" ignored="false" />
     <file path="/boot.rb" changelist="aa6a5015-3a56-4a58-9b19-a0ad2e76ab80" time="1372798651996" ignored="false" />
     <file path="/Gemfile" changelist="aa6a5015-3a56-4a58-9b19-a0ad2e76ab80" time="1385318412261" ignored="false" />
     <file path="/users_controller.rb" changelist="aa6a5015-3a56-4a58-9b19-a0ad2e76ab80" time="1380793607255" ignored="false" />
@@ -39,7 +41,7 @@
     <file path="/add_new_discontent.js.haml" changelist="aa6a5015-3a56-4a58-9b19-a0ad2e76ab80" time="1382901330491" ignored="false" />
     <file path="/_resolve_discontent.html.haml" changelist="aa6a5015-3a56-4a58-9b19-a0ad2e76ab80" time="1385324580513" ignored="false" />
     <file path="/_left_side.html.haml" changelist="aa6a5015-3a56-4a58-9b19-a0ad2e76ab80" time="1381518288851" ignored="false" />
-    <file path="/_post_estimate.html.haml" changelist="aa6a5015-3a56-4a58-9b19-a0ad2e76ab80" time="1375388070483" ignored="false" />
+    <file path="/_post_estimate.html.haml" changelist="aa6a5015-3a56-4a58-9b19-a0ad2e76ab80" time="1386176443910" ignored="false" />
     <file path="/20130805085158_add_important_for_estimate_post.rb" changelist="aa6a5015-3a56-4a58-9b19-a0ad2e76ab80" time="1375692789200" ignored="false" />
     <file path="/20130805090704_add_important_for_estimate_post_aspect.rb" changelist="aa6a5015-3a56-4a58-9b19-a0ad2e76ab80" time="1375694198464" ignored="false" />
     <file path="/_post.html.haml" changelist="aa6a5015-3a56-4a58-9b19-a0ad2e76ab80" time="1385052590386" ignored="false" />
@@ -140,28 +142,19 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="_form.html.haml" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/views/plan/posts/_form.html.haml">
+      <file leaf-file-name="application.js.coffee" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/assets/javascripts/application.js.coffee">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="129" column="26" selection-start="6618" selection-end="6629" vertical-scroll-proportion="-6.4166665">
+            <state line="39" column="5" selection-start="2175" selection-end="2175" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="_right_side.html.haml" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/views/plan/posts/_right_side.html.haml">
+      <file leaf-file-name="index.html.haml" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/views/estimate/posts/index.html.haml">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="-0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="_resolve_discontent.html.haml" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/views/plan/posts/_resolve_discontent.html.haml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="40" column="108" selection-start="2000" selection-end="2000" vertical-scroll-proportion="-9.916667">
+            <state line="2" column="43" selection-start="64" selection-end="64" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -170,43 +163,52 @@
       <file leaf-file-name="show.html.haml" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/views/plan/posts/show.html.haml">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="26" column="0" selection-start="648" selection-end="648" vertical-scroll-proportion="-4.25">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="application.js.coffee" pinned="false" current="true" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/app/assets/javascripts/application.js.coffee">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="35" column="20" selection-start="1425" selection-end="1425" vertical-scroll-proportion="0.6557377">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="404.html" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/public/404.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="21" column="35" selection-start="607" selection-end="607" vertical-scroll-proportion="-5.0833335">
+            <state line="15" column="9" selection-start="353" selection-end="353" vertical-scroll-proportion="48.125">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
       <file leaf-file-name="posts_controller.rb" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/controllers/plan/posts_controller.rb">
+        <entry file="file://$PROJECT_DIR$/app/controllers/estimate/posts_controller.rb">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="148" column="40" selection-start="4484" selection-end="4484" vertical-scroll-proportion="0.0">
+            <state line="22" column="0" selection-start="328" selection-end="328" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="table.html.haml" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/views/concept/posts/table.html.haml">
+      <file leaf-file-name="_post_estimate.html.haml" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/views/plan/posts/_post_estimate.html.haml">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="27" column="0" selection-start="1120" selection-end="3269" vertical-scroll-proportion="-7.5">
+            <state line="8" column="11" selection-start="279" selection-end="279" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="_form.html.haml" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/views/estimate/posts/_form.html.haml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="248" column="48" selection-start="14122" selection-end="14122" vertical-scroll-proportion="-11.583333">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="show.html.haml" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/views/concept/posts/show.html.haml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="47" column="28" selection-start="1928" selection-end="1941" vertical-scroll-proportion="-12.5">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="posts_controller.rb" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/app/controllers/plan/posts_controller.rb">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="33" column="0" selection-start="692" selection-end="692" vertical-scroll-proportion="0.5635179">
               <folding />
             </state>
           </provider>
@@ -215,7 +217,7 @@
       <file leaf-file-name="add_first_cond.js.haml" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/views/plan/posts/add_first_cond.js.haml">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="4" column="14" selection-start="886" selection-end="886" vertical-scroll-proportion="-2.5">
+            <state line="4" column="14" selection-start="886" selection-end="886" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -224,7 +226,7 @@
       <file leaf-file-name="add_new_discontent.js.haml" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/views/plan/posts/add_new_discontent.js.haml">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="4" column="18" selection-start="1342" selection-end="1342" vertical-scroll-proportion="-2.5">
+            <state line="4" column="18" selection-start="1342" selection-end="1342" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -253,7 +255,6 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/app/views/core/projects/help.html.haml" />
         <option value="$PROJECT_DIR$/app/views/plan/posts/_right_side.html.haml" />
         <option value="$PROJECT_DIR$/app/views/core/projects/help_s3_1.html.haml" />
         <option value="$PROJECT_DIR$/config/routes.rb" />
@@ -261,7 +262,6 @@
         <option value="$PROJECT_DIR$/Gemfile" />
         <option value="$PROJECT_DIR$/app/models/concept/post_aspect.rb" />
         <option value="$PROJECT_DIR$/app/views/plan/posts/_resolve_discontent.html.haml" />
-        <option value="$PROJECT_DIR$/app/views/plan/posts/show.html.haml" />
         <option value="$PROJECT_DIR$/app/models/plan/post_aspect.rb" />
         <option value="$PROJECT_DIR$/public/500.html" />
         <option value="$PROJECT_DIR$/app/controllers/plan/posts_controller.rb" />
@@ -269,6 +269,8 @@
         <option value="$PROJECT_DIR$/app/views/plan/posts/_form.html.haml" />
         <option value="$PROJECT_DIR$/app/views/plan/posts/add_first_cond.js.haml" />
         <option value="$PROJECT_DIR$/app/assets/javascripts/application.js.coffee" />
+        <option value="$PROJECT_DIR$/app/views/plan/posts/_post_estimate.html.haml" />
+        <option value="$PROJECT_DIR$/app/views/plan/posts/show.html.haml" />
       </list>
     </option>
   </component>
@@ -310,62 +312,30 @@
       <sortByType />
     </navigator>
     <panes>
-      <pane id="Scope">
-        <subPane subId="Project Files">
+      <pane id="RailsProjectView">
+        <subPane>
           <PATH>
-            <PATH_ELEMENT USER_OBJECT="Root">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
+            <PATH_ELEMENT>
+              <option name="myItemId" value="collectiveMind" />
+              <option name="myItemType" value="org.jetbrains.plugins.ruby.rails.projectView.v2.nodes.RailsProjectNode" />
             </PATH_ELEMENT>
-            <PATH_ELEMENT USER_OBJECT="collectiveMind">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
+            <PATH_ELEMENT>
+              <option name="myItemId" value="collectiveMind" />
+              <option name="myItemType" value="org.jetbrains.plugins.ruby.rails.projectView.v2.nodes.RailsModuleNode" />
             </PATH_ELEMENT>
           </PATH>
           <PATH>
-            <PATH_ELEMENT USER_OBJECT="Root">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
+            <PATH_ELEMENT>
+              <option name="myItemId" value="collectiveMind" />
+              <option name="myItemType" value="org.jetbrains.plugins.ruby.rails.projectView.v2.nodes.RailsProjectNode" />
             </PATH_ELEMENT>
-            <PATH_ELEMENT USER_OBJECT="collectiveMind">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
+            <PATH_ELEMENT>
+              <option name="myItemId" value="collectiveMind" />
+              <option name="myItemType" value="org.jetbrains.plugins.ruby.rails.projectView.v2.nodes.RailsModuleNode" />
             </PATH_ELEMENT>
-            <PATH_ELEMENT USER_OBJECT="lib">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT USER_OBJECT="Root">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT USER_OBJECT="collectiveMind">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT USER_OBJECT="app">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT USER_OBJECT="Root">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT USER_OBJECT="collectiveMind">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT USER_OBJECT="app">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT USER_OBJECT="controllers">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Views" />
+              <option name="myItemType" value="org.jetbrains.plugins.ruby.rails.projectView.v2.nodes.folders.UnclassifiedViewsFolderNode" />
             </PATH_ELEMENT>
           </PATH>
         </subPane>
@@ -434,11 +404,15 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="assets" />
+              <option name="myItemId" value="views" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="stylesheets" />
+              <option name="myItemId" value="plan" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="posts" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -456,11 +430,15 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="assets" />
+              <option name="myItemId" value="views" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="javascripts" />
+              <option name="myItemId" value="concept" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="posts" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -484,30 +462,62 @@
           </PATH>
         </subPane>
       </pane>
-      <pane id="RailsProjectView">
-        <subPane>
+      <pane id="Scope">
+        <subPane subId="Project Files">
           <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="collectiveMind" />
-              <option name="myItemType" value="org.jetbrains.plugins.ruby.rails.projectView.v2.nodes.RailsProjectNode" />
+            <PATH_ELEMENT USER_OBJECT="Root">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
             </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="collectiveMind" />
-              <option name="myItemType" value="org.jetbrains.plugins.ruby.rails.projectView.v2.nodes.RailsModuleNode" />
+            <PATH_ELEMENT USER_OBJECT="collectiveMind">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
             </PATH_ELEMENT>
           </PATH>
           <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="collectiveMind" />
-              <option name="myItemType" value="org.jetbrains.plugins.ruby.rails.projectView.v2.nodes.RailsProjectNode" />
+            <PATH_ELEMENT USER_OBJECT="Root">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
             </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="collectiveMind" />
-              <option name="myItemType" value="org.jetbrains.plugins.ruby.rails.projectView.v2.nodes.RailsModuleNode" />
+            <PATH_ELEMENT USER_OBJECT="collectiveMind">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
             </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Views" />
-              <option name="myItemType" value="org.jetbrains.plugins.ruby.rails.projectView.v2.nodes.folders.UnclassifiedViewsFolderNode" />
+            <PATH_ELEMENT USER_OBJECT="lib">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT USER_OBJECT="Root">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT USER_OBJECT="collectiveMind">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT USER_OBJECT="app">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT USER_OBJECT="Root">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT USER_OBJECT="collectiveMind">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT USER_OBJECT="app">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT USER_OBJECT="controllers">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
             </PATH_ELEMENT>
           </PATH>
         </subPane>
@@ -1462,7 +1472,11 @@
       <created>1385328794610</created>
       <updated>1385328794610</updated>
     </task>
-    <option name="localTasksCounter" value="129" />
+    <task id="LOCAL-00129" summary="notice for plan form">
+      <created>1385329919973</created>
+      <updated>1385329919973</updated>
+    </task>
+    <option name="localTasksCounter" value="130" />
     <servers />
   </component>
   <component name="TodoView" selected-index="0">
@@ -1489,13 +1503,12 @@
     <frame x="0" y="22" width="1280" height="701" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32781458" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32838285" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3294702" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32901135" sideWeight="0.49006623" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="true" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.28200972" sideWeight="0.6490066" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.35099337" sideWeight="0.49957302" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.31928688" sideWeight="0.650165" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.34983498" sideWeight="0.49957302" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.397351" sideWeight="0.500427" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4240924" sideWeight="0.49699572" order="2" side_tool="false" content_ui="tabs" />
@@ -1504,6 +1517,7 @@
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33443707" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32781458" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.39966273" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
@@ -1551,7 +1565,7 @@
     <option name="WRAP_WHEN_TYPING_REACHES_RIGHT_MARGIN" value="false" />
     <option name="FORCE_NON_EMPTY_COMMENT" value="false" />
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="false" />
-    <option name="LAST_COMMIT_MESSAGE" value="show cool tables in form" />
+    <option name="LAST_COMMIT_MESSAGE" value="notice for plan form" />
     <option name="MAKE_NEW_CHANGELIST_ACTIVE" value="false" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_FILES_UP_TO_DATE_BEFORE_COMMIT" value="false" />
@@ -1565,7 +1579,6 @@
     <option name="UPDATE_FILTER_BY_SCOPE" value="false" />
     <option name="SHOW_FILE_HISTORY_AS_TREE" value="false" />
     <option name="FILE_HISTORY_SPLITTER_PROPORTION" value="0.6" />
-    <MESSAGE value="new short help" />
     <MESSAGE value="new cool notes for concept parts" />
     <MESSAGE value="simple format for concept goal" />
     <MESSAGE value="new help and show for concept" />
@@ -1590,6 +1603,7 @@
     <MESSAGE value="add form restore for plan" />
     <MESSAGE value="new error pages and normal way for resplve discontent" />
     <MESSAGE value="show cool tables in form" />
+    <MESSAGE value="notice for plan form" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1610,87 +1624,28 @@
           <option name="timeStamp" value="189" />
         </line-breakpoint>
       </breakpoints>
-      <option name="time" value="190" />
+      <option name="time" value="192" />
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/app/helpers/journal_helper.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="17" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/models/concept/post_aspect.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/views/plan/posts/add_aspect.js.haml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/models/plan/post_aspect.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="34" column="13" selection-start="1438" selection-end="1438" vertical-scroll-proportion="0.0">
-          <folding>
-            <element signature="e#1063#1415#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/public/422.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="6.25">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/public/500.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="24" column="43" selection-start="766" selection-end="794" vertical-scroll-proportion="-10.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/views/plan/posts/show.html.haml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="26" column="0" selection-start="648" selection-end="648" vertical-scroll-proportion="-4.25">
-          <folding />
-        </state>
+        <state line="24" column="43" selection-start="766" selection-end="794" vertical-scroll-proportion="-10.0" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/views/concept/posts/table.html.haml">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="27" column="0" selection-start="1120" selection-end="3269" vertical-scroll-proportion="-7.5">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/controllers/plan/posts_controller.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="148" column="40" selection-start="4484" selection-end="4484" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
+        <state line="27" column="0" selection-start="1120" selection-end="3269" vertical-scroll-proportion="0.0" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/public/404.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="21" column="35" selection-start="607" selection-end="607" vertical-scroll-proportion="-5.0833335">
-          <folding />
-        </state>
+        <state line="21" column="35" selection-start="607" selection-end="607" vertical-scroll-proportion="0.0" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/views/plan/posts/_form.html.haml">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="129" column="26" selection-start="6618" selection-end="6629" vertical-scroll-proportion="-6.4166665">
-          <folding />
-        </state>
+        <state line="129" column="26" selection-start="6618" selection-end="6629" vertical-scroll-proportion="0.0" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/views/plan/posts/_right_side.html.haml">
@@ -1702,28 +1657,77 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/views/plan/posts/_resolve_discontent.html.haml">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="40" column="108" selection-start="2000" selection-end="2000" vertical-scroll-proportion="-9.916667">
+        <state line="40" column="108" selection-start="2000" selection-end="2000" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/views/plan/posts/add_first_cond.js.haml">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="4" column="14" selection-start="886" selection-end="886" vertical-scroll-proportion="-2.5">
+        <state line="4" column="14" selection-start="886" selection-end="886" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/views/plan/posts/add_new_discontent.js.haml">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="4" column="18" selection-start="1342" selection-end="1342" vertical-scroll-proportion="-2.5">
+        <state line="4" column="18" selection-start="1342" selection-end="1342" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/assets/javascripts/application.js.coffee">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="35" column="20" selection-start="1425" selection-end="1425" vertical-scroll-proportion="0.6557377">
+        <state line="39" column="5" selection-start="2175" selection-end="2175" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/controllers/estimate/posts_controller.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="22" column="0" selection-start="328" selection-end="328" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/views/estimate/posts/index.html.haml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="2" column="43" selection-start="64" selection-end="64" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/views/plan/posts/_post_estimate.html.haml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="8" column="11" selection-start="279" selection-end="279" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/views/estimate/posts/_form.html.haml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="248" column="48" selection-start="14122" selection-end="14122" vertical-scroll-proportion="-11.583333">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/views/concept/posts/show.html.haml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="47" column="28" selection-start="1928" selection-end="1941" vertical-scroll-proportion="-12.5">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/views/plan/posts/show.html.haml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="15" column="9" selection-start="353" selection-end="353" vertical-scroll-proportion="48.125">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/controllers/plan/posts_controller.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="33" column="0" selection-start="692" selection-end="692" vertical-scroll-proportion="0.5635179">
           <folding />
         </state>
       </provider>

@@ -104,6 +104,7 @@
     <orderEntry type="library" scope="PROVIDED" name="selectize-rails (v0.7.7, RVM: ruby-1.9.3-p392) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="selenium-webdriver (v2.30.0, RVM: ruby-1.9.3-p392) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="settingslogic (v2.0.8, RVM: ruby-1.9.3-p392) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="similar_text (v0.0.4, RVM: ruby-1.9.3-p392) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="slop (v3.4.3, RVM: ruby-1.9.3-p392) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="spork (v1.0.0rc3, RVM: ruby-1.9.3-p392) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="spork-rails (v3.2.1, RVM: ruby-1.9.3-p392) [gem]" level="application" />

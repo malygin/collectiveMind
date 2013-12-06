@@ -6,6 +6,7 @@
 		= trim_string(post_estimate.goal)
 
 		-#- if signed_in? and not current_user==post_estimate.user
+		%br
 		- if signed_in?
 			= link_to 'Добавить оценку', '/project/'+@project.id.to_s+'/estimate/status/2/posts/new?plan_id='+post_estimate.id.to_s
 = render post_estimate.estimates

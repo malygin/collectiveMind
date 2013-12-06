@@ -13,7 +13,7 @@
       %p
         %h1 1. Эссе о проекте в целом:
         %br
-        = @post.goal
+        =simple_format(@post.goal)
 
       %h1 2. Конечный образ желаемого будушего
       %br
@@ -63,7 +63,7 @@
       %h1 3. Подробное описание промежуточного будущего (итоги первого этапа)
       %b Эссе
       %br
-      =@post.first_step
+      =simple_format(@post.first_step)
 
       %div(id="accordion-resizer" class="ui-widget-content")
         .accordion
@@ -105,11 +105,11 @@
       %br
       %h1 4. Подробный  план первого этапа
       %br
-      =@post.plan_first
+      =simple_format(@post.plan_first)
       %br
       %h1 5. Набросок плана последующих этапов проекта
       %br
-      =@post.plan_other
+      =simple_format(@post.plan_other)
       %br
 
    
