@@ -1,5 +1,8 @@
 class Estimate::PostAspect < ActiveRecord::Base
-  attr_accessible :imp, :on, :on1, :on2, :on3, :op, :op1, :op2, :op3, :ozf, :ozf1, :ozf2, :ozf3, :ozs, :ozs1, :ozs2, :ozs3
+  attr_accessible :imp, :on, :on1, :on2, :on3, :on4,
+                  :op, :op1, :op2, :op3, :op4,
+                  :ozf, :ozf1, :ozf2, :ozf3,  :ozf4,
+                  :ozs, :ozs1, :ozs2, :ozs3
   belongs_to :post
   belongs_to :plan_post_aspect, :class_name => 'Plan::PostAspect'
   scope :by_firts_stage , lambda { |stage|

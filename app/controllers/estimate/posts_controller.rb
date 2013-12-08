@@ -32,12 +32,12 @@ class Estimate::PostsController < PostsController
 
 
     @pair_estimates1 = {}
-    @plan_post.post_aspects_first.each do |p|
+    @plan_post.post_first_conds.each do |p|
       @pair_estimates1[p] = Estimate::PostAspect.new
     end
 
     @pair_estimates2 = {}
-    @plan_post.post_aspects_other.each do |p|
+    @plan_post.post_aspects.each do |p|
       @pair_estimates2[p] = Estimate::PostAspect.new
     end
 

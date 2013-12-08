@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131121162405) do
+ActiveRecord::Schema.define(:version => 20131208204248) do
 
   create_table "answers", :force => true do |t|
     t.string   "text"
@@ -392,6 +392,10 @@ ActiveRecord::Schema.define(:version => 20131121162405) do
     t.datetime "created_at",          :null => false
     t.datetime "updated_at",          :null => false
     t.integer  "imp"
+    t.integer  "op4"
+    t.integer  "ozf4"
+    t.integer  "ozs4"
+    t.integer  "on4"
   end
 
   create_table "estimate_posts", :force => true do |t|
@@ -424,6 +428,12 @@ ActiveRecord::Schema.define(:version => 20131121162405) do
     t.integer  "status"
     t.integer  "project_id"
     t.integer  "imp"
+    t.integer  "nep1"
+    t.integer  "nep2"
+    t.integer  "nep3"
+    t.integer  "nep4"
+    t.text     "nep"
+    t.integer  "all_grade"
   end
 
   add_index "estimate_posts", ["created_at"], :name => "index_estimate_posts_on_created_at"
