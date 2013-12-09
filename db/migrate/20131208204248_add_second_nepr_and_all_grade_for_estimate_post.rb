@@ -1,11 +1,11 @@
 class AddSecondNeprAndAllGradeForEstimatePost < ActiveRecord::Migration
   def change
-    remove_column :estimate_post_aspects,  :nep1, :integer
-    remove_column :estimate_post_aspects,  :nep2, :integer
-    remove_column :estimate_post_aspects,  :nep3, :integer
-    remove_column :estimate_post_aspects,  :nep4, :integer
-    remove_column :estimate_post_aspects,  :nep, :text
-    remove_column :estimate_post_aspects,  :all_grade, :integer
+    #remove_column :estimate_post_aspects,  :nep1, :integer
+    #remove_column :estimate_post_aspects,  :nep2, :integer
+    #remove_column :estimate_post_aspects,  :nep3, :integer
+    #remove_column :estimate_post_aspects,  :nep4, :integer
+    #remove_column :estimate_post_aspects,  :nep, :text
+    #remove_column :estimate_post_aspects,  :all_grade, :integer
 
     add_column :estimate_posts,  :nep1, :integer
     add_column :estimate_posts,  :nep2, :integer
