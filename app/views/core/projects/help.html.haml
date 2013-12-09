@@ -53,7 +53,6 @@
     %li
         %b
             Стадия 3) – проекты
-            %span(style="color:red;")новый раздел
         %br
         %ul.help
             %li=link_to 'Описание стадии (краткое)', "/project/#{@core_project.id}/help_s3"
@@ -61,10 +60,16 @@
 
             %br
 
+    %li
+        %b
+            Стадия 4) – оценивание
+            %span(style="color:red;")новый раздел
+        %br
+        %ul.help
+            %li=link_to 'Описание стадии (краткое)', "/project/#{@core_project.id}/help_s4"
+            %li=link_to 'Описание стадии (подробное)', "/project/#{@core_project.id}/help_s4_1"
+            %br
+
 
 
 %br
-/ =link_to 'вернуться к процедуре', '/project/'+@core_project.id.to_s
-/ Видеовстпуление
-/ %br
-/ <iframe width="560" height="315" src="http://www.youtube.com/embed/GOQP8vSamoI" frameborder="0" allowfullscreen></iframe>

@@ -1,8 +1,9 @@
-= form_for @post,   :html => { :class => 'new_or_edit' } do |f|
+= form_for @post, :url => {:project => @project.id, :action => @post.persisted? ? 'update' : 'create'},   :html => { :class => 'new_or_edit' } do |f|
   %b Цель проекта
   %br= simple_format(@plan_post.goal)
   - if not jury?
     %h1 Общий список несовершенств
+    %b Чтобы оценить нововведение щелкните по нему мышью. Оценить нужно ВСЕ нововведения
     .accordion
       - @pair_estimates2.each do |pa, est|
         %h1=pa.name
@@ -101,13 +102,15 @@
             = select_tag "ozs[0][#{pa.id}][3]",   options_for_select([["невероятно", 0],["маловероятно", 1], ["вероятно", 2], ["очень вероятно", 3]], est.ozs3)
           .field
             = f.label "--4) ничтожными  "
-            = select_tag "ozs[0][#{pa.id}][3]",   options_for_select([["невероятно", 0],["маловероятно", 1], ["вероятно", 2], ["очень вероятно", 3]], est.ozs4)
+            = select_tag "ozs[0][#{pa.id}][4]",   options_for_select([["невероятно", 0],["маловероятно", 1], ["вероятно", 2], ["очень вероятно", 3]], est.ozs4)
           .field
             = f.label 'Объясните, почему вы так считаете'
             = text_area_tag "ozs_text[0][#{pa.id}]", est.ozs
 
 
     %h1 Список несовершенств, корректируемых на первом этапе
+    %b Чтобы оценить нововведение щелкните по нему мышью. Оценить нужно ВСЕ нововведения
+
     .accordion
       - @pair_estimates1.each do |pa, est|
         %h1=pa.name
@@ -211,7 +214,7 @@
             = select_tag "ozs[1][#{pa.id}][3]",   options_for_select([["невероятно", 0],["маловероятно", 1], ["вероятно", 2], ["очень вероятно", 3]], est.ozs3)
           .field
             = f.label "--3) ничтожными "
-            = select_tag "ozs[1][#{pa.id}][3]",   options_for_select([["невероятно", 0],["маловероятно", 1], ["вероятно", 2], ["очень вероятно", 3]], est.ozs4)
+            = select_tag "ozs[1][#{pa.id}][4]",   options_for_select([["невероятно", 0],["маловероятно", 1], ["вероятно", 2], ["очень вероятно", 3]], est.ozs4)
           .field
             = f.label 'Объясните, почему вы так считаете'
             = text_area_tag "ozs_text[1][#{pa.id}]", est.ozs

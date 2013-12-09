@@ -1,4 +1,4 @@
-- if signed_in?
+- if signed_in? and @project.status == 7
 	= link_to image_tag('add_project.png'), new_plan_post_path
 / -else
 / 	Авторизуйтесь, чтобы добавить проект

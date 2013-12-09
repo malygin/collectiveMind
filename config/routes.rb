@@ -41,6 +41,8 @@ scope '/project/:project' do
   match '/help_s2_1', :to => 'core/projects#help_s2_1'
   match '/help_s3', :to => 'core/projects#help_s3'
   match '/help_s3_1', :to => 'core/projects#help_s3_1'
+  match '/help_s4', :to => 'core/projects#help_s4'
+  match '/help_s4_1', :to => 'core/projects#help_s4_1'
 
   resources :users do
     member do
@@ -176,6 +178,7 @@ scope '/project/:project' do
       resources :posts do
         member do
           get :add_aspect
+          put :censored_comment
           put :add_comment
           put :plus
           put :plus_comment

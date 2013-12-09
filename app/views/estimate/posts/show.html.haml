@@ -19,30 +19,19 @@
       %b Общая оценка проекта
       %br= simple_format( @post.content)
     -if not  @post.user.jury?
-      -#Общая оценка проекта
-      -#%span.red_est #{ @post.score}
-      -#( = #{ @post.first_c} + #{ @post.second_c} - #{ @post.third_c})
-      -#%br
-      -#1) ожидаемая эффективность всего проекта в целом
-      -#%span.red_est #{ @post.first_c}
-      -#%br
-      -#2) ожидаемая эффективность его первого шага
-      -#%span.red_est #{ @post.second_c}
-      -#%br
-      -#3) ожидаемые неприятности в связи с осуществлением проекта
-      -#%span.red_est #{ @post.third_c}
       Общая оценка проекта
-      %span.red_est 9.87
-      ( = 4.11 + 5.64 - 1.05)
+      %span.red_est #{ @post.score}
+      ( = #{ @post.first_c} + #{ @post.second_c} - #{ @post.third_c})
       %br
       1) ожидаемая эффективность всего проекта в целом
-      %span.red_est 4.11
+      %span.red_est #{ @post.first_c}
       %br
       2) ожидаемая эффективность его первого шага
-      %span.red_est 5.64
+      %span.red_est #{ @post.second_c}
       %br
       3) ожидаемые неприятности в связи с осуществлением проекта
-      %span.red_est 1.05
+      %span.red_est #{ @post.third_c}
+
       %br
       %br
       %b Общий список несовершенств
@@ -50,7 +39,7 @@
       %div(id="accordion-resizer" class="ui-widget-content")
         .accordion
           -  @post.post_aspects.others.each_with_index do |tr, index|
-            %h1="Оценивание #{tr.plan_post_aspect.name}, -  "
+            %h1="Оценивание #{tr.plan_post_aspect.name}, - #{tr.score} "
             %div
               ожидаемая эффективность это задачи
               -#%span.red_est=tr.score
@@ -169,7 +158,7 @@
       %div(id="accordion-resizer" class="ui-widget-content")
         .accordion
           -  @post.post_aspects.firsts.each_with_index do |tr, index|
-            %h1="Оценивание #{tr.plan_post_first_cond.name}, -  "
+            %h1="Оценивание #{tr.plan_post_first_cond.name}, - #{tr.score} "
             %div
               ожидаемая эффективность это задачи
               -#%span.red_est=tr.score
@@ -341,13 +330,6 @@
       %br
       =estimate_trans_project(@post.all_grade)
 
-- if current_user ==  @post.user
-  / = link_to 'Редактировать', edit_estimate_post_path( @post)
-\|
-= link_to 'Назад', estimate_posts_path
-- if signed_in? 
-  = render :partial => 'shared/comment_form', :locals => { :comment => @comment, :url_link => add_comment_estimate_post_path( @post.id)}
+    = render 'shared/post_social_bar', :post => @post
 
-= render :partial => 'shared/comment',:collection =>  @post.comments, :locals => { :path_link => '/estimate/comments/'}
-%br
-%br
+= render 'shared/post_edit_bar', :post => @post

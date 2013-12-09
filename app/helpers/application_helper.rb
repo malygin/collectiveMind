@@ -29,7 +29,7 @@ module ApplicationHelper
   			'current'
   		elsif stage == 'plan' and (@project.status == 7)
   			'current' 		
-  		elsif stage == 'estimate' and (@project.status == 9)
+  		elsif stage == 'estimate' and (@project.status == 8)
   			'current'
   		end
 	end
@@ -57,7 +57,7 @@ module ApplicationHelper
 		    return image+'green.png'  
 		elsif stage == 'plan' and (@project.status == 7)
 		    return image+'green.png'  		
-		elsif stage == 'estimate' and (@project.status == 9)
+		elsif stage == 'estimate' and (@project.status == 8)
 		    return image+'green.png'  
 		else
 		  return  image+'.png' 

@@ -37,7 +37,7 @@ class Journal < ActiveRecord::Base
  expert_news_post_save
  estimate_post_save
  estimate_post_update
- estimate_comment_
+ estimate_comment_save
  save answer_save
  estimate_post_rejection
  estimate_post_acceptance)

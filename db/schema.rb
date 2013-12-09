@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131209094751) do
+ActiveRecord::Schema.define(:version => 20131209184838) do
 
   create_table "answers", :force => true do |t|
     t.string   "text"
@@ -344,8 +344,9 @@ ActiveRecord::Schema.define(:version => 20131209094751) do
     t.integer  "user_id"
     t.integer  "post_id"
     t.text     "content"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at",                    :null => false
+    t.datetime "updated_at",                    :null => false
+    t.boolean  "censored",   :default => false
   end
 
   add_index "estimate_comments", ["post_id"], :name => "index_estimate_comments_on_post_id"
@@ -400,6 +401,26 @@ ActiveRecord::Schema.define(:version => 20131209094751) do
     t.integer  "plan_post_first_cond_id"
   end
 
+  create_table "estimate_post_notes", :force => true do |t|
+    t.integer  "post_id"
+    t.integer  "user_id"
+    t.text     "content"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "estimate_post_votings", :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "post_id"
+    t.boolean  "against"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  add_index "estimate_post_votings", ["post_id", "user_id"], :name => "index_estimate_post_votings_on_post_id_and_user_id"
+  add_index "estimate_post_votings", ["post_id"], :name => "index_estimate_post_votings_on_post_id"
+  add_index "estimate_post_votings", ["user_id"], :name => "index_estimate_post_votings_on_user_id"
+
   create_table "estimate_posts", :force => true do |t|
     t.integer  "user_id"
     t.integer  "post_id"
@@ -425,8 +446,8 @@ ActiveRecord::Schema.define(:version => 20131209094751) do
     t.integer  "nepr3"
     t.integer  "nepr4"
     t.text     "nepr"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at",                      :null => false
+    t.datetime "updated_at",                      :null => false
     t.integer  "status"
     t.integer  "project_id"
     t.integer  "imp"
@@ -436,6 +457,8 @@ ActiveRecord::Schema.define(:version => 20131209094751) do
     t.integer  "nep4"
     t.text     "nep"
     t.integer  "all_grade"
+    t.integer  "number_views", :default => 0
+    t.boolean  "censored",     :default => false
   end
 
   add_index "estimate_posts", ["created_at"], :name => "index_estimate_posts_on_created_at"
@@ -468,6 +491,16 @@ ActiveRecord::Schema.define(:version => 20131209094751) do
   end
 
   add_index "estimate_task_triplets", ["post_id"], :name => "index_estimate_task_triplets_on_post_id"
+
+  create_table "estimate_votings", :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "estimate_post_id"
+    t.datetime "created_at",       :null => false
+    t.datetime "updated_at",       :null => false
+  end
+
+  add_index "estimate_votings", ["estimate_post_id"], :name => "index_estimate_votings_on_estimate_post_id"
+  add_index "estimate_votings", ["user_id"], :name => "index_estimate_votings_on_user_id"
 
   create_table "expert_news_comment_votings", :force => true do |t|
     t.integer  "user_id"

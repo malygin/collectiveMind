@@ -26,6 +26,23 @@ class Estimate::PostsController < PostsController
       format.json { render json: @posts }
     end
   end
+
+
+  def edit
+    @post = Estimate::Post.find(params[:id])
+    @plan_post = @post.post
+    @pair_estimates1 = {}
+    @plan_post.post_first_conds.each do |p|
+      @pair_estimates1[p] = @post.post_aspects.by_plan_fc(p.id).first
+    end
+
+    @pair_estimates2 = {}
+    @plan_post.post_aspects.each do |p|
+      @pair_estimates2[p] = @post.post_aspects.by_plan_pa(p.id).first
+    end
+  end
+
+
   def new
     @post = current_model.new
     @plan_post = Plan::Post.find(params[:plan_id])
@@ -46,6 +63,7 @@ class Estimate::PostsController < PostsController
       format.json { render json: @post }
     end
   end
+
   def prepare_data
     @project = Core::Project.find(params[:project])
     @journals = Journal.events_for_user_feed @project.id
@@ -166,42 +184,82 @@ class Estimate::PostsController < PostsController
   # PUT /estimate/posts/1.json
   def update
     @estimate_post = Estimate::Post.find(params[:id])
-    @estimate_post.task_triplets.destroy_all
-    @estimate_post.task_triplets=[]
-    @estimate_post.post.task_triplets.each do |tr|
-      est_tr = Estimate::TaskTriplet.new
-      est_tr.task_triplet = tr
-      op = params[:op][tr.id.to_s]
-      est_tr.op1 = op['1']
-      est_tr.op2 = op['2']
-      est_tr.op3 = op['3']
-      est_tr.op = params[:op_text][tr.id.to_s]      
+    @project = Core::Project.find(params[:project])
+    plan_post = Plan::Post.find(params[:post_id])
+    @estimate_post.post_aspects=[]
+      plan_post.post_aspects.each do |tr|
+        est_tr = Estimate::PostAspect.new
+        est_tr.first_stage = false
+        est_tr.plan_post_aspect = tr
+        op = params[:op]['0'][tr.id.to_s]
+        est_tr.op1 = op['1']
+        est_tr.op2 = op['2']
+        est_tr.op3 = op['3']
+        est_tr.op4 = op['4']
+        est_tr.op = params[:op_text]['0'][tr.id.to_s]
 
-      ozf = params[:ozf][tr.id.to_s]
-      est_tr.ozf1 = ozf['1']
-      est_tr.ozf2 = ozf['2']
-      est_tr.ozf3 = ozf['3']
-      est_tr.ozf = params[:ozf_text][tr.id.to_s]
+        ozf = params[:ozf]['0'][tr.id.to_s]
+        est_tr.ozf1 = ozf['1']
+        est_tr.ozf2 = ozf['2']
+        est_tr.ozf3 = ozf['3']
+        est_tr.ozf4 = ozf['4']
+        est_tr.ozf = params[:ozf_text]['0'][tr.id.to_s]
 
-      ozs = params[:ozs][tr.id.to_s]
-      est_tr.ozs1 = ozs['1']
-      est_tr.ozs2 = ozs['2']
-      est_tr.ozs3 = ozs['3']
-      est_tr.ozs = params[:ozs_text][tr.id.to_s]
+        ozs = params[:ozs]['0'][tr.id.to_s]
+        est_tr.ozs1 = ozs['1']
+        est_tr.ozs2 = ozs['2']
+        est_tr.ozs3 = ozs['3']
+        est_tr.ozs4 = ozs['4']
+        est_tr.ozs = params[:ozs_text]['0'][tr.id.to_s]
 
-      on = params[:on][tr.id.to_s]
-      est_tr.on1 = on['1']
-      est_tr.on2 = on['2']
-      est_tr.on3 = on['3']
-      est_tr.on = params[:on_text][tr.id.to_s]
+        on = params[:on]['0'][tr.id.to_s]
+        est_tr.on1 = on['1']
+        est_tr.on2 = on['2']
+        est_tr.on3 = on['3']
+        est_tr.on4 = on['4']
+        est_tr.on = params[:on_text]['0'][tr.id.to_s]
+        @estimate_post.post_aspects << est_tr
+      end
 
-      @estimate_post.task_triplets << est_tr
+      plan_post.post_first_conds.each do |tr|
+        est_tr = Estimate::PostAspect.new
+        est_tr.first_stage = true
+        est_tr.plan_post_first_cond = tr
+        op = params[:op]['1'][tr.id.to_s]
+        est_tr.op1 = op['1']
+        est_tr.op2 = op['2']
+        est_tr.op3 = op['3']
+        est_tr.op4 = op['4']
+        est_tr.op = params[:op_text]['1'][tr.id.to_s]
 
-    end
+        ozf = params[:ozf]['1'][tr.id.to_s]
+        est_tr.ozf1 = ozf['1']
+        est_tr.ozf2 = ozf['2']
+        est_tr.ozf3 = ozf['3']
+        est_tr.ozf4 = ozf['4']
+        est_tr.ozf = params[:ozf_text]['1'][tr.id.to_s]
+
+        ozs = params[:ozs]['1'][tr.id.to_s]
+        est_tr.ozs1 = ozs['1']
+        est_tr.ozs2 = ozs['2']
+        est_tr.ozs3 = ozs['3']
+        est_tr.ozs4 = ozs['4']
+        est_tr.ozs = params[:ozs_text]['1'][tr.id.to_s]
+
+        on = params[:on]['1'][tr.id.to_s]
+        est_tr.on1 = on['1']
+        est_tr.on2 = on['2']
+        est_tr.on3 = on['3']
+        est_tr.on4 = on['4']
+        est_tr.on = params[:on_text]['1'][tr.id.to_s]
+        @estimate_post.post_aspects << est_tr
+      end
+
+    @estimate_post.save
     @estimate_post.update_attributes(params[:estimate_post])
     current_user.journals.build(:type_event=>'estimate_post_update', :body=>@estimate_post.id).save!
 
-    redirect_to @estimate_post, notice: 'Оценка успешно обновлена.'
+    redirect_to estimate_post_path(@project,@estimate_post), notice: 'Оценка успешно обновлена.'
 
 end
 
