@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131208204248) do
+ActiveRecord::Schema.define(:version => 20131209094751) do
 
   create_table "answers", :force => true do |t|
     t.string   "text"
@@ -389,13 +389,15 @@ ActiveRecord::Schema.define(:version => 20131208204248) do
     t.integer  "on2"
     t.integer  "on3"
     t.text     "on"
-    t.datetime "created_at",          :null => false
-    t.datetime "updated_at",          :null => false
+    t.datetime "created_at",              :null => false
+    t.datetime "updated_at",              :null => false
     t.integer  "imp"
     t.integer  "op4"
     t.integer  "ozf4"
     t.integer  "ozs4"
     t.integer  "on4"
+    t.boolean  "first_stage"
+    t.integer  "plan_post_first_cond_id"
   end
 
   create_table "estimate_posts", :force => true do |t|

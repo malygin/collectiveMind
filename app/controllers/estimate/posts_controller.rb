@@ -73,36 +73,76 @@ class Estimate::PostsController < PostsController
     #puts "__________", @estimate_post.status
     @estimate_post.post_aspects=[]
     if not jury?
+
         plan_post.post_aspects.each do |tr|
           est_tr = Estimate::PostAspect.new
+          est_tr.first_stage = false
           est_tr.plan_post_aspect = tr
-          op = params[:op][tr.id.to_s]
+          op = params[:op]['0'][tr.id.to_s]
           est_tr.op1 = op['1']
           est_tr.op2 = op['2']
           est_tr.op3 = op['3']
-          #est_tr.op = params[:op_text][tr.id.to_s]
+          est_tr.op4 = op['4']
+          est_tr.op = params[:op_text]['0'][tr.id.to_s]
 
-          ozf = params[:ozf][tr.id.to_s]
+          ozf = params[:ozf]['0'][tr.id.to_s]
           est_tr.ozf1 = ozf['1']
           est_tr.ozf2 = ozf['2']
           est_tr.ozf3 = ozf['3']
-          #est_tr.ozf = params[:ozf_text][tr.id.to_s]
+          est_tr.ozf4 = ozf['4']
+          est_tr.ozf = params[:ozf_text]['0'][tr.id.to_s]
 
-          ozs = params[:ozs][tr.id.to_s]
+          ozs = params[:ozs]['0'][tr.id.to_s]
           est_tr.ozs1 = ozs['1']
           est_tr.ozs2 = ozs['2']
           est_tr.ozs3 = ozs['3']
-          est_tr.ozs = params[:ozs_text][tr.id.to_s]
+          est_tr.ozs4 = ozs['4']
+          est_tr.ozs = params[:ozs_text]['0'][tr.id.to_s]
 
-          on = params[:on][tr.id.to_s]
+          on = params[:on]['0'][tr.id.to_s]
           est_tr.on1 = on['1']
           est_tr.on2 = on['2']
           est_tr.on3 = on['3']
-          #est_tr.on = params[:on_text][tr.id.to_s]
-
+          est_tr.on4 = on['4']
+          est_tr.on = params[:on_text]['0'][tr.id.to_s]
           @estimate_post.post_aspects << est_tr
+        end
 
-          end
+      plan_post.post_first_conds.each do |tr|
+          est_tr = Estimate::PostAspect.new
+          est_tr.first_stage = true
+          est_tr.plan_post_first_cond = tr
+          op = params[:op]['1'][tr.id.to_s]
+          est_tr.op1 = op['1']
+          est_tr.op2 = op['2']
+          est_tr.op3 = op['3']
+          est_tr.op4 = op['4']
+          est_tr.op = params[:op_text]['1'][tr.id.to_s]
+
+          ozf = params[:ozf]['1'][tr.id.to_s]
+          est_tr.ozf1 = ozf['1']
+          est_tr.ozf2 = ozf['2']
+          est_tr.ozf3 = ozf['3']
+          est_tr.ozf4 = ozf['4']
+          est_tr.ozf = params[:ozf_text]['1'][tr.id.to_s]
+
+          ozs = params[:ozs]['1'][tr.id.to_s]
+          est_tr.ozs1 = ozs['1']
+          est_tr.ozs2 = ozs['2']
+          est_tr.ozs3 = ozs['3']
+          est_tr.ozs4 = ozs['4']
+          est_tr.ozs = params[:ozs_text]['1'][tr.id.to_s]
+
+          on = params[:on]['1'][tr.id.to_s]
+          est_tr.on1 = on['1']
+          est_tr.on2 = on['2']
+          est_tr.on3 = on['3']
+          est_tr.on4 = on['4']
+          est_tr.on = params[:on_text]['1'][tr.id.to_s]
+          @estimate_post.post_aspects << est_tr
+        end
+
+
       end
 
 
