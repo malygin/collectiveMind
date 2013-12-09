@@ -121,7 +121,7 @@ class Plan::PostsController < PostsController
     if @plan_post.step == 4   or @plan_post.step == 6
 
 
-      @plan_post.post_first_conds.destroy_all
+      @plan_post.post_first_conds =[]
       @plan_post.plan_first = params[:plan_post][:plan_first]
       unless params['first_cond'].nil?
         params['first_cond'].each do |k,v|
