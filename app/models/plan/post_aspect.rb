@@ -19,7 +19,7 @@ class Plan::PostAspect  < ActiveRecord::Base
       if score.nan?
         nil
       elsif score ==100
-        "(идентично исходному)"
+        "(идентично предыдущей стадии)"
       elsif score > 90
         "(небольшие изменения = #{score}%)"
 
