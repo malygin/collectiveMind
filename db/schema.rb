@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131209184838) do
+ActiveRecord::Schema.define(:version => 20131213094028) do
 
   create_table "answers", :force => true do |t|
     t.string   "text"
@@ -801,6 +801,13 @@ ActiveRecord::Schema.define(:version => 20131209184838) do
   end
 
   add_index "plan_task_triplets", ["post_id"], :name => "index_plan_task_triplets_on_post_id"
+
+  create_table "plan_votings", :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "plan_post_id"
+    t.datetime "created_at",   :null => false
+    t.datetime "updated_at",   :null => false
+  end
 
   create_table "posts", :force => true do |t|
     t.string   "title"

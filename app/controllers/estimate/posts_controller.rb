@@ -16,10 +16,21 @@ class Estimate::PostsController < PostsController
   end
 
   def voting_model
-    Estimate::Post
+    Plan::Post
   end
 
   def index
+    if @project.status == 9
+      #puts  current_user.plan_post_votings
+      @number_v = @project.stage5 - current_user.plan_post_votings.size
+      @votes = @project.stage5
+      if boss?
+        @all_people = @project.users.size
+
+        @voted_people = ActiveRecord::Base.connection.execute("select count(*) as r from (select distinct v.user_id from plan_votings v  left join   plan_posts asp on (v.plan_post_id = asp.id) ) as dm").first["r"]
+        @votes = ActiveRecord::Base.connection.execute("select count(*) as r from (select  v.user_id from plan_votings v  left join   plan_posts asp on (v.plan_post_id = asp.id) ) as dm").first["r"].to_i
+      end
+    end
     @posts = Plan::Post.where(:project_id => @project, :status => 2).paginate(:page => params[:page])
     respond_to do |format|
       format.html # index.html.erb

@@ -1,4 +1,23 @@
 %h3 Оценка проектов
+-if @project.status == 9
+    %br=link_to 'Вы можете оставить свое мнение или почитать другие', essay_posts_path(@project, @project.status), :id => 'essay_list'
+    Выберите  проект, которые считаете лучшим и нажмите "отдать голос" рядом с ним.
+    %br
 
+    - unless @number_v<1
+        Количество имеющихся голосов -
+        %span.rate
+            %span#count_vote=@number_v
+    %br
+    - if boss?
+        проголосовало
+        =@voted_people
+        из
+        =@all_people
+        Отдано голосов
+        =@votes
+    %br
+    %br
+    %br
 = render :partial => '/plan/posts/post_estimate', :collection => @posts
 

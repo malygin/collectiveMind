@@ -1,3 +1,12 @@
+-if boss?
+    %p.righttext
+        текущий статус проекта
+        %br
+        %span.rate= status_title(@project.status)
+    %br
+    -if @project.status == 8
+        =link_to 'Начать итоговое голосование ',  next_stage_core_project_path(@project), id: 'change_stage'
+
 %p.righttext
     Тогда обязательно посмотрите раздел помощи,
     = link_to 'раздел помощь', '/project/8/help'
