@@ -97,7 +97,7 @@ class Estimate::PostsController < PostsController
     elsif jury?
       @estimate_post.status = 3
     else
-      @estimate_post.status = 0
+      @estimate_post.status = 1
     end
     #puts "__________", @estimate_post.status
     @estimate_post.post_aspects=[]
