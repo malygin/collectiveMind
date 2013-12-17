@@ -1,6 +1,6 @@
 - if current_user?(post.user) and post.status == 0
   - if post.created_at < 2.day.ago
-    = link_to 'Послать эксперту', url_for(:action => 'to_expert')
+    -#= link_to 'Послать эксперту', url_for(:action => 'to_expert')
 - if boss? and post.status == 1
   = link_to 'Отправить на доработку', url_for(:action => 'expert_revision')
   \|
