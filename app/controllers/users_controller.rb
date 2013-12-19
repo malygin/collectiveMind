@@ -43,25 +43,25 @@ class UsersController < ApplicationController
 	end
 
 	def create 
-		@user = User.new(params[:user])
-		cp = nil
-		Core::Project.all.each do |pr|
-      puts 'aaa'
-			if @user.secret == pr.secret
-				@user.projects << pr
-			end
-		end
-
-		if @user.secret!='' and !@user.projects.empty? and @user.save
-			sign_in @user
-			flash[:success] = "Добро пожаловать!"
-			redirect_to root_path
-		else
-			if   @user.secret=='' or @user.projects.empty?
-				flash[:error] = "Кодовое слово введено неверно!"
-			end
-			render 'new'
-		end
+		#@user = User.new(params[:user])
+		#cp = nil
+		#Core::Project.all.each do |pr|
+     # puts 'aaa'
+		#	if @user.secret == pr.secret
+		#		@user.projects << pr
+		#	end
+		#end
+    #
+		#if @user.secret!='' and !@user.projects.empty? and @user.save
+		#	sign_in @user
+		#	flash[:success] = "Добро пожаловать!"
+		#	redirect_to root_path
+		#else
+		#	if   @user.secret=='' or @user.projects.empty?
+		#		flash[:error] = "Кодовое слово введено неверно!"
+		#	end
+		#	render 'new'
+		#end
 	end
 
 	def destroy

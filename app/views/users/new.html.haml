@@ -1,37 +1,37 @@
-%h1 Давайте зарегистрируем вас!
-
-= form_for @user do |f|
-	= render 'shared/error_messages', :object => f.object
-	.field 
-		= f.label :name, "Имя"
-		%br
-		= f.text_field :name
-	.field 
-		= f.label :surname, "Фамилия"
-		%br
-		= f.text_field :surname 	
-	.field
-		= f.label :surname, "Ник (используется, если вы поставить галочку на 'Участвовать анонимно')"
-		%br
-		= f.text_field :nickname
-	.field 
-		= f.label :secret, "Кодовое слово"
-		%br
-		= f.text_field :secret 
-	.field 
-		= f.label :email , "Электронная почта" 
-		%br
-		= f.text_field :email
-	.field 
-		= f.label :password, "Пароль"
-		%br
-		= f.password_field :password
-	.field 
-		=f.label :password_confirmation , "Подтвердите пароль"
-		%br
-		=f.password_field :password_confirmation
-	.fieild
-		= f.label :anonym, 'Участвовать анонимно'
-		= f.check_box :anonym
-	.action
-		=f.submit '',   class: "savebtn"
+-#%h1 Давайте зарегистрируем вас!
+-#
+-#= form_for @user do |f|
+-#	= render 'shared/error_messages', :object => f.object
+-#	.field
+-#		= f.label :name, "Имя"
+-#		%br
+-#		= f.text_field :name
+-#	.field
+-#		= f.label :surname, "Фамилия"
+-#		%br
+-#		= f.text_field :surname
+-#	.field
+-#		= f.label :surname, "Ник (используется, если вы поставить галочку на 'Участвовать анонимно')"
+-#		%br
+-#		= f.text_field :nickname
+-#	.field
+-#		= f.label :secret, "Кодовое слово"
+-#		%br
+-#		= f.text_field :secret
+-#	.field
+-#		= f.label :email , "Электронная почта"
+-#		%br
+-#		= f.text_field :email
+-#	.field
+-#		= f.label :password, "Пароль"
+-#		%br
+-#		= f.password_field :password
+-#	.field
+-#		=f.label :password_confirmation , "Подтвердите пароль"
+-#		%br
+-#		=f.password_field :password_confirmation
+-#	.fieild
+-#		= f.label :anonym, 'Участвовать анонимно'
+-#		= f.check_box :anonym
+-#	.action
+-#		=f.submit '',   class: "savebtn"
