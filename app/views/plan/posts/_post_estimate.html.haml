@@ -18,9 +18,10 @@
                     - if can_vote?(post_estimate.voted(current_user).size, @number_v, @votes)
                         %b=link_to 'отдать голос за этот проект', "/project/#{@project.id}/plan/vote/#{post_estimate.id}", :remote => true, :method => :put, class: "voteCounter"
 
-            %br
-            %br
-            %br
+
             -if @project.status == 8
                 = link_to 'Добавить оценку', '/project/'+@project.id.to_s+'/estimate/status/2/posts/new?plan_id='+post_estimate.id.to_s
 = render post_estimate.estimates
+%br
+%br
+%br
