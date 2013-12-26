@@ -29,7 +29,7 @@ module ApplicationHelper
   			'current'
   		elsif stage == 'plan' and (@project.status == 7)
   			'current' 		
-  		elsif stage == 'estimate' and (@project.status == 8)
+  		elsif stage == 'estimate' and ([8,9,10].include? @project.status )
   			'current'
   		end
 	end
@@ -87,7 +87,7 @@ def  status_title(pr)
 			when 9
 				'голосование за проекты'
 			when 10 
-				'итоговое голосование'
+				'подведение итогов'
 
 			when 20
 				'завершена'

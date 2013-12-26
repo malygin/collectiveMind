@@ -36,7 +36,7 @@ class Core::ProjectsController < ApplicationController
       redirect_to plan_posts_path(@project, :status => 0)
     elsif @project.status ==8
       redirect_to estimate_posts_path(@project)
-    elsif @project.status ==9
+    elsif @project.status ==9  or @project.status ==10
       redirect_to estimate_posts_path(@project)
     end
 
