@@ -2,13 +2,7 @@
 class LifeTape::PostsController < PostsController
 
 
-  def current_model
-    LifeTape::Post
-  end 
-  
-  def comment_model
-    LifeTape::Comment
-  end
+
 
   def voting_model
     Discontent::Aspect
@@ -46,6 +40,8 @@ end
       format.json { render json: @posts }
     end
   end
+
+
   def vote_list
     @posts = voting_model.where(:project_id => @project)
 

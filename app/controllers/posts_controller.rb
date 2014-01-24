@@ -8,17 +8,19 @@ class PostsController < ApplicationController
 
   # before_filter :authorized_user, :only => :destroy
 
-def current_model
-	Post
-end
+  def current_model
+    "#{self.class.name.deconstantize}::Post".constantize
+  end
+
+  def comment_model
+    "#{self.class.name.deconstantize}::Comment".constantize
+  end
+
 
 def note_model
-  PostNote
+  "#{self.class.name.deconstantize}::PostNote".constantize
 end
 
-def comment_model
-	Comment
-end
 
 def name_of_model_for_param
 	current_model.table_name.singularize

@@ -1,17 +1,7 @@
 class Discontent::PostsController < PostsController
   # GET /discontent/posts
   # GET /discontent/posts.json
-  def current_model
-    Discontent::Post
-  end 
-  
-  def comment_model
-    Discontent::Comment
-  end
 
-  def note_model
-    Discontent::PostNote
-  end
 
   def voting_model  
     Discontent::Post
