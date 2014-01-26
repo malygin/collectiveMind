@@ -4,6 +4,7 @@ require 'digest'
 class User < ActiveRecord::Base
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
+
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable,  :confirmable
 
@@ -68,7 +69,7 @@ class User < ActiveRecord::Base
               :on => :create
   validates :password_confirmation, presence: true,
    :length => { :within => 6..40 }, :on => :create
-before_save :encrypt_password
+  #before_save :encrypt_password
   attr_accessible :avatar
 
   # This method associates the attribute ":avatar" with a file attachment
@@ -76,6 +77,16 @@ before_save :encrypt_password
     thumb: '57x74>',
     normal: '300x300>'
   }
+  def devise_valid_password?(password)
+    begin
+      super(password)
+    rescue BCrypt::Errors::InvalidHash
+      return false unless Digest::SHA1.hexdigest(password) == encrypted_password
+      logger.info "User #{email} is using the old password hashing method, updating attribute."
+      self.password = password
+      true
+    end
+  end
 
   def add_score(score, type=:score_g)
     self.update_column(:score, self.score + score)
@@ -122,14 +133,17 @@ before_save :encrypt_password
       ""
     end
   end
+
   def boss?
     self.admin or self.expert
   end
+
   def have_essay_for_stage(project, stage)
     # puts self.essay_posts.where(:stage => stage)
     !self.essay_posts.where(:project_id => project, :stage => stage).empty?
   end
-      
+
+
 
 
   private 
@@ -152,6 +166,7 @@ before_save :encrypt_password
   	def secure_hash(string)
   		Digest::SHA2.hexdigest(string)
   	end
+
 
 
 end

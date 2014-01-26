@@ -2,7 +2,8 @@
 .project_name
   .child 
     %span.project_name= @project.name
-.top_buttons  
+.top_buttons
+
   - if signed_in?
     .greybut
       = link_to image_tag('edit.png'), "/project/#{@project.id}/users/#{current_user.id}/edit"

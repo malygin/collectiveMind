@@ -62,6 +62,9 @@ module CollectiveMind
     config.assets.version = '1.0'
     config.generators do |g|
           g.test_framework :rspec
-     end
+    end
+    config.to_prepare do
+      Devise::SessionsController.layout 'core/projects'
+    end
   end
 end

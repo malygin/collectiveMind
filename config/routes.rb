@@ -1,6 +1,6 @@
 CollectiveMind::Application.routes.draw do
 
-  devise_for :users
+devise_for :users
 
 resources :users
 
@@ -260,8 +260,8 @@ end
   match '/donot', :to => 'pages#donot'  
   match '/articles', :to => 'pages#articles'
 
-  match '/signin', :to => 'sessions#new'
-  match '/signout', :to => 'sessions#destroy'
+  #match '/signin', :to => 'sessions#new'
+  #match '/signout', :to => 'sessions#destroy'
   match '/frustrations/structure', :to => 'pages#structure_frustrations'
   match '/frustrations/unstructure', :to => 'pages#unstructure_frustrations'
   match '/frustrations/archive', :to => 'pages#archive_frustrations'  
@@ -276,11 +276,11 @@ end
 
 
   
-  resources :sessions, :only => [:new, :create, :destroy]
+  #resources :sessions, :only => [:new, :create, :destroy]
 
   
   #match 'frustrations/archive/:id/', :to =>'frustrations#archive'
-  match '/signup', :to =>'users#new'
+  #match '/signup', :to =>'users#new'
   get 'welcome/index'
   
   resources :posts do
