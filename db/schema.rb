@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131213094028) do
+ActiveRecord::Schema.define(:version => 20140126165924) do
 
   create_table "answers", :force => true do |t|
     t.string   "text"
@@ -897,28 +897,41 @@ ActiveRecord::Schema.define(:version => 20131213094028) do
     t.date     "dateActivation"
     t.date     "dateLastEnter"
     t.string   "vkid"
-    t.datetime "created_at",                             :null => false
-    t.datetime "updated_at",                             :null => false
+    t.datetime "created_at",                                :null => false
+    t.datetime "updated_at",                                :null => false
     t.string   "encrypted_password"
     t.string   "login"
     t.string   "salt"
-    t.boolean  "admin",               :default => false
-    t.integer  "score",               :default => 0
-    t.boolean  "expert",              :default => false
+    t.boolean  "admin",                  :default => false
+    t.integer  "score",                  :default => 0
+    t.boolean  "expert",                 :default => false
     t.string   "user_type"
-    t.boolean  "jury",                :default => false
+    t.boolean  "jury",                   :default => false
     t.string   "avatar_file_name"
     t.string   "avatar_content_type"
     t.integer  "avatar_file_size"
     t.datetime "avatar_updated_at"
     t.string   "nickname"
-    t.boolean  "anonym",              :default => false
-    t.integer  "score_a",             :default => 0
-    t.integer  "score_g",             :default => 0
-    t.integer  "score_o",             :default => 0
+    t.boolean  "anonym",                 :default => false
+    t.integer  "score_a",                :default => 0
+    t.integer  "score_g",                :default => 0
+    t.integer  "score_o",                :default => 0
+    t.string   "reset_password_token"
+    t.datetime "reset_password_sent_at"
+    t.datetime "remember_created_at"
+    t.integer  "sign_in_count",          :default => 0,     :null => false
+    t.datetime "current_sign_in_at"
+    t.datetime "last_sign_in_at"
+    t.string   "current_sign_in_ip"
+    t.string   "last_sign_in_ip"
+    t.string   "confirmation_token"
+    t.datetime "confirmed_at"
+    t.datetime "confirmation_sent_at"
+    t.string   "unconfirmed_email"
   end
 
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true
+  add_index "users", ["reset_password_token"], :name => "index_users_on_reset_password_token", :unique => true
 
   create_table "voitings", :force => true do |t|
     t.integer  "user_id"

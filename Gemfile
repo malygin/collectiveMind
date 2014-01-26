@@ -42,6 +42,8 @@ group :assets do
 end
 
 gem "selectize-rails"
+gem 'html2haml', '1.0.0'
+gem 'devise'
 gem 'haml'
 gem 'haml-rails'
 gem 'jquery-rails'
