@@ -1,13 +1,12 @@
 # encoding: utf-8
-require 'digest'
+require 'digest/sha1'
 
 class User < ActiveRecord::Base
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
 
   devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :trackable, :validatable,  :confirmable
-
+         :recoverable, :rememberable, :trackable, :validatable
   # Setup accessible (or protected) attributes for your model
   attr_accessible  :remember_me
 
@@ -77,11 +76,12 @@ class User < ActiveRecord::Base
     thumb: '57x74>',
     normal: '300x300>'
   }
-  def devise_valid_password?(password)
+  def valid_password?(password)
     begin
       super(password)
     rescue BCrypt::Errors::InvalidHash
-      return false unless Digest::SHA1.hexdigest(password) == encrypted_password
+
+      return false unless password == encrypted_password
       logger.info "User #{email} is using the old password hashing method, updating attribute."
       self.password = password
       true
