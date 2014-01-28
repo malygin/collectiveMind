@@ -3,9 +3,9 @@ include ApplicationHelper
 
 
 def sign_in(user)
-  visit signin_path
-  fill_in "session_email",    with: user.email
-  fill_in "session_password", with: user.password
+  visit '/users/sign_in'
+  fill_in "user_email",    with: user.email
+  fill_in "user_password", with: user.password
   click_button "Signin"
   # Sign in when not using Capybara.
   cookies[:remember_token] = [user.id, user.salt]

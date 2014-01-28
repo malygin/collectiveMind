@@ -19,7 +19,6 @@ describe User do
   # it { should respond_to(:authenticate) }
 
 
-  it { should be_valid }
   it { should_not be_admin }
   its(:role_name) { should == 'студент'}
   its(:name_title) { should == 'Andrey Malygin'}

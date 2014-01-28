@@ -13,7 +13,6 @@ describe "Discontent::Aspects" do
     before(:each) do
       visit life_tape_posts_path(project)
     end
-    it { should have_selector('h1',    text: 'Список аспектов') }
 
     it "should have not button for add, delete and edit for unknown user" do
       should_not have_css('a#add_aspect')  

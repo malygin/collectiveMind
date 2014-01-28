@@ -3,8 +3,8 @@ FactoryGirl.define do
     sequence(:name)  { |n| "Name #{n}" }
     sequence(:surname)  { |n| "Surname #{n}" }
     sequence(:email) { |n| "person_#{n}@example.com" }
-    password "foobar"
-    password_confirmation "foobar"
+    password "foobar123"
+    password_confirmation "foobar123"
     admin false
     expert false
 

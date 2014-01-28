@@ -27,8 +27,11 @@ group :test do
   gem 'factory_girl_rails'
   gem 'capybara'
   gem 'guard-rspec'
-  gem 'rb-inotify', '~> 0.9'
+  #gem 'rb-inotify'
   gem 'database_cleaner'
+  gem 'selenium-webdriver'
+  gem 'webdriver-user-agent'
+  gem 'headless'
 end
 
 
