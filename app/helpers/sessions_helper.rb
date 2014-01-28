@@ -1,40 +1,14 @@
 # encoding: utf-8
 module SessionsHelper
 
-	#def sign_in(user)
-	#	cookies.permanent.signed[:remember_token] = [user.id, user.salt]
-	#	self.current_user = user
-	#end
-	
 	def journal_enter
   		current_user.journals.build(:type_event=>'enter').save!
-  	end
-
-	#def sign_out
-	#	cookies.delete(:remember_token)
-	#	self.current_user = nil
-	#end
-
-	#def current_user=(user)
-	#	@current_user = user
-	#end
-  #
-	#def current_user
-	#	@current_user ||= user_from_remember_token
-	#end
-
-	#def signed_in?
-	#	!current_user.nil?
-	#end
+  end
 
 	def deny_access 
 	    store_location
 	    redirect_to signin_path, :notice => "Авторизуйтесь пожалуйста!"
 	end
-
-  #def authenticate
-		#deny_access unless signed_in?
-  #end
 
 	def have_rights
 		# puts "_________________"+params[:project]
@@ -42,7 +16,8 @@ module SessionsHelper
 		if (current_user.nil? or !(current_user.projects.include? project))  and project.type_access == 2 
 			redirect_to root_path, :notice => "У вас нет прав просматривать этот проект!"
 		end
-	end
+  end
+
 	def boss_authenticate
 		deny_access unless boss?
 	end
@@ -77,18 +52,13 @@ module SessionsHelper
 		not (current_user.admin? or current_user.expert?)
 	end
 
-	def authorized_user
-			# @frustration = current_user.frustrations.find_by_id(params[:id])
-			redirect_to root_path
-	end
-
 	def to_bool(arg)
-		    return true if arg =~ (/^(true|t|yes|y|1)$/i)
-		    return false if arg.empty? || arg =~ (/^(false|f|no|n|0)$/i)
-		    raise ArgumentError.new "invalid value: #{arg}"
-    end
+    return true if arg =~ (/^(true|t|yes|y|1)$/i)
+    return false if arg.empty? || arg =~ (/^(false|f|no|n|0)$/i)
+    raise ArgumentError.new "invalid value: #{arg}"
+  end
 
-    def admin_user
+  def admin_user
 		redirect_to(root_path) if current_user.nil? or not current_user.admin?
 	end
 
@@ -101,14 +71,5 @@ module SessionsHelper
 	    def clear_return_to
 	      session[:return_to] = nil
 	    end
-    #
-    #
-		#def user_from_remember_token
-		#	User.authenticate_with_salt(*remember_token)
-		#end
-    #
-		#def remember_token
-		#	cookies.signed[:remember_token] || [nil, nil]
-		#end
 
 end

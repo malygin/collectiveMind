@@ -8,7 +8,7 @@
     .greybut
       = link_to image_tag('edit.png'), "/project/#{@project.id}/users/#{current_user.id}/edit"
       = link_to current_user.name_title, "/project/#{@project.id}/users/#{current_user.id}", class: "username"
-      = link_to " - Выйти", "/signout" , class: "username"
+      = link_to " - Выйти", destroy_user_session_path, :method => :delete,  class: "username"
   -else
     %span.blackbut
       = image_tag('exit.png')
