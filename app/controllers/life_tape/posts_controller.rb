@@ -29,7 +29,7 @@ end
 
   def index
     if params[:aspect].nil?
-      @posts = current_model.where(:project_id => @project).paginate(:page => params[:page])
+      @posts = current_model.where(:project_id => @project).paginate(:page => params[:page]).includes(:discontent_aspects)
 
     else
       @posts = current_model.where(:project_id => @project, :aspect_id => params[:aspect]).paginate(:page => params[:page])

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140126165924) do
+ActiveRecord::Schema.define(:version => 20140129091941) do
 
   create_table "answers", :force => true do |t|
     t.string   "text"
@@ -211,6 +211,13 @@ ActiveRecord::Schema.define(:version => 20140126165924) do
   end
 
   add_index "discontent_aspects", ["project_id"], :name => "index_discontent_aspects_on_project_id"
+
+  create_table "discontent_aspects_life_tape_posts", :force => true do |t|
+    t.integer "discontent_aspect_id"
+    t.integer "life_tape_post_id"
+  end
+
+  add_index "discontent_aspects_life_tape_posts", ["discontent_aspect_id", "life_tape_post_id"], :name => "index_discontent_aspects_life_tape_posts"
 
   create_table "discontent_comment_votings", :force => true do |t|
     t.integer  "user_id"
