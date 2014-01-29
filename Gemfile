@@ -3,7 +3,6 @@ ruby "1.9.3"
 
 gem 'rails', '3.2.13'
 
-
 group :development, :test do
   gem 'sqlite3'
   #gem 'linecache19', :git => 'git://github.com/mark-moseley/linecache'
@@ -11,11 +10,7 @@ group :development, :test do
   gem 'ruby-debug19'
   gem 'quiet_assets'
   gem 'grizzled-rails-logger'
-  gem 'rspec'
-  gem 'rspec-rails'
-  gem 'spork'
-  gem 'spork-rails'
-  gem 'guard-spork'
+
 end
 
 group :production do
@@ -24,6 +19,11 @@ group :production do
 end
 
 group :test do
+  gem 'rspec'
+  gem 'rspec-rails'
+  gem 'spork'
+  gem 'spork-rails'
+  gem 'guard-spork'
   gem 'factory_girl_rails'
   gem 'capybara'
   gem 'guard-rspec'
@@ -31,7 +31,7 @@ group :test do
   gem 'database_cleaner'
   gem 'selenium-webdriver'
   gem 'webdriver-user-agent'
-  gem 'headless'
+  #gem 'headless'
 end
 
 
@@ -53,16 +53,19 @@ gem 'jquery-rails'
 gem 'jquery-ui-rails'
 gem 'paperclip'
 gem 'aws-sdk'
+
 gem "highcharts-rails", "~> 3.0.0"
 gem 'json'
 gem 'will_paginate', '~> 3.0.0'
 gem 'faker'
 gem 'russian'
+
 gem 'thin'
 gem 'settingslogic'
 gem 'wymeditor'
 gem 'rest-client'
 gem 'magic_encoding'
+
 gem 'dalli'
 gem 'similar_text'
 
