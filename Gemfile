@@ -44,6 +44,7 @@ group :assets do
   gem 'therubyracer', '>=0.11.4'
 end
 
+gem 'bootstrap-sass-rails'
 gem "selectize-rails"
 gem 'html2haml', '1.0.0'
 gem 'devise'

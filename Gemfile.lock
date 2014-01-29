@@ -38,6 +38,9 @@ GEM
       nokogiri (>= 1.4.4)
       uuidtools (~> 2.1)
     bcrypt-ruby (3.1.2)
+    bootstrap-sass-rails (3.0.3.0)
+      railties (>= 3.1.0)
+      sass-rails (>= 3.1.0)
     builder (3.0.4)
     capybara (2.2.1)
       mime-types (>= 1.16)
@@ -288,6 +291,7 @@ PLATFORMS
 DEPENDENCIES
   activerecord-postgresql-adapter
   aws-sdk
+  bootstrap-sass-rails
   capybara
   coffee-rails (~> 3.2.1)
   dalli

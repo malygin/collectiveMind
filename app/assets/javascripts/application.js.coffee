@@ -5,6 +5,8 @@
 #= require highcharts
 #= require highcharts/highcharts-more
 #= require selectize
+#= require twitter/bootstrap
+
 $(document).ready ->
     $(".voteBar")
       .bind "ajax:success", (event, resp) ->
