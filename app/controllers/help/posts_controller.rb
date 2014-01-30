@@ -14,7 +14,10 @@ class Help::PostsController < ApplicationController
   end
 
   def show
-
+    @stages = Stage::LIST
+    @posts={}
+    Help::Post.where(stage: params[:id]).each {
+        |f| @posts[f.style] = f }
   end
 
 
