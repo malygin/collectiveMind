@@ -1,5 +1,71 @@
-- unless @news.nil?
-	%h1 Новости
-	%p.righttext
-		= @news.anons
-		= link_to 'подробнее',  expert_news_post_path(@project, @news)
+%ul.nav.nav-tabs
+  %li.active
+    =link_to 'Активность', '#'
+  %li
+    =link_to 'Новости', '#'
+
+.imperfection_journal
+  =link_to 'Иван Орлов', '/user/1'
+  добавил свое
+  =link_to 'несовершенство', '#'
+  %small 12.13.2014
+.imperfection_journal
+  =link_to 'Мирон Левин', '/user/1'
+  добавил свое
+  =link_to 'несовершенство', '#'
+  %small 11.13.2014
+.imperfection_journal
+  =link_to 'Сергей Паратов', '/user/1'
+  добавил свое
+  =link_to 'несовершенство', '#'
+  %small 23.13.2014
+.imperfection_journal
+  =link_to 'Панкрат Свидригайлов', '/user/1'
+  добавил свое
+  =link_to 'несовершенство', '#'
+  %small 01.13.2014
+.imperfection_journal
+  =link_to 'Иван Орлов', '/user/1'
+  добавил свое
+  =link_to 'несовершенство', '#'
+  %small 12.13.2014
+.imperfection_journal
+  =link_to 'Мирон Левин', '/user/1'
+  добавил свое
+  =link_to 'несовершенство', '#'
+  %small 11.13.2014
+.imperfection_journal
+  =link_to 'Сергей Паратов', '/user/1'
+  добавил свое
+  =link_to 'несовершенство', '#'
+  %small 23.13.2014
+.imperfection_journal
+  =link_to 'Панкрат Свидригайлов', '/user/1'
+  добавил свое
+  =link_to 'несовершенство', '#'
+  %small 01.13.2014
+.imperfection_journal
+  =link_to 'Иван Орлов', '/user/1'
+  добавил свое
+  =link_to 'несовершенство', '#'
+  %small 12.13.2014
+.imperfection_journal
+  =link_to 'Мирон Левин', '/user/1'
+  добавил свое
+  =link_to 'несовершенство', '#'
+  %small 11.13.2014
+.imperfection_journal
+  =link_to 'Сергей Паратов', '/user/1'
+  добавил свое
+  =link_to 'несовершенство', '#'
+  %small 23.13.2014
+.imperfection_journal
+  =link_to 'Панкрат Свидригайлов', '/user/1'
+  добавил свое
+  =link_to 'несовершенство', '#'
+  %small 01.13.2014
+-#- unless @news.nil?
+-#	%h1 Новости
+-#	%p.righttext
+-#		= @news.anons
+-#		= link_to 'подробнее',  expert_news_post_path(@project, @news)

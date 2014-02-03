@@ -1,14 +1,4 @@
 
-%p.righttext
-    =link_to image_tag('fb.png'),'http://www.facebook.com/massdecision'
-    =link_to image_tag('tw.png'),'https://twitter.com/massdecision'
-    =link_to image_tag('vk.png'),'https://vk.com/massdecision'
-    =link_to image_tag('ok.png'),'http://odnoklassniki.ru/group/56725703557182'
-    =mail_to 'suslova@mass-decision.ru', image_tag('mail.png')
-    %br
-    %b По всем вопросам   suslova@mass-decision.ru, тел. 77-01-82 (Татьяна Суслова)
-
-
 %br
 - if @project.id == 8
 
@@ -28,56 +18,58 @@
         %br
         4. Примите участие в обсуждении (делитесь идеями, задавайте вопросы)
 
-%h1 Избранные записи
-- unless @post_star.empty?
-    -@post_star.each do |st|
-        %p.righttext
-            = trim_string(st.content,150)
-            = link_to 'Подробнее',  {:action => :show, :project => @project, :id => st.id}, class: "more"
-            %br
-            %br
 
+%ul.nav.nav-tabs
+    %li.active
+        =link_to 'Избранные',  '#best', :data => {:toggle=>"tab"}
+    %li
+        =link_to 'Обсуждаемые', '#discussed', :data => {:toggle=>"tab"}
+.tab-content
+    .tab-pane.active#best
+        - unless @post_star.empty?
+            -@post_star.each do |st|
+                .imperfection_journal
+                    = trim_string(st.content,150)
+                    = link_to 'Подробнее',  {:action => :show, :project => @project, :id => st.id}, class: "more"
+                    %small 12.13.2014
+    .tab-pane#discussed
+
+        -@post_dis.each do |st|
+            .imperfection_journal
+                = trim_string(st.content, 150)
+                = link_to 'Подробнее',  {:action => :show, :project => @project, :id => st.id}, class: "more"
+                %small 12.13.2014
 
 
 %br
 
-%h1 Самые обсуждаемые
--#- unless @post_dis.empty?
--@post_dis.each do |st|
-    %p.righttext
-        = trim_string(st.content, 150)
-        = link_to 'Подробнее',  {:action => :show, :project => @project, :id => st.id}, class: "more"
-        %br
-        %br
+
 
 
 
 - unless @aspects.empty?
-    %h1 Список фрагментов
-- @aspects.each do |asp|
-    %a{:href  => "/project/#{@project.id}/life_tape/aspect/#{asp.id}/posts/", :class => 'topic'}
-        .topics
-            %p.greentitle
-                - if  asp.user_add
-                    (new)
-                = "#{asp.content}"
+    .panel.panel-default
+        .panel-heading Темы процедуры
+        .panel-body
+            - @aspects.each do |asp|
+                %a{:href  => "/project/#{@project.id}/life_tape/aspect/#{asp.id}/posts/", :class => 'topic'}
+                    .topics
+                        %p.greentitle
+                            - if  asp.user_add
+                                (new)
+                            = "#{asp.content}"
 / = render :partial => 'discontent/aspects/aspect', :collection => @aspects
--if boss? 
-    %p.righttext= link_to 'добавить фрагмент', new_discontent_aspect_path, id: "add_aspect"
-
-
 -if boss?
-    %p.righttext
-        текущий статус проекта
-        %br
-        %span.rate= status_title(@project.status)
-        %br
-        -if @project.status == 1
-            =link_to 'Начать голосование',  next_stage_core_project_path(@project), id: 'change_stage'
-        -if @project.status == 2
-            =link_to 'Вернуться к началу процедуры',  pr_stage_core_project_path(@project), id: 'change_stage'
-            %br
-            =link_to 'Начать сбор недовольств',  next_stage_core_project_path(@project), id: 'change_stage'
+    .panel.panel-default
+        .panel-heading Инструменты администратора
+        .panel-body
+            =link_to 'добавить фрагмент', new_discontent_aspect_path, id: "add_aspect"
+            -if @project.status == 1
+                =link_to 'Начать голосование',  next_stage_core_project_path(@project), id: 'change_stage'
+            -if @project.status == 2
+                =link_to 'Вернуться к началу процедуры',  pr_stage_core_project_path(@project), id: 'change_stage'
+                %br
+                =link_to 'Начать сбор недовольств',  next_stage_core_project_path(@project), id: 'change_stage'
 
 
 
