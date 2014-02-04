@@ -7,7 +7,7 @@
       %a(href="#")
         %span.text-success
         =link_to  '',{:controller => post.class.name.underscore.pluralize ,:action => :plus, :project => @project,:status=>0, :aspect=>0, :id => post.id}, :id => post.id,:remote => true, :method => :put do
-          %span.text-success="поддерживают #{post.users.count}"
+          %span.text-success="поддержать #{post.users.count}"
 
         %span.glyphicon.glyphicon-thumbs-up.text-success
       |

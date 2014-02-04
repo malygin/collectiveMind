@@ -25,14 +25,14 @@
     %li
         =link_to 'Обсуждаемые', '#discussed', :data => {:toggle=>"tab"}
 .tab-content
-    .tab-pane.active#best
+    .tab-pane.fade.in.active#best
         - unless @post_star.empty?
             -@post_star.each do |st|
                 .imperfection_journal
                     = trim_string(st.content,150)
                     = link_to 'Подробнее',  {:action => :show, :project => @project, :id => st.id}, class: "more"
                     %small 12.13.2014
-    .tab-pane#discussed
+    .tab-pane.fade#discussed
 
         -@post_dis.each do |st|
             .imperfection_journal

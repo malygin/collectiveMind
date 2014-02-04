@@ -1,6 +1,6 @@
 
-- if @project.status>2
-    %p.righttext=link_to 'Посмотреть эссе этапа', essay_posts_path(@project, 2), :id => 'essay_list'
+-#- if @project.status>2
+-#    %p.righttext=link_to 'Посмотреть эссе этапа', essay_posts_path(@project, 2), :id => 'essay_list'
 
 - if stage_vote?('life_tape')
     .success
@@ -15,7 +15,7 @@
     %li
         =link_to 'Новости', '#news', :data => {:toggle=>"tab"}
 .tab-content
-    .tab-pane.active#activity
+    .tab-pane.fade.in.active#activity
         -unless @journals.nil?
             - @journals.each do |journal|
                 .imperfection_journal
@@ -38,7 +38,7 @@
             добавил свое
             =link_to 'несовершенство', '#'
             %small 23.13.2014
-    .tab-pane#news
+    .tab-pane.fade#news
         - unless @news.nil?
             %p.righttext
                 = @news.anons

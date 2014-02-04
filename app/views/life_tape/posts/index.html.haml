@@ -1,8 +1,9 @@
 
 - if signed_in?
-	= link_to image_tag("add_record.png"), new_life_tape_post_path, id: "add_record"
+	= link_to image_tag("add_record.png"), "#", id: "add_record", onClick: 'get_life_tape_form(); return false;'
 	%br
 %br
+%textarea#new_life_tape
 = render :partial => 'shared/post', :collection => @posts
 = will_paginate @posts
 
