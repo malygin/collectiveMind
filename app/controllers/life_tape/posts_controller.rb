@@ -35,6 +35,7 @@ end
       @posts = current_model.where(:project_id => @project, :aspect_id => params[:aspect]).paginate(:page => params[:page])
 
     end
+    @post = current_model.new
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @posts }

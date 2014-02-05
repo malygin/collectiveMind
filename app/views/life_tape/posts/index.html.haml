@@ -1,9 +1,18 @@
 
 - if signed_in?
-	= link_to image_tag("add_record.png"), "#", id: "add_record", onClick: 'get_life_tape_form(); return false;'
-	%br
+    = link_to image_tag("add_record.png"), "#", id: "add_record", onClick: 'get_life_tape_form(); return false;'
+    %br
 %br
-%textarea#new_life_tape
+= form_for @post,:url => {:project => @project.id, :action => @post.persisted? ? 'update' : 'create'},  :html => { :class => 'lt_new' } do |f|
+    = f.text_area :content, class: 'post', id: 'new_life_tape'
+
+    .btn-group#Send
+
+
+        = f.submit "Сохранить",  class:"btn btn-default"
+
+        %button.btn.btn-danger(type="button" onclick="reset_life_tape_form(); return false;" ) Отменить
+
 = render :partial => 'shared/post', :collection => @posts
 = will_paginate @posts
 
