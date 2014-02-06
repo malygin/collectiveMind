@@ -5,9 +5,9 @@
     -post.discontent_aspects.each do |asp|
       %span.label.label-info=asp.content
     %br
-    = trim_string(raw(post.content))
-    \...
-    = link_to 'Подробнее',  {:controller => post.class.name.underscore.pluralize, :action => show_post, :project => @project, :id => post.id}
+    %p(style='text-align: justify;')
+      = trim_string(raw(post.content))
+      = link_to 'подробнее',  {:controller => post.class.name.underscore.pluralize, :action => show_post, :project => @project, :id => post.id}
 
     .row
       .col-md-10

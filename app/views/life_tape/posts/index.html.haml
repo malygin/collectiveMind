@@ -1,6 +1,6 @@
 
 - if signed_in?
-    = link_to image_tag("add_record.png"), "#", id: "add_record", onClick: 'get_life_tape_form(); return false;'
+    = link_to '+ Добавить запись', "#", id: "add_record", onClick: 'get_life_tape_form(); return false;', class: 'btn btn-success'
     %br
 %br
 = form_for @post,:url => {:project => @project.id, :action => @post.persisted? ? 'update' : 'create'},  :html => { :class => 'lt_new' } do |f|

@@ -88,7 +88,7 @@ scope '/project/:project' do
       member do
         put :add_comment
         put :censored_comment
-        put :plus
+        get :plus
         put :plus_comment
       end
     end

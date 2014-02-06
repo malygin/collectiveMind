@@ -4,12 +4,15 @@
       =post.number_views
       %span.glyphicon.glyphicon-eye-open
       |
-      %a(href="#")
-        %span.text-success
-        =link_to  '',{:controller => post.class.name.underscore.pluralize ,:action => :plus, :project => @project,:status=>0, :aspect=>0, :id => post.id}, :id => post.id,:remote => true, :method => :put do
-          %span.text-success="поддержать #{post.users.count}"
+      - if signed_in? and not post.users.include?(current_user)
+        =link_to({:controller => post.class.name.underscore.pluralize ,:action => :plus, :project => @project,:status=>0, :aspect=>0,  :id => post.id,:remote => true}, id: "post_#{post.id}", class:'disabled') do
+          %span.text-success поддержать
+          %span.text-success(id="counter_#{post.id}")=post.users.count
+          %span.glyphicon.glyphicon-thumbs-up.text-success
+      -else
+        %span.text-muted= "поддержать #{post.users.count}"
+        %span.glyphicon.glyphicon-thumbs-up.text-muted
 
-        %span.glyphicon.glyphicon-thumbs-up.text-success
       |
       %a(href="#")
         комментировать

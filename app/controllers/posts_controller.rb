@@ -217,7 +217,10 @@ def index
   def plus
     post = current_model.find(params[:id])
     post.post_votings.create(:user => current_user, :post => post)
-    render json:post.users.count 
+    @id= post.id
+    respond_to do |format|
+      format.js
+    end
   end
 
   def plus_comment
