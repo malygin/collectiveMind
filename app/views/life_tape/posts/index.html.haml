@@ -13,6 +13,11 @@
 
         %button.btn.btn-danger(type="button" onclick="reset_life_tape_form(); return false;" ) Отменить
 
+%br
+%br
+%small(style='width: 100%;')
+    Показаны посты, отсортированные по дате
+    %a(href="#")| сортировать по популярности
 = render :partial => 'shared/post', :collection => @posts
 = will_paginate @posts
 
