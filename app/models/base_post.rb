@@ -14,7 +14,7 @@ module BasePost  extend ActiveSupport::Concern
     scope :archive, lambda { where(:status => 3) }
 
     validates :content, :presence => true
-    default_scope  :order => 'created_at DESC'
+    #default_scope  :order => 'created_at DESC'
 
     def show_content
     	content

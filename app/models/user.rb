@@ -30,6 +30,9 @@ class User < ActiveRecord::Base
   has_many :life_tape_posts, :class_name => "LifeTape::Post"
   has_many :discontent_posts, :class_name => "Discontent::Post"
 
+  has_many :discontent_aspect_users, :class_name => 'Discontent::AspectUser'
+  has_many :discontent_aspects, :class_name => 'Discontent::Aspect', :through => :discontent_aspect_users
+
   has_many :essay_posts, :class_name => "Essay::Post"
 
 

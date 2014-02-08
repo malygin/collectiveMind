@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140129154340) do
+ActiveRecord::Schema.define(:version => 20140208104212) do
 
   create_table "answers", :force => true do |t|
     t.string   "text"
@@ -197,6 +197,15 @@ ActiveRecord::Schema.define(:version => 20140129154340) do
   end
 
   add_index "core_projects", ["status"], :name => "index_core_projects_on_status"
+
+  create_table "discontent_aspect_users", :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "aspect_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  add_index "discontent_aspect_users", ["user_id"], :name => "index_discontent_aspect_users_on_user_id"
 
   create_table "discontent_aspects", :force => true do |t|
     t.text     "content"
@@ -620,11 +629,35 @@ ActiveRecord::Schema.define(:version => 20140129154340) do
   add_index "frustrations", ["status"], :name => "index_frustrations_on_status"
   add_index "frustrations", ["user_id"], :name => "index_frustrations_on_user_id"
 
+  create_table "help_answers", :force => true do |t|
+    t.text     "content"
+    t.integer  "question_id"
+    t.integer  "order"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+  end
+
   create_table "help_posts", :force => true do |t|
     t.text     "content"
     t.integer  "stage"
     t.boolean  "mini"
     t.integer  "style"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "help_questions", :force => true do |t|
+    t.text     "content"
+    t.integer  "post_id"
+    t.integer  "order"
+    t.integer  "style"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "help_users_answers", :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "answer_id"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end

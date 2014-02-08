@@ -29,16 +29,23 @@ end
 
   def index
     if params[:aspect].nil?
-      @posts = current_model.where(:project_id => @project).paginate(:page => params[:page]).includes(:discontent_aspects)
-
+      #@posts = current_model.where(:project_id => @project).paginate(:page => params[:page]).includes(:discontent_aspects)
     else
-      @posts = current_model.where(:project_id => @project, :aspect_id => params[:aspect]).paginate(:page => params[:page])
-
+      #@posts = current_model.where(:project_id => @project, :aspect_id => params[:aspect]).paginate(:page => params[:page])
     end
+    @posts  = current_model.where(:project_id => @project).popular_posts.paginate(:page => params[:page])
     @post = current_model.new
+
+    unless params[:aspects_filter].nil?
+      current_user.discontent_aspect_users.destroy_all
+      params[:aspects_filter].each do |asp|
+        current_user.discontent_aspect_users.create(aspect_id: asp.to_i)
+      end
+    end
+
     respond_to do |format|
       format.html # index.html.erb
-      format.json { render json: @posts }
+      format.js
     end
   end
 

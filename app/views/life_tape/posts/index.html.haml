@@ -1,23 +1,19 @@
-
+%small
+    Показаны посты, отсортированные по дате
+    %a(href="#")| сортировать по популярности
+%br
+%br
 - if signed_in?
-    = link_to '+ Добавить запись', "#", id: "add_record", onClick: 'get_life_tape_form(); return false;', class: 'btn btn-success'
+    = link_to '+ Добавить запись', "#", id: "add_record", onClick: 'get_life_tape_form(); return false;', class: 'btn btn-sm btn-success'
     %br
 %br
 = form_for @post,:url => {:project => @project.id, :action => @post.persisted? ? 'update' : 'create'},  :html => { :class => 'lt_new' } do |f|
     = f.text_area :content, class: 'post', id: 'new_life_tape'
-
-    .btn-group#Send
-
-
+    .btn-group.inv_element#Send
         = f.submit "Сохранить",  class:"btn btn-default"
-
         %button.btn.btn-danger(type="button" onclick="reset_life_tape_form(); return false;" ) Отменить
 
-%br
-%br
-%small(style='width: 100%;')
-    Показаны посты, отсортированные по дате
-    %a(href="#")| сортировать по популярности
+
 = render :partial => 'shared/post', :collection => @posts
 = will_paginate @posts
 

@@ -1,23 +1,16 @@
 
 %br
-- if @project.id == 8
+- unless @aspects.empty?
+    .panel.panel-default
+        .panel-heading Темы процедуры
+        .panel-body
+            = form_tag({:controller => "life_tape/posts", :action=> "index"},{ method: :get, remote: true }) do
+                - @aspects.each do |asp|
+                    .checkbox
 
-    %h1 Что нужно сделать в первую очередь?
-    %p.righttext
-        1. Ознакомьтесь с
-        = link_to 'темой', expert_news_post_path(@project, @news)
-        нашей процедуры
-        %br
-        2. Прочитайте раздел
-        = link_to 'помощь', "/project/#{@project.id}/help"
-        (там вы узнаете больше о рациональных процедурах)
-        %br
-        3. Изучите
-        = link_to 'базу знаний', "/project/#{@project.id}/knowledge"
-        , в которой подробно рассказывается о том, как сейчас работает "ИРБИС" и идеи по работе заочки
-        %br
-        4. Примите участие в обсуждении (делитесь идеями, задавайте вопросы)
-
+                        =  check_box_tag 'aspects_filter[]', asp.id, current_user.discontent_aspects.include?(asp), onclick: "show_filter_aspects_button();"
+                        = "#{asp.content}"
+                %button.btn.btn-default.inv_element#filter-aspect(type="submit") Сохранить
 
 %ul.nav.nav-tabs
     %li.active
@@ -39,25 +32,8 @@
                 = trim_string(st.content, 150)
                 = link_to 'Подробнее',  {:action => :show, :project => @project, :id => st.id}, class: "more"
                 %small 12.13.2014
-
-
 %br
 
-
-
-
-
-- unless @aspects.empty?
-    .panel.panel-default
-        .panel-heading Темы процедуры
-        .panel-body
-            - @aspects.each do |asp|
-                %a{:href  => "/project/#{@project.id}/life_tape/aspect/#{asp.id}/posts/", :class => 'topic'}
-                    .topics
-                        %p.greentitle
-                            - if  asp.user_add
-                                (new)
-                            = "#{asp.content}"
 / = render :partial => 'discontent/aspects/aspect', :collection => @aspects
 -if boss?
     .panel.panel-default
