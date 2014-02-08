@@ -18,9 +18,9 @@
     opacity:1.000 }
 
 @reset_life_tape_form = ->
-  $("#Send").animate {
-    left:0
-    opacity:0.000 }
+  $("#Send").animate({left:0, opacity:0.000 }, 'normal', ->
+    $("#Send").css 'display', 'none')
+
   $("#new_life_tape").animate {
     height: 0
   }, "normal",  ->

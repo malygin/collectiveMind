@@ -83,7 +83,6 @@ class User < ActiveRecord::Base
     begin
       super(password)
     rescue BCrypt::Errors::InvalidHash
-
       return false unless password == encrypted_password
       logger.info "User #{email} is using the old password hashing method, updating attribute."
       self.password = password
@@ -146,6 +145,13 @@ class User < ActiveRecord::Base
     !self.essay_posts.where(:project_id => project, :stage => stage).empty?
   end
 
+  def aspects(id)
+    if self.discontent_aspects.empty?
+      Discontent::Aspect.where(project_id: id)
+    else
+      self.discontent_aspects
+    end
+  end
 
 
 

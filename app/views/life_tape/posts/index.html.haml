@@ -1,6 +1,6 @@
 %small
     Показаны посты, отсортированные по дате
-    %a(href="#")| сортировать по популярности
+    %a(href="?order=popular")| сортировать по популярности
 %br
 %br
 - if signed_in?
@@ -13,7 +13,7 @@
         = f.submit "Сохранить",  class:"btn btn-default"
         %button.btn.btn-danger(type="button" onclick="reset_life_tape_form(); return false;" ) Отменить
 
-
-= render :partial => 'shared/post', :collection => @posts
-= will_paginate @posts
+#posts
+    = render :partial => 'shared/post', :collection => @posts
+    = will_paginate @posts
 

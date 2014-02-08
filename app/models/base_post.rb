@@ -14,12 +14,21 @@ module BasePost  extend ActiveSupport::Concern
     scope :archive, lambda { where(:status => 3) }
 
     validates :content, :presence => true
-    #default_scope  :order => 'created_at DESC'
+    scope :created_order,order("#{table_name}.created_at DESC")
+    scope :popular_posts, order('number_views DESC')
 
     def show_content
     	content
-  	end
+    end
 
+     def self.order_by_param(order)
+       if order =='popular'
+         popular_posts
+       else
+         created_order
+       end
+
+     end
  
 
   end

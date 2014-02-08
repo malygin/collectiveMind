@@ -28,20 +28,23 @@ def prepare_data
 end
 
   def index
-    if params[:aspect].nil?
-      #@posts = current_model.where(:project_id => @project).paginate(:page => params[:page]).includes(:discontent_aspects)
-    else
-      #@posts = current_model.where(:project_id => @project, :aspect_id => params[:aspect]).paginate(:page => params[:page])
-    end
-    @posts  = current_model.where(:project_id => @project).popular_posts.paginate(:page => params[:page])
+
+
     @post = current_model.new
 
-    unless params[:aspects_filter].nil?
+    if request.xhr?
       current_user.discontent_aspect_users.destroy_all
-      params[:aspects_filter].each do |asp|
-        current_user.discontent_aspect_users.create(aspect_id: asp.to_i)
+      unless params[:aspects_filter].nil?
+        params[:aspects_filter].each do |asp|
+          current_user.discontent_aspect_users.create(aspect_id: asp.to_i)
+        end
       end
     end
+    @posts  = current_model.where(:project_id => @project)
+      .eager_load(:discontent_aspects).where("discontent_aspects.id  IN (?) " , current_user.aspects(@project.id).collect(&:id))
+      .order_by_param(params[:order])
+      .paginate(:page => params[:page])
+
 
     respond_to do |format|
       format.html # index.html.erb
