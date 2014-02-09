@@ -14,7 +14,7 @@
   $("#add_record").fadeOut("slow").hide()
   $("#new_life_tape").animate {height: 100}, "normal"
   $("#Send").stop().show().animate {
-    left:$('#new_life_tape').width() - 200
+    left:$('#new_life_tape').width() - 160
     opacity:1.000 }
 
 @reset_life_tape_form = ->
@@ -32,4 +32,8 @@
   $('#filter-aspect').stop().show().animate {
     left: 15
     opacity: 1}
+
+@reset_filter_aspects = ->
+  $('input[type=checkbox]').prop('checked','')
+  show_filter_aspects_button()
 

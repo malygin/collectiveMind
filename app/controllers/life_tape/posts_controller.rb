@@ -29,21 +29,22 @@ end
 
   def index
 
-
     @post = current_model.new
-
-    if request.xhr?
+    @order = params[:order]
+    @page = params[:page]
+    if request.xhr? and @order.nil? and @page.nil?
       current_user.discontent_aspect_users.destroy_all
       unless params[:aspects_filter].nil?
         params[:aspects_filter].each do |asp|
           current_user.discontent_aspect_users.create(aspect_id: asp.to_i)
         end
       end
+
     end
     @posts  = current_model.where(:project_id => @project)
       .eager_load(:discontent_aspects).where("discontent_aspects.id  IN (?) " , current_user.aspects(@project.id).collect(&:id))
-      .order_by_param(params[:order])
-      .paginate(:page => params[:page])
+      .order_by_param(@order)
+      .paginate(:page => params[:page], :per_page => 5)
 
 
     respond_to do |format|

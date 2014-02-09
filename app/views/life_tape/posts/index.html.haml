@@ -1,6 +1,5 @@
-%small
-    Показаны посты, отсортированные по дате
-    %a(href="?order=popular")| сортировать по популярности
+%small#filter_posts
+    = render 'shared/filter_posts'
 %br
 %br
 - if signed_in?
@@ -10,10 +9,11 @@
 = form_for @post,:url => {:project => @project.id, :action => @post.persisted? ? 'update' : 'create'},  :html => { :class => 'lt_new' } do |f|
     = f.text_area :content, class: 'post', id: 'new_life_tape'
     .btn-group.inv_element#Send
-        = f.submit "Сохранить",  class:"btn btn-default"
-        %button.btn.btn-danger(type="button" onclick="reset_life_tape_form(); return false;" ) Отменить
+        = f.submit "Сохранить",  class:"btn btn-default btn-sm"
+        %button.btn.btn-danger.btn-sm(type="button" onclick="reset_life_tape_form(); return false;" ) Отменить
 
 #posts
     = render :partial => 'shared/post', :collection => @posts
-    = will_paginate @posts
+#pagination
+    = render 'shared/pagination'
 
