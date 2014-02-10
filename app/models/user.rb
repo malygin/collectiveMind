@@ -8,10 +8,11 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
   # Setup accessible (or protected) attributes for your model
-  attr_accessible  :remember_me
+  attr_accessible  :remember_me, :password, :password_confirmation
 
-  attr_accessor :password, :secret, :secret2, :secret3
-  attr_accessible :login, :nickname, :anonym, :password, :password_confirmation, :encrypted_password, :secret,
+  attr_accessor  :secret, :secret2, :secret3
+
+  attr_accessible :login, :nickname, :anonym,  :secret,
    :dateActivation, :dateLastEnter, :dateRegistration, :email, :faculty, :group,
     :name, :string, :string, :surname, :validate, :vkid,
     :score,  :score_a, :score_g, :score_o,
@@ -65,12 +66,6 @@ class User < ActiveRecord::Base
   validates :email, presence: true, format: { with: VALID_EMAIL_REGEX },
                     uniqueness: { case_sensitive: false }
 
-  validates :password, :presence => true,
-  						:confirmation => true,
-  						:length => { :within => 6..40 },
-              :on => :create
-  validates :password_confirmation, presence: true,
-   :length => { :within => 6..40 }, :on => :create
   #before_save :encrypt_password
   attr_accessible :avatar
 
@@ -95,26 +90,7 @@ class User < ActiveRecord::Base
     self.update_column(type.to_sym, self.attributes[type.to_s] + score)
   end
 
-  def has_password?(submitted_password)
-    # encrypted_password == encrypt(submitted_password)
-  	encrypted_password == submitted_password
-  end
 
-  def self.authenticate(email, submitted_password)
-  	user = find_by_email(email)
-    
-    #puts user.has_password?(submitted_password)
-    if user.nil?
-       user = find_by_login(email)
-    end
-  	return  nil if user.nil?
-  	return user if user.has_password?(submitted_password)
-  end
-
-  def self.authenticate_with_salt(id, cookie_salt)
-  	user = find_by_id(id)
-  	(user && user.salt == cookie_salt)? user : nil
-  end
 
   def name_title
     if self.anonym
@@ -157,24 +133,24 @@ class User < ActiveRecord::Base
 
   private 
 
-  	def encrypt_password
-  		self.salt = make_salt if new_record?
-  		#self.encrypted_password = encrypt (password)
-
-      self.encrypted_password = password unless password.blank?
-  	end
-
-  	# def encrypt(string)
-  	# 	secure_hash("#{salt}--#{string}")
-  	# end
-
-  	def make_salt
-  		secure_hash("#{Time.now.utc}--#{password}")
-  	end
-
-  	def secure_hash(string)
-  		Digest::SHA2.hexdigest(string)
-  	end
+  	#def encrypt_password
+  	#	self.salt = make_salt if new_record?
+  	#	#self.encrypted_password = encrypt (password)
+    #
+     # self.encrypted_password = password unless password.blank?
+  	#end
+    #
+  	## def encrypt(string)
+  	## 	secure_hash("#{salt}--#{string}")
+  	## end
+    #
+  	#def make_salt
+  	#	secure_hash("#{Time.now.utc}--#{password}")
+  	#end
+    #
+  	#def secure_hash(string)
+  	#	Digest::SHA2.hexdigest(string)
+  	#end
 
 
 
