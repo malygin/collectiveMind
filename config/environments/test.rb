@@ -6,7 +6,7 @@ CollectiveMind::Application.configure do
   # your test database is "scratch space" for the test suite and is wiped
   # and recreated between test runs. Don't rely on the data there!
   config.cache_classes = true
-
+  config.assets.debug = true
   # Configure static asset server for tests with Cache-Control for performance
   config.serve_static_assets = true
   config.static_cache_control = "public, max-age=3600"
@@ -19,7 +19,7 @@ CollectiveMind::Application.configure do
   config.action_controller.perform_caching = false
 
   # Raise exceptions instead of rendering exception templates
-  config.action_dispatch.show_exceptions = false
+  config.action_dispatch.show_exceptions = true
 
   # Disable request forgery protection in test environment
   config.action_controller.allow_forgery_protection    = false
@@ -31,7 +31,6 @@ CollectiveMind::Application.configure do
 
   # Raise exception on mass assignment protection for Active Record models
   config.active_record.mass_assignment_sanitizer = :strict
-
   # Print deprecation notices to the stderr
   config.active_support.deprecation = :stderr
 end

@@ -7,7 +7,7 @@
             .pull-right
                 %button.btn.btn-default.btn-sm(onclick="reset_filter_aspects();" ) Сбросить
 
-            = form_tag({:controller => "life_tape/posts", :action=> "index"},{ method: :get, remote: true }) do
+            = form_tag({:controller => "life_tape/posts", :action=> "index"},{ method: :get, remote: true, id: 'aspects_list' }) do
                 - @aspects.each do |asp|
                     .checkbox
 

@@ -44,7 +44,7 @@ end
     @posts  = current_model.where(:project_id => @project)
       .eager_load(:discontent_aspects).where("discontent_aspects.id  IN (?) " , current_user.aspects(@project.id).collect(&:id))
       .order_by_param(@order)
-      .paginate(:page => params[:page], :per_page => 5)
+      .paginate(:page => params[:page], :per_page => 20)
 
 
     respond_to do |format|
