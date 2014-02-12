@@ -11,7 +11,7 @@
                 - @aspects.each do |asp|
                     .checkbox
 
-                        =  check_box_tag 'aspects_filter[]', asp.id, current_user.discontent_aspects.include?(asp), onclick: "show_filter_aspects_button();"
+                        =  check_box_tag 'aspects_filter[]', asp.id, current_user.discontent_aspects.include?(asp), onclick: "show_filter_aspects_button();", id: "aspect_#{asp.id}"
                         = "#{asp.content}"
                 %button.btn.btn-default.inv_element#filter-aspect(type="submit") Сохранить
 

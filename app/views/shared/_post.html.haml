@@ -1,5 +1,5 @@
 - show_post||=:show
-.media
+.media{id: "post_#{post.id}"}
   = render 'users/user_post', :user => post.user
   .media-body
     -post.discontent_aspects.each do |asp|
