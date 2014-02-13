@@ -3,13 +3,14 @@
 %br
 %br
 - if signed_in?
-    = link_to '+ Добавить запись', "#", id: "add_record", onClick: 'get_life_tape_form(); return false;', class: 'btn btn-sm btn-success'
+    = link_to '+ Добавить запись', '#', id: 'add_record', onClick: 'get_life_tape_form(); return false;', class: 'btn btn-sm btn-success'
     %br
 %br
-= form_for @post,:url => {:project => @project.id, :action => @post.persisted? ? 'update' : 'create'},  :html => { :class => 'lt_new' } do |f|
+= form_for @post,:url => {:project => @project.id, :action => @post.persisted? ? 'update' : 'create'},:remote => true,  :html => { :class => 'lt_new' } do |f|
     = f.text_area :content, class: 'post', id: 'new_life_tape'
-    .btn-group.inv_element#Send
-        = f.submit "Сохранить",  class:"btn btn-default btn-sm"
+    .input-group.inv_element#Send
+        =select_tag 'aspect_id', options_from_collection_for_select(@aspects, 'id', 'content'), promt: 'Выберите тему записи', class: 'form-control', style: 'width: 200px;'
+        = f.submit 'Сохранить',  class:'btn btn-success btn-sm'
         %button.btn.btn-danger.btn-sm(type="button" onclick="reset_life_tape_form(); return false;" ) Отменить
 
 #posts

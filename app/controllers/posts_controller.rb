@@ -124,7 +124,7 @@ def index
         @post.stage = params[:stage]
       end     
       unless params[:aspect_id].nil?
-        @post.aspect_id = params[:aspect_id]
+        @post.discontent_aspects  << Discontent::Aspect.find(params[:aspect_id])
       end
       unless params[:style].nil?
         @post.style = params[:style]
@@ -136,6 +136,7 @@ def index
       end
       respond_to do |format|
         if @post.save
+          format.js
           format.html {
             unless params[:replace].nil?
               params[:replace].each do |k,v|
@@ -143,13 +144,14 @@ def index
               end
             end
             flash[:succes] = 'Успешно добавлено!'
-            current_user.journals.build(:type_event=>name_of_model_for_param+"_save", :project => @project, :body=>@post.id).save!
+            #current_user.journals.build(:type_event=>name_of_model_for_param+"_save", :project => @project, :body=>@post.id).save!
 
             redirect_to  :action=>'show', :id => @post.id, :project => @project  }
           format.json { render json: @post, status: :created, location: @post }
         else
           format.html { render action: "new" }
           format.json { render json: @post.errors, status: :unprocessable_entity }
+          format.js
         end
       end
     
