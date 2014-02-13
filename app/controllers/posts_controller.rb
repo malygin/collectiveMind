@@ -71,6 +71,8 @@ def index
   # GET /discontent/posts/1.json
   def show
     @post = current_model.where(:id => params[:id], :project_id => params[:project]).first
+    add_breadcrumb "просмотр записи ", polymorphic_path(@post, :project => @project.id)
+
     @comments = @post.comments.paginate(:page => params[:page], :per_page => 30)
     #puts "___________"
     #puts @post
