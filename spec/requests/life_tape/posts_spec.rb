@@ -36,6 +36,7 @@ describe 'Life Tape Posts' do
       it {should have_content('life tape post for project')}
       it {should have_selector("form#aspects_list input[type='checkbox']", count: 2)}
       it {should have_selector('div#posts div.media', count: 20)}
+      it {should have_selector("ol.breadcrumb li", text:I18n.t('stages.info'))}
 
 
       it 'click like on post', js: true do

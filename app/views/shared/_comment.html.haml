@@ -1,27 +1,13 @@
-.comments
+%li.media{id: "comment_#{comment.id}"}
   = render 'users/user_post', :user => comment.user
-  .posts
-    %a(name="comment_#{comment.id}")
-    %span.namedate
-      = comment.user.name_title
-      ,
-      = Russian::strftime(comment.created_at,"%d %B %k:%M:%S ")
-    %br
-    - if comment.censored?
-      %br
-        .error Комментарий удален модератором
-    - else
-      %p.comments=simple_format(comment.content)
-    - if comment.users.include?(comment.post.user) and comment.user!= comment.post.user
-      %b полезный комментарий
-    - if boss?
-      =link_to "Цензурировать",   {:action => :censored_comment, :id => comment.id}, :id => comment.id,:remote => true, :method => :put
-
-    -if signed_in? and not comment.users.include?(current_user)
-      .social
-        =link_to "#{comment.users.count}",   {:action => :plus_comment, :id => comment.id}, :id => comment.id,:remote => true, :method => :put, class: "counter"
-        =image_tag "like.png"
+  .media-body
+    =simple_format(comment.content)
+    - if signed_in? and not comment.users.include?(current_user)
+      =link_to({:action => :plus_comment, :id => comment.id}, :id => comment.id,:remote => true, :method => :put,  id: "comment_#{comment.id}", class:'pull-right') do
+        %span.text-success поддержать
+        %span.text-success(id="counter_#{comment.id}")=comment.users.count
+        %span.glyphicon.glyphicon-thumbs-up.text-success
     -else
-      .social
-        = comment.users.count
-        = image_tag "like.png"
+      %span.text-muted= "поддержать #{comment.users.count}"
+      %span.glyphicon.glyphicon-thumbs-up.text-muted
+

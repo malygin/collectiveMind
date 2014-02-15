@@ -9,10 +9,10 @@ class LifeTape::PostsController < PostsController
   
 def prepare_data
 
-  @project = Core::Project.find(params[:project])
-  add_breadcrumb "Сбор информации", life_tape_posts_path(@project)
+    @project = Core::Project.find(params[:project])
+    add_breadcrumb "Сбор информации", life_tape_posts_path(@project)
 
-  @aspects = Discontent::Aspect.unscoped.order("position").where(:project_id => @project)
+    @aspects = Discontent::Aspect.unscoped.order("position").where(:project_id => @project)
     @journals = Journal.events_for_user_feed @project.id
     @news = ExpertNews::Post.where(:project_id => @project).first
     @post_star = LifeTape::Post.where(:project_id => @project, :important => 't' ).limit(3)
@@ -25,32 +25,23 @@ def prepare_data
         #reorder('').
         reorder('count_comment DESC').
         limit(3)
-
     
 end
 
   def index
-
     @post = current_model.new
     @order = params[:order]
     @page = params[:page]
-    if request.xhr? and @order.nil? and @page.nil?
-      current_user.discontent_aspect_users.destroy_all
-      unless params[:aspects_filter].nil?
-        params[:aspects_filter].each do |asp|
-          current_user.discontent_aspect_users.create(aspect_id: asp.to_i)
-        end
-      end
+    load_filter_for_aspects   if (request.xhr? and @order.nil? and @page.nil?)
 
-    end
+
     @posts  = current_model.where(:project_id => @project)
       .eager_load(:discontent_aspects).where("discontent_aspects.id  IN (?) " , current_user.aspects(@project.id).collect(&:id))
       .order_by_param(@order)
       .paginate(:page => params[:page], :per_page => 20)
 
-
     respond_to do |format|
-      format.html # index.html.erb
+      format.html
       format.js
     end
   end
@@ -68,6 +59,17 @@ end
       @voted_people = ActiveRecord::Base.connection.execute("select count(*) as r from (select distinct v.user_id from life_tape_voitings v  left join   discontent_aspects asp on (v.discontent_aspect_id = asp.id) where asp.project_id = #{@project.id}) as dm").first["r"]
       @votes = ActiveRecord::Base.connection.execute("select count(*) as r from (select  v.user_id from life_tape_voitings v  left join   discontent_aspects asp on (v.discontent_aspect_id = asp.id) where asp.project_id = #{@project.id}) as dm").first["r"].to_i
     end
+  end
+
+  private
+
+  def load_filter_for_aspects
+      current_user.discontent_aspect_users.destroy_all
+      unless params[:aspects_filter].nil?
+        params[:aspects_filter].each do |asp|
+          current_user.discontent_aspect_users.create(aspect_id: asp.to_i)
+        end
+      end
   end
 
 end

@@ -50,13 +50,16 @@ def add_comment
     @project = Core::Project.find(params[:project]) 
     post = current_model.find(params[:id])
     unless  params[name_of_comment_for_param][:content]==''
-      comment = post.comments.create(:content => params[name_of_comment_for_param][:content], :user =>current_user)
-      current_user.journals.build(:type_event=>name_of_comment_for_param+'_save', :project => @project, :body=>"#{comment.content[0..12]}:#{post.id}#comment_#{comment.id}").save!
+      @comment = post.comments.create(:content => params[name_of_comment_for_param][:content], :user =>current_user)
+      current_user.journals.build(:type_event=>name_of_comment_for_param+'_save', :project => @project, :body=>"#{@comment.content[0..12]}:#{post.id}#comment_#{@comment.id}").save!
       flash[:success] = 'Комментарий добавлен'
     else
       flash[:success] = 'Введите текст комментария'
     end
-    redirect_to polymorphic_path(post, :project => @project.id)
+    respond_to do |format|
+       format.js
+    end
+    #redirect_to polymorphic_path(post, :project => @project.id)
  end 
 
 def index
@@ -71,7 +74,7 @@ def index
   # GET /discontent/posts/1.json
   def show
     @post = current_model.where(:id => params[:id], :project_id => params[:project]).first
-    add_breadcrumb "просмотр записи ", polymorphic_path(@post, :project => @project.id)
+    add_breadcrumb 'Просмотр записи', polymorphic_path(@post, :project => @project.id)
 
     @comments = @post.comments.paginate(:page => params[:page], :per_page => 30)
     #puts "___________"

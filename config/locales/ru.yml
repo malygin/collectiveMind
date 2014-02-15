@@ -7,7 +7,8 @@ ru:
     search: "Поиск"
     switch_procedure: "Перейти"
     sign_in: "Войти"
-
+  stages:
+    info: 'Сбор информации'
   activerecord:
     errors:
       models:

@@ -37,3 +37,9 @@
   $('input[type=checkbox]').prop('checked','')
   show_filter_aspects_button()
 
+@activate_button = (el)->
+  if el.value? and el.value!=''
+    $('#Send').removeClass('disabled')
+  else
+    $('#Send').addClass('disabled')
+

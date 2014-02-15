@@ -1,8 +1,13 @@
 .comments
-	= form_for comment, :html => {:class => 'new_or_edit'}, :url => url_link, :method => :put do |f|
-		= render 'shared/error_messages', :object =>f.object
-		%label Ваш комментарий
-		.field
-			=f.text_area :content, :class => 'comment'
-		.action
-			=f.submit '', :id  => "Send"
+    .row
+        .col-md-2(style= 'width: 60px;')
+            = image_tag current_user.avatar.url(:thumb),  class: "media-object"
+
+        .col-md-10
+            = form_for comment, :html => {:class => 'new_or_edit'},  remote: true, :url => url_link, :method => :put do |f|
+                = render 'shared/error_messages', :object =>f.object
+                =f.text_area :content, :class => 'form-control', style: 'height: 70px;', placeholder: 'Ваш комментарий', id:'comment_text_area', onkeyup: "activate_button(this);"
+                .pull-right
+                    =f.submit 'Отправить', :id  => "Send", class: 'btn btn-sm btn-success disabled'
+            .text-success#comment_success(style='display:none;')
+                Комментарий успешно добавлен
