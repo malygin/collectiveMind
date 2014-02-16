@@ -12,23 +12,23 @@
                     .checkbox
 
                         =  check_box_tag 'aspects_filter[]', asp.id, current_user.discontent_aspects.include?(asp), onclick: "show_filter_aspects_button();", id: "aspect_#{asp.id}"
-                        = "#{asp.content}"
+                        = "#{asp.content} (#{asp.life_tape_posts.count})"
                 %button.btn.btn-default.inv_element#filter-aspect(type="submit") Сохранить
 
 %ul.nav.nav-tabs
-    %li.active
-        =link_to 'Избранные',  '#best', :data => {:toggle=>"tab"}
     %li
+        =link_to 'Избранные',  '#best', :data => {:toggle=>"tab"}
+    %li.active
         =link_to 'Обсуждаемые', '#discussed', :data => {:toggle=>"tab"}
 .tab-content
-    .tab-pane.fade.in.active#best
+    .tab-pane.fade#best
         - unless @post_star.empty?
             -@post_star.each do |st|
                 .imperfection_journal
                     = trim_string(st.content,150)
                     = link_to 'Подробнее',  {:action => :show, :project => @project, :id => st.id}, class: "more"
                     %small 12.13.2014
-    .tab-pane.fade#discussed
+    .tab-pane.fade.in.active#discussed
 
         -@post_dis.each do |st|
             .imperfection_journal

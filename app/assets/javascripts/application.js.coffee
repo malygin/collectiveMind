@@ -7,7 +7,7 @@
 #= require selectize
 #= require twitter/bootstrap
 
-
+$('#modal1').modal('toggle')
 
 @get_life_tape_form = ->
   $('#new_life_tape').css 'display','block'

@@ -12,7 +12,7 @@ def prepare_data
     @project = Core::Project.find(params[:project])
     add_breadcrumb "Сбор информации", life_tape_posts_path(@project)
 
-    @aspects = Discontent::Aspect.unscoped.order("position").where(:project_id => @project)
+    @aspects = Discontent::Aspect.where(:project_id => @project)
     @journals = Journal.events_for_user_feed @project.id
     @news = ExpertNews::Post.where(:project_id => @project).first
     @post_star = LifeTape::Post.where(:project_id => @project, :important => 't' ).limit(3)
