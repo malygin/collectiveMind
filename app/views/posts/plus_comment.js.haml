@@ -1,0 +1,6 @@
+$("#counter_comment_#{@id}").html(parseInt($("#counter_comment_#{@id}").html())+1)
+$("#plus_comment_#{@id}").effect("highlight", {color: '#f5cecd'}, 1000);
+
+$("#plus_comment_#{@id}").find('span').toggleClass('text-success', 'text-muted')
+$("#plus_comment_#{@id}").click(function(e) { return false; });
+

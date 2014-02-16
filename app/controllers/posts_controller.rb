@@ -231,7 +231,8 @@ def index
   end
 
   def plus_comment
-    comment = comment_model.find(params[:id])
+    @id = params[:id]
+    comment = comment_model.find(@id)
     comment.comment_votings.create(:user => current_user, :comment => comment)
     if  (self.current_model  == Discontent::Post) or (self.current_model  == Concept::Post)
       if comment.comment_votings.count == 3 or current_user.boss?
@@ -240,7 +241,10 @@ def index
         comment.user.journals.build(:type_event=>'add_score_anal_'+name_of_model_for_param, :project => @project, :body=>"#{comment.post.id}#comment_#{comment.id}").save!
       end
     end
-    render json:comment.users.count
+
+    respond_to do |format|
+      format.js
+    end
   end
   
 ### function for voiting

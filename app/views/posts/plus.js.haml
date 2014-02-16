@@ -1,6 +1,6 @@
 $("#counter_#{@id}").html(parseInt($("#counter_#{@id}").html())+1)
-$("#post_#{@id}").effect("highlight", {color: '#f5cecd'}, 1000);
+$("#plus_post_#{@id}").effect("highlight", {color: '#f5cecd'}, 1000);
 
-$("#post_#{@id}").find('span').toggleClass('text-success', 'text-muted')
-$("#post_#{@id}").click(function(e) { return false; });
+$("#plus_post_#{@id}").find('span').toggleClass('text-success', 'text-muted')
+$("#plus_post_#{@id}").click(function(e) { return false; });
 

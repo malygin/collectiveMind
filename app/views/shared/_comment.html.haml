@@ -2,12 +2,13 @@
   = render 'users/user_post', :user => comment.user
   .media-body
     =simple_format(comment.content)
-    - if signed_in? and not comment.users.include?(current_user)
-      =link_to({:action => :plus_comment, :id => comment.id}, :id => comment.id,:remote => true, :method => :put,  id: "comment_#{comment.id}", class:'pull-right') do
-        %span.text-success поддержать
-        %span.text-success(id="counter_#{comment.id}")=comment.users.count
-        %span.glyphicon.glyphicon-thumbs-up.text-success
-    -else
-      %span.text-muted= "поддержать #{comment.users.count}"
-      %span.glyphicon.glyphicon-thumbs-up.text-muted
+    .pull-right
+      - if signed_in? and not comment.users.include?(current_user)
+        =link_to({:action => :plus_comment, :id => comment.id}, :id => comment.id,:remote => true, :method => :put,  id: "plus_comment_#{comment.id}", class:'disabled') do
+          %span.text-success поддержать
+          %span.text-success(id="counter_comment_#{comment.id}")=comment.users.count
+          %span.glyphicon.glyphicon-thumbs-up.text-success
+      -else
+        %span.text-muted= "поддержать #{comment.users.count}"
+        %span.glyphicon.glyphicon-thumbs-up.text-muted
 
