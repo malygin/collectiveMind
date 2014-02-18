@@ -7,7 +7,11 @@
 #= require selectize
 #= require twitter/bootstrap
 
-$('#modal1').modal('toggle')
+$('#modal_help').modal
+  keyboard: false
+  backdrop: 'static'
+$('#modal_help').on 'hidden.bs.modal', ->
+  $('#help_question').submit()
 
 @get_life_tape_form = ->
   $('#new_life_tape').css 'display','block'
@@ -27,7 +31,6 @@ $('#modal1').modal('toggle')
     $('#new_life_tape').css('display','none')
   $("#add_record").fadeIn('slow')
 
-
 @show_filter_aspects_button = ->
   $('#filter-aspect').stop().show().animate {
     left: 15
@@ -39,7 +42,10 @@ $('#modal1').modal('toggle')
 
 @activate_button = (el)->
   if el.value? and el.value!=''
-    $('#Send').removeClass('disabled')
+    $('#send_post').removeClass('disabled')
   else
-    $('#Send').addClass('disabled')
+    $('#send_post').addClass('disabled')
 
+@activate_modal_send = (el)->
+  if $( ".radio input:checked" ).length == 1
+    $('#send').removeClass('disabled')

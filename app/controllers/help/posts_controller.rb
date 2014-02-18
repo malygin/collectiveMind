@@ -20,5 +20,12 @@ class Help::PostsController < ApplicationController
         |f| @posts[f.style] = f }
   end
 
+  def save_help_answer
+    params['question'].each do |q, k|
+      current_user.help_users_answerses.build(answer_id: k.keys[0].to_i)
+    end
+    current_user.save
+    render :nothing => true
+  end
 
 end

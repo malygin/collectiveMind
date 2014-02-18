@@ -1,13 +1,23 @@
-#modal1.modal.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"}
+#modal_help.modal.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"}
   .modal-dialog
     .modal-content
       .modal-header
-        %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} &times;
-        %h4#myModalLabel.modal-title Добро пожаловать!
+        -#%button.close{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} &times;
+        %h4#myModalLabel.modal-title=small_help.title
       .modal-body
-        Вам предстоит долгая и интересная работа!
+        =small_help.content
         %br
-        Новизна MASSDECISION – в совмещении рациональности и массовости процедуры выработки решения. Первая обеспечивает высокое качество решения; вторая – его поддержку массой участвовавших в процедуре лиц, что особенно важно, если они затем участвуют и в реализации решения.
-        Применять MASSDECISION можно в компаниях, организациях, сообществах, общественных ассоциациях, политических партиях и движениях, а также при проведении общенациональных рациональных выборов и референдумов, предложенных в работах Савельзона.
+        %br
+        = form_tag(help_save_help_answer_path(@project),{ method: :post, remote: true, id: 'help_question' }) do
+          -small_help.help_questions.each do |hq|
+            %b=hq.content
+            -hq.help_answers.each do |ha|
+              .radio
+                %label
+                  =radio_button "question[#{hq.id}]", ha.id, true, onchange: "activate_modal_send(this);"
+                  -#%input(type="radio" value="" onchange="activate_modal_send(this);" )
+                  =ha.content
+
+
       .modal-footer
-        %button.btn.btn-primary(type = "button" data-dismiss="modal") Я все понял и готов!
+        %button.btn.btn-primary.disabled#send(type = "button" data-dismiss="modal") Ответить и приступить к работе!

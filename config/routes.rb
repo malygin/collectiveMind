@@ -47,7 +47,10 @@ scope '/project/:project' do
   match '/help_s4_1', :to => 'core/projects#help_s4_1'
 
   namespace :help do
-    resources :posts
+    post :save_help_answer, :to => 'posts#save_help_answer'
+    resources :posts do
+
+    end
   end
 
   resources :users do

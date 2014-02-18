@@ -16,7 +16,7 @@ def prepare_data
     @journals = Journal.events_for_user_feed @project.id
     @news = ExpertNews::Post.where(:project_id => @project).first
     @post_star = LifeTape::Post.where(:project_id => @project, :important => 't' ).limit(3)
-
+    @mini_help = Help::Post.where(stage:1, mini: true).first
     @post_dis = LifeTape::Post.joins(:comments).
         where(:project_id => @project).
         #reorder('count DESC').

@@ -18,9 +18,13 @@ class User < ActiveRecord::Base
     :score,  :score_a, :score_g, :score_o,
     :admin, :expert
 
-  has_many :question, :dependent => :destroy
-  has_many :answer, :dependent => :destroy
-  has_many :test_attempts
+  #has_many :help_questions, :class_name => 'Help::Question'
+  #has_many :help_answers, :class_name => 'Help::Answer'
+  has_many :help_users_answerses, :class_name => 'Help::UsersAnswers'
+  has_many :help_answers, :class_name => 'Help::Answer', :through => :help_users_answerses
+  has_many :help_questions, :class_name => 'Help::Question', :through => :help_answers
+  has_many :help_posts, :class_name => 'Help::Post', :through => :help_questions, :source => :post
+
   has_many :journals
   
   has_and_belongs_to_many :questions
@@ -90,6 +94,10 @@ class User < ActiveRecord::Base
     self.update_column(type.to_sym, self.attributes[type.to_s] + score)
   end
 
+  def answered_for_help_stage?(stage)
+    self.help_posts.pluck(:stage).include? stage
+
+  end
 
 
   def name_title

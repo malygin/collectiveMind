@@ -1,8 +1,9 @@
-=render 'shared/small_help'
+- unless current_user.answered_for_help_stage?(1)
+    =render partial: 'shared/small_help', object: @mini_help
+
 %small#filter_posts
     = render 'shared/filter_posts'
-%br
-%br
+
 - if signed_in?
     = link_to '+ Добавить запись', '#', id: 'add_record', onClick: 'get_life_tape_form(); return false;', class: 'btn btn-sm btn-success'
     %br
@@ -11,7 +12,7 @@
     = f.text_area :content, class: 'post', id: 'new_life_tape', onkeyup: "activate_button(this);"
     .input-group.inv_element#button_block
         =select_tag 'aspect_id', options_from_collection_for_select(@aspects, 'id', 'content'), promt: 'Выберите тему записи', class: 'form-control', style: 'width: 200px;'
-        = f.submit 'Сохранить',  class:'btn btn-success disabled btn-sm', id:'Send'
+        = f.submit 'Сохранить',  class:'btn btn-success disabled btn-sm', id:'send_post'
         %button.btn.btn-danger.btn-sm(type="button" onclick="reset_life_tape_form(); return false;" ) Отменить
 
 #posts

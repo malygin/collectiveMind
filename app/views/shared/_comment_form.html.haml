@@ -8,6 +8,6 @@
                 = render 'shared/error_messages', :object =>f.object
                 =f.text_area :content, :class => 'form-control', style: 'height: 70px;', placeholder: 'Ваш комментарий', id:'comment_text_area', onkeyup: "activate_button(this);"
                 .pull-right
-                    =f.submit 'Отправить', :id  => "Send", class: 'btn btn-sm btn-success disabled'
+                    =f.submit 'Отправить', :id  => "send", class: 'btn btn-sm btn-success disabled'
             .text-success#comment_success(style='display:none;')
                 Комментарий успешно добавлен
