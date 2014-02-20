@@ -7,6 +7,15 @@ describe 'Life Tape Posts' do
     @project = FactoryGirl.create :core_project
     @aspect1 = FactoryGirl.create :aspect, project: @project, content: 'aspect 1'
     @aspect2 = FactoryGirl.create :aspect, project: @project, content: 'aspect 2'
+    (1..1).each do |i|
+      (1..3).each do |j|
+        FactoryGirl.create :help_post, stage: i, style: j
+      end
+      post_mini_1 = FactoryGirl.create :help_post, stage: i, mini: true
+      @question_mini  = FactoryGirl.create :help_question, post: post_mini_1
+      @answer_mini = FactoryGirl.create :help_answer, help_question:@question_mini
+      3.times{ FactoryGirl.create :help_answer, help_question:@question_mini }
+    end
     30.times do
       lp = FactoryGirl.create :life_tape_post, user: @user, project: @project
       lp.discontent_aspects << [@aspect1,@aspect2].sample
@@ -22,16 +31,34 @@ describe 'Life Tape Posts' do
 
   context  'user sign in ' do
 
-    before {
+    before do
       lp = FactoryGirl.create :life_tape_post, content: 'low raiting post', user: @user, project: @project, number_views: 1
       lp.discontent_aspects <<@aspect2
-      sign_in @user }
+      sign_in @user
+    end
 
 
     context 'visit post lists' do
       before { visit life_tape_posts_path(@project)}
 
-      xit 'first time show help'
+
+
+        it 'first time show help' , js: true  do
+          should have_selector("h4#helpModalLabel.modal-title", visible: true)
+          should have_selector("button.disabled#send", visible: true)
+        end
+
+        it 'answer on mini help question ', js: true do
+          choose("question[#{@question_mini.id}][#{@answer_mini.id}]")
+          click_button 'send'
+          first('span.label-info')
+          should have_selector("h4#helpModalLabel.modal-title", visible: false)
+        end
+
+        it 'did not show after answering', js: true do
+          should_not have_selector("h4#myModalLabel.modal-title")
+        end
+
 
       it {should have_content('life tape post for project')}
       it {should have_selector("form#aspects_list input[type='checkbox']", count: 2)}
@@ -41,11 +68,14 @@ describe 'Life Tape Posts' do
 
       it 'click like on post', js: true do
         expect {
-          click_link "post_#{@post.id}"
+          click_link "plus_post_#{@post.id}"
           should  have_content '1'
-          should have_selector("a#post_#{@post.id}.disabled")
+          should have_selector("a#plus_post_#{@post.id}.disabled")
         }.to change(LifeTape::PostVoting, :count).by(1)
+        visit life_tape_posts_path(@project)
+        should_not have_selector("a#plus_post_#{@post.id}")
       end
+
 
       it 'show  only one aspect', js: true do
         check("aspect_#{@aspect1.id}")
@@ -55,7 +85,7 @@ describe 'Life Tape Posts' do
         should_not have_selector('span.label-info', text:'aspect 2')
       end
 
-      it 'show  only one aspect', js: true do
+      it 'show  only one aspect' do
         should_not have_selector('span.label-info', text:'aspect 2')
       end
 
@@ -65,13 +95,30 @@ describe 'Life Tape Posts' do
         should_not have_content 'low raiting post'
       end
 
-      xit 'add post'
-      xit 'can not like post twice'
+      it 'add post', js: true do
+        click_link 'add_record'
+        fill_in 'new_life_tape', with: 'some text for  new life tape'
+        click_button 'send_post'
+        #first('span.label-info')
+        should have_content 'some text for new life tape'
+
+      end
+
+
     end
 
     context   'visit one post' do
-      xit 'like post and can not like post twice'
-      xit 'add comment'
+
+      before { visit life_tape_post_path(@project, @post)}
+
+      it 'add comment', js: true do
+        should have_selector("input.disabled#send_post")
+        fill_in 'comment_text_area', with: 'some text for comment'
+        should_not have_selector("input.disabled#send_post")
+        click_button 'send_post'
+        should have_content 'some text for comment'
+      end
+
     end
 
 

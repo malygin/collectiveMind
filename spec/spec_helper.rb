@@ -19,7 +19,7 @@ Spork.prefork do
     #config.color_enabled = true
     config.include Capybara::DSL
 
-        config.before(:all) do
+    config.before(:all) do
       #DatabaseCleaner.strategy = :transaction
       #DatabaseCleaner.clean_with(:truncation)
       #Headless.new(display: 100, reuse: true, destroy_on_exit: false).start

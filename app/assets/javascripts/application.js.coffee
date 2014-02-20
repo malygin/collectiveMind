@@ -10,6 +10,7 @@
 $('#modal_help').modal
   keyboard: false
   backdrop: 'static'
+
 $('#modal_help').on 'hidden.bs.modal', ->
   $('#help_question').submit()
 
@@ -24,7 +25,6 @@ $('#modal_help').on 'hidden.bs.modal', ->
 @reset_life_tape_form = ->
   $("#button_block").animate({left:0, opacity:0.000 }, 'normal', ->
     $("#button_block").css 'display', 'none')
-
   $("#new_life_tape").animate {
     height: 0
   }, "normal",  ->
