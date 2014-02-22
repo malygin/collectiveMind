@@ -1,27 +1,126 @@
-%html
+-#%html
+-#  %head
+-#    = render 'meta'
+-#
+-#  %body
+-#    #wrapper
+-#      #header
+-#        = render 'header'
+-#        = render 'stages'
+-#        = render 'top_menu'
+-#      #middle
+-#        #container
+-#          #content
+-#            - flash.each do |key, value|
+-#              -if key == :success or key == :notice
+-#                .success
+-#                  =value
+-#              -else
+-#                .error
+-#                  =value
+-#            = yield
+-#        #sideLeft.sidebar
+-#          = render 'left_side'
+-#        #sideRight.sidebar
+-#          = render 'right_side'
+-#    #footer
+-#      = render 'footer'
+
+!!! 5
+%html(lang="en")
   %head
-    = render 'meta'
+    %meta(charset="utf-8")
+    %meta(http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1")
+    %meta(name="viewport" content="width=device-width, initial-scale=1.0")
+    %meta(http-equiv="X-UA-Compatible" content="IE=8")
+    %title
+      = content_for?(:title) ? yield(:title) : 'Massdecision'
+    = csrf_meta_tags
+
+    = stylesheet_link_tag 'application', media: 'all'
+    %link(href="/assets/favicon.ico" rel="shortcut icon")
+
 
   %body
-    #wrapper
-      #header
-        = render 'header'
-        = render 'stages'
-        = render 'top_menu'
-      #middle
-        #container
-          #content_wider3
-            - flash.each do |key, value|
-              -if key == :success
-                .success
-                  =value
-              -else 
-                .error
-                  =value
-            = yield 
-        #sideLeft.sidebar
-          = render 'left_side'
-    #footer
-      = render 'footer' 
+    .row
+      .col-md-10.col-md-offset-1
+        %nav.navbar.navbar-default{:role => "navigation"}
+          .navbar-header
+            %button.navbar-toggle{"data-target" => "#bs-example-navbar-collapse-1", "data-toggle" => "collapse", :type => "button"}
+              %span.sr-only Toggle navigation
+              %span.icon-bar
+              %span.icon-bar
+              %span.icon-bar
+            =image_tag 'logo.png'
+            &nbsp;
+            -#%a.navbar-brand{:href => "#"} Brand
+          / Collect the nav links, forms, and other content for toggling
+          #bs-example-navbar-collapse-1.collapse.navbar-collapse
+            %ul.nav.navbar-nav
+              %li
+                %a{:href => "/"}=t('menu.main')
+              %li
+                %a{:href => "/help1"}=t('menu.help')
+              %li
+                %a{:href => "/base"}=t('menu.base_knowledge')
+              %li
+                %a{:href => "/userstop"}="Рейтинг участников"
+              %li.dropdown
+                %a.dropdown-toggle{"data-toggle" => "dropdown", :href => "#"}
+                  =t('menu.switch_procedure')
+                  %b.caret
+                %ul.dropdown-menu
+                  %li
+                    %a{:href => "/procedure/1/stage/1?help1"} процедура в Ирбис
+                  %li
+                    %a{:href => "#"} процедура в СГУ
+                  %li.divider
+                  %li
+                    %a{:href => "#"} Начать новую
 
+
+            %ul.nav.navbar-nav.navbar-right
+
+              %li.dropdown
+                %a.dropdown-toggle{"data-toggle" => "dropdown", :href => "#"}
+                  %ul.nav.nav-pills.nav-stacked
+                    Сергей Петров
+                    %span.label.label-danger 5
+                %ul.dropdown-menu
+                  %li
+                    %a{:href => "/activity"}
+                      События
+                      %span.label.label-danger 4
+
+                  %li
+                    %a{:href => "/messages"}
+
+                      Сообщения
+                      %span.label.label-danger 1
+
+                  %li
+                    %a{:href => "/user/1"} Редактировать профиль
+                  %li.divider
+                  %li
+                    %a.dropdown-toggle(data-method="delete" href="/users/sign_out/" )
+                      Выход
+            %form.navbar-form.navbar-right{:role => "search"}
+              .form-group
+                %input.form-control{:placeholder => t('menu.search_text'), :type => "text"}/
+              %button.btn.btn-default{:type => "submit"}=t('menu.search')
+    .row
+      .col-md-10.col-md-offset-1
+        =  render partial: 'stages', :locals => { :stage => :first }
+        .row
+          .col-md-3
+            = render partial: 'left_side'
+          .col-md-9
+            = yield
+
+
+    /
+      Javascripts
+      \==================================================
+    / Placed at the end of the document so the pages load faster
+    = javascript_include_tag 'application'
 

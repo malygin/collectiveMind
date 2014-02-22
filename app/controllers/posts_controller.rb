@@ -260,9 +260,11 @@ def index
 
   #write fact of voting in db
   def vote
-    v = voting_model.find(params[:post_id])
-    v.final_votings.create(:user => current_user)
-    render json: params[:post_id]
+    @post_vote = voting_model.find(params[:post_id])
+    @post_vote.final_votings.create(:user => current_user)
+    respond_to do |format|
+      format.js
+    end
   end
 
    def up

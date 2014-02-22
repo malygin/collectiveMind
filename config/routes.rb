@@ -22,35 +22,12 @@ match '/description', :to =>'pages#description'
 
 
 scope '/project/:project' do
-  match '/knowledge', :to =>'core/projects#knowledge'
-  match '/help', :to => 'core/projects#help'
-  match '/journal', :to => 'journal#index'
 
-  match '/article1', :to => 'core/projects#article1'
-  match '/article2', :to => 'core/projects#article2'
-  match '/article3', :to => 'core/projects#article3'
-  match '/article4', :to => 'core/projects#article4'
-  match '/article5', :to => 'core/projects#article5'
 
-  match '/help_0', :to => 'core/projects#help_0'
-  match '/help_d0', :to => 'core/projects#help_d0'
-  match '/help_t0', :to => 'core/projects#help_t0'
-  match '/help_t1', :to => 'core/projects#help_t1'
-  match '/help_t2', :to => 'core/projects#help_t2'
-  match '/help_s0', :to => 'core/projects#help_s0'
-  match '/help_s1', :to => 'core/projects#help_s1'
-  match '/help_s2', :to => 'core/projects#help_s2'
-  match '/help_s2_1', :to => 'core/projects#help_s2_1'
-  match '/help_s3', :to => 'core/projects#help_s3'
-  match '/help_s3_1', :to => 'core/projects#help_s3_1'
-  match '/help_s4', :to => 'core/projects#help_s4'
-  match '/help_s4_1', :to => 'core/projects#help_s4_1'
 
   namespace :help do
     post :save_help_answer, :to => 'posts#save_help_answer'
-    resources :posts do
-
-    end
+    resources :posts
   end
 
   resources :users do

@@ -41,8 +41,6 @@ describe 'Life Tape Posts' do
     context 'visit post lists' do
       before { visit life_tape_posts_path(@project)}
 
-
-
         it 'first time show help' , js: true  do
           should have_selector("h4#helpModalLabel.modal-title", visible: true)
           should have_selector("button.disabled#send", visible: true)
@@ -55,7 +53,7 @@ describe 'Life Tape Posts' do
           should have_selector("h4#helpModalLabel.modal-title", visible: false)
         end
 
-        it 'did not show after answering', js: true do
+        it 'did not show mini help  after answering', js: true do
           should_not have_selector("h4#myModalLabel.modal-title")
         end
 
@@ -104,11 +102,9 @@ describe 'Life Tape Posts' do
 
       end
 
-
     end
 
     context   'visit one post' do
-
       before { visit life_tape_post_path(@project, @post)}
 
       it 'add comment', js: true do
@@ -119,12 +115,26 @@ describe 'Life Tape Posts' do
         should have_content 'some text for comment'
       end
 
+      it 'like comment only one time', js:true do
+          comment = @post.comments.first
+          expect {
+            click_link "plus_comment_#{comment.id}"
+            should  have_selector("span#counter_comment_#{comment.id}")
+            should have_selector("a#plus_comment_#{comment.id}.disabled")
+          }.to change(LifeTape::CommentVoting, :count).by(1)
+          visit life_tape_post_path(@project, @post)
+          should_not have_selector("a#plus_comment_#{comment.id}")
+      end
+
     end
 
-
-
+    context 'voting for aspects' do
+      xit 'show essay access only after voting'
+      xit 'show all aspects for voting'
+      xit 'vote only 5 times'
+      xit 'can not vote for one aspect twice'
+    end
 
   end
-
 
 end

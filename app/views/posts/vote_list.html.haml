@@ -1,26 +1,30 @@
-%h1 Голосование по итогам  стадии
-.success=link_to 'Вы также можете оставить свое мнение о прошедшей стадии или почитать другие', essay_posts_path(@project, @project.status), :id => 'essay_list'
+%h3 Голосование за самые актуальные аспекты
+
+-#.success=link_to 'Вы также можете оставить свое мнение о прошедшей стадии или почитать другие', essay_posts_path(@project, @project.status), :id => 'essay_list'
 %small Фрагменты, которые наберут менее 10% голосов (электоральный барьер), будут исключены из дальнейшего рассмотрения.
 %br
 %small
-    Участники, получат 10 баллов за каждый выбранный фрагмент, который преодолеет электоральный барьер, то есть максимум - 50 баллов.
+  Участники, получат 10 баллов за каждый выбранный фрагмент, который преодолеет электоральный барьер, то есть максимум - 50 баллов.
 %br
 - if boss?
-    %b
-        проголосовало
-        =@voted_people
-        из
-        =@all_people
-        Отдано голосов
-        =@votes
-        %br
+  %b
+  проголосовало
+  =@voted_people
+  из
+  =@all_people
+  Отдано голосов
+  =@votes
+  %br
 
 - unless @number_v<1  and not boss?
-    Количество имеющихся голосов -
-    %span.rate
-        %span#count_vote=@number_v
+  .alert.alert-info
+    .h3.text-danger
+      Осталось голосов:
+      %b#count_vote=@number_v
 
-    = render :partial => 'shared/post_for_vote', :collection => @posts,  :locals => { :path_for_voting => @path_for_voting, :count_voted => @number_v, :votes => @votes}
+
+
+  = render :partial => 'shared/post_for_vote', :collection => @posts,  :locals => { :path_for_voting => @path_for_voting, :count_voted => @number_v, :votes => @votes}
 - else
-    %b Спасибо за участие в голосовании!
-    %br
+  %b Спасибо за участие в голосовании!
+  %br
