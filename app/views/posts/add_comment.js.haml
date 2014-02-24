@@ -4,6 +4,6 @@
 -#$("#add_record").fadeIn('slow')
 $("#comment_text_area").val('')
 $('#comments').prepend("#{escape_javascript(render :partial => 'shared/comment', :object => @comment)}")
-$('#comment_success').fadeIn('slow').delay(3000).fadeOut('slow');
+$('#comment_success').fadeIn('slow').delay(1000).fadeOut('slow');
 $('#send').addClass('disabled')
 

@@ -17,21 +17,7 @@
                     = journal_parser(journal, @project.id).html_safe
                     =Russian::strftime(journal.created_at,"%d %B %k:%M:%S ")
 
-        .imperfection_journal
-            =link_to 'Иван Орлов', '/user/1'
-            добавил свое
-            =link_to 'несовершенство', '#'
-            %small 12.13.2014
-        .imperfection_journal
-            =link_to 'Мирон Левин', '/user/1'
-            добавил свое
-            =link_to 'несовершенство', '#'
-            %small 11.13.2014
-        .imperfection_journal
-            =link_to 'Сергей Паратов', '/user/1'
-            добавил свое
-            =link_to 'несовершенство', '#'
-            %small 23.13.2014
+
     .tab-pane.fade#news
         - unless @news.nil?
             %p.righttext

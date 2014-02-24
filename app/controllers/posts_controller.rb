@@ -134,13 +134,13 @@ def index
       unless params[:style].nil?
         @post.style = params[:style]
       end
-
-
       if current_model.column_names.include? 'status'
         @post.status = 0
       end
       respond_to do |format|
         if @post.save
+          current_user.journals.build(:type_event=>name_of_model_for_param+"_save", :project => @project, :body=>"#{@post.content[0..12]}:#{@post.id}").save!
+
           format.js
           format.html {
             unless params[:replace].nil?
@@ -149,7 +149,6 @@ def index
               end
             end
             flash[:succes] = 'Успешно добавлено!'
-            #current_user.journals.build(:type_event=>name_of_model_for_param+"_save", :project => @project, :body=>@post.id).save!
 
             redirect_to  :action=>'show', :id => @post.id, :project => @project  }
           format.json { render json: @post, status: :created, location: @post }

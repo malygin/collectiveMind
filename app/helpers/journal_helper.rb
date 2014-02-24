@@ -38,9 +38,15 @@ module JournalHelper
           "добавил комментарий '#{s[0]}...' к "+  link_to('записи', "/project/#{project}/life_tape/posts/#{s[1]}" )
 
         end
-			when 'life_tape_post_save'
-				'добавил '+  link_to('запись', life_tape_post_path(project, j.body))				
-            
+      when 'life_tape_post_save'
+        s = j.body.split(':')
+        if s.length == 1
+          'добавил   '+  link_to('запись', "/project/#{project}/life_tape/posts/#{j.body}" )
+        else
+          'добавил запись '+  link_to("#{s[0]}...", "/project/#{project}/life_tape/posts/#{s[1]}" )
+
+        end
+
       when 'discontent_comment_save'
         s = j.body.split(':')
          if s.length == 1
