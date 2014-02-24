@@ -13,7 +13,7 @@
       #bs-example-navbar-collapse-1.collapse.navbar-collapse
         %ul.nav.navbar-nav
           %li{class: ('active' if @project.current_status?(:life_tape)) }
-            = link_to '/project/1/life_tape/posts' do
+            = link_to "/project/#{@project.id}/life_tape/posts" do
               =@project.status_title(:life_tape)
               %br
               %small.text-center
