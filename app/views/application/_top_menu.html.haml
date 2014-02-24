@@ -43,15 +43,15 @@
               -#%span.label.label-danger 5
           %ul.dropdown-menu
             %li
-              %a{:href => "/activity"}
-                События
-                -#%span.label.label-danger 4
-            %li
+              = link_to 'Активность', user_path(@project, current_user)
+
+              -#%span.label.label-danger 4
+            %li.disabled
               %a{:href => "/messages"}
                 Сообщения
                 -#%span.label.label-danger 1
             %li
-              %a{:href => "/user/1"} Редактировать профиль
+              = link_to 'Редактировать профиль', edit_user_path(@project, current_user)
             %li.divider
             %li
               %a.dropdown-toggle(data-method="delete" href="/users/sign_out/" )

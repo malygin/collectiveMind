@@ -76,7 +76,7 @@ class User < ActiveRecord::Base
   # This method associates the attribute ":avatar" with a file attachment
   has_attached_file :avatar, styles: {
     thumb: '57x74>',
-    normal: '300x300>'
+    normal: '250x295>'
   }
   def valid_password?(password)
     begin
@@ -104,8 +104,8 @@ class User < ActiveRecord::Base
     if self.anonym
       self.nickname
     else
-      self.name + " "+self.surname
-    end
+      "#{self.name} #{self.surname}"
+     end
   end
 
   def role_name

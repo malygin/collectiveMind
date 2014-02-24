@@ -65,6 +65,7 @@ module CollectiveMind
     end
     config.to_prepare do
       Devise::SessionsController.layout 'core/projects'
+      Devise::RegistrationsController.layout 'core/projects'
     end
   end
 end

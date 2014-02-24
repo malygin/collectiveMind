@@ -1,6 +1,6 @@
 # encoding: utf-8
 class UsersController < ApplicationController
-	layout 'core/projects'
+	layout 'application_two_column'
 	#before_filter :authenticate, :only => [:edit, :update, :show]
 	before_filter :correct_user, :only => [:edit, :update]
 	before_filter :admin_user, :only => [:destroy]
@@ -10,33 +10,43 @@ class UsersController < ApplicationController
 		@title = "Sign up"
 	end
 
-	def show 
-		@user = User.find(params[:id])
+	def show
+
+    @user = User.find(params[:id])
     @project = Core::Project.find(params[:project])
+
+    add_breadcrumb  @user.name_title, user_path(@project, @user)
+
     @journals = Journal.events_for_user_show @project.id, @user.id, 30
-    @status = 0
-    @aspect =0
+
   end
 
-	def edit 
-		#@user = User.find(params[:id])
-	end
+	def edit
+    @project = Core::Project.find(params[:project])
+
+    @user = User.find(params[:id])
+    add_breadcrumb  "Редактирование профиля: #{@user.name_title}", edit_user_path(@project, @user)
+
+  end
 
 	def index
     @project = Core::Project.find(params[:project])
 
     @users = User.where('score>0').order('score DESC').paginate(:page =>params[:page])
-    @users1 = User.where('score_g>0').order('score_g DESC').paginate(:page =>params[:page])
-    @users2 = User.where('score_a>0').order('score_a DESC').paginate(:page =>params[:page])
-    @users3 = User.where('score_o>0').order('score_o DESC').paginate(:page =>params[:page])
+    #@users1 = User.where('score_g>0').order('score_g DESC').paginate(:page =>params[:page])
+    #@users2 = User.where('score_a>0').order('score_a DESC').paginate(:page =>params[:page])
+    #@users3 = User.where('score_o>0').order('score_o DESC').paginate(:page =>params[:page])
 	end
 
 	def update
-		@user = User.find(params[:id])
-		params[:user].delete(:password) if params[:user][:password].blank?
+    @project = Core::Project.find(params[:project])
+
+    @user = User.find(params[:id])
+
+    params[:user].delete(:password) if params[:user][:password].blank?
 		if @user.update_attributes(params[:user])
 			flash[:success] = "Профиль обновлен"
-			redirect_to @user
+			redirect_to user_path(@project,@user)
 		else
 			render 'edit'
 		end
