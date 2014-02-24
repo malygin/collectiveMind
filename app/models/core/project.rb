@@ -41,8 +41,8 @@ class Core::Project < ActiveRecord::Base
   has_many :project_users
   has_many :users, :through => :project_users
 
-  LIST_STAGES = {1 => {name: I18n.backend('stages.life_tape'), type_stage: :life_tape, status: [0,1,2]},
-         2 => { name: I18n.backend('stages.discontent'), type_stage: :discontent, status: [3,4]},
+  LIST_STAGES = {1 => {name: 'Сбор информации', type_stage: :life_tape, status: [0,1,2]},
+         2 => { name: 'Анализ проблемы', type_stage: :discontent, status: [3,4]},
          3 => { name: 'Формулирование проблемы'},
          4 => { name: 'Проекты'},
          5 => { name: 'Оценивание'}}.freeze
