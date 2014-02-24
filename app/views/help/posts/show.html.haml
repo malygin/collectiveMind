@@ -1,44 +1,28 @@
-.col-md-3
-  %div.well
-    %ol.nav.nav-pills.nav-stacked
-      -@stages.each do |key, value|
-        %li{class: ('active' if key.to_s==params[:id])}
-          %a(href="/project/#{@project.id}/help/posts/#{key}")
-            =key
-            =value[:name]
-            -#%i.glyphicon.glyphicon-exclamation-sign.pull-right
+%div.tabbable
+  %ul.nav.nav-tabs.nav-justified
+    %li.active
+      %a(href="#short_desc" data-toggle="tab") Краткое описание
+    %li
+      %a(href="#long_desc" data-toggle="tab") Подробное описание
+    %li
+      %a(href="#how_to" data-toggle="tab") Как участвовать
+    %li
+      %a(href="#helpful" data-toggle="tab") Полезные советы
+  .tab-content
+    #short_desc.tab-pane.fade.in.active
+      %br
+      -unless @posts[1].nil?
+        = @posts[1].content.html_safe
+    #long_desc.tab-pane.fade.in
+      %br
+      -unless @posts[2].nil?
+        = @posts[2].content.html_safe
+    #how_to.tab-pane.fade.in
+      %br
+      -unless @posts[3].nil?
+        = @posts[3].content.html_safe
 
-
-.col-md-9
-
-  %div.tabbable
-    %ul.nav.nav-tabs.nav-justified
-      %li.active
-        %a(href="#short_desc" data-toggle="tab") Краткое описание
-      %li
-        %a(href="#long_desc" data-toggle="tab") Подробное описание
-      %li
-        %a(href="#how_to" data-toggle="tab") Как участвовать
-      %li
-        %a(href="#helpful" data-toggle="tab") Полезные советы
-    .tab-content
-      #short_desc.tab-pane.fade.in.active
-        %br
-        -unless @posts[1].nil?
-          = @posts[1].content.html_safe
-      #long_desc.tab-pane.fade.in
-        %br
-        -unless @posts[2].nil?
-          = @posts[2].content.html_safe
-      #how_to.tab-pane.fade.in
-        %br
-        -unless @posts[3].nil?
-          = @posts[3].content.html_safe
-
-      #helpful.tab-pane.fade.in
-        %br
-        -unless @posts[4].nil?
-          = @posts[4].content.html_safe
-/ Видеовстпуление
-/ %br
-/ <iframe width="560" height="315" src="http://www.youtube.com/embed/GOQP8vSamoI" frameborder="0" allowfullscreen></iframe>
+    #helpful.tab-pane.fade.in
+      %br
+      -unless @posts[4].nil?
+        = @posts[4].content.html_safe

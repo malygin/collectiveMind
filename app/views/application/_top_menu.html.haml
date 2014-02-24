@@ -13,25 +13,25 @@
     #bs-example-navbar-collapse-1.collapse.navbar-collapse
       %ul.nav.navbar-nav
         %li
-          %a{:href => "/"}=t('menu.main')
+          =link_to t('menu.main'), "/project/#{@project.id}"
         %li
           =link_to t('menu.help'), help_posts_path(@project)
-        %li
+        %li.disabled
           %a{:href => "/base"}=t('menu.base_knowledge')
-        %li
+        %li.disabled
           %a{:href => "/userstop"}="Рейтинг участников"
-        %li.dropdown
-          %a.dropdown-toggle{"data-toggle" => "dropdown", :href => "#"}
-            =t('menu.switch_procedure')
-            %b.caret
-          %ul.dropdown-menu
-            %li
-              %a{:href => "/procedure/1/stage/1?help1"} процедура в Ирбис
-            %li
-              %a{:href => "#"} процедура в СГУ
-            %li.divider
-            %li
-              %a{:href => "#"} Начать новую
+        -#%li.dropdown
+        -#  %a.dropdown-toggle{"data-toggle" => "dropdown", :href => "#"}
+        -#    =t('menu.switch_procedure')
+        -#    %b.caret
+        -#  %ul.dropdown-menu
+        -#    %li
+        -#      %a{:href => "/procedure/1/stage/1?help1"} процедура в Ирбис
+        -#    %li
+        -#      %a{:href => "#"} процедура в СГУ
+        -#    %li.divider
+        -#    %li
+        -#      %a{:href => "#"} Начать новую
 
 
       %ul.nav.navbar-nav.navbar-right
@@ -39,20 +39,17 @@
         %li.dropdown
           %a.dropdown-toggle{"data-toggle" => "dropdown", :href => "#"}
             %ul.nav.nav-pills.nav-stacked
-              Сергей Петров
-              %span.label.label-danger 5
+              =current_user.name_title
+              -#%span.label.label-danger 5
           %ul.dropdown-menu
             %li
               %a{:href => "/activity"}
                 События
-                %span.label.label-danger 4
-
+                -#%span.label.label-danger 4
             %li
               %a{:href => "/messages"}
-
                 Сообщения
-                %span.label.label-danger 1
-
+                -#%span.label.label-danger 1
             %li
               %a{:href => "/user/1"} Редактировать профиль
             %li.divider

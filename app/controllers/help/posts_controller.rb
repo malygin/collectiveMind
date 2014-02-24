@@ -1,5 +1,5 @@
 class Help::PostsController < ApplicationController
-  layout "application_three_column"
+  layout "application_two_column"
   before_filter :project_by_id
 
   def  project_by_id
@@ -11,17 +11,15 @@ class Help::PostsController < ApplicationController
   end
 
   def index
-    @stages = Core::Project::LIST_STAGES
-    @post = Help::Post.find(1)
+    redirect_to help_post_path(@project, id:1)
   end
 
   def show
     @stages = Core::Project::LIST_STAGES
     @posts={}
-    Help::Post.where(stage: params[:id]).each {
-        |f| @posts[f.style] = f }
-    add_breadcrumb  @stages[params[:id].to_i][:name], help_post_path(@project, params[:id])
-
+    id =params[:id].to_i
+    Help::Post.where(stage: id).each {|f| @posts[f.style] = f }
+    add_breadcrumb  @stages[id][:name], help_post_path(@project, id)
   end
 
   def save_help_answer
