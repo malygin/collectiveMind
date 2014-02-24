@@ -12,18 +12,18 @@
       / Collect the nav links, forms, and other content for toggling
       #bs-example-navbar-collapse-1.collapse.navbar-collapse
         %ul.nav.navbar-nav
-          %li{class: ('active' if stage == :first) }
+          %li{class: ('active' if @project.current_status?(:life_tape)) }
             = link_to '/project/1/life_tape/posts' do
-              Сбор информации
+              =@project.status_title(:life_tape)
               %br
-              %small.text-center 35 записей
+              %small.text-center
+                =t('stages.record', count: @project.life_tape_posts.count)
           %li.divider_vertical
-
           %li.disabled
             %a{:href => "/procedure/1/stage/2?help1"}
-              Анализ ситуации
+              =@project.status_title(:discontent)
               %br
-              %small.text-center 14 записей
+              %small.text-center=t('stages.record', count: @project.discontent_ongoing_post.count)
           %li.divider_vertical
 
           %li.disabled

@@ -8,7 +8,13 @@ ru:
     switch_procedure: "Перейти"
     sign_in: "Войти"
   stages:
-    info: 'Сбор информации'
+    life_tape: 'Сбор информации'
+    discontent: 'Анализ ситуации'
+    record:
+      one: '1 запись'
+      few: '%{count} записи'
+      other: '%{count} записей'
+
   activerecord:
     errors:
       models:

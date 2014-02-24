@@ -2,20 +2,15 @@
   %div.well
     %ol.nav.nav-pills.nav-stacked
       -@stages.each do |key, value|
-        %li{class: ('active' if value[:id].to_s==params[:id])}
-          %a(href="/project/#{@core_project.id}/help/posts/#{value[:id]}")
-            =value[:id]
+        %li{class: ('active' if key.to_s==params[:id])}
+          %a(href="/project/#{@project.id}/help/posts/#{key}")
+            =key
             =value[:name]
             -#%i.glyphicon.glyphicon-exclamation-sign.pull-right
 
 
 .col-md-9
-  .row.pull-right
-    %span.label.label-info.label-lg Раздел обновлен
-    %span.text-muted 12.12.2012 13:45
-    =params[:id]
-  %br
-  %br
+
   %div.tabbable
     %ul.nav.nav-tabs.nav-justified
       %li.active

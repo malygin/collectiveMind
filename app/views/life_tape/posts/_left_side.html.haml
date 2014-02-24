@@ -2,13 +2,7 @@
 -#- if @project.status>2
 -#    %p.righttext=link_to 'Посмотреть эссе этапа', essay_posts_path(@project, 2), :id => 'essay_list'
 
-- if stage_vote?('life_tape')
-    .success
 
-
-        = link_to 'Начался этап голосования за актуальные фрагменты (перейти)', life_tape_vote_list_path(@project), id: 'vote_stage'
-        -#%br
-        -#=link_to 'Добавить мнение о прошедшем этапе', essay_posts_path(@project, @project.status), :id => 'essay_list'
 %ul.nav.nav-tabs
     %li.active
         =link_to 'Активность', '#activity', :data => {:toggle=>"tab"}

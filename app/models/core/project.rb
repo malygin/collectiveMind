@@ -1,3 +1,5 @@
+# encoding: utf-8
+
 class Core::Project < ActiveRecord::Base
 ##### status 
 # 0 - prepare to procedure
@@ -38,4 +40,53 @@ class Core::Project < ActiveRecord::Base
 
   has_many :project_users
   has_many :users, :through => :project_users
+
+  LIST_STAGES = {1 => {name: I18n.t('stages.life_tape'), type_stage: :life_tape, status: [0,1,2]},
+         2 => { name: I18n.t('stages.discontent'), type_stage: :discontent, status: [3,4]},
+         3 => { name: 'Формулирование проблемы'},
+         4 => { name: 'Проекты'},
+         5 => { name: 'Оценивание'}}.freeze
+
+
+  def get_free_votes_for(user, stage)
+    self.stage1.to_i - user.voted_aspects.size
+  end
+
+
+
+  def current_status?( status)
+    sort_list  = LIST_STAGES.select {|k,v| v[:type_stage]  == status}
+    sort_list.values[0][:status].include? self.status
+
+  end
+
+  def  status_title(status = self.status)
+    case status
+      when 0
+        'подготовка к процедуре'
+      when 1, :life_tape
+        I18n.t('stages.life_tape')
+      when 2
+        'голосование за аспекты и рефлексия'
+      when 3, :discontent
+        I18n.t('stages.discontent')
+      when 4
+        'голосование за недовольства и рефлексия'
+      when 5
+        'формулирование образов'
+      when 6
+        'голосование за концепции и рефлексия'
+      when 7
+        'создание проектов'
+      when 8
+        'выставление оценок'
+      when 9
+        'голосование за проекты'
+      when 10
+        'подведение итогов'
+      else
+        'завершена'
+    end
+  end
+
 end

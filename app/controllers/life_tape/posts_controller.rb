@@ -10,7 +10,7 @@ class LifeTape::PostsController < PostsController
 def prepare_data
 
     @project = Core::Project.find(params[:project])
-    add_breadcrumb "Сбор информации", life_tape_posts_path(@project)
+    add_breadcrumb I18n.t('stages.life_tape'), life_tape_posts_path(@project)
 
     @aspects = Discontent::Aspect.where(:project_id => @project)
     @journals = Journal.events_for_user_feed @project.id
@@ -19,16 +19,19 @@ def prepare_data
     @mini_help = Help::Post.where(stage:1, mini: true).first
     @post_dis = LifeTape::Post.joins(:comments).
         where(:project_id => @project).
-        #reorder('count DESC').
         group('"life_tape_posts"."id"').
         select('"life_tape_posts".*, count(life_tape_comments.id) as count_comment ').
-        #reorder('').
         reorder('count_comment DESC').
         limit(3)
-    
 end
 
   def index
+
+    if @project.status == 2 and ((@project.stage1.to_i - current_user.voted_aspects.size) != 0)
+      redirect_to action: "vote_list"
+      return
+    end
+
     @post = current_model.new
     @order = params[:order]
     @page = params[:page]
@@ -49,7 +52,8 @@ end
 
   def vote_list
     @posts = voting_model.where(:project_id => @project)
-    @number_v = @project.stage1.to_i - current_user.voted_aspects.size
+
+    @number_v = @project.get_free_votes_for(current_user, :life_tape)
     if @number_v == 0
       redirect_to action: "index"
       return
