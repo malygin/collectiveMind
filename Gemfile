@@ -10,6 +10,7 @@ group :development, :test do
   gem 'ruby-debug19'
   gem 'quiet_assets'
   gem 'grizzled-rails-logger'
+  gem 'rspec-rails'
 
 end
 
@@ -22,7 +23,7 @@ end
 
 group :test do
   gem 'rspec'
-  gem 'rspec-rails'
+
   gem 'spork'
   gem 'spork-rails'
   gem 'guard-spork'

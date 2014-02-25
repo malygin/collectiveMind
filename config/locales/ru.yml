@@ -14,7 +14,8 @@ ru:
       one: '1 запись'
       few: '%{count} записи'
       other: '%{count} записей'
-
+  voting:
+    have_votes: 'Осталось голосов:'
   activerecord:
     errors:
       models:

@@ -20,6 +20,9 @@ describe 'Life Tape Posts' do
       lp = FactoryGirl.create :life_tape_post, user: @user, project: @project
       lp.discontent_aspects << [@aspect1,@aspect2].sample
     end
+    @aspects=[]
+    4.times { @aspects<< FactoryGirl.create(:aspect, project: @project)}
+
     @post = FactoryGirl.create :life_tape_post, user: @user, content: 'post from aspect 2', project: @project, created_at: (Time.now.beginning_of_day + 1.day)
     @post.discontent_aspects << @aspect2
   end
@@ -59,9 +62,9 @@ describe 'Life Tape Posts' do
 
 
       it {should have_content('life tape post for project')}
-      it {should have_selector("form#aspects_list input[type='checkbox']", count: 2)}
+      it {should have_selector("form#aspects_list input[type='checkbox']", count: 6)}
       it {should have_selector('div#posts div.media', count: 20)}
-      it {should have_selector("ol.breadcrumb li", text:I18n.t('stages.info'))}
+      it {should have_selector("ol.breadcrumb li", text:I18n.t('stages.life_tape'))}
 
 
       it 'click like on post', js: true do
@@ -129,10 +132,30 @@ describe 'Life Tape Posts' do
     end
 
     context 'voting for aspects' do
-      xit 'show essay access only after voting'
-      xit 'show all aspects for voting'
-      xit 'vote only 5 times'
-      xit 'can not vote for one aspect twice'
+      before :all do
+        @project.update_attribute(:status, 2)
+      end
+      before { visit life_tape_posts_path(@project)}
+
+
+      it 'show all aspects for voting' do
+          should have_selector("h3.text-danger", text: I18n.t('voting.have_votes'))
+          should have_selector(".vote-button", count: @project.aspects.count)
+      end
+
+      it 'can not vote for one aspect twice', js: true do
+        click_link "vote_#{@aspect1.id}"
+        should have_selector("a.disabled#vote_#{@aspect1.id}")
+        should have_selector("#count_vote", text: "4")
+      end
+
+      it 'vote only 5 times', js: true do
+        @aspects.each do |asp|
+           click_link "vote_#{asp.id}"
+        end
+        should_not have_selector(".vote-button")
+      end
+
     end
 
   end
