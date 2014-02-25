@@ -1,5 +1,5 @@
 require 'spec_helper'
-describe 'Life Tape Posts' do
+describe 'Life Tape ' do
   subject { page }
 
   before :all do
