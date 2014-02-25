@@ -17,6 +17,7 @@ group :production do
   gem 'pg'
   gem 'activerecord-postgresql-adapter'
   gem 'rails_12factor'
+  gem 'newrelic_rpm'
 end
 
 group :test do
