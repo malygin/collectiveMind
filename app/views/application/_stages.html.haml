@@ -49,7 +49,7 @@
   .col-md-12
     %ol.breadcrumb
       %li
-        = link_to @project.name, core_projects_path(@project)
+        = link_to @project.name, "/project/#{@project.id}"
       = render_breadcrumbs :tag => :li, :separator => ""
 
 -#
