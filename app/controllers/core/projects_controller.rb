@@ -21,25 +21,8 @@ class Core::ProjectsController < ApplicationController
   end
 
   def to_project
-    @project = Core::Project.find(params[:project]) 
-    if [0,1,2, 20].include? @project.status 
-      redirect_to life_tape_posts_path(@project)
-    elsif @project.status == 3 
-      redirect_to discontent_posts_path(@project, :status => 2)
-    elsif @project.status ==4
-      redirect_to discontent_posts_path(@project, :status => 2)
-    elsif @project.status == 5
-      redirect_to concept_posts_path(@project, :status => 2)
-    elsif @project.status ==6
-      redirect_to concept_posts_path(@project, :status => 2)
-    elsif @project.status == 7
-      redirect_to plan_posts_path(@project, :status => 0)
-    elsif @project.status ==8
-      redirect_to estimate_posts_path(@project)
-    elsif @project.status ==9  or @project.status ==10
-      redirect_to estimate_posts_path(@project)
-    end
-
+    @project = Core::Project.find(params[:project])
+    redirect_to  polymorphic_path(@project.redirect_to_current_stage)
   end
 
   # GET /core/projects/1

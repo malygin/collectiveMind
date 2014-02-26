@@ -41,23 +41,25 @@ class Core::Project < ActiveRecord::Base
   has_many :project_users
   has_many :users, :through => :project_users
 
-  LIST_STAGES = {1 => {name: 'Сбор информации', type_stage: :life_tape, status: [0,1,2]},
-         2 => { name: 'Анализ проблемы', type_stage: :discontent, status: [3,4]},
-         3 => { name: 'Формулирование проблемы'},
-         4 => { name: 'Проекты'},
-         5 => { name: 'Оценивание'}}.freeze
+  LIST_STAGES = {1 => {name: 'Сбор информации', :type_stage => :life_tape_posts, status: [0,1,2]},
+         2 => { name: 'Анализ проблемы', :type_stage =>  :discontent_posts, status: [3,4]},
+         3 => { name: 'Формулирование проблемы', :type_stage => :concept_posts, status: [5,6]},
+         4 => { name: 'Проекты', :type_stage =>  :plan_posts, status: [7,8]},
+         5 => { name: 'Оценивание', :type_stage =>  :estimate_posts, status: [9,10]}}.freeze
 
 
   def get_free_votes_for(user, stage)
     self.stage1.to_i - user.voted_aspects.size
   end
 
-
-
   def current_status?( status)
     sort_list  = LIST_STAGES.select {|k,v| v[:type_stage]  == status}
     sort_list.values[0][:status].include? self.status
+  end
 
+  def redirect_to_current_stage
+    sort_list  = LIST_STAGES.select {|k,v| v[:status].include? self.status}
+    sort_list.values[0][:type_stage]
   end
 
   def  status_title(status = self.status)
@@ -88,5 +90,4 @@ class Core::Project < ActiveRecord::Base
         'завершена'
     end
   end
-
 end
