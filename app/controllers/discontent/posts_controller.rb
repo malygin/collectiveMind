@@ -17,26 +17,9 @@ class Discontent::PostsController < PostsController
 end
 
   def index
-  	if @aspect!='0'
-    	@posts = current_model.where(:project_id => @project, :status => 0, :aspect_id => params[:aspect]).paginate(:page => params[:page])
-    else
-    	@posts = current_model.where(:project_id => @project, :status => @status).paginate(:page => params[:page])
-    end
-    if @status == '2'
-      if @project.status > 3
-          @number_v = @project.stage2 - current_user.voted_discontent_posts.size
-          @votes = @project.stage2
-          if boss?
-            @all_people = @project.users.size
 
-            @voted_people = ActiveRecord::Base.connection.execute("select count(*) as r from (select distinct v.user_id from discontent_votings v  left join   discontent_posts asp on (v.discontent_post_id = asp.id) where asp.project_id = #{@project.id}) as dm").first["r"]
-            @votes = ActiveRecord::Base.connection.execute("select count(*) as r from (select  v.user_id from discontent_votings v  left join   discontent_posts asp on (v.discontent_post_id = asp.id) where asp.project_id = #{@project.id}) as dm").first["r"].to_i
-          end
-      end
-      render 'table', :layout => 'application_two_column'
-    else
-      render 'index'
-    end
+    	@posts = current_model.where(:project_id => @project).paginate(:page => params[:page])
+
   end
 
  def new

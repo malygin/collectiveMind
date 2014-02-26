@@ -30,6 +30,7 @@ class Core::Project < ActiveRecord::Base
   has_many :life_tape_posts, :class_name => "LifeTape::Post"
   has_many :aspects, :class_name => "Discontent::Aspect"
 
+  has_many :discontents, :class_name => "Discontent::Post"
   has_many :discontent_ongoing_post, :conditions =>"status = 0  ", :class_name => "Discontent::Post"
   has_many :discontent_accepted_post, :conditions =>"status = 2  ", :class_name => "Discontent::Post"
   has_many :discontent_for_admin_post, :conditions =>"status = 1  ", :class_name => "Discontent::Post"
@@ -66,11 +67,11 @@ class Core::Project < ActiveRecord::Base
     case status
       when 0
         'подготовка к процедуре'
-      when 1, :life_tape
+      when 1, :life_tape_posts
         I18n.t('stages.life_tape')
       when 2
         'голосование за аспекты и рефлексия'
-      when 3, :discontent
+      when 3, :discontent_posts
         I18n.t('stages.discontent')
       when 4
         'голосование за недовольства и рефлексия'

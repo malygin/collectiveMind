@@ -1,62 +1,6 @@
 CollectiveMind::Application.routes.draw do
 
-devise_for :users
-
-
-
-namespace :core, :shallow => true do 
-  resources :projects do
-    member do
-      get :next_stage
-      get :pr_stage
-    end
-  end 
-end
-
-match '/project/:project', :to => 'core/projects#to_project'
-match '/savelzon', :to =>'pages#savelzon'
-match '/vayntrub', :to =>'pages#vayntrub'
-match '/reviews', :to =>'pages#reviews'
-match '/contacts', :to =>'pages#contacts'
-match '/description', :to =>'pages#description'
-
-
-scope '/project/:project' do
-
-
-
-  namespace :help do
-    post :save_help_answer, :to => 'posts#save_help_answer'
-    resources :posts
-  end
-
-  resources :users do
-    member do
-      put :forecast
-      put :forecast_concept
-      put :forecast_plan
-      match 'add_score/:score' => 'users#add_score'
-      match 'add_score_essay/:score' => 'users#add_score_essay'
-    end
-  end
-
-  scope '/stage/:stage' do
-     namespace :essay do
-       get 'censored/:post_id'  => 'posts#censored'
-
-       resources :posts do
-            member do
-                put :add_comment
-                put :censored_comment
-
-                put :plus
-                put :plus_comment
-            end
-      end
-     end
-  end
-
-  namespace :life_tape do
+  def posts_routes
     get 'vote_list'  => 'posts#vote_list'
     put 'vote/:post_id'  => 'posts#vote'
     get 'censored/:post_id'  => 'posts#censored'
@@ -74,36 +18,43 @@ scope '/project/:project' do
     end
   end
 
-  namespace :discontent do
-    resources :aspects 
+devise_for :users
 
-    get 'vote_list'  => 'posts#vote_list'
-    put 'vote/:post_id'  => 'posts#vote'
-    get 'censored/:post_id'  => 'posts#censored'
-    put 'make_mandatory/:post_id'  => 'posts#make_mandatory'
-
-    scope '/status/:status/aspect/:aspect',  :defaults => {:status => 0, :aspect => 0} do
-      get 'replace/:replace_id/posts/new'  => 'posts#new'
-      get 'my'   => 'posts#my'
-      resources :posts do
-            member do
-                put :add_comment
-                put :plus
-                put :plus_comment
-                put :censored_comment
-
-                put :to_archive
-                get :to_expert
-                put :to_expert_save  
-                get :expert_rejection
-                put :expert_rejection_save 
-                get :expert_revision
-                put :expert_revision_save
-                get :expert_acceptance_save
-            end
-      end
+namespace :core, :shallow => true do 
+  resources :projects do
+    member do
+      get :next_stage
+      get :pr_stage
     end
-   end
+  end 
+end
+
+scope '/project/:project' do
+
+  namespace :help do
+    post :save_help_answer, :to => 'posts#save_help_answer'
+    resources :posts
+  end
+
+  resources :users do
+    member do
+      put :forecast
+      put :forecast_concept
+      put :forecast_plan
+      match 'add_score/:score' => 'users#add_score'
+      match 'add_score_essay/:score' => 'users#add_score_essay'
+    end
+  end
+
+
+  namespace :life_tape do
+    posts_routes
+  end
+
+  namespace :discontent do
+    resources :aspects
+    posts_routes
+  end
 
   namespace :concept do
     get 'vote_list'  => 'posts#vote_list'
@@ -195,7 +146,23 @@ scope '/project/:project' do
           put :plus_comment
       end
     end
-  end  
+  end
+
+  scope '/stage/:stage' do
+    namespace :essay do
+      get 'censored/:post_id'  => 'posts#censored'
+
+      resources :posts do
+        member do
+          put :add_comment
+          put :censored_comment
+
+          put :plus
+          put :plus_comment
+        end
+      end
+    end
+  end
 
   namespace :question do
     get 'censored/:post_id'  => 'posts#censored'
@@ -216,60 +183,7 @@ end
 
 ############
 
-  get 'journal/enter'
 
-  resources :tests do
-    member do
-      put :save_attempt
-    end
-  end
-
-
-  match '/about', :to => 'pages#about'
-  match '/contacts', :to => 'pages#contacts'
- 
-  match '/help', :to => 'pages#help'
-  match '/help0', :to => 'pages#help0'
-  match '/help_0', :to => 'pages#help_0'
-  match '/help1', :to => 'pages#help1'
-  match '/help2', :to => 'pages#help2'
-  match '/help3', :to => 'pages#help3'
-  match '/help4', :to => 'pages#help4'
-  match '/help5', :to => 'pages#help5'
-  match '/help6', :to => 'pages#help6'
-  match '/help7', :to => 'pages#help7'
-
-  match '/estimate/result', :to => 'pages#result'
-  match '/home', :to => 'pages#home'
-  match '/donot', :to => 'pages#donot'  
-  match '/articles', :to => 'pages#articles'
-
-  #match '/signin', :to => 'sessions#new'
-  #match '/signout', :to => 'sessions#destroy'
-  match '/frustrations/structure', :to => 'pages#structure_frustrations'
-  match '/frustrations/unstructure', :to => 'pages#unstructure_frustrations'
-  match '/frustrations/archive', :to => 'pages#archive_frustrations'  
-  match '/frustrations/to_expert', :to => 'pages#to_expert_frustrations'
-  match '/frustrations/accepted', :to => 'pages#accepted_frustrations'  
-  match '/frustrations/declined', :to => 'pages#declined_frustrations'    
-  match '/frustrations/voted', :to => 'pages#voted_frustrations'    
-  match '/frustrations/show_forecast', :to => 'frustrations#show_forecast'    
-
-
-  #get 'users/new'
-
-
-  
-  #resources :sessions, :only => [:new, :create, :destroy]
-
-  
-  #match 'frustrations/archive/:id/', :to =>'frustrations#archive'
-  #match '/signup', :to =>'users#new'
-  get 'welcome/index'
-  
-  resources :posts do
-    resources :comments
-  end
 
   root :to => 'core/projects#index'
 

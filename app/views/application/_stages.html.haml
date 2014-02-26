@@ -14,17 +14,19 @@
         %ul.nav.navbar-nav
           %li{class: ('active' if @project.current_status?(:life_tape_posts)) }
             = link_to "/project/#{@project.id}/life_tape/posts" do
-              =@project.status_title(:life_tape)
+              =@project.status_title(:life_tape_posts)
               %br
               %small.text-center
                 =t('stages.record', count: @project.life_tape_posts.count)
           %li.divider_vertical
 
-          %li.disabled
-            %a{:href => "/procedure/1/stage/2?help1"}
-              =@project.status_title(:discontent)
+          %li{class: ('active' if @project.current_status?(:discontent_posts)) }
+            = link_to "/project/#{@project.id}/discontent/posts" do
+              =@project.status_title(:discontent_posts)
               %br
-              %small.text-center=t('stages.record', count: @project.discontent_ongoing_post.count)
+              %small.text-center
+                3 несовершенства
+                -#=t('stages.record', count: @project.discontent_ongoing_post)
           %li.divider_vertical
 
           %li.disabled
