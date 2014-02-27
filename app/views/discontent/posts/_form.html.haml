@@ -18,13 +18,13 @@
     =f.text_field :where, class: 'form-control',placeholder: 'место, организация, общность, в которой это происходит '
 
   .form-group
-    = select_tag 'aspect_id', options_from_collection_for_select(@aspects, "id", "content", @post.aspect.nil? ? 0 :@post.aspect.id), :prompt => "Выберите фрагмент"
+    = select_tag 'discontent_post[aspect_id]', options_from_collection_for_select(@aspects, "id", "content", @post.aspect.nil? ? 0 :@post.aspect.id), :prompt => "Выберите фрагмент"
 
     %label.radio-inline
-      %input(type="radio" name="style" id="optionsRadios1" value="1")
+      %input(type="radio" name="discontent_post[style]" id="optionsRadios1" value="1")
         %span.text-danger Имеющийся негатив
     %label.radio-inline
-      %input(type="radio" name="style" id="optionsRadios1" value="2")
+      %input(type="radio" name="discontent_post[style]" id="optionsRadios1" value="0")
         %span.text-success Отсутствующий позитив
 
   %button.btn.btn-primary(type="submit" data-loading-text="Loading...") Сохранить

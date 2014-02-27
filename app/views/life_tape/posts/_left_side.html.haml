@@ -13,7 +13,7 @@
         -unless @journals.nil?
             - @journals.each do |journal|
                 .imperfection_journal
-                    = link_to journal.user.name_title, user_path(@project,journal.user)
+                    = link_to journal.user, user_path(@project,journal.user)
                     = journal_parser(journal, @project.id).html_safe
                     =Russian::strftime(journal.created_at,"%d %B %k:%M:%S ")
 

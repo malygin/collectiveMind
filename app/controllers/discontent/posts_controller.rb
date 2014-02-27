@@ -9,7 +9,9 @@ class Discontent::PostsController < PostsController
   end
 
   def prepare_data
-    @project = Core::Project.find(params[:project]) 
+    @project = Core::Project.find(params[:project])
+    add_breadcrumb I18n.t('stages.discontent'), discontent_posts_path(@project)
+
     @journals = Journal.events_for_user_feed @project.id
     @news = ExpertNews::Post.where(:project_id => @project).first 
     @status = params[:status]
@@ -79,13 +81,11 @@ end
     @achived_posts =current_user.discontent_posts.for_project(@project.id).archive
     render 'my', :layout => 'application_two_column'
   end
+
   def create
     @project = Core::Project.find(params[:project])
-    @post = current_model.new(params[name_of_model_for_param])
-    @post.project = @project
+    @post = @project.discontents.create(params[name_of_model_for_param])
     @post.user = current_user
-    @post.aspect =  Discontent::Aspect.find(params[:aspect_id])
-    @post.status = 0
 
     respond_to do |format|
       if @post.save

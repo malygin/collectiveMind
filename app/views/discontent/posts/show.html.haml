@@ -1,8 +1,28 @@
-%p#notice= notice
+.media{id: "post_#{@post.id}"}
+  = render 'users/user_post', :user => @post.user
+  .media-body
+    = render partial: 'discontent/aspects/aspect', object: @post.aspect
+    =discontent_style_name(@post.style)
+    %br
+    %span.label.label-g что
+    %span.h55=@post.content
+    %br
+    %span.label.label-g где
+    %span.h55=@post.when
+    %br
+    %span.label.label-g когда
+    %span.h55=@post.where
+    .row
+      .col-md-10
+        %small.text-muted= Russian::strftime(@post.created_at,"%d %B %k:%M:%S ")
+    = render 'shared/post_social_bar', :post => @post
+    %br
+    %br
+      %ul.media-list#comments
+      = render :partial => 'shared/comment',:collection => @comments
+    = will_paginate @comments
+    - if signed_in?
+      = render :partial => 'shared/comment_form', :locals => { :comment => @comment, :url_link => url_for(:controller => @post.class.name.underscore.pluralize, :action => 'add_comment')}
 
-- if @post.status == 2
-  %b
-    = link_to 'Переопределить', :action => 'new', :project => @project, :replace_id => @post.id
-= render 'shared/post_show', :post => @post
 
 

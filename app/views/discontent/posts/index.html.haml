@@ -1,5 +1,16 @@
+
+.pull-right
+    %a.btn.btn-default(href="/procedure/1/stage/2" style='font-size:14px;border:none !important;background-color: #b3d2f4;')
+        %span.glyphicon.glyphicon-th-list
+        Списком
+    %a.btn.btn-default(href="#" style='font-size:14px;border:none !important;')
+        %span.glyphicon.glyphicon-th
+        Таблицей
 - if signed_in?
     = link_to '+ Добавить свое несовершенство в список', new_discontent_post_path(@project) , id: 'add_record',  class: 'btn btn-sm btn-success'
     %br
+%br
+%small#filter_posts
+    = render 'shared/filter_posts'
 = render  @posts
 = will_paginate @posts
