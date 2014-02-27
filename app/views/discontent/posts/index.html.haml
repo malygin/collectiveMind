@@ -1,4 +1,5 @@
--#= link_to image_tag('add_discontent.png'), url_for(:action => 'new')
-
+- if signed_in?
+    = link_to '+ Добавить свое несовершенство в список', new_discontent_post_path(@project) , id: 'add_record',  class: 'btn btn-sm btn-success'
+    %br
 = render  @posts
 = will_paginate @posts

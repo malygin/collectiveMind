@@ -1,3 +1,4 @@
+# encoding: utf-8
 class Discontent::PostsController < PostsController
   # GET /discontent/posts
   # GET /discontent/posts.json
@@ -13,7 +14,16 @@ class Discontent::PostsController < PostsController
     @news = ExpertNews::Post.where(:project_id => @project).first 
     @status = params[:status]
     @aspect = params[:aspect]
-    @aspects = Discontent::Aspect.where(:project_id => @project, :status => 1)
+    @aspects = Discontent::Aspect.where(:project_id => @project)
+
+    @post_star = LifeTape::Post.where(:project_id => @project, :important => 't' ).limit(3)
+    @post_dis = LifeTape::Post.joins(:comments).
+        where(:project_id => @project).
+        group('"life_tape_posts"."id"').
+        select('"life_tape_posts".*, count(life_tape_comments.id) as count_comment ').
+        reorder('count_comment DESC').
+        limit(3)
+
 end
 
   def index
@@ -68,6 +78,36 @@ end
     @accepted_posts = current_user.discontent_posts.for_project(@project.id).accepted
     @achived_posts =current_user.discontent_posts.for_project(@project.id).archive
     render 'my', :layout => 'application_two_column'
+  end
+  def create
+    @project = Core::Project.find(params[:project])
+    @post = current_model.new(params[name_of_model_for_param])
+    @post.project = @project
+    @post.user = current_user
+    @post.aspect =  Discontent::Aspect.find(params[:aspect_id])
+    @post.status = 0
+
+    respond_to do |format|
+      if @post.save
+        current_user.journals.build(:type_event=>name_of_model_for_param+"_save", :project => @project, :body=>"#{@post.content[0..12]}:#{@post.id}").save!
+
+        format.js
+        format.html {
+          unless params[:replace].nil?
+            params[:replace].each do |k,v|
+              @post.post_replaces.build(:replace_id => k).save
+            end
+          end
+          flash[:succes] = 'Успешно добавлено!'
+
+          redirect_to  :action=>'show', :id => @post.id, :project => @project  }
+        format.json { render json: @post, status: :created, location: @post }
+      else
+        format.html { render action: "new" }
+        format.json { render json: @post.errors, status: :unprocessable_entity }
+        format.js
+      end
+    end
 
   end
 end

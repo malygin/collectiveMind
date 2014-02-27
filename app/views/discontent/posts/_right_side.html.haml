@@ -1,29 +1,52 @@
-%h1 Вы хотите добавить несовершенство? На что нужно обратить внимание
-%p.righttext
-    1. Самые ценные несовершенства - те, которые заменяют одно или несколько из уже принятых, предлагая более общие формулировки
-    %br
-    2. Указать переопределяемые несовершенства можно и после создания, нажав на ссылку "Редактировать"
-    %br
-    3. Активнее "лайкайте" те комментарии, которые помогают сделать ваше несовершенство более правильно оформленным или просто наводит вас на интересные мысли (авторы таких комментариев получают балыы)
-    %br
--if boss?
-    %p.righttext
-        текущий статус проекта
-        %br
-        %span.rate= status_title(@project.status)
-    %br
-    -if @project.status == 3
-        =link_to 'Начать голосование',  next_stage_core_project_path(@project), id: 'change_stage'
-    -if @project.status == 4
-        =link_to 'Вернуться к началу процедуры',  pr_stage_core_project_path(@project), id: 'change_stage'
-        %br
-        =link_to 'Начать сбор концепций',  next_stage_core_project_path(@project), id: 'change_stage'
+- if boss?
+    .panel.panel-info
+        .panel-heading Панель Администратора
+        .panel-body
+            -if @project.status == 3
+                =link_to 'Начать голосование',  next_stage_core_project_path(@project), id: 'change_stage'
+            -if @project.status == 4
+                =link_to 'Вернуться к началу процедуры',  pr_stage_core_project_path(@project), id: 'change_stage'
+                %br
+                =link_to 'Начать сбор концепций',  next_stage_core_project_path(@project), id: 'change_stage'
 
+- unless @aspects.empty?
+    .panel.panel-default
+        .panel-heading Темы процедуры
+        .panel-body
+            .pull-right
+                %button.btn.btn-default.btn-sm(onclick="reset_filter_aspects();" ) Сбросить
+
+            = form_tag({:controller => "life_tape/posts", :action=> "index"},{ method: :get, remote: true, id: 'aspects_list' }) do
+                - @aspects.each do |asp|
+                    .checkbox
+
+                        =  check_box_tag 'aspects_filter[]', asp.id, current_user.discontent_aspects.include?(asp), onclick: "show_filter_aspects_button();", id: "aspect_#{asp.id}"
+                        = "#{asp.content} (#{asp.life_tape_posts.count})"
+                %button.btn.btn-default.inv_element#filter-aspect(type="submit") Сохранить
+.panel.panel-default
+    .panel-heading Помощь
+    .panel-body
+        Настало время собирать несовершенства и всячески их обрабатывать.
+        = link_to 'узнать больше', help_post_path(@project, 2)
+
+%ul.nav.nav-tabs
+    %li
+        =link_to 'Избранные',  '#best', :data => {:toggle=>"tab"}
+    %li.active
+        =link_to 'Обсуждаемые', '#discussed', :data => {:toggle=>"tab"}
+.tab-content
+    .tab-pane.fade#best
+        - unless @post_star.empty?
+            -@post_star.each do |st|
+                .imperfection_journal
+                    = trim_string(st.content,150)
+                    = link_to 'Подробнее',  {:action => :show, :project => @project, :id => st.id}, class: "more"
+                    %small 12.13.2014
+    .tab-pane.fade.in.active#discussed
+
+        -@post_dis.each do |st|
+            .imperfection_journal
+                = trim_string(st.content, 150)
+                = link_to 'Подробнее',  {:action => :show, :project => @project, :id => st.id}, class: "more"
+                %small 12.13.2014
 %br
-.redtitle Фрагменты
--if boss? 
-    %p.righttext= link_to 'добавить фрагмент', new_discontent_aspect_path, id: "add_aspect"
-- @aspects.each do |asp|
-    %a{:href  => discontent_posts_path(:aspect => asp.id), :class => 'topic'}
-        .topics
-            %p.greentitle= "#{asp.content}"

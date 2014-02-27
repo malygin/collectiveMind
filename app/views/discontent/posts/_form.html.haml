@@ -1,9 +1,5 @@
--#- unless @replace_post.nil?
--#  %br
--#  =@replace_post.show_content.html_safe
--#  %br
--#  %br
-.success Если вы затрудняетесь правильно разбить ваше несовершенство, - добавляейте его так, как вам подсказывает интуиция. Если вы ошибетесь - наши модераторы помогут вам его исправить.
+%button.btn.btn-info(data-toggle="modal" data-target="#modalStage2")
+  Показать пример
 = form_for  @post, :url => {:project => @project.id, :replace_id => @replace_post.nil? ? nil : @replace_post.id , :action => @post.persisted? ? 'update' : 'create'},   :html => { :class => 'new_or_edit' }do |f|
   -if @post.errors.any?
     #error_explanation
@@ -12,37 +8,24 @@
         - @ost.errors.full_messages.each do |msg|
           %li= msg
 
-  .field
-    = f.label 'ЧТО вас не устраивает?'
-    = f.text_area :content
-    .timestamp - отрицательное действие, явление, установление, черта...
-  .field
-    = f.label 'КОГДА это происходит?'
-    = f.text_area :when
-    .timestamp - во время какого события, мероприятия, процесса, ситуации...
+  .form-group
+    %label.control-label(for="exampleInputEmail1") Что вас не устраивает (обязательное поле)
+    =f.text_area :content, class: 'form-control', rows: 5, placeholder: 'отрицательное действие, явление, установление, черта...'
+    %br
+    Когда это происходит?
+    =f.text_field :when, class: 'form-control',placeholder: 'во время какого события, мероприятия, процесса, ситуации... '
+    Где это происходит?
+    =f.text_field :where, class: 'form-control',placeholder: 'место, организация, общность, в которой это происходит '
 
-  .field
-    = f.label 'ГДЕ?'
-    = f.text_area :where
-    .timestamp -	место, организация, общность, в которой это происходит.
+  .form-group
+    = select_tag 'aspect_id', options_from_collection_for_select(@aspects, "id", "content", @post.aspect.nil? ? 0 :@post.aspect.id), :prompt => "Выберите фрагмент"
 
+    %label.radio-inline
+      %input(type="radio" name="style" id="optionsRadios1" value="1")
+        %span.text-danger Имеющийся негатив
+    %label.radio-inline
+      %input(type="radio" name="style" id="optionsRadios1" value="2")
+        %span.text-success Отсутствующий позитив
 
-  = select_tag 'aspect_id', options_from_collection_for_select(@aspects, "id", "content", @post.aspect.nil? ? 0 :@post.aspect.id), :prompt => "Выберите фрагмент"  
-  = select_tag 'style', options_for_select({ "отсутствующий позитив" => "0", "имеющийся негатив" => "1" }, @post.style), :prompt => "Выберите тип"
-  %br
-  %br
-  %b Переопределяемы несовершенства:
-  %br
-  .discontents
-
-    -@replace_posts.each do |rp|
-      %div{:id => "dis_#{rp.id}"}
-        =rp.show_content.html_safe
-        = hidden_field_tag "replace[#{rp.id}]",rp.id
-        %a{onclick: "remove_dis(#{rp.id})"} Удалить
-
-  -#= select_tag 'select-discontentа', grouped_collection_select(:city, :country_id, @aspects,:negative_posts, "id", "show_content",:show_content), :prompt => "Выберите Несовершенство"
-  = grouped_collection_select(:select_discontent, "", @aspects,:accepted_posts, :content, :id,:show_content)
-
-  .actions
-    = f.submit ''
+  %button.btn.btn-primary(type="submit" data-loading-text="Loading...") Сохранить
+  %hr
