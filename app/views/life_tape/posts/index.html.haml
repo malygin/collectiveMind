@@ -16,7 +16,7 @@
         %button.btn.btn-danger.btn-sm(type="button" onclick="reset_life_tape_form(); return false;" ) Отменить
 
 #posts
-    = render :partial => 'shared/post', :collection => @posts
+    = render @posts
 #pagination
     = render 'shared/pagination'
 
