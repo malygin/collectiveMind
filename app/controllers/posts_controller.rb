@@ -358,4 +358,14 @@ def index
     end
   end
 
+  protected
+
+  def load_filter_for_aspects
+    current_user.discontent_aspect_users.destroy_all
+    unless params[:aspects_filter].nil?
+      params[:aspects_filter].each do |asp|
+        current_user.discontent_aspect_users.create(aspect_id: asp.to_i)
+      end
+    end
+  end
 end

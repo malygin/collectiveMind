@@ -16,12 +16,12 @@
             .pull-right
                 %button.btn.btn-default.btn-sm(onclick="reset_filter_aspects();" ) Сбросить
 
-            = form_tag({:controller => "life_tape/posts", :action=> "index"},{ method: :get, remote: true, id: 'aspects_list' }) do
+            = form_tag({:controller => "discontent/posts", :action=> "index"},{ method: :get, remote: true, id: 'aspects_list' }) do
                 - @aspects.each do |asp|
                     .checkbox
 
                         =  check_box_tag 'aspects_filter[]', asp.id, current_user.discontent_aspects.include?(asp), onclick: "show_filter_aspects_button();", id: "aspect_#{asp.id}"
-                        = "#{asp.content} (#{asp.life_tape_posts.count})"
+                        = "#{asp.content} (#{asp.posts.count})"
                 %button.btn.btn-default.inv_element#filter-aspect(type="submit") Сохранить
 .panel.panel-default
     .panel-heading Помощь

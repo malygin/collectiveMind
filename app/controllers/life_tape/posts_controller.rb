@@ -67,15 +67,6 @@ end
     render :layout => 'application_two_column'
   end
 
-  private
 
-  def load_filter_for_aspects
-      current_user.discontent_aspect_users.destroy_all
-      unless params[:aspects_filter].nil?
-        params[:aspects_filter].each do |asp|
-          current_user.discontent_aspect_users.create(aspect_id: asp.to_i)
-        end
-      end
-  end
 
 end

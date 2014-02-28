@@ -12,5 +12,7 @@
 %br
 %small#filter_posts
     = render 'shared/filter_posts'
-= render  @posts
-= will_paginate @posts
+#posts
+    = render  @posts
+#pagination
+    = render 'shared/pagination'

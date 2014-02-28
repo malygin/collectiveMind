@@ -9,6 +9,7 @@ class Discontent::Aspect < ActiveRecord::Base
    has_many :accepted_posts, :class_name => 'Discontent::Post',
            :conditions => ['discontent_posts.status = ?',4]
 
+
   has_many :voted_users, :through => :final_votings, :source => :user
   has_many :final_votings,:foreign_key => 'discontent_aspect_id', :class_name => "LifeTape::Voiting"
 

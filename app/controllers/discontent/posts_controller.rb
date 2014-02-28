@@ -30,8 +30,20 @@ end
 
   def index
 
-    	@posts = current_model.where(:project_id => @project).paginate(:page => params[:page])
+    @post = current_model.new
+    @order = params[:order]
+    @page = params[:page]
+    load_filter_for_aspects   if (request.xhr? and @order.nil? and @page.nil?)
 
+    @posts  = current_model.where(:project_id => @project)
+    .where('aspect_id  IN (?) ' , current_user.aspects(@project.id).collect(&:id))
+    .order_by_param(@order)
+    .paginate(:page => params[:page], :per_page => 20)
+
+    respond_to do |format|
+      format.html
+      format.js {render 'posts/index'}
+    end
   end
 
  def new
@@ -91,7 +103,6 @@ end
       if @post.save
         current_user.journals.build(:type_event=>name_of_model_for_param+"_save", :project => @project, :body=>"#{@post.content[0..12]}:#{@post.id}").save!
 
-        format.js
         format.html {
           unless params[:replace].nil?
             params[:replace].each do |k,v|
