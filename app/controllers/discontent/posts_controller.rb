@@ -41,7 +41,11 @@ end
     .paginate(:page => params[:page], :per_page => 20)
 
     respond_to do |format|
-      format.html
+      format.html {
+       if params[:view] == 'table'
+         render  'table', layout: 'application_two_column'
+       end
+      }
       format.js {render 'posts/index'}
     end
   end

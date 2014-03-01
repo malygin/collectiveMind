@@ -1,18 +1,17 @@
-
 .pull-right
-    %a.btn.btn-default(href="/procedure/1/stage/2" style='font-size:14px;border:none !important;background-color: #b3d2f4;')
-        %span.glyphicon.glyphicon-th-list
-        Списком
-    %a.btn.btn-default(href="#" style='font-size:14px;border:none !important;')
-        %span.glyphicon.glyphicon-th
-        Таблицей
+  %a.active.btn.btn-default.menu_table(href="#")
+    %span.glyphicon.glyphicon-th-list
+    Списком
+  %a.btn.btn-default.menu_table(href="/project/#{@project.id}/discontent/posts?view=table")
+    %span.glyphicon.glyphicon-th
+    Таблицей
 - if signed_in?
-    = link_to '+ Добавить свое несовершенство в список', new_discontent_post_path(@project) , id: 'add_record',  class: 'btn btn-sm btn-success'
-    %br
+  = link_to '+ Добавить свое несовершенство в список', new_discontent_post_path(@project) , id: 'add_record',  class: 'btn btn-sm btn-success'
+  %br
 %br
 %small#filter_posts
-    = render 'shared/filter_posts', project: @project.id, folder: @folder
+  = render 'shared/filter_posts', project: @project.id, folder: @folder
 #posts
-    = render  @posts
+  = render  @posts
 #pagination
-    = render 'shared/pagination'
+  = render 'shared/pagination'
