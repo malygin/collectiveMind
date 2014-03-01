@@ -18,12 +18,11 @@ class Discontent::PostsController < PostsController
     @aspect = params[:aspect]
     @aspects = Discontent::Aspect.where(:project_id => @project)
 
-    @post_star = LifeTape::Post.where(:project_id => @project, :important => 't' ).limit(3)
-    @post_dis = LifeTape::Post.joins(:comments).
+    @post_star =[]
+    #Discontent::Post.where(:project_id => @project, :important => 't' ).limit(3)
+    @post_dis = Discontent::Post.
         where(:project_id => @project).
-        group('"life_tape_posts"."id"').
-        select('"life_tape_posts".*, count(life_tape_comments.id) as count_comment ').
-        reorder('count_comment DESC').
+        reorder('number_views DESC').
         limit(3)
 
 end
@@ -33,6 +32,7 @@ end
     @post = current_model.new
     @order = params[:order]
     @page = params[:page]
+    @folder = :discontent
     load_filter_for_aspects   if (request.xhr? and @order.nil? and @page.nil?)
 
     @posts  = current_model.where(:project_id => @project)

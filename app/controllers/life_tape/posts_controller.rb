@@ -8,10 +8,8 @@ class LifeTape::PostsController < PostsController
   end
   
 def prepare_data
-
     @project = Core::Project.find(params[:project])
     add_breadcrumb I18n.t('stages.life_tape'), life_tape_posts_path(@project)
-
     @aspects = Discontent::Aspect.where(:project_id => @project)
     @journals = Journal.events_for_user_feed @project.id
     @news = ExpertNews::Post.where(:project_id => @project).first
@@ -35,6 +33,7 @@ end
     @post = current_model.new
     @order = params[:order]
     @page = params[:page]
+    @folder = :life_tape
     load_filter_for_aspects   if (request.xhr? and @order.nil? and @page.nil?)
 
     @posts  = current_model.where(:project_id => @project)

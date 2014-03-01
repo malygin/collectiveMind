@@ -5,7 +5,7 @@
 
   .greybut
     -#= link_to image_tag('edit.png'), "/project/#{current_user.projects.first.id}/users/#{current_user.id}/edit"
-    = current_user.name_title
+    = current_user
     = link_to " - Выйти", destroy_user_session_path, :method => :delete,  class: "username"
 
 -else

@@ -1,8 +1,8 @@
 -if @order == 'popular'
     Показаны посты, отсортированные по популярности
-    =link_to '| сортировать по дате', "/project/#{@project.id}/life_tape/posts?order=date", remote: true
+    =link_to '| сортировать по дате', "/project/#{project}/#{folder}/posts?order=date", remote: true
 -else
     Показаны посты, отсортированные по дате
-    =link_to '| сортировать по популярности', "/project/#{@project.id}/life_tape/posts?order=popular", remote: true, id: 'date_filter'
+    =link_to '| сортировать по популярности', "/project/#{project}/#{folder}/posts?order=popular", remote: true, id: 'date_filter'
 %br
 %br
