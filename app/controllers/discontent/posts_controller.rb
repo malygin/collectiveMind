@@ -24,8 +24,7 @@ class Discontent::PostsController < PostsController
         where(:project_id => @project).
         reorder('number_views DESC').
         limit(3)
-
-end
+  end
 
   def index
 
@@ -51,12 +50,12 @@ end
   end
 
  def new
-    prepare_data
+
     @post = current_model.new
     @replace_posts =[]
     @accepted_posts = Discontent::Post.where(status: 2, project_id:  @project)
-    unless params[:replace_id].nil?
 
+    unless params[:replace_id].nil?
       @replace_posts << current_model.find(params[:replace_id])
     end
     respond_to do |format|

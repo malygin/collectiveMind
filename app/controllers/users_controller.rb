@@ -15,7 +15,7 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
     @project = Core::Project.find(params[:project])
 
-    add_breadcrumb  @user.name_title, user_path(@project, @user)
+    add_breadcrumb  @user, user_path(@project, @user)
 
     @journals = Journal.events_for_user_show @project.id, @user.id, 30
 

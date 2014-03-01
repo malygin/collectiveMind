@@ -107,9 +107,9 @@ module ApplicationHelper
 def discontent_style_name(dis)
 	case dis
 		when 0 		
-			content_tag :span,'отсутствующий позитив', class: 'label label-p'
+			content_tag :span,'Отсутствующие достоинства', class: 'label label-p'
 		when 1
-      content_tag :span, 'имеющийся негатив', class: 'label label-n'
+      content_tag :span, 'Имеющиеся недостатки', class: 'label label-n'
 		else 
 			'не определена'
 		end

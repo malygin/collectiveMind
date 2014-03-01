@@ -10,7 +10,7 @@
                 =link_to 'Начать сбор недовольств',  next_stage_core_project_path(@project), id: 'change_stage'
 - unless @aspects.empty?
     .panel.panel-default
-        .panel-heading Темы процедуры
+        .panel-heading Аспекты процедуры
         .panel-body
             .pull-right
                 %button.btn.btn-default.btn-sm(onclick="reset_filter_aspects();" ) Сбросить
@@ -24,30 +24,11 @@
 .panel.panel-default
     .panel-heading Помощь
     .panel-body
-        На этом этапе мы знакомимся с правилам предстоящей работы и пополняем аспекты процедуры, а также пополняем базу знаний!
+        На этой стадии вы познакомитесь с правилами процедуры, внесете коррективы в список аспектов и пополните базу знаний.
         = link_to 'узнать больше', help_post_path(@project, 1)
 
-%ul.nav.nav-tabs
-    %li
-        =link_to 'Избранные',  '#best', :data => {:toggle=>"tab"}
-    %li.active
-        =link_to 'Обсуждаемые', '#discussed', :data => {:toggle=>"tab"}
-.tab-content
-    .tab-pane.fade#best
-        - unless @post_star.empty?
-            -@post_star.each do |st|
-                .imperfection_journal
-                    = trim_string(st.content,150)
-                    = link_to 'Подробнее',  {:action => :show, :project => @project, :id => st.id}, class: "more"
-                    %small 12.13.2014
-    .tab-pane.fade.in.active#discussed
+= render 'shared/discussed_panel', post_star: @post_star, post_dis: @post_dis
 
-        -@post_dis.each do |st|
-            .imperfection_journal
-                = trim_string(st.content, 150)
-                = link_to 'Подробнее',  {:action => :show, :project => @project, :id => st.id}, class: "more"
-                %small 12.13.2014
-%br
 
 / = render :partial => 'discontent/aspects/aspect', :collection => @aspects
 

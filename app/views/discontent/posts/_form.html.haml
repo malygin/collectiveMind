@@ -1,5 +1,7 @@
 %button.btn.btn-info(data-toggle="modal" data-target="#modalStage2")
   Показать пример
+%br
+%br
 = form_for  @post, :url => {:project => @project.id, :replace_id => @replace_post.nil? ? nil : @replace_post.id , :action => @post.persisted? ? 'update' : 'create'},   :html => { :class => 'new_or_edit' }do |f|
   -if @post.errors.any?
     #error_explanation
