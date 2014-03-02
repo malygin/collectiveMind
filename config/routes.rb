@@ -9,6 +9,9 @@ CollectiveMind::Application.routes.draw do
     get 'aspect/:aspect/posts/'  => 'posts#index'
 
     resources :posts do
+      get :autocomplete_discontent_post_whend, :on => :collection
+      get :autocomplete_discontent_post_whered, :on => :collection
+
       member do
         put :add_comment
         put :censored_comment

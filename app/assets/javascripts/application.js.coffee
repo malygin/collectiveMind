@@ -2,10 +2,8 @@
 #= require jquery_ujs
 #= require_tree
 #= require jquery.ui.all
-#= require highcharts
-#= require highcharts/highcharts-more
-#= require selectize
 #= require twitter/bootstrap
+#= require autocomplete-rails
 
 $('#modal_help').modal
   keyboard: false

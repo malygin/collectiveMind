@@ -3,6 +3,8 @@ class Discontent::PostsController < PostsController
   # GET /discontent/posts
   # GET /discontent/posts.json
 
+  autocomplete :discontent_post, :whend, :class_name => 'Discontent::Post' , :full => true
+  autocomplete :discontent_post, :whered, :class_name => 'Discontent::Post' , :full => true
 
   def voting_model  
     Discontent::Post

@@ -1,4 +1,5 @@
-%button.btn.btn-info(data-toggle="modal" data-target="#modalStage2")
+=render partial: 'shared/help/new_discontent'
+%button.btn.btn-info(data-toggle="modal" data-target="#modalNewDiscontent")
   Показать пример
 %br
 %br
@@ -15,19 +16,20 @@
     =f.text_area :content, class: 'form-control', rows: 5, placeholder: 'отрицательное действие, явление, установление, черта...'
     %br
     Когда это происходит?
-    =f.text_field :when, class: 'form-control',placeholder: 'во время какого события, мероприятия, процесса, ситуации... '
+    -#f.autocomplete_field :brand_name, autocomplete_brand_name_products_path
+    =f.autocomplete_field :whend, autocomplete_discontent_post_whend_discontent_posts_path,  class: 'form-control',placeholder: 'во время какого события, мероприятия, процесса, ситуации... '
     Где это происходит?
-    =f.text_field :where, class: 'form-control',placeholder: 'место, организация, общность, в которой это происходит '
+    =f.autocomplete_field :whered, autocomplete_discontent_post_whered_discontent_posts_path,  class: 'form-control',placeholder: 'место, организация, общность, в которой это происходит '
 
   .form-group
     = select_tag 'discontent_post[aspect_id]', options_from_collection_for_select(@aspects, "id", "content", @post.aspect.nil? ? 0 :@post.aspect.id), :prompt => "Выберите фрагмент"
-
-    %label.radio-inline
-      %input(type="radio" name="discontent_post[style]" id="optionsRadios1" value="1")
-        %span.text-danger Имеющийся негатив
-    %label.radio-inline
-      %input(type="radio" name="discontent_post[style]" id="optionsRadios1" value="0")
-        %span.text-success Отсутствующий позитив
+    %small
+      %label.radio-inline
+        %input(type="radio" name="discontent_post[style]" id="optionsRadios1" value="1")
+          %span.text-danger Имеющиеся недостатки
+      %label.radio-inline
+        %input(type="radio" name="discontent_post[style]" id="optionsRadios1" value="0")
+          %span.text-success Отсутствующие достоинства
 
   %button.btn.btn-primary(type="submit" data-loading-text="Loading...") Сохранить
   %hr

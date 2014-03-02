@@ -1,0 +1,33 @@
+#modalNewDiscontent.modal.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"}
+  .modal-dialog
+    .modal-content
+      .modal-header
+        %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} &times;
+        %h4#myModalLabel.modal-title Примеры правильных несовершенств
+      .modal-body
+        .row
+          .col-md-6
+            %span.label.label-danger  Имеющиеся недостатки
+            %br
+            %span.label.label-default что
+            Нереруглярно ездят коллежские ассесоры
+            %br
+            %span.label.label-default где
+            Во Владимирской губернии
+            %br
+            %span.label.label-default когда
+            Во время сбора подати
+          .col-md-6
+            %span.label.label-success  Отсутствующие достоинства
+            %br
+            %span.label.label-default что
+            Нереруглярно ездят коллежские ассесоры
+            %br
+            %span.label.label-default где
+            Во Владимирской губернии
+            %br
+            %span.label.label-default когда
+            Во время сбора подати
+      .modal-footer
+
+        %button.btn.btn-primary(type = "button" data-dismiss="modal") Я все понял!

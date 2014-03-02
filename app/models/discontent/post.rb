@@ -2,7 +2,7 @@
 
 class Discontent::Post < ActiveRecord::Base
   include BasePost
-  attr_accessible :when, :where, :aspect_id, :replace_id, :aspect, :style
+  attr_accessible :whend, :whered, :aspect_id, :replace_id, :aspect, :style
   belongs_to :aspect
   has_many :childs, :class_name => 'Discontent::Post', :foreign_key => 'replace_id'
   belongs_to :post, :class_name => 'Discontent::Post', :foreign_key => 'replace_id'
@@ -19,9 +19,10 @@ class Discontent::Post < ActiveRecord::Base
 
   has_many :voted_users, :through => :final_votings, :source => :user
   has_many :final_votings,:foreign_key => 'discontent_post_id', :class_name => 'Discontent::Voting'
-
   #scope :ready_for_post, lambda {  where(:status => 0).where("created_at < ?", 2.day.ago) }
   #scope :not_ready_for_post, lambda {  where(:status => 0).where("created_at > ?", 2.day.ago) }
+
+
 
   def voted(user)
     self.voted_users.where(:id => user)

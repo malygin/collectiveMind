@@ -177,6 +177,8 @@ GEM
       activesupport (= 3.2.13)
       bundler (~> 1.0)
       railties (= 3.2.13)
+    rails3-jquery-autocomplete (1.0.12)
+      rails (>= 3.0)
     rails_12factor (0.0.2)
       rails_serve_static_assets
       rails_stdout_logging
@@ -323,6 +325,7 @@ DEPENDENCIES
   pg
   quiet_assets
   rails (= 3.2.13)
+  rails3-jquery-autocomplete
   rails_12factor
   rest-client
   rspec

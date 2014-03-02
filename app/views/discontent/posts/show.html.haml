@@ -4,14 +4,8 @@
     = render partial: 'discontent/aspects/aspect', object: @post.aspect
     =discontent_style_name(@post.style)
     %br
-    %span.label.label-g что
-    %span.h55=@post.content
-    %br
-    %span.label.label-g где
-    %span.h55=@post.when
-    %br
-    %span.label.label-g когда
-    %span.h55=@post.where
+    = render partial: 'post_content', object: @post
+
     .row
       .col-md-10
         %small.text-muted= Russian::strftime(@post.created_at,"%d %B %k:%M:%S ")
