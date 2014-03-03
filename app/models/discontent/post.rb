@@ -19,8 +19,8 @@ class Discontent::Post < ActiveRecord::Base
 
   has_many :voted_users, :through => :final_votings, :source => :user
   has_many :final_votings,:foreign_key => 'discontent_post_id', :class_name => 'Discontent::Voting'
-  scope :uniquely_whend, group(:whend)
-  scope :uniquely_whered, group(:whered)
+  #scope :uniquely_whend, :select => 'distinct whend'
+  #scope :uniquely_whered, :select => 'distinct whered'
   #scope :ready_for_post, lambda {  where(:status => 0).where("created_at < ?", 2.day.ago) }
   #scope :not_ready_for_post, lambda {  where(:status => 0).where("created_at > ?", 2.day.ago) }
 

@@ -6,11 +6,18 @@ class Discontent::PostsController < PostsController
   autocomplete :discontent_post, :whend, :class_name => 'Discontent::Post' , :full => true
   autocomplete :discontent_post, :whered, :class_name => 'Discontent::Post' , :full => true
 
-  def get_autocomplete_items(parameters)
-    items = super(parameters)
-    items = items.where(:project_id => params[:project])
+  #def get_autocomplete_items(parameters)
+  #  items = super(parameters)
+  #  items = items.where(:project_id => params[:project])
+  #end
+
+  def autocomplete_discontent_post_whend
+    render json: Discontent::Post.select("DISTINCT whend as value").where("LOWER(whend) like LOWER(?)", "%#{params[:term]}%").where(:project_id => params[:project])
   end
 
+ def autocomplete_discontent_post_whered
+    render json: Discontent::Post.select("DISTINCT whered as value").where("LOWER(whered) like LOWER(?)", "%#{params[:term]}%").where(:project_id => params[:project])
+  end
 
 
   def voting_model  
