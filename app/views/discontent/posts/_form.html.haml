@@ -3,7 +3,7 @@
   Показать пример
 %br
 %br
-= form_for  @post, :url => {:project => @project.id, :replace_id => @replace_post.nil? ? nil : @replace_post.id , :action => @post.persisted? ? 'update' : 'create'},   :html => { :class => 'new_or_edit' }do |f|
+= form_for  @post, :url => {:project => @project.id, :replace_id => @replace_post.nil? ? nil : @replace_post.id , :action => @post.persisted? ? 'update' : 'create'},  :remote => true, :html => { :id => 'new_discontent' }do |f|
   -if @post.errors.any?
     #error_explanation
       %h2= "#{pluralize(@discontent_post.errors.count, "error")} prohibited this discontent_post from being saved:"
@@ -13,7 +13,7 @@
 
   .form-group
     %label.control-label(for="exampleInputEmail1") Что вас не устраивает (обязательное поле)
-    =f.text_area :content, class: 'form-control', rows: 5, placeholder: 'отрицательное действие, явление, установление, черта...'
+    =f.text_area :content, class: 'form-control', rows: 5, placeholder: 'отрицательное действие, явление, установление, черта...', onkeyup: "activate_button(this);"
     %br
     Где это происходит?
     =f.autocomplete_field :whered, autocomplete_discontent_post_whered_discontent_posts_path,  class: 'form-control',placeholder: 'место, организация, общность, в которой это происходит '
@@ -22,7 +22,7 @@
     =f.autocomplete_field :whend, autocomplete_discontent_post_whend_discontent_posts_path,  class: 'form-control',placeholder: 'во время какого события, мероприятия, процесса, ситуации... '
 
   .form-group
-    = select_tag 'discontent_post[aspect_id]', options_from_collection_for_select(@aspects, "id", "content", @post.aspect.nil? ? 0 :@post.aspect.id), :prompt => "Выберите фрагмент"
+    = select_tag 'discontent_post[aspect_id]', options_from_collection_for_select(@aspects, "id", "content", @post.aspect.nil? ? @aspects.first.id : @post.aspect.id), :prompt => 'Выберите аспект'
     %small
       %label.radio-inline
         %input(type="radio" name="discontent_post[style]" id="optionsRadios1" value="1")
@@ -31,5 +31,8 @@
         %input(type="radio" name="discontent_post[style]" id="optionsRadios1" value="0")
           %span.text-success Отсутствующие достоинства
 
-  %button.btn.btn-primary(type="submit" data-loading-text="Loading...") Сохранить
+  %button#send_post.btn.btn-primary.disabled(type="submit") Сохранить
   %hr
+  %p#discontent_success.text-success Успешно добавлено!
+  %p#discontent_warning.text-primary Проверьте не добавлено ли ваше несовершенство другими участниками? Если вы уверены, что нет - нажмите на "Все равно сохранить"
+  #posts

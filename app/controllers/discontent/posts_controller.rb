@@ -1,4 +1,6 @@
 # encoding: utf-8
+require 'similar_text'
+
 class Discontent::PostsController < PostsController
   # GET /discontent/posts
   # GET /discontent/posts.json
@@ -115,29 +117,28 @@ class Discontent::PostsController < PostsController
 
   def create
     @project = Core::Project.find(params[:project])
-    @post = @project.discontents.create(params[name_of_model_for_param])
-    @post.user = current_user
-
-    respond_to do |format|
-      if @post.save
-        current_user.journals.build(:type_event=>name_of_model_for_param+"_save", :project => @project, :body=>"#{@post.content[0..12]}:#{@post.id}").save!
-
-        format.html {
-          unless params[:replace].nil?
-            params[:replace].each do |k,v|
-              @post.post_replaces.build(:replace_id => k).save
-            end
-          end
-          flash[:succes] = 'Успешно добавлено!'
-
-          redirect_to  :action=>'show', :id => @post.id, :project => @project  }
-        format.json { render json: @post, status: :created, location: @post }
-      else
-        format.html { render action: "new" }
-        format.json { render json: @post.errors, status: :unprocessable_entity }
-        format.js
-      end
+    #@post = @project.discontents.create(params[name_of_model_for_param])
+    #@post.user = current_user
+    #discontents = Discontent::Post.where(:project_id => @project.id)
+    r=nil
+    unless params[:resave]
+      r = Discontent::Post.where(:project_id => @project.id).collect {|d| [ d, d.content.similar(params[name_of_model_for_param][:content])]}
+      r.sort_by!(&:last)
     end
-
+    if r.nil? or  r.last[1] < 50
+       @post = @project.discontents.create(params[name_of_model_for_param])
+       @post.user = current_user
+       @post.save
+       current_user.journals.build(:type_event=>name_of_model_for_param+"_save", :project => @project, :body=>"#{@post.content[0..12]}:#{@post.id}").save!
+      # redirect_to  :action=>'show', :id => @post.id, :project => @project
+      #return
+    else
+      @posts = r.collect {|d| d[0] if d[1]> 20}.compact.reverse
+    end
+    respond_to do |format|
+      format.html
+      format.js
+    end
   end
+
 end
