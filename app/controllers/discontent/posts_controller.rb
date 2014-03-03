@@ -3,18 +3,15 @@ class Discontent::PostsController < PostsController
   # GET /discontent/posts
   # GET /discontent/posts.json
 
-  autocomplete :discontent_post, :whend, :class_name => 'Discontent::Post' , :full => true
-  autocomplete :discontent_post, :whered, :class_name => 'Discontent::Post' , :full => true
+  autocomplete :discontent_post, :whend, :class_name => 'Discontent::Post' , :full => true, :scopes => [:uniquely_whend]
+  autocomplete :discontent_post, :whered, :class_name => 'Discontent::Post' , :full => true, :scopes => [:uniquely_whered]
 
   def get_autocomplete_items(parameters)
     items = super(parameters)
     items = items.where(:project_id => params[:project])
   end
 
-  def json_for_autocomplete(items, method, extra_data=[])
-    items = super(items, method, extra_data)
-    items.uniq! {|e| e[:value] }
-  end
+
 
   def voting_model  
     Discontent::Post

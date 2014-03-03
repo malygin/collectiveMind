@@ -15,11 +15,11 @@
     %label.control-label(for="exampleInputEmail1") Что вас не устраивает (обязательное поле)
     =f.text_area :content, class: 'form-control', rows: 5, placeholder: 'отрицательное действие, явление, установление, черта...'
     %br
-    Когда это происходит?
-    -#f.autocomplete_field :brand_name, autocomplete_brand_name_products_path
-    =f.autocomplete_field :whend, autocomplete_discontent_post_whend_discontent_posts_path,  class: 'form-control',placeholder: 'во время какого события, мероприятия, процесса, ситуации... '
     Где это происходит?
     =f.autocomplete_field :whered, autocomplete_discontent_post_whered_discontent_posts_path,  class: 'form-control',placeholder: 'место, организация, общность, в которой это происходит '
+
+    Когда это происходит?
+    =f.autocomplete_field :whend, autocomplete_discontent_post_whend_discontent_posts_path,  class: 'form-control',placeholder: 'во время какого события, мероприятия, процесса, ситуации... '
 
   .form-group
     = select_tag 'discontent_post[aspect_id]', options_from_collection_for_select(@aspects, "id", "content", @post.aspect.nil? ? 0 :@post.aspect.id), :prompt => "Выберите фрагмент"
