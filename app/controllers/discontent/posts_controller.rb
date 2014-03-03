@@ -11,6 +11,11 @@ class Discontent::PostsController < PostsController
     items = items.where(:project_id => params[:project])
   end
 
+  def json_for_autocomplete(items, method, extra_data=[])
+    items = super(items, method, extra_data)
+    items.uniq! {|e| e[:value] }
+  end
+
   def voting_model  
     Discontent::Post
   end
