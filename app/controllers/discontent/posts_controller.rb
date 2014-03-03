@@ -3,8 +3,8 @@ class Discontent::PostsController < PostsController
   # GET /discontent/posts
   # GET /discontent/posts.json
 
-  autocomplete :discontent_post, :whend, :class_name => 'Discontent::Post' , :full => true, :scopes => [:uniquely_whend]
-  autocomplete :discontent_post, :whered, :class_name => 'Discontent::Post' , :full => true, :scopes => [:uniquely_whered]
+  autocomplete :discontent_post, :whend, :class_name => 'Discontent::Post' , :full => true
+  autocomplete :discontent_post, :whered, :class_name => 'Discontent::Post' , :full => true
 
   def get_autocomplete_items(parameters)
     items = super(parameters)
