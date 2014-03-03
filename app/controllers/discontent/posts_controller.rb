@@ -6,6 +6,11 @@ class Discontent::PostsController < PostsController
   autocomplete :discontent_post, :whend, :class_name => 'Discontent::Post' , :full => true
   autocomplete :discontent_post, :whered, :class_name => 'Discontent::Post' , :full => true
 
+  def get_autocomplete_items(parameters)
+    items = super(parameters)
+    items = items.where(:project_id => params[:project])
+  end
+
   def voting_model  
     Discontent::Post
   end
