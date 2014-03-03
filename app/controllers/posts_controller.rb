@@ -170,7 +170,9 @@ def index
     respond_to do |format|
       if @post.update_attributes(params[name_of_model_for_param])
         unless params[:aspect_id].nil?
-          @post.update_attribute(:aspect_id,params[:aspect_id]) 
+          @post.discontent_aspects.delete_all
+          @post.discontent_aspects << Discontent::Aspect.find(params[:aspect_id])
+
         end
         unless params[:style].nil?
           @post.update_attribute(:style,params[:style])

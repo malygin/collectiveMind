@@ -1,32 +1,27 @@
-- if current_user?(post.user) and post.status == 0
-  - if post.created_at < 2.day.ago
-    -#= link_to 'Послать эксперту', url_for(:action => 'to_expert')
-- if boss? and post.status == 1
-  = link_to 'Отправить на доработку', url_for(:action => 'expert_revision')
-  \|
-  = link_to 'Отклонить', url_for(:action => 'expert_rejection')
-  \|
-  = link_to 'Принять', url_for(:action => 'expert_acceptance_save')
-
-%br
-- if (current_user?(post.user) and post.status  == 0) or boss?
-  - if  post.instance_of? Plan::Post and post.step < 6
-    = link_to 'Продолжить работу над проектом', :action => 'edit', :project => @project, :id => post.id
-
-  - else
-    = link_to 'Редактировать', :action => 'edit', :project => @project, :id => post.id
+-#- if current_user?(post.user) and post.status == 0
+-#  - if post.created_at < 2.day.ago
+-#    -#= link_to 'Послать эксперту', url_for(:action => 'to_expert')
+-#- if boss? and post.status == 1
+-#  = link_to 'Отправить на доработку', url_for(:action => 'expert_revision')
+-#  \|
+-#  = link_to 'Отклонить', url_for(:action => 'expert_rejection')
+-#  \|
+-#  = link_to 'Принять', url_for(:action => 'expert_acceptance_save')
+-#
+-#%br
+- if current_user?(post.user) or boss?
+  = link_to 'Редактировать', :action => 'edit', :project => @project, :id => post.id
   \|
   = link_to 'В архив', {:action => :to_archive, :id => post.id}, :method => :put, :confirm => 'Точно?'
 %br
-= link_to 'Назад', url_for(:action => 'index')
 
--unless post.post_notes.empty?
-  %h1 Переписка с экспертом
-  =render :partial => 'shared/post_note', :collection => post.post_notes
-
-
-
-- if signed_in?
-  = render :partial => 'shared/comment_form', :locals => { :comment => @comment,  :url_link => url_for(:action => 'add_comment')}
-
-= render :partial => 'shared/comment',:collection => post.comments
+-#-unless post.post_notes.empty?
+-#  %h1 Переписка с экспертом
+-#  =render :partial => 'shared/post_note', :collection => post.post_notes
+-#
+-#
+-#
+-#- if signed_in?
+-#  = render :partial => 'shared/comment_form', :locals => { :comment => @comment,  :url_link => url_for(:action => 'add_comment')}
+-#
+-#= render :partial => 'shared/comment',:collection => post.comments

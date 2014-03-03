@@ -1,19 +1,12 @@
 = form_for @post,:url => {:project => @project.id, :action => @post.persisted? ? 'update' : 'create'},  :html => { :class => 'lt_new' } do |f|
-  / -if @post.errors.any?
-  /   #error_explanation
-  /     %h2= "#{pluralize(@post.errors.count, "error")} prohibited this post from being saved:"
-  /     %ul
-  /       - @post.errors.full_messages.each do |msg|
-  /         %li= msg
 
-  %field
-    = f.text_area :content, class: 'post'
+
+  = f.text_area :content, class: 'post',  onkeyup: "activate_button(this);" , style: 'width: 100%; height: 300px;'
   - unless @aspects.nil?
     -#= select_tag 'aspect_id', options_from_collection_for_select(@aspects, 'id', 'content', @post.aspect.nil? ? 0 :@post.aspect.id), :prompt => 'Выберите фрагмент'
 
-
   %br
-
   %br
-  .actions
-    = f.submit "",   id: "Send"
+  .input-group
+    =select_tag 'aspect_id', options_from_collection_for_select(@aspects, 'id', 'content', @post.discontent_aspects.first.id), promt: 'Выберите тему записи', class: 'form-control', style: 'width: 200px;'
+    = f.submit 'Сохранить',  class:'btn btn-success btn-sm', id:'send_post'
