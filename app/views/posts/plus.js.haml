@@ -1,6 +1,13 @@
-$("#counter_#{@id}").html(parseInt($("#counter_#{@id}").html())+1)
-$("#plus_post_#{@id}").effect("highlight", {color: '#f5cecd'}, 1000);
+- unless @against
+  $("#plus_counter_#{@id}").html(parseInt($("#plus_counter_#{@id}").html())+1)
+-else
+  $("#minus_counter_#{@id}").html(parseInt($("#minus_counter_#{@id}").html())+1)
 
+$("#plus_post_#{@id}").effect("highlight", {color: '#f5cecd'}, 1000);
 $("#plus_post_#{@id}").find('span').toggleClass('text-success', 'text-muted')
 $("#plus_post_#{@id}").click(function(e) { return false; });
+
+$("#minus_post_#{@id}").effect("highlight", {color: '#f5cecd'}, 1000);
+$("#minus_post_#{@id}").find('span').toggleClass('text-danger', 'text-muted')
+$("#minus_post_#{@id}").click(function(e) { return false; });
 

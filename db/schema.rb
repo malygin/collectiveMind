@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140304085839) do
+ActiveRecord::Schema.define(:version => 20140304141505) do
 
   create_table "answers", :force => true do |t|
     t.string   "text"
@@ -231,8 +231,9 @@ ActiveRecord::Schema.define(:version => 20140304085839) do
   create_table "discontent_comment_votings", :force => true do |t|
     t.integer  "user_id"
     t.integer  "comment_id"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at",                   :null => false
+    t.datetime "updated_at",                   :null => false
+    t.boolean  "against",    :default => true
   end
 
   add_index "discontent_comment_votings", ["comment_id"], :name => "index_discontent_comment_voitings_on_comment_id"
@@ -269,8 +270,9 @@ ActiveRecord::Schema.define(:version => 20140304085839) do
   create_table "discontent_post_votings", :force => true do |t|
     t.integer  "user_id"
     t.integer  "post_id"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at",                   :null => false
+    t.datetime "updated_at",                   :null => false
+    t.boolean  "against",    :default => true
   end
 
   add_index "discontent_post_votings", ["post_id", "user_id"], :name => "index_discontent_post_voitings_on_post_id_and_user_id"
@@ -688,8 +690,9 @@ ActiveRecord::Schema.define(:version => 20140304085839) do
   create_table "life_tape_comment_votings", :force => true do |t|
     t.integer  "user_id"
     t.integer  "comment_id"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at",                   :null => false
+    t.datetime "updated_at",                   :null => false
+    t.boolean  "against",    :default => true
   end
 
   add_index "life_tape_comment_votings", ["user_id", "comment_id"], :name => "index_life_tape_comment_voitings_on_user_id_and_comment_id"

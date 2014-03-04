@@ -225,7 +225,8 @@ def index
 #todo check if user already voted
   def plus
     post = current_model.find(params[:id])
-    post.post_votings.create(:user => current_user, :post => post)
+    @against =  params[:against] == 'true'
+    post.post_votings.create(:user => current_user, :post => post, :against => @against)
     @id= post.id
     respond_to do |format|
       format.js
@@ -235,14 +236,15 @@ def index
   def plus_comment
     @id = params[:id]
     comment = comment_model.find(@id)
-    comment.comment_votings.create(:user => current_user, :comment => comment)
-    if  (self.current_model  == Discontent::Post) or (self.current_model  == Concept::Post)
-      if comment.comment_votings.count == 3 or current_user.boss?
-        comment.user.add_score(20,:score_a)
-        @project = Core::Project.find(params[:project])
-        comment.user.journals.build(:type_event=>'add_score_anal_'+name_of_model_for_param, :project => @project, :body=>"#{comment.post.id}#comment_#{comment.id}").save!
-      end
-    end
+    @against =  params[:against] == 'true'
+    comment.comment_votings.create(:user => current_user, :comment => comment,  :against => @against)
+    #if  (self.current_model  == Discontent::Post) or (self.current_model  == Concept::Post)
+    #  if comment.comment_votings.count == 3 or current_user.boss?
+    #    comment.user.add_score(20,:score_a)
+    #    @project = Core::Project.find(params[:project])
+    #    comment.user.journals.build(:type_event=>'add_score_anal_'+name_of_model_for_param, :project => @project, :body=>"#{comment.post.id}#comment_#{comment.id}").save!
+    #  end
+    #end
 
     respond_to do |format|
       format.js

@@ -6,8 +6,16 @@ module BasePost  extend ActiveSupport::Concern
     belongs_to :project, :class_name => "Core::Project"
     has_many :post_notes
     has_many :comments
+
    	has_many :post_votings
    	has_many :users, :through => :post_votings
+
+    has_many :post_votings_pro,:conditions => ['against = ?',false], :source => :post_votings, :class_name => 'PostVoting'
+    has_many :users_pro, :through => :post_votings_pro, :source => :user
+
+    has_many :post_votings_against,:conditions => ['against = ?',true], :source => :post_votings, :class_name => 'PostVoting'
+    has_many :users_against, :through => :post_votings_against, :source => :user
+
     scope :for_project, lambda { |project| where(:project_id => project) }
     scope :for_expert, lambda {  where(:status => 1) }
     scope :accepted, lambda {  where(:status => 2) }

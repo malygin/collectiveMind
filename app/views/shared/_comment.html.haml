@@ -4,11 +4,18 @@
     =simple_format(comment.content)
     .pull-right
       - if signed_in? and not comment.users.include?(current_user)
-        =link_to({:action => :plus_comment, :id => comment.id}, :id => comment.id,:remote => true, :method => :put,  id: "plus_comment_#{comment.id}", class:'disabled') do
-          %span.text-success поддержать
-          %span.text-success(id="counter_comment_#{comment.id}")=comment.users.count
+        =link_to({:action => :plus_comment, :id => comment.id, :against => false},  :remote => true, :method => :put,  id: "plus_comment_#{comment.id}", class:'disabled') do
+          %span.text-success За
+          %span.text-success(id="plus_counter_comment_#{comment.id}")=comment.users_pro.count
           %span.glyphicon.glyphicon-thumbs-up.text-success
-      -else
-        %span.text-muted= "поддержать #{comment.users.count}"
-        %span.glyphicon.glyphicon-thumbs-up.text-muted
 
+        =link_to({:action => :plus_comment, :id => comment.id, :against => true, }, :remote => true, :method => :put, id: "minus_comment_#{comment.id}", class:'disabled') do
+          %span.text-danger Против
+          %span.text-danger(id="minus_counter_comment_#{comment.id}")=comment.users_against.count
+          %span.glyphicon.glyphicon-thumbs-down.text-danger
+
+      -else
+        %span.text-muted= "За #{comment.users_pro.count}"
+        %span.glyphicon.glyphicon-thumbs-up.text-muted
+        %span.text-muted= "Против #{comment.users_against.count}"
+        %span.glyphicon.glyphicon-thumbs-down.text-muted
