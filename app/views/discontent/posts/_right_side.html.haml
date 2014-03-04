@@ -23,10 +23,6 @@
                         =  check_box_tag 'aspects_filter[]', asp.id, current_user.discontent_aspects.include?(asp), onclick: "show_filter_aspects_button();", id: "aspect_#{asp.id}"
                         = "#{asp.content} (#{asp.posts.count})"
                 %button.btn.btn-default.inv_element#filter-aspect(type="submit") Сохранить
-.panel.panel-default
-    .panel-heading Помощь
-    .panel-body
-        На этой стадии вы будете выявлять, описывать и обсуждать несовершенства.
-        = link_to 'узнать больше', help_post_path(@project, 2)
+
 
 = render 'shared/discussed_panel', post_star: @post_star, post_dis: @post_dis

@@ -21,11 +21,6 @@
                         = "#{asp.content} (#{asp.life_tape_posts.count})"
                 %button.btn.btn-default.inv_element#filter-aspect(type="submit") Сохранить
 
-.panel.panel-default
-    .panel-heading Помощь
-    .panel-body
-        На этой стадии вы познакомитесь с правилами процедуры, внесете коррективы в список аспектов и пополните базу знаний.
-        = link_to 'узнать больше', help_post_path(@project, 1)
 
 = render 'shared/discussed_panel', post_star: @post_star, post_dis: @post_dis
 
