@@ -217,7 +217,7 @@ def index
     @project = Core::Project.find(params[:project]) 
 
     respond_to do |format|
-      format.html { redirect_to root_model_path(@project) }
+      format.html { redirect_to url_for(:controller => @post.class.to_s.tableize, :action => :index) }
       format.json { head :no_content }
     end
   end

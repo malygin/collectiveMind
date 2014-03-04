@@ -1,8 +1,9 @@
-%span.label.label-g что
-%span.h55=post_content.content
-%br
-%span.label.label-g где
-%span.h55=post_content.whered
-%br
-%span.label.label-g когда
-%span.h55=post_content.whend
+.content{onclick: "location.href='#{discontent_post_path(@project, post_content)}';",style:"cursor: hand;"}
+  %span.label.label-g что
+  %span.h55=post_content.content
+  %br
+  %span.label.label-g где
+  %span.h55=post_content.whered
+  %br
+  %span.label.label-g когда
+  %span.h55=post_content.whend

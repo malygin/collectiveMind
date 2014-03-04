@@ -12,7 +12,9 @@
           %li= msg
 
   .form-group
-    %label.control-label(for="exampleInputEmail1") Что вас не устраивает (обязательное поле)
+    %label.control-label(for="exampleInputEmail1")
+      Что вас не устраивает
+      %span.text-danger *
     =f.text_area :content, class: 'form-control', rows: 5, placeholder: 'отрицательное действие, явление, установление, черта...', onkeyup: "activate_button(this);"
     %br
     Где это происходит?
