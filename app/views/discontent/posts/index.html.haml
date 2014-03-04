@@ -5,10 +5,12 @@
   %a.btn.btn-default.menu_table(href="/project/#{@project.id}/discontent/posts?view=table")
     %span.glyphicon.glyphicon-th
     Таблицей
-- if signed_in?
+- if signed_in? and @project.status == 3
   = link_to '+ Добавить свое несовершенство в список', new_discontent_post_path(@project) , id: 'add_record',  class: 'btn btn-sm btn-success'
   %br
 %br
+-if @project.status == 4
+  %h5 Модераторы сейчас занимаются обработкой несовершенств, объединяя их. Пока вы можете работать на сборе информации или обсуждая предложенные несовершенства
 %small#filter_posts
   = render 'shared/filter_posts', project: @project.id, folder: @folder
 #posts

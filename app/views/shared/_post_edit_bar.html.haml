@@ -9,7 +9,7 @@
 -#  = link_to 'Принять', url_for(:action => 'expert_acceptance_save')
 -#
 -#%br
-- if (current_user?(post.user) and post.status == 0) or boss?
+- if (current_user?(post.user) and post.status == 0 and @project.can_edit_on_current_stage(post)) or boss?
   = link_to 'Редактировать', :action => 'edit', :project => @project, :id => post.id
   \|
   = link_to 'В архив', {:action => :to_archive, :id => post.id}, :method => :put, :confirm => 'Точно?'

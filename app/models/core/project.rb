@@ -43,8 +43,8 @@ class Core::Project < ActiveRecord::Base
   has_many :users, :through => :project_users
 
   LIST_STAGES = {1 => {name: 'Сбор информации', :type_stage => :life_tape_posts, status: [0,1,2]},
-         2 => { name: 'Анализ проблемы', :type_stage =>  :discontent_posts, status: [3,4]},
-         3 => { name: 'Формулирование проблемы', :type_stage => :concept_posts, status: [5,6]},
+         2 => { name: 'Анализ проблемы', :type_stage =>  :discontent_posts, status: [3,4,5,6]},
+         3 => { name: 'Формулирование проблемы', :type_stage => :concept_posts, status: [7,8]},
          4 => { name: 'Проекты', :type_stage =>  :plan_posts, status: [7,8]},
          5 => { name: 'Оценивание', :type_stage =>  :estimate_posts, status: [9,10]}}.freeze
 
@@ -61,6 +61,15 @@ class Core::Project < ActiveRecord::Base
   def redirect_to_current_stage
     sort_list  = LIST_STAGES.select {|k,v| v[:status].include? self.status}
     sort_list.values[0][:type_stage]
+  end
+
+  def can_edit_on_current_stage(p)
+    if p.instance_of? LifeTape::Post
+        return true
+     elsif p.instance_of? Discontent::Post
+       return self.status == 3
+     end
+    return false
   end
 
   def  status_title(status = self.status)

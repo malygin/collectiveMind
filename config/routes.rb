@@ -9,7 +9,6 @@ CollectiveMind::Application.routes.draw do
     get 'aspect/:aspect/posts/'  => 'posts#index'
 
     resources :posts do
-
       member do
         put :add_comment
         put :to_archive
