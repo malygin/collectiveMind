@@ -189,6 +189,7 @@ def index
           flash[:success] = 'Успешно добавлено!'
           redirect_to  :action=>'show', :project => @project, :id => @post.id}
         format.json { head :no_content }
+        format.js
       else
         format.html { render action: "edit" }
         format.json { render json: @post.errors, status: :unprocessable_entity }

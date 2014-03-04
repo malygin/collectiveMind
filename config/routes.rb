@@ -14,7 +14,7 @@ CollectiveMind::Application.routes.draw do
 
       member do
         put :add_comment
-        get :to_archive
+        put :to_archive
         put :censored_comment
         get :plus
         put :plus_comment

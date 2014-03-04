@@ -23,15 +23,16 @@
 
   .form-group
     = select_tag 'discontent_post[aspect_id]', options_from_collection_for_select(@aspects, "id", "content", @post.aspect.nil? ? @aspects.first.id : @post.aspect.id), :prompt => 'Выберите аспект'
+
     %small
       %label.radio-inline
-        %input(type="radio" name="discontent_post[style]" id="optionsRadios1" value="1")
-          %span.text-danger Имеющиеся недостатки
+        = f.radio_button :style,  '1'
+        %span.text-danger Имеющиеся недостатки
       %label.radio-inline
-        %input(type="radio" name="discontent_post[style]" id="optionsRadios1" value="0")
-          %span.text-success Отсутствующие достоинства
+        = f.radio_button :style,  '0'
+        %span.text-success Отсутствующие достоинства
 
-  %button#send_post.btn.btn-primary.disabled(type="submit") Сохранить
+  %button#send_post.btn.btn-primary(type="submit"){:class => ('disabled' unless @post.content?)} Сохранить
   %hr
   %p#discontent_success.text-success Успешно добавлено!
   %p#discontent_warning.text-primary Проверьте не добавлено ли ваше несовершенство другими участниками? Если вы уверены, что нет - нажмите на "Все равно сохранить"

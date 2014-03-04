@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140302183819) do
+ActiveRecord::Schema.define(:version => 20140304085839) do
 
   create_table "answers", :force => true do |t|
     t.string   "text"
@@ -731,6 +731,7 @@ ActiveRecord::Schema.define(:version => 20140302183819) do
     t.boolean  "important",    :default => false
     t.integer  "aspect_id"
     t.boolean  "censored",     :default => false
+    t.integer  "status",       :default => 0
   end
 
   add_index "life_tape_posts", ["category_id"], :name => "index_life_tape_posts_on_category_id"
