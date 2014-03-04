@@ -9,8 +9,6 @@ CollectiveMind::Application.routes.draw do
     get 'aspect/:aspect/posts/'  => 'posts#index'
 
     resources :posts do
-      get :autocomplete_discontent_post_whend, :on => :collection
-      get :autocomplete_discontent_post_whered, :on => :collection
 
       member do
         put :add_comment
@@ -55,6 +53,8 @@ scope '/project/:project' do
     posts_routes
   end
 
+  get :autocomplete_discontent_post_whend_discontent_posts , to: 'discontent/posts#autocomplete_discontent_post_whend'
+  get :autocomplete_discontent_post_whered_discontent_posts , to: 'discontent/posts#autocomplete_discontent_post_whered'
   namespace :discontent do
     resources :aspects
     posts_routes
