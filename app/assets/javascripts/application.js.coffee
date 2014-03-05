@@ -47,3 +47,6 @@ $('#modal_help').on 'hidden.bs.modal', ->
 @activate_modal_send = (el)->
   if $( ".radio input:checked" ).length == 1
     $('#send').removeClass('disabled')
+
+@remove_block = (el)->
+  $('#'+el).remove()

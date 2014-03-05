@@ -48,9 +48,14 @@ module SessionsHelper
 		current_user.expert or current_user.admin or current_user.jury unless current_user.nil?			
 	end
 
+
 	def user?
 		not (current_user.admin? or current_user.expert?)
 	end
+
+  def can_union_discontents?(project)
+    project.status == 4 and boss?
+  end
 
 	def to_bool(arg)
     return true if arg =~ (/^(true|t|yes|y|1)$/i)

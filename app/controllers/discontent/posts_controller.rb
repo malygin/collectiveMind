@@ -46,7 +46,7 @@ class Discontent::PostsController < PostsController
 
   def index
 
-    @post = current_model.new
+    #@post = current_model.new
     @order = params[:order]
     @page = params[:page]
     @folder = :discontent
@@ -142,4 +142,29 @@ class Discontent::PostsController < PostsController
     end
   end
 
+   def union_discontent
+     @project = Core::Project.find(params[:project])
+     @post = Discontent::Post.find(params[:id])
+     @new_post =Discontent::Post.create(status: 2, project: @project, aspect_id: @post.aspect.id, whered: @post.whered, whend: @post.whend)
+     @new_post.save!
+     params[:posts].each do |p|
+       Discontent::Post.find(p).update_attributes(status: 1, discontent_post_id: @new_post.id)
+     end
+     @post.update_attributes(status: 1, discontent_post_id: @new_post.id)
+     redirect_to discontent_posts_path(@project)
+   end
+
+   def unions
+     @project = Core::Project.find(params[:project])
+
+     @posts  = current_model.where(:project_id => @project)
+     .where('aspect_id  IN (?) ' , current_user.aspects(@project.id).collect(&:id))
+     .where(status: 2)
+     .order_by_param(@order)
+     .paginate(:page => params[:page], :per_page => 20)
+
+     respond_to do |format|
+       format.js
+     end
+   end
 end

@@ -7,7 +7,6 @@ CollectiveMind::Application.routes.draw do
     put 'up/:post_id'  => 'posts#up'
     put 'down/:post_id'  => 'posts#down'
     get 'aspect/:aspect/posts/'  => 'posts#index'
-
     resources :posts do
       member do
         put :add_comment
@@ -54,6 +53,8 @@ scope '/project/:project' do
 
   get :autocomplete_discontent_post_whend_discontent_posts , to: 'discontent/posts#autocomplete_discontent_post_whend'
   get :autocomplete_discontent_post_whered_discontent_posts , to: 'discontent/posts#autocomplete_discontent_post_whered'
+  post 'discontent/posts/:id/union', to:  'discontent/posts#union_discontent'
+  get 'discontent/posts/unions', to:  'discontent/posts#unions'
   namespace :discontent do
     resources :aspects
     posts_routes

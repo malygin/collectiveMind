@@ -11,5 +11,10 @@
         %small.text-muted= Russian::strftime(post.created_at,'%d %B %k:%M:%S')
     = render 'shared/post_social_bar2', :post => post
     = render 'shared/post_edit_bar', :post => post
+    - if can_union_discontents?(@project) and post.status == 0
+      = hidden_field_tag 'posts[]', post.id
+      .pull-right
+        %a.btn.btn-xs.btn-danger(onclick="remove_block('post_#{post.id}');" ) Удалить из объединения
+
 
 

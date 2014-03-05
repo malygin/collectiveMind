@@ -21,7 +21,7 @@ module BasePost  extend ActiveSupport::Concern
     scope :accepted, lambda {  where(:status => 2) }
     scope :archive, lambda { where(:status => 3) }
 
-    validates :content, :presence => true
+    #validates :content, :presence => true
     scope :created_order,order("#{table_name}.created_at DESC")
     scope :popular_posts, order('number_views DESC')
 

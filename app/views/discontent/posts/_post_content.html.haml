@@ -1,7 +1,11 @@
 .content{onclick: "location.href='#{discontent_post_path(@project, post_content)}';",style:"cursor: hand;"}
   %span.label.label-g что
-  %span.h55=post_content.content
-  %br
+  - if post_content.status == 2
+    -post_content.discontent_posts.each do |dp|
+      %li=dp.content
+  -else
+    %span.h55=post_content.content
+    %br
   %span.label.label-g где
   %span.h55=post_content.whered
   %br

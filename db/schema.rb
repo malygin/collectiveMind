@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140304141505) do
+ActiveRecord::Schema.define(:version => 20140305121459) do
 
   create_table "answers", :force => true do |t|
     t.string   "text"
@@ -284,15 +284,16 @@ ActiveRecord::Schema.define(:version => 20140304141505) do
     t.text     "whend"
     t.text     "whered"
     t.integer  "user_id"
-    t.integer  "status",       :default => 0
-    t.datetime "created_at",                      :null => false
-    t.datetime "updated_at",                      :null => false
-    t.integer  "number_views", :default => 0
+    t.integer  "status",             :default => 0
+    t.datetime "created_at",                            :null => false
+    t.datetime "updated_at",                            :null => false
+    t.integer  "number_views",       :default => 0
     t.integer  "project_id"
     t.integer  "aspect_id"
     t.integer  "replace_id"
     t.integer  "style"
-    t.boolean  "censored",     :default => false
+    t.boolean  "censored",           :default => false
+    t.integer  "discontent_post_id"
   end
 
   add_index "discontent_posts", ["aspect_id"], :name => "index_discontent_posts_on_aspect_id"
