@@ -1,6 +1,29 @@
--#.row
--#  .col-md-6.col-md-offset-3
--#    %h1 Технические работы на сайте.
+-#!!!
+-#/[if IE 8] <html lang="en" class="ie8">
+-#/[if IE 9] <html lang="en" class="ie9">
+-#/ [if !IE]><!
+-#%html{:lang => "en"}
+-#  / <![endif]
+-#  %head
+-#    %title Unify | Welcome...
+-#    / Meta
+-#    %meta{:charset => "utf-8"}/
+-#    %meta{:content => "width=device-width, initial-scale=1.0", :name => "viewport"}/
+-#    %meta{:content => "", :name => "description"}/
+-#    %meta{:content => "", :name => "author"}/
+-#    / CSS Global Compulsory
+-#    %link{:href => "assets/plugins/bootstrap/css/bootstrap.css", :rel => "stylesheet"}/
+-#    %link{:href => "assets/css/style.css", :rel => "stylesheet"}/
+-#    %link{:href => "assets/css/headers/header1.css", :rel => "stylesheet"}/
+-#    %link{:href => "assets/css/responsive.css", :rel => "stylesheet"}/
+-#    %link{:href => "favicon.ico", :rel => "shortcut icon"}/
+-#    / CSS Implementing Plugins
+-#    %link{:href => "assets/plugins/font-awesome/css/font-awesome.css", :rel => "stylesheet"}/
+-#    %link{:href => "assets/plugins/flexslider/flexslider.css", :rel => "stylesheet"}/
+-#    %link{:href => "assets/plugins/parallax-slider/css/parallax-slider.css", :rel => "stylesheet"}/
+-#    / CSS Theme
+-#    %link#style_color{:href => "assets/css/themes/default.css", :rel => "stylesheet"}/
+-#    %link#style_color-header-1{:href => "assets/css/themes/headers/default.css", :rel => "stylesheet"}/
 
 / === Style Switcher ===
 -#%i.style-switcher-btn.icon-cogs.hidden-xs
@@ -44,11 +67,7 @@
         %a{:href => "#"} Help
       %li.devider
       %li
-        - if signed_in?
-          = link_to "Logout", destroy_user_session_path, :method => :delete,  class: "username"
-
-        -else
-          = link_to "Login", "/users/sign_in", class: "exit"
+        %a{:href => "#"} Login
 / /top
 / === End Top ===
 / === Header ===
@@ -63,7 +82,7 @@
           %span.icon-bar
           %span.icon-bar
         %a.navbar-brand{:href => "#"}
-          %img#logo-header{:alt => "Logo", :src => "assets/img/logo1-blue.png"}/
+          %img#logo-header{:alt => "Logo", :height => "40px", :src => "assets/img/massdecision-logo.png"}/
       / Collect the nav links, forms, and other content for toggling
       .collapse.navbar-collapse.navbar-responsive-collapse
         %ul.nav.navbar-nav.navbar-right
@@ -234,54 +253,52 @@
 / === Slider ===
 .slider-inner
   #da-slider.da-slider
-    -#.da-slide
-    -#  %h2
-    -#    %i CLEAN &amp; FRESH
-    -#    %br/
-    -#    %i FULLY RESPONSIVE
-    -#    %br/
-    -#    %i DESIGN
-    -#  %p
-    -#    %i Lorem ipsum dolor amet
-    -#    %br/
-    -#    %i tempor incididunt ut
-    -#    %br/
-    -#    %i veniam omnis
-    -#  .da-img
-    -#    -#%img{:alt => "", :src => "assets/plugins/parallax-slider/img/1.png"}/
-    -#    %img{:alt => "", :src => "assets/img/1.png"}/
-    -#.da-slide
-    -#  %h2
-    -#    %i RESPONSIVE VIDEO
-    -#    %br/
-    -#    %i SUPPORT AND
-    -#    %br/
-    -#    %i MANY MORE
-    -#  %p
-    -#    %i Lorem ipsum dolor amet
-    -#    %br/
-    -#    %i tempor incididunt ut
-    -#  .da-img
-    -#    %iframe{:allowfullscreen => "", :frameborder => "0", :height => "300", :mozallowfullscreen => "", :src => "http://player.vimeo.com/video/47911018", :webkitallowfullscreen => "", :width => "530"}
-    -#.da-slide
-    -#  %h2
-    -#    %i USING BEST WEB
-    -#    %br/
-    -#    %i SOLUTIONS WITH
-    -#    %br/
-    -#    %i HTML5/CSS3
-    -#  %p
-    -#    %i Lorem ipsum dolor amet
-    -#    %br/
-    -#    %i tempor incididunt ut
-    -#    %br/
-    -#    %i veniam omnis
-    -#  .da-img
-    -#    -#%img{:alt => "image01", :src => "assets/plugins/parallax-slider/img/html5andcss3.png"}/
-    -#    %img{:alt => "image01", :src => "assets/img/html5andcss3.png"}/
-    -#.da-arrows
-    -#  %span.da-arrows-prev
-    -#  %span.da-arrows-next
+    .da-slide
+      %h2
+        %i MASS DECISION
+        %br/
+        %i ГУМАНИТАРНАЯ
+        %br/
+        %i ИНТЕРНЕТ-ТЕХНОЛОГИЯ
+      %p
+        %i Новый уровень мышления
+        %br/
+        %i для выработки стратегических решений
+        %br/
+        %i любой сложности
+      .da-img
+        %img{:alt => "", :src => "assets/img/1.png"}/
+    .da-slide
+      %h2
+        %i RESPONSIVE VIDEO
+        %br/
+        %i SUPPORT AND
+        %br/
+        %i MANY MORE
+      %p
+        %i Lorem ipsum dolor amet
+        %br/
+        %i tempor incididunt ut
+      .da-img
+        %iframe{:allowfullscreen => "", :frameborder => "0", :height => "300", :mozallowfullscreen => "", :src => "http://player.vimeo.com/video/47911018", :webkitallowfullscreen => "", :width => "530"}
+    .da-slide
+      %h2
+        %i USING BEST WEB
+        %br/
+        %i SOLUTIONS WITH
+        %br/
+        %i HTML5/CSS3
+      %p
+        %i Lorem ipsum dolor amet
+        %br/
+        %i tempor incididunt ut
+        %br/
+        %i veniam omnis
+      .da-img
+        %img{:alt => "image01", :src => "assets/img/html5andcss3.png"}/
+    .da-arrows
+      %span.da-arrows-prev
+      %span.da-arrows-next
   / /da-slider
 / /slider
 / === End Slider ===
@@ -290,10 +307,12 @@
   .container
     .row
       .col-md-9
-        %span Unify is a clean and fully responsive incredible Template.
-        %p At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi  vehicula sem ut volutpat. Ut non libero magna fusce condimentum eleifend enim a feugiat.
+        %span Что такое MASSDECISION?
+        %p
+          MASSDECISION - это интернет-воплощение одной из наиболее успешных моделей мышления и выработки решений, модели рационального мышления. А именно процедурной рациональности.
+          Это гуманитарная интернет-технология для демократичной выработки стратегических решений в массовых сообществах и подготовки будущих исполнителей к их реализации.
       .col-md-3
-        %a.btn-buy.hover-effect{:href => "#"} Purchase Now
+        %a.btn-buy.hover-effect{:href => "#"} Подробнее о проекте
 / /row
 / End Purchase Block
 / === Content Part ===
@@ -301,117 +320,140 @@
   / Service Blocks
   .row
     .col-md-4
-      .service
+      .service{:style => "border: 1px solid #97447A"}
         %i.icon-resize-small.service-icon
         .desc
-          %h4 Fully Responsive
-          %p Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus etiam sem...
+          %h4 Максимальная эффективность
+          %p Вовлечение в разработку решения будущих реализаторов значительно повышает их заинтересованность в успешном внедрении решения
     .col-md-4
-      .service
+      .service{:style => "border: 1px solid #97447A"}
         %i.icon-cogs.service-icon
         .desc
-          %h4 HTML5 + CSS3
-          %p Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus etiam sem...
+          %h4 Процедурная рациональность
+          %p Деловая игра, построенная по принципу "от простого к сложному" повышает заинтересованность в поиске рациональных решений
     .col-md-4
-      .service
+      .service{:style => "border: 1px solid #97447A"}
         %i.icon-plane.service-icon
         .desc
-          %h4 Launch Ready
-          %p Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus etiam sem...
+          %h4 Успешный запуск проектов
+          %p Проекты, разработанные и выработанные в процедурах MASSDECISION имеют высокую вероятность успешной реализации
   / /row
   / End Service Blokcs
-  / Recent Works
-  .headline
-    %h2 Recent Works
-  .row
-    .col-md-3.col-sm-6
-      .thumbnails.thumbnail-style.thumbnail-kenburn
-        .thumbnail-img
-          .overflow-hidden
-            %img.img-responsive{:alt => "", :src => "assets/img/main/2.jpg"}/
-          %a.btn-more.hover-effect{:href => "#"} read more +
-        .caption
-          %h3
-            %a.hover-effect{:href => "#"} Project One
-          %p Donec id elit non mi porta gravida at eget metus. Fusce dapibus, justo sit amet risus etiam porta sem.
-    .col-md-3.col-sm-6
-      .thumbnails.thumbnail-style.thumbnail-kenburn
-        .thumbnail-img
-          .overflow-hidden
-            %img.img-responsive{:alt => "", :src => "assets/img/main/3.jpg"}/
-          %a.btn-more.hover-effect{:href => "#"} read more +
-        .caption
-          %h3
-            %a.hover-effect{:href => "#"} Project Two
-          %p Donec id elit non mi porta gravida at eget metus. Fusce dapibus, justo sit amet risus etiam porta sem.
-    .col-md-3.col-sm-6
-      .thumbnails.thumbnail-style.thumbnail-kenburn
-        .thumbnail-img
-          .overflow-hidden
-            %img.img-responsive{:alt => "", :src => "assets/img/main/9.jpg"}/
-          %a.btn-more.hover-effect{:href => "#"} read more +
-        .caption
-          %h3
-            %a.hover-effect{:href => "#"} Project Three
-          %p Donec id elit non mi porta gravida at eget metus. Fusce dapibus, justo sit amet risus etiam porta sem.
-    .col-md-3.col-sm-6
-      .thumbnails.thumbnail-style.thumbnail-kenburn
-        .thumbnail-img
-          .overflow-hidden
-            %img.img-responsive{:alt => "", :src => "assets/img/main/10.jpg"}/
-          %a.btn-more.hover-effect{:href => "#"} read more +
-        .caption
-          %h3
-            %a.hover-effect{:href => "#"} Project Four
-          %p Donec id elit non mi porta gravida at eget metus. Fusce dapibus, justo sit amet risus etiam porta sem.
-  / /row
+  /
+    Recent Works
+    <div class="headline"><h2>Recent Works</h2></div>
+    <div class="row">
+    <div class="col-md-3 col-sm-6">
+    <div class="thumbnails thumbnail-style thumbnail-kenburn">
+    <div class="thumbnail-img">
+    <div class="overflow-hidden">
+    <img class="img-responsive" src="assets/img/main/2.jpg" alt="" />
+    </div>
+    <a class="btn-more hover-effect" href="#">read more +</a>
+    </div>
+    <div class="caption">
+    <h3><a class="hover-effect" href="#">Project One</a></h3>
+    <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, justo sit amet risus etiam porta sem.</p>
+    </div>
+    </div>
+    </div>
+    <div class="col-md-3 col-sm-6">
+    <div class="thumbnails thumbnail-style thumbnail-kenburn">
+    <div class="thumbnail-img">
+    <div class="overflow-hidden">
+    <img class="img-responsive" src="assets/img/main/3.jpg" alt="" />
+    </div>
+    <a class="btn-more hover-effect" href="#">read more +</a>
+    </div>
+    <div class="caption">
+    <h3><a class="hover-effect" href="#">Project Two</a></h3>
+    <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, justo sit amet risus etiam porta sem.</p>
+    </div>
+    </div>
+    </div>
+    <div class="col-md-3 col-sm-6">
+    <div class="thumbnails thumbnail-style thumbnail-kenburn">
+    <div class="thumbnail-img">
+    <div class="overflow-hidden">
+    <img class="img-responsive" src="assets/img/main/9.jpg" alt="" />
+    </div>
+    <a class="btn-more hover-effect" href="#">read more +</a>
+    </div>
+    <div class="caption">
+    <h3><a class="hover-effect" href="#">Project Three</a></h3>
+    <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, justo sit amet risus etiam porta sem.</p>
+    </div>
+    </div>
+    </div>
+    <div class="col-md-3 col-sm-6">
+    <div class="thumbnails thumbnail-style thumbnail-kenburn">
+    <div class="thumbnail-img">
+    <div class="overflow-hidden">
+    <img class="img-responsive" src="assets/img/main/10.jpg" alt="" />
+    </div>
+    <a class="btn-more hover-effect" href="#">read more +</a>
+    </div>
+    <div class="caption">
+    <h3><a class="hover-effect" href="#">Project Four</a></h3>
+    <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, justo sit amet risus etiam porta sem.</p>
+    </div>
+    </div>
+    </div>
+    </div><!--/row
   / End Recent Works
   / Info Blokcs
+  %br/
   .row
     / Welcome Block
     .col-md-8
       .headline
-        %h2 Welcome To Unify
+        %h2 Несколько слов о MASSDECISION
       .row
         .col-sm-4
           %img.img-responsive.margin-bottom-20{:alt => "", :src => "assets/img/main/6.jpg"}/
         .col-sm-8
-          %p Unify is an incredibly beautiful responsive Bootstrap Template for corporate and creative professionals. It works on all major web browsers, tablets and phone.
+          %p
+            MASSDECISION - это интернет-воплощение одной из наиболее успешных моделей мышления и выработки решений, модели рационального мышления. А именно процедурной рациональности.
+            Это гуманитарная интернет-технология для демократичной выработки стратегических решений в массовых сообществах и подготовки будущих исполнителей к их реализации.
+            = succeed "\u{410}" do
+              %br/
+            это  обеспечение максимально высокого качества выработанного решения при вовлечении максимального числа участников в процесс его выработки. Решение, выработанное в ходе рациональной процедуры, лишено следующих недостатков:
+            \.
           %ul.list-unstyled.margin-bottom-20
             %li
               %i.icon-ok.color-green
-              Donec id elit non mi porta gravida
+              Кратковременное выгадывание без учета долгосрочной перспективы.
             %li
               %i.icon-ok.color-green
-              Corporate and Creative
+              Склонность к негативному целеполаганию.
             %li
               %i.icon-ok.color-green
-              Responsive Bootstrap Template
+              Несклонность к контр-негативному анализу решения.
             %li
               %i.icon-ok.color-green
-              Corporate and Creative
+              Отсутствие восприятия множественности вариантов решения как ценности.
       %blockquote.hero-unify
-        %p Award winning digital agency. We bring a personal and effective approach to every project we work on, which is why. Unify is an incredibly beautiful responsive Bootstrap Template for corporate professionals.
-        %small CEO, Jack Bour
+        %p "Значительные проблемы, с которыми мы сталкиваемся, не могут быть решены на том же уровне мышления, на котором они были созданы."
+        %small А. Эйнштейн
     / /col-md-8
     / Latest Shots
     .col-md-4
       .headline
-        %h2 Latest Shots
+        %h2 Наши процедуры
       #myCarousel.carousel.slide.carousel-v1
         .carousel-inner
           .item.active
             %img{:alt => "", :src => "assets/img/main/5.jpg"}/
             .carousel-caption
-              %p Facilisis odio, dapibus ac justo acilisis gestinas.
+              %p Повышение спроса на заочное образование в ИРБИСе.
           .item
             %img{:alt => "", :src => "assets/img/main/4.jpg"}/
             .carousel-caption
-              %p Cras justo odio, dapibus ac facilisis into egestas.
+              %p Повышение спроса на дистанционное образование в СГУ.
           .item
             %img{:alt => "", :src => "assets/img/main/3.jpg"}/
             .carousel-caption
-              %p Justo cras odio apibus ac afilisis lingestas de.
+              %p Повышение спроса на печеньки на Сенном после пожара.
         .carousel-arrow
           %a.left.carousel-control{"data-slide" => "prev", :href => "#myCarousel"}
             %i.icon-angle-left
@@ -421,78 +463,78 @@
   / /row
   / End Info Blokcs
   / Our Clients
-  #clients-flexslider1.flexslider1.home1.clients1
+  #clients-flexslider.flexslider.home.clients
     .headline
-      %h2 Our Clients
-    %ul.slides1.list-inline.list-unstyled
+      %h2 Наши клиенты
+    %ul.slides
       %li
         %a{:href => "#"}
-          -#%img{:alt => "", :src => "assets/img/clients/hp_grey.png"}/
+          %img{:alt => "", :src => "assets/img/clients/hp_grey.png"}/
           %img.color-img{:alt => "", :src => "assets/img/clients/hp.png"}/
       %li
         %a{:href => "#"}
-          -#%img{:alt => "", :src => "assets/img/clients/igneus_grey.png"}/
+          %img{:alt => "", :src => "assets/img/clients/igneus_grey.png"}/
           %img.color-img{:alt => "", :src => "assets/img/clients/igneus.png"}/
       %li
         %a{:href => "#"}
-          -#%img{:alt => "", :src => "assets/img/clients/vadafone_grey.png"}/
+          %img{:alt => "", :src => "assets/img/clients/vadafone_grey.png"}/
           %img.color-img{:alt => "", :src => "assets/img/clients/vadafone.png"}/
       %li
         %a{:href => "#"}
-          -#%img{:alt => "", :src => "assets/img/clients/walmart_grey.png"}/
+          %img{:alt => "", :src => "assets/img/clients/walmart_grey.png"}/
           %img.color-img{:alt => "", :src => "assets/img/clients/walmart.png"}/
       %li
         %a{:href => "#"}
-          -#%img{:alt => "", :src => "assets/img/clients/shell_grey.png"}/
+          %img{:alt => "", :src => "assets/img/clients/shell_grey.png"}/
           %img.color-img{:alt => "", :src => "assets/img/clients/shell.png"}/
       %li
         %a{:href => "#"}
-          -#%img{:alt => "", :src => "assets/img/clients/natural_grey.png"}/
+          %img{:alt => "", :src => "assets/img/clients/natural_grey.png"}/
           %img.color-img{:alt => "", :src => "assets/img/clients/natural.png"}/
       %li
         %a{:href => "#"}
-          -#%img{:alt => "", :src => "assets/img/clients/aztec_grey.png"}/
+          %img{:alt => "", :src => "assets/img/clients/aztec_grey.png"}/
           %img.color-img{:alt => "", :src => "assets/img/clients/aztec.png"}/
-      -#%li
-      -#  %a{:href => "#"}
-      -#    -#%img{:alt => "", :src => "assets/img/clients/gamescast_grey.png"}/
-      -#    %img.color-img{:alt => "", :src => "assets/img/clients/gamescast.png"}/
-      -#%li
-      -#  %a{:href => "#"}
-      -#    -#%img{:alt => "", :src => "assets/img/clients/cisco_grey.png"}/
-      -#    %img.color-img{:alt => "", :src => "assets/img/clients/cisco.png"}/
-      -#%li
-      -#  %a{:href => "#"}
-      -#    -#%img{:alt => "", :src => "assets/img/clients/everyday_grey.png"}/
-      -#    %img.color-img{:alt => "", :src => "assets/img/clients/everyday.png"}/
-      -#%li
-      -#  %a{:href => "#"}
-      -#    -#%img{:alt => "", :src => "assets/img/clients/cocacola_grey.png"}/
-      -#    %img.color-img{:alt => "", :src => "assets/img/clients/cocacola.png"}/
-      -#%li
-      -#  %a{:href => "#"}
-      -#    -#%img{:alt => "", :src => "assets/img/clients/spinworkx_grey.png"}/
-      -#    %img.color-img{:alt => "", :src => "assets/img/clients/spinworkx.png"}/
-      -#%li
-      -#  %a{:href => "#"}
-      -#    -#%img{:alt => "", :src => "assets/img/clients/shell_grey.png"}/
-      -#    %img.color-img{:alt => "", :src => "assets/img/clients/shell.png"}/
-      -#%li
-      -#  %a{:href => "#"}
-      -#    -#%img{:alt => "", :src => "assets/img/clients/natural_grey.png"}/
-      -#    %img.color-img{:alt => "", :src => "assets/img/clients/natural.png"}/
-      -#%li
-      -#  %a{:href => "#"}
-      -#    -#%img{:alt => "", :src => "assets/img/clients/gamescast_grey.png"}/
-      -#    %img.color-img{:alt => "", :src => "assets/img/clients/gamescast.png"}/
-      -#%li
-      -#  %a{:href => "#"}
-      -#    -#%img{:alt => "", :src => "assets/img/clients/everyday_grey.png"}/
-      -#    %img.color-img{:alt => "", :src => "assets/img/clients/everyday.png"}/
-      -#%li
-      -#  %a{:href => "#"}
-      -#    -#%img{:alt => "", :src => "assets/img/clients/spinworkx_grey.png"}/
-      -#    %img.color-img{:alt => "", :src => "assets/img/clients/spinworkx.png"}/
+      %li
+        %a{:href => "#"}
+          %img{:alt => "", :src => "assets/img/clients/gamescast_grey.png"}/
+          %img.color-img{:alt => "", :src => "assets/img/clients/gamescast.png"}/
+      %li
+        %a{:href => "#"}
+          %img{:alt => "", :src => "assets/img/clients/cisco_grey.png"}/
+          %img.color-img{:alt => "", :src => "assets/img/clients/cisco.png"}/
+      %li
+        %a{:href => "#"}
+          %img{:alt => "", :src => "assets/img/clients/everyday_grey.png"}/
+          %img.color-img{:alt => "", :src => "assets/img/clients/everyday.png"}/
+      %li
+        %a{:href => "#"}
+          %img{:alt => "", :src => "assets/img/clients/cocacola_grey.png"}/
+          %img.color-img{:alt => "", :src => "assets/img/clients/cocacola.png"}/
+      %li
+        %a{:href => "#"}
+          %img{:alt => "", :src => "assets/img/clients/spinworkx_grey.png"}/
+          %img.color-img{:alt => "", :src => "assets/img/clients/spinworkx.png"}/
+      %li
+        %a{:href => "#"}
+          %img{:alt => "", :src => "assets/img/clients/shell_grey.png"}/
+          %img.color-img{:alt => "", :src => "assets/img/clients/shell.png"}/
+      %li
+        %a{:href => "#"}
+          %img{:alt => "", :src => "assets/img/clients/natural_grey.png"}/
+          %img.color-img{:alt => "", :src => "assets/img/clients/natural.png"}/
+      %li
+        %a{:href => "#"}
+          %img{:alt => "", :src => "assets/img/clients/gamescast_grey.png"}/
+          %img.color-img{:alt => "", :src => "assets/img/clients/gamescast.png"}/
+      %li
+        %a{:href => "#"}
+          %img{:alt => "", :src => "assets/img/clients/everyday_grey.png"}/
+          %img.color-img{:alt => "", :src => "assets/img/clients/everyday.png"}/
+      %li
+        %a{:href => "#"}
+          %img{:alt => "", :src => "assets/img/clients/spinworkx_grey.png"}/
+          %img.color-img{:alt => "", :src => "assets/img/clients/spinworkx.png"}/
   / /flexslider
   / End Our Clients
 / /container
@@ -504,49 +546,49 @@
       .col-md-4.md-margin-bottom-40
         / About
         .headline
-          %h2 About
-        %p.margin-bottom-25.md-margin-bottom-40 Unify is an incredibly beautiful responsive Bootstrap Template for corporate and creative professionals.
+          %h2 О нас
+        %p.margin-bottom-25.md-margin-bottom-40 Мы не решим ваши проблемы и не ответим на насущные вопросы. Мы дадим Вам ключ от нового уровня мышления, чтобы Вы сделали это сами.
         / Monthly Newsletter
         .headline
-          %h2 Monthly Newsletter
-        %p Subscribe to our newsletter and stay up to date with the latest news and deals!
+          %h2 Следите за новостями
+        %p Укажите почту, чтобы получать самые свежие новости проекта.
         %form.footer-subsribe
           .input-group
             %input.form-control{:placeholder => "Email Address", :type => "text"}/
             %span.input-group-btn
-              %button.btn-u{:type => "button"} Subscribe
+              %button.btn-u{:type => "button"} Подписаться
           / /input-group
       / /col-md-4
       .col-md-4.md-margin-bottom-40
         .posts
           .headline
-            %h2 Recent Blog Entries
+            %h2 Новости процедур
           %dl.dl-horizontal
             %dt
               %a{:href => "#"}
                 %img{:alt => "", :src => "assets/img/sliders/elastislide/6.jpg"}/
             %dd
               %p
-                %a{:href => "#"} Anim moon officia Unify is an incredibly beautiful responsive Bootstrap Template
+                %a{:href => "#"} Удалена процедура "Повышение спроса на работу в Саратове"
           %dl.dl-horizontal
             %dt
               %a{:href => "#"}
                 %img{:alt => "", :src => "assets/img/sliders/elastislide/10.jpg"}/
             %dd
               %p
-                %a{:href => "#"} Anim moon officia Unify is an incredibly beautiful responsive Bootstrap Template
+                %a{:href => "#"} Закрыта процедура "Повышение спроса на работу в Саратове"
           %dl.dl-horizontal
             %dt
               %a{:href => "#"}
                 %img{:alt => "", :src => "assets/img/sliders/elastislide/11.jpg"}/
             %dd
               %p
-                %a{:href => "#"} Anim moon officia Unify is an incredibly beautiful responsive Bootstrap Template
+                %a{:href => "#"} Запущена процедура "Повышение спроса на работу в Саратове"
       / /col-md-4
       .col-md-4
         / Monthly Newsletter
         .headline
-          %h2 Contact Us
+          %h2 Контакты
         %address.md-margin-bottom-40
           25, Lorem Lis Street, Orange
           %br/
@@ -560,23 +602,22 @@
           %a{:href => "mailto:info@anybiz.com"} info@anybiz.com
         / Stay Connected
         .headline
-          %h2 Stay Connected
+          %h2 Оставайтесь на связи
         %ul.social-icons
-          -#%li
-          -#  %a.social_rss{"data-original-title" => "Feed", :href => "#"}
-          -#%li
-          -#  %a.social_facebook{"data-original-title" => "Facebook", :href => "#"}
-          -#%li
-          -#  %a.social_twitter{"data-original-title" => "Twitter", :href => "#"}
-          -#%li
-          -#  %a.social_googleplus{"data-original-title" => "Goole Plus", :href => "#"}
-          -#%li
-          -#  %a.social_pintrest{"data-original-title" => "Pinterest", :href => "#"}
-          -#%li
-          -#  %a.social_linkedin{"data-original-title" => "Linkedin", :href => "#"}
-          -#%li
-          -#  %a.social_vimeo{"data-original-title" => "Vimeo", :href => "#"}
-
+          %li
+            %a.social_rss{"data-original-title" => "Feed", :href => "#"}
+          %li
+            %a.social_facebook{"data-original-title" => "Facebook", :href => "#"}
+          %li
+            %a.social_twitter{"data-original-title" => "Twitter", :href => "#"}
+          %li
+            %a.social_googleplus{"data-original-title" => "Goole Plus", :href => "#"}
+          %li
+            %a.social_pintrest{"data-original-title" => "Pinterest", :href => "#"}
+          %li
+            %a.social_linkedin{"data-original-title" => "Linkedin", :href => "#"}
+          %li
+            %a.social_vimeo{"data-original-title" => "Vimeo", :href => "#"}
       / /col-md-4
     / /row
   / /container
@@ -594,9 +635,29 @@
           %a{:href => "#"} Terms of Service
       .col-md-6
         %a{:href => "#"}
-          %img#logo-footer.pull-right{:alt => "", :src => "assets/img/logo2-blue.png"}/
+          %img#logo-footer.pull-right{:alt => "", :height => "40px", :src => "assets/img/massdecision-logo-light.png"}/
     / /row
   / /container
 / /copyright
 / === End Copyright ===
 / JS Global Compulsory
+-#%script{:src => "assets/plugins/jquery-1.10.2.min.js", :type => "text/javascript"}
+-#%script{:src => "assets/plugins/jquery-migrate-1.2.1.min.js", :type => "text/javascript"}
+-#%script{:src => "assets/plugins/bootstrap/js/bootstrap.min.js", :type => "text/javascript"}
+-#%script{:src => "assets/plugins/hover-dropdown.min.js", :type => "text/javascript"}
+-#%script{:src => "assets/plugins/back-to-top.js", :type => "text/javascript"}
+-#/ JS Implementing Plugins
+-#%script{:src => "assets/plugins/flexslider/jquery.flexslider-min.js", :type => "text/javascript"}
+-#%script{:src => "assets/plugins/parallax-slider/js/modernizr.js", :type => "text/javascript"}
+-#%script{:src => "assets/plugins/parallax-slider/js/jquery.cslider.js", :type => "text/javascript"}
+-#/ JS Page Level
+-#%script{:src => "assets/js/app.js", :type => "text/javascript"}
+-#%script{:src => "assets/js/pages/index.js", :type => "text/javascript"}
+-#:javascript
+-#  jQuery(document).ready(function() {
+-#    	App.init();
+-#      App.initSliders();
+-#      Index.initParallaxSlider();
+-#  });
+-#/[if lt IE 9]
+-#  <script src="assets/plugins/respond.js"></script>
