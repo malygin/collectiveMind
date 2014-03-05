@@ -8,20 +8,7 @@
 
 /*Import app.css*/
 @import url(app.css);
-.da-slider {
-    width: 100%;
-    height: 427px;
-    position: relative;
-    margin: 0 auto;
-    overflow: hidden;
-    background: transparent url(bg.jpg) repeat 0% 0%;
-    box-shadow: 0px 1px 1px rgba(0,0,0,0.2), 0px -2px 1px #fff;
-    -webkit-transition: background-position 1.4s ease-in-out 0.3s;
-    -moz-transition: background-position 1.4s ease-in-out 0.3s;
-    -o-transition: background-position 1.4s ease-in-out 0.3s;
-    -ms-transition: background-position 1.4s ease-in-out 0.3s;
-    transition: background-position 1.4s ease-in-out 0.3s;
-}
+
 /*Import Google Fonts*/
 @import url(http://fonts.googleapis.com/css?family=Monda:400,700);
 @import url(http://fonts.googleapis.com/css?family=Open+Sans);
@@ -58,7 +45,6 @@
 	padding: 30px 0;
 	margin-bottom: 30px;
 	box-shadow: inset 0 0 4px #eee;
-	/*background: url(../img/breadcrumbs.png) repeat;*/
 }
 .purchase p {
 	margin-bottom: 0;
@@ -251,7 +237,7 @@ blockquote:hover {
 	color: #dadada;
 	margin-top: 40px;
 	padding: 20px 0 30px;
-	background: #585f69;
+	background: #552143;
 }
 
 .footer.margin-top-0 {
@@ -334,8 +320,8 @@ blockquote:hover {
 .copyright {
 	font-size: 12px;
 	padding: 11px 0 7px;
-	background: #3e4753;
-	border-top: solid 1px #777;	
+	background: #380a2e;
+	border-top: solid 1px #70054b;	
 }
 
 .copyright p {
@@ -572,7 +558,7 @@ a.thumbnail {
 .breadcrumbs {
 	padding: 10px 0 6px;
 	box-shadow: inset 0 0 4px #eee;
-	/*background: url(../img/breadcrumbs.png) repeat;*/
+	background: url(/img/breadcrumbs.png) repeat;
 }
 .breadcrumbs h1 {
 	color: #686868;
@@ -1330,7 +1316,7 @@ ul.blog-tags a:hover i {
 
 .slider-promo-info-bg {
 	padding: 25px 20px 20px;
-	/*background: url(../img/bg-black.png) repeat;*/
+	background: url(/img/bg-black.png) repeat;
 }
 
 .slider-promo-info span.big-size { 

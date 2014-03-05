@@ -113,7 +113,7 @@ img.img-circle {
    cursor:pointer;
    padding:6px 13px;
    position:relative;
-   background:#72c02c;
+   background:#97447A;
    display:inline-block;
    color:#fff !important;
    text-decoration:none !important;
@@ -672,7 +672,7 @@ a.read-more:hover {
 }
 
 .overlay-zoom .zoom-icon {
-   background-image:url("../img/overlay-icon.png");
+   background-image:url("/img/overlay-icon.png");
    background-color: #000;
    background-repeat: no-repeat;
    background-position: 50%;
@@ -706,7 +706,7 @@ a.read-more:hover {
 /*Revolution Slider
 ------------------------------------*/
 .bg-black-opacity {
-   background: url(../img/sliders/revolution/bg-text.png) repeat;
+   background: url(/img/bg-text.png) repeat;
    padding: 7px;
    text-shadow: none !important;
 }

@@ -136,7 +136,7 @@
 }
 
 .header .navbar-default .navbar-nav > .active > a {
-	color: #72c02c;
+	color: #97447A;
 }
 
 /*Dropdown*/
@@ -235,7 +235,7 @@
 
 	.header .navbar-default .navbar-nav > li > a:hover,
 	.header .navbar-default .navbar-nav > .active > a {
-		border-bottom: solid 2px #72c02c;
+		border-bottom: solid 2px #97447A;
 	}
 
 	.header .navbar-default .navbar-nav > li > a,
@@ -250,7 +250,7 @@
 	.header .navbar-default .navbar-nav > .open > a,
 	.header .navbar-default .navbar-nav > .open > a:hover,
 	.header .navbar-default .navbar-nav > .open > a:focus {
-		color: #72c02c;
+		color: #97447A;
 	}
 
 	/*Dropdown Menu*/
