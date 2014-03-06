@@ -9,13 +9,6 @@
       #middle
         #container
           #content_wider
-            - flash.each do |key, value|
-              -if key == :success
-                .success
-                  =value
-              -else 
-                .error
-                  =value
             = yield 
  
     #footer
