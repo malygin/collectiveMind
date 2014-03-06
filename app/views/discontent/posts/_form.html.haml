@@ -16,24 +16,32 @@
       Что вас не устраивает
       %span.text-danger *
     =f.text_area :content, class: 'form-control', rows: 5, placeholder: 'отрицательное действие, явление, установление, черта...', onkeyup: "activate_button(this);"
-    %br
-    Где это происходит?
-    =f.autocomplete_field :whered, autocomplete_discontent_post_whered_discontent_posts_path,  class: 'form-control',placeholder: 'место, организация, общность, в которой это происходит '
-
-    Когда это происходит?
-    =f.autocomplete_field :whend, autocomplete_discontent_post_whend_discontent_posts_path,  class: 'form-control',placeholder: 'во время какого события, мероприятия, процесса, ситуации... '
 
   .form-group
     = select_tag 'discontent_post[aspect_id]', options_from_collection_for_select(@aspects, "id", "content", @post.aspect.nil? ? @aspects.first.id : @post.aspect.id), :prompt => 'Выберите аспект'
 
-    %small
-      %label.radio-inline
-        = f.radio_button :style,  '1'
-        %span.text-danger Имеющиеся недостатки
-      %label.radio-inline
-        = f.radio_button :style,  '0'
-        %span.text-success Отсутствующие достоинства
 
+  .panel-group
+    .panel
+      .panel-heading
+        %h4.panel-title
+        %a(data-toggle="collapse" data-parent="#accordion" href="#collapseOne")
+          Заполнить дополнительные поля (+10 баллов)
+      #collapseOne.panel-collapse.collapse
+        .panel-body
+          Где это происходит?
+          =f.autocomplete_field :whered, autocomplete_discontent_post_whered_discontent_posts_path,  class: 'form-control',placeholder: 'место, организация, общность, в которой это происходит '
+          Когда это происходит?
+          =f.autocomplete_field :whend, autocomplete_discontent_post_whend_discontent_posts_path,  class: 'form-control',placeholder: 'во время какого события, мероприятия, процесса, ситуации... '
+          %br
+          .form-group
+            %label.radio-inline
+              = f.radio_button :style,  '1'
+              %span.text-danger Имеющиеся недостатки
+            %label.radio-inline
+              = f.radio_button :style,  '0'
+              %span.text-success Отсутствующие достоинства
+  %br
   %button#send_post.btn.btn-primary(type="submit"){:class => ('disabled' unless @post.content?)} Сохранить
   %hr
   %p#discontent_success.text-success Успешно добавлено!
