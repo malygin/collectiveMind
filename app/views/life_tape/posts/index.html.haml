@@ -5,7 +5,7 @@
     = render 'shared/filter_posts', project: @project.id, folder: @folder
 
 - if signed_in?
-    = link_to '+ Добавить запись', '#', id: 'add_record', onClick: 'get_life_tape_form(); return false;', class: 'btn btn-sm btn-success'
+    = link_to '+ Добавить тему', '#', id: 'add_record', onClick: 'get_life_tape_form(); return false;', class: 'btn btn-sm btn-success'
     %br
 %br
 = form_for @post,:url => {:project => @project.id, :action => @post.persisted? ? 'update' : 'create'},:remote => true,  :html => { :class => 'lt_new' } do |f|

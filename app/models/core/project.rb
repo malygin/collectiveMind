@@ -42,8 +42,8 @@ class Core::Project < ActiveRecord::Base
   has_many :project_users
   has_many :users, :through => :project_users
 
-  LIST_STAGES = {1 => {name: 'Сбор информации', :type_stage => :life_tape_posts, status: [0,1,2]},
-         2 => { name: 'Анализ проблемы', :type_stage =>  :discontent_posts, status: [3,4,5,6]},
+  LIST_STAGES = {1 => {name: I18n.t('stages.life_tape'), :type_stage => :life_tape_posts, status: [0,1,2]},
+         2 => { name:  I18n.t('stages.discontent'), :type_stage =>  :discontent_posts, status: [3,4,5,6]},
          3 => { name: 'Формулирование проблемы', :type_stage => :concept_posts, status: [7,8]},
          4 => { name: 'Проекты', :type_stage =>  :plan_posts, status: [7,8]},
          5 => { name: 'Оценивание', :type_stage =>  :estimate_posts, status: [9,10]}}.freeze
@@ -62,6 +62,12 @@ class Core::Project < ActiveRecord::Base
   def current_status?( status)
     sort_list  = LIST_STAGES.select {|k,v| v[:type_stage]  == status}
     sort_list.values[0][:status].include? self.status
+  end
+
+  def current_page?(page, status)
+    sort_list  = LIST_STAGES.select {|k,v| v[:type_stage]  == status}
+    sort_list.values[0][:name] == page
+
   end
 
   def redirect_to_current_stage

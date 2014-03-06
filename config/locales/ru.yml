@@ -11,9 +11,14 @@ ru:
     life_tape: 'Сбор информации'
     discontent: 'Анализ ситуации'
     record:
-      one: '1 запись'
-      few: '%{count} записи'
-      other: '%{count} записей'
+      one: '1 тема'
+      few: '%{count} темы'
+      other: '%{count} тем'
+    discontents:
+      one: '1 несовершенство'
+      few: '%{count} несовершенства'
+      other: '%{count} несовершенств'
+
   voting:
     have_votes: 'Осталось голосов:'
   activerecord:

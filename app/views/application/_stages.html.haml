@@ -13,7 +13,7 @@
       #bs-example-navbar-collapse-1.collapse.navbar-collapse
         %ul.nav.navbar-nav
           %li{class: ('active' if @project.current_status?(:life_tape_posts)) }
-            = link_to "/project/#{@project.id}/life_tape/posts" do
+            = link_to "/project/#{@project.id}/life_tape/posts", class: "#{'active' if @project.current_page?(@breadcrumbs[0].name, :life_tape_posts)}" do
               =@project.status_title(:life_tape_posts)
               %br
               %small.text-center
@@ -21,11 +21,12 @@
           %li.divider_vertical
 
           %li{class: ('active' if @project.current_status?(:discontent_posts)) }
-            = link_to "/project/#{@project.id}/discontent/posts" do
+            = link_to "/project/#{@project.id}/discontent/posts", class: "#{'active' if @project.current_page?(@breadcrumbs[0].name, :discontent_posts)}" do
               =@project.status_title(:discontent_posts)
               %br
               %small.text-center
-                3 несовершенства
+                =t('stages.discontents', count: @project.discontent_ongoing_post.count)
+
                 -#=t('stages.record', count: @project.discontent_ongoing_post)
           %li.divider_vertical
 
