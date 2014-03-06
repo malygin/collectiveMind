@@ -18,7 +18,7 @@ class Help::PostsController < ApplicationController
     @stages = Core::Project::LIST_STAGES
     @posts={}
     id =params[:id].to_i
-    Help::Post.where(stage: id).each {|f| @posts[f.style] = f }
+    Help::Post.where(stage: id, mini: false).each {|f| @posts[f.style] = f }
     add_breadcrumb  @stages[id][:name], help_post_path(@project, id)
   end
 
