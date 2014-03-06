@@ -64,10 +64,9 @@ class Core::Project < ActiveRecord::Base
     sort_list.values[0][:status].include? self.status
   end
 
-  def current_page?(page, status)
+  def current_page_on_stage?(page, status)
     sort_list  = LIST_STAGES.select {|k,v| v[:type_stage]  == status}
-    sort_list.values[0][:name] == page
-
+    sort_list.values[0][:name]
   end
 
   def redirect_to_current_stage
