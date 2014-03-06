@@ -13,9 +13,8 @@
       #bs-example-navbar-collapse-1.collapse.navbar-collapse
         %ul.nav.navbar-nav
           %li{class: ('active' if @project.current_status?(:life_tape_posts)) }
-            = link_to "/project/#{@project.id}/life_tape/posts", class: "#{'active' if @project.current_page_on_stage?(@breadcrumbs[0].name, :life_tape_posts)}" do
-              =@project.status_title(:life_tape_posts)
-              = @breadcrumbs[0].name
+            = link_to "/project/#{@project.id}/life_tape/posts", class: "#{'active' if @project.current_page?(@breadcrumbs[0].name, :life_tape_posts)}" do
+
               =@project.current_page_on_stage?(@breadcrumbs[0].name, :life_tape_posts)
               %br
               %small.text-center
