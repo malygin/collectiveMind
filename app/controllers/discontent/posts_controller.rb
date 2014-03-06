@@ -45,16 +45,22 @@ class Discontent::PostsController < PostsController
   end
 
   def index
+    if @project.status == 6 and @project.get_free_votes_for(current_user, :discontent) != 0
+      redirect_to action: "vote_list"
+      return
+    end
 
     #@post = current_model.new
     @order = params[:order]
     @page = params[:page]
     @folder = :discontent
+    @status = 0
+    @status = 2 if @project.status == 5
     load_filter_for_aspects   if (request.xhr? and @order.nil? and @page.nil?)
 
     @posts  = current_model.where(:project_id => @project)
     .where('aspect_id  IN (?) ' , current_user.aspects(@project.id).collect(&:id))
-    .where(status: 0)
+    .where(status: @status)
     .order_by_param(@order)
     .paginate(:page => params[:page], :per_page => 20)
 
@@ -94,10 +100,21 @@ class Discontent::PostsController < PostsController
   def vote_list
     @posts = current_model.where(:project_id => @project, :status => 2)
     # i have votes now
-    @number_v = @project.stage2 - current_user.voted_discontent_posts.size
+    @number_v = @project.get_free_votes_for(current_user, :discontent)
+    if @number_v == 0
+      redirect_to action: "index"
+      return
+    end
     @path_for_voting = "/project/#{@project.id}/discontent/"
     #all number of votes
     @votes = @project.stage2
+    @status = 2
+    #if boss?
+    #  @all_people = @project.users.size
+    #  @voted_people = ActiveRecord::Base.connection.execute("select count(*) as r from (select distinct v.user_id from life_tape_voitings v  left join   discontent_aspects asp on (v.discontent_aspect_id = asp.id) where asp.project_id = #{@project.id}) as dm").first["r"]
+    #  @votes = ActiveRecord::Base.connection.execute("select count(*) as r from (select  v.user_id from life_tape_voitings v  left join   discontent_aspects asp on (v.discontent_aspect_id = asp.id) where asp.project_id = #{@project.id}) as dm").first["r"].to_i
+    #end
+    render 'vote_list', :layout => 'application_two_column'
   end
 
 

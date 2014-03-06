@@ -50,7 +50,13 @@ class Core::Project < ActiveRecord::Base
 
 
   def get_free_votes_for(user, stage)
-    self.stage1.to_i - user.voted_aspects.size
+    case stage
+      when :life_tape
+        self.stage1.to_i - user.voted_aspects.size
+      when :discontent
+        self.stage1.to_i - user.voted_discontent_posts.count
+
+    end
   end
 
   def current_status?( status)

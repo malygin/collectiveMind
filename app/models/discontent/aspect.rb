@@ -3,9 +3,9 @@ class Discontent::Aspect < ActiveRecord::Base
   attr_accessible :position, :short_desc, :user_add
    has_many :posts
    has_many :positive_posts, :class_name => 'Discontent::Post',
-           :conditions => ['discontent_posts.style = ? and (discontent_posts.status = ? )',0,0]
+           :conditions => ['discontent_posts.style = ? ',0]
    has_many :negative_posts, :class_name => 'Discontent::Post',
-           :conditions => ['discontent_posts.style = ? and (discontent_posts.status = ? )',1,0]
+           :conditions => ['discontent_posts.style = ? ',1]
    has_many :accepted_posts, :class_name => 'Discontent::Post',
            :conditions => ['discontent_posts.status = ?',4]
 

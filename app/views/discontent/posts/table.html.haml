@@ -6,7 +6,7 @@
     %span.glyphicon.glyphicon-th
     Таблицей
 
-- if signed_in?
+- if signed_in? and @project.status ==3
   = link_to '+ Добавить свое несовершенство в список', new_discontent_post_path(@project) , id: 'add_record',  class: 'btn btn-sm btn-success'
   %br
 %br
@@ -22,8 +22,8 @@
       %td
         %span.label.label-t=aspect.content
       %td
-        =render partial:'post_short', collection: aspect.negative_posts
+        =render partial:'post_short', collection: aspect.negative_posts.by_status(@status)
 
       %td
-        =render partial:'post_short', collection: aspect.positive_posts
+        =render partial:'post_short', collection: aspect.positive_posts.by_status(@status)
 
