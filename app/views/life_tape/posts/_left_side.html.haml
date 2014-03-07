@@ -13,7 +13,7 @@
     %li.active
         =link_to 'Новости', '#news', :data => {:toggle=>"tab"}
 .tab-content
-    .tab-pane.fade.in.active#activity
+    .tab-pane.fade#activity
         -unless @journals.nil?
             - @journals.each do |journal|
                 .imperfection_journal
@@ -22,7 +22,7 @@
                     =Russian::strftime(journal.created_at,"%d %B %k:%M:%S ")
 
 
-    .tab-pane.fade#news
+    .tab-pane.fade.in.active#news
         - unless @news.nil?
             %p.righttext
                 = @news.anons
