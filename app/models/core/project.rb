@@ -41,6 +41,7 @@ class Core::Project < ActiveRecord::Base
 
   has_many :project_users
   has_many :users, :through => :project_users
+  has_many :knowbase_posts, :class_name => 'Knowbase::Post'
 
   LIST_STAGES = {1 => {name: 'Сбор информации', :type_stage => :life_tape_posts, status: [0,1,2]},
          2 => { name: 'Анализ ситуации', :type_stage =>  :discontent_posts, status: [3,4,5,6]},

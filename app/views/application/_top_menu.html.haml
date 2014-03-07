@@ -16,8 +16,8 @@
           =link_to t('menu.main'), "/project/#{@project.id}"
         %li
           =link_to t('menu.help'), help_posts_path(@project)
-        %li.disabled
-          %a{:href => "/base"}=t('menu.base_knowledge')
+        %li
+          =link_to t('menu.base_knowledge'),   knowbase_posts_path(@project)
         %li.disabled
           %a{:href => "/userstop"}="Рейтинг участников"
         -#%li.dropdown

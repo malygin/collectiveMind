@@ -1,0 +1,6 @@
+%div.well
+  %ol.nav.nav-pills.nav-stacked
+    -@stages.each do |s|
+      %li{class: ('active' if s.stage==params[:id].to_i)}
+        %a(href="/project/#{@project.id}/knowbase/posts/#{s.stage}")
+          =s.title

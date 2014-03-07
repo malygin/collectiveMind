@@ -36,7 +36,9 @@ scope '/project/:project' do
     post :save_help_answer, :to => 'posts#save_help_answer'
     resources :posts
   end
-
+  namespace :knowbase do
+    resources :posts
+  end
   resources :users do
     member do
       put :forecast
@@ -46,7 +48,6 @@ scope '/project/:project' do
       match 'add_score_essay/:score' => 'users#add_score_essay'
     end
   end
-
 
   namespace :life_tape do
     posts_routes

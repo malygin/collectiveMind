@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140305121459) do
+ActiveRecord::Schema.define(:version => 20140307145323) do
 
   create_table "answers", :force => true do |t|
     t.string   "text"
@@ -679,6 +679,15 @@ ActiveRecord::Schema.define(:version => 20140305121459) do
   add_index "journals", ["project_id"], :name => "index_journals_on_project_id"
   add_index "journals", ["type_event"], :name => "index_journals_on_type"
   add_index "journals", ["user_id"], :name => "index_journals_on_user_id"
+
+  create_table "knowbase_posts", :force => true do |t|
+    t.text     "content"
+    t.integer  "project_id"
+    t.integer  "stage"
+    t.string   "title"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
 
   create_table "life_tape_categories", :force => true do |t|
     t.string   "name"

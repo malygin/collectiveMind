@@ -33,30 +33,30 @@ module JournalHelper
       when 'life_tape_comment_save'
         s = j.body.split(':')
         if s.length == 1
-				'добавил комментарий к '+  link_to('записи', "/project/#{project}/life_tape/posts/#{j.body}" )
+				'добавил(а) комментарий к '+  link_to('теме', "/project/#{project}/life_tape/posts/#{j.body}" )
         else
-          "добавил комментарий '#{s[0]}...' к "+  link_to('записи', "/project/#{project}/life_tape/posts/#{s[1]}" )
+          "добавил(а) комментарий '#{s[0]}...' к "+  link_to('теме', "/project/#{project}/life_tape/posts/#{s[1]}" )
 
         end
       when 'life_tape_post_save'
         s = j.body.split(':')
         if s.length == 1
-          'добавил   '+  link_to('запись', "/project/#{project}/life_tape/posts/#{j.body}" )
+          'добавил(а)   '+  link_to('запись', "/project/#{project}/life_tape/posts/#{j.body}" )
         else
-          'добавил запись '+  link_to("#{s[0]}...", "/project/#{project}/life_tape/posts/#{s[1]}" )
+          'добавил(а) тему '+  link_to("#{s[0]}...", "/project/#{project}/life_tape/posts/#{s[1]}" )
 
         end
 
       when 'discontent_comment_save'
         s = j.body.split(':')
          if s.length == 1
-           'добавил комментарий к '+  link_to('несовершенству', "/project/#{project}/discontent/status/0/aspect/0/posts/#{j.body}")
+           'добавил(а) комментарий к '+  link_to('несовершенству', "/project/#{project}/discontent/status/0/aspect/0/posts/#{j.body}")
          else
-           "добавил комментарий '#{s[0]}...' к "+  link_to('несовершенству', "/project/#{project}/discontent/status/0/aspect/0/posts/#{s[1]}")
+           "добавил(а) комментарий '#{s[0]}...' к "+  link_to('несовершенству', "/project/#{project}/discontent/status/0/aspect/0/posts/#{s[1]}")
 
          end
       when 'discontent_post_save'
-				'добавил '+  link_to('несовершенство', discontent_post_path(project, j.body))
+				'добавил(а) '+  link_to('несовершенство', discontent_post_path(project, j.body))
       when 'discontent_post_revision'
         'отправил на доработку ' +link_to('несовершенство', discontent_post_path(project,j.body))
       when 'discontent_post_acceptance'
