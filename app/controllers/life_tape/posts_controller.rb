@@ -66,6 +66,15 @@ end
     render :layout => 'application_two_column'
   end
 
+  def create
+    current_user.add_score(:type => :add_life_tape_post)
+    super()
+  end
 
+
+  def to_archive
+     super()
+    @post.user.add_score(:type => :to_archive_life_tape_post)
+  end
 
 end

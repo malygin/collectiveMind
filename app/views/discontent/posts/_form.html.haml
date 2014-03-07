@@ -42,7 +42,7 @@
               = f.radio_button :style,  '0'
               %span.text-success Отсутствующие достоинства
   %br
-  %button#send_post.btn.btn-primary(type="submit"){:class => ('disabled' unless @post.content?)} Сохранить
+  %button#send_post.btn.btn-primary(type="submit" onclick='disontent_form_submit();'){:class => ('disabled' unless @post.content?)} Сохранить
   %hr
   %p#discontent_success.text-success Успешно добавлено!
   %p#discontent_warning.text-primary Проверьте не добавлено ли ваше несовершенство другими участниками? Если вы уверены, что нет - нажмите на "Все равно сохранить"

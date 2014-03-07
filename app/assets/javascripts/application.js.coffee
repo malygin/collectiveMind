@@ -50,3 +50,7 @@ $('#modal_help').on 'hidden.bs.modal', ->
 
 @remove_block = (el)->
   $('#'+el).remove()
+
+@disontent_form_submit= ->
+  $('#send_post').html('Ищем совпадения ...')
+  $('#send_post').toggleClass('disabled')

@@ -137,9 +137,30 @@ class User < ActiveRecord::Base
     end
   end
 
+  def add_score(h={})
+    case h[:type]
+      when :add_life_tape_post
+        self.add_score_by_type(10, :score_g)
+      when :add_comment
+        self.add_score_by_type(2, :score_a)
+      when :to_archive_life_tape_post
+        self.add_score_by_type(-10, :score_g)
+      when :add_discontent_post
+        if h[:object].whend? and h[:object].whered? and h[:object].style?
+          self.add_score_by_type(30, :score_g)
+        elsif  h[:object].whend? and h[:object].whered?
+          self.add_score_by_type(20, :score_g)
+        else
+          self.add_score_by_type(10, :score_g)
+        end
+    end
 
+  end
 
-  private 
+  def add_score_by_type(score, type = :score_g)
+    self.update_attributes!(:score => score+self.score, type => self.read_attribute(type)+score)
+  end
+  private
 
   	#def encrypt_password
   	#	self.salt = make_salt if new_record?

@@ -92,8 +92,6 @@ class Discontent::PostsController < PostsController
   # GET /discontent/posts/1/edit
   def edit
     @post = current_model.find(params[:id])
-    @replace_posts = @post.post_replaced
-    @accepted_posts = Discontent::Post.where(status: 2, project_id:  @project )
   end
 
 
@@ -140,7 +138,7 @@ class Discontent::PostsController < PostsController
     #discontents = Discontent::Post.where(:project_id => @project.id)
     r=nil
     unless params[:resave]
-      r = Discontent::Post.where(:project_id => @project.id).collect {|d| [ d, d.content.similar(params[name_of_model_for_param][:content])]}
+      r = Discontent::Post.where(:project_id => @project.id, status: 0).collect {|d| [ d, d.content.similar(params[name_of_model_for_param][:content])]}
       r.sort_by!(&:last)
     end
     if r.nil? or  r.last[1] < 20
@@ -148,6 +146,8 @@ class Discontent::PostsController < PostsController
        @post.user = current_user
        @post.save
        current_user.journals.build(:type_event=>name_of_model_for_param+"_save", :project => @project, :body=>"#{@post.content[0..12]}:#{@post.id}").save!
+       current_user.add_score(:type => :add_discontent_post, :object => @post)
+
       # redirect_to  :action=>'show', :id => @post.id, :project => @project
       #return
     else

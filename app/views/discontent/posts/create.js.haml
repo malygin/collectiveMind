@@ -2,11 +2,13 @@
   $("#discontent_warning").fadeIn()
   $('#posts').html("#{escape_javascript(render  @posts)}")
   $('#send_post').html('Все равно сохранить')
+  $('#send_post').toggleClass('disabled')
   $('#new_discontent').append('<input type="hidden" name="resave" value="true" />');
 -else
   $("#discontent_success").fadeIn()
   $("#discontent_warning").fadeOut()
   $('#posts').html("")
+  $('#send_post').html('Сохранено')
 
 
 -#$('#Send').animate({left: 0, opacity: 0},  "normal",  function(){$('#Send').css('display','none')})

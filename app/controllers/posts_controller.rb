@@ -53,6 +53,8 @@ def add_comment
       @comment = post.comments.create(:content => params[name_of_comment_for_param][:content], :user =>current_user)
       current_user.journals.build(:type_event=>name_of_comment_for_param+'_save', :project => @project, :body=>"#{@comment.content[0..12]}:#{post.id}#comment_#{@comment.id}").save!
       flash[:success] = 'Комментарий добавлен'
+      current_user.add_score(:type => :add_comment)
+
     else
       flash[:success] = 'Введите текст комментария'
     end
