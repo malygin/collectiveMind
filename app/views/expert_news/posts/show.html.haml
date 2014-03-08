@@ -9,10 +9,10 @@
 	= link_to 'Редактировать', edit_expert_news_post_path(@project, @post)
 	= link_to 'Удалить', @post, :confirm => 'Уверены, Олег?', :method => :delete
 
-
-- if signed_in?
-	= render :partial => 'shared/comment_form', :locals => { :comment => @comment, :url_link => url_for(:action => 'add_comment')}
-
-
-= render :partial => 'shared/comment',:collection => @post.comments, :locals => { :path_link => '/expert_news/comments/'}
-
+-#
+-#- if signed_in?
+-#	= render :partial => 'shared/comment_form', :locals => { :comment => @comment, :url_link => url_for(:action => 'add_comment')}
+-#
+-#
+-#= render :partial => 'shared/comment',:collection => @post.comments, :locals => { :path_link => '/expert_news/comments/'}
+-#
