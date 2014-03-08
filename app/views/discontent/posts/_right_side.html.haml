@@ -13,6 +13,9 @@
                 =link_to 'Вернуться к объединению',  pr_stage_core_project_path(@project), id: 'change_stage'
                 %br
                 =link_to 'Начать голосование',  next_stage_core_project_path(@project), id: 'change_stage'
+            -if @project.status == 6
+                =link_to 'Начать сбор нововведений',  next_stage_core_project_path(@project), id: 'change_stage'
+
 
 - unless @aspects.empty?
     .panel.panel-default

@@ -16,25 +16,21 @@
             = link_to "/project/#{@project.id}/life_tape/posts", class: "#{'current' if @project.current_page?(@breadcrumbs[0].name, :life_tape_posts)}" do
               =@project.status_title(:life_tape_posts)
               %br
-              %small.text-center
-                =t('stages.record', count: @project.life_tape_posts.count)
+              %small.text-center=t('stages.record', count: @project.life_tape_posts.count)
           %li.divider_vertical
 
           %li{class: ('active' if @project.current_status?(:discontent_posts)) }
             = link_to "/project/#{@project.id}/discontent/posts", class: "#{'current' if @project.current_page?(@breadcrumbs[0].name, :discontent_posts)}" do
               =@project.status_title(:discontent_posts)
               %br
-              %small.text-center
-                =t('stages.discontents', count: @project.discontent_ongoing_post.count)
-
-                -#=t('stages.record', count: @project.discontent_ongoing_post)
+              %small.text-center=t('stages.discontents', count: @project.discontent_ongoing_post.count)
           %li.divider_vertical
 
-          %li.disabled
-            %a{:href => "/procedure/1/stage/3?help1"}
-              Формулирование проблемы
+          %li{class: ('active' if @project.current_status?(:concept_posts)) }
+            = link_to "/project/#{@project.id}/concept/posts", class: "#{'current' if @project.current_page?(@breadcrumbs[0].name, :concept_posts)}" do
+              =@project.status_title(:concept_posts)
               %br
-              %small.text-center 8 записей
+              %small.text-center=t('stages.concepts', count: @project.concept_ongoing_post.count)
           %li.divider_vertical
 
           %li.disabled

@@ -11,6 +11,7 @@ ru:
   stages:
     life_tape: 'Сбор информации'
     discontent: 'Анализ ситуации'
+    concept: 'Формулирование проблемы'
     record:
       one: '1 тема'
       few: '%{count} темы'
@@ -19,6 +20,10 @@ ru:
       one: '1 несовершенство'
       few: '%{count} несовершенства'
       other: '%{count} несовершенств'
+    concepts:
+      one: '1 нововведение'
+      few: '%{count} нововведения'
+      other: '%{count} нововведений'
 
   voting:
     have_votes: 'Осталось голосов:'

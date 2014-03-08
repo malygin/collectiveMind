@@ -97,8 +97,8 @@ class Core::Project < ActiveRecord::Base
         I18n.t('stages.discontent')
       when 4
         'голосование за недовольства и рефлексия'
-      when 5
-        'формулирование образов'
+      when 5, :concept_posts
+        I18n.t('stages.concept')
       when 6
         'голосование за концепции и рефлексия'
       when 7
