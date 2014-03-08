@@ -16,9 +16,9 @@
 - if can_union_discontents?(@project)
   %ul.nav.nav-tabs#tab_posts
     %li#origin.active
-      =link_to 'Исходные (437)', "/project/#{@project.id}/discontent/posts/", remote: true
+      =link_to "Исходные #{@project.discontent_ongoing_post.count}", "/project/#{@project.id}/discontent/posts/", remote: true
     %li#new
-      =link_to 'Объединные (24)', "/project/#{@project.id}/discontent/posts/unions", remote: true
+      =link_to "Объединные #{@project.discontent_accepted_post.count}", "/project/#{@project.id}/discontent/posts/unions", remote: true
     -#%li
     -#  %a(href="#part_origin" data-toggle="tab") Частично совпадающие (140)
   %br

@@ -37,7 +37,7 @@ class Discontent::Post < ActiveRecord::Base
   end
 
   def get_posts_suitable_for_association
-    Discontent::Post.where(status: 0, aspect_id: self.aspect_id, style: self.style, whered: self.whered, whend: self.whend).where('id!=?', self.id)
+    Discontent::Post.where(status: 0, aspect_id: self.aspect_id, style: self.style).where('id!=?', self.id).where('whered = ? or whend = ?',self.whered, self.whend)
   end
 
   def conditions_for_plan(plan)
