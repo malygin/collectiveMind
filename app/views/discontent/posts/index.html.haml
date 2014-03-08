@@ -1,12 +1,12 @@
 .pull-right
   %a.active.btn.btn-default.menu_table(href="#")
     %span.glyphicon.glyphicon-th-list
-    Списком
+    Список
   %a.btn.btn-default.menu_table(href="/project/#{@project.id}/discontent/posts?view=table")
     %span.glyphicon.glyphicon-th
-    Таблицей
+    Таблица
 - if signed_in? and @project.status == 3
-  = link_to '+ Добавить свое несовершенство в список', new_discontent_post_path(@project) , id: 'add_record',  class: 'btn btn-sm btn-success'
+  = link_to '+ Добавить снесовершенство', new_discontent_post_path(@project) , id: 'add_record',  class: 'btn btn-sm btn-success'
   %br
 %br
 - if @project.status == 4
