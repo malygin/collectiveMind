@@ -1,33 +1,30 @@
-- unless @news.nil?
-    %h1 Новости
-    %p.righttext
-        = @news.anons
-        = link_to 'подробнее',  expert_news_post_path(@project, @news)
-%ul.leftlink
+.panel.panel-info
+    .panel-heading Обратите внимание!
+    .panel-body
+        За добавленное несовершенство вы получите 10 баллов
+        Если заполните все поля, то
+        %span.text-success +10 баллов
+        Если это будет "отсутствующее достоинство", то еще
+        %span.text-success +10 балов!
+
+
+%ul.nav.nav-tabs
     %li
-        -#= link_to "Добавлены мной (#{current_user.concept_posts.for_project(@project.id).count})", concept_my_path(@project,:status => 6), class: menu_status(6)
-    %li
-        %b
-            = link_to "Обсуждаются (#{@project.concept_ongoing_post.count})", concept_posts_path(@project,:status => 0), class: menu_status(0)
-    %li= link_to 'Архив', concept_posts_path(@project,:status =>3), class: menu_status(3)
-    -if @project.status == 4
-        %li= link_to 'Голосование', concept_posts_path(@project,:status =>2), class: menu_status(2)
-    -else
-        %li= link_to "Принятые (#{@project.concept_accepted_post.count})", concept_posts_path(@project,:status =>2), class: menu_status(2)
-
-    - if boss?
-        %li= link_to 'Из проектов и концепций', concept_posts_path(@project,:status =>5), class: menu_status(5)
-        %li= link_to "На рассмотрении (#{@project.concept_for_admin_post.count})", concept_posts_path(@project,:status =>1), class: menu_status(1)
+        =link_to 'Активность', '#activity', :data => {:toggle=>"tab"}
+    %li.active
+        =link_to 'Новости', '#news', :data => {:toggle=>"tab"}
+.tab-content
+    .tab-pane.fade#activity
+        -unless @journals.nil?
+            - @journals.each do |journal|
+                .imperfection_journal
+                    = link_to journal.user, user_path(@project,journal.user)
+                    = journal_parser(journal, @project.id).html_safe
+                    =Russian::strftime(journal.created_at,"%d %B %k:%M:%S ")
 
 
-
--unless @journals.nil?
-    .redtitle Активность
-    - @journals.each do |journal|
-        %p.righttext
-            =Russian::strftime(journal.created_at,"%d %B %k:%M:%S ")
-            =link_to journal.user.name_title,  "/project/#{@project.id}/users/#{journal.user.id}"
-            = journal_parser(journal, @project.id).html_safe
-        =image_tag 'dots.png', :width =>'250px;'
-    %br
-    %b=link_to 'смотреть все события', "/project/#{@project.id}/journal"
+    .tab-pane.fade.in.active#news
+        - unless @news.nil?
+            %p.righttext
+                = @news.anons
+                = link_to 'подробнее',  expert_news_post_path(@project, @news)

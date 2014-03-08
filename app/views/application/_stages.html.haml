@@ -12,22 +12,22 @@
       / Collect the nav links, forms, and other content for toggling
       #bs-example-navbar-collapse-1.collapse.navbar-collapse
         %ul.nav.navbar-nav
-          %li{class: ('active' if @project.current_status?(:life_tape_posts)) }
-            = link_to "/project/#{@project.id}/life_tape/posts", class: "#{'current' if @project.current_page?(@breadcrumbs[0].name, :life_tape_posts)}" do
+          %li{class:  @project.stage_style(:life_tape_posts) }
+            = link_to "/project/#{@project.id}/life_tape/posts", class: "#{@project.stage_style_link(@breadcrumbs[0].name, :life_tape_posts)}" do
               =@project.status_title(:life_tape_posts)
               %br
               %small.text-center=t('stages.record', count: @project.life_tape_posts.count)
           %li.divider_vertical
 
-          %li{class: ('active' if @project.current_status?(:discontent_posts)) }
-            = link_to "/project/#{@project.id}/discontent/posts", class: "#{'current' if @project.current_page?(@breadcrumbs[0].name, :discontent_posts)}" do
+          %li{class: @project.stage_style(:discontent_posts) }
+            = link_to "/project/#{@project.id}/discontent/posts", class:"#{@project.stage_style_link(@breadcrumbs[0].name, :discontent_posts)}" do
               =@project.status_title(:discontent_posts)
               %br
               %small.text-center=t('stages.discontents', count: @project.discontent_ongoing_post.count)
           %li.divider_vertical
 
-          %li{class: ('active' if @project.current_status?(:concept_posts)) }
-            = link_to "/project/#{@project.id}/concept/posts", class: "#{'current' if @project.current_page?(@breadcrumbs[0].name, :concept_posts)}" do
+          %li{class:  @project.stage_style(:concept_posts)}
+            = link_to "/project/#{@project.id}/concept/posts", class:"#{@project.stage_style_link(@breadcrumbs[0].name, :concept_posts)}" do
               =@project.status_title(:concept_posts)
               %br
               %small.text-center=t('stages.concepts', count: @project.concept_ongoing_post.count)
@@ -37,14 +37,14 @@
             %a{:href => "#"}
               Проекты
               %br
-              %small.text-center Начнется через 10 дней
+              %small.text-center 0 проектов
           %li.divider_vertical
 
           %li.disabled
             %a{:href => "#"}
               Оценивание и выбор
               %br
-              %small.text-center Начнется через 20 дней
+              %small.text-center 0  оценок
 .row
   .col-md-12
     %ol.breadcrumb

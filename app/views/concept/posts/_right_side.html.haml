@@ -1,8 +1,5 @@
 -if boss? 
-	%p.righttext
-		текущий статус проекта
-		%br
-		%span.rate= status_title(@project.status)
+
 	%br
 	-if @project.status == 5
 		=link_to 'Начать голосование',  next_stage_core_project_path(@project), id: 'change_stage'

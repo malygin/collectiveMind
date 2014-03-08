@@ -63,30 +63,8 @@ scope '/project/:project' do
   end
 
   namespace :concept do
-    get 'vote_list'  => 'posts#vote_list'
-    put 'vote/:post_id'  => 'posts#vote'
-    scope '/status/:status/',  :defaults => {:status => 0} do   
-      resources :posts do
-            member do
-                get :add_aspect
-                get :add_new_discontent
-                put :add_comment
-                put :plus
-                put :censored_comment
-
-                put :plus_comment
-                put :to_archive
-                get :to_expert
-                put :to_expert_save  
-                get :expert_rejection
-                put :expert_rejection_save 
-                get :expert_revision
-                put :expert_revision_save
-                get :expert_acceptance_save
-            end
-      end
-    end
-   end  
+    posts_routes
+  end
 
    namespace :plan do
     get 'vote_list'  => 'posts#vote_list'

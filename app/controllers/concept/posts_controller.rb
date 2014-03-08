@@ -23,6 +23,7 @@ class Concept::PostsController < PostsController
   def prepare_data
     @project = Core::Project.find(params[:project])
     @aspects = Discontent::Aspect.where(:project_id => @project, :status => 1)
+    add_breadcrumb I18n.t('stages.concept'), concept_posts_path(@project)
 
     @journals = Journal.events_for_user_feed @project.id
     @news = ExpertNews::Post.first  

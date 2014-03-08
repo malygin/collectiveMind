@@ -65,6 +65,17 @@ class Core::Project < ActiveRecord::Base
     sort_list.values[0][:status].include? self.status
   end
 
+  def stage_style(status)
+     return 'disabled' if self.status < status_number(status)
+     return 'active' if current_status?(status)
+  end
+
+  def stage_style_link(name_page, status)
+     return 'disabled' if self.status < status_number(status)
+     return 'current' if current_page?(name_page, status)
+  end
+
+
   def current_page?(page, status)
     sort_list  = LIST_STAGES.select {|k,v| v[:type_stage]  == status}
     sort_list.values[0][:name] == page
@@ -85,6 +96,18 @@ class Core::Project < ActiveRecord::Base
     return false
   end
 
+  def status_number(status)
+    case status
+      when :life_tape_posts
+        1
+      when :discontent_posts
+        3
+      when :concept_posts
+        7
+
+
+     end
+  end
   def  status_title(status = self.status)
     case status
       when 0
@@ -97,17 +120,17 @@ class Core::Project < ActiveRecord::Base
         I18n.t('stages.discontent')
       when 4
         'голосование за недовольства и рефлексия'
-      when 5, :concept_posts
+      when 7, :concept_posts
         I18n.t('stages.concept')
-      when 6
-        'голосование за концепции и рефлексия'
-      when 7
-        'создание проектов'
       when 8
-        'выставление оценок'
+        'голосование за концепции и рефлексия'
       when 9
-        'голосование за проекты'
+        'создание проектов'
       when 10
+        'выставление оценок'
+      when 11
+        'голосование за проекты'
+      when 12
         'подведение итогов'
       else
         'завершена'
