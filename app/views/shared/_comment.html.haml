@@ -4,12 +4,12 @@
     =simple_format(comment.content)
     .pull-right
       - if signed_in? and not comment.users.include?(current_user)
-        =link_to({:action => :plus_comment, :id => comment.id, :against => false},  :remote => true, :method => :put,  id: "plus_comment_#{comment.id}", class:'disabled') do
+        =link_to({:action => :plus_comment, :id => comment.id, :against => false},  :remote => true, :method => :put,  id: "plus_comment_#{comment.id}") do
           %span.text-success За
           %span.text-success(id="plus_counter_comment_#{comment.id}")=comment.users_pro.count
           %span.glyphicon.glyphicon-thumbs-up.text-success
 
-        =link_to({:action => :plus_comment, :id => comment.id, :against => true, }, :remote => true, :method => :put, id: "minus_comment_#{comment.id}", class:'disabled') do
+        =link_to({:action => :plus_comment, :id => comment.id, :against => true, }, :remote => true, :method => :put, id: "minus_comment_#{comment.id}") do
           %span.text-danger Против
           %span.text-danger(id="minus_counter_comment_#{comment.id}")=comment.users_against.count
           %span.glyphicon.glyphicon-thumbs-down.text-danger
