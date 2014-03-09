@@ -1,8 +1,8 @@
 -if @order == 'popular'
-    по популярности
-    =link_to '| по дате', "/project/#{project}/#{folder}/posts?order=date", remote: true
+    По популярности
+    =link_to '| По дате', "/project/#{project}/#{folder}/posts?order=date", remote: true
 -else
-    по дате
-    =link_to '| по популярности', "/project/#{project}/#{folder}/posts?order=popular", remote: true, id: 'date_filter'
+    По дате
+    =link_to '| По популярности', "/project/#{project}/#{folder}/posts?order=popular", remote: true, id: 'date_filter'
 %br
 %br
