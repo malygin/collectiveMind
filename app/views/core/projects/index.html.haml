@@ -64,11 +64,11 @@
       / Collect the nav links, forms, and other content for toggling
       .collapse.navbar-collapse.navbar-responsive-collapse
         %ul.nav.navbar-nav.navbar-right
-          %li
-            =link_to 'Главная', '/'
-
-          %li
-            =link_to 'О проекте', '/'
+          -#%li
+          -#  =link_to 'Главная', '/'
+          -#
+          -#%li
+          -#  =link_to 'О проекте', '/'
           - if signed_in?
             %li
               =link_to 'Перейти к процедуре', '/project/9'
