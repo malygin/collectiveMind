@@ -6,7 +6,7 @@
     %span.glyphicon.glyphicon-th
     Таблица
 - if signed_in? and @project.status == 3
-  = link_to '+ Добавить снесовершенство', new_discontent_post_path(@project) , id: 'add_record',  class: 'btn btn-sm btn-success'
+  = link_to '+ Добавить несовершенство', new_discontent_post_path(@project) , id: 'add_record',  class: 'btn btn-sm btn-success'
   %br
 %br
 - if @project.status == 4
