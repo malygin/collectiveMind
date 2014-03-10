@@ -9,11 +9,11 @@
     -#    %a(href="/messages/1") Написать сообщение
     -#  %li
     -#    %a(href="#") Пригласить в группу
-    %h4 Награды
-    = image_tag 'award2.png', width: '50px;', title: 'написал 4 несовершенства'
-    = image_tag 'award3.png', width: '50px;', title: 'проголосовал за 50 постов'
-    = image_tag 'award4.png', width: '50px;', title: 'самый активный генератор идей'
-    = image_tag 'award5.png', width: '50px;', title: 'самый активный аналитик'
+    -#%h4 Награды
+    -#= image_tag 'award2.png', width: '50px;', title: 'написал 4 несовершенства'
+    -#= image_tag 'award3.png', width: '50px;', title: 'проголосовал за 50 постов'
+    -#= image_tag 'award4.png', width: '50px;', title: 'самый активный генератор идей'
+    -#= image_tag 'award5.png', width: '50px;', title: 'самый активный аналитик'
   .col-md-8
     .row
       .col-md-9
@@ -25,14 +25,14 @@
           -#%b Сыновья Кобы
 
       .col-md-3
-        %span.text-muted.pull-right  0
+        %span.text-muted.pull-right=@user.score
     %hr
     .row
       .col-md-7
         Генератор идей
       .col-md-5
         %span.pull-right
-          %span.text-muted  0
+          %span.text-muted=@user.score_g
           %span.text-success (0)
           %span.glyphicon.glyphicon-arrow-up.text-success
     .row
@@ -40,7 +40,7 @@
         Аналитик
       .col-md-5
         %span.pull-right
-          %span.text-muted 0
+          %span.text-muted=@user.score_a
           %span.text-danger (0)
           %span.glyphicon.glyphicon-arrow-down.text-danger
 
@@ -49,7 +49,7 @@
         Оценщик
       .col-md-5
         %span.pull-right
-          %span.text-muted  0
+          %span.text-muted=@user.score_o
           %span.text-muted (0)
           %span.glyphicon.glyphicon-minus.text-muted
     %br
@@ -77,127 +77,127 @@
         %a(href="#projects" data-toggle="tab")  Проекты
     .tab-content
       #active_line.tab-pane.fade.in.active
-        %br
-        .row
-          .col-md-3
-            %span.text-muted 13:45 12 апр.
-          .col-md-9
-            Добавил
-            =link_to 'пост "Как уже отмечалось, политическое учение ... " ', '/procedure/1/stage/1/1/'
-            в раздел "Сбора информации"
-        %br
-        .row
-          .col-md-3
-            %span.text-muted 11:44 13 апр.
-          .col-md-9
-            Разместил
-            =link_to 'комментарий "Я не согласен с вашим ... " ', '/procedure/1/stage/1/1/'
-            в раздел "Сбора информации"
-
-        %br
-        .row
-          .col-md-3
-            %span.text-muted 13:45 12 апр.
-          .col-md-9
-            Добавил
-            =link_to 'пост "Как уже отмечалось, политическое учение ... " ', '/procedure/1/stage/1/1/'
-            в раздел "Сбора информации"
-        %br
-        .row
-          .col-md-3
-            %span.text-muted 11:44 13 апр.
-          .col-md-9
-            Разместил
-            =link_to 'комментарий "Я не согласен с вашим ... " ', '/procedure/1/stage/1/1/'
-            в раздел "Сбора информации"
-
-        %br
-        .row
-          .col-md-3
-            %span.text-muted 13:45 12 апр.
-          .col-md-9
-            Добавил
-            =link_to 'пост "Как уже отмечалось, политическое учение ... " ', '/procedure/1/stage/1/1/'
-            в раздел "Сбора информации"
-        %br
-        .row
-          .col-md-3
-            %span.text-muted 11:44 13 апр.
-          .col-md-9
-            Разместил
-            =link_to 'комментарий "Я не согласен с вашим ... " ', '/procedure/1/stage/1/1/'
-            в раздел "Сбора информации"
-
-
-
-
-      #ideas.tab-pane.fade.in
-        %br
-          .media
-            %a.pull-left(href="/user/1")
-              = image_tag  'avatar.png',  class: "media-object"
-
-              %br
-              =link_to 'Никита Белов', '/user/1'
-
-            .media-body
-              %span.label.label-info  Брендинг
-              %span.label.label-info  Техническая
-              %br
-              Мне кажется мы решительно не дооцениваем силу нашего внутреннего противодействия существующим проблемам в брендинге ...
-              %a(href="/procedure/1/stage/1/1/") подробнее
-              %br
-              %br
-              .row
-                .col-md-2
-                  %small 11.12.2013
-                .col-md-10
-                  .pull-right
-                    114
-                    %span.glyphicon.glyphicon-eye-open
-                    |
-                    %a(href="#")
-                      %span.text-success  поддерживают 23
-                      %span.glyphicon.glyphicon-thumbs-up.text-success
-                    |
-                    %a(href="#")
-                      комментировать 7
-                      %span.glyphicon.glyphicon-comment
-          .media
-            %a.pull-left(href="/user/1")
-              = image_tag  'avatar.png',  class: "media-object"
-
-              %br
-              =link_to 'Никита Белов', '/user/1'
-
-            .media-body
-              %span.label.label-info  Брендинг
-              %span.label.label-info  Техническая
-              %br
-              Мне кажется мы решительно не дооцениваем силу нашего внутреннего противодействия существующим проблемам в брендинге ...
-              %a(href="/procedure/1/stage/1/1/") подробнее
-              %br
-              %br
-              .row
-                .col-md-2
-                  %small 11.12.2013
-                .col-md-10
-                  .pull-right
-                    114
-                    %span.glyphicon.glyphicon-eye-open
-                    |
-                    %a(href="#")
-                      %span.text-success  поддерживают 23
-                      %span.glyphicon.glyphicon-thumbs-up.text-success
-                    |
-                    %a(href="#")
-                      комментировать 7
-                      %span.glyphicon.glyphicon-comment
-
-
-
-
-
+      -#  %br
+      -#  .row
+      -#    .col-md-3
+      -#      %span.text-muted 13:45 12 апр.
+      -#    .col-md-9
+      -#      Добавил
+      -#      =link_to 'пост "Как уже отмечалось, политическое учение ... " ', '/procedure/1/stage/1/1/'
+      -#      в раздел "Сбора информации"
+      -#  %br
+      -#  .row
+      -#    .col-md-3
+      -#      %span.text-muted 11:44 13 апр.
+      -#    .col-md-9
+      -#      Разместил
+      -#      =link_to 'комментарий "Я не согласен с вашим ... " ', '/procedure/1/stage/1/1/'
+      -#      в раздел "Сбора информации"
+      -#
+      -#  %br
+      -#  .row
+      -#    .col-md-3
+      -#      %span.text-muted 13:45 12 апр.
+      -#    .col-md-9
+      -#      Добавил
+      -#      =link_to 'пост "Как уже отмечалось, политическое учение ... " ', '/procedure/1/stage/1/1/'
+      -#      в раздел "Сбора информации"
+      -#  %br
+      -#  .row
+      -#    .col-md-3
+      -#      %span.text-muted 11:44 13 апр.
+      -#    .col-md-9
+      -#      Разместил
+      -#      =link_to 'комментарий "Я не согласен с вашим ... " ', '/procedure/1/stage/1/1/'
+      -#      в раздел "Сбора информации"
+      -#
+      -#  %br
+      -#  .row
+      -#    .col-md-3
+      -#      %span.text-muted 13:45 12 апр.
+      -#    .col-md-9
+      -#      Добавил
+      -#      =link_to 'пост "Как уже отмечалось, политическое учение ... " ', '/procedure/1/stage/1/1/'
+      -#      в раздел "Сбора информации"
+      -#  %br
+      -#  .row
+      -#    .col-md-3
+      -#      %span.text-muted 11:44 13 апр.
+      -#    .col-md-9
+      -#      Разместил
+      -#      =link_to 'комментарий "Я не согласен с вашим ... " ', '/procedure/1/stage/1/1/'
+      -#      в раздел "Сбора информации"
+      -#
+      -#
+      -#
+      -#
+      -##ideas.tab-pane.fade.in
+      -#  %br
+      -#    .media
+      -#      %a.pull-left(href="/user/1")
+      -#        = image_tag  'avatar.png',  class: "media-object"
+      -#
+      -#        %br
+      -#        =link_to 'Никита Белов', '/user/1'
+      -#
+      -#      .media-body
+      -#        %span.label.label-info  Брендинг
+      -#        %span.label.label-info  Техническая
+      -#        %br
+      -#        Мне кажется мы решительно не дооцениваем силу нашего внутреннего противодействия существующим проблемам в брендинге ...
+      -#        %a(href="/procedure/1/stage/1/1/") подробнее
+      -#        %br
+      -#        %br
+      -#        .row
+      -#          .col-md-2
+      -#            %small 11.12.2013
+      -#          .col-md-10
+      -#            .pull-right
+      -#              114
+      -#              %span.glyphicon.glyphicon-eye-open
+      -#              |
+      -#              %a(href="#")
+      -#                %span.text-success  поддерживают 23
+      -#                %span.glyphicon.glyphicon-thumbs-up.text-success
+      -#              |
+      -#              %a(href="#")
+      -#                комментировать 7
+      -#                %span.glyphicon.glyphicon-comment
+      -#    .media
+      -#      %a.pull-left(href="/user/1")
+      -#        = image_tag  'avatar.png',  class: "media-object"
+      -#
+      -#        %br
+      -#        =link_to 'Никита Белов', '/user/1'
+      -#
+      -#      .media-body
+      -#        %span.label.label-info  Брендинг
+      -#        %span.label.label-info  Техническая
+      -#        %br
+      -#        Мне кажется мы решительно не дооцениваем силу нашего внутреннего противодействия существующим проблемам в брендинге ...
+      -#        %a(href="/procedure/1/stage/1/1/") подробнее
+      -#        %br
+      -#        %br
+      -#        .row
+      -#          .col-md-2
+      -#            %small 11.12.2013
+      -#          .col-md-10
+      -#            .pull-right
+      -#              114
+      -#              %span.glyphicon.glyphicon-eye-open
+      -#              |
+      -#              %a(href="#")
+      -#                %span.text-success  поддерживают 23
+      -#                %span.glyphicon.glyphicon-thumbs-up.text-success
+      -#              |
+      -#              %a(href="#")
+      -#                комментировать 7
+      -#                %span.glyphicon.glyphicon-comment
+      -#
+      -#
+      -#
+      -#
+      -#
 
 
 

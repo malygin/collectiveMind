@@ -25,7 +25,7 @@ class UsersController < ApplicationController
     @project = Core::Project.find(params[:project])
 
     @user = User.find(params[:id])
-    add_breadcrumb  "Редактирование профиля: #{@user.name_title}", edit_user_path(@project, @user)
+    add_breadcrumb  "Редактирование профиля: #{@user}", edit_user_path(@project, @user)
 
   end
 
