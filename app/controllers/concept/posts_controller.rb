@@ -22,7 +22,7 @@ class Concept::PostsController < PostsController
 
   def prepare_data
     @project = Core::Project.find(params[:project])
-    @aspects = Discontent::Aspect.where(:project_id => @project, :status => 1)
+    @aspects = Discontent::Aspect.where(:project_id => @project)
     add_breadcrumb I18n.t('stages.concept'), concept_posts_path(@project)
 
     @journals = Journal.events_for_user_feed @project.id
@@ -46,7 +46,7 @@ class Concept::PostsController < PostsController
       end
       render 'table', :layout => 'application_two_column'
     else
-      render 'index'
+      render 'index' , :layout => 'application_two_column'
     end
   end
 

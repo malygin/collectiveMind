@@ -1,5 +1,35 @@
--if  @project.status == 5
-  = link_to image_tag('add_desirable.png'), new_concept_post_path
-= render :partial => 'shared/post', :collection => @posts
+-if  @project.status == 7
+  = link_to 'Добавить нововведение', new_concept_post_path ,  class: 'btn btn-sm btn-success'
+
+%table.table.table-striped
+  %thead
+    %tr
+      %th
+      %th.text-success Несовершенства:
+      %th.text-success Варианты нововведений:
+
+  %tbody
+    -@aspects.each do |aspect|
+      %tr
+        %td
+          %span.label.label-info=aspect.content
+        %td
+        %td
+      -aspect.posts.each do |post|
+
+        %tr
+          %td
+          %td
+            =render partial:'discontent/posts/post_short2', object: post
+
+          %td
+            %a.btn.btn-primary.btn-sm.pull-right(href='/procedure/1/stage/3/nova_nov') Добавить нововведение
+            %br
+            %br
+            .panel.panel-success
+              .panel-body.nov-list
+                Пруд с водными растениями
+                %a(href="/procedure/1/stage/3/novation/1a") подробнее
+
 
 
