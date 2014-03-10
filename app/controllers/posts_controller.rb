@@ -51,7 +51,7 @@ def add_comment
     post = current_model.find(params[:id])
     unless  params[name_of_comment_for_param][:content]==''
       @comment = post.comments.create(:content => params[name_of_comment_for_param][:content], :user =>current_user)
-      current_user.journals.build(:type_event=>name_of_comment_for_param+'_save', :project => @project, :body=>"#{@comment.content[0..12]}:#{post.id}#comment_#{@comment.id}").save!
+      current_user.journals.build(:type_event=>name_of_comment_for_param+'_save', :project => @project, :body=>"#{@comment.content[0..24]}:#{post.id}#comment_#{@comment.id}").save!
       flash[:success] = 'Комментарий добавлен'
       current_user.add_score(:type => :add_comment)
 
@@ -141,7 +141,7 @@ def index
       end
       respond_to do |format|
         if @post.save
-          current_user.journals.build(:type_event=>name_of_model_for_param+"_save", :project => @project, :body=>"#{@post.content[0..12]}:#{@post.id}").save!
+          current_user.journals.build(:type_event=>name_of_model_for_param+"_save", :project => @project, :body=>"#{@post.content[0..24]}:#{@post.id}").save!
 
           format.js
           format.html {
