@@ -21,7 +21,7 @@ CollectiveMind::Application.routes.draw do
 devise_for :users
 match '/project/:project', :to => 'core/projects#to_project'
 
-namespace :core, :shallow => true do 
+namespace :core, :shallow => true do
   resources :projects do
     member do
       get :next_stage
@@ -31,6 +31,9 @@ namespace :core, :shallow => true do
 end
 
 scope '/project/:project' do
+  get '/article1', :to => 'core/projects#article1'
+  get '/article2', :to => 'core/projects#article2'
+  get '/article3', :to => 'core/projects#article3'
 
   namespace :help do
     post :save_help_answer, :to => 'posts#save_help_answer'
