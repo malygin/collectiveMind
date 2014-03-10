@@ -15,7 +15,7 @@
     %br
     %br
       %ul.media-list#comments
-      = render :partial => 'shared/comment',:collection => @comments
+        = render :partial => 'shared/comment',:collection => @comments
     = will_paginate @comments
     - if signed_in?
       = render :partial => 'shared/comment_form', :locals => { :comment => @comment, :url_link => url_for(:controller => post.class.name.underscore.pluralize, :action => 'add_comment')}
