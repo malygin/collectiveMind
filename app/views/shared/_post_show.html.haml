@@ -4,12 +4,12 @@
     = render partial: 'discontent/aspects/aspect', collection: post.discontent_aspects
     %br
     %p.text-justify
-      = raw(post.content)
+      = simple_format post.content
     .row
       .col-md-10
         %small.text-muted= Russian::strftime(post.created_at,"%d %B %k:%M:%S ")
 
-    = render 'shared/post_social_bar', :post => post
+    = render 'shared/post_social_bar2', :post => post
     = render 'shared/post_edit_bar', :post => post
 
     %br

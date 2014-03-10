@@ -10,12 +10,12 @@
         %span.text-success 30 баллов!
 
 %ul.nav.nav-tabs
-    %li
-        =link_to 'Активность', '#activity', :data => {:toggle=>"tab"}
     %li.active
+        =link_to 'Активность', '#activity', :data => {:toggle=>"tab"}
+    %li
         =link_to 'Новости', '#news', :data => {:toggle=>"tab"}
 .tab-content
-    .tab-pane.fade#activity
+    .tab-pane.fade.in.active#activity
         -unless @journals.nil?
             - @journals.each do |journal|
                 .imperfection_journal
@@ -24,7 +24,7 @@
                     =Russian::strftime(journal.created_at,"%d %B %k:%M:%S ")
 
 
-    .tab-pane.fade.in.active#news
+    .tab-pane.fade#news
         - unless @news.nil?
             %p.righttext
                 = @news.anons

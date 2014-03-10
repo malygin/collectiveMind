@@ -1,9 +1,10 @@
 -if  user
     %a.pull-left(href="/user/#{user.id}")
         = image_tag user.avatar.url(:thumb),  class: "media-object"
-        %h6
-            = user.score
-            %small баллов
+        - unless user.boss?
+            %h6
+                = user.score
+                %small баллов
         -#= image_tag 'award.png', title: 'Награда за 3 добавленных поста'
 
         %br
