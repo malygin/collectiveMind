@@ -1,36 +1,84 @@
 = form_for  @post, :url => {:project => @project.id, :action => @post.persisted? ? 'update' : 'create'},   :html => { :class => 'new_or_edit' }do |f|
-  %p.fimage Образ желаемого будущего
+  %h4 Нововведение:
   %br
-  %label 
-    Краткое описание образа
-  %field
-    = f.text_area :content, class: 'wider_area'
-  %div{:class=>'timestamp'} Вкратце опишите свой образ, укажите ключевые идеи.  
-  %br
-  %label 
-    %b Эссе об образе:  
-  %field
-    = f.text_area :goal, class: 'wider_area'
-  %div{:class=>'timestamp'} Что, в главном, представляет собой ваш образ.
-  %br
+  %div.tab-content
+    %div.tab-pane.active#novation1
+      %div.panel.panel-default
+        %div.panel-body
 
-  %p.fimage Нововведения образа
-  %br
-  = select_tag 'aspect_id', options_from_collection_for_select(@aspects, 'id', 'content'), :prompt => 'Выберите фрагмент'
-  = link_to 'добавить обязательные несовершенства из фрагмента', add_aspect_concept_post_path(@project, @status, 1), :remote => true, :id => 'add_aspect_for_concept'
-  %br
-  %br
-  = link_to 'добавить свое несовершенство', add_new_discontent_concept_post_path(@project, @status, 1), :remote => true, :id => 'add_new_discontent_for_concept'
+          %h5.text-infoУстраняемое несовершенство:
+
+          =render partial:'discontent/posts/post_short2', object: @discontent_post
+          %br
+          %a.btn.btn-danger.btn-sm{type: "button", "data-toggle"=>"modal", "data-target"=>"#add_nov", "data-backdrop"=>"static", "data-keyboard"=>"false", style:'font-size:10px;'} + Добавить несовершенство
+
+          %hr
+          %div.panel.panel-info
+            .panel-heading
+              %h5.text-success
+                %b A.
+
+              -#%a.btn.btn-success.btn-xs.pull-right{type: "button", "data-toggle"=>"modal", "data-target"=>"#prompt1", style:'font-size:10px;'} Пояснения
+
+              %p.text-info
+                Что новое, исправляющее несовершенство, появится в будущем?
+                %a.btn.btn-success.btn-xs{type: "button", "data-toggle"=>"modal", "data-target"=>"#prompt1", style:'font-size:10px;'} Пояснения
+              .form-group.has-danger
+                =text_area_tag "pa[#{@discontent_post.id}][name]",@pa.name, :class => "concept_cond"
+                %textarea.form-control(rows="4" cols="73")
 
 
-  %br
-  %br
-  *для просмотра нововведения щелкните по нему мышью
-  #accordion_concept
-    =render :partial => 'post_aspect_form', :collection => @post.post_aspects
+              %p.text-info
+                Как это нововведение будет исправлять несовершенство?
+                %a.btn.btn-success.btn-xs{type: "button", "data-toggle"=>"modal", "data-target"=>"#prompt2", style:'font-size:10px;'} Пояснения
+              .form-group.has-danger
+                %textarea.form-control(rows="4" cols="73")
+
+
+          %hr
+          %h5.text-success
+            %b B.
+          %p.text-info
+            Что должно делаться в будущем, чтобы нововведение функционировало?
+            %a.btn.btn-success.btn-xs{type: "button", "data-toggle"=>"modal", "data-target"=>"#prompt3", style:'font-size:10px;'} Пояснения
+          %p.text-info
+            Какие ресурсы требуются для поддержания УСЛОВИЯ и разрешения ЗАДАЧИ?
+            %a.btn.btn-success.btn-xs{type: "button", "data-toggle"=>"modal", "data-target"=>"#prompt4", style:'font-size:10px;'} Пояснения
+          .b-form
+            .panel.panel-default
+              .panel-body
+                %p.text-info
+                  1. Условие
+                .form-group.has-success
+                  %input.form-control
+
+                %p.text-info
+                  Ресурсы
+                .form-group.has-success
+                  %textarea.form-control(rows="2" cols="73")
+
+
+          %br
+          %a.btn.btn-danger.btn-xs.btn-b-form{type: "button", style:'font-size:10px;'} + Добавить условие и ресурсы
+
+          %hr
+          %h5.text-success
+            %b C.
+          %p.text-info
+            Покажите, что нововведение практично в работе?
+            %a.btn.btn-success.btn-xs{type: "button", "data-toggle"=>"modal", "data-target"=>"#prompt5", style:'font-size:10px;'} Пояснения
+          .form-group.has-success
+            %textarea.form-control(rows="4" cols="73")
+
+
+          %p.text-info
+            Обоснуйте, что нововведение реалистично воплотить в жизнь.
+            %a.btn.btn-success.btn-xs{type: "button", "data-toggle"=>"modal", "data-target"=>"#prompt6", style:'font-size:10px;'} Пояснения
+          .form-group.has-success
+            %textarea.form-control(rows="4" cols="73")
 
   %actions
-    = f.submit '',  class: 'btn'
+    = f.submit 'Сохранить',  class: 'btn btn-success btn-sm'
 
 
 

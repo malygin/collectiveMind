@@ -23,13 +23,13 @@
             =render partial:'discontent/posts/post_short2', object: post
 
           %td
-            %a.btn.btn-primary.btn-sm.pull-right(href='/procedure/1/stage/3/nova_nov') Добавить нововведение
+            %a.btn.btn-primary.btn-sm.pull-right(href="/project/#{@project.id}/concept/posts/new?dis_id=#{post.id}") Добавить нововведение
             %br
             %br
             .panel.panel-success
               .panel-body.nov-list
                 Пруд с водными растениями
-                %a(href="/procedure/1/stage/3/novation/1a") подробнее
+                %a(href="/project/#{@project.id}/concept/posts/new?dis_id=#{post.id}") подробнее
 
 
 

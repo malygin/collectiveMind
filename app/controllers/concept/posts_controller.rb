@@ -133,11 +133,11 @@ class Concept::PostsController < PostsController
 
   def new
     @post = current_model.new
-    @discontent_post = Discontent::Post.new
-    @aspects = Discontent::Aspect.where(:project_id => @project)
-
+    @discontent_post = Discontent::Post.find(params[:dis_id])
+    #@aspects = Discontent::Aspect.where(:project_id => @project)
+    @pa =Concept::PostAspect.new
     respond_to do |format|
-      format.html # new.html.erb
+      format.html { render :layout => 'application_two_column' }
       format.json { render json: @post }
     end
   end

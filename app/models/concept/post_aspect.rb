@@ -7,6 +7,7 @@ class Concept::PostAspect < ActiveRecord::Base
   belongs_to :discontent, :class_name => 'Discontent::Post', :foreign_key => :discontent_aspect_id
   has_many :voted_users, :through => :final_votings, :source => :user
   has_many :final_votings,:foreign_key => 'concept_post_aspect_id', :class_name => 'Concept::Voting'
+
   def voted(user)
     self.voted_users.where(:id => user)
   end
