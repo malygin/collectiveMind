@@ -16,7 +16,7 @@
           %div.panel.panel-info
             .panel-heading
               %h5.text-success
-                %b A.
+                %b A.*
 
               -#%a.btn.btn-success.btn-xs.pull-right{type: "button", "data-toggle"=>"modal", "data-target"=>"#prompt1", style:'font-size:10px;'} Пояснения
 
@@ -24,15 +24,14 @@
                 Что новое, исправляющее несовершенство, появится в будущем?
                 %a.btn.btn-success.btn-xs{type: "button", "data-toggle"=>"modal", "data-target"=>"#prompt1", style:'font-size:10px;'} Пояснения
               .form-group.has-danger
-                =text_area_tag "pa[#{@discontent_post.id}][name]",@pa.name, :class => "concept_cond"
-                %textarea.form-control(rows="4" cols="73")
+                =text_area_tag "pa[#{@discontent_post.id}][name]",@pa.name, :class => "concept_cond", rows: 4, cols: 134
 
 
               %p.text-info
                 Как это нововведение будет исправлять несовершенство?
                 %a.btn.btn-success.btn-xs{type: "button", "data-toggle"=>"modal", "data-target"=>"#prompt2", style:'font-size:10px;'} Пояснения
               .form-group.has-danger
-                %textarea.form-control(rows="4" cols="73")
+                =text_area_tag "pa[#{@discontent_post.id}][content]",@pa.content, :class => "concept_cond", rows: 4, cols: 134
 
 
           %hr
@@ -41,41 +40,49 @@
           %p.text-info
             Что должно делаться в будущем, чтобы нововведение функционировало?
             %a.btn.btn-success.btn-xs{type: "button", "data-toggle"=>"modal", "data-target"=>"#prompt3", style:'font-size:10px;'} Пояснения
+            .form-group.has-success
+              =text_area_tag "pa[#{@discontent_post.id}][positive]",@pa.positive, :class => "concept_cond", rows: 4, cols: 134
           %p.text-info
             Какие ресурсы требуются для поддержания УСЛОВИЯ и разрешения ЗАДАЧИ?
             %a.btn.btn-success.btn-xs{type: "button", "data-toggle"=>"modal", "data-target"=>"#prompt4", style:'font-size:10px;'} Пояснения
-          .b-form
-            .panel.panel-default
-              .panel-body
-                %p.text-info
-                  1. Условие
-                .form-group.has-success
-                  %input.form-control
+            .form-group.has-success
+              =text_area_tag "pa[#{@discontent_post.id}][positive_r]",@pa.positive_r, :class => "concept_cond", rows: 4, cols: 134
 
-                %p.text-info
-                  Ресурсы
-                .form-group.has-success
-                  %textarea.form-control(rows="2" cols="73")
-
-
-          %br
-          %a.btn.btn-danger.btn-xs.btn-b-form{type: "button", style:'font-size:10px;'} + Добавить условие и ресурсы
 
           %hr
           %h5.text-success
             %b C.
           %p.text-info
+            Если будут созданы и поддерживаться должные УСЛОВИЯ и разрешаться ЗАДАЧИ, какие из-за этого вероятны НЕЖЕЛАТЕЛЬНЫЕ ПОБОЧНЫЕ ЭФФЕКТЫ в будущем?
+            %a.btn.btn-success.btn-xs{type: "button", "data-toggle"=>"modal", "data-target"=>"#prompt3", style:'font-size:10px;'} Пояснения
+            .form-group.has-success
+              =text_area_tag "pa[#{@discontent_post.id}][negative]",@pa.negative, :class => "concept_cond", rows: 4, cols: 134
+          %p.text-info
+            Какие ресурсы требуются, чтобы предотвращать эти ЭФФЕКТЫ?
+            %a.btn.btn-success.btn-xs{type: "button", "data-toggle"=>"modal", "data-target"=>"#prompt4", style:'font-size:10px;'} Пояснения
+            .form-group.has-success
+              =text_area_tag "pa[#{@discontent_post.id}][negative_r]",@pa.negative, :class => "concept_cond", rows: 4, cols: 134
+
+
+
+          -#%br
+          -#%a.btn.btn-danger.btn-xs.btn-b-form{type: "button", style:'font-size:10px;'} + Добавить условие и ресурсы
+
+          %hr
+          %h5.text-success
+            %b D.
+          %p.text-info
             Покажите, что нововведение практично в работе?
             %a.btn.btn-success.btn-xs{type: "button", "data-toggle"=>"modal", "data-target"=>"#prompt5", style:'font-size:10px;'} Пояснения
           .form-group.has-success
-            %textarea.form-control(rows="4" cols="73")
+            =text_area_tag "pa[#{@discontent_post.id}][problems]",@pa.problems, :class => "concept_cond", rows: 4, cols: 134
 
 
           %p.text-info
             Обоснуйте, что нововведение реалистично воплотить в жизнь.
             %a.btn.btn-success.btn-xs{type: "button", "data-toggle"=>"modal", "data-target"=>"#prompt6", style:'font-size:10px;'} Пояснения
           .form-group.has-success
-            %textarea.form-control(rows="4" cols="73")
+            =text_area_tag "pa[#{@discontent_post.id}][reality]",@pa.reality, :class => "concept_cond", rows: 4, cols: 134
 
   %actions
     = f.submit 'Сохранить',  class: 'btn btn-success btn-sm'
