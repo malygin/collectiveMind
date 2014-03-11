@@ -2,6 +2,7 @@
   = render 'users/user_post', :user => comment.user
   .media-body
     =simple_format(comment.content)
+    уукукккккук
     .pull-right
       - if signed_in? and not comment.users.include?(current_user)
         =link_to({:action => :plus_comment, :id => comment.id, :against => false},  :remote => true, :method => :put,  id: "plus_comment_#{comment.id}") do
