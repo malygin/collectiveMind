@@ -27,7 +27,7 @@ class Core::Project < ActiveRecord::Base
   attr_accessible :desc,:postion, :secret, :type_project, :name, :short_desc, :knowledge, :status, :type_access, 
   :url_logo, :stage1, :stage2, :stage3, :stage4, :stage5
 
-  has_many :life_tape_posts, :class_name => "LifeTape::Post"
+  has_many :life_tape_posts, :class_name => "LifeTape::Post", :conditions => ['status = 0']
   has_many :aspects, :class_name => "Discontent::Aspect"
 
   has_many :discontents, :class_name => "Discontent::Post"
