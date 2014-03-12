@@ -15,11 +15,9 @@ def prepare_data
     @news = ExpertNews::Post.where(:project_id => @project).first
     @post_star = LifeTape::Post.where(:project_id => @project, :important => 't' ).limit(3)
     @mini_help = Help::Post.where(stage:1, mini: true).first
-    @post_dis = LifeTape::Post.joins(:comments).
+    @post_dis = LifeTape::Post.
         where(:project_id => @project).
-        group('"life_tape_posts"."id"').
-        select('"life_tape_posts".*, count(life_tape_comments.id) as count_comment ').
-        reorder('count_comment DESC').
+        reorder('number_views DESC').
         limit(3)
 end
 

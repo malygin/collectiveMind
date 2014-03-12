@@ -68,7 +68,7 @@
       %li.active
         %a(href="#active_line" data-toggle="tab") Активность
       %li
-        %a(href="#ideas" data-toggle="tab") Идеи
+        %a(href="#ideas" data-toggle="tab")="Темы (#{@user.life_tape_posts.count})"
       %li
         %a(href="#imperfections" data-toggle="tab") Несовершенства
       %li
@@ -77,62 +77,20 @@
         %a(href="#projects" data-toggle="tab")  Проекты
     .tab-content
       #active_line.tab-pane.fade.in.active
-      -#  %br
-      -#  .row
-      -#    .col-md-3
-      -#      %span.text-muted 13:45 12 апр.
-      -#    .col-md-9
-      -#      Добавил
-      -#      =link_to 'пост "Как уже отмечалось, политическое учение ... " ', '/procedure/1/stage/1/1/'
-      -#      в раздел "Сбора информации"
-      -#  %br
-      -#  .row
-      -#    .col-md-3
-      -#      %span.text-muted 11:44 13 апр.
-      -#    .col-md-9
-      -#      Разместил
-      -#      =link_to 'комментарий "Я не согласен с вашим ... " ', '/procedure/1/stage/1/1/'
-      -#      в раздел "Сбора информации"
-      -#
-      -#  %br
-      -#  .row
-      -#    .col-md-3
-      -#      %span.text-muted 13:45 12 апр.
-      -#    .col-md-9
-      -#      Добавил
-      -#      =link_to 'пост "Как уже отмечалось, политическое учение ... " ', '/procedure/1/stage/1/1/'
-      -#      в раздел "Сбора информации"
-      -#  %br
-      -#  .row
-      -#    .col-md-3
-      -#      %span.text-muted 11:44 13 апр.
-      -#    .col-md-9
-      -#      Разместил
-      -#      =link_to 'комментарий "Я не согласен с вашим ... " ', '/procedure/1/stage/1/1/'
-      -#      в раздел "Сбора информации"
-      -#
-      -#  %br
-      -#  .row
-      -#    .col-md-3
-      -#      %span.text-muted 13:45 12 апр.
-      -#    .col-md-9
-      -#      Добавил
-      -#      =link_to 'пост "Как уже отмечалось, политическое учение ... " ', '/procedure/1/stage/1/1/'
-      -#      в раздел "Сбора информации"
-      -#  %br
-      -#  .row
-      -#    .col-md-3
-      -#      %span.text-muted 11:44 13 апр.
-      -#    .col-md-9
-      -#      Разместил
-      -#      =link_to 'комментарий "Я не согласен с вашим ... " ', '/procedure/1/stage/1/1/'
-      -#      в раздел "Сбора информации"
-      -#
-      -#
-      -#
-      -#
-      -##ideas.tab-pane.fade.in
-      -#  %br
+        %br
+        -unless @journals.nil?
+          - @journals.each do |journal|
+            .row
+              .col-md-4
+                %span.text-muted=Russian::strftime(journal.created_at,"%d %B %k:%M:%S ")
+              .col-md-8
+                = journal_parser(journal, @project.id).html_safe
+
+
+
+      #ideas.tab-pane.fade.in
+        %br
+        = render @user.life_tape_posts
       -#    .media
       -#      %a.pull-left(href="/user/1")
       -#        = image_tag  'avatar.png',  class: "media-object"

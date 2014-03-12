@@ -1,5 +1,5 @@
 -if  user
-    %a.pull-left(href="/user/#{user.id}")
+    %a.pull-left(href="/project/#{@project.id}/users/#{user.id}")
         = image_tag user.avatar.url(:thumb),  class: "media-object"
         - unless user.boss?
             %h6
