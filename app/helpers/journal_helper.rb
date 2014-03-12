@@ -12,13 +12,13 @@ module JournalHelper
       when 'add_score_anal_concept_post'
 				'получил 20 балов за аналитику '+ link_to('за комментарий к образу', "/project/#{project}/concept/status/0/posts/#{j.body}")
       when 'concept_post_save'
-				'добавил  '+ link_to('образ', concept_post_path(project,j.body))
+				'добавил  '+ link_to('нововведение', concept_post_path(project,j.body))
       when 'concept_comment_save'
         s = j.body.split(':')
         if s.length == 1
-          'добавил комментарий к '+  link_to('образу', concept_post_path(project, j.body))
+          'добавил комментарий к '+  link_to('нововведению', concept_post_path(project, j.body))
         else
-          "добавил комментарий '#{s[0]}...' к "+  link_to('образу', concept_post_path(project, s[1]))
+          "добавил комментарий '#{s[0]}...' к "+  link_to('нововведению', concept_post_path(project, s[1]))
         end
 			when 'expert_news_post_save'
 				'добавил  '+ link_to('новость', expert_news_post_path(project, j.body))
@@ -32,19 +32,17 @@ module JournalHelper
 			
       when 'life_tape_comment_save'
         s = j.body.split(':')
-        if s.length == 1
-				'добавил(а) комментарий к '+  link_to('теме', "/project/#{project}/life_tape/posts/#{j.body}" )
-        else
+        if LifeTape::Post.find(s[1].split('#')[0]).status ==0
           "добавил(а) комментарий '#{s[0]}...' к "+  link_to('теме', "/project/#{project}/life_tape/posts/#{s[1]}" )
-
+        else
+          false
         end
       when 'life_tape_post_save'
         s = j.body.split(':')
-        if s.length == 1
-          'добавил(а)   '+  link_to('запись', "/project/#{project}/life_tape/posts/#{j.body}" )
+        if LifeTape::Post.find(s[1].split('#')[0]).status ==0
+         'добавил(а) тему '+  link_to("#{s[0]}...", "/project/#{project}/life_tape/posts/#{s[1]}" )
         else
-          'добавил(а) тему '+  link_to("#{s[0]}...", "/project/#{project}/life_tape/posts/#{s[1]}" )
-
+          false
         end
 
       when 'discontent_comment_save'
