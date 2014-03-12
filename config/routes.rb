@@ -54,6 +54,9 @@ scope '/project/:project' do
 
   namespace :life_tape do
     posts_routes
+    #===========================================================================================
+    match 'project/:project/life_tape/posts/:post_id' => 'life_tape/posts#update_comment'
+    #===========================================================================================
   end
 
   get :autocomplete_discontent_post_whend_discontent_posts , to: 'discontent/posts#autocomplete_discontent_post_whend'

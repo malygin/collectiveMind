@@ -47,6 +47,22 @@ end
     end
   end
 
+  #==============================================================================
+  # PUT /core/projects/1
+    def update_comment
+      @core_project = Core::Project.find(params[:id])
+
+      respond_to do |format|
+        if @core_project.update_attributes(params[:core_project])
+          format.html { redirect_to @core_project, success: 'Комментарий успешно отредактирован' }
+          format.js
+        else
+          format.html { render action: "edit" }
+          format.js
+        end
+      end
+    end
+  #==========================================================================
 
   def vote_list
     @posts = voting_model.where(:project_id => @project)
