@@ -23,6 +23,11 @@
         %span.text-muted
           Не состоит не в одной группе
           -#%b Сыновья Кобы
+        - if boss?
+          .scoreBar
+            =link_to "+30 баллов",  "/project/"+@project.id.to_s+"/users/"+@user.id.to_s+"/add_score/30", :remote => true, :method => :put, class: "voteCounter"
+            |
+            =link_to "+10 баллов",  "/project/"+@project.id.to_s+"/users/"+@user.id.to_s+"/add_score/10", :remote => true, :method => :put, class: "voteCounter"
 
       .col-md-3
         %span.text-muted.pull-right=@user.score

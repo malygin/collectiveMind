@@ -159,13 +159,15 @@ class UsersController < ApplicationController
 	def add_score
 		user = User.find(params[:id])
 		if boss?
-			user.update_column(:score, user.score + params[:score].to_i)
-      user.update_column(:score_a, user.score_a + params[:score].to_i)
 
+      user.add_score_by_type(params[:score].to_i, :score_a)
       @project = Core::Project.find(params[:project])
       user.journals.build(:type_event=>'add_score', :project => @project, :body=>params[:score]).save
     end
-		render json: user.score
+    respond_to do |format|
+
+      format.js
+    end
   end
 
 	def add_score_essay
