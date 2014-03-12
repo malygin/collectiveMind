@@ -80,11 +80,12 @@
         %br
         -unless @journals.nil?
           - @journals.each do |journal|
-            .row
-              .col-md-4
-                %span.text-muted=Russian::strftime(journal.created_at,"%d %B %k:%M:%S ")
-              .col-md-8
-                = journal_parser(journal, @project.id).html_safe
+            -  if journal_parser(journal, @project.id)
+              .row
+                .col-md-4
+                  %span.text-muted=Russian::strftime(journal.created_at,"%d %B %k:%M:%S ")
+                .col-md-8
+                  = journal_parser(journal, @project.id).html_safe
 
 
 

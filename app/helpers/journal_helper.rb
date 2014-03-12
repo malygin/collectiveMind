@@ -39,7 +39,7 @@ module JournalHelper
         end
       when 'life_tape_post_save'
         s = j.body.split(':')
-        if LifeTape::Post.find(s[1].split('#')[0]).status ==0
+        if LifeTape::Post.find(s[1]).status ==0
          'добавил(а) тему '+  link_to("#{s[0]}...", "/project/#{project}/life_tape/posts/#{s[1]}" )
         else
           false
