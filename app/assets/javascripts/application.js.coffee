@@ -30,9 +30,10 @@ $('#modal_help').on 'hidden.bs.modal', ->
   $("#add_record").fadeIn('slow')
 
 @show_filter_aspects_button = ->
-  $('#filter-aspect').stop().show().animate {
-    left: 15
-    opacity: 1}
+  $('#aspects_list').submit()
+#  $('#filter-aspect').stop().show().animate {
+#    left: 15
+#    opacity: 1}
 
 @reset_filter_aspects = ->
   $('input[type=checkbox]').prop('checked','')
