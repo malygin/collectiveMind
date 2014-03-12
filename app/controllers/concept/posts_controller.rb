@@ -3,7 +3,7 @@
 class Concept::PostsController < PostsController
   # GET /discontent/posts
   # GET /discontent/posts.json
-   layout 'life_tape/posts2', :only => [:new, :edit, :show]
+   layout 'application_two_column', :only => [:new, :edit, :show]
   def current_model
     Concept::Post
   end
@@ -52,32 +52,37 @@ class Concept::PostsController < PostsController
 
   def create
     @project = Core::Project.find(params[:project])
-    @concept_post = Concept::Post.new(params[:concept_post])
+    @concept_post = Concept::Post.new()
+    params[:pa].each do |pa|
+      post_aspect = Concept::PostAspect.new(pa[1])
+      disc = Discontent::Post.find(pa[0])
+      post_aspect.discontent = disc
+      @concept_post.post_aspects << post_aspect
+    end
     @concept_post.number_views =0
     @concept_post.user = current_user
     @concept_post.status = 0
     @concept_post.project = @project
-
-    unless params['correct_disc'].nil?
-      params['correct_disc'].each do |v|
-        if v!= ''
-          unless Discontent::Post.exists?(v[0])
-            disc =new_disc(v[1])
-            v[1].delete :disc
-            @concept_post.post_aspects.build(v[1].merge :discontent_aspect_id=> disc.id)
-          else
-            v[1].delete :disc
-            @concept_post.post_aspects.build(v[1].merge :discontent_aspect_id=> v[0])
-          end
-
-        end
-      end
-    end
+    #unless params['correct_disc'].nil?
+    #  params['correct_disc'].each do |v|
+    #    if v!= ''
+    #      unless Discontent::Post.exists?(v[0])
+    #        disc =new_disc(v[1])
+    #        v[1].delete :disc
+    #        @concept_post.post_aspects.build(v[1].merge :discontent_aspect_id=> disc.id)
+    #      else
+    #        v[1].delete :disc
+    #        @concept_post.post_aspects.build(v[1].merge :discontent_aspect_id=> v[0])
+    #      end
+    #
+    #    end
+    #  end
+    #end
     #
     respond_to do |format|
       if @concept_post.save!
          current_user.journals.build(:type_event=>'concept_post_save', :body=>@concept_post.id,  :project => @project).save!
-        format.html { redirect_to  action: "index" , notice: 'Образ добавлен!' }
+        format.html { redirect_to  action: "index"  }
         format.json { render json: @concept_post, status: :created, location: @concept_post }
       else
         format.html { render action: "new" }
@@ -92,22 +97,29 @@ class Concept::PostsController < PostsController
     @project = Core::Project.find(params[:project])
 
     @concept_post = Concept::Post.find(params[:id])
-    @concept_post.update_attributes(params[:concept_post])
+    #@concept_post.update_attributes(params[:concept_post])
     @concept_post.post_aspects.destroy_all
-    unless params['correct_disc'].nil?
-      params['correct_disc'].each do |v|
-        if v!= ''
-          unless Discontent::Post.exists?(v[0])
-            disc =new_disc(v[1])
-            v[1].delete :disc
-            @concept_post.post_aspects.build(v[1].merge :discontent_aspect_id=> disc.id)
-          else
-            @concept_post.post_aspects.build(v[1].merge :discontent_aspect_id=> v[0])
-          end
 
-        end
-      end
+    params[:pa].each do |pa|
+      post_aspect = Concept::PostAspect.new(pa[1])
+      disc = Discontent::Post.find(pa[0])
+      post_aspect.discontent = disc
+      @concept_post.post_aspects << post_aspect
     end
+    #unless params['correct_disc'].nil?
+    #  params['correct_disc'].each do |v|
+    #    if v!= ''
+    #      unless Discontent::Post.exists?(v[0])
+    #        disc =new_disc(v[1])
+    #        v[1].delete :disc
+    #        @concept_post.post_aspects.build(v[1].merge :discontent_aspect_id=> disc.id)
+    #      else
+    #        @concept_post.post_aspects.build(v[1].merge :discontent_aspect_id=> v[0])
+    #      end
+    #
+    #    end
+    #  end
+    #end
 
     respond_to do |format|
       if @concept_post.save!
@@ -144,7 +156,10 @@ class Concept::PostsController < PostsController
 
    def edit
      @post = current_model.find(params[:id])
-     @aspects = Discontent::Aspect.where(:project_id => @project)
+     @pa =@post.post_aspects.first
+
+     @discontent_post =@pa.discontent
+     #@aspects = Discontent::Aspect.where(:project_id => @project)
 
    end
 

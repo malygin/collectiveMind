@@ -1,54 +1,77 @@
-
-.wholePost.wider_area
+.media
   = render 'users/user_post', :user => @post.user
-  .posts
-    = render 'users/user_name', :user => @post.user, :created_at => @post.created_at
-    %p
-      %b Краткое описание образа
-      %br=simple_format(@post.show_content)
-    %p
-      %b Эссе об образе:
-      %br
-      = simple_format(@post.goal)
+
+
+- @post.post_aspects.each do |tp|
+  %h4 Нововведение (решение):
+  %br
+  %div.tab-content
+    %div.tab-pane.active#novation1
+      %div.panel.panel-default
+        %div.panel-body
+          %h5.text-infoУстраняемое несовершенство (проблема):
+          =render partial:'discontent/posts/post_short2', object: tp.discontent
+          %br
+
+          %hr
+          %div.panel.panel-info
+            .panel-heading
+              %h5.text-success
+                %b A.*
+              %p.text-info
+                Что новое, исправляющее несовершенство (проблему), появится в будущем?
+              .form-group.has-danger
+                %b=tp.name
+
+              %p.text-info
+                Как это нововведение будет исправлять несовершенство (проблему)?
+              .form-group.has-danger
+                %b=tp.content
+
+          %hr
+          %h5.text-success
+            %b B.
+          %p.text-info
+            Напишите о том, какие должны быть созданы и поддерживаться УСЛОВИЯ и разрешаться ПРАКТИЧЕСКИЕ ЗАДАЧИ.
+            .form-group.has-success
+              =tp.positive
+          %p.text-info
+            Какие ресурсы требуются для поддержания УСЛОВИЯ и разрешения ЗАДАЧИ?
+            .form-group.has-success
+              =tp.positive_r
+          %hr
+          %h5.text-success
+            %b C.
+          %p.text-info
+            Если будут созданы и поддерживаться должные УСЛОВИЯ и разрешаться ЗАДАЧИ, какие из-за этого вероятны НЕЖЕЛАТЕЛЬНЫЕ ПОБОЧНЫЕ ЭФФЕКТЫ в будущем?
+            .form-group.has-success
+              =tp.negative
+          %p.text-info
+            Какие ресурсы требуются, чтобы предотвращать эти ЭФФЕКТЫ?
+            .form-group.has-success
+              =tp.negative_r
+          %hr
+          %h5.text-success
+            %b D.
+          %p.text-info
+            Покажите, что нововведение практично в работе?
+          .form-group.has-success
+            =tp.problems
+          %p.text-info
+            Обоснуйте, что нововведение реалистично воплотить в жизнь.
+          .form-group.has-success
+            =tp.reality
 
     %br
-    %p.fimage Нововведения образа
-    %p  *для просмотра нововведения щелкните по нему мышью
-    %br
-    %div(id="accordion-resizer" class="ui-widget-content")
-      #accordion_concept
-        - @post.post_aspects.each do |tp|
-          %h3=tp.name
-          %div
-            %a{:name => tp.id}
-            %p.ftable.fline
-              %span.bigtext Устраняемое несовершенство:
-            %p.ftable.fcolor=tp.discontent.show_content.html_safe
-
-            %p.ftable.fline
-              %span.bigtext Название нововведения:
-              =tp.name
-            %p.ftable.fline
-              %span.bigtext Краткое описание нововведения:
-              %br
-              =tp.content
-            .ftable.fbackPositive
-              %span.fline.bigtext A. Какие в будущем должны быть созданы и поддерживаться УСЛОВИЯ, чтобы данное нововведение работало?
-              .task_supply=simple_format(tp.positive)
-            .ftable.fbackNegative
-              %span.fline.bigtext B. Если будут созданы и поддерживаться вышеозначенные УСЛОВИЯ, какие из-за этого вероятны НЕЖЕЛАТЕЛЬНЫЕ ПОБОЧНЫЕ ЭФФЕКТЫ в будущем?
-              .task_supply=simple_format(tp.negative)
-
-            .ftable.fback
-              %span.fline.bigtext C. Что, вероятно, может помешать в будущем должной работе всех перечисленных ресурсов и как с этим предлагается бороться?
-              %br
-              =tp.problems
-            .ftable.fback
-              %span.fline.bigtext D. Реалистичность и практичность: предложить средства формирования перечисленных ресурсов, обосновать их доступность и эффективность
-              =simple_format(tp.reality)
-
-
-    %br
-    = render 'shared/post_social_bar', :post => @post
+    = render 'shared/post_social_bar2', :post => @post
 
 = render 'shared/post_edit_bar', :post => @post
+%br
+%br
+  %ul.media-list#comments
+  = render :partial => 'shared/comment',:collection => @comments
+= will_paginate @comments
+- if signed_in?
+  = render :partial => 'shared/comment_form', :locals => { :comment => @comment, :url_link => url_for(:controller => @post.class.name.underscore.pluralize, :action => 'add_comment')}
+
+

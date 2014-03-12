@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140311205303) do
+ActiveRecord::Schema.define(:version => 20140312152231) do
 
   create_table "answers", :force => true do |t|
     t.string   "text"
@@ -54,8 +54,9 @@ ActiveRecord::Schema.define(:version => 20140311205303) do
   create_table "concept_comment_votings", :force => true do |t|
     t.integer  "user_id"
     t.integer  "comment_id"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at",                   :null => false
+    t.datetime "updated_at",                   :null => false
+    t.boolean  "against",    :default => true
   end
 
   add_index "concept_comment_votings", ["created_at", "comment_id"], :name => "index_concept_comment_voitings_on_created_at_and_comment_id"
@@ -355,8 +356,9 @@ ActiveRecord::Schema.define(:version => 20140311205303) do
   create_table "estimate_comment_votings", :force => true do |t|
     t.integer  "user_id"
     t.integer  "comment_id"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at",                   :null => false
+    t.datetime "updated_at",                   :null => false
+    t.boolean  "against",    :default => true
   end
 
   add_index "estimate_comment_votings", ["comment_id"], :name => "index_estimate_comment_voitings_on_comment_id"
@@ -768,8 +770,9 @@ ActiveRecord::Schema.define(:version => 20140311205303) do
   create_table "plan_comment_votings", :force => true do |t|
     t.integer  "user_id"
     t.integer  "comment_id"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at",                   :null => false
+    t.datetime "updated_at",                   :null => false
+    t.boolean  "against",    :default => true
   end
 
   add_index "plan_comment_votings", ["comment_id"], :name => "index_plan_comment_voitings_on_comment_id"
@@ -827,8 +830,9 @@ ActiveRecord::Schema.define(:version => 20140311205303) do
   create_table "plan_post_votings", :force => true do |t|
     t.integer  "user_id"
     t.integer  "post_id"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at",                   :null => false
+    t.datetime "updated_at",                   :null => false
+    t.boolean  "against",    :default => true
   end
 
   add_index "plan_post_votings", ["post_id"], :name => "index_plan_post_voitings_on_post_id"

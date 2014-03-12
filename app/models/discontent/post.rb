@@ -49,7 +49,7 @@ class Discontent::Post < ActiveRecord::Base
   end
 
   def show_content
-  	'<b>что: </b>'+self.content + '<br/> <b> когда: </b>'+ self.when + '<br/> <b>где: </b> ' +self.where+'<br/>'
+  	'<b>что: </b>'+self.content + '<br/> <b> когда: </b>'+ self.whend + '<br/> <b>где: </b> ' +self.whered+'<br/>'
   end
 
   def not_vote_for_other_post_aspects(user)

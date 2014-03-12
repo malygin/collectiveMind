@@ -1,12 +1,10 @@
--if  @project.status == 7
-  = link_to 'Добавить нововведение', new_concept_post_path ,  class: 'btn btn-sm btn-success'
 
 %table.table.table-striped
   %thead
     %tr
       %th
-      %th.text-success Несовершенства:
-      %th.text-success Варианты нововведений:
+      %th.text-success Несовершенства (проблемы):
+      %th.text-success(style='min-width: 300px;') Варианты нововведений (решений):
 
   %tbody
     -@aspects.each do |aspect|
@@ -23,13 +21,17 @@
             =render partial:'discontent/posts/post_short2', object: post
 
           %td
-            %a.btn.btn-primary.btn-sm.pull-right(href="/project/#{@project.id}/concept/posts/new?dis_id=#{post.id}") Добавить нововведение
+            -if  @project.status == 7
+              %a.btn.btn-primary.btn-sm.pull-right(href="/project/#{@project.id}/concept/posts/new?dis_id=#{post.id}") Добавить нововведение (решение)
             %br
             %br
-            .panel.panel-success
-              .panel-body.nov-list
-                Пруд с водными растениями
-                %a(href="/project/#{@project.id}/concept/posts/new?dis_id=#{post.id}") подробнее
+
+            - post.concept_conditions.each  do |pa|
+              - if pa.concept_post.status == 0
+                .panel.panel-success
+                  .panel-body.nov-list
+                    =pa.name
+                    =link_to 'подробнее', concept_post_path(@project, pa.concept_post)
 
 
 

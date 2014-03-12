@@ -1,16 +1,16 @@
+= render 'shared/help/new_concept'
 = form_for  @post, :url => {:project => @project.id, :action => @post.persisted? ? 'update' : 'create'},   :html => { :class => 'new_or_edit' }do |f|
-  %h4 Нововведение:
+  %h4 Нововведение (решение):
   %br
   %div.tab-content
     %div.tab-pane.active#novation1
       %div.panel.panel-default
         %div.panel-body
 
-          %h5.text-infoУстраняемое несовершенство:
+          %h5.text-infoУстраняемое несовершенство (проблема):
 
           =render partial:'discontent/posts/post_short2', object: @discontent_post
           %br
-          %a.btn.btn-danger.btn-sm{type: "button", "data-toggle"=>"modal", "data-target"=>"#add_nov", "data-backdrop"=>"static", "data-keyboard"=>"false", style:'font-size:10px;'} + Добавить несовершенство
 
           %hr
           %div.panel.panel-info
@@ -21,14 +21,14 @@
               -#%a.btn.btn-success.btn-xs.pull-right{type: "button", "data-toggle"=>"modal", "data-target"=>"#prompt1", style:'font-size:10px;'} Пояснения
 
               %p.text-info
-                Что новое, исправляющее несовершенство, появится в будущем?
+                Что новое, исправляющее несовершенство (проблему), появится в будущем?
                 %a.btn.btn-success.btn-xs{type: "button", "data-toggle"=>"modal", "data-target"=>"#prompt1", style:'font-size:10px;'} Пояснения
               .form-group.has-danger
                 =text_area_tag "pa[#{@discontent_post.id}][name]",@pa.name, :class => "concept_cond", rows: 4, cols: 134
 
 
               %p.text-info
-                Как это нововведение будет исправлять несовершенство?
+                Как это нововведение будет исправлять несовершенство (проблему)?
                 %a.btn.btn-success.btn-xs{type: "button", "data-toggle"=>"modal", "data-target"=>"#prompt2", style:'font-size:10px;'} Пояснения
               .form-group.has-danger
                 =text_area_tag "pa[#{@discontent_post.id}][content]",@pa.content, :class => "concept_cond", rows: 4, cols: 134
@@ -38,7 +38,7 @@
           %h5.text-success
             %b B.
           %p.text-info
-            Что должно делаться в будущем, чтобы нововведение функционировало?
+            Напишите о том, какие должны быть созданы и поддерживаться УСЛОВИЯ и разрешаться ПРАКТИЧЕСКИЕ ЗАДАЧИ.
             %a.btn.btn-success.btn-xs{type: "button", "data-toggle"=>"modal", "data-target"=>"#prompt3", style:'font-size:10px;'} Пояснения
             .form-group.has-success
               =text_area_tag "pa[#{@discontent_post.id}][positive]",@pa.positive, :class => "concept_cond", rows: 4, cols: 134
@@ -54,12 +54,12 @@
             %b C.
           %p.text-info
             Если будут созданы и поддерживаться должные УСЛОВИЯ и разрешаться ЗАДАЧИ, какие из-за этого вероятны НЕЖЕЛАТЕЛЬНЫЕ ПОБОЧНЫЕ ЭФФЕКТЫ в будущем?
-            %a.btn.btn-success.btn-xs{type: "button", "data-toggle"=>"modal", "data-target"=>"#prompt3", style:'font-size:10px;'} Пояснения
+            %a.btn.btn-success.btn-xs{type: "button", "data-toggle"=>"modal", "data-target"=>"#prompt7", style:'font-size:10px;'} Пояснения
             .form-group.has-success
               =text_area_tag "pa[#{@discontent_post.id}][negative]",@pa.negative, :class => "concept_cond", rows: 4, cols: 134
           %p.text-info
             Какие ресурсы требуются, чтобы предотвращать эти ЭФФЕКТЫ?
-            %a.btn.btn-success.btn-xs{type: "button", "data-toggle"=>"modal", "data-target"=>"#prompt4", style:'font-size:10px;'} Пояснения
+            %a.btn.btn-success.btn-xs{type: "button", "data-toggle"=>"modal", "data-target"=>"#prompt8", style:'font-size:10px;'} Пояснения
             .form-group.has-success
               =text_area_tag "pa[#{@discontent_post.id}][negative_r]",@pa.negative, :class => "concept_cond", rows: 4, cols: 134
 
