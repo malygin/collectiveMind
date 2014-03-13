@@ -1,10 +1,11 @@
--#= form_for comment, :method => :put do |f|
+
 = form_for comment, :html => {:class => 'new_or_edit'},  remote: true, :url => url_link, :method => :put do |f|
   = render 'shared/error_messages', :object =>f.object
   =f.text_area :content, :class => 'form-control', style: 'height: 70px;', placeholder: 'Ваш комментарий', id:'comment_text_area' #, :user_id => current_user, :post_id => comment.post.id
   .pull-right
     =f.submit 'Отправить', :id  => "send_post", class: 'btn btn-sm btn-success'
-
+.text-success#comment_success(style='display:none;')
+  Комментарий успешно обновлен
 
 -#%span=@comment.id
 -#= form_for @comment, :html => {:class => 'new_or_edit'},  remote: true, :url => url_link, :method => :put do |f|

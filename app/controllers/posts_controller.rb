@@ -87,7 +87,7 @@ def index
     if current_model.column_names.include? 'number_views'
       @post.update_column(:number_views, @post.number_views+1)
     end
-    @comment = comment_model.new  
+    @comment = comment_model.new
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @post }
