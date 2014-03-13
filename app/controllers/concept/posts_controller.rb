@@ -33,10 +33,12 @@ class Concept::PostsController < PostsController
 
   def index
     @posts = current_model.where(:project_id => @project, :status => @status).paginate(:page => params[:page])
-    if @status == '2'
-      if @project.status == 6
+
+      if @project.status == 8
         @number_v = @project.stage3 - current_user.concept_post_votings.size
         @votes = @project.stage3
+        @path_for_voting = "/project/#{@project.id}/concept/vote/"
+
         if boss?
           @all_people = @project.users.size
 
@@ -44,10 +46,8 @@ class Concept::PostsController < PostsController
           @votes = ActiveRecord::Base.connection.execute("select count(*) as r from (select  v.user_id from concept_votings v  left join   concept_post_aspects asp on (v.concept_post_aspect_id = asp.id) ) as dm").first["r"].to_i
         end
       end
-      render 'table', :layout => 'application_two_column'
-    else
-      render 'index' , :layout => 'application_two_column'
-    end
+
+    render 'index' , :layout => 'application_two_column'
   end
 
   def create
@@ -188,11 +188,7 @@ class Concept::PostsController < PostsController
      redirect_to  action: "index"
    end
   #write fact of voting in db
-   def vote
-     v = voting_model.find(params[:post_id])
-     v.final_votings.create(:user => current_user)
-     render json: v.discontent.id
-   end
+
 
   private
   def new_disc(param)

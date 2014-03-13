@@ -34,7 +34,7 @@ class Discontent::PostsController < PostsController
     @news = ExpertNews::Post.where(:project_id => @project).first 
     @status = params[:status]
     @aspect = params[:aspect]
-    @aspects = Discontent::Aspect.where(:project_id => @project)
+    @aspects = Discontent::Aspect.where(:project_id => @project, :status => 0)
     @mini_help = Help::Post.where(stage:2, mini: true).first
 
     @post_star =[]
@@ -59,7 +59,7 @@ class Discontent::PostsController < PostsController
     @status = 2 if @project.status == 5
     load_filter_for_aspects   if (request.xhr? and @order.nil? and @page.nil?)
 
-    @posts  = current_model.where(:project_id => @project)
+    @posts  = current_model.where(:project_id => @project, :status => 0)
     .where('aspect_id  IN (?) ' , current_user.aspects(@project.id).collect(&:id))
     .where(status: @status)
     .order_by_param(@order)

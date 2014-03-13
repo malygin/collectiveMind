@@ -47,7 +47,7 @@ end
 
 
   def vote_list
-    @posts = voting_model.where(:project_id => @project)
+    @posts = voting_model.where(:project_id => @project, :status => 0)
 
     @number_v = @project.get_free_votes_for(current_user, :life_tape)
     if @number_v == 0
