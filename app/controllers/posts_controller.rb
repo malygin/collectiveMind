@@ -62,7 +62,8 @@ def add_comment
        format.js
     end
     #redirect_to polymorphic_path(post, :project => @project.id)
- end 
+ end
+
 
 def index
     @posts = current_model.where(:project_id => @project).paginate(:page => params[:page])
@@ -252,7 +253,23 @@ def index
       format.js
     end
   end
-  
+
+  #def update_comment
+  #  #@project = Core::Project.find(params[:project])
+  #  #@post = current_model.find(params[:post_id])
+  #  #@comment = @post.comments.find(params[:id])
+  #  @id = params[:id]
+  #  @comment = comment_model.find(@id)
+  #  if @comment.update_attributes(params[:comment])
+  #    respond_to do |format|
+  #      format.js
+  #    end
+  #  end
+  #  #@id = params[:id]
+  #  #comment = comment_model.find(@id)
+  #  #@against =  params[:against] == 'true'
+  #  #comment.comment_votings.create(:user => current_user, :comment => comment,  :against => @against)
+  #end
 ### function for voiting
   #return list model for voiting, check stages
   def vote_list

@@ -47,22 +47,70 @@ end
     end
   end
 
-  #==============================================================================
-  # PUT /core/projects/1
-    def update_comment
-      @core_project = Core::Project.find(params[:id])
+  #def edit11
+  #
+  #end
 
+  # PUT project/:project/life_tape/posts/:post_id/comments/:id/edit
+  #def update_comment
+  #  @post = current_model.find(params[:id])
+  #  @project = Core::Project.find(params[:project])
+  #  @comment = current_model.find(params[:id])
+  #  #@project = Core::Project.find(params[:project])
+  #
+  #  respond_to do |format|
+  #    if @comment.update_attributes(params[:comment])
+  #      #format.html { redirect_to  :action=>'show', success: 'Комментарий успешно отредактирован' }
+  #      format.html {
+  #        flash[:success] = 'Комментарий успешно отредактирован'
+  #        redirect_to  :action=>'show', :project => @project, :post_id => @post.id}
+  #      format.js
+  #    else
+  #      format.html
+  #      format.js
+  #    end
+  #  end
+  #end
+
+  #def update_comment
+  #  @project = Core::Project.find(params[:project])
+  #  @post = current_model.find(params[:post_id])
+  #  @comment = @post.comments.find(params[:id])
+  #  if @comment.update_attributes(params[:comment])
+  #    respond_to do |format|
+  #      format.js {render 'posts/index'}
+  #    end
+  #  end
+  #  #unless  params[name_of_comment_for_param][:content]==''
+  #  #  @comment = post.comments.create(:content => params[name_of_comment_for_param][:content], :user =>current_user)
+  #  #
+  #  ##  flash[:success] = 'Комментарий обновлен'
+  #  ##else
+  #  ##  flash[:success] = 'Введите текст комментария'
+  #  #end
+  #end
+  def edit_comment
+    #@id = params[:id]
+    @comment = comment_model.find(params[:id])
+  end
+  def update_comment
+    #@project = Core::Project.find(params[:project])
+    #@post = current_model.find(params[:post_id])
+    #@comment = @post.comments.find(params[:id])
+    #@id = params[:id]
+    @comment = comment_model.find(params[:id])
+    #@post = @comment.post
+    #@post.user = current_user
+    if @comment.update_attributes(params[:life_tape_comment])
       respond_to do |format|
-        if @core_project.update_attributes(params[:core_project])
-          format.html { redirect_to @core_project, success: 'Комментарий успешно отредактирован' }
-          format.js
-        else
-          format.html { render action: "edit" }
-          format.js
-        end
+        format.js
       end
     end
-  #==========================================================================
+    #@id = params[:id]
+    #comment = comment_model.find(@id)
+    #@against =  params[:against] == 'true'
+    #comment.comment_votings.create(:user => current_user, :comment => comment,  :against => @against)
+  end
 
   def vote_list
     @posts = voting_model.where(:project_id => @project)

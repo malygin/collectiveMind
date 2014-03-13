@@ -1,0 +1,2 @@
+$("#update_comment_#{@comment.id}").hide();
+$('#comment_content_#{@comment.id}').html("#{escape_javascript(render  :partial => 'shared/update_comment_form', :locals => { :comment => @comment, :url_link => url_for(:action => 'update_comment')})}");

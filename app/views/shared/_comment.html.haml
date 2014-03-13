@@ -1,8 +1,7 @@
 .media{id: "comment_#{comment.id}"}
   = render 'users/user_post', :user => comment.user
   .media-body
-    =simple_format(comment.content)
-    уукукккккук
+    %div{id: "comment_content_#{comment.id}"}=simple_format(comment.content)
     .pull-right
       - if signed_in? and not comment.users.include?(current_user)
         =link_to({:action => :plus_comment, :id => comment.id, :against => false},  :remote => true, :method => :put,  id: "plus_comment_#{comment.id}") do
@@ -20,3 +19,8 @@
         %span.glyphicon.glyphicon-thumbs-up.text-muted
         %span.text-muted= "Против #{comment.users_against.count}"
         %span.glyphicon.glyphicon-thumbs-down.text-muted
+  - if current_user?(comment.user)
+    -#= link_to 'Редактировать','#', id: "update_comment_content" #, onClick: "update_life_tape_comment(#{comment.post.project.id},#{comment.post.id},#{comment.id},#{comment.content});" #:action => 'edit_comment',:project => @project, :post_id => @post, :id => comment.id
+    -#=link_to 'Редактировать','#',:action => 'update_comment',:remote => true, :method => :put,:project => @project, :post_id => @post, :id => comment.id #({:action => :update_comment, :id => comment.id},  :remote => true, :method => :put,  id: "update_comment_#{comment.id}")
+    =link_to({:action => :edit_comment, :id => comment.id},:remote => true) do
+      %span.text-success{id: "update_comment_#{comment.id}"} Редактировать

@@ -10,9 +10,11 @@ CollectiveMind::Application.routes.draw do
     resources :posts do
       member do
         put :add_comment
+        put :update_comment
         put :to_archive
         put :censored_comment
         get :plus
+        get :edit_comment
         put :plus_comment
       end
     end
@@ -54,9 +56,10 @@ scope '/project/:project' do
 
   namespace :life_tape do
     posts_routes
-    #===========================================================================================
-    match 'project/:project/life_tape/posts/:post_id' => 'life_tape/posts#update_comment'
-    #===========================================================================================
+    #match '/posts/:post_id/comments/:id/edit' => 'posts#update_comment'
+    #match '/posts/:id/comments/:id/edit' => 'life_tape/posts#update_comment'
+    match '/posts/:post_id/edit_comment' => 'posts#edit_comment'
+    match '/posts/:post_id/update_comment' => 'posts#update_comment'
   end
 
   get :autocomplete_discontent_post_whend_discontent_posts , to: 'discontent/posts#autocomplete_discontent_post_whend'
