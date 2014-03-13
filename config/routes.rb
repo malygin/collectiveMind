@@ -7,8 +7,7 @@ CollectiveMind::Application.routes.draw do
     put 'up/:post_id'  => 'posts#up'
     put 'down/:post_id'  => 'posts#down'
     get 'aspect/:aspect/posts/'  => 'posts#index'
-    #match '/posts/:post_id/edit_comment' => 'posts#edit_comment'
-    #match '/posts/:post_id/update_comment' => 'posts#update_comment'
+
     resources :posts do
       member do
         put :add_comment
