@@ -52,6 +52,7 @@ end
   def edit_comment
     @comment = comment_model.find(params[:id])
   end
+
   def update_comment
     @comment = comment_model.find(params[:id])
     if @comment.update_attributes(params[:life_tape_comment])

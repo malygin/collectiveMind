@@ -56,8 +56,6 @@ scope '/project/:project' do
 
   namespace :life_tape do
     posts_routes
-    #match '/posts/:post_id/comments/:id/edit' => 'posts#update_comment'
-    #match '/posts/:id/comments/:id/edit' => 'life_tape/posts#update_comment'
     match '/posts/:post_id/edit_comment' => 'posts#edit_comment'
     match '/posts/:post_id/update_comment' => 'posts#update_comment'
   end
