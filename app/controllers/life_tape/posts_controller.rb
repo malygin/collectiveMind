@@ -46,6 +46,9 @@ end
   end
 
 
+
+
+
   def vote_list
     @posts = voting_model.where(:project_id => @project, :status => 0)
 

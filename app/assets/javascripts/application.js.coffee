@@ -55,3 +55,4 @@ $('#modal_help').on 'hidden.bs.modal', ->
 @disontent_form_submit= ->
   $('#send_post').html('Ищем совпадения ...')
   $('#send_post').toggleClass('disabled')
+

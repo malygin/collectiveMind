@@ -1,7 +1,7 @@
 .media{id: "comment_#{comment.id}"}
   = render 'users/user_post', :user => comment.user
   .media-body
-    =simple_format(comment.content)
+    %div{id: "comment_content_#{comment.id}"}=simple_format(comment.content)
     .pull-right
       - if signed_in? and not comment.users.include?(current_user)
         =link_to({:action => :plus_comment, :id => comment.id, :against => false},  :remote => true, :method => :put,  id: "plus_comment_#{comment.id}") do
@@ -19,3 +19,6 @@
         %span.glyphicon.glyphicon-thumbs-up.text-muted
         %span.text-muted= "Против #{comment.users_against.count}"
         %span.glyphicon.glyphicon-thumbs-down.text-muted
+  - if current_user?(comment.user) or boss?
+    =link_to({:action => :edit_comment, :id => comment.id},:remote => true) do
+      %span.text-success{id: "update_comment_#{comment.id}"} Редактировать

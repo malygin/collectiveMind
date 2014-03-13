@@ -7,12 +7,16 @@ CollectiveMind::Application.routes.draw do
     put 'up/:post_id'  => 'posts#up'
     put 'down/:post_id'  => 'posts#down'
     get 'aspect/:aspect/posts/'  => 'posts#index'
+    #match '/posts/:post_id/edit_comment' => 'posts#edit_comment'
+    #match '/posts/:post_id/update_comment' => 'posts#update_comment'
     resources :posts do
       member do
         put :add_comment
+        put :update_comment
         put :to_archive
         put :censored_comment
         get :plus
+        get :edit_comment
         put :plus_comment
       end
     end
@@ -54,12 +58,14 @@ scope '/project/:project' do
 
   namespace :life_tape do
     posts_routes
+
   end
 
   get :autocomplete_discontent_post_whend_discontent_posts , to: 'discontent/posts#autocomplete_discontent_post_whend'
   get :autocomplete_discontent_post_whered_discontent_posts , to: 'discontent/posts#autocomplete_discontent_post_whered'
   post 'discontent/posts/:id/union', to:  'discontent/posts#union_discontent'
   get 'discontent/posts/unions', to:  'discontent/posts#unions'
+
   namespace :discontent do
     resources :aspects
     posts_routes

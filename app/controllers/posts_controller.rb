@@ -62,7 +62,8 @@ def add_comment
        format.js
     end
     #redirect_to polymorphic_path(post, :project => @project.id)
- end 
+ end
+
 
 def index
     @posts = current_model.where(:project_id => @project).paginate(:page => params[:page])
@@ -86,7 +87,7 @@ def index
     if current_model.column_names.include? 'number_views'
       @post.update_column(:number_views, @post.number_views+1)
     end
-    @comment = comment_model.new  
+    @comment = comment_model.new
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @post }
@@ -252,7 +253,7 @@ def index
       format.js
     end
   end
-  
+
 ### function for voiting
   #return list model for voiting, check stages
   def vote_list
@@ -362,6 +363,19 @@ def index
     if boss?
       comment = comment_model.find(params[:id])
       comment.update_column(:censored, true)
+    end
+  end
+
+  def edit_comment
+    @comment = comment_model.find(params[:id])
+  end
+
+  def update_comment
+    @comment = comment_model.find(params[:id])
+    if @comment.update_attributes(content: params[:content])
+      respond_to do |format|
+        format.js
+      end
     end
   end
 
