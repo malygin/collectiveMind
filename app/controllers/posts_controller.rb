@@ -119,6 +119,9 @@ def index
   # GET /discontent/posts/1/edit
   def edit
     @post = current_model.find(params[:id])
+    if @post.user != current_user  and not boss?
+      redirect_to life_tape_posts_path(@project)
+    end
   end
 
   # POST /discontent/posts

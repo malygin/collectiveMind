@@ -12,10 +12,12 @@ module SessionsHelper
 
 	def have_rights
 		# puts "_________________"+params[:project]
-		project = Core::Project.find(params[:project])
-		if (current_user.nil? or !(current_user.projects.include? project))  and project.type_access == 2 
-			redirect_to root_path, :notice => "У вас нет прав просматривать этот проект!"
-		end
+    #
+		#project = Core::Project.find(params[:project])
+		#if (current_user.nil? or !(current_user.projects.include? project))  and project.type_access == 2
+		#	redirect_to root_path, :notice => "У вас нет прав просматривать этот проект!"
+		#end
+
   end
 
 	def boss_authenticate

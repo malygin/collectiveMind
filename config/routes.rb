@@ -14,7 +14,7 @@ CollectiveMind::Application.routes.draw do
         put :update_comment
         put :to_archive
         put :censored_comment
-        get :plus
+        put :plus
         get :edit_comment
         put :plus_comment
       end

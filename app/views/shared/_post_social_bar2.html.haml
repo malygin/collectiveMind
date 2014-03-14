@@ -5,11 +5,11 @@
       %span.glyphicon.glyphicon-eye-open
       |
       - if signed_in? and not post.users.include?(current_user)
-        =link_to({:controller => post.class.name.underscore.pluralize ,:action => :plus, :project => @project,:status=>0, :aspect=>0,  :id => post.id, :against => false, :remote => true}, id: "plus_post_#{post.id}") do
+        =link_to({:controller => post.class.name.underscore.pluralize ,:action => :plus, :project => @project,:status=>0, :aspect=>0,  :id => post.id, :against => false,  :remote => true},:method => :put, id: "plus_post_#{post.id}") do
           %span.text-success За
           %span.text-success(id="plus_counter_#{post.id}")=post.users_pro.count
           %span.glyphicon.glyphicon-thumbs-up.text-success
-        =link_to({:controller => post.class.name.underscore.pluralize ,:action => :plus, :project => @project,:status=>0, :aspect=>0,  :id => post.id, :against => true, :remote => true}, id: "minus_post_#{post.id}") do
+        =link_to({:controller => post.class.name.underscore.pluralize ,:action => :plus, :project => @project,:status=>0, :aspect=>0,  :id => post.id, :against => true, :remote => true}, :method => :put, id: "minus_post_#{post.id}") do
           %span.text-danger Против
           %span.text-danger(id="minus_counter_#{post.id}")=post.users_against.count
           %span.glyphicon.glyphicon-thumbs-down.text-danger
