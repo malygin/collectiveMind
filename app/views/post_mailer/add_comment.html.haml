@@ -1,8 +1,17 @@
 %html
   %body
-    %h5
-      К вашему посту на портале
-      =link_to 'mass-decision', "http://mass-decision.ru/life_tape/posts/#{@post.id}"
+    %h3
+      К вашей теме на портале mass-decision.ru
       добавлен комментарий
-    =@comment.content
+    =  @comment.content
+    %br
+    =link_to ' подробнее', "http://mass-decision.ru/life_tape/posts/#{@post.id}"
+  %br
+  %br
+  %br
+  %br
+  %small
+    Команда проекта
+    =link_to 'massdecisoin', "http://mass-decision.ru/"
+
 
