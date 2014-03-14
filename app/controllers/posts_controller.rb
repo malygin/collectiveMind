@@ -232,7 +232,7 @@ def index
   def plus
     post = current_model.find(params[:id])
     @against =  params[:against] == 'true'
-    post.post_votings.create(:user => current_user, :post => post, :against => @against)
+    post.post_votings.create(:user => current_user, :post => post, :against => @against)  unless post.users.include? current_user
     @id= post.id
     respond_to do |format|
       format.js
@@ -243,7 +243,7 @@ def index
     @id = params[:id]
     comment = comment_model.find(@id)
     @against =  params[:against] == 'true'
-    comment.comment_votings.create(:user => current_user, :comment => comment,  :against => @against)
+    comment.comment_votings.create(:user => current_user, :comment => comment,  :against => @against) unless comment.users.include? current_user
     #if  (self.current_model  == Discontent::Post) or (self.current_model  == Concept::Post)
     #  if comment.comment_votings.count == 3 or current_user.boss?
     #    comment.user.add_score(20,:score_a)
