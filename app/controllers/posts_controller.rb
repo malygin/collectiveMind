@@ -54,7 +54,7 @@ def add_comment
       current_user.journals.build(:type_event=>name_of_comment_for_param+'_save', :project => @project, :body=>"#{@comment.content[0..24]}:#{post.id}#comment_#{@comment.id}").save!
       flash[:success] = 'Комментарий добавлен'
       current_user.add_score(:type => :add_comment)
-      PostMailer.add_comment(post, @comment).deliver  if post.user!=@comment.user
+      #PostMailer.add_comment(post, @comment).deliver  if post.user!=@comment.user
     else
       flash[:success] = 'Введите текст комментария'
     end
