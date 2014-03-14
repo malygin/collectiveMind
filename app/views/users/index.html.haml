@@ -1,46 +1,65 @@
 =link_to 'вернуться к процедуре', '/project/'+@project.id.to_s
 
 %h1 Рейтинг участников
-%b названия номинаций и размеры призов:
-%li Автор проекта, победившего по количеству голосов - 20т.р.
-%li Автор проекта, победившего по решению жюри - 20т.р.
-%li Участник, набравший наибольшее количество премиальных баллов - 15т.р.
-%li Участник, набравший наибольшее количество премиальных баллов в номинации «Генератор идей» – 12 т. р.
-%li Участники, набравшие наибольшее количество премиальных баллов в номинации «Аналитик»: 1 место – 10 т. р., 2 место – 8 т. р.
-%li Участники, набравшие наибольшее количество премиальных баллов в номинации «Оценщик»: 1 место – 6 т. р., 2 место – 5 т. р., 3 место – 4 т. р.
-
-
-
-%b Также предусмотрены дополнительные премии, не входящие в призовой фонд:
-%li автор проекта, набравшего более 80% голосов;
-%li самый активный участник проекта.
-
-И другие номинации!
-%br
-%br
+-#%b названия номинаций и размеры призов:
+-#%li Автор проекта, победившего по количеству голосов - 20т.р.
+-#%li Автор проекта, победившего по решению жюри - 20т.р.
+-#%li Участник, набравший наибольшее количество премиальных баллов - 15т.р.
+-#%li Участник, набравший наибольшее количество премиальных баллов в номинации «Генератор идей» – 12 т. р.
+-#%li Участники, набравшие наибольшее количество премиальных баллов в номинации «Аналитик»: 1 место – 10 т. р., 2 место – 8 т. р.
+-#%li Участники, набравшие наибольшее количество премиальных баллов в номинации «Оценщик»: 1 место – 6 т. р., 2 место – 5 т. р., 3 место – 4 т. р.
+-#
+-#
+-#
+-#%b Также предусмотрены дополнительные премии, не входящие в призовой фонд:
+-#%li автор проекта, набравшего более 80% голосов;
+-#%li самый активный участник проекта.
+-#
+-#И другие номинации!
+-#%br
+-#%br
 #tabs
-    %ul
-        %li=link_to "Общий рейтинг",'#tabs-1'
-        %li=link_to "Рейтинг Генераторов идей",'#tabs-2'
-        %li=link_to "Рейтинг Аналитиков",'#tabs-3'
-        %li=link_to "Рейтинг Оценщиков",'#tabs-4'
-    #tabs-1
-        = will_paginate
-        = render @users
-        = will_paginate
-    #tabs-2
-        = will_paginate
-        = render @users1,  :score_name =>  'score_g'
-        = will_paginate
+  .pull-right
+    -#Показан рейтинг,
+    -#=link_to "по текущему этапу", {:action => :show_top,:score_name =>  'score'},:remote => true
+    -#|
+    -#=link_to "Генераторов идей", {:action => :show_top, :score_name =>  'score_g'},:remote => true
+    -#|
+    -#=link_to "Аналитиков", {:action => :show_top,:score_name =>  'score_a'},:remote => true
+    -#|
+    -#=link_to "Оценщиков", {:action => :show_top, :score_name =>  'score_o'},:remote => true
+    Показан рейтинг,
+    =link_to "по текущему этапу", 'show_top',:locals => {:score_name =>  'score'},:remote => true
+    |
+    =link_to "Генераторов идей", {:action => :show_top, :score_name => 'score_g',:remote => true}
+    |
+    =link_to "Аналитиков", 'show_top',:score_name =>  'score_a',:remote => true
+    |
+    =link_to "Оценщиков", 'show_top', :score_name =>  'score_o',:remote => true
 
-    #tabs-3
-        = will_paginate
-        = render @users2,  :score_name =>  'score_a'
-        = will_paginate
+  %br
+  %br
+#tabs-1
+  = will_paginate
+  %table.table
+    %tbody
+      - @users.each_with_index do |user, i|
+        = render :partial => 'user', :locals => {:user => user, :number => i+1}
 
-    #tabs-4
-        = will_paginate
-        = render @users3,  :score_name =>  'score_o'
-        = will_paginate
+  = will_paginate
+-##tabs-2
+-#  = will_paginate
+-#  = render @users1,  :score_name =>  'score_g'
+-#  = will_paginate
+-#
+-##tabs-3
+-#  = will_paginate
+-#  = render @users2,  :score_name =>  'score_a'
+-#  = will_paginate
+-#
+-##tabs-4
+-#  = will_paginate
+-#  = render @users3,  :score_name =>  'score_o'
+-#  = will_paginate
 
 =link_to 'вернуться к процедуре', '/project/'+@project.id.to_s

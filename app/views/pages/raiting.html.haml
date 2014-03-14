@@ -1,0 +1,428 @@
+-#= render partial: 'application/stages' #, :locals => { :stage => :first }
+-#.row
+-#  .col-md-12
+-#    %ol.breadcrumb
+-#      %li
+-#        %a{:href=>"/"} Главная
+-#      %li.active Рейтинг участников
+-#
+-#.row
+-#  = render partial: 'application/left_side'
+
+.col-md-9
+  %h2.text-successРейтинг участников
+  %br
+
+  .pull-right
+    Показан рейтинг,
+    %a.text-muted(href="#utop1" data-toggle="tab" style="text-decoration: none;") по текущему этапу
+    |
+    %a(href="#utop2" data-toggle="tab") Генераторов идей
+    |
+    %a(href="#utop3" data-toggle="tab") Аналитиков
+    |
+    %a(href="#utop4" data-toggle="tab") Оценщиков
+    %br
+    %br
+
+    -##utop1
+    %table.table.top10
+      %tbody
+        %tr.top3
+          %td
+            %span 1
+          %td
+            .media
+              %a.pull-left(href="/user/1")
+                = image_tag  'avatar.png',  class: "media-object"
+                %br
+                =link_to 'Никита Белов', '/user/1'
+                %span.label.label-success new
+              .media-body
+                %span.text-success
+                  %a.text-success(href="/messages/1" style="text-decoration: none;") сообщения
+                  |
+                  %a.text-success(href="/user/1#active_line" style="text-decoration: none;") активность
+                  |
+                  %a.text-success(href="/user/1#ideas" style="text-decoration: none;") идеи
+                  |
+                  %a.text-success(href="/user/1#imperfections" style="text-decoration: none;") несовершенства
+                  |
+                  %a.text-success(href="/user/1#images" style="text-decoration: none;") образы
+                  |
+                  %a.text-success(href="/user/1#projects" style="text-decoration: none;") проекты
+                %br
+
+          %td
+            %span.text-success 7
+            %span.glyphicon.glyphicon-arrow-up.text-success
+
+          %td
+            %span.text-success 3500
+            %span.text-muted (7160)
+
+
+          -#
+          -#%tr.top3
+          -#  %td
+          -#    %span 2
+          -#  %td
+          -#    .media
+          -#      %a.pull-left(href="/user/1")
+          -#        = image_tag  'avatar2.png',  class: "media-object"
+          -#        %br
+          -#        =link_to 'Сергей Пронин', '/user/1'
+          -#
+          -#      .media-body
+          -#        %span.text-success
+          -#          %a.text-success(href="/messages/1" style="text-decoration: none;") сообщения
+          -#          |
+          -#          %a.text-success(href="/user/1#active_line" style="text-decoration: none;") активность
+          -#          |
+          -#          %a.text-success(href="/user/1#ideas" style="text-decoration: none;") идеи
+          -#          |
+          -#          %a.text-success(href="/user/1#imperfections" style="text-decoration: none;") несовершенства
+          -#          |
+          -#          %a.text-success(href="/user/1#images" style="text-decoration: none;") образы
+          -#          |
+          -#          %a.text-success(href="/user/1#projects" style="text-decoration: none;") проекты
+          -#        %br
+          -#
+          -#  %td
+          -#    %span.text-success 5
+          -#    %span.glyphicon.glyphicon-arrow-up.text-success
+          -#
+          -#
+          -#  %td
+          -#    %span.text-success 3400
+          -#    %span.text-muted (7060)
+          -#
+          -#%tr.top3
+          -#  %td
+          -#    %span 3
+          -#  %td
+          -#    .media
+          -#      %a.pull-left(href="/user/1")
+          -#        = image_tag  'avatar3.png',  class: "media-object"
+          -#        %br
+          -#        =link_to 'Вясечлав Голянин', '/user/1'
+          -#
+          -#      .media-body
+          -#        %span.text-success
+          -#          %a.text-success(href="/messages/1" style="text-decoration: none;") сообщения
+          -#          |
+          -#          %a.text-success(href="/user/1#active_line" style="text-decoration: none;") активность
+          -#          |
+          -#          %a.text-success(href="/user/1#ideas" style="text-decoration: none;") идеи
+          -#          |
+          -#          %a.text-success(href="/user/1#imperfections" style="text-decoration: none;") несовершенства
+          -#          |
+          -#          %a.text-success(href="/user/1#images" style="text-decoration: none;") образы
+          -#          |
+          -#          %a.text-success(href="/user/1#projects" style="text-decoration: none;") проекты
+          -#        %br
+          -#
+          -#  %td
+          -#
+          -#  %td
+          -#    %span.text-success 3300
+          -#    %span.text-muted (7000)
+          -#
+          -#%tr
+          -#  %td
+          -#    %span 4
+          -#  %td
+          -#    .media
+          -#      %a.pull-left(href="/user/1")
+          -#        = image_tag  'avatar.png',  class: "media-object"
+          -#        %br
+          -#        =link_to 'Максим Пингвинов', '/user/1'
+          -#
+          -#      .media-body
+          -#        %span.text-success
+          -#          %a.text-success(href="/messages/1" style="text-decoration: none;") сообщения
+          -#          |
+          -#          %a.text-success(href="/user/1#active_line" style="text-decoration: none;") активность
+          -#          |
+          -#          %a.text-success(href="/user/1#ideas" style="text-decoration: none;") идеи
+          -#          |
+          -#          %a.text-success(href="/user/1#imperfections" style="text-decoration: none;") несовершенства
+          -#          |
+          -#          %a.text-success(href="/user/1#images" style="text-decoration: none;") образы
+          -#          |
+          -#          %a.text-success(href="/user/1#projects" style="text-decoration: none;") проекты
+          -#        %br
+          -#
+          -#  %td
+          -#    %span.text-danger 5
+          -#    %span.glyphicon.glyphicon-arrow-down.text-danger
+          -#
+          -#  %td
+          -#    %span.h4.text-success 3200
+          -#    %span.text-muted (7000)
+          -#
+          -#%tr
+          -#  %td
+          -#    %span 5
+          -#  %td
+          -#    .media
+          -#      %a.pull-left(href="/user/1")
+          -#        = image_tag  'avatar2.png',  class: "media-object"
+          -#        %br
+          -#        =link_to 'Никита Ворохов', '/user/1'
+          -#
+          -#      .media-body
+          -#        %span.text-success
+          -#          %a.text-success(href="/messages/1" style="text-decoration: none;") сообщения
+          -#          |
+          -#          %a.text-success(href="/user/1#active_line" style="text-decoration: none;") активность
+          -#          |
+          -#          %a.text-success(href="/user/1#ideas" style="text-decoration: none;") идеи
+          -#          |
+          -#          %a.text-success(href="/user/1#imperfections" style="text-decoration: none;") несовершенства
+          -#          |
+          -#          %a.text-success(href="/user/1#images" style="text-decoration: none;") образы
+          -#          |
+          -#          %a.text-success(href="/user/1#projects" style="text-decoration: none;") проекты
+          -#        %br
+          -#
+          -#  %td
+          -#    %span.text-success 3
+          -#    %span.glyphicon.glyphicon-arrow-up.text-success
+          -#
+          -#
+          -#  %td
+          -#    %span.h4.text-success 3100
+          -#    %span.text-muted (6900)
+          -#
+          -#%tr
+          -#  %td
+          -#    %span 6
+          -#  %td
+          -#    .media
+          -#      %a.pull-left(href="/user/1")
+          -#        = image_tag  'avatar3.png',  class: "media-object"
+          -#        %br
+          -#        =link_to 'Михаил Панин', '/user/1'
+          -#        %span.label.label-success new
+          -#      .media-body
+          -#        %span.text-success
+          -#          %a.text-success(href="/messages/1" style="text-decoration: none;") сообщения
+          -#          |
+          -#          %a.text-success(href="/user/1#active_line" style="text-decoration: none;") активность
+          -#          |
+          -#          %a.text-success(href="/user/1#ideas" style="text-decoration: none;") идеи
+          -#          |
+          -#          %a.text-success(href="/user/1#imperfections" style="text-decoration: none;") несовершенства
+          -#          |
+          -#          %a.text-success(href="/user/1#images" style="text-decoration: none;") образы
+          -#          |
+          -#          %a.text-success(href="/user/1#projects" style="text-decoration: none;") проекты
+          -#        %br
+          -#
+          -#  %td
+          -#    %span.text-success 5
+          -#    %span.glyphicon.glyphicon-arrow-up.text-success
+          -#
+          -#  %td
+          -#    %span.h4.text-success 3000
+          -#    %span.text-muted (6800)
+          -#
+          -#%tr
+          -#  %td
+          -#    %span 7
+          -#  %td
+          -#    .media
+          -#      %a.pull-left(href="/user/1")
+          -#        = image_tag  'avatar.png',  class: "media-object"
+          -#        %br
+          -#        =link_to 'Леонид Максимов', '/user/1'
+          -#
+          -#      .media-body
+          -#        %span.text-success
+          -#          %a.text-success(href="/messages/1" style="text-decoration: none;") сообщения
+          -#          |
+          -#          %a.text-success(href="/user/1#active_line" style="text-decoration: none;") активность
+          -#          |
+          -#          %a.text-success(href="/user/1#ideas" style="text-decoration: none;") идеи
+          -#          |
+          -#          %a.text-success(href="/user/1#imperfections" style="text-decoration: none;") несовершенства
+          -#          |
+          -#          %a.text-success(href="/user/1#images" style="text-decoration: none;") образы
+          -#          |
+          -#          %a.text-success(href="/user/1#projects" style="text-decoration: none;") проекты
+          -#        %br
+          -#
+          -#  %td
+          -#
+          -#  %td
+          -#    %span.h4.text-success 2900
+          -#    %span.text-muted (6700)
+          -#
+          -#%tr
+          -#  %td
+          -#    %span 8
+          -#  %td
+          -#    .media
+          -#      %a.pull-left(href="/user/1")
+          -#        = image_tag  'avatar2.png',  class: "media-object"
+          -#        %br
+          -#        =link_to 'Лев Толстой', '/user/1'
+          -#        %span.label.label-success new
+          -#      .media-body
+          -#        %span.text-success
+          -#          %a.text-success(href="/messages/1" style="text-decoration: none;") сообщения
+          -#          |
+          -#          %a.text-success(href="/user/1#active_line" style="text-decoration: none;") активность
+          -#          |
+          -#          %a.text-success(href="/user/1#ideas" style="text-decoration: none;") идеи
+          -#          |
+          -#          %a.text-success(href="/user/1#imperfections" style="text-decoration: none;") несовершенства
+          -#          |
+          -#          %a.text-success(href="/user/1#images" style="text-decoration: none;") образы
+          -#          |
+          -#          %a.text-success(href="/user/1#projects" style="text-decoration: none;") проекты
+          -#        %br
+          -#
+          -#  %td
+          -#    %span.text-success 3
+          -#    %span.glyphicon.glyphicon-arrow-up.text-success
+          -#
+          -#  %td
+          -#    %span.h4.text-success 2700
+          -#    %span.text-muted (6500)
+          -#
+          -#%tr
+          -#  %td
+          -#    %span 9
+          -#  %td
+          -#    .media
+          -#      %a.pull-left(href="/user/1")
+          -#        = image_tag  'avatar3.png',  class: "media-object"
+          -#        %br
+          -#        =link_to 'Павел Гончаров', '/user/1'
+          -#
+          -#      .media-body
+          -#        %span.text-success
+          -#          %a.text-success(href="/messages/1" style="text-decoration: none;") сообщения
+          -#          |
+          -#          %a.text-success(href="/user/1#active_line" style="text-decoration: none;") активность
+          -#          |
+          -#          %a.text-success(href="/user/1#ideas" style="text-decoration: none;") идеи
+          -#          |
+          -#          %a.text-success(href="/user/1#imperfections" style="text-decoration: none;") несовершенства
+          -#          |
+          -#          %a.text-success(href="/user/1#images" style="text-decoration: none;") образы
+          -#          |
+          -#          %a.text-success(href="/user/1#projects" style="text-decoration: none;") проекты
+          -#        %br
+          -#
+          -#  %td
+          -#    %span.text-danger 2
+          -#    %span.glyphicon.glyphicon-arrow-down.text-danger
+          -#
+          -#  %td
+          -#    %span.h4.text-success 6300
+          -#    %span.text-muted (2100)
+          -#
+          -#%tr
+          -#  %td
+          -#    %span 10
+          -#  %td
+          -#    .media
+          -#      %a.pull-left(href="/user/1")
+          -#        = image_tag  'avatar2.png',  class: "media-object"
+          -#        %br
+          -#        =link_to 'Юрий Постнов', '/user/1'
+          -#
+          -#      .media-body
+          -#        %span.text-success
+          -#          %a.text-success(href="/messages/1" style="text-decoration: none;") сообщения
+          -#          |
+          -#          %a.text-success(href="/user/1#active_line" style="text-decoration: none;") активность
+          -#          |
+          -#          %a.text-success(href="/user/1#ideas" style="text-decoration: none;") идеи
+          -#          |
+          -#          %a.text-success(href="/user/1#imperfections" style="text-decoration: none;") несовершенства
+          -#          |
+          -#          %a.text-success(href="/user/1#images" style="text-decoration: none;") образы
+          -#          |
+          -#          %a.text-success(href="/user/1#projects" style="text-decoration: none;") проекты
+          -#        %br
+          -#
+          -#  %td
+          -#    %span.text-success 1
+          -#    %span.glyphicon.glyphicon-arrow-up.text-success
+          -#
+          -#  %td
+          -#    %span.h4.text-success 2000
+          -#    %span.text-muted (5800)
+          -#
+          -#
+          -#%tr.top-minus
+          -#  %td
+          -#    %span 11
+          -#  %td
+          -#    .media
+          -#      %a.pull-left(href="/user/1")
+          -#        = image_tag  'avatar3.png',  class: "media-object"
+          -#        %br
+          -#        =link_to 'Максим Рогов', '/user/1'
+          -#
+          -#
+          -#      .media-body
+          -#        %span.text-success
+          -#          %a.text-success(href="/messages/1" style="text-decoration: none;") сообщения
+          -#          |
+          -#          %a.text-success(href="/user/1#active_line" style="text-decoration: none;") активность
+          -#          |
+          -#          %a.text-success(href="/user/1#ideas" style="text-decoration: none;") идеи
+          -#          |
+          -#          %a.text-success(href="/user/1#imperfections" style="text-decoration: none;") несовершенства
+          -#          |
+          -#          %a.text-success(href="/user/1#images" style="text-decoration: none;") образы
+          -#          |
+          -#          %a.text-success(href="/user/1#projects" style="text-decoration: none;") проекты
+          -#        %br
+          -#
+          -#  %td
+          -#    %span.text-danger 3
+          -#    %span.glyphicon.glyphicon-arrow-down.text-danger
+          -#
+          -#  %td
+          -#    %span.h4.text-success 6100
+          -#    %span.text-muted (5000)
+          -#
+          -#%tr.top-minus
+          -#  %td
+          -#    %span 12
+          -#  %td
+          -#    .media
+          -#      %a.pull-left(href="/user/1")
+          -#        = image_tag  'avatar.png',  class: "media-object"
+          -#        %br
+          -#        =link_to 'Александр Горявин', '/user/1'
+          -#
+          -#
+          -#      .media-body
+          -#        %span.text-success
+          -#          %a.text-success(href="/messages/1" style="text-decoration: none;") сообщения
+          -#          |
+          -#          %a.text-success(href="/user/1#active_line" style="text-decoration: none;") активность
+          -#          |
+          -#          %a.text-success(href="/user/1#ideas" style="text-decoration: none;") идеи
+          -#          |
+          -#          %a.text-success(href="/user/1#imperfections" style="text-decoration: none;") несовершенства
+          -#          |
+          -#          %a.text-success(href="/user/1#images" style="text-decoration: none;") образы
+          -#          |
+          -#          %a.text-success(href="/user/1#projects" style="text-decoration: none;") проекты
+          -#        %br
+          -#
+          -#  %td
+          -#    %span.text-danger 5
+          -#    %span.glyphicon.glyphicon-arrow-down.text-danger
+          -#
+          -#  %td
+          -#    %span.h4.text-success 1500
+          -#    %span.text-muted (4500)

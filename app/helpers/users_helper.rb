@@ -28,5 +28,15 @@ module UsersHelper
 
 	def available_form_adding_frustration?(user)
 		signed_in? and current_user == user  and current_user.frustrations.count<Settings.max_frustration 
-	end
+  end
+
+  def set_class_for_top(number)
+    if number <= 3
+      'top3'
+    elsif 3 < number && number <= 10
+      'top10'
+    else
+      nil
+    end
+  end
 end
