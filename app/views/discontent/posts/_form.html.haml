@@ -42,6 +42,10 @@
               = f.radio_button :style,  '0'
               %span.text-success Отсутствующие достоинства
   %br
+  %b Мысленная контрольная проверка несовершенства на конкретность:
+  %br
+  cуществуют ли и какие практические действия, которые устранят это несовершенство?
+  %br
   %button#send_post.btn.btn-primary(type="submit" onclick='disontent_form_submit();'){:class => ('disabled' unless @post.content?)} Сохранить
   %hr
   %p#discontent_success.text-success Готово!

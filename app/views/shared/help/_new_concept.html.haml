@@ -6,17 +6,28 @@
         %h4#myModalLabel.modal-title Пояснения и пример правильного заполнения
       .modal-body
         %h4.text-primary Кратко опишите то, ЧТО появится в будущем и будет исправлять несовершенство.
-        %h4.text-primary Не пишите о том КАК это будет исправлять несовершенство - для этого есть следующий вопрос.
+        %h4.text-primary Не пишите о том, КАК это будет исправлять несовершенство - для этого есть следующий вопрос.
         %hr
         -#%h4.text-success Пример правильного заполнения
         -#%h5.text-success A.
         -#%p.text-info Что новое, исправляющее несовершенство, появится в будущем?
-        %h5.text-success Примеры:
+        %h5.text-success Пример:
+        %h5.text-success Несовершенство:
+        %span.label.label-default что
+        Пыльный и отвратительный на вид большой пустырь
+        %br
+        %span.label.label-default где
+        во дворе между домами
+        %br
+        %span.label.label-default когда
+        в теплое время года
+        %br
+        %br
+        %h5.text-success Нововведение:
         %p Газон по всему пустырю  с  клумбой  посредине
-        %p Пруд с водными растениями
 
       .modal-footer
-        %button.btn.btn-primary(type = "button" data-dismiss="modal") Я все понял!
+        %button.btn.btn-primary(type = "button" data-dismiss="modal") Мне все понятно!
 
 #prompt2.modal.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"}
   .modal-dialog
@@ -29,15 +40,24 @@
         %h4.text-primary Опишите то, КАК нововведение будет исправлять несовершенство.
         %h4.text-primary Старайтесь писать кратко, не углубляясь в лишние детали.
         %br
-        -#%h4.text-success Пример правильного заполнения
-        -#%h5.text-success A.
-        -#%p.text-info Как это нововведение будет исправлять несовершенство?
-        %h5.text-success Примеры:
+        %h5.text-success Пример:
+
+        %h5.text-success Несовершенство:
+        %span.label.label-default что
+        Пыльный и отвратительный на вид большой пустырь
+        %br
+        %span.label.label-default где
+        во дворе между домами
+        %br
+        %span.label.label-default когда
+        в теплое время года
+        %br
+        %br
+        %h5.text-success Как будет исправлено:
         %p Трава газона и декоративные растения на клумбе будут привлекательны на вид и предотвращать появление пыли.
-        %p Пруд очень красив и привлекателен и будет предотвращать появление пыли.
 
       .modal-footer
-        %button.btn.btn-primary(type = "button" data-dismiss="modal") Я все понял!
+        %button.btn.btn-primary(type = "button" data-dismiss="modal") Мне все понятно!
 
 #prompt3.modal.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"}
   .modal-dialog
@@ -48,18 +68,26 @@
       .modal-body
 
         %h4.text-primary Укажите ВСЕ УСЛОВИЯ для полноценного рутинного функционирования нововведения.
-        %h4.text-primary Включите "Машину времени", вообразите как выглядит будущее, в котором несовершенство скорректировано и опишите как оно работает.
+        %h4.text-primary Мысленно включите "машину времени"; то есть вообразите, как выглядит будущее, в котором несовершенство скорректировано; опишите, как оно работает.
         %br
-        -#%h4.text-success Пример правильного заполнения
-        -#%h5.text-success B.
-        -#%p.text-info Что должно делаться в будущем, чтобы нововведение функционировало (т.е. какие должны быть созданы и поддерживаться УСЛОВИЯ и разрешаться ПРАКТИЧЕСКИЕ ЗАДАЧИ)?
-        %h5.text-success Примеры
-        %p Необходимо весной собирать деньги у жильцов, засевать газон травой, а клумбу растениями, почву периодически вскапывать, удобрять и пропалывать, должен быть обеспечен регулярный полив.
-        %hr
-        %p Пруд нужно содержать в чистоте и постоянно ухаживать за растениями.
+        %h5.text-success Пример:
+
+        %h5.text-success Несовершенство:
+        %span.label.label-default что
+        Пыльный и отвратительный на вид большой пустырь
+        %br
+        %span.label.label-default где
+        во дворе между домами
+        %br
+        %span.label.label-default когда
+        в теплое время года
+        %br
+        %h5.text-success Условия:
+
+        %p Необходимо весной собирать деньги у жильцов; засевать газон травой, а клумбу растениями; почву периодически вскапывать, удобрять и пропалывать; должен быть обеспечен регулярный полив.
 
       .modal-footer
-        %button.btn.btn-primary(type = "button" data-dismiss="modal") Я все понял!
+        %button.btn.btn-primary(type = "button" data-dismiss="modal") Мне все понятно!
 
 #prompt4.modal.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"}
   .modal-dialog
@@ -71,22 +99,29 @@
 
         %h4.text-primary Ресурсами могут быть методы, технические, организационные или финансовые средства, человеческие силы и т.п.
         %h4.text-primary И в общем случае все, что необходимо иметь в распоряжении в будущем, чтобы обеспечить функционирование нововведения
-
         %br
-        -#%h4.text-success Пример правильного заполнения
-        -#%h5.text-success B.
-        -#%p.text-info Какие ресурсы требуются для поддержания УСЛОВИЙ и разрешения ЗАДАЧ (ресурсами могут быть методы, технические, организационные или финансовые средства, человеческие силы и т.п. – все, что необходимо иметь в распоряжении в будущем, чтобы обеспечить функционирование нововведения)?
-        %h5.text-success Примеры:
+        %h5.text-success Пример:
 
-        %span.text-success Условие:  необходимо периодически  вскапывать клумбу, удобрять и пропалывать
+        %h5.text-success Несовершенство:
+        %span.label.label-default что
+        Пыльный и отвратительный на вид большой пустырь
+        %br
+        %span.label.label-default где
+        во дворе между домами
+        %br
+        %span.label.label-default когда
+        в теплое время года
+        %br
+        %h5.text-success Условия:
+        %span.text-success необходимо периодически  вскапывать клумбу, удобрять и пропалывать...
         %span
-          %b Необходимые для этого ресурсы:
-          работник по уходу за растениями,  инструменты обработки почвы и растений, помещение для хранения технических средств
+          %b Требуемые для этого ресурсы:
+          работник по уходу за растениями,  инструменты обработки почвы и растений, помещение для хранения технических средств...
 
 
 
       .modal-footer
-        %button.btn.btn-primary(type = "button" data-dismiss="modal") Я все понял!
+        %button.btn.btn-primary(type = "button" data-dismiss="modal") Мне все понятно!
 
 #prompt5.modal.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"}
   .modal-dialog
@@ -104,11 +139,10 @@
         -#%p.text-info Покажите, что нововведение практично в работе (т.е. его функционирование в будущем не предусматривает ничего сложного и не потребует большого труда и затрат)?
         %h5.text-success Примеры
         %p Предлагается простая и повсеместно показавшая себя эффективной мера.
-        %hr
-        %p Практичность заглючается в долговечности и экономности.
+
 
       .modal-footer
-        %button.btn.btn-primary(type = "button" data-dismiss="modal") Я все понял!
+        %button.btn.btn-primary(type = "button" data-dismiss="modal") Мне все понятно!
 
 #prompt6.modal.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"}
   .modal-dialog
@@ -118,18 +152,16 @@
         %h4#myModalLabel.modal-title Пояснения и пример правильного заполнения
       .modal-body
         %h4.text-primary Покажите, что нужные для нововведения ресурсы несложно и недорого создать
-        %h4.text-primary Постарайтесь учесть все моменты, которые касаются реального применения нововведения в жизни.
         %br
         -#%h4.text-success Пример правильного заполнения
         -#%h5.text-success C.
         -#%p.text-info Обоснуйте, что нововведение реалистично воплотить в жизнь (т.е. нужные для него ресурсы несложно и недорого создать).
         %h5.text-success Примеры:
-        %p Работника нанять недорого, инструменты и материалы приобрести и организовать полив вполне возможно и жильцы, вероятно, согласятся собрать на это деньги.
-        %hr
-        %p Пруд недорого сделать и поддержание его в чистоте не вызовет больших затрат.
+        %p Работника нанять недорого; инструменты и материалы приобрести и организовать полив вполне возможно; жильцы, вероятно, согласятся дать на это деньги.
+
 
       .modal-footer
-        %button.btn.btn-primary(type = "button" data-dismiss="modal") Я все понял!
+        %button.btn.btn-primary(type = "button" data-dismiss="modal") Мне все понятно!
 
 #prompt7.modal.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"}
   .modal-dialog
@@ -141,15 +173,32 @@
 
         %h4.text-primary Напишите НЕЖЕЛАТЕЛЬНЫЕ ПОБОЧНЫЕ ЭФФЕКТЫ в будущем, которые могут возникнуть, Если будут созданы и поддерживаться должные УСЛОВИЯ и разрешаться ЗАДАЧИ
         %br
-        %h5.text-success Примеры:
-        -#%h4.text-success Пример правильного заполнения
-        -#%h5.text-success C.
-        -#%p.text-info Если будут созданы и поддерживаться должные УСЛОВИЯ и разрешаться ЗАДАЧИ, какие из-за этого вероятны НЕЖЕЛАТЕЛЬНЫЕ ПОБОЧНЫЕ ЭФФЕКТЫ в будущем?
-        %p Некоторые жильцы могут отказаться делать денежные взносы.
+        %h5.text-success Пример:
+
+        %h5.text-success Несовершенство:
+        %span.label.label-default что
+        Пыльный и отвратительный на вид большой пустырь
+        %br
+        %span.label.label-default где
+        во дворе между домами
+        %br
+        %span.label.label-default когда
+        в теплое время года
+        %br
+        %br
+        %span.text-success Условие:
+        %br
+        %span.text-success необходимо весной собирать деньги у жильцов...
+        %br
+        %br
+        %p
+          %b Вероятный нежелательный побочный эффект:
+          %br
+          Некоторые жильцы могут отказаться делать денежные взносы.
 
 
       .modal-footer
-        %button.btn.btn-primary(type = "button" data-dismiss="modal") Я все понял!
+        %button.btn.btn-primary(type = "button" data-dismiss="modal") Мне все понятно!
 
 #prompt8.modal.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"}
   .modal-dialog
@@ -160,15 +209,37 @@
       .modal-body
         %h4.text-primary Укажите ресурсы, чтобы предотвращать эти ЭФФЕКТЫ?
         %br
-        %h5.text-success Примеры
-        -#%h4.text-success Пример правильного заполнения
-        -#%h5.text-success C.
-        -#%p.text-info Какие ресурсы требуются, чтобы предотвращать эти ЭФФЕКТЫ?
-        %p Средства широкого публичного оповещения о должниках
+        %h5.text-success Пример:
+
+        %h5.text-success Несовершенство:
+        %span.label.label-default что
+        Пыльный и отвратительный на вид большой пустырь
+        %br
+        %span.label.label-default где
+        во дворе между домами
+        %br
+        %span.label.label-default когда
+        в теплое время года
+        %br
+        %br
+        %span.text-success Условие:
+        %br
+        %span.text-success необходимо весной собирать деньги у жильцов...
+        %br
+        %br
+        %span.text-success Вероятный нежелательный побочный эффект:
+        %br
+        %span.text-success Некоторые жильцы могут отказаться делать денежные взносы.
+        %br
+        %br
+        %p
+          %b Ресурсы предотвращения:
+          %br
+          Средства широкого публичного оповещения о должниках
 
 
       .modal-footer
-        %button.btn.btn-primary(type = "button" data-dismiss="modal") Я все понял!
+        %button.btn.btn-primary(type = "button" data-dismiss="modal") Мне все понятно!
 
 #prompt9.modal.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"}
   .modal-dialog
@@ -194,7 +265,7 @@
         %p Возможны большие издержки
 
       .modal-footer
-        %button.btn.btn-primary(type = "button" data-dismiss="modal") Я все понял!
+        %button.btn.btn-primary(type = "button" data-dismiss="modal") Мне все понятно!
 
 #prompt10.modal.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"}
   .modal-dialog
@@ -220,7 +291,7 @@
         %p Избирательные коммисии
 
       .modal-footer
-        %button.btn.btn-primary(type = "button" data-dismiss="modal") Я все понял!
+        %button.btn.btn-primary(type = "button" data-dismiss="modal") Мне все понятно!
 
 #prompt11.modal.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"}
   .modal-dialog
@@ -245,4 +316,4 @@
         %p Человек ответсвенный за содержание территории.
 
       .modal-footer
-        %button.btn.btn-primary(type = "button" data-dismiss="modal") Я все понял!
+        %button.btn.btn-primary(type = "button" data-dismiss="modal") Мне все понятно!
