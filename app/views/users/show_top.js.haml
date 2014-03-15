@@ -1,1 +1,9 @@
 $('#tabs-1').html("#{escape_javascript(render  :partial => 'users/user_table', :locals => { :users => @users, :score_name => @score_name})}");
+-#-if @score_name == "score"
+-#  $('#score').css('text-decoration','underline')
+-#-elsif @score_name == "score_g"
+-#  $('#score_g').css('text-decoration','underline')
+-#-elsif @score_name == "score_a"
+-#  $('#score_a').css('text-decoration','underline')
+-#-elsif @score_name == "score_o"
+-#  $('#score_a').css('text-decoration','underline')
