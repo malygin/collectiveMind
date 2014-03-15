@@ -147,7 +147,6 @@ class Discontent::PostsController < PostsController
        @post.user = current_user
        @post.save
        current_user.journals.build(:type_event=>name_of_model_for_param+"_save", :project => @project, :body=>"#{@post.content[0..12]}:#{@post.id}").save!
-       current_user.add_score(:type => :add_discontent_post, :object => @post)
 
       # redirect_to  :action=>'show', :id => @post.id, :project => @project
       #return

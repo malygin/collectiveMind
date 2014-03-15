@@ -141,9 +141,15 @@ class User < ActiveRecord::Base
     case h[:type]
       when :add_life_tape_post
         self.add_score_by_type(10, :score_g)
-      when :add_comment
+      when :plus_comment
         self.add_score_by_type(5, :score_a)
         self.journals.build(:type_event=>'useful_comment', :project => h[:project], :body=>"#{h[:comment].content[0..24]}:#{h[:path]}/#{h[:comment].post.id}#comment_#{h[:comment].id}").save!
+      when :plus_post
+
+        self.add_score_by_type(30, :score_g)  if h[:post].instance_of? Discontent::Post
+        self.add_score_by_type(10, :score_g)  if h[:post].instance_of? LifeTape::Post
+
+        self.journals.build(:type_event=>'useful_post', :project => h[:project], :body=>"#{h[:post].content[0..24]}:#{h[:path]}/#{h[:post].id}").save!
 
       when :to_archive_life_tape_post
         self.add_score_by_type(-10, :score_g)

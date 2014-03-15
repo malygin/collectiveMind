@@ -230,6 +230,8 @@ def index
     post = current_model.find(params[:id])
     @against =  params[:against] == 'true'
     post.post_votings.create(:user => current_user, :post => post, :against => @against)  unless post.users.include? current_user
+    post.user.add_score(:type => :plus_post, :project => Core::Project.find(params[:project]), :post => post, :path =>  post.class.name.underscore.pluralize)  if current_user.boss? or post.post_votings.count == 3
+
     @id= post.id
     respond_to do |format|
       format.js
@@ -241,7 +243,7 @@ def index
     comment = comment_model.find(@id)
     @against =  params[:against] == 'true'
     comment.comment_votings.create(:user => current_user, :comment => comment,  :against => @against) unless comment.users.include? current_user
-    current_user.add_score(:type => :add_comment, :project => Core::Project.find(params[:project]), :comment => comment, :path =>  comment.post.class.name.underscore.pluralize)  if current_user.boss? or comment.comment_votings.count == 3
+    comment.user.add_score(:type => :plus_comment, :project => Core::Project.find(params[:project]), :comment => comment, :path =>  comment.post.class.name.underscore.pluralize)  if current_user.boss? or comment.comment_votings.count == 3
 
     respond_to do |format|
       format.js

@@ -9,7 +9,10 @@ module JournalHelper
 				'получил(а)  '+j.body+' баллов за участие в сборе информации'
       when 'useful_comment'
         s = j.body.split(':')
-        'получил(а) 5 баллов за полезный комментарий '+ link_to(s[0], "/project/#{project}/#{s[1]}" )
+        'получил(а) баллы за полезный комментарий '+ link_to("#{s[0]}...", "/project/#{project}/#{s[1]}" )
+     when 'useful_post'
+        s = j.body.split(':')
+        'получил(а) баллы за полезный материал '+ link_to("#{s[0]}...", "/project/#{project}/#{s[1]}" )
 
       when 'add_score_anal'
 				'получил 20 балов за аналитику '+ link_to('за комментарий к несовершенству', "/project/#{project}/discontent/status/0/aspect/0/posts/#{j.body}")
