@@ -4,9 +4,13 @@ module JournalHelper
 	def journal_parser(j, project)
 		case j.type_event
 			when 'add_score_essay'
-				'получил  '+j.body+' баллов за эссе'
+				'получил(а)  '+j.body+' баллов за эссе'
       when 'add_score'
-				'получил  '+j.body+' баллов за участие в сборе информации'
+				'получил(а)  '+j.body+' баллов за участие в сборе информации'
+      when 'useful_comment'
+        s = j.body.split(':')
+        'получил(а) 5 баллов за полезный комментарий '+ link_to(s[0], "/project/#{project}/#{s[1]}" )
+
       when 'add_score_anal'
 				'получил 20 балов за аналитику '+ link_to('за комментарий к несовершенству', "/project/#{project}/discontent/status/0/aspect/0/posts/#{j.body}")
       when 'add_score_anal_concept_post'

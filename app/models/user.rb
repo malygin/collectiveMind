@@ -89,10 +89,10 @@ class User < ActiveRecord::Base
     end
   end
 
-  def add_score(score, type=:score_g)
-    self.update_column(:score, self.score + score)
-    self.update_column(type.to_sym, self.attributes[type.to_s] + score)
-  end
+  #def add_score(score, type=:score_g)
+  #  self.update_column(:score, self.score + score)
+  #  self.update_column(type.to_sym, self.attributes[type.to_s] + score)
+  #end
 
   def answered_for_help_stage?(stage)
     self.help_posts.pluck(:stage).include? stage
@@ -142,7 +142,9 @@ class User < ActiveRecord::Base
       when :add_life_tape_post
         self.add_score_by_type(10, :score_g)
       when :add_comment
-        self.add_score_by_type(2, :score_a)
+        self.add_score_by_type(5, :score_a)
+        self.journals.build(:type_event=>'useful_comment', :project => h[:project], :body=>"#{h[:comment].content[0..24]}:#{h[:path]}/#{h[:comment].post.id}#comment_#{h[:comment].id}").save!
+
       when :to_archive_life_tape_post
         self.add_score_by_type(-10, :score_g)
       when :add_discontent_post

@@ -52,11 +52,8 @@ def add_comment
     unless  params[name_of_comment_for_param][:content]==''
       @comment = post.comments.create(:content => params[name_of_comment_for_param][:content], :user =>current_user)
       current_user.journals.build(:type_event=>name_of_comment_for_param+'_save', :project => @project, :body=>"#{@comment.content[0..24]}:#{post.id}#comment_#{@comment.id}").save!
-      flash[:success] = 'Комментарий добавлен'
-      current_user.add_score(:type => :add_comment)
       #PostMailer.add_comment(post, @comment).deliver  if post.user!=@comment.user
-    else
-      flash[:success] = 'Введите текст комментария'
+
     end
     respond_to do |format|
        format.js
@@ -244,13 +241,7 @@ def index
     comment = comment_model.find(@id)
     @against =  params[:against] == 'true'
     comment.comment_votings.create(:user => current_user, :comment => comment,  :against => @against) unless comment.users.include? current_user
-    #if  (self.current_model  == Discontent::Post) or (self.current_model  == Concept::Post)
-    #  if comment.comment_votings.count == 3 or current_user.boss?
-    #    comment.user.add_score(20,:score_a)
-    #    @project = Core::Project.find(params[:project])
-    #    comment.user.journals.build(:type_event=>'add_score_anal_'+name_of_model_for_param, :project => @project, :body=>"#{comment.post.id}#comment_#{comment.id}").save!
-    #  end
-    #end
+    current_user.add_score(:type => :add_comment, :project => Core::Project.find(params[:project]), :comment => comment, :path =>  comment.post.class.name.underscore.pluralize)  if current_user.boss? or comment.comment_votings.count == 3
 
     respond_to do |format|
       format.js
