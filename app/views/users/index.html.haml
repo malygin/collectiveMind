@@ -21,13 +21,13 @@
 #tabs
   .pull-right
     Показан рейтинг,
-    =link_to "по текущему этапу", {:action => :show_top, :score_name => 'score'},:remote => true
+    =link_to "по текущему этапу", {:action => :show_top, :score_name => 'score'},:remote => true, class: "score_class top_all", id: "score_all"
     |
-    =link_to "Генераторов идей", {:action => :show_top, :score_name => 'score_g'},:remote => true
+    =link_to "Генераторов идей", {:action => :show_top, :score_name => 'score_g'},:remote => true, class: "score_class"
     |
-    =link_to "Аналитиков", {:action => :show_top, :score_name => 'score_a'},:remote => true
+    =link_to "Аналитиков", {:action => :show_top, :score_name => 'score_a'},:remote => true, class: "score_class"
     |
-    =link_to "Оценщиков", {:action => :show_top, :score_name => 'score_o'},:remote => true
+    =link_to "Оценщиков", {:action => :show_top, :score_name => 'score_o'},:remote => true, class: "score_class"
   %br
   %br
 #tabs-1

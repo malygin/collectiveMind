@@ -1,1 +1,4 @@
-$("#comment_#{@comment.id}").animate({height: 0, opacity:0}, 1000).queue(function() { $(this).remove(); });
+$("#comment_#{@comment.id}").animate({height: 0, opacity:0}, 1000);
+setTimeout(function() {
+$('#comment_#{@comment.id}').remove()
+}, 1000)
