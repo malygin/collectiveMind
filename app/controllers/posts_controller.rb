@@ -379,6 +379,16 @@ def index
     end
   end
 
+  def destroy_comment
+    @project = Core::Project.find(params[:project])
+    @comment = comment_model.find(params[:id])
+    @comment.destroy if @comment.user == current_user or current_user.boss?
+    respond_to do |format|
+      format.js
+    end
+  end
+
+
   protected
 
   def load_filter_for_aspects

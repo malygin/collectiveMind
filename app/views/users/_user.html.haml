@@ -17,9 +17,6 @@
 -#
 -#.dotline=image_tag('dotline.png')
 
--#%tr{class: if number <= 3; 'top3' elsif 3 < number <= 10; "top10" else nil end}
--#%tr{class: (number <= 3)? 'top3' : nil, class: (3 < number <= 10)? 'top10' : nil }{id: "top_user_#{user.id}"}
--#%tr{id: "top_user_#{user.id}", onload: "add_class_for_top(#{number},#{user.id});"}
 %tr{class: set_class_for_top(number)}
   %td
     %span=number
@@ -28,23 +25,8 @@
       %a.pull-left(href="/project/#{@project.id}/users/#{user.id}")
         = image_tag user.avatar.url(:thumb),  class: "media-object"
         %br
-        -#=link_to user.to_s, "/project/#{@project.id}/users/#{user.id}"
         =link_to user, user_path(@project, user)
         -#%span.label.label-success new
-
-      -#.media-body
-      -#  %span.text-success
-      -#    =link_to "сообщения", "/project/#{@project.id}/users/#{user.id}"
-      -#    |
-      -#    =link_to "активность", "/project/#{@project.id}/users/#{user.id}"
-      -#    |
-      -#    =link_to "темы", "/project/#{@project.id}/users/#{user.id}"
-      -#    |
-      -#    =link_to "несовершенства", "/project/#{@project.id}/users/#{user.id}"
-      -#    |
-      -#    =link_to "образы", "/project/#{@project.id}/users/#{user.id}"
-      -#    |
-      -#    =link_to "образы", "/project/#{@project.id}/users/#{user.id}"
 
   %td
     -#%span.text-success 7
@@ -52,8 +34,8 @@
 
   %td
     %span.text-success
-      -unless local_assigns[:score_name].nil?
-        %span.rate= user.send(score_name)
+      -unless @score_name.nil?
+        %span.rate= user.send(@score_name)
       -else
         %span.rate= user.score
     %span.text-muted (0)

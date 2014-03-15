@@ -22,3 +22,6 @@
   - if current_user?(comment.user) or boss?
     =link_to({:action => :edit_comment, :id => comment.id},:remote => true) do
       %span.text-success{id: "update_comment_#{comment.id}"} Редактировать
+    \|
+    = link_to 'Удалить', {:action => :destroy_comment, :id => comment.id}, :method => :put, :remote => true, :confirm => 'Удалить комментарий?', :class => "text-danger"
+

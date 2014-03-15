@@ -1,7 +1,5 @@
-= will_paginate
 %table.table
   %tbody
     - users.each_with_index do |user, i|
       = render :partial => 'user', :locals => {:user => user, :number => i+1}
 
-= will_paginate

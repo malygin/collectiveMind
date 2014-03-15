@@ -20,46 +20,21 @@
 -#%br
 #tabs
   .pull-right
-    -#Показан рейтинг,
-    -#=link_to "по текущему этапу", {:action => :show_top,:score_name =>  'score'},:remote => true
-    -#|
-    -#=link_to "Генераторов идей", {:action => :show_top, :score_name =>  'score_g'},:remote => true
-    -#|
-    -#=link_to "Аналитиков", {:action => :show_top,:score_name =>  'score_a'},:remote => true
-    -#|
-    -#=link_to "Оценщиков", {:action => :show_top, :score_name =>  'score_o'},:remote => true
     Показан рейтинг,
-    =link_to "по текущему этапу", 'show_top',:locals => {:score_name =>  'score'},:remote => true
+    =link_to "по текущему этапу", {:action => :show_top, :score_name => 'score'},:remote => true
     |
-    =link_to "Генераторов идей", {:action => :show_top, :score_name => 'score_g',:remote => true}
+    =link_to "Генераторов идей", {:action => :show_top, :score_name => 'score_g'},:remote => true
     |
-    =link_to "Аналитиков", 'show_top',:score_name =>  'score_a',:remote => true
+    =link_to "Аналитиков", {:action => :show_top, :score_name => 'score_a'},:remote => true
     |
-    =link_to "Оценщиков", 'show_top', :score_name =>  'score_o',:remote => true
-
+    =link_to "Оценщиков", {:action => :show_top, :score_name => 'score_o'},:remote => true
   %br
   %br
 #tabs-1
-  = will_paginate
   %table.table
     %tbody
       - @users.each_with_index do |user, i|
         = render :partial => 'user', :locals => {:user => user, :number => i+1}
 
-  = will_paginate
--##tabs-2
--#  = will_paginate
--#  = render @users1,  :score_name =>  'score_g'
--#  = will_paginate
--#
--##tabs-3
--#  = will_paginate
--#  = render @users2,  :score_name =>  'score_a'
--#  = will_paginate
--#
--##tabs-4
--#  = will_paginate
--#  = render @users3,  :score_name =>  'score_o'
--#  = will_paginate
 
 =link_to 'вернуться к процедуре', '/project/'+@project.id.to_s

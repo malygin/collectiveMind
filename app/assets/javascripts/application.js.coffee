@@ -56,10 +56,4 @@ $('#modal_help').on 'hidden.bs.modal', ->
   $('#send_post').html('Ищем совпадения ...')
   $('#send_post').toggleClass('disabled')
 
-#@add_class_for_top = (number,user)->
-#  alert("123")
-#  if number <= 3
-#    $("#top_user_"+user).addClass('top3')
-#  if 3 < number <= 10
-#    $("#top_user_"+user).addClass('top10')
 
