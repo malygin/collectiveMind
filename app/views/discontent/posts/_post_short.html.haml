@@ -2,6 +2,6 @@
   - if post_short. user
     =link_to post_short.user, user_path(@project, post_short.user)
   .media-body
-    = render partial: 'discontent/posts/post_content', object: post_short
-    = render 'shared/post_social_bar2', :post => post_short
+    %small= render partial: 'discontent/posts/post_content', object: post_short
+    -#= render 'shared/post_social_bar2', :post => post_short
 

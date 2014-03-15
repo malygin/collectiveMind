@@ -1,10 +1,10 @@
 .pull-right
   %a.btn.btn-default.menu_table(href="/project/#{@project.id}/discontent/posts" )
     %span.glyphicon.glyphicon-th-list
-    Списком
+    Список
   %a.active.btn.btn-default.menu_table(href="#" )
     %span.glyphicon.glyphicon-th
-    Таблицей
+    Таблица
 
 - if signed_in? and @project.status ==3
   = link_to '+ Добавить свое несовершенство в список', new_discontent_post_path(@project) , id: 'add_record',  class: 'btn btn-sm btn-success'
@@ -23,8 +23,8 @@
       %td
         %span.label.label-t=aspect.content
       %td
-        =render partial:'post_short', collection: aspect.negative_posts.by_status(@status)
+        =render partial:'post_short', collection: aspect.positive_posts.by_status(@status)
 
       %td
-        =render partial:'post_short', collection: aspect.positive_posts.by_status(@status)
+        =render partial:'post_short', collection: aspect.negative_posts.by_status(@status)
 
