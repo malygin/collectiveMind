@@ -66,11 +66,12 @@ module JournalHelper
          if s.length == 1
            'добавил(а) комментарий к '+  link_to('несовершенству', "/project/#{project}/discontent/posts/#{j.body}")
          else
-           "добавил(а) комментарий '#{s[0]}...' к "+  link_to('несовершенству', "/project/#{project}/discontent/posts/#{s[1]}")
+           "добавил(а) комментарий '#{s[0]}...' к "+  link_to('несовершенство', "/project/#{project}/discontent/posts/#{s[1]}")
 
          end
       when 'discontent_post_save'
-				'добавил(а) '+  link_to('несовершенство', discontent_post_path(project, j.body))
+        s = j.body.split(':')
+				'добавил(а) несовершенство '+ link_to("#{s[0]}...", "/project/#{project}/discontent/posts/#{s[1]}")
       when 'discontent_post_revision'
         'отправил на доработку ' +link_to('несовершенство', discontent_post_path(project,j.body))
       when 'discontent_post_acceptance'

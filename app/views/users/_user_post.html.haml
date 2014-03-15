@@ -3,8 +3,9 @@
         = image_tag user.avatar.url(:thumb),  class: "media-object"
         - unless user.boss?
             %h6
+                %small Баллов:
+
                 = user.score
-                %small баллов
         -#= image_tag 'award.png', title: 'Награда за 3 добавленных поста'
 
         %br
