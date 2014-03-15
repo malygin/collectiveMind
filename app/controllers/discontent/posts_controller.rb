@@ -142,7 +142,7 @@ class Discontent::PostsController < PostsController
       r = Discontent::Post.where(:project_id => @project.id, status: 0).collect {|d| [ d, d.content.similar(params[name_of_model_for_param][:content])]}
       r.sort_by!(&:last)
     end
-    if r.nil? or  r.empty? or  r.last[1] < 20
+    if r.nil? or  r.empty? or  r.last[1] < 40
        @post = @project.discontents.create(params[name_of_model_for_param])
        @post.user = current_user
        @post.save
@@ -151,7 +151,7 @@ class Discontent::PostsController < PostsController
       # redirect_to  :action=>'show', :id => @post.id, :project => @project
       #return
     else
-      @posts = r.collect {|d| d[0] if d[1]> 20}.compact.reverse
+      @posts = r.collect {|d| d[0] if d[1]> 40}.compact.reverse
     end
     respond_to do |format|
       format.html
