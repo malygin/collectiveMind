@@ -159,6 +159,17 @@ class Discontent::PostsController < PostsController
     end
   end
 
+  def update
+    @post = current_model.find(params[:id])
+    @project = Core::Project.find(params[:project])
+    @post.update_attributes(params[name_of_model_for_param])
+
+    respond_to do |format|
+      format.html
+      format.js
+    end
+  end
+
    def union_discontent
      @project = Core::Project.find(params[:project])
      @post = Discontent::Post.find(params[:id])
