@@ -12,6 +12,7 @@ CollectiveMind::Application.routes.draw do
       member do
         put :add_comment
         put :update_comment
+        put :destroy_comment
         put :to_archive
         put :censored_comment
         put :plus
@@ -23,6 +24,8 @@ CollectiveMind::Application.routes.draw do
 
 devise_for :users
 match '/project/:project', :to => 'core/projects#to_project'
+#match '/project/:project/life_tape/posts/raiting', :to => 'pages#raiting'
+#match '/project/:project/users/show_top', :to => 'users#show_top'
 
 namespace :core, :shallow => true do
   resources :projects do
@@ -38,6 +41,7 @@ scope '/project/:project' do
   get '/article2', :to => 'core/projects#article2'
   get '/article3', :to => 'core/projects#article3'
 
+
   namespace :help do
     post :save_help_answer, :to => 'posts#save_help_answer'
     resources :posts
@@ -46,6 +50,7 @@ scope '/project/:project' do
     resources :posts
   end
   resources :users do
+    get :show_top, :on => :collection
     member do
       put :forecast
       put :forecast_concept

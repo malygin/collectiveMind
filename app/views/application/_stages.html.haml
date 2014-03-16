@@ -13,7 +13,7 @@
       #bs-example-navbar-collapse-1.collapse.navbar-collapse
         %ul.nav.navbar-nav
           %li{class:  @project.stage_style(:life_tape_posts) }
-            = link_to "/project/#{@project.id}/life_tape/posts", class: "#{@project.stage_style_link(@breadcrumbs[0].name, :life_tape_posts)}" do
+            = link_to "/project/#{@project.id}/life_tape/posts" , class: "#{@project.stage_style_link(@breadcrumbs[0].name, :life_tape_posts)}" do
               =@project.status_title(:life_tape_posts)
               %br
               %small.text-center=t('stages.record', count: @project.life_tape_posts.count)
@@ -27,7 +27,7 @@
           %li.divider_vertical
 
           %li{class:  @project.stage_style(:concept_posts)}
-            = link_to "/project/#{@project.id}/concept/posts", class:"#{@project.stage_style_link(@breadcrumbs[0].name, :concept_posts)}" do
+            = link_to "/project/#{@project.id}/concept/posts" , class:"#{@project.stage_style_link(@breadcrumbs[0].name, :concept_posts)}" do
               =@project.status_title(:concept_posts)
               %br
               %small.text-center=t('stages.concepts', count: @project.concept_ongoing_post.count)

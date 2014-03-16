@@ -18,8 +18,8 @@
           =link_to t('menu.help'), help_posts_path(@project)
         %li
           =link_to t('menu.base_knowledge'),   knowbase_posts_path(@project)
-        %li.disabled
-          %a{:href => "#"}="Рейтинг участников"
+        %li
+          =link_to t('menu.raiting'), "/project/#{@project.id}/users"
         -#%li.dropdown
         -#  %a.dropdown-toggle{"data-toggle" => "dropdown", :href => "#"}
         -#    =t('menu.switch_procedure')

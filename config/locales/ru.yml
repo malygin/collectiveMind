@@ -3,6 +3,7 @@ ru:
     main: "Главная"
     help: "Помощь"
     base_knowledge: "База знаний"
+    raiting: "Рейтинг участников"
     search_text: "что я ищу"
     search: "Поиск"
     switch_procedure: "Перейти"

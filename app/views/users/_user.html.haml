@@ -1,18 +1,41 @@
-.wholePost
-    .avatar
-        = link_to gravatar_for(user), "/project/#{@project.id}/users/#{user.id}"
-        -#%br
-        -#%span.role= user.role_name
-    .posts
-        %span.namedate= user.name_title
+-#.wholePost
+-#    .avatar
+-#        = link_to gravatar_for(user), "/project/#{@project.id}/users/#{user.id}"
+-#        -#%br
+-#        -#%span.role= user.role_name
+-#    .posts
+-#        -#%span.namedate= user.name_title
+-#        %br
+-#        Набрано балов -
+-#
+-#        -unless local_assigns[:score_name].nil?
+-#            %span.rate= user.send(score_name)
+-#        -else
+-#            %span.rate= user.score
+-#
+-#        .social
+-#
+-#.dotline=image_tag('dotline.png')
+
+%tr{class: set_class_for_top(number)}
+  %td
+    %span=number
+  %td
+    .media
+      %a.pull-left(href="/project/#{@project.id}/users/#{user.id}")
+        = image_tag user.avatar.url(:thumb),  class: "media-object"
         %br
-        Набрано балов -
+        =link_to user, user_path(@project, user)
+        -#%span.label.label-success new
 
-        -unless local_assigns[:score_name].nil?
-            %span.rate= user.send(score_name)
-        -else
-            %span.rate= user.score
+  %td
+    -#%span.text-success 7
+    -#%span.glyphicon.glyphicon-arrow-up.text-success
 
-        .social
-
-.dotline=image_tag('dotline.png')
+  %td
+    %span.text-success
+      -unless @score_name.nil?
+        %span.rate= user.send(@score_name)
+      -else
+        %span.rate= user.score
+    %span.text-muted (0)

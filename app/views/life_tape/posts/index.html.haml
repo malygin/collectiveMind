@@ -1,4 +1,4 @@
-- unless current_user.answered_for_help_stage?(1)
+- if not current_user.answered_for_help_stage?(1) and not @mini_help.nil?
     =render partial: 'shared/small_help', object: @mini_help
 
 %small#filter_posts
