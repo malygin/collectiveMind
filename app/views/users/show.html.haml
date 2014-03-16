@@ -75,7 +75,7 @@
       %li
         %a(href="#ideas" data-toggle="tab")="Темы (#{@user.life_tape_posts.count})"
       %li
-        %a(href="#imperfections" data-toggle="tab") Несовершенства
+        %a(href="#imperfections" data-toggle="tab")="Несовершенства (#{@user.discontent_posts.count})"
       %li
         %a(href="#images" data-toggle="tab")  Образы
       %li
@@ -97,73 +97,11 @@
       #ideas.tab-pane.fade.in
         %br
         = render @user.life_tape_posts
-      -#    .media
-      -#      %a.pull-left(href="/user/1")
-      -#        = image_tag  'avatar.png',  class: "media-object"
-      -#
-      -#        %br
-      -#        =link_to 'Никита Белов', '/user/1'
-      -#
-      -#      .media-body
-      -#        %span.label.label-info  Брендинг
-      -#        %span.label.label-info  Техническая
-      -#        %br
-      -#        Мне кажется мы решительно не дооцениваем силу нашего внутреннего противодействия существующим проблемам в брендинге ...
-      -#        %a(href="/procedure/1/stage/1/1/") подробнее
-      -#        %br
-      -#        %br
-      -#        .row
-      -#          .col-md-2
-      -#            %small 11.12.2013
-      -#          .col-md-10
-      -#            .pull-right
-      -#              114
-      -#              %span.glyphicon.glyphicon-eye-open
-      -#              |
-      -#              %a(href="#")
-      -#                %span.text-success  поддерживают 23
-      -#                %span.glyphicon.glyphicon-thumbs-up.text-success
-      -#              |
-      -#              %a(href="#")
-      -#                комментировать 7
-      -#                %span.glyphicon.glyphicon-comment
-      -#    .media
-      -#      %a.pull-left(href="/user/1")
-      -#        = image_tag  'avatar.png',  class: "media-object"
-      -#
-      -#        %br
-      -#        =link_to 'Никита Белов', '/user/1'
-      -#
-      -#      .media-body
-      -#        %span.label.label-info  Брендинг
-      -#        %span.label.label-info  Техническая
-      -#        %br
-      -#        Мне кажется мы решительно не дооцениваем силу нашего внутреннего противодействия существующим проблемам в брендинге ...
-      -#        %a(href="/procedure/1/stage/1/1/") подробнее
-      -#        %br
-      -#        %br
-      -#        .row
-      -#          .col-md-2
-      -#            %small 11.12.2013
-      -#          .col-md-10
-      -#            .pull-right
-      -#              114
-      -#              %span.glyphicon.glyphicon-eye-open
-      -#              |
-      -#              %a(href="#")
-      -#                %span.text-success  поддерживают 23
-      -#                %span.glyphicon.glyphicon-thumbs-up.text-success
-      -#              |
-      -#              %a(href="#")
-      -#                комментировать 7
-      -#                %span.glyphicon.glyphicon-comment
-      -#
-      -#
-      -#
-      -#
-      -#
 
 
+      #imperfections.tab-pane.fade.in
+        %br
+        = render partial: 'discontent/posts/post_short', collection: @user.discontent_posts
 
 
 
