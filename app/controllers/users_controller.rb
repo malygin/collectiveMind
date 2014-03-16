@@ -32,12 +32,12 @@ class UsersController < ApplicationController
 	def index
     @project = Core::Project.find(params[:project])
     add_breadcrumb I18n.t('menu.raiting'), users_path(@project)
-    @users = User.where('score>0').order('score DESC').paginate(:page =>params[:page])
+    @users = User.where('score>0').where('admin=?', false).order('score DESC').paginate(:page =>params[:page])
   end
 
   def show_top
     @project = Core::Project.find(params[:project])
-    @users = User.scope_score_name(params[:score_name]).paginate(:page =>params[:page])
+    @users = User.scope_score_name(params[:score_name]).where('admin=?', false).paginate(:page =>params[:page])
     @score_name = params[:score_name]
     respond_to do |format|
       format.js
