@@ -64,7 +64,7 @@ class Discontent::PostsController < PostsController
     .where('aspect_id  IN (?) ' , current_user.aspects(@project.id).collect(&:id))
     .where(status: @status)
     .order_by_param(@order)
-    .paginate(:page => params[:page], :per_page => 20)
+    .paginate(:page => params[:page], :per_page => 5)
 
     respond_to do |format|
       format.html {
