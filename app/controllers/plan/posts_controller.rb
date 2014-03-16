@@ -25,6 +25,8 @@ class Plan::PostsController < PostsController
     @news = ExpertNews::Post.first  
     @status = params[:status]
     @aspects = Discontent::Aspect.where(:project_id => @project)
+    add_breadcrumb I18n.t('stages.plan'), concept_posts_path(@project)
+
 
   end
 

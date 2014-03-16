@@ -1,5 +1,6 @@
-- if signed_in? and @project.status == 7
-	= link_to image_tag('add_project.png'), new_plan_post_path
+- if signed_in? and @project.status == 9
+  = link_to '+ Добавить Проект', new_plan_post_path(@project) , id: 'add_record',  class: 'btn btn-sm btn-success'
+  %br
 / -else
 / 	Авторизуйтесь, чтобы добавить проект
 

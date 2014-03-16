@@ -1,20 +1,11 @@
-- unless @news.nil?
-    %h1 Новости
-    %p.righttext
-        = @news.anons
-        = link_to 'подробнее',  expert_news_post_path(@project, @news)
-%ul.leftlink
-    %li= link_to "Обсуждаются", plan_posts_path(@project,:status => 0), class: menu_status(0)
-    %li= link_to "Архив", plan_posts_path(@project,:status =>3), class: menu_status(3)
-    %li= link_to "Принятые", plan_posts_path(@project,:status =>2), class: menu_status(2)
-    - if boss?
-        %li= link_to "На рассмотрении", plan_posts_path(@project,:status =>1), class: menu_status(1)
+=render 'shared/journal_news_feed', :journals => @journals, :news => @news
+.panel.panel-info
+    .panel-heading Обратите внимание!
+    .panel-body
+        За каждое добавленное несовершенство вы можете получить от 10 до 30 баллов.
+        Базовое несовершенство оценивается в
+        %span.text-success 10 баллов
+        Если помимо обязательного поля вы заполните два необязательных, это принесет вам 10 дополнительных баллов.
+        Если добавленное вами несовершенство будет относиться к категории  «Отсутствующие достоинства», вы получите еще 10 баллов.
 
--unless @journals.nil?
-    .redtitle Активность
-    - @journals.each do |journal|
-        %p.righttext
-            =Russian::strftime(journal.created_at,"%d %B %k:%M:%S ")
-            %b= journal.user.name_title
-            = journal_parser(journal, @project.id).html_safe
-        =image_tag('dots.png')
+

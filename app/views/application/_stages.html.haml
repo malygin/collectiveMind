@@ -33,11 +33,11 @@
               %small.text-center=t('stages.concepts', count: @project.concept_ongoing_post.count)
           %li.divider_vertical
 
-          %li.disabled
-            %a{:href => "#"}
-              Проекты
+          %li{class:  @project.stage_style(:plan_posts)}
+            = link_to "/project/#{@project.id}/plan/posts" , class:"#{@project.stage_style_link(@breadcrumbs[0].name, :plan_posts)}" do
+              =@project.status_title(:plan_posts)
               %br
-              %small.text-center 0 проектов
+              %small.text-center=t('stages.plans', count: @project.plan_post.count)
           %li.divider_vertical
 
           %li.disabled

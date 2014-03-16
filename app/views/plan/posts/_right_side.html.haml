@@ -1,24 +1,4 @@
--if boss?
-    %p.righttext
-        текущий статус проекта
-        %br
-        %span.rate= status_title(@project.status)
-    %br
-    -if @project.status == 7
-        =link_to 'Начать голосование',  next_stage_core_project_path(@project), id: 'change_stage'
-    -if @project.status == 8
-        =link_to 'Вернуться к этуп сбора проектов',  pr_stage_core_project_path(@project), id: 'change_stage'
-        %br
-        =link_to 'Начать сбор оценок',  next_stage_core_project_path(@project), id: 'change_stage'
-%h1 Хотите узнать, что такое проекты?
-%p.righttext
-    Тогда обязательно посмотрите раздел помощи,
-    = link_to 'раздел помощь', '/project/8/help'
-    ,где мы подготовили для вас рекомендации по составлению проектов.
-%h1 Техподдержка
-%p.righttext
-    Что-то непонятно?
-    = link_to 'Задайте вопрос', question_posts_path(@project.id)
+
 
 
 

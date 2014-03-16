@@ -39,6 +39,8 @@ class Core::Project < ActiveRecord::Base
   has_many :concept_accepted_post, :conditions =>"status = 2  ", :class_name => "Concept::Post"
   has_many :concept_for_admin_post, :conditions =>"status = 1  ", :class_name => "Concept::Post"
 
+  has_many :plan_post, :conditions =>"status = 0", :class_name => "Plan::Post"
+
   has_many :project_users
   has_many :users, :through => :project_users
   has_many :knowbase_posts, :class_name => 'Knowbase::Post'
@@ -46,8 +48,8 @@ class Core::Project < ActiveRecord::Base
   LIST_STAGES = {1 => {name: 'Сбор информации', :type_stage => :life_tape_posts, status: [0,1,2]},
          2 => { name: 'Анализ ситуации', :type_stage =>  :discontent_posts, status: [3,4,5,6]},
          3 => { name: 'Формулирование проблемы', :type_stage => :concept_posts, status: [7,8]},
-         4 => { name: 'Проекты', :type_stage =>  :plan_posts, status: [7,8]},
-         5 => { name: 'Оценивание', :type_stage =>  :estimate_posts, status: [9,10]}}.freeze
+         4 => { name: 'Проекты', :type_stage =>  :plan_posts, status: [9]},
+         5 => { name: 'Оценивание', :type_stage =>  :estimate_posts, status: [10,11]}}.freeze
 
 
   def get_free_votes_for(user, stage)
@@ -104,6 +106,8 @@ class Core::Project < ActiveRecord::Base
         3
       when :concept_posts
         7
+      when :plan_posts
+        9
 
 
      end
@@ -124,7 +128,7 @@ class Core::Project < ActiveRecord::Base
         I18n.t('stages.concept')
       when 8
         'голосование за концепции и рефлексия'
-      when 9
+      when 9, :plan_posts
         'создание проектов'
       when 10
         'выставление оценок'
