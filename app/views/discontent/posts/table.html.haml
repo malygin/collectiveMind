@@ -13,14 +13,16 @@
 %table.table
 
   -@aspects.each do |aspect|
+
+    %tr
+      %td(colspan=3)
+        %span.label.label-t=aspect.content
     %tr
       %td
         %span.label.label-p  Отсутствующие достоинства
       %td
         %span.label.label-n(style='min-width: 300px;')  Имеющиеся недостатки
-    %tr
-      %td(colspan=3)
-        %span.label.label-t=aspect.content
+
     %tr
       %td
 
