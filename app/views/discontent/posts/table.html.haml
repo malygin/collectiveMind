@@ -15,13 +15,13 @@
   -@aspects.each do |aspect|
     %tr
       %td
-      %td
         %span.label.label-p  Отсутствующие достоинства
       %td
         %span.label.label-n(style='min-width: 300px;')  Имеющиеся недостатки
     %tr
-      %td
+      %td(colspan=3)
         %span.label.label-t=aspect.content
+    %tr
       %td
 
         =render partial:'post_short', collection: aspect.positive_posts.by_status(@status)
