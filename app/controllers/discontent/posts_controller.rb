@@ -37,8 +37,8 @@ class Discontent::PostsController < PostsController
     @aspects = Discontent::Aspect.where(:project_id => @project, :status => 0)
     @mini_help = Help::Post.where(stage:2, mini: true).first
 
-    @post_star = []
-    #@post_star = Discontent::Post.where(:project_id => @project, :important => 't' ).limit(3)
+    #@post_star = []
+    @post_star = Discontent::Post.where(:project_id => @project, :important => 't' ).limit(3)
     #Discontent::Post.where(:project_id => @project, :important => 't' ).limit(3)
     @post_dis = Discontent::Post.
         where(:project_id => @project).
