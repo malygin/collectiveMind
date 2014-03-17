@@ -1,11 +1,11 @@
 %html
   %body
     %h3
-      К вашей теме на портале mass-decision.ru
+      К вашему материалу на портале mass-decision.ru
       добавлен комментарий
     =  @comment.content
     %br
-    =link_to ' подробнее', "http://mass-decision.ru/life_tape/posts/#{@post.id}"
+    =link_to ' подробнее', "http://mass-decision.ru/project/9/#{@post.class.name.underscore.pluralize}/#{@post.id}"
   %br
   %br
   %br
