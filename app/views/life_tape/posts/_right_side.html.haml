@@ -14,16 +14,20 @@
 
 - unless @aspects.empty?
     .panel.panel-default
-        .panel-heading Аспекты процедуры
+        .panel-heading
+            %button.btn.btn-default.btn-sm.pull-right(onclick="reset_filter_aspects();" ) Сбросить
+            Аспекты процедуры
         .panel-body
-            .pull-right
-                %button.btn.btn-default.btn-sm(onclick="reset_filter_aspects();" ) Сбросить
+            -#.pull-right
+            -#    %button.btn.btn-default.btn-sm(onclick="reset_filter_aspects();" ) Сбросить
+            -#%br
             = form_tag({:controller => "life_tape/posts", :action=> "index"},{ method: :get, remote: true, id: 'aspects_list' }) do
                 - @aspects.each do |asp|
-                    .checkbox
-                        =  check_box_tag 'aspects_filter[]', asp.id, current_user.discontent_aspects.include?(asp), onclick: "show_filter_aspects_button();", id: "aspect_#{asp.id}"
-                        = "#{asp.content} (#{asp.life_tape_posts.count})"
+                    = render :partial => 'discontent/aspects/aspect_form', :object => asp
                 %button.btn.btn-default.inv_element#filter-aspect(type="submit") Сохранить
+            =link_to new_discontent_aspect_path(@project),:remote => true,:id => "new_aspect" do
+                %span.label.label-success +добавить аспект
+#aspect_modal
 
 / = render :partial => 'discontent/aspects/aspect', :collection => @aspects
 

@@ -1,0 +1,5 @@
+$('#edit_aspect_#{@aspect.id}').hide();
+$('#aspect_#{@aspect.id}').hide();
+
+
+$('#aspect_checkbox_#{@aspect.id}').html("#{escape_javascript(render  :partial => 'shared/update_aspect_form', :locals => { :aspect => @aspect, :url_link => url_for(:action => 'update_aspect')})}");

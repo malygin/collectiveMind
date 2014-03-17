@@ -7,9 +7,19 @@ CollectiveMind::Application.routes.draw do
     put 'up/:post_id'  => 'posts#up'
     put 'down/:post_id'  => 'posts#down'
     get 'aspect/:aspect/posts/'  => 'posts#index'
+    match 'destroy_aspect' => 'posts#destroy_aspect'
 
     resources :posts do
+      #collection do
+      #  #put :destroy_aspect
+      #  get :new_aspect
+      #  put :create_aspect
+      #end
       member do
+        #get :edit_aspect
+        #put :update_aspect
+        #get :new_aspect
+        #put :create_aspect
         put :add_comment
         put :update_comment
         put :destroy_comment
@@ -24,7 +34,7 @@ CollectiveMind::Application.routes.draw do
 
 devise_for :users
 match '/project/:project', :to => 'core/projects#to_project'
-#match '/project/:project/life_tape/posts/raiting', :to => 'pages#raiting'
+#match '/project/:project/life_tape/posts/:id/destroy_comment', :to => 'life#raiting'
 #match '/project/:project/users/show_top', :to => 'users#show_top'
 
 namespace :core, :shallow => true do
