@@ -79,15 +79,24 @@ config.static_cache_control = 'public, max-age=2592000'
   config.action_mailer.default_url_options = { :host => 'mass-decision.ru' }
   config.action_mailer.perform_deliveries = true
   config.action_mailer.default :charset => 'utf-8'
+  config.action_mailer.raise_delivery_errors = false
+
+  #ActionMailer::Base.smtp_settings = {
+  #    :address              => 'smtp.gmail.com',
+  #    :port                 => 587,
+  #    :user_name            => 'massdecision@gmail.com',
+  #    :password             => '11nekotyan',
+  #    :authentication       => 'plain',
+  #    :enable_starttls_auto => true
+  #}
   ActionMailer::Base.smtp_settings = {
-      :address              => 'smtp.gmail.com',
-      :port                 => 587,
-      :user_name            => 'massdecision@gmail.com',
+      :address              => 'smtp.yandex.com',
+      :port                 => 25,
+      :user_name            => 'mass-decision',
       :password             => '11nekotyan',
       :authentication       => 'plain',
       :enable_starttls_auto => true
   }
-
   # Log the query plan for queries taking more than this (works
   # with SQLite, MySQL, and PostgreSQL)
   # config.active_record.auto_explain_threshold_in_seconds = 0.5

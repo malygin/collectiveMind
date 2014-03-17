@@ -75,3 +75,6 @@ gem 'magic_encoding'
 gem 'dalli'
 gem 'similar_text'
 gem 'breadcrumbs_on_rails'
+
+gem 'resque' # or a compatible alternative / fork
+gem 'resque_mailer'

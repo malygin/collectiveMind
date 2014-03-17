@@ -32,6 +32,8 @@ CollectiveMind::Application.configure do
   # Do not compress assets
   config.assets.compress = false
 
+  config.action_mailer.raise_delivery_errors = false
+
   # Expands the lines which load the assets
   config.assets.debug = true
   config.quiet_assets = true
@@ -39,12 +41,21 @@ CollectiveMind::Application.configure do
   config.action_mailer.default_url_options = { :host => 'localhost:3000' }
   config.action_mailer.perform_deliveries = true
   config.action_mailer.default :charset => 'utf-8'
+  #ActionMailer::Base.smtp_settings = {
+  #    :address              => 'smtp.gmail.com',
+  #    :port                 => 587,
+  #    :user_name            => 'massdecision@gmail.com',
+  #    :password             => '11nekotyan',
+  #    :authentication       => 'plain',
+  #    :enable_starttls_auto => true
+  #}
   ActionMailer::Base.smtp_settings = {
-      :address              => 'smtp.gmail.com',
-      :port                 => 587,
-      :user_name            => 'massdecision@gmail.com',
+      :address              => 'smtp.yandex.com',
+      :port                 => 25,
+      :user_name            => 'mass-decision',
       :password             => '11nekotyan',
       :authentication       => 'plain',
       :enable_starttls_auto => true
   }
+
 end

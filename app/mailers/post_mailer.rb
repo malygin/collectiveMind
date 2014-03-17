@@ -1,5 +1,7 @@
 class PostMailer < ActionMailer::Base
-  default from: "massdecision@gmail.com"
+  #include Resque::Mailer
+
+  default from: "mass-decision@yandex.ru"
 
   def add_comment (post, comment)
     @user = post.user

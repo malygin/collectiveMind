@@ -52,7 +52,7 @@ def add_comment
     unless  params[name_of_comment_for_param][:content]==''
       @comment = post.comments.create(:content => params[name_of_comment_for_param][:content], :user =>current_user)
       current_user.journals.build(:type_event=>name_of_comment_for_param+'_save', :project => @project, :body=>"#{@comment.content[0..24]}:#{post.id}#comment_#{@comment.id}").save!
-      #PostMailer.add_comment(post, @comment).deliver  if post.user!=@comment.user
+      PostMailer.add_comment(post, @comment).deliver  if post.user!=@comment.user
 
     end
     respond_to do |format|
