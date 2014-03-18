@@ -1,2 +1,2 @@
 $('#modal_aspect_view').modal('hide');
-$('#aspects_list').append("#{escape_javascript("123")}");
+$('#aspects_list').append("#{escape_javascript(render  :partial => 'aspect_form', :object => @aspect)}");

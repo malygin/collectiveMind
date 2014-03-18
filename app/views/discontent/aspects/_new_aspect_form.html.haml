@@ -1,11 +1,3 @@
--#= form_for aspect, :html => {:class => 'new_or_edit'},  remote: true, :url => url_link, :method => :put do |f|
--#  = render 'shared/error_messages', :object =>f.object
--#  =f.text_area :content, :class => 'form-control', style: 'height: 70px;', placeholder: 'Введите новый аспект', id:'comment_text_area', onkeyup: "activate_button(this);"
--#  .pull-right
--#    =f.submit 'Отправить', :id  => "send_post", class: 'btn btn-sm btn-success disabled'
--#.text-success#comment_success(style='display:none;')
--#  Аспект успешно добавлен
-
 #modal_aspect_view.modal.fade
   .modal-dialog
     .modal-content
@@ -15,19 +7,14 @@
       .modal-body
         %p Напишите название нового аспекта
         %br
-        = form_for aspect,:url => {:project => @project.id, :action => 'create'},  remote: true do |f|
-          -#= render 'shared/error_messages', :object =>f.object
-          =f.text_area :content, :class => 'form-control', style: 'height: 70px;', placeholder: 'Введите новый аспект', id:'comment_text_area'
-          -#= f.hidden_field :project, :value => @project.id
+        = form_for aspect,:url => {:project => @project.id, :action => 'create'}, remote: true do |f|
+          = render 'shared/error_messages', :object =>f.object
+          =f.text_area :content, :class => 'form-control', style: 'height: 70px;', placeholder: 'Введите новый аспект', id:'aspect_text_area'
+
           .pull-right
             =f.submit 'Отправить', :id  => "send_post", class: 'btn btn-sm btn-success'
 
       .modal-footer
         %button.btn.btn-default{"data-dismiss" => "modal", type: "button"} Отмена
-        -#%button.btn.btn-primary{type: "button"} Сохранить
 
--##modal_aspect_view.modal.fade
--#      .modal-dialog
--#            .modal-content
--#                  .modal-header
--#                        %p 123
+

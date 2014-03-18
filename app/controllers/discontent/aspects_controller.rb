@@ -11,10 +11,9 @@ class Discontent::AspectsController  < ApplicationController
 
   def update
     @aspect = Discontent::Aspect.find(params[:id])
-    if @aspect.update_attributes(content: params[:content])
-      respond_to do |format|
-        format.js
-      end
+    @aspect.update_attributes(content: params[:content])
+    respond_to do |format|
+      format.js
     end
   end
 
@@ -38,12 +37,13 @@ class Discontent::AspectsController  < ApplicationController
     @project = Core::Project.find(params[:project])
     @aspect = Discontent::Aspect.create(params[:discontent_aspect])
     @aspect.project = @project
-    if @aspect.save
-      respond_to do |format|
+    respond_to do |format|
+      if @aspect.save
         format.js
+      else
+        #format.js {render :action => "new"}
+        render "new"
       end
-    else
-      render "new"
     end
   end
 end

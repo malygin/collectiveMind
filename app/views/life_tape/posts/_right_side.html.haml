@@ -25,8 +25,9 @@
                 - @aspects.each do |asp|
                     = render :partial => 'discontent/aspects/aspect_form', :object => asp
                 %button.btn.btn-default.inv_element#filter-aspect(type="submit") Сохранить
-            =link_to new_discontent_aspect_path(@project),:remote => true,:id => "new_aspect" do
-                %span.label.label-success +добавить аспект
+            -if current_user.boss?
+                =link_to new_discontent_aspect_path(@project),:remote => true,:id => "new_aspect" do
+                    %span.label.label-success +добавить аспект
 #aspect_modal
 
 / = render :partial => 'discontent/aspects/aspect', :collection => @aspects

@@ -1,12 +1,8 @@
-= form_for aspect,  remote: true, :url => url_link, :method => :put do |f|
-  = render 'shared/error_messages', :object =>f.object
-  -#=f.submit do
-  -#  %span{:type => "submit", :class=>"glyphicon glyphicon-ok text-success pull-left",:id=>"send_post", :style=>"cursor:pointer;text-decoration:none;margin-left:-20px;"}
+-# Не отрабатывает js
 
-  -#=f.submit "save", class: "glyphicon glyphicon-ok text-success pull-left", id: "send_post"
-  =f.text_field :content, name: 'content', id:"aspect_#{aspect.id}"
-  -#, style: 'padding-left: -40px !important;'
-  =f.submit "ok", class: " btn btn-default btn-xs text-success pull-left", style: 'margin-left: -30px !important;'
-  -#%span{:type => "submit", :class=>"glyphicon glyphicon-ok text-success pull-left", :style=>"cursor:pointer;text-decoration:none;"}
-    -#=f.submit do #:id  => "send_post", :class => 'glyphicon glyphicon-ok text-success', :style => "cursor:pointer;"
-    -#  %span{:class=>"glyphicon glyphicon-pencil text-success", :style=>"cursor:pointer;text-decoration:none;"}
+-#= form_for aspect, :url => "/project/1/discontent/aspects/#{aspect.id}",:method => :put, :remote => true do |f|
+-#  -#= render 'shared/error_messages', :object =>f.object
+-#  =f.text_field :content, name: 'content', id:"aspect_text_content_#{aspect.id}"
+-#  =f.submit "ok",:id  => "send_post", class: " btn btn-default btn-xs text-success pull-left", style: 'margin-left: -30px !important;'
+
+

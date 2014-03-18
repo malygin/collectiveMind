@@ -74,5 +74,4 @@ end
      super()
     @post.user.add_score(:type => :to_archive_life_tape_post)
   end
-
 end
