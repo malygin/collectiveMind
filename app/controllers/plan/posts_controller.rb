@@ -39,6 +39,15 @@ class Plan::PostsController < PostsController
     end
   end
 
+  def new
+    @discontents = Discontent::Post.required_posts(@project)
+    @post = current_model.new
+
+    respond_to do |format|
+      format.html {render :layout => 'application_two_column'}
+    end
+  end
+
   def create
     @project = Core::Project.find(params[:project])
     @plan_post = Plan::Post.new(params[:plan_post])
@@ -186,6 +195,12 @@ class Plan::PostsController < PostsController
    end
  end
 
+def get_cond
+  @cond = Concept::PostAspect.find(params[:pa])
+  respond_to do |format|
+    format.js
+  end
+end
 def add_first_cond
   @post = Plan::Post.find(params[:id])
   @cond2 = Plan::PostAspect.find(params[:cond_id])

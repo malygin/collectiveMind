@@ -79,6 +79,8 @@ scope '/project/:project' do
     posts_routes
   end
 
+  post 'plan/posts/get_cond', to:  'plan/posts#get_cond'
+
   namespace :plan do
     posts_routes
   end

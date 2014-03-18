@@ -6,5 +6,7 @@ module Concept::PostsHelper
 			end
 		end
 		return true
-	end
+  end
+
+
 end

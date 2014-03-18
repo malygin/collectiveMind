@@ -62,3 +62,11 @@ $('.score_class').on 'click', ->
   $('.score_class').css('text-decoration','none').css('background-color','transparent')
   $(this).css('text-decoration','underline').css('background-color','#ddeaf4')
 
+@load_discontent_for_cond= (el)->
+  console.log($('#select_'+el).val())
+  $.ajax({
+    type: "POST",
+    url: "/project/1/plan/posts/get_cond",
+    data: { pa: $('#select_'+el).val() },
+
+  })

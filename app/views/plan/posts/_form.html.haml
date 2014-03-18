@@ -1,165 +1,407 @@
-= form_for  @post, :url => {:project => @project.id, :action => @post.persisted? ? 'update' : 'create'},   :html => { :class => 'new_or_edit' }do |f|
+-#= form_for  @post, :url => {:project => @project.id, :action => @post.persisted? ? 'update' : 'create'},   :html => { :class => 'new_or_edit' }do |f|
+.col-md-8
+  .media
+    .media-body
+      %span.h5.text-success Эссе по всему проекту
+      %span
+        %a(href="#" style="text-decoration=none;")
+          -#%i.glyphicon.glyphicon-pencil
 
-  - if @post.step< 6
-    %h1
-      =@post.step
-      шаг из 5
-    %br
+      %textarea.form-control(rows="10" cols="73")
+        В институте проводится системный мониторинг по ключевым аспектам функционирования вуза и его материльно-техническое оснащение соотвествует заявленному бренду. В институте проводится системный мониторинг по ключевым аспектам функционирования вуза и его материльно-техническое оснащение соотвествует заявленному бренду. В институте проводится системный мониторинг по ключевым аспектам функционирования вуза и его материльно-техническое оснащение соотвествует...
 
-
-  - if @post.step == 1 or @post.step == 6
-    %label
-      %b Набросок эссе о проекте:
-    %field
-      = f.text_area :goal, class: 'wider_area'
-    %br
-
-  - if @post.step == 1
-    %div{:class=>'timestamp'}
-      Дать краткое представление о предлагаемых наборе нововведений и  плане их создания. Обосновать то, почему предлагаются именно они. В данном случае для этого надо показать, что выполняются следующие критерии:
-      %br
-      1) избранные нововведения обеспечат наибольшие а) повышение спроса на заочное образование и б) увеличение привлекательности бренда высшего образования ИРБиСа;
-      %br
-      2) возможные негативные последствия этих нововведений несущественные;
-      %br
-      3) средства (в том числе трудовые ресурсы), при помощи которых планируется создавать нововведения, надежны в работе и, таким образом, нововведения будут с большой вероятностью созданы;
-      %br
-      4) сам процесс создания нововведений не требует значительных материальных затрат и не представляет существенных затруднений для исполнителей
-    =link_to 'показать список несовершенств с нововведениями на этой странице', '#', onclick: "$('#list_discontents').show();  return false;"
-    %br
-    #list_discontents(hidden="true" )
-      %table.disColumns
-        %tr
-          %td(style="width:40%;")
-            %h1 Несовершенства:
-            %br
-          %td(style="width:60%;")
-            %h1 Варианты нововведений:
-
-        -@aspects.each do |asp|
-          -unless asp.accepted_posts.empty?
-            %tr
-              %td
-                %b=asp.content
-              %td
-            -asp.accepted_posts.each_with_index do |dis, index2|
-              %tr
-                %td{ :class => "#{((index2+1) % 2 !=0) ? 'disText' : 'disText2'}" }
-                  =dis.show_content.html_safe
-                  %br
-
-
-                %td{ :class => "#{((index2+1) % 2 !=0) ? '' : 'disText3'}" }
-                  -unless dis.concept_conditions.empty?
-                    %table
-                      -dis.concept_conditions.each_with_index do |cond,  index|
-
-                        %tr
-                          %td
-                            - if !cond.concept_post.nil? and  cond.concept_post.status ==2
-                              .fback
-
-                                .condition
-                                  =cond.name
-                                  =link_to 'подробнее', "/project/#{@project.id}/concept/status/2/posts/#{cond.concept_post_id}##{cond.id}"
-                  -else
-                    Пока не предложено
-
-  - if @post.step==2
-    %b Описание нововведений
-    %div{:class=>'timestamp'}
-      Составить его из разделов, соответствующих несовершенствам, которые в проекте планируется устранить.
-      Их в данном случае не менее 12-ти (по числу «обязательных» несовершенств), но может быть и больше.
-      Раздел озаглавливается наименованием несовершенства.
-      После этого в каждом из первых 12-ти разделов можно либо выдвинуть свой способ устранения «обязательного» несовершенства, либо выбрать уже предложенное для этого нововведение из материалов предыдущей стадии процедуры. В последнем случае в такое нововведение автор проекта имеет право вносить изменения, и если он их не делает, об этом сигнализирует специальная отметка, чтобы при ознакомлении с проектом участники не тратили время на перечитывание одного и того же материала. Вообще-то изменения рекомендуется вносить в отношении детализации описаний ресурсов, поскольку они представляют собой основу проекта.
-
-  - if @post.step == 2  or @post.step == 6
-    %br
-    %b Выберите нововведения из выпадающего списка для каждого несовершенства (либо кликните по синий ссылке, чтобы добавить свое нововведение, котороые еще не было представлено к соответствующему несовершенству):
-    %br
-    %br
-    -@aspects.each do |asp|
-      -unless asp.accepted_posts.empty?
-        %i=asp.content
-        %br
-        %br
-        -asp.accepted_posts.each do |dis|
-          =dis.show_content.html_safe
-          = select_tag "aspect_#{dis.id}", options_from_collection_for_select(dis.pure_conditions, 'id', 'name'), :prompt => 'Выберите нововведение', :onchange => "load_new_aspect(#{dis.id});"
-          %br
-          = link_to 'либо добавьте свое нововведение по этому несовершенству', add_aspect_plan_post_path(@project, @status, dis.id), :remote => true, :id => "add_new_cond_for_plan_#{dis.id}"
-          %br
-          -#%i Кликните на название нововведения, чтобы раскрыть его
-          .accordion(id= "accordion_concept_#{dis.id}")
-            -unless dis.conditions_for_plan(@post).empty?
-              -dis.conditions_for_plan(@post).each do |pc|
-                =render partial: 'plan/posts/resolve_discontent', :object => pc, as: :p
-
-          %br
-          %br
-
-  - if @post.step == 3  or @post.step == 6
-    %b Эссе о первом этапе проекта
-    %field
-      = f.text_area :first_step, class: 'wider_area'
-
-  - if @post.step==3
-    %div{:class=>'timestamp'}
-      Выбрать из всех нововведений, предлагаемых в проекте, несколько наиболее «ударных» для осуществления на первом этапе проекта. Обосновать то, почему избраны именно они. В данном случае для этого надо показать, что выполняются следующие критерии:
-      %br
-      1) будет наиболее быстро обеспечен самый ощутимый эффект;
-      %br
-      2) для создания новых условий потребуются самые простые, нетрудоемкие и дешевые действия.
-      %br
-      Заметим, что на этом этапе создание каких-то нововведений может быть не доведено до конца с тем, чтобы продолжить его в дальнейшем. Будущее после окончания первого этапа должно быть описано детальнее и шире, чем в предыдущей: подробно описаны создаваемые ресурсы; разобраны средства контроля за работой нововведений, помехи, которые могут возникнуть при формировании новых ресурсов, и способы их предотвращения.
-
-  - if @post.step == 4
-    %b Описание нововведений первого этапа:
-    %br
-
-  - if @post.step == 4  or @post.step == 6
-    %br
-    %b 1. Выберете из выпадающего списке те нововведения, которые вы будет использовать при описании первого шага ( выбирайте их столько, сколько вам нужно)
-    %br
-    %br
-    = select_tag 'pa_id', options_from_collection_for_select(@post.post_aspects, 'id', 'name'), :prompt => 'Выберите нововведение', :onchange => "load_new_first_cond(#{@post.id});"
-    %br
-    %br
-    %i Кликните на название нововведения, чтобы раскрыть его и редактировать
-
-    .accordion#first_cond
-      -unless @post.post_first_conds.empty?
-        -@post.post_first_conds.each do |fc|
-          =render partial: 'plan/posts/first_cond', :object => fc, as: :p
-
-    %br
-    %br
-    %label
-      %b 2. Подробное изложение плана первого этапа проекта:
-    %field
-      = f.text_area :plan_first, class: 'wider_area'
-    %div{:class=>'timestamp'} Детально описать график мероприятий, исполнителей и контроль за его выполнением.
-
-  - if @post.step == 5  or @post.step == 6
-    %label
-      %b Набросок плана действий по завершению проекта:
-    %field
-      = f.text_area :plan_other, class: 'wider_area'
-    %div{:class=>'timestamp'} Примерно описать итоги каждого последующего этапа, их периодизацию и контроль за созданием и внедрением нововведений.
-    %br
-    %br
-    -#%label
-    -#  %b Как будет контролироваться дальнейшее выполнение проекта?
-    -#%field
-    -#  = f.text_area :plan_control, class: 'wider_area'
-    -#%div{:class=>'timestamp'}
-
-
-
-
-
-  %actions
-    = f.submit '',  class: 'btn'
   %br
   %br
-  %br
+  %div.tab-content
+    -@discontents.each do |d|
+      =render partial: 'resolve_discontent', locals: { discontent: d }
+
+
+
+
+
+
+    %div.tab-pane#novation3
+      %hr
+      %h3.text-success План мероприятий конечного образа
+      %br
+      .panel.panel-info
+        .panel-heading
+          %span.text-danger 1. Газон по всему пустырю с клумбой посредине
+        .panel-body
+          -#%p.text-success.plan_table 1. Посадка растений
+          %blockquote
+            %dl.dl-horizontal
+              -#%a.btn.btn-success.btn-xs.pull-right#star_change{type:"button", 'data-toggle'=>'collapse', 'data-target'=>'#optional1'} Сроки
+              %p.h5.text-success.plan_table 1. Посадка растений
+              -#%a.btn.btn-success.btn-xs{type: "button", "data-toggle"=>"modal", "data-target"=>"#prompt1", style:'font-size:10px;'} Пояснения
+              -#%span.glyphicon.glyphicon-chevron-down.pull-right#star_change{type:"button", 'data-toggle'=>'collapse', 'data-target'=>'#optional1'} Сроки
+
+              .date-collapse
+                %span Начало:
+                %span.text-muted 02.05.2014
+                %span Окончание:
+                %span.text-muted 30.05.2014
+              %dt Ответственные:
+              %dd
+                %a(href="/user/1")Сергей Моржев
+
+          -#%p.text-success.plan_table 2. Полив растений
+          %blockquote
+            %dl.dl-horizontal
+              -#%a.btn.btn-success.btn-xs.pull-right#star_change{type:"button", 'data-toggle'=>'collapse', 'data-target'=>'#optional2'} Сроки
+              %p.h5.text-success.plan_table 2. Полив растений
+              .date-collapse
+                %span Начало:
+                %span.text-muted 02.05.2014
+                %span Окончание:
+                %span.text-muted 30.05.2014
+              %dt Ответственные:
+              %dd
+                %a(href="/user/1")Сергей Моржев
+                ,
+                %a(href="/user/1")Александр Пингвинов
+
+          -#%p.text-success.plan_table 3. Уход за растениями
+          %blockquote
+            %dl.dl-horizontal
+              -#%a.btn.btn-success.btn-xs.pull-right#star_change{type:"button", 'data-toggle'=>'collapse', 'data-target'=>'#optional3'} Сроки
+              %p.h5.text-success.plan_table 3. Уход за растениями
+              .date-collapse
+                %span Начало:
+                %span.text-muted 02.05.2014
+                %span Окончание:
+                %span.text-muted 30.05.2014
+              %dt Ответственные:
+              %dd
+                %a(href="/user/1")Сергей Моржев
+                ,
+                %span.text-mutedМаксим Панов
+                ,
+                %a(href="/user/1")Александр Пингвинов
+
+      .panel.panel-info
+        .panel-heading
+          %span.text-danger 2. Законодательная реформа
+        .panel-body
+          -#%p.text-success.plan_table 1. Рассчитать нормы разъездов ассесоров
+          %blockquote(style='max-height:100px !important;')
+            %dl.dl-horizontal
+              -#%a.btn.btn-success.btn-xs.pull-right#star_change{type:"button", 'data-toggle'=>'collapse', 'data-target'=>'#optional4'} Сроки
+              %p.h5.text-success.plan_table 1. Рассчитать нормы разъездов ассесоров
+
+              %dt Ответственные:
+              %dd
+                %a(href="/user/1")Сергей Моржев
+                ,
+                %span.text-mutedМаксим Карин
+                ,
+                %a(href="/user/1")Александр Пингвинов
+                ,
+                %span.text-mutedГеоргий Салин
+                ,
+                %a(href="/user/1")Максим Пугин
+                ,
+                %a(href="/user/1")Александр Морин
+
+          -#%p.text-success.plan_table 2. Обсудить закон
+          %blockquote
+            %dl.dl-horizontal
+              -#%a.btn.btn-success.btn-xs.pull-right#star_change{type:"button", 'data-toggle'=>'collapse', 'data-target'=>'#optional5'} Сроки
+              %p.h5.text-success.plan_table 2. Обсудить закон
+              .date-collapse
+                %span Начало:
+                %span.text-muted 02.05.2014
+                %span Окончание:
+                %span.text-muted 30.05.2014
+              %dt Ответственные:
+              %dd
+                %a(href="/user/1")Сергей Моржев
+
+          -#%p.text-success.plan_table 3. Принять закон
+          %blockquote
+            %dl.dl-horizontal
+              -#%a.btn.btn-success.btn-xs.pull-right#star_change{type:"button", 'data-toggle'=>'collapse', 'data-target'=>'#optional6'} Сроки
+              %p.h5.text-success.plan_table 3. Принять закон
+              .date-collapse
+                %span Начало:
+                %span.text-muted 02.05.2014
+                %span Окончание:
+                %span.text-muted 30.05.2014
+              %dt Ответственные:
+              %dd
+                %a(href="/user/1")Максим Панов
+                ,
+                %a(href="/user/1")Александр Пингвинов
+
+      .panel.panel-info
+        .panel-heading
+          %span.text-danger 3. Пруд с водными растениями
+        .panel-body
+          -#%p.text-success.plan_table 1. Сделать яму
+          %blockquote(style='max-height:100px !important;')
+            %dl.dl-horizontal
+              -#%a.btn.btn-success.btn-xs.pull-right#star_change{type:"button", 'data-toggle'=>'collapse', 'data-target'=>'#optional7'} Сроки
+              %p.h5.text-success.plan_table 1. Сделать яму
+
+              %dt Ответственные:
+              %dd
+                %a(href="/user/1")Сергей Моржев
+                ,
+                %span.text-mutedМаксим Панов
+                ,
+                %a(href="/user/1")Александр Пингвинов
+                ,
+                %span.text-mutedГеоргий Салин
+                ,
+                %span.text-mutedМаксим Пугин
+                ,
+                %a(href="/user/1")Александр Морин
+
+          -#%p.text-success.plan_table 2. Залить водой
+          %blockquote
+            %dl.dl-horizontal
+              -#%a.btn.btn-success.btn-xs.pull-right#star_change{type:"button", 'data-toggle'=>'collapse', 'data-target'=>'#optional8'} Сроки
+              %p.h5.text-success.plan_table 2. Залить водой
+
+              %dt Ответственные:
+              %dd
+                %a(href="/user/1")Сергей Моржев
+
+
+
+
+
+    %div.tab-pane#novation33
+      %hr
+      %h3.text-success План мероприятий первого этапа
+      %br
+      .panel.panel-info
+        .panel-heading
+          %span.text-danger 1. Газон по всему пустырю с клумбой посредине
+        .panel-body
+          -#%p.text-success.plan_table 1. Посадка растений
+          %blockquote
+            %dl.dl-horizontal
+              %p.h5.text-success.plan_table 1. Посадка растений
+              .date-collapse
+                %span Начало:
+                %span.text-muted 02.05.2014
+                %span Окончание:
+                %span.text-muted 30.05.2014
+              %dt Ответственные:
+              %dd
+                %a(href="/user/1")Сергей Моржев
+
+          -#%p.text-success.plan_table 2. Полив растений
+          %blockquote
+            %dl.dl-horizontal
+              %p.h5.text-success.plan_table 2. Полив растений
+              .date-collapse
+                %span Начало:
+                %span.text-muted 02.05.2014
+                %span Окончание:
+                %span.text-muted 30.05.2014
+              %dt Ответственные:
+              %dd
+                %a(href="/user/1")Сергей Моржев
+                ,
+                %a(href="/user/1")Александр Пингвинов
+
+          -#%p.text-success.plan_table 3. Уход за растениями
+          %blockquote
+            %dl.dl-horizontal
+              %p.h5.text-success.plan_table 3. Уход за растениями
+              .date-collapse
+                %span Начало:
+                %span.text-muted 02.05.2014
+                %span Окончание:
+                %span.text-muted 30.05.2014
+              %dt Ответственные:
+              %dd
+                %a(href="/user/1")Сергей Моржев
+                ,
+                %span.text-mutedМаксим Панов
+                ,
+                %a(href="/user/1")Александр Пингвинов
+      .panel.panel-info
+        .panel-heading
+          %span.text-danger 2. Законодательная реформа
+        .panel-body
+          -#%p.text-success.plan_table 1. Рассчитать нормы разъездов ассесоров
+          %blockquote(style='max-height:100px !important;')
+            %dl.dl-horizontal
+              %p.h5.text-success.plan_table 1. Рассчитать нормы разъездов ассесоров
+              .date-collapse
+                %span Начало:
+                %span.text-muted 02.05.2014
+                %span Окончание:
+                %span.text-muted 30.05.2014
+              %dt Ответственные:
+              %dd
+                %a(href="/user/1")Сергей Моржев
+                ,
+                %span.text-mutedМаксим Панов
+                ,
+                %a(href="/user/1")Александр Пингвинов
+                ,
+                %span.text-mutedГеоргий Салин
+                ,
+                %span.text-mutedМаксим Пугин
+                ,
+                %a(href="/user/1")Александр Морин
+
+          -#%p.text-success.plan_table 2. Обсудить закон
+          %blockquote
+            %dl.dl-horizontal
+              %p.h5.text-success.plan_table 2. Обсудить закон
+              .date-collapse
+                %span Начало:
+                %span.text-muted 02.05.2014
+                %span Окончание:
+                %span.text-muted 30.05.2014
+              %dt Ответственные:
+              %dd
+                %a(href="/user/1")Сергей Моржев
+
+
+          -#%p.text-success.plan_table 3. Принять закон
+          %blockquote
+            %dl.dl-horizontal
+              %p.h5.text-success.plan_table 3. Принять закон
+              .date-collapse
+                %span Начало:
+                %span.text-muted 02.05.2014
+                %span Окончание:
+                %span.text-muted 30.05.2014
+              %dt Ответственные:
+              %dd
+                %a(href="/user/1")Максим Панов
+                ,
+                %a(href="/user/1")Александр Пингвинов
+
+
+
+
+.col-md-4
+
+  %h5
+    .small Выберите несовершенство, кликнув по нужной вкладке:
+
+  %ul.nav.nav-tabs.nav-justified
+    %li.active
+      %a(href="#theall" data-toggle="tab") Образ
+    %li
+      %a(href="#thefirst" data-toggle="tab") Первый этап
+  .tab-content
+    #theall.tab-pane.fade.in.active
+
+      %ul.nav.nav-tabs.nav-stacked
+        %li
+          %a.text-success(href="#novation3" data-toggle="tab" style='font-size:10px; font-weight: bold;')
+            План мероприятий
+
+        -@discontents.each_with_index do |d,i|
+          %li
+            %a(href="#dis_#{d.id}" data-toggle="tab")="#{i+1}. #{trim_string(d.content)}"
+        -#%li.active
+        -#  %a(href="#novation1" data-toggle="tab")
+        -#    %span.text-success.glyphicon.glyphicon-ok.pull-right
+        -#    %span.text-danger.glyphicon.glyphicon-star.pull-right
+        -#    1. Пыльный и отвратительный на вид большой пустырь
+        -#%li
+        -#  %a(href="#novation2" data-toggle="tab")
+        -#    %span.text-success.glyphicon.glyphicon-ok.pull-right
+        -#    %span.text-danger.glyphicon.glyphicon-star.pull-right
+        -#    2. Нереруглярно ездят коллежские ассесоры
+        -#%li
+        -#  %a(href="#novation2" data-toggle="tab")
+        -#
+        -#    3. Губернатор плохо вышивает по тюли
+        -#%li
+        -#  %a(href="#novation2" data-toggle="tab")
+        -#    %span.text-success.glyphicon.glyphicon-ok.pull-right
+        -#    4. Почтмейстеры берут взятки
+        -#%li
+        -#  %a(href="#novation2" data-toggle="tab")
+        -#
+        -#    5. Нестабильный спрос на мертвые души
+        -#%li
+        -#  %a(href="#novation2" data-toggle="tab")
+        -#    %span.text-success.glyphicon.glyphicon-ok.pull-right
+        -#    6. Нереруглярно ездят коллежские ассесоры
+        -#%li
+        -#  %a(href="#novation2" data-toggle="tab")
+        -#
+        -#    7. Губернатор плохо вышивает по тюли
+        -#%li
+        -#  %a(href="#novation2" data-toggle="tab")
+        -#
+        -#    8. Почтмейстеры берут взятки
+        -#%li
+        -#  %a(href="#novation2" data-toggle="tab")
+        -#
+        -#    9. Нестабильный спрос на мертвые души
+        -#%li
+        -#  %a(href="#novation2" data-toggle="tab")
+        -#
+        -#    10. Нереруглярно ездят коллежские ассесоры -#%li.active
+        -#  %a(href="#novation1" data-toggle="tab")
+        -#    %span.text-success.glyphicon.glyphicon-ok.pull-right
+        -#    %span.text-danger.glyphicon.glyphicon-star.pull-right
+        -#    1. Пыльный и отвратительный на вид большой пустырь
+        -#%li
+        -#  %a(href="#novation2" data-toggle="tab")
+        -#    %span.text-success.glyphicon.glyphicon-ok.pull-right
+        -#    %span.text-danger.glyphicon.glyphicon-star.pull-right
+        -#    2. Нереруглярно ездят коллежские ассесоры
+        -#%li
+        -#  %a(href="#novation2" data-toggle="tab")
+        -#
+        -#    3. Губернатор плохо вышивает по тюли
+        -#%li
+        -#  %a(href="#novation2" data-toggle="tab")
+        -#    %span.text-success.glyphicon.glyphicon-ok.pull-right
+        -#    4. Почтмейстеры берут взятки
+        -#%li
+        -#  %a(href="#novation2" data-toggle="tab")
+        -#
+        -#    5. Нестабильный спрос на мертвые души
+        -#%li
+        -#  %a(href="#novation2" data-toggle="tab")
+        -#    %span.text-success.glyphicon.glyphicon-ok.pull-right
+        -#    6. Нереруглярно ездят коллежские ассесоры
+        -#%li
+        -#  %a(href="#novation2" data-toggle="tab")
+        -#
+        -#    7. Губернатор плохо вышивает по тюли
+        -#%li
+        -#  %a(href="#novation2" data-toggle="tab")
+        -#
+        -#    8. Почтмейстеры берут взятки
+        -#%li
+        -#  %a(href="#novation2" data-toggle="tab")
+        -#
+        -#    9. Нестабильный спрос на мертвые души
+        -#%li
+        -#  %a(href="#novation2" data-toggle="tab")
+        -#
+        -#    10. Нереруглярно ездят коллежские ассесоры
+
+
+    #thefirst.tab-pane.fade
+      %ul.nav.nav-tabs.nav-stacked
+        %li
+          %a.text-success(href="#novation33" data-toggle="tab" style='font-size:20px;')
+            План мероприятий
+        %li.active
+          %a(href="#novation11" data-toggle="tab")
+            %span.text-success.glyphicon.glyphicon-ok.pull-right
+            %span.text-danger.glyphicon.glyphicon-star.pull-right
+            1. Пыльный и отвратительный на вид большой пустырь
+
+        %li
+          %a(href="#novation22" data-toggle="tab")
+            %span.text-success.glyphicon.glyphicon-ok.pull-right
+            %span.text-danger.glyphicon.glyphicon-star.pull-right
+            2. Нереруглярно ездят коллежские ассесоры

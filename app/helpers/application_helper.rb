@@ -13,7 +13,12 @@ module ApplicationHelper
 # 8 - voiting for plan
 # 9 - estimate
 # 10 - final vote
-# 11 - wait for	
+# 11 - wait for
+
+  def escape_text(t)
+    t.gsub("\n", "\\n").gsub("\r", "\\r").gsub("\t", "\\t").gsub("'","\\'")
+  end
+
 	def menu_status(st)
 		if request.fullpath.include? "status/#{st}" 
 			'current'

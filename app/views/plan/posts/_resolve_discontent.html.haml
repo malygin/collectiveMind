@@ -1,41 +1,142 @@
+-#%h3(id ="name_#{p.id}" )
+-#  = p.nil? ? "Нововведние  не определено" : p.name
+-#%div{id: "discontent_#{p.id}"}
+-#  %p.ftable.fline
+-#    %a{onclick: "remove_discontent(#{p.id})"} Удалить нововведение
+-#  %p.ftable.fline
+-#    %span.bigtext Корректируемое несовершенство:
+-#  %p.ftable.fcolor
+-#    =p.discontent.show_content.html_safe
+-#
+-#  %p.ftable.fline
+-#    %span.bigtext Название корректировки:
+-#    %br
+-#    =text_field_tag "post_aspects[#{p.discontent.id}][name]",p.nil? ? nil : p.name, :class => 'concept_name', onchange: "change_name_concept(#{p.id});"
+-#
+-#  %p.ftable.fline.bigtext Краткое описание корректировки:
+-#  %p.ftable
+-#    =text_area_tag "post_aspects[#{p.discontent.id}][content]",p.nil? ? nil : p.content, :class => 'concept_cond'
+-#
+-#  %p.ftable.fbackPositive
+-#    %span.fline.bigtext A. Какие в будущем должны быть созданы и поддерживаться УСЛОВИЯ, чтобы данная корректировка работала
+-#    %br
+-#    =text_area_tag "post_aspects[#{p.discontent.id}][positive]",p.nil? ? nil : p.positive, :class => 'wymeditor'
+-#
+-#  %p.ftable.fbackNegative
+-#    %span.fline.bigtext B. Если будут созданы и поддерживаться вышеозначенные УСЛОВИЯ, какие из-за этого вероятны НЕЖЕЛАТЕЛЬНЫЕ ПОБОЧНЫЕ ЭФФЕКТЫ в будущем
+-#
+-#    %br
+-#    =text_area_tag "post_aspects[#{p.discontent.id}][negative]",p.nil? ? nil : p.negative, :class => "wymeditor"
+-#
+-#  %p.ftable.fback
+-#    %span.fline.bigtext C. Что, вероятно, может помешать в будущем должной работе всех перечисленных ресурсов и как с этим предлагается бороться?
+-#    %br
+-#    =text_area_tag "post_aspects[#{p.discontent.id}][problems]",p.nil? ? nil : p.problems, :class => 'concept_cond2'
+-#
+-#  %p.ftable.fback
+-#    %span.fline.bigtext D. Реалистичность и практичность: предложить средства формирования перечисленных ресурсов, обосновать их доступность и эффективность
+-#    %br
+-#    =text_area_tag "post_aspects[#{p.discontent.id}][reality]",p.nil? ? nil : p.reality, :class => 'concept_cond2'
+-#  =hidden_field_tag "post_aspects[#{p.discontent.id}][concept_post_aspect_id]",p.concept_post_aspect.nil? ? nil : p.concept_post_aspect.id
 
-%h3(id ="name_#{p.id}" )
-  = p.nil? ? "Нововведние  не определено" : p.name
-%div{id: "discontent_#{p.id}"}
-  %p.ftable.fline
-    %a{onclick: "remove_discontent(#{p.id})"} Удалить нововведение
-  %p.ftable.fline
-    %span.bigtext Корректируемое несовершенство:
-  %p.ftable.fcolor
-    =p.discontent.show_content.html_safe
+%div.tab-pane(id="dis_#{discontent.id}")
+  .tab-content
+    .row
+      .col-md-3
+        %span.h4 Нововведение:
+      .col-md-9
+    %div.panel.panel-default
+      %div.panel-body
+        %button.btn.btn-info.btn-sm.pull-right(data-toggle="modal" data-target="#modalStage3")
+          Показать пример
+        %h5.text-infoУстраняемое несовершенство:
+        =render partial:'discontent/posts/post_short2', object: discontent
+        %br
 
-  %p.ftable.fline
-    %span.bigtext Название корректировки:
-    %br
-    =text_field_tag "post_aspects[#{p.discontent.id}][name]",p.nil? ? nil : p.name, :class => 'concept_name', onchange: "change_name_concept(#{p.id});"
+        %hr
+        %span.h4.text-success Выберите нововведение:
+        %select.form-control(onchange="load_discontent_for_cond(#{discontent.id});" id="select_#{discontent.id}")
+          %option#option0(value="option_null")
+          - discontent.concept_conditions.each do |cd|
+            %option#option1(value="#{cd.id}")=cd.name
 
-  %p.ftable.fline.bigtext Краткое описание корректировки:
-  %p.ftable
-    =text_area_tag "post_aspects[#{p.discontent.id}][content]",p.nil? ? nil : p.content, :class => 'concept_cond'
+        %hr
 
-  %p.ftable.fbackPositive
-    %span.fline.bigtext A. Какие в будущем должны быть созданы и поддерживаться УСЛОВИЯ, чтобы данная корректировка работала
-    %br
-    =text_area_tag "post_aspects[#{p.discontent.id}][positive]",p.nil? ? nil : p.positive, :class => 'wymeditor'
+        #select0
+          .panel.panel-info
+            .panel-heading
+              %h5.text-success
+                %b A.*
 
-  %p.ftable.fbackNegative
-    %span.fline.bigtext B. Если будут созданы и поддерживаться вышеозначенные УСЛОВИЯ, какие из-за этого вероятны НЕЖЕЛАТЕЛЬНЫЕ ПОБОЧНЫЕ ЭФФЕКТЫ в будущем
+              -#%a.btn.btn-success.btn-xs.pull-right{type: "button", "data-toggle"=>"modal", "data-target"=>"#prompt1", style:'font-size:10px;'} Пояснения
 
-    %br
-    =text_area_tag "post_aspects[#{p.discontent.id}][negative]",p.nil? ? nil : p.negative, :class => "wymeditor"
+              %p.text-info
+                Что новое, исправляющее несовершенство (проблему), появится в будущем?
+                %a.btn.btn-success.btn-xs{type: "button", "data-toggle"=>"modal", "data-target"=>"#prompt1", style:'font-size:10px;'} Пояснения
+              .form-group.has-danger
+                =text_area_tag "pa[#{discontent.id}][name]", '', :class => "concept_cond", rows: 4, style: 'width: 100%;'
 
-  %p.ftable.fback
-    %span.fline.bigtext C. Что, вероятно, может помешать в будущем должной работе всех перечисленных ресурсов и как с этим предлагается бороться?
-    %br
-    =text_area_tag "post_aspects[#{p.discontent.id}][problems]",p.nil? ? nil : p.problems, :class => 'concept_cond2'
 
-  %p.ftable.fback
-    %span.fline.bigtext D. Реалистичность и практичность: предложить средства формирования перечисленных ресурсов, обосновать их доступность и эффективность
-    %br
-    =text_area_tag "post_aspects[#{p.discontent.id}][reality]",p.nil? ? nil : p.reality, :class => 'concept_cond2'
-  =hidden_field_tag "post_aspects[#{p.discontent.id}][concept_post_aspect_id]",p.concept_post_aspect.nil? ? nil : p.concept_post_aspect.id
+              %p.text-info
+                Как это нововведение будет исправлять несовершенство (проблему)?
+                %a.btn.btn-success.btn-xs{type: "button", "data-toggle"=>"modal", "data-target"=>"#prompt2", style:'font-size:10px;'} Пояснения
+              .form-group.has-danger
+                =text_area_tag "pa[#{discontent.id}][content]", '', :class => "concept_cond", rows: 4, style: 'width: 100%;'
+
+
+          .panel.panel-info
+            .panel-heading
+              %h5.text-success
+                %b B.*
+              %p.text-info
+                Напишите о том, какие должны быть созданы и поддерживаться УСЛОВИЯ и разрешаться ПРАКТИЧЕСКИЕ ЗАДАЧИ.
+                %a.btn.btn-success.btn-xs{type: "button", "data-toggle"=>"modal", "data-target"=>"#prompt3", style:'font-size:10px;'} Пояснения
+                .form-group.has-success
+                  =text_area_tag "pa[#{discontent.id}][positive]", '', :class => "concept_cond", rows: 4, style: 'width: 100%;'
+              %p.text-info
+                Какие ресурсы требуются для поддержания УСЛОВИЯ и разрешения ЗАДАЧИ?
+                %a.btn.btn-success.btn-xs{type: "button", "data-toggle"=>"modal", "data-target"=>"#prompt4", style:'font-size:10px;'} Пояснения
+                .form-group.has-success
+                  =text_area_tag "pa[#{discontent.id}][positive_r]", '', :class => "concept_cond", rows: 4, style: 'width: 100%;'
+
+
+          %hr
+          %h5.text-success
+            %b C.
+          %p.text-info
+            Если будут созданы и поддерживаться должные УСЛОВИЯ и разрешаться ЗАДАЧИ, какие из-за этого вероятны НЕЖЕЛАТЕЛЬНЫЕ ПОБОЧНЫЕ ЭФФЕКТЫ в будущем?
+            %a.btn.btn-success.btn-xs{type: "button", "data-toggle"=>"modal", "data-target"=>"#prompt7", style:'font-size:10px;'} Пояснения
+            .form-group.has-success
+              =text_area_tag "pa[#{discontent.id}][negative]", '', :class => "concept_cond", rows: 4, style: 'width: 100%;'
+          %p.text-info
+            Какие ресурсы требуются, чтобы предотвращать эти ЭФФЕКТЫ?
+            %a.btn.btn-success.btn-xs{type: "button", "data-toggle"=>"modal", "data-target"=>"#prompt8", style:'font-size:10px;'} Пояснения
+            .form-group.has-success
+              =text_area_tag "pa[#{discontent.id}][negative_r]", '', :class => "concept_cond", rows: 4, style: 'width: 100%;'
+
+          %hr
+          %h5.text-success D.
+          %p.text-info
+            Что, вероятно, может помешать в будущем плодотворному функционированию всех перечисленных в B и С  ресурсов и как с этим предлагается бороться?
+            %a.btn.btn-success.btn-xs{type: "button", "data-toggle"=>"modal", "data-target"=>"#prompt9", style:'font-size:10px;'} Пояснения
+          .form-group.has-success
+            =text_area_tag "pa[#{discontent.id}][obstacles]", '', :class => "concept_cond", rows: 4, style: 'width: 100%;'
+
+
+
+          .panel.panel-info
+            .panel-heading
+              %h5.text-success
+                %b E.*
+              %p.text-info
+                Покажите, что нововведение практично в работе?
+                %a.btn.btn-success.btn-xs{type: "button", "data-toggle"=>"modal", "data-target"=>"#prompt5", style:'font-size:10px;'} Пояснения
+              .form-group.has-success
+                =text_area_tag "pa[#{discontent.id}][problems]", '', :class => "concept_cond", rows: 4, style: 'width: 100%;'
+
+
+              %p.text-info
+                Обоснуйте, что нововведение реалистично воплотить в жизнь.
+                %a.btn.btn-success.btn-xs{type: "button", "data-toggle"=>"modal", "data-target"=>"#prompt6", style:'font-size:10px;'} Пояснения
+              .form-group.has-success
+                =text_area_tag "pa[#{discontent.id}][reality]",'', :class => "concept_cond", rows: 4, style: 'width: 100%;'
