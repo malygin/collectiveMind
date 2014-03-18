@@ -17,6 +17,7 @@ module BasePost  extend ActiveSupport::Concern
     has_many :users_against, :through => :post_votings_against, :source => :user
 
     has_many :admins_pro, :through => :post_votings_pro, :source => :user,:conditions => ['users.admin = ?',true]
+    has_many :admins_vote, :through => :post_votings, :source => :user,:conditions => ['users.admin = ?',true]
 
     has_many :admins_against, :through => :post_votings_against, :source => :user ,:conditions => ['users.admin = ?',true]
 

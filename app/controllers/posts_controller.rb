@@ -229,10 +229,18 @@ def index
   def plus
     post = current_model.find(params[:id])
     @against =  params[:against] == 'true'
-    post.post_votings.create(:user => current_user, :post => post, :against => @against)  unless post.users.include? current_user
-    if (current_user.boss? or post.post_votings.count == 3) and not @against
-      post.user.add_score(:type => :plus_post, :project => Core::Project.find(params[:project]), :post => post, :path =>  post.class.name.underscore.pluralize)
+
+    if boss? and post.admins_vote.count != 0
+      post.admins_vote.destroy_all
+      @admin_pro= true
+
+    else
+      post.post_votings.create(:user => current_user, :post => post, :against => @against)  unless post.users.include? current_user
+      if (current_user.boss? or post.post_votings.count == 3) and not @against
+        post.user.add_score(:type => :plus_post, :project => Core::Project.find(params[:project]), :post => post, :path =>  post.class.name.underscore.pluralize)
+      end
     end
+
     @id= post.id
     respond_to do |format|
       format.js
