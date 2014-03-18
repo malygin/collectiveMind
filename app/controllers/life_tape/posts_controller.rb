@@ -65,5 +65,12 @@ end
   end
 
 
+<<<<<<< HEAD
 
+=======
+  def to_archive
+     super()
+    @post.user.add_score(:type => :to_archive_life_tape_post)
+  end
+>>>>>>> admin_panel
 end

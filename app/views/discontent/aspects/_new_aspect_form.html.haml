@@ -1,0 +1,20 @@
+#modal_aspect_view.modal.fade
+  .modal-dialog
+    .modal-content
+      .modal-header
+        %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", type: "button"} ×
+        %h4.modal-title Добавление нового аспекта
+      .modal-body
+        %p Напишите название нового аспекта
+        %br
+        = form_for aspect,:url => {:project => @project.id, :action => 'create'}, remote: true do |f|
+          = render 'shared/error_messages', :object =>f.object
+          =f.text_area :content, :class => 'form-control', style: 'height: 70px;', placeholder: 'Введите новый аспект', id:'aspect_text_area'
+
+          .pull-right
+            =f.submit 'Отправить', :id  => "send_post", class: 'btn btn-sm btn-success'
+
+      .modal-footer
+        %button.btn.btn-default{"data-dismiss" => "modal", type: "button"} Отмена
+
+
