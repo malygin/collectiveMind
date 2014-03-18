@@ -16,6 +16,10 @@ module BasePost  extend ActiveSupport::Concern
     has_many :post_votings_against,:conditions => ['against = ?',true], :source => :post_votings, :class_name => 'PostVoting'
     has_many :users_against, :through => :post_votings_against, :source => :user
 
+    has_many :admins_pro, :through => :post_votings_pro, :source => :user,:conditions => ['users.admin = ?',true]
+
+    has_many :admins_against, :through => :post_votings_against, :source => :user ,:conditions => ['users.admin = ?',true]
+
     scope :for_project, lambda { |project| where(:project_id => project) }
     scope :for_expert, lambda {  where(:status => 1) }
     scope :accepted, lambda {  where(:status => 2) }

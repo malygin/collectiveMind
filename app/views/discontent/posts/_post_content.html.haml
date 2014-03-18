@@ -1,13 +1,13 @@
 .content{onclick: "location.href='#{discontent_post_path(@project, post_content)}';",style:"cursor: hand;"}
-  %span.label.label-g что
+  %span.label(class= "#{class_post_content(post_content.admins_pro.count, post_content.admins_against.count)}") что
   - if post_content.status == 2
     -post_content.discontent_posts.each do |dp|
       %li=dp.content
   -else
     %span.h55=post_content.content
     %br
-  %span.label.label-g где
+  %span.label(class= "#{class_post_content(post_content.admins_pro.count, post_content.admins_against.count)}") где
   %span.h55=post_content.whered
   %br
-  %span.label.label-g когда
+  %span.label(class= "#{class_post_content(post_content.admins_pro.count, post_content.admins_against.count)}") когда
   %span.h55=post_content.whend

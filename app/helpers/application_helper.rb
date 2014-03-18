@@ -18,6 +18,16 @@ module ApplicationHelper
   def escape_text(t)
     t.gsub("\n", "\\n").gsub("\r", "\\r").gsub("\t", "\\t").gsub("'","\\'")
   end
+  def class_post_content(pro, ag)
+    if  pro > 0
+      'label-success'
+    elsif ag > 0
+      'label-danger'
+    else
+       'label-g'
+    end
+
+  end
 
 	def menu_status(st)
 		if request.fullpath.include? "status/#{st}" 
