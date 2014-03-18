@@ -72,6 +72,9 @@ module JournalHelper
       when 'discontent_post_save'
         s = j.body.split(':')
 				'добавил(а) несовершенство '+ link_to("#{s[0]}...", "/project/#{project}/discontent/posts/#{s[1]}")
+      when 'discontent_post_update'
+        s = j.body.split(':')
+				'отредактировал(а) несовершенство '+ link_to("#{s[0]}...", "/project/#{project}/discontent/posts/#{s[1]}")
       when 'discontent_post_revision'
         'отправил на доработку ' +link_to('несовершенство', discontent_post_path(project,j.body))
       when 'discontent_post_acceptance'

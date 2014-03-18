@@ -164,6 +164,7 @@ class Discontent::PostsController < PostsController
     @post = current_model.find(params[:id])
     @project = Core::Project.find(params[:project])
     @post.update_attributes(params[name_of_model_for_param])
+    current_user.journals.build(:type_event=>name_of_model_for_param+"_update", :project => @project, :body=>"#{@post.content[0..12]}:#{@post.id}").save!
 
     respond_to do |format|
       format.html
