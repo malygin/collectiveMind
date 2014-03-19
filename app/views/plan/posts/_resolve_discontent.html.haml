@@ -47,8 +47,8 @@
       .col-md-9
     %div.panel.panel-default
       %div.panel-body
-        %button.btn.btn-info.btn-sm.pull-right(data-toggle="modal" data-target="#modalStage3")
-          Показать пример
+        -#%button.btn.btn-info.btn-sm.pull-right(data-toggle="modal" data-target="#modalStage3")
+        -#  Показать пример
         %h5.text-infoУстраняемое несовершенство:
         =render partial:'discontent/posts/post_short2', object: discontent
         %br
@@ -98,6 +98,11 @@
                 %a.btn.btn-success.btn-xs{type: "button", "data-toggle"=>"modal", "data-target"=>"#prompt4", style:'font-size:10px;'} Пояснения
                 .form-group.has-success
                   =text_area_tag "pa[#{discontent.id}][positive_r]", '', :class => "concept_cond", rows: 4, style: 'width: 100%;'
+              %p.text-info
+                Какие средства необходимы для получения ресурсов?
+                %a.btn.btn-success.btn-xs{type: "button", "data-toggle"=>"modal", "data-target"=>"#prompt4", style:'font-size:10px;'} Пояснения
+                .form-group.has-success
+                  =text_area_tag "pa[#{discontent.id}][positive_s]", '', :class => "concept_cond", rows: 4, style: 'width: 100%;'
 
 
           %hr
@@ -113,6 +118,11 @@
             %a.btn.btn-success.btn-xs{type: "button", "data-toggle"=>"modal", "data-target"=>"#prompt8", style:'font-size:10px;'} Пояснения
             .form-group.has-success
               =text_area_tag "pa[#{discontent.id}][negative_r]", '', :class => "concept_cond", rows: 4, style: 'width: 100%;'
+          %p.text-info
+            Какие средства необходимы для получения ресурсов?
+            %a.btn.btn-success.btn-xs{type: "button", "data-toggle"=>"modal", "data-target"=>"#prompt8", style:'font-size:10px;'} Пояснения
+            .form-group.has-success
+              =text_area_tag "pa[#{discontent.id}][negative_s]", '', :class => "concept_cond", rows: 4, style: 'width: 100%;'
 
           %hr
           %h5.text-success D.

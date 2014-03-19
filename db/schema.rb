@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140316090514) do
+ActiveRecord::Schema.define(:version => 20140319092728) do
 
   create_table "answers", :force => true do |t|
     t.string   "text"
@@ -803,6 +803,13 @@ ActiveRecord::Schema.define(:version => 20140316090514) do
     t.datetime "created_at",             :null => false
     t.datetime "updated_at",             :null => false
     t.integer  "concept_post_aspect_id"
+    t.text     "positive_r"
+    t.text     "negative_r"
+    t.text     "obstacles"
+    t.text     "positive_s"
+    t.text     "negative_s"
+    t.text     "control_s"
+    t.text     "control_r"
   end
 
   create_table "plan_post_first_conds", :force => true do |t|

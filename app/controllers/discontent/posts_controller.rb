@@ -175,7 +175,7 @@ class Discontent::PostsController < PostsController
    def union_discontent
      @project = Core::Project.find(params[:project])
      @post = Discontent::Post.find(params[:id])
-     @new_post =Discontent::Post.create(status: 2, project: @project, aspect_id: @post.aspect.id, whered: @post.whered, whend: @post.whend)
+     @new_post =Discontent::Post.create(status: 2, style: @post.style, project: @project, aspect_id: @post.aspect.id, whered: @post.whered, whend: @post.whend)
      @new_post.save!
      params[:posts].each do |p|
        Discontent::Post.find(p).update_attributes(status: 1, discontent_post_id: @new_post.id)

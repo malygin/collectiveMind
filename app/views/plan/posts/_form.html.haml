@@ -1,3 +1,5 @@
+= render 'shared/help/new_concept'
+
 -#= form_for  @post, :url => {:project => @project.id, :action => @post.persisted? ? 'update' : 'create'},   :html => { :class => 'new_or_edit' }do |f|
 .col-md-8
   .media
@@ -15,279 +17,30 @@
   %div.tab-content
     -@discontents.each do |d|
       =render partial: 'resolve_discontent', locals: { discontent: d }
+    -@discontents.each do |d|
+      =render partial: 'first_cond', locals: { discontent: d }
 
-
-
-
-
-
-    %div.tab-pane#novation3
+    %div.tab-pane#plan1
       %hr
       %h3.text-success План мероприятий конечного образа
       %br
       .panel.panel-info
-        .panel-heading
-          %span.text-danger 1. Газон по всему пустырю с клумбой посредине
+        .panel-heading  Название мероприятия - сроки - отвественные
         .panel-body
-          -#%p.text-success.plan_table 1. Посадка растений
-          %blockquote
-            %dl.dl-horizontal
-              -#%a.btn.btn-success.btn-xs.pull-right#star_change{type:"button", 'data-toggle'=>'collapse', 'data-target'=>'#optional1'} Сроки
-              %p.h5.text-success.plan_table 1. Посадка растений
-              -#%a.btn.btn-success.btn-xs{type: "button", "data-toggle"=>"modal", "data-target"=>"#prompt1", style:'font-size:10px;'} Пояснения
-              -#%span.glyphicon.glyphicon-chevron-down.pull-right#star_change{type:"button", 'data-toggle'=>'collapse', 'data-target'=>'#optional1'} Сроки
-
-              .date-collapse
-                %span Начало:
-                %span.text-muted 02.05.2014
-                %span Окончание:
-                %span.text-muted 30.05.2014
-              %dt Ответственные:
-              %dd
-                %a(href="/user/1")Сергей Моржев
-
-          -#%p.text-success.plan_table 2. Полив растений
-          %blockquote
-            %dl.dl-horizontal
-              -#%a.btn.btn-success.btn-xs.pull-right#star_change{type:"button", 'data-toggle'=>'collapse', 'data-target'=>'#optional2'} Сроки
-              %p.h5.text-success.plan_table 2. Полив растений
-              .date-collapse
-                %span Начало:
-                %span.text-muted 02.05.2014
-                %span Окончание:
-                %span.text-muted 30.05.2014
-              %dt Ответственные:
-              %dd
-                %a(href="/user/1")Сергей Моржев
-                ,
-                %a(href="/user/1")Александр Пингвинов
-
-          -#%p.text-success.plan_table 3. Уход за растениями
-          %blockquote
-            %dl.dl-horizontal
-              -#%a.btn.btn-success.btn-xs.pull-right#star_change{type:"button", 'data-toggle'=>'collapse', 'data-target'=>'#optional3'} Сроки
-              %p.h5.text-success.plan_table 3. Уход за растениями
-              .date-collapse
-                %span Начало:
-                %span.text-muted 02.05.2014
-                %span Окончание:
-                %span.text-muted 30.05.2014
-              %dt Ответственные:
-              %dd
-                %a(href="/user/1")Сергей Моржев
-                ,
-                %span.text-mutedМаксим Панов
-                ,
-                %a(href="/user/1")Александр Пингвинов
-
-      .panel.panel-info
-        .panel-heading
-          %span.text-danger 2. Законодательная реформа
-        .panel-body
-          -#%p.text-success.plan_table 1. Рассчитать нормы разъездов ассесоров
-          %blockquote(style='max-height:100px !important;')
-            %dl.dl-horizontal
-              -#%a.btn.btn-success.btn-xs.pull-right#star_change{type:"button", 'data-toggle'=>'collapse', 'data-target'=>'#optional4'} Сроки
-              %p.h5.text-success.plan_table 1. Рассчитать нормы разъездов ассесоров
-
-              %dt Ответственные:
-              %dd
-                %a(href="/user/1")Сергей Моржев
-                ,
-                %span.text-mutedМаксим Карин
-                ,
-                %a(href="/user/1")Александр Пингвинов
-                ,
-                %span.text-mutedГеоргий Салин
-                ,
-                %a(href="/user/1")Максим Пугин
-                ,
-                %a(href="/user/1")Александр Морин
-
-          -#%p.text-success.plan_table 2. Обсудить закон
-          %blockquote
-            %dl.dl-horizontal
-              -#%a.btn.btn-success.btn-xs.pull-right#star_change{type:"button", 'data-toggle'=>'collapse', 'data-target'=>'#optional5'} Сроки
-              %p.h5.text-success.plan_table 2. Обсудить закон
-              .date-collapse
-                %span Начало:
-                %span.text-muted 02.05.2014
-                %span Окончание:
-                %span.text-muted 30.05.2014
-              %dt Ответственные:
-              %dd
-                %a(href="/user/1")Сергей Моржев
-
-          -#%p.text-success.plan_table 3. Принять закон
-          %blockquote
-            %dl.dl-horizontal
-              -#%a.btn.btn-success.btn-xs.pull-right#star_change{type:"button", 'data-toggle'=>'collapse', 'data-target'=>'#optional6'} Сроки
-              %p.h5.text-success.plan_table 3. Принять закон
-              .date-collapse
-                %span Начало:
-                %span.text-muted 02.05.2014
-                %span Окончание:
-                %span.text-muted 30.05.2014
-              %dt Ответственные:
-              %dd
-                %a(href="/user/1")Максим Панов
-                ,
-                %a(href="/user/1")Александр Пингвинов
-
-      .panel.panel-info
-        .panel-heading
-          %span.text-danger 3. Пруд с водными растениями
-        .panel-body
-          -#%p.text-success.plan_table 1. Сделать яму
-          %blockquote(style='max-height:100px !important;')
-            %dl.dl-horizontal
-              -#%a.btn.btn-success.btn-xs.pull-right#star_change{type:"button", 'data-toggle'=>'collapse', 'data-target'=>'#optional7'} Сроки
-              %p.h5.text-success.plan_table 1. Сделать яму
-
-              %dt Ответственные:
-              %dd
-                %a(href="/user/1")Сергей Моржев
-                ,
-                %span.text-mutedМаксим Панов
-                ,
-                %a(href="/user/1")Александр Пингвинов
-                ,
-                %span.text-mutedГеоргий Салин
-                ,
-                %span.text-mutedМаксим Пугин
-                ,
-                %a(href="/user/1")Александр Морин
-
-          -#%p.text-success.plan_table 2. Залить водой
-          %blockquote
-            %dl.dl-horizontal
-              -#%a.btn.btn-success.btn-xs.pull-right#star_change{type:"button", 'data-toggle'=>'collapse', 'data-target'=>'#optional8'} Сроки
-              %p.h5.text-success.plan_table 2. Залить водой
-
-              %dt Ответственные:
-              %dd
-                %a(href="/user/1")Сергей Моржев
-
-
-
-
-
-    %div.tab-pane#novation33
+          %br
+          =text_area_tag "plan_other", '',  rows: 30, style: 'width: 100%;'
+    %div.tab-pane#plan2
       %hr
       %h3.text-success План мероприятий первого этапа
       %br
       .panel.panel-info
-        .panel-heading
-          %span.text-danger 1. Газон по всему пустырю с клумбой посредине
+        .panel-heading  Название мероприятия - сроки - отвественные
         .panel-body
-          -#%p.text-success.plan_table 1. Посадка растений
-          %blockquote
-            %dl.dl-horizontal
-              %p.h5.text-success.plan_table 1. Посадка растений
-              .date-collapse
-                %span Начало:
-                %span.text-muted 02.05.2014
-                %span Окончание:
-                %span.text-muted 30.05.2014
-              %dt Ответственные:
-              %dd
-                %a(href="/user/1")Сергей Моржев
-
-          -#%p.text-success.plan_table 2. Полив растений
-          %blockquote
-            %dl.dl-horizontal
-              %p.h5.text-success.plan_table 2. Полив растений
-              .date-collapse
-                %span Начало:
-                %span.text-muted 02.05.2014
-                %span Окончание:
-                %span.text-muted 30.05.2014
-              %dt Ответственные:
-              %dd
-                %a(href="/user/1")Сергей Моржев
-                ,
-                %a(href="/user/1")Александр Пингвинов
-
-          -#%p.text-success.plan_table 3. Уход за растениями
-          %blockquote
-            %dl.dl-horizontal
-              %p.h5.text-success.plan_table 3. Уход за растениями
-              .date-collapse
-                %span Начало:
-                %span.text-muted 02.05.2014
-                %span Окончание:
-                %span.text-muted 30.05.2014
-              %dt Ответственные:
-              %dd
-                %a(href="/user/1")Сергей Моржев
-                ,
-                %span.text-mutedМаксим Панов
-                ,
-                %a(href="/user/1")Александр Пингвинов
-      .panel.panel-info
-        .panel-heading
-          %span.text-danger 2. Законодательная реформа
-        .panel-body
-          -#%p.text-success.plan_table 1. Рассчитать нормы разъездов ассесоров
-          %blockquote(style='max-height:100px !important;')
-            %dl.dl-horizontal
-              %p.h5.text-success.plan_table 1. Рассчитать нормы разъездов ассесоров
-              .date-collapse
-                %span Начало:
-                %span.text-muted 02.05.2014
-                %span Окончание:
-                %span.text-muted 30.05.2014
-              %dt Ответственные:
-              %dd
-                %a(href="/user/1")Сергей Моржев
-                ,
-                %span.text-mutedМаксим Панов
-                ,
-                %a(href="/user/1")Александр Пингвинов
-                ,
-                %span.text-mutedГеоргий Салин
-                ,
-                %span.text-mutedМаксим Пугин
-                ,
-                %a(href="/user/1")Александр Морин
-
-          -#%p.text-success.plan_table 2. Обсудить закон
-          %blockquote
-            %dl.dl-horizontal
-              %p.h5.text-success.plan_table 2. Обсудить закон
-              .date-collapse
-                %span Начало:
-                %span.text-muted 02.05.2014
-                %span Окончание:
-                %span.text-muted 30.05.2014
-              %dt Ответственные:
-              %dd
-                %a(href="/user/1")Сергей Моржев
-
-
-          -#%p.text-success.plan_table 3. Принять закон
-          %blockquote
-            %dl.dl-horizontal
-              %p.h5.text-success.plan_table 3. Принять закон
-              .date-collapse
-                %span Начало:
-                %span.text-muted 02.05.2014
-                %span Окончание:
-                %span.text-muted 30.05.2014
-              %dt Ответственные:
-              %dd
-                %a(href="/user/1")Максим Панов
-                ,
-                %a(href="/user/1")Александр Пингвинов
-
-
-
-
+          %br
+          =text_area_tag "plan_first", '',  rows: 30, style: 'width: 100%;'
 .col-md-4
-
   %h5
     .small Выберите несовершенство, кликнув по нужной вкладке:
-
   %ul.nav.nav-tabs.nav-justified
     %li.active
       %a(href="#theall" data-toggle="tab") Образ
@@ -295,12 +48,10 @@
       %a(href="#thefirst" data-toggle="tab") Первый этап
   .tab-content
     #theall.tab-pane.fade.in.active
-
       %ul.nav.nav-tabs.nav-stacked
         %li
-          %a.text-success(href="#novation3" data-toggle="tab" style='font-size:10px; font-weight: bold;')
+          %a.text-success(href="#plan1" data-toggle="tab" style='font-size:10px; font-weight: bold;')
             План мероприятий
-
         -@discontents.each_with_index do |d,i|
           %li
             %a(href="#dis_#{d.id}" data-toggle="tab")="#{i+1}. #{trim_string(d.content)}"
@@ -318,90 +69,13 @@
         -#  %a(href="#novation2" data-toggle="tab")
         -#
         -#    3. Губернатор плохо вышивает по тюли
-        -#%li
-        -#  %a(href="#novation2" data-toggle="tab")
-        -#    %span.text-success.glyphicon.glyphicon-ok.pull-right
-        -#    4. Почтмейстеры берут взятки
-        -#%li
-        -#  %a(href="#novation2" data-toggle="tab")
-        -#
-        -#    5. Нестабильный спрос на мертвые души
-        -#%li
-        -#  %a(href="#novation2" data-toggle="tab")
-        -#    %span.text-success.glyphicon.glyphicon-ok.pull-right
-        -#    6. Нереруглярно ездят коллежские ассесоры
-        -#%li
-        -#  %a(href="#novation2" data-toggle="tab")
-        -#
-        -#    7. Губернатор плохо вышивает по тюли
-        -#%li
-        -#  %a(href="#novation2" data-toggle="tab")
-        -#
-        -#    8. Почтмейстеры берут взятки
-        -#%li
-        -#  %a(href="#novation2" data-toggle="tab")
-        -#
-        -#    9. Нестабильный спрос на мертвые души
-        -#%li
-        -#  %a(href="#novation2" data-toggle="tab")
-        -#
-        -#    10. Нереруглярно ездят коллежские ассесоры -#%li.active
-        -#  %a(href="#novation1" data-toggle="tab")
-        -#    %span.text-success.glyphicon.glyphicon-ok.pull-right
-        -#    %span.text-danger.glyphicon.glyphicon-star.pull-right
-        -#    1. Пыльный и отвратительный на вид большой пустырь
-        -#%li
-        -#  %a(href="#novation2" data-toggle="tab")
-        -#    %span.text-success.glyphicon.glyphicon-ok.pull-right
-        -#    %span.text-danger.glyphicon.glyphicon-star.pull-right
-        -#    2. Нереруглярно ездят коллежские ассесоры
-        -#%li
-        -#  %a(href="#novation2" data-toggle="tab")
-        -#
-        -#    3. Губернатор плохо вышивает по тюли
-        -#%li
-        -#  %a(href="#novation2" data-toggle="tab")
-        -#    %span.text-success.glyphicon.glyphicon-ok.pull-right
-        -#    4. Почтмейстеры берут взятки
-        -#%li
-        -#  %a(href="#novation2" data-toggle="tab")
-        -#
-        -#    5. Нестабильный спрос на мертвые души
-        -#%li
-        -#  %a(href="#novation2" data-toggle="tab")
-        -#    %span.text-success.glyphicon.glyphicon-ok.pull-right
-        -#    6. Нереруглярно ездят коллежские ассесоры
-        -#%li
-        -#  %a(href="#novation2" data-toggle="tab")
-        -#
-        -#    7. Губернатор плохо вышивает по тюли
-        -#%li
-        -#  %a(href="#novation2" data-toggle="tab")
-        -#
-        -#    8. Почтмейстеры берут взятки
-        -#%li
-        -#  %a(href="#novation2" data-toggle="tab")
-        -#
-        -#    9. Нестабильный спрос на мертвые души
-        -#%li
-        -#  %a(href="#novation2" data-toggle="tab")
-        -#
-        -#    10. Нереруглярно ездят коллежские ассесоры
 
 
     #thefirst.tab-pane.fade
       %ul.nav.nav-tabs.nav-stacked
         %li
-          %a.text-success(href="#novation33" data-toggle="tab" style='font-size:20px;')
+          %a.text-success(href="#plan2" data-toggle="tab" style='font-size:20px;')
             План мероприятий
-        %li.active
-          %a(href="#novation11" data-toggle="tab")
-            %span.text-success.glyphicon.glyphicon-ok.pull-right
-            %span.text-danger.glyphicon.glyphicon-star.pull-right
-            1. Пыльный и отвратительный на вид большой пустырь
-
-        %li
-          %a(href="#novation22" data-toggle="tab")
-            %span.text-success.glyphicon.glyphicon-ok.pull-right
-            %span.text-danger.glyphicon.glyphicon-star.pull-right
-            2. Нереруглярно ездят коллежские ассесоры
+        -@discontents.each_with_index do |d,i|
+          %li
+            %a(href="#fdis_#{d.id}" data-toggle="tab")="#{i+1}. #{trim_string(d.content)}"

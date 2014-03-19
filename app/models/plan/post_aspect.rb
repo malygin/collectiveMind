@@ -2,7 +2,9 @@
 require 'similar_text'
 class Plan::PostAspect  < ActiveRecord::Base
   attr_accessible :discontent_aspect_id, :plan_post_id, :content, :control,
-                  :name, :negative, :positive, :reality, :problems, :first_stage, :concept_post_aspect_id
+                  :name, :negative, :positive, :reality, :problems, :first_stage,
+                  :concept_post_aspect_id, :obstacles, :negative_r,
+                  :positive_r, :negative_s, :positive_s,:control_r, :control_s
 
   belongs_to :concept_post_aspect, :class_name => 'Concept::PostAspect', :foreign_key => :concept_post_aspect_id
   belongs_to :plan_post, :class_name => 'Plan::Post', :foreign_key => :plan_post_id
