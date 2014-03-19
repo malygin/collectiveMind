@@ -1,0 +1,6 @@
+-if @post.important?
+  $('#set_important_post_#{@post.id}').removeClass('glyphicon-star-empty').addClass('glyphicon-star');
+-else
+  $('#set_important_post_#{@post.id}').removeClass('glyphicon-star').addClass('glyphicon-star-empty');
+
+

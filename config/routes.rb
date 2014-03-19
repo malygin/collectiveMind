@@ -10,6 +10,7 @@ CollectiveMind::Application.routes.draw do
 
     resources :posts do
       member do
+        put :set_important
         put :add_comment
         put :update_comment
         put :destroy_comment
