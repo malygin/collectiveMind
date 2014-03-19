@@ -16,7 +16,9 @@
 - if @project.status == 5
   %h5
     Модераторы объединили все поданные несовершенства в блоки, рассудите, пожалуйста,
-    1) нет ли в каком то из блоков того, что к нему не относится по смыслу
+    %br
+    1) нет ли в каком-то из блоков того, что к нему не относится по смыслу
+    %br
     2) есть ли что-то, что разумно было бы отнести к определенному блоку, но этого не сделано?
 
 - if can_union_discontents?(@project)
@@ -24,7 +26,7 @@
     %li#origin.active
       =link_to "Исходные #{@project.discontent_ongoing_post.count}", "/project/#{@project.id}/discontent/posts/", remote: true
     %li#new
-      =link_to "Объединные #{@project.discontent_accepted_post.count}", "/project/#{@project.id}/discontent/posts/unions", remote: true
+      =link_to "Объединенные #{@project.discontent_accepted_post.count}", "/project/#{@project.id}/discontent/posts/unions", remote: true
     -#%li
     -#  %a(href="#part_origin" data-toggle="tab") Частично совпадающие (140)
   %br
