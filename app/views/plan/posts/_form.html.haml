@@ -54,7 +54,7 @@
             План мероприятий
         -@discontents.each_with_index do |d,i|
           %li
-            %a(href="#dis_#{d.id}" data-toggle="tab")="#{i+1}. #{trim_string(d.content)}"
+            %a(href="#dis_#{d.id}" data-toggle="tab")="#{i+1}. #{d.content}"
         -#%li.active
         -#  %a(href="#novation1" data-toggle="tab")
         -#    %span.text-success.glyphicon.glyphicon-ok.pull-right
@@ -78,4 +78,4 @@
             План мероприятий
         -@discontents.each_with_index do |d,i|
           %li
-            %a(href="#fdis_#{d.id}" data-toggle="tab")="#{i+1}. #{trim_string(d.content)}"
+            %a(href="#fdis_#{d.id}" data-toggle="tab")="#{i+1}. #{d.content}"

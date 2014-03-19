@@ -52,6 +52,9 @@ class Discontent::Post < ActiveRecord::Base
   def show_content
   	'<b>что: </b>'+self.content + '<br/> <b> когда: </b>'+ self.whend + '<br/> <b>где: </b> ' +self.whered+'<br/>'
   end
+  #def content
+  #  '123123' if content.nil?
+  #end
 
   def not_vote_for_other_post_aspects(user)
     self.concept_conditions.each  do |asp|

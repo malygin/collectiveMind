@@ -248,21 +248,33 @@
         %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} &times;
         %h4#myModalLabel.modal-title Пояснения и пример правильного заполнения
       .modal-body
-        %h5.text-success D.
         %h4.text-primary
-          Что, вероятно, может помешать в будущем плодотворному функционированию всех перечисленных в B и С  ресурсов и как с этим предлагается бороться?
-        %h5.text-success Пояснения
-        %ul
-          %li Укажите, что может помешать в будущем плодотворному функционированию всех перечисленных в B и С  ресурсов
-          %li Приведите варианты решения
+          Что, вероятно, может помешать в будущем плодотворному функционированию всех перечисленных  ресурсов и как с этим предлагается бороться?
+
         %br
         -#%h4.text-success Пример правильного заполнения
         -#%h5.text-success D.
         -#%p.text-info Что, вероятно, может помешать в будущем плодотворному функционированию всех перечисленных в B и С  ресурсов и как с этим предлагается бороться?
         %h5.text-success Примеры
-        %p Помех не предвидится.
-        %hr
-        %p Возможны большие издержки
+        %h5.text-success Несовершенство:
+        %span.label.label-default что
+        Пыльный и отвратительный на вид большой пустырь
+        %br
+        %span.label.label-default где
+        во дворе между домами
+        %br
+        %span.label.label-default когда
+        в теплое время года
+        %br
+        %h5.text-success Условия:
+        %span.text-success необходимо периодически  вскапывать клумбу, удобрять и пропалывать...
+
+        %h5.text-success Требуемые для этого ресурсы:
+        %span.text-success  работник по уходу за растениями,  инструменты обработки почвы и растений, помещение для хранения технических средств...
+        %br
+        %span
+          %b Вероятные помехи:
+          Работник будет не добросовестно работать (ввести систему штрафов), помещение не сможет вместить всех технических средства (искать помещение побольше) ...
 
       .modal-footer
         %button.btn.btn-primary(type = "button" data-dismiss="modal") Мне все понятно!
@@ -274,20 +286,26 @@
         %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} &times;
         %h4#myModalLabel.modal-title Пояснения и пример правильного заполнения
       .modal-body
-        %h5.text-success F.
         %h4.text-primary
           Кто и как будет контролировать создание и поддержание должных УСЛОВИЙ, разрешение ЗАДАЧ и предотвращение НЕЖЕЛАТЕЛЬНЫХ ПОБОЧНЫХ ЭФФЕКТОВ?
-        %h5.text-success Пояснения
-        %ul
-          %li Покажите, Кто и как будет контролировать создание и поддержание должных УСЛОВИЙ и предотвращение НЕЖЕЛАТЕЛЬНЫХ ПОБОЧНЫХ ЭФФЕКТОВ
-          %li Постарайтесь учесть все моменты
+
         %br
-        -#%h4.text-success Пример правильного заполнения
-        -#%h5.text-success F.
-        -#%p.text-info Кто и как будет контролировать создание и поддержание должных УСЛОВИЙ, разрешение ЗАДАЧ и предотвращение НЕЖЕЛАТЕЛЬНЫХ ПОБОЧНЫХ ЭФФЕКТОВ?
         %h5.text-success Примеры
+        %h5.text-success Несовершенство:
+        %span.label.label-default что
+        Пыльный и отвратительный на вид большой пустырь
+        %br
+        %span.label.label-default где
+        во дворе между домами
+        %br
+        %span.label.label-default когда
+        в теплое время года
+        %br
+        %h5.text-success Условия:
+        %span.text-success необходимо периодически  вскапывать клумбу, удобрять и пропалывать...
+        %br
+        %b Контроль:
         %p Орган самоуправления жильцов
-        %hr
         %p Избирательные коммисии
 
       .modal-footer
@@ -300,20 +318,142 @@
         %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} &times;
         %h4#myModalLabel.modal-title Пояснения и пример правильного заполнения
       .modal-body
-        %h5.text-success F.
         %h4.text-primary
           Какие ресурсы требуются для этого контроля?
-        %h5.text-success Пояснения
-        %ul
-          %li Покажите, Какие ресурсы требуются для этого контроля?
-          %li Постарайтесь учесть все моменты
         %br
         %h5.text-success Примеры
-        -#%h5.text-success F.
-        -#%p.text-info Какие ресурсы требуются для этого контроля?
-        %p Представитель самоуправления, ответственный за сбор денег у жильцов.
-        %hr
+        %h5.text-success Несовершенство:
+        %span.label.label-default что
+        Пыльный и отвратительный на вид большой пустырь
+        %br
+        %span.label.label-default где
+        во дворе между домами
+        %br
+        %span.label.label-default когда
+        в теплое время года
+        %br
+        %h5.text-success Условия:
+        %span.text-success необходимо периодически  вскапывать клумбу, удобрять и пропалывать...
+        %br
+        %h5.text-success  Контроль:
+        %span.text-success  Орган самоуправления жильцов
+        %span.text-success  Избирательные коммисии
+        %span.text-success Представитель самоуправления, ответственный за сбор денег у жильцов.
+        %br
+        %b Ресурсы для осуществления контроля:
         %p Человек ответсвенный за содержание территории.
+
+      .modal-footer
+        %button.btn.btn-primary(type = "button" data-dismiss="modal") Мне все понятно!
+
+#prompt12.modal.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"}
+  .modal-dialog
+    .modal-content
+      .modal-header
+        %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} &times;
+        %h4#myModalLabel.modal-title Пояснения и пример правильного заполнения
+      .modal-body
+
+        %h4.text-primary Пояснения для средств
+        %br
+        %h5.text-success Пример:
+
+        %h5.text-success Несовершенство:
+        %span.label.label-default что
+        Пыльный и отвратительный на вид большой пустырь
+        %br
+        %span.label.label-default где
+        во дворе между домами
+        %br
+        %span.label.label-default когда
+        в теплое время года
+        %br
+        %h5.text-success Условия:
+        %span.text-success необходимо периодически  вскапывать клумбу, удобрять и пропалывать...
+        %br
+        %h5.text-success Требуемые для этого ресурсы:
+        %span.text-success работник по уходу за растениями,  инструменты обработки почвы и растений, помещение для хранения технических средств...
+        %br
+        %b Средства:
+        %p Нанимаем работника по обявлению, покупаем инструменты на деньги собранные с жильцов
+        .modal-footer
+          %button.btn.btn-primary(type = "button" data-dismiss="modal") Мне все понятно!
+
+#prompt13.modal.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"}
+  .modal-dialog
+    .modal-content
+      .modal-header
+        %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} &times;
+        %h4#myModalLabel.modal-title Пояснения и пример правильного заполнения
+      .modal-body
+        %h4.text-primary Пояснения для средств
+        %br
+        %h5.text-success Пример:
+
+        %h5.text-success Несовершенство:
+        %span.label.label-default что
+        Пыльный и отвратительный на вид большой пустырь
+        %br
+        %span.label.label-default где
+        во дворе между домами
+        %br
+        %span.label.label-default когда
+        в теплое время года
+        %br
+        %br
+        %span.text-success Условие:
+        %br
+        %span.text-success необходимо весной собирать деньги у жильцов...
+        %br
+        %br
+        %span.text-success Вероятный нежелательный побочный эффект:
+        %br
+        %span.text-success Некоторые жильцы могут отказаться делать денежные взносы.
+        %br
+        %br
+        %span.text-successРесурсы предотвращения:
+        %span.text-successСредства широкого публичного оповещения о должниках
+        %br
+        %b Средства:
+        %p покупаем доску для объявлений и ставим ее посреди района
+
+      .modal-footer
+        %button.btn.btn-primary(type = "button" data-dismiss="modal") Мне все понятно!
+
+#prompt14.modal.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"}
+  .modal-dialog
+    .modal-content
+      .modal-header
+        %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} &times;
+        %h4#myModalLabel.modal-title Пояснения и пример правильного заполнения
+      .modal-body
+        %h4.text-primary
+          Пояснения для средств
+        %br
+        %h5.text-success Примеры
+        %h5.text-success Несовершенство:
+        %span.label.label-default что
+        Пыльный и отвратительный на вид большой пустырь
+        %br
+        %span.label.label-default где
+        во дворе между домами
+        %br
+        %span.label.label-default когда
+        в теплое время года
+        %br
+        %h5.text-success Условия:
+        %span.text-success необходимо периодически  вскапывать клумбу, удобрять и пропалывать...
+        %br
+        %h5.text-success  Контроль:
+        %span.text-success  Орган самоуправления жильцов
+        %span.text-success  Избирательные коммисии
+        %span.text-success Представитель самоуправления, ответственный за сбор денег у жильцов.
+        %br
+        %h5.text-success Ресурсы для осуществления контроля:
+        %span.text-success  Человек ответсвенный за содержание территории.
+        %br
+        %b Средства:
+        %p Нанимаем отвественного, платим ему зарплату, он отчитывается перед советом жильцов
 
       .modal-footer
         %button.btn.btn-primary(type = "button" data-dismiss="modal") Мне все понятно!
