@@ -19,7 +19,7 @@
           %span.label.label-info=aspect.content
         %td
         %td
-      -aspect.posts.each do |post|
+      -aspect.posts.by_status(4).each do |post|
 
         %tr
           %td

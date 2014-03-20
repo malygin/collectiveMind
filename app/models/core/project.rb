@@ -57,7 +57,7 @@ class Core::Project < ActiveRecord::Base
       when :life_tape
         self.stage1.to_i - user.voted_aspects.size
       when :discontent
-        self.stage1.to_i - user.voted_discontent_posts.count
+        self.stage2.to_i - user.voted_discontent_posts.count
 
     end
   end

@@ -38,7 +38,7 @@
           %h5.text-success
             %b B.
           %p.text-info
-            Напишите о том, какие должны быть созданы и поддерживаться УСЛОВИЯ и разрешаться ПРАКТИЧЕСКИЕ ЗАДАЧИ.
+            Что должно делаться в будущем, чтобы нововведение функционировало?
             %a.btn.btn-success.btn-xs{type: "button", "data-toggle"=>"modal", "data-target"=>"#prompt3", style:'font-size:10px;'} Пояснения
             .form-group.has-success
               =text_area_tag "pa[#{@discontent_post.id}][positive]",@pa.positive, :class => "concept_cond", rows: 4, cols: 134
@@ -72,14 +72,13 @@
           %h5.text-success
             %b D.
           %p.text-info
-            Покажите, что нововведение практично в работе?
+            Покажите, что если нововведение будет внедрено и начнет работать в будущем, то эффект от него оправдает денежные и трудовые затраты
             %a.btn.btn-success.btn-xs{type: "button", "data-toggle"=>"modal", "data-target"=>"#prompt5", style:'font-size:10px;'} Пояснения
           .form-group.has-success
             =text_area_tag "pa[#{@discontent_post.id}][problems]",@pa.problems, :class => "concept_cond", rows: 4, cols: 134
 
-
           %p.text-info
-            Обоснуйте, что нововведение реалистично воплотить в жизнь.
+            Обоснуйте, что воплощение нововведения в жизнь не встретит серьзеных припятствий
             %a.btn.btn-success.btn-xs{type: "button", "data-toggle"=>"modal", "data-target"=>"#prompt6", style:'font-size:10px;'} Пояснения
           .form-group.has-success
             =text_area_tag "pa[#{@discontent_post.id}][reality]",@pa.reality, :class => "concept_cond", rows: 4, cols: 134

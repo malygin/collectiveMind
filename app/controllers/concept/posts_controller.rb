@@ -27,7 +27,7 @@ class Concept::PostsController < PostsController
 
     @journals = Journal.events_for_user_feed @project.id
     @news = ExpertNews::Post.first  
-    @status = params[:status]
+    @status = 4
   end
 
 
