@@ -147,6 +147,7 @@ class User < ActiveRecord::Base
         self.journals.build(:type_event=>'useful_comment', :project => h[:project], :body=>"#{h[:comment].content[0..24]}:#{h[:path]}/#{h[:comment].post.id}#comment_#{h[:comment].id}").save!
       when :plus_post
 
+        self.add_score_by_type(300, :score_g)  if h[:post].instance_of? Concept::Post
         self.add_score_by_type(30, :score_g)  if h[:post].instance_of? Discontent::Post
         self.add_score_by_type(10, :score_g)  if h[:post].instance_of? LifeTape::Post
 
