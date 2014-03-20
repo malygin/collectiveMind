@@ -2,6 +2,8 @@
   = render 'users/user_post', :user => post.user
   .media-body
     = render partial: 'discontent/aspects/aspect', collection: post.discontent_aspects
+    = render :partial => 'set_important', locals: {post: post}
+
     %br
     %p.text-justify
       = simple_format post.content

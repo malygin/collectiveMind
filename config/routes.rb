@@ -10,6 +10,7 @@ CollectiveMind::Application.routes.draw do
 
     resources :posts do
       member do
+        put :set_important
         put :add_comment
         put :update_comment
         put :destroy_comment
@@ -24,8 +25,6 @@ CollectiveMind::Application.routes.draw do
 
 devise_for :users
 match '/project/:project', :to => 'core/projects#to_project'
-#match '/project/:project/life_tape/posts/raiting', :to => 'pages#raiting'
-#match '/project/:project/users/show_top', :to => 'users#show_top'
 
 namespace :core, :shallow => true do
   resources :projects do

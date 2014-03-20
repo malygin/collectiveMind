@@ -88,6 +88,7 @@ def index
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @post }
+      format.js
     end
   end
 
@@ -393,6 +394,15 @@ def index
     end
   end
 
+  def set_important
+    @project = Core::Project.find(params[:project])
+    @post = current_model.find(params[:id])
+    @post.toggle(:important)
+    @post.update_attributes(important: @post.important)
+    respond_to do |format|
+      format.js
+    end
+  end
 
   protected
 

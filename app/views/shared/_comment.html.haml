@@ -19,9 +19,13 @@
         %span.glyphicon.glyphicon-thumbs-up.text-muted
         %span.text-muted= "Против #{comment.users_against.count}"
         %span.glyphicon.glyphicon-thumbs-down.text-muted
+    .row
+      .col-md-10
+        %small.text-muted= Russian::strftime(comment.created_at,"%d %B %k:%M:%S ")
   - if current_user?(comment.user) or boss?
-    =link_to({:action => :edit_comment, :id => comment.id},:remote => true) do
-      %span.text-success{id: "update_comment_#{comment.id}"} Редактировать
-    \|
-    = link_to 'Удалить', {:action => :destroy_comment, :id => comment.id}, :method => :put, :remote => true, :confirm => 'Удалить комментарий?', :class => "text-danger"
+    %div{id: "redactor_comment_#{comment.id}"}
+      =link_to({:action => :edit_comment, :id => comment.id},:remote => true) do
+        %span.text-success{id: "update_comment_#{comment.id}"} Редактировать
+      \|
+      = link_to 'Удалить', {:action => :destroy_comment, :id => comment.id}, :method => :put, :remote => true, :confirm => 'Удалить комментарий?', :class => "text-danger",id: "destroy_comment_#{comment.id}"
 
