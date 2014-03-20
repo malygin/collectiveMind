@@ -6,14 +6,17 @@ class Discontent::AspectsController  < ApplicationController
   end
 
   def edit
+    @project = Core::Project.find(params[:project])
+
     @aspect = Discontent::Aspect.find(params[:id])
   end
 
   def update
     @aspect = Discontent::Aspect.find(params[:id])
-    @aspect.update_attributes(content: params[:content])
+    @aspect.update_attributes( params[:discontent_aspect])
     respond_to do |format|
       format.js
+      format.html
     end
   end
 

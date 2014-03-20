@@ -1,6 +1,10 @@
+
 -# Не отрабатывает js
 
 -#$('#redactor_aspect_#{@aspect.id}').hide();
 -#$('#aspect_#{@aspect.id}').hide();
--#
--#$('#edit_aspect_content_#{@aspect.id}').html("#{escape_javascript(render  :partial => 'update_aspect_form', :locals => { :aspect => @aspect} )}");
+-#$('#edit_aspect_content_#{@aspect.id}').html('')
+-#$('#edit_aspect_content_#{@aspect.id}').append("#{escape_javascript(render  :partial => 'update_aspect_form', :locals => { :aspect => @aspect} )}");
+-#-#$('form#edit_discontent_aspect_#{@aspect.id}').trigger('submit.rails');
+$('#aspect_modal').append("#{escape_javascript(render  :partial => 'new_aspect_form', :locals => { :aspect => @aspect})}");
+$('#modal_aspect_view').modal('show');

@@ -7,7 +7,7 @@
       .modal-body
         %p Напишите название нового аспекта
         %br
-        = form_for aspect,:url => {:project => @project.id, :action => 'create'}, remote: true do |f|
+        = form_for aspect,:url => {:project => @project.id,  :action => aspect.persisted? ? 'update' : 'create'}, remote: true do |f|
           = render 'shared/error_messages', :object =>f.object
           =f.text_area :content, :class => 'form-control', style: 'height: 70px;', placeholder: 'Введите новый аспект', id:'aspect_text_area'
 
