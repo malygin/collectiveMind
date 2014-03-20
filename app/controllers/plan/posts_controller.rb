@@ -57,15 +57,19 @@ class Plan::PostsController < PostsController
     @plan_post.status = 0
     unless params[:pa].nil?
       params[:pa].each do |pa|
-        p = Plan::PostAspect.new(pa)
+        p = Plan::PostAspect.new(pa[1])
         p.first_stage= 0
+        d = Discontent::Post.find(pa[0])
+        p.discontent = d
         @plan_post.post_aspects_other << p
       end
     end
     unless params[:pa1].nil?
       params[:pa1].each do |pa|
-        p = Plan::PostAspect.new(pa)
+        p = Plan::PostAspect.new(pa[1])
         p.first_stage= 1
+        d = Discontent::Post.find(pa[0])
+        p.discontent = d
         @plan_post.post_aspects_first << p
       end
     end
