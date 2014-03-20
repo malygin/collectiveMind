@@ -8,12 +8,6 @@
       %b#count_vote=@number_v
 
 %table.table
-  %tr
-    %td
-    %td(style='min-width: 400px;')
-      %span.label.label-p  Отсутствующие достоинства
-    %td(style='min-width: 400px;')
-      %span.label.label-n  Имеющиеся недостатки
   -@aspects.each do |aspect|
     %tr
       %td(colspan=3)
