@@ -1,4 +1,11 @@
+<<<<<<< HEAD
 $('#set_important_post_#{@post.id}').toggleClass('glyphicon-star-empty glyphicon-star')
 
+=======
+-if @post.important?
+  $('#set_important_post_#{@post.id}').removeClass('glyphicon-star-empty').addClass('glyphicon-star');
+-else
+  $('#set_important_post_#{@post.id}').removeClass('glyphicon-star').addClass('glyphicon-star-empty');
+>>>>>>> 1c6971ea4df05c3705904b02f87838fc251dd974
 
 
