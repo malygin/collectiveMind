@@ -68,7 +68,7 @@ gem 'russian'
 
 gem 'thin'
 gem 'settingslogic'
-gem 'wymeditor'
+#gem 'wymeditor'
 gem 'rest-client'
 gem 'magic_encoding'
 
