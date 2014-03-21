@@ -1,2 +1,10 @@
-%h3=@post.title
-=@post.content.html_safe
+%div{:id => "knowbase_post_#{@post.id}"}
+  %span.h3{:id => "edit_knowbase_post_title#{@post.id}"}=@post.title
+  %span
+    =link_to edit_knowbase_post_path(@project,@post),:remote => true, :id => "edit_knowbase_post_#{@post.id}" do
+      %span{:class=>"glyphicon glyphicon-pencil text-success", :style=>"cursor:pointer;text-decoration:none;font-size:15px;"}
+
+  %br
+  %br
+  %div{:id => "edit_knowbase_post_content_#{@post.id}"}
+    =@post.content.html_safe

@@ -3,4 +3,5 @@
     -@stages.each do |s|
       %li{class: ('active' if s.stage==params[:id].to_i or (s.stage == 1 and params[:id].nil?))}
         %a(href="/project/#{@project.id}/knowbase/posts/#{s.stage}")
-          =s.title
+          %div{id: "knowbase_left_title_#{s.id}"}
+            =s.title

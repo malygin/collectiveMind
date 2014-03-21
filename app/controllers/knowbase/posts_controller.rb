@@ -29,4 +29,17 @@ class Knowbase::PostsController < ApplicationController
     add_breadcrumb  @post.title, knowbase_post_path(@project, @post.id)
   end
 
+  def edit
+    @stages = current_model.stage_knowbase_order(@project.id)
+    @post = current_model.find(params[:id])
+    add_breadcrumb  @post.title, knowbase_post_path(@project, @post.id)
+  end
+
+  def update
+    @post = current_model.find(params[:id])
+    @post.update_attributes(params[:knowbase_post])
+    respond_to do |format|
+      format.js
+    end
+  end
 end

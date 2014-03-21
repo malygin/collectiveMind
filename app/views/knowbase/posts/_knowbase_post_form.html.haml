@@ -1,0 +1,42 @@
+-#.form-group.has-success
+-#  %textarea#some-textarea.wysihtml5.form-control(rows="10" cols="73" placeholder="Введите текст ...")
+
+= form_for post, :url => {:project => @project.id,  :action =>'update'}, remote: true do |f|
+
+  = render 'shared/error_messages', :object =>f.object
+  =f.text_field :title, :class => 'form-control', placeholder: 'Введите название ...', id:'title-textfield'
+  %br
+  %br
+  =f.text_area :content, :class => 'wysihtml5 form-control', style: 'height: 500px;', placeholder: 'Введите текст ...', id:'some-textarea'
+  .pull-right
+    =f.submit 'Сохранить', :id  => "send_post", class: 'btn btn-sm btn-success'
+
+:javascript
+  activate_htmleditor();
+
+-#:javascript
+-#  var myCustomTemplates = {
+-#      lists : function(locale) {
+-#          return "<li>" +
+-#              "<div class='btn-group'>" +
+-#              "<a class='btn btn-default btn' data-wysihtml5-command='insertUnorderedList' title='" + locale.lists.unordered + "' tabindex='-1'><img src='/assets/edit2.ico'></a>" +
+-#              "<a class='btn btn-default btn' data-wysihtml5-command='insertOrderedList' title='" + locale.lists.ordered + "' tabindex='-1'><img src='/assets/edit.ico'></a>" +
+-#              "<a class='btn btn-default btn' data-wysihtml5-command='Outdent' title='" + locale.lists.outdent + "' tabindex='-1'><img src='/assets/edit4.ico'></i></a>" +
+-#              "<a class='btn btn-default btn' data-wysihtml5-command='Indent' title='" + locale.lists.indent + "' tabindex='-1'><img src='/assets/edit3.ico'></i></a>" +
+-#              "</div>" +
+-#              "</li>";
+-#      }
+-#  };
+-#
+-#  $('.wysihtml5').each(function(i, elem) {
+-#      $(elem).wysihtml5({
+-#          "font-styles": true,
+-#          "emphasis": true,
+-#          "lists": true,
+-#          "html": true,
+-#          "link": true,
+-#          "image": true,
+-#          "color": true,
+-#          customTemplates: myCustomTemplates
+-#      });
+-#  });

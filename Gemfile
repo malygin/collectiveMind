@@ -69,6 +69,7 @@ gem 'russian'
 gem 'thin'
 gem 'settingslogic'
 #gem 'wymeditor'
+gem "bootstrap-wysihtml5-rails"
 gem 'rest-client'
 gem 'magic_encoding'
 

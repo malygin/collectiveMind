@@ -41,6 +41,8 @@ GEM
     bootstrap-sass-rails (3.0.3.0)
       railties (>= 3.1.0)
       sass-rails (>= 3.1.0)
+    bootstrap-wysihtml5-rails (0.3.1.23)
+      railties (>= 3.0)
     breadcrumbs_on_rails (2.3.0)
     builder (3.0.4)
     capybara (2.2.1)
@@ -300,6 +302,7 @@ DEPENDENCIES
   activerecord-postgresql-adapter
   aws-sdk
   bootstrap-sass-rails
+  bootstrap-wysihtml5-rails
   breadcrumbs_on_rails
   capybara
   coffee-rails (~> 3.2.1)

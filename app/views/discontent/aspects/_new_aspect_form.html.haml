@@ -11,7 +11,13 @@
 
           = render 'shared/error_messages', :object =>f.object
           =f.text_area :content, :class => 'form-control', style: 'height: 70px;', placeholder: 'Введите новый аспект', id:'aspect_text_area'
-
+          .form-group
+            %label.radio-inline
+              = f.radio_button :status,  '0'
+              %span.text-success Основной
+            %label.radio-inline
+              = f.radio_button :status,  '1'
+              %span.text-danger Дополнительный
           .pull-right
             =f.submit 'Отправить', :id  => "send_post", class: 'btn btn-sm btn-success'
 

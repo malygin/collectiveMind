@@ -4,6 +4,8 @@
 #= require jquery.ui.all
 #= require twitter/bootstrap
 #= require autocomplete-rails
+#= require bootstrap-wysihtml5/b3
+#= require bootstrap-wysihtml5/locales/ru-RU
 
 $('#modal_help').modal
   keyboard: false
@@ -70,3 +72,27 @@ $('.score_class').on 'click', ->
     data: { pa: $('#select_'+el).val() },
 
   })
+
+@activate_htmleditor= ->
+  myCustomTemplates = lists: (locale) ->
+    "<li>" + "<div class='btn-group'>" +
+    "<a class='btn btn-default btn' data-wysihtml5-command='insertUnorderedList' title='" +
+    locale.lists.unordered + "' tabindex='-1'><img src='/assets/edit2.ico'></a>" +
+    "<a class='btn btn-default btn' data-wysihtml5-command='insertOrderedList' title='" +
+    locale.lists.ordered + "' tabindex='-1'><img src='/assets/edit.ico'></a>" +
+    "<a class='btn btn-default btn' data-wysihtml5-command='Outdent' title='" +
+    locale.lists.outdent + "' tabindex='-1'><img src='/assets/edit4.ico'></i></a>" +
+    "<a class='btn btn-default btn' data-wysihtml5-command='Indent' title='" +
+    locale.lists.indent + "' tabindex='-1'><img src='/assets/edit3.ico'></i></a>" + "</div>" + "</li>"
+
+  $(document).ready ->
+    $(".wysihtml5").each (i, elem) ->
+      $(elem).wysihtml5
+        "font-styles": true
+        emphasis: true
+        lists: true
+        html: true
+        link: true
+        image: true
+        color: true
+        customTemplates: myCustomTemplates
