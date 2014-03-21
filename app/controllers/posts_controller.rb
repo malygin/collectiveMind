@@ -1,12 +1,16 @@
 # encoding: utf-8
 class PostsController < ApplicationController
-  #before_filter :authenticate, :only => [:new, :create, :edit, :update,
-  #  :plus, :plus_comment, :add_comment, :destroy, :vote_list]
+  before_filter :authenticate
   before_filter :prepare_data, :only => [:index, :new, :edit, :show, :show_essay, 
     :vote_list, :essay_list]
   before_filter :have_rights
 
   # before_filter :authorized_user, :only => :destroy
+ def authenticate
+   unless current_user
+     redirect_to '/users/sign_in'
+   end
+ end
 
   def current_model
     "#{self.class.name.deconstantize}::Post".constantize
