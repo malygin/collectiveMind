@@ -10,21 +10,18 @@
 %table.table.table-striped
   %thead
     %tr
-      %th
       %th.text-success Несовершенства (проблемы):
       %th.text-success(style='min-width: 300px;') Варианты нововведений (решений):
 
   %tbody
     -@aspects.each do |aspect|
       %tr
-        %td
+        %td(colspan=2)
           %span.label.label-info=aspect.content
-        %td
         %td
       -aspect.posts.by_status(4).each do |post|
 
         %tr
-          %td
           %td
             =render partial:'discontent/posts/post_short2', object: post
 
