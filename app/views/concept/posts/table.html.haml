@@ -37,7 +37,7 @@
     -@aspects.each do |asp|
         -unless asp.accepted_posts.empty?
             %tr
-                %td
+                %td(colspan='2' )
                     %b=asp.content
                 %td
             -asp.accepted_posts.each_with_index do |dis, index2|
