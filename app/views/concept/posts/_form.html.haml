@@ -41,12 +41,12 @@
             Что должно делаться в будущем, чтобы нововведение функционировало?
             %a.btn.btn-success.btn-xs{type: "button", "data-toggle"=>"modal", "data-target"=>"#prompt3", style:'font-size:10px;'} Пояснения
             .form-group.has-success
-              =text_area_tag "pa[#{@discontent_post.id}][positive]",@pa.positive, :class => "concept_cond", rows: 4, style: 'width: 100%;'
+              =text_area_tag "pa[#{@discontent_post.id}][positive]",@pa.positive, :placeholder => 'Опишите подробно весь процесс функционировния вашего нововведения в будущем', :class => "concept_cond", rows: 4, style: 'width: 100%;'
           %p.text-info
             Какие ресурсы требуются для поддержания УСЛОВИЯ и разрешения ЗАДАЧИ?
             %a.btn.btn-success.btn-xs{type: "button", "data-toggle"=>"modal", "data-target"=>"#prompt4", style:'font-size:10px;'} Пояснения
             .form-group.has-success
-              =text_area_tag "pa[#{@discontent_post.id}][positive_r]",@pa.positive_r, :class => "concept_cond", rows: 4, style: 'width: 100%;'
+              =text_area_tag "pa[#{@discontent_post.id}][positive_r]",@pa.positive_r, :placeholder => 'Перечислите все необходимое для успешного функционирования вашего нововедения в будущем', :class => "concept_cond", rows: 4, style: 'width: 100%;'
 
 
           %hr
@@ -56,7 +56,7 @@
             Если будут созданы и поддерживаться должные УСЛОВИЯ и разрешаться ЗАДАЧИ, какие из-за этого вероятны НЕЖЕЛАТЕЛЬНЫЕ ПОБОЧНЫЕ ЭФФЕКТЫ в будущем?
             %a.btn.btn-success.btn-xs{type: "button", "data-toggle"=>"modal", "data-target"=>"#prompt7", style:'font-size:10px;'} Пояснения
             .form-group.has-success
-              =text_area_tag "pa[#{@discontent_post.id}][negative]",@pa.negative, :class => "concept_cond", rows: 4,  style: 'width: 100%;'
+              =text_area_tag "pa[#{@discontent_post.id}][negative]",@pa.negative, :placeholder => 'К каким побочным эффектам может привести ваше нововведение в будущем', :class => "concept_cond", rows: 4,  style: 'width: 100%;'
           %p.text-info
             Какие ресурсы требуются, чтобы предотвращать эти ЭФФЕКТЫ?
             %a.btn.btn-success.btn-xs{type: "button", "data-toggle"=>"modal", "data-target"=>"#prompt8", style:'font-size:10px;'} Пояснения
