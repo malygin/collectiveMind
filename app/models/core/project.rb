@@ -94,6 +94,8 @@ class Core::Project < ActiveRecord::Base
         return true
      elsif p.instance_of? Discontent::Post
        return self.status == 3
+     elsif p.instance_of? Concept::Post
+       return self.status == 7
      end
     return false
   end
