@@ -7,13 +7,13 @@
             -if @project.status == 8
                 =link_to 'Вернуться к сбору нововедений',  pr_stage_core_project_path(@project), id: 'change_stage'
 
-.panel.panel-info
-    .panel-heading Обратите внимание!
-    .panel-body
-        За добавленное нововведние(решение) вы получите 50 баллов
-        За каждое дополнительное  поле -
-        %span.text-success +20 баллов
+
 
 
 
 =render 'shared/journal_news_feed', :journals => @journals, :news => @news
+
+.panel.panel-info
+    .panel-heading Обратите внимание!
+    .panel-body
+        За добавленное нововведние(решение) вы получите 200 баллов
