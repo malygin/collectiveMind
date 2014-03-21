@@ -24,12 +24,13 @@ class Concept::PostsController < PostsController
     @project = Core::Project.find(params[:project])
     @aspects = Discontent::Aspect.where(:project_id => @project)
     add_breadcrumb I18n.t('stages.concept'), concept_posts_path(@project)
+    @mini_help = Help::Post.where(stage:3, mini: true).first
 
     @journals = Journal.events_for_user_feed @project.id
     @news = ExpertNews::Post.first  
     @status = 4
   end
-
+                                                                ы
 
   def index
     @posts = current_model.where(:project_id => @project, :status => @status).paginate(:page => params[:page])
