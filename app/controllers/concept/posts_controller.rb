@@ -30,7 +30,7 @@ class Concept::PostsController < PostsController
     @news = ExpertNews::Post.first  
     @status = 4
   end
-                                                                ы
+
 
   def index
     @posts = current_model.where(:project_id => @project, :status => @status).paginate(:page => params[:page])
