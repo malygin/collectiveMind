@@ -21,46 +21,64 @@
               %p.text-info
                 %b Что новое, исправляющее несовершенство (проблему), появится в будущем?
               .form-group.has-danger
-                =tp.name
+                =simple_format(tp.name)
 
               %p.text-info
                 %b Как это нововведение будет исправлять несовершенство (проблему)?
               .form-group.has-danger
-                =tp.content
+                =simple_format(tp.content)
 
           %hr
           %h5.text-success
             %b B.
           %p.text-info
-            Напишите о том, какие должны быть созданы и поддерживаться УСЛОВИЯ и разрешаться ПРАКТИЧЕСКИЕ ЗАДАЧИ.
+            Что должно делаться в будущем, чтобы нововведение функционировало?
             .form-group.has-success
-              =tp.positive
+              -if tp.positive?
+                =simple_format(tp.positive)
+              -else
+                %b  ---
           %p.text-info
             Какие ресурсы требуются для поддержания УСЛОВИЯ и разрешения ЗАДАЧИ?
             .form-group.has-success
-              =tp.positive_r
+              -if tp.positive_r?
+                =simple_format(tp.positive_r)
+              -else
+                %b  ---
           %hr
           %h5.text-success
             %b C.
           %p.text-info
             Если будут созданы и поддерживаться должные УСЛОВИЯ и разрешаться ЗАДАЧИ, какие из-за этого вероятны НЕЖЕЛАТЕЛЬНЫЕ ПОБОЧНЫЕ ЭФФЕКТЫ в будущем?
             .form-group.has-success
-              =tp.negative
+              -if tp.negative?
+                =simple_format(tp.negative)
+              -else
+                %b  ---
           %p.text-info
             Какие ресурсы требуются, чтобы предотвращать эти ЭФФЕКТЫ?
             .form-group.has-success
-              =tp.negative_r
+              -if tp.negative_r?
+                =simple_format(tp.negative_r)
+              -else
+                %b  ---
           %hr
           %h5.text-success
             %b D.
           %p.text-info
             Покажите, что если нововведение будет внедрено и начнет работать в будущем, то эффект от него оправдает денежные и трудовые затраты
           .form-group.has-success
-            =tp.problems
+            -if tp.problems?
+              =simple_format(tp.problems)
+            -else
+              %b  ---
           %p.text-info
             Обоснуйте, что воплощение нововведения в жизнь не встретит серьезных препятствий
           .form-group.has-success
-            =tp.reality
+            -if tp.reality?
+              =simple_format(tp.reality)
+            -else
+              %b  ---
 
     %br
     = render 'shared/post_social_bar2', :post => @post
