@@ -30,9 +30,7 @@ class Knowbase::PostsController < ApplicationController
   end
 
   def edit
-    @stages = current_model.stage_knowbase_order(@project.id)
     @post = current_model.find(params[:id])
-    add_breadcrumb  @post.title, knowbase_post_path(@project, @post.id)
   end
 
   def update
@@ -41,5 +39,13 @@ class Knowbase::PostsController < ApplicationController
     respond_to do |format|
       format.js
     end
+  end
+
+  def sortable_save
+    current_model.set_knowbase_posts_sort(params[:sortable])
+    #params[:sortable].each do |el|
+    #  @post = current_model.find(el[1][0].to_i)
+    #  @post.update_attributes(stage: el[1][1].to_i)
+    #end
   end
 end

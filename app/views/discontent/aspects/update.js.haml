@@ -1,7 +1,5 @@
-
 $('#modal_aspect_view').modal('hide');
-
-
 $('#edit_aspect_content_#{@aspect.id}').html("#{escape_javascript("#{@aspect.content} (#{@aspect.life_tape_posts.count})")}");
+$('#edit_aspect_content_#{@aspect.id}').effect("highlight", {color: '#f5cecd'}, 1000);
 
 

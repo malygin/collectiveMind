@@ -74,25 +74,32 @@ $('.score_class').on 'click', ->
   })
 
 @activate_htmleditor= ->
-  myCustomTemplates = lists: (locale) ->
-    "<li>" + "<div class='btn-group'>" +
-    "<a class='btn btn-default btn' data-wysihtml5-command='insertUnorderedList' title='" +
-    locale.lists.unordered + "' tabindex='-1'><img src='/assets/edit2.ico'></a>" +
-    "<a class='btn btn-default btn' data-wysihtml5-command='insertOrderedList' title='" +
-    locale.lists.ordered + "' tabindex='-1'><img src='/assets/edit.ico'></a>" +
-    "<a class='btn btn-default btn' data-wysihtml5-command='Outdent' title='" +
-    locale.lists.outdent + "' tabindex='-1'><img src='/assets/edit4.ico'></i></a>" +
-    "<a class='btn btn-default btn' data-wysihtml5-command='Indent' title='" +
-    locale.lists.indent + "' tabindex='-1'><img src='/assets/edit3.ico'></i></a>" + "</div>" + "</li>"
+  $(".wysihtml5").each (i, elem) ->
+    $(elem).wysihtml5
+      "font-styles": true
+      emphasis: true
+      lists: true
+      html: true
+      link: true
+      image: true
+      color: true
 
-  $(document).ready ->
-    $(".wysihtml5").each (i, elem) ->
-      $(elem).wysihtml5
-        "font-styles": true
-        emphasis: true
-        lists: true
-        html: true
-        link: true
-        image: true
-        color: true
-        customTemplates: myCustomTemplates
+$ ->
+  $("#sortable").sortable()
+  $("#sortable").disableSelection()
+
+$('#sortable').sortable update: (event, ui) ->
+  order = []
+  i = 0
+  $("li",this).each (index) ->
+    if parseInt($(this).attr('stage')) != (index+1)
+      order[i] = []
+      order[i][0] = $(this).attr('id')
+      order[i][1] = index+1
+      i = i+1
+  $.ajax
+    url: "/project/1/knowbase/posts/sortable_save"
+    type: "post"
+    data:
+      sortable: order
+

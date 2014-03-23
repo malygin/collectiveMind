@@ -79,6 +79,7 @@ scope '/project/:project' do
   end
 
   post 'plan/posts/get_cond', to:  'plan/posts#get_cond'
+  post 'knowbase/posts/sortable_save', to:  'knowbase/posts#sortable_save'
 
   namespace :plan do
     posts_routes
