@@ -32,7 +32,7 @@ class Plan::PostsController < PostsController
 
 
   def index
-    @posts = current_model.where(:project_id => @project, :status => @status).paginate(:page => params[:page])
+    @posts = current_model.where(:project_id => @project, :status => 0).paginate(:page => params[:page])
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @posts }
@@ -114,7 +114,11 @@ class Plan::PostsController < PostsController
       end
     end
   end
+  def show
+    @post = Plan::Post.find(params[:id])
+    render 'show' , :layout => 'application_two_column'
 
+  end
   # PUT /Plan/posts/1
   # PUT /Plan/posts/1.json
   def update

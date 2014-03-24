@@ -52,6 +52,10 @@ class Discontent::Post < ActiveRecord::Base
   def show_content
   	'<b>что: </b>'+self.content + '<br/> <b> когда: </b>'+ self.whend + '<br/> <b>где: </b> ' +self.whered+'<br/>'
   end
+  def display_content
+    discontent_posts.first.content if status == 4 and  !discontent_posts.empty?
+  end
+
   #def content
   #  '123123' if content.nil?
   #end

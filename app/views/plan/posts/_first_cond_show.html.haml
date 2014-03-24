@@ -1,0 +1,112 @@
+
+%div.tab-pane(id="fdis_#{pa.discontent.id}")
+  .tab-content
+    .row
+      .col-md-3
+        %span.h4 Нововведение:
+      .col-md-9
+    %div.panel.panel-default
+      %div.panel-body
+        %button.btn.btn-info.btn-sm.pull-right(data-toggle="modal" data-target="#modalStage3")
+          Показать пример
+        %h5.text-infoУстраняемое несовершенство:
+        =render partial:'discontent/posts/post_short2', object: pa.discontent
+        %br
+
+
+
+        #select0
+          .panel.panel-info
+            .panel-heading
+              %h5.text-success
+                %b A.*
+
+              -#%a.btn.btn-success.btn-xs.pull-right{type: "button", "data-toggle"=>"modal", "data-target"=>"#prompt1", style:'font-size:10px;'} Пояснения
+
+              %p.text-info
+                %b Что новое, исправляющее несовершенство (проблему), появится в будущем?
+              .form-group.has-danger
+                =pa.name
+
+
+              %p.text-info
+                Как это нововведение будет исправлять несовершенство (проблему)?
+              .form-group.has-danger
+                =pa.content
+
+
+          .panel.panel-info
+            .panel-heading
+              %h5.text-success
+                %b B.*
+              %p.text-info
+                %b Напишите о том, какие должны быть созданы и поддерживаться УСЛОВИЯ и разрешаться ПРАКТИЧЕСКИЕ ЗАДАЧИ.
+                .form-group.has-success
+                  =pa.positive
+              %p.text-info
+                %b Какие ресурсы требуются для поддержания УСЛОВИЯ и разрешения ЗАДАЧИ?
+                .form-group.has-success
+                  =pa.positive_r
+
+              %p.text-info
+                %b Какие средства необходимы для получения ресурсов?
+                .form-group.has-success
+                  =pa.positive_s
+
+
+          %hr
+          %h5.text-success
+            %b C.
+          %p.text-info
+            %b Если будут созданы и поддерживаться должные УСЛОВИЯ и разрешаться ЗАДАЧИ, какие из-за этого вероятны НЕЖЕЛАТЕЛЬНЫЕ ПОБОЧНЫЕ ЭФФЕКТЫ в будущем?
+            .form-group.has-success
+              =pa.negative
+          %p.text-info
+            %b Какие ресурсы требуются, чтобы предотвращать эти ЭФФЕКТЫ?
+            .form-group.has-success
+              =pa.negative_r
+          %p.text-info
+            Какие средства необходимы для получения ресурсов?
+            .form-group.has-success
+              =pa.negative_s
+
+
+          %hr
+          %h5.text-success
+            %b D.
+          %p.text-info
+            Кто и как будет контролировать создание и поддержание должных УСЛОВИЙ и предотвращение возникновение НЕЖЕЛАТЕЛЬНЫХ ПОБОЧНЫХ ЭФФЕКТОВ?
+            .form-group.has-success
+              =pa.control
+          %p.text-info
+            Какие ресурсы требуются для этого контроля?
+            .form-group.has-success
+              =pa.control_r
+          %p.text-info
+            Какие средства необходимы для получения ресурсов?
+            .form-group.has-success
+              =pa.control_s
+
+
+
+
+          %hr
+          %h5.text-success E.
+          %p.text-info
+            Что, вероятно, может помешать в будущем плодотворному функционированию всех перечисленных в B, С и D  ресурсов и как с этим предлагается бороться?
+          .form-group.has-success
+            =pa.obstacles
+
+          %hr
+          .panel.panel-info
+            .panel-heading
+              %h5.text-success
+                %b F.*
+              %p.text-info
+                Покажите, что нововведение практично в работе?
+              .form-group.has-success
+                =pa.problems
+              %p.text-info
+                Обоснуйте, что нововведение реалистично воплотить в жизнь.
+              .form-group.has-success
+                =pa.reality
