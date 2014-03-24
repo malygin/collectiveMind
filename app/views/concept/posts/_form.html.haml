@@ -21,14 +21,14 @@
 
 
               %p.text-info
-                Что новое, исправляющее несовершенство (проблему), появится в будущем?
+                =t('form.novation_what')
                 %a.btn.btn-success.btn-xs{type: "button", "data-toggle"=>"modal", "data-target"=>"#prompt1", style:'font-size:10px;'} Пояснения
               .form-group.has-danger
                 =text_area_tag "pa[#{@discontent_post.id}][name]",@pa.name, :class => "concept_cond", rows: 4, style: 'width: 100%;'
 
 
               %p.text-info
-                Как это нововведение будет исправлять несовершенство (проблему)?
+                =t('form.novation_how')
                 %a.btn.btn-success.btn-xs{type: "button", "data-toggle"=>"modal", "data-target"=>"#prompt2", style:'font-size:10px;'} Пояснения
               .form-group.has-danger
                 =text_area_tag "pa[#{@discontent_post.id}][content]",@pa.content, :class => "concept_cond", rows: 4, style: 'width: 100%;'
@@ -40,17 +40,18 @@
                 %h4.panel-title
                 %a(data-toggle="collapse" data-parent="#accordion" href="#collapse1")
                   %b
-                    В. Опишите подробно весь процесс функционировния вашего нововведения в будущем
+                    В.
+                    =t('form.cond_h')
                     %span.glyphicon.glyphicon-chevron-down
               #collapse1.panel-collapse.collapse
                 .panel-body
                   %p.text-info
-                    Что должно делаться в будущем, чтобы нововведение функционировало?
+                    =t('form.cond')
                     %a.btn.btn-success.btn-xs{type: "button", "data-toggle"=>"modal", "data-target"=>"#prompt3", style:'font-size:10px;'} Пояснения
                     .form-group.has-success
-                      =text_area_tag "pa[#{@discontent_post.id}][positive]",@pa.positive, :placeholder => 'Опишите подробно весь процесс функционировния вашего нововведения в будущем', :class => "concept_cond", rows: 4, style: 'width: 100%;'
+                      =text_area_tag "pa[#{@discontent_post.id}][positive]",@pa.positive, :placeholder => 'Подробно опишите весь процесс функционирования вашего нововведения в будущем.', :class => "concept_cond", rows: 4, style: 'width: 100%;'
                   %p.text-info
-                    Какие ресурсы требуются для поддержания УСЛОВИЯ и разрешения ЗАДАЧИ?
+                    =t('form.cond_res')
                     %a.btn.btn-success.btn-xs{type: "button", "data-toggle"=>"modal", "data-target"=>"#prompt4", style:'font-size:10px;'} Пояснения
                     .form-group.has-success
                       =text_area_tag "pa[#{@discontent_post.id}][positive_r]",@pa.positive_r, :placeholder => 'Перечислите все необходимое для успешного функционирования вашего нововедения в будущем', :class => "concept_cond", rows: 4, style: 'width: 100%;'
@@ -61,18 +62,18 @@
                 %h4.panel-title
                 %a(data-toggle="collapse" data-parent="#accordion" href="#collapse2")
                   %b
-                    C. Есть ли нежелательные побочные эффекты у вашего нововведения?
+                    C.
+                    =t('form.cond_h')
                     %span.glyphicon.glyphicon-chevron-down
-
               #collapse2.panel-collapse.collapse
                 .panel-body
                   %p.text-info
-                    Если будут созданы и поддерживаться должные УСЛОВИЯ и разрешаться ЗАДАЧИ, какие из-за этого вероятны НЕЖЕЛАТЕЛЬНЫЕ ПОБОЧНЫЕ ЭФФЕКТЫ в будущем?
+                    =t('form.negative')
                     %a.btn.btn-success.btn-xs{type: "button", "data-toggle"=>"modal", "data-target"=>"#prompt7", style:'font-size:10px;'} Пояснения
                     .form-group.has-success
-                      =text_area_tag "pa[#{@discontent_post.id}][negative]",@pa.negative, :placeholder => 'К каким побочным эффектам может привести ваше нововведение в будущем', :class => "concept_cond", rows: 4,  style: 'width: 100%;'
+                      =text_area_tag "pa[#{@discontent_post.id}][negative]",@pa.negative, :placeholder => 'К каким побочным эффектам может привести ваше нововведение в будущем?', :class => "concept_cond", rows: 4,  style: 'width: 100%;'
                   %p.text-info
-                    Какие ресурсы требуются, чтобы предотвращать эти ЭФФЕКТЫ?
+                    =t('form.negative_res')
                     %a.btn.btn-success.btn-xs{type: "button", "data-toggle"=>"modal", "data-target"=>"#prompt8", style:'font-size:10px;'} Пояснения
                     .form-group.has-success
                       =text_area_tag "pa[#{@discontent_post.id}][negative_r]",@pa.negative_r, :class => "concept_cond", rows: 4,  style: 'width: 100%;'
@@ -84,19 +85,19 @@
                 %h4.panel-title
                 %a(data-toggle="collapse" data-parent="#accordion" href="#collapse3")
                   %b
-                    D. Покажите практично ли ваше нововведение?
+                    D.
+                    =t('form.problems_h')
                     %span.glyphicon.glyphicon-chevron-down
-
               #collapse3.panel-collapse.collapse
                 .panel-body
                   %p.text-info
-                    Покажите, что если нововведение будет внедрено и начнет работать в будущем, то эффект от него оправдает денежные и трудовые затраты
+                    =t('form.problems')
                     %a.btn.btn-success.btn-xs{type: "button", "data-toggle"=>"modal", "data-target"=>"#prompt5", style:'font-size:10px;'} Пояснения
                   .form-group.has-success
                     =text_area_tag "pa[#{@discontent_post.id}][problems]",@pa.problems, :class => "concept_cond", rows: 4,  style: 'width: 100%;'
 
                   %p.text-info
-                    Обоснуйте, что воплощение нововведения в жизнь не встретит серьезных препятствий
+                    =t('form.reality')
                     %a.btn.btn-success.btn-xs{type: "button", "data-toggle"=>"modal", "data-target"=>"#prompt6", style:'font-size:10px;'} Пояснения
                   .form-group.has-success
                     =text_area_tag "pa[#{@discontent_post.id}][reality]",@pa.reality, :class => "concept_cond", rows: 4,  style: 'width: 100%;'

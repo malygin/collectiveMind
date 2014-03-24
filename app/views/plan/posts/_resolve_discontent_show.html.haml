@@ -17,19 +17,13 @@
             .panel-heading
               %h5.text-success
                 %b A.*
-
-              -#%a.btn.btn-success.btn-xs.pull-right{type: "button", "data-toggle"=>"modal", "data-target"=>"#prompt1", style:'font-size:10px;'} Пояснения
-
               %p.text-info
-                %b Что новое, исправляющее несовершенство (проблему), появится в будущем?
-                -#%a.btn.btn-success.btn-xs{type: "button", "data-toggle"=>"modal", "data-target"=>"#prompt1", style:'font-size:10px;'} Пояснения
-              .form-group.has-danger
-                =pa.name
+                %b=t('form.novation_what')
+              .form-group.has-danger=pa.name
               %p.text-info
-                %b Как это нововведение будет исправлять несовершенство (проблему)?
+                %b=t('form.novation_how')
                 %a.btn.btn-success.btn-xs{type: "button", "data-toggle"=>"modal", "data-target"=>"#prompt2", style:'font-size:10px;'} Пояснения
-              .form-group.has-danger
-                =pa.content
+              .form-group.has-danger=pa.content
 
 
           .panel.panel-info
@@ -37,53 +31,43 @@
               %h5.text-success
                 %b B.*
               %p.text-info
-                %b Напишите о том, какие должны быть созданы и поддерживаться УСЛОВИЯ и разрешаться ПРАКТИЧЕСКИЕ ЗАДАЧИ.
-                .form-group.has-success
-                  =pa.positive
+                %b=t('form.cond')
+                .form-group.has-success=pa.positive
               %p.text-info
-                %b Какие ресурсы требуются для поддержания УСЛОВИЯ и разрешения ЗАДАЧИ?
-                .form-group.has-success
-                  =pa.positive_r
+                %b=t('form.cond_res')
+                .form-group.has-success=pa.positive_r
               %p.text-info
-                %b Какие средства необходимы для получения ресурсов?
-                .form-group.has-success
-                  =pa.positive_s
+                %b=t('form.cond_s')
+                .form-group.has-success=pa.positive_s
 
 
           %hr
           %h5.text-success
             %b C.
           %p.text-info
-            %b Если будут созданы и поддерживаться должные УСЛОВИЯ и разрешаться ЗАДАЧИ, какие из-за этого вероятны НЕЖЕЛАТЕЛЬНЫЕ ПОБОЧНЫЕ ЭФФЕКТЫ в будущем?
-            .form-group.has-success
-              =pa.negative
+            %b=t('form.negative')
+            .form-group.has-success=pa.negative
           %p.text-info
-            %b Какие ресурсы требуются, чтобы предотвращать эти ЭФФЕКТЫ?
-            .form-group.has-success
-              =pa.negative_r
+            %b=t('form.negative_res')
+            .form-group.has-success=pa.negative_r
           %p.text-info
-            %b Какие средства необходимы для получения ресурсов?
-            .form-group.has-success
-              =pa.negative_s
+            %b=t('form.negative_s')
+            .form-group.has-success=pa.negative_s
 
           %hr
           %h5.text-success D.
           %p.text-info
-            %b Что, вероятно, может помешать в будущем плодотворному функционированию всех перечисленных в B и С  ресурсов и как с этим предлагается бороться?
+            %b=t('form.obstacles_bcd')
           .form-group.has-success
             =pa.obstacles
-
-
 
           .panel.panel-info
             .panel-heading
               %h5.text-success
                 %b E.*
               %p.text-info
-                %b Покажите, что нововведение практично в работе?
-              .form-group.has-success
-                =pa.problems
+                %b=t('form.problems')
+              .form-group.has-success=pa.problems
               %p.text-info
-                %b Обоснуйте, что нововведение реалистично воплотить в жизнь.
-              .form-group.has-success
-                =pa.reality
+                %b=t('form.reality')
+              .form-group.has-success=pa.reality

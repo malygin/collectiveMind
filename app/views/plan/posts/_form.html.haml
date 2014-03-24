@@ -55,7 +55,7 @@
               План мероприятий
           -@discontents.each_with_index do |d,i|
             %li
-              %a(href="#dis_#{d.id}" data-toggle="tab")="#{i+1}. #{d.content}"
+              %a(href="#dis_#{d.id}" data-toggle="tab")="#{i+1}. #{d.display_content}"
           -#%li.active
           -#  %a(href="#novation1" data-toggle="tab")
           -#    %span.text-success.glyphicon.glyphicon-ok.pull-right
@@ -75,11 +75,11 @@
       #thefirst.tab-pane.fade
         %ul.nav.nav-tabs.nav-stacked
           %li
-            %a.text-success(href="#plan2" data-toggle="tab" style='font-size:20px;')
+            %a.text-success(href="#plan2" data-toggle="tab" style='font-size:10px; font-weight: bold;')
               План мероприятий
           -@discontents.each_with_index do |d,i|
             %li
-              %a(href="#fdis_#{d.id}" data-toggle="tab")="#{i+1}. #{d.content}"
+              %a(href="#fdis_#{d.id}" data-toggle="tab")="#{i+1}. #{d.display_content}"
   %br
   %br
   =f.submit 'Сохранить'

@@ -18,6 +18,7 @@ module ApplicationHelper
   def escape_text(t)
     t.gsub("\n", "\\n").gsub("\r", "\\r").gsub("\t", "\\t").gsub("'","\\'")
   end
+
   def class_post_content(pro, ag)
     if  pro > 0
       'label-success'
@@ -27,6 +28,14 @@ module ApplicationHelper
        'label-g'
     end
 
+  end
+
+  def display_content(content, default_string='---')
+    if  not content.nil? and content != ''
+      simple_format(content)
+    else
+      content_tag(:b, default_string)
+    end
   end
 
 	def menu_status(st)
