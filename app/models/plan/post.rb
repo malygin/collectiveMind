@@ -19,8 +19,6 @@ class Plan::Post < ActiveRecord::Base
    def voted(user)
      self.voted_users.where(:id => user)
    end
-  def content
-  	self.goal
-  end
+
 
 end

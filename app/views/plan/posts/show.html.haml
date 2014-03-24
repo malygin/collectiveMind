@@ -19,19 +19,19 @@
 
     %div.tab-pane#plan1
       %hr
-      %h3.text-success План мероприятий конечного образа
+      %h3.text-success=t('form.plan_all')
       %br
       .panel.panel-info
-        .panel-heading  Название мероприятия - сроки - отвественные
+        .panel-heading=t('form.plan_all_notice')
         .panel-body
           %br
           =@post.plan_other
     %div.tab-pane#plan2
       %hr
-      %h3.text-success План мероприятий первого этапа
+      %h3.text-success=t('form.plan_first')
       %br
       .panel.panel-info
-        .panel-heading  Название мероприятия - сроки - отвественные
+        .panel-heading=t('form.plan_first_notice')
         .panel-body
           %br
           =@post.plan_first
@@ -48,31 +48,17 @@
       %ul.nav.nav-tabs.nav-stacked
         %li
           %a.text-success(href="#plan1" data-toggle="tab" style='font-size:10px; font-weight: bold;')
-            План мероприятий
+            =t('form.plan')
         -@post.post_aspects_other.each_with_index do |d,i|
           %li
             %a(href="#dis_#{d.discontent.id}" data-toggle="tab")="#{i+1}. #{d.discontent.display_content}"
-        -#%li.active
-        -#  %a(href="#novation1" data-toggle="tab")
-        -#    %span.text-success.glyphicon.glyphicon-ok.pull-right
-        -#    %span.text-danger.glyphicon.glyphicon-star.pull-right
-        -#    1. Пыльный и отвратительный на вид большой пустырь
-        -#%li
-        -#  %a(href="#novation2" data-toggle="tab")
-        -#    %span.text-success.glyphicon.glyphicon-ok.pull-right
-        -#    %span.text-danger.glyphicon.glyphicon-star.pull-right
-        -#    2. Нереруглярно ездят коллежские ассесоры
-        -#%li
-        -#  %a(href="#novation2" data-toggle="tab")
-        -#
-        -#    3. Губернатор плохо вышивает по тюли
 
 
     #thefirst.tab-pane.fade
       %ul.nav.nav-tabs.nav-stacked
         %li
           %a.text-success(href="#plan2" data-toggle="tab" style='font-size:10px; font-weight: bold;')
-            План мероприятий
+            =t('form.plan')
         -@post.post_aspects_first.each_with_index do |d,i|
           %li
             %a(href="#fdis_#{d.discontent.id}" data-toggle="tab")="#{i+1}. #{d.discontent.display_content}"
