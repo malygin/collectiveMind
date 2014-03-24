@@ -35,6 +35,8 @@
               - if pa.concept_post.status == 0
                 .panel.panel-success
                   .panel-body.nov-list
+                    %small.text-muted= Russian::strftime(pa.created_at,"%d %B %k:%M:%S ")
+                    %br
                     =pa.name
                     =link_to 'подробнее', concept_post_path(@project, pa.concept_post)
                     = render 'shared/post_social_bar2', :post => pa.concept_post
