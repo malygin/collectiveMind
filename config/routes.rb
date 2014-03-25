@@ -60,6 +60,11 @@ scope '/project/:project' do
   end
 
   namespace :life_tape do
+    resources :posts do
+      member do
+        put :set_one_vote
+      end
+    end
     posts_routes
 
   end

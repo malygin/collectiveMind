@@ -71,4 +71,12 @@ end
     @post.user.add_score(:type => :to_archive_life_tape_post)
   end
 
+  def set_one_vote
+    @post = voting_model.find(params[:id])
+    @post.toggle(:status)
+    @post.update_attributes(status: @post.status)
+    respond_to do |format|
+      format.js
+    end
+  end
 end

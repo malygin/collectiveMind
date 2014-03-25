@@ -8,15 +8,18 @@
         =link_to  path_for_voting+"vote/"+post_for_vote.id.to_s , :remote => true, :method => :put, class: "btn btn-default btn-sm vote-button", id: "vote_#{post_for_vote.id}" do
           %span.glyphicon.text-success.glyphicon-thumbs-up
           -if boss?
-            %span.glyphicon.text-success=post_for_vote.voted_users.size
+            %span.glyphicon.text-success.h4=post_for_vote.voted_users.size
           Проголосовать
       -else
         %a.btn.btn-success.btn-sm.disabled.vote-button
           %span.glyphicon.text-success.glyphicon-thumbs-up
           -if boss?
-            %span.glyphicon.text-success=post_for_vote.voted_users.size
+            %span.glyphicon.text-success.h4=post_for_vote.voted_users.size
           Проголосовать
-
+      -if boss? and post_for_vote.status == 0
+        =link_to({:action => :set_one_vote, :id => post_for_vote.id},:remote => true,:method => :put,:class => "btn btn-default btn-sm vote-button") do
+          %span.glyphicon.text-danger.glyphicon-remove{:id => "set_vote_#{post_for_vote.id}"}
+            set one
 
 
 -#

@@ -1,2 +1,2 @@
-$('#knowbase_post_#{@post.id}').html("#{escape_javascript(render :template => "knowbase/posts/show", :locals => {:post => @post})}");
+$('#knowbase_post').html("#{escape_javascript(render :partial => "knowbase_post", :locals => {:post => @post})}");
 $('#knowbase_left_title_#{@post.id}').html("#{escape_javascript(@post.title)}");

@@ -65,7 +65,6 @@ $('.score_class').on 'click', ->
   $(this).css('text-decoration','underline').css('background-color','#ddeaf4')
 
 @load_discontent_for_cond= (el)->
-  console.log($('#select_'+el).val())
   $.ajax({
     type: "POST",
     url: "/project/1/plan/posts/get_cond",
@@ -89,17 +88,17 @@ $ ->
   $("#sortable").disableSelection()
 
 $('#sortable').sortable update: (event, ui) ->
-  order = []
-  i = 0
+  order = {}
   $("li",this).each (index) ->
     if parseInt($(this).attr('stage')) != (index+1)
-      order[i] = []
-      order[i][0] = $(this).attr('id')
-      order[i][1] = index+1
-      i = i+1
+      order[$(this).attr('id')] = index+1
   $.ajax
     url: "/project/1/knowbase/posts/sortable_save"
     type: "post"
     data:
       sortable: order
 
+$(window).load ->
+  $("#fixBlock").liFixar
+    side: "top"
+    position: 0
