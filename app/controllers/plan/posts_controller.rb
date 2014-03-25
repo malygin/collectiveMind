@@ -32,7 +32,7 @@ class Plan::PostsController < PostsController
 
 
   def index
-    @posts = current_model.where(:project_id => @project, :status => @status).paginate(:page => params[:page])
+    @posts = current_model.where(:project_id => @project, :status => 0).paginate(:page => params[:page])
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @posts }
@@ -55,6 +55,7 @@ class Plan::PostsController < PostsController
     @plan_post.project = @project
     @plan_post.user = current_user
     @plan_post.status = 0
+
     unless params[:pa].nil?
       params[:pa].each do |pa|
         p = Plan::PostAspect.new(pa[1])
@@ -64,6 +65,7 @@ class Plan::PostsController < PostsController
         @plan_post.post_aspects_other << p
       end
     end
+
     unless params[:pa1].nil?
       params[:pa1].each do |pa|
         p = Plan::PostAspect.new(pa[1])
@@ -73,40 +75,11 @@ class Plan::PostsController < PostsController
         @plan_post.post_aspects_first << p
       end
     end
-    #@plan_post.plan_first = params[]
-    #@plan_post.plan_other = 0
-
-    #@plan_post.step= @plan_post.step+1
-    #@plan_post.goal = params[:plan_post][:goal]
-
-    #unless params['correct_disc'].nil?
-    #  params['correct_disc'].each do |asp|
-    #    asp[1].each do |v|
-    #      if v!= ''
-    #        unless Discontent::Post.exists?(v[0])
-    #          disc = Discontent::Post.new(v[1]['disc'])
-    #          disc.status = 5
-    #          disc.project = @project
-    #          disc.user = current_user
-    #          disc.save!
-    #          v[1].delete :disc
-    #          @plan_post.post_aspects.build(v[1].merge(:discontent_aspect_id=> disc.id,:first_stage => (asp[0]=='accordion_concept1' ? 1 : 0)))
-    #        else
-    #          v[1].delete :disc
-    #          @plan_post.post_aspects.build(v[1].merge(:discontent_aspect_id=> v[0],:first_stage => (asp[0]=='accordion_concept1' ? 1 : 0)))
-    #        end
-    #
-    #      end
-    #    end
-    #
-    #  end
-    #end
-
 
     respond_to do |format|
       if @plan_post.save!
          current_user.journals.build(:type_event=>'plan_post_save', :body=>@plan_post.id).save!
-        format.html { redirect_to   edit_plan_post_path(project: @project, id: @plan_post), notice: 'Пройден первый шаг!' }
+        format.html { redirect_to   plan_post_path(project: @project, id: @plan_post) }
         format.json { render json: @plan_post, status: :created, location: @plan_post }
       else
         format.html { render action: 'new' }
@@ -115,8 +88,15 @@ class Plan::PostsController < PostsController
     end
   end
 
-  # PUT /Plan/posts/1
-  # PUT /Plan/posts/1.json
+  def show
+    @post = Plan::Post.find(params[:id])
+    add_breadcrumb 'Просмотр записи', polymorphic_path(@post, :project => @project.id)
+    @comment = comment_model.new
+    @comments = @post.comments.paginate(:page => params[:page], :per_page => 30)
+    render 'show' , :layout => 'application_two_column'
+  end
+
+
   def update
     @project = Core::Project.find(params[:project])
     @plan_post = Plan::Post.find(params[:id])
