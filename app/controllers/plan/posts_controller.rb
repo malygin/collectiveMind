@@ -87,13 +87,16 @@ class Plan::PostsController < PostsController
       end
     end
   end
+
   def show
     @post = Plan::Post.find(params[:id])
+    add_breadcrumb 'Просмотр записи', polymorphic_path(@post, :project => @project.id)
+    @comment = comment_model.new
+    @comments = @post.comments.paginate(:page => params[:page], :per_page => 30)
     render 'show' , :layout => 'application_two_column'
-
   end
-  # PUT /Plan/posts/1
-  # PUT /Plan/posts/1.json
+
+
   def update
     @project = Core::Project.find(params[:project])
     @plan_post = Plan::Post.find(params[:id])
