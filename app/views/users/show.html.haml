@@ -77,9 +77,9 @@
       %li
         %a(href="#imperfections" data-toggle="tab")="Несовершенства (#{@user.discontent_posts.count})"
       %li
-        %a(href="#images" data-toggle="tab")  Образы
-      %li
-        %a(href="#projects" data-toggle="tab")  Проекты
+        %a(href="#images" data-toggle="tab")="Нововв. (#{@user.concept_posts.count})"
+      -#%li
+      -#  %a(href="#projects" data-toggle="tab")  Проекты
     .tab-content
       #active_line.tab-pane.fade.in.active
         %br
@@ -102,6 +102,17 @@
       #imperfections.tab-pane.fade.in
         %br
         = render partial: 'discontent/posts/post_short', collection: @user.discontent_posts
+
+
+
+      #images.tab-pane.fade.in
+        %br
+        - @user.concept_posts.each do |cp|
+          .panel.panel-success
+            .panel-body.nov-list
+              =cp.post_aspects.first.name
+              =link_to 'подробнее', concept_post_path(@project, cp)
+              = render 'shared/post_social_bar2', :post =>cp
 
 
 

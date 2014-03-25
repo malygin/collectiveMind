@@ -8,16 +8,17 @@
       %b#count_vote=@number_v
 
 %table.table
-  %tr
-    %td
-    %td(style='min-width: 400px;')
-      %span.label.label-p  Отсутствующие достоинства
-    %td(style='min-width: 400px;')
-      %span.label.label-n  Имеющиеся недостатки
   -@aspects.each do |aspect|
     %tr
-      %td
+      %td(colspan=3)
         %span.label.label-t=aspect.content
+    %tr
+      %td
+        %span.label.label-p  Отсутствующие достоинства
+      %td
+        %span.label.label-n(style='min-width: 300px;')  Имеющиеся недостатки
+
+    %tr
       %td
         =render partial:'post_for_vote', collection: aspect.negative_posts.by_status(@status)
 

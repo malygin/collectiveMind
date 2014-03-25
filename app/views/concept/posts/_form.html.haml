@@ -6,7 +6,8 @@
     %div.tab-pane.active#novation1
       %div.panel.panel-default
         %div.panel-body
-
+          %button.btn.btn-info.pull-right(data-toggle="modal" data-target="#modalStage3")
+            Показать пример
           %h5.text-infoУстраняемое несовершенство (проблема):
 
           =render partial:'discontent/posts/post_short2', object: @discontent_post
@@ -18,71 +19,90 @@
               %h5.text-success
                 %b A.*
 
-              -#%a.btn.btn-success.btn-xs.pull-right{type: "button", "data-toggle"=>"modal", "data-target"=>"#prompt1", style:'font-size:10px;'} Пояснения
 
               %p.text-info
-                Что новое, исправляющее несовершенство (проблему), появится в будущем?
+                =t('form.novation_what')
                 %a.btn.btn-success.btn-xs{type: "button", "data-toggle"=>"modal", "data-target"=>"#prompt1", style:'font-size:10px;'} Пояснения
               .form-group.has-danger
-                =text_area_tag "pa[#{@discontent_post.id}][name]",@pa.name, :class => "concept_cond", rows: 4, cols: 134
+                =text_area_tag "pa[#{@discontent_post.id}][name]",@pa.name, :class => "concept_cond", rows: 4, style: 'width: 100%;'
 
 
               %p.text-info
-                Как это нововведение будет исправлять несовершенство (проблему)?
+                =t('form.novation_how')
                 %a.btn.btn-success.btn-xs{type: "button", "data-toggle"=>"modal", "data-target"=>"#prompt2", style:'font-size:10px;'} Пояснения
               .form-group.has-danger
-                =text_area_tag "pa[#{@discontent_post.id}][content]",@pa.content, :class => "concept_cond", rows: 4, cols: 134
+                =text_area_tag "pa[#{@discontent_post.id}][content]",@pa.content, :class => "concept_cond", rows: 4, style: 'width: 100%;'
 
 
-          %hr
-          %h5.text-success
-            %b B.
-          %p.text-info
-            Напишите о том, какие должны быть созданы и поддерживаться УСЛОВИЯ и разрешаться ПРАКТИЧЕСКИЕ ЗАДАЧИ.
-            %a.btn.btn-success.btn-xs{type: "button", "data-toggle"=>"modal", "data-target"=>"#prompt3", style:'font-size:10px;'} Пояснения
-            .form-group.has-success
-              =text_area_tag "pa[#{@discontent_post.id}][positive]",@pa.positive, :class => "concept_cond", rows: 4, cols: 134
-          %p.text-info
-            Какие ресурсы требуются для поддержания УСЛОВИЯ и разрешения ЗАДАЧИ?
-            %a.btn.btn-success.btn-xs{type: "button", "data-toggle"=>"modal", "data-target"=>"#prompt4", style:'font-size:10px;'} Пояснения
-            .form-group.has-success
-              =text_area_tag "pa[#{@discontent_post.id}][positive_r]",@pa.positive_r, :class => "concept_cond", rows: 4, cols: 134
+          .panel-group
+            .panel.panel-info
+              .panel-heading
+                %h4.panel-title
+                %a(data-toggle="collapse" data-parent="#accordion" href="#collapse1")
+                  %b
+                    В.
+                    =t('form.cond_h')
+                    %span.glyphicon.glyphicon-chevron-down
+              #collapse1.panel-collapse.collapse
+                .panel-body
+                  %p.text-info
+                    =t('form.cond')
+                    %a.btn.btn-success.btn-xs{type: "button", "data-toggle"=>"modal", "data-target"=>"#prompt3", style:'font-size:10px;'} Пояснения
+                    .form-group.has-success
+                      =text_area_tag "pa[#{@discontent_post.id}][positive]",@pa.positive, :placeholder => 'Подробно опишите весь процесс функционирования вашего нововведения в будущем.', :class => "concept_cond", rows: 4, style: 'width: 100%;'
+                  %p.text-info
+                    =t('form.cond_res')
+                    %a.btn.btn-success.btn-xs{type: "button", "data-toggle"=>"modal", "data-target"=>"#prompt4", style:'font-size:10px;'} Пояснения
+                    .form-group.has-success
+                      =text_area_tag "pa[#{@discontent_post.id}][positive_r]",@pa.positive_r, :placeholder => 'Перечислите все необходимое для успешного функционирования вашего нововедения в будущем', :class => "concept_cond", rows: 4, style: 'width: 100%;'
+
+          .panel-group
+            .panel.panel-info
+              .panel-heading
+                %h4.panel-title
+                %a(data-toggle="collapse" data-parent="#accordion" href="#collapse2")
+                  %b
+                    C.
+                    =t('form.cond_h')
+                    %span.glyphicon.glyphicon-chevron-down
+              #collapse2.panel-collapse.collapse
+                .panel-body
+                  %p.text-info
+                    =t('form.negative')
+                    %a.btn.btn-success.btn-xs{type: "button", "data-toggle"=>"modal", "data-target"=>"#prompt7", style:'font-size:10px;'} Пояснения
+                    .form-group.has-success
+                      =text_area_tag "pa[#{@discontent_post.id}][negative]",@pa.negative, :placeholder => 'К каким побочным эффектам может привести ваше нововведение в будущем?', :class => "concept_cond", rows: 4,  style: 'width: 100%;'
+                  %p.text-info
+                    =t('form.negative_res')
+                    %a.btn.btn-success.btn-xs{type: "button", "data-toggle"=>"modal", "data-target"=>"#prompt8", style:'font-size:10px;'} Пояснения
+                    .form-group.has-success
+                      =text_area_tag "pa[#{@discontent_post.id}][negative_r]",@pa.negative_r, :class => "concept_cond", rows: 4,  style: 'width: 100%;'
 
 
-          %hr
-          %h5.text-success
-            %b C.
-          %p.text-info
-            Если будут созданы и поддерживаться должные УСЛОВИЯ и разрешаться ЗАДАЧИ, какие из-за этого вероятны НЕЖЕЛАТЕЛЬНЫЕ ПОБОЧНЫЕ ЭФФЕКТЫ в будущем?
-            %a.btn.btn-success.btn-xs{type: "button", "data-toggle"=>"modal", "data-target"=>"#prompt7", style:'font-size:10px;'} Пояснения
-            .form-group.has-success
-              =text_area_tag "pa[#{@discontent_post.id}][negative]",@pa.negative, :class => "concept_cond", rows: 4, cols: 134
-          %p.text-info
-            Какие ресурсы требуются, чтобы предотвращать эти ЭФФЕКТЫ?
-            %a.btn.btn-success.btn-xs{type: "button", "data-toggle"=>"modal", "data-target"=>"#prompt8", style:'font-size:10px;'} Пояснения
-            .form-group.has-success
-              =text_area_tag "pa[#{@discontent_post.id}][negative_r]",@pa.negative, :class => "concept_cond", rows: 4, cols: 134
+          .panel-group
+            .panel.panel-info
+              .panel-heading
+                %h4.panel-title
+                %a(data-toggle="collapse" data-parent="#accordion" href="#collapse3")
+                  %b
+                    D.
+                    =t('form.problems_h')
+                    %span.glyphicon.glyphicon-chevron-down
+              #collapse3.panel-collapse.collapse
+                .panel-body
+                  %p.text-info
+                    =t('form.problems')
+                    %a.btn.btn-success.btn-xs{type: "button", "data-toggle"=>"modal", "data-target"=>"#prompt5", style:'font-size:10px;'} Пояснения
+                  .form-group.has-success
+                    =text_area_tag "pa[#{@discontent_post.id}][problems]",@pa.problems, :class => "concept_cond", rows: 4,  style: 'width: 100%;'
+
+                  %p.text-info
+                    =t('form.reality')
+                    %a.btn.btn-success.btn-xs{type: "button", "data-toggle"=>"modal", "data-target"=>"#prompt6", style:'font-size:10px;'} Пояснения
+                  .form-group.has-success
+                    =text_area_tag "pa[#{@discontent_post.id}][reality]",@pa.reality, :class => "concept_cond", rows: 4,  style: 'width: 100%;'
 
 
-
-          -#%br
-          -#%a.btn.btn-danger.btn-xs.btn-b-form{type: "button", style:'font-size:10px;'} + Добавить условие и ресурсы
-
-          %hr
-          %h5.text-success
-            %b D.
-          %p.text-info
-            Покажите, что нововведение практично в работе?
-            %a.btn.btn-success.btn-xs{type: "button", "data-toggle"=>"modal", "data-target"=>"#prompt5", style:'font-size:10px;'} Пояснения
-          .form-group.has-success
-            =text_area_tag "pa[#{@discontent_post.id}][problems]",@pa.problems, :class => "concept_cond", rows: 4, cols: 134
-
-
-          %p.text-info
-            Обоснуйте, что нововведение реалистично воплотить в жизнь.
-            %a.btn.btn-success.btn-xs{type: "button", "data-toggle"=>"modal", "data-target"=>"#prompt6", style:'font-size:10px;'} Пояснения
-          .form-group.has-success
-            =text_area_tag "pa[#{@discontent_post.id}][reality]",@pa.reality, :class => "concept_cond", rows: 4, cols: 134
 
   %actions
     = f.submit 'Сохранить',  class: 'btn btn-success btn-sm'

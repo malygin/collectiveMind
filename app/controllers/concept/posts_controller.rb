@@ -22,12 +22,13 @@ class Concept::PostsController < PostsController
 
   def prepare_data
     @project = Core::Project.find(params[:project])
-    @aspects = Discontent::Aspect.where(:project_id => @project)
+    @aspects = Discontent::Aspect.where(:project_id => @project, :status => 0)
     add_breadcrumb I18n.t('stages.concept'), concept_posts_path(@project)
+    @mini_help = Help::Post.where(stage:3, mini: true).first
 
     @journals = Journal.events_for_user_feed @project.id
     @news = ExpertNews::Post.first  
-    @status = params[:status]
+    @status = 4
   end
 
 

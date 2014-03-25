@@ -1,3 +1,5 @@
+- if not current_user.answered_for_help_stage?(3) and not @mini_help.nil?
+  =render partial: 'shared/small_help', object: @mini_help
 - if @project.status == 8
   %h3 Голосование за самые интересные нововведения(решения)
   - unless @number_v<1  and not boss?
@@ -8,21 +10,18 @@
 %table.table.table-striped
   %thead
     %tr
-      %th
-      %th.text-success Несовершенства (проблемы):
+      %th.text-success(style='width: 50%;') Несовершенства (проблемы):
       %th.text-success(style='min-width: 300px;') Варианты нововведений (решений):
 
   %tbody
     -@aspects.each do |aspect|
       %tr
-        %td
+        %td(colspan=2)
           %span.label.label-info=aspect.content
         %td
-        %td
-      -aspect.posts.each do |post|
+      -aspect.posts.by_status(4).each do |post|
 
         %tr
-          %td
           %td
             =render partial:'discontent/posts/post_short2', object: post
 
@@ -36,8 +35,12 @@
               - if pa.concept_post.status == 0
                 .panel.panel-success
                   .panel-body.nov-list
+                    %small.text-muted= Russian::strftime(pa.created_at,"%d %B %k:%M:%S ")
+                    %br
                     =pa.name
                     =link_to 'подробнее', concept_post_path(@project, pa.concept_post)
+                    = render 'shared/post_social_bar2', :post => pa.concept_post
+
                     -#- if can_vote_cond?(pa.voted(current_user).size,  @number_v, @votes, post)
                     -#  %br
                     -#  =link_to   @path_for_voting+pa.id.to_s , :remote => true, :method => :put, class: "btn btn-default btn-sm vote-button vote_dis_#{post.id}", id: "vote_#{pa.id}" do

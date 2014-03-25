@@ -1,81 +1,68 @@
 = render 'shared/help/new_concept'
 
--#= form_for  @post, :url => {:project => @project.id, :action => @post.persisted? ? 'update' : 'create'},   :html => { :class => 'new_or_edit' }do |f|
-.col-md-8
-  .media
-    .media-body
-      %span.h5.text-success Эссе по всему проекту
-      %span
-        %a(href="#" style="text-decoration=none;")
-          -#%i.glyphicon.glyphicon-pencil
+= form_for  @post, :url => {:project => @project.id, :action => @post.persisted? ? 'update' : 'create'},   :html => { :class => 'new_or_edit' }do |f|
+  .col-md-8
+    .media
+      .media-body
+        %span.h5.text-success=t('form.essay')
+        %span
+          %a(href="#" style="text-decoration=none;")
+        %br
+        =f.text_area :content, rows: 10, style: 'width: 100%;'
 
-      %textarea.form-control(rows="10" cols="73")
-        В институте проводится системный мониторинг по ключевым аспектам функционирования вуза и его материльно-техническое оснащение соотвествует заявленному бренду. В институте проводится системный мониторинг по ключевым аспектам функционирования вуза и его материльно-техническое оснащение соотвествует заявленному бренду. В институте проводится системный мониторинг по ключевым аспектам функционирования вуза и его материльно-техническое оснащение соотвествует...
+    %br
+    %br
+    %div.tab-content
+      -@discontents.each do |d|
+        =render partial: 'resolve_discontent', locals: { discontent: d }
+      -@discontents.each do |d|
+        =render partial: 'first_cond', locals: { discontent: d }
 
+      %div.tab-pane#plan1
+        %hr
+        %h3.text-success=t('form.plan_all')
+        %br
+        .panel.panel-info
+          .panel-heading=t('form.plan_all_notice')
+          .panel-body
+            %br
+            =f.text_area :plan_other, rows: 10, style: 'width: 100%;'
+      %div.tab-pane#plan2
+        %hr
+        %h3.text-success=t('form.plan_first')
+        %br
+        .panel.panel-info
+          .panel-heading=t('form.plan_first_notice')
+          .panel-body
+            %br
+            =f.text_area :plan_first,  rows: 30, style: 'width: 100%;'
+  .col-md-4
+    =f.submit 'Сохранить', class: 'btn btn-success'
+    %h5
+      .small Выберите несовершенство, кликнув по нужной вкладке:
+    %ul.nav.nav-tabs.nav-justified
+      %li.active
+        %a(href="#theall" data-toggle="tab") Образ
+      %li
+        %a(href="#thefirst" data-toggle="tab") Первый этап
+    .tab-content
+      #theall.tab-pane.fade.in.active
+        %ul.nav.nav-tabs.nav-stacked
+          %li
+            %a.text-success(href="#plan1" data-toggle="tab" style='font-size:10px; font-weight: bold;')
+              =t('form.plan')
+          -@discontents.each_with_index do |d,i|
+            %li
+              %a(href="#dis_#{d.id}" data-toggle="tab")="#{i+1}. #{d.display_content}"
+      #thefirst.tab-pane.fade
+        %ul.nav.nav-tabs.nav-stacked
+          %li
+            %a.text-success(href="#plan2" data-toggle="tab" style='font-size:10px; font-weight: bold;')
+              =t('form.plan')
+          -@discontents.each_with_index do |d,i|
+            %li
+              %a(href="#fdis_#{d.id}" data-toggle="tab")="#{i+1}. #{d.display_content}"
   %br
   %br
-  %div.tab-content
-    -@discontents.each do |d|
-      =render partial: 'resolve_discontent', locals: { discontent: d }
-    -@discontents.each do |d|
-      =render partial: 'first_cond', locals: { discontent: d }
-
-    %div.tab-pane#plan1
-      %hr
-      %h3.text-success План мероприятий конечного образа
-      %br
-      .panel.panel-info
-        .panel-heading  Название мероприятия - сроки - отвественные
-        .panel-body
-          %br
-          =text_area_tag "plan_other", '',  rows: 30, style: 'width: 100%;'
-    %div.tab-pane#plan2
-      %hr
-      %h3.text-success План мероприятий первого этапа
-      %br
-      .panel.panel-info
-        .panel-heading  Название мероприятия - сроки - отвественные
-        .panel-body
-          %br
-          =text_area_tag "plan_first", '',  rows: 30, style: 'width: 100%;'
-.col-md-4
-  %h5
-    .small Выберите несовершенство, кликнув по нужной вкладке:
-  %ul.nav.nav-tabs.nav-justified
-    %li.active
-      %a(href="#theall" data-toggle="tab") Образ
-    %li
-      %a(href="#thefirst" data-toggle="tab") Первый этап
-  .tab-content
-    #theall.tab-pane.fade.in.active
-      %ul.nav.nav-tabs.nav-stacked
-        %li
-          %a.text-success(href="#plan1" data-toggle="tab" style='font-size:10px; font-weight: bold;')
-            План мероприятий
-        -@discontents.each_with_index do |d,i|
-          %li
-            %a(href="#dis_#{d.id}" data-toggle="tab")="#{i+1}. #{d.content}"
-        -#%li.active
-        -#  %a(href="#novation1" data-toggle="tab")
-        -#    %span.text-success.glyphicon.glyphicon-ok.pull-right
-        -#    %span.text-danger.glyphicon.glyphicon-star.pull-right
-        -#    1. Пыльный и отвратительный на вид большой пустырь
-        -#%li
-        -#  %a(href="#novation2" data-toggle="tab")
-        -#    %span.text-success.glyphicon.glyphicon-ok.pull-right
-        -#    %span.text-danger.glyphicon.glyphicon-star.pull-right
-        -#    2. Нереруглярно ездят коллежские ассесоры
-        -#%li
-        -#  %a(href="#novation2" data-toggle="tab")
-        -#
-        -#    3. Губернатор плохо вышивает по тюли
-
-
-    #thefirst.tab-pane.fade
-      %ul.nav.nav-tabs.nav-stacked
-        %li
-          %a.text-success(href="#plan2" data-toggle="tab" style='font-size:20px;')
-            План мероприятий
-        -@discontents.each_with_index do |d,i|
-          %li
-            %a(href="#fdis_#{d.id}" data-toggle="tab")="#{i+1}. #{d.content}"
+  %br
+  %br

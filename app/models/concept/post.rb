@@ -8,5 +8,7 @@
   has_many :voted_users, :through => :final_votings, :source => :user
   has_many :final_votings,:foreign_key => 'concept_post_id', :class_name => "Concept::Voting"
 
-
+  def content
+     self.post_aspects.first.content
+  end
 end
