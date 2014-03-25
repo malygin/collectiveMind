@@ -96,75 +96,46 @@ class Plan::PostsController < PostsController
     render 'show' , :layout => 'application_two_column'
   end
 
+  def edit
+    @post = Plan::Post.find(params[:id])
+    @discontents = Discontent::Post.required_posts(@project)
+
+    add_breadcrumb 'Редактирование записи', polymorphic_path(@post, :project => @project.id)
+
+    render 'edit' , :layout => 'application_two_column'
+  end
+
 
   def update
     @project = Core::Project.find(params[:project])
     @plan_post = Plan::Post.find(params[:id])
-    pa_save ={}
-    pa_save2 ={}
-    if @plan_post.step == 2  or @plan_post.step == 6
+    @plan_post.update_attributes(params[:plan_post])
+    @plan_post.post_aspects.destroy_all
 
-      @plan_post.post_aspects.each do |pa|
-         unless params['post_aspects'].keys.include? pa.discontent.id.to_s
-             pa.destroy
-          end
-      end
-
-      unless params['post_aspects'].nil?
-        params['post_aspects'].each do |k,v|
-          if k!= ''
-            unless @plan_post.post_aspects.find_by_discontent_aspect_id(k).nil?
-              @plan_post.post_aspects.find_by_discontent_aspect_id(k).update_attributes(v)
-            else
-              dis = Discontent::Post.find(k)
-              pa = Plan::PostAspect.new(v)
-              pa.discontent = dis
-              @plan_post.post_aspects << pa
-            end
-          end
-        end
+    unless params[:pa].nil?
+      params[:pa].each do |pa|
+        p = Plan::PostAspect.new(pa[1])
+        p.first_stage= 0
+        d = Discontent::Post.find(pa[0])
+        p.discontent = d
+        @plan_post.post_aspects_other << p
       end
     end
 
-    if @plan_post.step == 3   or @plan_post.step == 6
-      @plan_post.first_step = params[:plan_post][:first_step]
-    end
-
-    if @plan_post.step == 4   or @plan_post.step == 6
-
-
-      @plan_post.post_first_conds =[]
-      @plan_post.plan_first = params[:plan_post][:plan_first]
-      unless params['first_cond'].nil?
-        params['first_cond'].each do |k,v|
-          if k!= ''
-            cond = Plan::PostAspect.find(k)
-            pa = Plan::PostFirstCond.new(v)
-            pa.post_aspect = cond
-            @plan_post.post_first_conds << pa
-          end
-        end
+    unless params[:pa1].nil?
+      params[:pa1].each do |pa|
+        p = Plan::PostAspect.new(pa[1])
+        p.first_stage= 1
+        d = Discontent::Post.find(pa[0])
+        p.discontent = d
+        @plan_post.post_aspects_first << p
       end
     end
 
-    if @plan_post.step == 5   or @plan_post.step == 6
-      @plan_post.plan_other = params[:plan_post][:plan_other]
-      #@plan_post.plan_control = params[:plan_post][:plan_control]
-    end
-
-    if  @plan_post.step < 6
-      @plan_post.step = @plan_post.step + 1
-    end
     respond_to do |format|
         @plan_post.save
         current_user.journals.build(:type_event=>'plan_post_update', :body=>@plan_post.id).save!
-        if @plan_post.step>5
-          flash[:success] = "Изменения успешно внесены!"
-          format.html { redirect_to plan_post_path(project: @project, id: @plan_post), success: "Изменения успешно внесены!" }
-        else
-          flash[:success] = "Шаг № #{@plan_post.step - 1 }  успешно пройден"
-          format.html { redirect_to edit_plan_post_path(project: @project, id: @plan_post) }
-        end
+        format.html { redirect_to plan_post_path(project: @project, id: @plan_post) }
       end
 
   end

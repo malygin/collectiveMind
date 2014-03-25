@@ -30,12 +30,12 @@
                 =t('form.novation_what')
                 %a.btn.btn-success.btn-xs{type: "button", "data-toggle"=>"modal", "data-target"=>"#prompt1", style:'font-size:10px;'} Пояснения
               .form-group.has-danger
-                =text_area_tag "pa[#{discontent.id}][name]", '', :class => "concept_cond", rows: 4, style: 'width: 100%;'
+                =text_area_tag "pa[#{discontent.id}][name]", @post.get_pa_by_discontent(discontent, :name), :class => "concept_cond", rows: 4, style: 'width: 100%;'
               %p.text-info
                 =t('form.novation_how')
                 %a.btn.btn-success.btn-xs{type: "button", "data-toggle"=>"modal", "data-target"=>"#prompt2", style:'font-size:10px;'} Пояснения
               .form-group.has-danger
-                =text_area_tag "pa[#{discontent.id}][content]", '', :class => "concept_cond", rows: 4, style: 'width: 100%;'
+                =text_area_tag "pa[#{discontent.id}][content]", @post.get_pa_by_discontent(discontent, :content), :class => "concept_cond", rows: 4, style: 'width: 100%;'
 
 
           .panel.panel-info
@@ -46,17 +46,17 @@
                 =t('form.cond')
                 %a.btn.btn-success.btn-xs{type: "button", "data-toggle"=>"modal", "data-target"=>"#prompt3", style:'font-size:10px;'} Пояснения
                 .form-group.has-success
-                  =text_area_tag "pa[#{discontent.id}][positive]", '', :class => "concept_cond", rows: 4, style: 'width: 100%;'
+                  =text_area_tag "pa[#{discontent.id}][positive]",  @post.get_pa_by_discontent(discontent, :positive), :class => "concept_cond", rows: 4, style: 'width: 100%;'
               %p.text-info
                 =t('form.cond_res')
                 %a.btn.btn-success.btn-xs{type: "button", "data-toggle"=>"modal", "data-target"=>"#prompt4", style:'font-size:10px;'} Пояснения
                 .form-group.has-success
-                  =text_area_tag "pa[#{discontent.id}][positive_r]", '', :class => "concept_cond", rows: 4, style: 'width: 100%;'
+                  =text_area_tag "pa[#{discontent.id}][positive_r]",  @post.get_pa_by_discontent(discontent, :positive_r), :class => "concept_cond", rows: 4, style: 'width: 100%;'
               %p.text-info
                 =t('form.cond_s')
                 %a.btn.btn-success.btn-xs{type: "button", "data-toggle"=>"modal", "data-target"=>"#prompt12", style:'font-size:10px;'} Пояснения
                 .form-group.has-success
-                  =text_area_tag "pa[#{discontent.id}][positive_s]", '', :class => "concept_cond", rows: 4, style: 'width: 100%;'
+                  =text_area_tag "pa[#{discontent.id}][positive_s]",  @post.get_pa_by_discontent(discontent, :positive_s), :class => "concept_cond", rows: 4, style: 'width: 100%;'
 
 
           %hr
@@ -66,17 +66,17 @@
             =t('form.negative')
             %a.btn.btn-success.btn-xs{type: "button", "data-toggle"=>"modal", "data-target"=>"#prompt7", style:'font-size:10px;'} Пояснения
             .form-group.has-success
-              =text_area_tag "pa[#{discontent.id}][negative]", '', :class => "concept_cond", rows: 4, style: 'width: 100%;'
+              =text_area_tag "pa[#{discontent.id}][negative]",  @post.get_pa_by_discontent(discontent, :negative), :class => "concept_cond", rows: 4, style: 'width: 100%;'
           %p.text-info
             =t('form.negative_res')
             %a.btn.btn-success.btn-xs{type: "button", "data-toggle"=>"modal", "data-target"=>"#prompt8", style:'font-size:10px;'} Пояснения
             .form-group.has-success
-              =text_area_tag "pa[#{discontent.id}][negative_r]", '', :class => "concept_cond", rows: 4, style: 'width: 100%;'
+              =text_area_tag "pa[#{discontent.id}][negative_r]",  @post.get_pa_by_discontent(discontent, :negative_r), :class => "concept_cond", rows: 4, style: 'width: 100%;'
           %p.text-info
             =t('form.negative_s')
             %a.btn.btn-success.btn-xs{type: "button", "data-toggle"=>"modal", "data-target"=>"#prompt13", style:'font-size:10px;'} Пояснения
             .form-group.has-success
-              =text_area_tag "pa[#{discontent.id}][negative_s]", '', :class => "concept_cond", rows: 4, style: 'width: 100%;'
+              =text_area_tag "pa[#{discontent.id}][negative_s]",  @post.get_pa_by_discontent(discontent, :negative_s), :class => "concept_cond", rows: 4, style: 'width: 100%;'
 
           %hr
           %h5.text-success D.
@@ -84,7 +84,7 @@
             =t('form.obstacles_bc')
             %a.btn.btn-success.btn-xs{type: "button", "data-toggle"=>"modal", "data-target"=>"#prompt9", style:'font-size:10px;'} Пояснения
           .form-group.has-success
-            =text_area_tag "pa[#{discontent.id}][obstacles]", '', :class => "concept_cond", rows: 4, style: 'width: 100%;'
+            =text_area_tag "pa[#{discontent.id}][obstacles]",  @post.get_pa_by_discontent(discontent, :obstacles), :class => "concept_cond", rows: 4, style: 'width: 100%;'
 
 
 
@@ -96,9 +96,9 @@
                 =t('form.problems')
                 %a.btn.btn-success.btn-xs{type: "button", "data-toggle"=>"modal", "data-target"=>"#prompt5", style:'font-size:10px;'} Пояснения
               .form-group.has-success
-                =text_area_tag "pa[#{discontent.id}][problems]", '', :class => "concept_cond", rows: 4, style: 'width: 100%;'
+                =text_area_tag "pa[#{discontent.id}][problems]",  @post.get_pa_by_discontent(discontent, :problems), :class => "concept_cond", rows: 4, style: 'width: 100%;'
               %p.text-info
                 =t('form.reality')
                 %a.btn.btn-success.btn-xs{type: "button", "data-toggle"=>"modal", "data-target"=>"#prompt6", style:'font-size:10px;'} Пояснения
               .form-group.has-success
-                =text_area_tag "pa[#{discontent.id}][reality]",'', :class => "concept_cond", rows: 4, style: 'width: 100%;'
+                =text_area_tag "pa[#{discontent.id}][reality]", @post.get_pa_by_discontent(discontent, :reality), :class => "concept_cond", rows: 4, style: 'width: 100%;'
