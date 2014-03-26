@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140325103959) do
+ActiveRecord::Schema.define(:version => 20140325151629) do
 
   create_table "answers", :force => true do |t|
     t.string   "text"
@@ -677,9 +677,11 @@ ActiveRecord::Schema.define(:version => 20140325103959) do
     t.integer  "user_id"
     t.string   "type_event"
     t.string   "body"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at",    :null => false
+    t.datetime "updated_at",    :null => false
     t.integer  "project_id"
+    t.integer  "user_informed"
+    t.boolean  "viewed"
   end
 
   add_index "journals", ["created_at"], :name => "index_journals_on_created_at"

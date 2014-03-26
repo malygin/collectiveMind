@@ -40,12 +40,14 @@
           %a.dropdown-toggle{"data-toggle" => "dropdown", :href => "#"}
             %ul.nav.nav-pills.nav-stacked
               =current_user
-              -#%span.label.label-danger 5
+              - if @my_jounals > 0
+                %span.label.label-danger=@my_jounals
           %ul.dropdown-menu
             %li
-              = link_to 'Активность', user_path(@project, current_user)
-
-              -#%span.label.label-danger 4
+              = link_to user_path(@project, current_user) do
+                Уведомления
+                - if @my_jounals > 0
+                  %span.label.label-danger=@my_jounals
             %li.disabled
               %a{:href => "#"}
                 Сообщения

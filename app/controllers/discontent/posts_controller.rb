@@ -29,6 +29,7 @@ class Discontent::PostsController < PostsController
   def prepare_data
     @project = Core::Project.find(params[:project])
     add_breadcrumb I18n.t('stages.discontent'), discontent_posts_path(@project)
+    @my_jounals = Journal.count_events_for_my_feed(@project.id, current_user)
 
     @journals = Journal.events_for_user_feed @project.id
     @news = ExpertNews::Post.where(:project_id => @project).first 
