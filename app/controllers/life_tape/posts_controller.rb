@@ -12,6 +12,7 @@ def prepare_data
     add_breadcrumb I18n.t('stages.life_tape'), life_tape_posts_path(@project)
     @aspects = Discontent::Aspect.where(:project_id => @project)
     @journals = Journal.events_for_user_feed @project.id
+    @my_jounals = Journal.count_events_for_my_feed(@project.id, current_user)
     @news = ExpertNews::Post.where(:project_id => @project).first
     @post_star = LifeTape::Post.where(:project_id => @project, :important => 't' ).limit(3)
     @mini_help = Help::Post.where(stage:1, mini: true).first

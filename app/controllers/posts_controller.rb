@@ -57,7 +57,9 @@ def add_comment
       @comment = post.comments.create(:content => params[name_of_comment_for_param][:content], :user =>current_user)
       current_user.journals.build(:type_event=>name_of_comment_for_param+'_save', :project => @project, :body=>"#{@comment.content[0..24]}:#{post.id}#comment_#{@comment.id}").save!
       #PostMailer.add_comment(post, @comment).deliver  if post.user!=@comment.user
-
+      if post.user!=current_user
+       current_user.journals.build(:type_event=>'my_'+name_of_comment_for_param, :user_informed => post.user, :project => @project, :body=>"#{@comment.content[0..24]}:#{post.id}#comment_#{@comment.id}", :viewed=> false).save!
+      end
     end
     respond_to do |format|
        format.js

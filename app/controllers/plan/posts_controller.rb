@@ -22,6 +22,8 @@ class Plan::PostsController < PostsController
   def prepare_data
     @project = Core::Project.find(params[:project]) 
     @journals = Journal.events_for_user_feed @project.id
+    @my_jounals = Journal.count_events_for_my_feed(@project.id, current_user)
+
     @news = ExpertNews::Post.first  
     @status = params[:status]
     @aspects = Discontent::Aspect.where(:project_id => @project)
