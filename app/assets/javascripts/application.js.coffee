@@ -8,12 +8,15 @@
 #= require bootstrap-wysihtml5/locales/ru-RU
 #= require selectize
 
+
+
 $('#modal_help').modal
   keyboard: false
   backdrop: 'static'
 
 $('#modal_help').on 'hidden.bs.modal', ->
   $('#help_question').submit()
+  $('#modal_help').remove()
 
 @get_life_tape_form = ->
   $('#new_life_tape').css 'display','block'

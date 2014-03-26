@@ -29,7 +29,8 @@ class Help::PostsController < ApplicationController
       current_user.help_users_answerses.build(answer_id: k.keys[0].to_i)
     end
     current_user.save
-    render :nothing => true
+    #render :nothing => true
+    redirect_to :back
   end
 
 end

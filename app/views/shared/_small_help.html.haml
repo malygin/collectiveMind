@@ -8,7 +8,7 @@
         =raw(small_help.content)
         %br
         %br
-        = form_tag(help_save_help_answer_path(@project),{ method: :post, remote: true, id: 'help_question' }) do
+        = form_tag(help_save_help_answer_path(@project),{ method: :post,  id: 'help_question' }) do
           -small_help.help_questions.each do |hq|
             %b=hq.content
             -hq.help_answers.each do |ha|
