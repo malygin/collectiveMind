@@ -57,6 +57,55 @@ class Plan::PostsController < PostsController
     @plan_post.project = @project
     @plan_post.user = current_user
     @plan_post.status = 0
+<<<<<<< HEAD
+=======
+    unless params[:pa].nil?
+      params[:pa].each do |pa|
+        p = Plan::PostAspect.new(pa[1])
+        p.first_stage= 0
+        d = Discontent::Post.find(pa[0])
+        p.discontent = d
+        @plan_post.post_aspects_other << p
+      end
+    end
+    unless params[:pa1].nil?
+      params[:pa1].each do |pa|
+        p = Plan::PostAspect.new(pa[1])
+        p.first_stage= 1
+        d = Discontent::Post.find(pa[0])
+        p.discontent = d
+        @plan_post.post_aspects_first << p
+      end
+    end
+    #@plan_post.plan_first = params[]
+    #@plan_post.plan_other = 0
+
+    #@plan_post.step= @plan_post.step+1
+    #@plan_post.goal = params[:plan_post][:goal]
+
+    #unless params['correct_disc'].nil?
+    #  params['correct_disc'].each do |asp|
+    #    asp[1].each do |v|
+    #      if v!= ''
+    #        unless Discontent::Post.exists?(v[0])
+    #          disc = Discontent::Post.new(v[1]['disc'])
+    #          disc.status = 5
+    #          disc.project = @project
+    #          disc.user = current_user
+    #          disc.save!
+    #          v[1].delete :disc
+    #          @plan_post.post_aspects.build(v[1].merge(:discontent_aspect_id=> disc.id,:first_stage => (asp[0]=='accordion_concept1' ? 1 : 0)))
+    #        else
+    #          v[1].delete :disc
+    #          @plan_post.post_aspects.build(v[1].merge(:discontent_aspect_id=> v[0],:first_stage => (asp[0]=='accordion_concept1' ? 1 : 0)))
+    #        end
+    #
+    #      end
+    #    end
+    #
+    #  end
+    #end
+>>>>>>> f43c06299a095f82a231456865d04a65b8d937f3
 
     unless params[:pa].nil?
       params[:pa].each do |pa|

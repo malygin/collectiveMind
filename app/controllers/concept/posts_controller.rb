@@ -25,7 +25,10 @@ class Concept::PostsController < PostsController
     @aspects = Discontent::Aspect.where(:project_id => @project, :status => 0)
     add_breadcrumb I18n.t('stages.concept'), concept_posts_path(@project)
     @mini_help = Help::Post.where(stage:3, mini: true).first
+<<<<<<< HEAD
     @my_jounals = Journal.count_events_for_my_feed(@project.id, current_user)
+=======
+>>>>>>> f43c06299a095f82a231456865d04a65b8d937f3
 
     @journals = Journal.events_for_user_feed @project.id
     @news = ExpertNews::Post.first  

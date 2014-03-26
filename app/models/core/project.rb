@@ -96,8 +96,11 @@ class Core::Project < ActiveRecord::Base
        return self.status == 3
      elsif p.instance_of? Concept::Post
        return self.status == 7
+<<<<<<< HEAD
      elsif p.instance_of? Plan::Post
        return self.status == 9
+=======
+>>>>>>> f43c06299a095f82a231456865d04a65b8d937f3
      end
     return false
   end
