@@ -9,76 +9,53 @@
     %div.tab-pane.active#novation1
       %div.panel.panel-default
         %div.panel-body
-          %h5.text-infoУстраняемое несовершенство (проблема):
+          %h5.text-info Устраняемое несовершенство (проблема):
           =render partial:'discontent/posts/post_short2', object: tp.discontent
           %br
-
           %hr
           %div.panel.panel-info
             .panel-heading
               %h5.text-success
                 %b A.*
               %p.text-info
-                %b Что новое, исправляющее несовершенство (проблему), появится в будущем?
+                %b=t('form.novation_what')
+
               .form-group.has-danger
                 =simple_format(tp.name)
 
               %p.text-info
-                %b Как это нововведение будет исправлять несовершенство (проблему)?
+                %b=t('form.novation_how')
+
               .form-group.has-danger
                 =simple_format(tp.content)
 
           %hr
           %h5.text-success
             %b B.
-          %p.text-info
-            Что должно делаться в будущем, чтобы нововведение функционировало?
-            .form-group.has-success
-              -if tp.positive?
-                =simple_format(tp.positive)
-              -else
-                %b  ---
-          %p.text-info
-            Какие ресурсы требуются для поддержания УСЛОВИЯ и разрешения ЗАДАЧИ?
-            .form-group.has-success
-              -if tp.positive_r?
-                =simple_format(tp.positive_r)
-              -else
-                %b  ---
+          %p.text-info=t('form.cond')
+          .form-group.has-success= display_content(tp.positive)
+
+          %p.text-info=t('form.cond_res')
+          .form-group.has-success= display_content(tp.positive_r)
           %hr
           %h5.text-success
             %b C.
-          %p.text-info
-            Если будут созданы и поддерживаться должные УСЛОВИЯ и разрешаться ЗАДАЧИ, какие из-за этого вероятны НЕЖЕЛАТЕЛЬНЫЕ ПОБОЧНЫЕ ЭФФЕКТЫ в будущем?
-            .form-group.has-success
-              -if tp.negative?
-                =simple_format(tp.negative)
-              -else
-                %b  ---
-          %p.text-info
-            Какие ресурсы требуются, чтобы предотвращать эти ЭФФЕКТЫ?
-            .form-group.has-success
-              -if tp.negative_r?
-                =simple_format(tp.negative_r)
-              -else
-                %b  ---
+          %p.text-info=t('form.negative')
+          .form-group.has-success= display_content(tp.negative)
+
+          %p.text-info=t('form.negative_res')
+          .form-group.has-success= display_content(tp.negative_r)
+
           %hr
           %h5.text-success
             %b D.
-          %p.text-info
-            Покажите, что если нововведение будет внедрено и начнет работать в будущем, то эффект от него оправдает денежные и трудовые затраты
-          .form-group.has-success
-            -if tp.problems?
-              =simple_format(tp.problems)
-            -else
-              %b  ---
-          %p.text-info
-            Обоснуйте, что воплощение нововведения в жизнь не встретит серьезных препятствий
-          .form-group.has-success
-            -if tp.reality?
-              =simple_format(tp.reality)
-            -else
-              %b  ---
+          %p.text-info=t('form.problems')
+          .form-group.has-success= display_content(tp.problems)
+
+          %p.text-info=t('form.reality')
+          .form-group.has-success= display_content(tp.reality)
+
+
 
     %br
     = render 'shared/post_social_bar2', :post => @post

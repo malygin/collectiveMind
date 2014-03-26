@@ -58,6 +58,7 @@ class Plan::PostsController < PostsController
     @plan_post.user = current_user
     @plan_post.status = 0
 
+
     unless params[:pa].nil?
       params[:pa].each do |pa|
         p = Plan::PostAspect.new(pa[1])

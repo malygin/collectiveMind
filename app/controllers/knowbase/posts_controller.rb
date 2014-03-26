@@ -9,6 +9,8 @@ class Knowbase::PostsController < ApplicationController
   def  project_by_id
     unless params[:project].nil?
       @project = Core::Project.find(params[:project])
+      @my_jounals = Journal.count_events_for_my_feed(@project.id, current_user)
+
     end
     add_breadcrumb I18n.t('menu.base_knowledge'), knowbase_posts_path(@project)
   end
