@@ -19,7 +19,7 @@
       -if boss? and post_for_vote.status == 0
         =link_to({:action => :set_one_vote, :id => post_for_vote.id},:remote => true,:method => :put,:class => "btn btn-default btn-sm vote-button") do
           %span.glyphicon.text-danger.glyphicon-remove{:id => "set_vote_#{post_for_vote.id}"}
-            set one
+            Убрать
 
 
 -#

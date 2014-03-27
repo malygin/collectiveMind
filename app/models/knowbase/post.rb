@@ -4,7 +4,7 @@ class Knowbase::Post < ActiveRecord::Base
   belongs_to :project, :class_name => "Core::Project"
 
   scope :stage_knowbase_order, ->(project) { where(:project_id => project).order(:stage) }
-  scope :stage_knowbase_post, ->(project,stage) { where(:project_id => project, :stage => stage) }
+  scope :stage_knowbase_post, ->(project,id) { where(:project_id => project, :id => id) }
   scope :min_stage_knowbase_post, ->(project) { where(:project_id => project, :stage => self.minimum(:stage)) }
 
   def self.set_knowbase_posts_sort(sortable)

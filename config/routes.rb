@@ -61,6 +61,7 @@ scope '/project/:project' do
 
   namespace :life_tape do
     resources :posts do
+      get :vote_top, :on => :collection
       member do
         put :set_one_vote
       end

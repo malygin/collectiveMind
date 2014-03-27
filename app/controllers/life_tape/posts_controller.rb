@@ -47,7 +47,9 @@ end
 
 
   def vote_list
-    @posts = voting_model.where(:project_id => @project, :status => 0)
+    #@posts = voting_model.where(:project_id => @project, :status => 0)
+
+    @posts = voting_model.scope_vote_top(@project.id,params[:revers])
 
     @number_v = @project.get_free_votes_for(current_user, :life_tape)
     if @number_v == 0
@@ -56,12 +58,16 @@ end
     end
     @path_for_voting = "/project/#{@project.id}/life_tape/"
     @votes = @project.stage1
-    if boss?
-      @all_people = @project.users.size
-      @voted_people = ActiveRecord::Base.connection.execute("select count(*) as r from (select distinct v.user_id from life_tape_voitings v  left join   discontent_aspects asp on (v.discontent_aspect_id = asp.id) where asp.project_id = #{@project.id}) as dm").first["r"]
-      @votes = ActiveRecord::Base.connection.execute("select count(*) as r from (select  v.user_id from life_tape_voitings v  left join   discontent_aspects asp on (v.discontent_aspect_id = asp.id) where asp.project_id = #{@project.id}) as dm").first["r"].to_i
+    #if boss?
+    #  @all_people = @project.users.size
+    #  @voted_people = ActiveRecord::Base.connection.execute("select count(*) as r from (select distinct v.user_id from life_tape_voitings v  left join   discontent_aspects asp on (v.discontent_aspect_id = asp.id) where asp.project_id = #{@project.id}) as dm").first["r"]
+    #  @votes = ActiveRecord::Base.connection.execute("select count(*) as r from (select  v.user_id from life_tape_voitings v  left join   discontent_aspects asp on (v.discontent_aspect_id = asp.id) where asp.project_id = #{@project.id}) as dm").first["r"].to_i
+    #end
+    #render :layout => 'application_two_column'
+    respond_to do |format|
+      format.html {render :layout => 'application_two_column'}
+      format.js
     end
-    render :layout => 'application_two_column'
   end
 
 
