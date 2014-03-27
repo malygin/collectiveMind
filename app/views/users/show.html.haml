@@ -86,11 +86,10 @@
         -unless @journals.nil?
           - @journals.each do |journal|
             -  if journal_parser(journal, @project.id)
-              .row
-                .col-md-4
-                  %span.text-muted=Russian::strftime(journal.created_at,"%d %B %k:%M:%S ")
-                .col-md-8
-                  = journal_parser(journal, @project.id).html_safe
+              = link_to journal.user, user_path(@project,journal.user)
+              = journal_parser(journal, @project.id).html_safe
+              %small=Russian::strftime(journal.created_at,"%d %B %k:%M:%S ")
+              %br
 
 
 

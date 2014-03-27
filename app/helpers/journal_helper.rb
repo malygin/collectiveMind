@@ -97,14 +97,14 @@ module JournalHelper
 
         end
 
-			when 'concept_post_revision'
-				'отправил на доработку ' +link_to('образ', concept_post_path(project,j.body))
-			when 'concept_post_acceptance'
-				'принял ' +link_to('образ', concept_post_path(project,j.body))
-			when 'concept_post_rejection'
-				'отклонил ' +link_to('образ', concept_post_path(project,j.body))
-			when 'concept_post_to_expert'	
-				'отправил эксперту ' +link_to('образ', concept_post_path(project,j.body))
+			#when 'concept_post_revision'
+			#	'отправил на доработку ' +link_to('образ', concept_post_path(project,j.body))
+			#when 'concept_post_acceptance'
+			#	'принял ' +link_to('образ', concept_post_path(project,j.body))
+			#when 'concept_post_rejection'
+			#	'отклонил ' +link_to('образ', concept_post_path(project,j.body))
+			#when 'concept_post_to_expert'
+			#	'отправил эксперту ' +link_to('образ', concept_post_path(project,j.body))
 			
 			when 'plan_post_save'
 				'добавил  '+ link_to('проект', plan_post_path(j.body))
@@ -127,37 +127,45 @@ module JournalHelper
         end
 
 
-			when 'essay_post_save'
-				'добавил  '+ link_to('эссе', essay_post_path(project, 2, j.body))
-      when 'essay_comment_save'
-        s = j.body.split(':')
-        if s.length == 1
-          'добавил комментарий   '+  link_to(' к эссе', question_post_path(project, j.body))
-        else
-          "добавил комментарий  '#{s[0]}...' "+  link_to('к эссе', "/project/#{project}/stage/2/essay/posts/#{s[1]}")
-
-        end
+      #when 'essay_post_save'
+				#'добавил  '+ link_to('эссе', essay_post_path(project, 2, j.body))
+      #when 'essay_comment_save'
+      #  s = j.body.split(':')
+      #  if s.length == 1
+      #    'добавил комментарий   '+  link_to(' к эссе', question_post_path(project, j.body))
+      #  else
+      #    "добавил комментарий  '#{s[0]}...' "+  link_to('к эссе', "/project/#{project}/stage/2/essay/posts/#{s[1]}")
+      #
+      #  end
 			when 'plan_post_update'
 				'отредактировал '+  link_to('проект', plan_post_path(j.body))
-			when 'plan_post_revision'
-				'отправил на доработку ' +link_to('проект', plan_post_path(j.body))
-			when 'plan_post_acceptance'
-				'принял ' +link_to('проект', plan_post_path(j.body))
-			when 'plan_post_rejection'
-				'отклонил ' +link_to('проект', plan_post_path(j.body))
-			when 'plan_post_to_expert'	
-				'отправил эксперту ' +link_to('проект', plan_post_path(j.body))
-			when 'estimate_post_save'	
-				'добавил к проекту ' +link_to('оценку', estimate_post_path(j.body))
-			when 'estimate_post_update'	
-				'отредактировал ' +link_to('оценку', estimate_post_path(j.body))
-			when 'estimate_comment_save'	
-				'добавил комментарий к ' +link_to('оценке', estimate_post_path(j.body))
-			when 'estimate_post_rejection'	
-				'отклонил ' +link_to('оценку', estimate_post_path(j.body))
-			when 'estimate_post_acceptance'	
-				'принял ' +link_to('оценку', estimate_post_path(j.body))
-
+			#when 'plan_post_revision'
+			#	'отправил на доработку ' +link_to('проект', plan_post_path(j.body))
+			#when 'plan_post_acceptance'
+			#	'принял ' +link_to('проект', plan_post_path(j.body))
+			#when 'plan_post_rejection'
+			#	'отклонил ' +link_to('проект', plan_post_path(j.body))
+			#when 'plan_post_to_expert'
+			#	'отправил эксперту ' +link_to('проект', plan_post_path(j.body))
+			#when 'estimate_post_save'
+			#	'добавил к проекту ' +link_to('оценку', estimate_post_path(j.body))
+			#when 'estimate_post_update'
+			#	'отредактировал ' +link_to('оценку', estimate_post_path(j.body))
+			#when 'estimate_comment_save'
+			#	'добавил комментарий к ' +link_to('оценке', estimate_post_path(j.body))
+			#when 'estimate_post_rejection'
+			#	'отклонил ' +link_to('оценку', estimate_post_path(j.body))
+			#when 'estimate_post_acceptance'
+			#	'принял ' +link_to('оценку', estimate_post_path(j.body))
+      when 'my_life_tape_comment'
+        s = j.body.split(':')
+        "добавил(а) комментарий '#{s[0]}...' к "+  link_to('вашей теме', "/project/#{project}/life_tape/posts/#{s[1]}" )
+      when 'my_discontent_comment'
+        s = j.body.split(':')
+        "добавил(а) комментарий '#{s[0]}...' к "+  link_to('вашему несовершенству', "/project/#{project}/discontent/posts/#{s[1]}" )
+      when 'my_concept_comment'
+        s = j.body.split(':')
+        "добавил(а) комментарий '#{s[0]}...' к "+  link_to('вашему нововведению', "/project/#{project}/concept/posts/#{s[1]}" )
 			else
 				'что то другое'
 		end 

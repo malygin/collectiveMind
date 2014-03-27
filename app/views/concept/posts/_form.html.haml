@@ -42,6 +42,7 @@
                   %b
                     В.
                     =t('form.cond_h')
+
                     %span.glyphicon.glyphicon-chevron-down
               #collapse1.panel-collapse.collapse
                 .panel-body
@@ -63,7 +64,7 @@
                 %a(data-toggle="collapse" data-parent="#accordion" href="#collapse2")
                   %b
                     C.
-                    =t('form.cond_h')
+                    =t('form.negative_h')
                     %span.glyphicon.glyphicon-chevron-down
               #collapse2.panel-collapse.collapse
                 .panel-body
@@ -74,6 +75,7 @@
                       =text_area_tag "pa[#{@discontent_post.id}][negative]",@pa.negative, :placeholder => 'К каким побочным эффектам может привести ваше нововведение в будущем?', :class => "concept_cond", rows: 4,  style: 'width: 100%;'
                   %p.text-info
                     =t('form.negative_res')
+
                     %a.btn.btn-success.btn-xs{type: "button", "data-toggle"=>"modal", "data-target"=>"#prompt8", style:'font-size:10px;'} Пояснения
                     .form-group.has-success
                       =text_area_tag "pa[#{@discontent_post.id}][negative_r]",@pa.negative_r, :class => "concept_cond", rows: 4,  style: 'width: 100%;'
@@ -92,12 +94,14 @@
                 .panel-body
                   %p.text-info
                     =t('form.problems')
+
                     %a.btn.btn-success.btn-xs{type: "button", "data-toggle"=>"modal", "data-target"=>"#prompt5", style:'font-size:10px;'} Пояснения
                   .form-group.has-success
                     =text_area_tag "pa[#{@discontent_post.id}][problems]",@pa.problems, :class => "concept_cond", rows: 4,  style: 'width: 100%;'
 
                   %p.text-info
                     =t('form.reality')
+
                     %a.btn.btn-success.btn-xs{type: "button", "data-toggle"=>"modal", "data-target"=>"#prompt6", style:'font-size:10px;'} Пояснения
                   .form-group.has-success
                     =text_area_tag "pa[#{@discontent_post.id}][reality]",@pa.reality, :class => "concept_cond", rows: 4,  style: 'width: 100%;'

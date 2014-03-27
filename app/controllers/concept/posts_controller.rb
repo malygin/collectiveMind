@@ -26,6 +26,9 @@ class Concept::PostsController < PostsController
     add_breadcrumb I18n.t('stages.concept'), concept_posts_path(@project)
     @mini_help = Help::Post.where(stage:3, mini: true).first
 
+    @my_jounals = Journal.count_events_for_my_feed(@project.id, current_user)
+
+
     @journals = Journal.events_for_user_feed @project.id
     @news = ExpertNews::Post.first  
     @status = 4

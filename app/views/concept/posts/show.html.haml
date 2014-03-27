@@ -19,11 +19,13 @@
                 %b A.*
               %p.text-info
                 %b=t('form.novation_what')
+
               .form-group.has-danger
                 =simple_format(tp.name)
 
               %p.text-info
                 %b=t('form.novation_how')
+
               .form-group.has-danger
                 =simple_format(tp.content)
 
@@ -52,6 +54,7 @@
 
           %p.text-info=t('form.reality')
           .form-group.has-success= display_content(tp.reality)
+
 
 
     %br

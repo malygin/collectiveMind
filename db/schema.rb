@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140324155804) do
+ActiveRecord::Schema.define(:version => 20140325151629) do
 
   create_table "answers", :force => true do |t|
     t.string   "text"
@@ -141,6 +141,7 @@ ActiveRecord::Schema.define(:version => 20140324155804) do
 
   add_index "concept_posts", ["created_at"], :name => "index_concept_posts_on_created_at"
   add_index "concept_posts", ["life_tape_post_id"], :name => "index_concept_posts_on_life_tape_post_id"
+  add_index "concept_posts", ["project_id", "status"], :name => "index_concept_posts_on_project_id_and_status"
   add_index "concept_posts", ["project_id"], :name => "index_concept_posts_on_project_id"
   add_index "concept_posts", ["status"], :name => "index_concept_posts_on_status"
   add_index "concept_posts", ["user_id"], :name => "index_concept_posts_on_user_id"
@@ -301,6 +302,7 @@ ActiveRecord::Schema.define(:version => 20140324155804) do
   end
 
   add_index "discontent_posts", ["aspect_id"], :name => "index_discontent_posts_on_aspect_id"
+  add_index "discontent_posts", ["project_id", "status"], :name => "index_discontent_posts_on_project_id_and_status"
   add_index "discontent_posts", ["project_id"], :name => "index_discontent_posts_on_project_id"
 
   create_table "discontent_votings", :force => true do |t|
@@ -675,12 +677,15 @@ ActiveRecord::Schema.define(:version => 20140324155804) do
     t.integer  "user_id"
     t.string   "type_event"
     t.string   "body"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at",    :null => false
+    t.datetime "updated_at",    :null => false
     t.integer  "project_id"
+    t.integer  "user_informed"
+    t.boolean  "viewed"
   end
 
   add_index "journals", ["created_at"], :name => "index_journals_on_created_at"
+  add_index "journals", ["project_id", "type_event"], :name => "index_journals_on_project_id_and_type_event"
   add_index "journals", ["project_id"], :name => "index_journals_on_project_id"
   add_index "journals", ["type_event"], :name => "index_journals_on_type"
   add_index "journals", ["user_id"], :name => "index_journals_on_user_id"
@@ -755,6 +760,7 @@ ActiveRecord::Schema.define(:version => 20140324155804) do
   add_index "life_tape_posts", ["category_id"], :name => "index_life_tape_posts_on_category_id"
   add_index "life_tape_posts", ["created_at"], :name => "index_life_tape_posts_on_created_at"
   add_index "life_tape_posts", ["post_id"], :name => "index_life_tape_posts_on_post_id"
+  add_index "life_tape_posts", ["project_id", "status"], :name => "index_life_tape_posts_on_project_id_and_status"
   add_index "life_tape_posts", ["project_id"], :name => "index_life_tape_posts_on_project_id"
   add_index "life_tape_posts", ["user_id"], :name => "index_life_tape_posts_on_user_id"
 
@@ -864,6 +870,7 @@ ActiveRecord::Schema.define(:version => 20140324155804) do
   end
 
   add_index "plan_posts", ["created_at"], :name => "index_plan_posts_on_created_at"
+  add_index "plan_posts", ["project_id", "status"], :name => "index_plan_posts_on_project_id_and_status"
   add_index "plan_posts", ["project_id"], :name => "index_plan_posts_on_project_id"
   add_index "plan_posts", ["user_id"], :name => "index_plan_posts_on_user_id"
 

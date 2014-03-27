@@ -32,7 +32,10 @@
         %h3.text-success=t('form.plan_first')
         %br
         .panel.panel-info
-          .panel-heading=t('form.plan_first_notice')
+          .panel-heading
+            =t('form.plan_first_notice')
+            %a.btn.btn-success.btn-xs{type: "button", "data-toggle"=>"modal", "data-target"=>"#prompt15", style:'font-size:10px;'} Пояснения
+
           .panel-body
             %br
             =f.text_area :plan_first,  rows: 30, style: 'width: 100%;'
