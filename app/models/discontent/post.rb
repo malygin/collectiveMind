@@ -24,7 +24,8 @@ class Discontent::Post < ActiveRecord::Base
   has_many :final_votings,:foreign_key => 'discontent_post_id', :class_name => 'Discontent::Voting'
   scope :by_status, ->(p){where(status: p)}
   scope :required_posts, ->(p){where(status:4, project_id:p.id)}
-  #scope :for_union,-> (p){ where(status: 0).where(aspect_id: p) }
+
+  scope :for_union, ->(aspect,post_ids){ where(status: 0).where(aspect_id: aspect).where("discontent_posts.id NOT IN (#{post_ids.join(", ")})") }
 
   #scope :uniquely_whend, :select => 'distinct whend'
   #scope :uniquely_whered, :select => 'distinct whered'
@@ -50,8 +51,12 @@ class Discontent::Post < ActiveRecord::Base
   end
 
   def show_content
-  	'<b>что: </b>'+self.content + '<br/> <b> когда: </b>'+ self.whend + '<br/> <b>где: </b> ' +self.whered+'<br/>'
+  	'<b> что: </b>' + self.content +
+    (self.whered.present? ? '<br/> <b> где: </b> ' + self.whered : '') +
+    (self.whend.present? ? '<br/> <b> когда: </b>' + self.whend : '') +
+    '<br/>'
   end
+
   def display_content
     discontent_posts.first.content if status == 4 and  !discontent_posts.empty?
   end
@@ -67,6 +72,10 @@ class Discontent::Post < ActiveRecord::Base
       end
     end
     return true
+  end
+
+  def one_last_post?
+    discontent_posts.size < 2
   end
 
 end

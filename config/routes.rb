@@ -78,6 +78,12 @@ scope '/project/:project' do
   namespace :discontent do
     resources :aspects
     posts_routes
+    resources :posts do
+      member do
+        put :remove_union
+        put :add_union
+      end
+    end
   end
 
   namespace :concept do

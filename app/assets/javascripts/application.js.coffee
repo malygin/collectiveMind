@@ -6,6 +6,7 @@
 #= require autocomplete-rails
 #= require bootstrap-wysihtml5/b3
 #= require bootstrap-wysihtml5/locales/ru-RU
+#= require selectize
 
 $('#modal_help').modal
   keyboard: false
@@ -102,3 +103,36 @@ $(window).load ->
   $("#fixBlock").liFixar
     side: "top"
     position: 0
+
+@select_discontent_for_union= (project,id)->
+  sel = $('#selectize_tag :selected')
+  $.ajax
+    url: "/project/#{project}/discontent/posts/#{id}/add_union"
+    type: "put"
+    data:
+      post_id: sel.val()
+
+
+$(window).load ->
+  $select = $("#selectize_tag").selectize
+    labelField: "show_content"
+    valueField: "id"
+    sortField: "show_content"
+    searchField: "show_content"
+    create: false
+    hideSelected: true
+    onChange: (item) ->
+      optsel = $(".option_for_selectize")
+      project_id = parseInt(optsel.attr('project'))
+      id = parseInt(optsel.attr('post'))
+      select_discontent_for_union(project_id,id)
+      selectize = $select[0].selectize
+      selectize.removeOption(item)
+      selectize.refreshOptions()
+      selectize.close()
+    render:
+      item: (item, escape) ->
+        short_item = item.show_content.split('<br/>')[0].replace('<b> что: </b>', '')
+        return '<div>'+short_item+'</div>'
+      option: (item, escape) ->
+        return '<div>'+item.show_content+'</div>'
