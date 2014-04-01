@@ -19,16 +19,41 @@ class Knowbase::PostsController < ApplicationController
     #redirect_to knowbase_post_path(@project, id:1)
 
     @stages = current_model.stage_knowbase_order(@project.id)
-    @post = current_model.stage_knowbase_post(@project.id, 1).first
+    @post = current_model.min_stage_knowbase_post(@project.id).first
     add_breadcrumb  @post.title, knowbase_post_path(@project, @post.id)
-    render "show"
+    render 'show'
 
+  end
+
+  def new
+    @post = current_model.new
+    respond_to do |format|
+      format.js
+    end
+  end
+
+  def create
+    @stages = current_model.stage_knowbase_order(@project.id)
+    @post = current_model.create(params[:knowbase_post])
+    @post.stage = current_model.maximum(:stage) + 1
+    @post.project_id = @project.id
+    if @post.save
+      redirect_to "/project/#{@project.id}/knowbase/posts/#{@post.id}"
+    else
+      render 'new'
+    end
+  end
+
+  def destroy
+    @post = current_model.find(params[:id])
+    @post.destroy if current_user.boss?
+    redirect_to knowbase_posts_path(@project)
   end
 
   def show
     @stages = current_model.stage_knowbase_order(@project.id)
     @post = current_model.stage_knowbase_post(@project.id, params[:id]).first
-    add_breadcrumb  @post.title, knowbase_post_path(@project, @post.id)
+    add_breadcrumb @post.title, knowbase_post_path(@project, @post.id)
   end
 
   def edit
@@ -45,9 +70,8 @@ class Knowbase::PostsController < ApplicationController
 
   def sortable_save
     current_model.set_knowbase_posts_sort(params[:sortable])
-    #params[:sortable].each do |el|
-    #  @post = current_model.find(el[1][0].to_i)
-    #  @post.update_attributes(stage: el[1][1].to_i)
-    #end
+    respond_to do |format|
+      format.js
+    end
   end
 end

@@ -1,7 +1,20 @@
 %div.well
-  %ul.nav.nav-pills.nav-stacked{:id => "sortable"}
+  -if current_user.boss?
+    .pull-right
+      =link_to new_knowbase_post_path(@project),:remote => true,:id => "new_knowbase_post" do
+        %span.label.label-success +добавить статью
+    %br
+    %br
+  .text-success#sort_success(style='display:none;')
+    Список успешно обновлен
+  .text-success#post_success(style='display:none;')
+    Статья успешно добавлена
+  %ul.nav.nav-pills.nav-stacked{:id => "#{'sortable' if boss?}"}
     -@stages.each do |s|
-      %li{class: "ui-state-default #{'active' if s.stage==params[:id].to_i or (s.stage == 1 and params[:id].nil?)}",stage:"#{s.stage}", id: "#{s.id}"}
-        %a(href="/project/#{@project.id}/knowbase/posts/#{s.stage}")
+      %li{class: "#{'ui-state-default' if boss?} #{'active' if s.id==params[:id].to_i or (s.id == @stages.min_stage_knowbase_post(@project.id).first.id and params[:id].nil?)}",stage:"#{s.stage}", id: "#{s.id}"}
+        %a(href="/project/#{@project.id}/knowbase/posts/#{s.id}")
           %div{id: "knowbase_left_title_#{s.id}"}
             =s.title
+
+
+

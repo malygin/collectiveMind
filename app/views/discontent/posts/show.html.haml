@@ -1,4 +1,4 @@
-.media{id: "post_#{@post.id}"}
+.media.option_for_selectize{id: "post_#{@post.id}", project: "#{@project.id}", post: "#{@post.id}"}
   = render 'users/user_post', :user => @post.user
   .media-body
     = render partial: 'discontent/aspects/aspect', object: @post.aspect
@@ -25,11 +25,21 @@
       .panel.panel-default
         .panel-heading
           %h5 Объединяет:
-        .panel-body
+        .panel-body{:id => "panel_union"}
           =render @post.discontent_posts
+      %br
+      .text-success#dispost_success(style='display:none;')
+        Несовершенство успешно добавлено
+      =select_tag "selectize_tag",
+      options_from_collection_for_select(Discontent::Post.for_union(@post.aspect_id,@post.discontent_posts.pluck(:id)), "id", "show_content"),
+      class: 'selectized',
+      include_blank: true,
+      placeholder: "Добавьте несовершенство"
 
-
-
+    %br
+    %br
+    %br
+    %br
     %br
     %br
       %ul.media-list#comments
@@ -37,6 +47,3 @@
     = will_paginate @comments
     - if signed_in?
       = render :partial => 'shared/comment_form', :locals => { :comment => @comment, :url_link => url_for(:controller => @post.class.name.underscore.pluralize, :action => 'add_comment')}
-
-
-

@@ -6,6 +6,10 @@
 #= require autocomplete-rails
 #= require bootstrap-wysihtml5/b3
 #= require bootstrap-wysihtml5/locales/ru-RU
+#= require selectize
+#= require liFixar/jquery.liFixar
+
+
 
 $('#modal_help').modal
   keyboard: false
@@ -13,6 +17,7 @@ $('#modal_help').modal
 
 $('#modal_help').on 'hidden.bs.modal', ->
   $('#help_question').submit()
+  $('#modal_help').remove()
 
 @get_life_tape_form = ->
   $('#new_life_tape').css 'display','block'
@@ -65,7 +70,6 @@ $('.score_class').on 'click', ->
   $(this).css('text-decoration','underline').css('background-color','#ddeaf4')
 
 @load_discontent_for_cond= (el)->
-  console.log($('#select_'+el).val())
   $.ajax({
     type: "POST",
     url: "/project/1/plan/posts/get_cond",
@@ -89,17 +93,50 @@ $ ->
   $("#sortable").disableSelection()
 
 $('#sortable').sortable update: (event, ui) ->
-  order = []
-  i = 0
+  order = {}
   $("li",this).each (index) ->
     if parseInt($(this).attr('stage')) != (index+1)
-      order[i] = []
-      order[i][0] = $(this).attr('id')
-      order[i][1] = index+1
-      i = i+1
+      order[$(this).attr('id')] = index+1
   $.ajax
     url: "/project/1/knowbase/posts/sortable_save"
     type: "post"
     data:
       sortable: order
 
+$(window).load ->
+  $("#fixBlock").liFixar
+    side: "top"
+    position: 0
+
+@select_discontent_for_union= (project,id)->
+  sel = $('#selectize_tag :selected')
+  $.ajax
+    url: "/project/#{project}/discontent/posts/#{id}/add_union"
+    type: "put"
+    data:
+      post_id: sel.val()
+
+
+$(window).load ->
+  $select = $("#selectize_tag").selectize
+    labelField: "show_content"
+    valueField: "id"
+    sortField: "show_content"
+    searchField: "show_content"
+    create: false
+    hideSelected: true
+    onChange: (item) ->
+      optsel = $(".option_for_selectize")
+      project_id = parseInt(optsel.attr('project'))
+      id = parseInt(optsel.attr('post'))
+      select_discontent_for_union(project_id,id)
+      selectize = $select[0].selectize
+      selectize.removeOption(item)
+      selectize.refreshOptions()
+      selectize.close()
+    render:
+      item: (item, escape) ->
+        short_item = item.show_content.split('<br/>')[0].replace('<b> что: </b>', '')
+        return '<div>'+short_item+'</div>'
+      option: (item, escape) ->
+        return '<div>'+item.show_content+'</div>'

@@ -4,8 +4,5 @@
         %span{:class=>"glyphicon glyphicon-pencil text-success", :style=>"cursor:pointer;text-decoration:none;"}
     =link_to({:action => :destroy_aspect, :id => aspect.id},:remote => true,:id => "destroy_aspect_#{aspect.id}") do
         %span{:class=>"glyphicon glyphicon-remove text-danger", :style=>"cursor:pointer;text-decoration:none;"}
-    -#%span(type="button" class="glyphicon glyphicon-remove text-danger" style="cursor:pointer;")
-    -#%span.glyphicon.glyphicon-pencil.text-success(type="button" onclick="edit_filter_aspects(#{asp.id},'#{asp.content}',#{asp.life_tape_posts.count});" style="cursor:pointer;")
-    -#%span.glyphicon.glyphicon-remove.text-danger(type="button" onclick="destroy_filter_aspects(#{asp.id});" style="cursor:pointer;")
 %div{:id => "edit_aspect_content_#{aspect.id}"}
     = "#{aspect.content} (#{aspect.life_tape_posts.count})"

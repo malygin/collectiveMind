@@ -1,0 +1,11 @@
+%span.h3{:id => "edit_knowbase_post_title#{@post.id}"}=@post.title
+%span
+  -if current_user.boss?
+    =link_to edit_knowbase_post_path(@project,@post),:remote => true, :id => "edit_knowbase_post_#{@post.id}" do
+      %span{:class=>"glyphicon glyphicon-pencil text-success", :style=>"cursor:pointer;text-decoration:none;font-size:15px;"}
+    =link_to knowbase_post_path(@project,@post), :method => :delete, :confirm => 'Удалить статью?',:id => "destroy_knowbase_post_#{@post.id}" do
+      %span{:class=>"glyphicon glyphicon-remove text-danger", :style=>"cursor:pointer;text-decoration:none;font-size:15px;"}
+%br
+%br
+%div{:id => "edit_knowbase_post_content_#{@post.id}"}
+  =@post.content.html_safe

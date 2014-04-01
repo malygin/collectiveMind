@@ -1,0 +1,5 @@
+$('#set_vote_#{@post.id}').toggleClass('glyphicon-remove glyphicon-ok text-danger text-success');
+-if @post.status == 0
+  $('#set_vote_#{@post.id}').html('Убрать');
+-else
+  $('#set_vote_#{@post.id}').html('Вернуть');

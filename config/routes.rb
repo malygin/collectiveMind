@@ -60,6 +60,12 @@ scope '/project/:project' do
   end
 
   namespace :life_tape do
+    resources :posts do
+      get :vote_top, :on => :collection
+      member do
+        put :set_one_vote
+      end
+    end
     posts_routes
 
   end
@@ -72,6 +78,12 @@ scope '/project/:project' do
   namespace :discontent do
     resources :aspects
     posts_routes
+    resources :posts do
+      member do
+        put :remove_union
+        put :add_union
+      end
+    end
   end
 
   namespace :concept do

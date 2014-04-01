@@ -200,4 +200,32 @@ class Discontent::PostsController < PostsController
        format.js
      end
    end
+
+   def remove_union
+     @project = Core::Project.find(params[:project])
+     @post = Discontent::Post.find(params[:id])
+     @union_post = Discontent::Post.find(params[:post_id])
+     if @post.one_last_post?
+       if boss?
+         @union_post.update_attributes(status: 0, discontent_post_id: nil)
+         @post.destroy
+         redirect_to action: "index"
+         return
+       end
+     else
+       @union_post.update_attributes(status: 0, discontent_post_id: nil)
+       respond_to do |format|
+         format.js
+       end
+     end
+   end
+   def add_union
+     @project = Core::Project.find(params[:project])
+     @post = Discontent::Post.find(params[:id])
+     @union_post = Discontent::Post.find(params[:post_id])
+     @union_post.update_attributes(status: 1, discontent_post_id: @post.id)
+     respond_to do |format|
+       format.js
+     end
+   end
 end

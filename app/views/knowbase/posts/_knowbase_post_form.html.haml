@@ -1,4 +1,4 @@
-= form_for post, :url => {:project => @project.id,  :action =>'update'}, remote: true do |f|
+= form_for post, :url => {:project => @project.id,  :action => post.persisted? ? 'update' : 'create'}, remote: post.persisted? ? true : false do |f|
   = render 'shared/error_messages', :object =>f.object
   =f.text_field :title, :class => 'form-control', placeholder: 'Введите название ...', id:'title-textfield'
   %br

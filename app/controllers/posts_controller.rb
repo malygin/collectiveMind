@@ -279,30 +279,12 @@ def index
 
   #write fact of voting in db
   def vote
+    @project = Core::Project.find(params[:project])
     @post_vote = voting_model.find(params[:post_id])
     @post_vote.final_votings.create(:user => current_user)
-    respond_to do |format|
-      format.js
-    end
+    @votes = @project.stage3 - current_user.concept_post_votings.count
   end
 
-   def up
-    v = voting_model.find(params[:post_id])
-    v.update_column(:status, v.status+1)
-    render json: 5
-   end
-
-   def down
-    v = voting_model.find(params[:post_id])
-    v.update_column(:status, v.status-1)
-    render json: 5
-   end
-
-  def make_mandatory
-    v = voting_model.find(params[:post_id])
-    v.update_column(:status, 4)
-    render json: 5
-  end
 ### function for dialog with expert
 
 
@@ -395,9 +377,7 @@ def index
     @project = Core::Project.find(params[:project])
     @comment = comment_model.find(params[:id])
     @comment.destroy if @comment.user == current_user or current_user.boss?
-    respond_to do |format|
-      format.js
-    end
+
   end
 
   def set_important
@@ -405,9 +385,7 @@ def index
     @post = current_model.find(params[:id])
     @post.toggle(:important)
     @post.update_attributes(important: @post.important)
-    respond_to do |format|
-      format.js
-    end
+
   end
 
   protected

@@ -11,17 +11,23 @@
   =@all_people
   Отдано голосов
   =@votes
+  .pull-right
+    Показана сортировка,
+    =link_to "по умолчанию", {:action => :vote_list },:remote => true, class: "vote_class", id: "vote_all"
+    |
+    =link_to "по голосам(убыванию)", {:action => :vote_list, :revers => 0 },:remote => true, class: "vote_class", id: "vote_all"
+    |
+    =link_to "по голосам(возрастанию)", {:action => :vote_list, :revers => 1 },:remote => true, class: "vote_class", id: "vote_all"
   %br
-
 - unless @number_v<1  and not boss?
-  .alert.alert-info
+  .alert.alert-info#fixBlock
     %h3.text-danger
       =t('voting.have_votes')
       %b#count_vote=@number_v
 
 
-
-  = render :partial => 'shared/post_for_vote', :collection => @posts,  :locals => { :path_for_voting => @path_for_voting, :count_voted => @number_v, :votes => @votes}
+  #vote_container.col-md-12
+    = render :partial => 'shared/post_for_vote', :collection => @posts,  :locals => { :path_for_voting => @path_for_voting, :count_voted => @number_v, :votes => @votes}
 - else
   %b Спасибо за участие в голосовании!
   %br

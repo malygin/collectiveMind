@@ -129,7 +129,7 @@ class Concept::PostsController < PostsController
       if @concept_post.save!
         current_user.journals.build(:type_event=>'concept_post_update', :body=>@concept_post.id,  :project => @project).save!
 
-        format.html { redirect_to action: "show", :project => @project, :id => @concept_post.id , notice: 'Концепция успешно изменена!' }
+        format.html { redirect_to action: "show", :project => @project, :id => @concept_post.id }
         format.json { head :no_content }
       else
         format.html { render action: "edit" }
@@ -141,7 +141,7 @@ class Concept::PostsController < PostsController
   def vote_list
     @posts = current_model.where(:project_id => @project, :status => 2)
     # i have votes now
-    @number_v = @project.stage3 - current_user.voted_concept_posts.size
+    @number_v = @project.stage3 - current_user.voted_concept_posts.count
     @path_for_voting = "/project/#{@project.id}/concept/vote/"
     #all number of votes
     @votes = @project.stage3
