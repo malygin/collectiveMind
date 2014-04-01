@@ -23,6 +23,7 @@ Spork.prefork do
     config.before(:all) do
 
       DatabaseCleaner.start
+      DatabaseCleaner.clean
 
       @user = FactoryGirl.create :user
       @project = FactoryGirl.create :core_project, :status => 1
