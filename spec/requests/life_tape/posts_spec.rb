@@ -57,7 +57,7 @@ describe 'Life Tape ' do
         check("aspect_#{@aspect1.id}")
         #click_button('filter-aspect')
         #@todo - bad code ajax response waiting
-        first('span.label-info')
+        #first('span.label-info')
         should_not have_selector('span.label-info', text:'aspect 2')
       end
 

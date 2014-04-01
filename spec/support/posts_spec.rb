@@ -11,7 +11,7 @@ shared_examples 'with mini help'   do |stage_name|
     answer = quest.help_answers.first
     choose("question[#{quest.id}][#{answer.id}]")
     click_button 'send'
-    first('span.label-info')
+    #first('span.label-info')
     should have_selector("h4#helpModalLabel.modal-title", visible: false)
   end
 
@@ -65,7 +65,7 @@ shared_examples 'filterable post'   do
     check("aspect_#{@aspect1.id}")
     #click_button('filter-aspect')
     #@todo - bad code ajax response waiting
-    first('span.label-info')
+    #first('span.label-info')
     should_not have_selector('span.label-info', text:'aspect 2')
   end
 

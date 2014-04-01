@@ -1,5 +1,5 @@
 require 'spec_helper'
-descr ibe 'Discontents ' do
+describe 'Discontents ' do
   subject { page }
 
   before :all do
@@ -58,9 +58,10 @@ descr ibe 'Discontents ' do
       it 'auto complete for where and when', js: true do
           click_link 'when_where_accordion'
           fill_in 'discontent_post_whend', with: 'when'
-          find('ul.ui-autocomplete').should have_selector('li', count: 31)
-          #should have_selector('ul.ui-autocomplete li')
-          #click_button 'send_post'
+          execute_script %Q{ $('#discontent_post_whend').trigger("focus") }
+          execute_script %Q{ $('#discontent_post_whend').trigger("keydown") }
+          should have_selector('ul.ui-autocomplete li')
+
       end
 
       xit 'show similar posts for adding '
