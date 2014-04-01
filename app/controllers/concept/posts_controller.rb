@@ -129,7 +129,7 @@ class Concept::PostsController < PostsController
       if @concept_post.save!
         current_user.journals.build(:type_event=>'concept_post_update', :body=>@concept_post.id,  :project => @project).save!
 
-        format.html { redirect_to action: "show", :project => @project, :id => @concept_post.id , notice: 'Концепция успешно изменена!' }
+        format.html { redirect_to action: "show", :project => @project, :id => @concept_post.id }
         format.json { head :no_content }
       else
         format.html { render action: "edit" }
