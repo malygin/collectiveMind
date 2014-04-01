@@ -23,7 +23,7 @@ describe 'Life Tape ' do
 
     before do
       lp = FactoryGirl.create :life_tape_post, content: 'low raiting post', user: @user, project: @project, number_views: 1
-      lp.discontent_aspects <<@aspect2
+      lp.discontent_aspects << @aspect2
       sign_in @user
     end
 

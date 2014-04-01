@@ -40,7 +40,6 @@ descr ibe 'Discontents ' do
       xit 'filter by popularity'
 
 
-
     context 'add post' do
        before { click_link 'add_record'}
 
