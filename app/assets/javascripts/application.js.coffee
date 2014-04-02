@@ -95,6 +95,7 @@ $('.score_class').on 'click', ->
 $ ->
   $("#sortable").sortable()
   $("#sortable").disableSelection()
+  $('#theall a:first').tab('show')
 
 $('#sortable').sortable update: (event, ui) ->
   order = {}
