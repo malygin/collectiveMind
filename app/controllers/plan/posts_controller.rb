@@ -82,7 +82,7 @@ class Plan::PostsController < PostsController
 
     respond_to do |format|
       if @plan_post.save!
-         current_user.journals.build(:type_event=>'plan_post_save', :body=>@plan_post.id).save!
+         current_user.journals.build(:type_event=>'plan_post_save', :body=>@plan_post.id,   :project => @project).save!
         format.html { redirect_to   plan_post_path(project: @project, id: @plan_post) }
         format.json { render json: @plan_post, status: :created, location: @plan_post }
       else
@@ -138,7 +138,7 @@ class Plan::PostsController < PostsController
 
     respond_to do |format|
         @plan_post.save
-        current_user.journals.build(:type_event=>'plan_post_update', :body=>@plan_post.id).save!
+        current_user.journals.build(:type_event=>'plan_post_update', :body=>@plan_post.id,   :project => @project).save!
         format.html { redirect_to plan_post_path(project: @project, id: @plan_post) }
       end
 
