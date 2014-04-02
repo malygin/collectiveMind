@@ -1,3 +1,5 @@
+- if not current_user.answered_for_help_stage?(4) and not @mini_help.nil?
+  =render partial: 'shared/small_help', object: @mini_help
 - if signed_in? and @project.status == 9
   = link_to '+ Добавить Проект', new_plan_post_path(@project) , id: 'add_record',  class: 'btn btn-sm btn-success'
   %br
