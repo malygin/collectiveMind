@@ -23,6 +23,7 @@ class Plan::PostsController < PostsController
     @project = Core::Project.find(params[:project]) 
     @journals = Journal.events_for_user_feed @project.id
     @my_jounals = Journal.count_events_for_my_feed(@project.id, current_user)
+    @mini_help = Help::Post.where(stage:4, mini: true).first
 
     @news = ExpertNews::Post.first  
     @status = params[:status]
