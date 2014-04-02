@@ -107,22 +107,22 @@ module JournalHelper
 			#	'отправил эксперту ' +link_to('образ', concept_post_path(project,j.body))
 			
 			when 'plan_post_save'
-				'добавил  '+ link_to('проект', plan_post_path(j.body))
+				'добавил  '+ link_to('проект', plan_post_path(project, j.body))
       when 'plan_comment_save'
         s = j.body.split(':')
         if s.length == 1
-          'добавил комментарий к '+  link_to('проекту', "/project/#{project}/plan/status/0/posts/#{j.body}")
+          'добавил комментарий к '+  link_to('проекту', "/project/#{project}/plan/posts/#{j.body}")
         else
-          "добавил комментарий '#{s[0]}...' к "+  link_to('проекту', "/project/#{project}/plan/status/0/posts/#{s[1]}")
+          "добавил комментарий '#{s[0]}...' к "+  link_to('проекту', "/project/#{project}/plan/posts/#{s[1]}")
 
         end
 
        when 'estimate_comment_save'
         s = j.body.split(':')
         if s.length == 1
-          'добавил комментарий к '+  link_to('оценке', "/project/#{project}/estimate/status/0/posts/#{j.body}")
+          'добавил комментарий к '+  link_to('оценке', "/project/#{project}/estimate/posts/#{j.body}")
         else
-          "добавил комментарий '#{s[0]}...' к "+  link_to('оценке', "/project/#{project}/estimate/status/0/posts/#{s[1]}")
+          "добавил комментарий '#{s[0]}...' к "+  link_to('оценке', "/project/#{project}/estimate/posts/#{s[1]}")
 
         end
 
@@ -138,7 +138,7 @@ module JournalHelper
       #
       #  end
 			when 'plan_post_update'
-				'отредактировал '+  link_to('проект', plan_post_path(j.body))
+				'отредактировал '+  link_to('проект', plan_post_path(project, j.body))
 			#when 'plan_post_revision'
 			#	'отправил на доработку ' +link_to('проект', plan_post_path(j.body))
 			#when 'plan_post_acceptance'
