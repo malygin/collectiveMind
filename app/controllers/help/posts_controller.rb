@@ -25,8 +25,8 @@ class Help::PostsController < ApplicationController
   end
 
   def save_help_answer
-    params['question'].each do |q, k|
-      current_user.help_users_answerses.build(answer_id: k.keys[0].to_i)
+    params['question'].each do |k|
+      current_user.help_users_answerses.build(answer_id: k[1].to_i)
     end
     current_user.save
     #render :nothing => true

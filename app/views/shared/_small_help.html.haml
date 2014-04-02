@@ -14,10 +14,10 @@
             -hq.help_answers.each do |ha|
               .radio
                 %label
-                  =radio_button "question[#{hq.id}]", ha.id, true, onchange: "activate_modal_send(this);"
+                  =radio_button "question", hq.id, ha.id, onchange: "activate_modal_send(this);"
                   -#%input(type="radio" value="" onchange="activate_modal_send(this);" )
                   =ha.content
 
 
       .modal-footer
-        %button.btn.btn-primary.disabled#send(type = "button" data-dismiss="modal") Ответить и приступить к работе!
+        %button.btn.btn-primary.disabled#send(type = "button" data-dismiss="modal") !Ответить и приступить к работе!
