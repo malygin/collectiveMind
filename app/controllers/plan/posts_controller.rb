@@ -35,7 +35,7 @@ class Plan::PostsController < PostsController
 
 
   def index
-    @posts = current_model.where(:project_id => @project, :status => 0).paginate(:page => params[:page])
+    @posts = current_model.where(:project_id => @project, :status => 0).order('created_at DESC').paginate(:page => params[:page])
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @posts }
@@ -176,7 +176,15 @@ def get_cond
   respond_to do |format|
     format.js
   end
+  end
+
+def get_cond1
+  @cond = Concept::PostAspect.find(params[:pa])
+  respond_to do |format|
+    format.js
+  end
 end
+
 def add_first_cond
   @post = Plan::Post.find(params[:id])
   @cond2 = Plan::PostAspect.find(params[:cond_id])

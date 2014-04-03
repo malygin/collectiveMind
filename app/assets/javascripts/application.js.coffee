@@ -76,6 +76,13 @@ $('.score_class').on 'click', ->
     data: { pa: $('#select_'+el).val() },
 
   })
+@load_discontent_for_cond1= (el)->
+  $.ajax({
+    type: "POST",
+    url: "/project/1/plan/posts/get_cond1",
+    data: { pa: $('#select_'+el).val() },
+
+  })
 
 @activate_htmleditor= ->
   $(".wysihtml5").each (i, elem) ->
