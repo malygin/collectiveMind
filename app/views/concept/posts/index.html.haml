@@ -41,20 +41,20 @@
                     =link_to 'подробнее', concept_post_path(@project, pa.concept_post)
                     = render 'shared/post_social_bar2', :post => pa.concept_post
 
-                    - if can_vote_cond?(pa.voted(current_user).size,  @number_v, @votes, post)
-                      %br
-                      =link_to   @path_for_voting+pa.id.to_s , :remote => true, :method => :put, class: "btn btn-default btn-sm vote-button vote_dis_#{post.id}", id: "vote_#{pa.id}" do
-                        %span.glyphicon.text-success.glyphicon-thumbs-up
-                        -if boss?
-                          %span.glyphicon.text-success=pa.voted_users.size
-                        Проголосовать
-                    -else
-                      %br
-                      %a.btn.btn-success.btn-sm.disabled.vote-button
-                        %span.glyphicon.text-success.glyphicon-thumbs-up
-                        - if boss?
-                          %span.glyphicon.text-success=pa.voted_users.size
-                        Проголосовать
+                    -#- if can_vote_cond?(pa.voted(current_user).size,  @number_v, @votes, post)
+                    -#  %br
+                    -#  =link_to   @path_for_voting+pa.id.to_s , :remote => true, :method => :put, class: "btn btn-default btn-sm vote-button vote_dis_#{post.id}", id: "vote_#{pa.id}" do
+                    -#    %span.glyphicon.text-success.glyphicon-thumbs-up
+                    -#    -if boss?
+                    -#      %span.glyphicon.text-success=pa.voted_users.size
+                    -#    Проголосовать
+                    -#-else
+                    -#  %br
+                    -#  %a.btn.btn-success.btn-sm.disabled.vote-button
+                    -#    %span.glyphicon.text-success.glyphicon-thumbs-up
+                    -#    - if boss?
+                    -#      %span.glyphicon.text-success=pa.voted_users.size
+                    -#    Проголосовать
 
 
 
