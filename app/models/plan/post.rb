@@ -20,9 +20,8 @@ class Plan::Post < ActiveRecord::Base
      self.voted_users.where(:id => user)
    end
 
-  def get_pa_by_discontent(d, column)
-
-    self.post_aspects.where(discontent_aspect_id: d).first.send(column)  unless self.post_aspects.empty?
+  def get_pa_by_discontent(d, column, first=0)
+    self.post_aspects.where(discontent_aspect_id: d, first_stage: first).first.send(column)  unless self.post_aspects.empty?
   end
 
 
