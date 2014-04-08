@@ -22,8 +22,9 @@
             -#    %button.btn.btn-default.btn-sm(onclick="reset_filter_aspects();" ) Сбросить
             -#%br
             = form_tag({:controller => "life_tape/posts", :action=> "index"},{ method: :get, remote: true, id: 'aspects_list' }) do
-                - @aspects.each do |asp|
-                    = render :partial => 'discontent/aspects/aspect_form', :object => asp
+                #aspects_lister
+                    - @aspects.each do |asp|
+                        = render :partial => 'discontent/aspects/aspect_form', :object => asp
                 %button.btn.btn-default.inv_element#filter-aspect(type="submit") Сохранить
             -if current_user.boss?
                 =link_to new_discontent_aspect_path(@project),:remote => true,:id => "new_aspect" do

@@ -7,8 +7,6 @@ class Discontent::AspectsController  < ApplicationController
 
   def edit
     @project = Core::Project.find(params[:project])
-
-
     @aspect = Discontent::Aspect.find(params[:id])
   end
 
@@ -18,7 +16,6 @@ class Discontent::AspectsController  < ApplicationController
     respond_to do |format|
       format.js
       format.html
-
     end
   end
 
@@ -32,7 +29,7 @@ class Discontent::AspectsController  < ApplicationController
 
   def new
     @project = Core::Project.find(params[:project])
-    @post = Discontent::Aspect.new
+    @aspect = Discontent::Aspect.new
     respond_to do |format|
       format.js
     end

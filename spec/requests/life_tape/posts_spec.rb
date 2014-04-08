@@ -12,6 +12,7 @@ describe 'Life Tape ' do
     4.times { @aspects<< FactoryGirl.create(:aspect, project: @project)}
     @post = FactoryGirl.create :life_tape_post, user: @user, content: 'post from aspect 2', project: @project, created_at: (Time.now.beginning_of_day + 1.day)
     @post.discontent_aspects << @aspect1
+    @comment = FactoryGirl.create :life_tape_comment, content: 'comment for post', user: @user, post: @post
   end
 
   before :each do
@@ -69,9 +70,9 @@ describe 'Life Tape ' do
 
       it 'add post', js: true do
         click_link 'add_record'
-        fill_in 'new_life_tape', with: 'some text for  new life tape'
+        fill_in 'new_life_tape', with: 'some text for new life tape'
         click_button 'send_post'
-        #first('span.label-info')
+        first('span.label-info')
         should have_content 'some text for new life tape'
 
       end
@@ -115,6 +116,81 @@ describe 'Life Tape ' do
 
     end
 
+    context 'comments for post' do
+      before do
+        visit life_tape_post_path(@project, @post)
+      end
+
+      it {should have_selector 'form#new_life_tape_comment'}
+      it {should have_content 'comment for post'}
+      it {should have_selector("div#comment_#{@comment.id}")}
+      it {should have_selector("div#redactor_comment_#{@comment.id}")}
+
+      it 'new comment', js: true do
+        should have_selector '#send_post.disabled'
+        fill_in 'comment_text_area', with: 'some text for new comment life tape'
+        should_not have_selector '#send_post.disabled'
+        click_button "send_post"
+        should have_content 'some text for new comment life tape'
+      end
+
+      it 'edit comment', js: true do
+        click_link "edit_comment_#{@comment.id}"
+        should have_selector("form#edit_life_tape_comment_#{@comment.id}")
+        should_not have_selector("div#redactor_comment_#{@comment.id}", visible: true)
+        fill_in 'edit_comment_text_area', with: 'some text for edit comment life tape'
+        click_button "send_post_#{@comment.id}"
+        should have_content 'some text for edit comment life tape'
+        should have_selector("div#redactor_comment_#{@comment.id}", visible: true)
+      end
+
+      it 'delete comment', js: true do
+        #page.driver.browser.switch_to.alert.accept
+        expect {
+          click_link "destroy_comment_#{@comment.id}"
+          page.driver.browser.switch_to.alert.accept
+          sleep 1.5
+          should_not have_selector("div#comment_#{@comment.id}")
+        }.to change(LifeTape::Comment, :count).by(-1)
+      end
+    end
   end
+  context 'aspects for life type' do
+    before :all do
+      @project.update_attribute(:status, 1)
+    end
+    before do
+      sign_in @admin
+      visit life_tape_posts_path(@project)
+    end
+    it 'new aspect', js: true do
+      click_link "new_aspect"
+      should have_selector 'div#modal_aspect_view'
+      fill_in 'aspect_text_area', with: 'new aspect life tape'
+      expect {
+      click_button "send_post"
+      should have_content 'new aspect life tape'
+      }.to change(Discontent::Aspect, :count).by(1)
+    end
+    it 'edit aspect', js: true do
+      click_link "edit_aspect_#{@aspect1.id}"
+      should have_selector('div#modal_aspect_view', visible: true)
+      should have_selector('#aspect_text_area', 'aspect 1')
+      fill_in 'aspect_text_area', with: 'update aspect life tape'
+      click_button "send_post"
+      should have_selector("div#edit_aspect_content_#{@aspect1.id}", text:"update aspect life tape (#{@aspect1.life_tape_posts.count})")
+    end
+    #@todo help
+    it 'delete aspect', js: true do
+      expect {
+        click_link "destroy_aspect_#{@aspect1.id}"
+        page.driver.browser.switch_to.alert.accept
+        sleep 1.5
+        should_not have_selector("div#aspect_checkbox_#{@aspect1.id}")
+      }.to change(Discontent::Aspect, :count).by(-1)
+    end
+
+  end
+
 
 end
