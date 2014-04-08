@@ -14,7 +14,7 @@
 
         %hr
         %span.h4.text-success Выберите нововведение:
-        %select.form-control(onchange="load_discontent_for_cond1(#{discontent.id});" id="select_#{discontent.id}")
+        %select.form-control(onchange="load_discontent_for_cond1(#{discontent.id});" id="select1_#{discontent.id}")
           %option#option0(value="option_null")
           - discontent.concept_conditions.each do |cd|
             %option#option1(value="#{cd.id}")=cd.name
