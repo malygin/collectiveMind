@@ -75,7 +75,7 @@
             %li
               %a(href="#dis_#{d.id}" data-toggle="tab")
                 ="#{i+1}. #{d.display_content}"
-                %span.text-success.glyphicon.glyphicon-ok.pull-right(class = "#{'inv_element' unless @post.get_pa_by_discontent(d, :name)==''}")
+                %span.text-success.glyphicon.glyphicon-ok.pull-right(class = "#{'inv_element' if @post.get_pa_by_discontent(d, :name)==''}")
       #thefirst.tab-pane.fade
         %ul.nav.nav-tabs.nav-stacked
           %li
@@ -88,7 +88,10 @@
               =t('form.plan')
           -@discontents.each_with_index do |d,i|
             %li
-              %a(href="#fdis_#{d.id}" data-toggle="tab")="#{i+1}. #{d.display_content}"
+              %a(href="#fdis_#{d.id}" data-toggle="tab")
+                ="#{i+1}. #{d.display_content}"
+                %span.text-success.glyphicon.glyphicon-ok.pull-right(class = "#{'inv_element' if @post.get_pa_by_discontent(d, :name, 1)==''}")
+
   %br
   %br
   %br
