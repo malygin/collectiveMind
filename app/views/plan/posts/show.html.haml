@@ -16,6 +16,7 @@
         .panel-body
           =@post.content
           %br
+          %br
           =@post.goal
     %div.tab-pane#essay2
       %hr
@@ -45,7 +46,7 @@
       %a(href="#theall" data-toggle="tab") Образ
     %li
       %a(href="#thefirst" data-toggle="tab") Первый этап
-  .tab-content
+  .tab-content#fixBlock
     #theall.tab-pane.fade.in.active
       %ul.nav.nav-tabs.nav-stacked
         %li
@@ -54,7 +55,9 @@
             =t('form.essay')
         -@post.post_aspects_other.each_with_index do |d,i|
           %li
-            %a(href="#dis_#{d.discontent.id}" data-toggle="tab")="#{i+1}. #{d.discontent.display_content}"
+            %a(href="#dis_#{d.discontent.id}" data-toggle="tab")
+              ="#{i+1}. #{d.discontent.display_content}"
+              %span.text-success.glyphicon.glyphicon-ok.pull-right(class = "#{'inv_element' if d.name==''}")
 
 
     #thefirst.tab-pane.fade
@@ -68,8 +71,9 @@
             III)
             =t('form.plan')
         -@post.post_aspects_first.each_with_index do |d,i|
-          %li
-            %a(href="#fdis_#{d.discontent.id}" data-toggle="tab")="#{i+1}. #{d.discontent.display_content}"
+          - if d.name!= ''
+            %li
+              %a(href="#fdis_#{d.discontent.id}" data-toggle="tab")="#{i+1}. #{d.discontent.display_content}"
 
 .row
   .col-md-12

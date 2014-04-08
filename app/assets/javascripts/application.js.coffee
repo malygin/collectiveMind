@@ -80,7 +80,7 @@ $('.score_class').on 'click', ->
   $.ajax({
     type: "POST",
     url: "/project/1/plan/posts/get_cond1",
-    data: { pa: $('#select_'+el).val() },
+    data: { pa: $('#select1_'+el).val() },
 
   })
 
