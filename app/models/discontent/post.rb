@@ -8,6 +8,7 @@ class Discontent::Post < ActiveRecord::Base
   #belongs_to :post, :class_name => 'Discontent::Post', :foreign_key => 'replace_id'
   belongs_to :discontent_post
   has_many :discontent_posts, :class_name => 'Discontent::Post', :foreign_key => 'discontent_post_id'
+  has_many :discontent_comment_notes, :class_name => 'Discontent::CommentNote'
 
   has_many :concept_conditions, :class_name => 'Concept::PostAspect', :foreign_key => 'discontent_aspect_id'
   has_many :plan_conditions, :class_name => 'Plan::PostAspect', :foreign_key => 'discontent_aspect_id'
@@ -32,7 +33,9 @@ class Discontent::Post < ActiveRecord::Base
   #scope :ready_for_post, lambda {  where(:status => 0).where("created_at < ?", 2.day.ago) }
   #scope :not_ready_for_post, lambda {  where(:status => 0).where("created_at > ?", 2.day.ago) }
 
-
+  def post_notes(type_field)
+    self.discontent_comment_notes.where("type_field = ?",type_field)
+  end
 
   def voted(user)
     self.voted_users.where(:id => user)

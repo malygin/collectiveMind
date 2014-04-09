@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140325151629) do
+ActiveRecord::Schema.define(:version => 20140409222335) do
 
   create_table "answers", :force => true do |t|
     t.string   "text"
@@ -231,6 +231,15 @@ ActiveRecord::Schema.define(:version => 20140325151629) do
   end
 
   add_index "discontent_aspects_life_tape_posts", ["discontent_aspect_id", "life_tape_post_id"], :name => "index_discontent_aspects_life_tape_posts"
+
+  create_table "discontent_comment_notes", :force => true do |t|
+    t.text     "content"
+    t.integer  "user_id"
+    t.integer  "post_id"
+    t.integer  "type_field"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
 
   create_table "discontent_comment_votings", :force => true do |t|
     t.integer  "user_id"

@@ -82,6 +82,11 @@ scope '/project/:project' do
       member do
         put :remove_union
         put :add_union
+        put :status_post
+        put :post_note_new
+        put :post_note_create
+        put :post_note_edit
+        put :post_note_update
       end
     end
   end
