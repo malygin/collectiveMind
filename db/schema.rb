@@ -905,9 +905,6 @@ ActiveRecord::Schema.define(:version => 20140325151629) do
     t.datetime "updated_at", :null => false
   end
 
-# Could not dump table "projects" because of following StandardError
-#   Unknown type 'serial' for column 'id'
-
   create_table "question_comment_votings", :force => true do |t|
     t.integer  "user_id"
     t.integer  "comment_id"
