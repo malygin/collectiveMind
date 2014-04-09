@@ -100,38 +100,15 @@ scope '/project/:project' do
   post 'plan/posts/get_cond1', to:  'plan/posts#get_cond1'
   post 'knowbase/posts/sortable_save', to:  'knowbase/posts#sortable_save'
 
+
   namespace :plan do
     posts_routes
   end
 
-
-
   namespace :estimate do
-    get 'vote_list'  => 'posts#vote_list'
-    put 'vote/:post_id'  => 'posts#vote'
-    scope '/status/:status/',  :defaults => {:status => 0} do
-      resources :posts do
-        member do
-          get :add_aspect
-          put :censored_comment
-          put :add_comment
-          put :plus
-          put :plus_comment
-          put :to_archive
-          get :to_expert
-          put :to_expert_save
-          get :expert_rejection
-          put :expert_rejection_save
-          get :expert_revision
-          put :expert_revision_save
-          get :expert_acceptance_save
-        end
-      end
-    end
+    posts_routes
   end
 
-
-  
   namespace :expert_news do
     get 'censored/:post_id'  => 'posts#censored'
 
@@ -140,7 +117,6 @@ scope '/project/:project' do
           put :add_comment
           put :plus
           put :censored_comment
-
           put :plus_comment
       end
     end
@@ -162,19 +138,7 @@ scope '/project/:project' do
     end
   end
 
-  namespace :question do
-    get 'censored/:post_id'  => 'posts#censored'
 
-    resources :posts do    
-      member do
-        put :censored_comment
-
-        put :add_comment
-          put :plus
-          put :plus_comment
-      end
-    end
-  end
   
 end
 
