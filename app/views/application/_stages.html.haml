@@ -45,10 +45,10 @@
           %li.divider_vertical
 
           %li#stage_plan{class:  @project.stage_style(:estimate_posts)}
-            = link_to "/project/#{@project.id}/esimate/posts" , class:"#{@project.stage_style_link(@breadcrumbs[0].name, :estimate_posts)}" do
+            = link_to "/project/#{@project.id}/estimate/posts" , class:"#{@project.stage_style_link(@breadcrumbs[0].name, :estimate_posts)}" do
               =@project.status_title(:estimate_posts)
               %br
-              %small.text-center=t('stages.plans', count: @project.plan_post.count)
+              %small.text-center=t('stages.estimates', count: @project.estimate_posts.count)
 .row
   .col-md-12
     %ol.breadcrumb
