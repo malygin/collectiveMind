@@ -205,13 +205,11 @@ class Discontent::PostsController < PostsController
      @project = Core::Project.find(params[:project])
      @post = Discontent::Post.find(params[:id])
      @union_post = Discontent::Post.find(params[:post_id])
-     if @post.one_last_post?
-       if boss?
+     if @post.one_last_post? and boss?
          @union_post.update_attributes(status: 0, discontent_post_id: nil)
          @post.destroy
          redirect_to action: "index"
          return
-       end
      else
        @union_post.update_attributes(status: 0, discontent_post_id: nil)
        respond_to do |format|

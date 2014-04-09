@@ -1,6 +1,10 @@
 class Knowbase::Post < ActiveRecord::Base
   attr_accessible :content, :title, :stage
 
+  validates :content, presence: true
+  validates :title, presence: true
+  validates :stage, presence: true
+
   belongs_to :project, :class_name => "Core::Project"
 
   scope :stage_knowbase_order, ->(project) { where(:project_id => project).order(:stage) }

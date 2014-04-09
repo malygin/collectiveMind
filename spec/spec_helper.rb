@@ -26,6 +26,7 @@ Spork.prefork do
       DatabaseCleaner.clean
 
       @user = FactoryGirl.create :user
+      @admin = FactoryGirl.create :admin
       @project = FactoryGirl.create :core_project, :status => 1
       @aspect1 = FactoryGirl.create :aspect, project: @project, content: 'aspect 1'
       @aspect2 = FactoryGirl.create :aspect, project: @project, content: 'aspect 2'

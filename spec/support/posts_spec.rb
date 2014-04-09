@@ -9,7 +9,7 @@ shared_examples 'with mini help'   do |stage_name|
     post = Help::Post.where(stage: stage, mini: true).first
     quest= post.help_questions.first
     answer = quest.help_answers.first
-    choose("question[#{quest.id}][#{answer.id}]")
+    choose("question_#{quest.id}_#{answer.id}")
     click_button 'send'
     #first('span.label-info')
     should have_selector("h4#helpModalLabel.modal-title", visible: false)

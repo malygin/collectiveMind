@@ -1,4 +1,4 @@
-%span.h3{:id => "edit_knowbase_post_title#{@post.id}"}=@post.title
+%span.h3{:id => "edit_knowbase_post_title_#{@post.id}"}=@post.title
 %span
   -if current_user.boss?
     =link_to edit_knowbase_post_path(@project,@post),:remote => true, :id => "edit_knowbase_post_#{@post.id}" do

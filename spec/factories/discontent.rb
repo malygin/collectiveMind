@@ -8,5 +8,7 @@ FactoryGirl.define do
     sequence(:whend) { |n| "whend #{n}" }
     sequence(:whered) { |n| "whered #{n}" }
   end
-
+  factory :discontent_union, :class => 'Discontent::Post'  do
+    status 2
+  end
 end
