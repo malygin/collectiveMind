@@ -164,7 +164,7 @@ describe 'Life Tape ' do
       visit life_tape_posts_path(@project)
     end
     it 'new aspect', js: true do
-      click_link "new_aspect"
+      click_link 'new_aspect'
       should have_selector 'div#modal_aspect_view'
       fill_in 'aspect_text_area', with: 'new aspect life tape'
       expect {

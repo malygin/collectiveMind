@@ -113,10 +113,12 @@ class Core::Project < ActiveRecord::Base
         7
       when :plan_posts
         9
-
+      when :estimate_posts
+        10
 
      end
   end
+  #@todo locale
   def  status_title(status = self.status)
     case status
       when 0
@@ -135,7 +137,7 @@ class Core::Project < ActiveRecord::Base
         'голосование за концепции и рефлексия'
       when 9, :plan_posts
         'создание проектов'
-      when 10
+      when 10, :estimate_posts
         'выставление оценок'
       when 11
         'голосование за проекты'
