@@ -3,7 +3,7 @@
 class Estimate::PostsController < PostsController
 
 
-  layout 'life_tape/posts2', :only => [:new, :edit, :show]
+  #layout 'life_tape/posts2', :only => [:new, :edit, :show]
   def current_model
     Estimate::Post
   end

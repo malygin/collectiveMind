@@ -14,7 +14,7 @@
 
           %p.ftable.fline
             %span.bigtext Корректируемое несовершенство:
-          %p.ftable.fcolor=pa.discontent.show_content.html_safe
+          %p.ftable.fcolor=pa.discontent.display_content
           %p.ftable.fline
             %span.bigtext Краткое описание нововведения:
             =pa.content
@@ -271,7 +271,7 @@
   .field
     = f.label 'Оцените проект в целом '
     = f.select :all_grade, [["Отличный проект ", 0],["Хороший проект", 1], ["Удовлетворительный проект", 2], ["Плохой проект", 3]]
-  
+
 
   .actions
     = f.submit ''
