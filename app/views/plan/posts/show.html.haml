@@ -14,10 +14,10 @@
       .panel.panel-info
         -#.panel-heading=t('form.essay_notice')
         .panel-body
-          =@post.content
+          =simple_format(@post.content)
           %br
           %br
-          =@post.goal
+          =simple_format(@post.goal)
     %div.tab-pane#essay2
       %hr
       %h3.text-success=t('form.essay1')
@@ -26,7 +26,7 @@
         -#.panel-heading=t('form.plan_all_notice')
         .panel-body
           %br
-          =@post.first_step
+          =simple_format(@post.first_step)
     %div.tab-pane#plan2
       %hr
       %h3.text-success=t('form.plan_first')
@@ -35,9 +35,9 @@
         -#.panel-heading=t('form.plan_first_notice')
         .panel-body
           %br
-          =@post.plan_first
+          =simple_format(@post.plan_first)
           %br
-          =@post.plan_other
+          =simple_format(@post.plan_other)
 .col-md-4
   %h5
     .small Выберите несовершенство, кликнув по нужной вкладке:
