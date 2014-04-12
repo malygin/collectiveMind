@@ -85,7 +85,7 @@ $('.score_class').on 'click', ->
   })
 
 @activate_htmleditor= ->
-  $(".wysihtml5").each (i, elem) ->
+  @editor = $(".wysihtml5").each (i, elem) ->
     $(elem).wysihtml5
       "font-styles": true
       emphasis: true
@@ -94,6 +94,10 @@ $('.score_class').on 'click', ->
       link: true
       image: true
       color: true
+      events:
+        load: ->
+          $(".wysihtml5-sandbox").contents().find("body").on "change", ->
+            activate_button_editor()
 
 $ ->
   $("#sortable").sortable()
@@ -148,3 +152,12 @@ $(window).load ->
         return '<div>'+short_item+'</div>'
       option: (item, escape) ->
         return '<div>'+item.show_content+'</div>'
+
+@activate_button_editor = ->
+  input = $('#title-textfield')
+  editor = $('.wysihtml5').data('wysihtml5').editor
+  html = editor.getValue()
+  if input? and input.val()!=''
+    $('#send_post').removeClass('disabled')
+  else
+    $('#send_post').addClass('disabled')

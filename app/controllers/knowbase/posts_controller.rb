@@ -37,10 +37,13 @@ class Knowbase::PostsController < ApplicationController
     @post = current_model.create(params[:knowbase_post])
     @post.stage = current_model.maximum(:stage) + 1
     @post.project_id = @project.id
-    if @post.save
-      redirect_to "/project/#{@project.id}/knowbase/posts/#{@post.id}"
-    else
-      render 'new'
+
+    respond_to do |format|
+      if @post.save
+        format.html { redirect_to  "/project/#{@project.id}/knowbase/posts/#{@post.id}" }
+      else
+        format.js {render 'new'}
+      end
     end
   end
 

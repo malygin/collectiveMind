@@ -1,8 +1,8 @@
 = form_for post, :url => {:project => @project.id,  :action => post.persisted? ? 'update' : 'create'}, remote: post.persisted? ? true : false do |f|
   = render 'shared/error_messages', :object =>f.object
-  =f.text_field :title, :class => 'form-control', placeholder: 'Введите название ...', id:'title-textfield'
+  =f.text_field :title, :class => 'form-control', placeholder: 'Введите название ...', id:'title-textfield', onkeyup: "activate_button_editor();"
   %br
   %br
   =f.text_area :content, :class => 'wysihtml5 form-control', style: 'height: 500px;', placeholder: 'Введите текст ...', id:'some-textarea'
   .pull-right
-    =f.submit 'Сохранить', :id  => "send_post", class: 'btn btn-sm btn-success'
+    =f.submit 'Сохранить', :id  => "send_post", class: 'btn btn-sm btn-success disabled'
