@@ -1,37 +1,88 @@
 %div.tab-pane(id="fdis_#{pa.id}")
-  %h1=pa.name
-  %div
-  - if pa.post_aspect.discontent.status == 5
-    %p.ftable.fline
-      = select_tag "imp[#{pa.id}]", options_for_select({ 'лишнее' => '0','маловажное' => '30','важное' => '60','очень важное' => '90'  },"imp[#{pa.id}]"), :prompt => 'Выберите важность'
+  %div.panel.panel-default
+    %div.panel-body
+      -#%button.btn.btn-info.btn-sm.pull-right(data-toggle="modal" data-target="#modalStage3")
+      -#  Показать пример
+      %h5.text-infoУстраняемое несовершенство:
+      =render partial:'discontent/posts/post_short2', object: pa.discontent
+      %br
 
-  %p.ftable.fline
-    %span.bigtext Корректируемое несовершенство:
-  %p.ftable.fcolor=pa.post_aspect.discontent.show_content.html_safe
-  %p.ftable.fline
-    %span.bigtext Краткое описание нововведения:
-    =pa.content
-  .ftable.fbackPositive
-    %span.fline.bigtext A. Какие УСЛОВИЯ надо создать и поддерживать для того, чтобы это нововведение работало?
-    .task_supply=simple_format(pa.positive)
-  .ftable.fbackNegative
-    %span.fline.bigtext B. Какие НЕЖЕЛАТЕЛЬНЫЕ ПОБОЧНЫЕ ЭФФЕКТЫ могут возникнуть в связи с созданием и поддержкой этих УСЛОВИЙ?
-    .task_supply=simple_format(pa.negative)
-  .ftable.fbackControl
-    %span.fline.bigtext C. Кто и как будет контролировать создание и поддержку этих УСЛОВИЙ и предотвращать возникновение НЕЖЕЛАТЕЛЬНЫХ ПОБОЧНЫХ ЭФФЕКТОВ?
-    .task_supply=simple_format(pa.control)
-  .ftable.fback
-    %span.fline.bigtext D. Что может помешать работе ресурсов и как с этим бороться?
-    %br
-    =pa.problems
-  .ftable.fback
-    %span.fline.bigtext E. Реалистичность и практичность: предложить средства для формирования ресурсов, обосновать их доступность и эффективность
-    %br
-    =pa.reality
-  .ftable.fback
-    %span.fline.bigtext F. Какие помехи могут возникнуть в процессе реализации методов и средств, необходимых для формирования ресурсов? Как их предотвратить?
-    %br
-    =pa.problems_with_resources
+
+      #select0
+        .panel.panel-info
+          .panel-heading
+            %h5.text-success
+              %b A.*
+            %p.text-info
+              %b=t('form.novation_what')
+            .form-group.has-danger=pa.name
+            %p.text-info
+              %b=t('form.novation_how')
+            .form-group.has-danger=pa.content
+
+        .panel.panel-info
+          .panel-heading
+            %h5.text-success
+              %b B.*
+            %p.text-info
+              %b=t('form.cond')
+              .form-group.has-success=pa.positive
+            %p.text-info
+              %b=t('form.cond_res')
+              .form-group.has-success=pa.positive_r
+            %p.text-info
+              %b=t('form.cond_s')
+              .form-group.has-success=pa.positive_s
+
+
+        %hr
+        %h5.text-success
+          %b C.
+        %p.text-info
+          %b=t('form.negative')
+          .form-group.has-success=pa.negative
+        %p.text-info
+          %b=t('form.negative_res')
+          .form-group.has-success=pa.negative_r
+        %p.text-info
+          %b=t('form.negative_s')
+          .form-group.has-success=pa.negative_s
+
+
+        %hr
+        %h5.text-success
+          %b D.
+        %p.text-info
+          %b=t('form.control')
+          .form-group.has-success=pa.control
+        %p.text-info
+          %b=t('form.control_res')
+          .form-group.has-success=pa.control_r
+        %p.text-info
+          %b=t('form.control_s')
+          .form-group.has-success=pa.control_s
+
+
+
+
+        %hr
+        %h5.text-success E.
+        %p.text-info
+          %b=t('form.obstacles_bcd')
+        .form-group.has-success=pa.obstacles
+
+        %hr
+        .panel.panel-info
+          .panel-heading
+            %h5.text-success
+              %b F.*
+            %p.text-info
+              %b=t('form.problems')
+            .form-group.has-success=pa.problems
+            %p.text-info
+              %b=t('form.reality')
+            .form-group.has-success=pa.reality
+
   %br
   %b  Предположим, что будущее уже наступило и все предложенные ресурсы созданы и работают. Какова вероятность, что с их помощью несовершенство будет устранено--
   .field

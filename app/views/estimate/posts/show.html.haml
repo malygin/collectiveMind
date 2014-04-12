@@ -1,4 +1,3 @@
-= link_to 'Назад', estimate_posts_path
 -#%br
 -#- if  @post.status == 0 and boss?
 -#  = link_to 'Принять', expert_acceptance_save_estimate_post_path( @post), :confirm => 'Точно?'
@@ -11,272 +10,249 @@
 
 - if current_user ==  @post.user
   / = link_to 'Редактировать', edit_estimate_post_path( @post)
-.wholePost
-  = render 'users/user_post', :user =>  @post.user
-  .posts
-    = render 'users/user_name', :user =>  @post.user, :created_at =>  @post.created_at
-    %p
-      %b Общая оценка проекта
-      %br= simple_format( @post.content)
-    -if not  @post.user.jury?
-      Общая оценка проекта
-      %span.red_est #{ @post.score}
-      ( = #{ @post.first_c} + #{ @post.second_c} - #{ @post.third_c})
-      %br
-      1) ожидаемая эффективность всего проекта в целом
-      %span.red_est #{ @post.first_c}
-      %br
-      2) ожидаемая эффективность его первого шага
-      %span.red_est #{ @post.second_c}
-      %br
-      3) ожидаемые неприятности в связи с осуществлением проекта
-      %span.red_est #{ @post.third_c}
+  .col-md-8
 
-      %br
-      %br
-      %b Общий список несовершенств
-      %br
-      %div(id="accordion-resizer" class="ui-widget-content")
-        .accordion
-          -  @post.post_aspects.others.each_with_index do |tr, index|
-            %h1="Оценивание #{tr.plan_post_aspect.name}, - #{tr.score} "
-            %div
-              ожидаемая эффективность это задачи
-              -#%span.red_est=tr.score
-              %br
-              %b Предположим, что будущее уже наступило и все предложенные ресурсы созданы и работают. Какова вероятность, что с их помощью несовершенство будет устранено--
-              %br
-              полностью -
-              %span{:class=>css_class_estimate(tr.op1)}= estimate_trans(tr.op1)
-              %br
-              в значительной мере -
-              %span{:class=>css_class_estimate(tr.op2)}= estimate_trans(tr.op2)
-              %br
-              в небольшой мере -
-              %span{:class=>css_class_estimate(tr.op3)}= estimate_trans(tr.op3)
-              %br
-              в ничтожной  мере  -
-              %span{:class=>css_class_estimate(tr.op4)}= estimate_trans(tr.op4)
-              %br
-              %br
-              - unless tr.op == ''
-                %b Объяснение:
-                = simple_format(tr.op)
+    %div.tab-content
 
-              %br
-              %b Функционирование ресурсов потребует материальных и трудовых затрат. Какова вероятность, что эти затраты окажутся—
-              %br
-              значительными -
-              %span{:class=>css_class_estimate(tr.ozf1)}= estimate_trans(tr.ozf1)
-              %br
-              средними -
-              %span{:class=>css_class_estimate(tr.ozf2)}= estimate_trans(tr.ozf2)
-              %br
-              незначительными -
-              %span{:class=>css_class_estimate(tr.ozf3)}= estimate_trans(tr.ozf3)
-              %br
-              ничтожными -
-              %span{:class=>css_class_estimate(tr.ozf4)}= estimate_trans(tr.ozf4)
-              %br
-              %br
-              - unless tr.ozf == ''
-                %b Объяснение:
-                = simple_format(tr.ozf)
+      %div.tab-pane#plan
+        %p
+          %b Общая оценка проекта
+          %br= simple_format( @post.content)
+        -if not  @post.user.jury?
+          Общая оценка проекта
+          %span.red_est #{ @post.score}
+          ( = #{ @post.first_c} + #{ @post.second_c} - #{ @post.third_c})
+          %br
+          1) ожидаемая эффективность всего проекта в целом
+          %span.red_est #{ @post.first_c}
+          %br
+          2) ожидаемая эффективность его первого шага
+          %span.red_est #{ @post.second_c}
+          %br
+          3) ожидаемые неприятности в связи с осуществлением проекта
+          %span.red_est #{ @post.third_c}
+          %br
+          %b Общее впечатление от проекта и рекомендации по улучшению
+          = simple_format( @post.content)
+          %br
+          %bОценка проекта в целом:
+          %br
+          =estimate_trans_project(@post.all_grade)
+      -  @post.post_aspects.each_with_index do |tr, index|
+        %div.tab-pane(id="dis_#{tr.id}")
 
-              %br
+          %br
+          %b Предположим, что будущее уже наступило и все предложенные ресурсы созданы и работают. Какова вероятность, что с их помощью несовершенство будет устранено--
+          %br
+          полностью -
+          %span{:class=>css_class_estimate(tr.op1)}= estimate_trans(tr.op1)
+          %br
+          в значительной мере -
+          %span{:class=>css_class_estimate(tr.op2)}= estimate_trans(tr.op2)
+          %br
+          в небольшой мере -
+          %span{:class=>css_class_estimate(tr.op3)}= estimate_trans(tr.op3)
+          %br
+          в ничтожной  мере  -
+          %span{:class=>css_class_estimate(tr.op4)}= estimate_trans(tr.op4)
+          %br
+          %br
+          - unless tr.op == ''
+            %b Объяснение:
+            = simple_format(tr.op)
 
-              %br
-              %b Для создания ресурсов в проекте предлагаются определенные средства. Проанализируйте их и оцените, какова вероятность того, что на базе этих средств ресурсы будут созданы --
-              %br
-              в полном объеме -
-              %span{:class=>css_class_estimate(tr.on1)}= estimate_trans(tr.on1)
-              %br
-              в значительном объеме -
-              %span{:class=>css_class_estimate(tr.on2)}= estimate_trans(tr.on2)
-              %br
-              в небольшом объеме -
-              %span{:class=>css_class_estimate(tr.on3)}= estimate_trans(tr.on3)
-              %br
-              в ничтожном объеме -
-              %span{:class=>css_class_estimate(tr.on4)}= estimate_trans(tr.on4)
-              %br
-              %br
-              - unless tr.on == ''
-                %b Объяснение:
-                = simple_format(tr.on)
+          %br
+          %b Функционирование ресурсов потребует материальных и трудовых затрат. Какова вероятность, что эти затраты окажутся—
+          %br
+          значительными -
+          %span{:class=>css_class_estimate(tr.ozf1)}= estimate_trans(tr.ozf1)
+          %br
+          средними -
+          %span{:class=>css_class_estimate(tr.ozf2)}= estimate_trans(tr.ozf2)
+          %br
+          незначительными -
+          %span{:class=>css_class_estimate(tr.ozf3)}= estimate_trans(tr.ozf3)
+          %br
+          ничтожными -
+          %span{:class=>css_class_estimate(tr.ozf4)}= estimate_trans(tr.ozf4)
+          %br
+          %br
+          - unless tr.ozf == ''
+            %b Объяснение:
+            = simple_format(tr.ozf)
 
+          %br
 
-              %br
-
-              %br
-              %b  Использование этих средств потребует материальных и трудовых затрат. Какова вероятность, что эти затраты окажутся--
-              %br
-              значительными -
-              %span{:class=>css_class_estimate(tr.ozs1)}= estimate_trans(tr.ozs1)
-              %br
-              средними -
-              %span{:class=>css_class_estimate(tr.ozs2)}= estimate_trans(tr.ozs2)
-              %br
-              незначительными -
-              %span{:class=>css_class_estimate(tr.ozs3)}= estimate_trans(tr.ozs3)
-              %br
-              ничтожными -
-              %span{:class=>css_class_estimate(tr.ozs4)}= estimate_trans(tr.ozs4)
-              %br
-
-              %br
-              - unless tr.ozs == ''
-                %b Объяснение:
-                = simple_format(tr.ozs)
-
-              %p.ftable.fline
-                %span.bigtext Корректируемое несовершенство:
-              %p.ftable.fcolor=tr.plan_post_aspect.discontent.show_content.html_safe
+          %br
+          %b Для создания ресурсов в проекте предлагаются определенные средства. Проанализируйте их и оцените, какова вероятность того, что на базе этих средств ресурсы будут созданы --
+          %br
+          в полном объеме -
+          %span{:class=>css_class_estimate(tr.on1)}= estimate_trans(tr.on1)
+          %br
+          в значительном объеме -
+          %span{:class=>css_class_estimate(tr.on2)}= estimate_trans(tr.on2)
+          %br
+          в небольшом объеме -
+          %span{:class=>css_class_estimate(tr.on3)}= estimate_trans(tr.on3)
+          %br
+          в ничтожном объеме -
+          %span{:class=>css_class_estimate(tr.on4)}= estimate_trans(tr.on4)
+          %br
+          %br
+          - unless tr.on == ''
+            %b Объяснение:
+            = simple_format(tr.on)
 
 
-              %p.ftable.fline
-                %span.bigtext Краткое описание нововведения:
-                =tr.plan_post_aspect.content
-              .ftable.fbackPositive
-                %span.fline.bigtext  A. Какие УСЛОВИЯ надо создать и поддерживать для того, чтобы это нововведение работало?
-                .task_supply=simple_format(tr.plan_post_aspect.positive)
-              .ftable.fbackNegative
-                %span.fline.bigtext B. Какие НЕЖЕЛАТЕЛЬНЫЕ ПОБОЧНЫЕ ЭФФЕКТЫ могут возникнуть в связи с созданием и поддержкой этих УСЛОВИЙ?
-                .task_supply=simple_format(tr.plan_post_aspect.negative)
-              .ftable.fback
-                %span.fline.bigtext C. Что может помешать работе ресурсов и как с этим бороться?
-                %br
-                =tr.plan_post_aspect.problems
-              .ftable.fback
-                %span.fline.bigtext D. Реалистичность и практичность: предложить средства для формирования ресурсов, обосновать их доступность и эффективность
-                %br
-                =tr.plan_post_aspect.reality
+          %br
+
+          %br
+          %b  Использование этих средств потребует материальных и трудовых затрат. Какова вероятность, что эти затраты окажутся--
+          %br
+          значительными -
+          %span{:class=>css_class_estimate(tr.ozs1)}= estimate_trans(tr.ozs1)
+          %br
+          средними -
+          %span{:class=>css_class_estimate(tr.ozs2)}= estimate_trans(tr.ozs2)
+          %br
+          незначительными -
+          %span{:class=>css_class_estimate(tr.ozs3)}= estimate_trans(tr.ozs3)
+          %br
+          ничтожными -
+          %span{:class=>css_class_estimate(tr.ozs4)}= estimate_trans(tr.ozs4)
+          %br
+
+          %br
+          - unless tr.ozs == ''
+            %b Объяснение:
+            = simple_format(tr.ozs)
 
 
-      %b Оценка остальных корректировок
-      %br
-      %div(id="accordion-resizer" class="ui-widget-content")
-        .accordion
-          -  @post.post_aspects.firsts.each_with_index do |tr, index|
-            %h1="Оценивание #{tr.plan_post_first_cond.name}, - #{tr.score} "
-            %div
-              ожидаемая эффективность это задачи
-              -#%span.red_est=tr.score
-              %br
-              %b Предположим, что будущее уже наступило и все предложенные ресурсы созданы и работают. Какова вероятность, что с их помощью несовершенство будет устранено--
-              %br
-              полностью -
-              %span{:class=>css_class_estimate(tr.op1)}= estimate_trans(tr.op1)
-              %br
-              в значительной мере -
-              %span{:class=>css_class_estimate(tr.op2)}= estimate_trans(tr.op2)
-              %br
-              в небольшой мере -
-              %span{:class=>css_class_estimate(tr.op3)}= estimate_trans(tr.op3)
-              %br
-              в ничтожной  мере  -
-              %span{:class=>css_class_estimate(tr.op4)}= estimate_trans(tr.op4)
-              %br
-              %br
-              - unless tr.op == ''
-                %b Объяснение:
-                = simple_format(tr.op)
-
-              %br
-              %b Функционирование ресурсов потребует материальных и трудовых затрат. Какова вероятность, что эти затраты окажутся—
-              %br
-              значительными -
-              %span{:class=>css_class_estimate(tr.ozf1)}= estimate_trans(tr.ozf1)
-              %br
-              средними -
-              %span{:class=>css_class_estimate(tr.ozf2)}= estimate_trans(tr.ozf2)
-              %br
-              незначительными -
-              %span{:class=>css_class_estimate(tr.ozf3)}= estimate_trans(tr.ozf3)
-              %br
-              ничтожными -
-              %span{:class=>css_class_estimate(tr.ozf4)}= estimate_trans(tr.ozf4)
-              %br
-              %br
-              - unless tr.ozf == ''
-                %b Объяснение:
-                = simple_format(tr.ozf)
-
-              %br
-
-              %br
-              %b Для создания ресурсов в проекте предлагаются определенные средства. Проанализируйте их и оцените, какова вероятность того, что на базе этих средств ресурсы будут созданы --
-              %br
-              в полном объеме -
-              %span{:class=>css_class_estimate(tr.on1)}= estimate_trans(tr.on1)
-              %br
-              в значительном объеме -
-              %span{:class=>css_class_estimate(tr.on2)}= estimate_trans(tr.on2)
-              %br
-              в небольшом объеме -
-              %span{:class=>css_class_estimate(tr.on3)}= estimate_trans(tr.on3)
-              %br
-              в ничтожном объеме -
-              %span{:class=>css_class_estimate(tr.on4)}= estimate_trans(tr.on4)
-              %br
-              %br
-              - unless tr.on == ''
-                %b Объяснение:
-                = simple_format(tr.on)
-
-
-              %br
-
-              %br
-              %b  Использование этих средств потребует материальных и трудовых затрат. Какова вероятность, что эти затраты окажутся--
-              %br
-              значительными -
-              %span{:class=>css_class_estimate(tr.ozs1)}= estimate_trans(tr.ozs1)
-              %br
-              средними -
-              %span{:class=>css_class_estimate(tr.ozs2)}= estimate_trans(tr.ozs2)
-              %br
-              незначительными -
-              %span{:class=>css_class_estimate(tr.ozs3)}= estimate_trans(tr.ozs3)
-              %br
-              ничтожными -
-              %span{:class=>css_class_estimate(tr.ozs4)}= estimate_trans(tr.ozs4)
-              %br
-
-              %br
-              - unless tr.ozs == ''
-                %b Объяснение:
-                = simple_format(tr.ozs)
-
-              %p.ftable.fline
-                %span.bigtext Корректируемое несовершенство:
-              %p.ftable.fcolor=tr.plan_post_first_cond.post_aspect.discontent.show_content.html_safe
-
-
-              %p.ftable.fline
-                %span.bigtext Краткое описание нововведения:
-                =tr.plan_post_first_cond.content
-              .ftable.fbackPositive
-                %span.fline.bigtext  A. Какие УСЛОВИЯ надо создать и поддерживать для того, чтобы это нововведение работало?
-                .task_supply=simple_format(tr.plan_post_first_cond.positive)
-              .ftable.fbackNegative
-                %span.fline.bigtext B. Какие НЕЖЕЛАТЕЛЬНЫЕ ПОБОЧНЫЕ ЭФФЕКТЫ могут возникнуть в связи с созданием и поддержкой этих УСЛОВИЙ?
-                .task_supply=simple_format(tr.plan_post_first_cond.negative)
-              .ftable.fbackControl
-                %span.fline.bigtext C. Кто и как будет контролировать создание и поддержку этих УСЛОВИЙ и предотвращать возникновение НЕЖЕЛАТЕЛЬНЫХ ПОБОЧНЫХ ЭФФЕКТОВ?
-                .task_supply=simple_format(tr.plan_post_first_cond.control)
-              .ftable.fback
-                %span.fline.bigtext D. Что может помешать работе ресурсов и как с этим бороться?
-                %br
-                =tr.plan_post_first_cond.problems
-              .ftable.fback
-                %span.fline.bigtext E. Реалистичность и практичность: предложить средства для формирования ресурсов, обосновать их доступность и эффективность
-                %br
-                =tr.plan_post_first_cond.reality
-              .ftable.fback
-                %span.fline.bigtext F. Какие помехи могут возникнуть в процессе реализации методов и средств, необходимых для формирования ресурсов? Как их предотвратить?
-                %br
-                =tr.plan_post_first_cond.problems_with_resources
+      -#%b Оценка остальных корректировок
+      -#%br
+      -#%div(id="accordion-resizer" class="ui-widget-content")
+      -#  .accordion
+      -#    -  @post.post_aspects.firsts.each_with_index do |tr, index|
+      -#      %h1="Оценивание #{tr.plan_post_first_cond.name}, - #{tr.score} "
+      -#      %div
+      -#        ожидаемая эффективность это задачи
+      -#        -#%span.red_est=tr.score
+      -#        %br
+      -#        %b Предположим, что будущее уже наступило и все предложенные ресурсы созданы и работают. Какова вероятность, что с их помощью несовершенство будет устранено--
+      -#        %br
+      -#        полностью -
+      -#        %span{:class=>css_class_estimate(tr.op1)}= estimate_trans(tr.op1)
+      -#        %br
+      -#        в значительной мере -
+      -#        %span{:class=>css_class_estimate(tr.op2)}= estimate_trans(tr.op2)
+      -#        %br
+      -#        в небольшой мере -
+      -#        %span{:class=>css_class_estimate(tr.op3)}= estimate_trans(tr.op3)
+      -#        %br
+      -#        в ничтожной  мере  -
+      -#        %span{:class=>css_class_estimate(tr.op4)}= estimate_trans(tr.op4)
+      -#        %br
+      -#        %br
+      -#        - unless tr.op == ''
+      -#          %b Объяснение:
+      -#          = simple_format(tr.op)
+      -#
+      -#        %br
+      -#        %b Функционирование ресурсов потребует материальных и трудовых затрат. Какова вероятность, что эти затраты окажутся—
+      -#        %br
+      -#        значительными -
+      -#        %span{:class=>css_class_estimate(tr.ozf1)}= estimate_trans(tr.ozf1)
+      -#        %br
+      -#        средними -
+      -#        %span{:class=>css_class_estimate(tr.ozf2)}= estimate_trans(tr.ozf2)
+      -#        %br
+      -#        незначительными -
+      -#        %span{:class=>css_class_estimate(tr.ozf3)}= estimate_trans(tr.ozf3)
+      -#        %br
+      -#        ничтожными -
+      -#        %span{:class=>css_class_estimate(tr.ozf4)}= estimate_trans(tr.ozf4)
+      -#        %br
+      -#        %br
+      -#        - unless tr.ozf == ''
+      -#          %b Объяснение:
+      -#          = simple_format(tr.ozf)
+      -#
+      -#        %br
+      -#
+      -#        %br
+      -#        %b Для создания ресурсов в проекте предлагаются определенные средства. Проанализируйте их и оцените, какова вероятность того, что на базе этих средств ресурсы будут созданы --
+      -#        %br
+      -#        в полном объеме -
+      -#        %span{:class=>css_class_estimate(tr.on1)}= estimate_trans(tr.on1)
+      -#        %br
+      -#        в значительном объеме -
+      -#        %span{:class=>css_class_estimate(tr.on2)}= estimate_trans(tr.on2)
+      -#        %br
+      -#        в небольшом объеме -
+      -#        %span{:class=>css_class_estimate(tr.on3)}= estimate_trans(tr.on3)
+      -#        %br
+      -#        в ничтожном объеме -
+      -#        %span{:class=>css_class_estimate(tr.on4)}= estimate_trans(tr.on4)
+      -#        %br
+      -#        %br
+      -#        - unless tr.on == ''
+      -#          %b Объяснение:
+      -#          = simple_format(tr.on)
+      -#
+      -#
+      -#        %br
+      -#
+      -#        %br
+      -#        %b  Использование этих средств потребует материальных и трудовых затрат. Какова вероятность, что эти затраты окажутся--
+      -#        %br
+      -#        значительными -
+      -#        %span{:class=>css_class_estimate(tr.ozs1)}= estimate_trans(tr.ozs1)
+      -#        %br
+      -#        средними -
+      -#        %span{:class=>css_class_estimate(tr.ozs2)}= estimate_trans(tr.ozs2)
+      -#        %br
+      -#        незначительными -
+      -#        %span{:class=>css_class_estimate(tr.ozs3)}= estimate_trans(tr.ozs3)
+      -#        %br
+      -#        ничтожными -
+      -#        %span{:class=>css_class_estimate(tr.ozs4)}= estimate_trans(tr.ozs4)
+      -#        %br
+      -#
+      -#        %br
+      -#        - unless tr.ozs == ''
+      -#          %b Объяснение:
+      -#          = simple_format(tr.ozs)
+      -#
+      -#        %p.ftable.fline
+      -#          %span.bigtext Корректируемое несовершенство:
+      -#        %p.ftable.fcolor
+      -#          =render partial:'discontent/posts/post_short2', object: tr.plan_post_aspect.discontent
+      -#
+      -#
+      -#        %p.ftable.fline
+      -#          %span.bigtext Краткое описание нововведения:
+      -#          =tr.plan_post_first_cond.content
+      -#        .ftable.fbackPositive
+      -#          %span.fline.bigtext  A. Какие УСЛОВИЯ надо создать и поддерживать для того, чтобы это нововведение работало?
+      -#          .task_supply=simple_format(tr.plan_post_first_cond.positive)
+      -#        .ftable.fbackNegative
+      -#          %span.fline.bigtext B. Какие НЕЖЕЛАТЕЛЬНЫЕ ПОБОЧНЫЕ ЭФФЕКТЫ могут возникнуть в связи с созданием и поддержкой этих УСЛОВИЙ?
+      -#          .task_supply=simple_format(tr.plan_post_first_cond.negative)
+      -#        .ftable.fbackControl
+      -#          %span.fline.bigtext C. Кто и как будет контролировать создание и поддержку этих УСЛОВИЙ и предотвращать возникновение НЕЖЕЛАТЕЛЬНЫХ ПОБОЧНЫХ ЭФФЕКТОВ?
+      -#          .task_supply=simple_format(tr.plan_post_first_cond.control)
+      -#        .ftable.fback
+      -#          %span.fline.bigtext D. Что может помешать работе ресурсов и как с этим бороться?
+      -#          %br
+      -#          =tr.plan_post_first_cond.problems
+      -#        .ftable.fback
+      -#          %span.fline.bigtext E. Реалистичность и практичность: предложить средства для формирования ресурсов, обосновать их доступность и эффективность
+      -#          %br
+      -#          =tr.plan_post_first_cond.reality
+      -#        .ftable.fback
+      -#          %span.fline.bigtext F. Какие помехи могут возникнуть в процессе реализации методов и средств, необходимых для формирования ресурсов? Как их предотвратить?
+      -#          %br
+      -#          =tr.plan_post_first_cond.problems_with_resources
 
 
 
@@ -322,14 +298,43 @@
 
       %b Объяснение:
       = simple_format( @post.nep)
-      %br
-      %b Общее впечатление от проекта и рекомендации по улучшению
-      = simple_format( @post.content)
-      %br
-      %bОценка проекта в целом:
-      %br
-      =estimate_trans_project(@post.all_grade)
 
-    = render 'shared/post_social_bar', :post => @post
+
+  .col-md-4
+    %h5
+      .small Выберите несовершенство, кликнув по нужной вкладке:
+    %ul.nav.nav-tabs.nav-justified
+      %li.active
+        %a(href="#theall" data-toggle="tab") Образ будущ.
+      %li
+        %a(href="#thefirst" data-toggle="tab") Первый этап
+    .tab-content
+      #theall.tab-pane.fade.in.active
+        %ul.nav.nav-tabs.nav-stacked
+          -#%li
+          -#  %a.text-success(href="#plan1" data-toggle="tab" style='font-size:10px; font-weight: bold;')
+          -#    =t('form.plan')
+        -@post.post_aspects_other.each_with_index do |pa, i|
+          %li
+            %a(href="#dis_#{pa[0].id}" data-toggle="tab")
+              ="#{i+1}. #{pa[0].discontent.display_content}"
+              -#%span.text-success.glyphicon.glyphicon-ok.pull-right(class = "#{'inv_element' if @post.get_pa_by_discontent(d, :name)==''}")
+      #thefirst.tab-pane.fade
+        %ul.nav.nav-tabs.nav-stacked
+
+
+          -@post.post_aspects_other.each_with_index do |pa, i|
+            %li
+              %a(href="#fdis_#{pa[0].id}" data-toggle="tab")
+                ="#{i+1}. #{pa[0].discontent.display_content}"
+                -#%span.text-success.glyphicon.glyphicon-ok.pull-right(class = "#{'inv_element' if @post.get_pa_by_discontent(d, :name, 1)==''}")
+          %li
+            %a.text-success(href="#negative" data-toggle="tab" style='font-size:10px; font-weight: bold;')
+              Оценка негативных явлений
+          %li
+            %a.text-success(href="#plan" data-toggle="tab" style='font-size:10px; font-weight: bold;')
+              Общая оценка проекта
+
+
 
 = render 'shared/post_edit_bar', :post => @post

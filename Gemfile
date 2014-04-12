@@ -32,9 +32,9 @@ group :test do
   gem 'guard-rspec'
   #gem 'rb-inotify'
   gem 'database_cleaner'
-  gem 'selenium-webdriver'
+  gem 'selenium-webdriver','~> 2.41.0'
   gem 'webdriver-user-agent'
-  #gem 'headless'
+  gem 'headless'
 end
 
 

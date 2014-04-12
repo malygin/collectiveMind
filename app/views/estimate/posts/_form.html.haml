@@ -4,12 +4,11 @@
     %div.tab-content
 
       %div.tab-pane#plan
-        %b Цель проекта
         %br= simple_format(@plan_post.goal)
         = hidden_field_tag "post_id", @plan_post.id
 
         %label Выскажите, пожалуйста, общее впечатление от проекта и рекомендации по улучшению
-        %field= f.text_area :content, class: 'wider_area'
+        %field= f.text_area :content ,   rows: 6, style: 'width: 100%;'
         .field
           = f.label 'Оцените проект в целом '
           = f.select :all_grade, [["Отличный проект ", 0],["Хороший проект", 1], ["Удовлетворительный проект", 2], ["Плохой проект", 3]]
@@ -44,7 +43,7 @@
           = f.select :nepr4, [["невероятно", 0],["маловероятно", 1], ["вероятно", 2], ["очень вероятно", 3]]
         .field
           = f.label 'Объясните, почему вы так считаете'
-          = f.text_area :nepr
+          = f.text_area :nepr,   rows: 3, style: 'width: 100%;'
         %br
         %b Второй тип – это препятствия, возникшие в процессе создания нововведений (например, сопротивление со стороны сотрудников, привыкших работать по-старому).
         %br
@@ -64,13 +63,11 @@
           = f.select :nep4, [["невероятно", 0],["маловероятно", 1], ["вероятно", 2], ["очень вероятно", 3]]
         .field
           = f.label 'Объясните, почему вы так считаете'
-          = f.text_area :nep
+          = f.text_area :nep,   rows: 3, style: 'width: 100%;'
         %br
 
 
 
-    .actions
-      = f.submit 'Сохранить'
 
   .col-md-4
     =f.submit 'Сохранить', class: 'btn btn-success'
@@ -87,10 +84,7 @@
           -#%li
           -#  %a.text-success(href="#plan1" data-toggle="tab" style='font-size:10px; font-weight: bold;')
           -#    =t('form.plan')
-          %li
-            %a.text-success(href="#essay1" data-toggle="tab" style='font-size:10px; font-weight: bold;')
-              I)
-              =t('form.essay')
+
           -@pair_estimates2.each_with_index do |pa, i|
             %li
               %a(href="#dis_#{pa[0].id}" data-toggle="tab")
@@ -98,19 +92,19 @@
                 -#%span.text-success.glyphicon.glyphicon-ok.pull-right(class = "#{'inv_element' if @post.get_pa_by_discontent(d, :name)==''}")
       #thefirst.tab-pane.fade
         %ul.nav.nav-tabs.nav-stacked
-          %li
-            %a.text-success(href="#essay2" data-toggle="tab" style='font-size:10px; font-weight: bold;')
-              II)
-              =t('form.essay1')
-          %li
-            %a.text-success(href="#plan2" data-toggle="tab" style='font-size:10px; font-weight: bold;')
-              III)
-              =t('form.plan')
+
+
           -@pair_estimates1.each_with_index do |pa, i|
             %li
               %a(href="#fdis_#{pa[0].id}" data-toggle="tab")
                 ="#{i+1}. #{pa[0].discontent.display_content}"
                 -#%span.text-success.glyphicon.glyphicon-ok.pull-right(class = "#{'inv_element' if @post.get_pa_by_discontent(d, :name, 1)==''}")
+          %li
+            %a.text-success(href="#negative" data-toggle="tab" style='font-size:10px; font-weight: bold;')
+              Оценка негативных явлений
+          %li
+            %a.text-success(href="#plan" data-toggle="tab" style='font-size:10px; font-weight: bold;')
+              Общая оценка проекта
 
   %br
   %br
