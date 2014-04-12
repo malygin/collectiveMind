@@ -85,8 +85,7 @@ class Estimate::PostsController < PostsController
     end
 
     respond_to do |format|
-      format.html # new.html.erb
-      format.json { render json: @post }
+      format.html {render :layout => 'application_two_column'}
     end
   end
 
