@@ -66,12 +66,15 @@ class Estimate::PostsController < PostsController
     @plan_post = @post.post
     @pair_estimates1 = {}
     @plan_post.post_aspects_first.each do |p|
-      @pair_estimates1[p] = @post.post_aspects.by_plan_fc(p.id).first
+      @pair_estimates1[p] = @post.post_aspects.by_plan_pa(p.id).first
     end
 
     @pair_estimates2 = {}
     @plan_post.post_aspects_other.each do |p|
       @pair_estimates2[p] = @post.post_aspects.by_plan_pa(p.id).first
+    end
+    respond_to do |format|
+      format.html {render :layout => 'application_two_column'}
     end
   end
 

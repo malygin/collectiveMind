@@ -15,7 +15,10 @@ class Estimate::Post < ActiveRecord::Base
   #end
 
   has_many :post_aspects_other, :foreign_key => 'post_id', :class_name => 'Estimate::PostAspect',
-           :conditions =>  {:first_stage => :false}
+           :conditions =>  {:first_stage => false}
+  has_many :post_aspects_first, :foreign_key => 'post_id', :class_name => 'Estimate::PostAspect',
+           :conditions =>  {:first_stage => true}
+  has_many :post_aspects_all, :foreign_key => 'post_id', :class_name => 'Estimate::PostAspect'
 
   
 
