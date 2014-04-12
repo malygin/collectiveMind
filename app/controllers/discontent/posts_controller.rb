@@ -230,6 +230,10 @@ class Discontent::PostsController < PostsController
     def status_post
       @project = Core::Project.find(params[:project])
       @post = Discontent::Post.find(params[:id])
+      @type = params[:type_field]
+      if @post.post_notes(@type.to_i).size == 0
+        @post.update_attributes(column_for_type_field(@type.to_i) => 't')
+      end
       respond_to do |format|
         format.js
       end
@@ -251,20 +255,26 @@ class Discontent::PostsController < PostsController
       @post_note.type_field = params[:type_field]
       @post_note.user_id = current_user.id
       @type = params[:type_field]
-      # @post_note.project = @project
+      if @post.post_notes(@type.to_i).size == 0
+        @post.update_attributes(column_for_type_field(@type.to_i) => 'f')
+      end
       respond_to do |format|
         if @post_note.save
           format.js
         else
-          #format.js {render :action => "new"}
           render "post_note_new"
         end
       end
     end
-    def post_note_edit
 
-    end
-    def post_note_update
-
+    def post_note_destroy
+      @project = Core::Project.find(params[:project])
+      @post = Discontent::Post.find(params[:id])
+      @type = params[:type_field]
+      @post_note = Discontent::CommentNote.find(params[:note_id])
+      @post_note.destroy if boss?
+      respond_to do |format|
+        format.js
+      end
     end
 end

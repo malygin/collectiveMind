@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140409222335) do
+ActiveRecord::Schema.define(:version => 20140412130241) do
 
   create_table "answers", :force => true do |t|
     t.string   "text"
@@ -308,6 +308,9 @@ ActiveRecord::Schema.define(:version => 20140409222335) do
     t.boolean  "censored",           :default => false
     t.integer  "discontent_post_id"
     t.boolean  "important"
+    t.boolean  "status_content"
+    t.boolean  "status_whered"
+    t.boolean  "status_whend"
   end
 
   add_index "discontent_posts", ["aspect_id"], :name => "index_discontent_posts_on_aspect_id"
@@ -913,6 +916,9 @@ ActiveRecord::Schema.define(:version => 20140409222335) do
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end
+
+# Could not dump table "projects" because of following StandardError
+#   Unknown type 'serial' for column 'id'
 
   create_table "question_comment_votings", :force => true do |t|
     t.integer  "user_id"

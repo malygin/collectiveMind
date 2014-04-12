@@ -1,0 +1,3 @@
+$("#post_note_#{@post_note.id}").animate({height: 0, opacity:0}, 1000, function() { $(this).remove(); });
+-if !@post.note_size?(@type.to_i)
+  $("ul#where_form_#{@post.id}_#{@type.to_i}").removeClass('border_note');

@@ -153,3 +153,9 @@ $(window).load ->
     $('#send_post').removeClass('disabled')
   else
     $('#send_post').addClass('disabled')
+
+$ ->
+  $('button').popover
+    html: true
+    placement: 'auto'
+    trigger: 'hover'

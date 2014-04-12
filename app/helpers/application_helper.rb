@@ -139,3 +139,15 @@ def discontent_style_name(dis)
 		end
 	end
 end
+def column_for_type_field(type_fd)
+  case type_fd
+    when 1
+      'status_content'
+    when 2
+      'status_whered'
+    when 3
+      'status_whend'
+    else
+      null
+  end
+end
