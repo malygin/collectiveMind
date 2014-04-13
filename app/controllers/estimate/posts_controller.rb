@@ -214,7 +214,7 @@ class Estimate::PostsController < PostsController
     @project = Core::Project.find(params[:project])
     plan_post = Plan::Post.find(params[:post_id])
     @estimate_post.post_aspects=[]
-      plan_post.post_aspects.each do |tr|
+      plan_post.post_aspects_other.each do |tr|
         est_tr = Estimate::PostAspect.new
         est_tr.first_stage = false
         est_tr.plan_post_aspect = tr
@@ -248,10 +248,10 @@ class Estimate::PostsController < PostsController
         @estimate_post.post_aspects << est_tr
       end
 
-      plan_post.post_first_conds.each do |tr|
+      plan_post.post_aspects_first.each do |tr|
         est_tr = Estimate::PostAspect.new
         est_tr.first_stage = true
-        est_tr.plan_post_first_cond = tr
+        est_tr.plan_post_aspect = tr
         op = params[:op]['1'][tr.id.to_s]
         est_tr.op1 = op['1']
         est_tr.op2 = op['2']

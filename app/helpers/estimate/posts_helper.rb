@@ -30,13 +30,13 @@ module Estimate::PostsHelper
 	def css_class_estimate(e)
 		case e
       when 0
-        'red_est'
+        'text-danger'
 			when 1
-				'red_est'
+				'text-danger'
 			when 2
-				'orange_est'
+				'text-warning'
 			else
-				'green_est'
+				'text-success'
 		end
 	end
 end
