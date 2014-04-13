@@ -21,10 +21,10 @@
                 %b A.*
               %p.text-info
                 %b=t('form.novation_what')
-              .form-group.has-danger=pa.name
+              .form-group.has-danger=simple_format(pa.name)
               %p.text-info
                 %b=t('form.novation_how')
-              .form-group.has-danger=pa.content
+              .form-group.has-danger=simple_format(pa.content)
 
           .panel.panel-info
             .panel-heading
@@ -32,13 +32,13 @@
                 %b B.*
               %p.text-info
                 %b=t('form.cond')
-                .form-group.has-success=pa.positive
+                .form-group.has-success=simple_format(pa.positive)
               %p.text-info
                 %b=t('form.cond_res')
-                .form-group.has-success=pa.positive_r
+                .form-group.has-success=simple_format(pa.positive_r)
               %p.text-info
                 %b=t('form.cond_s')
-                .form-group.has-success=pa.positive_s
+                .form-group.has-success=simple_format(pa.positive_s)
 
 
           %hr
@@ -46,13 +46,13 @@
             %b C.
           %p.text-info
             %b=t('form.negative')
-            .form-group.has-success=pa.negative
+            .form-group.has-success=simple_format(pa.negative)
           %p.text-info
             %b=t('form.negative_res')
-            .form-group.has-success=pa.negative_r
+            .form-group.has-success=simple_format(pa.negative_r)
           %p.text-info
             %b=t('form.negative_s')
-            .form-group.has-success=pa.negative_s
+            .form-group.has-success=simple_format(pa.negative_s)
 
 
           %hr
@@ -60,13 +60,13 @@
             %b D.
           %p.text-info
             %b=t('form.control')
-            .form-group.has-success=pa.control
+            .form-group.has-success=simple_format(pa.control)
           %p.text-info
             %b=t('form.control_res')
-            .form-group.has-success=pa.control_r
+            .form-group.has-success=simple_format(pa.control_r)
           %p.text-info
             %b=t('form.control_s')
-            .form-group.has-success=pa.control_s
+            .form-group.has-success=simple_format(pa.control_s)
 
 
 
@@ -75,7 +75,7 @@
           %h5.text-success E.
           %p.text-info
             %b=t('form.obstacles_bcd')
-          .form-group.has-success=pa.obstacles
+          .form-group.has-success=simple_format(pa.obstacles)
 
           %hr
           .panel.panel-info
@@ -84,7 +84,7 @@
                 %b F.*
               %p.text-info
                 %b=t('form.problems')
-              .form-group.has-success=pa.problems
+              .form-group.has-success=simple_format(pa.problems)
               %p.text-info
                 %b=t('form.reality')
-              .form-group.has-success=pa.reality
+              .form-group.has-success=simple_format(pa.reality)
