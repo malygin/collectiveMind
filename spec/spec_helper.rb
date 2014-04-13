@@ -6,6 +6,7 @@ require File.expand_path('../../config/environment', __FILE__)
 Dir[Rails.root.join('spec/support/**/*.rb')].each { |f| require f }
 
 require 'rspec/rails'
+require 'headless'
 
 require 'rspec/autorun'
 require 'capybara/rspec'
@@ -24,6 +25,7 @@ Spork.prefork do
 
       DatabaseCleaner.start
       DatabaseCleaner.clean
+      Headless.new(display: 100, reuse: true, destroy_on_exit: false).start
 
       @user = FactoryGirl.create :user
       @admin = FactoryGirl.create :admin
