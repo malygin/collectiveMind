@@ -31,10 +31,10 @@ describe 'Discontents ' do
         let(:stage){2}
       end
 
-      it_behaves_like 'likable post' do
-        let(:voting_model) { Discontent::PostVoting }
-        let(:model_path) { discontent_posts_path(@project) }
-      end
+      #it_behaves_like 'likable post' do
+      #  let(:voting_model) { Discontent::PostVoting }
+      #  let(:model_path) { discontent_posts_path(@project) }
+      #end
 
       it_behaves_like 'filterable post'
 

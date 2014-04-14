@@ -47,10 +47,10 @@ describe 'Life Tape ' do
       it {should have_selector('li#stage_plan.disabled')}
       it {should have_selector('li#stage_concept.disabled')}
 
-      it_behaves_like 'likable post' do
-        let(:voting_model) { LifeTape::PostVoting }
-        let(:model_path) { life_tape_posts_path(@project) }
-      end
+      #it_behaves_like 'likable post' do
+      #  let(:voting_model) { LifeTape::PostVoting }
+      #  let(:model_path) { life_tape_posts_path(@project) }
+      #end
 
       it_behaves_like 'filterable post'
 
