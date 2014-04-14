@@ -4,7 +4,7 @@
 %small#filter_posts
     = render 'shared/filter_posts', project: @project.id, folder: @folder
 
-- if signed_in?
+- if signed_in? and boss?
     = link_to '+ Добавить новую тему для обсуждения', '#', id: 'add_record', onClick: 'get_life_tape_form(); return false;', class: 'btn btn-sm btn-success'
     %br
 %br

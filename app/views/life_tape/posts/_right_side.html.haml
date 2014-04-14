@@ -1,16 +1,7 @@
-- if boss?
-    .panel.panel-info
-        .panel-heading Панель Администратора
-        .panel-body
-            -if @project.status == 1
-                =link_to 'Начать голосование',  next_stage_core_project_path(@project), id: 'change_stage'
-            -if @project.status == 2
-                =link_to 'Вернуться к началу процедуры',  pr_stage_core_project_path(@project), id: 'change_stage'
-                %br
-                =link_to 'Начать сбор недовольств',  next_stage_core_project_path(@project), id: 'change_stage'
 
 
-= render 'shared/discussed_panel', post_star: @post_star, post_dis: @post_dis
+
+-#= render 'shared/discussed_panel', post_star: @post_star, post_dis: @post_dis
 
 - unless @aspects.empty?
     .panel.panel-default

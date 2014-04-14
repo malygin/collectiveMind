@@ -24,7 +24,7 @@ end
 
   def index
 
-    if @project.status == 2 and ((@project.stage1.to_i - current_user.voted_aspects.size) != 0)
+    if @project.status == 2 and ((@project.stage1.to_i - current_user.voted_aspects.by_project(@project).size) != 0)
       redirect_to action: "vote_list"
       return
     end
@@ -52,8 +52,8 @@ end
 
     @posts = voting_model.scope_vote_top(@project.id,params[:revers])
 
-    @number_v = @project.get_free_votes_for(current_user, :life_tape)
-    if @number_v == 0
+    @number_v = @project.get_free_votes_for(current_user, :life_tape, @project)
+    if @number_v == 0  or  @project.status !=2
       redirect_to action: "index"
       return
     end

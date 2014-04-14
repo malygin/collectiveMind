@@ -1,16 +1,15 @@
 %h3 Голосование за самые актуальные аспекты
 
 -#.success=link_to 'Вы также можете оставить свое мнение о прошедшей стадии или почитать другие', essay_posts_path(@project, @project.status), :id => 'essay_list'
-%br
-%br
+
 - if boss?
-  %b
-  проголосовало
-  =@voted_people
-  из
-  =@all_people
-  Отдано голосов
-  =@votes
+  -#%b
+  -#проголосовало
+  -#=@voted_people
+  -#из
+  -#=@all_people
+  -#Отдано голосов
+  -#=@votes
   .pull-right
     Показана сортировка,
     =link_to "по умолчанию", {:action => :vote_list },:remote => true, class: "vote_class", id: "vote_all"
