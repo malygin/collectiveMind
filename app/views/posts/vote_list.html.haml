@@ -25,7 +25,7 @@
       %b#count_vote=@number_v
 
 
-  #vote_container.col-md-12
+  #vote_container
     = render :partial => 'shared/post_for_vote', :collection => @posts,  :locals => { :path_for_voting => @path_for_voting, :count_voted => @number_v, :votes => @votes}
 - else
   %b Спасибо за участие в голосовании!
