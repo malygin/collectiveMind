@@ -149,7 +149,8 @@ describe 'Life Tape ' do
         expect {
           click_link "destroy_comment_#{@comment.id}"
           page.driver.browser.switch_to.alert.accept
-          sleep 1.5
+          #page.driver.browser.switch_to.alert.accept
+
           should_not have_selector("div#comment_#{@comment.id}")
         }.to change(LifeTape::Comment, :count).by(-1)
       end
@@ -159,7 +160,7 @@ describe 'Life Tape ' do
   context 'work with aspects ' do
     before :all do
       @project.update_attribute(:status, 1)
-      sign_out
+      #sign_out
     end
     before do
       sign_in @admin
