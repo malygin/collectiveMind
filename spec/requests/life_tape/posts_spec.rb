@@ -58,7 +58,7 @@ describe 'Life Tape ' do
         check("aspect_#{@aspect1.id}")
         #click_button('filter-aspect')
         #@todo - bad code ajax response waiting
-        #first('span.label-info')
+        first('span.label-info')
         should_not have_selector('span.label-info', text:'aspect 2')
       end
 
@@ -155,14 +155,17 @@ describe 'Life Tape ' do
       end
     end
   end
-  context 'aspects for life type' do
+
+  context 'work with aspects ' do
     before :all do
       @project.update_attribute(:status, 1)
+      sign_out
     end
     before do
       sign_in @admin
       visit life_tape_posts_path(@project)
     end
+
     it 'new aspect', js: true do
       click_link 'new_aspect'
       should have_selector 'div#modal_aspect_view'

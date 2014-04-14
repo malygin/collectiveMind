@@ -31,17 +31,17 @@ shared_examples 'add and like comment'   do |voting|
     should have_content 'some text for comment'
   end
 
-  it 'like comment only one time', js:true do
-    comment = @post.comments.first
-    expect {
-      click_link "plus_comment_#{comment.id}"
-      should  have_selector("span#plus_counter_comment_#{comment.id}")
-      should have_selector("a#plus_comment_#{comment.id}.disabled")
-    }.to change(voting_model, :count).by(1)
-    visit model_path
-    should_not have_selector("a#plus_comment_#{comment.id}")
-    should_not have_selector("a#minus_comment_#{comment.id}")
-  end
+  #it 'like comment only one time', js:true do
+  #  comment = @post.comments.first
+  #  expect {
+  #    click_link "plus_comment_#{comment.id}"
+  #    should  have_selector("span#plus_counter_comment_#{comment.id}")
+  #    should have_selector("a#plus_comment_#{comment.id}.disabled")
+  #  }.to change(voting_model, :count).by(1)
+  #  visit model_path
+  #  should_not have_selector("a#plus_comment_#{comment.id}")
+  #  should_not have_selector("a#minus_comment_#{comment.id}")
+  #end
 
 end
 
@@ -65,7 +65,7 @@ shared_examples 'filterable post'   do
     check("aspect_#{@aspect1.id}")
     #click_button('filter-aspect')
     #@todo - bad code ajax response waiting
-    #first('span.label-info')
+    first('span.label-info')
     should_not have_selector('span.label-info', text:'aspect 2')
   end
 
