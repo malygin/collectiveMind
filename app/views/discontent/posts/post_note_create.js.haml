@@ -8,3 +8,6 @@ $('#where_form_#{@post.id}_#{@type}').append(
 $('#where_form_#{@post.id}_#{@type}').addClass('border_note');
 -if @post.send(column_for_type_field(@type.to_i)) == false
   $("##{id_for_type_field(@type.to_i)}_#{@post.id}").removeClass('label-g label-success').addClass('label-danger');
+
+$('#content_dispost_#{@post.id}_#{@type}').removeClass('disabled');
+$('#post_note_#{@post_note.id}').effect("highlight", {color: '#f5cecd'}, 1000);

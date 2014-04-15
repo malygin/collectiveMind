@@ -1,5 +1,6 @@
-= form_for form_post_note, :html => {:class => 'new_or_edit', :id => "note_for_post_#{@post.id}_#{@type}"}, remote: true, :url => {:project => @project.id, :type_field => @type, :action => form_post_note.persisted? ? 'post_note_update' : 'post_note_create'}, :method => :put do |f|
+= form_for form_post_note, :html => {:class => 'new_or_edit', :id => "note_for_post_#{@post.id}_#{@type}",style: 'height: 0px;display:none;'}, remote: true, :url => {:project => @project.id, :type_field => @type, :action => form_post_note.persisted? ? 'post_note_update' : 'post_note_create'}, :method => :put do |f|
   = render 'shared/error_messages', :object =>f.object
-  =f.text_area :content, :class => 'form-control', style: 'height: 70px;', placeholder: 'Ваш комментарий', id:'edit_post_note_text_area'
+  =f.text_area :content, :class => 'form-control', style: 'height: 40px;', placeholder: 'Ваш комментарий', id:'edit_post_note_text_area'
   .pull-right
-    =f.submit 'Отправить', :id  => "send_post_#{@post.id}", class: 'btn btn-sm btn-success', style: 'margin-left: 20px;'
+    =f.submit 'Отправить', :id  => "send_post_#{@post.id}", class: 'btn btn-xs btn-success', style: 'margin-left: 20px;'
+    %button.btn.btn-danger.btn-xs(type="button" onclick="reset_post_note_form(#{@post.id},#{@type}); return false;" ) Отменить

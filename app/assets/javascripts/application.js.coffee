@@ -159,3 +159,7 @@ $ ->
     html: true
     placement: 'auto'
     trigger: 'hover'
+
+@reset_post_note_form= (post,type)->
+  $('#note_for_post_'+post+'_'+type).remove();
+  $('#content_dispost_'+post+'_'+type).removeClass('disabled');

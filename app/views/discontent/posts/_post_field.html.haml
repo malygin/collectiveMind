@@ -9,12 +9,12 @@
       %li{:id => "li_id_#{dp.id}"}=dp.content
 -else
   -if boss?
-    =link_to({:action => :post_note_new, :id => post_field.id, :type_field => type_fd},:remote => true,:method => :put, :id => "content_dispost_#{post_field.id}", :class => "note_text") do
+    =link_to({:action => :post_note_new, :id => post_field.id, :type_field => type_fd},:remote => true,:method => :put, :id => "content_dispost_#{post_field.id}_#{type_fd}", :class => "note_text") do
       %span.h55(id="#{id_for_type_field(type_fd)}_content_#{post_field.id}")=post_field.content
   -else
     %span.h55(id="#{id_for_type_field(type_fd)}_content_#{post_field.id}")=post_field.content
 -if params[:view] == "table" and post_field.note_size?(type_fd)
-  %br
+  %ul{:id => "where_form_#{post_field.id}_#{type_fd}", :style => "margin-bottom:0 !important;"}
   %button.btn.btn-default.btn-xs{ "data-toggle" => "popover","data-content" => render_post_notes(post_field,type_fd), type: "button"} Замечания
   %br
 -else
