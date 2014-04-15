@@ -28,14 +28,14 @@ class Plan::PostsController < PostsController
     @news = ExpertNews::Post.first  
     @status = params[:status]
     @aspects = Discontent::Aspect.where(:project_id => @project)
-    add_breadcrumb I18n.t('stages.plan'), concept_posts_path(@project)
+    add_breadcrumb I18n.t('stages.plan'), plan_posts_path(@project)
 
 
   end
 
 
   def index
-    @posts = current_model.where(:project_id => @project, :status => 0).paginate(:page => params[:page])
+    @posts = current_model.where(:project_id => @project, :status => 0).order('created_at DESC').paginate(:page => params[:page])
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @posts }
@@ -82,7 +82,7 @@ class Plan::PostsController < PostsController
 
     respond_to do |format|
       if @plan_post.save!
-         current_user.journals.build(:type_event=>'plan_post_save', :body=>@plan_post.id).save!
+         current_user.journals.build(:type_event=>'plan_post_save', :body=>@plan_post.id,   :project => @project).save!
         format.html { redirect_to   plan_post_path(project: @project, id: @plan_post) }
         format.json { render json: @plan_post, status: :created, location: @plan_post }
       else
@@ -138,7 +138,7 @@ class Plan::PostsController < PostsController
 
     respond_to do |format|
         @plan_post.save
-        current_user.journals.build(:type_event=>'plan_post_update', :body=>@plan_post.id).save!
+        current_user.journals.build(:type_event=>'plan_post_update', :body=>@plan_post.id,   :project => @project).save!
         format.html { redirect_to plan_post_path(project: @project, id: @plan_post) }
       end
 
@@ -176,7 +176,15 @@ def get_cond
   respond_to do |format|
     format.js
   end
+  end
+
+def get_cond1
+  @cond = Concept::PostAspect.find(params[:pa])
+  respond_to do |format|
+    format.js
+  end
 end
+
 def add_first_cond
   @post = Plan::Post.find(params[:id])
   @cond2 = Plan::PostAspect.find(params[:cond_id])

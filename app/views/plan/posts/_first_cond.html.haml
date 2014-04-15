@@ -14,7 +14,7 @@
 
         %hr
         %span.h4.text-success Выберите нововведение:
-        %select.form-control(onchange="load_discontent_for_cond(#{discontent.id});" id="select_#{discontent.id}")
+        %select.form-control(onchange="load_discontent_for_cond1(#{discontent.id});" id="select1_#{discontent.id}")
           %option#option0(value="option_null")
           - discontent.concept_conditions.each do |cd|
             %option#option1(value="#{cd.id}")=cd.name
@@ -33,12 +33,12 @@
                 =t('form.novation_what')
                 %a.btn.btn-success.btn-xs{type: "button", "data-toggle"=>"modal", "data-target"=>"#prompt1", style:'font-size:10px;'} Пояснения
               .form-group.has-danger
-                =text_area_tag "pa1[#{discontent.id}][name]", @post.get_pa_by_discontent(discontent, :name), :class => "concept_cond", rows: 4, style: 'width: 100%;'
+                =text_area_tag "pa1[#{discontent.id}][name]", @post.get_pa_by_discontent(discontent, :name,1), :class => "concept_cond", rows: 4, style: 'width: 100%;'
               %p.text-info
                 =t('form.novation_how')
                 %a.btn.btn-success.btn-xs{type: "button", "data-toggle"=>"modal", "data-target"=>"#prompt2", style:'font-size:10px;'} Пояснения
               .form-group.has-danger
-                =text_area_tag "pa1[#{discontent.id}][content]", @post.get_pa_by_discontent(discontent, :content), :class => "concept_cond", rows: 4, style: 'width: 100%;'
+                =text_area_tag "pa1[#{discontent.id}][content]", @post.get_pa_by_discontent(discontent, :content,1), :class => "concept_cond", rows: 4, style: 'width: 100%;'
 
 
           .panel.panel-info
@@ -49,17 +49,17 @@
                 =t('form.cond')
                 %a.btn.btn-success.btn-xs{type: "button", "data-toggle"=>"modal", "data-target"=>"#prompt3", style:'font-size:10px;'} Пояснения
                 .form-group.has-success
-                  =text_area_tag "pa1[#{discontent.id}][positive]", @post.get_pa_by_discontent(discontent, :positive), :class => "concept_cond", rows: 4, style: 'width: 100%;'
+                  =text_area_tag "pa1[#{discontent.id}][positive]", @post.get_pa_by_discontent(discontent, :positive,1), :class => "concept_cond", rows: 4, style: 'width: 100%;'
               %p.text-info
                 =t('form.cond_res')
                 %a.btn.btn-success.btn-xs{type: "button", "data-toggle"=>"modal", "data-target"=>"#prompt4", style:'font-size:10px;'} Пояснения
                 .form-group.has-success
-                  =text_area_tag "pa1[#{discontent.id}][positive_r]", @post.get_pa_by_discontent(discontent, :positive_r), :class => "concept_cond", rows: 4, style: 'width: 100%;'
+                  =text_area_tag "pa1[#{discontent.id}][positive_r]", @post.get_pa_by_discontent(discontent, :positive_r,1), :class => "concept_cond", rows: 4, style: 'width: 100%;'
               %p.text-info
                 =t('form.cond_s')
                 %a.btn.btn-success.btn-xs{type: "button", "data-toggle"=>"modal", "data-target"=>"#prompt12", style:'font-size:10px;'} Пояснения
                 .form-group.has-success
-                  =text_area_tag "pa1[#{discontent.id}][positive_s]", @post.get_pa_by_discontent(discontent, :positive_s), :class => "concept_cond", rows: 4, style: 'width: 100%;'
+                  =text_area_tag "pa1[#{discontent.id}][positive_s]", @post.get_pa_by_discontent(discontent, :positive_s,1), :class => "concept_cond", rows: 4, style: 'width: 100%;'
 
           %hr
           %h5.text-success
@@ -68,17 +68,17 @@
             =t('form.negative')
             %a.btn.btn-success.btn-xs{type: "button", "data-toggle"=>"modal", "data-target"=>"#prompt7", style:'font-size:10px;'} Пояснения
             .form-group.has-success
-              =text_area_tag "pa1[#{discontent.id}][negative]", @post.get_pa_by_discontent(discontent, :negative), :class => "concept_cond", rows: 4, style: 'width: 100%;'
+              =text_area_tag "pa1[#{discontent.id}][negative]", @post.get_pa_by_discontent(discontent, :negative, 1), :class => "concept_cond", rows: 4, style: 'width: 100%;'
           %p.text-info
             =t('form.negative_res')
             %a.btn.btn-success.btn-xs{type: "button", "data-toggle"=>"modal", "data-target"=>"#prompt8", style:'font-size:10px;'} Пояснения
             .form-group.has-success
-              =text_area_tag "pa1[#{discontent.id}][negative_r]", @post.get_pa_by_discontent(discontent, :negative_r), :class => "concept_cond", rows: 4, style: 'width: 100%;'
+              =text_area_tag "pa1[#{discontent.id}][negative_r]", @post.get_pa_by_discontent(discontent, :negative_r, 1), :class => "concept_cond", rows: 4, style: 'width: 100%;'
           %p.text-info
             =t('form.negative_s')
             %a.btn.btn-success.btn-xs{type: "button", "data-toggle"=>"modal", "data-target"=>"#prompt13", style:'font-size:10px;'} Пояснения
             .form-group.has-success
-              =text_area_tag "pa1[#{discontent.id}][negative_s]", @post.get_pa_by_discontent(discontent, :negative_s), :class => "concept_cond", rows: 4, style: 'width: 100%;'
+              =text_area_tag "pa1[#{discontent.id}][negative_s]", @post.get_pa_by_discontent(discontent, :negative_s, 1), :class => "concept_cond", rows: 4, style: 'width: 100%;'
 
           %hr
           %h5.text-success
@@ -87,18 +87,18 @@
             =t('form.control')
             %a.btn.btn-success.btn-xs{type: "button", "data-toggle"=>"modal", "data-target"=>"#prompt10", style:'font-size:10px;'} Пояснения
             .form-group.has-success
-              =text_area_tag "pa1[#{discontent.id}][control]", @post.get_pa_by_discontent(discontent, :control), :class => "concept_cond", rows: 4, style: 'width: 100%;'
+              =text_area_tag "pa1[#{discontent.id}][control]", @post.get_pa_by_discontent(discontent, :control, 1), :class => "concept_cond", rows: 4, style: 'width: 100%;'
           %p.text-info
             =t('form.control_res')
             %a.btn.btn-success.btn-xs{type: "button", "data-toggle"=>"modal", "data-target"=>"#prompt11", style:'font-size:10px;'} Пояснения
             .form-group.has-success
-              =text_area_tag "pa1[#{discontent.id}][control_r]", @post.get_pa_by_discontent(discontent, :control_r), :class => "concept_cond", rows: 4, style: 'width: 100%;'
+              =text_area_tag "pa1[#{discontent.id}][control_r]", @post.get_pa_by_discontent(discontent, :control_r, 1), :class => "concept_cond", rows: 4, style: 'width: 100%;'
 
           %p.text-info
             =t('form.control_s')
             %a.btn.btn-success.btn-xs{type: "button", "data-toggle"=>"modal", "data-target"=>"#prompt14", style:'font-size:10px;'} Пояснения
             .form-group.has-success
-              =text_area_tag "pa1[#{discontent.id}][control_s]", @post.get_pa_by_discontent(discontent, :control_s), :class => "concept_cond", rows: 4, style: 'width: 100%;'
+              =text_area_tag "pa1[#{discontent.id}][control_s]", @post.get_pa_by_discontent(discontent, :control_s, 1), :class => "concept_cond", rows: 4, style: 'width: 100%;'
 
 
 
@@ -108,7 +108,7 @@
             =t('form.obstacles_bcd')
             %a.btn.btn-success.btn-xs{type: "button", "data-toggle"=>"modal", "data-target"=>"#prompt9", style:'font-size:10px;'} Пояснения
           .form-group.has-success
-            =text_area_tag "pa1[#{discontent.id}][obstacles]", @post.get_pa_by_discontent(discontent, :obstacles), :class => "concept_cond", rows: 4, style: 'width: 100%;'
+            =text_area_tag "pa1[#{discontent.id}][obstacles]", @post.get_pa_by_discontent(discontent, :obstacles, 1), :class => "concept_cond", rows: 4, style: 'width: 100%;'
 
           %hr
           .panel.panel-info
@@ -119,10 +119,10 @@
                 =t('form.problems')
                 %a.btn.btn-success.btn-xs{type: "button", "data-toggle"=>"modal", "data-target"=>"#prompt5", style:'font-size:10px;'} Пояснения
               .form-group.has-success
-                =text_area_tag "pa1[#{discontent.id}][problems]", @post.get_pa_by_discontent(discontent, :problems), :class => "concept_cond", rows: 4, style: 'width: 100%;'
+                =text_area_tag "pa1[#{discontent.id}][problems]", @post.get_pa_by_discontent(discontent, :problems, 1), :class => "concept_cond", rows: 4, style: 'width: 100%;'
 
               %p.text-info
                 =t('form.reality')
                 %a.btn.btn-success.btn-xs{type: "button", "data-toggle"=>"modal", "data-target"=>"#prompt6", style:'font-size:10px;'} Пояснения
               .form-group.has-success
-                =text_area_tag "pa1[#{discontent.id}][reality]",@post.get_pa_by_discontent(discontent, :reality), :class => "concept_cond", rows: 4, style: 'width: 100%;'
+                =text_area_tag "pa1[#{discontent.id}][reality]",@post.get_pa_by_discontent(discontent, :reality, 1), :class => "concept_cond", rows: 4, style: 'width: 100%;'

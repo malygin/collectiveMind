@@ -3,7 +3,7 @@
 class Estimate::PostsController < PostsController
 
 
-  layout 'life_tape/posts2', :only => [:new, :edit, :show]
+  #layout 'life_tape/posts2', :only => [:new, :edit, :show]
   def current_model
     Estimate::Post
   end
@@ -19,8 +19,23 @@ class Estimate::PostsController < PostsController
     Plan::Post
   end
 
+
+  def prepare_data
+    @project = Core::Project.find(params[:project])
+    @journals = Journal.events_for_user_feed @project.id
+    @news = ExpertNews::Post.first
+    @my_jounals = Journal.count_events_for_my_feed(@project.id, current_user)
+    @mini_help = Help::Post.where(stage:4, mini: true).first
+
+    @status = params[:status]
+    @aspects = Discontent::Aspect.where(:project_id => @project)
+    add_breadcrumb I18n.t('stages.estimate'), estimate_posts_path(@project)
+
+  end
+
+
   def index
-    if @project.status == 9
+    if @project.status == 11
       #puts  current_user.plan_post_votings
       @number_v = @project.stage5 - current_user.plan_post_votings.size
       @votes = @project.stage5
@@ -31,7 +46,7 @@ class Estimate::PostsController < PostsController
         @votes = ActiveRecord::Base.connection.execute("select count(*) as r from (select  v.user_id from plan_votings v  left join   plan_posts asp on (v.plan_post_id = asp.id) ) as dm").first["r"].to_i
       end
     end
-    @posts = Plan::Post.where(:project_id => @project, :status => 2).paginate(:page => params[:page])
+    @posts = Plan::Post.where(:project_id => @project, :status => 0).paginate(:page => params[:page])
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @posts }
@@ -75,14 +90,6 @@ class Estimate::PostsController < PostsController
     end
   end
 
-  def prepare_data
-    @project = Core::Project.find(params[:project])
-    @journals = Journal.events_for_user_feed @project.id
-    @news = ExpertNews::Post.first
-    @status = params[:status]
-    @aspects = Discontent::Aspect.where(:project_id => @project)
-
-  end
   def create
     @estimate_post = Estimate::Post.new(params[:estimate_post])
     @project = Core::Project.find(params[:project])

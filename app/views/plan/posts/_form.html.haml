@@ -2,33 +2,34 @@
 
 = form_for  @post, :url => {:project => @project.id, :action => @post.persisted? ? 'update' : 'create'},   :html => { :class => 'new_or_edit' }do |f|
   .col-md-8
-    .media
-      .media-body
-        %span.h5.text-success=t('form.essay')
-        %span
-          %a(href="#" style="text-decoration=none;")
-        %br
-        =f.text_area :content, rows: 10, style: 'width: 100%;'
-
-    %br
-    %br
     %div.tab-content
       -@discontents.each do |d|
         =render partial: 'resolve_discontent', locals: { discontent: d }
       -@discontents.each do |d|
         =render partial: 'first_cond', locals: { discontent: d }
 
-      %div.tab-pane#plan1
-        %hr
-        %h3.text-success=t('form.plan_all')
+
+      %div.tab-pane#essay2
+        %h3.text-success=t('form.essay1')
         %br
         .panel.panel-info
-          .panel-heading=t('form.plan_all_notice')
+          .panel-heading=t('form.essay1_notice')
           .panel-body
             %br
-            =f.text_area :plan_other, rows: 10, style: 'width: 100%;'
+            =f.text_area :first_step, rows: 10, style: 'width: 100%;'
+      %div.tab-pane#essay1
+        %h3.text-success=t('form.essay')
+        %br
+        .panel.panel-info
+          .panel-heading=t('form.essay_notice')
+          .panel-body
+            =f.text_area :content, rows: 10, style: 'width: 100%;'
+            %br
+            =t('form.essay_notice2')
+            %br
+            =f.text_area :goal, rows: 5, style: 'width: 100%;'
+
       %div.tab-pane#plan2
-        %hr
         %h3.text-success=t('form.plan_first')
         %br
         .panel.panel-info
@@ -38,33 +39,59 @@
 
           .panel-body
             %br
-            =f.text_area :plan_first,  rows: 30, style: 'width: 100%;'
+            =f.text_area :plan_first,  rows: 10, style: 'width: 100%;'
+        %h3.text-success=t('form.plan_all')
+        %br
+        .panel.panel-info
+          .panel-heading
+            =t('form.plan_all_notice')
+            %a.btn.btn-success.btn-xs{type: "button", "data-toggle"=>"modal", "data-target"=>"#prompt15", style:'font-size:10px;'} Пояснения
+
+          .panel-body
+            %br
+            =f.text_area :plan_other,  rows: 10, style: 'width: 100%;' , placeholder: 'Дальнейшие действия'
+
+
   .col-md-4
     =f.submit 'Сохранить', class: 'btn btn-success'
     %h5
       .small Выберите несовершенство, кликнув по нужной вкладке:
     %ul.nav.nav-tabs.nav-justified
       %li.active
-        %a(href="#theall" data-toggle="tab") Образ
+        %a(href="#theall" data-toggle="tab") Образ будущ.
       %li
         %a(href="#thefirst" data-toggle="tab") Первый этап
     .tab-content
       #theall.tab-pane.fade.in.active
         %ul.nav.nav-tabs.nav-stacked
+          -#%li
+          -#  %a.text-success(href="#plan1" data-toggle="tab" style='font-size:10px; font-weight: bold;')
+          -#    =t('form.plan')
           %li
-            %a.text-success(href="#plan1" data-toggle="tab" style='font-size:10px; font-weight: bold;')
-              =t('form.plan')
+            %a.text-success(href="#essay1" data-toggle="tab" style='font-size:10px; font-weight: bold;')
+              I)
+              =t('form.essay')
           -@discontents.each_with_index do |d,i|
             %li
-              %a(href="#dis_#{d.id}" data-toggle="tab")="#{i+1}. #{d.display_content}"
+              %a(href="#dis_#{d.id}" data-toggle="tab")
+                ="#{i+1}. #{d.display_content}"
+                %span.text-success.glyphicon.glyphicon-ok.pull-right(class = "#{'inv_element' if @post.get_pa_by_discontent(d, :name)==''}")
       #thefirst.tab-pane.fade
         %ul.nav.nav-tabs.nav-stacked
           %li
+            %a.text-success(href="#essay2" data-toggle="tab" style='font-size:10px; font-weight: bold;')
+              II)
+              =t('form.essay1')
+          %li
             %a.text-success(href="#plan2" data-toggle="tab" style='font-size:10px; font-weight: bold;')
+              III)
               =t('form.plan')
           -@discontents.each_with_index do |d,i|
             %li
-              %a(href="#fdis_#{d.id}" data-toggle="tab")="#{i+1}. #{d.display_content}"
+              %a(href="#fdis_#{d.id}" data-toggle="tab")
+                ="#{i+1}. #{d.display_content}"
+                %span.text-success.glyphicon.glyphicon-ok.pull-right(class = "#{'inv_element' if @post.get_pa_by_discontent(d, :name, 1)==''}")
+
   %br
   %br
   %br
