@@ -178,13 +178,16 @@ describe 'Life Tape ' do
       should have_selector 'div#modal_aspect_view'
       fill_in 'aspect_text_area', with: 'new aspect life tape'
       expect {
-      click_button "send_post"
-      should have_content 'new aspect life tape'
+        click_button "send_post"
+        should have_content 'new aspect life tape'
+        Rails.logger.info page.html
       }.to change(Discontent::Aspect, :count).by(1)
     end
     it 'edit aspect', js: true do
       click_link "edit_aspect_#{@aspect1.id}"
       should have_selector('div#modal_aspect_view', visible: true)
+      Rails.logger.info page.html
+
       should have_selector('#aspect_text_area', 'aspect 1')
       fill_in 'aspect_text_area', with: 'update aspect life tape'
       click_button "send_post"
