@@ -55,6 +55,7 @@ describe 'Life Tape ' do
       it_behaves_like 'filterable post'
 
       it 'show  only one aspect', js: true do
+        Rails.logger.info page.html
         check("aspect_#{@aspect1.id}")
         #click_button('filter-aspect')
         #@todo - bad code ajax response waiting
@@ -160,6 +161,11 @@ describe 'Life Tape ' do
   context 'work with aspects ' do
     before :all do
       @project.update_attribute(:status, 1)
+      post = Help::Post.where(stage: 1, mini: true).first
+      quest= post.help_questions.first
+      answer = quest.help_answers.first
+      @admin.help_users_answerses.build(answer_id: answer.id)
+      @admin.save
       #sign_out
     end
     before do
