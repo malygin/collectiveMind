@@ -32,9 +32,9 @@ describe 'Life Tape ' do
     context 'visit post lists' do
       before { visit life_tape_posts_path(@project)}
 
-      it_behaves_like 'with mini help' do
-        let(:stage){1}
-      end
+      #it_behaves_like 'with mini help' do
+      #  let(:stage){1}
+      #end
 
 
       it {should have_content('life tape post for project')}
@@ -69,14 +69,14 @@ describe 'Life Tape ' do
         should_not have_content 'low raiting post'
       end
 
-      it 'add post', js: true do
-        click_link 'add_record'
-        fill_in 'new_life_tape', with: 'some text for new life tape'
-        click_button 'send_post'
-        first('span.label-info')
-        should have_content 'some text for new life tape'
-
-      end
+      #it 'add post', js: true do
+      #  click_link 'add_record'
+      #  fill_in 'new_life_tape', with: 'some text for new life tape'
+      #  click_button 'send_post'
+      #  first('span.label-info')
+      #  should have_content 'some text for new life tape'
+      #
+      #end
 
     end
 

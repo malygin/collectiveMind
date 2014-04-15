@@ -27,9 +27,9 @@ describe 'Discontents ' do
       it {should have_selector('li#stage_plan.disabled')}
       it {should have_selector('li#stage_concept.disabled')}
 
-      it_behaves_like 'with mini help' do
-        let(:stage){2}
-      end
+      #it_behaves_like 'with mini help' do
+      #  let(:stage){2}
+      #end
 
       #it_behaves_like 'likable post' do
       #  let(:voting_model) { Discontent::PostVoting }
