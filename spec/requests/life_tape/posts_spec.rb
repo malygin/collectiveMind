@@ -176,13 +176,15 @@ describe 'Life Tape ' do
     it 'new aspect', js: true do
       click_link 'new_aspect'
       should have_selector 'div#modal_aspect_view'
+      Rails.logger.info page.html
+
       fill_in 'aspect_text_area', with: 'new aspect life tape'
       expect {
         click_button "send_post"
         should have_content 'new aspect life tape'
-        Rails.logger.info page.html
       }.to change(Discontent::Aspect, :count).by(1)
     end
+
     it 'edit aspect', js: true do
       click_link "edit_aspect_#{@aspect1.id}"
       should have_selector('div#modal_aspect_view', visible: true)
@@ -198,7 +200,7 @@ describe 'Life Tape ' do
       expect {
         click_link "destroy_aspect_#{@aspect1.id}"
         page.driver.browser.switch_to.alert.accept
-        sleep 1.5
+        #sleep 1.5
         should_not have_selector("div#aspect_checkbox_#{@aspect1.id}")
       }.to change(Discontent::Aspect, :count).by(-1)
     end
