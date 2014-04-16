@@ -3,7 +3,7 @@
 class Estimate::PostsController < PostsController
 
 
-  #layout 'life_tape/posts2', :only => [:new, :edit, :show]
+  layout 'life_tape/posts2', :only => [:new, :edit, :show]
   def current_model
     Estimate::Post
   end
@@ -19,23 +19,8 @@ class Estimate::PostsController < PostsController
     Plan::Post
   end
 
-
-  def prepare_data
-    @project = Core::Project.find(params[:project])
-    @journals = Journal.events_for_user_feed @project.id
-    @news = ExpertNews::Post.first
-    @my_jounals = Journal.count_events_for_my_feed(@project.id, current_user)
-    @mini_help = Help::Post.where(stage:5, mini: true).first
-
-    @status = params[:status]
-    @aspects = Discontent::Aspect.where(:project_id => @project)
-    add_breadcrumb I18n.t('stages.estimate'), estimate_posts_path(@project)
-
-  end
-
-
   def index
-    if @project.status == 11
+    if @project.status == 9
       #puts  current_user.plan_post_votings
       @number_v = @project.stage5 - current_user.plan_post_votings.size
       @votes = @project.stage5
@@ -46,35 +31,25 @@ class Estimate::PostsController < PostsController
         @votes = ActiveRecord::Base.connection.execute("select count(*) as r from (select  v.user_id from plan_votings v  left join   plan_posts asp on (v.plan_post_id = asp.id) ) as dm").first["r"].to_i
       end
     end
-    @posts = Plan::Post.where(:project_id => @project, :status => 0).paginate(:page => params[:page])
+    @posts = Plan::Post.where(:project_id => @project, :status => 2).paginate(:page => params[:page])
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @posts }
     end
+  end
 
-  end
-  def show
-    @post = Estimate::Post.find(params[:id])
-    add_breadcrumb 'Просмотр записи', polymorphic_path(@post, :project => @project.id)
-    @comment = comment_model.new
-    @comments = @post.comments.paginate(:page => params[:page], :per_page => 30)
-    render 'show' , :layout => 'application_two_column'
-  end
 
   def edit
     @post = Estimate::Post.find(params[:id])
     @plan_post = @post.post
     @pair_estimates1 = {}
-    @plan_post.post_aspects_first.each do |p|
-      @pair_estimates1[p] = @post.post_aspects.by_plan_pa(p.id).first
+    @plan_post.post_first_conds.each do |p|
+      @pair_estimates1[p] = @post.post_aspects.by_plan_fc(p.id).first
     end
 
     @pair_estimates2 = {}
-    @plan_post.post_aspects_other.each do |p|
+    @plan_post.post_aspects.each do |p|
       @pair_estimates2[p] = @post.post_aspects.by_plan_pa(p.id).first
-    end
-    respond_to do |format|
-      format.html {render :layout => 'application_two_column'}
     end
   end
 
@@ -85,20 +60,29 @@ class Estimate::PostsController < PostsController
 
 
     @pair_estimates1 = {}
-    @plan_post.post_aspects_first.each do |p|
+    @plan_post.post_first_conds.each do |p|
       @pair_estimates1[p] = Estimate::PostAspect.new
     end
 
     @pair_estimates2 = {}
-    @plan_post.post_aspects_other.each do |p|
+    @plan_post.post_aspects.each do |p|
       @pair_estimates2[p] = Estimate::PostAspect.new
     end
 
     respond_to do |format|
-      format.html {render :layout => 'application_two_column'}
+      format.html # new.html.erb
+      format.json { render json: @post }
     end
   end
 
+  def prepare_data
+    @project = Core::Project.find(params[:project])
+    @journals = Journal.events_for_user_feed @project.id
+    @news = ExpertNews::Post.first
+    @status = params[:status]
+    @aspects = Discontent::Aspect.where(:project_id => @project)
+
+  end
   def create
     @estimate_post = Estimate::Post.new(params[:estimate_post])
     @project = Core::Project.find(params[:project])
@@ -119,7 +103,7 @@ class Estimate::PostsController < PostsController
     @estimate_post.post_aspects=[]
     if not jury?
 
-        plan_post.post_aspects_other.each do |tr|
+        plan_post.post_aspects.each do |tr|
           est_tr = Estimate::PostAspect.new
           est_tr.first_stage = false
           est_tr.plan_post_aspect = tr
@@ -153,10 +137,10 @@ class Estimate::PostsController < PostsController
           @estimate_post.post_aspects << est_tr
         end
 
-      plan_post.post_aspects_first.each do |tr|
+      plan_post.post_first_conds.each do |tr|
           est_tr = Estimate::PostAspect.new
           est_tr.first_stage = true
-          est_tr.plan_post_aspect = tr
+          est_tr.plan_post_first_cond = tr
           op = params[:op]['1'][tr.id.to_s]
           est_tr.op1 = op['1']
           est_tr.op2 = op['2']
@@ -196,7 +180,7 @@ class Estimate::PostsController < PostsController
       if @estimate_post.save
         current_user.journals.build(:type_event=>'estimate_post_save', :body=>@estimate_post.id).save!
 
-        format.html { redirect_to  action: "index"  }
+        format.html { redirect_to  action: "index" , notice: 'Оценка добавлена' }
         format.json { render json: @estimate_post, status: :created, location: @estimate_post }
       else
         format.html { render action: "new" }
@@ -214,7 +198,7 @@ class Estimate::PostsController < PostsController
     @project = Core::Project.find(params[:project])
     plan_post = Plan::Post.find(params[:post_id])
     @estimate_post.post_aspects=[]
-      plan_post.post_aspects_other.each do |tr|
+      plan_post.post_aspects.each do |tr|
         est_tr = Estimate::PostAspect.new
         est_tr.first_stage = false
         est_tr.plan_post_aspect = tr
@@ -248,10 +232,10 @@ class Estimate::PostsController < PostsController
         @estimate_post.post_aspects << est_tr
       end
 
-      plan_post.post_aspects_first.each do |tr|
+      plan_post.post_first_conds.each do |tr|
         est_tr = Estimate::PostAspect.new
         est_tr.first_stage = true
-        est_tr.plan_post_aspect = tr
+        est_tr.plan_post_first_cond = tr
         op = params[:op]['1'][tr.id.to_s]
         est_tr.op1 = op['1']
         est_tr.op2 = op['2']

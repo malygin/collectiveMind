@@ -2,12 +2,13 @@
 
 class Discontent::Post < ActiveRecord::Base
   include BasePost
-  attr_accessible :whend, :whered, :aspect_id, :replace_id, :aspect, :style, :discontent_post_id, :important
+  attr_accessible :whend, :whered, :aspect_id, :replace_id, :aspect, :style, :discontent_post_id, :important, :status_content, :status_whered, :status_whend
   belongs_to :aspect
   #has_many :childs, :class_name => 'Discontent::Post', :foreign_key => 'replace_id'
   #belongs_to :post, :class_name => 'Discontent::Post', :foreign_key => 'replace_id'
   belongs_to :discontent_post
   has_many :discontent_posts, :class_name => 'Discontent::Post', :foreign_key => 'discontent_post_id'
+  has_many :discontent_comment_notes, :class_name => 'Discontent::CommentNote'
 
   has_many :concept_conditions, :class_name => 'Concept::PostAspect', :foreign_key => 'discontent_aspect_id'
   has_many :plan_conditions, :class_name => 'Plan::PostAspect', :foreign_key => 'discontent_aspect_id'
@@ -32,7 +33,9 @@ class Discontent::Post < ActiveRecord::Base
   #scope :ready_for_post, lambda {  where(:status => 0).where("created_at < ?", 2.day.ago) }
   #scope :not_ready_for_post, lambda {  where(:status => 0).where("created_at > ?", 2.day.ago) }
 
-
+  def post_notes(type_field)
+    self.discontent_comment_notes.by_type(type_field)
+  end
 
   def voted(user)
     self.voted_users.where(:id => user)
@@ -76,6 +79,9 @@ class Discontent::Post < ActiveRecord::Base
 
   def one_last_post?
     discontent_posts.size < 2
+  end
+  def note_size?(type_fd)
+    self.post_notes(type_fd).size > 0
   end
 
 end

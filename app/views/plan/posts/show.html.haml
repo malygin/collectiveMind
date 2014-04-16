@@ -1,7 +1,15 @@
 
 .col-md-8
-
-
+  .media
+    .media-body
+      %span.h5.text-success Эссе по всему проекту
+      %span
+        %a(href="#" style="text-decoration=none;")
+          -#%i.glyphicon.glyphicon-pencil
+      %br
+      =@post.content
+  %br
+  %br
   %div.tab-content
     -@post.post_aspects_other.each do |pa|
       =render partial: 'resolve_discontent_show', locals: { pa: pa }
@@ -9,38 +17,24 @@
     -@post.post_aspects_first.each do |pa|
       =render partial: 'first_cond_show', locals: { pa: pa }
 
-    %div.tab-pane#essay1
-      %h3.text-success=t('form.essay')
-      .panel.panel-info
-        -#.panel-heading=t('form.essay_notice')
-        .panel-body
-
-          =simple_format(@post.content)
-          %br
-          %br
-          =simple_format(@post.goal)
-    %div.tab-pane#essay2
+    %div.tab-pane#plan1
       %hr
-      %h3.text-success=t('form.essay1')
+      %h3.text-success=t('form.plan_all')
       %br
       .panel.panel-info
-        -#.panel-heading=t('form.plan_all_notice')
+        .panel-heading=t('form.plan_all_notice')
         .panel-body
           %br
-
-          =simple_format(@post.first_step)
+          =@post.plan_other
     %div.tab-pane#plan2
       %hr
       %h3.text-success=t('form.plan_first')
       %br
       .panel.panel-info
-        -#.panel-heading=t('form.plan_first_notice')
+        .panel-heading=t('form.plan_first_notice')
         .panel-body
           %br
-
-          =simple_format(@post.plan_first)
-          %br
-          =simple_format(@post.plan_other)
+          =@post.plan_first
 .col-md-4
   %h5
     .small Выберите несовершенство, кликнув по нужной вкладке:
@@ -53,33 +47,21 @@
     #theall.tab-pane.fade.in.active
       %ul.nav.nav-tabs.nav-stacked
         %li
-          %a.text-success(href="#essay1" data-toggle="tab" style='font-size:10px; font-weight: bold;')
-            I)
-            =t('form.essay')
+          %a.text-success(href="#plan1" data-toggle="tab" style='font-size:10px; font-weight: bold;')
+            =t('form.plan')
         -@post.post_aspects_other.each_with_index do |d,i|
           %li
-            %a(href="#dis_#{d.discontent.id}" data-toggle="tab")
-              ="#{i+1}. #{d.discontent.display_content}"
-              %span.text-success.glyphicon.glyphicon-ok.pull-right(class = "#{'inv_element' if d.name==''}")
+            %a(href="#dis_#{d.discontent.id}" data-toggle="tab")="#{i+1}. #{d.discontent.display_content}"
 
 
     #thefirst.tab-pane.fade
       %ul.nav.nav-tabs.nav-stacked
         %li
-          %a.text-success(href="#essay2" data-toggle="tab" style='font-size:10px; font-weight: bold;')
-            II)
-            =t('form.essay1')
-        %li
           %a.text-success(href="#plan2" data-toggle="tab" style='font-size:10px; font-weight: bold;')
-            III)
             =t('form.plan')
         -@post.post_aspects_first.each_with_index do |d,i|
-          - if d.name!= ''
-            %li
-              %a(href="#fdis_#{d.discontent.id}" data-toggle="tab")
-                ="#{i+1}. #{d.discontent.display_content}"
-                -#%span.text-success.glyphicon.glyphicon-ok.pull-right(class = "#{'inv_element' if d.name==''}")
-
+          %li
+            %a(href="#fdis_#{d.discontent.id}" data-toggle="tab")="#{i+1}. #{d.discontent.display_content}"
 
 .row
   .col-md-12

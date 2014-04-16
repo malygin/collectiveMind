@@ -19,10 +19,11 @@
                 %b A.*
               %p.text-info
                 %b=t('form.novation_what')
-              .form-group.has-danger=simple_format(pa.name)
+              .form-group.has-danger=pa.name
               %p.text-info
                 %b=t('form.novation_how')
-              .form-group.has-danger=simple_format(pa.content)
+                %a.btn.btn-success.btn-xs{type: "button", "data-toggle"=>"modal", "data-target"=>"#prompt2", style:'font-size:10px;'} Пояснения
+              .form-group.has-danger=pa.content
 
 
           .panel.panel-info
@@ -31,13 +32,13 @@
                 %b B.*
               %p.text-info
                 %b=t('form.cond')
-                .form-group.has-success=simple_format(pa.positive)
+                .form-group.has-success=pa.positive
               %p.text-info
                 %b=t('form.cond_res')
-                .form-group.has-success=simple_format(pa.positive_r)
+                .form-group.has-success=pa.positive_r
               %p.text-info
                 %b=t('form.cond_s')
-                .form-group.has-success=simple_format(pa.positive_s)
+                .form-group.has-success=pa.positive_s
 
 
           %hr
@@ -45,20 +46,20 @@
             %b C.
           %p.text-info
             %b=t('form.negative')
-            .form-group.has-success=simple_format(pa.negative)
+            .form-group.has-success=pa.negative
           %p.text-info
             %b=t('form.negative_res')
-            .form-group.has-success=simple_format(pa.negative_r)
+            .form-group.has-success=pa.negative_r
           %p.text-info
             %b=t('form.negative_s')
-            .form-group.has-success=simple_format(pa.negative_s)
+            .form-group.has-success=pa.negative_s
 
           %hr
           %h5.text-success D.
           %p.text-info
             %b=t('form.obstacles_bcd')
           .form-group.has-success
-            =simple_format(pa.obstacles)
+            =pa.obstacles
 
           .panel.panel-info
             .panel-heading
@@ -66,7 +67,7 @@
                 %b E.*
               %p.text-info
                 %b=t('form.problems')
-              .form-group.has-success=simple_format(pa.problems)
+              .form-group.has-success=pa.problems
               %p.text-info
                 %b=t('form.reality')
-              .form-group.has-success=simple_format(pa.reality)
+              .form-group.has-success=pa.reality

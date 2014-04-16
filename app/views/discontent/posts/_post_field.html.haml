@@ -1,0 +1,30 @@
+-if boss?
+  =link_to({:action => :status_post, :id => post_field.id, :type_field => type_fd},:remote => true,:method => :put, :id => "label_dispost_#{post_field.id}",:class => "note_text") do
+    %span.label(class= "#{class_for_type_field(post_field,type_fd)}" id="#{id_for_type_field(type_fd)}_#{post_field.id}")=name_for_type_field(type_fd)
+-else
+  %span.label(class= "#{class_for_type_field(post_field,type_fd)}" id="#{id_for_type_field(type_fd)}_#{post_field.id}")=name_for_type_field(type_fd)
+- if post_field.status == 2 or post_field.status == 4
+  %ul(id="post_content_#{post_field.id}" style="margin-left:-20px;" )
+    -post_field.discontent_posts.each do |dp|
+      %li{:id => "li_id_#{dp.id}"}=dp.content
+-else
+  -if boss?
+    =link_to({:action => :post_note_new, :id => post_field.id, :type_field => type_fd},:remote => true,:method => :put, :id => "content_dispost_#{post_field.id}_#{type_fd}", :class => "note_text") do
+      %span.h55(id="#{id_for_type_field(type_fd)}_content_#{post_field.id}")=post_field.content
+  -else
+    %span.h55(id="#{id_for_type_field(type_fd)}_content_#{post_field.id}")=post_field.content
+
+-#-if params[:view] == "table" and post_field.note_size?(type_fd)
+-#  %ul{:id => "where_form_#{post_field.id}_#{type_fd}", :style => "margin-bottom:0 !important;"}
+-#  %button.btn.btn-default.btn-xs{ "data-toggle" => "popover","data-content" => render_post_notes(post_field,type_fd), type: "button"} Замечания
+-#  %br
+-#-else
+%ul{:id => "where_form_#{post_field.id}_#{type_fd}", :class => "#{'border_note' if post_field.note_size?(type_fd) }", :style => "margin-bottom:0 !important;"}
+  -post_field.post_notes(type_fd).each do |dpn|
+    %div{:id => "post_note_#{dpn.id}"}
+      -if boss?
+        =link_to({:action => :post_note_destroy, :id => post_field.id,:note_id => dpn.id, :type_field => type_fd},:remote => true,:method => :delete, :confirm => 'Удалить замечание?',:id => "destroy_post_note_#{dpn.id}") do
+          %span{:class=>"glyphicon glyphicon-remove text-danger pull-right", :style=>"cursor:pointer;text-decoration:none;font-size:15px;"}
+      %li{:id => "li_note_#{dpn.id}"}=dpn.content
+
+

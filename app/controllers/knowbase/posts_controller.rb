@@ -20,9 +20,12 @@ class Knowbase::PostsController < ApplicationController
 
     @stages = current_model.stage_knowbase_order(@project.id)
     @post = current_model.min_stage_knowbase_post(@project.id).first
-    add_breadcrumb  @post.title, knowbase_post_path(@project, @post.id)
-    render 'show'
-
+    if @post.nil?
+      redirect_to  polymorphic_path(@project.redirect_to_current_stage)
+    else
+      add_breadcrumb  @post.title, knowbase_post_path(@project, @post.id)
+      render 'show'
+    end
   end
 
   def new
