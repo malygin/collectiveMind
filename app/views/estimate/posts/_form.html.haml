@@ -4,7 +4,10 @@
     %div.tab-content
 
       %div.tab-pane#plan
-        %br= simple_format(@plan_post.goal)
+        %br
+        = simple_format(@plan_post.content)
+        %brs
+        = simple_format(@plan_post.goal)
         = hidden_field_tag "post_id", @plan_post.id
 
         %label Выскажите, пожалуйста, общее впечатление от проекта и рекомендации по улучшению
