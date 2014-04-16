@@ -38,7 +38,7 @@ describe 'Life Tape ' do
 
 
       it {should have_content('life tape post for project')}
-      it {should have_selector("form#aspects_list input[type='checkbox']", count: 6)}
+      it {should have_selector("form#aspects_list input[type='checkbox']", count: 7)}
       it {should have_selector('div#posts div.media', count: 20)}
       it {should have_selector('ol.breadcrumb li', text:I18n.t('stages.life_tape'))}
 
@@ -109,6 +109,7 @@ describe 'Life Tape ' do
       end
 
       it 'vote only 5 times', js: true do
+        LifeTape::Voiting.delete_all
         @aspects.each do |asp|
            click_link "vote_#{asp.id}"
         end

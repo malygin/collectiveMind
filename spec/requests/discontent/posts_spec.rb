@@ -57,7 +57,7 @@ describe 'Discontents ' do
       end
 
       it 'auto complete for where and when', js: true do
-          click_link 'when_where_accordion'
+          #click_link 'when_where_accordion'
           fill_in 'discontent_post_whend', with: 'when'
           execute_script %Q{ $('#discontent_post_whend').trigger("focus") }
           execute_script %Q{ $('#discontent_post_whend').trigger("keydown") }
