@@ -98,7 +98,7 @@ describe 'Life Tape ' do
       before { visit life_tape_posts_path(@project)}
 
       it 'show all aspects for voting' do
-          should have_selector("h3.text-danger", text: I18n.t('voting.have_votes'))
+          #should have_selector("h3.text-danger", text: I18n.t('voting.have_votes'))
           should have_selector(".vote-button", count: @project.aspects.count)
       end
 
@@ -149,7 +149,8 @@ describe 'Life Tape ' do
         #page.driver.browser.switch_to.alert.accept
         expect {
           click_link "destroy_comment_#{@comment.id}"
-          page.driver.browser.switch_to.alert.accept
+          page.driver.accept_js_confirms!
+          sleep 2
           #page.driver.browser.switch_to.alert.accept
 
           should_not have_selector("div#comment_#{@comment.id}")
@@ -198,8 +199,8 @@ describe 'Life Tape ' do
     it 'delete aspect', js: true do
       expect {
         click_link "destroy_aspect_#{@aspect1.id}"
-        page.driver.browser.switch_to.alert.accept
-        #sleep 1.5
+        page.driver.accept_js_confirms!
+        sleep 2
         should_not have_selector("div#aspect_checkbox_#{@aspect1.id}")
       }.to change(Discontent::Aspect, :count).by(-1)
     end

@@ -20,7 +20,7 @@ Spork.prefork do
     config.use_transactional_fixtures = false
     #config.color_enabled = true
     config.include Capybara::DSL
-
+    Capybara.javascript_driver = :webkit
     config.before(:all) do
 
       DatabaseCleaner.start

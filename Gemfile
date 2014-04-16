@@ -11,7 +11,6 @@ group :development, :test do
   gem 'quiet_assets'
   gem 'grizzled-rails-logger'
   gem 'rspec-rails'
-
 end
 
 group :production do
@@ -34,6 +33,8 @@ group :test do
   gem 'database_cleaner'
   gem 'selenium-webdriver','~> 2.41.0'
   gem 'webdriver-user-agent'
+  gem "capybara-webkit"
+
   gem 'headless'
 end
 
