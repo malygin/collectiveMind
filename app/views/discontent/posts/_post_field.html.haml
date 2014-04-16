@@ -13,17 +13,18 @@
       %span.h55(id="#{id_for_type_field(type_fd)}_content_#{post_field.id}")=post_field.content
   -else
     %span.h55(id="#{id_for_type_field(type_fd)}_content_#{post_field.id}")=post_field.content
--if params[:view] == "table" and post_field.note_size?(type_fd)
-  %ul{:id => "where_form_#{post_field.id}_#{type_fd}", :style => "margin-bottom:0 !important;"}
-  %button.btn.btn-default.btn-xs{ "data-toggle" => "popover","data-content" => render_post_notes(post_field,type_fd), type: "button"} Замечания
-  %br
--else
-  %ul{:id => "where_form_#{post_field.id}_#{type_fd}", :class => "#{'border_note' if post_field.note_size?(type_fd) }", :style => "margin-bottom:0 !important;"}
-    -post_field.post_notes(type_fd).each do |dpn|
-      %div{:id => "post_note_#{dpn.id}"}
-        -if boss?
-          =link_to({:action => :post_note_destroy, :id => post_field.id,:note_id => dpn.id, :type_field => type_fd},:remote => true,:method => :delete, :confirm => 'Удалить замечание?',:id => "destroy_post_note_#{dpn.id}") do
-            %span{:class=>"glyphicon glyphicon-remove text-danger pull-right", :style=>"cursor:pointer;text-decoration:none;font-size:15px;"}
-        %li{:id => "li_note_#{dpn.id}"}=dpn.content
+
+-#-if params[:view] == "table" and post_field.note_size?(type_fd)
+-#  %ul{:id => "where_form_#{post_field.id}_#{type_fd}", :style => "margin-bottom:0 !important;"}
+-#  %button.btn.btn-default.btn-xs{ "data-toggle" => "popover","data-content" => render_post_notes(post_field,type_fd), type: "button"} Замечания
+-#  %br
+-#-else
+%ul{:id => "where_form_#{post_field.id}_#{type_fd}", :class => "#{'border_note' if post_field.note_size?(type_fd) }", :style => "margin-bottom:0 !important;"}
+  -post_field.post_notes(type_fd).each do |dpn|
+    %div{:id => "post_note_#{dpn.id}"}
+      -if boss?
+        =link_to({:action => :post_note_destroy, :id => post_field.id,:note_id => dpn.id, :type_field => type_fd},:remote => true,:method => :delete, :confirm => 'Удалить замечание?',:id => "destroy_post_note_#{dpn.id}") do
+          %span{:class=>"glyphicon glyphicon-remove text-danger pull-right", :style=>"cursor:pointer;text-decoration:none;font-size:15px;"}
+      %li{:id => "li_note_#{dpn.id}"}=dpn.content
 
 

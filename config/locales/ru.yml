@@ -33,7 +33,7 @@ ru:
       other: '%{count} проектов'
     estimates:
       one: '1 оценка'
-      few: '%{count} оенки'
+      few: '%{count} оценки'
       other: '%{count} оценок'
   form:
     novation_what: 'Что новое, исправляющее несовершенство, появится в будущем?'
