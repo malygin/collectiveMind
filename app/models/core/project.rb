@@ -99,6 +99,8 @@ class Core::Project < ActiveRecord::Base
        return self.status == 7
      elsif p.instance_of? Plan::Post
        return self.status == 9
+     elsif p.instance_of? Estimate::Post
+       return self.status == 10
 
      end
     return false

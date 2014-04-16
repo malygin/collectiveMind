@@ -10,10 +10,7 @@
 
   / = link_to 'Редактировать', edit_estimate_post_path( @post)
 .col-md-8
-
   %div.tab-content
-
-
     -  @post.post_aspects_other.each_with_index do |tr, index|
       %div.tab-pane(id="dis_#{tr.plan_post_aspect.id}")
         ожидаемая эффективность это задачи:

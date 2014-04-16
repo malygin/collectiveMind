@@ -34,7 +34,7 @@ class Estimate::PostsController < PostsController
   end
 
 
-  def index
+  def лindex
     if @project.status == 11
       #puts  current_user.plan_post_votings
       @number_v = @project.stage5 - current_user.plan_post_votings.size
