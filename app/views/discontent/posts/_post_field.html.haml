@@ -10,7 +10,7 @@
       %li{:id => "li_id_#{dp.id}"}=dp.content
 -else
   -if boss?
-    =link_to({:action => :post_note_new, :id => post_field.id, :type_field => type_fd},:remote => true,:method => :put, :id => "content_dispost_#{post_field.id}_#{type_fd}", :class => "note_text") do
+    =link_to({:controller => 'discontent/posts', :action => :post_note_new, :id => post_field.id, :type_field => type_fd},:remote => true,:method => :put, :id => "content_dispost_#{post_field.id}_#{type_fd}", :class => "note_text") do
       %span.h55(id="#{id_for_type_field(type_fd)}_content_#{post_field.id}")=field
   -else
     %span.h55(id="#{id_for_type_field(type_fd)}_content_#{post_field.id}")=field
