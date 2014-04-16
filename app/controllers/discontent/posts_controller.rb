@@ -87,7 +87,7 @@ class Discontent::PostsController < PostsController
       @replace_posts << current_model.find(params[:replace_id])
     end
     respond_to do |format|
-      format.html # new.html.erb
+      format.html {render  layout: 'application_two_column'}
       format.json { render json: @post }
     end
   end

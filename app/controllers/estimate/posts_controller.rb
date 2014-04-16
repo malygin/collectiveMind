@@ -25,7 +25,7 @@ class Estimate::PostsController < PostsController
     @journals = Journal.events_for_user_feed @project.id
     @news = ExpertNews::Post.first
     @my_jounals = Journal.count_events_for_my_feed(@project.id, current_user)
-    @mini_help = Help::Post.where(stage:4, mini: true).first
+    @mini_help = Help::Post.where(stage:5, mini: true).first
 
     @status = params[:status]
     @aspects = Discontent::Aspect.where(:project_id => @project)
