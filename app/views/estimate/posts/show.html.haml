@@ -9,6 +9,7 @@
 
 
   / = link_to 'Редактировать', edit_estimate_post_path( @post)
+
 .col-md-8
   %div.tab-content
     -  @post.post_aspects_other.each_with_index do |tr, index|
@@ -417,6 +418,8 @@
         =estimate_trans_project(@post.all_grade)
 
 .col-md-4
+  = render 'shared/post_edit_bar', :post => @post
+
   %h5
     .small Выберите несовершенство, кликнув по нужной вкладке:
   %ul.nav.nav-tabs.nav-justified
@@ -458,4 +461,3 @@
 
 
 
-= render 'shared/post_edit_bar', :post => @post

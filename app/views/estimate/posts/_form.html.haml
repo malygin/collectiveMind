@@ -1,277 +1,122 @@
 = form_for @post, :url => {:project => @project.id, :action => @post.persisted? ? 'update' : 'create'},   :html => { :class => 'new_or_edit' } do |f|
-  %b Цель проекта
-  %br= simple_format(@plan_post.goal)
-  - if not jury?
-    %h1 Общий список несовершенств
-    %b Чтобы оценить нововведение щелкните по нему мышью. Оценить нужно ВСЕ нововведения
-    .accordion
+  .col-md-8
+
+    %div.tab-content
+
+      %div.tab-pane#plan
+        = simple_format(@plan_post.content)
+
+        %br
+        %br
+        = simple_format(@plan_post.goal)
+        %br
+        %br
+        = simple_format(@plan_post.first_step)
+
+        = hidden_field_tag "post_id", @plan_post.id
+
+        %label Выскажите, пожалуйста, общее впечатление от проекта и рекомендации по улучшению
+        %field= f.text_area :content ,   rows: 6, style: 'width: 100%;'
+        .field
+          = f.label 'Оцените проект в целом '
+          = f.select :all_grade, [["Отличный проект ", 0],["Хороший проект", 1], ["Удовлетворительный проект", 2], ["Плохой проект", 3]]
+
+
       - @pair_estimates2.each do |pa, est|
-        %h1=pa.name
-        %div
-          - if pa.discontent.status == 5
-            %p.ftable.fline
-              = select_tag "imp[#{pa.id}]", options_for_select({ 'лишнее' => '0','маловажное' => '30','важное' => '60','очень важное' => '90'  },"imp[#{pa.id}]"), :prompt => 'Выберите важность'
+        = render partial: 'resolve_discontent',locals: { pa: pa, est: est , f: f}
 
-          %p.ftable.fline
-            %span.bigtext Корректируемое несовершенство:
-          %p.ftable.fcolor=pa.discontent.show_content.html_safe
-          %p.ftable.fline
-            %span.bigtext Краткое описание нововведения:
-            =pa.content
-          .ftable.fbackPositive
-            %span.fline.bigtext A. Какие УСЛОВИЯ надо создать и поддерживать для того, чтобы это нововведение работало?
-            .task_supply=simple_format(pa.positive)
-          .ftable.fbackNegative
-            %span.fline.bigtext B. Какие НЕЖЕЛАТЕЛЬНЫЕ ПОБОЧНЫЕ ЭФФЕКТЫ могут возникнуть в связи с созданием и поддержкой этих УСЛОВИЙ?
-            .task_supply=simple_format(pa.negative)
-
-          .ftable.fback
-            %span.fline.bigtext C. Что может помешать работе ресурсов и как с этим бороться?
-            %br
-            =pa.problems
-          .ftable.fback
-            %span.fline.bigtext D. Реалистичность и практичность: предложить средства для формирования ресурсов, обосновать их доступность и эффективность
-            %br
-            =pa.reality
-
-          %br
-          %b  Предположим, что будущее уже наступило и все предложенные ресурсы созданы и работают. Какова вероятность, что с их помощью несовершенство будет устранено--
-          .field
-            = f.label "-- 1) полностью ?"
-            = select_tag "op[0][#{pa.id}][1]",   options_for_select([["невероятно", 0],["маловероятно", 1], ["вероятно", 2], ["очень вероятно", 3]], est.op1)
-          .field
-            = f.label "-- 2) в значительной мере ?"
-            = select_tag "op[0][#{pa.id}][2]",   options_for_select([["невероятно", 0],["маловероятно", 1], ["вероятно", 2], ["очень вероятно", 3]], est.op2)
-          .field
-            = f.label "-- 3) в небольшой мере?"
-            = select_tag "op[0][#{pa.id}][3]",   options_for_select([["невероятно", 0],["маловероятно", 1], ["вероятно", 2], ["очень вероятно", 3]], est.op3)
-          .field
-            = f.label "-- 4) в ничтожной  мере ?"
-            = select_tag "op[0][#{pa.id}][4]",   options_for_select([["невероятно", 0],["маловероятно", 1], ["вероятно", 2], ["очень вероятно", 3]], est.op4)
-          .field
-            = f.label 'Объясните, почему вы так считаете'
-            = text_area_tag "op_text[0][#{pa.id}]", est.op
-          %br
-          %b Функционирование ресурсов потребует материальных и трудовых затрат. Какова вероятность, что эти затраты окажутся—
-          .field
-            = f.label '--1) значительными '
-            = select_tag "ozf[0][#{pa.id}][1]",   options_for_select([["невероятно", 0],["маловероятно", 1], ["вероятно", 2], ["очень вероятно", 3]], est.ozf1)
-          .field
-            = f.label '-- 2) средними '
-            = select_tag "ozf[0][#{pa.id}][2]",   options_for_select([["невероятно", 0],["маловероятно", 1], ["вероятно", 2], ["очень вероятно", 3]], est.ozf2)
-          .field
-            = f.label '-- 3) незначительными '
-            = select_tag "ozf[0][#{pa.id}][3]",   options_for_select([["невероятно", 0],["маловероятно", 1], ["вероятно", 2], ["очень вероятно", 3]], est.ozf3)
-          .field
-            = f.label '-- 4) ничтожными  '
-            = select_tag "ozf[0][#{pa.id}][4]",   options_for_select([["невероятно", 0],["маловероятно", 1], ["вероятно", 2], ["очень вероятно", 3]], est.ozf4)
-          .field
-            = f.label 'Объясните, почему вы так считаете'
-            = text_area_tag "ozf_text[0][#{pa.id}]", est.ozf
-          %br
-
-
-
-          %b Для создания ресурсов в проекте предлагаются определенные средства. Проанализируйте их и оцените, какова вероятность того, что на базе этих средств ресурсы будут созданы --
-          .field
-            = f.label "-- 1) в полном объеме"
-            = select_tag "on[0][#{pa.id}][1]",   options_for_select([["невероятно", 0],["маловероятно", 1], ["вероятно", 2], ["очень вероятно", 3]], est.on1)
-          .field
-            = f.label "-- 2) в значительном объеме"
-            = select_tag "on[0][#{pa.id}][2]",   options_for_select([["невероятно", 0],["маловероятно", 1], ["вероятно", 2], ["очень вероятно", 3]], est.on2)
-          .field
-            = f.label "-- 3) в небольшом объеме"
-            = select_tag "on[0][#{pa.id}][3]",   options_for_select([["невероятно", 0],["маловероятно", 1], ["вероятно", 2], ["очень вероятно", 3]], est.on3)
-          .field
-            = f.label "-- 4) в ничтожном  объеме"
-            = select_tag "on[0][#{pa.id}][4]",   options_for_select([["невероятно", 0],["маловероятно", 1], ["вероятно", 2], ["очень вероятно", 3]], est.on4)
-          .field
-            = f.label 'Объясните, почему вы так считаете'
-            = text_area_tag "on_text[0][#{pa.id}]", est.on
-
-          %br
-          %b Использование этих средств потребует материальных и трудовых затрат. Какова вероятность, что эти затраты окажутся--
-          .field
-            = f.label '--1) значительными '
-            = select_tag "ozs[0][#{pa.id}][1]",   options_for_select([["невероятно", 0],["маловероятно", 1], ["вероятно", 2], ["очень вероятно", 3]], est.ozs1)
-          .field
-            = f.label "--2) средними "
-            = select_tag "ozs[0][#{pa.id}][2]",   options_for_select([["невероятно", 0],["маловероятно", 1], ["вероятно", 2], ["очень вероятно", 3]], est.ozs2)
-          .field
-            = f.label "--3) незначительными "
-            = select_tag "ozs[0][#{pa.id}][3]",   options_for_select([["невероятно", 0],["маловероятно", 1], ["вероятно", 2], ["очень вероятно", 3]], est.ozs3)
-          .field
-            = f.label "--4) ничтожными  "
-            = select_tag "ozs[0][#{pa.id}][4]",   options_for_select([["невероятно", 0],["маловероятно", 1], ["вероятно", 2], ["очень вероятно", 3]], est.ozs4)
-          .field
-            = f.label 'Объясните, почему вы так считаете'
-            = text_area_tag "ozs_text[0][#{pa.id}]", est.ozs
-
-
-    %h1 Список несовершенств, корректируемых на первом этапе
-    %b Чтобы оценить нововведение щелкните по нему мышью. Оценить нужно ВСЕ нововведения
-
-    .accordion
       - @pair_estimates1.each do |pa, est|
-        %h1=pa.name
-        %div
-          - if pa.post_aspect.discontent.status == 5
-            %p.ftable.fline
-              = select_tag "imp[#{pa.id}]", options_for_select({ 'лишнее' => '0','маловажное' => '30','важное' => '60','очень важное' => '90'  },"imp[#{pa.id}]"), :prompt => 'Выберите важность'
-
-          %p.ftable.fline
-            %span.bigtext Корректируемое несовершенство:
-          %p.ftable.fcolor=pa.post_aspect.discontent.show_content.html_safe
-          %p.ftable.fline
-            %span.bigtext Краткое описание нововведения:
-            =pa.content
-          .ftable.fbackPositive
-            %span.fline.bigtext A. Какие УСЛОВИЯ надо создать и поддерживать для того, чтобы это нововведение работало?
-            .task_supply=simple_format(pa.positive)
-          .ftable.fbackNegative
-            %span.fline.bigtext B. Какие НЕЖЕЛАТЕЛЬНЫЕ ПОБОЧНЫЕ ЭФФЕКТЫ могут возникнуть в связи с созданием и поддержкой этих УСЛОВИЙ?
-            .task_supply=simple_format(pa.negative)
-          .ftable.fbackControl
-            %span.fline.bigtext C. Кто и как будет контролировать создание и поддержку этих УСЛОВИЙ и предотвращать возникновение НЕЖЕЛАТЕЛЬНЫХ ПОБОЧНЫХ ЭФФЕКТОВ?
-            .task_supply=simple_format(pa.control)
-          .ftable.fback
-            %span.fline.bigtext D. Что может помешать работе ресурсов и как с этим бороться?
-            %br
-            =pa.problems
-          .ftable.fback
-            %span.fline.bigtext E. Реалистичность и практичность: предложить средства для формирования ресурсов, обосновать их доступность и эффективность
-            %br
-            =pa.reality
-          .ftable.fback
-            %span.fline.bigtext F. Какие помехи могут возникнуть в процессе реализации методов и средств, необходимых для формирования ресурсов? Как их предотвратить?
-            %br
-            =pa.problems_with_resources
-          %br
-          %b  Предположим, что будущее уже наступило и все предложенные ресурсы созданы и работают. Какова вероятность, что с их помощью несовершенство будет устранено--
-          .field
-            = f.label "-- 1) полностью ?"
-            = select_tag "op[1][#{pa.id}][1]",   options_for_select([["невероятно", 0],["маловероятно", 1], ["вероятно", 2], ["очень вероятно", 3]], est.op1)
-          .field
-            = f.label "-- 2) в значительной мере ?"
-            = select_tag "op[1][#{pa.id}][2]",   options_for_select([["невероятно", 0],["маловероятно", 1], ["вероятно", 2], ["очень вероятно", 3]], est.op2)
-          .field
-            = f.label "-- 3) в небольшой мере?"
-            = select_tag "op[1][#{pa.id}][3]",   options_for_select([["невероятно", 0],["маловероятно", 1], ["вероятно", 2], ["очень вероятно", 3]], est.op3)
-          .field
-            = f.label "-- 4) в ничтожной  мере ?"
-            = select_tag "op[1][#{pa.id}][4]",   options_for_select([["невероятно", 0],["маловероятно", 1], ["вероятно", 2], ["очень вероятно", 3]], est.op4)
-          .field
-            = f.label 'Объясните, почему вы так считаете'
-            = text_area_tag "op_text[1][#{pa.id}]", est.op
-          %br
-          %b Функционирование ресурсов потребует материальных и трудовых затрат. Какова вероятность, что эти затраты окажутся—
-          .field
-            = f.label '--1) значительными '
-            = select_tag "ozf[1][#{pa.id}][1]",   options_for_select([["невероятно", 0],["маловероятно", 1], ["вероятно", 2], ["очень вероятно", 3]], est.ozf1)
-          .field
-            = f.label '-- 2) средними '
-            = select_tag "ozf[1][#{pa.id}][2]",   options_for_select([["невероятно", 0],["маловероятно", 1], ["вероятно", 2], ["очень вероятно", 3]], est.ozf2)
-          .field
-            = f.label '-- 3) незначительными '
-            = select_tag "ozf[1][#{pa.id}][3]",   options_for_select([["невероятно", 0],["маловероятно", 1], ["вероятно", 2], ["очень вероятно", 3]], est.ozf3)
-          .field
-            = f.label '-- 4) ничтожными  '
-            = select_tag "ozf[1][#{pa.id}][4]",   options_for_select([["невероятно", 0],["маловероятно", 1], ["вероятно", 2], ["очень вероятно", 3]], est.ozf4)
-          .field
-            = f.label 'Объясните, почему вы так считаете'
-            = text_area_tag "ozf_text[1][#{pa.id}]", est.ozf
-          %br
-
-
-
-          %b Для создания ресурсов в проекте предлагаются определенные средства. Проанализируйте их и оцените, какова вероятность того, что на базе этих средств ресурсы будут созданы --
-          .field
-            = f.label "-- 1) в полном объеме"
-            = select_tag "on[1][#{pa.id}][1]",   options_for_select([["невероятно", 0],["маловероятно", 1], ["вероятно", 2], ["очень вероятно", 3]], est.on1)
-          .field
-            = f.label "-- 2) в значительном объеме"
-            = select_tag "on[1][#{pa.id}][2]",   options_for_select([["невероятно", 0],["маловероятно", 1], ["вероятно", 2], ["очень вероятно", 3]], est.on2)
-          .field
-            = f.label "-- 3) в небольшом объеме"
-            = select_tag "on[1][#{pa.id}][3]",   options_for_select([["невероятно", 0],["маловероятно", 1], ["вероятно", 2], ["очень вероятно", 3]], est.on3)
-          .field
-            = f.label "-- 4) в ничтожном  объеме"
-            = select_tag "on[1][#{pa.id}][4]",   options_for_select([["невероятно", 0],["маловероятно", 1], ["вероятно", 2], ["очень вероятно", 3]], est.on4)
-          .field
-            = f.label 'Объясните, почему вы так считаете'
-            = text_area_tag "on_text[1][#{pa.id}]", est.on
-
-          %br
-          %b Использование этих средств потребует материальных и трудовых затрат. Какова вероятность, что эти затраты окажутся--
-          .field
-            = f.label '--1) значительными '
-            = select_tag "ozs[1][#{pa.id}][1]",   options_for_select([["невероятно", 0],["маловероятно", 1], ["вероятно", 2], ["очень вероятно", 3]], est.ozs1)
-          .field
-            = f.label "--2) средними "
-            = select_tag "ozs[1][#{pa.id}][2]",   options_for_select([["невероятно", 0],["маловероятно", 1], ["вероятно", 2], ["очень вероятно", 3]], est.ozs2)
-          .field
-            = f.label "--3) незначительными "
-            = select_tag "ozs[1][#{pa.id}][3]",   options_for_select([["невероятно", 0],["маловероятно", 1], ["вероятно", 2], ["очень вероятно", 3]], est.ozs3)
-          .field
-            = f.label "--3) ничтожными "
-            = select_tag "ozs[1][#{pa.id}][4]",   options_for_select([["невероятно", 0],["маловероятно", 1], ["вероятно", 2], ["очень вероятно", 3]], est.ozs4)
-          .field
-            = f.label 'Объясните, почему вы так считаете'
-            = text_area_tag "ozs_text[1][#{pa.id}]", est.ozs
+        = render partial: 'resolve_discontent1',locals: { pa: pa, est: est, f: f}
 
 
 
 
 
-    %br
-    %b При осуществлении проекта могут возникать разные негативные явления. Рассмотрите два типа таких явлений. Первый тип – это побочные эффекты, возникшие наряду с улучшениями (например, нововведения работают, но обходятся слишком дорого).
-    %br
-    %b  Какова вероятность, что эти побочные эффекты будут—
+      %div.tab-pane#negative
+        %b При осуществлении проекта могут возникать разные негативные явления. Рассмотрите два типа таких явлений. Первый тип – это побочные эффекты, возникшие наряду с улучшениями (например, нововведения работают, но обходятся слишком дорого).
+        %br
+        %b  Какова вероятность, что эти побочные эффекты будут—
 
-    .field
-      = f.label '-- 1) значительными '
-      = f.select :nepr1, [["невероятно", 0],["маловероятно", 1], ["вероятно", 2], ["очень вероятно", 3]]
-    .field
-      = f.label "-- 2) средними "
-      = f.select :nepr2, [["невероятно", 0],["маловероятно", 1], ["вероятно", 2], ["очень вероятно", 3]]
-    .field
-      = f.label "-- 3) незначительными "
-      = f.select :nepr3, [["невероятно", 0],["маловероятно", 1], ["вероятно", 2], ["очень вероятно", 3]]
-    .field
-      = f.label "-- 4) нулевыми "
-      = f.select :nepr4, [["невероятно", 0],["маловероятно", 1], ["вероятно", 2], ["очень вероятно", 3]]
-    .field
-      = f.label 'Объясните, почему вы так считаете'
-      = f.text_area :nepr
-    %br
-    %b Второй тип – это препятствия, возникшие в процессе создания нововведений (например, сопротивление со стороны сотрудников, привыкших работать по-старому).
-    %br
-    %b  Какова вероятность, что эти препятствия будут—
+        .field
+          = f.label '-- 1) значительными '
+          = f.select :nepr1, [["невероятно", 0],["маловероятно", 1], ["вероятно", 2], ["очень вероятно", 3]]
+        .field
+          = f.label "-- 2) средними "
+          = f.select :nepr2, [["невероятно", 0],["маловероятно", 1], ["вероятно", 2], ["очень вероятно", 3]]
+        .field
+          = f.label "-- 3) незначительными "
+          = f.select :nepr3, [["невероятно", 0],["маловероятно", 1], ["вероятно", 2], ["очень вероятно", 3]]
+        .field
+          = f.label "-- 4) нулевыми "
+          = f.select :nepr4, [["невероятно", 0],["маловероятно", 1], ["вероятно", 2], ["очень вероятно", 3]]
+        .field
+          = f.label 'Объясните, почему вы так считаете'
+          = f.text_area :nepr,   rows: 3, style: 'width: 100%;'
+        %br
+        %b Второй тип – это препятствия, возникшие в процессе создания нововведений (например, сопротивление со стороны сотрудников, привыкших работать по-старому).
+        %br
+        %b  Какова вероятность, что эти препятствия будут—
 
-    .field
-      = f.label '-- 1) значительными '
-      = f.select :nep1, [["невероятно", 0],["маловероятно", 1], ["вероятно", 2], ["очень вероятно", 3]]
-    .field
-      = f.label "-- 2) средними "
-      = f.select :nep2, [["невероятно", 0],["маловероятно", 1], ["вероятно", 2], ["очень вероятно", 3]]
-    .field
-      = f.label "-- 3) незначительными "
-      = f.select :nep3, [["невероятно", 0],["маловероятно", 1], ["вероятно", 2], ["очень вероятно", 3]]
-    .field
-      = f.label "-- 4) нулевыми "
-      = f.select :nep4, [["невероятно", 0],["маловероятно", 1], ["вероятно", 2], ["очень вероятно", 3]]
-    .field
-      = f.label 'Объясните, почему вы так считаете'
-      = f.text_area :nep
-    %br
+        .field
+          = f.label '-- 1) значительными '
+          = f.select :nep1, [["невероятно", 0],["маловероятно", 1], ["вероятно", 2], ["очень вероятно", 3]]
+        .field
+          = f.label "-- 2) средними "
+          = f.select :nep2, [["невероятно", 0],["маловероятно", 1], ["вероятно", 2], ["очень вероятно", 3]]
+        .field
+          = f.label "-- 3) незначительными "
+          = f.select :nep3, [["невероятно", 0],["маловероятно", 1], ["вероятно", 2], ["очень вероятно", 3]]
+        .field
+          = f.label "-- 4) нулевыми "
+          = f.select :nep4, [["невероятно", 0],["маловероятно", 1], ["вероятно", 2], ["очень вероятно", 3]]
+        .field
+          = f.label 'Объясните, почему вы так считаете'
+          = f.text_area :nep,   rows: 3, style: 'width: 100%;'
+        %br
 
-  = hidden_field_tag "post_id", @plan_post.id
-  %label Выскажите, пожалуйста, общее впечатление от проекта и рекомендации по улучшению
-  %field= f.text_area :content, class: 'wider_area'
-  .field
-    = f.label 'Оцените проект в целом '
-    = f.select :all_grade, [["Отличный проект ", 0],["Хороший проект", 1], ["Удовлетворительный проект", 2], ["Плохой проект", 3]]
-  
 
-  .actions
-    = f.submit ''
+
+
+  .col-md-4
+    =f.submit 'Сохранить', class: 'btn btn-success'
+    %h5
+      .small Выберите несовершенство, кликнув по нужной вкладке:
+    %ul.nav.nav-tabs.nav-justified
+      %li.active
+        %a(href="#theall" data-toggle="tab") Образ будущ.
+      %li
+        %a(href="#thefirst" data-toggle="tab") Первый этап
+    .tab-content
+      #theall.tab-pane.fade.in.active
+        %ul.nav.nav-tabs.nav-stacked
+          -#%li
+          -#  %a.text-success(href="#plan1" data-toggle="tab" style='font-size:10px; font-weight: bold;')
+          -#    =t('form.plan')
+
+          -@pair_estimates2.each_with_index do |pa, i|
+            %li
+              %a(href="#dis_#{pa[0].id}" data-toggle="tab")
+                ="#{i+1}. #{pa[0].discontent.display_content}"
+                %span.text-success= pa[1].score
+                -#%span.text-success.glyphicon.glyphicon-ok.pull-right(class = "#{'inv_element' if @post.get_pa_by_discontent(d, :name)==''}")
+      #thefirst.tab-pane.fade
+        %ul.nav.nav-tabs.nav-stacked
+
+
+          -@pair_estimates1.each_with_index do |pa, i|
+            %li
+              %a(href="#fdis_#{pa[0].id}" data-toggle="tab")
+                ="#{i+1}. #{pa[0].discontent.display_content}"
+                %span.text-success= pa[1].score
+                -#%span.text-success.glyphicon.glyphicon-ok.pull-right(class = "#{'inv_element' if @post.get_pa_by_discontent(d, :name, 1)==''}")
+          %li
+            %a.text-success(href="#negative" data-toggle="tab" style='font-size:10px; font-weight: bold;')
+              Оценка негативных явлений
+          %li
+            %a.text-success(href="#plan" data-toggle="tab" style='font-size:10px; font-weight: bold;')
+              Общая оценка проекта
+
+  %br
+  %br
+  %br
+  %br

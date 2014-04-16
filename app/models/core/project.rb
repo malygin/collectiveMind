@@ -40,6 +40,7 @@ class Core::Project < ActiveRecord::Base
   has_many :concept_for_admin_post, :conditions =>"status = 1  ", :class_name => "Concept::Post"
 
   has_many :plan_post, :conditions =>"status = 0", :class_name => "Plan::Post"
+  has_many :estimate_posts, :conditions =>"status = 1", :class_name => "Estimate::Post"
 
   has_many :project_users
   has_many :users, :through => :project_users
@@ -49,7 +50,7 @@ class Core::Project < ActiveRecord::Base
          2 => { name: 'Анализ ситуации', :type_stage =>  :discontent_posts, status: [3,4,5,6]},
          3 => { name: 'Формулирование проблемы', :type_stage => :concept_posts, status: [7,8]},
          4 => { name: 'Проекты', :type_stage =>  :plan_posts, status: [9]},
-         5 => { name: 'Оценивание', :type_stage =>  :estimate_posts, status: [10,11]}}.freeze
+         5 => { name: 'Оценки', :type_stage =>  :estimate_posts, status: [10,11]}}.freeze
 
 
   def get_free_votes_for(user, stage)
@@ -98,6 +99,8 @@ class Core::Project < ActiveRecord::Base
        return self.status == 7
      elsif p.instance_of? Plan::Post
        return self.status == 9
+     elsif p.instance_of? Estimate::Post
+       return self.status == 10
 
      end
     return false
@@ -113,6 +116,8 @@ class Core::Project < ActiveRecord::Base
         7
       when :plan_posts
         9
+      when :estimate_posts
+        10
 
 
      end
@@ -134,9 +139,9 @@ class Core::Project < ActiveRecord::Base
       when 8
         'голосование за концепции и рефлексия'
       when 9, :plan_posts
-        'создание проектов'
-      when 10
-        'выставление оценок'
+        'Создание проектов'
+      when 10, :estimate_posts
+        'Выставление оценок'
       when 11
         'голосование за проекты'
       when 12
