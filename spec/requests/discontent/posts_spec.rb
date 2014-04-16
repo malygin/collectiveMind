@@ -50,6 +50,7 @@ describe 'Discontents ' do
         click_button 'send_post'
         should have_selector 'p#discontent_warning'
         expect {
+          sleep 2
           click_button 'send_post'
           should have_selector 'p#discontent_success'
         }.to change(Discontent::Post, :count).by(1)

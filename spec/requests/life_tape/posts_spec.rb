@@ -9,7 +9,7 @@ describe 'Life Tape ' do
       lp.discontent_aspects << [@aspect1,@aspect2].sample
     end
     @aspects=[]
-    4.times { @aspects<< FactoryGirl.create(:aspect, project: @project)}
+    5.times { @aspects<< FactoryGirl.create(:aspect, project: @project)}
     @post = FactoryGirl.create :life_tape_post, user: @user, content: 'post from aspect 2', project: @project, created_at: (Time.now.beginning_of_day + 1.day)
     @post.discontent_aspects << @aspect1
     @comment = FactoryGirl.create :life_tape_comment, content: 'comment for post', user: @user, post: @post
