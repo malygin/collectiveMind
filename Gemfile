@@ -34,7 +34,7 @@ group :test do
   gem 'selenium-webdriver','~> 2.41.0'
   gem 'webdriver-user-agent'
   gem "capybara-webkit"
-
+  gem 'capybara-screenshot'
   gem 'headless'
 end
 

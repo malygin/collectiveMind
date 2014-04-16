@@ -12,6 +12,7 @@ require 'rspec/autorun'
 require 'capybara/rspec'
 require 'capybara/rails'
 require 'database_cleaner'
+require 'capybara-screenshot/rspec'
 
 DatabaseCleaner.strategy = :truncation
 Spork.prefork do

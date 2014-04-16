@@ -3,7 +3,7 @@
   $("#discontent_success").fadeOut()
   $('#posts').html("#{escape_javascript(render  @posts)}")
   $('#send_post').html('Все равно сохранить')
-  $('#send_post').toggleClass('disabled')
+  -#$('#send_post').toggleClass('disabled')
   $('#new_discontent').append('<input id="new_discontent_hidden" type="hidden" name="resave" value="true" />');
 -else
   $("#discontent_success").fadeIn()
