@@ -53,15 +53,16 @@ class Core::Project < ActiveRecord::Base
          5 => { name: 'Оценки', :type_stage =>  :estimate_posts, status: [10,11]}}.freeze
 
 
-  def get_free_votes_for(user, stage)
+  def get_free_votes_for(user, stage, project)
     case stage
       when :life_tape
-        self.stage1.to_i - user.voted_aspects.size
+        self.stage1.to_i - user.voted_aspects.by_project(project.id).size
       when :discontent
         self.stage2.to_i - user.voted_discontent_posts.count
 
     end
   end
+
 
   def current_status?( status)
     sort_list  = LIST_STAGES.select {|k,v| v[:type_stage]  == status}
