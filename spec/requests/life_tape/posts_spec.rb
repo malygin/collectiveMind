@@ -9,7 +9,7 @@ describe 'Life Tape ' do
       lp.discontent_aspects << [@aspect1,@aspect2].sample
     end
     @aspects=[]
-    4.times { @aspects<< FactoryGirl.create(:aspect, project: @project)}
+    5.times { @aspects<< FactoryGirl.create(:aspect, project: @project)}
     @post = FactoryGirl.create :life_tape_post, user: @user, content: 'post from aspect 2', project: @project, created_at: (Time.now.beginning_of_day + 1.day)
     @post.discontent_aspects << @aspect1
     @comment = FactoryGirl.create :life_tape_comment, content: 'comment for post', user: @user, post: @post
@@ -38,7 +38,7 @@ describe 'Life Tape ' do
 
 
       it {should have_content('life tape post for project')}
-      it {should have_selector("form#aspects_list input[type='checkbox']", count: 6)}
+      it {should have_selector("form#aspects_list input[type='checkbox']", count: 7)}
       it {should have_selector('div#posts div.media', count: 20)}
       it {should have_selector('ol.breadcrumb li', text:I18n.t('stages.life_tape'))}
 
@@ -109,6 +109,7 @@ describe 'Life Tape ' do
       end
 
       it 'vote only 5 times', js: true do
+        LifeTape::Voiting.delete_all
         @aspects.each do |asp|
            click_link "vote_#{asp.id}"
         end

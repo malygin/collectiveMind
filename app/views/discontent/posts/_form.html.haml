@@ -1,8 +1,8 @@
-=render partial: 'shared/help/new_discontent'
-%button.btn.btn-info(data-toggle="modal" data-target="#modalNewDiscontent")
-  Показать пример
-%br
-%br
+-#=render partial: 'shared/help/new_discontent'
+-#%button.btn.btn-info(data-toggle="modal" data-target="#modalNewDiscontent")
+-#  Показать пример
+-#%br
+-#%br
 = form_for  @post, :url => {:project => @project.id, :replace_id => @replace_post.nil? ? nil : @replace_post.id , :action => @post.persisted? ? 'update' : 'create'},  :remote => true, :html => { :id => 'new_discontent' }do |f|
   -if @post.errors.any?
     #error_explanation
@@ -10,37 +10,69 @@
       %ul
         - @ost.errors.full_messages.each do |msg|
           %li= msg
+  .row
+    .col-md-12
+      .text-center
+        .h5
+          Что вас не устраивает
+          %span.text-danger *
+        %br
 
-  .form-group
-    %label.control-label(for="exampleInputEmail1")
-      Что вас не устраивает
-      %span.text-danger *
-    =f.text_area :content, class: 'form-control', rows: 5, placeholder: 'Отрицательное действие, явление, установление, черта', onkeyup: "activate_button(this);"
+  .row
+    .col-md-6
+      %span.label.label-danger  Имеющиеся недостатки
+      %br
+      %span.label.label-default что
+      Пыльный и отвратительный на вид большой пустырь
+      %br
+      %span.label.label-success  Отсутствующие достоинства
+      %br
+      %span.label.label-default что
+      Отсутствие автоматической коробки передач
+    .col-md-6
 
-  .form-group
-    = select_tag 'discontent_post[aspect_id]', options_from_collection_for_select(@aspects, "id", "content", @post.aspect.nil? ? @aspects.first.id : @post.aspect.id), :prompt => 'Выберите аспект'
+      .form-group
 
-
-  .panel-group
-    .panel
-      .panel-heading
-        %h4.panel-title
-        %a(data-toggle="collapse" data-parent="#accordion" id="when_where_accordion"  href="#collapseOne")
-          Заполнить дополнительные поля (+10 баллов)
-      #collapseOne.panel-collapse.collapse
-        .panel-body
+        =f.text_area :content, class: 'form-control', rows: 5, placeholder: 'Отрицательное действие, явление, установление, черта', onkeyup: "activate_button(this);"
+  .row
+    .col-md-12
+      .text-center
+        .h5
           Где это происходит?
-          =f.autocomplete_field :whered, autocomplete_discontent_post_whered_discontent_posts_path,  class: 'form-control',placeholder: 'Место, организация, общность, в которой это происходит '
+        %br
+  .row
+    .col-md-6
+      %span.label.label-default где
+      во дворе между домами
+    .col-md-6
+      =f.autocomplete_field :whered, autocomplete_discontent_post_whered_discontent_posts_path,  class: 'form-control',placeholder: 'Место, организация, общность, в которой это происходит '
+  .row
+    .col-md-12
+      .text-center
+        .h5
           Когда это происходит?
-          =f.autocomplete_field :whend, autocomplete_discontent_post_whend_discontent_posts_path,  class: 'form-control',placeholder: 'Во время какого события, мероприятия, процесса, ситуации '
-          %br
-          .form-group
-            %label.radio-inline
-              = f.radio_button :style,  '1'
-              %span.text-danger Имеющиеся недостатки
-            %label.radio-inline
-              = f.radio_button :style,  '0'
-              %span.text-success Отсутствующие достоинства
+        %br
+  .row
+    .col-md-6
+      %span.label.label-default когда
+      в теплое время года
+    .col-md-6
+      =f.autocomplete_field :whend, autocomplete_discontent_post_whend_discontent_posts_path,  class: 'form-control',placeholder: 'Во время какого события, мероприятия, процесса, ситуации '
+
+
+  .row
+    .col-md-12
+      %br
+      %br
+      .form-group
+        = select_tag 'discontent_post[aspect_id]', options_from_collection_for_select(@aspects, "id", "content", @post.aspect.nil? ? @aspects.first.id : @post.aspect.id), :prompt => 'Выберите аспект'
+
+        %label.radio-inline
+          = f.radio_button :style,  '1'
+          %span.text-danger Имеющиеся недостатки
+        %label.radio-inline
+          = f.radio_button :style,  '0'
+          %span.text-success Отсутствующие достоинства
   %br
   %b Мысленная контрольная проверка несовершенства на конкретность:
   %br
