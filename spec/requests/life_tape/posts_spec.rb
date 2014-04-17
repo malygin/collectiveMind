@@ -106,10 +106,11 @@ describe 'Life Tape ' do
         click_link "vote_#{@aspect1.id}"
         should have_selector("a.disabled#vote_#{@aspect1.id}")
         should have_selector("#count_vote", text: "4")
+        LifeTape::Voiting.delete_all
+
       end
 
       it 'vote only 5 times', js: true do
-        LifeTape::Voiting.delete_all
         @aspects.each do |asp|
            click_link "vote_#{asp.id}"
         end
