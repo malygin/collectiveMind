@@ -155,3 +155,11 @@ $(window).load ->
     $('#send_post').removeClass('disabled')
   else
     $('#send_post').addClass('disabled')
+
+$ ->
+  $('#edit_where').editable
+    type: 'text'
+    pk: 1
+    name: 'edit_where'
+    title: 'edit_where'
+
