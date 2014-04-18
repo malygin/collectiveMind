@@ -14,21 +14,24 @@
     .col-md-12
       .text-center
         .h5
-          Что вас не устраивает
-          %span.text-danger *
+          Что вас не устраивает?
         %br
 
   .row
     .col-md-6
-      %span.label.label-danger  Имеющиеся недостатки
-      %br
-      %span.label.label-default что
-      Пыльный и отвратительный на вид большой пустырь
-      %br
-      %span.label.label-success  Отсутствующие достоинства
-      %br
-      %span.label.label-default что
-      Отсутствие автоматической коробки передач
+      .text-right
+        %i
+          %b Пример:
+          %br
+          %span.label.label-danger  Имеющиеся недостатки
+          %br
+          %span.label.label-default что
+          Пыльный и отвратительный на вид большой пустырь
+          %br
+          %span.label.label-success  Отсутствующие достоинства
+          %br
+          %span.label.label-default что
+          Отсутствие автоматической коробки передач
     .col-md-6
 
       .form-group
@@ -38,14 +41,21 @@
     .col-md-12
       .text-center
         .h5
+
           Где это происходит?
         %br
   .row
     .col-md-6
-      %span.label.label-default где
-      во дворе между домами
+      .text-right
+        %i
+          %b Пример:
+          %br
+          %span.label.label-default где
+          во дворе между домами
     .col-md-6
       =f.autocomplete_field :whered, autocomplete_discontent_post_whered_discontent_posts_path,  class: 'form-control',placeholder: 'Место, организация, общность, в которой это происходит '
+      %br
+      %br
   .row
     .col-md-12
       .text-center
@@ -54,19 +64,31 @@
         %br
   .row
     .col-md-6
-      %span.label.label-default когда
-      в теплое время года
+      .text-right
+        %i
+          %b Пример:
+          %br
+          %span.label.label-default когда
+          в теплое время года
     .col-md-6
       =f.autocomplete_field :whend, autocomplete_discontent_post_whend_discontent_posts_path,  class: 'form-control',placeholder: 'Во время какого события, мероприятия, процесса, ситуации '
 
 
   .row
+    .col-md-6
+      %br
+      %h5.text-right
+        %b К какой теме относится  несовершенство?
+      %br
+      %br
+    .com-md-6
+      %br
+      = select_tag 'discontent_post[aspect_id]', options_from_collection_for_select(@aspects, "id", "content", @post.aspect.nil? ? @aspects.first.id : @post.aspect.id), :prompt => 'Выберите аспект' , style:'margin-left: 20px;margin-top: 10px;'
+  .row
     .col-md-12
-      %br
-      %br
-      .form-group
-        = select_tag 'discontent_post[aspect_id]', options_from_collection_for_select(@aspects, "id", "content", @post.aspect.nil? ? @aspects.first.id : @post.aspect.id), :prompt => 'Выберите аспект'
 
+      .form-group.text-center
+        %b  Выберите тип несовершенства
         %label.radio-inline
           = f.radio_button :style,  '1'
           %span.text-danger Имеющиеся недостатки

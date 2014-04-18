@@ -442,10 +442,11 @@
 
 
         -@post.post_aspects_other.each_with_index do |pa, i|
-          %li
-            %a(href="#dis_#{pa.plan_post_aspect.id}" data-toggle="tab")
-              ="#{i+1}. #{pa.plan_post_aspect.discontent.display_content}"
-              %span.text-success= pa.score
+          - if pa.plan_post_aspect.name!=''
+            %li
+              %a(href="#dis_#{pa.plan_post_aspect.id}" data-toggle="tab")
+                ="#{i+1}. #{pa.plan_post_aspect.discontent.display_content}"
+                %span.text-success= pa.score
             -#%span.text-success.glyphicon.glyphicon-ok.pull-right(class = "#{'inv_element' if @post.get_pa_by_discontent(d, :name)==''}")
     #thefirst.tab-pane.fade
       %ul.nav.nav-tabs.nav-stacked
