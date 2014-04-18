@@ -95,7 +95,9 @@ describe 'Life Tape ' do
         @project.update_attribute(:status, 2)
       end
 
-      before { visit life_tape_posts_path(@project)}
+      before {
+        LifeTape::Voiting.delete_all
+        visit life_tape_posts_path(@project)}
 
       it 'show all aspects for voting' do
           #should have_selector("h3.text-danger", text: I18n.t('voting.have_votes'))
@@ -106,10 +108,12 @@ describe 'Life Tape ' do
         click_link "vote_#{@aspect1.id}"
         should have_selector("a.disabled#vote_#{@aspect1.id}")
         should have_selector("#count_vote", text: "4")
+
       end
 
       it 'vote only 5 times', js: true do
-        LifeTape::Voiting.delete_all
+
+
         @aspects.each do |asp|
            click_link "vote_#{asp.id}"
         end

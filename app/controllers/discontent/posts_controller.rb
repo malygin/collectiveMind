@@ -14,11 +14,19 @@ class Discontent::PostsController < PostsController
   #end
 
   def autocomplete_discontent_post_whend
-    render json: Discontent::Post.select("DISTINCT whend as value").where("LOWER(whend) like LOWER(?)", "%#{params[:term]}%").where(:project_id => params[:project])
+    pr = Discontent::Post.select("DISTINCT whend as value").where("LOWER(whend) like LOWER(?)", "%#{params[:term]}%").where(:project_id => params[:project])
+    pr<<{:value => 'Значение 1'}
+    pr<<{:value => 'Значение 2'}
+    pr<<{:value => 'Значение 3'}
+    render json: pr
   end
 
  def autocomplete_discontent_post_whered
-    render json: Discontent::Post.select("DISTINCT whered as value").where("LOWER(whered) like LOWER(?)", "%#{params[:term]}%").where(:project_id => params[:project])
+    pr=Discontent::Post.select("DISTINCT whered as value").where("LOWER(whered) like LOWER(?)", "%#{params[:term]}%").where(:project_id => params[:project])
+    pr<<{:value => 'Значение 1'}
+    pr<<{:value => 'Значение 2'}
+    pr<<{:value => 'Значение 3'}
+    render json: pr
   end
 
 
