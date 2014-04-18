@@ -443,6 +443,7 @@
 
         -@post.post_aspects_other.each_with_index do |pa, i|
           - if pa.plan_post_aspect.name!=''
+
             %li
               %a(href="#dis_#{pa.plan_post_aspect.id}" data-toggle="tab")
                 ="#{i+1}. #{pa.plan_post_aspect.discontent.display_content}"
