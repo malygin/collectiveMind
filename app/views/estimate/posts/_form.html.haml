@@ -104,10 +104,11 @@
 
 
           -@pair_estimates1.each_with_index do |pa, i|
-            %li
-              %a(href="#fdis_#{pa[0].id}" data-toggle="tab")
-                ="#{i+1}. #{pa[0].discontent.display_content}"
-                %span.text-success= pa[1].score
+            - if pa.plan_post_aspect.name!=''
+              %li
+                %a(href="#fdis_#{pa[0].id}" data-toggle="tab")
+                  ="#{i+1}. #{pa[0].discontent.display_content}"
+                  %span.text-success= pa[1].score
                 -#%span.text-success.glyphicon.glyphicon-ok.pull-right(class = "#{'inv_element' if @post.get_pa_by_discontent(d, :name, 1)==''}")
           %li
             %a.text-success(href="#negative" data-toggle="tab" style='font-size:10px; font-weight: bold;')
