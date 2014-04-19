@@ -10,6 +10,9 @@ class Discontent::Post < ActiveRecord::Base
   has_many :discontent_posts, :class_name => 'Discontent::Post', :foreign_key => 'discontent_post_id'
   has_many :discontent_comment_notes, :class_name => 'Discontent::CommentNote'
 
+  has_many :discontent_post_aspects, :class_name => 'Discontent::PostAspect'
+  has_many :post_aspects, :through => :discontent_post_aspects, :source => :discontent_aspect, :class_name => 'Discontent::Aspect'
+
   has_many :concept_conditions, :class_name => 'Concept::PostAspect', :foreign_key => 'discontent_aspect_id'
   has_many :plan_conditions, :class_name => 'Plan::PostAspect', :foreign_key => 'discontent_aspect_id'
 

@@ -155,3 +155,17 @@ $(window).load ->
     $('#send_post').removeClass('disabled')
   else
     $('#send_post').addClass('disabled')
+
+$('#select_for_aspects').on 'change', ->
+  val=this.value
+  text=$(this).find('option:selected').text()
+  $(this).find('option:selected').remove()
+  func = "'#{val}','#{text}'"
+  $('#add_post_aspects').append('<div id="aspect_'+val+'"><input type="hidden" name="discontent_post_aspects[]" value="'+val+'"/><span class="glyphicon glyphicon-remove text-danger pull-left" onclick="remove_discontent_aspect('+func+');" style="cursor:pointer;text-decoration:none;font-size:15px;"></span><span id="'+val+'" class="span_aspect label label-t">'+text+'</span></br></div>')
+
+@remove_discontent_aspect= (val,text)->
+  $('#aspect_'+val).remove()
+  $('#select_for_aspects').append(new Option(val,text))
+
+
+

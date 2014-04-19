@@ -8,7 +8,7 @@
     #error_explanation
       %h2= "#{pluralize(@discontent_post.errors.count, "error")} prohibited this discontent_post from being saved:"
       %ul
-        - @ost.errors.full_messages.each do |msg|
+        - @post.errors.full_messages.each do |msg|
           %li= msg
   .row
     .col-md-12
@@ -83,7 +83,11 @@
       %br
     .com-md-6
       %br
-      = select_tag 'discontent_post[aspect_id]', options_from_collection_for_select(@aspects, "id", "content", @post.aspect.nil? ? @aspects.first.id : @post.aspect.id), :prompt => 'Выберите аспект' , style:'margin-left: 20px;margin-top: 10px;'
+      = select_tag 'select_for_aspects', options_from_collection_for_select(@aspects, "id", "content", @post.aspect.nil? ? @aspects.first.id : @post.aspect.id),
+       :prompt => 'Выберите аспект' , style:'margin-left:20px;margin-top:10px;'
+      %br
+      #add_post_aspects(style="margin-left: 52%;margin-top: 10px;")
+
   .row
     .col-md-12
 
