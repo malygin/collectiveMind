@@ -104,7 +104,7 @@
 
 
           -@pair_estimates1.each_with_index do |pa, i|
-            - if pa.plan_post_aspect.name!=''
+            - if pa[0].name!=''
               %li
                 %a(href="#fdis_#{pa[0].id}" data-toggle="tab")
                   ="#{i+1}. #{pa[0].discontent.display_content}"
