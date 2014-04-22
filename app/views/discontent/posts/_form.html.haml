@@ -53,7 +53,7 @@
           %span.label.label-default где
           во дворе между домами
     .col-md-6
-      =f.autocomplete_field :whered, autocomplete_discontent_post_whered_discontent_posts_path,  class: 'form-control',placeholder: 'Место, организация, общность, в которой это происходит '
+      =f.autocomplete_field :whered, autocomplete_discontent_post_whered_discontent_posts_path, :"min-length" => 0, class: 'form-control autocomplete',placeholder: 'Место, организация, общность, в которой это происходит '
       %br
       %br
   .row
@@ -71,7 +71,7 @@
           %span.label.label-default когда
           в теплое время года
     .col-md-6
-      =f.autocomplete_field :whend, autocomplete_discontent_post_whend_discontent_posts_path,  class: 'form-control',placeholder: 'Во время какого события, мероприятия, процесса, ситуации '
+      =f.autocomplete_field :whend, autocomplete_discontent_post_whend_discontent_posts_path, :"min-length" => 0,  class: 'form-control autocomplete',placeholder: 'Во время какого события, мероприятия, процесса, ситуации '
 
 
   .row
