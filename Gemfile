@@ -51,7 +51,7 @@ end
 
 gem 'bootstrap-sass-rails'
 gem "selectize-rails"
-gem 'rails3-jquery-autocomplete'
+gem 'rails3-jquery-autocomplete', '1.0.14'
 gem 'html2haml', '1.0.0'
 gem 'devise'
 gem 'haml'

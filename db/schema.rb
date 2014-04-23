@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140412130241) do
+ActiveRecord::Schema.define(:version => 20140423153848) do
 
   create_table "answers", :force => true do |t|
     t.string   "text"
@@ -260,6 +260,13 @@ ActiveRecord::Schema.define(:version => 20140412130241) do
     t.boolean  "censored",   :default => false
   end
 
+  create_table "discontent_post_aspects", :force => true do |t|
+    t.integer  "post_id"
+    t.integer  "aspect_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
   create_table "discontent_post_notes", :force => true do |t|
     t.integer  "post_id"
     t.integer  "user_id"
@@ -291,6 +298,16 @@ ActiveRecord::Schema.define(:version => 20140412130241) do
   add_index "discontent_post_votings", ["post_id", "user_id"], :name => "index_discontent_post_voitings_on_post_id_and_user_id"
   add_index "discontent_post_votings", ["post_id"], :name => "index_discontent_post_voitings_on_post_id"
   add_index "discontent_post_votings", ["user_id"], :name => "index_discontent_post_voitings_on_user_id"
+
+  create_table "discontent_post_whens", :force => true do |t|
+    t.string  "content"
+    t.integer "project_id"
+  end
+
+  create_table "discontent_post_wheres", :force => true do |t|
+    t.string  "content"
+    t.integer "project_id"
+  end
 
   create_table "discontent_posts", :force => true do |t|
     t.text     "content"

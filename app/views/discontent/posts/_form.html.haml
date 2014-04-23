@@ -8,7 +8,7 @@
     #error_explanation
       %h2= "#{pluralize(@discontent_post.errors.count, "error")} prohibited this discontent_post from being saved:"
       %ul
-        - @ost.errors.full_messages.each do |msg|
+        - @post.errors.full_messages.each do |msg|
           %li= msg
   .row
     .col-md-12
@@ -53,7 +53,7 @@
           %span.label.label-default где
           во дворе между домами
     .col-md-6
-      =f.autocomplete_field :whered, autocomplete_discontent_post_whered_discontent_posts_path,  class: 'form-control',placeholder: 'Место, организация, общность, в которой это происходит '
+      =f.autocomplete_field :whered, autocomplete_discontent_post_whered_discontent_posts_path, :"min-length" => 0, class: 'form-control autocomplete',placeholder: 'Место, организация, общность, в которой это происходит '
       %br
       %br
   .row
@@ -71,7 +71,7 @@
           %span.label.label-default когда
           в теплое время года
     .col-md-6
-      =f.autocomplete_field :whend, autocomplete_discontent_post_whend_discontent_posts_path,  class: 'form-control',placeholder: 'Во время какого события, мероприятия, процесса, ситуации '
+      =f.autocomplete_field :whend, autocomplete_discontent_post_whend_discontent_posts_path, :"min-length" => 0,  class: 'form-control autocomplete',placeholder: 'Во время какого события, мероприятия, процесса, ситуации '
 
 
   .row
@@ -83,7 +83,18 @@
       %br
     .com-md-6
       %br
-      = select_tag 'discontent_post[aspect_id]', options_from_collection_for_select(@aspects, "id", "content", @post.aspect.nil? ? @aspects.first.id : @post.aspect.id), :prompt => 'Выберите аспект' , style:'margin-left: 20px;margin-top: 10px;'
+      = select_tag 'select_for_aspects', options_from_collection_for_select(@aspects.minus_view(@aspects_for_post.nil? ? [] : @aspects_for_post.pluck(:id)), "id", "content"),
+       :prompt => 'Выберите аспект' , style:'margin-left:15px;margin-top:10px;'
+      %br
+      #add_post_aspects(style="margin-left: 52%;margin-top: 10px;")
+        -unless @aspects_for_post.nil?
+          - @aspects_for_post.each do |ap|
+            %div{id: "aspect_#{ap.id}"}
+              %input{name: "discontent_post_aspects[]", type: "hidden", value: "#{ap.id}"}/
+              %span.glyphicon.glyphicon-remove.text-danger.pull-left{onclick: "remove_discontent_aspect('#{ap.id}','#{ap.content}');", style: "cursor:pointer;text-decoration:none;font-size:15px;"}
+              %span.span_aspect.label.label-t{id: "#{ap.id}"}=ap.content
+      %br
+
   .row
     .col-md-12
 
@@ -95,8 +106,8 @@
         %label.radio-inline
           = f.radio_button :style,  '0'
           %span.text-success Отсутствующие достоинства
-  %br
-  %b Мысленная контрольная проверка несовершенства на конкретность:
+  -#%br
+  -#%b Мысленная контрольная проверка несовершенства на конкретность:
   %br
   существуют ли какие-либо практические действия, которые устранят это несовершенство?
   %br

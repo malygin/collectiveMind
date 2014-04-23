@@ -96,6 +96,16 @@ $ ->
   $("#sortable").sortable()
   $("#sortable").disableSelection()
   $('#theall a:first').tab('show')
+  $("input#discontent_post_whend ").autocomplete(
+    minLength: 0
+  ).focus ->
+    $(this).autocomplete "search", ""
+    return
+  $("input#discontent_post_whered ").autocomplete(
+    minLength: 0
+  ).focus ->
+    $(this).autocomplete "search", ""
+    return
 
 
 $('#sortable').sortable update: (event, ui) ->
@@ -155,3 +165,30 @@ $(window).load ->
     $('#send_post').removeClass('disabled')
   else
     $('#send_post').addClass('disabled')
+
+$('#select_for_aspects').on 'change', ->
+  val=this.value
+  text=$(this).find('option:selected').text()
+  $(this).find('option:selected').remove()
+  func = "'#{val}','#{text}'"
+  $('#add_post_aspects').append('<div id="aspect_'+val+'" style="display:none;height:0;"><input type="hidden" name="discontent_post_aspects[]" value="'+val+'"/><span class="glyphicon glyphicon-remove text-danger pull-left" onclick="remove_discontent_aspect('+func+');" style="cursor:pointer;text-decoration:none;font-size:15px;"></span><span id="'+val+'" class="span_aspect label label-t">'+text+'</span></br></div>')
+  $('#aspect_'+val).css('display','block').animate({height: 20, opacity:1}, 500).effect("highlight", {color: '#f5cecd'}, 500)
+  activate_discontent_aspect()
+
+@reset_post_note_form= (post,type)->
+  $('#note_for_post_'+post+'_'+type).remove();
+  $('#content_dispost_'+post+'_'+type).removeClass('disabled');
+
+@remove_discontent_aspect= (val,text)->
+  $('#aspect_'+val).animate({height: 0, opacity: 0.000}, 1000, ->
+    $(this).remove())
+  $('#select_for_aspects').append(new Option(text,val))
+  activate_discontent_aspect()
+
+@activate_discontent_aspect= ->
+  setTimeout (->
+    if $("#add_post_aspects div").length
+      $('#send_post').removeClass('disabled')
+    else
+      $('#send_post').addClass('disabled')
+  ), 1500
