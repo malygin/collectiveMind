@@ -33,6 +33,8 @@ class Discontent::Post < ActiveRecord::Base
 
   scope :for_union, ->(aspect,post_ids){ where(status: 0).where(aspect_id: aspect).where("discontent_posts.id NOT IN (#{post_ids.join(", ")})") }
 
+  scope :by_post_aspects, ->(aspects){ join(post_aspects).where("discontent_posts.id IN (?)", aspects) }
+
   #scope :uniquely_whend, :select => 'distinct whend'
   #scope :uniquely_whered, :select => 'distinct whered'
   #scope :ready_for_post, lambda {  where(:status => 0).where("created_at < ?", 2.day.ago) }
@@ -67,7 +69,14 @@ class Discontent::Post < ActiveRecord::Base
   end
 
   def get_posts_suitable_for_association
-    Discontent::Post.where(status: 0, aspect_id: self.aspect_id, style: self.style).where('id!=?', self.id).where('whered = ? or whend = ?',self.whered, self.whend)
+    #Discontent::Post.where(status: 0, style: self.style).where('id!=?', self.id).where('whered = ? or whend = ?',self.whered, self.whend)
+    aspects = self.post_aspects.pluck(:id).join(", ")
+
+    Discontent::Post.includes(:discontent_post_aspects).
+    where('"discontent_post_aspects"."aspect_id" IN (?) and "discontent_posts"."status" = 0
+    and "discontent_posts"."style" = ? and "discontent_posts"."id" <> ?
+    and ("discontent_posts"."whered" = ? or "discontent_posts"."whend" = ?)', aspects, self.style, self.id, self.whered, self.whend)
+
   end
 
   def conditions_for_plan(plan)
