@@ -1,8 +1,8 @@
 - unless @posts.nil?
-  $("#discontent_warning").fadeIn()
-  $("#discontent_success").fadeOut()
-  $('#posts').html("#{escape_javascript(render  @posts)}")
-  $('#send_post').html('Все равно сохранить')
+  $("#discontent_warning").fadeIn();
+  $("#discontent_success").fadeOut();
+  $('#posts').html("#{escape_javascript(render  @posts)}");
+  $('#send_post').html('Все равно сохранить');
   -#$('#send_post').toggleClass('disabled')
   $('#new_discontent').append('<input id="new_discontent_hidden" type="hidden" name="resave" value="true" />');
 -else
@@ -17,6 +17,14 @@
   $('#discontent_post_whend').val('')
 
   $('#new_discontent_hidden').remove();
+
+  sel_aspect = $('#add_post_aspects').find('span.span_aspect');
+  for (i=0; i<sel_aspect.length; i++) {
+  var value = sel_aspect[i].id;
+  var text = sel_aspect[i].textContent;
+  $('#select_for_aspects').append(new Option(text,value));
+  }
+  $('#add_post_aspects').empty();
 
 
 

@@ -70,11 +70,10 @@ class Discontent::PostsController < PostsController
     load_filter_for_aspects   if (request.xhr? and @order.nil? and @page.nil?)
 
     @posts  = current_model.where(:project_id => @project, :status => 0)
-    .where('aspect_id  IN (?) ' , current_user.aspects(@project.id).collect(&:id))
     .where(status: @status)
     .order_by_param(@order)
     .paginate(:page => params[:page], :per_page => 20)
-
+    #.where('aspect_id  IN (?) ' , current_user.aspects(@project.id).collect(&:id))
     respond_to do |format|
       format.html {
        if params[:view] == 'table'
@@ -103,6 +102,7 @@ class Discontent::PostsController < PostsController
   # GET /discontent/posts/1/edit
   def edit
     @post = current_model.find(params[:id])
+    @aspects_for_post = @post.post_aspects
   end
 
 
@@ -147,6 +147,7 @@ class Discontent::PostsController < PostsController
     #@post = @project.discontents.create(params[name_of_model_for_param])
     #@post.user = current_user
     #discontents = Discontent::Post.where(:project_id => @project.id)
+
     r=nil
     unless params[:resave]
       r = Discontent::Post.where(:project_id => @project.id, status: 0).collect {|d| [ d, d.content.similar(params[name_of_model_for_param][:content])]}
@@ -163,6 +164,14 @@ class Discontent::PostsController < PostsController
     else
       @posts = r.collect {|d| d[0] if d[1]> 40}.compact.reverse
     end
+
+    if !params[:discontent_post_aspects].nil? and @posts.nil?
+      params[:discontent_post_aspects].each do |asp|
+        aspect = Discontent::PostAspect.create(post_id: @post.id, aspect_id: asp.to_i)
+        aspect.save!
+      end
+    end
+
     respond_to do |format|
       format.html
       format.js
@@ -172,9 +181,13 @@ class Discontent::PostsController < PostsController
   def update
     @post = current_model.find(params[:id])
     @project = Core::Project.find(params[:project])
-    @post.update_attributes(params[name_of_model_for_param])
-    current_user.journals.build(:type_event=>name_of_model_for_param+"_update", :project => @project, :body=>"#{@post.content[0..12]}:#{@post.id}").save!
+    unless params[:discontent_post_aspects].nil?
+      @post.update_attributes(params[name_of_model_for_param])
 
+      @post.update_post_aspects(params[:discontent_post_aspects])
+
+      current_user.journals.build(:type_event=>name_of_model_for_param+"_update", :project => @project, :body=>"#{@post.content[0..12]}:#{@post.id}").save!
+    end
     respond_to do |format|
       format.html
       format.js

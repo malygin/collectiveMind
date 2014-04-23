@@ -10,6 +10,9 @@ class Discontent::Post < ActiveRecord::Base
   has_many :discontent_posts, :class_name => 'Discontent::Post', :foreign_key => 'discontent_post_id'
   has_many :discontent_comment_notes, :class_name => 'Discontent::CommentNote'
 
+  has_many :discontent_post_aspects, :class_name => 'Discontent::PostAspect'
+  has_many :post_aspects, :through => :discontent_post_aspects, :source => :discontent_aspect, :class_name => 'Discontent::Aspect'
+
   has_many :concept_conditions, :class_name => 'Concept::PostAspect', :foreign_key => 'discontent_aspect_id'
   has_many :plan_conditions, :class_name => 'Plan::PostAspect', :foreign_key => 'discontent_aspect_id'
 
@@ -24,6 +27,8 @@ class Discontent::Post < ActiveRecord::Base
   has_many :voted_users, :through => :final_votings, :source => :user
   has_many :final_votings,:foreign_key => 'discontent_post_id', :class_name => 'Discontent::Voting'
   scope :by_status, ->(p){where(status: p)}
+  scope :by_positive, ->(p){where(style: 0, status: p)}
+  scope :by_negative, ->(p){where(style: 1, status: p)}
   scope :required_posts, ->(p){where(status:4, project_id:p.id)}
 
   scope :for_union, ->(aspect,post_ids){ where(status: 0).where(aspect_id: aspect).where("discontent_posts.id NOT IN (#{post_ids.join(", ")})") }
@@ -32,6 +37,26 @@ class Discontent::Post < ActiveRecord::Base
   #scope :uniquely_whered, :select => 'distinct whered'
   #scope :ready_for_post, lambda {  where(:status => 0).where("created_at < ?", 2.day.ago) }
   #scope :not_ready_for_post, lambda {  where(:status => 0).where("created_at > ?", 2.day.ago) }
+
+  def update_post_aspects(aspects_new)
+    aspects_old = self.discontent_post_aspects
+    unless aspects_old.nil? or aspects_new.nil?
+      aspects_old.each do |asp|
+        unless aspects_new.include? asp.aspect_id.to_s
+          asp.destroy
+        end
+      end
+    end
+    aspects_old = self.post_aspects.nil? ? [] : self.post_aspects.pluck(:id)
+    unless aspects_new.nil?
+      aspects_new.each do |asp|
+        unless aspects_old.include? asp.to_i
+          aspect = Discontent::PostAspect.create(post_id: self.id, aspect_id: asp.to_i)
+          aspect.save!
+        end
+      end
+    end
+  end
 
   def post_notes(type_field)
     self.discontent_comment_notes.by_type(type_field)

@@ -26,8 +26,9 @@
     %tr
       %td
 
-        =render partial:'post_short', collection: aspect.positive_posts.by_status(@status)
+        -#=render partial:'post_short', collection: aspect.positive_posts.by_status(@status)
+        =render partial:'post_short', collection: aspect.aspect_posts.by_positive(@status)
 
       %td
-        =render partial:'post_short', collection: aspect.negative_posts.by_status(@status)
-
+        -#=render partial:'post_short', collection: aspect.negative_posts.by_status(@status)
+        =render partial:'post_short', collection: aspect.aspect_posts.by_negative(@status)
