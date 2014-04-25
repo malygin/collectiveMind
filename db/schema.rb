@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140423153848) do
+ActiveRecord::Schema.define(:version => 20140425120500) do
 
   create_table "answers", :force => true do |t|
     t.string   "text"
@@ -339,6 +339,7 @@ ActiveRecord::Schema.define(:version => 20140423153848) do
     t.integer  "discontent_post_id"
     t.datetime "created_at",         :null => false
     t.datetime "updated_at",         :null => false
+    t.boolean  "against"
   end
 
   add_index "discontent_votings", ["discontent_post_id"], :name => "index_discontent_votings_on_discontent_post_id"

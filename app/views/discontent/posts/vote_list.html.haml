@@ -1,27 +1,35 @@
+-#
+-#%h3 Голосование за самые актуальные несовершенства
+-#
+-#- unless @number_v<1  and not boss?
+-#  .alert.alert-info
+-#    %h3.text-danger
+-#      =t('voting.have_votes')
+-#      %b#count_vote=@number_v
+-#
+-#%table.table
+-#  -@aspects.each do |aspect|
+-#    %tr
+-#      %td(colspan=3)
+-#        %span.label.label-t=aspect.content
+-#    %tr
+-#      %td
+-#        %span.label.label-p  Отсутствующие достоинства
+-#      %td
+-#        %span.label.label-n(style='min-width: 300px;')  Имеющиеся недостатки
+-#
+-#    %tr
+-#      %td
+-#        =render partial:'post_for_vote', collection: aspect.negative_posts.by_status(@status)
+-#
+-#      %td
+-#        =render partial:'post_for_vote', collection: aspect.positive_posts.by_status(@status)
 
-%h3 Голосование за самые актуальные несовершенства
-
-- unless @number_v<1  and not boss?
-  .alert.alert-info
-    %h3.text-danger
-      =t('voting.have_votes')
-      %b#count_vote=@number_v
-
-%table.table
-  -@aspects.each do |aspect|
-    %tr
-      %td(colspan=3)
-        %span.label.label-t=aspect.content
-    %tr
-      %td
-        %span.label.label-p  Отсутствующие достоинства
-      %td
-        %span.label.label-n(style='min-width: 300px;')  Имеющиеся недостатки
-
-    %tr
-      %td
-        =render partial:'post_for_vote', collection: aspect.negative_posts.by_status(@status)
-
-      %td
-        =render partial:'post_for_vote', collection: aspect.positive_posts.by_status(@status)
-
+.panel.panel-default
+  .panel-heading
+    %h5 Определение наиболее важных проблем
+  .panel-body
+    -@posts.each do |post|
+      =render partial: 'post_for_vote', object: post
+    #vote_success.text-success(style="display:none;" )
+      Спасибо за голосование
