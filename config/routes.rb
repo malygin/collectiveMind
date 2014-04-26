@@ -88,6 +88,7 @@ scope '/project/:project' do
         put :post_note_edit
         put :post_note_update
         delete :post_note_destroy
+        put :next_post_for_vote
       end
     end
   end

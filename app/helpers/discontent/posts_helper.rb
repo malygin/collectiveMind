@@ -24,6 +24,17 @@ module Discontent::PostsHelper
     text+='</ul>'
     text.html_safe
   end
+  def first_post_for_vote?(post)
+    if @project.get_united_posts_for_vote(current_user).size == 1
+      false
+    else
+      if @project.get_united_posts_for_vote(current_user).pluck(:id).min != post
+        true
+      else
+        false
+      end
+    end
+  end
 
   def id_for_type_field(type_fd)
     case type_fd
