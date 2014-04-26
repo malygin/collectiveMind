@@ -28,8 +28,15 @@
 .panel.panel-default
   .panel-heading
     %h5 Определение наиболее важных проблем
+    %span Несовершенство:
+    %span#prog_now=@votes != @post_all ? @votes+1 : @votes
+    из
+    %span#prog_all=@post_all
+    .progress
+      .progress-bar.progress-bar-success{"aria-valuemax" => "100", "aria-valuemin" => "0", "aria-valuenow" => "#{(@votes/@post_all.to_f)*100}", role: "progressbar", style: "width: #{(@votes/@post_all.to_f)*100}%;"}
+
   .panel-body
     -@posts.each do |post|
       =render partial: 'post_for_vote', object: post
     #vote_success.text-success(style="display:none;" )
-      Спасибо за голосование
+      %h3 Спасибо за голосование

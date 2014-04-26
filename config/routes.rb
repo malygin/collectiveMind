@@ -85,8 +85,6 @@ scope '/project/:project' do
         put :status_post
         put :post_note_new
         put :post_note_create
-        put :post_note_edit
-        put :post_note_update
         delete :post_note_destroy
         put :next_post_for_vote
       end
