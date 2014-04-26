@@ -8,7 +8,7 @@
         %div.panel-body
           -#%button.btn.btn-info.pull-right(data-toggle="modal" data-target="#modalStage3")
           -#  Показать пример
-          %h5.text-infoУстраняемое несовершенство (проблема):
+          %h6.text-infoУстраняемое несовершенство (проблема):
 
           =render partial:'discontent/posts/post_short2', object: @discontent_post
           %br
@@ -17,7 +17,7 @@
           .row
             .col-md-12
               .text-center
-                %h5.text-success
+                %h6.text-success
                   %b A 1
                 %p.text-info.h5
                   =t('form.novation_what')
@@ -27,10 +27,10 @@
             .col-md-6
               .text-right
                 %i
-                  %h5.text-primary Предположим, мы оказались в будущем; что там есть такого, что исправляет несовершенство?
-                  %h5.text-primary Не пишите о том, КАК это будет исправлять несовершенство - для этого есть следующий вопрос.
-                  %h5.text-success Пример:
-                  %h5.text-muted Несовершенство:
+                  %h6.text-primary Предположим, мы оказались в будущем; что там есть такого, что исправляет несовершенство?
+                  %h6.text-primary Не пишите о том, КАК это будет исправлять несовершенство - для этого есть следующий вопрос.
+                  %h6.text-success Пример:
+                  %h6.text-muted Несовершенство:
                   %span.label.label-default что
                   %span.text-muted Пыльный и отвратительный на вид большой пустырь
                   %br
@@ -41,15 +41,15 @@
                   %span.text-muted в теплое время года
                   %br
                   %br
-                  %h5.text-success Нововведение:
-                  %p.text-success Газон по всему пустырю  с  клумбой  посредине
+                  %h6.text-success Нововведение:
+                  %p Газон по всему пустырю  с  клумбой  посредине
             .col-md-6
               .form-group.has-danger
                 =text_area_tag "pa[#{@discontent_post.id}][name]",@pa.name, :class => "concept_cond form-control", rows: 12, style: 'width: 100%;'
           .row
             .col-md-12
               .text-center
-                %h5.text-success
+                %h6.text-success
                   %b A 2
                 %p.text-info.h5
                   =t('form.novation_how')
@@ -58,22 +58,10 @@
             .col-md-6
               .text-right
                 %i
-                  %h5.text-primary Старайтесь писать кратко, не углубляясь в лишние детали.
-                  %br
-                  %h5.text-success Пример:
-                  %h5.text-muted Несовершенство:
-                  %span.label.label-default что
-                  %span.text-muted Пыльный и отвратительный на вид большой пустырь
-                  %br
-                  %span.label.label-default где
-                  %span.text-muted во дворе между домами
-                  %br
-                  %span.label.label-default когда
-                  %span.text-muted в теплое время года
-                  %br
-                  %br
-                  %h5.text-success Как будет исправлено:
-                  %p.text-success Трава газона и декоративные растения на клумбе будут привлекательны на вид и предотвращать появление пыли.
+                  %h6.text-primary Старайтесь писать кратко, не углубляясь в лишние детали.
+                  %h6.text-success Пример:
+
+                  %p Трава газона и декоративные растения на клумбе будут привлекательны на вид и предотвращать появление пыли.
             .col-md-6
               .form-group.has-danger
                 =text_area_tag "pa[#{@discontent_post.id}][content]",@pa.content, :class => "concept_cond form-control", rows: 12, style: 'width: 100%;'
@@ -81,7 +69,7 @@
           .row
             .col-md-12
               .text-center
-                %h5.text-success
+                %h6.text-success
                   %b B 1
                 %p.text-info.h5
                   =t('form.cond')
@@ -91,28 +79,17 @@
             .col-md-6
               .text-right
                 %i
-                  %h5.text-primary Какие в будущем должны быть созданы и поддерживаться УСЛОВИЯ и разрешаться ПРАКТИЧЕСКИЕ ЗАДАЧИ.
+                  %h6.text-primary Какие в будущем должны быть созданы и поддерживаться УСЛОВИЯ и разрешаться ПРАКТИЧЕСКИЕ ЗАДАЧИ.
                   %br
-                  %h5.text-success Пример:
-                  %h5.text-muted Несовершенство:
-                  %span.label.label-default что
-                  %span.text-muted Пыльный и отвратительный на вид большой пустырь
-                  %br
-                  %span.label.label-default где
-                  %span.text-muted во дворе между домами
-                  %br
-                  %span.label.label-default когда
-                  %span.text-muted в теплое время года
-                  %br
-                  %h5.text-success Условия и задачи:
-                  %p.text-success Должен быть обеспечен регулярный полив;  нужно засевать газон травой, а на клумбу высаживать растения; почву периодически вскапывать, удобрять и пропалывать; необходимо весной собирать деньги у жильцов.
+                  %h6.text-success Пример:
+                  %p Должен быть обеспечен регулярный полив;  нужно засевать газон травой, а на клумбу высаживать растения; почву периодически вскапывать, удобрять и пропалывать; необходимо весной собирать деньги у жильцов.
             .col-md-6
               .form-group.has-success
                 =text_area_tag "pa[#{@discontent_post.id}][positive]",@pa.positive, :placeholder => 'Подробно опишите весь процесс функционирования вашего нововведения в будущем.', :class => "concept_cond form-control", rows: 12, style: 'width: 100%;'
           .row
             .col-md-12
               .text-center
-                %h5.text-success
+                %h6.text-success
                   %b B 2
                 %p.text-info.h5
                   =t('form.cond_res')
@@ -122,37 +99,34 @@
             .col-md-6
               .text-right
                 %i
-                  %h5.text-primary
+                  %h6.text-primary
                     Ресурсами могут быть методы, технические, организационные или финансовые средства, человеческие силы и вообще все,
                     что необходимо иметь в распоряжении в будущем, чтобы обеспечить функционирование нововведения
                   %br
-                  %h5.text-success Пример:
+                  %h6.text-success Пример:
 
-                  %h5.text-muted Несовершенство:
-                  %span.label.label-default что
-                  %span.text-muted Пыльный и отвратительный на вид большой пустырь
-                  %br
-                  %span.label.label-default где
-                  %span.text-muted во дворе между домами
-                  %br
-                  %span.label.label-default когда
-                  %span.text-muted в теплое время года
-                  %br
-                  %span.text-success Условия и задачи:
-                  %span.text-success необходимо периодически  вскапывать клумбу, удобрять и пропалывать...
-                  %br
-                  %span.text-success
-                    %b Требуемые для этого ресурсы:
+                  %p
                     работник по уходу за растениями,  инструменты обработки почвы и растений, помещение для хранения технических средств...
             .col-md-6
               .form-group.has-success
-                =text_area_tag "pa[#{@discontent_post.id}][positive_r]",@pa.positive_r, :placeholder => 'Перечислите все необходимое для успешного функционирования вашего нововедения в будущем', :class => "concept_cond form-control", rows: 12, style: 'width: 100%;'
+                .panel.panel-default
+                  .panel-body
+                    =f.autocomplete_field :resource, autocomplete_concept_post_resource_concept_posts_path, :"min-length" => 0,  class: 'form-control autocomplete',placeholder: 'Ресурс 1'
+                    %br
+                    = text_area_tag 'res', '', class: 'form-control', placeholder: 'Пояснение к ресурсу'
+                .panel.panel-default
+                  .panel-body
+                    =f.autocomplete_field :resource, autocomplete_concept_post_resource_concept_posts_path, :"min-length" => 0,  class: 'form-control autocomplete',placeholder: 'Ресурс 2'
+                    %br
+                    = text_area_tag 'res', '', class: 'form-control', placeholder: 'Пояснение к ресурсу'
+                %button.btn.btn-success Добавить ресурс
+                -#=text_area_tag "pa[#{@discontent_post.id}][positive_r]",@pa.positive_r, :placeholder => 'Перечислите все необходимое для успешного функционирования вашего нововедения в будущем', :class => "concept_cond form-control", rows: 12, style: 'width: 100%;'
 
           %hr
           .row
             .col-md-12
               .text-center
-                %h5.text-success
+                %h6.text-success
                   %b C 1
                 %p.text-info.h5
                   =t('form.negative_h')
@@ -162,26 +136,11 @@
             .col-md-6
               .text-right
                 %i
-                  %h5.text-primary Напишите, какие НЕЖЕЛАТЕЛЬНЫЕ ПОБОЧНЫЕ ЭФФЕКТЫ в будущем, которые могут возникнуть в будущем, если будут созданы и поддерживаться должные УСЛОВИЯ и разрешаться ЗАДАЧИ.
+                  %h6.text-primary Напишите, какие НЕЖЕЛАТЕЛЬНЫЕ ПОБОЧНЫЕ ЭФФЕКТЫ в будущем, которые могут возникнуть в будущем, если будут созданы и поддерживаться должные УСЛОВИЯ и разрешаться ЗАДАЧИ.
                   %br
-                  %h5.text-success Пример:
-                  %h5.text-muted Несовершенство:
-                  %span.label.label-default что
-                  %span.text-muted Пыльный и отвратительный на вид большой пустырь
-                  %br
-                  %span.label.label-default где
-                  %span.text-muted во дворе между домами
-                  %br
-                  %span.label.label-default когда
-                  %span.text-muted в теплое время года
-                  %br
-                  %span.text-success Условие:
-                  %br
-                  %span.text-success необходимо весной собирать деньги у жильцов...
-                  %br
-                  %br
+                  %h6.text-success Пример:
+
                   %p.text-success
-                    %b Вероятный нежелательный побочный эффект:
                     %br
                     Конфликты из-за того, что некоторые жильцы могут отказаться делать денежные взносы.
             .col-md-6
@@ -191,7 +150,7 @@
           .row
             .col-md-12
               .text-center
-                %h5.text-success
+                %h6.text-success
                   %b C 2
                 %p.text-info.h5
                   =t('form.negative_res')
@@ -201,32 +160,11 @@
             .col-md-6
               .text-right
                 %i
-                  %h5.text-primary Укажите ресурсы, которые потребуются, чтобы предотвращать эти ЭФФЕКТЫ.
+                  %h6.text-primary Укажите ресурсы, которые потребуются, чтобы предотвращать эти ЭФФЕКТЫ.
                   %br
-                  %h5.text-success Пример:
-                  %h5.text-muted Несовершенство:
-                  %span.label.label-default что
-                  %span.text-muted Пыльный и отвратительный на вид большой пустырь
-                  %br
-                  %span.label.label-default где
-                  %span.text-muted во дворе между домами
-                  %br
-                  %span.label.label-default когда
-                  %span.text-muted в теплое время года
-                  %br
-                  %span.text-success Условие:
-                  %br
-                  %span.text-success необходимо весной собирать деньги у жильцов...
-                  %br
-                  %br
-                  %span.text-success Вероятный нежелательный побочный эффект:
-                  %br
-                  %span.text-success Некоторые жильцы могут отказаться делать денежные взносы.
-                  %br
-                  %br
-                  %p.text-success
-                    %b Ресурсы предотвращения:
-                    %br
+                  %h6.text-success Пример:
+
+                  %p
                     Средства широкого публичного оповещения о должниках
             .col-md-6
               .form-group.has-success
@@ -236,7 +174,7 @@
           .row
             .col-md-12
               .text-center
-                %h5.text-success
+                %h6.text-success
                   %b D 1
                 %p.text-info.h5
                   =t('form.problems')
@@ -246,20 +184,9 @@
             .col-md-6
               .text-right
                 %i
-                  %h5.text-primary Обоснуйте, что "игра стоит свеч".
+                  %h6.text-primary Обоснуйте, что "игра стоит свеч".
                   %br
-                  %h5.text-success Пример:
-                  %h5.text-muted Несовершенство:
-                  %span.label.label-default что
-                  %span.text-muted Пыльный и отвратительный на вид большой пустырь
-                  %br
-                  %span.label.label-default где
-                  %span.text-muted во дворе между домами
-                  %br
-                  %span.label.label-default когда
-                  %span.text-muted в теплое время года
-                  %br
-                  %h5.text-success Примеры
+                  %h6.text-success Пример:
                   %p К сожалению, уход за клумбой потребует значительного труда, однако  ввиду ее красоты предлагается на это пойти.
             .col-md-6
               .form-group.has-success
@@ -268,7 +195,7 @@
           .row
             .col-md-12
               .text-center
-                %h5.text-success
+                %h6.text-success
                   %b D 2
                 %p.text-info.h5
                   =t('form.reality')
@@ -278,20 +205,10 @@
             .col-md-6
               .text-right
                 %i
-                  %h5.text-primary Покажите, что нужные для нововведения ресурсы несложно и недорого создать
+                  %h6.text-primary Покажите, что нужные для нововведения ресурсы несложно и недорого создать
                   %br
-                  %h5.text-success Пример:
-                  %h5.text-muted Несовершенство:
-                  %span.label.label-default что
-                  %span.text-muted Пыльный и отвратительный на вид большой пустырь
-                  %br
-                  %span.label.label-default где
-                  %span.text-muted во дворе между домами
-                  %br
-                  %span.label.label-default когда
-                  %span.text-muted в теплое время года
-                  %br
-                  %h5.text-success Примеры:
+                  %h6.text-success Пример:
+
                   %p Работника нанять недорого; инструменты и материалы приобрести и организовать полив вполне возможно; жильцы, вероятно, согласятся дать на это деньги.
             .col-md-6
               .form-group.has-success
@@ -321,7 +238,7 @@
 -#        %div.panel-body
 -#          %button.btn.btn-info.pull-right(data-toggle="modal" data-target="#modalStage3")
 -#            Показать пример
--#          %h5.text-infoУстраняемое несовершенство (проблема):
+-#          %h6.text-infoУстраняемое несовершенство (проблема):
 -#
 -#          =render partial:'discontent/posts/post_short2', object: @discontent_post
 -#          %br
@@ -329,7 +246,7 @@
 -#          %hr
 -#          %div.panel.panel-info
 -#            .panel-heading
--#              %h5.text-success
+-#              %h6.text-success
 -#                %b A.*
 -#
 -#

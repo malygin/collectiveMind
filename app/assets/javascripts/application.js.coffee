@@ -96,12 +96,18 @@ $ ->
   $("#sortable").sortable()
   $("#sortable").disableSelection()
   $('#theall a:first').tab('show')
-  $("input#discontent_post_whend ").autocomplete(
-    minLength: 0
-  ).focus ->
-    $(this).autocomplete "search", ""
-    return
-  $("input#discontent_post_whered ").autocomplete(
+#  $("input#discontent_post_whend ").autocomplete(
+#    minLength: 0
+#  ).focus ->
+#    $(this).autocomplete "search", ""
+#    return
+#
+#  $("input#discontent_post_whered ").autocomplete(
+#    minLength: 0
+#  ).focus ->
+#    $(this).autocomplete "search", ""
+#    return
+  $("input.autocomplete ").autocomplete(
     minLength: 0
   ).focus ->
     $(this).autocomplete "search", ""
