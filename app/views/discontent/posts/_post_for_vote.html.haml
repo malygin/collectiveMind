@@ -6,16 +6,16 @@
 
   %br
 
-  =link_to  next_post_for_vote_discontent_post_path(@project,post_for_vote,against: true), :remote => true, :method => :put, class: "btn btn-default btn-sm vote-button", id: "vote_positive_#{post_for_vote.id}" do
+  =link_to  next_post_for_vote_discontent_post_path(@project,post_for_vote,against: true), :remote => true, :method => :put, class: "btn btn-success btn-sm vote-button", id: "vote_positive_#{post_for_vote.id}" do
     %span.glyphicon.text-success.glyphicon-thumbs-up
     -if boss?
       %span.glyphicon.text-success=post_for_vote.final_votings.by_positive.size
     Важная
-  =link_to  next_post_for_vote_discontent_post_path(@project,post_for_vote,against: false), :remote => true, :method => :put, class: "btn btn-default btn-sm vote-button", id: "vote__negative_#{post_for_vote.id}" do
+  =link_to  next_post_for_vote_discontent_post_path(@project,post_for_vote,against: false), :remote => true, :method => :put, class: "btn btn-danger btn-sm vote-button", id: "vote__negative_#{post_for_vote.id}" do
     %span.glyphicon.text-danger.glyphicon-thumbs-down
     -if boss?
       %span.glyphicon.text-success=post_for_vote.final_votings.by_negative.size
-    Надуманная
+    Не важная
 
 -#- if can_vote?(post_for_vote.voted(current_user).size,  @number_v, @votes)
 -#  =link_to   @path_for_voting+"vote/"+post_for_vote.id.to_s , :remote => true, :method => :put, class: "btn btn-default btn-sm vote-button", id: "vote_#{post_for_vote.id}" do

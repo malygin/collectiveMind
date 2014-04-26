@@ -114,6 +114,7 @@ class Discontent::PostsController < PostsController
   def vote_list
     #@posts = current_model.where(:project_id => @project, :status => 2)
     @posts = @project.get_united_posts_for_vote(current_user)
+    @post_all = current_model.where(:project_id => @project, :status => 2).count
     # i have votes now
     #@number_v = @project.get_united_posts_for_vote(current_user)
     if @posts.empty?
@@ -204,7 +205,7 @@ class Discontent::PostsController < PostsController
    def union_discontent
      @project = Core::Project.find(params[:project])
      @post = Discontent::Post.find(params[:id])
-     @new_post =Discontent::Post.create(status: 2, style: @post.style, project: @project, aspect_id: @post.aspect.id, whered: @post.whered, whend: @post.whend)
+     @new_post =Discontent::Post.create(status: 2, style: @post.style, project: @project, content: params[:union_post_descr], whered: @post.whered, whend: @post.whend)
      @new_post.save!
      unless params[:posts].nil?
        params[:posts].each do |p|
@@ -219,11 +220,10 @@ class Discontent::PostsController < PostsController
      @project = Core::Project.find(params[:project])
 
      @posts  = current_model.where(:project_id => @project)
-     .where('aspect_id  IN (?) ' , current_user.aspects(@project.id).collect(&:id))
      .where(status: 2)
      .order_by_param(@order)
      .paginate(:page => params[:page], :per_page => 20)
-
+     #.where('aspect_id  IN (?) ' , current_user.aspects(@project.id).collect(&:id))
      respond_to do |format|
        format.js
      end
@@ -311,6 +311,7 @@ class Discontent::PostsController < PostsController
       @post_vote = voting_model.find(params[:id])
       @post_vote.final_votings.create(:user => current_user, :against => params[:against]) unless @post_vote.voted_users.include? current_user
       @votes = current_user.voted_discontent_posts.count
+      @post_all = current_model.where(:project_id => @project, :status => 2).count
       #if @project.get_united_posts_for_vote(current_user).empty?
       #  redirect_to action: "index"
       #end
