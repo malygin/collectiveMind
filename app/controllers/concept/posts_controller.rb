@@ -167,7 +167,7 @@ class Concept::PostsController < PostsController
     #@aspects = Discontent::Aspect.where(:project_id => @project)
     @pa =Concept::PostAspect.new
     respond_to do |format|
-      format.html { render :layout => 'application_one_column' }
+      format.html { render :layout => 'application_two_column' }
       format.json { render json: @post }
     end
   end

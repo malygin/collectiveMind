@@ -1,26 +1,27 @@
 .row
   .col-md-5.col-md-offset-3
-
-    %h2 Регистрация
-    = form_for(resource, :as => resource_name, :url => registration_path(resource_name)) do |f|
-      = devise_error_messages!
-      %div
-        email
-        %br/
-        = f.email_field :email, :autofocus => true
-      %div
-        Имя
-        %br/
-        = f.text_field :name
-      %div
-        пароль
-        %br/
-        = f.password_field :password
-      %div
-        пароль еще раз
-        %br/
-        = f.password_field :password_confirmation
-      %br
-      %div
-        = f.submit "Зарегистрироваться", class: 'btn btn-primary'
-    = render "devise/shared/links"
+    .panel.panel-primary
+      .panel-heading Регистрация
+      .panel-body
+        = form_for(resource, :as => resource_name, :url => registration_path(resource_name)) do |f|
+          = devise_error_messages!
+          %div
+            email
+            %br/
+            = f.email_field :email, :autofocus => true
+          %div
+            Имя
+            %br/
+            = f.text_field :name
+          %div
+            Пароль
+            %br/
+            = f.password_field :password
+          %div
+            Пароль еще раз
+            %br/
+            = f.password_field :password_confirmation
+          %br
+          %div
+            = f.submit "Зарегистрироваться", class: 'btn btn-primary'
+        = render "devise/shared/links"
