@@ -8,7 +8,7 @@ class Discontent::Post < ActiveRecord::Base
   #belongs_to :post, :class_name => 'Discontent::Post', :foreign_key => 'replace_id'
   belongs_to :discontent_post
   has_many :discontent_posts, :class_name => 'Discontent::Post', :foreign_key => 'discontent_post_id'
-  has_many :discontent_comment_notes, :class_name => 'Discontent::CommentNote'
+  has_many :discontent_notes, :class_name => 'Discontent::Note'
 
   has_many :discontent_post_aspects, :class_name => 'Discontent::PostAspect'
   has_many :post_aspects, :through => :discontent_post_aspects, :source => :discontent_aspect, :class_name => 'Discontent::Aspect'
@@ -30,7 +30,7 @@ class Discontent::Post < ActiveRecord::Base
   scope :by_positive, ->(p){where(style: 0, status: p)}
   scope :by_negative, ->(p){where(style: 1, status: p)}
   scope :required_posts, ->(p){where(status:4, project_id:p.id)}
-  scope :united_for_vote,  ->(project,voted){where(project_id: project,status:2).where("discontent_posts.id NOT IN (#{voted.join(", ")})").order(:id)}
+  scope :united_for_vote,  ->(project,voted){where(project_id: project, status: 2).where("discontent_posts.id NOT IN (#{voted.join(", ")})").order(:id)}
 
   scope :for_union, ->(aspects,post_ids){ includes(:discontent_post_aspects).where("discontent_post_aspects.aspect_id IN (#{aspects.join(", ")})").where(status: 0).where("discontent_posts.id NOT IN (#{post_ids.join(", ")})") }
 
@@ -60,7 +60,7 @@ class Discontent::Post < ActiveRecord::Base
   end
 
   def post_notes(type_field)
-    self.discontent_comment_notes.by_type(type_field)
+    self.discontent_notes.by_type(type_field)
   end
 
   def voted(user)

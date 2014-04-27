@@ -207,6 +207,57 @@ class Concept::PostsController < PostsController
    end
   #write fact of voting in db
 
+   def status_post
+     @project = Core::Project.find(params[:project])
+     @post = Concept::Post.find(params[:id])
+     @type = params[:type_field]
+     if @post.post_notes(@type.to_i).size == 0
+        @post.update_attributes(column_for_concept_type(@type.to_i) => 't')
+     end
+     respond_to do |format|
+       format.js
+     end
+   end
+   def new_note
+     @project = Core::Project.find(params[:project])
+     @post = Concept::Post.find(params[:id])
+     @type = params[:type_field]
+     @post_note = Concept::Note.new
+     respond_to do |format|
+       format.js
+     end
+   end
+   def create_note
+     @project = Core::Project.find(params[:project])
+     @post = Concept::Post.find(params[:id])
+     @post_note = Concept::Note.create(params[:concept_note])
+     @post_note.post_id = params[:id]
+     @post_note.type_field = params[:type_field]
+     @post_note.user_id = current_user.id
+     @type = params[:type_field]
+     if @post.post_notes(@type.to_i).size == 0
+       @post.update_attributes(column_for_concept_type(@type.to_i) => 'f')
+     end
+     respond_to do |format|
+       if @post_note.save
+         format.js
+       else
+         render "new_note"
+       end
+     end
+   end
+
+   def destroy_note
+     @project = Core::Project.find(params[:project])
+     @post = Concept::Post.find(params[:id])
+     @type = params[:type_field]
+     @post_note = Concept::Note.find(params[:note_id])
+     @post_note.destroy if boss?
+     respond_to do |format|
+       format.js
+     end
+   end
+
 
   private
   def new_disc(param)

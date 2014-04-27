@@ -33,7 +33,7 @@
 
             - post.concept_conditions.each  do |pa|
               - if pa.concept_post.status == 0
-                .panel.panel-success
+                .panel.panel-success(class="#{class_for_concept_type(pa)}")
                   .panel-body.nov-list
                     %small.text-muted= Russian::strftime(pa.created_at,"%d %B %k:%M:%S ")
                     %br
