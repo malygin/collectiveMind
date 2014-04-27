@@ -100,7 +100,6 @@ class User < ActiveRecord::Base
 
   end
 
-
   def to_s
     if self.anonym
       self.nickname

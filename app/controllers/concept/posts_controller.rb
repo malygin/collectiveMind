@@ -4,7 +4,9 @@ class Concept::PostsController < PostsController
   # GET /discontent/posts
   # GET /discontent/posts.json
    layout 'application_two_column', :only => [:new, :edit, :show]
-  def current_model
+   autocomplete :concept_post, :resource, :class_name => 'Concept::Post' , :full => true
+
+   def current_model
     Concept::Post
   end
   
@@ -20,7 +22,18 @@ class Concept::PostsController < PostsController
     Concept::PostAspect
   end
 
-  def prepare_data
+   def autocomplete_concept_post_resource
+     pr=Set.new
+     pr.merge(Concept::Resource.where(:project_id => params[:project]).map {|d| {:value => d.name}})
+     #if params[:term].length > 1
+     #  pr.merge(Discontent::Post.select("DISTINCT whend as value").where("LOWER(whend) like LOWER(?)", "%#{params[:term]}%")
+     #           .where(:project_id => params[:project]).map {|d| {:value => d.value } })
+     #end
+     render json: pr
+   end
+
+
+   def prepare_data
     @project = Core::Project.find(params[:project])
     @aspects = Discontent::Aspect.where(:project_id => @project, :status => 0)
     add_breadcrumb I18n.t('stages.concept'), concept_posts_path(@project)
@@ -150,10 +163,11 @@ class Concept::PostsController < PostsController
   def new
     @post = current_model.new
     @discontent_post = Discontent::Post.find(params[:dis_id])
+    @resources = Concept::Resource.where(:project_id => @project.id)
     #@aspects = Discontent::Aspect.where(:project_id => @project)
     @pa =Concept::PostAspect.new
     respond_to do |format|
-      format.html { render :layout => 'application_two_column' }
+      format.html { render :layout => 'application_one_column' }
       format.json { render json: @post }
     end
   end

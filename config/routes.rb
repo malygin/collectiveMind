@@ -72,6 +72,8 @@ scope '/project/:project' do
 
   get :autocomplete_discontent_post_whend_discontent_posts , to: 'discontent/posts#autocomplete_discontent_post_whend'
   get :autocomplete_discontent_post_whered_discontent_posts , to: 'discontent/posts#autocomplete_discontent_post_whered'
+  get :autocomplete_concept_post_resource_concept_posts , to: 'concept/posts#autocomplete_concept_post_resource'
+
   post 'discontent/posts/:id/union', to:  'discontent/posts#union_discontent'
   get 'discontent/posts/unions', to:  'discontent/posts#unions'
 
@@ -85,9 +87,8 @@ scope '/project/:project' do
         put :status_post
         put :post_note_new
         put :post_note_create
-        put :post_note_edit
-        put :post_note_update
         delete :post_note_destroy
+        put :next_post_for_vote
       end
     end
   end

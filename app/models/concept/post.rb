@@ -11,4 +11,7 @@
   def content
      self.post_aspects.first.content
   end
+   def resource
+
+   end
 end

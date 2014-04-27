@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140423153848) do
+ActiveRecord::Schema.define(:version => 20140426204336) do
 
   create_table "answers", :force => true do |t|
     t.string   "text"
@@ -113,6 +113,15 @@ ActiveRecord::Schema.define(:version => 20140423153848) do
 
   add_index "concept_post_notes", ["post_id"], :name => "index_concept_post_notes_on_post_id"
 
+  create_table "concept_post_resources", :force => true do |t|
+    t.string   "name"
+    t.text     "desc"
+    t.integer  "post_id"
+    t.integer  "resource_id"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+  end
+
   create_table "concept_post_votings", :force => true do |t|
     t.integer  "user_id"
     t.integer  "post_id"
@@ -145,6 +154,12 @@ ActiveRecord::Schema.define(:version => 20140423153848) do
   add_index "concept_posts", ["project_id"], :name => "index_concept_posts_on_project_id"
   add_index "concept_posts", ["status"], :name => "index_concept_posts_on_status"
   add_index "concept_posts", ["user_id"], :name => "index_concept_posts_on_user_id"
+
+  create_table "concept_resources", :force => true do |t|
+    t.string  "name"
+    t.text    "desc"
+    t.integer "project_id"
+  end
 
   create_table "concept_task_supply_pairs", :force => true do |t|
     t.text     "task"
@@ -339,6 +354,7 @@ ActiveRecord::Schema.define(:version => 20140423153848) do
     t.integer  "discontent_post_id"
     t.datetime "created_at",         :null => false
     t.datetime "updated_at",         :null => false
+    t.boolean  "against"
   end
 
   add_index "discontent_votings", ["discontent_post_id"], :name => "index_discontent_votings_on_discontent_post_id"
