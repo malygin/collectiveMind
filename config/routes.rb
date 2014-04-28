@@ -84,17 +84,25 @@ scope '/project/:project' do
       member do
         put :remove_union
         put :add_union
-        put :status_post
-        put :post_note_new
-        put :post_note_create
-        delete :post_note_destroy
         put :next_post_for_vote
+        put :status_post
+        put :new_note
+        put :create_note
+        put :destroy_note
       end
     end
   end
 
   namespace :concept do
     posts_routes
+    resources :posts do
+      member do
+        put :status_post
+        put :new_note
+        put :create_note
+        put :destroy_note
+      end
+    end
   end
 
   post 'plan/posts/get_cond', to:  'plan/posts#get_cond'

@@ -151,3 +151,25 @@ def column_for_type_field(type_fd)
       null
   end
 end
+def column_for_concept_type(type_fd)
+  case type_fd
+    when 1
+      'stat_name'
+    when 2
+      'stat_content'
+    when 3
+      'stat_positive'
+    when 4
+      'stat_positive_r'
+    when 5
+      'stat_negative'
+    when 6
+      'stat_negative_r'
+    when 7
+      'stat_problems'
+    when 8
+      'stat_reality'
+    else
+      nil
+  end
+end

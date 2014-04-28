@@ -266,19 +266,19 @@ class Discontent::PostsController < PostsController
         format.js
       end
     end
-    def post_note_new
+    def new_note
       @project = Core::Project.find(params[:project])
       @post = Discontent::Post.find(params[:id])
       @type = params[:type_field]
-      @post_note = Discontent::CommentNote.new
+      @post_note = Discontent::Note.new
       respond_to do |format|
         format.js
       end
     end
-    def post_note_create
+    def create_note
       @project = Core::Project.find(params[:project])
       @post = Discontent::Post.find(params[:id])
-      @post_note = Discontent::CommentNote.create(params[:discontent_comment_note])
+      @post_note = Discontent::Note.create(params[:discontent_note])
       @post_note.post_id = params[:id]
       @post_note.type_field = params[:type_field]
       @post_note.user_id = current_user.id
@@ -290,16 +290,16 @@ class Discontent::PostsController < PostsController
         if @post_note.save
           format.js
         else
-          render "post_note_new"
+          render "new_note"
         end
       end
     end
 
-    def post_note_destroy
+    def destroy_note
       @project = Core::Project.find(params[:project])
       @post = Discontent::Post.find(params[:id])
       @type = params[:type_field]
-      @post_note = Discontent::CommentNote.find(params[:note_id])
+      @post_note = Discontent::Note.find(params[:note_id])
       @post_note.destroy if boss?
       respond_to do |format|
         format.js
