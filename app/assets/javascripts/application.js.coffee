@@ -92,14 +92,7 @@ $('.score_class').on 'click', ->
         load: ->
           $(".wysihtml5-sandbox").contents().find("body").on "change", ->
             activate_button_editor()
-resizeTextarea = ->
-  this.style.height = "";
-  $this = $(this)
-  outerHeight = $this.outerHeight()
-  scrollHeight = this.scrollHeight
-  innerHeight = $this.innerHeight()
-  magic = outerHeight - innerHeight
-  this.style.height = scrollHeight + magic + "px"
+
 
 
 
