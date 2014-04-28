@@ -9,9 +9,9 @@
   %ul(id="post_content_#{post_field.id}" style="margin-left:-20px;" )
     -post_field.discontent_posts.each do |dp|
       %li{:id => "li_id_#{dp.id}"}=dp.content
-  -else
-    %span.h55(id="#{id_for_type_field(type_fd)}_content_#{post_field.id}")=field unless field.nil?
-    %br
+  -#-else
+  -#  %span.h55(id="#{id_for_type_field(type_fd)}_content_#{post_field.id}")=field unless field.nil?
+  -#  %br
 
 -else
   -if boss? and @project.status == 3
