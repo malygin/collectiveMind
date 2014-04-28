@@ -92,7 +92,7 @@ def index
     end
     @comment = comment_model.new
     respond_to do |format|
-      format.html # show.html.erb
+      format.html { render :layout => 'application_two_column'} # show.html.erb
       format.json { render json: @post }
       format.js
     end
