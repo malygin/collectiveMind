@@ -5,10 +5,10 @@
   %span.label(class= "#{class_for_type_field(post_field,type_fd)}" id="#{id_for_type_field(type_fd)}_#{post_field.id}")=name_for_type_field(type_fd)
 
 - if (post_field.status == 2 or post_field.status == 4) and type_fd == 1
-  -if !params[:id].nil?
-    %ul(id="post_content_#{post_field.id}" style="margin-left:-20px;" )
-      -post_field.discontent_posts.each do |dp|
-        %li{:id => "li_id_#{dp.id}"}=dp.content
+  -#-if !params[:id].nil?
+  %ul(id="post_content_#{post_field.id}" style="margin-left:-20px;" )
+    -post_field.discontent_posts.each do |dp|
+      %li{:id => "li_id_#{dp.id}"}=dp.content
   -else
     %span.h55(id="#{id_for_type_field(type_fd)}_content_#{post_field.id}")=field unless field.nil?
     %br
