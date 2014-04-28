@@ -1,0 +1,2 @@
+-if @post.post_notes(@type.to_i).size == 0
+  $('##{id_for_concept_type(@type.to_i)}').removeClass('text-danger text-info').addClass('text-success');

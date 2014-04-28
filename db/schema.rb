@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140426204336) do
+ActiveRecord::Schema.define(:version => 20140427160214) do
 
   create_table "answers", :force => true do |t|
     t.string   "text"
@@ -74,6 +74,15 @@ ActiveRecord::Schema.define(:version => 20140426204336) do
   add_index "concept_comments", ["created_at"], :name => "index_concept_comments_on_created_at"
   add_index "concept_comments", ["post_id"], :name => "index_concept_comments_on_post_id"
   add_index "concept_comments", ["user_id"], :name => "index_concept_comments_on_user_id"
+
+  create_table "concept_notes", :force => true do |t|
+    t.text     "content"
+    t.integer  "user_id"
+    t.integer  "post_id"
+    t.integer  "type_field"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
 
   create_table "concept_post_aspect_discontents", :force => true do |t|
     t.integer  "post_aspect_id"
@@ -146,6 +155,14 @@ ActiveRecord::Schema.define(:version => 20140426204336) do
     t.integer  "project_id"
     t.text     "content"
     t.boolean  "censored",          :default => false
+    t.boolean  "stat_name"
+    t.boolean  "stat_content"
+    t.boolean  "stat_positive"
+    t.boolean  "stat_positive_r"
+    t.boolean  "stat_negative"
+    t.boolean  "stat_negative_r"
+    t.boolean  "stat_problems"
+    t.boolean  "stat_reality"
   end
 
   add_index "concept_posts", ["created_at"], :name => "index_concept_posts_on_created_at"
@@ -273,6 +290,15 @@ ActiveRecord::Schema.define(:version => 20140426204336) do
     t.datetime "created_at",                    :null => false
     t.datetime "updated_at",                    :null => false
     t.boolean  "censored",   :default => false
+  end
+
+  create_table "discontent_notes", :force => true do |t|
+    t.text     "content"
+    t.integer  "user_id"
+    t.integer  "post_id"
+    t.integer  "type_field"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
   create_table "discontent_post_aspects", :force => true do |t|
