@@ -7,7 +7,6 @@
 - if signed_in? and boss?
     = link_to '+ Добавить новую тему для обсуждения', '#', id: 'add_record', onClick: 'get_life_tape_form(); return false;', class: 'btn btn-sm btn-success'
     %br
-%br
 = form_for @post,:url => {:project => @project.id, :action => @post.persisted? ? 'update' : 'create'},:remote => true,  :html => { :class => 'lt_new' } do |f|
 
     = f.text_area :content, class: 'post', id: 'new_life_tape', onkeyup: "activate_button(this);"
