@@ -36,7 +36,7 @@ end
     load_filter_for_aspects   if (request.xhr? and @order.nil? and @page.nil?)
 
     @posts  = current_model.where(:project_id => @project).where(:status => 0)
-      .eager_load(:discontent_aspects).where("discontent_aspects.id  IN (?) " , current_user.aspects(@project.id).collect(&:id))
+      .eager_load(:discontent_aspects)
       .order_by_param(@order)
       .paginate(:page => params[:page], :per_page => 20)
 
