@@ -21,17 +21,17 @@
     .col-md-6
       .text-right
         %i
-          %b Пример:
+          %b Примеры:
           %br
           %span.label.label-danger  Имеющиеся недостатки
           %br
-          %span.label.label-default что
+          %span.label.label-danger что
           Пыльный и отвратительный на вид большой пустырь
           %br
           %span.label.label-success  Отсутствующие достоинства
           %br
-          %span.label.label-default что
-          Отсутствие автоматической коробки передач
+          %span.label.label-success что
+          Отсутствие декоративных растений
     .col-md-6
 
       .form-group
@@ -48,12 +48,16 @@
     .col-md-6
       .text-right
         %i
-          %b Пример:
+          %b Примеры:
           %br
-          %span.label.label-default где
+          %span.label.label-danger где
           во дворе между домами
+          %br
+          %span.label.label-success где
+          в вестибюлях и подъездах
+
     .col-md-6
-      =f.autocomplete_field :whered, autocomplete_discontent_post_whered_discontent_posts_path, :"min-length" => 0, class: 'form-control autocomplete',placeholder: 'Место, организация, общность, в которой это происходит '
+      =f.autocomplete_field :whered, autocomplete_discontent_post_whered_discontent_posts_path, :"min-length" => 0, style: 'height: 44px', class: 'form-control autocomplete',placeholder: 'Место, организация, общность, в которой это происходит '
       %br
       %br
   .row
@@ -66,12 +70,15 @@
     .col-md-6
       .text-right
         %i
-          %b Пример:
+          %b Примеры:
           %br
-          %span.label.label-default когда
+          %span.label.label-danger когда
           в теплое время года
+          %br
+          %span.label.label-success когда
+          всегда
     .col-md-6
-      =f.autocomplete_field :whend, autocomplete_discontent_post_whend_discontent_posts_path, :"min-length" => 0,  class: 'form-control autocomplete',placeholder: 'Во время какого события, мероприятия, процесса, ситуации '
+      =f.autocomplete_field :whend, autocomplete_discontent_post_whend_discontent_posts_path, :"min-length" => 0, style: 'height: 44px',  class: 'form-control autocomplete',placeholder: 'Во время какого события, мероприятия, процесса, ситуации '
 
 
   .row
@@ -84,7 +91,7 @@
     .com-md-6
       %br
       = select_tag 'select_for_aspects', options_from_collection_for_select(@aspects.minus_view(@aspects_for_post.nil? ? [] : @aspects_for_post.pluck(:id)), "id", "content"),
-       :prompt => 'Выберите аспект' , style:'margin-left:15px;margin-top:10px;'
+       :prompt => 'Выберите тему' , style:'margin-left:15px;margin-top:10px;'
       %br
       #add_post_aspects(style="margin-left: 52%;margin-top: 10px;")
         -unless @aspects_for_post.nil?
