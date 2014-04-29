@@ -16,8 +16,21 @@
         = f.submit 'Сохранить',  class:'btn btn-success disabled btn-sm', id:'send_post'
         %button.btn.btn-danger.btn-sm(type="button" onclick="reset_life_tape_form(); return false;" ) Отменить
 
-#posts
-    = render @posts
+%table.table.table-stripped
+    %tr
+        %th Темы
+        %th{width: "50%"} Последний комментарий
+    -@posts.each do |post|
+        %tr
+            %td
+                =render post
+            %td
+                -unless post.comments.empty?
+                    =render :partial => 'shared/comment', :object =>  post.comments.last
+                -else
+                    -#= render :partial => 'shared/comment_form', :locals => { :comment => @comment, :url_link => url_for(:controller => post.class.name.underscore.pluralize, :action => 'add_comment')}
+
+
 #pagination
     = render 'shared/pagination'
 
