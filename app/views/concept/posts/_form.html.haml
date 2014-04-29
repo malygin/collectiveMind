@@ -123,14 +123,14 @@
               .form-group.has-success
                 .panel.panel-default
                   .panel-body
-                    =f.autocomplete_field :resource, autocomplete_concept_post_resource_concept_posts_path, :"min-length" => 0,  class: 'form-control autocomplete',placeholder: 'Ресурс 1'
+                    =f.autocomplete_field :resource, autocomplete_concept_post_resource_concept_posts_path, :"min-length" => 0,  class: 'form-control autocomplete',placeholder: 'Ресурс', name: 'resor[]'
                     %br
-                    = text_area_tag 'res', '', class: 'form-control', placeholder: 'Пояснение к ресурсу'
+                    = text_area_tag 'res[]', '', class: 'form-control', placeholder: 'Пояснение к ресурсу'
                 .panel.panel-default
                   .panel-body
-                    =f.autocomplete_field :resource, autocomplete_concept_post_resource_concept_posts_path, :"min-length" => 0,  class: 'form-control autocomplete',placeholder: 'Ресурс 2'
+                    =f.autocomplete_field :resource, autocomplete_concept_post_resource_concept_posts_path, :"min-length" => 0,  class: 'form-control autocomplete',placeholder: 'Ресурс', name: 'resor[]'
                     %br
-                    = text_area_tag 'res', '', class: 'form-control', placeholder: 'Пояснение к ресурсу'
+                    = text_area_tag 'res[]', '', class: 'form-control', placeholder: 'Пояснение к ресурсу'
                 %button.btn.btn-success Добавить ресурс
                 -#=text_area_tag "pa[#{@discontent_post.id}][positive_r]",@pa.positive_r, :placeholder => 'Перечислите все необходимое для успешного функционирования вашего нововедения в будущем', :class => "concept_cond form-control", rows: 12, style: 'width: 100%;'
 
