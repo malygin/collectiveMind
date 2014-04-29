@@ -55,7 +55,7 @@ def add_comment
     post = current_model.find(params[:id])
     unless  params[name_of_comment_for_param][:content]==''
       @comment = post.comments.create(:content => params[name_of_comment_for_param][:content], :user =>current_user)
-      current_user.journals.build(:type_event=>name_of_comment_for_param+'_save', :project => @project, :body=>"#{@comment.content[0..24]}:#{post.id}#comment_#{@comment.id}").save!
+      current_user.journals.build(:type_event=>name_of_comment_for_param+'_save', :project => @project, :body=>"#{@comment.content[0..48]}:#{post.id}#comment_#{@comment.id}").save!
       #PostMailer.add_comment(post, @comment).deliver  if post.user!=@comment.user
       if post.user!=current_user
        current_user.journals.build(:type_event=>'my_'+name_of_comment_for_param, :user_informed => post.user, :project => @project, :body=>"#{@comment.content[0..24]}:#{post.id}#comment_#{@comment.id}", :viewed=> false).save!
@@ -92,7 +92,7 @@ def index
     end
     @comment = comment_model.new
     respond_to do |format|
-      format.html # show.html.erb
+      format.html { render :layout => 'application_two_column'} # show.html.erb
       format.json { render json: @post }
       format.js
     end

@@ -17,7 +17,7 @@
         %li
           =link_to t('menu.help'), help_posts_path(@project)
         %li
-          =link_to t('menu.base_knowledge'),   knowbase_posts_path(@project)
+          =link_to t('menu.base_knowledge'),   knowbase_posts_path(@project), style:'color: #5cb85c !important; font-weight: bold;'
         %li
           =link_to t('menu.raiting'), "/project/#{@project.id}/users"
         -#%li.dropdown

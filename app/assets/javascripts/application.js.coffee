@@ -8,6 +8,7 @@
 #= require bootstrap-wysihtml5/locales/ru-RU
 #= require selectize
 #= require liFixar/jquery.liFixar
+#= require jquery.autosize
 
 
 
@@ -92,10 +93,15 @@ $('.score_class').on 'click', ->
           $(".wysihtml5-sandbox").contents().find("body").on "change", ->
             activate_button_editor()
 
+
+
+
+
 $ ->
   $("#sortable").sortable()
   $("#sortable").disableSelection()
   $('#theall a:first').tab('show')
+  $('textarea').autosize()
 #  $("input#discontent_post_whend ").autocomplete(
 #    minLength: 0
 #  ).focus ->
