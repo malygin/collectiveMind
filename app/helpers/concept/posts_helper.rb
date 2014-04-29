@@ -33,8 +33,8 @@ module Concept::PostsHelper
   end
 
   def class_for_concept_type(pa)
-    stat_p = Concept::Post.stat_fields_positive(pa.concept_post.id)
-    stat_n = Concept::Post.stat_fields_negative(pa.concept_post.id)
+    stat_p = Concept::Post.stat_fields_positive(pa.id)
+    stat_n = Concept::Post.stat_fields_negative(pa.id)
     if stat_p.present?
       'panel-p'
     elsif stat_n.present?

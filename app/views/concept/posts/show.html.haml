@@ -9,8 +9,10 @@
     %div.tab-pane.active#novation1
       %div.panel.panel-default
         %div.panel-body
-          %h5.text-info Устраняемое несовершенство (проблема):
-          =render partial:'discontent/posts/post_short2', object: tp.discontent
+          %h5.text-info Устраняемые несовершенства (проблемы):
+          -@post.concept_disposts.each  do |cd|
+            =render partial:'discontent/posts/post_short2', object: cd
+          -#=render partial:'discontent/posts/post_short2', object: tp.discontent
           %br
           %hr
 

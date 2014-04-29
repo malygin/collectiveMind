@@ -69,7 +69,7 @@ class Concept::PostsController < PostsController
 
   def create
     @project = Core::Project.find(params[:project])
-    @concept_post = Concept::Post.new()
+    @concept_post = Concept::Post.new
     params[:pa].each do |pa|
       post_aspect = Concept::PostAspect.new(pa[1])
       disc = Discontent::Post.find(pa[0])
@@ -80,6 +80,7 @@ class Concept::PostsController < PostsController
     @concept_post.user = current_user
     @concept_post.status = 0
     @concept_post.project = @project
+
     #unless params['correct_disc'].nil?
     #  params['correct_disc'].each do |v|
     #    if v!= ''
@@ -96,9 +97,12 @@ class Concept::PostsController < PostsController
     #  end
     #end
     #
-    respond_to do |format|
+   respond_to do |format|
       if @concept_post.save!
-         current_user.journals.build(:type_event=>'concept_post_save', :body=>@concept_post.id,  :project => @project).save!
+        params[:cd].each do |cd|
+          Concept::PostDiscontent.create(post_id: @concept_post.id, discontent_post_id: cd.to_i)
+        end
+        current_user.journals.build(:type_event=>'concept_post_save', :body=>@concept_post.id,  :project => @project).save!
         format.html { redirect_to  action: "index"  }
         format.json { render json: @concept_post, status: :created, location: @concept_post }
       else
@@ -140,6 +144,10 @@ class Concept::PostsController < PostsController
 
     respond_to do |format|
       if @concept_post.save!
+        @concept_post.concept_post_discontents.destroy_all
+        params[:cd].each do |cd|
+          Concept::PostDiscontent.create(post_id: @concept_post.id, discontent_post_id: cd.to_i)
+        end
         current_user.journals.build(:type_event=>'concept_post_update', :body=>@concept_post.id,  :project => @project).save!
 
         format.html { redirect_to action: "show", :project => @project, :id => @concept_post.id }
@@ -253,6 +261,15 @@ class Concept::PostsController < PostsController
      @type = params[:type_field]
      @post_note = Concept::Note.find(params[:note_id])
      @post_note.destroy if boss?
+     respond_to do |format|
+       format.js
+     end
+   end
+
+   def add_dispost
+     @project = Core::Project.find(params[:project])
+     @dispost = Discontent::Post.find(params[:dispost_id])
+     @remove_able = params[:remove_able]
      respond_to do |format|
        format.js
      end

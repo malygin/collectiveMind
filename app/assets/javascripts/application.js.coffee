@@ -88,14 +88,10 @@ $('.score_class').on 'click', ->
       link: true
       image: true
       color: true
-      events:
-        load: ->
-          $(".wysihtml5-sandbox").contents().find("body").on "change", ->
-            activate_button_editor()
-
-
-
-
+#      events:
+#        load: ->
+#          $(".wysihtml5-sandbox").contents().find("body").on "change", ->
+#            activate_button_editor()
 
 $ ->
   $("#sortable").sortable()
@@ -138,11 +134,12 @@ $(window).load ->
 
 @select_discontent_for_union= (project,id)->
   sel = $('#selectize_tag :selected')
-  $.ajax
-    url: "/project/#{project}/discontent/posts/#{id}/add_union"
-    type: "put"
-    data:
-      post_id: sel.val()
+  if sel.val() != ''
+    $.ajax
+      url: "/project/#{project}/discontent/posts/#{id}/add_union"
+      type: "put"
+      data:
+        post_id: sel.val()
 
 
 $(window).load ->
@@ -169,14 +166,49 @@ $(window).load ->
       option: (item, escape) ->
         return '<div>'+item.show_content+'</div>'
 
-@activate_button_editor = ->
-  input = $('#title-textfield')
-  editor = $('.wysihtml5').data('wysihtml5').editor
-  html = editor.getValue()
-  if input? and input.val()!=''
-    $('#send_post').removeClass('disabled')
-  else
-    $('#send_post').addClass('disabled')
+@select_discontent_for_concept= (project,id)->
+  sel = $('#selectize_concept :selected')
+  if sel.val() != ''
+    $.ajax
+      url: "/project/#{project}/concept/posts/add_dispost"
+      type: "post"
+      data:
+        dispost_id: sel.val()
+        remove_able: 1
+
+$(window).load ->
+  $select = $("#selectize_concept").selectize
+    labelField: "show_content"
+    valueField: "id"
+    sortField: "show_content"
+    searchField: "show_content"
+    create: false
+    hideSelected: true
+    onChange: (item) ->
+      optsel = $(".option_for_selectize")
+      project_id = parseInt(optsel.attr('project'))
+      id = parseInt(optsel.attr('post'))
+      select_discontent_for_concept(project_id,id)
+      selectize = $select[0].selectize
+      selectize.removeOption(item)
+      selectize.refreshOptions()
+      selectize.close()
+    render:
+      item: (item, escape) ->
+        short_item = item.show_content.split('<br/>')[0].replace('<b> что: </b>', '')
+        return '<div>'+short_item+'</div>'
+      option: (item, escape) ->
+        return '<div>'+item.show_content+'</div>'
+
+
+#@activate_button_editor = ->
+#  input = $('#title-textfield')
+#  editor = $('.wysihtml5').data('wysihtml5').editor
+#  html = editor.getValue()
+#  if input? and input.val()!=''
+#    $('#send_post').removeClass('disabled')
+#  else
+#    $('#send_post').addClass('disabled')
 
 $('#select_for_aspects').on 'change', ->
   val=this.value
@@ -204,3 +236,7 @@ $('#select_for_aspects').on 'change', ->
     else
       $('#send_post').addClass('disabled')
   ), 1500
+
+@remove_discontent_post= (val)->
+  $('#post_'+val).animate({height: 0, opacity: 0.000}, 1000, ->
+    $(this).remove())

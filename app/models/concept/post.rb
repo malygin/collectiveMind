@@ -12,6 +12,9 @@
 
   has_many :concept_notes, :class_name => 'Concept::Note'
 
+  has_many :concept_post_discontents, :class_name => 'Concept::PostDiscontent'
+  has_many :concept_disposts, :through => :concept_post_discontents, :source => :discontent_post , :class_name => 'Discontent::Post'
+
   scope :stat_fields_negative, ->(p){where(:id => p).where("stat_name = 'f' or stat_content = 'f' or stat_negative = 'f'
             or stat_positive = 'f' or stat_reality = 'f' or stat_problems = 'f'
             or stat_positive_r = 'f' or stat_negative_r = 'f' ")}
@@ -22,6 +25,7 @@
   def post_notes(type_field)
     self.concept_notes.by_type(type_field)
   end
+
   def note_size?(type_fd)
     self.post_notes(type_fd).size > 0
   end

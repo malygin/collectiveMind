@@ -19,7 +19,7 @@
         %td(colspan=2)
           %span.label.label-info=aspect.content
         %td
-      -aspect.posts.by_status(4).each do |post|
+      -aspect.aspect_posts.by_status(4).each do |post|
 
         %tr
           %td
@@ -31,15 +31,15 @@
             %br
             %br
 
-            - post.concept_conditions.each  do |pa|
-              - if pa.concept_post.status == 0
+            - post.dispost_concepts.each  do |pa|
+              - if pa.status == 0
                 .panel.panel-success(class="#{class_for_concept_type(pa)}")
                   .panel-body.nov-list
                     %small.text-muted= Russian::strftime(pa.created_at,"%d %B %k:%M:%S ")
                     %br
-                    =pa.name
-                    =link_to 'подробнее', concept_post_path(@project, pa.concept_post)
-                    = render 'shared/post_social_bar2', :post => pa.concept_post
+                    =pa.post_aspects.first.name
+                    =link_to 'подробнее', concept_post_path(@project, pa)
+                    = render 'shared/post_social_bar2', :post => pa
 
                     -#- if can_vote_cond?(pa.voted(current_user).size,  @number_v, @votes, post)
                     -#  %br

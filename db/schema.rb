@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140427160214) do
+ActiveRecord::Schema.define(:version => 20140429151650) do
 
   create_table "answers", :force => true do |t|
     t.string   "text"
@@ -110,6 +110,13 @@ ActiveRecord::Schema.define(:version => 20140427160214) do
     t.text     "problems"
     t.text     "positive_r"
     t.text     "negative_r"
+  end
+
+  create_table "concept_post_discontents", :force => true do |t|
+    t.integer  "post_id"
+    t.integer  "discontent_post_id"
+    t.datetime "created_at",         :null => false
+    t.datetime "updated_at",         :null => false
   end
 
   create_table "concept_post_notes", :force => true do |t|
