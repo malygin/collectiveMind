@@ -1,13 +1,12 @@
 - if not current_user.answered_for_help_stage?(1) and not @mini_help.nil?
     =render partial: 'shared/small_help', object: @mini_help
 
-%small#filter_posts
-    = render 'shared/filter_posts', project: @project.id, folder: @folder
+-#%small#filter_posts
+-#    = render 'shared/filter_posts', project: @project.id, folder: @folder
 
 - if signed_in? and boss?
     = link_to '+ Добавить новую тему для обсуждения', '#', id: 'add_record', onClick: 'get_life_tape_form(); return false;', class: 'btn btn-sm btn-success'
     %br
-%br
 = form_for @post,:url => {:project => @project.id, :action => @post.persisted? ? 'update' : 'create'},:remote => true,  :html => { :class => 'lt_new' } do |f|
 
     = f.text_area :content, class: 'post', id: 'new_life_tape', onkeyup: "activate_button(this);"
@@ -16,8 +15,21 @@
         = f.submit 'Сохранить',  class:'btn btn-success disabled btn-sm', id:'send_post'
         %button.btn.btn-danger.btn-sm(type="button" onclick="reset_life_tape_form(); return false;" ) Отменить
 
-#posts
-    = render @posts
+%table.table.table-stripped
+    %tr
+        %th Темы
+        %th{width: "50%"} Последний комментарий
+    -@posts.each do |post|
+        %tr
+            %td
+                =render post
+            %td
+                -unless post.comments.empty?
+                    =render :partial => 'shared/comment', :object =>  post.comments.last
+                -else
+                    -#= render :partial => 'shared/comment_form', :locals => { :comment => @comment, :url_link => url_for(:controller => post.class.name.underscore.pluralize, :action => 'add_comment')}
+
+
 #pagination
     = render 'shared/pagination'
 

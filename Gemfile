@@ -74,6 +74,6 @@ gem "bootstrap-wysihtml5-rails"
 gem 'rest-client'
 gem 'magic_encoding'
 
-gem 'dalli'
+#gem 'dalli'
 gem 'similar_text'
 gem 'breadcrumbs_on_rails'
