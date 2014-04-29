@@ -1,7 +1,7 @@
 .media{id: "comment_#{comment.id}"}
   = render 'users/user_post', :user => comment.user
   -if comment.created_at > 1.day.ago
-    %span.label.label-danger новое
+    %span.label.label-danger за последние сутки
   .media-body
     %div{id: "comment_content_#{comment.id}"}=simple_format(comment.content)
     -#.pull-right
