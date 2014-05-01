@@ -101,10 +101,12 @@ class Discontent::Post < ActiveRecord::Base
   end
 
   def show_content
-  	'<b> что: </b>' + self.content +
-    (self.whered.present? ? '<br/> <b> где: </b> ' + self.whered : '') +
-    (self.whend.present? ? '<br/> <b> когда: </b>' + self.whend : '') +
-    '<br/>'
+    unless self.content.nil?
+      '<b> что: </b>' + self.content +
+      (self.whered.present? ? '<br/> <b> где: </b> ' + self.whered : '') +
+      (self.whend.present? ? '<br/> <b> когда: </b>' + self.whend : '') +
+      '<br/>'
+    end
   end
 
   def display_content
