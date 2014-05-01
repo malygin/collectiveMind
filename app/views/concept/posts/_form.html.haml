@@ -12,6 +12,10 @@
           #panel_union
             -if !@post.id.nil?
               -@post.concept_disposts.each  do |cd|
+                -if cd.id != @discontent_post.id
+                  -@remove_able = 1
+                -else
+                  -@remove_able = nil
                 =render partial:'discontent/posts/post_short2', object: cd
             -else
               =render partial:'discontent/posts/post_short2', object: @discontent_post
