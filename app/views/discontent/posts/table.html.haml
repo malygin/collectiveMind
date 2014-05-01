@@ -5,7 +5,7 @@
   %a.active.btn.btn-default.menu_table(href="#" )
     %span.glyphicon.glyphicon-th
     Таблица
-
+%a{name:'top'}
 - if signed_in? and @project.status ==3
   = link_to '+ Добавить свое несовершенство в список', new_discontent_post_path(@project) , id: 'add_record',  class: 'btn btn-sm btn-success'
   %br
@@ -19,6 +19,9 @@
         %span.label.label-t=aspect.content
         - if signed_in? and @project.status ==3
           = link_to '+ Добавить несовершенство', new_discontent_post_path(@project) , id: 'add_record',  class: 'btn btn-xs btn-success',style: 'font-size:10px;'
+        %br
+        %a{name: "asp_#{aspect.id}"}
+        %a{href:"#top"} Наверх↑
     %tr
       %td
         %span.label.label-p  Отсутствующие достоинства
