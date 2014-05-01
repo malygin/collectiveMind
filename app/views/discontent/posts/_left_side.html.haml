@@ -1,9 +1,9 @@
 -if  params[:view]
   -@aspects.each do  |asp|
-    = link_to  "#asp_#{asp.id}" do
-      =asp.content
-      ="(#{asp.aspect_posts.count})"
-    %br
-
+    %li
+      = link_to  "#asp_#{asp.id}" do
+        =asp.content
+        %b="(#{asp.aspect_posts.count})"
+  %br
 =render 'shared/journal_news_feed', :journals => @journals, :news => @news
 
