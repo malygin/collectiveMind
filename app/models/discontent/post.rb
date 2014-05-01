@@ -62,6 +62,18 @@ class Discontent::Post < ActiveRecord::Base
     end
   end
 
+  def update_status_fields(pa)
+    if self.read_attribute('content') != pa['content']
+      self.status_content = nil
+    end
+    if self.read_attribute('whend') != pa['whend']
+      self.status_whend = nil
+    end
+    if self.read_attribute('whered') != pa['whered']
+      self.status_whered = nil
+    end
+  end
+
   def post_notes(type_field)
     self.discontent_notes.by_type(type_field)
   end

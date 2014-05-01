@@ -17,6 +17,8 @@
     %tr
       %td(colspan=3)
         %span.label.label-t=aspect.content
+        - if signed_in? and @project.status ==3
+          = link_to '+ Добавить несовершенство', new_discontent_post_path(@project) , id: 'add_record',  class: 'btn btn-xs btn-success',style: 'font-size:10px;'
     %tr
       %td
         %span.label.label-p  Отсутствующие достоинства

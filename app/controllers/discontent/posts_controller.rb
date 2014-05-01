@@ -191,6 +191,7 @@ class Discontent::PostsController < PostsController
     @post = current_model.find(params[:id])
     @project = Core::Project.find(params[:project])
     unless params[:discontent_post_aspects].nil?
+      @post.update_status_fields(params[name_of_model_for_param])
       @post.update_attributes(params[name_of_model_for_param])
 
       @post.update_post_aspects(params[:discontent_post_aspects])

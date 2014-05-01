@@ -120,7 +120,9 @@
   %br
   %button#send_post.btn.btn-primary(type="submit" onclick='disontent_form_submit();'){:class => ('disabled' unless @post.content?)} Сохранить
   %hr
-  %p#discontent_success.text-success Готово!
+  %span#discontent_success.text-success Готово!
+  %span#redirect_success
+
   %p#discontent_warning.text-primary
     Проверьте в списке ниже, не было ли ваше несовершенство или похожее на него добавлено другими участниками. Если да, то прекратите работу с ним.  Если вы уверены, что ваше несовершенство оригинально,  нажмите на кнопку "Все равно сохранить".
     Учтите,  модератор может рассудить, что на самом деле оно не оригинально, и вычесть у вас баллы.
