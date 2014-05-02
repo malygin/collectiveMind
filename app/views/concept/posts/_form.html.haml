@@ -124,7 +124,7 @@
                   %p
                     работник по уходу за растениями,  инструменты обработки почвы и растений, помещение для хранения технических средств...
             .col-md-6
-              .form-group.has-success
+              .form-group.has-success#resources
                 .panel.panel-default
                   .panel-body
                     =f.autocomplete_field :resource, autocomplete_concept_post_resource_concept_posts_path, :"min-length" => 0,  class: 'form-control autocomplete',placeholder: 'Ресурс', name: 'resor[]'
@@ -135,8 +135,8 @@
                     =f.autocomplete_field :resource, autocomplete_concept_post_resource_concept_posts_path, :"min-length" => 0,  class: 'form-control autocomplete',placeholder: 'Ресурс', name: 'resor[]'
                     %br
                     = text_area_tag 'res[]', '', class: 'form-control', placeholder: 'Пояснение к ресурсу'
-                %button.btn.btn-success Добавить ресурс
-                -#=text_area_tag "pa[#{@discontent_post.id}][positive_r]",@pa.positive_r, :placeholder => 'Перечислите все необходимое для успешного функционирования вашего нововедения в будущем', :class => "concept_cond form-control", rows: 12, style: 'width: 100%;'
+              %a.btn.btn-success{onclick:"return add_new_resource_to_concept(); "} Добавить ресурс
+              -#=text_area_tag "pa[#{@discontent_post.id}][positive_r]",@pa.positive_r, :placeholder => 'Перечислите все необходимое для успешного функционирования вашего нововедения в будущем', :class => "concept_cond form-control", rows: 12, style: 'width: 100%;'
 
           %hr
           .row
