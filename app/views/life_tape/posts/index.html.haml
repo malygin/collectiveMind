@@ -1,6 +1,9 @@
 - if not current_user.answered_for_help_stage?(1) and not @mini_help.nil?
     =render partial: 'shared/small_help', object: @mini_help
-
+%h3
+    1 этап: Сбор информации.
+    %br
+    %small Обсуждение тем процедуры "Выведение аптечной справки WWW.ROS-MED.INFO в Топ-3 аптечных справок рунета"
 -#%small#filter_posts
 -#    = render 'shared/filter_posts', project: @project.id, folder: @folder
 
