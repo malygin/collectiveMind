@@ -16,10 +16,13 @@
     .panel.panel-default
       .panel-heading
         %h4.panel-title
-          %a(data-toggle="collapse" data-parent="#accordion" href="#asp_#{aspect.id}")
+          %a(data-toggle="collapse" data-parent="#accordion" href="#asp_#{aspect.id}" )
             =aspect.content
             %b="(#{aspect.aspect_posts.count})"
             %span.glyphicon.glyphicon-chevron-down
+
+            %br
+            %small=aspect.short_desc
 
       .panel-collapse.collapse{id:"asp_#{aspect.id}"}
         .panel-body
