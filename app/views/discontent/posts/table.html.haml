@@ -5,32 +5,38 @@
   %a.active.btn.btn-default.menu_table(href="#" )
     %span.glyphicon.glyphicon-th
     Таблица
-
+%a{name:'top'}
 - if signed_in? and @project.status ==3
   = link_to '+ Добавить свое несовершенство в список', new_discontent_post_path(@project) , id: 'add_record',  class: 'btn btn-sm btn-success'
   %br
 %br
-%table.table
 
+.panel-group#accordion
   -@aspects.each do |aspect|
+    .panel.panel-default
+      .panel-heading
+        %h4.panel-title
+          %a(data-toggle="collapse" data-parent="#accordion" href="#asp_#{aspect.id}")
+            =aspect.content
+            %b="(#{aspect.aspect_posts.count})"
+            %span.glyphicon.glyphicon-chevron-down
 
-    %tr
-      %td(colspan=3)
-        %span.label.label-t=aspect.content
-        - if signed_in? and @project.status ==3
-          = link_to '+ Добавить несовершенство', new_discontent_post_path(@project) , id: 'add_record',  class: 'btn btn-xs btn-success',style: 'font-size:10px;'
-    %tr
-      %td
-        %span.label.label-p  Отсутствующие достоинства
-      %td
-        %span.label.label-n(style='min-width: 300px;')  Имеющиеся недостатки
+      .panel-collapse.collapse{id:"asp_#{aspect.id}"}
+        .panel-body
+          %table.table
 
-    %tr
-      %td
+            %tr
+              %td
+                %span.label.label-p  Отсутствующие достоинства
+              %td
+                %span.label.label-n(style='min-width: 300px;')  Имеющиеся недостатки
 
-        -#=render partial:'post_short', collection: aspect.positive_posts.by_status(@status)
-        =render partial:'post_short', collection: aspect.aspect_posts.by_positive(@status)
+            %tr
+              %td
 
-      %td
-        -#=render partial:'post_short', collection: aspect.negative_posts.by_status(@status)
-        =render partial:'post_short', collection: aspect.aspect_posts.by_negative(@status)
+                -#=render partial:'post_short', collection: aspect.positive_posts.by_status(@status)
+                =render partial:'post_short', collection: aspect.aspect_posts.by_positive(@status)
+
+              %td
+                -#=render partial:'post_short', collection: aspect.negative_posts.by_status(@status)
+                =render partial:'post_short', collection: aspect.aspect_posts.by_negative(@status)

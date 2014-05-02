@@ -91,7 +91,7 @@
     .com-md-6
       %br
       = select_tag 'select_for_aspects', options_from_collection_for_select(@aspects.minus_view(@aspects_for_post.nil? ? [] : @aspects_for_post.pluck(:id)), "id", "content"),
-       :prompt => 'Выберите тему' , style:'margin-left:15px;margin-top:10px;'
+       :prompt => 'Выберите тему' , style:'margin-left:15px; margin-top:10px; height: 30px;'
       %br
       #add_post_aspects(style="margin-left: 52%;margin-top: 10px;")
         -unless @aspects_for_post.nil?
@@ -113,10 +113,7 @@
         %label.radio-inline
           = f.radio_button :style,  '0'
           %span.text-success Отсутствующие достоинства
-  -#%br
-  -#%b Мысленная контрольная проверка несовершенства на конкретность:
-  %br
-  существуют ли какие-либо практические действия, которые устранят это несовершенство?
+
   %br
   %button#send_post.btn.btn-primary(type="submit" onclick='disontent_form_submit();'){:class => ('disabled' unless @post.content?)} Сохранить
   %hr

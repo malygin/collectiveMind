@@ -240,3 +240,6 @@ $('#select_for_aspects').on 'change', ->
 @remove_discontent_post= (val)->
   $('#post_'+val).animate({height: 0, opacity: 0.000}, 1000, ->
     $(this).remove())
+
+@add_new_resource_to_concept= ->
+  $('#resources').append('<div class="panel panel-default"><div class="panel-body"><span role="status" aria-live="polite" class="ui-helper-hidden-accessible"></span><input class="form-control autocomplete ui-autocomplete-input" data-autocomplete="/project/1/autocomplete_concept_post_resource_concept_posts" id="concept_post_resource" min-length="0" name="resor[]" placeholder="Ресурс" size="30" type="text" autocomplete="off"><br><textarea class="form-control" id="res_" name="res[]" placeholder="Пояснение к ресурсу" style="overflow: hidden; word-wrap: break-word; resize: horizontal; height: 54px;"></textarea></div></div>')
