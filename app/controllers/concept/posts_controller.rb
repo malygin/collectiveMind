@@ -62,8 +62,9 @@ class Concept::PostsController < PostsController
           @voted_people = ActiveRecord::Base.connection.execute("select count(*) as r from (select distinct v.user_id from concept_votings v  left join   concept_post_aspects asp on (v.concept_post_aspect_id = asp.id) ) as dm").first["r"]
           @votes = ActiveRecord::Base.connection.execute("select count(*) as r from (select  v.user_id from concept_votings v  left join   concept_post_aspects asp on (v.concept_post_aspect_id = asp.id) ) as dm").first["r"].to_i
         end
+        render 'index' , :layout => 'application_one_column'
+        return
       end
-
     render 'index' , :layout => 'application_two_column'
   end
 
