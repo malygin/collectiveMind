@@ -98,6 +98,11 @@ $ ->
   $("#sortable").disableSelection()
   $('#theall a:first').tab('show')
   $('textarea').autosize()
+#  $('#accordion').on 'shown.bs.collapse', ->
+#    m = $(this);
+#    console.log(m)
+#    alert(m)
+
 #  $("input#discontent_post_whend ").autocomplete(
 #    minLength: 0
 #  ).focus ->

@@ -8,7 +8,7 @@
   %a.active.btn.btn-default.menu_table(href="#")
     %span.glyphicon.glyphicon-th-list
     Список
-  %a.btn.btn-default.menu_table(href="/project/#{@project.id}/discontent/posts?view=table")
+  %a.btn.btn-default.menu_table(href="/project/#{@project.id}/discontent/posts")
     %span.glyphicon.glyphicon-th
     Таблица
 - if signed_in? and @project.status == 3

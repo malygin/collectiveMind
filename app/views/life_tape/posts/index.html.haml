@@ -18,21 +18,41 @@
         = f.submit 'Сохранить',  class:'btn btn-success disabled btn-sm', id:'send_post'
         %button.btn.btn-danger.btn-sm(type="button" onclick="reset_life_tape_form(); return false;" ) Отменить
 
-%table.table.table-stripped
-    %tr
-        %th Темы
-        %th{width: "50%"} Последний комментарий
+
+.panel-group#accordion
     -@posts.each do |post|
-        %tr
-            %td
-                =render post
-            %td
-                -unless post.comments.empty?
-                    =render :partial => 'shared/comment', :object =>  post.comments.last
-                -else
-                    -#= render :partial => 'shared/comment_form', :locals => { :comment => @comment, :url_link => url_for(:controller => post.class.name.underscore.pluralize, :action => 'add_comment')}
+        .panel.panel-default
+            .panel-heading
+                %h4.panel-title
+                    %a(data-toggle="collapse" data-parent="#accordion" href="#asp_#{post.id}" )
+                        -post.discontent_aspects.each do |asp|
+                            =asp.content
+                        %b="(#{post.comments.count})"
+                        %span.glyphicon.glyphicon-chevron-down
 
+                        %br
+                        %small=post.content
 
-#pagination
-    = render 'shared/pagination'
+            .panel-collapse.collapse{id:"asp_#{post.id}"}
+                .panel-body
+                    =render :partial => 'shared/comment', :collection => post.comments
+-#
+-#
+-#%table.table.table-stripped
+-#    %tr
+-#        %th Темы
+-#        %th{width: "50%"} Последний комментарий
+-#    -@posts.each do |post|
+-#        %tr
+-#            %td
+-#                =render post
+-#            %td
+-#                -unless post.comments.empty?
+-#                    =render :partial => 'shared/comment', :object =>  post.comments.last
+-#                -else
+-#                    -#= render :partial => 'shared/comment_form', :locals => { :comment => @comment, :url_link => url_for(:controller => post.class.name.underscore.pluralize, :action => 'add_comment')}
+-#
+-#
+-##pagination
+-#    = render 'shared/pagination'
 

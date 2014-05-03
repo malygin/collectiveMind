@@ -73,7 +73,7 @@ class Discontent::PostsController < PostsController
     @status = 0
     @status = 2 if @project.status == 5 or @project.status == 9
     @status = 4 if @project.status >9
-    load_filter_for_aspects   if (request.xhr? and @order.nil? and @page.nil?)
+    #load_filter_for_aspects   if (request.xhr? and @order.nil? and @page.nil?)
 
     @posts  = current_model.where(:project_id => @project, :status => 0)
     .where(status: @status)
@@ -82,7 +82,9 @@ class Discontent::PostsController < PostsController
     #.where('aspect_id  IN (?) ' , current_user.aspects(@project.id).collect(&:id))
     respond_to do |format|
       format.html {
-       if params[:view] == 'table'
+       if params[:view] == 'list'
+         render  'index'
+       else
          render  'table', layout: 'application_two_column'
        end
       }
