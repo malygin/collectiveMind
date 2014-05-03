@@ -117,6 +117,9 @@
 
   %br
   %button#send_post.btn.btn-primary(type="submit" onclick='disontent_form_submit();'){:class => ('disabled' unless @post.content?)} Сохранить
+  %br
+  %br
+  =link_to 'Назад', discontent_posts_path(@project)
   %hr
   %span#discontent_success.text-success Готово!
   %span#redirect_success

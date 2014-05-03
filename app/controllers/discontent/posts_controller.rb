@@ -45,11 +45,11 @@ class Discontent::PostsController < PostsController
     @my_jounals = Journal.count_events_for_my_feed(@project.id, current_user)
 
     @journals = Journal.events_for_user_feed @project.id
-    @news = ExpertNews::Post.where(:project_id => @project).first 
+    #@news = ExpertNews::Post.where(:project_id => @project).first
     @status = params[:status]
     @aspect = params[:aspect]
-    @aspects = Discontent::Aspect.where(:project_id => @project, :status => 0)
-    @mini_help = Help::Post.where(stage:2, mini: true).first
+    @aspects = Discontent::Aspect.where(:project_id => @project, :status => 0).eager_load(:aspect_posts)
+    #@mini_help = Help::Post.where(stage:2, mini: true).first
 
     #@post_star = []
     @post_star = Discontent::Post.where(:project_id => @project, :important => 't' ).limit(3)
@@ -78,7 +78,7 @@ class Discontent::PostsController < PostsController
     @posts  = current_model.where(:project_id => @project, :status => 0)
     .where(status: @status)
     .order_by_param(@order)
-    .paginate(:page => params[:page], :per_page => 20)
+    .paginate(:page => params[:page], :per_page => 20).eager_load(:discontent_post_aspects)
     #.where('aspect_id  IN (?) ' , current_user.aspects(@project.id).collect(&:id))
     respond_to do |format|
       format.html {

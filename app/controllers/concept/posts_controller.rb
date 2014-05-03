@@ -80,7 +80,11 @@ class Concept::PostsController < PostsController
     @concept_post.user = current_user
     @concept_post.status = 0
     @concept_post.project = @project
-
+    unless params[:resor].nil?
+      params[:resor].each_with_index do |r,i|
+        @concept_post.concept_post_resources.build(:name => r, :desc => params[:res][i])
+      end
+    end
     #unless params['correct_disc'].nil?
     #  params['correct_disc'].each do |v|
     #    if v!= ''
@@ -99,8 +103,10 @@ class Concept::PostsController < PostsController
     #
    respond_to do |format|
       if @concept_post.save!
-        params[:cd].each do |cd|
-          Concept::PostDiscontent.create(post_id: @concept_post.id, discontent_post_id: cd.to_i)
+        unless params[:cd].nil?
+          params[:cd].each do |cd|
+            Concept::PostDiscontent.create(post_id: @concept_post.id, discontent_post_id: cd.to_i)
+          end
         end
         current_user.journals.build(:type_event=>'concept_post_save', :body=>@concept_post.id,  :project => @project).save!
         format.html { redirect_to  action: "index"  }
@@ -127,6 +133,13 @@ class Concept::PostsController < PostsController
       post_aspect.discontent = disc
       @concept_post.post_aspects << post_aspect
     end
+    @concept_post.concept_post_resources.destroy_all
+    unless params[:resor].nil?
+      params[:resor].each_with_index do |r,i|
+        @concept_post.concept_post_resources.build(:name => r, :desc => params[:res][i])
+      end
+    end
+
     #unless params['correct_disc'].nil?
     #  params['correct_disc'].each do |v|
     #    if v!= ''
