@@ -24,7 +24,7 @@
           .text-success#add_dispost_success(style='display:none;')
             Несовершенство успешно добавлено
           =select_tag "selectize_concept",
-          options_from_collection_for_select(Discontent::Post.where("discontent_posts.id <> ?", @discontent_post.id).by_status(4), "id", "show_content"),
+          options_from_collection_for_select(Discontent::Post.where("discontent_posts.id <> ? and project_id = ?", @discontent_post.id, @project.id).by_status(4), "id", "show_content"),
           class: 'selectized',
           include_blank: true,
           placeholder: "Добавьте несовершенство"
