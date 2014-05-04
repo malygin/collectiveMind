@@ -82,7 +82,7 @@ class Concept::PostsController < PostsController
     @concept_post.project = @project
     unless params[:resor].nil?
       params[:resor].each_with_index do |r,i|
-        @concept_post.concept_post_resources.build(:name => r, :desc => params[:res][i])
+        @concept_post.concept_post_resources.build(:name => r, :desc => params[:res][i])   if r!=''
       end
     end
     #unless params['correct_disc'].nil?
@@ -136,7 +136,7 @@ class Concept::PostsController < PostsController
     @concept_post.concept_post_resources.destroy_all
     unless params[:resor].nil?
       params[:resor].each_with_index do |r,i|
-        @concept_post.concept_post_resources.build(:name => r, :desc => params[:res][i])
+        @concept_post.concept_post_resources.build(:name => r, :desc => params[:res][i])  if r!=''
       end
     end
 
