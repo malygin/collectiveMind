@@ -35,7 +35,7 @@ class Discontent::Post < ActiveRecord::Base
   scope :required_posts, ->(p){where(status:4, project_id:p.id)}
   scope :united_for_vote,  ->(project,voted){where(project_id: project, status: 2).where("discontent_posts.id NOT IN (#{voted.join(", ")})").order(:id)}
 
-  scope :for_union, ->(aspects,post_ids){ includes(:discontent_post_aspects).where("discontent_post_aspects.aspect_id IN (#{aspects.join(", ")})").where(status: 0).where("discontent_posts.id NOT IN (#{post_ids.join(", ")})") }
+  scope :for_union, ->(project){ where("discontent_posts.status = 0 and discontent_posts.project_id = ? ", project) }
 
   #scope :uniquely_whend, :select => 'distinct whend'
   #scope :uniquely_whered, :select => 'distinct whered'
