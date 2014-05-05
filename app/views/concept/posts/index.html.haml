@@ -1,7 +1,7 @@
 - if not current_user.answered_for_help_stage?(3) and not @mini_help.nil?
   =render partial: 'shared/small_help', object: @mini_help
 - if @project.status == 8
-  %h3 Голосование за самые интересные нововведения(решения)
+  %h3 Голосование за самые интересные нововведения
   - unless @number_v<1  and not boss?
     .alert.alert-info#fixBlock
       %h3.text-danger
@@ -10,8 +10,8 @@
 %table.table.table-striped
   %thead
     %tr
-      %th.text-success(style='width: 50%;') Несовершенства (проблемы):
-      %th.text-success(style='min-width: 300px;') Варианты нововведений (решений):
+      %th.text-success(style='width: 50%;') Несовершенства:
+      %th.text-success(style='min-width: 300px;') Варианты нововведений:
 
   %tbody
     -@aspects.each do |aspect|
@@ -27,7 +27,7 @@
 
           %td
             -if  @project.status == 7
-              %a.btn.btn-primary.btn-sm.pull-right(href="/project/#{@project.id}/concept/posts/new?dis_id=#{post.id}") Добавить нововведение (решение)
+              %a.btn.btn-primary.btn-sm.pull-right(href="/project/#{@project.id}/concept/posts/new?dis_id=#{post.id}") Добавить нововведение
             %br
             %br
 
@@ -37,7 +37,7 @@
                   .panel-body.nov-list
                     %small.text-muted= Russian::strftime(pa.created_at,"%d %B %k:%M:%S ")
                     %br
-                    =pa.post_aspects.first.name
+                    =pa.post_aspects.first.title
                     =link_to 'подробнее', concept_post_path(@project, pa)
                     = render 'shared/post_social_bar2', :post => pa
 

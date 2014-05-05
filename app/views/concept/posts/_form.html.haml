@@ -1,6 +1,6 @@
 = render 'shared/help/new_concept'
 = form_for  @post, :url => {:project => @project.id, :action => @post.persisted? ? 'update' : 'create'},   :html => { :class => 'new_or_edit' }do |f|
-  %h4 Нововведение (решение):
+  %h4 Нововведение:
   %br
   %div.tab-content
     %div.tab-pane.active#novation1
@@ -8,7 +8,7 @@
         %div.panel-body
           -#%button.btn.btn-info.pull-right(data-toggle="modal" data-target="#modalStage3")
           -#  Показать пример
-          %h6.text-info Устраняемые несовершенства (проблемы):
+          %h6.text-info Устраняемые несовершенства:
           #panel_union
             -if !@post.id.nil?
               -@post.concept_disposts.each  do |cd|
@@ -30,6 +30,14 @@
           placeholder: "Добавьте несовершенство"
 
           %hr
+          .row
+            .col-md-12
+              .text-center
+                %p.text-info.h5
+                  Название нововведения
+                %br
+                =text_field_tag "pa[#{@discontent_post.id}][title]",@pa.title, style: 'width: 100%; height: 30px', placeholder:'Введетие краткое название для своего нововведения'
+                %br
           .row
             .col-md-12
               .text-center
