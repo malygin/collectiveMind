@@ -14,7 +14,6 @@
     = render 'shared/post_edit_bar', :post => @post
 
     - if can_union_discontents?(@project) and @post.status == 0
-
       .panel.panel-default
         .panel-heading
           %h5 Подходящие для объединения несовершенства:
