@@ -19,6 +19,7 @@ CollectiveMind::Application.routes.draw do
         put :plus
         get :edit_comment
         put :plus_comment
+        put :set_required
       end
     end
   end

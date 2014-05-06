@@ -58,6 +58,9 @@ class Discontent::PostsController < PostsController
         where(:project_id => @project).
         reorder('number_views DESC').
         limit(3)
+    if @project.status == 6
+      @vote_all = Discontent::Voting.where("discontent_votings.discontent_post_id IN (#{@project.discontents.by_status(2).pluck(:id).join(", ")})").uniq_user.count
+    end
   end
 
   def index
@@ -71,7 +74,7 @@ class Discontent::PostsController < PostsController
     @page = params[:page]
     @folder = :discontent
     @status = 0
-    @status = 2 if @project.status == 5 or @project.status == 9
+    @status = 2 if @project.status == 6 or @project.status == 9
     @status = 4 if @project.status >9
     #load_filter_for_aspects   if (request.xhr? and @order.nil? and @page.nil?)
 
@@ -115,20 +118,20 @@ class Discontent::PostsController < PostsController
 
 
   def vote_list
-    #@posts = current_model.where(:project_id => @project, :status => 2)
-    @posts = @project.get_united_posts_for_vote(@project,current_user)
+    @posts = @project.get_united_posts_for_vote(@project, current_user)
     @post_all = current_model.where(:project_id => @project, :status => 2).count
-    # i have votes now
-    #@number_v = @project.get_united_posts_for_vote(current_user)
     if @posts.empty?
       redirect_to action: "index"
       return
     end
+    @votes = current_user.voted_discontent_posts.count
+    @status = 2
+    #@posts = current_model.where(:project_id => @project, :status => 2)
+    # i have votes now
+    #@number_v = @project.get_united_posts_for_vote(current_user)
     #@path_for_voting = "/project/#{@project.id}/discontent/"
     #all number of votes
     #@votes = @project.stage2
-    @votes = current_user.voted_discontent_posts.count
-    @status = 2
     #if boss?
     #  @all_people = @project.users.size
     #  @voted_people = ActiveRecord::Base.connection.execute("select count(*) as r from (select distinct v.user_id from discontent_voitings v  left join   discontent_aspects asp on (v.discontent_aspect_id = asp.id) where asp.project_id = #{@project.id}) as dm").first["r"]
@@ -321,5 +324,10 @@ class Discontent::PostsController < PostsController
       #if @project.get_united_posts_for_vote(current_user).empty?
       #  redirect_to action: "index"
       #end
+    end
+
+    def set_required
+      @post = Discontent::Post.find(params[:id])
+      @post.update_attributes(:status => 4) if boss?
     end
 end

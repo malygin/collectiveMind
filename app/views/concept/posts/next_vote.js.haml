@@ -5,6 +5,7 @@
     $('#right-concept').html("#{escape_javascript(render partial: 'post_for_vote', object: @concept2, :locals => {:number => 2})}")
     $('#prog_all').html("#{@post_all}");
     $('#prog_now').html("#{@votes}");
+
     $('.progress-bar').css('width',"#{((@votes-1)/@post_all.to_f)*100}%");
     $('#dispost').effect("highlight", {color: '#f5cecd'}, 1000);
 

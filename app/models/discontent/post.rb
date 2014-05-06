@@ -91,7 +91,6 @@ class Discontent::Post < ActiveRecord::Base
     Discontent::Post.includes(:discontent_post_aspects).
     where("discontent_post_aspects.aspect_id IN (#{aspects.join(', ')}) and discontent_posts.status = 0 and discontent_posts.id <> ?
     and (discontent_posts.whered = ? or discontent_posts.whend = ?)", self.id, self.whered, self.whend)
-
   end
 
   def conditions_for_plan(plan)

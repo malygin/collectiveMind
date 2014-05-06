@@ -38,3 +38,16 @@
         Комментировать
         =post.comments.count
         %span.glyphicon.glyphicon-comment
+      -if boss? and @project.status == 6
+        |
+        %span.text-success За:
+        =post.final_votings.by_positive.uniq_user.size
+        |
+        %span.text-danger Против:
+        =post.final_votings.by_negative.uniq_user.size
+        |
+        %span.text-info Всего:
+        =@vote_all
+        |
+        =link_to({:controller => post.class.name.underscore.pluralize, :action => :set_required, :id => post.id, :project => @project},:remote => true,:method => :put,:id => "set_required_#{post.id}", :class => "note_text") do
+          %span.text-warning В обязательные
