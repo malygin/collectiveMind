@@ -78,7 +78,7 @@ class Discontent::PostsController < PostsController
     @posts  = current_model.where(:project_id => @project, :status => 0)
     .where(status: @status)
     .order_by_param(@order)
-    .paginate(:page => params[:page], :per_page => 20).eager_load(:discontent_post_aspects)
+    .paginate(:page => params[:page], :per_page => 40).eager_load(:discontent_post_aspects)
     #.where('aspect_id  IN (?) ' , current_user.aspects(@project.id).collect(&:id))
     respond_to do |format|
       format.html {
