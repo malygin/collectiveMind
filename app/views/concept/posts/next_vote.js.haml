@@ -1,0 +1,21 @@
+-unless @discontent_post.nil?
+  -if @discontent_post.id != @last_now.discontent_post_id
+    $('#dispost').html("#{escape_javascript(render partial: 'discontent/posts/post_content', object: @discontent_post)}")
+    $('#left-concept').html("#{escape_javascript(render partial: 'post_for_vote', object: @concept1, :locals => {:number => 1})}")
+    $('#right-concept').html("#{escape_javascript(render partial: 'post_for_vote', object: @concept2, :locals => {:number => 2})}")
+    $('#prog_all').html("#{@post_all}");
+    $('#prog_now').html("#{@votes}");
+    $('.progress-bar').css('width',"#{((@votes-1)/@post_all.to_f)*100}%");
+    $('#dispost').effect("highlight", {color: '#f5cecd'}, 1000);
+
+  -else
+    -if params[:num] == "1"
+      $('#right-concept').html("#{escape_javascript(render partial: 'post_for_vote', object: @concept2, :locals => {:number => 2})}")
+
+    -if params[:num] == "2"
+      $('#left-concept').html("#{escape_javascript(render partial: 'post_for_vote', object: @concept2, :locals => {:number => 1})}")
+    $('#prog_now').html("#{@votes}");
+    $('.progress-bar').css('width',"#{((@votes-1)/@post_all.to_f)*100}%");
+
+-if @discontent_post.nil?
+  $('#concept_success').fadeIn('slow');

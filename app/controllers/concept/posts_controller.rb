@@ -43,28 +43,34 @@ class Concept::PostsController < PostsController
 
 
     @journals = Journal.events_for_user_feed @project.id
-    @news = ExpertNews::Post.first  
+    @news = ExpertNews::Post.first
     @status = 4
   end
 
 
   def index
-    @posts = current_model.where(:project_id => @project, :status => @status).paginate(:page => params[:page])
-
-      if @project.status == 8
-        @number_v = @project.stage3 - current_user.concept_post_votings.size
-        @votes = @project.stage3
-        @path_for_voting = "/project/#{@project.id}/concept/vote/"
-
-        if boss?
-          @all_people = @project.users.size
-
-          @voted_people = ActiveRecord::Base.connection.execute("select count(*) as r from (select distinct v.user_id from concept_votings v  left join   concept_post_aspects asp on (v.concept_post_aspect_id = asp.id) ) as dm").first["r"]
-          @votes = ActiveRecord::Base.connection.execute("select count(*) as r from (select  v.user_id from concept_votings v  left join   concept_post_aspects asp on (v.concept_post_aspect_id = asp.id) ) as dm").first["r"].to_i
-        end
-        render 'index' , :layout => 'application_one_column'
+    if @project.status == 8
+      if view_context.get_concept_posts_for_vote?(@project)
+        redirect_to action: "vote_list"
         return
       end
+    end
+    @posts = current_model.where(:project_id => @project, :status => @status).paginate(:page => params[:page])
+
+    #if @project.status == 8
+    #  @number_v = @project.stage3 - current_user.concept_post_votings.size
+    #  @votes = @project.stage3
+    #  @path_for_voting = "/project/#{@project.id}/concept/vote/"
+    #
+    #  if boss?
+    #    @all_people = @project.users.size
+    #
+    #    @voted_people = ActiveRecord::Base.connection.execute("select count(*) as r from (select distinct v.user_id from concept_votings v  left join   concept_post_aspects asp on (v.concept_post_aspect_id = asp.id) ) as dm").first["r"]
+    #    @votes = ActiveRecord::Base.connection.execute("select count(*) as r from (select  v.user_id from concept_votings v  left join   concept_post_aspects asp on (v.concept_post_aspect_id = asp.id) ) as dm").first["r"].to_i
+    #  end
+    #  render 'vote_list' , :layout => 'application_one_column'
+    #  return
+    #end
     render 'index' , :layout => 'application_two_column'
   end
 
@@ -161,12 +167,83 @@ class Concept::PostsController < PostsController
   end
 
   def vote_list
-    @posts = current_model.where(:project_id => @project, :status => 2)
+    #@posts = @project.get_concept_posts_for_vote(current_user)
+    #if @posts.empty?
+    #  redirect_to action: "index"
+    #  return
+    #end
+    #@posts = current_model.where(:project_id => @project, :status => 2)
     # i have votes now
-    @number_v = @project.stage3 - current_user.voted_concept_posts.count
-    @path_for_voting = "/project/#{@project.id}/concept/vote/"
+    #@number_v = @project.stage3 - current_user.voted_concept_posts.count
+    #@path_for_voting = "/project/#{@project.id}/concept/vote/"
     #all number of votes
-    @votes = @project.stage3
+    #@votes = @project.stage3
+    @project = Core::Project.find(params[:project])
+    unless view_context.get_concept_posts_for_vote?(@project)
+      redirect_to action: "index"
+      return
+    end
+
+    disposts = Discontent::Post.where(:project_id => @project, :status => 4).order(:id)
+    last_vote = current_user.concept_post_votings.last
+
+    @discontent_post = view_context.able_concept_posts_for_vote(disposts,last_vote)
+    unless @discontent_post.nil?
+      @post_all = @discontent_post.dispost_concepts.size - 1
+      concept_posts = @discontent_post.dispost_concepts.order('concept_posts.id')
+      if last_vote.nil? or @discontent_post.id != last_vote.discontent_post_id
+        @concept1 = concept_posts[0].post_aspects.first
+        @concept2 = concept_posts[1].post_aspects.first
+        @votes = 1
+      else
+        @concept1 = last_vote.concept_post_aspect
+        count_now = current_user.concept_post_votings.where(:discontent_post_id => @discontent_post.id, :concept_post_aspect_id => @concept1.id).count
+        index = concept_posts.index @concept1.concept_post
+        index = count_now unless index == count_now
+        unless concept_posts[index+1].nil?
+          @concept2 = concept_posts[index+1].post_aspects.first
+          @votes = index+1
+        end
+      end
+    end
+    render 'vote_list' , :layout => 'application_one_column'
+  end
+
+  def next_vote
+    @project = Core::Project.find(params[:project])
+    disposts = Discontent::Post.where(:project_id => @project, :status => 4).order(:id)
+    @last_vote = current_user.concept_post_votings.last
+
+    if @last_vote.nil? or params[:id].to_i == @last_vote.concept_post_aspect_id or params[:dis_id].to_i != @last_vote.discontent_post_id
+      count_create = 1
+    else
+      count_create = current_user.concept_post_votings.where(:discontent_post_id => @last_vote.discontent_post_id,
+                                                             :concept_post_aspect_id => @last_vote.concept_post_aspect_id).count + 1
+    end
+    if view_context.get_concept_posts_for_vote?(@project)
+      count_create.times do
+          @last_now = Concept::Voting.create(:user_id => current_user.id, :concept_post_aspect_id => params[:id], :discontent_post_id => params[:dis_id])
+      end
+    end
+    @discontent_post = view_context.able_concept_posts_for_vote(disposts,@last_now)
+    unless @discontent_post.nil?
+      @post_all = @discontent_post.dispost_concepts.size - 1
+      concept_posts = @discontent_post.dispost_concepts.order('concept_posts.id')
+      if @discontent_post.id != @last_now.discontent_post_id
+        @concept1 = concept_posts[0].post_aspects.first
+        @concept2 = concept_posts[1].post_aspects.first
+        @votes = 1
+      else
+        @concept1 = @last_now.concept_post_aspect
+        count_now = current_user.concept_post_votings.where(:discontent_post_id => @discontent_post.id, :concept_post_aspect_id => @concept1.id).count
+        index = concept_posts.index @concept1.concept_post
+        index = count_now unless index == count_now
+        unless concept_posts[index+1].nil?
+          @concept2 = concept_posts[index+1].post_aspects.first
+          @votes = index+1
+        end
+      end
+    end
   end
 
   def new
@@ -174,7 +251,7 @@ class Concept::PostsController < PostsController
     @discontent_post = Discontent::Post.find(params[:dis_id])
     @resources = Concept::Resource.where(:project_id => @project.id)
     #@aspects = Discontent::Aspect.where(:project_id => @project)
-    @pa =Concept::PostAspect.new
+    @pa = Concept::PostAspect.new
     respond_to do |format|
       format.html { render :layout => 'application_two_column' }
       format.json { render json: @post }

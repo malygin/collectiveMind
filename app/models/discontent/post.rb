@@ -29,6 +29,8 @@ class Discontent::Post < ActiveRecord::Base
 
   has_many :voted_users, :through => :final_votings, :source => :user
   has_many :final_votings,:foreign_key => 'discontent_post_id', :class_name => 'Discontent::Voting'
+
+  has_many :concept_votings, :foreign_key => 'discontent_post_id', :class_name => 'Concept::Voting'
   scope :by_status, ->(p){where(status: p)}
   scope :by_positive, ->(p){where(style: 0, status: p)}
   scope :by_negative, ->(p){where(style: 1, status: p)}

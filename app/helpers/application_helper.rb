@@ -172,4 +172,60 @@ def column_for_concept_type(type_fd)
     else
       nil
   end
+
+
+  #def get_concept_posts_for_vote?
+  #  disposts = Discontent::Post.where(:project_id => @project, :status => 4).order(:id)
+  #  last_vote = current_user.concept_post_votings.last
+  #  unless last_vote.nil?
+  #    i = -1
+  #    able = disposts[i].nil? ? false:true
+  #    while able
+  #      @concept_posts = disposts[i].dispost_concepts.order('concept_posts.id')
+  #      if @concept_posts.size > 1
+  #        break
+  #      end
+  #      i -= 1
+  #    end
+  #    if disposts[i].id == last_vote.discontent_post_id
+  #      count_now = current_user.concept_post_votings.where(:discontent_post_id => last_vote.discontent_post_id, :concept_post_aspect_id => last_vote.concept_post_aspect_id).count
+  #      index = @concept_posts.index last_vote.concept_post_aspect.concept_post
+  #      index = count_now unless index == count_now
+  #      if @concept_posts[index+1].nil?
+  #        return false
+  #      end
+  #    end
+  #  end
+  #  return true
+  #end
+
+  #def able_concept_posts_for_vote(disposts,last_vote, num = 0)
+  #  unless last_vote.nil?
+  #    dis_post = last_vote.discontent_post
+  #    num = disposts.index dis_post
+  #  end
+  #  i = num
+  #  able = disposts[i].nil? ? false:true
+  #  while able
+  #    @discontent_post = disposts[i]
+  #    concept_posts = @discontent_post.dispost_concepts.order('concept_posts.id')
+  #    if last_vote.nil?
+  #      if concept_posts.size > 1
+  #        return @discontent_post
+  #      end
+  #    elsif @discontent_post.id != last_vote.discontent_post_id
+  #      if concept_posts.size > 1
+  #        return @discontent_post
+  #      end
+  #    else
+  #      count_now = current_user.concept_post_votings.where(:discontent_post_id => last_vote.discontent_post_id, :concept_post_aspect_id => last_vote.concept_post_aspect_id).count
+  #      index = concept_posts.index last_vote.concept_post_aspect.concept_post
+  #      index = count_now unless index == count_now
+  #      unless concept_posts[index+1].nil?
+  #        return @discontent_post
+  #      end
+  #    end
+  #    i += 1
+  #  end
+  #end
 end

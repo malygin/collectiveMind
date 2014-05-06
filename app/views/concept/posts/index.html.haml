@@ -1,12 +1,12 @@
 - if not current_user.answered_for_help_stage?(3) and not @mini_help.nil?
   =render partial: 'shared/small_help', object: @mini_help
-- if @project.status == 8
-  %h3 Голосование за самые интересные нововведения(решения)
-  - unless @number_v<1  and not boss?
-    .alert.alert-info#fixBlock
-      %h3.text-danger
-        =t('voting.have_votes')
-        %b#count_vote=@number_v
+-#- if @project.status == 8
+-#  %h3 Голосование за самые интересные нововведения(решения)
+-#  - unless @number_v<1  and not boss?
+-#    .alert.alert-info#fixBlock
+-#      %h3.text-danger
+-#        =t('voting.have_votes')
+-#        %b#count_vote=@number_v
 %table.table.table-striped
   %thead
     %tr
