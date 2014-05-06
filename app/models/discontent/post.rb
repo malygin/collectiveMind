@@ -33,7 +33,7 @@ class Discontent::Post < ActiveRecord::Base
   scope :by_positive, ->(p){where(style: 0, status: p)}
   scope :by_negative, ->(p){where(style: 1, status: p)}
   scope :required_posts, ->(p){where(status:4, project_id:p.id)}
-  scope :united_for_vote,  ->(project,voted){where(project_id: project, status: 2).where("discontent_posts.id NOT IN (#{voted.join(", ")})").order(:id)}
+  scope :united_for_vote,  ->(project,voted){where(project_id: project, status: 2).where("discontent_posts.id NOT IN ()", voted).order(:id)}
 
   scope :for_union, ->(project){ where("discontent_posts.status = 0 and discontent_posts.project_id = ? ", project) }
 
