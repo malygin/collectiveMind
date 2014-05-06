@@ -61,7 +61,7 @@ class Discontent::PostsController < PostsController
   end
 
   def index
-    if @project.status == 6 and !@project.get_united_posts_for_vote(current_user).empty?
+    if @project.status == 6 and !@project.get_united_posts_for_vote(@project,current_user).empty?
       redirect_to action: "vote_list"
       return
     end
