@@ -1,6 +1,6 @@
 = render 'shared/help/new_concept'
 = form_for  @post, :url => {:project => @project.id, :action => @post.persisted? ? 'update' : 'create'},   :html => { :class => 'new_or_edit' }do |f|
-  %h4 Нововведение (решение):
+  %h4 Нововведение:
   %br
   %div.tab-content
     %div.tab-pane.active#novation1
@@ -8,7 +8,7 @@
         %div.panel-body
           -#%button.btn.btn-info.pull-right(data-toggle="modal" data-target="#modalStage3")
           -#  Показать пример
-          %h6.text-info Устраняемые несовершенства (проблемы):
+          %h6.text-info Устраняемые несовершенства:
           #panel_union
             -if !@post.id.nil?
               -@post.concept_disposts.each  do |cd|
@@ -24,12 +24,20 @@
           .text-success#add_dispost_success(style='display:none;')
             Несовершенство успешно добавлено
           =select_tag "selectize_concept",
-          options_from_collection_for_select(Discontent::Post.where("discontent_posts.id <> ?", @discontent_post.id).by_status(4), "id", "show_content"),
+          options_from_collection_for_select(Discontent::Post.where("discontent_posts.id <> ? and project_id = ?", @discontent_post.id, @project.id).by_status(4), "id", "show_content"),
           class: 'selectized',
           include_blank: true,
-          placeholder: "Добавьте несовершенство"
+          placeholder: "Какие еще несовершенства решает ваше нововведение?"
 
           %hr
+          .row
+            .col-md-12
+              .text-center
+                %p.text-info.h5
+                  Краткое название вашего нововведения
+                %br
+                =text_field_tag "pa[#{@discontent_post.id}][title]",@pa.title, style: 'width: 100%; height: 30px', placeholder:'Введетие краткое название для своего нововведения'
+                %br
           .row
             .col-md-12
               .text-center
@@ -44,9 +52,8 @@
               .text-right
                 %i
                   %h6.text-primary Предположим, вы оказались в будущем. Что там есть такого, что исправляет несовершенство?
-                  %h6.text-primary Не пишите о том, КАК это будет исправлять несовершенство - для этого есть следующий вопрос.
                   %h6.text-success Пример:
-                  %h6.text-muted Несовершенство:
+                  %h6.text-muted Решаемое несовершенство:
                   %span.label.label-default что
                   %span.text-muted Пыльный и отвратительный на вид большой пустырь
                   %br
@@ -56,9 +63,8 @@
                   %span.label.label-default когда
                   %span.text-muted в теплое время года
                   %br
-                  %br
-                  %h6.text-success Нововведение:
-                  %p Газон по всему пустырю  с  клумбой  посредине
+                  %h6.text-success Предлагаемое нововведение:
+                  %p Большой зеленый газон по всему пустырю  с клумбой с посредине. Клумба засеяна красными многолетными цветами.
             .col-md-6
               .form-group.has-danger
                 =text_area_tag "pa[#{@discontent_post.id}][name]",@pa.name, :class => "concept_cond form-control", rows: 12, style: 'width: 100%;'
@@ -100,7 +106,7 @@
                   %p Должен быть обеспечен регулярный полив;  нужно засевать газон травой, а на клумбу высаживать растения; почву периодически вскапывать, удобрять и пропалывать; необходимо весной собирать деньги у жильцов.
             .col-md-6
               .form-group.has-success
-                =text_area_tag "pa[#{@discontent_post.id}][positive]",@pa.positive, :placeholder => 'Подробно опишите весь процесс функционирования вашего нововведения в будущем.', :class => "concept_cond form-control", rows: 12, style: 'width: 100%;'
+                =text_area_tag "pa[#{@discontent_post.id}][positive]",@pa.positive,  :class => "concept_cond form-control", rows: 12, style: 'width: 100%;'
                 -#=text_area_tag "pa[positive]",@pa.positive, :placeholder => 'Подробно опишите весь процесс функционирования вашего нововведения в будущем.', :class => "concept_cond form-control", rows: 12, style: 'width: 100%;'
           .row
             .col-md-12
@@ -118,24 +124,49 @@
                   %h6.text-primary
                     Ресурсами могут быть методы, технические, организационные или финансовые средства, человеческие силы и вообще все,
                     что необходимо иметь в распоряжении в будущем, чтобы обеспечить функционирование нововведения
+                    %br
+                    %br
+                    %b Четкое представление о том, какие ресурсы понадобятся для функционирования нововведения позволят выработать более эффективный проект.
                   %br
+
                   %h6.text-success Пример:
 
                   %p
-                    работник по уходу за растениями,  инструменты обработки почвы и растений, помещение для хранения технических средств...
+                    работник (для ухода за растениями),
+                    %br
+                    инструменты (обработки почвы и растений),
+                    %br
+                    помещение (для хранения технических средств)...
             .col-md-6
               .form-group.has-success#resources
-                .panel.panel-default
-                  .panel-body
-                    =f.autocomplete_field :resource, autocomplete_concept_post_resource_concept_posts_path, :"min-length" => 0,  class: 'form-control autocomplete',placeholder: 'Ресурс', name: 'resor[]'
-                    %br
-                    = text_area_tag 'res[]', '', class: 'form-control', placeholder: 'Пояснение к ресурсу'
-                .panel.panel-default
-                  .panel-body
-                    =f.autocomplete_field :resource, autocomplete_concept_post_resource_concept_posts_path, :"min-length" => 0,  class: 'form-control autocomplete',placeholder: 'Ресурс', name: 'resor[]'
-                    %br
-                    = text_area_tag 'res[]', '', class: 'form-control', placeholder: 'Пояснение к ресурсу'
+                - if @post.persisted?
+                  -@post.concept_post_resources.each do |r|
+                    .panel.panel-default
+                      .panel-body
+                        %span.glyphicon.glyphicon-remove.text-danger.pull-right{onclick: "$(this).parent().parent().remove();", style: "cursor:pointer;text-decoration:none;font-size:15px;"}
+
+                        =f.autocomplete_field :resource, autocomplete_concept_post_resource_concept_posts_path, :"min-length" => 0, value: r.name,  class: 'form-control autocomplete',placeholder: 'Ресурс', name: 'resor[]'
+                        %br
+                        = text_area_tag 'res[]', r.desc, class: 'form-control', placeholder: 'Пояснение к ресурсу'
+                -else
+
+
+                  .panel.panel-default
+                    .panel-body
+                      %span.glyphicon.glyphicon-remove.text-danger.pull-right{onclick: "$(this).parent().parent().remove();", style: "cursor:pointer;text-decoration:none;font-size:15px;"}
+
+                      =f.autocomplete_field :resource, autocomplete_concept_post_resource_concept_posts_path, :"min-length" => 0,  class: 'form-control autocomplete',placeholder: 'Ресурс', name: 'resor[]'
+                      %br
+                      = text_area_tag 'res[]', '', class: 'form-control', placeholder: 'Пояснение к ресурсу'
+                  .panel.panel-default
+                    .panel-body
+                      %span.glyphicon.glyphicon-remove.text-danger.pull-right{onclick: "$(this).parent().parent().remove();", style: "cursor:pointer;text-decoration:none;font-size:15px;"}
+
+                      =f.autocomplete_field :resource, autocomplete_concept_post_resource_concept_posts_path, :"min-length" => 0,  class: 'form-control autocomplete',placeholder: 'Ресурс', name: 'resor[]'
+                      %br
+                      = text_area_tag 'res[]', '', class: 'form-control', placeholder: 'Пояснение к ресурсу'
               %a.btn.btn-success{onclick:"return add_new_resource_to_concept(); "} Добавить ресурс
+
               -#=text_area_tag "pa[#{@discontent_post.id}][positive_r]",@pa.positive_r, :placeholder => 'Перечислите все необходимое для успешного функционирования вашего нововедения в будущем', :class => "concept_cond form-control", rows: 12, style: 'width: 100%;'
 
           %hr
@@ -160,7 +191,7 @@
                     Конфликты из-за того, что некоторые жильцы могут отказаться делать денежные взносы.
             .col-md-6
               .form-group.has-success
-                =text_area_tag "pa[#{@discontent_post.id}][negative]",@pa.negative, :placeholder => 'К каким побочным эффектам может привести ваше нововведение в будущем?', :class => "concept_cond form-control", rows: 14,  style: 'width: 100%;'
+                =text_area_tag "pa[#{@discontent_post.id}][negative]",@pa.negative,  :class => "concept_cond form-control", rows: 14,  style: 'width: 100%;'
                 -#=text_area_tag "pa[negative]",@pa.negative, :placeholder => 'К каким побочным эффектам может привести ваше нововведение в будущем?', :class => "concept_cond form-control", rows: 14,  style: 'width: 100%;'
 
           .row

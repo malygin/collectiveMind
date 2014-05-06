@@ -5,7 +5,7 @@ class Journal < ActiveRecord::Base
 
   belongs_to :project, :class_name => 'Core::Project', :foreign_key => "project_id"
   @types = %w(enter)
-  @my_types = %w(my_life_tape_comment my_discontent_comment my_concept_comment)
+  @my_types = %w(my_life_tape_comment my_discontent_comment my_concept_comment my_discontent_note)
 
   def self.events_for_user_feed(project_id, lim = 20)
 		Journal.where(' project_id = ? AND type_event NOT  IN (?)',project_id, @types+ @my_types).limit(lim).order('created_at DESC')
@@ -20,7 +20,7 @@ class Journal < ActiveRecord::Base
   end
 
   def self.count_events_for_my_feed(project_id, user_id)
-    Journal.where(' project_id = ? AND type_event  IN (?) AND user_informed = ? AND viewed=?',project_id, @my_types, user_id, false).count
+    Journal.where(' project_id = ? AND type_event  IN (?) AND user_informed = ? AND viewed=?',project_id, @my_types, user_id, false).size
   end
 
 

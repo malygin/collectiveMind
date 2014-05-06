@@ -45,11 +45,11 @@ class Discontent::PostsController < PostsController
     @my_jounals = Journal.count_events_for_my_feed(@project.id, current_user)
 
     @journals = Journal.events_for_user_feed @project.id
-    @news = ExpertNews::Post.where(:project_id => @project).first 
+    #@news = ExpertNews::Post.where(:project_id => @project).first
     @status = params[:status]
     @aspect = params[:aspect]
-    @aspects = Discontent::Aspect.where(:project_id => @project, :status => 0)
-    @mini_help = Help::Post.where(stage:2, mini: true).first
+    @aspects = Discontent::Aspect.where(:project_id => @project, :status => 0).eager_load(:aspect_posts)
+    #@mini_help = Help::Post.where(stage:2, mini: true).first
 
     #@post_star = []
     @post_star = Discontent::Post.where(:project_id => @project, :important => 't' ).limit(3)
@@ -61,7 +61,7 @@ class Discontent::PostsController < PostsController
   end
 
   def index
-    if @project.status == 6 and !@project.get_united_posts_for_vote(current_user).empty?
+    if @project.status == 6 and !@project.get_united_posts_for_vote(@project,current_user).empty?
       redirect_to action: "vote_list"
       return
     end
@@ -73,16 +73,18 @@ class Discontent::PostsController < PostsController
     @status = 0
     @status = 2 if @project.status == 5 or @project.status == 9
     @status = 4 if @project.status >9
-    load_filter_for_aspects   if (request.xhr? and @order.nil? and @page.nil?)
+    #load_filter_for_aspects   if (request.xhr? and @order.nil? and @page.nil?)
 
     @posts  = current_model.where(:project_id => @project, :status => 0)
     .where(status: @status)
     .order_by_param(@order)
-    .paginate(:page => params[:page], :per_page => 20)
+    .paginate(:page => params[:page], :per_page => 40).eager_load(:discontent_post_aspects)
     #.where('aspect_id  IN (?) ' , current_user.aspects(@project.id).collect(&:id))
     respond_to do |format|
       format.html {
-       if params[:view] == 'table'
+       if params[:view] == 'list'
+         render  'index'
+       else
          render  'table', layout: 'application_two_column'
        end
       }
@@ -114,7 +116,7 @@ class Discontent::PostsController < PostsController
 
   def vote_list
     #@posts = current_model.where(:project_id => @project, :status => 2)
-    @posts = @project.get_united_posts_for_vote(current_user)
+    @posts = @project.get_united_posts_for_vote(@project,current_user)
     @post_all = current_model.where(:project_id => @project, :status => 2).count
     # i have votes now
     #@number_v = @project.get_united_posts_for_vote(current_user)
@@ -224,7 +226,7 @@ class Discontent::PostsController < PostsController
      @posts  = current_model.where(:project_id => @project)
      .where(status: 2)
      .order_by_param(@order)
-     .paginate(:page => params[:page], :per_page => 20)
+     .paginate(:page => params[:page], :per_page => 40)
      #.where('aspect_id  IN (?) ' , current_user.aspects(@project.id).collect(&:id))
      respond_to do |format|
        format.js
@@ -285,6 +287,8 @@ class Discontent::PostsController < PostsController
       @post_note.type_field = params[:type_field]
       @post_note.user_id = current_user.id
       @type = params[:type_field]
+      current_user.journals.build(:type_event=>'my_discontent_note', :user_informed => @post.user, :project => @project, :body=>"#{@post_note.content[0..24]}:#{@post.id}", :viewed=> false).save!
+
       if @post.post_notes(@type.to_i).size == 0
         @post.update_attributes(column_for_type_field(@type.to_i) => 'f')
       end

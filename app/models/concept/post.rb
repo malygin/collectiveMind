@@ -14,7 +14,7 @@
 
   has_many :concept_post_discontents, :class_name => 'Concept::PostDiscontent'
   has_many :concept_disposts, :through => :concept_post_discontents, :source => :discontent_post , :class_name => 'Discontent::Post'
-
+  has_many :concept_post_resources, :class_name => 'Concept::PostResource'
   scope :stat_fields_negative, ->(p){where(:id => p).where("stat_name = 'f' or stat_content = 'f' or stat_negative = 'f'
             or stat_positive = 'f' or stat_reality = 'f' or stat_problems = 'f'
             or stat_positive_r = 'f' or stat_negative_r = 'f' ")}

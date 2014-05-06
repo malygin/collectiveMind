@@ -35,6 +35,9 @@ module CollectiveMind
 
     # Configure the default encoding used in templates for Ruby 1.9.
     config.encoding = "utf-8"
+    config.i18n.enforce_available_locales = true
+    # or if one of your gem compete for pre-loading, use
+    I18n.config.enforce_available_locales = true
     config.i18n.default_locale = :ru
     I18n.default_locale = :ru
     # Configure sensitive parameters which will be filtered from the log file.

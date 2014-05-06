@@ -3,7 +3,7 @@ $("#post_#{@post_vote.id}").animate({height: 0, opacity:0}, 1000, function() { $
 -#for (var i = 0; i < items.length; i++) ids.push(items[i].attr('stage_id'));
 
 $("#post_#{@post_vote.id}").next().fadeIn();
--if @project.get_united_posts_for_vote(current_user).empty?
+-if @project.get_united_posts_for_vote(@project,current_user).empty?
   $("#vote_success").fadeIn()
 
 $('#prog_now').html("#{@votes != @post_all ? @votes+1 : @votes}");

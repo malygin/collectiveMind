@@ -14,7 +14,6 @@
     = render 'shared/post_edit_bar', :post => @post
 
     - if can_union_discontents?(@project) and @post.status == 0
-
       .panel.panel-default
         .panel-heading
           %h5 Подходящие для объединения несовершенства:
@@ -37,7 +36,7 @@
       .text-success#dispost_success(style='display:none;')
         Несовершенство успешно добавлено
       =select_tag "selectize_tag",
-      options_from_collection_for_select(Discontent::Post.for_union(Discontent::PostAspect.by_post_aspects(@post.discontent_posts.pluck(:id)).pluck(:aspect_id),@post.discontent_posts.pluck(:id)), "id", "show_content"),
+      options_from_collection_for_select(Discontent::Post.for_union(@project.id), "id", "show_content"),
       class: 'selectized',
       include_blank: true,
       placeholder: "Добавьте несовершенство"

@@ -3,6 +3,7 @@
 -#  Показать пример
 -#%br
 -#%br
+%h3.text-center Форма добавления несовершенства
 = form_for  @post, :url => {:project => @project.id, :replace_id => @replace_post.nil? ? nil : @replace_post.id , :action => @post.persisted? ? 'update' : 'create'},  :remote => true, :html => { :id => 'new_discontent' }do |f|
   -if @post.errors.any?
     #error_explanation
@@ -116,6 +117,9 @@
 
   %br
   %button#send_post.btn.btn-primary(type="submit" onclick='disontent_form_submit();'){:class => ('disabled' unless @post.content?)} Сохранить
+  %br
+  %br
+  =link_to 'Назад', discontent_posts_path(@project)
   %hr
   %span#discontent_success.text-success Готово!
   %span#redirect_success

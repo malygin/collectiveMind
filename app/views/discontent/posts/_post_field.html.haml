@@ -6,6 +6,8 @@
 
 - if (post_field.status == 2 or post_field.status == 4) and type_fd == 1
   -#-if !params[:id].nil?
+  =post_field.content
+  %br
   %ul(id="post_content_#{post_field.id}" style="margin-left:-20px;" )
     -post_field.discontent_posts.each do |dp|
       %li{:id => "li_id_#{dp.id}"}=dp.content

@@ -1,13 +1,18 @@
+%h3
+  2 этап: Анализ ситуации.
+  %br
+  %small Сбор несовершенств в рамках процедуры "Выведение аптечной справки WWW.ROS-MED.INFO в Топ-3 аптечных справок рунета"
 .pull-right
-  %a.btn.btn-default.menu_table(href="/project/#{@project.id}/discontent/posts" )
+  %a.btn.btn-default.menu_table(href="/project/#{@project.id}/discontent/posts?view=list" )
     %span.glyphicon.glyphicon-th-list
     Список
   %a.active.btn.btn-default.menu_table(href="#" )
     %span.glyphicon.glyphicon-th
     Таблица
+%br
 %a{name:'top'}
 - if signed_in? and @project.status ==3
-  = link_to '+ Добавить свое несовершенство в список', new_discontent_post_path(@project) , id: 'add_record',  class: 'btn btn-sm btn-success'
+  = link_to '+ Добавить свое несовершенство', new_discontent_post_path(@project) , id: 'add_record',  class: 'btn btn-sm btn-success'
   %br
 %br
 
@@ -16,10 +21,13 @@
     .panel.panel-default
       .panel-heading
         %h4.panel-title
-          %a(data-toggle="collapse" data-parent="#accordion" href="#asp_#{aspect.id}")
+          %a(data-toggle="collapse" data-parent="#accordion" href="#asp_#{aspect.id}" )
             =aspect.content
             %b="(#{aspect.aspect_posts.count})"
             %span.glyphicon.glyphicon-chevron-down
+
+            %br
+            %small=aspect.short_desc
 
       .panel-collapse.collapse{id:"asp_#{aspect.id}"}
         .panel-body

@@ -16,6 +16,10 @@
           %br
           %hr
 
+          %h5.text-success.text-center
+            %b=tp.title
+            %br
+            %br
           %h5.text-success
             %b A 1
           %p
@@ -73,8 +77,15 @@
             -else
               %span.text-info{:id => "positive_r"}=t('form.cond_res')
           -if @project.status == 7
-            = render partial: 'concept/posts/note_list', :locals => {:post_field => @post,:type_fd => 4}
-          .form-group.has-success= display_content(tp.positive_r)
+            - @post.concept_post_resources.each do |r|
+              %h5
+                =r.name
+                %br
+                %small=r.desc
+
+
+            -#= render partial: 'concept/posts/note_list', :locals => {:post_field => @post,:type_fd => 4}
+          -#.form-group.has-success= display_content(tp.positive_r)
 
           %hr
           %h5.text-success

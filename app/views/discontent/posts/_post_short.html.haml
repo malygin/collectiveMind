@@ -4,5 +4,6 @@
   -#.media-body(class="#{'active_discontent' if post_short.comments.count==0}")
   .media-body
     = render partial: 'discontent/posts/post_content', object: post_short
+    %small.text-muted= Russian::strftime(post_short.created_at,'%d %B %k:%M:%S')
     = render 'shared/post_social_bar2', :post => post_short
 

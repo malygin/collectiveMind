@@ -20,7 +20,7 @@
           %li.divider_vertical
 
           %li#stage_discontent{class: @project.stage_style(:discontent_posts) }
-            = link_to "/project/#{@project.id}/discontent/posts?view=table", class:"#{@project.stage_style_link(@breadcrumbs[0].name, :discontent_posts)}" do
+            = link_to "/project/#{@project.id}/discontent/posts", class:"#{@project.stage_style_link(@breadcrumbs[0].name, :discontent_posts)}" do
               =@project.status_title(:discontent_posts)
               %br
               - if @project.status > 4
@@ -31,24 +31,47 @@
           %li.divider_vertical
 
           %li#stage_concept{class:  @project.stage_style(:concept_posts)}
-            = link_to "/project/#{@project.id}/concept/posts" , class:"#{@project.stage_style_link(@breadcrumbs[0].name, :concept_posts)}" do
-              =@project.status_title(:concept_posts)
-              %br
-              %small.text-center=t('stages.concepts', count: @project.concept_ongoing_post.count)
+            - if  @project.stage_style(:concept_posts) == 'active'
+              = link_to "/project/#{@project.id}/concept/posts" , class:"#{@project.stage_style_link(@breadcrumbs[0].name, :concept_posts)}" do
+                =@project.status_title(:concept_posts)
+                %br
+                %small.text-center=t('stages.concepts', count: @project.concept_ongoing_post.count)
+            -else
+              %a
+                =@project.status_title(:concept_posts)
+                %br
+                %small не доступен
           %li.divider_vertical
 
           %li#stage_plan{class:  @project.stage_style(:plan_posts)}
-            = link_to "/project/#{@project.id}/plan/posts" , class:"#{@project.stage_style_link(@breadcrumbs[0].name, :plan_posts)}" do
-              =@project.status_title(:plan_posts)
-              %br
-              %small.text-center=t('stages.plans', count: @project.plan_post.count)
+            - if  @project.stage_style(:plan_posts) == 'active'
+              = link_to "/project/#{@project.id}/plan/posts" , class:"#{@project.stage_style_link(@breadcrumbs[0].name, :plan_posts)}" do
+                =@project.status_title(:plan_posts)
+                %br
+                %small.text-center=t('stages.plans', count: @project.plan_post.count)
+            -else
+              %a
+                =@project.status_title(:plan_posts)
+                %br
+                %small не доступен
+
           %li.divider_vertical
 
           %li#stage_plan{class:  @project.stage_style(:estimate_posts)}
-            = link_to "/project/#{@project.id}/estimate/posts" , class:"#{@project.stage_style_link(@breadcrumbs[0].name, :estimate_posts)}" do
-              =@project.status_title(:estimate_posts)
-              %br
-              %small.text-center=t('stages.estimates', count: @project.estimate_posts.count)
+            - if  @project.stage_style(:estimate_posts) == 'active'
+              = link_to "/project/#{@project.id}/estimate/posts" , class:"#{@project.stage_style_link(@breadcrumbs[0].name, :estimate_posts)}" do
+                =@project.status_title(:estimate_posts)
+                %br
+                %small.text-center=t('stages.estimates', count: @project.estimate_posts.count)
+            -else
+              %a
+                =@project.status_title(:estimate_posts)
+                %br
+                %small не доступен
+
+
+
+
 .row
   .col-md-12
     %ol.breadcrumb
