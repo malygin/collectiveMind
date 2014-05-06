@@ -226,7 +226,7 @@ class Discontent::PostsController < PostsController
      @posts  = current_model.where(:project_id => @project)
      .where(status: 2)
      .order_by_param(@order)
-     .paginate(:page => params[:page], :per_page => 20)
+     .paginate(:page => params[:page], :per_page => 40)
      #.where('aspect_id  IN (?) ' , current_user.aspects(@project.id).collect(&:id))
      respond_to do |format|
        format.js
