@@ -116,7 +116,7 @@ class Discontent::PostsController < PostsController
 
   def vote_list
     #@posts = current_model.where(:project_id => @project, :status => 2)
-    @posts = @project.get_united_posts_for_vote(current_user)
+    @posts = @project.get_united_posts_for_vote(@project,current_user)
     @post_all = current_model.where(:project_id => @project, :status => 2).count
     # i have votes now
     #@number_v = @project.get_united_posts_for_vote(current_user)

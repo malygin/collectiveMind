@@ -62,9 +62,9 @@ class Core::Project < ActiveRecord::Base
 
     end
   end
-  def get_united_posts_for_vote(user)
+  def get_united_posts_for_vote(project, user)
     voted = user.voted_discontent_posts.pluck(:id)
-    Discontent::Post.united_for_vote(self.id,voted)
+    Discontent::Post.united_for_vote(project.id,voted)
   end
 
 
