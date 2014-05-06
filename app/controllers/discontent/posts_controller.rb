@@ -64,7 +64,7 @@ class Discontent::PostsController < PostsController
   end
 
   def index
-    if @project.status == 6 and !@project.get_united_posts_for_vote(@project,current_user).empty?
+    if @project.status == 6 and !@project.get_united_posts_for_vote(current_user).empty?
       redirect_to action: "vote_list"
       return
     end
@@ -118,7 +118,12 @@ class Discontent::PostsController < PostsController
 
 
   def vote_list
+<<<<<<< HEAD
     @posts = @project.get_united_posts_for_vote(@project, current_user)
+=======
+    #@posts = current_model.where(:project_id => @project, :status => 2)
+    @posts = @project.get_united_posts_for_vote(current_user)
+>>>>>>> a16ecb6db49a285674ab2ab3c5814d896e9cc480
     @post_all = current_model.where(:project_id => @project, :status => 2).count
     if @posts.empty?
       redirect_to action: "index"
@@ -132,6 +137,11 @@ class Discontent::PostsController < PostsController
     #@path_for_voting = "/project/#{@project.id}/discontent/"
     #all number of votes
     #@votes = @project.stage2
+<<<<<<< HEAD
+=======
+    @votes = current_user.voted_discontent_posts.where(:project_id => @project).count
+    @status = 2
+>>>>>>> a16ecb6db49a285674ab2ab3c5814d896e9cc480
     #if boss?
     #  @all_people = @project.users.size
     #  @voted_people = ActiveRecord::Base.connection.execute("select count(*) as r from (select distinct v.user_id from discontent_voitings v  left join   discontent_aspects asp on (v.discontent_aspect_id = asp.id) where asp.project_id = #{@project.id}) as dm").first["r"]
@@ -319,7 +329,7 @@ class Discontent::PostsController < PostsController
       @project = Core::Project.find(params[:project])
       @post_vote = voting_model.find(params[:id])
       @post_vote.final_votings.create(:user => current_user, :against => params[:against]) unless @post_vote.voted_users.include? current_user
-      @votes = current_user.voted_discontent_posts.count
+      @votes = current_user.voted_discontent_posts.where(:project_id => @project).count
       @post_all = current_model.where(:project_id => @project, :status => 2).count
       #if @project.get_united_posts_for_vote(current_user).empty?
       #  redirect_to action: "index"
