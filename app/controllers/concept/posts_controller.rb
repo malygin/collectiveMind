@@ -55,7 +55,7 @@ class Concept::PostsController < PostsController
         return
       end
     end
-    @posts = current_model.where(:project_id => @project, :status => @status).paginate(:page => params[:page])
+    #@posts = current_model.where(:project_id => @project, :status => @status).paginate(:page => params[:page])
 
     #if @project.status == 8
     #  @number_v = @project.stage3 - current_user.concept_post_votings.size

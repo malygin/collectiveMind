@@ -74,8 +74,8 @@ class Discontent::PostsController < PostsController
     @page = params[:page]
     @folder = :discontent
     @status = 0
-    @status = 2 if @project.status == 6 or @project.status == 9
-    #@status = 4 if @project.status == 6 or @project.status >9
+    @status = 2 if @project.status == 6
+    @status = 1 if @project.status > 6
     #load_filter_for_aspects   if (request.xhr? and @order.nil? and @page.nil?)
 
     @posts  = current_model.where(:project_id => @project, :status => 0)

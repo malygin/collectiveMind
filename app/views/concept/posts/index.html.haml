@@ -22,10 +22,7 @@
                   %th.text-success(style='min-width: 300px;') Варианты нововведений:
 
               %tbody
-                %tr
-                  %td(colspan=2)
-                    %span.label.label-info=aspect.content
-                  %td
+
                 -aspect.aspect_posts.by_status(4).each do |post|
 
                   %tr
