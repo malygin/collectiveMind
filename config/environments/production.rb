@@ -30,7 +30,7 @@ CollectiveMind::Application.configure do
   #}
 
 
-config.static_cache_control = 'public, max-age=2592000'
+  config.static_cache_control = 'public, max-age=2592000'
 
   # Compress JavaScripts and CSS
   config.assets.compress = true

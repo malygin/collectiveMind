@@ -35,7 +35,7 @@ class Discontent::Aspect < ActiveRecord::Base
   end
 
   def count_concept
-    self.aspect_posts.by_status(4).inject(0){|sum, ap| ap.concept_conditions.count +sum }
+    self.aspect_posts.by_status(4).inject(0){|sum, ap| ap.concept_conditions.size + sum }
 
   end
 

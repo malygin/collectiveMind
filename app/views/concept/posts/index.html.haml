@@ -8,11 +8,16 @@
         %h4.panel-title
           %a(data-toggle="collapse" data-parent="#accordion" href="#asp_#{aspect.id}" )
             =aspect.content
-            %b="(#{aspect.count_concept})"
             %span.glyphicon.glyphicon-chevron-down
 
             %br
-            %small=aspect.short_desc
+            - if aspect.count_concept > 0
+              %small
+                ="Нововведений: "
+                %b.text-success="(#{aspect.count_concept})"
+
+            %br
+            -#%small=aspect.short_desc
       .panel-collapse.collapse{id:"asp_#{aspect.id}"}
         .panel-body
           %table.table.table-striped
