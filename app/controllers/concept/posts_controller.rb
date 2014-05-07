@@ -26,10 +26,11 @@ class Concept::PostsController < PostsController
      pr=Set.new
      pr.merge(Concept::Resource.where(:project_id => params[:project]).map {|d| {:value => d.name}})
      #if params[:term].length > 1
-     #  pr.merge(Discontent::Post.select("DISTINCT whend as value").where("LOWER(whend) like LOWER(?)", "%#{params[:term]}%")
-     #           .where(:project_id => params[:project]).map {|d| {:value => d.value } })
+       pr.merge(Concept::PostResource.select("DISTINCT name as value").where("LOWER(name) like LOWER(?)", "%#{params[:term]}%")
+                .map {|d| {:value => d.value } })
      #end
-     render json: pr
+     render json: pr.sort_by{|ha| ha[:value].downcase}
+
    end
 
 
