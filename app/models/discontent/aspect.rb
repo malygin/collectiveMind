@@ -34,6 +34,11 @@ class Discontent::Aspect < ActiveRecord::Base
     self.voted_users.where(:id => user)
   end
 
+  def count_concept
+    self.aspect_posts.by_status(4).inject(0){|sum, ap| ap.concept_conditions.count +sum }
+
+  end
+
   def self.scope_vote_top(project,revers)
     includes(:final_votings).
     group('"discontent_aspects"."id"').

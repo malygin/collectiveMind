@@ -1,62 +1,50 @@
 - if not current_user.answered_for_help_stage?(3) and not @mini_help.nil?
   =render partial: 'shared/small_help', object: @mini_help
 
--#- if @project.status == 8
--#  %h3 Голосование за самые интересные нововведения(решения)
--#  - unless @number_v<1  and not boss?
--#    .alert.alert-info#fixBlock
--#      %h3.text-danger
--#        =t('voting.have_votes')
--#        %b#count_vote=@number_v
+.panel-group#accordion
+  -@aspects.each do |aspect|
+    .panel.panel-default
+      .panel-heading
+        %h4.panel-title
+          %a(data-toggle="collapse" data-parent="#accordion" href="#asp_#{aspect.id}" )
+            =aspect.content
+            %b="(#{aspect.count_concept})"
+            %span.glyphicon.glyphicon-chevron-down
 
-%table.table.table-striped
-  %thead
-    %tr
-      %th.text-success(style='width: 50%;') Несовершенства:
-      %th.text-success(style='min-width: 300px;') Варианты нововведений:
-
-  %tbody
-    -@aspects.each do |aspect|
-      %tr
-        %td(colspan=2)
-          %span.label.label-info=aspect.content
-        %td
-      -aspect.aspect_posts.by_status(4).each do |post|
-
-        %tr
-          %td
-            =render partial:'discontent/posts/post_short2', object: post
-
-          %td
-            -if  @project.status == 7
-              %a.btn.btn-primary.btn-sm.pull-right(href="/project/#{@project.id}/concept/posts/new?dis_id=#{post.id}") Добавить нововведение
             %br
-            %br
+            %small=aspect.short_desc
+        .panel-collapse.collapse{id:"asp_#{aspect.id}"}
+          .panel-body
+            %table.table.table-striped
+              %thead
+                %tr
+                  %th.text-success(style='width: 50%;') Несовершенства:
+                  %th.text-success(style='min-width: 300px;') Варианты нововведений:
 
-            - post.dispost_concepts.each  do |pa|
-              - if pa.status == 0
-                .panel.panel-success(class="#{class_for_concept_type(pa)}")
-                  .panel-body.nov-list
-                    %small.text-muted= Russian::strftime(pa.created_at,"%d %B %k:%M:%S ")
-                    %br
-                    =pa.post_aspects.first.title
-                    =link_to 'подробнее', concept_post_path(@project, pa)
-                    = render 'shared/post_social_bar2', :post => pa
+              %tbody
+                %tr
+                  %td(colspan=2)
+                    %span.label.label-info=aspect.content
+                  %td
+                -aspect.aspect_posts.by_status(4).each do |post|
 
-                    -#- if can_vote_cond?(pa.voted(current_user).size,  @number_v, @votes, post)
-                    -#  %br
-                    -#  =link_to   @path_for_voting+pa.id.to_s , :remote => true, :method => :put, class: "btn btn-default btn-sm vote-button vote_dis_#{post.id}", id: "vote_#{pa.id}" do
-                    -#    %span.glyphicon.text-success.glyphicon-thumbs-up
-                    -#    -if boss?
-                    -#      %span.glyphicon.text-success=pa.voted_users.size
-                    -#    Проголосовать
-                    -#-else
-                    -#  %br
-                    -#  %a.btn.btn-success.btn-sm.disabled.vote-button
-                    -#    %span.glyphicon.text-success.glyphicon-thumbs-up
-                    -#    - if boss?
-                    -#      %span.glyphicon.text-success=pa.voted_users.size
-                    -#    Проголосовать
+                  %tr
+                    %td
+                      =render partial:'discontent/posts/post_short2', object: post
 
+                    %td
+                      -if  @project.status == 7
+                        %a.btn.btn-primary.btn-sm.pull-right(href="/project/#{@project.id}/concept/posts/new?dis_id=#{post.id}") Добавить нововведение
+                      %br
+                      %br
+
+                      - post.dispost_concepts.each  do |pa|
+                        - if pa.status == 0
+                          .panel.panel-success(class="#{class_for_concept_type(pa)}")
+                            .panel-body.nov-list
+                              %small.text-muted= Russian::strftime(pa.created_at,"%d %B %k:%M:%S ")
+                              %br
+                              =link_to pa.post_aspects.first.title, concept_post_path(@project, pa)
+                              = render 'shared/post_social_bar2', :post => pa
 
 
