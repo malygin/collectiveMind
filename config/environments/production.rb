@@ -17,6 +17,19 @@ CollectiveMind::Application.configure do
 #  :allow_reload => false
 #}
 config.serve_static_assets = true
+
+
+  config.cache_store = :dalli_store
+
+  client = Dalli::Client.new(ENV["MEMCACHIER_SERVERS"], :value_max_bytes => 10485760,:expires_in => 86400) # 1 day
+
+  # Configure rack-cache for using memcachier
+  config.action_dispatch.rack_cache = {
+      :metastore    => client,
+      :entitystore  => client
+  }
+
+
 config.static_cache_control = 'public, max-age=2592000'
 
   # Compress JavaScripts and CSS

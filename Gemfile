@@ -18,6 +18,8 @@ group :production do
   gem 'activerecord-postgresql-adapter'
   gem 'rails_12factor'
   gem 'newrelic_rpm', '>=3.7.3'
+  gem 'heroku-deflater'
+
 end
 
 group :test do
@@ -68,6 +70,15 @@ gem 'faker'
 gem 'russian'
 
 gem 'unicorn'
+gem 'memcachier'
+gem 'dalli'
+# Fast IO for memcache
+gem 'kgio'
+# Serve static assets through Rack + Memcache
+# https://devcenter.heroku.com/articles/rack-cache-memcached-rails31
+gem 'rack-cache'
+
+
 gem 'settingslogic'
 #gem 'wymeditor'
 gem "bootstrap-wysihtml5-rails"
