@@ -118,30 +118,18 @@ class Discontent::PostsController < PostsController
 
 
   def vote_list
-<<<<<<< HEAD
-    @posts = @project.get_united_posts_for_vote(@project, current_user)
-=======
+
     #@posts = current_model.where(:project_id => @project, :status => 2)
     @posts = @project.get_united_posts_for_vote(current_user)
->>>>>>> a16ecb6db49a285674ab2ab3c5814d896e9cc480
+
     @post_all = current_model.where(:project_id => @project, :status => 2).count
     if @posts.empty?
       redirect_to action: "index"
       return
     end
-    @votes = current_user.voted_discontent_posts.count
-    @status = 2
-    #@posts = current_model.where(:project_id => @project, :status => 2)
-    # i have votes now
-    #@number_v = @project.get_united_posts_for_vote(current_user)
-    #@path_for_voting = "/project/#{@project.id}/discontent/"
-    #all number of votes
-    #@votes = @project.stage2
-<<<<<<< HEAD
-=======
+
     @votes = current_user.voted_discontent_posts.where(:project_id => @project).count
     @status = 2
->>>>>>> a16ecb6db49a285674ab2ab3c5814d896e9cc480
     #if boss?
     #  @all_people = @project.users.size
     #  @voted_people = ActiveRecord::Base.connection.execute("select count(*) as r from (select distinct v.user_id from discontent_voitings v  left join   discontent_aspects asp on (v.discontent_aspect_id = asp.id) where asp.project_id = #{@project.id}) as dm").first["r"]

@@ -5,7 +5,10 @@
             -if @project.status == 4
                 =link_to 'Начать обсуждение группировок',  next_stage_core_project_path(@project), id: 'change_stage'
             -if @project.status == 5
-                =link_to 'Начать голосование',  pr_stage_core_project_path(@project), id: 'change_stage'
+                =link_to 'Начать голосование',  next_stage_core_project_path(@project), id: 'change_stage'
+
+            -if @project.status == 6
+                =link_to 'Начать сбор нововведений',  next_stage_core_project_path(@project), id: 'change_stage'
 
 -#- unless @aspects.empty?
 -#    .panel.panel-default
