@@ -148,7 +148,7 @@
                       .panel-body
                         %span.glyphicon.glyphicon-remove.text-danger.pull-right{onclick: "$(this).parent().parent().remove();", style: "cursor:pointer;text-decoration:none;font-size:15px;"}
 
-                        =f.autocomplete_field :resource, autocomplete_concept_post_resource_concept_posts_path, :"min-length" => 0, value: r.name,  class: 'form-control autocomplete',placeholder: 'Ресурс', name: 'resor[]'
+                        =f.autocomplete_field :resource, autocomplete_concept_post_resource_concept_posts_path, :"min-length" => 0, value: r.name,  class: 'form-control autocomplete',placeholder: 'Введите свой ресурс или выберите из списка', name: 'resor[]'
                         %br
                         = text_area_tag 'res[]', r.desc, class: 'form-control', placeholder: 'Пояснение к ресурсу'
                 -else
@@ -158,14 +158,14 @@
                     .panel-body
                       %span.glyphicon.glyphicon-remove.text-danger.pull-right{onclick: "$(this).parent().parent().remove();", style: "cursor:pointer;text-decoration:none;font-size:15px;"}
 
-                      =f.autocomplete_field :resource, autocomplete_concept_post_resource_concept_posts_path, :"min-length" => 0,  class: 'form-control autocomplete',placeholder: 'Ресурс', name: 'resor[]'
+                      =f.autocomplete_field :resource, autocomplete_concept_post_resource_concept_posts_path, :"min-length" => 0,  class: 'form-control autocomplete',placeholder: 'Введите свой ресурс или выберите из списка', name: 'resor[]'
                       %br
                       = text_area_tag 'res[]', '', class: 'form-control', placeholder: 'Пояснение к ресурсу'
                   .panel.panel-default
                     .panel-body
                       %span.glyphicon.glyphicon-remove.text-danger.pull-right{onclick: "$(this).parent().parent().remove();", style: "cursor:pointer;text-decoration:none;font-size:15px;"}
 
-                      =f.autocomplete_field :resource, autocomplete_concept_post_resource_concept_posts_path, :"min-length" => 0,  class: 'form-control autocomplete',placeholder: 'Ресурс', name: 'resor[]'
+                      =f.autocomplete_field :resource, autocomplete_concept_post_resource_concept_posts_path, :"min-length" => 0,  class: 'form-control autocomplete',placeholder: 'Введите свой ресурс или выберите из списка', name: 'resor[]'
                       %br
                       = text_area_tag 'res[]', '', class: 'form-control', placeholder: 'Пояснение к ресурсу'
               %a.btn.btn-success{onclick:"return add_new_resource_to_concept(); "} Добавить ресурс

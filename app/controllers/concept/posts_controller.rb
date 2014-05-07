@@ -115,7 +115,9 @@ class Concept::PostsController < PostsController
             Concept::PostDiscontent.create(post_id: @concept_post.id, discontent_post_id: cd.to_i)
           end
         end
-        current_user.journals.build(:type_event=>'concept_post_save', :body=>@concept_post.id,  :project => @project).save!
+        current_user.journals.build(:type_event=>'concept_post_save', :body=>"#{@concept_post.post_aspects.first.title[0..24]}:#{@concept_post.id}",  :project => @project).save!
+        #current_user.journals.build(:type_event=>'my_'+name_of_comment_for_param, :user_informed => post.user, :project => @project, :body=>"#{@comment.content[0..24]}:#{post.id}#comment_#{@comment.id}", :viewed=> false).save!
+
         format.html { redirect_to  action: "index"  }
         format.json { render json: @concept_post, status: :created, location: @concept_post }
       else
@@ -337,6 +339,8 @@ class Concept::PostsController < PostsController
      if @post.post_notes(@type.to_i).size == 0
        @post.update_attributes(column_for_concept_type(@type.to_i) => 'f')
      end
+     current_user.journals.build(:type_event=>'my_concept_note', :user_informed => @post.user, :project => @project, :body=>"#{@post_note.content[0..24]}:#{@post.id}", :viewed=> false).save!
+
      respond_to do |format|
        if @post_note.save
          format.js
