@@ -1,6 +1,9 @@
 - if not current_user.answered_for_help_stage?(3) and not @mini_help.nil?
   =render partial: 'shared/small_help', object: @mini_help
-
+%h3
+  3 этап: Формулирование проблемы.
+  %br
+  %small Сбор идей для решения несовершенств в рамках процедуры "Выведение аптечной справки WWW.ROS-MED.INFO в Топ-3 аптечных справок рунета"
 .panel-group#accordion
   -@aspects.each do |aspect|
     .panel.panel-default
@@ -8,16 +11,12 @@
         %h4.panel-title
           %a(data-toggle="collapse" data-parent="#accordion" href="#asp_#{aspect.id}" )
             =aspect.content
+            - if aspect.count_concept > 0
+              %b.text-success=": #{aspect.count_concept}"
             %span.glyphicon.glyphicon-chevron-down
 
             %br
-            - if aspect.count_concept > 0
-              %small
-                ="Нововведений: "
-                %b.text-success="(#{aspect.count_concept})"
-
-            %br
-            -#%small=aspect.short_desc
+            %small=aspect.short_desc
       .panel-collapse.collapse{id:"asp_#{aspect.id}"}
         .panel-body
           %table.table.table-striped
