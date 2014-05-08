@@ -1,5 +1,5 @@
-- if not current_user.answered_for_help_stage?(3) and not @mini_help.nil?
-  =render partial: 'shared/small_help', object: @mini_help
+-#- if not current_user.answered_for_help_stage?(3) and not @mini_help.nil?
+-#  =render partial: 'shared/small_help', object: @mini_help
 %h3
   3 этап: Формулирование проблемы.
   %br
@@ -11,12 +11,21 @@
         %h4.panel-title
           %a(data-toggle="collapse" data-parent="#accordion" href="#asp_#{aspect.id}" )
             =aspect.content
-            - if aspect.count_concept > 0
-              %b.text-success=": #{aspect.count_concept}"
+            =aspect.count_concept
             %span.glyphicon.glyphicon-chevron-down
 
             %br
             %small=aspect.short_desc
+            %br
+            .progress
+              .progress-bar.progress-bar-success(style="width: #{aspect.count_concept}%")
+                %span.sr-only">35% Complete (success)
+
+              -#.progress-bar.progress-bar-warning(style="width: 20%")
+              -#  %span.sr-only">35% Complete (success)
+
+              .progress-bar.progress-bar-danger(style="width: #{100-aspect.count_concept}%")
+                %span.sr-only">35% Complete (success)
       .panel-collapse.collapse{id:"asp_#{aspect.id}"}
         .panel-body
           %table.table.table-striped

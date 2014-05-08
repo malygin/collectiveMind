@@ -11,6 +11,7 @@ group :development, :test do
   gem 'quiet_assets'
   gem 'grizzled-rails-logger'
   gem 'rspec-rails'
+  gem 'thin'
 end
 
 group :production do
@@ -19,6 +20,7 @@ group :production do
   gem 'rails_12factor'
   gem 'newrelic_rpm', '>=3.7.3'
   gem 'heroku-deflater'
+  gem 'unicorn'
 
 end
 
@@ -69,7 +71,6 @@ gem 'will_paginate', '~> 3.0.0'
 gem 'faker'
 gem 'russian'
 
-gem 'unicorn'
 gem 'memcachier'
 gem 'dalli'
 # Fast IO for memcache
