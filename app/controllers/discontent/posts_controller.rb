@@ -74,8 +74,8 @@ class Discontent::PostsController < PostsController
     @page = params[:page]
     @folder = :discontent
     @status = 0
-    @status = 2 if @project.status == 6 or @project.status == 9
-    @status = 4 if @project.status == 6 or @project.status >9
+    @status = 2 if @project.status == 6
+    @status = 1 if @project.status > 6
     #load_filter_for_aspects   if (request.xhr? and @order.nil? and @page.nil?)
 
     @posts  = current_model.where(:project_id => @project, :status => 0)
@@ -118,19 +118,16 @@ class Discontent::PostsController < PostsController
 
 
   def vote_list
+
     #@posts = current_model.where(:project_id => @project, :status => 2)
     @posts = @project.get_united_posts_for_vote(current_user)
+
     @post_all = current_model.where(:project_id => @project, :status => 2).count
     if @posts.empty?
       redirect_to action: "index"
       return
     end
-    #@posts = current_model.where(:project_id => @project, :status => 2)
-    # i have votes now
-    #@number_v = @project.get_united_posts_for_vote(current_user)
-    #@path_for_voting = "/project/#{@project.id}/discontent/"
-    #all number of votes
-    #@votes = @project.stage2
+
     @votes = current_user.voted_discontent_posts.where(:project_id => @project).count
     @status = 2
     #if boss?

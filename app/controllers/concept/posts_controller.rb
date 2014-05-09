@@ -26,10 +26,11 @@ class Concept::PostsController < PostsController
      pr=Set.new
      pr.merge(Concept::Resource.where(:project_id => params[:project]).map {|d| {:value => d.name}})
      #if params[:term].length > 1
-     #  pr.merge(Discontent::Post.select("DISTINCT whend as value").where("LOWER(whend) like LOWER(?)", "%#{params[:term]}%")
-     #           .where(:project_id => params[:project]).map {|d| {:value => d.value } })
+       pr.merge(Concept::PostResource.select("DISTINCT name as value").where("LOWER(name) like LOWER(?)", "%#{params[:term]}%")
+                .map {|d| {:value => d.value } })
      #end
-     render json: pr
+     render json: pr.sort_by{|ha| ha[:value].downcase}
+
    end
 
 
@@ -55,7 +56,7 @@ class Concept::PostsController < PostsController
         return
       end
     end
-    @posts = current_model.where(:project_id => @project, :status => @status).paginate(:page => params[:page])
+    #@posts = current_model.where(:project_id => @project, :status => @status).paginate(:page => params[:page])
 
     #if @project.status == 8
     #  @number_v = @project.stage3 - current_user.concept_post_votings.size
@@ -115,7 +116,9 @@ class Concept::PostsController < PostsController
             Concept::PostDiscontent.create(post_id: @concept_post.id, discontent_post_id: cd.to_i)
           end
         end
-        current_user.journals.build(:type_event=>'concept_post_save', :body=>@concept_post.id,  :project => @project).save!
+        current_user.journals.build(:type_event=>'concept_post_save', :body=>"#{@concept_post.post_aspects.first.title[0..24]}:#{@concept_post.id}",  :project => @project).save!
+        #current_user.journals.build(:type_event=>'my_'+name_of_comment_for_param, :user_informed => post.user, :project => @project, :body=>"#{@comment.content[0..24]}:#{post.id}#comment_#{@comment.id}", :viewed=> false).save!
+
         format.html { redirect_to  action: "index"  }
         format.json { render json: @concept_post, status: :created, location: @concept_post }
       else
@@ -337,6 +340,8 @@ class Concept::PostsController < PostsController
      if @post.post_notes(@type.to_i).size == 0
        @post.update_attributes(column_for_concept_type(@type.to_i) => 'f')
      end
+     current_user.journals.build(:type_event=>'my_concept_note', :user_informed => @post.user, :project => @project, :body=>"#{@post_note.content[0..24]}:#{@post.id}", :viewed=> false).save!
+
      respond_to do |format|
        if @post_note.save
          format.js

@@ -29,12 +29,13 @@
                 =link_to({:controller => 'concept/posts', :action => :new_note, :id => @post.id, :type_field => 1},:remote => true,:method => :put, :id => "btn_note_1", :class => "note_text") do
                   %btn.btn-danger замечание
             -else
-              %span.text-info{:id => "name"}=t('form.novation_what')
+              %span(class= "#{class_for_concept_type_field(@post,1)}" id="name")=t('form.novation_what')
+
+
+          .form-group
+            =simple_format(tp.name)
           -if @project.status == 7
             = render partial: 'concept/posts/note_list', :locals => {:post_field => @post,:type_fd => 1}
-
-          .form-group.has-danger
-            =simple_format(tp.name)
 
           %h5.text-success
             %b A 2
@@ -45,11 +46,12 @@
                 =link_to({:controller => 'concept/posts', :action => :new_note, :id => @post.id, :type_field => 2},:remote => true,:method => :put, :id => "btn_note_2", :class => "note_text") do
                   %btn.btn-danger замечание
             -else
-              %span.text-info{:id => "content"}=t('form.novation_how')
-          -if @project.status == 7
-            = render partial: 'concept/posts/note_list', :locals => {:post_field => @post,:type_fd => 2}
+              %span(class= "#{class_for_concept_type_field(@post,2)}" id="content")=t('form.novation_how')
+
           .form-group.has-danger
             =simple_format(tp.content)
+          -if @project.status == 7
+            = render partial: 'concept/posts/note_list', :locals => {:post_field => @post,:type_fd => 2}
 
           %hr
           %h5.text-success
@@ -61,11 +63,11 @@
                 =link_to({:controller => 'concept/posts', :action => :new_note, :id => @post.id, :type_field => 3},:remote => true,:method => :put, :id => "btn_note_3", :class => "note_text") do
                   %btn.btn-danger замечание
             -else
-              %span.text-info{:id => "positive"}=t('form.cond')
+              %span(class= "#{class_for_concept_type_field(@post,3)}" id="positive")=t('form.cond')
+
+          .form-group.has-success= display_content(tp.positive)
           -if @project.status == 7
             = render partial: 'concept/posts/note_list', :locals => {:post_field => @post,:type_fd => 3}
-          .form-group.has-success= display_content(tp.positive)
-
           %h5.text-success
             %b B 2
           %p
@@ -75,7 +77,7 @@
                 =link_to({:controller => 'concept/posts', :action => :new_note, :id => @post.id, :type_field => 4},:remote => true,:method => :put, :id => "btn_note_4", :class => "note_text") do
                   %btn.btn-danger замечание
             -else
-              %span.text-info{:id => "positive_r"}=t('form.cond_res')
+              %span(class= "#{class_for_concept_type_field(@post,4)}" id="positive_r")=t('form.cond_res')
           -if @project.status == 7
             - @post.concept_post_resources.each do |r|
               %h5
@@ -83,8 +85,9 @@
                 %br
                 %small=r.desc
 
+          -if @project.status == 7
 
-            -#= render partial: 'concept/posts/note_list', :locals => {:post_field => @post,:type_fd => 4}
+            = render partial: 'concept/posts/note_list', :locals => {:post_field => @post,:type_fd => 4}
           -#.form-group.has-success= display_content(tp.positive_r)
 
           %hr
@@ -97,10 +100,11 @@
                 =link_to({:controller => 'concept/posts', :action => :new_note, :id => @post.id, :type_field => 5},:remote => true,:method => :put, :id => "btn_note_5", :class => "note_text") do
                   %btn.btn-danger замечание
             -else
-              %span.text-info{:id => "negative"}=t('form.negative')
+              %span(class= "#{class_for_concept_type_field(@post,5)}" id= "negative")=t('form.negative')
+
+          .form-group.has-success= display_content(tp.negative)
           -if @project.status == 7
             = render partial: 'concept/posts/note_list', :locals => {:post_field => @post,:type_fd => 5}
-          .form-group.has-success= display_content(tp.negative)
 
           %h5.text-success
             %b C 2
@@ -111,10 +115,11 @@
                 =link_to({:controller => 'concept/posts', :action => :new_note, :id => @post.id, :type_field => 6},:remote => true,:method => :put, :id => "btn_note_6", :class => "note_text") do
                   %btn.btn-danger замечание
             -else
-              %span.text-info{:id => "negative_r"}=t('form.negative_res')
+              %span(class= "#{class_for_concept_type_field(@post,6)}" id= "negative_r")=t('form.negative_res')
+
+          .form-group.has-success= display_content(tp.negative_r)
           -if @project.status == 7
             = render partial: 'concept/posts/note_list', :locals => {:post_field => @post,:type_fd => 6}
-          .form-group.has-success= display_content(tp.negative_r)
 
           %hr
           %h5.text-success
@@ -126,10 +131,11 @@
                 =link_to({:controller => 'concept/posts', :action => :new_note, :id => @post.id, :type_field => 7},:remote => true,:method => :put, :id => "btn_note_7", :class => "note_text") do
                   %btn.btn-danger замечание
             -else
-              %span.text-info{:id => "problems"}=t('form.problems')
+              %span(class= "#{class_for_concept_type_field(@post,7)}" id="problems")=t('form.problems')
+
+          .form-group.has-success= display_content(tp.problems)
           -if @project.status == 7
             = render partial: 'concept/posts/note_list', :locals => {:post_field => @post,:type_fd => 7}
-          .form-group.has-success= display_content(tp.problems)
 
           %h5.text-success
             %b D 2
@@ -140,10 +146,11 @@
                 =link_to({:controller => 'concept/posts', :action => :new_note, :id => @post.id, :type_field => 8},:remote => true,:method => :put, :id => "btn_note_8", :class => "note_text") do
                   %btn.btn-danger замечание
             -else
-              %span.text-info{:id => "reality"}=t('form.reality')
+              %span(class= "#{class_for_concept_type_field(@post,8)}" id= "reality")=t('form.reality')
+
+          .form-group.has-success= display_content(tp.reality)
           -if @project.status == 7
             = render partial: 'concept/posts/note_list', :locals => {:post_field => @post,:type_fd => 8}
-          .form-group.has-success= display_content(tp.reality)
 
     %br
     = render 'shared/post_social_bar2', :post => @post

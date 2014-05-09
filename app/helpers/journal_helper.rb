@@ -19,7 +19,13 @@ module JournalHelper
       when 'add_score_anal_concept_post'
 				'получил 20 балов за аналитику '+ link_to('за комментарий к образу', "/project/#{project}/concept/status/0/posts/#{j.body}")
       when 'concept_post_save'
+        s = j.body.split(':')
+        if s.length == 1
 				'добавил  '+ link_to('нововведение', concept_post_path(project,j.body))
+        else
+          'добавил нововведение  '+ link_to("#{s[0]}...", concept_post_path(project,s[1]))
+        end
+
       when 'concept_comment_save'
         s = j.body.split(':')
         if s.length == 1
@@ -169,6 +175,9 @@ module JournalHelper
       when 'my_discontent_note'
         s = j.body.split(':')
         "добавил(а) замечание  '#{s[0]}...' к "+  link_to('вашему несовершенству', "/project/#{project}/discontent/posts/#{s[1]}" )
+      when 'my_concept_note'
+        s = j.body.split(':')
+        "добавил(а) замечание  '#{s[0]}...' к "+  link_to('вашему нововведению', "/project/#{project}/concept/posts/#{s[1]}" )
 			else
 				'что то другое'
 		end 

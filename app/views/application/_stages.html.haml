@@ -24,7 +24,7 @@
               =@project.status_title(:discontent_posts)
               %br
               - if @project.status > 4
-                %small.text-center=t('stages.discontents', count: @project.discontents.by_status(2).count)
+                %small.text-center=t('stages.discontents', count: @project.discontents.by_status(1).count)
               -else
                 %small.text-center=t('stages.discontents', count: @project.discontent_ongoing_post.count)
 
@@ -40,7 +40,7 @@
               %a
                 =@project.status_title(:concept_posts)
                 %br
-                %small не доступен
+                %small недоступен
           %li.divider_vertical
 
           %li#stage_plan{class:  @project.stage_style(:plan_posts)}
@@ -53,7 +53,7 @@
               %a
                 =@project.status_title(:plan_posts)
                 %br
-                %small не доступен
+                %small недоступен
 
           %li.divider_vertical
 
@@ -67,7 +67,7 @@
               %a
                 =@project.status_title(:estimate_posts)
                 %br
-                %small не доступен
+                %small недоступен
 
 
 

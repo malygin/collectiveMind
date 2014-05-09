@@ -1,5 +1,6 @@
 class Discontent::Aspect < ActiveRecord::Base
   include BasePost
+
   attr_accessible :position, :short_desc, :user_add, :status
    has_many :posts
    has_many :positive_posts, :class_name => 'Discontent::Post',
@@ -34,10 +35,34 @@ class Discontent::Aspect < ActiveRecord::Base
     self.voted_users.where(:id => user)
   end
 
+  def count_concept
+   unless  @count_concept
+      pr = []
+      overpr = {}
+      self.aspect_posts.by_status(4).each do |ap|
+         if ap.dispost_concepts.size > 1
+           pr << 100
+           overpr[ap.id] = ( ap.dispost_concepts.size - 2) * 50
+         else
+           pr << (ap.dispost_concepts.size*50)
+         end
+      end
+
+      if pr.size == 0
+            @count_concept =0
+      else
+        @count_concept =  pr.inject(0){ |sum,v| sum + v.abs } / pr.size
+      end
+
+    end
+    return @count_concept
+  end
+
   def self.scope_vote_top(project,revers)
     includes(:final_votings).
     group('"discontent_aspects"."id"').
     where('"discontent_aspects"."project_id" = ? and "discontent_aspects"."status" = 0', project)
     .vote_top(revers)
   end
+
 end

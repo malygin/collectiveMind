@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 ruby '1.9.3'
 
-gem 'rails', '3.2.15'
+gem 'rails', '3.2.18'
 
 group :development, :test do
   gem 'sqlite3'
@@ -11,6 +11,7 @@ group :development, :test do
   gem 'quiet_assets'
   gem 'grizzled-rails-logger'
   gem 'rspec-rails'
+  gem 'thin'
 end
 
 group :production do
@@ -18,6 +19,9 @@ group :production do
   gem 'activerecord-postgresql-adapter'
   gem 'rails_12factor'
   gem 'newrelic_rpm', '>=3.7.3'
+  gem 'heroku-deflater'
+  gem 'unicorn'
+
 end
 
 group :test do
@@ -67,7 +71,15 @@ gem 'will_paginate', '~> 3.0.0'
 gem 'faker'
 gem 'russian'
 
-gem 'thin'
+gem 'memcachier'
+gem 'dalli'
+# Fast IO for memcache
+gem 'kgio'
+# Serve static assets through Rack + Memcache
+# https://devcenter.heroku.com/articles/rack-cache-memcached-rails31
+gem 'rack-cache'
+
+
 gem 'settingslogic'
 #gem 'wymeditor'
 gem "bootstrap-wysihtml5-rails"
