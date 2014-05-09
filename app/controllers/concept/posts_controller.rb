@@ -134,6 +134,7 @@ class Concept::PostsController < PostsController
     @project = Core::Project.find(params[:project])
 
     @concept_post = Concept::Post.find(params[:id])
+    @concept_post.update_status_fields(params[:pa],params[:resor],params[:res])
     #@concept_post.update_attributes(params[:concept_post])
     @concept_post.post_aspects.destroy_all
 

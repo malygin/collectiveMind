@@ -20,9 +20,9 @@ class Concept::PostAspect < ActiveRecord::Base
     return true
   end
 
-   def discontent_id
-     self.discontent.id
-   end
+  def discontent_id
+   self.discontent.id
+  end
 
 
 end

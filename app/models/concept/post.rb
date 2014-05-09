@@ -37,4 +37,38 @@
   def resource
 
   end
+
+  def update_status_fields(pa,resor,res)
+    aspect = self.post_aspects.first.discontent_aspect_id
+    unless aspect.nil?
+      if self.post_aspects.first.read_attribute('name') != pa["#{aspect}"]['name']
+        self.stat_name = nil
+      end
+      if self.post_aspects.first.read_attribute('content') != pa["#{aspect}"]['content']
+        self.stat_content = nil
+      end
+      if self.post_aspects.first.read_attribute('negative') != pa["#{aspect}"]['negative']
+        self.stat_negative = nil
+      end
+      if self.post_aspects.first.read_attribute('positive') != pa["#{aspect}"]['positive']
+        self.stat_positive = nil
+      end
+      if self.post_aspects.first.read_attribute('reality') != pa["#{aspect}"]['reality']
+        self.stat_reality = nil
+      end
+      if self.post_aspects.first.read_attribute('problems') != pa["#{aspect}"]['problems']
+        self.stat_problems = nil
+      end
+      if self.post_aspects.first.read_attribute('negative_r') != pa["#{aspect}"]['negative_r']
+        self.stat_negative_r = nil
+      end
+    end
+
+    resources = self.concept_post_resources.pluck(:name) unless self.concept_post_resources.nil?
+    desc = self.concept_post_resources.pluck(:desc) unless self.concept_post_resources.nil?
+
+    unless resources == resor and desc == res
+      self.stat_positive_r = nil
+    end
+  end
 end
