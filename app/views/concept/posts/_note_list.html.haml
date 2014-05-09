@@ -1,4 +1,5 @@
-%span.btn-danger Замечания:
+-if post_field.note_size?(type_fd)
+  %span.btn-danger Замечания:
 %ul{:id => "note_form_#{type_fd}", :class => "#{'border_note2' if post_field.note_size?(type_fd) }", :style => "margin-bottom:0 !important;"}
   -post_field.post_notes(type_fd).each do |dpn|
     %div{:id => "post_note_#{dpn.id}"}

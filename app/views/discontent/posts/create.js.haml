@@ -5,6 +5,7 @@
   $('#send_post').html('Все равно сохранить');
   -#$('#send_post').toggleClass('disabled')
   $('#new_discontent').append('<input id="new_discontent_hidden" type="hidden" name="resave" value="true" />');
+  document.location.href='#discontent_warning';
 -else
   $("#discontent_success").fadeIn()
   $("#discontent_warning").fadeOut()
@@ -26,7 +27,7 @@
   }
   $('#add_post_aspects').empty();
   $('#redirect_success').empty();
-  $('#redirect_success').html('<a href="/project/#{@project.id}/discontent/posts/#{@post.id}">Перейти к просмотру своего несовершенства</a>');
+  $('#redirect_success').html('<a class="btn btn-sm btn-success" href="/project/#{@project.id}/discontent/posts/#{@post.id}">Перейти к просмотру своего несовершенства</a>');
 
 
 

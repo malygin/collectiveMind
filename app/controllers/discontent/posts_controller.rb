@@ -214,10 +214,13 @@ class Discontent::PostsController < PostsController
      @new_post.save!
      unless params[:posts].nil?
        params[:posts].each do |p|
-         Discontent::Post.find(p).update_attributes(status: 1, discontent_post_id: @new_post.id)
+         post = Discontent::Post.find(p)
+         post.update_attributes(status: 1, discontent_post_id: @new_post.id)
+         @new_post.update_union_post_aspects(post.post_aspects)
        end
      end
      @post.update_attributes(status: 1, discontent_post_id: @new_post.id)
+     @new_post.update_union_post_aspects(@post.post_aspects)
      redirect_to discontent_posts_path(@project)
    end
 
@@ -241,6 +244,7 @@ class Discontent::PostsController < PostsController
      if @post.one_last_post? and boss?
          @union_post.update_attributes(status: 0, discontent_post_id: nil)
          @post.destroy
+         @post.discontent_post_aspects.destroy_all
          redirect_to action: "index"
          return
      else
@@ -255,6 +259,7 @@ class Discontent::PostsController < PostsController
      @post = Discontent::Post.find(params[:id])
      @union_post = Discontent::Post.find(params[:post_id])
      @union_post.update_attributes(status: 1, discontent_post_id: @post.id)
+     @post.update_union_post_aspects(@union_post.post_aspects)
      respond_to do |format|
        format.js
      end

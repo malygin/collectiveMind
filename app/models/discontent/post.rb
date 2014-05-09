@@ -48,19 +48,36 @@ class Discontent::Post < ActiveRecord::Base
   #scope :not_ready_for_post, lambda {  where(:status => 0).where("created_at > ?", 2.day.ago) }
 
   def update_post_aspects(aspects_new)
-    aspects_old = self.discontent_post_aspects
-    unless aspects_old.nil? or aspects_new.nil?
-      aspects_old.each do |asp|
-        unless aspects_new.include? asp.aspect_id.to_s
-          asp.destroy
-        end
-      end
+    self.discontent_post_aspects.destroy_all
+    aspects_new.each do |asp|
+      aspect = Discontent::PostAspect.create(post_id: self.id, aspect_id: asp.to_i)
+      aspect.save!
     end
+    #aspects_old = self.discontent_post_aspects
+    #unless aspects_old.nil? or aspects_new.nil?
+    #  aspects_old.each do |asp|
+    #    unless aspects_new.include? asp.aspect_id.to_s
+    #      asp.destroy
+    #    end
+    #  end
+    #end
+    #aspects_old = self.post_aspects.nil? ? [] : self.post_aspects.pluck(:id)
+    #unless aspects_new.nil?
+    #  aspects_new.each do |asp|
+    #    unless aspects_old.include? asp.to_i
+    #      aspect = Discontent::PostAspect.create(post_id: self.id, aspect_id: asp.to_i)
+    #      aspect.save!
+    #    end
+    #  end
+    #end
+  end
+
+  def update_union_post_aspects(aspects_new)
     aspects_old = self.post_aspects.nil? ? [] : self.post_aspects.pluck(:id)
     unless aspects_new.nil?
-      aspects_new.each do |asp|
-        unless aspects_old.include? asp.to_i
-          aspect = Discontent::PostAspect.create(post_id: self.id, aspect_id: asp.to_i)
+      aspects_new.uniq.each do |asp|
+        unless aspects_old.include? asp.id
+          aspect = Discontent::PostAspect.create(post_id: self.id, aspect_id: asp.id)
           aspect.save!
         end
       end

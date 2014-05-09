@@ -52,6 +52,7 @@ $('#modal_help').on 'hidden.bs.modal', ->
     $('#send_post').removeClass('disabled')
   else
     $('#send_post').addClass('disabled')
+  $('#new_discontent_hidden').remove()
 
 @activate_modal_send = (el)->
   if $( ".radio input:checked" ).length == 1
