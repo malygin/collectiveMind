@@ -7,8 +7,13 @@
         .col-md-10
             = form_for comment, :html => {:class => 'new_or_edit'},  remote: true, :url => url_link, :method => :put do |f|
                 = render 'shared/error_messages', :object =>f.object
-                =f.text_area :content, :class => 'form-control', style: 'height: 70px;', placeholder: 'Ваш комментарий', id:'comment_text_area', onkeyup: "activate_button(this);"
-                .pull-right
-                    =f.submit 'Отправить', :id  => "send_post", class: 'btn btn-sm btn-success disabled', onclick: 'disable_send_button();'
+                -if comment.get_class == "LifeTape"
+                    =f.text_area :content, :class => 'form-control', style: 'height: 70px;', placeholder: 'Ваш комментарий', id:"comment_text_area_#{post}"
+                    .pull-right
+                        =f.submit 'Отправить', :id  => "send_post", class: 'btn btn-sm btn-success', onclick: 'disable_send_button();'
+                -else
+                    =f.text_area :content, :class => 'form-control', style: 'height: 70px;', placeholder: 'Ваш комментарий', id:'comment_text_area', onkeyup: "activate_button(this);"
+                    .pull-right
+                        =f.submit 'Отправить', :id  => "send_post", class: 'btn btn-sm btn-success disabled', onclick: 'disable_send_button();'
             .text-success#comment_success(style='display:none;')
                 Комментарий успешно добавлен

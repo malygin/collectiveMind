@@ -39,7 +39,7 @@ end
       .eager_load(:discontent_aspects)
       .order_by_param(@order)
       .paginate(:page => params[:page], :per_page => 20)
-
+    @comment = LifeTape::Comment.new
     respond_to do |format|
       format.html{render :layout  => 'application_two_column'}
       format.js {render 'posts/index' }

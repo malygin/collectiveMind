@@ -36,6 +36,10 @@
             .panel-collapse.collapse{id:"asp_#{post.id}"}
                 .panel-body
                     =render :partial => 'shared/comment', :collection => post.comments
+                    .media{:id => "comments_#{post.id}"}
+                    - if signed_in?
+                        = render :partial => 'shared/comment_form', :locals => { :comment => @comment, :post => post.id, :url_link => url_for(:controller => post.class.name.underscore.pluralize,:id => post.id, :action => 'add_comment')}
+
 -#
 -#
 -#%table.table.table-stripped

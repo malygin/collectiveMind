@@ -13,6 +13,8 @@ module BaseComment  extend ActiveSupport::Concern
     has_many :comment_votings_against,:conditions => ['against = ?',true], :source => :comment_votings, :class_name => 'CommentVoting'
     has_many :users_against, :through => :comment_votings_against, :source => :user
 
-
+    def get_class
+      self.class.name.deconstantize
+    end
   end
 end
