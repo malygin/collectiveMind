@@ -120,7 +120,6 @@ class Discontent::PostsController < PostsController
   def vote_list
     #@posts = current_model.where(:project_id => @project, :status => 2)
     @posts = @project.get_united_posts_for_vote(current_user)
-
     @post_all = current_model.where(:project_id => @project, :status => 2).count
     if @posts.empty?
       redirect_to action: "index"
