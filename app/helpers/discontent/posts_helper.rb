@@ -105,6 +105,32 @@ module Discontent::PostsHelper
         nil
     end
   end
+  def validate_dispost(pa,aspects)
+    if pa[:content].empty?
+      flash[:content]='Заполните поле "что"'
+    end
+    if pa[:whered].empty?
+      flash[:whered]='Заполните поле "где"'
+    end
+    if pa[:whend].empty?
+      flash[:whend]='Заполните поле "когда"'
+    end
+    if aspects.nil?
+      flash[:aspects]='Выберите тему несовершенства'
+    end
+    if pa[:style].nil?
+      flash[:style]='Выберите тип несовершенства'
+    end
+    flash
+  end
 
+  def flash_display
+    response = ""
+    flash.each do |name, msg|
+      response = response + content_tag(:div, msg, :id => "flash_#{name}",:class => "text-danger",:style => "font-size:15px;")
+    end
+    flash.discard
+    response
+  end
 
 end

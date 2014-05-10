@@ -121,8 +121,12 @@
   %br
   =link_to 'Назад', discontent_posts_path(@project)
   %hr
-  %p#discontent_success.text-success Готово!
+  %p#discontent_success.text-success Готово! Спасибо за добавление несовершенства!
   %p#redirect_success
+  #flash-panel.panel.panel-danger(style="display:none;")
+    .panel-heading
+      %h4.text-danger Для сохранения несовершенства:
+    .panel-body#flash
 
   %p#discontent_warning.text-primary
     Проверьте в списке ниже, не было ли ваше несовершенство или похожее на него добавлено другими участниками. Если да, то прекратите работу с ним.  Если вы уверены, что ваше несовершенство оригинально,  нажмите на кнопку "Все равно сохранить".

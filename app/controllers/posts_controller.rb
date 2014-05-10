@@ -282,7 +282,8 @@ def index
     @project = Core::Project.find(params[:project])
     @post_vote = voting_model.find(params[:post_id])
     @post_vote.final_votings.create(:user => current_user)
-    @votes = @project.stage3 - current_user.concept_post_votings.count
+    @number_v = @project.get_free_votes_for(current_user, :life_tape, @project)
+    #@votes = @project.stage3 - current_user.concept_post_votings.count
   end
 
 ### function for dialog with expert
