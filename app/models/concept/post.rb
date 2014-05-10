@@ -8,7 +8,7 @@
   has_many :post_aspects, :foreign_key => 'concept_post_id', :class_name => "Concept::PostAspect"
 
   has_many :voted_users, :through => :final_votings, :source => :user
-  has_many :final_votings,:foreign_key => 'concept_post_id', :class_name => "Concept::Voting"
+  has_many :final_votings,:foreign_key => 'concept_post_aspect_id', :class_name => "Concept::Voting"
 
   has_many :concept_notes, :class_name => 'Concept::Note'
 
@@ -21,6 +21,16 @@
   scope :stat_fields_positive, ->(p){where(:id => p).where("stat_name = 't' and stat_content = 't' and stat_negative = 't'
             and stat_positive = 't' and stat_reality = 't' and stat_problems = 't'
             and stat_positive_r = 't' and stat_negative_r = 't' ")}
+
+  def self.scope_vote_top(post)
+    joins(:concept_post_discontents).
+    where('"concept_post_discontents"."discontent_post_id" = ?', post.id).
+    joins(:post_aspects).
+    joins('INNER JOIN "concept_votings" ON "concept_votings"."concept_post_aspect_id" = "concept_post_aspects"."id"').
+    where('"concept_votings"."discontent_post_id" = "concept_post_aspects"."discontent_aspect_id"')
+    .group('"concept_posts"."id"')
+    .order('count("concept_votings"."user_id") DESC')
+  end
 
   def post_notes(type_field)
     self.concept_notes.by_type(type_field)

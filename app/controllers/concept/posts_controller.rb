@@ -46,6 +46,9 @@ class Concept::PostsController < PostsController
     @journals = Journal.events_for_user_feed @project.id
     @news = ExpertNews::Post.first
     @status = 4
+    if @project.status == 8
+      @vote_all = Concept::Voting.where("concept_votings.discontent_post_id IN (#{@project.discontents.by_status(4).pluck(:id).join(", ")})").uniq_user.count
+    end
   end
 
 

@@ -3,4 +3,6 @@ class Concept::Voting < ActiveRecord::Base
   belongs_to :user
   belongs_to :concept_post_aspect, :class_name => 'Concept::PostAspect'
   belongs_to :discontent_post, :class_name => 'Discontent::Post'
+  scope :uniq_user,   ->{select('distinct user_id')}
+  scope :by_dispost,  ->(p){where(:discontent_post_id => p)}
 end

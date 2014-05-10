@@ -3,6 +3,37 @@
     .pull-right
       =post.number_views
       %span.glyphicon.glyphicon-eye-open
+      |
+      = link_to(:controller => post.class.name.underscore.pluralize, :action => :show, :project => @project, :id => post.id) do
+        Комментировать
+        =post.comments.count
+        %span.glyphicon.glyphicon-comment
+      -if boss? and @project.status == 6 and post.class.name.deconstantize == "Discontent"
+        |
+        %span.text-success За:
+        =post.final_votings.by_positive.uniq_user.size
+        |
+        %span.text-danger Против:
+        =post.final_votings.by_negative.uniq_user.size
+        |
+        %span.text-info Всего:
+        =@vote_all
+        |
+        =link_to({:controller => post.class.name.underscore.pluralize, :action => :set_required, :id => post.id, :project => @project},:remote => true,:method => :put,:id => "set_required_#{post.id}", :class => "note_text") do
+          %span.text-warning В обязательные
+      -if boss? and @project.status == 8 and post.class.name.deconstantize == "Concept"
+        |
+        %span.text-success Голосов:
+        =post.post_aspects.first.final_votings.by_dispost(dispost.id).size
+        |
+        %span.text-success Голосовавших:
+        =post.post_aspects.first.final_votings.by_dispost(dispost.id).uniq_user.size
+        |
+        %span.text-info Всего:
+        =@vote_all
+
+
+
       -#|
       -#- if signed_in? and not post.users.include?(current_user)
       -#  =link_to({:controller => post.class.name.underscore.pluralize ,:action => :plus, :project => @project,:status=>0, :aspect=>0,  :id => post.id, :against => false,  :remote => true},:method => :put, id: "plus_post_#{post.id}") do
@@ -30,24 +61,3 @@
       -#    %span.glyphicon.glyphicon-thumbs-up.text-muted
       -#    %span.text-muted= "Против #{post.users_against.count}"
       -#    %span.glyphicon.glyphicon-thumbs-down.text-muted
-
-
-
-      |
-      = link_to(:controller => post.class.name.underscore.pluralize, :action => :show, :project => @project, :id => post.id) do
-        Комментировать
-        =post.comments.count
-        %span.glyphicon.glyphicon-comment
-      -if boss? and @project.status == 6
-        |
-        %span.text-success За:
-        =post.final_votings.by_positive.uniq_user.size
-        |
-        %span.text-danger Против:
-        =post.final_votings.by_negative.uniq_user.size
-        |
-        %span.text-info Всего:
-        =@vote_all
-        |
-        =link_to({:controller => post.class.name.underscore.pluralize, :action => :set_required, :id => post.id, :project => @project},:remote => true,:method => :put,:id => "set_required_#{post.id}", :class => "note_text") do
-          %span.text-warning В обязательные
