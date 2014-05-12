@@ -6,6 +6,7 @@ class Concept::PostsController < PostsController
    layout 'application_two_column', :only => [:new, :edit, :show]
    autocomplete :concept_post, :resource, :class_name => 'Concept::Post' , :full => true
 
+
    def current_model
     Concept::Post
   end

@@ -3,7 +3,8 @@ class PostsController < ApplicationController
   before_filter :authenticate
   before_filter :prepare_data, :only => [:index, :new, :edit, :show, :show_essay, 
     :vote_list, :essay_list]
-  before_filter :have_rights
+  #before_filter :have_rights
+  before_filter :have_rights, :only =>[:edit]
 
   # before_filter :authorized_user, :only => :destroy
  def authenticate
@@ -11,7 +12,11 @@ class PostsController < ApplicationController
      redirect_to '/users/sign_in'
    end
  end
-
+ def have_rights
+   unless  current_model.find(params[:id]).user == current_user
+     redirect_to :back
+   end
+end
   def current_model
     "#{self.class.name.deconstantize}::Post".constantize
   end

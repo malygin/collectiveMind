@@ -137,8 +137,9 @@ def discontent_style_name(dis)
 		else 
 			'не определена'
 		end
-	end
 end
+
+
 def column_for_type_field(type_fd)
   case type_fd
     when 1
@@ -172,6 +173,7 @@ def column_for_concept_type(type_fd)
     else
       nil
   end
+end
 
   def wrap(content,length = 30)
     sanitize(raw(content.split.map{ |s| wrap_long_string(s,length) }.join(' ')))
