@@ -36,6 +36,11 @@
                 %a.btn.btn-success.btn-xs{type: "button", "data-toggle"=>"modal", "data-target"=>"#prompt2", style:'font-size:10px;'} Пояснения
               .form-group.has-danger
                 =text_area_tag "pa[#{discontent.id}][content]", @post.get_pa_by_discontent(discontent, :content), :class => "concept_cond", rows: 4, style: 'width: 100%;'
+              %p.text-info
+                Чем это лучше других нововведений?
+                %a.btn.btn-success.btn-xs{type: "button", "data-toggle"=>"modal", "data-target"=>"#prompt2", style:'font-size:10px;'} Пояснения
+              .form-group.has-danger
+                =text_area_tag "pa[#{discontent.id}][content]", @post.get_pa_by_discontent(discontent, :content), :class => "concept_cond", rows: 4, style: 'width: 100%;'
 
 
           .panel.panel-info
