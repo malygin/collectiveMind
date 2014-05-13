@@ -18,7 +18,11 @@
 
     .concept-name
       %h5.text-info=t('form.cond_res')
-    =display_content(post_for_vote.positive_r)
+    - post_for_vote.concept_post.concept_post_resources.each do |r|
+      %h5
+        =r.name
+        %br
+        %small=r.desc
 
     .concept-name
       %h5.text-info=t('form.negative')

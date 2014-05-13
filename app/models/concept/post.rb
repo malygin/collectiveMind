@@ -21,6 +21,7 @@
   scope :stat_fields_positive, ->(p){where(:id => p).where("stat_name = 't' and stat_content = 't' and stat_negative = 't'
             and stat_positive = 't' and stat_reality = 't' and stat_problems = 't'
             and stat_positive_r = 't' and stat_negative_r = 't' ")}
+  scope :by_status, ->(p){where(status: p)}
 
   def self.scope_vote_top(post)
     joins(:concept_post_discontents).

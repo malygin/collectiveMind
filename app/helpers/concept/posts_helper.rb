@@ -41,7 +41,7 @@ module Concept::PostsHelper
     i = num
     while disposts[i].nil? ? false:true
       @discontent_post = disposts[i]
-      concept_posts = @discontent_post.dispost_concepts.order('concept_posts.id')
+      concept_posts = @discontent_post.dispost_concepts.by_status(0).order('concept_posts.id')
       if last_vote.nil?
         if concept_posts.size > 1
           return @discontent_post

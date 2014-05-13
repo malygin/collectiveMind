@@ -210,8 +210,8 @@ class Concept::PostsController < PostsController
 
     @discontent_post = view_context.able_concept_posts_for_vote(disposts,last_vote)
     unless @discontent_post.nil?
-      @post_all = @discontent_post.dispost_concepts.size - 1
-      concept_posts = @discontent_post.dispost_concepts.order('concept_posts.id')
+      @post_all = @discontent_post.dispost_concepts.by_status(0).size - 1
+      concept_posts = @discontent_post.dispost_concepts.by_status(0).order('concept_posts.id')
       if last_vote.nil? or @discontent_post.id != last_vote.discontent_post_id
         @concept1 = concept_posts[0].post_aspects.first
         @concept2 = concept_posts[1].post_aspects.first
