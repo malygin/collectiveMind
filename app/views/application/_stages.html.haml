@@ -25,7 +25,7 @@
                 =@project.status_title(:discontent_posts)
                 %br
 
-                %small.text-center=t('stages.discontents', count: @project.discontents.by_status(1).count)
+                %small.text-center=t('stages.discontents', count: @project.discontents.by_status(0).count)
             -else
               %a
                 =@project.status_title(:discontent_posts)
