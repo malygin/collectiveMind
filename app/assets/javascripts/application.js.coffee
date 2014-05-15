@@ -8,7 +8,6 @@
 #= require bootstrap-wysihtml5/locales/ru-RU
 #= require selectize
 #= require liFixar/jquery.liFixar
-#= require jquery.autosize
 
 
 
@@ -98,7 +97,6 @@ $ ->
   $("#sortable").sortable()
   $("#sortable").disableSelection()
   $('#theall a:first').tab('show')
-  $('textarea').autosize()
 #  $('#accordion').on 'shown.bs.collapse', ->
 #    m = $(this);
 #    console.log(m)
@@ -133,10 +131,7 @@ $('#sortable').sortable update: (event, ui) ->
     data:
       sortable: order
 
-$(window).load ->
-  $("#fixBlock").liFixar
-    side: "top"
-    position: 0
+
 
 @select_discontent_for_union= (project,id)->
   sel = $('#selectize_tag :selected')
