@@ -1,4 +1,4 @@
-
+=render partial: 'modal_concept'
 .col-md-8
   .media
     .media-body
@@ -11,11 +11,11 @@
   %br
   %br
   %div.tab-content
-    -@post.post_aspects_other.each do |pa|
-      =render partial: 'resolve_discontent_show', locals: { pa: pa }
-
-    -@post.post_aspects_first.each do |pa|
-      =render partial: 'first_cond_show', locals: { pa: pa }
+    -#-@post.post_aspects_other.each do |pa|
+    -#  =render partial: 'resolve_discontent_show', locals: { pa: pa }
+    -#
+    -#-@post.post_aspects_first.each do |pa|
+    -#  =render partial: 'first_cond_show', locals: { pa: pa }
 
     %div.tab-pane#plan1
       %hr
@@ -49,9 +49,13 @@
         %li
           %a.text-success(href="#plan1" data-toggle="tab" style='font-size:10px; font-weight: bold;')
             =t('form.plan')
+        %li
+          %a.text-success(href="#modal_concept" data-toggle="modal" onclick="empty_modal_plan();" data-target="#modal_concept" style='font-size:10px; font-weight: bold;')
+            =t('form.plan_add_concept')
         -@post.post_aspects_other.each_with_index do |d,i|
           %li
-            %a(href="#dis_#{d.discontent.id}" data-toggle="tab")="#{i+1}. #{d.discontent.display_content}"
+            %a(href="#dis_#{d.id}" data-toggle="tab")="#{i+1}. #{d.title}"
+            -#%a(href="#dis_#{d.discontent.id}" data-toggle="tab")="#{i+1}. #{d.discontent.display_content}"
 
 
     #thefirst.tab-pane.fade
@@ -59,10 +63,14 @@
         %li
           %a.text-success(href="#plan2" data-toggle="tab" style='font-size:10px; font-weight: bold;')
             =t('form.plan')
+        %li
+          %a.text-success(href="#modal_concept" data-toggle="modal" onclick="empty_modal_plan();" data-target="#modal_concept" style='font-size:10px; font-weight: bold;')
+            =t('form.plan_add_concept')
         -@post.post_aspects_first.each_with_index do |d,i|
           - if d.name!=''
             %li
-              %a(href="#fdis_#{d.discontent.id}" data-toggle="tab")="#{i+1}. #{d.discontent.display_content}"
+              %a(href="#fdis_#{d.id}" data-toggle="tab")="#{i+1}. #{d.title}"
+              -#%a(href="#fdis_#{d.discontent.id}" data-toggle="tab")="#{i+1}. #{d.discontent.display_content}"
 
 .row
   .col-md-12

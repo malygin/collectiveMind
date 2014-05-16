@@ -1,4 +1,5 @@
 = render 'shared/help/new_concept'
+=render partial: 'modal_concept'
 
 = form_for  @post, :url => {:project => @project.id, :action => @post.persisted? ? 'update' : 'create'},   :html => { :class => 'new_or_edit' }do |f|
   .col-md-8
@@ -71,11 +72,15 @@
             %a.text-success(href="#essay1" data-toggle="tab" style='font-size:10px; font-weight: bold;')
               I)
               =t('form.essay')
-          -@discontents.each_with_index do |d,i|
-            %li
-              %a(href="#dis_#{d.id}" data-toggle="tab")
-                ="#{i+1}. #{d.display_content}"
-                %span.text-success.glyphicon.glyphicon-ok.pull-right(class = "#{'inv_element' if @post.get_pa_by_discontent(d, :name)==''}")
+          %li
+            %a.text-success(href="#modal_concept" data-toggle="modal" onclick="empty_modal_plan();" data-target="#modal_concept" style='font-size:10px; font-weight: bold;')
+              =t('form.plan_add_concept')
+          -#-if @post.persisted?
+          -#  -@post.each_with_index do |d,i|
+          -#    %li
+          -#      %a(href="#dis_#{d.id}" data-toggle="tab")
+          -#        ="#{i+1}. #{d.title}"
+          -#        %span.text-success.glyphicon.glyphicon-ok.pull-right(class = "#{'inv_element' if @post.get_pa_by_discontent(d, :name)==''}")
       #thefirst.tab-pane.fade
         %ul.nav.nav-tabs.nav-stacked
           %li
@@ -86,11 +91,15 @@
             %a.text-success(href="#plan2" data-toggle="tab" style='font-size:10px; font-weight: bold;')
               III)
               =t('form.plan')
-          -@discontents.each_with_index do |d,i|
-            %li
-              %a(href="#fdis_#{d.id}" data-toggle="tab")
-                ="#{i+1}. #{d.display_content}"
-                %span.text-success.glyphicon.glyphicon-ok.pull-right(class = "#{'inv_element' if @post.get_pa_by_discontent(d, :name, 1)==''}")
+          %li
+            %a.text-success(href="#modal_concept" data-toggle="modal" onclick="empty_modal_plan();" data-target="#modal_concept" style='font-size:10px; font-weight: bold;')
+              =t('form.plan_add_concept')
+          -#-if @post.persisted?
+          -#  -@post.each_with_index do |d,i|
+          -#    %li
+          -#      %a(href="#fdis_#{d.id}" data-toggle="tab")
+          -#        ="#{i+1}. #{d.title}"
+          -#        %span.text-success.glyphicon.glyphicon-ok.pull-right(class = "#{'inv_element' if @post.get_pa_by_discontent(d, :name, 1)==''}")
 
   %br
   %br

@@ -8,66 +8,154 @@
       %div.panel-body
         -#%button.btn.btn-info.btn-sm.pull-right(data-toggle="modal" data-target="#modalStage3")
         -#  Показать пример
-        %h5.text-infoУстраняемое несовершенство:
-        =render partial:'discontent/posts/post_short2', object: pa.discontent
-        %br
+        -unless pa.discontent.nil?
+          %h5.text-info Устраняемое несовершенство:
+          =render partial:'discontent/posts/post_short2', object: pa.discontent
+          %br
+          %hr
+
+        %h5.text-success.text-center
+          %b=pa.title
+          %br
+          %br
+        %h5.text-success
+          %b A 1
+        %p.text-info=t('form.novation_what')
+        .form-group
+          =simple_format(pa.name)
+
+        %h5.text-success
+          %b A 2
+        %p.text-info=t('form.novation_how')
+        .form-group.has-danger
+          =simple_format(pa.content)
+
         %hr
-        #select0
-          .panel.panel-info
-            .panel-heading
-              %h5.text-success
-                %b A.*
-              %p.text-info
-                %b=t('form.novation_what')
-              .form-group.has-danger=pa.name
-              %p.text-info
-                %b=t('form.novation_how')
-                %a.btn.btn-success.btn-xs{type: "button", "data-toggle"=>"modal", "data-target"=>"#prompt2", style:'font-size:10px;'} Пояснения
-              .form-group.has-danger=pa.content
+        %h5.text-success
+          %b B 1
+        %p.text-info=t('form.cond')
+        .form-group.has-success= display_content(pa.positive)
+
+        %h5.text-success
+          %b B 2
+        %p.text-info=t('form.cond_res')
+        -#- @post.concept_post_resources.each do |r|
+        -#  %h5
+        -#    =r.name
+        -#    %br
+        -#    %small=r.desc
+
+        %h5.text-success
+          %b B 3
+        %p.text-info=t('form.cond_s')
+        .form-group.has-success= display_content(pa.positive_s)
+
+        %hr
+        %h5.text-success
+          %b C 1
+        %p.text-info=t('form.negative')
+        .form-group.has-success= display_content(pa.negative)
+
+        %h5.text-success
+          %b C 2
+        %p.text-info=t('form.negative_res')
+        .form-group.has-success= display_content(pa.negative_r)
+
+        %h5.text-success
+          %b C 3
+        %p.text-info=t('form.negative_s')
+        .form-group.has-success= display_content(pa.negative_s)
+
+        %hr
+        %h5.text-success
+          %b D 1
+        %p.text-info=t('form.control')
+        .form-group.has-success= display_content(pa.control)
+
+        %h5.text-success
+          %b D 2
+        %p.text-info=t('form.control_res')
+        .form-group.has-success= display_content(pa.control_r)
+
+        %h5.text-success
+          %b D 3
+        %p.text-info=t('form.control_s')
+        .form-group.has-success= display_content(pa.control_s)
+
+        %hr
+        %h5.text-success
+          %b E 1
+        %p.text-info=t('form.obstacles_bcd')
+        .form-group.has-success= display_content(pa.obstacles)
+
+        %hr
+        %h5.text-success
+          %b F 1
+        %p.text-info=t('form.problems')
+        .form-group.has-success= display_content(pa.problems)
+
+        %h5.text-success
+          %b F 2
+        %p.text-info=t('form.reality')
+        .form-group.has-success= display_content(pa.reality)
 
 
-          .panel.panel-info
-            .panel-heading
-              %h5.text-success
-                %b B.*
-              %p.text-info
-                %b=t('form.cond')
-                .form-group.has-success=pa.positive
-              %p.text-info
-                %b=t('form.cond_res')
-                .form-group.has-success=pa.positive_r
-              %p.text-info
-                %b=t('form.cond_s')
-                .form-group.has-success=pa.positive_s
-
-
-          %hr
-          %h5.text-success
-            %b C.
-          %p.text-info
-            %b=t('form.negative')
-            .form-group.has-success=pa.negative
-          %p.text-info
-            %b=t('form.negative_res')
-            .form-group.has-success=pa.negative_r
-          %p.text-info
-            %b=t('form.negative_s')
-            .form-group.has-success=pa.negative_s
-
-          %hr
-          %h5.text-success D.
-          %p.text-info
-            %b=t('form.obstacles_bcd')
-          .form-group.has-success
-            =pa.obstacles
-
-          .panel.panel-info
-            .panel-heading
-              %h5.text-success
-                %b E.*
-              %p.text-info
-                %b=t('form.problems')
-              .form-group.has-success=pa.problems
-              %p.text-info
-                %b=t('form.reality')
-              .form-group.has-success=pa.reality
+        -##select0
+        -#  .panel.panel-info
+        -#    .panel-heading
+        -#      %h5.text-success
+        -#        %b A.*
+        -#      %p.text-info
+        -#        %b=t('form.novation_what')
+        -#      .form-group.has-danger=pa.name
+        -#      %p.text-info
+        -#        %b=t('form.novation_how')
+        -#        %a.btn.btn-success.btn-xs{type: "button", "data-toggle"=>"modal", "data-target"=>"#prompt2", style:'font-size:10px;'} Пояснения
+        -#      .form-group.has-danger=pa.content
+        -#
+        -#
+        -#  .panel.panel-info
+        -#    .panel-heading
+        -#      %h5.text-success
+        -#        %b B.*
+        -#      %p.text-info
+        -#        %b=t('form.cond')
+        -#        .form-group.has-success=pa.positive
+        -#      %p.text-info
+        -#        %b=t('form.cond_res')
+        -#        .form-group.has-success=pa.positive_r
+        -#      %p.text-info
+        -#        %b=t('form.cond_s')
+        -#        .form-group.has-success=pa.positive_s
+        -#
+        -#
+        -#  %hr
+        -#  %h5.text-success
+        -#    %b C.
+        -#  %p.text-info
+        -#    %b=t('form.negative')
+        -#    .form-group.has-success=pa.negative
+        -#  %p.text-info
+        -#    %b=t('form.negative_res')
+        -#    .form-group.has-success=pa.negative_r
+        -#  %p.text-info
+        -#    %b=t('form.negative_s')
+        -#    .form-group.has-success=pa.negative_s
+        -#
+        -#  %hr
+        -#  %h5.text-success D.
+        -#  %p.text-info
+        -#    %b=t('form.obstacles_bcd')
+        -#  .form-group.has-success
+        -#    =pa.obstacles
+        -#
+        -#  .panel.panel-info
+        -#    .panel-heading
+        -#      %h5.text-success
+        -#        %b E.*
+        -#      %p.text-info
+        -#        %b=t('form.problems')
+        -#      .form-group.has-success=pa.problems
+        -#      %p.text-info
+        -#        %b=t('form.reality')
+        -#      .form-group.has-success=pa.reality

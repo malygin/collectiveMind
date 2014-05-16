@@ -6,123 +6,499 @@
       .col-md-9
     %div.panel.panel-default
       %div.panel-body
-        %button.btn.btn-info.btn-sm.pull-right(data-toggle="modal" data-target="#modalStage3")
-          Показать пример
-        %h5.text-infoУстраняемое несовершенство:
-        =render partial:'discontent/posts/post_short2', object: discontent
-        %br
+        -#%button.btn.btn-info.btn-sm.pull-right(data-toggle="modal" data-target="#modalStage3")
+        -#  Показать пример
+        -unless discontent.nil?
+          %h5.text-info Устраняемое несовершенство:
+          =render partial:'discontent/posts/post_short2', object: discontent
+          -#%h5.text-info Устраняемые несовершенства (проблемы):
+          -#-@post.concept_disposts.each  do |cd|
+          -#  =render partial:'discontent/posts/post_short2', object: cd
+          %br
+          %hr
+        -#%span.h4.text-success Выберите нововведение:
+        -#%select.form-control(onchange="load_discontent_for_cond1(#{discontent.id});" id="select1_#{discontent.id}")
+        -#  %option#option0(value="option_null")
+        -#  - discontent.concept_conditions.each do |cd|
+        -#    %option#option1(value="#{cd.id}")=cd.name
 
-        %hr
-        %span.h4.text-success Выберите нововведение:
-        %select.form-control(onchange="load_discontent_for_cond1(#{discontent.id});" id="select1_#{discontent.id}")
-          %option#option0(value="option_null")
-          - discontent.concept_conditions.each do |cd|
-            %option#option1(value="#{cd.id}")=cd.name
-
-        %hr
-
-        #select0
-          .panel.panel-info
-            .panel-heading
-              %h5.text-success
-                %b A.*
-
-              -#%a.btn.btn-success.btn-xs.pull-right{type: "button", "data-toggle"=>"modal", "data-target"=>"#prompt1", style:'font-size:10px;'} Пояснения
-
-              %p.text-info
+        .row
+          .col-md-12
+            .text-center
+              %p.text-info.h5
+                Краткое название нововведения
+              %br
+              =text_field_tag "pa1[#{discontent.id}][title]", @post.get_pa_by_discontent(discontent, :title,1), style: 'width: 100%; height: 30px', placeholder:'Введетие краткое название для нововведения'
+              %br
+        .row
+          .col-md-12
+            .text-center
+              %h6.text-success
+                %b A 1
+              %p.text-info.h5
                 =t('form.novation_what')
-                %a.btn.btn-success.btn-xs{type: "button", "data-toggle"=>"modal", "data-target"=>"#prompt1", style:'font-size:10px;'} Пояснения
-              .form-group.has-danger
-                =text_area_tag "pa1[#{discontent.id}][name]", @post.get_pa_by_discontent(discontent, :name,1), :class => "concept_cond", rows: 4, style: 'width: 100%;'
-              %p.text-info
+              %br
+
+        .row
+          .col-md-6
+            .text-right
+              %i
+                %h6.text-primary Предположим, вы оказались в будущем. Что там есть такого, что исправляет несовершенство?
+                %h6.text-success Пример:
+                %h6.text-muted Решаемое несовершенство:
+                %span.label.label-default что
+                %span.text-muted Пыльный и отвратительный на вид большой пустырь
+                %br
+                %span.label.label-default где
+                %span.text-muted во дворе между домами
+                %br
+                %span.label.label-default когда
+                %span.text-muted в теплое время года
+                %br
+                %h6.text-success Предлагаемое нововведение:
+                %p Большой зеленый газон по всему пустырю  с клумбой с посредине. Клумба засеяна красными многолетными цветами.
+          .col-md-6
+            .form-group.has-danger
+              =text_area_tag "pa1[#{discontent.id}][name]", @post.get_pa_by_discontent(discontent, :name,1), :class => "concept_cond form-control", rows: 12, style: 'width: 100%;'
+        .row
+          .col-md-12
+            .text-center
+              %h6.text-success
+                %b A 2
+              %p.text-info.h5
                 =t('form.novation_how')
-                %a.btn.btn-success.btn-xs{type: "button", "data-toggle"=>"modal", "data-target"=>"#prompt2", style:'font-size:10px;'} Пояснения
-              .form-group.has-danger
-                =text_area_tag "pa1[#{discontent.id}][content]", @post.get_pa_by_discontent(discontent, :content,1), :class => "concept_cond", rows: 4, style: 'width: 100%;'
+              %br
+        .row
+          .col-md-6
+            .text-right
+              %i
+                %h6.text-success Пример:
 
-
-          .panel.panel-info
-            .panel-heading
-              %h5.text-success
-                %b B.*
-              %p.text-info
+                %p Трава газона и декоративные растения на клумбе будут привлекательны на вид и предотвращать появление пыли.
+          .col-md-6
+            .form-group.has-danger
+              =text_area_tag "pa1[#{discontent.id}][content]", @post.get_pa_by_discontent(discontent, :content,1),  :class => "concept_cond form-control", rows: 12, style: 'width: 100%;'
+        %hr
+        .row
+          .col-md-12
+            .text-center
+              %h6.text-success
+                %b B 1
+              %p.text-info.h5
                 =t('form.cond')
-                %a.btn.btn-success.btn-xs{type: "button", "data-toggle"=>"modal", "data-target"=>"#prompt3", style:'font-size:10px;'} Пояснения
-                .form-group.has-success
-                  =text_area_tag "pa1[#{discontent.id}][positive]", @post.get_pa_by_discontent(discontent, :positive,1), :class => "concept_cond", rows: 4, style: 'width: 100%;'
-              %p.text-info
+              %br
+
+        .row
+          .col-md-6
+            .text-right
+              %i
+                %h6.text-success Пример:
+                %p
+                  %b Для поддержания внешнего вида газона и травы необходимо обеспечить:
+
+                  регулярный полив;  нужно засевать газон травой, а на клумбу высаживать растения; почву периодически вскапывать, удобрять и пропалывать; необходимо весной собирать деньги у жильцов.
+          .col-md-6
+            .form-group.has-success
+              =text_area_tag "pa1[#{discontent.id}][positive]", @post.get_pa_by_discontent(discontent, :positive,1), :class => "concept_cond form-control", rows: 12, style: 'width: 100%;'
+        .row
+          .col-md-12
+            .text-center
+              %h6.text-success
+                %b B 2
+              %p.text-info.h5
                 =t('form.cond_res')
-                %a.btn.btn-success.btn-xs{type: "button", "data-toggle"=>"modal", "data-target"=>"#prompt4", style:'font-size:10px;'} Пояснения
-                .form-group.has-success
-                  =text_area_tag "pa1[#{discontent.id}][positive_r]", @post.get_pa_by_discontent(discontent, :positive_r,1), :class => "concept_cond", rows: 4, style: 'width: 100%;'
-              %p.text-info
+              %br
+
+        .row
+          .col-md-6
+            .text-right
+              %i
+                %h6.text-primary
+                  Ресурсами могут быть методы, технические, организационные или финансовые средства, человеческие силы и вообще все,
+                  что необходимо иметь в распоряжении в будущем, чтобы обеспечить функционирование нововведения
+                  %br
+                  %br
+                  %b Четкое представление о том, какие ресурсы понадобятся для функционирования нововведения позволят выработать более эффективный проект.
+                %br
+
+                %h6.text-success Пример:
+
+                %p
+                  работник (для ухода за растениями),
+                  %br
+                  инструменты (обработки почвы и растений),
+                  %br
+                  помещение (для хранения технических средств)...
+          .col-md-6
+            -#.form-group.has-success#resources
+            -#  - if @post.persisted?
+            -#    -@post.concept_post_resources.each do |r|
+            -#      .panel.panel-default
+            -#        .panel-body
+            -#          %span.glyphicon.glyphicon-remove.text-danger.pull-right{onclick: "$(this).parent().parent().remove();", style: "cursor:pointer;text-decoration:none;font-size:15px;"}
+            -#
+            -#          =f.autocomplete_field :resource, autocomplete_concept_post_resource_concept_posts_path, :"min-length" => 0, value: r.name,  class: 'form-control autocomplete',placeholder: 'Введите свой ресурс или выберите из списка', name: 'resor[]'
+            -#          %br
+            -#          = text_area_tag 'res[]', r.desc, class: 'form-control', placeholder: 'Пояснение к ресурсу'
+            -#  -else
+            -#
+            -#
+            -#    .panel.panel-default
+            -#      .panel-body
+            -#        %span.glyphicon.glyphicon-remove.text-danger.pull-right{onclick: "$(this).parent().parent().remove();", style: "cursor:pointer;text-decoration:none;font-size:15px;"}
+            -#
+            -#        =f.autocomplete_field :resource, autocomplete_concept_post_resource_concept_posts_path, :"min-length" => 0,  class: 'form-control autocomplete',placeholder: 'Введите свой ресурс или выберите из списка', name: 'resor[]'
+            -#        %br
+            -#        = text_area_tag 'res[]', '', class: 'form-control', placeholder: 'Пояснение к ресурсу'
+            -#    .panel.panel-default
+            -#      .panel-body
+            -#        %span.glyphicon.glyphicon-remove.text-danger.pull-right{onclick: "$(this).parent().parent().remove();", style: "cursor:pointer;text-decoration:none;font-size:15px;"}
+            -#
+            -#        =f.autocomplete_field :resource, autocomplete_concept_post_resource_concept_posts_path, :"min-length" => 0,  class: 'form-control autocomplete',placeholder: 'Введите свой ресурс или выберите из списка', name: 'resor[]'
+            -#        %br
+            -#        = text_area_tag 'res[]', '', class: 'form-control', placeholder: 'Пояснение к ресурсу'
+            -#%a.btn.btn-success{onclick:"return add_new_resource_to_concept(); "} Добавить ресурс
+
+        .row
+          .col-md-12
+            .text-center
+              %h6.text-success
+                %b B 3
+              %p.text-info.h5
                 =t('form.cond_s')
-                %a.btn.btn-success.btn-xs{type: "button", "data-toggle"=>"modal", "data-target"=>"#prompt12", style:'font-size:10px;'} Пояснения
-                .form-group.has-success
-                  =text_area_tag "pa1[#{discontent.id}][positive_s]", @post.get_pa_by_discontent(discontent, :positive_s,1), :class => "concept_cond", rows: 4, style: 'width: 100%;'
+              %br
 
-          %hr
-          %h5.text-success
-            %b C.
-          %p.text-info
-            =t('form.negative')
-            %a.btn.btn-success.btn-xs{type: "button", "data-toggle"=>"modal", "data-target"=>"#prompt7", style:'font-size:10px;'} Пояснения
+        .row
+          .col-md-6
+            .text-right
+              %i
+                %h6.text-success Пример:
+                %p
+                  %b Средства:
+
+                  Объявление для найма работника; деньги, собранные с жильцов для оплаты работника, покупки инструментов и аренды помощения
+          .col-md-6
             .form-group.has-success
-              =text_area_tag "pa1[#{discontent.id}][negative]", @post.get_pa_by_discontent(discontent, :negative, 1), :class => "concept_cond", rows: 4, style: 'width: 100%;'
-          %p.text-info
-            =t('form.negative_res')
-            %a.btn.btn-success.btn-xs{type: "button", "data-toggle"=>"modal", "data-target"=>"#prompt8", style:'font-size:10px;'} Пояснения
+              =text_area_tag "pa1[#{discontent.id}][positive_s]", @post.get_pa_by_discontent(discontent, :positive_s,1), :class => "concept_cond form-control", rows: 12, style: 'width: 100%;'
+        %hr
+        .row
+          .col-md-12
+            .text-center
+              %h6.text-success
+                %b C 1
+              %p.text-info.h5
+                =t('form.negative_h')
+              %br
+
+        .row
+          .col-md-6
+            .text-right
+              %i
+                %h6.text-primary Напишите, какие неприятности могут возникнуть, если будут созданы и поддерживаться должные УСЛОВИЯ и разрешаться ЗАДАЧИ.
+                %br
+                %h6.text-success Пример:
+
+                %p
+                  Конфликты из-за того, что некоторые жильцы могут отказаться делать денежные взносы.
+          .col-md-6
             .form-group.has-success
-              =text_area_tag "pa1[#{discontent.id}][negative_r]", @post.get_pa_by_discontent(discontent, :negative_r, 1), :class => "concept_cond", rows: 4, style: 'width: 100%;'
-          %p.text-info
-            =t('form.negative_s')
-            %a.btn.btn-success.btn-xs{type: "button", "data-toggle"=>"modal", "data-target"=>"#prompt13", style:'font-size:10px;'} Пояснения
+              =text_area_tag "pa1[#{discontent.id}][negative]", @post.get_pa_by_discontent(discontent, :negative, 1),  :class => "concept_cond form-control", rows: 14,  style: 'width: 100%;'
+
+        .row
+          .col-md-12
+            .text-center
+              %h6.text-success
+                %b C 2
+              %p.text-info.h5
+                =t('form.negative_res')
+              %br
+
+        .row
+          .col-md-6
+            .text-right
+              %i
+                %h6.text-primary Что должно иметься в будущем, препятствующее возможному возникновению неприятностей?
+                %br
+                %h6.text-success Пример:
+
+                %p
+                  Средства широкого публичного оповещения о должниках
+          .col-md-6
             .form-group.has-success
-              =text_area_tag "pa1[#{discontent.id}][negative_s]", @post.get_pa_by_discontent(discontent, :negative_s, 1), :class => "concept_cond", rows: 4, style: 'width: 100%;'
+              =text_area_tag "pa1[#{discontent.id}][negative_r]", @post.get_pa_by_discontent(discontent, :negative_r, 1), :class => "concept_cond form-control", rows: 14,  style: 'width: 100%;'
 
-          %hr
-          %h5.text-success
-            %b D.
-          %p.text-info
-            =t('form.control')
-            %a.btn.btn-success.btn-xs{type: "button", "data-toggle"=>"modal", "data-target"=>"#prompt10", style:'font-size:10px;'} Пояснения
+        .row
+          .col-md-12
+            .text-center
+              %h6.text-success
+                %b C 3
+              %p.text-info.h5
+                =t('form.negative_s')
+              %br
+
+        .row
+          .col-md-6
+            .text-right
+              %i
+                %h6.text-primary Какие средства необходимы для создания ресурсов?
+                %br
+                %h6.text-success Пример:
+
+                %p
+                  %b Средства создания:
+
+                  деньги на покупку доски объявлений, создание и ведение сайта в Интернет
+          .col-md-6
             .form-group.has-success
-              =text_area_tag "pa1[#{discontent.id}][control]", @post.get_pa_by_discontent(discontent, :control, 1), :class => "concept_cond", rows: 4, style: 'width: 100%;'
-          %p.text-info
-            =t('form.control_res')
-            %a.btn.btn-success.btn-xs{type: "button", "data-toggle"=>"modal", "data-target"=>"#prompt11", style:'font-size:10px;'} Пояснения
+              =text_area_tag "pa1[#{discontent.id}][negative_s]", @post.get_pa_by_discontent(discontent, :negative_s, 1), :class => "concept_cond form-control", rows: 14,  style: 'width: 100%;'
+
+        %hr
+        .row
+          .col-md-12
+            .text-center
+              %h6.text-success
+                %b D 1
+              %p.text-info.h5
+                =t('form.control')
+              %br
+
+        .row
+          .col-md-6
+            .text-right
+              %i
+                %h6.text-primary Напишите, кто и как будет контролировать создание и поддержание должных УСЛОВИЙ.
+                %br
+                %h6.text-success Пример:
+
+                %p
+                  %b Контроль:
+
+                  будет осуществляться органом самоуправления жильцов посредством регулярных инспекций
+          .col-md-6
             .form-group.has-success
-              =text_area_tag "pa1[#{discontent.id}][control_r]", @post.get_pa_by_discontent(discontent, :control_r, 1), :class => "concept_cond", rows: 4, style: 'width: 100%;'
+              =text_area_tag "pa1[#{discontent.id}][control]", @post.get_pa_by_discontent(discontent, :control, 1), :class => "concept_cond form-control", rows: 14,  style: 'width: 100%;'
 
-          %p.text-info
-            =t('form.control_s')
-            %a.btn.btn-success.btn-xs{type: "button", "data-toggle"=>"modal", "data-target"=>"#prompt14", style:'font-size:10px;'} Пояснения
+        .row
+          .col-md-12
+            .text-center
+              %h6.text-success
+                %b D 2
+              %p.text-info.h5
+                =t('form.control_res')
+              %br
+
+        .row
+          .col-md-6
+            .text-right
+              %i
+                %h6.text-primary Какие ресурсы требуются для этого контроля?
+                %br
+                %h6.text-success Пример:
+
+                %p
+                  %b Ресурсы для осуществления контроля:
+
+                  Ответсвенный за содержание территории.
+          .col-md-6
             .form-group.has-success
-              =text_area_tag "pa1[#{discontent.id}][control_s]", @post.get_pa_by_discontent(discontent, :control_s, 1), :class => "concept_cond", rows: 4, style: 'width: 100%;'
+              =text_area_tag "pa1[#{discontent.id}][control_r]", @post.get_pa_by_discontent(discontent, :control_r, 1), :class => "concept_cond form-control", rows: 14,  style: 'width: 100%;'
+        .row
+          .col-md-12
+            .text-center
+              %h6.text-success
+                %b D 3
+              %p.text-info.h5
+                =t('form.control_s')
+              %br
 
+        .row
+          .col-md-6
+            .text-right
+              %i
+                %h6.text-primary Какие средства необходимы для создания ресурсов?
+                %br
+                %h6.text-success Пример:
 
+                %p
+                  %b Средства:
 
-          %hr
-          %h5.text-success E.
-          %p.text-info
-            =t('form.obstacles_bcd')
-            %a.btn.btn-success.btn-xs{type: "button", "data-toggle"=>"modal", "data-target"=>"#prompt9", style:'font-size:10px;'} Пояснения
-          .form-group.has-success
-            =text_area_tag "pa1[#{discontent.id}][obstacles]", @post.get_pa_by_discontent(discontent, :obstacles, 1), :class => "concept_cond", rows: 4, style: 'width: 100%;'
+                  Оплата инспекций
+          .col-md-6
+            .form-group.has-success
+              =text_area_tag "pa1[#{discontent.id}][control_s]", @post.get_pa_by_discontent(discontent, :control_s, 1), :class => "concept_cond form-control", rows: 14,  style: 'width: 100%;'
 
-          %hr
-          .panel.panel-info
-            .panel-heading
-              %h5.text-success
-                %b F.*
-              %p.text-info
+        %hr
+        .row
+          .col-md-12
+            .text-center
+              %h6.text-success
+                %b E 1
+              %p.text-info.h5
+                =t('form.obstacles_bcd')
+              %br
+
+        .row
+          .col-md-6
+            .text-right
+              %i
+                %h6.text-primary  Что, вероятно, может помешать в будущем плодотворному функционированию всех перечисленных ресурсов и как с этим предлагается бороться?
+                %br
+                %h6.text-success Пример:
+                %p
+                  %b Вероятные помехи:
+                  Работник окажется запойным (по всему микрорайону развесить агитационные плакаты "Пьянству - БОЙ!") ...
+          .col-md-6
+            .form-group.has-success
+              =text_area_tag "pa1[#{discontent.id}][obstacles]", @post.get_pa_by_discontent(discontent, :obstacles, 1), :class => "concept_cond form-control", rows: 12,  style: 'width: 100%;'
+
+        %hr
+        .row
+          .col-md-12
+            .text-center
+              %h6.text-success
+                %b F 1
+              %p.text-info.h5
                 =t('form.problems')
-                %a.btn.btn-success.btn-xs{type: "button", "data-toggle"=>"modal", "data-target"=>"#prompt5", style:'font-size:10px;'} Пояснения
-              .form-group.has-success
-                =text_area_tag "pa1[#{discontent.id}][problems]", @post.get_pa_by_discontent(discontent, :problems, 1), :class => "concept_cond", rows: 4, style: 'width: 100%;'
+              %br
 
-              %p.text-info
+        .row
+          .col-md-6
+            .text-right
+              %i
+                %h6.text-primary Обоснуйте, что "игра стоит свеч".
+                %br
+                %h6.text-success Пример:
+                %p К сожалению, уход за клумбой потребует значительного труда, однако  ввиду ее красоты предлагается на это пойти.
+          .col-md-6
+            .form-group.has-success
+              =text_area_tag "pa1[#{discontent.id}][problems]", @post.get_pa_by_discontent(discontent, :problems, 1), :class => "concept_cond form-control", rows: 12,  style: 'width: 100%;'
+
+        .row
+          .col-md-12
+            .text-center
+              %h6.text-success
+                %b F 2
+              %p.text-info.h5
                 =t('form.reality')
-                %a.btn.btn-success.btn-xs{type: "button", "data-toggle"=>"modal", "data-target"=>"#prompt6", style:'font-size:10px;'} Пояснения
-              .form-group.has-success
-                =text_area_tag "pa1[#{discontent.id}][reality]",@post.get_pa_by_discontent(discontent, :reality, 1), :class => "concept_cond", rows: 4, style: 'width: 100%;'
+              %br
+
+        .row
+          .col-md-6
+            .text-right
+              %i
+                %h6.text-primary Покажите, что нужные для нововведения ресурсы несложно и недорого создать
+                %br
+                %h6.text-success Пример:
+
+                %p Работника нанять недорого; инструменты и материалы приобрести и организовать полив вполне возможно; жильцы, вероятно, согласятся дать на это деньги.
+          .col-md-6
+            .form-group.has-success
+              =text_area_tag "pa1[#{discontent.id}][reality]",@post.get_pa_by_discontent(discontent, :reality, 1), :class => "concept_cond form-control", rows: 12,  style: 'width: 100%;'
+
+
+
+        -##select0
+        -#  .panel.panel-info
+        -#    .panel-heading
+        -#      %h5.text-success
+        -#        %b A.*
+        -#
+        -#      -#%a.btn.btn-success.btn-xs.pull-right{type: "button", "data-toggle"=>"modal", "data-target"=>"#prompt1", style:'font-size:10px;'} Пояснения
+        -#
+        -#      %p.text-info
+        -#        =t('form.novation_what')
+        -#        %a.btn.btn-success.btn-xs{type: "button", "data-toggle"=>"modal", "data-target"=>"#prompt1", style:'font-size:10px;'} Пояснения
+        -#      .form-group.has-danger
+        -#        =text_area_tag "pa1[#{discontent.id}][name]", @post.get_pa_by_discontent(discontent, :name,1), :class => "concept_cond", rows: 4, style: 'width: 100%;'
+        -#      %p.text-info
+        -#        =t('form.novation_how')
+        -#        %a.btn.btn-success.btn-xs{type: "button", "data-toggle"=>"modal", "data-target"=>"#prompt2", style:'font-size:10px;'} Пояснения
+        -#      .form-group.has-danger
+        -#        =text_area_tag "pa1[#{discontent.id}][content]", @post.get_pa_by_discontent(discontent, :content,1), :class => "concept_cond", rows: 4, style: 'width: 100%;'
+        -#
+        -#
+        -#  .panel.panel-info
+        -#    .panel-heading
+        -#      %h5.text-success
+        -#        %b B.*
+        -#      %p.text-info
+        -#        =t('form.cond')
+        -#        %a.btn.btn-success.btn-xs{type: "button", "data-toggle"=>"modal", "data-target"=>"#prompt3", style:'font-size:10px;'} Пояснения
+        -#        .form-group.has-success
+        -#          =text_area_tag "pa1[#{discontent.id}][positive]", @post.get_pa_by_discontent(discontent, :positive,1), :class => "concept_cond", rows: 4, style: 'width: 100%;'
+        -#      %p.text-info
+        -#        =t('form.cond_res')
+        -#        %a.btn.btn-success.btn-xs{type: "button", "data-toggle"=>"modal", "data-target"=>"#prompt4", style:'font-size:10px;'} Пояснения
+        -#        .form-group.has-success
+        -#          =text_area_tag "pa1[#{discontent.id}][positive_r]", @post.get_pa_by_discontent(discontent, :positive_r,1), :class => "concept_cond", rows: 4, style: 'width: 100%;'
+        -#      %p.text-info
+        -#        =t('form.cond_s')
+        -#        %a.btn.btn-success.btn-xs{type: "button", "data-toggle"=>"modal", "data-target"=>"#prompt12", style:'font-size:10px;'} Пояснения
+        -#        .form-group.has-success
+        -#          =text_area_tag "pa1[#{discontent.id}][positive_s]", @post.get_pa_by_discontent(discontent, :positive_s,1), :class => "concept_cond", rows: 4, style: 'width: 100%;'
+        -#
+        -#  %hr
+        -#  %h5.text-success
+        -#    %b C.
+        -#  %p.text-info
+        -#    =t('form.negative')
+        -#    %a.btn.btn-success.btn-xs{type: "button", "data-toggle"=>"modal", "data-target"=>"#prompt7", style:'font-size:10px;'} Пояснения
+        -#    .form-group.has-success
+        -#      =text_area_tag "pa1[#{discontent.id}][negative]", @post.get_pa_by_discontent(discontent, :negative, 1), :class => "concept_cond", rows: 4, style: 'width: 100%;'
+        -#  %p.text-info
+        -#    =t('form.negative_res')
+        -#    %a.btn.btn-success.btn-xs{type: "button", "data-toggle"=>"modal", "data-target"=>"#prompt8", style:'font-size:10px;'} Пояснения
+        -#    .form-group.has-success
+        -#      =text_area_tag "pa1[#{discontent.id}][negative_r]", @post.get_pa_by_discontent(discontent, :negative_r, 1), :class => "concept_cond", rows: 4, style: 'width: 100%;'
+        -#  %p.text-info
+        -#    =t('form.negative_s')
+        -#    %a.btn.btn-success.btn-xs{type: "button", "data-toggle"=>"modal", "data-target"=>"#prompt13", style:'font-size:10px;'} Пояснения
+        -#    .form-group.has-success
+        -#      =text_area_tag "pa1[#{discontent.id}][negative_s]", @post.get_pa_by_discontent(discontent, :negative_s, 1), :class => "concept_cond", rows: 4, style: 'width: 100%;'
+        -#
+        -#  %hr
+        -#  %h5.text-success
+        -#    %b D.
+        -#  %p.text-info
+        -#    =t('form.control')
+        -#    %a.btn.btn-success.btn-xs{type: "button", "data-toggle"=>"modal", "data-target"=>"#prompt10", style:'font-size:10px;'} Пояснения
+        -#    .form-group.has-success
+        -#      =text_area_tag "pa1[#{discontent.id}][control]", @post.get_pa_by_discontent(discontent, :control, 1), :class => "concept_cond", rows: 4, style: 'width: 100%;'
+        -#  %p.text-info
+        -#    =t('form.control_res')
+        -#    %a.btn.btn-success.btn-xs{type: "button", "data-toggle"=>"modal", "data-target"=>"#prompt11", style:'font-size:10px;'} Пояснения
+        -#    .form-group.has-success
+        -#      =text_area_tag "pa1[#{discontent.id}][control_r]", @post.get_pa_by_discontent(discontent, :control_r, 1), :class => "concept_cond", rows: 4, style: 'width: 100%;'
+        -#
+        -#  %p.text-info
+        -#    =t('form.control_s')
+        -#    %a.btn.btn-success.btn-xs{type: "button", "data-toggle"=>"modal", "data-target"=>"#prompt14", style:'font-size:10px;'} Пояснения
+        -#    .form-group.has-success
+        -#      =text_area_tag "pa1[#{discontent.id}][control_s]", @post.get_pa_by_discontent(discontent, :control_s, 1), :class => "concept_cond", rows: 4, style: 'width: 100%;'
+        -#
+        -#
+        -#
+        -#  %hr
+        -#  %h5.text-success E.
+        -#  %p.text-info
+        -#    =t('form.obstacles_bcd')
+        -#    %a.btn.btn-success.btn-xs{type: "button", "data-toggle"=>"modal", "data-target"=>"#prompt9", style:'font-size:10px;'} Пояснения
+        -#  .form-group.has-success
+        -#    =text_area_tag "pa1[#{discontent.id}][obstacles]", @post.get_pa_by_discontent(discontent, :obstacles, 1), :class => "concept_cond", rows: 4, style: 'width: 100%;'
+        -#
+        -#  %hr
+        -#  .panel.panel-info
+        -#    .panel-heading
+        -#      %h5.text-success
+        -#        %b F.*
+        -#      %p.text-info
+        -#        =t('form.problems')
+        -#        %a.btn.btn-success.btn-xs{type: "button", "data-toggle"=>"modal", "data-target"=>"#prompt5", style:'font-size:10px;'} Пояснения
+        -#      .form-group.has-success
+        -#        =text_area_tag "pa1[#{discontent.id}][problems]", @post.get_pa_by_discontent(discontent, :problems, 1), :class => "concept_cond", rows: 4, style: 'width: 100%;'
+        -#
+        -#      %p.text-info
+        -#        =t('form.reality')
+        -#        %a.btn.btn-success.btn-xs{type: "button", "data-toggle"=>"modal", "data-target"=>"#prompt6", style:'font-size:10px;'} Пояснения
+        -#      .form-group.has-success
+        -#        =text_area_tag "pa1[#{discontent.id}][reality]",@post.get_pa_by_discontent(discontent, :reality, 1), :class => "concept_cond", rows: 4, style: 'width: 100%;'

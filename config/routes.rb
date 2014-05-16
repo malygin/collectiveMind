@@ -79,6 +79,8 @@ scope '/project/:project' do
   get 'discontent/posts/unions', to:  'discontent/posts#unions'
   post 'concept/posts/add_dispost', to:  'concept/posts#add_dispost'
   put 'concept/posts/next_vote', to:  'concept/posts#next_vote'
+  post 'plan/posts/get_concepts', to:  'plan/posts#get_concepts'
+  post 'plan/posts/add_concept', to:  'plan/posts#add_concept'
 
   namespace :discontent do
     resources :aspects

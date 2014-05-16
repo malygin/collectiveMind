@@ -1,0 +1,5 @@
+-unless @concepts.empty?
+  $('#select_concept').append('<option id="option0" value="0">Выберите нововведение</option>');
+  -@concepts.each do |cp|
+    $('#select_concept').append('<option id="option_#{cp.id}" value="#{cp.id}">#{cp.title}</option>');
+  $("#select_concept").attr("disabled", false);

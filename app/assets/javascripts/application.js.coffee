@@ -254,3 +254,54 @@ $('#select_for_aspects').on 'change', ->
   ).click ->
     $(this).autocomplete "search", ""
     return
+
+$(document).ready ->
+  $("#select_aspect").change ->
+    optsel = $("#option_for_select_concept")
+    project_id = parseInt(optsel.attr('project'))
+    aspect_id = $(this).val()
+    if aspect_id is "0"
+      $("#select_concept").attr "disabled", true
+      return (false)
+    $("#select_concept").attr "disabled", true
+    $("#select_concept").empty()
+    if aspect_id != ''
+      $.ajax
+        url: "/project/#{project_id}/plan/posts/get_concepts"
+        type: "post"
+        data:
+          aspect_id: aspect_id
+
+  $("#select_concept").change ->
+    concept_id = $(this).val()
+    if concept_id is "0"
+      return (false)
+    title=$(this).find('option:selected').text()
+    $(this).find('option:selected').remove()
+    func = "'#{concept_id}','#{title}'"
+    $('#aspect_concepts').append('<div id="concept_aspect_'+concept_id+'" style="display:none;height:0;"><input type="hidden" name="plan_aspect_concepts[]" value="'+concept_id+'"/><span class="glyphicon glyphicon-remove text-danger pull-left" onclick="remove_aspect_concept('+func+');" style="cursor:pointer;text-decoration:none;font-size:15px;"></span><span id="'+concept_id+'" class="span_aspect label label-t">'+title+'</span></br></div>')
+    $('#concept_aspect_'+concept_id).css('display','block').animate({height: 20, opacity:1}, 500).effect("highlight", {color: '#f5cecd'}, 500)
+
+@remove_aspect_concept= (val,text)->
+  $('#concept_aspect_'+val).animate({height: 0, opacity: 0.000}, 1000, ->
+    $(this).remove())
+  $('#select_concept').append('<option id="option_'+val+'" value="'+val+'">'+text+'</option>')
+
+@empty_modal_plan= ->
+  $("#select_aspect option:first").prop "selected", "selected"
+  $("#select_concept").empty()
+  $("#select_concept").attr "disabled", true
+  $("#aspect_concepts").empty()
+
+
+
+
+#aspect_concepts
+#    $("#select_concept").html "<option>загрузка...</option>"
+#      $("#select_concept").html "<option>- выберите нововведение -</option>"
+#@load_discontent_for_cond= (el)->
+#  $.ajax({
+#    type: "POST",
+#    url: "/project/1/plan/posts/get_cond",
+#    data: { pa: $('#select_'+el).val() },
+#  })

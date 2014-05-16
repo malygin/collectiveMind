@@ -3,6 +3,7 @@
 class Plan::PostsController < PostsController
 
   layout 'life_tape/posts2', :only => [:new, :edit, :show]
+  autocomplete :concept_post, :resource, :class_name => 'Concept::Post' , :full => true
 
   def current_model
     Plan::Post
@@ -27,7 +28,8 @@ class Plan::PostsController < PostsController
 
     @news = ExpertNews::Post.first  
     @status = params[:status]
-    @aspects = Discontent::Aspect.where(:project_id => @project)
+    #@aspects = Discontent::Aspect.where(:project_id => @project)
+    @aspects = Discontent::Aspect.where(:project_id => @project, :status => 0)
     add_breadcrumb I18n.t('stages.plan'), plan_posts_path(@project)
 
 
@@ -37,7 +39,7 @@ class Plan::PostsController < PostsController
   def index
     @posts = current_model.where(:project_id => @project, :status => 0).order('created_at DESC').paginate(:page => params[:page])
     respond_to do |format|
-      format.html # index.html.erb
+      format.html {render :layout => 'application_two_column'}
       format.json { render json: @posts }
     end
   end
@@ -47,7 +49,7 @@ class Plan::PostsController < PostsController
     @post = current_model.new
 
     respond_to do |format|
-      format.html {render :layout => 'application_two_column'}
+      format.html {render :layout => 'application_one_column'}
     end
   end
 
@@ -97,7 +99,7 @@ class Plan::PostsController < PostsController
     add_breadcrumb 'Просмотр записи', polymorphic_path(@post, :project => @project.id)
     @comment = comment_model.new
     @comments = @post.comments.paginate(:page => params[:page], :per_page => 30)
-    render 'show' , :layout => 'application_two_column'
+    render 'show' , :layout => 'application_one_column'
   end
 
   def edit
@@ -106,7 +108,7 @@ class Plan::PostsController < PostsController
 
     add_breadcrumb 'Редактирование записи', polymorphic_path(@post, :project => @project.id)
 
-    render 'edit' , :layout => 'application_two_column'
+    render 'edit' , :layout => 'application_one_column'
   end
 
 
@@ -212,5 +214,26 @@ end
    end
 
  end
+
+  def get_concepts
+    @project = Core::Project.find(params[:project])
+    @concepts = Concept::PostAspect.plan_concepts(@project,params[:aspect_id].to_i)
+    respond_to do |format|
+      format.js
+    end
+  end
+
+  def add_concept
+    @project = Core::Project.find(params[:project])
+    @concept_posts = params[:plan_aspect_concepts]
+    unless @concept_posts.nil?
+      @concept_posts.each do |cp|
+
+      end
+    end
+    respond_to do |format|
+      format.js
+    end
+  end
 
 end
