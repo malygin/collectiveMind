@@ -262,6 +262,9 @@ end
             @cond.discontent_aspect_id = @concept.discontent_aspect_id
             @cond.concept_post_aspect = @concept
             @cond.save
+            @concept.concept_post.concept_post_resources.each do |rs|
+              @cond.plan_post_resources.build(:name => rs.name, :desc => rs.desc).save  if rs!=''
+            end
             @cond_add << @cond
           end
         end
