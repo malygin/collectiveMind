@@ -3,7 +3,7 @@
 class Plan::PostsController < PostsController
 
   layout 'life_tape/posts2', :only => [:new, :edit, :show]
-  autocomplete :concept_post, :resource, :class_name => 'Concept::Post' , :full => true
+  #autocomplete :concept_post, :resource, :class_name => 'Concept::Post' , :full => true
 
   def current_model
     Plan::Post
@@ -45,7 +45,7 @@ class Plan::PostsController < PostsController
   end
 
   def new
-    @discontents = Discontent::Post.required_posts(@project)
+    #@discontents = Discontent::Post.required_posts(@project)
     @post = current_model.new
 
     respond_to do |format|
@@ -62,30 +62,30 @@ class Plan::PostsController < PostsController
     @plan_post.status = 0
 
 
-    unless params[:pa].nil?
-      params[:pa].each do |pa|
-        p = Plan::PostAspect.new(pa[1])
-        p.first_stage= 0
-        d = Discontent::Post.find(pa[0])
-        p.discontent = d
-        @plan_post.post_aspects_other << p
-      end
-    end
-
-    unless params[:pa1].nil?
-      params[:pa1].each do |pa|
-        p = Plan::PostAspect.new(pa[1])
-        p.first_stage= 1
-        d = Discontent::Post.find(pa[0])
-        p.discontent = d
-        @plan_post.post_aspects_first << p
-      end
-    end
+    #unless params[:pa].nil?
+    #  params[:pa].each do |pa|
+    #    p = Plan::PostAspect.new(pa[1])
+    #    p.first_stage= 0
+    #    d = Discontent::Post.find(pa[0])
+    #    p.discontent = d
+    #    @plan_post.post_aspects_other << p
+    #  end
+    #end
+    #
+    #unless params[:pa1].nil?
+    #  params[:pa1].each do |pa|
+    #    p = Plan::PostAspect.new(pa[1])
+    #    p.first_stage= 1
+    #    d = Discontent::Post.find(pa[0])
+    #    p.discontent = d
+    #    @plan_post.post_aspects_first << p
+    #  end
+    #end
 
     respond_to do |format|
       if @plan_post.save!
-         current_user.journals.build(:type_event=>'plan_post_save', :body=>@plan_post.id,   :project => @project).save!
-        format.html { redirect_to   plan_post_path(project: @project, id: @plan_post) }
+        current_user.journals.build(:type_event=>'plan_post_save', :body=>@plan_post.id,   :project => @project).save!
+        format.html { redirect_to   edit_plan_post_path(project: @project, id: @plan_post) }
         format.json { render json: @plan_post, status: :created, location: @plan_post }
       else
         format.html { render action: 'new' }
@@ -104,7 +104,7 @@ class Plan::PostsController < PostsController
 
   def edit
     @post = Plan::Post.find(params[:id])
-    @discontents = Discontent::Post.required_posts(@project)
+    #@discontents = Discontent::Post.required_posts(@project)
 
     add_breadcrumb 'Редактирование записи', polymorphic_path(@post, :project => @project.id)
 
@@ -118,23 +118,31 @@ class Plan::PostsController < PostsController
     @plan_post.update_attributes(params[:plan_post])
     @plan_post.post_aspects.destroy_all
 
-    unless params[:pa].nil?
-      params[:pa].each do |pa|
-        p = Plan::PostAspect.new(pa[1])
-        p.first_stage= 0
-        d = Discontent::Post.find(pa[0])
-        p.discontent = d
-        @plan_post.post_aspects_other << p
-      end
-    end
+    #unless params[:pa].nil?
+    #  params[:pa].each do |pa|
+    #    p = Plan::PostAspect.new(pa[1])
+    #    p.first_stage= 0
+    #    d = Discontent::Post.find(pa[0])
+    #    p.discontent = d
+    #    @plan_post.post_aspects_other << p
+    #  end
+    #end
 
     unless params[:pa1].nil?
       params[:pa1].each do |pa|
         p = Plan::PostAspect.new(pa[1])
-        p.first_stage= 1
-        d = Discontent::Post.find(pa[0])
-        p.discontent = d
-        @plan_post.post_aspects_first << p
+        p.plan_post = @plan_post
+        p.save
+        #p.first_stage= 1
+        #d = Discontent::Post.find(pa[0])
+        #p.discontent = d
+        #@plan_post.post_aspects_first << p
+        Plan::PostResource.by_post(pa[0]).destroy_all
+        unless params[:resor][pa[0]].nil?
+          params[:resor][pa[0]].each_with_index do |r,i|
+            p.plan_post_resources.build(:name => r, :desc => params[:res][pa[0]][i]).save  if r!=''
+          end
+        end
       end
     end
 
@@ -225,10 +233,38 @@ end
 
   def add_concept
     @project = Core::Project.find(params[:project])
+    @post = Plan::Post.find(params[:id])
+    @aspects = Discontent::Aspect.where(:project_id => @project, :status => 0)
     @concept_posts = params[:plan_aspect_concepts]
-    unless @concept_posts.nil?
-      @concept_posts.each do |cp|
-
+    @first_stage = params[:first_stage]
+    @concept_empty = params[:concept_empty]
+    @save_form = params[:save_form]
+    if @save_form
+      @cond_add = []
+      if @concept_empty == "1"
+        @cond = Plan::PostAspect.create(:plan_post_id => @post.id, :first_stage => @first_stage.to_i, :title => params[:new_post_aspect_title])
+        @cond_add << @cond
+      else
+        unless @concept_posts.nil?
+          @concept_posts.each do |cp|
+            @concept = Concept::PostAspect.find(cp)
+            @cond = Plan::PostAspect.new
+            @cond.first_stage = @first_stage.to_i
+            @cond.plan_post = @post
+            @cond.title= @concept.title
+            @cond.name= @concept.name
+            @cond.content = @concept.content
+            @cond.positive = @concept.positive
+            @cond.negative = @concept.negative
+            @cond.negative_r = @concept.negative_r
+            @cond.reality = @concept.reality
+            @cond.problems = @concept.problems
+            @cond.discontent_aspect_id = @concept.discontent_aspect_id
+            @cond.concept_post_aspect = @concept
+            @cond.save
+            @cond_add << @cond
+          end
+        end
       end
     end
     respond_to do |format|

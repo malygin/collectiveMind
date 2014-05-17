@@ -1,4 +1,4 @@
-%div.tab-pane(id="fdis_#{discontent.id}")
+%div.tab-pane(id="asp_#{first_cond.id}")
   .tab-content
     .row
       .col-md-3
@@ -8,27 +8,27 @@
       %div.panel-body
         -#%button.btn.btn-info.btn-sm.pull-right(data-toggle="modal" data-target="#modalStage3")
         -#  Показать пример
-        -unless discontent.nil?
-          %h5.text-info Устраняемое несовершенство:
-          =render partial:'discontent/posts/post_short2', object: discontent
-          -#%h5.text-info Устраняемые несовершенства (проблемы):
-          -#-@post.concept_disposts.each  do |cd|
-          -#  =render partial:'discontent/posts/post_short2', object: cd
-          %br
-          %hr
+        -unless first_cond.concept_post_aspect_id.nil?
+          %h5.text-info Устраняемые несовершенства (проблемы):
+          -first_cond.concept_post_aspect.concept_post.concept_disposts.each  do |cd|
+            =render partial:'discontent/posts/post_short2', object: cd
+            %br
+            %hr
         -#%span.h4.text-success Выберите нововведение:
         -#%select.form-control(onchange="load_discontent_for_cond1(#{discontent.id});" id="select1_#{discontent.id}")
         -#  %option#option0(value="option_null")
         -#  - discontent.concept_conditions.each do |cd|
         -#    %option#option1(value="#{cd.id}")=cd.name
-
+        %input(type="hidden" name="pa1[#{first_cond.id}][first_stage]" value="#{first_cond.first_stage}")
+        %input(type="hidden" name="pa1[#{first_cond.id}][discontent_aspect_id]" value="#{first_cond.discontent_aspect_id}")
+        %input(type="hidden" name="pa1[#{first_cond.id}][concept_post_aspect_id]" value="#{first_cond.concept_post_aspect_id}")
         .row
           .col-md-12
             .text-center
               %p.text-info.h5
                 Краткое название нововведения
               %br
-              =text_field_tag "pa1[#{discontent.id}][title]", @post.get_pa_by_discontent(discontent, :title,1), style: 'width: 100%; height: 30px', placeholder:'Введетие краткое название для нововведения'
+              =text_field_tag "pa1[#{first_cond.id}][title]", first_cond.title, style: 'width: 100%; height: 30px', placeholder:'Введетие краткое название для нововведения'
               %br
         .row
           .col-md-12
@@ -59,7 +59,7 @@
                 %p Большой зеленый газон по всему пустырю  с клумбой с посредине. Клумба засеяна красными многолетными цветами.
           .col-md-6
             .form-group.has-danger
-              =text_area_tag "pa1[#{discontent.id}][name]", @post.get_pa_by_discontent(discontent, :name,1), :class => "concept_cond form-control", rows: 12, style: 'width: 100%;'
+              =text_area_tag "pa1[#{first_cond.id}][name]", first_cond.name, :class => "concept_cond form-control", rows: 12, style: 'width: 100%;'
         .row
           .col-md-12
             .text-center
@@ -77,7 +77,7 @@
                 %p Трава газона и декоративные растения на клумбе будут привлекательны на вид и предотвращать появление пыли.
           .col-md-6
             .form-group.has-danger
-              =text_area_tag "pa1[#{discontent.id}][content]", @post.get_pa_by_discontent(discontent, :content,1),  :class => "concept_cond form-control", rows: 12, style: 'width: 100%;'
+              =text_area_tag "pa1[#{first_cond.id}][content]", first_cond.content,  :class => "concept_cond form-control", rows: 12, style: 'width: 100%;'
         %hr
         .row
           .col-md-12
@@ -99,7 +99,7 @@
                   регулярный полив;  нужно засевать газон травой, а на клумбу высаживать растения; почву периодически вскапывать, удобрять и пропалывать; необходимо весной собирать деньги у жильцов.
           .col-md-6
             .form-group.has-success
-              =text_area_tag "pa1[#{discontent.id}][positive]", @post.get_pa_by_discontent(discontent, :positive,1), :class => "concept_cond form-control", rows: 12, style: 'width: 100%;'
+              =text_area_tag "pa1[#{first_cond.id}][positive]", first_cond.positive, :class => "concept_cond form-control", rows: 12, style: 'width: 100%;'
         .row
           .col-md-12
             .text-center
@@ -130,34 +130,32 @@
                   %br
                   помещение (для хранения технических средств)...
           .col-md-6
-            -#.form-group.has-success#resources
-            -#  - if @post.persisted?
-            -#    -@post.concept_post_resources.each do |r|
-            -#      .panel.panel-default
-            -#        .panel-body
-            -#          %span.glyphicon.glyphicon-remove.text-danger.pull-right{onclick: "$(this).parent().parent().remove();", style: "cursor:pointer;text-decoration:none;font-size:15px;"}
-            -#
-            -#          =f.autocomplete_field :resource, autocomplete_concept_post_resource_concept_posts_path, :"min-length" => 0, value: r.name,  class: 'form-control autocomplete',placeholder: 'Введите свой ресурс или выберите из списка', name: 'resor[]'
-            -#          %br
-            -#          = text_area_tag 'res[]', r.desc, class: 'form-control', placeholder: 'Пояснение к ресурсу'
-            -#  -else
-            -#
-            -#
-            -#    .panel.panel-default
-            -#      .panel-body
-            -#        %span.glyphicon.glyphicon-remove.text-danger.pull-right{onclick: "$(this).parent().parent().remove();", style: "cursor:pointer;text-decoration:none;font-size:15px;"}
-            -#
-            -#        =f.autocomplete_field :resource, autocomplete_concept_post_resource_concept_posts_path, :"min-length" => 0,  class: 'form-control autocomplete',placeholder: 'Введите свой ресурс или выберите из списка', name: 'resor[]'
-            -#        %br
-            -#        = text_area_tag 'res[]', '', class: 'form-control', placeholder: 'Пояснение к ресурсу'
-            -#    .panel.panel-default
-            -#      .panel-body
-            -#        %span.glyphicon.glyphicon-remove.text-danger.pull-right{onclick: "$(this).parent().parent().remove();", style: "cursor:pointer;text-decoration:none;font-size:15px;"}
-            -#
-            -#        =f.autocomplete_field :resource, autocomplete_concept_post_resource_concept_posts_path, :"min-length" => 0,  class: 'form-control autocomplete',placeholder: 'Введите свой ресурс или выберите из списка', name: 'resor[]'
-            -#        %br
-            -#        = text_area_tag 'res[]', '', class: 'form-control', placeholder: 'Пояснение к ресурсу'
-            -#%a.btn.btn-success{onclick:"return add_new_resource_to_concept(); "} Добавить ресурс
+            .form-group.has-success{:id => "resources_#{first_cond.id}"}
+              - unless first_cond.plan_post_resources.empty?
+                -first_cond.plan_post_resources.each do |r|
+                  .panel.panel-default
+                    .panel-body
+                      %span.glyphicon.glyphicon-remove.text-danger.pull-right{onclick: "$(this).parent().parent().remove();", style: "cursor:pointer;text-decoration:none;font-size:15px;"}
+
+                      =autocomplete_field_tag "resor[#{first_cond.id}][]",'', autocomplete_concept_post_resource_concept_posts_path, :"min-length" => 0, value: r.name,  class: 'form-control autocomplete',placeholder: 'Введите свой ресурс или выберите из списка'
+                      %br
+                      = text_area_tag "res[#{first_cond.id}][]", r.desc, class: 'form-control', placeholder: 'Пояснение к ресурсу'
+              -else
+                .panel.panel-default
+                  .panel-body
+                    %span.glyphicon.glyphicon-remove.text-danger.pull-right{onclick: "$(this).parent().parent().remove();", style: "cursor:pointer;text-decoration:none;font-size:15px;"}
+
+                    =autocomplete_field_tag "resor[#{first_cond.id}][]",'', autocomplete_concept_post_resource_concept_posts_path, :"min-length" => 0,  class: 'form-control autocomplete',placeholder: 'Введите свой ресурс или выберите из списка'
+                    %br
+                    = text_area_tag "res[#{first_cond.id}][]", '', class: 'form-control', placeholder: 'Пояснение к ресурсу'
+                .panel.panel-default
+                  .panel-body
+                    %span.glyphicon.glyphicon-remove.text-danger.pull-right{onclick: "$(this).parent().parent().remove();", style: "cursor:pointer;text-decoration:none;font-size:15px;"}
+
+                    =autocomplete_field_tag "resor[#{first_cond.id}][]",'', autocomplete_concept_post_resource_concept_posts_path, :"min-length" => 0,  class: 'form-control autocomplete',placeholder: 'Введите свой ресурс или выберите из списка'
+                    %br
+                    = text_area_tag "res[#{first_cond.id}][]", '', class: 'form-control', placeholder: 'Пояснение к ресурсу'
+            %a.btn.btn-success{onclick:"return add_new_resource_to_plan(#{first_cond.id}); "} Добавить ресурс
 
         .row
           .col-md-12
@@ -179,7 +177,7 @@
                   Объявление для найма работника; деньги, собранные с жильцов для оплаты работника, покупки инструментов и аренды помощения
           .col-md-6
             .form-group.has-success
-              =text_area_tag "pa1[#{discontent.id}][positive_s]", @post.get_pa_by_discontent(discontent, :positive_s,1), :class => "concept_cond form-control", rows: 12, style: 'width: 100%;'
+              =text_area_tag "pa1[#{first_cond.id}][positive_s]", first_cond.positive_s, :class => "concept_cond form-control", rows: 12, style: 'width: 100%;'
         %hr
         .row
           .col-md-12
@@ -202,7 +200,7 @@
                   Конфликты из-за того, что некоторые жильцы могут отказаться делать денежные взносы.
           .col-md-6
             .form-group.has-success
-              =text_area_tag "pa1[#{discontent.id}][negative]", @post.get_pa_by_discontent(discontent, :negative, 1),  :class => "concept_cond form-control", rows: 14,  style: 'width: 100%;'
+              =text_area_tag "pa1[#{first_cond.id}][negative]", first_cond.negative,  :class => "concept_cond form-control", rows: 14,  style: 'width: 100%;'
 
         .row
           .col-md-12
@@ -225,7 +223,7 @@
                   Средства широкого публичного оповещения о должниках
           .col-md-6
             .form-group.has-success
-              =text_area_tag "pa1[#{discontent.id}][negative_r]", @post.get_pa_by_discontent(discontent, :negative_r, 1), :class => "concept_cond form-control", rows: 14,  style: 'width: 100%;'
+              =text_area_tag "pa1[#{first_cond.id}][negative_r]", first_cond.negative_r, :class => "concept_cond form-control", rows: 14,  style: 'width: 100%;'
 
         .row
           .col-md-12
@@ -250,7 +248,7 @@
                   деньги на покупку доски объявлений, создание и ведение сайта в Интернет
           .col-md-6
             .form-group.has-success
-              =text_area_tag "pa1[#{discontent.id}][negative_s]", @post.get_pa_by_discontent(discontent, :negative_s, 1), :class => "concept_cond form-control", rows: 14,  style: 'width: 100%;'
+              =text_area_tag "pa1[#{first_cond.id}][negative_s]", first_cond.negative_s, :class => "concept_cond form-control", rows: 14,  style: 'width: 100%;'
 
         %hr
         .row
@@ -276,7 +274,7 @@
                   будет осуществляться органом самоуправления жильцов посредством регулярных инспекций
           .col-md-6
             .form-group.has-success
-              =text_area_tag "pa1[#{discontent.id}][control]", @post.get_pa_by_discontent(discontent, :control, 1), :class => "concept_cond form-control", rows: 14,  style: 'width: 100%;'
+              =text_area_tag "pa1[#{first_cond.id}][control]", first_cond.control, :class => "concept_cond form-control", rows: 14,  style: 'width: 100%;'
 
         .row
           .col-md-12
@@ -301,7 +299,7 @@
                   Ответсвенный за содержание территории.
           .col-md-6
             .form-group.has-success
-              =text_area_tag "pa1[#{discontent.id}][control_r]", @post.get_pa_by_discontent(discontent, :control_r, 1), :class => "concept_cond form-control", rows: 14,  style: 'width: 100%;'
+              =text_area_tag "pa1[#{first_cond.id}][control_r]", first_cond.control_r, :class => "concept_cond form-control", rows: 14,  style: 'width: 100%;'
         .row
           .col-md-12
             .text-center
@@ -325,7 +323,7 @@
                   Оплата инспекций
           .col-md-6
             .form-group.has-success
-              =text_area_tag "pa1[#{discontent.id}][control_s]", @post.get_pa_by_discontent(discontent, :control_s, 1), :class => "concept_cond form-control", rows: 14,  style: 'width: 100%;'
+              =text_area_tag "pa1[#{first_cond.id}][control_s]", first_cond.control_s, :class => "concept_cond form-control", rows: 14,  style: 'width: 100%;'
 
         %hr
         .row
@@ -349,7 +347,7 @@
                   Работник окажется запойным (по всему микрорайону развесить агитационные плакаты "Пьянству - БОЙ!") ...
           .col-md-6
             .form-group.has-success
-              =text_area_tag "pa1[#{discontent.id}][obstacles]", @post.get_pa_by_discontent(discontent, :obstacles, 1), :class => "concept_cond form-control", rows: 12,  style: 'width: 100%;'
+              =text_area_tag "pa1[#{first_cond.id}][obstacles]", first_cond.obstacles, :class => "concept_cond form-control", rows: 12,  style: 'width: 100%;'
 
         %hr
         .row
@@ -371,7 +369,7 @@
                 %p К сожалению, уход за клумбой потребует значительного труда, однако  ввиду ее красоты предлагается на это пойти.
           .col-md-6
             .form-group.has-success
-              =text_area_tag "pa1[#{discontent.id}][problems]", @post.get_pa_by_discontent(discontent, :problems, 1), :class => "concept_cond form-control", rows: 12,  style: 'width: 100%;'
+              =text_area_tag "pa1[#{first_cond.id}][problems]", first_cond.problems, :class => "concept_cond form-control", rows: 12,  style: 'width: 100%;'
 
         .row
           .col-md-12
@@ -393,7 +391,7 @@
                 %p Работника нанять недорого; инструменты и материалы приобрести и организовать полив вполне возможно; жильцы, вероятно, согласятся дать на это деньги.
           .col-md-6
             .form-group.has-success
-              =text_area_tag "pa1[#{discontent.id}][reality]",@post.get_pa_by_discontent(discontent, :reality, 1), :class => "concept_cond form-control", rows: 12,  style: 'width: 100%;'
+              =text_area_tag "pa1[#{first_cond.id}][reality]",first_cond.reality, :class => "concept_cond form-control", rows: 12,  style: 'width: 100%;'
 
 
 

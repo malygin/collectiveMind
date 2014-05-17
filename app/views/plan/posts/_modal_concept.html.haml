@@ -6,51 +6,34 @@
         %h4#myModalLabel.modal-title Добавление нововведений
       .modal-body
         #option_for_select_concept(project="#{@project.id}")
-        -#= form_for  @post, :url => {:project => @project.id, :action => @post.persisted? ? 'update' : 'create'},   :html => { :class => 'new_or_edit' }do |f|
-        = form_tag(plan_posts_add_concept_path(@project),{ method: :post,remote: true,  id: 'form_add_concept' }) do
-          %h4.text-primary Выберите тему:
-          %br
-
-          %select.form-control#select_aspect
-            %option#option0(value="0") Выберите тему
-            - @aspects.each do |asp|
-              %option(value="#{asp.id}")=asp.content
-
-
-          %br
-          %hr
-          %h4.text-primary Выберите нововведение:
-          %br
-          %select.form-control#select_concept(disabled="disabled")
-            -#%option#option0(value="0") Выберите нововведение
-
-          %hr
-          #aspect_concepts
-
-          -#= select_tag 'select_aspect', options_from_collection_for_select(@aspects, "id", "content"),
-          -# :prompt => 'Выберите тему' , style:'margin-left:15px; margin-top:10px; height: 30px;'
-          -#%span.h4.text-success Выберите тему:
-          -#(onchange="load_discontent_for_cond(#{aspect.id});" id="select1_#{acpect.id}")
-          -#select_aspect
-          -#    %select name="country_id" id="country_id">
-          -#        <option value="0">- выберите страну -</option>
-          -#        <option value="1">Россия</option>
-          -#        <option value="2">Украина</option>
-          -#        <option value="3">Беларусь</option>
-          -#    </select>
-          -#    <p>Город:</p>
-          -#    <select name="region_id" id="region_id" disabled="disabled">
-          -#        <option value="0">- выберите город -</option>
-          -#    </select>
-          -#%br
-          -#%h5.text-success Выберите нововведение
+        -#= form_for  @post, :url => {:project => @project.id, :action => 'add_concept'}, :remote => true, :method => :put, :id => 'form_add_concept' do |f|
+        = form_tag(add_concept_plan_post_path(@project,@post,save_form:true,concept_empty:@concept_empty,first_stage:@first_stage), {method: :put, remote: true,  id: 'form_add_concept' }) do
+          -if @concept_empty == "0"
+            %h4.text-primary Выберите тему:
+            %br
+            %select.form-control#select_aspect(onchange="plan_select_aspect(this);")
+              %option#option0(value="0") Выберите тему
+              - @aspects.each do |asp|
+                %option(value="#{asp.id}")=asp.content
+            %br
+            %hr
+            %h4.text-primary Выберите нововведение:
+            %br
+            %select.form-control#select_concept(disabled="disabled" onchange="plan_select_concept(this);")
+            %hr
+            #aspect_concepts
+          -if @concept_empty == "1"
+            %h4.text-primary Напишите название своего нововведения:
+            %input.form-control(type="text" name="new_post_aspect_title" style='width: 100%; height: 30px' placeholder='Введетие краткое название для нововведения')
           %br
           %hr
           .row.pull-right
             %button.btn.btn-primary(type = "button" data-dismiss="modal") Закрыть
             %input.btn.btn-success{:type => "submit", :value => "Сохранить"}
-            -#=link_to({:action => :destroy_note, :id => post_field.id,:note_id => dpn.id, :type_field => type_fd},:remote => true,:method => :put, :confirm => 'Удалить замечание?',:id => "destroy_post_note_#{dpn.id}") do
 
       .modal-footer
-      -#  %button.btn.btn-primary(type = "button" data-dismiss="modal") Закрыть!
-      -#  %input.btn.btn-success(type="submit" value="Отправить" name="commit")
+
+
+-#= select_tag 'select_aspect', options_from_collection_for_select(@aspects, "id", "content"),
+-# :prompt => 'Выберите тему' , style:'margin-left:15px; margin-top:10px; height: 30px;'
+-#(onchange="load_discontent_for_cond(#{aspect.id});" id="select1_#{acpect.id}")
