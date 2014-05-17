@@ -294,6 +294,12 @@ $('#select_for_aspects').on 'change', ->
   ).click ->
     $(this).autocomplete "search", ""
     return
+@autocomplete_initialized= ->
+  $("input.autocomplete ").autocomplete(
+    minLength: 0
+  ).click ->
+    $(this).autocomplete "search", ""
+    return
 
 
 #aspect_concepts
