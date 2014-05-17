@@ -128,6 +128,7 @@ module ApplicationHelper
   end
 
 
+<<<<<<< HEAD
 def discontent_style_name(dis)
 	case dis
 		when 0 		
@@ -172,19 +173,54 @@ def column_for_concept_type(type_fd)
       'stat_reality'
     else
       nil
+=======
+  def discontent_style_name(dis)
+    case dis
+      when 0
+        content_tag :span,'Отсутствующие достоинства', class: 'label label-p'
+      when 1
+        content_tag :span, 'Имеющиеся недостатки', class: 'label label-n'
+      else
+        'не определена'
+    end
+>>>>>>> theplan
   end
 end
 
-  def wrap(content,length = 30)
-    sanitize(raw(content.split.map{ |s| wrap_long_string(s,length) }.join(' ')))
+
+  def column_for_type_field(type_fd)
+    case type_fd
+      when 1
+        'status_content'
+      when 2
+        'status_whered'
+      when 3
+        'status_whend'
+      else
+        null
+    end
   end
 
-  def wrap_long_string(text, max_width = 30)
-    zero_width_space = "&#8203;"
-    regex = /.{1,#{max_width}}/
-    (text.length < max_width) ? text :
-        text.scan(regex).join(zero_width_space)
+  def column_for_concept_type(type_fd)
+    case type_fd
+      when 1
+        'stat_name'
+      when 2
+        'stat_content'
+      when 3
+        'stat_positive'
+      when 4
+        'stat_positive_r'
+      when 5
+        'stat_negative'
+      when 6
+        'stat_negative_r'
+      when 7
+        'stat_problems'
+      when 8
+        'stat_reality'
+      else
+        null
+    end
   end
-
-
 end

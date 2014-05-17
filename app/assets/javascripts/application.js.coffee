@@ -249,3 +249,59 @@ $('#select_for_aspects').on 'change', ->
   ).click ->
     $(this).autocomplete "search", ""
     return
+
+@plan_select_aspect= (el)->
+  optsel = $("#option_for_select_concept")
+  project_id = parseInt(optsel.attr('project'))
+  aspect_id = $(el).val()
+  if aspect_id is "0"
+    $("#select_concept").attr "disabled", true
+    return (false)
+  $("#select_concept").attr "disabled", true
+  $("#select_concept").empty()
+  if aspect_id != ''
+    $.ajax
+      url: "/project/#{project_id}/plan/posts/get_concepts"
+      type: "post"
+      data:
+        aspect_id: aspect_id
+
+@plan_select_concept= (el)->
+  concept_id = $(el).val()
+  if concept_id is "0"
+    return (false)
+  title=$(el).find('option:selected').text()
+  $(el).find('option:selected').remove()
+  func = "'#{concept_id}','#{title}'"
+  $('#aspect_concepts').append('<div id="concept_aspect_'+concept_id+'" style="display:none;height:0;"><input type="hidden" name="plan_aspect_concepts[]" value="'+concept_id+'"/><span class="glyphicon glyphicon-remove text-danger pull-left" onclick="remove_aspect_concept('+func+');" style="cursor:pointer;text-decoration:none;font-size:15px;"></span><span id="'+concept_id+'" class="span_aspect label label-t">'+title+'</span></br></div>')
+  $('#concept_aspect_'+concept_id).css('display','block').animate({height: 20, opacity:1}, 500).effect("highlight", {color: '#f5cecd'}, 500)
+
+@remove_aspect_concept= (val,text)->
+  $('#concept_aspect_'+val).animate({height: 0, opacity: 0.000}, 1000, ->
+    $(el).remove())
+  $('#select_concept').append('<option id="option_'+val+'" value="'+val+'">'+text+'</option>')
+
+@empty_modal_plan= ->
+  $("#select_aspect option:first").prop "selected", "selected"
+  $("#select_concept").empty()
+  $("#select_concept").attr "disabled", true
+  $("#aspect_concepts").empty()
+
+@add_new_resource_to_plan= (concept)->
+  $('#resources_'+concept).append('<div class="panel panel-default"><div class="panel-body"><span class="glyphicon glyphicon-remove text-danger pull-right" onclick="$(this).parent().parent().remove();" style="cursor:pointer;text-decoration:none;font-size:15px;"></span><span role="status" aria-live="polite" class="ui-helper-hidden-accessible"></span><input class="form-control autocomplete ui-autocomplete-input" data-autocomplete="/project/1/autocomplete_concept_post_resource_concept_posts" id="concept_post_resource" min-length="0" name="resor['+concept+'][]" placeholder="Введите свой ресурс или выберите из списка" size="30" type="text" autocomplete="off"><br><textarea class="form-control" id="res_" name="res['+concept+'][]" placeholder="Пояснение к ресурсу" style="overflow: hidden; word-wrap: break-word; resize: horizontal; height: 54px;"></textarea></div></div>')
+  $("input.autocomplete ").autocomplete(
+    minLength: 0
+  ).click ->
+    $(this).autocomplete "search", ""
+    return
+
+
+#aspect_concepts
+#    $("#select_concept").html "<option>загрузка...</option>"
+#      $("#select_concept").html "<option>- выберите нововведение -</option>"
+#@load_discontent_for_cond= (el)->
+#  $.ajax({
+#    type: "POST",
+#    url: "/project/1/plan/posts/get_cond",
+#    data: { pa: $('#select_'+el).val() },
+#  })

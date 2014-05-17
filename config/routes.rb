@@ -115,6 +115,12 @@ scope '/project/:project' do
 
   namespace :plan do
     posts_routes
+    resources :posts do
+      post :get_concepts, :on => :collection
+      member do
+        put :add_concept
+      end
+    end
   end
 
   namespace :estimate do

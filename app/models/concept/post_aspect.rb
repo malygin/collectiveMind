@@ -24,5 +24,11 @@ class Concept::PostAspect < ActiveRecord::Base
    self.discontent.id
   end
 
+  def self.plan_concepts(project,post_id)
+    joins(:concept_post).
+    joins('INNER JOIN "concept_post_discontents" ON "concept_post_discontents"."post_id" = "concept_posts"."id"').
+    where('"concept_post_discontents"."discontent_post_id" = ?', post_id).
+    where('"concept_posts"."project_id" = ? and "concept_posts"."status" = 0', project.id)
+  end
 
 end

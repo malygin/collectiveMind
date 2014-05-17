@@ -2,21 +2,33 @@
 .col-md-8
   .media
     .media-body
-      %span.h5.text-success Эссе по всему проекту
+      %span.h5.text-success=t('form.essay')
       %span
         %a(href="#" style="text-decoration=none;")
           -#%i.glyphicon.glyphicon-pencil
       %br
       =@post.content
+
   %br
   %br
   %div.tab-content
-    -@post.post_aspects_other.each do |pa|
-      =render partial: 'resolve_discontent_show', locals: { pa: pa }
-
-    -@post.post_aspects_first.each do |pa|
-      =render partial: 'first_cond_show', locals: { pa: pa }
-
+    -#-@post.post_aspects_other.each do |pa|
+    -#  =render partial: 'resolve_discontent_show', locals: { pa: pa }
+    -#
+    -#-@post.post_aspects_first.each do |pa|
+    -#  =render partial: 'first_cond_show', locals: { pa: pa }
+    -unless @post.post_aspects.nil?
+      -@post.post_aspects.each do |cp|
+        =render partial: 'first_cond_show', object: cp
+    %div.tab-pane#essay2
+      %hr
+      %h3.text-success=t('form.essay1')
+      %br
+      .panel.panel-info
+        .panel-heading=t('form.essay1_notice')
+        .panel-body
+          %br
+          =@post.first_step
     %div.tab-pane#plan1
       %hr
       %h3.text-success=t('form.plan_all')
@@ -36,6 +48,8 @@
           %br
           =@post.plan_first
 .col-md-4
+  - if (current_user?(@post.user) and @post.status == 0 and @project.can_edit_on_current_stage(@post)) or boss?
+    = link_to 'Редактировать', {:action => 'edit', :project => @project, :id => @post.id}, :class => "btn btn-success"
   %h5
     .small Выберите несовершенство, кликнув по нужной вкладке:
   %ul.nav.nav-tabs.nav-justified
@@ -44,25 +58,47 @@
     %li
       %a(href="#thefirst" data-toggle="tab") Первый этап
   .tab-content
-    #theall.tab-pane.fade.in.active
+    #theall.tab-pane.fade.in.active(onclick="$('#thefirst ul li').removeClass('active');" )
       %ul.nav.nav-tabs.nav-stacked
         %li
           %a.text-success(href="#plan1" data-toggle="tab" style='font-size:10px; font-weight: bold;')
-            =t('form.plan')
-        -@post.post_aspects_other.each_with_index do |d,i|
-          %li
-            %a(href="#dis_#{d.discontent.id}" data-toggle="tab")="#{i+1}. #{d.discontent.display_content}"
+            =t('form.plan_all')
+        -unless @post.post_aspects_other.nil?
+          -@post.post_aspects_other.each do |cp|
+            %li
+              %a(href="#asp_#{cp.id}" data-toggle="tab")
+                =cp.title
+
+        -#%li
+        -#  %a.text-success(href="#modal_concept" data-toggle="modal" onclick="empty_modal_plan();" data-target="#modal_concept" style='font-size:10px; font-weight: bold;')
+        -#    =t('form.plan_add_concept')
+        -#-@post.post_aspects_other.each_with_index do |d,i|
+        -#  %li
+        -#    %a(href="#dis_#{d.id}" data-toggle="tab")="#{i+1}. #{d.title}"
+            -#%a(href="#dis_#{d.discontent.id}" data-toggle="tab")="#{i+1}. #{d.discontent.display_content}"
 
 
-    #thefirst.tab-pane.fade
+    #thefirst.tab-pane.fade(onclick="$('#theall ul li').removeClass('active');" )
       %ul.nav.nav-tabs.nav-stacked
         %li
+          %a.text-success(href="#essay2" data-toggle="tab" style='font-size:10px; font-weight: bold;')
+            =t('form.essay1')
+        %li
           %a.text-success(href="#plan2" data-toggle="tab" style='font-size:10px; font-weight: bold;')
-            =t('form.plan')
-        -@post.post_aspects_first.each_with_index do |d,i|
-          - if d.name!=''
+            =t('form.plan_first')
+        -unless @post.post_aspects_first.nil?
+          -@post.post_aspects_first.each do |cp|
             %li
-              %a(href="#fdis_#{d.discontent.id}" data-toggle="tab")="#{i+1}. #{d.discontent.display_content}"
+              %a(href="#asp_#{cp.id}" data-toggle="tab")
+                =cp.title
+        -#%li
+        -#  %a.text-success(href="#modal_concept" data-toggle="modal" onclick="empty_modal_plan();" data-target="#modal_concept" style='font-size:10px; font-weight: bold;')
+        -#    =t('form.plan_add_concept')
+        -#-@post.post_aspects_first.each_with_index do |d,i|
+        -#  - if d.name!=''
+        -#    %li
+        -#      %a(href="#fdis_#{d.id}" data-toggle="tab")="#{i+1}. #{d.title}"
+              -#%a(href="#fdis_#{d.discontent.id}" data-toggle="tab")="#{i+1}. #{d.discontent.display_content}"
 
 .row
   .col-md-12

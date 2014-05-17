@@ -1,0 +1,39 @@
+#modal_concept.modal.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"}
+  .modal-dialog.modal-lg
+    .modal-content
+      .modal-header
+        %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} &times;
+        %h4#myModalLabel.modal-title Добавление нововведений
+      .modal-body
+        #option_for_select_concept(project="#{@project.id}")
+        -#= form_for  @post, :url => {:project => @project.id, :action => 'add_concept'}, :remote => true, :method => :put, :id => 'form_add_concept' do |f|
+        = form_tag(add_concept_plan_post_path(@project,@post,save_form:true,concept_empty:@concept_empty,first_stage:@first_stage), {method: :put, remote: true,  id: 'form_add_concept' }) do
+          -if @concept_empty == "0"
+            %h4.text-primary Выберите тему:
+            %br
+            %select.form-control#select_aspect(onchange="plan_select_aspect(this);")
+              %option#option0(value="0") Выберите тему
+              - @aspects.each do |asp|
+                %option(value="#{asp.id}")=asp.content
+            %br
+            %hr
+            %h4.text-primary Выберите нововведение:
+            %br
+            %select.form-control#select_concept(disabled="disabled" onchange="plan_select_concept(this);")
+            %hr
+            #aspect_concepts
+          -if @concept_empty == "1"
+            %h4.text-primary Напишите название своего нововведения:
+            %input.form-control(type="text" name="new_post_aspect_title" style='width: 100%; height: 30px' placeholder='Введетие краткое название для нововведения')
+          %br
+          %hr
+          .row.pull-right
+            %button.btn.btn-primary(type = "button" data-dismiss="modal") Закрыть
+            %input.btn.btn-success{:type => "submit", :value => "Сохранить"}
+
+      .modal-footer
+
+
+-#= select_tag 'select_aspect', options_from_collection_for_select(@aspects, "id", "content"),
+-# :prompt => 'Выберите тему' , style:'margin-left:15px; margin-top:10px; height: 30px;'
+-#(onchange="load_discontent_for_cond(#{aspect.id});" id="select1_#{acpect.id}")
