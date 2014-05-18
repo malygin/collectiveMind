@@ -301,6 +301,10 @@ $('#select_for_aspects').on 'change', ->
     $(this).autocomplete "search", ""
     return
 
+@remove_plan_concept= (el,cp)->
+  $(el).parent().parent().remove()
+  $("#asp_"+cp).remove()
+
 
 #aspect_concepts
 #    $("#select_concept").html "<option>загрузка...</option>"
