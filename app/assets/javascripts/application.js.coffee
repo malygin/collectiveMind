@@ -278,7 +278,7 @@ $('#select_for_aspects').on 'change', ->
 
 @remove_aspect_concept= (val,text)->
   $('#concept_aspect_'+val).animate({height: 0, opacity: 0.000}, 1000, ->
-    $(el).remove())
+    $(this).remove())
   $('#select_concept').append('<option id="option_'+val+'" value="'+val+'">'+text+'</option>')
 
 @empty_modal_plan= ->
