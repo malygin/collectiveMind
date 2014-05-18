@@ -67,7 +67,10 @@
           -@post.post_aspects_other.each do |cp|
             %li
               %a(href="#asp_#{cp.id}" data-toggle="tab")
-                =cp.title
+                -if cp.title!=''
+                  =cp.title
+                -else
+                  =cp.discontent.display_content
 
         -#%li
         -#  %a.text-success(href="#modal_concept" data-toggle="modal" onclick="empty_modal_plan();" data-target="#modal_concept" style='font-size:10px; font-weight: bold;')
@@ -90,7 +93,10 @@
           -@post.post_aspects_first.each do |cp|
             %li
               %a(href="#asp_#{cp.id}" data-toggle="tab")
-                =cp.title
+                -if cp.title!=''
+                  =cp.title
+                -else
+                  =cp.discontent.display_content
         -#%li
         -#  %a.text-success(href="#modal_concept" data-toggle="modal" onclick="empty_modal_plan();" data-target="#modal_concept" style='font-size:10px; font-weight: bold;')
         -#    =t('form.plan_add_concept')

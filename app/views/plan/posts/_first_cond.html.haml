@@ -14,6 +14,8 @@
             =render partial:'discontent/posts/post_short2', object: cd
             %br
             %hr
+        -else
+          =render partial:'discontent/posts/post_short2', object: first_cond_show.discontent unless first_cond_show.discontent.nil?
         -#%span.h4.text-success Выберите нововведение:
         -#%select.form-control(onchange="load_discontent_for_cond1(#{discontent.id});" id="select1_#{discontent.id}")
         -#  %option#option0(value="option_null")
