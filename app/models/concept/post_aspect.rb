@@ -29,6 +29,7 @@ class Concept::PostAspect < ActiveRecord::Base
     joins('INNER JOIN "concept_post_discontents" ON "concept_post_discontents"."post_id" = "concept_posts"."id"').
     joins('INNER JOIN "discontent_post_aspects" ON "discontent_post_aspects"."post_id" = "concept_post_discontents"."discontent_post_id"').
     where('"discontent_post_aspects"."aspect_id" = ?', post_id).
-    where('"concept_posts"."project_id" = ? and "concept_posts"."status" = 0', project.id)
+    where('"concept_posts"."project_id" = ? and "concept_posts"."status" = 0', project.id).
+    select('distinct "concept_post_aspects".*')
   end
 end
