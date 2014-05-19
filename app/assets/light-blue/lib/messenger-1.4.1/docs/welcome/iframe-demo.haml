@@ -1,0 +1,108 @@
+!!!
+%html
+  %head
+    %meta{:charset => "utf-8"}/
+    %meta{:content => "chrome=1", "http-equiv" => "X-UA-Compatible"}/
+    %meta{:content => "Messenger : Alerts for the 21st century", :name => "description"}/
+    %link{:href => "stylesheets/stylesheet.css", :media => "screen", :rel => "stylesheet", :type => "text/css"}/
+    %link{:href => "stylesheets/location-sel.css", :media => "screen", :rel => "stylesheet", :type => "text/css"}/
+    %link{:href => "stylesheets/theme-sel.css", :media => "screen", :rel => "stylesheet", :type => "text/css"}/
+    %link{:href => "stylesheets/demo.css", :media => "screen", :rel => "stylesheet", :type => "text/css"}/
+    %link{:href => "../../build/css/messenger.css", :media => "screen", :rel => "stylesheet", :type => "text/css"}/
+    %link{:href => "../../build/css/messenger-theme-block.css", :media => "screen", :rel => "stylesheet", :type => "text/css"}/
+    %link{:href => "../../build/css/messenger-theme-future.css", :media => "screen", :rel => "stylesheet", :type => "text/css"}/
+    %link{:href => "../../build/css/messenger-theme-air.css", :media => "screen", :rel => "stylesheet", :type => "text/css"}/
+    %link{:href => "../../build/css/messenger-theme-ice.css", :media => "screen", :rel => "stylesheet", :type => "text/css"}/
+    %link{:href => "../../build/css/messenger-theme-flat.css", :media => "screen", :rel => "stylesheet", :type => "text/css"}/
+    %link{:href => "lib/executr/build/css/executr.css", :media => "screen", :rel => "stylesheet", :type => "text/css"}/
+    %link{:href => "lib/executr/lib/CodeMirror/codemirror.css", :media => "screen", :rel => "stylesheet", :type => "text/css"}/
+    %script{:src => "http://cdnjs.cloudflare.com/ajax/libs/jquery/1.9.0/jquery.min.js", :type => "text/javascript"}
+    %script{:src => "http://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.4.3/underscore-min.js", :type => "text/javascript"}
+    %script{:src => "http://cdnjs.cloudflare.com/ajax/libs/backbone.js/0.9.10/backbone-min.js", :type => "text/javascript"}
+    %script{:src => "../../build/js/messenger.min.js", :type => "text/javascript"}
+    %script{:src => "../../build/js/messenger-theme-future.js", :type => "text/javascript"}
+    %script{:src => "javascripts/location-sel.js", :type => "text/javascript"}
+    %script{:src => "javascripts/theme-sel.js", :type => "text/javascript"}
+    %script{:src => "lib/executr/lib/CodeMirror/codemirror.js", :type => "text/javascript"}
+    %script{:src => "lib/executr/lib/CodeMirror/mode/coffeescript/coffeescript.js", :type => "text/javascript"}
+    %script{:src => "lib/executr/lib/CodeMirror/mode/javascript/javascript.js", :type => "text/javascript"}
+    %script{:src => "lib/executr/build/js/executr.js", :type => "text/javascript"}
+    %script{:src => "lib/executr/lib/coffee-script.js", :type => "text/javascript"}
+    :javascript
+      $(function(){
+
+        Messenger.options = {
+          extraClasses: "messenger-fixed messenger-on-bottom",
+          theme: "air"
+        };
+
+        var alienAttemptMsg;
+
+        var steps = [
+          function() {
+            var msg = Messenger().post({
+              message: 'Launching thermonuclear war...',
+              type: 'info',
+              actions: {
+                cancel: {
+                  label: 'cancel launch',
+                  action: function() {
+                    msg.update({
+                      message: 'Thermonuclear war averted.',
+                      type: 'success',
+                      actions: false
+                    });
+                  }
+                }
+              }
+            });
+            setTimeout(function(){
+              msg.update({
+                message: 'Thermonuclear war averted.',
+                type: 'success',
+                actions: false
+              });
+            }, 4000);
+            setTimeout(function(){ msg.hide(); }, 8000);
+          },
+          function() {
+            alienAttemptMsg = Messenger().post({
+              message: 'Attempting to destory alien planet...',
+              type: 'info'
+            });
+          },
+          function() {
+            var i = 0;
+            alienAttemptMsg.hide();
+            Messenger().run({
+              errorMessage: 'Error destroying alien planet',
+              successMessage: 'Alien planet destroyed!',
+              action: function(opts) {
+                if (++i < 3) {
+                  return opts.error({
+                    status: 500,
+                    readyState: 0,
+                    responseText: 0
+                  });
+                } else {
+                  return opts.success();
+                }
+              }
+            });
+          },
+          function() {
+            //Pause
+          }
+        ];
+
+        var i = 1;
+
+        steps[0]();
+        setInterval(function(){
+          steps[i]();
+          i = (i + 1) % steps.length;
+        }, 6000);
+
+      });
+        %title Messenger &ndash; Demo
+  %body{:style => "background: #fff"}

@@ -12,6 +12,7 @@
 
     = stylesheet_link_tag 'application', media: 'all'
     %link(href="/assets/favicon.ico" rel="shortcut icon")
+    %link{:href => "/assets/application1.css", :rel => "stylesheet"}/
 
 
   %body
@@ -19,10 +20,10 @@
       =render 'top_menu'
     .row
       .col-md-10.col-md-offset-1
-        =  render partial: 'stages', :locals => { :stage => :first }
+        -#=  render partial: 'stages', :locals => { :stage => :first }
         .row
           .col-md-3
-            = render partial: 'left_side'
+            = render partial: 'left_menu', :locals => { :stage => :first }
           .col-md-9
             = yield
 

@@ -1,0 +1,207 @@
+!!!
+%html
+  %head
+    %title Light Blue - Admin Template
+    %link{:href => "css/application.min.css", :rel => "stylesheet"}/
+    %link{:href => "img/favicon.png", :rel => "shortcut icon"}/
+    %meta{:content => "width=device-width, initial-scale=1.0", :name => "viewport"}/
+    %meta{:content => "", :name => "description"}/
+    %meta{:content => "", :name => "author"}/
+    %meta{:charset => "utf-8"}/
+  %body.background.landing
+    .container
+      %header.page-header
+        .navbar
+          .logo.pull-left
+            %h4
+              %a{:href => "index.html"}
+                Light
+                %strong Blue
+              %small bootstrap 3 template
+          %ul.nav.navbar-nav.pull-right.navbar-menu.hidden-xs
+            %li.active
+              %a{:href => "#"}
+                Home
+            %li
+              %a{:href => "#about"}
+                About
+          %ul.navbar-buttons.pull-right
+            %li
+              %a.btn.btn-sm.btn-transparent{:href => "index.html"}
+                Preview&nbsp;
+                %i.fa.fa-arrow-right
+            %li
+              %a.btn.btn-sm.btn-transparent{:href => "https://wrapbootstrap.com/theme/light-blue-responsive-admin-template-WB0T41TX4"}
+                Download&nbsp;
+                %i.fa.fa-download
+      .content
+        #carousel-landing.carousel.slide.carousel-landing.carousel-fade
+          %ol.carousel-indicators
+            %li.active{"data-slide-to" => "0", "data-target" => "#carousel-landing"}
+            %li{"data-slide-to" => "1", "data-target" => "#carousel-landing"}
+            %li{"data-slide-to" => "2", "data-target" => "#carousel-landing"}
+          .carousel-inner
+            .item.active
+              .row
+                .col-xs-6
+                  .animated.fadeInLeftBig
+                    %h1.slide-one-header
+                      %strong Light Blue
+                      = succeed "Dashboard" do
+                        %br/
+                      Template
+                    %p.lead.hidden-xs
+                      World
+                      %strong First
+                      Transparent Dashboard
+                    %p
+                      %a.btn.btn-lg.btn-white{:href => "index.html"}
+                        Preview &nbsp;
+                        %i.fa.fa-angle-right
+                      %a.btn.btn-lg.btn-transparent{:href => "https://wrapbootstrap.com/theme/light-blue-responsive-admin-template-WB0T41TX4"}
+                        Purchase &nbsp;
+                        %i.fa.fa-shopping-cart
+                .col-xs-6
+                  .text-align-center.animated.fadeInRightBig
+                    %img{:alt => "Second slide", :src => "img/jpeg/light-blue-preview-1.png"}/
+            .item
+              %h1.slide-two-header.text-align-center.animated.fadeInDown
+                %strong Transparent
+                \&
+                %strong White
+                Versions
+              .row
+                .col-xs-6
+                  .animated.fadeInLeftBig
+                    %p
+                      %a{:href => "index.html"}
+                        %img{:alt => "", :src => "img/jpeg/light-blue-laptop-transparent.png"}/
+                    %p.text-align-center
+                      %a.btn.btn-transparent.btn-lg.btn-version-preview{:href => "index.html"}
+                        Preview &nbsp;
+                        %i.fa.fa-angle-right
+                .col-xs-6
+                  .animated.fadeInRightBig
+                    %p
+                      %a{:href => "white/index.html"}
+                        %img{:alt => "", :src => "img/jpeg/light-blue-laptop-white.png"}/
+                    %p.text-align-center
+                      %a.btn.btn-white.btn-lg.btn-version-preview{:href => "white/index.html"}
+                        Preview &nbsp;
+                        %i.fa.fa-angle-right
+            .item
+              .row
+                .col-xs-6
+                  .animated.fadeInLeft
+                    %h1.slide-three-header
+                      %strong Fully
+                      %br/
+                      Responsive
+                    %p
+                      %a.btn.btn-white.btn-lg{:href => "http://responsinator.com/?url=http%3A%2F%2Fdemo.okendoken.com", :target => "_blank"}
+                        Test It
+                .col-xs-6
+                  %p.animated.fadeInUp{:style => "margin-top: 20px"}
+                    %img{:alt => "", :src => "img/jpeg/light-blue-phone.png"}/
+          %a.left.carousel-control.carousel-control-landing{"data-slide" => "prev", :href => "#carousel-landing"}
+            %span.icon-prev
+          %a.right.carousel-control.carousel-control-landing{"data-slide" => "next", :href => "#carousel-landing"}
+            %span.icon-next
+    #about.widget.widget-white.widget-about
+      .container
+        .row
+          .col-sm-offset-1.col-sm-10
+            %h2
+              %strong About Light Blue
+            %p
+              %strong Light Blue
+              \- is a next generation dashboard template. Flat design and transparency - the
+              design that the world haven't seen before Light Blue.
+            .row.features
+              .col-sm-4
+                %section.feature
+                  .row
+                    .col-xs-4
+                      %p
+                        %span.icon.background-danger
+                          %i.fa.fa-bold
+                    .col-xs-8
+                      %h4 Bootstrap 3
+                      %p
+                        Light Blue comes with built-in Twitter Bootstrap 3 support.
+                        Easy to design your next web app.
+              .col-sm-4
+                %section.feature
+                  .row
+                    .col-xs-4
+                      %p
+                        %span.icon.background-warning
+                          %i.fa.fa-magic
+                    .col-xs-8
+                      %h4 Unique design
+                      %p
+                        Transparent widgets and gradient background - have you seen something like this
+                        before?
+              .col-sm-4
+                %section.feature
+                  .row
+                    .col-xs-4
+                      %p
+                        %span.icon.background-success
+                          %i.fa.fa-wrench
+                    .col-xs-8
+                      %h4 Developer-friendly
+                      %p
+                        Simple, intuitive and easily maintainable code.
+            .row.features
+              .col-sm-4
+                %section.feature
+                  .row
+                    .col-xs-4
+                      %p
+                        %span.icon.background-primary
+                          %i.fa.fa-superscript
+                    .col-xs-8
+                      %h4 White & Transparent
+                      %p
+                        Two styles each having two background options.
+              .col-sm-4
+                %section.feature
+                  .row
+                    .col-xs-4
+                      %p
+                        %span.icon.background-lime
+                          %i.fa.fa-check
+                    .col-xs-8
+                      %h4 Web applications
+                      %p
+                        LB itself is a web app. Plus there is an Email -
+                        ready-to-use Backbone application.
+              .col-sm-4
+                %section.feature
+                  .row
+                    .col-xs-4
+                      %p
+                        %span.icon.background-info
+                          %i.fa.fa-css3
+                    .col-xs-8
+                      %h4 Sass-powered
+                      %p
+                        Variables, mixins, includes - things that
+                        make Light Blue really easy to customize.
+        %p.preview.text-align-center
+          %a.btn.btn-lg.btn-danger{:href => "white/index.html"}
+            \&nbsp; Preview the White Version &nbsp;
+    %h2.thanks.text-align-center Thanks for watching!
+    %p.lead.text-align-center
+      %a.back-to-top{:href => "#"}
+        back to top
+        %i.fa.fa-angle-up
+    / jquery and friends
+    %script{:src => "lib/jquery/jquery-2.0.3.min.js"}
+    %script{:src => "lib/jquery-pjax/jquery.pjax.js"}
+    / bootstrap default plugins
+    %script{:src => "lib/bootstrap/transition.js"}
+    %script{:src => "lib/bootstrap/carousel.js"}
+    / page specific
+    %script{:src => "js/landing.js"}

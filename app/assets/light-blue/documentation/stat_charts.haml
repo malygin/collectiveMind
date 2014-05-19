@@ -1,0 +1,200 @@
+!!!
+%html{:xmlns => "http://www.w3.org/1999/html"}
+  %head
+    %title Light Blue Documentation
+    %link{:href => "css/documentation.css", :rel => "stylesheet"}/
+    %meta{:content => "width=device-width, initial-scale=1.0", :name => "viewport"}/
+    %meta{:content => "", :name => "description"}/
+    %meta{:content => "", :name => "author"}/
+    %meta{:charset => "utf-8"}/
+  %body.background-two
+    %nav#sidebar.sidebar
+      %ul#side-nav.side-nav
+        %li.green
+          %a{:href => "index.html"}
+            %i.icon-desktop
+            %span.name Dashboard
+        %li.active.teal.accordion-group
+          %a.accordion-toggle{"data-parent" => "#side-nav", "data-toggle" => "collapse", :href => "#stats-collapse"}
+            %i.icon-bar-chart
+            %span.name Statistics
+          %ul#stats-collapse.accordion-body.collapse.in
+            %li
+              %a{:href => "stat_statistics.html"} Stats
+            %li.active
+              %a{:href => "stat_charts.html"} Charts
+            %li
+              %a{:href => "stat_realtime.html"} Realtime
+        %li.blue.accordion-group
+          %a.accordion-toggle.collapsed{"data-parent" => "#side-nav", "data-toggle" => "collapse", :href => "#forms-collapse"}
+            %i.icon-edit
+            %span.name Forms
+          %ul#forms-collapse.accordion-body.collapse
+            %li
+              %a{:href => "form_account.html"} Account
+            %li
+              %a{:href => "form_article.html"} Article
+            %li
+              %a{:href => "form_elements.html"} Elements
+            %li
+              %a{:href => "form_validation.html"} Validation
+            %li
+              %a{:href => "form_wizard.html"} Wizard
+        %li.brown.accordion-group
+          %a.accordion-toggle.collapsed{"data-parent" => "#side-nav", "data-toggle" => "collapse", :href => "#ui-collapse"}
+            %i.icon-magic
+            %span.name UI
+          %ul#ui-collapse.accordion-body.collapse
+            %li
+              %a{:href => "ui_buttons.html"} Buttons
+            %li
+              %a{:href => "ui_dialogs.html"} Dialogs
+            %li
+              %a{:href => "ui_notifications.html"} Notifications
+            %li
+              %a{:href => "ui_icons.html"} Icons
+            %li
+              %a{:href => "ui_tabs.html"} Tabs
+            %li
+              %a{:href => "ui_accordion.html"} Accordion
+        %li.dark-red.accordion-group
+          %a.accordion-toggle.collapsed{"data-parent" => "#side-nav", "data-toggle" => "collapse", :href => "#components-collapse"}
+            %i.icon-bookmark-empty
+            %span.name Components
+          %ul#components-collapse.accordion-body.collapse
+            %li
+              %a{:href => "component_calendar.html"} Calendar
+            %li
+              %a{:href => "component_maps.html"} Maps
+            %li
+              %a{:href => "component_gallery.html"} Gallery
+            %li
+              %a{:href => "component_fileupload.html"} Fileupload
+        %li.red.accordion-group
+          %a.accordion-toggle.collapsed{"data-parent" => "#side-nav", "data-toggle" => "collapse", :href => "#tables-collapse"}
+            %i.icon-table
+            %span.name Tables
+          %ul#tables-collapse.accordion-body.collapse
+            %li
+              %a{:href => "tables_static.html"} Static
+            %li
+              %a{:href => "tables_dynamic.html"} Dynamic
+        %li.orange
+          %a{:href => "grid.html"}
+            %i.icon-columns
+            %span.name
+              Widgets &nbsp;
+              %span.label.label-info new
+        %li.lime.accordion-group
+          %a.accordion-toggle.collapsed{"data-parent" => "#side-nav", "data-toggle" => "collapse", :href => "#special-collapse"}
+            %i.icon-asterisk
+            %span.name Special
+          %ul#special-collapse.accordion-body.collapse
+            %li
+              %a{:href => "special_search.html"} Search
+            %li
+              %a{:href => "login.html"} Login
+            %li
+              %a{:href => "special_404.html"} 404
+    .wrap
+      %header.page-header
+        %h1 Documentation
+      .content.container-fluid
+        .row-fluid
+          .span10.offset1
+            %section.widget
+              %h2 Charts
+              %p
+                All Light Blue charts are based on amazing
+                %a{:href => "http://d3js.org/"} D3.js
+                library. Here is what D3
+                says about itself:
+              %blockquote
+                D3.js is a JavaScript library for manipulating documents based on data.
+                D3 helps you bring data to life using HTML, SVG and CSS. D3’s emphasis on web standards
+                gives you the full capabilities of modern browsers without tying yourself to a proprietary
+                framework, combining powerful visualization components and a data-driven approach to DOM manipulation.
+              %p So it means that graphs are drawn with standard SVG and styled with CSS. You can customize all you like with techniques you already know.
+              %p
+                There are two libraries used in
+                %strong Light Blue
+                which work on top of D3.js:
+              %ul
+                %li
+                  %a{:href => "http://nvd3.org/"} nvd3
+                  \- which is focused on developing re-usable charts and chart components for d3.js without taking away the power that d3.js gives to developer, and
+                %li
+                  %a{:href => "http://code.shutterstock.com/rickshaw/"} Rickshaw
+                  \- a JavaScript toolkit for creating interactive time series graphs based on d3.js underneath. Rickshaw is used for displaying
+                  %a{:href => "stat_realtime.html"} realtime data
+                  in Light Blue.
+        .row-fluid
+          .span10.offset1
+            %section.widget
+              %h3 Top sources
+              %p
+                Top sources is a
+                %a{:href => "http://nvd3.org/ghpages/pie.html"} nvd3's pie chart
+                with a little
+                bit of custom code which can be simply reused (
+                %a{:href => "../js/stats.js"}> stats.js
+                ).
+              %p It depends on following files:
+              %pre
+                :preserve
+                  
+                  lib/nvd3/nv.d3.custom.js
+                  lib/nvd3/src/models/pie.js
+                  lib/nvd3/src/models/legend.js
+                  lib/nvd3/src/models/pieChartTotal.js        .row-fluid
+          .span10.offset1
+            %section.widget
+              %h3 Bar Chart
+              %p
+                Bar Chart is based on
+                = succeed "." do
+                  %a{:href => "http://nvd3.org/ghpages/multiBar.html"} nvd3's multi-bar chart
+              %p It depends on following files:
+              %pre
+                :preserve
+                  
+                  lib/nvd3/nv.d3.custom.js
+                  lib/nvd3/src/models/axis.js
+                  lib/nvd3/src/models/legend.js
+                  lib/nvd3/src/models/multiBar.js
+                  lib/nvd3/src/models/multiBarChart.js        .row-fluid
+          .span10.offset1
+            %section.widget
+              %h3 Stacked Chart
+              %p
+                Stacked Chart is based on
+                = succeed "." do
+                  %a{:href => "http://nvd3.org/ghpages/stackedArea.html"} nvd3's stacked area chart
+              %p It depends on following files:
+              %pre
+                :preserve
+                  
+                  lib/nvd3/nv.d3.custom.js
+                  lib/nvd3/src/models/axis.js
+                  lib/nvd3/src/models/legend.js
+                  lib/nvd3/src/models/stackedArea.js
+                  lib/nvd3/src/models/stackedAreaChart.js        .row-fluid
+          .span10.offset1
+            %section.widget
+              %h3 Line Chart
+              %p
+                Line Chart is based on
+                = succeed "." do
+                  %a{:href => "http://nvd3.org/ghpages/stackedArea.html"} nvd3's stacked area chart
+              %p It depends on following files:
+              %pre
+                :preserve
+                  
+                  lib/nvd3/nv.d3.custom.js
+                  lib/nvd3/src/models/axis.js
+                  lib/nvd3/src/models/legend.js
+                  lib/nvd3/src/models/line.js
+                  lib/nvd3/src/models/lineChart.js    / jquery and friends
+    %script{:src => "js/jquery.1.9.0.min.js"}
+    %script{:src => "js/bootstrap-transition.js"}
+    %script{:src => "js/bootstrap-collapse.js"}

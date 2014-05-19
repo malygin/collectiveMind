@@ -1,0 +1,47 @@
+!!!
+%html
+  %head
+    %title Light Blue - Admin Template
+    %link{:href => "css/application.min.css", :rel => "stylesheet"}/
+    %link{:href => "img/favicon.png", :rel => "shortcut icon"}/
+    %meta{:content => "width=device-width, initial-scale=1.0", :name => "viewport"}/
+    %meta{:content => "", :name => "description"}/
+    %meta{:content => "", :name => "author"}/
+    %meta{:charset => "utf-8"}/
+    %script{:src => "lib/jquery/jquery-2.0.3.min.js"}
+    %script{:src => "lib/jquery-pjax/jquery.pjax.js"}
+    %script{:src => "lib/backbone/underscore-min.js"}
+    %script{:src => "js/settings.js"}
+  %body.background-dark
+    .single-widget-container
+      %section.widget.login-widget
+        %header.text-align-center
+          %h4 Login to your account
+        .body
+          %form.no-margin{:action => "index.html", :method => "get"}
+            %fieldset
+              .form-group.no-margin
+                %label{:for => "email"} Email
+                .input-group.input-group-lg
+                  %span.input-group-addon
+                    %i.eicon-user
+                  %input#email.form-control.input-lg{:placeholder => "Your Email", :type => "email"}/
+              .form-group
+                %label{:for => "password"} Password
+                .input-group.input-group-lg
+                  %span.input-group-addon
+                    %i.fa.fa-lock
+                  %input#password.form-control.input-lg{:placeholder => "Your Password", :type => "password"}/
+            .form-actions
+              %button.btn.btn-block.btn-lg.btn-danger{:type => "submit"}
+                %span.small-circle
+                  %i.fa.fa-caret-right
+                %small Sign In
+              .forgot
+                %a.forgot{:href => "#"} Forgot Username or Password?
+        %footer
+          .facebook-login
+            %a{:href => "index.html"}
+              %span
+                %i.fa.fa-facebook-square.fa-lg
+                LogIn with Facebook

@@ -1,0 +1,3341 @@
+!!!
+%html
+  %head
+    %title Light Blue - Admin Template
+    %link{:href => "css/application.min.css", :rel => "stylesheet"}/
+    %link{:href => "img/favicon.png", :rel => "shortcut icon"}/
+    %meta{:content => "width=device-width, initial-scale=1.0", :name => "viewport"}/
+    %meta{:content => "", :name => "description"}/
+    %meta{:content => "", :name => "author"}/
+    %meta{:charset => "utf-8"}/
+  %body.background-dark
+    .logo
+      %h4
+        %a{:href => "index.html"}
+          Light
+          %strong Blue
+    %nav#sidebar.sidebar.nav-collapse.collapse
+      %ul#side-nav.side-nav
+        %li
+          %a{:href => "index.html"}
+            %i.fa.fa-home
+            %span.name Dashboard
+        %li.panel
+          %a.accordion-toggle.collapsed{"data-parent" => "#side-nav", "data-toggle" => "collapse", :href => "#forms-collapse"}
+            %i.fa.fa-edit
+            %span.name Forms
+          %ul#forms-collapse.panel-collapse.collapse
+            %li
+              %a{:href => "form_account.html"} Account
+            %li
+              %a{:href => "form_article.html"} Article
+            %li
+              %a{:href => "form_elements.html"} Elements
+            %li
+              %a{:href => "form_validation.html"} Validation
+            %li
+              %a{:href => "form_wizard.html"} Wizard
+        %li.panel
+          %a.accordion-toggle.collapsed{"data-parent" => "#side-nav", "data-toggle" => "collapse", :href => "#stats-collapse"}
+            %i.fa.fa-bar-chart-o
+            %span.name Statistics
+          %ul#stats-collapse.panel-collapse.collapse
+            %li
+              %a{:href => "stat_statistics.html"} Stats
+            %li
+              %a{:href => "stat_charts.html"} Charts
+            %li
+              %a{:href => "stat_realtime.html"} Realtime
+        %li.active.panel
+          %a.accordion-toggle{"data-parent" => "#side-nav", "data-toggle" => "collapse", :href => "#ui-collapse"}
+            %i.fa.fa-magic
+            %span.name User Interface
+          %ul#ui-collapse.panel-collapse.in
+            %li
+              %a{:href => "ui_buttons.html"} Buttons
+            %li
+              %a{:href => "ui_dialogs.html"} Dialogs
+            %li
+              %a{:href => "ui_notifications.html"}
+                Notifications &nbsp;
+                %span.label.label-danger new
+            %li.active
+              %a{:href => "ui_icons.html"} Icons
+            %li
+              %a{:href => "ui_tabs.html"} Tabs
+            %li
+              %a{:href => "ui_accordion.html"} Accordion
+        %li.panel
+          %a.accordion-toggle.collapsed{"data-parent" => "#side-nav", "data-toggle" => "collapse", :href => "#components-collapse"}
+            %i.fa.fa-bookmark-o
+            %span.name Components
+          %ul#components-collapse.panel-collapse.collapse
+            %li
+              %a{:href => "component_calendar.html"} Calendar
+            %li
+              %a{"data-no-pjax" => "", :href => "component_maps.html"} Maps
+            %li
+              %a{:href => "component_gallery.html"} Gallery
+            %li
+              %a{:href => "component_fileupload.html"} Fileupload
+            %li
+              %a{:href => "component_bootstrap.html"}
+                Bootstrap &nbsp;
+                %span.label.label-important new
+            %li
+              %a{:href => "component_list_groups.html"}
+                List Groups &nbsp;
+                %span.label.label-important new
+        %li.panel
+          %a.accordion-toggle.collapsed{"data-parent" => "#side-nav", "data-toggle" => "collapse", :href => "#tables-collapse"}
+            %i.fa.fa-table
+            %span.name Tables
+          %ul#tables-collapse.panel-collapse.collapse
+            %li
+              %a{:href => "tables_static.html"} Static
+            %li
+              %a{:href => "tables_dynamic.html"} Dynamic
+        %li.panel
+          %a.accordion-toggle.collapsed{"data-parent" => "#side-nav", "data-toggle" => "collapse", :href => "#grid-collapse"}
+            %i.fa.fa-bars
+            %span.name
+              Widgets &nbsp;
+              %span.label.label-info new
+          %ul#grid-collapse.panel-collapse.collapse
+            %li
+              %a{:href => "grid.html"} Basic
+            %li
+              %a{:href => "grid_live.html"}
+                Live &nbsp;
+                %span.label.label-important hot
+        %li.panel
+          %a.accordion-toggle.collapsed{"data-parent" => "#side-nav", "data-toggle" => "collapse", :href => "#special-collapse"}
+            %i.fa.fa-asterisk
+            %span.name Special
+          %ul#special-collapse.panel-collapse.collapse
+            %li
+              %a{:href => "special_search.html"} Search
+            %li
+              %a{:href => "special_invoice.html"} Invoice
+            %li
+              %a{:href => "special_inbox.html"}
+                Inbox
+                %span.label.label-important 3
+            %li
+              %a{:href => "login.html"} Login
+            %li
+              %a{:href => "special_404.html"} 404
+            %li
+              %a{"data-no-pjax" => "", :href => "landing.html"} Landing
+            %li
+              %a{"data-no-pjax" => "", :href => "white/index.html"}
+                White
+                %i.fa.fa-external-link-square
+        %li.panel
+          %a.accordion-toggle.collapsed{"data-parent" => "#side-nav", "data-toggle" => "collapse", :href => "#menu-levels-collapse"}
+            %i.fa.fa-code-fork
+            %span.name Menu Levels
+          %ul#menu-levels-collapse.panel-collapse.collapse
+            %li
+              %a{:href => "#"} Item 1.1
+            %li
+              %a{:href => "#"} Item 1.2
+            %li.panel
+              %a.accordion-toggle.collapsed{"data-parent" => "#menu-levels-collapse", "data-toggle" => "collapse", :href => "#sub-menu-1-collapse"} Item 1.3
+              %ul#sub-menu-1-collapse.panel-collapse.collapse
+                %li
+                  %a{:href => "#"} Item 2.1
+                %li
+                  %a{:href => "#"} Item 2.2
+                %li.panel
+                  %a.accordion-toggle.collapsed{"data-parent" => "#sub-menu-2-collapse", "data-toggle" => "collapse", :href => "#sub-menu-2-collapse"} Item 2.3
+                  %ul#sub-menu-2-collapse.panel-collapse.collapse
+                    %li
+                      %a{:href => "#"} Item 3.1
+                    %li
+                      %a{:href => "#"} Item 3.2
+                    %li
+                      %a{:href => "#"} Item 3.3
+        %li.visible-xs
+          %a{:href => "login.html"}
+            %i.fa.fa-sign-out
+            %span.name Sign Out
+      #sidebar-settings.settings
+        %button.btn-icons.btn.btn-transparent.btn-sm{"data-value" => "icons", :type => "button"} Icons
+        %button.btn-auto.btn.btn-transparent.btn-sm{"data-value" => "auto", :type => "button"} Auto
+    .wrap
+      %header.page-header
+        .navbar
+          %ul.nav.navbar-nav.navbar-right.pull-right
+            %li.visible-phone-landscape
+              %a#search-toggle{:href => "#"}
+                %i.fa.fa-search
+            %li.dropdown
+              %a#messages.dropdown-toggle{"data-toggle" => "dropdown", :href => "#", :title => "Messages"}
+                %i.fa.fa-comments
+              %ul#messages-menu.dropdown-menu.messages{:role => "menu"}
+                %li{:role => "presentation"}
+                  %a.message{:href => "#"}
+                    %img{:alt => "", :src => "img/1.jpg"}/
+                  .details
+                    .sender Jane Hew
+                    .text
+                      Hey, John! How is it going? ...
+                %li{:role => "presentation"}
+                  %a.message{:href => "#"}
+                    %img{:alt => "", :src => "img/2.jpg"}/
+                  .details
+                    .sender Alies Rumiancaŭ
+                    .text
+                      I'll definitely buy this template
+                %li{:role => "presentation"}
+                  %a.message{:href => "#"}
+                    %img{:alt => "", :src => "img/3.jpg"}/
+                  .details
+                    .sender Michał Rumiancaŭ
+                    .text
+                      Is it really Lore ipsum? Lore ...
+                %li{:role => "presentation"}
+                  %a.text-align-center.see-all{:href => "#"}
+                    See all messages
+                    %i.fa.fa-arrow-right
+            %li.dropdown
+              %a.dropdown-toggle{"data-toggle" => "dropdown", :href => "#", :title => "8 support tickets"}
+                %i.fa.fa-group
+                %span.count 8
+              %ul#support-menu.dropdown-menu.support{:role => "menu"}
+                %li{:role => "presentation"}
+                  %a.support-ticket{:href => "#"}
+                  .picture
+                    %span.label.label-important
+                      %i.fa.fa-bell-o
+                  .details
+                    Check out this awesome ticket
+                %li{:role => "presentation"}
+                  %a.support-ticket{:href => "#"}
+                  .picture
+                    %span.label.label-warning
+                      %i.fa.fa-question-circle
+                  .details
+                    "What is the best way to get ...
+                %li{:role => "presentation"}
+                  %a.support-ticket{:href => "#"}
+                  .picture
+                    %span.label.label-success
+                      %i.fa.fa-tag
+                  .details
+                    This is just a simple notification
+                %li{:role => "presentation"}
+                  %a.support-ticket{:href => "#"}
+                  .picture
+                    %span.label.label-info
+                      %i.fa.fa-info-circle
+                  .details
+                    12 new orders has arrived today
+                %li{:role => "presentation"}
+                  %a.support-ticket{:href => "#"}
+                  .picture
+                    %span.label.label-important
+                      %i.fa.fa-plus
+                  .details
+                    One more thing that just happened
+                %li{:role => "presentation"}
+                  %a.text-align-center.see-all{:href => "#"}
+                    See all tickets
+                    %i.fa.fa-arrow-right
+            %li.divider
+            %li.hidden-xs
+              %a#settings{"data-placement" => "bottom", "data-toggle" => "popover", :href => "#", :title => "Settings"}
+                %i.fa.fa-cog
+            %li.hidden-xs.dropdown
+              %a#account.dropdown-toggle{"data-toggle" => "dropdown", :href => "#", :title => "Account"}
+                %i.fa.fa-user
+              %ul#account-menu.dropdown-menu.account{:role => "menu"}
+                %li.account-picture{:role => "presentation"}
+                  %img{:alt => "", :src => "img/2.jpg"}/
+                  Philip Daineka
+                %li{:role => "presentation"}
+                  %a.link{:href => "form_account.html"}
+                    %i.fa.fa-user
+                    Profile
+                %li{:role => "presentation"}
+                  %a.link{:href => "component_calendar.html"}
+                    %i.fa.fa-calendar
+                    Calendar
+                %li{:role => "presentation"}
+                  %a.link{:href => "#"}
+                    %i.fa.fa-inbox
+                    Inbox
+            %li.visible-xs
+              %a.btn-navbar{"data-target" => ".sidebar", "data-toggle" => "collapse", :href => "#", :title => ""}
+                %i.fa.fa-bars
+            %li.hidden-xs
+              %a{:href => "login.html"}
+                %i.fa.fa-sign-out
+          %form#search-form.navbar-form.pull-right{:role => "search"}
+            %input.search-query{:placeholder => "Search...", :type => "search"}/
+      .content.container
+        .row
+          .col-md-12
+            %h2.page-title
+              Icons
+              %small Large set of built-in icons
+        .row
+          .col-md-10.col-md-offset-1
+            %section.widget
+              %header
+                %h4
+                  %i.fa.fa-thumbs-up
+                  Font Awesome pictographic font
+              .body.icons
+                %p
+                  The complete set of 369 icons in Font Awesome 4.0.3. Add
+                  %code .fa .fa-*
+                  class to
+                  %code &lt;i&gt;
+                  to display icon.
+                  Provided by
+                  = succeed "." do
+                    %a{:href => "http://fortawesome.github.com/Font-Awesome/"} Font Awesome
+                #new
+                  %h2.page-header 11 New Icons in 4.0
+                  .row.fontawesome-icon-list
+                    .fa-hover.col-md-3.col-sm-4
+                      %i.fa.fa-rub
+                      fa-rub
+                    .fa-hover.col-md-3.col-sm-4
+                      %i.fa.fa-ruble
+                      fa-ruble
+                      %span.text-muted (alias)
+                    .fa-hover.col-md-3.col-sm-4
+                      %i.fa.fa-rouble
+                      fa-rouble
+                      %span.text-muted (alias)
+                    .fa-hover.col-md-3.col-sm-4
+                      %i.fa.fa-pagelines
+                      fa-pagelines
+                    .fa-hover.col-md-3.col-sm-4
+                      %i.fa.fa-stack-exchange
+                      fa-stack-exchange
+                    .fa-hover.col-md-3.col-sm-4
+                      %i.fa.fa-arrow-circle-o-right
+                      fa-arrow-circle-o-right
+                    .fa-hover.col-md-3.col-sm-4
+                      %i.fa.fa-arrow-circle-o-left
+                      fa-arrow-circle-o-left
+                    .fa-hover.col-md-3.col-sm-4
+                      %i.fa.fa-caret-square-o-left
+                      fa-caret-square-o-left
+                    .fa-hover.col-md-3.col-sm-4
+                      %i.fa.fa-toggle-left
+                      fa-toggle-left
+                      %span.text-muted (alias)
+                    .fa-hover.col-md-3.col-sm-4
+                      %i.fa.fa-dot-circle-o
+                      fa-dot-circle-o
+                    .fa-hover.col-md-3.col-sm-4
+                      %i.fa.fa-wheelchair
+                      fa-wheelchair
+                    .fa-hover.col-md-3.col-sm-4
+                      %i.fa.fa-vimeo-square
+                      fa-vimeo-square
+                    .fa-hover.col-md-3.col-sm-4
+                      %i.fa.fa-try
+                      fa-try
+                    .fa-hover.col-md-3.col-sm-4
+                      %i.fa.fa-turkish-lira
+                      fa-turkish-lira
+                      %span.text-muted (alias)
+                    .fa-hover.col-md-3.col-sm-4
+                      %i.fa.fa-plus-square-o
+                      fa-plus-square-o
+                %section#web-application
+                  %h2.page-header Web Application Icons
+                  .row.fontawesome-icon-list
+                    .fa-hover.col-md-3.col-sm-4
+                      %i.fa.fa-adjust
+                      fa-adjust
+                    .fa-hover.col-md-3.col-sm-4
+                      %i.fa.fa-anchor
+                      fa-anchor
+                    .fa-hover.col-md-3.col-sm-4
+                      %i.fa.fa-archive
+                      fa-archive
+                    .fa-hover.col-md-3.col-sm-4
+                      %i.fa.fa-arrows
+                      fa-arrows
+                    .fa-hover.col-md-3.col-sm-4
+                      %i.fa.fa-arrows-h
+                      fa-arrows-h
+                    .fa-hover.col-md-3.col-sm-4
+                      %i.fa.fa-arrows-v
+                      fa-arrows-v
+                    .fa-hover.col-md-3.col-sm-4
+                      %i.fa.fa-asterisk
+                      fa-asterisk
+                    .fa-hover.col-md-3.col-sm-4
+                      %i.fa.fa-ban
+                      fa-ban
+                    .fa-hover.col-md-3.col-sm-4
+                      %i.fa.fa-bar-chart-o
+                      fa-bar-chart-o
+                    .fa-hover.col-md-3.col-sm-4
+                      %i.fa.fa-barcode
+                      fa-barcode
+                    .fa-hover.col-md-3.col-sm-4
+                      %i.fa.fa-bars
+                      fa-bars
+                    .fa-hover.col-md-3.col-sm-4
+                      %i.fa.fa-beer
+                      fa-beer
+                    .fa-hover.col-md-3.col-sm-4
+                      %i.fa.fa-bell
+                      fa-bell
+                    .fa-hover.col-md-3.col-sm-4
+                      %i.fa.fa-bell-o
+                      fa-bell-o
+                    .fa-hover.col-md-3.col-sm-4
+                      %i.fa.fa-bolt
+                      fa-bolt
+                    .fa-hover.col-md-3.col-sm-4
+                      %i.fa.fa-book
+                      fa-book
+                    .fa-hover.col-md-3.col-sm-4
+                      %i.fa.fa-bookmark
+                      fa-bookmark
+                    .fa-hover.col-md-3.col-sm-4
+                      %i.fa.fa-bookmark-o
+                      fa-bookmark-o
+                    .fa-hover.col-md-3.col-sm-4
+                      %i.fa.fa-briefcase
+                      fa-briefcase
+                    .fa-hover.col-md-3.col-sm-4
+                      %i.fa.fa-bug
+                      fa-bug
+                    .fa-hover.col-md-3.col-sm-4
+                      %i.fa.fa-building-o
+                      fa-building-o
+                    .fa-hover.col-md-3.col-sm-4
+                      %i.fa.fa-bullhorn
+                      fa-bullhorn
+                    .fa-hover.col-md-3.col-sm-4
+                      %i.fa.fa-bullseye
+                      fa-bullseye
+                    .fa-hover.col-md-3.col-sm-4
+                      %i.fa.fa-calendar
+                      fa-calendar
+                    .fa-hover.col-md-3.col-sm-4
+                      %i.fa.fa-calendar-o
+                      fa-calendar-o
+                    .fa-hover.col-md-3.col-sm-4
+                      %i.fa.fa-camera
+                      fa-camera
+                    .fa-hover.col-md-3.col-sm-4
+                      %i.fa.fa-camera-retro
+                      fa-camera-retro
+                    .fa-hover.col-md-3.col-sm-4
+                      %i.fa.fa-caret-square-o-down
+                      fa-caret-square-o-down
+                    .fa-hover.col-md-3.col-sm-4
+                      %i.fa.fa-caret-square-o-left
+                      fa-caret-square-o-left
+                    .fa-hover.col-md-3.col-sm-4
+                      %i.fa.fa-caret-square-o-right
+                      fa-caret-square-o-right
+                    .fa-hover.col-md-3.col-sm-4
+                      %i.fa.fa-caret-square-o-up
+                      fa-caret-square-o-up
+                    .fa-hover.col-md-3.col-sm-4
+                      %i.fa.fa-certificate
+                      fa-certificate
+                    .fa-hover.col-md-3.col-sm-4
+                      %i.fa.fa-check
+                      fa-check
+                    .fa-hover.col-md-3.col-sm-4
+                      %i.fa.fa-check-circle
+                      fa-check-circle
+                    .fa-hover.col-md-3.col-sm-4
+                      %i.fa.fa-check-circle-o
+                      fa-check-circle-o
+                    .fa-hover.col-md-3.col-sm-4
+                      %i.fa.fa-check-square
+                      fa-check-square
+                    .fa-hover.col-md-3.col-sm-4
+                      %i.fa.fa-check-square-o
+                      fa-check-square-o
+                    .fa-hover.col-md-3.col-sm-4
+                      %i.fa.fa-circle
+                      fa-circle
+                    .fa-hover.col-md-3.col-sm-4
+                      %i.fa.fa-circle-o
+                      fa-circle-o
+                    .fa-hover.col-md-3.col-sm-4
+                      %i.fa.fa-clock-o
+                      fa-clock-o
+                    .fa-hover.col-md-3.col-sm-4
+                      %i.fa.fa-cloud
+                      fa-cloud
+                    .fa-hover.col-md-3.col-sm-4
+                      %i.fa.fa-cloud-download
+                      fa-cloud-download
+                    .fa-hover.col-md-3.col-sm-4
+                      %i.fa.fa-cloud-upload
+                      fa-cloud-upload
+                    .fa-hover.col-md-3.col-sm-4
+                      %i.fa.fa-code
+                      fa-code
+                    .fa-hover.col-md-3.col-sm-4
+                      %i.fa.fa-code-fork
+                      fa-code-fork
+                    .fa-hover.col-md-3.col-sm-4
+                      %i.fa.fa-coffee
+                      fa-coffee
+                    .fa-hover.col-md-3.col-sm-4
+                      %i.fa.fa-cog
+                      fa-cog
+                    .fa-hover.col-md-3.col-sm-4
+                      %i.fa.fa-cogs
+                      fa-cogs
+                    .fa-hover.col-md-3.col-sm-4
+                      %i.fa.fa-comment
+                      fa-comment
+                    .fa-hover.col-md-3.col-sm-4
+                      %i.fa.fa-comment-o
+                      fa-comment-o
+                    .fa-hover.col-md-3.col-sm-4
+                      %i.fa.fa-comments
+                      fa-comments
+                    .fa-hover.col-md-3.col-sm-4
+                      %i.fa.fa-comments-o
+                      fa-comments-o
+                    .fa-hover.col-md-3.col-sm-4
+                      %i.fa.fa-compass
+                      fa-compass
+                    .fa-hover.col-md-3.col-sm-4
+                      %i.fa.fa-credit-card
+                      fa-credit-card
+                    .fa-hover.col-md-3.col-sm-4
+                      %i.fa.fa-crop
+                      fa-crop
+                    .fa-hover.col-md-3.col-sm-4
+                      %i.fa.fa-crosshairs
+                      fa-crosshairs
+                    .fa-hover.col-md-3.col-sm-4
+                      %i.fa.fa-cutlery
+                      fa-cutlery
+                    .fa-hover.col-md-3.col-sm-4
+                      %i.fa.fa-dashboard
+                      fa-dashboard
+                      %span.text-muted (alias)
+                    .fa-hover.col-md-3.col-sm-4
+                      %i.fa.fa-desktop
+                      fa-desktop
+                    .fa-hover.col-md-3.col-sm-4
+                      %i.fa.fa-dot-circle-o
+                      fa-dot-circle-o
+                    .fa-hover.col-md-3.col-sm-4
+                      %i.fa.fa-download
+                      fa-download
+                    .fa-hover.col-md-3.col-sm-4
+                      %i.fa.fa-edit
+                      fa-edit
+                      %span.text-muted (alias)
+                    .fa-hover.col-md-3.col-sm-4
+                      %i.fa.fa-ellipsis-h
+                      fa-ellipsis-h
+                    .fa-hover.col-md-3.col-sm-4
+                      %i.fa.fa-ellipsis-v
+                      fa-ellipsis-v
+                    .fa-hover.col-md-3.col-sm-4
+                      %i.fa.fa-envelope
+                      fa-envelope
+                    .fa-hover.col-md-3.col-sm-4
+                      %i.fa.fa-envelope-o
+                      fa-envelope-o
+                    .fa-hover.col-md-3.col-sm-4
+                      %i.fa.fa-eraser
+                      fa-eraser
+                    .fa-hover.col-md-3.col-sm-4
+                      %i.fa.fa-exchange
+                      fa-exchange
+                    .fa-hover.col-md-3.col-sm-4
+                      %i.fa.fa-exclamation
+                      fa-exclamation
+                    .fa-hover.col-md-3.col-sm-4
+                      %i.fa.fa-exclamation-circle
+                      fa-exclamation-circle
+                    .fa-hover.col-md-3.col-sm-4
+                      %i.fa.fa-exclamation-triangle
+                      fa-exclamation-triangle
+                    .fa-hover.col-md-3.col-sm-4
+                      %i.fa.fa-external-link
+                      fa-external-link
+                    .fa-hover.col-md-3.col-sm-4
+                      %i.fa.fa-external-link-square
+                      fa-external-link-square
+                    .fa-hover.col-md-3.col-sm-4
+                      %i.fa.fa-eye
+                      fa-eye
+                    .fa-hover.col-md-3.col-sm-4
+                      %i.fa.fa-eye-slash
+                      fa-eye-slash
+                    .fa-hover.col-md-3.col-sm-4
+                      %i.fa.fa-female
+                      fa-female
+                    .fa-hover.col-md-3.col-sm-4
+                      %i.fa.fa-fighter-jet
+                      fa-fighter-jet
+                    .fa-hover.col-md-3.col-sm-4
+                      %i.fa.fa-film
+                      fa-film
+                    .fa-hover.col-md-3.col-sm-4
+                      %i.fa.fa-filter
+                      fa-filter
+                    .fa-hover.col-md-3.col-sm-4
+                      %i.fa.fa-fire
+                      fa-fire
+                    .fa-hover.col-md-3.col-sm-4
+                      %i.fa.fa-fire-extinguisher
+                      fa-fire-extinguisher
+                    .fa-hover.col-md-3.col-sm-4
+                      %i.fa.fa-flag
+                      fa-flag
+                    .fa-hover.col-md-3.col-sm-4
+                      %i.fa.fa-flag-checkered
+                      fa-flag-checkered
+                    .fa-hover.col-md-3.col-sm-4
+                      %i.fa.fa-flag-o
+                      fa-flag-o
+                    .fa-hover.col-md-3.col-sm-4
+                      %i.fa.fa-flash
+                      fa-flash
+                      %span.text-muted (alias)
+                    .fa-hover.col-md-3.col-sm-4
+                      %i.fa.fa-flask
+                      fa-flask
+                    .fa-hover.col-md-3.col-sm-4
+                      %i.fa.fa-folder
+                      fa-folder
+                    .fa-hover.col-md-3.col-sm-4
+                      %i.fa.fa-folder-o
+                      fa-folder-o
+                    .fa-hover.col-md-3.col-sm-4
+                      %i.fa.fa-folder-open
+                      fa-folder-open
+                    .fa-hover.col-md-3.col-sm-4
+                      %i.fa.fa-folder-open-o
+                      fa-folder-open-o
+                    .fa-hover.col-md-3.col-sm-4
+                      %i.fa.fa-frown-o
+                      fa-frown-o
+                    .fa-hover.col-md-3.col-sm-4
+                      %i.fa.fa-gamepad
+                      fa-gamepad
+                    .fa-hover.col-md-3.col-sm-4
+                      %i.fa.fa-gavel
+                      fa-gavel
+                    .fa-hover.col-md-3.col-sm-4
+                      %i.fa.fa-gear
+                      fa-gear
+                      %span.text-muted (alias)
+                    .fa-hover.col-md-3.col-sm-4
+                      %i.fa.fa-gears
+                      fa-gears
+                      %span.text-muted (alias)
+                    .fa-hover.col-md-3.col-sm-4
+                      %i.fa.fa-gift
+                      fa-gift
+                    .fa-hover.col-md-3.col-sm-4
+                      %i.fa.fa-glass
+                      fa-glass
+                    .fa-hover.col-md-3.col-sm-4
+                      %i.fa.fa-globe
+                      fa-globe
+                    .fa-hover.col-md-3.col-sm-4
+                      %i.fa.fa-group
+                      fa-group
+                      %span.text-muted (alias)
+                    .fa-hover.col-md-3.col-sm-4
+                      %i.fa.fa-hdd-o
+                      fa-hdd-o
+                    .fa-hover.col-md-3.col-sm-4
+                      %i.fa.fa-headphones
+                      fa-headphones
+                    .fa-hover.col-md-3.col-sm-4
+                      %i.fa.fa-heart
+                      fa-heart
+                    .fa-hover.col-md-3.col-sm-4
+                      %i.fa.fa-heart-o
+                      fa-heart-o
+                    .fa-hover.col-md-3.col-sm-4
+                      %i.fa.fa-home
+                      fa-home
+                    .fa-hover.col-md-3.col-sm-4
+                      %i.fa.fa-inbox
+                      fa-inbox
+                    .fa-hover.col-md-3.col-sm-4
+                      %i.fa.fa-info
+                      fa-info
+                    .fa-hover.col-md-3.col-sm-4
+                      %i.fa.fa-info-circle
+                      fa-info-circle
+                    .fa-hover.col-md-3.col-sm-4
+                      %i.fa.fa-key
+                      fa-key
+                    .fa-hover.col-md-3.col-sm-4
+                      %i.fa.fa-keyboard-o
+                      fa-keyboard-o
+                    .fa-hover.col-md-3.col-sm-4
+                      %i.fa.fa-laptop
+                      fa-laptop
+                    .fa-hover.col-md-3.col-sm-4
+                      %i.fa.fa-leaf
+                      fa-leaf
+                    .fa-hover.col-md-3.col-sm-4
+                      %i.fa.fa-legal
+                      fa-legal
+                      %span.text-muted (alias)
+                    .fa-hover.col-md-3.col-sm-4
+                      %i.fa.fa-lemon-o
+                      fa-lemon-o
+                    .fa-hover.col-md-3.col-sm-4
+                      %i.fa.fa-level-down
+                      fa-level-down
+                    .fa-hover.col-md-3.col-sm-4
+                      %i.fa.fa-level-up
+                      fa-level-up
+                    .fa-hover.col-md-3.col-sm-4
+                      %i.fa.fa-lightbulb-o
+                      fa-lightbulb-o
+                    .fa-hover.col-md-3.col-sm-4
+                      %i.fa.fa-location-arrow
+                      fa-location-arrow
+                    .fa-hover.col-md-3.col-sm-4
+                      %i.fa.fa-lock
+                      fa-lock
+                    .fa-hover.col-md-3.col-sm-4
+                      %i.fa.fa-magic
+                      fa-magic
+                    .fa-hover.col-md-3.col-sm-4
+                      %i.fa.fa-magnet
+                      fa-magnet
+                    .fa-hover.col-md-3.col-sm-4
+                      %i.fa.fa-mail-forward
+                      fa-mail-forward
+                      %span.text-muted (alias)
+                    .fa-hover.col-md-3.col-sm-4
+                      %i.fa.fa-mail-reply
+                      fa-mail-reply
+                      %span.text-muted (alias)
+                    .fa-hover.col-md-3.col-sm-4
+                      %i.fa.fa-mail-reply-all
+                      fa-mail-reply-all
+                    .fa-hover.col-md-3.col-sm-4
+                      %i.fa.fa-male
+                      fa-male
+                    .fa-hover.col-md-3.col-sm-4
+                      %i.fa.fa-map-marker
+                      fa-map-marker
+                    .fa-hover.col-md-3.col-sm-4
+                      %i.fa.fa-meh-o
+                      fa-meh-o
+                    .fa-hover.col-md-3.col-sm-4
+                      %i.fa.fa-microphone
+                      fa-microphone
+                    .fa-hover.col-md-3.col-sm-4
+                      %i.fa.fa-microphone-slash
+                      fa-microphone-slash
+                    .fa-hover.col-md-3.col-sm-4
+                      %i.fa.fa-minus
+                      fa-minus
+                    .fa-hover.col-md-3.col-sm-4
+                      %i.fa.fa-minus-circle
+                      fa-minus-circle
+                    .fa-hover.col-md-3.col-sm-4
+                      %i.fa.fa-minus-square
+                      fa-minus-square
+                    .fa-hover.col-md-3.col-sm-4
+                      %i.fa.fa-minus-square-o
+                      fa-minus-square-o
+                    .fa-hover.col-md-3.col-sm-4
+                      %i.fa.fa-mobile
+                      fa-mobile
+                    .fa-hover.col-md-3.col-sm-4
+                      %i.fa.fa-mobile-phone
+                      fa-mobile-phone
+                      %span.text-muted (alias)
+                    .fa-hover.col-md-3.col-sm-4
+                      %i.fa.fa-money
+                      fa-money
+                    .fa-hover.col-md-3.col-sm-4
+                      %i.fa.fa-moon-o
+                      fa-moon-o
+                    .fa-hover.col-md-3.col-sm-4
+                      %i.fa.fa-music
+                      fa-music
+                    .fa-hover.col-md-3.col-sm-4
+                      %i.fa.fa-pencil
+                      fa-pencil
+                    .fa-hover.col-md-3.col-sm-4
+                      %i.fa.fa-pencil-square
+                      fa-pencil-square
+                    .fa-hover.col-md-3.col-sm-4
+                      %i.fa.fa-pencil-square-o
+                      fa-pencil-square-o
+                    .fa-hover.col-md-3.col-sm-4
+                      %i.fa.fa-phone
+                      fa-phone
+                    .fa-hover.col-md-3.col-sm-4
+                      %i.fa.fa-phone-square
+                      fa-phone-square
+                    .fa-hover.col-md-3.col-sm-4
+                      %i.fa.fa-picture-o
+                      fa-picture-o
+                    .fa-hover.col-md-3.col-sm-4
+                      %i.fa.fa-plane
+                      fa-plane
+                    .fa-hover.col-md-3.col-sm-4
+                      %i.fa.fa-plus
+                      fa-plus
+                    .fa-hover.col-md-3.col-sm-4
+                      %i.fa.fa-plus-circle
+                      fa-plus-circle
+                    .fa-hover.col-md-3.col-sm-4
+                      %i.fa.fa-plus-square
+                      fa-plus-square
+                    .fa-hover.col-md-3.col-sm-4
+                      %i.fa.fa-plus-square-o
+                      fa-plus-square-o
+                    .fa-hover.col-md-3.col-sm-4
+                      %i.fa.fa-power-off
+                      fa-power-off
+                    .fa-hover.col-md-3.col-sm-4
+                      %i.fa.fa-print
+                      fa-print
+                    .fa-hover.col-md-3.col-sm-4
+                      %i.fa.fa-puzzle-piece
+                      fa-puzzle-piece
+                    .fa-hover.col-md-3.col-sm-4
+                      %i.fa.fa-qrcode
+                      fa-qrcode
+                    .fa-hover.col-md-3.col-sm-4
+                      %i.fa.fa-question
+                      fa-question
+                    .fa-hover.col-md-3.col-sm-4
+                      %i.fa.fa-question-circle
+                      fa-question-circle
+                    .fa-hover.col-md-3.col-sm-4
+                      %i.fa.fa-quote-left
+                      fa-quote-left
+                    .fa-hover.col-md-3.col-sm-4
+                      %i.fa.fa-quote-right
+                      fa-quote-right
+                    .fa-hover.col-md-3.col-sm-4
+                      %i.fa.fa-random
+                      fa-random
+                    .fa-hover.col-md-3.col-sm-4
+                      %i.fa.fa-refresh
+                      fa-refresh
+                    .fa-hover.col-md-3.col-sm-4
+                      %i.fa.fa-reply
+                      fa-reply
+                    .fa-hover.col-md-3.col-sm-4
+                      %i.fa.fa-reply-all
+                      fa-reply-all
+                    .fa-hover.col-md-3.col-sm-4
+                      %i.fa.fa-retweet
+                      fa-retweet
+                    .fa-hover.col-md-3.col-sm-4
+                      %i.fa.fa-road
+                      fa-road
+                    .fa-hover.col-md-3.col-sm-4
+                      %i.fa.fa-rocket
+                      fa-rocket
+                    .fa-hover.col-md-3.col-sm-4
+                      %i.fa.fa-rss
+                      fa-rss
+                    .fa-hover.col-md-3.col-sm-4
+                      %i.fa.fa-rss-square
+                      fa-rss-square
+                    .fa-hover.col-md-3.col-sm-4
+                      %i.fa.fa-search
+                      fa-search
+                    .fa-hover.col-md-3.col-sm-4
+                      %i.fa.fa-search-minus
+                      fa-search-minus
+                    .fa-hover.col-md-3.col-sm-4
+                      %i.fa.fa-search-plus
+                      fa-search-plus
+                    .fa-hover.col-md-3.col-sm-4
+                      %i.fa.fa-share
+                      fa-share
+                    .fa-hover.col-md-3.col-sm-4
+                      %i.fa.fa-share-square
+                      fa-share-square
+                    .fa-hover.col-md-3.col-sm-4
+                      %i.fa.fa-share-square-o
+                      fa-share-square-o
+                    .fa-hover.col-md-3.col-sm-4
+                      %i.fa.fa-shield
+                      fa-shield
+                    .fa-hover.col-md-3.col-sm-4
+                      %i.fa.fa-shopping-cart
+                      fa-shopping-cart
+                    .fa-hover.col-md-3.col-sm-4
+                      %i.fa.fa-sign-in
+                      fa-sign-in
+                    .fa-hover.col-md-3.col-sm-4
+                      %i.fa.fa-sign-out
+                      fa-sign-out
+                    .fa-hover.col-md-3.col-sm-4
+                      %i.fa.fa-signal
+                      fa-signal
+                    .fa-hover.col-md-3.col-sm-4
+                      %i.fa.fa-sitemap
+                      fa-sitemap
+                    .fa-hover.col-md-3.col-sm-4
+                      %i.fa.fa-smile-o
+                      fa-smile-o
+                    .fa-hover.col-md-3.col-sm-4
+                      %i.fa.fa-sort
+                      fa-sort
+                    .fa-hover.col-md-3.col-sm-4
+                      %i.fa.fa-sort-alpha-asc
+                      fa-sort-alpha-asc
+                    .fa-hover.col-md-3.col-sm-4
+                      %i.fa.fa-sort-alpha-desc
+                      fa-sort-alpha-desc
+                    .fa-hover.col-md-3.col-sm-4
+                      %i.fa.fa-sort-amount-asc
+                      fa-sort-amount-asc
+                    .fa-hover.col-md-3.col-sm-4
+                      %i.fa.fa-sort-amount-desc
+                      fa-sort-amount-desc
+                    .fa-hover.col-md-3.col-sm-4
+                      %i.fa.fa-sort-asc
+                      fa-sort-asc
+                    .fa-hover.col-md-3.col-sm-4
+                      %i.fa.fa-sort-desc
+                      fa-sort-desc
+                    .fa-hover.col-md-3.col-sm-4
+                      %i.fa.fa-sort-down
+                      fa-sort-down
+                      %span.text-muted (alias)
+                    .fa-hover.col-md-3.col-sm-4
+                      %i.fa.fa-sort-numeric-asc
+                      fa-sort-numeric-asc
+                    .fa-hover.col-md-3.col-sm-4
+                      %i.fa.fa-sort-numeric-desc
+                      fa-sort-numeric-desc
+                    .fa-hover.col-md-3.col-sm-4
+                      %i.fa.fa-sort-up
+                      fa-sort-up
+                      %span.text-muted (alias)
+                    .fa-hover.col-md-3.col-sm-4
+                      %i.fa.fa-spinner
+                      fa-spinner
+                    .fa-hover.col-md-3.col-sm-4
+                      %i.fa.fa-square
+                      fa-square
+                    .fa-hover.col-md-3.col-sm-4
+                      %i.fa.fa-square-o
+                      fa-square-o
+                    .fa-hover.col-md-3.col-sm-4
+                      %i.fa.fa-star
+                      fa-star
+                    .fa-hover.col-md-3.col-sm-4
+                      %i.fa.fa-star-half
+                      fa-star-half
+                    .fa-hover.col-md-3.col-sm-4
+                      %i.fa.fa-star-half-empty
+                      fa-star-half-empty
+                      %span.text-muted (alias)
+                    .fa-hover.col-md-3.col-sm-4
+                      %i.fa.fa-star-half-full
+                      fa-star-half-full
+                      %span.text-muted (alias)
+                    .fa-hover.col-md-3.col-sm-4
+                      %i.fa.fa-star-half-o
+                      fa-star-half-o
+                    .fa-hover.col-md-3.col-sm-4
+                      %i.fa.fa-star-o
+                      fa-star-o
+                    .fa-hover.col-md-3.col-sm-4
+                      %i.fa.fa-subscript
+                      fa-subscript
+                    .fa-hover.col-md-3.col-sm-4
+                      %i.fa.fa-suitcase
+                      fa-suitcase
+                    .fa-hover.col-md-3.col-sm-4
+                      %i.fa.fa-sun-o
+                      fa-sun-o
+                    .fa-hover.col-md-3.col-sm-4
+                      %i.fa.fa-superscript
+                      fa-superscript
+                    .fa-hover.col-md-3.col-sm-4
+                      %i.fa.fa-tablet
+                      fa-tablet
+                    .fa-hover.col-md-3.col-sm-4
+                      %i.fa.fa-tachometer
+                      fa-tachometer
+                    .fa-hover.col-md-3.col-sm-4
+                      %i.fa.fa-tag
+                      fa-tag
+                    .fa-hover.col-md-3.col-sm-4
+                      %i.fa.fa-tags
+                      fa-tags
+                    .fa-hover.col-md-3.col-sm-4
+                      %i.fa.fa-tasks
+                      fa-tasks
+                    .fa-hover.col-md-3.col-sm-4
+                      %i.fa.fa-terminal
+                      fa-terminal
+                    .fa-hover.col-md-3.col-sm-4
+                      %i.fa.fa-thumb-tack
+                      fa-thumb-tack
+                    .fa-hover.col-md-3.col-sm-4
+                      %i.fa.fa-thumbs-down
+                      fa-thumbs-down
+                    .fa-hover.col-md-3.col-sm-4
+                      %i.fa.fa-thumbs-o-down
+                      fa-thumbs-o-down
+                    .fa-hover.col-md-3.col-sm-4
+                      %i.fa.fa-thumbs-o-up
+                      fa-thumbs-o-up
+                    .fa-hover.col-md-3.col-sm-4
+                      %i.fa.fa-thumbs-up
+                      fa-thumbs-up
+                    .fa-hover.col-md-3.col-sm-4
+                      %i.fa.fa-ticket
+                      fa-ticket
+                    .fa-hover.col-md-3.col-sm-4
+                      %i.fa.fa-times
+                      fa-times
+                    .fa-hover.col-md-3.col-sm-4
+                      %i.fa.fa-times-circle
+                      fa-times-circle
+                    .fa-hover.col-md-3.col-sm-4
+                      %i.fa.fa-times-circle-o
+                      fa-times-circle-o
+                    .fa-hover.col-md-3.col-sm-4
+                      %i.fa.fa-tint
+                      fa-tint
+                    .fa-hover.col-md-3.col-sm-4
+                      %i.fa.fa-toggle-down
+                      fa-toggle-down
+                      %span.text-muted (alias)
+                    .fa-hover.col-md-3.col-sm-4
+                      %i.fa.fa-toggle-left
+                      fa-toggle-left
+                      %span.text-muted (alias)
+                    .fa-hover.col-md-3.col-sm-4
+                      %i.fa.fa-toggle-right
+                      fa-toggle-right
+                      %span.text-muted (alias)
+                    .fa-hover.col-md-3.col-sm-4
+                      %i.fa.fa-toggle-up
+                      fa-toggle-up
+                      %span.text-muted (alias)
+                    .fa-hover.col-md-3.col-sm-4
+                      %i.fa.fa-trash-o
+                      fa-trash-o
+                    .fa-hover.col-md-3.col-sm-4
+                      %i.fa.fa-trophy
+                      fa-trophy
+                    .fa-hover.col-md-3.col-sm-4
+                      %i.fa.fa-truck
+                      fa-truck
+                    .fa-hover.col-md-3.col-sm-4
+                      %i.fa.fa-umbrella
+                      fa-umbrella
+                    .fa-hover.col-md-3.col-sm-4
+                      %i.fa.fa-unlock
+                      fa-unlock
+                    .fa-hover.col-md-3.col-sm-4
+                      %i.fa.fa-unlock-alt
+                      fa-unlock-alt
+                    .fa-hover.col-md-3.col-sm-4
+                      %i.fa.fa-unsorted
+                      fa-unsorted
+                      %span.text-muted (alias)
+                    .fa-hover.col-md-3.col-sm-4
+                      %i.fa.fa-upload
+                      fa-upload
+                    .fa-hover.col-md-3.col-sm-4
+                      %i.fa.fa-user
+                      fa-user
+                    .fa-hover.col-md-3.col-sm-4
+                      %i.fa.fa-users
+                      fa-users
+                    .fa-hover.col-md-3.col-sm-4
+                      %i.fa.fa-video-camera
+                      fa-video-camera
+                    .fa-hover.col-md-3.col-sm-4
+                      %i.fa.fa-volume-down
+                      fa-volume-down
+                    .fa-hover.col-md-3.col-sm-4
+                      %i.fa.fa-volume-off
+                      fa-volume-off
+                    .fa-hover.col-md-3.col-sm-4
+                      %i.fa.fa-volume-up
+                      fa-volume-up
+                    .fa-hover.col-md-3.col-sm-4
+                      %i.fa.fa-warning
+                      fa-warning
+                      %span.text-muted (alias)
+                    .fa-hover.col-md-3.col-sm-4
+                      %i.fa.fa-wheelchair
+                      fa-wheelchair
+                    .fa-hover.col-md-3.col-sm-4
+                      %i.fa.fa-wrench
+                      fa-wrench
+                %section#form-control
+                  %h2.page-header Form Control Icons
+                  .row.fontawesome-icon-list
+                    .fa-hover.col-md-3.col-sm-4
+                      %i.fa.fa-check-square
+                      fa-check-square
+                    .fa-hover.col-md-3.col-sm-4
+                      %i.fa.fa-check-square-o
+                      fa-check-square-o
+                    .fa-hover.col-md-3.col-sm-4
+                      %i.fa.fa-circle
+                      fa-circle
+                    .fa-hover.col-md-3.col-sm-4
+                      %i.fa.fa-circle-o
+                      fa-circle-o
+                    .fa-hover.col-md-3.col-sm-4
+                      %i.fa.fa-dot-circle-o
+                      fa-dot-circle-o
+                    .fa-hover.col-md-3.col-sm-4
+                      %i.fa.fa-minus-square
+                      fa-minus-square
+                    .fa-hover.col-md-3.col-sm-4
+                      %i.fa.fa-minus-square-o
+                      fa-minus-square-o
+                    .fa-hover.col-md-3.col-sm-4
+                      %i.fa.fa-plus-square
+                      fa-plus-square
+                    .fa-hover.col-md-3.col-sm-4
+                      %i.fa.fa-plus-square-o
+                      fa-plus-square-o
+                    .fa-hover.col-md-3.col-sm-4
+                      %i.fa.fa-square
+                      fa-square
+                    .fa-hover.col-md-3.col-sm-4
+                      %i.fa.fa-square-o
+                      fa-square-o
+                %section#currency
+                  %h2.page-header Currency Icons
+                  .row.fontawesome-icon-list
+                    .fa-hover.col-md-3.col-sm-4
+                      %i.fa.fa-bitcoin
+                      fa-bitcoin
+                      %span.text-muted (alias)
+                    .fa-hover.col-md-3.col-sm-4
+                      %i.fa.fa-btc
+                      fa-btc
+                    .fa-hover.col-md-3.col-sm-4
+                      %i.fa.fa-cny
+                      fa-cny
+                      %span.text-muted (alias)
+                    .fa-hover.col-md-3.col-sm-4
+                      %i.fa.fa-dollar
+                      fa-dollar
+                      %span.text-muted (alias)
+                    .fa-hover.col-md-3.col-sm-4
+                      %i.fa.fa-eur
+                      fa-eur
+                    .fa-hover.col-md-3.col-sm-4
+                      %i.fa.fa-euro
+                      fa-euro
+                      %span.text-muted (alias)
+                    .fa-hover.col-md-3.col-sm-4
+                      %i.fa.fa-gbp
+                      fa-gbp
+                    .fa-hover.col-md-3.col-sm-4
+                      %i.fa.fa-inr
+                      fa-inr
+                    .fa-hover.col-md-3.col-sm-4
+                      %i.fa.fa-jpy
+                      fa-jpy
+                    .fa-hover.col-md-3.col-sm-4
+                      %i.fa.fa-krw
+                      fa-krw
+                    .fa-hover.col-md-3.col-sm-4
+                      %i.fa.fa-money
+                      fa-money
+                    .fa-hover.col-md-3.col-sm-4
+                      %i.fa.fa-rmb
+                      fa-rmb
+                      %span.text-muted (alias)
+                    .fa-hover.col-md-3.col-sm-4
+                      %i.fa.fa-rouble
+                      fa-rouble
+                      %span.text-muted (alias)
+                    .fa-hover.col-md-3.col-sm-4
+                      %i.fa.fa-rub
+                      fa-rub
+                    .fa-hover.col-md-3.col-sm-4
+                      %i.fa.fa-ruble
+                      fa-ruble
+                      %span.text-muted (alias)
+                    .fa-hover.col-md-3.col-sm-4
+                      %i.fa.fa-rupee
+                      fa-rupee
+                      %span.text-muted (alias)
+                    .fa-hover.col-md-3.col-sm-4
+                      %i.fa.fa-try
+                      fa-try
+                    .fa-hover.col-md-3.col-sm-4
+                      %i.fa.fa-turkish-lira
+                      fa-turkish-lira
+                      %span.text-muted (alias)
+                    .fa-hover.col-md-3.col-sm-4
+                      %i.fa.fa-usd
+                      fa-usd
+                    .fa-hover.col-md-3.col-sm-4
+                      %i.fa.fa-won
+                      fa-won
+                      %span.text-muted (alias)
+                    .fa-hover.col-md-3.col-sm-4
+                      %i.fa.fa-yen
+                      fa-yen
+                      %span.text-muted (alias)
+                %section#text-editor
+                  %h2.page-header Text Editor Icons
+                  .row.fontawesome-icon-list
+                    .fa-hover.col-md-3.col-sm-4
+                      %i.fa.fa-align-center
+                      fa-align-center
+                    .fa-hover.col-md-3.col-sm-4
+                      %i.fa.fa-align-justify
+                      fa-align-justify
+                    .fa-hover.col-md-3.col-sm-4
+                      %i.fa.fa-align-left
+                      fa-align-left
+                    .fa-hover.col-md-3.col-sm-4
+                      %i.fa.fa-align-right
+                      fa-align-right
+                    .fa-hover.col-md-3.col-sm-4
+                      %i.fa.fa-bold
+                      fa-bold
+                    .fa-hover.col-md-3.col-sm-4
+                      %i.fa.fa-chain
+                      fa-chain
+                      %span.text-muted (alias)
+                    .fa-hover.col-md-3.col-sm-4
+                      %i.fa.fa-chain-broken
+                      fa-chain-broken
+                    .fa-hover.col-md-3.col-sm-4
+                      %i.fa.fa-clipboard
+                      fa-clipboard
+                    .fa-hover.col-md-3.col-sm-4
+                      %i.fa.fa-columns
+                      fa-columns
+                    .fa-hover.col-md-3.col-sm-4
+                      %i.fa.fa-copy
+                      fa-copy
+                      %span.text-muted (alias)
+                    .fa-hover.col-md-3.col-sm-4
+                      %i.fa.fa-cut
+                      fa-cut
+                      %span.text-muted (alias)
+                    .fa-hover.col-md-3.col-sm-4
+                      %i.fa.fa-dedent
+                      fa-dedent
+                      %span.text-muted (alias)
+                    .fa-hover.col-md-3.col-sm-4
+                      %i.fa.fa-eraser
+                      fa-eraser
+                    .fa-hover.col-md-3.col-sm-4
+                      %i.fa.fa-file
+                      fa-file
+                    .fa-hover.col-md-3.col-sm-4
+                      %i.fa.fa-file-o
+                      fa-file-o
+                    .fa-hover.col-md-3.col-sm-4
+                      %i.fa.fa-file-text
+                      fa-file-text
+                    .fa-hover.col-md-3.col-sm-4
+                      %i.fa.fa-file-text-o
+                      fa-file-text-o
+                    .fa-hover.col-md-3.col-sm-4
+                      %i.fa.fa-files-o
+                      fa-files-o
+                    .fa-hover.col-md-3.col-sm-4
+                      %i.fa.fa-floppy-o
+                      fa-floppy-o
+                    .fa-hover.col-md-3.col-sm-4
+                      %i.fa.fa-font
+                      fa-font
+                    .fa-hover.col-md-3.col-sm-4
+                      %i.fa.fa-indent
+                      fa-indent
+                    .fa-hover.col-md-3.col-sm-4
+                      %i.fa.fa-italic
+                      fa-italic
+                    .fa-hover.col-md-3.col-sm-4
+                      %i.fa.fa-link
+                      fa-link
+                    .fa-hover.col-md-3.col-sm-4
+                      %i.fa.fa-list
+                      fa-list
+                    .fa-hover.col-md-3.col-sm-4
+                      %i.fa.fa-list-alt
+                      fa-list-alt
+                    .fa-hover.col-md-3.col-sm-4
+                      %i.fa.fa-list-ol
+                      fa-list-ol
+                    .fa-hover.col-md-3.col-sm-4
+                      %i.fa.fa-list-ul
+                      fa-list-ul
+                    .fa-hover.col-md-3.col-sm-4
+                      %i.fa.fa-outdent
+                      fa-outdent
+                    .fa-hover.col-md-3.col-sm-4
+                      %i.fa.fa-paperclip
+                      fa-paperclip
+                    .fa-hover.col-md-3.col-sm-4
+                      %i.fa.fa-paste
+                      fa-paste
+                      %span.text-muted (alias)
+                    .fa-hover.col-md-3.col-sm-4
+                      %i.fa.fa-repeat
+                      fa-repeat
+                    .fa-hover.col-md-3.col-sm-4
+                      %i.fa.fa-rotate-left
+                      fa-rotate-left
+                      %span.text-muted (alias)
+                    .fa-hover.col-md-3.col-sm-4
+                      %i.fa.fa-rotate-right
+                      fa-rotate-right
+                      %span.text-muted (alias)
+                    .fa-hover.col-md-3.col-sm-4
+                      %i.fa.fa-save
+                      fa-save
+                      %span.text-muted (alias)
+                    .fa-hover.col-md-3.col-sm-4
+                      %i.fa.fa-scissors
+                      fa-scissors
+                    .fa-hover.col-md-3.col-sm-4
+                      %i.fa.fa-strikethrough
+                      fa-strikethrough
+                    .fa-hover.col-md-3.col-sm-4
+                      %i.fa.fa-table
+                      fa-table
+                    .fa-hover.col-md-3.col-sm-4
+                      %i.fa.fa-text-height
+                      fa-text-height
+                    .fa-hover.col-md-3.col-sm-4
+                      %i.fa.fa-text-width
+                      fa-text-width
+                    .fa-hover.col-md-3.col-sm-4
+                      %i.fa.fa-th
+                      fa-th
+                    .fa-hover.col-md-3.col-sm-4
+                      %i.fa.fa-th-large
+                      fa-th-large
+                    .fa-hover.col-md-3.col-sm-4
+                      %i.fa.fa-th-list
+                      fa-th-list
+                    .fa-hover.col-md-3.col-sm-4
+                      %i.fa.fa-underline
+                      fa-underline
+                    .fa-hover.col-md-3.col-sm-4
+                      %i.fa.fa-undo
+                      fa-undo
+                    .fa-hover.col-md-3.col-sm-4
+                      %i.fa.fa-unlink
+                      fa-unlink
+                      %span.text-muted (alias)
+                %section#directional
+                  %h2.page-header Directional Icons
+                  .row.fontawesome-icon-list
+                    .fa-hover.col-md-3.col-sm-4
+                      %i.fa.fa-angle-double-down
+                      fa-angle-double-down
+                    .fa-hover.col-md-3.col-sm-4
+                      %i.fa.fa-angle-double-left
+                      fa-angle-double-left
+                    .fa-hover.col-md-3.col-sm-4
+                      %i.fa.fa-angle-double-right
+                      fa-angle-double-right
+                    .fa-hover.col-md-3.col-sm-4
+                      %i.fa.fa-angle-double-up
+                      fa-angle-double-up
+                    .fa-hover.col-md-3.col-sm-4
+                      %i.fa.fa-angle-down
+                      fa-angle-down
+                    .fa-hover.col-md-3.col-sm-4
+                      %i.fa.fa-angle-left
+                      fa-angle-left
+                    .fa-hover.col-md-3.col-sm-4
+                      %i.fa.fa-angle-right
+                      fa-angle-right
+                    .fa-hover.col-md-3.col-sm-4
+                      %i.fa.fa-angle-up
+                      fa-angle-up
+                    .fa-hover.col-md-3.col-sm-4
+                      %i.fa.fa-arrow-circle-down
+                      fa-arrow-circle-down
+                    .fa-hover.col-md-3.col-sm-4
+                      %i.fa.fa-arrow-circle-left
+                      fa-arrow-circle-left
+                    .fa-hover.col-md-3.col-sm-4
+                      %i.fa.fa-arrow-circle-o-down
+                      fa-arrow-circle-o-down
+                    .fa-hover.col-md-3.col-sm-4
+                      %i.fa.fa-arrow-circle-o-left
+                      fa-arrow-circle-o-left
+                    .fa-hover.col-md-3.col-sm-4
+                      %i.fa.fa-arrow-circle-o-right
+                      fa-arrow-circle-o-right
+                    .fa-hover.col-md-3.col-sm-4
+                      %i.fa.fa-arrow-circle-o-up
+                      fa-arrow-circle-o-up
+                    .fa-hover.col-md-3.col-sm-4
+                      %i.fa.fa-arrow-circle-right
+                      fa-arrow-circle-right
+                    .fa-hover.col-md-3.col-sm-4
+                      %i.fa.fa-arrow-circle-up
+                      fa-arrow-circle-up
+                    .fa-hover.col-md-3.col-sm-4
+                      %i.fa.fa-arrow-down
+                      fa-arrow-down
+                    .fa-hover.col-md-3.col-sm-4
+                      %i.fa.fa-arrow-left
+                      fa-arrow-left
+                    .fa-hover.col-md-3.col-sm-4
+                      %i.fa.fa-arrow-right
+                      fa-arrow-right
+                    .fa-hover.col-md-3.col-sm-4
+                      %i.fa.fa-arrow-up
+                      fa-arrow-up
+                    .fa-hover.col-md-3.col-sm-4
+                      %i.fa.fa-arrows
+                      fa-arrows
+                    .fa-hover.col-md-3.col-sm-4
+                      %i.fa.fa-arrows-alt
+                      fa-arrows-alt
+                    .fa-hover.col-md-3.col-sm-4
+                      %i.fa.fa-arrows-h
+                      fa-arrows-h
+                    .fa-hover.col-md-3.col-sm-4
+                      %i.fa.fa-arrows-v
+                      fa-arrows-v
+                    .fa-hover.col-md-3.col-sm-4
+                      %i.fa.fa-caret-down
+                      fa-caret-down
+                    .fa-hover.col-md-3.col-sm-4
+                      %i.fa.fa-caret-left
+                      fa-caret-left
+                    .fa-hover.col-md-3.col-sm-4
+                      %i.fa.fa-caret-right
+                      fa-caret-right
+                    .fa-hover.col-md-3.col-sm-4
+                      %i.fa.fa-caret-square-o-down
+                      fa-caret-square-o-down
+                    .fa-hover.col-md-3.col-sm-4
+                      %i.fa.fa-caret-square-o-left
+                      fa-caret-square-o-left
+                    .fa-hover.col-md-3.col-sm-4
+                      %i.fa.fa-caret-square-o-right
+                      fa-caret-square-o-right
+                    .fa-hover.col-md-3.col-sm-4
+                      %i.fa.fa-caret-square-o-up
+                      fa-caret-square-o-up
+                    .fa-hover.col-md-3.col-sm-4
+                      %i.fa.fa-caret-up
+                      fa-caret-up
+                    .fa-hover.col-md-3.col-sm-4
+                      %i.fa.fa-chevron-circle-down
+                      fa-chevron-circle-down
+                    .fa-hover.col-md-3.col-sm-4
+                      %i.fa.fa-chevron-circle-left
+                      fa-chevron-circle-left
+                    .fa-hover.col-md-3.col-sm-4
+                      %i.fa.fa-chevron-circle-right
+                      fa-chevron-circle-right
+                    .fa-hover.col-md-3.col-sm-4
+                      %i.fa.fa-chevron-circle-up
+                      fa-chevron-circle-up
+                    .fa-hover.col-md-3.col-sm-4
+                      %i.fa.fa-chevron-down
+                      fa-chevron-down
+                    .fa-hover.col-md-3.col-sm-4
+                      %i.fa.fa-chevron-left
+                      fa-chevron-left
+                    .fa-hover.col-md-3.col-sm-4
+                      %i.fa.fa-chevron-right
+                      fa-chevron-right
+                    .fa-hover.col-md-3.col-sm-4
+                      %i.fa.fa-chevron-up
+                      fa-chevron-up
+                    .fa-hover.col-md-3.col-sm-4
+                      %i.fa.fa-hand-o-down
+                      fa-hand-o-down
+                    .fa-hover.col-md-3.col-sm-4
+                      %i.fa.fa-hand-o-left
+                      fa-hand-o-left
+                    .fa-hover.col-md-3.col-sm-4
+                      %i.fa.fa-hand-o-right
+                      fa-hand-o-right
+                    .fa-hover.col-md-3.col-sm-4
+                      %i.fa.fa-hand-o-up
+                      fa-hand-o-up
+                    .fa-hover.col-md-3.col-sm-4
+                      %i.fa.fa-long-arrow-down
+                      fa-long-arrow-down
+                    .fa-hover.col-md-3.col-sm-4
+                      %i.fa.fa-long-arrow-left
+                      fa-long-arrow-left
+                    .fa-hover.col-md-3.col-sm-4
+                      %i.fa.fa-long-arrow-right
+                      fa-long-arrow-right
+                    .fa-hover.col-md-3.col-sm-4
+                      %i.fa.fa-long-arrow-up
+                      fa-long-arrow-up
+                    .fa-hover.col-md-3.col-sm-4
+                      %i.fa.fa-toggle-down
+                      fa-toggle-down
+                      %span.text-muted (alias)
+                    .fa-hover.col-md-3.col-sm-4
+                      %i.fa.fa-toggle-left
+                      fa-toggle-left
+                      %span.text-muted (alias)
+                    .fa-hover.col-md-3.col-sm-4
+                      %i.fa.fa-toggle-right
+                      fa-toggle-right
+                      %span.text-muted (alias)
+                    .fa-hover.col-md-3.col-sm-4
+                      %i.fa.fa-toggle-up
+                      fa-toggle-up
+                      %span.text-muted (alias)
+                %section#video-player
+                  %h2.page-header Video Player Icons
+                  .row.fontawesome-icon-list
+                    .fa-hover.col-md-3.col-sm-4
+                      %i.fa.fa-arrows-alt
+                      fa-arrows-alt
+                    .fa-hover.col-md-3.col-sm-4
+                      %i.fa.fa-backward
+                      fa-backward
+                    .fa-hover.col-md-3.col-sm-4
+                      %i.fa.fa-compress
+                      fa-compress
+                    .fa-hover.col-md-3.col-sm-4
+                      %i.fa.fa-eject
+                      fa-eject
+                    .fa-hover.col-md-3.col-sm-4
+                      %i.fa.fa-expand
+                      fa-expand
+                    .fa-hover.col-md-3.col-sm-4
+                      %i.fa.fa-fast-backward
+                      fa-fast-backward
+                    .fa-hover.col-md-3.col-sm-4
+                      %i.fa.fa-fast-forward
+                      fa-fast-forward
+                    .fa-hover.col-md-3.col-sm-4
+                      %i.fa.fa-forward
+                      fa-forward
+                    .fa-hover.col-md-3.col-sm-4
+                      %i.fa.fa-pause
+                      fa-pause
+                    .fa-hover.col-md-3.col-sm-4
+                      %i.fa.fa-play
+                      fa-play
+                    .fa-hover.col-md-3.col-sm-4
+                      %i.fa.fa-play-circle
+                      fa-play-circle
+                    .fa-hover.col-md-3.col-sm-4
+                      %i.fa.fa-play-circle-o
+                      fa-play-circle-o
+                    .fa-hover.col-md-3.col-sm-4
+                      %i.fa.fa-step-backward
+                      fa-step-backward
+                    .fa-hover.col-md-3.col-sm-4
+                      %i.fa.fa-step-forward
+                      fa-step-forward
+                    .fa-hover.col-md-3.col-sm-4
+                      %i.fa.fa-stop
+                      fa-stop
+                    .fa-hover.col-md-3.col-sm-4
+                      %i.fa.fa-youtube-play
+                      fa-youtube-play
+                %section#brand
+                  %h2.page-header Brand Icons
+                  .row.fontawesome-icon-list
+                    .fa-hover.col-md-3.col-sm-4
+                      %i.fa.fa-adn
+                      fa-adn
+                    .fa-hover.col-md-3.col-sm-4
+                      %i.fa.fa-android
+                      fa-android
+                    .fa-hover.col-md-3.col-sm-4
+                      %i.fa.fa-apple
+                      fa-apple
+                    .fa-hover.col-md-3.col-sm-4
+                      %i.fa.fa-bitbucket
+                      fa-bitbucket
+                    .fa-hover.col-md-3.col-sm-4
+                      %i.fa.fa-bitbucket-square
+                      fa-bitbucket-square
+                    .fa-hover.col-md-3.col-sm-4
+                      %i.fa.fa-bitcoin
+                      fa-bitcoin
+                      %span.text-muted (alias)
+                    .fa-hover.col-md-3.col-sm-4
+                      %i.fa.fa-btc
+                      fa-btc
+                    .fa-hover.col-md-3.col-sm-4
+                      %i.fa.fa-css3
+                      fa-css3
+                    .fa-hover.col-md-3.col-sm-4
+                      %i.fa.fa-dribbble
+                      fa-dribbble
+                    .fa-hover.col-md-3.col-sm-4
+                      %i.fa.fa-dropbox
+                      fa-dropbox
+                    .fa-hover.col-md-3.col-sm-4
+                      %i.fa.fa-facebook
+                      fa-facebook
+                    .fa-hover.col-md-3.col-sm-4
+                      %i.fa.fa-facebook-square
+                      fa-facebook-square
+                    .fa-hover.col-md-3.col-sm-4
+                      %i.fa.fa-flickr
+                      fa-flickr
+                    .fa-hover.col-md-3.col-sm-4
+                      %i.fa.fa-foursquare
+                      fa-foursquare
+                    .fa-hover.col-md-3.col-sm-4
+                      %i.fa.fa-github
+                      fa-github
+                    .fa-hover.col-md-3.col-sm-4
+                      %i.fa.fa-github-alt
+                      fa-github-alt
+                    .fa-hover.col-md-3.col-sm-4
+                      %i.fa.fa-github-square
+                      fa-github-square
+                    .fa-hover.col-md-3.col-sm-4
+                      %i.fa.fa-gittip
+                      fa-gittip
+                    .fa-hover.col-md-3.col-sm-4
+                      %i.fa.fa-google-plus
+                      fa-google-plus
+                    .fa-hover.col-md-3.col-sm-4
+                      %i.fa.fa-google-plus-square
+                      fa-google-plus-square
+                    .fa-hover.col-md-3.col-sm-4
+                      %i.fa.fa-html5
+                      fa-html5
+                    .fa-hover.col-md-3.col-sm-4
+                      %i.fa.fa-instagram
+                      fa-instagram
+                    .fa-hover.col-md-3.col-sm-4
+                      %i.fa.fa-linkedin
+                      fa-linkedin
+                    .fa-hover.col-md-3.col-sm-4
+                      %i.fa.fa-linkedin-square
+                      fa-linkedin-square
+                    .fa-hover.col-md-3.col-sm-4
+                      %i.fa.fa-linux
+                      fa-linux
+                    .fa-hover.col-md-3.col-sm-4
+                      %i.fa.fa-maxcdn
+                      fa-maxcdn
+                    .fa-hover.col-md-3.col-sm-4
+                      %i.fa.fa-pagelines
+                      fa-pagelines
+                    .fa-hover.col-md-3.col-sm-4
+                      %i.fa.fa-pinterest
+                      fa-pinterest
+                    .fa-hover.col-md-3.col-sm-4
+                      %i.fa.fa-pinterest-square
+                      fa-pinterest-square
+                    .fa-hover.col-md-3.col-sm-4
+                      %i.fa.fa-renren
+                      fa-renren
+                    .fa-hover.col-md-3.col-sm-4
+                      %i.fa.fa-skype
+                      fa-skype
+                    .fa-hover.col-md-3.col-sm-4
+                      %i.fa.fa-stack-exchange
+                      fa-stack-exchange
+                    .fa-hover.col-md-3.col-sm-4
+                      %i.fa.fa-stack-overflow
+                      fa-stack-overflow
+                    .fa-hover.col-md-3.col-sm-4
+                      %i.fa.fa-trello
+                      fa-trello
+                    .fa-hover.col-md-3.col-sm-4
+                      %i.fa.fa-tumblr
+                      fa-tumblr
+                    .fa-hover.col-md-3.col-sm-4
+                      %i.fa.fa-tumblr-square
+                      fa-tumblr-square
+                    .fa-hover.col-md-3.col-sm-4
+                      %i.fa.fa-twitter
+                      fa-twitter
+                    .fa-hover.col-md-3.col-sm-4
+                      %i.fa.fa-twitter-square
+                      fa-twitter-square
+                    .fa-hover.col-md-3.col-sm-4
+                      %i.fa.fa-vimeo-square
+                      fa-vimeo-square
+                    .fa-hover.col-md-3.col-sm-4
+                      %i.fa.fa-vk
+                      fa-vk
+                    .fa-hover.col-md-3.col-sm-4
+                      %i.fa.fa-weibo
+                      fa-weibo
+                    .fa-hover.col-md-3.col-sm-4
+                      %i.fa.fa-windows
+                      fa-windows
+                    .fa-hover.col-md-3.col-sm-4
+                      %i.fa.fa-xing
+                      fa-xing
+                    .fa-hover.col-md-3.col-sm-4
+                      %i.fa.fa-xing-square
+                      fa-xing-square
+                    .fa-hover.col-md-3.col-sm-4
+                      %i.fa.fa-youtube
+                      fa-youtube
+                    .fa-hover.col-md-3.col-sm-4
+                      %i.fa.fa-youtube-play
+                      fa-youtube-play
+                    .fa-hover.col-md-3.col-sm-4
+                      %i.fa.fa-youtube-square
+                      fa-youtube-square
+                %section#medical
+                  %h2.page-header Medical Icons
+                  .row.fontawesome-icon-list
+                    .fa-hover.col-md-3.col-sm-4
+                      %i.fa.fa-ambulance
+                      fa-ambulance
+                    .fa-hover.col-md-3.col-sm-4
+                      %i.fa.fa-h-square
+                      fa-h-square
+                    .fa-hover.col-md-3.col-sm-4
+                      %i.fa.fa-hospital-o
+                      fa-hospital-o
+                    .fa-hover.col-md-3.col-sm-4
+                      %i.fa.fa-medkit
+                      fa-medkit
+                    .fa-hover.col-md-3.col-sm-4
+                      %i.fa.fa-plus-square
+                      fa-plus-square
+                    .fa-hover.col-md-3.col-sm-4
+                      %i.fa.fa-stethoscope
+                      fa-stethoscope
+                    .fa-hover.col-md-3.col-sm-4
+                      %i.fa.fa-user-md
+                      fa-user-md
+                    .fa-hover.col-md-3.col-sm-4
+                      %i.fa.fa-wheelchair
+                      fa-wheelchair
+        .row
+          .col-md-10.col-md-offset-1
+            %section.widget
+              %header
+                %h4
+                  %i.eicon-attach
+                  The Entypo pictographic font
+              .body.icons
+                %p
+                  284 icons in pictographic font form. Add
+                  %code .eicon-*
+                  class to
+                  %code &lt;i&gt;
+                  to display
+                  icon.
+                  Provided by
+                  = succeed "." do
+                    %a{:href => "http://www.entypo.com/"} Entypo
+                %section
+                  .row
+                    .col-md-12
+                      %h2.page-header Entypo Icons
+                  .row
+                    .col-md-3
+                      %ul.the-icons.unstyled
+                        %li{:title => "Code: 0x2b"}
+                          %i.eicon-plus
+                          %span.i-name eicon-plus
+                          %span.i-code 0x2b
+                        %li{:title => "Code: 0x2d"}
+                          %i.eicon-minus
+                          %span.i-name eicon-minus
+                          %span.i-code 0x2d
+                        %li{:title => "Code: 0x2139"}
+                          %i.eicon-info
+                          %span.i-name eicon-info
+                          %span.i-code 0x2139
+                        %li{:title => "Code: 0x2190"}
+                          %i.eicon-left-thin
+                          %span.i-name eicon-left-thin
+                          %span.i-code 0x2190
+                        %li{:title => "Code: 0x2191"}
+                          %i.eicon-up-thin
+                          %span.i-name eicon-up-thin
+                          %span.i-code 0x2191
+                        %li{:title => "Code: 0x2192"}
+                          %i.eicon-right-thin
+                          %span.i-name eicon-right-thin
+                          %span.i-code 0x2192
+                        %li{:title => "Code: 0x2193"}
+                          %i.eicon-down-thin
+                          %span.i-name eicon-down-thin
+                          %span.i-code 0x2193
+                        %li{:title => "Code: 0x21b0"}
+                          %i.eicon-level-up
+                          %span.i-name eicon-level-up
+                          %span.i-code 0x21b0
+                        %li{:title => "Code: 0x21b3"}
+                          %i.eicon-level-down
+                          %span.i-name eicon-level-down
+                          %span.i-code 0x21b3
+                        %li{:title => "Code: 0x21c6"}
+                          %i.eicon-switch
+                          %span.i-name eicon-switch
+                          %span.i-code 0x21c6
+                        %li{:title => "Code: 0x221e"}
+                          %i.eicon-infinity
+                          %span.i-name eicon-infinity
+                          %span.i-code 0x221e
+                        %li{:title => "Code: 0x229e"}
+                          %i.eicon-plus-squared
+                          %span.i-name eicon-plus-squared
+                          %span.i-code 0x229e
+                        %li{:title => "Code: 0x229f"}
+                          %i.eicon-minus-squared
+                          %span.i-name eicon-minus-squared
+                          %span.i-code 0x229f
+                        %li{:title => "Code: 0x2302"}
+                          %i.eicon-home
+                          %span.i-name eicon-home
+                          %span.i-code 0x2302
+                        %li{:title => "Code: 0x2328"}
+                          %i.eicon-keyboard
+                          %span.i-name eicon-keyboard
+                          %span.i-code 0x2328
+                        %li{:title => "Code: 0x232b"}
+                          %i.eicon-erase
+                          %span.i-name eicon-erase
+                          %span.i-code 0x232b
+                        %li{:title => "Code: 0x2389"}
+                          %i.eicon-pause
+                          %span.i-name eicon-pause
+                          %span.i-code 0x2389
+                        %li{:title => "Code: 0x23e9"}
+                          %i.eicon-fast-forward
+                          %span.i-name eicon-fast-forward
+                          %span.i-code 0x23e9
+                        %li{:title => "Code: 0x23ea"}
+                          %i.eicon-fast-backward
+                          %span.i-name eicon-fast-backward
+                          %span.i-code 0x23ea
+                        %li{:title => "Code: 0x23ed"}
+                          %i.eicon-to-end
+                          %span.i-name eicon-to-end
+                          %span.i-code 0x23ed
+                        %li{:title => "Code: 0x23ee"}
+                          %i.eicon-to-start
+                          %span.i-name eicon-to-start
+                          %span.i-code 0x23ee
+                        %li{:title => "Code: 0x23f3"}
+                          %i.eicon-hourglass
+                          %span.i-name eicon-hourglass
+                          %span.i-code 0x23f3
+                        %li{:title => "Code: 0x25a0"}
+                          %i.eicon-stop
+                          %span.i-name eicon-stop
+                          %span.i-code 0x25a0
+                        %li{:title => "Code: 0x25b4"}
+                          %i.eicon-up-dir
+                          %span.i-name eicon-up-dir
+                          %span.i-code 0x25b4
+                        %li{:title => "Code: 0x25b6"}
+                          %i.eicon-play
+                          %span.i-name eicon-play
+                          %span.i-code 0x25b6
+                        %li{:title => "Code: 0x25b8"}
+                          %i.eicon-right-dir
+                          %span.i-name eicon-right-dir
+                          %span.i-code 0x25b8
+                        %li{:title => "Code: 0x25be"}
+                          %i.eicon-down-dir
+                          %span.i-name eicon-down-dir
+                          %span.i-code 0x25be
+                        %li{:title => "Code: 0x25c2"}
+                          %i.eicon-left-dir
+                          %span.i-name eicon-left-dir
+                          %span.i-code 0x25c2
+                        %li{:title => "Code: 0x25d1"}
+                          %i.eicon-adjust
+                          %span.i-name eicon-adjust
+                          %span.i-code 0x25d1
+                        %li{:title => "Code: 0x2601"}
+                          %i.eicon-cloud
+                          %span.i-name eicon-cloud
+                          %span.i-code 0x2601
+                        %li{:title => "Code: 0x2605"}
+                          %i.eicon-star
+                          %span.i-name eicon-star
+                          %span.i-code 0x2605
+                        %li{:title => "Code: 0x2606"}
+                          %i.eicon-star-empty
+                          %span.i-name eicon-star-empty
+                          %span.i-code 0x2606
+                        %li{:title => "Code: 0x2615"}
+                          %i.eicon-cup
+                          %span.i-name eicon-cup
+                          %span.i-code 0x2615
+                        %li{:title => "Code: 0x2630"}
+                          %i.eicon-menu
+                          %span.i-name eicon-menu
+                          %span.i-code 0x2630
+                        %li{:title => "Code: 0x263d"}
+                          %i.eicon-moon
+                          %span.i-name eicon-moon
+                          %span.i-code 0x263d
+                        %li{:title => "Code: 0x2661"}
+                          %i.eicon-heart-empty
+                          %span.i-name eicon-heart-empty
+                          %span.i-code 0x2661
+                        %li{:title => "Code: 0x2665"}
+                          %i.eicon-heart
+                          %span.i-name eicon-heart
+                          %span.i-code 0x2665
+                        %li{:title => "Code: 0x266a"}
+                          %i.eicon-note
+                          %span.i-name eicon-note
+                          %span.i-code 0x266a
+                        %li{:title => "Code: 0x266b"}
+                          %i.eicon-note-beamed
+                          %span.i-name eicon-note-beamed
+                          %span.i-code 0x266b
+                        %li{:title => "Code: 0x268f"}
+                          %i.eicon-layout
+                          %span.i-name eicon-layout
+                          %span.i-code 0x268f
+                        %li{:title => "Code: 0x2691"}
+                          %i.eicon-flag
+                          %span.i-name eicon-flag
+                          %span.i-code 0x2691
+                        %li{:title => "Code: 0x2692"}
+                          %i.eicon-tools
+                          %span.i-name eicon-tools
+                          %span.i-code 0x2692
+                        %li{:title => "Code: 0x2699"}
+                          %i.eicon-cog
+                          %span.i-name eicon-cog
+                          %span.i-code 0x2699
+                        %li{:title => "Code: 0x26a0"}
+                          %i.eicon-attention
+                          %span.i-name eicon-attention
+                          %span.i-code 0x26a0
+                        %li{:title => "Code: 0x26a1"}
+                          %i.eicon-flash
+                          %span.i-name eicon-flash
+                          %span.i-code 0x26a1
+                        %li{:title => "Code: 0x26ab"}
+                          %i.eicon-record
+                          %span.i-name eicon-record
+                          %span.i-code 0x26ab
+                        %li{:title => "Code: 0x26c8"}
+                          %i.eicon-cloud-thunder
+                          %span.i-name eicon-cloud-thunder
+                          %span.i-code 0x26c8
+                        %li{:title => "Code: 0x2707"}
+                          %i.eicon-tape
+                          %span.i-name eicon-tape
+                          %span.i-code 0x2707
+                        %li{:title => "Code: 0x2708"}
+                          %i.eicon-flight
+                          %span.i-name eicon-flight
+                          %span.i-code 0x2708
+                        %li{:title => "Code: 0x2709"}
+                          %i.eicon-mail
+                          %span.i-name eicon-mail
+                          %span.i-code 0x2709
+                        %li{:title => "Code: 0x270e"}
+                          %i.eicon-pencil
+                          %span.i-name eicon-pencil
+                          %span.i-code 0x270e
+                        %li{:title => "Code: 0x2712"}
+                          %i.eicon-feather
+                          %span.i-name eicon-feather
+                          %span.i-code 0x2712
+                        %li{:title => "Code: 0x2713"}
+                          %i.eicon-check
+                          %span.i-name eicon-check
+                          %span.i-code 0x2713
+                        %li{:title => "Code: 0x2715"}
+                          %i.eicon-cancel
+                          %span.i-name eicon-cancel
+                          %span.i-code 0x2715
+                        %li{:title => "Code: 0x2716"}
+                          %i.eicon-cancel-circled
+                          %span.i-name eicon-cancel-circled
+                          %span.i-code 0x2716
+                        %li{:title => "Code: 0x274e"}
+                          %i.eicon-cancel-squared
+                          %span.i-name eicon-cancel-squared
+                          %span.i-code 0x274e
+                        %li{:title => "Code: 0x2753"}
+                          %i.eicon-help
+                          %span.i-name eicon-help
+                          %span.i-code 0x2753
+                        %li{:title => "Code: 0x275e"}
+                          %i.eicon-quote
+                          %span.i-name eicon-quote
+                          %span.i-code 0x275e
+                        %li{:title => "Code: 0x2795"}
+                          %i.eicon-plus-circled
+                          %span.i-name eicon-plus-circled
+                          %span.i-code 0x2795
+                        %li{:title => "Code: 0x2796"}
+                          %i.eicon-minus-circled
+                          %span.i-name eicon-minus-circled
+                          %span.i-code 0x2796
+                        %li{:title => "Code: 0x27a1"}
+                          %i.eicon-right
+                          %span.i-name eicon-right
+                          %span.i-code 0x27a1
+                        %li{:title => "Code: 0x27a2"}
+                          %i.eicon-direction
+                          %span.i-name eicon-direction
+                          %span.i-code 0x27a2
+                        %li{:title => "Code: 0x27a6"}
+                          %i.eicon-forward
+                          %span.i-name eicon-forward
+                          %span.i-code 0x27a6
+                        %li{:title => "Code: 0x27f2"}
+                          %i.eicon-ccw
+                          %span.i-name eicon-ccw
+                          %span.i-code 0x27f2
+                        %li{:title => "Code: 0x27f3"}
+                          %i.eicon-cw
+                          %span.i-name eicon-cw
+                          %span.i-code 0x27f3
+                        %li{:title => "Code: 0x2b05"}
+                          %i.eicon-left
+                          %span.i-name eicon-left
+                          %span.i-code 0x2b05
+                        %li{:title => "Code: 0x2b06"}
+                          %i.eicon-up
+                          %span.i-name eicon-up
+                          %span.i-code 0x2b06
+                        %li{:title => "Code: 0x2b07"}
+                          %i.eicon-down
+                          %span.i-name eicon-down
+                          %span.i-code 0x2b07
+                        %li{:title => "Code: 0xe003"}
+                          %i.eicon-list-add
+                          %span.i-name eicon-list-add
+                          %span.i-code 0xe003
+                        %li{:title => "Code: 0xe005"}
+                          %i.eicon-list
+                          %span.i-name eicon-list
+                          %span.i-code 0xe005
+                        %li{:title => "Code: 0xe4ad"}
+                          %i.eicon-left-bold
+                          %span.i-name eicon-left-bold
+                          %span.i-code 0xe4ad
+                    .col-md-3
+                      %ul.the-icons.unstyled
+                        %li{:title => "Code: 0xe4ae"}
+                          %i.eicon-right-bold
+                          %span.i-name eicon-right-bold
+                          %span.i-code 0xe4ae
+                        %li{:title => "Code: 0xe4af"}
+                          %i.eicon-up-bold
+                          %span.i-name eicon-up-bold
+                          %span.i-code 0xe4af
+                        %li{:title => "Code: 0xe4b0"}
+                          %i.eicon-down-bold
+                          %span.i-name eicon-down-bold
+                          %span.i-code 0xe4b0
+                        %li{:title => "Code: 0xe700"}
+                          %i.eicon-user-add
+                          %span.i-name eicon-user-add
+                          %span.i-code 0xe700
+                        %li{:title => "Code: 0xe704"}
+                          %i.eicon-help-circled
+                          %span.i-name eicon-help-circled
+                          %span.i-code 0xe704
+                        %li{:title => "Code: 0xe705"}
+                          %i.eicon-info-circled
+                          %span.i-name eicon-info-circled
+                          %span.i-code 0xe705
+                        %li{:title => "Code: 0xe70a"}
+                          %i.eicon-eye
+                          %span.i-name eicon-eye
+                          %span.i-code 0xe70a
+                        %li{:title => "Code: 0xe70c"}
+                          %i.eicon-tag
+                          %span.i-name eicon-tag
+                          %span.i-code 0xe70c
+                        %li{:title => "Code: 0xe711"}
+                          %i.eicon-upload-cloud
+                          %span.i-name eicon-upload-cloud
+                          %span.i-code 0xe711
+                        %li{:title => "Code: 0xe712"}
+                          %i.eicon-reply
+                          %span.i-name eicon-reply
+                          %span.i-code 0xe712
+                        %li{:title => "Code: 0xe713"}
+                          %i.eicon-reply-all
+                          %span.i-name eicon-reply-all
+                          %span.i-code 0xe713
+                        %li{:title => "Code: 0xe714"}
+                          %i.eicon-code
+                          %span.i-name eicon-code
+                          %span.i-code 0xe714
+                        %li{:title => "Code: 0xe715"}
+                          %i.eicon-export
+                          %span.i-name eicon-export
+                          %span.i-code 0xe715
+                        %li{:title => "Code: 0xe716"}
+                          %i.eicon-print
+                          %span.i-name eicon-print
+                          %span.i-code 0xe716
+                        %li{:title => "Code: 0xe717"}
+                          %i.eicon-retweet
+                          %span.i-name eicon-retweet
+                          %span.i-code 0xe717
+                        %li{:title => "Code: 0xe718"}
+                          %i.eicon-comment
+                          %span.i-name eicon-comment
+                          %span.i-code 0xe718
+                        %li{:title => "Code: 0xe720"}
+                          %i.eicon-chat
+                          %span.i-name eicon-chat
+                          %span.i-code 0xe720
+                        %li{:title => "Code: 0xe722"}
+                          %i.eicon-vcard
+                          %span.i-name eicon-vcard
+                          %span.i-code 0xe722
+                        %li{:title => "Code: 0xe723"}
+                          %i.eicon-address
+                          %span.i-name eicon-address
+                          %span.i-code 0xe723
+                        %li{:title => "Code: 0xe724"}
+                          %i.eicon-location
+                          %span.i-name eicon-location
+                          %span.i-code 0xe724
+                        %li{:title => "Code: 0xe727"}
+                          %i.eicon-map
+                          %span.i-name eicon-map
+                          %span.i-code 0xe727
+                        %li{:title => "Code: 0xe728"}
+                          %i.eicon-compass
+                          %span.i-name eicon-compass
+                          %span.i-code 0xe728
+                        %li{:title => "Code: 0xe729"}
+                          %i.eicon-trash
+                          %span.i-name eicon-trash
+                          %span.i-code 0xe729
+                        %li{:title => "Code: 0xe730"}
+                          %i.eicon-doc
+                          %span.i-name eicon-doc
+                          %span.i-code 0xe730
+                        %li{:title => "Code: 0xe731"}
+                          %i.eicon-doc-text-inv
+                          %span.i-name eicon-doc-text-inv
+                          %span.i-code 0xe731
+                        %li{:title => "Code: 0xe736"}
+                          %i.eicon-docs
+                          %span.i-name eicon-docs
+                          %span.i-code 0xe736
+                        %li{:title => "Code: 0xe737"}
+                          %i.eicon-doc-landscape
+                          %span.i-name eicon-doc-landscape
+                          %span.i-code 0xe737
+                        %li{:title => "Code: 0xe738"}
+                          %i.eicon-archive
+                          %span.i-name eicon-archive
+                          %span.i-code 0xe738
+                        %li{:title => "Code: 0xe73a"}
+                          %i.eicon-rss
+                          %span.i-name eicon-rss
+                          %span.i-code 0xe73a
+                        %li{:title => "Code: 0xe73c"}
+                          %i.eicon-share
+                          %span.i-name eicon-share
+                          %span.i-code 0xe73c
+                        %li{:title => "Code: 0xe73d"}
+                          %i.eicon-basket
+                          %span.i-name eicon-basket
+                          %span.i-code 0xe73d
+                        %li{:title => "Code: 0xe73e"}
+                          %i.eicon-shareable
+                          %span.i-name eicon-shareable
+                          %span.i-code 0xe73e
+                        %li{:title => "Code: 0xe740"}
+                          %i.eicon-login
+                          %span.i-name eicon-login
+                          %span.i-code 0xe740
+                        %li{:title => "Code: 0xe741"}
+                          %i.eicon-logout
+                          %span.i-name eicon-logout
+                          %span.i-code 0xe741
+                        %li{:title => "Code: 0xe742"}
+                          %i.eicon-volume
+                          %span.i-name eicon-volume
+                          %span.i-code 0xe742
+                        %li{:title => "Code: 0xe744"}
+                          %i.eicon-resize-full
+                          %span.i-name eicon-resize-full
+                          %span.i-code 0xe744
+                        %li{:title => "Code: 0xe746"}
+                          %i.eicon-resize-small
+                          %span.i-name eicon-resize-small
+                          %span.i-code 0xe746
+                        %li{:title => "Code: 0xe74c"}
+                          %i.eicon-popup
+                          %span.i-name eicon-popup
+                          %span.i-code 0xe74c
+                        %li{:title => "Code: 0xe74d"}
+                          %i.eicon-publish
+                          %span.i-name eicon-publish
+                          %span.i-code 0xe74d
+                        %li{:title => "Code: 0xe74e"}
+                          %i.eicon-window
+                          %span.i-name eicon-window
+                          %span.i-code 0xe74e
+                        %li{:title => "Code: 0xe74f"}
+                          %i.eicon-arrow-combo
+                          %span.i-name eicon-arrow-combo
+                          %span.i-code 0xe74f
+                        %li{:title => "Code: 0xe751"}
+                          %i.eicon-chart-pie
+                          %span.i-name eicon-chart-pie
+                          %span.i-code 0xe751
+                        %li{:title => "Code: 0xe752"}
+                          %i.eicon-language
+                          %span.i-name eicon-language
+                          %span.i-code 0xe752
+                        %li{:title => "Code: 0xe753"}
+                          %i.eicon-air
+                          %span.i-name eicon-air
+                          %span.i-code 0xe753
+                        %li{:title => "Code: 0xe754"}
+                          %i.eicon-database
+                          %span.i-name eicon-database
+                          %span.i-code 0xe754
+                        %li{:title => "Code: 0xe755"}
+                          %i.eicon-drive
+                          %span.i-name eicon-drive
+                          %span.i-code 0xe755
+                        %li{:title => "Code: 0xe756"}
+                          %i.eicon-bucket
+                          %span.i-name eicon-bucket
+                          %span.i-code 0xe756
+                        %li{:title => "Code: 0xe757"}
+                          %i.eicon-thermometer
+                          %span.i-name eicon-thermometer
+                          %span.i-code 0xe757
+                        %li{:title => "Code: 0xe758"}
+                          %i.eicon-down-circled
+                          %span.i-name eicon-down-circled
+                          %span.i-code 0xe758
+                        %li{:title => "Code: 0xe759"}
+                          %i.eicon-left-circled
+                          %span.i-name eicon-left-circled
+                          %span.i-code 0xe759
+                        %li{:title => "Code: 0xe75a"}
+                          %i.eicon-right-circled
+                          %span.i-name eicon-right-circled
+                          %span.i-code 0xe75a
+                        %li{:title => "Code: 0xe75b"}
+                          %i.eicon-up-circled
+                          %span.i-name eicon-up-circled
+                          %span.i-code 0xe75b
+                        %li{:title => "Code: 0xe75c"}
+                          %i.eicon-down-open
+                          %span.i-name eicon-down-open
+                          %span.i-code 0xe75c
+                        %li{:title => "Code: 0xe75d"}
+                          %i.eicon-left-open
+                          %span.i-name eicon-left-open
+                          %span.i-code 0xe75d
+                        %li{:title => "Code: 0xe75e"}
+                          %i.eicon-right-open
+                          %span.i-name eicon-right-open
+                          %span.i-code 0xe75e
+                        %li{:title => "Code: 0xe75f"}
+                          %i.eicon-up-open
+                          %span.i-name eicon-up-open
+                          %span.i-code 0xe75f
+                        %li{:title => "Code: 0xe760"}
+                          %i.eicon-down-open-mini
+                          %span.i-name eicon-down-open-mini
+                          %span.i-code 0xe760
+                        %li{:title => "Code: 0xe761"}
+                          %i.eicon-left-open-mini
+                          %span.i-name eicon-left-open-mini
+                          %span.i-code 0xe761
+                        %li{:title => "Code: 0xe762"}
+                          %i.eicon-right-open-mini
+                          %span.i-name eicon-right-open-mini
+                          %span.i-code 0xe762
+                        %li{:title => "Code: 0xe763"}
+                          %i.eicon-up-open-mini
+                          %span.i-name eicon-up-open-mini
+                          %span.i-code 0xe763
+                        %li{:title => "Code: 0xe764"}
+                          %i.eicon-down-open-big
+                          %span.i-name eicon-down-open-big
+                          %span.i-code 0xe764
+                        %li{:title => "Code: 0xe765"}
+                          %i.eicon-left-open-big
+                          %span.i-name eicon-left-open-big
+                          %span.i-code 0xe765
+                        %li{:title => "Code: 0xe766"}
+                          %i.eicon-right-open-big
+                          %span.i-name eicon-right-open-big
+                          %span.i-code 0xe766
+                        %li{:title => "Code: 0xe767"}
+                          %i.eicon-up-open-big
+                          %span.i-name eicon-up-open-big
+                          %span.i-code 0xe767
+                        %li{:title => "Code: 0xe768"}
+                          %i.eicon-progress-0
+                          %span.i-name eicon-progress-0
+                          %span.i-code 0xe768
+                        %li{:title => "Code: 0xe769"}
+                          %i.eicon-progress-1
+                          %span.i-name eicon-progress-1
+                          %span.i-code 0xe769
+                        %li{:title => "Code: 0xe76a"}
+                          %i.eicon-progress-2
+                          %span.i-name eicon-progress-2
+                          %span.i-code 0xe76a
+                        %li{:title => "Code: 0xe76b"}
+                          %i.eicon-progress-3
+                          %span.i-name eicon-progress-3
+                          %span.i-code 0xe76b
+                        %li{:title => "Code: 0xe771"}
+                          %i.eicon-back-in-time
+                          %span.i-name eicon-back-in-time
+                          %span.i-code 0xe771
+                        %li{:title => "Code: 0xe776"}
+                          %i.eicon-network
+                          %span.i-name eicon-network
+                          %span.i-code 0xe776
+                        %li{:title => "Code: 0xe777"}
+                          %i.eicon-inbox
+                          %span.i-name eicon-inbox
+                          %span.i-code 0xe777
+                    .col-md-3
+                      %ul.the-icons.unstyled
+                        %li{:title => "Code: 0xe778"}
+                          %i.eicon-install
+                          %span.i-name eicon-install
+                          %span.i-code 0xe778
+                        %li{:title => "Code: 0xe788"}
+                          %i.eicon-lifebuoy
+                          %span.i-name eicon-lifebuoy
+                          %span.i-code 0xe788
+                        %li{:title => "Code: 0xe789"}
+                          %i.eicon-mouse
+                          %span.i-name eicon-mouse
+                          %span.i-code 0xe789
+                        %li{:title => "Code: 0xe78b"}
+                          %i.eicon-dot
+                          %span.i-name eicon-dot
+                          %span.i-code 0xe78b
+                        %li{:title => "Code: 0xe78c"}
+                          %i.eicon-dot-2
+                          %span.i-name eicon-dot-2
+                          %span.i-code 0xe78c
+                        %li{:title => "Code: 0xe78d"}
+                          %i.eicon-dot-3
+                          %span.i-name eicon-dot-3
+                          %span.i-code 0xe78d
+                        %li{:title => "Code: 0xe78e"}
+                          %i.eicon-suitcase
+                          %span.i-name eicon-suitcase
+                          %span.i-code 0xe78e
+                        %li{:title => "Code: 0xe790"}
+                          %i.eicon-flow-cascade
+                          %span.i-name eicon-flow-cascade
+                          %span.i-code 0xe790
+                        %li{:title => "Code: 0xe791"}
+                          %i.eicon-flow-branch
+                          %span.i-name eicon-flow-branch
+                          %span.i-code 0xe791
+                        %li{:title => "Code: 0xe792"}
+                          %i.eicon-flow-tree
+                          %span.i-name eicon-flow-tree
+                          %span.i-code 0xe792
+                        %li{:title => "Code: 0xe793"}
+                          %i.eicon-flow-line
+                          %span.i-name eicon-flow-line
+                          %span.i-code 0xe793
+                        %li{:title => "Code: 0xe794"}
+                          %i.eicon-flow-parallel
+                          %span.i-name eicon-flow-parallel
+                          %span.i-code 0xe794
+                        %li{:title => "Code: 0xe79a"}
+                          %i.eicon-brush
+                          %span.i-name eicon-brush
+                          %span.i-code 0xe79a
+                        %li{:title => "Code: 0xe79b"}
+                          %i.eicon-paper-plane
+                          %span.i-name eicon-paper-plane
+                          %span.i-code 0xe79b
+                        %li{:title => "Code: 0xe7a1"}
+                          %i.eicon-magnet
+                          %span.i-name eicon-magnet
+                          %span.i-code 0xe7a1
+                        %li{:title => "Code: 0xe7a2"}
+                          %i.eicon-gauge
+                          %span.i-name eicon-gauge
+                          %span.i-code 0xe7a2
+                        %li{:title => "Code: 0xe7a3"}
+                          %i.eicon-traffic-cone
+                          %span.i-name eicon-traffic-cone
+                          %span.i-code 0xe7a3
+                        %li{:title => "Code: 0xe7a5"}
+                          %i.eicon-cc
+                          %span.i-name eicon-cc
+                          %span.i-code 0xe7a5
+                        %li{:title => "Code: 0xe7a6"}
+                          %i.eicon-cc-by
+                          %span.i-name eicon-cc-by
+                          %span.i-code 0xe7a6
+                        %li{:title => "Code: 0xe7a7"}
+                          %i.eicon-cc-nc
+                          %span.i-name eicon-cc-nc
+                          %span.i-code 0xe7a7
+                        %li{:title => "Code: 0xe7a8"}
+                          %i.eicon-cc-nc-eu
+                          %span.i-name eicon-cc-nc-eu
+                          %span.i-code 0xe7a8
+                        %li{:title => "Code: 0xe7a9"}
+                          %i.eicon-cc-nc-jp
+                          %span.i-name eicon-cc-nc-jp
+                          %span.i-code 0xe7a9
+                        %li{:title => "Code: 0xe7aa"}
+                          %i.eicon-cc-sa
+                          %span.i-name eicon-cc-sa
+                          %span.i-code 0xe7aa
+                        %li{:title => "Code: 0xe7ab"}
+                          %i.eicon-cc-nd
+                          %span.i-name eicon-cc-nd
+                          %span.i-code 0xe7ab
+                        %li{:title => "Code: 0xe7ac"}
+                          %i.eicon-cc-pd
+                          %span.i-name eicon-cc-pd
+                          %span.i-code 0xe7ac
+                        %li{:title => "Code: 0xe7ad"}
+                          %i.eicon-cc-zero
+                          %span.i-name eicon-cc-zero
+                          %span.i-code 0xe7ad
+                        %li{:title => "Code: 0xe7ae"}
+                          %i.eicon-cc-share
+                          %span.i-name eicon-cc-share
+                          %span.i-code 0xe7ae
+                        %li{:title => "Code: 0xe7af"}
+                          %i.eicon-cc-remix
+                          %span.i-name eicon-cc-remix
+                          %span.i-code 0xe7af
+                        %li{:title => "Code: 0xf300"}
+                          %i.eicon-github
+                          %span.i-name eicon-github
+                          %span.i-code 0xf300
+                        %li{:title => "Code: 0xf301"}
+                          %i.eicon-github-circled
+                          %span.i-name eicon-github-circled
+                          %span.i-code 0xf301
+                        %li{:title => "Code: 0xf303"}
+                          %i.eicon-flickr
+                          %span.i-name eicon-flickr
+                          %span.i-code 0xf303
+                        %li{:title => "Code: 0xf304"}
+                          %i.eicon-flickr-circled
+                          %span.i-name eicon-flickr-circled
+                          %span.i-code 0xf304
+                        %li{:title => "Code: 0xf306"}
+                          %i.eicon-vimeo
+                          %span.i-name eicon-vimeo
+                          %span.i-code 0xf306
+                        %li{:title => "Code: 0xf307"}
+                          %i.eicon-vimeo-circled
+                          %span.i-name eicon-vimeo-circled
+                          %span.i-code 0xf307
+                        %li{:title => "Code: 0xf309"}
+                          %i.eicon-twitter
+                          %span.i-name eicon-twitter
+                          %span.i-code 0xf309
+                        %li{:title => "Code: 0xf30a"}
+                          %i.eicon-twitter-circled
+                          %span.i-name eicon-twitter-circled
+                          %span.i-code 0xf30a
+                        %li{:title => "Code: 0xf30c"}
+                          %i.eicon-facebook
+                          %span.i-name eicon-facebook
+                          %span.i-code 0xf30c
+                        %li{:title => "Code: 0xf30d"}
+                          %i.eicon-facebook-circled
+                          %span.i-name eicon-facebook-circled
+                          %span.i-code 0xf30d
+                        %li{:title => "Code: 0xf30e"}
+                          %i.eicon-facebook-squared
+                          %span.i-name eicon-facebook-squared
+                          %span.i-code 0xf30e
+                        %li{:title => "Code: 0xf30f"}
+                          %i.eicon-gplus
+                          %span.i-name eicon-gplus
+                          %span.i-code 0xf30f
+                        %li{:title => "Code: 0xf310"}
+                          %i.eicon-gplus-circled
+                          %span.i-name eicon-gplus-circled
+                          %span.i-code 0xf310
+                        %li{:title => "Code: 0xf312"}
+                          %i.eicon-pinterest
+                          %span.i-name eicon-pinterest
+                          %span.i-code 0xf312
+                        %li{:title => "Code: 0xf313"}
+                          %i.eicon-pinterest-circled
+                          %span.i-name eicon-pinterest-circled
+                          %span.i-code 0xf313
+                        %li{:title => "Code: 0xf315"}
+                          %i.eicon-tumblr
+                          %span.i-name eicon-tumblr
+                          %span.i-code 0xf315
+                        %li{:title => "Code: 0xf316"}
+                          %i.eicon-tumblr-circled
+                          %span.i-name eicon-tumblr-circled
+                          %span.i-code 0xf316
+                        %li{:title => "Code: 0xf318"}
+                          %i.eicon-linkedin
+                          %span.i-name eicon-linkedin
+                          %span.i-code 0xf318
+                        %li{:title => "Code: 0xf319"}
+                          %i.eicon-linkedin-circled
+                          %span.i-name eicon-linkedin-circled
+                          %span.i-code 0xf319
+                        %li{:title => "Code: 0xf31b"}
+                          %i.eicon-dribbble
+                          %span.i-name eicon-dribbble
+                          %span.i-code 0xf31b
+                        %li{:title => "Code: 0xf31c"}
+                          %i.eicon-dribbble-circled
+                          %span.i-name eicon-dribbble-circled
+                          %span.i-code 0xf31c
+                        %li{:title => "Code: 0xf31e"}
+                          %i.eicon-stumbleupon
+                          %span.i-name eicon-stumbleupon
+                          %span.i-code 0xf31e
+                        %li{:title => "Code: 0xf31f"}
+                          %i.eicon-stumbleupon-circled
+                          %span.i-name eicon-stumbleupon-circled
+                          %span.i-code 0xf31f
+                        %li{:title => "Code: 0xf321"}
+                          %i.eicon-lastfm
+                          %span.i-name eicon-lastfm
+                          %span.i-code 0xf321
+                        %li{:title => "Code: 0xf322"}
+                          %i.eicon-lastfm-circled
+                          %span.i-name eicon-lastfm-circled
+                          %span.i-code 0xf322
+                        %li{:title => "Code: 0xf324"}
+                          %i.eicon-rdio
+                          %span.i-name eicon-rdio
+                          %span.i-code 0xf324
+                        %li{:title => "Code: 0xf325"}
+                          %i.eicon-rdio-circled
+                          %span.i-name eicon-rdio-circled
+                          %span.i-code 0xf325
+                        %li{:title => "Code: 0xf327"}
+                          %i.eicon-spotify
+                          %span.i-name eicon-spotify
+                          %span.i-code 0xf327
+                        %li{:title => "Code: 0xf328"}
+                          %i.eicon-spotify-circled
+                          %span.i-name eicon-spotify-circled
+                          %span.i-code 0xf328
+                        %li{:title => "Code: 0xf32a"}
+                          %i.eicon-qq
+                          %span.i-name eicon-qq
+                          %span.i-code 0xf32a
+                        %li{:title => "Code: 0xf32d"}
+                          %i.eicon-instagram
+                          %span.i-name eicon-instagram
+                          %span.i-code 0xf32d
+                        %li{:title => "Code: 0xf330"}
+                          %i.eicon-dropbox
+                          %span.i-name eicon-dropbox
+                          %span.i-code 0xf330
+                        %li{:title => "Code: 0xf333"}
+                          %i.eicon-evernote
+                          %span.i-name eicon-evernote
+                          %span.i-code 0xf333
+                        %li{:title => "Code: 0xf336"}
+                          %i.eicon-flattr
+                          %span.i-name eicon-flattr
+                          %span.i-code 0xf336
+                        %li{:title => "Code: 0xf339"}
+                          %i.eicon-skype
+                          %span.i-name eicon-skype
+                          %span.i-code 0xf339
+                        %li{:title => "Code: 0xf33a"}
+                          %i.eicon-skype-circled
+                          %span.i-name eicon-skype-circled
+                          %span.i-code 0xf33a
+                        %li{:title => "Code: 0xf33c"}
+                          %i.eicon-renren
+                          %span.i-name eicon-renren
+                          %span.i-code 0xf33c
+                        %li{:title => "Code: 0xf33f"}
+                          %i.eicon-sina-weibo
+                          %span.i-name eicon-sina-weibo
+                          %span.i-code 0xf33f
+                        %li{:title => "Code: 0xf342"}
+                          %i.eicon-paypal
+                          %span.i-name eicon-paypal
+                          %span.i-code 0xf342
+                        %li{:title => "Code: 0xf345"}
+                          %i.eicon-picasa
+                          %span.i-name eicon-picasa
+                          %span.i-code 0xf345
+                        %li{:title => "Code: 0xf348"}
+                          %i.eicon-soundcloud
+                          %span.i-name eicon-soundcloud
+                          %span.i-code 0xf348
+                        %li{:title => "Code: 0xf34b"}
+                          %i.eicon-mixi
+                          %span.i-name eicon-mixi
+                          %span.i-code 0xf34b
+                        %li{:title => "Code: 0xf34e"}
+                          %i.eicon-behance
+                          %span.i-name eicon-behance
+                          %span.i-code 0xf34e
+                    .col-md-3
+                      %ul.the-icons.unstyled
+                        %li{:title => "Code: 0xf351"}
+                          %i.eicon-google-circles
+                          %span.i-name eicon-google-circles
+                          %span.i-code 0xf351
+                        %li{:title => "Code: 0xf354"}
+                          %i.eicon-vkontakte
+                          %span.i-name eicon-vkontakte
+                          %span.i-code 0xf354
+                        %li{:title => "Code: 0xf357"}
+                          %i.eicon-smashing
+                          %span.i-name eicon-smashing
+                          %span.i-code 0xf357
+                        %li{:title => "Code: 0xf600"}
+                          %i.eicon-db-shape
+                          %span.i-name eicon-db-shape
+                          %span.i-code 0xf600
+                        %li{:title => "Code: 0xf601"}
+                          %i.eicon-sweden
+                          %span.i-name eicon-sweden
+                          %span.i-code 0xf601
+                        %li{:title => "Code: 0xf603"}
+                          %i.eicon-logo-db
+                          %span.i-name eicon-logo-db
+                          %span.i-code 0xf603
+                        %li{:title => "Code: 0x1f304"}
+                          %i.eicon-picture
+                          %span.i-name eicon-picture
+                          %span.i-code 0x1f304
+                        %li{:title => "Code: 0x1f30e"}
+                          %i.eicon-globe
+                          %span.i-name eicon-globe
+                          %span.i-code 0x1f30e
+                        %li{:title => "Code: 0x1f342"}
+                          %i.eicon-leaf
+                          %span.i-name eicon-leaf
+                          %span.i-code 0x1f342
+                        %li{:title => "Code: 0x1f393"}
+                          %i.eicon-graduation-cap
+                          %span.i-name eicon-graduation-cap
+                          %span.i-code 0x1f393
+                        %li{:title => "Code: 0x1f3a4"}
+                          %i.eicon-mic
+                          %span.i-name eicon-mic
+                          %span.i-code 0x1f3a4
+                        %li{:title => "Code: 0x1f3a8"}
+                          %i.eicon-palette
+                          %span.i-name eicon-palette
+                          %span.i-code 0x1f3a8
+                        %li{:title => "Code: 0x1f3ab"}
+                          %i.eicon-ticket
+                          %span.i-name eicon-ticket
+                          %span.i-code 0x1f3ab
+                        %li{:title => "Code: 0x1f3ac"}
+                          %i.eicon-video
+                          %span.i-name eicon-video
+                          %span.i-code 0x1f3ac
+                        %li{:title => "Code: 0x1f3af"}
+                          %i.eicon-target
+                          %span.i-name eicon-target
+                          %span.i-code 0x1f3af
+                        %li{:title => "Code: 0x1f3b5"}
+                          %i.eicon-music
+                          %span.i-name eicon-music
+                          %span.i-code 0x1f3b5
+                        %li{:title => "Code: 0x1f3c6"}
+                          %i.eicon-trophy
+                          %span.i-name eicon-trophy
+                          %span.i-code 0x1f3c6
+                        %li{:title => "Code: 0x1f44d"}
+                          %i.eicon-thumbs-up
+                          %span.i-name eicon-thumbs-up
+                          %span.i-code 0x1f44d
+                        %li{:title => "Code: 0x1f44e"}
+                          %i.eicon-thumbs-down
+                          %span.i-name eicon-thumbs-down
+                          %span.i-code 0x1f44e
+                        %li{:title => "Code: 0x1f45c"}
+                          %i.eicon-bag
+                          %span.i-name eicon-bag
+                          %span.i-code 0x1f45c
+                        %li{:title => "Code: 0x1f464"}
+                          %i.eicon-user
+                          %span.i-name eicon-user
+                          %span.i-code 0x1f464
+                        %li{:title => "Code: 0x1f465"}
+                          %i.eicon-users
+                          %span.i-name eicon-users
+                          %span.i-code 0x1f465
+                        %li{:title => "Code: 0x1f4a1"}
+                          %i.eicon-lamp
+                          %span.i-name eicon-lamp
+                          %span.i-code 0x1f4a1
+                        %li{:title => "Code: 0x1f4a5"}
+                          %i.eicon-alert
+                          %span.i-name eicon-alert
+                          %span.i-code 0x1f4a5
+                        %li{:title => "Code: 0x1f4a6"}
+                          %i.eicon-water
+                          %span.i-name eicon-water
+                          %span.i-code 0x1f4a6
+                        %li{:title => "Code: 0x1f4a7"}
+                          %i.eicon-droplet
+                          %span.i-name eicon-droplet
+                          %span.i-code 0x1f4a7
+                        %li{:title => "Code: 0x1f4b3"}
+                          %i.eicon-credit-card
+                          %span.i-name eicon-credit-card
+                          %span.i-code 0x1f4b3
+                        %li{:title => "Code: 0x1f4bb"}
+                          %i.eicon-monitor
+                          %span.i-name eicon-monitor
+                          %span.i-code 0x1f4bb
+                        %li{:title => "Code: 0x1f4bc"}
+                          %i.eicon-briefcase
+                          %span.i-name eicon-briefcase
+                          %span.i-code 0x1f4bc
+                        %li{:title => "Code: 0x1f4be"}
+                          %i.eicon-floppy
+                          %span.i-name eicon-floppy
+                          %span.i-code 0x1f4be
+                        %li{:title => "Code: 0x1f4bf"}
+                          %i.eicon-cd
+                          %span.i-name eicon-cd
+                          %span.i-code 0x1f4bf
+                        %li{:title => "Code: 0x1f4c1"}
+                          %i.eicon-folder
+                          %span.i-name eicon-folder
+                          %span.i-code 0x1f4c1
+                        %li{:title => "Code: 0x1f4c4"}
+                          %i.eicon-doc-text
+                          %span.i-name eicon-doc-text
+                          %span.i-code 0x1f4c4
+                        %li{:title => "Code: 0x1f4c5"}
+                          %i.eicon-calendar
+                          %span.i-name eicon-calendar
+                          %span.i-code 0x1f4c5
+                        %li{:title => "Code: 0x1f4c8"}
+                          %i.eicon-chart-line
+                          %span.i-name eicon-chart-line
+                          %span.i-code 0x1f4c8
+                        %li{:title => "Code: 0x1f4ca"}
+                          %i.eicon-chart-bar
+                          %span.i-name eicon-chart-bar
+                          %span.i-code 0x1f4ca
+                        %li{:title => "Code: 0x1f4cb"}
+                          %i.eicon-clipboard
+                          %span.i-name eicon-clipboard
+                          %span.i-code 0x1f4cb
+                        %li{:title => "Code: 0x1f4ce"}
+                          %i.eicon-attach
+                          %span.i-name eicon-attach
+                          %span.i-code 0x1f4ce
+                        %li{:title => "Code: 0x1f4d1"}
+                          %i.eicon-bookmarks
+                          %span.i-name eicon-bookmarks
+                          %span.i-code 0x1f4d1
+                        %li{:title => "Code: 0x1f4d5"}
+                          %i.eicon-book
+                          %span.i-name eicon-book
+                          %span.i-code 0x1f4d5
+                        %li{:title => "Code: 0x1f4d6"}
+                          %i.eicon-book-open
+                          %span.i-name eicon-book-open
+                          %span.i-code 0x1f4d6
+                        %li{:title => "Code: 0x1f4de"}
+                          %i.eicon-phone
+                          %span.i-name eicon-phone
+                          %span.i-code 0x1f4de
+                        %li{:title => "Code: 0x1f4e3"}
+                          %i.eicon-megaphone
+                          %span.i-name eicon-megaphone
+                          %span.i-code 0x1f4e3
+                        %li{:title => "Code: 0x1f4e4"}
+                          %i.eicon-upload
+                          %span.i-name eicon-upload
+                          %span.i-code 0x1f4e4
+                        %li{:title => "Code: 0x1f4e5"}
+                          %i.eicon-download
+                          %span.i-name eicon-download
+                          %span.i-code 0x1f4e5
+                        %li{:title => "Code: 0x1f4e6"}
+                          %i.eicon-box
+                          %span.i-name eicon-box
+                          %span.i-code 0x1f4e6
+                        %li{:title => "Code: 0x1f4f0"}
+                          %i.eicon-newspaper
+                          %span.i-name eicon-newspaper
+                          %span.i-code 0x1f4f0
+                        %li{:title => "Code: 0x1f4f1"}
+                          %i.eicon-mobile
+                          %span.i-name eicon-mobile
+                          %span.i-code 0x1f4f1
+                        %li{:title => "Code: 0x1f4f6"}
+                          %i.eicon-signal
+                          %span.i-name eicon-signal
+                          %span.i-code 0x1f4f6
+                        %li{:title => "Code: 0x1f4f7"}
+                          %i.eicon-camera
+                          %span.i-name eicon-camera
+                          %span.i-code 0x1f4f7
+                        %li{:title => "Code: 0x1f500"}
+                          %i.eicon-shuffle
+                          %span.i-name eicon-shuffle
+                          %span.i-code 0x1f500
+                        %li{:title => "Code: 0x1f501"}
+                          %i.eicon-loop
+                          %span.i-name eicon-loop
+                          %span.i-code 0x1f501
+                        %li{:title => "Code: 0x1f504"}
+                          %i.eicon-arrows-ccw
+                          %span.i-name eicon-arrows-ccw
+                          %span.i-code 0x1f504
+                        %li{:title => "Code: 0x1f505"}
+                          %i.eicon-light-down
+                          %span.i-name eicon-light-down
+                          %span.i-code 0x1f505
+                        %li{:title => "Code: 0x1f506"}
+                          %i.eicon-light-up
+                          %span.i-name eicon-light-up
+                          %span.i-code 0x1f506
+                        %li{:title => "Code: 0x1f507"}
+                          %i.eicon-mute
+                          %span.i-name eicon-mute
+                          %span.i-code 0x1f507
+                        %li{:title => "Code: 0x1f50a"}
+                          %i.eicon-sound
+                          %span.i-name eicon-sound
+                          %span.i-code 0x1f50a
+                        %li{:title => "Code: 0x1f50b"}
+                          %i.eicon-battery
+                          %span.i-name eicon-battery
+                          %span.i-code 0x1f50b
+                        %li{:title => "Code: 0x1f50d"}
+                          %i.eicon-search
+                          %span.i-name eicon-search
+                          %span.i-code 0x1f50d
+                        %li{:title => "Code: 0x1f511"}
+                          %i.eicon-key
+                          %span.i-name eicon-key
+                          %span.i-code 0x1f511
+                        %li{:title => "Code: 0x1f512"}
+                          %i.eicon-lock
+                          %span.i-name eicon-lock
+                          %span.i-code 0x1f512
+                        %li{:title => "Code: 0x1f513"}
+                          %i.eicon-lock-open
+                          %span.i-name eicon-lock-open
+                          %span.i-code 0x1f513
+                        %li{:title => "Code: 0x1f514"}
+                          %i.eicon-bell
+                          %span.i-name eicon-bell
+                          %span.i-code 0x1f514
+                        %li{:title => "Code: 0x1f516"}
+                          %i.eicon-bookmark
+                          %span.i-name eicon-bookmark
+                          %span.i-code 0x1f516
+                        %li{:title => "Code: 0x1f517"}
+                          %i.eicon-link
+                          %span.i-name eicon-link
+                          %span.i-code 0x1f517
+                        %li{:title => "Code: 0x1f519"}
+                          %i.eicon-back
+                          %span.i-name eicon-back
+                          %span.i-code 0x1f519
+                        %li{:title => "Code: 0x1f526"}
+                          %i.eicon-flashlight
+                          %span.i-name eicon-flashlight
+                          %span.i-code 0x1f526
+                        %li{:title => "Code: 0x1f53e"}
+                          %i.eicon-chart-area
+                          %span.i-name eicon-chart-area
+                          %span.i-code 0x1f53e
+                        %li{:title => "Code: 0x1f554"}
+                          %i.eicon-clock
+                          %span.i-name eicon-clock
+                          %span.i-code 0x1f554
+                        %li{:title => "Code: 0x1f680"}
+                          %i.eicon-rocket
+                          %span.i-name eicon-rocket
+                          %span.i-code 0x1f680
+                        %li{:title => "Code: 0x1f6ab"}
+                          %i.eicon-block
+                          %span.i-name eicon-block
+                          %span.i-code 0x1f6ab
+        .row
+          .col-md-10.col-md-offset-1
+            %section.widget
+              %header
+                %h4
+                  %i.fa.fa-star
+                  Glyphicons
+              .body.icons
+                %p
+                  180 glyphs in font format from the Glyphicon Halflings set. Add
+                  %code .glyphicon-*
+                  class to
+                  %code &lt;i&gt;
+                  to display icon.
+                  Provided by
+                  = succeed "." do
+                    %a{:href => "http://glyphicons.com"} Glyphicons
+                %section
+                  .row
+                    .col-md-3
+                      %ul.the-icons
+                        %li
+                          %i.glyphicon.glyphicon-glass
+                          glyphicon-glass
+                        %li
+                          %i.glyphicon.glyphicon-music
+                          glyphicon-music
+                        %li
+                          %i.glyphicon.glyphicon-search
+                          glyphicon-search
+                        %li
+                          %i.glyphicon.glyphicon-envelope
+                          glyphicon-envelope
+                        %li
+                          %i.glyphicon.glyphicon-heart
+                          glyphicon-heart
+                        %li
+                          %i.glyphicon.glyphicon-star
+                          glyphicon-star
+                        %li
+                          %i.glyphicon.glyphicon-star-empty
+                          glyphicon-star-empty
+                        %li
+                          %i.glyphicon.glyphicon-user
+                          glyphicon-user
+                        %li
+                          %i.glyphicon.glyphicon-film
+                          glyphicon-film
+                        %li
+                          %i.glyphicon.glyphicon-th-large
+                          glyphicon-th-large
+                        %li
+                          %i.glyphicon.glyphicon-th
+                          glyphicon-th
+                        %li
+                          %i.glyphicon.glyphicon-th-list
+                          glyphicon-th-list
+                        %li
+                          %i.glyphicon.glyphicon-ok
+                          glyphicon-ok
+                        %li
+                          %i.glyphicon.glyphicon-remove
+                          glyphicon-remove
+                        %li
+                          %i.glyphicon.glyphicon-zoom-in
+                          glyphicon-zoom-in
+                        %li
+                          %i.glyphicon.glyphicon-zoom-out
+                          glyphicon-zoom-out
+                        %li
+                          %i.glyphicon.glyphicon-off
+                          glyphicon-off
+                        %li
+                          %i.glyphicon.glyphicon-signal
+                          glyphicon-signal
+                        %li
+                          %i.glyphicon.glyphicon-cog
+                          glyphicon-cog
+                        %li
+                          %i.glyphicon.glyphicon-trash
+                          glyphicon-trash
+                        %li
+                          %i.glyphicon.glyphicon-home
+                          glyphicon-home
+                        %li
+                          %i.glyphicon.glyphicon-file
+                          glyphicon-file
+                        %li
+                          %i.glyphicon.glyphicon-time
+                          glyphicon-time
+                        %li
+                          %i.glyphicon.glyphicon-road
+                          glyphicon-road
+                        %li
+                          %i.glyphicon.glyphicon-download-alt
+                          glyphicon-download-alt
+                        %li
+                          %i.glyphicon.glyphicon-download
+                          glyphicon-download
+                        %li
+                          %i.glyphicon.glyphicon-upload
+                          glyphicon-upload
+                        %li
+                          %i.glyphicon.glyphicon-inbox
+                          glyphicon-inbox
+                    .col-md-3
+                      %ul.the-icons
+                        %li
+                          %i.glyphicon.glyphicon-play-circle
+                          glyphicon-play-circle
+                        %li
+                          %i.glyphicon.glyphicon-repeat
+                          glyphicon-repeat
+                        %li
+                          %i.glyphicon.glyphicon-refresh
+                          glyphicon-refresh
+                        %li
+                          %i.glyphicon.glyphicon-list-alt
+                          glyphicon-list-alt
+                        %li
+                          %i.glyphicon.glyphicon-lock
+                          glyphicon-lock
+                        %li
+                          %i.glyphicon.glyphicon-flag
+                          glyphicon-flag
+                        %li
+                          %i.glyphicon.glyphicon-headphones
+                          glyphicon-headphones
+                        %li
+                          %i.glyphicon.glyphicon-volume-off
+                          glyphicon-volume-off
+                        %li
+                          %i.glyphicon.glyphicon-volume-down
+                          glyphicon-volume-down
+                        %li
+                          %i.glyphicon.glyphicon-volume-up
+                          glyphicon-volume-up
+                        %li
+                          %i.glyphicon.glyphicon-qrcode
+                          glyphicon-qrcode
+                        %li
+                          %i.glyphicon.glyphicon-barcode
+                          glyphicon-barcode
+                        %li
+                          %i.glyphicon.glyphicon-tag
+                          glyphicon-tag
+                        %li
+                          %i.glyphicon.glyphicon-tags
+                          glyphicon-tags
+                        %li
+                          %i.glyphicon.glyphicon-book
+                          glyphicon-book
+                        %li
+                          %i.glyphicon.glyphicon-bookmark
+                          glyphicon-bookmark
+                        %li
+                          %i.glyphicon.glyphicon-print
+                          glyphicon-print
+                        %li
+                          %i.glyphicon.glyphicon-camera
+                          glyphicon-camera
+                        %li
+                          %i.glyphicon.glyphicon-font
+                          glyphicon-font
+                        %li
+                          %i.glyphicon.glyphicon-bold
+                          glyphicon-bold
+                        %li
+                          %i.glyphicon.glyphicon-italic
+                          glyphicon-italic
+                        %li
+                          %i.glyphicon.glyphicon-text-height
+                          glyphicon-text-height
+                        %li
+                          %i.glyphicon.glyphicon-text-width
+                          glyphicon-text-width
+                        %li
+                          %i.glyphicon.glyphicon-align-left
+                          glyphicon-align-left
+                        %li
+                          %i.glyphicon.glyphicon-align-center
+                          glyphicon-align-center
+                        %li
+                          %i.glyphicon.glyphicon-align-right
+                          glyphicon-align-right
+                        %li
+                          %i.glyphicon.glyphicon-align-justify
+                          glyphicon-align-justify
+                        %li
+                          %i.glyphicon.glyphicon-list
+                          glyphicon-list
+                    .col-md-3
+                      %ul.the-icons
+                        %li
+                          %i.glyphicon.glyphicon-indent-left
+                          glyphicon-indent-left
+                        %li
+                          %i.glyphicon.glyphicon-indent-right
+                          glyphicon-indent-right
+                        %li
+                          %i.glyphicon.glyphicon-facetime-video
+                          glyphicon-facetime-video
+                        %li
+                          %i.glyphicon.glyphicon-picture
+                          glyphicon-picture
+                        %li
+                          %i.glyphicon.glyphicon-pencil
+                          glyphicon-pencil
+                        %li
+                          %i.glyphicon.glyphicon-map-marker
+                          glyphicon-map-marker
+                        %li
+                          %i.glyphicon.glyphicon-adjust
+                          glyphicon-adjust
+                        %li
+                          %i.glyphicon.glyphicon-tint
+                          glyphicon-tint
+                        %li
+                          %i.glyphicon.glyphicon-edit
+                          glyphicon-edit
+                        %li
+                          %i.glyphicon.glyphicon-share
+                          glyphicon-share
+                        %li
+                          %i.glyphicon.glyphicon-check
+                          glyphicon-check
+                        %li
+                          %i.glyphicon.glyphicon-move
+                          glyphicon-move
+                        %li
+                          %i.glyphicon.glyphicon-step-backward
+                          glyphicon-step-backward
+                        %li
+                          %i.glyphicon.glyphicon-fast-backward
+                          glyphicon-fast-backward
+                        %li
+                          %i.glyphicon.glyphicon-backward
+                          glyphicon-backward
+                        %li
+                          %i.glyphicon.glyphicon-play
+                          glyphicon-play
+                        %li
+                          %i.glyphicon.glyphicon-pause
+                          glyphicon-pause
+                        %li
+                          %i.glyphicon.glyphicon-stop
+                          glyphicon-stop
+                        %li
+                          %i.glyphicon.glyphicon-forward
+                          glyphicon-forward
+                        %li
+                          %i.glyphicon.glyphicon-fast-forward
+                          glyphicon-fast-forward
+                        %li
+                          %i.glyphicon.glyphicon-step-forward
+                          glyphicon-step-forward
+                        %li
+                          %i.glyphicon.glyphicon-eject
+                          glyphicon-eject
+                        %li
+                          %i.glyphicon.glyphicon-chevron-left
+                          glyphicon-chevron-left
+                        %li
+                          %i.glyphicon.glyphicon-chevron-right
+                          glyphicon-chevron-right
+                        %li
+                          %i.glyphicon.glyphicon-plus-sign
+                          glyphicon-plus-sign
+                        %li
+                          %i.glyphicon.glyphicon-minus-sign
+                          glyphicon-minus-sign
+                        %li
+                          %i.glyphicon.glyphicon-remove-sign
+                          glyphicon-remove-sign
+                        %li
+                          %i.glyphicon.glyphicon-ok-sign
+                          glyphicon-ok-sign
+                    .col-md-3
+                      %ul.the-icons
+                        %li
+                          %i.glyphicon.glyphicon-question-sign
+                          glyphicon-question-sign
+                        %li
+                          %i.glyphicon.glyphicon-info-sign
+                          glyphicon-info-sign
+                        %li
+                          %i.glyphicon.glyphicon-screenshot
+                          glyphicon-screenshot
+                        %li
+                          %i.glyphicon.glyphicon-remove-circle
+                          glyphicon-remove-circle
+                        %li
+                          %i.glyphicon.glyphicon-ok-circle
+                          glyphicon-ok-circle
+                        %li
+                          %i.glyphicon.glyphicon-ban-circle
+                          glyphicon-ban-circle
+                        %li
+                          %i.glyphicon.glyphicon-arrow-left
+                          glyphicon-arrow-left
+                        %li
+                          %i.glyphicon.glyphicon-arrow-right
+                          glyphicon-arrow-right
+                        %li
+                          %i.glyphicon.glyphicon-arrow-up
+                          glyphicon-arrow-up
+                        %li
+                          %i.glyphicon.glyphicon-arrow-down
+                          glyphicon-arrow-down
+                        %li
+                          %i.glyphicon.glyphicon-share-alt
+                          glyphicon-share-alt
+                        %li
+                          %i.glyphicon.glyphicon-resize-full
+                          glyphicon-resize-full
+                        %li
+                          %i.glyphicon.glyphicon-resize-small
+                          glyphicon-resize-small
+                        %li
+                          %i.glyphicon.glyphicon-plus
+                          glyphicon-plus
+                        %li
+                          %i.glyphicon.glyphicon-minus
+                          glyphicon-minus
+                        %li
+                          %i.glyphicon.glyphicon-asterisk
+                          glyphicon-asterisk
+                        %li
+                          %i.glyphicon.glyphicon-exclamation-sign
+                          glyphicon-exclamation-sign
+                        %li
+                          %i.glyphicon.glyphicon-gift
+                          glyphicon-gift
+                        %li
+                          %i.glyphicon.glyphicon-leaf
+                          glyphicon-leaf
+                        %li
+                          %i.glyphicon.glyphicon-fire
+                          glyphicon-fire
+                        %li
+                          %i.glyphicon.glyphicon-eye-open
+                          glyphicon-eye-open
+                        %li
+                          %i.glyphicon.glyphicon-eye-close
+                          glyphicon-eye-close
+                        %li
+                          %i.glyphicon.glyphicon-warning-sign
+                          glyphicon-warning-sign
+                        %li
+                          %i.glyphicon.glyphicon-plane
+                          glyphicon-plane
+                        %li
+                          %i.glyphicon.glyphicon-calendar
+                          glyphicon-calendar
+                        %li
+                          %i.glyphicon.glyphicon-random
+                          glyphicon-random
+                        %li
+                          %i.glyphicon.glyphicon-comment
+                          glyphicon-comment
+                        %li
+                          %i.glyphicon.glyphicon-magnet
+                          glyphicon-magnet
+      .loader-wrap.hiding.hide
+        %i.fa.fa-spinner.fa-spin
+    / jquery and friends
+    %script{:src => "lib/jquery/jquery-2.0.3.min.js"}
+    %script{:src => "lib/jquery-pjax/jquery.pjax.js"}
+    / jquery plugins
+    %script{:src => "lib/jquery-maskedinput/jquery.maskedinput.js"}
+    %script{:src => "lib/parsley/parsley.js"}
+    %script{:src => "lib/icheck.js/jquery.icheck.js"}
+    %script{:src => "lib/select2.js"}
+    / backbone and friends
+    %script{:src => "lib/backbone/underscore-min.js"}
+    / bootstrap default plugins
+    %script{:src => "lib/bootstrap/transition.js"}
+    %script{:src => "lib/bootstrap/collapse.js"}
+    %script{:src => "lib/bootstrap/alert.js"}
+    %script{:src => "lib/bootstrap/tooltip.js"}
+    %script{:src => "lib/bootstrap/popover.js"}
+    %script{:src => "lib/bootstrap/button.js"}
+    %script{:src => "lib/bootstrap/dropdown.js"}
+    %script{:src => "lib/bootstrap/modal.js"}
+    / bootstrap custom plugins
+    %script{:src => "lib/bootstrap-datepicker.js"}
+    %script{:src => "lib/bootstrap-select/bootstrap-select.js"}
+    %script{:src => "lib/wysihtml5/wysihtml5-0.3.0_rc2.js"}
+    %script{:src => "lib/bootstrap-wysihtml5/bootstrap-wysihtml5.js"}
+    / basic application js
+    %script{:src => "js/app.js"}
+    %script{:src => "js/settings.js"}
+    %script#settings-template{:type => "text/template"}
+      <div class="setting clearfix">
+      <div>Background</div>
+      <div id="background-toggle" class="pull-left btn-group" data-toggle="buttons-radio">
+      <% dark = background == 'dark'; light = background == 'light';%>
+      <button type="button" data-value="dark" class="btn btn-sm btn-transparent <%= dark? 'active' : '' %>">Dark</button>
+      <button type="button" data-value="light" class="btn btn-sm btn-transparent <%= light? 'active' : '' %>">Light</button>
+      </div>
+      </div>
+      <div class="setting clearfix">
+      <div>Sidebar on the</div>
+      <div id="sidebar-toggle" class="pull-left btn-group" data-toggle="buttons-radio">
+      <% onRight = sidebar == 'right'%>
+      <button type="button" data-value="left" class="btn btn-sm btn-transparent <%= onRight? '' : 'active' %>">Left</button>
+      <button type="button" data-value="right" class="btn btn-sm btn-transparent <%= onRight? 'active' : '' %>">Right</button>
+      </div>
+      </div>
+      <div class="setting clearfix">
+      <div>Sidebar</div>
+      <div id="display-sidebar-toggle" class="pull-left btn-group" data-toggle="buttons-radio">
+      <% display = displaySidebar%>
+      <button type="button" data-value="true" class="btn btn-sm btn-transparent <%= display? 'active' : '' %>">Show</button>
+      <button type="button" data-value="false" class="btn btn-sm btn-transparent <%= display? '' : 'active' %>">Hide</button>
+      </div>
+      </div>
+      <div class="setting clearfix">
+      <div>White Version</div>
+      <div>
+      <a href="white/" class="btn btn-sm btn-transparent">&nbsp; Switch &nbsp;   <i class="fa fa-angle-right"></i></a>
+      </div>
+      </div>
+    %script#sidebar-settings-template{:type => "text/template"}
+      <% auto = sidebarState == 'auto'%>
+      <% if (auto) {%>
+      <button type="button"
+      data-value="icons"
+      class="btn-icons btn btn-transparent btn-sm">Icons</button>
+      <button type="button"
+      data-value="auto"
+      class="btn-auto btn btn-transparent btn-sm">Auto</button>
+      <%} else {%>
+      <button type="button"
+      data-value="auto"
+      class="btn btn-transparent btn-sm">Auto</button>
+      <% } %>

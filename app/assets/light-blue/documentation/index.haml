@@ -1,0 +1,358 @@
+!!!
+%html{:xmlns => "http://www.w3.org/1999/html"}
+  %head
+    %title Light Blue Documentation
+    %link{:href => "css/documentation.css", :rel => "stylesheet"}/
+    %meta{:content => "width=device-width, initial-scale=1.0", :name => "viewport"}/
+    %meta{:content => "", :name => "description"}/
+    %meta{:content => "", :name => "author"}/
+    %meta{:charset => "utf-8"}/
+  %body.background-two
+    %nav#sidebar.sidebar
+      %ul#side-nav.side-nav
+        %li.active.green
+          %a{:href => "index.html"}
+            %i.icon-desktop
+            %span.name Dashboard
+        %li.teal.accordion-group
+          %a.accordion-toggle.collapsed{"data-parent" => "#side-nav", "data-toggle" => "collapse", :href => "#stats-collapse"}
+            %i.icon-bar-chart
+            %span.name Statistics
+          %ul#stats-collapse.accordion-body.collapse
+            %li
+              %a{:href => "stat_statistics.html"} Stats
+            %li
+              %a{:href => "stat_charts.html"} Charts
+            %li
+              %a{:href => "stat_realtime.html"} Realtime
+        %li.blue.accordion-group
+          %a.accordion-toggle.collapsed{"data-parent" => "#side-nav", "data-toggle" => "collapse", :href => "#forms-collapse"}
+            %i.icon-edit
+            %span.name Forms
+          %ul#forms-collapse.accordion-body.collapse
+            %li
+              %a{:href => "form_account.html"} Account
+            %li
+              %a{:href => "form_article.html"} Article
+            %li
+              %a{:href => "form_elements.html"} Elements
+            %li
+              %a{:href => "form_validation.html"} Validation
+            %li
+              %a{:href => "form_wizard.html"} Wizard
+        %li.brown.accordion-group
+          %a.accordion-toggle.collapsed{"data-parent" => "#side-nav", "data-toggle" => "collapse", :href => "#ui-collapse"}
+            %i.icon-magic
+            %span.name UI
+          %ul#ui-collapse.accordion-body.collapse
+            %li
+              %a{:href => "ui_buttons.html"} Buttons
+            %li
+              %a{:href => "ui_dialogs.html"} Dialogs
+            %li
+              %a{:href => "ui_notifications.html"} Notifications
+            %li
+              %a{:href => "ui_icons.html"} Icons
+            %li
+              %a{:href => "ui_tabs.html"} Tabs
+            %li
+              %a{:href => "ui_accordion.html"} Accordion
+        %li.dark-red.accordion-group
+          %a.accordion-toggle.collapsed{"data-parent" => "#side-nav", "data-toggle" => "collapse", :href => "#components-collapse"}
+            %i.icon-bookmark-empty
+            %span.name Components
+          %ul#components-collapse.accordion-body.collapse
+            %li
+              %a{:href => "component_calendar.html"} Calendar
+            %li
+              %a{:href => "component_maps.html"} Maps
+            %li
+              %a{:href => "component_gallery.html"} Gallery
+            %li
+              %a{:href => "component_fileupload.html"} Fileupload
+        %li.red.accordion-group
+          %a.accordion-toggle.collapsed{"data-parent" => "#side-nav", "data-toggle" => "collapse", :href => "#tables-collapse"}
+            %i.icon-table
+            %span.name Tables
+          %ul#tables-collapse.accordion-body.collapse
+            %li
+              %a{:href => "tables_static.html"} Static
+            %li
+              %a{:href => "tables_dynamic.html"} Dynamic
+        %li.orange
+          %a{:href => "grid.html"}
+            %i.icon-columns
+            %span.name
+              Widgets &nbsp;
+              %span.label.label-info new
+        %li.lime.accordion-group
+          %a.accordion-toggle.collapsed{"data-parent" => "#side-nav", "data-toggle" => "collapse", :href => "#special-collapse"}
+            %i.icon-asterisk
+            %span.name Special
+          %ul#special-collapse.accordion-body.collapse
+            %li
+              %a{:href => "special_search.html"} Search
+            %li
+              %a{:href => "login.html"} Login
+            %li
+              %a{:href => "special_404.html"} 404
+    .wrap
+      %header.page-header
+        %h1 Documentation
+      .content.container-fluid
+        .row-fluid
+          .span10.offset1
+            %section.widget
+              %h2 About Template (Light Blue 2.1)
+              %p
+                %strong Light Blue Admin Template
+                is next-generation, well-designed and powerful front-end template. It's very useful for designing either your next
+                web application or admin entrance for it.
+              %p
+                It's base on super powerful
+                %a{:href => "http://getbootstrap.com/"} Bootstrap
+                front-end framework which
+                uses
+                %strong 12-column responsive grid
+                layout.
+              %h2 Structure
+              %p Light Blue package goes with following folders:
+              %ul{:style => "list-style: disc; padding-left: 40px;"}
+                %li
+                  %strong *root*
+                  \- html templates;
+                %li
+                  %strong css
+                  \- compiled css stylesheets;
+                %li
+                  %strong img
+                  \- images;
+                %li
+                  %strong js
+                  \- custom javascript written for Light Blue;
+                %li
+                  %strong lib
+                  \- various JS libraries used in Light Blue. You can remove them depending on what you need;
+              %p
+              %p
+                %em Next folders are not essential and can be removed from package:
+              %ul{:style => "list-style: disc; padding-left: 40px;"}
+                %li documentation - you're actually reading it now;
+                %li sass - scss stylesheets that compiled into css;
+                %li server - few php files used for fileupload & ajax widgets demo;
+                %li
+                  white - white version of Light Blue. It has the same/copied file structure so you can just
+                  choose one between White and Transparent and remove another.
+              %h2 Scss
+              %p
+                Light Blue uses
+                %a{:href => "http://sass-lang.com/"} scss
+                to generate css. This choice has been made because of significant boost
+                scss gives when developing front-end apps like this one. We used
+                %a{:href => "http://compass-style.org/"} compass
+                to compile scss to css, but what to use
+                is absolutely up to your choice. Anyway editing css is a good old way, right? :)
+              %p
+                The main scss file is
+                = succeed "." do
+                  %a{:href => "../sass/application.scss"} application.scss
+                It includes all libraries and partial files.
+              %ul{:style => "list-style: disc; padding-left: 40px;"}
+                %li
+                  %p
+                    %a{:href => "../sass/_general.scss"} general.scss
+                    \- all application styles. Only element styles
+                    (
+                    %code> body
+                    ,
+                    = succeed "," do
+                      %code a
+                    = succeed "," do
+                      %code h2
+                    etc).
+                %li
+                  %p
+                    %a{:href => "../sass/_base.scss"} base.scss
+                    \- all application styles. Everything except elements.
+                    Every class used in Light Blue is defined here.
+                  %p There are lots of sections like:
+                  %pre
+                    %code
+                      :preserve
+                        /***********************************/
+                        /**          LOGO                **/
+                        /**********************************/                  %p in this file. You can simply remove sections you don't need and recompile stylesheets. The essential sections are:
+                  %p
+                    %small
+                      LOGO, SIDEBAR, CONTENT, WIDGET, HEADER, MESSAGES, SUPPORT, SETTINGS, ACCOUNT, BUTTONS,
+                      FORMS, TABLES, UTILS.
+                    All other sections can be removed.
+                %li
+                  %p
+                    %a{:href => "../sass/_font.scss"} font.scss
+                    \- downloaded version of Open Sans font.
+                %li
+                  %p
+                    %a{:href => "../sass/_responsive.scss"} responsive.scss
+                    \- responsive styles.
+                %li
+                  %p
+                    %a{:href => "../sass/_variables.scss"} variables.scss
+                    \- all template variables like colors, button sizes, etc.
+                %li
+                  %p
+                    %a{:href => "../sass/_svg.scss"} svg.scss
+                    \- svg-related styles. This one can be easily removed if you don't need nvd3 charts.
+              %h2 Pjax
+              %p
+                Light Blue uses
+                %a{:href => "https://github.com/defunkt/jquery-pjax"} jquery-pjax
+                library that
+                uses ajax and pushState which makes page loading super fast.
+              %p
+                In case you want to turn off ajax page loading you need to just set
+                %code window.PJAX_ENABLED
+                variable to
+                %code false
+                (js/app.js file):
+              %pre
+                %code window.PJAX_ENABLED = false;
+              %h2 Support
+              %p
+                If you have any questions or problems when installing template feel free to contact us via email -
+                = succeed "." do
+                  %a{:href => "mailto:contact@flatlogic.com"} contact@flatlogic.com
+                We will provide as much help as possible.
+              %h3 Statistics Boxes
+              %hr/
+              %p
+                See
+                = succeed "." do
+                  %a{:href => "stat_statistics.html"} statistics section
+              %h3 Left Sidebar
+              %hr/
+              %p
+                Left sidebar is based on
+                = succeed "." do
+                  %a{:href => "http://getbootstrap.com/javascript/#collapse"} Bootstrap's collapse component
+                %a{:href => "../js/settings.js"} Settings.js
+                holds additional javascript code which is used to
+                change sidebar state and sidebar position depending on chosen option (icons, auto) and (left, right).
+              %h3 Top Navigation
+              %hr/
+              %p
+                Is simple
+                = succeed "." do
+                  %a{:href => "http://getbootstrap.com/components/#navbar"} Bootstrap's Navbar
+                User profile and settings popovers are implemented via
+                %a{:href => "http://getbootstrap.com/javascript/#popovers"} Bootstrap's popover
+              %h3 Widget Controls
+              %hr/
+              %p
+                Each widget may have widget controls. See
+                = succeed "." do
+                  %a{:href => "grid.html"} Widgets
+              %h3 Charts
+              %hr/
+              %p
+                Charts are built with
+                = succeed "-based" do
+                  %a{:href => "http://d3js.org/"} D3.js
+                = succeed "." do
+                  %a{:href => "http://nvd3.org/"} nvd3 library
+                Read more in
+                %a{:href => "stat_charts.html"} charts section
+              %h3 Change Log
+              %hr/
+              %h4
+                %strong Version 2.1
+              %ul
+                %li - Widgster plugin (closable, fullscreenable, collapsible, refreshable widgets)
+                %li - Messenger notifications
+                %li - Input Sliders
+                %li - Parsley 2.0.0
+                %li - White version bug fixes
+              %h4
+                %strong Version 2.0
+              %ul
+                %li - Super fast Ajax page loading
+                %li - Lib updates
+                %li - Few bug fixes
+              %h4
+                %strong Version 1.8
+              %ul
+                %li - Bootstrap v3.1 update
+                %li - Few bug fixes
+              %h4
+                %strong Version 1.7.1
+              %ul
+                %li - Bootstrap 3.0.3 upgrade fix
+              %h4
+                %strong Version 1.7
+              %ul
+                %li - 4+ level menu
+                %li - Libs updates & fixes
+                %li - Documentation update
+              %h4
+                %strong Version 1.6
+              %ul
+                %li - Bootstrap components page
+                %li - Draggable Grid
+                %li - List Groups
+                %li - Jquery 2.0, lib updates
+                %li - Font Awesome 4.0.3
+              %h4
+                %strong Version 1.5
+              %ul
+                %li
+                  \- White version (
+                  %a{:href => "../white/index.html"}> white/
+                  )
+                  %small
+                    %em Thanks to Quang Pham for convincing me :)
+                %li
+                  \- Landing page (
+                  %a{:href => "../landing.html"}> landing.html
+                  )
+                %li - Css & Structure refactoring
+                %li - Drop Bootstrap 2 version from package
+              %h4
+                %strong Version 1.4
+              %ul
+                %li - Bootstrap 3 support
+                %li
+                  \- Ready-to-use Inbox App (
+                  %a{:href => "../special_inbox.html"}> special_inbox.html
+                  )
+              %h4
+                %strong Version 1.3
+              %ul
+                %li - Overall UI improvements
+                %li - New iCheck library instead of out-of-date uniform
+                %li - Print Optimized
+                %li
+                  \- Invoice Page (
+                  %a{:href => "../special_invoice.html"}> special_invoice.html
+                  )
+              %h4
+                %strong Version 1.2
+              %ul
+                %li - Fileupload fix
+                %li - Second level menu overlap fix
+              %h4
+                %strong Version 1.1
+              %ul
+                %li - Generic Search Field
+                %li
+                  \- Form Wizard (
+                  %a{:href => "../form_wizard.html"}> form_wizard.html
+                  )
+                %li
+                  \- jQuery Datatables (
+                  %a{:href => "../tables_dynamic.html"}> tables_dynamic.html
+                  )
+                %li - UI improvements
+    / jquery and friends
+    %script{:src => "js/jquery.1.9.0.min.js"}
+    %script{:src => "js/bootstrap-transition.js"}
+    %script{:src => "js/bootstrap-collapse.js"}

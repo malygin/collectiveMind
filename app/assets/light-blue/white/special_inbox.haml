@@ -1,0 +1,663 @@
+!!!
+%html
+  %head
+    %title Light Blue - Admin Template
+    %link{:href => "css/application.min.css", :rel => "stylesheet"}/
+    %link{:href => "img/favicon.png", :rel => "shortcut icon"}/
+    %meta{:content => "width=device-width, initial-scale=1.0", :name => "viewport"}/
+    %meta{:content => "", :name => "description"}/
+    %meta{:content => "", :name => "author"}/
+    %meta{:charset => "utf-8"}/
+  %body.background-dark
+    .logo
+      %h4
+        %a{:href => "index.html"}
+          Light
+          %strong Blue
+    %nav#sidebar.sidebar.nav-collapse.collapse
+      %ul#side-nav.side-nav
+        %li
+          %a{:href => "index.html"}
+            %i.fa.fa-home
+            %span.name Dashboard
+        %li.panel
+          %a.accordion-toggle.collapsed{"data-parent" => "#side-nav", "data-toggle" => "collapse", :href => "#forms-collapse"}
+            %i.fa.fa-edit
+            %span.name Forms
+          %ul#forms-collapse.panel-collapse.collapse
+            %li
+              %a{:href => "form_account.html"} Account
+            %li
+              %a{:href => "form_article.html"} Article
+            %li
+              %a{:href => "form_elements.html"} Elements
+            %li
+              %a{:href => "form_validation.html"} Validation
+            %li
+              %a{:href => "form_wizard.html"} Wizard
+        %li.panel
+          %a.accordion-toggle.collapsed{"data-parent" => "#side-nav", "data-toggle" => "collapse", :href => "#stats-collapse"}
+            %i.fa.fa-bar-chart-o
+            %span.name Statistics
+          %ul#stats-collapse.panel-collapse.collapse
+            %li
+              %a{:href => "stat_statistics.html"} Stats
+            %li
+              %a{:href => "stat_charts.html"} Charts
+            %li
+              %a{:href => "stat_realtime.html"} Realtime
+        %li.panel
+          %a.accordion-toggle.collapsed{"data-parent" => "#side-nav", "data-toggle" => "collapse", :href => "#ui-collapse"}
+            %i.fa.fa-magic
+            %span.name User Interface
+          %ul#ui-collapse.panel-collapse.collapse
+            %li
+              %a{:href => "ui_buttons.html"} Buttons
+            %li
+              %a{:href => "ui_dialogs.html"} Dialogs
+            %li
+              %a{:href => "ui_notifications.html"}
+                Notifications &nbsp;
+                %span.label.label-danger new
+            %li
+              %a{:href => "ui_icons.html"} Icons
+            %li
+              %a{:href => "ui_tabs.html"} Tabs
+            %li
+              %a{:href => "ui_accordion.html"} Accordion
+        %li.panel
+          %a.accordion-toggle.collapsed{"data-parent" => "#side-nav", "data-toggle" => "collapse", :href => "#components-collapse"}
+            %i.fa.fa-bookmark-o
+            %span.name Components
+          %ul#components-collapse.panel-collapse.collapse
+            %li
+              %a{:href => "component_calendar.html"} Calendar
+            %li
+              %a{"data-no-pjax" => "", :href => "component_maps.html"} Maps
+            %li
+              %a{:href => "component_gallery.html"} Gallery
+            %li
+              %a{:href => "component_fileupload.html"} Fileupload
+            %li
+              %a{:href => "component_bootstrap.html"}
+                Bootstrap &nbsp;
+                %span.label.label-important new
+            %li
+              %a{:href => "component_list_groups.html"}
+                List Groups &nbsp;
+                %span.label.label-important new
+        %li.panel
+          %a.accordion-toggle.collapsed{"data-parent" => "#side-nav", "data-toggle" => "collapse", :href => "#tables-collapse"}
+            %i.fa.fa-table
+            %span.name Tables
+          %ul#tables-collapse.panel-collapse.collapse
+            %li
+              %a{:href => "tables_static.html"} Static
+            %li
+              %a{:href => "tables_dynamic.html"} Dynamic
+        %li.panel
+          %a.accordion-toggle.collapsed{"data-parent" => "#side-nav", "data-toggle" => "collapse", :href => "#grid-collapse"}
+            %i.fa.fa-bars
+            %span.name
+              Widgets &nbsp;
+              %span.label.label-primary new
+          %ul#grid-collapse.panel-collapse.collapse
+            %li
+              %a{:href => "grid.html"} Basic
+            %li
+              %a{:href => "grid_live.html"}
+                Live &nbsp;
+                %span.label.label-important hot
+        %li.active.panel
+          %a.accordion-toggle{"data-parent" => "#side-nav", "data-toggle" => "collapse", :href => "#special-collapse"}
+            %i.fa.fa-asterisk
+            %span.name Special
+          %ul#special-collapse.panel-collapse.in
+            %li
+              %a{:href => "special_search.html"} Search
+            %li
+              %a{:href => "special_invoice.html"} Invoice
+            %li.active
+              %a{:href => "special_inbox.html"}
+                Inbox
+                %span.label.label-important 3
+            %li
+              %a{:href => "login.html"} Login
+            %li
+              %a{:href => "special_404.html"} 404
+            %li
+              %a{"data-no-pjax" => "", :href => "../landing.html"} Landing
+            %li
+              %a{"data-no-pjax" => "", :href => "../index.html"}
+                Transparent
+                %i.fa.fa-external-link-square
+        %li.panel
+          %a.accordion-toggle.collapsed{"data-parent" => "#side-nav", "data-toggle" => "collapse", :href => "#menu-levels-collapse"}
+            %i.fa.fa-code-fork
+            %span.name Menu Levels
+          %ul#menu-levels-collapse.panel-collapse.collapse
+            %li
+              %a{:href => "#"} Item 1.1
+            %li
+              %a{:href => "#"} Item 1.2
+            %li.panel
+              %a.accordion-toggle.collapsed{"data-parent" => "#menu-levels-collapse", "data-toggle" => "collapse", :href => "#sub-menu-1-collapse"} Item 1.3
+              %ul#sub-menu-1-collapse.panel-collapse.collapse
+                %li
+                  %a{:href => "#"} Item 2.1
+                %li
+                  %a{:href => "#"} Item 2.2
+                %li.panel
+                  %a.accordion-toggle.collapsed{"data-parent" => "#sub-menu-2-collapse", "data-toggle" => "collapse", :href => "#sub-menu-2-collapse"} Item 2.3
+                  %ul#sub-menu-2-collapse.panel-collapse.collapse
+                    %li
+                      %a{:href => "#"} Item 3.1
+                    %li
+                      %a{:href => "#"} Item 3.2
+                    %li
+                      %a{:href => "#"} Item 3.3
+        %li.visible-xs
+          %a{:href => "login.html"}
+            %i.fa.fa-sign-out
+            %span.name Sign Out
+      #sidebar-settings.settings
+        %button.btn-icons.btn.btn-inverse.btn-sm{"data-value" => "icons", :type => "button"} Icons
+        %button.btn-auto.btn.btn-inverse.btn-sm{"data-value" => "auto", :type => "button"} Auto
+    .wrap
+      %header.page-header
+        .navbar
+          %ul.nav.navbar-nav.navbar-right.pull-right
+            %li.visible-phone-landscape
+              %a#search-toggle{:href => "#"}
+                %i.fa.fa-search
+            %li.dropdown
+              %a#messages.dropdown-toggle{"data-toggle" => "dropdown", :href => "#", :title => "Messages"}
+                %i.fa.fa-comments
+              %ul#messages-menu.dropdown-menu.messages{:role => "menu"}
+                %li{:role => "presentation"}
+                  %a.message{:href => "#"}
+                    %img{:alt => "", :src => "img/1.jpg"}/
+                  .details
+                    .sender Jane Hew
+                    .text
+                      Hey, John! How is it going? ...
+                %li{:role => "presentation"}
+                  %a.message{:href => "#"}
+                    %img{:alt => "", :src => "img/2.jpg"}/
+                  .details
+                    .sender Alies Rumiancaŭ
+                    .text
+                      I'll definitely buy this template
+                %li{:role => "presentation"}
+                  %a.message{:href => "#"}
+                    %img{:alt => "", :src => "img/3.jpg"}/
+                  .details
+                    .sender Michał Rumiancaŭ
+                    .text
+                      Is it really Lore ipsum? Lore ...
+                %li{:role => "presentation"}
+                  %a.text-align-center.see-all{:href => "#"}
+                    See all messages
+                    %i.fa.fa-arrow-right
+            %li.dropdown
+              %a.dropdown-toggle{"data-toggle" => "dropdown", :href => "#", :title => "8 support tickets"}
+                %i.fa.fa-group
+                %span.count 8
+              %ul#support-menu.dropdown-menu.support{:role => "menu"}
+                %li{:role => "presentation"}
+                  %a.support-ticket{:href => "#"}
+                  .picture
+                    %span.label.label-important
+                      %i.fa.fa-bell-o
+                  .details
+                    Check out this awesome ticket
+                %li{:role => "presentation"}
+                  %a.support-ticket{:href => "#"}
+                  .picture
+                    %span.label.label-warning
+                      %i.fa.fa-question-circle
+                  .details
+                    "What is the best way to get ...
+                %li{:role => "presentation"}
+                  %a.support-ticket{:href => "#"}
+                  .picture
+                    %span.label.label-success
+                      %i.fa.fa-tag
+                  .details
+                    This is just a simple notification
+                %li{:role => "presentation"}
+                  %a.support-ticket{:href => "#"}
+                  .picture
+                    %span.label.label-info
+                      %i.fa.fa-info-circle
+                  .details
+                    12 new orders has arrived today
+                %li{:role => "presentation"}
+                  %a.support-ticket{:href => "#"}
+                  .picture
+                    %span.label.label-important
+                      %i.fa.fa-plus
+                  .details
+                    One more thing that just happened
+                %li{:role => "presentation"}
+                  %a.text-align-center.see-all{:href => "#"}
+                    See all tickets
+                    %i.fa.fa-arrow-right
+            %li.divider
+            %li.hidden-xs
+              %a#settings{"data-placement" => "bottom", "data-toggle" => "popover", :href => "#", :title => "Settings"}
+                %i.fa.fa-cog
+            %li.hidden-xs.dropdown
+              %a#account.dropdown-toggle{"data-toggle" => "dropdown", :href => "#", :title => "Account"}
+                %i.fa.fa-user
+              %ul#account-menu.dropdown-menu.account{:role => "menu"}
+                %li.account-picture{:role => "presentation"}
+                  %img{:alt => "", :src => "img/2.jpg"}/
+                  Philip Daineka
+                %li{:role => "presentation"}
+                  %a.link{:href => "form_account.html"}
+                    %i.fa.fa-user
+                    Profile
+                %li{:role => "presentation"}
+                  %a.link{:href => "component_calendar.html"}
+                    %i.fa.fa-calendar
+                    Calendar
+                %li{:role => "presentation"}
+                  %a.link{:href => "#"}
+                    %i.fa.fa-inbox
+                    Inbox
+            %li.visible-xs
+              %a.btn-navbar{"data-target" => ".sidebar", "data-toggle" => "collapse", :href => "#", :title => ""}
+                %i.fa.fa-bars
+            %li.hidden-xs
+              %a{:href => "login.html"}
+                %i.fa.fa-sign-out
+          %form#search-form.navbar-form.pull-right{:role => "search"}
+            %input.search-query{:placeholder => "Search...", :type => "search"}/
+      .content.container
+        .row
+          .col-md-12
+            %h2.page-title
+              Inbox
+              %small Ready-to-use client-side application
+        .row
+          .col-md-12
+            %section.widget
+              %header
+                %h4
+                  Inbox App
+              .body
+                #mailbox-app.mailbox
+                  .row
+                    .col-sm-2
+                      %button#compose-btn.btn.btn-danger.btn-block Compose
+                      %ul#folders-list.mailbox-folders
+                        %li.active
+                          %a{:href => "#"} Inbox
+                        %li
+                          %a{:href => "#"} Sent
+                        %li
+                          %a{:href => "#"} Drafts
+                    .col-sm-10
+                      %h2#folder-title.folder-title
+                        Inbox
+                        %small (2 unread messages)
+                      %form.form-inline.form-search.text-align-right{:action => ""}
+                        %label
+                          %input#mailbox-search.input-search{:placeholder => "Search folder...", :type => "search"}/
+                      #mailbox-content.mailbox-content
+                        %table#folder-view.folder-view.table.table-striped
+                          %thead
+                            %tr
+                              %th#folder-actions{:colspan => "3"}
+                                %input#toggle-all{:type => "checkbox"}/
+                                %span.btn-group
+                                  %a.btn.btn-default.btn-sm{"data-toggle" => "dropdown", :href => "#"}
+                                    Select
+                                    %i.fa.fa-angle-down
+                                %ul.dropdown-menu
+                                  %li
+                                    %a{:href => "#"} All
+                                  %li
+                                    %a{:href => "#"} None
+                                  %li.divider
+                                  %li
+                                    %a{:href => "#"} Read
+                                  %li
+                                    %a{:href => "#"} Unread
+                              %th.total-pages{:colspan => "3"}
+                                1-30 of 1,421
+                                %button.btn.btn-default.btn-xs
+                                  %i.fa.fa-angle-left.fa-lg
+                                %button.btn.btn-default.btn-xs
+                                  %i.fa.fa-angle-right.fa-lg
+                          %tbody
+                            %tr
+                              %td.tiny-column
+                                %input{:type => "checkbox"}/
+                              %td.tiny-column
+                                %i.fa.fa-star
+                              %td.name.hidden-xs Philip Daineka
+                              %td.subject Light Blue template
+                              %td.tiny-column
+                                %i.fa.fa-paper-clip
+                              %td.date Aug 13
+      .loader-wrap.hiding.hide
+        %i.fa.fa-spinner.fa-spin
+    / jquery and friends
+    %script{:src => "lib/jquery/jquery-2.0.3.min.js"}
+    %script{:src => "lib/jquery-pjax/jquery.pjax.js"}
+    / jquery plugins
+    %script{:src => "lib/jquery-maskedinput/jquery.maskedinput.js"}
+    %script{:src => "lib/parsley/parsley.js"}
+    %script{:src => "lib/icheck.js/jquery.icheck.js"}
+    %script{:src => "lib/select2.js"}
+    / backbone and friends
+    %script{:src => "lib/backbone/underscore-min.js"}
+    %script{:src => "lib/backbone/backbone-min.js"}
+    %script{:src => "lib/backbone/backbone.localStorage-min.js"}
+    / bootstrap default plugins
+    %script{:src => "lib/bootstrap/transition.js"}
+    %script{:src => "lib/bootstrap/collapse.js"}
+    %script{:src => "lib/bootstrap/alert.js"}
+    %script{:src => "lib/bootstrap/tooltip.js"}
+    %script{:src => "lib/bootstrap/popover.js"}
+    %script{:src => "lib/bootstrap/button.js"}
+    %script{:src => "lib/bootstrap/dropdown.js"}
+    %script{:src => "lib/bootstrap/modal.js"}
+    %script{:src => "lib/bootstrap/tab.js"}
+    / bootstrap plugins
+    %script{:src => "lib/wysihtml5/wysihtml5-0.3.0_rc2.js"}
+    %script{:src => "lib/bootstrap-wysihtml5/bootstrap-wysihtml5.js"}
+    / advanced parser rules
+    %script{:src => "lib/wysihtml5/advanced.js"}
+    / fileupload stuff. see component_fileupload.html
+    %script{:src => "lib/vendor/jquery.ui.widget.js"}
+    %script{:src => "lib/vendor/http_blueimp.github.io_JavaScript-Templates_js_tmpl.js"}
+    %script{:src => "lib/vendor/http_blueimp.github.io_JavaScript-Load-Image_js_load-image.js"}
+    %script{:src => "lib/vendor/http_blueimp.github.io_JavaScript-Canvas-to-Blob_js_canvas-to-blob.js"}
+    %script{:src => "lib/jquery.iframe-transport.js"}
+    %script{:src => "lib/jquery.fileupload.js"}
+    %script{:src => "lib/jquery.fileupload-fp.js"}
+    %script{:src => "lib/jquery.fileupload-ui.js"}
+    / basic application js
+    %script{:src => "js/app.js"}
+    %script{:src => "js/settings.js"}
+    / page-specifix js
+    %script{:src => "js/inbox.js"}
+    %script#settings-template{:type => "text/template"}
+      <div class="setting clearfix">
+      <div>Background</div>
+      <div id="background-toggle" class="pull-left btn-group" data-toggle="buttons-radio">
+      <% dark = background == 'dark'; light = background == 'light';%>
+      <button type="button" data-value="dark" class="btn btn-sm btn-inverse <%= dark? 'active' : '' %>">Dark</button>
+      <button type="button" data-value="light" class="btn btn-sm btn-inverse <%= light? 'active' : '' %>">Light</button>
+      </div>
+      </div>
+      <div class="setting clearfix">
+      <div>Sidebar on the</div>
+      <div id="sidebar-toggle" class="pull-left btn-group" data-toggle="buttons-radio">
+      <% onRight = sidebar == 'right'%>
+      <button type="button" data-value="left" class="btn btn-sm btn-inverse <%= onRight? '' : 'active' %>">Left</button>
+      <button type="button" data-value="right" class="btn btn-sm btn-inverse <%= onRight? 'active' : '' %>">Right</button>
+      </div>
+      </div>
+      <div class="setting clearfix">
+      <div>Sidebar</div>
+      <div id="display-sidebar-toggle" class="pull-left btn-group" data-toggle="buttons-radio">
+      <% display = displaySidebar%>
+      <button type="button" data-value="true" class="btn btn-sm btn-inverse <%= display? 'active' : '' %>">Show</button>
+      <button type="button" data-value="false" class="btn btn-sm btn-inverse <%= display? '' : 'active' %>">Hide</button>
+      </div>
+      </div>
+      <div class="setting clearfix">
+      <div>Transparent</div>
+      <div>
+      <a href="../" class="btn btn-sm btn-inverse">&nbsp; Switch &nbsp;   <i class="fa fa-angle-right"></i></a>
+      </div>
+      </div>
+    %script#sidebar-settings-template{:type => "text/template"}
+      <% auto = sidebarState == 'auto'%>
+      <% if (auto) {%>
+      <button type="button"
+      data-value="icons"
+      class="btn-icons btn btn-inverse btn-sm">Icons</button>
+      <button type="button"
+      data-value="auto"
+      class="btn-auto btn btn-inverse btn-sm">Auto</button>
+      <%} else {%>
+      <button type="button"
+      data-value="auto"
+      class="btn btn-inverse btn-sm">Auto</button>
+      <% } %>
+    / Page Specific Templates
+    %script#folder-actions-template{:type => "text/template"}
+      <input id="toggle-all" type="checkbox" <%= allSelected ? 'checked' : '' %>/>
+      <span class="btn-group">
+      <a class="btn btn-default btn-sm" href="#" data-toggle="dropdown">
+      Select
+      <i class="fa fa-angle-down "></i>
+      </a>
+      <ul class="dropdown-menu">
+      <li><a id="select-all" href="#">All</a></li>
+      <li><a id="select-none" href="#">None</a></li>
+      <li class="divider"></li>
+      <li><a id="select-read" href="#">Read</a></li>
+      <li><a id="select-unread" href="#">Unread</a></li>
+      </ul>
+      </span>
+      <% if (anySelected) { %>
+      <span class="btn-group">
+      <a class="btn btn-sm btn-inverse" href="#" data-toggle="dropdown">
+      Actions
+      <i class="fa fa-angle-down "></i>
+      </a>
+      <ul class="dropdown-menu">
+      <li><a id="reply" href="#">Reply</a></li>
+      <li><a id="forward" href="#">Forward</a></li>
+      <li><a id="archive" href="#">Archive</a></li>
+      <li class="divider"></li>
+      <li><a id="mark-as-read" href="#">Mark As Read</a></li>
+      <li><a id="mark-as-unread" href="#">Mark As Unread</a></li>
+      <li class="divider"></li>
+      <li><a id="delete" href="#">Delete</a></li>
+      </ul>
+      </span>
+      <% } %>
+    %script#mail-item-template{:type => "text/template"}
+      <td class="tiny-column"><input class="selected-checkbox" type="checkbox"<%= selected ? ' checked="ckeched"' : ''%>/></td>
+      <td class="tiny-column"><span class="starred"><i class="<%= starred ? 'fa fa-star color-orange' : 'fa fa-star-o'%>"></i></span></td>
+      <td class="name hidden-xs"><%= sender ? sender : senderMail %></td>
+      <td class="subject"><%= subject %></td>
+      <td class="tiny-column"><% if (attachment) {%><i class="fa fa-paper-clip"><% } %></i></td>
+      <td class="date"><%= this.formatDate(timestamp) %></td>
+    %script#folder-template{:type => "text/template"}
+      <a href="#"><%= name %></a>
+    %script#folders-view-template{:type => "text/template"}
+      <table id="folder-view" class="folder-view table table-striped">
+      <thead>
+      <tr>
+      <th colspan="3" id="folder-actions">
+      <input id="toggle-all" type="checkbox"/>
+      <span class="btn-group">
+      <a class="btn btn-default btn-sm" href="#" data-toggle="dropdown">
+      Select
+      <i class="fa fa-angle-down "></i>
+      </a>
+      <ul class="dropdown-menu">
+      <li><a href="#">All</a></li>
+      <li><a href="#">None</a></li>
+      <li class="divider"></li>
+      <li><a href="#">Read</a></li>
+      <li><a href="#">Unread</a></li>
+      </ul>
+      </span>
+      </th>
+      <th colspan="3" class="total-pages">
+      1-30 of 1,421
+      <button class="btn btn-default btn-xs">
+      <i class="fa fa-angle-left fa-lg"></i>
+      </button>
+      <button class="btn btn-default btn-xs">
+      <i class="fa fa-angle-right fa-lg"></i>
+      </button>
+      </th>
+      </tr>
+      </thead>
+      <tbody>
+      </tbody>
+      </table>
+    %script#email-view-template{:type => "text/template"}
+      <span class="pull-right"><a href="#" class="print"><i class="fa fa-print fa-lg"></i></a></span>
+      <h4><%= subject %></h4>
+      <div class="email-details clearfix">
+      <img src="img/13.jpg" alt="<%= sender %>"/>
+      <div class="email-details-content">
+      <div class="pull-left">
+      <strong><%= sender ? sender : senderMail %></strong>
+      <% if (senderMail) { %>
+      <span class="email">&lt;<%= senderMail %>&gt;</span>
+      <% } %>
+      <span class="receiver">to Wrapbootstrap</span>
+      </div>
+      <div class="email-actions pull-right">
+      <div class="btn-group">
+      <button id='email-opened-reply' class="btn btn-sm btn-inverse">
+      <i class="fa fa-reply"></i> Reply
+      </button>
+      <button class="btn btn-sm btn-inverse dropdown-toggle" data-toggle="dropdown">
+      <i class="fa fa-angle-down"></i>
+      </button>
+      <ul class="dropdown-menu pull-right">
+      <li><a href="#"><i class="fa fa-reply reply-btn"></i> Reply</a></li>
+      <li><a href="#"><i class="fa fa-arrow-right reply-btn"></i> Forward</a></li>
+      <li><a href="#"><i class="fa fa-print"></i> Print</a></li>
+      <li class="divider"></li>
+      <li><a href="#"><i class="fa fa-ban"></i> Spam</a></li>
+      <li><a href="#"><i class="fa fa-trash"></i> Delete</a></li>
+      </ul>
+      </div>
+      </div>
+      <div class="email-date pull-right">
+      <%= this.formatDate(timestamp) %>
+      </div>
+      </div>
+      </div>
+      <div class="email-body">
+      <%= body %>
+      </div>
+      <% if (attachment) { %>
+      <%
+      attachments = attachments.split(",");
+      attachmentsCount = attachments.length
+      \%>
+      <div class="email-attachments">
+      <div class="row">
+      <div class="col-sm-6">
+      <hr>
+      <p class="details"><strong><%= attachmentsCount %> attachments</strong> &nbsp;-&nbsp; <a href="#">Download all attachments</a>
+      \&nbsp;&nbsp;&nbsp;<a href="#">View all Images</a></p>
+      <% i = 1 %>
+      <% _.each(attachments, function(attachment){ %>
+      <% size = Math.round(Math.random()*1000) %>
+      <section class="attachment">
+      <img src="<%= attachment %>" alt=""/>
+      <h5 class="title">some-cool-image<%= i++ %>.jpg</h5>
+      <p class="details">
+      <%= size %>K  &nbsp;&nbsp;
+      <a href="#">View</a> &nbsp;&nbsp;
+      <a href="#">Download</a>
+      </p>
+      </section>
+      <% }); %>
+      </div>
+      </div>
+      </div>
+      <% } %>
+    %script#compose-view-template{:type => "text/template"}
+      <form id="email-compose" class="form-horizontal form-email-compose" method="POST" enctype="multipart/form-data">
+      <div class="control-group">
+      <input type="email" id="input-to" placeholder="To" class="form-control"
+      value="<%= receiver %>">
+      </div>
+      <div class="control-group">
+      <input type="text" id="input-subject" placeholder="Subject" class="form-control"
+      value="<%= subject %>">
+      </div>
+      <div class="control-group">
+      <textarea rows="12" id="email-body"><%- body %></textarea>
+      </div>
+      <div class="control-group">
+      <div class="fileupload-buttonbar">
+      <span class="btn btn-sm btn-inverse fileinput-button">
+      <i class="fa fa-paper-clip"></i>
+      Attach files...
+      <input type="file" name="files[]" multiple="">
+      </span>
+      </div>
+      <table role="presentation" class="table table-striped no-margin"><tbody class="files"></tbody></table>
+      </div>
+      <div class="control-group">
+      <button type="submit" id="compose-send-button" class="btn btn-sm btn-primary">&nbsp;&nbsp;&nbsp;Send&nbsp;&nbsp;&nbsp;</button>
+      <button type="button" id="compose-save-button" class="btn btn-sm btn-inverse">&nbsp;&nbsp;Save&nbsp;&nbsp;</button>
+      <button type="reset" id="compose-discard-button" class="btn btn-sm btn-inverse">Discard</button>
+      </div>
+      </form>
+    %script#template-upload{:type => "text/template"}
+      {% for (var i=0, file; file=o.files[i]; i++) { %}
+      <tr class="template-upload fade">
+      <td class="preview"><span class="fade"></span></td>
+      <td class="name"><span>{%=file.name%}</span></td>
+      <td class="size"><span>{%=o.formatFileSize(file.size)%}</span></td>
+      {% if (file.error) { %}
+      <td class="error" colspan="2"><span class="label label-important">Error</span> {%=file.error%}</td>
+      {% } else if (o.files.valid && !i) { %}
+      <td>
+      <div class="progress progress-inverse progress-small progress-striped active" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
+      <div class="bar" style="width:0%;"></div>
+      </div>
+      </td>
+      <td>{% if (!o.options.autoUpload) { %}
+      <button class="btn btn-primary btn-sm start">
+      <i class="fa fa-upload"></i>
+      <span>Start</span>
+      </button>
+      {% } %}</td>
+      {% } else { %}
+      <td colspan="2"></td>
+      {% } %}
+      <td>{% if (!i) { %}
+      <button class="btn btn-inverse btn-sm cancel">
+      <i class="fa fa-ban"></i>
+      <span>Cancel</span>
+      </button>
+      {% } %}</td>
+      </tr>
+      {% } %}
+    / The template to display files available for download
+    %script#template-download{:type => "text/template"}
+      {% for (var i=0, file; file=o.files[i]; i++) { %}
+      <tr class="template-download fade">
+      {% if (file.error) { %}
+      <td></td>
+      <td class="name"><span>{%=file.name%}</span></td>
+      <td class="size"><span>{%=o.formatFileSize(file.size)%}</span></td>
+      <td class="error" colspan="2"><span class="label label-important">Error</span> {%=file.error%}</td>
+      {% } else { %}
+      <td class="preview">{% if (file.thumbnail_url) { %}
+      <a href="{%=file.url%}" title="{%=file.name%}" data-gallery="gallery" download="{%=file.name%}"><img src="{%=file.thumbnail_url%}"></a>
+      {% } %}</td>
+      <td class="name">
+      <a href="{%=file.url%}" title="{%=file.name%}" data-gallery="{%=file.thumbnail_url&&'gallery'%}" download="{%=file.name%}">{%=file.name%}</a>
+      </td>
+      <td class="size"><span>{%=o.formatFileSize(file.size)%}</span></td>
+      <td colspan="2"></td>
+      {% } %}
+      <td>
+      <button class="btn btn-inverse btn-sm delete" data-type="{%=file.delete_type%}" data-url="{%=file.delete_url%}"{% if (file.delete_with_credentials) { %} data-xhr-fields='{"withCredentials":true}'{% } %}>
+      <i class="fa fa-trash"></i>
+      <span>Delete</span>
+      </button>
+      </td>
+      </tr>
+      {% } %}

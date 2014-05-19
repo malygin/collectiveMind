@@ -1,0 +1,601 @@
+!!!
+%html
+  %head
+    %title Light Blue - Admin Template
+    %link{:href => "css/application.min.css", :rel => "stylesheet"}/
+    %link{:href => "img/favicon.png", :rel => "shortcut icon"}/
+    %meta{:content => "width=device-width, initial-scale=1.0", :name => "viewport"}/
+    %meta{:content => "", :name => "description"}/
+    %meta{:content => "", :name => "author"}/
+    %meta{:charset => "utf-8"}/
+  %body.background-dark
+    .logo
+      %h4
+        %a{:href => "index.html"}
+          Light
+          %strong Blue
+    %nav#sidebar.sidebar.nav-collapse.collapse
+      %ul#side-nav.side-nav
+        %li
+          %a{:href => "index.html"}
+            %i.fa.fa-home
+            %span.name Dashboard
+        %li.panel
+          %a.accordion-toggle.collapsed{"data-parent" => "#side-nav", "data-toggle" => "collapse", :href => "#forms-collapse"}
+            %i.fa.fa-edit
+            %span.name Forms
+          %ul#forms-collapse.panel-collapse.collapse
+            %li
+              %a{:href => "form_account.html"} Account
+            %li
+              %a{:href => "form_article.html"} Article
+            %li
+              %a{:href => "form_elements.html"} Elements
+            %li
+              %a{:href => "form_validation.html"} Validation
+            %li
+              %a{:href => "form_wizard.html"} Wizard
+        %li.panel
+          %a.accordion-toggle.collapsed{"data-parent" => "#side-nav", "data-toggle" => "collapse", :href => "#stats-collapse"}
+            %i.fa.fa-bar-chart-o
+            %span.name Statistics
+          %ul#stats-collapse.panel-collapse.collapse
+            %li
+              %a{:href => "stat_statistics.html"} Stats
+            %li
+              %a{:href => "stat_charts.html"} Charts
+            %li
+              %a{:href => "stat_realtime.html"} Realtime
+        %li.panel
+          %a.accordion-toggle.collapsed{"data-parent" => "#side-nav", "data-toggle" => "collapse", :href => "#ui-collapse"}
+            %i.fa.fa-magic
+            %span.name User Interface
+          %ul#ui-collapse.panel-collapse.collapse
+            %li
+              %a{:href => "ui_buttons.html"} Buttons
+            %li
+              %a{:href => "ui_dialogs.html"} Dialogs
+            %li
+              %a{:href => "ui_notifications.html"}
+                Notifications &nbsp;
+                %span.label.label-danger new
+            %li
+              %a{:href => "ui_icons.html"} Icons
+            %li
+              %a{:href => "ui_tabs.html"} Tabs
+            %li
+              %a{:href => "ui_accordion.html"} Accordion
+        %li.panel
+          %a.accordion-toggle.collapsed{"data-parent" => "#side-nav", "data-toggle" => "collapse", :href => "#components-collapse"}
+            %i.fa.fa-bookmark-o
+            %span.name Components
+          %ul#components-collapse.panel-collapse.collapse
+            %li
+              %a{:href => "component_calendar.html"} Calendar
+            %li
+              %a{"data-no-pjax" => "", :href => "component_maps.html"} Maps
+            %li
+              %a{:href => "component_gallery.html"} Gallery
+            %li
+              %a{:href => "component_fileupload.html"} Fileupload
+            %li
+              %a{:href => "component_bootstrap.html"}
+                Bootstrap &nbsp;
+                %span.label.label-important new
+            %li
+              %a{:href => "component_list_groups.html"}
+                List Groups &nbsp;
+                %span.label.label-important new
+        %li.panel
+          %a.accordion-toggle.collapsed{"data-parent" => "#side-nav", "data-toggle" => "collapse", :href => "#tables-collapse"}
+            %i.fa.fa-table
+            %span.name Tables
+          %ul#tables-collapse.panel-collapse.collapse
+            %li
+              %a{:href => "tables_static.html"} Static
+            %li
+              %a{:href => "tables_dynamic.html"} Dynamic
+        %li.panel.active
+          %a.accordion-toggle{"data-parent" => "#side-nav", "data-toggle" => "collapse", :href => "#grid-collapse"}
+            %i.fa.fa-bars
+            %span.name
+              Widgets &nbsp;
+              %span.label.label-info new
+          %ul#grid-collapse.panel-collapse.in
+            %li
+              %a{:href => "grid.html"} Basic
+            %li.active
+              %a{:href => "grid_live.html"}
+                Live &nbsp;
+                %span.label.label-important hot
+        %li.panel
+          %a.accordion-toggle.collapsed{"data-parent" => "#side-nav", "data-toggle" => "collapse", :href => "#special-collapse"}
+            %i.fa.fa-asterisk
+            %span.name Special
+          %ul#special-collapse.panel-collapse.collapse
+            %li
+              %a{:href => "special_search.html"} Search
+            %li
+              %a{:href => "special_invoice.html"} Invoice
+            %li
+              %a{:href => "special_inbox.html"}
+                Inbox
+                %span.label.label-important 3
+            %li
+              %a{:href => "login.html"} Login
+            %li
+              %a{:href => "special_404.html"} 404
+            %li
+              %a{"data-no-pjax" => "", :href => "landing.html"} Landing
+            %li
+              %a{"data-no-pjax" => "", :href => "white/index.html"}
+                White
+                %i.fa.fa-external-link-square
+        %li.panel
+          %a.accordion-toggle.collapsed{"data-parent" => "#side-nav", "data-toggle" => "collapse", :href => "#menu-levels-collapse"}
+            %i.fa.fa-code-fork
+            %span.name Menu Levels
+          %ul#menu-levels-collapse.panel-collapse.collapse
+            %li
+              %a{:href => "#"} Item 1.1
+            %li
+              %a{:href => "#"} Item 1.2
+            %li.panel
+              %a.accordion-toggle.collapsed{"data-parent" => "#menu-levels-collapse", "data-toggle" => "collapse", :href => "#sub-menu-1-collapse"} Item 1.3
+              %ul#sub-menu-1-collapse.panel-collapse.collapse
+                %li
+                  %a{:href => "#"} Item 2.1
+                %li
+                  %a{:href => "#"} Item 2.2
+                %li.panel
+                  %a.accordion-toggle.collapsed{"data-parent" => "#sub-menu-2-collapse", "data-toggle" => "collapse", :href => "#sub-menu-2-collapse"} Item 2.3
+                  %ul#sub-menu-2-collapse.panel-collapse.collapse
+                    %li
+                      %a{:href => "#"} Item 3.1
+                    %li
+                      %a{:href => "#"} Item 3.2
+                    %li
+                      %a{:href => "#"} Item 3.3
+        %li.visible-xs
+          %a{:href => "login.html"}
+            %i.fa.fa-sign-out
+            %span.name Sign Out
+      #sidebar-settings.settings
+        %button.btn-icons.btn.btn-transparent.btn-sm{"data-value" => "icons", :type => "button"} Icons
+        %button.btn-auto.btn.btn-transparent.btn-sm{"data-value" => "auto", :type => "button"} Auto
+    .wrap
+      %header.page-header
+        .navbar
+          %ul.nav.navbar-nav.navbar-right.pull-right
+            %li.visible-phone-landscape
+              %a#search-toggle{:href => "#"}
+                %i.fa.fa-search
+            %li.dropdown
+              %a#messages.dropdown-toggle{"data-toggle" => "dropdown", :href => "#", :title => "Messages"}
+                %i.fa.fa-comments
+              %ul#messages-menu.dropdown-menu.messages{:role => "menu"}
+                %li{:role => "presentation"}
+                  %a.message{:href => "#"}
+                    %img{:alt => "", :src => "img/1.jpg"}/
+                  .details
+                    .sender Jane Hew
+                    .text
+                      Hey, John! How is it going? ...
+                %li{:role => "presentation"}
+                  %a.message{:href => "#"}
+                    %img{:alt => "", :src => "img/2.jpg"}/
+                  .details
+                    .sender Alies Rumiancaŭ
+                    .text
+                      I'll definitely buy this template
+                %li{:role => "presentation"}
+                  %a.message{:href => "#"}
+                    %img{:alt => "", :src => "img/3.jpg"}/
+                  .details
+                    .sender Michał Rumiancaŭ
+                    .text
+                      Is it really Lore ipsum? Lore ...
+                %li{:role => "presentation"}
+                  %a.text-align-center.see-all{:href => "#"}
+                    See all messages
+                    %i.fa.fa-arrow-right
+            %li.dropdown
+              %a.dropdown-toggle{"data-toggle" => "dropdown", :href => "#", :title => "8 support tickets"}
+                %i.fa.fa-group
+                %span.count 8
+              %ul#support-menu.dropdown-menu.support{:role => "menu"}
+                %li{:role => "presentation"}
+                  %a.support-ticket{:href => "#"}
+                  .picture
+                    %span.label.label-important
+                      %i.fa.fa-bell-o
+                  .details
+                    Check out this awesome ticket
+                %li{:role => "presentation"}
+                  %a.support-ticket{:href => "#"}
+                  .picture
+                    %span.label.label-warning
+                      %i.fa.fa-question-circle
+                  .details
+                    "What is the best way to get ...
+                %li{:role => "presentation"}
+                  %a.support-ticket{:href => "#"}
+                  .picture
+                    %span.label.label-success
+                      %i.fa.fa-tag
+                  .details
+                    This is just a simple notification
+                %li{:role => "presentation"}
+                  %a.support-ticket{:href => "#"}
+                  .picture
+                    %span.label.label-info
+                      %i.fa.fa-info-circle
+                  .details
+                    12 new orders has arrived today
+                %li{:role => "presentation"}
+                  %a.support-ticket{:href => "#"}
+                  .picture
+                    %span.label.label-important
+                      %i.fa.fa-plus
+                  .details
+                    One more thing that just happened
+                %li{:role => "presentation"}
+                  %a.text-align-center.see-all{:href => "#"}
+                    See all tickets
+                    %i.fa.fa-arrow-right
+            %li.divider
+            %li.hidden-xs
+              %a#settings{"data-placement" => "bottom", "data-toggle" => "popover", :href => "#", :title => "Settings"}
+                %i.fa.fa-cog
+            %li.hidden-xs.dropdown
+              %a#account.dropdown-toggle{"data-toggle" => "dropdown", :href => "#", :title => "Account"}
+                %i.fa.fa-user
+              %ul#account-menu.dropdown-menu.account{:role => "menu"}
+                %li.account-picture{:role => "presentation"}
+                  %img{:alt => "", :src => "img/2.jpg"}/
+                  Philip Daineka
+                %li{:role => "presentation"}
+                  %a.link{:href => "form_account.html"}
+                    %i.fa.fa-user
+                    Profile
+                %li{:role => "presentation"}
+                  %a.link{:href => "component_calendar.html"}
+                    %i.fa.fa-calendar
+                    Calendar
+                %li{:role => "presentation"}
+                  %a.link{:href => "#"}
+                    %i.fa.fa-inbox
+                    Inbox
+            %li.visible-xs
+              %a.btn-navbar{"data-target" => ".sidebar", "data-toggle" => "collapse", :href => "#", :title => ""}
+                %i.fa.fa-bars
+            %li.hidden-xs
+              %a{:href => "login.html"}
+                %i.fa.fa-sign-out
+          %form#search-form.navbar-form.pull-right{:role => "search"}
+            %input.search-query{:placeholder => "Search...", :type => "search"}/
+      .content.container
+        .row
+          .col-md-12
+            %h2.page-title
+              Live Grid
+              %small Draggable widgets. Touch screen support
+        .row
+          .col-md-7.col-lg-offset-1
+            %section.widget
+              %header
+                %h4
+                  New Widgets &nbsp;
+                  %span.label.label-danger since 2.1
+              .body
+                %p
+                  Specially for Light Blue 2.1 we have developed a plugin that allows to easily implement basic widget functions that
+                  lots of our customers have requested. The plugin is called
+                  = succeed "." do
+                    %strong Widgster
+                  For now it has the following essential
+                  widget features:
+                %ul.text-list
+                  %li
+                    %strong Collapse/Expand
+                    \- all widgets can be collapsed to fill only header's vertical space;
+                  %li
+                    %strong Close
+                    \- closable. Any widget may be removed by clicking the close btn;
+                  %li
+                    %strong Full Screen
+                    \- an option to make widget fill the whole window (just like OS);
+                  %li
+                    %strong Ajax Load
+                    \- the hottest option allowing to load/reload widget content asynchronously. You just
+                    need to provide an url to fetch the data from. With loader delivered.
+                %p In the future this plugin may be released under MIT license, but for now it's available exclusively with Light Blue.
+                %p
+                  Test it out!
+        .row
+          .col-md-6.widget-container
+            %section#default-widget.widget{"data-widgster-load" => "server/php/widgets/default.php"}
+              %header
+                %h5 Default Widget
+                .widget-controls
+                  %a{"data-widgster" => "load", :href => "#", :title => "Reload"}
+                    %i.glyphicon.glyphicon-refresh
+                  %a{"data-widgster" => "expand", :href => "#", :title => "Expand"}
+                    %i.glyphicon.glyphicon-plus
+                  %a{"data-widgster" => "collapse", :href => "#", :title => "Collapse"}
+                    %i.glyphicon.glyphicon-minus
+                  %a{"data-widgster" => "fullscreen", :href => "#", :title => "Full Screen"}
+                    %i.glyphicon.glyphicon-resize-full
+                  %a{"data-widgster" => "restore", :href => "#", :title => "Restore"}
+                    %i.glyphicon.glyphicon-resize-small
+                  %a{"data-widgster" => "close", :href => "#", :title => "Close"}
+                    %i.glyphicon.glyphicon-remove
+              .body
+                %p A timestamp this widget was created: Apr 24, 19:07:07
+                %p A timestamp this widget was updated: Apr 24, 19:07:07
+            %section#shares-widget.widget{"data-widgster-load" => "server/php/widgets/shares.php"}
+              %header
+                %h5
+                  %span.label.label-primary
+                    %i.fa.fa-facebook
+                  \&nbsp; Shares
+                .widget-controls
+                  %a{"data-widgster" => "load", :href => "#", :title => "Reload"}
+                    %strong Reload
+                  %a{"data-widgster" => "close", :href => "#", :title => "Close"}
+                    %strong Close
+              .body
+                .list-group.users-list-group
+                  %a.list-group-item{:href => "#"}
+                    %img.img-circle{:alt => "", :src => "img/1.jpg"}/
+                    %i.fa.fa-circle.pull-right.text-danger
+                  %h5.no-margin Maikel Basso
+                  %small.text-muted about 2 mins ago
+                  %a.list-group-item{:href => "#"}
+                    %img.img-circle{:alt => "", :src => "img/2.jpg"}/
+                    %i.fa.fa-circle.pull-right.text-info
+                  %h5.no-margin Ianus Arendse
+                  %small.text-muted about 42 mins ago
+                  %a.list-group-item{:href => "#"}
+                    %img.img-circle{:alt => "", :src => "img/3.jpg"}/
+                    %i.fa.fa-circle.pull-right.text-success
+                  %h5.no-margin Valdemar Landau
+                  %small.text-muted one hour ago
+                  %a.list-group-item{:href => "#"}
+                    %img.img-circle{:alt => "", :src => "img/13.jpg"}/
+                    %i.fa.fa-circle.pull-right.text-warning
+                  %h5.no-margin Rick Teagan
+                  %small.text-muted 3 hours ago
+            %section#autoload-widget.widget{"data-widgster-autoload" => "true", "data-widgster-load" => "server/php/widgets/autoload.php", "data-widgster-show-loader" => "false"}
+              %header
+                %h5 Autoload widget
+                .widget-controls.dropdown
+                  %span
+                    %i.fa.fa-spinner.fa-lg.fade
+                  %a.dropdown-toggle{"data-toggle" => "dropdown", :href => "#"}
+                    %i.fa.fa-cog
+                  %ul.dropdown-menu.dropdown-menu-right
+                    %li
+                      %a{"data-widgster" => "load", :href => "#", :title => "Reload"}
+                        Reload
+                        \&nbsp;&nbsp;
+                        %span.badge.background-success.animated.bounceIn
+                          %strong 9
+                    %li
+                      %a{"data-widgster" => "fullscreen", :href => "#", :title => "Full Screen"} Fullscreen
+                      %a{"data-widgster" => "restore", :href => "#", :title => "Restore"} Restore
+                    %li.divider
+                    %li
+                      %a{"data-widgster" => "close", :href => "#", :title => "Close"} Close
+              .body
+                %h3.text-align-center.no-margin
+                  Sign up, it's
+                  %strong free
+                %p.lead.text-muted.text-align-center
+                  Faith makes it possible to achieve that which man's mind can conceive and believe.
+                .row
+                  .col-md-10.col-md-offset-1
+                    %form
+                      .form-group
+                        %label{:for => "exampleInputEmail1"}
+                          %i.fa.fa-circle.text-warning
+                          \&nbsp; Email address
+                        %input#exampleInputEmail1.form-control.input-transparent{:placeholder => "Enter email", :type => "email"}/
+                      .form-group
+                        %label{:for => "exampleInputPassword1"}
+                          %i.fa.fa-circle.text-danger
+                          \&nbsp; Password
+                        %input#exampleInputPassword1.form-control.input-transparent{:placeholder => "Min 8 characters", :type => "password"}/
+                        %span
+                      %p
+                        To make a widget automatically load it's content you just need to set
+                        %strong data-widgster-autoload
+                        attribute and provide an url.
+                      %pre
+                        %code
+                          :preserve
+                            data-widgster-load="server/ajax_widget.php"
+                            data-widgster-autoload="true"                      %p
+                        %strong data-widgster-autoload
+                        may be set to an integer value. If set, for example, to
+                        2000 will refresh widget every 2 seconds.
+                      .btn-toolbar.pull-right
+                        %button.btn.btn-transparent{:type => "button"} Cancel
+                        %button.btn.btn-success{:type => "button"} &nbsp;Submit&nbsp;
+            %section.widget{:style => "min-height: 200px"}
+              %header
+                %h5 Custom Loader
+              .body
+                .loader.animated.fadeIn.handle
+                  %span.spinner
+                    %i.fa.fa-spinner.fa-spin
+          .col-md-6.widget-container
+            %section#news-widget.widget{"data-widgster-load" => "server/php/widgets/news.php"}
+              %header
+                %h5
+                  News
+                  %span.badge.badge-success 17
+                %span.text-muted spinning refresh button & close prompt
+                .widget-controls
+                  %a{"data-widgster" => "expand", :href => "#", :title => "Expand"}
+                    %i.glyphicon.glyphicon-plus
+                  %a{"data-widgster" => "collapse", :href => "#", :title => "Collapse"}
+                    %i.glyphicon.glyphicon-minus
+                  %a{"data-widgster" => "load", :href => "#", :title => "I am spinning!"}
+                    %i.glyphicon.glyphicon-refresh
+                  %a{"data-widgster" => "close", :href => "#", :title => "Close"}
+                    %i.glyphicon.glyphicon-remove
+              .body
+                %ul.news-list.stretchable
+                  %li
+                    %span.icon.background-warning
+                      %i.fa.fa-star
+                    .news-item-info
+                      %h4.name
+                        %a{:href => "#"} First Human Colony on Mars
+                      %p
+                        First 700 people will take part in building first human settlement outside of Earth.
+                        That's awesome, right?
+                      .time Mar 20, 18:46
+                  %li
+                    %span.icon.background-info
+                      %i.fa.fa-microphone
+                    .news-item-info
+                      %h4.name
+                        %a{:href => "#"} Light Blue reached $300
+                      %p
+                        Light Blue Inc. shares just hit $300 price. "This was inevitable. It should
+                        have happen sooner or later" - says NYSE expert.
+                      .time Sep 25, 11:59
+                  %li
+                    %span.icon.background-lime
+                      %i.fa.fa-eye
+                    .news-item-info
+                      %h4.name
+                        %a{:href => "#"} No more spying
+                      %p
+                        Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor
+                        incididunt ut labore et dolore magna aliqua.
+                      .time Mar 20, 18:46
+              #news-close-modal.modal.fade{"aria-hidden" => "true", "aria-labelledby" => "news-close-modal-label", :role => "dialog", :style => "display: none;", :tabindex => "-1"}
+                .modal-dialog
+                  .modal-content
+                    .modal-header
+                      %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} ×
+                      %h4#news-close-modal-label.modal-title Sure?
+                    .modal-body
+                      Do you really want to unrevertably remove this super news widget?
+                    .modal-footer
+                      %button.btn.btn-default{"data-dismiss" => "modal", :type => "button"} No
+                      %button#news-widget-remove.btn.btn-danger{:type => "button"} Yes, remove widget
+                  / /.modal-content
+                / /.modal-dialog
+            %section.widget.locked{"data-widgster-collapsed" => "true"}
+              %header
+                %h5 Collapsed by default & locked
+                .widget-controls
+                  %a{"data-widgster" => "expand", :href => "#", :title => "Expand"}
+                    %i.glyphicon.glyphicon-plus
+                  %a{"data-widgster" => "collapse", :href => "#", :title => "Collapse"}
+                    %i.glyphicon.glyphicon-minus
+                  %a{"data-widgster" => "close", :href => "#", :title => "Close"}
+                    %i.glyphicon.glyphicon-remove
+              .body
+                %blockquote
+                  There are no limits. There are plateaus, but you must not stay there, you must go beyond
+                  them. If it kills you, it kills you. A man must constantly exceed his level.
+                  %footer
+                    Bruce Lee
+                %p
+                  To make a widget initially collapsed just add
+                  %code data-widgster-collapsed="true"
+                  attribute to
+                  = succeed "." do
+                    %code .widget
+                %p
+                  To make it locked (prevent dragging) add
+                  %code .locked
+                  class.
+            %section.widget
+              .jumbotron.handle
+                .container
+                  %h1 Draggable story!
+                  %p.lead
+                    %em Build
+                    your own
+                    interfaces! Sit back and relax.
+                  %p.text-align-center
+                    %a.btn.btn-danger.btn-lg{"data-widgster" => "fullscreen"}
+                      Fullscreen me! &nbsp;
+                      %i.fa.fa-check
+                  %a.btn.btn-danger.btn-lg{"data-widgster" => "restore"}
+                    Want to go back?
+      .loader-wrap.hiding.hide
+        %i.fa.fa-spinner.fa-spin
+    / jquery and friends
+    %script{:src => "lib/jquery/jquery-2.0.3.min.js"}
+    %script{:src => "lib/jquery-pjax/jquery.pjax.js"}
+    / backbone and friends
+    %script{:src => "lib/backbone/underscore-min.js"}
+    / bootstrap default plugins
+    %script{:src => "lib/bootstrap/transition.js"}
+    %script{:src => "lib/bootstrap/collapse.js"}
+    %script{:src => "lib/bootstrap/alert.js"}
+    %script{:src => "lib/bootstrap/tooltip.js"}
+    %script{:src => "lib/bootstrap/popover.js"}
+    %script{:src => "lib/bootstrap/button.js"}
+    %script{:src => "lib/bootstrap/dropdown.js"}
+    %script{:src => "lib/bootstrap/modal.js"}
+    %script{:src => "lib/bootstrap/tab.js"}
+    / basic application js
+    %script{:src => "js/app.js"}
+    %script{:src => "js/settings.js"}
+    / page specific
+    %script{:src => "lib/jquery-ui-1.10.3.custom.js"}
+    %script{:src => "lib/jquery.ui.touch-punch.js"}
+    %script{:src => "js/grid-live.js"}
+    %script#settings-template{:type => "text/template"}
+      <div class="setting clearfix">
+      <div>Background</div>
+      <div id="background-toggle" class="pull-left btn-group" data-toggle="buttons-radio">
+      <% dark = background == 'dark'; light = background == 'light';%>
+      <button type="button" data-value="dark" class="btn btn-sm btn-transparent <%= dark? 'active' : '' %>">Dark</button>
+      <button type="button" data-value="light" class="btn btn-sm btn-transparent <%= light? 'active' : '' %>">Light</button>
+      </div>
+      </div>
+      <div class="setting clearfix">
+      <div>Sidebar on the</div>
+      <div id="sidebar-toggle" class="pull-left btn-group" data-toggle="buttons-radio">
+      <% onRight = sidebar == 'right'%>
+      <button type="button" data-value="left" class="btn btn-sm btn-transparent <%= onRight? '' : 'active' %>">Left</button>
+      <button type="button" data-value="right" class="btn btn-sm btn-transparent <%= onRight? 'active' : '' %>">Right</button>
+      </div>
+      </div>
+      <div class="setting clearfix">
+      <div>Sidebar</div>
+      <div id="display-sidebar-toggle" class="pull-left btn-group" data-toggle="buttons-radio">
+      <% display = displaySidebar%>
+      <button type="button" data-value="true" class="btn btn-sm btn-transparent <%= display? 'active' : '' %>">Show</button>
+      <button type="button" data-value="false" class="btn btn-sm btn-transparent <%= display? '' : 'active' %>">Hide</button>
+      </div>
+      </div>
+      <div class="setting clearfix">
+      <div>White Version</div>
+      <div>
+      <a href="white/" class="btn btn-sm btn-transparent">&nbsp; Switch &nbsp;   <i class="fa fa-angle-right"></i></a>
+      </div>
+      </div>
+    %script#sidebar-settings-template{:type => "text/template"}
+      <% auto = sidebarState == 'auto'%>
+      <% if (auto) {%>
+      <button type="button"
+      data-value="icons"
+      class="btn-icons btn btn-transparent btn-sm">Icons</button>
+      <button type="button"
+      data-value="auto"
+      class="btn-auto btn btn-transparent btn-sm">Auto</button>
+      <%} else {%>
+      <button type="button"
+      data-value="auto"
+      class="btn btn-transparent btn-sm">Auto</button>
+      <% } %>

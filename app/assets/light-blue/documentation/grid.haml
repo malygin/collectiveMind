@@ -1,0 +1,270 @@
+!!!
+%html{:xmlns => "http://www.w3.org/1999/html"}
+  %head
+    %title Light Blue Documentation
+    %link{:href => "css/documentation.css", :rel => "stylesheet"}/
+    %meta{:content => "width=device-width, initial-scale=1.0", :name => "viewport"}/
+    %meta{:content => "", :name => "description"}/
+    %meta{:content => "", :name => "author"}/
+    %meta{:charset => "utf-8"}/
+  %body.background-two
+    %nav#sidebar.sidebar
+      %ul#side-nav.side-nav
+        %li.green
+          %a{:href => "index.html"}
+            %i.icon-desktop
+            %span.name Dashboard
+        %li.teal.accordion-group
+          %a.accordion-toggle.collapsed{"data-parent" => "#side-nav", "data-toggle" => "collapse", :href => "#stats-collapse"}
+            %i.icon-bar-chart
+            %span.name Statistics
+          %ul#stats-collapse.accordion-body.collapse
+            %li
+              %a{:href => "stat_statistics.html"} Stats
+            %li
+              %a{:href => "stat_charts.html"} Charts
+            %li
+              %a{:href => "stat_realtime.html"} Realtime
+        %li.blue.accordion-group
+          %a.accordion-toggle.collapsed{"data-parent" => "#side-nav", "data-toggle" => "collapse", :href => "#forms-collapse"}
+            %i.icon-edit
+            %span.name Forms
+          %ul#forms-collapse.accordion-body.collapse
+            %li
+              %a{:href => "form_account.html"} Account
+            %li
+              %a{:href => "form_article.html"} Article
+            %li
+              %a{:href => "form_elements.html"} Elements
+            %li
+              %a{:href => "form_validation.html"} Validation
+            %li
+              %a{:href => "form_wizard.html"} Wizard
+        %li.brown.accordion-group
+          %a.accordion-toggle.collapsed{"data-parent" => "#side-nav", "data-toggle" => "collapse", :href => "#ui-collapse"}
+            %i.icon-magic
+            %span.name UI
+          %ul#ui-collapse.accordion-body.collapse
+            %li
+              %a{:href => "ui_buttons.html"} Buttons
+            %li
+              %a{:href => "ui_dialogs.html"} Dialogs
+            %li
+              %a{:href => "ui_notifications.html"} Notifications
+            %li
+              %a{:href => "ui_icons.html"} Icons
+            %li
+              %a{:href => "ui_tabs.html"} Tabs
+            %li
+              %a{:href => "ui_accordion.html"} Accordion
+        %li.dark-red.accordion-group
+          %a.accordion-toggle.collapsed{"data-parent" => "#side-nav", "data-toggle" => "collapse", :href => "#components-collapse"}
+            %i.icon-bookmark-empty
+            %span.name Components
+          %ul#components-collapse.accordion-body.collapse
+            %li
+              %a{:href => "component_calendar.html"} Calendar
+            %li
+              %a{:href => "component_maps.html"} Maps
+            %li
+              %a{:href => "component_gallery.html"} Gallery
+            %li
+              %a{:href => "component_fileupload.html"} Fileupload
+        %li.red.accordion-group
+          %a.accordion-toggle.collapsed{"data-parent" => "#side-nav", "data-toggle" => "collapse", :href => "#tables-collapse"}
+            %i.icon-table
+            %span.name Tables
+          %ul#tables-collapse.accordion-body.collapse
+            %li
+              %a{:href => "tables_static.html"} Static
+            %li
+              %a{:href => "tables_dynamic.html"} Dynamic
+        %li.active.orange
+          %a{:href => "grid.html"}
+            %i.icon-columns
+            %span.name
+              Widgets &nbsp;
+              %span.label.label-info new
+        %li.lime.accordion-group
+          %a.accordion-toggle.collapsed{"data-parent" => "#side-nav", "data-toggle" => "collapse", :href => "#special-collapse"}
+            %i.icon-asterisk
+            %span.name Special
+          %ul#special-collapse.accordion-body.collapse
+            %li
+              %a{:href => "special_search.html"} Search
+            %li
+              %a{:href => "login.html"} Login
+            %li
+              %a{:href => "special_404.html"} 404
+    .wrap
+      %header.page-header
+        %h1 Documentation
+      .content.container-fluid
+        .row-fluid
+          .span10.offset1
+            %section.widget
+              %h2 Grid System
+              %p
+                %strong Light Blue
+                inherits 12-column grid system from
+                = succeed "." do
+                  %a{:href => "http://getbootstrap.com/css/#grid"} Bootstrap's great one
+              %p
+                Sometimes this behaviour has to be omitted, so you can add
+                %code .col-xs-*
+                classes to your columns. Columns within this row will always remain their relative size.
+              %h2 Widgets
+              %p
+                Light Blue widget looks simple and may contain three parts: header, body and footer. But any of them
+                can be omitted. So the basic widget structure looks like:
+              %pre
+                :preserve
+                  &lt;section class="widget"&gt;
+                      &lt;header&gt;
+                          &lt;h3&gt;Header&lt;/h3&gt;
+                      &lt;/header&gt;
+                      &lt;div class="body"&gt;
+                          Body
+                      &lt;/div&gt;
+                      &lt;footer&gt;
+                          Footer
+                      &lt;/footer&gt;
+                  &lt;/section&gt;              %p
+                You can color widget's background by adding light color class. For example
+                = succeed "." do
+                  %code .light-blue
+              %p
+                Widget will take as much place as inner content needs, but you can control its size:
+                = succeed "," do
+                  %code .tiny
+                = succeed "," do
+                  %code .normal
+                = succeed "," do
+                  %code .large
+                or
+                = succeed "." do
+                  %code .xlarge
+              %p
+                Consider using some
+                %code .offset*
+                for
+                %code .col-*
+                that holds widget.
+                Let background shine!
+              %h2 Widget Controls
+              %p
+                Since version 2.1 Light Blue includes a custom jquery plugin called
+                %strong Widgster
+                which provides an easy way to handle basic
+                widget functions like collapsing, closing, ajax-refreshing & fullsreening.
+              %p To apply all these features to your default widget you have to add appropriate links (or buttons) to it:
+              %pre
+                :preserve
+                  &lt;section class="widget"&gt;
+                      &lt;header&gt;
+                          &lt;h3&gt;Header&lt;/h3&gt;
+                          &lt;div class="widget-controls"&gt;
+                              &lt;a data-widgster="load" href="#"&gt;Reload&lt;/a&gt;
+                              &lt;a data-widgster="expand" href="#"&gt;Expand&lt;/a&gt;
+                              &lt;a data-widgster="collapse" href="#"&gt;Collapse&lt;/a&gt;
+                              &lt;a data-widgster="fullscreen" href="#"&gt;Fullscreen&lt;/a&gt;
+                              &lt;a data-widgster="restore" href="#"&gt;Restore&lt;/a&gt;
+                              &lt;a data-widgster="close" href="#"&gt;Close&lt;/a&gt;
+                          &lt;/div&gt;
+                      &lt;/header&gt;
+                      &lt;div class="body"&gt;
+                          Body
+                      &lt;/div&gt;
+                  &lt;/section&gt;              %p
+                In the example above links are put into a
+                %code .widget-controls
+                but you can put them wherever inside of widget.
+              %p Then widgster needs to be initialized via javascript:
+              %pre
+                %code $('.widget').widgster();
+              %p
+                As you could guess
+                %code data-widgster
+                attribute defines widget action to be performed when link is clicked.
+              %h3 Options
+              %ul{:style => "list-style: disc; padding-left: 40px; margin-bottom: 10px"}
+                %li
+                  %strong collapsed
+                  \- if true collapses widget after page load;
+                %li
+                  %strong fullscreened
+                  \- if true fullscreens widget after page load;
+                %li
+                  %strong bodySelector
+                  \- widget body selector. Used for loading and collapsing. Default is
+                  = succeed ";" do
+                    %code .body
+                %li
+                  %strong load
+                  \- an url to fetch widget body from. Default is
+                  = succeed ";" do
+                    %code undefined
+                %li
+                  %strong showLoader
+                  \- whether to show a loader when ajax refresh performed. Default is
+                  = succeed ";" do
+                    %code true
+                %li
+                  %strong autoload
+                  \- whether to automatically perform ajax refresh after page load. May be set to an integer value. If set, for example, to 2000 will refresh the widget every 2 seconds. Default is
+                  = succeed ";" do
+                    %code false
+                %li
+                  %strong closePrompt(callback)
+                  \- a function to be called when closing. Closing is
+                  only performed when
+                  %code callback
+                  is called.
+              %p Widgster accepts an object with options:
+              %pre
+                %code
+                  :preserve
+                    $('.widget').widgster({
+                        collapsed: true
+                    });              %h3 Actions
+              %ul{:style => "list-style: disc; padding-left: 40px; margin-bottom: 10px"}
+                %li
+                  %strong close
+                  \- closes the widget;
+                %li
+                  %strong collapse
+                  \- collapses (minimizes) the widget. An element holding this data
+                  attribute will be hidden when widget gets expanded;
+                %li
+                  %strong expand
+                  \- expands the widget. An element holding this data
+                  attribute will be hidden when widget gets collapsed;
+                %li
+                  %strong fullscreen
+                  \- fullscreens the widget. An element holding this data
+                  attribute will be hidden when widget gets restored;
+                %li
+                  %strong restore
+                  \- restores the widget back to its position. An element holding this data
+                  attribute will be hidden when widget gets fullscreened;
+                %li
+                  %strong load
+                  \- reloads widget content from the url provided with
+                  %code data-widget-load
+                  attribute.
+              %p All actions may be called via js:
+              %pre
+                %code $('.widget').widgster('close');
+              %h3 Events
+              %p Each action fires both before and after event. Events have the same names as actions. Before event may be canceled.
+              %p For example, to make refresh button spin:
+              %pre
+                :preserve
+                  $('.widget').on("load.widgster", function(){
+                      $(this).find('[data-widgster="load"] > i').addClass('fa-spin')
+                  }).on("loaded.widgster", function(){
+                      $(this).find('[data-widgster="load"] > i').removeClass('fa-spin')
+                  });    / jquery and friends
+    %script{:src => "js/jquery.1.9.0.min.js"}
+    %script{:src => "js/bootstrap-transition.js"}
+    %script{:src => "js/bootstrap-collapse.js"}
