@@ -67,8 +67,9 @@ module CollectiveMind
           g.test_framework :rspec
     end
     config.to_prepare do
-      Devise::SessionsController.layout 'core/projects'
-      Devise::RegistrationsController.layout 'core/projects'
+      Devise::SessionsController.layout 'devise'
+      Devise::RegistrationsController.layout 'devise'
+      Devise::PasswordsController.layout 'devise'
     end
   end
 end

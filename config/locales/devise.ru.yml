@@ -6,8 +6,9 @@ ru:
       already_confirmed: "уже был подтвержден. Попробуйте войти"
       not_locked: "не был заблокирован"
       not_saved:
-        one: "%{resource} не сохранен из-за 1 ошибки:"
-        other: "%{resource} не сохранен из-за %{count} ошибок:"
+        one: "Регистрация не удалась из-за 1 ошибки:"
+        other: "Регистрация не удалась из-за %{count} ошибок:"
+        few: "Регистрация не удалась из-за %{count} ошибок:"
   devise:
     failure:
       already_authenticated: 'Вы уже вошли'

@@ -1,9 +1,18 @@
-%h2 Forgot your password?
+%header.text-align-center
+  %h4 Забыли пароль?
 = form_for(resource, :as => resource_name, :url => password_path(resource_name), :html => { :method => :post }) do |f|
   = devise_error_messages!
-  %div
-    = f.label :email
-    %br/
-    = f.email_field :email, :autofocus => true
-  %div= f.submit "Send me reset password instructions"
-= render "devise/shared/links"
+  %fieldset
+    .form-group
+      -#= f.label :email, 'Email'
+      .input-group.input-group-lg
+        %span.input-group-addon
+          %i.eicon-user
+        = f.email_field :email, placeholder: 'Ваш Email', class: 'form-control input-lg'
+
+  .form-actions
+    =f.submit 'Восстановить пароль', class: 'btn btn-block btn-lg btn-danger', id: 'Signin'
+    .forgot
+      =link_to 'Вернуться', '/users/sign_in', class:'forgot'
+
+
