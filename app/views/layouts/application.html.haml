@@ -45,8 +45,9 @@
     .row
       =render 'top_menu'
     .row
-      .col-md-10.col-md-offset-1
-        =  render partial: 'stages', :locals => { :stage => :first }
+      .col-md-10
+        -#.col-md-offset-1
+        -#=  render partial: 'stages', :locals => { :stage => :first }
         .row
           .col-md-3
             = render partial: 'left_side'

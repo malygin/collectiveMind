@@ -1,32 +1,120 @@
-- if boss? and @project.status < 3
-    .panel.panel-info
-        .panel-heading Панель Администратора
-        .panel-body
-            -if @project.status == 1
-                =link_to 'Начать голосование',  next_stage_core_project_path(@project), id: 'change_stage'
-            -if @project.status == 2
-                =link_to 'Вернуться к началу процедуры',  pr_stage_core_project_path(@project), id: 'change_stage'
-                %br
-                =link_to 'Начать сбор несовершенств',  next_stage_core_project_path(@project), id: 'change_stage'
-- if boss?
-    .panel.panel-default
-        .panel-heading
-            %button.btn.btn-default.btn-sm.pull-right(onclick="reset_filter_aspects();" ) Сбросить
-            Темы процедуры
-        .panel-body
-            -#.pull-right
-            -#    %button.btn.btn-default.btn-sm(onclick="reset_filter_aspects();" ) Сбросить
-            -#%br
-            = form_tag({:controller => "life_tape/posts", :action=> "index"},{ method: :get, remote: true, id: 'aspects_list' }) do
-                #aspects_lister
-                    - @aspects.each do |asp|
-                        = render :partial => 'discontent/aspects/aspect_form', :object => asp
-                %button.btn.btn-default.inv_element#filter-aspect(type="submit") Сохранить
-            -if current_user.boss?
-                =link_to new_discontent_aspect_path(@project),:remote => true,:id => "new_aspect" do
-                    %span.label.label-success +добавить аспект
-#aspect_modal
-=render 'shared/journal_news_feed', :journals => @journals, :news => @news
+%nav#sidebar.sidebar.nav-collapse.collapse
+  %ul#side-nav.side-nav
+    %li.panel#stage_life_tape{class:  @project.stage_style(:life_tape_posts) }
+      -#=link_to "/project/#{@project.id}/life_tape/posts" ,  class: "#{@project.stage_style_link(@breadcrumbs[0].name, :life_tape_posts)}" do
+      %a.accordion-toggle.collapsed{"data-parent" => "#side-nav", "data-toggle" => "collapse", :href => "#forms-collapse"}
+        %i.fa.fa-edit
+        =@project.status_title(:life_tape_posts)
+        %br
+        %small#life-tape-all-count.text-center=t('stages.record', count: @project.life_tape_posts.count)
+
+      %ul#forms-collapse.panel-collapse.collapse
+        .tab-content
+          %ul.nav.nav-tabs.nav-stacked
+            -unless @posts.nil?
+              -@posts.each do |post|
+                %li
+                  %a(data-toggle="tab" href="#asp_#{post.id}")
+                    -unless post.discontent_aspects.nil?
+                      -post.discontent_aspects.each do |asp|
+                        =asp.content
+                      %b="(#{post.comments.count})"
+
+    %li.panel#stage_discontent{class: @project.stage_style(:discontent_posts) }
+      -#%a.accordion-toggle.collapsed{"data-parent" => "#side-nav", "data-toggle" => "collapse", :href => "#stats-collapse"}
+      - if @project.status > 2
+        = link_to "/project/#{@project.id}/discontent/posts", class:"#{@project.stage_style_link(@breadcrumbs[0].name, :discontent_posts)}" do
+          %i.fa.fa-bar-chart-o
+          =@project.status_title(:discontent_posts)
+          %br
+          %small.text-center=t('stages.discontents', count: @project.discontents.by_status(0).count)
+      -else
+        %a
+          %i.fa.fa-bar-chart-o
+          =@project.status_title(:discontent_posts)
+          %br
+          %small недоступен
+      %ul#stats-collapse.panel-collapse.collapse
+
+    %li.panel#stage_concept{class:  @project.stage_style(:concept_posts)}
+      -#%a.accordion-toggle.collapsed{"data-parent" => "#side-nav", "data-toggle" => "collapse", :href => "#ui-collapse"}
+      - if  @project.status > 6
+        = link_to "/project/#{@project.id}/concept/posts" , class:"#{@project.stage_style_link(@breadcrumbs[0].name, :concept_posts)}" do
+          %i.fa.fa-magic
+          =@project.status_title(:concept_posts)
+          %br
+          %small.text-center=t('stages.concepts', count: @project.concept_ongoing_post.count)
+      -else
+        %a
+          %i.fa.fa-magic
+          =@project.status_title(:concept_posts)
+          %br
+          %small недоступен
+      %ul#ui-collapse.panel-collapse.collapse
+
+    %li.panel#stage_plan{class:  @project.stage_style(:plan_posts)}
+      -#%a.accordion-toggle.collapsed{"data-parent" => "#side-nav", "data-toggle" => "collapse", :href => "#components-collapse"}
+      - if  @project.status > 8
+        = link_to "/project/#{@project.id}/plan/posts" , class:"#{@project.stage_style_link(@breadcrumbs[0].name, :plan_posts)}" do
+          %i.fa.fa-bookmark-o
+          =@project.status_title(:plan_posts)
+          %br
+          %small.text-center=t('stages.plans', count: @project.plan_post.count)
+      -else
+        %a
+          %i.fa.fa-bookmark-o
+          =@project.status_title(:plan_posts)
+          %br
+          %small недоступен
+      %ul#components-collapse.panel-collapse.collapse
+
+    %li.panel#stage_plan{class:  @project.stage_style(:estimate_posts)}
+      -#%a.accordion-toggle.collapsed{"data-parent" => "#side-nav", "data-toggle" => "collapse", :href => "#tables-collapse"}
+      - if  @project.status > 10
+        = link_to "/project/#{@project.id}/estimate/posts" , class:"#{@project.stage_style_link(@breadcrumbs[0].name, :estimate_posts)}" do
+          %i.fa.fa-table
+          =@project.status_title(:estimate_posts)
+          %br
+          %small.text-center=t('stages.estimates', count: @project.estimate_posts.count)
+      -else
+        %a
+          %i.fa.fa-table
+          =@project.status_title(:estimate_posts)
+          %br
+          %small недоступен
+      %ul#tables-collapse.panel-collapse.collapse
+
+-#- if boss? and @project.status < 3
+-#  .panel.panel-info
+-#    .panel-heading Панель Администратора
+-#    .panel-body
+-#      -if @project.status == 1
+-#        =link_to 'Начать голосование',  next_stage_core_project_path(@project), id: 'change_stage'
+-#      -if @project.status == 2
+-#        =link_to 'Вернуться к началу процедуры',  pr_stage_core_project_path(@project), id: 'change_stage'
+-#        %br
+-#        =link_to 'Начать сбор несовершенств',  next_stage_core_project_path(@project), id: 'change_stage'
+-#- if boss?
+-#  .panel.panel-default
+-#    .panel-heading
+-#      %button.btn.btn-default.btn-sm.pull-right(onclick="reset_filter_aspects();" ) Сбросить
+-#      Темы процедуры
+-#    .panel-body
+-#      -#.pull-right
+-#      -#    %button.btn.btn-default.btn-sm(onclick="reset_filter_aspects();" ) Сбросить
+-#      -#%br
+-#      = form_tag({:controller => "life_tape/posts", :action=> "index"},{ method: :get, remote: true, id: 'aspects_list' }) do
+-#        #aspects_lister
+-#          - @aspects.each do |asp|
+-#            = render :partial => 'discontent/aspects/aspect_form', :object => asp
+-#        %button.btn.btn-default.inv_element#filter-aspect(type="submit") Сохранить
+-#      -if current_user.boss?
+-#        =link_to new_discontent_aspect_path(@project),:remote => true,:id => "new_aspect" do
+-#          %span.label.label-success +добавить аспект
+-##aspect_modal
+
+
+-#=render 'shared/journal_news_feed', :journals => @journals, :news => @news
 -#
 -#%br
 -#.panel.panel-info

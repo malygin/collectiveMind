@@ -1,13 +1,109 @@
-.panel.panel-success
-    .panel-heading
-        Обратите внимание!
-    .panel-body
-        В центральном блоке представлены все обсуждаемые темы, в рамках которых вам предлагается найти всевозможные несовершенства.
+%nav#sidebar.sidebar.nav-collapse.collapse
+  %ul#side-nav.side-nav
+    %li.panel#stage_life_tape{class:  @project.stage_style(:life_tape_posts) }
+      -#=link_to "/project/#{@project.id}/life_tape/posts" ,  class: "#{@project.stage_style_link(@breadcrumbs[0].name, :life_tape_posts)}" do
+      %a.accordion-toggle.collapsed{"data-parent" => "#side-nav", "data-toggle" => "collapse", :href => "#forms-collapse"}
+        %i.fa.fa-edit
+        =@project.status_title(:life_tape_posts)
         %br
-        Нажмите на кнопку
-        %b"ДОБАВИТЬ НЕСОВЕРШЕНСТВО"
-        и опишите проблему.
-        %br
-        %i Совет: Старайтесь формулировать короткие и емкие несовершенства, -  они приводят к более качественным решениям.
-=render 'shared/journal_news_feed', :journals => @journals, :news => @news
+        %small#life-tape-all-count.text-center=t('stages.record', count: @project.life_tape_posts.count)
+
+      %ul#forms-collapse.panel-collapse.collapse
+
+        -#.tab-content
+        -#  %ul.nav.nav-tabs.nav-stacked
+        -#    -unless @posts.nil?
+        -#      -@posts.each do |post|
+        -#        %li
+        -#          %a(data-toggle="tab" href="#asp_#{post.id}")
+        -#            -unless post.discontent_aspects.nil?
+        -#              -post.discontent_aspects.each do |asp|
+        -#                =asp.content
+        -#              %b="(#{post.comments.count})"
+
+    %li.panel#stage_discontent{class: @project.stage_style(:discontent_posts) }
+      - if @project.status > 2
+        %a.accordion-toggle.collapsed{"data-parent" => "#side-nav", "data-toggle" => "collapse", :href => "#stats-collapse"}
+          %i.fa.fa-bar-chart-o
+          =@project.status_title(:discontent_posts)
+          %br
+          %small.text-center=t('stages.discontents', count: @project.discontents.by_status(0).count)
+        %ul#stats-collapse.panel-collapse.collapse
+          .tab-content
+            %ul.nav.nav-tabs.nav-stacked
+              -unless @aspects.nil?
+                -@aspects.each do |aspect|
+                  %li
+                    %a(data-toggle="tab" href="#asp_#{aspect.id}")
+                      =aspect.content
+                      %b="(#{aspect.aspect_posts.count})"
+
+      -else
+        %a
+          %i.fa.fa-bar-chart-o
+          =@project.status_title(:discontent_posts)
+          %br
+          %small недоступен
+
+
+    %li.panel#stage_concept{class:  @project.stage_style(:concept_posts)}
+      -#%a.accordion-toggle.collapsed{"data-parent" => "#side-nav", "data-toggle" => "collapse", :href => "#ui-collapse"}
+      - if  @project.status > 6
+        = link_to "/project/#{@project.id}/concept/posts" , class:"#{@project.stage_style_link(@breadcrumbs[0].name, :concept_posts)}" do
+          %i.fa.fa-magic
+          =@project.status_title(:concept_posts)
+          %br
+          %small.text-center=t('stages.concepts', count: @project.concept_ongoing_post.count)
+      -else
+        %a
+          %i.fa.fa-magic
+          =@project.status_title(:concept_posts)
+          %br
+          %small недоступен
+      %ul#ui-collapse.panel-collapse.collapse
+
+    %li.panel#stage_plan{class:  @project.stage_style(:plan_posts)}
+      -#%a.accordion-toggle.collapsed{"data-parent" => "#side-nav", "data-toggle" => "collapse", :href => "#components-collapse"}
+      - if  @project.status > 8
+        = link_to "/project/#{@project.id}/plan/posts" , class:"#{@project.stage_style_link(@breadcrumbs[0].name, :plan_posts)}" do
+          %i.fa.fa-bookmark-o
+          =@project.status_title(:plan_posts)
+          %br
+          %small.text-center=t('stages.plans', count: @project.plan_post.count)
+      -else
+        %a
+          %i.fa.fa-bookmark-o
+          =@project.status_title(:plan_posts)
+          %br
+          %small недоступен
+      %ul#components-collapse.panel-collapse.collapse
+
+    %li.panel#stage_plan{class:  @project.stage_style(:estimate_posts)}
+      -#%a.accordion-toggle.collapsed{"data-parent" => "#side-nav", "data-toggle" => "collapse", :href => "#tables-collapse"}
+      - if  @project.status > 10
+        = link_to "/project/#{@project.id}/estimate/posts" , class:"#{@project.stage_style_link(@breadcrumbs[0].name, :estimate_posts)}" do
+          %i.fa.fa-table
+          =@project.status_title(:estimate_posts)
+          %br
+          %small.text-center=t('stages.estimates', count: @project.estimate_posts.count)
+      -else
+        %a
+          %i.fa.fa-table
+          =@project.status_title(:estimate_posts)
+          %br
+          %small недоступен
+      %ul#tables-collapse.panel-collapse.collapse
+
+-#.panel.panel-success
+-#    .panel-heading
+-#        Обратите внимание!
+-#    .panel-body
+-#        В центральном блоке представлены все обсуждаемые темы, в рамках которых вам предлагается найти всевозможные несовершенства.
+-#        %br
+-#        Нажмите на кнопку
+-#        %b"ДОБАВИТЬ НЕСОВЕРШЕНСТВО"
+-#        и опишите проблему.
+-#        %br
+-#        %i Совет: Старайтесь формулировать короткие и емкие несовершенства, -  они приводят к более качественным решениям.
+-#=render 'shared/journal_news_feed', :journals => @journals, :news => @news
 
