@@ -48,7 +48,47 @@
   src: local("Open Sans Light Italic"), local("OpenSansLight-Italic"), url(font/open-sans-italic-light.woff) format("woff");
 }
 /*! normalize.css v3.0.0 | MIT License | git.io/normalize */
+/*****************************************/
+/* discontent posts */
+.label-t {
+    color: #0e7ccd !important;
+    background-color: #90d0ff !important;
+    font-weight: normal !important;
+}
+.label-n {
+    color: #fd3411 !important;
+    background-color: #ffd2ca !important;
+    font-weight: normal !important;
+    font-size: 100% !important;
+}
 
+.label-p {
+    color: #069818 !important;
+    background-color: #ceffd4 !important;
+    font-weight: normal !important;
+    font-size: 100% !important;
+}
+
+.label-g {
+    background-color: #999999 !important;
+    font-weight: normal !important;
+}
+
+.news-list ul li {
+    border-top: 0px solid rgba(51, 51, 51, 0.25);
+    margin-bottom: 0 !important;
+    /*background-color: #ffb8a7 !important;*/
+}
+.news-list ul li:hover {
+    background: none;
+}
+.border_note {
+    border: 0.5px solid red !important;
+}
+.note_text {
+    text-decoration: none !important;
+}
+/*****************************************/
 html {
   font-family: sans-serif;
   -ms-text-size-adjust: 100%;
@@ -17313,12 +17353,13 @@ input.parsley-error {
   padding: 12px;
   margin: 0 -12px;
   cursor: pointer;
-  height: 50px;
+  /*height: 50px;*/
   -moz-transition: background-color 0.2s ease-out;
   -o-transition: background-color 0.2s ease-out;
   -webkit-transition: background-color 0.2s ease-out;
   transition: background-color 0.2s ease-out;
 }
+
 .news-list li:hover,
 .users-list li:hover {
   background: rgba(51, 51, 51, 0.25);
