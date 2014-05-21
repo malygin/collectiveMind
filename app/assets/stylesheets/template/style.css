@@ -85,7 +85,7 @@
 	padding: 15px 15px 10px;
 }
 .service:hover {
-	background: #fcfcfc;
+	/*background: #fcfcfc;*/
 	box-shadow: 0 0 5px #ddd;
     -webkit-transition: box-shadow 0.2s ease-in-out;
     -moz-transition: box-shadow 0.2s ease-in-out;

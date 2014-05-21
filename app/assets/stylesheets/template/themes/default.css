@@ -64,13 +64,13 @@ a.read-more:hover {
 /*Service
 ------------------------------------*/
 .service .service-icon {
-	color:#97447A;	
+	color:#97447A;
 }
 
 /*Service Blocks*/
-.service-alternative .service:hover { 
-	background:#72c02c;
-} 
+/*.service-alternative .service:hover {*/
+	/*background:#72c02c;*/
+/*} */
 
 /*Thumbnail (Recent Work)
 ------------------------------------*/
