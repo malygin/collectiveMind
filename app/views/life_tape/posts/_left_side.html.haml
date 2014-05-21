@@ -9,7 +9,7 @@
 
     %ul.nav.nav-tabs.nav-stacked.panel-collapse
       -@project.aspects.each do |asp|
-        %li
+        %li{class:"#{'active' if asp == @aspect}"}
           %a(href="?asp=#{asp.id}")
             =asp.content
             -#%b="(#{post.comments.count})"
