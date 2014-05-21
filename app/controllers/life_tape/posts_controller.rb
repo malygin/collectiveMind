@@ -28,17 +28,21 @@ end
       redirect_to action: "vote_list"
       return
     end
+    if params[:asp]
+      @aspect =  Discontent::Aspect.find(params[:asp])
+      @post_show = @aspect.life_tape_posts.first
+    end
 
     @post = current_model.new
     @order = params[:order]
     @page = params[:page]
     @folder = :life_tape
-    load_filter_for_aspects   if (request.xhr? and @order.nil? and @page.nil?)
+    # load_filter_for_aspects   if (request.xhr? and @order.nil? and @page.nil?)
 
-    @posts  = current_model.where(:project_id => @project).where(:status => 0)
-      .eager_load(:discontent_aspects)
-      .order_by_param(@order)
-      .paginate(:page => params[:page], :per_page => 20)
+    # @posts  = current_model.where(:project_id => @project).where(:status => 0)
+    #   .eager_load(:discontent_aspects)
+    #   .order_by_param(@order)
+    #   .paginate(:page => params[:page], :per_page => 20)
     @comment = LifeTape::Comment.new
     respond_to do |format|
       format.html{render :layout  => 'application_two_column'}

@@ -62,146 +62,140 @@
 -#  .form-group
 -#    %input.form-control{:placeholder => t('menu.search_text'), :type => "text"}/
 -#  %button.btn.btn-default{:type => "submit"}=t('menu.search')
-.background-dark
-  .logo
-    %h4
-      %a{:href => "/project/#{@project.id}"}
-        %h3
-          %strong MASSDECISION
-  .wrap
-    %header.page-header
-      .navbar
-        %ul.nav.navbar-nav.navbar-right.pull-right
-          %li.visible-phone-landscape
-            %a#search-toggle{:href => "#"}
-              %i.fa.fa-search
-          %li.dropdown
-            %a#messages.dropdown-toggle{"data-toggle" => "dropdown", :href => "#", :title => "Messages"}
-              %i.fa.fa-cog
-            %ul#messages-menu.dropdown-menu.messages{:role => "menu"}
-              %li{:role => "presentation"}
-                =link_to t('menu.help'), help_posts_path(@project)
-              %li{:role => "presentation"}
-                =link_to t('menu.base_knowledge'),   knowbase_posts_path(@project), style:'color: #5cb85c !important; font-weight: bold;'
-              %li{:role => "presentation"}
-                =link_to t('menu.raiting'), "/project/#{@project.id}/users"
-          %li.dropdown
-            %a#messages.dropdown-toggle{"data-toggle" => "dropdown", :href => "#", :title => "Messages"}
-              %i.fa.fa-comments
-            %ul#messages-menu.dropdown-menu.messages{:role => "menu"}
-              -@my_journals = Journal.events_for_my_feed @project.id, current_user.id, 10
-              -unless @my_journals.nil?
-                - @my_journals.each do |journal|
-                  %li{:role => "presentation"}
-                    %a.message{:href => "#"}
-                      =image_tag current_user.avatar.url(:thumb),  class: "media-object"
-                    .details
-                      .sender=current_user.to_s
-                      .text
-                        = journal_parser(journal, @project.id).html_safe
 
-              %li{:role => "presentation"}
-                %a.text-align-center.see-all{:href => "#"}
-                  See all messages
-                  %i.fa.fa-arrow-right
-          %li.dropdown
-            %a.dropdown-toggle{"data-toggle" => "dropdown", :href => "#", :title => "8 support tickets"}
-              %i.fa.fa-group
-              %span.count 8
-            %ul#support-menu.dropdown-menu.support{:role => "menu"}
-              -unless @journals.nil?
-                - @journals.each do |journal|
-                  -  if journal_parser(journal, @project.id)
-                    -#.imperfection_journal
-                    -#  = link_to journal.user, user_path(@project,journal.user)
-                    -#  = journal_parser(journal, @project.id).html_safe
-                    -#  %br
-                    -#  %small.text-muted=Russian::strftime(journal.created_at,"%d %B %k:%M:%S ")
-                    %li{:role => "presentation"}
-                      %p
-                        %span.label.label-inverse
-                          %small=Russian::strftime(journal.created_at,"%d %B %k:%M:%S ")
-                        = link_to journal.user, user_path(@project,journal.user)
-                        = journal_parser(journal, @project.id).html_safe
-                      -#.picture
-                      -#  %span.label.label-important
-                      -#    %i.fa.fa-bell-o
-                      -#.details
-                      -#  = journal_parser(journal, @project.id).html_safe
-              -#%li{:role => "presentation"}
-              -#  %a.support-ticket{:href => "#"}
-              -#  .picture
-              -#    %span.label.label-warning
-              -#      %i.fa.fa-question-circle
-              -#  .details
-              -#    "What is the best way to get ...
-              -#%li{:role => "presentation"}
-              -#  %a.support-ticket{:href => "#"}
-              -#  .picture
-              -#    %span.label.label-success
-              -#      %i.fa.fa-tag
-              -#  .details
-              -#    This is just a simple notification
-              -#%li{:role => "presentation"}
-              -#  %a.support-ticket{:href => "#"}
-              -#  .picture
-              -#    %span.label.label-info
-              -#      %i.fa.fa-info-circle
-              -#  .details
-              -#    12 new orders has arrived today
-              -#%li{:role => "presentation"}
-              -#  %a.support-ticket{:href => "#"}
-              -#  .picture
-              -#    %span.label.label-important
-              -#      %i.fa.fa-plus
-              -#  .details
-              -#    One more thing that just happened
-              -#%li{:role => "presentation"}
-              -#  %a.text-align-center.see-all{:href => "#"}
-              -#    See all tickets
-              -#    %i.fa.fa-arrow-right
-          %li.divider
-          %li.hidden-xs
-            %a#settings{"data-placement" => "bottom", "data-toggle" => "popover", :href => "#", :title => "Settings"}
-              %i.fa.fa-cog
-          %li.hidden-xs.dropdown
-            %a#account.dropdown-toggle{"data-toggle" => "dropdown", :href => "#", :title => "Account"}
-              %i.fa.fa-user
-            %ul#account-menu.dropdown-menu.account{:role => "menu"}
-              %li.account-picture{:role => "presentation"}
-                %a.pull-left(href="/project/#{@project.id}/users/#{current_user.id}")
-                  = image_tag current_user.avatar.url(:thumb),  class: "media-object"
-                =current_user.to_s
-                -#%p
-                -#  =link_to current_user, user_path(@project, current_user)
-              %li{:role => "presentation"}
-                = link_to 'Редактировать профиль', edit_user_path(@project, current_user)
 
-              %li{:role => "presentation"}
-                =link_to 'Уведомления', user_path(@project, current_user)
+.navbar
+  %ul.nav.navbar-nav.navbar-right.pull-right
+    %li.visible-phone-landscape
+      %a#search-toggle{:href => "#"}
+        %i.fa.fa-search
+    %li.dropdown
+      %a#messages.dropdown-toggle{"data-toggle" => "dropdown", :href => "#", :title => "Messages"}
+        %i.fa.fa-cog
+      %ul#messages-menu.dropdown-menu.messages{:role => "menu"}
+        %li{:role => "presentation"}
+          =link_to t('menu.help'), help_posts_path(@project)
+        %li{:role => "presentation"}
+          =link_to t('menu.base_knowledge'),   knowbase_posts_path(@project), style:'color: #5cb85c !important; font-weight: bold;'
+        %li{:role => "presentation"}
+          =link_to t('menu.raiting'), "/project/#{@project.id}/users"
+    %li.dropdown
+      %a#messages.dropdown-toggle{"data-toggle" => "dropdown", :href => "#", :title => "Messages"}
+        %i.fa.fa-comments
+      %ul#messages-menu.dropdown-menu.messages{:role => "menu"}
+        -@my_journals = Journal.events_for_my_feed @project.id, current_user.id, 10
+        -unless @my_journals.nil?
+          - @my_journals.each do |journal|
+            %li{:role => "presentation"}
+              %a.message{:href => "#"}
+                =image_tag current_user.avatar.url(:thumb),  class: "media-object"
+              .details
+                .sender=current_user.to_s
+                .text
+                  = journal_parser(journal, @project.id).html_safe
 
-          %li.visible-xs
-            %a.btn-navbar{"data-target" => ".sidebar", "data-toggle" => "collapse", :href => "#", :title => ""}
-              %i.fa.fa-bars
-          %li.hidden-xs
-            %a{:href => "/users/sign_out/", "data-method" => "delete"}
-              %i.fa.fa-sign-out
-          -#      -#%a.link{:href => "component_calendar.html"}
-          -#      -#  %i.fa.fa-calendar
-          -#      -#= link_to 'Уведомления', user_path(@project, current_user)
-          -#      -#- if @my_jounals > 0
-          -#      -#  %span.label.label-danger=@my_jounals
-          -#
-          -#      -#%li.disabled{:role => "presentation"}
-          -#      -#  %a.link{:href => "#"}
-          -#      -#    %i.fa.fa-inbox
-          -#      -#    Сообщения
-          -#%li.visible-xs
-          -#  %a.btn-navbar{"data-target" => ".sidebar", "data-toggle" => "collapse", :href => "#", :title => ""}
-          -#    %i.fa.fa-bars
-          -#%li.hidden-xs
-          -#  %a{:href => "/users/sign_out/", "data-method" => "delete"}
-          -#    %i.fa.fa-sign-out
+        %li{:role => "presentation"}
+          %a.text-align-center.see-all{:href => "#"}
+            See all messages
+            %i.fa.fa-arrow-right
+    %li.dropdown
+      %a.dropdown-toggle{"data-toggle" => "dropdown", :href => "#", :title => "8 support tickets"}
+        %i.fa.fa-group
+        %span.count 8
+      %ul#support-menu.dropdown-menu.support{:role => "menu"}
+        -unless @journals.nil?
+          - @journals.each do |journal|
+            -  if journal_parser(journal, @project.id)
+              -#.imperfection_journal
+              -#  = link_to journal.user, user_path(@project,journal.user)
+              -#  = journal_parser(journal, @project.id).html_safe
+              -#  %br
+              -#  %small.text-muted=Russian::strftime(journal.created_at,"%d %B %k:%M:%S ")
+              %li{:role => "presentation"}
+                %p
+                  %span.label.label-inverse
+                    %small=Russian::strftime(journal.created_at,"%d %B %k:%M:%S ")
+                  = link_to journal.user, user_path(@project,journal.user)
+                  = journal_parser(journal, @project.id).html_safe
+                -#.picture
+                -#  %span.label.label-important
+                -#    %i.fa.fa-bell-o
+                -#.details
+                -#  = journal_parser(journal, @project.id).html_safe
+        -#%li{:role => "presentation"}
+        -#  %a.support-ticket{:href => "#"}
+        -#  .picture
+        -#    %span.label.label-warning
+        -#      %i.fa.fa-question-circle
+        -#  .details
+        -#    "What is the best way to get ...
+        -#%li{:role => "presentation"}
+        -#  %a.support-ticket{:href => "#"}
+        -#  .picture
+        -#    %span.label.label-success
+        -#      %i.fa.fa-tag
+        -#  .details
+        -#    This is just a simple notification
+        -#%li{:role => "presentation"}
+        -#  %a.support-ticket{:href => "#"}
+        -#  .picture
+        -#    %span.label.label-info
+        -#      %i.fa.fa-info-circle
+        -#  .details
+        -#    12 new orders has arrived today
+        -#%li{:role => "presentation"}
+        -#  %a.support-ticket{:href => "#"}
+        -#  .picture
+        -#    %span.label.label-important
+        -#      %i.fa.fa-plus
+        -#  .details
+        -#    One more thing that just happened
+        -#%li{:role => "presentation"}
+        -#  %a.text-align-center.see-all{:href => "#"}
+        -#    See all tickets
+        -#    %i.fa.fa-arrow-right
+    %li.divider
+    %li.hidden-xs
+      %a#settings{"data-placement" => "bottom", "data-toggle" => "popover", :href => "#", :title => "Settings"}
+        %i.fa.fa-cog
+    %li.hidden-xs.dropdown
+      %a#account.dropdown-toggle{"data-toggle" => "dropdown", :href => "#", :title => "Account"}
+        %i.fa.fa-user
+      %ul#account-menu.dropdown-menu.account{:role => "menu"}
+        %li.account-picture{:role => "presentation"}
+          %a.pull-left(href="/project/#{@project.id}/users/#{current_user.id}")
+            = image_tag current_user.avatar.url(:thumb),  class: "media-object"
+          =current_user.to_s
+          -#%p
+          -#  =link_to current_user, user_path(@project, current_user)
+        %li{:role => "presentation"}
+          = link_to 'Редактировать профиль', edit_user_path(@project, current_user)
+
+        %li{:role => "presentation"}
+          =link_to 'Уведомления', user_path(@project, current_user)
+
+    %li.visible-xs
+      %a.btn-navbar{"data-target" => ".sidebar", "data-toggle" => "collapse", :href => "#", :title => ""}
+        %i.fa.fa-bars
+    %li.hidden-xs
+      %a{:href => "/users/sign_out/", "data-method" => "delete"}
+        %i.fa.fa-sign-out
+    -#      -#%a.link{:href => "component_calendar.html"}
+    -#      -#  %i.fa.fa-calendar
+    -#      -#= link_to 'Уведомления', user_path(@project, current_user)
+    -#      -#- if @my_jounals > 0
+    -#      -#  %span.label.label-danger=@my_jounals
+    -#
+    -#      -#%li.disabled{:role => "presentation"}
+    -#      -#  %a.link{:href => "#"}
+    -#      -#    %i.fa.fa-inbox
+    -#      -#    Сообщения
+    -#%li.visible-xs
+    -#  %a.btn-navbar{"data-target" => ".sidebar", "data-toggle" => "collapse", :href => "#", :title => ""}
+    -#    %i.fa.fa-bars
+    -#%li.hidden-xs
+    -#  %a{:href => "/users/sign_out/", "data-method" => "delete"}
+    -#    %i.fa.fa-sign-out
 
 -#%form#search-form.navbar-form.pull-right{:role => "search"}
 -#  %input.search-query{:placeholder => "Search...", :type => "search"}/

@@ -1,15 +1,10 @@
 -if  user
-    %a.pull-left(href="/project/#{@project.id}/users/#{user.id}")
-        = image_tag user.avatar.url(:thumb),  class: "media-object"
-        - unless user.boss?
-            %h6
-                %small Баллов:
+    .sender.pull-left
+        .icon
+            = image_tag user.avatar.url(:thumb),  class: "img-circle"
 
-                = user.score
         -#= image_tag 'award.png', title: 'Награда за 3 добавленных поста'
 
-        %br
-        =link_to user, user_path(@project, user)
 
 -#.avatar
 -#	= link_to gravatar_for(user), "/project/#{@project.id}/users/#{user.id}"

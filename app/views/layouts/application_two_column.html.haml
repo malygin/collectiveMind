@@ -15,16 +15,20 @@
 
 
   %body.background-dark
-    .row
-      =render 'top_menu'
-    .row
-      .col-md-10
-        -#=  render partial: 'stages', :locals => { :stage => :first }
-        .row
-          .col-md-3
-            = render partial: 'left_side', :locals => { :stage => :first }
-          .col-md-9
-            = yield
+    .logo
+      %h4
+        %a{:href => "/project/#{@project.id}"}
+          %h3
+            MASS
+            %strong DECISION
+    %nav#sidebar.sidebar.nav-collapse.collapse
+      = render partial: 'left_side', :locals => { :stage => :first }
+    .wrap
+      %header.page-header
+        .navbar
+          =render 'top_menu'
+      .content.container
+        = yield
 
 
     /

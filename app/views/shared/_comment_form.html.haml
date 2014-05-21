@@ -1,14 +1,13 @@
-%a(name='comment_form')
+%br
+
 .comments
     .row
-        .col-md-2(style= 'width: 60px;')
-            = image_tag current_user.avatar.url(:thumb),  class: "media-object"
 
-        .col-md-10
+        .col-md-12
             = form_for comment, :html => {:class => 'new_or_edit'},  remote: true, :url => url_link, :method => :put do |f|
                 = render 'shared/error_messages', :object =>f.object
                 -if comment.get_class == "LifeTape"
-                    =f.text_area :content, :class => 'form-control', style: 'height: 70px;', placeholder: 'Ваш комментарий', id:"comment_text_area_#{post}"
+                    =f.text_area :content, :class => 'form-control input-transparent', style: 'height: 70px;', placeholder: 'Ваш комментарий', id:"comment_text_area_#{post}"
                     .pull-right
                         =f.submit 'Отправить', :id  => "send_post", class: 'btn btn-sm btn-success', onclick: 'disable_send_button();'
                 -else

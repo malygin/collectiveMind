@@ -16872,7 +16872,7 @@ input.parsley-error {
   border-radius: 1px;
   background: rgba(51, 51, 51, 0.4);
   position: absolute;
-  width: 300px;
+  width: 200px;
   padding: 10px 0;
   top: 0;
   color: #d2d2d2;
@@ -17032,7 +17032,7 @@ input.parsley-error {
 /**********************************/
 /*main content*/
 .wrap {
-  margin-left: 185px;
+  margin-left: 220px;
 }
 
 /*content except of header*/

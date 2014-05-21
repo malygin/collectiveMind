@@ -1,159 +1,27 @@
-- if not current_user.answered_for_help_stage?(1) and not @mini_help.nil?
-    =render partial: 'shared/small_help', object: @mini_help
-%h3
-    1 этап: Сбор информации.
-    %br
-    %small(style="color:white;" )
+.row
+  .col-md-12
+    %h3
+      1 этап: Сбор информации.
+      %small(style="color:white;" )
         Обсуждение тем процедуры:
         =@project.name
+- if @post_show
+  .row
+    .col-md-6
+      %section.widget
 
--#%small#filter_posts
--#    = render 'shared/filter_posts', project: @project.id, folder: @folder
+        .body
+          .slimScrollDiv
+            .chat-messages
+              = render :partial => 'shared/comment',:collection => @post_show.comments
+            - if signed_in?
+              = render :partial => 'shared/comment_form', :locals => { :comment => @comment,:post =>@post_show, :url_link => "/project/#{@project.id}/life_tape/posts/#{@post_show.id}/add_comment"}
+    .col-md-6
+      %section.widget
+        %header
+          %h4=@aspect.content
+        .body
+          .slimScrollDiv
+            =@post_show.content
 
-- if signed_in? and boss?
-    = link_to '+ Добавить новую тему для обсуждения', '#', id: 'add_record', onClick: 'get_life_tape_form(); return false;', class: 'btn btn-sm btn-success'
-    %br
-= form_for @post,:url => {:project => @project.id, :action => @post.persisted? ? 'update' : 'create'},:remote => true,  :html => { :class => 'lt_new' } do |f|
-
-    = f.text_area :content, class: 'post', id: 'new_life_tape', onkeyup: "activate_button(this);"
-    .input-group.inv_element#button_block
-        =select_tag 'aspect_id', options_from_collection_for_select(@aspects, 'id', 'content'), promt: 'Выберите тему записи', class: 'form-control', style: 'width: 200px;'
-        = f.submit 'Сохранить',  class:'btn btn-success disabled btn-sm', id:'send_post'
-        %button.btn.btn-danger.btn-sm(type="button" onclick="reset_life_tape_form(); return false;" ) Отменить
-
-%br
--#.panel-group#accordion
--#    -@posts.each do |post|
--#        .panel.panel-default
--#            .panel-heading
--#                %h4.panel-title
--#                    %a(data-toggle="collapse" data-parent="#accordion" href="#asp_#{post.id}" )
--#                        -post.discontent_aspects.each do |asp|
--#                            =asp.content
--#                        %b="(#{post.comments.count})"
--#
--#                        %span.glyphicon.glyphicon-chevron-down
--#
--#                        %br
--#                        %small=post.content
--#
--#
--#            .panel-collapse.collapse{id:"asp_#{post.id}"}
--#                .panel-body
--#                    =render :partial => 'shared/comment', :collection => post.comments
--#                    .media{:id => "comments_#{post.id}"}
--#                    - if signed_in?
--#                        = render :partial => 'shared/comment_form', :locals => { :comment => @comment, :post => post.id, :url_link => url_for(:controller => post.class.name.underscore.pluralize,:id => post.id, :action => 'add_comment')}
-%div.tab-content
-    -@posts.each do |post|
-        -post.discontent_aspects.each do |asp|
-            %div.tab-pane(id="asp_#{post.id}")
-                .col-md-6
-                    %section.widget.large
-                        %header
-                            %h4
-                                %span Обсуждение темы:
-                                %span=asp.content
-                        .body
-                            #chat.chat
-                                #chat-messages.chat-messages
-                                    -post.comments.each do |com|
-                                        .chat-message
-                                            .sender.pull-left
-                                                -#.icon
-                                                -#    %img.img-circle{:alt => "", :src => "img/2.jpg"}/
-                                                -#.time
-                                                -#    4 min
-                                            .chat-message-body
-                                                %span.arrow
-                                                .sender
-
-                                                .text
-                                                    =render :partial => 'shared/comment', :object => com
-                                %footer.chat-footer.row
-                                    .col-xs-9
-                                        %input#new-message.form-control.input-transparent{:placeholder => "Введите ваше сообщение..", :type => "text"}/
-                                    .col-xs-3
-                                        %button#new-message-btn.btn.btn-transparent.btn-block{:type => "button"} Отправить
-                .col-md-6
-                    %section.widget.large
-                        %header
-                            %h4
-                                %span База знаний по теме:
-                                %span=asp.content
-                        .body
-                            -@post = Knowbase::Post.min_stage_knowbase_post(@project.id).first
-                            =render  :partial => 'knowbase/posts/knowbase_post', :locals => { :post => @post}
-
--#.chat-message
--#    .sender.pull-right
--#        .icon
--#            %img.img-circle{:alt => "", :src => "img/1.jpg"}/
--#        .time
--#            3 min
--#    .chat-message-body.on-left
--#        %span.arrow
--#        .sender
--#            %a{:href => "#"} Cenhelm Houston
--#        .text
--#            Pretty good. Doing my homework..  No one rejects, dislikes, or avoids
--#            pleasure itself, because it is pleasure, but because
--#.chat-message
--#    .sender.pull-left
--#        .icon
--#            %img.img-circle{:alt => "", :src => "img/2.jpg"}/
--#        .time
--#            2 min
--#    .chat-message-body
--#        %span.arrow
--#        .sender
--#            %a{:href => "#"} Tikhon Laninga
--#        .text
--#            Any chance to go out? To take a trivial example, which of us ever undertakes
--#            laborious physical exercise, except to obtain some advantage
-
-
-
--#.panel-group#accordion
--#    -@posts.each do |post|
--#        .panel.panel-default
--#            .panel-heading
--#                %h4.panel-title
--#                    %a(data-toggle="collapse" data-parent="#accordion" href="#asp_#{post.id}" )
--#                        -post.discontent_aspects.each do |asp|
--#                            =asp.content
--#                        %b="(#{post.comments.count})"
--#
--#                        %span.glyphicon.glyphicon-chevron-down
--#
--#                        %br
--#                        %small=post.content
--#
--#
--#            .panel-collapse.collapse{id:"asp_#{post.id}"}
--#                .panel-body
--#                    =render :partial => 'shared/comment', :collection => post.comments
--#                    .media{:id => "comments_#{post.id}"}
--#                    - if signed_in?
--#                        = render :partial => 'shared/comment_form', :locals => { :comment => @comment, :post => post.id, :url_link => url_for(:controller => post.class.name.underscore.pluralize,:id => post.id, :action => 'add_comment')}
-
--#
--#
--#%table.table.table-stripped
--#    %tr
--#        %th Темы
--#        %th{width: "50%"} Последний комментарий
--#    -@posts.each do |post|
--#        %tr
--#            %td
--#                =render post
--#            %td
--#                -unless post.comments.empty?
--#                    =render :partial => 'shared/comment', :object =>  post.comments.last
--#                -else
--#                    -#= render :partial => 'shared/comment_form', :locals => { :comment => @comment, :url_link => url_for(:controller => post.class.name.underscore.pluralize, :action => 'add_comment')}
--#
--#
--##pagination
--#    = render 'shared/pagination'
 
