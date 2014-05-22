@@ -31,6 +31,9 @@ end
     if params[:asp]
       @aspect =  Discontent::Aspect.find(params[:asp])
       @post_show = @aspect.life_tape_posts.first
+    else
+      @aspect = @project.aspects.first
+      @post_show = @aspect.life_tape_posts.first unless @aspect.nil?
     end
 
     @post = current_model.new

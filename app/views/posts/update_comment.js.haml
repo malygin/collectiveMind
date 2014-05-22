@@ -1,3 +1,3 @@
-$('#comment_content_#{@comment.id}').html("#{escape_javascript( @comment.content )}");
+$('#comment_text_#{@comment.id}').html("#{escape_javascript( simple_format(@comment.content) )}");
 $("#redactor_comment_#{@comment.id}").show();
 $('#comment_#{@comment.id}').effect("highlight", {color: '#f5cecd'}, 1000);

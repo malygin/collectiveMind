@@ -100,7 +100,8 @@
 
       #imperfections.tab-pane.fade.in
         %br
-        = render partial: 'discontent/posts/post_short', collection: @user.discontent_posts
+        %ul.discontent-list
+          = render partial: 'discontent/posts/post_short', collection: @user.discontent_posts
 
 
 

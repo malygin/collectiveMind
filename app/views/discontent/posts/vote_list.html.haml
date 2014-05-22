@@ -24,10 +24,20 @@
 -#
 -#      %td
 -#        =render partial:'post_for_vote', collection: aspect.positive_posts.by_status(@status)
+.row
+  .col-md-12
+    %h3
+      2 этап: Анализ ситуации.
+      %br
+      %small(style="color:white;" )
+        Голосование за несовершенства в рамках процедуры:
+        =@project.name
 
-.panel.panel-default
-  .panel-heading
-    %h5 Определение наиболее важных проблем
+
+%section.widget
+  %header
+    %h5 Определение наиболее важных проблем:
+  .body
     %span Несовершенство:
     %span#prog_now=@votes != @post_all ? @votes+1 : @votes
     из
@@ -35,8 +45,7 @@
     .progress
       .progress-bar.progress-bar-success{"aria-valuemax" => "100", "aria-valuemin" => "0", "aria-valuenow" => "#{(@votes/@post_all.to_f)*100}", role: "progressbar", style: "width: #{(@votes/@post_all.to_f)*100}%;"}
 
-  .panel-body
     -@posts.each do |post|
       =render partial: 'post_for_vote', object: post
-    #vote_success.text-success(style="display:none;" )
+    #vote_success.text-internal(style="display:none;" )
       %h3 Спасибо за участие в голосовании!

@@ -10,7 +10,8 @@
     %ul.nav.nav-tabs.nav-stacked.panel-collapse
       -@project.aspects.each do |asp|
         %li{class:"#{'active' if asp == @aspect}"}
-          %a(href="?asp=#{asp.id}")
+          -#%a(href="?asp=#{asp.id}")
+          = link_to "/project/#{@project.id}/life_tape/posts?asp=#{asp.id}" do
             =asp.content
             -#%b="(#{post.comments.count})"
 

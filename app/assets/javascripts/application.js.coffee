@@ -66,6 +66,7 @@ $('#modal_help').on 'hidden.bs.modal', ->
 
 @disable_send_button= ->
   $('#send_post').toggleClass('disabled')
+
 $('.score_class').on 'click', ->
   $('.score_class').css('text-decoration','none').css('background-color','transparent')
   $(this).css('text-decoration','underline').css('background-color','#ddeaf4')

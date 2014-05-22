@@ -48,7 +48,9 @@
   src: local("Open Sans Light Italic"), local("OpenSansLight-Italic"), url(font/open-sans-italic-light.woff) format("woff");
 }
 /*! normalize.css v3.0.0 | MIT License | git.io/normalize */
-/*****************************************/
+/*************************************************************************************************************************************************/
+/*todo my styles top*/
+
 /* discontent posts */
 .label-t {
     color: #0e7ccd !important;
@@ -88,7 +90,34 @@
 .note_text {
     text-decoration: none !important;
 }
-/*****************************************/
+
+
+p, a {
+    word-wrap: break-word;
+}
+
+.discontent-list .news-item-info {
+    margin-left: 62px;
+}
+
+/*Raiting users*/
+.top3 {
+    background: rgba(51, 51, 51, 0.4);
+}
+.top10 {
+    background: rgba(51, 51, 51, 0.2);
+}
+.ui-state-default {
+    border: none;
+}
+.widget-panel .tab-content {
+    overflow: visible !important;
+}
+
+/*todo my styles bottom*/
+/******************************************************************************************************************************************************/
+
+
 html {
   font-family: sans-serif;
   -ms-text-size-adjust: 100%;
@@ -217,7 +246,7 @@ samp {
 button,
 input,
 optgroup,
-select,
+/*select,todo select not white*/
 textarea {
   color: inherit;
   font: inherit;
@@ -16614,7 +16643,7 @@ html {
 }
 
 body {
-  font-weight: 300;
+  font-weight: 500;
   /*padding-bottom: 100px;*/
   background-image: url("data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4gPHN2ZyB2ZXJzaW9uPSIxLjEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGRlZnM+PHJhZGlhbEdyYWRpZW50IGlkPSJncmFkIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgY3g9IjEwJSIgY3k9IjAiIHI9IjEwMCUiPjxzdG9wIG9mZnNldD0iMCUiIHN0b3AtY29sb3I9InJnYmEoNzQsIDEyMSwgMTQ3LCAwLjg5KSIvPjxzdG9wIG9mZnNldD0iNTAlIiBzdG9wLWNvbG9yPSJyZ2JhKDIyNiwgMjI2LCAyMjYsIDAuODcpIi8+PHN0b3Agb2Zmc2V0PSIxMDAlIiBzdG9wLWNvbG9yPSJyZ2JhKDE4NSwgMTM1LCAxMzEsIDAuODcpIi8+PC9yYWRpYWxHcmFkaWVudD48L2RlZnM+PHJlY3QgeD0iMCIgeT0iMCIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgZmlsbD0idXJsKCNncmFkKSIgLz48L3N2Zz4="), url("../assets/bgnoise_lg_dark.png");
   background-color: rgba(74, 121, 147, 0.89);

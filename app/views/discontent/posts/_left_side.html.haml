@@ -25,8 +25,10 @@
     %ul.nav.nav-tabs.nav-stacked.panel-collapse
       -@project.aspects.each do |asp|
         %li
-          %a(href="?asp=#{asp.id}")
+          -#%a(href="?asp=#{asp.id}")
+          = link_to "/project/#{@project.id}/discontent/posts?asp=#{asp.id}" do
             =asp.content
+            %small="(#{asp.aspect_posts.count})"
             -#%b="(#{post.comments.count})"
 
   %li.panel#stage_concept{class:  @project.stage_style(:concept_posts)}

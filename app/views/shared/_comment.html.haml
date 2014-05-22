@@ -6,7 +6,8 @@
     .sender
       =link_to comment.user, user_path(@project, comment.user)
     .text
-      =simple_format(comment.content)
+      %div{id: "comment_text_#{comment.id}"}
+        =simple_format(comment.content)
       - if current_user?(comment.user) or boss?
         %div{id: "redactor_comment_#{comment.id}"}
           =link_to 'Редактировать', {:action => :edit_comment, :id => comment.id},:remote => true, :class => "text-success",id: "edit_comment_#{comment.id}"

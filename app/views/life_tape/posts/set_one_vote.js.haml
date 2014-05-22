@@ -1,5 +1,6 @@
-$('#set_vote_#{@post.id}').toggleClass('glyphicon-remove glyphicon-ok text-danger text-success');
+$('#set_vote_#{@post.id}').toggleClass('btn-danger btn-success');
+$('#set_vote_#{@post.id} i').toggleClass('glyphicon-remove glyphicon-ok');
 -if @post.status == 0
-  $('#set_vote_#{@post.id}').html('Убрать');
+  $('#set_vote_#{@post.id} span').html('Убрать');
 -else
-  $('#set_vote_#{@post.id}').html('Вернуть');
+  $('#set_vote_#{@post.id} span').html('Вернуть');

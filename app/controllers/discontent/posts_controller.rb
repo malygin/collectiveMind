@@ -70,10 +70,8 @@ class Discontent::PostsController < PostsController
     end
     if params[:asp]
       @aspect_post =  Discontent::Aspect.find(params[:asp])
-      #@aspect_posts = current_model.where(:project_id => @project, :status => 0)
-      #.where(status: @status)
-      #.order_by_param(@order)
-      #.paginate(:page => params[:page], :per_page => 40).eager_load(:discontent_post_aspects)
+    else
+      @aspect_post = @project.aspects.first
     end
     #@post = current_model.new
     @order = params[:order]
@@ -120,6 +118,10 @@ class Discontent::PostsController < PostsController
   def edit
     @post = current_model.find(params[:id])
     @aspects_for_post = @post.post_aspects
+    respond_to do |format|
+      format.html {render  layout: 'application_two_column'}
+      format.js
+    end
   end
 
 
@@ -278,7 +280,7 @@ class Discontent::PostsController < PostsController
       @post = Discontent::Post.find(params[:id])
       @type = params[:type_field]
       if @post.post_notes(@type.to_i).size == 0
-        @post.update_attributes(column_for_type_field(@type.to_i) => 't')
+        @post.update_attributes(view_context.column_for_type_field(@type.to_i) => 't')
       end
       respond_to do |format|
         format.js
@@ -304,7 +306,7 @@ class Discontent::PostsController < PostsController
       current_user.journals.build(:type_event=>'my_discontent_note', :user_informed => @post.user, :project => @project, :body=>"#{@post_note.content[0..24]}:#{@post.id}", :viewed=> false).save!
 
       if @post.post_notes(@type.to_i).size == 0
-        @post.update_attributes(column_for_type_field(@type.to_i) => 'f')
+        @post.update_attributes(view_context.column_for_type_field(@type.to_i) => 'f')
       end
       respond_to do |format|
         if @post_note.save

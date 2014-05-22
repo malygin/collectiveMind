@@ -8,7 +8,8 @@
 -#    = render 'shared/post_social_bar2', :post => post_short
 
 %li{id: "post_#{post_short.id}"}
-  = image_tag post_short.user.avatar.url(:thumb),  class: "pull-left img-circle"
+  -if post_short.user
+    = image_tag post_short.user.avatar.url(:thumb),  class: "pull-left img-circle"
   .news-item-info
     .time
       = Russian::strftime(post_short.created_at,'%d %B %k:%M:%S')
