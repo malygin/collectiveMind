@@ -11,7 +11,7 @@ ru:
     news: "Новости"
   stages:
     life_tape: 'Сбор информации'
-    discontent: 'Анализ ситуации'
+    discontent: 'Анализ  ситуации'
     concept: 'Формулирование проблемы'
     plan: 'Проекты'
     estimate: 'Оценки'

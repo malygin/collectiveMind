@@ -8,6 +8,27 @@
 */
 /* require_tree .*/
 
+.stage_menu1 {
+    border-left: 4px solid #4ab0ce !important;
+}
+
+.stage_menu2 {
+    border-left: 4px solid #e5603b!important;
+}
+
+.stage_menu3 {
+    border-left: 4px solid #eac85e!important;
+}
+
+.stage_menu4 {
+    border-left: 4px solid #56bc76!important;
+}
+
+.stage_menu5 {
+    border-left: 4px solid #999!important;
+}
+
+
 @charset "IBM866";
 @import url(./template/nv.d3.css);
 @import url(./fontello/css/fontello.css);

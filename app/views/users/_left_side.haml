@@ -1,24 +1,24 @@
-%div
-  %ul.nav.nav-pills.nav-stacked
-    %li.active
-      = link_to  user_path(@project, current_user) do
-        %i.glyphicon.glyphicon-user
-        Профиль
 
-    %li.disabled
-      %a(href="#")
-        %i.glyphicon.glyphicon-list-alt
-        %span.badge.pull-right 0
-        Уведомления
+%ul.side-nav
+  %li.active
+    = link_to  user_path(@project, current_user) do
+      %i.glyphicon.glyphicon-user
+      Профиль
 
-    %li.disabled
-      %a(href="#")
-        %i.glyphicon.glyphicon-envelope
-        %span.badge.pull-right 0
-        Сообщения
+  %li.disabled
+    %a(href="#")
+      %i.glyphicon.glyphicon-list-alt
+      %span.badge.pull-right 0
+      Уведомления
 
-    - if current_user
-      %li
-        = link_to edit_user_path(@project, current_user) do
-          %i.glyphicon.glyphicon-cog
-          Редактировать профиль
+  %li.disabled
+    %a(href="#")
+      %i.glyphicon.glyphicon-envelope
+      %span.badge.pull-right 0
+      Сообщения
+
+  - if current_user
+    %li
+      = link_to edit_user_path(@project, current_user) do
+        %i.glyphicon.glyphicon-cog
+        Редактировать профиль
