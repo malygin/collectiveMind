@@ -59,7 +59,7 @@ scope '/project/:project' do
       match 'add_score_essay/:score' => 'users#add_score_essay'
     end
   end
-
+  get 'life_tape/posts/fast_discussion_topics' , to: 'life_tape/posts#fast_discussion_topics'
   namespace :life_tape do
     posts_routes
     resources :posts do

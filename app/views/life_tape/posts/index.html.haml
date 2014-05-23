@@ -6,6 +6,13 @@
       %small(style="color:white;" )
         Обсуждение тем процедуры:
         =@project.name
+
+%a{name:'top'}
+- if signed_in? and @project.status == 1
+  = link_to 'Начать быстрое обсуждение тем', life_tape_posts_fast_discussion_topics_path(@project) ,remote: true, id: 'fast_discussion_topics',  class: 'btn btn-sm btn-success'
+  %br
+  %br
+
 - if @post_show
   .row
     .col-md-6
@@ -25,3 +32,4 @@
             =@post_show.content
 
 
+#render_fast_discussion_topics

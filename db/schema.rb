@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140512211337) do
+ActiveRecord::Schema.define(:version => 20140523181240) do
 
   create_table "answers", :force => true do |t|
     t.string   "text"
@@ -813,6 +813,13 @@ ActiveRecord::Schema.define(:version => 20140512211337) do
   add_index "life_tape_comments", ["created_at"], :name => "index_life_tape_comments_on_created_at"
   add_index "life_tape_comments", ["post_id"], :name => "index_life_tape_comments_on_post_id"
   add_index "life_tape_comments", ["user_id"], :name => "index_life_tape_comments_on_user_id"
+
+  create_table "life_tape_post_discussions", :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "post_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
 
   create_table "life_tape_post_votings", :force => true do |t|
     t.integer  "user_id"
