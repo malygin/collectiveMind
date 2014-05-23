@@ -1,27 +1,28 @@
-.row
-  .col-md-12
-    %h3
+%section.widget
+  %header
+    %h3.text-info
       1 этап: Сбор информации.
       %br
-      %small(style="color:white;" )
+      %small
         Обсуждение тем процедуры:
         =@project.name
-- if @post_show
-  .row
-    .col-md-6
-      %section.widget
-        .body
-          .slimScrollDiv
-            .chat-messages
-              = render :partial => 'shared/comment',:collection => @post_show.comments
-            - if signed_in?
-              = render :partial => 'shared/comment_form', :locals => { :comment => @comment,:post =>@post_show, :url_link => "/project/#{@project.id}/life_tape/posts/#{@post_show.id}/add_comment"}
-    .col-md-6
-      %section.widget
-        %header
-          %h4=@aspect.content
-        .body
-          .slimScrollDiv
-            =@post_show.content
+  .body
+    - if @post_show
+      .row
+        .col-md-6
+          %section.widget
+            .body
+              .slimScrollDiv
+                .chat-messages
+                  = render :partial => 'shared/comment',:collection => @post_show.comments
+                - if signed_in?
+                  = render :partial => 'shared/comment_form', :locals => { :comment => @comment,:post =>@post_show, :url_link => "/project/#{@project.id}/life_tape/posts/#{@post_show.id}/add_comment"}
+        .col-md-6
+          %section.widget
+            %header
+              %h4.text-info=@aspect.content
+            .body
+              .slimScrollDiv
+                =@post_show.content
 
 
