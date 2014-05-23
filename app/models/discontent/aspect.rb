@@ -9,7 +9,7 @@ class Discontent::Aspect < ActiveRecord::Base
            :conditions => ['discontent_posts.style = ? ',1]
    has_many :accepted_posts, :class_name => 'Discontent::Post',
            :conditions => ['discontent_posts.status = ?',4]
-
+  has_one :knowbase_post, :class_name => 'Knowbase::Post'
   has_many :life_tape_posts, :class_name => 'LifeTape::Post'
   has_many :discontent_post_aspects, :class_name => 'Discontent::PostAspect'
   has_many :aspect_posts, :through => :discontent_post_aspects, :source => :post, :class_name => 'Discontent::Post'

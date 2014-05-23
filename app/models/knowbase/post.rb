@@ -6,7 +6,7 @@ class Knowbase::Post < ActiveRecord::Base
   validates :stage, presence: true
 
   belongs_to :project, :class_name => "Core::Project"
-
+  belongs_to :discontent_aspect, :class_name => 'Discontent::Aspect', :foreign_key => :aspect_id
   scope :stage_knowbase_order, ->(project) { where(:project_id => project).order(:stage) }
   scope :stage_knowbase_post, ->(project,id) { where(:project_id => project, :id => id) }
   scope :min_stage_knowbase_post, ->(project) { where(:project_id => project, :stage => self.minimum(:stage)) }
