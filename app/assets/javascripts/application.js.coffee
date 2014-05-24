@@ -8,6 +8,7 @@
 #= require bootstrap-wysihtml5/locales/ru-RU
 #= require selectize
 #= require liFixar/jquery.liFixar
+#= require slimscroll/jquery.slimscroll
 
 
 
@@ -98,6 +99,8 @@ $ ->
   $("#sortable").sortable()
   $("#sortable").disableSelection()
   $('#theall a:first').tab('show')
+
+
 #  $('#accordion').on 'shown.bs.collapse', ->
 #    m = $(this);
 #    console.log(m)
@@ -179,6 +182,13 @@ $(window).load ->
         remove_able: 1
 
 $(window).load ->
+  $(".chat-messages").slimScroll
+    start: 'bottom'
+    size: '5px'
+    alwaysVisible: true
+    railVisible: true
+    disableFadeOut: true
+
   $select = $("#selectize_concept").selectize
     labelField: "show_content"
     valueField: "id"
