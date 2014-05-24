@@ -9,17 +9,13 @@
 
     %br
     - if signed_in? and @project.status == 1
-<<<<<<< HEAD
-      = link_to 'Начать быстрое обсуждение тем', life_tape_posts_fast_discussion_topics_path(@project) ,remote: true, id: 'fast_discussion_topics',  class: 'btn btn-sm btn-success'
-    -if boss?
-      =link_to '+ Добавить новую тему', new_discontent_aspect_path(@project),:remote => true,:id => "new_aspect",  class: 'btn btn-sm btn-primary'
-    %br
-    %br
-=======
       .text-right
         = link_to 'Начать быстрое обсуждение тем', life_tape_posts_fast_discussion_topics_path(@project) ,remote: true, id: 'fast_discussion_topics',  class: 'btn btn-sm btn-info '
+        -if boss?
+          =link_to '+ Добавить новую тему', new_discontent_aspect_path(@project),:remote => true,:id => "new_aspect",  class: 'btn btn-sm btn-primary'
+        %br
+        %br
 
->>>>>>> 7383d6c2ea14e37155481f7964d561c764debc15
   .body
     - if @post_show
       -if @aspect.short_desc.present?
