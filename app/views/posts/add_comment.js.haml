@@ -5,6 +5,7 @@
 
 $("#comment_text_area").val('')
 $('.chat-messages').append("#{escape_javascript(render :partial => 'shared/comment', :object => @comment)}")
+$(".chat-messages").scrollTop(10000);
 $('#comment_success').fadeIn('slow').delay(1000).fadeOut('slow');
 -#$('#send').addClass('disabled')
 

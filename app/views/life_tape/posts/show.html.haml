@@ -1,3 +1,7 @@
-
-= render 'shared/post_show', :post => @post
+=link_to '/project/'+@project.id.to_s do
+  %span.fa.fa-angle-double-left
+  вернуться
+%section.widget
+  .body
+    = render 'shared/post_show', :post => @post
 

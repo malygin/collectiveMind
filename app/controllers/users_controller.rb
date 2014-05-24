@@ -179,6 +179,8 @@ class UsersController < ApplicationController
       user.add_score_by_type(params[:score].to_i, :score_a)
       @project = Core::Project.find(params[:project])
       user.journals.build(:type_event=>'add_score', :project => @project, :body=>params[:score]).save
+      current_user.journals.build(:type_event=>'my_add_score', :user_informed => user, :project => @project, :body=>params[:score], :viewed=> false).save!
+
     end
     respond_to do |format|
 
@@ -189,7 +191,7 @@ class UsersController < ApplicationController
 	def add_score_essay
 		user = User.find(params[:id])
 		if boss?
-      user.add_score(params[:score].to_i,:score_a)
+      # user.add_score(params[:score].to_i,:score_a)
       @project = Core::Project.find(params[:project])
       user.journals.build(:type_event=>'add_score_essay', :project => @project, :body=>params[:score]).save
     end
