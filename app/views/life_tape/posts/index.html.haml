@@ -10,7 +10,8 @@
     %br
     - if signed_in? and @project.status == 1
       .text-right
-        = link_to 'Начать быстрое обсуждение тем', life_tape_posts_fast_discussion_topics_path(@project) ,remote: true, id: 'fast_discussion_topics',  class: 'btn btn-sm btn-info '
+        -if fast_discussion_able?
+          = link_to 'Начать быстрое обсуждение тем', life_tape_posts_fast_discussion_topics_path(@project) ,remote: true, id: 'fast_discussion_topics',  class: 'btn btn-sm btn-info '
         -if boss?
           =link_to '+ Добавить новую тему', new_discontent_aspect_path(@project),:remote => true,:id => "new_aspect",  class: 'btn btn-sm btn-primary'
         %br

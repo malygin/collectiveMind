@@ -44,7 +44,7 @@ class Discontent::AspectsController  < ApplicationController
     @project = Core::Project.find(params[:project])
     @aspect = Discontent::Aspect.create(params[:discontent_aspect])
     @aspect.project = @project
-    @post = LifeTape::Post.create(:aspect => @aspect, :status => @aspect.status)
+    @post = LifeTape::Post.create(:aspect => @aspect, :status => 0)
     @post.project = @project
     @aspect.life_tape_posts << @post
     respond_to do |format|
