@@ -1,8 +1,9 @@
 class LifeTape::Post < ActiveRecord::Base
-  attr_accessible :important
+  attr_accessible :important, :aspect
   include BasePost
   has_many :childs, :class_name => 'LifeTape::Post', :foreign_key => 'post_id'
   belongs_to :post, :class_name => 'LifeTape::Post'
+  belongs_to :aspect, :class_name => 'Discontent::Aspect', :foreign_key => 'aspect_id'
 
   has_many :life_tape_post_discussions, :class_name => 'LifeTape::PostDiscussion'
   has_many :post_discussion_users, :through => :life_tape_post_discussions, :source => :user, :class_name => 'User'

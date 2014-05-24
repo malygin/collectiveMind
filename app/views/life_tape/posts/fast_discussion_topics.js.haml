@@ -1,4 +1,4 @@
--if @post.nil? and not (@aspect.nil? or @post_show.nil?)
+-if @discontent_aspect.nil? and not (@aspect.nil? or @post_show.nil?)
   $('#render_fast_discussion_topics').empty();
   $("#render_fast_discussion_topics").html('#{escape_javascript(render partial: 'modal_fast_discussion_topics', :locals => { :aspect => @aspect, :post_show => @post_show } )}');
   $('#modal_fast_discussion_topics').modal('show');

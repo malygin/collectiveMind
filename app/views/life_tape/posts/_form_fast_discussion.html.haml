@@ -1,4 +1,4 @@
-= form_tag(life_tape_posts_fast_discussion_topics_path(@project, post_show: post_show, save_form: true), { method: :get, remote: true, id: 'form_add_discussion' }) do
+= form_tag(life_tape_posts_fast_discussion_topics_path(@project, aspect: aspect,post_show: post_show, save_form: true), {method: :get, remote: true, id: 'form_add_discussion' }) do
   %h3.text-success
     Тема:
     =aspect.content
@@ -12,5 +12,4 @@
   =text_area_tag "discussion",'', :class => "form-control", rows: 6, style: 'width: 100%;',placeholder: 'Ваше мнение', id:'discussion_text_area'
   %br
   .pull-right
-    = link_to 'Пропустить тему', life_tape_posts_fast_discussion_topics_path(@project, post_show: post_show, empty_discussion: true), remote: true, id: 'empty_discussion', class: 'btn btn-danger'
     %input.btn.btn-success{:type => "submit",:id  => "send_discussion", :value => "Сохранить и перейти к следующей теме"}

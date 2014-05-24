@@ -34,9 +34,10 @@
 
     -else
       %a.stage_menu2
-        2.
-        =@project.status_title(:discontent_posts)
-        %br
+        %h4.no-margin
+          2.
+          =@project.status_title(:discontent_posts)
+          %br
     %ul#stats-collapse.panel-collapse.collapse
 
   %li.panel#stage_concept{class:  @project.stage_style(:concept_posts)}

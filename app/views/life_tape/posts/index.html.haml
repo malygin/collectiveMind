@@ -11,11 +11,20 @@
     %a{name:'top'}
     - if signed_in? and @project.status == 1
       = link_to 'Начать быстрое обсуждение тем', life_tape_posts_fast_discussion_topics_path(@project) ,remote: true, id: 'fast_discussion_topics',  class: 'btn btn-sm btn-success'
-      %br
-      %br
-
+    -if boss?
+      =link_to '+ Добавить новую тему', new_discontent_aspect_path(@project),:remote => true,:id => "new_aspect",  class: 'btn btn-sm btn-primary'
+    %br
+    %br
   .body
     - if @post_show
+      -if @aspect.short_desc.present?
+        .row
+          .col-md-12
+            %section.widget
+              .body
+                .slimScrollDiv
+                  %div{:id => "edit_aspect_desc_#{@aspect.id}"}=@aspect.short_desc
+
       .row
         .col-md-6
           %section.widget
@@ -28,7 +37,14 @@
         .col-md-6
           %section.widget
             %header
-              %h4.text-info=@aspect.content
+              -if boss?
+                .pull-right{:id => "redactor_aspect_#{@aspect.id}"}
+                  =link_to edit_discontent_aspect_path(@project,@aspect),:remote => true, :id => "edit_aspect_#{@aspect.id}" do
+                    %span{:class=>"glyphicon glyphicon-pencil text-success", :style=>"cursor:pointer;text-decoration:none;"}
+                  -#=link_to discontent_aspect_path(@project,@aspect), :method => :delete, :remote => true, :confirm => 'Удалить тему?',:id => "destroy_aspect_#{@aspect.id}" do
+                  -#  %span{:class=>"glyphicon glyphicon-remove text-danger", :style=>"cursor:pointer;text-decoration:none;"}
+              %h4.text-info{:id => "edit_aspect_content_#{@aspect.id}"}=@aspect.content
+
             .body
               .slimScrollDiv
                 - if  @aspect.knowbase_post
@@ -38,3 +54,4 @@
 
 
 #render_fast_discussion_topics
+#aspect_modal

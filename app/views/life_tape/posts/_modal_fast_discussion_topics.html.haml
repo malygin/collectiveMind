@@ -8,5 +8,6 @@
         #form_fast_discussion
           = render :partial => 'form_fast_discussion', :locals => { :aspect => @aspect, :post_show => @post_show }
       .modal-footer
+        = link_to 'Пропустить тему', life_tape_posts_fast_discussion_topics_path(@project, aspect: @aspect, empty_discussion: true), remote: true, id: 'empty_discussion', class: 'btn btn-danger'
         %button.btn.btn-default(type = "button" data-dismiss="modal") Закрыть
 

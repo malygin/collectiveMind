@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140523201346) do
+ActiveRecord::Schema.define(:version => 20140524175327) do
 
   create_table "answers", :force => true do |t|
     t.string   "text"
@@ -820,6 +820,7 @@ ActiveRecord::Schema.define(:version => 20140523201346) do
     t.integer  "post_id"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
+    t.integer  "aspect_id"
   end
 
   create_table "life_tape_post_votings", :force => true do |t|

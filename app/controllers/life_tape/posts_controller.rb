@@ -97,31 +97,38 @@ end
   def fast_discussion_topics
     @project = Core::Project.find(params[:project])
     @post = LifeTape::Post.find(params[:post_show]) unless params[:post_show].nil?
-    user_discussion_posts = current_user.user_discussion_posts.where(:project_id => @project).pluck(:id)
+    @discontent_aspect = Discontent::Aspect.find(params[:aspect]) unless params[:aspect].nil?
+    #user_discussion_posts = current_user.user_discussion_posts.where(:project_id => @project).pluck(:id)
+    user_discussion_aspects = current_user.user_discussion_aspects.where(:project_id => @project).pluck(:id)
 
-    if @post.nil?
-      post_for_discussion = LifeTape::Post.by_discussions(user_discussion_posts).where(:project_id => @project).order(:id).first
-      unless post_for_discussion.nil?
-        @post_show = post_for_discussion
-        @aspect = @post_show.discontent_aspects.first
+    if @discontent_aspect.nil?
+      #posts_for_discussion = LifeTape::Post.by_discussions(user_discussion_posts).where(:project_id => @project).order(:id)
+      #aspects_for_discussion = Discontent::Aspect.by_discussions(user_discussion_aspects).where(:project_id => @project).order(:id)
+      aspects_for_discussion = @project.aspects.by_discussions(user_discussion_aspects).order(:id)
+      unless aspects_for_discussion.empty?
+        aspects_for_discussion.each do |asp|
+          @aspect = asp
+          @post_show = @aspect.life_tape_posts.first
+          break unless @post_show.nil?
+        end
       end
     else
-      aspects = @project.aspects.order(:id)
-      unless aspects.empty?
-        aspects.each do |asp|
+      aspects_for_discussion = @project.aspects.by_discussions(user_discussion_aspects).order(:id)
+      unless aspects_for_discussion.empty?
+        aspects_for_discussion.each do |asp|
           @aspect = asp
-          @post_show = @aspect.life_tape_posts.order(:id).first unless @aspect.nil?
-          if (!@post_show.nil? and @post_show.id > @post.id) or asp == aspects.last
+          @post_show = @aspect.life_tape_posts.first
+          if @aspect.id > @discontent_aspect.id or asp == aspects_for_discussion.last
             if params[:empty_discussion]
               break
             elsif params[:save_form]
               unless params[:discussion].empty?
                 @comment = @post.comments.create(:content => params[:discussion], :user => current_user)
-                current_user.journals.build(:type_event=>'life_tape_comment_save'+'_save', :project => @project, :body=>"#{@comment.content[0..48]}:#{@post.id}#comment_#{@comment.id}").save!
+                current_user.journals.build(:type_event=>'life_tape_comment'+'_save', :project => @project, :body=>"#{@comment.content[0..48]}:#{@post.id}#comment_#{@comment.id}").save!
                 if @post.user!=current_user
                   current_user.journals.build(:type_event=>'my_'+'life_tape_comment', :user_informed => @post.user, :project => @project, :body=>"#{@comment.content[0..24]}:#{@post.id}#comment_#{@comment.id}", :viewed=> false).save!
                 end
-                current_user.life_tape_post_discussions.create(post: @post)
+                current_user.life_tape_post_discussions.create(post: @post, aspect: @discontent_aspect)
               end
               break
             else
