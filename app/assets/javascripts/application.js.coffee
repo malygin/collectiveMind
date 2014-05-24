@@ -182,14 +182,14 @@ $(window).load ->
         remove_able: 1
 
 $(window).load ->
-  $(".chat-messages").slimScroll
+#  $(".chat-messages").slimScroll
 #    start: 'bottom'
-    size: '5px'
-    alwaysVisible: true
-    railVisible: true
-    disableFadeOut: true
-
-  $(".chat-messages").scrollTop(10000);
+#    size: '5px'
+#    alwaysVisible: true
+#    railVisible: true
+#    disableFadeOut: true
+#
+#  $(".chat-messages").scrollTop(10000);
 
   $select = $("#selectize_concept").selectize
     labelField: "show_content"
