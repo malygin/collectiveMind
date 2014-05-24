@@ -8,11 +8,9 @@
         =@project.name
 
     %br
-    %a{name:'top'}
     - if signed_in? and @project.status == 1
-      = link_to 'Начать быстрое обсуждение тем', life_tape_posts_fast_discussion_topics_path(@project) ,remote: true, id: 'fast_discussion_topics',  class: 'btn btn-sm btn-success'
-      %br
-      %br
+      .text-right
+        = link_to 'Начать быстрое обсуждение тем', life_tape_posts_fast_discussion_topics_path(@project) ,remote: true, id: 'fast_discussion_topics',  class: 'btn btn-sm btn-info '
 
   .body
     - if @post_show
@@ -20,19 +18,17 @@
         .col-md-6
           %section.widget
             .body
-              .slimScrollDiv
-                .chat-messages
-                  = render :partial => 'shared/comment',:collection => @post_show.comments
-                - if signed_in?
-                  = render :partial => 'shared/comment_form', :locals => { :comment => @comment,:post =>@post_show, :url_link => "/project/#{@project.id}/life_tape/posts/#{@post_show.id}/add_comment"}
+              .chat-messages
+                = render :partial => 'shared/comment',:collection => @post_show.comments
+              - if signed_in?
+                = render :partial => 'shared/comment_form', :locals => { :comment => @comment,:post =>@post_show, :url_link => "/project/#{@project.id}/life_tape/posts/#{@post_show.id}/add_comment"}
         .col-md-6
           %section.widget
             %header
               %h4.text-info=@aspect.content
             .body
-              .slimScrollDiv
-                - if  @aspect.knowbase_post
-                  =@aspect.knowbase_post.content
+              - if  @aspect.knowbase_post
+                =@aspect.knowbase_post.content
 
 
 

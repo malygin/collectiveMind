@@ -1,31 +1,33 @@
-%h1 Отредактируйте информацию о себе
-= form_for @user,:url => { :action => :update, :type =>@project.id }   do |f|
-    =render 'shared/error_messages', :object => f.object
-    .field
-        = f.label :name, "Имя"
-        %br
-        = f.text_field :name
-    .field
-        = f.label :surname, "Фамилия"
-        %br
-        = f.text_field :surname
+%section.widget
+    .body
+        %h3 Отредактируйте информацию о себе
+        = form_for @user,:url => { :action => :update, :type =>@project.id }   do |f|
+            =render 'shared/error_messages', :object => f.object
+            .field
+                = f.label :name, "Имя"
+                %br
+                = f.text_field :name
+            .field
+                = f.label :surname, "Фамилия"
+                %br
+                = f.text_field :surname
 
-    .field
-        = f.label :email, "Почта"
-        %br
-        = f.text_field :email
+            .field
+                = f.label :email, "Почта"
+                %br
+                = f.text_field :email
 
 
-    .field
+            .field
+                %br
+                = f.label :avatar, "Выберите файл для аватара"
+                %br
+                = f.file_field :avatar
+            %br
+            %br
+            %br
+            .action
+                = f.submit 'Сохранить', class: 'btn btn-primary'
         %br
-        = f.label :avatar, "Выберите файл для аватара"
-        %br
-        = f.file_field :avatar
-    %br
-    %br
-    %br
-    .action
-        = f.submit 'Сохранить', class: 'btn btn-primary'
-%br
 
 
