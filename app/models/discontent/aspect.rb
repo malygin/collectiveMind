@@ -9,9 +9,13 @@ class Discontent::Aspect < ActiveRecord::Base
            :conditions => ['discontent_posts.style = ? ',1]
    has_many :accepted_posts, :class_name => 'Discontent::Post',
            :conditions => ['discontent_posts.status = ?',4]
-
+  has_one :knowbase_post, :class_name => 'Knowbase::Post'
+  has_many :life_tape_posts, :class_name => 'LifeTape::Post'
   has_many :discontent_post_aspects, :class_name => 'Discontent::PostAspect'
   has_many :aspect_posts, :through => :discontent_post_aspects, :source => :post, :class_name => 'Discontent::Post'
+
+  has_many :life_tape_post_discussions, :class_name => 'LifeTape::PostDiscussion'
+  has_many :aspect_discussion_users, :through => :life_tape_post_discussions, :source => :user, :class_name => 'User'
 
   has_many :voted_users, :through => :final_votings, :source => :user
   has_many :final_votings,:foreign_key => 'discontent_aspect_id', :class_name => "LifeTape::Voiting"
@@ -20,6 +24,7 @@ class Discontent::Aspect < ActiveRecord::Base
   scope :procedurial_only, where(:status, 0)
   scope :by_project, ->(project_id) { where("discontent_aspects.project_id = ?", project_id) }
   scope :minus_view, ->(aspects) { where("discontent_aspects.id NOT IN (#{aspects.join(", ")})") unless aspects.empty? }
+  scope :by_discussions, ->(aspects) { where("discontent_aspects.id NOT IN (#{aspects.join(", ")})") unless aspects.empty? }
 
   scope :vote_top , ->(revers) {
     if revers == "0"
@@ -63,6 +68,10 @@ class Discontent::Aspect < ActiveRecord::Base
     group('"discontent_aspects"."id"').
     where('"discontent_aspects"."project_id" = ? and "discontent_aspects"."status" = 0', project)
     .vote_top(revers)
+  end
+
+  def to_s
+    self.content
   end
 
 end

@@ -173,4 +173,11 @@ module ApplicationHelper
         null
     end
   end
+  def fast_discussion_able?
+    user_discussion_aspects = current_user.user_discussion_aspects.where(:project_id => @project).size
+    if user_discussion_aspects == @project.aspects.size
+      return false
+    end
+    true
+  end
 end

@@ -47,7 +47,7 @@ module JournalHelper
         s = j.body.split(':')
         begin
           if LifeTape::Post.find(s[1].split('#')[0]).status ==0
-            ": "+  link_to("'#{s[0]}...'", "/project/#{project}/life_tape/posts/#{s[1]}" )
+            "добавил комментарий  "+  link_to("#{s[0]}..", "/project/#{project}/life_tape/posts/#{s[1]}" )
           else
             false
           end
@@ -166,6 +166,9 @@ module JournalHelper
       when 'my_life_tape_comment'
         s = j.body.split(':')
         ": '#{s[0]}...' к "+  link_to('вашей теме', "/project/#{project}/life_tape/posts/#{s[1]}" )
+      when 'my_add_score_comment'
+        s = j.body.split(':')
+        "вы получили #{s[0]} баллов "  +  link_to("за полезный комментарий ", "/project/#{project}/#{s[1]}" )
       when 'my_discontent_comment'
         s = j.body.split(':')
         "добавил(а) комментарий '#{s[0]}...' к "+  link_to('вашему несовершенству', "/project/#{project}/discontent/posts/#{s[1]}" )

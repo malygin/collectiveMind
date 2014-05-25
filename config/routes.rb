@@ -40,7 +40,7 @@ scope '/project/:project' do
   get '/article1', :to => 'core/projects#article1'
   get '/article2', :to => 'core/projects#article2'
   get '/article3', :to => 'core/projects#article3'
-
+  get '/journals', :to => 'journal#index'
 
   namespace :help do
     post :save_help_answer, :to => 'posts#save_help_answer'
@@ -59,7 +59,7 @@ scope '/project/:project' do
       match 'add_score_essay/:score' => 'users#add_score_essay'
     end
   end
-
+  get 'life_tape/posts/fast_discussion_topics' , to: 'life_tape/posts#fast_discussion_topics'
   namespace :life_tape do
     posts_routes
     resources :posts do

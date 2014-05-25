@@ -1,3 +1,6 @@
-$('#posts').fadeOut(500, function() {$('#posts').html("#{escape_javascript(render  @posts)}").fadeIn();});
-$('li#new').toggleClass('active')
-$('li#origin').toggleClass('active')
+$('#new_posts').fadeOut(500, function() {$('#new_posts').html("#{escape_javascript(render  @posts)}").fadeIn();});
+$('li#new').toggleClass('active');
+$('li#old').toggleClass('active');
+$('#tab_posts a[href="#new_posts"]').tab('show');
+$('#origin').toggleClass('active in');
+$('#new_posts').toggleClass('active in');

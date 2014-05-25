@@ -18,22 +18,27 @@
     =link_to "по голосам(возрастанию)", {:action => :vote_list, :revers => 1 },:remote => true, class: "vote_class", id: "vote_all"
   %br
 
-.panel.panel-success
-  .panel-heading
-    %h4 Определение наиболее важных тем
+
+.row
+  .col-md-12
+    %h3.page-title
+      1 этап: Сбор информации.
+      %br
+      %small
+        Определение наиболее важных тем процедуры:
+        =@project.name
 
 %h4.text-success#lifetape_success(style="display:none;" ) Спасибо за участие в голосовании!
 %br
 - unless @number_v<1  and not boss?
-  .panel.panel-info#fixBlock
-    .panel-heading
-      %h5
-        Вы можете выбрать
-        %b=@project.stage1
-        тем, которые на Ваш взгляд являются наиболее важными
-      %h5.text-info
-        =t('voting.have_votes')
-        %b#count_vote=@number_v
+  %section.widget#fixBlock
+    %h4
+      Вы можете выбрать
+      %b=@project.stage1
+      тем, которые на Ваш взгляд являются наиболее важными
+    %h3.text-info
+      =t('voting.have_votes')
+      %b#count_vote=@number_v
 
 
   #vote_container

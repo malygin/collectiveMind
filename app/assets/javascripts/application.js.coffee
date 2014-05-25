@@ -8,6 +8,7 @@
 #= require bootstrap-wysihtml5/locales/ru-RU
 #= require selectize
 #= require liFixar/jquery.liFixar
+#= require slimscroll/jquery.slimscroll
 
 
 
@@ -66,6 +67,7 @@ $('#modal_help').on 'hidden.bs.modal', ->
 
 @disable_send_button= ->
   $('#send_post').toggleClass('disabled')
+
 $('.score_class').on 'click', ->
   $('.score_class').css('text-decoration','none').css('background-color','transparent')
   $(this).css('text-decoration','underline').css('background-color','#ddeaf4')
@@ -97,6 +99,8 @@ $ ->
   $("#sortable").sortable()
   $("#sortable").disableSelection()
   $('#theall a:first').tab('show')
+
+
 #  $('#accordion').on 'shown.bs.collapse', ->
 #    m = $(this);
 #    console.log(m)
@@ -178,6 +182,15 @@ $(window).load ->
         remove_able: 1
 
 $(window).load ->
+#  $(".chat-messages").slimScroll
+#    start: 'bottom'
+#    size: '5px'
+#    alwaysVisible: true
+#    railVisible: true
+#    disableFadeOut: true
+#
+#  $(".chat-messages").scrollTop(10000);
+
   $select = $("#selectize_concept").selectize
     labelField: "show_content"
     valueField: "id"

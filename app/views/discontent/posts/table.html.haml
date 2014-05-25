@@ -1,52 +1,138 @@
-%h3
-  2 этап: Анализ ситуации.
-  %br
-  %small
-    Сбор несовершенств в рамках процедуры
-    =@project.name
-.pull-right
-  %a.btn.btn-default.menu_table(href="/project/#{@project.id}/discontent/posts?view=list" )
-    %span.glyphicon.glyphicon-th-list
-    Список
-  %a.active.btn.btn-default.menu_table(href="#" )
-    %span.glyphicon.glyphicon-th
-    Таблица
-%br
-%a{name:'top'}
-- if signed_in? and @project.status ==3
-  = link_to '+ Добавить свое несовершенство', new_discontent_post_path(@project) , id: 'add_record',  class: 'btn btn-sm btn-success'
-  %br
-%br
+-#%h3
+-#  2 этап: Анализ ситуации.
+-#  %br
+-#  %small
+-#    Сбор несовершенств в рамках процедуры
+-#    =@project.name
+-#.pull-right
+-#  %a.btn.btn-default.menu_table(href="/project/#{@project.id}/discontent/posts?view=list" )
+-#    %span.glyphicon.glyphicon-th-list
+-#    Список
+-#  %a.active.btn.btn-default.menu_table(href="#" )
+-#    %span.glyphicon.glyphicon-th
+-#    Таблица
+-#%br
+-#%a{name:'top'}
+-#- if signed_in? and @project.status ==3
+-#  = link_to '+ Добавить свое несовершенство', new_discontent_post_path(@project) , id: 'add_record',  class: 'btn btn-sm btn-success'
+-#  %br
+-#%br
+%section.widget
+  %header
+    %h3.text-danger
+      2 этап: Анализ ситуации.
+      %br
+      %small
+        Сбор несовершенств в рамках процедуры:
+        =@project.name
+  .body
 
-.panel-group#accordion
-  -@aspects.each do |aspect|
-    .panel.panel-default
-      .panel-heading
-        %h4.panel-title
-          %a(data-toggle="collapse" data-parent="#accordion" href="#asp_#{aspect.id}" )
-            =aspect.content
-            %b="(#{aspect.aspect_posts.count})"
-            %span.glyphicon.glyphicon-chevron-down
+    %a{name:'top'}
+    - if signed_in? and @project.status ==3
+      = link_to '+ Добавить свое несовершенство', new_discontent_post_path(@project) , id: 'add_record',  class: 'btn btn-sm btn-danger'
+      %br
 
-            %br
-            %small=aspect.short_desc
+    - if @aspect_post
+      %h4.text-right
+        Тема:
+        =@aspect_post.content
+        %b="(#{@aspect_post.aspect_posts.count})"
 
-      .panel-collapse.collapse{id:"asp_#{aspect.id}"}
-        .panel-body
-          %table.table
+      - if can_union_discontents?(@project)
+        .col-md-12
+          %section.widget
+            .body.widget-panel
+              %ul.nav.nav-tabs#tab_posts
+                %li#old.active
+                  %a(href="#origin" data-toggle="tab" onclick="$('#new_posts').fadeOut();")
+                    Исходные #{@aspect_post.aspect_posts.count}
+                %li#new
+                  =link_to "Объединенные #{@project.discontent_accepted_post.count}", "/project/#{@project.id}/discontent/posts/unions", remote: true
+              %br
+              %br
+              .tab-content
+                #origin.tab-pane.fade.in.active
+                  .row
+                    .col-md-6
+                      %section.widget
+                        %header
+                          %h4
+                            Тип:
+                            %span.label.label-success Отсутствующие достоинства
+                            %hr
+                        .body
+                          .slimScrollDiv
+                            %ul.news-list
+                              =render partial:'post_short', collection: @aspect_post.aspect_posts.by_positive(@status)
 
-            %tr
-              %td
-                %span.label.label-p  Отсутствующие достоинства
-              %td
-                %span.label.label-n(style='min-width: 300px;')  Имеющиеся недостатки
+                    .col-md-6
+                      %section.widget
+                        %header
+                          %h4
+                            Тип:
+                            %span.label.label-danger Имеющиеся недостатки
+                          %hr
+                        .body
+                          .slimScrollDiv
+                            %ul.news-list
+                              =render partial:'post_short', collection: @aspect_post.aspect_posts.by_negative(@status)
+                #new_posts.tab-pane.fade
+      -else
+        .row
+          .col-md-6
+            %section.widget
+              %header
+                %h4
+                  Тип:
+                  %span.label.label-success Отсутствующие достоинства
+                  %hr
+              .body
+                .slimScrollDiv
+                  %ul.news-list
+                    =render partial:'post_short', collection: @aspect_post.aspect_posts.by_positive(@status)
 
-            %tr
-              %td
+          .col-md-6
+            %section.widget
+              %header
+                %h4
+                  Тип:
+                  %span.label.label-danger Имеющиеся недостатки
+                %hr
+              .body
+                .slimScrollDiv
+                  %ul.news-list
+                    =render partial:'post_short', collection: @aspect_post.aspect_posts.by_negative(@status)
 
-                -#=render partial:'post_short', collection: aspect.positive_posts.by_status(@status)
-                =render partial:'post_short', collection: aspect.aspect_posts.by_positive(@status)
 
-              %td
-                -#=render partial:'post_short', collection: aspect.negative_posts.by_status(@status)
-                =render partial:'post_short', collection: aspect.aspect_posts.by_negative(@status)
+    -#.panel-group#accordion
+    -#  -@aspects.each do |aspect|
+    -#    .panel.panel-default
+    -#      .panel-heading
+    -#        %h4.panel-title
+    -#          %a(data-toggle="collapse" data-parent="#accordion" href="#asp_#{aspect.id}" )
+    -#            =aspect.content
+    -#            %b="(#{aspect.aspect_posts.count})"
+    -#            %span.glyphicon.glyphicon-chevron-down
+    -#
+    -#            %br
+    -#            %small=aspect.short_desc
+    -#
+    -#      .panel-collapse.collapse{id:"asp_#{aspect.id}"}
+    -#        .panel-body
+    -#          %table.table
+    -#
+    -#            %tr
+    -#              %td
+    -#                %span.label.label-p  Отсутствующие достоинства
+    -#              %td
+    -#                %span.label.label-n(style='min-width: 300px;')  Имеющиеся недостатки
+    -#
+    -#            %tr
+    -#              %td
+    -#
+    -#                -#=render partial:'post_short', collection: aspect.positive_posts.by_status(@status)
+    -#                =render partial:'post_short', collection: aspect.aspect_posts.by_positive(@status)
+    -#
+    -#              %td
+    -#                -#=render partial:'post_short', collection: aspect.negative_posts.by_status(@status)
+    -#                =render partial:'post_short', collection: aspect.aspect_posts.by_negative(@status)

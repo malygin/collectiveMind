@@ -41,8 +41,9 @@ class User < ActiveRecord::Base
 
   has_many :essay_posts, :class_name => "Essay::Post"
 
-
-
+  has_many :life_tape_post_discussions, :class_name => 'LifeTape::PostDiscussion'
+  has_many :user_discussion_posts, :through => :life_tape_post_discussions, :source => :post, :class_name => 'LifeTape::Post'
+  has_many :user_discussion_aspects, :through => :life_tape_post_discussions, :source => :aspect, :class_name => 'Discontent::Aspect'
 
   has_many :concept_posts, :class_name => "Concept::Post"
   
@@ -144,6 +145,8 @@ class User < ActiveRecord::Base
       when :plus_comment
         self.add_score_by_type(5, :score_a)
         self.journals.build(:type_event=>'useful_comment', :project => h[:project], :body=>"#{h[:comment].content[0..24]}:#{h[:path]}/#{h[:comment].post.id}#comment_#{h[:comment].id}").save!
+        self.journals.build(:type_event=>'my_add_score_comment', :project => h[:project], :user_informed => self, :body=>"5:#{h[:path]}/#{h[:comment].post.id}#comment_#{h[:comment].id}", :viewed=> false).save!
+
       when :plus_post
 
         self.add_score_by_type(300, :score_g)  if h[:post].instance_of? Concept::Post

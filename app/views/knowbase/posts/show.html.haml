@@ -1,2 +1,7 @@
-%div{:id => "knowbase_post"}
-  =render  :partial => 'knowbase_post', :locals => { :post => @post}
+=link_to '/project/'+@project.id.to_s do
+  %span.fa.fa-angle-double-left
+  вернуться к процедуре
+%section.widget
+  .body
+    %div{:id => "knowbase_post"}
+      =render  :partial => 'knowbase_post', :locals => { :post => @post}

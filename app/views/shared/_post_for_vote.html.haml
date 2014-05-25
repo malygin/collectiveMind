@@ -1,25 +1,45 @@
-.row
-  .col-md-12
+.col-md-4.col-sm-8.col-xs-12
 
-    - if can_vote?(post_for_vote.voted(current_user).size, count_voted, votes)
-      =link_to  path_for_voting+"vote/"+post_for_vote.id.to_s , :remote => true, :method => :put, class: "btn btn-default btn-sm vote-button", id: "vote_#{post_for_vote.id}" do
-        %span.glyphicon.text-success.glyphicon-thumbs-up
-        -if boss?
-          %span.glyphicon.text-success.h4=post_for_vote.voted_users.size
-        =post_for_vote.content
-    -else
-      %a.btn.btn-success.btn-sm.disabled.vote-button
-        %span.glyphicon.text-success.glyphicon-thumbs-up
-        -if boss?
-          %span.glyphicon.text-success.h4=post_for_vote.voted_users.size
-        =post_for_vote.content
-    -if boss? and post_for_vote.status == 0
-      =link_to({:action => :set_one_vote, :id => post_for_vote.id},:remote => true,:method => :put,:class => "btn btn-default btn-sm vote-button") do
-        %span.glyphicon.text-danger.glyphicon-remove{:id => "set_vote_#{post_for_vote.id}"}
-          Убрать
-    %br
-    %br
+  - if can_vote?(post_for_vote.voted(current_user).size, count_voted, votes)
+    .box
+      =simple_format(post_for_vote.content)
+      .description
+        =link_to  path_for_voting+"vote/"+post_for_vote.id.to_s , :remote => true, :method => :put, class: "btn btn-default btn-sm vote-button", id: "vote_#{post_for_vote.id}" do
+          %i.fa.fa-thumbs-up
+          -if boss?
+            =post_for_vote.voted_users.size
+          Проголосовать
+        -if boss? and post_for_vote.status == 0
+          =link_to({:action => :set_one_vote, :id => post_for_vote.id},:remote => true,:method => :put,:class => "btn btn-default btn-sm vote-button btn-danger", :id => "set_vote_#{post_for_vote.id}") do
+            %i.glyphicon.glyphicon-remove
+            %span Убрать
+  -else
+    .box
+      =simple_format(post_for_vote.content)
+      .description
+        %a.btn.btn-success.btn-sm.disabled.vote-button
+          %i.fa.fa-thumbs-up
+          -if boss?
+            =post_for_vote.voted_users.size
+          Проголосовать
+        -if boss? and post_for_vote.status == 0
+          =link_to({:action => :set_one_vote, :id => post_for_vote.id},:remote => true,:method => :put,:class => "btn btn-default btn-sm vote-button btn-danger", :id => "set_vote_#{post_for_vote.id}") do
+            %i.glyphicon.glyphicon-remove
+            %span Убрать
 
+  %br
+  %br
+  %br
+
+-#=link_to  path_for_voting+"vote/"+post_for_vote.id.to_s , :remote => true, :method => :put, class: "btn btn-default btn-sm vote-button", id: "vote_#{post_for_vote.id}" do
+-#  %span.glyphicon.text-success.glyphicon-thumbs-up
+-#  -if boss?
+-#    %span.glyphicon.text-success.h4=post_for_vote.voted_users.size
+-#%a.btn.btn-success.btn-sm.disabled.vote-button
+-#  %span.glyphicon.text-success.glyphicon-thumbs-up
+-#  -if boss?
+-#    %span.glyphicon.text-success.h4=post_for_vote.voted_users.size
+-#  =post_for_vote.content
 -#
 -#%p.righttext
 -#    .voteBar

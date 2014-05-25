@@ -28,17 +28,24 @@ end
       redirect_to action: "vote_list"
       return
     end
+    if params[:asp]
+      @aspect =  Discontent::Aspect.find(params[:asp])
+      @post_show = @aspect.life_tape_posts.first
+    else
+      @aspect = @project.aspects.first
+      @post_show = @aspect.life_tape_posts.first unless @aspect.nil?
+    end
 
     @post = current_model.new
     @order = params[:order]
     @page = params[:page]
     @folder = :life_tape
-    load_filter_for_aspects   if (request.xhr? and @order.nil? and @page.nil?)
+    # load_filter_for_aspects   if (request.xhr? and @order.nil? and @page.nil?)
 
-    @posts  = current_model.where(:project_id => @project).where(:status => 0)
-      .eager_load(:discontent_aspects)
-      .order_by_param(@order)
-      .paginate(:page => params[:page], :per_page => 20)
+    # @posts  = current_model.where(:project_id => @project).where(:status => 0)
+    #   .eager_load(:discontent_aspects)
+    #   .order_by_param(@order)
+    #   .paginate(:page => params[:page], :per_page => 20)
     @comment = LifeTape::Comment.new
     respond_to do |format|
       format.html{render :layout  => 'application_two_column'}
@@ -82,6 +89,56 @@ end
     @post = voting_model.find(params[:id])
     @post.toggle(:status)
     @post.update_attributes(status: @post.status)
+    respond_to do |format|
+      format.js
+    end
+  end
+
+  def fast_discussion_topics
+    @project = Core::Project.find(params[:project])
+    @post = LifeTape::Post.find(params[:post_show]) unless params[:post_show].nil?
+    @discontent_aspect = Discontent::Aspect.find(params[:aspect]) unless params[:aspect].nil?
+    #user_discussion_posts = current_user.user_discussion_posts.where(:project_id => @project).pluck(:id)
+    user_discussion_aspects = current_user.user_discussion_aspects.where(:project_id => @project).pluck(:id)
+
+    if @discontent_aspect.nil?
+      #posts_for_discussion = LifeTape::Post.by_discussions(user_discussion_posts).where(:project_id => @project).order(:id)
+      #aspects_for_discussion = Discontent::Aspect.by_discussions(user_discussion_aspects).where(:project_id => @project).order(:id)
+      aspects_for_discussion = @project.aspects.by_discussions(user_discussion_aspects).order(:id)
+      unless aspects_for_discussion.empty?
+        aspects_for_discussion.each do |asp|
+          @aspect = asp
+          @post_show = @aspect.life_tape_posts.first
+          break unless @post_show.nil?
+        end
+      end
+    else
+      aspects_for_discussion = @project.aspects.by_discussions(user_discussion_aspects).order(:id)
+      unless aspects_for_discussion.empty?
+        aspects_for_discussion.each do |asp|
+          @aspect = asp
+          @post_show = @aspect.life_tape_posts.first
+          if @aspect.id > @discontent_aspect.id or asp == aspects_for_discussion.last
+            if params[:empty_discussion]
+              break
+            elsif params[:save_form]
+              unless params[:discussion].empty?
+                @comment = @post.comments.create(:content => params[:discussion], :user => current_user)
+                current_user.journals.build(:type_event=>'life_tape_comment'+'_save', :project => @project, :body=>"#{@comment.content[0..48]}:#{@post.id}#comment_#{@comment.id}").save!
+                if @post.user!=current_user
+                  current_user.journals.build(:type_event=>'my_'+'life_tape_comment', :user_informed => @post.user, :project => @project, :body=>"#{@comment.content[0..24]}:#{@post.id}#comment_#{@comment.id}", :viewed=> false).save!
+                end
+                current_user.life_tape_post_discussions.create(post: @post, aspect: @discontent_aspect)
+              end
+              break
+            else
+              next
+            end
+          end
+        end
+      end
+    end
+
     respond_to do |format|
       format.js
     end

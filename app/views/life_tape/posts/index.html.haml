@@ -1,65 +1,57 @@
-- if not current_user.answered_for_help_stage?(1) and not @mini_help.nil?
-    =render partial: 'shared/small_help', object: @mini_help
-%h3
-    1 этап: Сбор информации.
-    %br
-    %small
+%section.widget
+  %header
+    %h3.text-info
+      1 этап: Сбор информации.
+      %br
+      %small
         Обсуждение тем процедуры:
         =@project.name
 
--#%small#filter_posts
--#    = render 'shared/filter_posts', project: @project.id, folder: @folder
-
-- if signed_in? and boss?
-    = link_to '+ Добавить новую тему для обсуждения', '#', id: 'add_record', onClick: 'get_life_tape_form(); return false;', class: 'btn btn-sm btn-success'
     %br
-= form_for @post,:url => {:project => @project.id, :action => @post.persisted? ? 'update' : 'create'},:remote => true,  :html => { :class => 'lt_new' } do |f|
+    - if signed_in? and @project.status == 1
+      .text-right
+        -if fast_discussion_able?
+          = link_to 'Начать быстрое обсуждение тем', life_tape_posts_fast_discussion_topics_path(@project) ,remote: true, id: 'fast_discussion_topics',  class: 'btn btn-sm btn-info '
+        -if boss?
+          =link_to '+ Добавить новую тему', new_discontent_aspect_path(@project),:remote => true,:id => "new_aspect",  class: 'btn btn-sm btn-primary'
+        %br
+        %br
 
-    = f.text_area :content, class: 'post', id: 'new_life_tape', onkeyup: "activate_button(this);"
-    .input-group.inv_element#button_block
-        =select_tag 'aspect_id', options_from_collection_for_select(@aspects, 'id', 'content'), promt: 'Выберите тему записи', class: 'form-control', style: 'width: 200px;'
-        = f.submit 'Сохранить',  class:'btn btn-success disabled btn-sm', id:'send_post'
-        %button.btn.btn-danger.btn-sm(type="button" onclick="reset_life_tape_form(); return false;" ) Отменить
+  .body
+    - if @post_show
+      -if @aspect.short_desc.present?
+        .row
+          .col-md-12
+            %section.widget
+              .body
+                .slimScrollDiv
+                  %div{:id => "edit_aspect_desc_#{@aspect.id}"}=@aspect.short_desc
+
+      .row
+        .col-md-6
+          %section.widget
+            .body
+              .chat-messages
+                = render :partial => 'shared/comment',:collection => @post_show.comments
+              - if signed_in?
+                = render :partial => 'shared/comment_form', :locals => { :comment => @comment,:post =>@post_show, :url_link => "/project/#{@project.id}/life_tape/posts/#{@post_show.id}/add_comment"}
+        .col-md-6
+          %section.widget
+            %header
+              -if boss?
+                .pull-right{:id => "redactor_aspect_#{@aspect.id}"}
+                  =link_to edit_discontent_aspect_path(@project,@aspect),:remote => true, :id => "edit_aspect_#{@aspect.id}" do
+                    %span{:class=>"glyphicon glyphicon-pencil text-success", :style=>"cursor:pointer;text-decoration:none;"}
+                  -#=link_to discontent_aspect_path(@project,@aspect), :method => :delete, :remote => true, :confirm => 'Удалить тему?',:id => "destroy_aspect_#{@aspect.id}" do
+                  -#  %span{:class=>"glyphicon glyphicon-remove text-danger", :style=>"cursor:pointer;text-decoration:none;"}
+              %h4.text-info{:id => "edit_aspect_content_#{@aspect.id}"}=@aspect.content
+
+            .body
+              - if  @aspect.knowbase_post
+                =@aspect.knowbase_post.content.html_safe
 
 
-.panel-group#accordion
-    -@posts.each do |post|
-        .panel.panel-default
-            .panel-heading
-                %h4.panel-title
-                    %a(data-toggle="collapse" data-parent="#accordion" href="#asp_#{post.id}" )
-                        -post.discontent_aspects.each do |asp|
-                            =asp.content
-                        %b="(#{post.comments.count})"
-                        %span.glyphicon.glyphicon-chevron-down
 
-                        %br
-                        %small=post.content
 
-            .panel-collapse.collapse{id:"asp_#{post.id}"}
-                .panel-body
-                    =render :partial => 'shared/comment', :collection => post.comments
-                    .media{:id => "comments_#{post.id}"}
-                    - if signed_in?
-                        = render :partial => 'shared/comment_form', :locals => { :comment => @comment, :post => post.id, :url_link => url_for(:controller => post.class.name.underscore.pluralize,:id => post.id, :action => 'add_comment')}
-
--#
--#
--#%table.table.table-stripped
--#    %tr
--#        %th Темы
--#        %th{width: "50%"} Последний комментарий
--#    -@posts.each do |post|
--#        %tr
--#            %td
--#                =render post
--#            %td
--#                -unless post.comments.empty?
--#                    =render :partial => 'shared/comment', :object =>  post.comments.last
--#                -else
--#                    -#= render :partial => 'shared/comment_form', :locals => { :comment => @comment, :url_link => url_for(:controller => post.class.name.underscore.pluralize, :action => 'add_comment')}
--#
--#
--##pagination
--#    = render 'shared/pagination'
-
+#render_fast_discussion_topics
+#aspect_modal

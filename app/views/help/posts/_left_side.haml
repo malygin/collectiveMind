@@ -1,8 +1,8 @@
-%div.well
-  %ol.nav.nav-pills.nav-stacked
-    -@stages.each do |key, value|
-      %li{class: ('active' if key.to_s==params[:id])}
-        %a(href="/project/#{@project.id}/help/posts/#{key}")
-          =key
-          =value[:name]
-          -#%i.glyphicon.glyphicon-exclamation-sign.pull-right
+
+%ol.side-nav
+  -@stages.each do |key, value|
+    %li{class: ('active' if key.to_s==params[:id])}
+      %a(href="/project/#{@project.id}/help/posts/#{key}")
+        =key
+        =value[:name]
+        -#%i.glyphicon.glyphicon-exclamation-sign.pull-right

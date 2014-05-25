@@ -8,7 +8,7 @@
   -#-if !params[:id].nil?
   =post_field.content
   %br
-  %ul(id="post_content_#{post_field.id}" style="margin-left:-20px;" )
+  %ul(id="post_content_#{post_field.id}" style="list-style: disc inside;" )
     -post_field.discontent_posts.each do |dp|
       %li{:id => "li_id_#{dp.id}"}=dp.content
   -#-else
@@ -29,7 +29,8 @@
 -#  %br
 -#-else
 -if @project.status == 3
-  %ul{:id => "where_form_#{post_field.id}_#{type_fd}", :class => "#{'border_note' if post_field.note_size?(type_fd) }", :style => "margin-bottom:0 !important;"}
+  %div
+  %ul{:id => "where_form_#{post_field.id}_#{type_fd}", :class => "#{'border_note' if post_field.note_size?(type_fd) }", :style => "list-style: disc inside; "}
     -post_field.post_notes(type_fd).each do |dpn|
       %div{:id => "post_note_#{dpn.id}"}
         -if boss?

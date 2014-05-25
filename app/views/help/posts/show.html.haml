@@ -1,19 +1,20 @@
-%div.tabbable
-  %ul.nav.nav-tabs.nav-justified
-    %li.active
-      %a(href="#short_desc" data-toggle="tab") Введение
-    %li
-      %a(href="#long_desc" data-toggle="tab") Подробное пояснение
-    -#%li
-    -#  %a(href="#how_to" data-toggle="tab") Как участвовать
-    -#%li
-    -#  %a(href="#helpful" data-toggle="tab") Полезные советы
-  .tab-content
-    #short_desc.tab-pane.fade.in.active
+=link_to '/project/'+@project.id.to_s do
+  %span.fa.fa-angle-double-left
+  вернуться к процедуре
+%section.widget.widget-tabs
+  %header
+    %ul.nav.nav-tabs
+      %li.active
+        %a(href="#short_desc" data-toggle="tab") Введение
+      %li
+        %a(href="#long_desc" data-toggle="tab") Подробное пояснение
+
+  .body.tab-content
+    #short_desc.tab-pane.clearfix.active
       %br
       -unless @posts[1].nil?
         = @posts[1].content.html_safe
-    #long_desc.tab-pane.fade.in
+    #long_desc.tab-pane
       %br
       -unless @posts[2].nil?
         = @posts[2].content.html_safe

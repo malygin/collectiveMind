@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140512211337) do
+ActiveRecord::Schema.define(:version => 20140524175327) do
 
   create_table "answers", :force => true do |t|
     t.string   "text"
@@ -503,12 +503,6 @@ ActiveRecord::Schema.define(:version => 20140512211337) do
     t.integer  "ozf4"
     t.integer  "ozs4"
     t.integer  "on4"
-    t.integer  "nep1"
-    t.integer  "nep2"
-    t.integer  "nep3"
-    t.integer  "nep4"
-    t.text     "nep"
-    t.integer  "all_grade"
     t.boolean  "first_stage"
     t.integer  "plan_post_first_cond_id"
   end
@@ -668,10 +662,12 @@ ActiveRecord::Schema.define(:version => 20140512211337) do
     t.string   "comment_admin"
     t.boolean  "trash",                  :default => false
     t.integer  "frustration_comment_id"
+    t.integer  "useful_frustration_id"
   end
 
   add_index "frustration_comments", ["created_at"], :name => "index_frustration_comments_on_created_at"
   add_index "frustration_comments", ["frustration_id"], :name => "index_frustration_comments_on_frustration_id"
+  add_index "frustration_comments", ["useful_frustration_id"], :name => "index_frustration_comments_on_useful_frustration_id"
   add_index "frustration_comments", ["user_id"], :name => "index_frustration_comments_on_user_id"
 
   create_table "frustration_essays", :force => true do |t|
@@ -781,6 +777,7 @@ ActiveRecord::Schema.define(:version => 20140512211337) do
     t.string   "title"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
+    t.integer  "aspect_id"
   end
 
   create_table "life_tape_categories", :force => true do |t|
@@ -813,6 +810,14 @@ ActiveRecord::Schema.define(:version => 20140512211337) do
   add_index "life_tape_comments", ["created_at"], :name => "index_life_tape_comments_on_created_at"
   add_index "life_tape_comments", ["post_id"], :name => "index_life_tape_comments_on_post_id"
   add_index "life_tape_comments", ["user_id"], :name => "index_life_tape_comments_on_user_id"
+
+  create_table "life_tape_post_discussions", :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "post_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+    t.integer  "aspect_id"
+  end
 
   create_table "life_tape_post_votings", :force => true do |t|
     t.integer  "user_id"
@@ -994,9 +999,6 @@ ActiveRecord::Schema.define(:version => 20140512211337) do
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end
-
-# Could not dump table "projects" because of following StandardError
-#   Unknown type 'serial' for column 'id'
 
   create_table "question_comment_votings", :force => true do |t|
     t.integer  "user_id"

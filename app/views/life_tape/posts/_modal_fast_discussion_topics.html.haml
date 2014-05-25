@@ -1,0 +1,9 @@
+#modal_fast_discussion_topics.modal.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :style => "display: none;", :tabindex => "-1"}
+  .modal-dialog
+    .modal-content
+      .modal-header
+        %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} ×
+        %h3#myModalLabel.modal-title Быстрое обсуждение тем
+      #form_fast_discussion
+        = render :partial => 'form_fast_discussion', :locals => { :aspect => @aspect, :post_show => @post_show }
+
