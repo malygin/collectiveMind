@@ -1,17 +1,21 @@
 %html
   %head
     =render 'meta'
-  %body
-    #wrapper
-      #header
+  %body.background.landing
+    .container
+      %header.page-header
+        %a(name='top')
         =render 'header_no_current_project'
+    #about.widget.widget-white.widget-about
+      .container
+        .col-sm-offset-1.col-sm-10
+          = yield
 
-      #middle
-        #container
-          #content_wider
-            = yield
-
-    #footer
-      = render 'footer'
+    %h2.thanks.text-align-center
+      Контакты: тел. +7-937-242-888-1, email: slava@mass-decision.ru
+    %p.lead.text-align-center
+      %a.back-to-top(href="#top")
+        наверх
+        %i.fa.fa-angle-up
 
 
