@@ -20,7 +20,7 @@ class Discontent::Aspect < ActiveRecord::Base
   has_many :voted_users, :through => :final_votings, :source => :user
   has_many :final_votings,:foreign_key => 'discontent_aspect_id', :class_name => "LifeTape::Voiting"
 
-  has_and_belongs_to_many :life_tape_posts, :class_name => 'LifeTape::Post', join_table: 'discontent_aspects_life_tape_posts', foreign_key: 'discontent_aspect_id', association_foreign_key: 'life_tape_post_id', :conditions => ['status = 0']
+  has_and_belongs_to_many :life_tape_posts, :class_name => 'LifeTape::Post', join_table: 'discontent_aspects_life_tape_posts', foreign_key: 'discontent_aspect_id', association_foreign_key: 'life_tape_post_id' #, :conditions => ['status = 0']
   scope :procedurial_only, where(:status, 0)
   scope :by_project, ->(project_id) { where("discontent_aspects.project_id = ?", project_id) }
   scope :minus_view, ->(aspects) { where("discontent_aspects.id NOT IN (#{aspects.join(", ")})") unless aspects.empty? }

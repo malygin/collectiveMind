@@ -29,6 +29,8 @@ class Knowbase::PostsController < ApplicationController
   end
 
   def new
+    @aspects = Discontent::Aspect.where(:project_id => @project)
+
     @post = current_model.new
     respond_to do |format|
       format.js
