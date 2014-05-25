@@ -48,7 +48,7 @@
 
             .body
               - if  @aspect.knowbase_post
-                =@aspect.knowbase_post.content
+                =@aspect.knowbase_post.content.html_safe
 
 
 

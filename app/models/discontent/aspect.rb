@@ -70,4 +70,8 @@ class Discontent::Aspect < ActiveRecord::Base
     .vote_top(revers)
   end
 
+  def to_s
+    self.content
+  end
+
 end

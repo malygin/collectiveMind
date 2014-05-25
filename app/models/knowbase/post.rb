@@ -1,5 +1,5 @@
 class Knowbase::Post < ActiveRecord::Base
-  attr_accessible :content, :title, :stage
+  attr_accessible :content, :title, :stage, :aspect_id
 
   validates :content, presence: true
   validates :title, presence: true

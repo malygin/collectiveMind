@@ -63,6 +63,7 @@ class Knowbase::PostsController < ApplicationController
   end
 
   def edit
+    @aspects = Discontent::Aspect.where(:project_id => @project)
     @post = current_model.find(params[:id])
   end
 
