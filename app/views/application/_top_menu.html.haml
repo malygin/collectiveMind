@@ -186,6 +186,10 @@
                   %small=Russian::strftime(journal.created_at,"%d %B %k:%M:%S ")
                   = link_to journal.user, user_path(@project,journal.user)
                   = journal_parser(journal, @project.id).html_safe
+        %li{:role => "presentation"}
+          %a.text-align-center.see-all{:href => "/project/#{@project.id}/journals/"}
+            Посмотреть все
+            %i.fa.fa-arrow-right
 
     %li.divider
 

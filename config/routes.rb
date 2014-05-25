@@ -40,7 +40,7 @@ scope '/project/:project' do
   get '/article1', :to => 'core/projects#article1'
   get '/article2', :to => 'core/projects#article2'
   get '/article3', :to => 'core/projects#article3'
-
+  get '/journals', :to => 'journal#index'
 
   namespace :help do
     post :save_help_answer, :to => 'posts#save_help_answer'

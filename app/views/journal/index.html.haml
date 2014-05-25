@@ -1,6 +1,18 @@
-- @journals.each do |journal|
-    %p.righttext
-        =Russian::strftime(journal.created_at,"%d %B %k:%M:%S ")
-        %b= journal.user.name_title
-        = journal_parser(journal, @project.id).html_safe
-= will_paginate @journals
+%section.widget
+  .body
+    %h3.text-center События
+    .text-center= will_paginate @journals
+    %ul
+      - @journals.each do |journal|
+        -  if journal_parser(journal, @project.id)
+          -#.imperfection_journal
+          -#  = link_to journal.user, user_path(@project,journal.user)
+          -#  = journal_parser(journal, @project.id).html_safe
+          -#  %br
+          -#  %small.text-muted=Russian::strftime(journal.created_at,"%d %B %k:%M:%S ")
+          %li{:role => "presentation"}
+            %p.message{:href => "#", :style => 'margin-left: 10px;'}
+              %small=Russian::strftime(journal.created_at,"%d %B %k:%M:%S ")
+              = link_to journal.user, user_path(@project,journal.user)
+              = journal_parser(journal, @project.id).html_safe
+    .text-center= will_paginate @journals
