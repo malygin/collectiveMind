@@ -1,4 +1,8 @@
 %header.text-align-center
+  %h2
+    %strong MASS
+    DECISION
+  %br
   %h4 Регистрация
 .body
   = form_for(resource, :as => resource_name, :url => registration_path(resource_name)) do |f|
@@ -18,12 +22,12 @@
         .input-group.input-group-lg
           %span.input-group-addon
             %i.fa.fa-lock
-          = f.text_field :password, placeholder: 'Ваш пароль', class: 'form-control input-lg'
+          = f.password_field :password, placeholder: 'Ваш пароль', class: 'form-control input-lg'
       .form-group
         .input-group.input-group-lg
           %span.input-group-addon
             %i.fa.fa-lock
-          = f.text_field :password, placeholder: 'Повторите пароль', class: 'form-control input-lg'
+          = f.password_field :password_confirmation, placeholder: 'Повторите пароль', class: 'form-control input-lg'
 
 
       .form-actions
