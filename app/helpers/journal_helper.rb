@@ -45,15 +45,8 @@ module JournalHelper
 			
       when 'life_tape_comment_save'
         s = j.body.split(':')
-        begin
-          if LifeTape::Post.find(s[1].split('#')[0]).status ==0
-            "добавил комментарий  "+  link_to("#{s[0]}..", "/project/#{project}/life_tape/posts/#{s[1]}" )
-          else
-            false
-          end
-        rescue
-          false
-        end
+       "добавил комментарий  "+  link_to("#{s[0]}..", "/project/#{project}/life_tape/posts/#{s[1]}" )
+
 
       when 'life_tape_post_save'
         s = j.body.split(':')
