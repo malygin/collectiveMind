@@ -182,6 +182,7 @@ $(window).load ->
         remove_able: 1
 
 $(window).load ->
+  $('.liFixar').liFixar()
 #  $(".chat-messages").slimScroll
 #    start: 'bottom'
 #    size: '5px'
