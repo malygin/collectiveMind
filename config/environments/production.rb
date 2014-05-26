@@ -102,14 +102,23 @@ CollectiveMind::Application.configure do
   #    :authentication       => 'plain',
   #    :enable_starttls_auto => true
   #}
+  # ActionMailer::Base.smtp_settings = {
+  #     :address              => 'smtp.yandex.com',
+  #     :port                 => 25,
+  #     :user_name            => 'mass-decision',
+  #     :password             => '11nekotyan',
+  #     :authentication       => 'plain',
+  #     :enable_starttls_auto => true
+  # }
   ActionMailer::Base.smtp_settings = {
-      :address              => 'smtp.yandex.com',
-      :port                 => 25,
-      :user_name            => 'mass-decision',
-      :password             => '11nekotyan',
-      :authentication       => 'plain',
-      :enable_starttls_auto => true
+      :port =>           '587',
+      :address =>        'smtp.mandrillapp.com',
+      :user_name =>      ENV['MANDRILL_USERNAME'],
+      :password =>       ENV['MANDRILL_APIKEY'],
+      :domain =>         'mandrillapp.com',
+      :authentication => :plain
   }
+  ActionMailer::Base.delivery_method = :smtp
   # Log the query plan for queries taking more than this (works
   # with SQLite, MySQL, and PostgreSQL)
   # config.active_record.auto_explain_threshold_in_seconds = 0.5
