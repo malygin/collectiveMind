@@ -2,10 +2,10 @@
   %header
     %h3.text-info
       1 этап: Сбор информации.
+      =@aspect.content
       %br
       %small
-        Обсуждение тем процедуры:
-        =@project.name
+        ="Обсуждение тем процедуры: '#{@project.name}'"
 
     %br
     - if signed_in? and @project.status == 1
@@ -19,14 +19,6 @@
 
   .body
     - if @post_show
-      -if @aspect.short_desc.present?
-        .row
-          .col-md-12
-            %section.widget
-              .body
-                .slimScrollDiv
-                  %div{:id => "edit_aspect_desc_#{@aspect.id}"}=@aspect.short_desc
-
       .row
         .col-md-6
           %section.widget
