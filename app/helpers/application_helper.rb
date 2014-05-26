@@ -180,4 +180,5 @@ module ApplicationHelper
     end
     true
   end
+
 end

@@ -17,12 +17,12 @@
         .input-group.input-group-lg
           %span.input-group-addon
             %i.eicon-user
-          = f.text_field :email, placeholder: 'Имя для сайта', class: 'form-control input-lg'
+          = f.text_field :name, placeholder: 'Имя для сайта', class: 'form-control input-lg'
       .form-group
         .input-group.input-group-lg
           %span.input-group-addon
             %i.fa.fa-lock
-          = f.password_field :password, placeholder: 'Ваш пароль', class: 'form-control input-lg'
+          = f.password_field :password, placeholder: 'Ваш пароль (не менее 5 символов)', class: 'form-control input-lg'
       .form-group
         .input-group.input-group-lg
           %span.input-group-addon
