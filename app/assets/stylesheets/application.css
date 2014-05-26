@@ -31,6 +31,10 @@
     font-size: 8px;
 }
 
+.text-info:hover{
+    color:#4ab0ce !important;
+}
+
 @charset "IBM866";
 @import url(./template/nv.d3.css);
 @import url(./fontello/css/fontello.css);

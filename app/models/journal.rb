@@ -7,15 +7,15 @@ class Journal < ActiveRecord::Base
   @types = %w(enter)
   @my_types = %w(my_life_tape_comment my_discontent_comment my_concept_comment my_discontent_note my_concept_note my_add_score_comment)
 
-  def self.events_for_user_feed(project_id, lim = 10)
+  def self.events_for_user_feed(project_id, lim = 5)
 		Journal.where(' project_id = ? AND type_event NOT  IN (?)',project_id, @types+ @my_types).limit(lim).order('created_at DESC')
   end
 
-  def self.events_for_user_show(project_id, user_id, lim = 9)
+  def self.events_for_user_show(project_id, user_id, lim = 5)
 		Journal.where(' project_id = ? AND type_event NOT IN (?)',project_id, @types).where("user_id= (?)", user_id).limit(lim).order('created_at DESC')
   end
 
-  def self.events_for_my_feed(project_id, user_id, lim=9)
+  def self.events_for_my_feed(project_id, user_id, lim=5)
     Journal.where(' project_id = ? AND type_event  IN (?) AND user_informed = ?',project_id, @my_types, user_id).limit(lim).order('created_at DESC')
   end
 
