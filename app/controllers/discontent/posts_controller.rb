@@ -168,33 +168,33 @@ class Discontent::PostsController < PostsController
     #@post.user = current_user
     #discontents = Discontent::Post.where(:project_id => @project.id)
     @flash = view_context.validate_dispost(params[name_of_model_for_param],params[:discontent_post_aspects])
-    r=nil
-    if params[:resave].nil? or !(@flash.nil? or @flash.empty?)
-      r = Discontent::Post.where(:project_id => @project.id, status: 0).collect {|d| [ d, d.content.similar(params[name_of_model_for_param][:content])]}
-      r.sort_by!(&:last)
-    end
+    # r=nil
+    # if params[:resave].nil? or !(@flash.nil? or @flash.empty?)
+    #   r = Discontent::Post.where(:project_id => @project.id, status: 0).collect {|d| [ d, d.content.similar(params[name_of_model_for_param][:content])]}
+    #   r.sort_by!(&:last)
+    # end
 
-    if r.nil? or  r.empty? or  r.last[1] < 40
+    # if r.nil? or  r.empty? or  r.last[1] < 40
       if @flash.nil? or @flash.empty?
        @post = @project.discontents.create(params[name_of_model_for_param])
        @post.user = current_user
        @post.save
        current_user.journals.build(:type_event=>name_of_model_for_param+"_save", :project => @project, :body=>"#{@post.content[0..100]}:#{@post.id}").save!
        current_user.add_score(:type => :add_discontent_post)
-
+       if !params[:discontent_post_aspects].nil? and @posts.nil? and (@flash.nil? or @flash.empty?)
+         params[:discontent_post_aspects].each do |asp|
+           aspect = Discontent::PostAspect.create(post_id: @post.id, aspect_id: asp.to_i)
+           aspect.save!
+         end
+       end
       end
       # redirect_to  :action=>'show', :id => @post.id, :project => @project
-      #return
-    else
-      @posts = r.collect {|d| d[0] if d[1]> 40}.compact.reverse
-    end
+      return
+    # else
+    #   @posts = r.collect {|d| d[0] if d[1]> 40}.compact.reverse
+    # end
 
-    if !params[:discontent_post_aspects].nil? and @posts.nil? and (@flash.nil? or @flash.empty?)
-      params[:discontent_post_aspects].each do |asp|
-        aspect = Discontent::PostAspect.create(post_id: @post.id, aspect_id: asp.to_i)
-        aspect.save!
-      end
-    end
+
 
     respond_to do |format|
       format.html

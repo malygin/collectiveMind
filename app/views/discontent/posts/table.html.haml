@@ -21,92 +21,92 @@
   =render partial:'form_wizard'
 %section.widget
   %header
-    %h3.text-danger
-      2 этап: Анализ ситуации.
-      %br
-      %small
-        Сбор несовершенств в рамках процедуры:
-        =@project.name
+    .row
+      .col-md-9
+        %h3.color-red
+          2 этап: Анализ ситуации.
+          =@aspect_post.content
+          %br
+          %small
+            Сбор несовершенств в рамках процедуры:
+            =@project.name
+      .col-md-3
+        .pull-right
+          = link_to 'Быстрый Старт!', discontent_posts_fast_discussion_discontents_path(@project) ,remote: true, id: 'fast_discussion_discontents',  class: 'btn btn-lg btn-danger'
+
+
   .body
 
     %a{name:'top'}
     - if signed_in? and @project.status ==3
-      = link_to '+ Добавить свое несовершенство', new_discontent_post_path(@project, asp: params[:asp]) , id: 'add_record',  class: 'btn btn-sm btn-danger'
-      -#-if fast_discussion_able?
-      .pull-right
-        = link_to 'Быстрый Старт!', discontent_posts_fast_discussion_discontents_path(@project) ,remote: true, id: 'fast_discussion_discontents',  class: 'btn btn-lg btn-info'
+      = link_to '+ Добавить свое несовершенство', new_discontent_post_path(@project, asp: params[:asp]) , id: 'add_record',  class: 'btn  btn-danger'
       %br
       %br
-    - if @aspect_post
-      %h4.text-right
-        Тема:
-        =@aspect_post.content
-        %b="(#{@aspect_post.aspect_posts.count})"
 
-      - if can_union_discontents?(@project)
-        .col-md-12
-          %section.widget
-            .body.widget-panel
-              %ul.nav.nav-tabs#tab_posts
-                %li#old.active
-                  %a(href="#origin" data-toggle="tab" onclick="$('#new_posts').fadeOut();")
-                    Исходные #{@aspect_post.aspect_posts.count}
-                %li#new
-                  =link_to "Объединенные #{@project.discontent_accepted_post.count}", "/project/#{@project.id}/discontent/posts/unions", remote: true
-              %br
-              %br
-              .tab-content
-                #origin.tab-pane.fade.in.active
-                  .row
-                    .col-md-6
-                      %section.widget
-                        %header
-                          %h4
-                            Тип:
-                            %span.label.label-success Отсутствующие достоинства
-                            %hr
-                        .body
-                          .slimScrollDiv
-                            %ul.news-list
-                              =render partial:'post_short', collection: @aspect_post.aspect_posts.by_positive(@status)
-
-                    .col-md-6
-                      %section.widget
-                        %header
-                          %h4
-                            Тип:
-                            %span.label.label-danger Имеющиеся недостатки
+    - if can_union_discontents?(@project)
+      .col-md-12
+        %section.widget
+          .body.widget-panel
+            %ul.nav.nav-tabs#tab_posts
+              %li#old.active
+                %a(href="#origin" data-toggle="tab" onclick="$('#new_posts').fadeOut();")
+                  Исходные #{@aspect_post.aspect_posts.count}
+              %li#new
+                =link_to "Объединенные #{@project.discontent_accepted_post.count}", "/project/#{@project.id}/discontent/posts/unions", remote: true
+            %br
+            %br
+            .tab-content
+              #origin.tab-pane.fade.in.active
+                .row
+                  .col-md-6
+                    %section.widget
+                      %header
+                        %h4
+                          Тип:
+                          %span.label.label-success Отсутствующие достоинства
                           %hr
-                        .body
-                          .slimScrollDiv
-                            %ul.news-list
-                              =render partial:'post_short', collection: @aspect_post.aspect_posts.by_negative(@status)
-                #new_posts.tab-pane.fade
-      -else
-        .row
-          .col-md-6
-            %section.widget
-              %header
-                %h4
-                  Тип:
-                  %span.label.label-success Отсутствующие достоинства
-                  %hr
-              .body
-                .slimScrollDiv
-                  %ul.news-list
-                    =render partial:'post_short', collection: @aspect_post.aspect_posts.by_positive(@status)
+                      .body
+                        .slimScrollDiv
+                          %ul.news-list
+                            =render partial:'post_short', collection: @aspect_post.aspect_posts.by_positive(@status)
 
-          .col-md-6
-            %section.widget
-              %header
-                %h4
-                  Тип:
-                  %span.label.label-danger Имеющиеся недостатки
+                  .col-md-6
+                    %section.widget
+                      %header
+                        %h4
+                          Тип:
+                          %span.label.label-danger Имеющиеся недостатки
+                        %hr
+                      .body
+                        .slimScrollDiv
+                          %ul.news-list
+                            =render partial:'post_short', collection: @aspect_post.aspect_posts.by_negative(@status)
+              #new_posts.tab-pane.fade
+    -else
+      .row
+        .col-md-6
+          %section.widget
+            %header
+              %h4
+                Тип:
+                %span.label.label-success Отсутствующие достоинства
                 %hr
-              .body
-                .slimScrollDiv
-                  %ul.news-list
-                    =render partial:'post_short', collection: @aspect_post.aspect_posts.by_negative(@status)
+            .body
+              .slimScrollDiv
+                %ul.news-list
+                  =render partial:'post_short', collection: @aspect_post.aspect_posts.by_positive(@status)
+
+        .col-md-6
+          %section.widget
+            %header
+              %h4
+                Тип:
+                %span.label.label-danger Имеющиеся недостатки
+              %hr
+            .body
+              .slimScrollDiv
+                %ul.news-list
+                  =render partial:'post_short', collection: @aspect_post.aspect_posts.by_negative(@status)
 
 
     -#.panel-group#accordion

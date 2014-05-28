@@ -1,3 +1,6 @@
+=link_to '/project/'+@project.id.to_s do
+  %span.fa.fa-angle-double-left
+  вернуться
 %section.widget
   .body
     .media.option_for_selectize{id: "post_#{@post.id}", project: "#{@project.id}", post: "#{@post.id}"}
@@ -43,12 +46,6 @@
           include_blank: true,
           placeholder: "Добавьте несовершенство"
 
-        %br
-        %br
-        %br
-        %br
-        %br
-        %br
           %ul.media-list#comments.chat-messages
             = render :partial => 'shared/comment',:collection => @comments
         = will_paginate @comments
