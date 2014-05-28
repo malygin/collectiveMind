@@ -1,6 +1,19 @@
 # encoding: utf-8
 module JournalHelper
-
+  def journal_icon(j)
+    case j.type_event
+      when 'discontent_post_save'
+        'fa fa-plus color-red'
+      when 'discontent_post_update'
+        'fa fa-edit color-red'
+      when 'discontent_comment_save'
+        'fa fa-comment color-red'
+      when 'life_tapet_post_save'
+        'fa fa-plus color-teal'
+      when 'life_tape_comment_save'
+        'fa fa-comment color-teal'
+    end
+  end
 	def journal_parser(j, project)
 		case j.type_event
 			when 'add_score_essay'
@@ -45,15 +58,8 @@ module JournalHelper
 			
       when 'life_tape_comment_save'
         s = j.body.split(':')
-        begin
-          if LifeTape::Post.find(s[1].split('#')[0]).status ==0
-            "добавил комментарий  "+  link_to("#{s[0]}..", "/project/#{project}/life_tape/posts/#{s[1]}" )
-          else
-            false
-          end
-        rescue
-          false
-        end
+       "добавил комментарий  "+  link_to("#{s[0]}..", "/project/#{project}/life_tape/posts/#{s[1]}" )
+
 
       when 'life_tape_post_save'
         s = j.body.split(':')
@@ -69,15 +75,13 @@ module JournalHelper
 
       when 'discontent_comment_save'
         s = j.body.split(':')
-         if s.length == 1
-           'добавил(а) комментарий к '+  link_to('несовершенству', "/project/#{project}/discontent/posts/#{j.body}")
-         else
-           "добавил(а) комментарий '#{s[0]}...' к "+  link_to('несовершенству', "/project/#{project}/discontent/posts/#{s[1]}")
+        d = Discontent::Post.find(s[1])
+        "добавил(а) комментарий \"#{s[0]}...\" к несовершенству #{d.content[0..70]} "+  link_to(' подробнее', "/project/#{project}/discontent/posts/#{s[1]}")
 
-         end
       when 'discontent_post_save'
         s = j.body.split(':')
-				'добавил(а) несовершенство '+ link_to("#{s[0]}...", "/project/#{project}/discontent/posts/#{s[1]}")
+        d = Discontent::Post.find(s[1])
+				" добавил(а) несовершенство:  \" #{s[0]} \" к темам: \" "+d.discontent_post_aspects.to_sentence+'"'+ link_to(" подробнее", "/project/#{project}/discontent/posts/#{s[1]}")
       when 'discontent_post_update'
         s = j.body.split(':')
 				'отредактировал(а) несовершенство '+ link_to("#{s[0]}...", "/project/#{project}/discontent/posts/#{s[1]}")

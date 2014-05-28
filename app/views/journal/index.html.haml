@@ -1,18 +1,20 @@
 %section.widget
-  .body
+  %header
     %h3.text-center События
-    .text-center= will_paginate @journals
-    %ul
-      - @journals.each do |journal|
-        -  if journal_parser(journal, @project.id)
-          -#.imperfection_journal
-          -#  = link_to journal.user, user_path(@project,journal.user)
-          -#  = journal_parser(journal, @project.id).html_safe
-          -#  %br
-          -#  %small.text-muted=Russian::strftime(journal.created_at,"%d %B %k:%M:%S ")
-          %li{:role => "presentation"}
-            %p.message{:href => "#", :style => 'margin-left: 10px;'}
-              %small=Russian::strftime(journal.created_at,"%d %B %k:%M:%S ")
-              = link_to journal.user, user_path(@project,journal.user)
-              = journal_parser(journal, @project.id).html_safe
-    .text-center= will_paginate @journals
+
+  .body
+    .feed
+      .wrapper
+
+        .text-center= will_paginate @journals
+        - @journals.each do |journal|
+          -  if journal_parser(journal, @project.id)
+            %section.feed-item
+              .icon.pull-left
+                %i(class="#{journal_icon(journal)}")
+              .feed-item-body
+                = link_to journal.user, user_path(@project,journal.user)
+                = journal_parser(journal, @project.id).html_safe
+                %br
+                .time.pull-left=Russian::strftime(journal.created_at,"%d %B %k:%M:%S ")
+        .text-center= will_paginate @journals

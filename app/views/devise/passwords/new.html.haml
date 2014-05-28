@@ -1,4 +1,8 @@
 %header.text-align-center
+  %h2
+    %strong MASS
+    DECISION
+  %br
   %h4 Забыли пароль?
 = form_for(resource, :as => resource_name, :url => password_path(resource_name), :html => { :method => :post }) do |f|
   = devise_error_messages!
@@ -11,7 +15,7 @@
         = f.email_field :email, placeholder: 'Ваш Email', class: 'form-control input-lg'
 
   .form-actions
-    =f.submit 'Восстановить пароль', class: 'btn btn-block btn-lg btn-danger', id: 'Signin'
+    =f.submit 'Послать инструкции', class: 'btn btn-block btn-lg btn-danger', id: 'Signin'
     .forgot
       =link_to 'Вернуться', '/users/sign_in', class:'forgot'
 

@@ -1,46 +1,28 @@
--#= link_to image_tag("logo.png", :alt => "Colleсtive mind", :class => "round", ), root_path
-/ = @project.name
-/ = image_tag("improve.png")
--#- if signed_in?
--#
--#  .greybut
--#    -#= link_to image_tag('edit.png'), "/project/#{current_user.projects.first.id}/users/#{current_user.id}/edit"
--#    = current_user
--#    = link_to " - Выйти", destroy_user_session_path, :method => :delete,  class: "username"
--#
--#-else
--#  %span.blackbut
--#    = image_tag('exit.png')
--#    = link_to "Войти", "/users/sign_in", class: "exit"
-.top
-  .container
-    %ul.loginbar.pull-right
-      -#%li
-      -#  %i.icon-globe
-      -#  %a Languages
-      -#  %ul.lenguages
-      -#    %li.active
-      -#      %a{:href => "#"}
-      -#        English
-      -#        %i.icon-ok
-      -#    %li
-      -#      %a{:href => "#"} Spanish
-      -#    %li
-      -#      %a{:href => "#"} Russian
-      -#    %li
-      -#      %a{:href => "#"} German
-      -#%li.devider
-      -#%li
-      -#  %a{:href => "#"} Help
-      -#%li.devider
-      - if signed_in?
-        %li
-          = current_user
-          = link_to " - Выйти", destroy_user_session_path, :method => :delete,  class: "username"
-          -#%a{:href => "#"} Авторизоваться
-      -else
-        %li
-          = link_to "Войти", "/users/sign_in", class: "exit"
+
+.navbar
+  .logo.pull-left
+    %h2
+      %strong Mass
+      Decision
+
+  %ul.nav.navbar-nav.pull-right.navbar-menu.hidden-xs
+    - if signed_in?
+      %li
+        =link_to current_user, "project/11/users/#{current_user.id}"
+      %li
+        = link_to destroy_user_session_path, :method => :delete do
+          Выйти
+    -else
+      %li
+        = link_to "Войти", "/users/sign_in", class: "exit"
+      %li
+        = link_to "Зарегистрироваться", "/users/sign_up", class: "exit"
+  %ul.navbar-buttons.pull-right
+    - if signed_in?
+      %li
+        =link_to '/project/11', class:'btn btn-sm btn-danger'  do
+          Перейти к процедуре
+          %i.fa.fa-arrow-right
 
 
 

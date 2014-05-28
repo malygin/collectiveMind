@@ -1,32 +1,27 @@
 %section.widget
   %header
-    %h3.text-info
-      1 этап: Сбор информации.
-      %br
-      %small
-        Обсуждение тем процедуры:
-        =@project.name
+    .row
+      .col-md-9
+        %h3.text-info
+          1 этап: Сбор информации.
+          =@aspect.content
+          %br
+          %small
+            ="Обсуждение тем процедуры: '#{@project.name}'"
+          %br
+          %br
+      .col-md-3
 
-    %br
-    - if signed_in? and @project.status == 1
-      .text-right
-        -if fast_discussion_able?
-          = link_to 'Начать быстрое обсуждение тем', life_tape_posts_fast_discussion_topics_path(@project) ,remote: true, id: 'fast_discussion_topics',  class: 'btn btn-sm btn-info '
-        -if boss?
-          =link_to '+ Добавить новую тему', new_discontent_aspect_path(@project),:remote => true,:id => "new_aspect",  class: 'btn btn-sm btn-primary'
-        %br
-        %br
+        - if signed_in? and @project.status == 1
+          .text-right
+            -if fast_discussion_able?
+              = link_to 'Быстрый старт!', life_tape_posts_fast_discussion_topics_path(@project) ,remote: true, id: 'fast_discussion_topics',  class: 'btn btn-lg btn-info '
+            -if boss?
+              =link_to '+ Добавить новую тему', new_discontent_aspect_path(@project),:remote => true,:id => "new_aspect",  class: 'btn btn-sm btn-primary'
+
 
   .body
     - if @post_show
-      -if @aspect.short_desc.present?
-        .row
-          .col-md-12
-            %section.widget
-              .body
-                .slimScrollDiv
-                  %div{:id => "edit_aspect_desc_#{@aspect.id}"}=@aspect.short_desc
-
       .row
         .col-md-6
           %section.widget
@@ -38,6 +33,7 @@
         .col-md-6
           %section.widget
             %header
+
               -if boss?
                 .pull-right{:id => "redactor_aspect_#{@aspect.id}"}
                   =link_to edit_discontent_aspect_path(@project,@aspect),:remote => true, :id => "edit_aspect_#{@aspect.id}" do

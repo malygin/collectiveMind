@@ -1,236 +1,176 @@
--#.col-md-10.col-md-offset-1
--#  %nav.navbar.navbar-default{:role => "navigation"}
--#    .navbar-header
--#      %button.navbar-toggle{"data-target" => "#bs-example-navbar-collapse-1", "data-toggle" => "collapse", :type => "button"}
--#        %span.sr-only Toggle navigation
--#        %span.icon-bar
--#        %span.icon-bar
--#        %span.icon-bar
--#      =image_tag 'logo.png'
--#      &nbsp;
--#      -#%a.navbar-brand{:href => "#"} Brand
--#    / Collect the nav links, forms, and other content for toggling
--#    #bs-example-navbar-collapse-1.collapse.navbar-collapse
--#      %ul.nav.navbar-nav
--#        %li
--#          =link_to t('menu.main'), "/project/#{@project.id}"
--#        %li
--#          =link_to t('menu.help'), help_posts_path(@project)
--#        %li
--#          =link_to t('menu.base_knowledge'),   knowbase_posts_path(@project), style:'color: #5cb85c !important; font-weight: bold;'
--#        %li
--#          =link_to t('menu.raiting'), "/project/#{@project.id}/users"
--#        -#%li.dropdown
--#        -#  %a.dropdown-toggle{"data-toggle" => "dropdown", :href => "#"}
--#        -#    =t('menu.switch_procedure')
--#        -#    %b.caret
--#        -#  %ul.dropdown-menu
--#        -#    %li
--#        -#      %a{:href => "/procedure/1/stage/1?help1"} процедура в Ирбис
--#        -#    %li
--#        -#      %a{:href => "#"} процедура в СГУ
--#        -#    %li.divider
--#        -#    %li
--#        -#      %a{:href => "#"} Начать новую
--#
--#
--#      %ul.nav.navbar-nav.navbar-right
--#
--#        %li.dropdown
--#          %a.dropdown-toggle{"data-toggle" => "dropdown", :href => "#"}
--#            %ul.nav.nav-pills.nav-stacked
--#              =current_user
--#              - if @my_jounals > 0
--#                %span.label.label-danger=@my_jounals
--#          %ul.dropdown-menu
--#            %li
--#              = link_to user_path(@project, current_user) do
--#                Уведомления
--#                - if @my_jounals > 0
--#                  %span.label.label-danger=@my_jounals
--#            %li.disabled
--#              %a{:href => "#"}
--#                Сообщения
--#                -#%span.label.label-danger 1
--#            %li
--#              = link_to 'Редактировать профиль', edit_user_path(@project, current_user)
--#            %li.divider
--#            %li
--#              %a.dropdown-toggle(data-method="delete" href="/users/sign_out/" )
--#                Выход
--#%form.navbar-form.navbar-right{:role => "search"}
--#  .form-group
--#    %input.form-control{:placeholder => t('menu.search_text'), :type => "text"}/
--#  %button.btn.btn-default{:type => "submit"}=t('menu.search')
 
 
-.navbar
 
-  %ul.nav.navbar-nav.navbar-right.pull-right
-    %li.active
-      =link_to t('menu.help'), help_posts_path(@project), style:'width:auto; margin-right: 10px;'
-    %li.divider
-    %li.active
-      =link_to t('menu.base_knowledge'),   knowbase_posts_path(@project) , style:'width:auto; margin-right: 10px;'
-    %li.divider
+%ul.nav.navbar-nav.navbar-right.pull-right
+  %li.active
+    =link_to t('menu.help'), help_posts_path(@project), style:'width:auto; margin-right: 10px;'
+  %li.divider
+  %li.active
+    =link_to t('menu.base_knowledge'),   knowbase_posts_path(@project) , style:'width:auto; margin-right: 10px;'
+  %li.divider
 
-    %li.active
-      =link_to t('menu.raiting'), "/project/#{@project.id}/users" , style:'width:auto; margin-right: 10px;'
-    - if boss?
-      %li.divider
-      %li.dropdown
-        %a#settings.dropdown-toggle{"data-toggle" => "dropdown", :href => "#", :title => "Settings"}
-          %i.fa.fa-cog
-        %ul#settings-menu.dropdown-menu.messages{:role => "menu"}
-          .text-internal.text-center Настройки Администратора
-          %hr
-          -if @project.status == 1
-            %li{:role => "presentation"}
-              =link_to 'Начать голосование за темы',  next_stage_core_project_path(@project), id: 'change_stage'
-          -if @project.status == 2
-            %li{:role => "presentation"}
-              =link_to 'Вернуться к сбору тем',  pr_stage_core_project_path(@project), id: 'change_stage'
-            %br
-            %li{:role => "presentation"}
-              =link_to 'Начать сбор несовершенств',  next_stage_core_project_path(@project), id: 'change_stage'
-          -if @project.status == 3
-            %li{:role => "presentation"}
-              =link_to 'Вернуться к голосованию за темы',  pr_stage_core_project_path(@project), id: 'change_stage'
-            %br
-            %li{:role => "presentation"}
-              =link_to 'Начать группировку несовершенств',  next_stage_core_project_path(@project), id: 'change_stage'
-          -if @project.status == 4
-            %li{:role => "presentation"}
-              =link_to 'Вернуться к сбору несовершенств',  pr_stage_core_project_path(@project), id: 'change_stage'
-            %br
-            %li{:role => "presentation"}
-              =link_to 'Начать обсуждение группировок',  next_stage_core_project_path(@project), id: 'change_stage'
-          -if @project.status == 5
-            %li{:role => "presentation"}
-              =link_to 'Вернуться к группировке несовершенств',  pr_stage_core_project_path(@project), id: 'change_stage'
-            %br
-            %li{:role => "presentation"}
-              =link_to 'Начать голосование за несовершенства',  next_stage_core_project_path(@project), id: 'change_stage'
-          -if @project.status == 6
-            %li{:role => "presentation"}
-              =link_to 'Вернуться к обсуждению группировок',  pr_stage_core_project_path(@project), id: 'change_stage'
-            %br
-            %li{:role => "presentation"}
-              =link_to 'Начать сбор нововведений',  next_stage_core_project_path(@project), id: 'change_stage'
-          -if @project.status == 7
-            %li{:role => "presentation"}
-              =link_to 'Вернуться к голосованию за несовершенства',  pr_stage_core_project_path(@project), id: 'change_stage'
-            %br
-            %li{:role => "presentation"}
-              =link_to 'Начать голосование за нововведения',  next_stage_core_project_path(@project), id: 'change_stage'
-          -if @project.status == 8
-            %li{:role => "presentation"}
-              =link_to 'Вернуться к сбору нововведений',  pr_stage_core_project_path(@project), id: 'change_stage'
-            %br
-            %li{:role => "presentation"}
-              =link_to 'Начать сбор проектов',  next_stage_core_project_path(@project), id: 'change_stage'
-          -if @project.status == 9
-            %li{:role => "presentation"}
-              =link_to 'Вернуться к голосованию за нововведения',  pr_stage_core_project_path(@project), id: 'change_stage'
-            %br
-            %li{:role => "presentation"}
-              =link_to 'Начать выставление оценок',  next_stage_core_project_path(@project), id: 'change_stage'
-          -if @project.status == 10
-            %li{:role => "presentation"}
-              =link_to 'Вернуться к сбору проектов',  pr_stage_core_project_path(@project), id: 'change_stage'
-            %br
-            %li{:role => "presentation"}
-              =link_to 'Начать голосование',  next_stage_core_project_path(@project), id: 'change_stage'
-          -if @project.status == 11
-            %li{:role => "presentation"}
-              =link_to 'Вернуться к выставлению оценок',  pr_stage_core_project_path(@project), id: 'change_stage'
-            %br
-            %li{:role => "presentation"}
-              =link_to 'Завершить процедуру', next_stage_core_project_path(@project), id: 'change_stage'
+  %li.active
+    =link_to t('menu.raiting'), "/project/#{@project.id}/users" , style:'width:auto; margin-right: 10px;'
+  %li.divider
 
+  %li.active
+    =link_to "/project/#{@project.id}/journals" , style:'width:auto; margin-right: 10px;' do
+      =t('menu.news')
+      %span.badge.badge-danger !
+  - if boss?
     %li.divider
     %li.dropdown
-      %a#messages.dropdown-toggle{"data-toggle" => "dropdown", :href => "#", :title => "Messages"}
-        %i.fa.fa-comments
+      %a#settings.dropdown-toggle{"data-toggle" => "dropdown", :href => "#", :title => "Настройки"}
+        %i.fa.fa-cog
+      %ul#settings-menu.dropdown-menu.messages{:role => "menu"}
+        .text-internal.text-center Настройки Администратора
+        %hr
+        -if @project.status == 1
+          %li{:role => "presentation"}
+            =link_to 'Начать голосование за темы',  next_stage_core_project_path(@project), id: 'change_stage'
+        -if @project.status == 2
+          %li{:role => "presentation"}
+            =link_to 'Вернуться к сбору тем',  pr_stage_core_project_path(@project), id: 'change_stage'
+          %br
+          %li{:role => "presentation"}
+            =link_to 'Начать сбор несовершенств',  next_stage_core_project_path(@project), id: 'change_stage'
+        -if @project.status == 3
+          %li{:role => "presentation"}
+            =link_to 'Вернуться к голосованию за темы',  pr_stage_core_project_path(@project), id: 'change_stage'
+          %br
+          %li{:role => "presentation"}
+            =link_to 'Начать группировку несовершенств',  next_stage_core_project_path(@project), id: 'change_stage'
+        -if @project.status == 4
+          %li{:role => "presentation"}
+            =link_to 'Вернуться к сбору несовершенств',  pr_stage_core_project_path(@project), id: 'change_stage'
+          %br
+          %li{:role => "presentation"}
+            =link_to 'Начать обсуждение группировок',  next_stage_core_project_path(@project), id: 'change_stage'
+        -if @project.status == 5
+          %li{:role => "presentation"}
+            =link_to 'Вернуться к группировке несовершенств',  pr_stage_core_project_path(@project), id: 'change_stage'
+          %br
+          %li{:role => "presentation"}
+            =link_to 'Начать голосование за несовершенства',  next_stage_core_project_path(@project), id: 'change_stage'
+        -if @project.status == 6
+          %li{:role => "presentation"}
+            =link_to 'Вернуться к обсуждению группировок',  pr_stage_core_project_path(@project), id: 'change_stage'
+          %br
+          %li{:role => "presentation"}
+            =link_to 'Начать сбор нововведений',  next_stage_core_project_path(@project), id: 'change_stage'
+        -if @project.status == 7
+          %li{:role => "presentation"}
+            =link_to 'Вернуться к голосованию за несовершенства',  pr_stage_core_project_path(@project), id: 'change_stage'
+          %br
+          %li{:role => "presentation"}
+            =link_to 'Начать голосование за нововведения',  next_stage_core_project_path(@project), id: 'change_stage'
+        -if @project.status == 8
+          %li{:role => "presentation"}
+            =link_to 'Вернуться к сбору нововведений',  pr_stage_core_project_path(@project), id: 'change_stage'
+          %br
+          %li{:role => "presentation"}
+            =link_to 'Начать сбор проектов',  next_stage_core_project_path(@project), id: 'change_stage'
+        -if @project.status == 9
+          %li{:role => "presentation"}
+            =link_to 'Вернуться к голосованию за нововведения',  pr_stage_core_project_path(@project), id: 'change_stage'
+          %br
+          %li{:role => "presentation"}
+            =link_to 'Начать выставление оценок',  next_stage_core_project_path(@project), id: 'change_stage'
+        -if @project.status == 10
+          %li{:role => "presentation"}
+            =link_to 'Вернуться к сбору проектов',  pr_stage_core_project_path(@project), id: 'change_stage'
+          %br
+          %li{:role => "presentation"}
+            =link_to 'Начать голосование',  next_stage_core_project_path(@project), id: 'change_stage'
+        -if @project.status == 11
+          %li{:role => "presentation"}
+            =link_to 'Вернуться к выставлению оценок',  pr_stage_core_project_path(@project), id: 'change_stage'
+          %br
+          %li{:role => "presentation"}
+            =link_to 'Завершить процедуру', next_stage_core_project_path(@project), id: 'change_stage'
+
+  %li.divider
+  %li.dropdown
+    %a#messages.dropdown-toggle{"data-toggle" => "dropdown", :href => "#", :title => "Уведомления"}
+      %i.fa.fa-comments
+      - if @my_jounals > 0
+        %span.count(style='background: #e5603b;')=@my_jounals
+      -else
         %span.count=@my_jounals
 
-      %ul#messages-menu.dropdown-menu.messages{:role => "menu"}
-        -@my_journals = Journal.events_for_my_feed @project.id, current_user.id, 5
-        -unless @my_journals.nil?
-          - @my_journals.each do |journal|
+
+    %ul#messages-menu.dropdown-menu.messages{:role => "menu"}
+      -@my_journals = Journal.events_for_my_feed @project.id, current_user.id, 5
+      -unless @my_journals.nil?
+        - @my_journals.each do |journal|
+          %li{:role => "presentation"}
+            %p.message{:href => "#"}
+              =image_tag current_user.avatar.url(:thumb), style: 'margin-left: 10px;'
+              .details(style="margin-left: 60px;")
+                .sender=current_user.to_s
+                .text= journal_parser(journal, @project.id).html_safe
+
+      %li{:role => "presentation"}
+        %a.text-align-center.see-all{:href => "/project/#{@project.id}/users/#{current_user.id}"}
+          Посмотреть все
+          %i.fa.fa-arrow-right
+  %li.dropdown
+    %a.dropdown-toggle{"data-toggle" => "dropdown", :href => "#", :title => "События"}
+      %i.fa.fa-group
+    %ul#support-menu.dropdown-menu.support{:role => "menu"}
+      -unless @journals.nil?
+        - @journals.each do |journal|
+          -  if journal_parser(journal, @project.id)
             %li{:role => "presentation"}
-              %p.message{:href => "#"}
-                =image_tag current_user.avatar.url(:thumb), style: 'margin-left: 10px;'
-                .details(style="margin-left: 60px;")
-                  .sender=current_user.to_s
-                  .text= journal_parser(journal, @project.id).html_safe
+              %p.message{:href => "#", :style => 'margin-left: 10px;'}
+                %small=Russian::strftime(journal.created_at,"%d %B %k:%M:%S ")
+                = link_to journal.user, user_path(@project,journal.user)
+                = journal_parser(journal, @project.id).html_safe
+      %li{:role => "presentation"}
+        %a.text-align-center.see-all{:href => "/project/#{@project.id}/journals/"}
+          Посмотреть все
+          %i.fa.fa-arrow-right
 
-        %li{:role => "presentation"}
-          %a.text-align-center.see-all{:href => "/project/#{@project.id}/users/#{current_user.id}"}
-            Посмотреть все
-            %i.fa.fa-arrow-right
-    %li.dropdown
-      %a.dropdown-toggle{"data-toggle" => "dropdown", :href => "#", :title => "8 support tickets"}
-        %i.fa.fa-group
-      %ul#support-menu.dropdown-menu.support{:role => "menu"}
-        -unless @journals.nil?
-          - @journals.each do |journal|
-            -  if journal_parser(journal, @project.id)
-              -#.imperfection_journal
-              -#  = link_to journal.user, user_path(@project,journal.user)
-              -#  = journal_parser(journal, @project.id).html_safe
-              -#  %br
-              -#  %small.text-muted=Russian::strftime(journal.created_at,"%d %B %k:%M:%S ")
-              %li{:role => "presentation"}
-                %p.message{:href => "#", :style => 'margin-left: 10px;'}
-                  %small=Russian::strftime(journal.created_at,"%d %B %k:%M:%S ")
-                  = link_to journal.user, user_path(@project,journal.user)
-                  = journal_parser(journal, @project.id).html_safe
-        %li{:role => "presentation"}
-          %a.text-align-center.see-all{:href => "/project/#{@project.id}/journals/"}
-            Посмотреть все
-            %i.fa.fa-arrow-right
+  %li.divider
 
-    %li.divider
+  %li.hidden-xs.dropdown
+    %a#account.dropdown-toggle{"data-toggle" => "dropdown", :href => "#", :title => "Account"}
+      %i.fa.fa-user
+    %ul#account-menu.dropdown-menu.account{:role => "menu"}
+      %li.account-picture{:role => "presentation"}
+        %a.pull-left(href="/project/#{@project.id}/users/#{current_user.id}")
+          = image_tag current_user.avatar.url(:thumb),  class: "media-object"
+        =current_user.to_s
+        -#%p
+        -#  =link_to current_user, user_path(@project, current_user)
+      %li{:role => "presentation"}
+        = link_to 'Редактировать профиль', edit_user_path(@project, current_user)
 
-    %li.hidden-xs.dropdown
-      %a#account.dropdown-toggle{"data-toggle" => "dropdown", :href => "#", :title => "Account"}
-        %i.fa.fa-user
-      %ul#account-menu.dropdown-menu.account{:role => "menu"}
-        %li.account-picture{:role => "presentation"}
-          %a.pull-left(href="/project/#{@project.id}/users/#{current_user.id}")
-            = image_tag current_user.avatar.url(:thumb),  class: "media-object"
-          =current_user.to_s
-          -#%p
-          -#  =link_to current_user, user_path(@project, current_user)
-        %li{:role => "presentation"}
-          = link_to 'Редактировать профиль', edit_user_path(@project, current_user)
+      %li{:role => "presentation"}
+        =link_to 'Уведомления', user_path(@project, current_user)
 
-        %li{:role => "presentation"}
-          =link_to 'Уведомления', user_path(@project, current_user)
-
-    %li.visible-xs
-      %a.btn-navbar{"data-target" => ".sidebar", "data-toggle" => "collapse", :href => "#", :title => ""}
-        %i.fa.fa-bars
-    %li.hidden-xs
-      %a{:href => "/users/sign_out/", "data-method" => "delete"}
-        %i.fa.fa-sign-out
-    -#      -#%a.link{:href => "component_calendar.html"}
-    -#      -#  %i.fa.fa-calendar
-    -#      -#= link_to 'Уведомления', user_path(@project, current_user)
-    -#      -#- if @my_jounals > 0
-    -#      -#  %span.label.label-danger=@my_jounals
-    -#
-    -#      -#%li.disabled{:role => "presentation"}
-    -#      -#  %a.link{:href => "#"}
-    -#      -#    %i.fa.fa-inbox
-    -#      -#    Сообщения
-    -#%li.visible-xs
-    -#  %a.btn-navbar{"data-target" => ".sidebar", "data-toggle" => "collapse", :href => "#", :title => ""}
-    -#    %i.fa.fa-bars
-    -#%li.hidden-xs
-    -#  %a{:href => "/users/sign_out/", "data-method" => "delete"}
-    -#    %i.fa.fa-sign-out
+  %li.visible-xs
+    %a.btn-navbar{"data-target" => ".sidebar", "data-toggle" => "collapse", :href => "#", :title => ""}
+      %i.fa.fa-bars
+  %li.hidden-xs
+    %a{:href => "/users/sign_out/", "data-method" => "delete"}
+      %i.fa.fa-sign-out
+  -#      -#%a.link{:href => "component_calendar.html"}
+  -#      -#  %i.fa.fa-calendar
+  -#      -#= link_to 'Уведомления', user_path(@project, current_user)
+  -#      -#- if @my_jounals > 0
+  -#      -#  %span.label.label-danger=@my_jounals
+  -#
+  -#      -#%li.disabled{:role => "presentation"}
+  -#      -#  %a.link{:href => "#"}
+  -#      -#    %i.fa.fa-inbox
+  -#      -#    Сообщения
+  -#%li.visible-xs
+  -#  %a.btn-navbar{"data-target" => ".sidebar", "data-toggle" => "collapse", :href => "#", :title => ""}
+  -#    %i.fa.fa-bars
+  -#%li.hidden-xs
+  -#  %a{:href => "/users/sign_out/", "data-method" => "delete"}
+  -#    %i.fa.fa-sign-out
 
 -#%form#search-form.navbar-form.pull-right{:role => "search"}
 -#  %input.search-query{:placeholder => "Search...", :type => "search"}/

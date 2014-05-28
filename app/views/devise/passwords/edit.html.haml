@@ -1,14 +1,41 @@
-%h2 Change your password
+%header.text-align-center
+  %h2
+    %strong MASS
+    DECISION
+  %br
+  %h4 Сменить пароль
 = form_for(resource, :as => resource_name, :url => password_path(resource_name), :html => { :method => :put }) do |f|
   = devise_error_messages!
   = f.hidden_field :reset_password_token
-  %div
-    = f.label :password, "New password"
-    %br/
-    = f.password_field :password, :autofocus => true
-  %div
-    = f.label :password_confirmation, "Confirm new password"
-    %br/
-    = f.password_field :password_confirmation
-  %div= f.submit "Change my password"
-= render "devise/shared/links"
+
+  %fieldset
+    .form-group
+      .input-group.input-group-lg
+        %span.input-group-addon
+          %i.fa.fa-lock
+        = f.password_field :password, placeholder: 'Ваш пароль', class: 'form-control input-lg'
+    .form-group
+      .input-group.input-group-lg
+        %span.input-group-addon
+          %i.fa.fa-lock
+        = f.password_field :password_confirmation, placeholder: 'Повторите пароль', class: 'form-control input-lg'
+
+  .form-actions
+    =f.submit 'Сменить пароль', class: 'btn btn-block btn-lg btn-danger', id: 'Signin'
+    .forgot
+      =link_to 'Вернуться', '/users/sign_in', class:'forgot'
+
+-#%h2 Смените пароль
+-#= form_for(resource, :as => resource_name, :url => password_path(resource_name), :html => { :method => :put }) do |f|
+-#  = devise_error_messages!
+-#  = f.hidden_field :reset_password_token
+-#  %div
+-#    = f.label :password, "New password"
+-#    %br/
+-#    = f.password :password, :autofocus => true
+-#  %div
+-#    = f.label :password_confirmation, "Confirm new password"
+-#    %br/
+-#    = f.password_field :password_confirmation
+-#  %div= f.submit "Change my password"
+-#= render "devise/shared/links"
