@@ -81,7 +81,7 @@ module JournalHelper
       when 'discontent_post_save'
         s = j.body.split(':')
         d = Discontent::Post.find(s[1])
-				" добавил(а) несовершенство:  \" #{s[0]} \" к темам: \" "+d.discontent_post_aspects.to_sentence+'"'+ link_to(" подробнее", "/project/#{project}/discontent/posts/#{s[1]}")
+				" добавил(а) несовершенство:  " + link_to(" #{s[0]}", "/project/#{project}/discontent/posts/#{s[1]}") +" к темам: \" "+d.discontent_post_aspects.to_sentence+'"'
       when 'discontent_post_update'
         s = j.body.split(':')
 				'отредактировал(а) несовершенство '+ link_to("#{s[0]}...", "/project/#{project}/discontent/posts/#{s[1]}")

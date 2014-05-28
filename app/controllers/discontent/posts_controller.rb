@@ -179,7 +179,7 @@ class Discontent::PostsController < PostsController
        @post = @project.discontents.create(params[name_of_model_for_param])
        @post.user = current_user
        @post.save
-       current_user.journals.build(:type_event=>name_of_model_for_param+"_save", :project => @project, :body=>"#{@post.content[0..100]}:#{@post.id}").save!
+       current_user.journals.build(:type_event=>name_of_model_for_param+"_save", :project => @project, :body=>"#{@post.content}:#{@post.id}").save!
        current_user.add_score(:type => :add_discontent_post)
        if !params[:discontent_post_aspects].nil? and @posts.nil? and (@flash.nil? or @flash.empty?)
          params[:discontent_post_aspects].each do |asp|

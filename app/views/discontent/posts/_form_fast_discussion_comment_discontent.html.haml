@@ -5,14 +5,14 @@
   -#= select_tag 'select_for_discussion_aspects', options_from_collection_for_select(@aspects, "id", "content"), class: 'select-block-level', onchange: "discussion_select_aspect(this);"
   %br
   .text-info#comment_info(style='display:none;')
-    На данный момент нет подходящих несовершенств для обсуждения
+    Пока ни одно несовершенство по данной теме не было обработано
   %hr
   %h4.text-success Несовершенство:
   %div{:id => "update_discontent_discussion"}
     = render partial: 'post_for_discussion', object: @post unless @post.nil?
   %br
   %p
-    Напишите свое мнение и переходите к следующему несовершенству. Вы можете пропустить несовершенство или закрыть обсуждение.
+    Прокомментируйте указанное несовершенство и переходите к следующему.
   %br
   =text_area_tag "discussion",'', :class => "form-control", rows: 6, style: 'width: 100%;',placeholder: 'Ваше мнение', id:'discussion_text_area'
   %br
