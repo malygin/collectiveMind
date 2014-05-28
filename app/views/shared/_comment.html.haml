@@ -5,6 +5,8 @@
   .chat-message-body.stage_menu1{id: "comment_content_#{comment.id}"}
     .sender
       =link_to comment.user, user_path(@project, comment.user)
+      - if comment.user.last_seen and (comment.user.last_seen >  30.minutes.ago)
+        %span.fa.fa-circle.text-success
     .text
       %div{id: "comment_text_#{comment.id}"}
         =simple_format(comment.content)
