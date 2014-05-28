@@ -1,11 +1,11 @@
-- if !@posts.nil? or !(@flash.nil? or @flash.empty?)
+- if  !(@flash.nil? or @flash.empty?)
   $("#discontent_success").fadeOut();
   -unless @posts.nil?
     $("#discontent_warning").fadeIn();
     $('#posts').html("#{escape_javascript(render  @posts)}");
-  $('#send_post').html('Все равно сохранить');
+  -#$('#send_post').html('Все равно сохранить');
   -#$('#send_post').toggleClass('disabled')
-  $('#new_discontent').append('<input id="new_discontent_hidden" type="hidden" name="resave" value="true" />');
+  -#$('#new_discontent').append('<input id="new_discontent_hidden" type="hidden" name="resave" value="true" />');
   document.location.href='#flash-panel';
 -else
   $("#discontent_success").fadeIn()
