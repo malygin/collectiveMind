@@ -144,7 +144,7 @@ class User < ActiveRecord::Base
         self.add_score_by_type(10, :score_g)
       when :plus_comment
         self.add_score_by_type(5, :score_a)
-        self.journals.build(:type_event=>'useful_comment', :project => h[:project], :body=>"#{h[:comment].content[0..24]}:#{h[:path]}/#{h[:comment].post.id}#comment_#{h[:comment].id}").save!
+        # self.journals.build(:type_event=>'useful_comment', :project => h[:project], :body=>"#{h[:comment].content[0..24]}:#{h[:path]}/#{h[:comment].post.id}#comment_#{h[:comment].id}").save!
         self.journals.build(:type_event=>'my_add_score_comment', :project => h[:project], :user_informed => self, :body=>"5:#{h[:path]}/#{h[:comment].post.id}#comment_#{h[:comment].id}", :viewed=> false).save!
 
       when :plus_post
@@ -153,18 +153,12 @@ class User < ActiveRecord::Base
         self.add_score_by_type(30, :score_g)  if h[:post].instance_of? Discontent::Post
         self.add_score_by_type(10, :score_g)  if h[:post].instance_of? LifeTape::Post
 
-        self.journals.build(:type_event=>'useful_post', :project => h[:project], :body=>"#{h[:post].content[0..24]}:#{h[:path]}/#{h[:post].id}").save!
+        # self.journals.build(:type_event=>'useful_post', :project => h[:project], :body=>"#{h[:post].content[0..24]}:#{h[:path]}/#{h[:post].id}").save!
 
       when :to_archive_life_tape_post
         self.add_score_by_type(-10, :score_g)
       when :add_discontent_post
-        if h[:object].whend? and h[:object].whered? and h[:object].style?
-          self.add_score_by_type(30, :score_g)
-        elsif  h[:object].whend? and h[:object].whered?
-          self.add_score_by_type(20, :score_g)
-        else
-          self.add_score_by_type(10, :score_g)
-        end
+        self.add_score_by_type(20, :score_g)
     end
 
   end
