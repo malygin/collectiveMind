@@ -4,6 +4,8 @@
   -#%label{:for => "select_for_aspects"} Выберите тему
   -#= select_tag 'select_for_discussion_aspects', options_from_collection_for_select(@aspects, "id", "content"), class: 'select-block-level', onchange: "discussion_select_aspect(this);"
   %br
+  .text-info#comment_info(style='display:none;')
+    На данный момент нет подходящих несовершенств для обсуждения
   %hr
   %h4.text-success Несовершенство:
   %div{:id => "update_discontent_discussion"}
