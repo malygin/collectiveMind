@@ -7,7 +7,7 @@
         =@project.status_title(:life_tape_posts)
     - if request.original_url.include? 'life_tape'
       %ul.nav.nav-tabs.nav-stacked.panel-collapse
-        -@project.aspects.procedurial_only.each do |asp|
+        -@project.aspects.each do |asp|
           %li{class:"#{'active' if asp == @aspect}"}
             = link_to "/project/#{@project.id}/life_tape/posts?asp=#{asp.id}" do
               %i.fa.fa-minus(style="font-size: 8px;")
@@ -23,7 +23,7 @@
           =@project.status_title(:discontent_posts)
       - if request.original_url.include? 'discontent'
         %ul.nav.nav-tabs.nav-stacked.panel-collapse
-          -@project.aspects.procedurial_only.each do |asp|
+          -@project.proc_aspects.each do |asp|
             %li
               = link_to "/project/#{@project.id}/discontent/posts?asp=#{asp.id}" do
                 %i.fa.fa-minus(style="font-size: 8px;")
