@@ -76,7 +76,7 @@ module JournalHelper
       when 'discontent_comment_save'
         s = j.body.split(':')
         d = Discontent::Post.find(s[1])
-        "добавил(а) комментарий \"#{s[0]}...\" к несовершенству \"#{d.content[0..70]}\" "+  link_to(' подробнее', "/project/#{project}/discontent/posts/#{s[1]}")
+        "добавил(а) комментарий "+ link_to(s[0], "/project/#{project}/discontent/posts/#{s[1]}")+ " к несовершенству "+  link_to(d.content[0..150], "/project/#{project}/discontent/posts/#{s[1]}")
 
       when 'discontent_post_save'
         s = j.body.split(':')
