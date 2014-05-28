@@ -219,6 +219,11 @@ $(window).load ->
       option: (item, escape) ->
         return '<div>'+item.show_content+'</div>'
 
+  $("input.autocomplete ").autocomplete(
+    minLength: 0
+  ).click ->
+    $(this).autocomplete "search", ""
+    return
 
 #@activate_button_editor = ->
 #  input = $('#title-textfield')
