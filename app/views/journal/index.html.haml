@@ -6,8 +6,8 @@
     .feed
       .wrapper
 
-        .text-center= will_paginate @journals
-        - @journals.each do |journal|
+        .text-center= will_paginate @journals_feed
+        - @journals_feed.each do |journal|
           -  if journal_parser(journal, @project.id)
             %section.feed-item
               .icon.pull-left
@@ -17,4 +17,4 @@
                 = journal_parser(journal, @project.id).html_safe
                 %br
                 .time.pull-left=Russian::strftime(journal.created_at,"%d %B %k:%M:%S ")
-        .text-center= will_paginate @journals
+        .text-center= will_paginate @journals_feed

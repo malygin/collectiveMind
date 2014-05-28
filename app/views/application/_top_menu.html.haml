@@ -123,9 +123,11 @@
           -  if journal_parser(journal, @project.id)
             %li{:role => "presentation"}
               %p.message{:href => "#", :style => 'margin-left: 10px;'}
-                %small=Russian::strftime(journal.created_at,"%d %B %k:%M:%S ")
                 = link_to journal.user, user_path(@project,journal.user)
                 = journal_parser(journal, @project.id).html_safe
+                %br
+                %small=Russian::strftime(journal.created_at,"%d %B %k:%M:%S ")
+
       %li{:role => "presentation"}
         %a.text-align-center.see-all{:href => "/project/#{@project.id}/journals/"}
           Посмотреть все
