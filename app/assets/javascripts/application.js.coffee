@@ -9,8 +9,12 @@
 #= require selectize
 #= require liFixar/jquery.liFixar
 #= require slimscroll/jquery.slimscroll
-
-
+#= require wizard/wizard
+#= require wizard/jquery.bootstrap.wizard
+#= require wizard/underscore-min
+#= require wizard/bootstrap-datepicker
+#= require wizard/jquery.maskedinput
+#= require wizard/select2
 
 $('#modal_help').modal
   keyboard: false
@@ -318,13 +322,49 @@ $('#select_for_aspects').on 'change', ->
   $(el).parent().parent().remove()
   $("#asp_"+cp).remove()
 
+@activate_wizard= ->
+  $('.chzn-select').select2();
+  $("#destination").mask("99999");
+  $("#credit").mask("9999-9999-9999-9999");
+  $("#expiration-date").datepicker();
+  $("#wizard").bootstrapWizard onTabShow: (tab, navigation, index) ->
+    $total = navigation.find("li").length
+    $current = index + 1
+    $percent = ($current / $total) * 100
+    $wizard = $("#wizard")
+    $wizard.find(".progress-bar").css width: $percent + "%"
+    if $current >= $total
+      $wizard.find(".pager .next").hide()
+      $wizard.find(".pager .finish").show()
+      $wizard.find(".pager .finish").removeClass "disabled"
+    else
+      $wizard.find(".pager .next").show()
+      $wizard.find(".pager .finish").hide()
+    return
 
-#aspect_concepts
-#    $("#select_concept").html "<option>загрузка...</option>"
-#      $("#select_concept").html "<option>- выберите нововведение -</option>"
-#@load_discontent_for_cond= (el)->
-#  $.ajax({
-#    type: "POST",
-#    url: "/project/1/plan/posts/get_cond",
-#    data: { pa: $('#select_'+el).val() },
-#  })
+
+@discussion_select_aspect= (el)->
+  optsel = $("#option_for_select_discontent")
+  project_id = parseInt(optsel.attr('project'))
+  aspect_id = $(el).val()
+  if aspect_id != ''
+    $.ajax
+      url: "/project/#{project_id}/discontent/posts/fast_discussion_discontents"
+      type: "get"
+      data:
+        aspect_id: aspect_id
+
+@user_check_field= (el,check_field)->
+  optsel = $("#option_for_select_discontent")
+  project_id = parseInt(optsel.attr('project'))
+  if ( $(el).is( ":checked" ) )
+    status = true
+  else
+    status = false
+  if check_field != ''
+    $.ajax
+      url: "/project/#{project_id}/discontent/posts/check_field"
+      type: "get"
+      data:
+        check_field: check_field
+        status: status

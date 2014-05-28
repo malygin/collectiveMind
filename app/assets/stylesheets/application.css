@@ -137,6 +137,9 @@ p, a {
     overflow: visible !important;
 }
 
+.wizard-navigation.nav-pills li.active a {
+    background-color: #618FB0 !important;
+}
 /*todo my styles bottom*/
 /******************************************************************************************************************************************************/
 

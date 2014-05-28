@@ -18,7 +18,8 @@ class Discontent::Post < ActiveRecord::Base
 
   has_many :concept_conditions, :class_name => 'Concept::PostAspect', :foreign_key => 'discontent_aspect_id'
 
-
+  has_many :discontent_post_discussions, :class_name => 'Discontent::PostDiscussion'
+  has_many :dispost_discussion_users, :through => :discontent_post_discussions, :source => :user, :class_name => 'User'
 
   has_many :plan_conditions, :class_name => 'Plan::PostAspect', :foreign_key => 'discontent_aspect_id'
 
@@ -41,6 +42,10 @@ class Discontent::Post < ActiveRecord::Base
   scope :united_for_vote,  ->(project,voted){where(project_id: project, status: 2).where("discontent_posts.id NOT IN (?)", voted<<0).order(:id)}
 
   scope :for_union, ->(project){ where("discontent_posts.status = 0 and discontent_posts.project_id = ? ", project) }
+
+  scope :posts_for_discussions, ->(p){where(:project_id => p.id, status: 0).where("discontent_posts.status_content = 't' and discontent_posts.status_whered = 't' and discontent_posts.status_whend = 't'")}
+
+  scope :by_discussions, ->(posts) { where("discontent_posts.id NOT IN (#{posts.join(", ")})") unless posts.empty? }
 
   #scope :uniquely_whend, :select => 'distinct whend'
   #scope :uniquely_whered, :select => 'distinct whered'

@@ -93,8 +93,8 @@
           %br
         .com-md-6
           %br
-          = select_tag 'select_for_aspects', options_from_collection_for_select(@aspects.minus_view(@aspects_for_post.nil? ? [] : @aspects_for_post.pluck(:id)), "id", "content"),
-           :prompt => 'Выберите тему' , style:'margin-left:15px; margin-top:10px; height: 30px;'
+          = select_tag 'select_for_aspects', options_from_collection_for_select(@aspects.minus_view(@aspects_for_post.nil? ? (@asp.nil? ? [] : [@asp.id]) : @aspects_for_post.pluck(:id)), "id", "content"),
+          :prompt => 'Выберите тему' , style:'margin-left:15px; margin-top:10px; height: 30px;'
           %br
           #add_post_aspects(style="margin-left: 52%;margin-top: 10px;")
             -unless @aspects_for_post.nil?
@@ -103,6 +103,11 @@
                   %input{name: "discontent_post_aspects[]", type: "hidden", value: "#{ap.id}"}/
                   %span.glyphicon.glyphicon-remove.text-danger.pull-left{onclick: "remove_discontent_aspect('#{ap.id}','#{ap.content}');", style: "cursor:pointer;text-decoration:none;font-size:15px;"}
                   %span.span_aspect.label.label-t{id: "#{ap.id}"}=ap.content
+            -unless @asp.nil?
+              %div{id: "aspect_#{@asp.id}"}
+                %input{name: "discontent_post_aspects[]", type: "hidden", value: "#{@asp.id}"}/
+                %span.glyphicon.glyphicon-remove.text-danger.pull-left{onclick: "remove_discontent_aspect('#{@asp.id}','#{@asp.content}');", style: "cursor:pointer;text-decoration:none;font-size:15px;"}
+                %span.span_aspect.label.label-t{id: "#{@asp.id}"}=@asp.content
           %br
 
       .row

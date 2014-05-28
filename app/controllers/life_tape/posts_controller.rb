@@ -98,12 +98,10 @@ end
     @project = Core::Project.find(params[:project])
     @post = LifeTape::Post.find(params[:post_show]) unless params[:post_show].nil?
     @discontent_aspect = Discontent::Aspect.find(params[:aspect]) unless params[:aspect].nil?
-    #user_discussion_posts = current_user.user_discussion_posts.where(:project_id => @project).pluck(:id)
+
     user_discussion_aspects = current_user.user_discussion_aspects.where(:project_id => @project).pluck(:id)
 
     if @discontent_aspect.nil?
-      #posts_for_discussion = LifeTape::Post.by_discussions(user_discussion_posts).where(:project_id => @project).order(:id)
-      #aspects_for_discussion = Discontent::Aspect.by_discussions(user_discussion_aspects).where(:project_id => @project).order(:id)
       aspects_for_discussion = @project.aspects.by_discussions(user_discussion_aspects).order(:id)
       unless aspects_for_discussion.empty?
         aspects_for_discussion.each do |asp|

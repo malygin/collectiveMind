@@ -100,7 +100,7 @@ class Discontent::PostsController < PostsController
   end
 
  def new
-
+    @asp = Discontent::Aspect.find(params[:asp]) unless params[:asp].nil?
     @post = current_model.new
     @replace_posts =[]
     @accepted_posts = Discontent::Post.where(status: 2, project_id:  @project)
@@ -342,5 +342,90 @@ class Discontent::PostsController < PostsController
     def set_required
       @post = Discontent::Post.find(params[:id])
       @post.update_attributes(:status => 4) if boss?
+    end
+
+    def fast_discussion_discontents
+      @project = Core::Project.find(params[:project])
+      @aspects = Discontent::Aspect.where(:project_id => @project, :status => 0).order(:id)
+      @discontent_aspect = Discontent::Aspect.find(params[:asp_id]) unless params[:asp_id].nil?
+      @discontent_post = Discontent::Post.find(params[:dis_id]) unless params[:dis_id].nil?
+      @select_aspect = Discontent::Aspect.find(params[:aspect_id]) unless params[:aspect_id].nil?
+
+      user_discussion_posts = current_user.user_discussion_disposts.where(:project_id => @project).pluck(:id)
+
+      if params[:asp_id].nil? and params[:dis_id].nil? and params[:aspect_id].nil? and params[:save_form_dispost].nil?
+        @aspects.each do |asp|
+          @aspect = asp
+          posts_for_discussion = @aspect.aspect_posts.posts_for_discussions(@project).by_discussions(user_discussion_posts).order('"discontent_posts"."id"')
+          unless posts_for_discussion.empty?
+            @post = posts_for_discussion.first
+            break
+          end
+        end
+      elsif !params[:aspect_id].nil?
+        @aspect = @select_aspect
+        @post = @aspect.aspect_posts.posts_for_discussions(@project).by_discussions(user_discussion_posts).order('"discontent_posts"."id"').first
+      elsif !params[:dis_id].nil? and !params[:asp_id].nil?
+        index = @aspects.index @discontent_aspect
+        @able = true
+        while @able do
+          @aspect = @aspects[index]
+          @posts_for_discussion = @aspect.aspect_posts.posts_for_discussions(@project).by_discussions(user_discussion_posts).order('"discontent_posts"."id"')
+          unless @posts_for_discussion.empty?
+            @posts_for_discussion.each do |p|
+              @post = p
+              if (@aspect == @discontent_aspect and @post.id > @discontent_post.id) or (@aspect != @discontent_aspect and @post.id > 0) or @post == @posts_for_discussion.last
+                if params[:empty_discussion]
+                  @able = false if @post != @posts_for_discussion.last or (@posts_for_discussion.size == 1 and @aspect != @discontent_aspect) or (@aspect == @discontent_aspect and @post.id > @discontent_post.id)
+                  break
+                elsif params[:save_form]
+                  unless params[:discussion].empty?
+                    @comment = @discontent_post.comments.create(:content => params[:discussion], :user => current_user)
+                    current_user.journals.build(:type_event=>'discontent_comment'+'_save', :project => @project, :body=>"#{@comment.content[0..48]}:#{@discontent_post.id}#comment_#{@comment.id}").save!
+                    if @post.user!=current_user
+                      current_user.journals.build(:type_event=>'my_'+'discontent_comment', :user_informed => @discontent_post.user, :project => @project, :body=>"#{@comment.content[0..24]}:#{@discontent_post.id}#comment_#{@comment.id}", :viewed=> false).save!
+                    end
+                    current_user.discontent_post_discussions.create(post: @discontent_post, aspect: @discontent_aspect)
+                  end
+                  @able = false if @post != @posts_for_discussion.last or (@posts_for_discussion.size == 1 and @aspect != @discontent_aspect) or (@aspect == @discontent_aspect and @post.id > @discontent_post.id)
+                  break
+                else
+                  next
+                end
+              end
+            end
+          end
+          index+=1
+          @able = false if index == @aspects.size
+        end
+      elsif !params[:save_form_dispost].nil?
+        if !params[:discontent_post][:content].empty? and !params[:discontent_post][:whered].empty? and !params[:discontent_post][:whend].empty? and !params[:discontent_post][:style].empty?
+          @dispost = @project.discontents.create(params[:discontent_post])
+          @dispost.user = current_user
+          @dispost.save!
+          current_user.journals.build(:type_event=>'discontent_post'+"_save", :project => @project, :body=>"#{@dispost.content[0..12]}:#{@dispost.id}").save!
+
+          unless params[:select_for_discussion_aspects_add].nil?
+            asp = params[:select_for_discussion_aspects_add]
+            Discontent::PostAspect.create(post_id: @dispost.id, aspect_id: asp.to_i)
+          end
+        end
+      end
+
+      respond_to do |format|
+        format.js
+      end
+    end
+
+
+    def check_field
+      @project = Core::Project.find(params[:project])
+      if !params[:check_field].nil? and !params[:status].nil?
+        current_user.user_checks.where(project_id: @project.id,check_field: params[:check_field]).destroy_all
+        current_user.user_checks.create(project_id: @project.id, check_field: params[:check_field], status: params[:status]).save!
+      end
+      respond_to do |format|
+        format.js
+      end
     end
 end
