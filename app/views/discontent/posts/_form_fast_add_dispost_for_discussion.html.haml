@@ -48,7 +48,8 @@
           в вестибюлях и подъездах
 
     .col-md-6
-      =autocomplete_field_tag "discontent_post[whered]",'', autocomplete_discontent_post_whered_discontent_posts_path, :"min-length" => 0, style: 'height: 44px', class: 'form-control autocomplete', placeholder: 'Место, организация, общность, в которой это происходит '
+      #mod2
+      =autocomplete_field_tag "discontent_post[whered]",'', autocomplete_discontent_post_whered_discontent_posts_path,:append_to => "#mod2",  :"min-length" => 0, style: 'height: 44px', class: 'form-control autocomplete', placeholder: 'Место, организация, общность, в которой это происходит '
       %br
       %br
   .row
@@ -70,7 +71,8 @@
           %span.label.label-success когда
           всегда
     .col-md-6
-      =autocomplete_field_tag "discontent_post[whend]",'', autocomplete_discontent_post_whend_discontent_posts_path, :"min-length" => 0, style: 'height: 44px', class: 'form-control autocomplete', placeholder: 'Во время какого события, мероприятия, процесса, ситуации '
+      #mod
+      =autocomplete_field_tag "discontent_post[whend]",'', autocomplete_discontent_post_whend_discontent_posts_path, :"min-length" => 0, :append_to => "#mod",  style: 'height: 44px', class: 'form-control autocomplete', placeholder: 'Во время какого события, мероприятия, процесса, ситуации '
 
   .row
     .col-md-12
