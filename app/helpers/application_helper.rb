@@ -181,7 +181,6 @@ module ApplicationHelper
     true
   end
 
-<<<<<<< HEAD
   def get_check_field?(field)
     check = current_user.user_checks.where(project_id: @project.id, status: 't', check_field: field).first unless current_user.user_checks.empty?
     if check
@@ -189,6 +188,4 @@ module ApplicationHelper
     end
     false
   end
-=======
->>>>>>> develop
 end
