@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140528120443) do
+ActiveRecord::Schema.define(:version => 20140524175327) do
 
   create_table "answers", :force => true do |t|
     t.string   "text"
@@ -313,14 +313,6 @@ ActiveRecord::Schema.define(:version => 20140528120443) do
   create_table "discontent_post_aspects", :force => true do |t|
     t.integer  "post_id"
     t.integer  "aspect_id"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
-  end
-
-  create_table "discontent_post_discussions", :force => true do |t|
-    t.integer  "user_id"
-    t.integer  "aspect_id"
-    t.integer  "post_id"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end
@@ -1077,15 +1069,6 @@ ActiveRecord::Schema.define(:version => 20140528120443) do
     t.integer  "project_id"
   end
 
-  create_table "user_checks", :force => true do |t|
-    t.integer  "user_id"
-    t.string   "check_field"
-    t.boolean  "status"
-    t.integer  "project_id"
-    t.datetime "created_at",  :null => false
-    t.datetime "updated_at",  :null => false
-  end
-
   create_table "users", :force => true do |t|
     t.string   "name"
     t.string   "surname"
@@ -1129,7 +1112,6 @@ ActiveRecord::Schema.define(:version => 20140528120443) do
     t.datetime "confirmed_at"
     t.datetime "confirmation_sent_at"
     t.string   "unconfirmed_email"
-    t.datetime "last_seen"
   end
 
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true
