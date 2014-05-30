@@ -68,6 +68,12 @@ def add_comment
       #PostMailer.add_comment(post, @comment).deliver  if post.user!=@comment.user
       if post.user!=current_user
        current_user.journals.build(:type_event=>'my_'+name_of_comment_for_param, :user_informed => post.user, :project => @project,  :body=>"#{@comment.content[0..148]}:#{post.id}#comment_#{@comment.id}", :viewed=> false).save!
+
+      end
+      post.comments.each do |c|
+        if c.user!=current_user and c.user!= post.user
+          current_user.journals.build(:type_event=>'other_'+name_of_comment_for_param, :user_informed => c.user, :project => @project,  :body=>"#{@comment.content[0..148]}:#{post.id}#comment_#{@comment.id}", :viewed=> false).save!
+        end
       end
     end
     respond_to do |format|

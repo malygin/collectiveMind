@@ -176,6 +176,9 @@ module JournalHelper
       when 'my_discontent_comment'
         s = j.body.split(':')
         "добавил(а) комментарий '#{s[0]}...' к "+  link_to('вашему несовершенству', "/project/#{project}/discontent/posts/#{s[1]}" )
+      when 'other_discontent_comment'
+        s = j.body.split(':')
+        "добавил(а) комментарий '#{s[0]}...' к "+  link_to(' несовершенству, которые вы комментировали ранее', "/project/#{project}/discontent/posts/#{s[1]}" )
       when 'my_concept_comment'
         s = j.body.split(':')
         "добавил(а) комментарий '#{s[0]}...' к "+  link_to('вашему нововведению', "/project/#{project}/concept/posts/#{s[1]}" )
