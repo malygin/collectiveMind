@@ -353,7 +353,7 @@ class Discontent::PostsController < PostsController
       @discontent_post = Discontent::Post.find(params[:dis_id]) unless params[:dis_id].nil?
       @select_aspect = Discontent::Aspect.find(params[:aspect_id]) unless params[:aspect_id].nil?
 
-      user_discussion_posts = current_user.user_discussion_disposts.where(:project_id => @project).pluck(:id)
+      user_discussion_posts = current_user.user_discussion_disposts.where(:project_id => @project).select('distinct "discontent_posts".*').pluck(:id)
 
       if params[:asp_id].nil? and params[:dis_id].nil? and params[:aspect_id].nil? and params[:save_form_dispost].nil?
         @aspects.each do |asp|
@@ -372,7 +372,7 @@ class Discontent::PostsController < PostsController
         @able = true
         while @able do
           @aspect = @aspects[index]
-          @posts_for_discussion = @aspect.aspect_posts.posts_for_discussions(@project).by_discussions(user_discussion_posts).order('"discontent_posts"."id"')
+          @posts_for_discussion = @aspect.aspect_posts.posts_for_discussions(@project).by_discussions(user_discussion_posts).select('distinct "discontent_posts".*').order('"discontent_posts"."id"')
           unless @posts_for_discussion.empty?
             @posts_for_discussion.each do |p|
               @post = p
@@ -381,7 +381,7 @@ class Discontent::PostsController < PostsController
                   @able = false if @post != @posts_for_discussion.last or (@posts_for_discussion.size == 1 and @aspect != @discontent_aspect) or (@aspect == @discontent_aspect and @post.id > @discontent_post.id)
                   break
                 elsif params[:save_form]
-                  unless params[:discussion].empty?
+                  if !params[:discussion].empty?  and not (@aspect != @discontent_aspect and @post == @discontent_post)
                     @comment = @discontent_post.comments.create(:content => params[:discussion], :user => current_user)
                     current_user.journals.build(:type_event=>'discontent_comment'+'_save', :project => @project, :body=>"#{@comment.content[0..48]}:#{@discontent_post.id}#comment_#{@comment.id}").save!
                     if @post.user!=current_user
