@@ -104,7 +104,7 @@
         - @my_journals.each do |journal|
           %li{:role => "presentation"}
             %p.message{:href => "#"}
-              =image_tag current_user.avatar.url(:thumb), style: 'margin-left: 10px;'
+              =image_tag journal.user.avatar.url(:thumb), style: 'margin-left: 10px;'
               .details(style="margin-left: 60px;")
                 .sender=current_user.to_s
                 .text= journal_parser(journal, @project.id).html_safe

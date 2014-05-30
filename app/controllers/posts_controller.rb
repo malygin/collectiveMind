@@ -70,9 +70,11 @@ def add_comment
        current_user.journals.build(:type_event=>'my_'+name_of_comment_for_param, :user_informed => post.user, :project => @project,  :body=>"#{@comment.content[0..148]}:#{post.id}#comment_#{@comment.id}", :viewed=> false).save!
 
       end
-      post.comments.each do |c|
-        if c.user!=current_user and c.user!= post.user
-          current_user.journals.build(:type_event=>'other_'+name_of_comment_for_param, :user_informed => c.user, :project => @project,  :body=>"#{@comment.content[0..148]}:#{post.id}#comment_#{@comment.id}", :viewed=> false).save!
+      users = []
+      users =post.comments.collect{|c| c.user}
+      users.uniq.each do |u|
+        if u!=current_user and u!= post.user
+          current_user.journals.build(:type_event=>'other_'+name_of_comment_for_param, :user_informed =>u, :project => @project,  :body=>"#{@comment.content[0..148]}:#{post.id}#comment_#{@comment.id}", :viewed=> false).save!
         end
       end
     end
