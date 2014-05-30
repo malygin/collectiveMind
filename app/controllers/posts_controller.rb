@@ -74,7 +74,11 @@ def add_comment
       users =post.comments.collect{|c| c.user}
       users.uniq.each do |u|
         if u!=current_user and u!= post.user
-          current_user.journals.build(:type_event=>'other_'+name_of_comment_for_param, :user_informed =>u, :project => @project,  :body=>"#{@comment.content[0..148]}:#{post.id}#comment_#{@comment.id}", :viewed=> false).save!
+          if  post.instance_of? LifeTape::Post
+            current_user.journals.build(:type_event=>'other_'+name_of_comment_for_param, :user_informed =>u, :project => @project, :body=>"#{@comment.content[0..148]}:?asp=#{post.discontent_aspects.first.id}#comment_#{@comment.id}", :viewed=> false).save!
+          elsif post.instance_of? Discontent::Post
+            current_user.journals.build(:type_event=>'other_'+name_of_comment_for_param, :user_informed =>u, :project => @project,  :body=>"#{@comment.content[0..148]}:#{post.id}#comment_#{@comment.id}", :viewed=> false).save!
+          end
         end
       end
     end

@@ -170,6 +170,9 @@ module JournalHelper
       when 'my_life_tape_comment'
         s = j.body.split(':')
         ": '#{s[0]}...' к "+  link_to('вашей теме', "/project/#{project}/life_tape/posts/#{s[1]}" )
+      when 'other_life_tape_comment'
+        s = j.body.split(':')
+        ": '#{s[0]}...' к "+  link_to('к теме, которую вы ранне комментировали', "/project/#{project}/life_tape/posts/#{s[1]}" )
       when 'my_add_score_comment'
         s = j.body.split(':')
         "вы получили #{s[0]} баллов "  +  link_to("за полезный комментарий ", "/project/#{project}/#{s[1]}" )
