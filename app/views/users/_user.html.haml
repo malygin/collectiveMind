@@ -26,6 +26,8 @@
         = image_tag user.avatar.url(:thumb),  class: "media-object"
         %br
         =link_to user, user_path(@project, user)
+        = render partial: '/shared/user_online', object: user
+
         -#%span.label.label-success new
 
   %td
