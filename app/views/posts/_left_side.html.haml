@@ -50,7 +50,7 @@
         %small.text-center=t('stages.concepts', count: @project.concept_ongoing_post.count)
     -else
       %a.stage_menu3
-        %h4.no-margin
+        %h4.no-margin(style='color:#444444')
           3.
           =@project.status_title(:concept_posts)
     %ul#ui-collapse.panel-collapse.collapse
@@ -65,7 +65,7 @@
         %small.text-center=t('stages.plans', count: @project.plan_post.count)
     -else
       %a.stage_menu4
-        %h4.no-margin
+        %h4.no-margin(style='color:#444444')
           4.
           =@project.status_title(:plan_posts)
     %ul#components-collapse.panel-collapse.collapse
@@ -80,7 +80,7 @@
         %small.text-center=t('stages.estimates', count: @project.estimate_posts.count)
     -else
       %a.stage_menu5
-        %h4.no-margin
+        %h4.no-margin(style='color:#444444')
           5.
           =@project.status_title(:estimate_posts)
     %ul#tables-collapse.panel-collapse.collapse
