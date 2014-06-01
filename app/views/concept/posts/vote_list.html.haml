@@ -25,32 +25,82 @@
 -#      %td
 -#        =render partial:'post_for_vote', collection: aspect.positive_posts.by_status(@status)
 
-.panel.panel-default
-  .panel-heading
-    %h5
-      Выберите
-      %b одно из двух
-      нововведений, которое на Ваш взгляд является лучшим решением поставленной проблемы
-    %span Пара:
-    %span#prog_now=@votes
-    из
-    %span#prog_all=@post_all
-    .progress
-      .progress-bar.progress-bar-success{"aria-valuemax" => "100", "aria-valuemin" => "0", role: "progressbar", style: "width: #{((@votes-1)/@post_all.to_f)*100}%;"}
-    #dispost
-      = render partial: 'discontent/posts/post_content', object: @discontent_post
+-#.panel.panel-default
+-#  .panel-heading
+-#    %h5
+-#      Выберите
+-#      %b одно из двух
+-#      нововведений, которое на Ваш взгляд является лучшим решением поставленной проблемы
+-#    %span Пара:
+-#    %span#prog_now=@votes
+-#    из
+-#    %span#prog_all=@post_all
+-#    .progress
+-#      .progress-bar.progress-bar-success{"aria-valuemax" => "100", "aria-valuemin" => "0", role: "progressbar", style: "width: #{((@votes-1)/@post_all.to_f)*100}%;"}
+-#    #dispost
+-#      = render partial: 'discontent/posts/post_content', object: @discontent_post
+-#
+-##concept_success(style="display:none;")
+-#  .panel.panel-success
+-#    .panel-heading
+-#      %h4.text-center
+-#        .text-success Спасибо за участие в голосовании!
+-#        =link_to "Перейти к процедуре", concept_posts_path(@project)
+-#
+-#.col-md-12
+-#  .col-md-6
+-#    #left-concept
+-#      =render partial: 'post_for_vote', object: @concept1, :locals => {:number => 1}
+-#  .col-md-6
+-#    #right-concept
+-#      =render partial: 'post_for_vote', object: @concept2, :locals => {:number => 2}
 
-#concept_success(style="display:none;")
-  .panel.panel-success
-    .panel-heading
-      %h4.text-center
-        .text-success Спасибо за участие в голосовании!
-        =link_to "Перейти к процедуре", concept_posts_path(@project)
 
-.col-md-12
-  .col-md-6
-    #left-concept
-      =render partial: 'post_for_vote', object: @concept1, :locals => {:number => 1}
-  .col-md-6
-    #right-concept
-      =render partial: 'post_for_vote', object: @concept2, :locals => {:number => 2}
+%section.widget
+  %header
+    .row
+      .col-md-9
+        %h3.color-orange
+          3 этап: Формулирование проблемы.
+          %br
+          %small
+            Голосование за нововведения в рамках процедуры:
+            =@project.name
+
+  .body
+    %br
+    %section.widget
+      %header
+        %h5
+          Выберите
+          %b одно из двух
+          нововведений, которое на Ваш взгляд является лучшим решением поставленной проблемы
+      .body
+        %span Пара:
+        %span#prog_now=@votes
+        из
+        %span#prog_all=@post_all
+        .progress
+          .progress-bar.progress-bar-success{"aria-valuemax" => "100", "aria-valuemin" => "0", role: "progressbar", style: "width: #{((@votes-1)/@post_all.to_f)*100}%;"}
+        #dispost
+          = render partial: 'discontent/posts/post_content', object: @discontent_post
+        %br
+        %br
+
+        #concept_success(style="display:none;")
+          %section.widget
+            .body
+              %h4.text-center
+                .text-success Спасибо за участие в голосовании!
+                =link_to "Перейти к процедуре", concept_posts_path(@project)
+        .row
+          .col-md-6
+            %section.widget
+              .body
+                #left-concept
+                  =render partial: 'post_for_vote', object: @concept1, :locals => {:number => 1}
+          .col-md-6
+            %section.widget
+              .body
+                #right-concept
+                  =render partial: 'post_for_vote', object: @concept2, :locals => {:number => 2}

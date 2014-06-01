@@ -13,19 +13,19 @@
 }
 
 .stage_menu2 {
-    border-left: 4px solid #e5603b!important;
+    border-left: 4px solid #e5603b !important;
 }
 
 .stage_menu3 {
-    border-left: 4px solid #eac85e!important;
+    border-left: 4px solid #eac85e !important;
 }
 
 .stage_menu4 {
-    border-left: 4px solid #56bc76!important;
+    border-left: 4px solid #56bc76 !important;
 }
 
 .stage_menu5 {
-    border-left: 4px solid #999!important;
+    border-left: 4px solid #999 !important;
 }
 .redactor {
     font-size: 8px;
@@ -85,17 +85,17 @@
     font-weight: normal !important;
 }
 .label-n {
-    color: #fd3411 !important;
-    background-color: #ffd2ca !important;
+    color: white !important;
+    background-color: #e5603b !important;
     font-weight: normal !important;
-    font-size: 100% !important;
+    /*font-size: 100% !important;*/
 }
 
 .label-p {
-    color: #069818 !important;
-    background-color: #ceffd4 !important;
+    color: white !important;
+    background-color: #56bc76 !important;
     font-weight: normal !important;
-    font-size: 100% !important;
+    /*font-size: 100% !important;*/
 }
 
 .label-g {
@@ -144,6 +144,17 @@ p, a {
 .wizard-navigation.nav-pills li.active a {
     background-color: #618FB0 !important;
 }
+
+.concept-name {
+    background-color: #f4f4f4;
+    border-top: 0.5px solid grey;
+    border-bottom: 0.5px solid grey;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    text-align: center;
+}
+
+
 /*todo my styles bottom*/
 /******************************************************************************************************************************************************/
 

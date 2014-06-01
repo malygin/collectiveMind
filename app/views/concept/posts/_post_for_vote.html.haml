@@ -1,47 +1,91 @@
-.panel.panel-default
-  .panel-heading
-    %h4
-      Нововведение
-      =number
-  .panel-body
-    .concept-name
-      %h5.text-info=t('form.novation_what')
+%h4
+  Нововведение
+  =number
+
+%h5.text-center
+  %b=post_for_vote.title
+
+%section.widget
+  .body
+    .text-center
+      -#.badge.badge-mutted A 1
+      %span.h5(class="#{class_for_concept_type_field(post_for_vote.concept_post,1)}" id="name")=t('form.novation_what')
+    %br
     =simple_format(post_for_vote.name)
 
-    .concept-name
-      %h5.text-info=t('form.novation_how')
+%section.widget
+  .body
+    .text-center
+      -#.badge.badge-mutted A 2
+      %span.h5(class= "#{class_for_concept_type_field(post_for_vote.concept_post,2)}" id="content")=t('form.novation_how')
+    %br
     =simple_format(post_for_vote.content)
 
-    .concept-name
-      %h5.text-info=t('form.cond')
+%section.widget
+  .body
+    .text-center
+      -#.badge.badge-mutted B 1
+      %span.h5(class= "#{class_for_concept_type_field(post_for_vote.concept_post,3)}" id="positive")=t('form.cond')
+    %br
     =display_content(post_for_vote.positive)
 
-    .concept-name
-      %h5.text-info=t('form.cond_res')
-    - post_for_vote.concept_post.concept_post_resources.each do |r|
-      %h5
-        =r.name
-        %br
-        %small=r.desc
 
-    .concept-name
-      %h5.text-info=t('form.negative')
+%section.widget
+  .body
+    .text-center
+      %span.h5(class="#{class_for_concept_type_field(post_for_vote.concept_post,4)}" id="positive_r") Какие ресурсы необходимы?
+    %br
+    %table.table.table-striped.table-bordered
+      %thead
+        %tr
+          %th
+            ="#"
+          %th
+            Название
+          %th
+            Пояснение
+      %tbody
+        - post_for_vote.concept_post.concept_post_resources.each_with_index  do |r, index|
+          %tr
+            %td
+              =index+1
+            %td
+              =r.name
+            %td
+              =r.desc
+
+%section.widget
+  .body
+    .text-center
+      -#.badge.badge-mutted C 1
+      %span.h5(class="#{class_for_concept_type_field(post_for_vote.concept_post,5)}" id= "negative")=t('form.negative')
+    %br
     =display_content(post_for_vote.negative)
 
-    .concept-name
-      %h5.text-info=t('form.negative_res')
+%section.widget
+  .body
+    .text-center
+      -#.badge.badge-mutted C 2
+      %span.h5(class= "#{class_for_concept_type_field(post_for_vote.concept_post,6)}" id= "negative_r")=t('form.negative_res')
+    %br
     =display_content(post_for_vote.negative_r)
 
-    .concept-name
-      %h5.text-info=t('form.problems')
+%section.widget
+  .body
+    .text-center
+      -#.badge.badge-mutted D 1
+      %span.h5(class= "#{class_for_concept_type_field(post_for_vote.concept_post,7)}" id="problems")=t('form.problems')
+    %br
     =display_content(post_for_vote.problems)
 
-    .concept-name
-      %h5.text-info=t('form.reality')
+%section.widget
+  .body
+    .text-center
+      -#.badge.badge-mutted D 2
+      %span.h5(class= "#{class_for_concept_type_field(post_for_vote.concept_post,8)}" id= "reality")=t('form.reality')
+    %br
     =display_content(post_for_vote.reality)
-    %hr
-    =link_to({:controller => 'concept/posts', :action => :next_vote, :id => post_for_vote.id, :dis_id =>@discontent_post.id, :num => number},:remote => true,:method => :put, :id => "btn_vote_#{number}", :class => "note_text") do
-      .btn.btn-lg.btn-primary
-        Нововведение
-        =number
-
+%hr
+=link_to({:controller => 'concept/posts', :action => :next_vote, :id => post_for_vote.id, :dis_id =>@discontent_post.id, :num => number},:remote => true,:method => :put, :id => "btn_vote_#{number}", :class => "note_text btn btn-lg btn-warning btn-block",  :style => "font-weight: normal !important;") do
+  Нововведение
+  =number

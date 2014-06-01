@@ -60,8 +60,12 @@ class Concept::PostsController < PostsController
         return
       end
     end
+    if params[:asp]
+      @aspect_post =  Discontent::Aspect.find(params[:asp])
+    else
+      @aspect_post = @project.aspects.first
+    end
     #@posts = current_model.where(:project_id => @project, :status => @status).paginate(:page => params[:page])
-
     #if @project.status == 8
     #  @number_v = @project.stage3 - current_user.concept_post_votings.size
     #  @votes = @project.stage3
@@ -206,7 +210,7 @@ class Concept::PostsController < PostsController
     end
 
     disposts = Discontent::Post.where(:project_id => @project, :status => 4).order(:id)
-    last_vote = current_user.concept_post_votings.last
+    last_vote = current_user.concept_post_votings.by_project_votings(@project).last
 
     @discontent_post = view_context.able_concept_posts_for_vote(disposts,last_vote)
     unless @discontent_post.nil?
@@ -218,7 +222,7 @@ class Concept::PostsController < PostsController
         @votes = 1
       else
         @concept1 = last_vote.concept_post_aspect
-        count_now = current_user.concept_post_votings.where(:discontent_post_id => @discontent_post.id, :concept_post_aspect_id => @concept1.id).count
+        count_now = current_user.concept_post_votings.by_project_votings(@project).where(:discontent_post_id => @discontent_post.id, :concept_post_aspect_id => @concept1.id).count
         index = concept_posts.index @concept1.concept_post
         index = count_now unless index == count_now
         unless concept_posts[index+1].nil?
@@ -227,23 +231,23 @@ class Concept::PostsController < PostsController
         end
       end
     end
-    render 'vote_list' , :layout => 'application_one_column'
+    render 'vote_list' , :layout => 'application_two_column'
   end
 
   def next_vote
     @project = Core::Project.find(params[:project])
     disposts = Discontent::Post.where(:project_id => @project, :status => 4).order(:id)
-    @last_vote = current_user.concept_post_votings.last
+    @last_vote = current_user.concept_post_votings.by_project_votings(@project).last
 
     if @last_vote.nil? or params[:id].to_i == @last_vote.concept_post_aspect_id or params[:dis_id].to_i != @last_vote.discontent_post_id
       count_create = 1
     else
-      count_create = current_user.concept_post_votings.where(:discontent_post_id => @last_vote.discontent_post_id,
+      count_create = current_user.concept_post_votings.by_project_votings(@project).where(:discontent_post_id => @last_vote.discontent_post_id,
                                                              :concept_post_aspect_id => @last_vote.concept_post_aspect_id).count + 1
     end
     if view_context.get_concept_posts_for_vote?(@project)
       count_create.times do
-          @last_now = Concept::Voting.create(:user_id => current_user.id, :concept_post_aspect_id => params[:id], :discontent_post_id => params[:dis_id])
+        @last_now = Concept::Voting.create(:user_id => current_user.id, :concept_post_aspect_id => params[:id], :discontent_post_id => params[:dis_id])
       end
     end
     @discontent_post = view_context.able_concept_posts_for_vote(disposts,@last_now)
@@ -256,7 +260,7 @@ class Concept::PostsController < PostsController
         @votes = 1
       else
         @concept1 = @last_now.concept_post_aspect
-        count_now = current_user.concept_post_votings.where(:discontent_post_id => @discontent_post.id, :concept_post_aspect_id => @concept1.id).count
+        count_now = current_user.concept_post_votings.by_project_votings(@project).where(:discontent_post_id => @discontent_post.id, :concept_post_aspect_id => @concept1.id).count
         index = concept_posts.index @concept1.concept_post
         index = count_now unless index == count_now
         unless concept_posts[index+1].nil?
@@ -319,7 +323,7 @@ class Concept::PostsController < PostsController
      @post = Concept::Post.find(params[:id])
      @type = params[:type_field]
      if @post.post_notes(@type.to_i).size == 0
-        @post.update_attributes(column_for_concept_type(@type.to_i) => 't')
+        @post.update_attributes(view_context.column_for_concept_type(@type.to_i) => 't')
      end
      respond_to do |format|
        format.js
@@ -343,7 +347,7 @@ class Concept::PostsController < PostsController
      @post_note.user_id = current_user.id
      @type = params[:type_field]
      if @post.post_notes(@type.to_i).size == 0
-       @post.update_attributes(column_for_concept_type(@type.to_i) => 'f')
+       @post.update_attributes(view_context.column_for_concept_type(@type.to_i) => 'f')
      end
      current_user.journals.build(:type_event=>'my_concept_note', :user_informed => @post.user, :project => @project, :body=>"#{@post_note.content[0..24]}:#{@post.id}", :viewed=> false).save!
 

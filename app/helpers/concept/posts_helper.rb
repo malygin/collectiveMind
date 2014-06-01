@@ -11,7 +11,7 @@ module Concept::PostsHelper
 
   def get_concept_posts_for_vote?(project)
     disposts = Discontent::Post.where(:project_id => project, :status => 4).order(:id)
-    last_vote = current_user.concept_post_votings.last
+    last_vote = current_user.concept_post_votings.by_project_votings(project).last
     unless last_vote.nil?
       i = -1
       while disposts[i].nil? ? false:true
@@ -22,7 +22,7 @@ module Concept::PostsHelper
         i -= 1
       end
       if disposts[i].id == last_vote.discontent_post_id
-        count_now = current_user.concept_post_votings.where(:discontent_post_id => last_vote.discontent_post_id, :concept_post_aspect_id => last_vote.concept_post_aspect_id).count
+        count_now = current_user.concept_post_votings.by_project_votings(project).where(:discontent_post_id => last_vote.discontent_post_id, :concept_post_aspect_id => last_vote.concept_post_aspect_id).count
         index = @concept_posts.index last_vote.concept_post_aspect.concept_post
         index = count_now unless index == count_now
         if @concept_posts[index+1].nil?
@@ -30,7 +30,7 @@ module Concept::PostsHelper
         end
       end
     end
-    return true
+    true
   end
 
   def able_concept_posts_for_vote(disposts,last_vote, num = 0)
@@ -38,7 +38,7 @@ module Concept::PostsHelper
       dis_post = last_vote.discontent_post
       num = disposts.index dis_post
     end
-    i = num
+    i = num.nil? ? 0 : num
     while disposts[i].nil? ? false:true
       @discontent_post = disposts[i]
       concept_posts = @discontent_post.dispost_concepts.by_status(0).order('concept_posts.id')
@@ -51,7 +51,7 @@ module Concept::PostsHelper
           return @discontent_post
         end
       else
-        count_now = current_user.concept_post_votings.where(:discontent_post_id => last_vote.discontent_post_id, :concept_post_aspect_id => last_vote.concept_post_aspect_id).count
+        count_now = current_user.concept_post_votings.by_project_votings(@project).where(:discontent_post_id => last_vote.discontent_post_id, :concept_post_aspect_id => last_vote.concept_post_aspect_id).count
         index = concept_posts.index last_vote.concept_post_aspect.concept_post
         index = count_now unless index == count_now
         unless concept_posts[index+1].nil?
@@ -100,11 +100,11 @@ module Concept::PostsHelper
   def class_for_concept_type_field(post,type_fd)
     stat = post.send(column_for_concept_type(type_fd))
     if stat == true
-      'text-success'
+      'color-green'
     elsif stat == false
-      'text-danger'
+      'color-red'
     else
-      'text-info'
+      'color-blue'
     end
   end
 end

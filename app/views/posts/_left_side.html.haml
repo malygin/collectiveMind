@@ -41,13 +41,20 @@
     %ul#stats-collapse.panel-collapse.collapse
 
   %li.panel#stage_concept{class:  @project.stage_style(:concept_posts)}
-    -#%a.accordion-toggle.collapsed{"data-parent" => "#side-nav", "data-toggle" => "collapse", :href => "#ui-collapse"}
     - if  @project.status > 6
-      = link_to "/project/#{@project.id}/concept/posts" , class:"#{@project.stage_style_link(@breadcrumbs[0].name, :concept_posts)}" do
-        2.
-        =@project.status_title(:concept_posts)
-        %br
-        %small.text-center=t('stages.concepts', count: @project.concept_ongoing_post.count)
+      = link_to "/project/#{@project.id}/concept/posts" , class:"stage_menu3" do
+        %h4.no-margin
+          3.
+          =@project.status_title(:concept_posts)
+      - if request.original_url.include? 'concept'
+        %ul.nav.nav-tabs.nav-stacked.panel-collapse
+          -@project.aspects.each do |asp|
+            %li
+              = link_to "/project/#{@project.id}/concept/posts?asp=#{asp.id}" do
+                %i.fa.fa-minus(style="font-size: 8px;")
+                &nbsp;
+                =asp.content
+                %small="(#{asp.aspect_posts.count})"
     -else
       %a.stage_menu3
         %h4.no-margin(style='color:#444444')
