@@ -23,6 +23,8 @@
             and stat_positive_r = 't' and stat_negative_r = 't' ")}
   scope :by_status, ->(p){where(status: p)}
 
+  scope :by_project, ->(p){ where(project: p) }
+
   def self.scope_vote_top(post)
     joins(:concept_post_discontents).
     where('"concept_post_discontents"."discontent_post_id" = ?', post.id).

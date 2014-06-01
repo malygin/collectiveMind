@@ -8,7 +8,7 @@
         %div.panel-body
           -#%button.btn.btn-info.pull-right(data-toggle="modal" data-target="#modalStage3")
           -#  Показать пример
-          %h6.text-info Устраняемые несовершенства:
+          %h5 Устраняемые несовершенства:
           #panel_union
             -if !@post.id.nil?
               -@post.concept_disposts.each  do |cd|
@@ -33,7 +33,7 @@
           .row
             .col-md-12
               .text-center
-                %p.text-info.h5
+                %p.h5.color-teal
                   Краткое название вашего нововведения
                 %br
                 =text_field_tag "pa[#{@discontent_post.id}][title]",@pa.title, style: 'width: 100%; height: 30px', placeholder:'Введетие краткое название для своего нововведения'
@@ -41,9 +41,9 @@
           .row
             .col-md-12
               .text-center
-                %h6.text-success
+                %h6.color-green
                   %b A 1
-                %p.text-info.h5
+                %p.h5
                   =t('form.novation_what')
                 %br
 
@@ -51,8 +51,8 @@
             .col-md-6
               .text-right
                 %i
-                  %h6.text-primary Предположим, вы оказались в будущем. Что там есть такого, что исправляет несовершенство?
-                  %h6.text-success Пример:
+                  %h6 Предположим, вы оказались в будущем. Что там есть такого, что исправляет несовершенство?
+                  %h6.color-green Пример:
                   %h6.text-muted Решаемое несовершенство:
                   %span.label.label-default что
                   %span.text-muted Пыльный и отвратительный на вид большой пустырь
@@ -63,7 +63,7 @@
                   %span.label.label-default когда
                   %span.text-muted в теплое время года
                   %br
-                  %h6.text-success Предлагаемое нововведение:
+                  %h6.color-green Предлагаемое нововведение:
                   %p Большой зеленый газон по всему пустырю  с клумбой с посредине. Клумба засеяна красными многолетными цветами.
             .col-md-6
               .form-group.has-danger
@@ -72,17 +72,16 @@
           .row
             .col-md-12
               .text-center
-                %h6.text-success
+                %h6.color-green
                   %b A 2
-                %p.text-info.h5
+                %p.h5
                   =t('form.novation_how')
                 %br
           .row
             .col-md-6
               .text-right
                 %i
-                  %h6.text-success Пример:
-
+                  %h6.color-green Пример:
                   %p Трава газона и декоративные растения на клумбе будут привлекательны на вид и предотвращать появление пыли.
             .col-md-6
               .form-group.has-danger
@@ -92,10 +91,10 @@
           .row
             .col-md-12
               .text-center
-                %h6.text-success
+                %h6.color-green
                   %b B 1
 
-                %p.text-info.h5
+                %p.h5
                   =t('form.cond')
                 %br
 
@@ -103,8 +102,8 @@
             .col-md-6
               .text-right
                 %i
-                  %h6.text-primary То есть какие должны поддерживаться УСЛОВИЯ и разрешаться ЗАДАЧИ
-                  %h6.text-success Пример:
+                  %h6 То есть какие должны поддерживаться УСЛОВИЯ и разрешаться ЗАДАЧИ
+                  %h6.color-green Пример:
                   %p
                     %b Для поддержания внешнего вида газона и травы необходимо обеспечить:
 
@@ -116,9 +115,9 @@
           .row
             .col-md-12
               .text-center
-                %h6.text-success
+                %h6.color-green
                   %b B 2
-                %p.text-info.h5
+                %p.h5
                   =t('form.cond_res')
                 %br
 
@@ -126,7 +125,7 @@
             .col-md-6
               .text-right
                 %i
-                  %h6.text-primary
+                  %h6
                     Ресурсами могут быть методы, технические, организационные или финансовые средства, человеческие силы и вообще все,
                     что необходимо иметь в распоряжении в будущем, чтобы обеспечить функционирование нововведения
                     %br
@@ -134,7 +133,7 @@
                     %b Четкое представление о том, какие ресурсы понадобятся для функционирования нововведения позволят выработать более эффективный проект.
                   %br
 
-                  %h6.text-success Пример:
+                  %h6.color-green Пример:
 
                   %p
                     работник (для ухода за растениями),
@@ -178,9 +177,9 @@
           .row
             .col-md-12
               .text-center
-                %h6.text-success
+                %h6.color-green
                   %b C 1
-                %p.text-info.h5
+                %p.h5
                   =t('form.negative_h')
                 %br
 
@@ -188,9 +187,9 @@
             .col-md-6
               .text-right
                 %i
-                  %h6.text-primary Напишите, какие неприятности могут возникнуть, если будут созданы и поддерживаться должные УСЛОВИЯ и разрешаться ЗАДАЧИ.
+                  %h6 Напишите, какие неприятности могут возникнуть, если будут созданы и поддерживаться должные УСЛОВИЯ и разрешаться ЗАДАЧИ.
                   %br
-                  %h6.text-success Пример:
+                  %h6.color-green Пример:
 
                   %p
                     Конфликты из-за того, что некоторые жильцы могут отказаться делать денежные взносы.
@@ -202,9 +201,9 @@
           .row
             .col-md-12
               .text-center
-                %h6.text-success
+                %h6.color-green
                   %b C 2
-                %p.text-info.h5
+                %p.h5
                   =t('form.negative_res')
                 %br
 
@@ -212,9 +211,9 @@
             .col-md-6
               .text-right
                 %i
-                  %h6.text-primary Что должно иметься в будущем, препятствующее возможному возникновению неприятностей?
+                  %h6 Что должно иметься в будущем, препятствующее возможному возникновению неприятностей?
                   %br
-                  %h6.text-success Пример:
+                  %h6.color-green Пример:
 
                   %p
                     Средства широкого публичного оповещения о должниках
@@ -227,9 +226,9 @@
           .row
             .col-md-12
               .text-center
-                %h6.text-success
+                %h6.color-green
                   %b D 1
-                %p.text-info.h5
+                %p.h5
                   =t('form.problems')
                 %br
 
@@ -237,9 +236,9 @@
             .col-md-6
               .text-right
                 %i
-                  %h6.text-primary Обоснуйте, что "игра стоит свеч".
+                  %h6 Обоснуйте, что "игра стоит свеч".
                   %br
-                  %h6.text-success Пример:
+                  %h6.color-green Пример:
                   %p К сожалению, уход за клумбой потребует значительного труда, однако  ввиду ее красоты предлагается на это пойти.
             .col-md-6
               .form-group.has-success
@@ -249,9 +248,9 @@
           .row
             .col-md-12
               .text-center
-                %h6.text-success
+                %h6.color-green
                   %b D 2
-                %p.text-info.h5
+                %p.h5
                   =t('form.reality')
                 %br
 
@@ -259,9 +258,9 @@
             .col-md-6
               .text-right
                 %i
-                  %h6.text-primary Покажите, что нужные для нововведения ресурсы несложно и недорого создать
+                  %h6 Покажите, что нужные для нововведения ресурсы несложно и недорого создать
                   %br
-                  %h6.text-success Пример:
+                  %h6.color-green Пример:
 
                   %p Работника нанять недорого; инструменты и материалы приобрести и организовать полив вполне возможно; жильцы, вероятно, согласятся дать на это деньги.
             .col-md-6
@@ -271,7 +270,7 @@
 
 
   %actions
-    = f.submit 'Сохранить',  class: 'btn btn-success btn-sm'
+    = f.submit 'Сохранить',  class: 'btn btn-success btn-lg'
   %br
   %br
 

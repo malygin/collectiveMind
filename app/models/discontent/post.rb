@@ -149,12 +149,13 @@ class Discontent::Post < ActiveRecord::Base
         return false
       end
     end
-    return true
+    true
   end
 
   def one_last_post?
     discontent_posts.size < 2
   end
+
   def note_size?(type_fd)
     self.post_notes(type_fd).size > 0
   end

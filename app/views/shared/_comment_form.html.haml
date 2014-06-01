@@ -4,7 +4,7 @@
         .col-md-12
             = form_for comment, :html => {:class => 'new_or_edit'},  remote: true, :url => url_link, :method => :put do |f|
                 = render 'shared/error_messages', :object =>f.object
-                -if comment.get_class == "LifeTape"
+                -if comment.get_class == "LifeTape" or comment.get_class == "Concept"
                     =f.text_area :content, :class => 'form-control input-transparent', style: 'height: 70px;', placeholder: 'Ваш комментарий', id:"comment_text_area", onkeyup: "activate_button(this);"
                     .pull-right
                         =f.submit 'Отправить', :id  => "send_post", class: 'btn btn-sm btn-info disabled', onclick: 'disable_send_button();'
