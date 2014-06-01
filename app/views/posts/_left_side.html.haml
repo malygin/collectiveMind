@@ -54,7 +54,7 @@
                 %i.fa.fa-minus(style="font-size: 8px;")
                 &nbsp;
                 =asp.content
-                %small="(#{asp.aspect_posts.count})"
+                %small="(#{asp.aspect_posts.by_status(4).count})"
     -else
       %a.stage_menu3
         %h4.no-margin(style='color:#444444')
