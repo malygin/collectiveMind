@@ -6,7 +6,7 @@
         1.
         =@project.status_title(:life_tape_posts)
     - if request.original_url.include? 'life_tape'
-      %ul.nav.nav-tabs.nav-stacked.panel-collapse
+      %ul.nav.nav-tabs.nav-stacked
         -@project.aspects.each do |asp|
           %li{class:"#{'active' if asp == @aspect}"}
             = link_to "/project/#{@project.id}/life_tape/posts?asp=#{asp.id}" do
@@ -18,11 +18,11 @@
   %li.panel#stage_discontent
     - if @project.status > 2
       = link_to "/project/#{@project.id}/discontent/posts", class:"stage_menu2" do
-        %h4.no-margin
+        %h4.no-margin.text-left
           2.
           =@project.status_title(:discontent_posts)
       - if request.original_url.include? 'discontent'
-        %ul.nav.nav-tabs.nav-stacked.panel-collapse
+        %ul.nav.nav-tabs.nav-stacked
           -@project.proc_aspects.each do |asp|
             %li{class:"#{'active' if asp == @aspect_post}"}
               = link_to "/project/#{@project.id}/discontent/posts?asp=#{asp.id}" do
@@ -38,7 +38,7 @@
           2.
           =@project.status_title(:discontent_posts)
 
-    %ul#stats-collapse.panel-collapse.collapse
+
 
   %li.panel#stage_concept{class:  @project.stage_style(:concept_posts)}
     - if  @project.status > 6

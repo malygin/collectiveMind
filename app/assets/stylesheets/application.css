@@ -19508,7 +19508,7 @@ ol.text-list {
   }
 
   .wrap {
-    margin-left: 62px;
+    margin-left: 220px;
   }
 
   .sidebar-hidden .sidebar {
@@ -19519,12 +19519,15 @@ ol.text-list {
     margin-right: 0;
   }
 
-  .logo {
-    left: 1.6%;
-    padding-left: 5px;
-    width: 40px;
-    top: 13px;
-  }
+    .logo {
+        -moz-box-sizing: content-box;
+        -webkit-box-sizing: content-box;
+        box-sizing: content-box;
+        position: absolute;
+        left: 55px;
+        top: 5px;
+        z-index: 1;
+    }
 
   .sidebar .settings .btn-sm, .sidebar .settings .btn-group-sm > .btn {
     padding: 2px 8px;
@@ -19654,7 +19657,7 @@ ol.text-list {
   }
 
   .sidebar + .wrap, .sidebar-on-right .sidebar + .wrap {
-    margin-left: 0;
+    margin-left: 200;
     margin-right: 0;
   }
 

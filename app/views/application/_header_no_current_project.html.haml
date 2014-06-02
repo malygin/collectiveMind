@@ -1,11 +1,11 @@
 
 .navbar
-  .logo.pull-left
+  .logo.pull-left.hidden-xs
     %h2
       %strong Mass
       Decision
 
-  %ul.nav.navbar-nav.pull-right.navbar-menu.hidden-xs
+  %ul.nav.navbar-nav.pull-right.navbar-menu
     - if signed_in?
       %li
         =link_to current_user, "project/11/users/#{current_user.id}"
