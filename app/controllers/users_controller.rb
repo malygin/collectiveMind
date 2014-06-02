@@ -24,7 +24,7 @@ class UsersController < ApplicationController
     else
       @journals = Journal.events_for_my_feed @project.id, @user.id, 30
     end
-    if @my_jounals_count > 0
+    if @my_journals_count > 0
       @journals.update_all(viewed: true)
     end
 
