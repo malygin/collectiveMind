@@ -11,8 +11,7 @@ def prepare_data
     @project = Core::Project.find(params[:project])
     add_breadcrumb I18n.t('stages.life_tape'), life_tape_posts_path(@project)
     @aspects = Discontent::Aspect.where(:project_id => @project)
-    @journals = Journal.events_for_user_feed @project.id
-    @my_jounals = Journal.count_events_for_my_feed(@project.id, current_user)
+
     @news = ExpertNews::Post.where(:project_id => @project).first
     @post_star = LifeTape::Post.where(:project_id => @project, :important => 't' ).limit(3)
     @mini_help = Help::Post.where(stage:1, mini: true).first
@@ -37,15 +36,15 @@ end
     end
 
     @post = current_model.new
-    @order = params[:order]
-    @page = params[:page]
-    @folder = :life_tape
-    # load_filter_for_aspects   if (request.xhr? and @order.nil? and @page.nil?)
+    # @order = params[:order]
+    # @page = params[:page]
+    # @folder = :life_tape
 
-    # @posts  = current_model.where(:project_id => @project).where(:status => 0)
-    #   .eager_load(:discontent_aspects)
-    #   .order_by_param(@order)
-    #   .paginate(:page => params[:page], :per_page => 20)
+    if params[:viewed]
+      Journal.find(params[:viewed]).update_attribute(:viewed, true)
+      @my_journals_count = Journal.count_events_for_my_feed(@project.id, current_user)
+    end
+
     @comment = LifeTape::Comment.new
     respond_to do |format|
       format.html{render :layout  => 'application_two_column'}

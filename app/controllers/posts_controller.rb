@@ -3,9 +3,15 @@ class PostsController < ApplicationController
   before_filter :authenticate
   before_filter :prepare_data, :only => [:index, :new, :edit, :show, :show_essay, 
     :vote_list, :essay_list]
+  before_filter :journal_data, :only => [:index, :new, :edit, :show, :show_essay,
+    :vote_list, :essay_list]
   #before_filter :have_rights
   before_filter :have_rights, :only =>[:edit]
 
+  def journal_data
+    @my_journals_count = Journal.count_events_for_my_feed(@project.id, current_user)
+    @my_journals  = Journal.events_for_my_feed @project.id, current_user.id, 5
+  end
   # before_filter :authorized_user, :only => :destroy
  def authenticate
    unless current_user
@@ -50,9 +56,6 @@ end
 def prepare_data
     @project = Core::Project.find(params[:project]) 
 
-    @journals = Journal.events_for_user_feed @project.id
-    @news = ExpertNews::Post.where(:project_id => @project).first 
-    
 end
 
 def add_comment
@@ -102,7 +105,10 @@ def index
   def show
     @post = current_model.where(:id => params[:id], :project_id => params[:project]).first
     add_breadcrumb 'Просмотр записи', polymorphic_path(@post, :project => @project.id)
-
+    if params[:viewed]
+      Journal.find(params[:viewed]).update_attribute(:viewed, true)
+      @my_journals_count = Journal.count_events_for_my_feed(@project.id, current_user)
+    end
     @comments = @post.comments.paginate(:page => params[:page], :per_page => 30)
     #puts "___________"
     #puts @post

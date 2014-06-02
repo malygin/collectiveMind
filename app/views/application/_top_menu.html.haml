@@ -92,15 +92,14 @@
   %li.dropdown
     %a#messages.dropdown-toggle{"data-toggle" => "dropdown", :href => "#", :title => "Уведомления"}
       %i.fa.fa-comments
-      - if @my_jounals > 0
-        %span.count(style='background: #e5603b;')=@my_jounals
+      - if @my_journals_count > 0
+        %span.count(style='background: #e5603b;')=@my_journals_count
       -else
-        %span.count=@my_jounals
+        %span.count=@my_journals_count
 
 
     %ul#messages-menu.dropdown-menu.messages{:role => "menu"}
-      -@my_journals = Journal.events_for_my_feed @project.id, current_user.id, 5
-      -unless @my_journals.nil?
+      -unless @my_journals.empty?
         - @my_journals.each do |journal|
           %li{:role => "presentation"}
             %p.message{:href => "#"}
@@ -108,29 +107,31 @@
               .details(style="margin-left: 60px;")
                 .sender=journal.user
                 .text= journal_parser(journal, @project.id).html_safe
-
-      %li{:role => "presentation"}
-        %a.text-align-center.see-all{:href => "/project/#{@project.id}/users/#{current_user.id}"}
-          Очистить
-          %i.fa.fa-arrow-right
-  %li.dropdown
-    %a.dropdown-toggle{"data-toggle" => "dropdown", :href => "#", :title => "События"}
-      %i.fa.fa-group
-    %ul#support-menu.dropdown-menu.support{:role => "menu"}
-      -unless @journals.nil?
-        - @journals.each do |journal|
-          -  if journal_parser(journal, @project.id)
-            %li{:role => "presentation"}
-              %p.message{:href => "#", :style => 'margin-left: 10px;'}
-                = link_to journal.user, user_path(@project,journal.user)
-                = journal_parser(journal, @project.id).html_safe
-                %br
-                %small=Russian::strftime(journal.created_at,"%d %B %k:%M:%S ")
-
-      %li{:role => "presentation"}
-        %a.text-align-center.see-all{:href => "/project/#{@project.id}/journals/"}
-          Посмотреть все
-          %i.fa.fa-arrow-right
+        %li{:role => "presentation"}
+          %a.text-align-center.see-all{:href => "/project/#{@project.id}/users/#{current_user.id}"}
+            Очистить
+            %i.fa.fa-arrow-right
+      -else
+        %li
+          %a Уведомлений нет
+  -#%li.dropdown
+  -#  %a.dropdown-toggle{"data-toggle" => "dropdown", :href => "#", :title => "События"}
+  -#    %i.fa.fa-group
+  -#  %ul#support-menu.dropdown-menu.support{:role => "menu"}
+  -#    -unless @journals.nil?
+  -#      - @journals.each do |journal|
+  -#        -  if journal_parser(journal, @project.id)
+  -#          %li{:role => "presentation"}
+  -#            %p.message{:href => "#", :style => 'margin-left: 10px;'}
+  -#              = link_to journal.user, user_path(@project,journal.user)
+  -#              = journal_parser(journal, @project.id).html_safe
+  -#              %br
+  -#              %small=Russian::strftime(journal.created_at,"%d %B %k:%M:%S ")
+  -#
+  -#    %li{:role => "presentation"}
+  -#      %a.text-align-center.see-all{:href => "/project/#{@project.id}/journals/"}
+  -#        Посмотреть все
+  -#        %i.fa.fa-arrow-right
 
   %li.divider
 

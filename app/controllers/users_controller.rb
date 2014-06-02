@@ -16,14 +16,15 @@ class UsersController < ApplicationController
     @project = Core::Project.find(params[:project])
 
     add_breadcrumb  @user, user_path(@project, @user)
-    @my_jounals = Journal.count_events_for_my_feed(@project.id, current_user)
+    @my_journals_count = Journal.count_events_for_my_feed(@project.id, current_user)
+    @my_journals  = Journal.events_for_my_feed @project.id, current_user.id, 5
 
     if @user != current_user
      @journals = Journal.events_for_user_show @project.id, @user.id, 30
     else
       @journals = Journal.events_for_my_feed @project.id, @user.id, 30
     end
-    if @my_jounals > 0
+    if @my_jounals_count > 0
       @journals.update_all(viewed: true)
     end
 
@@ -31,8 +32,8 @@ class UsersController < ApplicationController
 
 	def edit
     @project = Core::Project.find(params[:project])
-    @my_jounals = Journal.count_events_for_my_feed(@project.id, current_user)
-
+    @my_journals_count = Journal.count_events_for_my_feed(@project.id, current_user)
+    @my_journals  = Journal.events_for_my_feed @project.id, current_user.id, 5
     @user = User.find(params[:id])
     add_breadcrumb  "Редактирование профиля: #{@user}", edit_user_path(@project, @user)
 
@@ -41,7 +42,8 @@ class UsersController < ApplicationController
 	def index
     @project = Core::Project.find(params[:project])
     add_breadcrumb I18n.t('menu.raiting'), users_path(@project)
-    @my_jounals = Journal.count_events_for_my_feed(@project.id, current_user)
+    @my_journals_count = Journal.count_events_for_my_feed(@project.id, current_user)
+    @my_journals  = Journal.events_for_my_feed @project.id, current_user.id, 5
     @users = User.where('score>0').where('admin=?', false).order('score DESC').paginate(:page =>params[:page])
   end
 

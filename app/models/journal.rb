@@ -16,7 +16,7 @@ class Journal < ActiveRecord::Base
   end
 
   def self.events_for_my_feed(project_id, user_id, lim=5)
-    Journal.where(' project_id = ? AND type_event  IN (?) AND user_informed = ?',project_id, @my_types, user_id).limit(lim).order('created_at DESC')
+    Journal.where(' project_id = ? AND type_event  IN (?) AND user_informed = ? AND viewed =?',project_id, @my_types, user_id, false).limit(lim).order('created_at DESC')
   end
 
   def self.count_events_for_my_feed(project_id, user_id)

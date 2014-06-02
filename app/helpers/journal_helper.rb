@@ -169,28 +169,28 @@ module JournalHelper
 			#	'принял ' +link_to('оценку', estimate_post_path(j.body))
       when 'my_life_tape_comment'
         s = j.body.split(':')
-        ": '#{s[0]}...' к "+  link_to('вашей теме', "/project/#{project}/life_tape/posts/#{s[1]}" )
+        ": '#{s[0]}...' к "+  link_to('вашей теме', "/project/#{project}/life_tape/posts/#{s[1].gsub('#', "&&viewed=#{j.id}#")}")
       when 'other_life_tape_comment'
         s = j.body.split(':')
-        ": '#{s[0]}...' к "+  link_to('к теме, которую вы ранне комментировали', "/project/#{project}/life_tape/posts/#{s[1]}" )
+        ": '#{s[0]}...' к "+  link_to('к теме, которую вы ранне комментировали', "/project/#{project}/life_tape/posts/#{s[1].gsub('#', "&&viewed=#{j.id}#")}" )
       when 'my_add_score_comment'
         s = j.body.split(':')
-        "вы получили #{s[0]} баллов "  +  link_to("за полезный комментарий ", "/project/#{project}/#{s[1]}" )
+        "вы получили #{s[0]} баллов "  +  link_to("за полезный комментарий ", "/project/#{project}/#{s[1].gsub('#', "?viewed=#{j.id}#")}" )
       when 'my_discontent_comment'
         s = j.body.split(':')
-        "добавил(а) комментарий '#{s[0]}...' к "+  link_to('вашему несовершенству', "/project/#{project}/discontent/posts/#{s[1]}" )
+        "добавил(а) комментарий '#{s[0]}...' к "+  link_to('вашему несовершенству', "/project/#{project}/discontent/posts/#{s[1].gsub('#', "?viewed=#{j.id}#")}" )
       when 'other_discontent_comment'
         s = j.body.split(':')
-        "добавил(а) комментарий '#{s[0]}...' к "+  link_to(' несовершенству, которые вы комментировали ранее', "/project/#{project}/discontent/posts/#{s[1]}" )
+        "добавил(а) комментарий '#{s[0]}...' к "+  link_to(' несовершенству, которые вы комментировали ранее', "/project/#{project}/discontent/posts/#{s[1].gsub('#', "?viewed=#{j.id}#")}" )
       when 'my_concept_comment'
         s = j.body.split(':')
-        "добавил(а) комментарий '#{s[0]}...' к "+  link_to('вашему нововведению', "/project/#{project}/concept/posts/#{s[1]}" )
+        "добавил(а) комментарий '#{s[0]}...' к "+  link_to('вашему нововведению', "/project/#{project}/concept/posts/#{s[1].gsub('#', "?viewed=#{j.id}#")}" )
       when 'my_discontent_note'
         s = j.body.split(':')
-        "добавил(а) замечание  '#{s[0]}...' к "+  link_to('вашему несовершенству', "/project/#{project}/discontent/posts/#{s[1]}" )
+        "добавил(а) замечание  '#{s[0]}...' к "+  link_to('вашему несовершенству', "/project/#{project}/discontent/posts/#{s[1]}?viewed=#{j.id}")
       when 'my_concept_note'
         s = j.body.split(':')
-        "добавил(а) замечание  '#{s[0]}...' к "+  link_to('вашему нововведению', "/project/#{project}/concept/posts/#{s[1]}" )
+        "добавил(а) замечание  '#{s[0]}...' к "+  link_to('вашему нововведению', "/project/#{project}/concept/posts/#{s[1].gsub('#', "?viewed=#{j.id}#")}" )
 			else
 				'что то другое'
 		end 
