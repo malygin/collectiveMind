@@ -20,8 +20,9 @@
         %section.widget
           .body
             .row
-              .col-md-6
-                -@aspect_post.aspect_posts.by_positive(4).each do |post|
+
+              -@aspect_post.aspect_posts.by_status(4).each do |post|
+                .col-md-6
                   =render partial:'discontent/posts/post_short2', object: post
                   %br
                   %h4 Предложенные решения
@@ -54,39 +55,6 @@
                             %a.btn.btn-lg.btn-warning.btn-block(href="/project/#{@project.id}/concept/posts/new?dis_id=#{post.id}" style="font-weight: normal !important;")
                               Добавить свое решение
 
-              .col-md-6
-                -@aspect_post.aspect_posts.by_negative(4).each do |post|
-                  =render partial:'discontent/posts/post_short2', object: post
-                  %br
-                  %h4 Предложенные решения
-                  %br
-                  %table.table.table-striped.table-bordered
-                    %thead
-                      %tr
-                        %th
-                          ="#"
-                        %th
-                          Название / Автор
-                        %th
-                          Статус
-                    %tbody
-                      - post.dispost_concepts.each_with_index  do |pa, index|
-                        - if pa.status == 0
-                          %tr
-                            %td
-                              =index+1
-                            %td
-                              =link_to pa.post_aspects.first.title, concept_post_path(@project, pa)
-                            %td
-                              -if class_for_concept_type(pa) == 'panel-p'
-                                Проверено
-                              -else
-                                Проверяется
-                      -if  @project.status == 7
-                        %tr
-                          %td{:colspan => 3}
-                            %a.btn.btn-lg.btn-warning.btn-block(href="/project/#{@project.id}/concept/posts/new?dis_id=#{post.id}" style="font-weight: normal !important;")
-                              Добавить свое решение
 
 
 

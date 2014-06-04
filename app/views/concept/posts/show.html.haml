@@ -182,8 +182,9 @@
                   %blockquote
                     %h4 Смотрите также другие решения:
                     -tp.discontent.dispost_concepts.each do |pa|
-                      =link_to pa.post_aspects.first.title, concept_post_path(@project, pa)
-                      %br
+                      - unless pa == @post
+                        =link_to pa.post_aspects.first.title, concept_post_path(@project, pa)
+                        %br
 
                 %td.col-md-6
                   %section.widget

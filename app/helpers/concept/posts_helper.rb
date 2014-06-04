@@ -104,7 +104,7 @@ module Concept::PostsHelper
     elsif stat == false
       'color-red'
     else
-      'color-blue'
+      'color-orange'
     end
   end
 end

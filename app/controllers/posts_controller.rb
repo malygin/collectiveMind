@@ -65,7 +65,7 @@ def add_comment
       @comment = post.comments.create(:content => params[name_of_comment_for_param][:content], :user =>current_user)
       if  post.instance_of? LifeTape::Post
         current_user.journals.build(:type_event=>name_of_comment_for_param+'_save', :project => @project, :body=>"#{@comment.content[0..148]}:?asp=#{post.discontent_aspects.first.id}#comment_#{@comment.id}").save!
-      elsif post.instance_of? Discontent::Post
+      else
         current_user.journals.build(:type_event=>name_of_comment_for_param+'_save', :project => @project, :body=>"#{@comment.content[0..148]}:#{post.id}#comment_#{@comment.id}").save!
       end
       #PostMailer.add_comment(post, @comment).deliver  if post.user!=@comment.user
@@ -79,7 +79,7 @@ def add_comment
         if u!=current_user and u!= post.user
           if  post.instance_of? LifeTape::Post
             current_user.journals.build(:type_event=>'other_'+name_of_comment_for_param, :user_informed =>u, :project => @project, :body=>"#{@comment.content[0..148]}:?asp=#{post.discontent_aspects.first.id}#comment_#{@comment.id}", :viewed=> false).save!
-          elsif post.instance_of? Discontent::Post
+          else
             current_user.journals.build(:type_event=>'other_'+name_of_comment_for_param, :user_informed =>u, :project => @project,  :body=>"#{@comment.content[0..148]}:#{post.id}#comment_#{@comment.id}", :viewed=> false).save!
           end
         end

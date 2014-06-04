@@ -2,12 +2,20 @@
 module JournalHelper
   def journal_icon(j)
     case j.type_event
+      when 'concept_post_save'
+        'fa fa-plus color-orange'
+      when 'concept_post_update'
+        'fa fa-edit color-orange'
+      when 'concept_comment_save'
+        'fa fa-comment color-orange'
+
       when 'discontent_post_save'
         'fa fa-plus color-red'
       when 'discontent_post_update'
         'fa fa-edit color-red'
       when 'discontent_comment_save'
         'fa fa-comment color-red'
+
       when 'life_tapet_post_save'
         'fa fa-plus color-teal'
       when 'life_tape_comment_save'
@@ -39,13 +47,14 @@ module JournalHelper
           'добавил нововведение  '+ link_to("#{s[0]}...", concept_post_path(project,s[1]))
         end
 
+      when 'concept_post_update'
+        c =  Concept::Post.find(j.body)
+        'отредактировал нововведение '+  link_to("#{c.post_aspects.first.title[0..100]} ...", concept_post_path(project,j.body))
       when 'concept_comment_save'
         s = j.body.split(':')
-        if s.length == 1
-          'добавил комментарий к '+  link_to('нововведению', concept_post_path(project, j.body))
-        else
-          "добавил комментарий '#{s[0]}...' к "+  link_to('нововведению', concept_post_path(project, s[1]))
-        end
+        c =  Concept::Post.find(s[1])
+
+        "добавил комментарий '#{s[0]}...' к нововведению "+  link_to("#{c.post_aspects.first.title[0..100]} ...", "/project/#{project}/concept/posts/#{s[1]}")
 			when 'expert_news_post_save'
 				'добавил  '+ link_to('новость', expert_news_post_path(project, j.body))
       when 'expert_news_comment_save'
@@ -94,8 +103,6 @@ module JournalHelper
       when 'discontent_post_to_expert'
         'отправил эксперту ' +link_to('несовершенство', discontent_post_path(project,j.body))
 
-      when 'concept_post_update'
-				'отредактировал '+  link_to('нововведение', concept_post_path(project,j.body))
 			when 'question_post_save'
 				'задал '+  link_to('вопрос', question_post_path(project, j.body))		
       when 'question_comment_save'
@@ -182,6 +189,9 @@ module JournalHelper
       when 'other_discontent_comment'
         s = j.body.split(':')
         "добавил(а) комментарий '#{s[0]}...' к "+  link_to(' несовершенству, которые вы комментировали ранее', "/project/#{project}/discontent/posts/#{s[1].gsub('#', "?viewed=#{j.id}#")}" )
+      when 'other_concept_comment'
+        s = j.body.split(':')
+        "добавил(а) комментарий '#{s[0]}...' к "+  link_to(' нововведению, которые вы комментировали ранее', "/project/#{project}/concept/posts/#{s[1].gsub('#', "?viewed=#{j.id}#")}" )
       when 'my_concept_comment'
         s = j.body.split(':')
         "добавил(а) комментарий '#{s[0]}...' к "+  link_to('вашему нововведению', "/project/#{project}/concept/posts/#{s[1].gsub('#', "?viewed=#{j.id}#")}" )
@@ -190,7 +200,7 @@ module JournalHelper
         "добавил(а) замечание  '#{s[0]}...' к "+  link_to('вашему несовершенству', "/project/#{project}/discontent/posts/#{s[1]}?viewed=#{j.id}")
       when 'my_concept_note'
         s = j.body.split(':')
-        "добавил(а) замечание  '#{s[0]}...' к "+  link_to('вашему нововведению', "/project/#{project}/concept/posts/#{s[1].gsub('#', "?viewed=#{j.id}#")}" )
+        "добавил(а) замечание  '#{s[0]}...' к "+  link_to('вашему нововведению', "/project/#{project}/concept/posts/#{s[1]}?viewed=#{j.id}")
 			else
 				'что то другое'
 		end 
