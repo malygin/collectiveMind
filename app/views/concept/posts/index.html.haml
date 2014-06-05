@@ -13,9 +13,10 @@
           %small
             Сбор идей для решения несовершенств в рамках процедуры:
             =@project.name
-      .col-md-3
-        .pull-right
-          = link_to 'Быстрый cтарт!', concept_posts_fast_discussion_concepts_path(@project) ,remote: true, id: 'fast_discussion_concepts',  class: 'btn btn-lg btn-warning'
+      - if signed_in? and @project.status == 7
+        .col-md-3
+          .pull-right
+            = link_to 'Быстрый cтарт!', concept_posts_fast_discussion_concepts_path(@project) ,remote: true, id: 'fast_discussion_concepts',  class: 'btn btn-lg btn-warning'
 
   .body
     %br

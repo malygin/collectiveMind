@@ -1,4 +1,4 @@
--if boss? and (@project.status == 3 or @project.status == 4 or @project.status == 5)
+-if boss? and (@project.status == 3 or @project.status == 4 or @project.status == 5 or @project.status == 7)
   =link_to({:controller => 'discontent/posts', :action => :status_post, :id => post_field.id, :type_field => type_fd},:remote => true,:method => :put, :id => "label_dispost_#{post_field.id}",:class => "note_text") do
     %span.label(class= "#{class_for_type_field(post_field,type_fd)}" id="#{id_for_type_field(type_fd)}_#{post_field.id}")=name_for_type_field(type_fd)
 -else
