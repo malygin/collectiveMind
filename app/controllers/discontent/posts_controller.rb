@@ -46,7 +46,7 @@ class Discontent::PostsController < PostsController
     #@news = ExpertNews::Post.where(:project_id => @project).first
     @status = params[:status]
     @aspect = params[:aspect]
-    @aspects = Discontent::Aspect.where(:project_id => @project, :status => 0).eager_load(:aspect_posts)
+    @aspects = Discontent::Aspect.where(:project_id => @project, :status => 0) #.eager_load(:aspect_posts)
     #@mini_help = Help::Post.where(stage:2, mini: true).first
 
     #@post_star = []

@@ -23,7 +23,8 @@
           =@project.status_title(:discontent_posts)
       - if request.original_url.include? 'discontent'
         %ul.nav.nav-tabs.nav-stacked
-          -@project.proc_aspects.each do |asp|
+          -#todo for the following procedure should be replaced aspects -> proc_aspects
+          -@project.aspects.each do |asp|
             %li{class:"#{'active' if asp == @aspect_post}"}
               = link_to "/project/#{@project.id}/discontent/posts?asp=#{asp.id}" do
                 %i.fa.fa-minus(style="font-size: 8px;")
@@ -48,7 +49,7 @@
           =@project.status_title(:concept_posts)
       - if request.original_url.include? 'concept'
         %ul.nav.nav-tabs.nav-stacked.panel-collapse
-          -@project.aspects.each do |asp|
+          -@project.proc_aspects.each do |asp|
             %li
               = link_to "/project/#{@project.id}/concept/posts?asp=#{asp.id}" do
                 %i.fa.fa-minus(style="font-size: 8px;")

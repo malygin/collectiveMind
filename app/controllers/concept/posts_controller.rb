@@ -417,10 +417,10 @@ class Concept::PostsController < PostsController
                  @able = false if @post != @posts_for_discussion.last or (@posts_for_discussion.size == 1 and @dispost != @discontent_post) or (@dispost == @discontent_post and @post.id > @concept_post.id)
                  break
                elsif params[:save_form]
-                 if !params[:discussion].empty?  and not (@dispost != @discontent_post and @post == @concept_post)
+                 if !params[:discussion].empty?  and @dispost == @discontent_post
                    @comment = @concept_post.comments.create(:content => params[:discussion], :user => current_user)
                    current_user.journals.build(:type_event=>'concept_comment'+'_save', :project => @project, :body=>"#{@comment.content[0..48]}:#{@concept_post.id}#comment_#{@comment.id}").save!
-                   if @post.user!=current_user
+                   if @concept_post.user!=current_user
                      current_user.journals.build(:type_event=>'my_'+'concept_comment', :user_informed => @concept_post.user, :project => @project, :body=>"#{@comment.content[0..24]}:#{@concept_post.id}#comment_#{@comment.id}", :viewed=> false).save!
                    end
                    current_user.concept_post_discussions.create(post: @concept_post, discontent_post: @discontent_post)
