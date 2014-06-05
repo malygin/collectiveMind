@@ -49,6 +49,10 @@ class User < ActiveRecord::Base
   has_many :user_discussion_disposts, :through => :discontent_post_discussions, :source => :post, :class_name => 'Discontent::Post'
   has_many :user_discussion_disaspects, :through => :discontent_post_discussions, :source => :aspect, :class_name => 'Discontent::Aspect'
 
+  has_many :concept_post_discussions, :class_name => 'Concept::PostDiscussion'
+  has_many :user_discussion_concepts, :through => :concept_post_discussions, :source => :post, :class_name => 'Concept::Post'
+  has_many :user_discussion_disposts, :through => :concept_post_discussions, :source => :discontent_post, :class_name => 'Discontent::Post'
+
   has_many :concept_posts, :class_name => "Concept::Post"
   
   has_many :aspect_votings, :class_name => "LifeTape::Voiting"
@@ -71,6 +75,7 @@ class User < ActiveRecord::Base
 
   has_many :user_checks , :class_name => "UserCheck"
   scope :check_field, ->(p,c){ where(project: p.id, status: 't', check_field: c) }
+
   validates :name,
   				   :length => { :maximum => 50 }
 

@@ -21,6 +21,9 @@ class Discontent::Post < ActiveRecord::Base
   has_many :discontent_post_discussions, :class_name => 'Discontent::PostDiscussion'
   has_many :dispost_discussion_users, :through => :discontent_post_discussions, :source => :user, :class_name => 'User'
 
+  has_many :concept_post_discussions, :class_name => 'Concept::PostDiscussion'
+  has_many :dispost_discussion_users, :through => :concept_post_discussions, :source => :user, :class_name => 'User'
+
   has_many :plan_conditions, :class_name => 'Plan::PostAspect', :foreign_key => 'discontent_aspect_id'
 
   has_many :concept_posts, :through => :concept_conditions, :foreign_key => 'concept_post_id', :class_name => "Concept::Post"

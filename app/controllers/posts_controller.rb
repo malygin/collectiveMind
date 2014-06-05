@@ -416,6 +416,15 @@ def index
 
   end
 
+  def check_field
+    @project = Core::Project.find(params[:project])
+    if !params[:check_field].nil? and !params[:status].nil?
+      current_user.user_checks.where(project_id: @project.id,check_field: params[:check_field]).destroy_all
+      current_user.user_checks.create(project_id: @project.id, check_field: params[:check_field], status: params[:status]).save!
+    end
+    head :ok
+  end
+
   protected
 
   def load_filter_for_aspects

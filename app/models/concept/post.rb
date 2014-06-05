@@ -12,6 +12,9 @@
 
   has_many :concept_notes, :class_name => 'Concept::Note'
 
+  has_many :concept_post_discussions, :class_name => 'Concept::PostDiscussion'
+  has_many :concept_discussion_users, :through => :concept_post_discussions, :source => :user, :class_name => 'User'
+
   has_many :concept_post_discontents, :class_name => 'Concept::PostDiscontent'
   has_many :concept_disposts, :through => :concept_post_discontents, :source => :discontent_post , :class_name => 'Discontent::Post'
   has_many :concept_post_resources, :class_name => 'Concept::PostResource'
@@ -24,6 +27,10 @@
   scope :by_status, ->(p){where(status: p)}
 
   scope :by_project, ->(p){ where(project: p) }
+
+  scope :by_discussions, ->(posts) { where("concept_posts.id NOT IN (#{posts.join(", ")})") unless posts.empty? }
+
+  scope :posts_for_discussions, ->(p){ where(:project_id => p.id, status: 0).where("concept_posts.stat_name = 't' and concept_posts.stat_content = 't'") }
 
   def self.scope_vote_top(post)
     joins(:concept_post_discontents).

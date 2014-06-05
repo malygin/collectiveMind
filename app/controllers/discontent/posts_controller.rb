@@ -417,15 +417,4 @@ class Discontent::PostsController < PostsController
       end
     end
 
-
-    def check_field
-      @project = Core::Project.find(params[:project])
-      if !params[:check_field].nil? and !params[:status].nil?
-        current_user.user_checks.where(project_id: @project.id,check_field: params[:check_field]).destroy_all
-        current_user.user_checks.create(project_id: @project.id, check_field: params[:check_field], status: params[:status]).save!
-      end
-      respond_to do |format|
-        format.js
-      end
-    end
 end
