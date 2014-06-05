@@ -13,16 +13,13 @@
     = render partial: 'discontent/posts/post_short2', object: @dispost unless @dispost.nil?
   %hr
   %div{:id => "update_concept_discussion"}
-    %h4.text-success Нововведение:
     = render partial: 'concept_for_discussion', object: @post.post_aspects.first unless @post.nil?
-  %br
   .text-info#comment_info(style='display:none;')
     Пока ни одно нововведение к данному несовершенству не было обработано
   %hr
   #form_for_comment_concept
     %p
       Прокомментируйте указанное нововведение и переходите к следующему.
-    %br
     =text_area_tag "discussion",'', :class => "form-control", rows: 6, style: 'width: 100%;',placeholder: 'Ваше мнение', id:'discussion_text_area'
     %br
     .text-success#comment_success(style='display:none;')

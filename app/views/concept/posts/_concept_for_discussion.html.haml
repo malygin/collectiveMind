@@ -1,13 +1,15 @@
-%h5.text-center.color-teal=concept_for_discussion.title
-%br
-.text-center
-  %p.h5.color-teal
-    =t('form.novation_what')
-  %br
-  =concept_for_discussion.name
-%br
-.text-center
-  %p.h5.color-teal
-    =t('form.novation_how')
-  %br
-  =concept_for_discussion.content
+
+%h5.text-center.color-teal
+  %b Нововведение:
+  =concept_for_discussion.title
+%table.table.table-striped
+  %tr
+    %th
+      %b=t('form.novation_what')
+    %th
+      %b=t('form.novation_how')
+
+  %tr
+    %td=concept_for_discussion.name
+  %tr
+    %td=concept_for_discussion.content

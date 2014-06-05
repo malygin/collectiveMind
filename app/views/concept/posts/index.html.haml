@@ -42,6 +42,8 @@
                           Название / Автор
                         %th
                           Статус
+                        %th
+                          Заполненность
                     %tbody
                       - post.dispost_concepts.each_with_index  do |pa, index|
                         - if pa.status == 0
@@ -56,11 +58,12 @@
 
                               -else
                                 Проверяется
+                            %td
                               %span.h4.color-orange
                                 =status_for_concept(pa.post_aspects.first)
                       -if  @project.status == 7
                         %tr
-                          %td{:colspan => 3, :style => "font-weight: normal !important;"}
+                          %td{:colspan => 4, :style => "font-weight: normal !important;"}
                             %a.btn.btn-lg.btn-warning.btn-block(href="/project/#{@project.id}/concept/posts/new?dis_id=#{post.id}" style="font-weight: normal !important;")
                               Добавить свое решение
 
