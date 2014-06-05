@@ -42,6 +42,8 @@
                           Название / Автор
                         %th
                           Статус
+                        %th
+                          Заполненность
                     %tbody
                       - post.dispost_concepts.each_with_index  do |pa, index|
                         - if pa.status == 0
@@ -56,6 +58,7 @@
 
                               -else
                                 Проверяется
+                            %td
                               %span.h4.color-orange
                                 =status_for_concept(pa.post_aspects.first)
                       -if  @project.status == 7
