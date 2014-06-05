@@ -107,4 +107,35 @@ module Concept::PostsHelper
       'color-orange'
     end
   end
+
+  def status_for_concept(concept)
+    add_score = 0
+
+    if concept.name.present?
+      add_score+=1
+    end
+    if concept.content.present?
+      add_score+=1
+    end
+    if concept.positive.present?
+      add_score+=1
+    end
+    if concept.negative.present?
+      add_score+=1
+    end
+    if concept.negative_r.present?
+      add_score+=1
+    end
+    if concept.problems.present?
+      add_score+=1
+    end
+    if concept.reality.present?
+      add_score+=1
+    end
+    if concept.concept_post.concept_post_resources.present?
+      add_score+=1
+    end
+    "#{(add_score/8.to_f)*100}%"
+  end
+
 end

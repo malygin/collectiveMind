@@ -376,3 +376,62 @@ $('#select_for_aspects').on 'change', ->
       data:
         check_field: check_field
         status: status
+
+
+
+#@activate_discussion_selectize= ->
+#  $select = $("#select_for_discussion_discontents").selectize
+#    labelField: "show_content"
+#    valueField: "id"
+#    sortField: "show_content"
+#    searchField: "show_content"
+#    create: false
+##    hideSelected: true
+#    onChange: (item) ->
+#      optsel = $("#option_for_select_discontent")
+#      project_id = parseInt(optsel.attr('project'))
+##      id = parseInt(optsel.attr('post'))
+#      select_discontent_for_discussion_concepts(project_id)
+#      selectize = $select[0].selectize
+##      selectize.removeOption(item)
+##      selectize.refreshOptions()
+##      selectize.close()
+#    render:
+#      item: (item, escape) ->
+#        short_item = item.show_content.split('<br/>')[0].replace('<b> что: </b>', '')
+#        return '<div>'+short_item+'</div>'
+#      option: (item, escape) ->
+#        return '<div>'+item.show_content+'</div>'
+
+#@select_discontent_for_discussion_concepts= (project)->
+#  sel = $('#select_for_discussion_discontents :selected')
+#  if sel.val() != ''
+#    $.ajax
+#      url: "/project/#{project}/concept/posts/fast_discussion_concepts"
+#      type: "get"
+#      data:
+#        sel_dis_id: sel.val()
+
+
+@discussion_select_discontent= (el)->
+  optsel = $("#option_for_select_discontent")
+  project_id = parseInt(optsel.attr('project'))
+  sel_dis_id = $(el).val()
+  if sel_dis_id != ''
+    $.ajax
+      url: "/project/#{project_id}/concept/posts/fast_discussion_concepts"
+      type: "get"
+      data:
+        sel_dis_id: sel_dis_id
+
+@discussion_select_discontent_add_concept= (el)->
+  optsel = $("#option_for_select_discontent")
+  project_id = parseInt(optsel.attr('project'))
+  sel_dis_id = $(el).val()
+  if sel_dis_id != ''
+    $.ajax
+      url: "/project/#{project_id}/concept/posts/fast_discussion_concepts"
+      type: "get"
+      data:
+        sel_dis_id: sel_dis_id
+        add_concept: 1

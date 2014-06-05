@@ -1,5 +1,7 @@
 -#- if not current_user.answered_for_help_stage?(3) and not @mini_help.nil?
 -#  =render partial: 'shared/small_help', object: @mini_help
+#render_fast_discussion_concepts
+  =render partial:'form_wizard'
 %section.widget
   %header
     .row
@@ -11,6 +13,9 @@
           %small
             Сбор идей для решения несовершенств в рамках процедуры:
             =@project.name
+      .col-md-3
+        .pull-right
+          = link_to 'Быстрый cтарт!', concept_posts_fast_discussion_concepts_path(@project) ,remote: true, id: 'fast_discussion_concepts',  class: 'btn btn-lg btn-warning'
 
   .body
     %br
@@ -47,8 +52,11 @@
                             %td
                               -if class_for_concept_type(pa) == 'panel-p'
                                 Проверено
+
                               -else
                                 Проверяется
+                              %span.h4.color-orange
+                                =status_for_concept(pa.post_aspects.first)
                       -if  @project.status == 7
                         %tr
                           %td{:colspan => 3, :style => "font-weight: normal !important;"}
