@@ -1,8 +1,12 @@
 %section.widget
   .body
     .media.option_for_selectize{id: "post_#{@post.id}", project: "#{@project.id}", post: "#{@post.id}"}
-      = render 'users/user_post', :user => @post.user
+      - if @post.user
+        = render 'users/user_post', :user => @post.user
       .media-body
+        - if @post.user
+          .media-heading
+            =link_to @post.user, user_path(@project, @post.user)
         -@post.post_aspects.each do |da|
           = render partial: 'discontent/aspects/aspect', object: da
         =discontent_style_name(@post.style)
@@ -35,13 +39,14 @@
             .panel-body{:id => "panel_union"}
               =render @post.discontent_posts
           %br
-          .text-success#dispost_success(style='display:none;')
-            Несовершенство успешно добавлено
-          =select_tag "selectize_tag",
-          options_from_collection_for_select(Discontent::Post.for_union(@project.id), "id", "show_content"),
-          class: 'selectized',
-          include_blank: true,
-          placeholder: "Добавьте несовершенство"
+          - if boss?
+            .text-success#dispost_success(style='display:none;')
+              Несовершенство успешно добавлено
+            =select_tag "selectize_tag",
+            options_from_collection_for_select(Discontent::Post.for_union(@project.id), "id", "show_content"),
+            class: 'selectized',
+            include_blank: true,
+            placeholder: "Добавьте несовершенство"
 
         %br
         %br

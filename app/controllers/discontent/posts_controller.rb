@@ -346,6 +346,7 @@ class Discontent::PostsController < PostsController
 
     def fast_discussion_discontents
       @project = Core::Project.find(params[:project])
+      status  = @project.status == 3 ? 0 : 2
       @aspects = Discontent::Aspect.where(:project_id => @project, :status => 0).order(:id)
       @discontent_aspect = Discontent::Aspect.find(params[:asp_id]) unless params[:asp_id].nil?
       @discontent_post = Discontent::Post.find(params[:dis_id]) unless params[:dis_id].nil?
@@ -356,7 +357,7 @@ class Discontent::PostsController < PostsController
       if params[:asp_id].nil? and params[:dis_id].nil? and params[:aspect_id].nil? and params[:save_form_dispost].nil?
         @aspects.each do |asp|
           @aspect = asp
-          posts_for_discussion = @aspect.aspect_posts.posts_for_discussions(@project).by_discussions(user_discussion_posts).order('"discontent_posts"."id"')
+          posts_for_discussion = @aspect.aspect_posts.posts_for_discussions(@project).by_status(status).by_discussions(user_discussion_posts).order('"discontent_posts"."id"')
           unless posts_for_discussion.empty?
             @post = posts_for_discussion.first
             break
@@ -364,13 +365,13 @@ class Discontent::PostsController < PostsController
         end
       elsif !params[:aspect_id].nil?
         @aspect = @select_aspect
-        @post = @aspect.aspect_posts.posts_for_discussions(@project).by_discussions(user_discussion_posts).order('"discontent_posts"."id"').first
+        @post = @aspect.aspect_posts.posts_for_discussions(@project).by_status(status).by_discussions(user_discussion_posts).order('"discontent_posts"."id"').first
       elsif !params[:dis_id].nil? and !params[:asp_id].nil?
         index = @aspects.index @discontent_aspect
         @able = true
         while @able do
           @aspect = @aspects[index]
-          @posts_for_discussion = @aspect.aspect_posts.posts_for_discussions(@project).by_discussions(user_discussion_posts).select('distinct "discontent_posts".*').order('"discontent_posts"."id"')
+          @posts_for_discussion = @aspect.aspect_posts.posts_for_discussions(@project).by_status(status).by_discussions(user_discussion_posts).select('distinct "discontent_posts".*').order('"discontent_posts"."id"')
           unless @posts_for_discussion.empty?
             @posts_for_discussion.each do |p|
               @post = p

@@ -46,7 +46,7 @@ class Discontent::Post < ActiveRecord::Base
 
   scope :for_union, ->(project){ where("discontent_posts.status = 0 and discontent_posts.project_id = ? ", project) }
 
-  scope :posts_for_discussions, ->(p){where(:project_id => p.id, status: 0).where("discontent_posts.status_content = 't' and discontent_posts.status_whered = 't' and discontent_posts.status_whend = 't'")}
+  scope :posts_for_discussions, ->(p){where(:project_id => p.id).where("discontent_posts.status_content = 't' and discontent_posts.status_whered = 't' and discontent_posts.status_whend = 't'")}
 
   scope :by_discussions, ->(posts) { where("discontent_posts.id NOT IN (#{posts.join(", ")})") unless posts.empty? }
 

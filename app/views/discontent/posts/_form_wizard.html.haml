@@ -28,14 +28,15 @@
                   -else
                     2.
                 %strong Обзор
-            %li
-              %a{"data-toggle" => "tab", :href => "#tab3"}
-                %small
-                  -if check
-                    2.
-                  -else
-                    3.
-                %strong Добавить
+            - if @project.status == 3
+              %li
+                %a{"data-toggle" => "tab", :href => "#tab3"}
+                  %small
+                    -if check
+                      2.
+                    -else
+                      3.
+                  %strong Добавить
 
           #bar.progress.progress-small
             .progress-bar
