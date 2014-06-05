@@ -79,6 +79,40 @@
                       .form-group.has-success= display_content(tp.positive)
                       -if @project.status == 7
                         = render partial: 'concept/posts/note_list', :locals => {:post_field => @post,:type_fd => 3}
+                  %section.widget
+                    .body
+                      %p
+                        .badge.badge-mutted В 2
+                        -if boss? and @project.status == 7
+                          =link_to({:controller => 'concept/posts', :action => :status_post, :id => @post.id, :type_field => 4},:remote => true,:method => :put, :id => "label_post_#{@post.id}",:class => "note_text") do
+                            %span(class= "#{class_for_concept_type_field(@post,4)}" id="#{id_for_concept_type(4)}") Какие ресурсы необходимы?
+                            =link_to({:controller => 'concept/posts', :action => :new_note, :id => @post.id, :type_field => 4},:remote => true,:method => :put, :id => "btn_note_4", :class => "note_text") do
+                              .label.label-danger замечание
+                        -else
+                          %span(class= "#{class_for_concept_type_field(@post,4)}" id="positive_r")=t('form.cond_res')
+                      %br
+                      %br
+                      %table.table.table-striped.table-bordered
+                        %thead
+                          %tr
+                            %th
+                              ="#"
+                            %th
+                              Название
+                            %th
+                              Пояснение
+                        %tbody
+                          - @post.concept_post_resources.each_with_index  do |r, index|
+                            %tr
+                              %td
+                                =index+1
+                              %td
+                                =r.name
+                              %td
+                                =r.desc
+
+                      -if @project.status == 7
+                        = render partial: 'concept/posts/note_list', :locals => {:post_field => @post,:type_fd => 4}
 
                   %section.widget
                     .body
@@ -155,27 +189,6 @@
                         %span(class= "#{class_for_concept_type_field(@post,4)}" id="positive_r") Какие ресурсы необходимы?
                       %br
                       %br
-                      %table.table.table-striped.table-bordered
-                        %thead
-                          %tr
-                            %th
-                              ="#"
-                            %th
-                              Название
-                            %th
-                              Пояснение
-                        %tbody
-                          - @post.concept_post_resources.each_with_index  do |r, index|
-                            %tr
-                              %td
-                                =index+1
-                              %td
-                                =r.name
-                              %td
-                                =r.desc
-
-                      -if @project.status == 7
-                        = render partial: 'concept/posts/note_list', :locals => {:post_field => @post,:type_fd => 4}
 
                   %blockquote
                     %h4 Смотрите также другие решения:
