@@ -19,7 +19,7 @@ class PostsController < ApplicationController
    end
  end
  def have_rights
-   unless  current_model.find(params[:id]).user == current_user
+   if  current_model.find(params[:id]).user != current_user and not boss?
      redirect_to :back
    end
 end
