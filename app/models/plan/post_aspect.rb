@@ -12,6 +12,11 @@ class Plan::PostAspect  < ActiveRecord::Base
   has_many :plan_post_first_conds, :class_name => 'Plan::PostFirstCond'
   has_many :plan_post_resources, :class_name => 'Plan::PostResource', :foreign_key => :post_id
 
+  has_many :plan_post_first_conds, :class_name => 'Plan::PostFirstCond'
+
+  belongs_to :plan_post_stage, :class_name => 'Plan::PostStage', :foreign_key => :post_stage_id
+  has_many :plan_post_actions, :class_name => 'Plan::PostAction'
+
   def compare_text
     unless self.concept_post_aspect.nil?
       score = ((self.content.similar(self.concept_post_aspect.content) +
