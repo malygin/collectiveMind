@@ -9430,6 +9430,7 @@ a.thumbnail:focus {
   -moz-border-radius: 1px;
   -webkit-border-radius: 1px;
   border-radius: 1px;
+  z-index: 100000;
   /*.dow {
   	border-top: 1px solid #ddd !important;
   }*/

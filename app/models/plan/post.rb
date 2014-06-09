@@ -1,6 +1,6 @@
 class Plan::Post < ActiveRecord::Base
    include BasePost
-  attr_accessible :first_step, :goal, :other_steps, :plan_first, :plan_other,:plan_control, :step  #for form master
+  attr_accessible :first_step, :goal, :other_steps, :plan_first, :plan_other,:plan_control, :step,:name  #for form master
 
    #has_many :task_triplets, :order => 'position'
 

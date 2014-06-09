@@ -49,7 +49,7 @@ class Plan::PostsController < PostsController
     @post = current_model.new
 
     respond_to do |format|
-      format.html {render :layout => 'application_one_column'}
+      format.html {render :layout => 'application_two_column'}
     end
   end
 
@@ -87,9 +87,11 @@ class Plan::PostsController < PostsController
         current_user.journals.build(:type_event=>'plan_post_save', :body=>@plan_post.id,   :project => @project).save!
         format.html { redirect_to   edit_plan_post_path(project: @project, id: @plan_post) }
         format.json { render json: @plan_post, status: :created, location: @plan_post }
+        format.js #{head :ok}
       else
         format.html { render action: 'new' }
         format.json { render json: @plan_post.errors, status: :unprocessable_entity }
+        format.js #{head :ok}
       end
     end
   end
@@ -99,7 +101,7 @@ class Plan::PostsController < PostsController
     add_breadcrumb 'Просмотр записи', polymorphic_path(@post, :project => @project.id)
     @comment = comment_model.new
     @comments = @post.comments.paginate(:page => params[:page], :per_page => 30)
-    render 'show' , :layout => 'application_one_column'
+    render 'show' , :layout => 'application_two_column'
   end
 
   def edit
@@ -108,7 +110,7 @@ class Plan::PostsController < PostsController
 
     add_breadcrumb 'Редактирование записи', polymorphic_path(@post, :project => @project.id)
 
-    render 'edit' , :layout => 'application_one_column'
+    render 'edit' , :layout => 'application_two_column'
   end
 
 
@@ -275,4 +277,133 @@ end
     end
   end
 
+  def new_stage
+    @project = Core::Project.find(params[:project])
+    @post = Plan::Post.find(params[:id])
+    @post_stage = Plan::PostStage.new
+    respond_to do |format|
+      format.js
+    end
+  end
+
+  def edit_stage
+    @project = Core::Project.find(params[:project])
+    @post = Plan::Post.find(params[:id])
+    @post_stage = Plan::PostStage.find(params[:stage_id])
+    respond_to do |format|
+      format.js
+    end
+  end
+
+  def create_stage
+    @project = Core::Project.find(params[:project])
+    @post = Plan::Post.find(params[:id])
+    @post_stage = Plan::PostStage.new(params[:plan_post_stage])
+    @post_stage.post = @post
+    @post_stage.status = 0
+    respond_to do |format|
+      if @post_stage.save!
+        format.js
+      else
+        format.js { render action: 'new_stage' }
+      end
+    end
+  end
+
+  def update_stage
+    @project = Core::Project.find(params[:project])
+    @post = Plan::Post.find(params[:id])
+    @post_stage = Plan::PostStage.find(params[:stage_id])
+    @post_stage.update_attributes(params[:plan_post_stage])
+    respond_to do |format|
+      if @post_stage.save!
+        format.js
+      else
+        format.js { render action: 'edit_stage' }
+      end
+    end
+  end
+
+  def destroy_stage
+    @project = Core::Project.find(params[:project])
+    @post = Plan::Post.find(params[:id])
+    @post_stage = Plan::PostStage.find(params[:stage_id])
+    @post_stage.destroy if @post_stage.post.user == current_user or boss?
+    respond_to do |format|
+      format.js
+    end
+  end
+
+  def new_action
+    @project = Core::Project.find(params[:project])
+    @post = Plan::Post.find(params[:id])
+    @post_stage = Plan::PostStage.find(params[:stage_id])
+    @post_aspect = Plan::PostAspect.find(params[:con_id])
+    @post_action = Plan::PostAction.new
+    respond_to do |format|
+      format.js
+    end
+  end
+
+  def edit_action
+    @project = Core::Project.find(params[:project])
+    @post = Plan::Post.find(params[:id])
+    @post_aspect = Plan::PostAspect.find(params[:con_id])
+    @post_action = Plan::PostAction.find(params[:act_id])
+    respond_to do |format|
+      format.js
+    end
+  end
+
+  def create_action
+    @project = Core::Project.find(params[:project])
+    @post = Plan::Post.find(params[:id])
+    @post_stage = Plan::PostStage.find(params[:stage_id])
+    @post_aspect = Plan::PostAspect.find(params[:con_id])
+    @post_action = Plan::PostAction.new(params[:plan_post_action])
+    @post_action.plan_post_aspect = @post_aspect
+    @post_action.status = 0
+    respond_to do |format|
+      if @post_action.save!
+        format.js
+      else
+        format.js { render action: 'new_action' }
+      end
+    end
+  end
+
+  def update_action
+    @project = Core::Project.find(params[:project])
+    @post = Plan::Post.find(params[:id])
+    @post_aspect = Plan::PostAspect.find(params[:con_id])
+    @post_action = Plan::PostAction.find(params[:act_id])
+    @post_action.update_attributes(params[:plan_post_action])
+    respond_to do |format|
+      if @post_action.save!
+        format.js
+      else
+        format.js { render action: 'edit_action' }
+      end
+    end
+  end
+
+  def destroy_action
+    @project = Core::Project.find(params[:project])
+    @post = Plan::Post.find(params[:id])
+    @post_stage = Plan::PostStage.find(params[:stage_id])
+    @post_aspect = Plan::PostAspect.find(params[:con_id])
+    @post_action = Plan::PostAction.find(params[:act_id])
+    @post_action.destroy
+    respond_to do |format|
+      format.js
+    end
+  end
+
+  def edit_concept
+
+  end
+
+  def destroy_concept
+
+  end
 end

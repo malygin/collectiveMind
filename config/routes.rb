@@ -123,6 +123,18 @@ scope '/project/:project' do
       post :get_concepts, :on => :collection
       member do
         put :add_concept
+        put :new_stage
+        put :edit_stage
+        put :create_stage
+        put :update_stage
+        delete :destroy_stage
+        put :edit_concept
+        put :destroy_concept
+        put :new_action
+        put :edit_action
+        put :create_action
+        put :update_action
+        delete :destroy_action
       end
     end
   end

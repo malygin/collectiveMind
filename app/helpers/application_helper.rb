@@ -188,4 +188,9 @@ module ApplicationHelper
     end
     false
   end
+
+  def rowspan_stage(stage)
+    2 + stage.plan_post_aspects.size + stage.actions_rowcount.size + (stage.plan_post_aspects.size > 0 ? stage.plan_post_aspects.size : 0)
+  end
+
 end

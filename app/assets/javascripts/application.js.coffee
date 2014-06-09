@@ -187,6 +187,13 @@ $(window).load ->
 
 $(window).load ->
   $('.liFixar').liFixar()
+  $('.datepicker').datepicker(
+    format: 'yyyy-mm-dd'
+    autoclose: true
+  ).on "changeDate", (e) ->
+    $(this).datepicker "hide"
+    return
+
 #  $(".chat-messages").slimScroll
 #    start: 'bottom'
 #    size: '5px'
@@ -435,3 +442,9 @@ $('#select_for_aspects').on 'change', ->
       data:
         sel_dis_id: sel_dis_id
         add_concept: 1
+
+@activate_datepicker= ->
+  $('.datepicker').datepicker(
+    format: 'yyyy-mm-dd'
+  ).on "changeDate", (e) ->
+    $(this).datepicker "hide"

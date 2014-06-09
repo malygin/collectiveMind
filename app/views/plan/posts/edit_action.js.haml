@@ -1,0 +1,4 @@
+$('#modal_action').empty();
+$('#modal_action').html("#{escape_javascript(render :partial => 'modal_new_action', :locals => { :action => @post_action })}");
+$('#modal_new_action').modal('show');
+activate_datepicker();

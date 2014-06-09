@@ -64,12 +64,11 @@
     %ul#ui-collapse.panel-collapse.collapse
 
   %li.panel#stage_plan{class:  @project.stage_style(:plan_posts)}
-    -#%a.accordion-toggle.collapsed{"data-parent" => "#side-nav", "data-toggle" => "collapse", :href => "#components-collapse"}
     - if  @project.status > 8
-      = link_to "/project/#{@project.id}/plan/posts" , class:"#{@project.stage_style_link(@breadcrumbs[0].name, :plan_posts)}" do
-        %i.fa.fa-bookmark-o
-        =@project.status_title(:plan_posts)
-        %br
+      = link_to "/project/#{@project.id}/plan/posts" , class:"stage_menu4" do
+        %h4.no-margin
+          4.
+          =@project.status_title(:plan_posts)
         %small.text-center=t('stages.plans', count: @project.plan_post.count)
     -else
       %a.stage_menu4

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140605075117) do
+ActiveRecord::Schema.define(:version => 20140608090522) do
 
   create_table "answers", :force => true do |t|
     t.string   "text"
@@ -519,6 +519,12 @@ ActiveRecord::Schema.define(:version => 20140605075117) do
     t.integer  "ozf4"
     t.integer  "ozs4"
     t.integer  "on4"
+    t.integer  "nep1"
+    t.integer  "nep2"
+    t.integer  "nep3"
+    t.integer  "nep4"
+    t.text     "nep"
+    t.integer  "all_grade"
     t.boolean  "first_stage"
     t.integer  "plan_post_first_cond_id"
   end
@@ -678,12 +684,10 @@ ActiveRecord::Schema.define(:version => 20140605075117) do
     t.string   "comment_admin"
     t.boolean  "trash",                  :default => false
     t.integer  "frustration_comment_id"
-    t.integer  "useful_frustration_id"
   end
 
   add_index "frustration_comments", ["created_at"], :name => "index_frustration_comments_on_created_at"
   add_index "frustration_comments", ["frustration_id"], :name => "index_frustration_comments_on_frustration_id"
-  add_index "frustration_comments", ["useful_frustration_id"], :name => "index_frustration_comments_on_useful_frustration_id"
   add_index "frustration_comments", ["user_id"], :name => "index_frustration_comments_on_user_id"
 
   create_table "frustration_essays", :force => true do |t|
@@ -900,6 +904,26 @@ ActiveRecord::Schema.define(:version => 20140605075117) do
 
   add_index "plan_comments", ["post_id"], :name => "index_plan_comments_on_post_id"
 
+  create_table "plan_post_action_resources", :force => true do |t|
+    t.integer  "post_action_id"
+    t.string   "name"
+    t.text     "desc"
+    t.integer  "resource_id"
+    t.datetime "created_at",     :null => false
+    t.datetime "updated_at",     :null => false
+  end
+
+  create_table "plan_post_actions", :force => true do |t|
+    t.integer  "plan_post_aspect_id"
+    t.string   "name"
+    t.text     "desc"
+    t.date     "date_begin"
+    t.date     "date_end"
+    t.integer  "status"
+    t.datetime "created_at",          :null => false
+    t.datetime "updated_at",          :null => false
+  end
+
   create_table "plan_post_aspects", :force => true do |t|
     t.integer  "discontent_aspect_id"
     t.integer  "plan_post_id"
@@ -922,6 +946,7 @@ ActiveRecord::Schema.define(:version => 20140605075117) do
     t.text     "control_s"
     t.text     "control_r"
     t.text     "title"
+    t.integer  "post_stage_id"
   end
 
   create_table "plan_post_first_conds", :force => true do |t|
@@ -956,6 +981,17 @@ ActiveRecord::Schema.define(:version => 20140605075117) do
     t.datetime "updated_at",  :null => false
   end
 
+  create_table "plan_post_stages", :force => true do |t|
+    t.integer  "post_id"
+    t.string   "name"
+    t.text     "desc"
+    t.date     "date_begin"
+    t.date     "date_end"
+    t.integer  "status"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
   create_table "plan_post_votings", :force => true do |t|
     t.integer  "user_id"
     t.integer  "post_id"
@@ -982,6 +1018,7 @@ ActiveRecord::Schema.define(:version => 20140605075117) do
     t.text     "plan_first"
     t.text     "plan_other"
     t.text     "plan_control"
+    t.string   "name"
   end
 
   add_index "plan_posts", ["created_at"], :name => "index_plan_posts_on_created_at"
@@ -1015,6 +1052,9 @@ ActiveRecord::Schema.define(:version => 20140605075117) do
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end
+
+# Could not dump table "projects" because of following StandardError
+#   Unknown type 'serial' for column 'id'
 
   create_table "question_comment_votings", :force => true do |t|
     t.integer  "user_id"
@@ -1089,9 +1129,9 @@ ActiveRecord::Schema.define(:version => 20140605075117) do
     t.integer  "user_id"
     t.string   "check_field"
     t.boolean  "status"
-    t.integer  "project_id"
     t.datetime "created_at",  :null => false
     t.datetime "updated_at",  :null => false
+    t.integer  "project_id"
   end
 
   create_table "users", :force => true do |t|
