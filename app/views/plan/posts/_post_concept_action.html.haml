@@ -1,0 +1,11 @@
+%tr
+  %td(style="width:80px;")
+    %small
+      =post_concept_action.date_begin
+      =post_concept_action.date_end
+  %td
+    =post_concept_action.name
+  %td
+    -unless post_concept_action.plan_post_action_resources.nil?
+      -post_concept_action.plan_post_action_resources.each  do |res|
+        .label.label-danger=res.name

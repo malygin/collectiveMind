@@ -6609,10 +6609,10 @@ pre {
 /*         Forms           */
 /***************************/
 label,
-input,
+/*input,*/
 button,
 select,
-textarea {
+/*textarea */ {
   font-weight: 300;
 }
 

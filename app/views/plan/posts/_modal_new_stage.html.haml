@@ -13,13 +13,13 @@
             .controls.form-group
               .col-md-10
                 =f.text_field :name, :class => 'form-control', placeholder: 'Введите название нового этапа', id:'name_stage'
-                %span.help-block Короткое название этапа
+                %span.small Короткое название этапа
           .control-group
             %label.control-label{:for => "desc_stage"} Эссе по этапу
             .controls.form-group
               .col-md-10
                 =f.text_area :desc, :class => 'form-control', :rows => 4, placeholder: 'Введите описание нового этапа', id:'desc_stage'
-                %span.help-block Опишите ваше видение проекта в будущем в рамках данного этапа
+                %span.small Опишите ваше видение проекта в будущем в рамках данного этапа
           .col-md-6
             .form-group
               %label{:for => "date_begin"} Дата начала реализации

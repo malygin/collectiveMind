@@ -129,12 +129,17 @@ scope '/project/:project' do
         put :update_stage
         delete :destroy_stage
         put :edit_concept
-        put :destroy_concept
+        delete :destroy_concept
         put :new_action
         put :edit_action
         put :create_action
         put :update_action
         delete :destroy_action
+        put :add_form_for_concept
+        put :update_concept
+        get :get_concept
+        put :update_get_concept
+        put :render_table
       end
     end
   end

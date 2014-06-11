@@ -1,0 +1,17 @@
+#modal_edit_concept.modal.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"}
+  .modal-dialog.modal-lg
+    .modal-content
+      .modal-header
+        %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} &times;
+        %h4#myModalLabel.modal-title Редактирование нововведения
+      .modal-body
+        =render :partial => 'form_for_light_concept', :object => form_for_edit_concept
+        %br
+        .text-success#concept_success(style='display:none;')
+          Нововведение успешно отредактировано
+        .text-danger#concept_failed(style='display:none;')
+          Заполните, пожалуйста, все поля
+
+
+      .modal-footer
+        %button.btn.btn-primary(type = "button" data-dismiss="modal") Закрыть

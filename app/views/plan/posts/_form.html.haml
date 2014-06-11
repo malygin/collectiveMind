@@ -43,10 +43,15 @@
                       .col-md-10
                         =f.text_area :goal, rows: 4, style: 'width: 100%;', class: "form-control", id: "goals"
                         %span.help-block Опишите цели проекта
+                  .color-green#plan_success(style='display:none;')
+                    Проект успешно обновлен
                   .control-group
                     .controls.form-group
                       .col-md-10
-                        %input.btn.btn-success.pull-right{:style => @post.persisted? ? "display:none;":"display:block;", :type => "submit", :id  => "send_plan_post", :value => "Сохранить и приступить к добавлению этапов"}
+                        -if @post.persisted?
+                          %input.btn.btn-success.pull-right{:type => "submit", :id  => "send_plan_post", :value => "Сохранить"}
+                        -else
+                          %input.btn.btn-success.pull-right{:type => "submit", :id  => "send_plan_post", :value => "Сохранить и приступить к добавлению этапов"}
               .col-md-6
                 %legend.section
                   Этапы проекта
@@ -67,6 +72,7 @@
           .form-horizontal
             %fieldset
               #render_modal_concept
+              #render_modal_edit_concept
               #modal_action
               %table.table.table-striped.table-bordered
                 %thead
@@ -84,62 +90,61 @@
                     %th(colspan="2")
                       Мероприятия этапа
                 %tbody#table_stages
-                  -@post.post_stages.each_with_index do |stage, index|
-                    -#-if index == 0
-                    %tr
-                      %td(rowspan="#{rowspan_stage(stage)}" class="td_stage_#{stage.id}")
-                        =index+1
-                      %td(rowspan="#{rowspan_stage(stage)}" class="td_stage_#{stage.id}")
-                        =stage.date_begin
-                        ="/"
-                        =stage.date_end
-                      %td(rowspan="#{rowspan_stage(stage)}" class="td_stage_#{stage.id}")
-                        =stage.name
-                      %td(rowspan="#{rowspan_stage(stage)}" class="td_stage_#{stage.id}")
-                        =stage.desc
-                      -#%td
-                        -#%table.table.table-striped.table-bordered
-                        -#  %tbody
-                    - unless stage.plan_post_aspects.nil?
-                      - stage.plan_post_aspects.each_with_index do |concept, i|
-                        -#-if i == 0
-                        %tr
-                          %td(rowspan="#{2+concept.plan_post_actions.size}" id="td_concept_#{concept.id}")
-                            %span.h5{:id => "name_post_concept_#{concept.id}"}=concept.title
-                            .pull-right
-                              =link_to edit_concept_plan_post_path(@project, @post, :con_id => concept.id), :method => :put, :remote => true, :id => "edit_post_concept_#{concept.id}" do
-                                %button.btn.btn-sm.btn-warning{:type => "button"}
-                                  %i.fa.fa-pencil
-                              =link_to destroy_concept_plan_post_path(@project, @post, :con_id => concept.id, :stage_id => stage.id), :method => :delete, :remote => true, :confirm => 'Удалить нововведение?', :id => "destroy_post_concept_#{concept.id}" do
-                                %button.btn.btn-sm.btn-danger{:type => "button"}
-                                  %i.fa.fa-trash-o
+                  - unless @post.post_stages.nil?
+                    -@post.post_stages.each_with_index do |stage, index|
+                      %tr
+                        %td(rowspan="#{rowspan_stage(stage)}" class="td_stage_#{stage.id}")
+                          =index+1
+                        %td(rowspan="#{rowspan_stage(stage)}" class="td_stage_#{stage.id}")
+                          =stage.date_begin
+                          ="/"
+                          =stage.date_end
+                        %td(rowspan="#{rowspan_stage(stage)}" class="td_stage_#{stage.id}")
+                          =stage.name
+                        %td(rowspan="#{rowspan_stage(stage)}" class="td_stage_#{stage.id}")
+                          =stage.desc
+                        -#%td
+                          -#%table.table.table-striped.table-bordered
+                          -#  %tbody
+                      - unless stage.plan_post_aspects.nil?
+                        - stage.plan_post_aspects.each_with_index do |concept|
+                          %tr(id="tr_concept_#{concept.id}")
+                            %td(rowspan="#{2+concept.plan_post_actions.size}" id="td_concept_#{concept.id}")
+                              %span.h5{:id => "name_post_concept_#{concept.id}"}=concept.title
+                              .pull-right
+                                =link_to edit_concept_plan_post_path(@project, @post, :con_id => concept.id, :edit_concept => true), :method => :put, :remote => true, :id => "edit_post_concept_#{concept.id}" do
+                                  %button.btn.btn-sm.btn-warning{:type => "button"}
+                                    %i.fa.fa-pencil
+                                =link_to destroy_concept_plan_post_path(@project, @post, :con_id => concept.id, :stage_id => stage.id), :method => :delete, :remote => true, :confirm => 'Удалить нововведение?', :id => "destroy_post_concept_#{concept.id}" do
+                                  %button.btn.btn-sm.btn-danger{:type => "button"}
+                                    %i.fa.fa-trash-o
 
-                        - unless concept.plan_post_actions.nil?
-                          - concept.plan_post_actions.each do |action|
-                            %tr(id="tr_action_#{action.id}")
-                              %td(style="width:30px;")
-                                %small
-                                  =action.date_begin
-                                  =action.date_end
-                              %td
-                                %span.h5{:id => "name_post_action_#{action.id}"}=action.name
-                                .pull-right
-                                  =link_to edit_action_plan_post_path(@project, @post, :act_id => action.id, :con_id => concept.id), :method => :put, :remote => true, :id => "edit_post_action_#{action.id}" do
-                                    %button.btn.btn-xs.btn-warning{:type => "button"}
-                                      %i.fa.fa-pencil
-                                  =link_to destroy_action_plan_post_path(@project, @post, :act_id => action.id, :con_id => concept.id, :stage_id => stage.id), :method => :delete, :remote => true, :confirm => 'Удалить нововведение?', :id => "destroy_post_action_#{action.id}" do
-                                    %button.btn.btn-xs.btn-danger{:type => "button"}
-                                      %i.fa.fa-trash-o
+                          - unless concept.plan_post_actions.nil?
+                            - concept.plan_post_actions.each do |action|
+                              %tr(id="tr_action_#{action.id}")
+                                %td(style="width:30px;")
+                                  %small
+                                    =action.date_begin
+                                    =action.date_end
+                                %td
+                                  %span.h5{:id => "name_post_action_#{action.id}"}=action.name
+                                  .pull-right
+                                    =link_to edit_action_plan_post_path(@project, @post, :act_id => action.id, :con_id => concept.id), :method => :put, :remote => true, :id => "edit_post_action_#{action.id}" do
+                                      %button.btn.btn-xs.btn-warning{:type => "button"}
+                                        %i.fa.fa-pencil
+                                    =link_to destroy_action_plan_post_path(@project, @post, :act_id => action.id, :con_id => concept.id, :stage_id => stage.id), :method => :delete, :remote => true, :confirm => 'Удалить нововведение?', :id => "destroy_post_action_#{action.id}" do
+                                      %button.btn.btn-xs.btn-danger{:type => "button"}
+                                        %i.fa.fa-trash-o
 
-                          %tr(id="tr_new_action_#{concept.id}")
-                            %td(colspan="2")
-                              =link_to new_action_plan_post_path(@project, @post, :con_id => concept.id, :stage_id => stage.id), :method => :put, :remote => true, :class => "btn btn-default btn-success btn-block", :id => "btn_new_concept", :style => "font-weight: normal;" do
-                                Запланировать мероприятие
+                            %tr(id="tr_new_action_#{concept.id}")
+                              %td(colspan="2")
+                                =link_to new_action_plan_post_path(@project, @post, :con_id => concept.id, :stage_id => stage.id), :method => :put, :remote => true, :class => "btn btn-default btn-success btn-block", :id => "btn_new_concept", :style => "font-weight: normal;" do
+                                  Запланировать мероприятие
 
-                    %tr(id="tr_new_concept_#{stage.id}")
-                      %td(colspan="3")
-                        =link_to add_concept_plan_post_path(@project, @post, :concept_empty => 0, :stage_id => stage.id), :method => :put, :remote => true, :class => "btn btn-default btn-warning btn-block", :id => "btn_new_concept", :style => "font-weight: normal;" do
-                          Добавить нововведение
+                      %tr(id="tr_new_concept_#{stage.id}")
+                        %td(colspan="3")
+                          =link_to add_concept_plan_post_path(@project, @post, :stage_id => stage.id), :method => :put, :remote => true, :class => "btn btn-default btn-warning btn-block", :id => "btn_new_concept", :style => "font-weight: normal;" do
+                            Добавить нововведение
 
 
 
@@ -149,6 +154,61 @@
         #tab3.tab-pane
           .form-horizontal
             %fieldset
+              #modal_concept_action
+              .col-md-2
+                - unless @post.post_stages.nil?
+                  %ul#menu-levels-collapse.side-nav
+                    -@post.post_stages.each_with_index do |stage, index|
+                      %li.panel
+                        %a.accordion-toggle{"data-parent" => "#menu-levels-collapse", "data-toggle" => "collapse", :href => "#sub-menu-#{index}-collapse"}
+                          %b="Этап #{index+1}. "
+                          =stage.name
+                        - unless stage.plan_post_aspects.nil?
+                          %ul.panel-collapse.collapse.in{:id => "sub-menu-#{index}-collapse"}
+                            - stage.plan_post_aspects.each_with_index do |concept, i|
+                              %li.concept_side{:id => "li_concept_#{concept.id}"}
+                                =link_to get_concept_plan_post_path(@project, @post, :con_id => concept.id), :method => :get, :remote => true do
+                                  =concept.title
+              .col-md-6
+                #render_get_concept
+              .col-md-4
+                #render_get_concept_actions
+
+
+
+
+      -#%li.panel
+      -#  %a.accordion-toggle.collapsed{"data-parent" => "#side-nav", "data-toggle" => "collapse", :href => "#menu-levels-collapse"}
+      -#    %i.fa.fa-code-fork
+      -#    %span.name Menu Levels
+      -#  %ul#menu-levels-collapse.panel-collapse.collapse
+      -#    %li
+      -#      %a{:href => "#"} Item 1.1
+      -#    %li
+      -#      %a{:href => "#"} Item 1.2
+      -#    %li.panel
+      -#      %a.accordion-toggle.collapsed{"data-parent" => "#menu-levels-collapse", "data-toggle" => "collapse", :href => "#sub-menu-1-collapse"} Item 1.3
+      -#      %ul#sub-menu-1-collapse.panel-collapse.collapse
+      -#        %li.panel
+      -#          %a.accordion-toggle.collapsed{"data-parent" => "#sub-menu-1-collapse", "data-toggle" => "collapse", :href => "#sub-menu-3-collapse"} Item 2.1
+      -#          %ul#sub-menu-3-collapse.panel-collapse.collapse
+      -#            %li
+      -#              %a{:href => "#"} Item 3.1
+      -#            %li
+      -#              %a{:href => "#"} Item 3.2
+      -#            %li
+      -#              %a{:href => "#"} Item 3.3
+      -#        %li
+      -#          %a{:href => "#"} Item 2.2
+      -#        %li.panel
+      -#          %a.accordion-toggle.collapsed{"data-parent" => "#sub-menu-1-collapse", "data-toggle" => "collapse", :href => "#sub-menu-2-collapse"} Item 2.3
+      -#          %ul#sub-menu-2-collapse.panel-collapse.collapse
+      -#            %li
+      -#              %a{:href => "#"} Item 3.4
+      -#            %li
+      -#              %a{:href => "#"} Item 3.5
+      -#            %li
+      -#              %a{:href => "#"} Item 3.6
 
 
 

@@ -11,6 +11,7 @@ class Plan::PostAspect  < ActiveRecord::Base
   belongs_to :discontent, :class_name => 'Discontent::Post', :foreign_key => :discontent_aspect_id
   has_many :plan_post_first_conds, :class_name => 'Plan::PostFirstCond'
   has_many :plan_post_resources, :class_name => 'Plan::PostResource', :foreign_key => :post_id
+  has_many :plan_post_means, :class_name => 'Plan::PostMean', :foreign_key => :post_id
 
   has_many :plan_post_first_conds, :class_name => 'Plan::PostFirstCond'
 
