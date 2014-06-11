@@ -560,4 +560,12 @@ end
       format.js
     end
   end
+
+  def render_concept_side
+    @project = Core::Project.find(params[:project])
+    @post = Plan::Post.find(params[:id])
+    respond_to do |format|
+      format.js
+    end
+  end
 end

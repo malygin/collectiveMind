@@ -2,17 +2,11 @@ $('#add_new_stage').html('<a id="btn_new_stage" class="btn btn-lg btn-success bt
 $('#second').removeClass('disabled');
 $('#third').removeClass('disabled');
 $('#btn_next').removeClass('disabled');
-$('#send_plan_post').html('Сохранить');
--#$('#second').append('<div id="option_for_render_table" project="#{@project.id}" post="#{@plan_post.id}"></div>');
--#$('#second').on('click', function() {
--#  var optsel = $("#option_for_render_table");
--#  var project_id = parseInt(optsel.attr('project'));
--#  var post_id = parseInt(optsel.attr('post'));
--#  return $.ajax({
--#  url: "/project/" + project_id + "/plan/posts/" + post_id + "/render_table",
--#  type: "put"
--#  });
--#});
+$('#send_plan_post').val('Сохранить');
+$('#second').append('<div id="option_for_render_tab" project="#{@project.id}" post="#{@plan_post.id}"></div>');
+-#$('#third').append('<div id="option_for_render_concept_side" project="#{@project.id}" post="#{@plan_post.id}"></div>');
+$('#second').on('click', function() {render_table();});
+$('#third').on('click', function() {render_concept_side();});
 
 
 

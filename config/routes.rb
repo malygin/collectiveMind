@@ -140,6 +140,7 @@ scope '/project/:project' do
         get :get_concept
         put :update_get_concept
         put :render_table
+        put :render_concept_side
       end
     end
   end

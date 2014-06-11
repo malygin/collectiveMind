@@ -10,6 +10,7 @@
           %a{"data-toggle" => "tab", :href => "#tab2"}
             %small 2.
             %strong План мероприятий
+          #option_for_render_tab(project="#{@project.id}" post="#{@post.id}")
         %li#third{:class => @post.persisted? ? nil:"disabled"}
           %a{"data-toggle" => "tab", :href => "#tab3"}
             %small 3.
@@ -155,7 +156,7 @@
           .form-horizontal
             %fieldset
               #modal_concept_action
-              .col-md-2
+              .col-md-2#concept_side
                 - unless @post.post_stages.nil?
                   %ul#menu-levels-collapse.side-nav
                     -@post.post_stages.each_with_index do |stage, index|
@@ -165,7 +166,7 @@
                           =stage.name
                         - unless stage.plan_post_aspects.nil?
                           %ul.panel-collapse.collapse.in{:id => "sub-menu-#{index}-collapse"}
-                            - stage.plan_post_aspects.each_with_index do |concept, i|
+                            - stage.plan_post_aspects.each_with_index do |concept|
                               %li.concept_side{:id => "li_concept_#{concept.id}"}
                                 =link_to get_concept_plan_post_path(@project, @post, :con_id => concept.id), :method => :get, :remote => true do
                                   =concept.title

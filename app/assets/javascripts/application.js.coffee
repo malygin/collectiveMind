@@ -479,3 +479,26 @@ $('#select_for_aspects').on 'change', ->
   ).click ->
     $(this).autocomplete "search", ""
     return
+
+
+@render_table= ->
+  optsel = $("#option_for_render_tab")
+  project_id = parseInt(optsel.attr('project'))
+  post_id = parseInt(optsel.attr('post'))
+  $.ajax
+    url: "/project/#{project_id}/plan/posts/#{post_id}/render_table"
+    type: "put"
+
+@render_concept_side= ->
+  optsel = $("#option_for_render_tab")
+  project_id = parseInt(optsel.attr('project'))
+  post_id = parseInt(optsel.attr('post'))
+  $.ajax
+    url: "/project/#{project_id}/plan/posts/#{post_id}/render_concept_side"
+    type: "put"
+
+$(window).load ->
+  $("#second").on "click", ->
+    render_table()
+  $("#third").on "click", ->
+    render_concept_side()
