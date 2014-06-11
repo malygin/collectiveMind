@@ -101,6 +101,10 @@ class Plan::PostsController < PostsController
     add_breadcrumb 'Просмотр записи', polymorphic_path(@post, :project => @project.id)
     @comment = comment_model.new
     @comments = @post.comments.paginate(:page => params[:page], :per_page => 30)
+    if params[:viewed]
+      Journal.find(params[:viewed]).update_attribute(:viewed, true)
+      @my_journals_count = Journal.count_events_for_my_feed(@project.id, current_user)
+    end
     render 'show' , :layout => 'application_two_column'
   end
 
