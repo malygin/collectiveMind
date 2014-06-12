@@ -3,11 +3,11 @@
         .icon
             = image_tag user.avatar.url(:thumb),  class: "img-circle"
 
-        - unless user.expert? or user.admin?
-            .time
-                = user.score
-                %br
-                баллов
+        -#- unless user.expert? or user.admin?
+        -#    .time
+        -#        = user.score
+        -#        %br
+        -#        баллов
 
 
         -#= image_tag 'award.png', title: 'Награда за 3 добавленных поста'

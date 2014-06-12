@@ -4,13 +4,19 @@ class Plan::PostAspect  < ActiveRecord::Base
   attr_accessible :discontent_aspect_id, :plan_post_id, :content, :control,
                   :name, :negative, :positive, :reality, :problems, :first_stage,
                   :concept_post_aspect_id, :obstacles, :negative_r,
-                  :positive_r, :negative_s, :positive_s,:control_r, :control_s,:title
+                  :positive_r, :negative_s, :positive_s,:control_r, :control_s,:title,:post_stage_id
 
   belongs_to :concept_post_aspect, :class_name => 'Concept::PostAspect', :foreign_key => :concept_post_aspect_id
   belongs_to :plan_post, :class_name => 'Plan::Post', :foreign_key => :plan_post_id
   belongs_to :discontent, :class_name => 'Discontent::Post', :foreign_key => :discontent_aspect_id
   has_many :plan_post_first_conds, :class_name => 'Plan::PostFirstCond'
   has_many :plan_post_resources, :class_name => 'Plan::PostResource', :foreign_key => :post_id
+  has_many :plan_post_means, :class_name => 'Plan::PostMean', :foreign_key => :post_id
+
+  has_many :plan_post_first_conds, :class_name => 'Plan::PostFirstCond'
+
+  belongs_to :plan_post_stage, :class_name => 'Plan::PostStage', :foreign_key => :post_stage_id
+  has_many :plan_post_actions, :class_name => 'Plan::PostAction', :foreign_key => :plan_post_aspect_id
 
   def compare_text
     unless self.concept_post_aspect.nil?

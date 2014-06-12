@@ -1,0 +1,13 @@
+- unless @post.post_stages.nil?
+  %ul#menu-levels-collapse.side-nav
+    -@post.post_stages.each_with_index do |stage, index|
+      %li.panel
+        %a.accordion-toggle{"data-parent" => "#menu-levels-collapse", "data-toggle" => "collapse", :href => "#sub-menu-#{index}-collapse"}
+          %b="Этап #{index+1}. "
+          =stage.name
+        - unless stage.plan_post_aspects.nil?
+          %ul.panel-collapse.collapse.in{:id => "sub-menu-#{index}-collapse"}
+            - stage.plan_post_aspects.each_with_index do |concept|
+              %li.concept_side{:id => "li_concept_#{concept.id}"}
+                =link_to get_concept_plan_post_path(@project, @post, :con_id => concept.id), :method => :get, :remote => true do
+                  =concept.title

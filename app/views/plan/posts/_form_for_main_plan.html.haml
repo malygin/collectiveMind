@@ -1,0 +1,19 @@
+= form_for  form_for_main_plan, :url => {:project => @project.id, :id => form_for_main_plan.id, :action => 'update'}, :remote => true, :method => :put, :html => { :class => 'new_or_edit' } do |f|
+  %legend.section
+    Описание проекта
+  .form-group(style="margin-left:0;")
+    %label{:for => "name_plan"} Название проекта
+    =f.text_field :name, :type => "text", class: "form-control", id: "name_plan"
+    %span.help-block Короткое название вашего проекта
+  .form-group(style="margin-left:0;")
+    %label{:for => "desc_plan"} Эссе по проекту
+    =f.text_area :content, rows: 12, style: 'width: 100%;', class: "form-control", id: "desc_plan"
+    %span.help-block Опишите ваше видение проекта в будущем
+  .form-group(style="margin-left:0;")
+    %label{:for => "goals"} Цели проекта
+    =f.text_area :goal, rows: 4, style: 'width: 100%;', class: "form-control", id: "goals"
+    %span.help-block Опишите цели проекта
+  .color-green#plan_success(style='display:none;')
+    Проект успешно обновлен
+  .form-group
+    %input.btn.btn-success.pull-right{:type => "submit", :id  => "send_plan_post", :value => "Сохранить"}
