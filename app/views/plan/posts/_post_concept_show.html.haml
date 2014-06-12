@@ -23,20 +23,48 @@
 %h4.color-orange.text-center
   %b B2.
   =t('form.cond_res')
-- post_concept_show.plan_post_resources.by_type('positive_r').each do |r|
-  %h5
-    .label.label-danger=r.name
-    %br
-    %small=r.desc
+%br
+%table.table.table-striped.table-bordered
+  %thead
+    %tr
+      %th
+        ="#"
+      %th
+        Название
+      %th
+        Пояснение
+  %tbody
+    - post_concept_show.plan_post_resources.by_type('positive_r').each_with_index do |r, index|
+      %tr
+        %td
+          =index+1
+        %td
+          =r.name
+        %td
+          =r.desc
 
 %h4.color-orange.text-center
   %b B3.
   =t('form.cond_s')
-- post_concept_show.plan_post_means.by_type('positive_s').each do |r|
-  %h5
-    .label.label-danger=r.name
-    %br
-    %small=r.desc
+%br
+%table.table.table-striped.table-bordered
+  %thead
+    %tr
+      %th
+        ="#"
+      %th
+        Название
+      %th
+        Пояснение
+  %tbody
+    - post_concept_show.plan_post_means.by_type('positive_s').each_with_index do |r, index|
+      %tr
+        %td
+          =index+1
+        %td
+          =r.name
+        %td
+          =r.desc
 
 %hr
 %h4.color-orange.text-center
@@ -47,20 +75,49 @@
 %h4.color-orange.text-center
   %b C2.
   =t('form.negative_res')
-- post_concept_show.plan_post_resources.by_type('negative_r').each do |r|
-  %h5
-    .label.label-danger=r.name
-    %br
-    %small=r.desc
+%br
+%table.table.table-striped.table-bordered
+  %thead
+    %tr
+      %th
+        ="#"
+      %th
+        Название
+      %th
+        Пояснение
+  %tbody
+    - post_concept_show.plan_post_resources.by_type('negative_r').each_with_index do |r, index|
+      %tr
+        %td
+          =index+1
+        %td
+          =r.name
+        %td
+          =r.desc
+
 
 %h4.color-orange.text-center
   %b C3.
   =t('form.negative_s')
-- post_concept_show.plan_post_means.by_type('negative_s').each do |r|
-  %h5
-    .label.label-danger=r.name
-    %br
-    %small=r.desc
+%br
+%table.table.table-striped.table-bordered
+  %thead
+    %tr
+      %th
+        ="#"
+      %th
+        Название
+      %th
+        Пояснение
+  %tbody
+    - post_concept_show.plan_post_means.by_type('negative_s').each_with_index do |r, index|
+      %tr
+        %td
+          =index+1
+        %td
+          =r.name
+        %td
+          =r.desc
 
 %hr
 %h4.color-orange.text-center
@@ -71,20 +128,48 @@
 %h4.color-orange.text-center
   %b D2.
   =t('form.control_res')
-- post_concept_show.plan_post_resources.by_type('control_r').each do |r|
-  %h5
-    .label.label-danger=r.name
-    %br
-    %small=r.desc
+%br
+%table.table.table-striped.table-bordered
+  %thead
+    %tr
+      %th
+        ="#"
+      %th
+        Название
+      %th
+        Пояснение
+  %tbody
+    - post_concept_show.plan_post_resources.by_type('control_r').each_with_index do |r, index|
+      %tr
+        %td
+          =index+1
+        %td
+          =r.name
+        %td
+          =r.desc
 
 %h4.color-orange.text-center
   %b D3.
   =t('form.control_s')
-- post_concept_show.plan_post_means.by_type('control_s').each do |r|
-  %h5
-    .label.label-danger=r.name
-    %br
-    %small=r.desc
+%br
+%table.table.table-striped.table-bordered
+  %thead
+    %tr
+      %th
+        ="#"
+      %th
+        Название
+      %th
+        Пояснение
+  %tbody
+    - post_concept_show.plan_post_means.by_type('control_s').each_with_index do |r, index|
+      %tr
+        %td
+          =index+1
+        %td
+          =r.name
+        %td
+          =r.desc
 
 %hr
 %h4.color-orange.text-center
