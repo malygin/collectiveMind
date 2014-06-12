@@ -24,17 +24,17 @@
               .col-md-6
                 %legend.section
                   Описание проекта
-                .text-center
-                  %h3.color-green Название проекта
-                  %h4=@post.name
+                .text-left
+                  %h4.color-green Название проекта
+                  =@post.name
                 %br
-                .text-center
-                  %h3.color-green Эссе по проекту
-                  %h4=@post.content
+                .text-left
+                  %h4.color-green Коротко о поекте
+                  =@post.goal
                 %br
-                .text-center
-                  %h3.color-green Цели проекта
-                  %h4=@post.goal
+                .text-left
+                  %h4.color-green Эссе по проекту. Пояснения и обоснования
+                  =@post.content
 
               .col-md-6
                 %legend.section

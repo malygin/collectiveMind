@@ -3,6 +3,7 @@
   .media-body
     .media-heading
       =link_to post.user, user_path(@project, post.user)
-    =post.name
+    .color-green=post.name
+    =post.goal
     -#=link_to 'подробнее', plan_post_path(@project, post)
     = render 'shared/post_social_bar2', :post => post
