@@ -553,7 +553,7 @@ end
     end
 
     respond_to do |format|
-      format.js {head :ok}
+      format.js
     end
   end
 

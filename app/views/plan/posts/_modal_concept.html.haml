@@ -24,7 +24,7 @@
         .text-danger#concept_failed(style='display:none;')
           Заполните, пожалуйста, все поля
 
-      .modal-footer
+      .modal-footer(style="margin-top:30px;padding-bottom:10px;padding-top:10px;padding-right:10px;")
         %button.btn.btn-primary(type = "button" data-dismiss="modal") Закрыть
 
 -#= form_for  @post, :url => {:project => @project.id, :action => 'add_concept'}, :remote => true, :method => :put, :id => 'form_add_concept' do |f|

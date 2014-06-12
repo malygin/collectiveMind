@@ -2,11 +2,13 @@ $('#add_new_stage').html('<a id="btn_new_stage" class="btn btn-lg btn-success bt
 $('#second').removeClass('disabled');
 $('#third').removeClass('disabled');
 $('#btn_next').removeClass('disabled');
-$('#send_plan_post').val('Сохранить');
+$('#form_for_main_plan').html("#{escape_javascript(render :partial => 'form_for_main_plan', :object => @plan_post )}");
+-#$('#send_plan_post').val('Сохранить');
 $('#second').append('<div id="option_for_render_tab" project="#{@project.id}" post="#{@plan_post.id}"></div>');
 -#$('#third').append('<div id="option_for_render_concept_side" project="#{@project.id}" post="#{@plan_post.id}"></div>');
 $('#second').on('click', function() {render_table();});
 $('#third').on('click', function() {render_concept_side();});
+
 
 
 

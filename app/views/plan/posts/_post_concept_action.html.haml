@@ -1,9 +1,11 @@
 %tr
-  %td(style="width:80px;")
-    %small
-      =post_concept_action.date_begin
-      =post_concept_action.date_end
   %td
+    -if post_concept_action.date_begin and post_concept_action.date_end
+      %small.color-green
+        =post_concept_action.date_begin
+        ="/"
+        =post_concept_action.date_end
+      %br
     =post_concept_action.name
   %td
     -unless post_concept_action.plan_post_action_resources.nil?

@@ -4,10 +4,12 @@
       %td(rowspan="#{rowspan_stage(stage)}" class="td_stage_#{stage.id}")
         =index+1
       %td(rowspan="#{rowspan_stage(stage)}" class="td_stage_#{stage.id}")
-        =stage.date_begin
-        ="/"
-        =stage.date_end
-      %td(rowspan="#{rowspan_stage(stage)}" class="td_stage_#{stage.id}")
+        -if stage.date_begin and stage.date_end
+          %small.color-green
+            =stage.date_begin
+            ="/"
+            =stage.date_end
+          %br
         =stage.name
       %td(rowspan="#{rowspan_stage(stage)}" class="td_stage_#{stage.id}")
         =stage.desc
@@ -30,11 +32,13 @@
         - unless concept.plan_post_actions.nil?
           - concept.plan_post_actions.each do |action|
             %tr(id="tr_action_#{action.id}")
-              %td(style="width:30px;")
-                %small
-                  =action.date_begin
-                  =action.date_end
               %td
+                -if action.date_begin and action.date_end
+                  %small.color-green
+                    =action.date_begin
+                    ="/"
+                    =action.date_end
+                  %br
                 %span.h5{:id => "name_post_action_#{action.id}"}=action.name
                 .pull-right
                   =link_to edit_action_plan_post_path(@project, @post, :act_id => action.id, :con_id => concept.id), :method => :put, :remote => true, :id => "edit_post_action_#{action.id}" do
@@ -46,10 +50,10 @@
 
           %tr(id="tr_new_action_#{concept.id}")
             %td(colspan="2")
-              =link_to new_action_plan_post_path(@project, @post, :con_id => concept.id, :stage_id => stage.id), :method => :put, :remote => true, :class => "btn btn-default btn-success btn-block", :id => "btn_new_concept", :style => "font-weight: normal;" do
+              =link_to new_action_plan_post_path(@project, @post, :con_id => concept.id, :stage_id => stage.id), :method => :put, :remote => true, :class => "btn btn-sm btn-success pull-right", :id => "btn_new_concept", :style => "font-weight: normal; width:200px;" do
                 Запланировать мероприятие
 
     %tr(id="tr_new_concept_#{stage.id}")
       %td(colspan="3")
-        =link_to add_concept_plan_post_path(@project, @post, :stage_id => stage.id), :method => :put, :remote => true, :class => "btn btn-default btn-warning btn-block", :id => "btn_new_concept", :style => "font-weight: normal;" do
+        =link_to add_concept_plan_post_path(@project, @post, :stage_id => stage.id), :method => :put, :remote => true, :class => "btn btn-sm btn-warning pull-right", :id => "btn_new_concept", :style => "font-weight: normal;width:200px;" do
           Добавить нововведение

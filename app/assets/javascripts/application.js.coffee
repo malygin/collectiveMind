@@ -485,17 +485,19 @@ $('#select_for_aspects').on 'change', ->
   optsel = $("#option_for_render_tab")
   project_id = parseInt(optsel.attr('project'))
   post_id = parseInt(optsel.attr('post'))
-  $.ajax
-    url: "/project/#{project_id}/plan/posts/#{post_id}/render_table"
-    type: "put"
+  if project_id and post_id
+    $.ajax
+      url: "/project/#{project_id}/plan/posts/#{post_id}/render_table"
+      type: "put"
 
 @render_concept_side= ->
   optsel = $("#option_for_render_tab")
   project_id = parseInt(optsel.attr('project'))
   post_id = parseInt(optsel.attr('post'))
-  $.ajax
-    url: "/project/#{project_id}/plan/posts/#{post_id}/render_concept_side"
-    type: "put"
+  if project_id and post_id
+    $.ajax
+      url: "/project/#{project_id}/plan/posts/#{post_id}/render_concept_side"
+      type: "put"
 
 $(window).load ->
   $("#second").on "click", ->

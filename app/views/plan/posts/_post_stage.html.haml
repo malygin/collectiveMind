@@ -1,5 +1,11 @@
 %tr{:id => "tr_post_stage_#{post_stage.id}"}
   %td
+    -if post_stage.date_begin and post_stage.date_end
+      %small.color-green
+        =post_stage.date_begin
+        ="/"
+        =post_stage.date_end
+      %br
     %span.h5{:id => "name_post_stage_#{post_stage.id}"}=post_stage.name
     .pull-right
       =link_to edit_stage_plan_post_path(@project, @post, :stage_id => post_stage),:method => :put, :remote => true, :id => "edit_post_stage_#{post_stage.id}" do

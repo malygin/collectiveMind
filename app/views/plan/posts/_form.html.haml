@@ -10,7 +10,8 @@
           %a{"data-toggle" => "tab", :href => "#tab2"}
             %small 2.
             %strong План мероприятий
-          #option_for_render_tab(project="#{@project.id}" post="#{@post.id}")
+          -if @post.persisted?
+            #option_for_render_tab(project="#{@project.id}" post="#{@post.id}")
         %li#third{:class => @post.persisted? ? nil:"disabled"}
           %a{"data-toggle" => "tab", :href => "#tab3"}
             %small 3.
@@ -22,37 +23,29 @@
         #tab1.tab-pane
           .form-horizontal
             %fieldset
-              .col-md-6
+              .col-md-6#form_for_main_plan
                 = form_for  @post, :url => {:project => @project.id, :action => @post.persisted? ? 'update' : 'create'}, :remote => true, :html => { :class => 'new_or_edit' } do |f|
                   %legend.section
                     Описание проекта
-                  .control-group
-                    %label.control-label{:for => "name_plan"} Название проекта
-                    .controls.form-group
-                      .col-md-10
-                        =f.text_field :name, :type => "text", class: "form-control", id: "name_plan"
-                        %span.help-block Короткое название вашего проекта
-                  .control-group
-                    %label.control-label{:for => "desc_plan"} Эссе по проекту
-                    .controls.form-group
-                      .col-md-10
-                        =f.text_area :content, rows: 4, style: 'width: 100%;', class: "form-control", id: "desc_plan"
-                        %span.help-block Опишите ваше видение проекта в будущем
-                  .control-group
-                    %label.control-label{:for => "goals"} Цели проекта
-                    .controls.form-group
-                      .col-md-10
-                        =f.text_area :goal, rows: 4, style: 'width: 100%;', class: "form-control", id: "goals"
-                        %span.help-block Опишите цели проекта
+                  .form-group(style="margin-left:0;")
+                    %label{:for => "name_plan"} Название проекта
+                    =f.text_field :name, :type => "text", class: "form-control", id: "name_plan"
+                    %span.help-block Короткое название вашего проекта
+                  .form-group(style="margin-left:0;")
+                    %label{:for => "desc_plan"} Эссе по проекту
+                    =f.text_area :content, rows: 12, style: 'width: 100%;', class: "form-control", id: "desc_plan"
+                    %span.help-block Опишите ваше видение проекта в будущем
+                  .form-group(style="margin-left:0;")
+                    %label{:for => "goals"} Цели проекта
+                    =f.text_area :goal, rows: 4, style: 'width: 100%;', class: "form-control", id: "goals"
+                    %span.help-block Опишите цели проекта
                   .color-green#plan_success(style='display:none;')
                     Проект успешно обновлен
-                  .control-group
-                    .controls.form-group
-                      .col-md-10
-                        -if @post.persisted?
-                          %input.btn.btn-success.pull-right{:type => "submit", :id  => "send_plan_post", :value => "Сохранить"}
-                        -else
-                          %input.btn.btn-success.pull-right{:type => "submit", :id  => "send_plan_post", :value => "Сохранить и приступить к добавлению этапов"}
+                  .form-group
+                    -if @post.persisted?
+                      %input.btn.btn-success.pull-right{:type => "submit", :id  => "send_plan_post", :value => "Сохранить"}
+                    -else
+                      %input.btn.btn-success.pull-right{:type => "submit", :id  => "send_plan_post", :value => "Сохранить и приступить к добавлению этапов"}
               .col-md-6
                 %legend.section
                   Этапы проекта
@@ -80,15 +73,13 @@
                   %tr
                     %th
                       ="#"
-                    %th(style="width:20px;")
-                      Начало / окончание
-                    %th(style="width:50px;")
+                    %th(style="width:150px;")
                       Название этапа
                     %th(style="width:300px;")
                       Эссе по этапу
                     %th
                       Нововведения
-                    %th(colspan="2")
+                    %th
                       Мероприятия этапа
                 %tbody#table_stages
                   - unless @post.post_stages.nil?
@@ -97,10 +88,12 @@
                         %td(rowspan="#{rowspan_stage(stage)}" class="td_stage_#{stage.id}")
                           =index+1
                         %td(rowspan="#{rowspan_stage(stage)}" class="td_stage_#{stage.id}")
-                          =stage.date_begin
-                          ="/"
-                          =stage.date_end
-                        %td(rowspan="#{rowspan_stage(stage)}" class="td_stage_#{stage.id}")
+                          -if stage.date_begin and stage.date_end
+                            %small.color-green
+                              =stage.date_begin
+                              ="/"
+                              =stage.date_end
+                            %br
                           =stage.name
                         %td(rowspan="#{rowspan_stage(stage)}" class="td_stage_#{stage.id}")
                           =stage.desc
@@ -123,11 +116,13 @@
                           - unless concept.plan_post_actions.nil?
                             - concept.plan_post_actions.each do |action|
                               %tr(id="tr_action_#{action.id}")
-                                %td(style="width:30px;")
-                                  %small
-                                    =action.date_begin
-                                    =action.date_end
                                 %td
+                                  -if action.date_begin and action.date_end
+                                    %small.color-green
+                                      =action.date_begin
+                                      ="/"
+                                      =action.date_end
+                                    %br
                                   %span.h5{:id => "name_post_action_#{action.id}"}=action.name
                                   .pull-right
                                     =link_to edit_action_plan_post_path(@project, @post, :act_id => action.id, :con_id => concept.id), :method => :put, :remote => true, :id => "edit_post_action_#{action.id}" do
@@ -139,12 +134,12 @@
 
                             %tr(id="tr_new_action_#{concept.id}")
                               %td(colspan="2")
-                                =link_to new_action_plan_post_path(@project, @post, :con_id => concept.id, :stage_id => stage.id), :method => :put, :remote => true, :class => "btn btn-default btn-success btn-block", :id => "btn_new_concept", :style => "font-weight: normal;" do
+                                =link_to new_action_plan_post_path(@project, @post, :con_id => concept.id, :stage_id => stage.id), :method => :put, :remote => true, :class => "btn btn-sm btn-success pull-right", :id => "btn_new_concept", :style => "font-weight: normal;width:200px;" do
                                   Запланировать мероприятие
 
                       %tr(id="tr_new_concept_#{stage.id}")
                         %td(colspan="3")
-                          =link_to add_concept_plan_post_path(@project, @post, :stage_id => stage.id), :method => :put, :remote => true, :class => "btn btn-default btn-warning btn-block", :id => "btn_new_concept", :style => "font-weight: normal;" do
+                          =link_to add_concept_plan_post_path(@project, @post, :stage_id => stage.id), :method => :put, :remote => true, :class => "btn btn-sm btn-warning pull-right", :id => "btn_new_concept", :style => "font-weight: normal;width:200px;" do
                             Добавить нововведение
 
 
@@ -176,7 +171,16 @@
                 #render_get_concept_actions
 
 
-
+        .description
+          %ul.pager.wizard
+            %li.previous
+              %button.btn.btn-primary.pull-left{:onclick => "wizard_tabs();"}
+                %i.fa.fa-caret-left
+                Назад
+            %li.next
+              %button.btn.btn-primary.pull-right#btn_next{:class => @post.persisted? ? nil:"disabled", :onclick => "wizard_tabs();"}
+                Далее
+                %i.fa.fa-caret-right
 
       -#%li.panel
       -#  %a.accordion-toggle.collapsed{"data-parent" => "#side-nav", "data-toggle" => "collapse", :href => "#menu-levels-collapse"}

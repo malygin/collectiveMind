@@ -1,9 +1,13 @@
 = form_for @post_concept, :url => {:project => @project.id, :id => @post.id, con_id: @post_concept.id, :action => 'update_get_concept'}, :remote => true, :method => :put do |f|
   #mod
+  .color-green#cocnept_update_success(style='display:none;')
+    Нововведение успешно обновлено
+  .pull-right
+    =f.submit 'Сохранить', :id  => "send_post_concept", class: 'btn btn-success'
   .row
     .col-md-12
       .text-center
-        %p.h3.color-orange
+        %p.h4.color-orange
           Краткое название нововведения
         %br
       .form-group.has-danger
@@ -12,7 +16,7 @@
   .row
     .col-md-12
       .text-center
-        %h3.color-orange
+        %h4.color-orange
           %b A1.
           =t('form.novation_what')
           .label.label-success{"data-toggle" => "collapse", "data-target" => "#novation_what"} Пример
@@ -43,7 +47,7 @@
   .row
     .col-md-12
       .text-center
-        %h3.color-orange
+        %h4.color-orange
           %b A2.
           =t('form.novation_how')
           .label.label-success{"data-toggle" => "collapse", "data-target" => "#novation_how"} Пример
@@ -63,7 +67,7 @@
   .row
     .col-md-12
       .text-center
-        %h3.color-orange
+        %h4.color-orange
           %b B1.
           =t('form.cond')
           .label.label-success{"data-toggle" => "collapse", "data-target" => "#cond"} Пример
@@ -85,7 +89,7 @@
   .row
     .col-md-12
       .text-center
-        %h3.color-orange
+        %h4.color-orange
           %b B2.
           =t('form.cond_res')
           .label.label-success{"data-toggle" => "collapse", "data-target" => "#cond_res"} Пример
@@ -140,7 +144,7 @@
   .row
     .col-md-12
       .text-center
-        %h3.color-orange
+        %h4.color-orange
           %b B3.
           =t('form.cond_s')
           .label.label-success{"data-toggle" => "collapse", "data-target" => "#cond_s"} Пример
@@ -186,7 +190,7 @@
   .row
     .col-md-12
       .text-center
-        %h3.color-orange
+        %h4.color-orange
           %b C1.
           =t('form.negative_h')
           .label.label-success{"data-toggle" => "collapse", "data-target" => "#negative_h"} Пример
@@ -210,7 +214,7 @@
   .row
     .col-md-12
       .text-center
-        %h3.color-orange
+        %h4.color-orange
           %b C2.
           =t('form.negative_res')
           .label.label-success{"data-toggle" => "collapse", "data-target" => "#negative_res"} Пример
@@ -257,7 +261,7 @@
   .row
     .col-md-12
       .text-center
-        %h3.color-orange
+        %h4.color-orange
           %b C3.
           =t('form.negative_s')
           .label.label-success{"data-toggle" => "collapse", "data-target" => "#negative_s"} Пример
@@ -307,7 +311,7 @@
   .row
     .col-md-12
       .text-center
-        %h3.color-orange
+        %h4.color-orange
           %b D1.
           =t('form.control')
           .label.label-success{"data-toggle" => "collapse", "data-target" => "#control"} Пример
@@ -333,7 +337,7 @@
   .row
     .col-md-12
       .text-center
-        %h3.color-orange
+        %h4.color-orange
           %b D2.
           =t('form.control_res')
           .label.label-success{"data-toggle" => "collapse", "data-target" => "#control_res"} Пример
@@ -381,7 +385,7 @@
   .row
     .col-md-12
       .text-center
-        %h3.color-orange
+        %h4.color-orange
           %b D3.
           =t('form.control_s')
           .label.label-success{"data-toggle" => "collapse", "data-target" => "#control_s"} Пример
@@ -431,7 +435,7 @@
   .row
     .col-md-12
       .text-center
-        %h3.color-orange
+        %h4.color-orange
           %b E1.
           =t('form.obstacles_bcd')
           .label.label-success{"data-toggle" => "collapse", "data-target" => "#obstacles_bcd"} Пример
@@ -456,7 +460,7 @@
   .row
     .col-md-12
       .text-center
-        %h3.color-orange
+        %h4.color-orange
           %b F1.
           =t('form.problems')
           .label.label-success{"data-toggle" => "collapse", "data-target" => "#problems"} Пример
@@ -478,7 +482,7 @@
   .row
     .col-md-12
       .text-center
-        %h3.color-orange
+        %h4.color-orange
           %b F2.
           =t('form.reality')
           .label.label-success{"data-toggle" => "collapse", "data-target" => "#reality"} Пример
