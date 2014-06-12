@@ -1,0 +1,104 @@
+%h3.color-orange.text-center
+  %b=post_concept_show.title
+  %br
+  %br
+%h4.color-orange.text-center
+  %b A1.
+  =t('form.novation_what')
+.form-group
+  =simple_format(post_concept_show.name)
+
+%h4.color-orange.text-center
+  %b A2.
+  =t('form.novation_how')
+.form-group.has-danger
+  =simple_format(post_concept_show.content)
+
+%hr
+%h4.color-orange.text-center
+  %b B1.
+  =t('form.cond')
+.form-group.has-success= display_content(post_concept_show.positive)
+
+%h4.color-orange.text-center
+  %b B2.
+  =t('form.cond_res')
+- post_concept_show.plan_post_resources.by_type('positive_r').each do |r|
+  %h5
+    .label.label-danger=r.name
+    %br
+    %small=r.desc
+
+%h4.color-orange.text-center
+  %b B3.
+  =t('form.cond_s')
+- post_concept_show.plan_post_means.by_type('positive_s').each do |r|
+  %h5
+    .label.label-danger=r.name
+    %br
+    %small=r.desc
+
+%hr
+%h4.color-orange.text-center
+  %b C1.
+  =t('form.negative')
+.form-group.has-success= display_content(post_concept_show.negative)
+
+%h4.color-orange.text-center
+  %b C2.
+  =t('form.negative_res')
+- post_concept_show.plan_post_resources.by_type('negative_r').each do |r|
+  %h5
+    .label.label-danger=r.name
+    %br
+    %small=r.desc
+
+%h4.color-orange.text-center
+  %b C3.
+  =t('form.negative_s')
+- post_concept_show.plan_post_means.by_type('negative_s').each do |r|
+  %h5
+    .label.label-danger=r.name
+    %br
+    %small=r.desc
+
+%hr
+%h4.color-orange.text-center
+  %b D1.
+  =t('form.control')
+.form-group.has-success= display_content(post_concept_show.control)
+
+%h4.color-orange.text-center
+  %b D2.
+  =t('form.control_res')
+- post_concept_show.plan_post_resources.by_type('control_r').each do |r|
+  %h5
+    .label.label-danger=r.name
+    %br
+    %small=r.desc
+
+%h4.color-orange.text-center
+  %b D3.
+  =t('form.control_s')
+- post_concept_show.plan_post_means.by_type('control_s').each do |r|
+  %h5
+    .label.label-danger=r.name
+    %br
+    %small=r.desc
+
+%hr
+%h4.color-orange.text-center
+  %b E1.
+  =t('form.obstacles_bcd')
+.form-group.has-success= display_content(post_concept_show.obstacles)
+
+%hr
+%h4.color-orange.text-center
+  %b F1.
+  =t('form.problems')
+.form-group.has-success= display_content(post_concept_show.problems)
+
+%h4.color-orange.text-center
+  %b F2.
+  =t('form.reality')
+.form-group.has-success= display_content(post_concept_show.reality)

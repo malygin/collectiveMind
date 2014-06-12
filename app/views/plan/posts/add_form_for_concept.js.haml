@@ -1,0 +1,17 @@
+-if @save_form
+  -if @cond
+    $('#concept_success').fadeIn('slow').delay(1000).fadeOut('slow');
+
+    $("#{escape_javascript(render :partial => 'post_concept', :object => @cond )}").insertBefore('#tr_new_concept_#{@post_stage.id}');
+    -#var rowspan = parseInt($('#td_concept_#{@post_aspect.id}').attr("rowSpan"));
+    -#$('#td_concept_#{@post_aspect.id}').attr('rowspan', rowspan + 1);
+    var rowspan_main = parseInt($('.td_stage_#{@post_stage.id}').attr("rowSpan"));
+    $('.td_stage_#{@post_stage.id}').attr('rowspan', rowspan_main + 2);
+  -else
+    $('#concept_failed').fadeIn('slow').delay(1000).fadeOut('slow');
+-else
+  $('#aspect_concepts').html("#{escape_javascript(render :partial => 'form_for_light_concept', :object => @post_concept )}");
+
+
+
+-#$('#concept_aspect_'+concept_id).css('display','block').animate({height: 20, opacity:1}, 500).effect("highlight", {color: '#f5cecd'}, 500)

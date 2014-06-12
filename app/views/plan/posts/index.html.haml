@@ -1,10 +1,32 @@
-- if not current_user.answered_for_help_stage?(4) and not @mini_help.nil?
-  =render partial: 'shared/small_help', object: @mini_help
-- if signed_in? and @project.status == 9
-  = link_to '+ Добавить Проект', new_plan_post_path(@project) , id: 'add_record',  class: 'btn btn-sm btn-success'
-  %br
-/ -else
-/ 	Авторизуйтесь, чтобы добавить проект
+-#- if not current_user.answered_for_help_stage?(4) and not @mini_help.nil?
+-#  =render partial: 'shared/small_help', object: @mini_help
+-#%section.widget
+-#  .body
+-#    - if signed_in? and @project.status == 9
+-#      = link_to '+ Добавить Проект', new_plan_post_path(@project) , id: 'add_record',  class: 'btn btn-lg btn-success'
+-#      %br
+-#    = render  @posts
+-#= will_paginate @posts
 
-= render  @posts
-= will_paginate @posts
+%section.widget
+  %header
+    .row
+      .col-md-9
+        %h3.color-green
+          4 этап: Создание проектов.
+          %br
+          %small
+            Сбор идей для решения несовершенств в рамках процедуры:
+            =@project.name
+      - if signed_in? and @project.status == 9
+        .col-md-3
+          .pull-right
+            = link_to '+ Добавить Проект', new_plan_post_path(@project) , id: 'add_record',  class: 'btn btn-lg btn-success'
+  .body
+    %br
+    %br
+    .row
+      .col-md-12
+        %section.widget
+          .body
+            = render  @posts
