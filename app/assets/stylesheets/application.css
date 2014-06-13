@@ -154,6 +154,14 @@ p, a {
     text-align: center;
 }
 
+.autocomplete,
+.ui-autocomplete-input,
+.ui-autocomplete {
+    max-height: 200px !important;
+    overflow-y: auto !important;
+    /* prevent horizontal scrollbar */
+    overflow-x: hidden !important;
+}
 
 /*todo my styles bottom*/
 /******************************************************************************************************************************************************/
@@ -6609,10 +6617,10 @@ pre {
 /*         Forms           */
 /***************************/
 label,
-input,
+/*input,*/
 button,
 select,
-textarea {
+/*textarea */ {
   font-weight: 300;
 }
 
@@ -9430,6 +9438,7 @@ a.thumbnail:focus {
   -moz-border-radius: 1px;
   -webkit-border-radius: 1px;
   border-radius: 1px;
+  z-index: 100000;
   /*.dow {
   	border-top: 1px solid #ddd !important;
   }*/

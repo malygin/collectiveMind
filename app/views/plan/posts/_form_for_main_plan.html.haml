@@ -1,0 +1,25 @@
+= form_for  form_for_main_plan, :url => {:project => @project.id, :id => form_for_main_plan.id, :action => 'update'}, :remote => true, :method => :put, :html => { :class => 'new_or_edit' } do |f|
+  %legend.section
+    Описание проекта
+  .form-group(style="margin-left:0;")
+    %label.color-green{:for => "name_plan"} Название проекта
+    =f.text_field :name, :type => "text", class: "form-control", id: "name_plan"
+  .form-group(style="margin-left:0;")
+    %label{:for => "goals"}
+      %span.color-greenКоротко о проекте.
+      %small
+    =f.text_area :goal, rows: 8, style: 'width: 100%;', class: "form-control", id: "goals", placeholder: 'Попытайтесь кратко изложив суть проекта в тоже время привлечь этим внимание других участников'
+    %span.help-block
+      1) Цель: какую выгоду даст ваш проект? Зачем это нужно его реализаторам?
+      %br
+      2) Методы, средства и другие ресурсы:  как, при помощи чего эта выгода будет получаться?
+      %br
+      3) Этапность реализации:  с чего вы планируете начать, что делать потом и т. д.?
+  .form-group(style="margin-left:0;")
+    %label.color-green{:for => "desc_plan"} Пояснения и обоснования
+    =f.text_area :content, rows: 12, style: 'width: 100%;', class: "form-control", id: "desc_plan"
+    %span.help-block Опишите ваше видение проекта в будущем
+  .color-green#plan_success(style='display:none;')
+    Проект успешно обновлен
+  .form-group
+    %input.btn.btn-success.pull-right{:type => "submit", :id  => "send_plan_post", :value => "Сохранить"}

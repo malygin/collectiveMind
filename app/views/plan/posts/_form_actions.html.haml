@@ -1,0 +1,40 @@
+%h3 Мероприятия по реализации
+%table.table.table-striped.table-bordered
+  %thead
+    %tr
+      %th
+        Мероприятия по реализации нововведения
+        ="'#{form_actions.title}'"
+      %th(style="width:100px;")
+        Необходимые ресурсы
+  %tbody
+    -unless form_actions.plan_post_actions.nil?
+      - form_actions.plan_post_actions.each  do |action|
+        %tr
+          %td
+            -if action.date_begin and action.date_end
+              %small.color-green
+                =action.date_begin
+                ="/"
+                =action.date_end
+              %br
+            =action.name
+          %td
+            -unless action.plan_post_action_resources.nil?
+              -action.plan_post_action_resources.each  do |res|
+                .label.label-danger=res.name
+
+    -unless @view_post_concept
+      %tr(id="tr_new_concept_action_#{form_actions.id}")
+        %td(colspan="3")
+          =link_to new_action_plan_post_path(@project, @post, :con_id => form_actions.id, :view_concept => true), :method => :put, :remote => true, :class => "btn btn-default btn-success btn-block", :id => "btn_new_concept", :style => "font-weight: normal;" do
+            Добавить мероприятие
+
+%br
+%br
+%h3 Обратите внимание!
+%h4 Для функционирования выбранного нововведения в будущем ему будут необходимы следующие ресурсы:
+- unless form_actions.plan_post_resources.by_type('positive_r').empty?
+  -form_actions.plan_post_resources.by_type('positive_r').each do |res|
+    .label.label-danger=res.name
+

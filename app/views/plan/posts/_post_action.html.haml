@@ -1,0 +1,16 @@
+%tr(id="tr_action_#{post_action.id}")
+  %td
+    -if post_action.date_begin and post_action.date_end
+      %small.color-green
+        =post_action.date_begin
+        ="/"
+        =post_action.date_end
+      %br
+    %span.h5{:id => "name_post_action_#{post_action.id}"}=post_action.name
+    .pull-right
+      =link_to edit_action_plan_post_path(@project, @post, :act_id => post_action.id, :con_id => @post_aspect.id), :method => :put, :remote => true, :id => "edit_post_action_#{post_action.id}" do
+        %button.btn.btn-xs.btn-warning{:type => "button"}
+          %i.fa.fa-pencil
+      =link_to destroy_action_plan_post_path(@project, @post, :act_id => post_action.id, :con_id => @post_aspect.id, :stage_id => @post_stage ? @post_stage.id : nil), :method => :delete, :remote => true, :confirm => 'Удалить нововведение?', :id => "destroy_post_action_#{post_action.id}" do
+        %button.btn.btn-xs.btn-danger{:type => "button"}
+          %i.fa.fa-trash-o

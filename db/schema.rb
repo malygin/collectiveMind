@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140605075117) do
+ActiveRecord::Schema.define(:version => 20140610235840) do
 
   create_table "answers", :force => true do |t|
     t.string   "text"
@@ -900,6 +900,26 @@ ActiveRecord::Schema.define(:version => 20140605075117) do
 
   add_index "plan_comments", ["post_id"], :name => "index_plan_comments_on_post_id"
 
+  create_table "plan_post_action_resources", :force => true do |t|
+    t.integer  "post_action_id"
+    t.string   "name"
+    t.text     "desc"
+    t.integer  "resource_id"
+    t.datetime "created_at",     :null => false
+    t.datetime "updated_at",     :null => false
+  end
+
+  create_table "plan_post_actions", :force => true do |t|
+    t.integer  "plan_post_aspect_id"
+    t.string   "name"
+    t.text     "desc"
+    t.date     "date_begin"
+    t.date     "date_end"
+    t.integer  "status"
+    t.datetime "created_at",          :null => false
+    t.datetime "updated_at",          :null => false
+  end
+
   create_table "plan_post_aspects", :force => true do |t|
     t.integer  "discontent_aspect_id"
     t.integer  "plan_post_id"
@@ -922,6 +942,7 @@ ActiveRecord::Schema.define(:version => 20140605075117) do
     t.text     "control_s"
     t.text     "control_r"
     t.text     "title"
+    t.integer  "post_stage_id"
   end
 
   create_table "plan_post_first_conds", :force => true do |t|
@@ -939,6 +960,16 @@ ActiveRecord::Schema.define(:version => 20140605075117) do
     t.datetime "updated_at",              :null => false
   end
 
+  create_table "plan_post_means", :force => true do |t|
+    t.string   "name"
+    t.text     "desc"
+    t.integer  "post_id"
+    t.integer  "resource_id"
+    t.string   "type_res"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+  end
+
   create_table "plan_post_notes", :force => true do |t|
     t.integer  "post_id"
     t.integer  "user_id"
@@ -954,6 +985,18 @@ ActiveRecord::Schema.define(:version => 20140605075117) do
     t.integer  "resource_id"
     t.datetime "created_at",  :null => false
     t.datetime "updated_at",  :null => false
+    t.string   "type_res"
+  end
+
+  create_table "plan_post_stages", :force => true do |t|
+    t.integer  "post_id"
+    t.string   "name"
+    t.text     "desc"
+    t.date     "date_begin"
+    t.date     "date_end"
+    t.integer  "status"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
   create_table "plan_post_votings", :force => true do |t|
@@ -982,6 +1025,7 @@ ActiveRecord::Schema.define(:version => 20140605075117) do
     t.text     "plan_first"
     t.text     "plan_other"
     t.text     "plan_control"
+    t.string   "name"
   end
 
   add_index "plan_posts", ["created_at"], :name => "index_plan_posts_on_created_at"

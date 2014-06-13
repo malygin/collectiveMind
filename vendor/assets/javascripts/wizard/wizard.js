@@ -19,6 +19,16 @@ $(function(){
                 $wizard.find('.pager .next').show();
                 $wizard.find('.pager .finish').hide();
             }
+            if($current == 1) {
+                $('#send_post_concept').submit();
+            }
+            if($current == 2) {
+                render_table();
+                $('#send_post_concept').submit();
+            }
+            if($current == 3) {
+                render_concept_side();
+            }
         }});
     }
 

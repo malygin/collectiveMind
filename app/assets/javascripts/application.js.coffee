@@ -187,6 +187,13 @@ $(window).load ->
 
 $(window).load ->
   $('.liFixar').liFixar()
+  $('.datepicker').datepicker(
+    format: 'yyyy-mm-dd'
+    autoclose: true
+  ).on "changeDate", (e) ->
+    $(this).datepicker "hide"
+    return
+
 #  $(".chat-messages").slimScroll
 #    start: 'bottom'
 #    size: '5px'
@@ -289,15 +296,15 @@ $('#select_for_aspects').on 'change', ->
       data:
         aspect_id: aspect_id
 
-@plan_select_concept= (el)->
-  concept_id = $(el).val()
-  if concept_id is "0"
-    return (false)
-  title=$(el).find('option:selected').text()
-  $(el).find('option:selected').remove()
-  func = "'#{concept_id}','#{title}'"
-  $('#aspect_concepts').append('<div id="concept_aspect_'+concept_id+'" style="display:none;height:0;"><input type="hidden" name="plan_aspect_concepts[]" value="'+concept_id+'"/><span class="glyphicon glyphicon-remove text-danger pull-left" onclick="remove_aspect_concept('+func+');" style="cursor:pointer;text-decoration:none;font-size:15px;"></span><span id="'+concept_id+'" class="span_aspect label label-t">'+title+'</span></br></div>')
-  $('#concept_aspect_'+concept_id).css('display','block').animate({height: 20, opacity:1}, 500).effect("highlight", {color: '#f5cecd'}, 500)
+#@plan_select_concept= (el)->
+#  concept_id = $(el).val()
+#  if concept_id is "0"
+#    return (false)
+#  title=$(el).find('option:selected').text()
+#  $(el).find('option:selected').remove()
+#  func = "'#{concept_id}','#{title}'"
+#  $('#aspect_concepts').append('<div id="concept_aspect_'+concept_id+'" style="display:none;height:0;"><input type="hidden" name="plan_aspect_concepts[]" value="'+concept_id+'"/><span class="glyphicon glyphicon-remove text-danger pull-left" onclick="remove_aspect_concept('+func+');" style="cursor:pointer;text-decoration:none;font-size:15px;"></span><span id="'+concept_id+'" class="span_aspect label label-t">'+title+'</span></br></div>')
+#  $('#concept_aspect_'+concept_id).css('display','block').animate({height: 20, opacity:1}, 500).effect("highlight", {color: '#f5cecd'}, 500)
 
 @remove_aspect_concept= (val,text)->
   $('#concept_aspect_'+val).animate({height: 0, opacity: 0.000}, 1000, ->
@@ -310,17 +317,16 @@ $('#select_for_aspects').on 'change', ->
   $("#select_concept").attr "disabled", true
   $("#aspect_concepts").empty()
 
-@add_new_resource_to_plan= (concept)->
-  $('#resources_'+concept).append('<div class="panel panel-default"><div class="panel-body"><span class="glyphicon glyphicon-remove text-danger pull-right" onclick="$(this).parent().parent().remove();" style="cursor:pointer;text-decoration:none;font-size:15px;"></span><span role="status" aria-live="polite" class="ui-helper-hidden-accessible"></span><input class="form-control autocomplete ui-autocomplete-input" data-autocomplete="/project/1/autocomplete_concept_post_resource_concept_posts" id="concept_post_resource" min-length="0" name="resor['+concept+'][]" placeholder="Введите свой ресурс или выберите из списка" size="30" type="text" autocomplete="off"><br><textarea class="form-control" id="res_" name="res['+concept+'][]" placeholder="Пояснение к ресурсу" style="overflow: hidden; word-wrap: break-word; resize: horizontal; height: 54px;"></textarea></div></div>')
-  $("input.autocomplete ").autocomplete(
-    minLength: 0
-  ).click ->
-    $(this).autocomplete "search", ""
-    return
+#@add_new_resource_to_plan= (concept)->
+#  $('#resources_'+concept).append('<div class="panel panel-default"><div class="panel-body"><span class="glyphicon glyphicon-remove text-danger pull-right" onclick="$(this).parent().parent().remove();" style="cursor:pointer;text-decoration:none;font-size:15px;"></span><span role="status" aria-live="polite" class="ui-helper-hidden-accessible"></span><input class="form-control autocomplete ui-autocomplete-input" data-autocomplete="/project/1/autocomplete_concept_post_resource_concept_posts" id="concept_post_resource" min-length="0" name="resor['+concept+'][]" placeholder="Введите свой ресурс или выберите из списка" size="30" type="text" autocomplete="off"><br><textarea class="form-control" id="res_" name="res['+concept+'][]" placeholder="Пояснение к ресурсу" style="overflow: hidden; word-wrap: break-word; resize: horizontal; height: 54px;"></textarea></div></div>')
+#  $("input.autocomplete ").autocomplete(
+#    minLength: 0
+#  ).click ->
+#    $(this).autocomplete "search", ""
+#    return
 
 @autocomplete_initialized= ->
-  console.log($("input.autocomplete "))
-  $("input.autocomplete ").autocomplete(
+  $("input.autocomplete").autocomplete(
     minLength: 0
   ).click ->
     $(this).autocomplete "search", ""
@@ -435,3 +441,98 @@ $('#select_for_aspects').on 'change', ->
       data:
         sel_dis_id: sel_dis_id
         add_concept: 1
+
+@activate_datepicker= ->
+  $('.datepicker').datepicker(
+    format: 'yyyy-mm-dd'
+  ).on "changeDate", (e) ->
+    $(this).datepicker "hide"
+
+@plan_select_concept= (el)->
+  optsel = $("#option_for_select_concept")
+  project_id = parseInt(optsel.attr('project'))
+  post_id = parseInt(optsel.attr('post'))
+  stage_id = parseInt(optsel.attr('stage'))
+  concept_id = $(el).val()
+  if concept_id is "0"
+    return (false)
+  if concept_id != ''
+    $.ajax
+      url: "/project/#{project_id}/plan/posts/#{post_id}/add_form_for_concept"
+      type: "put"
+      data:
+        concept_id: concept_id
+        stage_id: stage_id
+
+@add_new_resource_to_plan= (field)->
+  $('#resources_'+field).append('<div class="panel panel-default"><div class="panel-body"><span class="glyphicon glyphicon-remove text-danger pull-right" onclick="$(this).parent().parent().remove();" style="cursor:pointer;text-decoration:none;font-size:15px;"></span><span role="status" aria-live="polite" class="ui-helper-hidden-accessible"></span><input class="form-control autocomplete ui-autocomplete-input" data-append-to="#mod" data-autocomplete="/project/1/autocomplete_concept_post_resource_concept_posts" id="concept_post_resource" min-length="0" name="resor_'+field+'[]" placeholder="Введите свой ресурс или выберите из списка" size="30" type="text" autocomplete="off"><br><textarea class="form-control" id="res" name="res'+field+'[]" placeholder="Пояснение к ресурсу" style="overflow: hidden; word-wrap: break-word; resize: horizontal; height: 54px;"></textarea></div></div>')
+  $("input.autocomplete").autocomplete(
+    minLength: 0
+  ).click ->
+    $(this).autocomplete "search", ""
+    return
+
+@add_new_action_resource_to_plan= ->
+  $('#action_resources').append('<div class="panel panel-default"><div class="panel-body"><span class="glyphicon glyphicon-remove text-danger pull-right" onclick="$(this).parent().parent().remove();" style="cursor:pointer;text-decoration:none;font-size:15px;"></span><span role="status" aria-live="polite" class="ui-helper-hidden-accessible"></span><input class="form-control autocomplete ui-autocomplete-input" data-append-to="#mod2" data-autocomplete="/project/1/autocomplete_concept_post_resource_concept_posts" id="concept_post_resource" min-length="0" name="resor_action[]" placeholder="Введите свой ресурс или выберите из списка" size="30" type="text" autocomplete="off"><br><textarea class="form-control" id="res" name="res_action[]" placeholder="Пояснение к ресурсу" style="overflow: hidden; word-wrap: break-word; resize: horizontal; height: 54px;"></textarea></div></div>')
+  $("input.autocomplete").autocomplete(
+    minLength: 0
+  ).click ->
+    $(this).autocomplete "search", ""
+    return
+
+
+@render_table= ->
+  optsel = $("#option_for_render_tab")
+  project_id = parseInt(optsel.attr('project'))
+  post_id = parseInt(optsel.attr('post'))
+  if project_id and post_id
+    $.ajax
+      url: "/project/#{project_id}/plan/posts/#{post_id}/render_table"
+      type: "put"
+
+@render_concept_side= ->
+  optsel = $("#option_for_render_tab")
+  project_id = parseInt(optsel.attr('project'))
+  post_id = parseInt(optsel.attr('post'))
+  if project_id and post_id
+    $.ajax
+      url: "/project/#{project_id}/plan/posts/#{post_id}/render_concept_side"
+      type: "put"
+
+#$(window).load ->
+#  $("#first").on "click", ->
+#    $('#send_post_concept').submit()
+#  $("#second").on "click", ->
+#    render_table()
+#    $('#send_post_concept').submit()
+#  $("#third").on "click", ->
+#    render_concept_side()
+
+@save_last_concept= ->
+  last_id = $('ul.panel-collapse li.active').attr('id')
+  -unless typeof last_id is 'undefined'
+    $("##{last_id} a").append('<i class="color-green fa fa-save" style="opacity:0;"></i>')
+    $("##{last_id} a i").animate {
+      opacity: 1
+    }, "slow",  ->
+      $(this).animate {
+        opacity: 0
+      }, "slow",  ->
+        $(this).remove()
+
+
+@get_concept_save= (new_concept)->
+  $('#render_new_concept_side').html('<div id="option_for_render_new_concept_side" concept="'+new_concept+'"></div>')
+  if $('#send_post_concept').val()
+    $('#send_post_concept').submit()
+  else
+    optsel = $("#option_for_render_tab")
+    project_id = parseInt(optsel.attr('project'))
+    post_id = parseInt(optsel.attr('post'))
+    if project_id and post_id and new_concept != ''
+      $.ajax
+        url: "/project/#{project_id}/plan/posts/#{post_id}/get_concept"
+        type: "get"
+        data:
+          con_id: new_concept
+

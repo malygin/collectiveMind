@@ -1,6 +1,6 @@
 class Plan::Post < ActiveRecord::Base
    include BasePost
-  attr_accessible :first_step, :goal, :other_steps, :plan_first, :plan_other,:plan_control, :step  #for form master
+  attr_accessible :first_step, :goal, :other_steps, :plan_first, :plan_other,:plan_control, :step,:name  #for form master
 
    #has_many :task_triplets, :order => 'position'
 
@@ -16,13 +16,17 @@ class Plan::Post < ActiveRecord::Base
    has_many :estimates, :class_name => 'Estimate::Post'
    has_many :voted_users, :through => :final_votings, :source => :user
    has_many :final_votings,:foreign_key => 'plan_post_id', :class_name => "Plan::Voting"
+
+   has_many :post_stages, :class_name => 'Plan::PostStage'
+
+
    def voted(user)
      self.voted_users.where(:id => user)
    end
 
-  def get_pa_by_discontent(d, column, first=0)
-    self.post_aspects.where(discontent_aspect_id: d, first_stage: first).first.send(column)  unless self.post_aspects.empty?
-  end
+   def get_pa_by_discontent(d, column, first=0)
+     self.post_aspects.where(discontent_aspect_id: d, first_stage: first).first.send(column)  unless self.post_aspects.empty?
+   end
 
 
 end
