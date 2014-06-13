@@ -154,6 +154,14 @@ p, a {
     text-align: center;
 }
 
+.autocomplete,
+.ui-autocomplete-input,
+.ui-autocomplete {
+    max-height: 200px !important;
+    overflow-y: auto !important;
+    /* prevent horizontal scrollbar */
+    overflow-x: hidden !important;
+}
 
 /*todo my styles bottom*/
 /******************************************************************************************************************************************************/

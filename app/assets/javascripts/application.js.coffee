@@ -499,8 +499,40 @@ $('#select_for_aspects').on 'change', ->
       url: "/project/#{project_id}/plan/posts/#{post_id}/render_concept_side"
       type: "put"
 
-$(window).load ->
-  $("#second").on "click", ->
-    render_table()
-  $("#third").on "click", ->
-    render_concept_side()
+#$(window).load ->
+#  $("#first").on "click", ->
+#    $('#send_post_concept').submit()
+#  $("#second").on "click", ->
+#    render_table()
+#    $('#send_post_concept').submit()
+#  $("#third").on "click", ->
+#    render_concept_side()
+
+@save_last_concept= ->
+  last_id = $('ul.panel-collapse li.active').attr('id')
+  -unless typeof last_id is 'undefined'
+    $("##{last_id} a").append('<i class="color-green fa fa-save" style="opacity:0;"></i>')
+    $("##{last_id} a i").animate {
+      opacity: 1
+    }, "slow",  ->
+      $(this).animate {
+        opacity: 0
+      }, "slow",  ->
+        $(this).remove()
+
+
+@get_concept_save= (new_concept)->
+  $('#render_new_concept_side').html('<div id="option_for_render_new_concept_side" concept="'+new_concept+'"></div>')
+  if $('#send_post_concept').val()
+    $('#send_post_concept').submit()
+  else
+    optsel = $("#option_for_render_tab")
+    project_id = parseInt(optsel.attr('project'))
+    post_id = parseInt(optsel.attr('post'))
+    if project_id and post_id and new_concept != ''
+      $.ajax
+        url: "/project/#{project_id}/plan/posts/#{post_id}/get_concept"
+        type: "get"
+        data:
+          con_id: new_concept
+

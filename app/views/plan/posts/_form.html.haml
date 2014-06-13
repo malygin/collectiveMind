@@ -157,6 +157,8 @@
           .form-horizontal
             %fieldset
               #modal_concept_action
+              #render_old_concept_side
+              #render_new_concept_side
               .col-md-2#concept_side
                 - unless @post.post_stages.nil?
                   %ul#menu-levels-collapse.side-nav
@@ -166,9 +168,9 @@
                           %b="Этап #{index+1}. "
                           =stage.name
                         - unless stage.plan_post_aspects.nil?
-                          %ul.panel-collapse.collapse.in{:id => "sub-menu-#{index}-collapse"}
+                          %ul.concept_side_list.panel-collapse.collapse.in{:id => "sub-menu-#{index}-collapse"}
                             - stage.plan_post_aspects.each_with_index do |concept|
-                              %li.concept_side{:id => "li_concept_#{concept.id}"}
+                              %li.concept_side{:id => "li_concept_#{concept.id}", :onclick => "$('#send_post_concept').submit();save_last_concept();"}
                                 =link_to get_concept_plan_post_path(@project, @post, :con_id => concept.id), :method => :get, :remote => true do
                                   =concept.title
               .col-md-6
@@ -180,7 +182,7 @@
         .description
           %ul.pager.wizard
             %li.previous
-              %button.btn.btn-primary.pull-left{:onclick => "wizard_tabs();"}
+              %button.btn.btn-primary.pull-left{:onclick => "wizard_tabs();$('#send_post_concept').submit();"}
                 %i.fa.fa-caret-left
                 Назад
             %li.next
