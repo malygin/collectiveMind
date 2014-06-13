@@ -182,11 +182,11 @@
         .description
           %ul.pager.wizard
             %li.previous
-              %button.btn.btn-primary.pull-left{:onclick => "wizard_tabs();$('#send_post_concept').submit();"}
+              %button.btn.btn-primary.pull-left
                 %i.fa.fa-caret-left
                 Назад
             %li.next
-              %button.btn.btn-primary.pull-right#btn_next{:class => @post.persisted? ? nil:"disabled", :onclick => "wizard_tabs();"}
+              %button.btn.btn-primary.pull-right#btn_next{:class => @post.persisted? ? nil:"disabled"}
                 Далее
                 %i.fa.fa-caret-right
 

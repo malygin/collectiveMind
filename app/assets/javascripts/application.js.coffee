@@ -509,10 +509,10 @@ $('#select_for_aspects').on 'change', ->
 #    render_concept_side()
 
 @save_last_concept= ->
-  last_id = $('ul.panel-collapse li.active').attr('id')
-  -unless typeof last_id is 'undefined'
-    $("##{last_id} a").append('<i class="color-green fa fa-save" style="opacity:0;"></i>')
-    $("##{last_id} a i").animate {
+  last_id = $("#option_for_render_old_concept_side").attr('concept')
+  -if last_id != ''
+    $("#li_concept_#{last_id} a").append('<i class="color-green fa fa-save" style="opacity:0;"></i>')
+    $("#li_concept_#{last_id} a i").animate {
       opacity: 1
     }, "slow",  ->
       $(this).animate {
@@ -520,6 +520,18 @@ $('#select_for_aspects').on 'change', ->
       }, "slow",  ->
         $(this).remove()
 
+#  last_id = $('ul.panel-collapse li.active').attr('id')
+#  -unless typeof last_id is 'undefined'
+
+@save_last_concept_tabs= ->
+  $("#third a").append('<i class="color-green fa fa-save" style="opacity:0;"></i>')
+  $("#third a i").animate {
+      opacity: 1
+    }, "slow",  ->
+      $(this).animate {
+        opacity: 0
+      }, "slow",  ->
+        $(this).remove()
 
 @get_concept_save= (new_concept)->
   $('#render_new_concept_side').html('<div id="option_for_render_new_concept_side" concept="'+new_concept+'"></div>')

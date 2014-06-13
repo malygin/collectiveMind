@@ -21,10 +21,12 @@ $(function(){
             }
             if($current == 1) {
                 $('#send_post_concept').submit();
+                save_last_concept_tabs();
             }
             if($current == 2) {
                 render_table();
                 $('#send_post_concept').submit();
+                save_last_concept_tabs();
             }
             if($current == 3) {
                 render_concept_side();
