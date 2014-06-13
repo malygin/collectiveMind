@@ -115,7 +115,7 @@
           .form-horizontal
             %fieldset
               #modal_concept_action
-              .col-md-2
+              .col-md-4
                 - unless @post.post_stages.nil?
                   %ul#menu-levels-collapse.side-nav
                     -@post.post_stages.each_with_index do |stage, index|
@@ -129,10 +129,10 @@
                               %li.concept_side{:id => "li_concept_#{concept.id}"}
                                 =link_to get_concept_plan_post_path(@project, @post, :con_id => concept.id, :view_post_concept => true), :method => :get, :remote => true do
                                   =concept.title
-              .col-md-6
+              .col-md-8
                 #render_get_concept
-              .col-md-4
-                #render_get_concept_actions
+              -#.col-md-4
+              -#  #render_get_concept_actions
 
         .description
           %ul.pager.wizard
