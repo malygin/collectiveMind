@@ -1,5 +1,5 @@
 - unless @post.post_stages.nil?
-  %ul#menu-levels-collapse.side-nav
+  %ul#menu-levels-collapse.side-nav.liFixar
     -@post.post_stages.each_with_index do |stage, index|
       %li.panel
         %a.accordion-toggle{"data-parent" => "#menu-levels-collapse", "data-toggle" => "collapse", :href => "#sub-menu-#{index}-collapse"}

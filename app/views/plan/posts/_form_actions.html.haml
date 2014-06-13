@@ -4,7 +4,7 @@
     %tr
       %th
         Мероприятия по реализации нововведения
-        ="'#{form_actions.title}'"
+        -#="'#{form_actions.title}'"
       %th(style="width:100px;")
         Необходимые ресурсы
   %tbody
@@ -30,7 +30,6 @@
           =link_to new_action_plan_post_path(@project, @post, :con_id => form_actions.id, :view_concept => true), :method => :put, :remote => true, :class => "btn btn-default btn-success btn-block", :id => "btn_new_concept", :style => "font-weight: normal;" do
             Добавить мероприятие
 
-%br
 %br
 %h3 Обратите внимание!
 %h4 Для функционирования выбранного нововведения в будущем ему будут необходимы следующие ресурсы:

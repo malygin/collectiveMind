@@ -27,11 +27,21 @@ class Concept::PostsController < PostsController
      pr=Set.new
      pr.merge(Concept::Resource.where(:project_id => params[:project]).map {|d| {:value => d.name}})
      #if params[:term].length > 1
-       pr.merge(Concept::PostResource.select("DISTINCT name as value").where("LOWER(name) like LOWER(?)", "%#{params[:term]}%")
-                .map {|d| {:value => d.value } })
      #end
-     render json: pr.sort_by{|ha| ha[:value].downcase}
+     pr.merge(Concept::PostResource.select("DISTINCT name as value").where("LOWER(name) like LOWER(?)", "%#{params[:term]}%")
+              .map {|d| {:value => d.value } })
 
+     @project = Core::Project.find(params[:project])
+     if @project.status == 9
+       pr.merge(Plan::PostResource.select("DISTINCT name as value").where("LOWER(name) like LOWER(?)", "%#{params[:term]}%")
+            .map {|d| {:value => d.value } })
+       pr.merge(Plan::PostMean.select("DISTINCT name as value").where("LOWER(name) like LOWER(?)", "%#{params[:term]}%")
+            .map {|d| {:value => d.value } })
+       pr.merge(Plan::PostActionResource.select("DISTINCT name as value").where("LOWER(name) like LOWER(?)", "%#{params[:term]}%")
+                .map {|d| {:value => d.value } })
+     end
+
+     render json: pr.sort_by{|ha| ha[:value].downcase}
    end
 
 

@@ -105,6 +105,9 @@ class Plan::PostsController < PostsController
       Journal.find(params[:viewed]).update_attribute(:viewed, true)
       @my_journals_count = Journal.count_events_for_my_feed(@project.id, current_user)
     end
+    if current_model.column_names.include? 'number_views'
+      @post.update_column(:number_views, @post.number_views+1)
+    end
     render 'show' , :layout => 'application_two_column'
   end
 
@@ -334,7 +337,15 @@ end
     @project = Core::Project.find(params[:project])
     @post = Plan::Post.find(params[:id])
     @post_stage = Plan::PostStage.find(params[:stage_id])
-    @post_stage.destroy if @post_stage.post.user == current_user or boss?
+    #if current_user?(@post.user)
+    #  @post_stage.destroy
+    #  @post_stage.plan_post_aspects.each do |concept|
+    #    concept.plan_post_actions.destroy_all
+    #  end
+    #  @post_stage.plan_post_aspects.destroy_all
+    #end
+    @post_stage.update_column(:status, 1) if current_user?(@post.user)
+
     respond_to do |format|
       format.js
     end
@@ -409,7 +420,7 @@ end
     @post_stage = Plan::PostStage.find(params[:stage_id])
     @post_aspect = Plan::PostAspect.find(params[:con_id])
     @post_action = Plan::PostAction.find(params[:act_id])
-    @post_action.destroy
+    @post_action.destroy if current_user?(@post.user)
     respond_to do |format|
       format.js
     end
@@ -490,9 +501,11 @@ end
     @post = Plan::Post.find(params[:id])
     @post_stage = Plan::PostStage.find(params[:stage_id])
     @post_concept = Plan::PostAspect.find(params[:con_id])
-    @post_concept.destroy
     @post_actions = @post_concept.plan_post_actions.pluck(:id)
-    @post_concept.plan_post_actions.destroy_all
+    if current_user?(@post.user)
+      @post_concept.destroy
+      @post_concept.plan_post_actions.destroy_all
+    end
     respond_to do |format|
       format.js
     end

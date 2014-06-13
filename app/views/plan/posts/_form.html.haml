@@ -159,7 +159,7 @@
               #modal_concept_action
               #render_old_concept_side
               #render_new_concept_side
-              .col-md-2#concept_side
+              .col-md-4#concept_side
                 - unless @post.post_stages.nil?
                   %ul#menu-levels-collapse.side-nav
                     -@post.post_stages.each_with_index do |stage, index|
@@ -173,10 +173,10 @@
                               %li.concept_side{:id => "li_concept_#{concept.id}", :onclick => "$('#send_post_concept').submit();save_last_concept();"}
                                 =link_to get_concept_plan_post_path(@project, @post, :con_id => concept.id), :method => :get, :remote => true do
                                   =concept.title
-              .col-md-6
+              .col-md-8
                 #render_get_concept
-              .col-md-4
-                #render_get_concept_actions
+              -#.col-md-3
+              -#  #render_get_concept_actions
 
 
         .description

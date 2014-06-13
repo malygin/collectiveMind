@@ -187,6 +187,8 @@
       -#.form-group.has-success
       -#  =text_area_tag "pa1[#{first_cond.id}][positive_s]", first_cond.positive_s, :class => "concept_cond form-control", rows: 12, style: 'width: 100%;'
   %hr
+  #render_get_concept_actions
+  %hr
   .row
     .col-md-12
       .text-center
@@ -230,6 +232,13 @@
 
           %p
             Средства широкого публичного оповещения о должниках
+  -if form_concept.negative_r.present? and form_concept.plan_post_resources.by_type('negative_r').empty?
+    .row
+      .col-md-12
+        %h4.color-red
+          Переведите, пожалуйста, данное поле в новый формат ресурсов, для дальнейшей работы с ним!
+        .form-group.has-success= display_content(form_concept.negative_r)
+
   .row
     .col-md-12
       .form-group.has-success{:id => "resources_negative_r"}
