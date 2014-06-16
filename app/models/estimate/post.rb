@@ -27,28 +27,28 @@ class Estimate::Post < ActiveRecord::Base
 
   	sum_tr=0.0
     post_aspects.others.each do |tr|
-      #op_i=(tr.op1+tr.op2+tr.op3+tr.op4) ==0 ? 0 :  33.33 * (3*tr.op1+2*tr.op2+1*tr.op3)/(tr.op1+tr.op2+tr.op3+tr.op4).to_f
-      #on_i=(tr.on1+tr.on2+tr.on3+tr.on4) ==0 ? 0 :  33.33 * (3*tr.on1+2*tr.on2+1*tr.on3)/(tr.on1+tr.on2+tr.on3+tr.on4).to_f
-      #ozf_i=(tr.ozf1+tr.ozf2+tr.ozf3+tr.ozf4) ==0 ? 0 : 33.33 * (3*tr.ozf1+2*tr.ozf2+1*tr.ozf3)/(tr.ozf1+tr.ozf2+tr.ozf3+tr.ozf4).to_f
-      #ozs_i=(tr.ozs1+tr.ozs2+tr.ozs3+tr.ozs4) ==0 ? 0 : 33.33 * (3*tr.ozs1+2*tr.ozs2+1*tr.ozs3)/(tr.ozs1+tr.ozs2+tr.ozs3+tr.ozs4).to_f
-      op_i=(tr.op1+tr.op2+tr.op3+tr.op4) ==0 ? 0 :  ((95/100.to_f)*tr.op1+(70/100.to_f)*tr.op2+(30/100.to_f)*tr.op3)/(tr.op1+tr.op2+tr.op3+tr.op4).to_f
-      on_i=(tr.on1+tr.on2+tr.on3+tr.on4) ==0 ? 0 :   ((5/6.to_f)*tr.on1+(1/2.to_f)*tr.on2+(1/6.to_f)*tr.on3)/(tr.on1+tr.on2+tr.on3+tr.on4).to_f
-      ozf_i=(tr.ozf1+tr.ozf2+tr.ozf3+tr.ozf4) ==0 ? 0 : ((5/6.to_f)*tr.ozf1+(1/2.to_f)*tr.ozf2+(1/6.to_f)*tr.ozf3)/(tr.ozf1+tr.ozf2+tr.ozf3+tr.ozf4).to_f
-      ozs_i=(tr.ozs1+tr.ozs2+tr.ozs3+tr.ozs4) ==0 ? 0 :  ((5/6.to_f)*tr.ozs1+(1/2.to_f)*tr.ozs2+(1/6.to_f)*tr.ozs3)/(tr.ozs1+tr.ozs2+tr.ozs3+tr.ozs4).to_f
+      op_i=(tr.op1+tr.op2+tr.op3+tr.op4) ==0 ? 0 :  33.33 * (3*tr.op1+2*tr.op2+1*tr.op3)/(tr.op1+tr.op2+tr.op3+tr.op4).to_f
+      on_i=(tr.on1+tr.on2+tr.on3+tr.on4) ==0 ? 0 :  33.33 * (3*tr.on1+2*tr.on2+1*tr.on3)/(tr.on1+tr.on2+tr.on3+tr.on4).to_f
+      ozf_i=(tr.ozf1+tr.ozf2+tr.ozf3+tr.ozf4) ==0 ? 0 : 33.33 * (3*tr.ozf1+2*tr.ozf2+1*tr.ozf3)/(tr.ozf1+tr.ozf2+tr.ozf3+tr.ozf4).to_f
+      ozs_i=(tr.ozs1+tr.ozs2+tr.ozs3+tr.ozs4) ==0 ? 0 : 33.33 * (3*tr.ozs1+2*tr.ozs2+1*tr.ozs3)/(tr.ozs1+tr.ozs2+tr.ozs3+tr.ozs4).to_f
+      # op_i=(tr.op1+tr.op2+tr.op3+tr.op4) ==0 ? 0 :  ((95/100.to_f)*tr.op1+(70/100.to_f)*tr.op2+(30/100.to_f)*tr.op3)/(tr.op1+tr.op2+tr.op3+tr.op4).to_f
+      # on_i=(tr.on1+tr.on2+tr.on3+tr.on4) ==0 ? 0 :   ((95/100.to_f)*tr.on1+(70/100.to_f)*tr.on2+(30/100.to_f)*tr.on3)/(tr.on1+tr.on2+tr.on3+tr.on4).to_f
+      # ozf_i=(tr.ozf1+tr.ozf2+tr.ozf3+tr.ozf4) ==0 ? 0 : ((95/100.to_f)*tr.ozf1+(70/100.to_f)*tr.ozf2+(30/100.to_f)*tr.ozf3)/(tr.ozf1+tr.ozf2+tr.ozf3+tr.ozf4).to_f
+      # ozs_i=(tr.ozs1+tr.ozs2+tr.ozs3+tr.ozs4) ==0 ? 0 :  ((95/100.to_f)*tr.ozs1+(70/100.to_f)*tr.ozs2+(30/100.to_f)*tr.ozs3)/(tr.ozs1+tr.ozs2+tr.ozs3+tr.ozs4).to_f
       sum_tr = sum_tr + ( (ozf_i*ozs_i) ==0 ? 0 : (op_i*on_i)/(ozf_i*ozs_i)).to_f
     end
   	#puts "__________", sum_tr
   	@first_c = sum_tr
     sum_tr=0.0
     post_aspects.firsts.each do |tr|
-      #op_i=(tr.op1+tr.op2+tr.op3+tr.op4) ==0 ? 0 :  33.33 * (3*tr.op1+2*tr.op2+1*tr.op3)/(tr.op1+tr.op2+tr.op3+tr.op4).to_f
-      #on_i=(tr.on1+tr.on2+tr.on3+tr.on4) ==0 ? 0 :  33.33 * (3*tr.on1+2*tr.on2+1*tr.on3)/(tr.on1+tr.on2+tr.on3+tr.on4).to_f
-      #ozf_i=(tr.ozf1+tr.ozf2+tr.ozf3+tr.ozf4) ==0 ? 0 : 33.33 * (3*tr.ozf1+2*tr.ozf2+1*tr.ozf3)/(tr.ozf1+tr.ozf2+tr.ozf3+tr.ozf4).to_f
-      #ozs_i=(tr.ozs1+tr.ozs2+tr.ozs3+tr.ozs4) ==0 ? 0 : 33.33 * (3*tr.ozs1+2*tr.ozs2+1*tr.ozs3)/(tr.ozs1+tr.ozs2+tr.ozs3+tr.ozs4).to_f
-      op_i=(tr.op1+tr.op2+tr.op3+tr.op4) ==0 ? 0 :  ((5/6.to_f)*tr.op1+(1/2.to_f)*tr.op2+(1/6.to_f)*tr.op3)/(tr.op1+tr.op2+tr.op3+tr.op4).to_f
-      on_i=(tr.on1+tr.on2+tr.on3+tr.on4) ==0 ? 0 :   ((5/6.to_f)*tr.on1+(1/2.to_f)*tr.on2+(1/6.to_f)*tr.on3)/(tr.on1+tr.on2+tr.on3+tr.on4).to_f
-      ozf_i=(tr.ozf1+tr.ozf2+tr.ozf3+tr.ozf4) ==0 ? 0 : ((5/6.to_f)*tr.ozf1+(1/2.to_f)*tr.ozf2+(1/6.to_f)*tr.ozf3)/(tr.ozf1+tr.ozf2+tr.ozf3+tr.ozf4).to_f
-      ozs_i=(tr.ozs1+tr.ozs2+tr.ozs3+tr.ozs4) ==0 ? 0 :  ((5/6.to_f)*tr.ozs1+(1/2.to_f)*tr.ozs2+(1/6.to_f)*tr.ozs3)/(tr.ozs1+tr.ozs2+tr.ozs3+tr.ozs4).to_f
+      op_i=(tr.op1+tr.op2+tr.op3+tr.op4) ==0 ? 0 :  33.33 * (3*tr.op1+2*tr.op2+1*tr.op3)/(tr.op1+tr.op2+tr.op3+tr.op4).to_f
+      on_i=(tr.on1+tr.on2+tr.on3+tr.on4) ==0 ? 0 :  33.33 * (3*tr.on1+2*tr.on2+1*tr.on3)/(tr.on1+tr.on2+tr.on3+tr.on4).to_f
+      ozf_i=(tr.ozf1+tr.ozf2+tr.ozf3+tr.ozf4) ==0 ? 0 : 33.33 * (3*tr.ozf1+2*tr.ozf2+1*tr.ozf3)/(tr.ozf1+tr.ozf2+tr.ozf3+tr.ozf4).to_f
+      ozs_i=(tr.ozs1+tr.ozs2+tr.ozs3+tr.ozs4) ==0 ? 0 : 33.33 * (3*tr.ozs1+2*tr.ozs2+1*tr.ozs3)/(tr.ozs1+tr.ozs2+tr.ozs3+tr.ozs4).to_f
+      # op_i=(tr.op1+tr.op2+tr.op3+tr.op4) ==0 ? 0 :  ((95/100.to_f)*tr.op1+(70/100.to_f)*tr.op2+(30/100.to_f)*tr.op3)/(tr.op1+tr.op2+tr.op3+tr.op4).to_f
+      # on_i=(tr.on1+tr.on2+tr.on3+tr.on4) ==0 ? 0 :   ((95/100.to_f)*tr.on1+(70/100.to_f)*tr.on2+(30/100.to_f)*tr.on3)/(tr.on1+tr.on2+tr.on3+tr.on4).to_f
+      # ozf_i=(tr.ozf1+tr.ozf2+tr.ozf3+tr.ozf4) ==0 ? 0 : ((95/100.to_f)*tr.ozf1+(70/100.to_f)*tr.ozf2+(30/100.to_f)*tr.ozf3)/(tr.ozf1+tr.ozf2+tr.ozf3+tr.ozf4).to_f
+      # ozs_i=(tr.ozs1+tr.ozs2+tr.ozs3+tr.ozs4) ==0 ? 0 :  ((95/100.to_f)*tr.ozs1+(70/100.to_f)*tr.ozs2+(30/100.to_f)*tr.ozs3)/(tr.ozs1+tr.ozs2+tr.ozs3+tr.ozs4).to_f
       sum_tr = sum_tr + ( (ozf_i*ozs_i) ==0 ? 0 : (op_i*on_i)/(ozf_i*ozs_i)).to_f
     end
     @second_c = sum_tr
@@ -57,7 +57,7 @@ class Estimate::Post < ActiveRecord::Base
     @first_c = (@first_c * 100).round / 100.0
     @second_c = (@second_c * 100).round / 100.0
     @third_c = ((th1 +th2)*100).round / 100.0
-  	((@second_c+@first_c-@third_c)*100).round / 100.0
+  	((@second_c*@first_c/@third_c)*100).round / 100.0
 
   	# oppsh_i=(1*oppsh1+2*oppsh2+3*oppsh3)/(oppsh1+oppsh2+oppsh3)
 
