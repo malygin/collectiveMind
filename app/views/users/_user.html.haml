@@ -37,7 +37,8 @@
   %td
     %span.text-inverse
       -unless @score_name.nil?
-        %span.rate= user.send(@score_name)
+        -#%span.rate= user.send(@score_name)
+        %span.rate= user.user_project_scores(@project.id).send(@score_name)
       -else
-        %span.rate= user.score
-    %span.text-muted (0)
+        %span.rate= user.user_project_scores(@project.id).score
+    %span.text-muted (#{user.score})

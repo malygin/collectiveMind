@@ -24,14 +24,16 @@
                 =link_to "+10 баллов",  "/project/"+@project.id.to_s+"/users/"+@user.id.to_s+"/add_score/10", :remote => true, :method => :put, class: "voteCounter"
 
           .col-md-3
-            %span.text-muted.pull-right=@user.score
+            -#%span.text-muted.pull-right=@user.score
+            %span.text-muted.pull-right=@user.user_project_scores(@project.id).score
         %hr
         .row
           .col-md-7
             Генератор идей
           .col-md-5
             %span.pull-right
-              %span.text-muted=@user.score_g
+              -#%span.text-muted=@user.score_g
+              %span.text-muted=@user.user_project_scores(@project.id).score_g
               %span.text-success (0)
               %span.glyphicon.glyphicon-arrow-up.text-success
         .row
@@ -39,7 +41,8 @@
             Аналитик
           .col-md-5
             %span.pull-right
-              %span.text-muted=@user.score_a
+              -#%span.text-muted=@user.score_a
+              %span.text-muted=@user.user_project_scores(@project.id).score_a
               %span.text-danger (0)
               %span.glyphicon.glyphicon-arrow-down.text-danger
 
@@ -48,7 +51,8 @@
             Оценщик
           .col-md-5
             %span.pull-right
-              %span.text-muted=@user.score_o
+              -#%span.text-muted=@user.score_o
+              %span.text-muted=@user.user_project_scores(@project.id).score_o
               %span.text-muted (0)
               %span.glyphicon.glyphicon-minus.text-muted
         %br

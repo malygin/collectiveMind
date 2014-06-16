@@ -44,12 +44,14 @@ class UsersController < ApplicationController
     add_breadcrumb I18n.t('menu.raiting'), users_path(@project)
     @my_journals_count = Journal.count_events_for_my_feed(@project.id, current_user)
     @my_journals  = Journal.events_for_my_feed @project.id, current_user.id, 5
-    @users = User.where('score>0').where('admin=?', false).order('score DESC').paginate(:page =>params[:page])
+    #@users = User.where('score>0').where('admin=?', false).order('score DESC').paginate(:page =>params[:page])
+    @users = User.joins(:core_project_scores).where("core_project_scores.project_id = ? AND core_project_scores.score > 0", @project.id).where('users.admin=?', false).order("core_project_scores.score DESC").paginate(:page =>params[:page])
   end
 
   def show_top
     @project = Core::Project.find(params[:project])
-    @users = User.scope_score_name(params[:score_name]).where('admin=?', false).paginate(:page =>params[:page])
+    #@users = User.scope_score_name(params[:score_name]).where('admin=?', false).paginate(:page =>params[:page])
+    @users = User.joins(:core_project_scores).where("core_project_scores.project_id = ? AND core_project_scores.score > 0", @project.id).where('users.admin=?', false).order("core_project_scores.#{params[:score_name]} DESC").paginate(:page =>params[:page])
     @score_name = params[:score_name]
     respond_to do |format|
       format.js

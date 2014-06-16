@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140610235840) do
+ActiveRecord::Schema.define(:version => 20140616174819) do
 
   create_table "answers", :force => true do |t|
     t.string   "text"
@@ -215,6 +215,17 @@ ActiveRecord::Schema.define(:version => 20140610235840) do
 
   add_index "concept_votings", ["concept_post_aspect_id"], :name => "index_concept_votings_on_concept_post_id"
   add_index "concept_votings", ["user_id"], :name => "index_concept_votings_on_user_id"
+
+  create_table "core_project_scores", :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "project_id"
+    t.integer  "score"
+    t.integer  "score_a"
+    t.integer  "score_g"
+    t.integer  "score_o"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
 
   create_table "core_project_users", :force => true do |t|
     t.integer  "project_id"
@@ -1064,6 +1075,9 @@ ActiveRecord::Schema.define(:version => 20140610235840) do
     t.datetime "updated_at", :null => false
   end
 
+# Could not dump table "projects" because of following StandardError
+#   Unknown type 'serial' for column 'id'
+
   create_table "question_comment_votings", :force => true do |t|
     t.integer  "user_id"
     t.integer  "comment_id"
@@ -1137,9 +1151,9 @@ ActiveRecord::Schema.define(:version => 20140610235840) do
     t.integer  "user_id"
     t.string   "check_field"
     t.boolean  "status"
-    t.integer  "project_id"
     t.datetime "created_at",  :null => false
     t.datetime "updated_at",  :null => false
+    t.integer  "project_id"
   end
 
   create_table "users", :force => true do |t|
