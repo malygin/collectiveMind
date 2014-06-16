@@ -259,11 +259,31 @@ class Discontent::PostsController < PostsController
          return
      else
        @union_post.update_attributes(status: 0, discontent_post_id: nil)
+       @post.destroy_ungroup_aspects(@union_post)
        respond_to do |format|
          format.js
        end
      end
    end
+
+   def ungroup_union
+     @project = Core::Project.find(params[:project])
+     @post = Discontent::Post.find(params[:id])
+     unless @post.discontent_posts.nil?
+       @post.discontent_posts.each do |post|
+         post.update_attributes(status: 0, discontent_post_id: nil)
+       end
+     end
+     if boss?
+       @post.destroy
+       @post.discontent_post_aspects.destroy_all
+     end
+     redirect_to action: "index"
+     #respond_to do |format|
+     #  format.js {render :js => "alert('Разгруппировано');"}
+     #end
+   end
+
    def add_union
      @project = Core::Project.find(params[:project])
      @post = Discontent::Post.find(params[:id])

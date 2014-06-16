@@ -92,6 +92,25 @@ class Discontent::Post < ActiveRecord::Base
     end
   end
 
+  def destroy_ungroup_aspects(ungroup_post)
+    aspects_for_ungroup = ungroup_post.post_aspects.pluck(:id)
+    union_posts = self.discontent_posts.where("discontent_posts.id <> ?", ungroup_post.id)
+    union_posts_aspects = []
+    if union_posts.present?
+      union_posts.each do |p|
+        union_posts_aspects = union_posts_aspects | p.post_aspects.pluck(:id) if p.post_aspects.present?
+      end
+    end
+
+    if aspects_for_ungroup.present? and union_posts_aspects.present?
+      aspects_for_ungroup.each do |asp|
+        unless union_posts_aspects.include? asp.id
+          self.discontent_post_aspects.by_aspect(asp.id).destroy if boss?
+        end
+      end
+    end
+  end
+
   def update_status_fields(pa)
     if self.read_attribute('content') != pa['content']
       self.status_content = nil

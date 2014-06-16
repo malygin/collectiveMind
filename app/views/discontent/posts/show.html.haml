@@ -17,21 +17,28 @@
           .col-md-10
             %small.text-muted= Russian::strftime(@post.created_at,"%d %B %k:%M:%S ")
         = render 'shared/post_social_bar2', :post => @post
-        = render 'shared/post_edit_bar', :post => @post
+        %span
+          -if @post.status == 2 and boss?
+            = link_to 'Разгруппировать', {:action => :ungroup_union, :id => @post.id}, :method => :put, :confirm => 'Точно?'
+            \|
+          = render 'shared/post_edit_bar', :post => @post
 
         - if can_union_discontents?(@project) and @post.status == 0
-          .panel.panel-default
-            %p
-              %h4 Подходящие для объединения несовершенства:
-            .panel-body
-              = form_tag "/project/#{@project.id}/discontent/posts/#{@post.id}/union" do
-                %br
-                %p Добавьте общее описание для объединенного несовершенства (обязательное поле):
-                %textarea{name: "union_post_descr", class:"form-control"}
-                %br
-                =render @post.get_posts_suitable_for_association
-                %br
-                %button#btn-union.btn.btn-sm.btn-success(type="submit")  Объединить их
+          -if @post.get_posts_suitable_for_association.size > 0
+            .panel.panel-default
+              %p
+                %h4 Подходящие для объединения несовершенства:
+              .panel-body
+                = form_tag "/project/#{@project.id}/discontent/posts/#{@post.id}/union" do
+                  %br
+                  %p Добавьте общее описание для объединенного несовершенства (обязательное поле):
+                  %textarea{name: "union_post_descr", class:"form-control"}
+                  %br
+                  =render @post.get_posts_suitable_for_association
+                  %br
+                  %button#btn-union.btn.btn-sm.btn-success(type="submit")  Объединить их
+          -else
+            %h4 Нет подходяших несовершенств для объединения.
         - if @post.status == 2
           .panel.panel-default
             %p

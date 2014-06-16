@@ -96,6 +96,7 @@ scope '/project/:project' do
         put :new_note
         put :create_note
         put :destroy_note
+        put :ungroup_union
       end
     end
   end
