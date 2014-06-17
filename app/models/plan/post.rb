@@ -17,7 +17,7 @@ class Plan::Post < ActiveRecord::Base
    has_many :voted_users, :through => :final_votings, :source => :user
    has_many :final_votings,:foreign_key => 'plan_post_id', :class_name => "Plan::Voting"
 
-   has_many :post_stages, :class_name => 'Plan::PostStage', :conditions =>  {:status => 0}
+   has_many :post_stages, :class_name => 'Plan::PostStage', :conditions =>  {:status => 0}, :order => [ :date_begin]
 
 
    def voted(user)
