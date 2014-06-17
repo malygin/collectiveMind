@@ -50,9 +50,9 @@
                             %td
                               -if ps.date_begin and ps.date_end
                                 %small.color-green
-                                  =ps.date_begin
-                                  ="/"
-                                  =ps.date_end
+                                  =Russian::strftime(ps.date_begin, "%d %b %Y")
+                                  ="-"
+                                  =Russian::strftime(ps.date_end, "%d %b %Y")
                                 %br
                               %span.h5=ps.name
 
@@ -81,9 +81,9 @@
                         %td(rowspan="#{rowspan_stage_show(stage)}" class="td_stage_#{stage.id}")
                           -if stage.date_begin and stage.date_end
                             %small.color-green
-                              =stage.date_begin
-                              ="/"
-                              =stage.date_end
+                              =Russian::strftime(stage.date_begin, "%d %b %y")
+                              ="-"
+                              =Russian::strftime(stage.date_end, "%d %b %y")
                             %br
                           =stage.name
                         %td(rowspan="#{rowspan_stage_show(stage)}" class="td_stage_#{stage.id}")
@@ -100,9 +100,9 @@
                                 %td
                                   -if action.date_begin and action.date_end
                                     %small.color-green
-                                      =action.date_begin
-                                      ="/"
-                                      =action.date_end
+                                      =Russian::strftime(action.date_begin, "%d %b %Y")
+                                      ="-"
+                                      =Russian::strftime(action.date_end, "%d %b %Y")
                                     %br
                                   %span.h5{:id => "name_post_action_#{action.id}"}=action.name
                                   .pull-right
