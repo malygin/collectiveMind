@@ -2,9 +2,9 @@
   %td
     -if post_concept_action.date_begin and post_concept_action.date_end
       %small.color-green
-        =post_concept_action.date_begin
-        ="/"
-        =post_concept_action.date_end
+        =Russian::strftime(post_concept_action.date_begin, "%d %b %Y")
+        ="-"
+        =Russian::strftime(post_concept_action.date_end, "%d %b %Y")
       %br
     =post_concept_action.name
   %td
