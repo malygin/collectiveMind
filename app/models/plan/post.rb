@@ -36,7 +36,7 @@ class Plan::Post < ActiveRecord::Base
    end
 
    def first_stage
-     self.post_stages.order(:id).first.id unless self.post_stages.order(:id).first.nil?
+     self.post_stages.first.id unless self.post_stages.first.nil?
    end
 
 

@@ -118,7 +118,7 @@
               .col-md-4
                 - unless @plan_post.post_stages.nil?
                   %ul#menu-levels-collapse.side-nav
-                    -@plan_post.post_stages.order(:id).each_with_index do |stage, index|
+                    -@plan_post.post_stages.each_with_index do |stage, index|
                       %li.panel
                         %a.accordion-toggle{"data-parent" => "#menu-levels-collapse", "data-toggle" => "collapse", :href => "#sub-menu-#{index}-collapse"}
                           %b="Этап #{index+1}. "
