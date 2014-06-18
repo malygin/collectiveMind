@@ -1,0 +1,16 @@
+%tr{class: set_class_for_top(number)}
+  %td
+    %span=number
+  %td
+    .media
+      %a.pull-left(href="/project/#{@project.id}/users/#{user.id}")
+        = image_tag user.avatar.url(:thumb),  class: "media-object"
+        %br
+        =link_to user, user_path(@project, user)
+        = render partial: '/shared/user_online', object: user
+
+  %td
+
+  %td
+    %span.text-inverse
+      %span.rate= user.score

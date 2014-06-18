@@ -41,4 +41,4 @@
         %span.rate= user.user_project_scores(@project.id).send(@score_name)
       -else
         %span.rate= user.user_project_scores(@project.id).score
-    %span.text-muted (#{user.score})
+    -#%span.text-muted (#{user.score})

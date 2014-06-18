@@ -58,6 +58,13 @@ class UsersController < ApplicationController
     end
   end
 
+  def users_rc
+    @project = Core::Project.find(params[:project])
+    @my_journals_count = Journal.count_events_for_my_feed(@project.id, current_user)
+    @my_journals  = Journal.events_for_my_feed @project.id, current_user.id, 5
+    @users = User.where('score>0').where('admin=?', false).order('score DESC').paginate(:page =>params[:page])
+  end
+
 	def update
     @project = Core::Project.find(params[:project])
 

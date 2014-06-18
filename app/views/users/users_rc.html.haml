@@ -1,0 +1,16 @@
+=link_to '/project/'+@project.id.to_s do
+  %span.fa.fa-angle-double-left
+  вернуться к процедуре
+%section.widget
+  .body
+
+    %h1 Клубный рейтинг участников
+
+
+    %table.table
+      %tbody
+        - @users.each_with_index do |user, i|
+          = render :partial => 'user_rc', :locals => {:user => user, :number => i+1}
+
+
+    =link_to 'вернуться к процедуре', '/project/'+@project.id.to_s
