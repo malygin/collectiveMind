@@ -16911,6 +16911,10 @@ a {
   color: white !important;
 }
 
+.color-grey {
+  color: #999 !important;
+}
+
 .color-red {
   color: #e5603b !important;
 }

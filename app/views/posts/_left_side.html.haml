@@ -77,17 +77,16 @@
           =@project.status_title(:plan_posts)
 
 
-  %li.panel#stage_plan{class:  @project.stage_style(:estimate_posts)}
-    -#%a.accordion-toggle.collapsed{"data-parent" => "#side-nav", "data-toggle" => "collapse", :href => "#tables-collapse"}
-    - if  @project.status > 10
-      = link_to "/project/#{@project.id}/estimate/posts" , class:"#{@project.stage_style_link(@breadcrumbs[0].name, :estimate_posts)}" do
-        %i.fa.fa-table
-        =@project.status_title(:estimate_posts)
-        %br
+  %li.panel#stage_plan
+    - if  @project.status > 9
+      = link_to "/project/#{@project.id}/estimate/posts" , class:"stage_menu5" do
+        %h4.no-margin
+          5.
+          =@project.status_title(:estimate_posts)
         %small.text-center=t('stages.estimates', count: @project.estimate_posts.count)
     -else
       %a.stage_menu5
         %h4.no-margin(style='color:#444444')
           5.
           =@project.status_title(:estimate_posts)
-    %ul#tables-collapse.panel-collapse.collapse
+

@@ -18,6 +18,11 @@ class Plan::PostAspect  < ActiveRecord::Base
   belongs_to :plan_post_stage, :class_name => 'Plan::PostStage', :foreign_key => :post_stage_id
   has_many :plan_post_actions, :class_name => 'Plan::PostAction', :foreign_key => :plan_post_aspect_id
 
+  has_many :estimate_post_aspects, :class_name => 'Estimate::PostAspect', :foreign_key => :plan_post_aspect_id
+
+  #:conditions => "post_stage_id <> #{first_stage}"
+  #scope :by_first, ->(post){ where(:post_stage_id => type) }
+
   def compare_text
     unless self.concept_post_aspect.nil?
       score = ((self.content.similar(self.concept_post_aspect.content) +
@@ -46,4 +51,7 @@ class Plan::PostAspect  < ActiveRecord::Base
 
   end
 
+  def estimate_post_aspect(post)
+    estimate_post_aspects.where(:post_id => post).first
+  end
 end

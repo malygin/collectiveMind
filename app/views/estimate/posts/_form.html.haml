@@ -1,123 +1,370 @@
-= form_for @post, :url => {:project => @project.id, :action => @post.persisted? ? 'update' : 'create'},   :html => { :class => 'new_or_edit' } do |f|
-  .col-md-8
+%section.widget
+  .body
+    #wizard.form-wizard
+      %ul.wizard-navigation.nav-justified
+        %li#first
+          %a{"data-toggle" => "tab", :href => "#tab1"}
+            %small 1.
+            %strong Описание проекта
+        %li#second
+          %a{"data-toggle" => "tab", :href => "#tab2"}
+            %small 2.
+            %strong План мероприятий
+        %li#third
+          %a{"data-toggle" => "tab", :href => "#tab3"}
+            %small 3.
+            %strong Просмотр нововведений
 
-    %div.tab-content
+      #bar.progress.progress-small
+        .progress-bar
+      .tab-content
+        #tab1.tab-pane
+          .form-horizontal
+            %fieldset
+              .col-md-6
+                %legend.section
+                  Описание проекта
+                .text-left
+                  %h4.color-green Название проекта
+                  =@plan_post.name
+                %br
+                .text-left
+                  %h4.color-green Коротко о поекте
+                  =@plan_post.goal
+                %br
+                .text-left
+                  %h4.color-green Эссе по проекту. Пояснения и обоснования
+                  =@plan_post.content
 
-      %div.tab-pane#plan
-        = simple_format(@plan_post.content)
+              .col-md-6
+                %legend.section
+                  Этапы проекта
+                #post_stages
+                  %table.table.table-striped
+                    %tbody
+                      -if @plan_post.post_stages.present?
+                        -@plan_post.post_stages.each_with_index do |ps,index|
+                          %tr
+                            %td
+                              =index+1
+                            %td
+                              -if ps.date_begin and ps.date_end
+                                %small.color-green
+                                  =Russian::strftime(ps.date_begin, "%d %b %Y")
+                                  ="-"
+                                  =Russian::strftime(ps.date_end, "%d %b %Y")
+                                %br
+                              %span.h5=ps.name
 
-        %br
-        %br
-        = simple_format(@plan_post.goal)
-        %br
-        %br
-        = simple_format(@plan_post.first_step)
+        #tab2.tab-pane
+          .form-horizontal
+            %fieldset
+              %table.table.table-striped.table-bordered
+                %thead
+                  %tr
+                    %th
+                      ="#"
+                    %th(style="width:150px;")
+                      Название этапа
+                    %th(style="width:300px;")
+                      Эссе по этапу
+                    %th
+                      Нововведения
+                    %th(colspan="2")
+                      Мероприятия этапа
+                %tbody
+                  - unless @plan_post.post_stages.nil?
+                    -@plan_post.post_stages.each_with_index do |stage, index|
+                      %tr
+                        %td(rowspan="#{rowspan_stage_show(stage)}" class="td_stage_#{stage.id}")
+                          =index+1
+                        %td(rowspan="#{rowspan_stage_show(stage)}" class="td_stage_#{stage.id}")
+                          -if stage.date_begin and stage.date_end
+                            %small.color-green
+                              =Russian::strftime(stage.date_begin, "%d %b %Y")
+                              ="-"
+                              =Russian::strftime(stage.date_end, "%d %b %Y")
+                            %br
+                          =stage.name
+                        %td(rowspan="#{rowspan_stage_show(stage)}" class="td_stage_#{stage.id}")
+                          =stage.desc
+                      - unless stage.plan_post_aspects.empty?
+                        - stage.plan_post_aspects.each do |concept|
+                          %tr(id="tr_concept_#{concept.id}")
+                            %td(rowspan="#{1+concept.plan_post_actions.size}" id="td_concept_#{concept.id}")
+                              %span.h5{:id => "name_post_concept_#{concept.id}"}=concept.title
 
-        = hidden_field_tag "post_id", @plan_post.id
-
-        %label Выскажите, пожалуйста, общее впечатление от проекта и рекомендации по улучшению
-        %field= f.text_area :content ,   rows: 6, style: 'width: 100%;'
-        .field
-          = f.label 'Оцените проект в целом '
-          = f.select :all_grade, [["Отличный проект ", 0],["Хороший проект", 1], ["Удовлетворительный проект", 2], ["Плохой проект", 3]]
-
-
-      - @pair_estimates2.each do |pa, est|
-        = render partial: 'resolve_discontent',locals: { pa: pa, est: est , f: f}
-
-      - @pair_estimates1.each do |pa, est|
-        = render partial: 'resolve_discontent1',locals: { pa: pa, est: est, f: f}
-
-
-
-
-
-      %div.tab-pane#negative
-        %b При осуществлении проекта могут возникать разные негативные явления. Рассмотрите два типа таких явлений. Первый тип – это побочные эффекты, возникшие наряду с улучшениями (например, нововведения работают, но обходятся слишком дорого).
-        %br
-        %b  Какова вероятность, что эти побочные эффекты будут—
-
-        .field
-          = f.label '-- 1) значительными '
-          = f.select :nepr1, [["невероятно", 0],["маловероятно", 1], ["вероятно", 2], ["очень вероятно", 3]]
-        .field
-          = f.label "-- 2) средними "
-          = f.select :nepr2, [["невероятно", 0],["маловероятно", 1], ["вероятно", 2], ["очень вероятно", 3]]
-        .field
-          = f.label "-- 3) незначительными "
-          = f.select :nepr3, [["невероятно", 0],["маловероятно", 1], ["вероятно", 2], ["очень вероятно", 3]]
-        .field
-          = f.label "-- 4) нулевыми "
-          = f.select :nepr4, [["невероятно", 0],["маловероятно", 1], ["вероятно", 2], ["очень вероятно", 3]]
-        .field
-          = f.label 'Объясните, почему вы так считаете'
-          = f.text_area :nepr,   rows: 3, style: 'width: 100%;'
-        %br
-        %b Второй тип – это препятствия, возникшие в процессе создания нововведений (например, сопротивление со стороны сотрудников, привыкших работать по-старому).
-        %br
-        %b  Какова вероятность, что эти препятствия будут—
-
-        .field
-          = f.label '-- 1) значительными '
-          = f.select :nep1, [["невероятно", 0],["маловероятно", 1], ["вероятно", 2], ["очень вероятно", 3]]
-        .field
-          = f.label "-- 2) средними "
-          = f.select :nep2, [["невероятно", 0],["маловероятно", 1], ["вероятно", 2], ["очень вероятно", 3]]
-        .field
-          = f.label "-- 3) незначительными "
-          = f.select :nep3, [["невероятно", 0],["маловероятно", 1], ["вероятно", 2], ["очень вероятно", 3]]
-        .field
-          = f.label "-- 4) нулевыми "
-          = f.select :nep4, [["невероятно", 0],["маловероятно", 1], ["вероятно", 2], ["очень вероятно", 3]]
-        .field
-          = f.label 'Объясните, почему вы так считаете'
-          = f.text_area :nep,   rows: 3, style: 'width: 100%;'
-        %br
-
-
-
-
-  .col-md-4
-    =f.submit 'Сохранить', class: 'btn btn-success'
-    %h5
-      .small Выберите несовершенство, кликнув по нужной вкладке:
-    %ul.nav.nav-tabs.nav-justified
-      %li.active
-        %a(href="#theall" data-toggle="tab") Образ будущ.
-      %li
-        %a(href="#thefirst" data-toggle="tab") Первый этап
-    .tab-content
-      #theall.tab-pane.fade.in.active
-        %ul.nav.nav-tabs.nav-stacked
-          -#%li
-          -#  %a.text-success(href="#plan1" data-toggle="tab" style='font-size:10px; font-weight: bold;')
-          -#    =t('form.plan')
-
-          -@pair_estimates2.each_with_index do |pa, i|
-            %li
-              %a(href="#dis_#{pa[0].id}" data-toggle="tab")
-                ="#{i+1}. #{pa[0].discontent.display_content}"
-                %span.text-success= pa[1].score
-                -#%span.text-success.glyphicon.glyphicon-ok.pull-right(class = "#{'inv_element' if @post.get_pa_by_discontent(d, :name)==''}")
-      #thefirst.tab-pane.fade
-        %ul.nav.nav-tabs.nav-stacked
+                          - unless concept.plan_post_actions.nil?
+                            - concept.plan_post_actions.each do |action|
+                              %tr(id="tr_action_#{action.id}")
+                                %td
+                                  -if action.date_begin and action.date_end
+                                    %small.color-green
+                                      =Russian::strftime(action.date_begin, "%d %b %Y")
+                                      ="-"
+                                      =Russian::strftime(action.date_end, "%d %b %Y")
+                                    %br
+                                  %span.h5{:id => "name_post_action_#{action.id}"}=action.name
+                                  .pull-right
 
 
-          -@pair_estimates1.each_with_index do |pa, i|
-            - if pa[0].name!=''
-              %li
-                %a(href="#fdis_#{pa[0].id}" data-toggle="tab")
-                  ="#{i+1}. #{pa[0].discontent.display_content}"
-                  %span.text-success= pa[1].score
-                -#%span.text-success.glyphicon.glyphicon-ok.pull-right(class = "#{'inv_element' if @post.get_pa_by_discontent(d, :name, 1)==''}")
-          %li
-            %a.text-success(href="#negative" data-toggle="tab" style='font-size:10px; font-weight: bold;')
-              Оценка негативных явлений
-          %li
-            %a.text-success(href="#plan" data-toggle="tab" style='font-size:10px; font-weight: bold;')
-              Общая оценка проекта
 
-  %br
-  %br
-  %br
-  %br
+
+
+        #tab3.tab-pane
+          .form-horizontal
+            %fieldset
+              #modal_concept_action
+              .col-md-4
+                - unless @plan_post.post_stages.nil?
+                  %ul#menu-levels-collapse.side-nav
+                    -@plan_post.post_stages.order(:id).each_with_index do |stage, index|
+                      %li.panel
+                        %a.accordion-toggle{"data-parent" => "#menu-levels-collapse", "data-toggle" => "collapse", :href => "#sub-menu-#{index}-collapse"}
+                          %b="Этап #{index+1}. "
+                          =stage.name
+                        - unless stage.plan_post_aspects.nil?
+                          %ul.panel-collapse.collapse.in{:id => "sub-menu-#{index}-collapse"}
+                            - stage.plan_post_aspects.each_with_index do |concept, i|
+                              %li.concept_side{:id => "li_concept_#{concept.id}"}
+                                %a(href="#dis_#{concept.id}" data-toggle="tab")
+                                  ="#{i+1}. #{concept.title}"
+                                  -if @post.persisted?
+                                    %span.color-green= concept.estimate_post_aspect(@post.id).score
+
+                    %li.panel
+                      %a.color-green(href="#negative" data-toggle="tab")
+                        %b Оценка негативных явлений
+                    %li.panel
+                      %a.color-green(href="#plan" data-toggle="tab")
+                        %b Общая оценка проекта
+
+
+              .col-md-8
+                = form_for @post, :url => {:project => @project.id, :action => @post.persisted? ? 'update' : 'create'},   :html => { :class => 'new_or_edit' } do |f|
+                  .pull-right
+                    =f.submit 'Сохранить', :id  => "send_post_estimate", class: 'btn btn-success'
+                  %br
+                  %br
+                  %div.tab-content
+                    %div.tab-pane#plan
+                      = hidden_field_tag "post_id", @plan_post.id
+
+                      %label Выскажите, пожалуйста, общее впечатление от проекта и рекомендации по улучшению
+                      %field= f.text_area :content ,   rows: 6, style: 'width: 100%;'
+                      .field
+                        = f.label 'Оцените проект в целом '
+                        = f.select :all_grade, [["Отличный проект ", 0],["Хороший проект", 1], ["Удовлетворительный проект", 2], ["Плохой проект", 3]]
+
+
+                    - @pair_estimates2.each do |pa, est|
+                      = render partial: 'resolve_discontent',locals: { pa: pa, est: est , f: f}
+
+                    - @pair_estimates1.each do |pa, est|
+                      = render partial: 'resolve_discontent1',locals: { pa: pa, est: est, f: f}
+
+
+                    %div.tab-pane#negative
+                      %b При осуществлении проекта могут возникать разные негативные явления. Рассмотрите два типа таких явлений. Первый тип – это побочные эффекты, возникшие наряду с улучшениями (например, нововведения работают, но обходятся слишком дорого).
+                      %br
+                      %b  Какова вероятность, что эти побочные эффекты будут—
+
+                      .field
+                        = f.label '-- 1) значительными '
+                        = f.select :nepr1, [["невероятно", 0],["маловероятно", 1], ["вероятно", 2], ["очень вероятно", 3]]
+                      .field
+                        = f.label "-- 2) средними "
+                        = f.select :nepr2, [["невероятно", 0],["маловероятно", 1], ["вероятно", 2], ["очень вероятно", 3]]
+                      .field
+                        = f.label "-- 3) незначительными "
+                        = f.select :nepr3, [["невероятно", 0],["маловероятно", 1], ["вероятно", 2], ["очень вероятно", 3]]
+                      .field
+                        = f.label "-- 4) нулевыми "
+                        = f.select :nepr4, [["невероятно", 0],["маловероятно", 1], ["вероятно", 2], ["очень вероятно", 3]]
+                      .field
+                        = f.label 'Объясните, почему вы так считаете'
+                        = f.text_area :nepr,   rows: 3, style: 'width: 100%;'
+                      %br
+                      %b Второй тип – это препятствия, возникшие в процессе создания нововведений (например, сопротивление со стороны сотрудников, привыкших работать по-старому).
+                      %br
+                      %b  Какова вероятность, что эти препятствия будут—
+
+                      .field
+                        = f.label '-- 1) значительными '
+                        = f.select :nep1, [["невероятно", 0],["маловероятно", 1], ["вероятно", 2], ["очень вероятно", 3]]
+                      .field
+                        = f.label "-- 2) средними "
+                        = f.select :nep2, [["невероятно", 0],["маловероятно", 1], ["вероятно", 2], ["очень вероятно", 3]]
+                      .field
+                        = f.label "-- 3) незначительными "
+                        = f.select :nep3, [["невероятно", 0],["маловероятно", 1], ["вероятно", 2], ["очень вероятно", 3]]
+                      .field
+                        = f.label "-- 4) нулевыми "
+                        = f.select :nep4, [["невероятно", 0],["маловероятно", 1], ["вероятно", 2], ["очень вероятно", 3]]
+                      .field
+                        = f.label 'Объясните, почему вы так считаете'
+                        = f.text_area :nep,   rows: 3, style: 'width: 100%;'
+                      %br
+
+        .description
+          %ul.pager.wizard
+            %li.previous
+              %button.btn.btn-primary.pull-left
+                %i.fa.fa-caret-left
+                Назад
+            %li.next
+              %button.btn.btn-primary.pull-right
+                Далее
+                %i.fa.fa-caret-right
+
+
+-#-@post.post_aspects_other.each_with_index do |pa, i|
+-#  - if pa.plan_post_aspect.name!=''
+-#    %li
+-#      %a(href="#dis_#{pa.plan_post_aspect.id}" data-toggle="tab")
+-#        ="#{i+1}. #{pa.plan_post_aspect.discontent.display_content}"
+-#        %span.text-success= pa.score
+
+-#          -@pair_estimates1.each_with_index do |pa, i|
+-#            - if pa[0].name!=''
+-#              %li
+-#                %a(href="#fdis_#{pa[0].id}" data-toggle="tab")
+-#                  ="#{i+1}. #{pa[0].discontent.display_content}"
+-#                  %span.text-success= pa[1].score
+-#                -#%span.text-success.glyphicon.glyphicon-ok.pull-right(class = "#{'inv_element' if @post.get_pa_by_discontent(d, :name, 1)==''}")
+-#          %li
+-#            %a.text-success(href="#negative" data-toggle="tab" style='font-size:10px; font-weight: bold;')
+-#              Оценка негативных явлений
+-#          %li
+-#            %a.text-success(href="#plan" data-toggle="tab" style='font-size:10px; font-weight: bold;')
+-#              Общая оценка проекта
+
+
+
+
+
+
+
+-#= form_for @post, :url => {:project => @project.id, :action => @post.persisted? ? 'update' : 'create'},   :html => { :class => 'new_or_edit' } do |f|
+-#  .col-md-8
+-#
+-#    %div.tab-content
+-#
+-#      %div.tab-pane#plan
+-#        = simple_format(@plan_post.content)
+-#
+-#        %br
+-#        %br
+-#        = simple_format(@plan_post.goal)
+-#        %br
+-#        %br
+-#        = simple_format(@plan_post.first_step)
+-#
+-#        = hidden_field_tag "post_id", @plan_post.id
+-#
+-#        %label Выскажите, пожалуйста, общее впечатление от проекта и рекомендации по улучшению
+-#        %field= f.text_area :content ,   rows: 6, style: 'width: 100%;'
+-#        .field
+-#          = f.label 'Оцените проект в целом '
+-#          = f.select :all_grade, [["Отличный проект ", 0],["Хороший проект", 1], ["Удовлетворительный проект", 2], ["Плохой проект", 3]]
+-#
+-#
+-#      - @pair_estimates2.each do |pa, est|
+-#        = render partial: 'resolve_discontent',locals: { pa: pa, est: est , f: f}
+-#
+-#      - @pair_estimates1.each do |pa, est|
+-#        = render partial: 'resolve_discontent1',locals: { pa: pa, est: est, f: f}
+-#
+-#
+-#
+-#
+-#
+-#      %div.tab-pane#negative
+-#        %b При осуществлении проекта могут возникать разные негативные явления. Рассмотрите два типа таких явлений. Первый тип – это побочные эффекты, возникшие наряду с улучшениями (например, нововведения работают, но обходятся слишком дорого).
+-#        %br
+-#        %b  Какова вероятность, что эти побочные эффекты будут—
+-#
+-#        .field
+-#          = f.label '-- 1) значительными '
+-#          = f.select :nepr1, [["невероятно", 0],["маловероятно", 1], ["вероятно", 2], ["очень вероятно", 3]]
+-#        .field
+-#          = f.label "-- 2) средними "
+-#          = f.select :nepr2, [["невероятно", 0],["маловероятно", 1], ["вероятно", 2], ["очень вероятно", 3]]
+-#        .field
+-#          = f.label "-- 3) незначительными "
+-#          = f.select :nepr3, [["невероятно", 0],["маловероятно", 1], ["вероятно", 2], ["очень вероятно", 3]]
+-#        .field
+-#          = f.label "-- 4) нулевыми "
+-#          = f.select :nepr4, [["невероятно", 0],["маловероятно", 1], ["вероятно", 2], ["очень вероятно", 3]]
+-#        .field
+-#          = f.label 'Объясните, почему вы так считаете'
+-#          = f.text_area :nepr,   rows: 3, style: 'width: 100%;'
+-#        %br
+-#        %b Второй тип – это препятствия, возникшие в процессе создания нововведений (например, сопротивление со стороны сотрудников, привыкших работать по-старому).
+-#        %br
+-#        %b  Какова вероятность, что эти препятствия будут—
+-#
+-#        .field
+-#          = f.label '-- 1) значительными '
+-#          = f.select :nep1, [["невероятно", 0],["маловероятно", 1], ["вероятно", 2], ["очень вероятно", 3]]
+-#        .field
+-#          = f.label "-- 2) средними "
+-#          = f.select :nep2, [["невероятно", 0],["маловероятно", 1], ["вероятно", 2], ["очень вероятно", 3]]
+-#        .field
+-#          = f.label "-- 3) незначительными "
+-#          = f.select :nep3, [["невероятно", 0],["маловероятно", 1], ["вероятно", 2], ["очень вероятно", 3]]
+-#        .field
+-#          = f.label "-- 4) нулевыми "
+-#          = f.select :nep4, [["невероятно", 0],["маловероятно", 1], ["вероятно", 2], ["очень вероятно", 3]]
+-#        .field
+-#          = f.label 'Объясните, почему вы так считаете'
+-#          = f.text_area :nep,   rows: 3, style: 'width: 100%;'
+-#        %br
+-#
+-#
+-#
+-#
+-#  .col-md-4
+-#    =f.submit 'Сохранить', class: 'btn btn-success'
+-#    %h5
+-#      .small Выберите несовершенство, кликнув по нужной вкладке:
+-#    %ul.nav.nav-tabs.nav-justified
+-#      %li.active
+-#        %a(href="#theall" data-toggle="tab") Образ будущ.
+-#      %li
+-#        %a(href="#thefirst" data-toggle="tab") Первый этап
+-#    .tab-content
+-#      #theall.tab-pane.fade.in.active
+-#        %ul.nav.nav-tabs.nav-stacked
+-#          -#%li
+-#          -#  %a.text-success(href="#plan1" data-toggle="tab" style='font-size:10px; font-weight: bold;')
+-#          -#    =t('form.plan')
+-#
+-#          -@pair_estimates2.each_with_index do |pa, i|
+-#            %li
+-#              %a(href="#dis_#{pa[0].id}" data-toggle="tab")
+-#                ="#{i+1}. #{pa[0].discontent.display_content}"
+-#                %span.text-success= pa[1].score
+-#                -#%span.text-success.glyphicon.glyphicon-ok.pull-right(class = "#{'inv_element' if @post.get_pa_by_discontent(d, :name)==''}")
+-#      #thefirst.tab-pane.fade
+-#        %ul.nav.nav-tabs.nav-stacked
+-#
+-#
+-#          -@pair_estimates1.each_with_index do |pa, i|
+-#            - if pa[0].name!=''
+-#              %li
+-#                %a(href="#fdis_#{pa[0].id}" data-toggle="tab")
+-#                  ="#{i+1}. #{pa[0].discontent.display_content}"
+-#                  %span.text-success= pa[1].score
+-#                -#%span.text-success.glyphicon.glyphicon-ok.pull-right(class = "#{'inv_element' if @post.get_pa_by_discontent(d, :name, 1)==''}")
+-#          %li
+-#            %a.text-success(href="#negative" data-toggle="tab" style='font-size:10px; font-weight: bold;')
+-#              Оценка негативных явлений
+-#          %li
+-#            %a.text-success(href="#plan" data-toggle="tab" style='font-size:10px; font-weight: bold;')
+-#              Общая оценка проекта
+-#
+-#  %br
+-#  %br
+-#  %br
+-#  %br

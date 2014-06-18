@@ -20,12 +20,23 @@ class Plan::Post < ActiveRecord::Base
    has_many :post_stages, :class_name => 'Plan::PostStage', :conditions =>  {:status => 0}
 
 
+   #has_many :post_aspects_first, :foreign_key => 'plan_post_id', :class_name => 'Plan::PostAspect',
+   #         #:conditions => {:post_stage_id => self.first_stage}
+   #         :conditions => "post_stage_id = #{first_stage}"
+   #has_many :post_aspects_other, :foreign_key => 'plan_post_id', :class_name => 'Plan::PostAspect',
+   #         :conditions => "post_stage_id <> #{first_stage}"
+
+
    def voted(user)
      self.voted_users.where(:id => user)
    end
 
    def get_pa_by_discontent(d, column, first=0)
      self.post_aspects.where(discontent_aspect_id: d, first_stage: first).first.send(column)  unless self.post_aspects.empty?
+   end
+
+   def first_stage
+     self.post_stages.order(:id).first.id unless self.post_stages.order(:id).first.nil?
    end
 
 
