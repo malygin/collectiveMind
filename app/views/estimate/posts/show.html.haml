@@ -50,6 +50,35 @@
                   =@plan_post.content
 
               .col-md-6
+                %p
+                  %b Общая оценка проекта
+                  %br
+                  = simple_format( @post.content)
+
+                -if not  @post.user.jury?
+                  Общая оценка проекта
+                  %span.color-red #{ @post.score}
+                  ( = #{ @post.first_c} + #{ @post.second_c} - #{ @post.third_c})
+                  %br
+                  1) ожидаемая эффективность всего проекта в целом
+                  %span.color-red #{ @post.first_c}
+                  %br
+                  2) ожидаемая эффективность его первого шага
+                  %span.color-red #{ @post.second_c}
+                  %br
+                  3) ожидаемые неприятности в связи с осуществлением проекта
+                  %span.color-red #{ @post.third_c}
+                  %br
+                  %br
+                  %b Общее впечатление от проекта и рекомендации по улучшению
+                  = simple_format( @post.content)
+                  %br
+                  %bОценка проекта в целом:
+                  %br
+                  =estimate_trans_project(@post.all_grade)
+                %br
+                %br
+
                 %legend.section
                   Этапы проекта
                 #post_stages
@@ -147,9 +176,6 @@
                     %li.panel
                       %a.color-green(href="#negative" data-toggle="tab")
                         %b Оценка негативных явлений
-                    %li.panel
-                      %a.color-green(href="#plan" data-toggle="tab")
-                        %b Общая оценка проекта
 
 
               .col-md-8
@@ -480,35 +506,7 @@
 
                     %b Объяснение:
                     = simple_format( @post.nep)
-                  %div.tab-pane#plan
-                    %p
-                      %b Общая оценка проекта
-                      %br
-                      = simple_format( @post.content)
 
-
-
-                    -if not  @post.user.jury?
-                      Общая оценка проекта
-                      %span.red_est #{ @post.score}
-                      ( = #{ @post.first_c} + #{ @post.second_c} - #{ @post.third_c})
-                      %br
-                      1) ожидаемая эффективность всего проекта в целом
-                      %span.red_est #{ @post.first_c}
-                      %br
-                      2) ожидаемая эффективность его первого шага
-                      %span.red_est #{ @post.second_c}
-                      %br
-                      3) ожидаемые неприятности в связи с осуществлением проекта
-                      %span.red_est #{ @post.third_c}
-                      %br
-                      %br
-                      %b Общее впечатление от проекта и рекомендации по улучшению
-                      = simple_format( @post.content)
-                      %br
-                      %bОценка проекта в целом:
-                      %br
-                      =estimate_trans_project(@post.all_grade)
 
 
 

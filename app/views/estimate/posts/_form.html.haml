@@ -205,6 +205,9 @@
                         = f.label 'Объясните, почему вы так считаете'
                         = f.text_area :nep,   rows: 3, style: 'width: 100%;'
                       %br
+                  %br
+                  .pull-right
+                    =f.submit 'Сохранить', :id  => "send_post_estimate", class: 'btn btn-success'
 
         .description
           %ul.pager.wizard
