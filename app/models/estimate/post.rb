@@ -57,7 +57,7 @@ class Estimate::Post < ActiveRecord::Base
     @first_c = (@first_c * 100).round / 100.0
     @second_c = (@second_c * 100).round / 100.0
     @third_c = ((th1 + th2)*100).round / 100.0
-    0.0 ? 0.0 : ((@second_c*@first_c/@third_c)*100).round / 100.0
+    @third_c == 0.0 ? 0.0 : ((@second_c*@first_c/@third_c)*100).round / 100.0
 
   	# oppsh_i=(1*oppsh1+2*oppsh2+3*oppsh3)/(oppsh1+oppsh2+oppsh3)
 
