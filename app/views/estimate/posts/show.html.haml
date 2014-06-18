@@ -50,10 +50,9 @@
                   =@plan_post.content
 
               .col-md-6
-                %p
-                  %b Общая оценка проекта
-                  %br
-                  = simple_format( @post.content)
+                %legend.section
+                  Общая оценка проекта
+                = simple_format( @post.content)
 
                 -if not  @post.user.jury?
                   Общая оценка проекта
