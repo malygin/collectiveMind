@@ -10,465 +10,987 @@
 
   / = link_to 'Редактировать', edit_estimate_post_path( @post)
 
-.col-md-8
-  %div.tab-content
-    -  @post.post_aspects_other.each_with_index do |tr, index|
-      %div.tab-pane(id="dis_#{tr.plan_post_aspect.id}")
-        ожидаемая эффективность это задачи:
-        %span.red_est=tr.score
-        %div.panel.panel-default
-          %div.panel-body
-            -#%button.btn.btn-info.btn-sm.pull-right(data-toggle="modal" data-target="#modalStage3")
-            -#  Показать пример
-            %h5.text-infoУстраняемое несовершенство:
-            =render partial:'discontent/posts/post_short2', object: tr.plan_post_aspect.discontent
-            %br
-            %hr
-            #select0
-              .panel.panel-info
-                .panel-heading
-                  %h5.text-success
-                    %b A.*
-                  %p.text-info
-                    %b=t('form.novation_what')
-                  .form-group.has-danger=tr.plan_post_aspect.name
-                  %p.text-info
-                    %b=t('form.novation_how')
-                  .form-group.has-danger=tr.plan_post_aspect.content
 
+%section.widget
+  .body
+    #wizard.form-wizard
+      %ul.wizard-navigation.nav-justified
+        %li#first
+          %a{"data-toggle" => "tab", :href => "#tab1"}
+            %small 1.
+            %strong Описание проекта
+        %li#second
+          %a{"data-toggle" => "tab", :href => "#tab2"}
+            %small 2.
+            %strong План мероприятий
+        %li#third
+          %a{"data-toggle" => "tab", :href => "#tab3"}
+            %small 3.
+            %strong Просмотр нововведений
 
-              .panel.panel-info
-                .panel-heading
-                  %h5.text-success
-                    %b B.*
-                  %p.text-info
-                    %b=t('form.cond')
-                    .form-group.has-success=tr.plan_post_aspect.positive
-                  %p.text-info
-                    %b=t('form.cond_res')
-                    .form-group.has-success=tr.plan_post_aspect.positive_r
-                  %p.text-info
-                    %b=t('form.cond_s')
-                    .form-group.has-success=tr.plan_post_aspect.positive_s
-
-
-              %hr
-              %h5.text-success
-                %b C.
-              %p.text-info
-                %b=t('form.negative')
-                .form-group.has-success=tr.plan_post_aspect.negative
-              %p.text-info
-                %b=t('form.negative_res')
-                .form-group.has-success=tr.plan_post_aspect.negative_r
-              %p.text-info
-                %b=t('form.negative_s')
-                .form-group.has-success=tr.plan_post_aspect.negative_s
-
-              %hr
-              %h5.text-success D.
-              %p.text-info
-                %b=t('form.obstacles_bcd')
-              .form-group.has-success
-                =tr.plan_post_aspect.obstacles
-
-              .panel.panel-info
-                .panel-heading
-                  %h5.text-success
-                    %b E.*
-                  %p.text-info
-                    %b=t('form.problems')
-                  .form-group.has-success=tr.plan_post_aspect.problems
-                  %p.text-info
-                    %b=t('form.reality')
-                  .form-group.has-success=tr.plan_post_aspect.reality
+      #bar.progress.progress-small
+        .progress-bar
+      .tab-content
+        #tab1.tab-pane
+          .form-horizontal
+            %fieldset
+              .col-md-6
+                %legend.section
+                  Описание проекта
+                .text-left
+                  %h4.color-green Название проекта
+                  =@plan_post.name
                 %br
+                .text-left
+                  %h4.color-green Коротко о поекте
+                  =@plan_post.goal
+                %br
+                .text-left
+                  %h4.color-green Эссе по проекту. Пояснения и обоснования
+                  =@plan_post.content
 
-        %br
-        %b
-          Для создания ресурсов, необходимых в будущем, в проекте предлагаются определенные средства.
-          Проанализируйте их и оцените, какова вероятность того, что при помощи этих средств ресурсы будут созданы --
-        %br
-        в полном объеме (более 90%) -
-        %span{:class=>css_class_estimate(tr.on1)}= estimate_trans(tr.on1)
-        %br
-        в значительном объеме (от 50% до 90%) -
-        %span{:class=>css_class_estimate(tr.on2)}= estimate_trans(tr.on2)
-        %br
-        в небольшом объеме (от 10% до 50%) -
-        %span{:class=>css_class_estimate(tr.on3)}= estimate_trans(tr.on3)
-        %br
-        в ничтожном объеме (менее 10%)-
-        %span{:class=>css_class_estimate(tr.on4)}= estimate_trans(tr.on4)
-        %br
-        %br
-        - unless tr.on == ''
-          %b Объяснение:
-          = simple_format(tr.on)
-        %br
+              .col-md-6
+                %legend.section
+                  Этапы проекта
+                #post_stages
+                  %table.table.table-striped
+                    %tbody
+                      -if @plan_post.post_stages.present?
+                        -@plan_post.post_stages.each_with_index do |ps,index|
+                          %tr
+                            %td
+                              =index+1
+                            %td
+                              -if ps.date_begin and ps.date_end
+                                %small.color-green
+                                  =Russian::strftime(ps.date_begin, "%d %b %Y")
+                                  ="-"
+                                  =Russian::strftime(ps.date_end, "%d %b %Y")
+                                %br
+                              %span.h5=ps.name
 
-        %br
-        %b  Использование вышеназванных средств потребует материальных и трудовых затрат. Какова вероятность, что эти затраты окажутся--
-        %br
-        значительными -
-        %span{:class=>css_class_estimate(tr.ozs1)}= estimate_trans(tr.ozs1)
-        %br
-        средними -
-        %span{:class=>css_class_estimate(tr.ozs2)}= estimate_trans(tr.ozs2)
-        %br
-        незначительными -
-        %span{:class=>css_class_estimate(tr.ozs3)}= estimate_trans(tr.ozs3)
-        %br
-        ничтожными -
-        %span{:class=>css_class_estimate(tr.ozs4)}= estimate_trans(tr.ozs4)
-        %br
+        #tab2.tab-pane
+          .form-horizontal
+            %fieldset
+              %table.table.table-striped.table-bordered
+                %thead
+                  %tr
+                    %th
+                      ="#"
+                    %th(style="width:150px;")
+                      Название этапа
+                    %th(style="width:300px;")
+                      Эссе по этапу
+                    %th
+                      Нововведения
+                    %th(colspan="2")
+                      Мероприятия этапа
+                %tbody
+                  - unless @plan_post.post_stages.nil?
+                    -@plan_post.post_stages.each_with_index do |stage, index|
+                      %tr
+                        %td(rowspan="#{rowspan_stage_show(stage)}" class="td_stage_#{stage.id}")
+                          =index+1
+                        %td(rowspan="#{rowspan_stage_show(stage)}" class="td_stage_#{stage.id}")
+                          -if stage.date_begin and stage.date_end
+                            %small.color-green
+                              =Russian::strftime(stage.date_begin, "%d %b %Y")
+                              ="-"
+                              =Russian::strftime(stage.date_end, "%d %b %Y")
+                            %br
+                          =stage.name
+                        %td(rowspan="#{rowspan_stage_show(stage)}" class="td_stage_#{stage.id}")
+                          =stage.desc
+                      - unless stage.plan_post_aspects.empty?
+                        - stage.plan_post_aspects.each do |concept|
+                          %tr(id="tr_concept_#{concept.id}")
+                            %td(rowspan="#{1+concept.plan_post_actions.size}" id="td_concept_#{concept.id}")
+                              %span.h5{:id => "name_post_concept_#{concept.id}"}=concept.title
 
-        %br
-        - unless tr.ozs == ''
-          %b Объяснение:
-          = simple_format(tr.ozs)
-        %br
-        %b
-          Предположим, что будущее уже наступило и необходимые для него ресурсы созданы и работают.
-          Какова вероятность, что с их помощью несовершенство будет устранено--
-        %br
-        полностью (более 90%) -
-        %span{:class=>css_class_estimate(tr.op1)}= estimate_trans(tr.op1)
-        %br
-        в значительной мере (от 50% до 90%) -
-        %span{:class=>css_class_estimate(tr.op2)}= estimate_trans(tr.op2)
-        %br
-        в небольшой мере (от 10% до 50%) -
-        %span{:class=>css_class_estimate(tr.op3)}= estimate_trans(tr.op3)
-        %br
-        в ничтожной мере (менее 10%) -
-        %span{:class=>css_class_estimate(tr.op4)}= estimate_trans(tr.op4)
-        %br
-        %br
-        - unless tr.op == ''
-          %b Объяснение:
-          = simple_format(tr.op)
-
-        %br
-        %b Функционирование ресурсов потребует материальных и трудовых затрат. Какова вероятность, что эти затраты окажутся—
-        %br
-        значительными -
-        %span{:class=>css_class_estimate(tr.ozf1)}= estimate_trans(tr.ozf1)
-        %br
-        средними -
-        %span{:class=>css_class_estimate(tr.ozf2)}= estimate_trans(tr.ozf2)
-        %br
-        незначительными -
-        %span{:class=>css_class_estimate(tr.ozf3)}= estimate_trans(tr.ozf3)
-        %br
-        ничтожными -
-        %span{:class=>css_class_estimate(tr.ozf4)}= estimate_trans(tr.ozf4)
-        %br
-        %br
-        - unless tr.ozf == ''
-          %b Объяснение:
-          = simple_format(tr.ozf)
+                          - unless concept.plan_post_actions.nil?
+                            - concept.plan_post_actions.each do |action|
+                              %tr(id="tr_action_#{action.id}")
+                                %td
+                                  -if action.date_begin and action.date_end
+                                    %small.color-green
+                                      =Russian::strftime(action.date_begin, "%d %b %Y")
+                                      ="-"
+                                      =Russian::strftime(action.date_end, "%d %b %Y")
+                                    %br
+                                  %span.h5{:id => "name_post_action_#{action.id}"}=action.name
+                                  .pull-right
 
 
 
 
-        %br
+
+        #tab3.tab-pane
+          .form-horizontal
+            %fieldset
+              #modal_concept_action
+              .col-md-4
+                - unless @plan_post.post_stages.nil?
+                  %ul#menu-levels-collapse.side-nav
+                    -@plan_post.post_stages.each_with_index do |stage, index|
+                      %li.panel
+                        %a.accordion-toggle{"data-parent" => "#menu-levels-collapse", "data-toggle" => "collapse", :href => "#sub-menu-#{index}-collapse"}
+                          %b="Этап #{index+1}. "
+                          =stage.name
+                        - unless stage.plan_post_aspects.nil?
+                          %ul.panel-collapse.collapse.in{:id => "sub-menu-#{index}-collapse"}
+                            - stage.plan_post_aspects.each_with_index do |concept, i|
+                              %li.concept_side{:id => "li_concept_#{concept.id}"}
+                                %a(href="#dis_#{concept.id}" data-toggle="tab")
+                                  ="#{i+1}. #{concept.title}"
+                                  %span.color-green= concept.estimate_post_aspect(@post.id).score
+
+                    %li.panel
+                      %a.color-green(href="#negative" data-toggle="tab")
+                        %b Оценка негативных явлений
+                    %li.panel
+                      %a.color-green(href="#plan" data-toggle="tab")
+                        %b Общая оценка проекта
 
 
-    -  @post.post_aspects_first.each_with_index do |tr, index|
-      %div.tab-pane(id="fdis_#{tr.plan_post_aspect.id}")
-        ожидаемая эффективность это задачи:
-        %span.red_est=tr.score
-        %div.panel.panel-default
-          %div.panel-body
-            -#%button.btn.btn-info.btn-sm.pull-right(data-toggle="modal" data-target="#modalStage3")
-            -#  Показать пример
-            %h5.text-infoУстраняемое несовершенство:
-            =render partial:'discontent/posts/post_short2', object: tr.plan_post_aspect.discontent
-            %br
+              .col-md-8
+                %div.tab-content
+                  - @post.post_aspects_all.each_with_index do |tr, index|
+                    %div.tab-pane(id="dis_#{tr.plan_post_aspect.id}" style="padding-left:10px;")
+                      ожидаемая эффективность это задачи:
+                      %span.red_est=tr.score
+                      %br
+                      %h3.color-orange.text-center
+                        %b=tr.plan_post_aspect.title
+                        %br
+                        %br
+                      %h4.color-orange.text-center
+                        %b A1.
+                        =t('form.novation_what')
+                      .form-group
+                        =simple_format(tr.plan_post_aspect.name)
+
+                      %h4.color-orange.text-center
+                        %b A2.
+                        =t('form.novation_how')
+                      .form-group.has-danger
+                        =simple_format(tr.plan_post_aspect.content)
+
+                      %hr
+                      %h4.color-orange.text-center
+                        %b B1.
+                        =t('form.cond')
+                      .form-group.has-success= display_content(tr.plan_post_aspect.positive)
+
+                      %h4.color-orange.text-center
+                        %b B2.
+                        =t('form.cond_res')
+                      %br
+                      %table.table.table-striped.table-bordered
+                        %thead
+                          %tr
+                            %th
+                              ="#"
+                            %th
+                              Название
+                            %th
+                              Пояснение
+                        %tbody
+                          - tr.plan_post_aspect.plan_post_resources.by_type('positive_r').each_with_index do |r, index|
+                            %tr
+                              %td
+                                =index+1
+                              %td
+                                =r.name
+                              %td
+                                =r.desc
+
+                      %h4.color-orange.text-center
+                        %b B3.
+                        =t('form.cond_s')
+                      %br
+                      %table.table.table-striped.table-bordered
+                        %thead
+                          %tr
+                            %th
+                              ="#"
+                            %th
+                              Название
+                            %th
+                              Пояснение
+                        %tbody
+                          - tr.plan_post_aspect.plan_post_means.by_type('positive_s').each_with_index do |r, index|
+                            %tr
+                              %td
+                                =index+1
+                              %td
+                                =r.name
+                              %td
+                                =r.desc
+
+                      %hr
+                      #render_get_concept_actions
+                      %hr
+                      %h4.color-orange.text-center
+                        %b C1.
+                        =t('form.negative')
+                      .form-group.has-success= display_content(tr.plan_post_aspect.negative)
+
+                      %h4.color-orange.text-center
+                        %b C2.
+                        =t('form.negative_res')
+                      %br
+                      %table.table.table-striped.table-bordered
+                        %thead
+                          %tr
+                            %th
+                              ="#"
+                            %th
+                              Название
+                            %th
+                              Пояснение
+                        %tbody
+                          - tr.plan_post_aspect.plan_post_resources.by_type('negative_r').each_with_index do |r, index|
+                            %tr
+                              %td
+                                =index+1
+                              %td
+                                =r.name
+                              %td
+                                =r.desc
 
 
-            #select0
-              .panel.panel-info
-                .panel-heading
-                  %h5.text-success
-                    %b A.*
-                  %p.text-info
-                    %b=t('form.novation_what')
-                  .form-group.has-danger=tr.plan_post_aspect.name
-                  %p.text-info
-                    %b=t('form.novation_how')
-                  .form-group.has-danger=tr.plan_post_aspect.content
+                      %h4.color-orange.text-center
+                        %b C3.
+                        =t('form.negative_s')
+                      %br
+                      %table.table.table-striped.table-bordered
+                        %thead
+                          %tr
+                            %th
+                              ="#"
+                            %th
+                              Название
+                            %th
+                              Пояснение
+                        %tbody
+                          - tr.plan_post_aspect.plan_post_means.by_type('negative_s').each_with_index do |r, index|
+                            %tr
+                              %td
+                                =index+1
+                              %td
+                                =r.name
+                              %td
+                                =r.desc
 
-              .panel.panel-info
-                .panel-heading
-                  %h5.text-success
-                    %b B.*
-                  %p.text-info
-                    %b=t('form.cond')
-                    .form-group.has-success=tr.plan_post_aspect.positive
-                  %p.text-info
-                    %b=t('form.cond_res')
-                    .form-group.has-success=tr.plan_post_aspect.positive_r
-                  %p.text-info
-                    %b=t('form.cond_s')
-                    .form-group.has-success=tr.plan_post_aspect.positive_s
+                      %hr
+                      %h4.color-orange.text-center
+                        %b D1.
+                        =t('form.control')
+                      .form-group.has-success= display_content(tr.plan_post_aspect.control)
 
+                      %h4.color-orange.text-center
+                        %b D2.
+                        =t('form.control_res')
+                      %br
+                      %table.table.table-striped.table-bordered
+                        %thead
+                          %tr
+                            %th
+                              ="#"
+                            %th
+                              Название
+                            %th
+                              Пояснение
+                        %tbody
+                          - tr.plan_post_aspect.plan_post_resources.by_type('control_r').each_with_index do |r, index|
+                            %tr
+                              %td
+                                =index+1
+                              %td
+                                =r.name
+                              %td
+                                =r.desc
 
-              %hr
-              %h5.text-success
-                %b C.
-              %p.text-info
-                %b=t('form.negative')
-                .form-group.has-success=tr.plan_post_aspect.negative
-              %p.text-info
-                %b=t('form.negative_res')
-                .form-group.has-success=tr.plan_post_aspect.negative_r
-              %p.text-info
-                %b=t('form.negative_s')
-                .form-group.has-success=tr.plan_post_aspect.negative_s
+                      %h4.color-orange.text-center
+                        %b D3.
+                        =t('form.control_s')
+                      %br
+                      %table.table.table-striped.table-bordered
+                        %thead
+                          %tr
+                            %th
+                              ="#"
+                            %th
+                              Название
+                            %th
+                              Пояснение
+                        %tbody
+                          - tr.plan_post_aspect.plan_post_means.by_type('control_s').each_with_index do |r, index|
+                            %tr
+                              %td
+                                =index+1
+                              %td
+                                =r.name
+                              %td
+                                =r.desc
 
+                      %hr
+                      %h4.color-orange.text-center
+                        %b E1.
+                        =t('form.obstacles_bcd')
+                      .form-group.has-success= display_content(tr.plan_post_aspect.obstacles)
 
-              %hr
-              %h5.text-success
-                %b D.
-              %p.text-info
-                %b=t('form.control')
-                .form-group.has-success=tr.plan_post_aspect.control
-              %p.text-info
-                %b=t('form.control_res')
-                .form-group.has-success=tr.plan_post_aspect.control_r
-              %p.text-info
-                %b=t('form.control_s')
-                .form-group.has-success=tr.plan_post_aspect.control_s
+                      %hr
+                      %h4.color-orange.text-center
+                        %b F1.
+                        =t('form.problems')
+                      .form-group.has-success= display_content(tr.plan_post_aspect.problems)
 
+                      %h4.color-orange.text-center
+                        %b F2.
+                        =t('form.reality')
+                      .form-group.has-success= display_content(tr.plan_post_aspect.reality)
 
+                      %br
+                      %br
+                      %b
+                        Для создания ресурсов, необходимых в будущем, в проекте предлагаются определенные средства.
+                        Проанализируйте их и оцените, какова вероятность того, что при помощи этих средств ресурсы будут созданы --
+                      %br
+                      в полном объеме (более 90%) -
+                      %span{:class=>css_class_estimate(tr.on1)}= estimate_trans(tr.on1)
+                      %br
+                      в значительном объеме (от 50% до 90%) -
+                      %span{:class=>css_class_estimate(tr.on2)}= estimate_trans(tr.on2)
+                      %br
+                      в небольшом объеме (от 10% до 50%) -
+                      %span{:class=>css_class_estimate(tr.on3)}= estimate_trans(tr.on3)
+                      %br
+                      в ничтожном объеме (менее 10%)-
+                      %span{:class=>css_class_estimate(tr.on4)}= estimate_trans(tr.on4)
+                      %br
+                      %br
+                      - unless tr.on == ''
+                        %b Объяснение:
+                        = simple_format(tr.on)
+                      %br
 
+                      %br
+                      %b  Использование вышеназванных средств потребует материальных и трудовых затрат. Какова вероятность, что эти затраты окажутся--
+                      %br
+                      значительными -
+                      %span{:class=>css_class_estimate(tr.ozs1)}= estimate_trans(tr.ozs1)
+                      %br
+                      средними -
+                      %span{:class=>css_class_estimate(tr.ozs2)}= estimate_trans(tr.ozs2)
+                      %br
+                      незначительными -
+                      %span{:class=>css_class_estimate(tr.ozs3)}= estimate_trans(tr.ozs3)
+                      %br
+                      ничтожными -
+                      %span{:class=>css_class_estimate(tr.ozs4)}= estimate_trans(tr.ozs4)
+                      %br
 
-              %hr
-              %h5.text-success E.
-              %p.text-info
-                %b=t('form.obstacles_bcd')
-              .form-group.has-success=tr.plan_post_aspect.obstacles
+                      %br
+                      - unless tr.ozs == ''
+                        %b Объяснение:
+                        = simple_format(tr.ozs)
+                      %br
+                      %b
+                        Предположим, что будущее уже наступило и необходимые для него ресурсы созданы и работают.
+                        Какова вероятность, что с их помощью несовершенство будет устранено--
+                      %br
+                      полностью (более 90%) -
+                      %span{:class=>css_class_estimate(tr.op1)}= estimate_trans(tr.op1)
+                      %br
+                      в значительной мере (от 50% до 90%) -
+                      %span{:class=>css_class_estimate(tr.op2)}= estimate_trans(tr.op2)
+                      %br
+                      в небольшой мере (от 10% до 50%) -
+                      %span{:class=>css_class_estimate(tr.op3)}= estimate_trans(tr.op3)
+                      %br
+                      в ничтожной мере (менее 10%) -
+                      %span{:class=>css_class_estimate(tr.op4)}= estimate_trans(tr.op4)
+                      %br
+                      %br
+                      - unless tr.op == ''
+                        %b Объяснение:
+                        = simple_format(tr.op)
 
-              %hr
-              .panel.panel-info
-                .panel-heading
-                  %h5.text-success
-                    %b F.*
-                  %p.text-info
-                    %b=t('form.problems')
-                  .form-group.has-success=tr.plan_post_aspect.problems
-                  %p.text-info
-                    %b=t('form.reality')
-                  .form-group.has-success=tr.plan_post_aspect.reality
-        %br
-        %br
-        %b
-          Для создания ресурсов, необходимых в будущем, в проекте предлагаются определенные средства.
-          Проанализируйте их и оцените, какова вероятность того, что при помощи этих средств ресурсы будут созданы --
-        %br
-        в полном объеме (более 90%) -
-        %span{:class=>css_class_estimate(tr.on1)}= estimate_trans(tr.on1)
-        %br
-        в значительном объеме (от 50% до 90%) -
-        %span{:class=>css_class_estimate(tr.on2)}= estimate_trans(tr.on2)
-        %br
-        в небольшом объеме (от 10% до 50%) -
-        %span{:class=>css_class_estimate(tr.on3)}= estimate_trans(tr.on3)
-        %br
-        в ничтожном объеме (менее 10%) -
-        %span{:class=>css_class_estimate(tr.on4)}= estimate_trans(tr.on4)
-        %br
-        %br
-        - unless tr.on == ''
-          %b Объяснение:
-          = simple_format(tr.on)
-        %br
+                      %br
+                      %b Функционирование ресурсов потребует материальных и трудовых затрат. Какова вероятность, что эти затраты окажутся—
+                      %br
+                      значительными -
+                      %span{:class=>css_class_estimate(tr.ozf1)}= estimate_trans(tr.ozf1)
+                      %br
+                      средними -
+                      %span{:class=>css_class_estimate(tr.ozf2)}= estimate_trans(tr.ozf2)
+                      %br
+                      незначительными -
+                      %span{:class=>css_class_estimate(tr.ozf3)}= estimate_trans(tr.ozf3)
+                      %br
+                      ничтожными -
+                      %span{:class=>css_class_estimate(tr.ozf4)}= estimate_trans(tr.ozf4)
+                      %br
+                      %br
+                      - unless tr.ozf == ''
+                        %b Объяснение:
+                        = simple_format(tr.ozf)
+                      %br
 
-        %br
-        %b  Использование вышеназванных средств потребует материальных и трудовых затрат. Какова вероятность, что эти затраты окажутся--
-        %br
-        значительными -
-        %span{:class=>css_class_estimate(tr.ozs1)}= estimate_trans(tr.ozs1)
-        %br
-        средними -
-        %span{:class=>css_class_estimate(tr.ozs2)}= estimate_trans(tr.ozs2)
-        %br
-        незначительными -
-        %span{:class=>css_class_estimate(tr.ozs3)}= estimate_trans(tr.ozs3)
-        %br
-        ничтожными -
-        %span{:class=>css_class_estimate(tr.ozs4)}= estimate_trans(tr.ozs4)
-        %br
+                  %div.tab-pane#negative
+                    %br
+                    %b  При осуществлении проекта могут возникать разные негативные явления. Рассмотрите два типа таких явлений. Первый тип – это побочные эффекты, возникшие наряду с улучшениями (например, нововведения работают, но обходятся слишком дорого).
+                    %br
+                    %b  Какова вероятность, что эти побочные эффекты будут—
+                    %br
+                    значительными  -
+                    %span{:class=>css_class_estimate_all( @post.nepr1)}= estimate_trans_all( @post.nepr1)
+                    %br
+                    средними   -
+                    %span{:class=>css_class_estimate_all( @post.nepr2)}= estimate_trans_all( @post.nepr2)
+                    %br
+                    незначительными  -
+                    %span{:class=>css_class_estimate_all( @post.nepr3)}= estimate_trans_all( @post.nepr3)
+                    %br
+                    нулевыми  -
+                    %span{:class=>css_class_estimate_all( @post.nepr4)}= estimate_trans_all( @post.nepr4)
+                    %br
+                    %br
 
-        %br
-        - unless tr.ozs == ''
-          %b Объяснение:
-          = simple_format(tr.ozs)
-        %br
-        %b
-          Предположим, что будущее уже наступило и необходимые для него ресурсы созданы и работают.
-          Какова вероятность, что с их помощью несовершенство будет устранено--
-        %br
-        полностью (более 90%) -
-        %span{:class=>css_class_estimate(tr.op1)}= estimate_trans(tr.op1)
-        %br
-        в значительной мере (от 50% до 90%) -
-        %span{:class=>css_class_estimate(tr.op2)}= estimate_trans(tr.op2)
-        %br
-        в небольшой мере (от 10% до 50%) -
-        %span{:class=>css_class_estimate(tr.op3)}= estimate_trans(tr.op3)
-        %br
-        в ничтожной мере (менее 10%) -
-        %span{:class=>css_class_estimate(tr.op4)}= estimate_trans(tr.op4)
-        %br
-        %br
-        - unless tr.op == ''
-          %b Объяснение:
-          = simple_format(tr.op)
+                    %b Объяснение:
+                    = simple_format( @post.nepr)
+                    %br
+                    %br
+                    %b  Второй тип – это препятствия, возникшие в процессе создания нововведений (например, сопротивление со стороны сотрудников, привыкших работать по-старому).
+                    %br
+                    значительными  -
+                    %span{:class=>css_class_estimate_all( @post.nep1)}= estimate_trans_all( @post.nep1)
+                    %br
+                    средними   -
+                    %span{:class=>css_class_estimate_all( @post.nep2)}= estimate_trans_all( @post.nep2)
+                    %br
+                    незначительными  -
+                    %span{:class=>css_class_estimate_all( @post.nep3)}= estimate_trans_all( @post.nep3)
+                    %br
+                    нулевыми  -
+                    %span{:class=>css_class_estimate_all( @post.nep4)}= estimate_trans_all( @post.nep4)
+                    %br
+                    %br
 
-        %br
-        %b Функционирование ресурсов потребует материальных и трудовых затрат. Какова вероятность, что эти затраты окажутся—
-        %br
-        значительными -
-        %span{:class=>css_class_estimate(tr.ozf1)}= estimate_trans(tr.ozf1)
-        %br
-        средними -
-        %span{:class=>css_class_estimate(tr.ozf2)}= estimate_trans(tr.ozf2)
-        %br
-        незначительными -
-        %span{:class=>css_class_estimate(tr.ozf3)}= estimate_trans(tr.ozf3)
-        %br
-        ничтожными -
-        %span{:class=>css_class_estimate(tr.ozf4)}= estimate_trans(tr.ozf4)
-        %br
-        %br
-        - unless tr.ozf == ''
-          %b Объяснение:
-          = simple_format(tr.ozf)
-
-
-
-
-        %br
-
-
-    %div.tab-pane#negative
-      %br
-      %b  При осуществлении проекта могут возникать разные негативные явления. Рассмотрите два типа таких явлений. Первый тип – это побочные эффекты, возникшие наряду с улучшениями (например, нововведения работают, но обходятся слишком дорого).
-      %br
-      %b  Какова вероятность, что эти побочные эффекты будут—
-      %br
-      значительными  -
-      %span{:class=>css_class_estimate( @post.nepr1)}= estimate_trans( @post.nepr1)
-      %br
-      средними   -
-      %span{:class=>css_class_estimate( @post.nepr2)}= estimate_trans( @post.nepr2)
-      %br
-      незначительными  -
-      %span{:class=>css_class_estimate( @post.nepr3)}= estimate_trans( @post.nepr3)
-      %br
-      нулевыми  -
-      %span{:class=>css_class_estimate( @post.nepr4)}= estimate_trans( @post.nepr4)
-      %br
-      %br
-
-      %b Объяснение:
-      = simple_format( @post.nepr)
-      %br
-      %br
-      %b  Второй тип – это препятствия, возникшие в процессе создания нововведений (например, сопротивление со стороны сотрудников, привыкших работать по-старому).
-      %br
-      значительными  -
-      %span{:class=>css_class_estimate( @post.nep1)}= estimate_trans( @post.nep1)
-      %br
-      средними   -
-      %span{:class=>css_class_estimate( @post.nep2)}= estimate_trans( @post.nep2)
-      %br
-      незначительными  -
-      %span{:class=>css_class_estimate( @post.nep3)}= estimate_trans( @post.nep3)
-      %br
-      нулевыми  -
-      %span{:class=>css_class_estimate( @post.nep4)}= estimate_trans( @post.nep4)
-      %br
-      %br
-
-      %b Объяснение:
-      = simple_format( @post.nep)
-    %div.tab-pane#plan
-      %p
-        %b Общая оценка проекта
-        %br
-        = simple_format( @post.content)
-
-
-
-      -if not  @post.user.jury?
-        Общая оценка проекта
-        %span.red_est #{ @post.score}
-        ( = #{ @post.first_c} + #{ @post.second_c} - #{ @post.third_c})
-        %br
-        1) ожидаемая эффективность всего проекта в целом
-        %span.red_est #{ @post.first_c}
-        %br
-        2) ожидаемая эффективность его первого шага
-        %span.red_est #{ @post.second_c}
-        %br
-        3) ожидаемые неприятности в связи с осуществлением проекта
-        %span.red_est #{ @post.third_c}
-        %br
-        %br
-        %b Общее впечатление от проекта и рекомендации по улучшению
-        = simple_format( @post.content)
-        %br
-        %bОценка проекта в целом:
-        %br
-        =estimate_trans_project(@post.all_grade)
-
-.col-md-4
-  = render 'shared/post_edit_bar', :post => @post
-
-  %h5
-    .small Выберите несовершенство, кликнув по нужной вкладке:
-  %ul.nav.nav-tabs.nav-justified
-    %li.active
-      %a(href="#theall" data-toggle="tab") Образ будущ.
-    %li
-      %a(href="#thefirst" data-toggle="tab") Первый этап
-  .tab-content
-    #theall.tab-pane.fade.in.active
-      %ul.nav.nav-tabs.nav-stacked
-        -#%li
-        -#  %a.text-success(href="#plan1" data-toggle="tab" style='font-size:10px; font-weight: bold;')
-        -#    =t('form.plan')
-        %li
-          %a.text-success(href="#plan" data-toggle="tab" style='font-size:10px; font-weight: bold;')
-            Общая оценка проекта
-        %li
-          %a.text-success(href="#negative" data-toggle="tab" style='font-size:10px; font-weight: bold;')
-            Оценка негативных явлений
+                    %b Объяснение:
+                    = simple_format( @post.nep)
+                  %div.tab-pane#plan
+                    %p
+                      %b Общая оценка проекта
+                      %br
+                      = simple_format( @post.content)
 
 
-        -@post.post_aspects_other.each_with_index do |pa, i|
-          - if pa.plan_post_aspect.name!=''
 
-            %li
-              %a(href="#dis_#{pa.plan_post_aspect.id}" data-toggle="tab")
-                ="#{i+1}. #{pa.plan_post_aspect.discontent.display_content}"
-                %span.text-success= pa.score
-            -#%span.text-success.glyphicon.glyphicon-ok.pull-right(class = "#{'inv_element' if @post.get_pa_by_discontent(d, :name)==''}")
-    #thefirst.tab-pane.fade
-      %ul.nav.nav-tabs.nav-stacked
+                    -if not  @post.user.jury?
+                      Общая оценка проекта
+                      %span.red_est #{ @post.score}
+                      ( = #{ @post.first_c} + #{ @post.second_c} - #{ @post.third_c})
+                      %br
+                      1) ожидаемая эффективность всего проекта в целом
+                      %span.red_est #{ @post.first_c}
+                      %br
+                      2) ожидаемая эффективность его первого шага
+                      %span.red_est #{ @post.second_c}
+                      %br
+                      3) ожидаемые неприятности в связи с осуществлением проекта
+                      %span.red_est #{ @post.third_c}
+                      %br
+                      %br
+                      %b Общее впечатление от проекта и рекомендации по улучшению
+                      = simple_format( @post.content)
+                      %br
+                      %bОценка проекта в целом:
+                      %br
+                      =estimate_trans_project(@post.all_grade)
 
 
-        -@post.post_aspects_first.each_with_index do |pa, i|
-          - if pa.plan_post_aspect.name != ''
-            %li
-              %a(href="#fdis_#{pa.plan_post_aspect.id}" data-toggle="tab")
-                ="#{i+1}. #{pa.plan_post_aspect.discontent.display_content}"
-                %span.text-success= pa.score
-                -#%span.text-success.glyphicon.glyphicon-ok.pull-right(class = "#{'inv_element' if @post.get_pa_by_discontent(d, :name, 1)==''}")
+
+        .description
+          %ul.pager.wizard
+            %li.previous
+              %button.btn.btn-primary.pull-left
+                %i.fa.fa-caret-left
+                Назад
+            %li.next
+              %button.btn.btn-primary.pull-right
+                Далее
+                %i.fa.fa-caret-right
+
+
+
+= render 'shared/post_edit_bar', :post => @post
+
+
+
+
+
+
+-#.col-md-8
+-#  %div.tab-content
+-#    -  @post.post_aspects_other.each_with_index do |tr, index|
+-#      %div.tab-pane(id="dis_#{tr.plan_post_aspect.id}")
+-#        ожидаемая эффективность это задачи:
+-#        -#%span.red_est=tr.score
+-#        %div.panel.panel-default
+-#          %div.panel-body
+-#            -#%button.btn.btn-info.btn-sm.pull-right(data-toggle="modal" data-target="#modalStage3")
+-#            -#  Показать пример
+-#            %h5.text-infoУстраняемое несовершенство:
+-#            =render partial:'discontent/posts/post_short2', object: tr.plan_post_aspect.discontent
+-#            %br
+-#            %hr
+-#            #select0
+-#              .panel.panel-info
+-#                .panel-heading
+-#                  %h5.text-success
+-#                    %b A.*
+-#                  %p.text-info
+-#                    %b=t('form.novation_what')
+-#                  .form-group.has-danger=tr.plan_post_aspect.name
+-#                  %p.text-info
+-#                    %b=t('form.novation_how')
+-#                  .form-group.has-danger=tr.plan_post_aspect.content
+-#
+-#
+-#              .panel.panel-info
+-#                .panel-heading
+-#                  %h5.text-success
+-#                    %b B.*
+-#                  %p.text-info
+-#                    %b=t('form.cond')
+-#                    .form-group.has-success=tr.plan_post_aspect.positive
+-#                  %p.text-info
+-#                    %b=t('form.cond_res')
+-#                    .form-group.has-success=tr.plan_post_aspect.positive_r
+-#                  %p.text-info
+-#                    %b=t('form.cond_s')
+-#                    .form-group.has-success=tr.plan_post_aspect.positive_s
+-#
+-#
+-#              %hr
+-#              %h5.text-success
+-#                %b C.
+-#              %p.text-info
+-#                %b=t('form.negative')
+-#                .form-group.has-success=tr.plan_post_aspect.negative
+-#              %p.text-info
+-#                %b=t('form.negative_res')
+-#                .form-group.has-success=tr.plan_post_aspect.negative_r
+-#              %p.text-info
+-#                %b=t('form.negative_s')
+-#                .form-group.has-success=tr.plan_post_aspect.negative_s
+-#
+-#              %hr
+-#              %h5.text-success D.
+-#              %p.text-info
+-#                %b=t('form.obstacles_bcd')
+-#              .form-group.has-success
+-#                =tr.plan_post_aspect.obstacles
+-#
+-#              .panel.panel-info
+-#                .panel-heading
+-#                  %h5.text-success
+-#                    %b E.*
+-#                  %p.text-info
+-#                    %b=t('form.problems')
+-#                  .form-group.has-success=tr.plan_post_aspect.problems
+-#                  %p.text-info
+-#                    %b=t('form.reality')
+-#                  .form-group.has-success=tr.plan_post_aspect.reality
+-#                %br
+-#
+-#        %br
+-#        %b
+-#          Для создания ресурсов, необходимых в будущем, в проекте предлагаются определенные средства.
+-#          Проанализируйте их и оцените, какова вероятность того, что при помощи этих средств ресурсы будут созданы --
+-#        %br
+-#        в полном объеме (более 90%) -
+-#        %span{:class=>css_class_estimate(tr.on1)}= estimate_trans(tr.on1)
+-#        %br
+-#        в значительном объеме (от 50% до 90%) -
+-#        %span{:class=>css_class_estimate(tr.on2)}= estimate_trans(tr.on2)
+-#        %br
+-#        в небольшом объеме (от 10% до 50%) -
+-#        %span{:class=>css_class_estimate(tr.on3)}= estimate_trans(tr.on3)
+-#        %br
+-#        в ничтожном объеме (менее 10%)-
+-#        %span{:class=>css_class_estimate(tr.on4)}= estimate_trans(tr.on4)
+-#        %br
+-#        %br
+-#        - unless tr.on == ''
+-#          %b Объяснение:
+-#          = simple_format(tr.on)
+-#        %br
+-#
+-#        %br
+-#        %b  Использование вышеназванных средств потребует материальных и трудовых затрат. Какова вероятность, что эти затраты окажутся--
+-#        %br
+-#        значительными -
+-#        %span{:class=>css_class_estimate(tr.ozs1)}= estimate_trans(tr.ozs1)
+-#        %br
+-#        средними -
+-#        %span{:class=>css_class_estimate(tr.ozs2)}= estimate_trans(tr.ozs2)
+-#        %br
+-#        незначительными -
+-#        %span{:class=>css_class_estimate(tr.ozs3)}= estimate_trans(tr.ozs3)
+-#        %br
+-#        ничтожными -
+-#        %span{:class=>css_class_estimate(tr.ozs4)}= estimate_trans(tr.ozs4)
+-#        %br
+-#
+-#        %br
+-#        - unless tr.ozs == ''
+-#          %b Объяснение:
+-#          = simple_format(tr.ozs)
+-#        %br
+-#        %b
+-#          Предположим, что будущее уже наступило и необходимые для него ресурсы созданы и работают.
+-#          Какова вероятность, что с их помощью несовершенство будет устранено--
+-#        %br
+-#        полностью (более 90%) -
+-#        %span{:class=>css_class_estimate(tr.op1)}= estimate_trans(tr.op1)
+-#        %br
+-#        в значительной мере (от 50% до 90%) -
+-#        %span{:class=>css_class_estimate(tr.op2)}= estimate_trans(tr.op2)
+-#        %br
+-#        в небольшой мере (от 10% до 50%) -
+-#        %span{:class=>css_class_estimate(tr.op3)}= estimate_trans(tr.op3)
+-#        %br
+-#        в ничтожной мере (менее 10%) -
+-#        %span{:class=>css_class_estimate(tr.op4)}= estimate_trans(tr.op4)
+-#        %br
+-#        %br
+-#        - unless tr.op == ''
+-#          %b Объяснение:
+-#          = simple_format(tr.op)
+-#
+-#        %br
+-#        %b Функционирование ресурсов потребует материальных и трудовых затрат. Какова вероятность, что эти затраты окажутся—
+-#        %br
+-#        значительными -
+-#        %span{:class=>css_class_estimate(tr.ozf1)}= estimate_trans(tr.ozf1)
+-#        %br
+-#        средними -
+-#        %span{:class=>css_class_estimate(tr.ozf2)}= estimate_trans(tr.ozf2)
+-#        %br
+-#        незначительными -
+-#        %span{:class=>css_class_estimate(tr.ozf3)}= estimate_trans(tr.ozf3)
+-#        %br
+-#        ничтожными -
+-#        %span{:class=>css_class_estimate(tr.ozf4)}= estimate_trans(tr.ozf4)
+-#        %br
+-#        %br
+-#        - unless tr.ozf == ''
+-#          %b Объяснение:
+-#          = simple_format(tr.ozf)
+-#
+-#
+-#
+-#
+-#        %br
+-#
+-#
+-#    -  @post.post_aspects_first.each_with_index do |tr, index|
+-#      %div.tab-pane(id="fdis_#{tr.plan_post_aspect.id}")
+-#        ожидаемая эффективность это задачи:
+-#        %span.red_est=tr.score
+-#        %div.panel.panel-default
+-#          %div.panel-body
+-#            -#%button.btn.btn-info.btn-sm.pull-right(data-toggle="modal" data-target="#modalStage3")
+-#            -#  Показать пример
+-#            %h5.text-infoУстраняемое несовершенство:
+-#            =render partial:'discontent/posts/post_short2', object: tr.plan_post_aspect.discontent
+-#            %br
+-#
+-#
+-#            #select0
+-#              .panel.panel-info
+-#                .panel-heading
+-#                  %h5.text-success
+-#                    %b A.*
+-#                  %p.text-info
+-#                    %b=t('form.novation_what')
+-#                  .form-group.has-danger=tr.plan_post_aspect.name
+-#                  %p.text-info
+-#                    %b=t('form.novation_how')
+-#                  .form-group.has-danger=tr.plan_post_aspect.content
+-#
+-#              .panel.panel-info
+-#                .panel-heading
+-#                  %h5.text-success
+-#                    %b B.*
+-#                  %p.text-info
+-#                    %b=t('form.cond')
+-#                    .form-group.has-success=tr.plan_post_aspect.positive
+-#                  %p.text-info
+-#                    %b=t('form.cond_res')
+-#                    .form-group.has-success=tr.plan_post_aspect.positive_r
+-#                  %p.text-info
+-#                    %b=t('form.cond_s')
+-#                    .form-group.has-success=tr.plan_post_aspect.positive_s
+-#
+-#
+-#              %hr
+-#              %h5.text-success
+-#                %b C.
+-#              %p.text-info
+-#                %b=t('form.negative')
+-#                .form-group.has-success=tr.plan_post_aspect.negative
+-#              %p.text-info
+-#                %b=t('form.negative_res')
+-#                .form-group.has-success=tr.plan_post_aspect.negative_r
+-#              %p.text-info
+-#                %b=t('form.negative_s')
+-#                .form-group.has-success=tr.plan_post_aspect.negative_s
+-#
+-#
+-#              %hr
+-#              %h5.text-success
+-#                %b D.
+-#              %p.text-info
+-#                %b=t('form.control')
+-#                .form-group.has-success=tr.plan_post_aspect.control
+-#              %p.text-info
+-#                %b=t('form.control_res')
+-#                .form-group.has-success=tr.plan_post_aspect.control_r
+-#              %p.text-info
+-#                %b=t('form.control_s')
+-#                .form-group.has-success=tr.plan_post_aspect.control_s
+-#
+-#
+-#
+-#
+-#              %hr
+-#              %h5.text-success E.
+-#              %p.text-info
+-#                %b=t('form.obstacles_bcd')
+-#              .form-group.has-success=tr.plan_post_aspect.obstacles
+-#
+-#              %hr
+-#              .panel.panel-info
+-#                .panel-heading
+-#                  %h5.text-success
+-#                    %b F.*
+-#                  %p.text-info
+-#                    %b=t('form.problems')
+-#                  .form-group.has-success=tr.plan_post_aspect.problems
+-#                  %p.text-info
+-#                    %b=t('form.reality')
+-#                  .form-group.has-success=tr.plan_post_aspect.reality
+-#        %br
+-#        %br
+-#        %b
+-#          Для создания ресурсов, необходимых в будущем, в проекте предлагаются определенные средства.
+-#          Проанализируйте их и оцените, какова вероятность того, что при помощи этих средств ресурсы будут созданы --
+-#        %br
+-#        в полном объеме (более 90%) -
+-#        %span{:class=>css_class_estimate(tr.on1)}= estimate_trans(tr.on1)
+-#        %br
+-#        в значительном объеме (от 50% до 90%) -
+-#        %span{:class=>css_class_estimate(tr.on2)}= estimate_trans(tr.on2)
+-#        %br
+-#        в небольшом объеме (от 10% до 50%) -
+-#        %span{:class=>css_class_estimate(tr.on3)}= estimate_trans(tr.on3)
+-#        %br
+-#        в ничтожном объеме (менее 10%) -
+-#        %span{:class=>css_class_estimate(tr.on4)}= estimate_trans(tr.on4)
+-#        %br
+-#        %br
+-#        - unless tr.on == ''
+-#          %b Объяснение:
+-#          = simple_format(tr.on)
+-#        %br
+-#
+-#        %br
+-#        %b  Использование вышеназванных средств потребует материальных и трудовых затрат. Какова вероятность, что эти затраты окажутся--
+-#        %br
+-#        значительными -
+-#        %span{:class=>css_class_estimate(tr.ozs1)}= estimate_trans(tr.ozs1)
+-#        %br
+-#        средними -
+-#        %span{:class=>css_class_estimate(tr.ozs2)}= estimate_trans(tr.ozs2)
+-#        %br
+-#        незначительными -
+-#        %span{:class=>css_class_estimate(tr.ozs3)}= estimate_trans(tr.ozs3)
+-#        %br
+-#        ничтожными -
+-#        %span{:class=>css_class_estimate(tr.ozs4)}= estimate_trans(tr.ozs4)
+-#        %br
+-#
+-#        %br
+-#        - unless tr.ozs == ''
+-#          %b Объяснение:
+-#          = simple_format(tr.ozs)
+-#        %br
+-#        %b
+-#          Предположим, что будущее уже наступило и необходимые для него ресурсы созданы и работают.
+-#          Какова вероятность, что с их помощью несовершенство будет устранено--
+-#        %br
+-#        полностью (более 90%) -
+-#        %span{:class=>css_class_estimate(tr.op1)}= estimate_trans(tr.op1)
+-#        %br
+-#        в значительной мере (от 50% до 90%) -
+-#        %span{:class=>css_class_estimate(tr.op2)}= estimate_trans(tr.op2)
+-#        %br
+-#        в небольшой мере (от 10% до 50%) -
+-#        %span{:class=>css_class_estimate(tr.op3)}= estimate_trans(tr.op3)
+-#        %br
+-#        в ничтожной мере (менее 10%) -
+-#        %span{:class=>css_class_estimate(tr.op4)}= estimate_trans(tr.op4)
+-#        %br
+-#        %br
+-#        - unless tr.op == ''
+-#          %b Объяснение:
+-#          = simple_format(tr.op)
+-#
+-#        %br
+-#        %b Функционирование ресурсов потребует материальных и трудовых затрат. Какова вероятность, что эти затраты окажутся—
+-#        %br
+-#        значительными -
+-#        %span{:class=>css_class_estimate(tr.ozf1)}= estimate_trans(tr.ozf1)
+-#        %br
+-#        средними -
+-#        %span{:class=>css_class_estimate(tr.ozf2)}= estimate_trans(tr.ozf2)
+-#        %br
+-#        незначительными -
+-#        %span{:class=>css_class_estimate(tr.ozf3)}= estimate_trans(tr.ozf3)
+-#        %br
+-#        ничтожными -
+-#        %span{:class=>css_class_estimate(tr.ozf4)}= estimate_trans(tr.ozf4)
+-#        %br
+-#        %br
+-#        - unless tr.ozf == ''
+-#          %b Объяснение:
+-#          = simple_format(tr.ozf)
+-#
+-#
+-#
+-#
+-#        %br
+-#
+-#
+-#    %div.tab-pane#negative
+-#      %br
+-#      %b  При осуществлении проекта могут возникать разные негативные явления. Рассмотрите два типа таких явлений. Первый тип – это побочные эффекты, возникшие наряду с улучшениями (например, нововведения работают, но обходятся слишком дорого).
+-#      %br
+-#      %b  Какова вероятность, что эти побочные эффекты будут—
+-#      %br
+-#      значительными  -
+-#      %span{:class=>css_class_estimate( @post.nepr1)}= estimate_trans( @post.nepr1)
+-#      %br
+-#      средними   -
+-#      %span{:class=>css_class_estimate( @post.nepr2)}= estimate_trans( @post.nepr2)
+-#      %br
+-#      незначительными  -
+-#      %span{:class=>css_class_estimate( @post.nepr3)}= estimate_trans( @post.nepr3)
+-#      %br
+-#      нулевыми  -
+-#      %span{:class=>css_class_estimate( @post.nepr4)}= estimate_trans( @post.nepr4)
+-#      %br
+-#      %br
+-#
+-#      %b Объяснение:
+-#      = simple_format( @post.nepr)
+-#      %br
+-#      %br
+-#      %b  Второй тип – это препятствия, возникшие в процессе создания нововведений (например, сопротивление со стороны сотрудников, привыкших работать по-старому).
+-#      %br
+-#      значительными  -
+-#      %span{:class=>css_class_estimate( @post.nep1)}= estimate_trans( @post.nep1)
+-#      %br
+-#      средними   -
+-#      %span{:class=>css_class_estimate( @post.nep2)}= estimate_trans( @post.nep2)
+-#      %br
+-#      незначительными  -
+-#      %span{:class=>css_class_estimate( @post.nep3)}= estimate_trans( @post.nep3)
+-#      %br
+-#      нулевыми  -
+-#      %span{:class=>css_class_estimate( @post.nep4)}= estimate_trans( @post.nep4)
+-#      %br
+-#      %br
+-#
+-#      %b Объяснение:
+-#      = simple_format( @post.nep)
+-#    %div.tab-pane#plan
+-#      %p
+-#        %b Общая оценка проекта
+-#        %br
+-#        = simple_format( @post.content)
+-#
+-#
+-#
+-#      -if not  @post.user.jury?
+-#        Общая оценка проекта
+-#        -#%span.red_est #{ @post.score}
+-#        ( = #{ @post.first_c} + #{ @post.second_c} - #{ @post.third_c})
+-#        %br
+-#        1) ожидаемая эффективность всего проекта в целом
+-#        %span.red_est #{ @post.first_c}
+-#        %br
+-#        2) ожидаемая эффективность его первого шага
+-#        %span.red_est #{ @post.second_c}
+-#        %br
+-#        3) ожидаемые неприятности в связи с осуществлением проекта
+-#        %span.red_est #{ @post.third_c}
+-#        %br
+-#        %br
+-#        %b Общее впечатление от проекта и рекомендации по улучшению
+-#        = simple_format( @post.content)
+-#        %br
+-#        %bОценка проекта в целом:
+-#        %br
+-#        =estimate_trans_project(@post.all_grade)
+-#
+-#.col-md-4
+-#  = render 'shared/post_edit_bar', :post => @post
+-#
+-#  %h5
+-#    .small Выберите несовершенство, кликнув по нужной вкладке:
+-#  %ul.nav.nav-tabs.nav-justified
+-#    %li.active
+-#      %a(href="#theall" data-toggle="tab") Образ будущ.
+-#    %li
+-#      %a(href="#thefirst" data-toggle="tab") Первый этап
+-#  .tab-content
+-#    #theall.tab-pane.fade.in.active
+-#      %ul.nav.nav-tabs.nav-stacked
+-#        -#%li
+-#        -#  %a.text-success(href="#plan1" data-toggle="tab" style='font-size:10px; font-weight: bold;')
+-#        -#    =t('form.plan')
+-#        %li
+-#          %a.text-success(href="#plan" data-toggle="tab" style='font-size:10px; font-weight: bold;')
+-#            Общая оценка проекта
+-#        %li
+-#          %a.text-success(href="#negative" data-toggle="tab" style='font-size:10px; font-weight: bold;')
+-#            Оценка негативных явлений
+-#
+-#
+-#        -@post.post_aspects_other.each_with_index do |pa, i|
+-#          - if pa.plan_post_aspect.name!=''
+-#
+-#            %li
+-#              %a(href="#dis_#{pa.plan_post_aspect.id}" data-toggle="tab")
+-#                ="#{i+1}. #{pa.plan_post_aspect.discontent.display_content}"
+-#                %span.text-success= pa.score
+-#            -#%span.text-success.glyphicon.glyphicon-ok.pull-right(class = "#{'inv_element' if @post.get_pa_by_discontent(d, :name)==''}")
+-#    #thefirst.tab-pane.fade
+-#      %ul.nav.nav-tabs.nav-stacked
+-#
+-#
+-#        -@post.post_aspects_first.each_with_index do |pa, i|
+-#          - if pa.plan_post_aspect.name != ''
+-#            %li
+-#              %a(href="#fdis_#{pa.plan_post_aspect.id}" data-toggle="tab")
+-#                ="#{i+1}. #{pa.plan_post_aspect.discontent.display_content}"
+-#                %span.text-success= pa.score
+-#                -#%span.text-success.glyphicon.glyphicon-ok.pull-right(class = "#{'inv_element' if @post.get_pa_by_discontent(d, :name, 1)==''}")
 
 
 

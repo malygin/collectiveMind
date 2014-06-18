@@ -2,9 +2,9 @@
   %td
     -if post_action.date_begin and post_action.date_end
       %small.color-green
-        =post_action.date_begin
-        ="/"
-        =post_action.date_end
+        =Russian::strftime(post_action.date_begin, "%d %b %Y")
+        ="-"
+        =Russian::strftime(post_action.date_end, "%d %b %Y")
       %br
     %span.h5{:id => "name_post_action_#{post_action.id}"}=post_action.name
     .pull-right

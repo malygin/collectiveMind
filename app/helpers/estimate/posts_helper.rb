@@ -5,13 +5,26 @@ module Estimate::PostsHelper
 		case e
       when 0
         'невероятно'
-			when 1
+			when 0.125
 				'маловероятно'
-			when 2
+			when 0.5
 				'вероятно'
 			else
 				'очень вероятно'
 		end
+  end
+
+  def estimate_trans_all(e)
+    case e
+      when 0
+        'невероятно'
+      when 1
+        'маловероятно'
+      when 2
+        'вероятно'
+      else
+        'очень вероятно'
+    end
   end
 
   def estimate_trans_project(e)
@@ -31,12 +44,26 @@ module Estimate::PostsHelper
 		case e
       when 0
         'text-danger'
-			when 1
+			when 0.125
 				'text-danger'
-			when 2
+			when 0.5
 				'text-warning'
 			else
 				'text-success'
 		end
-	end
+  end
+
+  def css_class_estimate_all(e)
+    case e
+      when 0
+        'text-danger'
+      when 1
+        'text-danger'
+      when 2
+        'text-warning'
+      else
+        'text-success'
+    end
+  end
+
 end

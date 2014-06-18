@@ -1,24 +1,43 @@
-- if not current_user.answered_for_help_stage?(5) and not @mini_help.nil?
-    =render partial: 'shared/small_help', object: @mini_help
-%h3 Оценка проектов
--#-if @project.status == 9
--#    %br=link_to 'Вы можете оставить свое мнение или почитать другие', essay_posts_path(@project, @project.status), :id => 'essay_list'
--#    Выберите  проект, которые считаете лучшим и нажмите "отдать голос" рядом с ним.
--#    %br
+-#- if not current_user.answered_for_help_stage?(5) and not @mini_help.nil?
+-#    =render partial: 'shared/small_help', object: @mini_help
+-#%h3 Оценка проектов
+-#-#-if @project.status == 9
+-#-#    %br=link_to 'Вы можете оставить свое мнение или почитать другие', essay_posts_path(@project, @project.status), :id => 'essay_list'
+-#-#    Выберите  проект, которые считаете лучшим и нажмите "отдать голос" рядом с ним.
+-#-#    %br
+-#-#
+-#-#    Количество имеющихся голосов -
+-#-#    %span.rate
+-#-#        %span#count_vote=@number_v
+-#-#    %br
+-#-#    - if boss?
+-#-#        проголосовало
+-#-#        =@voted_people
+-#-#        из
+-#-#        =@all_people
+-#-#        Отдано голосов
+-#-#        =@votes
 -#
--#    Количество имеющихся голосов -
--#    %span.rate
--#        %span#count_vote=@number_v
--#    %br
--#    - if boss?
--#        проголосовало
--#        =@voted_people
--#        из
--#        =@all_people
--#        Отдано голосов
--#        =@votes
+-#= render :partial => '/plan/posts/post_estimate', :collection => @posts
+-#%br
+-#%br
+-#%br
 
-= render :partial => '/plan/posts/post_estimate', :collection => @posts
-%br
-%br
-%br
+%section.widget
+  %header
+    .row
+      .col-md-9
+        %h3.color-grey
+          5 этап: Оценка проектов.
+          %br
+          %small
+            Оценка проектов в рамках процедуры:
+            =@project.name
+  .body
+    %br
+    %br
+    .row
+      .col-md-12
+        %section.widget
+          .body
+            = render :partial => '/plan/posts/post_estimate', :collection => @posts

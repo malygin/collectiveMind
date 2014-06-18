@@ -11,7 +11,11 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
+<<<<<<< HEAD
 ActiveRecord::Schema.define(:version => 20140616174819) do
+=======
+ActiveRecord::Schema.define(:version => 20140618195947) do
+>>>>>>> develop
 
   create_table "answers", :force => true do |t|
     t.string   "text"
@@ -507,29 +511,29 @@ ActiveRecord::Schema.define(:version => 20140616174819) do
   create_table "estimate_post_aspects", :force => true do |t|
     t.integer  "post_id"
     t.integer  "plan_post_aspect_id"
-    t.integer  "op1"
-    t.integer  "op2"
-    t.integer  "op3"
+    t.float    "op1"
+    t.float    "op2"
+    t.float    "op3"
     t.text     "op"
-    t.integer  "ozf1"
-    t.integer  "ozf2"
-    t.integer  "ozf3"
+    t.float    "ozf1"
+    t.float    "ozf2"
+    t.float    "ozf3"
     t.text     "ozf"
-    t.integer  "ozs1"
-    t.integer  "ozs2"
-    t.integer  "ozs3"
+    t.float    "ozs1"
+    t.float    "ozs2"
+    t.float    "ozs3"
     t.text     "ozs"
-    t.integer  "on1"
-    t.integer  "on2"
-    t.integer  "on3"
+    t.float    "on1"
+    t.float    "on2"
+    t.float    "on3"
     t.text     "on"
     t.datetime "created_at",              :null => false
     t.datetime "updated_at",              :null => false
     t.integer  "imp"
-    t.integer  "op4"
-    t.integer  "ozf4"
-    t.integer  "ozs4"
-    t.integer  "on4"
+    t.float    "op4"
+    t.float    "ozf4"
+    t.float    "ozs4"
+    t.float    "on4"
     t.integer  "nep1"
     t.integer  "nep2"
     t.integer  "nep3"

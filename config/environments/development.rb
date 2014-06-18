@@ -57,5 +57,6 @@ CollectiveMind::Application.configure do
       :authentication       => 'plain',
       :enable_starttls_auto => true
   }
-
+  # Date::DATE_FORMATS[:default]="%-d %b %Y"
+  # Time::DATE_FORMATS[:default]="%Y/%m/%d %H:%M"
 end

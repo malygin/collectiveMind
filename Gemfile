@@ -52,7 +52,7 @@ group :assets do
   gem 'therubyracer', '>=0.11.4'
 end
 
-
+gem 'russian'
 gem 'bootstrap-sass-rails'
 gem "selectize-rails"
 gem 'rails3-jquery-autocomplete', '1.0.14'

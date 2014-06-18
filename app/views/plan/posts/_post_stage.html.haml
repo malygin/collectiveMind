@@ -2,9 +2,9 @@
   %td
     -if post_stage.date_begin and post_stage.date_end
       %small.color-green
-        =post_stage.date_begin
-        ="/"
-        =post_stage.date_end
+        =Russian::strftime(post_stage.date_begin, "%d %b %Y")
+        ="-"
+        =Russian::strftime(post_stage.date_end, "%d %b %Y")
       %br
     %span.h5{:id => "name_post_stage_#{post_stage.id}"}=post_stage.name
     .pull-right
