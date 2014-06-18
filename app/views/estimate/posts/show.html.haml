@@ -57,7 +57,7 @@
                 -if not  @post.user.jury?
                   Общая оценка проекта
                   %span.color-red #{ @post.score}
-                  ( = #{ @post.first_c} + #{ @post.second_c} - #{ @post.third_c})
+                  ( = #{ @post.first_c} * #{ @post.second_c} / #{ @post.third_c})
                   %br
                   1) ожидаемая эффективность всего проекта в целом
                   %span.color-red #{ @post.first_c}
