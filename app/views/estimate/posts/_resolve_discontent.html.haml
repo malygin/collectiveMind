@@ -1,75 +1,198 @@
-%div.tab-pane(id="dis_#{pa.id}")
-  %div
-    - if pa.discontent.status == 5
-      %p.ftable.fline
-        = select_tag "imp[#{pa.id}]", options_for_select({ 'лишнее' => '0','маловажное' => '30','важное' => '60','очень важное' => '90'  },"imp[#{pa.id}]"), :prompt => 'Выберите важность'
+%div.tab-pane(id="dis_#{pa.id}" style="padding-left:10px;" )
+  %h3.color-orange.text-center
+    %b=pa.title
+    %br
+    %br
+  %h4.color-orange.text-center
+    %b A1.
+    =t('form.novation_what')
+  .form-group
+    =simple_format(pa.name)
 
-  %div.panel.panel-default
-    %div.panel-body
-      -#%button.btn.btn-info.btn-sm.pull-right(data-toggle="modal" data-target="#modalStage3")
-      -#  Показать пример
-      %h5.text-infoУстраняемое несовершенство:
-      =render partial:'discontent/posts/post_short2', object: pa.discontent
-      %br
-      %hr
-      #select0
-        .panel.panel-info
-          .panel-heading
-            %h5.text-success
-              %b A.*
-            %p.text-info
-              %b=t('form.novation_what')
-            .form-group.has-danger=pa.name
-            %p.text-info
-              %b=t('form.novation_how')
-            .form-group.has-danger=pa.content
+  %h4.color-orange.text-center
+    %b A2.
+    =t('form.novation_how')
+  .form-group.has-danger
+    =simple_format(pa.content)
+
+  %hr
+  %h4.color-orange.text-center
+    %b B1.
+    =t('form.cond')
+  .form-group.has-success= display_content(pa.positive)
+
+  %h4.color-orange.text-center
+    %b B2.
+    =t('form.cond_res')
+  %br
+  %table.table.table-striped.table-bordered
+    %thead
+      %tr
+        %th
+          ="#"
+        %th
+          Название
+        %th
+          Пояснение
+    %tbody
+      - pa.plan_post_resources.by_type('positive_r').each_with_index do |r, index|
+        %tr
+          %td
+            =index+1
+          %td
+            =r.name
+          %td
+            =r.desc
+
+  %h4.color-orange.text-center
+    %b B3.
+    =t('form.cond_s')
+  %br
+  %table.table.table-striped.table-bordered
+    %thead
+      %tr
+        %th
+          ="#"
+        %th
+          Название
+        %th
+          Пояснение
+    %tbody
+      - pa.plan_post_means.by_type('positive_s').each_with_index do |r, index|
+        %tr
+          %td
+            =index+1
+          %td
+            =r.name
+          %td
+            =r.desc
+
+  %hr
+  #render_get_concept_actions
+  %hr
+  %h4.color-orange.text-center
+    %b C1.
+    =t('form.negative')
+  .form-group.has-success= display_content(pa.negative)
+
+  %h4.color-orange.text-center
+    %b C2.
+    =t('form.negative_res')
+  %br
+  %table.table.table-striped.table-bordered
+    %thead
+      %tr
+        %th
+          ="#"
+        %th
+          Название
+        %th
+          Пояснение
+    %tbody
+      - pa.plan_post_resources.by_type('negative_r').each_with_index do |r, index|
+        %tr
+          %td
+            =index+1
+          %td
+            =r.name
+          %td
+            =r.desc
 
 
-        .panel.panel-info
-          .panel-heading
-            %h5.text-success
-              %b B.*
-            %p.text-info
-              %b=t('form.cond')
-              .form-group.has-success=pa.positive
-            %p.text-info
-              %b=t('form.cond_res')
-              .form-group.has-success=pa.positive_r
-            %p.text-info
-              %b=t('form.cond_s')
-              .form-group.has-success=pa.positive_s
+  %h4.color-orange.text-center
+    %b C3.
+    =t('form.negative_s')
+  %br
+  %table.table.table-striped.table-bordered
+    %thead
+      %tr
+        %th
+          ="#"
+        %th
+          Название
+        %th
+          Пояснение
+    %tbody
+      - pa.plan_post_means.by_type('negative_s').each_with_index do |r, index|
+        %tr
+          %td
+            =index+1
+          %td
+            =r.name
+          %td
+            =r.desc
 
+  %hr
+  %h4.color-orange.text-center
+    %b D1.
+    =t('form.control')
+  .form-group.has-success= display_content(pa.control)
 
-        %hr
-        %h5.text-success
-          %b C.
-        %p.text-info
-          %b=t('form.negative')
-          .form-group.has-success=pa.negative
-        %p.text-info
-          %b=t('form.negative_res')
-          .form-group.has-success=pa.negative_r
-        %p.text-info
-          %b=t('form.negative_s')
-          .form-group.has-success=pa.negative_s
+  %h4.color-orange.text-center
+    %b D2.
+    =t('form.control_res')
+  %br
+  %table.table.table-striped.table-bordered
+    %thead
+      %tr
+        %th
+          ="#"
+        %th
+          Название
+        %th
+          Пояснение
+    %tbody
+      - pa.plan_post_resources.by_type('control_r').each_with_index do |r, index|
+        %tr
+          %td
+            =index+1
+          %td
+            =r.name
+          %td
+            =r.desc
 
-        %hr
-        %h5.text-success D.
-        %p.text-info
-          %b=t('form.obstacles_bcd')
-        .form-group.has-success
-          =pa.obstacles
+  %h4.color-orange.text-center
+    %b D3.
+    =t('form.control_s')
+  %br
+  %table.table.table-striped.table-bordered
+    %thead
+      %tr
+        %th
+          ="#"
+        %th
+          Название
+        %th
+          Пояснение
+    %tbody
+      - pa.plan_post_means.by_type('control_s').each_with_index do |r, index|
+        %tr
+          %td
+            =index+1
+          %td
+            =r.name
+          %td
+            =r.desc
 
-        .panel.panel-info
-          .panel-heading
-            %h5.text-success
-              %b E.*
-            %p.text-info
-              %b=t('form.problems')
-            .form-group.has-success=pa.problems
-            %p.text-info
-              %b=t('form.reality')
-            .form-group.has-success=pa.reality
+  %hr
+  %h4.color-orange.text-center
+    %b E1.
+    =t('form.obstacles_bcd')
+  .form-group.has-success= display_content(pa.obstacles)
+
+  %hr
+  %h4.color-orange.text-center
+    %b F1.
+    =t('form.problems')
+  .form-group.has-success= display_content(pa.problems)
+
+  %h4.color-orange.text-center
+    %b F2.
+    =t('form.reality')
+  .form-group.has-success= display_content(pa.reality)
+
+  %br
+  %br
 
   %b Для создания ресурсов в проекте предлагаются определенные средства. Проанализируйте их и оцените, какова вероятность того, что на базе этих средств ресурсы будут созданы --
   .field
@@ -143,6 +266,153 @@
     %br
     = text_area_tag "ozf_text[0][#{pa.id}]", est.ozf ,   rows: 3, style: 'width: 100%;'
   %br
+
+
+
+  -#%div
+  -#  - if pa.discontent.status == 5
+  -#    %p.ftable.fline
+  -#      = select_tag "imp[#{pa.id}]", options_for_select({ 'лишнее' => '0','маловажное' => '30','важное' => '60','очень важное' => '90'  },"imp[#{pa.id}]"), :prompt => 'Выберите важность'
+
+  -#%div.panel.panel-default
+  -#  %div.panel-body
+  -#    -#%button.btn.btn-info.btn-sm.pull-right(data-toggle="modal" data-target="#modalStage3")
+  -#    -#  Показать пример
+  -#    -#%h5.text-infoУстраняемое несовершенство:
+  -#    -#=render partial:'discontent/posts/post_short2', object: pa.discontent
+  -#    %br
+  -#    %hr
+  -#    #select0
+  -#      .panel.panel-info
+  -#        .panel-heading
+  -#          %h5.text-success
+  -#            %b A.*
+  -#          %p.text-info
+  -#            %b=t('form.novation_what')
+  -#          .form-group.has-danger=pa.name
+  -#          %p.text-info
+  -#            %b=t('form.novation_how')
+  -#          .form-group.has-danger=pa.content
+  -#
+  -#
+  -#      .panel.panel-info
+  -#        .panel-heading
+  -#          %h5.text-success
+  -#            %b B.*
+  -#          %p.text-info
+  -#            %b=t('form.cond')
+  -#            .form-group.has-success=pa.positive
+  -#          %p.text-info
+  -#            %b=t('form.cond_res')
+  -#            .form-group.has-success=pa.positive_r
+  -#          %p.text-info
+  -#            %b=t('form.cond_s')
+  -#            .form-group.has-success=pa.positive_s
+  -#
+  -#
+  -#      %hr
+  -#      %h5.text-success
+  -#        %b C.
+  -#      %p.text-info
+  -#        %b=t('form.negative')
+  -#        .form-group.has-success=pa.negative
+  -#      %p.text-info
+  -#        %b=t('form.negative_res')
+  -#        .form-group.has-success=pa.negative_r
+  -#      %p.text-info
+  -#        %b=t('form.negative_s')
+  -#        .form-group.has-success=pa.negative_s
+  -#
+  -#      %hr
+  -#      %h5.text-success D.
+  -#      %p.text-info
+  -#        %b=t('form.obstacles_bcd')
+  -#      .form-group.has-success
+  -#        =pa.obstacles
+  -#
+  -#      .panel.panel-info
+  -#        .panel-heading
+  -#          %h5.text-success
+  -#            %b E.*
+  -#          %p.text-info
+  -#            %b=t('form.problems')
+  -#          .form-group.has-success=pa.problems
+  -#          %p.text-info
+  -#            %b=t('form.reality')
+  -#          .form-group.has-success=pa.reality
+
+  -#%b Для создания ресурсов в проекте предлагаются определенные средства. Проанализируйте их и оцените, какова вероятность того, что на базе этих средств ресурсы будут созданы --
+  -#.field
+  -#  = f.label "-- 1) в полном объеме"
+  -#  = select_tag "on[0][#{pa.id}][1]",   options_for_select([["невероятно", 0],["маловероятно", 0.125], ["вероятно", 0.5], ["очень вероятно", 0.875]], est.on1)
+  -#.field
+  -#  = f.label "-- 2) в значительном объеме"
+  -#  = select_tag "on[0][#{pa.id}][2]",   options_for_select([["невероятно", 0],["маловероятно", 0.125], ["вероятно", 0.5], ["очень вероятно", 0.875]], est.on2)
+  -#.field
+  -#  = f.label "-- 3) в небольшом объеме"
+  -#  = select_tag "on[0][#{pa.id}][3]",   options_for_select([["невероятно", 0],["маловероятно", 0.125], ["вероятно", 0.5], ["очень вероятно", 0.875]], est.on3)
+  -#.field
+  -#  = f.label "-- 4) в ничтожном  объеме"
+  -#  = select_tag "on[0][#{pa.id}][4]",   options_for_select([["невероятно", 0],["маловероятно", 0.125], ["вероятно", 0.5], ["очень вероятно", 0.875]], est.on4)
+  -#.field
+  -#  = f.label 'Объясните, почему вы так считаете'
+  -#  %br
+  -#  = text_area_tag "on_text[0][#{pa.id}]", est.on ,   rows: 3, style: 'width: 100%;'
+  -#%br
+  -#%b Использование этих средств потребует материальных и трудовых затрат. Какова вероятность, что эти затраты окажутся--
+  -#.field
+  -#  = f.label '--1) значительными '
+  -#  = select_tag "ozs[0][#{pa.id}][1]",   options_for_select([["невероятно", 0],["маловероятно", 0.125], ["вероятно", 0.5], ["очень вероятно", 0.875]], est.ozs1)
+  -#.field
+  -#  = f.label "--2) средними "
+  -#  = select_tag "ozs[0][#{pa.id}][2]",   options_for_select([["невероятно", 0],["маловероятно", 0.125], ["вероятно", 0.5], ["очень вероятно", 0.875]], est.ozs2)
+  -#.field
+  -#  = f.label "--3) незначительными "
+  -#  = select_tag "ozs[0][#{pa.id}][3]",   options_for_select([["невероятно", 0],["маловероятно", 0.125], ["вероятно", 0.5], ["очень вероятно", 0.875]], est.ozs3)
+  -#.field
+  -#  = f.label "--4) ничтожными  "
+  -#  = select_tag "ozs[0][#{pa.id}][4]",   options_for_select([["невероятно", 0],["маловероятно", 0.125], ["вероятно", 0.5], ["очень вероятно", 0.875]], est.ozs4)
+  -#.field
+  -#  = f.label 'Объясните, почему вы так считаете'
+  -#  %br
+  -#  = text_area_tag "ozs_text[0][#{pa.id}]", est.ozs,   rows: 3, style: 'width: 100%;'
+  -#%br
+  -#%b  Предположим, что будущее уже наступило и все предложенные ресурсы созданы и работают. Какова вероятность, что с их помощью несовершенство будет устранено--
+  -#.field
+  -#  = f.label "-- 1) полностью ?"
+  -#  = select_tag "op[0][#{pa.id}][1]",   options_for_select([["невероятно", 0],["маловероятно", 0.125], ["вероятно", 0.5], ["очень вероятно", 0.875]], est.op1)
+  -#.field
+  -#  = f.label "-- 2) в значительной мере ?"
+  -#  = select_tag "op[0][#{pa.id}][2]",   options_for_select([["невероятно", 0],["маловероятно", 0.125], ["вероятно", 0.5], ["очень вероятно", 0.875]], est.op2)
+  -#.field
+  -#  = f.label "-- 3) в небольшой мере?"
+  -#  = select_tag "op[0][#{pa.id}][3]",   options_for_select([["невероятно", 0],["маловероятно", 0.125], ["вероятно", 0.5], ["очень вероятно", 0.875]], est.op3)
+  -#.field
+  -#  = f.label "-- 4) в ничтожной  мере ?"
+  -#  = select_tag "op[0][#{pa.id}][4]",  options_for_select([["невероятно", 0],["маловероятно", 0.125], ["вероятно", 0.5], ["очень вероятно", 0.875]], est.op4)
+  -#.field
+  -#  = f.label 'Объясните, почему вы так считаете'
+  -#  %br
+  -#  = text_area_tag "op_text[0][#{pa.id}]", est.op,   rows: 3, style: 'width: 100%;'
+  -#%br
+  -#%b Функционирование ресурсов потребует материальных и трудовых затрат. Какова вероятность, что эти затраты окажутся—
+  -#.field
+  -#  = f.label '--1) значительными '
+  -#  = select_tag "ozf[0][#{pa.id}][1]",   options_for_select([["невероятно", 0],["маловероятно", 0.125], ["вероятно", 0.5], ["очень вероятно", 0.875]], est.ozf1)
+  -#.field
+  -#  = f.label '-- 2) средними '
+  -#  = select_tag "ozf[0][#{pa.id}][2]",   options_for_select([["невероятно", 0],["маловероятно",  0.125], ["вероятно", 0.5], ["очень вероятно", 0.875]], est.ozf2)
+  -#.field
+  -#  = f.label '-- 3) незначительными '
+  -#  = select_tag "ozf[0][#{pa.id}][3]",   options_for_select([["невероятно", 0],["маловероятно",  0.125], ["вероятно", 0.5], ["очень вероятно", 0.875]], est.ozf3)
+  -#.field
+  -#  = f.label '-- 4) ничтожными  '
+  -#  = select_tag "ozf[0][#{pa.id}][4]",   options_for_select([["невероятно", 0],["маловероятно",  0.125], ["вероятно", 0.5], ["очень вероятно", 0.875]], est.ozf4)
+  -#.field
+  -#  = f.label 'Объясните, почему вы так считаете'
+  -#  %br
+  -#  = text_area_tag "ozf_text[0][#{pa.id}]", est.ozf ,   rows: 3, style: 'width: 100%;'
+  -#%br
 
 
 

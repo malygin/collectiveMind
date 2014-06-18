@@ -8,6 +8,7 @@ class Plan::PostStage < ActiveRecord::Base
     joins('INNER JOIN "plan_post_actions" ON "plan_post_aspects"."id" = "plan_post_actions"."plan_post_aspect_id"')
   end
 
+
   #def self.scope_vote_top(post)
   #  joins(:concept_post_discontents).
   #      where('"concept_post_discontents"."discontent_post_id" = ?', post.id).

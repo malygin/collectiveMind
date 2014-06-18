@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140610235840) do
+ActiveRecord::Schema.define(:version => 20140618195947) do
 
   create_table "answers", :force => true do |t|
     t.string   "text"
@@ -215,6 +215,17 @@ ActiveRecord::Schema.define(:version => 20140610235840) do
 
   add_index "concept_votings", ["concept_post_aspect_id"], :name => "index_concept_votings_on_concept_post_id"
   add_index "concept_votings", ["user_id"], :name => "index_concept_votings_on_user_id"
+
+  create_table "core_project_scores", :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "project_id"
+    t.integer  "score"
+    t.integer  "score_a"
+    t.integer  "score_g"
+    t.integer  "score_o"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
 
   create_table "core_project_users", :force => true do |t|
     t.integer  "project_id"
@@ -496,29 +507,29 @@ ActiveRecord::Schema.define(:version => 20140610235840) do
   create_table "estimate_post_aspects", :force => true do |t|
     t.integer  "post_id"
     t.integer  "plan_post_aspect_id"
-    t.integer  "op1"
-    t.integer  "op2"
-    t.integer  "op3"
+    t.float    "op1"
+    t.float    "op2"
+    t.float    "op3"
     t.text     "op"
-    t.integer  "ozf1"
-    t.integer  "ozf2"
-    t.integer  "ozf3"
+    t.float    "ozf1"
+    t.float    "ozf2"
+    t.float    "ozf3"
     t.text     "ozf"
-    t.integer  "ozs1"
-    t.integer  "ozs2"
-    t.integer  "ozs3"
+    t.float    "ozs1"
+    t.float    "ozs2"
+    t.float    "ozs3"
     t.text     "ozs"
-    t.integer  "on1"
-    t.integer  "on2"
-    t.integer  "on3"
+    t.float    "on1"
+    t.float    "on2"
+    t.float    "on3"
     t.text     "on"
     t.datetime "created_at",              :null => false
     t.datetime "updated_at",              :null => false
     t.integer  "imp"
-    t.integer  "op4"
-    t.integer  "ozf4"
-    t.integer  "ozs4"
-    t.integer  "on4"
+    t.float    "op4"
+    t.float    "ozf4"
+    t.float    "ozs4"
+    t.float    "on4"
     t.integer  "nep1"
     t.integer  "nep2"
     t.integer  "nep3"
@@ -1064,6 +1075,9 @@ ActiveRecord::Schema.define(:version => 20140610235840) do
     t.datetime "updated_at", :null => false
   end
 
+# Could not dump table "projects" because of following StandardError
+#   Unknown type 'serial' for column 'id'
+
   create_table "question_comment_votings", :force => true do |t|
     t.integer  "user_id"
     t.integer  "comment_id"
@@ -1137,9 +1151,9 @@ ActiveRecord::Schema.define(:version => 20140610235840) do
     t.integer  "user_id"
     t.string   "check_field"
     t.boolean  "status"
-    t.integer  "project_id"
     t.datetime "created_at",  :null => false
     t.datetime "updated_at",  :null => false
+    t.integer  "project_id"
   end
 
   create_table "users", :force => true do |t|

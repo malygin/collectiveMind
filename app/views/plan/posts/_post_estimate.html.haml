@@ -1,7 +1,7 @@
 .media{id: "post_#{post_estimate.id}"}
   = render 'users/user_post', :user => post_estimate.user
   .media-body
-    =trim_string(post_estimate.content)
+    =post_estimate.name.present? ? trim_string(post_estimate.name) : trim_string(post_estimate.content)
     =link_to 'подробнее', plan_post_path(@project, post_estimate)
     -if @project.status == 10
       %br

@@ -1,6 +1,7 @@
 .media
-    .pull-left
-        %h1.text-success=post.score
+    -unless post.score.nil?
+        .pull-left
+            %h1.color-green=post.score
     = render 'users/user_post', :user => post.user
     .media-body
         = trim_string(post.content)
