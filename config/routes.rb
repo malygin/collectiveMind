@@ -56,6 +56,8 @@ scope '/project/:project' do
       put :forecast
       put :forecast_concept
       put :forecast_plan
+      post :update_score
+      put :club_toggle
       match 'add_score/:score' => 'users#add_score'
       match 'add_score_essay/:score' => 'users#add_score_essay'
     end

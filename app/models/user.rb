@@ -16,7 +16,7 @@ class User < ActiveRecord::Base
    :dateActivation, :dateLastEnter, :dateRegistration, :email, :faculty, :group,
     :name, :string, :string, :surname, :validate, :vkid,
     :score,  :score_a, :score_g, :score_o,
-    :admin, :expert
+    :admin, :expert, :type_user
 
   #scope :scope_score_name, ->(sn) { where("#{sn}>0").order("#{sn} DESC") }
   has_many :core_project_scores, :class_name => 'Core::ProjectScore'
@@ -139,6 +139,14 @@ class User < ActiveRecord::Base
 
   def boss?
     self.admin or self.expert
+  end
+
+  def cluber?
+    self.type_user == 4 or self.type_user == 5
+  end
+
+  def watcher?
+    self.type_user == 5
   end
 
   def have_essay_for_stage(project, stage)

@@ -5,6 +5,7 @@
 *= require twitter/bootstrap
 *= require bootstrap-wysihtml5/b3
 *= require liFixar/liFixar
+*= require bootstrap3-editable/bootstrap-editable
 */
 /* require_tree .*/
 
