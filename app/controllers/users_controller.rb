@@ -62,7 +62,7 @@ class UsersController < ApplicationController
     @project = Core::Project.find(params[:project])
     @my_journals_count = Journal.count_events_for_my_feed(@project.id, current_user)
     @my_journals  = Journal.events_for_my_feed @project.id, current_user.id, 5
-    @users = User.where('admin=?', false).order('score DESC').paginate(:page =>params[:page])
+    @users = User.where(admin:false, type_user: 4).order('score DESC').paginate(:page =>params[:page])
     #@users = User.where('admin=?', false).where('type_user = 4 or type_user = 5').order('score DESC').paginate(:page =>params[:page])
   end
 
