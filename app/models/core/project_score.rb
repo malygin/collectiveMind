@@ -4,4 +4,5 @@ class Core::ProjectScore < ActiveRecord::Base
   belongs_to :user
 
   scope :user_scores, ->(pr,sn) { where(:project_id => pr).where("#{sn}>0").order("#{sn} DESC") }
+  scope :by_project, ->(pr){where(:project_id => pr)}
 end

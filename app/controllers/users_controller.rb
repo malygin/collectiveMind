@@ -209,9 +209,9 @@ class UsersController < ApplicationController
 	def add_score
 		user = User.find(params[:id])
 		if boss?
-
-      user.add_score_by_type(params[:score].to_i, :score_a)
       @project = Core::Project.find(params[:project])
+      user.add_score_by_type(@project, params[:score].to_i, :score_a)
+
       user.journals.build(:type_event=>'add_score', :project => @project, :body=>params[:score]).save
       current_user.journals.build(:type_event=>'my_add_score', :user_informed => user, :project => @project, :body=>params[:score], :viewed=> false).save!
 

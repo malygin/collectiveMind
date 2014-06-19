@@ -20,6 +20,7 @@ class User < ActiveRecord::Base
 
   #scope :scope_score_name, ->(sn) { where("#{sn}>0").order("#{sn} DESC") }
   has_many :core_project_scores, :class_name => 'Core::ProjectScore'
+
   #has_many :help_questions, :class_name => 'Help::Question'
   #has_many :help_answers, :class_name => 'Help::Answer'
   has_many :help_users_answerses, :class_name => 'Help::UsersAnswers'
@@ -166,30 +167,31 @@ class User < ActiveRecord::Base
     #@todo нужно добавить :project => h[:project]
     case h[:type]
       when :add_life_tape_post
-        self.add_score_by_type(10, :score_g)
+        self.add_score_by_type(h[:project],10, :score_g)
       when :plus_comment
-        self.add_score_by_type(5, :score_a)
+        self.add_score_by_type(h[:project],5, :score_a)
         # self.journals.build(:type_event=>'useful_comment', :project => h[:project], :body=>"#{h[:comment].content[0..24]}:#{h[:path]}/#{h[:comment].post.id}#comment_#{h[:comment].id}").save!
         self.journals.build(:type_event=>'my_add_score_comment', :project => h[:project], :user_informed => self, :body=>"5:#{h[:path]}/#{h[:comment].post.id}#comment_#{h[:comment].id}", :viewed=> false).save!
 
       when :plus_post
 
-        self.add_score_by_type(300, :score_g)  if h[:post].instance_of? Concept::Post
-        self.add_score_by_type(30, :score_g)  if h[:post].instance_of? Discontent::Post
-        self.add_score_by_type(10, :score_g)  if h[:post].instance_of? LifeTape::Post
+        self.add_score_by_type(h[:project],300, :score_g)  if h[:post].instance_of? Concept::Post
+        self.add_score_by_type(h[:project],30, :score_g)  if h[:post].instance_of? Discontent::Post
+        self.add_score_by_type(h[:project],10, :score_g)  if h[:post].instance_of? LifeTape::Post
 
         # self.journals.build(:type_event=>'useful_post', :project => h[:project], :body=>"#{h[:post].content[0..24]}:#{h[:path]}/#{h[:post].id}").save!
 
       when :to_archive_life_tape_post
-        self.add_score_by_type(-10, :score_g)
+        self.add_score_by_type(h[:project],-10, :score_g)
       when :add_discontent_post
-        self.add_score_by_type(20, :score_g)
+        self.add_score_by_type(h[:project],20, :score_g)
     end
 
   end
 
-  def add_score_by_type(score, type = :score_g)
-    self.update_attributes!(:score => score+self.score, type => self.read_attribute(type)+score)
+  def add_score_by_type(project, score, type = :score_g)
+    ps = self.core_project_scores.by_project(project).first_or_create
+    ps.update_attributes!(:score => score!=nil ?score :0 +ps.score, type => ps.read_attribute(type)+score)
     #self.user_project_scores(project).update_attributes!(:score => score+self.score, type => self.read_attribute(type)+score)
   end
   private
