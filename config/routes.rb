@@ -63,6 +63,7 @@ scope '/project/:project' do
     end
   end
   get 'life_tape/posts/fast_discussion_topics' , to: 'life_tape/posts#fast_discussion_topics'
+  get 'life_tape/posts/transfer_comment' , to: 'life_tape/posts#transfer_comment'
   namespace :life_tape do
     posts_routes
     resources :posts do

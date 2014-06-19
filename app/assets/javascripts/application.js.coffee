@@ -560,3 +560,13 @@ $('#select_for_aspects').on 'change', ->
         data:
           con_id: new_concept
 
+@select_for_aspects_comments= (el, post)->
+  comment_id = post
+  aspect_id = $(el).val()
+  if aspect_id != '' and comment_id != ''
+    $.ajax
+      url: "/project/1/life_tape/posts/transfer_comment"
+      type: "get"
+      data:
+        comment_id: comment_id
+        aspect_id: aspect_id

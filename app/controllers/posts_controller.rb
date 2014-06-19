@@ -61,7 +61,8 @@ def prepare_data
 end
 
 def add_comment
-    @project = Core::Project.find(params[:project]) 
+    @project = Core::Project.find(params[:project])
+    @aspects = Discontent::Aspect.where(:project_id => @project)
     post = current_model.find(params[:id])
     unless  params[name_of_comment_for_param][:content]==''
       @comment = post.comments.create(:content => params[name_of_comment_for_param][:content], :user =>current_user)

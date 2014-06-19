@@ -15,7 +15,10 @@
           =link_to 'Редактировать', {:action => :edit_comment, :id => comment.id},:remote => true, :class => "text-success",id: "edit_comment_#{comment.id}"
           \|
           = link_to 'Удалить', {:action => :destroy_comment, :id => comment.id}, :method => :put, :remote => true, :confirm => 'Удалить комментарий?', :class => "text-danger",id: "destroy_comment_#{comment.id}"
-
+          -if boss?
+            \|
+            = select_tag 'select_for_aspects_comments', options_from_collection_for_select(@aspects, "id", "content"),
+            :prompt => 'Выберите тему', :onchange => "select_for_aspects_comments(this,#{comment.id});"
       .pull-right
         - if boss?
           - if signed_in? and not comment.users.include?(current_user)

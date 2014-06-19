@@ -77,7 +77,19 @@ end
     end
   end
 
-
+  def transfer_comment
+    aspect_id =  Discontent::Aspect.find(params[:aspect_id])
+    post_id = aspect_id.life_tape_posts.first.id unless aspect_id.life_tape_posts.first.nil?
+    comment_id = LifeTape::Comment.find(params[:comment_id])
+    comment_old = comment_id.post.discontent_aspects.first.id
+    comment_id.update_attributes(post_id: post_id) unless post_id.nil?
+    journal_comment = Journal.where(:type_event => 'life_tape_comment_save').where("journals.body like '%#comment_#{comment_id.id}%'").first
+    jc = journal_comment.body.sub("asp=#{comment_old}", "asp=#{aspect_id.id}")
+    journal_comment.update_attributes(body: jc)
+    respond_to do |format|
+      format.js {head :ok}
+    end
+  end
 
   def to_archive
      super()
