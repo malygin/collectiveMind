@@ -8,7 +8,7 @@
   %ul.nav.navbar-nav.pull-right.navbar-menu
     - if signed_in?
       %li
-        =link_to current_user, "project/11/users/#{current_user.id}"
+        =link_to current_user, "project/13/users/#{current_user.id}"
       %li
         = link_to destroy_user_session_path, :method => :delete do
           Выйти
@@ -20,7 +20,7 @@
   %ul.navbar-buttons.pull-right
     - if signed_in?
       %li
-        =link_to '/project/11', class:'btn btn-sm btn-danger'  do
+        =link_to '/project/13', class:'btn btn-sm btn-danger'  do
           Перейти к процедуре
           %i.fa.fa-arrow-right
 

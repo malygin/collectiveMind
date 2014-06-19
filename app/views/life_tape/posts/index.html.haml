@@ -6,11 +6,10 @@
           1 этап: Сбор информации.
           =@aspect.content
           %br
-          %small
-            Обсуждение тем процедуры:
-            =@project.name
-          %br
-          %br
+        %span(style='font-size: 20px;line-height: 30px;')
+          Обсуждение процедуры:
+          =@project.name
+
       .col-md-3
 
         - if signed_in? and @project.status == 1
