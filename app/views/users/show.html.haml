@@ -24,19 +24,18 @@
                 =link_to "+10 баллов",  "/project/"+@project.id.to_s+"/users/"+@user.id.to_s+"/add_score/10", :remote => true, :method => :put, class: "voteCounter"
             %br
 
-            -if @user.cluber?
-              -if boss?
-                %h4(style="font-weight: bold;")
-                  %span.color-green.pull-left
-                    = link_to club_toggle_user_path(@project, @user), :remote => true, :method => :put, :style => 'text-decoration:none;', :id => "club_status_#{@user.id}" do
-                      =club_status(@user)
-                    %a(href="#" id="userscore_#{@user.id}" class="userscore" data-pk="1" data-remote="true" data-resource="post" data-type="text" data-name="score" data-url="/project/#{@project.id}/users/#{@user.id}/update_score")
-                      =@user.score
-              -else
-                %h4(style="font-weight: bold;")
-                  %span.color-green.pull-left
+            -if boss?
+              %h4(style="font-weight: bold;")
+                %span.color-green.pull-left
+                  = link_to club_toggle_user_path(@project, @user), :remote => true, :method => :put, :style => 'text-decoration:none;', :id => "club_status_#{@user.id}" do
                     =club_status(@user)
+                  %a(href="#" id="userscore_#{@user.id}" class="userscore" data-pk="1" data-remote="true" data-resource="post" data-type="text" data-name="score" data-url="/project/#{@project.id}/users/#{@user.id}/update_score")
                     =@user.score
+            -else
+              %h4(style="font-weight: bold;")
+                %span.color-green.pull-left
+                  =club_status(@user)
+                  =@user.score
           .col-md-3
             -#%span.text-muted.pull-right
             -#  =@user.user_project_scores(@project.id).score
