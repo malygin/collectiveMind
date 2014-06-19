@@ -19,8 +19,10 @@ class PostsController < ApplicationController
    end
  end
  def have_rights
-   if  current_model.find(params[:id]).user != current_user and not boss?
-     redirect_to :back
+   unless current_model != "Knowbase::Post"
+     if  current_model.find(params[:id]).user != current_user and not boss?
+       redirect_to :back
+     end
    end
 end
   def current_model

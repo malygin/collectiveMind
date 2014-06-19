@@ -51,10 +51,13 @@ scope '/project/:project' do
   end
   resources :users do
     get :show_top, :on => :collection
+    get :users_rc, :on => :collection
     member do
       put :forecast
       put :forecast_concept
       put :forecast_plan
+      post :update_score
+      put :club_toggle
       match 'add_score/:score' => 'users#add_score'
       match 'add_score_essay/:score' => 'users#add_score_essay'
     end

@@ -15,6 +15,7 @@
 #= require wizard/bootstrap-datepicker
 #= require wizard/jquery.maskedinput
 #= require wizard/select2
+#= require bootstrap3-editable/bootstrap-editable
 
 $('#modal_help').modal
   keyboard: false
@@ -193,6 +194,17 @@ $(window).load ->
   ).on "changeDate", (e) ->
     $(this).datepicker "hide"
     return
+
+  $('.userscore').editable()
+#  $('.userscore').editable
+#    type: 'text'
+#    pk: 1
+#    placement: 'top'
+#    title: 'enter score'
+#    url: '/post'
+#    source: '/list'
+
+
 
 #  $(".chat-messages").slimScroll
 #    start: 'bottom'

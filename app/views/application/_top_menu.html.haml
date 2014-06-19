@@ -8,7 +8,9 @@
   %li.active
     =link_to t('menu.base_knowledge'),   knowbase_posts_path(@project) , style:'width:auto; margin-right: 10px;'
   %li.divider
-
+  %li.active
+    =link_to t('menu.raiting_rc'), users_rc_users_path(@project), style:'width:auto; margin-right: 10px;'
+  %li.divider
   %li.active
     =link_to t('menu.raiting'), "/project/#{@project.id}/users" , style:'width:auto; margin-right: 10px;'
   %li.divider

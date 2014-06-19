@@ -47,6 +47,9 @@ class Core::Project < ActiveRecord::Base
   has_many :users, :through => :project_users
   has_many :knowbase_posts, :class_name => 'Knowbase::Post'
 
+  has_many :core_project_scores, :class_name => 'Core::ProjectScore'
+  #has_many :project_score_users, :class_name => 'User', :through => :core_project_scores, :source => :user
+
   LIST_STAGES = {1 => {name: 'Сбор информации', :type_stage => :life_tape_posts, status: [0,1,2]},
          2 => { name: 'Анализ ситуации', :type_stage =>  :discontent_posts, status: [3,4,5,6]},
          3 => { name: 'Формулирование проблемы', :type_stage => :concept_posts, status: [7,8]},

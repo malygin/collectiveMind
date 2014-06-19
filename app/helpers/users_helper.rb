@@ -39,4 +39,27 @@ module UsersHelper
       nil
     end
   end
+
+  def club_toggle_user(user)
+    case user.type_user
+      when 4
+        5
+      when 5
+        4
+      else
+        4
+    end
+  end
+
+  def club_status(user)
+    case user.type_user
+      when 4
+        content_tag(:b, 'RC',:class =>'color-teal', :style => 'text-decoration:none;', :id => "club_status_tag_#{user.id}")
+      when 5
+        content_tag(:b, 'RC WATCHER',:class =>'color-red', :style => 'text-decoration:none;', :id => "club_status_tag_#{user.id}")
+      else
+        content_tag(:b, 'RC?',:class =>'color-orange', :style => 'text-decoration:none;', :id => "club_status_tag_#{user.id}")
+    end
+  end
+
 end

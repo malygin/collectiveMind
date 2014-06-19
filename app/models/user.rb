@@ -16,9 +16,10 @@ class User < ActiveRecord::Base
    :dateActivation, :dateLastEnter, :dateRegistration, :email, :faculty, :group,
     :name, :string, :string, :surname, :validate, :vkid,
     :score,  :score_a, :score_g, :score_o,
-    :admin, :expert
+    :admin, :expert, :type_user
 
-  scope :scope_score_name, ->(sn) { where("#{sn}>0").order("#{sn} DESC") }
+  #scope :scope_score_name, ->(sn) { where("#{sn}>0").order("#{sn} DESC") }
+  has_many :core_project_scores, :class_name => 'Core::ProjectScore'
   #has_many :help_questions, :class_name => 'Help::Question'
   #has_many :help_answers, :class_name => 'Help::Answer'
   has_many :help_users_answerses, :class_name => 'Help::UsersAnswers'
@@ -103,6 +104,9 @@ class User < ActiveRecord::Base
     end
   end
 
+  def user_project_scores(project)
+    self.core_project_scores.where("core_project_scores.project_id = ?", project).first
+  end
   #def add_score(score, type=:score_g)
   #  self.update_column(:score, self.score + score)
   #  self.update_column(type.to_sym, self.attributes[type.to_s] + score)
@@ -137,6 +141,14 @@ class User < ActiveRecord::Base
     self.admin or self.expert
   end
 
+  def cluber?
+    self.type_user == 4 or self.type_user == 5
+  end
+
+  def watcher?
+    self.type_user == 5
+  end
+
   def have_essay_for_stage(project, stage)
     # puts self.essay_posts.where(:stage => stage)
     !self.essay_posts.where(:project_id => project, :stage => stage).empty?
@@ -151,6 +163,7 @@ class User < ActiveRecord::Base
   end
 
   def add_score(h={})
+    #@todo нужно добавить :project => h[:project]
     case h[:type]
       when :add_life_tape_post
         self.add_score_by_type(10, :score_g)
@@ -177,6 +190,7 @@ class User < ActiveRecord::Base
 
   def add_score_by_type(score, type = :score_g)
     self.update_attributes!(:score => score+self.score, type => self.read_attribute(type)+score)
+    #self.user_project_scores(project).update_attributes!(:score => score+self.score, type => self.read_attribute(type)+score)
   end
   private
 

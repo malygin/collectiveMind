@@ -20,7 +20,16 @@ module SessionsHelper
 
   end
 
-	def boss_authenticate
+  #@todo new permissions
+  ##### user.type_user
+  # 1 - admin
+  # 2 - expert
+  # 3 - jury
+  # 4 - ratio club user
+  # 5 - ratio club watcher
+  #####
+
+  def boss_authenticate
 		deny_access unless boss?
 	end
 
@@ -35,23 +44,35 @@ module SessionsHelper
 	end
 
 	def expert?
+    #current_user.type_user == 2 unless current_user.nil?
 		current_user.expert unless current_user.nil?
 	end	
 
 	def admin?
+    #current_user.type_user == 1 unless current_user.nil?
 		current_user.admin unless current_user.nil?
 	end	
 
 	def jury?
+    #current_user.type_user == 3 unless current_user.nil?
 		current_user.jury unless current_user.nil?
 	end
 
 	def boss?
+    #current_user.type_user == 1 or current_user.type_user == 2 or current_user.type_user == 3 unless current_user.nil?
 		current_user.expert or current_user.admin or current_user.jury unless current_user.nil?			
 	end
 
+  def watcher?
+    current_user.type_user == 5 unless current_user.nil?
+  end
 
-	def user?
+  def cluber?
+    current_user.type_user == 4 or current_user.type_user == 5 unless current_user.nil?
+  end
+
+  def user?
+    #not (current_user.type_user == 1 or current_user.type_user == 2)
 		not (current_user.admin? or current_user.expert?)
 	end
 

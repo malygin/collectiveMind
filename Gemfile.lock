@@ -46,6 +46,8 @@ GEM
       sass-rails (>= 3.1.0)
     bootstrap-wysihtml5-rails (0.3.1.23)
       railties (>= 3.0)
+    bootstrap-x-editable-rails (1.5.1.1)
+      railties (>= 3.0)
     breadcrumbs_on_rails (2.3.0)
     builder (3.0.4)
     capybara (2.2.1)
@@ -332,6 +334,7 @@ DEPENDENCIES
   aws-sdk
   bootstrap-sass-rails
   bootstrap-wysihtml5-rails
+  bootstrap-x-editable-rails
   breadcrumbs_on_rails
   capybara
   capybara-screenshot

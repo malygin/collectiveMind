@@ -44,15 +44,47 @@ class UsersController < ApplicationController
     add_breadcrumb I18n.t('menu.raiting'), users_path(@project)
     @my_journals_count = Journal.count_events_for_my_feed(@project.id, current_user)
     @my_journals  = Journal.events_for_my_feed @project.id, current_user.id, 5
-    @users = User.where('score>0').where('admin=?', false).order('score DESC').paginate(:page =>params[:page])
+    #@users = User.where('score>0').where('admin=?', false).order('score DESC').paginate(:page =>params[:page])
+    @users = User.joins(:core_project_scores).where("core_project_scores.project_id = ? AND core_project_scores.score > 0", @project.id).where('users.admin=?', false).order("core_project_scores.score DESC").paginate(:page =>params[:page])
   end
 
   def show_top
     @project = Core::Project.find(params[:project])
-    @users = User.scope_score_name(params[:score_name]).where('admin=?', false).paginate(:page =>params[:page])
+    #@users = User.scope_score_name(params[:score_name]).where('admin=?', false).paginate(:page =>params[:page])
+    @users = User.joins(:core_project_scores).where("core_project_scores.project_id = ? AND core_project_scores.score > 0", @project.id).where('users.admin=?', false).order("core_project_scores.#{params[:score_name]} DESC").paginate(:page =>params[:page])
     @score_name = params[:score_name]
     respond_to do |format|
       format.js
+    end
+  end
+
+  def users_rc
+    @project = Core::Project.find(params[:project])
+    @my_journals_count = Journal.count_events_for_my_feed(@project.id, current_user)
+    @my_journals  = Journal.events_for_my_feed @project.id, current_user.id, 5
+    @users = User.where('admin=?', false).order('score DESC').paginate(:page =>params[:page])
+    #@users = User.where('admin=?', false).where('type_user = 4 or type_user = 5').order('score DESC').paginate(:page =>params[:page])
+  end
+
+  def update_score
+    @project = Core::Project.find(params[:project])
+    @user = User.find(params[:id])
+    params[:value] = "0" if params[:value] == ""
+    respond_to do |format|
+      if @user.update_attributes(params[:name] => params[:value])
+        format.json { head :no_content } # 204 No Content
+        format.js { head :no_content }
+      end
+    end
+  end
+
+  def club_toggle
+    @project = Core::Project.find(params[:project])
+    @user = User.find(params[:id])
+    respond_to do |format|
+      if @user.update_attributes!(:type_user => view_context.club_toggle_user(@user))
+        format.js
+      end
     end
   end
 

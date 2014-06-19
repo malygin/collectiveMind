@@ -53,6 +53,7 @@ ru:
     help: "Помощь"
     base_knowledge: "База знаний"
     raiting: "Рейтинг"
+    raiting_rc: "Клубный рейтинг"
     search_text: "что я ищу"
     search: "Поиск"
     switch_procedure: "Перейти"
