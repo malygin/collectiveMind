@@ -62,4 +62,15 @@ module UsersHelper
     end
   end
 
+  def club_status_show_user(user)
+    case user.type_user
+      when 4
+        content_tag(:span, 'RC',:class =>'label label-primary')
+      when 5
+        content_tag(:span, 'RC WATCHER',:class =>'label label-warning')
+      else
+        # content_tag(:b, 'RC?',:class =>'color-orange', :style => 'text-decoration:none;', :id => "club_status_tag_#{user.id}")
+    end
+  end
+
 end

@@ -2,6 +2,7 @@
   = render 'users/user_post', :user => post.user
   .media-body
     =link_to post.user, user_path(@project, post.user)
+
     %br
     -#= render partial: 'discontent/aspects/aspect', collection: post.discontent_aspects
     = render :partial => 'set_important', locals: {post: post}
