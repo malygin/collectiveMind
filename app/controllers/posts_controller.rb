@@ -67,7 +67,8 @@ end
 def to_work_redirect
   @project = Core::Project.find(params[:project])
   path_link = "/project/#{@project.id}/" + current_model.table_name.sub('_posts','/posts') + "/to_work"
-  redirect_to path_link unless params[:asp]
+  able = ['life_tape_posts','discontent_posts','concept_posts'].include? current_model.table_name
+  redirect_to path_link if params[:asp].nil? and able
 end
 
 def add_comment

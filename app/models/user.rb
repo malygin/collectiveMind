@@ -106,7 +106,7 @@ class User < ActiveRecord::Base
   end
 
   def last_event(project)
-    Journal.last_event_for(self,project)
+    Journal.last_event_for(self,project) unless self.nil?
 
   end
 
