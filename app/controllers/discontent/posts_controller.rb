@@ -426,8 +426,8 @@ class Discontent::PostsController < PostsController
           user_for_post = params[:select_for_clubers].present? ? User.find(params[:select_for_clubers]) : current_user
           @dispost.user = user_for_post
           @dispost.save!
-          user_for_post.journals.build(:type_event=>'discontent_post'+"_save", :project => @project, :body=>"#{@dispost.content[0..12]}:#{@dispost.id}").save!
-
+          user_for_post.journals.build(:type_event=>'discontent_post'+"_save", :project => @project, :body=>"#{@dispost.content}:#{@dispost.id}").save!
+          user_for_post.add_score(:type => :add_discontent_post)
           unless params[:select_for_discussion_aspects_add].nil?
             asp = params[:select_for_discussion_aspects_add]
             Discontent::PostAspect.create(post_id: @dispost.id, aspect_id: asp.to_i)
