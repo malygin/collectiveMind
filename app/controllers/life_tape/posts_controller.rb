@@ -2,7 +2,6 @@
 class LifeTape::PostsController < PostsController
 
 
-
   def voting_model
     Discontent::Aspect
   end
@@ -78,16 +77,17 @@ end
   end
 
   def transfer_comment
-    aspect_id =  Discontent::Aspect.find(params[:aspect_id])
-    post_id = aspect_id.life_tape_posts.first.id unless aspect_id.life_tape_posts.first.nil?
-    comment_id = LifeTape::Comment.find(params[:comment_id])
-    comment_old = comment_id.post.discontent_aspects.first.id
-    comment_id.update_attributes(post_id: post_id) unless post_id.nil?
-    journal_comment = Journal.where(:type_event => 'life_tape_comment_save').where("journals.body like '%#comment_#{comment_id.id}%'").first
-    jc = journal_comment.body.sub("asp=#{comment_old}", "asp=#{aspect_id.id}")
+    @project = Core::Project.find(params[:project])
+    aspect =  Discontent::Aspect.find(params[:aspect_id])
+    post_id = aspect.life_tape_posts.first.id unless aspect.life_tape_posts.first.nil?
+    comment = LifeTape::Comment.find(params[:comment_id])
+    aspect_old_id = comment.post.discontent_aspects.first.id unless comment.post.discontent_aspects.first.nil?
+    comment.update_attributes(post_id: post_id) unless post_id.nil?
+    journal_comment = Journal.where(:type_event => 'life_tape_comment_save', :project_id => @project.id).where("journals.body like '%#comment_#{comment.id}%'").first
+    jc = journal_comment.body.sub("asp=#{aspect_old_id}", "asp=#{aspect.id}")
     journal_comment.update_attributes(body: jc)
     respond_to do |format|
-      format.js {head :ok}
+      format.js {render js: "alert('Перенесено');"}
     end
   end
 

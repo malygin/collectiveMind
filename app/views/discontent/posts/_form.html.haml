@@ -109,6 +109,19 @@
                 %span.glyphicon.glyphicon-remove.text-danger.pull-left{onclick: "remove_discontent_aspect('#{@asp.id}','#{@asp.content}');", style: "cursor:pointer;text-decoration:none;font-size:15px;"}
                 %span.span_aspect.label.label-t{id: "#{@asp.id}"}=@asp.content
           %br
+      -if boss? and !@post.persisted?
+        .row
+          .col-md-6
+            %br
+            %h5.text-right
+              %b Выберите члена клуба
+            %br
+            %br
+          .com-md-6
+            %br
+            = select_tag 'select_for_clubers', options_from_collection_for_select(@users_rc, "id", "to_s"),
+            :prompt => 'Выберите члена клуба' , style:'margin-left:15px; margin-top:10px; height: 30px;'
+            %br
 
       .row
         .col-md-12

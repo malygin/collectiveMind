@@ -7,6 +7,8 @@ class PostsController < ApplicationController
     :vote_list, :essay_list]
   #before_filter :have_rights
   before_filter :have_rights, :only =>[:edit]
+  before_filter :to_work_redirect, only: [:index]
+
 
   def journal_data
     @my_journals_count = Journal.count_events_for_my_feed(@project.id, current_user)
@@ -24,7 +26,9 @@ class PostsController < ApplicationController
        redirect_to :back
      end
    end
-end
+ end
+
+
   def current_model
     "#{self.class.name.deconstantize}::Post".constantize
   end
@@ -54,10 +58,16 @@ end
 def voting_model  
   Discontent::Post
 end
-
 def prepare_data
     @project = Core::Project.find(params[:project]) 
 
+end
+
+def to_work_redirect
+  @project = Core::Project.find(params[:project])
+  check = view_context.get_session_to_work?(session[:session_id])
+  path_link = "/project/#{@project.id}/" + current_model.table_name.sub('_posts','/posts') + "/to_work"
+  redirect_to path_link unless check
 end
 
 def add_comment
@@ -426,6 +436,27 @@ def index
       current_user.user_checks.create(project_id: @project.id, check_field: params[:check_field], status: params[:status]).save!
     end
     head :ok
+  end
+
+  def to_work
+    @project = Core::Project.find(params[:project])
+    @my_journals  = Journal.events_for_my_feed @project.id, current_user.id, 5
+    @my_journals_count = Journal.count_events_for_my_feed(@project.id, current_user)
+    @path_link = "/project/#{@project.id}/" + current_model.table_name.sub('_posts','/posts') + "/to_begin_work"
+
+    respond_to do |format|
+      format.html { render :layout => 'application_two_column_to_work'}
+    end
+  end
+
+  def to_begin_work
+    @project = Core::Project.find(params[:project])
+    @redirect = params[:redirect]
+    path_link = "/project/#{@project.id}/" + current_model.table_name.sub('_posts','/posts')
+    current_user.user_checks.where(project_id: @project.id, status: true, check_field: 'session_id').destroy_all
+    current_user.user_checks.create(project_id: @project.id, status: true, check_field: 'session_id', value: session[:session_id]).save!
+
+    redirect_to path_link
   end
 
   protected

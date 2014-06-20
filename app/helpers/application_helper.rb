@@ -189,6 +189,14 @@ module ApplicationHelper
     false
   end
 
+  def get_session_to_work?(value)
+    check = current_user.user_checks.where(project_id: @project.id, status: true, check_field: 'session_id', value: value).first unless current_user.user_checks.empty?
+    if check
+      return true if check.updated_at > 6.hours.ago
+    end
+    false
+  end
+
   def rowspan_stage(stage)
     2 + stage.plan_post_aspects.size + stage.actions_rowcount.size + (stage.plan_post_aspects.size > 0 ? stage.plan_post_aspects.size : 0)
   end

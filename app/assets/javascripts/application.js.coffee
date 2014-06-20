@@ -560,13 +560,14 @@ $('#select_for_aspects').on 'change', ->
         data:
           con_id: new_concept
 
-@select_for_aspects_comments= (el, post)->
+@select_for_aspects_comments= (el,project,post)->
+  project_id = project
   comment_id = post
   aspect_id = $(el).val()
   if aspect_id != '' and comment_id != ''
     $.ajax
-      url: "/project/1/life_tape/posts/transfer_comment"
-      type: "get"
+      url: "/project/#{project_id}/life_tape/posts/transfer_comment"
+      type: "put"
       data:
         comment_id: comment_id
         aspect_id: aspect_id

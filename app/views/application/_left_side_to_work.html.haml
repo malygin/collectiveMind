@@ -1,0 +1,64 @@
+%ul#side-nav.side-nav
+  %li.panel#stage_life_tape
+
+    %a.stage_menu1
+      %h4.no-margin.text-left
+        1.
+        =@project.status_title(:life_tape_posts)
+
+
+  %li.panel#stage_discontent
+    - if @project.status > 2
+      %a.stage_menu2
+        %h4.no-margin.text-left
+          2.
+          =@project.status_title(:discontent_posts)
+
+    -else
+      %a.stage_menu2
+        %h4.no-margin(style='color:#444444')
+          2.
+          =@project.status_title(:discontent_posts)
+
+
+
+  %li.panel#stage_concept
+    - if  @project.status > 6
+      %a.stage_menu3
+        %h4.no-margin.text-left
+          3.
+          =@project.status_title(:concept_posts)
+
+    -else
+      %a.stage_menu3
+        %h4.no-margin(style='color:#444444')
+          3.
+          =@project.status_title(:concept_posts)
+
+
+  %li.panel#stage_plan
+    - if  @project.status > 8
+      %a.stage_menu4
+        %h4.no-margin
+          4.
+          =@project.status_title(:plan_posts)
+    -else
+      %a.stage_menu4
+        %h4.no-margin(style='color:#444444')
+          4.
+          =@project.status_title(:plan_posts)
+
+
+  %li.panel#stage_plan
+    - if  @project.status > 9
+      %a.stage_menu5
+        %h4.no-margin
+          5.
+          =@project.status_title(:estimate_posts)
+
+    -else
+      %a.stage_menu5
+        %h4.no-margin(style='color:#444444')
+          5.
+          =@project.status_title(:estimate_posts)
+

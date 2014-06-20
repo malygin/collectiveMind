@@ -18,7 +18,7 @@
           -if boss?
             \|
             = select_tag 'select_for_aspects_comments', options_from_collection_for_select(@aspects, "id", "content"),
-            :prompt => 'Выберите тему', :onchange => "select_for_aspects_comments(this,#{comment.id});"
+            :prompt => 'Выберите тему', :onchange => "select_for_aspects_comments(this,#{@project.id},#{comment.id});"
       .pull-right
         - if boss?
           - if signed_in? and not comment.users.include?(current_user)

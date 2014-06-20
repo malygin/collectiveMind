@@ -12,57 +12,30 @@
         %h3#myModalLabel.modal-title Быстрая работа с несовершенствами
       .modal-body
         #option_for_select_discontent{project: "#{@project.id}"}
-        - check = get_check_field?('fast_discussion_discontents')
         #wizard.form-wizard
           %ul.wizard-navigation.nav-justified
-            -unless check
-              %li
-                %a{"data-toggle" => "tab", :href => "#tab1"}
-                  %small 1.
-                  %strong Правила
             %li
-              %a{"data-toggle" => "tab", :href => "#tab2"}
+              %a{"data-toggle" => "tab", :href => "#tab1"}
                 %small
-                  -if check
-                    1.
-                  -else
-                    2.
+                  1.
                 %strong Обзор
             - if @project.status == 3
               %li
-                %a{"data-toggle" => "tab", :href => "#tab3"}
+                %a{"data-toggle" => "tab", :href => "#tab2"}
                   %small
-                    -if check
-                      2.
-                    -else
-                      3.
+                    2.
                   %strong Добавить
 
           #bar.progress.progress-small
             .progress-bar
           .tab-content
-            -#-unless check
             #tab1.tab-pane
-              .form-horizontal
-                %fieldset
-                  %br
-                  %h4
-                    %p Проблемы, требующие исправления, в нашей процедуре называются несовершенствами.
-                    %p Чтобы разработать проект по комплексному совершенствованию ситуации, надо выявить и описать конкретные несовершенства, то есть такие, для исправления которых требуются конкретные действия.
-                    %p Чтобы максимально четко описать несовершенство, мы предлагаем вам ответить на три простых вопроса: что вас не устраивает, когда это явление происходит и где оно наблюдается.
-                    %p Впоследствии, когда вы будете придумывать, как корректировать несовершенства, такая структура вам очень поможет (как и почему она вам поможет, вы можете узнать в подробном описании стадии).
-                  .control-group
-                    %label.checkbox{:for => "notview"}
-                      %input{:name => "notview", :type => "checkbox", :id => "notview", :onchange => "user_check_field(this,'fast_discussion_discontents');"}/
-                      Не показывать в следующий раз
-
-            #tab2.tab-pane
               .form-horizontal
                 %fieldset
                   #form_fast_discussion_comment_discontent
 
 
-            #tab3.tab-pane
+            #tab2.tab-pane
               .form-horizontal
                 %fieldset
                   #form_fast_discussion_add_discontent

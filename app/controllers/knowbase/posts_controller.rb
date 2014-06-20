@@ -20,7 +20,8 @@ class Knowbase::PostsController <  PostsController
     @stages = current_model.stage_knowbase_order(@project.id)
     @post = current_model.min_stage_knowbase_post(@project.id).first
     if @post.nil?
-      redirect_to  polymorphic_path(@project.redirect_to_current_stage)
+      #redirect_to  polymorphic_path(@project.redirect_to_current_stage)
+      redirect_to :back
     else
       add_breadcrumb  @post.title, knowbase_post_path(@project, @post.id)
       render 'show'

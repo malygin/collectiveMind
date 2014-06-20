@@ -102,6 +102,7 @@ class Discontent::PostsController < PostsController
     @post = current_model.new
     @replace_posts =[]
     @accepted_posts = Discontent::Post.where(status: 2, project_id:  @project)
+    @users_rc = User.where(admin:false, type_user: 4)
 
     unless params[:replace_id].nil?
       @replace_posts << current_model.find(params[:replace_id])
@@ -173,26 +174,25 @@ class Discontent::PostsController < PostsController
     # end
 
     # if r.nil? or  r.empty? or  r.last[1] < 40
-      if @flash.nil? or @flash.empty?
-       @post = @project.discontents.create(params[name_of_model_for_param])
-       @post.user = current_user
-       @post.save
-       current_user.journals.build(:type_event=>name_of_model_for_param+"_save", :project => @project, :body=>"#{@post.content}:#{@post.id}").save!
-       current_user.add_score(:type => :add_discontent_post)
-       if !params[:discontent_post_aspects].nil? and @posts.nil? and (@flash.nil? or @flash.empty?)
-         params[:discontent_post_aspects].each do |asp|
-           aspect = Discontent::PostAspect.create(post_id: @post.id, aspect_id: asp.to_i)
-           aspect.save!
-         end
+    if @flash.nil? or @flash.empty?
+     @post = @project.discontents.create(params[name_of_model_for_param])
+     user_for_post = params[:select_for_clubers].present? ? User.find(params[:select_for_clubers]) : current_user
+     @post.user = user_for_post
+     @post.save
+     user_for_post.journals.build(:type_event=>name_of_model_for_param+"_save", :project => @project, :body=>"#{@post.content}:#{@post.id}").save!
+     user_for_post.add_score(:type => :add_discontent_post)
+     if !params[:discontent_post_aspects].nil? and @posts.nil? and (@flash.nil? or @flash.empty?)
+       params[:discontent_post_aspects].each do |asp|
+         aspect = Discontent::PostAspect.create(post_id: @post.id, aspect_id: asp.to_i)
+         aspect.save!
        end
-      end
-      # redirect_to  :action=>'show', :id => @post.id, :project => @project
-      return
+     end
+    end
+    # redirect_to  :action=>'show', :id => @post.id, :project => @project
+    #return
     # else
     #   @posts = r.collect {|d| d[0] if d[1]> 40}.compact.reverse
     # end
-
-
 
     respond_to do |format|
       format.html
@@ -368,6 +368,7 @@ class Discontent::PostsController < PostsController
       @project = Core::Project.find(params[:project])
       status  = @project.status == 3 ? 0 : 2
       @aspects = Discontent::Aspect.where(:project_id => @project, :status => 0).order(:id)
+      @users_rc = User.where(admin:false, type_user: 4)
       @discontent_aspect = Discontent::Aspect.find(params[:asp_id]) unless params[:asp_id].nil?
       @discontent_post = Discontent::Post.find(params[:dis_id]) unless params[:dis_id].nil?
       @select_aspect = Discontent::Aspect.find(params[:aspect_id]) unless params[:aspect_id].nil?
@@ -422,9 +423,10 @@ class Discontent::PostsController < PostsController
       elsif !params[:save_form_dispost].nil?
         if !params[:discontent_post][:content].empty? and !params[:discontent_post][:whered].empty? and !params[:discontent_post][:whend].empty? and !params[:discontent_post][:style].empty?
           @dispost = @project.discontents.create(params[:discontent_post])
-          @dispost.user = current_user
+          user_for_post = params[:select_for_clubers].present? ? User.find(params[:select_for_clubers]) : current_user
+          @dispost.user = user_for_post
           @dispost.save!
-          current_user.journals.build(:type_event=>'discontent_post'+"_save", :project => @project, :body=>"#{@dispost.content[0..12]}:#{@dispost.id}").save!
+          user_for_post.journals.build(:type_event=>'discontent_post'+"_save", :project => @project, :body=>"#{@dispost.content[0..12]}:#{@dispost.id}").save!
 
           unless params[:select_for_discussion_aspects_add].nil?
             asp = params[:select_for_discussion_aspects_add]

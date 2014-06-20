@@ -63,7 +63,20 @@ scope '/project/:project' do
     end
   end
   get 'life_tape/posts/fast_discussion_topics' , to: 'life_tape/posts#fast_discussion_topics'
-  get 'life_tape/posts/transfer_comment' , to: 'life_tape/posts#transfer_comment'
+  put 'life_tape/posts/transfer_comment' , to: 'life_tape/posts#transfer_comment'
+  get 'life_tape/posts/check_field', to:  'life_tape/posts#check_field'
+
+  get 'life_tape/posts/to_work', to:  'life_tape/posts#to_work'
+  put 'life_tape/posts/to_begin_work', to:  'life_tape/posts#to_begin_work'
+  get 'discontent/posts/to_work', to:  'discontent/posts#to_work'
+  put 'discontent/posts/to_begin_work', to:  'discontent/posts#to_begin_work'
+  get 'concept/posts/to_work', to:  'concept/posts#to_work'
+  put 'concept/posts/to_begin_work', to:  'concept/posts#to_begin_work'
+  get 'plan/posts/to_work', to:  'plan/posts#to_work'
+  put 'plan/posts/to_begin_work', to:  'plan/posts#to_begin_work'
+  get 'estimate/posts/to_work', to:  'estimate/posts#to_work'
+  put 'estimate/posts/to_begin_work', to:  'estimate/posts#to_begin_work'
+
   namespace :life_tape do
     posts_routes
     resources :posts do
@@ -84,9 +97,11 @@ scope '/project/:project' do
   post 'concept/posts/add_dispost', to:  'concept/posts#add_dispost'
   put 'concept/posts/next_vote', to:  'concept/posts#next_vote'
   get 'discontent/posts/fast_discussion_discontents', to:  'discontent/posts#fast_discussion_discontents'
-  get 'discontent/posts/check_field', to:  'discontent/posts#check_field'
   get 'concept/posts/fast_discussion_concepts', to:  'concept/posts#fast_discussion_concepts'
+  get 'discontent/posts/check_field', to:  'discontent/posts#check_field'
   get 'concept/posts/check_field', to:  'concept/posts#check_field'
+
+
 
   namespace :discontent do
     resources :aspects
