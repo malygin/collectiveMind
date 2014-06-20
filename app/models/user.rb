@@ -105,6 +105,11 @@ class User < ActiveRecord::Base
     end
   end
 
+  def last_event(project)
+    Journal.last_event_for(self,project)
+
+  end
+
   def user_project_scores(project)
     self.core_project_scores.where("core_project_scores.project_id = ?", project).first
   end
