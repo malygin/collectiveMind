@@ -21,7 +21,7 @@ def prepare_data
 end
 
   def index
-
+    @page = params[:page]
     if @project.status == 2 and ((@project.stage1.to_i - current_user.voted_aspects.by_project(@project).size) != 0)
       redirect_to action: "vote_list"
       return
@@ -29,14 +29,19 @@ end
     if params[:asp]
       @aspect =  Discontent::Aspect.find(params[:asp])
       @post_show = @aspect.life_tape_posts.first
+
+      @comments= @post_show.comments.paginate(:page => @page ? @page: last_page, :per_page => 10)
     else
       @aspect = @project.aspects.first
       @post_show = @aspect.life_tape_posts.first unless @aspect.nil?
+
+      @comments= @post_show.comments.paginate(:page => @page ? @page: last_page, :per_page => 10)
+
     end
 
     @post = current_model.new
     # @order = params[:order]
-    # @page = params[:page]
+
     # @folder = :life_tape
 
     if params[:viewed]
@@ -152,4 +157,10 @@ end
       format.js
     end
   end
+
+  def last_page
+    total_results = @post_show.comments.count
+    total_results / 10 + (total_results % 10 == 0 ? 0 : 1)
+  end
+
 end

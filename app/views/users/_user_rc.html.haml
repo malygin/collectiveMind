@@ -8,6 +8,11 @@
         %br
         =link_to user, user_path(@project, user)
         = render partial: '/shared/user_online', object: user
+      %br
+      %small= journal_parser(user.last_event(@project), @project.id).html_safe
+      %br
+      %small
+        .time.pull-left=Russian::strftime(user.last_event(@project).created_at,"%d %B %k:%M:%S ")
 
   %td(style="width:300px;")
     -if boss?

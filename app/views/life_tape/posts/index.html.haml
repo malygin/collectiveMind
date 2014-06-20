@@ -17,6 +17,7 @@
             -if fast_discussion_able?
               = link_to 'Быстрый старт!', life_tape_posts_fast_discussion_topics_path(@project) ,remote: true, id: 'fast_discussion_topics',  class: 'btn btn-lg btn-info '
             -if boss?
+              %br
               =link_to '+ Добавить новую тему', new_discontent_aspect_path(@project),:remote => true,:id => "new_aspect",  class: 'btn btn-sm btn-primary'
 
 
@@ -26,8 +27,11 @@
         .col-md-6
           %section.widget
             .body
+              .text-center= will_paginate @comments
               .chat-messages
-                = render :partial => 'shared/comment',:collection => @post_show.comments
+                = render :partial => 'shared/comment',:collection => @comments
+              .text-center= will_paginate @comments
+
               - if signed_in?
                 = render :partial => 'shared/comment_form', :locals => { :comment => @comment,:post =>@post_show, :url_link => "/project/#{@project.id}/life_tape/posts/#{@post_show.id}/add_comment"}
         .col-md-6

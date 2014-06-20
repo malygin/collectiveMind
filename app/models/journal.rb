@@ -27,5 +27,10 @@ class Journal < ActiveRecord::Base
     Journal.where(' project_id = ? AND type_event  IN (?) AND user_informed = ? AND viewed=?',project_id, @my_types, user_id, false).size
   end
 
+  def self.last_event_for(user, project_id)
+    Journal.where(' project_id = ? AND type_event NOT IN (?)',project_id, @my_types).where("user_id= (?)", user.id).order('created_at DESC').first
+
+  end
+
 
 end
