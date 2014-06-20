@@ -67,15 +67,10 @@ scope '/project/:project' do
   get 'life_tape/posts/check_field', to:  'life_tape/posts#check_field'
 
   get 'life_tape/posts/to_work', to:  'life_tape/posts#to_work'
-  put 'life_tape/posts/to_begin_work', to:  'life_tape/posts#to_begin_work'
   get 'discontent/posts/to_work', to:  'discontent/posts#to_work'
-  put 'discontent/posts/to_begin_work', to:  'discontent/posts#to_begin_work'
   get 'concept/posts/to_work', to:  'concept/posts#to_work'
-  put 'concept/posts/to_begin_work', to:  'concept/posts#to_begin_work'
   get 'plan/posts/to_work', to:  'plan/posts#to_work'
-  put 'plan/posts/to_begin_work', to:  'plan/posts#to_begin_work'
   get 'estimate/posts/to_work', to:  'estimate/posts#to_work'
-  put 'estimate/posts/to_begin_work', to:  'estimate/posts#to_begin_work'
 
   namespace :life_tape do
     posts_routes

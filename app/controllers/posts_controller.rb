@@ -4,13 +4,14 @@ class PostsController < ApplicationController
   before_filter :prepare_data, :only => [:index, :new, :edit, :show, :show_essay, 
     :vote_list, :essay_list]
   before_filter :journal_data, :only => [:index, :new, :edit, :show, :show_essay,
-    :vote_list, :essay_list]
+    :vote_list, :essay_list, :to_work]
   #before_filter :have_rights
   before_filter :have_rights, :only =>[:edit]
   before_filter :to_work_redirect, only: [:index]
 
 
   def journal_data
+    @project = Core::Project.find(params[:project])
     @my_journals_count = Journal.count_events_for_my_feed(@project.id, current_user)
     @my_journals  = Journal.events_for_my_feed @project.id, current_user.id, 5
   end
@@ -65,9 +66,8 @@ end
 
 def to_work_redirect
   @project = Core::Project.find(params[:project])
-  check = view_context.get_session_to_work?(session[:session_id])
   path_link = "/project/#{@project.id}/" + current_model.table_name.sub('_posts','/posts') + "/to_work"
-  redirect_to path_link unless check
+  redirect_to path_link unless params[:asp]
 end
 
 def add_comment
@@ -443,23 +443,11 @@ def index
 
   def to_work
     @project = Core::Project.find(params[:project])
-    @my_journals  = Journal.events_for_my_feed @project.id, current_user.id, 5
-    @my_journals_count = Journal.count_events_for_my_feed(@project.id, current_user)
-    @path_link = "/project/#{@project.id}/" + current_model.table_name.sub('_posts','/posts') + "/to_begin_work"
+    @path_link = "/project/#{@project.id}/" + current_model.table_name.sub('_posts','/posts') + "?asp=#{@project.aspects.first.id}"
 
     respond_to do |format|
-      format.html { render :layout => 'application_two_column_to_work'}
+      format.html { render :layout => 'application_two_column'}
     end
-  end
-
-  def to_begin_work
-    @project = Core::Project.find(params[:project])
-    @redirect = params[:redirect]
-    path_link = "/project/#{@project.id}/" + current_model.table_name.sub('_posts','/posts')
-    current_user.user_checks.where(project_id: @project.id, status: true, check_field: 'session_id').destroy_all
-    current_user.user_checks.create(project_id: @project.id, status: true, check_field: 'session_id', value: session[:session_id]).save!
-
-    redirect_to path_link
   end
 
   protected

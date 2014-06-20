@@ -48,8 +48,8 @@ end
       Journal.find(params[:viewed]).update_attribute(:viewed, true)
       @my_journals_count = Journal.count_events_for_my_feed(@project.id, current_user)
     end
-
     @comment = LifeTape::Comment.new
+
     respond_to do |format|
       format.html{render :layout  => 'application_two_column'}
       format.js {render 'posts/index' }
