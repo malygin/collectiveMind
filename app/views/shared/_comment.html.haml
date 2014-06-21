@@ -22,6 +22,8 @@
             = select_tag 'select_for_aspects_comments', options_from_collection_for_select(@aspects, "id", "content"),
             :prompt => 'Выберите тему', :onchange => "select_for_aspects_comments(this,#{@project.id},#{comment.id});"
       .pull-right
+        =link_to({:action => :add_child_comment_form, :id => comment.post.id, :comment_id => comment.id },  :remote => true, :method => :put,  id: "add_child_comment_#{comment.id}") do
+          %span.color-blue Ответить
         - if boss?
           - if signed_in? and not comment.users.include?(current_user)
             =link_to({:action => :plus_comment, :id => comment.id, :against => false},  :remote => true, :method => :put,  id: "plus_comment_#{comment.id}") do
@@ -39,6 +41,9 @@
             %span.glyphicon.glyphicon-thumbs-up.text-muted
             -#%span.text-muted= "Против #{comment.users_against.count}"
             -#%span.glyphicon.glyphicon-thumbs-down.text-muted
-    -#.row
-    -#  .col-md-10
-    -#    %small.text-muted= Russian::strftime(comment.created_at,"%d %B %k:%M:%S ")
+      .col-md-12
+        %div{:id => "child_comments_#{comment.id}"}
+          -unless comment.comments.empty?
+            - comment.comments.each do |c|
+              = render :partial => 'shared/child_comment', object: c
+        %div{:id => "child_comments_form_#{comment.id}"}

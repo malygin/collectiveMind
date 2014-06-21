@@ -1,0 +1,27 @@
+.chat-message{id: "comment_#{child_comment.id}"}
+  = render 'users/user_post', :user => child_comment.user
+  .chat-message-body.stage_menu1{id: "comment_content_#{child_comment.id}"}
+    .sender
+      =link_to child_comment.user, user_path(@project, child_comment.user)
+      = render partial: '/shared/user_online', object: child_comment.user
+      =club_status_show_user(child_comment.user)
+      - if child_comment.user.boss?
+        %span.label.label-danger MD
+    .text
+      %div{id: "comment_text_#{child_comment.id}"}
+        =simple_format(child_comment.content)
+      - if current_user?(child_comment.user) or boss?
+        %div.redactor{id: "redactor_comment_#{child_comment.id}"}
+          =link_to 'Редактировать', {:action => :edit_comment, :id => child_comment.id},:remote => true, :class => "text-success",id: "edit_comment_#{child_comment.id}"
+          \|
+          = link_to 'Удалить', {:action => :destroy_comment, :id => child_comment.id}, :method => :put, :remote => true, :confirm => 'Удалить комментарий?', :class => "text-danger",id: "destroy_comment_#{child_comment.id}"
+      .pull-right
+        - if boss?
+          - if signed_in? and not child_comment.users.include?(current_user)
+            =link_to({:action => :plus_comment, :id => child_comment.id, :against => false},  :remote => true, :method => :put,  id: "plus_comment_#{child_comment.id}") do
+              %span.text-success За
+              %span.text-success(id="plus_counter_comment_#{child_comment.id}")=child_comment.users_pro.count
+              %span.glyphicon.glyphicon-thumbs-up.text-success
+          -else
+            %span.text-muted= "За #{child_comment.users_pro.count}"
+            %span.glyphicon.glyphicon-thumbs-up.text-muted

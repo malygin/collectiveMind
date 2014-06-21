@@ -30,12 +30,12 @@ end
       @aspect =  Discontent::Aspect.find(params[:asp])
       @post_show = @aspect.life_tape_posts.first
 
-      @comments= @post_show.comments.paginate(:page => @page ? @page: last_page, :per_page => 10)
+      @comments= @post_show.comments.where(:comment_id => nil).paginate(:page => @page ? @page: last_page, :per_page => 10)
     else
       @aspect = @project.aspects.first
       @post_show = @aspect.life_tape_posts.first unless @aspect.nil?
 
-      @comments= @post_show.comments.paginate(:page => @page ? @page: last_page, :per_page => 10)
+      @comments= @post_show.comments.where(:comment_id => nil).paginate(:page => @page ? @page: last_page, :per_page => 10)
 
     end
 
@@ -159,7 +159,7 @@ end
   end
 
   def last_page
-    total_results = @post_show.comments.count
+    total_results = @post_show.comments.where(:comment_id => nil).count
     total_results / 10 + (total_results % 10 == 0 ? 0 : 1)
   end
 

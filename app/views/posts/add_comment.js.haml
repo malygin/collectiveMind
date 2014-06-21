@@ -1,11 +1,13 @@
-
 -#$('#Send').animate({left: 0, opacity: 0},  "normal",  function(){$('#Send').css('display','none')})
 -#$("#new_life_tape").animate({height: 0}, "normal", function(){$('#new_life_tape').css('display','none')})
 -#$("#add_record").fadeIn('slow')
-
-$("#comment_text_area").val('')
-$('.chat-messages').append("#{escape_javascript(render :partial => 'shared/comment', :object => @comment)}")
-$(".chat-messages").scrollTop(10000);
-$('#comment_success').fadeIn('slow').delay(1000).fadeOut('slow');
 -#$('#send').addClass('disabled')
 
+-if @main_comment.nil?
+  $("#comment_text_area").val('')
+  $('.chat-messages').append("#{escape_javascript(render :partial => 'shared/comment', :object => @comment)}")
+  $(".chat-messages").scrollTop(10000);
+  $('#comment_success').fadeIn('slow').delay(1000).fadeOut('slow');
+-else
+  $("#child_comments_#{@main_comment.id}").append("#{escape_javascript(render :partial => 'shared/child_comment', :object => @comment)}");
+  $("#child_comments_form_#{@main_comment.id}").html('')

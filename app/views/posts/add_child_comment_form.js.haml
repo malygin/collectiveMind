@@ -1,0 +1,1 @@
+$("#child_comments_form_#{@main_comment.id}").html("#{escape_javascript(render :partial => 'shared/comment_form', :locals => { :comment => @comment, :url_link => @url_link })}");

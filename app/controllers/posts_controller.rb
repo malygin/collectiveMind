@@ -75,8 +75,9 @@ def add_comment
     @project = Core::Project.find(params[:project])
     @aspects = Discontent::Aspect.where(:project_id => @project)
     post = current_model.find(params[:id])
+    @main_comment = comment_model.find(params[:main_comment]) unless params[:main_comment].nil?
     unless  params[name_of_comment_for_param][:content]==''
-      @comment = post.comments.create(:content => params[name_of_comment_for_param][:content], :user =>current_user)
+      @comment = post.comments.create(:content => params[name_of_comment_for_param][:content], :user =>current_user, :comment_id => @main_comment ? @main_comment.id : nil)
       if  post.instance_of? LifeTape::Post
         current_user.journals.build(:type_event=>name_of_comment_for_param+'_save', :project => @project, :body=>"#{@comment.content[0..148].sub(':',' ')}:?asp=#{post.discontent_aspects.first.id}#comment_#{@comment.id}").save!
       else
@@ -108,6 +109,16 @@ def add_comment
     #redirect_to polymorphic_path(post, :project => @project.id)
  end
 
+  def add_child_comment_form
+    @project = Core::Project.find(params[:project])
+    @post = current_model.find(params[:id])
+    @main_comment = comment_model.find(params[:comment_id])
+    @comment = comment_model.new
+    @url_link = "/project/#{@project.id}/" + current_model.table_name.sub('_posts','/posts') + "/#{@post.id}/add_comment?main_comment=#{@main_comment.id}"
+    respond_to do |format|
+      format.js
+    end
+  end
 
 def index
     @posts = current_model.where(:project_id => @project).paginate(:page => params[:page])
@@ -304,7 +315,7 @@ def index
     @against =  params[:against] == 'true'
     comment.comment_votings.create(:user => current_user, :comment => comment,  :against => @against) unless comment.users.include? current_user
     comment.user.add_score(:type => :plus_comment, :project => Core::Project.find(params[:project]), :comment => comment, :path =>  comment.post.class.name.underscore.pluralize)  if current_user.boss? or comment.comment_votings.count == 3
-
+    @main_comment = comment.comment.id if comment.comment.nil?
     respond_to do |format|
       format.js
     end
