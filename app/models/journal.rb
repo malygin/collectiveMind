@@ -24,7 +24,7 @@ class Journal < ActiveRecord::Base
   end
 
   def self.count_events_for_my_feed(project_id, user_id)
-    Journal.where(' project_id = ? AND type_event  IN (?) AND user_informed = ? AND viewed=?',project_id, @my_types, user_id, false).size
+    Journal.where(' project_id = ? AND type_event  IN (?) AND user_informed = ? AND viewed=?',project_id, @my_types, user_id, false).count
   end
 
   def self.last_event_for(user, project_id)
