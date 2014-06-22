@@ -139,14 +139,15 @@
       #flash-panel.panel.panel-danger(style="display:none;")
         %h4 Для сохранения несовершенства:
         .panel-body#flash
-      %button#send_post.btn.btn-primary(type="submit" onclick='disontent_form_submit();'){:class => ('disabled' unless @post.content?)} Сохранить
-      %br
-      %br
-      =link_to 'Назад', discontent_posts_path(@project)
       %hr
       %p#discontent_success(style="display:none;")
         %strong Готово! Спасибо за добавление несовершенства!
       %p#redirect_success
+      %hr
+      %button#send_post.btn.btn-primary(type="submit" onclick='disontent_form_submit();'){:class => ('disabled' unless @post.content?)} Сохранить
+      %br
+      %br
+      =link_to 'Назад', discontent_posts_path(@project)
 
 
       -#%p#discontent_warning
