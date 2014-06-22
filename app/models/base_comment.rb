@@ -4,8 +4,8 @@ module BaseComment  extend ActiveSupport::Concern
     belongs_to :user
     belongs_to :post
 
-    has_many :comments, :class_name => 'LifeTape::Comment', :foreign_key => 'comment_id'
-    belongs_to :comment, :class_name => 'LifeTape::Comment', :foreign_key => 'comment_id'
+    has_many :comments, :foreign_key => 'comment_id'
+    belongs_to :comment, :foreign_key => 'comment_id'
 
     has_many :comment_votings
     has_many :users, :through => :comment_votings

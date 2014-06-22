@@ -571,3 +571,7 @@ $('#select_for_aspects').on 'change', ->
       data:
         comment_id: comment_id
         aspect_id: aspect_id
+
+
+@reset_child_comment_form= (comment)->
+  $('#child_comments_form_'+comment).empty()

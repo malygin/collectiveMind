@@ -137,7 +137,8 @@ def index
       Journal.find(params[:viewed]).update_attribute(:viewed, true)
       @my_journals_count = Journal.count_events_for_my_feed(@project.id, current_user)
     end
-    @comments = @post.comments.paginate(:page => params[:page], :per_page => 30)
+
+    @comments = @post.comments.where(:comment_id => nil).paginate(:page => params[:page], :per_page => 30)
     #puts "___________"
     #puts @post
     # @path_link ='/'+ self.class.to_s.split("::").first.tableize.singularize+'/comments/'

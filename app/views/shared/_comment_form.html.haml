@@ -7,10 +7,17 @@
                 -if comment.get_class == "LifeTape" or comment.get_class == "Concept"
                     =f.text_area :content, :class => 'form-control input-transparent', style: 'height: 70px;', placeholder: 'Ваш комментарий', id:"comment_text_area", onkeyup: "activate_button(this);"
                     .pull-right
+                        -if @main_comment
+                            %button.btn.btn-danger.btn-xs(type="button" onclick="reset_child_comment_form(#{@main_comment.id}); return false;" ) Отменить
                         =f.submit 'Отправить', :id  => "send_post", class: 'btn btn-sm btn-info disabled', onclick: 'disable_send_button();'
+
                 -else
                     =f.text_area :content, :class => 'form-control', style: 'height: 70px;', placeholder: 'Ваш комментарий', id:'comment_text_area', onkeyup: "activate_button(this);"
                     .pull-right
+                        -if @main_comment
+                            %button.btn.btn-danger.btn-xs(type="button" onclick="reset_child_comment_form(#{@main_comment.id}); return false;" ) Отменить
                         =f.submit 'Отправить', :id  => "send_post", class: 'btn btn-sm btn-info disabled', onclick: 'disable_send_button();'
+
+
             .text-success#comment_success(style='display:none;')
                 Комментарий успешно добавлен

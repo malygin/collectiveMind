@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140620224917) do
+ActiveRecord::Schema.define(:version => 20140621210443) do
 
   create_table "answers", :force => true do |t|
     t.string   "text"
@@ -69,6 +69,7 @@ ActiveRecord::Schema.define(:version => 20140620224917) do
     t.datetime "created_at",                    :null => false
     t.datetime "updated_at",                    :null => false
     t.boolean  "censored",   :default => false
+    t.integer  "comment_id"
   end
 
   add_index "concept_comments", ["created_at"], :name => "index_concept_comments_on_created_at"
@@ -318,6 +319,7 @@ ActiveRecord::Schema.define(:version => 20140620224917) do
     t.datetime "created_at",                    :null => false
     t.datetime "updated_at",                    :null => false
     t.boolean  "censored",   :default => false
+    t.integer  "comment_id"
   end
 
   create_table "discontent_notes", :force => true do |t|
@@ -480,6 +482,7 @@ ActiveRecord::Schema.define(:version => 20140620224917) do
     t.datetime "created_at",                    :null => false
     t.datetime "updated_at",                    :null => false
     t.boolean  "censored",   :default => false
+    t.integer  "comment_id"
   end
 
   add_index "estimate_comments", ["post_id"], :name => "index_estimate_comments_on_post_id"
@@ -912,6 +915,7 @@ ActiveRecord::Schema.define(:version => 20140620224917) do
     t.datetime "created_at",                    :null => false
     t.datetime "updated_at",                    :null => false
     t.boolean  "censored",   :default => false
+    t.integer  "comment_id"
   end
 
   add_index "plan_comments", ["post_id"], :name => "index_plan_comments_on_post_id"
