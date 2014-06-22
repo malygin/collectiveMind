@@ -456,7 +456,11 @@ def index
 
   def to_work
     @project = Core::Project.find(params[:project])
-    @path_link = "/project/#{@project.id}/" + current_model.table_name.sub('_posts','/posts') + "?asp=#{@project.aspects.first.id}"
+    if current_model == "LifeTape"
+      @path_link = "/project/#{@project.id}/" + current_model.table_name.sub('_posts','/posts') + "?asp=#{@project.aspects.first.id}"
+    else
+      @path_link = "/project/#{@project.id}/" + current_model.table_name.sub('_posts','/posts') + "?asp=#{@project.proc_aspects.first.id}"
+    end
 
     respond_to do |format|
       format.html { render :layout => 'application_two_column'}
