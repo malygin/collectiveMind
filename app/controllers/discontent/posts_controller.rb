@@ -69,7 +69,7 @@ class Discontent::PostsController < PostsController
     if params[:asp]
       @aspect_post =  Discontent::Aspect.find(params[:asp])
     else
-      @aspect_post = @project.aspects.first
+      @aspect_post = @project.proc_aspects.first
     end
     #@post = current_model.new
     @order = params[:order]
