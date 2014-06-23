@@ -3,13 +3,15 @@
 = form_tag(discontent_posts_fast_discussion_discontents_path(@project, asp_id: @aspect, dis_id: @post, save_form: true), {method: :get, remote: true, id: 'form_add_discussion'}) do
   -#%label{:for => "select_for_aspects"} Выберите тему
   -#= select_tag 'select_for_discussion_aspects', options_from_collection_for_select(@aspects, "id", "content"), class: 'select-block-level', onchange: "discussion_select_aspect(this);"
-  %br
   .text-info#comment_info(style='display:none;')
     Пока ни одно несовершенство по данной теме не было обработано
   %hr
   %h4.text-success Несовершенство:
   %div{:id => "update_discontent_discussion"}
     = render partial: 'post_for_discussion', object: @post unless @post.nil?
+  %br
+  = link_to 'Пропустить несовершенство', discontent_posts_fast_discussion_discontents_path(@project, asp_id: @aspect, dis_id: @post, empty_discussion: true), remote: true, id: 'empty_discussion', class: 'btn btn-danger'
+  %br
   %br
   %p
     Прокомментируйте указанное несовершенство и переходите к следующему.
@@ -21,4 +23,3 @@
   %br
   .pull-right
     %input.btn.btn-success{:type => "submit",:id  => "send_discussion", :value => "Сохранить и перейти к следующему несовершенству"}
-= link_to 'Пропустить несовершенство', discontent_posts_fast_discussion_discontents_path(@project, asp_id: @aspect, dis_id: @post, empty_discussion: true), remote: true, id: 'empty_discussion', class: 'btn btn-danger'

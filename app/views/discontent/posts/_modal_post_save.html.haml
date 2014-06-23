@@ -4,16 +4,14 @@
       .modal-header
         %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} ×
       .modal-body
-        %h4.text-center.color-green Несовершенство успешно сохранено!
-        %h4.text-center.color-blue Спасибо за добавление несовершенства!
-        %h4.text-center
-          %p Хотите добавить еще одно или перейти к просмотру добавленного несовершенства?
+        %h3.text-center.color-green  Ваше несовершенство добавлено! Вы можете добавить еще одно или перейти к просмотру списка несовершенств.
         %hr
         .text-center
           .col-md-6
-            %a.btn.btn-primary(data-dismiss="modal") Добавить еще одно
+            %a.btn.btn-lg.btn-primary(data-dismiss="modal") Добавить еще одно
           .col-md-6
-            =link_to 'Перейти к просмотру', discontent_post_path(@project, @post), :class => "btn btn-success"
+            =link_to 'Перейти к списку', "/project/#{@project.id}/discontent/posts?asp=#{@project.proc_aspects.first.id}", :class => "btn btn-lg btn-success"
+
         %br
         %br
 
