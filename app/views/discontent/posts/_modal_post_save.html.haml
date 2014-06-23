@@ -1,0 +1,25 @@
+#modal_save_discontent.modal.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :style => "display: none;", :tabindex => "-1"}
+  .modal-dialog
+    .modal-content
+      .modal-header
+        %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} ×
+      .modal-body
+        %h4.text-center.color-green Несовершенство успешно сохранено!
+        %h4.text-center.color-blue Спасибо за добавление несовершенства!
+        %h4.text-center
+          %p Хотите добавить еще одно или перейти к просмотру добавленного несовершенства?
+        %hr
+        .text-center
+          .col-md-6
+            %a.btn.btn-primary(data-dismiss="modal") Добавить еще одно
+          .col-md-6
+            =link_to 'Перейти к просмотру', discontent_post_path(@project, @post), :class => "btn btn-success"
+        %br
+        %br
+
+-#.modal-footer
+-#  %button.btn.btn-default(type = "button" data-dismiss="modal") Закрыть
+
+-##form_fast_discussion
+-#  = render :partial => 'form_fast_discussion', :locals => { :aspect => @aspect, :post_show => @post_show }
+

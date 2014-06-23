@@ -76,8 +76,14 @@ def add_comment
     @aspects = Discontent::Aspect.where(:project_id => @project)
     post = current_model.find(params[:id])
     @main_comment = comment_model.find(params[:main_comment]) unless params[:main_comment].nil?
+    @comment_user = User.find(params[:comment_user]) unless params[:comment_user].nil?
+    if @comment_user
+      content = "#{@comment_user.to_s}, " + params[name_of_comment_for_param][:content]
+    else
+      content = params[name_of_comment_for_param][:content]
+    end
     unless  params[name_of_comment_for_param][:content]==''
-      @comment = post.comments.create(:content => params[name_of_comment_for_param][:content], :user =>current_user, :comment_id => @main_comment ? @main_comment.id : nil)
+      @comment = post.comments.create(:content => content, :user =>current_user, :comment_id => @main_comment ? @main_comment.id : nil)
       if  post.instance_of? LifeTape::Post
         current_user.journals.build(:type_event=>name_of_comment_for_param+'_save', :project => @project, :body=>"#{@comment.content[0..148].sub(':',' ')}:?asp=#{post.discontent_aspects.first.id}#comment_#{@comment.id}").save!
       else
@@ -113,8 +119,13 @@ def add_comment
     @project = Core::Project.find(params[:project])
     @post = current_model.find(params[:id])
     @main_comment = comment_model.find(params[:comment_id])
+    @comment_user = User.find(params[:comment_user]) unless params[:comment_user].nil?
     @comment = comment_model.new
-    @url_link = "/project/#{@project.id}/" + current_model.table_name.sub('_posts','/posts') + "/#{@post.id}/add_comment?main_comment=#{@main_comment.id}"
+    if @comment_user
+      @url_link = "/project/#{@project.id}/" + current_model.table_name.sub('_posts','/posts') + "/#{@post.id}/add_comment?main_comment=#{@main_comment.id}&comment_user=#{@comment_user.id}"
+    else
+      @url_link = "/project/#{@project.id}/" + current_model.table_name.sub('_posts','/posts') + "/#{@post.id}/add_comment?main_comment=#{@main_comment.id}"
+    end
     respond_to do |format|
       format.js
     end

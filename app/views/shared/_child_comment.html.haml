@@ -16,6 +16,8 @@
           \|
           = link_to 'Удалить', {:action => :destroy_comment, :id => child_comment.id}, :method => :put, :remote => true, :confirm => 'Удалить комментарий?', :class => "text-danger",id: "destroy_comment_#{child_comment.id}"
       .pull-right
+        =link_to({:action => :add_child_comment_form, :id => child_comment.comment.post.id, :comment_id => child_comment.comment.id, :comment_user => child_comment.user }, :remote => true, :method => :put,  id: "add_child_comment_#{child_comment.id}") do
+          %span.label.label-primary Ответить
         - if boss?
           - if signed_in? and not child_comment.users.include?(current_user)
             =link_to({:action => :plus_comment, :id => child_comment.id, :against => false},  :remote => true, :method => :put,  id: "plus_comment_#{child_comment.id}") do

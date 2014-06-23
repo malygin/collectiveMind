@@ -27,9 +27,10 @@
           2 этап: Анализ ситуации.
           =@aspect_post.content
           %br
-          %small
-            Сбор несовершенств в рамках процедуры:
-            =@project.name
+        %span(style='font-size: 20px;line-height: 30px;')
+          Сбор несовершенств в рамках процедуры:
+          =@project.name
+
       - if signed_in? and (@project.status == 3 or @project.status == 4 or @project.status == 5)
         .col-md-3
           .pull-right
