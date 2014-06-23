@@ -390,6 +390,7 @@ class Discontent::PostsController < PostsController
       elsif !params[:dis_id].nil? and !params[:asp_id].nil?
         index = @aspects.index @discontent_aspect
         @able = true
+        able_save = 0
         while @able do
           @aspect = @aspects[index]
           @posts_for_discussion = @aspect.aspect_posts.posts_for_discussions(@project).by_status(status).by_discussions(user_discussion_posts).select('distinct "discontent_posts".*').order('"discontent_posts"."id"')
@@ -401,8 +402,9 @@ class Discontent::PostsController < PostsController
                   @able = false if @post != @posts_for_discussion.last or (@posts_for_discussion.size == 1 and @aspect != @discontent_aspect) or (@aspect == @discontent_aspect and @post.id > @discontent_post.id)
                   break
                 elsif params[:save_form]
-                  if !params[:discussion].empty?  and not (@aspect != @discontent_aspect and @post == @discontent_post)
+                  if !params[:discussion].empty?  and not (@aspect != @discontent_aspect and @post == @discontent_post) and able_save == 0
                     @comment = @discontent_post.comments.create(:content => params[:discussion], :user => current_user)
+                    able_save += 1
                     current_user.journals.build(:type_event=>'discontent_comment'+'_save', :project => @project, :body=>"#{@comment.content[0..48]}:#{@discontent_post.id}#comment_#{@comment.id}").save!
                     if @post.user!=current_user
                       current_user.journals.build(:type_event=>'my_'+'discontent_comment', :user_informed => @discontent_post.user, :project => @project, :body=>"#{@comment.content[0..24]}:#{@discontent_post.id}#comment_#{@comment.id}", :viewed=> false).save!
