@@ -130,10 +130,10 @@
             %b  Выберите тип несовершенства
             %label.radio-inline
               = f.radio_button :style,  '1', :checked => "checked"
-              %span.text-danger Имеющиеся недостатки
+              %span.label.label-danger Имеющиеся недостатки
             %label.radio-inline
               = f.radio_button :style,  '0'
-              %span.text-success Отсутствующие достоинства
+              %span.label.label-success Отсутствующие достоинства
 
       %br
       #flash-panel.panel.panel-danger(style="display:none;")
