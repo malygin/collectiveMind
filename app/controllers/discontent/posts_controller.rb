@@ -182,6 +182,7 @@ class Discontent::PostsController < PostsController
      user_for_post.journals.build(:type_event=>name_of_model_for_param+"_save", :project => @project, :body=>"#{@post.content}:#{@post.id}").save!
      user_for_post.add_score(:type => :add_discontent_post)
      if !params[:discontent_post_aspects].nil? and @posts.nil? and (@flash.nil? or @flash.empty?)
+       @aspect_id =  params[:discontent_post_aspects].first
        params[:discontent_post_aspects].each do |asp|
          aspect = Discontent::PostAspect.create(post_id: @post.id, aspect_id: asp.to_i)
          aspect.save!
