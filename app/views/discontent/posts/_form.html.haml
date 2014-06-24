@@ -129,7 +129,7 @@
           .form-group.text-center
             %b  Выберите тип несовершенства
             %label.radio-inline
-              = f.radio_button :style,  '1'
+              = f.radio_button :style,  '1', :checked => "checked"
               %span.text-danger Имеющиеся недостатки
             %label.radio-inline
               = f.radio_button :style,  '0'
