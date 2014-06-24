@@ -17,7 +17,7 @@ class Discontent::PostsController < PostsController
   def autocomplete_discontent_post_whend
     pr=Set.new
     pr.merge(Discontent::PostWhen.where(:project_id => params[:project]).map {|d| {:value => d.content}})
-    if params[:term].length > 1
+    if params[:term].length > -1
       pr.merge(Discontent::Post.select("DISTINCT whend as value").where("LOWER(whend) like LOWER(?)", "%#{params[:term]}%")
                .where(:project_id => params[:project]).map {|d| {:value => d.value } })
     end
@@ -27,7 +27,7 @@ class Discontent::PostsController < PostsController
  def autocomplete_discontent_post_whered
     pr=Set.new
     pr.merge(Discontent::PostWhere.where(:project_id => params[:project]).map {|d| {:value => d.content}})
-    if params[:term].length > 1
+    if params[:term].length > -1
       pr.merge(Discontent::Post.select("DISTINCT whered as value").where("LOWER(whered) like LOWER(?)", "%#{params[:term]}%")
                .where(:project_id => params[:project]).map {|d| {:value => d.value } })
     end
