@@ -161,7 +161,7 @@
               #render_new_concept_side
               .col-md-4#concept_side
                 - unless @post.post_stages.nil?
-                  %ul#menu-levels-collapse.side-nav.liFixar
+                  %ul#menu-levels-collapse.side-nav
                     -@post.post_stages.each_with_index do |stage, index|
                       %li.panel
                         %a.accordion-toggle{"data-parent" => "#menu-levels-collapse", "data-toggle" => "collapse", :href => "#sub-menu-#{index}-collapse"}

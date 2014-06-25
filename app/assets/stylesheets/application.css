@@ -19454,7 +19454,7 @@ ol.text-list {
     display: none;
   }
   .sidebar .panel-collapse li a {
-    width: 1px;
+    /*width: 1px;*/
     padding-left: 10px;
     -moz-transition: width 0.3s;
     -o-transition: width 0.3s;
@@ -19522,7 +19522,7 @@ ol.text-list {
   }
 
   .wrap {
-    margin-left: 220px;
+    margin-left: 140px;
   }
 
   .sidebar-hidden .sidebar {
@@ -19671,7 +19671,7 @@ ol.text-list {
   }
 
   .sidebar + .wrap, .sidebar-on-right .sidebar + .wrap {
-    margin-left: 200;
+    margin-left: 0;
     margin-right: 0;
   }
 

@@ -16,6 +16,7 @@
 #= require wizard/jquery.maskedinput
 #= require wizard/select2
 #= require bootstrap3-editable/bootstrap-editable
+#= require wizard/jquery.pjax
 
 $('#modal_help').modal
   keyboard: false

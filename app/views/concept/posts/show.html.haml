@@ -23,187 +23,181 @@
             %br
 
       .row
-        .col-md-12
+        .col-md-6
+          %section.widget
+            .body
+              %h5.color-orange.text-center
+                %b=tp.title
+              %p
+                .badge.badge-mutted A 1
+                -if boss? and @project.status == 7
+                  =link_to({:controller => 'concept/posts', :action => :status_post, :id => @post.id, :type_field => 1},:remote => true,:method => :put, :id => "label_post_#{@post.id}",:class => "note_text") do
+                    %span(class= "#{class_for_concept_type_field(@post,1)}" id="#{id_for_concept_type(1)}")=t('form.novation_what')
+                    =link_to({:controller => 'concept/posts', :action => :new_note, :id => @post.id, :type_field => 1},:remote => true,:method => :put, :id => "btn_note_1", :class => "note_text") do
+                      .label.label-danger замечание
+                -else
+                  %span(class= "#{class_for_concept_type_field(@post,1)}" id="name")=t('form.novation_what')
+              .form-group
+                =simple_format(tp.name)
+              -if @project.status == 7
+                = render partial: 'concept/posts/note_list', :locals => {:post_field => @post,:type_fd => 1}
 
-          %table.table
-            %tbody
-              %tr
-                %td.col-md-6
-                  %section.widget
-                    .body
-                      %h5.color-orange.text-center
-                        %b=tp.title
-                      %p
-                        .badge.badge-mutted A 1
-                        -if boss? and @project.status == 7
-                          =link_to({:controller => 'concept/posts', :action => :status_post, :id => @post.id, :type_field => 1},:remote => true,:method => :put, :id => "label_post_#{@post.id}",:class => "note_text") do
-                            %span(class= "#{class_for_concept_type_field(@post,1)}" id="#{id_for_concept_type(1)}")=t('form.novation_what')
-                            =link_to({:controller => 'concept/posts', :action => :new_note, :id => @post.id, :type_field => 1},:remote => true,:method => :put, :id => "btn_note_1", :class => "note_text") do
-                              .label.label-danger замечание
-                        -else
-                          %span(class= "#{class_for_concept_type_field(@post,1)}" id="name")=t('form.novation_what')
-                      .form-group
-                        =simple_format(tp.name)
-                      -if @project.status == 7
-                        = render partial: 'concept/posts/note_list', :locals => {:post_field => @post,:type_fd => 1}
+          %section.widget
+            .body
+              %p
+                .badge.badge-mutted A 2
+                -if boss? and @project.status == 7
+                  =link_to({:controller => 'concept/posts', :action => :status_post, :id => @post.id, :type_field => 2},:remote => true,:method => :put, :id => "label_post_#{@post.id}",:class => "note_text") do
+                    %span(class= "#{class_for_concept_type_field(@post,2)}" id="#{id_for_concept_type(2)}")=t('form.novation_how')
+                    =link_to({:controller => 'concept/posts', :action => :new_note, :id => @post.id, :type_field => 2},:remote => true,:method => :put, :id => "btn_note_2", :class => "note_text") do
+                      .label.label-danger замечание
+                -else
+                  %span(class= "#{class_for_concept_type_field(@post,2)}" id="content")=t('form.novation_how')
 
-                  %section.widget
-                    .body
-                      %p
-                        .badge.badge-mutted A 2
-                        -if boss? and @project.status == 7
-                          =link_to({:controller => 'concept/posts', :action => :status_post, :id => @post.id, :type_field => 2},:remote => true,:method => :put, :id => "label_post_#{@post.id}",:class => "note_text") do
-                            %span(class= "#{class_for_concept_type_field(@post,2)}" id="#{id_for_concept_type(2)}")=t('form.novation_how')
-                            =link_to({:controller => 'concept/posts', :action => :new_note, :id => @post.id, :type_field => 2},:remote => true,:method => :put, :id => "btn_note_2", :class => "note_text") do
-                              .label.label-danger замечание
-                        -else
-                          %span(class= "#{class_for_concept_type_field(@post,2)}" id="content")=t('form.novation_how')
+              .form-group.has-danger
+                =simple_format(tp.content)
+              -if @project.status == 7
+                = render partial: 'concept/posts/note_list', :locals => {:post_field => @post,:type_fd => 2}
 
-                      .form-group.has-danger
-                        =simple_format(tp.content)
-                      -if @project.status == 7
-                        = render partial: 'concept/posts/note_list', :locals => {:post_field => @post,:type_fd => 2}
+          %section.widget
+            .body
+              %p
+                .badge.badge-mutted В 1
+                -if boss? and @project.status == 7
+                  =link_to({:controller => 'concept/posts', :action => :status_post, :id => @post.id, :type_field => 3},:remote => true,:method => :put, :id => "label_post_#{@post.id}",:class => "note_text") do
+                    %span(class= "#{class_for_concept_type_field(@post,3)}" id="#{id_for_concept_type(3)}")=t('form.cond')
+                    =link_to({:controller => 'concept/posts', :action => :new_note, :id => @post.id, :type_field => 3},:remote => true,:method => :put, :id => "btn_note_3", :class => "note_text") do
+                      .label.label-danger замечание
+                -else
+                  %span(class= "#{class_for_concept_type_field(@post,3)}" id="positive")=t('form.cond')
 
-                  %section.widget
-                    .body
-                      %p
-                        .badge.badge-mutted В 1
-                        -if boss? and @project.status == 7
-                          =link_to({:controller => 'concept/posts', :action => :status_post, :id => @post.id, :type_field => 3},:remote => true,:method => :put, :id => "label_post_#{@post.id}",:class => "note_text") do
-                            %span(class= "#{class_for_concept_type_field(@post,3)}" id="#{id_for_concept_type(3)}")=t('form.cond')
-                            =link_to({:controller => 'concept/posts', :action => :new_note, :id => @post.id, :type_field => 3},:remote => true,:method => :put, :id => "btn_note_3", :class => "note_text") do
-                              .label.label-danger замечание
-                        -else
-                          %span(class= "#{class_for_concept_type_field(@post,3)}" id="positive")=t('form.cond')
+              .form-group.has-success= display_content(tp.positive)
+              -if @project.status == 7
+                = render partial: 'concept/posts/note_list', :locals => {:post_field => @post,:type_fd => 3}
+          %section.widget
+            .body
+              %p
+                .badge.badge-mutted В 2
+                -if boss? and @project.status == 7
+                  =link_to({:controller => 'concept/posts', :action => :status_post, :id => @post.id, :type_field => 4},:remote => true,:method => :put, :id => "label_post_#{@post.id}",:class => "note_text") do
+                    %span(class= "#{class_for_concept_type_field(@post,4)}" id="#{id_for_concept_type(4)}") Какие ресурсы необходимы?
+                    =link_to({:controller => 'concept/posts', :action => :new_note, :id => @post.id, :type_field => 4},:remote => true,:method => :put, :id => "btn_note_4", :class => "note_text") do
+                      .label.label-danger замечание
+                -else
+                  %span(class= "#{class_for_concept_type_field(@post,4)}" id="positive_r")=t('form.cond_res')
+              %br
+              %br
+              %table.table.table-striped.table-bordered
+                %thead
+                  %tr
+                    %th
+                      ="#"
+                    %th
+                      Название
+                    %th
+                      Пояснение
+                %tbody
+                  - @post.concept_post_resources.each_with_index  do |r, index|
+                    %tr
+                      %td
+                        =index+1
+                      %td
+                        =r.name
+                      %td
+                        =r.desc
 
-                      .form-group.has-success= display_content(tp.positive)
-                      -if @project.status == 7
-                        = render partial: 'concept/posts/note_list', :locals => {:post_field => @post,:type_fd => 3}
-                  %section.widget
-                    .body
-                      %p
-                        .badge.badge-mutted В 2
-                        -if boss? and @project.status == 7
-                          =link_to({:controller => 'concept/posts', :action => :status_post, :id => @post.id, :type_field => 4},:remote => true,:method => :put, :id => "label_post_#{@post.id}",:class => "note_text") do
-                            %span(class= "#{class_for_concept_type_field(@post,4)}" id="#{id_for_concept_type(4)}") Какие ресурсы необходимы?
-                            =link_to({:controller => 'concept/posts', :action => :new_note, :id => @post.id, :type_field => 4},:remote => true,:method => :put, :id => "btn_note_4", :class => "note_text") do
-                              .label.label-danger замечание
-                        -else
-                          %span(class= "#{class_for_concept_type_field(@post,4)}" id="positive_r")=t('form.cond_res')
-                      %br
-                      %br
-                      %table.table.table-striped.table-bordered
-                        %thead
-                          %tr
-                            %th
-                              ="#"
-                            %th
-                              Название
-                            %th
-                              Пояснение
-                        %tbody
-                          - @post.concept_post_resources.each_with_index  do |r, index|
-                            %tr
-                              %td
-                                =index+1
-                              %td
-                                =r.name
-                              %td
-                                =r.desc
+              -if @project.status == 7
+                = render partial: 'concept/posts/note_list', :locals => {:post_field => @post,:type_fd => 4}
 
-                      -if @project.status == 7
-                        = render partial: 'concept/posts/note_list', :locals => {:post_field => @post,:type_fd => 4}
+          %section.widget
+            .body
+              %p
+                .badge.badge-mutted С 1
+                -if boss? and @project.status == 7
+                  =link_to({:controller => 'concept/posts', :action => :status_post, :id => @post.id, :type_field => 5},:remote => true,:method => :put, :id => "label_post_#{@post.id}",:class => "note_text") do
+                    %span(class= "#{class_for_concept_type_field(@post,5)}" id="#{id_for_concept_type(5)}")=t('form.negative')
+                    =link_to({:controller => 'concept/posts', :action => :new_note, :id => @post.id, :type_field => 5},:remote => true,:method => :put, :id => "btn_note_5", :class => "note_text") do
+                      .label.label-danger замечание
+                -else
+                  %span(class= "#{class_for_concept_type_field(@post,5)}" id= "negative")=t('form.negative')
 
-                  %section.widget
-                    .body
-                      %p
-                        .badge.badge-mutted С 1
-                        -if boss? and @project.status == 7
-                          =link_to({:controller => 'concept/posts', :action => :status_post, :id => @post.id, :type_field => 5},:remote => true,:method => :put, :id => "label_post_#{@post.id}",:class => "note_text") do
-                            %span(class= "#{class_for_concept_type_field(@post,5)}" id="#{id_for_concept_type(5)}")=t('form.negative')
-                            =link_to({:controller => 'concept/posts', :action => :new_note, :id => @post.id, :type_field => 5},:remote => true,:method => :put, :id => "btn_note_5", :class => "note_text") do
-                              .label.label-danger замечание
-                        -else
-                          %span(class= "#{class_for_concept_type_field(@post,5)}" id= "negative")=t('form.negative')
+              .form-group.has-success= display_content(tp.negative)
+              -if @project.status == 7
+                = render partial: 'concept/posts/note_list', :locals => {:post_field => @post,:type_fd => 5}
 
-                      .form-group.has-success= display_content(tp.negative)
-                      -if @project.status == 7
-                        = render partial: 'concept/posts/note_list', :locals => {:post_field => @post,:type_fd => 5}
+          %section.widget
+            .body
+              %p
+                .badge.badge-mutted С 2
+                -if boss? and @project.status == 7
+                  =link_to({:controller => 'concept/posts', :action => :status_post, :id => @post.id, :type_field => 6},:remote => true,:method => :put, :id => "label_post_#{@post.id}",:class => "note_text") do
+                    %span(class= "#{class_for_concept_type_field(@post,6)}" id="#{id_for_concept_type(6)}")=t('form.negative_res')
+                    =link_to({:controller => 'concept/posts', :action => :new_note, :id => @post.id, :type_field => 6},:remote => true,:method => :put, :id => "btn_note_6", :class => "note_text") do
+                      .label.label-danger замечание
+                -else
+                  %span(class= "#{class_for_concept_type_field(@post,6)}" id= "negative_r")=t('form.negative_res')
 
-                  %section.widget
-                    .body
-                      %p
-                        .badge.badge-mutted С 2
-                        -if boss? and @project.status == 7
-                          =link_to({:controller => 'concept/posts', :action => :status_post, :id => @post.id, :type_field => 6},:remote => true,:method => :put, :id => "label_post_#{@post.id}",:class => "note_text") do
-                            %span(class= "#{class_for_concept_type_field(@post,6)}" id="#{id_for_concept_type(6)}")=t('form.negative_res')
-                            =link_to({:controller => 'concept/posts', :action => :new_note, :id => @post.id, :type_field => 6},:remote => true,:method => :put, :id => "btn_note_6", :class => "note_text") do
-                              .label.label-danger замечание
-                        -else
-                          %span(class= "#{class_for_concept_type_field(@post,6)}" id= "negative_r")=t('form.negative_res')
+              .form-group.has-success= display_content(tp.negative_r)
+              -if @project.status == 7
+                = render partial: 'concept/posts/note_list', :locals => {:post_field => @post,:type_fd => 6}
 
-                      .form-group.has-success= display_content(tp.negative_r)
-                      -if @project.status == 7
-                        = render partial: 'concept/posts/note_list', :locals => {:post_field => @post,:type_fd => 6}
+          %section.widget
+            .body
+              %p
+                .badge.badge-mutted D 1
+                -if boss? and @project.status == 7
+                  =link_to({:controller => 'concept/posts', :action => :status_post, :id => @post.id, :type_field => 7},:remote => true,:method => :put, :id => "label_post_#{@post.id}",:class => "note_text") do
+                    %span(class= "#{class_for_concept_type_field(@post,7)}" id="#{id_for_concept_type(7)}")=t('form.problems')
+                    =link_to({:controller => 'concept/posts', :action => :new_note, :id => @post.id, :type_field => 7},:remote => true,:method => :put, :id => "btn_note_7", :class => "note_text") do
+                      .label.label-danger замечание
+                -else
+                  %span(class= "#{class_for_concept_type_field(@post,7)}" id="problems")=t('form.problems')
 
-                  %section.widget
-                    .body
-                      %p
-                        .badge.badge-mutted D 1
-                        -if boss? and @project.status == 7
-                          =link_to({:controller => 'concept/posts', :action => :status_post, :id => @post.id, :type_field => 7},:remote => true,:method => :put, :id => "label_post_#{@post.id}",:class => "note_text") do
-                            %span(class= "#{class_for_concept_type_field(@post,7)}" id="#{id_for_concept_type(7)}")=t('form.problems')
-                            =link_to({:controller => 'concept/posts', :action => :new_note, :id => @post.id, :type_field => 7},:remote => true,:method => :put, :id => "btn_note_7", :class => "note_text") do
-                              .label.label-danger замечание
-                        -else
-                          %span(class= "#{class_for_concept_type_field(@post,7)}" id="problems")=t('form.problems')
+              .form-group.has-success= display_content(tp.problems)
+              -if @project.status == 7
+                = render partial: 'concept/posts/note_list', :locals => {:post_field => @post,:type_fd => 7}
 
-                      .form-group.has-success= display_content(tp.problems)
-                      -if @project.status == 7
-                        = render partial: 'concept/posts/note_list', :locals => {:post_field => @post,:type_fd => 7}
+          %section.widget
+            .body
+              %p
+                .badge.badge-mutted D 2
+                -if boss? and @project.status == 7
+                  =link_to({:controller => 'concept/posts', :action => :status_post, :id => @post.id, :type_field => 8},:remote => true,:method => :put, :id => "label_post_#{@post.id}",:class => "note_text") do
+                    %span(class= "#{class_for_concept_type_field(@post,8)}" id="#{id_for_concept_type(8)}")=t('form.reality')
+                    =link_to({:controller => 'concept/posts', :action => :new_note, :id => @post.id, :type_field => 8},:remote => true,:method => :put, :id => "btn_note_8", :class => "note_text") do
+                      .label.label-danger замечание
+                -else
+                  %span(class= "#{class_for_concept_type_field(@post,8)}" id= "reality")=t('form.reality')
 
-                  %section.widget
-                    .body
-                      %p
-                        .badge.badge-mutted D 2
-                        -if boss? and @project.status == 7
-                          =link_to({:controller => 'concept/posts', :action => :status_post, :id => @post.id, :type_field => 8},:remote => true,:method => :put, :id => "label_post_#{@post.id}",:class => "note_text") do
-                            %span(class= "#{class_for_concept_type_field(@post,8)}" id="#{id_for_concept_type(8)}")=t('form.reality')
-                            =link_to({:controller => 'concept/posts', :action => :new_note, :id => @post.id, :type_field => 8},:remote => true,:method => :put, :id => "btn_note_8", :class => "note_text") do
-                              .label.label-danger замечание
-                        -else
-                          %span(class= "#{class_for_concept_type_field(@post,8)}" id= "reality")=t('form.reality')
+              .form-group.has-success= display_content(tp.reality)
+              -if @project.status == 7
+                = render partial: 'concept/posts/note_list', :locals => {:post_field => @post,:type_fd => 8}
 
-                      .form-group.has-success= display_content(tp.reality)
-                      -if @project.status == 7
-                        = render partial: 'concept/posts/note_list', :locals => {:post_field => @post,:type_fd => 8}
+          -#%section.widget
+          -#  .body
+          -#    -if boss? and @project.status == 7
+          -#      =link_to({:controller => 'concept/posts', :action => :status_post, :id => @post.id, :type_field => 4},:remote => true,:method => :put, :id => "label_post_#{@post.id}",:class => "note_text") do
+          -#        %span(class= "#{class_for_concept_type_field(@post,4)}" id="#{id_for_concept_type(4)}") Какие ресурсы необходимы?
+          -#        =link_to({:controller => 'concept/posts', :action => :new_note, :id => @post.id, :type_field => 4},:remote => true,:method => :put, :id => "btn_note_4", :class => "note_text") do
+          -#          .label.label-danger замечание
+          -#    -else
+          -#      %span(class= "#{class_for_concept_type_field(@post,4)}" id="positive_r") Какие ресурсы необходимы?
+          -#    %br
+          -#    %br
 
-                  -#%section.widget
-                  -#  .body
-                  -#    -if boss? and @project.status == 7
-                  -#      =link_to({:controller => 'concept/posts', :action => :status_post, :id => @post.id, :type_field => 4},:remote => true,:method => :put, :id => "label_post_#{@post.id}",:class => "note_text") do
-                  -#        %span(class= "#{class_for_concept_type_field(@post,4)}" id="#{id_for_concept_type(4)}") Какие ресурсы необходимы?
-                  -#        =link_to({:controller => 'concept/posts', :action => :new_note, :id => @post.id, :type_field => 4},:remote => true,:method => :put, :id => "btn_note_4", :class => "note_text") do
-                  -#          .label.label-danger замечание
-                  -#    -else
-                  -#      %span(class= "#{class_for_concept_type_field(@post,4)}" id="positive_r") Какие ресурсы необходимы?
-                  -#    %br
-                  -#    %br
-
-                  %blockquote
-                    %h4 Смотрите также другие решения:
-                    -tp.discontent.dispost_concepts.each do |pa|
-                      - unless pa == @post
-                        =link_to pa.post_aspects.first.title, concept_post_path(@project, pa)
-                        %br
-
-                %td.col-md-6
-                  %section.widget
-                    .body
-                      %p Комментарии к нововведению
-                      .chat-messages
-                        = render :partial => 'shared/comment',:collection => @comments
-                      - if signed_in?
-                        = render :partial => 'shared/comment_form', :locals => { :comment => @comment, :url_link => url_for(:controller => @post.class.name.underscore.pluralize, :action => 'add_comment')}
+          %blockquote
+            %h4 Смотрите также другие решения:
+            -tp.discontent.dispost_concepts.each do |pa|
+              - unless pa == @post
+                =link_to pa.post_aspects.first.title, concept_post_path(@project, pa)
+                %br
+        .col-md-6
+          %section.widget
+            .body
+              %p Комментарии к нововведению
+              .chat-messages
+                = render :partial => 'shared/comment',:collection => @comments
+              - if signed_in?
+                = render :partial => 'shared/comment_form', :locals => { :comment => @comment, :url_link => url_for(:controller => @post.class.name.underscore.pluralize, :action => 'add_comment')}
 
 

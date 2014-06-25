@@ -2,24 +2,24 @@
 
 
 %ul.nav.navbar-nav.navbar-right.pull-right
-  %li.active
+  %li.hidden-xs.active
     =link_to t('menu.help'), help_posts_path(@project), style:'width:auto; margin-right: 10px;'
-  %li.divider
-  %li.active
+  %li.hidden-xs.divider
+  %li.hidden-xs.active
     =link_to t('menu.base_knowledge'),   knowbase_posts_path(@project) , style:'width:auto; margin-right: 10px;'
-  %li.divider
-  %li.active
+  %li.hidden-xs.divider
+  %li.hidden-xs.active
     =link_to t('menu.raiting_rc'), users_rc_users_path(@project), style:'width:auto; margin-right: 10px;'
-  %li.divider
-  %li.active
+  %li.hidden-xs.divider
+  %li.hidden-xs.active
     =link_to t('menu.raiting'), "/project/#{@project.id}/users" , style:'width:auto; margin-right: 10px;'
-  %li.divider
+  %li.hidden-xs.divider
 
-  %li.active
+  %li.hidden-xs.active
     =link_to "/project/#{@project.id}/journals" , style:'width:auto; margin-right: 10px;' do
       =t('menu.news')
   - if boss?
-    %li.divider
+    %li.divider.hidden-xs
     %li.dropdown
       %a#settings.dropdown-toggle{"data-toggle" => "dropdown", :href => "#", :title => "Настройки"}
         %i.fa.fa-cog
@@ -90,7 +90,7 @@
           %li{:role => "presentation"}
             =link_to 'Завершить процедуру', next_stage_core_project_path(@project), id: 'change_stage'
 
-  %li.divider
+  %li.hidden-xs.divider
   %li.dropdown
     %a#messages.dropdown-toggle{"data-toggle" => "dropdown", :href => "#", :title => "Уведомления"}
       %i.fa.fa-comments
@@ -137,7 +137,7 @@
 
   %li.divider
 
-  %li.hidden-xs.dropdown
+  %li.dropdown
     %a#account.dropdown-toggle{"data-toggle" => "dropdown", :href => "#", :title => "Account"}
       %i.fa.fa-user
     %ul#account-menu.dropdown-menu.account{:role => "menu"}
@@ -152,7 +152,7 @@
 
       %li{:role => "presentation"}
         =link_to 'Уведомления', user_path(@project, current_user)
-
+  %li.visible-xs.divider
   %li.visible-xs
     %a.btn-navbar{"data-target" => ".sidebar", "data-toggle" => "collapse", :href => "#", :title => ""}
       %i.fa.fa-bars
