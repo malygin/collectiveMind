@@ -103,8 +103,9 @@ class Concept::PostsController < PostsController
       post_aspect.discontent = disc
       @concept_post.post_aspects << post_aspect
     end
+    user_for_post = params[:select_for_clubers].present? ? User.find(params[:select_for_clubers]) : current_user
     @concept_post.number_views =0
-    @concept_post.user = current_user
+    @concept_post.user = user_for_post
     @concept_post.status = 0
     @concept_post.project = @project
     unless params[:resor].nil?
@@ -135,10 +136,11 @@ class Concept::PostsController < PostsController
             Concept::PostDiscontent.create(post_id: @concept_post.id, discontent_post_id: cd.to_i)
           end
         end
-        current_user.journals.build(:type_event=>'concept_post_save', :body=>"#{@concept_post.post_aspects.first.title[0..24]}:#{@concept_post.id}",  :project => @project).save!
+        user_for_post.journals.build(:type_event=>'concept_post_save', :body=>"#{@concept_post.post_aspects.first.title[0..24]}:#{@concept_post.id}",  :project => @project).save!
         #current_user.journals.build(:type_event=>'my_'+name_of_comment_for_param, :user_informed => post.user, :project => @project, :body=>"#{@comment.content[0..24]}:#{post.id}#comment_#{@comment.id}", :viewed=> false).save!
+        aspect_id =  params[:asp_id]
 
-        format.html { redirect_to  action: "index"  }
+        format.html { redirect_to  "/project/#{@project.id}/concept/posts?asp=#{aspect_id}"  }
         format.json { render json: @concept_post, status: :created, location: @concept_post }
       else
         format.html { render action: "new" }
@@ -286,6 +288,7 @@ class Concept::PostsController < PostsController
     @post = current_model.new
     @discontent_post = Discontent::Post.find(params[:dis_id])
     @resources = Concept::Resource.where(:project_id => @project.id)
+    @users_rc = User.where(admin:false, type_user: 4)
     #@aspects = Discontent::Aspect.where(:project_id => @project)
     @pa = Concept::PostAspect.new
     respond_to do |format|

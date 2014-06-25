@@ -1,5 +1,5 @@
 = render 'shared/help/new_concept'
-= form_for  @post, :url => {:project => @project.id, :action => @post.persisted? ? 'update' : 'create'},   :html => { :class => 'new_or_edit' }do |f|
+= form_for  @post, :url => {:project => @project.id, :asp_id => params[:asp_id].present? ? params[:asp_id] : nil, :action => @post.persisted? ? 'update' : 'create'},   :html => { :class => 'new_or_edit' } do |f|
 
   %div.tab-content
     %div.tab-pane.active#novation1
@@ -27,7 +27,20 @@
           class: 'selectized',
           include_blank: true,
           placeholder: "Какие еще несовершенства решает ваше нововведение?"
-
+          %br
+          -if boss? and !@post.persisted?
+            .row
+              .col-md-6
+                %br
+                %h5.text-right
+                  %b Выберите члена клуба
+                %br
+                %br
+              .com-md-6
+                %br
+                = select_tag 'select_for_clubers', options_from_collection_for_select(@users_rc, "id", "to_s"),
+                :prompt => 'Выберите члена клуба' , style:'margin-left:15px; margin-top:10px; height: 30px;'
+                %br
           %hr
           .row
             .col-md-12
