@@ -1,18 +1,15 @@
 class Journal < ActiveRecord::Base
-  attr_accessible :body, :type_event, :user, :project, :user_informed, :viewed
+  attr_accessible :body, :type_event, :user, :project, :user_informed, :viewed,
+                  :event, :first_id, :second_id, :personal
   belongs_to :user
   belongs_to :user_informed, class_name: 'User', foreign_key: :user_informed
 
   belongs_to :project, :class_name => 'Core::Project', :foreign_key => "project_id"
-  @types = %w(enter)
-  @my_types = %w(my_life_tape_comment my_discontent_comment
-                  other_life_tape_comment other_discontent_comment
-                  other_concept_comment my_concept_comment
-                  other_plan_comment my_plan_comment
-                  my_discontent_note my_concept_note my_add_score_comment)
+  @types = []
+  @my_types = [11]
 
   def self.events_for_user_feed(project_id, lim = 5)
-		Journal.where(' project_id = ? AND type_event NOT  IN (?)',project_id, @types+ @my_types).limit(lim).order('created_at DESC')
+		Journal.where(' project_id = ? AND personal = ? ',project_id, false).order('created_at DESC')
   end
 
   def self.events_for_user_show(project_id, user_id, lim = 5)
