@@ -1,5 +1,8 @@
-$("#discontent_success").fadeIn();
-$('#send_post').html('Сохранить');
+-#$("#discontent_success").fadeIn();
+-#$('#send_post').html('Сохранить');
 $('#send_post').toggleClass('disabled');
-$('#redirect_success').empty();
-$('#redirect_success').html('<a class="btn btn-sm btn-success" href="/project/#{@project.id}/discontent/posts/#{@post.id}">Перейти к просмотру своего несовершенства</a>');
+-#$('#redirect_success').empty();
+-#$('#redirect_success').html('<a class="btn btn-sm btn-success" href="/project/#{@project.id}/discontent/posts/#{@post.id}">Перейти к просмотру своего несовершенства</a>');
+$('#render_success_discontent').empty();
+$("#render_success_discontent").html('#{escape_javascript(render partial: 'modal_post_update')}');
+$('#modal_update_discontent').modal('show');

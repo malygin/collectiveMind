@@ -209,7 +209,7 @@ class Discontent::PostsController < PostsController
       @post.update_attributes(params[name_of_model_for_param])
 
       @post.update_post_aspects(params[:discontent_post_aspects])
-
+      @aspect_id =  params[:discontent_post_aspects].first
       current_user.journals.build(:type_event=>name_of_model_for_param+"_update", :project => @project, :body=>"#{@post.content[0..12]}:#{@post.id}").save!
     end
     respond_to do |format|
