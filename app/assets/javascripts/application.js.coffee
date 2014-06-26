@@ -152,6 +152,15 @@ $('#sortable').sortable update: (event, ui) ->
       data:
         post_id: sel.val()
 
+@select_discontent_for_union_add_list= (project,id)->
+  sel = $('#selectize_tag_for_union :selected')
+  if sel.val() != ''
+    $.ajax
+      url: "/project/#{project}/discontent/posts/#{id}/add_union"
+      type: "put"
+      data:
+        post_id: sel.val()
+        add_list: true
 
 $(window).load ->
   $select = $("#selectize_tag").selectize
@@ -167,6 +176,30 @@ $(window).load ->
       id = parseInt(optsel.attr('post'))
       select_discontent_for_union(project_id,id)
       selectize = $select[0].selectize
+      selectize.removeOption(item)
+      selectize.refreshOptions()
+      selectize.close()
+    render:
+      item: (item, escape) ->
+        short_item = item.show_content.split('<br/>')[0].replace('<b> что: </b>', '')
+        return '<div>'+short_item+'</div>'
+      option: (item, escape) ->
+        return '<div>'+item.show_content+'</div>'
+
+
+  $select_for_union = $("#selectize_tag_for_union").selectize
+    labelField: "show_content"
+    valueField: "id"
+    sortField: "show_content"
+    searchField: "show_content"
+    create: false
+    hideSelected: true
+    onChange: (item) ->
+      optsel = $(".option_for_selectize")
+      project_id = parseInt(optsel.attr('project'))
+      id = parseInt(optsel.attr('post'))
+      select_discontent_for_union_add_list(project_id,id)
+      selectize = $select_for_union[0].selectize
       selectize.removeOption(item)
       selectize.refreshOptions()
       selectize.close()

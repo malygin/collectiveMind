@@ -232,7 +232,7 @@ class Discontent::PostsController < PostsController
      end
      @post.update_attributes(status: 1, discontent_post_id: @new_post.id)
      @new_post.update_union_post_aspects(@post.post_aspects)
-     redirect_to discontent_posts_path(@project)
+     redirect_to discontent_post_path(@project,@new_post)
    end
 
    def unions
@@ -289,8 +289,11 @@ class Discontent::PostsController < PostsController
      @project = Core::Project.find(params[:project])
      @post = Discontent::Post.find(params[:id])
      @union_post = Discontent::Post.find(params[:post_id])
-     @union_post.update_attributes(status: 1, discontent_post_id: @post.id)
-     @post.update_union_post_aspects(@union_post.post_aspects)
+     @add_list = params[:add_list]
+     if @add_list.nil?
+       @union_post.update_attributes(status: 1, discontent_post_id: @post.id)
+       @post.update_union_post_aspects(@union_post.post_aspects)
+     end
      respond_to do |format|
        format.js
      end

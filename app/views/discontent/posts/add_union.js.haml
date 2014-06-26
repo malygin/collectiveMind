@@ -1,4 +1,8 @@
-$('#panel_union').append("#{escape_javascript(render :partial => 'post', :object => @union_post)}")
-$('#post_content_#{@post.id}').append('<li id="li_id_#{@union_post.id}">#{@union_post.content}</li>');
+-if @add_list.nil?
+  $('#panel_union').append("#{escape_javascript(render :partial => 'post', :object => @union_post)}")
+  $('#post_content_#{@post.id}').append('<li id="li_id_#{@union_post.id}">#{@union_post.content}</li>');
+-else
+  -#$('#form_for_union_discontent').append("#{escape_javascript(render :partial => 'post', :object => @union_post)}")
+  $("#{escape_javascript(render :partial => 'post', :object => @union_post)}").insertBefore('#btn-union');
 $('#dispost_success').fadeIn('slow').delay(1000).fadeOut('slow');
 $("#post_#{@union_post.id}").effect("highlight", {color: '#f5cecd'}, 1000);
