@@ -41,8 +41,11 @@ class Discontent::Post < ActiveRecord::Base
 
   scope :by_project, ->(p){ where(project_id: p) }
   scope :by_status, ->(p){where(status: p)}
+  scope :by_style, ->(p){where(style: p)}
   scope :by_positive, ->(p){where(style: 0, status: p)}
   scope :by_negative, ->(p){where(style: 1, status: p)}
+  scope :by_positive_vote, ->(p){where(style: 0).where("status IN (#{p.join(", ")})", p)}
+  scope :by_negative_vote, ->(p){where(style: 1).where("status IN (#{p.join(", ")})", p)}
   scope :required_posts, ->(p){where(status:4, project_id:p.id)}
   scope :united_for_vote,  ->(project,voted){where(project_id: project, status: 2).where("discontent_posts.id NOT IN (?)", voted<<0).order(:id)}
 

@@ -20,7 +20,10 @@
         =@vote_all
         |
         =link_to({:controller => post.class.name.underscore.pluralize, :action => :set_required, :id => post.id, :project => @project},:remote => true,:method => :put,:id => "set_required_#{post.id}", :class => "note_text") do
-          %span.text-warning В обязательные
+          -if post.status == 4
+            %span.text-success Добавлено
+          -else
+            %span.text-warning В обязательные
       -if boss? and @project.status == 8 and post.class.name.deconstantize == "Concept"
         |
         %span.text-success Голосов:
