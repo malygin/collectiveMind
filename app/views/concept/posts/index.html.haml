@@ -10,9 +10,9 @@
           3 этап: Формулирование проблемы.
           =@aspect_post.content
           %br
-          %small
-            Сбор идей для решения несовершенств в рамках процедуры:
-            =@project.name
+        %span(style='font-size: 20px;line-height: 30px;')
+          Сбор идей для решения несовершенств в рамках процедуры:
+          =@project.name
       - if signed_in? and @project.status == 7
         .col-md-3
           .pull-right
