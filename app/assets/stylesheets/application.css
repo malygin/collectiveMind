@@ -36,6 +36,21 @@
     color:#4ab0ce !important;
 }
 
+hr {
+    -moz-border-bottom-colors: none;
+    -moz-border-image: none;
+    -moz-border-left-colors: none;
+    -moz-border-right-colors: none;
+    -moz-border-top-colors: none;
+    border-color: #EEEEEE -moz-use-text-color #FFFFFF;
+    border-style: solid none;
+    border-width: 1px 0;
+    margin: 18px 0;
+    height: 1px;
+    background: #eac85e;
+
+}
+
 @charset "IBM866";
 @import url(./template/nv.d3.css);
 @import url(./fontello/css/fontello.css);
@@ -278,7 +293,7 @@ figure {
 hr {
   -moz-box-sizing: content-box;
   box-sizing: content-box;
-  height: 0;
+  height: 1px;
 }
 
 pre {

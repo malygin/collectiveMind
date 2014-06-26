@@ -25,12 +25,13 @@
       .col-md-12
         %section.widget
           .body
-            .row
 
-              -@aspect_post.aspect_posts.by_status(4).each do |post|
+
+            -@aspect_post.aspect_posts.by_status(4).each do |post|
+              .row
                 .col-md-6
                   =render partial:'discontent/posts/post_short2', object: post
-                  %br
+                .col-md-6
                   %h4 Предложенные решения
                   %br
                   %table.table.table-striped.table-bordered
@@ -67,160 +68,6 @@
                             %a.btn.btn-lg.btn-warning.btn-block(href="/project/#{@project.id}/concept/posts/new?dis_id=#{post.id}&asp_id=#{@aspect_post.id}" style="font-weight: normal !important;")
                               Добавить свое решение
 
-
-
-
--#-if boss? and @project.status == 8
--#  - Concept::Post.scope_vote_top(post).each  do |pa|
--#    - if pa.status == 0
--#      .panel.panel-success(class="#{class_for_concept_type(pa)}")
--#        .panel-body.nov-list
--#          %small.text-muted= Russian::strftime(pa.created_at,"%d %B %k:%M:%S ")
--#          %br
--#          =link_to pa.post_aspects.first.title, concept_post_path(@project, pa)
--#          = render 'shared/post_social_bar2', :post => pa, :dispost => post
--#-else
--#  - post.dispost_concepts.each  do |pa|
--#    - if pa.status == 0
--#      .panel.panel-success(class="#{class_for_concept_type(pa)}")
--#        .panel-body.nov-list
--#          %small.text-muted= Russian::strftime(pa.created_at,"%d %B %k:%M:%S ")
--#          %br
--#          =link_to pa.post_aspects.first.title, concept_post_path(@project, pa)
--#          = render 'shared/post_social_bar2', :post => pa, :dispost => post
--#-if  @project.status == 7
--#  %a.btn.btn-primary.btn-sm.pull-right(href="/project/#{@project.id}/concept/posts/new?dis_id=#{post.id}") Добавить нововведение
--#%br
--#%br
-
--#=render partial:'discontent/posts/post_short2', object: post
--#%br
--#%h4 Предложенные решения:
--#%br
--#-if boss? and @project.status == 8
--#  - Concept::Post.scope_vote_top(post).each  do |pa|
--#    - if pa.status == 0
--#      .panel.panel-success(class="#{class_for_concept_type(pa)}")
--#        .panel-body.nov-list
--#          %small.text-muted= Russian::strftime(pa.created_at,"%d %B %k:%M:%S ")
--#          %br
--#          =link_to pa.post_aspects.first.title, concept_post_path(@project, pa)
--#          = render 'shared/post_social_bar2', :post => pa, :dispost => post
--#-else
--#  - post.dispost_concepts.each  do |pa|
--#    - if pa.status == 0
--#      .panel.panel-success(class="#{class_for_concept_type(pa)}")
--#        .panel-body.nov-list
--#          %small.text-muted= Russian::strftime(pa.created_at,"%d %B %k:%M:%S ")
--#          %br
--#          =link_to pa.post_aspects.first.title, concept_post_path(@project, pa)
--#          = render 'shared/post_social_bar2', :post => pa, :dispost => post
--#-if  @project.status == 7
--#  %a.btn.btn-primary.btn-sm.pull-right(href="/project/#{@project.id}/concept/posts/new?dis_id=#{post.id}") Добавить нововведение
--#%br
--#%br
-
--#.row
--#  .col-md-12
--#    %section.widget
--#      .body
--#        %table.table
--#          %tbody
--#            %tr
--#              -@aspect_post.aspect_posts.by_positive(4).each do |post|
--#                %td
--#                  =render partial:'discontent/posts/post_short2', object: post
--#                  %br
--#                  Предложенные решения:
--#                  %br
--#                  -if boss? and @project.status == 8
--#                    - Concept::Post.scope_vote_top(post).each  do |pa|
--#                      - if pa.status == 0
--#                        .panel.panel-success(class="#{class_for_concept_type(pa)}")
--#                          .panel-body.nov-list
--#                            %small.text-muted= Russian::strftime(pa.created_at,"%d %B %k:%M:%S ")
--#                            %br
--#                            =link_to pa.post_aspects.first.title, concept_post_path(@project, pa)
--#                            = render 'shared/post_social_bar2', :post => pa, :dispost => post
--#                  -else
--#                    - post.dispost_concepts.each  do |pa|
--#                      - if pa.status == 0
--#                        .panel.panel-success(class="#{class_for_concept_type(pa)}")
--#                          .panel-body.nov-list
--#                            %small.text-muted= Russian::strftime(pa.created_at,"%d %B %k:%M:%S ")
--#                            %br
--#                            =link_to pa.post_aspects.first.title, concept_post_path(@project, pa)
--#                            = render 'shared/post_social_bar2', :post => pa, :dispost => post
--#                  -if  @project.status == 7
--#                    %a.btn.btn-primary.btn-sm.pull-right(href="/project/#{@project.id}/concept/posts/new?dis_id=#{post.id}") Добавить нововведение
--#                  %br
--#                  %br
-
-
-
-
--#.panel-group#accordion
--#  -@aspects.each do |aspect|
--#    .panel.panel-default
--#      .panel-heading
--#        %h4.panel-title
--#          %a(data-toggle="collapse" data-parent="#accordion" href="#asp_#{aspect.id}" )
--#            =aspect.content
--#            %b="#{aspect.count_concept}%"
--#
--#            %span.glyphicon.glyphicon-chevron-down
--#
--#            %br
--#            %small=aspect.short_desc
--#            %br
--#            .progress
--#              .progress-bar.progress-bar-success(style="width: #{aspect.count_concept}%; height: 25%; ")
--#                %span.sr-only">35% Complete (success)
--#
--#              -#.progress-bar.progress-bar-warning(style="width: 20%")
--#              -#  %span.sr-only">35% Complete (success)
--#
--#              .progress-bar.progress-bar-danger(style="width: #{100-aspect.count_concept}%; height: 25%;")
--#                %span.sr-only">35% Complete (success)
--#      .panel-collapse.collapse{id:"asp_#{aspect.id}"}
--#        .panel-body
--#          %table.table.table-striped
--#            %thead
--#              %tr
--#                %th.text-success(style='width: 50%;') Несовершенства:
--#                %th.text-success(style='min-width: 300px;') Варианты нововведений:
--#
--#            %tbody
--#
--#              -aspect.aspect_posts.by_status(4).each do |post|
--#
--#                %tr
--#                  %td
--#                    =render partial:'discontent/posts/post_short2', object: post
--#
--#                  %td
--#                    -if  @project.status == 7
--#                      %a.btn.btn-primary.btn-sm.pull-right(href="/project/#{@project.id}/concept/posts/new?dis_id=#{post.id}") Добавить нововведение
--#                    %br
--#                    %br
--#
--#                    -if boss? and @project.status == 8
--#                      - Concept::Post.scope_vote_top(post).each  do |pa|
--#                        - if pa.status == 0
--#                          .panel.panel-success(class="#{class_for_concept_type(pa)}")
--#                            .panel-body.nov-list
--#                              %small.text-muted= Russian::strftime(pa.created_at,"%d %B %k:%M:%S ")
--#                              %br
--#                              =link_to pa.post_aspects.first.title, concept_post_path(@project, pa)
--#                              = render 'shared/post_social_bar2', :post => pa, :dispost => post
--#                    -else
--#                      - post.dispost_concepts.each  do |pa|
--#                        - if pa.status == 0
--#                          .panel.panel-success(class="#{class_for_concept_type(pa)}")
--#                            .panel-body.nov-list
--#                              %small.text-muted= Russian::strftime(pa.created_at,"%d %B %k:%M:%S ")
--#                              %br
--#                              =link_to pa.post_aspects.first.title, concept_post_path(@project, pa)
--#                              = render 'shared/post_social_bar2', :post => pa, :dispost => post
-
-
+              .row
+                .col-md-12
+                  %hr

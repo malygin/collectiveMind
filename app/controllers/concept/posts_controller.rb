@@ -28,7 +28,7 @@ class Concept::PostsController < PostsController
      pr.merge(Concept::Resource.where(:project_id => params[:project]).map {|d| {:value => d.name}})
      #if params[:term].length > 1
      #end
-     pr.merge(Concept::PostResource.select("DISTINCT name as value").where("LOWER(name) like LOWER(?)", "%#{params[:term]}%")
+     pr.merge(Concept::PostResource.select("DISTINCT LOWER(name) as value").joins(:concept_post).where("LOWER(name) like LOWER(?) AND concept_posts.project_id = ?", "%#{params[:term]}%", params[:project] )
               .map {|d| {:value => d.value } })
 
      @project = Core::Project.find(params[:project])
