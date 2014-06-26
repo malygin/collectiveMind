@@ -1,5 +1,5 @@
 class Journal < ActiveRecord::Base
-  attr_accessible :body, :type_event, :user, :project, :user_informed, :viewed,
+  attr_accessible :body, :body2, :type_event, :user, :project, :user_informed, :viewed,
                   :event, :first_id, :second_id, :personal
   belongs_to :user
   belongs_to :user_informed, class_name: 'User', foreign_key: :user_informed
@@ -16,8 +16,8 @@ class Journal < ActiveRecord::Base
 		Journal.where(' project_id = ? AND type_event NOT IN (?)',project_id, @types).where("user_id= (?)", user_id).limit(lim).order('created_at DESC')
   end
 
-  def self.events_for_my_feed(project_id, user_id, lim=5)
-    Journal.where(' project_id = ? AND type_event  IN (?) AND user_informed = ? AND viewed =?',project_id, @my_types, user_id, false).limit(lim).order('created_at DESC')
+  def self.events_for_my_feed(project_id, user_id, lim=10)
+    Journal.where(' project_id = ? AND user_informed = ? AND viewed =? AND personal =?',project_id,  user_id, false, true).order('created_at DESC')
   end
 
   def self.count_events_for_my_feed(project_id, user_id)

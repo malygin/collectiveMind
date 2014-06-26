@@ -19,6 +19,10 @@ module ApplicationHelper
     t.gsub("\n", "\\n").gsub("\r", "\\r").gsub("\t", "\\t").gsub("'","\\'")
   end
 
+  def trim_content(s, l=100)
+    s[0..l]
+  end
+
   def class_post_content(pro, ag)
     if  pro > 0
       'label-success'

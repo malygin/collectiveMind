@@ -1,5 +1,6 @@
 # encoding: utf-8
 class PostsController < ApplicationController
+  include ApplicationHelper
   before_filter :authenticate
   before_filter :prepare_data, :only => [:index, :new, :edit, :show, :show_essay, 
     :vote_list, :essay_list]
@@ -84,30 +85,24 @@ def add_comment
     end
     unless  params[name_of_comment_for_param][:content]==''
       @comment = post.comments.create(:content => content, :user =>current_user, :comment_id => @main_comment ? @main_comment.id : nil)
-      if  post.instance_of? LifeTape::Post
-        current_user.journals.build(:type_event=>name_of_comment_for_param+'_save', :project => @project, :body=>"#{@comment.content[0..148].sub(':',' ')}:?asp=#{post.discontent_aspects.first.id}#comment_#{@comment.id}").save!
-      else
-        current_user.journals.build(:type_event=>name_of_comment_for_param+'_save', :project => @project, :body=>"#{@comment.content[0..148].sub(':',' ')}:#{post.id}#comment_#{@comment.id}").save!
-      end
+      current_user.journals.build(:type_event=>name_of_comment_for_param+'_save', :project => @project,
+                                  :body=>"#{trim_content(@comment.content)}", :body2=>trim_content(post.content),
+                                  :first_id=> (post.instance_of? LifeTape::Post) ? post.discontent_aspects.first.id : post.id, :second_id => @comment.id).save!
+
       #PostMailer.add_comment(post, @comment).deliver  if post.user!=@comment.user
       if post.user!=current_user
-         if  post.instance_of? LifeTape::Post
-           current_user.journals.build(:type_event=>'my_'+name_of_comment_for_param, :user_informed => post.user, :project => @project,  :body=>"#{@comment.content[0..148].sub(':',' ')}:?asp=#{post.discontent_aspects.first.id}#comment_#{@comment.id}", :viewed=> false).save!
-         else
-           current_user.journals.build(:type_event=>'my_'+name_of_comment_for_param, :user_informed => post.user, :project => @project,  :body=>"#{@comment.content[0..148].sub(':',' ')}:#{post.id}#comment_#{@comment.id}", :viewed=> false).save!
-         end
+        current_user.journals.build(:type_event=>'my_'+name_of_comment_for_param, :user_informed => post.user, :project => @project,
+                                    :body=>"#{trim_content(@comment.content)}", :body2=>trim_content(post.content),
+                                    :first_id=> (post.instance_of? LifeTape::Post) ? post.discontent_aspects.first.id : post.id, :second_id => @comment.id,
+                                    :personal=> true, :viewed=> false).save!
       end
-      users = []
-      users =post.comments.collect{|c| c.user}
-      users.uniq.each do |u|
-        if u!=current_user and u!= post.user
-          if  post.instance_of? LifeTape::Post
-            current_user.journals.build(:type_event=>'other_'+name_of_comment_for_param, :user_informed =>u, :project => @project, :body=>"#{@comment.content[0..148].sub(':',' ')}:?asp=#{post.discontent_aspects.first.id}#comment_#{@comment.id}", :viewed=> false).save!
-          else
-            current_user.journals.build(:type_event=>'other_'+name_of_comment_for_param, :user_informed =>u, :project => @project,  :body=>"#{@comment.content[0..148].sub(':',' ')}:#{post.id}#comment_#{@comment.id}", :viewed=> false).save!
-          end
-        end
+      if @main_comment and @main_comment.user!=current_user
+        current_user.journals.build(:type_event=>'reply_'+name_of_comment_for_param, :user_informed =>@main_comment.user, :project => @project,
+                                    :body=>"#{trim_content(@comment.content)}", :body2=>trim_content(@main_comment.content),
+                                    :first_id=> (post.instance_of? LifeTape::Post) ? post.discontent_aspects.first.id : post.id, :second_id => @comment.id,
+                                    :personal=> true, :viewed=> false).save!
       end
+
     end
     respond_to do |format|
        format.js

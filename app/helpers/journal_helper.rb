@@ -34,16 +34,16 @@ module JournalHelper
 		case j.type_event
 
       #LIFETAPE
-      when 'lifetape_comment_save'
-        "добавил комментарий: '#{j.body} ...'  "+  link_to("к теме #{j.body2}", "/project/#{project}/life_tape/posts/#{j.first_id}" )
+      when 'life_tape_comment_save'
+        "добавил комментарий: '#{j.body} ...' к теме:  "+  link_to("#{j.body2}", "/project/#{project}/life_tape/posts/?asp=#{j.first_id}#comment_#{j.second_id}" )
 
-      when 'lifetape_post_save'
+      when 'life_tape_post_save'
         'добавил тему '+  link_to("#{j.body}..", "/project/#{project}/life_tape/posts/#{j.first_id}" )
 
-      when 'my_lifetape_comment'
+      when 'my_life_tape_comment'
         "добавил комментарий: #{j.body}"+  link_to('к вашей теме ', "/project/#{project}/life_tape/posts/#{j.first_id}?viewed=true#comment_#{j.second_id}")
 
-      when 'reply_lifetape_comment'
+      when 'reply_life_tape_comment'
         "добавил комментарий: #{j.body}"+  link_to("в ответ на ваш #{j.body2}", "/project/#{project}/life_tape/posts/#{j.first_id}?viewed=true#comment_#{j.second_id}")
 
       # DISCONTENTS
@@ -57,10 +57,10 @@ module JournalHelper
         'отредактировал(а) несовершенство '+ link_to("#{j.body}...", "/project/#{project}/discontent/posts/#{j.first_id}")
 
       when 'my_discontent_comment'
-        "добавил(а) комментарий '#{j.body}...' к "+  link_to('вашему несовершенству', "/project/#{project}/discontent/posts/#{j.first_id}?viewed=true#comment_#{j.second_id}")
+        "добавил(а) комментарий '#{j.body}...' к вашему несовершенству "+  link_to(j.body2, "/project/#{project}/discontent/posts/#{j.first_id}?viewed=true#comment_#{j.second_id}")
 
       when 'reply_discontent_comment'
-        "добавил(а) комментарий '#{j.body}...' к "+  link_to("в ответ на ваш #{j.body2}", "/project/#{project}/discontent/posts/#{j.first_id}?viewed=true#comment_#{j.second_id}")
+        "добавил(а) комментарий '#{j.body}...' в ответ на ваш "+  link_to( j.body2, "/project/#{project}/discontent/posts/#{j.first_id}?viewed=true#comment_#{j.second_id}")
 
 
       when 'add_score_essay'

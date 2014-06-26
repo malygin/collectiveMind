@@ -102,13 +102,18 @@
 
     %ul#messages-menu.dropdown-menu.messages{:role => "menu"}
       -unless @my_journals.empty?
-        - @my_journals.each do |journal|
+        - @my_journals.each do |journal, k|
           %li{:role => "presentation"}
             %p.message{:href => "#"}
               =image_tag journal.user.avatar.url(:thumb), style: 'margin-left: 10px;'
               .details(style="margin-left: 60px;")
-                .sender=journal.user
-                .text= journal_parser(journal, @project.id).html_safe
+                .sender
+                  %span.color-teal=journal.user
+                  - if k >1
+                    %br
+                    %span.color-red="и еще #{k} похожих"
+                .text
+                  = journal_parser(journal, @project.id).html_safe
         %li{:role => "presentation"}
           %a.text-align-center.see-all{:href => "/project/#{@project.id}/users/#{current_user.id}"}
             Очистить
