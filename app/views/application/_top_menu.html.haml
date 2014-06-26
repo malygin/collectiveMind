@@ -8,12 +8,12 @@
   %li.hidden-xs.active
     =link_to t('menu.base_knowledge'),   knowbase_posts_path(@project) , style:'width:auto; margin-right: 10px;'
   %li.hidden-xs.divider
-  %li.hidden-xs.active
+  %li.hidden-xs.hidden-sm.hidden-md.active
     =link_to t('menu.raiting_rc'), users_rc_users_path(@project), style:'width:auto; margin-right: 10px;'
-  %li.hidden-xs.divider
-  %li.hidden-xs.active
+  %li.hidden-xs.hidden-sm.hidden-md.divider
+  %li.hidden-xs.hidden-sm.hidden-md.active
     =link_to t('menu.raiting'), "/project/#{@project.id}/users" , style:'width:auto; margin-right: 10px;'
-  %li.hidden-xs.divider
+  %li.hidden-xs.hidden-sm.hidden-md.divider
 
   %li.hidden-xs.active
     =link_to "/project/#{@project.id}/journals" , style:'width:auto; margin-right: 10px;' do
