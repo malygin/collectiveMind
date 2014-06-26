@@ -422,6 +422,7 @@ class Concept::PostsController < PostsController
      elsif !params[:dis_id].nil? and !params[:con_id].nil?
        index = @disposts.index @discontent_post
        @able = true
+       able_save = 0
        while @able do
          @dispost = @disposts[index]
          @posts_for_discussion = @dispost.dispost_concepts.posts_for_discussions(@project).by_discussions(user_discussion_posts).select('distinct "concept_posts".*').order('"concept_posts"."id"')
@@ -433,8 +434,9 @@ class Concept::PostsController < PostsController
                  @able = false if @post != @posts_for_discussion.last or (@posts_for_discussion.size == 1 and @dispost != @discontent_post and @post != @concept_post) or (@dispost == @discontent_post and @post.id > @concept_post.id)
                  break
                elsif params[:save_form]
-                 if !params[:discussion].empty?  and @dispost == @discontent_post
+                 if !params[:discussion].empty?  and @dispost == @discontent_post and able_save == 0
                    @comment = @concept_post.comments.create(:content => params[:discussion], :user => current_user)
+                   able_save += 1
                    current_user.journals.build(:type_event=>'concept_comment'+'_save', :project => @project, :body=>"#{@comment.content[0..48]}:#{@concept_post.id}#comment_#{@comment.id}").save!
                    if @concept_post.user!=current_user
                      current_user.journals.build(:type_event=>'my_'+'concept_comment', :user_informed => @concept_post.user, :project => @project, :body=>"#{@comment.content[0..24]}:#{@concept_post.id}#comment_#{@comment.id}", :viewed=> false).save!

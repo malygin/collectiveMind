@@ -16,6 +16,7 @@
     = render partial: 'concept_for_discussion', object: @post.post_aspects.first unless @post.nil?
   .text-info#comment_info(style='display:none;')
     Пока ни одно нововведение к данному несовершенству не было обработано
+  = link_to 'Пропустить нововведение', concept_posts_fast_discussion_concepts_path(@project, dis_id: @dispost, con_id: @post, empty_discussion: true), remote: true, id: 'empty_discussion', class: 'btn btn-danger'
   %hr
   #form_for_comment_concept
     %p
@@ -27,4 +28,3 @@
     %br
     .pull-right
       %input.btn.btn-success{:type => "submit",:id  => "send_discussion", :value => "Сохранить и перейти к следующему нововведению"}
-= link_to 'Пропустить нововведение', concept_posts_fast_discussion_concepts_path(@project, dis_id: @dispost, con_id: @post, empty_discussion: true), remote: true, id: 'empty_discussion', class: 'btn btn-danger'

@@ -16799,7 +16799,7 @@ a {
 }
 @media (min-width: 768px) {
   .sidebar.sidebar-icons .panel-collapse.open li a {
-    width: 80px;
+    width: 140px;
   }
 }
 
@@ -19447,7 +19447,7 @@ ol.text-list {
 }
 @media (max-width: 1048px) {
   .sidebar {
-    width: auto;
+    width: 140px;
     margin: 80px 0 0 1.6%;
   }
   .sidebar h2 {
@@ -19464,7 +19464,7 @@ ol.text-list {
 }
 @media (max-width: 1048px) and (min-width: 768px) {
   .sidebar .panel-collapse.open li a {
-    width: 80px;
+    width: 140px;
   }
 }
 
