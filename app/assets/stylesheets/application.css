@@ -17056,7 +17056,8 @@ input.parsley-error {
   padding-left: 40px;
 }
 .side-nav .panel-collapse li a:hover, .side-nav .panel-collapse li a:focus {
-  background: rgba(51, 51, 51, 0.25);
+  /*background: rgba(51, 51, 51, 0.25);*/
+  background: #4f5653;
 }
 .side-nav .panel-collapse li a i[class*="fa"] {
   float: none;
@@ -19460,6 +19461,9 @@ ol.text-list {
     -o-transition: width 0.3s;
     -webkit-transition: width 0.3s;
     transition: width 0.3s;
+    background: #666f67;
+    /*background: #4f5653;*/
+     text-align: left;
   }
 }
 @media (max-width: 1048px) and (min-width: 768px) {
