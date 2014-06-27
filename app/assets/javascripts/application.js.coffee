@@ -17,6 +17,7 @@
 #= require wizard/select2
 #= require bootstrap3-editable/bootstrap-editable
 #= require wizard/jquery.pjax
+#= require jquery.autosize
 
 $('#modal_help').modal
   keyboard: false
@@ -163,6 +164,7 @@ $('#sortable').sortable update: (event, ui) ->
         add_list: true
 
 $(window).load ->
+  $('textarea').autosize()
   $select = $("#selectize_tag").selectize
     labelField: "show_content"
     valueField: "id"

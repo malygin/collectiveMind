@@ -8,10 +8,6 @@
             .media-body
               .media-heading
                 =link_to @post.user, user_path(@project, @post.user)
-          .pull-right
-            =@post.number_views
-            %span.glyphicon.glyphicon-eye-open
-            = render 'shared/post_edit_bar', :post => @post
         .col-md-5
           %h4 Решаемое несовершенство:
           =render partial:'discontent/posts/post_short2', object: tp.discontent
@@ -22,6 +18,8 @@
             =cd.content
             %br
       %br
+      = render 'shared/post_edit_bar', :post => @post
+
       .row
         .col-md-6
           %section.widget
@@ -184,6 +182,8 @@
           -#      %span(class= "#{class_for_concept_type_field(@post,4)}" id="positive_r") Какие ресурсы необходимы?
           -#    %br
           -#    %br
+          .pull-right
+            = render 'shared/post_edit_bar', :post => @post
 
           %blockquote
             %h4 Смотрите также другие решения:
@@ -191,6 +191,7 @@
               - unless pa == @post
                 =link_to pa.post_aspects.first.title, concept_post_path(@project, pa)
                 %br
+
         .col-md-6
           %section.widget
             .body
