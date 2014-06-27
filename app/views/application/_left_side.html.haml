@@ -7,7 +7,7 @@
     -#    1.
     -#    =@project.status_title(:life_tape_posts)
     - if request.original_url.include? 'life_tape'
-      %a.stage_menu1.accordion-toggle.collapsed(data-toggle="collapse" data-parent="#side-nav" href="#life_tape")
+      %a.stage_menu1.accordion-toggle(data-toggle="collapse" data-parent="#side-nav" href="#life_tape")
         %i.fa.fa-edit
         %span.name.h4.no-margin.text-left
           1.
@@ -34,7 +34,7 @@
       -#    2.
       -#    =@project.status_title(:discontent_posts)
       - if request.original_url.include? 'discontent'
-        %a.stage_menu2.accordion-toggle.collapsed(data-toggle="collapse" data-parent="#side-nav" href="#discontent")
+        %a.stage_menu2.accordion-toggle(data-toggle="collapse" data-parent="#side-nav" href="#discontent")
           %i.fa.fa-bar-chart-o
           %span.name.h4.no-margin.text-left
             2.
@@ -72,7 +72,7 @@
       -#    3.
       -#    =@project.status_title(:concept_posts)
       - if request.original_url.include? 'concept'
-        %a.stage_menu3.accordion-toggle.collapsed(data-toggle="collapse" data-parent="#side-nav" href="#concept")
+        %a.stage_menu3.accordion-toggle(data-toggle="collapse" data-parent="#side-nav" href="#concept")
           %i.fa.fa-magic
           %span.name.h4.no-margin.text-left
             3.
