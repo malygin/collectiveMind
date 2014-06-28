@@ -64,10 +64,8 @@
                   %tr
                     %th
                       ="#"
-                    %th(style="width:150px;")
-                      Название этапа
                     %th(style="width:300px;")
-                      Эссе по этапу
+                      Название и описание этапа
                     %th
                       Нововведения
                     %th(colspan="2")
@@ -86,13 +84,14 @@
                               =Russian::strftime(stage.date_end, "%d %b %y")
                             %br
                           =stage.name
-                        %td(rowspan="#{rowspan_stage_show(stage)}" class="td_stage_#{stage.id}")
+                          %hr
                           =stage.desc
                       - unless stage.plan_post_aspects.empty?
                         - stage.plan_post_aspects.each do |concept|
                           %tr(id="tr_concept_#{concept.id}")
                             %td(rowspan="#{1+concept.plan_post_actions.size}" id="td_concept_#{concept.id}")
-                              %span.h5{:id => "name_post_concept_#{concept.id}"}=concept.title
+                              =link_to view_concept_table_plan_post_path(@project, @post, :con_id => concept.id), :method => :get, :remote => true,:class => "color-teal", :style => "text-decoration:none;", :id => "view_post_concept_table_#{concept.id}" do
+                                %span.h5{:id => "name_post_concept_#{concept.id}"}=concept.title
 
                           - unless concept.plan_post_actions.nil?
                             - concept.plan_post_actions.each do |action|

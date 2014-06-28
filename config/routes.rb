@@ -157,6 +157,8 @@ scope '/project/:project' do
         put :update_get_concept
         put :render_table
         put :render_concept_side
+        get :view_concept
+        get :view_concept_table
       end
     end
   end

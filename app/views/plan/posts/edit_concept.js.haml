@@ -1,3 +1,4 @@
 $('#render_modal_edit_concept').empty();
 $('#render_modal_edit_concept').html("#{escape_javascript(render :partial => 'form_for_edit_concept', :object => @post_concept )}");
+autocomplete_initialized();
 $('#modal_edit_concept').modal('show');

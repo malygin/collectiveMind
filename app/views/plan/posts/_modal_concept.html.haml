@@ -6,26 +6,84 @@
         %h4#myModalLabel.modal-title Добавление нововведений
       .modal-body
         #option_for_select_concept(project="#{@project.id}" post="#{@post.id}" stage="#{@post_stage.id}")
-        %h4.text-primary Выберите тему:
-        %select.form-control#select_aspect(onchange="plan_select_aspect(this);")
-          %option#option0(value="0") Выберите тему
-          - @aspects.each do |asp|
-            %option(value="#{asp.id}")=asp.content
-
-        %h4.text-primary Выберите нововведение:
-        %select.form-control#select_concept(disabled="disabled" onchange="plan_select_concept(this);")
-        %hr
-        = link_to 'Добавить свое нововведение',  add_form_for_concept_plan_post_path(@project, @post, stage_id: @post_stage, new_concept: true), remote: true,method: :put, id: 'new_concept', class: 'btn btn-success btn-block'
-        %hr
-        #aspect_concepts
+        = link_to 'Добавить пустое нововведение',  add_form_for_concept_plan_post_path(@project, @post, stage_id: @post_stage.id, save_form: true), remote: true, method: :put, id: 'new_concept', class: 'btn btn-success pull-right'
         %br
-        .text-success#concept_success(style='display:none;')
-          Нововведение успешно добавлено
-        .text-danger#concept_failed(style='display:none;')
-          Заполните, пожалуйста, все поля
+        %h4.text-primary Выберите нововведение:
+        - @disposts.each do |post|
+          -if post.dispost_concepts.by_status(0).present?
+            =render partial:'discontent/posts/post_short2', object: post
+            %br
+            %table.table.table-striped.table-condensed
+              %tbody
+                - post.dispost_concepts.by_status(0).each_with_index do |pa, index|
+                  %tr(style="width:10px;")
+                    %td
+                      =index+1
+                    %td
+                      - if pa.post_aspects.first.title!=''
+                        =link_to view_concept_plan_post_path(@project, @post,:post_id => post.id, :con_id => pa.post_aspects.first.id), :method => :get, :remote => true,:class => "color-teal", :style => "text-decoration:none;", :id => "view_post_concept_#{post.id}_#{pa.post_aspects.first.id}" do
+                          =pa.post_aspects.first.title
+                      - else
+                        Без названия
+                    %td(id="td_plus_concept_#{pa.post_aspects.first.id}" style="width:100px;")
+                      -if plus_concept?(@post_stage,pa)
+                        .label.label-success Добавлено
+                    %td(style="width:100px;")
+                      .pull-right
+                        =link_to add_form_for_concept_plan_post_path(@project, @post,:stage_id => @post_stage.id, :concept_id => pa.post_aspects.first.id, :save_form => true), :method => :put, :remote => true, :id => "plus_post_concept_#{pa.id}" do
+                          %button.btn.btn-sm.btn-warning{:type => "button"}
+                            %i.fa.fa-plus
+        %br
+        = link_to 'Добавить пустое нововведение',  add_form_for_concept_plan_post_path(@project, @post, stage_id: @post_stage.id, save_form: true), remote: true, method: :put, id: 'new_concept', class: 'btn btn-success pull-right'
 
       .modal-footer(style="margin-top:30px;padding-bottom:10px;padding-top:10px;padding-right:10px;")
         %button.btn.btn-primary(type = "button" data-dismiss="modal") Закрыть
+
+-#- unless @post.post_stages.nil?
+-#  %ul#menu-levels-collapse.side-nav
+-#    -@post.post_stages.each_with_index do |stage, index|
+-#      %li.panel
+-#        %a.accordion-toggle{"data-parent" => "#menu-levels-collapse", "data-toggle" => "collapse", :href => "#sub-menu-#{index}-collapse"}
+-#          %b="Этап #{index+1}. "
+-#          =stage.name
+-#        - unless stage.plan_post_aspects.nil?
+-#          %ul.concept_side_list.panel-collapse.collapse.in{:id => "sub-menu-#{index}-collapse"}
+-#            - stage.plan_post_aspects.each_with_index do |concept|
+-#              %li.concept_side{:id => "li_concept_#{concept.id}"}
+-#                -#=link_to get_concept_plan_post_path(@project, @post, :con_id => concept.id), :method => :get, :remote => true do
+-#                %a{:href => "#", :onclick => "get_concept_save(#{concept.id})"}
+-#                  =concept.title
+
+
+-##modal_concept.modal.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"}
+-#  .modal-dialog.modal-lg
+-#    .modal-content
+-#      .modal-header
+-#        %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} &times;
+-#        %h4#myModalLabel.modal-title Добавление нововведений
+-#      .modal-body
+-#        #option_for_select_concept(project="#{@project.id}" post="#{@post.id}" stage="#{@post_stage.id}")
+-#        %h4.text-primary Выберите тему:
+-#        %select.form-control#select_aspect(onchange="plan_select_aspect(this);")
+-#          %option#option0(value="0") Выберите тему
+-#          - @aspects.each do |asp|
+-#            %option(value="#{asp.id}")=asp.content
+-#
+-#        %h4.text-primary Выберите нововведение:
+-#        %select.form-control#select_concept(disabled="disabled" onchange="plan_select_concept(this);")
+-#        %hr
+-#        = link_to 'Добавить свое нововведение',  add_form_for_concept_plan_post_path(@project, @post, stage_id: @post_stage, new_concept: true), remote: true,method: :put, id: 'new_concept', class: 'btn btn-success btn-block'
+-#        %hr
+-#        #aspect_concepts
+-#        %br
+-#        .text-success#concept_success(style='display:none;')
+-#          Нововведение успешно добавлено
+-#        .text-danger#concept_failed(style='display:none;')
+-#          Заполните, пожалуйста, все поля
+-#
+-#      .modal-footer(style="margin-top:30px;padding-bottom:10px;padding-top:10px;padding-right:10px;")
+-#        %button.btn.btn-primary(type = "button" data-dismiss="modal") Закрыть
+
 
 -#= form_for  @post, :url => {:project => @project.id, :action => 'add_concept'}, :remote => true, :method => :put, :id => 'form_add_concept' do |f|
 -#= form_tag(add_concept_plan_post_path(@project, @post,save_form:true,concept_empty:@concept_empty,first_stage:@first_stage), {method: :put, remote: true,  id: 'form_add_concept' }) do

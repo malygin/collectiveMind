@@ -246,6 +246,7 @@ end
     @post = Plan::Post.find(params[:id])
     @post_stage = Plan::PostStage.find(params[:stage_id])
     @aspects = Discontent::Aspect.where(:project_id => @project, :status => 0)
+    @disposts = Discontent::Post.where(:project_id => @project, :status => 4).order(:id)
     #@concept_posts = params[:plan_aspect_concepts]
     #@first_stage = params[:first_stage]
     #@concept_empty = params[:concept_empty]
@@ -433,33 +434,29 @@ end
     @save_form = params[:save_form]
     if @save_form
       if params[:concept_id]
-        if params[:concept_post_aspect][:title].present? and params[:concept_post_aspect][:name].present? and params[:concept_post_aspect][:content].present?
-          @concept = Concept::PostAspect.find(params[:concept_id])
-          @cond = Plan::PostAspect.new
-          @cond.plan_post = @post
-          @cond.plan_post_stage = @post_stage
-          @cond.title= params[:concept_post_aspect][:title]
-          @cond.name= params[:concept_post_aspect][:name]
-          @cond.content = params[:concept_post_aspect][:content]
-          @cond.positive = @concept.positive
-          @cond.negative = @concept.negative
-          @cond.negative_r = @concept.negative_r
-          @cond.reality = @concept.reality
-          @cond.problems = @concept.problems
-          @cond.discontent_aspect_id = @concept.discontent_aspect_id
-          @cond.concept_post_aspect = @concept
-          @cond.save!
-          @concept.concept_post.concept_post_resources.each do |rs|
-            @cond.plan_post_resources.build(:name => rs.name, :desc => rs.desc, :type_res => 'positive_r').save  if rs!=''
-          end
+        @concept = Concept::PostAspect.find(params[:concept_id])
+        @cond = Plan::PostAspect.new
+        @cond.plan_post = @post
+        @cond.plan_post_stage = @post_stage
+        @cond.title= @concept.title
+        @cond.name= @concept.name
+        @cond.content = @concept.content
+        @cond.positive = @concept.positive
+        @cond.negative = @concept.negative
+        @cond.negative_r = @concept.negative_r
+        @cond.reality = @concept.reality
+        @cond.problems = @concept.problems
+        @cond.discontent_aspect_id = @concept.discontent_aspect_id
+        @cond.concept_post_aspect = @concept
+        @cond.save!
+        @concept.concept_post.concept_post_resources.each do |rs|
+          @cond.plan_post_resources.build(:name => rs.name, :desc => rs.desc, :type_res => 'positive_r').save  if rs!=''
         end
       else
-        if params[:plan_post_aspect][:title].present? and params[:plan_post_aspect][:name].present? and params[:plan_post_aspect][:content].present?
-          @cond = Plan::PostAspect.create(params[:plan_post_aspect])
+          @cond = Plan::PostAspect.create(:title => 'Новое нововведение')
           @cond.plan_post = @post
           @cond.plan_post_stage = @post_stage
           @cond.save!
-        end
       end
     else
       if params[:new_concept]
@@ -487,6 +484,12 @@ end
     @post = Plan::Post.find(params[:id])
     @post_concept = Plan::PostAspect.find(params[:concept_id])
     @post_concept.update_attributes(params[:plan_post_aspect])
+    Plan::PostResource.by_post(@post_concept.id).by_type('positive_r').destroy_all
+    unless params[:resor_positive_r].nil?
+      params[:resor_positive_r].each_with_index do |r,i|
+        @post_concept.plan_post_resources.build(:name => r, :desc => params[:res_positive_r][i], :type_res => 'positive_r').save  if r!=''
+      end
+    end
     respond_to do |format|
       if @post_concept.save!
         format.js
@@ -581,6 +584,24 @@ end
   def render_concept_side
     @project = Core::Project.find(params[:project])
     @post = Plan::Post.find(params[:id])
+    respond_to do |format|
+      format.js
+    end
+  end
+
+  def view_concept
+    @project = Core::Project.find(params[:project])
+    @post = Plan::Post.find(params[:id])
+    @dispost = Discontent::Post.find(params[:post_id])
+    @concept_post = Concept::PostAspect.find(params[:con_id])
+    respond_to do |format|
+      format.js
+    end
+  end
+  def view_concept_table
+    @project = Core::Project.find(params[:project])
+    @post = Plan::Post.find(params[:id])
+    @concept_post = Plan::PostAspect.find(params[:con_id])
     respond_to do |format|
       format.js
     end

@@ -10,4 +10,11 @@ module Plan::PostsHelper
       '---'
     end
   end
+
+  def plus_concept?(stage,concept)
+    if stage.plan_post_aspects.pluck(:concept_post_aspect_id).include? concept.post_aspects.first.id
+      return true
+    end
+    false
+  end
 end
