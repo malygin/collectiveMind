@@ -20,9 +20,11 @@ class Journal < ActiveRecord::Base
     Journal.where(' project_id = ? AND user_informed = ? AND viewed =? AND personal =?',project_id,  user_id, false, true).order('created_at DESC')
   end
 
-  def self.count_events_for_my_feed(project_id, user_id)
-    Journal.where(' project_id = ? AND type_event  IN (?) AND user_informed = ? AND viewed=?',project_id, @my_types, user_id, false).count
+  def self.events_for_content(project_id, user_id, first_id)
+    Journal.where(' project_id = ? AND user_informed = ? AND viewed =? AND personal =? AND first_id=?',project_id,  user_id, false, true, first_id).order('created_at DESC')
   end
+
+
 
   def self.last_event_for(user, project_id)
     Journal.where(' project_id = ? AND type_event NOT IN (?)',project_id, @my_types).where("user_id= (?)", user.id).order('created_at DESC').first

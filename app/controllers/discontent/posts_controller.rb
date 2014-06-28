@@ -179,7 +179,7 @@ class Discontent::PostsController < PostsController
      user_for_post = params[:select_for_clubers].present? ? User.find(params[:select_for_clubers]) : current_user
      @post.user = user_for_post
      @post.save
-     user_for_post.journals.build(:type_event=>name_of_model_for_param+"_save", :project => @project, :body=>"#{@post.content}:#{@post.id}").save!
+     user_for_post.journals.build(:type_event=>name_of_model_for_param+"_save", :project => @project, :body=>"#{trim_content(@post.content)}", :first_id => @post.id).save!
      user_for_post.add_score(:type => :add_discontent_post)
      if !params[:discontent_post_aspects].nil? and @posts.nil? and (@flash.nil? or @flash.empty?)
        params[:discontent_post_aspects].each do |asp|
@@ -209,7 +209,7 @@ class Discontent::PostsController < PostsController
 
       @post.update_post_aspects(params[:discontent_post_aspects])
 
-      current_user.journals.build(:type_event=>name_of_model_for_param+"_update", :project => @project, :body=>"#{@post.content[0..12]}:#{@post.id}").save!
+      current_user.journals.build(:type_event=>name_of_model_for_param+"_update", :project => @project, :body=>"#{trim_content(@post.content)}").save!
     end
     respond_to do |format|
       format.html

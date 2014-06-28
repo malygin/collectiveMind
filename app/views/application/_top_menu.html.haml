@@ -111,7 +111,7 @@
                   %span.color-teal=journal.user
                   - if k >1
                     %br
-                    %span.color-red="и еще #{k} похожих"
+                    %span.color-red="и еще #{k-1} похожих"
                 .text
                   = journal_parser(journal, @project.id).html_safe
         %li{:role => "presentation"}

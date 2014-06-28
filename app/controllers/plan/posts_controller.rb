@@ -22,11 +22,7 @@ class Plan::PostsController < PostsController
 
   def prepare_data
     @project = Core::Project.find(params[:project]) 
-    @journals = Journal.events_for_user_feed @project.id
-    @my_jounals = Journal.count_events_for_my_feed(@project.id, current_user)
-    @mini_help = Help::Post.where(stage:4, mini: true).first
 
-    @news = ExpertNews::Post.first  
     @status = params[:status]
     #@aspects = Discontent::Aspect.where(:project_id => @project)
     @aspects = Discontent::Aspect.where(:project_id => @project, :status => 0)
@@ -84,7 +80,7 @@ class Plan::PostsController < PostsController
 
     respond_to do |format|
       if @plan_post.save!
-        current_user.journals.build(:type_event=>'plan_post_save', :body=>@plan_post.id,   :project => @project).save!
+        current_user.journals.build(:type_event=>'plan_post_save', :body =>trim_content(@plan_post.name),  :first_id=>@plan_post.id,   :project => @project).save!
         format.html { redirect_to   edit_plan_post_path(project: @project, id: @plan_post) }
         format.json { render json: @plan_post, status: :created, location: @plan_post }
         format.js #{head :ok}
@@ -157,7 +153,7 @@ class Plan::PostsController < PostsController
 
     respond_to do |format|
       @plan_post.save
-      current_user.journals.build(:type_event=>'plan_post_update', :body=>@plan_post.id,   :project => @project).save!
+      current_user.journals.build(:type_event=>'plan_post_update',:body =>trim_content(@plan_post.name), :first_id=>@plan_post.id,   :project => @project).save!
       format.html { redirect_to plan_post_path(project: @project, id: @plan_post) }
       format.js
     end

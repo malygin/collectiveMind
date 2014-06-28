@@ -13,8 +13,10 @@ class PostsController < ApplicationController
 
   def journal_data
     @project = Core::Project.find(params[:project])
-    @my_journals_count = Journal.count_events_for_my_feed(@project.id, current_user)
-    @my_journals  = Journal.events_for_my_feed @project.id, current_user.id, 5
+    events  = Journal.events_for_my_feed @project.id, current_user.id
+    g = events.group_by { |e| e.first_id }
+    @my_journals=g.collect{|k,v| [v.first, v.size]}
+    @my_journals_count = @my_journals.size
   end
   # before_filter :authorized_user, :only => :destroy
  def authenticate
@@ -140,8 +142,8 @@ def index
     @post = current_model.where(:id => params[:id], :project_id => params[:project]).first
     add_breadcrumb 'Просмотр записи', polymorphic_path(@post, :project => @project.id)
     if params[:viewed]
-      Journal.find(params[:viewed]).update_attribute(:viewed, true)
-      @my_journals_count = Journal.count_events_for_my_feed(@project.id, current_user)
+      Journal.events_for_content(@project, current_user, @post.id).update_all("viewed = 'true'")
+      @my_journals_count = @my_journals_count - 1
     end
 
     @comments = @post.comments.where(:comment_id => nil).paginate(:page => params[:page], :per_page => 30)

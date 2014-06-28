@@ -49,14 +49,10 @@ class Concept::PostsController < PostsController
     @project = Core::Project.find(params[:project])
     @aspects = Discontent::Aspect.where(:project_id => @project, :status => 0)
     add_breadcrumb I18n.t('stages.concept'), concept_posts_path(@project)
-    @mini_help = Help::Post.where(stage:3, mini: true).first
-
-    @my_jounals = Journal.count_events_for_my_feed(@project.id, current_user)
+    # @mini_help = Help::Post.where(stage:3, mini: true).first
 
     @disposts = Discontent::Post.where(:project_id => @project, :status => 4).order(:id)
 
-    @journals = Journal.events_for_user_feed @project.id
-    @news = ExpertNews::Post.first
     @status = 4
     if @project.status == 8
       @vote_all = Concept::Voting.where("concept_votings.discontent_post_id IN (#{@project.discontents.by_status(4).pluck(:id).join(", ")})").uniq_user.count
@@ -135,7 +131,7 @@ class Concept::PostsController < PostsController
             Concept::PostDiscontent.create(post_id: @concept_post.id, discontent_post_id: cd.to_i)
           end
         end
-        current_user.journals.build(:type_event=>'concept_post_save', :body=>"#{@concept_post.post_aspects.first.title[0..24]}:#{@concept_post.id}",  :project => @project).save!
+        current_user.journals.build(:type_event=>'concept_post_save', :body=>"#{trim_content(@concept_post.post_aspects.first.title)}", :first_id => @concept_post.id,  :project => @project).save!
         #current_user.journals.build(:type_event=>'my_'+name_of_comment_for_param, :user_informed => post.user, :project => @project, :body=>"#{@comment.content[0..24]}:#{post.id}#comment_#{@comment.id}", :viewed=> false).save!
 
         format.html { redirect_to  action: "index"  }
@@ -191,7 +187,7 @@ class Concept::PostsController < PostsController
         params[:cd].each do |cd|
           Concept::PostDiscontent.create(post_id: @concept_post.id, discontent_post_id: cd.to_i)
         end
-        current_user.journals.build(:type_event=>'concept_post_update', :body=>@concept_post.id,  :project => @project).save!
+        current_user.journals.build(:type_event=>'concept_post_update', :body=>"#{trim_content(@concept_post.post_aspects.first.title)}", :first_id=>@concept_post.id,  :project => @project).save!
 
         format.html { redirect_to action: "show", :project => @project, :id => @concept_post.id }
         format.json { head :no_content }
