@@ -1,15 +1,15 @@
 -if @concept_post.name.present?
   var concept_name = "<h5 class='color-orange text-center'><b>A1.</b>#{t('form.novation_what')}</h5><div class='text-center'><p>#{@concept_post.name.gsub("\r\n", "&nbsp;")}</p></div>"
 -else
-  var concept_name = "undefined"
+  var concept_name = ''
 -if @concept_post.content.present?
   var concept_content = "<h5 class='color-orange text-center'><b>A2.</b>#{t('form.novation_how')}</h5><div class='text-center'><p>#{@concept_post.content.gsub("\r\n", "&nbsp;")}</p></div>"
 -else
-  var concept_content = "undefined"
+  var concept_content = ''
 
 var text = "";
-if (typeof concept_name !== "undefined") {text = text + concept_name;}
-if (typeof concept_content !== "undefined") {text = text + concept_content;}
+if (typeof concept_name !== "undefined" && concept_name != '') {text = text + concept_name;}
+if (typeof concept_content !== "undefined" && concept_content != '') {text = text + concept_content;}
 
 $("#view_post_concept_table_#{@concept_post.id}").popover({trigger: 'manual', html : true, placement : 'auto', title: "<div class='color-orange'><b>#{@concept_post.title}</b></div>",
 template: '<div class="popover popover-concept" role="tooltip"><div class="arrow"></div><h3 class="popover-title"></h3><div class="popover-content"></div></div>',
