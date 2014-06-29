@@ -67,7 +67,7 @@ def to_work_redirect
   redirect_to path_link if params[:asp].nil? and able
 end
 
-def add_comment
+  def add_comment
     @project = Core::Project.find(params[:project])
     @aspects = Discontent::Aspect.where(:project_id => @project)
     post = current_model.find(params[:id])
@@ -80,36 +80,30 @@ def add_comment
     end
     unless  params[name_of_comment_for_param][:content]==''
       @comment = post.comments.create(:content => content, :user =>current_user, :comment_id => @main_comment ? @main_comment.id : nil)
-      if  post.instance_of? LifeTape::Post
-        current_user.journals.build(:type_event=>name_of_comment_for_param+'_save', :project => @project, :body=>"#{@comment.content[0..148].sub(':',' ')}:?asp=#{post.discontent_aspects.first.id}#comment_#{@comment.id}").save!
-      else
-        current_user.journals.build(:type_event=>name_of_comment_for_param+'_save', :project => @project, :body=>"#{@comment.content[0..148].sub(':',' ')}:#{post.id}#comment_#{@comment.id}").save!
-      end
+      current_user.journals.build(:type_event=>name_of_comment_for_param+'_save', :project => @project,
+                                  :body=>"#{trim_content(@comment.content)}", :body2=>trim_content(post.content),
+                                  :first_id=> (post.instance_of? LifeTape::Post) ? post.discontent_aspects.first.id : post.id, :second_id => @comment.id).save!
+
       #PostMailer.add_comment(post, @comment).deliver  if post.user!=@comment.user
       if post.user!=current_user
-         if  post.instance_of? LifeTape::Post
-           current_user.journals.build(:type_event=>'my_'+name_of_comment_for_param, :user_informed => post.user, :project => @project,  :body=>"#{@comment.content[0..148].sub(':',' ')}:?asp=#{post.discontent_aspects.first.id}#comment_#{@comment.id}", :viewed=> false).save!
-         else
-           current_user.journals.build(:type_event=>'my_'+name_of_comment_for_param, :user_informed => post.user, :project => @project,  :body=>"#{@comment.content[0..148].sub(':',' ')}:#{post.id}#comment_#{@comment.id}", :viewed=> false).save!
-         end
+        current_user.journals.build(:type_event=>'my_'+name_of_comment_for_param, :user_informed => post.user, :project => @project,
+                                    :body=>"#{trim_content(@comment.content)}", :body2=>trim_content(post.content),
+                                    :first_id=> (post.instance_of? LifeTape::Post) ? post.discontent_aspects.first.id : post.id, :second_id => @comment.id,
+                                    :personal=> true, :viewed=> false).save!
       end
-      users = []
-      users =post.comments.collect{|c| c.user}
-      users.uniq.each do |u|
-        if u!=current_user and u!= post.user
-          if  post.instance_of? LifeTape::Post
-            current_user.journals.build(:type_event=>'other_'+name_of_comment_for_param, :user_informed =>u, :project => @project, :body=>"#{@comment.content[0..148].sub(':',' ')}:?asp=#{post.discontent_aspects.first.id}#comment_#{@comment.id}", :viewed=> false).save!
-          else
-            current_user.journals.build(:type_event=>'other_'+name_of_comment_for_param, :user_informed =>u, :project => @project,  :body=>"#{@comment.content[0..148].sub(':',' ')}:#{post.id}#comment_#{@comment.id}", :viewed=> false).save!
-          end
-        end
+      if @main_comment and @main_comment.user!=current_user
+        current_user.journals.build(:type_event=>'reply_'+name_of_comment_for_param, :user_informed =>@main_comment.user, :project => @project,
+                                    :body=>"#{trim_content(@comment.content)}", :body2=>trim_content(@main_comment.content),
+                                    :first_id=> (post.instance_of? LifeTape::Post) ? post.discontent_aspects.first.id : post.id, :second_id => @comment.id,
+                                    :personal=> true, :viewed=> false).save!
       end
+
     end
     respond_to do |format|
-       format.js
+      format.js
     end
     #redirect_to polymorphic_path(post, :project => @project.id)
- end
+  end
 
   def add_child_comment_form
     @project = Core::Project.find(params[:project])
@@ -141,8 +135,8 @@ def index
     @post = current_model.where(:id => params[:id], :project_id => params[:project]).first
     add_breadcrumb 'Просмотр записи', polymorphic_path(@post, :project => @project.id)
     if params[:viewed]
-      Journal.find(params[:viewed]).update_attribute(:viewed, true)
-      @my_journals_count = Journal.count_events_for_my_feed(@project.id, current_user)
+      Journal.events_for_content(@project, current_user, @post.id).update_all("viewed = 'true'")
+      @my_journals_count = @my_journals_count - 1
     end
 
     @comments = @post.comments.where(:comment_id => nil).paginate(:page => params[:page], :per_page => 30)
