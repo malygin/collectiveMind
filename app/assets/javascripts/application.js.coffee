@@ -612,14 +612,3 @@ $('#select_for_aspects').on 'change', ->
 @reset_child_comment_form= (comment)->
   $('#child_comments_form_'+comment).empty()
 
-@activate_datepicker_date= ->
-  date = new Date("2014-07-15")
-  currentMonth = date.getMonth()
-  currentDate = date.getDate()
-  currentYear = date.getFullYear()
-#  $('.datepicker').datepicker('destroy')
-  $('.datepicker').datepicker(
-    format: 'yyyy-mm-dd'
-    maxDate: new Date()
-  ).on "changeDate", (e) ->
-    $(this).datepicker "hide"

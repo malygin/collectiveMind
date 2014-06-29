@@ -92,7 +92,11 @@
                             %td(rowspan="#{1+concept.plan_post_actions.size}" id="td_concept_#{concept.id}")
                               =link_to view_concept_table_plan_post_path(@project, @post, :con_id => concept.id), :method => :get, :remote => true,:class => "color-teal", :style => "text-decoration:none;", :id => "view_post_concept_table_#{concept.id}" do
                                 %span.h5{:id => "name_post_concept_#{concept.id}"}=concept.title
-
+                              -unless concept.plan_post_resources.by_type('positive_r').empty?
+                                %br
+                                %hr
+                                - concept.plan_post_resources.by_type('positive_r').each do |res|
+                                  .label.label-danger=res.name
                           - unless concept.plan_post_actions.nil?
                             - concept.plan_post_actions.each do |action|
                               %tr(id="tr_action_#{action.id}")

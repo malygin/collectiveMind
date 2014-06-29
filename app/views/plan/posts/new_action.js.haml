@@ -6,5 +6,4 @@ $('#modal_action').empty();
   $('#modal_concept_action').html("#{escape_javascript(render :partial => 'modal_new_action', :locals => { :action => @post_action })}");
   autocomplete_initialized();
 $('#modal_new_action').modal('show');
-activate_datepicker_date();
--#autocomplete_initialized();
+activate_datepicker();
