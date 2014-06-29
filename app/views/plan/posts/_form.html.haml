@@ -98,8 +98,8 @@
                               ="-"
                               =Russian::strftime(stage.date_end, "%d %b %Y")
                             %br
+
                           =stage.name
-                          %hr
                           =stage.desc
                       - unless stage.plan_post_aspects.nil?
                         - stage.plan_post_aspects.each_with_index do |concept|
@@ -116,7 +116,6 @@
                                     %i.fa.fa-trash-o
                               -unless concept.plan_post_resources.by_type('positive_r').empty?
                                 %br
-                                %hr
                                 - concept.plan_post_resources.by_type('positive_r').each do |res|
                                   .label.label-danger=res.name
                           - unless concept.plan_post_actions.nil?

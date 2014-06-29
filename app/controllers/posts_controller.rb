@@ -10,11 +10,7 @@ class PostsController < ApplicationController
   before_filter :to_work_redirect, only: [:index]
 
 
-  def journal_data
-    @project = Core::Project.find(params[:project])
-    @my_journals_count = Journal.count_events_for_my_feed(@project.id, current_user)
-    @my_journals  = Journal.events_for_my_feed @project.id, current_user.id, 5
-  end
+
   # before_filter :authorized_user, :only => :destroy
  def authenticate
    unless current_user
