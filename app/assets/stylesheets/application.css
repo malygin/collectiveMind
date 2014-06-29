@@ -180,8 +180,20 @@ p, a {
 }
 
 .popover-concept {
-    max-width: 800px !important;
+    max-width: 600px !important;
 }
+
+.popover-concept-modal {
+    background-color:#fff !important;
+    color: #555 !important;
+}
+
+.popover-title-modal {
+    background-color:#f7f7f7 !important;
+    border-bottom:1px solid #ebebeb !important;
+    color: #555 !important;
+}
+
 
 /*todo my styles bottom*/
 /******************************************************************************************************************************************************/

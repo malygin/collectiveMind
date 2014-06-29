@@ -7,7 +7,7 @@
     -#$('#td_concept_#{@post_aspect.id}').attr('rowspan', rowspan + 1);
     var rowspan_main = parseInt($('.td_stage_#{@post_stage.id}').attr("rowSpan"));
     $('.td_stage_#{@post_stage.id}').attr('rowspan', rowspan_main + 2);
-    $('#td_plus_concept_#{@concept.id}').html('<div class="label label-success">Добавлено</div>')
+    $('.td_plus_concept_#{@concept.id}').html('<div class="label label-success">Добавлено</div>')
   -else
     alert("Ошибка при добавлении! Попробуйте еще раз.");
 - else

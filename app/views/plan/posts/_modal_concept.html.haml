@@ -25,7 +25,7 @@
                           =pa.post_aspects.first.title
                       - else
                         Без названия
-                    %td(id="td_plus_concept_#{pa.post_aspects.first.id}" style="width:100px;")
+                    %td(class="td_plus_concept_#{pa.post_aspects.first.id}" style="width:100px;")
                       -if plus_concept?(@post_stage,pa)
                         .label.label-success Добавлено
                     %td(style="width:100px;")

@@ -1,6 +1,7 @@
 %tr(id="tr_concept_#{post_concept.id}")
   %td(rowspan="#{2+post_concept.plan_post_actions.size}" id="td_concept_#{post_concept.id}")
-    %span.h5{:id => "name_post_concept_#{post_concept.id}"}=post_concept.title
+    =link_to view_concept_table_plan_post_path(@project, @post, :con_id => post_concept.id), :method => :get, :remote => true,:class => "color-teal", :style => "text-decoration:none;", :id => "view_post_concept_table_#{post_concept.id}" do
+      %span.h5{:id => "name_post_concept_#{post_concept.id}"}=post_concept.title
     .pull-right
       =link_to edit_concept_plan_post_path(@project, @post, :con_id => post_concept.id, :edit_concept => true), :method => :put, :remote => true, :id => "edit_post_concept_#{post_concept.id}" do
         %button.btn.btn-sm.btn-warning{:type => "button"}
