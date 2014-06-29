@@ -9,10 +9,17 @@
 -#$("#view_post_concept_#{@dispost.id}_#{@concept_post.id}").popover('toggle');
 -if @concept_post.name.present?
   var concept_name = "<div class='color-teal text-center'><b>A1.</b>#{t('form.novation_what')}</div><div class='text-center'><p>#{@concept_post.name.gsub("\r\n", "&nbsp;")}</p></div>"
+-else
+  var concept_name = "undefined"
 -if @concept_post.content.present?
   var concept_content = "<div class='color-teal text-center'><b>A2.</b>#{t('form.novation_how')}</div><div class='text-center'><p>#{@concept_post.content.gsub("\r\n", "&nbsp;")}</p></div>"
+-else
+  var concept_content = "undefined"
 -if @concept_post.positive.present?
   var concept_positive = "<div class='color-teal text-center'><b>B1.</b>#{t('form.cond')}</div><div class='text-center'><p>#{@concept_post.positive.gsub("\r\n", "&nbsp;")}</p></div>"
+-else
+  var concept_positive = "undefined"
+
 var text = "<div id='collapse_plus_concept_#{@dispost.id}_#{@concept_post.id}' class='collapse'>";
 if (typeof concept_name !== "undefined") {text = text + concept_name;}
 if (typeof concept_content !== "undefined") {text = text + concept_content;}

@@ -11,13 +11,13 @@
             =Russian::strftime(stage.date_end, "%d %b %Y")
           %br
         =stage.name
-
+        %br
         =stage.desc
     - unless stage.plan_post_aspects.nil?
       - stage.plan_post_aspects.each_with_index do |concept|
         %tr(id="tr_concept_#{concept.id}")
           %td(rowspan="#{2+concept.plan_post_actions.size}" id="td_concept_#{concept.id}")
-            =link_to view_concept_table_plan_post_path(@project, @post, :con_id => concept.id), :method => :get, :remote => true,:class => "color-teal", :style => "text-decoration:none;", :id => "view_post_concept_table_#{concept.id}" do
+            =link_to view_concept_table_plan_post_path(@project, @post, :con_id => concept.id), :method => :get, :remote => true,:class => "color-white", :style => "text-decoration:none;", :id => "view_post_concept_table_#{concept.id}" do
               %span.h5{:id => "name_post_concept_#{concept.id}"}=concept.title
             .pull-right
               =link_to edit_concept_plan_post_path(@project, @post, :con_id => concept.id, :edit_concept => true), :method => :put, :remote => true, :id => "edit_post_concept_#{concept.id}" do
