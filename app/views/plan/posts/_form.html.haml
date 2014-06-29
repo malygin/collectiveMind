@@ -115,6 +115,8 @@
                                   %button.btn.btn-sm.btn-danger{:type => "button"}
                                     %i.fa.fa-trash-o
                               -unless concept.plan_post_resources.by_type('positive_r').empty?
+                                %br
+                                %hr
                                 - concept.plan_post_resources.by_type('positive_r').each do |res|
                                   .label.label-danger=res.name
                           - unless concept.plan_post_actions.nil?
