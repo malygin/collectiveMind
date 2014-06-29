@@ -182,6 +182,7 @@ class Discontent::PostsController < PostsController
      user_for_post.journals.build(:type_event=>name_of_model_for_param+"_save", :project => @project, :body=>"#{@post.content}:#{@post.id}").save!
      user_for_post.add_score(:type => :add_discontent_post)
      if !params[:discontent_post_aspects].nil? and @posts.nil? and (@flash.nil? or @flash.empty?)
+       @aspect_id =  params[:discontent_post_aspects].first
        params[:discontent_post_aspects].each do |asp|
          aspect = Discontent::PostAspect.create(post_id: @post.id, aspect_id: asp.to_i)
          aspect.save!
@@ -208,7 +209,7 @@ class Discontent::PostsController < PostsController
       @post.update_attributes(params[name_of_model_for_param])
 
       @post.update_post_aspects(params[:discontent_post_aspects])
-
+      @aspect_id =  params[:discontent_post_aspects].first
       current_user.journals.build(:type_event=>name_of_model_for_param+"_update", :project => @project, :body=>"#{@post.content[0..12]}:#{@post.id}").save!
     end
     respond_to do |format|
@@ -231,7 +232,7 @@ class Discontent::PostsController < PostsController
      end
      @post.update_attributes(status: 1, discontent_post_id: @new_post.id)
      @new_post.update_union_post_aspects(@post.post_aspects)
-     redirect_to discontent_posts_path(@project)
+     redirect_to discontent_post_path(@project,@new_post)
    end
 
    def unions
@@ -288,8 +289,11 @@ class Discontent::PostsController < PostsController
      @project = Core::Project.find(params[:project])
      @post = Discontent::Post.find(params[:id])
      @union_post = Discontent::Post.find(params[:post_id])
-     @union_post.update_attributes(status: 1, discontent_post_id: @post.id)
-     @post.update_union_post_aspects(@union_post.post_aspects)
+     @add_list = params[:add_list]
+     if @add_list.nil?
+        @union_post.update_attributes(status: 1, discontent_post_id: @post.id)
+        @post.update_union_post_aspects(@union_post.post_aspects)
+     end
      respond_to do |format|
        format.js
      end

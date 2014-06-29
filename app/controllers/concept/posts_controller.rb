@@ -28,7 +28,8 @@ class Concept::PostsController < PostsController
      pr.merge(Concept::Resource.where(:project_id => params[:project]).map {|d| {:value => d.name}})
      #if params[:term].length > 1
      #end
-     pr.merge(Concept::PostResource.select("DISTINCT name as value").where("LOWER(name) like LOWER(?)", "%#{params[:term]}%")
+     #pr.merge(Concept::PostResource.select("DISTINCT name as value").where("LOWER(name) like LOWER(?)", "%#{params[:term]}%")
+     pr.merge(Concept::PostResource.select("DISTINCT LOWER(name) as value").joins(:concept_post).where("LOWER(name) like LOWER(?) AND concept_posts.project_id = ?", "%#{params[:term]}%", params[:project] )
               .map {|d| {:value => d.value } })
 
      @project = Core::Project.find(params[:project])
@@ -99,8 +100,9 @@ class Concept::PostsController < PostsController
       post_aspect.discontent = disc
       @concept_post.post_aspects << post_aspect
     end
+    user_for_post = params[:select_for_clubers].present? ? User.find(params[:select_for_clubers]) : current_user
     @concept_post.number_views =0
-    @concept_post.user = current_user
+    @concept_post.user = user_for_post
     @concept_post.status = 0
     @concept_post.project = @project
     unless params[:resor].nil?
@@ -131,9 +133,9 @@ class Concept::PostsController < PostsController
             Concept::PostDiscontent.create(post_id: @concept_post.id, discontent_post_id: cd.to_i)
           end
         end
-        current_user.journals.build(:type_event=>'concept_post_save', :body=>trim_content(@concept_post.post_aspects.first.title),   :first_id => @concept_post.id,  :project => @project).save!
-
-        format.html { redirect_to  action: "index"  }
+        user_for_post.journals.build(:type_event=>'concept_post_save', :body=>trim_content(@concept_post.post_aspects.first.title),   :first_id => @concept_post.id,  :project => @project).save!
+        aspect_id =  params[:asp_id]
+        format.html { redirect_to  action: "/project/#{@project.id}/concept/posts?asp=#{aspect_id}"  }
         format.json { render json: @concept_post, status: :created, location: @concept_post }
       else
         format.html { render action: "new" }
@@ -281,6 +283,7 @@ class Concept::PostsController < PostsController
     @post = current_model.new
     @discontent_post = Discontent::Post.find(params[:dis_id])
     @resources = Concept::Resource.where(:project_id => @project.id)
+    @users_rc = User.where(admin:false, type_user: 4)
     #@aspects = Discontent::Aspect.where(:project_id => @project)
     @pa = Concept::PostAspect.new
     respond_to do |format|
@@ -414,6 +417,7 @@ class Concept::PostsController < PostsController
      elsif !params[:dis_id].nil? and !params[:con_id].nil?
        index = @disposts.index @discontent_post
        @able = true
+       able_save = 0
        while @able do
          @dispost = @disposts[index]
          @posts_for_discussion = @dispost.dispost_concepts.posts_for_discussions(@project).by_discussions(user_discussion_posts).select('distinct "concept_posts".*').order('"concept_posts"."id"')
@@ -425,8 +429,9 @@ class Concept::PostsController < PostsController
                  @able = false if @post != @posts_for_discussion.last or (@posts_for_discussion.size == 1 and @dispost != @discontent_post and @post != @concept_post) or (@dispost == @discontent_post and @post.id > @concept_post.id)
                  break
                elsif params[:save_form]
-                 if !params[:discussion].empty?  and @dispost == @discontent_post
+                 if !params[:discussion].empty?  and @dispost == @discontent_post and able_save == 0
                    @comment = @concept_post.comments.create(:content => params[:discussion], :user => current_user)
+                   able_save += 1
                    current_user.journals.build(:type_event=>'concept_comment'+'_save', :project => @project, :body=>"#{@comment.content[0..48]}:#{@concept_post.id}#comment_#{@comment.id}").save!
                    if @concept_post.user!=current_user
                      current_user.journals.build(:type_event=>'my_'+'concept_comment', :user_informed => @concept_post.user, :project => @project, :body=>"#{@comment.content[0..24]}:#{@concept_post.id}#comment_#{@comment.id}", :viewed=> false).save!
