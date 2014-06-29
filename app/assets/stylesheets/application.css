@@ -193,6 +193,18 @@ p, a {
     border-bottom:1px solid #ebebeb !important;
     color: #555 !important;
 }
+.example-concept {
+    cursor: pointer;
+}
+
+.plus-concept {
+    /*border-bottom: 1px solid #eac85e;*/
+    padding-bottom: 2px;
+    padding-top: 2px;
+}
+.concept-devider {
+  border-bottom: 1px solid #eac85e;
+}
 
 
 /*todo my styles bottom*/

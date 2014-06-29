@@ -1,9 +1,14 @@
-$("#view_post_concept_#{@dispost.id}_#{@concept_post.id}").popover({trigger: 'manual', html : true, placement : 'auto', title: "<div class='color-black'><b>#{@concept_post.title}</b></div>",
--#template: '<div class="popover popover-concept"><div class="arrow"></div><div class="popover-inner"><h3 class="popover-title"></h3><div class="popover-content"><p></p></div></div></div>',
-template: '<div class="popover popover-concept popover-concept-modal" role="tooltip"><div class="arrow"></div><h3 class="popover-title popover-title-modal"></h3><div class="popover-content"></div></div>',
-content:
-"<div class='color-teal text-center'><b>A1.</b>#{t('form.novation_what')}</div><div class='text-center'><p>#{@concept_post.name}</p></div>"+
-"<div class='color-teal text-center'><b>A2.</b>#{t('form.novation_how')}</div><div class='text-center'><p>#{@concept_post.content}</p></div>"+
-"<div class='color-teal text-center'><b>B1.</b>#{t('form.cond')}</div><div class='text-center'><p>#{@concept_post.positive}</p></div>"
-});
-$("#view_post_concept_#{@dispost.id}_#{@concept_post.id}").popover('toggle');
+-#$("#view_post_concept_#{@dispost.id}_#{@concept_post.id}").popover({trigger: 'manual', html : true, placement : 'auto', title: "<div class='color-black'><b>#{@concept_post.title}</b></div>",
+-#-#template: '<div class="popover popover-concept"><div class="arrow"></div><div class="popover-inner"><h3 class="popover-title"></h3><div class="popover-content"><p></p></div></div></div>',
+-#template: '<div class="popover popover-concept popover-concept-modal" role="tooltip"><div class="arrow"></div><h3 class="popover-title popover-title-modal"></h3><div class="popover-content"></div></div>',
+-#content:
+-#"<div class='color-teal text-center'><b>A1.</b>#{t('form.novation_what')}</div><div class='text-center'><p>#{@concept_post.name}</p></div>"+
+-#"<div class='color-teal text-center'><b>A2.</b>#{t('form.novation_how')}</div><div class='text-center'><p>#{@concept_post.content}</p></div>"+
+-#"<div class='color-teal text-center'><b>B1.</b>#{t('form.cond')}</div><div class='text-center'><p>#{@concept_post.positive}</p></div>"
+-#});
+-#$("#view_post_concept_#{@dispost.id}_#{@concept_post.id}").popover('toggle');
+var das = render_concept_collapse(#{@dispost.id}, #{@concept_post.id});
+if (das == true) {
+$("#tr_plus_concept_#{@dispost.id}_#{@concept_post.id}").after("<div id='collapse_plus_concept_#{@dispost.id}_#{@concept_post.id}' class='collapse'><div class='color-teal text-center'><b>A1.</b>#{t('form.novation_what')}</div><div class='text-center'><p>#{@concept_post.name}</p></div><div class='color-teal text-center'><b>A2.</b>#{t('form.novation_how')}</div><div class='text-center'><p>#{@concept_post.content}</p></div><div class='color-teal text-center'><b>B1.</b>#{t('form.cond')}</div><div class='text-center'><p>#{@concept_post.positive}</p></div></div>");
+}
+$("#collapse_plus_concept_#{@dispost.id}_#{@concept_post.id}").collapse('toggle');

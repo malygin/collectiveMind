@@ -612,3 +612,9 @@ $('#select_for_aspects').on 'change', ->
 @reset_child_comment_form= (comment)->
   $('#child_comments_form_'+comment).empty()
 
+@render_concept_collapse= (post,concept)->
+  con_id = $("#collapse_plus_concept_"+post+"_"+concept).attr('id')
+  if typeof con_id is 'undefined'
+    return true
+  else
+    return false
