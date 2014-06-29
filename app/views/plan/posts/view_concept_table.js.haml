@@ -1,7 +1,5 @@
 $("#view_post_concept_table_#{@concept_post.id}").popover({trigger: 'manual', html : true, placement : 'auto', title: "<div class='color-orange'><b>#{@concept_post.title}</b></div>",
 template: '<div class="popover popover-concept" role="tooltip"><div class="arrow"></div><h3 class="popover-title"></h3><div class="popover-content"></div></div>',
-content:
-"<h5 class='color-orange text-center'><b>A1.</b>#{t('form.novation_what')}</h5><div class='form-group text-center'><p>#{@concept_post.name}</p></div>"+
-"<h5 class='color-orange text-center'><b>A2.</b>#{t('form.novation_how')}</h5><div class='form-group text-center has-danger'><p>#{@concept_post.content}</p></div>"
+content: "<h5 class='color-orange text-center'><b>A1.</b>#{t('form.novation_what')}</h5><div class='form-group text-center'><p>#{@concept_post.name}</p></div><h5 class='color-orange text-center'><b>A2.</b>#{t('form.novation_how')}</h5><div class='form-group text-center has-danger'><p>#{@concept_post.content}</p></div>"
 });
 $("#view_post_concept_table_#{@concept_post.id}").popover('toggle');
