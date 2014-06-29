@@ -84,7 +84,6 @@
                               =Russian::strftime(stage.date_end, "%d %b %y")
                             %br
                           =stage.name
-                          %hr
                           =stage.desc
                       - unless stage.plan_post_aspects.empty?
                         - stage.plan_post_aspects.each do |concept|
@@ -94,7 +93,6 @@
                                 %span.h5{:id => "name_post_concept_#{concept.id}"}=concept.title
                               -unless concept.plan_post_resources.by_type('positive_r').empty?
                                 %br
-                                %hr
                                 - concept.plan_post_resources.by_type('positive_r').each do |res|
                                   .label.label-danger=res.name
                           - unless concept.plan_post_actions.nil?
@@ -151,7 +149,6 @@
 
 .row
   .col-md-12
-    %hr
     = render 'shared/post_social_bar2', :post => @post
     = render 'shared/post_edit_bar', :post => @post
     %br

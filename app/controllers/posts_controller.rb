@@ -10,11 +10,7 @@ class PostsController < ApplicationController
   before_filter :to_work_redirect, only: [:index]
 
 
-  def journal_data
-    @project = Core::Project.find(params[:project])
-    @my_journals_count = Journal.count_events_for_my_feed(@project.id, current_user)
-    @my_journals  = Journal.events_for_my_feed @project.id, current_user.id, 5
-  end
+
   # before_filter :authorized_user, :only => :destroy
  def authenticate
    unless current_user
@@ -87,14 +83,14 @@ def add_comment
       if  post.instance_of? LifeTape::Post
         current_user.journals.build(:type_event=>name_of_comment_for_param+'_save', :project => @project, :body=>"#{@comment.content[0..148].sub(':',' ')}:?asp=#{post.discontent_aspects.first.id}#comment_#{@comment.id}").save!
       else
-        current_user.journals.build(:type_event=>name_of_comment_for_param+'_save', :project => @project, :body=>"#{@comment.content[0..148].gsub(':',' ')}:#{post.id}#comment_#{@comment.id}").save!
+        current_user.journals.build(:type_event=>name_of_comment_for_param+'_save', :project => @project, :body=>"#{@comment.content[0..148].sub(':',' ')}:#{post.id}#comment_#{@comment.id}").save!
       end
       #PostMailer.add_comment(post, @comment).deliver  if post.user!=@comment.user
       if post.user!=current_user
          if  post.instance_of? LifeTape::Post
            current_user.journals.build(:type_event=>'my_'+name_of_comment_for_param, :user_informed => post.user, :project => @project,  :body=>"#{@comment.content[0..148].sub(':',' ')}:?asp=#{post.discontent_aspects.first.id}#comment_#{@comment.id}", :viewed=> false).save!
          else
-           current_user.journals.build(:type_event=>'my_'+name_of_comment_for_param, :user_informed => post.user, :project => @project,  :body=>"#{@comment.content[0..148].gsub(':',' ')}:#{post.id}#comment_#{@comment.id}", :viewed=> false).save!
+           current_user.journals.build(:type_event=>'my_'+name_of_comment_for_param, :user_informed => post.user, :project => @project,  :body=>"#{@comment.content[0..148].sub(':',' ')}:#{post.id}#comment_#{@comment.id}", :viewed=> false).save!
          end
       end
       users = []
@@ -104,7 +100,7 @@ def add_comment
           if  post.instance_of? LifeTape::Post
             current_user.journals.build(:type_event=>'other_'+name_of_comment_for_param, :user_informed =>u, :project => @project, :body=>"#{@comment.content[0..148].sub(':',' ')}:?asp=#{post.discontent_aspects.first.id}#comment_#{@comment.id}", :viewed=> false).save!
           else
-            current_user.journals.build(:type_event=>'other_'+name_of_comment_for_param, :user_informed =>u, :project => @project,  :body=>"#{@comment.content[0..148].gsub(':',' ')}:#{post.id}#comment_#{@comment.id}", :viewed=> false).save!
+            current_user.journals.build(:type_event=>'other_'+name_of_comment_for_param, :user_informed =>u, :project => @project,  :body=>"#{@comment.content[0..148].sub(':',' ')}:#{post.id}#comment_#{@comment.id}", :viewed=> false).save!
           end
         end
       end

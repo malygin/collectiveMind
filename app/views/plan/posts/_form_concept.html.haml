@@ -63,7 +63,6 @@
     .col-md-12
       .form-group.has-danger
         =f.text_area :content,  :class => "concept_cond form-control", rows: 12, style: 'width: 100%;'
-  %hr
   .row
     .col-md-12
       .text-center
@@ -186,9 +185,7 @@
       %a.btn.btn-success.pull-right{onclick:"return add_new_resource_to_plan('positive_s');"} Добавить ресурс
       -#.form-group.has-success
       -#  =text_area_tag "pa1[#{first_cond.id}][positive_s]", first_cond.positive_s, :class => "concept_cond form-control", rows: 12, style: 'width: 100%;'
-  %hr
   #render_get_concept_actions
-  %hr
   .row
     .col-md-12
       .text-center
@@ -316,7 +313,6 @@
       -#.form-group.has-success
       -#  =text_area_tag "pa1[#{first_cond.id}][negative_s]", first_cond.negative_s, :class => "concept_cond form-control", rows: 14,  style: 'width: 100%;'
 
-  %hr
   .row
     .col-md-12
       .text-center

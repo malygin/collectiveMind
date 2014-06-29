@@ -4,7 +4,7 @@ class UsersController < ApplicationController
 	#before_filter :authenticate, :only => [:edit, :update, :show]
 	before_filter :correct_user, :only => [:edit, :update]
 	before_filter :admin_user, :only => [:destroy]
-
+  before_filter :journal_data, :only => [:index, :new, :edit, :show, :users_rc]
 	def new
 		@user = User.new
 		@title = "Sign up"
@@ -16,8 +16,6 @@ class UsersController < ApplicationController
     @project = Core::Project.find(params[:project])
 
     add_breadcrumb  @user, user_path(@project, @user)
-    @my_journals_count = Journal.count_events_for_my_feed(@project.id, current_user)
-    @my_journals  = Journal.events_for_my_feed @project.id, current_user.id, 5
 
     if @user != current_user
      @journals = Journal.events_for_user_show @project.id, @user.id, 30
@@ -31,9 +29,7 @@ class UsersController < ApplicationController
   end
 
 	def edit
-    @project = Core::Project.find(params[:project])
-    @my_journals_count = Journal.count_events_for_my_feed(@project.id, current_user)
-    @my_journals  = Journal.events_for_my_feed @project.id, current_user.id, 5
+
     @user = User.find(params[:id])
     add_breadcrumb  "Редактирование профиля: #{@user}", edit_user_path(@project, @user)
 
@@ -42,9 +38,7 @@ class UsersController < ApplicationController
 	def index
     @project = Core::Project.find(params[:project])
     add_breadcrumb I18n.t('menu.raiting'), users_path(@project)
-    @my_journals_count = Journal.count_events_for_my_feed(@project.id, current_user)
-    @my_journals  = Journal.events_for_my_feed @project.id, current_user.id, 5
-    #@users = User.where('score>0').where('admin=?', false).order('score DESC').paginate(:page =>params[:page])
+       #@users = User.where('score>0').where('admin=?', false).order('score DESC').paginate(:page =>params[:page])
     @users = User.joins(:core_project_scores).where("core_project_scores.project_id = ? AND core_project_scores.score > 0", @project.id).where('users.admin=?', false).order("core_project_scores.score DESC").paginate(:page =>params[:page])
   end
 
@@ -60,8 +54,7 @@ class UsersController < ApplicationController
 
   def users_rc
     @project = Core::Project.find(params[:project])
-    @my_journals_count = Journal.count_events_for_my_feed(@project.id, current_user)
-    @my_journals  = Journal.events_for_my_feed @project.id, current_user.id, 5
+
     @users = User.where(admin:false, type_user: 4).order('score DESC').paginate(:page =>params[:page])
     #@users = User.where('admin=?', false).where('type_user = 4 or type_user = 5').order('score DESC').paginate(:page =>params[:page])
   end
