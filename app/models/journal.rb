@@ -13,7 +13,7 @@ class Journal < ActiveRecord::Base
   end
 
   def self.events_for_user_show(project_id, user_id, lim = 5)
-		Journal.where(' project_id = ? AND type_event NOT IN (?)',project_id, @types).where("user_id= (?)", user_id).limit(lim).order('created_at DESC')
+		Journal.where(' project_id = ? AND personal =? ',project_id, false).where("user_id= (?)", user_id).limit(lim).order('created_at DESC')
   end
 
   def self.events_for_my_feed(project_id, user_id, lim=10)
@@ -27,7 +27,7 @@ class Journal < ActiveRecord::Base
 
 
   def self.last_event_for(user, project_id)
-    Journal.where(' project_id = ? AND type_event NOT IN (?)',project_id, @my_types).where("user_id= (?)", user.id).order('created_at DESC').first
+    Journal.where(' project_id = ? AND personal = ? ',project_id, false).where("user_id= (?)", user.id).order('created_at DESC').first
 
   end
 

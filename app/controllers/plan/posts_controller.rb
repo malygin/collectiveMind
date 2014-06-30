@@ -98,8 +98,8 @@ class Plan::PostsController < PostsController
     @comment = comment_model.new
     @comments = @post.comments.paginate(:page => params[:page], :per_page => 30)
     if params[:viewed]
-      Journal.find(params[:viewed]).update_attribute(:viewed, true)
-      @my_journals_count = Journal.count_events_for_my_feed(@project.id, current_user)
+      Journal.events_for_content(@project, current_user, @post.id).update_all("viewed = 'true'")
+      @my_journals_count = @my_journals_count - 1
     end
     if current_model.column_names.include? 'number_views'
       @post.update_column(:number_views, @post.number_views+1)
