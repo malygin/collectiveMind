@@ -1,9 +1,9 @@
 -if @concept_post.name.present?
-  var concept_name = "<h5 class='color-orange text-center'><b>A1.</b>#{t('form.novation_what')}</h5><div class='text-center'><p>#{@concept_post.name.gsub("\r\n", "&nbsp;")}</p></div>"
+  var concept_name = "<h5 class='color-orange text-center'><b>A1.</b>#{t('form.novation_what')}</h5><div class='text-center'><p>#{@concept_post.name.gsub("\r\n", "<br>").html_safe}</p></div>"
 -else
   var concept_name = ''
 -if @concept_post.content.present?
-  var concept_content = "<h5 class='color-orange text-center'><b>A2.</b>#{t('form.novation_how')}</h5><div class='text-center'><p>#{@concept_post.content.gsub("\r\n", "&nbsp;")}</p></div>"
+  var concept_content = "<h5 class='color-orange text-center'><b>A2.</b>#{t('form.novation_how')}</h5><div class='text-center'><p>#{@concept_post.content.gsub("\r\n", "<br>").html_safe}</p></div>"
 -else
   var concept_content = ''
 

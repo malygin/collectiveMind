@@ -15,9 +15,9 @@
         %h3.color-green
           4 этап: Создание проектов.
           %br
-          %small
-            Создание проектов в рамках процедуры:
-            =@project.name
+        %span(style='font-size: 20px;line-height: 30px;')
+          Создание проектов в рамках процедуры:
+          =@project.name
       - if signed_in? and @project.status == 9
         .col-md-3
           .pull-right
