@@ -27,7 +27,7 @@ class Journal < ActiveRecord::Base
 
 
   def self.last_event_for(user, project_id)
-    Journal.where(' project_id = ? AND type_event NOT IN (?)',project_id, @my_types).where("user_id= (?)", user.id).order('created_at DESC').first
+    Journal.where(' project_id = ? AND personal = ? ',project_id, false).where("user_id= (?)", user.id).order('created_at DESC').first
 
   end
 
