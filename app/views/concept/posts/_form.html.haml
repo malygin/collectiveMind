@@ -178,7 +178,7 @@
                       =f.autocomplete_field :resource, autocomplete_concept_post_resource_concept_posts_path, :"min-length" => 0,  class: 'form-control autocomplete',placeholder: 'Введите свой ресурс или выберите из списка', name: 'resor[]'
                       %br
                       = text_area_tag 'res[]', '', class: 'form-control', placeholder: 'Пояснение к ресурсу'
-              %a.btn.btn-warning{onclick:"return add_new_resource_to_concept(); "} Добавить ресурс
+              %a.btn.btn-warning{onclick:"return add_new_resource_to_concept(#{@project.id}); "} Добавить ресурс
 
               -#=text_area_tag "pa[#{@discontent_post.id}][positive_r]",@pa.positive_r, :placeholder => 'Перечислите все необходимое для успешного функционирования вашего нововедения в будущем', :class => "concept_cond form-control", rows: 12, style: 'width: 100%;'
 

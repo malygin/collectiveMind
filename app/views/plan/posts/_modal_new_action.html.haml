@@ -53,7 +53,7 @@
                   =autocomplete_field_tag "resor_action[]",'', autocomplete_concept_post_resource_concept_posts_path,:append_to => "#mod2", :"min-length" => 0,  class: 'form-control autocomplete',placeholder: 'Введите свой ресурс или выберите из списка'
                   %br
                   = text_area_tag "res_action[]", '', class: 'form-control', placeholder: 'Пояснение к ресурсу'
-          %a.btn.btn-primary.pull-right{onclick:"return add_new_action_resource_to_plan();"} Добавить ресурс
+          %a.btn.btn-primary.pull-right{onclick:"return add_new_action_resource_to_plan(#{@project.id});"} Добавить ресурс
           %br
           %br
           .pull-right
