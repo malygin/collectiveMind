@@ -18,6 +18,7 @@
 #= require bootstrap3-editable/bootstrap-editable
 #= require wizard/jquery.pjax
 #= require jquery.autosize
+#= require wizard/jquery.icheck
 
 $('#modal_help').modal
   keyboard: false
@@ -417,15 +418,16 @@ $('#select_for_aspects').on 'change', ->
         aspect_id: aspect_id
 
 @user_check_field= (el,check_field)->
-  optsel = $("#option_for_select_discontent")
+  optsel = $("#option_for_check_field")
   project_id = parseInt(optsel.attr('project'))
+  table_name = optsel.attr('table_name')
   if ( $(el).is( ":checked" ) )
     status = true
   else
     status = false
   if check_field != ''
     $.ajax
-      url: "/project/#{project_id}/discontent/posts/check_field"
+      url: "/project/#{project_id}/#{table_name}/posts/check_field"
       type: "get"
       data:
         check_field: check_field

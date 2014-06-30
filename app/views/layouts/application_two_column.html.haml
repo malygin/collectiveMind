@@ -21,15 +21,19 @@
           %h3
             MASS
             %strong DECISION
-    %nav#sidebar.sidebar.nav-collapse.collapse
-      = render partial: 'left_side', :locals => { :stage => :first }
+    -#.content
+    -#  %nav#sidebar.sidebar.nav-collapse.collapse
+    -#    = render partial: 'left_side', :locals => { :stage => :first }
     .wrap
       %header.page-header
         .navbar
           =render 'top_menu'
-      .content.container
-
-        = yield
+    .content.container
+      %nav#sidebar.sidebar.nav-collapse.collapse
+        = render partial: 'left_side', :locals => { :stage => :first }
+      .wrap
+        .content.container
+          = yield
 
 
     /

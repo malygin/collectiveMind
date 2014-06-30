@@ -14,6 +14,7 @@
         .body
           .row
             .col-md-6
+              #option_for_check_field(project="#{@project.id}" table_name="#{@table_name}")
               %h3.color-red
                 Правила работы на этапе "Анализ ситуации"
                 %br
@@ -28,7 +29,12 @@
               %p 2) Предлагать конструктивную критику любых предложенных несовершенств от других участников, а также задавать как можно больше вопросов
 
               %br
+              .control-group
+                %label.checkbox{:for => "check-field"}
+                  %input#check-field{:name => "check-field", :type => "checkbox", :onchange => "user_check_field(this,'discontent_posts_to_work');"}/
+                  Не показывать в следующий раз
 
+              %br
               =link_to "Приступить к работе!", @path_link, class: 'btn btn-danger btn-block'
 
             .col-md-6

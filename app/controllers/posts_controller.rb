@@ -64,7 +64,8 @@ def to_work_redirect
   @project = Core::Project.find(params[:project])
   path_link = "/project/#{@project.id}/" + current_model.table_name.sub('_posts','/posts') + "/to_work"
   able = ['life_tape_posts','discontent_posts','concept_posts'].include? current_model.table_name
-  redirect_to path_link if params[:asp].nil? and able
+  check = get_check_field?(current_model.table_name + '_to_work')
+  redirect_to path_link if params[:asp].nil? and able and !check
 end
 
   def add_comment
@@ -462,6 +463,7 @@ def index
     else
       @path_link = "/project/#{@project.id}/" + current_model.table_name.sub('_posts','/posts') + "?asp=#{@project.proc_aspects.first.id}"
     end
+    @table_name = current_model.table_name.sub('_posts','')
 
     respond_to do |format|
       format.html { render :layout => 'application_two_column'}

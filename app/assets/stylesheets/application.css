@@ -9409,7 +9409,7 @@ a.thumbnail:focus {
   padding: 0;
   width: 22px;
   height: 22px;
-  background: url(../img/icheck/square/grey.png) no-repeat;
+  background: url(/assets/img/icheck/square/grey.png) no-repeat;
   border: none;
   cursor: pointer;
 }
@@ -9460,7 +9460,7 @@ a.thumbnail:focus {
 @media only screen and (-webkit-min-device-pixel-ratio: 1.5), only screen and (-moz-min-device-pixel-ratio: 1.5), only screen and (-o-min-device-pixel-ratio: 3 / 2), only screen and (min-device-pixel-ratio: 1.5) {
   .icheckbox_square-grey,
   .iradio_square-grey {
-    background-image: url(../img/icheck/square/grey@2x.png);
+    background-image: url(img/icheck/square/grey@2x.png);
     -webkit-background-size: 240px 24px;
     background-size: 240px 24px;
   }
