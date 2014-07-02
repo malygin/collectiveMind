@@ -620,3 +620,8 @@ $('#select_for_aspects').on 'change', ->
     return false
   else
     return true
+
+
+$("html").on "click", (e) ->
+  $("[data-original-title]").popover "hide"  if typeof $(e.target).data("original-title") is "undefined" and not $(e.target).parents().is(".popover.in")
+  return
