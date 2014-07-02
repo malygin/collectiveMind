@@ -2,7 +2,7 @@
   .modal-dialog.modal-lg
     .modal-content
       .modal-header
-        %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} &times;
+        %button.btn.btn-primary.pull-right(type = "button" data-dismiss="modal") Закрыть
         %h4#myModalLabel.modal-title Добавление нововведений
       .modal-body
         #option_for_select_concept(project="#{@project.id}" post="#{@post.id}" stage="#{@post_stage.id}")
