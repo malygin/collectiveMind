@@ -22,6 +22,13 @@
         .col-md-3
           .pull-right
             = link_to '+ Добавить Проект', new_plan_post_path(@project) , id: 'add_record',  class: 'btn btn-lg btn-success'
+    -if boss? and (@project.status == 9 or @project.status == 10)
+      %br
+      .row
+        .col-md-12
+          .pull-right
+            = link_to 'Стандартная оценка', plan_posts_change_estimate_status_path(@project, :est_stat => "0"), :remote => true, :method => :put, id: 'standart_estimate',  class: "btn btn-sm stat_estimate #{@est_stat == 0 ? 'btn-success' : 'btn-default'}"
+            = link_to 'Упрощенная оценка', plan_posts_change_estimate_status_path(@project, :est_stat => "1"), :remote => true, :method => :put, id: 'simple_estimate',  class: "btn btn-sm stat_estimate #{@est_stat == 1 ? 'btn-success' : 'btn-default'}"
   .body
     %br
     %br

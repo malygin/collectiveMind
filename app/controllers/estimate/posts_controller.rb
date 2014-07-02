@@ -22,10 +22,10 @@ class Estimate::PostsController < PostsController
 
   def prepare_data
     @project = Core::Project.find(params[:project])
-    @journals = Journal.events_for_user_feed @project.id
-    @news = ExpertNews::Post.first
-    @my_jounals = Journal.count_events_for_my_feed(@project.id, current_user)
-    @mini_help = Help::Post.where(stage:5, mini: true).first
+    #@journals = Journal.events_for_user_feed @project.id
+    #@news = ExpertNews::Post.first
+    #@my_jounals = Journal.count_events_for_my_feed(@project.id, current_user)
+    #@mini_help = Help::Post.where(stage:5, mini: true).first
 
     @status = params[:status]
     @aspects = Discontent::Aspect.where(:project_id => @project)
@@ -51,11 +51,12 @@ class Estimate::PostsController < PostsController
       format.html {render :layout => 'application_two_column'} # index.html.erb
       format.json { render json: @posts }
     end
-
   end
+
   def show
     @post = Estimate::Post.find(params[:id])
     @plan_post = @post.post
+    @est_stat = @plan_post.estimate_status.nil? ? 0 : @plan_post.estimate_status
     add_breadcrumb 'Просмотр записи', polymorphic_path(@post, :project => @project.id)
     @comment = comment_model.new
     @comments = @post.comments.paginate(:page => params[:page], :per_page => 30)
@@ -83,7 +84,7 @@ class Estimate::PostsController < PostsController
   def new
     @post = current_model.new
     @plan_post = Plan::Post.find(params[:plan_id])
-
+    @est_stat = @plan_post.estimate_status.nil? ? 0 : @plan_post.estimate_status
 
     @pair_estimates1 = {}
     @plan_post.post_aspects.where("post_stage_id = ?", @plan_post.first_stage).each do |p|
@@ -116,42 +117,66 @@ class Estimate::PostsController < PostsController
     else
       @estimate_post.status = 1
     end
+    @est_stat = plan_post.estimate_status.nil? ? 0 : plan_post.estimate_status
     #puts "__________", @estimate_post.status
     @estimate_post.post_aspects=[]
     if not jury?
+      if @est_stat == 0
+        plan_post.post_aspects.each do |tr|
+          est_tr = Estimate::PostAspect.new
+          #est_tr.first_stage = false
+          est_tr.plan_post_aspect = tr
+          op = params[:op]['0'][tr.id.to_s]
+          est_tr.op1 = op['1']
+          est_tr.op2 = op['2']
+          est_tr.op3 = op['3']
+          est_tr.op4 = op['4']
+          est_tr.op = params[:op_text]['0'][tr.id.to_s]
 
-      plan_post.post_aspects.each do |tr|
-        est_tr = Estimate::PostAspect.new
-        #est_tr.first_stage = false
-        est_tr.plan_post_aspect = tr
-        op = params[:op]['0'][tr.id.to_s]
-        est_tr.op1 = op['1']
-        est_tr.op2 = op['2']
-        est_tr.op3 = op['3']
-        est_tr.op4 = op['4']
-        est_tr.op = params[:op_text]['0'][tr.id.to_s]
+          ozf = params[:ozf]['0'][tr.id.to_s]
+          est_tr.ozf1 = ozf['1']
+          est_tr.ozf2 = ozf['2']
+          est_tr.ozf3 = ozf['3']
+          est_tr.ozf4 = ozf['4']
+          est_tr.ozf = params[:ozf_text]['0'][tr.id.to_s]
 
-        ozf = params[:ozf]['0'][tr.id.to_s]
-        est_tr.ozf1 = ozf['1']
-        est_tr.ozf2 = ozf['2']
-        est_tr.ozf3 = ozf['3']
-        est_tr.ozf4 = ozf['4']
-        est_tr.ozf = params[:ozf_text]['0'][tr.id.to_s]
+          ozs = params[:ozs]['0'][tr.id.to_s]
+          est_tr.ozs1 = ozs['1']
+          est_tr.ozs2 = ozs['2']
+          est_tr.ozs3 = ozs['3']
+          est_tr.ozs4 = ozs['4']
+          est_tr.ozs = params[:ozs_text]['0'][tr.id.to_s]
 
-        ozs = params[:ozs]['0'][tr.id.to_s]
-        est_tr.ozs1 = ozs['1']
-        est_tr.ozs2 = ozs['2']
-        est_tr.ozs3 = ozs['3']
-        est_tr.ozs4 = ozs['4']
-        est_tr.ozs = params[:ozs_text]['0'][tr.id.to_s]
+          on = params[:on]['0'][tr.id.to_s]
+          est_tr.on1 = on['1']
+          est_tr.on2 = on['2']
+          est_tr.on3 = on['3']
+          est_tr.on4 = on['4']
+          est_tr.on = params[:on_text]['0'][tr.id.to_s]
+          @estimate_post.post_aspects << est_tr
+        end
+      else
+        plan_post.post_aspects.each do |tr|
+          est_tr = Estimate::PostAspect.new
+          #est_tr.first_stage = false
+          est_tr.plan_post_aspect = tr
+          op = params[:op]['0'][tr.id.to_s]
+          est_tr.op1 = op
+          est_tr.op = params[:op_text]['0'][tr.id.to_s]
 
-        on = params[:on]['0'][tr.id.to_s]
-        est_tr.on1 = on['1']
-        est_tr.on2 = on['2']
-        est_tr.on3 = on['3']
-        est_tr.on4 = on['4']
-        est_tr.on = params[:on_text]['0'][tr.id.to_s]
-        @estimate_post.post_aspects << est_tr
+          ozf = params[:ozf]['0'][tr.id.to_s]
+          est_tr.ozf1 = ozf
+          est_tr.ozf = params[:ozf_text]['0'][tr.id.to_s]
+
+          ozs = params[:ozs]['0'][tr.id.to_s]
+          est_tr.ozs1 = ozs
+          est_tr.ozs = params[:ozs_text]['0'][tr.id.to_s]
+
+          on = params[:on]['0'][tr.id.to_s]
+          est_tr.on1 = on
+          est_tr.on = params[:on_text]['0'][tr.id.to_s]
+          @estimate_post.post_aspects << est_tr
+        end
       end
 
       #plan_post.post_aspects_first.each do |tr|
@@ -216,38 +241,63 @@ class Estimate::PostsController < PostsController
     plan_post = Plan::Post.find(params[:post_id])
     @estimate_post.post_aspects.destroy_all
     #@estimate_post.post_aspects=[]
-    plan_post.post_aspects.each do |tr|
-      est_tr = Estimate::PostAspect.new
-      #est_tr.first_stage = false
-      est_tr.plan_post_aspect = tr
-      op = params[:op]['0'][tr.id.to_s]
-      est_tr.op1 = op['1']
-      est_tr.op2 = op['2']
-      est_tr.op3 = op['3']
-      est_tr.op4 = op['4']
-      est_tr.op = params[:op_text]['0'][tr.id.to_s]
+    @est_stat = plan_post.estimate_status.nil? ? 0 : plan_post.estimate_status
+    if @est_stat == 0
+      plan_post.post_aspects.each do |tr|
+        est_tr = Estimate::PostAspect.new
+        #est_tr.first_stage = false
+        est_tr.plan_post_aspect = tr
+        op = params[:op]['0'][tr.id.to_s]
+        est_tr.op1 = op['1']
+        est_tr.op2 = op['2']
+        est_tr.op3 = op['3']
+        est_tr.op4 = op['4']
+        est_tr.op = params[:op_text]['0'][tr.id.to_s]
 
-      ozf = params[:ozf]['0'][tr.id.to_s]
-      est_tr.ozf1 = ozf['1']
-      est_tr.ozf2 = ozf['2']
-      est_tr.ozf3 = ozf['3']
-      est_tr.ozf4 = ozf['4']
-      est_tr.ozf = params[:ozf_text]['0'][tr.id.to_s]
+        ozf = params[:ozf]['0'][tr.id.to_s]
+        est_tr.ozf1 = ozf['1']
+        est_tr.ozf2 = ozf['2']
+        est_tr.ozf3 = ozf['3']
+        est_tr.ozf4 = ozf['4']
+        est_tr.ozf = params[:ozf_text]['0'][tr.id.to_s]
 
-      ozs = params[:ozs]['0'][tr.id.to_s]
-      est_tr.ozs1 = ozs['1']
-      est_tr.ozs2 = ozs['2']
-      est_tr.ozs3 = ozs['3']
-      est_tr.ozs4 = ozs['4']
-      est_tr.ozs = params[:ozs_text]['0'][tr.id.to_s]
+        ozs = params[:ozs]['0'][tr.id.to_s]
+        est_tr.ozs1 = ozs['1']
+        est_tr.ozs2 = ozs['2']
+        est_tr.ozs3 = ozs['3']
+        est_tr.ozs4 = ozs['4']
+        est_tr.ozs = params[:ozs_text]['0'][tr.id.to_s]
 
-      on = params[:on]['0'][tr.id.to_s]
-      est_tr.on1 = on['1']
-      est_tr.on2 = on['2']
-      est_tr.on3 = on['3']
-      est_tr.on4 = on['4']
-      est_tr.on = params[:on_text]['0'][tr.id.to_s]
-      @estimate_post.post_aspects << est_tr
+        on = params[:on]['0'][tr.id.to_s]
+        est_tr.on1 = on['1']
+        est_tr.on2 = on['2']
+        est_tr.on3 = on['3']
+        est_tr.on4 = on['4']
+        est_tr.on = params[:on_text]['0'][tr.id.to_s]
+        @estimate_post.post_aspects << est_tr
+      end
+    else
+      plan_post.post_aspects.each do |tr|
+        est_tr = Estimate::PostAspect.new
+        #est_tr.first_stage = false
+        est_tr.plan_post_aspect = tr
+        op = params[:op]['0'][tr.id.to_s]
+        est_tr.op1 = op
+        est_tr.op = params[:op_text]['0'][tr.id.to_s]
+
+        ozf = params[:ozf]['0'][tr.id.to_s]
+        est_tr.ozf1 = ozf
+        est_tr.ozf = params[:ozf_text]['0'][tr.id.to_s]
+
+        ozs = params[:ozs]['0'][tr.id.to_s]
+        est_tr.ozs1 = ozs
+        est_tr.ozs = params[:ozs_text]['0'][tr.id.to_s]
+
+        on = params[:on]['0'][tr.id.to_s]
+        est_tr.on1 = on
+        est_tr.on = params[:on_text]['0'][tr.id.to_s]
+        @estimate_post.post_aspects << est_tr
+      end
     end
 
     #plan_post.post_aspects_first.each do |tr|

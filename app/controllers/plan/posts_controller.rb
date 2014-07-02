@@ -34,6 +34,8 @@ class Plan::PostsController < PostsController
 
   def index
     @posts = current_model.where(:project_id => @project, :status => 0).order('created_at DESC').paginate(:page => params[:page])
+    post = Plan::Post.where(:project_id => @project, :status => 0).first
+    @est_stat = post.estimate_status if post
     respond_to do |format|
       format.html {render :layout => 'application_two_column'}
       format.json { render json: @posts }
@@ -598,6 +600,20 @@ end
     @project = Core::Project.find(params[:project])
     @post = Plan::Post.find(params[:id])
     @concept_post = Plan::PostAspect.find(params[:con_id])
+    respond_to do |format|
+      format.js
+    end
+  end
+
+  def change_estimate_status
+    @project = Core::Project.find(params[:project])
+    @est_stat = params[:est_stat]
+    posts = Plan::Post.where(:project_id => @project, :status => 0)
+    if posts.present? and @est_stat.present?
+      posts.each do |est|
+        est.update_attributes(:estimate_status => @est_stat)
+      end
+    end
     respond_to do |format|
       format.js
     end

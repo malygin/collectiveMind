@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140625151324) do
+ActiveRecord::Schema.define(:version => 20140701230004) do
 
   create_table "answers", :force => true do |t|
     t.string   "text"
@@ -1042,16 +1042,17 @@ ActiveRecord::Schema.define(:version => 20140625151324) do
     t.text     "other_steps"
     t.integer  "status"
     t.integer  "number_views"
-    t.datetime "created_at",                      :null => false
-    t.datetime "updated_at",                      :null => false
+    t.datetime "created_at",                         :null => false
+    t.datetime "updated_at",                         :null => false
     t.integer  "project_id"
     t.text     "content"
-    t.integer  "step",         :default => 1
-    t.boolean  "censored",     :default => false
+    t.integer  "step",            :default => 1
+    t.boolean  "censored",        :default => false
     t.text     "plan_first"
     t.text     "plan_other"
     t.text     "plan_control"
     t.string   "name"
+    t.integer  "estimate_status"
   end
 
   add_index "plan_posts", ["created_at"], :name => "index_plan_posts_on_created_at"

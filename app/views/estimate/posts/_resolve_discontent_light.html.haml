@@ -1,0 +1,305 @@
+%div.tab-pane(id="dis_#{pa.id}" style="padding-left:10px;" )
+  %h3.color-orange.text-center
+    %b=pa.title
+    %br
+    %br
+  %h4.color-orange.text-center
+    %b A1.
+    =t('form.novation_what')
+  .form-group
+    =simple_format(pa.name)
+
+  %h4.color-orange.text-center
+    %b A2.
+    =t('form.novation_how')
+  .form-group.has-danger
+    =simple_format(pa.content)
+
+  %hr
+  %h4.color-orange.text-center
+    %b B1.
+    =t('form.cond')
+  .form-group.has-success= display_content(pa.positive)
+
+  %h4.color-orange.text-center
+    %b B2.
+    =t('form.cond_res')
+  %br
+  %table.table.table-striped.table-bordered
+    %thead
+      %tr
+        %th
+          ="#"
+        %th
+          Название
+        %th
+          Пояснение
+    %tbody
+      - pa.plan_post_resources.by_type('positive_r').each_with_index do |r, index|
+        %tr
+          %td
+            =index+1
+          %td
+            =r.name
+          %td
+            =r.desc
+
+  %h4.color-orange.text-center
+    %b B3.
+    =t('form.cond_s')
+  %br
+  %table.table.table-striped.table-bordered
+    %thead
+      %tr
+        %th
+          ="#"
+        %th
+          Название
+        %th
+          Пояснение
+    %tbody
+      - pa.plan_post_means.by_type('positive_s').each_with_index do |r, index|
+        %tr
+          %td
+            =index+1
+          %td
+            =r.name
+          %td
+            =r.desc
+
+  %hr
+  #render_get_concept_actions
+  %hr
+  %h4.color-orange.text-center
+    %b C1.
+    =t('form.negative')
+  .form-group.has-success= display_content(pa.negative)
+
+  %h4.color-orange.text-center
+    %b C2.
+    =t('form.negative_res')
+  %br
+  %table.table.table-striped.table-bordered
+    %thead
+      %tr
+        %th
+          ="#"
+        %th
+          Название
+        %th
+          Пояснение
+    %tbody
+      - pa.plan_post_resources.by_type('negative_r').each_with_index do |r, index|
+        %tr
+          %td
+            =index+1
+          %td
+            =r.name
+          %td
+            =r.desc
+
+
+  %h4.color-orange.text-center
+    %b C3.
+    =t('form.negative_s')
+  %br
+  %table.table.table-striped.table-bordered
+    %thead
+      %tr
+        %th
+          ="#"
+        %th
+          Название
+        %th
+          Пояснение
+    %tbody
+      - pa.plan_post_means.by_type('negative_s').each_with_index do |r, index|
+        %tr
+          %td
+            =index+1
+          %td
+            =r.name
+          %td
+            =r.desc
+
+  %hr
+  %h4.color-orange.text-center
+    %b D1.
+    =t('form.control')
+  .form-group.has-success= display_content(pa.control)
+
+  %h4.color-orange.text-center
+    %b D2.
+    =t('form.control_res')
+  %br
+  %table.table.table-striped.table-bordered
+    %thead
+      %tr
+        %th
+          ="#"
+        %th
+          Название
+        %th
+          Пояснение
+    %tbody
+      - pa.plan_post_resources.by_type('control_r').each_with_index do |r, index|
+        %tr
+          %td
+            =index+1
+          %td
+            =r.name
+          %td
+            =r.desc
+
+  %h4.color-orange.text-center
+    %b D3.
+    =t('form.control_s')
+  %br
+  %table.table.table-striped.table-bordered
+    %thead
+      %tr
+        %th
+          ="#"
+        %th
+          Название
+        %th
+          Пояснение
+    %tbody
+      - pa.plan_post_means.by_type('control_s').each_with_index do |r, index|
+        %tr
+          %td
+            =index+1
+          %td
+            =r.name
+          %td
+            =r.desc
+
+  %hr
+  %h4.color-orange.text-center
+    %b E1.
+    =t('form.obstacles_bcd')
+  .form-group.has-success= display_content(pa.obstacles)
+
+  %hr
+  %h4.color-orange.text-center
+    %b F1.
+    =t('form.problems')
+  .form-group.has-success= display_content(pa.problems)
+
+  %h4.color-orange.text-center
+    %b F2.
+    =t('form.reality')
+  .form-group.has-success= display_content(pa.reality)
+
+  %br
+  %br
+
+  %b Для создания ресурсов в проекте предлагаются определенные средства. Проанализируйте их и оцените, какова вероятность того, что на базе этих средств ресурсы будут созданы --
+  .field
+    = radio_button_tag "on[0][#{pa.id}]", '4', :checked => est.on1 == 4
+    = f.label " -- 1) в полном объеме"
+  .field
+    = radio_button_tag "on[0][#{pa.id}]", '2', :checked => est.on1 == 2
+    = f.label " -- 2) в значительном объеме"
+  .field
+    = radio_button_tag "on[0][#{pa.id}]", '1', :checked => est.on1 == 1
+    = f.label " -- 3) в небольшом объеме"
+  .field
+    = radio_button_tag "on[0][#{pa.id}]", '0', :checked => est.on1 == 0
+    = f.label " -- 4) в ничтожном  объеме"
+  .field
+    = f.label 'Объясните, почему вы так считаете'
+    %br
+    = text_area_tag "on_text[0][#{pa.id}]", est.on ,   rows: 3, style: 'width: 100%;'
+  %br
+  %b Использование этих средств потребует материальных и трудовых затрат. Какова вероятность, что эти затраты окажутся--
+  .field
+    = radio_button_tag "ozs[0][#{pa.id}]", '4', :checked => est.ozs1 == 4
+    = f.label " --1) значительными"
+  .field
+    = radio_button_tag "ozs[0][#{pa.id}]", '2', :checked => est.ozs1 == 2
+    = f.label " --2) средними"
+  .field
+    = radio_button_tag "ozs[0][#{pa.id}]", '1', :checked => est.ozs1 == 1
+    = f.label " --3) незначительными"
+  .field
+    = radio_button_tag "ozs[0][#{pa.id}]", '0', :checked => est.ozs1 == 0
+    = f.label " --4) ничтожными"
+  .field
+    = f.label 'Объясните, почему вы так считаете'
+    %br
+    = text_area_tag "ozs_text[0][#{pa.id}]", est.ozs,   rows: 3, style: 'width: 100%;'
+  %br
+  %b  Предположим, что будущее уже наступило и все предложенные ресурсы созданы и работают. Какова вероятность, что с их помощью несовершенство будет устранено--
+  .field
+    = radio_button_tag "op[0][#{pa.id}]", '4', :checked => est.op1 == 4
+    = f.label " -- 1) полностью ?"
+  .field
+    = radio_button_tag "op[0][#{pa.id}]", '2', :checked => est.op1 == 2
+    = f.label " -- 2) в значительной мере ?"
+  .field
+    = radio_button_tag "op[0][#{pa.id}]", '1', :checked => est.op1 == 1
+    = f.label " -- 3) в небольшой мере?"
+  .field
+    = radio_button_tag "op[0][#{pa.id}]", '0', :checked => est.op1 == 0
+    = f.label " -- 4) в ничтожной  мере ?"
+  .field
+    = f.label 'Объясните, почему вы так считаете'
+    %br
+    = text_area_tag "op_text[0][#{pa.id}]", est.op,   rows: 3, style: 'width: 100%;'
+  %br
+  %b Функционирование ресурсов потребует материальных и трудовых затрат. Какова вероятность, что эти затраты окажутся—
+  .field
+    = radio_button_tag "ozf[0][#{pa.id}]", '4', :checked => est.ozf1 == 4
+    = f.label ' --1) значительными'
+  .field
+    = radio_button_tag "ozf[0][#{pa.id}]", '2', :checked => est.ozf1 == 2
+    = f.label ' -- 2) средними'
+  .field
+    = radio_button_tag "ozf[0][#{pa.id}]", '1', :checked => est.ozf1 == 1
+    = f.label ' -- 3) незначительными'
+  .field
+    = radio_button_tag "ozf[0][#{pa.id}]", '0', :checked => est.ozf1 == 0
+    = f.label ' -- 4) ничтожными'
+  .field
+    = f.label 'Объясните, почему вы так считаете'
+    %br
+    = text_area_tag "ozf_text[0][#{pa.id}]", est.ozf ,   rows: 3, style: 'width: 100%;'
+  %br
+
+-#<div class="radio">
+-#  <label>
+-#    <input type="radio" name="optionsRadios" id="optionsRadios1" value="option1" checked>
+-#    Option one is this and that&mdash;be sure to include why it's great
+-#  </label>
+-#</div>
+-#<div class="radio">
+-#  <label>
+-#    <input type="radio" name="optionsRadios" id="optionsRadios2" value="option2">
+-#    Option two can be something else and selecting it will deselect option one
+-#  </label>
+-#</div>
+-#.control-group
+-#  %label.control-label Radio Buttons
+-#  .controls.form-group
+-#    %label.radio
+-#      %input#radio-4.iCheck{:checked => "checked", :name => "can", :type => "radio"}/
+-#      We can sing
+-#    %label.radio
+-#      %input#radio-5.iCheck{:name => "can", :type => "radio"}/
+-#      We can dance
+-#    %label.radio
+-#      %input#radio-6.iCheck{:name => "can", :type => "radio"}/
+-#      We are trying our best!
+-#.control-group
+-#  %label.control-label Same Inline
+-#  .controls.form-group
+-#    %label.radio.inline
+-#      %input#radio-1.iCheck{:checked => "checked", :name => "cani", :type => "radio"}/
+-#      Sing
+-#    %label.radio.inline
+-#      %input#radio-2.iCheck{:name => "cani", :type => "radio"}/
+-#      Dance
+-#    %label.radio.inline
+-#      %input#radio-3.iCheck{:name => "cani", :type => "radio"}/
+-#      Best

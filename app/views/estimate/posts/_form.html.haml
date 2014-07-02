@@ -129,8 +129,8 @@
                               %li.concept_side{:id => "li_concept_#{concept.id}"}
                                 %a(href="#dis_#{concept.id}" data-toggle="tab")
                                   ="#{i+1}. #{concept.title}"
-                                  -if @post.persisted?
-                                    %span.color-green= concept.estimate_post_aspect(@post.id).score
+                                  -if @post.persisted? and concept.estimate_post_aspect(@post.id)
+                                    %span.color-green= concept.estimate_post_aspect(@post.id).score(@est_stat)
 
                     %li.panel
                       %a.color-green(href="#negative" data-toggle="tab")
@@ -156,12 +156,18 @@
                         = f.label 'Оцените проект в целом '
                         = f.select :all_grade, [["Отличный проект ", 0],["Хороший проект", 1], ["Удовлетворительный проект", 2], ["Плохой проект", 3]]
 
+                    -if @est_stat == 1
+                      - @pair_estimates2.each do |pa, est|
+                        = render partial: 'resolve_discontent_light',locals: { pa: pa, est: est , f: f}
 
-                    - @pair_estimates2.each do |pa, est|
-                      = render partial: 'resolve_discontent',locals: { pa: pa, est: est , f: f}
+                      - @pair_estimates1.each do |pa, est|
+                        = render partial: 'resolve_discontent1_light',locals: { pa: pa, est: est, f: f}
+                    -else
+                      - @pair_estimates2.each do |pa, est|
+                        = render partial: 'resolve_discontent',locals: { pa: pa, est: est , f: f}
 
-                    - @pair_estimates1.each do |pa, est|
-                      = render partial: 'resolve_discontent1',locals: { pa: pa, est: est, f: f}
+                      - @pair_estimates1.each do |pa, est|
+                        = render partial: 'resolve_discontent1',locals: { pa: pa, est: est, f: f}
 
 
                     %div.tab-pane#negative

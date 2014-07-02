@@ -131,7 +131,7 @@ scope '/project/:project' do
   post 'plan/posts/get_cond', to:  'plan/posts#get_cond'
   post 'plan/posts/get_cond1', to:  'plan/posts#get_cond1'
   post 'knowbase/posts/sortable_save', to:  'knowbase/posts#sortable_save'
-
+  put 'plan/posts/change_estimate_status', to:  'plan/posts#change_estimate_status'
 
   namespace :plan do
     posts_routes

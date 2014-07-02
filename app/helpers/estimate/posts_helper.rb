@@ -1,7 +1,7 @@
 # encoding: utf-8
 
 module Estimate::PostsHelper
-	def estimate_trans(e)
+	def estimate_trans(e,stat)
 		case e
       when 0
         'невероятно'
@@ -9,7 +9,7 @@ module Estimate::PostsHelper
 				'маловероятно'
 			when 0.5
 				'вероятно'
-			else
+      when 0.850
 				'очень вероятно'
 		end
   end
