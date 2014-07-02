@@ -66,6 +66,7 @@ class Estimate::PostsController < PostsController
   def edit
     @post = Estimate::Post.find(params[:id])
     @plan_post = @post.post
+    @est_stat = @plan_post.estimate_status.nil? ? 0 : @plan_post.estimate_status
     @pair_estimates1 = {}
     @plan_post.post_aspects.where("post_stage_id = ?", @plan_post.first_stage).each do |p|
       @pair_estimates1[p] = @post.post_aspects.by_plan_pa(p.id).first
