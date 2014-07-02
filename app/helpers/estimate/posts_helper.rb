@@ -69,7 +69,7 @@ module Estimate::PostsHelper
   def estimate_trans_simple(field,val)
     if field == 'on'
       case val
-        when 4
+        when 3
           'в полном объеме (более 90%)'
         when 2
           'в значительном объеме (от 50% до 90%)'
@@ -80,7 +80,7 @@ module Estimate::PostsHelper
       end
     elsif field == 'ozs'
       case val
-        when 4
+        when 3
           'значительными'
         when 2
           'средними'
@@ -91,7 +91,7 @@ module Estimate::PostsHelper
       end
     elsif field == 'op'
       case val
-        when 4
+        when 3
           'полностью (более 90%)'
         when 2
           'в значительной мере (от 50% до 90%)'
@@ -102,7 +102,7 @@ module Estimate::PostsHelper
       end
     elsif field == 'ozf'
       case val
-        when 4
+        when 3
           'значительными'
         when 2
           'средними'
@@ -121,7 +121,7 @@ module Estimate::PostsHelper
         'text-danger'
       when 2
         'text-warning'
-      when 4
+      when 3
         'text-success'
     end
   end
