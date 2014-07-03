@@ -47,6 +47,7 @@ class Estimate::PostsController < PostsController
       end
     end
     @posts = Plan::Post.where(:project_id => @project, :status => 0).paginate(:page => params[:page])
+    @est_stat = @posts.first.estimate_status.nil? ? 0 : @posts.first.estimate_status
     respond_to do |format|
       format.html {render :layout => 'application_two_column'} # index.html.erb
       format.json { render json: @posts }

@@ -5,7 +5,12 @@
       =link_to post.user, user_path(@project, post.user)
     %span.color-green=post.name
     %span
-      =link_to 'подробнее', plan_post_path(@project, post)
+      -if boss?
+        =link_to 'подробнее', plan_post_path(@project, post), :class => "btn btn-primary btn-xs"
+        |
+        = render 'shared/post_edit_bar', :post => post
+      -else
+        =link_to 'подробнее', plan_post_path(@project, post)
     %br
     =post.goal
     -#=link_to 'подробнее', plan_post_path(@project, post)

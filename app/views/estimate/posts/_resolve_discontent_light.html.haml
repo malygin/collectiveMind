@@ -194,77 +194,93 @@
   %br
   %br
 
-  %b Для создания ресурсов в проекте предлагаются определенные средства. Проанализируйте их и оцените, какова вероятность того, что на базе этих средств ресурсы будут созданы --
+  Для создания ресурсов в проекте предлагаются определенные средства. Наиболее вероятно, что на базе этих средств ресурсы будут созданы --
   .field
-    = radio_button_tag "on[0][#{pa.id}]", '3', est.on1 == 3
-    = f.label " -- 1) в полном объеме"
+    %label
+      = radio_button_tag "on[0][#{pa.id}]", '3', est.on1 == 3
+      = " -- 1) в полном объеме"
   .field
-    = radio_button_tag "on[0][#{pa.id}]", '2', est.on1 == 2
-    = f.label " -- 2) в значительном объеме"
+    %label
+      = radio_button_tag "on[0][#{pa.id}]", '2', est.on1 == 2
+      = " -- 2) в значительном объеме"
   .field
-    = radio_button_tag "on[0][#{pa.id}]", '1', est.on1 == 1
-    = f.label " -- 3) в небольшом объеме"
+    %label
+      = radio_button_tag "on[0][#{pa.id}]", '1', est.on1 == 1
+      = " -- 3) в небольшом объеме"
   .field
-    = radio_button_tag "on[0][#{pa.id}]", '0', est.on1 == 0
-    = f.label " -- 4) в ничтожном  объеме"
+    %label
+      = radio_button_tag "on[0][#{pa.id}]", '0', est.on1 == 0
+      =  " -- 4) в ничтожном  объеме"
   .field
-    = f.label 'Объясните, почему вы так считаете'
+    = 'Объясните, почему вы так считаете'
     %br
-    = text_area_tag "on_text[0][#{pa.id}]", est.on ,   rows: 3, style: 'width: 100%;'
+    = text_area_tag "on_text[0][#{pa.id}]", est.on ,   rows: 3, style: 'width: 100%; height: 70px;'
   %br
-  %b Использование этих средств потребует материальных и трудовых затрат. Какова вероятность, что эти затраты окажутся--
+  Использование этих средств потребует материальных и трудовых затрат. Наиболее вероятно, что эти затраты окажутся--
   .field
-    = radio_button_tag "ozs[0][#{pa.id}]", '3', est.ozs1 == 3
-    = f.label " --1) значительными"
+    %label
+      = radio_button_tag "ozs[0][#{pa.id}]", '3', est.ozs1 == 3
+      = " --1) значительными"
   .field
-    = radio_button_tag "ozs[0][#{pa.id}]", '2', est.ozs1 == 2
-    = f.label " --2) средними"
+    %label
+      = radio_button_tag "ozs[0][#{pa.id}]", '2', est.ozs1 == 2
+      = " --2) средними"
   .field
-    = radio_button_tag "ozs[0][#{pa.id}]", '1', est.ozs1 == 1
-    = f.label " --3) незначительными"
+    %label
+      = radio_button_tag "ozs[0][#{pa.id}]", '1', est.ozs1 == 1
+      = " --3) незначительными"
   .field
-    = radio_button_tag "ozs[0][#{pa.id}]", '0', est.ozs1 == 0
-    = f.label " --4) ничтожными"
+    %label
+      = radio_button_tag "ozs[0][#{pa.id}]", '0', est.ozs1 == 0
+      =  " --4) ничтожными"
   .field
-    = f.label 'Объясните, почему вы так считаете'
+    = 'Объясните, почему вы так считаете'
     %br
-    = text_area_tag "ozs_text[0][#{pa.id}]", est.ozs,   rows: 3, style: 'width: 100%;'
+    = text_area_tag "ozs_text[0][#{pa.id}]", est.ozs,   rows: 3, style: 'width: 100%; height: 70px;'
   %br
-  %b  Предположим, что будущее уже наступило и все предложенные ресурсы созданы и работают. Какова вероятность, что с их помощью несовершенство будет устранено--
+  Предположим, что будущее уже наступило и все предложенные ресурсы созданы и работают. Наиболее вероятно, что с их помощью несовершенство будет устранено--
   .field
-    = radio_button_tag "op[0][#{pa.id}]", '3', est.op1 == 3
-    = f.label " -- 1) полностью ?"
+    %label
+      = radio_button_tag "op[0][#{pa.id}]", '3', est.op1 == 3
+      =  " -- 1) полностью ?"
   .field
-    = radio_button_tag "op[0][#{pa.id}]", '2', est.op1 == 2
-    = f.label " -- 2) в значительной мере ?"
+    %label
+      = radio_button_tag "op[0][#{pa.id}]", '2', est.op1 == 2
+      = " -- 2) в значительной мере ?"
   .field
-    = radio_button_tag "op[0][#{pa.id}]", '1', est.op1 == 1
-    = f.label " -- 3) в небольшой мере?"
+    %label
+      = radio_button_tag "op[0][#{pa.id}]", '1', est.op1 == 1
+      =  " -- 3) в небольшой мере?"
   .field
-    = radio_button_tag "op[0][#{pa.id}]", '0', est.op1 == 0
-    = f.label " -- 4) в ничтожной  мере ?"
+    %label
+      = radio_button_tag "op[0][#{pa.id}]", '0', est.op1 == 0
+      = " -- 4) в ничтожной  мере ?"
   .field
-    = f.label 'Объясните, почему вы так считаете'
+    = 'Объясните, почему вы так считаете'
     %br
-    = text_area_tag "op_text[0][#{pa.id}]", est.op,   rows: 3, style: 'width: 100%;'
+    = text_area_tag "op_text[0][#{pa.id}]", est.op,   rows: 3, style: 'width: 100%; height: 70px;'
   %br
-  %b Функционирование ресурсов потребует материальных и трудовых затрат. Какова вероятность, что эти затраты окажутся—
+  Функционирование ресурсов потребует материальных и трудовых затрат. Наиболе вероятно, что эти затраты окажутся—
   .field
-    = radio_button_tag "ozf[0][#{pa.id}]", '3', est.ozf1 == 3
-    = f.label ' --1) значительными'
+    %label
+      = radio_button_tag "ozf[0][#{pa.id}]", '3', est.ozf1 == 3
+      = ' --1) значительными'
   .field
-    = radio_button_tag "ozf[0][#{pa.id}]", '2', est.ozf1 == 2
-    = f.label ' -- 2) средними'
+    %label
+      = radio_button_tag "ozf[0][#{pa.id}]", '2', est.ozf1 == 2
+      = ' -- 2) средними'
   .field
-    = radio_button_tag "ozf[0][#{pa.id}]", '1', est.ozf1 == 1
-    = f.label ' -- 3) незначительными'
+    %label
+      = radio_button_tag "ozf[0][#{pa.id}]", '1', est.ozf1 == 1
+      = ' -- 3) незначительными'
   .field
-    = radio_button_tag "ozf[0][#{pa.id}]", '0', est.ozf1 == 0
-    = f.label ' -- 4) ничтожными'
+    %label
+      = radio_button_tag "ozf[0][#{pa.id}]", '0', est.ozf1 == 0
+      = ' -- 4) ничтожными'
   .field
-    = f.label 'Объясните, почему вы так считаете'
+    = 'Объясните, почему вы так считаете'
     %br
-    = text_area_tag "ozf_text[0][#{pa.id}]", est.ozf ,   rows: 3, style: 'width: 100%;'
+    = text_area_tag "ozf_text[0][#{pa.id}]", est.ozf ,   rows: 3, style: 'width: 100%; height: 70px;'
   %br
 
 -#<div class="radio">

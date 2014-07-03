@@ -385,9 +385,7 @@
                       %br
                       %br
                       - if @est_stat == 1
-                        %b
-                          Для создания ресурсов, необходимых в будущем, в проекте предлагаются определенные средства.
-                          Проанализируйте их и оцените, какова вероятность того, что при помощи этих средств ресурсы будут созданы --
+                        Для создания ресурсов в проекте предлагаются определенные средства. Наиболее вероятно, что на базе этих средств ресурсы будут созданы --
                         %br
                         %span{:class=>css_class_estimate_simple(tr.on1)}
                           = estimate_trans_simple('on',tr.on1)
@@ -399,7 +397,7 @@
                         %br
 
                         %br
-                        %b  Использование вышеназванных средств потребует материальных и трудовых затрат. Какова вероятность, что эти затраты окажутся--
+                        Использование этих средств потребует материальных и трудовых затрат. Наиболее вероятно, что эти затраты окажутся--
                         %br
                         %span{:class=>css_class_estimate_simple(tr.ozs1)}
                           = estimate_trans_simple('ozs',tr.ozs1)
@@ -410,9 +408,7 @@
                           %b Объяснение:
                           = simple_format(tr.ozs)
                         %br
-                        %b
-                          Предположим, что будущее уже наступило и необходимые для него ресурсы созданы и работают.
-                          Какова вероятность, что с их помощью несовершенство будет устранено--
+                        Предположим, что будущее уже наступило и все предложенные ресурсы созданы и работают. Наиболее вероятно, что с их помощью несовершенство будет устранено--
                         %br
                         %span{:class=>css_class_estimate_simple(tr.op1)}
                           = estimate_trans_simple('op',tr.op1)
@@ -423,7 +419,7 @@
                           = simple_format(tr.op)
 
                         %br
-                        %b Функционирование ресурсов потребует материальных и трудовых затрат. Какова вероятность, что эти затраты окажутся—
+                        Функционирование ресурсов потребует материальных и трудовых затрат. Наиболе вероятно, что эти затраты окажутся—
                         %br
                         %span{:class=>css_class_estimate_simple(tr.op1)}
                           = estimate_trans_simple('ozf',tr.op1)
@@ -433,7 +429,7 @@
                           %b Объяснение:
                           = simple_format(tr.ozf)
                         %br
-                      -else
+                      - else
                         %b
                           Для создания ресурсов, необходимых в будущем, в проекте предлагаются определенные средства.
                           Проанализируйте их и оцените, какова вероятность того, что при помощи этих средств ресурсы будут созданы --
@@ -521,47 +517,73 @@
 
 
                   %div.tab-pane#negative
-                    %br
-                    %b  При осуществлении проекта могут возникать разные негативные явления. Рассмотрите два типа таких явлений. Первый тип – это побочные эффекты, возникшие наряду с улучшениями (например, нововведения работают, но обходятся слишком дорого).
-                    %br
-                    %b  Какова вероятность, что эти побочные эффекты будут—
-                    %br
-                    значительными  -
-                    %span{:class=>css_class_estimate_all( @post.nepr1)}= estimate_trans_all( @post.nepr1)
-                    %br
-                    средними   -
-                    %span{:class=>css_class_estimate_all( @post.nepr2)}= estimate_trans_all( @post.nepr2)
-                    %br
-                    незначительными  -
-                    %span{:class=>css_class_estimate_all( @post.nepr3)}= estimate_trans_all( @post.nepr3)
-                    %br
-                    нулевыми  -
-                    %span{:class=>css_class_estimate_all( @post.nepr4)}= estimate_trans_all( @post.nepr4)
-                    %br
-                    %br
+                    -if @est_stat == 1
+                      %br
+                      При осуществлении проекта могут возникать разные негативные явления. Рассмотрите два типа таких явлений. Первый тип – это побочные эффекты, возникшие наряду с улучшениями (например, нововведения работают, но обходятся слишком дорого).
+                      %br
+                      Какова вероятность, что эти побочные эффекты будут—
+                      %br
+                      %span{:class=>css_class_estimate_all( @post.nepr1)}
+                        = estimate_trans_all( @post.nepr1)
+                      %br
+                      %br
 
-                    %b Объяснение:
-                    = simple_format( @post.nepr)
-                    %br
-                    %br
-                    %b  Второй тип – это препятствия, возникшие в процессе создания нововведений (например, сопротивление со стороны сотрудников, привыкших работать по-старому).
-                    %br
-                    значительными  -
-                    %span{:class=>css_class_estimate_all( @post.nep1)}= estimate_trans_all( @post.nep1)
-                    %br
-                    средними   -
-                    %span{:class=>css_class_estimate_all( @post.nep2)}= estimate_trans_all( @post.nep2)
-                    %br
-                    незначительными  -
-                    %span{:class=>css_class_estimate_all( @post.nep3)}= estimate_trans_all( @post.nep3)
-                    %br
-                    нулевыми  -
-                    %span{:class=>css_class_estimate_all( @post.nep4)}= estimate_trans_all( @post.nep4)
-                    %br
-                    %br
+                      %b Объяснение:
+                      = simple_format( @post.nepr)
+                      %br
+                      %br
+                      Второй тип – это препятствия, возникшие в процессе создания нововведений (например, сопротивление со стороны сотрудников, привыкших работать по-старому).
+                      %br
+                      %span{:class=>css_class_estimate_all( @post.nep1)}
+                        = estimate_trans_all( @post.nep1 )
+                      %br
+                      %br
 
-                    %b Объяснение:
-                    = simple_format( @post.nep)
+                      %b Объяснение:
+                      = simple_format( @post.nep)
+
+                    -else
+                      %br
+                      %b  При осуществлении проекта могут возникать разные негативные явления. Рассмотрите два типа таких явлений. Первый тип – это побочные эффекты, возникшие наряду с улучшениями (например, нововведения работают, но обходятся слишком дорого).
+                      %br
+                      %b  Какова вероятность, что эти побочные эффекты будут—
+                      %br
+                      значительными  -
+                      %span{:class=>css_class_estimate_all( @post.nepr1)}= estimate_trans_all( @post.nepr1)
+                      %br
+                      средними   -
+                      %span{:class=>css_class_estimate_all( @post.nepr2)}= estimate_trans_all( @post.nepr2)
+                      %br
+                      незначительными  -
+                      %span{:class=>css_class_estimate_all( @post.nepr3)}= estimate_trans_all( @post.nepr3)
+                      %br
+                      нулевыми  -
+                      %span{:class=>css_class_estimate_all( @post.nepr4)}= estimate_trans_all( @post.nepr4)
+                      %br
+                      %br
+
+                      %b Объяснение:
+                      = simple_format( @post.nepr)
+                      %br
+                      %br
+                      %b  Второй тип – это препятствия, возникшие в процессе создания нововведений (например, сопротивление со стороны сотрудников, привыкших работать по-старому).
+                      %br
+                      значительными  -
+                      %span{:class=>css_class_estimate_all( @post.nep1)}= estimate_trans_all( @post.nep1)
+                      %br
+                      средними   -
+                      %span{:class=>css_class_estimate_all( @post.nep2)}= estimate_trans_all( @post.nep2)
+                      %br
+                      незначительными  -
+                      %span{:class=>css_class_estimate_all( @post.nep3)}= estimate_trans_all( @post.nep3)
+                      %br
+                      нулевыми  -
+                      %span{:class=>css_class_estimate_all( @post.nep4)}= estimate_trans_all( @post.nep4)
+                      %br
+                      %br
+
+                      %b Объяснение:
+                      = simple_format( @post.nep)
 
 
 

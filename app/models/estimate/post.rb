@@ -24,7 +24,7 @@ class Estimate::Post < ActiveRecord::Base
 
 
   def score(status)
-    if status == 0
+    if status.nil? or status == 0
       sum_tr=0.0
       post_aspects.others(self.post).each do |tr|
         op_i=(tr.op1+tr.op2+tr.op3+tr.op4) ==0 ? 0 :  33.33 * (3*tr.op1+2*tr.op2+1*tr.op3)/(tr.op1+tr.op2+tr.op3+tr.op4)
