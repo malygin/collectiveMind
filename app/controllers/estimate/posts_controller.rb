@@ -162,19 +162,19 @@ class Estimate::PostsController < PostsController
             est_tr = Estimate::PostAspect.new
             #est_tr.first_stage = false
             est_tr.plan_post_aspect = tr
-            op = params[:op] ? params[:op]['0'][tr.id.to_s] : 0
+            op = params[:op] ? (params[:op]['0'][tr.id.to_s] ? params[:op]['0'][tr.id.to_s] : 0) : 0
             est_tr.op1 = op
             est_tr.op = params[:op_text]['0'][tr.id.to_s]
 
-            ozf = params[:ozf] ? params[:ozf]['0'][tr.id.to_s] : 0
+            ozf = params[:ozf] ? (params[:ozf]['0'][tr.id.to_s] ? params[:ozf]['0'][tr.id.to_s] : 0) : 0
             est_tr.ozf1 = ozf
             est_tr.ozf = params[:ozf_text]['0'][tr.id.to_s]
 
-            ozs = params[:ozs] ? params[:ozs]['0'][tr.id.to_s] : 0
+            ozs = params[:ozs] ? (params[:ozs]['0'][tr.id.to_s] ? params[:ozs]['0'][tr.id.to_s] : 0) : 0
             est_tr.ozs1 = ozs
             est_tr.ozs = params[:ozs_text]['0'][tr.id.to_s]
 
-            on = params[:on] ? params[:on]['0'][tr.id.to_s] : 0
+            on = params[:on] ? (params[:on]['0'][tr.id.to_s] ? params[:on]['0'][tr.id.to_s] : 0) : 0
             est_tr.on1 = on
             est_tr.on = params[:on_text]['0'][tr.id.to_s]
             @estimate_post.post_aspects << est_tr
@@ -287,19 +287,19 @@ class Estimate::PostsController < PostsController
           est_tr = Estimate::PostAspect.new
           #est_tr.first_stage = false
           est_tr.plan_post_aspect = tr
-          op = params[:op] ? params[:op]['0'][tr.id.to_s] : 0
+          op = params[:op] ? (params[:op]['0'][tr.id.to_s] ? params[:op]['0'][tr.id.to_s] : 0) : 0
           est_tr.op1 = op
           est_tr.op = params[:op_text]['0'][tr.id.to_s]
 
-          ozf = params[:ozf] ? params[:ozf]['0'][tr.id.to_s] : 0
+          ozf = params[:ozf] ? (params[:ozf]['0'][tr.id.to_s] ? params[:ozf]['0'][tr.id.to_s] : 0) : 0
           est_tr.ozf1 = ozf
           est_tr.ozf = params[:ozf_text]['0'][tr.id.to_s]
 
-          ozs = params[:ozs] ? params[:ozs]['0'][tr.id.to_s] : 0
+          ozs = params[:ozs] ? (params[:ozs]['0'][tr.id.to_s] ? params[:ozs]['0'][tr.id.to_s] : 0) : 0
           est_tr.ozs1 = ozs
           est_tr.ozs = params[:ozs_text]['0'][tr.id.to_s]
 
-          on = params[:on] ? params[:on]['0'][tr.id.to_s] : 0
+          on = params[:on] ? (params[:on]['0'][tr.id.to_s] ? params[:on]['0'][tr.id.to_s] : 0) : 0
           est_tr.on1 = on
           est_tr.on = params[:on_text]['0'][tr.id.to_s]
           @estimate_post.post_aspects << est_tr
