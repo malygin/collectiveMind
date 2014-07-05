@@ -62,13 +62,13 @@
                 -if not  @post.user.jury?
                   Общая оценка проекта
                   %span.color-red #{ @post.score(@est_stat)}
-                  ( = #{ @post.first_c} * #{ @post.second_c} / #{ @post.third_c})
+                  ( = #{ @post.second_c} + #{ @post.first_c} / #{ @post.third_c})
                   %br
-                  1) ожидаемая эффективность всего проекта в целом
-                  %span.color-red #{ @post.first_c}
-                  %br
-                  2) ожидаемая эффективность его первого шага
+                  1) ожидаемая эффективность  первого шага проекта
                   %span.color-red #{ @post.second_c}
+                  %br
+                  2) ожидаемая эффективность остальных этапов проекта
+                  %span.color-red #{ @post.first_c}
                   %br
                   3) ожидаемые неприятности в связи с осуществлением проекта
                   %span.color-red #{ @post.third_c}
