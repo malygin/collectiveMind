@@ -59,11 +59,12 @@ class Core::Project < ActiveRecord::Base
 
   def get_free_votes_for(user, stage, project)
     case stage
-      when :life_tape
+      when 'lifetape'
         self.stage1.to_i - user.voted_aspects.by_project(project.id).size
-      when :discontent
-        self.stage2.to_i - user.voted_discontent_posts.count
-
+      when 'discontent'
+        self.stage2.to_i - user.voted_discontent_posts.by_project(project.id).size
+      when 'plan'
+        self.stage5.to_i - user.voted_plan_posts.by_project(project.id).size
     end
   end
 

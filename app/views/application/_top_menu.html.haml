@@ -82,7 +82,7 @@
             =link_to 'Вернуться к сбору проектов',  pr_stage_core_project_path(@project), id: 'change_stage'
           %br
           %li{:role => "presentation"}
-            =link_to 'Начать голосование',  next_stage_core_project_path(@project), id: 'change_stage'
+            =link_to 'Начать голосование за проекты',  next_stage_core_project_path(@project), id: 'change_stage'
         -if @project.status == 11
           %li{:role => "presentation"}
             =link_to 'Вернуться к выставлению оценок',  pr_stage_core_project_path(@project), id: 'change_stage'

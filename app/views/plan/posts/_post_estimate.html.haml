@@ -8,6 +8,7 @@
       =link_to 'подробнее', plan_post_path(@project, post_estimate)
     %br
     =post_estimate.goal
+    = render 'shared/post_social_bar2', :post => post_estimate
     -if @project.status == 10
       %br
 

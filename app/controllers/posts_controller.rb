@@ -340,7 +340,9 @@ def index
     @project = Core::Project.find(params[:project])
     @post_vote = voting_model.find(params[:post_id])
     @post_vote.final_votings.create(:user => current_user)
-    @number_v = @project.get_free_votes_for(current_user, :life_tape, @project)
+    stage = "#{self.class.name.deconstantize.downcase}"
+    @number_v = @project.get_free_votes_for(current_user, stage, @project)
+    @table_name = current_model.table_name.sub('_posts','/posts')
     #@votes = @project.stage3 - current_user.concept_post_votings.count
   end
 

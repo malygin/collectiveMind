@@ -62,7 +62,7 @@ end
 
     @posts = voting_model.scope_vote_top(@project.id,params[:revers])
 
-    @number_v = @project.get_free_votes_for(current_user, :life_tape, @project)
+    @number_v = @project.get_free_votes_for(current_user, 'lifetape', @project)
     if @number_v == 0  or  @project.status !=2
       redirect_to action: "index"
       return
@@ -160,7 +160,8 @@ end
 
   def last_page
     total_results = @post_show.comments.where(:comment_id => nil).count
-    total_results / 10 + (total_results % 10 == 0 ? 0 : 1)
+    page = total_results / 10 + (total_results % 10 == 0 ? 0 : 1)
+    page == 0 ? 1 :page
   end
 
 end

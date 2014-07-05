@@ -27,7 +27,9 @@ class Plan::PostsController < PostsController
     #@aspects = Discontent::Aspect.where(:project_id => @project)
     @aspects = Discontent::Aspect.where(:project_id => @project, :status => 0)
     add_breadcrumb I18n.t('stages.plan'), plan_posts_path(@project)
-
+    if @project.status == 11
+      @vote_all = Plan::Voting.where("plan_votings.plan_post_id IN (#{@project.plan_post.pluck(:id).join(", ")})").uniq_user.count
+    end
 
   end
 

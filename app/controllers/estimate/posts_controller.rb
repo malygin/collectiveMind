@@ -30,20 +30,17 @@ class Estimate::PostsController < PostsController
     @status = params[:status]
     @aspects = Discontent::Aspect.where(:project_id => @project)
     add_breadcrumb I18n.t('stages.estimate'), estimate_posts_path(@project)
-
+    if @project.status == 11
+      @vote_all = Plan::Voting.where("plan_votings.plan_post_id IN (#{@project.plan_post.pluck(:id).join(", ")})").uniq_user.count
+    end
   end
 
 
   def index
     if @project.status == 11
-      #puts  current_user.plan_post_votings
-      @number_v = @project.stage5 - current_user.plan_post_votings.size
-      @votes = @project.stage5
-      if boss?
-        @all_people = @project.users.size
-
-        @voted_people = ActiveRecord::Base.connection.execute("select count(*) as r from (select distinct v.user_id from plan_votings v  left join   plan_posts asp on (v.plan_post_id = asp.id) ) as dm").first["r"]
-        @votes = ActiveRecord::Base.connection.execute("select count(*) as r from (select  v.user_id from plan_votings v  left join   plan_posts asp on (v.plan_post_id = asp.id) ) as dm").first["r"].to_i
+      if current_user.plan_post_votings.size == 0
+        redirect_to action: "vote_list"
+        return
       end
     end
     @posts = Plan::Post.where(:project_id => @project, :status => 0).paginate(:page => params[:page])
@@ -352,5 +349,19 @@ class Estimate::PostsController < PostsController
 
   end
 
+  def vote_list
+    @project = Core::Project.find(params[:project])
+    @posts = Plan::Post.where(:project_id => @project, :status => 0)
+    @number_v = @project.stage5 - current_user.plan_post_votings.size
+    @votes = @project.stage5
+    # if boss?
+    #   @all_people = @project.users.size
+    #   @voted_people = ActiveRecord::Base.connection.execute("select count(*) as r from (select distinct v.user_id from plan_votings v  left join   plan_posts asp on (v.plan_post_id = asp.id) ) as dm").first["r"]
+    #   @votes = ActiveRecord::Base.connection.execute("select count(*) as r from (select  v.user_id from plan_votings v  left join   plan_posts asp on (v.plan_post_id = asp.id) ) as dm").first["r"].to_i
+    # end
+    respond_to do |format|
+      format.html {render :layout => 'application_two_column'}
+    end
+  end
 
 end
