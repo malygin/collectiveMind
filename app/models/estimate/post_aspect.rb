@@ -35,7 +35,7 @@ class Estimate::PostAspect < ActiveRecord::Base
          0
        end
      else
-       if op1!=nil
+       if not (op1.nil? or on1.nil? or ozf1.nil? or ozs1.nil?)
          op_i=op1
          on_i=on1
          ozf_i=ozf1

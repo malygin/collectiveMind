@@ -5,5 +5,5 @@ if (n == 0){
   $(".vote-button").remove();}
 $('#count_vote').html(parseInt($('#count_vote').html())-1);
 if (<%=@number_v == 0%>){
-    $("#lifetape_success").fadeIn('slow');
-    document.location.href="/project/<%=@project.id%>/life_tape/posts";}
+    $("#stage_success").fadeIn('slow');
+    document.location.href="/project/<%=@project.id%>/<%=@table_name%>";}

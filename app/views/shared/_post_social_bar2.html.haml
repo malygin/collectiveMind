@@ -34,7 +34,13 @@
         |
         %span.text-info Всего:
         =@vote_all
-
+      -if boss? and @project.status == 11 and post.class.name.deconstantize == "Plan"
+        |
+        %span.text-success Голосов:
+        =post.voted_users.size
+        |
+        %span.text-info Голосовавших:
+        =@vote_all
 
 
       -#|

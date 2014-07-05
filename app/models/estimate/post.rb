@@ -65,7 +65,9 @@ class Estimate::Post < ActiveRecord::Base
         on_i = tr.on1
         ozf_i = tr.ozf1
         ozs_i = tr.ozs1
-        sum_tr = sum_tr + ( (ozf_i*ozs_i) ==0 ? 0 : (op_i*on_i)/(ozf_i*ozs_i))
+        if not (op_i.nil? or on_i.nil? or ozf_i.nil? or ozs_i.nil?)
+          sum_tr = sum_tr + ( (ozf_i*ozs_i) ==0 ? 0 : (op_i*on_i)/(ozf_i*ozs_i))
+        end
       end
 
       @first_c = sum_tr
@@ -75,15 +77,17 @@ class Estimate::Post < ActiveRecord::Base
         on_i = tr.on1
         ozf_i = tr.ozf1
         ozs_i = tr.ozs1
-        sum_tr = sum_tr + ( (ozf_i*ozs_i) ==0 ? 0 : (op_i*on_i)/(ozf_i*ozs_i))
+        if not (op_i.nil? or on_i.nil? or ozf_i.nil? or ozs_i.nil?)
+          sum_tr = sum_tr + ( (ozf_i*ozs_i) ==0 ? 0 : (op_i*on_i)/(ozf_i*ozs_i))
+        end
       end
       @second_c = sum_tr
-      th1 =(nepr1+nepr2+nepr3+nepr4) ==0 ? 0 : (4*nepr1 + 3*nepr2 + 2*nepr3 + 1*nepr4)/(nepr1+nepr2+nepr3+nepr4)
-      th2 =(nep1+nep2+nep3+nep4) ==0 ? 0 : (4*nep1 + 3*nep2 + 2*nep3 + 1*nep4)/(nep1+nep2+nep3+nep4).to_f / 2
+      th1 = nepr1
+      th2 = nep1
       @first_c = (@first_c * 100).round / 100.0
       @second_c = (@second_c * 100).round / 100.0
-      @third_c = ((th1 + th2)*100).round / 100.0
-      @third_c == 0.0 ? 0.0 : ((@second_c+@first_c/@third_c)*100).round / 100.0
+      @third_c = (th1.nil? or th2.nil?) ? 0.0 : ((th1 + th2)*100).round / 100.0
+      @third_c == 0 ? 0.0 : (((@second_c+@first_c)/@third_c)*100).round / 100.0
     end
   	# oppsh_i=(1*oppsh1+2*oppsh2+3*oppsh3)/(oppsh1+oppsh2+oppsh3)
 

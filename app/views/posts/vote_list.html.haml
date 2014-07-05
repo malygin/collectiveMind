@@ -1,6 +1,15 @@
-
 -#.success=link_to 'Вы также можете оставить свое мнение о прошедшей стадии или почитать другие', essay_posts_path(@project, @project.status), :id => 'essay_list'
 
+.row
+  .col-md-12
+    %h3.text-info
+      1 этап: Сбор информации. Голосование
+      %br
+    %span(style='font-size: 20px;line-height: 30px;')
+      Определение наиболее важных тем процедуры:
+      =@project.name
+
+%br
 - if boss?
   -#%b
   -#проголосовало
@@ -19,16 +28,7 @@
   %br
 
 
-.row
-  .col-md-12
-    %h3.page-title
-      1 этап: Сбор информации.
-      %br
-      %small
-        Определение наиболее важных тем процедуры:
-        =@project.name
-
-%h4.text-success#lifetape_success(style="display:none;" ) Спасибо за участие в голосовании!
+%h4.color-green#stage_success(style="display:none;" ) Спасибо за участие в голосовании!
 %br
 - unless @number_v<1  and not boss?
   %section.widget#fixBlock

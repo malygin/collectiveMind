@@ -4,7 +4,9 @@
             %h1.color-green=post.score(@est_stat)
     = render 'users/user_post', :user => post.user
     .media-body
-        = trim_string(post.content)
+        .media-heading
+            =link_to post.user, user_path(@project, post.user)
+        %span.color-green= trim_string(post.content) if post.content.present?
         = link_to "Подробнее", {:action => "show", :project => @project, :id => post.id}, class: "more"
         -#-else
         -#	%p
