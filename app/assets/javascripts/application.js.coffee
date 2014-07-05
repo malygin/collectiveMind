@@ -622,6 +622,23 @@ $('#select_for_aspects').on 'change', ->
     return true
 
 
-$("html").on "click", (e) ->
-  $("[data-original-title]").popover "hide"  if typeof $(e.target).data("original-title") is "undefined" and not $(e.target).parents().is(".popover.in")
-  return
+#$("html").on "click", (e) ->
+#  $("[data-original-title]").popover "hide"  if typeof $(e.target).data("original-title") is "undefined" and not $(e.target).parents().is(".popover.in")
+#  return
+
+$.fn.extend popoverClosable: (options) ->
+  defaults = template: "<div class=\"popover popover-concept\"><div class=\"arrow\"></div><div class=\"popover-header\"><button type=\"button\" class=\"close\" style=\"font-size:30px;color:white;\" data-dismiss=\"popover\" aria-hidden=\"true\">&times;</button><h3 class=\"popover-title popover-concept-title\"></h3></div><div class=\"popover-content\"></div></div>"
+  options = $.extend({}, defaults, options)
+  $popover_togglers = this
+  $popover_togglers.popover options
+  $popover_togglers.on "click", (e) ->
+    e.preventDefault()
+    $popover_togglers.not(this).popover "hide"
+    $('.popover').css 'display', 'none'
+
+
+  $("html body").on "click", "[data-dismiss=\"popover\"]", (e) ->
+    $popover_togglers.popover "hide"
+    $('.popover').css 'display', 'none'
+
+

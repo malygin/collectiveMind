@@ -7,13 +7,36 @@
 -#-else
 -#  text = text + ''
 
-$("#view_post_concept_table_#{@concept_post.id}").popover({trigger: 'focus', html : true, placement : 'auto', title: "<div class='color-orange'><b>#{@concept_post.title}</b></div>",
-template: '<div class="popover popover-concept" role="tooltip"><div class="arrow"></div><div class="popover-header"><button type="button" style="font-size:30px;color:white;" class="close" data-dismiss="popover" aria-hidden="true">&times;</button><h3 class="popover-title"></h3></div><div class="popover-content"></div></div>',
-content: "#{escape_javascript(render :partial => 'light_concept', :object => @concept_post, :locals => { :table => true } )}"
-});
+-#$("#view_post_concept_table_#{@concept_post.id}").popover({trigger: 'focus', html : true, placement : 'auto', title: "<div class='color-orange'><b>#{@concept_post.title}</b></div>",
+-#template: '<div class="popover popover-concept" ><div class="arrow"></div><div class="popover-header"><button type="button" style="font-size:30px;color:white;" class="close" data-dismiss="popover" aria-hidden="true">&times;</button><h3 class="popover-title popover-concept-title"></h3></div><div class="popover-content"></div></div>',
+-#content: "#{escape_javascript(render :partial => 'light_concept', :object => @concept_post, :locals => { :table => true } )}"
+-#});
 
+-#$("#view_post_concept_table_#{@concept_post.id}").popover('toggle');
+
+$("#view_post_concept_table_#{@concept_post.id}").popoverClosable({trigger: 'focus', html: true, placement: 'auto', title: "<div class='color-orange'><b>#{@concept_post.title}</b></div>", content: "#{escape_javascript(render :partial => 'light_concept', :object => @concept_post, :locals => { :table => true } )}"});
+
+-#$("#view_post_concept_table_#{@concept_post.id}").popover('toggle');
+
+-#trigger: 'focus', html : true, placement : 'auto', title: "<div class='color-orange'><b>#{@concept_post.title}</b></div>",
+-#content: "#{escape_javascript(render :partial => 'light_concept', :object => @concept_post, :locals => { :table => true } )}"
+-#);
+if( !$(".popover").is(':visible')) {
 $("#view_post_concept_table_#{@concept_post.id}").popover('toggle');
+}
 
-
+-#
+-#$('[data-toggle=popover]').hover(function(e) {
+-#  if( !$(".popover").is(':visible') ) {
+-#      var el = this;
+-#      $(el).popover('show');
+-#      $(".popover > h3").append('<span class="close icon icon-remove"></span>')
+-#                        .find('.close').on('click', function(e) {
+-#                            e.preventDefault();
+-#                            $(el).popover('hide');
+-#                        }
+-#      );
+-#  }
+-#});
 
 
