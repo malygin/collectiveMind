@@ -82,8 +82,8 @@ class Estimate::Post < ActiveRecord::Base
         end
       end
       @second_c = sum_tr
-      th1 = nepr1
-      th2 = nep1
+      th1 = nepr1.nil? ? 0 : nepr1
+      th2 = nep1.nil? ? 0 : nep1
       @first_c = (@first_c * 100).round / 100.0
       @second_c = (@second_c * 100).round / 100.0
       @third_c = (th1.nil? or th2.nil?) ? 0.0 : ((th1 + th2)*100).round / 100.0

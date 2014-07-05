@@ -110,11 +110,11 @@ class Estimate::PostsController < PostsController
     @estimate_post.user = current_user
     #puts "__________",boss?
     if expert? or admin?
-      @estimate_post.status = 1
+      @estimate_post.status = 0
     elsif jury?
       @estimate_post.status = 3
     else
-      @estimate_post.status = 1
+      @estimate_post.status = 0
     end
     @est_stat = plan_post.estimate_status.nil? ? 0 : plan_post.estimate_status
     #puts "__________", @estimate_post.status
