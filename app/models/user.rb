@@ -132,11 +132,11 @@ class User < ActiveRecord::Base
   end
 
   def role_name
-    if self.admin
+    if [1,6,7].include? self.type_user
       "модератор"
-    elsif self.expert
+    elsif self.type_user == 2
       "эксперт"    
-    elsif self.jury
+    elsif self.type_user == 3
       "жюри"
     else 
       ""
@@ -144,11 +144,11 @@ class User < ActiveRecord::Base
   end
 
   def boss?
-    self.admin or self.expert
+    [1,2,3,6,7].include? self.type_user
   end
 
   def cluber?
-    self.type_user == 4 or self.type_user == 5
+    [4,5,7].include? self.type_user
   end
 
   def watcher?

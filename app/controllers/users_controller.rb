@@ -39,13 +39,13 @@ class UsersController < ApplicationController
     @project = Core::Project.find(params[:project])
     add_breadcrumb I18n.t('menu.raiting'), users_path(@project)
        #@users = User.where('score>0').where('admin=?', false).order('score DESC').paginate(:page =>params[:page])
-    @users = User.joins(:core_project_scores).where("core_project_scores.project_id = ? AND core_project_scores.score > 0", @project.id).where('users.admin=?', false).order("core_project_scores.score DESC").paginate(:page =>params[:page])
+    @users = User.joins(:core_project_scores).where("core_project_scores.project_id = ? AND core_project_scores.score > 0", @project.id).where('users.type_user NOT IN (?)', "1,6").order("core_project_scores.score DESC").paginate(:page =>params[:page])
   end
 
   def show_top
     @project = Core::Project.find(params[:project])
     #@users = User.scope_score_name(params[:score_name]).where('admin=?', false).paginate(:page =>params[:page])
-    @users = User.joins(:core_project_scores).where("core_project_scores.project_id = ? AND core_project_scores.score > 0", @project.id).where('users.admin=?', false).order("core_project_scores.#{params[:score_name]} DESC").paginate(:page =>params[:page])
+    @users = User.joins(:core_project_scores).where("core_project_scores.project_id = ? AND core_project_scores.score > 0", @project.id).where('users.type_user NOT IN (?)', "1,6").order("core_project_scores.#{params[:score_name]} DESC").paginate(:page =>params[:page])
     @score_name = params[:score_name]
     respond_to do |format|
       format.js
@@ -55,7 +55,7 @@ class UsersController < ApplicationController
   def users_rc
     @project = Core::Project.find(params[:project])
 
-    @users = User.where(admin:false, type_user: 4).order('score DESC').paginate(:page =>params[:page])
+    @users = User.where('users.type_user NOT IN (?) AND users.type_user IN (?)', "1,6","4,7").order('score DESC').paginate(:page =>params[:page])
     #@users = User.where('admin=?', false).where('type_user = 4 or type_user = 5').order('score DESC').paginate(:page =>params[:page])
   end
 
