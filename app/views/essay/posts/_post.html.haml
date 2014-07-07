@@ -3,7 +3,7 @@
   .media-body
     .media-heading
       =link_to post.user, user_path(@project, post.user)
-    %span=post.content
+    %span=trim_content(post.content)
     %span
       -if boss?
         =link_to 'подробнее', essay_post_path(@project,@stage, post), :class => "btn btn-primary btn-xs"

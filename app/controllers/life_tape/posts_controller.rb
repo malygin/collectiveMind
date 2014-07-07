@@ -161,7 +161,7 @@ end
   def last_page
     total_results = @post_show.comments.where(:comment_id => nil).count
     page = total_results / 10 + (total_results % 10 == 0 ? 0 : 1)
-    page == 0 ? 1 :page
+    page == 0 ? 1 : page
   end
 
 end

@@ -250,7 +250,7 @@ module ApplicationHelper
       true
     elsif stage == 4 and @project.status == 9
       true
-    elsif stage == 5 and @project.status == 10
+    elsif stage == 5 and @project.status == 11
       true
     else
       false

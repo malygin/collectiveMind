@@ -154,7 +154,7 @@
           %br
           %small.text-center=t('stages.estimates', count: @project.estimate_posts.count)
         %ul#estimate.panel-collapse.open.in
-          -if @project.status > 9
+          -if @project.status > 10
             %li
               = link_to 'Рефлексия', essay_posts_path(@project, 5), :class => 'color-green'
 
