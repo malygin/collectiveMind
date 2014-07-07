@@ -9,7 +9,16 @@
 
 %br
 
-%h4.color-green#stage_success(style="display:none;" ) Спасибо за участие в голосовании!
+#stage_success.text-center(style="display:none;" )
+  %section.widget
+    .body
+      %h3 Спасибо за участие в голосовании!
+      .col-md-6
+        =link_to "Перейти к рефлексии", new_essay_post_path(@project, 4),:class => "btn btn-lg btn-success"
+      .col-md-6
+        =link_to "Перейти к списку проектов", plan_posts_path(@project),:class => "btn btn-lg btn-primary"
+      %br
+      %br
 %br
 - unless @number_v<1  and not boss?
   %section.widget#fixBlock

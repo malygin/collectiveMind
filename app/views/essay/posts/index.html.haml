@@ -1,4 +1,22 @@
+%section.widget
+  %header
+    .row
+      .col-md-9
+        %h3(class="#{color_stage(@stage.to_i)}")
+          =@stage
+          этап:
+          =stage_status(@stage.to_i)
+          %br
+          %br
+        %span(style='font-size: 20px;line-height: 30px;')
+          Рефлексия по данному этапу в рамках процедуры:
+          =@project.name
 
-- unless current_user.have_essay_for_stage(@project, @stage)
-	=link_to 'Добавить свой отзыв об этапе', new_essay_post_path(@project, @stage)
-=render :partial => 'shared/post', :collection => @posts
+      - unless current_user.have_essay_for_stage(@project, @stage)
+        .col-md-3
+          .pull-right
+            =link_to 'Добавить свой отзыв об этапе', new_essay_post_path(@project, @stage), id: 'new_essay',  class: 'btn btn-lg btn-success'
+
+
+  .body
+    =render @posts

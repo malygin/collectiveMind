@@ -1,3 +1,58 @@
+%section.widget
+  .body
+    .row
+      .col-md-2
+        .media
+          = render 'users/user_post', :user => @post.user
+          .media-body
+            .media-heading
+              =link_to @post.user, user_path(@project, @post.user)
+
+    %br
+    %br
+    .row
+      .col-md-6
+        %section.widget
+          .body
+            %span(class="#{color_stage(@stage.to_i)}") Какие было недостатки в процедуре, вашей работе в ней, работе других участников, модераторв и жюри?
+            .form-group
+              =simple_format(@post.content)
+
+        %section.widget
+          .body
+            %span(class="#{color_stage(@stage.to_i)}") Каковы отсуствующие достоинства в этой работе?
+            .form-group
+              =simple_format(@post.positive)
+
+        %section.widget
+          .body
+            %span(class="#{color_stage(@stage.to_i)}") Что можно было бы изменить и как?
+            .form-group
+              =simple_format(@post.change)
+
+        -if @stage.to_i > 1 and @project.status > 2
+          %section.widget
+            .body
+              %span(class="#{color_stage(@stage.to_i)}") Что уже изменилось к лучшему в результате реакции на рефлексию?
+              .form-group
+                =simple_format(@post.reaction)
+
+      .col-md-6
+        %section.widget
+          .body
+            %p Комментарии к рефлексии
+            .text-center= will_paginate @comments
+            .chat-messages
+              = render :partial => 'shared/comment',:collection => @comments
+            .text-center= will_paginate @comments
+            - if signed_in?
+              = render :partial => 'shared/comment_form', :locals => { :comment => @comment, :url_link => url_for(:controller => @post.class.name.underscore.pluralize, :action => 'add_comment')}
+
+= render :partial => 'post_edit_essay', :object => @post
+%br
+= link_to 'К списку', essay_posts_path(@project, @stage)
+
+
 
 / .inspire= link_to image_tag('inspire.png'),  new_child_life_tape_post_path
 
@@ -10,7 +65,7 @@
 
 / - if signed_in?
 / 	= render :partial => 'shared/comment_form', :locals => { :comment => @comment, :url_link => add_comment_life_tape_post_path(@life_tape_post.id)}
-	
+
 / = render :partial => 'shared/comment',:collection => @life_tape_post.comments, :locals => { :path_link => '/life_tape/comments/'}
 
 / - unless @life_tape_post.post.nil?
@@ -21,10 +76,8 @@
 / 	.redtitle Этой записью были вдохновлены следующие записи
 / 	- @life_tape_post.childs.each do |post|
 / 		=render post
-
-
-= render 'shared/post', :post => @post
-= link_to 'К списку', essay_posts_path(@project, @stage)
+-#= render 'shared/post', :post => @post
+-#= link_to 'К списку', essay_posts_path(@project, @stage)
 -#- if signed_in?
 -#  = render :partial => 'shared/comment_form', :locals => { :comment => @comment, :url_link => add_comment_essay_post_path(@post.id)}
 -#

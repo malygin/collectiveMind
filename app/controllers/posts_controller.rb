@@ -113,9 +113,11 @@ end
     @comment_user = User.find(params[:comment_user]) unless params[:comment_user].nil?
     @comment = comment_model.new
     if @comment_user
-      @url_link = "/project/#{@project.id}/" + current_model.table_name.sub('_posts','/posts') + "/#{@post.id}/add_comment?main_comment=#{@main_comment.id}&comment_user=#{@comment_user.id}"
+      @url_link = url_for(:controller => @post.class.name.underscore.pluralize, :action => 'add_comment', :main_comment => @main_comment.id, :comment_user => @comment_user.id)
+      #@url_link = "/project/#{@project.id}/" + current_model.table_name.sub('_posts','/posts') + "/#{@post.id}/add_comment?main_comment=#{@main_comment.id}&comment_user=#{@comment_user.id}"
     else
-      @url_link = "/project/#{@project.id}/" + current_model.table_name.sub('_posts','/posts') + "/#{@post.id}/add_comment?main_comment=#{@main_comment.id}"
+      @url_link = url_for(:controller => @post.class.name.underscore.pluralize, :action => 'add_comment', :main_comment => @main_comment.id)
+      #@url_link = "/project/#{@project.id}/" + current_model.table_name.sub('_posts','/posts') + "/#{@post.id}/add_comment?main_comment=#{@main_comment.id}"
     end
     respond_to do |format|
       format.js
@@ -139,8 +141,8 @@ def index
       Journal.events_for_content(@project, current_user, @post.id).update_all("viewed = 'true'")
       @my_journals_count = @my_journals_count - 1
     end
-
-    @comments = @post.comments.where(:comment_id => nil).paginate(:page => params[:page], :per_page => 30)
+    per_page = ["Concept","Essay"].include?(@post.class.name.deconstantize) ? 10 : 30
+    @comments = @post.comments.where(:comment_id => nil).paginate(:page => params[:page] ? params[:page] : last_page, :per_page => per_page)
     #puts "___________"
     #puts @post
     # @path_link ='/'+ self.class.to_s.split("::").first.tableize.singularize+'/comments/'
@@ -154,6 +156,12 @@ def index
       format.json { render json: @post }
       format.js
     end
+  end
+
+  def last_page
+    total_results = @post.comments.where(:comment_id => nil).count
+    page = total_results / 10 + (total_results % 10 == 0 ? 0 : 1)
+    page == 0 ? 1 :page
   end
 
   def show_essay
@@ -318,7 +326,7 @@ def index
     @against =  params[:against] == 'true'
     comment.comment_votings.create(:user => current_user, :comment => comment,  :against => @against) unless comment.users.include? current_user
     comment.user.add_score(:type => :plus_comment, :project => Core::Project.find(params[:project]), :comment => comment, :path =>  comment.post.class.name.underscore.pluralize)  if current_user.boss? or comment.comment_votings.count == 3
-    @main_comment = comment.comment.id if comment.comment.nil?
+    @main_comment = comment.comment.id unless comment.comment.nil?
     respond_to do |format|
       format.js
     end

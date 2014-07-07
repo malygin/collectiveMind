@@ -182,17 +182,32 @@ scope '/project/:project' do
 
   scope '/stage/:stage' do
     namespace :essay do
-      get 'censored/:post_id'  => 'posts#censored'
-
-      resources :posts do
-        member do
-          put :add_comment
-          put :censored_comment
-
-          put :plus
-          put :plus_comment
-        end
-      end
+      #get 'censored/:post_id'  => 'posts#censored'
+      posts_routes
+      #resources :posts do
+      #  member do
+      #    put :add_comment
+      #    put :censored_comment
+      #
+      #    put :plus
+      #    put :plus_comment
+      #  end
+      #end
+      #put 'project/:project/stage/:stage/essay/posts/:id/add_comment', to:  'plan/posts#change_estimate_status'
+      #resources :posts do
+      #  member do
+      #    put :add_comment
+      #    put :update_comment
+      #    put :destroy_comment
+      #    put :to_archive
+      #    put :censored_comment
+      #    put :plus
+      #    get :edit_comment
+      #    put :plus_comment
+      #    put :set_required
+      #    put :add_child_comment_form
+      #  end
+      #end
     end
   end
 

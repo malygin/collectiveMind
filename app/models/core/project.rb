@@ -147,15 +147,19 @@ class Core::Project < ActiveRecord::Base
       when 1, :life_tape_posts
         I18n.t('stages.life_tape')
       when 2
-        'голосование за аспекты и рефлексия'
+        'голосование за темы и рефлексия'
       when 3, :discontent_posts
         I18n.t('stages.discontent')
       when 4
-        'голосование за недовольства и рефлексия'
+        'группировка несовершенств'
+      when 5
+        'обсуждение сгруппированных несовершенств'
+      when 6
+        'голосование за несовершенства и рефлексия'
       when 7, :concept_posts
         I18n.t('stages.concept')
       when 8
-        'голосование за концепции и рефлексия'
+        'голосование за нововведения и рефлексия'
       when 9, :plan_posts
         'Создание проектов'
       when 10, :estimate_posts

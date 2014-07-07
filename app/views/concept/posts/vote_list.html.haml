@@ -90,9 +90,14 @@
         #concept_success(style="display:none;")
           %section.widget
             .body
-              %h4.text-center
-                .text-success Спасибо за участие в голосовании!
-                =link_to "Перейти к процедуре", concept_posts_path(@project)
+              .text-center
+                %h3 Спасибо за участие в голосовании!
+                .col-md-6
+                  =link_to "Перейти к рефлексии", new_essay_post_path(@project, 3),:class => "btn btn-lg btn-success"
+                .col-md-6
+                  =link_to "Перейти к списку нововведений", concept_posts_path(@project),:class => "btn btn-lg btn-primary"
+              %br
+              %br
         .row
           .col-md-6
             %section.widget

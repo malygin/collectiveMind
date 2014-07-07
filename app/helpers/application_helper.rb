@@ -20,7 +20,9 @@ module ApplicationHelper
   end
 
   def trim_content(s, l=100)
-    s[0..l]
+    if s
+      s[0..l]
+    end
   end
 
   def class_post_content(pro, ag)
@@ -65,11 +67,11 @@ module ApplicationHelper
 	def stage_vote?(stage)
 		if stage =='life_tape' and (@project.status==2)
 			true
-		elsif stage =='discontent' and (@project.status==4)
+		elsif stage =='discontent' and (@project.status==6)
 			true
-		elsif stage =='concept' and (@project.status==6)
+		elsif stage =='concept' and (@project.status==8)
 			true	
-		elsif stage =='plan' and (@project.status==8)
+		elsif stage =='plan' and (@project.status==11)
 			true
 		else
 			false
@@ -208,5 +210,52 @@ module ApplicationHelper
   def rowspan_stage_show(stage)
     1 + stage.plan_post_aspects.size + stage.actions_rowcount.size
   end
+
+  def color_stage(stage)
+    case stage
+      when 1
+        'color-teal'
+      when 2
+        'color-red'
+      when 3
+        'color-orange'
+      when 4
+        'color-green'
+      when 5
+        'color-grey'
+    end
+  end
+
+  def stage_status(stage)
+    case stage
+      when 1
+        'Сбор информации.'
+      when 2
+        'Анализ ситуации.'
+      when 3
+        'Формулирование проблемы.'
+      when 4
+        'Создание проектов.'
+      when 5
+        'Оценка проектов.'
+    end
+  end
+
+  def current_stage?(stage)
+    if stage == 1 and @project.status == 2
+      true
+    elsif stage == 2 and @project.status == 6
+      true
+    elsif stage == 3 and @project.status == 8
+      true
+    elsif stage == 4 and @project.status == 9
+      true
+    elsif stage == 5 and @project.status == 10
+      true
+    else
+      false
+    end
+  end
+
 
 end

@@ -19,7 +19,7 @@
             %br
       %br
       = render 'shared/post_edit_bar', :post => @post
-
+      %br
       .row
         .col-md-6
           %section.widget
@@ -196,8 +196,10 @@
           %section.widget
             .body
               %p Комментарии к нововведению
+              .text-center= will_paginate @comments
               .chat-messages
                 = render :partial => 'shared/comment',:collection => @comments
+              .text-center= will_paginate @comments
               - if signed_in?
                 = render :partial => 'shared/comment_form', :locals => { :comment => @comment, :url_link => url_for(:controller => @post.class.name.underscore.pluralize, :action => 'add_comment')}
 

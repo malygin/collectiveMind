@@ -1,27 +1,45 @@
-.wholePost
-	= render 'users/user_post', :user => post.user
-	.posts
-		= render 'users/user_name', :user => post.user, :created_at => post.created_at
-		=image_tag("tag.png")
+.media{id: "post_#{post.id}"}
+  = render 'users/user_post', :user => post.user
+  .media-body
+    .media-heading
+      =link_to post.user, user_path(@project, post.user)
+    %span=post.content
+    %span
+      -if boss?
+        =link_to 'подробнее', essay_post_path(@project,@stage, post), :class => "btn btn-primary btn-xs"
+        |
+        = render :partial => 'post_edit_essay', :object => post
+      -else
+        =link_to 'подробнее', essay_post_path(@project,@stage, post)
+    %br
+    = render 'shared/post_social_bar2', :post => post
 
-		- if not current_page?(life_tape_post_path(post)) 
-			%p
-				= trim_string(post.content)
-				= link_to "Подробнее", post, class: "more"
-		-else
-			%p
-				= post.content
 
-		.social 
-			=link_to post.childs.count, "#", class: "counter"
-			=image_tag "tree.png"
-			- if signed_in? and not post.users.include?(current_user)
-				=link_to "#{post.users.count}",  plus_life_tape_post_path(post), :id => post.id,:remote => true, :method => :put, class: "counter"
-			-else
-				=post.users.count
-			=image_tag "like.png"
-			=link_to post.number_views, post, class: "counter"
-			=image_tag "views.png"
-			=link_to post.comments.count, post, class: "counter"
-			=image_tag "comment.png"
-.dotline=image_tag('dotline.png')
+
+-#.wholePost
+-#	= render 'users/user_post', :user => post.user
+-#	.posts
+-#		= render 'users/user_name', :user => post.user, :created_at => post.created_at
+-#		=image_tag("tag.png")
+-#
+-#		- if not current_page?(life_tape_post_path(post))
+-#			%p
+-#				= trim_string(post.content)
+-#				= link_to "Подробнее", post, class: "more"
+-#		-else
+-#			%p
+-#				= post.content
+-#
+-#		.social
+-#			=link_to post.childs.count, "#", class: "counter"
+-#			=image_tag "tree.png"
+-#			- if signed_in? and not post.users.include?(current_user)
+-#				=link_to "#{post.users.count}",  plus_life_tape_post_path(post), :id => post.id,:remote => true, :method => :put, class: "counter"
+-#			-else
+-#				=post.users.count
+-#			=image_tag "like.png"
+-#			=link_to post.number_views, post, class: "counter"
+-#			=image_tag "views.png"
+-#			=link_to post.comments.count, post, class: "counter"
+-#			=image_tag "comment.png"
+-#.dotline=image_tag('dotline.png')

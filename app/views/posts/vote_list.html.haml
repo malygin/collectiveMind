@@ -26,9 +26,21 @@
     |
     =link_to "по голосам(возрастанию)", {:action => :vote_list, :revers => 1 },:remote => true, class: "vote_class", id: "vote_all"
   %br
+  %br
 
-
-%h4.color-green#stage_success(style="display:none;" ) Спасибо за участие в голосовании!
+#stage_success(style="display:none;")
+  %section.widget
+    .body
+      .text-center
+        %h3 Спасибо за участие в голосовании!
+        .col-md-6
+          =link_to "Перейти к рефлексии", new_essay_post_path(@project, 1),:class => "btn btn-lg btn-success"
+        .col-md-6
+          =link_to "Перейти к списку тем", life_tape_posts_path(@project),:class => "btn btn-lg btn-primary"
+      %br
+      %br
+%br
+%br
 %br
 - unless @number_v<1  and not boss?
   %section.widget#fixBlock

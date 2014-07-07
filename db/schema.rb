@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140701230004) do
+ActiveRecord::Schema.define(:version => 20140707002812) do
 
   create_table "answers", :force => true do |t|
     t.string   "text"
@@ -429,6 +429,7 @@ ActiveRecord::Schema.define(:version => 20140701230004) do
     t.integer  "comment_id"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
+    t.boolean  "against"
   end
 
   add_index "essay_comment_votings", ["comment_id"], :name => "index_essay_comment_voitings_on_comment_id"
@@ -440,6 +441,7 @@ ActiveRecord::Schema.define(:version => 20140701230004) do
     t.datetime "created_at",                    :null => false
     t.datetime "updated_at",                    :null => false
     t.boolean  "censored",   :default => false
+    t.integer  "comment_id"
   end
 
   add_index "essay_comments", ["post_id"], :name => "index_essay_comments_on_post_id"
@@ -463,6 +465,10 @@ ActiveRecord::Schema.define(:version => 20140701230004) do
     t.datetime "updated_at",                      :null => false
     t.integer  "number_views", :default => 0
     t.boolean  "censored",     :default => false
+    t.text     "negative"
+    t.text     "positive"
+    t.text     "change"
+    t.text     "reaction"
   end
 
   create_table "estimate_comment_votings", :force => true do |t|
@@ -1087,6 +1093,9 @@ ActiveRecord::Schema.define(:version => 20140701230004) do
     t.datetime "updated_at", :null => false
   end
 
+# Could not dump table "projects" because of following StandardError
+#   Unknown type 'serial' for column 'id'
+
   create_table "question_comment_votings", :force => true do |t|
     t.integer  "user_id"
     t.integer  "comment_id"
@@ -1160,9 +1169,9 @@ ActiveRecord::Schema.define(:version => 20140701230004) do
     t.integer  "user_id"
     t.string   "check_field"
     t.boolean  "status"
-    t.integer  "project_id"
     t.datetime "created_at",  :null => false
     t.datetime "updated_at",  :null => false
+    t.integer  "project_id"
     t.string   "value"
   end
 
