@@ -16,13 +16,13 @@ module Estimate::PostsHelper
 
   def estimate_trans_all(e)
     case e
-      when 0
-        'невероятно'
       when 1
-        'маловероятно'
+        'невероятно'
       when 2
-        'вероятно'
+        'маловероятно'
       when 3
+        'вероятно'
+      when 4
         'очень вероятно'
     end
   end
@@ -55,13 +55,13 @@ module Estimate::PostsHelper
 
   def css_class_estimate_all(e)
     case e
-      when 0
-        'text-danger'
       when 1
         'text-danger'
       when 2
-        'text-warning'
+        'text-danger'
       when 3
+        'text-warning'
+      when 4
         'text-success'
     end
   end
@@ -69,59 +69,59 @@ module Estimate::PostsHelper
   def estimate_trans_simple(field,val)
     if field == 'on'
       case val
-        when 3
+        when 4
           'в полном объеме'
-        when 2
+        when 3
           'в значительном объеме'
-        when 1
+        when 2
           'в небольшом объеме'
-        when 0
+        when 1
           'в ничтожном объеме'
       end
     elsif field == 'ozs'
       case val
-        when 3
+        when 4
           'значительными'
-        when 2
+        when 3
           'средними'
-        when 1
+        when 2
           'незначительными'
-        when 0
+        when 1
           'ничтожными'
       end
     elsif field == 'op'
       case val
-        when 3
+        when 4
           'полностью'
-        when 2
+        when 3
           'в значительной мере'
-        when 1
+        when 2
           'в небольшой мере'
-        when 0
+        when 1
           'в ничтожной мере'
       end
-    elsif field == 'ozf'
+    elsif field == 'ozf' or field == 'nep1' or field == 'nepr1'
       case val
-        when 3
+        when 4
           'значительными'
-        when 2
+        when 3
           'средними'
-        when 1
+        when 2
           'незначительными'
-        when 0
+        when 1
           'ничтожными'
       end
     end
   end
   def css_class_estimate_simple(e)
     case e
-      when 0
-        'text-danger'
       when 1
         'text-danger'
       when 2
-        'text-warning'
+        'text-danger'
       when 3
+        'text-warning'
+      when 4
         'text-success'
     end
   end

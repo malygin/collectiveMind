@@ -61,8 +61,13 @@
 
                 -if not  @post.user.jury?
                   Общая оценка проекта
-                  %span.color-red #{ @post.score(@est_stat) }
-                  \ = ( #{@post.second_c} + #{@post.first_c} ) / #{@post.third_c}
+                  %span.color-red(style='font-size: 30px;')="#{ @post.score(@est_stat) } %"
+                  %br
+                  %span.text-warning
+                    #{@post.sum_score} = ( #{@post.second_c} + #{@post.first_c} ) / #{@post.third_c}
+                    %br
+                    максимальная оценка проекта:
+                    %b= @post.max_score
                   %br
                   1) ожидаемая эффективность  первого шага проекта
                   %span.color-red #{ @post.second_c}
@@ -176,7 +181,7 @@
                                 %a(href="#dis_#{concept.id}" data-toggle="tab")
                                   ="#{i+1}. #{concept.title}"
                                   -if concept.estimate_post_aspect(@post.id)
-                                    %span.color-green= concept.estimate_post_aspect(@post.id).score(@est_stat)
+                                    %span.color-green= "#{concept.estimate_post_aspect(@post.id).score(@est_stat)} %"
 
                     %li.panel
                       %a.color-green(href="#negative" data-toggle="tab")
@@ -189,6 +194,7 @@
                     %div.tab-pane(id="dis_#{tr.plan_post_aspect.id}" style="padding-left:10px;")
                       ожидаемая эффективность этой задачи:
                       %span.red_est=tr.score(@est_stat)
+
                       %br
                       %h3.color-orange.text-center
                         %b=tr.plan_post_aspect.title
@@ -421,8 +427,8 @@
                         %br
                         Функционирование ресурсов потребует материальных и трудовых затрат. Наиболе вероятно, что эти затраты окажутся—
                         %br
-                        %span{:class=>css_class_estimate_simple(tr.op1)}
-                          = estimate_trans_simple('ozf',tr.op1)
+                        %span{:class=>css_class_estimate_simple(tr.ozf1)}
+                          = estimate_trans_simple('ozf',tr.ozf1)
                         %br
                         %br
                         - unless tr.ozf == ''
@@ -521,10 +527,10 @@
                       %br
                       При осуществлении проекта могут возникать разные негативные явления. Рассмотрите два типа таких явлений. Первый тип – это побочные эффекты, возникшие наряду с улучшениями (например, нововведения работают, но обходятся слишком дорого).
                       %br
-                      Какова вероятность, что эти побочные эффекты будут—
+                      Наиболее вероятно, что эти побочные эффекты будут—
                       %br
                       %span{:class=>css_class_estimate_all( @post.nepr1)}
-                        = estimate_trans_all( @post.nepr1)
+                        = estimate_trans_simple('nepr1', @post.nepr1)
                       %br
                       %br
 
@@ -534,8 +540,10 @@
                       %br
                       Второй тип – это препятствия, возникшие в процессе создания нововведений (например, сопротивление со стороны сотрудников, привыкших работать по-старому).
                       %br
+                      Наиболее вероятно, что эти побочные эффекты будут—
+                      %br
                       %span{:class=>css_class_estimate_all( @post.nep1)}
-                        = estimate_trans_all( @post.nep1 )
+                        = estimate_trans_simple('nep1', @post.nep1 )
                       %br
                       %br
 

@@ -4,7 +4,7 @@ class Estimate::PostAspect < ActiveRecord::Base
                   :ozf, :ozf1, :ozf2, :ozf3,  :ozf4,
                   :ozs, :ozs1, :ozs2, :ozs3,
                   :first_stage, :plan_post_first_cond_id
-
+  attr_accessor :max_score
   belongs_to :post
   belongs_to :plan_post_aspect, :class_name => 'Plan::PostAspect'
   belongs_to :plan_post_first_cond, :class_name => 'Plan::PostFirstCond'
@@ -40,8 +40,9 @@ class Estimate::PostAspect < ActiveRecord::Base
          on_i=on1
          ozf_i=ozf1
          ozs_i=ozs1
-         r =  (ozf_i*ozs_i)== 0? 0 : (op_i*on_i)/(ozf_i*ozs_i)
-         (r*100).round/100.0
+         r =  (ozf_i*ozs_i)== 0? 0 : (op_i+on_i)/(ozf_i+ozs_i)
+         @max_score =  r * 25
+         (r*2500).round/100.0
        else
          0
        end

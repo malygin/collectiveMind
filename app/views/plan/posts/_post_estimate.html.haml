@@ -3,7 +3,7 @@
   .media-body
     .media-heading
       =link_to post_estimate.user, user_path(@project, post_estimate.user)
-    %span.color-green=post_estimate.name
+    %span=post_estimate.name
     %span
       =link_to 'подробнее', plan_post_path(@project, post_estimate)
     %br

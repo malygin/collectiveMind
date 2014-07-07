@@ -5,7 +5,7 @@ class Estimate::Post < ActiveRecord::Base
   attr_accessible  :imp, :nepr, :nepr1, :nepr2, :nepr3, :nepr4,
                    :nep, :nep1, :nep2, :nep3, :nep4, :all_grade,
                    :onpsh, :onpsh1, :onpsh2, :onpsh3, :oppsh, :oppsh1, :oppsh2, :oppsh3, :ozpshf, :ozpshf1, :ozpshf2, :ozpshf3, :ozpshs, :ozpshs1, :ozpshs2, :ozpshs3
-  attr_accessor :first_c, :second_c, :third_c
+  attr_accessor :first_c, :second_c, :third_c, :max_score, :sum_score
 
   belongs_to :post, :class_name => 'Plan::Post'
   has_many :post_aspects
@@ -60,13 +60,15 @@ class Estimate::Post < ActiveRecord::Base
       @third_c == 0.0 ? 0.0 : ((@second_c+@first_c/@third_c)*100).round / 100.0
     else
       sum_tr=0.0
+      count = 0
       post_aspects.others(self.post).each do |tr|
         op_i = tr.op1
         on_i = tr.on1
         ozf_i = tr.ozf1
         ozs_i = tr.ozs1
+        count+=1
         if not (op_i.nil? or on_i.nil? or ozf_i.nil? or ozs_i.nil?)
-          sum_tr = sum_tr + ( (ozf_i*ozs_i) ==0 ? 0 : (op_i*on_i)/(ozf_i*ozs_i))
+          sum_tr = sum_tr + ( (ozf_i*ozs_i) ==0 ? 0 : (op_i+on_i)/(ozf_i+ozs_i))
         end
       end
 
@@ -77,8 +79,9 @@ class Estimate::Post < ActiveRecord::Base
         on_i = tr.on1
         ozf_i = tr.ozf1
         ozs_i = tr.ozs1
+        count+=1
         if not (op_i.nil? or on_i.nil? or ozf_i.nil? or ozs_i.nil?)
-          sum_tr = sum_tr + ( (ozf_i*ozs_i) ==0 ? 0 : (op_i*on_i)/(ozf_i*ozs_i))
+          sum_tr = sum_tr + ( (ozf_i*ozs_i) ==0 ? 0 : (op_i+on_i)/(ozf_i+ozs_i))
         end
       end
       @second_c = sum_tr
@@ -87,7 +90,10 @@ class Estimate::Post < ActiveRecord::Base
       @first_c = (@first_c * 100).round / 100.0
       @second_c = (@second_c * 100).round / 100.0
       @third_c = (th1.nil? or th2.nil?) ? 0.0 : ((th1 + th2)*100).round / 100.0
-      @third_c == 0 ? 0.0 : (((@second_c+@first_c)/@third_c)*100).round / 100.0
+      @max_score = count *2
+      result = @third_c == 0 ? 0.0 : ((@second_c+@first_c)/@third_c)
+      @sum_score = result
+      (result*100/ @max_score).round
     end
   	# oppsh_i=(1*oppsh1+2*oppsh2+3*oppsh3)/(oppsh1+oppsh2+oppsh3)
 
