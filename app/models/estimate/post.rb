@@ -22,7 +22,7 @@ class Estimate::Post < ActiveRecord::Base
 
   
 
-
+  #@todo replace sum in product
   def score(status)
     if status.nil? or status == 0
       sum_tr=0.0
