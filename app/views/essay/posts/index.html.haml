@@ -12,7 +12,7 @@
           Рефлексия по данному этапу в рамках процедуры:
           =@project.name
 
-      - unless current_user.have_essay_for_stage(@project, @stage)
+      - if !current_user.have_essay_for_stage(@project, @stage) and current_stage?(@stage.to_i)
         .col-md-3
           .pull-right
             =link_to 'Добавить свой отзыв об этапе', new_essay_post_path(@project, @stage), id: 'new_essay',  class: 'btn btn-lg btn-success'

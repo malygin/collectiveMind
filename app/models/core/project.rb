@@ -48,6 +48,7 @@ class Core::Project < ActiveRecord::Base
   has_many :knowbase_posts, :class_name => 'Knowbase::Post'
 
   has_many :core_project_scores, :class_name => 'Core::ProjectScore'
+  has_many :essays, :class_name => 'Essay::Post', :conditions => ['status = 0']
   #has_many :project_score_users, :class_name => 'User', :through => :core_project_scores, :source => :user
 
   LIST_STAGES = {1 => {name: 'Сбор информации', :type_stage => :life_tape_posts, status: [0,1,2]},
@@ -119,7 +120,6 @@ class Core::Project < ActiveRecord::Base
        return self.status == 9
      elsif p.instance_of? Estimate::Post
        return self.status == 10
-
      end
     return false
   end
@@ -136,8 +136,6 @@ class Core::Project < ActiveRecord::Base
         9
       when :estimate_posts
         10
-
-
      end
   end
   def  status_title(status = self.status)
@@ -171,5 +169,9 @@ class Core::Project < ActiveRecord::Base
       else
         'завершена'
     end
+  end
+
+  def essay_count(stage)
+    self.essays.by_stage(stage)
   end
 end

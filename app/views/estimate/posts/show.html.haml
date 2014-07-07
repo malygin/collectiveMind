@@ -63,11 +63,11 @@
                   Общая оценка проекта
                   %span.color-red(style='font-size: 30px;')="#{ @post.score(@est_stat) } %"
                   %br
-                  %span.text-warning
+                  %span.color-orange
                     #{@post.sum_score} = ( #{@post.second_c} + #{@post.first_c} ) / #{@post.third_c}
                     %br
                     максимальная оценка проекта:
-                    %b= @post.max_score
+                    %b(style='font-size: 15px;')= @post.max_score
                   %br
                   1) ожидаемая эффективность  первого шага проекта
                   %span.color-red #{ @post.second_c}

@@ -68,7 +68,7 @@ class Estimate::Post < ActiveRecord::Base
         ozs_i = tr.ozs1
         count+=1
         if not (op_i.nil? or on_i.nil? or ozf_i.nil? or ozs_i.nil?)
-          sum_tr = sum_tr + ( (ozf_i*ozs_i) ==0 ? 0 : (op_i+on_i)/(ozf_i+ozs_i))
+          sum_tr = sum_tr + ( (ozf_i+ozs_i) ==0 ? 0 : (op_i+on_i)/(ozf_i+ozs_i))
         end
       end
 
@@ -81,7 +81,7 @@ class Estimate::Post < ActiveRecord::Base
         ozs_i = tr.ozs1
         count+=1
         if not (op_i.nil? or on_i.nil? or ozf_i.nil? or ozs_i.nil?)
-          sum_tr = sum_tr + ( (ozf_i*ozs_i) ==0 ? 0 : (op_i+on_i)/(ozf_i+ozs_i))
+          sum_tr = sum_tr + ( (ozf_i+ozs_i) ==0 ? 0 : (op_i+on_i)/(ozf_i+ozs_i))
         end
       end
       @second_c = sum_tr
@@ -93,7 +93,7 @@ class Estimate::Post < ActiveRecord::Base
       @max_score = count *2
       result = @third_c == 0 ? 0.0 : ((@second_c+@first_c)/@third_c)
       @sum_score = result
-      (result*100/ @max_score).round
+      @max_score == 0 ? 0 : (result*100/ @max_score).round
     end
   	# oppsh_i=(1*oppsh1+2*oppsh2+3*oppsh3)/(oppsh1+oppsh2+oppsh3)
 

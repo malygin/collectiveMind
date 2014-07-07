@@ -13,6 +13,12 @@
           1.
           =@project.status_title(:life_tape_posts)
       %ul#life_tape.panel-collapse.open.in
+        -if @project.status > 1
+          %li
+            = link_to essay_posts_path(@project, 1), :class => 'color-green' do
+              Рефлексия
+              %b="(#{@project.essay_count(1).count})"
+
         -@project.aspects.each do |asp|
           %li{class:"#{'active' if asp == @aspect}"}
             = link_to "/project/#{@project.id}/life_tape/posts?asp=#{asp.id}" do
@@ -20,9 +26,7 @@
               &nbsp;
               =" #{asp.content}"
               -#%b="(#{post.comments.count})"
-        -if @project.status > 1
-          %li
-            = link_to 'Рефлексия', essay_posts_path(@project, 1), :class => 'color-green'
+
 
     -else
       =link_to "/project/#{@project.id}/life_tape/posts" ,  class: "stage_menu1" do
@@ -45,6 +49,12 @@
             =@project.status_title(:discontent_posts)
 
         %ul#discontent.panel-collapse.open.in
+          -if @project.status > 5
+            %li
+              = link_to essay_posts_path(@project, 2), :class => 'color-green' do
+                Рефлексия
+                %b="(#{@project.essay_count(2).count})"
+
           -@project.proc_aspects.each do |asp|
             %li{class:"#{'active' if asp == @aspect_post}"}
               = link_to "/project/#{@project.id}/discontent/posts?asp=#{asp.id}" do
@@ -53,9 +63,6 @@
                 =asp.content
                 %small="(#{asp.aspect_posts.count})"
                 -#%b="(#{post.comments.count})"
-          -if @project.status > 5
-            %li
-              = link_to 'Рефлексия', essay_posts_path(@project, 2), :class => 'color-green'
 
       -else
         = link_to "/project/#{@project.id}/discontent/posts", class:"stage_menu2" do
@@ -86,6 +93,12 @@
             3.
             =@project.status_title(:concept_posts)
         %ul#concept.panel-collapse.open.in
+          -if @project.status > 7
+            %li
+              = link_to essay_posts_path(@project, 3), :class => 'color-green' do
+                Рефлексия
+                %b="(#{@project.essay_count(3).count})"
+
           -@project.proc_aspects.each do |asp|
             %li{class:"#{'active' if asp == @aspect_post}"}
               = link_to "/project/#{@project.id}/concept/posts?asp=#{asp.id}" do
@@ -93,9 +106,7 @@
                 &nbsp;
                 =asp.content
                 %small="(#{asp.aspect_posts.by_status(4).count})"
-          -if @project.status > 7
-            %li
-              = link_to 'Рефлексия', essay_posts_path(@project, 3), :class => 'color-green'
+
 
       -else
         = link_to "/project/#{@project.id}/concept/posts" , class:"stage_menu3" do
@@ -124,7 +135,9 @@
         %ul#plan.panel-collapse.open.in
           -if @project.status > 8
             %li
-              = link_to 'Рефлексия', essay_posts_path(@project, 4), :class => 'color-green'
+              = link_to essay_posts_path(@project, 4), :class => 'color-green' do
+                Рефлексия
+                %b="(#{@project.essay_count(4).count})"
 
       -else
         = link_to "/project/#{@project.id}/plan/posts" , class:"stage_menu4" do
@@ -156,7 +169,9 @@
         %ul#estimate.panel-collapse.open.in
           -if @project.status > 10
             %li
-              = link_to 'Рефлексия', essay_posts_path(@project, 5), :class => 'color-green'
+              = link_to essay_posts_path(@project, 5), :class => 'color-green' do
+                Рефлексия
+                %b="(#{@project.essay_count(5).count})"
 
       -else
         = link_to "/project/#{@project.id}/estimate/posts" , class:"stage_menu5" do
