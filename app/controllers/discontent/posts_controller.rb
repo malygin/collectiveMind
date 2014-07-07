@@ -102,7 +102,7 @@ class Discontent::PostsController < PostsController
     @post = current_model.new
     @replace_posts =[]
     @accepted_posts = Discontent::Post.where(status: 2, project_id:  @project)
-    @users_rc = User.where('users.type_user NOT IN (?) AND users.type_user IN (?)', "1,6","4,7")
+    @users_rc = User.where(:type_user => [4,7])
 
     unless params[:replace_id].nil?
       @replace_posts << current_model.find(params[:replace_id])
@@ -372,7 +372,7 @@ class Discontent::PostsController < PostsController
       @project = Core::Project.find(params[:project])
       status  = @project.status == 3 ? 0 : 2
       @aspects = Discontent::Aspect.where(:project_id => @project, :status => 0).order(:id)
-      @users_rc = User.where('users.type_user NOT IN (?) AND users.type_user IN (?)', "1,6","4,7")
+      @users_rc = User.where(:type_user => [4,7])
       @discontent_aspect = Discontent::Aspect.find(params[:asp_id]) unless params[:asp_id].nil?
       @discontent_post = Discontent::Post.find(params[:dis_id]) unless params[:dis_id].nil?
       @select_aspect = Discontent::Aspect.find(params[:aspect_id]) unless params[:aspect_id].nil?

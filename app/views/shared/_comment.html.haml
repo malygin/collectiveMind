@@ -7,7 +7,9 @@
       =link_to comment.user, user_path(@project, comment.user)
       = render partial: '/shared/user_online', object: comment.user
       =club_status_show_user(comment.user)
-      - if comment.user.boss?
+      - if comment.user.type_user == 7
+        %span.label.label-success MD
+      - elsif comment.user.boss?
         %span.label.label-danger MD
     .text
       %div{id: "comment_text_#{comment.id}"}
