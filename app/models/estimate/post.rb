@@ -61,6 +61,7 @@ class Estimate::Post < ActiveRecord::Base
     else
       sum_tr=0.0
       count = 0
+      sum_all =0
       post_aspects.others(self.post).each do |tr|
         op_i = tr.op1
         on_i = tr.on1
@@ -68,8 +69,15 @@ class Estimate::Post < ActiveRecord::Base
         ozs_i = tr.ozs1
         count+=1
         if not (op_i.nil? or on_i.nil? or ozf_i.nil? or ozs_i.nil?)
-          sum_tr = sum_tr + ( (ozf_i+ozs_i) ==0 ? 0 : (op_i+on_i)/(ozf_i+ozs_i))
+          sum_tr = ( (ozf_i*ozs_i) ==0 ? 0 : (op_i*on_i)/(ozf_i*ozs_i))
+          if sum_tr > 1
+            sum_all += (sum_tr *50/16)+50
+          else
+            sum_all += sum_tr * 50
+          end
         end
+
+
       end
 
       @first_c = sum_tr
@@ -81,8 +89,15 @@ class Estimate::Post < ActiveRecord::Base
         ozs_i = tr.ozs1
         count+=1
         if not (op_i.nil? or on_i.nil? or ozf_i.nil? or ozs_i.nil?)
-          sum_tr = sum_tr + ( (ozf_i+ozs_i) ==0 ? 0 : (op_i+on_i)/(ozf_i+ozs_i))
+          sum_tr =  ( (ozf_i*ozs_i) ==0 ? 0 : (op_i*on_i)/(ozf_i*ozs_i))
+          if sum_tr > 1
+            sum_all += (sum_tr *50/16)+50
+          else
+            sum_all += sum_tr * 50
+          end
         end
+
+
       end
       @second_c = sum_tr
       th1 = nepr1.nil? ? 0 : nepr1
@@ -90,10 +105,10 @@ class Estimate::Post < ActiveRecord::Base
       @first_c = (@first_c * 100).round / 100.0
       @second_c = (@second_c * 100).round / 100.0
       @third_c = (th1.nil? or th2.nil?) ? 0.0 : ((th1 + th2)*100).round / 100.0
-      @max_score = count *2
-      result = @third_c == 0 ? 0.0 : ((@second_c+@first_c)/@third_c)
-      @sum_score = result
-      @max_score == 0 ? 0 : (result*100/ @max_score).round
+      @max_score = count * 50
+      sum_all /= @third_c
+      # result = @third_c == 0 ? 0.0 : ((@second_c+@first_c)/@third_c)
+      sum_all.nan?  ? 0:  ((sum_all*100/ @max_score) *1000).round / 1000.0
     end
   	# oppsh_i=(1*oppsh1+2*oppsh2+3*oppsh3)/(oppsh1+oppsh2+oppsh3)
 

@@ -40,9 +40,14 @@ class Estimate::PostAspect < ActiveRecord::Base
          on_i=on1
          ozf_i=ozf1
          ozs_i=ozs1
-         r =  (ozf_i*ozs_i)== 0? 0 : (op_i+on_i)/(ozf_i+ozs_i)
-         @max_score =  r * 25
-         (r*2500).round/100.0
+         r =  (ozf_i*ozs_i)== 0? 0 : (op_i*on_i)/(ozf_i*ozs_i)
+
+        if r > 1
+          (r *50/16)+50
+        else
+           r * 50
+        end
+
        else
          0
        end
