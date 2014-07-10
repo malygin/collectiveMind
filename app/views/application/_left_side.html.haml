@@ -125,7 +125,8 @@
   %li.panel#stage_plan
     - if  @project.status > 8
       - if request.original_url.include? 'plan' or request.original_url.include? '/4/essay'
-        %a.stage_menu4.accordion-toggle(data-toggle="collapse" data-parent="#side-nav" href="#plan")
+        -#%a.stage_menu4.accordion-toggle(data-toggle="collapse" data-parent="#side-nav" href="#plan")
+        = link_to "/project/#{@project.id}/plan/posts" , class:"stage_menu4" do
           %i.fa.fa-table
           %span.name.h4.no-margin.text-left
             4.
@@ -156,10 +157,11 @@
           =@project.status_title(:plan_posts)
 
 
-  %li.panel#stage_plan
+  %li.panel#stage_estimate
     - if  @project.status > 9
       - if request.original_url.include? 'estimate' or request.original_url.include? '/5/essay'
-        %a.stage_menu5.accordion-toggle(data-toggle="collapse" data-parent="#side-nav" href="#estimate")
+        -#%a.stage_menu5.accordion-toggle(data-toggle="collapse" data-parent="#side-nav" href="#estimate")
+        = link_to "/project/#{@project.id}/estimate/posts" , class:"stage_menu5" do
           %i.fa.fa-code-fork
           %span.name.h4.no-margin
             5.
