@@ -125,4 +125,12 @@ module Estimate::PostsHelper
         'text-success'
     end
   end
+
+  def vote_post?(post)
+    user_vote_post = current_user.voted_plan_posts.by_project(@project.id).first
+    unless user_vote_post.nil?
+      return true if user_vote_post == post
+    end
+    false
+  end
 end

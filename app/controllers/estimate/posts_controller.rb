@@ -38,7 +38,7 @@ class Estimate::PostsController < PostsController
 
   def index
     if @project.status == 11
-      if current_user.plan_post_votings.size == 0
+      if current_user.voted_plan_posts.by_project(@project.id).size == 0
         redirect_to action: "vote_list"
         return
       end
@@ -351,8 +351,9 @@ class Estimate::PostsController < PostsController
 
   def vote_list
     @project = Core::Project.find(params[:project])
-    @posts = Plan::Post.where(:project_id => @project, :status => 0)
-    @number_v = @project.stage5 - current_user.plan_post_votings.size
+    @posts = Plan::Post.where(:project_id => @project, :status => 0).paginate(:page => params[:page])
+    @est_stat = @posts.first.estimate_status.nil? ? 0 : @posts.first.estimate_status
+    @number_v = @project.stage5 - current_user.voted_plan_posts.by_project(@project.id).size
     @votes = @project.stage5
     # if boss?
     #   @all_people = @project.users.size

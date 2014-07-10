@@ -1,69 +1,76 @@
-.row
-  .col-md-12
-    %h3.color-grey
-      5 этап: Оценка проектов. Голосование.
-      %br
-    %span(style='font-size: 20px;line-height: 30px;')
-      Голосование за проекты в рамках процедуры:
-      =@project.name
+%section.widget
+  %header
+    .row
+      .col-md-12
+        %h3.color-grey
+          5 этап: Оценка проектов. Голосование.
+          %br
+        %span(style='font-size: 20px;line-height: 30px;')
+          Голосование за проекты в рамках процедуры:
+          =@project.name
+  .body
+    %br
+    #stage_success.text-center(style="display:none;" )
+      %section.widget
+        .body
+          %h3 Спасибо за участие в голосовании!
+          .col-md-6
+            =link_to "Перейти к рефлексии", new_essay_post_path(@project, 5),:class => "btn btn-lg btn-success"
+          .col-md-6
+            =link_to "Перейти к списку проектов", plan_posts_path(@project),:class => "btn btn-lg btn-primary"
+          %br
+          %br
+    - unless @number_v<1  and not boss?
+      %section.widget#fixBlock
+        %h4
+          Вы можете выбрать
+          %b=@project.stage5
+          проект, который на Ваш взгляд является лучшим
+        %h3.text-info
+          =t('voting.have_votes')
+          %b#count_vote=@number_v
+    %br
+    .row
+      .col-md-12
+        %section.widget
+          .body
+            = render :partial => '/plan/posts/post_estimate', :collection => @posts
 
-%br
-
-#stage_success.text-center(style="display:none;" )
-  %section.widget
-    .body
-      %h3 Спасибо за участие в голосовании!
-      .col-md-6
-        =link_to "Перейти к рефлексии", new_essay_post_path(@project, 5),:class => "btn btn-lg btn-success"
-      .col-md-6
-        =link_to "Перейти к списку проектов", plan_posts_path(@project),:class => "btn btn-lg btn-primary"
-      %br
-      %br
-%br
-- unless @number_v<1  and not boss?
-  %section.widget#fixBlock
-    %h4
-      Вы можете выбрать
-      %b=@project.stage5
-      проект, который на Ваш взгляд является лучшим
-    %h3.text-info
-      =t('voting.have_votes')
-      %b#count_vote=@number_v
 
 
-  #vote_container
-    -@posts.each do |post|
-      .col-md-4.col-sm-8.col-xs-12
-        - if can_vote?(post.voted(current_user).size, @number_v, @votes)
-          .box
-            %span.color-green=post.name
-            %span
-              =link_to 'подробнее', plan_post_path(@project, post)
-            %br
-            =simple_format(post.goal)
-            %br
-            =simple_format(post.content)
-            .description
-              =link_to "/project/#{@project.id}/plan/vote/#{post.id}", :remote => true, :method => :put, class: "btn btn-default btn-sm vote-button", id: "vote_#{post.id}" do
-                %i.fa.fa-thumbs-up
-                -if boss?
-                  =post.voted_users.size
-                Проголосовать
-        -else
-          .box
-            %span.color-green=post.name
-            %span
-              =link_to 'подробнее', plan_post_path(@project, post)
-            %br
-            =simple_format(post.goal)
-            %br
-            =simple_format(post.content)
-            .description
-              %a.btn.btn-success.btn-sm.disabled.vote-button
-                %i.fa.fa-thumbs-up
-                -if boss?
-                  =post.voted_users.size
-                Проголосовать
+  -##vote_container
+  -#  -@posts.each do |post|
+  -#    .col-md-4.col-sm-8.col-xs-12
+  -#      - if can_vote?(post.voted(current_user).size, @number_v, @votes)
+  -#        .box
+  -#          %span.color-green=post.name
+  -#          %span
+  -#            =link_to 'подробнее', plan_post_path(@project, post)
+  -#          %br
+  -#          =simple_format(post.goal)
+  -#          %br
+  -#          =simple_format(post.content)
+  -#          .description
+  -#            =link_to "/project/#{@project.id}/plan/vote/#{post.id}", :remote => true, :method => :put, class: "btn btn-default btn-sm vote-button", id: "vote_#{post.id}" do
+  -#              %i.fa.fa-thumbs-up
+  -#              -if boss?
+  -#                =post.voted_users.size
+  -#              Проголосовать
+  -#      -else
+  -#        .box
+  -#          %span.color-green=post.name
+  -#          %span
+  -#            =link_to 'подробнее', plan_post_path(@project, post)
+  -#          %br
+  -#          =simple_format(post.goal)
+  -#          %br
+  -#          =simple_format(post.content)
+  -#          .description
+  -#            %a.btn.btn-success.btn-sm.disabled.vote-button
+  -#              %i.fa.fa-thumbs-up
+  -#              -if boss?
+  -#                =post.voted_users.size
+  -#              Проголосовать
 
 
 

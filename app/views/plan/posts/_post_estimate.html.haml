@@ -3,11 +3,27 @@
   .media-body
     .media-heading
       =link_to post_estimate.user, user_path(@project, post_estimate.user)
-    %span=post_estimate.name
-    %span
-      =link_to 'подробнее', plan_post_path(@project, post_estimate)
-    %br
-    =post_estimate.goal
+    .col-md-8
+      %span=post_estimate.name
+      %span
+        =link_to 'подробнее', plan_post_path(@project, post_estimate)
+      %br
+      =simple_format(post_estimate.goal)
+      %br
+      =simple_format(post_estimate.content)
+    .col-md-4
+      - if can_vote?(post_estimate.voted(current_user).size, @number_v, @votes)
+        =link_to "/project/#{@project.id}/plan/vote/#{post_estimate.id}", :remote => true, :method => :put, class: "btn btn-default btn-lg vote-button pull-right", id: "vote_#{post_estimate.id}" do
+          %i.fa.fa-thumbs-up
+          -if boss?
+            =post_estimate.voted_users.size
+          Проголосовать
+      -else
+        %a.btn.btn-lg.disabled.vote-button.pull-right{:class => "#{vote_post?(post_estimate) ? 'btn-success' : 'btn-default'}"}
+          %i.fa.fa-thumbs-up
+          -if boss?
+            =post_estimate.voted_users.size
+          Проголосовать
     = render 'shared/post_social_bar2', :post => post_estimate
     -if @project.status == 10
       %br
