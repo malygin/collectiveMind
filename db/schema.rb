@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140711175948) do
+ActiveRecord::Schema.define(:version => 20140711203329) do
 
   create_table "answers", :force => true do |t|
     t.string   "text"
@@ -34,11 +34,10 @@ ActiveRecord::Schema.define(:version => 20140711175948) do
   add_index "answers_users", ["user_id"], :name => "index_answers_users_on_user_id"
 
   create_table "awards", :force => true do |t|
-    t.string   "name"
-    t.string   "url"
-    t.text     "desc"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.string  "name"
+    t.string  "url"
+    t.text    "desc"
+    t.integer "position"
   end
 
   create_table "comments", :force => true do |t|
@@ -1171,6 +1170,7 @@ ActiveRecord::Schema.define(:version => 20140711175948) do
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
     t.integer  "project_id"
+    t.integer  "position"
   end
 
   create_table "user_checks", :force => true do |t|

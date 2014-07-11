@@ -7,7 +7,11 @@
     .row
       .col-md-4
         = image_tag  @user.avatar(:normal),  class: "img-circle"
-
+        %br
+        %h3 Достижения (22 из 22)
+        %br
+        -@awards.each do |a|
+          =image_tag('/assets/awards/'+a.url+'_70_70.png', title: a.name)
       .col-md-8
         .row
           .col-md-9
