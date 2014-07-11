@@ -1200,11 +1200,7 @@ ActiveRecord::Schema.define(:version => 20140711203329) do
     t.string   "encrypted_password"
     t.string   "login"
     t.string   "salt"
-    t.boolean  "admin",                  :default => false
     t.integer  "score",                  :default => 0
-    t.boolean  "expert",                 :default => false
-    t.string   "user_type"
-    t.boolean  "jury",                   :default => false
     t.string   "avatar_file_name"
     t.string   "avatar_content_type"
     t.integer  "avatar_file_size"
