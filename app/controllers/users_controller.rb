@@ -14,7 +14,7 @@ class UsersController < ApplicationController
 
     @user = User.find(params[:id])
     @project = Core::Project.find(params[:project])
-
+    @awards = Award.all
     add_breadcrumb  @user, user_path(@project, @user)
 
     if @user != current_user
