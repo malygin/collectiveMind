@@ -77,4 +77,11 @@ class Discontent::Aspect < ActiveRecord::Base
     self.content
   end
 
+  def comments_temp
+    Discontent::Comment.joins("INNER JOIN discontent_posts ON discontent_comments.post_id = discontent_posts.id").
+    joins("INNER JOIN discontent_post_aspects ON discontent_post_aspects.post_id = discontent_posts.id").
+    where("discontent_post_aspects.aspect_id = ? and discontent_comments.dis_stat = 't'", self.id)
+  end
+
+
 end

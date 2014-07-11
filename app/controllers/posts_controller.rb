@@ -79,8 +79,10 @@ end
     else
       content = params[name_of_comment_for_param][:content]
     end
+    dis_stat = params[name_of_comment_for_param][:dis_stat]
+    con_stat = params[name_of_comment_for_param][:con_stat]
     unless  params[name_of_comment_for_param][:content]==''
-      @comment = post.comments.create(:content => content, :user =>current_user, :comment_id => @main_comment ? @main_comment.id : nil)
+      @comment = post.comments.create(:content => content, :user =>current_user,:dis_stat => dis_stat,:con_stat => con_stat, :comment_id => @main_comment ? @main_comment.id : nil)
       current_user.journals.build(:type_event=>name_of_comment_for_param+'_save', :project => @project,
                                   :body=>"#{trim_content(@comment.content)}", :body2=>trim_content(post.content),
                                   :first_id=> (post.instance_of? LifeTape::Post) ? post.discontent_aspects.first.id : post.id, :second_id => @comment.id).save!
@@ -118,6 +120,23 @@ end
     else
       @url_link = url_for(:controller => @post.class.name.underscore.pluralize, :action => 'add_comment', :main_comment => @main_comment.id)
       #@url_link = "/project/#{@project.id}/" + current_model.table_name.sub('_posts','/posts') + "/#{@post.id}/add_comment?main_comment=#{@main_comment.id}"
+    end
+    respond_to do |format|
+      format.js
+    end
+  end
+
+  def comment_stat
+    @project = Core::Project.find(params[:project])
+    @post = current_model.find(params[:id])
+    @comment = comment_model.find(params[:comment_id])
+    if params[:dis_stat].present?
+      @comment.toggle(:dis_stat)
+      @comment.update_attributes(dis_stat: @comment.dis_stat)
+    end
+    if params[:con_stat].present?
+      @comment.toggle(:con_stat)
+      @comment.update_attributes(con_stat: @comment.con_stat)
     end
     respond_to do |format|
       format.js
@@ -469,9 +488,17 @@ def index
   def to_work
     @project = Core::Project.find(params[:project])
     if current_model == "LifeTape"
-      @path_link = "/project/#{@project.id}/" + current_model.table_name.sub('_posts','/posts') + "?asp=#{@project.aspects.first.id}"
+      if @project.aspects.first
+        @path_link = "/project/#{@project.id}/" + current_model.table_name.sub('_posts','/posts') + "?asp=#{@project.aspects.first.id}"
+      else
+        @path_link = "/project/#{@project.id}/" + current_model.table_name.sub('_posts','/posts')
+      end
     else
-      @path_link = "/project/#{@project.id}/" + current_model.table_name.sub('_posts','/posts') + "?asp=#{@project.proc_aspects.first.id}"
+      if @project.proc_aspects.first
+        @path_link = "/project/#{@project.id}/" + current_model.table_name.sub('_posts','/posts') + "?asp=#{@project.proc_aspects.first.id}"
+      else
+        @path_link = "/project/#{@project.id}/" + current_model.table_name.sub('_posts','/posts')
+      end
     end
     @table_name = current_model.table_name.sub('_posts','')
 

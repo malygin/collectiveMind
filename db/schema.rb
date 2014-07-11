@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140707002812) do
+ActiveRecord::Schema.define(:version => 20140711175948) do
 
   create_table "answers", :force => true do |t|
     t.string   "text"
@@ -70,6 +70,8 @@ ActiveRecord::Schema.define(:version => 20140707002812) do
     t.datetime "updated_at",                    :null => false
     t.boolean  "censored",   :default => false
     t.integer  "comment_id"
+    t.boolean  "dis_stat"
+    t.boolean  "con_stat"
   end
 
   add_index "concept_comments", ["created_at"], :name => "index_concept_comments_on_created_at"
@@ -320,6 +322,8 @@ ActiveRecord::Schema.define(:version => 20140707002812) do
     t.datetime "updated_at",                    :null => false
     t.boolean  "censored",   :default => false
     t.integer  "comment_id"
+    t.boolean  "dis_stat"
+    t.boolean  "con_stat"
   end
 
   create_table "discontent_notes", :force => true do |t|
@@ -407,6 +411,8 @@ ActiveRecord::Schema.define(:version => 20140707002812) do
     t.boolean  "status_content"
     t.boolean  "status_whered"
     t.boolean  "status_whend"
+    t.integer  "imp_comment"
+    t.integer  "imp_stage"
   end
 
   add_index "discontent_posts", ["aspect_id"], :name => "index_discontent_posts_on_aspect_id"
@@ -852,6 +858,8 @@ ActiveRecord::Schema.define(:version => 20140707002812) do
     t.datetime "updated_at",                    :null => false
     t.boolean  "censored",   :default => false
     t.integer  "comment_id"
+    t.boolean  "dis_stat"
+    t.boolean  "con_stat"
   end
 
   add_index "life_tape_comments", ["created_at"], :name => "index_life_tape_comments_on_created_at"

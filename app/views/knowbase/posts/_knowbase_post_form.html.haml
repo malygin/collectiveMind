@@ -4,5 +4,8 @@
   %br
   =f.select :aspect_id, options_for_select(@aspects.collect { |p| [p.content, p.id] }, post.aspect_id)
   =f.text_area :content, :class => 'wysihtml5 form-control', style: 'height: 500px;', placeholder: 'Введите текст ...', id:'some-textarea'
+  %br
   .pull-right
-    =f.submit 'Сохранить', :id  => "send_post", class: 'btn btn-sm btn-success'
+    =f.submit 'Сохранить', :id  => "send_post", class: 'btn btn-lg btn-success'
+  %br
+  %br

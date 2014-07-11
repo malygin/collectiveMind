@@ -21,6 +21,7 @@ CollectiveMind::Application.routes.draw do
         put :plus_comment
         put :set_required
         put :add_child_comment_form
+        put :comment_stat
       end
     end
   end

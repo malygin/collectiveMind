@@ -9,6 +9,13 @@
       =club_status_show_user(comment.user)
       - if comment.user.boss?
         %span.label.label-danger MD
+      - if current_user?(comment.user) or boss?
+        .pull-right
+          =link_to({:action => :comment_stat, :id => comment.post.id, :comment_id => comment.id, :dis_stat => 1},  :remote => true, :method => :put,  id: "dis_stat_comment_#{comment.id}") do
+            %span.label(class="#{label_dis_stat(comment)}") Проблема
+          =link_to({:action => :comment_stat, :id => comment.post.id, :comment_id => comment.id, :con_stat => 1},  :remote => true, :method => :put,  id: "con_stat_comment_#{comment.id}") do
+            %span.label(class="#{label_con_stat(comment)}") Идея
+
     .text
       %div{id: "comment_text_#{comment.id}"}
         =simple_format(comment.content)
@@ -23,8 +30,12 @@
             :prompt => 'Выберите тему', :onchange => "select_for_aspects_comments(this,#{@project.id},#{comment.id});"
 
       .pull-right
-        =link_to({:action => :add_child_comment_form, :id => comment.post.id, :comment_id => comment.id },  :remote => true, :method => :put,  id: "add_child_comment_#{comment.id}") do
-          %span.label.label-success Ответить
+        -unless @imp_comment
+          =link_to({:action => :add_child_comment_form, :id => comment.post.id, :comment_id => comment.id },  :remote => true, :method => :put,  id: "add_child_comment_#{comment.id}") do
+            %span.label.label-success Ответить
+        -else
+          =link_to({:action => :new, :asp => params[:asp], :imp_comment => comment.id, :imp_stage => get_stage_for_improve(comment.get_class) }, :method => :get,  id: "improve_comment_#{comment.id}") do
+            %span.label.label-success Доработать
         - if boss?
           - if signed_in? and not comment.users.include?(current_user)
             =link_to({:action => :plus_comment, :id => comment.id, :against => false},  :remote => true, :method => :put,  id: "plus_comment_#{comment.id}") do
@@ -44,10 +55,21 @@
             -#%span.glyphicon.glyphicon-thumbs-down.text-muted
 
       %br
-      .col-md-12
+      -unless @imp_comment
+        .col-md-12
+          %br
+          %div{:id => "child_comments_#{comment.id}"}
+            -unless comment.comments.empty?
+              - comment.comments.each do |c|
+                = render :partial => 'shared/child_comment', object: c
+          %div{:id => "child_comments_form_#{comment.id}"}
+      -else
         %br
-        %div{:id => "child_comments_#{comment.id}"}
-          -unless comment.comments.empty?
-            - comment.comments.each do |c|
-              = render :partial => 'shared/child_comment', object: c
-        %div{:id => "child_comments_form_#{comment.id}"}
+        %section.widget
+          .body
+            %ul
+              - comment.imp_disposts.each do |post|
+                %li(style="line-height:30px;")
+                  Доработано
+                  =link_to post.user, user_path(@project, post.user)
+                  =link_to 'подробнее', discontent_post_path(@project, post), :class=> 'btn btn-primary btn-xs'

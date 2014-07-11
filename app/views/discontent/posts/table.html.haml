@@ -73,7 +73,7 @@
                             %ul.news-list
                               =render partial:'post_short', collection: @aspect_post.aspect_posts.by_positive(@status)
 
-                    .col-md-6
+
                       %section.widget
                         %header
                           %h4
@@ -103,7 +103,7 @@
                     =render partial:'post_short', collection: @aspect_post.aspect_posts.by_positive(@status)
 
 
-        .col-md-6
+
           %section.widget
             %header
               %h4
@@ -117,6 +117,17 @@
                     =render partial:'post_short', collection: @aspect_post.aspect_posts.by_negative_vote([2,4])
                   -else
                     =render partial:'post_short', collection: @aspect_post.aspect_posts.by_negative(@status)
+
+        .col-md-6
+          %section.widget
+            %header
+              %h4
+                Неоформленные проблемы
+              %hr
+            .body
+              .chat-messages
+                = render :partial => 'shared/comment',:collection => @comments_all
+
 
 
     -#.panel-group#accordion

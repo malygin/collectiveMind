@@ -166,6 +166,7 @@ $('#sortable').sortable update: (event, ui) ->
 
 $(window).load ->
   $('textarea').autosize()
+  activate_htmleditor();
   $select = $("#selectize_tag").selectize
     labelField: "show_content"
     valueField: "id"
@@ -642,3 +643,10 @@ $.fn.extend popoverClosable: (options) ->
     $('.popover').css 'display', 'none'
 
 
+@color_button= (el)->
+  if $(el).hasClass('active')
+    $(el).removeClass('btn-success')
+    $(el).addClass('btn-default')
+  else
+    $(el).removeClass('btn-default')
+    $(el).addClass('btn-success')

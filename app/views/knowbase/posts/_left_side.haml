@@ -1,6 +1,6 @@
 -if current_user.boss?
   .pull-right
-    =link_to new_knowbase_post_path(@project),:remote => true,:id => "new_knowbase_post" do
+    =link_to new_knowbase_post_path(@project),:id => "new_knowbase_post", :onclick => "setTimeout(function() { activate_htmleditor() }, 2000);" do
       %span.label.label-success +добавить статью
   %br
   %br
@@ -9,11 +9,12 @@
 .text-success#post_success(style='display:none;')
   Статья успешно добавлена
 %ul.liFixar.side-nav{:id => "#{'sortable' if boss?}"}
-  -@stages.each do |s|
-    %li{class: "#{'ui-state-default' if boss?} #{'active' if s.id==params[:id].to_i or (s.id == @stages.min_stage_knowbase_post(@project.id).first.id and params[:id].nil?)}",stage:"#{s.stage}", id: "#{s.id}"}
-      %a(href="/project/#{@project.id}/knowbase/posts/#{s.id}")
-        %div{id: "knowbase_left_title_#{s.id}"}
-          =s.title
+  -unless @stages.nil?
+    -@stages.each do |s|
+      %li{class: "#{'ui-state-default' if boss?} #{'active' if s.id==params[:id].to_i or (s.id == @stages.min_stage_knowbase_post(@project.id).first.id and params[:id].nil?)}",stage:"#{s.stage}", id: "#{s.id}"}
+        %a(href="/project/#{@project.id}/knowbase/posts/#{s.id}")
+          %div{id: "knowbase_left_title_#{s.id}"}
+            =s.title
 
 
 

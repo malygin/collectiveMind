@@ -152,6 +152,11 @@ p, a {
 }
 .ui-state-default {
     border: none;
+    background: none;
+    color: white;
+}
+.ui-state-default a div{
+    color: white;
 }
 .widget-panel .tab-content {
     overflow: visible !important;

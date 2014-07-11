@@ -1,6 +1,6 @@
 module BaseComment  extend ActiveSupport::Concern
   included do
-    attr_accessible :content, :user, :censored, :post_id, :comment_id
+    attr_accessible :content, :user, :censored, :post_id, :comment_id, :dis_stat, :con_stat
     belongs_to :user
     belongs_to :post
 
@@ -16,6 +16,8 @@ module BaseComment  extend ActiveSupport::Concern
 
     has_many :comment_votings_against,:conditions => ['against = ?',true], :source => :comment_votings, :class_name => 'CommentVoting'
     has_many :users_against, :through => :comment_votings_against, :source => :user
+
+    has_many :imp_disposts,:foreign_key => 'imp_comment', :conditions => {:imp_stage => [1,2]}, :source => :discontent_posts, :class_name => 'Discontent::Post'
 
     def get_class
       self.class.name.deconstantize

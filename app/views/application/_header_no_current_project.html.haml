@@ -8,7 +8,7 @@
   %ul.nav.navbar-nav.pull-right.navbar-menu
     - if signed_in?
       %li
-        =link_to current_user, "project/13/users/#{current_user.id}"
+        =link_to current_user, "project/#{@core_project.id}/users/#{current_user.id}"
       %li
         = link_to destroy_user_session_path, :method => :delete do
           Выйти
@@ -19,8 +19,15 @@
         = link_to "Зарегистрироваться", "/users/sign_up", class: "exit"
   %ul.navbar-buttons.pull-right
     - if signed_in?
+      -if current_user.type_user == 1
+        %li
+          =link_to new_core_project_path, class:'btn btn-sm btn-info'  do
+            Создать процедуру
+            %i.fa.fa-arrow-right
+  %ul.navbar-buttons.pull-right
+    - if signed_in?
       %li
-        =link_to '/project/13', class:'btn btn-sm btn-danger'  do
+        =link_to "/project/#{@core_project.id}", class:'btn btn-sm btn-danger'  do
           Перейти к процедуре
           %i.fa.fa-arrow-right
 

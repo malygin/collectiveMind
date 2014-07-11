@@ -7,6 +7,12 @@
       =club_status_show_user(child_comment.user)
       - if child_comment.user.boss?
         %span.label.label-danger MD
+      - if current_user?(child_comment.user) or boss?
+        .pull-right
+          =link_to({:action => :comment_stat, :id => child_comment.post.id, :comment_id => child_comment.id, :dis_stat => 1},  :remote => true, :method => :put,  id: "dis_stat_comment_#{child_comment.id}") do
+            %span.label(class="#{label_dis_stat(child_comment)}") Проблема
+          =link_to({:action => :comment_stat, :id => child_comment.post.id, :comment_id => child_comment.id, :con_stat => 1},  :remote => true, :method => :put,  id: "con_stat_comment_#{child_comment.id}") do
+            %span.label(class="#{label_con_stat(child_comment)}") Идея
     .text
       %div{id: "comment_text_#{child_comment.id}"}
         =simple_format(child_comment.content)
