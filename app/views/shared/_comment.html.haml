@@ -36,6 +36,7 @@
           =link_to({:action => :add_child_comment_form, :id => comment.post.id, :comment_id => comment.id },  :remote => true, :method => :put,  id: "add_child_comment_#{comment.id}") do
             %span.label.label-success Ответить
         -else
+          =link_for_improve(comment).html_safe if link_for_improve(comment)
           =link_to({:action => :new, :asp => params[:asp], :imp_comment => comment.id, :imp_stage => get_stage_for_improve(comment.get_class) }, :method => :get,  id: "improve_comment_#{comment.id}") do
             %span.label.label-success Доработать
         - if boss?

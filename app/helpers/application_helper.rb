@@ -318,7 +318,21 @@ module ApplicationHelper
     end
   end
 
-  #url_for(:controller => post.class.name.underscore.pluralize, :action => 'add_comment')
-  #table_name.singularize
+  def link_for_improve(comment)
+    com_class = get_stage_for_improve(comment.get_class)
+    case com_class
+      when 1
+        link_to "/project/#{@project.id}/life_tape/posts?asp=#{comment.post.aspect.id}#comment_#{comment.id}" do
+          content_tag :span, 'Источник', class: 'label label-primary'
+        end
+
+      when 2
+        link_to "/project/#{@project.id}/discontent/posts/#{comment.post.id}#comment_#{comment.id}" do
+          content_tag :span, 'Источник', class: 'label label-primary'
+        end
+    end
+  end
+
+
 
 end
