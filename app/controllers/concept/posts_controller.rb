@@ -283,7 +283,7 @@ class Concept::PostsController < PostsController
     @post = current_model.new
     @discontent_post = Discontent::Post.find(params[:dis_id])
     @resources = Concept::Resource.where(:project_id => @project.id)
-    @users_rc = User.where(admin:false, type_user: 4)
+    @users_rc = User.where(:type_user => [4,7])
     #@aspects = Discontent::Aspect.where(:project_id => @project)
     @pa = Concept::PostAspect.new
     respond_to do |format|

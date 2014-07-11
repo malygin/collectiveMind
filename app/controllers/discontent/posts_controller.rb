@@ -68,23 +68,18 @@ class Discontent::PostsController < PostsController
     end
     if params[:asp]
       @aspect_post =  Discontent::Aspect.find(params[:asp])
-
-      post_temp = @aspect_post.life_tape_posts.first
-      life_tape_comments = post_temp.comments.where(:dis_stat => true)
-
-      discontent_comments = @aspect_post.comments_temp
-      @comments_all = life_tape_comments | discontent_comments
     else
       @aspect_post = @project.proc_aspects.first
-
-      post_temp = @aspect_post.life_tape_posts.first
-      life_tape_comments = post_temp.comments.where(:dis_stat => true)
-
-      discontent_comments = @aspect_post.comments_temp
-      @comments_all = life_tape_comments | discontent_comments
     end
 
+    post_temp = @aspect_post.life_tape_posts.first
+    life_tape_comments = post_temp.comments.where(:dis_stat => true)
+
+    discontent_comments = @aspect_post.comments_temp
+    @comments_all = life_tape_comments | discontent_comments
+    @comments_all = @comments_all.sort_by{|c| c.imp_disposts.size}
     @imp_comment = true
+
     #@post = current_model.new
     @order = params[:order]
     @page = params[:page]
@@ -117,7 +112,7 @@ class Discontent::PostsController < PostsController
     @post = current_model.new
     @replace_posts =[]
     @accepted_posts = Discontent::Post.where(status: 2, project_id:  @project)
-    @users_rc = User.where(admin:false, type_user: 4)
+    @users_rc = User.where(:type_user => [4,7])
 
     unless params[:replace_id].nil?
       @replace_posts << current_model.find(params[:replace_id])
@@ -394,7 +389,7 @@ class Discontent::PostsController < PostsController
       @project = Core::Project.find(params[:project])
       status  = @project.status == 3 ? 0 : 2
       @aspects = Discontent::Aspect.where(:project_id => @project, :status => 0).order(:id)
-      @users_rc = User.where(admin:false, type_user: 4)
+      @users_rc = User.where(:type_user => [4,7])
       @discontent_aspect = Discontent::Aspect.find(params[:asp_id]) unless params[:asp_id].nil?
       @discontent_post = Discontent::Post.find(params[:dis_id]) unless params[:dis_id].nil?
       @select_aspect = Discontent::Aspect.find(params[:aspect_id]) unless params[:aspect_id].nil?
@@ -468,7 +463,4 @@ class Discontent::PostsController < PostsController
       end
     end
 
-    def improve_comment
-
-    end
 end

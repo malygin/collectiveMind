@@ -7,7 +7,9 @@
       =link_to comment.user, user_path(@project, comment.user)
       = render partial: '/shared/user_online', object: comment.user
       =club_status_show_user(comment.user)
-      - if comment.user.boss?
+      - if comment.user.type_user == 7
+        %span.label.label-success MD
+      - elsif comment.user.boss?
         %span.label.label-danger MD
       - if current_user?(comment.user) or boss?
         .pull-right
@@ -64,12 +66,13 @@
                 = render :partial => 'shared/child_comment', object: c
           %div{:id => "child_comments_form_#{comment.id}"}
       -else
-        %br
-        %section.widget
-          .body
-            %ul
-              - comment.imp_disposts.each do |post|
-                %li(style="line-height:30px;")
-                  Доработано
-                  =link_to post.user, user_path(@project, post.user)
-                  =link_to 'подробнее', discontent_post_path(@project, post), :class=> 'btn btn-primary btn-xs'
+        -if comment.imp_disposts.present?
+          %br
+          %section.widget
+            .body
+              %ul
+                - comment.imp_disposts.each do |post|
+                  %li(style="line-height:30px;")
+                    Доработано
+                    =link_to post.user, user_path(@project, post.user)
+                    =link_to 'подробнее', discontent_post_path(@project, post), :class=> 'btn btn-primary btn-xs'
