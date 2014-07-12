@@ -1,10 +1,11 @@
 -if  user
     .sender.pull-left
         .icon
-            = image_tag user.avatar.url(:thumb),  class: "img-circle"
-            %br
-            - if not  user.awards.empty?
-                =image_tag('/assets/awards/'+user.awards.last.url+'_25_25.png', title: user.awards.last.name)
+            = link_to user_path( @project,user ) do
+                = image_tag user.avatar.url(:thumb),  class: "img-circle"
+                - if not  user.awards.empty?
+
+                    =image_tag('/assets/awards/'+user.awards.last.url+'_25_25.png', title: user.awards.last.name, style: 'height: 25px; width: 25px;')
 
 
         -#- unless user.expert? or user.admin?
