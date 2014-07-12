@@ -58,49 +58,46 @@
       .col-md-12
         %h3.text-info
           1 этап: Сбор информации. Ознакомьтесь перед началом работы!
-          %br
+  .body
+    #carousel-example-generic.carousel.slide{"data-ride" => "carousel"}
+      / Indicators
+      %ol.carousel-indicators
+        %li.active{"data-slide-to" => "0", "data-target" => "#carousel-example-generic"}
+        %li{"data-slide-to" => "1", "data-target" => "#carousel-example-generic"}
+        %li{"data-slide-to" => "2", "data-target" => "#carousel-example-generic"}
+        %li{"data-slide-to" => "3", "data-target" => "#carousel-example-generic"}
+        %li{"data-slide-to" => "4", "data-target" => "#carousel-example-generic"}
+      / Wrapper for slides
+      .carousel-inner
+        .item.active
+          %img{alt: "", src: "/assets/img/to_work/to_work_1_0.jpg"}/
+          -#.carousel-caption
+        .item
+          %img{alt: "", src: "/assets/img/to_work/to_work_1_1.jpg"}/
+          -#.carousel-caption
+        .item
+          %img{alt: "", src: "/assets/img/to_work/to_work_1_2.jpg"}/
+          -#.carousel-caption
+        .item
+          %img{alt: "", src: "/assets/img/to_work/to_work_1_3.jpg"}/
+          -#.carousel-caption
+        .item
+          %img{alt: "", src: "/assets/img/to_work/to_work_1_4.jpg"}/
+          -#.carousel-caption
+      / Controls
+      %a.left.carousel-control{"data-slide" => "prev", href: "#carousel-example-generic", role: "button"}
+        %span.glyphicon.glyphicon-chevron-left
+      %a.right.carousel-control{"data-slide" => "next", href: "#carousel-example-generic", role: "button"}
+        %span.glyphicon.glyphicon-chevron-right
 
-#carousel-example-generic.carousel.slide{"data-ride" => "carousel"}
-  / Indicators
-  %ol.carousel-indicators
-    %li.active{"data-slide-to" => "0", "data-target" => "#carousel-example-generic"}
-    %li{"data-slide-to" => "1", "data-target" => "#carousel-example-generic"}
-    %li{"data-slide-to" => "2", "data-target" => "#carousel-example-generic"}
-    %li{"data-slide-to" => "3", "data-target" => "#carousel-example-generic"}
-    %li{"data-slide-to" => "4", "data-target" => "#carousel-example-generic"}
-  / Wrapper for slides
-  .carousel-inner
-    .item.active
-      %img{alt: "", src: "/assets/img/to_work/to_work_1_0.jpg"}/
-      -#.carousel-caption
-    .item
-      %img{alt: "", src: "/assets/img/to_work/to_work_1_1.jpg"}/
-      -#.carousel-caption
-    .item
-      %img{alt: "", src: "/assets/img/to_work/to_work_1_2.jpg"}/
-      -#.carousel-caption
-    .item
-      %img{alt: "", src: "/assets/img/to_work/to_work_1_3.jpg"}/
-      -#.carousel-caption
-    .item
-      %img{alt: "", src: "/assets/img/to_work/to_work_1_4.jpg"}/
-      -#.carousel-caption
-  / Controls
-  %a.left.carousel-control{"data-slide" => "prev", href: "#carousel-example-generic", role: "button"}
-    %span.glyphicon.glyphicon-chevron-left
-  %a.right.carousel-control{"data-slide" => "next", href: "#carousel-example-generic", role: "button"}
-    %span.glyphicon.glyphicon-chevron-right
-
-%br
 %section.widget
   .body
     .row
-      .col-md-12
+      .col-md-6
         #option_for_check_field(project="#{@project.id}" table_name="#{@table_name}")
         .control-group
           %label.checkbox{:for => "check-field"}
             %input#check-field{:name => "check-field", :type => "checkbox", :onchange => "user_check_field(this,'life_tape_posts_to_work');"}/
             Не показывать в следующий раз
-
-        %br
+      .col-md-6
         =link_to "Приступить к работе!", @path_link, class: 'btn btn-danger btn-block'

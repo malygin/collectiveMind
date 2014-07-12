@@ -12,7 +12,7 @@ class Core::ProjectsController < ApplicationController
   end
 
   def index
-    @core_projects = Core::Project.all
+    @core_projects = Core::Project.order(:id).all
     @core_project = @core_projects.last
     respond_to do |format|
       format.html # index.html.erb

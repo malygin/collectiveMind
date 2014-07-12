@@ -167,7 +167,9 @@ $('#sortable').sortable update: (event, ui) ->
 $(window).load ->
   $('textarea').autosize()
   activate_htmleditor()
-  $('.carousel').carousel()
+  $('.carousel').carousel
+    interval: 1000
+
   $select = $("#selectize_tag").selectize
     labelField: "show_content"
     valueField: "id"

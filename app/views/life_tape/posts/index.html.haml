@@ -27,16 +27,6 @@
       .row
         .col-md-6
           %section.widget
-            .body
-              .text-center= will_paginate @comments
-              .chat-messages
-                = render :partial => 'shared/comment',:collection => @comments
-              .text-center= will_paginate @comments
-
-              - if signed_in?
-                = render :partial => 'shared/comment_form', :locals => { :comment => @comment,:post =>@post_show, :url_link => "/project/#{@project.id}/life_tape/posts/#{@post_show.id}/add_comment"}
-        .col-md-6
-          %section.widget
             %header
 
               -if boss?
@@ -51,7 +41,16 @@
               - if  @aspect.knowbase_post
                 =@aspect.knowbase_post.content.html_safe
 
+        .col-md-6
+          %section.widget
+            .body
+              .text-center= will_paginate @comments
+              .chat-messages
+                = render :partial => 'shared/comment',:collection => @comments
+              .text-center= will_paginate @comments
 
+              - if signed_in?
+                = render :partial => 'shared/comment_form', :locals => { :comment => @comment,:post =>@post_show, :url_link => "/project/#{@project.id}/life_tape/posts/#{@post_show.id}/add_comment"}
 
 
 #render_fast_discussion_topics
