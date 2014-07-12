@@ -65,7 +65,7 @@ def to_work_redirect
   path_link = "/project/#{@project.id}/" + current_model.table_name.sub('_posts','/posts') + "/to_work"
   able = ['life_tape_posts','discontent_posts','concept_posts'].include? current_model.table_name
   check = get_check_field?(current_model.table_name + '_to_work')
-  redirect_to path_link if params[:asp].nil? and able and !check
+  redirect_to path_link if params[:asp].nil? and able and !check or params[:help]
 end
 
   def add_comment

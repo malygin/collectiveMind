@@ -167,9 +167,6 @@ $('#sortable').sortable update: (event, ui) ->
 $(window).load ->
   $('textarea').autosize()
   activate_htmleditor()
-  $('.carousel').carousel
-    interval: 1000
-
   $select = $("#selectize_tag").selectize
     labelField: "show_content"
     valueField: "id"
@@ -228,6 +225,7 @@ $(window).load ->
         remove_able: 1
 
 $(window).load ->
+#  $('.carousel').carousel()
   $('.liFixar').liFixar()
   $('.datepicker').datepicker(
     format: 'yyyy-mm-dd'

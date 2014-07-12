@@ -13,6 +13,10 @@
           1.
           =@project.status_title(:life_tape_posts)
       %ul#life_tape.panel-collapse.open.in
+        %li
+          = link_to life_tape_posts_path(@project, :help => true), :class => 'color-teal' do
+            Помощь
+            %i.fa.fa-question
         -if @project.status > 1
           %li
             = link_to essay_posts_path(@project, 1), :class => 'color-green' do
@@ -49,6 +53,10 @@
             =@project.status_title(:discontent_posts)
 
         %ul#discontent.panel-collapse.open.in
+          %li
+            = link_to discontent_posts_path(@project, :help => true), :class => 'color-teal' do
+              Помощь
+              %i.fa.fa-question
           -if @project.status > 5
             %li
               = link_to essay_posts_path(@project, 2), :class => 'color-green' do
@@ -93,6 +101,10 @@
             3.
             =@project.status_title(:concept_posts)
         %ul#concept.panel-collapse.open.in
+          %li
+            = link_to concept_posts_path(@project, :help => true), :class => 'color-teal' do
+              Помощь
+              %i.fa.fa-question
           -if @project.status > 7
             %li
               = link_to essay_posts_path(@project, 3), :class => 'color-green' do
