@@ -2,6 +2,10 @@
     .sender.pull-left
         .icon
             = image_tag user.avatar.url(:thumb),  class: "img-circle"
+            %br
+            - if not  user.awards.empty?
+                =image_tag('/assets/awards/'+user.awards.last.url+'_25_25.png', title: user.awards.last.name)
+
 
         -#- unless user.expert? or user.admin?
         -#    .time

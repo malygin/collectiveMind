@@ -341,10 +341,12 @@ def index
 
   def plus_comment
     @id = params[:id]
+    @project= Core::Project.find(params[:project])
     comment = comment_model.find(@id)
     @against =  params[:against] == 'true'
     comment.comment_votings.create(:user => current_user, :comment => comment,  :against => @against) unless comment.users.include? current_user
-    comment.user.add_score(:type => :plus_comment, :project => Core::Project.find(params[:project]), :comment => comment, :path =>  comment.post.class.name.underscore.pluralize)  if current_user.boss? or comment.comment_votings.count == 3
+    comment.user.add_score(:type => :plus_comment, :project => @project, :comment => comment, :path =>  comment.post.class.name.underscore.pluralize)  if current_user.boss? or comment.comment_votings.count == 3
+    Award.reward(user: comment.user, project: @project, type: 'like')
     @main_comment = comment.comment.id unless comment.comment.nil?
     respond_to do |format|
       format.js

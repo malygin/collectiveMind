@@ -6,12 +6,12 @@
   .body
     .row
       .col-md-4
-        = image_tag  @user.avatar(:normal),  class: "img-circle"
+        = image_tag  @user.avatar(:normal)
         %br
-        %h3 Достижения (22 из 22)
+        %h3="Достижения (#{@user.awards.count} из 22)"
         %br
         -@awards.each do |a|
-          =image_tag('/assets/awards/'+a.url+'_70_70.png', title: a.name)
+          =image_tag('/assets/awards/'+a.url+'_70_70.png', title: a.name, class: "#{'disabled_award' if not @user.awards.include? a}")
       .col-md-8
         .row
           .col-md-9

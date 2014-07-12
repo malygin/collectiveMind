@@ -188,7 +188,7 @@ class User < ActiveRecord::Base
       when :plus_comment
         self.add_score_by_type(h[:project],5, :score_a)
         # self.journals.build(:type_event=>'useful_comment', :project => h[:project], :body=>"#{h[:comment].content[0..24]}:#{h[:path]}/#{h[:comment].post.id}#comment_#{h[:comment].id}").save!
-        self.journals.build(:type_event=>'my_add_score_comment', :project => h[:project], :user_informed => self, :body=>"5:#{h[:path]}/#{h[:comment].post.id}#comment_#{h[:comment].id}", :viewed=> false).save!
+        self.journals.build(:type_event=>'my_add_score_comment', :project => h[:project], :user_informed => self, :body=>"5:#{h[:path]}/#{h[:comment].post.id}#comment_#{h[:comment].id}", :viewed=> false, :personal=> true).save!
 
       when :plus_post
 
