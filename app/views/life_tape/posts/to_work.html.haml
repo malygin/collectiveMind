@@ -66,13 +66,13 @@
         %li{"data-slide-to" => "1", "data-target" => "#carousel-example-generic"}
         %li{"data-slide-to" => "2", "data-target" => "#carousel-example-generic"}
         %li{"data-slide-to" => "3", "data-target" => "#carousel-example-generic"}
-        %li{"data-slide-to" => "4", "data-target" => "#carousel-example-generic"}
+        -#%li{"data-slide-to" => "4", "data-target" => "#carousel-example-generic"}
       / Wrapper for slides
       .carousel-inner
+        -#.item.active
+        -#  %img{alt: "", style: 'margin: auto;', src: "/assets/img/to_work/to_work_1_0.png"}/
+        -#  -#.carousel-caption
         .item.active
-          %img{alt: "", style: 'margin: auto;', src: "/assets/img/to_work/to_work_1_0.png"}/
-          -#.carousel-caption
-        .item
           %img{alt: "", style: 'margin: auto;', src: "/assets/img/to_work/to_work_1_1.png"}/
           -#.carousel-caption
         .item
