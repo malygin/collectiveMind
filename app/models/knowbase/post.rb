@@ -16,6 +16,6 @@ class Knowbase::Post < ActiveRecord::Base
     sortable.each {|k,v| self.find(k.to_i).update_attributes!(:stage => v.to_i)}
   end
   def self.min_stage_knowbase_post(project)
-    where(:stage => self.minimum(:stage))
+    where(:project_id => project).where(:stage => self.stage_knowbase_order(project).minimum(:stage))
   end
 end
