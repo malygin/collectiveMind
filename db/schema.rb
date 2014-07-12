@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140712155558) do
+ActiveRecord::Schema.define(:version => 20140712161704) do
 
   create_table "answers", :force => true do |t|
     t.string   "text"
@@ -449,8 +449,8 @@ ActiveRecord::Schema.define(:version => 20140712155558) do
     t.datetime "updated_at",                    :null => false
     t.boolean  "censored",   :default => false
     t.integer  "comment_id"
-    t.integer  "dis_stat"
-    t.integer  "con_stat"
+    t.boolean  "dis_stat"
+    t.boolean  "con_stat"
   end
 
   add_index "essay_comments", ["post_id"], :name => "index_essay_comments_on_post_id"
@@ -498,8 +498,8 @@ ActiveRecord::Schema.define(:version => 20140712155558) do
     t.datetime "updated_at",                    :null => false
     t.boolean  "censored",   :default => false
     t.integer  "comment_id"
-    t.integer  "dis_stat"
-    t.integer  "con_stat"
+    t.boolean  "dis_stat"
+    t.boolean  "con_stat"
   end
 
   add_index "estimate_comments", ["post_id"], :name => "index_estimate_comments_on_post_id"
@@ -941,8 +941,8 @@ ActiveRecord::Schema.define(:version => 20140712155558) do
     t.datetime "updated_at",                    :null => false
     t.boolean  "censored",   :default => false
     t.integer  "comment_id"
-    t.integer  "dis_stat"
-    t.integer  "con_stat"
+    t.boolean  "dis_stat"
+    t.boolean  "con_stat"
   end
 
   add_index "plan_comments", ["post_id"], :name => "index_plan_comments_on_post_id"

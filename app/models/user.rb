@@ -155,6 +155,18 @@ class User < ActiveRecord::Base
     self.type_user == 5
   end
 
+  def admin?
+    [1,6,7].include? self.type_user
+  end
+
+  def expert?
+    self.type_user == 2
+  end
+
+  def jury?
+    self.type_user == 3
+  end
+
   def have_essay_for_stage(project, stage)
     # puts self.essay_posts.where(:stage => stage)
     !self.essay_posts.where(:project_id => project, :stage => stage, :status => 0).empty?
