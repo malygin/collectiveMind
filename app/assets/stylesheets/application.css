@@ -215,6 +215,14 @@ p, a {
   border-bottom: 1px solid #eac85e;
 }
 
+.dis-comment {
+    line-height: 20px !important;
+}
+
+.news-list li.union-list {
+    padding: 0;
+    margin: 0 0;
+}
 
 /*todo my styles bottom*/
 /******************************************************************************************************************************************************/
