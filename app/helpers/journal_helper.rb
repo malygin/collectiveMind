@@ -28,6 +28,8 @@ module JournalHelper
         'fa fa-plus color-teal'
       when 'life_tape_comment_save'
         'fa fa-comment color-teal'
+      when  'award_1like', 'award_3likes','award_5likes','award_15likes','award_50likes'
+        'fa fa-trophy '
     end
   end
 	def journal_parser(j, project)
@@ -95,6 +97,15 @@ module JournalHelper
         "добавил(а) комментарий '#{j.body}...' в ответ на ваш "+  link_to( j.body2, "/project/#{project}/plan/posts/#{j.first_id}?viewed=true#comment_#{j.second_id}")
 
 
+      # AWARDS
+
+      when 'award_1like', 'award_3likes','award_5likes','award_15likes','award_50likes'
+          "заработал(а) достижение '#{j.body}'"
+
+      when 'my_award_1like', 'my_award_3likes', 'my_award_5likes','my_award_15likes','my_award_50likes'
+        "вы заработали достижение '#{j.body}'! Продолжайте в том же духе!"
+
+
       when 'add_score_essay'
 				'получил(а)  '+j.body+' баллов за эссе'
       when 'add_score'
@@ -136,7 +147,7 @@ module JournalHelper
         s = j.body.split(':')
         "вы получили #{s[0]} баллов "  +  link_to("за полезный комментарий ", "/project/#{project}/#{s[1].gsub('#', "?viewed=#{j.id}#")}" )
 
-          when 'my_discontent_note'
+      when 'my_discontent_note'
         s = j.body.split(':')
         "добавил(а) замечание  '#{s[0]}...' к "+  link_to('вашему несовершенству', "/project/#{project}/discontent/posts/#{s[1]}?viewed=#{j.id}")
       when 'my_concept_note'
