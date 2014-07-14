@@ -103,9 +103,15 @@ class Concept::PostsController < PostsController
   def create
     @project = Core::Project.find(params[:project])
     @concept_post = Concept::Post.new
+    params[:cd]
+    #if params[:imp_stage]
+    #  if params[:cd].empty?
+    #
+    #  end
+    #end
     params[:pa].each do |pa|
       post_aspect = Concept::PostAspect.new(pa[1])
-      disc = Discontent::Post.find(pa[0])
+      disc = Discontent::Post.find(pa[0]) unless
       post_aspect.discontent = disc
       @concept_post.post_aspects << post_aspect
     end
@@ -312,7 +318,7 @@ class Concept::PostsController < PostsController
      @post = current_model.find(params[:id])
      @pa =@post.post_aspects.first
 
-     @discontent_post =@pa.discontent
+     @discontent_post = @pa.discontent
      #@aspects = Discontent::Aspect.where(:project_id => @project)
 
    end

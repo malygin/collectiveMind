@@ -9,21 +9,23 @@
           -#  Показать пример
           %h5 Устраняемые несовершенства:
           #panel_union
-            -if !@post.id.nil?
+            -if @post.persisted?
               -@post.concept_disposts.each  do |cd|
-                -if cd.id != @discontent_post.id
+                -if cd.id != (@discontent_post.nil? ? 0 : @discontent_post.id)
                   -@remove_able = 1
                 -else
                   -@remove_able = nil
                 =render partial:'discontent/posts/post_short2', object: cd
             -else
-              =render partial:'discontent/posts/post_short2', object: @discontent_post
+              =render partial:'discontent/posts/post_short2', object: @discontent_post unless @discontent_post.nil?
           %br
           .option_for_selectize{project: "#{@project.id}", post: "#{@post.id}"}
           .text-success#add_dispost_success(style='display:none;')
             Несовершенство успешно добавлено
+          .color-red#add_dispost_warning(style='display:none;')
+            Выберите хотя бы одно несовершенство, которое будет решаться нововведением
           =select_tag "selectize_concept",
-          options_from_collection_for_select(Discontent::Post.where("discontent_posts.id <> ? and project_id = ?", @discontent_post.id, @project.id).by_status(4), "id", "show_content"),
+          options_from_collection_for_select(Discontent::Post.where("discontent_posts.id <> ? and project_id = ?", @discontent_post.nil? ? 0 : @discontent_post.id, @project.id).by_status(4), "id", "show_content"),
           class: 'selectized',
           include_blank: true,
           placeholder: "Какие еще несовершенства решает ваше нововведение?"
@@ -48,7 +50,7 @@
                 %p.h3.color-orange
                   Краткое название вашего нововведения
                 %br
-                =text_field_tag "pa[#{@discontent_post.id}][title]",@pa.title, style: 'width: 100%; height: 30px', placeholder:'Введетие краткое название для своего нововведения'
+                =text_field_tag "pa[#{@discontent_post.nil? ? 0 : @discontent_post.id}][title]",@pa.title, style: 'width: 100%; height: 30px', placeholder:'Введетие краткое название для своего нововведения'
                 %br
           .row
             .col-md-12
@@ -79,7 +81,7 @@
                   %p Большой зеленый газон по всему пустырю  с клумбой с посредине. Клумба засеяна красными многолетными цветами.
             .col-md-6
               .form-group.has-danger
-                =text_area_tag "pa[#{@discontent_post.id}][name]",@pa.name, :class => "concept_cond form-control", rows: 12, style: 'width: 100%;'
+                =text_area_tag "pa[#{@discontent_post.nil? ? 0 : @discontent_post.id}][name]",@pa.name, :class => "concept_cond form-control", rows: 12, style: 'width: 100%;'
                 -#=text_area_tag "pa[name]",@pa.name, :class => "concept_cond form-control", rows: 12, style: 'width: 100%;'
           .row
             .col-md-12
@@ -97,7 +99,7 @@
                   %p Трава газона и декоративные растения на клумбе будут привлекательны на вид и предотвращать появление пыли.
             .col-md-6
               .form-group.has-danger
-                =text_area_tag "pa[#{@discontent_post.id}][content]",@pa.content, :class => "concept_cond form-control", rows: 12, style: 'width: 100%;'
+                =text_area_tag "pa[#{@discontent_post.nil? ? 0 : @discontent_post.id}][content]",@pa.content, :class => "concept_cond form-control", rows: 12, style: 'width: 100%;'
                 -#=text_area_tag "pa[content]",@pa.content, :class => "concept_cond form-control", rows: 12, style: 'width: 100%;'
           %hr
           .row
@@ -122,7 +124,7 @@
                     регулярный полив;  нужно засевать газон травой, а на клумбу высаживать растения; почву периодически вскапывать, удобрять и пропалывать; необходимо весной собирать деньги у жильцов.
             .col-md-6
               .form-group.has-success
-                =text_area_tag "pa[#{@discontent_post.id}][positive]",@pa.positive,  :class => "concept_cond form-control", rows: 12, style: 'width: 100%;'
+                =text_area_tag "pa[#{@discontent_post.nil? ? 0 : @discontent_post.id}][positive]",@pa.positive,  :class => "concept_cond form-control", rows: 12, style: 'width: 100%;'
                 -#=text_area_tag "pa[positive]",@pa.positive, :placeholder => 'Подробно опишите весь процесс функционирования вашего нововведения в будущем.', :class => "concept_cond form-control", rows: 12, style: 'width: 100%;'
           .row
             .col-md-12
@@ -204,7 +206,7 @@
                     Конфликты из-за того, что некоторые жильцы могут отказаться делать денежные взносы.
             .col-md-6
               .form-group.has-success
-                =text_area_tag "pa[#{@discontent_post.id}][negative]",@pa.negative,  :class => "concept_cond form-control", rows: 14,  style: 'width: 100%;'
+                =text_area_tag "pa[#{@discontent_post.nil? ? 0 : @discontent_post.id}][negative]",@pa.negative,  :class => "concept_cond form-control", rows: 14,  style: 'width: 100%;'
                 -#=text_area_tag "pa[negative]",@pa.negative, :placeholder => 'К каким побочным эффектам может привести ваше нововведение в будущем?', :class => "concept_cond form-control", rows: 14,  style: 'width: 100%;'
 
           .row
@@ -228,7 +230,7 @@
                     Средства широкого публичного оповещения о должниках
             .col-md-6
               .form-group.has-success
-                =text_area_tag "pa[#{@discontent_post.id}][negative_r]",@pa.negative_r, :class => "concept_cond form-control", rows: 14,  style: 'width: 100%;'
+                =text_area_tag "pa[#{@discontent_post.nil? ? 0 : @discontent_post.id}][negative_r]",@pa.negative_r, :class => "concept_cond form-control", rows: 14,  style: 'width: 100%;'
                 -#=text_area_tag "pa[negative_r]",@pa.negative_r, :class => "concept_cond form-control", rows: 14,  style: 'width: 100%;'
 
           %hr
@@ -251,7 +253,7 @@
                   %p К сожалению, уход за клумбой потребует значительного труда, однако  ввиду ее красоты предлагается на это пойти.
             .col-md-6
               .form-group.has-success
-                =text_area_tag "pa[#{@discontent_post.id}][problems]",@pa.problems, :class => "concept_cond form-control", rows: 12,  style: 'width: 100%;'
+                =text_area_tag "pa[#{@discontent_post.nil? ? 0 : @discontent_post.id}][problems]",@pa.problems, :class => "concept_cond form-control", rows: 12,  style: 'width: 100%;'
                 -#=text_area_tag "pa[problems]",@pa.problems, :class => "concept_cond form-control", rows: 12,  style: 'width: 100%;'
 
           .row
@@ -274,7 +276,7 @@
                   %p Работника нанять недорого; инструменты и материалы приобрести и организовать полив вполне возможно; жильцы, вероятно, согласятся дать на это деньги.
             .col-md-6
               .form-group.has-success
-                =text_area_tag "pa[#{@discontent_post.id}][reality]",@pa.reality, :class => "concept_cond form-control", rows: 12,  style: 'width: 100%;'
+                =text_area_tag "pa[#{@discontent_post.nil? ? 0 : @discontent_post.id}][reality]",@pa.reality, :class => "concept_cond form-control", rows: 12,  style: 'width: 100%;'
                 -#=text_area_tag "pa[reality]",@pa.reality, :class => "concept_cond form-control", rows: 12,  style: 'width: 100%;'
 
 
