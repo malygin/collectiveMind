@@ -84,13 +84,38 @@ end
   def transfer_comment
     @project = Core::Project.find(params[:project])
     aspect =  Discontent::Aspect.find(params[:aspect_id])
+    aspect_id =  aspect.id unless aspect.nil?
     post_id = aspect.life_tape_posts.first.id unless aspect.life_tape_posts.first.nil?
     comment = LifeTape::Comment.find(params[:comment_id])
-    aspect_old_id = comment.post.discontent_aspects.first.id unless comment.post.discontent_aspects.first.nil?
-    comment.update_attributes(post_id: post_id) unless post_id.nil?
-    journal_comment = Journal.where(:type_event => 'life_tape_comment_save', :project_id => @project.id).where("journals.body like '%#comment_#{comment.id}%'").first
-    jc = journal_comment.body.sub("asp=#{aspect_old_id}", "asp=#{aspect.id}")
-    journal_comment.update_attributes(body: jc)
+    aspect_old = comment.post.discontent_aspects.first
+    aspect_old_id = aspect_old.id unless aspect_old.nil?
+    post_old_id = aspect_old.life_tape_posts.first.id unless aspect_old.nil?
+    unless post_id.nil?
+      comment.update_attributes(post_id: post_id)
+      unless comment.comments.nil?
+        comment.comments.each do |c|
+          c.update_attributes(post_id: post_id)
+        end
+      end
+
+      journal_comment = Journal.where(:type_event => 'life_tape_comment_save', :project_id => @project.id, :user_id => comment.user, :first_id => aspect_old_id, :second_id => comment.id).first
+      my_journal_comment = Journal.where(:type_event => 'my_life_tape_comment', :project_id => @project.id, :user_id => comment.user, :first_id => aspect_old_id, :second_id => comment.id).first
+      reply_journal_comment = Journal.where(:type_event => 'reply_life_tape_comment', :project_id => @project.id, :user_id => comment.user, :first_id => aspect_old_id, :second_id => comment.id).first
+      journal_comment.update_attributes(first_id: aspect_id) unless journal_comment.nil?
+      my_journal_comment.update_attributes(first_id: aspect_id) unless my_journal_comment.nil?
+      reply_journal_comment.update_attributes(first_id: aspect_id) unless reply_journal_comment.nil?
+
+      unless comment.comments.nil?
+        comment.comments.each do |c|
+          journal_comment = Journal.where(:type_event => 'life_tape_comment_save', :project_id => @project.id, :user_id => c.user, :first_id => aspect_old_id, :second_id => c.id).first
+          my_journal_comment = Journal.where(:type_event => 'my_life_tape_comment', :project_id => @project.id, :user_id => c.user, :first_id => aspect_old_id, :second_id => c.id).first
+          reply_journal_comment = Journal.where(:type_event => 'reply_life_tape_comment', :project_id => @project.id, :user_id => c.user, :first_id => aspect_old_id, :second_id => c.id).first
+          journal_comment.update_attributes(first_id: aspect_id) unless journal_comment.nil?
+          my_journal_comment.update_attributes(first_id: aspect_id) unless my_journal_comment.nil?
+          reply_journal_comment.update_attributes(first_id: aspect_id) unless reply_journal_comment.nil?
+        end
+      end
+    end
     respond_to do |format|
       format.js {render js: "alert('Перенесено');"}
     end

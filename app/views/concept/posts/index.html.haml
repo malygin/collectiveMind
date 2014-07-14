@@ -6,7 +6,7 @@
   %header
     .row
       .col-md-9
-        %h3.color-orange
+        %h3.color-orange(style='line-height: 30px;')
           3 этап: Формулирование проблемы.
           =@aspect_post.content
           %br
@@ -22,56 +22,57 @@
     %br
     %br
     .row
-      .col-md-12
+      .col-md-6
         %section.widget
           .body
-
-
             -@aspect_post.aspect_posts.by_status(4).each do |post|
-              .row
-                .col-md-6
-                  =render partial:'discontent/posts/post_short2', object: post
-                .col-md-6
-                  %h4 Предложенные решения
-                  %br
-                  %table.table.table-striped.table-bordered
-                    %thead
+              =render partial:'discontent/posts/post_short2', object: post
+              %h4 Предложенные решения
+              %br
+              %table.table.table-striped.table-bordered
+                %thead
+                  %tr
+                    %th
+                      ="#"
+                    %th
+                      Название / Автор
+                    %th
+                      Статус
+                    %th
+                      Заполненность
+                %tbody
+                  - post.dispost_concepts.each_with_index  do |pa, index|
+                    - if pa.status == 0
                       %tr
-                        %th
-                          ="#"
-                        %th
-                          Название / Автор
-                        %th
-                          Статус
-                        %th
-                          Заполненность
-                    %tbody
-                      - post.dispost_concepts.each_with_index  do |pa, index|
-                        - if pa.status == 0
-                          %tr
-                            %td
-                              =index+1
-                            %td
-                              - if pa.post_aspects.first.title!=''
-                                =link_to pa.post_aspects.first.title , concept_post_path(@project, pa)
-                              -else
-                                =link_to 'Без названия' , concept_post_path(@project, pa)
+                        %td
+                          =index+1
+                        %td
+                          - if pa.post_aspects.first.title!=''
+                            =link_to pa.post_aspects.first.title , concept_post_path(@project, pa)
+                          -else
+                            =link_to 'Без названия' , concept_post_path(@project, pa)
 
-                            %td
-                              -if class_for_concept_type(pa) == 'panel-p'
-                                %span.color-green Проверено
+                        %td
+                          -if class_for_concept_type(pa) == 'panel-p'
+                            %span.color-green Проверено
 
-                              -else
-                                Проверяется
-                            %td
-                              %span.h4.color-orange
-                                =status_for_concept(pa.post_aspects.first)
-                      -if  @project.status == 7
-                        %tr
-                          %td{:colspan => 4, :style => "font-weight: normal !important;"}
-                            %a.btn.btn-lg.btn-warning.btn-block(href="/project/#{@project.id}/concept/posts/new?dis_id=#{post.id}&asp_id=#{@aspect_post.id}" style="font-weight: normal !important;")
-                              Добавить свое решение
-
-              .row
-                .col-md-12
-                  %hr
+                          -else
+                            Проверяется
+                        %td
+                          %span.h4.color-orange
+                            =status_for_concept(pa.post_aspects.first)
+                  -if  @project.status == 7
+                    %tr
+                      %td{:colspan => 4, :style => "font-weight: normal !important;"}
+                        %a.btn.btn-lg.btn-warning.btn-block(href="/project/#{@project.id}/concept/posts/new?dis_id=#{post.id}&asp_id=#{@aspect_post.id}" style="font-weight: normal !important;")
+                          Добавить свое решение
+              %hr
+      .col-md-6
+        %section.widget
+          %header
+            %h4
+              Неоформленные идеи
+            %hr
+          .body
+            .chat-messages
+              = render :partial => 'shared/comment',:collection => @comments_all

@@ -330,6 +330,10 @@ module ApplicationHelper
         link_to "/project/#{@project.id}/discontent/posts/#{comment.post.id}#comment_#{comment.id}" do
           content_tag :span, 'Источник', class: 'label label-primary'
         end
+      when 3
+        link_to "/project/#{@project.id}/concept/posts/#{comment.post.id}#comment_#{comment.id}" do
+          content_tag :span, 'Источник', class: 'label label-primary'
+        end
     end
   end
 

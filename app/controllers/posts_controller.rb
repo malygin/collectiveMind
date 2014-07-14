@@ -84,13 +84,13 @@ end
     unless  params[name_of_comment_for_param][:content]==''
       @comment = post.comments.create(:content => content, :user =>current_user,:dis_stat => dis_stat,:con_stat => con_stat, :comment_id => @main_comment ? @main_comment.id : nil)
       current_user.journals.build(:type_event=>name_of_comment_for_param+'_save', :project => @project,
-                                  :body=>"#{trim_content(@comment.content)}", :body2=>trim_content(post.content),
+                                  :body=>"#{trim_content(@comment.content)}", :body2=>trim_content((post.instance_of? LifeTape::Post) ? post.discontent_aspects.first.content : post.content),
                                   :first_id=> (post.instance_of? LifeTape::Post) ? post.discontent_aspects.first.id : post.id, :second_id => @comment.id).save!
 
       #PostMailer.add_comment(post, @comment).deliver  if post.user!=@comment.user
       if post.user!=current_user
         current_user.journals.build(:type_event=>'my_'+name_of_comment_for_param, :user_informed => post.user, :project => @project,
-                                    :body=>"#{trim_content(@comment.content)}", :body2=>trim_content(post.content),
+                                    :body=>"#{trim_content(@comment.content)}", :body2=>trim_content((post.instance_of? LifeTape::Post) ? post.discontent_aspects.first.content : post.content),
                                     :first_id=> (post.instance_of? LifeTape::Post) ? post.discontent_aspects.first.id : post.id, :second_id => @comment.id,
                                     :personal=> true, :viewed=> false).save!
       end

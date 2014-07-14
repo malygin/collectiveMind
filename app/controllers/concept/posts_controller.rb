@@ -73,6 +73,15 @@ class Concept::PostsController < PostsController
     else
       @aspect_post = @project.aspects.first
     end
+
+    post_temp = @aspect_post.life_tape_posts.first
+    life_tape_comments = post_temp.comments.where(:con_stat => true)
+
+    discontent_comments = @aspect_post.imp_dis_comments(3)
+    concept_comments = @aspect_post.imp_con_comments
+    @comments_all = life_tape_comments | discontent_comments | concept_comments
+    @comments_all = @comments_all.sort_by{|c| c.imp_concepts.size}
+    @imp_con_comment = true
     #@posts = current_model.where(:project_id => @project, :status => @status).paginate(:page => params[:page])
     #if @project.status == 8
     #  @number_v = @project.stage3 - current_user.concept_post_votings.size
@@ -105,6 +114,8 @@ class Concept::PostsController < PostsController
     @concept_post.user = user_for_post
     @concept_post.status = 0
     @concept_post.project = @project
+    @concept_post.imp_comment = params[:imp_comment] if params[:imp_comment]
+    @concept_post.imp_stage = params[:imp_stage] if params[:imp_stage]
     unless params[:resor].nil?
       params[:resor].each_with_index do |r,i|
         @concept_post.concept_post_resources.build(:name => r, :desc => params[:res][i])   if r!=''
@@ -280,12 +291,17 @@ class Concept::PostsController < PostsController
   end
 
   def new
+    @asp = Discontent::Aspect.find(params[:asp]) unless params[:asp].nil?
     @post = current_model.new
-    @discontent_post = Discontent::Post.find(params[:dis_id])
+    @discontent_post = Discontent::Post.find(params[:dis_id]) unless params[:dis_id].nil?
     @resources = Concept::Resource.where(:project_id => @project.id)
     @users_rc = User.where(:type_user => [4,7])
     #@aspects = Discontent::Aspect.where(:project_id => @project)
     @pa = Concept::PostAspect.new
+    if params[:imp_stage]
+      @comment = "#{get_class_for_improve(params[:imp_stage].to_i)}::Comment".constantize.find(params[:imp_comment]) unless params[:imp_comment].nil?
+    end
+    @pa.name = @comment.content if @comment
     respond_to do |format|
       format.html { render :layout => 'application_two_column' }
       format.json { render json: @post }

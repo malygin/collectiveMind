@@ -75,10 +75,10 @@ class Discontent::PostsController < PostsController
     post_temp = @aspect_post.life_tape_posts.first
     life_tape_comments = post_temp.comments.where(:dis_stat => true)
 
-    discontent_comments = @aspect_post.comments_temp
+    discontent_comments = @aspect_post.imp_dis_comments(2)
     @comments_all = life_tape_comments | discontent_comments
     @comments_all = @comments_all.sort_by{|c| c.imp_disposts.size}
-    @imp_comment = true
+    @imp_dis_comment = true
 
     #@post = current_model.new
     @order = params[:order]

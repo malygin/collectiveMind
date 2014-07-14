@@ -18,6 +18,7 @@ module BaseComment  extend ActiveSupport::Concern
     has_many :users_against, :through => :comment_votings_against, :source => :user
 
     has_many :imp_disposts,:foreign_key => 'imp_comment', :conditions => {:imp_stage => [1,2]}, :source => :discontent_posts, :class_name => 'Discontent::Post'
+    has_many :imp_concepts,:foreign_key => 'imp_comment', :conditions => {:imp_stage => [1,2,3]}, :source => :concept_posts, :class_name => 'Concept::Post'
 
     def get_class
       self.class.name.deconstantize
