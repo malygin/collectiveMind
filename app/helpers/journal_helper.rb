@@ -145,7 +145,8 @@ module JournalHelper
 
       when 'my_add_score_comment'
         s = j.body.split(':')
-        "вы получили #{s[0]} баллов "  +  link_to("за полезный комментарий ", "/project/#{project}/#{s[1].gsub('#', "?viewed=#{j.id}#")}" )
+        "вы получили #{s[0]} баллов за полезный комментарий!"
+        # "вы получили #{s[0]} баллов "  +  link_to("за полезный комментарий ", "/project/#{project}/#{s[1].gsub('#', "?viewed=#{j.id}#")}" )
 
       when 'my_discontent_note'
         s = j.body.split(':')
