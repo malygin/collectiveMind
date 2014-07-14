@@ -257,5 +257,86 @@ module ApplicationHelper
     end
   end
 
+  def label_dis_stat(comment)
+    case comment.dis_stat
+      when false
+        'label-default'
+      when true
+        'label-danger'
+      else
+        'label-default'
+    end
+  end
+  def label_con_stat(comment)
+    case comment.con_stat
+      when false
+        'label-default'
+      when true
+        'label-warning'
+      else
+        'label-default'
+    end
+  end
+  def get_class_for_improve(stage)
+    case stage
+      when 1
+        'LifeTape'
+      when 2
+        'Discontent'
+      when 3
+        'Concept'
+      when 4
+        'Plan'
+      when 5
+        'Estimate'
+    end
+  end
+  def get_stage_for_improve(c)
+    case c
+      when 'LifeTape'
+        1
+      when 'Discontent'
+        2
+      when 'Concept'
+        3
+      when 'Plan'
+        4
+      when 'Estimate'
+        5
+    end
+  end
+
+  def improve_comment(post)
+    if post.imp_comment and post.imp_stage
+      comment = "#{get_class_for_improve(post.imp_stage)}::Comment".constantize.find(post.imp_comment)
+      case post.imp_stage
+        when 1
+          "«Основано на " + (link_to "посте", "/project/#{@project.id}/life_tape/posts?asp=#{comment.post.aspect.id}#comment_#{comment.id}") + " «#{comment.user.to_s}»»"
+        when 2
+          "«Основано на " + (link_to "посте", "/project/#{@project.id}/discontent/posts/#{comment.post.id}#comment_#{comment.id}") + " «#{comment.user.to_s}»»"
+      end
+    end
+  end
+
+  def link_for_improve(comment)
+    com_class = get_stage_for_improve(comment.get_class)
+    case com_class
+      when 1
+        link_to "/project/#{@project.id}/life_tape/posts?asp=#{comment.post.aspect.id}#comment_#{comment.id}" do
+          content_tag :span, 'Источник', class: 'label label-primary'
+        end
+
+      when 2
+        link_to "/project/#{@project.id}/discontent/posts/#{comment.post.id}#comment_#{comment.id}" do
+          content_tag :span, 'Источник', class: 'label label-primary'
+        end
+      when 3
+        link_to "/project/#{@project.id}/concept/posts/#{comment.post.id}#comment_#{comment.id}" do
+          content_tag :span, 'Источник', class: 'label label-primary'
+        end
+    end
+  end
+
+
 
 end

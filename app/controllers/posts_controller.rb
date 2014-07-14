@@ -65,7 +65,7 @@ def to_work_redirect
   path_link = "/project/#{@project.id}/" + current_model.table_name.sub('_posts','/posts') + "/to_work"
   able = ['life_tape_posts','discontent_posts','concept_posts'].include? current_model.table_name
   check = get_check_field?(current_model.table_name + '_to_work')
-  redirect_to path_link if params[:asp].nil? and able and !check
+  redirect_to path_link if params[:asp].nil? and able and !check or params[:help]
 end
 
   def add_comment
@@ -79,16 +79,18 @@ end
     else
       content = params[name_of_comment_for_param][:content]
     end
+    dis_stat = params[name_of_comment_for_param][:dis_stat]
+    con_stat = params[name_of_comment_for_param][:con_stat]
     unless  params[name_of_comment_for_param][:content]==''
-      @comment = post.comments.create(:content => content, :user =>current_user, :comment_id => @main_comment ? @main_comment.id : nil)
+      @comment = post.comments.create(:content => content, :user =>current_user,:dis_stat => dis_stat,:con_stat => con_stat, :comment_id => @main_comment ? @main_comment.id : nil)
       current_user.journals.build(:type_event=>name_of_comment_for_param+'_save', :project => @project,
-                                  :body=>"#{trim_content(@comment.content)}", :body2=>trim_content(post.content),
+                                  :body=>"#{trim_content(@comment.content)}", :body2=>trim_content((post.instance_of? LifeTape::Post) ? post.discontent_aspects.first.content : post.content),
                                   :first_id=> (post.instance_of? LifeTape::Post) ? post.discontent_aspects.first.id : post.id, :second_id => @comment.id).save!
 
       #PostMailer.add_comment(post, @comment).deliver  if post.user!=@comment.user
       if post.user!=current_user
         current_user.journals.build(:type_event=>'my_'+name_of_comment_for_param, :user_informed => post.user, :project => @project,
-                                    :body=>"#{trim_content(@comment.content)}", :body2=>trim_content(post.content),
+                                    :body=>"#{trim_content(@comment.content)}", :body2=>trim_content((post.instance_of? LifeTape::Post) ? post.discontent_aspects.first.content : post.content),
                                     :first_id=> (post.instance_of? LifeTape::Post) ? post.discontent_aspects.first.id : post.id, :second_id => @comment.id,
                                     :personal=> true, :viewed=> false).save!
       end
@@ -118,6 +120,23 @@ end
     else
       @url_link = url_for(:controller => @post.class.name.underscore.pluralize, :action => 'add_comment', :main_comment => @main_comment.id)
       #@url_link = "/project/#{@project.id}/" + current_model.table_name.sub('_posts','/posts') + "/#{@post.id}/add_comment?main_comment=#{@main_comment.id}"
+    end
+    respond_to do |format|
+      format.js
+    end
+  end
+
+  def comment_stat
+    @project = Core::Project.find(params[:project])
+    @post = current_model.find(params[:id])
+    @comment = comment_model.find(params[:comment_id])
+    if params[:dis_stat].present?
+      @comment.toggle(:dis_stat)
+      @comment.update_attributes(dis_stat: @comment.dis_stat)
+    end
+    if params[:con_stat].present?
+      @comment.toggle(:con_stat)
+      @comment.update_attributes(con_stat: @comment.con_stat)
     end
     respond_to do |format|
       format.js
@@ -322,10 +341,12 @@ def index
 
   def plus_comment
     @id = params[:id]
+    @project= Core::Project.find(params[:project])
     comment = comment_model.find(@id)
     @against =  params[:against] == 'true'
     comment.comment_votings.create(:user => current_user, :comment => comment,  :against => @against) unless comment.users.include? current_user
-    comment.user.add_score(:type => :plus_comment, :project => Core::Project.find(params[:project]), :comment => comment, :path =>  comment.post.class.name.underscore.pluralize)  if current_user.boss? or comment.comment_votings.count == 3
+    comment.user.add_score(:type => :plus_comment, :project => @project, :comment => comment, :path =>  comment.post.class.name.underscore.pluralize)  if current_user.boss? or comment.comment_votings.count == 3
+    Award.reward(user: comment.user, project: @project, type: 'like')
     @main_comment = comment.comment.id unless comment.comment.nil?
     respond_to do |format|
       format.js
@@ -469,9 +490,17 @@ def index
   def to_work
     @project = Core::Project.find(params[:project])
     if current_model == "LifeTape"
-      @path_link = "/project/#{@project.id}/" + current_model.table_name.sub('_posts','/posts') + "?asp=#{@project.aspects.first.id}"
+      if @project.aspects.first
+        @path_link = "/project/#{@project.id}/" + current_model.table_name.sub('_posts','/posts') + "?asp=#{@project.aspects.first.id}"
+      else
+        @path_link = "/project/#{@project.id}/" + current_model.table_name.sub('_posts','/posts')
+      end
     else
-      @path_link = "/project/#{@project.id}/" + current_model.table_name.sub('_posts','/posts') + "?asp=#{@project.proc_aspects.first.id}"
+      if @project.proc_aspects.first
+        @path_link = "/project/#{@project.id}/" + current_model.table_name.sub('_posts','/posts') + "?asp=#{@project.proc_aspects.first.id}"
+      else
+        @path_link = "/project/#{@project.id}/" + current_model.table_name.sub('_posts','/posts')
+      end
     end
     @table_name = current_model.table_name.sub('_posts','')
 

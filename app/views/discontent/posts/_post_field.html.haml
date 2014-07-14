@@ -10,7 +10,7 @@
   %br
   %ul(id="post_content_#{post_field.id}" style="list-style: disc inside;" )
     -post_field.discontent_posts.each do |dp|
-      %li{:id => "li_id_#{dp.id}"}=dp.content
+      %li.union-list{:id => "li_id_#{dp.id}"}=dp.content
   -#-else
   -#  %span.h55(id="#{id_for_type_field(type_fd)}_content_#{post_field.id}")=field unless field.nil?
   -#  %br

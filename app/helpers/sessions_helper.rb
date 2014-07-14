@@ -22,11 +22,14 @@ module SessionsHelper
 
   #@todo new permissions
   ##### user.type_user
-  # 1 - admin
+  # 1 - admin (prime moderator) :)
   # 2 - expert
   # 3 - jury
   # 4 - ratio club user
   # 5 - ratio club watcher
+  # 6 - assistant (admin)
+  # 7 - tech admin and ratio club user :)
+  # 8 - user
   #####
 
   def boss_authenticate
@@ -44,23 +47,19 @@ module SessionsHelper
 	end
 
 	def expert?
-    #current_user.type_user == 2 unless current_user.nil?
-		current_user.expert unless current_user.nil?
+    current_user.type_user == 2 unless current_user.nil?
 	end	
 
 	def admin?
-    #current_user.type_user == 1 unless current_user.nil?
-		current_user.admin unless current_user.nil?
+    [1,6,7].include? current_user.type_user unless current_user.nil?
 	end	
 
 	def jury?
-    #current_user.type_user == 3 unless current_user.nil?
-		current_user.jury unless current_user.nil?
+    current_user.type_user == 3 unless current_user.nil?
 	end
 
 	def boss?
-    #current_user.type_user == 1 or current_user.type_user == 2 or current_user.type_user == 3 unless current_user.nil?
-		current_user.expert or current_user.admin or current_user.jury unless current_user.nil?			
+    [1,2,3,6,7].include? current_user.type_user unless current_user.nil?
 	end
 
   def watcher?
@@ -68,12 +67,11 @@ module SessionsHelper
   end
 
   def cluber?
-    current_user.type_user == 4 or current_user.type_user == 5 unless current_user.nil?
+    [4,5,7].include? current_user.type_user unless current_user.nil?
   end
 
   def user?
-    #not (current_user.type_user == 1 or current_user.type_user == 2)
-		not (current_user.admin? or current_user.expert?)
+		not (admin? or expert?)
 	end
 
   def can_union_discontents?(project)
@@ -87,7 +85,7 @@ module SessionsHelper
   end
 
   def admin_user
-		redirect_to(root_path) if current_user.nil? or not current_user.admin?
+		redirect_to(root_path) if current_user.nil? or not admin?
 	end
 
   private

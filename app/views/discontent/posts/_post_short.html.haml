@@ -13,11 +13,12 @@
   .news-item-info
     .time
       = Russian::strftime(post_short.created_at,'%d %B %k:%M:%S')
+    =improve_comment(post_short).html_safe if improve_comment(post_short)
     .name
       - if post_short.user
         =link_to post_short.user, user_path(@project, post_short.user)
         = render partial: '/shared/user_online', object: post_short.user
-
-    .comment
+    =discontent_style_name(post_short.style)
+    .comment.dis-comment
       = render partial: '/discontent/posts/post_content', object: post_short
     = render '/shared/post_social_bar2', :post => post_short

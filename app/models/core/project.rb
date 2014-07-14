@@ -41,7 +41,7 @@ class Core::Project < ActiveRecord::Base
   has_many :concept_for_admin_post, :conditions =>"status = 1  ", :class_name => "Concept::Post"
 
   has_many :plan_post, :conditions =>"status = 0", :class_name => "Plan::Post"
-  has_many :estimate_posts, :conditions =>"status = 1", :class_name => "Estimate::Post"
+  has_many :estimate_posts, :conditions =>"status = 0", :class_name => "Estimate::Post"
 
   has_many :project_users
   has_many :users, :through => :project_users

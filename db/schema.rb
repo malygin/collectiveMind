@@ -11,7 +11,9 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
+
 ActiveRecord::Schema.define(:version => 20140708172919) do
+
 
   create_table "answers", :force => true do |t|
     t.string   "text"
@@ -34,11 +36,10 @@ ActiveRecord::Schema.define(:version => 20140708172919) do
   add_index "answers_users", ["user_id"], :name => "index_answers_users_on_user_id"
 
   create_table "awards", :force => true do |t|
-    t.string   "name"
-    t.string   "url"
-    t.text     "desc"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.string  "name"
+    t.string  "url"
+    t.text    "desc"
+    t.integer "position"
   end
 
   create_table "comments", :force => true do |t|
@@ -70,6 +71,8 @@ ActiveRecord::Schema.define(:version => 20140708172919) do
     t.datetime "updated_at",                    :null => false
     t.boolean  "censored",   :default => false
     t.integer  "comment_id"
+    t.boolean  "dis_stat"
+    t.boolean  "con_stat"
   end
 
   add_index "concept_comments", ["created_at"], :name => "index_concept_comments_on_created_at"
@@ -180,6 +183,8 @@ ActiveRecord::Schema.define(:version => 20140708172919) do
     t.boolean  "stat_negative_r"
     t.boolean  "stat_problems"
     t.boolean  "stat_reality"
+    t.integer  "imp_comment"
+    t.integer  "imp_stage"
   end
 
   add_index "concept_posts", ["created_at"], :name => "index_concept_posts_on_created_at"
@@ -320,6 +325,8 @@ ActiveRecord::Schema.define(:version => 20140708172919) do
     t.datetime "updated_at",                    :null => false
     t.boolean  "censored",   :default => false
     t.integer  "comment_id"
+    t.boolean  "dis_stat"
+    t.boolean  "con_stat"
   end
 
   create_table "discontent_notes", :force => true do |t|
@@ -407,6 +414,8 @@ ActiveRecord::Schema.define(:version => 20140708172919) do
     t.boolean  "status_content"
     t.boolean  "status_whered"
     t.boolean  "status_whend"
+    t.integer  "imp_comment"
+    t.integer  "imp_stage"
   end
 
   add_index "discontent_posts", ["aspect_id"], :name => "index_discontent_posts_on_aspect_id"
@@ -442,6 +451,8 @@ ActiveRecord::Schema.define(:version => 20140708172919) do
     t.datetime "updated_at",                    :null => false
     t.boolean  "censored",   :default => false
     t.integer  "comment_id"
+    t.boolean  "dis_stat"
+    t.boolean  "con_stat"
   end
 
   add_index "essay_comments", ["post_id"], :name => "index_essay_comments_on_post_id"
@@ -489,6 +500,8 @@ ActiveRecord::Schema.define(:version => 20140708172919) do
     t.datetime "updated_at",                    :null => false
     t.boolean  "censored",   :default => false
     t.integer  "comment_id"
+    t.boolean  "dis_stat"
+    t.boolean  "con_stat"
   end
 
   add_index "estimate_comments", ["post_id"], :name => "index_estimate_comments_on_post_id"
@@ -852,6 +865,8 @@ ActiveRecord::Schema.define(:version => 20140708172919) do
     t.datetime "updated_at",                    :null => false
     t.boolean  "censored",   :default => false
     t.integer  "comment_id"
+    t.boolean  "dis_stat"
+    t.boolean  "con_stat"
   end
 
   add_index "life_tape_comments", ["created_at"], :name => "index_life_tape_comments_on_created_at"
@@ -928,6 +943,8 @@ ActiveRecord::Schema.define(:version => 20140708172919) do
     t.datetime "updated_at",                    :null => false
     t.boolean  "censored",   :default => false
     t.integer  "comment_id"
+    t.boolean  "dis_stat"
+    t.boolean  "con_stat"
   end
 
   add_index "plan_comments", ["post_id"], :name => "index_plan_comments_on_post_id"
@@ -1154,12 +1171,21 @@ ActiveRecord::Schema.define(:version => 20140708172919) do
   add_index "questions_users", ["question_id"], :name => "index_questions_users_on_question_id"
   add_index "questions_users", ["user_id"], :name => "index_questions_users_on_user_id"
 
+  create_table "user_award_clicks", :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "project_id"
+    t.integer  "clicks",     :default => 0
+    t.datetime "created_at",                :null => false
+    t.datetime "updated_at",                :null => false
+  end
+
   create_table "user_awards", :force => true do |t|
     t.integer  "user_id"
     t.integer  "award_id"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
     t.integer  "project_id"
+    t.integer  "position"
   end
 
   create_table "user_checks", :force => true do |t|
@@ -1189,11 +1215,7 @@ ActiveRecord::Schema.define(:version => 20140708172919) do
     t.string   "encrypted_password"
     t.string   "login"
     t.string   "salt"
-    t.boolean  "admin",                  :default => false
     t.integer  "score",                  :default => 0
-    t.boolean  "expert",                 :default => false
-    t.string   "user_type"
-    t.boolean  "jury",                   :default => false
     t.string   "avatar_file_name"
     t.string   "avatar_content_type"
     t.integer  "avatar_file_size"

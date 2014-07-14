@@ -6,7 +6,7 @@
 %section.widget
   .body
     %h3.text-center Форма добавления несовершенства
-    = form_for  @post, :url => {:project => @project.id, :replace_id => @replace_post.nil? ? nil : @replace_post.id , :action => @post.persisted? ? 'update' : 'create'},  :remote => true, :html => { :id => 'new_discontent' }do |f|
+    = form_for  @post, :url => {:project => @project.id, :replace_id => @replace_post.nil? ? nil : @replace_post.id ,:imp_comment => params[:imp_comment],:imp_stage => params[:imp_stage], :action => @post.persisted? ? 'update' : 'create'},  :remote => true, :html => { :id => 'new_discontent' }do |f|
       -if @post.errors.any?
         #error_explanation
           %h2= "#{pluralize(@discontent_post.errors.count, "error")} prohibited this discontent_post from being saved:"

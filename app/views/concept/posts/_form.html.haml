@@ -1,5 +1,5 @@
 = render 'shared/help/new_concept'
-= form_for  @post, :url => {:project => @project.id, :asp_id => params[:asp_id].present? ? params[:asp_id] : nil, :action => @post.persisted? ? 'update' : 'create'},   :html => { :class => 'new_or_edit' } do |f|
+= form_for  @post, :url => {:project => @project.id, :asp_id => params[:asp_id].present? ? params[:asp_id] : nil, :imp_comment => params[:imp_comment], :imp_stage => params[:imp_stage], :action => @post.persisted? ? 'update' : 'create'},   :html => { :class => 'new_or_edit' } do |f|
 
   %div.tab-content
     %div.tab-pane.active#novation1

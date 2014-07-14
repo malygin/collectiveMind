@@ -1,0 +1,4 @@
+-if params[:dis_stat].present?
+  $('#dis_stat_comment_#{@comment.id} span').toggleClass('label-default label-danger')
+-if params[:con_stat].present?
+  $('#con_stat_comment_#{@comment.id} span').toggleClass('label-default label-warning')

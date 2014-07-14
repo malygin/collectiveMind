@@ -2,7 +2,7 @@
 
 class Discontent::Post < ActiveRecord::Base
   include BasePost
-  attr_accessible :whend, :whered, :aspect_id, :replace_id, :aspect, :style, :discontent_post_id, :important, :status_content, :status_whered, :status_whend
+  attr_accessible :whend, :whered, :aspect_id, :replace_id, :aspect, :style, :discontent_post_id, :important, :status_content, :status_whered, :status_whend, :imp_comment, :imp_stage
   belongs_to :aspect
   #has_many :childs, :class_name => 'Discontent::Post', :foreign_key => 'replace_id'
   #belongs_to :post, :class_name => 'Discontent::Post', :foreign_key => 'replace_id'
@@ -56,6 +56,7 @@ class Discontent::Post < ActiveRecord::Base
   scope :by_discussions, ->(posts) { where("discontent_posts.id NOT IN (#{posts.join(", ")})") unless posts.empty? }
 
   scope :not_view, ->(posts) { where("discontent_posts.id NOT IN (#{posts.join(", ")})") unless posts.empty? }
+  scope :created_order, order("created_at DESC")
 
   #scope :uniquely_whend, :select => 'distinct whend'
   #scope :uniquely_whered, :select => 'distinct whered'

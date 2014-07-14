@@ -71,6 +71,15 @@ class Discontent::PostsController < PostsController
     else
       @aspect_post = @project.proc_aspects.first
     end
+
+    post_temp = @aspect_post.life_tape_posts.first
+    life_tape_comments = post_temp.comments.where(:dis_stat => true)
+
+    discontent_comments = @aspect_post.imp_dis_comments(2)
+    @comments_all = life_tape_comments | discontent_comments
+    @comments_all = @comments_all.sort_by{|c| c.imp_disposts.size}
+    @imp_dis_comment = true
+
     #@post = current_model.new
     @order = params[:order]
     @page = params[:page]
@@ -78,6 +87,7 @@ class Discontent::PostsController < PostsController
     @status = 0
     @status = 2 if @project.status == 6
     @status = 1 if @project.status > 6
+
     #load_filter_for_aspects   if (request.xhr? and @order.nil? and @page.nil?)
 
     #@posts  = current_model.where(:project_id => @project, :status => 0)
@@ -102,11 +112,16 @@ class Discontent::PostsController < PostsController
     @post = current_model.new
     @replace_posts =[]
     @accepted_posts = Discontent::Post.where(status: 2, project_id:  @project)
-    @users_rc = User.where(admin:false, type_user: 4)
+    @users_rc = User.where(:type_user => [4,7])
 
     unless params[:replace_id].nil?
       @replace_posts << current_model.find(params[:replace_id])
     end
+    if params[:imp_stage]
+      @comment = "#{get_class_for_improve(params[:imp_stage].to_i)}::Comment".constantize.find(params[:imp_comment]) unless params[:imp_comment].nil?
+    end
+    @post.content = @comment.content if @comment
+    #params[name_of_model_for_param][:content]
     respond_to do |format|
       format.html {render  layout: 'application_two_column'}
       format.json { render json: @post }
@@ -178,6 +193,8 @@ class Discontent::PostsController < PostsController
      @post = @project.discontents.create(params[name_of_model_for_param])
      user_for_post = params[:select_for_clubers].present? ? User.find(params[:select_for_clubers]) : current_user
      @post.user = user_for_post
+     @post.imp_comment = params[:imp_comment] if params[:imp_comment]
+     @post.imp_stage = params[:imp_stage] if params[:imp_stage]
      @post.save
      user_for_post.journals.build(:type_event=>name_of_model_for_param+"_save", :project => @project, :body=>"#{@post.content}:#{@post.id}").save!
      user_for_post.add_score(:type => :add_discontent_post)
@@ -372,7 +389,7 @@ class Discontent::PostsController < PostsController
       @project = Core::Project.find(params[:project])
       status  = @project.status == 3 ? 0 : 2
       @aspects = Discontent::Aspect.where(:project_id => @project, :status => 0).order(:id)
-      @users_rc = User.where(admin:false, type_user: 4)
+      @users_rc = User.where(:type_user => [4,7])
       @discontent_aspect = Discontent::Aspect.find(params[:asp_id]) unless params[:asp_id].nil?
       @discontent_post = Discontent::Post.find(params[:dis_id]) unless params[:dis_id].nil?
       @select_aspect = Discontent::Aspect.find(params[:aspect_id]) unless params[:aspect_id].nil?

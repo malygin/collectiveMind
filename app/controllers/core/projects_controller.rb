@@ -12,8 +12,8 @@ class Core::ProjectsController < ApplicationController
   end
 
   def index
-    @core_projects = Core::Project.all
-
+    @core_projects = Core::Project.order(:id).all
+    @core_project = @core_projects.last
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @core_projects }
@@ -40,7 +40,7 @@ class Core::ProjectsController < ApplicationController
   # GET /core/projects/new.json
   def new
     @project = Core::Project.new
-
+    @core_project = Core::Project.all.last
     respond_to do |format|
       format.html # new.html.erb
       format.json { render json: @core_project }
@@ -50,6 +50,7 @@ class Core::ProjectsController < ApplicationController
   # GET /core/projects/1/edit
   def edit
     @project = Core::Project.find(params[:id])
+    @core_project = Core::Project.find(params[:id])
   end
 
   # POST /core/projects

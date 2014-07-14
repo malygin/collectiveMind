@@ -8,7 +8,9 @@
 *= require bootstrap3-editable/bootstrap-editable
 */
 /* require_tree .*/
-
+.disabled_award{
+    opacity: 0.2;
+}
 .stage_menu1 {
     border-left: 4px solid #4ab0ce !important;
 }
@@ -152,6 +154,11 @@ p, a {
 }
 .ui-state-default {
     border: none;
+    background: none;
+    color: white;
+}
+.ui-state-default a div{
+    color: white;
 }
 .widget-panel .tab-content {
     overflow: visible !important;
@@ -210,6 +217,14 @@ p, a {
   border-bottom: 1px solid #eac85e;
 }
 
+.dis-comment {
+    line-height: 20px !important;
+}
+
+.news-list li.union-list {
+    padding: 0;
+    margin: 0 0;
+}
 
 /*todo my styles bottom*/
 /******************************************************************************************************************************************************/

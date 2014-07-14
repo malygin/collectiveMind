@@ -132,11 +132,11 @@ class User < ActiveRecord::Base
   end
 
   def role_name
-    if self.admin
+    if [1,6,7].include? self.type_user
       "модератор"
-    elsif self.expert
+    elsif self.type_user == 2
       "эксперт"    
-    elsif self.jury
+    elsif self.type_user == 3
       "жюри"
     else 
       ""
@@ -144,20 +144,32 @@ class User < ActiveRecord::Base
   end
 
   def boss?
-    self.admin or self.expert
+    [1,2,3,6,7].include? self.type_user
   end
 
   def cluber?
-    self.type_user == 4 or self.type_user == 5
+    [4,5,7].include? self.type_user
   end
 
   def watcher?
     self.type_user == 5
   end
 
+  def admin?
+    [1,6,7].include? self.type_user
+  end
+
+  def expert?
+    self.type_user == 2
+  end
+
+  def jury?
+    self.type_user == 3
+  end
+
   def have_essay_for_stage(project, stage)
     # puts self.essay_posts.where(:stage => stage)
-    !self.essay_posts.where(:project_id => project, :stage => stage).empty?
+    !self.essay_posts.where(:project_id => project, :stage => stage, :status => 0).empty?
   end
 
   def aspects(id)
@@ -176,7 +188,7 @@ class User < ActiveRecord::Base
       when :plus_comment
         self.add_score_by_type(h[:project],5, :score_a)
         # self.journals.build(:type_event=>'useful_comment', :project => h[:project], :body=>"#{h[:comment].content[0..24]}:#{h[:path]}/#{h[:comment].post.id}#comment_#{h[:comment].id}").save!
-        self.journals.build(:type_event=>'my_add_score_comment', :project => h[:project], :user_informed => self, :body=>"5:#{h[:path]}/#{h[:comment].post.id}#comment_#{h[:comment].id}", :viewed=> false).save!
+        self.journals.build(:type_event=>'my_add_score_comment', :project => h[:project], :user_informed => self, :body=>"5:#{h[:path]}/#{h[:comment].post.id}#comment_#{h[:comment].id}", :viewed=> false, :personal=> true).save!
 
       when :plus_post
 

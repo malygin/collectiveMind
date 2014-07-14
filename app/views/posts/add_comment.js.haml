@@ -11,3 +11,11 @@
 -else
   $("#child_comments_#{@main_comment.id}").append("#{escape_javascript(render :partial => 'shared/child_comment', :object => @comment)}");
   $("#child_comments_form_#{@main_comment.id}").html('')
+
+
+$("#change_comment_stat label").removeClass('btn-success active').addClass('btn-default');
+$('#change_comment_stat .btn').button('reset');
+-#$("#change_comment_stat input[type!='hidden']").val('0');
+-#$("#change_comment_stat input[type='hidden']").val('1');
+
+-#$("#change_comment_stat input:checkbox:enabled").attr('checked', false);

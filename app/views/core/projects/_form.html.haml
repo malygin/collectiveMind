@@ -6,24 +6,26 @@
         - @project.errors.full_messages.each do |msg|
           %li= msg
 
-  .field
-    = f.label :name
-    = f.text_field :name    
-  .field
-    = f.label :secret
-    = f.text_field :secret  
-  .field
-    = f.label :url_logo
-    = f.text_field :url_logo
-  .field
-    = f.label :desc
-    = f.text_area :desc, class: 'redactor' 
-  .field
-    = f.label :short_desc
-    = f.text_area :short_desc
-  .field
-    = f.label :knowledge
-    = f.text_area :knowledge, class: 'redactor'
 
-  .actions
-    = f.submit ''
+  .form-group
+    = f.label :name
+    = f.text_field :name, class: 'form-control'
+  .form-group
+    = f.label :secret
+    = f.text_field :secret , class: 'form-control'
+  .form-group
+    = f.label :url_logo
+    = f.text_field :url_logo, class: 'form-control'
+  .form-group
+    = f.label :desc
+    = f.text_area :desc, class: 'form-control', rows: 5
+  .form-group
+    = f.label :short_desc
+    = f.text_area :short_desc, class: 'form-control', rows: 5
+  .form-group
+    = f.label :knowledge
+    = f.text_area :knowledge, class: 'form-control', rows: 5
+
+  %actions.pull-right
+    = f.submit 'Сохранить',  class: 'btn btn-primary btn-lg'
+

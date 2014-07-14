@@ -23,7 +23,7 @@
   %header
     .row
       .col-md-9
-        %h3.color-red
+        %h3.color-red(style='line-height: 30px;')
           2 этап: Анализ ситуации.
           =@aspect_post.content
           %br
@@ -65,25 +65,22 @@
                       %section.widget
                         %header
                           %h4
-                            Тип:
-                            %span.label.label-success Отсутствующие достоинства
-                            %hr
+                            Несовершенства
                         .body
                           .slimScrollDiv
                             %ul.news-list
-                              =render partial:'post_short', collection: @aspect_post.aspect_posts.by_positive(@status)
+                              =render partial:'post_short', collection: @aspect_post.aspect_posts.by_status(@status).created_order
+
 
                     .col-md-6
                       %section.widget
                         %header
                           %h4
-                            Тип:
-                            %span.label.label-danger Имеющиеся недостатки
+                            Неоформленные проблемы
                           %hr
                         .body
-                          .slimScrollDiv
-                            %ul.news-list
-                              =render partial:'post_short', collection: @aspect_post.aspect_posts.by_negative(@status)
+                          .chat-messages
+                            = render :partial => 'shared/comment',:collection => @comments_all
                 #new_posts.tab-pane.fade
     -else
       .row
@@ -91,32 +88,28 @@
           %section.widget
             %header
               %h4
-                Тип:
-                %span.label.label-success Отсутствующие достоинства
-                %hr
+                Несовершенства
             .body
               .slimScrollDiv
                 %ul.news-list
                   -if @project.status == 6
-                    =render partial:'post_short', collection: @aspect_post.aspect_posts.by_positive_vote([2,4])
+                    =render partial:'post_short', collection: @aspect_post.aspect_posts.by_status([2,4]).created_order
                   -else
-                    =render partial:'post_short', collection: @aspect_post.aspect_posts.by_positive(@status)
+                    =render partial:'post_short', collection: @aspect_post.aspect_posts.by_status(@status).created_order
+
+
 
 
         .col-md-6
           %section.widget
             %header
               %h4
-                Тип:
-                %span.label.label-danger Имеющиеся недостатки
+                Неоформленные проблемы
               %hr
             .body
-              .slimScrollDiv
-                %ul.news-list
-                  -if @project.status == 6
-                    =render partial:'post_short', collection: @aspect_post.aspect_posts.by_negative_vote([2,4])
-                  -else
-                    =render partial:'post_short', collection: @aspect_post.aspect_posts.by_negative(@status)
+              .chat-messages
+                = render :partial => 'shared/comment',:collection => @comments_all
+
 
 
     -#.panel-group#accordion
