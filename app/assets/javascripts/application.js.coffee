@@ -225,7 +225,11 @@ $(window).load ->
         remove_able: 1
 
 $(window).load ->
-#  $('.carousel').carousel()
+  $('.carousel').carousel
+    interval: 4000,
+    pause: "hover",
+    wrap: false
+
   $('.liFixar').liFixar()
   $('.datepicker').datepicker(
     format: 'yyyy-mm-dd'

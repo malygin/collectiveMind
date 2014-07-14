@@ -16,6 +16,9 @@
             %span.label(class="#{label_dis_stat(child_comment)}") Проблема
           =link_to({:action => :comment_stat, :id => child_comment.post.id, :comment_id => child_comment.id, :con_stat => 1},  :remote => true, :method => :put,  id: "con_stat_comment_#{child_comment.id}") do
             %span.label(class="#{label_con_stat(child_comment)}") Идея
+      -else
+        %span.label(class="#{label_dis_stat(child_comment)}") Проблема
+        %span.label(class="#{label_con_stat(child_comment)}") Идея
 
     .text
       %div{id: "comment_text_#{child_comment.id}"}
