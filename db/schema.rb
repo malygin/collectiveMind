@@ -1108,6 +1108,9 @@ ActiveRecord::Schema.define(:version => 20140712180735) do
     t.datetime "updated_at", :null => false
   end
 
+# Could not dump table "projects" because of following StandardError
+#   Unknown type 'serial' for column 'id'
+
   create_table "question_comment_votings", :force => true do |t|
     t.integer  "user_id"
     t.integer  "comment_id"
@@ -1190,9 +1193,9 @@ ActiveRecord::Schema.define(:version => 20140712180735) do
     t.integer  "user_id"
     t.string   "check_field"
     t.boolean  "status"
-    t.integer  "project_id"
     t.datetime "created_at",  :null => false
     t.datetime "updated_at",  :null => false
+    t.integer  "project_id"
     t.string   "value"
   end
 
@@ -1213,11 +1216,7 @@ ActiveRecord::Schema.define(:version => 20140712180735) do
     t.string   "encrypted_password"
     t.string   "login"
     t.string   "salt"
-    t.boolean  "admin",                  :default => false
     t.integer  "score",                  :default => 0
-    t.boolean  "expert",                 :default => false
-    t.string   "user_type"
-    t.boolean  "jury",                   :default => false
     t.string   "avatar_file_name"
     t.string   "avatar_content_type"
     t.integer  "avatar_file_size"
