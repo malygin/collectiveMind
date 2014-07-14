@@ -43,10 +43,10 @@ module JournalHelper
         'добавил тему '+  link_to("#{j.body}..", "/project/#{project}/life_tape/posts/#{j.first_id}" )
 
       when 'my_life_tape_comment'
-        "добавил комментарий: #{j.body}"+  link_to('к вашей теме ', "/project/#{project}/life_tape/posts/#{j.first_id}?viewed=true#comment_#{j.second_id}")
+        "добавил комментарий: '#{j.body}'"+  link_to(' к вашей теме ', "/project/#{project}/life_tape/posts?asp=#{j.first_id}&viewed=true#comment_#{j.second_id}")
 
       when 'reply_life_tape_comment'
-        "добавил комментарий: #{j.body}"+  link_to("в ответ на ваш #{j.body2}", "/project/#{project}/life_tape/posts/#{j.first_id}?viewed=true#comment_#{j.second_id}")
+        "добавил комментарий: '#{j.body}'"+  link_to(" в ответ на ваш '#{j.body2}'", "/project/#{project}/life_tape/posts?asp=#{j.first_id}&viewed=true#comment_#{j.second_id}")
 
       # DISCONTENTS
       when 'discontent_comment_save'

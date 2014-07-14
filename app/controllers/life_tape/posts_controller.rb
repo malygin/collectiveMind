@@ -45,8 +45,8 @@ end
     # @folder = :life_tape
 
     if params[:viewed]
-      Journal.find(params[:viewed]).update_attribute(:viewed, true)
-      @my_journals_count = Journal.count_events_for_my_feed(@project.id, current_user)
+      Journal.events_for_content(@project, current_user, @aspect.id).update_all("viewed = 'true'")
+      @my_journals_count = @my_journals_count - 1
     end
     @comment = LifeTape::Comment.new
 
