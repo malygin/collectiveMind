@@ -20,10 +20,10 @@ class UsersController < ApplicationController
     if @user != current_user
      @journals = Journal.events_for_user_show @project.id, @user.id, 30
     else
-      @journals = Journal.events_for_my_feed @project.id, @user.id, 30
+      @journals = Journal.events_for_user_show @project.id, @user.id, 30
     end
-    if @my_journals_count > 0
-      @journals.update_all(viewed: true)
+    if @my_journals_count > 0 and @user == current_user
+      Journal.events_for_my_feed(@project.id, current_user).update_all(viewed: true)
     end
 
   end
