@@ -18,8 +18,9 @@
           =link_to({:action => :comment_stat, :id => comment.post.id, :comment_id => comment.id, :con_stat => 1},  :remote => true, :method => :put,  id: "con_stat_comment_#{comment.id}") do
             %span.label(class="#{label_con_stat(comment)}") Идея
       -else
-        %span.label(class="#{label_dis_stat(comment)}") Проблема
-        %span.label(class="#{label_con_stat(comment)}") Идея
+        .pull-right
+          %span.label(class="#{label_dis_stat(comment)}") Проблема
+          %span.label(class="#{label_con_stat(comment)}") Идея
 
     .text
       %div{id: "comment_text_#{comment.id}"}

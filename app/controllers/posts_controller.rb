@@ -73,7 +73,9 @@ end
     @aspects = Discontent::Aspect.where(:project_id => @project)
     post = current_model.find(params[:id])
     @main_comment = comment_model.find(params[:main_comment]) unless params[:main_comment].nil?
-    @comment_user = User.find(params[:comment_user]) unless params[:comment_user].nil?
+    #@comment_user = User.find(params[:comment_user]) unless params[:comment_user].nil?
+    @main_comment_answer = comment_model.find(params[:answer_id]) unless params[:answer_id].nil?
+    @comment_user = @main_comment_answer.user unless @main_comment_answer.nil?
     if @comment_user
       content = "#{@comment_user.to_s}, " + params[name_of_comment_for_param][:content]
     else
@@ -100,7 +102,12 @@ end
                                     :first_id=> (post.instance_of? LifeTape::Post) ? post.discontent_aspects.first.id : post.id, :second_id => @comment.id,
                                     :personal=> true, :viewed=> false).save!
       end
-
+      if @main_comment_answer and @main_comment_answer.user!=current_user
+        current_user.journals.build(:type_event=>'reply_'+name_of_comment_for_param, :user_informed => @main_comment_answer.user, :project => @project,
+                                    :body=>"#{trim_content(@comment.content)}", :body2=>trim_content(@main_comment_answer.content),
+                                    :first_id=> (post.instance_of? LifeTape::Post) ? post.discontent_aspects.first.id : post.id, :second_id => @comment.id,
+                                    :personal=> true, :viewed=> false).save!
+      end
     end
     respond_to do |format|
       format.js
@@ -112,10 +119,12 @@ end
     @project = Core::Project.find(params[:project])
     @post = current_model.find(params[:id])
     @main_comment = comment_model.find(params[:comment_id])
-    @comment_user = User.find(params[:comment_user]) unless params[:comment_user].nil?
+    @main_comment_answer = comment_model.find(params[:answer_id]) unless params[:answer_id].nil?
+    #@comment_user = User.find(params[:comment_user]) unless params[:comment_user].nil?
+    @comment_user = @main_comment_answer.user unless @main_comment_answer.nil?
     @comment = comment_model.new
-    if @comment_user
-      @url_link = url_for(:controller => @post.class.name.underscore.pluralize, :action => 'add_comment', :main_comment => @main_comment.id, :comment_user => @comment_user.id)
+    if @main_comment_answer
+      @url_link = url_for(:controller => @post.class.name.underscore.pluralize, :action => 'add_comment', :main_comment => @main_comment.id, :answer_id => @main_comment_answer.id)
       #@url_link = "/project/#{@project.id}/" + current_model.table_name.sub('_posts','/posts') + "/#{@post.id}/add_comment?main_comment=#{@main_comment.id}&comment_user=#{@comment_user.id}"
     else
       @url_link = url_for(:controller => @post.class.name.underscore.pluralize, :action => 'add_comment', :main_comment => @main_comment.id)
