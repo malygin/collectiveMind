@@ -7,7 +7,6 @@
         - if @post.user
           .media-heading
             =link_to @post.user, user_path(@project, @post.user)
-        =improve_comment(@post).html_safe if improve_comment(@post)
         %br
         -@post.post_aspects.each do |da|
           = render partial: 'discontent/aspects/aspect', object: da
@@ -17,7 +16,11 @@
 
         .row
           .col-md-10
-            %small.text-muted= Russian::strftime(@post.created_at,"%d %B %k:%M:%S ")
+            %small.text-muted
+              = Russian::strftime(@post.created_at,"%d %B %k:%M:%S ")
+              |
+              =improve_comment(@post).html_safe if improve_comment(@post)
+
         = render 'shared/post_social_bar2', :post => @post
         %span
           -if @post.status == 2 and boss?

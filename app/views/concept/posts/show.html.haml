@@ -10,15 +10,17 @@
                 =link_to @post.user, user_path(@project, @post.user)
         .col-md-5
           %h4 Решаемое несовершенство:
-          =render partial:'discontent/posts/post_short2', object: tp.discontent
+          =render partial:'discontent/posts/post_short2', object: tp.discontent if tp.discontent
         .col-md-5
           %h4 Другие решаемые несовершенства:
-          -@post.concept_disposts.by_discussions([tp.discontent.id]).each_with_index  do |cd, index|
-            .label.label-success=index+1
-            =cd.content
-            %br
+          -if tp.discontent
+            -@post.concept_disposts.by_discussions([tp.discontent.id]).each_with_index  do |cd, index|
+              .label.label-success=index+1
+              =cd.content
+              %br
       %br
       = render 'shared/post_edit_bar', :post => @post
+      = render '/shared/post_social_bar2', :post => @post
       %br
       .row
         .col-md-6
@@ -187,10 +189,11 @@
 
           %blockquote
             %h4 Смотрите также другие решения:
-            -tp.discontent.dispost_concepts.each do |pa|
-              - unless pa == @post
-                =link_to pa.post_aspects.first.title, concept_post_path(@project, pa)
-                %br
+            -if tp.discontent
+              -tp.discontent.dispost_concepts.each do |pa|
+                - unless pa == @post
+                  =link_to pa.post_aspects.first.title, concept_post_path(@project, pa)
+                  %br
 
         .col-md-6
           %section.widget

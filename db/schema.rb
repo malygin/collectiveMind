@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140712180735) do
+ActiveRecord::Schema.define(:version => 20140715163259) do
 
   create_table "answers", :force => true do |t|
     t.string   "text"
@@ -460,6 +460,7 @@ ActiveRecord::Schema.define(:version => 20140712180735) do
     t.integer  "post_id"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
+    t.boolean  "against"
   end
 
   add_index "essay_post_votings", ["post_id"], :name => "index_essay_post_voitings_on_post_id"
@@ -1108,9 +1109,6 @@ ActiveRecord::Schema.define(:version => 20140712180735) do
     t.datetime "updated_at", :null => false
   end
 
-# Could not dump table "projects" because of following StandardError
-#   Unknown type 'serial' for column 'id'
-
   create_table "question_comment_votings", :force => true do |t|
     t.integer  "user_id"
     t.integer  "comment_id"
@@ -1193,9 +1191,9 @@ ActiveRecord::Schema.define(:version => 20140712180735) do
     t.integer  "user_id"
     t.string   "check_field"
     t.boolean  "status"
+    t.integer  "project_id"
     t.datetime "created_at",  :null => false
     t.datetime "updated_at",  :null => false
-    t.integer  "project_id"
     t.string   "value"
   end
 
