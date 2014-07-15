@@ -28,7 +28,8 @@ module JournalHelper
         'fa fa-plus color-teal'
       when 'life_tape_comment_save'
         'fa fa-comment color-teal'
-      when  'award_1like', 'award_3likes','award_5likes','award_15likes','award_50likes'
+      when  'award_1like', 'award_3likes','award_5likes','award_15likes','award_50likes',
+          'award_1imperfection', 'award_3imperfection', 'award_5imperfection', 'award_15imperfection'
         'fa fa-trophy '
     end
   end
@@ -63,6 +64,12 @@ module JournalHelper
 
       when 'reply_discontent_comment'
         "добавил(а) комментарий '#{j.body}...' в ответ на ваш "+  link_to( j.body2, "/project/#{project}/discontent/posts/#{j.first_id}?viewed=true#comment_#{j.second_id}")
+
+      when 'my_add_score_discontent'
+        "вы получили  #{j.body} баллов за несовершенство "+  link_to( j.body2, "/project/#{project}/discontent/posts/#{j.first_id}?viewed=true")
+
+      when 'my_add_score_discontent_improve'
+        "вы получили  #{j.body} баллов за то, что вашу проблему доработали в несовершенство "+  link_to( j.body2, "/project/#{project}/discontent/posts/#{j.first_id}?viewed=true")
 
       # CONCEPTS
       when 'concept_comment_save'
@@ -99,10 +106,12 @@ module JournalHelper
 
       # AWARDS
 
-      when 'award_1like', 'award_3likes','award_5likes','award_15likes','award_50likes'
+      when 'award_1like', 'award_3likes','award_5likes','award_15likes','award_50likes',
+          'award_1imperfection', 'award_3imperfection', 'award_5imperfection', 'award_15imperfection'
           "заработал(а) достижение '#{j.body}'"
 
-      when 'my_award_1like', 'my_award_3likes', 'my_award_5likes','my_award_15likes','my_award_50likes'
+      when 'my_award_1like', 'my_award_3likes', 'my_award_5likes','my_award_15likes','my_award_50likes',
+        'my_award_1imperfection', 'my_award_3imperfection', 'my_award_5imperfection', 'my_award_15imperfection'
         "вы заработали достижение '#{j.body}'! Продолжайте в том же духе!"
 
 

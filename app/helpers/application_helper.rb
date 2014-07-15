@@ -311,9 +311,9 @@ module ApplicationHelper
       comment = "#{get_class_for_improve(post.imp_stage)}::Comment".constantize.find(post.imp_comment)
       case post.imp_stage
         when 1
-          "«Основано на " + (link_to "посте", "/project/#{@project.id}/life_tape/posts?asp=#{comment.post.aspect.id}#comment_#{comment.id}") + " «#{comment.user.to_s}»»"
+          "Основано на " + (link_to "проблеме", "/project/#{@project.id}/life_tape/posts?asp=#{comment.post.discontent_aspects.first.id}#comment_#{comment.id}")
         when 2
-          "«Основано на " + (link_to "посте", "/project/#{@project.id}/discontent/posts/#{comment.post.id}#comment_#{comment.id}") + " «#{comment.user.to_s}»»"
+          "Основано на " + (link_to "проблеме", "/project/#{@project.id}/discontent/posts/#{comment.post.id}#comment_#{comment.id}")
       end
     end
   end
@@ -322,7 +322,7 @@ module ApplicationHelper
     com_class = get_stage_for_improve(comment.get_class)
     case com_class
       when 1
-        link_to "/project/#{@project.id}/life_tape/posts?asp=#{comment.post.aspect.id}#comment_#{comment.id}" do
+        link_to "/project/#{@project.id}/life_tape/posts?asp=#{comment.post.discontent_aspects.first.id}#comment_#{comment.id}" do
           content_tag :span, 'Источник', class: 'label label-primary'
         end
 

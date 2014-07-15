@@ -4,6 +4,7 @@ require 'digest/sha1'
 class User < ActiveRecord::Base
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
+  include ApplicationHelper
 
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable,:lastseenable
@@ -77,7 +78,6 @@ class User < ActiveRecord::Base
 
   has_many :user_checks , :class_name => "UserCheck"
   scope :check_field, ->(p,c){ where(project: p.id, status: 't', check_field: c) }
-
   validates :name,
   				   :length => { :maximum => 50 }
 
@@ -188,12 +188,20 @@ class User < ActiveRecord::Base
       when :plus_comment
         self.add_score_by_type(h[:project],5, :score_a)
         # self.journals.build(:type_event=>'useful_comment', :project => h[:project], :body=>"#{h[:comment].content[0..24]}:#{h[:path]}/#{h[:comment].post.id}#comment_#{h[:comment].id}").save!
-        self.journals.build(:type_event=>'my_add_score_comment', :project => h[:project], :user_informed => self, :body=>"5:#{h[:path]}/#{h[:comment].post.id}#comment_#{h[:comment].id}", :viewed=> false, :personal=> true).save!
+        self.journals.build(:type_event=>'my_add_score_comment', :project => h[:project], :user_informed => self, :body=>"5", :viewed=> false, :personal=> true).save!
 
       when :plus_post
 
         self.add_score_by_type(h[:project],300, :score_g)  if h[:post].instance_of? Concept::Post
-        self.add_score_by_type(h[:project],30, :score_g)  if h[:post].instance_of? Discontent::Post
+        if h[:post].instance_of? Discontent::Post
+          self.add_score_by_type(h[:project],25, :score_g)
+          self.journals.build(:type_event=>'my_add_score_discontent', :project => h[:project], :user_informed => self, :body=>"25", :first_id => h[:post].id, :body2 => trim_content(h[:post].content), :viewed=> false, :personal=> true).save!
+          if h[:post].imp_comment
+            comment  = "#{get_class_for_improve(h[:post].imp_stage)}::Comment".constantize.find(h[:post].imp_comment)
+            comment.user.add_score_by_type(h[:project], 10, :score_g)
+            self.journals.build(:type_event=>'my_add_score_discontent_improve', :project => h[:project], :user_informed =>comment.user, :body=>"10", :first_id => h[:post].id, :body2 => trim_content(h[:post].content), :viewed=> false, :personal=> true).save!
+          end
+        end
         self.add_score_by_type(h[:project],10, :score_g)  if h[:post].instance_of? LifeTape::Post
 
         # self.journals.build(:type_event=>'useful_post', :project => h[:project], :body=>"#{h[:post].content[0..24]}:#{h[:path]}/#{h[:post].id}").save!
