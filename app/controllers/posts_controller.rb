@@ -234,7 +234,7 @@ def index
       end
       respond_to do |format|
         if @post.save
-          current_user.journals.build(:type_event=>name_of_model_for_param+"_save", :project => @project, :body=>"#{@post.content[0..24]}:#{@post.id}").save!
+          current_user.journals.build(:type_event=>name_of_model_for_param+"_save", :project => @project, :body=>trim_content(@post.content), :first_id => @post.id).save!
 
           format.js
           format.html {

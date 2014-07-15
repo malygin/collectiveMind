@@ -31,6 +31,13 @@ module JournalHelper
       when  'award_1like', 'award_3likes','award_5likes','award_15likes','award_50likes',
           'award_1imperfection', 'award_3imperfection', 'award_5imperfection', 'award_15imperfection'
         'fa fa-trophy '
+
+      when 'essay_post_save'
+        'fa fa-plus'
+      when 'essay_post_update'
+        'fa fa-edit'
+      when 'essay_comment_save'
+        'fa fa-comment'
     end
   end
 	def journal_parser(j, project)
@@ -101,6 +108,22 @@ module JournalHelper
         "добавил(а) комментарий '#{j.body}...' к вашему проекту "+  link_to(j.body2, "/project/#{project}/plan/posts/#{j.first_id}?viewed=true#comment_#{j.second_id}")
 
       when 'reply_plan_comment'
+        "добавил(а) комментарий '#{j.body}...' в ответ на ваш "+  link_to( j.body2, "/project/#{project}/plan/posts/#{j.first_id}?viewed=true#comment_#{j.second_id}")
+
+      # ESSAY
+      when 'essay_comment_save'
+        "добавил(а) комментарий: '#{j.body}'"+ ' к рефлексии '+  link_to("#{j.body2} ... ", "/project/#{project}/stage/1/essay/posts/#{j.first_id}#comment_#{j.second_id}")
+
+      when 'essay_post_save'
+        'добавил(а) свою рефлексию об этапе  ' + link_to("#{j.body}", "/project/#{project}/stage/1/essay/posts/#{j.first_id}")
+
+      when 'essay_post_update'
+        'отредактировал(а) проект '+ link_to("#{j.body}...", "/project/#{project}/plan/posts/#{j.first_id}")
+
+      when 'my_essay_comment'
+        "добавил(а) комментарий '#{j.body}...' к вашему проекту "+  link_to(j.body2, "/project/#{project}/plan/posts/#{j.first_id}?viewed=true#comment_#{j.second_id}")
+
+      when 'reply_essay_comment'
         "добавил(а) комментарий '#{j.body}...' в ответ на ваш "+  link_to( j.body2, "/project/#{project}/plan/posts/#{j.first_id}?viewed=true#comment_#{j.second_id}")
 
 
