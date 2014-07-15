@@ -232,9 +232,11 @@ def index
       if current_model.column_names.include? 'status'
         @post.status = 0
       end
+
       respond_to do |format|
         if @post.save
           current_user.journals.build(:type_event=>name_of_model_for_param+"_save", :project => @project, :body=>trim_content(@post.content), :first_id => @post.id).save!
+          current_user.add_score_by_type(@project, 50, :score_a)
 
           format.js
           format.html {
