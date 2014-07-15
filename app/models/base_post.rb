@@ -25,7 +25,7 @@ module BasePost  extend ActiveSupport::Concern
     scope :for_expert, lambda {  where(:status => 1) }
     scope :accepted, lambda {  where(:status => 2) }
     scope :archive, lambda { where(:status => 3) }
-
+    scope :with_votes, -> {includes(:post_votings).where('"discontent_post_votings"."id" >0')}
 
     #validates :content, :presence => true
     scope :created_order,order("#{table_name}.created_at DESC")

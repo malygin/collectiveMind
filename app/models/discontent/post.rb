@@ -9,7 +9,6 @@ class Discontent::Post < ActiveRecord::Base
   belongs_to :discontent_post
   has_many :discontent_posts, :class_name => 'Discontent::Post', :foreign_key => 'discontent_post_id'
   has_many :discontent_notes, :class_name => 'Discontent::Note'
-
   has_many :discontent_post_aspects, :class_name => 'Discontent::PostAspect'
   has_many :post_aspects, :through => :discontent_post_aspects, :source => :discontent_aspect, :class_name => 'Discontent::Aspect'
 

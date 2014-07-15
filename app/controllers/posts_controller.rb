@@ -234,7 +234,7 @@ def index
       end
       respond_to do |format|
         if @post.save
-          current_user.journals.build(:type_event=>name_of_model_for_param+"_save", :project => @project, :body=>"#{@post.content[0..24]}:#{@post.id}").save!
+          current_user.journals.build(:type_event=>name_of_model_for_param+"_save", :project => @project, :body=>trim_content(@post.content), :first_id => @post.id).save!
 
           format.js
           format.html {
@@ -320,6 +320,8 @@ def index
 #todo check if user already voted
   def plus
     post = current_model.find(params[:id])
+    @project= Core::Project.find(params[:project])
+
     @against =  params[:against] == 'true'
 
     if boss? and post.admins_vote.count != 0
@@ -329,6 +331,8 @@ def index
     else
       post.post_votings.create(:user => current_user, :post => post, :against => @against)  unless post.users.include? current_user
       if (current_user.boss? or post.post_votings.count == 3) and not @against
+        Award.reward(user: post.user, post: post, project: @project, type: 'add')
+
         post.user.add_score(:type => :plus_post, :project => Core::Project.find(params[:project]), :post => post, :path =>  post.class.name.underscore.pluralize)
       end
     end

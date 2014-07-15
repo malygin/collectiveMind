@@ -39,6 +39,34 @@ class Award < ActiveRecord::Base
         h[:user].journals.build(:type_event=>'my_award_50likes',  :user_informed => h[:user], :project => h[:project], :body=> a.name, :viewed=> false, :personal=> true).save!
 
       end
+
+    elsif h[:type] == 'add'
+      if h[:post].instance_of? Discontent::Post
+        count_d = h[:user].discontent_posts.by_project(h[:project]).with_votes.count
+        if count_d == 1
+          a = Award.find_by_url('1imperfection')
+          UserAward.create!(user: h[:user], award: a, project: h[:project])
+          h[:user].journals.build(:type_event=>'award_1imperfection', :project => h[:project], :body=> a.name).save!
+          h[:user].journals.build(:type_event=>'my_award_1imperfection',  :user_informed => h[:user], :project => h[:project], :body=> a.name, :viewed=> false, :personal=> true).save!
+        elsif count_d == 3
+          a = Award.find_by_url('3imperfection')
+          UserAward.create!(user: h[:user], award: a, project: h[:project])
+          h[:user].journals.build(:type_event=>'award_3imperfection', :project => h[:project], :body=> a.name).save!
+          h[:user].journals.build(:type_event=>'my_award_3imperfection',  :user_informed => h[:user], :project => h[:project], :body=> a.name, :viewed=> false, :personal=> true).save!
+        elsif count_d == 5
+          a = Award.find_by_url('5imperfection')
+          UserAward.create!(user: h[:user], award: a, project: h[:project])
+          h[:user].journals.build(:type_event=>'award_5imperfection', :project => h[:project], :body=> a.name).save!
+          h[:user].journals.build(:type_event=>'my_award_5imperfection',  :user_informed => h[:user], :project => h[:project], :body=> a.name, :viewed=> false, :personal=> true).save!
+        elsif count_d == 15
+          a = Award.find_by_url('15imperfection')
+          UserAward.create!(user: h[:user], award: a, project: h[:project])
+          h[:user].journals.build(:type_event=>'award_15imperfection', :project => h[:project], :body=> a.name).save!
+          h[:user].journals.build(:type_event=>'my_award_15imperfection',  :user_informed => h[:user], :project => h[:project], :body=> a.name, :viewed=> false, :personal=> true).save!
+        end
+
+      end
+
     end
 
   end
