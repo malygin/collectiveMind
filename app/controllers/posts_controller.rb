@@ -336,8 +336,14 @@ def index
         post.user.add_score(:type => :plus_post, :project => Core::Project.find(params[:project]), :post => post, :path =>  post.class.name.underscore.pluralize)
       end
     end
+    if post.instance_of? Discontent::Post
+      post.update_attributes(:status_content => true, :status_whered => true,:status_whend => true)
+    elsif post.instance_of? Concept::Post
+      post.update_attributes(:stat_name => true, :stat_content => true,:stat_positive => true,:stat_positive_r => true, :stat_negative => true,:stat_negative_r => true,:stat_problems => true,:stat_reality => true)
+    end
 
     @id= post.id
+    @post_vote = post
     respond_to do |format|
       format.js
     end

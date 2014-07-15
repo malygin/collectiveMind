@@ -4,8 +4,8 @@
             = link_to user_path( @project,user ) do
                 = image_tag user.avatar.url(:thumb),  class: "img-circle"
                 - if not  user.awards.empty?
-
-                    =image_tag('/assets/awards/'+user.awards.last.url+'_25_25.png', title: user.awards.last.name, style: 'height: 25px; width: 25px;')
+                    %br
+                    =image_tag('/assets/awards/'+user.awards.last.url+'_25_25.png', title: user.awards.last.name, style: 'height: 25px; width: 25px;margin-left:15px;')
 
 
         -#- unless user.expert? or user.admin?
