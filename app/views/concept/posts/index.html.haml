@@ -24,6 +24,10 @@
     .row
       .col-md-6
         %section.widget
+          %header
+            %h4
+              Нововведения
+            %hr
           .body
             -@aspect_post.aspect_posts.by_status(4).each do |post|
               =render partial:'discontent/posts/post_short2', object: post
