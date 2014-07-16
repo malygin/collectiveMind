@@ -67,6 +67,30 @@ class Award < ActiveRecord::Base
 
       end
 
+    elsif h[:type] == 'max'
+       if h[:score] >= 100 and h[:old_score] < 100
+         a = Award.find_by_url('100points')
+         UserAward.create!(user: h[:user], award: a, project: h[:project])
+         h[:user].journals.build(:type_event=>'award_100points', :project => h[:project], :body=> a.name).save!
+         h[:user].journals.build(:type_event=>'my_award_100points',  :user_informed => h[:user], :project => h[:project], :body=> a.name, :viewed=> false, :personal=> true).save!
+     elsif h[:score] >= 500 and h[:old_score] < 500
+         a = Award.find_by_url('500points')
+         UserAward.create!(user: h[:user], award: a, project: h[:project])
+         h[:user].journals.build(:type_event=>'award_500points', :project => h[:project], :body=> a.name).save!
+         h[:user].journals.build(:type_event=>'my_award_500points',  :user_informed => h[:user], :project => h[:project], :body=> a.name, :viewed=> false, :personal=> true).save!
+       elsif h[:score] >= 1000 and h[:old_score] < 1000
+         a = Award.find_by_url('1000points')
+         UserAward.create!(user: h[:user], award: a, project: h[:project])
+         h[:user].journals.build(:type_event=>'award_1000points', :project => h[:project], :body=> a.name).save!
+         h[:user].journals.build(:type_event=>'my_award_1000points',  :user_informed => h[:user], :project => h[:project], :body=> a.name, :viewed=> false, :personal=> true).save!
+       elsif h[:score] >= 3000 and h[:old_score] < 3000
+         a = Award.find_by_url('3000points')
+         UserAward.create!(user: h[:user], award: a, project: h[:project])
+         h[:user].journals.build(:type_event=>'award_3000points', :project => h[:project], :body=> a.name).save!
+         h[:user].journals.build(:type_event=>'my_award_3000points',  :user_informed => h[:user], :project => h[:project], :body=> a.name, :viewed=> false, :personal=> true).save!
+
+
+       end
     end
 
   end

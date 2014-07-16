@@ -29,7 +29,8 @@ module JournalHelper
       when 'life_tape_comment_save'
         'fa fa-comment color-teal'
       when  'award_1like', 'award_3likes','award_5likes','award_15likes','award_50likes',
-          'award_1imperfection', 'award_3imperfection', 'award_5imperfection', 'award_15imperfection'
+          'award_1imperfection', 'award_3imperfection', 'award_5imperfection', 'award_15imperfection',
+          'award_100points',   'award_500points', 'award_1000points', 'award_3000points'
         'fa fa-trophy '
 
       when 'essay_post_save'
@@ -135,8 +136,10 @@ module JournalHelper
       # AWARDS
 
       when 'award_1like', 'award_3likes','award_5likes','award_15likes','award_50likes',
-          'award_1imperfection', 'award_3imperfection', 'award_5imperfection', 'award_15imperfection'
-          "заработал(а) достижение '#{j.body}'"
+          'award_1imperfection', 'award_3imperfection', 'award_5imperfection', 'award_15imperfection',
+          'award_100points',   'award_500points', 'award_1000points', 'award_3000points'
+
+        "заработал(а) достижение '#{j.body}'"
 
       when 'my_award_1like', 'my_award_3likes', 'my_award_5likes','my_award_15likes','my_award_50likes',
         'my_award_1imperfection', 'my_award_3imperfection', 'my_award_5imperfection', 'my_award_15imperfection'
