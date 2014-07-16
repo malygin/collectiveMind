@@ -78,6 +78,11 @@ module JournalHelper
       when 'my_add_score_discontent_improve'
         "вы получили  #{j.body} баллов за то, что вашу проблему доработали в несовершенство "+  link_to( j.body2, "/project/#{project}/discontent/posts/#{j.first_id}?viewed=true")
 
+      when 'my_discontent_note'
+        s = j.body.split(':')
+        "добавил(а) замечание  '#{j.body}...' к "+  link_to('вашему несовершенству', "/project/#{project}/discontent/posts/#{j.first_id}?viewed=true")
+
+
       # CONCEPTS
       when 'concept_comment_save'
         "добавил(а) комментарий: '#{j.body}'"+ ' к нововведению '+  link_to("#{j.body2} ... ", "/project/#{project}/concept/posts/#{j.first_id}#comment_#{j.second_id}")
@@ -121,10 +126,10 @@ module JournalHelper
         'отредактировал(а) проект '+ link_to("#{j.body}...", "/project/#{project}/plan/posts/#{j.first_id}")
 
       when 'my_essay_comment'
-        "добавил(а) комментарий '#{j.body}...' к вашему проекту "+  link_to(j.body2, "/project/#{project}/plan/posts/#{j.first_id}?viewed=true#comment_#{j.second_id}")
+        "добавил(а) комментарий '#{j.body}...' к вашему проекту "+  link_to(j.body2, "/project/#{project}/stage/1/essay/posts/#{j.first_id}?viewed=true#comment_#{j.second_id}")
 
       when 'reply_essay_comment'
-        "добавил(а) комментарий '#{j.body}...' в ответ на ваш "+  link_to( j.body2, "/project/#{project}/plan/posts/#{j.first_id}?viewed=true#comment_#{j.second_id}")
+        "добавил(а) комментарий '#{j.body}...' в ответ на ваш "+  link_to( j.body2, "/project/#{project}/stage/1/essay/posts/#{j.first_id}?viewed=true#comment_#{j.second_id}")
 
 
       # AWARDS
@@ -180,10 +185,7 @@ module JournalHelper
         "вы получили #{s[0]} баллов за полезный комментарий!"
         # "вы получили #{s[0]} баллов "  +  link_to("за полезный комментарий ", "/project/#{project}/#{s[1].gsub('#', "?viewed=#{j.id}#")}" )
 
-      when 'my_discontent_note'
-        s = j.body.split(':')
-        "добавил(а) замечание  '#{s[0]}...' к "+  link_to('вашему несовершенству', "/project/#{project}/discontent/posts/#{s[1]}?viewed=#{j.id}")
-      when 'my_concept_note'
+          when 'my_concept_note'
         s = j.body.split(':')
         "добавил(а) замечание  '#{s[0]}...' к "+  link_to('вашему нововведению', "/project/#{project}/concept/posts/#{s[1]}?viewed=#{j.id}")
 			else
