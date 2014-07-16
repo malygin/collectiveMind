@@ -138,7 +138,10 @@ end
   def comment_stat
     @project = Core::Project.find(params[:project])
     @post = current_model.find(params[:id])
-    @comment = comment_model.find(params[:comment_id])
+    if params[:com_stage]
+      @comment = "#{get_class_for_improve(params[:com_stage].to_i)}::Comment".constantize.find(params[:comment_id]) unless params[:comment_id].nil?
+    end
+    # @comment = comment_model.find(params[:comment_id])
     if params[:dis_stat].present?
       @comment.toggle(:dis_stat)
       @comment.update_attributes(dis_stat: @comment.dis_stat)

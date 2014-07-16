@@ -13,9 +13,9 @@
         %span.label.label-danger MD
       - if current_user?(comment.user) or boss?
         .pull-right
-          =link_to({:action => :comment_stat, :id => comment.post.id, :comment_id => comment.id, :dis_stat => 1},  :remote => true, :method => :put,  id: "dis_stat_comment_#{comment.id}") do
+          =link_to({:action => :comment_stat, :id => comment.post.id, :comment_id => comment.id, :dis_stat => 1, :com_stage => get_stage_for_improve(comment.get_class)},  :remote => true, :method => :put,  id: "dis_stat_comment_#{comment.id}") do
             %span.label(class="#{label_dis_stat(comment)}") Проблема
-          =link_to({:action => :comment_stat, :id => comment.post.id, :comment_id => comment.id, :con_stat => 1},  :remote => true, :method => :put,  id: "con_stat_comment_#{comment.id}") do
+          =link_to({:action => :comment_stat, :id => comment.post.id, :comment_id => comment.id, :con_stat => 1, :com_stage => get_stage_for_improve(comment.get_class)},  :remote => true, :method => :put,  id: "con_stat_comment_#{comment.id}") do
             %span.label(class="#{label_con_stat(comment)}") Идея
       -else
         .pull-right
