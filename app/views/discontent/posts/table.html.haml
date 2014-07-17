@@ -133,37 +133,39 @@
               .chat-messages
                 = render :partial => 'shared/comment',:collection => @comments_all
 
+-#%a(href="#" title="Вернуться к началу" class="topbutton") Наверх
+#toTop ^ Наверх
 
 
-    -#.panel-group#accordion
-    -#  -@aspects.each do |aspect|
-    -#    .panel.panel-default
-    -#      .panel-heading
-    -#        %h4.panel-title
-    -#          %a(data-toggle="collapse" data-parent="#accordion" href="#asp_#{aspect.id}" )
-    -#            =aspect.content
-    -#            %b="(#{aspect.aspect_posts.count})"
-    -#            %span.glyphicon.glyphicon-chevron-down
-    -#
-    -#            %br
-    -#            %small=aspect.short_desc
-    -#
-    -#      .panel-collapse.collapse{id:"asp_#{aspect.id}"}
-    -#        .panel-body
-    -#          %table.table
-    -#
-    -#            %tr
-    -#              %td
-    -#                %span.label.label-p  Отсутствующие достоинства
-    -#              %td
-    -#                %span.label.label-n(style='min-width: 300px;')  Имеющиеся недостатки
-    -#
-    -#            %tr
-    -#              %td
-    -#
-    -#                -#=render partial:'post_short', collection: aspect.positive_posts.by_status(@status)
-    -#                =render partial:'post_short', collection: aspect.aspect_posts.by_positive(@status)
-    -#
-    -#              %td
-    -#                -#=render partial:'post_short', collection: aspect.negative_posts.by_status(@status)
-    -#                =render partial:'post_short', collection: aspect.aspect_posts.by_negative(@status)
+-#.panel-group#accordion
+-#  -@aspects.each do |aspect|
+-#    .panel.panel-default
+-#      .panel-heading
+-#        %h4.panel-title
+-#          %a(data-toggle="collapse" data-parent="#accordion" href="#asp_#{aspect.id}" )
+-#            =aspect.content
+-#            %b="(#{aspect.aspect_posts.count})"
+-#            %span.glyphicon.glyphicon-chevron-down
+-#
+-#            %br
+-#            %small=aspect.short_desc
+-#
+-#      .panel-collapse.collapse{id:"asp_#{aspect.id}"}
+-#        .panel-body
+-#          %table.table
+-#
+-#            %tr
+-#              %td
+-#                %span.label.label-p  Отсутствующие достоинства
+-#              %td
+-#                %span.label.label-n(style='min-width: 300px;')  Имеющиеся недостатки
+-#
+-#            %tr
+-#              %td
+-#
+-#                -#=render partial:'post_short', collection: aspect.positive_posts.by_status(@status)
+-#                =render partial:'post_short', collection: aspect.aspect_posts.by_positive(@status)
+-#
+-#              %td
+-#                -#=render partial:'post_short', collection: aspect.negative_posts.by_status(@status)
+-#                =render partial:'post_short', collection: aspect.aspect_posts.by_negative(@status)

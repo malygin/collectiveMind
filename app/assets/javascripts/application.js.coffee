@@ -677,3 +677,16 @@ $.fn.extend popoverClosable: (options) ->
       type: "put"
       data:
         group_id: group_id
+
+$ ->
+  $(window).scroll ->
+    unless $(this).scrollTop() is 0
+      $("#toTop").fadeIn()
+    else
+      $("#toTop").fadeOut()
+    return
+
+  $("#toTop").click ->
+    $("body,html").animate
+      scrollTop: 0
+    , 800
