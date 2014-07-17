@@ -71,6 +71,7 @@ class Discontent::PostsController < PostsController
     else
       @aspect_post = @project.proc_aspects.first
     end
+    @accepted_posts = Discontent::Post.where(status: 2, project_id:  @project)
 
     post_temp = @aspect_post.life_tape_posts.first
     life_tape_comments = post_temp.comments.where(:dis_stat => true)
@@ -458,6 +459,69 @@ class Discontent::PostsController < PostsController
         end
       end
 
+      respond_to do |format|
+        format.js
+      end
+    end
+
+    def new_group
+      @project = Core::Project.find(params[:project])
+      @asp = Discontent::Aspect.find(params[:asp]) unless params[:asp].nil?
+      @aspects = Discontent::Aspect.where(:project_id => @project, :status => 0)
+      #@aspects_for_post = @post.post_aspects
+      @post_group = current_model.new
+      respond_to do |format|
+        format.js
+      end
+    end
+
+    def create_group
+      @project = Core::Project.find(params[:project])
+      @post_group = @project.discontents.create(params[name_of_model_for_param])
+      @post_group.status = 2
+      @post_group.save
+      unless params[:discontent_post_aspects].nil?
+        params[:discontent_post_aspects].each do |asp|
+          Discontent::PostAspect.create(post_id: @post_group.id, aspect_id: asp.to_i).save!
+        end
+      end
+      respond_to do |format|
+        format.js
+      end
+    end
+
+    def union_group
+      @project = Core::Project.find(params[:project])
+      @post = Discontent::Post.find(params[:id])
+      @new_post = Discontent::Post.find(params[:group_id])
+      if @post and @new_post
+        @post.update_attributes(status: 1, discontent_post_id: @new_post.id)
+        @new_post.update_union_post_aspects(@post.post_aspects)
+      end
+      respond_to do |format|
+        format.js
+      end
+    end
+
+    def edit_group
+      @project = Core::Project.find(params[:project])
+      @asp = Discontent::Aspect.find(params[:asp]) unless params[:asp].nil?
+      @aspects = Discontent::Aspect.where(:project_id => @project, :status => 0)
+      @post_group = current_model.find(params[:id])
+      @aspects_for_post = @post_group.post_aspects
+      respond_to do |format|
+        format.js
+      end
+    end
+
+    def update_group
+      @project = Core::Project.find(params[:project])
+      @post_group = current_model.find(params[:id])
+      unless params[:discontent_post_aspects].nil?
+        @post_group.update_status_fields(params[name_of_model_for_param])
+        @post_group.update_attributes(params[name_of_model_for_param])
+        @post_group.update_post_aspects(params[:discontent_post_aspects])
+      end
       respond_to do |format|
         format.js
       end

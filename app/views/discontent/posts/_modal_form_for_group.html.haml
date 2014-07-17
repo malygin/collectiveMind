@@ -1,0 +1,90 @@
+#modal_group_discontent.modal.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :style => "display: none;", :tabindex => "-1"}
+  .modal-dialog.modal-lg
+    .modal-content
+      .modal-header
+        %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} ×
+        %h3#myModalLabel.modal-title Добавление новой группы для несовершенств
+      .modal-body
+        = form_for  @post_group, :url => {:project => @project.id,:id => @post_group, :action => @post_group.persisted? ? 'update_group' : 'create_group'},  :remote => true,:method => :put, :html => { :id => 'new_discontent' } do |f|
+          .col-md-12
+            .row
+              .col-md-12
+                .text-center
+                  .h5
+                    Что вас не устраивает?
+                  %br
+
+            .row
+              .col-md-12
+                .form-group
+                  =f.text_area :content, class: 'form-control', rows: 5, placeholder: 'Отрицательное действие, явление, установление, черта', onkeyup: "activate_button(this);"
+
+            .row
+              .col-md-12
+                .text-center
+                  .h5
+                    Где это происходит?
+                  %br
+
+            .row
+              .col-md-12
+                #mod2
+                =f.autocomplete_field :whered, autocomplete_discontent_post_whered_discontent_posts_path,:append_to => "#mod2",  :"min-length" => 0, style: 'height: 44px', class: 'form-control autocomplete', placeholder: 'Место, организация, общность, в которой это происходит '
+                %br
+                %br
+            .row
+              .col-md-12
+                .text-center
+                  .h5
+                    Когда это происходит?
+                  %br
+
+            .row
+              .col-md-12
+                #mod
+                =f.autocomplete_field :whend, autocomplete_discontent_post_whend_discontent_posts_path, :"min-length" => 0, :append_to => "#mod",  style: 'height: 44px', class: 'form-control autocomplete', placeholder: 'Во время какого события, мероприятия, процесса, ситуации '
+                %br
+                %br
+            .row
+              .col-md-12
+                .text-center
+                  .h5 К какой теме относится  несовершенство?
+                %br
+            .row
+              .com-md-12
+                = select_tag 'select_for_aspects', options_from_collection_for_select(@aspects.minus_view(@aspects_for_post.nil? ? (@asp.nil? ? [] : [@asp.id]) : @aspects_for_post.pluck(:id)), "id", "content"),
+                :prompt => 'Выберите тему' , style:'margin-left:15px; margin-top:10px; height: 30px;'
+                %br
+                #add_post_aspects(style="margin-left: 2%;margin-top: 10px;")
+                  -unless @aspects_for_post.nil?
+                    - @aspects_for_post.each do |ap|
+                      %div{id: "aspect_#{ap.id}"}
+                        %input{name: "discontent_post_aspects[]", type: "hidden", value: "#{ap.id}"}/
+                        %span.glyphicon.glyphicon-remove.text-danger{onclick: "remove_discontent_aspect('#{ap.id}','#{ap.content}');", style: "cursor:pointer;text-decoration:none;font-size:15px;"}
+                        %span.span_aspect.label.label-t{id: "#{ap.id}"}=ap.content
+                  -unless @asp.nil?
+                    %div{id: "aspect_#{@asp.id}"}
+                      %input{name: "discontent_post_aspects[]", type: "hidden", value: "#{@asp.id}"}/
+                      %span.glyphicon.glyphicon-remove.text-danger{onclick: "remove_discontent_aspect('#{@asp.id}','#{@asp.content}');", style: "cursor:pointer;text-decoration:none;font-size:15px;"}
+                      %span.span_aspect.label.label-t{id: "#{@asp.id}"}=@asp.content
+                %br
+
+            .row
+              .col-md-12
+                .form-group.text-center
+                  %br
+                  %b  Выберите тип несовершенства
+                  %br
+                  %label.radio-inline
+                    = f.radio_button :style,  '1', :checked => "checked"
+                    %span.label.label-danger Имеющиеся недостатки
+                  %label.radio-inline
+                    = f.radio_button :style,  '0'
+                    %span.label.label-success Отсутствующие достоинства
+
+            %br
+            %button#send_post.btn.btn-primary.pull-right(type="submit" onclick='disontent_form_submit();'){:class => ('disabled' unless @post_group.content?)} Сохранить
+
+      .modal-footer
+
+

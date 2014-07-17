@@ -655,3 +655,25 @@ $.fn.extend popoverClosable: (options) ->
   else
     $(el).removeClass('btn-default')
     $(el).addClass('btn-success')
+
+@activate_add_aspects= ->
+  $('#select_for_aspects').on 'change', ->
+    val=this.value
+    text=$(this).find('option:selected').text()
+    $(this).find('option:selected').remove()
+    func = "'#{val}','#{text}'"
+    $('#add_post_aspects').append('<div id="aspect_'+val+'" style="display:none;height:0;"><input type="hidden" name="discontent_post_aspects[]" value="'+val+'"/><span class="glyphicon glyphicon-remove text-danger pull-left" onclick="remove_discontent_aspect('+func+');" style="cursor:pointer;text-decoration:none;font-size:15px;"></span><span id="'+val+'" class="span_aspect label label-t">'+text+'</span></br></div>')
+    $('#aspect_'+val).css('display','block').animate({height: 20, opacity:1}, 500).effect("highlight", {color: '#f5cecd'}, 500)
+    activate_discontent_aspect()
+
+
+@select_for_discontents_group= (el,project,post)->
+  project_id = project
+  dispost_id = post
+  group_id = $(el).val()
+  if group_id != '' and dispost_id != ''
+    $.ajax
+      url: "/project/#{project_id}/discontent/posts/#{dispost_id}/union_group"
+      type: "put"
+      data:
+        group_id: group_id

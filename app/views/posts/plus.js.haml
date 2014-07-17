@@ -23,6 +23,7 @@
     $('##{id_for_type_field(1)}_#{@post_vote.id}').removeClass('label-danger label-g').addClass('label-success');
     $('##{id_for_type_field(2)}_#{@post_vote.id}').removeClass('label-danger label-g').addClass('label-success');
     $('##{id_for_type_field(3)}_#{@post_vote.id}').removeClass('label-danger label-g').addClass('label-success');
+
   -elsif @post_vote.instance_of? Concept::Post
     - 8.times do |n|
       $('##{id_for_concept_type(n+1)}').removeClass('color-blue color-red').addClass('color-green');

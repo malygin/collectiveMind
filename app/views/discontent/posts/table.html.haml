@@ -56,11 +56,29 @@
                     Исходные #{@aspect_post.aspect_posts.count}
                 %li#new
                   =link_to "Объединенные #{@project.discontent_accepted_post.count}", "/project/#{@project.id}/discontent/posts/unions", remote: true
+                %li#imp
+                  %a(href="#improve" data-toggle="tab" onclick="$('#new_posts').fadeOut();")
+                    Неоформленные проблемы
               %br
               %br
+              #form_for_group_discontent
               .tab-content
                 #origin.tab-pane.fade.in.active
                   .row
+                    .col-md-6
+                      %section.widget
+                        %header
+                          %span.h4
+                            Группы несовершенств
+                          %span.pull-right
+                            = link_to '+ Добавить новую группу', discontent_posts_new_group_path(@project, asp: params[:asp]) ,:remote => true, id: 'add_record',  class: 'btn  btn-danger'
+                        .body
+                          .slimScrollDiv
+                            %ul.news-list#panel_union_group
+                              - @aspect_post.aspect_posts.by_status(2).created_order.each do |post|
+                                %li{id: "post_union_#{post.id}"}
+                                  =render partial:'post', object: post
+
                     .col-md-6
                       %section.widget
                         %header
@@ -69,9 +87,13 @@
                         .body
                           .slimScrollDiv
                             %ul.news-list
-                              =render partial:'post_short', collection: @aspect_post.aspect_posts.by_status(@status).created_order
+                              -if [4,5,6].include? @project.status
+                                =render partial:'post_short', collection: @aspect_post.aspect_posts.by_status([0,1]).created_order
+                              -else
+                                =render partial:'post_short', collection: @aspect_post.aspect_posts.by_status(@status).created_order
 
-
+                #improve.tab-pane.fade
+                  .row
                     .col-md-6
                       %section.widget
                         %header
@@ -82,6 +104,7 @@
                           .chat-messages
                             = render :partial => 'shared/comment',:collection => @comments_all
                 #new_posts.tab-pane.fade
+
     -else
       .row
         .col-md-6

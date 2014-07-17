@@ -19,7 +19,13 @@
       .col-md-10
         %small.text-muted= Russian::strftime(post.created_at,'%d %B %k:%M:%S')
     = render 'shared/post_social_bar2', :post => post
-    = render 'shared/post_edit_bar', :post => post
+    %span
+      -if post.status == 2 and boss?
+        = link_to 'Разгруппировать', {:action => :ungroup_union, :id => post.id}, :method => :put, :confirm => 'Точно?', :class => 'btn btn-warning btn-xs'
+        \|
+        = link_to 'Редактировать группу', {:action => :edit_group, :id => post.id},:remote => true, :class => 'btn btn-primary btn-xs'
+        \|
+      = render 'shared/post_edit_bar', :post => post
     - if can_union_discontents?(@project) and post.status == 0
       = hidden_field_tag 'posts[]', post.id
       .pull-right

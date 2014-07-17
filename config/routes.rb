@@ -97,6 +97,8 @@ scope '/project/:project' do
   get 'concept/posts/fast_discussion_concepts', to:  'concept/posts#fast_discussion_concepts'
   get 'discontent/posts/check_field', to:  'discontent/posts#check_field'
   get 'concept/posts/check_field', to:  'concept/posts#check_field'
+  get 'discontent/posts/new_group', to:  'discontent/posts#new_group'
+  put 'discontent/posts/create_group', to:  'discontent/posts#create_group'
 
 
 
@@ -113,6 +115,10 @@ scope '/project/:project' do
         put :create_note
         put :destroy_note
         put :ungroup_union
+        get :edit_group
+        put :update_group
+        put :destroy_group
+        put :union_group
       end
     end
   end
