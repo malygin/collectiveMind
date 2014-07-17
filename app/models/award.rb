@@ -64,7 +64,29 @@ class Award < ActiveRecord::Base
           h[:user].journals.build(:type_event=>'award_15imperfection', :project => h[:project], :body=> a.name).save!
           h[:user].journals.build(:type_event=>'my_award_15imperfection',  :user_informed => h[:user], :project => h[:project], :body=> a.name, :viewed=> false, :personal=> true).save!
         end
-
+      elsif  h[:post].instance_of? Concept::Post
+        count_d = h[:user].concept_posts.by_project(h[:project]).with_concept_votes.count
+        if count_d == 1
+          a = Award.find_by_url('1innovation')
+          UserAward.create!(user: h[:user], award: a, project: h[:project])
+          h[:user].journals.build(:type_event=>'award_1innovation', :project => h[:project], :body=> a.name).save!
+          h[:user].journals.build(:type_event=>'my_award_1innovation',  :user_informed => h[:user], :project => h[:project], :body=> a.name, :viewed=> false, :personal=> true).save!
+        elsif count_d == 3
+          a = Award.find_by_url('3innovation')
+          UserAward.create!(user: h[:user], award: a, project: h[:project])
+          h[:user].journals.build(:type_event=>'award_3innovation', :project => h[:project], :body=> a.name).save!
+          h[:user].journals.build(:type_event=>'my_award_3innovation',  :user_informed => h[:user], :project => h[:project], :body=> a.name, :viewed=> false, :personal=> true).save!
+        elsif count_d == 5
+          a = Award.find_by_url('5innovation')
+          UserAward.create!(user: h[:user], award: a, project: h[:project])
+          h[:user].journals.build(:type_event=>'award_5innovation', :project => h[:project], :body=> a.name).save!
+          h[:user].journals.build(:type_event=>'my_award_5innovation',  :user_informed => h[:user], :project => h[:project], :body=> a.name, :viewed=> false, :personal=> true).save!
+        elsif count_d == 15
+          a = Award.find_by_url('15innovation')
+          UserAward.create!(user: h[:user], award: a, project: h[:project])
+          h[:user].journals.build(:type_event=>'award_15innovation', :project => h[:project], :body=> a.name).save!
+          h[:user].journals.build(:type_event=>'my_award_15innovation',  :user_informed => h[:user], :project => h[:project], :body=> a.name, :viewed=> false, :personal=> true).save!
+        end
       end
 
     elsif h[:type] == 'max'

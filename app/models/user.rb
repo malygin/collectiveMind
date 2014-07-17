@@ -192,7 +192,8 @@ class User < ActiveRecord::Base
 
       when :plus_post
 
-        self.add_score_by_type(h[:project],300, :score_g)  if h[:post].instance_of? Concept::Post
+        self.add_score_by_type(h[:project],50, :score_g)  if h[:post].instance_of? Concept::Post
+
         if h[:post].instance_of? Discontent::Post
           self.add_score_by_type(h[:project],25, :score_g)
           self.journals.build(:type_event=>'my_add_score_discontent', :project => h[:project], :user_informed => self, :body=>"25", :first_id => h[:post].id, :body2 => trim_content(h[:post].content), :viewed=> false, :personal=> true).save!

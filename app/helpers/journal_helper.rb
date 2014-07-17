@@ -30,6 +30,8 @@ module JournalHelper
         'fa fa-comment color-teal'
       when  'award_1like', 'award_3likes','award_5likes','award_15likes','award_50likes',
           'award_1imperfection', 'award_3imperfection', 'award_5imperfection', 'award_15imperfection',
+          'award_1innovation', 'award_3innovation', 'award_5innovation', 'award_15innovation',
+
           'award_100points',   'award_500points', 'award_1000points', 'award_3000points'
         'fa fa-trophy '
 
@@ -137,12 +139,15 @@ module JournalHelper
 
       when 'award_1like', 'award_3likes','award_5likes','award_15likes','award_50likes',
           'award_1imperfection', 'award_3imperfection', 'award_5imperfection', 'award_15imperfection',
+          'award_1innovation', 'award_3innovation', 'award_5innovation', 'award_15innovation',
           'award_100points',   'award_500points', 'award_1000points', 'award_3000points'
 
         "заработал(а) достижение '#{j.body}'"
 
       when 'my_award_1like', 'my_award_3likes', 'my_award_5likes','my_award_15likes','my_award_50likes',
-        'my_award_1imperfection', 'my_award_3imperfection', 'my_award_5imperfection', 'my_award_15imperfection'
+        'my_award_1imperfection', 'my_award_3imperfection', 'my_award_5imperfection', 'my_award_15imperfection',
+        'my_award_1innovation', 'my_award_3innovation', 'my_award_5innovation', 'my_award_15innovation',
+          'my_award_100points',   'my_award_500points', 'my_award_1000points', 'my_award_3000points'
         "вы заработали достижение '#{j.body}'! Продолжайте в том же духе!"
 
 
