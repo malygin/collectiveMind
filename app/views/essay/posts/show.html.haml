@@ -28,26 +28,26 @@
       .col-md-6
         %section.widget
           .body
-            %span(class="#{color_stage(@stage.to_i)}") Какие было недостатки в процедуре, вашей работе в ней, работе других участников, модераторв и жюри?
+            %span(class="#{color_stage(@stage.to_i)}")  1. Какие недостатки вы заметили в процедуре, в вашей работе, а также в работе других участников, модераторов и жюри?
             .form-group
               =simple_format(@post.content)
 
         %section.widget
           .body
-            %span(class="#{color_stage(@stage.to_i)}") Каковы отсуствующие достоинства в этой работе?
+            %span(class="#{color_stage(@stage.to_i)}") 2. Какие достоинства отсутствовали в этой работе?
             .form-group
               =simple_format(@post.positive)
 
         %section.widget
           .body
-            %span(class="#{color_stage(@stage.to_i)}") Что можно было бы изменить и как?
+            %span(class="#{color_stage(@stage.to_i)}")  3. Что и как можно было бы изменить?
             .form-group
               =simple_format(@post.change)
 
         -if @stage.to_i > 1 and @project.status > 2
           %section.widget
             .body
-              %span(class="#{color_stage(@stage.to_i)}") Что уже изменилось к лучшему в результате реакции на рефлексию?
+              %span(class="#{color_stage(@stage.to_i)}") 4. Что уже изменилось к лучшему в результате реакции на рефлексию?
               .form-group
                 =simple_format(@post.reaction)
 

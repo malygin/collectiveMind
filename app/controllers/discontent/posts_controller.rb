@@ -228,7 +228,7 @@ class Discontent::PostsController < PostsController
 
       @post.update_post_aspects(params[:discontent_post_aspects])
       @aspect_id =  params[:discontent_post_aspects].first
-      current_user.journals.build(:type_event=>name_of_model_for_param+"_update", :project => @project, :body=>"#{@post.content[0..12]}:#{@post.id}").save!
+      current_user.journals.build(:type_event=>name_of_model_for_param+"_update", :project => @project, :body=>trim_content(@post.content), :first_id=> @post.id).save!
     end
     respond_to do |format|
       format.html
@@ -345,7 +345,7 @@ class Discontent::PostsController < PostsController
       @post_note.type_field = params[:type_field]
       @post_note.user_id = current_user.id
       @type = params[:type_field]
-      current_user.journals.build(:type_event=>'my_discontent_note', :user_informed => @post.user, :project => @project, :body=>"#{@post_note.content[0..24]}:#{@post.id}", :viewed=> false).save!
+      current_user.journals.build(:type_event=>'my_discontent_note', :user_informed => @post.user, :project => @project, :body=>trim_content(@post_note.content), :first_id => @post.id,:personal => true, :viewed=> false).save!
 
       if @post.post_notes(@type.to_i).size == 0
         @post.update_attributes(view_context.column_for_type_field(@type.to_i) => 'f')

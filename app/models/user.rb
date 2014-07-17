@@ -217,6 +217,7 @@ class User < ActiveRecord::Base
   def add_score_by_type(project, score, type = :score_g)
     ps = self.core_project_scores.by_project(project).first_or_create
     ps.update_attributes!(:score => score +ps.score, type => ps.read_attribute(type)+score)
+    Award.reward(:user => self, :old_score => ps.score-score, :project=> project, :score => ps.score, :type => 'max')
     # self.user_project_scores(project).update_attributes!(:score => score+self.score, type => self.read_attribute(type)+score)
   end
   private
