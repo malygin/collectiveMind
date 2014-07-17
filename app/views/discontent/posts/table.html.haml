@@ -87,10 +87,8 @@
                         .body
                           .slimScrollDiv
                             %ul.news-list
-                              -if [4,5,6].include? @project.status
-                                =render partial:'post_short', collection: @aspect_post.aspect_posts.by_status([0,1]).created_order
-                              -else
-                                =render partial:'post_short', collection: @aspect_post.aspect_posts.by_status(@status).created_order
+                              =render partial:'post_short', collection: @aspect_post.aspect_posts.by_status([0,1]).sort_by{|c| c.discontent_post.nil? ? 0 : 1}
+
 
                 #improve.tab-pane.fade
                   .row
@@ -115,7 +113,9 @@
             .body
               .slimScrollDiv
                 %ul.news-list
-                  -if @project.status == 6
+                  -if @project.status == 4
+                    =render partial:'post_short', collection: @aspect_post.aspect_posts.by_status([0,1]).created_order
+                  -elsif @project.status == 5 or @project.status == 6
                     =render partial:'post_short', collection: @aspect_post.aspect_posts.by_status([2,4]).created_order
                   -else
                     =render partial:'post_short', collection: @aspect_post.aspect_posts.by_status(@status).created_order

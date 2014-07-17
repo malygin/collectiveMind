@@ -56,6 +56,7 @@ class Discontent::Post < ActiveRecord::Base
 
   scope :not_view, ->(posts) { where("discontent_posts.id NOT IN (#{posts.join(", ")})") unless posts.empty? }
   scope :created_order, order("created_at DESC")
+  scope :updated_order, order("updated_at DESC")
 
   #scope :uniquely_whend, :select => 'distinct whend'
   #scope :uniquely_whered, :select => 'distinct whered'
