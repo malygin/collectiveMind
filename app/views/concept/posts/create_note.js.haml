@@ -7,7 +7,7 @@ $('#note_form_#{@type}').append(
 
 $('#note_form_#{@type}').addClass('border_note');
 -if @post.send(column_for_concept_type(@type.to_i)) == false
-  $("##{id_for_concept_type(@type.to_i)}").removeClass('color-blue color-green').addClass('color-red');
+  $("##{id_for_concept_type(@type.to_i)}").removeClass('color-blue color-green color-orange').addClass('color-red');
 
 $('#btn_note_#{@type}').removeClass('disabled');
 $('#post_note_#{@post_note.id}').effect("highlight", {color: '#f5cecd'}, 1000);

@@ -1,6 +1,6 @@
 -if post_field.note_size?(type_fd)
   %span.btn-danger Замечания:
-%ul{:id => "note_form_#{type_fd}", :class => "#{'border_note2' if post_field.note_size?(type_fd) }", :style => "list-style: disc inside;"}
+%ul{:id => "note_form_#{type_fd}", :class => "#{'border_note' if post_field.note_size?(type_fd) }", :style => "list-style: disc inside;"}
   -post_field.post_notes(type_fd).each do |dpn|
     %div{:id => "post_note_#{dpn.id}"}
       -if boss?

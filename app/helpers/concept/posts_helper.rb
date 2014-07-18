@@ -123,16 +123,16 @@ module Concept::PostsHelper
     if concept.negative.present?
       add_score+=1
     end
-    if concept.negative_r.present?
-      add_score+=1
-    end
     if concept.problems.present?
       add_score+=1
     end
     if concept.reality.present?
       add_score+=1
     end
-    if concept.concept_post.concept_post_resources.present?
+    if concept.concept_post.concept_post_resources.by_type('positive_r').present?
+      add_score+=1
+    end
+    if concept.concept_post.concept_post_resources.by_type('negative_r').present?
       add_score+=1
     end
     "#{(add_score/8.to_f)*100}%"

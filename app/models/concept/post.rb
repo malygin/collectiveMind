@@ -58,7 +58,7 @@
 
   end
 
-  def update_status_fields(pa,resor,res)
+  def update_status_fields(pa,resor_pos,res_pos,resor_neg,res_neg)
     aspect = self.post_aspects.first.discontent_aspect_id
     unless aspect.nil?
       if self.post_aspects.first.read_attribute('name') != pa["#{aspect}"]['name']
@@ -79,16 +79,18 @@
       if self.post_aspects.first.read_attribute('problems') != pa["#{aspect}"]['problems']
         self.stat_problems = nil
       end
-      if self.post_aspects.first.read_attribute('negative_r') != pa["#{aspect}"]['negative_r']
-        self.stat_negative_r = nil
-      end
     end
 
-    resources = self.concept_post_resources.pluck(:name) unless self.concept_post_resources.nil?
-    desc = self.concept_post_resources.pluck(:desc) unless self.concept_post_resources.nil?
+    resources_pos = self.concept_post_resources.by_type('positive_r').pluck(:name) unless self.concept_post_resources.by_type('positive_r').nil?
+    desc_pos = self.concept_post_resources.by_type('positive_r').pluck(:desc) unless self.concept_post_resources.by_type('positive_r').nil?
+    resources_neg = self.concept_post_resources.by_type('negative_r').pluck(:name) unless self.concept_post_resources.by_type('negative_r').nil?
+    desc_neg = self.concept_post_resources.by_type('negative_r').pluck(:desc) unless self.concept_post_resources.by_type('negative_r').nil?
 
-    unless resources == resor and desc == res
+    unless resources_pos == resor_pos and desc_pos == res_pos
       self.stat_positive_r = nil
+    end
+    unless resources_neg == resor_neg and desc_neg == res_neg
+      self.stat_negative_r = nil
     end
   end
 end

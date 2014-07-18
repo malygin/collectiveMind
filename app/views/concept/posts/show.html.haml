@@ -97,7 +97,7 @@
                     %th
                       Пояснение
                 %tbody
-                  - @post.concept_post_resources.each_with_index  do |r, index|
+                  - @post.concept_post_resources.by_type('positive_r').each_with_index  do |r, index|
                     %tr
                       %td
                         =index+1
@@ -137,7 +137,26 @@
                 -else
                   %span(class= "#{class_for_concept_type_field(@post,6)}" id= "negative_r")=t('form.negative_res')
 
-              .form-group.has-success= display_content(tp.negative_r)
+              %br
+              %br
+              %table.table.table-striped.table-bordered
+                %thead
+                  %tr
+                    %th
+                      ="#"
+                    %th
+                      Название
+                    %th
+                      Пояснение
+                %tbody
+                  - @post.concept_post_resources.by_type('negative_r').each_with_index  do |r, index|
+                    %tr
+                      %td
+                        =index+1
+                      %td
+                        =r.name
+                      %td
+                        =r.desc
               -if @project.status == 7
                 = render partial: 'concept/posts/note_list', :locals => {:post_field => @post,:type_fd => 6}
 

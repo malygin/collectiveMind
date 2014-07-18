@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140715163259) do
+ActiveRecord::Schema.define(:version => 20140717195746) do
 
   create_table "answers", :force => true do |t|
     t.string   "text"
@@ -147,6 +147,8 @@ ActiveRecord::Schema.define(:version => 20140715163259) do
     t.integer  "resource_id"
     t.datetime "created_at",  :null => false
     t.datetime "updated_at",  :null => false
+    t.integer  "project_id"
+    t.string   "type_res"
   end
 
   create_table "concept_post_votings", :force => true do |t|
@@ -955,6 +957,7 @@ ActiveRecord::Schema.define(:version => 20140715163259) do
     t.integer  "resource_id"
     t.datetime "created_at",     :null => false
     t.datetime "updated_at",     :null => false
+    t.integer  "project_id"
   end
 
   create_table "plan_post_actions", :force => true do |t|
@@ -1016,6 +1019,7 @@ ActiveRecord::Schema.define(:version => 20140715163259) do
     t.string   "type_res"
     t.datetime "created_at",  :null => false
     t.datetime "updated_at",  :null => false
+    t.integer  "project_id"
   end
 
   create_table "plan_post_notes", :force => true do |t|
@@ -1034,6 +1038,7 @@ ActiveRecord::Schema.define(:version => 20140715163259) do
     t.datetime "created_at",  :null => false
     t.datetime "updated_at",  :null => false
     t.string   "type_res"
+    t.integer  "project_id"
   end
 
   create_table "plan_post_stages", :force => true do |t|

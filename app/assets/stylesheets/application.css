@@ -130,7 +130,7 @@ hr {
     background: none;
 }
 .border_note {
-    border: 0.5px solid red !important;
+    border: 1px solid red !important;
 }
 .note_text {
     text-decoration: none !important;

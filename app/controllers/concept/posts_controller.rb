@@ -34,11 +34,11 @@ class Concept::PostsController < PostsController
 
      @project = Core::Project.find(params[:project])
      if @project.status == 9
-       pr.merge(Plan::PostResource.select("DISTINCT name as value").where("LOWER(name) like LOWER(?)", "%#{params[:term]}%")
+       pr.merge(Plan::PostResource.select("DISTINCT LOWER(name) as value").where("LOWER(name) like LOWER(?) AND project_id = ?", "%#{params[:term]}%", params[:project])
             .map {|d| {:value => d.value } })
-       pr.merge(Plan::PostMean.select("DISTINCT name as value").where("LOWER(name) like LOWER(?)", "%#{params[:term]}%")
+       pr.merge(Plan::PostMean.select("DISTINCT LOWER(name) as value").where("LOWER(name) like LOWER(?) AND project_id = ?", "%#{params[:term]}%", params[:project])
             .map {|d| {:value => d.value } })
-       pr.merge(Plan::PostActionResource.select("DISTINCT name as value").where("LOWER(name) like LOWER(?)", "%#{params[:term]}%")
+       pr.merge(Plan::PostActionResource.select("DISTINCT LOWER(name) as value").where("LOWER(name) like LOWER(?) AND project_id = ?", "%#{params[:term]}%", params[:project])
                 .map {|d| {:value => d.value } })
      end
 
@@ -103,15 +103,13 @@ class Concept::PostsController < PostsController
   def create
     @project = Core::Project.find(params[:project])
     @concept_post = Concept::Post.new
-    params[:cd]
-    #if params[:imp_stage]
-    #  if params[:cd].empty?
-    #
-    #  end
-    #end
     params[:pa].each do |pa|
       post_aspect = Concept::PostAspect.new(pa[1])
-      disc = Discontent::Post.find(pa[0]) unless
+      if pa[0] == '0'
+        disc = Discontent::Post.find(params[:cd].first) if params[:cd].present?
+      else
+        disc = Discontent::Post.find(pa[0])
+      end
       post_aspect.discontent = disc
       @concept_post.post_aspects << post_aspect
     end
@@ -122,9 +120,19 @@ class Concept::PostsController < PostsController
     @concept_post.project = @project
     @concept_post.imp_comment = params[:imp_comment] if params[:imp_comment]
     @concept_post.imp_stage = params[:imp_stage] if params[:imp_stage]
-    unless params[:resor].nil?
-      params[:resor].each_with_index do |r,i|
-        @concept_post.concept_post_resources.build(:name => r, :desc => params[:res][i])   if r!=''
+    #unless params[:resor].nil?
+    #  params[:resor].each_with_index do |r,i|
+    #    @concept_post.concept_post_resources.build(:name => r, :desc => params[:res][i])   if r!=''
+    #  end
+    #end
+    unless params[:resor_positive_r].nil?
+      params[:resor_positive_r].each_with_index do |r,i|
+        @concept_post.concept_post_resources.build(:name => r, :desc => params[:res_positive_r][i], :type_res => 'positive_r', :project_id => @project.id).save  if r!=''
+      end
+    end
+    unless params[:resor_negative_r].nil?
+      params[:resor_negative_r].each_with_index do |r,i|
+        @concept_post.concept_post_resources.build(:name => r, :desc => params[:res_negative_r][i], :type_res => 'negative_r', :project_id => @project.id).save  if r!=''
       end
     end
     #unless params['correct_disc'].nil?
@@ -152,7 +160,7 @@ class Concept::PostsController < PostsController
         end
         user_for_post.journals.build(:type_event=>'concept_post_save', :body=>trim_content(@concept_post.post_aspects.first.title),   :first_id => @concept_post.id,  :project => @project).save!
         aspect_id =  params[:asp_id]
-        format.html { redirect_to  action: "/project/#{@project.id}/concept/posts?asp=#{aspect_id}"  }
+        format.html { redirect_to  aspect_id.nil? ? "/project/#{@project.id}/concept/posts" : "/project/#{@project.id}/concept/posts?asp=#{aspect_id}" }
         format.json { render json: @concept_post, status: :created, location: @concept_post }
       else
         format.html { render action: "new" }
@@ -167,23 +175,38 @@ class Concept::PostsController < PostsController
     @project = Core::Project.find(params[:project])
 
     @concept_post = Concept::Post.find(params[:id])
-    @concept_post.update_status_fields(params[:pa],params[:resor],params[:res])
+    @concept_post.update_status_fields(params[:pa],params[:resor_positive_r],params[:res_positive_r],params[:resor_negative_r],params[:res_negative_r])
     #@concept_post.update_attributes(params[:concept_post])
     @concept_post.post_aspects.destroy_all
 
     params[:pa].each do |pa|
       post_aspect = Concept::PostAspect.new(pa[1])
-      disc = Discontent::Post.find(pa[0])
+      if pa[0] == '0'
+        disc = Discontent::Post.find(params[:cd].first) if params[:cd].present?
+      else
+        disc = Discontent::Post.find(pa[0])
+      end
       post_aspect.discontent = disc
       @concept_post.post_aspects << post_aspect
     end
-    @concept_post.concept_post_resources.destroy_all
-    unless params[:resor].nil?
-      params[:resor].each_with_index do |r,i|
-        @concept_post.concept_post_resources.build(:name => r, :desc => params[:res][i])  if r!=''
+    #@concept_post.concept_post_resources.destroy_all
+    #unless params[:resor].nil?
+    #  params[:resor].each_with_index do |r,i|
+    #    @concept_post.concept_post_resources.build(:name => r, :desc => params[:res][i])  if r!=''
+    #  end
+    #end
+    @concept_post.concept_post_resources.by_type('positive_r').destroy_all
+    unless params[:resor_positive_r].nil?
+      params[:resor_positive_r].each_with_index do |r,i|
+        @concept_post.concept_post_resources.build(:name => r, :desc => params[:res_positive_r][i], :type_res => 'positive_r', :project_id => @project.id).save  if r!=''
       end
     end
-
+    @concept_post.concept_post_resources.by_type('negative_r').destroy_all
+    unless params[:resor_negative_r].nil?
+      params[:resor_negative_r].each_with_index do |r,i|
+        @concept_post.concept_post_resources.build(:name => r, :desc => params[:res_negative_r][i], :type_res => 'negative_r', :project_id => @project.id).save  if r!=''
+      end
+    end
     #unless params['correct_disc'].nil?
     #  params['correct_disc'].each do |v|
     #    if v!= ''
@@ -205,7 +228,7 @@ class Concept::PostsController < PostsController
         params[:cd].each do |cd|
           Concept::PostDiscontent.create(post_id: @concept_post.id, discontent_post_id: cd.to_i)
         end
-        current_user.journals.build(:type_event=>'concept_post_update', :body => trim_content(@concept_post.name), :first_id=>@concept_post.id,  :project => @project).save!
+        current_user.journals.build(:type_event=>'concept_post_update', :body => trim_content(@concept_post.post_aspects.first.title), :first_id=>@concept_post.id,  :project => @project).save!
 
         format.html { redirect_to action: "show", :project => @project, :id => @concept_post.id }
         format.json { head :no_content }
