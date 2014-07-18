@@ -4,50 +4,106 @@
       .col-md-12
         %h3.color-orange
           3 этап: Формулирование проблемы. Ознакомьтесь перед началом работы!
-          %br
-
   .body
-    %br
-    %br
-    %section.widget
-      .body
-        .row
-          .col-md-6
-            #option_for_check_field(project="#{@project.id}" table_name="#{@table_name}")
-            %h3.color-orange
-              Правила работы на этапе "Формулирование проблемы"
-              %br
+    #carousel-example-generic.carousel.slide{"data-ride" => "carousel"}
+      / Indicators
+      %ol.carousel-indicators
+        %li.active{"data-slide-to" => "0", "data-target" => "#carousel-example-generic"}
+        %li{"data-slide-to" => "1", "data-target" => "#carousel-example-generic"}
+        %li{"data-slide-to" => "2", "data-target" => "#carousel-example-generic"}
+        %li{"data-slide-to" => "3", "data-target" => "#carousel-example-generic"}
+        %li{"data-slide-to" => "4", "data-target" => "#carousel-example-generic"}
+      / Wrapper for slides
+      .carousel-inner
+        .item.active
+          %img{alt: "", style: 'margin: auto;', src: "/assets/img/to_work/to_work_3_0.png"}/
+          -#.carousel-caption
+        .item
+          %img{alt: "", style: 'margin: auto;', src: "/assets/img/to_work/to_work_3_1.png"}/
+          -#.carousel-caption
+        .item
+          %img{alt: "", style: 'margin: auto;',src: "/assets/img/to_work/to_work_3_2.png"}/
+          -#.carousel-caption
+        .item
+          %img{alt: "", style: 'margin: auto;', src: "/assets/img/to_work/to_work_3_3.png"}/
+          -#.carousel-caption
+        .item
+          %img{alt: "", style: 'margin: auto;', src: "/assets/img/to_work/to_work_3_4.png"}/
+          -#.carousel-caption
+      / Controls
+      %a.left.carousel-control{"data-slide" => "prev", href: "#carousel-example-generic", role: "button"}
+        %span.glyphicon.glyphicon-chevron-left(style='color:#e5603b')
+      %a.right.carousel-control{"data-slide" => "next", href: "#carousel-example-generic", role: "button"}
+        %span.glyphicon.glyphicon-chevron-right(style='color:#e5603b')
 
-            %p 1) Просмотрев список поданных несовершенств, добавить нововведения к тем из них, которые на ваш взгляд можно решить
-            %p 2) При получении замечаний и рекомендаций по улучшению вашего нововведения от модератора, стараться следовать указаниям
-            %p 3) Ежедневно следить за обновлениями контента в рамках процедуры
-            %p 4) Писать содержательные сообщения
-            %p 5) Не оскорблять других участников и воздерживаться от необоснованной критики
 
-            %p Для получения максимально эффективного проекта советуем вам:
-            %p 1) Добавлять как можно больше нововведений, исправляющих одно или несколько несовершенств, выявленных на втором этапе
-            %p 2) Предлагать конструктивную критику любых предложенных нововведений от других участников, а также задавать как можно больше вопросов, тем самым улучшая предложенные идеи
-            %br
-            .control-group
-              %label.checkbox{:for => "check-field"}
-                %input#check-field{:name => "check-field", :type => "checkbox", :onchange => "user_check_field(this,'concept_posts_to_work');"}/
-                Не показывать в следующий раз
+%section.widget
+  .body
+    .row
+      .col-md-6
+        #option_for_check_field(project="#{@project.id}" table_name="#{@table_name}")
+        .control-group
+          %label.checkbox{:for => "check-field"}
+            %input#check-field{:name => "check-field", :type => "checkbox", :onchange => "user_check_field(this,'concept_posts_to_work');"}/
+            Не показывать в следующий раз
+      .col-md-6
+        =link_to "Приступить к работе!", @path_link, class: 'btn btn-lg btn-danger btn-block'
 
-            %br
-            =link_to "Приступить к работе!", @path_link, class: 'btn btn-danger btn-block'
 
-          .col-md-6
-            %h3.color-orange
-              Краткое описание этапа
-              %br
-            %p Эта стадия посвящена нововведениям, корректирующим несовершенства, выявленные на предыдущей стадии.
-            %p Любой участник может предложить для всеобщего обсуждения свою картину нововведений, функционирующих в будущем. Предложения требуются :
-            %p 1) плодотворные,
-            %p 2) безвредные,
-            %p 3) реалистические.
 
-            %p Поэтому автору каждого нововведения необходимо показать, что оно:
-            %p 1) скорректирует несовершенство,
-            %p 2) не вызовет вредных побочных эффектов,
-            %p 3) вполне может быть внедрено.
-            %p Для этого автору надо включить воображаемую машину времени и мысленно перенестись в недалекое будущее, где внедренные нововведения скорректировали актуальные несовершенства. «Вернувшись из будущего», автор должен описать то, что он там «увидел», по шаблону, содержащему компоненты 1)-3).
+
+
+
+-#%section.widget
+-#  %header
+-#    .row
+-#      .col-md-12
+-#        %h3.color-orange
+-#          3 этап: Формулирование проблемы. Ознакомьтесь перед началом работы!
+-#          %br
+-#
+-#  .body
+-#    %br
+-#    %br
+-#    %section.widget
+-#      .body
+-#        .row
+-#          .col-md-6
+-#            #option_for_check_field(project="#{@project.id}" table_name="#{@table_name}")
+-#            %h3.color-orange
+-#              Правила работы на этапе "Формулирование проблемы"
+-#              %br
+-#
+-#            %p 1) Просмотрев список поданных несовершенств, добавить нововведения к тем из них, которые на ваш взгляд можно решить
+-#            %p 2) При получении замечаний и рекомендаций по улучшению вашего нововведения от модератора, стараться следовать указаниям
+-#            %p 3) Ежедневно следить за обновлениями контента в рамках процедуры
+-#            %p 4) Писать содержательные сообщения
+-#            %p 5) Не оскорблять других участников и воздерживаться от необоснованной критики
+-#
+-#            %p Для получения максимально эффективного проекта советуем вам:
+-#            %p 1) Добавлять как можно больше нововведений, исправляющих одно или несколько несовершенств, выявленных на втором этапе
+-#            %p 2) Предлагать конструктивную критику любых предложенных нововведений от других участников, а также задавать как можно больше вопросов, тем самым улучшая предложенные идеи
+-#            %br
+-#            .control-group
+-#              %label.checkbox{:for => "check-field"}
+-#                %input#check-field{:name => "check-field", :type => "checkbox", :onchange => "user_check_field(this,'concept_posts_to_work');"}/
+-#                Не показывать в следующий раз
+-#
+-#            %br
+-#            =link_to "Приступить к работе!", @path_link, class: 'btn btn-danger btn-block'
+-#
+-#          .col-md-6
+-#            %h3.color-orange
+-#              Краткое описание этапа
+-#              %br
+-#            %p Эта стадия посвящена нововведениям, корректирующим несовершенства, выявленные на предыдущей стадии.
+-#            %p Любой участник может предложить для всеобщего обсуждения свою картину нововведений, функционирующих в будущем. Предложения требуются :
+-#            %p 1) плодотворные,
+-#            %p 2) безвредные,
+-#            %p 3) реалистические.
+-#
+-#            %p Поэтому автору каждого нововведения необходимо показать, что оно:
+-#            %p 1) скорректирует несовершенство,
+-#            %p 2) не вызовет вредных побочных эффектов,
+-#            %p 3) вполне может быть внедрено.
+-#            %p Для этого автору надо включить воображаемую машину времени и мысленно перенестись в недалекое будущее, где внедренные нововведения скорректировали актуальные несовершенства. «Вернувшись из будущего», автор должен описать то, что он там «увидел», по шаблону, содержащему компоненты 1)-3).
