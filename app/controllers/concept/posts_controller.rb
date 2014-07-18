@@ -225,8 +225,10 @@ class Concept::PostsController < PostsController
     respond_to do |format|
       if @concept_post.save!
         @concept_post.concept_post_discontents.destroy_all
-        params[:cd].each do |cd|
-          Concept::PostDiscontent.create(post_id: @concept_post.id, discontent_post_id: cd.to_i)
+        unless params[:cd].nil?
+          params[:cd].each do |cd|
+            Concept::PostDiscontent.create(post_id: @concept_post.id, discontent_post_id: cd.to_i)
+          end
         end
         current_user.journals.build(:type_event=>'concept_post_update', :body => trim_content(@concept_post.post_aspects.first.title), :first_id=>@concept_post.id,  :project => @project).save!
 
