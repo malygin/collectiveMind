@@ -1,6 +1,6 @@
 -if  user
     .sender.pull-left
-        .icon
+        .icon(style="text-align: center;line-height: 53px;")
             = link_to user_path( @project,user ) do
                 = image_tag user.avatar.url(:thumb),  class: "img-circle"
                 - if not  user.awards.empty?

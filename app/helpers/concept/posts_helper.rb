@@ -97,6 +97,18 @@ module Concept::PostsHelper
     end
   end
 
+  def status_for_concept_type(pa)
+    stat_p = Concept::Post.stat_fields_positive(pa.id)
+    stat_n = Concept::Post.stat_fields_negative(pa.id)
+    if stat_p.present?
+      content_tag :span, 'Проверено', class: 'color-green'
+    elsif stat_n.present?
+      content_tag :span, 'Замечания', class: 'color-red'
+    else
+      content_tag :span, 'Проверяется'
+    end
+  end
+
   def class_for_concept_type_field(post,type_fd)
     stat = post.send(column_for_concept_type(type_fd))
     if stat == true

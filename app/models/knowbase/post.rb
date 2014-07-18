@@ -1,9 +1,9 @@
 class Knowbase::Post < ActiveRecord::Base
   attr_accessible :content, :title, :stage, :aspect_id
 
-  validates :content, presence: true
+  #validates :content, presence: true
   validates :title, presence: true
-  validates :stage, presence: true
+  #validates :stage, presence: true
 
   belongs_to :project, :class_name => "Core::Project"
   belongs_to :discontent_aspect, :class_name => 'Discontent::Aspect', :foreign_key => :aspect_id

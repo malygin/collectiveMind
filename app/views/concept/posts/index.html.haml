@@ -57,11 +57,7 @@
                             =link_to 'Без названия' , concept_post_path(@project, pa)
 
                         %td
-                          -if class_for_concept_type(pa) == 'panel-p'
-                            %span.color-green Проверено
-
-                          -else
-                            Проверяется
+                          = status_for_concept_type(pa)
                         %td
                           %span.h4.color-orange
                             =status_for_concept(pa.post_aspects.first)
