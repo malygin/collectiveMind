@@ -1,18 +1,12 @@
 %ul#side-nav.side-nav
   %li.panel#stage_life_tape{class:  @project.stage_style(:life_tape_posts) }
-
-    -#=link_to "/project/#{@project.id}/life_tape/posts" ,  class: "stage_menu1" do
-    -#  %i.fa.fa-edit
-    -#  %span.name.h4.no-margin.text-left
-    -#    1.
-    -#    =@project.status_title(:life_tape_posts)
     - if request.original_url.include? 'life_tape' or request.original_url.include? '/1/essay'
       %a.stage_menu1.accordion-toggle(data-toggle="collapse" data-parent="#side-nav" href="#life_tape")
         %i.fa.fa-edit
         %span.name.h4.no-margin.text-left
           1.
           =@project.status_title(:life_tape_posts)
-      %ul#life_tape.panel-collapse.open.in
+      %ul#life_tape.panel-collapse.collapse
         %li
           = link_to life_tape_posts_path(@project, :help => true), :class => 'color-teal' do
             Помощь по этапу
@@ -30,8 +24,6 @@
               &nbsp;
               =" #{asp.content}"
               -#%b="(#{post.comments.count})"
-
-
     -else
       =link_to "/project/#{@project.id}/life_tape/posts" ,  class: "stage_menu1" do
         %i.fa.fa-edit
@@ -41,10 +33,6 @@
 
   %li.panel#stage_discontent
     - if @project.status > 2
-      -#= link_to "/project/#{@project.id}/discontent/posts", class:"stage_menu2" do
-      -#  %h4.no-margin.text-left
-      -#    2.
-      -#    =@project.status_title(:discontent_posts)
       - if request.original_url.include? 'discontent' or request.original_url.include? '/2/essay'
         %a.stage_menu2.accordion-toggle(data-toggle="collapse" data-parent="#side-nav" href="#discontent")
           %i.fa.fa-bar-chart-o
@@ -52,7 +40,7 @@
             2.
             =@project.status_title(:discontent_posts)
 
-        %ul#discontent.panel-collapse.open.in
+        %ul#discontent.panel-collapse.collapse
           %li
             = link_to discontent_posts_path(@project, :help => true), :class => 'color-teal' do
               Помощь по этапу
@@ -90,17 +78,13 @@
 
   %li.panel#stage_concept
     - if  @project.status > 6
-      -#= link_to "/project/#{@project.id}/concept/posts" , class:"stage_menu3" do
-      -#  %h4.no-margin.text-left
-      -#    3.
-      -#    =@project.status_title(:concept_posts)
       - if request.original_url.include? 'concept' or request.original_url.include? '/3/essay'
         %a.stage_menu3.accordion-toggle(data-toggle="collapse" data-parent="#side-nav" href="#concept")
           %i.fa.fa-magic
           %span.name.h4.no-margin.text-left
             3.
             =@project.status_title(:concept_posts)
-        %ul#concept.panel-collapse.open.in
+        %ul#concept.panel-collapse.collapse
           %li
             = link_to concept_posts_path(@project, :help => true), :class => 'color-teal' do
               Помощь по этапу
@@ -145,7 +129,7 @@
             =@project.status_title(:plan_posts)
           %br
           %small.text-center=t('stages.plans', count: @project.plan_post.count)
-        %ul#plan.panel-collapse.open.in
+        %ul#plan.panel-collapse.collapse
           -if @project.status > 8
             %li
               = link_to essay_posts_path(@project, 4), :class => 'color-green' do
@@ -180,7 +164,7 @@
             =@project.status_title(:estimate_posts)
           %br
           %small.text-center=t('stages.estimates', count: @project.estimate_posts.count)
-        %ul#estimate.panel-collapse.open.in
+        %ul#estimate.panel-collapse.collapse
           -if @project.status > 10
             %li
               = link_to essay_posts_path(@project, 5), :class => 'color-green' do

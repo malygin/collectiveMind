@@ -67,7 +67,7 @@ function closeNavigation(){
     $accordion.siblings(".accordion-toggle").addClass("collapsed");
     resetContentMargin();
     var $sidebar = $('#sidebar');
-    if ($(window).width() < 768 && $sidebar.is('.in')){
+    if ($(window).width() <= 768 && $sidebar.is('.in')){
         $sidebar.collapse('hide');
     }
 }

@@ -1,4 +1,4 @@
--#= render 'shared/help/new_concept'
+%h4=link_to ' << Вернуться к списку', "/project/#{@project.id}/concept/posts/"
 = form_for  @post, :url => {:project => @project.id, :asp_id => params[:asp_id].present? ? params[:asp_id] : params[:asp], :imp_comment => params[:imp_comment], :imp_stage => params[:imp_stage], :action => @post.persisted? ? 'update' : 'create'},   :html => { :class => 'new_or_edit' } do |f|
 
   %div.tab-content
@@ -57,14 +57,14 @@
             .col-md-12
               .text-center
                 %h3.color-orange
-                  %b A 1
-                %p.h3.color-orange
+                  %b A1:
+
                   =t('form.novation_what')
                 %br
 
           .row
             .col-md-6
-              .text-right
+              .text-right.hidden-sm
                 %i
                   %h6 Предположим, вы оказались в будущем. Что там есть такого, что исправляет несовершенство?
                   %h6.color-green Пример:
@@ -88,13 +88,13 @@
             .col-md-12
               .text-center
                 %h3.color-orange
-                  %b A 2
-                %p.h3.color-orange
+                  %b A2:
+
                   =t('form.novation_how')
                 %br
           .row
             .col-md-6
-              .text-right
+              .text-right.hidden-sm
                 %i
                   %h6.color-green Пример:
                   %p Трава газона и декоративные растения на клумбе будут привлекательны на вид и предотвращать появление пыли.
@@ -107,15 +107,14 @@
             .col-md-12
               .text-center
                 %h3.color-orange
-                  %b B 1
+                  %b B1:
 
-                %p.h3.color-orange
                   =t('form.cond')
                 %br
 
           .row
             .col-md-6
-              .text-right
+              .text-right.hidden-sm
                 %i
                   %h6 То есть какие должны поддерживаться УСЛОВИЯ и разрешаться ЗАДАЧИ
                   %h6.color-green Пример:
@@ -131,14 +130,13 @@
             .col-md-12
               .text-center
                 %h3.color-orange
-                  %b B 2
-                %p.h3.color-orange
+                  %b B2:
                   =t('form.cond_res')
                 %br
 
           .row
             .col-md-6
-              .text-right
+              .text-right.hidden-sm
                 %i
                   %h6
                     Ресурсами могут быть методы, технические, организационные или финансовые средства, человеческие силы и вообще все,
@@ -190,14 +188,13 @@
             .col-md-12
               .text-center
                 %h3.color-orange
-                  %b C 1
-                %p.h3.color-orange
+                  %b C1:
                   =t('form.negative_h')
                 %br
 
           .row
             .col-md-6
-              .text-right
+              .text-right.hidden-sm
                 %i
                   %h6 Напишите, какие неприятности могут возникнуть, если будут созданы и поддерживаться должные УСЛОВИЯ и разрешаться ЗАДАЧИ.
                   %br
@@ -214,14 +211,13 @@
             .col-md-12
               .text-center
                 %h3.color-orange
-                  %b C 2
-                %p.h3.color-orange
+                  %b C2:
                   =t('form.negative_res')
                 %br
 
           .row
             .col-md-6
-              .text-right
+              .text-right.hidden-sm
                 %i
                   %h6 Что должно иметься в будущем, препятствующее возможному возникновению неприятностей?
                   %br
@@ -262,14 +258,13 @@
             .col-md-12
               .text-center
                 %h3.color-orange
-                  %b D 1
-                %p.h3.color-orange
+                  %b D1:
                   =t('form.problems')
                 %br
 
           .row
             .col-md-6
-              .text-right
+              .text-right.hidden-sm
                 %i
                   %h6 Обоснуйте, что "игра стоит свеч".
                   %br
@@ -284,14 +279,13 @@
             .col-md-12
               .text-center
                 %h3.color-orange
-                  %b D 2
-                %p.h3.color-orange
+                  %b D2:
                   =t('form.reality')
                 %br
 
           .row
             .col-md-6
-              .text-right
+              .text-right.hidden-sm
                 %i
                   %h6 Покажите, что нужные для нововведения ресурсы несложно и недорого создать
                   %br

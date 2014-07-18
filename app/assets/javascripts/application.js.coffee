@@ -165,6 +165,9 @@ $('#sortable').sortable update: (event, ui) ->
         add_list: true
 
 $(window).load ->
+  if ($(window).width() > 1022)
+    $('.panel-collapse.collapse').addClass('in')
+
   $('textarea').autosize()
   activate_htmleditor()
   $select = $("#selectize_tag").selectize
