@@ -101,6 +101,9 @@ module JournalHelper
 
       when 'reply_concept_comment'
         "добавил(а) комментарий '#{j.body}...' в ответ на ваш "+  link_to( j.body2, "/project/#{project}/concept/posts/#{j.first_id}?viewed=true#comment_#{j.second_id}")
+      when 'my_concept_note'
+        s = j.body.split(':')
+        "добавил(а) замечание  '#{s[0]}...' к "+  link_to('вашему нововведению', "/project/#{project}/concept/posts/#{j.first_id}?viewed=true")
 
       # PLANS
       when 'plan_comment_save'
@@ -193,10 +196,7 @@ module JournalHelper
         "вы получили #{s[0]} баллов за полезный комментарий!"
         # "вы получили #{s[0]} баллов "  +  link_to("за полезный комментарий ", "/project/#{project}/#{s[1].gsub('#', "?viewed=#{j.id}#")}" )
 
-          when 'my_concept_note'
-        s = j.body.split(':')
-        "добавил(а) замечание  '#{s[0]}...' к "+  link_to('вашему нововведению', "/project/#{project}/concept/posts/#{s[1]}?viewed=#{j.id}")
-			else
+       else
 				'что то другое'
 		end 
 	end
