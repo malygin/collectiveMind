@@ -339,6 +339,16 @@ module ApplicationHelper
     end
   end
 
-
+  def field_for_journal(post)
+    if post.instance_of? LifeTape::Post
+      post.discontent_aspects.first.content unless post.discontent_aspects.first.nil?
+    elsif post.instance_of? Concept::Post
+      post.post_aspects.first.title unless post.post_aspects.first.nil?
+    elsif post.instance_of? Plan::Post
+      post.name
+    else
+      post.content
+    end
+  end
 
 end
