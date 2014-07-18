@@ -405,7 +405,7 @@ class Concept::PostsController < PostsController
      if @post.post_notes(@type.to_i).size == 0
        @post.update_attributes(view_context.column_for_concept_type(@type.to_i) => 'f')
      end
-     current_user.journals.build(:type_event=>'my_concept_note', :user_informed => @post.user, :project => @project, :body=>"#{@post_note.content[0..24]}:#{@post.id}", :viewed=> false).save!
+     current_user.journals.build(:type_event=>'my_concept_note', :user_informed => @post.user, :project => @project,  :body=>trim_content(@post_note.content), :first_id => @post.id,:personal => true,  :viewed=> false).save!
 
      respond_to do |format|
        if @post_note.save
