@@ -8,6 +8,14 @@
 *= require bootstrap3-editable/bootstrap-editable
 */
 /* require_tree .*/
+
+ul.panel-collapse.in{
+    width: 200px;
+}
+ul.panel-collapse.collapse{
+    height: 0px !important;
+}
+
 .disabled_award{
     opacity: 0.2;
 }
@@ -17122,10 +17130,10 @@ input.parsley-error {
   padding: 8px 20px;
 }
 .side-nav li a.accordion-toggle:not(.collapsed) + .panel-collapse li.active a {
-  background: rgba(13, 13, 13, 0.5);
+    background: #363837;
 }
 .side-nav li a.accordion-toggle:not(.collapsed) + .panel-collapse li a:hover {
-  background: rgba(13, 13, 13, 0.5);
+    background: #363837;
 }
 .side-nav > li.active > a {
   border-left: 4px solid white;
@@ -19550,7 +19558,8 @@ ol.text-list {
 }
 @media (max-width: 1048px) and (min-width: 768px) {
   .sidebar .panel-collapse.open li a {
-    width: 140px;
+    width: 200px;
+      background: #484f4c;
   }
 }
 
