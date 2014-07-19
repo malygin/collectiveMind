@@ -16,7 +16,6 @@
 #= require wizard/jquery.maskedinput
 #= require wizard/select2
 #= require bootstrap3-editable/bootstrap-editable
-#= require wizard/jquery.pjax
 #= require jquery.autosize
 #= require wizard/jquery.icheck
 
