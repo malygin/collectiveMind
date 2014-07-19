@@ -164,7 +164,7 @@ $('#sortable').sortable update: (event, ui) ->
         add_list: true
 
 $(window).load ->
-  if ($(window).width() > 1022)
+  if ($(window).width() > 1030)
     $('ul.panel-collapse.collapse').removeClass('collapse').addClass('open in')
 
   $('textarea').autosize()
