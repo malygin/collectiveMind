@@ -16,7 +16,7 @@
         %span.text-danger Против:
         =post.final_votings.by_negative.uniq_user.size
         |
-        %span.text-info Всего:
+        %span.text-info Голосовавших:
         =@vote_all
         |
         =link_to({:controller => post.class.name.underscore.pluralize, :action => :set_required, :id => post.id, :project => @project},:remote => true,:method => :put,:id => "set_required_#{post.id}", :class => "note_text") do
@@ -27,12 +27,12 @@
       -if boss? and @project.status == 8 and post.class.name.deconstantize == "Concept"
         |
         %span.text-success Голосов:
-        =post.post_aspects.first.final_votings.by_dispost(dispost.id).size
+        =post.post_aspects.first.final_votings.by_dispost(post.dispost).size
         |
-        %span.text-success Голосовавших:
-        =post.post_aspects.first.final_votings.by_dispost(dispost.id).uniq_user.size
+        %span.text-success Всего за пост:
+        =post.post_aspects.first.final_votings.by_dispost(post.dispost).uniq_user.size
         |
-        %span.text-info Всего:
+        %span.text-info Голосовавших:
         =@vote_all
       -if boss? and @project.status == 11 and post.class.name.deconstantize == "Plan"
         |

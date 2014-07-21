@@ -54,6 +54,10 @@
      self.post_aspects.first.content
   end
 
+  def dispost
+    self.post_aspects.first.discontent_aspect_id
+  end
+
   def resource
 
   end
