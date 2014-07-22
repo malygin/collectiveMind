@@ -5,9 +5,12 @@
     $("#{escape_javascript(render :partial => 'post_concept', :object => @cond )}").insertBefore('#tr_new_concept_#{@post_stage.id}');
     -#var rowspan = parseInt($('#td_concept_#{@post_aspect.id}').attr("rowSpan"));
     -#$('#td_concept_#{@post_aspect.id}').attr('rowspan', rowspan + 1);
-    var rowspan_main = parseInt($('.td_stage_#{@post_stage.id}').attr("rowSpan"));
-    $('.td_stage_#{@post_stage.id}').attr('rowspan', rowspan_main + 2);
-    $('.td_plus_concept_#{@concept.id}').html('<div class="label label-success">Добавлено</div>')
+    -#var rowspan_main = parseInt($('.td_stage_#{@post_stage.id}').attr("rowSpan"));
+    -#$('.td_stage_#{@post_stage.id}').attr('rowspan', rowspan_main + 2);
+    -#var rowspan_main = parseInt($('.td_concept_#{@cond.id}').attr("rowSpan"));
+    -#$('.td_concept_#{@cond.id}').attr('rowspan', rowspan_main + 1);
+    -if @concept
+      $('.td_plus_concept_#{@concept.id}').html('<div class="label label-success">Добавлено</div>')
   -else
     alert("Ошибка при добавлении! Попробуйте еще раз.");
 - else

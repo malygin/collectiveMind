@@ -1,20 +1,20 @@
 -if table
   -if light_concept.name.present?
-    .text-center
+    .text-left
       %h5.color-orange
         %b A1.
         =t('form.novation_what')
       %p=light_concept.name
 
   -if light_concept.content.present?
-    .text-center
+    .text-left
       %h5.color-orange
         %b A2.
         =t('form.novation_how')
       %p=light_concept.content
 
 -else
-  %div.collapse.text-center{:id => "collapse_plus_concept_#{dispost.id}_#{light_concept.id}"}
+  %div.collapse.text-left{:id => "collapse_plus_concept_#{dispost.id}_#{light_concept.id}"}
     -if light_concept.name.present?
       .color-teal
         %b A1.

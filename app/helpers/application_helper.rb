@@ -207,8 +207,16 @@ module ApplicationHelper
     2 + stage.plan_post_aspects.size + stage.actions_rowcount.size + (stage.plan_post_aspects.size > 0 ? stage.plan_post_aspects.size : 0)
   end
 
+  def rowspan_concept(concept)
+    2 + concept.plan_post_actions.size
+  end
+
   def rowspan_stage_show(stage)
     1 + stage.plan_post_aspects.size + stage.actions_rowcount.size
+  end
+
+  def rowspan_concept_show(concept)
+    1 + concept.plan_post_actions.size
   end
 
   def color_stage(stage)

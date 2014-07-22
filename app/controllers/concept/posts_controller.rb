@@ -29,16 +29,16 @@ class Concept::PostsController < PostsController
      #if params[:term].length > 1
      #end
      #pr.merge(Concept::PostResource.select("DISTINCT name as value").where("LOWER(name) like LOWER(?)", "%#{params[:term]}%")
-     pr.merge(Concept::PostResource.select("DISTINCT LOWER(name) as value").joins(:concept_post).where("LOWER(name) like LOWER(?) AND concept_posts.project_id = ?", "%#{params[:term]}%", params[:project] )
+     pr.merge(Concept::PostResource.select("DISTINCT name as value").joins(:concept_post).where("LOWER(name) like LOWER(?) AND concept_posts.project_id = ?", "%#{params[:term]}%", params[:project] )
               .map {|d| {:value => d.value } })
 
      @project = Core::Project.find(params[:project])
      if @project.status == 9
-       pr.merge(Plan::PostResource.select("DISTINCT LOWER(name) as value").where("LOWER(name) like LOWER(?) AND project_id = ?", "%#{params[:term]}%", params[:project])
+       pr.merge(Plan::PostResource.select("DISTINCT name as value").where("LOWER(name) like LOWER(?) AND project_id = ?", "%#{params[:term]}%", params[:project])
             .map {|d| {:value => d.value } })
-       pr.merge(Plan::PostMean.select("DISTINCT LOWER(name) as value").where("LOWER(name) like LOWER(?) AND project_id = ?", "%#{params[:term]}%", params[:project])
+       pr.merge(Plan::PostMean.select("DISTINCT name as value").where("LOWER(name) like LOWER(?) AND project_id = ?", "%#{params[:term]}%", params[:project])
             .map {|d| {:value => d.value } })
-       pr.merge(Plan::PostActionResource.select("DISTINCT LOWER(name) as value").where("LOWER(name) like LOWER(?) AND project_id = ?", "%#{params[:term]}%", params[:project])
+       pr.merge(Plan::PostActionResource.select("DISTINCT name as value").where("LOWER(name) like LOWER(?) AND project_id = ?", "%#{params[:term]}%", params[:project])
                 .map {|d| {:value => d.value } })
      end
 

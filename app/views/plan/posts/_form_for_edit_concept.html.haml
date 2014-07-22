@@ -1,9 +1,19 @@
-#modal_edit_concept.modal.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"}
+#modal_edit_concept.modal.fade{"aria-hidden" => "true", "data-backdrop" => "false", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"}
   .modal-dialog.modal-lg
     .modal-content
       .modal-header
         %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} &times;
-        %h4#myModalLabel.modal-title Редактирование нововведения
+        %h4#myModalLabel.modal-title
+          Редактирование нововведения
+          в рамках этапа:
+          %br
+          -if @post_stage.date_begin and @post_stage.date_end
+            %small.color-green
+              =Russian::strftime(@post_stage.date_begin, "%d %b %Y")
+              ="-"
+              =Russian::strftime(@post_stage.date_end, "%d %b %Y")
+            %br
+          .color-teal=@post_stage.name
       .modal-body
         =render :partial => 'form_for_light_concept', :object => form_for_edit_concept
         %br
