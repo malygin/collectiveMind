@@ -660,7 +660,7 @@ $.fn.extend popoverClosable: (options) ->
       data:
         group_id: group_id
 
-$ ->
+$(window).load ->
   $(window).scroll ->
     unless $(this).scrollTop() is 0
       $("#toTop").fadeIn()
@@ -669,9 +669,9 @@ $ ->
     return
 
   $("#toTop").click ->
-    $("body,html").animate
+    $("body,html").animate {
       scrollTop: 0
-    , 800
+    }, 800
 
 $("#wizard").bootstrapWizard onTabShow: (tab, navigation, index) ->
   $total = navigation.find("li").length
@@ -693,5 +693,4 @@ $("#wizard").bootstrapWizard onTabShow: (tab, navigation, index) ->
 #    $("#send_post_concept").submit()
   if $current is 3
     render_concept_side()
-
 
