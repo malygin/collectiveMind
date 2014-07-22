@@ -63,7 +63,7 @@ end
 def to_work_redirect
   @project = Core::Project.find(params[:project])
   path_link = "/project/#{@project.id}/" + current_model.table_name.sub('_posts','/posts') + "/to_work"
-  able = ['life_tape_posts','discontent_posts','concept_posts'].include? current_model.table_name
+  able = ['life_tape_posts','discontent_posts','concept_posts','plan_posts','estimate_posts'].include? current_model.table_name
   check = get_check_field?(current_model.table_name + '_to_work')
   redirect_to path_link if params[:asp].nil? and able and !check or params[:help]
 end
@@ -519,12 +519,14 @@ def index
       else
         @path_link = "/project/#{@project.id}/" + current_model.table_name.sub('_posts','/posts')
       end
-    else
+    elsif ["Discontent","Concept"].include?(current_model)
       if @project.proc_aspects.first
         @path_link = "/project/#{@project.id}/" + current_model.table_name.sub('_posts','/posts') + "?asp=#{@project.proc_aspects.first.id}"
       else
         @path_link = "/project/#{@project.id}/" + current_model.table_name.sub('_posts','/posts')
       end
+    else
+      @path_link = "/project/#{@project.id}/" + current_model.table_name.sub('_posts','/posts')
     end
     @table_name = current_model.table_name.sub('_posts','')
 
