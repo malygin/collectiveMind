@@ -193,6 +193,7 @@ class User < ActiveRecord::Base
       when :plus_post
 
         self.add_score_by_type(h[:project],50, :score_g)  if h[:post].instance_of? Concept::Post
+        self.add_score_by_type(h[:project],500, :score_g)  if h[:post].instance_of? Plan::Post
 
         if h[:post].instance_of? Discontent::Post
           self.add_score_by_type(h[:project],25, :score_g)
