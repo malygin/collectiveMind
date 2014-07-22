@@ -1,2 +1,3 @@
 $('#modal_new_stage').modal('hide');
-$('#name_post_stage_#{@post_stage.id}').html('#{@post_stage.name}')
+-#$('#name_post_stage_#{@post_stage.id}').html('#{@post_stage.name}');
+$('#table_stage_list').html("#{escape_javascript(render :partial => 'post_stage', :collection => @post.post_stages )}");

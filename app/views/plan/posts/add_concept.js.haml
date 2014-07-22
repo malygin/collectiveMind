@@ -5,17 +5,17 @@ $('#modal_concept').modal('show');
 -#-else
 -#  $('#modal_concept').modal('hide');
 
-  -#-unless @cond_add.nil?
-  -#  -@cond_add.each_with_index do |cp,i|
-  -#    $("#plan_content_form").append('#{escape_javascript(render partial: 'first_cond', object: cp )}');
-  -#    -#var func = "'#asp_#{cp.id}'"
-  -#    -if cp.first_stage == 0
-  -#      $("#theall ul").append('<li><a href="#asp_#{cp.id}" data-toggle="tab"><span class="glyphicon glyphicon-remove text-danger pull-right" style="cursor:pointer;text-decoration:none;font-size:15px;" onclick="remove_plan_concept(this,#{cp.id});"></span>#{cp.title}</a></li>');
-  -#
-  -#      -if @cond_add.size == 1
-  -#        $('#theall ul a[href="#asp_#{cp.id}"]').tab('show');
-  -#    -else
-  -#      $("#thefirst ul").append('<li><a href="#asp_#{cp.id}" data-toggle="tab"><span class="glyphicon glyphicon-remove text-danger pull-right" style="cursor:pointer;text-decoration:none;font-size:15px;" onclick="remove_plan_concept(this,#{cp.id});"></span>#{cp.title}</a></li>');
-  -#      -if @cond_add.size == 1
-  -#        $('#thefirst ul a[href="#asp_#{cp.id}"]').tab('show');
-  -#  autocomplete_initialized();
+-#-unless @cond_add.nil?
+-#  -@cond_add.each_with_index do |cp,i|
+-#    $("#plan_content_form").append('#{escape_javascript(render partial: 'first_cond', object: cp )}');
+-#    -#var func = "'#asp_#{cp.id}'"
+-#    -if cp.first_stage == 0
+-#      $("#theall ul").append('<li><a href="#asp_#{cp.id}" data-toggle="tab"><span class="glyphicon glyphicon-remove text-danger pull-right" style="cursor:pointer;text-decoration:none;font-size:15px;" onclick="remove_plan_concept(this,#{cp.id});"></span>#{cp.title}</a></li>');
+-#
+-#      -if @cond_add.size == 1
+-#        $('#theall ul a[href="#asp_#{cp.id}"]').tab('show');
+-#    -else
+-#      $("#thefirst ul").append('<li><a href="#asp_#{cp.id}" data-toggle="tab"><span class="glyphicon glyphicon-remove text-danger pull-right" style="cursor:pointer;text-decoration:none;font-size:15px;" onclick="remove_plan_concept(this,#{cp.id});"></span>#{cp.title}</a></li>');
+-#      -if @cond_add.size == 1
+-#        $('#thefirst ul a[href="#asp_#{cp.id}"]').tab('show');
+-#  autocomplete_initialized();

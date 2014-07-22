@@ -6,9 +6,10 @@
           %b="Этап #{index+1}. "
           =stage.name
         - unless stage.plan_post_aspects.nil?
-          %ul.concept_side_list.panel-collapse.collapse.in{:id => "sub-menu-#{index}-collapse"}
+          %ul.concept_side_list.panel-collapse.in{:id => "sub-menu-#{index}-collapse"}
             - stage.plan_post_aspects.each_with_index do |concept|
               %li.concept_side{:id => "li_concept_#{concept.id}"}
                 -#=link_to get_concept_plan_post_path(@project, @post, :con_id => concept.id), :method => :get, :remote => true do
-                %a{:href => "#", :onclick => "get_concept_save(#{concept.id})"}
+                -#%a{:href => "#", :onclick => "get_concept_save(#{concept.id})"}
+                =link_to get_concept_plan_post_path(@project, @post, :con_id => concept.id, :view_post_concept => true), :method => :get, :remote => true do
                   =concept.title

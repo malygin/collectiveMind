@@ -1,9 +1,24 @@
-#modal_new_action.modal.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :style => "display: none;", :tabindex => "-1"}
+#modal_new_action.modal.fade{"aria-hidden" => "true", "data-backdrop" => "false", "aria-labelledby" => "myModalLabel", :role => "dialog", :style => "display: none;", :tabindex => "-1"}
   .modal-dialog
     .modal-content
       .modal-header
         %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} ×
-        %h3#myModalLabel.modal-title Добавление мероприятия к нововведению
+        %h4#myModalLabel.modal-title(style="line-height:20px;" )
+          Добавление мероприятия к нововведению:
+          .color-teal=@post_aspect.title
+          -unless @post_aspect.plan_post_resources.by_type('positive_r').nil?
+            - @post_aspect.plan_post_resources.by_type('positive_r').each do |res|
+              .label.label-danger=res.name
+            %br
+          в рамках этапа:
+          %br
+          -if @post_stage.date_begin and @post_stage.date_end
+            %small.color-green
+              =Russian::strftime(@post_stage.date_begin, "%d %b %Y")
+              ="-"
+              =Russian::strftime(@post_stage.date_end, "%d %b %Y")
+            %br
+          .color-teal=@post_stage.name
       .modal-body
         -#= form_tag(plan_posts_add_new_stage_path(@project, add_dis_id: @plan_post, save_stage: true), {method: :post, remote: true, id: 'form_add_stage'}) do
         = form_for action, :url => {:project => @project.id, :con_id => @post_aspect.id, :act_id => action ? action.id : nil, :stage_id => @post_stage ? @post_stage.id : nil, :view_concept => @view_concept, :action => action.persisted? ? 'update_action' : 'create_action'}, :remote => true, :method => :put do |f|

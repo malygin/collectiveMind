@@ -1,9 +1,9 @@
 $(function(){
     function pageLoad(){
-        $('.chzn-select').select2();
-        $("#destination").mask("99999");
-        $("#credit").mask("9999-9999-9999-9999");
-        $("#expiration-date").datepicker();
+//        $('.chzn-select').select2();
+//        $("#destination").mask("99999");
+//        $("#credit").mask("9999-9999-9999-9999");
+//        $("#expiration-date").datepicker();
         $("#wizard").bootstrapWizard({onTabShow: function(tab, navigation, index) {
             var $total = navigation.find('li').length;
             var $current = index+1;
@@ -20,6 +20,7 @@ $(function(){
                 $wizard.find('.pager .finish').hide();
             }
             if($current == 1) {
+                alert('123');
                 $('#send_post_concept').submit();
             }
             if($current == 2) {
@@ -34,5 +35,5 @@ $(function(){
 
     pageLoad();
 
-    PjaxApp.onPageLoad(pageLoad);
+//    PjaxApp.onPageLoad(pageLoad);
 });

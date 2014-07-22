@@ -1,3 +1,6 @@
+$("#view_post_concept_table_#{@concept_post.id}").popoverClosable({trigger: 'focus', html: true, placement: 'auto', title: "<div class='color-orange'><b>#{@concept_post.title}</b></div>", content: "#{escape_javascript(render :partial => 'light_concept', :object => @concept_post, :locals => { :table => true } )}"});
+if( !$(".popover").is(':visible')) { $("#view_post_concept_table_#{@concept_post.id}").popover('toggle'); }
+
 -#-if @concept_post.name.present?
 -#  var text = "#{escape_javascript("<h5 class='color-orange text-center'><b>A1.</b>#{t('form.novation_what')}</h5><div class='text-center'><p>#{@concept_post.name}</p></div>")}"
 -#-else
@@ -14,18 +17,12 @@
 
 -#$("#view_post_concept_table_#{@concept_post.id}").popover('toggle');
 
-$("#view_post_concept_table_#{@concept_post.id}").popoverClosable({trigger: 'focus', html: true, placement: 'auto', title: "<div class='color-orange'><b>#{@concept_post.title}</b></div>", content: "#{escape_javascript(render :partial => 'light_concept', :object => @concept_post, :locals => { :table => true } )}"});
-
 -#$("#view_post_concept_table_#{@concept_post.id}").popover('toggle');
 
 -#trigger: 'focus', html : true, placement : 'auto', title: "<div class='color-orange'><b>#{@concept_post.title}</b></div>",
 -#content: "#{escape_javascript(render :partial => 'light_concept', :object => @concept_post, :locals => { :table => true } )}"
 -#);
-if( !$(".popover").is(':visible')) {
-$("#view_post_concept_table_#{@concept_post.id}").popover('toggle');
-}
 
--#
 -#$('[data-toggle=popover]').hover(function(e) {
 -#  if( !$(".popover").is(':visible') ) {
 -#      var el = this;

@@ -8,16 +8,10 @@
 #= require bootstrap-wysihtml5/locales/ru-RU
 #= require selectize
 #= require liFixar/jquery.liFixar
-#= require slimscroll/jquery.slimscroll
-#= require wizard/wizard
 #= require wizard/jquery.bootstrap.wizard
-#= require wizard/underscore-min
 #= require wizard/bootstrap-datepicker
-#= require wizard/jquery.maskedinput
-#= require wizard/select2
 #= require bootstrap3-editable/bootstrap-editable
 #= require jquery.autosize
-#= require wizard/jquery.icheck
 
 $('#modal_help').modal
   keyboard: false
@@ -69,7 +63,7 @@ $('#modal_help').on 'hidden.bs.modal', ->
   $('#'+el).remove()
 
 @disontent_form_submit= ->
-#   $('#send_post').html('Ищем совпадения ...')
+#  $('#send_post').html('Ищем совпадения ...')
 #  $('#send_post').toggleClass('disabled')
 
 @disable_send_button= ->
@@ -81,10 +75,9 @@ $('.score_class').on 'click', ->
 
 @load_discontent_for_cond= (el)->
   $.ajax({
-    type: "POST",
-    url: "/project/1/plan/posts/get_cond",
-    data: { pa: $('#select_'+el).val() },
-
+    type: "POST"
+    url: "/project/1/plan/posts/get_cond"
+    data: { pa: $('#select_'+el).val() }
   })
 
 @activate_htmleditor= ->
@@ -106,7 +99,11 @@ $ ->
   $("#sortable").sortable()
   $("#sortable").disableSelection()
   $('#theall a:first').tab('show')
-
+  $("input.autocomplete ").autocomplete(
+    minLength: 0
+  ).click ->
+    $(this).autocomplete "search", ""
+    return
 
 #  $('#accordion').on 'shown.bs.collapse', ->
 #    m = $(this);
@@ -124,11 +121,7 @@ $ ->
 #  ).focus ->
 #    $(this).autocomplete "search", ""
 #    return
-  $("input.autocomplete ").autocomplete(
-    minLength: 0
-  ).click ->
-    $(this).autocomplete "search", ""
-    return
+
 
 
 $('#sortable').sortable update: (event, ui) ->
@@ -141,8 +134,6 @@ $('#sortable').sortable update: (event, ui) ->
     type: "post"
     data:
       sortable: order
-
-
 
 @select_discontent_for_union= (project,id)->
   sel = $('#selectize_tag :selected')
@@ -167,8 +158,39 @@ $(window).load ->
   if ($(window).width() > 1030)
     $('ul.panel-collapse.collapse').removeClass('collapse').addClass('open in')
 
+#  $('input[data-autocomplete]').focus()
+#  $("input.autocomplete ").autocomplete({
+#    source: data,
+#    minLength: 0
+#  }).click ->
+#    $(this).autocomplete "search", ""
+#    return
+
   $('textarea').autosize()
+  $('.liFixar').liFixar()
   activate_htmleditor()
+
+  $('.carousel').carousel
+    interval: 4000,
+    pause: "hover",
+    wrap: false
+
+  $('.datepicker').datepicker(
+    format: 'yyyy-mm-dd'
+    autoclose: true
+  ).on "changeDate", (e) ->
+    $(this).datepicker "hide"
+    return
+
+  $('.userscore').editable()
+  #  $('.userscore').editable
+  #    type: 'text'
+  #    pk: 1
+  #    placement: 'top'
+  #    title: 'enter score'
+  #    url: '/post'
+  #    source: '/list'
+
   $select = $("#selectize_tag").selectize
     labelField: "show_content"
     valueField: "id"
@@ -191,7 +213,6 @@ $(window).load ->
         return '<div>'+short_item+'</div>'
       option: (item, escape) ->
         return '<div>'+item.show_content+'</div>'
-
 
   $select_for_union = $("#selectize_tag_for_union").selectize
     labelField: "show_content"
@@ -216,51 +237,7 @@ $(window).load ->
       option: (item, escape) ->
         return '<div>'+item.show_content+'</div>'
 
-@select_discontent_for_concept= (project,id)->
-  sel = $('#selectize_concept :selected')
-  if sel.val() != ''
-    $.ajax
-      url: "/project/#{project}/concept/posts/add_dispost"
-      type: "post"
-      data:
-        dispost_id: sel.val()
-        remove_able: 1
-
-$(window).load ->
-  $('.carousel').carousel
-    interval: 4000,
-    pause: "hover",
-    wrap: false
-
-  $('.liFixar').liFixar()
-  $('.datepicker').datepicker(
-    format: 'yyyy-mm-dd'
-    autoclose: true
-  ).on "changeDate", (e) ->
-    $(this).datepicker "hide"
-    return
-
-  $('.userscore').editable()
-#  $('.userscore').editable
-#    type: 'text'
-#    pk: 1
-#    placement: 'top'
-#    title: 'enter score'
-#    url: '/post'
-#    source: '/list'
-
-
-
-#  $(".chat-messages").slimScroll
-#    start: 'bottom'
-#    size: '5px'
-#    alwaysVisible: true
-#    railVisible: true
-#    disableFadeOut: true
-#
-#  $(".chat-messages").scrollTop(10000);
-
-  $select = $("#selectize_concept").selectize
+  $select_for_concept = $("#selectize_concept").selectize
     labelField: "show_content"
     valueField: "id"
     sortField: "show_content"
@@ -272,7 +249,7 @@ $(window).load ->
       project_id = parseInt(optsel.attr('project'))
       id = parseInt(optsel.attr('post'))
       select_discontent_for_concept(project_id,id)
-      selectize = $select[0].selectize
+      selectize = $select_for_concept[0].selectize
       selectize.removeOption(item)
       selectize.refreshOptions()
       selectize.close()
@@ -283,11 +260,16 @@ $(window).load ->
       option: (item, escape) ->
         return '<div>'+item.show_content+'</div>'
 
-  $("input.autocomplete ").autocomplete(
-    minLength: 0
-  ).click ->
-    $(this).autocomplete "search", ""
-    return
+
+#  $(".chat-messages").slimScroll
+#    start: 'bottom'
+#    size: '5px'
+#    alwaysVisible: true
+#    railVisible: true
+#    disableFadeOut: true
+#
+#  $(".chat-messages").scrollTop(10000);
+
 
 #@activate_button_editor = ->
 #  input = $('#title-textfield')
@@ -297,6 +279,17 @@ $(window).load ->
 #    $('#send_post').removeClass('disabled')
 #  else
 #    $('#send_post').addClass('disabled')
+
+
+@select_discontent_for_concept= (project,id)->
+  sel = $('#selectize_concept :selected')
+  if sel.val() != ''
+    $.ajax
+      url: "/project/#{project}/concept/posts/add_dispost"
+      type: "post"
+      data:
+        dispost_id: sel.val()
+        remove_able: 1
 
 $('#select_for_aspects').on 'change', ->
   val=this.value
@@ -394,10 +387,6 @@ $('#select_for_aspects').on 'change', ->
   $("#asp_"+cp).remove()
 
 @activate_wizard= ->
-  $('.chzn-select').select2();
-  $("#destination").mask("99999");
-  $("#credit").mask("9999-9999-9999-9999");
-  $("#expiration-date").datepicker();
   $("#wizard").bootstrapWizard onTabShow: (tab, navigation, index) ->
     $total = navigation.find("li").length
     $current = index + 1
@@ -412,7 +401,6 @@ $('#select_for_aspects').on 'change', ->
       $wizard.find(".pager .next").show()
       $wizard.find(".pager .finish").hide()
     return
-
 
 @discussion_select_aspect= (el)->
   optsel = $("#option_for_select_discontent")
@@ -441,8 +429,6 @@ $('#select_for_aspects').on 'change', ->
         check_field: check_field
         status: status
 
-
-
 #@activate_discussion_selectize= ->
 #  $select = $("#select_for_discussion_discontents").selectize
 #    labelField: "show_content"
@@ -450,16 +436,16 @@ $('#select_for_aspects').on 'change', ->
 #    sortField: "show_content"
 #    searchField: "show_content"
 #    create: false
-##    hideSelected: true
+#    hideSelected: true
 #    onChange: (item) ->
 #      optsel = $("#option_for_select_discontent")
 #      project_id = parseInt(optsel.attr('project'))
-##      id = parseInt(optsel.attr('post'))
+#      id = parseInt(optsel.attr('post'))
 #      select_discontent_for_discussion_concepts(project_id)
 #      selectize = $select[0].selectize
-##      selectize.removeOption(item)
-##      selectize.refreshOptions()
-##      selectize.close()
+#      selectize.removeOption(item)
+#      selectize.refreshOptions()
+#      selectize.close()
 #    render:
 #      item: (item, escape) ->
 #        short_item = item.show_content.split('<br/>')[0].replace('<b> что: </b>', '')
@@ -475,7 +461,6 @@ $('#select_for_aspects').on 'change', ->
 #      type: "get"
 #      data:
 #        sel_dis_id: sel.val()
-
 
 @discussion_select_discontent= (el)->
   optsel = $("#option_for_select_discontent")
@@ -523,7 +508,7 @@ $('#select_for_aspects').on 'change', ->
         stage_id: stage_id
 
 @add_new_resource_to_plan= (field,project)->
-  $('#resources_'+field).append('<div class="panel panel-default"><div class="panel-body"><span class="glyphicon glyphicon-remove text-danger pull-right" onclick="$(this).parent().parent().remove();" style="cursor:pointer;text-decoration:none;font-size:15px;"></span><span role="status" aria-live="polite" class="ui-helper-hidden-accessible"></span><input class="form-control autocomplete ui-autocomplete-input" data-append-to="#mod" data-autocomplete="/project/'+project+'/autocomplete_concept_post_resource_concept_posts" id="concept_post_resource" min-length="0" name="resor_'+field+'[]" placeholder="Введите свой ресурс или выберите из списка" size="30" type="text" autocomplete="off"><br><textarea class="form-control" id="res" name="res'+field+'[]" placeholder="Пояснение к ресурсу" style="overflow: hidden; word-wrap: break-word; resize: horizontal; height: 54px;"></textarea></div></div>')
+  $('#resources_'+field).append('<div class="panel panel-default"><div class="panel-body"><span class="glyphicon glyphicon-remove text-danger pull-right" onclick="$(this).parent().parent().remove();" style="cursor:pointer;text-decoration:none;font-size:15px;"></span><span role="status" aria-live="polite" class="ui-helper-hidden-accessible"></span><input class="form-control autocomplete ui-autocomplete-input" data-append-to="#mod" data-autocomplete="/project/'+project+'/autocomplete_concept_post_resource_concept_posts" id="concept_post_resource" min-length="0" name="resor_'+field+'[]" placeholder="Введите свой ресурс или выберите из списка" size="30" type="text" autocomplete="off"><br><textarea class="form-control" id="res" name="res_'+field+'[]" placeholder="Пояснение к ресурсу" style="overflow: hidden; word-wrap: break-word; resize: horizontal; height: 54px;"></textarea></div></div>')
   $("input.autocomplete").autocomplete(
     minLength: 0
   ).click ->
@@ -537,7 +522,6 @@ $('#select_for_aspects').on 'change', ->
   ).click ->
     $(this).autocomplete "search", ""
     return
-
 
 @render_table= ->
   optsel = $("#option_for_render_tab")
@@ -618,7 +602,6 @@ $('#select_for_aspects').on 'change', ->
         comment_id: comment_id
         aspect_id: aspect_id
 
-
 @reset_child_comment_form= (comment)->
   $('#child_comments_form_'+comment).empty()
 
@@ -628,7 +611,6 @@ $('#select_for_aspects').on 'change', ->
     return false
   else
     return true
-
 
 #$("html").on "click", (e) ->
 #  $("[data-original-title]").popover "hide"  if typeof $(e.target).data("original-title") is "undefined" and not $(e.target).parents().is(".popover.in")
@@ -643,7 +625,6 @@ $.fn.extend popoverClosable: (options) ->
     e.preventDefault()
     $popover_togglers.not(this).popover "hide"
     $('.popover').css 'display', 'none'
-
 
   $("html body").on "click", "[data-dismiss=\"popover\"]", (e) ->
     $popover_togglers.popover "hide"
@@ -668,7 +649,6 @@ $.fn.extend popoverClosable: (options) ->
     $('#aspect_'+val).css('display','block').animate({height: 20, opacity:1}, 500).effect("highlight", {color: '#f5cecd'}, 500)
     activate_discontent_aspect()
 
-
 @select_for_discontents_group= (el,project,post)->
   project_id = project
   dispost_id = post
@@ -692,3 +672,25 @@ $(window).load ->
     $("body,html").animate {
       scrollTop: 0
     }, 800
+
+$("#wizard").bootstrapWizard onTabShow: (tab, navigation, index) ->
+  $total = navigation.find("li").length
+  $current = index + 1
+  $percent = ($current / $total) * 100
+  $wizard = $("#wizard")
+  $wizard.find(".progress-bar").css width: $percent + "%"
+  if $current >= $total
+    $wizard.find(".pager .next").hide()
+    $wizard.find(".pager .finish").show()
+    $wizard.find(".pager .finish").removeClass "disabled"
+  else
+    $wizard.find(".pager .next").show()
+    $wizard.find(".pager .finish").hide()
+#  if $current is 1
+#    $("#send_post_concept").submit()
+  if $current is 2
+    render_table()
+#    $("#send_post_concept").submit()
+  if $current is 3
+    render_concept_side()
+
