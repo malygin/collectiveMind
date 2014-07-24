@@ -77,7 +77,7 @@ module Plan::PostsHelper
       notice_adap = "Поля не адаптированны под текущий проект "
       notice_note = "Поля имеюшие замечания от модератора "
       6.times do |n|
-        link = link_to "#{field_for_concept(n+1)}", "/project/#{@project.id}/plan/posts/#{@post.id}/edit_concept?con_id=#{concept.id}&edit_concept=#{'true'}##{tag_for_concept(n+1)}", :method => :put, :remote => true
+        link = link_to "#{field_for_concept(n+1)}", "/project/#{@project.id}/plan/posts/#{@post.id}/edit_concept?con_id=#{concept.id}&edit_concept=#{'true'}&num=#{n+1}##{tag_for_concept(n+1)}", :method => :put, :remote => true
         if concept.send(column_for_concept(n+1)) == concept_aspect.send(column_for_concept(n+1))
           notice_adap = notice_adap + link
         end
