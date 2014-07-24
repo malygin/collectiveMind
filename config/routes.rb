@@ -67,6 +67,8 @@ scope '/project/:project' do
   get 'life_tape/posts/fast_discussion_topics' , to: 'life_tape/posts#fast_discussion_topics'
   put 'life_tape/posts/transfer_comment' , to: 'life_tape/posts#transfer_comment'
   get 'life_tape/posts/check_field', to:  'life_tape/posts#check_field'
+  get 'plan/posts/check_field', to:  'plan/posts#check_field'
+  get 'estimate/posts/check_field', to:  'estimate/posts#check_field'
 
   get 'life_tape/posts/to_work', to:  'life_tape/posts#to_work'
   get 'discontent/posts/to_work', to:  'discontent/posts#to_work'

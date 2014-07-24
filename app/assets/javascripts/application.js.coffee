@@ -159,12 +159,12 @@ $(window).load ->
     $('ul.panel-collapse.collapse').removeClass('collapse').addClass('open in')
 
 #  $('input[data-autocomplete]').focus()
-  $("input.autocomplete ").autocomplete({
-    source: data,
-    minLength: 0
-  }).click ->
-    $(this).autocomplete "search", ""
-    return
+#  $("input.autocomplete ").autocomplete({
+#    source: data,
+#    minLength: 0
+#  }).click ->
+#    $(this).autocomplete "search", ""
+#    return
 
   $('textarea').autosize()
   $('.liFixar').liFixar()

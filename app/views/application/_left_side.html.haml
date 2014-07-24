@@ -130,6 +130,10 @@
           %br
           %small.text-center=t('stages.plans', count: @project.plan_post.count)
         %ul#plan.panel-collapse.collapse
+          %li
+            = link_to plan_posts_path(@project, :help => true), :class => 'color-teal' do
+              Помощь по этапу
+              %i.fa.fa-question-circle
           -if @project.status > 8
             %li
               = link_to essay_posts_path(@project, 4), :class => 'color-green' do
@@ -165,6 +169,10 @@
           %br
           %small.text-center=t('stages.estimates', count: @project.estimate_posts.count)
         %ul#estimate.panel-collapse.collapse
+          %li
+            = link_to estimate_posts_path(@project, :help => true), :class => 'color-teal' do
+              Помощь по этапу
+              %i.fa.fa-question-circle
           -if @project.status > 10
             %li
               = link_to essay_posts_path(@project, 5), :class => 'color-green' do
