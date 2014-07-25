@@ -441,16 +441,16 @@
                           Проанализируйте их и оцените, какова вероятность того, что при помощи этих средств ресурсы будут созданы --
                         %br
                         в полном объеме (более 90%) -
-                        %span{:class=>css_class_estimate(tr.on1)}= estimate_trans(tr.on1)
+                        %span{:class=>css_class_estimate_all(tr.on1)}= estimate_trans_all(tr.on1)
                         %br
                         в значительном объеме (от 50% до 90%) -
-                        %span{:class=>css_class_estimate(tr.on2)}= estimate_trans(tr.on2)
+                        %span{:class=>css_class_estimate_all(tr.on2)}=estimate_trans_all(tr.on2)
                         %br
                         в небольшом объеме (от 10% до 50%) -
-                        %span{:class=>css_class_estimate(tr.on3)}= estimate_trans(tr.on3)
+                        %span{:class=>css_class_estimate_all(tr.on3)}=estimate_trans_all(tr.on3)
                         %br
                         в ничтожном объеме (менее 10%)-
-                        %span{:class=>css_class_estimate(tr.on4)}= estimate_trans(tr.on4)
+                        %span{:class=>css_class_estimate_all(tr.on4)}=estimate_trans_all(tr.on4)
                         %br
                         %br
                         - unless tr.on == ''
@@ -461,17 +461,18 @@
                         %br
                         %b  Использование вышеназванных средств потребует материальных и трудовых затрат. Какова вероятность, что эти затраты окажутся--
                         %br
+                        =tr.ozs1
                         значительными -
-                        %span{:class=>css_class_estimate(tr.ozs1)}= estimate_trans(tr.ozs1)
+                        %span{:class=>css_class_estimate_all(tr.ozs1)}=estimate_trans_all(tr.ozs1)
                         %br
                         средними -
-                        %span{:class=>css_class_estimate(tr.ozs2)}= estimate_trans(tr.ozs2)
+                        %span{:class=>css_class_estimate_all(tr.ozs2)}=estimate_trans_all(tr.ozs2)
                         %br
                         незначительными -
-                        %span{:class=>css_class_estimate(tr.ozs3)}= estimate_trans(tr.ozs3)
+                        %span{:class=>css_class_estimate_all(tr.ozs3)}=estimate_trans_all(tr.ozs3)
                         %br
                         ничтожными -
-                        %span{:class=>css_class_estimate(tr.ozs4)}= estimate_trans(tr.ozs4)
+                        %span{:class=>css_class_estimate_all(tr.ozs4)}=estimate_trans_all(tr.ozs4)
                         %br
 
                         %br
@@ -484,16 +485,16 @@
                           Какова вероятность, что с их помощью несовершенство будет устранено--
                         %br
                         полностью (более 90%) -
-                        %span{:class=>css_class_estimate(tr.op1)}= estimate_trans(tr.op1)
+                        %span{:class=>css_class_estimate_all(tr.op1)}=estimate_trans_all(tr.op1)
                         %br
                         в значительной мере (от 50% до 90%) -
-                        %span{:class=>css_class_estimate(tr.op2)}= estimate_trans(tr.op2)
+                        %span{:class=>css_class_estimate_all(tr.op2)}=estimate_trans_all(tr.op2)
                         %br
                         в небольшой мере (от 10% до 50%) -
-                        %span{:class=>css_class_estimate(tr.op3)}= estimate_trans(tr.op3)
+                        %span{:class=>css_class_estimate_all(tr.op3)}=estimate_trans_all(tr.op3)
                         %br
                         в ничтожной мере (менее 10%) -
-                        %span{:class=>css_class_estimate(tr.op4)}= estimate_trans(tr.op4)
+                        %span{:class=>css_class_estimate_all(tr.op4)}=estimate_trans_all(tr.op4)
                         %br
                         %br
                         - unless tr.op == ''
@@ -504,16 +505,16 @@
                         %b Функционирование ресурсов потребует материальных и трудовых затрат. Какова вероятность, что эти затраты окажутся—
                         %br
                         значительными -
-                        %span{:class=>css_class_estimate(tr.ozf1)}= estimate_trans(tr.ozf1)
+                        %span{:class=>css_class_estimate_all(tr.ozf1)}=estimate_trans_all(tr.ozf1)
                         %br
                         средними -
-                        %span{:class=>css_class_estimate(tr.ozf2)}= estimate_trans(tr.ozf2)
+                        %span{:class=>css_class_estimate_all(tr.ozf2)}=estimate_trans_all(tr.ozf2)
                         %br
                         незначительными -
-                        %span{:class=>css_class_estimate(tr.ozf3)}= estimate_trans(tr.ozf3)
+                        %span{:class=>css_class_estimate_all(tr.ozf3)}=estimate_trans_all(tr.ozf3)
                         %br
                         ничтожными -
-                        %span{:class=>css_class_estimate(tr.ozf4)}= estimate_trans(tr.ozf4)
+                        %span{:class=>css_class_estimate_all(tr.ozf4)}=estimate_trans_all(tr.ozf4)
                         %br
                         %br
                         - unless tr.ozf == ''

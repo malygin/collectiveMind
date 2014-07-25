@@ -22,9 +22,9 @@ class Estimate::PostAspect < ActiveRecord::Base
      if status == 0
        if op1!=nil
         op_i=(op1+op2+op3+op4) ==0 ? 0 :  (4*op1+3*op2+2*op3+op4)/(op1+op2+op3+op4)
-        on_i=(on1+on2+on3+on4) ==0 ? 0 :  (4*op1+3*op2+2*op3+op4)/(op1+op2+op3+op4)
-        ozf_i=(ozf1+ozf2+ozf3+ozf4) ==0 ? 0 : (4*op1+3*op2+2*op3+op4)/(op1+op2+op3+op4)
-        ozs_i=(ozs1+ozs2+ozs3+ozs4) ==0 ? 0 : (4*op1+3*op2+2*op3+op4)/(op1+op2+op3+op4)
+        on_i=(on1+on2+on3+on4) ==0 ? 0 :  (4*on1+3*on2+2*on3+on4)/(on1+on2+on3+on4)
+        ozf_i=(ozf1+ozf2+ozf3+ozf4) ==0 ? 0 : (4*ozf1+3*ozf2+2*ozf3+ozf4)/(ozf1+ozf2+ozf3+ozf4)
+        ozs_i=(ozs1+ozs2+ozs3+ozs4) ==0 ? 0 : (4*ozs1+3*ozs2+2*ozs3+ozs4)/(ozs1+ozs2+ozs3+ozs4)
          r =  (ozf_i*ozs_i)== 0? 0 : (op_i*on_i)/(ozf_i*ozs_i)
          r =  r*100/2.85
         (r*100).round/100.0
@@ -41,11 +41,11 @@ class Estimate::PostAspect < ActiveRecord::Base
          r =  (ozf_i*ozs_i)== 0? 0 : (op_i*on_i)/(ozf_i*ozs_i)
 
         if r > 1
-          (r *50/16)+50
+          r =(r *50/16)+50
         else
-           r * 50
+           r = r * 50
         end
-
+         (r*100).round/100.0
        else
          0
        end
