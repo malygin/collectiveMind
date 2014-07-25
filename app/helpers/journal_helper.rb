@@ -104,7 +104,7 @@ module JournalHelper
 
       when 'my_concept_note'
         s = j.body.split(':')
-        "добавил(а) замечание  '#{s[0]}...' к "+  link_to('вашему нововведению', "/project/#{project}/concept/posts/#{j.first_id}?viewed=true")
+        "добавил(а) замечание  '#{j.body}...' к "+  link_to('вашему нововведению', "/project/#{project}/concept/posts/#{j.first_id}?viewed=true")
 
       # PLANS
       when 'plan_comment_save'
@@ -121,6 +121,9 @@ module JournalHelper
 
       when 'reply_plan_comment'
         "добавил(а) комментарий '#{j.body}...' в ответ на ваш "+  link_to( j.body2, "/project/#{project}/plan/posts/#{j.first_id}?viewed=true#comment_#{j.second_id}")
+
+      when 'my_plan_note'
+        "добавил(а) замечание  '#{j.body}...' к вашему проекту "+  link_to(j.body2, "/project/#{project}/plan/posts/#{j.first_id}?viewed=true")
 
       # ESSAY
       when 'essay_comment_save'

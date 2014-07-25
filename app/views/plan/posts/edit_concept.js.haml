@@ -3,3 +3,5 @@ $('#render_modal_edit_concept').html("#{escape_javascript(render :partial => 'fo
 autocomplete_initialized();
 $('#modal_edit_concept').modal('show');
 $('textarea').autosize();
+-if params[:tag_field]
+  scroll_to_elem("#{params[:tag_field]}");

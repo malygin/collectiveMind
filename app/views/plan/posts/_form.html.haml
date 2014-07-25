@@ -19,7 +19,7 @@
 
       #bar.progress.progress-small
         .progress-bar
-      .tab-content
+      .tab-content(style="overflow:visible;")
         #tab1.tab-pane
           .form-horizontal
             %fieldset
@@ -77,17 +77,19 @@
 
               #table_stages
                 - unless @post.post_stages.nil?
-                  -@post.post_stages.each_with_index do |stage|
+                  -@post.post_stages.each_with_index do |stage,ind|
                     %section.widget
                       .body
                         %div(class="td_stage_#{stage.id}")
+                          %h3
+                            %span="Этап #{ind+1}. "
+                            %span.color-teal=stage.name
                           -if stage.date_begin and stage.date_end
-                            %small.color-green
+                            %h3.color-green
                               =Russian::strftime(stage.date_begin, "%d %b %Y")
                               ="-"
                               =Russian::strftime(stage.date_end, "%d %b %Y")
-                            %br
-                          .color-teal=stage.name
+
                           %br
                           =stage.desc
                           %br
@@ -108,7 +110,7 @@
                                     =index+1
                                   %td(rowspan="#{rowspan_concept(concept)}" class="td_concept_#{concept.id}" id="td_concept_#{concept.id}")
                                     .pull-right
-                                      =link_to edit_concept_plan_post_path(@project, @post, :con_id => concept.id, :edit_concept => true), :method => :put, :remote => true, :id => "edit_post_concept_#{concept.id}" do
+                                      =link_to edit_concept_plan_post_path(@project, @post, :con_id => concept.id), :method => :put, :remote => true, :id => "edit_post_concept_#{concept.id}" do
                                         %button.btn.btn-sm.btn-warning{:type => "button"}
                                           %i.fa.fa-pencil
                                       =link_to destroy_concept_plan_post_path(@project, @post, :con_id => concept.id, :stage_id => stage.id), :method => :delete, :remote => true, :confirm => 'Удалить нововведение?', :id => "destroy_post_concept_#{concept.id}" do

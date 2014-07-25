@@ -177,7 +177,7 @@ $(window).load ->
 
   $('.datepicker').datepicker(
     format: 'yyyy-mm-dd'
-    autoclose: true
+    "autoclose": true
   ).on "changeDate", (e) ->
     $(this).datepicker "hide"
     return
@@ -488,6 +488,9 @@ $('#select_for_aspects').on 'change', ->
 @activate_datepicker= ->
   $('.datepicker').datepicker(
     format: 'yyyy-mm-dd'
+    autoclose: true
+    autoSize: true
+    weekStart: 1
   ).on "changeDate", (e) ->
     $(this).datepicker "hide"
 
@@ -693,4 +696,16 @@ $("#wizard").bootstrapWizard onTabShow: (tab, navigation, index) ->
 #    $("#send_post_concept").submit()
   if $current is 3
     render_concept_side()
+
+@scroll_to_elem= (el)->
+  $(".modal").on "shown.bs.modal", ->
+    if $("#" + el)
+      pos = $("#" + el).offset().top
+      $(".modal").animate {
+        scrollTop: pos
+      }, 500
+
+
+
+
 

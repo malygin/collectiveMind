@@ -658,4 +658,47 @@ end
       format.js
     end
   end
+
+  def new_note
+    @project = Core::Project.find(params[:project])
+    @post = Plan::Post.find(params[:id])
+    @post_aspect_note = Plan::PostAspect.find(params[:con_id])
+    @type = params[:type_field]
+    @post_note = Plan::Note.new
+    respond_to do |format|
+      format.js
+    end
+  end
+
+  def create_note
+    @project = Core::Project.find(params[:project])
+    @post = Plan::Post.find(params[:id])
+    @post_aspect_note = Plan::PostAspect.find(params[:con_id])
+    @post_note = Plan::Note.create(params[:plan_note])
+    @post_note.post_id = @post_aspect_note.id
+    @post_note.type_field = params[:type_field]
+    @post_note.user = current_user
+    @type = params[:type_field]
+    current_user.journals.build(:type_event=>'my_plan_note', :user_informed => @post.user, :project => @project,  :body=>trim_content(@post_note.content),:body2=> trim_content(@post.name),:first_id => @post.id, :second_id => @post_aspect_note.id,:personal => true,  :viewed=> false).save!
+
+    respond_to do |format|
+      if @post_note.save
+        format.js
+      else
+        render "new_note"
+      end
+    end
+  end
+
+  def destroy_note
+    @project = Core::Project.find(params[:project])
+    @post = Plan::Post.find(params[:id])
+    @post_aspect_note = Plan::PostAspect.find(params[:con_id])
+    @type = params[:type_field]
+    @post_note = Plan::Note.find(params[:note_id])
+    @post_note.destroy if boss?
+    respond_to do |format|
+      format.js
+    end
+  end
 end

@@ -28,11 +28,44 @@ module Plan::PostsHelper
       when 3
         'cond'
       when 4
-        'negative_h'
+        'cond_res'
       when 5
-        'problems'
+        'cond_s'
       when 6
+        'negative_h'
+      when 7
+        'negative_res'
+      when 8
+        'negative_s'
+      when 9
+        'control'
+      when 10
+        'control_res'
+      when 11
+        'control_s'
+      when 12
+        'obstacles_bcd'
+      when 13
+        'problems'
+      when 14
         'reality'
+    end
+  end
+
+  def field_for_res(num)
+    case num
+      when 4
+        'positive_r'
+      when 5
+        'positive_s'
+      when 7
+        'negative_r'
+      when 8
+        'negative_s'
+      when 10
+        'control_r'
+      when 11
+        'control_s'
     end
   end
 
@@ -44,11 +77,15 @@ module Plan::PostsHelper
         'content'
       when 3
         'positive'
-      when 4
-        'negative'
-      when 5
-        'problems'
       when 6
+        'negative'
+      when 9
+        'control'
+      when 12
+        'obstacles'
+      when 13
+        'problems'
+      when 14
         'reality'
     end
   end
@@ -62,72 +99,88 @@ module Plan::PostsHelper
       when 3
         'B1'
       when 4
-        'C1'
+        'B2'
       when 5
-        'D1'
+        'B3'
       when 6
+        'C1'
+      when 7
+        'C2'
+      when 8
+        'C3'
+      when 9
+        'D1'
+      when 10
         'D2'
+      when 11
+        'D3'
+      when 12
+        'E1'
+      when 13
+        'F1'
+      when 14
+        'F2'
     end
   end
 
-  def check_validate_concept(concept)
-    concept_aspect = concept.concept_post_aspect
-    if concept_aspect
-      notice_empty = "Поля не заполнены "
-      notice_adap = "Поля не адаптированны под текущий проект "
-      notice_note = "Поля имеюшие замечания от модератора "
-      6.times do |n|
-        link = link_to "#{field_for_concept(n+1)}", "/project/#{@project.id}/plan/posts/#{@post.id}/edit_concept?con_id=#{concept.id}&edit_concept=#{'true'}##{tag_for_concept(n+1)}", :method => :put, :remote => true
-        if concept.send(column_for_concept(n+1)) == concept_aspect.send(column_for_concept(n+1))
-          notice_adap = notice_adap + link
+  def check_validate_concept(concept, view = false)
+    if concept
+      concept_aspect = concept.concept_post_aspect
+      concept_post = concept_aspect.concept_post if concept_aspect
+      if concept_aspect and concept_post
+        notice_prefix_empty = " Поля не заполнены: "
+        notice_prefix_adap = " Поля не адаптированы под текущий проект: "
+        notice_prefix_note = " Поля, имеющие замечания от модератора: "
+        notice_empty = ''
+        notice_adap = ''
+        notice_note = ''
+        14.times do |n|
+          if view
+            link = content_tag :span, "#{field_for_concept(n+1)}", class: "badge badge-danger"
+          else
+            link = link_to "#{field_for_concept(n+1)} ", "/project/#{@project.id}/plan/posts/#{@post.id}/edit_concept?con_id=#{concept.id}&tag_field=#{tag_for_concept(n+1)}", :method => :put, :remote => true, :class => "badge badge-danger"
+          end
+          if [4,7].include?(n+1)
+            if !concept.plan_post_resources.by_type(field_for_res(n+1)).present?
+              notice_empty += link if link
+            else
+              old_resources = concept_post.concept_post_resources.by_type(field_for_res(n+1)).pluck(:name) unless concept_post.concept_post_resources.by_type(field_for_res(n+1)).nil?
+              old_desc = concept_post.concept_post_resources.by_type(field_for_res(n+1)).pluck(:desc) unless concept_post.concept_post_resources.by_type(field_for_res(n+1)).nil?
+              new_resources = concept.plan_post_resources.by_type(field_for_res(n+1)).pluck(:name) unless concept.plan_post_resources.by_type(field_for_res(n+1)).nil?
+              new_desc = concept.plan_post_resources.by_type(field_for_res(n+1)).pluck(:desc) unless concept.plan_post_resources.by_type(field_for_res(n+1)).nil?
+
+              if old_resources == new_resources and old_desc == new_desc
+                notice_adap += link if link
+              end
+            end
+            if concept.note_size?(n+1)
+              notice_note += link if link
+            end
+          elsif [5,8,10,11].include?(n+1)
+            if !concept.plan_post_resources.by_type(field_for_res(n+1)).present?
+              notice_empty += link if link
+            end
+            if concept.note_size?(n+1)
+              notice_note += link if link
+            end
+          else
+            if !concept.send(column_for_concept(n+1)).present?
+              notice_empty += link if link
+            elsif ![9,12].include?(n+1) and concept.send(column_for_concept(n+1)) == concept_aspect.send(column_for_concept(n+1))
+              notice_adap += link if link
+            end
+            cn = 5 if n+1 == 6
+            cn = 7 if n+1 == 13
+            cn = 8 if n+1 == 14
+            if concept.note_size?(n+1) or concept_post.note_size?(cn)
+              notice_note += link if link
+            end
+          end
         end
-        if concept.send(column_for_concept(n+1)).empty?
-          notice_empty = notice_empty + link
-        end
-        n = 5 if n+1 == 4
-        n = 7 if n+1 == 5
-        n = 8 if n+1 == 6
-        if concept_aspect.concept_post.note_size?(n)
-          notice_note = notice_note + link
-        end
+        (notice_empty.present? ? "<i class=\"fa fa-exclamation-triangle\"></i>" + notice_prefix_empty + notice_empty + "<br/>" : '') + (notice_adap.present? ? "<i class=\"fa fa-bell\"></i>" + notice_prefix_adap + notice_adap + "<br/>" : '') + (notice_note.present? ? "<i class=\"fa fa-comment\"></i>" + notice_prefix_note + notice_note + "<br/>" : '')
       end
-      return (notice_empty+"<br/>" if notice_empty.present?) + (notice_adap+"<br/>" if notice_adap.present?) + (notice_note+"<br/>" if notice_note.present?)
     end
   end
-
-
-  # def improve_comment(post)
-  #   if post.imp_comment and post.imp_stage
-  #     comment = "#{get_class_for_improve(post.imp_stage)}::Comment".constantize.find(post.imp_comment)
-  #     case post.imp_stage
-  #       when 1
-  #         "Доработано из " + (link_to "предложения ", "/project/#{@project.id}/life_tape/posts?asp=#{comment.post.discontent_aspects.first.id}#comment_#{comment.id}") + (link_to comment.user, user_path(@project, comment.user))
-  #       when 2
-  #         "Доработано из " + (link_to "предложения ", "/project/#{@project.id}/discontent/posts/#{comment.post.id}#comment_#{comment.id}") + (link_to comment.user, user_path(@project, comment.user))
-  #       when 3
-  #         "Доработано из " + (link_to "предложения ", "/project/#{@project.id}/concept/posts/#{comment.post.id}#comment_#{comment.id}") + (link_to comment.user, user_path(@project, comment.user))
-  #     end
-  #   end
-  # end
-  #
-  # def link_for_improve(comment)
-  #   com_class = get_stage_for_improve(comment.get_class)
-  #   case com_class
-  #     when 1
-  #       link_to "/project/#{@project.id}/life_tape/posts?asp=#{comment.post.discontent_aspects.first.id}#comment_#{comment.id}" do
-  #         content_tag :span, 'Источник', class: 'label label-primary'
-  #       end
-  #
-  #     when 2
-  #       link_to "/project/#{@project.id}/discontent/posts/#{comment.post.id}#comment_#{comment.id}" do
-  #         content_tag :span, 'Источник', class: 'label label-primary'
-  #       end
-  #     when 3
-  #       link_to "/project/#{@project.id}/concept/posts/#{comment.post.id}#comment_#{comment.id}" do
-  #         content_tag :span, 'Источник', class: 'label label-primary'
-  #       end
-  #   end
-  # end
 
 
 end

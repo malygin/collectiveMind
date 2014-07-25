@@ -1,0 +1,10 @@
+-if post_field.note_size?(type_fd)
+  %span.btn-danger Замечания:
+%ul{:id => "note_form_#{post_field.id}_#{type_fd}", :class => "#{'border_note' if post_field.note_size?(type_fd) }", :style => "list-style: disc inside;"}
+  -post_field.post_notes(type_fd).each do |dpn|
+    %div{:id => "post_note_#{dpn.id}"}
+      -if boss?
+        =link_to({:action => :destroy_note, :id => @post.id, :con_id => post_field.id,:note_id => dpn.id, :type_field => type_fd},:remote => true,:method => :put, :confirm => 'Удалить замечание?',:id => "destroy_post_note_#{dpn.id}") do
+          %span{:class=>"glyphicon glyphicon-remove text-danger pull-right", :style=>"cursor:pointer;text-decoration:none;font-size:15px;"}
+      %li{:id => "li_note_#{dpn.id}"}=dpn.content
+%br

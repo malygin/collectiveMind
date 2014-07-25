@@ -168,6 +168,9 @@ scope '/project/:project' do
         put :render_concept_side
         get :view_concept
         get :view_concept_table
+        put :new_note
+        put :create_note
+        put :destroy_note
       end
     end
   end
