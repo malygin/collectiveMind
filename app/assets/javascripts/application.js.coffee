@@ -9,7 +9,7 @@
 #= require selectize
 #= require liFixar/jquery.liFixar
 #= require wizard/jquery.bootstrap.wizard
-#= require wizard/bootstrap-datepicker
+#= require datepicker/bootstrap-datepicker
 #= require bootstrap3-editable/bootstrap-editable
 #= require jquery.autosize
 
@@ -485,16 +485,16 @@ $('#select_for_aspects').on 'change', ->
         sel_dis_id: sel_dis_id
         add_concept: 1
 
-@activate_datepicker= ->
-  $('.datepicker').datepicker(
-    format: 'yyyy-mm-dd',
-    autoclose: true,
-    autoSize: true,
-    todayHighlight: true,
-    startDate: "07/05/2014",
-    weekStart: 1
-  ).on "changeDate", (e) ->
-    $(this).datepicker('hide')
+#@activate_datepicker= ->
+#  $('.datepicker').datepicker(
+#    format: 'yyyy-mm-dd',
+#    autoclose: true,
+#    autoSize: true,
+#    todayHighlight: true,
+#    startDate: "07/05/2014",
+#    weekStart: 1
+#  ).on "changeDate", (e) ->
+#    $(this).datepicker('hide')
 
 @plan_select_concept= (el)->
   optsel = $("#option_for_select_concept")
@@ -708,6 +708,54 @@ $("#wizard").bootstrapWizard onTabShow: (tab, navigation, index) ->
       }, 500
 
 
+@activate_datepicker= ->
+  nowTemp = new Date()
+  now = new Date(nowTemp.getFullYear(), nowTemp.getMonth(), nowTemp.getDate(), 0, 0, 0, 0)
+  checkin = $("#date_begin").datepicker(onRender: (date) ->
+    (if date.valueOf() < now.valueOf() then "disabled" else "")
+  ).on("changeDate", (ev) ->
+#    if not typeof ev.date == "undefined" and (if typeof ev.date == "undefined" then 0 else ev.date.valueOf()) > (if typeof checkout.date == "undefined" then 0 else checkout.date.valueOf())
+#      newDate = new Date(ev.date)
+#      newDate.setDate newDate.getDate() + 1
+#      checkout.setValue newDate
+    checkin.hide()
+    $("#date_end")[0].focus()
+  ).data("datepicker")
+  checkout = $("#date_end").datepicker(onRender: (date) ->
+    (if date.valueOf() <= checkin.date.valueOf() then "disabled" else "")
+  ).on("changeDate", (ev) ->
+    checkout.hide()
+  ).data("datepicker")
 
 
+@color_select= (el)->
+  switch $(el).val()
+    when '1.0'
+      color = '#999'
+    when '2.0'
+      color = '#e5603b'
+    when '3.0'
+      color = '#da9901'
+    when '4.0'
+      color = '#56bc76'
 
+  $(el).css 'color', color
+
+
+$(window).load ->
+  $("select.estimate_select").each ->
+    switch $(this).val()
+      when '1.0'
+        color = '#999'
+      when '2.0'
+        color = '#e5603b'
+      when '3.0'
+        color = '#da9901'
+      when '4.0'
+        color = '#56bc76'
+
+    $(this).css 'color', color
+    $(this).find("option[value='1.0']").css 'color', '#999'
+    $(this).find("option[value='2.0']").css 'color', '#e5603b'
+    $(this).find("option[value='3.0']").css 'color', '#eac85e'
+    $(this).find("option[value='4.0']").css 'color', '#56bc76'

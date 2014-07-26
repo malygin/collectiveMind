@@ -71,17 +71,17 @@
   Для создания ресурсов в проекте предлагаются определенные средства. Проанализируйте их и оцените, какова вероятность того, что на базе этих средств ресурсы будут созданы --
   .field
     = f.label "-- 1) в полном объеме"
-    = select_tag "on[0][#{pa.id}][1]",   options_for_select([["невероятно", 1.0],["маловероятно", 2.0], ["вероятно", 3.0], ["очень вероятно", 4.0]], est.on1)
+    = select_tag "on[0][#{pa.id}][1]",   options_for_select([["невероятно", 1.0],["маловероятно", 2.0], ["вероятно", 3.0], ["очень вероятно", 4.0]], est.on1), :onchange => "color_select(this)", :class => "estimate_select"
 
   .field
     = f.label "-- 2) в значительном объеме"
-    = select_tag "on[0][#{pa.id}][2]",   options_for_select([["невероятно", 1.0],["маловероятно", 2.0], ["вероятно", 3.0], ["очень вероятно", 4.0]], est.on2)
+    = select_tag "on[0][#{pa.id}][2]",   options_for_select([["невероятно", 1.0],["маловероятно", 2.0], ["вероятно", 3.0], ["очень вероятно", 4.0]], est.on2), :onchange => "color_select(this)", :class => "estimate_select"
   .field
     = f.label "-- 3) в небольшом объеме"
-    = select_tag "on[0][#{pa.id}][3]",   options_for_select([["невероятно", 1.0],["маловероятно", 2.0], ["вероятно", 3.0], ["очень вероятно", 4.0]], est.on3)
+    = select_tag "on[0][#{pa.id}][3]",   options_for_select([["невероятно", 1.0],["маловероятно", 2.0], ["вероятно", 3.0], ["очень вероятно", 4.0]], est.on3), :onchange => "color_select(this)", :class => "estimate_select"
   .field
     = f.label "-- 4) в ничтожном  объеме"
-    = select_tag "on[0][#{pa.id}][4]",   options_for_select([["невероятно", 1.0],["маловероятно", 2.0], ["вероятно", 3.0], ["очень вероятно", 4.0]], est.on4)
+    = select_tag "on[0][#{pa.id}][4]",   options_for_select([["невероятно", 1.0],["маловероятно", 2.0], ["вероятно", 3.0], ["очень вероятно", 4.0]], est.on4), :onchange => "color_select(this)", :class => "estimate_select"
   .field
     %br
     = f.label 'Объясните, почему вы так считаете'
@@ -93,16 +93,16 @@
   Использование этих средств потребует материальных и трудовых затрат. Какова вероятность, что эти затраты окажутся--
   .field
     = f.label '--1) значительными '
-    = select_tag "ozs[0][#{pa.id}][1]",   options_for_select([["невероятно", 1.0],["маловероятно", 2.0], ["вероятно", 3.0], ["очень вероятно", 4.0]], est.ozs1)
+    = select_tag "ozs[0][#{pa.id}][1]",   options_for_select([["невероятно", 1.0],["маловероятно", 2.0], ["вероятно", 3.0], ["очень вероятно", 4.0]], est.ozs1), :onchange => "color_select(this)", :class => "estimate_select"
   .field
     = f.label "--2) средними "
-    = select_tag "ozs[0][#{pa.id}][2]",   options_for_select([["невероятно", 1.0],["маловероятно", 2.0], ["вероятно", 3.0], ["очень вероятно", 4.0]], est.ozs2)
+    = select_tag "ozs[0][#{pa.id}][2]",   options_for_select([["невероятно", 1.0],["маловероятно", 2.0], ["вероятно", 3.0], ["очень вероятно", 4.0]], est.ozs2), :onchange => "color_select(this)", :class => "estimate_select"
   .field
     = f.label "--3) незначительными "
-    = select_tag "ozs[0][#{pa.id}][3]",   options_for_select([["невероятно", 1.0],["маловероятно", 2.0], ["вероятно", 3.0], ["очень вероятно", 4.0]], est.ozs3)
+    = select_tag "ozs[0][#{pa.id}][3]",   options_for_select([["невероятно", 1.0],["маловероятно", 2.0], ["вероятно", 3.0], ["очень вероятно", 4.0]], est.ozs3), :onchange => "color_select(this)", :class => "estimate_select"
   .field
     = f.label "--4) ничтожными  "
-    = select_tag "ozs[0][#{pa.id}][4]",   options_for_select([["невероятно", 1.0],["маловероятно", 2.0], ["вероятно", 3.0], ["очень вероятно", 4.0]], est.ozs4)
+    = select_tag "ozs[0][#{pa.id}][4]",   options_for_select([["невероятно", 1.0],["маловероятно", 2.0], ["вероятно", 3.0], ["очень вероятно", 4.0]], est.ozs4), :onchange => "color_select(this)", :class => "estimate_select"
   .field
     %br
     = f.label 'Объясните, почему вы так считаете'
@@ -114,16 +114,16 @@
   Предположим, что будущее уже наступило и все предложенные ресурсы созданы и работают. Какова вероятность, что с их помощью несовершенство будет устранено--
   .field
     = f.label "-- 1) полностью ?"
-    = select_tag "op[0][#{pa.id}][1]",   options_for_select([["невероятно", 1.0],["маловероятно", 2.0], ["вероятно", 3.0], ["очень вероятно", 4.0]], est.op1)
+    = select_tag "op[0][#{pa.id}][1]",   options_for_select([["невероятно", 1.0],["маловероятно", 2.0], ["вероятно", 3.0], ["очень вероятно", 4.0]], est.op1), :onchange => "color_select(this)", :class => "estimate_select"
   .field
     = f.label "-- 2) в значительной мере ?"
-    = select_tag "op[0][#{pa.id}][2]",   options_for_select([["невероятно", 1.0],["маловероятно", 2.0], ["вероятно", 3.0], ["очень вероятно", 4.0]], est.op2)
+    = select_tag "op[0][#{pa.id}][2]",   options_for_select([["невероятно", 1.0],["маловероятно", 2.0], ["вероятно", 3.0], ["очень вероятно", 4.0]], est.op2), :onchange => "color_select(this)", :class => "estimate_select"
   .field
     = f.label "-- 3) в небольшой мере?"
-    = select_tag "op[0][#{pa.id}][3]",   options_for_select([["невероятно", 1.0],["маловероятно", 2.0], ["вероятно", 3.0], ["очень вероятно", 4.0]], est.op3)
+    = select_tag "op[0][#{pa.id}][3]",   options_for_select([["невероятно", 1.0],["маловероятно", 2.0], ["вероятно", 3.0], ["очень вероятно", 4.0]], est.op3), :onchange => "color_select(this)", :class => "estimate_select"
   .field
     = f.label "-- 4) в ничтожной  мере ?"
-    = select_tag "op[0][#{pa.id}][4]",  options_for_select([["невероятно", 1.0],["маловероятно", 2.0], ["вероятно", 3.0], ["очень вероятно", 4.0]], est.op4)
+    = select_tag "op[0][#{pa.id}][4]",  options_for_select([["невероятно", 1.0],["маловероятно", 2.0], ["вероятно", 3.0], ["очень вероятно", 4.0]], est.op4), :onchange => "color_select(this)", :class => "estimate_select"
   .field
     %br
     = f.label 'Объясните, почему вы так считаете'
@@ -135,16 +135,16 @@
   Функционирование ресурсов потребует материальных и трудовых затрат. Какова вероятность, что эти затраты окажутся—
   .field
     = f.label '--1) значительными '
-    = select_tag "ozf[0][#{pa.id}][1]",   options_for_select([["невероятно", 1.0],["маловероятно", 2.0], ["вероятно", 3.0], ["очень вероятно", 4.0]], est.ozf1)
+    = select_tag "ozf[0][#{pa.id}][1]",   options_for_select([["невероятно", 1.0],["маловероятно", 2.0], ["вероятно", 3.0], ["очень вероятно", 4.0]], est.ozf1), :onchange => "color_select(this)", :class => "estimate_select"
   .field
     = f.label '-- 2) средними '
-    = select_tag "ozf[0][#{pa.id}][2]",   options_for_select([["невероятно", 1.0],["маловероятно", 2.0], ["вероятно", 3.0], ["очень вероятно", 4.0]], est.ozf2)
+    = select_tag "ozf[0][#{pa.id}][2]",   options_for_select([["невероятно", 1.0],["маловероятно", 2.0], ["вероятно", 3.0], ["очень вероятно", 4.0]], est.ozf2), :onchange => "color_select(this)", :class => "estimate_select"
   .field
     = f.label '-- 3) незначительными '
-    = select_tag "ozf[0][#{pa.id}][3]",   options_for_select([["невероятно", 1.0],["маловероятно", 2.0], ["вероятно", 3.0], ["очень вероятно", 4.0]], est.ozf3)
+    = select_tag "ozf[0][#{pa.id}][3]",   options_for_select([["невероятно", 1.0],["маловероятно", 2.0], ["вероятно", 3.0], ["очень вероятно", 4.0]], est.ozf3), :onchange => "color_select(this)", :class => "estimate_select"
   .field
     = f.label '-- 4) ничтожными  '
-    = select_tag "ozf[0][#{pa.id}][4]",   options_for_select([["невероятно", 1.0],["маловероятно", 2.0], ["вероятно", 3.0], ["очень вероятно", 4.0]], est.ozf4)
+    = select_tag "ozf[0][#{pa.id}][4]",   options_for_select([["невероятно", 1.0],["маловероятно", 2.0], ["вероятно", 3.0], ["очень вероятно", 4.0]], est.ozf4), :onchange => "color_select(this)", :class => "estimate_select"
   .field
     %br
     = f.label 'Объясните, почему вы так считаете'
