@@ -157,8 +157,14 @@ module Plan::PostsHelper
               notice_note += link if link
             end
           elsif [5,8,10,11].include?(n+1)
-            if !concept.plan_post_resources.by_type(field_for_res(n+1)).present?
-              notice_empty += link if link
+            if n+1 == 10
+              if !concept.plan_post_resources.by_type(field_for_res(n+1)).present?
+                notice_empty += link if link
+              end
+            else
+              if !concept.plan_post_means.by_type(field_for_res(n+1)).present?
+                notice_empty += link if link
+              end
             end
             if concept.note_size?(n+1)
               notice_note += link if link
