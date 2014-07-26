@@ -26,7 +26,7 @@ class Estimate::PostAspect < ActiveRecord::Base
         ozf_i=(ozf1+ozf2+ozf3+ozf4) ==0 ? 0 : (4*ozf1+3*ozf2+2*ozf3+ozf4)/(ozf1+ozf2+ozf3+ozf4)
         ozs_i=(ozs1+ozs2+ozs3+ozs4) ==0 ? 0 : (4*ozs1+3*ozs2+2*ozs3+ozs4)/(ozs1+ozs2+ozs3+ozs4)
          r =  (ozf_i*ozs_i)== 0? 0 : (op_i*on_i)/(ozf_i*ozs_i)
-         r =  r*100/2.85
+         r =  r*100/2.86
         (r*100).round/100.0
        else
          0
