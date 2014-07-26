@@ -155,7 +155,7 @@
                         = render partial: 'resolve_discontent1_light',locals: { pa: pa, est: est, f: f}
                     -else
                       - @pair_estimates2.each do |pa, est|
-                        = render partial: 'resolve_discontent',locals: { pa: pa, est: est , f: f}
+                        = render partial: 'resolve_discontent1',locals: { pa: pa, est: est , f: f}
 
                       - @pair_estimates1.each do |pa, est|
                         = render partial: 'resolve_discontent1',locals: { pa: pa, est: est, f: f}

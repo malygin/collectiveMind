@@ -58,15 +58,16 @@ class Estimate::Post < ActiveRecord::Base
       end
 
       @second_c = sum_tr
-      th1 =(nepr1+nepr2+nepr3+nepr4) ==0 ? 0 : (4*nepr1 + 3*nepr2 + 2*nepr3 + 1*nepr4)/(nepr1+nepr2+nepr3+nepr4)
+      th1 =(nepr1+nepr2+nepr3+nepr4) ==0 ? 0 : (4*nepr1 + 3*nepr2 + 2*nepr3 + 1*nepr4)/(nepr1+nepr2+nepr3+nepr4).to_f
       th2 =(nep1+nep2+nep3+nep4) ==0 ? 0 : (4*nep1 + 3*nep2 + 2*nep3 + 1*nep4)/(nep1+nep2+nep3+nep4).to_f
       @first_c = (@first_c * 100).round / 100.0
       @second_c = (@second_c * 100).round / 100.0
       @third_c = ((th1 + th2)*100).round / 100.0
       # max nov 3.14 min 1.86
-      @max_score = count.to_f * 2.85 / (2 * 1.86)
+      @max_score = ((count.to_f * 1.86 / (2 * 1.86))  *100).round / 100.0
       sum_all = @first_c+@second_c
       sum_all /= @third_c if @third_c != 0.0
+
       @max_score == 0 ? 0 : ((sum_all*100/ @max_score) *100).round / 100.0
 
     else
