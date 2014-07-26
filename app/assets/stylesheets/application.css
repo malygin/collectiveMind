@@ -10,6 +10,10 @@
 */
 /* require_tree .*/
 
+.estimate_select{
+    -webkit-appearance: none;
+    -webkit-appearance: menulist-button;
+}
 ul.panel-collapse.in{
     width: 200px;
 }
