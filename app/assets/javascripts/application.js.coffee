@@ -487,12 +487,14 @@ $('#select_for_aspects').on 'change', ->
 
 @activate_datepicker= ->
   $('.datepicker').datepicker(
-    format: 'yyyy-mm-dd'
-    autoclose: true
-    autoSize: true
+    format: 'yyyy-mm-dd',
+    autoclose: true,
+    autoSize: true,
+    todayHighlight: true,
+    startDate: "07/05/2014",
     weekStart: 1
   ).on "changeDate", (e) ->
-    $(this).datepicker "hide"
+    $(this).datepicker('hide')
 
 @plan_select_concept= (el)->
   optsel = $("#option_for_select_concept")
