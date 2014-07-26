@@ -707,22 +707,62 @@ $("#wizard").bootstrapWizard onTabShow: (tab, navigation, index) ->
         scrollTop: pos
       }, 500
 
-
 @activate_datepicker= ->
+  $("#date_begin").datepicker("refresh")
+  $("#date_end").datepicker("refresh")
+
   nowTemp = new Date()
   now = new Date(nowTemp.getFullYear(), nowTemp.getMonth(), nowTemp.getDate(), 0, 0, 0, 0)
-  checkin = $("#date_begin").datepicker(onRender: (date) ->
-    (if date.valueOf() < now.valueOf() then "disabled" else "")
+  $("#date_begin").datepicker("setStartDate", now);
+  $("#date_end").datepicker("setStartDate", now);
+
+  checkin = $("#date_begin").datepicker(
   ).on("changeDate", (ev) ->
-#    if not typeof ev.date == "undefined" and (if typeof ev.date == "undefined" then 0 else ev.date.valueOf()) > (if typeof checkout.date == "undefined" then 0 else checkout.date.valueOf())
-#      newDate = new Date(ev.date)
-#      newDate.setDate newDate.getDate() + 1
-#      checkout.setValue newDate
+    newDate = new Date(ev.date)
+    $("#date_end").datepicker("setStartDate", newDate)
+    if $("#date_end").val() == ''
+      $("#date_end").datepicker("setDate", newDate)
+    else
+      if ev.date.valueOf() > Date.parse($("#date_end").val())
+        newDate.setDate newDate.getDate() + 1
+        $("#date_end").datepicker("setDate", newDate)
+        $("#date_end")[0].focus()
     checkin.hide()
-    $("#date_end")[0].focus()
   ).data("datepicker")
-  checkout = $("#date_end").datepicker(onRender: (date) ->
-    (if date.valueOf() <= checkin.date.valueOf() then "disabled" else "")
+  checkout = $("#date_end").datepicker(
+  ).on("changeDate", (ev) ->
+    checkout.hide()
+  ).data("datepicker")
+
+@activate_datepicker_action= (date_begin,date_end)->
+  $("#date_begin_action").datepicker("refresh")
+  $("#date_end_action").datepicker("refresh")
+
+  nowTemp = new Date()
+  now = new Date(nowTemp.getFullYear(), nowTemp.getMonth(), nowTemp.getDate(), 0, 0, 0, 0)
+  if date_begin and date_end
+    $("#date_begin_action").datepicker("setStartDate", new Date(Date.parse(date_begin)));
+    $("#date_begin_action").datepicker("setEndDate", new Date(Date.parse(date_end)));
+    $("#date_end_action").datepicker("setStartDate", new Date(Date.parse(date_begin)));
+    $("#date_end_action").datepicker("setEndDate", new Date(Date.parse(date_end)));
+  else
+    $("#date_begin_action").datepicker("setStartDate", now);
+    $("#date_end_action").datepicker("setStartDate", now);
+
+  checkin = $("#date_begin_action").datepicker(
+  ).on("changeDate", (ev) ->
+    newDate = new Date(ev.date)
+    $("#date_end_action").datepicker("setStartDate", newDate)
+    if $("#date_end_action").val() == ''
+      $("#date_end_action").datepicker("setDate", newDate)
+    else
+      if ev.date.valueOf() > Date.parse($("#date_end_action").val())
+        newDate.setDate newDate.getDate() + 1
+        $("#date_end_action").datepicker("setDate", newDate)
+        $("#date_end_action")[0].focus()
+    checkin.hide()
+  ).data("datepicker")
+  checkout = $("#date_end_action").datepicker(
   ).on("changeDate", (ev) ->
     checkout.hide()
   ).data("datepicker")

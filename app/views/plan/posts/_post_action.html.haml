@@ -1,7 +1,7 @@
 %tr(id="tr_action_#{post_action.id}")
   %td
     .pull-right
-      =link_to edit_action_plan_post_path(@project, @post, :act_id => post_action.id, :con_id => @post_aspect.id), :method => :put, :remote => true, :id => "edit_post_action_#{post_action.id}" do
+      =link_to edit_action_plan_post_path(@project, @post, :act_id => post_action.id, :con_id => @post_aspect.id, :stage_id => @post_stage ? @post_stage.id : nil), :method => :put, :remote => true, :id => "edit_post_action_#{post_action.id}" do
         %button.btn.btn-xs.btn-warning{:type => "button"}
           %i.fa.fa-pencil
       =link_to destroy_action_plan_post_path(@project, @post, :act_id => post_action.id, :con_id => @post_aspect.id, :stage_id => @post_stage ? @post_stage.id : nil), :method => :delete, :remote => true, :confirm => 'Удалить нововведение?', :id => "destroy_post_action_#{post_action.id}" do

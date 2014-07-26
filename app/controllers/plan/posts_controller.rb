@@ -368,7 +368,7 @@ end
     @project = Core::Project.find(params[:project])
     @post = Plan::Post.find(params[:id])
     @post_aspect = Plan::PostAspect.find(params[:con_id])
-    @post_stage = @post_aspect.plan_post_stage
+    @post_stage = Plan::PostStage.find(params[:stage_id]) unless params[:stage_id].nil?
     @post_action = Plan::PostAction.find(params[:act_id])
     respond_to do |format|
       format.js
@@ -398,6 +398,7 @@ end
   def update_action
     @project = Core::Project.find(params[:project])
     @post = Plan::Post.find(params[:id])
+    @post_stage = Plan::PostStage.find(params[:stage_id]) unless params[:stage_id].nil?
     @post_aspect = Plan::PostAspect.find(params[:con_id])
     @post_action = Plan::PostAction.find(params[:act_id])
     @post_action.update_attributes(params[:plan_post_action])

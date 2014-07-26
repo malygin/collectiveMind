@@ -53,7 +53,7 @@
                     %tr(id="tr_action_#{action.id}")
                       %td
                         .pull-right
-                          =link_to edit_action_plan_post_path(@project, @post, :act_id => action.id, :con_id => concept.id), :method => :put, :remote => true, :id => "edit_post_action_#{action.id}" do
+                          =link_to edit_action_plan_post_path(@project, @post, :act_id => action.id, :con_id => concept.id, :stage_id => stage.id), :method => :put, :remote => true, :id => "edit_post_action_#{action.id}" do
                             %button.btn.btn-xs.btn-warning{:type => "button"}
                               %i.fa.fa-pencil
                           =link_to destroy_action_plan_post_path(@project, @post, :act_id => action.id, :con_id => concept.id, :stage_id => stage.id), :method => :delete, :remote => true, :confirm => 'Удалить нововведение?', :id => "destroy_post_action_#{action.id}" do

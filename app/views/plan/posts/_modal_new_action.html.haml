@@ -33,12 +33,12 @@
             .col-md-6
               .form-group(style="margin-left:0;")
                 %label{:for => "date_begin"} Дата начала реализации
-                =f.text_field :date_begin, :class => 'form-control datepicker', id:'date_begin'
+                =f.text_field :date_begin, :class => 'form-control datepicker', id:'date_begin_action'
                 -#%input#date_begin.form-control.datepicker{:name => "date_begin", :type => "text", :value => ""}/
             .col-md-6
               .form-group(style="margin-left:0;")
                 %label{:for => "date_end"} Дата окончания реализации
-                =f.text_field :date_end, :class => 'form-control datepicker', id:'date_end'
+                =f.text_field :date_end, :class => 'form-control datepicker', id:'date_end_action'
                 -#%input#date_end.form-control.datepicker{:name => "date_end", :type => "text", :value => ""}/
           .form-group(style="margin-left:0;")
             %label{:for => "desc_stage"} Описание мероприятия
