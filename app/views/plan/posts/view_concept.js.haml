@@ -39,6 +39,15 @@
   if (concept == false) {
   $("#view_dis_concept_#{@dispost.id}").after("#{escape_javascript(render :partial => 'light_concept', :object => @concept_post, :locals => { :post => @dispost, :table => false, :what_view => true } )}");
   }
+  if ($("#collapse_dis_concept_#{@dispost.id}").hasClass('in')) {
+  $('#view_what_#{@dispost.id}').show();
+  $('#view_concepts_#{@dispost.id}').html('Показать решения');
+  }
+  else {
+  $('#view_what_#{@dispost.id}').hide();
+  $('#view_concepts_#{@dispost.id}').html('Скрыть решения');
+  }
+  $('#view_concepts_#{@dispost.id}').toggleClass('label-success label-primary');
   $("#collapse_dis_concept_#{@dispost.id}").collapse('toggle');
 -else
   var concept = render_concept_collapse(#{@dispost.id},#{@concept_post.id});

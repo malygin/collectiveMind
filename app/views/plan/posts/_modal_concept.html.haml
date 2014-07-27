@@ -42,10 +42,14 @@
             -#%a{"data-toggle" => "collapse", "data-target" => "collapse_dis_concept_#{post.id}", :style => "text-decoration:none;"}
             -#  =post.content
             -#%div.collapse{:id => }
-            =link_to view_concept_plan_post_path(@project, @post,:stage_id => @post_stage.id, :post_id => post.id, :what_view => true), :method => :get, :remote => true, :class => "color-teal", "data-toggle" => "collapse", "data-target" => "collapse_dis_concept_#{post.id}", :style => "text-decoration:none;border-bottom: 1px dashed #4ab0ce;", :id => "view_dis_concept_#{post.id}" do
+            %span{:id => "view_what_#{post.id}"}
               %span.label(class= "#{class_for_type_field(post,1)}" id="#{id_for_type_field(1)}_#{post.id}")=name_for_type_field(1)
               =post.content
-              %br
+            %span
+              =link_to view_concept_plan_post_path(@project, @post,:stage_id => @post_stage.id, :post_id => post.id, :what_view => true), :method => :get, :remote => true, :class => "color-teal pull-right", "data-toggle" => "collapse", "data-target" => "collapse_dis_concept_#{post.id}", :style => "text-decoration:none;", :id => "view_dis_concept_#{post.id}" do
+                .label.label-success{:id => "view_concepts_#{post.id}"} Показать решения
+            %br
+            %br
             -#=render partial:'discontent/posts/post_short2', object: post
             -#%br
             -#- post.dispost_concepts.by_status(0).each_with_index do |pa, index|
