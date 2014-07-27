@@ -13,6 +13,7 @@
 .estimate_select{
     -webkit-appearance: none;
     -webkit-appearance: menulist-button;
+    background-color: #645e5e;
 }
 ul.panel-collapse.in{
     width: 200px;

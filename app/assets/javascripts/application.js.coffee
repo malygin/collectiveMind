@@ -780,7 +780,7 @@ $("#wizard").bootstrapWizard onTabShow: (tab, navigation, index) ->
     when '2.0'
       color = '#e5603b'
     when '3.0'
-      color = '#da9901'
+      color = '#fd8605'
     when '4.0'
       color = '#56bc76'
 
@@ -795,12 +795,12 @@ $(window).load ->
       when '2.0'
         color = '#e5603b'
       when '3.0'
-        color = '#da9901'
+        color = '#fd8605'
       when '4.0'
         color = '#56bc76'
 
     $(this).css 'color', color
     $(this).find("option[value='1.0']").css 'color', '#999'
     $(this).find("option[value='2.0']").css 'color', '#e5603b'
-    $(this).find("option[value='3.0']").css 'color', '#eac85e'
+    $(this).find("option[value='3.0']").css 'color', '#fd8605'
     $(this).find("option[value='4.0']").css 'color', '#56bc76'

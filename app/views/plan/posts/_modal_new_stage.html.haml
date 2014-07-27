@@ -12,10 +12,6 @@
             %label{:for => "name_stage"} Название этапа
             =f.text_field :name, :class => 'form-control', placeholder: 'Введите название этапа', id:'name_stage'
             %span.small Короткое название этапа
-          .form-group(style="margin-left:0;")
-            %label{:for => "desc_stage"} Эссе по этапу
-            =f.text_area :desc, :class => 'form-control', :rows => 10, placeholder: 'Введите описание этапа', id:'desc_stage'
-            %span.small Опишите ваше видение проекта в будущем в рамках данного этапа
           .col-md-6
             .form-group(style="margin-left:0;")
               %label{:for => "date_begin"} Дата начала реализации
@@ -26,6 +22,10 @@
               %label{:for => "date_end"} Дата окончания реализации
               =f.text_field :date_end, :class => 'form-control datepicker', id:'date_end'
               -#%input#date_end.form-control.datepicker{:name => "date_end", :type => "text", :value => ""}/
+          .form-group(style="margin-left:0;")
+            %label{:for => "desc_stage"} Эссе по этапу
+            =f.text_area :desc, :class => 'form-control', :rows => 10, placeholder: 'Введите описание этапа', id:'desc_stage'
+            %span.small Опишите ваше видение проекта в будущем в рамках данного этапа
           .pull-right
             -#%button.btn.btn-default(type = "button" data-dismiss="modal") Закрыть
             %button.btn.btn-default(type = "button" data-dismiss="modal" style="margin-right:5px;") Закрыть
