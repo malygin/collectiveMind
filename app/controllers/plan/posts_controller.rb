@@ -667,11 +667,14 @@ end
   def view_concept
     @project = Core::Project.find(params[:project])
     @post = Plan::Post.find(params[:id])
-    unless params[:new_idea]
+    if params[:new_idea]
+      @concept_post = Plan::PostAspect.find(params[:con_id])
+    elsif params[:what_view]
+      @dispost = Discontent::Post.find(params[:post_id])
+      @post_stage = Plan::PostStage.find(params[:stage_id])
+    else
       @dispost = Discontent::Post.find(params[:post_id])
       @concept_post = Concept::PostAspect.find(params[:con_id])
-    else
-      @concept_post = Plan::PostAspect.find(params[:con_id])
     end
     respond_to do |format|
       format.js

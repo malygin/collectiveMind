@@ -74,7 +74,6 @@
                               ="-"
                               =Russian::strftime(stage.date_end, "%d %b %Y")
 
-                          %br
                           =stage.desc
                           %br
                           %br
@@ -94,9 +93,10 @@
                                   %td(rowspan="#{rowspan_concept_show(concept)}" class="td_concept_#{concept.id}")
                                     =index+1
                                   %td(rowspan="#{rowspan_concept_show(concept)}" class="td_concept_#{concept.id}" id="td_concept_#{concept.id}")
-                                    =link_to view_concept_table_plan_post_path(@project, @post, :con_id => concept.id), :method => :get, :remote => true,:class => "color-white", :style => "text-decoration:none;", :id => "view_post_concept_table_#{concept.id}" do
+                                    =link_to view_concept_table_plan_post_path(@project, @post, :con_id => concept.id), :method => :get, :remote => true,:class => "color-white", :style => "text-decoration:none;border-bottom: 1px dashed #fafbfc;", :id => "view_post_concept_table_#{concept.id}" do
                                       %span.h5{:id => "name_post_concept_#{concept.id}"}=concept.title
                                     %br
+                                    =concept.name
                                     %br
                                     = check_validate_concept(concept,true).html_safe if check_validate_concept(concept)
                                     -#-unless concept.plan_post_resources.by_type('positive_r').empty?

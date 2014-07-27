@@ -32,27 +32,41 @@
         %h4.color-teal Выберите нововведение:
         - @disposts.each do |post|
           -if post.dispost_concepts.by_status(0).present?
-            =render partial:'discontent/posts/post_short2', object: post
-            %br
-            - post.dispost_concepts.by_status(0).each_with_index do |pa, index|
-              .row.plus-concept(id="tr_plus_concept_#{post.id}_#{pa.post_aspects.first.id}")
-                .col-md-1
-                  =index+1
-                .col-md-8
-                  - if pa.post_aspects.first.title!=''
-                    =link_to view_concept_plan_post_path(@project, @post, :post_id => post.id, :con_id => pa.post_aspects.first.id), :method => :get, :remote => true, :class => "color-teal", "data-toggle" => "collapse", "data-target" => "collapse_plus_concept_#{post.id}_#{pa.post_aspects.first.id}", :style => "text-decoration:none;", :id => "view_post_concept_#{post.id}_#{pa.post_aspects.first.id}" do
-                      =pa.post_aspects.first.title
-                  - else
-                    Без названия
-                .col-md-2(class="td_plus_concept_#{pa.post_aspects.first.id}")
-                  -if plus_concept?(@post_stage,pa)
-                    .label.label-success Добавлено
-                .col-md-1
-                  .pull-right
-                    =link_to add_form_for_concept_plan_post_path(@project, @post,:stage_id => @post_stage.id, :concept_id => pa.post_aspects.first.id, :save_form => true), :method => :put, :remote => true, :id => "plus_post_concept_#{pa.id}" do
-                      %button.btn.btn-sm.btn-warning{:type => "button"}
-                        %i.fa.fa-plus
-              .concept-devider
+            -#%span.label(class= "#{class_for_type_field(post,1)}" id="#{id_for_type_field(1)}_#{post.id}")=name_for_type_field(1)
+            -#=post.content
+            -#%br
+            -#%ul(id="post_content_#{post.id}" style="list-style: disc inside;" )
+            -#  -post.discontent_posts.each do |dp|
+            -#    %li.union-list{:id => "li_id_#{dp.id}"}=dp.content
+
+            -#%a{"data-toggle" => "collapse", "data-target" => "collapse_dis_concept_#{post.id}", :style => "text-decoration:none;"}
+            -#  =post.content
+            -#%div.collapse{:id => }
+            =link_to view_concept_plan_post_path(@project, @post,:stage_id => @post_stage.id, :post_id => post.id, :what_view => true), :method => :get, :remote => true, :class => "color-teal", "data-toggle" => "collapse", "data-target" => "collapse_dis_concept_#{post.id}", :style => "text-decoration:none;border-bottom: 1px dashed #4ab0ce;", :id => "view_dis_concept_#{post.id}" do
+              %span.label(class= "#{class_for_type_field(post,1)}" id="#{id_for_type_field(1)}_#{post.id}")=name_for_type_field(1)
+              =post.content
+              %br
+            -#=render partial:'discontent/posts/post_short2', object: post
+            -#%br
+            -#- post.dispost_concepts.by_status(0).each_with_index do |pa, index|
+            -#  .row.plus-concept(id="tr_plus_concept_#{post.id}_#{pa.post_aspects.first.id}")
+            -#    .col-md-1
+            -#      =index+1
+            -#    .col-md-8
+            -#      - if pa.post_aspects.first.title!=''
+            -#        =link_to view_concept_plan_post_path(@project, @post, :post_id => post.id, :con_id => pa.post_aspects.first.id), :method => :get, :remote => true, :class => "color-teal", "data-toggle" => "collapse", "data-target" => "collapse_plus_concept_#{post.id}_#{pa.post_aspects.first.id}", :style => "text-decoration:none;", :id => "view_post_concept_#{post.id}_#{pa.post_aspects.first.id}" do
+            -#          =pa.post_aspects.first.title
+            -#      - else
+            -#        Без названия
+            -#    .col-md-2(class="td_plus_concept_#{pa.post_aspects.first.id}")
+            -#      -if plus_concept?(@post_stage,pa)
+            -#        .label.label-success Добавлено
+            -#    .col-md-1
+            -#      .pull-right
+            -#        =link_to add_form_for_concept_plan_post_path(@project, @post,:stage_id => @post_stage.id, :concept_id => pa.post_aspects.first.id, :save_form => true), :method => :put, :remote => true, :id => "plus_post_concept_#{pa.id}" do
+            -#          %button.btn.btn-sm.btn-warning{:type => "button"}
+            -#            %i.fa.fa-plus
+            -#  .concept-devider
         %br
         = link_to 'Добавить пустое нововведение',  add_form_for_concept_plan_post_path(@project, @post, stage_id: @post_stage.id, save_form: true), remote: true, method: :put, id: 'new_concept', class: 'btn btn-success pull-right'
 
