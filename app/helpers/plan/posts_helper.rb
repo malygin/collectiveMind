@@ -19,6 +19,13 @@ module Plan::PostsHelper
     false
   end
 
+  def plus_concept_new_idea?(stage,concept)
+    if stage.plan_post_aspects.pluck(:id).include? concept.id
+      return true
+    end
+    false
+  end
+
   def tag_for_concept(num)
     case num
       when 1
@@ -127,64 +134,68 @@ module Plan::PostsHelper
     if concept
       concept_aspect = concept.concept_post_aspect
       concept_post = concept_aspect.concept_post if concept_aspect
-      if concept_aspect and concept_post
-        notice_prefix_empty = " Поля не заполнены: "
-        notice_prefix_adap = " Поля не адаптированы под текущий проект: "
-        notice_prefix_note = " Поля, имеющие замечания от модератора: "
-        notice_empty = ''
-        notice_adap = ''
-        notice_note = ''
-        14.times do |n|
-          if view
-            link = content_tag :span, "#{field_for_concept(n+1)}", class: "badge badge-danger"
-          else
-            link = link_to "#{field_for_concept(n+1)} ", "/project/#{@project.id}/plan/posts/#{@post.id}/edit_concept?con_id=#{concept.id}&tag_field=#{tag_for_concept(n+1)}", :method => :put, :remote => true, :class => "badge badge-danger"
-          end
-          if [4,7].include?(n+1)
-            if !concept.plan_post_resources.by_type(field_for_res(n+1)).present?
-              notice_empty += link if link
-            else
-              old_resources = concept_post.concept_post_resources.by_type(field_for_res(n+1)).pluck(:name) unless concept_post.concept_post_resources.by_type(field_for_res(n+1)).nil?
-              old_desc = concept_post.concept_post_resources.by_type(field_for_res(n+1)).pluck(:desc) unless concept_post.concept_post_resources.by_type(field_for_res(n+1)).nil?
-              new_resources = concept.plan_post_resources.by_type(field_for_res(n+1)).pluck(:name) unless concept.plan_post_resources.by_type(field_for_res(n+1)).nil?
-              new_desc = concept.plan_post_resources.by_type(field_for_res(n+1)).pluck(:desc) unless concept.plan_post_resources.by_type(field_for_res(n+1)).nil?
 
-              if old_resources == new_resources and old_desc == new_desc
-                notice_adap += link if link
-              end
-            end
-            if concept.note_size?(n+1)
-              notice_note += link if link
-            end
-          elsif [5,8,10,11].include?(n+1)
-            if n+1 == 10
-              if !concept.plan_post_resources.by_type(field_for_res(n+1)).present?
-                notice_empty += link if link
-              end
-            else
-              if !concept.plan_post_means.by_type(field_for_res(n+1)).present?
-                notice_empty += link if link
-              end
-            end
-            if concept.note_size?(n+1)
-              notice_note += link if link
-            end
-          else
-            if !concept.send(column_for_concept(n+1)).present?
-              notice_empty += link if link
-            elsif ![9,12].include?(n+1) and concept.send(column_for_concept(n+1)) == concept_aspect.send(column_for_concept(n+1))
+      notice_prefix_empty = " Поля не заполнены: "
+      notice_prefix_adap = " Поля не адаптированы под текущий проект: "
+      notice_prefix_note = " Поля, имеющие замечания от модератора: "
+      notice_empty = ''
+      notice_adap = ''
+      notice_note = ''
+      14.times do |n|
+        if view
+          link = content_tag :span, "#{field_for_concept(n+1)}", class: "badge badge-danger"
+        else
+          link = link_to "#{field_for_concept(n+1)} ", "/project/#{@project.id}/plan/posts/#{@post.id}/edit_concept?con_id=#{concept.id}&tag_field=#{tag_for_concept(n+1)}", :method => :put, :remote => true, :class => "badge badge-danger"
+        end
+        if [4,7].include?(n+1)
+          if !concept.plan_post_resources.by_type(field_for_res(n+1)).present?
+            notice_empty += link if link
+          elsif concept_post
+            old_resources = concept_post.concept_post_resources.by_type(field_for_res(n+1)).pluck(:name) unless concept_post.concept_post_resources.by_type(field_for_res(n+1)).nil?
+            old_desc = concept_post.concept_post_resources.by_type(field_for_res(n+1)).pluck(:desc) unless concept_post.concept_post_resources.by_type(field_for_res(n+1)).nil?
+            new_resources = concept.plan_post_resources.by_type(field_for_res(n+1)).pluck(:name) unless concept.plan_post_resources.by_type(field_for_res(n+1)).nil?
+            new_desc = concept.plan_post_resources.by_type(field_for_res(n+1)).pluck(:desc) unless concept.plan_post_resources.by_type(field_for_res(n+1)).nil?
+
+            if old_resources == new_resources and old_desc == new_desc
               notice_adap += link if link
             end
-            cn = 5 if n+1 == 6
-            cn = 7 if n+1 == 13
-            cn = 8 if n+1 == 14
-            if concept.note_size?(n+1) or concept_post.note_size?(cn)
-              notice_note += link if link
+          end
+          if concept.note_size?(n+1)
+            notice_note += link if link
+          end
+        elsif [5,8,10,11].include?(n+1)
+          if n+1 == 10
+            if !concept.plan_post_resources.by_type(field_for_res(n+1)).present?
+              notice_empty += link if link
+            end
+          else
+            if !concept.plan_post_means.by_type(field_for_res(n+1)).present?
+              notice_empty += link if link
             end
           end
+          if concept.note_size?(n+1)
+            notice_note += link if link
+          end
+        else
+          if !concept.send(column_for_concept(n+1)).present?
+            notice_empty += link if link
+          elsif concept_aspect
+            if ![9,12].include?(n+1) and concept.send(column_for_concept(n+1)) == concept_aspect.send(column_for_concept(n+1))
+              notice_adap += link if link
+            end
+          end
+          cn = 5 if n+1 == 6
+          cn = 7 if n+1 == 13
+          cn = 8 if n+1 == 14
+          if concept.note_size?(n+1)
+            notice_note += link if link
+          end
+          if concept_post
+            notice_note += link if link and concept_post.note_size?(cn)
+          end
         end
-        (notice_empty.present? ? "<i class=\"fa fa-exclamation-triangle\"></i>" + notice_prefix_empty + notice_empty + "<br/>" : '') + (notice_adap.present? ? "<i class=\"fa fa-bell\"></i>" + notice_prefix_adap + notice_adap + "<br/>" : '') + (notice_note.present? ? "<i class=\"fa fa-comment\"></i>" + notice_prefix_note + notice_note + "<br/>" : '')
       end
+      (notice_empty.present? ? "<i class=\"fa fa-exclamation-triangle\"></i>" + notice_prefix_empty + notice_empty + "<br/>" : '') + (notice_adap.present? ? "<i class=\"fa fa-bell\"></i>" + notice_prefix_adap + notice_adap + "<br/>" : '') + (notice_note.present? ? "<i class=\"fa fa-comment\"></i>" + notice_prefix_note + notice_note + "<br/>" : '')
     end
   end
 

@@ -247,6 +247,7 @@ end
     @post_stage = Plan::PostStage.find(params[:stage_id])
     @aspects = Discontent::Aspect.where(:project_id => @project, :status => 0)
     @disposts = Discontent::Post.where(:project_id => @project, :status => 4).order(:id)
+    @new_ideas = Plan::PostAspect.joins("INNER JOIN plan_posts ON plan_posts.id = plan_post_aspects.plan_post_id").where("plan_posts.project_id = ? and plan_posts.id = ?",@project.id,@post.id).where(:plan_post_aspects => {:concept_post_aspect_id => nil, :discontent_aspect_id => nil})
     #@concept_posts = params[:plan_aspect_concepts]
     #@first_stage = params[:first_stage]
     #@concept_empty = params[:concept_empty]
@@ -436,26 +437,61 @@ end
     @save_form = params[:save_form]
     if @save_form
       if params[:concept_id]
-        @concept = Concept::PostAspect.find(params[:concept_id])
-        @cond = Plan::PostAspect.new
-        @cond.plan_post = @post
-        @cond.plan_post_stage = @post_stage
-        @cond.title= @concept.title
-        @cond.name= @concept.name
-        @cond.content = @concept.content
-        @cond.positive = @concept.positive
-        @cond.negative = @concept.negative
-        @cond.negative_r = @concept.negative_r
-        @cond.reality = @concept.reality
-        @cond.problems = @concept.problems
-        @cond.discontent_aspect_id = @concept.discontent_aspect_id
-        @cond.concept_post_aspect = @concept
-        @cond.save!
-        @concept.concept_post.concept_post_resources.by_type('positive_r').each do |rs|
-          @cond.plan_post_resources.build(:name => rs.name, :desc => rs.desc, :type_res => 'positive_r', :project_id => @project.id).save  if rs!=''
-        end
-        @concept.concept_post.concept_post_resources.by_type('negative_r').each do |rs|
-          @cond.plan_post_resources.build(:name => rs.name, :desc => rs.desc, :type_res => 'negative_r', :project_id => @project.id).save  if rs!=''
+        if params[:new_idea]
+          @concept = Plan::PostAspect.find(params[:concept_id])
+          @cond = Plan::PostAspect.new
+          @cond.plan_post = @post
+          @cond.plan_post_stage = @post_stage
+          @cond.title= @concept.title
+          @cond.name= @concept.name
+          @cond.content = @concept.content
+          @cond.positive = @concept.positive
+          @cond.negative = @concept.negative
+          @cond.control = @concept.control
+          @cond.obstacles = @concept.obstacles
+          @cond.reality = @concept.reality
+          @cond.problems = @concept.problems
+          @cond.save!
+          @concept.plan_post_resources.by_type('positive_r').each do |rs|
+            @cond.plan_post_resources.build(:name => rs.name, :desc => rs.desc, :type_res => 'positive_r', :project_id => @project.id).save  if rs!=''
+          end
+          @concept.plan_post_resources.by_type('negative_r').each do |rs|
+            @cond.plan_post_resources.build(:name => rs.name, :desc => rs.desc, :type_res => 'negative_r', :project_id => @project.id).save  if rs!=''
+          end
+          @concept.plan_post_resources.by_type('control_r').each do |rs|
+            @cond.plan_post_resources.build(:name => rs.name, :desc => rs.desc, :type_res => 'control_r', :project_id => @project.id).save  if rs!=''
+          end
+          @concept.plan_post_means.by_type('positive_s').each do |rs|
+            @cond.plan_post_means.build(:name => rs.name, :desc => rs.desc, :type_res => 'positive_s', :project_id => @project.id).save  if rs!=''
+          end
+          @concept.plan_post_means.by_type('negative_s').each do |rs|
+            @cond.plan_post_means.build(:name => rs.name, :desc => rs.desc, :type_res => 'negative_s', :project_id => @project.id).save  if rs!=''
+          end
+          @concept.plan_post_means.by_type('control_s').each do |rs|
+            @cond.plan_post_means.build(:name => rs.name, :desc => rs.desc, :type_res => 'control_s', :project_id => @project.id).save  if rs!=''
+          end
+        else
+          @concept = Concept::PostAspect.find(params[:concept_id])
+          @cond = Plan::PostAspect.new
+          @cond.plan_post = @post
+          @cond.plan_post_stage = @post_stage
+          @cond.title= @concept.title
+          @cond.name= @concept.name
+          @cond.content = @concept.content
+          @cond.positive = @concept.positive
+          @cond.negative = @concept.negative
+          @cond.negative_r = @concept.negative_r
+          @cond.reality = @concept.reality
+          @cond.problems = @concept.problems
+          @cond.discontent_aspect_id = @concept.discontent_aspect_id
+          @cond.concept_post_aspect = @concept
+          @cond.save!
+          @concept.concept_post.concept_post_resources.by_type('positive_r').each do |rs|
+            @cond.plan_post_resources.build(:name => rs.name, :desc => rs.desc, :type_res => 'positive_r', :project_id => @project.id).save  if rs!=''
+          end
+          @concept.concept_post.concept_post_resources.by_type('negative_r').each do |rs|
+            @cond.plan_post_resources.build(:name => rs.name, :desc => rs.desc, :type_res => 'negative_r', :project_id => @project.id).save  if rs!=''
+          end
         end
       else
           @cond = Plan::PostAspect.create(:title => 'Новое нововведение')
@@ -631,8 +667,12 @@ end
   def view_concept
     @project = Core::Project.find(params[:project])
     @post = Plan::Post.find(params[:id])
-    @dispost = Discontent::Post.find(params[:post_id])
-    @concept_post = Concept::PostAspect.find(params[:con_id])
+    unless params[:new_idea]
+      @dispost = Discontent::Post.find(params[:post_id])
+      @concept_post = Concept::PostAspect.find(params[:con_id])
+    else
+      @concept_post = Plan::PostAspect.find(params[:con_id])
+    end
     respond_to do |format|
       format.js
     end

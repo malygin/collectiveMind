@@ -14,7 +14,11 @@
       %p=light_concept.content
 
 -else
-  %div.collapse.text-left{:id => "collapse_plus_concept_#{dispost.id}_#{light_concept.id}"}
+  -if params[:new_idea]
+    -@id_collapse = "collapse_plus_concept_#{light_concept.id}"
+  -else
+    -@id_collapse = "collapse_plus_concept_#{dispost.id}_#{light_concept.id}"
+  %div.collapse.text-left{:id => @id_collapse}
     -if light_concept.name.present?
       .color-teal
         %b A1.

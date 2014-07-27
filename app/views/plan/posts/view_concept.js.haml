@@ -27,8 +27,15 @@
 -#text = text + "</div>";
 -#var con_id = $("#collapse_plus_concept_#{@dispost.id}_#{@concept_post.id}).attr('id');
 
-var concept = render_concept_collapse(#{@dispost.id},#{@concept_post.id});
-if (concept == false) {
-$("#tr_plus_concept_#{@dispost.id}_#{@concept_post.id}").after("#{escape_javascript(render :partial => 'light_concept', :object => @concept_post, :locals => { :dispost => @dispost, :table => false } )}");
-}
-$("#collapse_plus_concept_#{@dispost.id}_#{@concept_post.id}").collapse('toggle');
+-unless params[:new_idea]
+  var concept = render_concept_collapse(#{@dispost.id},#{@concept_post.id});
+  if (concept == false) {
+  $("#tr_plus_concept_#{@dispost.id}_#{@concept_post.id}").after("#{escape_javascript(render :partial => 'light_concept', :object => @concept_post, :locals => { :dispost => @dispost, :table => false } )}");
+  }
+  $("#collapse_plus_concept_#{@dispost.id}_#{@concept_post.id}").collapse('toggle');
+-else
+  var concept = render_concept_collapse("",#{@concept_post.id});
+  if (concept == false) {
+  $("#tr_plus_concept_#{@concept_post.id}").after("#{escape_javascript(render :partial => 'light_concept', :object => @concept_post, :locals => { :table => false } )}");
+  }
+  $("#collapse_plus_concept_#{@concept_post.id}").collapse('toggle');

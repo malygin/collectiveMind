@@ -8,7 +8,28 @@
         #option_for_select_concept(project="#{@project.id}" post="#{@post.id}" stage="#{@post_stage.id}")
         = link_to 'Добавить пустое нововведение',  add_form_for_concept_plan_post_path(@project, @post, stage_id: @post_stage.id, save_form: true), remote: true, method: :put, id: 'new_concept', class: 'btn btn-success pull-right'
         %br
-        %h4.text-primary Выберите нововведение:
+        %h4.color-green Новые идеи:
+        - @new_ideas.each_with_index do |post,ind|
+          .row.plus-concept(id="tr_plus_concept_#{post.id}")
+            .col-md-1
+              =ind+1
+            .col-md-8
+              - if post.title!=''
+                =link_to view_concept_plan_post_path(@project, @post, :con_id => post.id, :new_idea => true), :method => :get, :remote => true, :class => "color-teal", "data-toggle" => "collapse", "data-target" => "collapse_plus_concept_#{post.id}", :style => "text-decoration:none;", :id => "view_post_concept_#{post.id}" do
+                  =post.title
+              - else
+                Без названия
+            .col-md-2(class="td_plus_concept_#{post.id}")
+              -if plus_concept_new_idea?(@post_stage,post)
+                .label.label-success Добавлено
+            .col-md-1
+              .pull-right
+                =link_to add_form_for_concept_plan_post_path(@project, @post,:stage_id => @post_stage.id, :concept_id => post.id, :save_form => true, :new_idea => true), :method => :put, :remote => true, :id => "plus_post_concept_#{post.id}" do
+                  %button.btn.btn-sm.btn-warning{:type => "button"}
+                    %i.fa.fa-plus
+          .concept-devider
+        %br
+        %h4.color-teal Выберите нововведение:
         - @disposts.each do |post|
           -if post.dispost_concepts.by_status(0).present?
             =render partial:'discontent/posts/post_short2', object: post
