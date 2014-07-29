@@ -12,6 +12,8 @@
 #= require datepicker/bootstrap-datepicker
 #= require bootstrap3-editable/bootstrap-editable
 #= require jquery.autosize
+#= require totop/jquery.ui.totop
+#= require totop/easing
 
 $('#modal_help').modal
   keyboard: false
@@ -670,18 +672,18 @@ $.fn.extend popoverClosable: (options) ->
       data:
         group_id: group_id
 
-$(window).load ->
-  $(window).scroll ->
-    unless $(this).scrollTop() is 0
-      $("#toTop").fadeIn()
-    else
-      $("#toTop").fadeOut()
-    return
-
-  $("#toTop").click ->
-    $("body,html").animate {
-      scrollTop: 0
-    }, 800
+#$(window).load ->
+#  $(window).scroll ->
+#    unless $(this).scrollTop() is 0
+#      $("#toTop").fadeIn()
+#    else
+#      $("#toTop").fadeOut()
+#    return
+#
+#  $("#toTop").click ->
+#    $("body,html").animate {
+#      scrollTop: 0
+#    }, 800
 
 $("#wizard").bootstrapWizard onTabShow: (tab, navigation, index) ->
   $total = navigation.find("li").length
@@ -804,3 +806,14 @@ $(window).load ->
     $(this).find("option[value='2.0']").css 'color', '#e5603b'
     $(this).find("option[value='3.0']").css 'color', '#fd8605'
     $(this).find("option[value='4.0']").css 'color', '#56bc76'
+
+
+$(document).ready ->
+  #var defaults = {
+  #containerID: 'toTop', // fading element id
+  #containerHoverID: 'toTopHover', // fading element hover id
+  #scrollSpeed: 1200,
+  #easingType: 'linear'
+  #};
+  $().UItoTop easingType: "easeOutQuart"
+  return
