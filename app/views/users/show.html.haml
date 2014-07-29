@@ -39,7 +39,8 @@
               %h4(style="font-weight: bold;")
                 %span.color-green.pull-left
                   =club_status_show_user(@user)
-                  =@user.user_project_scores(@project.id).score
+                  -unless @user.user_project_scores(@project.id).nil?
+                    =@user.user_project_scores(@project.id).score
           .col-md-3
             -#%span.text-muted.pull-right
             -#  =@user.user_project_scores(@project.id).score
