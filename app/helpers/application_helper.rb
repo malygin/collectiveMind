@@ -348,8 +348,8 @@ module ApplicationHelper
   end
 
   def role_stat_color(user)
-    if user.role_stat == 2 or user.id == 3092
-      "background-color: rgba(215, 233, 208, 0.3);"
+    if user.role_stat == 2
+      "background-color: rgba(150, 236, 167, 0.3);"
     end
   end
 

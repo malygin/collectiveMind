@@ -4,13 +4,11 @@
     .sender
       =link_to child_comment.user, user_path(@project, child_comment.user)
       = render partial: '/shared/user_online', object: child_comment.user
-      =club_status_show_user(child_comment.user)
-      - if child_comment.user.type_user == 7
-        %span.label.label-success MD
-      - elsif child_comment.user.boss?
+      -#=club_status_show_user(child_comment.user)
+      - if child_comment.user.boss?
         %span.label.label-danger MD
       - if child_comment.user.role_expert?
-        %span.label.label-warning Эксперт
+        %span.label.label-success Эксперт
       - if current_user?(child_comment.user) or boss?
         .pull-right
           =link_to({:action => :comment_stat, :id => child_comment.post.id, :comment_id => child_comment.id, :dis_stat => 1,:com_stage => get_stage_for_improve(child_comment.get_class)},  :remote => true, :method => :put,  id: "dis_stat_comment_#{child_comment.id}") do
