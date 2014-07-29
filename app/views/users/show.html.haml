@@ -8,10 +8,10 @@
       .col-md-4
         = image_tag  @user.avatar(:normal)
         %br
-        %h3="Достижения (#{@user.awards.count} из 22)"
+        %h3="Достижения (#{@user.awards.for_project(@project).count} из 22)"
         %br
         -@awards.each do |a|
-          =image_tag('/assets/awards/'+a.url+'_70_70.png', title: a.name, class: "#{'disabled_award' if not @user.awards.include? a}")
+          =image_tag('/assets/awards/'+a.url+'_70_70.png', title: a.name, class: "#{'disabled_award' if not @user.awards.for_project(@project).include? a}")
       .col-md-8
         .row
           .col-md-9
@@ -32,14 +32,15 @@
               %h4(style="font-weight: bold;")
                 %span.color-green.pull-left
                   = link_to club_toggle_user_path(@project, @user), :remote => true, :method => :put, :style => 'text-decoration:none;', :id => "club_status_#{@user.id}" do
-                    =club_status(@user)
+                    =club_status_show_user(@user)
                   %a(href="#" id="userscore_#{@user.id}" class="userscore" data-pk="1" data-remote="true" data-resource="post" data-type="text" data-name="score" data-url="/project/#{@project.id}/users/#{@user.id}/update_score")
                     =@user.score
             -else
               %h4(style="font-weight: bold;")
                 %span.color-green.pull-left
-                  =club_status(@user)
-                  =@user.score
+                  =club_status_show_user(@user)
+                  -unless @user.user_project_scores(@project.id).nil?
+                    =@user.user_project_scores(@project.id).score
           .col-md-3
             -#%span.text-muted.pull-right
             -#  =@user.user_project_scores(@project.id).score

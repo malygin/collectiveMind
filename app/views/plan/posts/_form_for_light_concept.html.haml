@@ -1,4 +1,4 @@
-= form_for form_for_light_concept, :url => {:project => @project.id, :stage_id => @post_stage ? @post_stage.id : nil, concept_id: @post_concept ? @post_concept.id : nil, save_form:true, :action => params[:edit_concept] ? 'update_concept' : 'add_form_for_concept'}, :remote => true, :method => :put do |f|
+= form_for form_for_light_concept, :url => {:project => @project.id, :stage_id => @post_stage ? @post_stage.id : nil, concept_id: @post_concept ? @post_concept.id : (@cond ? @cond.id : nil), save_form:true, :action => 'update_concept'}, :remote => true, :method => :put do |f|
   #mod
   .row
     .col-md-12
@@ -9,6 +9,7 @@
         =f.text_field :title, style: 'width: 100%; height: 30px', placeholder:'Введите краткое название для своего нововведения'
         %br
         %br
+
   .row#novation_what
     .col-md-12
       .text-center
@@ -18,6 +19,8 @@
         %br
         =f.text_area :name, :class => "concept_cond form-control", rows: 5, style: 'width: 100%;'
         %br
+  -if @project.status == 9
+    = render partial: 'plan/posts/note_list', :locals => {:post_field => form_for_light_concept,:type_fd => 1}
   .row#novation_how
     .col-md-12
       .text-center
@@ -27,6 +30,8 @@
         %br
         =f.text_area :content, :class => "concept_cond form-control", rows: 5, style: 'width: 100%;'
         %br
+  -if @project.status == 9
+    = render partial: 'plan/posts/note_list', :locals => {:post_field => form_for_light_concept,:type_fd => 2}
   .row#cond
     .col-md-12
       .text-center
@@ -36,6 +41,8 @@
         %br
         =f.text_area :positive, :class => "concept_cond form-control", rows: 5, style: 'width: 100%;'
         %br
+  -if @project.status == 9
+    = render partial: 'plan/posts/note_list', :locals => {:post_field => form_for_light_concept,:type_fd => 3}
   .row#cond_res
     .col-md-12
       .text-center
@@ -67,7 +74,8 @@
               %br
               = text_area_tag "res_positive_r[]", '', class: 'form-control', placeholder: 'Пояснение к ресурсу'
       %a.btn.btn-success.pull-right{onclick:"return add_new_resource_to_plan('positive_r',#{@project.id});"} Добавить ресурс
-
+  -if @project.status == 9
+    = render partial: 'plan/posts/note_list', :locals => {:post_field => form_for_light_concept,:type_fd => 4}
   .row#cond_s
     .col-md-12
       .text-center
@@ -100,7 +108,8 @@
               %br
               = text_area_tag "res_positive_s[]", '', class: 'form-control', placeholder: 'Пояснение к ресурсу'
       %a.btn.btn-success.pull-right{onclick:"return add_new_resource_to_plan('positive_s',#{@project.id});"} Добавить ресурс
-
+  -if @project.status == 9
+    = render partial: 'plan/posts/note_list', :locals => {:post_field => form_for_light_concept,:type_fd => 5}
   .row#negative_h
     .col-md-12
       .text-center
@@ -110,7 +119,8 @@
         %br
         =f.text_area :negative, :class => "concept_cond form-control", rows: 5, style: 'width: 100%;'
         %br
-
+  -if @project.status == 9
+    = render partial: 'plan/posts/note_list', :locals => {:post_field => form_for_light_concept,:type_fd => 6}
   .row#negative_res
     .col-md-12
       .text-center
@@ -143,7 +153,8 @@
               %br
               = text_area_tag "res_negative_r[]", '', class: 'form-control', placeholder: 'Пояснение к ресурсу'
       %a.btn.btn-success.pull-right{onclick:"return add_new_resource_to_plan('negative_r','#{@project.id}');"} Добавить ресурс
-
+  -if @project.status == 9
+    = render partial: 'plan/posts/note_list', :locals => {:post_field => form_for_light_concept,:type_fd => 7}
   .row#negative_s
     .col-md-12
       .text-center
@@ -176,7 +187,8 @@
               %br
               = text_area_tag "res_negative_s[]", '', class: 'form-control', placeholder: 'Пояснение к ресурсу'
       %a.btn.btn-success.pull-right{onclick:"return add_new_resource_to_plan('negative_s',#{@project.id});"} Добавить ресурс
-
+  -if @project.status == 9
+    = render partial: 'plan/posts/note_list', :locals => {:post_field => form_for_light_concept,:type_fd => 8}
   .row#control
     .col-md-12
       .text-center
@@ -186,7 +198,8 @@
         %br
         =f.text_area :control, :class => "concept_cond form-control", rows: 5,  style: 'width: 100%;'
         %br
-
+  -if @project.status == 9
+    = render partial: 'plan/posts/note_list', :locals => {:post_field => form_for_light_concept,:type_fd => 9}
   .row#control_res
     .col-md-12
       .text-center
@@ -219,7 +232,8 @@
               %br
               = text_area_tag "res_control_r[]", '', class: 'form-control', placeholder: 'Пояснение к ресурсу'
       %a.btn.btn-success.pull-right{onclick:"return add_new_resource_to_plan('control_r',#{@project.id});"} Добавить ресурс
-
+  -if @project.status == 9
+    = render partial: 'plan/posts/note_list', :locals => {:post_field => form_for_light_concept,:type_fd => 10}
   .row#control_s
     .col-md-12
       .text-center
@@ -252,7 +266,8 @@
               %br
               = text_area_tag "res_control_s[]", '', class: 'form-control', placeholder: 'Пояснение к ресурсу'
       %a.btn.btn-success.pull-right{onclick:"return add_new_resource_to_plan('control_s',#{@project.id});"} Добавить ресурс
-
+  -if @project.status == 9
+    = render partial: 'plan/posts/note_list', :locals => {:post_field => form_for_light_concept,:type_fd => 11}
   .row#obstacles_bcd
     .col-md-12
       .text-center
@@ -262,7 +277,8 @@
         %br
         =f.text_area :obstacles, :class => "concept_cond form-control", rows: 5,  style: 'width: 100%;'
         %br
-
+  -if @project.status == 9
+    = render partial: 'plan/posts/note_list', :locals => {:post_field => form_for_light_concept,:type_fd => 12}
   .row#problems
     .col-md-12
       .text-center
@@ -272,6 +288,8 @@
         %br
         =f.text_area :problems, :class => "concept_cond form-control", rows: 5, style: 'width: 100%;'
         %br
+  -if @project.status == 9
+    = render partial: 'plan/posts/note_list', :locals => {:post_field => form_for_light_concept,:type_fd => 13}
   .row#reality
     .col-md-12
       .text-center
@@ -281,6 +299,8 @@
         %br
         =f.text_area :reality, :class => "concept_cond form-control", rows: 5, style: 'width: 100%;'
         %br
+  -if @project.status == 9
+    = render partial: 'plan/posts/note_list', :locals => {:post_field => form_for_light_concept,:type_fd => 14}
 
   .pull-right
     =f.submit 'Сохранить', class: 'btn btn-success'

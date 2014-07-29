@@ -56,13 +56,13 @@ module Estimate::PostsHelper
   def css_class_estimate_all(e)
     case e
       when 1
-        'text-danger'
+        'color-dark-red'
       when 2
-        'text-danger'
+        'color-red'
       when 3
-        'text-warning'
+        'color-orange'
       when 4
-        'text-success'
+        'color-green'
     end
   end
 
@@ -116,13 +116,13 @@ module Estimate::PostsHelper
   def css_class_estimate_simple(e)
     case e
       when 1
-        'text-danger'
+        'color-dark-red'
       when 2
-        'text-danger'
+        'color-red'
       when 3
-        'text-warning'
+        'color-orange'
       when 4
-        'text-success'
+        'color-green'
     end
   end
 
@@ -132,5 +132,18 @@ module Estimate::PostsHelper
       return true if user_vote_post == post
     end
     false
+  end
+
+  def css_class_estimate_form_select(e)
+    case e
+      when 1
+        'color-grey'
+      when 2
+        'color-red'
+      when 3
+        'color-orange'
+      when 4
+        'color-green'
+    end
   end
 end

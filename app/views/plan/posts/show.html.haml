@@ -17,7 +17,7 @@
 
       #bar.progress.progress-small
         .progress-bar
-      .tab-content
+      .tab-content(style="overflow:visible;")
         #tab1.tab-pane
           .form-horizontal
             %fieldset
@@ -61,18 +61,19 @@
             %fieldset
               #table_stages
                 - unless @post.post_stages.nil?
-                  -@post.post_stages.each_with_index do |stage|
+                  -@post.post_stages.each_with_index do |stage, ind|
                     %section.widget
                       .body
                         %div(class="td_stage_#{stage.id}")
+                          %h3
+                            %span="Этап #{ind+1}. "
+                            %span.color-teal=stage.name
                           -if stage.date_begin and stage.date_end
-                            %small.color-green
+                            %h3.color-green
                               =Russian::strftime(stage.date_begin, "%d %b %Y")
                               ="-"
                               =Russian::strftime(stage.date_end, "%d %b %Y")
-                            %br
-                          .color-teal=stage.name
-                          %br
+
                           =stage.desc
                           %br
                           %br
@@ -92,8 +93,12 @@
                                   %td(rowspan="#{rowspan_concept_show(concept)}" class="td_concept_#{concept.id}")
                                     =index+1
                                   %td(rowspan="#{rowspan_concept_show(concept)}" class="td_concept_#{concept.id}" id="td_concept_#{concept.id}")
-                                    =link_to view_concept_table_plan_post_path(@project, @post, :con_id => concept.id), :method => :get, :remote => true,:class => "color-white", :style => "text-decoration:none;", :id => "view_post_concept_table_#{concept.id}" do
+                                    =link_to view_concept_table_plan_post_path(@project, @post, :con_id => concept.id), :method => :get, :remote => true,:class => "color-white", :style => "text-decoration:none;border-bottom: 1px dashed #fafbfc;", :id => "view_post_concept_table_#{concept.id}" do
                                       %span.h5{:id => "name_post_concept_#{concept.id}"}=concept.title
+                                    %br
+                                    =concept.name
+                                    %br
+                                    = check_validate_concept(concept,true).html_safe if check_validate_concept(concept)
                                     -#-unless concept.plan_post_resources.by_type('positive_r').empty?
                                     -#  %br
                                     -#  - concept.plan_post_resources.by_type('positive_r').each do |res|

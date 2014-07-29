@@ -51,17 +51,6 @@ module UsersHelper
     end
   end
 
-  def club_status(user)
-    case user.type_user
-      when 4,7
-        content_tag(:b, 'RC',:class =>'color-teal', :style => 'text-decoration:none;', :id => "club_status_tag_#{user.id}")
-      when 5
-        content_tag(:b, 'RC WATCHER',:class =>'color-red', :style => 'text-decoration:none;', :id => "club_status_tag_#{user.id}")
-      else
-        content_tag(:b, 'RC?',:class =>'color-orange', :style => 'text-decoration:none;', :id => "club_status_tag_#{user.id}")
-    end
-  end
-
   def club_status_show_user(user)
     case user.type_user
       when 4,7

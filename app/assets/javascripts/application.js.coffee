@@ -9,7 +9,7 @@
 #= require selectize
 #= require liFixar/jquery.liFixar
 #= require wizard/jquery.bootstrap.wizard
-#= require wizard/bootstrap-datepicker
+#= require datepicker/bootstrap-datepicker
 #= require bootstrap3-editable/bootstrap-editable
 #= require jquery.autosize
 
@@ -177,7 +177,7 @@ $(window).load ->
 
   $('.datepicker').datepicker(
     format: 'yyyy-mm-dd'
-    autoclose: true
+    "autoclose": true
   ).on "changeDate", (e) ->
     $(this).datepicker "hide"
     return
@@ -485,11 +485,16 @@ $('#select_for_aspects').on 'change', ->
         sel_dis_id: sel_dis_id
         add_concept: 1
 
-@activate_datepicker= ->
-  $('.datepicker').datepicker(
-    format: 'yyyy-mm-dd'
-  ).on "changeDate", (e) ->
-    $(this).datepicker "hide"
+#@activate_datepicker= ->
+#  $('.datepicker').datepicker(
+#    format: 'yyyy-mm-dd',
+#    autoclose: true,
+#    autoSize: true,
+#    todayHighlight: true,
+#    startDate: "07/05/2014",
+#    weekStart: 1
+#  ).on "changeDate", (e) ->
+#    $(this).datepicker('hide')
 
 @plan_select_concept= (el)->
   optsel = $("#option_for_select_concept")
@@ -606,7 +611,12 @@ $('#select_for_aspects').on 'change', ->
   $('#child_comments_form_'+comment).empty()
 
 @render_concept_collapse= (post,concept)->
-  con_id = $("#collapse_plus_concept_"+post+"_"+concept).attr('id')
+  if post!='' and concept!=''
+    con_id = $("#collapse_plus_concept_"+post+"_"+concept).attr('id')
+  if post!='' and concept == ''
+    con_id = $("#collapse_dis_concept_"+post).attr('id')
+  if post =='' and concept != ''
+    con_id = $("#collapse_plus_concept_"+concept).attr('id')
   if typeof con_id is 'undefined'
     return false
   else
@@ -694,3 +704,103 @@ $("#wizard").bootstrapWizard onTabShow: (tab, navigation, index) ->
   if $current is 3
     render_concept_side()
 
+@scroll_to_elem= (el)->
+  $(".modal").on "shown.bs.modal", ->
+    if $("#" + el)
+      pos = $("#" + el).offset().top
+      $(".modal").animate {
+        scrollTop: pos
+      }, 500
+
+@activate_datepicker= ->
+  $("#date_begin").datepicker("refresh")
+  $("#date_end").datepicker("refresh")
+
+  nowTemp = new Date()
+  now = new Date(nowTemp.getFullYear(), nowTemp.getMonth(), nowTemp.getDate(), 0, 0, 0, 0)
+  $("#date_begin").datepicker("setStartDate", now);
+  $("#date_end").datepicker("setStartDate", now);
+
+  checkin = $("#date_begin").datepicker(
+  ).on("changeDate", (ev) ->
+    newDate = new Date(ev.date)
+    $("#date_end").datepicker("setStartDate", newDate)
+    if $("#date_end").val() == ''
+      $("#date_end").datepicker("setDate", newDate)
+    else
+      if ev.date.valueOf() > Date.parse($("#date_end").val())
+        newDate.setDate newDate.getDate() + 1
+        $("#date_end").datepicker("setDate", newDate)
+        $("#date_end")[0].focus()
+    checkin.hide()
+  ).data("datepicker")
+  checkout = $("#date_end").datepicker(
+  ).on("changeDate", (ev) ->
+    checkout.hide()
+  ).data("datepicker")
+
+@activate_datepicker_action= (date_begin,date_end)->
+  $("#date_begin_action").datepicker("refresh")
+  $("#date_end_action").datepicker("refresh")
+
+  nowTemp = new Date()
+  now = new Date(nowTemp.getFullYear(), nowTemp.getMonth(), nowTemp.getDate(), 0, 0, 0, 0)
+  if date_begin and date_end
+    $("#date_begin_action").datepicker("setStartDate", new Date(Date.parse(date_begin)));
+    $("#date_begin_action").datepicker("setEndDate", new Date(Date.parse(date_end)));
+    $("#date_end_action").datepicker("setStartDate", new Date(Date.parse(date_begin)));
+    $("#date_end_action").datepicker("setEndDate", new Date(Date.parse(date_end)));
+  else
+    $("#date_begin_action").datepicker("setStartDate", now);
+    $("#date_end_action").datepicker("setStartDate", now);
+
+  checkin = $("#date_begin_action").datepicker(
+  ).on("changeDate", (ev) ->
+    newDate = new Date(ev.date)
+    $("#date_end_action").datepicker("setStartDate", newDate)
+    if $("#date_end_action").val() == ''
+      $("#date_end_action").datepicker("setDate", newDate)
+    else
+      if ev.date.valueOf() > Date.parse($("#date_end_action").val())
+        newDate.setDate newDate.getDate() + 1
+        $("#date_end_action").datepicker("setDate", newDate)
+        $("#date_end_action")[0].focus()
+    checkin.hide()
+  ).data("datepicker")
+  checkout = $("#date_end_action").datepicker(
+  ).on("changeDate", (ev) ->
+    checkout.hide()
+  ).data("datepicker")
+
+
+@color_select= (el)->
+  switch $(el).val()
+    when '1.0'
+      color = '#999'
+    when '2.0'
+      color = '#e5603b'
+    when '3.0'
+      color = '#fd8605'
+    when '4.0'
+      color = '#56bc76'
+
+  $(el).css 'color', color
+
+
+$(window).load ->
+  $("select.estimate_select").each ->
+    switch $(this).val()
+      when '1.0'
+        color = '#999'
+      when '2.0'
+        color = '#e5603b'
+      when '3.0'
+        color = '#fd8605'
+      when '4.0'
+        color = '#56bc76'
+
+    $(this).css 'color', color
+    $(this).find("option[value='1.0']").css 'color', '#999'
+    $(this).find("option[value='2.0']").css 'color', '#e5603b'
+    $(this).find("option[value='3.0']").css 'color', '#fd8605'
+    $(this).find("option[value='4.0']").css 'color', '#56bc76'

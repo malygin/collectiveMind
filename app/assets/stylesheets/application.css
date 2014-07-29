@@ -6,9 +6,15 @@
 *= require bootstrap-wysihtml5/b3
 *= require liFixar/liFixar
 *= require bootstrap3-editable/bootstrap-editable
+*= require datepicker/datepicker3
 */
 /* require_tree .*/
 
+.estimate_select{
+    -webkit-appearance: none;
+    -webkit-appearance: menulist-button;
+    background-color: #645e5e;
+}
 ul.panel-collapse.in{
     width: 200px;
 }
@@ -9516,6 +9522,7 @@ a.thumbnail:focus {
  * http://www.apache.org/licenses/LICENSE-2.0
  *
  */
+/*
 .datepicker {
   top: 0;
   left: 0;
@@ -9526,9 +9533,9 @@ a.thumbnail:focus {
   -webkit-border-radius: 1px;
   border-radius: 1px;
   z-index: 100000;
-  /*.dow {
+  .dow {
   	border-top: 1px solid #ddd !important;
-  }*/
+  }
 }
 .datepicker:before {
   content: '';
@@ -9623,7 +9630,7 @@ a.thumbnail:focus {
   width: 16px;
   height: 16px;
 }
-
+*/
 /*
 Version: @@ver@@ Timestamp: @@timestamp@@
 */

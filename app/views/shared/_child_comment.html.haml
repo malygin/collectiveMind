@@ -1,6 +1,6 @@
 .chat-message{id: "comment_#{child_comment.id}"}
   = render 'users/user_post', :user => child_comment.user
-  .chat-message-body.stage_menu1{id: "comment_content_#{child_comment.id}"}
+  .chat-message-body.stage_menu1{id: "comment_content_#{child_comment.id}", style: "#{role_stat_color(child_comment.user)}"}
     .sender
       =link_to child_comment.user, user_path(@project, child_comment.user)
       = render partial: '/shared/user_online', object: child_comment.user
@@ -9,7 +9,8 @@
         %span.label.label-success MD
       - elsif child_comment.user.boss?
         %span.label.label-danger MD
-
+      - if child_comment.user.role_expert?
+        %span.label.label-warning Эксперт
       - if current_user?(child_comment.user) or boss?
         .pull-right
           =link_to({:action => :comment_stat, :id => child_comment.post.id, :comment_id => child_comment.id, :dis_stat => 1,:com_stage => get_stage_for_improve(child_comment.get_class)},  :remote => true, :method => :put,  id: "dis_stat_comment_#{child_comment.id}") do
