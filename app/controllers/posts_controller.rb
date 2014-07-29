@@ -65,6 +65,9 @@ def to_work_redirect
   path_link = "/project/#{@project.id}/" + current_model.table_name.sub('_posts','/posts') + "/to_work"
   able = ['life_tape_posts','discontent_posts','concept_posts','plan_posts','estimate_posts'].include? current_model.table_name
   check = get_check_field?(current_model.table_name + '_to_work')
+  unless check
+    current_user.user_checks.create(project_id: @project.id, check_field: current_model.table_name + '_to_work', status: true).save!
+  end
   redirect_to path_link if params[:asp].nil? and able and !check or params[:help]
 end
 
@@ -528,7 +531,7 @@ def index
     else
       @path_link = "/project/#{@project.id}/" + current_model.table_name.sub('_posts','/posts')
     end
-    @table_name = current_model.table_name.sub('_posts','')
+    #@table_name = current_model.table_name.sub('_posts','')
 
     respond_to do |format|
       format.html { render :layout => 'application_two_column'}

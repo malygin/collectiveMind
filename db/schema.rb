@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140724185249) do
+ActiveRecord::Schema.define(:version => 20140728233431) do
 
   create_table "answers", :force => true do |t|
     t.string   "text"
@@ -553,6 +553,12 @@ ActiveRecord::Schema.define(:version => 20140724185249) do
     t.float    "ozf4"
     t.float    "ozs4"
     t.float    "on4"
+    t.integer  "nep1"
+    t.integer  "nep2"
+    t.integer  "nep3"
+    t.integer  "nep4"
+    t.text     "nep"
+    t.integer  "all_grade"
     t.boolean  "first_stage"
     t.integer  "plan_post_first_cond_id"
   end
@@ -712,12 +718,10 @@ ActiveRecord::Schema.define(:version => 20140724185249) do
     t.string   "comment_admin"
     t.boolean  "trash",                  :default => false
     t.integer  "frustration_comment_id"
-    t.integer  "useful_frustration_id"
   end
 
   add_index "frustration_comments", ["created_at"], :name => "index_frustration_comments_on_created_at"
   add_index "frustration_comments", ["frustration_id"], :name => "index_frustration_comments_on_frustration_id"
-  add_index "frustration_comments", ["useful_frustration_id"], :name => "index_frustration_comments_on_useful_frustration_id"
   add_index "frustration_comments", ["user_id"], :name => "index_frustration_comments_on_user_id"
 
   create_table "frustration_essays", :force => true do |t|
@@ -1119,6 +1123,9 @@ ActiveRecord::Schema.define(:version => 20140724185249) do
     t.datetime "updated_at", :null => false
   end
 
+# Could not dump table "projects" because of following StandardError
+#   Unknown type 'serial' for column 'id'
+
   create_table "question_comment_votings", :force => true do |t|
     t.integer  "user_id"
     t.integer  "comment_id"
@@ -1201,9 +1208,9 @@ ActiveRecord::Schema.define(:version => 20140724185249) do
     t.integer  "user_id"
     t.string   "check_field"
     t.boolean  "status"
-    t.integer  "project_id"
     t.datetime "created_at",  :null => false
     t.datetime "updated_at",  :null => false
+    t.integer  "project_id"
     t.string   "value"
   end
 
@@ -1248,6 +1255,7 @@ ActiveRecord::Schema.define(:version => 20140724185249) do
     t.string   "unconfirmed_email"
     t.datetime "last_seen"
     t.integer  "type_user"
+    t.integer  "role_stat"
   end
 
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true

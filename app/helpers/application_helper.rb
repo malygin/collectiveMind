@@ -347,6 +347,12 @@ module ApplicationHelper
     end
   end
 
+  def role_stat_color(user)
+    if user.role_stat == 2 or user.id == 3092
+      "background-color: rgba(215, 233, 208, 0.3);"
+    end
+  end
+
   def field_for_journal(post)
     if post.instance_of? LifeTape::Post
       post.discontent_aspects.first.content unless post.discontent_aspects.first.nil?
