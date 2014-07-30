@@ -15,7 +15,9 @@ class Core::ProjectsController < ApplicationController
   def index
     @core_projects = Core::Project.order(:id).all
     @core_project = @core_projects.last
-    @view_projects = Core::Project.where(:type_access => list_type_projects_for_user).order(:id).limit(limit_projects_for_user)
+    #@view_projects = Core::Project.where(:type_access => list_type_projects_for_user).order(:id).limit(limit_projects_for_user)
+    @opened_projects = Core::Project.where(:type_access => 0).order(:id)
+    @demo_projects = Core::Project.where(:type_access => 3).order(:id).limit(2)
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @core_projects }

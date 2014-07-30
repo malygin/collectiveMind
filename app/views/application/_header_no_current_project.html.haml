@@ -1,9 +1,10 @@
 
 .navbar
   .logo.pull-left.hidden-xs
-    %h2
-      %strong Mass
-      Decision
+    %a{:href => "/"}
+      %h2
+        %strong Mass
+        Decision
 
   %ul.nav.navbar-nav.pull-right.navbar-menu
     - if signed_in?

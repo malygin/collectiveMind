@@ -1,4 +1,4 @@
-=link_to '/project/'+@project.id.to_s do
+=link_to list_projects_path do
   %span.fa.fa-angle-double-left
   вернуться к процедуре
 
@@ -33,6 +33,6 @@
 .text-center
   = will_paginate @users
 %br
-=link_to '/project/'+@project.id.to_s do
+=link_to list_projects_path do
   %span.fa.fa-angle-double-left
   вернуться к процедуре
