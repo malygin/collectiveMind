@@ -1,14 +1,38 @@
 =link_to '/project/'+@project.id.to_s do
   %span.fa.fa-angle-double-left
   вернуться к процедуре
-%section.widget
-  .body
-    %h1 Выберите участников для закрытой процедуры
-    %table.table
-      %tbody
-        - @users.each_with_index do |user, i|
-          = render :partial => 'user', :locals => {:user => user, :number => i+1}
-    .text-center
-      = will_paginate @users
-    %br
-    =link_to 'вернуться к процедуре', '/project/'+@project.id.to_s
+
+%h3 Выберите участников для закрытой процедуры
+%h2= @project.name
+%br
+%table.table
+  %tbody
+    - @users.each_with_index do |user, i|
+      %tr
+        %td
+          %span=i+1
+        %td
+          .media
+            %a.pull-left(href="/project/#{@project.id}/users/#{user.id}")
+              = image_tag user.avatar.url(:thumb),  class: "media-object"
+              %br
+              =link_to user, user_path(@project, user)
+              = render partial: '/shared/user_online', object: user
+        %td
+
+        %td{:id => "list_users_#{user.id}"}
+          -if user.projects.include? @project
+            =link_to remove_user_for_project_user_path(@project, user), class:'btn btn-danger', :method => :put, :remote => true do
+              %i.fa.fa-minus
+              Удалить
+          -else
+            =link_to add_user_for_project_user_path(@project, user), class:'btn btn-success', :method => :put, :remote => true do
+              %i.fa.fa-plus
+              Добавить
+
+.text-center
+  = will_paginate @users
+%br
+=link_to '/project/'+@project.id.to_s do
+  %span.fa.fa-angle-double-left
+  вернуться к процедуре

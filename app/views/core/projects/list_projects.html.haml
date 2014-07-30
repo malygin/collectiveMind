@@ -7,7 +7,7 @@
   %br
   %h5
     - @view_projects.each do |project|
-      .row
+      .row(style="font-weight:500;")
         .col-md-4
           = project.name
         .col-md-2
@@ -21,6 +21,8 @@
             =link_to list_users_users_path(project), class:'btn btn-sm btn-primary' do
               Участники
               %i.fa.fa-arrow-right
+        -else
+          .col-md-1
         .col-md-2
           =link_to edit_core_project_path(project), class:'btn btn-sm btn-info' do
             Редактировать

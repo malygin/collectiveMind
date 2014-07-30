@@ -92,6 +92,8 @@ class Core::Project < ActiveRecord::Base
       true
     elsif [0,3].include?(type_project)
       true
+    elsif [2].include?(type_project) and user.projects.include?(self)
+      true
     else
       false
     end

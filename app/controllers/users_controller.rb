@@ -5,7 +5,7 @@ class UsersController < ApplicationController
 	before_filter :correct_user, :only => [:edit, :update]
 	before_filter :admin_user, :only => [:destroy]
   before_filter :journal_data, :only => [:index, :new, :edit, :show, :users_rc]
-  before_filter :admin_authenticate, :only => [:list_users]
+  before_filter :admin_authenticate, :only => [:list_users,:add_user_for_project,:remove_user_for_project]
 	def new
 		@user = User.new
 		@title = "Sign up"
@@ -62,9 +62,27 @@ class UsersController < ApplicationController
 
   def list_users
     @project = Core::Project.find(params[:project])
-    @users = User.where(:type_user => !nil).paginate(:page =>params[:page])
+    @users = User.paginate(:page =>params[:page])
     respond_to do |format|
       format.html { render :layout => 'core/list_projects'}
+    end
+  end
+
+  def add_user_for_project
+    @project = Core::Project.find(params[:project])
+    @user = User.find(params[:id])
+    @user.core_project_users.create(:project_id => @project.id)
+    respond_to do |format|
+      format.js
+    end
+  end
+
+  def remove_user_for_project
+    @project = Core::Project.find(params[:project])
+    @user = User.find(params[:id])
+    @user.core_project_users.where(:project_id => @project.id).destroy_all
+    respond_to do |format|
+      format.js
     end
   end
 
