@@ -40,9 +40,7 @@ end
     end
 
     @post = current_model.new
-    # @order = params[:order]
 
-    # @folder = :life_tape
 
     if params[:viewed]
       Journal.events_for_content(@project, current_user, @aspect.id).update_all("viewed = 'true'")
