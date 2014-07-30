@@ -8,11 +8,19 @@
   %h5
     - @view_projects.each do |project|
       .row
-        .col-md-6
+        .col-md-4
           = project.name
         .col-md-2
           .badge.badge-success
             =status_project(project)
+        .col-md-1
+          .badge.badge-primary
+            = project.type_access_name
+        -if project.type_access == 2
+          .col-md-1
+            =link_to list_users_users_path(project), class:'btn btn-sm btn-primary' do
+              Участники
+              %i.fa.fa-arrow-right
         .col-md-2
           =link_to edit_core_project_path(project), class:'btn btn-sm btn-info' do
             Редактировать

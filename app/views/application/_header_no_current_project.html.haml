@@ -7,8 +7,12 @@
 
   %ul.nav.navbar-nav.pull-right.navbar-menu
     - if signed_in?
-      %li
-        =link_to current_user, "project/#{@core_project.id}/users/#{current_user.id}"
+      -if @core_project
+        %li
+          =link_to current_user, "project/#{@core_project.id}/users/#{current_user.id}"
+      -else
+        %li
+          = current_user.to_s
       %li
         = link_to destroy_user_session_path, :method => :delete do
           Выйти

@@ -29,6 +29,7 @@ class Core::Project < ActiveRecord::Base
 # 3 demo (opened for all)
 # 4 testing
 # 5 preparing procedure
+# 10 disabled
 
   attr_accessible :desc,:postion, :secret, :type_project, :name, :short_desc, :knowledge, :status, :type_access, 
   :url_logo, :stage1, :stage2, :stage3, :stage4, :stage5
@@ -93,6 +94,27 @@ class Core::Project < ActiveRecord::Base
       true
     else
       false
+    end
+  end
+
+  def type_access_name
+    type_project = self.type_access
+
+    case type_project
+      when 0
+        'Открытая'
+      when 1
+        'Для клубистов'
+      when 2
+        'Закрытая'
+      when 3
+        'Демо'
+      when 4
+        'Тестовая'
+      when 5
+        'Подготовка'
+      else
+        'Не задано'
     end
   end
 

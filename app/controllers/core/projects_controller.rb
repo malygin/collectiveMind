@@ -39,9 +39,8 @@ class Core::ProjectsController < ApplicationController
   end
 
   def list_projects
-    @core_projects = Core::Project.where(:type_access => [0,3]).order(:id)
-    @core_project = @core_projects.last
     @view_projects = Core::Project.where(:type_access => list_type_projects_for_user).order(:id)
+    @core_project = @view_projects.last
     respond_to do |format|
       format.html { render :layout => 'core/list_projects' }
     end
@@ -69,7 +68,7 @@ class Core::ProjectsController < ApplicationController
   def create
     @core_project = Core::Project.new(params[:core_project])
     @core_project.type_project  =  0
-    @core_project.type_access  =  2
+    # @core_project.type_access  =  2
     @core_project.status  =  1
     respond_to do |format|
       if @core_project.save

@@ -2,6 +2,6 @@
 
 = render 'form'
 
-= link_to 'Перейти', @core_project
+= link_to 'Перейти', "/project/#{@core_project.id}"
 \|
 = link_to 'Назад', core_projects_path
