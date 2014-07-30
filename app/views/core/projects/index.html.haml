@@ -1,3 +1,16 @@
+- if signed_in?
+  %h2
+    %strong Список процедур
+  - @view_projects.each do |project|
+    .row
+      .col-md-9
+        = project.name
+      .col-md-3
+        =link_to "/project/#{project.id}", class:'btn btn-sm btn-danger' do
+          Перейти к процедуре
+          %i.fa.fa-arrow-right
+    %br
+
 %h2
   %strong О проекте
 %p

@@ -28,6 +28,7 @@ CollectiveMind::Application.routes.draw do
 
 devise_for :users
 match '/project/:project', :to => 'core/projects#to_project'
+match '/list_projects', :to => 'core/projects#list_projects'
 
 namespace :core, :shallow => true do
   resources :projects do

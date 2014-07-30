@@ -59,6 +59,11 @@ class UsersController < ApplicationController
     #@users = User.where('admin=?', false).where('type_user = 4 or type_user = 5').order('score DESC').paginate(:page =>params[:page])
   end
 
+  def list_users
+    @project = Core::Project.find(params[:project])
+    @users = User.where(:type_user => !nil).paginate(:page =>params[:page])
+  end
+
   def update_score
     @project = Core::Project.find(params[:project])
     @user = User.find(params[:id])

@@ -3,6 +3,7 @@ class Core::ProjectsController < ApplicationController
   # GET /core/projects
   # GET /core/projects.json
   before_filter :boss_authenticate, :only => [:next_stage, :pr_stage]
+  before_filter :admin_authenticate, :only => [:list_projects]
   before_filter :project_by_id
   
   def  project_by_id
@@ -14,6 +15,7 @@ class Core::ProjectsController < ApplicationController
   def index
     @core_projects = Core::Project.order(:id).all
     @core_project = @core_projects.last
+    @view_projects = Core::Project.where(:type_access => list_type_projects_for_user).order(:id).limit(limit_projects_for_user)
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @core_projects }
@@ -33,6 +35,15 @@ class Core::ProjectsController < ApplicationController
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @core_project }
+    end
+  end
+
+  def list_projects
+    @core_projects = Core::Project.where(:type_access => [0,3]).order(:id)
+    @core_project = @core_projects.last
+    @view_projects = Core::Project.where(:type_access => list_type_projects_for_user).order(:id)
+    respond_to do |format|
+      format.html { render :layout => 'core/list_projects' }
     end
   end
 
@@ -62,7 +73,7 @@ class Core::ProjectsController < ApplicationController
     @core_project.status  =  1
     respond_to do |format|
       if @core_project.save
-        format.html { redirect_to root_path, success: 'Project was successfully created.' }
+        format.html { redirect_to list_projects_path, success: 'Project was successfully created.' }
         format.json { render json: @core_project, status: :created, location: @core_project }
       else
         format.html { render action: "new" }
@@ -78,7 +89,7 @@ class Core::ProjectsController < ApplicationController
 
     respond_to do |format|
       if @core_project.update_attributes(params[:core_project])
-        format.html { redirect_to @core_project, success: 'Процедура успешно отредактирована' }
+        format.html { redirect_to list_projects_path, success: 'Процедура успешно отредактирована' }
         format.json { head :no_content }
       else
         format.html { render action: "edit" }
@@ -91,7 +102,7 @@ class Core::ProjectsController < ApplicationController
   # DELETE /core/projects/1.json
   def destroy
     @core_project = Core::Project.find(params[:id])
-    @core_project.destroy
+    @core_project.update_attributes(:type_access => 10)
 
     respond_to do |format|
       format.html { redirect_to core_projects_url }

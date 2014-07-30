@@ -22,7 +22,13 @@ class Core::Project < ActiveRecord::Base
 ####### type_project
 # 0 normal
 # 1 invisible
-
+####### new type_access
+# 0 opened for all
+# 1 only for ratio club and all moderators
+# 2 closed, only for invited and prime moderators
+# 3 demo (opened for all)
+# 4 testing
+# 5 preparing procedure
 
   attr_accessible :desc,:postion, :secret, :type_project, :name, :short_desc, :knowledge, :status, :type_access, 
   :url_logo, :stage1, :stage2, :stage3, :stage4, :stage5
@@ -66,6 +72,27 @@ class Core::Project < ActiveRecord::Base
         self.stage2.to_i - user.voted_discontent_posts.by_project(project.id).size
       when 'plan'
         self.stage5.to_i - user.voted_plan_posts.by_project(project.id).size
+    end
+  end
+
+  def project_access(user)
+    type_project = self.type_access
+    type_user = user.type_user
+
+    if [1,7].include?(type_user) and [0,1,2,3,4,5].include?(type_project)
+      true
+    elsif [6].include?(type_user) and [0,1,3,4,5].include?(type_project)
+      true
+    elsif [2,3].include?(type_user) and [0,1,3].include?(type_project)
+      true
+    elsif [4,5].include?(type_user) and [0,1,3].include?(type_project)
+      true
+    elsif [8].include?(type_user) and [0,3].include?(type_project)
+      true
+    elsif [0,3].include?(type_project)
+      true
+    else
+      false
     end
   end
 

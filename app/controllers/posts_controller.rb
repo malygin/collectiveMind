@@ -8,22 +8,33 @@ class PostsController < ApplicationController
   #before_filter :have_rights
   before_filter :have_rights, :only =>[:edit]
   before_filter :to_work_redirect, only: [:index]
+  before_filter :have_project_access
 
 
 
   # before_filter :authorized_user, :only => :destroy
- def authenticate
-   unless current_user
-     redirect_to '/users/sign_in'
-   end
- end
- def have_rights
-   unless current_model != "Knowbase::Post"
-     if  current_model.find(params[:id]).user != current_user and not boss?
-       redirect_to :back
-     end
-   end
- end
+  def authenticate
+    unless current_user
+      redirect_to '/users/sign_in'
+    end
+  end
+
+  def have_project_access
+    @project = Core::Project.find(params[:project])
+    if @project
+      unless @project.project_access(current_user)
+        redirect_to :root
+      end
+    end
+  end
+
+  def have_rights
+    unless current_model != "Knowbase::Post"
+      if current_model.find(params[:id]).user != current_user and not boss?
+        redirect_to :back
+      end
+    end
+  end
 
 
   def current_model

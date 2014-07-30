@@ -34,7 +34,11 @@ module SessionsHelper
 
   def boss_authenticate
 		deny_access unless boss?
-	end
+  end
+
+  def admin_authenticate
+    deny_access unless prime_admin?
+  end
 
 
 	def redirect_back_or(default)
@@ -52,9 +56,13 @@ module SessionsHelper
 
 	def admin?
     [1,6,7].include? current_user.type_user unless current_user.nil?
-	end	
+  end
 
-	def jury?
+  def prime_admin?
+    [1,7].include? current_user.type_user unless current_user.nil?
+  end
+
+  def jury?
     current_user.type_user == 3 unless current_user.nil?
 	end
 
@@ -68,6 +76,35 @@ module SessionsHelper
 
   def cluber?
     [4,5,7].include? current_user.type_user unless current_user.nil?
+  end
+
+  def list_type_projects_for_user
+    unless current_user.nil?
+      case current_user.type_user
+        when 1,7
+          [0,1,2,3,4,5]
+        when 6
+          [0,1,3,4,5]
+        when 2,3
+          [0,1,3]
+        when 4,5
+          [0,1,3]
+        when 8
+          [0,3]
+        else
+          [0,3]
+      end
+    else
+      [-1]
+    end
+  end
+
+  def limit_projects_for_user
+    unless current_user.nil?
+      [1,6,7].include?(current_user.type_user) ? 0 : 2
+    else
+      0
+    end
   end
 
   def user?

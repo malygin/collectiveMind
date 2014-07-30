@@ -1,0 +1,31 @@
+- if signed_in?
+  .pull-right
+    = link_to 'Создать проект', new_core_project_path, class: 'btn btn-lg btn-primary'
+  %h2
+    %strong Список процедур
+  %br
+  %br
+  %h5
+    - @view_projects.each do |project|
+      .row
+        .col-md-6
+          = project.name
+        .col-md-2
+          .badge.badge-success
+            =status_project(project)
+        .col-md-2
+          =link_to edit_core_project_path(project), class:'btn btn-sm btn-info' do
+            Редактировать
+            %i.fa.fa-arrow-right
+        .col-md-2
+          -if project.status == 20
+            =link_to "/project/#{project.id}/life_tape/posts", class:'btn btn-sm btn-danger' do
+              Перейти к процедуре
+              %i.fa.fa-arrow-right
+          -else
+            =link_to "/project/#{project.id}", class:'btn btn-sm btn-danger' do
+              Перейти к процедуре
+              %i.fa.fa-arrow-right
+
+
+      %br

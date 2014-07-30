@@ -335,7 +335,6 @@ module ApplicationHelper
         link_to "/project/#{@project.id}/life_tape/posts?asp=#{comment.post.discontent_aspects.first.id}#comment_#{comment.id}" do
           content_tag :span, 'Источник', class: 'label label-primary'
         end
-
       when 2
         link_to "/project/#{@project.id}/discontent/posts/#{comment.post.id}#comment_#{comment.id}" do
           content_tag :span, 'Источник', class: 'label label-primary'
@@ -350,6 +349,24 @@ module ApplicationHelper
   def role_stat_color(user)
     if user.role_stat == 2
       "background-color: rgba(215, 233, 208, 0.3);"
+    end
+  end
+
+  def status_project(project)
+    if project.status == 0 or project.type_access == 5
+      "Идет подготовка к процедуре"
+    elsif [1,2].include? project.status
+      "Идет 1 этап"
+    elsif [3,4,5,6].include? project.status
+      "Идет 2 этап"
+    elsif [7,8].include? project.status
+      "Идет 3 этап"
+    elsif [9].include? project.status
+      "Идет 4 этап"
+    elsif [10,11,12].include? project.status
+      "Идет 5 этап"
+    elsif [20].include? project.status
+      "Завершена"
     end
   end
 
