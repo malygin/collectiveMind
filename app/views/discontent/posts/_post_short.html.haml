@@ -17,7 +17,7 @@
         = render partial: '/shared/user_online', object: post_short.user
       - if boss? or role_expert?
         .pull-right
-          =link_to({:action => :discuss_stat, :id => post_short.id, :discuss_stat => 1},  :remote => true, :method => :put,  id: "discuss_stat_post_#{post_short.id}") do
+          =link_to({:controller => post_short.class.name.underscore.pluralize, :action => :discuss_stat, :id => post_short.id, :discuss_stat => 1},  :remote => true, :method => :put,  id: "discuss_stat_post_#{post_short.id}") do
             %span.label(class="#{label_discuss_stat(post_short)}") ТРЕБУЕТ ОБСУЖДЕНИЯ
       - elsif post_short.discuss_stat
         .pull-right
