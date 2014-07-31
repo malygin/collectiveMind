@@ -1,8 +1,8 @@
-.chat-message{id: "comment_#{comment.id}"}
+.chat-message{id: "comment_#{comment.id}", :class => "#{'border_note' if comment.discuss_stat }"}
   = render 'users/user_post', :user => comment.user
   -#-if comment.created_at > 1.day.ago
   -#  %span.label.label-danger за последние сутки
-  .chat-message-body.stage_menu1{id: "comment_content_#{comment.id}", style: "#{role_stat_color(comment.user)}"}
+  .chat-message-body.stage_menu1{id: "comment_content_#{comment.id}", class: "#{comment_stat_color(comment)}"}
     .sender
       =link_to comment.user, user_path(@project, comment.user)
       = render partial: '/shared/user_online', object: comment.user
@@ -11,6 +11,15 @@
         %span.label.label-danger MD
       - if comment.user.role_expert?
         %span.label.label-success Эксперт
+
+      - if boss? or role_expert?
+        .pull-right
+          =link_to({:action => :comment_stat, :id => comment.post.id, :comment_id => comment.id, :discuss_stat => 1, :com_stage => get_stage_for_improve(comment.get_class)},  :remote => true, :method => :put,  id: "discuss_stat_comment_#{comment.id}") do
+            %span.label(class="#{label_discuss_stat(comment)}") ТРЕБУЕТ ОБСУЖДЕНИЯ
+      - elsif comment.discuss_stat
+        .pull-right
+          %span.label-danger ТРЕБУЕТ ОБСУЖДЕНИЯ
+
       - if current_user?(comment.user) or boss?
         .pull-right
           =link_to({:action => :comment_stat, :id => comment.post.id, :comment_id => comment.id, :dis_stat => 1, :com_stage => get_stage_for_improve(comment.get_class)},  :remote => true, :method => :put,  id: "dis_stat_comment_#{comment.id}") do

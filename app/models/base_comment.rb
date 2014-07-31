@@ -1,6 +1,6 @@
 module BaseComment  extend ActiveSupport::Concern
   included do
-    attr_accessible :content, :user, :censored, :post_id, :comment_id, :dis_stat, :con_stat
+    attr_accessible :content, :user, :censored, :post_id, :comment_id, :dis_stat, :con_stat, :discuss_stat
     belongs_to :user
     belongs_to :post
 

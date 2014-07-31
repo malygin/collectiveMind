@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140728233431) do
+ActiveRecord::Schema.define(:version => 20140730224833) do
 
   create_table "answers", :force => true do |t|
     t.string   "text"
@@ -65,12 +65,13 @@ ActiveRecord::Schema.define(:version => 20140728233431) do
     t.integer  "user_id"
     t.integer  "post_id"
     t.boolean  "useful"
-    t.datetime "created_at",                    :null => false
-    t.datetime "updated_at",                    :null => false
-    t.boolean  "censored",   :default => false
+    t.datetime "created_at",                      :null => false
+    t.datetime "updated_at",                      :null => false
+    t.boolean  "censored",     :default => false
     t.integer  "comment_id"
     t.boolean  "dis_stat"
     t.boolean  "con_stat"
+    t.boolean  "discuss_stat"
   end
 
   add_index "concept_comments", ["created_at"], :name => "index_concept_comments_on_created_at"
@@ -321,12 +322,13 @@ ActiveRecord::Schema.define(:version => 20140728233431) do
     t.text     "content"
     t.integer  "user_id"
     t.integer  "post_id"
-    t.datetime "created_at",                    :null => false
-    t.datetime "updated_at",                    :null => false
-    t.boolean  "censored",   :default => false
+    t.datetime "created_at",                      :null => false
+    t.datetime "updated_at",                      :null => false
+    t.boolean  "censored",     :default => false
     t.integer  "comment_id"
     t.boolean  "dis_stat"
     t.boolean  "con_stat"
+    t.boolean  "discuss_stat"
   end
 
   create_table "discontent_notes", :force => true do |t|
@@ -447,12 +449,13 @@ ActiveRecord::Schema.define(:version => 20140728233431) do
     t.integer  "user_id"
     t.integer  "post_id"
     t.text     "content"
-    t.datetime "created_at",                    :null => false
-    t.datetime "updated_at",                    :null => false
-    t.boolean  "censored",   :default => false
+    t.datetime "created_at",                      :null => false
+    t.datetime "updated_at",                      :null => false
+    t.boolean  "censored",     :default => false
     t.integer  "comment_id"
     t.boolean  "dis_stat"
     t.boolean  "con_stat"
+    t.boolean  "discuss_stat"
   end
 
   add_index "essay_comments", ["post_id"], :name => "index_essay_comments_on_post_id"
@@ -497,12 +500,13 @@ ActiveRecord::Schema.define(:version => 20140728233431) do
     t.integer  "user_id"
     t.integer  "post_id"
     t.text     "content"
-    t.datetime "created_at",                    :null => false
-    t.datetime "updated_at",                    :null => false
-    t.boolean  "censored",   :default => false
+    t.datetime "created_at",                      :null => false
+    t.datetime "updated_at",                      :null => false
+    t.boolean  "censored",     :default => false
     t.integer  "comment_id"
     t.boolean  "dis_stat"
     t.boolean  "con_stat"
+    t.boolean  "discuss_stat"
   end
 
   add_index "estimate_comments", ["post_id"], :name => "index_estimate_comments_on_post_id"
@@ -862,12 +866,13 @@ ActiveRecord::Schema.define(:version => 20140728233431) do
     t.text     "content"
     t.integer  "user_id"
     t.integer  "post_id"
-    t.datetime "created_at",                    :null => false
-    t.datetime "updated_at",                    :null => false
-    t.boolean  "censored",   :default => false
+    t.datetime "created_at",                      :null => false
+    t.datetime "updated_at",                      :null => false
+    t.boolean  "censored",     :default => false
     t.integer  "comment_id"
     t.boolean  "dis_stat"
     t.boolean  "con_stat"
+    t.boolean  "discuss_stat"
   end
 
   add_index "life_tape_comments", ["created_at"], :name => "index_life_tape_comments_on_created_at"
@@ -940,12 +945,13 @@ ActiveRecord::Schema.define(:version => 20140728233431) do
     t.integer  "user_id"
     t.integer  "post_id"
     t.text     "content"
-    t.datetime "created_at",                    :null => false
-    t.datetime "updated_at",                    :null => false
-    t.boolean  "censored",   :default => false
+    t.datetime "created_at",                      :null => false
+    t.datetime "updated_at",                      :null => false
+    t.boolean  "censored",     :default => false
     t.integer  "comment_id"
     t.boolean  "dis_stat"
     t.boolean  "con_stat"
+    t.boolean  "discuss_stat"
   end
 
   add_index "plan_comments", ["post_id"], :name => "index_plan_comments_on_post_id"
@@ -1123,6 +1129,9 @@ ActiveRecord::Schema.define(:version => 20140728233431) do
     t.datetime "updated_at", :null => false
   end
 
+# Could not dump table "projects" because of following StandardError
+#   Unknown type 'serial' for column 'id'
+
   create_table "question_comment_votings", :force => true do |t|
     t.integer  "user_id"
     t.integer  "comment_id"
@@ -1205,9 +1214,9 @@ ActiveRecord::Schema.define(:version => 20140728233431) do
     t.integer  "user_id"
     t.string   "check_field"
     t.boolean  "status"
-    t.integer  "project_id"
     t.datetime "created_at",  :null => false
     t.datetime "updated_at",  :null => false
+    t.integer  "project_id"
     t.string   "value"
   end
 

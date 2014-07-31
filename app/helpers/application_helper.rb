@@ -285,6 +285,16 @@ module ApplicationHelper
         'label-default'
     end
   end
+  def label_discuss_stat(comment)
+    case comment.discuss_stat
+      when false
+        'label-default'
+      when true
+        'label-danger'
+      else
+        'label-default'
+    end
+  end
   def get_class_for_improve(stage)
     case stage
       when 1
@@ -346,9 +356,11 @@ module ApplicationHelper
     end
   end
 
-  def role_stat_color(user)
-    if user.role_stat == 2
-      "background-color: rgba(215, 233, 208, 0.3);"
+  def comment_stat_color(comment)
+    if comment.discuss_stat
+      'discuss_comment'
+    elsif comment.user.role_stat == 2
+      'expert_comment'
     end
   end
 

@@ -62,6 +62,10 @@ module SessionsHelper
     [1,7].include? current_user.type_user unless current_user.nil?
   end
 
+  def role_expert?
+    current_user.role_stat == 2 unless current_user.nil?
+  end
+
   def jury?
     current_user.type_user == 3 unless current_user.nil?
 	end

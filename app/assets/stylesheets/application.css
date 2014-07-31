@@ -149,7 +149,12 @@ hr {
 .note_text {
     text-decoration: none !important;
 }
-
+.discuss_comment {
+  background-color: rgba(240, 64, 106, 0.2) !important;
+}
+.expert_comment {
+  background-color: rgba(215, 233, 208, 0.3) !important;
+}
 
 p, a {
     word-wrap: break-word;

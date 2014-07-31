@@ -164,6 +164,10 @@ end
       @comment.toggle(:con_stat)
       @comment.update_attributes(con_stat: @comment.con_stat)
     end
+    if params[:discuss_stat].present?
+      @comment.toggle(:discuss_stat)
+      @comment.update_attributes(discuss_stat: @comment.discuss_stat)
+    end
     respond_to do |format|
       format.js
     end

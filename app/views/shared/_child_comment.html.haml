@@ -1,6 +1,6 @@
-.chat-message{id: "comment_#{child_comment.id}"}
+.chat-message{id: "comment_#{child_comment.id}", :class => "#{'border_note' if child_comment.discuss_stat }"}
   = render 'users/user_post', :user => child_comment.user
-  .chat-message-body.stage_menu1{id: "comment_content_#{child_comment.id}", style: "#{role_stat_color(child_comment.user)}"}
+  .chat-message-body.stage_menu1{id: "comment_content_#{child_comment.id}", class: "#{comment_stat_color(child_comment)}"}
     .sender
       =link_to child_comment.user, user_path(@project, child_comment.user)
       = render partial: '/shared/user_online', object: child_comment.user
@@ -9,6 +9,15 @@
         %span.label.label-danger MD
       - if child_comment.user.role_expert?
         %span.label.label-success Эксперт
+
+      - if boss? or role_expert?
+        .pull-right
+          =link_to({:action => :comment_stat, :id => child_comment.post.id, :comment_id => child_comment.id, :discuss_stat => 1, :com_stage => get_stage_for_improve(child_comment.get_class)},  :remote => true, :method => :put,  id: "discuss_stat_comment_#{child_comment.id}") do
+            %span.label(class="#{label_discuss_stat(child_comment)}") ТРЕБУЕТ ОБСУЖДЕНИЯ
+      - elsif child_comment.discuss_stat
+        .pull-right
+          %span.label-danger ТРЕБУЕТ ОБСУЖДЕНИЯ
+
       - if current_user?(child_comment.user) or boss?
         .pull-right
           =link_to({:action => :comment_stat, :id => child_comment.post.id, :comment_id => child_comment.id, :dis_stat => 1,:com_stage => get_stage_for_improve(child_comment.get_class)},  :remote => true, :method => :put,  id: "dis_stat_comment_#{child_comment.id}") do

@@ -159,6 +159,10 @@ class User < ActiveRecord::Base
     [1,6,7].include? self.type_user
   end
 
+  def prime_admin?
+    [1,7].include? self.type_user
+  end
+
   def expert?
     self.type_user == 2
   end
