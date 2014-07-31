@@ -329,11 +329,11 @@ module ApplicationHelper
       comment = "#{get_class_for_improve(post.imp_stage)}::Comment".constantize.find(post.imp_comment)
       case post.imp_stage
         when 1
-          "Доработано из " + (link_to "предложения ", "/project/#{@project.id}/life_tape/posts?asp=#{comment.post.discontent_aspects.first.id}#comment_#{comment.id}") + (link_to comment.user, user_path(@project, comment.user))
+          "| Доработано из " + (link_to "предложения ", "/project/#{@project.id}/life_tape/posts?asp=#{comment.post.discontent_aspects.first.id}#comment_#{comment.id}") + (link_to comment.user, user_path(@project, comment.user))
         when 2
-          "Доработано из " + (link_to "предложения ", "/project/#{@project.id}/discontent/posts/#{comment.post.id}#comment_#{comment.id}") + (link_to comment.user, user_path(@project, comment.user))
+          "| Доработано из " + (link_to "предложения ", "/project/#{@project.id}/discontent/posts/#{comment.post.id}#comment_#{comment.id}") + (link_to comment.user, user_path(@project, comment.user))
         when 3
-          "Доработано из " + (link_to "предложения ", "/project/#{@project.id}/concept/posts/#{comment.post.id}#comment_#{comment.id}") + (link_to comment.user, user_path(@project, comment.user))
+          "| Доработано из " + (link_to "предложения ", "/project/#{@project.id}/concept/posts/#{comment.post.id}#comment_#{comment.id}") + (link_to comment.user, user_path(@project, comment.user))
       end
     end
   end

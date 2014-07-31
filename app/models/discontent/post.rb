@@ -2,7 +2,7 @@
 
 class Discontent::Post < ActiveRecord::Base
   include BasePost
-  attr_accessible :whend, :whered, :aspect_id, :replace_id, :aspect, :style, :discontent_post_id, :important, :status_content, :status_whered, :status_whend, :imp_comment, :imp_stage
+  attr_accessible :whend, :whered, :aspect_id, :replace_id, :aspect, :style, :discontent_post_id, :important, :status_content, :status_whered, :status_whend, :imp_comment, :imp_stage, :discuss_stat
   belongs_to :aspect
   #has_many :childs, :class_name => 'Discontent::Post', :foreign_key => 'replace_id'
   #belongs_to :post, :class_name => 'Discontent::Post', :foreign_key => 'replace_id'

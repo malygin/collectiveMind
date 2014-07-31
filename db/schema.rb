@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140730224833) do
+ActiveRecord::Schema.define(:version => 20140731064841) do
 
   create_table "answers", :force => true do |t|
     t.string   "text"
@@ -186,6 +186,7 @@ ActiveRecord::Schema.define(:version => 20140730224833) do
     t.boolean  "stat_reality"
     t.integer  "imp_comment"
     t.integer  "imp_stage"
+    t.boolean  "discuss_stat"
   end
 
   add_index "concept_posts", ["created_at"], :name => "index_concept_posts_on_created_at"
@@ -418,6 +419,7 @@ ActiveRecord::Schema.define(:version => 20140730224833) do
     t.boolean  "status_whend"
     t.integer  "imp_comment"
     t.integer  "imp_stage"
+    t.boolean  "discuss_stat"
   end
 
   add_index "discontent_posts", ["aspect_id"], :name => "index_discontent_posts_on_aspect_id"

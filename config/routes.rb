@@ -125,6 +125,7 @@ scope '/project/:project' do
         put :update_group
         put :destroy_group
         put :union_group
+        put :discuss_stat
       end
     end
   end
@@ -137,6 +138,7 @@ scope '/project/:project' do
         put :new_note
         put :create_note
         put :destroy_note
+        put :discuss_stat
       end
     end
   end

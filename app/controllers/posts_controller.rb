@@ -172,6 +172,17 @@ end
       format.js
     end
   end
+  def discuss_stat
+    @project = Core::Project.find(params[:project])
+    @post = current_model.find(params[:id])
+    if params[:discuss_stat].present?
+      @post.toggle(:discuss_stat)
+      @post.update_attributes(discuss_stat: @post.discuss_stat)
+    end
+    respond_to do |format|
+      format.js
+    end
+  end
 
 def index
     @posts = current_model.where(:project_id => @project).paginate(:page => params[:page])
