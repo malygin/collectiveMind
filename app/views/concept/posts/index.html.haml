@@ -13,7 +13,7 @@
         %span(style='font-size: 20px;line-height: 30px;')
           Сбор идей для решения несовершенств в рамках процедуры:
           =@project.name
-      - if signed_in? and @project.status == 7
+      - if signed_in? and (@project.status == 7 or @project.demo?)
         .col-md-3
           .pull-right
             = link_to 'Быстрый cтарт!', concept_posts_fast_discussion_concepts_path(@project) ,remote: true, id: 'fast_discussion_concepts',  class: 'btn btn-lg btn-warning'
@@ -64,7 +64,7 @@
                         %td
                           %span.h4.color-orange
                             =status_for_concept(pa.post_aspects.first)
-                  -if  @project.status == 7
+                  -if  @project.status == 7 or @project.demo?
                     %tr
                       %td{:colspan => 4, :style => "font-weight: normal !important;"}
                         %a.btn.btn-lg.btn-warning.btn-block(href="/project/#{@project.id}/concept/posts/new?dis_id=#{post.id}&asp_id=#{@aspect_post.id}" style="font-weight: normal !important;")

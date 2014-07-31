@@ -18,12 +18,12 @@
         %span(style='font-size: 20px;line-height: 30px;')
           Создание проектов в рамках процедуры:
           =@project.name
-      - if signed_in? and @project.status == 9
+      - if signed_in? and (@project.status == 9 or @project.demo?)
         .col-md-3
           .pull-right
             = link_to '+ Добавить Проект', new_plan_post_path(@project) , id: 'add_record',  class: 'btn btn-lg btn-success'
     -if boss?
-      -if @project.status == 9
+      -if @project.status == 9 or @project.demo?
         %br
         .row
           .col-md-12

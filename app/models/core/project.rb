@@ -189,6 +189,11 @@ class Core::Project < ActiveRecord::Base
         10
      end
   end
+
+  def demo?
+    self.type_access == 3
+  end
+
   def  status_title(status = self.status)
     case status
       when 0

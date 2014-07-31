@@ -31,7 +31,7 @@
           Сбор несовершенств в рамках процедуры:
           =@project.name
 
-      - if signed_in? and (@project.status == 3 or @project.status == 4 or @project.status == 5)
+      - if signed_in? and (@project.status == 3 or @project.status == 4 or @project.status == 5 or @project.demo?)
         .col-md-3
           .pull-right
             = link_to 'Быстрый cтарт!', discontent_posts_fast_discussion_discontents_path(@project) ,remote: true, id: 'fast_discussion_discontents',  class: 'btn btn-lg btn-danger'
@@ -40,7 +40,7 @@
   .body
 
     %a{name:'top'}
-    - if signed_in? and @project.status ==3
+    - if signed_in? and (@project.status ==3 or @project.demo?)
       = link_to '+ Добавить свое несовершенство', new_discontent_post_path(@project, asp: params[:asp]) , id: 'add_record',  class: 'btn  btn-danger'
       %br
       %br

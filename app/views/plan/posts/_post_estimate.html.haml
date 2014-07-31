@@ -26,7 +26,7 @@
               =post_estimate.voted_users.size
             Проголосовать
     = render 'shared/post_social_bar2', :post => post_estimate
-    -if @project.status == 10
+    -if @project.status == 10 or @project.demo?
       %br
 
       = link_to '+Добавить оценку', '/project/'+@project.id.to_s+'/estimate/posts/new?plan_id='+post_estimate.id.to_s, class:'btn btn-xs btn-primary'

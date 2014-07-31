@@ -12,12 +12,12 @@
 
       .col-md-3
 
-        - if signed_in? and @project.status == 1
+        - if signed_in? and (@project.status == 1 or @project.demo?)
           .text-right
-            -if fast_discussion_able?
+            -if fast_discussion_able? or @project.demo?
               = link_to 'Быстрый старт!', life_tape_posts_fast_discussion_topics_path(@project) ,remote: true, id: 'fast_discussion_topics',  class: 'btn btn-lg btn-info '
             %br
-            -if boss?
+            -if boss? or @project.demo?
               %br
               =link_to '+ Добавить новую тему', new_discontent_aspect_path(@project),:remote => true,:id => "new_aspect",  class: 'btn btn-sm btn-primary'
 
