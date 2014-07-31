@@ -307,6 +307,8 @@ module ApplicationHelper
         'Plan'
       when 5
         'Estimate'
+      when 6
+        'Essay'
     end
   end
   def get_stage_for_improve(c)
@@ -321,6 +323,8 @@ module ApplicationHelper
         4
       when 'Estimate'
         5
+      when 'Essay'
+        6
     end
   end
 
