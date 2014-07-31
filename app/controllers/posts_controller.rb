@@ -167,6 +167,18 @@ end
     if params[:discuss_stat].present?
       @comment.toggle(:discuss_stat)
       @comment.update_attributes(discuss_stat: @comment.discuss_stat)
+      if @comment.discuss_stat
+        current_user.journals.build(:type_event=>name_of_comment_for_param+'_discuss_stat', :project => @project,
+                                    :body=>"#{trim_content(@comment.content)}", :body2=>trim_content(field_for_journal(@post)),
+                                    :first_id=> (@post.instance_of? LifeTape::Post) ? @post.discontent_aspects.first.id : @post.id, :second_id => @comment.id).save!
+
+        if @comment.user!=current_user
+          current_user.journals.build(:type_event=>'my_'+name_of_comment_for_param+'_discuss_stat', :user_informed => @comment.user, :project => @project,
+                                      :body=>"#{trim_content(@comment.content)}", :body2=>trim_content(field_for_journal(@post)),
+                                      :first_id=> (@post.instance_of? LifeTape::Post) ? @post.discontent_aspects.first.id : @post.id, :second_id => @comment.id,
+                                      :personal=> true, :viewed=> false).save!
+        end
+      end
     end
     respond_to do |format|
       format.js
@@ -178,6 +190,14 @@ end
     if params[:discuss_stat].present?
       @post.toggle(:discuss_stat)
       @post.update_attributes(discuss_stat: @post.discuss_stat)
+      if @post.discuss_stat
+        current_user.journals.build(:type_event=>name_of_model_for_param+'_discuss_stat', :project => @project,
+                                  :body=>"#{trim_content(@post.content)}", :first_id=> @post.id).save!
+        if @post.user!=current_user
+          current_user.journals.build(:type_event=>'my_'+name_of_model_for_param+'_discuss_stat', :user_informed => @post.user, :project => @project,
+                                      :body=>"#{trim_content(@post.content)}", :first_id=> @post.id, :personal=> true, :viewed=> false).save!
+        end
+      end
     end
     respond_to do |format|
       format.js
