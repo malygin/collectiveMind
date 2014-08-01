@@ -1,4 +1,3 @@
-ru.devise.failure.user.not_found_in_database
 ru:
   errors:
     messages:
@@ -20,8 +19,7 @@ ru:
       invalid_token: 'Ссылка не правильная.'
       timeout: 'Ваша сессия устарела. Пожалуйста, войдите снова.'
       inactive: 'Ваш аккаунт еще не активирован.'
-      user:
-        not_found_in_database: 'Пользователь не найдет в системе'
+
 
     sessions:
       user:
