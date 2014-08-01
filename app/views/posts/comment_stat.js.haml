@@ -4,7 +4,7 @@
   $('#con_stat_comment_#{@comment.id} span').toggleClass('label-default label-warning')
 -if params[:discuss_stat].present?
   $('#discuss_stat_comment_#{@comment.id} span').toggleClass('label-default label-danger')
-  $('#comment_#{@comment.id}').toggleClass('border_note')
+  -#$('#comment_#{@comment.id}').toggleClass('border_note')
   $('#comment_content_#{@comment.id}').toggleClass('discuss_comment')
 
 

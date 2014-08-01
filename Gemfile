@@ -15,8 +15,6 @@ group :development, :test do
 end
 
 group :production do
-  gem 'pg'
-  gem 'activerecord-postgresql-adapter'
   gem 'rails_12factor'
   gem 'newrelic_rpm', '>=3.7.3'
   gem 'heroku-deflater'
@@ -51,6 +49,9 @@ group :assets do
   gem 'uglifier', '>= 2.1.1'
   gem 'therubyracer', '>=0.11.4'
 end
+
+gem 'pg'
+gem 'activerecord-postgresql-adapter'
 
 gem 'russian'
 gem 'bootstrap-sass-rails'
