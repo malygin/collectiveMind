@@ -1,4 +1,4 @@
-.chat-message{id: "comment_#{child_comment.id}", :class => "#{'border_note' if child_comment.discuss_stat }"}
+.chat-message{id: "comment_#{child_comment.id}"}
   = render 'users/user_post', :user => child_comment.user
   .chat-message-body.stage_menu1{id: "comment_content_#{child_comment.id}", class: "#{comment_stat_color(child_comment)}"}
     .sender

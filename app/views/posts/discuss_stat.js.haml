@@ -1,7 +1,7 @@
 -if @post and params[:discuss_stat].present?
   -if @post.class.name.deconstantize == "Discontent"
     $('#discuss_stat_post_#{@post.id} span').toggleClass('label-default label-danger')
-    $('#post_#{@post.id}').toggleClass('border_note discuss_comment')
+    $('#post_#{@post.id}').toggleClass('discuss_comment')
   -elsif @post.class.name.deconstantize == "Concept"
     $('#discuss_stat_post_#{@post.id} span').toggleClass('label-default label-danger')
-    $('#post_#{@post.id}').toggleClass('border_note discuss_comment')
+    $('#post_#{@post.id}').toggleClass('discuss_comment')

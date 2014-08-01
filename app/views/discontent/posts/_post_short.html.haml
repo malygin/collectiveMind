@@ -7,7 +7,7 @@
 -#    %small.text-muted= Russian::strftime(post_short.created_at,'%d %B %k:%M:%S')
 -#    = render 'shared/post_social_bar2', :post => post_short
 
-%li{id: "post_#{post_short.id}", :class => "#{'border_note discuss_comment' if post_short.discuss_stat }"}
+%li{id: "post_#{post_short.id}"}
   -if post_short.user
     = image_tag post_short.user.avatar.url(:thumb),  class: "pull-left img-circle"
   .news-item-info
