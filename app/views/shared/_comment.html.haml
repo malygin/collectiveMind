@@ -13,11 +13,11 @@
         %span.label.label-success Эксперт
 
       - if boss? or role_expert?
-        .pull-right
+        .pull-right(style="margin-left:3px;")
           =link_to({:action => :comment_stat, :id => comment.post.id, :comment_id => comment.id, :discuss_stat => 1, :com_stage => get_stage_for_improve(comment.get_class)},  :remote => true, :method => :put,  id: "discuss_stat_comment_#{comment.id}") do
             %span.label(class="#{label_discuss_stat(comment)}") ТРЕБУЕТ ОБСУЖДЕНИЯ
       - elsif comment.discuss_stat
-        .pull-right
+        .pull-right(style="margin-left:3px;")
           %span.label-danger ТРЕБУЕТ ОБСУЖДЕНИЯ
 
       - if current_user?(comment.user) or boss?
