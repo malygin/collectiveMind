@@ -30,7 +30,7 @@
 -#-else
 -if @project.status == 3
   %div
-  %ul{:id => "where_form_#{post_field.id}_#{type_fd}", :class => "#{'border_note' if post_field.note_size?(type_fd) }", :style => "list-style: disc inside; "}
+  %ul{:id => "where_form_#{post_field.id}_#{type_fd}", :class => "#{'discuss_comment' if post_field.note_size?(type_fd) }", :style => "list-style: none; "}
     -post_field.post_notes(type_fd).each do |dpn|
       %div{:id => "post_note_#{dpn.id}"}
         -if boss?
