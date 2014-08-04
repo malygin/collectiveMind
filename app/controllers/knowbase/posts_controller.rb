@@ -23,9 +23,9 @@ class Knowbase::PostsController <  PostsController
       #redirect_to  polymorphic_path(@project.redirect_to_current_stage)
       #redirect_to :back
     #end
-    if @post
-      add_breadcrumb  @post.title, knowbase_post_path(@project, @post.id)
-    end
+    #if @post
+    #  add_breadcrumb  @post.title, knowbase_post_path(@project, @post.id)
+    #end
     render 'show'
   end
 
@@ -63,7 +63,7 @@ class Knowbase::PostsController <  PostsController
   def show
     @stages = current_model.stage_knowbase_order(@project.id)
     @post = current_model.stage_knowbase_post(@project.id, params[:id]).first
-    add_breadcrumb @post.title, knowbase_post_path(@project, @post.id)
+    #add_breadcrumb @post.title, knowbase_post_path(@project, @post.id)
   end
 
   def edit

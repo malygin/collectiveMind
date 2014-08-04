@@ -4,7 +4,13 @@
       .col-md-9
         %h3.text-info(style='line-height: 30px;')
           1 этап: Сбор информации.
-          =@aspect.content if @aspect
+          -if @aspect
+            %span{:id => "edit_aspect_content_#{@aspect.id}"}=@aspect.content
+            -if boss?
+              %span{:id => "redactor_aspect_#{@aspect.id}"}
+                =link_to edit_discontent_aspect_path(@project,@aspect),:remote => true, :id => "edit_aspect_#{@aspect.id}" do
+                  %span{:class=>"glyphicon glyphicon-pencil text-success", :style=>"cursor:pointer;text-decoration:none;"}
+
           %br
         %span(style='font-size: 20px;line-height: 30px;')
           Обсуждение процедуры:
@@ -26,20 +32,12 @@
     - if @post_show
       .row
         .col-md-6
-          %section.widget
-            %header
-
-              -if boss?
-                .pull-right{:id => "redactor_aspect_#{@aspect.id}"}
-                  =link_to edit_discontent_aspect_path(@project,@aspect),:remote => true, :id => "edit_aspect_#{@aspect.id}" do
-                    %span{:class=>"glyphicon glyphicon-pencil text-success", :style=>"cursor:pointer;text-decoration:none;"}
-                  -#=link_to discontent_aspect_path(@project,@aspect), :method => :delete, :remote => true, :confirm => 'Удалить тему?',:id => "destroy_aspect_#{@aspect.id}" do
-                  -#  %span{:class=>"glyphicon glyphicon-remove text-danger", :style=>"cursor:pointer;text-decoration:none;"}
-              %h4.text-info{:id => "edit_aspect_content_#{@aspect.id}"}=@aspect.content
-
-            .body
-              - if  @aspect.knowbase_post
-                =@aspect.knowbase_post.content.html_safe
+          - unless @aspect.knowbase_posts.nil?
+            - @aspect.knowbase_posts.each do |post|
+              %section.widget
+                .body
+                  %div{:id => "knowbase_post_#{post.id}"}
+                    = render :partial => 'knowbase/posts/knowbase_post',:object => post
 
         .col-md-6
           %section.widget

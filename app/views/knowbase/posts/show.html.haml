@@ -3,5 +3,6 @@
   вернуться к процедуре
 %section.widget
   .body
-    %div{:id => "knowbase_post"}
-      =render  :partial => 'knowbase_post', :locals => { :post => @post} if @post
+    -if @post
+      %div{:id => "knowbase_post_#{@post.id}"}
+        =render  :partial => 'knowbase_post', :object => @post
