@@ -57,7 +57,7 @@ class Discontent::PostsController < PostsController
         reorder('number_views DESC').
         limit(3)
     if @project.status == 6
-      @vote_all = Discontent::Voting.by_posts_vote(@project.discontents.by_status(2).pluck(:id).join(", ")).uniq_user.count
+      @vote_all = Discontent::Voting.by_posts_vote(@project.discontents.by_status([2,4]).pluck(:id).join(", ")).uniq_user.count
     end
   end
 
