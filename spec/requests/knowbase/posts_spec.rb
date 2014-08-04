@@ -1,7 +1,8 @@
 require 'spec_helper'
 describe 'Knowbase ' do
   subject { page }
-  before :all do
+
+  before do
     @post1 =  FactoryGirl.create :knowbase_post, project: @project, title: 'title first knowbase', content: 'content first knowbase', stage: 1
     @post2 =  FactoryGirl.create :knowbase_post, project: @project, title: 'title second knowbase', content: 'content second knowbase', stage: 2
   end
