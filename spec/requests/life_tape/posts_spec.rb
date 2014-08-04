@@ -17,6 +17,9 @@ describe 'Life Tape ' do
        # screenshot_and_open_image
        click_link 'go_to_project'
        click_link 'to_work'
+       expect have_content @aspect1.content
+       expect have_content @aspect2.content
+       expect have_selector 'textarea#comment_text_area'
      end
 
   end
