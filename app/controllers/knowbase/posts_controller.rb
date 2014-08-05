@@ -54,8 +54,11 @@ class Knowbase::PostsController <  PostsController
         end
       end
     else
+      @aspects = Discontent::Aspect.where(:project_id => @project)
+      @stages = current_model.stage_knowbase_order(@project.id)
+      @post = current_model.new
       respond_to do |format|
-        format.js {render :action => 'new'}
+        format.html {render :action => 'new'}
       end
     end
   end
