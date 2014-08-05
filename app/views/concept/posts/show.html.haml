@@ -92,7 +92,7 @@
                 .badge.badge-mutted В 2
                 -if boss? and @project.status == 7
                   =link_to({:controller => 'concept/posts', :action => :status_post, :id => @post.id, :type_field => 4},:remote => true,:method => :put, :id => "label_post_#{@post.id}",:class => "note_text") do
-                    %span(class= "#{class_for_concept_type_field(@post,4)}" id="#{id_for_concept_type(4)}") Какие ресурсы необходимы?
+                    %span(class= "#{class_for_concept_type_field(@post,4)}" id="#{id_for_concept_type(4)}")=t('form.cond_res')
                     =link_to({:controller => 'concept/posts', :action => :new_note, :id => @post.id, :type_field => 4},:remote => true,:method => :put, :id => "btn_note_4", :class => "note_text") do
                       .label.label-danger замечание
                 -else
