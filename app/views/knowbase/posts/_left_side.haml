@@ -8,7 +8,7 @@
   Список успешно обновлен
 .text-success#post_success(style='display:none;')
   Статья успешно добавлена
-%ul.liFixar.side-nav{:id => "#{'sortable' if boss?}"}
+%ul.side-nav{:id => "#{'sortable' if boss?}"}
   -unless @stages.nil?
     -@stages.each do |s|
       %li{class: "#{'ui-state-default' if boss?} #{'active' if s.id==params[:id].to_i or (s.id == @stages.min_stage_knowbase_post(@project.id).first.id and params[:id].nil?)}",stage:"#{s.stage}", id: "#{s.id}"}

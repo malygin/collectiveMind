@@ -56,7 +56,7 @@ class Concept::PostsController < PostsController
 
     @status = 4
     if @project.status == 8
-      @vote_all = Concept::Voting.where("concept_votings.discontent_post_id IN (#{@project.discontents.by_status(4).pluck(:id).join(", ")})").uniq_user.count
+      @vote_all = Concept::Voting.by_posts_vote(@project.discontents.by_status(4).pluck(:id).join(", ")).uniq_user.count
     end
   end
 

@@ -398,4 +398,23 @@ module ApplicationHelper
     end
   end
 
+  def validate_knowbase(post)
+    if post[:title].empty?
+      flash[:title]='Заполните название статьи'
+    end
+    if post[:content].empty?
+      flash[:content]='Заполните поле контента'
+    end
+    flash
+  end
+
+  def show_flash(flash)
+    response = ""
+    flash.each do |name, msg|
+      response = response + content_tag(:div, msg, :id => "flash_#{name}",:class => "color-red",:style => "font-size:15px;")
+    end
+    flash.discard
+    response
+  end
+
 end

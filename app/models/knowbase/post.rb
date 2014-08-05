@@ -2,7 +2,7 @@ class Knowbase::Post < ActiveRecord::Base
   attr_accessible :content, :title, :stage, :aspect_id
 
   #validates :content, presence: true
-  validates :title, presence: true
+  #validates :title, presence: true
   #validates :stage, presence: true
 
   belongs_to :project, :class_name => "Core::Project"
