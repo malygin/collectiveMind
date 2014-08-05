@@ -77,6 +77,12 @@ class Discontent::Aspect < ActiveRecord::Base
     self.content
   end
 
+  def concept_count
+    self.aspect_posts.
+    joins("INNER JOIN concept_post_discontents ON concept_post_discontents.discontent_post_id = discontent_post_aspects.post_id").
+    where("discontent_posts.status = ?", 4)
+  end
+
   def imp_dis_comments(stage)
     if stage == 2
       Discontent::Comment.joins("INNER JOIN discontent_posts ON discontent_comments.post_id = discontent_posts.id").
