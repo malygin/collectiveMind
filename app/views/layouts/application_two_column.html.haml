@@ -18,22 +18,20 @@
     .logo.hidden-sm.hidden-xs.hidden-md
       %h4
         %a{:href => "/project/#{@project.id}"}
-          %h3
-            MASS
+          %h4
+            MASS!
             %strong DECISION
     -#.content
     -#  %nav#sidebar.sidebar.nav-collapse.collapse
     -#    = render partial: 'left_side', :locals => { :stage => :first }
+    %nav#sidebar.sidebar.nav-collapse.collapse
+      = render partial: 'left_side', :locals => { :stage => :first }
     .wrap
       %header.page-header
         .navbar
           =render 'top_menu'
-    .content.container
-      %nav#sidebar.sidebar.nav-collapse.collapse
-        = render partial: 'left_side', :locals => { :stage => :first }
-      .wrap
-        .content.container(style='padding-top: 0px;')
-          = yield
+      .content.container
+        = yield
 
     -##toTop ^ Наверх
     /
