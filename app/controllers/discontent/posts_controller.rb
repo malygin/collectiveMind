@@ -74,7 +74,7 @@ class Discontent::PostsController < PostsController
     @accepted_posts = Discontent::Post.where(status: 2, project_id:  @project)
 
     post_temp = @aspect_post.life_tape_posts.first
-    life_tape_comments = post_temp.comments.where(:dis_stat => true)
+    life_tape_comments = post_temp ? post_temp.comments.where(:dis_stat => true) : []
 
     discontent_comments = @aspect_post.imp_dis_comments(2)
     @comments_all = life_tape_comments | discontent_comments
