@@ -5,7 +5,7 @@ describe 'Discontents ' do
   subject { page }
 
   before  do
-    @project = FactoryGirl.create :core_project, status: 3
+    @project = FactoryGirl.create :core_project, status: 2
     @aspect1 = FactoryGirl.create :aspect, project: @project, content: 'aspect 1'
     @aspect2 = FactoryGirl.create :aspect, project: @project, content: 'aspect 2'
     @discontent1 = FactoryGirl.create :discontent, project: @project, content: 'discontent 1', whend: 'when 1', whered: 'where 1'
