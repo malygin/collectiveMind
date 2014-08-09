@@ -45,7 +45,7 @@
           %th
             Пояснение
       %tbody
-        - post_for_vote.concept_post.concept_post_resources.each_with_index  do |r, index|
+        - post_for_vote.concept_post.concept_post_resources.by_type('positive_r').each_with_index  do |r, index|
           %tr
             %td
               =index+1
@@ -68,7 +68,24 @@
       -#.badge.badge-mutted C 2
       %span.h5(class= "#{class_for_concept_type_field(post_for_vote.concept_post,6)}" id= "negative_r")=t('form.negative_res')
     %br
-    =display_content(post_for_vote.negative_r)
+    %table.table.table-striped.table-bordered
+      %thead
+        %tr
+          %th
+            ="#"
+          %th
+            Название
+          %th
+            Пояснение
+      %tbody
+        - post_for_vote.concept_post.concept_post_resources.by_type('negative_r').each_with_index  do |r, index|
+          %tr
+            %td
+              =index+1
+            %td
+              =r.name
+            %td
+              =r.desc
 
 %section.widget
   .body
