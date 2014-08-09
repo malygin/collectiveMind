@@ -2,7 +2,6 @@
 #= require jquery_ujs
 #= require_tree
 #= require jquery.ui.all
-#= require twitter/bootstrap
 #= require autocomplete-rails
 #= require bootstrap-wysihtml5/b3
 #= require bootstrap-wysihtml5/locales/ru-RU
@@ -14,6 +13,8 @@
 #= require jquery.autosize
 #= require totop/jquery.ui.totop
 #= require totop/easing
+
+#= require bootstrap/dropdown
 
 $('#modal_help').modal
   keyboard: false
