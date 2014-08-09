@@ -19,7 +19,7 @@
           %a
             = current_user.to_s
       %li
-        = link_to destroy_user_session_path, :method => :delete do
+        = link_to destroy_user_session_path, :method => :delete, id: 'sign_out' do
           Выйти
     -else
       %li

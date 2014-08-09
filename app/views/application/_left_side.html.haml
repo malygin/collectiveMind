@@ -212,6 +212,6 @@
     =link_to "/project/#{@project.id}/journals" , style:'width:auto; margin-right: 10px;' do
       =t('menu.news')
   %li.visible-xs
-    %a{:href => "/users/sign_out/", "data-method" => "delete"}
+    %a{:href => "/users/sign_out/", "data-method" => "delete", :id => "sign_out"}
       %i.fa.fa-sign-out
       Выйти

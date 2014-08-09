@@ -71,16 +71,18 @@ class Concept::PostsController < PostsController
     if params[:asp]
       @aspect_post =  Discontent::Aspect.find(params[:asp])
     else
-      @aspect_post = @project.aspects.first
+      @aspect_post = @project.aspects.order(:id).first
     end
 
     post_temp = @aspect_post.life_tape_posts.first
-    life_tape_comments = post_temp.comments.where(:con_stat => true)
+    if post_temp.present?
+      life_tape_comments = post_temp.comments.where(:con_stat => true)
 
-    discontent_comments = @aspect_post.imp_dis_comments(3)
-    concept_comments = @aspect_post.imp_con_comments
-    @comments_all = life_tape_comments | discontent_comments | concept_comments
-    @comments_all = @comments_all.sort_by{|c| c.imp_concepts.size}
+      discontent_comments = @aspect_post.imp_dis_comments(3)
+      concept_comments = @aspect_post.imp_con_comments
+      @comments_all = life_tape_comments | discontent_comments | concept_comments
+      @comments_all = @comments_all.sort_by{|c| c.imp_concepts.size}
+    end
     @imp_con_comment = true
     #@posts = current_model.where(:project_id => @project, :status => @status).paginate(:page => params[:page])
     #if @project.status == 8

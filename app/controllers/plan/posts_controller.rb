@@ -106,7 +106,11 @@ class Plan::PostsController < PostsController
       @my_journals_count = @my_journals_count - 1
     end
     if current_model.column_names.include? 'number_views'
-      @post.update_column(:number_views, @post.number_views+1)
+      if @post.number_views.nil?
+        @post.update_column(:number_views, 1)
+      else
+        @post.update_column(:number_views, @post.number_views+1)
+      end
     end
     render 'show' , :layout => 'application_two_column'
   end

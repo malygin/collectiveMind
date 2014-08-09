@@ -9,7 +9,7 @@
         = form_for aspect,:url => {:project => @project.id,  :action => aspect.persisted? ? 'update' : 'create'}, :remote => aspect.persisted? ? true : false do |f|
 
           = render 'shared/error_messages', :object =>f.object
-          =f.text_field :content, :class => 'form-control', placeholder: 'Введите название новой темы', id:'aspect_text_field'
+          =f.text_field :content, :class => 'form-control', placeholder: 'Введите название новой темы', id:'aspect_text_field_content'
           %br
           =f.text_area :short_desc, :class => 'form-control', style: 'height: 70px;', placeholder: 'Введите описание новой темы', id:'aspect_text_area'
           .form-group
@@ -20,7 +20,7 @@
               = f.radio_button :status,  '1'
               %span.text-danger Дополнительная
           .pull-right
-            =f.submit 'Отправить', :id  => "send_post", class: 'btn btn-success'
+            =f.submit 'Отправить', :id  => "send_post_aspect", class: 'btn btn-success'
 
       .modal-footer
         %button.btn.btn-default{"data-dismiss" => "modal", type: "button"} Отмена

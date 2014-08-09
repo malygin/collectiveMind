@@ -32,7 +32,7 @@ end
 
       @comments= @post_show.comments.where(:comment_id => nil).paginate(:page => @page ? @page: last_page, :per_page => 10) if @post_show
     else
-      @aspect = @project.aspects.first
+      @aspect = @project.aspects.order(:id).first
       @post_show = @aspect.life_tape_posts.first unless @aspect.nil?
 
       @comments= @post_show.comments.where(:comment_id => nil).paginate(:page => @page ? @page: last_page, :per_page => 10) if @post_show

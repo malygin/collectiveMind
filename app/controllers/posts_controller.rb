@@ -228,7 +228,11 @@ def index
     # @path_link ='/'+ self.class.to_s.split("::").first.tableize.singularize+'/comments/'
 
     if current_model.column_names.include? 'number_views'
-      @post.update_column(:number_views, @post.number_views+1)
+      if @post.number_views.nil?
+        @post.update_column(:number_views, 1)
+      else
+        @post.update_column(:number_views, @post.number_views+1)
+      end
     end
     @comment = comment_model.new
     respond_to do |format|
