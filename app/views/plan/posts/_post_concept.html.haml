@@ -14,7 +14,8 @@
     %br
     =post_concept.name
     %br
-    = check_validate_concept(post_concept).html_safe if check_validate_concept(post_concept)
+    %div{:id => "validate_concept_#{post_concept.id}"}
+      = check_validate_concept(post_concept).html_safe if check_validate_concept(post_concept)
 
     -#-unless post_concept.plan_post_resources.by_type('positive_r').empty?
     -#  %br
