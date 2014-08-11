@@ -536,6 +536,17 @@ input.parsley-error{
 }
 
 /***********************************/
+/**         Comments LIST         **/
+/**********************************/
+
+
+.comments{
+  textarea {
+    height: 70px;
+  }
+}
+
+/***********************************/
 /**          NEWS LIST           **/
 /**********************************/
 /**
@@ -618,7 +629,7 @@ input.parsley-error{
 
   .time{
     font-size: $font-size-small;
-    color: $textLightGray;
+    color: $textDarkGray;
   }
 
   .options{
@@ -630,6 +641,7 @@ input.parsley-error{
     color: $text-color;
     line-height: 1.3em;
   }
+
 }
 
 .users-list-group{
@@ -1143,7 +1155,7 @@ input.parsley-error{
     font-size: $font-size-small;
     line-height: 1.5em;
     text-align: center;
-    color: $textLightGray;
+    color: $textDarkGray;
   }
 }
 
@@ -1724,7 +1736,7 @@ input, textarea{
   .time{
     font-size: $font-size-small;
     line-height: 1.5em;
-    color: $textLightGray;
+    color: $textDarkGray;
   }
 }
 
