@@ -32,3 +32,7 @@
         =f.submit 'Авторизоваться', class: 'btn btn-block btn-lg btn-danger', id: 'Signin'
         .forgot
           =link_to 'Забыли пароль?', new_password_path(resource_name), class:'forgot'
+          |
+          =link_to 'Создать аккаунт', '/users/sign_up', class:'forgot'
+          |
+          =link_to 'Вернуться', '/', class:'forgot'

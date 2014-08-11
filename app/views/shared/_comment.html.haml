@@ -1,12 +1,13 @@
 .chat-message{id: "comment_#{comment.id}"}
   = render 'users/user_post', :user => comment.user
-  -#-if comment.created_at > 1.day.ago
-  -#  %span.label.label-danger за последние сутки
+
   .chat-message-body.stage_menu1{id: "comment_content_#{comment.id}", class: "#{comment_stat_color(comment)}"}
+    %span.arrow
     .sender
       =link_to comment.user, user_path(@project, comment.user)
       = render partial: '/shared/user_online', object: comment.user
-      -#=club_status_show_user(comment.user)
+
+      -#@todo to helper method
       - if comment.user.boss?
         %span.label.label-danger MD
       - if comment.user.role_expert?
@@ -51,7 +52,7 @@
             %span.label.label-success Доработать
         -else
           =link_to({:action => :add_child_comment_form, :id => comment.post.id, :comment_id => comment.id },  :remote => true, :method => :put,  id: "add_child_comment_#{comment.id}") do
-            %span.label.label-success Ответить
+            Ответить
         - if boss?
           - if signed_in? and not comment.users.include?(current_user)
             =link_to({:action => :plus_comment, :id => comment.id, :against => false},  :remote => true, :method => :put,  id: "plus_comment_#{comment.id}") do
@@ -69,7 +70,8 @@
             %span.glyphicon.glyphicon-thumbs-up.text-muted
             -#%span.text-muted= "Против #{comment.users_against.count}"
             -#%span.glyphicon.glyphicon-thumbs-down.text-muted
-
+      .time.pull-left
+        =time_ago_in_words(comment.created_at)
       %br
       -if @imp_dis_comment
         -if comment.imp_disposts.present?

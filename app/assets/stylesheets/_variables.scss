@@ -39,6 +39,7 @@ $widget-padding: $widget-padding-vertical $widget-padding-horizontal;
 
 $boldTextColor: lighten($text-color, 3%);
 $textLightGray: darken($text-color, 15%) !default;
+$textDarkGray: darken($text-color, 45%) !default;
 $smallsColor: darken($text-color, 16%);
 $dropzoneColor: #eee;
 $transparentTextColor: rgba($backgroundGray, .5);

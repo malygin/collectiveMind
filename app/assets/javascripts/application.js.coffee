@@ -15,162 +15,49 @@
 #= require totop/easing
 
 #= require bootstrap/dropdown
-
-$('#modal_help').modal
-  keyboard: false
-  backdrop: 'static'
-
-$('#modal_help').on 'hidden.bs.modal', ->
-  $('#help_question').submit()
-  $('#modal_help').remove()
-
-@get_life_tape_form = ->
-  $('#new_life_tape').css 'display','block'
-  $("#add_record").fadeOut("slow").hide()
-  $("#new_life_tape").animate {height: 100}, "normal"
-  $("#button_block").stop().show().animate {
-    left:$('#new_life_tape').width() - 370
-    opacity:1.000 }
-
-@reset_life_tape_form = ->
-  $("#button_block").animate({left:0, opacity:0.000 }, 'normal', ->
-    $("#button_block").css 'display', 'none')
-  $("#new_life_tape").animate {
-    height: 0
-  }, "normal",  ->
-    $('#new_life_tape').css('display','none')
-  $("#add_record").fadeIn('slow')
-
-@show_filter_aspects_button = ->
-  $('#aspects_list').submit()
-#  $('#filter-aspect').stop().show().animate {
-#    left: 15
-#    opacity: 1}
-
-@reset_filter_aspects = ->
-  $('input[type=checkbox]').prop('checked','')
-  show_filter_aspects_button()
-
-@activate_button = (el)->
-  if el.value? and el.value!=''
-    $('#send_post').removeClass('disabled')
-  else
-    $('#send_post').addClass('disabled')
-  $('#new_discontent_hidden').remove()
-
-@activate_modal_send = (el)->
-  if $( ".radio input:checked" ).length == 1
-    $('#send').removeClass('disabled')
-
-@remove_block = (el)->
-  $('#'+el).remove()
-
-@disontent_form_submit= ->
-#  $('#send_post').html('Ищем совпадения ...')
-#  $('#send_post').toggleClass('disabled')
-
-@disable_send_button= ->
-  $('#send_post').toggleClass('disabled')
-
-$('.score_class').on 'click', ->
-  $('.score_class').css('text-decoration','none').css('background-color','transparent')
-  $(this).css('text-decoration','underline').css('background-color','#ddeaf4')
-
-@load_discontent_for_cond= (el)->
-  $.ajax({
-    type: "POST"
-    url: "/project/1/plan/posts/get_cond"
-    data: { pa: $('#select_'+el).val() }
-  })
-
-@activate_htmleditor= ->
-  @editor = $(".wysihtml5").each (i, elem) ->
-    $(elem).wysihtml5
-      "font-styles": true
-      emphasis: true
-      lists: true
-      html: true
-      link: true
-      image: true
-      color: true
-#      events:
-#        load: ->
-#          $(".wysihtml5-sandbox").contents().find("body").on "change", ->
-#            activate_button_editor()
+#= require bootstrap/modal
+#= require bootstrap/tab
+#= require bootstrap/carousel
 
 $ ->
+  $('textarea.comment-textarea').on 'keyup', ->
+    activate_button(this)
+
+  $("select.estimate_select").each ->
+    switch $(this).val()
+      when '1.0'
+        color = '#999'
+      when '2.0'
+        color = '#e5603b'
+      when '3.0'
+        color = '#fd8605'
+      when '4.0'
+        color = '#56bc76'
+
+    $(this).css 'color', color
+    $(this).find("option[value='1.0']").css 'color', '#999'
+    $(this).find("option[value='2.0']").css 'color', '#e5603b'
+    $(this).find("option[value='3.0']").css 'color', '#fd8605'
+    $(this).find("option[value='4.0']").css 'color', '#56bc76'
+
+  $().UItoTop easingType: "easeOutQuart"
   $("#sortable").sortable()
   $("#sortable").disableSelection()
   $('#theall a:first').tab('show')
+
   $("input.autocomplete ").autocomplete(
     minLength: 0
   ).click ->
     $(this).autocomplete "search", ""
     return
 
-#  $('#accordion').on 'shown.bs.collapse', ->
-#    m = $(this);
-#    console.log(m)
-#    alert(m)
-
-#  $("input#discontent_post_whend ").autocomplete(
-#    minLength: 0
-#  ).focus ->
-#    $(this).autocomplete "search", ""
-#    return
-#
-#  $("input#discontent_post_whered ").autocomplete(
-#    minLength: 0
-#  ).focus ->
-#    $(this).autocomplete "search", ""
-#    return
-
-
-
-$('#sortable').sortable update: (event, ui) ->
-  order = {}
-  $("li",this).each (index) ->
-    if parseInt($(this).attr('stage')) != (index+1)
-      order[$(this).attr('id')] = index+1
-  $.ajax
-    url: "/project/1/knowbase/posts/sortable_save"
-    type: "post"
-    data:
-      sortable: order
-
-@select_discontent_for_union= (project,id)->
-  sel = $('#selectize_tag :selected')
-  if sel.val() != ''
-    $.ajax
-      url: "/project/#{project}/discontent/posts/#{id}/add_union"
-      type: "put"
-      data:
-        post_id: sel.val()
-
-@select_discontent_for_union_add_list= (project,id)->
-  sel = $('#selectize_tag_for_union :selected')
-  if sel.val() != ''
-    $.ajax
-      url: "/project/#{project}/discontent/posts/#{id}/add_union"
-      type: "put"
-      data:
-        post_id: sel.val()
-        add_list: true
-
-$(window).load ->
   if ($(window).width() > 1030)
     $('ul.panel-collapse.collapse').removeClass('collapse').addClass('open in')
 
-#  $('input[data-autocomplete]').focus()
-#  $("input.autocomplete ").autocomplete({
-#    source: data,
-#    minLength: 0
-#  }).click ->
-#    $(this).autocomplete "search", ""
-#    return
-
   $('textarea').autosize()
+
   $('.liFixar').liFixar()
+
   activate_htmleditor()
 
   $('.carousel').carousel
@@ -186,13 +73,6 @@ $(window).load ->
     return
 
   $('.userscore').editable()
-  #  $('.userscore').editable
-  #    type: 'text'
-  #    pk: 1
-  #    placement: 'top'
-  #    title: 'enter score'
-  #    url: '/post'
-  #    source: '/list'
 
   $select = $("#selectize_tag").selectize
     labelField: "show_content"
@@ -264,25 +144,88 @@ $(window).load ->
         return '<div>'+item.show_content+'</div>'
 
 
-#  $(".chat-messages").slimScroll
-#    start: 'bottom'
-#    size: '5px'
-#    alwaysVisible: true
-#    railVisible: true
-#    disableFadeOut: true
-#
-#  $(".chat-messages").scrollTop(10000);
+
+$('#modal_help').modal
+  keyboard: false
+  backdrop: 'static'
+
+$('#modal_help').on 'hidden.bs.modal', ->
+  $('#help_question').submit()
+  $('#modal_help').remove()
+
+# work with comment buttons
+@activate_button = (el)->
+  if (el.value? and el.value.length>1)
+    $('#send_post').removeClass('disabled')
+  else
+    $('#send_post').addClass('disabled')
+#  ???
+  $('#new_discontent_hidden').remove()
+
+@activate_modal_send = (el)->
+  if $( ".radio input:checked" ).length == 1
+    $('#send').removeClass('disabled')
+
+@remove_block = (el)->
+  $('#'+el).remove()
+
+@disable_send_button= ->
+  $('#send_post').toggleClass('disabled')
 
 
-#@activate_button_editor = ->
-#  input = $('#title-textfield')
-#  editor = $('.wysihtml5').data('wysihtml5').editor
-#  html = editor.getValue()
-#  if input? and input.val()!=''
-#    $('#send_post').removeClass('disabled')
-#  else
-#    $('#send_post').addClass('disabled')
+$('.score_class').on 'click', ->
+  $('.score_class').css('text-decoration','none').css('background-color','transparent')
+  $(this).css('text-decoration','underline').css('background-color','#ddeaf4')
 
+@load_discontent_for_cond= (el)->
+  $.ajax({
+    type: "POST"
+    url: "/project/1/plan/posts/get_cond"
+    data: { pa: $('#select_'+el).val() }
+  })
+
+@activate_htmleditor= ->
+  @editor = $(".wysihtml5").each (i, elem) ->
+    $(elem).wysihtml5
+      "font-styles": true
+      emphasis: true
+      lists: true
+      html: true
+      link: true
+      image: true
+      color: true
+
+
+
+$('#sortable').sortable update: (event, ui) ->
+  order = {}
+  $("li",this).each (index) ->
+    if parseInt($(this).attr('stage')) != (index+1)
+      order[$(this).attr('id')] = index+1
+  $.ajax
+    url: "/project/1/knowbase/posts/sortable_save"
+    type: "post"
+    data:
+      sortable: order
+
+@select_discontent_for_union= (project,id)->
+  sel = $('#selectize_tag :selected')
+  if sel.val() != ''
+    $.ajax
+      url: "/project/#{project}/discontent/posts/#{id}/add_union"
+      type: "put"
+      data:
+        post_id: sel.val()
+
+@select_discontent_for_union_add_list= (project,id)->
+  sel = $('#selectize_tag_for_union :selected')
+  if sel.val() != ''
+    $.ajax
+      url: "/project/#{project}/discontent/posts/#{id}/add_union"
+      type: "put"
+      data:
+        post_id: sel.val()
+        add_list: true
 
 @select_discontent_for_concept= (project,id)->
   sel = $('#selectize_concept :selected')
@@ -349,16 +292,6 @@ $('#select_for_aspects').on 'change', ->
       data:
         aspect_id: aspect_id
 
-#@plan_select_concept= (el)->
-#  concept_id = $(el).val()
-#  if concept_id is "0"
-#    return (false)
-#  title=$(el).find('option:selected').text()
-#  $(el).find('option:selected').remove()
-#  func = "'#{concept_id}','#{title}'"
-#  $('#aspect_concepts').append('<div id="concept_aspect_'+concept_id+'" style="display:none;height:0;"><input type="hidden" name="plan_aspect_concepts[]" value="'+concept_id+'"/><span class="glyphicon glyphicon-remove text-danger pull-left" onclick="remove_aspect_concept('+func+');" style="cursor:pointer;text-decoration:none;font-size:15px;"></span><span id="'+concept_id+'" class="span_aspect label label-t">'+title+'</span></br></div>')
-#  $('#concept_aspect_'+concept_id).css('display','block').animate({height: 20, opacity:1}, 500).effect("highlight", {color: '#f5cecd'}, 500)
-
 @remove_aspect_concept= (val,text)->
   $('#concept_aspect_'+val).animate({height: 0, opacity: 0.000}, 1000, ->
     $(this).remove())
@@ -370,13 +303,6 @@ $('#select_for_aspects').on 'change', ->
   $("#select_concept").attr "disabled", true
   $("#aspect_concepts").empty()
 
-#@add_new_resource_to_plan= (concept)->
-#  $('#resources_'+concept).append('<div class="panel panel-default"><div class="panel-body"><span class="glyphicon glyphicon-remove text-danger pull-right" onclick="$(this).parent().parent().remove();" style="cursor:pointer;text-decoration:none;font-size:15px;"></span><span role="status" aria-live="polite" class="ui-helper-hidden-accessible"></span><input class="form-control autocomplete ui-autocomplete-input" data-autocomplete="/project/1/autocomplete_concept_post_resource_concept_posts" id="concept_post_resource" min-length="0" name="resor['+concept+'][]" placeholder="Введите свой ресурс или выберите из списка" size="30" type="text" autocomplete="off"><br><textarea class="form-control" id="res_" name="res['+concept+'][]" placeholder="Пояснение к ресурсу" style="overflow: hidden; word-wrap: break-word; resize: horizontal; height: 54px;"></textarea></div></div>')
-#  $("input.autocomplete ").autocomplete(
-#    minLength: 0
-#  ).click ->
-#    $(this).autocomplete "search", ""
-#    return
 
 @autocomplete_initialized= ->
   $("input.autocomplete").autocomplete(
@@ -432,38 +358,6 @@ $('#select_for_aspects').on 'change', ->
         check_field: check_field
         status: status
 
-#@activate_discussion_selectize= ->
-#  $select = $("#select_for_discussion_discontents").selectize
-#    labelField: "show_content"
-#    valueField: "id"
-#    sortField: "show_content"
-#    searchField: "show_content"
-#    create: false
-#    hideSelected: true
-#    onChange: (item) ->
-#      optsel = $("#option_for_select_discontent")
-#      project_id = parseInt(optsel.attr('project'))
-#      id = parseInt(optsel.attr('post'))
-#      select_discontent_for_discussion_concepts(project_id)
-#      selectize = $select[0].selectize
-#      selectize.removeOption(item)
-#      selectize.refreshOptions()
-#      selectize.close()
-#    render:
-#      item: (item, escape) ->
-#        short_item = item.show_content.split('<br/>')[0].replace('<b> что: </b>', '')
-#        return '<div>'+short_item+'</div>'
-#      option: (item, escape) ->
-#        return '<div>'+item.show_content+'</div>'
-
-#@select_discontent_for_discussion_concepts= (project)->
-#  sel = $('#select_for_discussion_discontents :selected')
-#  if sel.val() != ''
-#    $.ajax
-#      url: "/project/#{project}/concept/posts/fast_discussion_concepts"
-#      type: "get"
-#      data:
-#        sel_dis_id: sel.val()
 
 @discussion_select_discontent= (el)->
   optsel = $("#option_for_select_discontent")
@@ -488,16 +382,6 @@ $('#select_for_aspects').on 'change', ->
         sel_dis_id: sel_dis_id
         add_concept: 1
 
-#@activate_datepicker= ->
-#  $('.datepicker').datepicker(
-#    format: 'yyyy-mm-dd',
-#    autoclose: true,
-#    autoSize: true,
-#    todayHighlight: true,
-#    startDate: "07/05/2014",
-#    weekStart: 1
-#  ).on "changeDate", (e) ->
-#    $(this).datepicker('hide')
 
 @plan_select_concept= (el)->
   optsel = $("#option_for_select_concept")
@@ -549,15 +433,6 @@ $('#select_for_aspects').on 'change', ->
       url: "/project/#{project_id}/plan/posts/#{post_id}/render_concept_side"
       type: "put"
 
-#$(window).load ->
-#  $("#first").on "click", ->
-#    $('#send_post_concept').submit()
-#  $("#second").on "click", ->
-#    render_table()
-#    $('#send_post_concept').submit()
-#  $("#third").on "click", ->
-#    render_concept_side()
-
 @save_last_concept= ->
   last_id = $("#option_for_render_old_concept_side").attr('concept')
   -if last_id != ''
@@ -570,8 +445,7 @@ $('#select_for_aspects').on 'change', ->
       }, "slow",  ->
         $(this).remove()
 
-#  last_id = $('ul.panel-collapse li.active').attr('id')
-#  -unless typeof last_id is 'undefined'
+
 
 @save_last_concept_tabs= ->
   $("#third a").append('<i class="color-green fa fa-save" style="opacity:0;"></i>')
@@ -625,9 +499,6 @@ $('#select_for_aspects').on 'change', ->
   else
     return true
 
-#$("html").on "click", (e) ->
-#  $("[data-original-title]").popover "hide"  if typeof $(e.target).data("original-title") is "undefined" and not $(e.target).parents().is(".popover.in")
-#  return
 
 $.fn.extend popoverClosable: (options) ->
   defaults = template: "<div class=\"popover popover-concept\"><div class=\"arrow\"></div><div class=\"popover-header\"><button type=\"button\" class=\"close\" style=\"font-size:30px;color:white;\" data-dismiss=\"popover\" aria-hidden=\"true\">&times;</button><h3 class=\"popover-title popover-concept-title\"></h3></div><div class=\"popover-content\"></div></div>"
@@ -673,18 +544,6 @@ $.fn.extend popoverClosable: (options) ->
       data:
         group_id: group_id
 
-#$(window).load ->
-#  $(window).scroll ->
-#    unless $(this).scrollTop() is 0
-#      $("#toTop").fadeIn()
-#    else
-#      $("#toTop").fadeOut()
-#    return
-#
-#  $("#toTop").click ->
-#    $("body,html").animate {
-#      scrollTop: 0
-#    }, 800
 
 $("#wizard").bootstrapWizard onTabShow: (tab, navigation, index) ->
   $total = navigation.find("li").length
@@ -790,31 +649,3 @@ $("#wizard").bootstrapWizard onTabShow: (tab, navigation, index) ->
   $(el).css 'color', color
 
 
-$(window).load ->
-  $("select.estimate_select").each ->
-    switch $(this).val()
-      when '1.0'
-        color = '#999'
-      when '2.0'
-        color = '#e5603b'
-      when '3.0'
-        color = '#fd8605'
-      when '4.0'
-        color = '#56bc76'
-
-    $(this).css 'color', color
-    $(this).find("option[value='1.0']").css 'color', '#999'
-    $(this).find("option[value='2.0']").css 'color', '#e5603b'
-    $(this).find("option[value='3.0']").css 'color', '#fd8605'
-    $(this).find("option[value='4.0']").css 'color', '#56bc76'
-
-
-$(document).ready ->
-  #var defaults = {
-  #containerID: 'toTop', // fading element id
-  #containerHoverID: 'toTopHover', // fading element hover id
-  #scrollSpeed: 1200,
-  #easingType: 'linear'
-  #};
-  $().UItoTop easingType: "easeOutQuart"
-  return
