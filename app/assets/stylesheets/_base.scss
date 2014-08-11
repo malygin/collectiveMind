@@ -560,7 +560,7 @@ input.parsley-error{
     padding: 12px;
     margin: 0 -12px;
     cursor: pointer;
-    height: 50px;
+
     @include transition(background-color .2s ease-out);
 
     &:hover{
@@ -1076,7 +1076,6 @@ input.parsley-error{
     .forgot {
       color: $white;
       text-align: center;
-      text-decoration: underline;
       padding: 15px 0 15px 0;
     }
   }
@@ -2284,8 +2283,11 @@ table.table thead .sorting_desc_disabled { background: url('../../../../../Downl
 
   .feature{
     text-align: center;
-
+    p{
+     text-align: left;
+    }
     .icon{
+      text-align: center;
       display: inline-block;
       height: 60px;
       width: 60px;
@@ -2295,6 +2297,7 @@ table.table thead .sorting_desc_disabled { background: url('../../../../../Downl
       border-radius: 50%;
       > i{
         color: #ffffff;
+        margin-top: 10px;
       }
     }
   }
