@@ -20,14 +20,12 @@
             %br
             %span.text-muted
               Не состоит ни в одной группе
-              -#%b Сыновья Кобы
             - if boss?
               .scoreBar
                 =link_to "+30 баллов",  "/project/"+@project.id.to_s+"/users/"+@user.id.to_s+"/add_score/30", :remote => true, :method => :put, class: "voteCounter"
                 |
                 =link_to "+10 баллов",  "/project/"+@project.id.to_s+"/users/"+@user.id.to_s+"/add_score/10", :remote => true, :method => :put, class: "voteCounter"
             %br
-
             -if boss?
               %h4(style="font-weight: bold;")
                 %span.color-green.pull-left
@@ -42,37 +40,29 @@
                   -unless @user.user_project_scores(@project.id).nil?
                     =@user.user_project_scores(@project.id).score
           .col-md-3
-            -#%span.text-muted.pull-right
-            -#  =@user.user_project_scores(@project.id).score
+
         -unless @user.user_project_scores(@project.id).nil?
           .row
             .col-md-7
               Генератор идей
             .col-md-5
               %span.pull-right
-                -#%span.text-muted=@user.score_g
                 %span.text-muted=@user.user_project_scores(@project.id).score_g
-                -#%span.text-muted (0)
-                -#%span.glyphicon.glyphicon-arrow-up.text-success
+
           .row
             .col-md-7
               Аналитик
             .col-md-5
               %span.pull-right
-                -#%span.text-muted=@user.score_a
                 %span.text-muted=@user.user_project_scores(@project.id).score_a
-                -#%span.text-muted (0)
-                -#%span.glyphicon.glyphicon-arrow-down.text-danger
 
           .row
             .col-md-7
               Оценщик
             .col-md-5
               %span.pull-right
-                -#%span.text-muted=@user.score_o
                 %span.text-muted=@user.user_project_scores(@project.id).score_o
-                -#%span.text-muted (0)
-                -#%span.glyphicon.glyphicon-minus.text-muted
+
           %hr
 
           .row
@@ -80,22 +70,10 @@
 
             .col-md-5
               %span.pull-right
-                -#%span.text-muted=@user.score_o
                 Всего:
                 %span.text-muted=@user.user_project_scores(@project.id).score
-                -#%span.text-muted (0)
-                -#%i.fa.fa-thumbs-up
-                -#%span.glyphicon.glyphicon-minus.text-muted
+
         %br
-        -#.progress
-        -#  .progress-bar.progress-bar-success(style="width: 70%")
-        -#    %span.sr-only">35% Complete (success)
-        -#
-        -#  .progress-bar.progress-bar-warning(style="width: 20%")
-        -#    %span.sr-only">35% Complete (success)
-        -#
-        -#  .progress-bar.progress-bar-danger(style="width: 10%")
-        -#    %span.sr-only">35% Complete (success)
 
         %br
         %ul.nav.nav-tabs
@@ -107,8 +85,7 @@
             %a(href="#imperfections" data-toggle="tab")="Несовершенства (#{@user.discontent_posts.by_project(@project.id).count})"
           %li
             %a(href="#images" data-toggle="tab")="Нововв. (#{@user.concept_posts.by_project(@project.id).count})"
-          -#%li
-          -#  %a(href="#projects" data-toggle="tab")  Проекты
+
         .tab-content
           #active_line.tab-pane.fade.in.active
             %br
@@ -120,19 +97,14 @@
                   %small=Russian::strftime(journal.created_at,"%d %B %k:%M:%S ")
                   %br
 
-
-
           #ideas.tab-pane.fade.in
             %br
             = render @user.life_tape_posts.by_project(@project.id)
-
 
           #imperfections.tab-pane.fade.in
             %br
             %ul.discontent-list
               = render partial: 'discontent/posts/post_short', collection: @user.discontent_posts.by_project(@project.id)
-
-
 
           #images.tab-pane.fade.in
             %br

@@ -1,5 +1,3 @@
--#.success=link_to 'Вы также можете оставить свое мнение о прошедшей стадии или почитать другие', essay_posts_path(@project, @project.status), :id => 'essay_list'
-
 .row
   .col-md-12
     %h3.text-info
@@ -11,13 +9,6 @@
 
 %br
 - if boss?
-  -#%b
-  -#проголосовало
-  -#=@voted_people
-  -#из
-  -#=@all_people
-  -#Отдано голосов
-  -#=@votes
   .pull-right
     Показана сортировка,
     =link_to "по умолчанию", {:action => :vote_list },:remote => true, class: "vote_class", id: "vote_all"
@@ -51,7 +42,6 @@
     %h3.text-info
       =t('voting.have_votes')
       %b#count_vote=@number_v
-
 
   #vote_container
     = render :partial => 'shared/post_for_vote', :collection => @posts,  :locals => { :path_for_voting => @path_for_voting, :count_voted => @number_v, :votes => @votes}

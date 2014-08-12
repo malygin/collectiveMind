@@ -10,14 +10,12 @@
               %span{:id => "redactor_aspect_#{@aspect.id}"}
                 =link_to edit_discontent_aspect_path(@project,@aspect),:remote => true, :id => "edit_aspect_#{@aspect.id}" do
                   %span{:class=>"glyphicon glyphicon-pencil text-success", :style=>"cursor:pointer;text-decoration:none;"}
-
           %br
         %span(style='font-size: 20px;line-height: 30px;')
           Обсуждение процедуры:
           =@project.name
 
       .col-md-3
-
         - if signed_in? and (@project.status == 1 or @project.demo?)
           .text-right
             -if fast_discussion_able? or @project.demo?
@@ -26,7 +24,6 @@
             -if boss? or @project.demo?
               %br
               =link_to '+ Добавить новую тему', new_discontent_aspect_path(@project),:remote => true,:id => "new_aspect",  class: 'btn btn-sm btn-primary'
-
 
   .body
     - if @post_show
@@ -49,7 +46,6 @@
 
               - if signed_in?
                 = render :partial => 'shared/comment_form', :locals => { :comment => @comment,:post =>@post_show, :url_link => "/project/#{@project.id}/life_tape/posts/#{@post_show.id}/add_comment"}
-
 
 #render_fast_discussion_topics
 #aspect_modal

@@ -1,4 +1,3 @@
-
 !!! 5
 %html(lang="en")
   %head
@@ -9,10 +8,8 @@
     %title
       = content_for?(:title) ? yield(:title) : 'Massdecision'
     = csrf_meta_tags
-
     = stylesheet_link_tag 'application', media: 'all'
-    %link(href="/assets/favicon.ico" rel="shortcut icon")
-
+    -#%link(href="/assets/favicon.ico" rel="shortcut icon")
 
   %body
     .logo.hidden-sm.hidden-xs.hidden-md
@@ -21,9 +18,7 @@
           %h4
             MASS
             %strong DECISION
-    -#.content
-    -#  %nav#sidebar.sidebar.nav-collapse.collapse
-    -#    = render partial: 'left_side', :locals => { :stage => :first }
+
     %nav#sidebar.sidebar.nav-collapse.collapse
       = render partial: 'left_side', :locals => { :stage => :first }
     .wrap
@@ -33,7 +28,6 @@
       .content.container
         = yield
 
-    -##toTop ^ Наверх
     /
       Javascripts
       \==================================================

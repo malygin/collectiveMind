@@ -1,4 +1,3 @@
-
 module BasePostVoting extend ActiveSupport::Concern
   	included do
 	 	attr_accessible  :post, :user, :against

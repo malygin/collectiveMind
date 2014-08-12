@@ -1,5 +1,3 @@
--#- if not current_user.answered_for_help_stage?(2) and not @mini_help.nil?
--#  =render partial: 'shared/small_help', object: @mini_help
 %h3
   2 этап: Анализ ситуации.
   %br
@@ -35,13 +33,10 @@
       =link_to "Исходные #{@project.discontent_ongoing_post.count}", "/project/#{@project.id}/discontent/posts/", remote: true
     %li#new
       =link_to "Объединенные #{@project.discontent_accepted_post.count}", "/project/#{@project.id}/discontent/posts/unions", remote: true
-    -#%li
-    -#  %a(href="#part_origin" data-toggle="tab") Частично совпадающие (140)
   %br
   %br
   #posts
     = render  @posts
-
 
 -else
   %small#filter_posts

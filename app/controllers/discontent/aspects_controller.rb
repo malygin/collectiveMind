@@ -26,10 +26,6 @@ class Discontent::AspectsController  < ApplicationController
     respond_to do |format|
       format.js
     end
-    #@aspect.destroy if current_user.boss?
-    #@aspect.life_tape_posts.destroy_all if current_user.boss?
-    #@aspect.life_tape_posts.first.destroy if current_user.boss?
-    #redirect_to life_tape_posts_path(@project)
   end
 
   def new
@@ -52,7 +48,6 @@ class Discontent::AspectsController  < ApplicationController
         redirect_to "/project/#{@project.id}/life_tape/posts?asp=#{@aspect.id}"
         return
       else
-        #format.js {render :action => "new"}
         render "new"
       end
     end

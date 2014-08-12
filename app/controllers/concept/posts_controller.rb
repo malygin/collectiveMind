@@ -7,7 +7,7 @@ class Concept::PostsController < PostsController
    autocomplete :concept_post, :resource, :class_name => 'Concept::Post' , :full => true
 
 
-   def current_model
+  def current_model
     Concept::Post
   end
   
@@ -23,12 +23,10 @@ class Concept::PostsController < PostsController
     Concept::PostAspect
   end
 
-   def autocomplete_concept_post_resource
+  def autocomplete_concept_post_resource
      pr=Set.new
      pr.merge(Concept::Resource.where(:project_id => params[:project]).map {|d| {:value => d.name}})
-     #if params[:term].length > 1
-     #end
-     #pr.merge(Concept::PostResource.select("DISTINCT name as value").where("LOWER(name) like LOWER(?)", "%#{params[:term]}%")
+
      pr.merge(Concept::PostResource.select("DISTINCT name as value").joins(:concept_post).where("LOWER(name) like LOWER(?) AND concept_posts.project_id = ?", "%#{params[:term]}%", params[:project] )
               .map {|d| {:value => d.value } })
 
@@ -43,23 +41,20 @@ class Concept::PostsController < PostsController
      end
 
      render json: pr.sort_by{|ha| ha[:value].downcase}
-   end
+  end
 
-
-   def prepare_data
+  def prepare_data
     @project = Core::Project.find(params[:project])
     @aspects = Discontent::Aspect.where(:project_id => @project, :status => 0)
     add_breadcrumb I18n.t('stages.concept'), concept_posts_path(@project)
 
     @disposts = Discontent::Post.where(:project_id => @project, :status => 4).order(:id)
 
-
     @status = 4
     if @project.status == 8
       @vote_all = Concept::Voting.by_posts_vote(@project.discontents.by_status(4).pluck(:id).join(", ")).uniq_user.count
     end
   end
-
 
   def index
     if @project.status == 8
@@ -84,21 +79,6 @@ class Concept::PostsController < PostsController
       @comments_all = @comments_all.sort_by{|c| c.imp_concepts.size}
     end
     @imp_con_comment = true
-    #@posts = current_model.where(:project_id => @project, :status => @status).paginate(:page => params[:page])
-    #if @project.status == 8
-    #  @number_v = @project.stage3 - current_user.concept_post_votings.size
-    #  @votes = @project.stage3
-    #  @path_for_voting = "/project/#{@project.id}/concept/vote/"
-    #
-    #  if boss?
-    #    @all_people = @project.users.size
-    #
-    #    @voted_people = ActiveRecord::Base.connection.execute("select count(*) as r from (select distinct v.user_id from concept_votings v  left join   concept_post_aspects asp on (v.concept_post_aspect_id = asp.id) ) as dm").first["r"]
-    #    @votes = ActiveRecord::Base.connection.execute("select count(*) as r from (select  v.user_id from concept_votings v  left join   concept_post_aspects asp on (v.concept_post_aspect_id = asp.id) ) as dm").first["r"].to_i
-    #  end
-    #  render 'vote_list' , :layout => 'application_one_column'
-    #  return
-    #end
     render 'index' , :layout => 'application_two_column'
   end
 
@@ -122,11 +102,7 @@ class Concept::PostsController < PostsController
     @concept_post.project = @project
     @concept_post.imp_comment = params[:imp_comment] if params[:imp_comment]
     @concept_post.imp_stage = params[:imp_stage] if params[:imp_stage]
-    #unless params[:resor].nil?
-    #  params[:resor].each_with_index do |r,i|
-    #    @concept_post.concept_post_resources.build(:name => r, :desc => params[:res][i])   if r!=''
-    #  end
-    #end
+
     unless params[:resor_positive_r].nil?
       params[:resor_positive_r].each_with_index do |r,i|
         @concept_post.concept_post_resources.build(:name => r, :desc => params[:res_positive_r][i], :type_res => 'positive_r', :project_id => @project.id).save  if r!=''
@@ -137,22 +113,7 @@ class Concept::PostsController < PostsController
         @concept_post.concept_post_resources.build(:name => r, :desc => params[:res_negative_r][i], :type_res => 'negative_r', :project_id => @project.id).save  if r!=''
       end
     end
-    #unless params['correct_disc'].nil?
-    #  params['correct_disc'].each do |v|
-    #    if v!= ''
-    #      unless Discontent::Post.exists?(v[0])
-    #        disc =new_disc(v[1])
-    #        v[1].delete :disc
-    #        @concept_post.post_aspects.build(v[1].merge :discontent_aspect_id=> disc.id)
-    #      else
-    #        v[1].delete :disc
-    #        @concept_post.post_aspects.build(v[1].merge :discontent_aspect_id=> v[0])
-    #      end
-    #
-    #    end
-    #  end
-    #end
-    #
+
    respond_to do |format|
       if @concept_post.save!
         unless params[:cd].nil?
@@ -178,7 +139,6 @@ class Concept::PostsController < PostsController
 
     @concept_post = Concept::Post.find(params[:id])
     @concept_post.update_status_fields(params[:pa],params[:resor_positive_r],params[:res_positive_r],params[:resor_negative_r],params[:res_negative_r])
-    #@concept_post.update_attributes(params[:concept_post])
     @concept_post.post_aspects.destroy_all
 
     params[:pa].each do |pa|
@@ -191,12 +151,6 @@ class Concept::PostsController < PostsController
       post_aspect.discontent = disc
       @concept_post.post_aspects << post_aspect
     end
-    #@concept_post.concept_post_resources.destroy_all
-    #unless params[:resor].nil?
-    #  params[:resor].each_with_index do |r,i|
-    #    @concept_post.concept_post_resources.build(:name => r, :desc => params[:res][i])  if r!=''
-    #  end
-    #end
     @concept_post.concept_post_resources.by_type('positive_r').destroy_all
     unless params[:resor_positive_r].nil?
       params[:resor_positive_r].each_with_index do |r,i|
@@ -209,20 +163,6 @@ class Concept::PostsController < PostsController
         @concept_post.concept_post_resources.build(:name => r, :desc => params[:res_negative_r][i], :type_res => 'negative_r', :project_id => @project.id).save  if r!=''
       end
     end
-    #unless params['correct_disc'].nil?
-    #  params['correct_disc'].each do |v|
-    #    if v!= ''
-    #      unless Discontent::Post.exists?(v[0])
-    #        disc =new_disc(v[1])
-    #        v[1].delete :disc
-    #        @concept_post.post_aspects.build(v[1].merge :discontent_aspect_id=> disc.id)
-    #      else
-    #        @concept_post.post_aspects.build(v[1].merge :discontent_aspect_id=> v[0])
-    #      end
-    #
-    #    end
-    #  end
-    #end
 
     respond_to do |format|
       if @concept_post.save!
@@ -244,17 +184,6 @@ class Concept::PostsController < PostsController
   end
 
   def vote_list
-    #@posts = @project.get_concept_posts_for_vote(current_user)
-    #if @posts.empty?
-    #  redirect_to action: "index"
-    #  return
-    #end
-    #@posts = current_model.where(:project_id => @project, :status => 2)
-    # i have votes now
-    #@number_v = @project.stage3 - current_user.voted_concept_posts.count
-    #@path_for_voting = "/project/#{@project.id}/concept/vote/"
-    #all number of votes
-    #@votes = @project.stage3
     @project = Core::Project.find(params[:project])
     unless view_context.get_concept_posts_for_vote?(@project)
       redirect_to action: "index"
@@ -329,7 +258,6 @@ class Concept::PostsController < PostsController
     @discontent_post = Discontent::Post.find(params[:dis_id]) unless params[:dis_id].nil?
     @resources = Concept::Resource.where(:project_id => @project.id)
     @users_rc = User.where(:type_user => [4,7])
-    #@aspects = Discontent::Aspect.where(:project_id => @project)
     @pa = Concept::PostAspect.new
     if params[:imp_stage]
       @comment = "#{get_class_for_improve(params[:imp_stage].to_i)}::Comment".constantize.find(params[:imp_comment]) unless params[:imp_comment].nil?
@@ -344,29 +272,7 @@ class Concept::PostsController < PostsController
    def edit
      @post = current_model.find(params[:id])
      @pa =@post.post_aspects.first
-
      @discontent_post = @pa.discontent
-     #@aspects = Discontent::Aspect.where(:project_id => @project)
-
-   end
-
-  def add_aspect
-    
-    @aspect = Discontent::Aspect.find(params[:aspect_id]) 
-    respond_to do |format|
-      format.html # new.html.erb
-      format.js
-    end
-  end
-
-   def add_new_discontent
-     @discontent = Discontent::Post.new
-     @discontent.id = (0..10).map{rand(0..10)}.join
-     @aspects = Discontent::Aspect.where(:project_id =>params[:project])
-     respond_to do |format|
-       format.js
-     end
-
    end
 
    def expert_acceptance_save
@@ -374,7 +280,7 @@ class Concept::PostsController < PostsController
      post.user.add_score(200*post.post_aspects.size)
      redirect_to  action: "index"
    end
-  #write fact of voting in db
+
 
    def status_post
      @project = Core::Project.find(params[:project])
@@ -532,17 +438,5 @@ class Concept::PostsController < PostsController
      end
    end
 
-
-  private
-  def new_disc(param)
-    disc = Discontent::Post.new(param['disc'])
-    disc.status = 5
-    project = Core::Project.find(params[:project])
-
-    disc.project = project
-    disc.user = current_user
-    disc.save!
-    disc
-  end
   
 end

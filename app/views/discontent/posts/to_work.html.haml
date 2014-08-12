@@ -6,7 +6,6 @@
           2 этап: Анализ ситуации. Ознакомьтесь перед началом работы!
   .body
     #carousel-example-generic.carousel.slide{"data-ride" => "carousel"}
-      / Indicators
       %ol.carousel-indicators
         %li.active{"data-slide-to" => "0", "data-target" => "#carousel-example-generic"}
         %li{"data-slide-to" => "1", "data-target" => "#carousel-example-generic"}
@@ -14,27 +13,21 @@
         %li{"data-slide-to" => "3", "data-target" => "#carousel-example-generic"}
         %li{"data-slide-to" => "4", "data-target" => "#carousel-example-generic"}
         %li{"data-slide-to" => "5", "data-target" => "#carousel-example-generic"}
-      / Wrapper for slides
+
       .carousel-inner
         .item.active
           %img{alt: "", style: 'margin: auto;', src: "/assets/img/to_work/to_work_2_0.png"}/
-          -#.carousel-caption
         .item
           %img{alt: "", style: 'margin: auto;', src: "/assets/img/to_work/to_work_2_1.png"}/
-          -#.carousel-caption
         .item
           %img{alt: "", style: 'margin: auto;',src: "/assets/img/to_work/to_work_2_2.png"}/
-          -#.carousel-caption
         .item
           %img{alt: "", style: 'margin: auto;', src: "/assets/img/to_work/to_work_2_3.png"}/
-          -#.carousel-caption
         .item
           %img{alt: "", style: 'margin: auto;', src: "/assets/img/to_work/to_work_2_4.png"}/
-          -#.carousel-caption
         .item
           %img{alt: "", style: 'margin: auto;', src: "/assets/img/to_work/to_work_2_5.png"}/
-          -#.carousel-caption
-      / Controls
+
       %a.left.carousel-control{"data-slide" => "prev", href: "#carousel-example-generic", role: "button"}
         %span.glyphicon.glyphicon-chevron-left(style='color:#e5603b')
       %a.right.carousel-control{"data-slide" => "next", href: "#carousel-example-generic", role: "button"}
@@ -44,65 +37,5 @@
 %section.widget
   .body
     .row
-      -#.col-md-6
-      -#  #option_for_check_field(project="#{@project.id}" table_name="#{@table_name}")
-      -#  .control-group
-      -#    %label.checkbox{:for => "check-field"}
-      -#      %input#check-field{:name => "check-field", :type => "checkbox", :onchange => "user_check_field(this,'discontent_posts_to_work');"}/
-      -#      Не показывать в следующий раз
       .col-md-12
         =link_to "Приступить к работе!", @path_link, class: 'btn btn-lg btn-danger btn-block', id: 'to_work'
-
-
-
-
--#.row
--#  %section.widget
--#    %header
--#      .row
--#        .col-md-12
--#          %h3.color-red
--#            2 этап: Анализ ситуации. Ознакомьтесь перед началом работы!
--#            %br
--#
--#    .body
--#      %br
--#      %br
--#      %section.widget
--#        .body
--#          .row
--#            .col-md-6
--#              #option_for_check_field(project="#{@project.id}" table_name="#{@table_name}")
--#              %h3.color-red
--#                Правила работы на этапе "Анализ ситуации"
--#                %br
--#
--#              %p 1) Убедившись, что все темы процедуры ясны, начать формулирование несовершенств
--#              %p 2) Ежедневно следить за обновлениями контента в рамках процедуры
--#              %p 3) Писать содержательные сообщения
--#              %p 4) Не оскорблять других участников и воздерживаться от необоснованной критики
--#
--#              %p Для получения максимально эффективного проекта советуем вам:
--#              %p 1) Добавлять как можно больше несовершенств, максимально их локализуя и уточняя
--#              %p 2) Предлагать конструктивную критику любых предложенных несовершенств от других участников, а также задавать как можно больше вопросов
--#
--#              %br
--#              .control-group
--#                %label.checkbox{:for => "check-field"}
--#                  %input#check-field{:name => "check-field", :type => "checkbox", :onchange => "user_check_field(this,'discontent_posts_to_work');"}/
--#                  Не показывать в следующий раз
--#
--#              %br
--#              =link_to "Приступить к работе!", @path_link, class: 'btn btn-danger btn-block'
--#
--#            .col-md-6
--#              %h3.color-red
--#                Краткое описание этапа
--#                %br
--#
--#              %p Чтобы разработать проект совершенствования чего-либо, сперва надо выявить конкретные несовершенства по темам, определенным на предыдущей стадии. «Совершенствовать» означает «корректировать несовершенства», и идеально, когда скорректированы они все. Но для этого их необходимо сначала идентифицировать.
--#
--#              %p Для четкого описания несовершенства используется формат ЧТО\КОГДА\ГДЕ. Он задается вопросами (1)–(3):
--#              %p (1) «ЧТО не устраивает?» — отрицательное действие, явление, установление, свойство и т. д.
--#              %p (2) «КОГДА это происходит?» — во время какого регулярно случающегося мероприятия, процесса, события, ситуации и т. п.
--#              %p (3) «ГДЕ?» – физическое или институциональное место, в котором это происходит.

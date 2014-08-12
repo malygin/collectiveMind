@@ -4,7 +4,7 @@
     .sender
       =link_to child_comment.user, user_path(@project, child_comment.user)
       = render partial: '/shared/user_online', object: child_comment.user
-      -#=club_status_show_user(child_comment.user)
+
       - if child_comment.user.boss?
         %span.label.label-danger MD
       - if child_comment.user.role_expert?

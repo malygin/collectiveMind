@@ -22,10 +22,6 @@ class Estimate::PostsController < PostsController
 
   def prepare_data
     @project = Core::Project.find(params[:project])
-    #@journals = Journal.events_for_user_feed @project.id
-    #@news = ExpertNews::Post.first
-    #@my_jounals = Journal.count_events_for_my_feed(@project.id, current_user)
-    #@mini_help = Help::Post.where(stage:5, mini: true).first
 
     @status = params[:status]
     @aspects = Discontent::Aspect.where(:project_id => @project)
@@ -108,7 +104,6 @@ class Estimate::PostsController < PostsController
     @estimate_post.post = plan_post
     @estimate_post.project = @project
     @estimate_post.user = current_user
-    #puts "__________",boss?
     if expert? or admin?
       @estimate_post.status = 0
     elsif jury?
@@ -117,7 +112,6 @@ class Estimate::PostsController < PostsController
       @estimate_post.status = 0
     end
     @est_stat = plan_post.estimate_status.nil? ? 0 : plan_post.estimate_status
-    #puts "__________", @estimate_post.status
     @estimate_post.post_aspects=[]
     if not jury?
       if @est_stat == 0
@@ -182,44 +176,7 @@ class Estimate::PostsController < PostsController
         end
       end
 
-      #plan_post.post_aspects_first.each do |tr|
-      #  est_tr = Estimate::PostAspect.new
-      #  est_tr.first_stage = true
-      #  est_tr.plan_post_aspect = tr
-      #  op = params[:op]['1'][tr.id.to_s]
-      #  est_tr.op1 = op['1']
-      #  est_tr.op2 = op['2']
-      #  est_tr.op3 = op['3']
-      #  est_tr.op4 = op['4']
-      #  est_tr.op = params[:op_text]['1'][tr.id.to_s]
-      #
-      #  ozf = params[:ozf]['1'][tr.id.to_s]
-      #  est_tr.ozf1 = ozf['1']
-      #  est_tr.ozf2 = ozf['2']
-      #  est_tr.ozf3 = ozf['3']
-      #  est_tr.ozf4 = ozf['4']
-      #  est_tr.ozf = params[:ozf_text]['1'][tr.id.to_s]
-      #
-      #  ozs = params[:ozs]['1'][tr.id.to_s]
-      #  est_tr.ozs1 = ozs['1']
-      #  est_tr.ozs2 = ozs['2']
-      #  est_tr.ozs3 = ozs['3']
-      #  est_tr.ozs4 = ozs['4']
-      #  est_tr.ozs = params[:ozs_text]['1'][tr.id.to_s]
-      #
-      #  on = params[:on]['1'][tr.id.to_s]
-      #  est_tr.on1 = on['1']
-      #  est_tr.on2 = on['2']
-      #  est_tr.on3 = on['3']
-      #  est_tr.on4 = on['4']
-      #  est_tr.on = params[:on_text]['1'][tr.id.to_s]
-      #  @estimate_post.post_aspects << est_tr
-      #end
-
-
     end
-
-
 
     respond_to do |format|
       if @estimate_post.save
@@ -243,13 +200,11 @@ class Estimate::PostsController < PostsController
     @project = Core::Project.find(params[:project])
     plan_post = Plan::Post.find(params[:post_id])
     @estimate_post.post_aspects.destroy_all
-    #@estimate_post.post_aspects=[]
     @est_stat = plan_post.estimate_status.nil? ? 0 : plan_post.estimate_status
     if @est_stat == 0
       plan_post.post_aspects.each do |tr|
         if tr.plan_post_stage.status == 0
           est_tr = Estimate::PostAspect.new
-          #est_tr.first_stage = false
           est_tr.plan_post_aspect = tr
           op = params[:op]['0'][tr.id.to_s]
           est_tr.op1 = op['1']
@@ -285,7 +240,6 @@ class Estimate::PostsController < PostsController
       plan_post.post_aspects.each do |tr|
         if tr.plan_post_stage.status == 0
           est_tr = Estimate::PostAspect.new
-          #est_tr.first_stage = false
           est_tr.plan_post_aspect = tr
           op = params[:op] ? (params[:op]['0'][tr.id.to_s] ? params[:op]['0'][tr.id.to_s] : 0) : 0
           est_tr.op1 = op
@@ -307,40 +261,6 @@ class Estimate::PostsController < PostsController
       end
     end
 
-    #plan_post.post_aspects_first.each do |tr|
-    #  est_tr = Estimate::PostAspect.new
-    #  est_tr.first_stage = true
-    #  est_tr.plan_post_aspect = tr
-    #  op = params[:op]['1'][tr.id.to_s]
-    #  est_tr.op1 = op['1']
-    #  est_tr.op2 = op['2']
-    #  est_tr.op3 = op['3']
-    #  est_tr.op4 = op['4']
-    #  est_tr.op = params[:op_text]['1'][tr.id.to_s]
-    #
-    #  ozf = params[:ozf]['1'][tr.id.to_s]
-    #  est_tr.ozf1 = ozf['1']
-    #  est_tr.ozf2 = ozf['2']
-    #  est_tr.ozf3 = ozf['3']
-    #  est_tr.ozf4 = ozf['4']
-    #  est_tr.ozf = params[:ozf_text]['1'][tr.id.to_s]
-    #
-    #  ozs = params[:ozs]['1'][tr.id.to_s]
-    #  est_tr.ozs1 = ozs['1']
-    #  est_tr.ozs2 = ozs['2']
-    #  est_tr.ozs3 = ozs['3']
-    #  est_tr.ozs4 = ozs['4']
-    #  est_tr.ozs = params[:ozs_text]['1'][tr.id.to_s]
-    #
-    #  on = params[:on]['1'][tr.id.to_s]
-    #  est_tr.on1 = on['1']
-    #  est_tr.on2 = on['2']
-    #  est_tr.on3 = on['3']
-    #  est_tr.on4 = on['4']
-    #  est_tr.on = params[:on_text]['1'][tr.id.to_s]
-    #  @estimate_post.post_aspects << est_tr
-    #end
-
     @estimate_post.save
     @estimate_post.update_attributes(params[:estimate_post])
     current_user.journals.build(:type_event=>'estimate_post_update', :body=>@estimate_post.id).save!
@@ -355,11 +275,6 @@ class Estimate::PostsController < PostsController
     @est_stat = @posts.first.estimate_status.nil? ? 0 : @posts.first.estimate_status
     @number_v = @project.stage5 - current_user.voted_plan_posts.by_project(@project.id).size
     @votes = @project.stage5
-    # if boss?
-    #   @all_people = @project.users.size
-    #   @voted_people = ActiveRecord::Base.connection.execute("select count(*) as r from (select distinct v.user_id from plan_votings v  left join   plan_posts asp on (v.plan_post_id = asp.id) ) as dm").first["r"]
-    #   @votes = ActiveRecord::Base.connection.execute("select count(*) as r from (select  v.user_id from plan_votings v  left join   plan_posts asp on (v.plan_post_id = asp.id) ) as dm").first["r"].to_i
-    # end
     respond_to do |format|
       format.html {render :layout => 'application_two_column'}
     end

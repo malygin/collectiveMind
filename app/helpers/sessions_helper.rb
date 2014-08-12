@@ -17,7 +17,6 @@ module SessionsHelper
 		#if (current_user.nil? or !(current_user.projects.include? project))  and project.type_access == 2
 		#	redirect_to root_path, :notice => "У вас нет прав просматривать этот проект!"
 		#end
-
   end
 
   #@todo new permissions

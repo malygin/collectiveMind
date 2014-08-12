@@ -6,8 +6,4 @@ $('#note_form_#{@post_aspect_note.id}_#{@type}').append(
 '<li id="li_note_#{@post_note.id}">#{@post_note.content}</li></div>' );
 
 $('#note_form_#{@post_aspect_note.id}_#{@type}').addClass('border_note');
--#-if @post.send(column_for_concept_type(@type.to_i)) == false
--#  $("##{id_for_concept_type(@type.to_i)}").removeClass('color-blue color-green color-orange').addClass('color-red');
-
--#$('#btn_note_#{@post_aspect_note.id}_#{@type}').removeClass('disabled');
 $('#post_note_#{@post_note.id}').effect("highlight", {color: '#f5cecd'}, 1000);

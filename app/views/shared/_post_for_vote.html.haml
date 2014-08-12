@@ -1,5 +1,4 @@
 .col-md-4.col-sm-8.col-xs-12
-
   - if can_vote?(post_for_vote.voted(current_user).size, count_voted, votes)
     .box
       =simple_format(post_for_vote.content)
@@ -30,34 +29,3 @@
   %br
   %br
   %br
-
--#=link_to  path_for_voting+"vote/"+post_for_vote.id.to_s , :remote => true, :method => :put, class: "btn btn-default btn-sm vote-button", id: "vote_#{post_for_vote.id}" do
--#  %span.glyphicon.text-success.glyphicon-thumbs-up
--#  -if boss?
--#    %span.glyphicon.text-success.h4=post_for_vote.voted_users.size
--#%a.btn.btn-success.btn-sm.disabled.vote-button
--#  %span.glyphicon.text-success.glyphicon-thumbs-up
--#  -if boss?
--#    %span.glyphicon.text-success.h4=post_for_vote.voted_users.size
--#  =post_for_vote.content
--#
--#%p.righttext
--#    .voteBar
--#        - if can_vote?(post_for_vote.voted(current_user).size, count_voted, votes)
--#            =link_to 'отдать голос', path_for_voting+"vote/"+post_for_vote.id.to_s , :remote => true, :method => :put, class: "voteCounter", :id => "aspect_#{post_for_vote.id}"
--#
--#
--#    %b=post_for_vote.content
--#    -
--#    =post_for_vote.short_desc
--#    - if boss?
--#        .adminVoteBar
--#            (
--#            -#%b=post_for_vote.status
--#            =post_for_vote.voted_users.size
--#            %b="#{(post_for_vote.voted_users.size*100)/@votes}%"
--#            -if post_for_vote.status ==0
--#                =link_to "сделать обязательной", path_for_voting+"up/"+post_for_vote.id.to_s , :remote => true, :method => :put, class: "voteCounter", :id => "aspect_#{post_for_vote.id}"
--#            )
--#
--#

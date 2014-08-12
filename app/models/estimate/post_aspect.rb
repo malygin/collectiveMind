@@ -11,9 +11,6 @@ class Estimate::PostAspect < ActiveRecord::Base
   scope :by_plan_fc, ->(id) { where("plan_post_first_cond_id = ?", id) }
   scope :by_plan_pa, ->(id) { where("plan_post_aspect_id = ?", id) }
 
-  #scope :firsts, -> { where(first_stage: true) }
-  #scope :others, -> { where(first_stage: false) }
-
   scope :firsts, ->(post) { joins(:plan_post_aspect).where("plan_post_aspects.post_stage_id = ?", post.first_stage) }
   scope :others, ->(post) { joins(:plan_post_aspect).where("plan_post_aspects.post_stage_id != ?", post.first_stage) }
 

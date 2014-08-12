@@ -67,7 +67,7 @@
                   -if @post.persisted?
                     =link_to new_stage_plan_post_path(@project, @post), :method => :put, :remote => true, :class => "btn btn-lg btn-success btn-block", :id => "btn_new_stage", :style => "font-weight: normal;" do
                       Добавить этап в проект
-                  -#%button.btn.btn-lg.btn-success.btn-block.disabled#btn_new_stage(href="#" style="font-weight: normal;") Добавить этап в проект
+
         #tab2.tab-pane
           .form-horizontal
             %fieldset
@@ -122,10 +122,7 @@
                                     =concept.name
                                     %br
                                     = check_validate_concept(concept).html_safe if check_validate_concept(concept)
-                                    -#-unless concept.plan_post_resources.by_type('positive_r').empty?
-                                    -#  %br
-                                    -#  - concept.plan_post_resources.by_type('positive_r').each do |res|
-                                    -#    .label.label-danger=res.name
+
                                 - unless concept.plan_post_actions.nil?
                                   - concept.plan_post_actions.each do |action|
                                     %tr(id="tr_action_#{action.id}")
@@ -182,13 +179,9 @@
                               %li.concept_side{:id => "li_concept_#{concept.id}"}
                                 =link_to get_concept_plan_post_path(@project, @post, :con_id => concept.id, :view_post_concept => true), :method => :get, :remote => true do
                                   =concept.title
-                              -#%li.concept_side{:id => "li_concept_#{concept.id}", :onclick => "$('#send_post_concept').submit();save_last_concept();"}
-                              -#  =link_to get_concept_plan_post_path(@project, @post, :con_id => concept.id), :method => :get, :remote => true do
-                              -#    =concept.title
+
               .col-md-8
                 #render_get_concept
-              -#.col-md-3
-              -#  #render_get_concept_actions
 
         .description
           %ul.pager.wizard
@@ -200,210 +193,3 @@
               %button.btn.btn-primary.pull-right#btn_next{:class => @post.persisted? ? nil:"disabled"}
                 Далее
                 %i.fa.fa-caret-right
-
-      -#%li.panel
-      -#  %a.accordion-toggle.collapsed{"data-parent" => "#side-nav", "data-toggle" => "collapse", :href => "#menu-levels-collapse"}
-      -#    %i.fa.fa-code-fork
-      -#    %span.name Menu Levels
-      -#  %ul#menu-levels-collapse.panel-collapse.collapse
-      -#    %li
-      -#      %a{:href => "#"} Item 1.1
-      -#    %li
-      -#      %a{:href => "#"} Item 1.2
-      -#    %li.panel
-      -#      %a.accordion-toggle.collapsed{"data-parent" => "#menu-levels-collapse", "data-toggle" => "collapse", :href => "#sub-menu-1-collapse"} Item 1.3
-      -#      %ul#sub-menu-1-collapse.panel-collapse.collapse
-      -#        %li.panel
-      -#          %a.accordion-toggle.collapsed{"data-parent" => "#sub-menu-1-collapse", "data-toggle" => "collapse", :href => "#sub-menu-3-collapse"} Item 2.1
-      -#          %ul#sub-menu-3-collapse.panel-collapse.collapse
-      -#            %li
-      -#              %a{:href => "#"} Item 3.1
-      -#            %li
-      -#              %a{:href => "#"} Item 3.2
-      -#            %li
-      -#              %a{:href => "#"} Item 3.3
-      -#        %li
-      -#          %a{:href => "#"} Item 2.2
-      -#        %li.panel
-      -#          %a.accordion-toggle.collapsed{"data-parent" => "#sub-menu-1-collapse", "data-toggle" => "collapse", :href => "#sub-menu-2-collapse"} Item 2.3
-      -#          %ul#sub-menu-2-collapse.panel-collapse.collapse
-      -#            %li
-      -#              %a{:href => "#"} Item 3.4
-      -#            %li
-      -#              %a{:href => "#"} Item 3.5
-      -#            %li
-      -#              %a{:href => "#"} Item 3.6
-
-
-
-        .description
-          %ul.pager.wizard
-            %li.previous
-              %button.btn.btn-primary.pull-left
-                %i.fa.fa-caret-left
-                Назад
-            %li.next
-              %button.btn.btn-primary.pull-right#btn_next{:class => @post.persisted? ? nil:"disabled"}
-                Далее
-                %i.fa.fa-caret-right
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
--#= render 'shared/help/new_concept'
--#
--#= form_for  @post, :url => {:project => @project.id, :action => @post.persisted? ? 'update' : 'create'}, :html => { :class => 'new_or_edit' } do |f|
--#  .col-md-8
--#    %div.tab-content#plan_content_form
--#      -#-@discontents.each do |d|
--#      -#  =render partial: 'resolve_discontent', locals: { discontent: d }
--#      -#-@discontents.each do |d|
--#      -#  =render partial: 'first_cond', locals: { discontent: d }
--#      -unless @post.post_aspects.nil?
--#        -@post.post_aspects.each do |cp|
--#          =render partial: 'first_cond', object: cp
--#
--#      %div.tab-pane#essay2
--#        %h3.text-success=t('form.essay1')
--#        %br
--#        .panel.panel-info
--#          .panel-heading=t('form.essay1_notice')
--#          .panel-body
--#            %br
--#            =f.text_area :first_step, rows: 10, style: 'width: 100%;'
--#      %div.tab-pane#essay1
--#        %h3.text-success=t('form.essay')
--#        %br
--#        .panel.panel-info
--#          .panel-heading=t('form.essay_notice')
--#          .panel-body
--#            =f.text_area :content, rows: 10, style: 'width: 100%;'
--#            %br
--#            =t('form.essay_notice2')
--#            %br
--#            =f.text_area :goal, rows: 5, style: 'width: 100%;'
--#
--#      %div.tab-pane#plan2
--#        %h3.text-success=t('form.plan_first')
--#        %br
--#        .panel.panel-info
--#          .panel-heading
--#            =t('form.plan_first_notice')
--#            %a.btn.btn-success.btn-xs{type: "button", "data-toggle"=>"modal", "data-target"=>"#prompt15", style:'font-size:10px;'} Пояснения
--#
--#          .panel-body
--#            %br
--#            =f.text_area :plan_first,  rows: 10, style: 'width: 100%;'
--#        %h3.text-success=t('form.plan_all')
--#        %br
--#        .panel.panel-info
--#          .panel-heading
--#            =t('form.plan_all_notice')
--#            %a.btn.btn-success.btn-xs{type: "button", "data-toggle"=>"modal", "data-target"=>"#prompt15", style:'font-size:10px;'} Пояснения
--#
--#          .panel-body
--#            %br
--#            =f.text_area :plan_other,  rows: 10, style: 'width: 100%;' , placeholder: 'Дальнейшие действия'
--#
--#
--#  .col-md-4
--#    -unless @post.persisted?
--#      %h5.text-success#button_create Сохранить проект и приступить к добавлению нововведений?
--#    =f.submit 'Сохранить', class: "btn btn-success", id: 'save_concept_form'
--#    %h5
--#      .small Выберите нововведение, кликнув по нужной вкладке:
--#    %ul.nav.nav-tabs.nav-justified
--#      %li.active
--#        %a(href="#theall" data-toggle="tab") Образ будущ.
--#      %li
--#        %a(href="#thefirst" data-toggle="tab") Первый этап
--#    .tab-content
--#      #theall.tab-pane.fade.in.active(onclick="$('#thefirst ul li').removeClass('active');" )
--#        %ul.nav.nav-tabs.nav-stacked
--#          -#%li
--#          -#  %a.text-success(href="#plan1" data-toggle="tab" style='font-size:10px; font-weight: bold;')
--#          -#    =t('form.plan')
--#          %li
--#            %a.text-success(href="#essay1" data-toggle="tab" style='font-size:10px; font-weight: bold;')
--#              I)
--#              =t('form.essay')
--#          -if @post.persisted?
--#            %li
--#              =link_to({:action => :add_concept, :first_stage => 0, :concept_empty => 0}, :remote => true, :method => :put, :style => "font-size:10px; font-weight: bold;") do
--#                =t('form.plan_add_concept')
--#              -#%a.text-success(href="#modal_concept" class="plan_add_concept" data-toggle="modal" onclick="empty_modal_plan();" data-target="#modal_concept" style='font-size:10px; font-weight: bold;')
--#              -#  =t('form.plan_add_concept')
--#            %li
--#              =link_to({:action => :add_concept, :first_stage => 0, :concept_empty => 1}, :remote => true, :method => :put, :style => "font-size:10px; font-weight: bold;") do
--#                =t('form.plan_add_empty_concept')
--#              -#%a.text-success(href="#modal_empty_concept" class="plan_add_concept" data-toggle="modal" data-target="#modal_empty_concept" style='font-size:10px; font-weight: bold;')
--#              -#  =t('form.plan_add_empty_concept')
--#            -unless @post.post_aspects_other.nil?
--#              -@post.post_aspects_other.each do |cp|
--#                %li
--#                  %a(href="#asp_#{cp.id}" data-toggle="tab")
--#                    %span.glyphicon.glyphicon-remove.text-danger.pull-right{onclick: "remove_plan_concept(this,#{cp.id});", style: "cursor:pointer;text-decoration:none;font-size:15px;"}
--#                    =display_title(cp)
--#                    -#-if not cp.title.nil? and cp.title!=''
--#                    -#  =cp.title
--#                    -#-else
--#                    -#  =cp.discontent.display_content
--#          -#        ="#{i+1}. #{d.title}"
--#          -#        %span.text-success.glyphicon.glyphicon-ok.pull-right(class = "#{'inv_element' if @post.get_pa_by_discontent(d, :name)==''}")
--#      #thefirst.tab-pane.fade(onclick="$('#theall ul li').removeClass('active');" )
--#        %ul.nav.nav-tabs.nav-stacked
--#          %li
--#            %a.text-success(href="#essay2" data-toggle="tab" style='font-size:10px; font-weight: bold;')
--#              II)
--#              =t('form.essay1')
--#          %li
--#            %a.text-success(href="#plan2" data-toggle="tab" style='font-size:10px; font-weight: bold;')
--#              III)
--#              =t('form.plan')
--#          -if @post.persisted?
--#            %li
--#              =link_to({:action => :add_concept, :first_stage => 1, :concept_empty => 0}, :remote => true, :method => :put, :style => "font-size:10px; font-weight: bold;") do
--#                =t('form.plan_add_concept')
--#              -#%a.text-success(href="#modal_concept" class="plan_add_concept" data-toggle="modal" onclick="empty_modal_plan();" data-target="#modal_concept" style='font-size:10px; font-weight: bold;')
--#              -#  =t('form.plan_add_concept')
--#            %li
--#              =link_to({:action => :add_concept, :first_stage => 1, :concept_empty => 1}, :remote => true, :method => :put, :style => "font-size:10px; font-weight: bold;") do
--#                =t('form.plan_add_empty_concept')
--#              -#%a.text-success(href="#modal_empty_concept" class="plan_add_concept" data-toggle="modal" data-target="#modal_empty_concept" style='font-size:10px; font-weight: bold;')
--#              -#  =t('form.plan_add_empty_concept')
--#            -unless @post.post_aspects_first.nil?
--#              -@post.post_aspects_first.each do |cp|
--#                %li
--#                  %a(href="#asp_#{cp.id}" data-toggle="tab")
--#                    %span.glyphicon.glyphicon-remove.text-danger.pull-right{onclick: "remove_plan_concept(this,#{cp.id});", style: "cursor:pointer;text-decoration:none;font-size:15px;"}
--#                    =display_title(cp)
--#                    -#-if not cp.title.nil? and cp.title!=''
--#                    -#  =cp.title
--#                    -#-else
--#                    -#  =cp.discontent.display_content
--#          -#-if @post.persisted?
--#          -#  -@post.each_with_index do |d,i|
--#          -#    %li
--#          -#      %a(href="#fdis_#{d.id}" data-toggle="tab")
--#          -#        ="#{i+1}. #{d.title}"
--#          -#        %span.text-success.glyphicon.glyphicon-ok.pull-right(class = "#{'inv_element' if @post.get_pa_by_discontent(d, :name, 1)==''}")
--#
--#  %br
--#  %br
--#  %br
--#  %br
--##render_modal_concept

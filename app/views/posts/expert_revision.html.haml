@@ -1,7 +1,0 @@
-.redtitle На доработку
-= form_for @note, :url => url_for('expert_revision_save'), :method => :put  do |f|
-	Поясните, что нужно доработать и нажмите отправить
-	.field
-		=f.text_area :content
-	.action
-		=f.submit '', class: 'btn'

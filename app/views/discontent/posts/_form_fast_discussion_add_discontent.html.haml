@@ -1,5 +1,3 @@
--#%label{:for => "select_for_discussion_aspects_add"} Выберите тему
--#= select_tag 'select_for_discussion_aspects_add', options_from_collection_for_select(@aspects, "id", "content"), class: 'select-block-level', onchange: "discussion_select_aspect(this);"
 = form_tag(discontent_posts_fast_discussion_discontents_path(@project, asp_id: @aspect, save_form_dispost: true), {method: :get, remote: true, id: 'form_add_discussion'}) do
   %label{:for => "select_for_discussion_aspects_add"} Выберите тему
   = select_tag 'select_for_discussion_aspects_add', options_from_collection_for_select(@aspects, "id", "content"), class: 'select-block-level'

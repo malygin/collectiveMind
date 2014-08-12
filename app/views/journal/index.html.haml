@@ -7,7 +7,6 @@
   .body
     .feed
       .wrapper
-
         .text-center= will_paginate @journals_feed
         - @journals_feed.each do |journal|
           %section.feed-item

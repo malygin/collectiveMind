@@ -4,8 +4,6 @@ class Discontent::Post < ActiveRecord::Base
   include BasePost
   attr_accessible :whend, :whered, :aspect_id, :replace_id, :aspect, :style, :discontent_post_id, :important, :status_content, :status_whered, :status_whend, :imp_comment, :imp_stage, :discuss_stat
   belongs_to :aspect
-  #has_many :childs, :class_name => 'Discontent::Post', :foreign_key => 'replace_id'
-  #belongs_to :post, :class_name => 'Discontent::Post', :foreign_key => 'replace_id'
   has_many :discontent_posts, :class_name => 'Discontent::Post', :foreign_key => 'discontent_post_id'
   belongs_to :discontent_post, :foreign_key => 'discontent_post_id',:class_name => 'Discontent::Post'
   has_many :discontent_notes, :class_name => 'Discontent::Note'
@@ -58,34 +56,12 @@ class Discontent::Post < ActiveRecord::Base
   scope :created_order, order("created_at DESC")
   scope :updated_order, order("updated_at DESC")
 
-  #scope :uniquely_whend, :select => 'distinct whend'
-  #scope :uniquely_whered, :select => 'distinct whered'
-  #scope :ready_for_post, lambda {  where(:status => 0).where("created_at < ?", 2.day.ago) }
-  #scope :not_ready_for_post, lambda {  where(:status => 0).where("created_at > ?", 2.day.ago) }
-
   def update_post_aspects(aspects_new)
     self.discontent_post_aspects.destroy_all
     aspects_new.each do |asp|
       aspect = Discontent::PostAspect.create(post_id: self.id, aspect_id: asp.to_i)
       aspect.save!
     end
-    #aspects_old = self.discontent_post_aspects
-    #unless aspects_old.nil? or aspects_new.nil?
-    #  aspects_old.each do |asp|
-    #    unless aspects_new.include? asp.aspect_id.to_s
-    #      asp.destroy
-    #    end
-    #  end
-    #end
-    #aspects_old = self.post_aspects.nil? ? [] : self.post_aspects.pluck(:id)
-    #unless aspects_new.nil?
-    #  aspects_new.each do |asp|
-    #    unless aspects_old.include? asp.to_i
-    #      aspect = Discontent::PostAspect.create(post_id: self.id, aspect_id: asp.to_i)
-    #      aspect.save!
-    #    end
-    #  end
-    #end
   end
 
   def update_union_post_aspects(aspects_new)
@@ -140,7 +116,6 @@ class Discontent::Post < ActiveRecord::Base
   end
 
   def get_posts_suitable_for_association
-    #Discontent::Post.where(status: 0, style: self.style).where('id!=?', self.id).where('whered = ? or whend = ?',self.whered, self.whend)
     aspects = self.post_aspects.pluck(:id)
 
     Discontent::Post.includes(:discontent_post_aspects).where("discontent_post_aspects.aspect_id IN (#{aspects.join(', ')}) and discontent_posts.status = 0 and discontent_posts.id <> ? and (discontent_posts.whered = ? or discontent_posts.whend = ?)", self.id, self.whered, self.whend)
@@ -173,10 +148,6 @@ class Discontent::Post < ActiveRecord::Base
   def display_content
     discontent_posts.first.content if status == 4 and  !discontent_posts.empty?
   end
-
-  #def content
-  #  '123123' if content.nil?
-  #end
 
   def not_vote_for_other_post_aspects(user)
     self.concept_conditions.each  do |asp|

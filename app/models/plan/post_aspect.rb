@@ -22,9 +22,6 @@ class Plan::PostAspect  < ActiveRecord::Base
 
   has_many :plan_notes, :class_name => 'Plan::Note', :foreign_key => :post_id
 
-  #:conditions => "post_stage_id <> #{first_stage}"
-  #scope :by_first, ->(post){ where(:post_stage_id => type) }
-
   def post_notes(type_field)
     self.plan_notes.by_type(type_field)
   end

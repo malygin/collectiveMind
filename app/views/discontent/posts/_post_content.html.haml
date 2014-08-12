@@ -1,39 +1,3 @@
--#.content
 = render partial: 'discontent/posts/post_field', :locals => {:post_field => post_content, :field => post_content.content, :type_fd => 1}
 = render partial: 'discontent/posts/post_field', :locals => {:post_field => post_content,:field => post_content.whered, :type_fd => 2}
 = render partial: 'discontent/posts/post_field', :locals => {:post_field => post_content, :field => post_content.whend,:type_fd => 3}
-
--#=link_to 'подробнее', discontent_post_path(@project,post_content)
-
-
-
--#{onclick: "location.href='#{discontent_post_path(@project, post_content)}';",style:"cursor: pointer;"}
--#=link_to({:action => :status_post, :id => post_content.id, :type_field => 1},:remote => true,:method => :put, :id => "label_dispost_#{post_content.id}",:class => "note_text") do
--#  %span.label(class= "label-g" id="what_#{post_content.id}") что
--#- if post_content.status == 2 or post_content.status == 4
--#  %ul(id="post_content_#{post_content.id}" style="margin-left:-20px;" )
--#    -post_content.discontent_posts.each do |dp|
--#      %li{:id => "li_id_#{dp.id}"}=dp.content
--#-else
--#  =link_to({:action => :post_note_new, :id => post_content.id, :type_field => 1},:remote => true,:method => :put, :id => "content_dispost_#{post_content.id}", :class => "note_text") do
--#    %span.h55(id="what_content_#{post_content.id}")=post_content.content
--#%div{:id => "where_form_#{post_content.id}_1", :class => post_content.post_notes(1).size>0 ? "border_note":"" }
--#  -post_content.post_notes(1).each do |dpn|
--#    %li{:id => "li_note_#{dpn.id}"}=dpn.content
-
--#=link_to({:action => :status_post, :id => post_content.id, :type_field => 2},:remote => true,:method => :put, :id => "label_dispost_#{post_content.id}",:class => "note_text") do
--#  %span.label(class= "label-g" id="where_#{post_content.id}") где
--#=link_to({:action => :post_note_new, :id => post_content.id, :type_field => 2},:remote => true,:method => :put, :id => "content_dispost_#{post_content.id}",:class => "note_text") do
--#  %span.h55(id="where_content_#{post_content.id}")=post_content.whered
--#%div{:id => "where_form_#{post_content.id}_2"}
--#  -post_content.post_notes(2).each do |dpn|
--#    %li{:id => "li_note_#{dpn.id}"}=dpn.content
--#
--#=link_to({:action => :status_post, :id => post_content.id, :type_field => 3},:remote => true,:method => :put, :id => "label_dispost_#{post_content.id}",:class => "note_text") do
--#  %span.label(class= "label-g" id="when_#{post_content.id}") когда
--#=link_to({:action => :post_note_new, :id => post_content.id, :type_field => 3},:remote => true,:method => :put, :id => "content_dispost_#{post_content.id}",:class => "note_text") do
--#  %span.h55(id="when_content_#{post_content.id}")=post_content.whend
--#%div{:id => "where_form_#{post_content.id}_3"}
--#  -post_content.post_notes(3).each do |dpn|
--#    %li{:id => "li_note_#{dpn.id}"}=dpn.content
--#=link_to 'подробнее', discontent_post_path(@project,post_content)

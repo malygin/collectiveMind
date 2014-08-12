@@ -1,10 +1,8 @@
-
 .media{id: "post_#{post.id}"}
   = render 'users/user_post', :user => post.user
   .media-body
     -post.post_aspects.each do |da|
       = render partial: 'discontent/aspects/aspect', object: da
-
     =discontent_style_name(post.style)
     -if current_user.boss?
       =link_to({:action => :set_important, :id => post.id}, :remote => true,:method => :put) do

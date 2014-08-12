@@ -28,7 +28,6 @@ module BasePost  extend ActiveSupport::Concern
     scope :with_votes, -> {includes(:post_votings).where('"discontent_post_votings"."id" >0')}
     scope :with_concept_votes, -> {includes(:post_votings).where('"concept_post_votings"."id" >0')}
 
-    #validates :content, :presence => true
     scope :created_order,order("#{table_name}.created_at DESC")
     scope :popular_posts, order('number_views DESC')
 

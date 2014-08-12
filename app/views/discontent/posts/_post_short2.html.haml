@@ -1,7 +1,6 @@
 .media{id: "post_#{post_short2.id}"}
   -if  @project.status == 7
     %input{name: "cd[]", type: "hidden", value: "#{post_short2.id}"}
-    -#=hidden_field_tag 'cd[]', post_short2.id
     -unless @remove_able.nil?
       %span.glyphicon.glyphicon-remove.text-danger.pull-left{onclick: "remove_discontent_post('#{post_short2.id}');", style: "cursor:pointer;text-decoration:none;font-size:15px;"}
   =discontent_style_name(post_short2.style)

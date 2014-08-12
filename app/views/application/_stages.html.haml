@@ -8,8 +8,6 @@
           %span.icon-bar
           %span.icon-bar
         &nbsp;
-        -#%a.navbar-brand{:href => "#"} Brand
-      / Collect the nav links, forms, and other content for toggling
       #bs-example-navbar-collapse-1.collapse.navbar-collapse
         %ul.nav.navbar-nav
           %li#stage_life_tape{class:  @project.stage_style(:life_tape_posts) }
@@ -24,7 +22,6 @@
               = link_to "/project/#{@project.id}/discontent/posts", class:"#{@project.stage_style_link(@breadcrumbs[0].name, :discontent_posts)}" do
                 =@project.status_title(:discontent_posts)
                 %br
-
                 %small.text-center=t('stages.discontents', count: @project.discontents.by_status(0).count)
             -else
               %a
@@ -73,9 +70,6 @@
                 %br
                 %small недоступен
 
-
-
-
 .row
   .col-md-12
     %ol.breadcrumb
@@ -83,53 +77,3 @@
         = link_to @project.name, "/project/#{@project.id}"
       = render_breadcrumbs :tag => :li, :separator => ""
 
--#
--#.stages
--#  %ul
--#    %li{ :class => cp('life_tape')}
--#      = link_to "Сбор Информации", life_tape_posts_path(@project), class: "lstages"
--#    = image_tag "space.png", :class => "space"
--#
--#
--#
--#    %li{ :class => cp('discontent')}
--#      = image_tag image_for_stages('1', 'discontent'), :class => 'numbers'
--#      - if @project.status>2
--#        = link_to "Анализ ситуации", discontent_posts_path(@project, :status => 2), class: "lstages"
--#      -else
--#        %span.lstagesdisabled Анализ ситуации
--#
--#
--#
--#    = image_tag "space.png", :class => "space"
--#
--#    %li{ :class => cp('concept')}
--#      = image_tag image_for_stages('2', 'concept'), :class => 'numbers'
--#      - if @project.status >4
--#        = link_to "Формулирование проблемы", concept_posts_path(@project, :status => 2), class: "lstages"
--#      -else
--#        %span.lstagesdisabled Формулирование проблемы
--#
--#
--#
--#    = image_tag "space.png", :class => "space"
--#
--#    %li{ :class => cp('plan')}
--#      = image_tag image_for_stages('3', 'plan'), :class => 'numbers'
--#      -if @project.status > 6
--#        = link_to "Проекты", plan_posts_path(@project, :status => 0), class: "lstages"
--#      -else
--#        %span.lstagesdisabled Проекты
--#    = image_tag "space.png", :class => "space"
--#
--#
--#
--#    = image_tag "space.png" , :class => "space"
--#    %li{ :class => cp('estimate')}
--#      = image_tag image_for_stages('4', 'estimate'), :class => 'numbers'
--#      - if @project.status  > 7
--#        = link_to "Оценивание и выбор", estimate_posts_path(@project, :status => 2), class: 'lstages'
--#      -else
--#        %span.lstagesdisabled Оценивание и выбор
--#    = image_tag "space.png", :class => "space"
--#

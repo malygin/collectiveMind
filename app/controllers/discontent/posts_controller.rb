@@ -9,10 +9,6 @@ class Discontent::PostsController < PostsController
   autocomplete :discontent_post, :whend, :class_name => 'Discontent::Post' , :full => true
   autocomplete :discontent_post, :whered, :class_name => 'Discontent::Post' , :full => true
 
-  #def get_autocomplete_items(parameters)
-  #  items = super(parameters)
-  #  items = items.where(:project_id => params[:project])
-  #end
 
   def autocomplete_discontent_post_whend
     pr=Set.new
@@ -43,15 +39,11 @@ class Discontent::PostsController < PostsController
     @project = Core::Project.find(params[:project])
     add_breadcrumb I18n.t('stages.discontent'), discontent_posts_path(@project)
 
-    #@news = ExpertNews::Post.where(:project_id => @project).first
     @status = params[:status]
     @aspect = params[:aspect]
-    @aspects = Discontent::Aspect.where(:project_id => @project, :status => 0) #.eager_load(:aspect_posts)
-    #@mini_help = Help::Post.where(stage:2, mini: true).first
+    @aspects = Discontent::Aspect.where(:project_id => @project, :status => 0)
 
-    #@post_star = []
     @post_star = Discontent::Post.where(:project_id => @project, :important => 't' ).limit(3)
-    #Discontent::Post.where(:project_id => @project, :important => 't' ).limit(3)
     @post_dis = Discontent::Post.
         where(:project_id => @project).
         reorder('number_views DESC').
@@ -81,7 +73,6 @@ class Discontent::PostsController < PostsController
     @comments_all = @comments_all.sort_by{|c| c.imp_disposts.size}
     @imp_dis_comment = true
 
-    #@post = current_model.new
     @order = params[:order]
     @page = params[:page]
     @folder = :discontent
@@ -89,13 +80,6 @@ class Discontent::PostsController < PostsController
     @status = 2 if @project.status == 6
     @status = 1 if @project.status > 6
 
-    #load_filter_for_aspects   if (request.xhr? and @order.nil? and @page.nil?)
-
-    #@posts  = current_model.where(:project_id => @project, :status => 0)
-    #.where(status: @status)
-    #.order_by_param(@order)
-    #.paginate(:page => params[:page], :per_page => 40).eager_load(:discontent_post_aspects)
-    #.where('aspect_id  IN (?) ' , current_user.aspects(@project.id).collect(&:id))
     respond_to do |format|
       format.html {
        if params[:view] == 'list'
@@ -122,7 +106,6 @@ class Discontent::PostsController < PostsController
       @comment = "#{get_class_for_improve(params[:imp_stage].to_i)}::Comment".constantize.find(params[:imp_comment]) unless params[:imp_comment].nil?
     end
     @post.content = @comment.content if @comment
-    #params[name_of_model_for_param][:content]
     respond_to do |format|
       format.html {render  layout: 'application_two_column'}
       format.json { render json: @post }
@@ -141,8 +124,6 @@ class Discontent::PostsController < PostsController
 
 
   def vote_list
-
-    #@posts = current_model.where(:project_id => @project, :status => 2)
     @posts = @project.get_united_posts_for_vote(current_user)
 
     @post_all = current_model.where(:project_id => @project, :status => 2).count
@@ -153,43 +134,14 @@ class Discontent::PostsController < PostsController
 
     @votes = current_user.voted_discontent_posts.where(:project_id => @project).count
     @status = 2
-    #if boss?
-    #  @all_people = @project.users.size
-    #  @voted_people = ActiveRecord::Base.connection.execute("select count(*) as r from (select distinct v.user_id from discontent_voitings v  left join   discontent_aspects asp on (v.discontent_aspect_id = asp.id) where asp.project_id = #{@project.id}) as dm").first["r"]
-    #  @votes = ActiveRecord::Base.connection.execute("select count(*) as r from (select  v.user_id from discontent_voitings v  left join   discontent_aspects asp on (v.discontent_aspect_id = asp.id) where asp.project_id = #{@project.id}) as dm").first["r"].to_i
-    #end
     render 'vote_list', :layout => 'application_two_column'
-  end
-
-
-  def my
-    prepare_data
-    @posts = current_model.where(:project_id => @project, :status => 0, :user_id => current_user).where("created_at < ?", 2.day.ago)
-    @posts2 = current_model.where(:project_id => @project, :status => 0, :user_id => current_user).where("created_at >= ?", 2.day.ago)
-    @review_posts = current_model.where(:project_id => @project, :status => 1, :user_id => current_user)
-    @accepted_posts = current_model.where(:project_id => @project, :status => 2, :user_id => current_user)
-
-    @posts = current_user.discontent_posts.for_project(@project.id).ready_for_post
-    @posts2 =  current_user.discontent_posts.for_project(@project.id).not_ready_for_post
-    @review_posts = current_user.discontent_posts.for_project(@project.id).for_expert
-    @accepted_posts = current_user.discontent_posts.for_project(@project.id).accepted
-    @achived_posts =current_user.discontent_posts.for_project(@project.id).archive
-    render 'my', :layout => 'application_two_column'
   end
 
   def create
     @project = Core::Project.find(params[:project])
-    #@post = @project.discontents.create(params[name_of_model_for_param])
-    #@post.user = current_user
-    #discontents = Discontent::Post.where(:project_id => @project.id)
-    @flash = view_context.validate_dispost(params[name_of_model_for_param],params[:discontent_post_aspects])
-    # r=nil
-    # if params[:resave].nil? or !(@flash.nil? or @flash.empty?)
-    #   r = Discontent::Post.where(:project_id => @project.id, status: 0).collect {|d| [ d, d.content.similar(params[name_of_model_for_param][:content])]}
-    #   r.sort_by!(&:last)
-    # end
 
-    # if r.nil? or  r.empty? or  r.last[1] < 40
+    @flash = view_context.validate_dispost(params[name_of_model_for_param],params[:discontent_post_aspects])
+
     if @flash.nil? or @flash.empty?
      @post = @project.discontents.create(params[name_of_model_for_param])
      user_for_post = params[:select_for_clubers].present? ? User.find(params[:select_for_clubers]) : current_user
@@ -207,11 +159,6 @@ class Discontent::PostsController < PostsController
        end
      end
     end
-    # redirect_to  :action=>'show', :id => @post.id, :project => @project
-    #return
-    # else
-    #   @posts = r.collect {|d| d[0] if d[1]> 40}.compact.reverse
-    # end
 
     respond_to do |format|
       format.html
@@ -260,7 +207,6 @@ class Discontent::PostsController < PostsController
      .where(status: 2)
      .order_by_param(@order)
      .paginate(:page => params[:page], :per_page => 40)
-     #.where('aspect_id  IN (?) ' , current_user.aspects(@project.id).collect(&:id))
      respond_to do |format|
        format.js
      end
@@ -298,9 +244,6 @@ class Discontent::PostsController < PostsController
        @post.discontent_post_aspects.destroy_all
      end
      redirect_to action: "index"
-     #respond_to do |format|
-     #  format.js {render :js => "alert('Разгруппировано');"}
-     #end
    end
 
    def add_union
@@ -376,9 +319,6 @@ class Discontent::PostsController < PostsController
       @post_vote.final_votings.create(:user => current_user, :against => params[:against]) unless @post_vote.voted_users.include? current_user
       @votes = current_user.voted_discontent_posts.where(:project_id => @project).count
       @post_all = current_model.where(:project_id => @project, :status => 2).count
-      #if @project.get_united_posts_for_vote(current_user).empty?
-      #  redirect_to action: "index"
-      #end
     end
 
     def set_required
@@ -468,7 +408,6 @@ class Discontent::PostsController < PostsController
       @project = Core::Project.find(params[:project])
       @asp = Discontent::Aspect.find(params[:asp]) unless params[:asp].nil?
       @aspects = Discontent::Aspect.where(:project_id => @project, :status => 0)
-      #@aspects_for_post = @post.post_aspects
       @post_group = current_model.new
       respond_to do |format|
         format.js

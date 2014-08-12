@@ -5,14 +5,10 @@ class PostsController < ApplicationController
     :vote_list, :essay_list]
   before_filter :journal_data, :only => [:index, :new, :edit, :show, :show_essay,
     :vote_list, :essay_list, :to_work]
-  #before_filter :have_rights
   before_filter :have_rights, :only =>[:edit]
   before_filter :to_work_redirect, only: [:index]
   before_filter :have_project_access
 
-
-
-  # before_filter :authorized_user, :only => :destroy
   def authenticate
     unless current_user
       redirect_to '/users/sign_in'
@@ -87,7 +83,6 @@ end
     @aspects = Discontent::Aspect.where(:project_id => @project)
     post = current_model.find(params[:id])
     @main_comment = comment_model.find(params[:main_comment]) unless params[:main_comment].nil?
-    #@comment_user = User.find(params[:comment_user]) unless params[:comment_user].nil?
     @main_comment_answer = comment_model.find(params[:answer_id]) unless params[:answer_id].nil?
     @comment_user = @main_comment_answer.user unless @main_comment_answer.nil?
     if @comment_user
@@ -126,7 +121,6 @@ end
     respond_to do |format|
       format.js
     end
-    #redirect_to polymorphic_path(post, :project => @project.id)
   end
 
   def add_child_comment_form
@@ -134,15 +128,12 @@ end
     @post = current_model.find(params[:id])
     @main_comment = comment_model.find(params[:comment_id])
     @main_comment_answer = comment_model.find(params[:answer_id]) unless params[:answer_id].nil?
-    #@comment_user = User.find(params[:comment_user]) unless params[:comment_user].nil?
     @comment_user = @main_comment_answer.user unless @main_comment_answer.nil?
     @comment = comment_model.new
     if @main_comment_answer
       @url_link = url_for(:controller => @post.class.name.underscore.pluralize, :action => 'add_comment', :main_comment => @main_comment.id, :answer_id => @main_comment_answer.id)
-      #@url_link = "/project/#{@project.id}/" + current_model.table_name.sub('_posts','/posts') + "/#{@post.id}/add_comment?main_comment=#{@main_comment.id}&comment_user=#{@comment_user.id}"
     else
       @url_link = url_for(:controller => @post.class.name.underscore.pluralize, :action => 'add_comment', :main_comment => @main_comment.id)
-      #@url_link = "/project/#{@project.id}/" + current_model.table_name.sub('_posts','/posts') + "/#{@post.id}/add_comment?main_comment=#{@main_comment.id}"
     end
     respond_to do |format|
       format.js
@@ -155,7 +146,6 @@ end
     if params[:com_stage]
       @comment = "#{get_class_for_improve(params[:com_stage].to_i)}::Comment".constantize.find(params[:comment_id]) unless params[:comment_id].nil?
     end
-    # @comment = comment_model.find(params[:comment_id])
     if params[:dis_stat].present?
       @comment.toggle(:dis_stat)
       @comment.update_attributes(dis_stat: @comment.dis_stat)
@@ -223,9 +213,6 @@ def index
     end
     per_page = ["Concept","Essay"].include?(@post.class.name.deconstantize) ? 10 : 30
     @comments = @post.comments.where(:comment_id => nil).paginate(:page => params[:page] ? params[:page] : last_page, :per_page => per_page)
-    #puts "___________"
-    #puts @post
-    # @path_link ='/'+ self.class.to_s.split("::").first.tableize.singularize+'/comments/'
 
     if current_model.column_names.include? 'number_views'
       if @post.number_views.nil?
@@ -344,7 +331,6 @@ def index
           params[:replace].each do |k,v|
             @post.post_replaces.build(:replace_id => k).save
           end
-          #@post.replace_id = params[:replace_id]
 
         end
         format.html { 
@@ -449,29 +435,10 @@ def index
     stage = "#{self.class.name.deconstantize.downcase}"
     @number_v = @project.get_free_votes_for(current_user, stage, @project)
     @table_name = current_model.table_name.sub('_posts','/posts')
-    #@votes = @project.stage3 - current_user.concept_post_votings.count
   end
 
-### function for dialog with expert
-
-
-  def to_expert
-    prepare_data
-    @note = Concept::PostNote.new
-  end 
-
-  def expert_rejection
-    prepare_data
-    @note = Concept::PostNote.new
-  end 
-  
-  def expert_revision
-    prepare_data
-    @note = Concept::PostNote.new
-  end 
 
   def save_note(params, status, message, type_event)
-
     post = current_model.find(params[:id])
     if !params[:concept_post_note].nil? and params[:concept_post_note][:content]!= ''
       @note = note_model.new(params[:concept_post_note])
@@ -483,34 +450,6 @@ def index
     current_user.journals.build(:type_event=>type_event,  :project => Core::Project.find(params[:project]), :body=>post.id).save!
     flash[:notice]=message
     post
-  end
-
-  def to_expert_save
-    save_note(params, 1, 'Отправлено эксперту!',name_of_model_for_param+'_to_expert' )
-    redirect_to  action: "index"    
-  end
-
-  def expert_rejection_save
-    save_note(params, 3, 'Отклонено!',name_of_model_for_param+'_rejection' )
-    redirect_to  action: "index"
-  end
-
-  def expert_acceptance_save
-    post = save_note(params, 2, 'Принято!',name_of_model_for_param+'_acceptance' )
-    if post.post_replaced.empty?
-      post.user.add_score(100)
-    else
-      post.user.add_score(200)
-      post.post_replaced.each do |rp|
-        rp.update_column(:status, 3)
-      end
-    end
-    redirect_to  action: "index"
-  end
-
-  def expert_revision_save
-    save_note(params, 0, 'Отправлена на доработку!',name_of_model_for_param+'_revision' )
-    redirect_to  action: "index"
   end
 
   def censored
@@ -581,21 +520,10 @@ def index
     else
       @path_link = "/project/#{@project.id}/" + current_model.table_name.sub('_posts','/posts')
     end
-    #@table_name = current_model.table_name.sub('_posts','')
 
     respond_to do |format|
       format.html { render :layout => 'application_two_column'}
     end
   end
 
-  protected
-
-  def load_filter_for_aspects
-    current_user.discontent_aspect_users.destroy_all
-    unless params[:aspects_filter].nil?
-      params[:aspects_filter].each do |asp|
-        current_user.discontent_aspect_users.create(aspect_id: asp.to_i)
-      end
-    end
-  end
 end

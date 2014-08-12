@@ -19,11 +19,8 @@ class User < ActiveRecord::Base
     :score,  :score_a, :score_g, :score_o,
     :admin, :expert, :type_user
 
-  #scope :scope_score_name, ->(sn) { where("#{sn}>0").order("#{sn} DESC") }
   has_many :core_project_scores, :class_name => 'Core::ProjectScore'
 
-  #has_many :help_questions, :class_name => 'Help::Question'
-  #has_many :help_answers, :class_name => 'Help::Answer'
   has_many :help_users_answerses, :class_name => 'Help::UsersAnswers'
   has_many :help_answers, :class_name => 'Help::Answer', :through => :help_users_answerses
   has_many :help_questions, :class_name => 'Help::Question', :through => :help_answers

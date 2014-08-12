@@ -20,7 +20,6 @@
             %br
           .color-teal=@post_stage.name
       .modal-body
-        -#= form_tag(plan_posts_add_new_stage_path(@project, add_dis_id: @plan_post, save_stage: true), {method: :post, remote: true, id: 'form_add_stage'}) do
         = form_for action, :url => {:project => @project.id, :con_id => @post_aspect.id, :act_id => action ? action.id : nil, :stage_id => @post_stage ? @post_stage.id : nil, :view_concept => @view_concept, :action => action.persisted? ? 'update_action' : 'create_action'}, :remote => true, :method => :put do |f|
           = render 'shared/error_messages', :object => f.object
           #mod2
@@ -34,12 +33,10 @@
               .form-group(style="margin-left:0;")
                 %label{:for => "date_begin"} Дата начала реализации
                 =f.text_field :date_begin, :class => 'form-control datepicker', id:'date_begin_action'
-                -#%input#date_begin.form-control.datepicker{:name => "date_begin", :type => "text", :value => ""}/
             .col-md-6
               .form-group(style="margin-left:0;")
                 %label{:for => "date_end"} Дата окончания реализации
                 =f.text_field :date_end, :class => 'form-control datepicker', id:'date_end_action'
-                -#%input#date_end.form-control.datepicker{:name => "date_end", :type => "text", :value => ""}/
           .form-group(style="margin-left:0;")
             %label{:for => "desc_stage"} Описание мероприятия
             =f.text_area :desc, :class => 'form-control', :rows => 10, placeholder: 'Введите описание мероприятия', id:'desc_stage'
@@ -72,10 +69,9 @@
           %br
           %br
           .pull-right
-            -#%button.btn.btn-default(type = "button" data-dismiss="modal") Закрыть
             %button.btn.btn-default(type = "button" data-dismiss="modal" style="margin-right:5px;") Закрыть
             =f.submit 'Сохранить', :id  => "send_post", class: 'btn btn-success'
       %br
       .modal-footer(style="margin-top:30px;padding-bottom:10px;")
-        -#%button.btn.btn-default(type = "button" data-dismiss="modal") Закрыть
+
 

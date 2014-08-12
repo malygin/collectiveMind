@@ -1,27 +1,14 @@
 - if  !(@flash.nil? or @flash.empty?)
   $("#discontent_success").fadeOut();
-  -#-unless @posts.nil?
-  -#  $("#discontent_warning").fadeIn();
-  -#  $('#posts').html("#{escape_javascript(render @posts)}");
-  -#$('#send_post').html('Все равно сохранить');
-  -#$('#send_post').toggleClass('disabled');
-  -#$('#new_discontent').append('<input id="new_discontent_hidden" type="hidden" name="resave" value="true" />');
-  -#document.location.href='#flash-panel';
 - else
   $('#render_success_discontent').empty();
   $("#render_success_discontent").html('#{escape_javascript(render partial: 'modal_post_save')}');
   $('#modal_save_discontent').modal('show');
-
-  -#$("#discontent_success").fadeIn();
   $("#discontent_warning").fadeOut();
-  -#$('#posts').html("");
-  -#$('#send_post').html('Сохранить');
   $('#send_post').toggleClass('disabled');
-
   $('#discontent_post_content').val('');
   $('#discontent_post_whered').val('');
   $('#discontent_post_whend').val('');
-
   $('#new_discontent_hidden').remove();
 
   sel_aspect = $('#add_post_aspects').find('span.span_aspect');
@@ -31,17 +18,9 @@
   $('#select_for_aspects').append(new Option(text,value));
   }
   $('#add_post_aspects').empty();
--#$('#redirect_success').empty();
--#-unless @post.nil?
--#  $('#redirect_success').html('<a class="btn btn-sm btn-success" href="/project/#{@project.id}/discontent/posts/#{@post.id}">Перейти к просмотру своего несовершенства</a>');
 -if @flash.nil? or @flash.empty?
   $("#flash-panel").fadeOut();
 -else
   $('#flash-panel').fadeIn('slow');
   $('#flash').html("#{escape_javascript(raw(flash_display))}");
 
--#$('#Send').animate({left: 0, opacity: 0},  "normal",  function(){$('#Send').css('display','none')})
--#$("#new_life_tape").animate({height: 0}, "normal", function(){$('#new_life_tape').css('display','none')})
--#$("#new_life_tape").val('')
--#$('#posts').prepend("#{escape_javascript(render :partial => 'shared/post', :object => @post)}")
--#$('#post_#{@post.id}').effect("highlight", {color: '#f5cecd'}, 1000);

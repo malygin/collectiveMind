@@ -5,10 +5,8 @@ class Help::PostsController < PostsController
   def  project_by_id
     unless params[:project].nil?
       @project = Core::Project.find(params[:project])
-
     end
     add_breadcrumb I18n.t('menu.help'), help_posts_path(@project)
-
   end
 
   def index
@@ -28,7 +26,6 @@ class Help::PostsController < PostsController
       current_user.help_users_answerses.build(answer_id: k[1].to_i)
     end
     current_user.save
-    #render :nothing => true
     redirect_to :back
   end
 

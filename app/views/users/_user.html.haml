@@ -1,22 +1,3 @@
--#.wholePost
--#    .avatar
--#        = link_to gravatar_for(user), "/project/#{@project.id}/users/#{user.id}"
--#        -#%br
--#        -#%span.role= user.role_name
--#    .posts
--#        -#%span.namedate= user.name_title
--#        %br
--#        Набрано балов -
--#
--#        -unless local_assigns[:score_name].nil?
--#            %span.rate= user.send(score_name)
--#        -else
--#            %span.rate= user.score
--#
--#        .social
--#
--#.dotline=image_tag('dotline.png')
-
 %tr{class: set_class_for_top(number)}
   %td
     %span=number
@@ -28,17 +9,11 @@
         =link_to user, user_path(@project, user)
         = render partial: '/shared/user_online', object: user
 
-        -#%span.label.label-success new
-
   %td
-    -#%span.text-success 7
-    -#%span.glyphicon.glyphicon-arrow-up.text-success
 
   %td
     %span.text-inverse
       -unless @score_name.nil?
-        -#%span.rate= user.send(@score_name)
         %span.rate= user.user_project_scores(@project.id).send(@score_name)
       -else
         %span.rate= user.user_project_scores(@project.id).score
-    -#%span.text-muted (#{user.score})

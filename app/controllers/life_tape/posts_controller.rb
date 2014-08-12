@@ -11,8 +11,6 @@ def prepare_data
     add_breadcrumb I18n.t('stages.life_tape'), life_tape_posts_path(@project)
     @aspects = Discontent::Aspect.where(:project_id => @project)
 
-    # @news = ExpertNews::Post.where(:project_id => @project).first
-    # @post_star = LifeTape::Post.where(:project_id => @project, :important => 't' ).limit(3)
     @mini_help = Help::Post.where(stage:1, mini: true).first
     @post_dis = LifeTape::Post.
         where(:project_id => @project).
@@ -38,9 +36,7 @@ end
       @comments= @post_show.comments.where(:comment_id => nil).paginate(:page => @page ? @page: last_page, :per_page => 10) if @post_show
 
     end
-
     @post = current_model.new
-
 
     if params[:viewed]
       Journal.events_for_content(@project, current_user, @aspect.id).update_all("viewed = 'true'")
@@ -56,8 +52,6 @@ end
 
 
   def vote_list
-    #@posts = voting_model.where(:project_id => @project, :status => 0)
-
     @posts = voting_model.scope_vote_top(@project.id,params[:revers])
 
     @number_v = @project.get_free_votes_for(current_user, 'lifetape', @project)
@@ -67,12 +61,7 @@ end
     end
     @path_for_voting = "/project/#{@project.id}/life_tape/"
     @votes = @project.stage1
-    #if boss?
-    #  @all_people = @project.users.size
-    #  @voted_people = ActiveRecord::Base.connection.execute("select count(*) as r from (select distinct v.user_id from life_tape_voitings v  left join   discontent_aspects asp on (v.discontent_aspect_id = asp.id) where asp.project_id = #{@project.id}) as dm").first["r"]
-    #  @votes = ActiveRecord::Base.connection.execute("select count(*) as r from (select  v.user_id from life_tape_voitings v  left join   discontent_aspects asp on (v.discontent_aspect_id = asp.id) where asp.project_id = #{@project.id}) as dm").first["r"].to_i
-    #end
-    #render :layout => 'application_two_column'
+
     respond_to do |format|
       format.html {render :layout => 'application_two_column'}
       format.js

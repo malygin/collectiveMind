@@ -1,2 +1,0 @@
-module ExpertNews::PostsHelper
-end

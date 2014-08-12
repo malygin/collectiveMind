@@ -5,15 +5,11 @@
   %span.label(class= "#{class_for_type_field(post_field,type_fd)}" id="#{id_for_type_field(type_fd)}_#{post_field.id}")=name_for_type_field(type_fd)
 
 - if (post_field.status == 2 or post_field.status == 4) and type_fd == 1
-  -#-if !params[:id].nil?
   =post_field.content
   %br
   %ul(id="post_content_#{post_field.id}" style="list-style: disc inside;" )
     -post_field.discontent_posts.each do |dp|
       %li.union-list{:id => "li_id_#{dp.id}"}=dp.content
-  -#-else
-  -#  %span.h55(id="#{id_for_type_field(type_fd)}_content_#{post_field.id}")=field unless field.nil?
-  -#  %br
 
 -else
   -if boss? and @project.status == 3
@@ -23,11 +19,6 @@
     %span.h55(id="#{id_for_type_field(type_fd)}_content_#{post_field.id}")=field
     %br
 
--#-if params[:view] == "table" and post_field.note_size?(type_fd)
--#  %ul{:id => "where_form_#{post_field.id}_#{type_fd}", :style => "margin-bottom:0 !important;"}
--#  %button.btn.btn-default.btn-xs{ "data-toggle" => "popover","data-content" => render_post_notes(post_field,type_fd), type: "button"} Замечания
--#  %br
--#-else
 -if @project.status == 3
   %div
   %ul{:id => "where_form_#{post_field.id}_#{type_fd}", :class => "#{'discuss_comment' if post_field.note_size?(type_fd) }", :style => "list-style: none; "}

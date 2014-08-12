@@ -1,22 +1,3 @@
--#%h3
--#  2 этап: Анализ ситуации.
--#  %br
--#  %small
--#    Сбор несовершенств в рамках процедуры
--#    =@project.name
--#.pull-right
--#  %a.btn.btn-default.menu_table(href="/project/#{@project.id}/discontent/posts?view=list" )
--#    %span.glyphicon.glyphicon-th-list
--#    Список
--#  %a.active.btn.btn-default.menu_table(href="#" )
--#    %span.glyphicon.glyphicon-th
--#    Таблица
--#%br
--#%a{name:'top'}
--#- if signed_in? and @project.status ==3
--#  = link_to '+ Добавить свое несовершенство', new_discontent_post_path(@project) , id: 'add_record',  class: 'btn btn-sm btn-success'
--#  %br
--#%br
 #render_fast_discussion_discontents
   =render partial:'form_wizard'
 %section.widget
@@ -36,9 +17,7 @@
           .pull-right
             = link_to 'Быстрый cтарт!', discontent_posts_fast_discussion_discontents_path(@project) ,remote: true, id: 'fast_discussion_discontents',  class: 'btn btn-lg btn-danger'
 
-
   .body
-
     %a{name:'top'}
     - if signed_in? and (@project.status ==3 or @project.demo?)
       = link_to '+ Добавить свое несовершенство', new_discontent_post_path(@project, asp: params[:asp]) , id: 'add_record',  class: 'btn  btn-danger'
@@ -120,9 +99,6 @@
                   -else
                     =render partial:'post_short', collection: @aspect_post.aspect_posts.by_status(@status).created_order
 
-
-
-
         .col-md-6
           %section.widget
             %header
@@ -133,39 +109,3 @@
               .chat-messages
                 = render :partial => 'shared/comment',:collection => @comments_all
 
--#%a(href="#" title="Вернуться к началу" class="topbutton") Наверх
--##toTop ^ Наверх
-
-
--#.panel-group#accordion
--#  -@aspects.each do |aspect|
--#    .panel.panel-default
--#      .panel-heading
--#        %h4.panel-title
--#          %a(data-toggle="collapse" data-parent="#accordion" href="#asp_#{aspect.id}" )
--#            =aspect.content
--#            %b="(#{aspect.aspect_posts.count})"
--#            %span.glyphicon.glyphicon-chevron-down
--#
--#            %br
--#            %small=aspect.short_desc
--#
--#      .panel-collapse.collapse{id:"asp_#{aspect.id}"}
--#        .panel-body
--#          %table.table
--#
--#            %tr
--#              %td
--#                %span.label.label-p  Отсутствующие достоинства
--#              %td
--#                %span.label.label-n(style='min-width: 300px;')  Имеющиеся недостатки
--#
--#            %tr
--#              %td
--#
--#                -#=render partial:'post_short', collection: aspect.positive_posts.by_status(@status)
--#                =render partial:'post_short', collection: aspect.aspect_posts.by_positive(@status)
--#
--#              %td
--#                -#=render partial:'post_short', collection: aspect.negative_posts.by_status(@status)
--#                =render partial:'post_short', collection: aspect.aspect_posts.by_negative(@status)

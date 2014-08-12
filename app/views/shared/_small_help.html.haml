@@ -2,7 +2,6 @@
   .modal-dialog
     .modal-content
       .modal-header
-        -#%button.close{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} &times;
         %h4#helpModalLabel.modal-title=small_help.title
       .modal-body
         =raw(small_help.content)
@@ -15,9 +14,7 @@
               .radio
                 %label
                   =radio_button "question", hq.id, ha.id, onchange: "activate_modal_send(this);"
-                  -#%input(type="radio" value="" onchange="activate_modal_send(this);" )
                   =ha.content
-
 
       .modal-footer
         %button.btn.btn-primary.disabled#send(type = "button" data-dismiss="modal") Ответить и приступить к работе!

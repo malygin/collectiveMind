@@ -1,6 +1,4 @@
--#%h3.text-center Форма добавления несовершенства
 %h4.text-center Добавьте свое несовершенство к предложенной теме. Вы можете изменить тему, добавить несколько несовершенств или закончить работу с несовершенствами.
--#= form_for  @post, :url => {:project => @project.id, :action => 'create'},  :remote => true, :html => { :id => 'new_discontent' } do |f|
 .col-md-12
   .row
     .col-md-12
@@ -74,14 +72,6 @@
       #mod
       =autocomplete_field_tag "discontent_post[whend]",'', autocomplete_discontent_post_whend_discontent_posts_path, :"min-length" => 0, :append_to => "#mod",  style: 'height: 44px', class: 'form-control autocomplete', placeholder: 'Во время какого события, мероприятия, процесса, ситуации '
 
-  -#-if boss?
-  -#  .row
-  -#    .col-md-12
-  -#      .form-group.text-center
-  -#        %b Выберите члена клуба
-  -#        = select_tag 'select_for_clubers', options_from_collection_for_select(@users_rc, "id", "to_s"),
-  -#        :prompt => 'Выберите члена клуба' , style:'margin-left:15px; margin-top:10px; height: 30px;'
-
   .row
     .col-md-12
       .form-group.text-center
@@ -92,9 +82,8 @@
         %label.radio-inline
           = radio_button_tag 'discontent_post[style]', '0'
           %span.text-success Отсутствующие достоинства
-
   %br
-  -#%button#send_post.btn.btn-primary(type="submit" onclick='disontent_form_submit();') Сохранить
+
 
 
 
