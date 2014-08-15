@@ -9,7 +9,7 @@ class Discontent::PostsController < PostsController
   autocomplete :discontent_post, :whend, :class_name => 'Discontent::Post' , :full => true
   autocomplete :discontent_post, :whered, :class_name => 'Discontent::Post' , :full => true
 
-
+  #@todo объединить в один метод
   def autocomplete_discontent_post_whend
     pr=Set.new
     pr.merge(Discontent::PostWhen.where(:project_id => params[:project]).map {|d| {:value => d.content}})
@@ -20,7 +20,7 @@ class Discontent::PostsController < PostsController
     render json: pr
   end
 
- def autocomplete_discontent_post_whered
+  def autocomplete_discontent_post_whered
     pr=Set.new
     pr.merge(Discontent::PostWhere.where(:project_id => params[:project]).map {|d| {:value => d.content}})
     if params[:term].length > -1
@@ -69,7 +69,7 @@ class Discontent::PostsController < PostsController
     end
   end
 
- def new
+  def new
     @asp = Discontent::Aspect.find(params[:asp]) unless params[:asp].nil?
     @post = current_model.new
     #@users_rc = User.where(:type_user => [4,7])
@@ -153,53 +153,54 @@ class Discontent::PostsController < PostsController
     end
   end
 
-   def union_discontent
-     @project = Core::Project.find(params[:project])
-     @post = Discontent::Post.find(params[:id])
-     @new_post =Discontent::Post.create(status: 2, style: @post.style, project: @project, content: params[:union_post_descr], whered: @post.whered, whend: @post.whend)
-     @new_post.save!
-     unless params[:posts].nil?
-       params[:posts].each do |p|
-         post = Discontent::Post.find(p)
-         post.update_attributes(status: 1, discontent_post_id: @new_post.id)
-         @new_post.update_union_post_aspects(post.post_aspects)
-       end
+  def union_discontent
+    @project = Core::Project.find(params[:project])
+    @post = Discontent::Post.find(params[:id])
+    @new_post =Discontent::Post.create(status: 2, style: @post.style, project: @project, content: params[:union_post_descr], whered: @post.whered, whend: @post.whend)
+    @new_post.save!
+    unless params[:posts].nil?
+     params[:posts].each do |p|
+       post = Discontent::Post.find(p)
+       post.update_attributes(status: 1, discontent_post_id: @new_post.id)
+       @new_post.update_union_post_aspects(post.post_aspects)
      end
-     @post.update_attributes(status: 1, discontent_post_id: @new_post.id)
-     @new_post.update_union_post_aspects(@post.post_aspects)
-     redirect_to discontent_post_path(@project,@new_post)
-   end
+    end
+    @post.update_attributes(status: 1, discontent_post_id: @new_post.id)
+    @new_post.update_union_post_aspects(@post.post_aspects)
+    redirect_to discontent_post_path(@project,@new_post)
+  end
 
-   def unions
-     @project = Core::Project.find(params[:project])
+  def unions
+    @project = Core::Project.find(params[:project])
 
-     @posts  = current_model.where(:project_id => @project)
-     .where(status: 2)
-     .order_by_param(@order)
-     .paginate(:page => params[:page], :per_page => 40)
-     respond_to do |format|
-       format.js
-     end
-   end
+    @posts  = current_model.where(:project_id => @project)
+    .where(status: 2)
+    .order_by_param(@order)
+    .paginate(:page => params[:page], :per_page => 40)
 
-   def remove_union
-     @project = Core::Project.find(params[:project])
-     @post = Discontent::Post.find(params[:id])
-     @union_post = Discontent::Post.find(params[:post_id])
-     if @post.one_last_post? and boss?
-         @union_post.update_attributes(status: 0, discontent_post_id: nil)
-         @post.destroy
-         @post.discontent_post_aspects.destroy_all
-         redirect_to action: "index"
-         return
-     else
-       @union_post.update_attributes(status: 0, discontent_post_id: nil)
-       @post.destroy_ungroup_aspects(@union_post)
-       respond_to do |format|
-         format.js
-       end
-     end
-   end
+    respond_to do |format|
+     format.js
+    end
+  end
+
+  def remove_union
+    @project = Core::Project.find(params[:project])
+    @post = Discontent::Post.find(params[:id])
+    @union_post = Discontent::Post.find(params[:post_id])
+    if @post.one_last_post? and boss?
+      @union_post.update_attributes(status: 0, discontent_post_id: nil)
+      @post.destroy
+      @post.discontent_post_aspects.destroy_all
+      redirect_to action: "index"
+      return
+    else
+      @union_post.update_attributes(status: 0, discontent_post_id: nil)
+      @post.destroy_ungroup_aspects(@union_post)
+      respond_to do |format|
+        format.js
+      end
+    end
+  end
 
    def ungroup_union
      @project = Core::Project.find(params[:project])
