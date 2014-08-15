@@ -227,6 +227,14 @@ class User < ActiveRecord::Base
     Award.reward(:user => self, :old_score => ps.score-score, :project=> project, :score => ps.score, :type => 'max')
     # self.user_project_scores(project).update_attributes!(:score => score+self.score, type => self.read_attribute(type)+score)
   end
+
+  def can_vote_for(stage, project)
+      if project.status == 2 and ((project.stage1.to_i - self.voted_aspects.by_project(project).size) != 0)
+         true
+      end
+      false
+  end
+
   private
 
   	#def encrypt_password
