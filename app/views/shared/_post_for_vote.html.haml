@@ -9,7 +9,7 @@
             =post_for_vote.voted_users.size
           Проголосовать
         -if boss? and post_for_vote.status == 0
-          =link_to({:action => :set_one_vote, :id => post_for_vote.id},:remote => true,:method => :put,:class => "btn btn-default btn-sm vote-button btn-danger", :id => "set_vote_#{post_for_vote.id}") do
+          =link_to({:action => :set_aspect_status, :id => post_for_vote.id},:remote => true,:method => :put,:class => "btn btn-default btn-sm vote-button btn-danger", :id => "set_vote_#{post_for_vote.id}") do
             %i.glyphicon.glyphicon-remove
             %span Убрать
   -else
@@ -22,7 +22,7 @@
             =post_for_vote.voted_users.size
           Проголосовать
         -if boss? and post_for_vote.status == 0
-          =link_to({:action => :set_one_vote, :id => post_for_vote.id},:remote => true,:method => :put,:class => "btn btn-default btn-sm vote-button btn-danger", :id => "set_vote_#{post_for_vote.id}") do
+          =link_to({:action => :set_aspect_status, :id => post_for_vote.id},:remote => true,:method => :put,:class => "btn btn-default btn-sm vote-button btn-danger", :id => "set_vote_#{post_for_vote.id}") do
             %i.glyphicon.glyphicon-remove
             %span Убрать
 

@@ -37,17 +37,7 @@ class Discontent::PostsController < PostsController
 
   def prepare_data
     @project = Core::Project.find(params[:project])
-    add_breadcrumb I18n.t('stages.discontent'), discontent_posts_path(@project)
-
-    @status = params[:status]
-    @aspect = params[:aspect]
     @aspects = Discontent::Aspect.where(:project_id => @project, :status => 0)
-
-    @post_star = Discontent::Post.where(:project_id => @project, :important => 't' ).limit(3)
-    @post_dis = Discontent::Post.
-        where(:project_id => @project).
-        reorder('number_views DESC').
-        limit(3)
     if @project.status == 6
       @vote_all = Discontent::Voting.by_posts_vote(@project.discontents.by_status([2,4]).pluck(:id).join(", ")).uniq_user.count
     end
@@ -55,15 +45,9 @@ class Discontent::PostsController < PostsController
 
   def index
     if @project.status == 6 and !@project.get_united_posts_for_vote(current_user).empty?
-      redirect_to action: "vote_list"
-      return
+      return redirect_to action: "vote_list"
     end
-    if params[:asp]
-      @aspect_post =  Discontent::Aspect.find(params[:asp])
-    else
-      @aspect_post = @project.proc_aspects.order(:id).first
-    end
-    @accepted_posts = Discontent::Post.where(status: 2, project_id:  @project)
+    @aspect_post =  params[:asp] ? Discontent::Aspect.find(params[:asp]) : @project.proc_aspects.order(:id).first
 
     post_temp = @aspect_post.life_tape_posts.first
     life_tape_comments = post_temp ? post_temp.comments.where(:dis_stat => true) : []
@@ -81,27 +65,15 @@ class Discontent::PostsController < PostsController
     @status = 1 if @project.status > 6
 
     respond_to do |format|
-      format.html {
-       if params[:view] == 'list'
-         render  'index'
-       else
-         render  'table', layout: 'application_two_column'
-       end
-      }
-      format.js {render 'posts/index'}
+      format.html {render  'table', layout: 'application_two_column'}
     end
   end
 
  def new
     @asp = Discontent::Aspect.find(params[:asp]) unless params[:asp].nil?
     @post = current_model.new
-    @replace_posts =[]
-    @accepted_posts = Discontent::Post.where(status: 2, project_id:  @project)
-    @users_rc = User.where(:type_user => [4,7])
+    #@users_rc = User.where(:type_user => [4,7])
 
-    unless params[:replace_id].nil?
-      @replace_posts << current_model.find(params[:replace_id])
-    end
     if params[:imp_stage]
       @comment = "#{get_class_for_improve(params[:imp_stage].to_i)}::Comment".constantize.find(params[:imp_comment]) unless params[:imp_comment].nil?
     end
@@ -125,13 +97,11 @@ class Discontent::PostsController < PostsController
 
   def vote_list
     @posts = @project.get_united_posts_for_vote(current_user)
-
     @post_all = current_model.where(:project_id => @project, :status => 2).count
     if @posts.empty?
       redirect_to action: "index"
       return
     end
-
     @votes = current_user.voted_discontent_posts.where(:project_id => @project).count
     @status = 2
     render 'vote_list', :layout => 'application_two_column'

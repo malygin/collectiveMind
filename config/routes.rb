@@ -85,7 +85,7 @@ scope '/project/:project' do
     resources :posts do
       get :vote_top, :on => :collection
       member do
-        put :set_one_vote
+        put :set_aspect_status
       end
     end
 

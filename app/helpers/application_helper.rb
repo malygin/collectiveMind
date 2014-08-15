@@ -417,4 +417,29 @@ module ApplicationHelper
     response
   end
 
+  def events_for_add_comment(project, current_user, name_of_comment_for_param, comment, post, main_comment, main_comment_answer)
+    current_user.journals.build(:type_event=>name_of_comment_for_param+'_save', :project => project,
+                                :body=>"#{trim_content(comment.content)}", :body2=>trim_content(field_for_journal(post)),
+                                :first_id=> (post.instance_of? LifeTape::Post) ? post.discontent_aspects.first.id : post.id, :second_id => comment.id).save!
+
+    if post.user!=current_user
+      current_user.journals.build(:type_event=>'my_'+name_of_comment_for_param, :user_informed => post.user, :project => project,
+                                  :body=>"#{trim_content(comment.content)}", :body2=>trim_content(field_for_journal(post)),
+                                  :first_id=> (post.instance_of? LifeTape::Post) ? post.discontent_aspects.first.id : post.id, :second_id => comment.id,
+                                  :personal=> true, :viewed=> false).save!
+    end
+    if main_comment and main_comment.user!=current_user
+      current_user.journals.build(:type_event=>'reply_'+name_of_comment_for_param, :user_informed =>main_comment.user, :project => project,
+                                  :body=>"#{trim_content(comment.content)}", :body2=>trim_content(main_comment.content),
+                                  :first_id=> (post.instance_of? LifeTape::Post) ? post.discontent_aspects.first.id : post.id, :second_id => comment.id,
+                                  :personal=> true, :viewed=> false).save!
+    end
+    if main_comment_answer and main_comment_answer.user!=current_user
+      current_user.journals.build(:type_event=>'reply_'+name_of_comment_for_param, :user_informed => main_comment_answer.user, :project => project,
+                                  :body=>"#{trim_content(comment.content)}", :body2=>trim_content(main_comment_answer.content),
+                                  :first_id=> (post.instance_of? LifeTape::Post) ? post.discontent_aspects.first.id : post.id, :second_id => comment.id,
+                                  :personal=> true, :viewed=> false).save!
+    end
+  end
+
 end
