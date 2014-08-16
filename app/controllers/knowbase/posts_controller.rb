@@ -1,5 +1,4 @@
 class Knowbase::PostsController <  PostsController
-  layout "application_two_column"
   before_filter :project_by_id
   before_filter :journal_data
 

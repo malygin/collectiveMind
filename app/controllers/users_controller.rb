@@ -1,6 +1,5 @@
 # encoding: utf-8
 class UsersController < ApplicationController
-	layout 'application_two_column'
 	#before_filter :authenticate, :only => [:edit, :update, :show]
 	before_filter :correct_user, :only => [:edit, :update]
 	before_filter :admin_user, :only => [:destroy]

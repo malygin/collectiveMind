@@ -65,7 +65,7 @@ class Discontent::PostsController < PostsController
     @status = 1 if @project.status > 6
 
     respond_to do |format|
-      format.html {render  'table', layout: 'application_two_column'}
+      format.html {render  'table'}
     end
   end
 
@@ -79,7 +79,7 @@ class Discontent::PostsController < PostsController
     end
     @post.content = @comment.content if @comment
     respond_to do |format|
-      format.html {render  layout: 'application_two_column'}
+      format.html
       format.json { render json: @post }
     end
   end
@@ -89,7 +89,7 @@ class Discontent::PostsController < PostsController
     @post = current_model.find(params[:id])
     @aspects_for_post = @post.post_aspects
     respond_to do |format|
-      format.html {render  layout: 'application_two_column'}
+      format.html
       format.js
     end
   end
@@ -104,7 +104,7 @@ class Discontent::PostsController < PostsController
     end
     @votes = current_user.voted_discontent_posts.where(:project_id => @project).count
     @status = 2
-    render 'vote_list', :layout => 'application_two_column'
+    render 'vote_list'
   end
 
   def create
