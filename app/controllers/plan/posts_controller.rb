@@ -346,7 +346,7 @@ end
     #  end
     #  @post_stage.plan_post_aspects.destroy_all
     #end
-    @post_stage.update_column(:status, 1) if current_user?(@post.user)
+    @post_stage.update_column(:status, 1) if current_user?(@post.user) or boss?
 
     respond_to do |format|
       format.js
@@ -424,7 +424,7 @@ end
     @post_stage = Plan::PostStage.find(params[:stage_id])
     @post_aspect = Plan::PostAspect.find(params[:con_id])
     @post_action = Plan::PostAction.find(params[:act_id])
-    @post_action.destroy if current_user?(@post.user)
+    @post_action.destroy if current_user?(@post.user) or boss?
     respond_to do |format|
       format.js
     end
@@ -580,7 +580,7 @@ end
     @post_stage = Plan::PostStage.find(params[:stage_id])
     @post_concept = Plan::PostAspect.find(params[:con_id])
     @post_actions = @post_concept.plan_post_actions.pluck(:id)
-    if current_user?(@post.user)
+    if current_user?(@post.user) or boss?
       @post_concept.destroy
       @post_concept.plan_post_actions.destroy_all
     end
