@@ -5,24 +5,21 @@
       =link_to child_comment.user, user_path(@project, child_comment.user)
       = render partial: '/shared/user_online', object: child_comment.user
       = role_label(child_comment)
-      - if boss? or role_expert?
-        .pull-right(style="margin-left:3px;")
-          =link_to({:controller => child_comment.post.class.name.underscore.pluralize, :action => :comment_status, :id => child_comment.post.id, :comment_id => child_comment.id, :discuss_status => 1, :comment_stage => get_stage_for_improve(child_comment.get_class)},  :remote => true, :method => :put,  id: "discuss_stat_comment_#{child_comment.id}") do
-            %span.label(class="#{label_discuss_stat(child_comment)}") ТРЕБУЕТ ОБСУЖДЕНИЯ
-      - elsif child_comment.discuss_status
-        .pull-right(style="margin-left:3px;")
-          %span.label-danger ТРЕБУЕТ ОБСУЖДЕНИЯ
-
-      - if current_user?(child_comment.user) or boss?
-        .pull-right
+      %span.pull-right
+        - if current_user?(child_comment.user) or boss?
           =link_to({:controller => child_comment.post.class.name.underscore.pluralize, :action => :comment_status, :id => child_comment.post.id, :comment_id => child_comment.id, :discontent_status => 1,:comment_stage => get_stage_for_improve(child_comment.get_class)},  :remote => true, :method => :put,  id: "dis_stat_comment_#{child_comment.id}") do
             %span.label(class="#{label_dis_stat(child_comment)}") Проблема
           =link_to({:controller => child_comment.post.class.name.underscore.pluralize, :action => :comment_status, :id => child_comment.post.id, :comment_id => child_comment.id, :concept_status => 1,:comment_stage => get_stage_for_improve(child_comment.get_class)},  :remote => true, :method => :put,  id: "con_stat_comment_#{child_comment.id}") do
             %span.label(class="#{label_con_stat(child_comment)}") Идея
-      -else
-        .pull-right
+        - else
           %span.label(class="#{label_dis_stat(child_comment)}") Проблема
           %span.label(class="#{label_con_stat(child_comment)}") Идея
+
+        - if boss? or role_expert?
+          =link_to({:controller => child_comment.post.class.name.underscore.pluralize, :action => :comment_status, :id => child_comment.post.id, :comment_id => child_comment.id, :discuss_status => 1, :comment_stage => get_stage_for_improve(child_comment.get_class)},  :remote => true, :method => :put,  id: "discuss_stat_comment_#{child_comment.id}") do
+            %span.label(class="#{label_discuss_stat(child_comment)}") ТРЕБУЕТ ОБСУЖДЕНИЯ
+        - elsif child_comment.discuss_status
+          %span.label-danger ТРЕБУЕТ ОБСУЖДЕНИЯ
 
     .text
       %div{id: "comment_text_#{child_comment.id}"}

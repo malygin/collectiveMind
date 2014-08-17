@@ -1,6 +1,5 @@
 # encoding: utf-8
 class LifeTape::PostsController < PostsController
-  # layout 'application_two_column'
 
   after_filter :journal_viewed_life_tape, only: [:index]
 
@@ -14,8 +13,8 @@ class LifeTape::PostsController < PostsController
   end
 
   def index
-    @page = params[:page]
     return redirect_to action: "vote_list" if current_user.can_vote_for(:life_tape,  @project)
+    @page = params[:page]
     @aspect =  params[:asp] ? Discontent::Aspect.find(params[:asp]) : @project.aspects.order(:id).first
     @post_show = @aspect.life_tape_posts.first unless @aspect.nil?
     @comments= @post_show.comments.where(:comment_id => nil).paginate(:page => @page ? @page: last_page, :per_page => 10) if @post_show
@@ -23,8 +22,8 @@ class LifeTape::PostsController < PostsController
   end
 
   def vote_list
-    @posts = voting_model.scope_vote_top(@project.id,params[:revers])
     return redirect_to action: "index" unless current_user.can_vote_for(:life_tape,  @project)
+    @posts = voting_model.scope_vote_top(@project.id,params[:revers])
     @path_for_voting = "/project/#{@project.id}/life_tape/"
     @votes = @project.stage1
     respond_to do |format|
