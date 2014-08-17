@@ -16,7 +16,7 @@ describe 'Discontents ' do
     context 'discontent list' do
       before do
         visit discontent_posts_path(project)
-        click_link 'to_work'
+        # click_link 'to_work'
       end
 
       it ' can see all discontents in aspect' do
@@ -30,7 +30,7 @@ describe 'Discontents ' do
         fill_in 'discontent_post_content', with: 'dis content'
         fill_in 'discontent_post_whered', with: 'dis where'
         fill_in 'discontent_post_whend', with: 'dis when'
-        # find("option[value='1']").click
+        select('aspect 1', :from => 'select_for_aspects')
         click_button 'send_post'
         expect(page).to have_content 'Перейти к списку'
         expect(page).to have_content 'Добавить еще одно'
@@ -50,7 +50,7 @@ describe 'Discontents ' do
         expect(page).to have_selector 'textarea#comment_text_area'
       end
 
-      it ' can add  comments '  do
+      it ' can add  comments ', js: true  do
         fill_in 'comment_text_area', with: 'dis comment 1'
         click_button 'send_post'
         expect(page).to have_content 'dis comment 1'

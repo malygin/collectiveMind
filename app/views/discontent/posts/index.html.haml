@@ -1,23 +1,9 @@
-#render_fast_discussion_discontents
-  =render partial:'form_wizard'
-%section.widget
+%h2=@project.name
+
+%section.widget.widget-tabs
   %header
-    .row
-      .col-md-9
-        %h3.color-red(style='line-height: 30px;')
-          2 этап: Анализ ситуации.
-          =@aspect_post.content
-          %br
-        %span(style='font-size: 20px;line-height: 30px;')
-          Сбор несовершенств в рамках процедуры:
-          =@project.name
-
-      -#- if signed_in? and (@project.status == 3 or @project.status == 4 or @project.status == 5 or @project.demo?)
-      -#  .col-md-3
-      -#    .pull-right
-      -#      = link_to 'Быстрый cтарт!', discontent_posts_fast_discussion_discontents_path(@project) ,remote: true, id: 'fast_discussion_discontents',  class: 'btn btn-lg btn-danger'
-
-  .body
+    =render partial: 'application/stages', locals:  {current_stage: :discontent}
+  .body.tab-content
     %a{name:'top'}
     - if signed_in? and (@project.status ==3 or @project.demo?)
       = link_to '+ Добавить свое несовершенство', new_discontent_post_path(@project, asp: params[:asp]) , id: 'add_record',  class: 'btn  btn-danger'
@@ -32,7 +18,7 @@
               %ul.nav.nav-tabs#tab_posts
                 %li#old.active
                   %a(href="#origin" data-toggle="tab" onclick="$('#new_posts').fadeOut();")
-                    Исходные #{@aspect_post.aspect_posts.count}
+                    Исходные #{@aspect.aspect_posts.count}
                 %li#new
                   =link_to "Объединенные #{@project.discontent_accepted_post.count}", "/project/#{@project.id}/discontent/posts/unions", remote: true
                 %li#imp
@@ -54,7 +40,7 @@
                         .body
                           .slimScrollDiv
                             %ul.news-list#panel_union_group
-                              - @aspect_post.aspect_posts.by_status(2).created_order.each do |post|
+                              - @aspect.aspect_posts.by_status(2).created_order.each do |post|
                                 %li{id: "post_union_#{post.id}"}
                                   =render partial:'post', object: post
 
@@ -66,7 +52,7 @@
                         .body
                           .slimScrollDiv
                             %ul.news-list
-                              =render partial:'post_short', collection: @aspect_post.aspect_posts.by_status([0,1]).sort_by{|c| c.discontent_post.nil? ? 0 : 1}
+                              =render partial:'post_short', collection: @aspect.aspect_posts.by_status([0,1]).sort_by{|c| c.discontent_post.nil? ? 0 : 1}
 
 
                 #improve.tab-pane.fade
@@ -92,7 +78,7 @@
             .body
               .slimScrollDiv
                 %ul.news-list
-                  =render partial:'post_short', collection: @aspect_post.aspect_posts.by_status_for_post(@project)
+                  =render partial:'post_short', collection: @aspect.aspect_posts.by_status_for_post(@project)
 
         .col-md-6
           %section.widget
