@@ -35,13 +35,27 @@
 @import "general";
 @import "base";
 @import "responsive";
-@import "print";
+//@import "print";
 
 
+// Brand colors
+// -------------------------
 
-.text-lifetape         { color: $teal; }
-.text-discontent       { color: $pink; }
-.text-concept          { color: $orange; }
-.text-plan             { color: $lime; }
-.text-estimate         { color: #663505; }
+$brand-lifetape:        $teal !default;
+$brand-discontent:      $pink !default;
+$brand-concept:         $orange !default;
+$brand-plan:            $lime !default;
+$brand-estimate:        #663505 !default;
+
+.text-lifetape         { color: $brand-lifetape; }
+.text-discontent       { color: $brand-discontent; }
+.text-concept          { color: $brand-concept; }
+.text-plan             { color: $brand-plan; }
+.text-estimate         { color: $brand-estimate; }
+
+.label-lifetape    { @include label-variant($brand-lifetape);}
+.label-discontent  { @include label-variant($brand-discontent);}
+.label-concept     { @include label-variant($brand-concept);}
+.label-plan        { @include label-variant($brand-plan);}
+.label-estimate    { @include label-variant($brand-estimate);}
 

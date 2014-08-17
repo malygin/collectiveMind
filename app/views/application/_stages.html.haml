@@ -1,26 +1,26 @@
 %ul.nav.nav-tabs{role: "tablist"}
   %li(class="#{'active' if current_stage == :lifetape}")
     %a{href: "/project/#{@project.id}/life_tape/posts"}
-      1 этап
+      %span.label.label-lifetape 1 этап
       %br
-      %span.text-lifetape Подготовка к процедуре
+      Подготовка к процедуре
   %li(class="#{'active' if current_stage == :discontent}")
     %a{href: "/project/#{@project.id}/discontent/posts"}
-      2 этап
+      %span.label.label-discontent 2 этап
       %br
-      %span.text-discontent Сбор несовершенств
+      Сбор несовершенств
   %li(class="#{'active' if current_stage == :concept}")
     %a{ href: "/project/#{@project.id}/concept/posts"}
-      3 этап
+      %span.label.label-concept 3 этап
       %br
-      %span.text-concept Сбор нововведений
+      Сбор нововведений
   %li(class="#{'active' if current_stage == :plan}")
     %a{ href:"/project/#{@project.id}/plan/posts"}
-      4 этап
+      %span.label.label-plan 4 этап
       %br
-      %span.text-plan Создание проектов
+      Создание проектов
   %li(class="#{'active' if current_stage == :estimate}")
     %a{ href: "/project/#{@project.id}/estimate/posts"}
-      5 этап
+      %span.label.label-estimate 5 этап
       %br
-      %span.text-estimate Выставление оценок
+      Выставление оценок
