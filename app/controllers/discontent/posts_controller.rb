@@ -44,12 +44,12 @@ class Discontent::PostsController < PostsController
 
   def index
     return redirect_to action: "vote_list" if current_user.can_vote_for(:discontent,  @project)
-    @aspect_post =  params[:asp] ? Discontent::Aspect.find(params[:asp]) : @project.proc_aspects.order(:id).first
+    @aspect =  params[:asp] ? Discontent::Aspect.find(params[:asp]) : @project.proc_aspects.order(:id).first
 
-    life_tape_post = @aspect_post.life_tape_post
+    life_tape_post = @aspect.life_tape_post
     life_tape_comments = life_tape_post ? life_tape_post.comments.where(:discontent_status => true) : []
 
-    discontent_comments = @aspect_post.improve_discontent_comments(2)
+    discontent_comments = @aspect.improve_discontent_comments(2)
     @comments_all = life_tape_comments | discontent_comments
     @comments_all = @comments_all.sort_by{|c| c.improve_disposts.size}
     @page = params[:page]
