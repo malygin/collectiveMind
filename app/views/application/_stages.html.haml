@@ -1,79 +1,26 @@
-.row
-  .col-md-12
-    %nav.navbar.navbar-default.navbar-inverse{:role => "navigation"}
-      .navbar-header
-        %button.navbar-toggle{"data-target" => "#bs-example-navbar-collapse-1", "data-toggle" => "collapse", :type => "button"}
-          %span.sr-only Toggle navigation
-          %span.icon-bar
-          %span.icon-bar
-          %span.icon-bar
-        &nbsp;
-      #bs-example-navbar-collapse-1.collapse.navbar-collapse
-        %ul.nav.navbar-nav
-          %li#stage_life_tape{class:  @project.stage_style(:life_tape_posts) }
-            = link_to "/project/#{@project.id}/life_tape/posts" ,  class: "#{@project.stage_style_link(@breadcrumbs[0].name, :life_tape_posts)}" do
-              =@project.status_title(:life_tape_posts)
-              %br
-              %small#life-tape-all-count.text-center=t('stages.record', count: @project.life_tape_posts.count)
-          %li.divider_vertical
-
-          %li#stage_discontent{class: @project.stage_style(:discontent_posts) }
-            - if @project.status > 2
-              = link_to "/project/#{@project.id}/discontent/posts", class:"#{@project.stage_style_link(@breadcrumbs[0].name, :discontent_posts)}" do
-                =@project.status_title(:discontent_posts)
-                %br
-                %small.text-center=t('stages.discontents', count: @project.discontents.by_status(0).count)
-            -else
-              %a
-                =@project.status_title(:discontent_posts)
-                %br
-                %small недоступен
-
-          %li.divider_vertical
-
-          %li#stage_concept{class:  @project.stage_style(:concept_posts)}
-            - if  @project.status > 6
-              = link_to "/project/#{@project.id}/concept/posts" , class:"#{@project.stage_style_link(@breadcrumbs[0].name, :concept_posts)}" do
-                =@project.status_title(:concept_posts)
-                %br
-                %small.text-center=t('stages.concepts', count: @project.concept_ongoing_post.count)
-            -else
-              %a
-                =@project.status_title(:concept_posts)
-                %br
-                %small недоступен
-          %li.divider_vertical
-
-          %li#stage_plan{class:  @project.stage_style(:plan_posts)}
-            - if  @project.status > 8
-              = link_to "/project/#{@project.id}/plan/posts" , class:"#{@project.stage_style_link(@breadcrumbs[0].name, :plan_posts)}" do
-                =@project.status_title(:plan_posts)
-                %br
-                %small.text-center=t('stages.plans', count: @project.plan_post.count)
-            -else
-              %a
-                =@project.status_title(:plan_posts)
-                %br
-                %small недоступен
-
-          %li.divider_vertical
-
-          %li#stage_plan{class:  @project.stage_style(:estimate_posts)}
-            - if  @project.status > 10
-              = link_to "/project/#{@project.id}/estimate/posts" , class:"#{@project.stage_style_link(@breadcrumbs[0].name, :estimate_posts)}" do
-                =@project.status_title(:estimate_posts)
-                %br
-                %small.text-center=t('stages.estimates', count: @project.estimate_posts.count)
-            -else
-              %a
-                =@project.status_title(:estimate_posts)
-                %br
-                %small недоступен
-
-.row
-  .col-md-12
-    %ol.breadcrumb
-      %li
-        = link_to @project.name, "/project/#{@project.id}"
-      = render_breadcrumbs :tag => :li, :separator => ""
-
+%ul.nav.nav-tabs{role: "tablist"}
+  %li(class="#{'active' if current_stage == :lifetape}")
+    %a{href: "/project/#{@project.id}/lifetape/posts"}
+      1 этап
+      %br
+      %span.text-lifetape Подготовка к процедуре
+  %li(class="#{'active' if current_stage == :discontent}")
+    %a{href: "/project/#{@project.id}/discontent/posts"}
+      2 этап
+      %br
+      %span.text-discontent Сбор несовершенств
+  %li(class="#{'active' if current_stage == :concept}")
+    %a{ href: "/project/#{@project.id}/concept/posts"}
+      3 этап
+      %br
+      %span.text-concept Сбор нововведений
+  %li(class="#{'active' if current_stage == :plan}")
+    %a{ href:"/project/#{@project.id}/plan/posts"}
+      4 этап
+      %br
+      %span.text-plan Создание проектов
+  %li(class="#{'active' if current_stage == :estimate}")
+    %a{ href: "/project/#{@project.id}/estimate/posts"}
+      5 этап
+      %br
+      %span.text-estimate Выставление оценок

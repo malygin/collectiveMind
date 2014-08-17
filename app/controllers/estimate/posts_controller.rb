@@ -25,7 +25,6 @@ class Estimate::PostsController < PostsController
 
     @status = params[:status]
     @aspects = Discontent::Aspect.where(:project_id => @project)
-    add_breadcrumb I18n.t('stages.estimate'), estimate_posts_path(@project)
     if @project.status == 11
       @vote_all = Plan::Voting.where("plan_votings.plan_post_id IN (#{@project.plan_post.pluck(:id).join(", ")})").uniq_user.count
     end
@@ -42,7 +41,7 @@ class Estimate::PostsController < PostsController
     @posts = Plan::Post.where(:project_id => @project, :status => 0).paginate(:page => params[:page])
     @est_stat = @posts.first.estimate_status.nil? ? 0 : @posts.first.estimate_status
     respond_to do |format|
-      format.html {render :layout => 'application_two_column'} # index.html.erb
+      format.html
       format.json { render json: @posts }
     end
   end
@@ -51,10 +50,8 @@ class Estimate::PostsController < PostsController
     @post = Estimate::Post.find(params[:id])
     @plan_post = @post.post
     @est_stat = @plan_post.estimate_status.nil? ? 0 : @plan_post.estimate_status
-    add_breadcrumb 'Просмотр записи', polymorphic_path(@post, :project => @project.id)
     @comment = comment_model.new
     @comments = @post.comments.paginate(:page => params[:page], :per_page => 30)
-    render 'show' , :layout => 'application_two_column'
   end
 
   def edit
@@ -71,7 +68,7 @@ class Estimate::PostsController < PostsController
       @pair_estimates2[p] = @post.post_aspects.by_plan_pa(p.id).first if p.plan_post_stage.status == 0
     end
     respond_to do |format|
-      format.html {render :layout => 'application_two_column'}
+      format.html
     end
   end
 
@@ -92,7 +89,7 @@ class Estimate::PostsController < PostsController
     end
 
     respond_to do |format|
-      format.html {render :layout => 'application_two_column'}
+      format.html
     end
   end
 
@@ -276,7 +273,7 @@ class Estimate::PostsController < PostsController
     @number_v = @project.stage5 - current_user.voted_plan_posts.by_project(@project.id).size
     @votes = @project.stage5
     respond_to do |format|
-      format.html {render :layout => 'application_two_column'}
+      format.html
     end
   end
 

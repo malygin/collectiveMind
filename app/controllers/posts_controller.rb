@@ -4,7 +4,7 @@ class PostsController < ApplicationController
   before_filter :prepare_data, :only => [:index, :new, :edit, :show, :show_essay,:vote_list, :essay_list]
   before_filter :journal_data, :only => [:index, :new, :edit, :show, :show_essay, :vote_list, :essay_list, :to_work]
   before_filter :have_rights, :only =>[:edit]
-  before_filter :to_work_redirect, only: [:index]
+  # before_filter :to_work_redirect, only: [:index]
   before_filter :have_project_access
 
   def authenticate
@@ -198,7 +198,7 @@ class PostsController < ApplicationController
     end
     @comment = comment_model.new
     respond_to do |format|
-      format.html { render :layout => 'application_two_column'} # show.html.erb
+      format.html
       format.json { render json: @post }
       format.js
     end
@@ -494,7 +494,7 @@ class PostsController < ApplicationController
     end
 
     respond_to do |format|
-      format.html { render :layout => 'application_two_column'}
+      format.html
     end
   end
 

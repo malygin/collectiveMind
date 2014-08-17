@@ -11,19 +11,22 @@
     = stylesheet_link_tag 'application', media: 'all'
     -#%link(href="/assets/favicon.ico" rel="shortcut icon")
 
-
   %body
-    .row
-      =render 'top_menu'
-    .row
-      .col-md-10
-        .row
-          .col-md-3
-            = render partial: 'left_side'
-          .col-md-6
-            = yield
-          .col-md-3
-            = render partial: 'right_side'
+    .logo.hidden-sm.hidden-xs.hidden-md
+      %h4
+        %a{:href => "/project/#{@project.id}"}
+          %h4
+            MASS
+            %strong DECISION
+
+    %nav#sidebar.sidebar.nav-collapse.collapse
+      = render partial: 'left_side', :locals => { :current_stage => controller.controller_path }
+    .wrap
+      %header.page-header
+        .navbar
+          =render 'top_menu'
+      .content.container
+        = yield
 
     /
       Javascripts

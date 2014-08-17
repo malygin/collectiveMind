@@ -5,7 +5,6 @@ require 'set'
 class Discontent::PostsController < PostsController
   # GET /discontent/posts
   # GET /discontent/posts.json
-  layout 'application_two_column'
   autocomplete :discontent_post, :whend, :class_name => 'Discontent::Post' , :full => true
   autocomplete :discontent_post, :whered, :class_name => 'Discontent::Post' , :full => true
 

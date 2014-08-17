@@ -21,25 +21,27 @@ describe 'Knowbase ' do
 
     context 'visit knowbase posts as user' do
       it ' has all tags' do
-        expect have_selector("span#edit_knowbase_post_title_#{@post1.id}", @post1.title)
-        expect have_selector("div#edit_knowbase_post_content_#{@post1.id}", @post1.content)
+        expect(page).to have_selector("span#edit_knowbase_post_title_#{@post1.id}", @post1.title)
+        expect(page).to have_selector("div#edit_knowbase_post_content_#{@post1.id}", @post1.content)
         expect(page).to_not have_selector('ul#sortable li')
         expect(page).to_not have_selector('li.ui-state-default')
         expect(page).to_not have_selector('a#new_knowbase_post')
         expect(page).to_not have_selector("a#edit_knowbase_post_#{@post1.id}")
         expect(page).to_not have_selector("a#destroy_knowbase_post_#{@post1.id}")
-        expect have_selector("li##{@post1.id}.active")
+        expect(page).to have_selector("li##{@post1.id}.active")
         expect(page).to_not have_selector("li##{@post2.id}.active")
       end
+      it_behaves_like 'validation links', :user, :project
     end
     context 'visit knowbase post 2' do
       before { visit knowbase_post_path(project,@post2) }
       it ' has all tags' do
-        expect have_selector("span#edit_knowbase_post_title_#{@post2.id}", @post1.title)
-        expect have_selector("div#edit_knowbase_post_content_#{@post2.id}", @post1.content)
+        expect(page).to have_selector("span#edit_knowbase_post_title_#{@post2.id}", @post1.title)
+        expect(page).to have_selector("div#edit_knowbase_post_content_#{@post2.id}", @post1.content)
         expect(page).to_not have_selector("li##{@post1.id}.active")
-        expect have_selector("li##{@post2.id}.active")
+        expect(page).to have_selector("li##{@post2.id}.active")
       end
+      it_behaves_like 'validation links', :user, :project
     end
   end
 
@@ -51,24 +53,24 @@ describe 'Knowbase ' do
 
     context 'visit knowbase posts as admin' do
       it ' has all tags' do
-        expect have_selector("span#edit_knowbase_post_title_#{@post1.id}", @post1.title)
-        expect have_selector("div#edit_knowbase_post_content_#{@post1.id}", @post1.content)
-        expect have_selector('ul#sortable li')
-        expect have_selector('li.ui-state-default')
-        expect have_selector('a#new_knowbase_post')
-        expect have_selector("a#edit_knowbase_post_#{@post1.id}")
-        expect have_selector("a#destroy_knowbase_post_#{@post1.id}")
-        expect have_selector("li##{@post1.id}.active")
+        expect(page).to have_selector("span#edit_knowbase_post_title_#{@post1.id}", @post1.title)
+        expect(page).to have_selector("div#edit_knowbase_post_content_#{@post1.id}", @post1.content)
+        expect(page).to have_selector('ul#sortable li')
+        expect(page).to have_selector('li.ui-state-default')
+        expect(page).to have_selector('a#new_knowbase_post')
+        expect(page).to have_selector("a#edit_knowbase_post_#{@post1.id}")
+        expect(page).to have_selector("a#destroy_knowbase_post_#{@post1.id}")
+        expect(page).to have_selector("li##{@post1.id}.active")
         expect(page).to_not have_selector("li##{@post2.id}.active")
       end
 
       context 'add knowbase post' do
         before { click_link "new_knowbase_post" }
         it 'post without content' do
-          expect have_selector("ul.wysihtml5-toolbar")
-          expect have_selector '#send_post.disabled'
+          expect(page).to have_selector("ul.wysihtml5-toolbar")
+          expect(page).to have_selector '#send_post.disabled'
           fill_in 'title-textfield', with: 'title'
-          expect have_content("Заполните поле контента")
+          expect(page).to have_content("Заполните поле контента")
           expect(page).to_not have_selector '#send_post.disabled'
         end
         #@todo not focus on editor when set value(not work activate_button)
@@ -87,16 +89,17 @@ describe 'Knowbase ' do
         #    expect have_content 'content for post'
         #  }.to change(Knowbase::Post, :count).by(1)
         #end
+        it_behaves_like 'validation links', :user, :project
       end
       context 'edit knowbase post' do
         before { click_link "edit_knowbase_post_#{@post1.id}" }
 
         it 'content and title', js: true do
-          expect have_selector("ul.wysihtml5-toolbar")
-          expect have_selector("input#title-textfield", @post1.title)
+          expect(page).to have_selector("ul.wysihtml5-toolbar")
+          expect(page).to have_selector("input#title-textfield", @post1.title)
           fill_in 'title-textfield', with: 'new title'
           click_button 'send_post'
-          expect have_selector("span#edit_knowbase_post_title_#{@post1.id}", 'new title')
+          expect(page).to have_selector("span#edit_knowbase_post_title_#{@post1.id}", 'new title')
         end
       end
       context 'delete knowbase post' do
@@ -104,9 +107,10 @@ describe 'Knowbase ' do
           expect {
             click_link "destroy_knowbase_post_#{@post1.id}"
             expect(page).to_not have_selector("span#edit_knowbase_post_title_#{@post1.id}")
-            expect have_selector("span#edit_knowbase_post_title_#{@post2.id}", @post2.title)
+            expect(page).to have_selector("span#edit_knowbase_post_title_#{@post2.id}", @post2.title)
           }.to change(Knowbase::Post, :count).by(-1)
         end
+        it_behaves_like 'validation links', :user, :project
       end
     end
   end

@@ -1,5 +1,4 @@
 class Help::PostsController < PostsController
-  layout "application_two_column"
   before_filter :project_by_id
 
   def  project_by_id

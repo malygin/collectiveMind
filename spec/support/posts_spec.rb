@@ -1,3 +1,37 @@
+# encoding: utf-8
+
+shared_examples 'validation links' do
+  it ' validate journal' do
+    visit journals_path(project)
+    expect(page).to have_content 'События'
+  end
+  it ' validate knowbase' do
+    visit knowbase_posts_path(project)
+    expect(page).to have_selector "a", 'вернуться к процедуре'
+  end
+  #it ' validate help' do
+  #  visit help_posts_path(project)
+  #  expect(page).to have_selector "a", 'вернуться к процедуре'
+  #end
+  it ' validate reiting' do
+    visit users_path(project)
+    expect(page).to have_content 'Рейтинг участников'
+  end
+  it ' validate profile' do
+    visit user_path(project,user)
+    expect(page).to have_content user.to_s
+    expect(page).to have_content 'Достижения'
+  end
+end
+
+shared_examples 'validation journal' do
+  it ' validate journal with content' do
+    visit journals_path(project)
+    expect(page).to have_content 'comment 1'
+    expect(page).to have_selector "a", @aspect1.content
+  end
+end
+
 #shared_examples 'with mini help'   do |stage_name|
 #
 #  it 'first time show help' , js: true  do
@@ -70,7 +104,4 @@
 #  end
 #
 #end
-#
-#
-#
-#
+

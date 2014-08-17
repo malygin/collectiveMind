@@ -3,7 +3,6 @@
 class Concept::PostsController < PostsController
   # GET /discontent/posts
   # GET /discontent/posts.json
-   layout 'application_two_column', :only => [:new, :edit, :show]
    autocomplete :concept_post, :resource, :class_name => 'Concept::Post' , :full => true
 
 
@@ -73,7 +72,6 @@ class Concept::PostsController < PostsController
       @comments_all = life_tape_comments | discontent_comments | concept_comments
       @comments_all = @comments_all.sort_by{|c| c.improve_concepts.size}
     end
-    render 'index' , :layout => 'application_two_column'
   end
 
   def create
@@ -206,7 +204,6 @@ class Concept::PostsController < PostsController
         end
       end
     end
-    render 'vote_list' , :layout => 'application_two_column'
   end
 
   def next_vote
@@ -258,7 +255,7 @@ class Concept::PostsController < PostsController
     end
     @pa.name = @comment.content if @comment
     respond_to do |format|
-      format.html { render :layout => 'application_two_column' }
+      format.html
       format.json { render json: @post }
     end
   end

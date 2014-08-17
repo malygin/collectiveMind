@@ -1,6 +1,6 @@
 # encoding: utf-8
 class LifeTape::PostsController < PostsController
-  layout 'application_two_column'
+  # layout 'application_two_column'
 
   after_filter :journal_viewed_life_tape, only: [:index]
 

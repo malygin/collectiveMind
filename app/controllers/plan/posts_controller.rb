@@ -2,8 +2,6 @@
 
 class Plan::PostsController < PostsController
 
-  layout 'life_tape/posts2', :only => [:new, :edit, :show]
-
   def current_model
     Plan::Post
   end 
@@ -37,8 +35,7 @@ class Plan::PostsController < PostsController
     post = Plan::Post.where(:project_id => @project, :status => 0).first
     @est_stat = post.estimate_status if post
     respond_to do |format|
-      format.html {render :layout => 'application_two_column'}
-      format.json { render json: @posts }
+      format.html
     end
   end
 
@@ -46,7 +43,7 @@ class Plan::PostsController < PostsController
     @post = current_model.new
 
     respond_to do |format|
-      format.html {render :layout => 'application_two_column'}
+      format.html
     end
   end
 
@@ -88,15 +85,10 @@ class Plan::PostsController < PostsController
         @post.update_column(:number_views, @post.number_views+1)
       end
     end
-    render 'show' , :layout => 'application_two_column'
   end
 
   def edit
     @post = Plan::Post.find(params[:id])
-
-    add_breadcrumb 'Редактирование записи', polymorphic_path(@post, :project => @project.id)
-
-    render 'edit' , :layout => 'application_two_column'
   end
 
 
