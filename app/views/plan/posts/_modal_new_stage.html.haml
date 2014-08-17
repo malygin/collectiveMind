@@ -6,7 +6,7 @@
         %h3#myModalLabel.modal-title Добавление этапа в проект
       .modal-body
         = form_for stage, :url => {:project => @project.id, :stage_id => stage.persisted? ? stage.id : nil, :action => stage.persisted? ? 'update_stage' : 'create_stage'}, :remote => true, :method => :put do |f|
-          = render 'shared/error_messages', :object => f.object
+          = render 'shared/notice_messages', :object => f.object
           .form-group(style="margin-left:0;")
             %label{:for => "name_stage"} Название этапа
             =f.text_field :name, :class => 'form-control', placeholder: 'Введите название этапа', id:'name_stage'

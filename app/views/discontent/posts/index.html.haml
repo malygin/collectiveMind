@@ -1,50 +1,106 @@
-%h3
-  2 этап: Анализ ситуации.
-  %br
-  %small
-    Сбор несовершенств в рамках процедуры
-    =@project.name
+#render_fast_discussion_discontents
+  =render partial:'form_wizard'
+%section.widget
+  %header
+    .row
+      .col-md-9
+        %h3.color-red(style='line-height: 30px;')
+          2 этап: Анализ ситуации.
+          =@aspect_post.content
+          %br
+        %span(style='font-size: 20px;line-height: 30px;')
+          Сбор несовершенств в рамках процедуры:
+          =@project.name
 
-.pull-right
-  %a.active.btn.btn-default.menu_table(href="#")
-    %span.glyphicon.glyphicon-th-list
-    Список
-  %a.btn.btn-default.menu_table(href="/project/#{@project.id}/discontent/posts")
-    %span.glyphicon.glyphicon-th
-    Таблица
-- if signed_in? and @project.status == 3
-  = link_to '+ Добавить несовершенство', new_discontent_post_path(@project) , id: 'add_record',  class: 'btn btn-sm btn-success'
-  %br
-%br
-- if @project.status == 4
-  %h5 Модераторы сейчас занимаются обработкой несовершенств, объединяя их. Пока вы можете работать на сборе информации или обсуждая предложенные несовершенства
-- if @project.status == 5
-  %h5
-    Уважаемые участники!
-    Модераторы объединили все представленные несовершенства в блоки. Пожалуйста, оцените эти блоки, обратив особое внимание на два вопроса:
-    %br
-    1) Нет ли в каком-либо блоке того, что не относится к нему по смыслу?
-    %br
-    2) Есть ли какие-то несовершенства, которые было бы разумно поместить в тот или иной блок, но этого не сделано?
+      -#- if signed_in? and (@project.status == 3 or @project.status == 4 or @project.status == 5 or @project.demo?)
+      -#  .col-md-3
+      -#    .pull-right
+      -#      = link_to 'Быстрый cтарт!', discontent_posts_fast_discussion_discontents_path(@project) ,remote: true, id: 'fast_discussion_discontents',  class: 'btn btn-lg btn-danger'
 
-- if can_union_discontents?(@project)
-  %ul.nav.nav-tabs#tab_posts
-    %li#origin.active
-      =link_to "Исходные #{@project.discontent_ongoing_post.count}", "/project/#{@project.id}/discontent/posts/", remote: true
-    %li#new
-      =link_to "Объединенные #{@project.discontent_accepted_post.count}", "/project/#{@project.id}/discontent/posts/unions", remote: true
-  %br
-  %br
-  #posts
-    = render  @posts
+  .body
+    %a{name:'top'}
+    - if signed_in? and (@project.status ==3 or @project.demo?)
+      = link_to '+ Добавить свое несовершенство', new_discontent_post_path(@project, asp: params[:asp]) , id: 'add_record',  class: 'btn  btn-danger'
+      %br
+      %br
 
--else
-  %small#filter_posts
-    = render 'shared/filter_posts', project: @project.id, folder: @folder
-  #posts
-    = render  @posts
-#pagination
-  %br
-  - if @posts.next_page
-    = link_to 'Посмотреть еще', discontent_posts_path(page: @posts.next_page, order: @order), class: 'btn btn-primary btn-sm',  style: 'width: 100%;',remote: true , id: 'load_more_product'
+    - if can_union_discontents?(@project)
+      .row
+        .col-md-12
+          %section.widget
+            .body.widget-panel
+              %ul.nav.nav-tabs#tab_posts
+                %li#old.active
+                  %a(href="#origin" data-toggle="tab" onclick="$('#new_posts').fadeOut();")
+                    Исходные #{@aspect_post.aspect_posts.count}
+                %li#new
+                  =link_to "Объединенные #{@project.discontent_accepted_post.count}", "/project/#{@project.id}/discontent/posts/unions", remote: true
+                %li#imp
+                  %a(href="#improve" data-toggle="tab" onclick="$('#new_posts').fadeOut();")
+                    Неоформленные проблемы
+              %br
+              %br
+              #form_for_group_discontent
+              .tab-content
+                #origin.tab-pane.fade.in.active
+                  .row
+                    .col-md-6
+                      %section.widget
+                        %header
+                          %span.h4
+                            Группы несовершенств
+                          %span.pull-right
+                            = link_to '+ Добавить новую группу', discontent_posts_new_group_path(@project, asp: params[:asp]) ,:remote => true, id: 'add_record',  class: 'btn  btn-danger'
+                        .body
+                          .slimScrollDiv
+                            %ul.news-list#panel_union_group
+                              - @aspect_post.aspect_posts.by_status(2).created_order.each do |post|
+                                %li{id: "post_union_#{post.id}"}
+                                  =render partial:'post', object: post
+
+                    .col-md-6
+                      %section.widget
+                        %header
+                          %h4
+                            Несовершенства
+                        .body
+                          .slimScrollDiv
+                            %ul.news-list
+                              =render partial:'post_short', collection: @aspect_post.aspect_posts.by_status([0,1]).sort_by{|c| c.discontent_post.nil? ? 0 : 1}
+
+
+                #improve.tab-pane.fade
+                  .row
+                    .col-md-6
+                      %section.widget
+                        %header
+                          %h4
+                            Неоформленные проблемы
+                          %hr
+                        .body
+                          .chat-messages
+                            = render :partial => 'shared/improve_comment',:collection => @comments_all
+                #new_posts.tab-pane.fade
+
+    -else
+      .row
+        .col-md-6
+          %section.widget
+            %header
+              %h4
+                Несовершенства
+            .body
+              .slimScrollDiv
+                %ul.news-list
+                  =render partial:'post_short', collection: @aspect_post.aspect_posts.by_status_for_post(@project)
+
+        .col-md-6
+          %section.widget
+            %header
+              %h4
+                Неоформленные проблемы
+              %hr
+            .body
+              .chat-messages
+                = render :partial => 'shared/improve_comment',:collection => @comments_all
 

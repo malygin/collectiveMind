@@ -1,5 +1,5 @@
 = form_for form_post_note, :html => {:class => 'new_or_edit', :id => "note_for_post_#{@post.id}_#{@type}",style: 'height: 0px;display:none;'}, remote: true, :url => {:project => @project.id, :type_field => @type, :action => 'create_note' }, :method => :put do |f|
-  = render 'shared/error_messages', :object =>f.object
+  = render 'shared/notice_messages', :object =>f.object
   =f.text_area :content, :class => 'form-control', style: 'height: 40px;', placeholder: 'Ваш комментарий', id:'edit_post_note_text_area'
   .pull-right
     =f.submit 'Отправить', :id  => "send_post_#{@type}", class: 'btn btn-xs btn-success', style: 'margin-left: 20px;'

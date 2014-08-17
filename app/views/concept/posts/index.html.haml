@@ -11,10 +11,10 @@
         %span(style='font-size: 20px;line-height: 30px;')
           Сбор идей для решения несовершенств в рамках процедуры:
           =@project.name
-      - if signed_in? and (@project.status == 7 or @project.demo?)
-        .col-md-3
-          .pull-right
-            = link_to 'Быстрый cтарт!', concept_posts_fast_discussion_concepts_path(@project) ,remote: true, id: 'fast_discussion_concepts',  class: 'btn btn-lg btn-warning'
+      -#- if signed_in? and (@project.status == 7 or @project.demo?)
+      -#  .col-md-3
+      -#    .pull-right
+      -#      = link_to 'Быстрый cтарт!', concept_posts_fast_discussion_concepts_path(@project) ,remote: true, id: 'fast_discussion_concepts',  class: 'btn btn-lg btn-warning'
 
   .body
     %br
@@ -56,7 +56,7 @@
 
                         %td
                           = status_for_concept_type(pa)
-                          -if pa.discuss_stat
+                          -if pa.discuss_status
                             %br
                             %span.label-danger ТРЕБУЕТ ОБСУЖДЕНИЯ
                         %td
@@ -76,4 +76,4 @@
             %hr
           .body
             .chat-messages
-              = render :partial => 'shared/comment',:collection => @comments_all
+              = render :partial => 'shared/improve_comment',:collection => @comments_all

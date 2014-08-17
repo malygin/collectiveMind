@@ -46,7 +46,6 @@ class Concept::PostsController < PostsController
   def prepare_data
     @project = Core::Project.find(params[:project])
     @aspects = Discontent::Aspect.where(:project_id => @project, :status => 0)
-    add_breadcrumb I18n.t('stages.concept'), concept_posts_path(@project)
 
     @disposts = Discontent::Post.where(:project_id => @project, :status => 4).order(:id)
 
@@ -63,22 +62,17 @@ class Concept::PostsController < PostsController
         return
       end
     end
-    if params[:asp]
-      @aspect_post =  Discontent::Aspect.find(params[:asp])
-    else
-      @aspect_post = @project.aspects.order(:id).first
-    end
+    @aspect_post =  params[:asp] ? Discontent::Aspect.find(params[:asp]) : @project.aspects.order(:id).first
 
-    post_temp = @aspect_post.life_tape_posts.first
-    if post_temp.present?
-      life_tape_comments = post_temp.comments.where(:con_stat => true)
+    life_tape_post = @aspect_post.life_tape_post
+    if life_tape_post
+      life_tape_comments = life_tape_post.comments.where(:concept_status => true)
 
-      discontent_comments = @aspect_post.imp_dis_comments(3)
-      concept_comments = @aspect_post.imp_con_comments
+      discontent_comments = @aspect_post.improve_discontent_comments(3)
+      concept_comments = @aspect_post.improve_concept_comments
       @comments_all = life_tape_comments | discontent_comments | concept_comments
-      @comments_all = @comments_all.sort_by{|c| c.imp_concepts.size}
+      @comments_all = @comments_all.sort_by{|c| c.improve_concepts.size}
     end
-    @imp_con_comment = true
     render 'index' , :layout => 'application_two_column'
   end
 
@@ -100,8 +94,8 @@ class Concept::PostsController < PostsController
     @concept_post.user = user_for_post
     @concept_post.status = 0
     @concept_post.project = @project
-    @concept_post.imp_comment = params[:imp_comment] if params[:imp_comment]
-    @concept_post.imp_stage = params[:imp_stage] if params[:imp_stage]
+    @concept_post.improve_comment = params[:improve_comment] if params[:improve_comment]
+    @concept_post.improve_stage = params[:improve_stage] if params[:improve_stage]
 
     unless params[:resor_positive_r].nil?
       params[:resor_positive_r].each_with_index do |r,i|
@@ -344,99 +338,100 @@ class Concept::PostsController < PostsController
      end
    end
 
-   def fast_discussion_concepts
-     @project = Core::Project.find(params[:project])
-     @disposts = Discontent::Post.where(:project_id => @project, :status => 4).order(:id)
-
-     @concept_post = Concept::Post.find(params[:con_id]) unless params[:con_id].nil?
-     @discontent_post = Discontent::Post.find(params[:dis_id]) unless params[:dis_id].nil?
-     @select_dispost = Discontent::Post.find(params[:sel_dis_id]) unless params[:sel_dis_id].nil?
-     @add_discontent_post = Discontent::Post.find(params[:add_dis_id]) unless params[:add_dis_id].nil?
-
-     user_discussion_posts = current_user.user_discussion_concepts.where(:project_id => @project).select('distinct "concept_posts".*').pluck(:id)
-
-     if params[:con_id].nil? and params[:dis_id].nil? and params[:sel_dis_id].nil? and params[:add_dis_id].nil? and params[:save_form_concept].nil?
-       @disposts.each do |dp|
-         @dispost = dp
-         posts_for_discussion = @dispost.dispost_concepts.posts_for_discussions(@project).by_discussions(user_discussion_posts).order('"concept_posts"."id"')
-         unless posts_for_discussion.empty?
-           @post = posts_for_discussion.first
-           break
-         end
-       end
-       @add_dispost = @disposts.first
-     elsif !params[:sel_dis_id].nil?
-       @dispost = @select_dispost
-       @post = @dispost.dispost_concepts.posts_for_discussions(@project).by_discussions(user_discussion_posts).order('"concept_posts"."id"').first
-       @add_dispost  = @select_dispost
-     elsif !params[:dis_id].nil? and !params[:con_id].nil?
-       index = @disposts.index @discontent_post
-       @able = true
-       able_save = 0
-       while @able do
-         @dispost = @disposts[index]
-         @posts_for_discussion = @dispost.dispost_concepts.posts_for_discussions(@project).by_discussions(user_discussion_posts).select('distinct "concept_posts".*').order('"concept_posts"."id"')
-         unless @posts_for_discussion.empty?
-           @posts_for_discussion.each do |p|
-             @post = p
-             if (@dispost == @discontent_post and @post.id > @concept_post.id) or (@dispost != @discontent_post and @post.id > 0) or @post == @posts_for_discussion.last
-               if params[:empty_discussion]
-                 @able = false if @post != @posts_for_discussion.last or (@posts_for_discussion.size == 1 and @dispost != @discontent_post and @post != @concept_post) or (@dispost == @discontent_post and @post.id > @concept_post.id)
-                 break
-               elsif params[:save_form]
-                 if !params[:discussion].empty?  and @dispost == @discontent_post and able_save == 0
-                   @comment = @concept_post.comments.create(:content => params[:discussion], :user => current_user)
-                   able_save += 1
-                   current_user.journals.build(:type_event=>'concept_comment'+'_save', :project => @project, :body=>"#{@comment.content[0..48]}:#{@concept_post.id}#comment_#{@comment.id}").save!
-                   if @concept_post.user!=current_user
-                     current_user.journals.build(:type_event=>'my_'+'concept_comment', :user_informed => @concept_post.user, :project => @project, :body=>"#{@comment.content[0..24]}:#{@concept_post.id}#comment_#{@comment.id}", :viewed=> false).save!
-                   end
-                   current_user.concept_post_discussions.create(post: @concept_post, discontent_post: @discontent_post)
-                 end
-                 @able = false if @post != @posts_for_discussion.last or (@posts_for_discussion.size == 1 and @dispost != @discontent_post and @post != @concept_post) or (@dispost == @discontent_post and @post.id > @concept_post.id)
-                 break
-               else
-                 next
-               end
-             end
-           end
-         end
-         index+=1
-         @able = false if index == @disposts.size
-       end
-     elsif !params[:save_form_concept].nil?
-       if !params[:concept_post_aspect][:title].empty? and !params[:concept_post_aspect][:name].empty? and !params[:concept_post_aspect][:content].empty?
-         @concept = Concept::Post.new
-         @post_aspect = Concept::PostAspect.new(params[:concept_post_aspect])
-         disc = Discontent::Post.find(params[:select_for_discussion_discontents_add_concept])
-         @post_aspect.discontent = disc
-         @concept.post_aspects << @post_aspect
-         @concept.number_views = 0
-         @concept.user = current_user
-         @concept.status = 0
-         @concept.project = @project
-         @concept.save!
-         unless params[:select_for_discussion_discontents_add_concept].nil?
-           dp = params[:select_for_discussion_discontents_add_concept]
-           Concept::PostDiscontent.create(post_id: @concept.id, discontent_post_id: dp.to_i)
-         end
-         current_user.journals.build(:type_event=>'concept_post_save', :body=>"#{@concept.post_aspects.first.title[0..24]}:#{@concept.id}",  :project => @project).save!
-       end
-       @disposts.each do |dp|
-         @add_dispost = dp
-         break if @add_dispost.id > @add_discontent_post.id
-       end
-     elsif !params[:empty_discontent].nil?
-       @disposts.each do |dp|
-         @add_dispost = dp
-         break if @add_dispost.id > @add_discontent_post.id
-       end
-     end
-
-     respond_to do |format|
-       format.js
-     end
-   end
+   #@todo будет полностью перерабатываться на всех трех этапах
+   #def fast_discussion_concepts
+   #  @project = Core::Project.find(params[:project])
+   #  @disposts = Discontent::Post.where(:project_id => @project, :status => 4).order(:id)
+   #
+   #  @concept_post = Concept::Post.find(params[:con_id]) unless params[:con_id].nil?
+   #  @discontent_post = Discontent::Post.find(params[:dis_id]) unless params[:dis_id].nil?
+   #  @select_dispost = Discontent::Post.find(params[:sel_dis_id]) unless params[:sel_dis_id].nil?
+   #  @add_discontent_post = Discontent::Post.find(params[:add_dis_id]) unless params[:add_dis_id].nil?
+   #
+   #  user_discussion_posts = current_user.user_discussion_concepts.where(:project_id => @project).select('distinct "concept_posts".*').pluck(:id)
+   #
+   #  if params[:con_id].nil? and params[:dis_id].nil? and params[:sel_dis_id].nil? and params[:add_dis_id].nil? and params[:save_form_concept].nil?
+   #    @disposts.each do |dp|
+   #      @dispost = dp
+   #      posts_for_discussion = @dispost.dispost_concepts.posts_for_discussions(@project).by_discussions(user_discussion_posts).order('"concept_posts"."id"')
+   #      unless posts_for_discussion.empty?
+   #        @post = posts_for_discussion.first
+   #        break
+   #      end
+   #    end
+   #    @add_dispost = @disposts.first
+   #  elsif !params[:sel_dis_id].nil?
+   #    @dispost = @select_dispost
+   #    @post = @dispost.dispost_concepts.posts_for_discussions(@project).by_discussions(user_discussion_posts).order('"concept_posts"."id"').first
+   #    @add_dispost  = @select_dispost
+   #  elsif !params[:dis_id].nil? and !params[:con_id].nil?
+   #    index = @disposts.index @discontent_post
+   #    @able = true
+   #    able_save = 0
+   #    while @able do
+   #      @dispost = @disposts[index]
+   #      @posts_for_discussion = @dispost.dispost_concepts.posts_for_discussions(@project).by_discussions(user_discussion_posts).select('distinct "concept_posts".*').order('"concept_posts"."id"')
+   #      unless @posts_for_discussion.empty?
+   #        @posts_for_discussion.each do |p|
+   #          @post = p
+   #          if (@dispost == @discontent_post and @post.id > @concept_post.id) or (@dispost != @discontent_post and @post.id > 0) or @post == @posts_for_discussion.last
+   #            if params[:empty_discussion]
+   #              @able = false if @post != @posts_for_discussion.last or (@posts_for_discussion.size == 1 and @dispost != @discontent_post and @post != @concept_post) or (@dispost == @discontent_post and @post.id > @concept_post.id)
+   #              break
+   #            elsif params[:save_form]
+   #              if !params[:discussion].empty?  and @dispost == @discontent_post and able_save == 0
+   #                @comment = @concept_post.comments.create(:content => params[:discussion], :user => current_user)
+   #                able_save += 1
+   #                current_user.journals.build(:type_event=>'concept_comment'+'_save', :project => @project, :body=>"#{@comment.content[0..48]}:#{@concept_post.id}#comment_#{@comment.id}").save!
+   #                if @concept_post.user!=current_user
+   #                  current_user.journals.build(:type_event=>'my_'+'concept_comment', :user_informed => @concept_post.user, :project => @project, :body=>"#{@comment.content[0..24]}:#{@concept_post.id}#comment_#{@comment.id}", :viewed=> false).save!
+   #                end
+   #                current_user.concept_post_discussions.create(post: @concept_post, discontent_post: @discontent_post)
+   #              end
+   #              @able = false if @post != @posts_for_discussion.last or (@posts_for_discussion.size == 1 and @dispost != @discontent_post and @post != @concept_post) or (@dispost == @discontent_post and @post.id > @concept_post.id)
+   #              break
+   #            else
+   #              next
+   #            end
+   #          end
+   #        end
+   #      end
+   #      index+=1
+   #      @able = false if index == @disposts.size
+   #    end
+   #  elsif !params[:save_form_concept].nil?
+   #    if !params[:concept_post_aspect][:title].empty? and !params[:concept_post_aspect][:name].empty? and !params[:concept_post_aspect][:content].empty?
+   #      @concept = Concept::Post.new
+   #      @post_aspect = Concept::PostAspect.new(params[:concept_post_aspect])
+   #      disc = Discontent::Post.find(params[:select_for_discussion_discontents_add_concept])
+   #      @post_aspect.discontent = disc
+   #      @concept.post_aspects << @post_aspect
+   #      @concept.number_views = 0
+   #      @concept.user = current_user
+   #      @concept.status = 0
+   #      @concept.project = @project
+   #      @concept.save!
+   #      unless params[:select_for_discussion_discontents_add_concept].nil?
+   #        dp = params[:select_for_discussion_discontents_add_concept]
+   #        Concept::PostDiscontent.create(post_id: @concept.id, discontent_post_id: dp.to_i)
+   #      end
+   #      current_user.journals.build(:type_event=>'concept_post_save', :body=>"#{@concept.post_aspects.first.title[0..24]}:#{@concept.id}",  :project => @project).save!
+   #    end
+   #    @disposts.each do |dp|
+   #      @add_dispost = dp
+   #      break if @add_dispost.id > @add_discontent_post.id
+   #    end
+   #  elsif !params[:empty_discontent].nil?
+   #    @disposts.each do |dp|
+   #      @add_dispost = dp
+   #      break if @add_dispost.id > @add_discontent_post.id
+   #    end
+   #  end
+   #
+   #  respond_to do |format|
+   #    format.js
+   #  end
+   #end
 
   
 end

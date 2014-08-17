@@ -160,21 +160,21 @@ module ApplicationHelper
   def column_for_concept_type(type_fd)
     case type_fd
       when 1
-        'stat_name'
+        'status_name'
       when 2
-        'stat_content'
+        'status_content'
       when 3
-        'stat_positive'
+        'status_positive'
       when 4
-        'stat_positive_r'
+        'status_positive_r'
       when 5
-        'stat_negative'
+        'status_negative'
       when 6
-        'stat_negative_r'
+        'status_negative_r'
       when 7
-        'stat_problems'
+        'status_problems'
       when 8
-        'stat_reality'
+        'status_reality'
       else
         null
     end
@@ -266,7 +266,7 @@ module ApplicationHelper
   end
 
   def label_dis_stat(comment)
-    case comment.dis_stat
+    case comment.discontent_status
       when false
         'label-default'
       when true
@@ -276,7 +276,7 @@ module ApplicationHelper
     end
   end
   def label_con_stat(comment)
-    case comment.con_stat
+    case comment.concept_status
       when false
         'label-default'
       when true
@@ -286,7 +286,7 @@ module ApplicationHelper
     end
   end
   def label_discuss_stat(comment)
-    case comment.discuss_stat
+    case comment.discuss_status
       when false
         'label-default'
       when true
@@ -329,9 +329,9 @@ module ApplicationHelper
   end
 
   def improve_comment(post)
-    if post.imp_comment and post.imp_stage
-      comment = "#{get_class_for_improve(post.imp_stage)}::Comment".constantize.find(post.imp_comment)
-      case post.imp_stage
+    if post.improve_comment and post.improve_stage
+      comment = "#{get_class_for_improve(post.improve_stage)}::Comment".constantize.find(post.improve_comment)
+      case post.improve_stage
         when 1
           "| Доработано из " + (link_to "предложения ", "/project/#{@project.id}/life_tape/posts?asp=#{comment.post.discontent_aspects.first.id}#comment_#{comment.id}") + (link_to comment.user, user_path(@project, comment.user))
         when 2
@@ -343,8 +343,8 @@ module ApplicationHelper
   end
 
   def link_for_improve(comment)
-    com_class = get_stage_for_improve(comment.get_class)
-    case com_class
+    comment_class = get_stage_for_improve(comment.get_class)
+    case comment_class
       when 1
         link_to "/project/#{@project.id}/life_tape/posts?asp=#{comment.post.discontent_aspects.first.id}#comment_#{comment.id}" do
           content_tag :span, 'Источник', class: 'label label-primary'
@@ -361,7 +361,7 @@ module ApplicationHelper
   end
 
   def comment_stat_color(comment)
-    if comment.discuss_stat
+    if comment.discuss_status
       'discuss_comment'
     elsif comment.user.role_stat == 2
       'expert_comment'
@@ -417,28 +417,11 @@ module ApplicationHelper
     response
   end
 
-  def events_for_add_comment(project, current_user, name_of_comment_for_param, comment, post, main_comment, main_comment_answer)
-    current_user.journals.build(:type_event=>name_of_comment_for_param+'_save', :project => project,
-                                :body=>"#{trim_content(comment.content)}", :body2=>trim_content(field_for_journal(post)),
-                                :first_id=> (post.instance_of? LifeTape::Post) ? post.discontent_aspects.first.id : post.id, :second_id => comment.id).save!
-
-    if post.user!=current_user
-      current_user.journals.build(:type_event=>'my_'+name_of_comment_for_param, :user_informed => post.user, :project => project,
-                                  :body=>"#{trim_content(comment.content)}", :body2=>trim_content(field_for_journal(post)),
-                                  :first_id=> (post.instance_of? LifeTape::Post) ? post.discontent_aspects.first.id : post.id, :second_id => comment.id,
-                                  :personal=> true, :viewed=> false).save!
-    end
-    if main_comment and main_comment.user!=current_user
-      current_user.journals.build(:type_event=>'reply_'+name_of_comment_for_param, :user_informed =>main_comment.user, :project => project,
-                                  :body=>"#{trim_content(comment.content)}", :body2=>trim_content(main_comment.content),
-                                  :first_id=> (post.instance_of? LifeTape::Post) ? post.discontent_aspects.first.id : post.id, :second_id => comment.id,
-                                  :personal=> true, :viewed=> false).save!
-    end
-    if main_comment_answer and main_comment_answer.user!=current_user
-      current_user.journals.build(:type_event=>'reply_'+name_of_comment_for_param, :user_informed => main_comment_answer.user, :project => project,
-                                  :body=>"#{trim_content(comment.content)}", :body2=>trim_content(main_comment_answer.content),
-                                  :first_id=> (post.instance_of? LifeTape::Post) ? post.discontent_aspects.first.id : post.id, :second_id => comment.id,
-                                  :personal=> true, :viewed=> false).save!
+  def role_label(post)
+    if post.user.boss?
+      content_tag :span, 'MD', class: 'label label-danger'
+    elsif post.user.role_expert?
+      content_tag :span, 'Эксперт', class: 'label label-success'
     end
   end
 

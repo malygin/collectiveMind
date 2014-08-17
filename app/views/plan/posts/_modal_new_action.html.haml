@@ -21,7 +21,7 @@
           .color-teal=@post_stage.name
       .modal-body
         = form_for action, :url => {:project => @project.id, :con_id => @post_aspect.id, :act_id => action ? action.id : nil, :stage_id => @post_stage ? @post_stage.id : nil, :view_concept => @view_concept, :action => action.persisted? ? 'update_action' : 'create_action'}, :remote => true, :method => :put do |f|
-          = render 'shared/error_messages', :object => f.object
+          = render 'shared/notice_messages', :object => f.object
           #mod2
           .form-group(style="margin-left:0;")
             %label{:for => "name_stage"} Название мероприятия

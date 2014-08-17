@@ -39,6 +39,10 @@ class Discontent::Aspect < ActiveRecord::Base
     end
   }
 
+  def life_tape_post
+    self.life_tape_posts.first
+  end
+
   def voted(user)
     self.voted_users.where(:id => user)
   end
@@ -83,22 +87,22 @@ class Discontent::Aspect < ActiveRecord::Base
     where("discontent_posts.status = ?", 4)
   end
 
-  def imp_dis_comments(stage)
+  def improve_discontent_comments(stage)
     if stage == 2
       Discontent::Comment.joins("INNER JOIN discontent_posts ON discontent_comments.post_id = discontent_posts.id").
       joins("INNER JOIN discontent_post_aspects ON discontent_post_aspects.post_id = discontent_posts.id").
-      where("discontent_post_aspects.aspect_id = ? and discontent_comments.dis_stat = 't'", self.id)
+      where("discontent_post_aspects.aspect_id = ? and discontent_comments.discontent_status = 't'", self.id)
     elsif stage == 3
       Discontent::Comment.joins("INNER JOIN discontent_posts ON discontent_comments.post_id = discontent_posts.id").
       joins("INNER JOIN discontent_post_aspects ON discontent_post_aspects.post_id = discontent_posts.id").
-      where("discontent_post_aspects.aspect_id = ? and discontent_comments.con_stat = 't'", self.id)
+      where("discontent_post_aspects.aspect_id = ? and discontent_comments.concept_status = 't'", self.id)
     end
   end
-  def imp_con_comments
+  def improve_concept_comments
     Concept::Comment.joins("INNER JOIN concept_posts ON concept_comments.post_id = concept_posts.id").
     joins("INNER JOIN concept_post_discontents ON concept_post_discontents.post_id = concept_posts.id").
     joins("INNER JOIN discontent_post_aspects ON discontent_post_aspects.post_id = concept_post_discontents.discontent_post_id").
-    where("discontent_post_aspects.aspect_id = ? and concept_comments.con_stat = 't'", self.id)
+    where("discontent_post_aspects.aspect_id = ? and concept_comments.concept_status = 't'", self.id)
   end
 
 end

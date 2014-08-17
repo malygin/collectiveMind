@@ -11,15 +11,15 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140731064841) do
+ActiveRecord::Schema.define(:version => 20140816201656) do
 
   create_table "answers", :force => true do |t|
-    t.string   "text"
-    t.integer  "raiting",     :default => 0
+    t.string   "text",        :limit => 700
+    t.integer  "raiting",                    :default => 0
     t.integer  "user_id"
     t.integer  "question_id"
-    t.datetime "created_at",                 :null => false
-    t.datetime "updated_at",                 :null => false
+    t.datetime "created_at",                                :null => false
+    t.datetime "updated_at",                                :null => false
   end
 
   add_index "answers", ["created_at"], :name => "index_answers_on_created_at"
@@ -65,18 +65,55 @@ ActiveRecord::Schema.define(:version => 20140731064841) do
     t.integer  "user_id"
     t.integer  "post_id"
     t.boolean  "useful"
-    t.datetime "created_at",                      :null => false
-    t.datetime "updated_at",                      :null => false
-    t.boolean  "censored",     :default => false
+    t.datetime "created_at",                           :null => false
+    t.datetime "updated_at",                           :null => false
+    t.boolean  "censored",          :default => false
     t.integer  "comment_id"
-    t.boolean  "dis_stat"
-    t.boolean  "con_stat"
-    t.boolean  "discuss_stat"
+    t.boolean  "discontent_status"
+    t.boolean  "concept_status"
+    t.boolean  "discuss_status"
   end
 
   add_index "concept_comments", ["created_at"], :name => "index_concept_comments_on_created_at"
   add_index "concept_comments", ["post_id"], :name => "index_concept_comments_on_post_id"
   add_index "concept_comments", ["user_id"], :name => "index_concept_comments_on_user_id"
+
+  create_table "concept_essays", :force => true do |t|
+    t.integer  "user_id"
+    t.text     "content"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "concept_final_voitings", :force => true do |t|
+    t.integer  "score"
+    t.integer  "forecast_task_id"
+    t.integer  "user_id"
+    t.datetime "created_at",       :null => false
+    t.datetime "updated_at",       :null => false
+  end
+
+  add_index "concept_final_voitings", ["forecast_task_id"], :name => "index_concept_final_voitings_on_forecast_task_id"
+  add_index "concept_final_voitings", ["user_id"], :name => "index_concept_final_voitings_on_user_id"
+
+  create_table "concept_forecast_tasks", :force => true do |t|
+    t.integer  "user_id"
+    t.text     "content"
+    t.text     "description"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+  end
+
+  create_table "concept_forecasts", :force => true do |t|
+    t.integer  "forecast_task_id"
+    t.integer  "position"
+    t.integer  "user_id"
+    t.datetime "created_at",       :null => false
+    t.datetime "updated_at",       :null => false
+  end
+
+  add_index "concept_forecasts", ["forecast_task_id"], :name => "index_concept_forecasts_on_forecast_task_id"
+  add_index "concept_forecasts", ["user_id"], :name => "index_concept_forecasts_on_user_id"
 
   create_table "concept_notes", :force => true do |t|
     t.text     "content"
@@ -89,26 +126,26 @@ ActiveRecord::Schema.define(:version => 20140731064841) do
 
   create_table "concept_post_aspect_discontents", :force => true do |t|
     t.integer  "post_aspect_id"
-    t.string   "name"
+    t.string   "name",               :limit => 1000
     t.text     "content"
     t.integer  "discontent_post_id"
     t.text     "positive"
     t.text     "negative"
     t.text     "control"
-    t.datetime "created_at",         :null => false
-    t.datetime "updated_at",         :null => false
+    t.datetime "created_at",                         :null => false
+    t.datetime "updated_at",                         :null => false
   end
 
   create_table "concept_post_aspects", :force => true do |t|
     t.integer  "discontent_aspect_id"
     t.integer  "concept_post_id"
-    t.datetime "created_at",                          :null => false
-    t.datetime "updated_at",                          :null => false
+    t.datetime "created_at",           :null => false
+    t.datetime "updated_at",           :null => false
     t.text     "positive"
     t.text     "negative"
     t.text     "control"
-    t.text     "name",                 :limit => 255
-    t.text     "content",              :limit => 255
+    t.text     "name"
+    t.text     "content"
     t.text     "reality"
     t.text     "problems"
     t.text     "positive_r"
@@ -176,17 +213,17 @@ ActiveRecord::Schema.define(:version => 20140731064841) do
     t.integer  "project_id"
     t.text     "content"
     t.boolean  "censored",          :default => false
-    t.boolean  "stat_name"
-    t.boolean  "stat_content"
-    t.boolean  "stat_positive"
-    t.boolean  "stat_positive_r"
-    t.boolean  "stat_negative"
-    t.boolean  "stat_negative_r"
-    t.boolean  "stat_problems"
-    t.boolean  "stat_reality"
-    t.integer  "imp_comment"
-    t.integer  "imp_stage"
-    t.boolean  "discuss_stat"
+    t.boolean  "status_name"
+    t.boolean  "status_content"
+    t.boolean  "status_positive"
+    t.boolean  "status_positive_r"
+    t.boolean  "status_negative"
+    t.boolean  "status_negative_r"
+    t.boolean  "status_problems"
+    t.boolean  "status_reality"
+    t.integer  "improve_comment"
+    t.integer  "improve_stage"
+    t.boolean  "discuss_status"
   end
 
   add_index "concept_posts", ["created_at"], :name => "index_concept_posts_on_created_at"
@@ -323,13 +360,13 @@ ActiveRecord::Schema.define(:version => 20140731064841) do
     t.text     "content"
     t.integer  "user_id"
     t.integer  "post_id"
-    t.datetime "created_at",                      :null => false
-    t.datetime "updated_at",                      :null => false
-    t.boolean  "censored",     :default => false
+    t.datetime "created_at",                           :null => false
+    t.datetime "updated_at",                           :null => false
+    t.boolean  "censored",          :default => false
     t.integer  "comment_id"
-    t.boolean  "dis_stat"
-    t.boolean  "con_stat"
-    t.boolean  "discuss_stat"
+    t.boolean  "discontent_status"
+    t.boolean  "concept_status"
+    t.boolean  "discuss_status"
   end
 
   create_table "discontent_notes", :force => true do |t|
@@ -410,6 +447,7 @@ ActiveRecord::Schema.define(:version => 20140731064841) do
     t.integer  "project_id"
     t.integer  "aspect_id"
     t.integer  "replace_id"
+    t.integer  "original_id"
     t.integer  "style"
     t.boolean  "censored",           :default => false
     t.integer  "discontent_post_id"
@@ -417,9 +455,9 @@ ActiveRecord::Schema.define(:version => 20140731064841) do
     t.boolean  "status_content"
     t.boolean  "status_whered"
     t.boolean  "status_whend"
-    t.integer  "imp_comment"
-    t.integer  "imp_stage"
-    t.boolean  "discuss_stat"
+    t.integer  "improve_comment"
+    t.integer  "improve_stage"
+    t.boolean  "discuss_status"
   end
 
   add_index "discontent_posts", ["aspect_id"], :name => "index_discontent_posts_on_aspect_id"
@@ -451,13 +489,13 @@ ActiveRecord::Schema.define(:version => 20140731064841) do
     t.integer  "user_id"
     t.integer  "post_id"
     t.text     "content"
-    t.datetime "created_at",                      :null => false
-    t.datetime "updated_at",                      :null => false
-    t.boolean  "censored",     :default => false
+    t.datetime "created_at",                           :null => false
+    t.datetime "updated_at",                           :null => false
+    t.boolean  "censored",          :default => false
     t.integer  "comment_id"
-    t.boolean  "dis_stat"
-    t.boolean  "con_stat"
-    t.boolean  "discuss_stat"
+    t.boolean  "discontent_status"
+    t.boolean  "concept_status"
+    t.boolean  "discuss_status"
   end
 
   add_index "essay_comments", ["post_id"], :name => "index_essay_comments_on_post_id"
@@ -502,13 +540,13 @@ ActiveRecord::Schema.define(:version => 20140731064841) do
     t.integer  "user_id"
     t.integer  "post_id"
     t.text     "content"
-    t.datetime "created_at",                      :null => false
-    t.datetime "updated_at",                      :null => false
-    t.boolean  "censored",     :default => false
+    t.datetime "created_at",                           :null => false
+    t.datetime "updated_at",                           :null => false
+    t.boolean  "censored",          :default => false
     t.integer  "comment_id"
-    t.boolean  "dis_stat"
-    t.boolean  "con_stat"
-    t.boolean  "discuss_stat"
+    t.boolean  "discontent_status"
+    t.boolean  "concept_status"
+    t.boolean  "discuss_status"
   end
 
   add_index "estimate_comments", ["post_id"], :name => "index_estimate_comments_on_post_id"
@@ -559,6 +597,12 @@ ActiveRecord::Schema.define(:version => 20140731064841) do
     t.float    "ozf4"
     t.float    "ozs4"
     t.float    "on4"
+    t.integer  "nep1"
+    t.integer  "nep2"
+    t.integer  "nep3"
+    t.integer  "nep4"
+    t.text     "nep"
+    t.integer  "all_grade"
     t.boolean  "first_stage"
     t.integer  "plan_post_first_cond_id"
   end
@@ -709,14 +753,14 @@ ActiveRecord::Schema.define(:version => 20140731064841) do
   add_index "expert_news_posts", ["project_id"], :name => "index_expert_news_posts_on_project_id"
 
   create_table "frustration_comments", :force => true do |t|
-    t.string   "content"
+    t.string   "content",                :limit => 500
     t.integer  "user_id"
     t.integer  "frustration_id"
-    t.datetime "created_at",                                :null => false
-    t.datetime "updated_at",                                :null => false
-    t.boolean  "negative",               :default => true
+    t.datetime "created_at",                                               :null => false
+    t.datetime "updated_at",                                               :null => false
+    t.boolean  "negative",                              :default => true
     t.string   "comment_admin"
-    t.boolean  "trash",                  :default => false
+    t.boolean  "trash",                                 :default => false
     t.integer  "frustration_comment_id"
     t.integer  "useful_frustration_id"
   end
@@ -747,28 +791,28 @@ ActiveRecord::Schema.define(:version => 20140731064841) do
   add_index "frustration_forecasts", ["user_id"], :name => "index_frustration_forecasts_on_user_id"
 
   create_table "frustrations", :force => true do |t|
-    t.string   "what"
-    t.string   "wherin"
-    t.string   "when"
-    t.string   "what_old"
-    t.string   "wherin_old"
+    t.string   "what",             :limit => 500
+    t.string   "wherin",           :limit => 500
+    t.string   "when",             :limit => 500
+    t.string   "what_old",         :limit => 500
+    t.string   "wherin_old",       :limit => 500
     t.string   "when_old"
     t.integer  "user_id"
-    t.integer  "status",           :default => 0
-    t.datetime "created_at",                          :null => false
-    t.datetime "updated_at",                          :null => false
-    t.string   "old_content"
+    t.integer  "status",                          :default => 0
+    t.datetime "created_at",                                         :null => false
+    t.datetime "updated_at",                                         :null => false
+    t.string   "old_content",      :limit => 500
     t.integer  "negative_user_id"
     t.integer  "struct_user_id"
     t.datetime "structuring_date"
     t.string   "comment_admin"
-    t.boolean  "trash",            :default => false
-    t.string   "content_text"
-    t.string   "content_text_old"
-    t.integer  "project_id",       :default => 1
-    t.string   "what_expert"
-    t.string   "wherin_expert"
-    t.string   "when_expert"
+    t.boolean  "trash",                           :default => false
+    t.string   "content_text",     :limit => 500
+    t.string   "content_text_old", :limit => 500
+    t.integer  "project_id",                      :default => 1
+    t.string   "what_expert",      :limit => 500
+    t.string   "wherin_expert",    :limit => 500
+    t.string   "when_expert",      :limit => 500
   end
 
   add_index "frustrations", ["created_at"], :name => "index_frustrations_on_created_at"
@@ -864,13 +908,13 @@ ActiveRecord::Schema.define(:version => 20140731064841) do
     t.text     "content"
     t.integer  "user_id"
     t.integer  "post_id"
-    t.datetime "created_at",                      :null => false
-    t.datetime "updated_at",                      :null => false
-    t.boolean  "censored",     :default => false
+    t.datetime "created_at",                           :null => false
+    t.datetime "updated_at",                           :null => false
+    t.boolean  "censored",          :default => false
     t.integer  "comment_id"
-    t.boolean  "dis_stat"
-    t.boolean  "con_stat"
-    t.boolean  "discuss_stat"
+    t.boolean  "discontent_status"
+    t.boolean  "concept_status"
+    t.boolean  "discuss_status"
   end
 
   add_index "life_tape_comments", ["created_at"], :name => "index_life_tape_comments_on_created_at"
@@ -943,13 +987,13 @@ ActiveRecord::Schema.define(:version => 20140731064841) do
     t.integer  "user_id"
     t.integer  "post_id"
     t.text     "content"
-    t.datetime "created_at",                      :null => false
-    t.datetime "updated_at",                      :null => false
-    t.boolean  "censored",     :default => false
+    t.datetime "created_at",                           :null => false
+    t.datetime "updated_at",                           :null => false
+    t.boolean  "censored",          :default => false
     t.integer  "comment_id"
-    t.boolean  "dis_stat"
-    t.boolean  "con_stat"
-    t.boolean  "discuss_stat"
+    t.boolean  "discontent_status"
+    t.boolean  "concept_status"
+    t.boolean  "discuss_status"
   end
 
   add_index "plan_comments", ["post_id"], :name => "index_plan_comments_on_post_id"
@@ -992,11 +1036,11 @@ ActiveRecord::Schema.define(:version => 20140731064841) do
     t.text     "control"
     t.text     "problems"
     t.text     "reality"
+    t.text     "name"
+    t.text     "content"
+    t.datetime "created_at",             :null => false
+    t.datetime "updated_at",             :null => false
     t.integer  "first_stage"
-    t.text     "name",                   :limit => 255
-    t.text     "content",                :limit => 255
-    t.datetime "created_at",                            :null => false
-    t.datetime "updated_at",                            :null => false
     t.integer  "concept_post_aspect_id"
     t.text     "positive_r"
     t.text     "negative_r"
@@ -1019,7 +1063,7 @@ ActiveRecord::Schema.define(:version => 20140731064841) do
     t.text     "problems_with_resources"
     t.text     "reality"
     t.string   "name"
-    t.string   "content"
+    t.text     "content"
     t.datetime "created_at",              :null => false
     t.datetime "updated_at",              :null => false
   end
@@ -1127,6 +1171,17 @@ ActiveRecord::Schema.define(:version => 20140731064841) do
     t.datetime "updated_at", :null => false
   end
 
+  create_table "projects", :force => true do |t|
+    t.string   "name"
+    t.string   "description"
+    t.datetime "begin1st"
+    t.datetime "end1st"
+    t.datetime "begin1stvote"
+    t.datetime "end1stvote"
+    t.datetime "created_at",   :null => false
+    t.datetime "updated_at",   :null => false
+  end
+
   create_table "question_comment_votings", :force => true do |t|
     t.integer  "user_id"
     t.integer  "comment_id"
@@ -1170,11 +1225,11 @@ ActiveRecord::Schema.define(:version => 20140731064841) do
   add_index "question_posts", ["project_id"], :name => "index_questions_posts_on_project_id"
 
   create_table "questions", :force => true do |t|
-    t.string   "text"
-    t.integer  "raiting",    :default => 0
+    t.string   "text",       :limit => 700
+    t.integer  "raiting",                   :default => 0
     t.integer  "user_id"
-    t.datetime "created_at",                :null => false
-    t.datetime "updated_at",                :null => false
+    t.datetime "created_at",                               :null => false
+    t.datetime "updated_at",                               :null => false
   end
 
   add_index "questions", ["created_at"], :name => "index_questions_on_created_at"
@@ -1187,6 +1242,63 @@ ActiveRecord::Schema.define(:version => 20140731064841) do
 
   add_index "questions_users", ["question_id"], :name => "index_questions_users_on_question_id"
   add_index "questions_users", ["user_id"], :name => "index_questions_users_on_user_id"
+
+  create_table "test_answers", :force => true do |t|
+    t.text     "name"
+    t.integer  "type_answer"
+    t.integer  "test_question_id"
+    t.datetime "created_at",       :null => false
+    t.datetime "updated_at",       :null => false
+  end
+
+  add_index "test_answers", ["test_question_id"], :name => "index_test_answers_on_test_question_id"
+
+  create_table "test_attempts", :force => true do |t|
+    t.integer  "test_id"
+    t.integer  "user_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  add_index "test_attempts", ["test_id"], :name => "index_test_attempts_on_test_id"
+  add_index "test_attempts", ["user_id"], :name => "index_test_attempts_on_user_id"
+
+  create_table "test_question_attempts", :force => true do |t|
+    t.integer  "test_attempt_id"
+    t.integer  "test_question_id"
+    t.string   "answer"
+    t.datetime "created_at",       :null => false
+    t.datetime "updated_at",       :null => false
+  end
+
+  add_index "test_question_attempts", ["test_attempt_id"], :name => "index_test_question_attempts_on_test_attempt_id"
+  add_index "test_question_attempts", ["test_question_id"], :name => "index_test_question_attempts_on_test_question_id"
+
+  create_table "test_questions", :force => true do |t|
+    t.text     "name"
+    t.integer  "type_question"
+    t.integer  "test_id"
+    t.datetime "created_at",     :null => false
+    t.datetime "updated_at",     :null => false
+    t.integer  "order_question"
+  end
+
+  add_index "test_questions", ["order_question"], :name => "index_test_questions_on_order_question"
+  add_index "test_questions", ["test_id"], :name => "index_test_questions_on_test_id"
+
+  create_table "tests", :force => true do |t|
+    t.string   "name"
+    t.string   "description"
+    t.integer  "project_id"
+    t.datetime "begin_date"
+    t.datetime "end_date"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+    t.text     "preview"
+  end
+
+  add_index "tests", ["begin_date"], :name => "index_tests_on_begin_date"
+  add_index "tests", ["end_date"], :name => "index_tests_on_end_date"
 
   create_table "user_award_clicks", :force => true do |t|
     t.integer  "user_id"

@@ -77,18 +77,18 @@ module Discontent::PostsHelper
     end
   end
 
-  def column_for_type_field(type_fd)
-    case type_fd
-      when 1
-        'status_content'
-      when 2
-        'status_whered'
-      when 3
-        'status_whend'
-      else
-        nil
-    end
-  end
+  #def column_for_type_field(type_fd)
+  #  case type_fd
+  #    when 1
+  #      'status_content'
+  #    when 2
+  #      'status_whered'
+  #    when 3
+  #      'status_whend'
+  #    else
+  #      nil
+  #  end
+  #end
   def validate_dispost(pa,aspects)
     if pa[:content].empty?
       flash[:content]='Заполните поле "что"'

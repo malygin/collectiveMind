@@ -35,15 +35,14 @@ module BasePost  extend ActiveSupport::Concern
     	content
     end
 
-     def self.order_by_param(order)
-       if order =='popular'
-         popular_posts
-       else
-         created_order
-       end
+    def self.order_by_param(order)
+      if order =='popular'
+        popular_posts
+      else
+        created_order
+      end
 
-     end
- 
+    end
 
   end
 end

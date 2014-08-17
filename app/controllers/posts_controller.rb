@@ -30,7 +30,7 @@ class PostsController < ApplicationController
     end
   end
 
-  def journals_viewed
+  def journal_viewed_life_tape
     if params[:viewed]
       Journal.events_for_content(@project, current_user, @aspect.id).update_all("viewed = 'true'")
       @my_journals_count = @my_journals_count - 1
@@ -43,10 +43,6 @@ class PostsController < ApplicationController
 
   def comment_model
     "#{self.class.name.deconstantize}::Comment".constantize
-  end
-
-  def note_model
-    "#{self.class.name.deconstantize}::PostNote".constantize
   end
 
   def name_of_model_for_param
@@ -87,9 +83,30 @@ class PostsController < ApplicationController
     comment_user = main_comment_answer.user unless main_comment_answer.nil?
     content = comment_user ? "#{comment_user.to_s}, " + params[name_of_comment_for_param][:content] : params[name_of_comment_for_param][:content]
     unless  params[name_of_comment_for_param][:content]==''
-      @comment = post.comments.create(:content => content, :user =>current_user,:dis_stat => params[name_of_comment_for_param][:dis_stat],:con_stat => params[name_of_comment_for_param][:con_stat], :comment_id => @main_comment ? @main_comment.id : nil)
+      @comment = post.comments.create(:content => content, :user =>current_user,:discontent_status => params[name_of_comment_for_param][:discontent_status],:concept_status => params[name_of_comment_for_param][:concept_status], :comment_id => @main_comment ? @main_comment.id : nil)
       #@todo новости и информирование авторов
-      events_for_add_comment(@project, current_user,name_of_comment_for_param, @comment, post, @main_comment,main_comment_answer)
+      current_user.journals.build(:type_event=>name_of_comment_for_param+'_save', :project => @project,
+                                  :body=>"#{trim_content(@comment.content)}", :body2=>trim_content(field_for_journal(post)),
+                                  :first_id=> (post.instance_of? LifeTape::Post) ? post.discontent_aspects.first.id : post.id, :second_id => @comment.id).save!
+
+      if post.user!=current_user
+        current_user.journals.build(:type_event=>'my_'+name_of_comment_for_param, :user_informed => post.user, :project => @project,
+                                    :body=>"#{trim_content(@comment.content)}", :body2=>trim_content(field_for_journal(post)),
+                                    :first_id=> (post.instance_of? LifeTape::Post) ? post.discontent_aspects.first.id : post.id, :second_id => @comment.id,
+                                    :personal=> true, :viewed=> false).save!
+      end
+      if @main_comment and @main_comment.user!=current_user
+        current_user.journals.build(:type_event=>'reply_'+name_of_comment_for_param, :user_informed =>main_comment.user, :project => @project,
+                                    :body=>"#{trim_content(@comment.content)}", :body2=>trim_content(@main_comment.content),
+                                    :first_id=> (post.instance_of? LifeTape::Post) ? post.discontent_aspects.first.id : post.id, :second_id => @comment.id,
+                                    :personal=> true, :viewed=> false).save!
+      end
+      if main_comment_answer and main_comment_answer.user!=current_user
+        current_user.journals.build(:type_event=>'reply_'+name_of_comment_for_param, :user_informed => main_comment_answer.user, :project => @project,
+                                    :body=>"#{trim_content(@comment.content)}", :body2=>trim_content(main_comment_answer.content),
+                                    :first_id=> (post.instance_of? LifeTape::Post) ? post.discontent_aspects.first.id : post.id, :second_id => @comment.id,
+                                    :personal=> true, :viewed=> false).save!
+      end
     end
     respond_to do |format|
       format.js
@@ -108,17 +125,17 @@ class PostsController < ApplicationController
     end
   end
 
-  def comment_stat
+  def comment_status
     @project = Core::Project.find(params[:project])
     @post = current_model.find(params[:id])
     #@todo безопасность
-    if params[:com_stage]
-      @comment = "#{get_class_for_improve(params[:com_stage].to_i)}::Comment".constantize.find(params[:comment_id]) unless params[:comment_id].nil?
+    if params[:comment_stage]
+      @comment = "#{get_class_for_improve(params[:comment_stage].to_i)}::Comment".constantize.find(params[:comment_id]) unless params[:comment_id].nil?
     end
-    @comment.toggle!(:dis_stat) if params[:dis_stat]
-    @comment.toggle!(:con_stat) if params[:con_stat]
-    @comment.toggle!(:discuss_stat) if params[:discuss_stat]
-    if @comment.discuss_stat
+    @comment.toggle!(:discontent_status) if params[:discontent_status]
+    @comment.toggle!(:concept_status) if params[:concept_status]
+    @comment.toggle!(:discuss_status) if params[:discuss_status]
+    if @comment.discuss_status
       current_user.journals.build(:type_event=>name_of_comment_for_param+'_discuss_stat', :project => @project,
                                   :body=>"#{trim_content(@comment.content)}", :body2=>trim_content(field_for_journal(@post)),
                                   :first_id=> (@post.instance_of? LifeTape::Post) ? @post.discontent_aspects.first.id : @post.id, :second_id => @comment.id).save!
@@ -134,12 +151,12 @@ class PostsController < ApplicationController
       format.js
     end
   end
-  def discuss_stat
+  def discuss_status
     @project = Core::Project.find(params[:project])
     @post = current_model.find(params[:id])
-    if params[:discuss_stat]
-      @post.toggle!(:discuss_stat)
-      if @post.discuss_stat
+    if params[:discuss_status]
+      @post.toggle!(:discuss_status)
+      if @post.discuss_status
         current_user.journals.build(:type_event=>name_of_model_for_param+'_discuss_stat', :project => @project,
                                   :body=>"#{trim_content(@post.content)}", :first_id=> @post.id).save!
         if @post.user!=current_user

@@ -24,31 +24,28 @@ class Journal < ActiveRecord::Base
     Journal.where(' project_id = ? AND user_informed = ? AND viewed =? AND personal =? AND first_id=?',project_id,  user_id, false, true, first_id).order('created_at DESC')
   end
 
-
-
   def self.last_event_for(user, project_id)
     Journal.where(' project_id = ? AND personal = ? ',project_id, false).where("user_id= (?)", user.id).order('created_at DESC').first
 
   end
 
   def self.events_for_transfer_comment(project, comment, aspect_old_id, aspect_id)
-    journal_comment = Journal.where(:type_event => 'life_tape_comment_save', :project_id => project.id, :user_id => comment.user, :first_id => aspect_old_id, :second_id => comment.id).first
-    my_journal_comment = Journal.where(:type_event => 'my_life_tape_comment', :project_id => project.id, :user_id => comment.user, :first_id => aspect_old_id, :second_id => comment.id).first
-    reply_journal_comment = Journal.where(:type_event => 'reply_life_tape_comment', :project_id => project.id, :user_id => comment.user, :first_id => aspect_old_id, :second_id => comment.id).first
-    journal_comment.update_attributes(first_id: aspect_id) unless journal_comment.nil?
-    my_journal_comment.update_attributes(first_id: aspect_id) unless my_journal_comment.nil?
-    reply_journal_comment.update_attributes(first_id: aspect_id) unless reply_journal_comment.nil?
-
+    self.journal_comment_update(project, comment, aspect_old_id, aspect_id)
     unless comment.comments.nil?
       comment.comments.each do |c|
-        journal_comment = Journal.where(:type_event => 'life_tape_comment_save', :project_id => project.id, :user_id => c.user, :first_id => aspect_old_id, :second_id => c.id).first
-        my_journal_comment = Journal.where(:type_event => 'my_life_tape_comment', :project_id => project.id, :user_id => c.user, :first_id => aspect_old_id, :second_id => c.id).first
-        reply_journal_comment = Journal.where(:type_event => 'reply_life_tape_comment', :project_id => project.id, :user_id => c.user, :first_id => aspect_old_id, :second_id => c.id).first
-        journal_comment.update_attributes(first_id: aspect_id) unless journal_comment.nil?
-        my_journal_comment.update_attributes(first_id: aspect_id) unless my_journal_comment.nil?
-        reply_journal_comment.update_attributes(first_id: aspect_id) unless reply_journal_comment.nil?
+        self.journal_comment_update(project, c, aspect_old_id, aspect_id)
       end
     end
   end
+
+  private
+    def self.journal_comment_update(project, comment, aspect_old_id, aspect_id)
+      journal_comment = self.where(:type_event => 'life_tape_comment_save', :project_id => project.id, :user_id => comment.user, :first_id => aspect_old_id, :second_id => comment.id).first
+      my_journal_comment = self.where(:type_event => 'my_life_tape_comment', :project_id => project.id, :user_id => comment.user, :first_id => aspect_old_id, :second_id => comment.id).first
+      reply_journal_comment = self.where(:type_event => 'reply_life_tape_comment', :project_id => project.id, :user_id => comment.user, :first_id => aspect_old_id, :second_id => comment.id).first
+      journal_comment.update_attributes(first_id: aspect_id) unless journal_comment.nil?
+      my_journal_comment.update_attributes(first_id: aspect_id) unless my_journal_comment.nil?
+      reply_journal_comment.update_attributes(first_id: aspect_id) unless reply_journal_comment.nil?
+    end
 
 end

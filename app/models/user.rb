@@ -16,8 +16,7 @@ class User < ActiveRecord::Base
   attr_accessible :login, :nickname, :anonym,  :secret,
    :dateActivation, :dateLastEnter, :dateRegistration, :email, :faculty, :group,
     :name, :string, :string, :surname, :validate, :vkid,
-    :score,  :score_a, :score_g, :score_o,
-    :admin, :expert, :type_user
+    :score,  :score_a, :score_g, :score_o, :type_user
 
   has_many :core_project_scores, :class_name => 'Core::ProjectScore'
 
@@ -27,9 +26,6 @@ class User < ActiveRecord::Base
   has_many :help_posts, :class_name => 'Help::Post', :through => :help_questions, :source => :post
 
   has_many :journals
-  
-  has_and_belongs_to_many :questions
-  has_and_belongs_to_many :answers
 
   has_many :life_tape_comment_voitings
   has_many :life_tape_comments, :through => :life_type_comment_voitings
@@ -203,8 +199,8 @@ class User < ActiveRecord::Base
         if h[:post].instance_of? Discontent::Post
           self.add_score_by_type(h[:project],25, :score_g)
           self.journals.build(:type_event=>'my_add_score_discontent', :project => h[:project], :user_informed => self, :body=>"25", :first_id => h[:post].id, :body2 => trim_content(h[:post].content), :viewed=> false, :personal=> true).save!
-          if h[:post].imp_comment
-            comment  = "#{get_class_for_improve(h[:post].imp_stage)}::Comment".constantize.find(h[:post].imp_comment)
+          if h[:post].improve_comment
+            comment  = "#{get_class_for_improve(h[:post].improve_stage)}::Comment".constantize.find(h[:post].improve_comment)
             comment.user.add_score_by_type(h[:project], 10, :score_g)
             self.journals.build(:type_event=>'my_add_score_discontent_improve', :project => h[:project], :user_informed =>comment.user, :body=>"10", :first_id => h[:post].id, :body2 => trim_content(h[:post].content), :viewed=> false, :personal=> true).save!
           end
@@ -229,10 +225,13 @@ class User < ActiveRecord::Base
   end
 
   def can_vote_for(stage, project)
-      if project.status == 2 and ((project.stage1.to_i - self.voted_aspects.by_project(project).size) != 0)
-         true
-      end
-      false
+    if project.status == 2 and ((project.stage1.to_i - self.voted_aspects.by_project(project).size) != 0)
+      true
+    end
+    if project.status == 6 and !project.get_united_posts_for_vote(self).empty?
+      true
+    end
+    false
   end
 
   private
