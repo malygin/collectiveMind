@@ -2,6 +2,7 @@
 #= require jquery_ujs
 #= require_tree
 #= require jquery.ui.all
+#= require bootstrap/bootstrap.min
 #= require autocomplete-rails
 #= require bootstrap-wysihtml5/b3
 #= require bootstrap-wysihtml5/locales/ru-RU
@@ -14,15 +15,13 @@
 #= require totop/jquery.ui.totop
 #= require totop/easing
 
-#= require bootstrap/dropdown
-#= require bootstrap/modal
-#= require bootstrap/tab
-#= require bootstrap/carousel
+
+
 
 $ ->
   $('textarea.comment-textarea').on 'keyup', ->
     activate_button(this)
-
+  $('.tooltips').tooltip()
   $("select.estimate_select").each ->
     switch $(this).val()
       when '1.0'
@@ -72,7 +71,7 @@ $ ->
     $(this).datepicker "hide"
     return
 
-  $('.userscore').editable()
+#  $('.userscore').editable()
 
   $select = $("#selectize_tag").selectize
     labelField: "show_content"
