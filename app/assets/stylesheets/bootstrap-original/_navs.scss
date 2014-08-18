@@ -29,7 +29,7 @@
 
     // Disabled state sets text to gray and nukes hover/tab effects
     &.disabled > a {
-      color: $nav-disabled-link-color;
+      color: $nav-disabled-link-color !important;
 
       &:hover,
       &:focus {

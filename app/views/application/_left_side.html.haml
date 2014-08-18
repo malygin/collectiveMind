@@ -1,9 +1,16 @@
 %ul#side-nav.side-nav
+   %li
+      %a
+         %h4 Аспекты:
    -@project.aspects.each do |asp|
       %li{class:"#{'active' if asp == @aspect}"}
          = link_to "/project/#{@project.id}/#{current_stage}?asp=#{asp.id}" do
             &nbsp;
             =" #{asp.content}"
+   %li
+      = link_to essay_posts_path(@project, 1), :class => 'color-green' do
+         Рефлексия по этапу
+         %b="(#{@project.essay_count(1).count})"
 -#%li.panel#stage_life_tape{class:  @project.stage_style(:life_tape_posts) }
 -#  - if request.original_url.include? 'life_tape' or request.original_url.include? '/1/essay'
 -#    %a.stage_menu1.accordion-toggle(data-toggle="collapse" data-parent="#side-nav" href="#life_tape")

@@ -21,7 +21,7 @@
 $ ->
   $('textarea.comment-textarea').on 'keyup', ->
     activate_button(this)
-
+  $('.tooltips').tooltip()
   $("select.estimate_select").each ->
     switch $(this).val()
       when '1.0'

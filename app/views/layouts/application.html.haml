@@ -15,7 +15,7 @@
     .logo.hidden-sm.hidden-xs.hidden-md
       %h4
         %a{:href => "/project/#{@project.id}"}
-          %h4
+          %h3
             MASS
             %strong DECISION
 
@@ -26,6 +26,7 @@
         .navbar
           =render 'top_menu'
       .content.container
+        %h2=@project.name
         = yield
 
     /

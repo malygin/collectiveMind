@@ -44,7 +44,7 @@ input.parsley-error{
 .logo{
   @include box-sizing(content-box);
   position: absolute;
-  left: 65px;
+  left: 35px;
   top: 13px;
   z-index: 1;
   a{
@@ -257,7 +257,7 @@ input.parsley-error{
 
 /*content except of header*/
 .content{
-  padding: 25px 2.5641%;
+  padding: 10px 2.5641%;
   @include transition(margin-top .35s ease, opacity .2s);
   max-width: none;
   width: auto;

@@ -1,8 +1,6 @@
 %span.h3{:id => "edit_knowbase_post_title_#{knowbase_post.id}"}
   =knowbase_post.title
-  %i.fa.fa-question-circle(data-toggle="tooltip" data-placement="left" title="Tooltip on left")
-%button.btn.btn-default{"data-placement" => "left", "data-toggle" => "tooltip", :title => "Tooltip on left", :type => "button"} Tooltip on left
-%button.btn.btn-lg.btn-danger{"data-content" => "And here's some amazing content. It's very engaging. Right?", "data-toggle" => "popover", :title => "Popover title", :type => "button"} Click to toggle popover
+  %i.fa.fa-question-circle.tooltips(data-toggle="tooltip" data-placement="bottom" title="Статьи очень важны!")
 %span
   -if boss?
     =link_to edit_knowbase_post_path(@project,knowbase_post),:remote => true, :id => "edit_knowbase_post_#{knowbase_post.id}" do
