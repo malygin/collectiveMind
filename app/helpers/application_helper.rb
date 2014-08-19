@@ -103,8 +103,6 @@ module ApplicationHelper
 				'открыта для просмотра'
 			when 2
 				'закрыта'
-		
-
 			else
 				'закрыта'
 		end 
@@ -116,7 +114,6 @@ module ApplicationHelper
 				''
 			when 1
 				'(демонстрационная)'
-
 		end 
 	end
 
@@ -144,41 +141,64 @@ module ApplicationHelper
     end
   end
 
-  def column_for_type_field(type_fd)
-    case type_fd
-      when 1
-        'status_content'
-      when 2
-        'status_whered'
-      when 3
-        'status_whend'
-      else
-        null
+  def column_for_type_field(table_name, type_fd)
+    if table_name == 'discontent_note'
+      case type_fd
+        when 1
+          'status_content'
+        when 2
+          'status_whered'
+        when 3
+          'status_whend'
+        else
+          ''
+      end
+    elsif table_name == 'concept_note'
+      case type_fd
+        when 1
+          'status_name'
+        when 2
+          'status_content'
+        when 3
+          'status_positive'
+        when 4
+          'status_positive_r'
+        when 5
+          'status_negative'
+        when 6
+          'status_negative_r'
+        when 7
+          'status_problems'
+        when 8
+          'status_reality'
+        else
+          ''
+      end
     end
   end
 
-  def column_for_concept_type(type_fd)
-    case type_fd
-      when 1
-        'status_name'
-      when 2
-        'status_content'
-      when 3
-        'status_positive'
-      when 4
-        'status_positive_r'
-      when 5
-        'status_negative'
-      when 6
-        'status_negative_r'
-      when 7
-        'status_problems'
-      when 8
-        'status_reality'
-      else
-        null
-    end
-  end
+  #def column_for_concept_type(type_fd)
+  #  case type_fd
+  #    when 1
+  #      'status_name'
+  #    when 2
+  #      'status_content'
+  #    when 3
+  #      'status_positive'
+  #    when 4
+  #      'status_positive_r'
+  #    when 5
+  #      'status_negative'
+  #    when 6
+  #      'status_negative_r'
+  #    when 7
+  #      'status_problems'
+  #    when 8
+  #      'status_reality'
+  #    else
+  #      null
+  #  end
+  #end
   def fast_discussion_able?
     user_discussion_aspects = current_user.user_discussion_aspects.where(:project_id => @project).size
     if user_discussion_aspects == @project.aspects.size
@@ -237,15 +257,15 @@ module ApplicationHelper
   def stage_status(stage)
     case stage
       when 1
-        'Сбор информации.'
+        'Подготовка к процедуре'
       when 2
-        'Анализ ситуации.'
+        'Сбор несовершенств'
       when 3
-        'Формулирование проблемы.'
+        'Сбор нововведений'
       when 4
-        'Создание проектов.'
+        'Создание проектов'
       when 5
-        'Оценка проектов.'
+        'Выставление оценок'
     end
   end
 
@@ -422,6 +442,22 @@ module ApplicationHelper
       content_tag :span, 'MD', class: 'label label-danger'
     elsif post.user.role_expert?
       content_tag :span, 'Эксперт', class: 'label label-success'
+    end
+  end
+
+  def current_stage_for_navbar(controller)
+    if controller.instance_of? LifeTape::PostsController
+      :lifetape
+    elsif controller.instance_of? Discontent::PostsController
+      :discontent
+    elsif controller.instance_of? Concept::PostsController
+      :concept
+    elsif controller.instance_of? Plan::PostsController
+      :plan
+    elsif controller.instance_of? Estimate::PostsController
+      :estimate
+    else
+      :lifetape
     end
   end
 

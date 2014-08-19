@@ -1,9 +1,9 @@
-%section.widget
+%section
   %header
     .row
       .col-md-12
         %h3.color-red
-          2 этап: Анализ ситуации. Ознакомьтесь перед началом работы!
+          2 этап: Сбор несовершенств. Ознакомьтесь перед началом работы!
   .body
     #carousel-example-generic.carousel.slide{"data-ride" => "carousel"}
       %ol.carousel-indicators
@@ -33,9 +33,3 @@
       %a.right.carousel-control{"data-slide" => "next", href: "#carousel-example-generic", role: "button"}
         %span.glyphicon.glyphicon-chevron-right(style='color:#e5603b')
 
-
-%section.widget
-  .body
-    .row
-      .col-md-12
-        =link_to "Приступить к работе!", @path_link, class: 'btn btn-lg btn-danger btn-block', id: 'to_work'

@@ -1,12 +1,12 @@
 .panel.panel-default
-    .panel-heading
-        Активность:
-    .panel-body
-        -unless journals.nil?
-            - journals.each do |journal|
-                -  if journal_parser(journal, @project.id)
-                    .imperfection_journal
-                        = link_to journal.user, user_path(@project,journal.user)
-                        = journal_parser(journal, @project.id).html_safe
-                        %br
-                        %small.text-muted=Russian::strftime(journal.created_at,"%d %B %k:%M:%S ")
+  .panel-heading
+    Активность:
+  .panel-body
+    -unless journals.nil?
+      - journals.each do |journal|
+        - if journal_parser(journal, @project.id)
+          .imperfection_journal
+            = link_to journal.user, user_path(@project,journal.user)
+            = journal_parser(journal, @project.id).html_safe
+            %br
+            %small.text-muted=Russian::strftime(journal.created_at,"%d %B %k:%M:%S ")

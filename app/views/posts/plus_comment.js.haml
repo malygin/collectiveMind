@@ -1,14 +1,8 @@
 - unless @against
   $("#plus_counter_comment_#{@id}").html(parseInt($("#plus_counter_comment_#{@id}").html())+1)
--else
-  $("#minus_counter_comment_#{@id}").html(parseInt($("#minus_counter_comment_#{@id}").html())+1)
 
 $("#plus_comment_#{@id}").effect("highlight", {color: '#f5cecd'}, 1000);
 $("#plus_comment_#{@id}").find('span').toggleClass('text-success', 'text-muted')
 $("#plus_comment_#{@id}").click(function(e) { return false; });
 $("#plus_comment_#{@id}").toggleClass('disabled');
 
-$("#minus_comment_#{@id}").effect("highlight", {color: '#f5cecd'}, 1000);
-$("#minus_comment_#{@id}").find('span').toggleClass('text-danger', 'text-muted')
-$("#minus_comment_#{@id}").click(function(e) { return false; });
-$("#minus_comment_#{@id}").toggleClass('disabled');

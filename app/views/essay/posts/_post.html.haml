@@ -4,12 +4,9 @@
     .media-heading
       =link_to post.user, user_path(@project, post.user)
     %span=trim_content(post.content)
-    %span
-      -if boss?
-        =link_to 'подробнее', essay_post_path(@project,@stage, post), :class => "btn btn-primary btn-xs"
-        |
-        = render :partial => 'post_edit_essay', :object => post
-      -else
-        =link_to 'подробнее', essay_post_path(@project,@stage, post)
+    %br
+    =link_to 'подробнее', essay_post_path(@project,@stage, post), :class => "btn btn-primary btn-xs"
+    |
+    = render :partial => 'post_edit_essay', :object => post
     %br
     = render 'shared/post_social_bar2', :post => post

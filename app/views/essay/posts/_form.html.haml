@@ -1,18 +1,10 @@
-%section.widget
-  %header
-    .row
-      .col-md-9
-        %h3(class="#{color_stage(@stage.to_i)}")
-          =@stage
-          этап:
-          =stage_status(@stage.to_i)
-          %br
-          %br
-        %span(style='font-size: 20px;line-height: 30px;')
-          Рефлексия по данному этапу в рамках процедуры:
-          =@project.name
+%h3(class="#{color_stage(@stage.to_i)}")
+  Рефлексия по этапу:
+  =stage_status(@stage.to_i)
+  %br
+  %br
 
-%section.widget
+%section
   .body
     = form_for @post,:url => {:project => @project.id, :action => @post.persisted? ? 'update' : 'create'},  :html => { :class => 'lt_new' } do |f|
       -if @post.errors.any?

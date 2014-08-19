@@ -3,12 +3,11 @@ require 'similar_text'
 require 'set'
 
 class Discontent::PostsController < PostsController
-  # GET /discontent/posts
-  # GET /discontent/posts.json
+
   autocomplete :discontent_post, :whend, :class_name => 'Discontent::Post' , :full => true
   autocomplete :discontent_post, :whered, :class_name => 'Discontent::Post' , :full => true
 
-  #@todo объединить в один метод
+  #@todo объединить autocomplete в один метод
   def autocomplete_discontent_post_whend
     pr=Set.new
     pr.merge(Discontent::PostWhen.where(:project_id => params[:project]).map {|d| {:value => d.content}})
@@ -29,9 +28,12 @@ class Discontent::PostsController < PostsController
     render json: pr
   end
 
-
   def voting_model  
     Discontent::Post
+  end
+
+  def note_model
+    Discontent::Note
   end
 
   def prepare_data
@@ -45,17 +47,12 @@ class Discontent::PostsController < PostsController
   def index
     return redirect_to action: "vote_list" if current_user.can_vote_for(:discontent,  @project)
     @aspect =  params[:asp] ? Discontent::Aspect.find(params[:asp]) : @project.proc_aspects.order(:id).first
-
-    life_tape_post = @aspect.life_tape_post
-    life_tape_comments = life_tape_post ? life_tape_post.comments.where(:discontent_status => true) : []
-
-    discontent_comments = @aspect.improve_discontent_comments(2)
+    @accepted_posts = Discontent::Post.where(project_id: @project, status: 2)
+    life_tape_comments = @project.improve_life_tape_comments(2)
+    discontent_comments = @project.improve_discontent_comments(2)
     @comments_all = life_tape_comments | discontent_comments
     @comments_all = @comments_all.sort_by{|c| c.improve_disposts.size}
     @page = params[:page]
-    respond_to do |format|
-      format.html
-    end
   end
 
   def new
@@ -67,12 +64,8 @@ class Discontent::PostsController < PostsController
       @comment = "#{get_class_for_improve(params[:improve_stage].to_i)}::Comment".constantize.find(params[:improve_comment]) unless params[:improve_comment].nil?
     end
     @post.content = @comment.content if @comment
-    respond_to do |format|
-      format.html
-    end
   end
 
-  # GET /discontent/posts/1/edit
   def edit
     @post = current_model.find(params[:id])
     @aspects_for_post = @post.post_aspects
@@ -85,8 +78,8 @@ class Discontent::PostsController < PostsController
 
   def vote_list
     @posts = @project.get_united_posts_for_vote(current_user)
-    @post_all = current_model.where(:project_id => @project, :status => 2).count
     return redirect_to action: "index" if @posts.empty?
+    @post_all = current_model.where(:project_id => @project, :status => 2).count
     @votes = current_user.voted_discontent_posts.where(:project_id => @project).count
     @status = 2
   end
@@ -156,12 +149,7 @@ class Discontent::PostsController < PostsController
 
   def unions
     @project = Core::Project.find(params[:project])
-
-    @posts  = current_model.where(:project_id => @project)
-    .where(status: 2)
-    .order_by_param(@order)
-    .paginate(:page => params[:page], :per_page => 40)
-
+    @posts  = current_model.where(:project_id => @project).where(status: 2).order_by_param(@order).paginate(:page => params[:page], :per_page => 40)
     respond_to do |format|
      format.js
     end
@@ -175,8 +163,7 @@ class Discontent::PostsController < PostsController
       @union_post.update_attributes(status: 0, discontent_post_id: nil)
       @post.destroy
       @post.discontent_post_aspects.destroy_all
-      redirect_to action: "index"
-      return
+      return redirect_to action: "index"
     else
       @union_post.update_attributes(status: 0, discontent_post_id: nil)
       @post.destroy_ungroup_aspects(@union_post)
@@ -215,59 +202,6 @@ class Discontent::PostsController < PostsController
      end
    end
 
-    def status_post
-      @project = Core::Project.find(params[:project])
-      @post = Discontent::Post.find(params[:id])
-      @type = params[:type_field]
-      if @post.post_notes(@type.to_i).size == 0
-        @post.update_attributes(column_for_type_field(@type.to_i) => 't')
-      end
-      respond_to do |format|
-        format.js
-      end
-    end
-    def new_note
-      @project = Core::Project.find(params[:project])
-      @post = Discontent::Post.find(params[:id])
-      @type = params[:type_field]
-      @post_note = Discontent::Note.new
-      respond_to do |format|
-        format.js
-      end
-    end
-    def create_note
-      @project = Core::Project.find(params[:project])
-      @post = Discontent::Post.find(params[:id])
-      @post_note = Discontent::Note.create(params[:discontent_note])
-      @post_note.post_id = params[:id]
-      @post_note.type_field = params[:type_field]
-      @post_note.user_id = current_user.id
-      @type = params[:type_field]
-      current_user.journals.build(:type_event=>'my_discontent_note', :user_informed => @post.user, :project => @project, :body=>trim_content(@post_note.content), :first_id => @post.id,:personal => true, :viewed=> false).save!
-
-      if @post.post_notes(@type.to_i).size == 0
-        @post.update_attributes(column_for_type_field(@type.to_i) => 'f')
-      end
-      respond_to do |format|
-        if @post_note.save
-          format.js
-        else
-          render "new_note"
-        end
-      end
-    end
-
-    def destroy_note
-      @project = Core::Project.find(params[:project])
-      @post = Discontent::Post.find(params[:id])
-      @type = params[:type_field]
-      @post_note = Discontent::Note.find(params[:note_id])
-      @post_note.destroy if boss?
-      respond_to do |format|
-        format.js
-      end
-    end
-
     def next_post_for_vote
       @project = Core::Project.find(params[:project])
       @post_vote = voting_model.find(params[:id])
@@ -281,84 +215,6 @@ class Discontent::PostsController < PostsController
       @post.update_attributes(:status => 4) if boss?
     end
 
-    #@todo будет полностью перерабатываться на всех трех этапах
-    #def fast_discussion_discontents
-    #  @project = Core::Project.find(params[:project])
-    #  status  = @project.status == 3 ? 0 : 2
-    #  @aspects = Discontent::Aspect.where(:project_id => @project, :status => 0).order(:id)
-    #  @users_rc = User.where(:type_user => [4,7])
-    #  @discontent_aspect = Discontent::Aspect.find(params[:asp_id]) unless params[:asp_id].nil?
-    #  @discontent_post = Discontent::Post.find(params[:dis_id]) unless params[:dis_id].nil?
-    #  @select_aspect = Discontent::Aspect.find(params[:aspect_id]) unless params[:aspect_id].nil?
-    #
-    #  user_discussion_posts = current_user.user_discussion_disposts.where(:project_id => @project).select('distinct "discontent_posts".*').pluck(:id)
-    #
-    #  if params[:asp_id].nil? and params[:dis_id].nil? and params[:aspect_id].nil? and params[:save_form_dispost].nil?
-    #    @aspects.each do |asp|
-    #      @aspect = asp
-    #      posts_for_discussion = @aspect.aspect_posts.posts_for_discussions(@project).by_status(status).by_discussions(user_discussion_posts).order('"discontent_posts"."id"')
-    #      unless posts_for_discussion.empty?
-    #        @post = posts_for_discussion.first
-    #        break
-    #      end
-    #    end
-    #  elsif !params[:aspect_id].nil?
-    #    @aspect = @select_aspect
-    #    @post = @aspect.aspect_posts.posts_for_discussions(@project).by_status(status).by_discussions(user_discussion_posts).order('"discontent_posts"."id"').first
-    #  elsif !params[:dis_id].nil? and !params[:asp_id].nil?
-    #    index = @aspects.index @discontent_aspect
-    #    @able = true
-    #    able_save = 0
-    #    while @able do
-    #      @aspect = @aspects[index]
-    #      @posts_for_discussion = @aspect.aspect_posts.posts_for_discussions(@project).by_status(status).by_discussions(user_discussion_posts).select('distinct "discontent_posts".*').order('"discontent_posts"."id"')
-    #      unless @posts_for_discussion.empty?
-    #        @posts_for_discussion.each do |p|
-    #          @post = p
-    #          if (@aspect == @discontent_aspect and @post.id > @discontent_post.id) or (@aspect != @discontent_aspect and @post.id > 0) or @post == @posts_for_discussion.last
-    #            if params[:empty_discussion]
-    #              @able = false if @post != @posts_for_discussion.last or (@posts_for_discussion.size == 1 and @aspect != @discontent_aspect) or (@aspect == @discontent_aspect and @post.id > @discontent_post.id)
-    #              break
-    #            elsif params[:save_form]
-    #              if !params[:discussion].empty?  and not (@aspect != @discontent_aspect and @post == @discontent_post) and able_save == 0
-    #                @comment = @discontent_post.comments.create(:content => params[:discussion], :user => current_user)
-    #                able_save += 1
-    #                current_user.journals.build(:type_event=>'discontent_comment'+'_save', :project => @project, :body=>"#{@comment.content[0..48]}:#{@discontent_post.id}#comment_#{@comment.id}").save!
-    #                if @post.user!=current_user
-    #                  current_user.journals.build(:type_event=>'my_'+'discontent_comment', :user_informed => @discontent_post.user, :project => @project, :body=>"#{@comment.content[0..24]}:#{@discontent_post.id}#comment_#{@comment.id}", :viewed=> false).save!
-    #                end
-    #                current_user.discontent_post_discussions.create(post: @discontent_post, aspect: @discontent_aspect)
-    #              end
-    #              @able = false if @post != @posts_for_discussion.last or (@posts_for_discussion.size == 1 and @aspect != @discontent_aspect) or (@aspect == @discontent_aspect and @post.id > @discontent_post.id)
-    #              break
-    #            else
-    #              next
-    #            end
-    #          end
-    #        end
-    #      end
-    #      index+=1
-    #      @able = false if index == @aspects.size
-    #    end
-    #  elsif !params[:save_form_dispost].nil?
-    #    if !params[:discontent_post][:content].empty? and !params[:discontent_post][:whered].empty? and !params[:discontent_post][:whend].empty? and !params[:discontent_post][:style].empty?
-    #      @dispost = @project.discontents.create(params[:discontent_post])
-    #      user_for_post = params[:select_for_clubers].present? ? User.find(params[:select_for_clubers]) : current_user
-    #      @dispost.user = user_for_post
-    #      @dispost.save!
-    #      user_for_post.journals.build(:type_event=>'discontent_post'+"_save", :project => @project, :body=>"#{@dispost.content}:#{@dispost.id}").save!
-    #      user_for_post.add_score(:type => :add_discontent_post)
-    #      unless params[:select_for_discussion_aspects_add].nil?
-    #        asp = params[:select_for_discussion_aspects_add]
-    #        Discontent::PostAspect.create(post_id: @dispost.id, aspect_id: asp.to_i)
-    #      end
-    #    end
-    #  end
-    #
-    #  respond_to do |format|
-    #    format.js
-    #  end
-    #end
 
     def new_group
       @project = Core::Project.find(params[:project])

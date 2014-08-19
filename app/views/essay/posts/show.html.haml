@@ -1,18 +1,10 @@
-%section.widget
-  %header
-    .row
-      .col-md-9
-        %h3(class="#{color_stage(@stage.to_i)}")
-          =@stage
-          этап:
-          =stage_status(@stage.to_i)
-          %br
-          %br
-        %span(style='font-size: 20px;line-height: 30px;')
-          Рефлексия по данному этапу в рамках процедуры:
-          =@project.name
+%h3(class="#{color_stage(@stage.to_i)}")
+  Рефлексия по этапу:
+  =stage_status(@stage.to_i)
+  %br
+  %br
 
-%section.widget
+%section
   .body
     .row
       .col-md-2
@@ -26,33 +18,27 @@
     %br
     .row
       .col-md-6
-        %section.widget
+        %section
           .body
             %span(class="#{color_stage(@stage.to_i)}")  1. Какие недостатки вы заметили в процедуре, в вашей работе, а также в работе других участников, модераторов и жюри?
             .form-group
               =simple_format(@post.content)
 
-        %section.widget
-          .body
             %span(class="#{color_stage(@stage.to_i)}") 2. Какие достоинства отсутствовали в этой работе?
             .form-group
               =simple_format(@post.positive)
 
-        %section.widget
-          .body
             %span(class="#{color_stage(@stage.to_i)}")  3. Что и как можно было бы изменить?
             .form-group
               =simple_format(@post.change)
 
-        -if @stage.to_i > 1 and @project.status > 2
-          %section.widget
-            .body
+            -if @stage.to_i > 1 and @project.status > 2
               %span(class="#{color_stage(@stage.to_i)}") 4. Что уже изменилось к лучшему в результате реакции на рефлексию?
               .form-group
                 =simple_format(@post.reaction)
 
       .col-md-6
-        %section.widget
+        %section
           .body
             %p Комментарии к рефлексии
             .text-center= will_paginate @comments
@@ -61,7 +47,7 @@
             .text-center= will_paginate @comments
             - if signed_in?
               = render :partial => 'shared/comment_form', :locals => { :comment => @comment, :url_link => url_for(:controller => @post.class.name.underscore.pluralize, :action => 'add_comment')}
-
+%br
 = render :partial => 'post_edit_essay', :object => @post
 %br
 = link_to 'К списку', essay_posts_path(@project, @stage)

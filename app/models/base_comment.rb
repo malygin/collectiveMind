@@ -23,5 +23,27 @@ module BaseComment  extend ActiveSupport::Concern
     def get_class
       self.class.name.deconstantize
     end
+
+    def current_class?(stage)
+      case stage
+        when :life_tape, 'life_tape'
+          self.instance_of? LifeTape::Post
+        when :discontent, 'discontent'
+          self.instance_of? Discontent::Post
+        when :concept, 'concept'
+          self.instance_of? Concept::Post
+        when :plan, 'plan'
+          self.instance_of? Plan::Post
+        when :estimate, 'estimate'
+          self.instance_of? Estimate::Post
+        else
+          false
+      end
+      false
+    end
+
+    def stage_name
+      self.class.name.deconstantize.underscore
+    end
   end
 end

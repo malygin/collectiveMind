@@ -51,7 +51,7 @@
       %br
       -if improve_comment.improve_disposts.present?
         %br
-        %section.widget
+        %section
           .body
             %ul
               - improve_comment.improve_disposts.each do |post|
@@ -61,7 +61,7 @@
                   =link_to 'подробнее', discontent_post_path(@project, post), :class=> 'btn btn-primary btn-xs'
       -if improve_comment.improve_concepts.present?
         %br
-        %section.widget
+        %section
           .body
             %ul
               - improve_comment.improve_concepts.each do |post|

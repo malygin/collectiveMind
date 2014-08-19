@@ -226,10 +226,10 @@ class User < ActiveRecord::Base
 
   def can_vote_for(stage, project)
     if project.status == 2 and ((project.stage1.to_i - self.voted_aspects.by_project(project).size) != 0)
-      true
+      return true
     end
     if project.status == 6 and !project.get_united_posts_for_vote(self).empty?
-      true
+      return true
     end
     false
   end

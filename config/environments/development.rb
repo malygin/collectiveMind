@@ -32,6 +32,17 @@ CollectiveMind::Application.configure do
   # Do not compress assets
   config.assets.compress = false
 
+  # Send deprecation notices to registered listeners
+  config.active_support.deprecation = :notify
+  config.paperclip_defaults = {
+      :storage => :s3,
+      :s3_credentials => {
+          :bucket => 'stuff_bucket',
+          :access_key_id => 'AKIAIUXUHQCN45FUQ2UQ',
+          :secret_access_key => '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'
+      }
+  }
+
   config.action_mailer.raise_delivery_errors = false
 
   # Expands the lines which load the assets

@@ -1,91 +1,64 @@
+- if signed_in? and (@project.status ==3 or @project.demo?)
+  = link_to '+ Добавить свое несовершенство', new_discontent_post_path(@project, asp: params[:asp]) , id: 'add_record',  class: 'btn  btn-danger'
+  %br
+  %br
 
-%section.widget.widget-tabs
-  %header
-    =render partial: 'application/stages', locals:  {current_stage: :discontent}
-  .body.tab-content
-    %a{name:'top'}
-    - if signed_in? and (@project.status ==3 or @project.demo?)
-      = link_to '+ Добавить свое несовершенство', new_discontent_post_path(@project, asp: params[:asp]) , id: 'add_record',  class: 'btn  btn-danger'
+- if can_union_discontents?(@project)
+  %section
+    .body.widget-panel
+      %ul.nav.nav-tabs#tab_posts
+        %li#old.active
+          %a(href="#origin" data-toggle="tab" onclick="$('#new_posts').fadeOut();")
+            Исходные #{@aspect.aspect_posts.count}
+        %li#new
+          =link_to "Объединенные #{@project.discontent_accepted_post.count}", "/project/#{@project.id}/discontent/posts/unions", remote: true
+        %li#imp
+          %a(href="#improve" data-toggle="tab" onclick="$('#new_posts').fadeOut();")
+            Неоформленные проблемы
       %br
       %br
+      #form_for_group_discontent
+      .tab-content
+        #origin.tab-pane.fade.in.active
+          .row
+            .col-md-6
+              %section
+                .body
+                  .pull-right
+                    = link_to '+ Добавить новую группу', discontent_posts_new_group_path(@project, asp: params[:asp]) ,:remote => true, id: 'add_record',  class: 'btn btn-danger'
+                  %h4 Группы несовершенств
+                  %ul.news-list#panel_union_group
+                    - @aspect.aspect_posts.by_status(2).created_order.each do |post|
+                      %li{id: "post_union_#{post.id}"}
+                        =render partial:'post', object: post
 
-    - if can_union_discontents?(@project)
-      .row
-        .col-md-12
-          %section.widget
-            .body.widget-panel
-              %ul.nav.nav-tabs#tab_posts
-                %li#old.active
-                  %a(href="#origin" data-toggle="tab" onclick="$('#new_posts').fadeOut();")
-                    Исходные #{@aspect.aspect_posts.count}
-                %li#new
-                  =link_to "Объединенные #{@project.discontent_accepted_post.count}", "/project/#{@project.id}/discontent/posts/unions", remote: true
-                %li#imp
-                  %a(href="#improve" data-toggle="tab" onclick="$('#new_posts').fadeOut();")
-                    Неоформленные проблемы
-              %br
-              %br
-              #form_for_group_discontent
-              .tab-content
-                #origin.tab-pane.fade.in.active
-                  .row
-                    .col-md-6
-                      %section.widget
-                        %header
-                          %span.h4
-                            Группы несовершенств
-                          %span.pull-right
-                            = link_to '+ Добавить новую группу', discontent_posts_new_group_path(@project, asp: params[:asp]) ,:remote => true, id: 'add_record',  class: 'btn  btn-danger'
-                        .body
-                          .slimScrollDiv
-                            %ul.news-list#panel_union_group
-                              - @aspect.aspect_posts.by_status(2).created_order.each do |post|
-                                %li{id: "post_union_#{post.id}"}
-                                  =render partial:'post', object: post
-
-                    .col-md-6
-                      %section.widget
-                        %header
-                          %h4
-                            Несовершенства
-                        .body
-                          .slimScrollDiv
-                            %ul.news-list
-                              =render partial:'post_short', collection: @aspect.aspect_posts.by_status([0,1]).sort_by{|c| c.discontent_post.nil? ? 0 : 1}
+            .col-md-6
+              %section
+                .body
+                  %h4 Несовершенства
+                  %ul.news-list
+                    =render partial:'post_short', collection: @aspect.aspect_posts.by_status([0,1]).sort_by{|c| c.discontent_post.nil? ? 0 : 1}
 
 
-                #improve.tab-pane.fade
-                  .row
-                    .col-md-6
-                      %section.widget
-                        %header
-                          %h4
-                            Неоформленные проблемы
-                          %hr
-                        .body
-                          .chat-messages
-                            = render :partial => 'shared/improve_comment',:collection => @comments_all
-                #new_posts.tab-pane.fade
-
-    -else
-      .row
-        .col-md-6
-          %section.widget
-            %header
-              %h4
-                Несовершенства
-            .body
-              .slimScrollDiv
-                %ul.news-list
-                  =render partial:'post_short', collection: @aspect.aspect_posts.by_status_for_post(@project)
-
-        .col-md-6
-          %section.widget
-            %header
-              %h4
-                Неоформленные проблемы
-              %hr
-            .body
+        #improve.tab-pane.fade
+          .row
+            .col-md-6
               .chat-messages
                 = render :partial => 'shared/improve_comment',:collection => @comments_all
+        #new_posts.tab-pane.fade
+
+-else
+  .col-md-6
+    %section
+      .body
+        %h4 Несовершенства
+        %ul.news-list
+          =render partial:'post_short', collection: @aspect.aspect_posts.by_status_for_discontent(@project)
+
+  .col-md-6
+    %section
+      .body
+        %h4 Неоформленные проблемы
+        .chat-messages
+          = render :partial => 'shared/improve_comment',:collection => @comments_all
 

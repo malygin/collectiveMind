@@ -1,10 +1,9 @@
 # encoding: utf-8
 class PostsController < ApplicationController
   before_filter :authenticate
-  before_filter :prepare_data, :only => [:index, :new, :edit, :show, :show_essay,:vote_list, :essay_list]
-  before_filter :journal_data, :only => [:index, :new, :edit, :show, :show_essay, :vote_list, :essay_list, :to_work]
+  before_filter :prepare_data, :only => [:index, :new, :edit, :show,:vote_list, :to_work]
+  before_filter :journal_data, :only => [:index, :new, :edit, :show, :vote_list, :to_work]
   before_filter :have_rights, :only =>[:edit]
-  # before_filter :to_work_redirect, only: [:index]
   before_filter :have_project_access
 
   def authenticate
@@ -53,6 +52,10 @@ class PostsController < ApplicationController
     comment_model.table_name.singularize
   end
 
+  def name_of_note_for_param
+    note_model.table_name.singularize
+  end
+
   def root_model_path(project)
     life_tape_posts_path(project)
   end
@@ -63,15 +66,6 @@ class PostsController < ApplicationController
 
   def prepare_data
     @project = Core::Project.find(params[:project])
-  end
-
-  def to_work_redirect
-    @project = Core::Project.find(params[:project])
-    path_link = "/project/#{@project.id}/" + current_model.table_name.sub('_posts','/posts') + "/to_work"
-    able = ['life_tape_posts','discontent_posts','concept_posts','plan_posts','estimate_posts'].include? current_model.table_name
-    check = get_check_field?(current_model.table_name + '_to_work')
-    current_user.user_checks.create(project_id: @project.id, check_field: current_model.table_name + '_to_work', status: true).save! unless check
-    redirect_to path_link if params[:asp].nil? and able and !check or params[:help]
   end
 
   def add_comment
@@ -173,13 +167,10 @@ class PostsController < ApplicationController
   def index
     @posts = current_model.where(:project_id => @project).paginate(:page => params[:page])
     respond_to do |format|
-      format.html # index.html.erb
-      format.json { render json: @posts }
+      format.html
     end
   end
 
-  # GET /discontent/posts/1
-  # GET /discontent/posts/1.json
   def show
     @post = current_model.where(:id => params[:id], :project_id => params[:project]).first
     if params[:viewed]
@@ -187,14 +178,10 @@ class PostsController < ApplicationController
       @my_journals_count = @my_journals_count - 1
     end
     per_page = ["Concept","Essay"].include?(@post.class.name.deconstantize) ? 10 : 30
-    @comments = @post.comments.where(:comment_id => nil).paginate(:page => params[:page] ? params[:page] : last_page, :per_page => per_page)
+    @comments = @post.main_comments.paginate(:page => params[:page] ? params[:page] : last_page, :per_page => per_page)
 
     if current_model.column_names.include? 'number_views'
-      if @post.number_views.nil?
-        @post.update_column(:number_views, 1)
-      else
-        @post.update_column(:number_views, @post.number_views+1)
-      end
+      @post.update_column(:number_views, @post.number_views.nil? ? 1 : @post.number_views+1)
     end
     @comment = comment_model.new
     respond_to do |format|
@@ -205,88 +192,51 @@ class PostsController < ApplicationController
   end
 
   def last_page
-    total_results = @post.comments.where(:comment_id => nil).count
+    total_results = @post.main_comments.count
     page = total_results / 10 + (total_results % 10 == 0 ? 0 : 1)
     page == 0 ? 1 :page
   end
 
-  def show_essay
-    @post = Essay::Post.find(params[:id])
-    @post.update_column(:number_views, @post.number_views+1)
-
-    @comment = Essay::Comment.new  
-    respond_to do |format|
-      format.html # show.html.erb
-      format.json { render json: @post }
-    end
-  end
-
-  # GET /discontent/posts/new
-  # GET /discontent/posts/new.json
   def new
     @post = current_model.new
-
     respond_to do |format|
-      format.html # new.html.erb
-      format.json { render json: @post }
+      format.html
     end
   end
 
-  # GET /discontent/posts/1/edit
   def edit
     @post = current_model.find(params[:id])
-    if @post.user != current_user  and not boss?
+    if @post.user != current_user and not boss?
       redirect_to life_tape_posts_path(@project)
     end
   end
 
-  # POST /discontent/posts
-  # POST /discontent/posts.json
   def create
       @project = Core::Project.find(params[:project]) 
       @post = current_model.new(params[name_of_model_for_param])
       @post.project = @project
       @post.user = current_user
-      unless params[:stage].nil?
-        @post.stage = params[:stage]
-      end     
-      unless params[:aspect_id].nil?
-        @post.discontent_aspects  << Discontent::Aspect.find(params[:aspect_id])
-      end
-      unless params[:style].nil?
-        @post.style = params[:style]
-      end
-      if current_model.column_names.include? 'status'
-        @post.status = 0
-      end
+
+      @post.stage = params[:stage] unless params[:stage].nil?
+      @post.discontent_aspects  << Discontent::Aspect.find(params[:aspect_id]) unless params[:aspect_id].nil?
+      @post.style = params[:style] unless params[:style].nil?
+      @post.status = 0 if current_model.column_names.include? 'status'
 
       respond_to do |format|
         if @post.save
           current_user.journals.build(:type_event=>name_of_model_for_param+"_save", :project => @project, :body=>trim_content(@post.content), :first_id => @post.id).save!
           current_user.add_score_by_type(@project, 50, :score_a)
 
+          format.html { redirect_to  :action=>'show', :id => @post.id, :project => @project }
           format.js
-          format.html {
-            unless params[:replace].nil?
-              params[:replace].each do |k,v|
-                @post.post_replaces.build(:replace_id => k).save
-              end
-            end
-            flash[:succes] = 'Успешно добавлено!'
-
-            redirect_to  :action=>'show', :id => @post.id, :project => @project  }
-          format.json { render json: @post, status: :created, location: @post }
         else
           format.html { render action: "new" }
-          format.json { render json: @post.errors, status: :unprocessable_entity }
           format.js
         end
       end
     
   end
 
-  # PUT /discontent/posts/1
-  # PUT /discontent/posts/1.json
   def update
     @post = current_model.find(params[:id])
     @project = Core::Project.find(params[:project]) 
@@ -296,32 +246,18 @@ class PostsController < ApplicationController
         unless params[:aspect_id].nil?
           @post.discontent_aspects.delete_all
           @post.discontent_aspects << Discontent::Aspect.find(params[:aspect_id])
+        end
+        @post.update_attribute(:style,params[:style]) unless params[:style].nil?
 
-        end
-        unless params[:style].nil?
-          @post.update_attribute(:style,params[:style])
-        end
-        unless params[:replace].nil?
-          @post.post_replaces.destroy_all
-          params[:replace].each do |k,v|
-            @post.post_replaces.build(:replace_id => k).save
-          end
-
-        end
-        format.html { 
-          flash[:success] = 'Успешно добавлено!'
-          redirect_to  :action=>'show', :project => @project, :id => @post.id}
-        format.json { head :no_content }
+        format.html { redirect_to  :action=>'show', :project => @project, :id => @post.id }
         format.js
       else
         format.html { render action: "edit" }
-        format.json { render json: @post.errors, status: :unprocessable_entity }
       end
     end
   end
 
-  # DELETE /discontent/posts/1
-  # DELETE /discontent/posts/1.json
+
   def destroy
     @post = current_model.find(params[:id])
     @post.destroy
@@ -395,10 +331,6 @@ class PostsController < ApplicationController
     @posts = voting_model.where(:project_id => @project)
   end
 
-  def essay_list
-    @posts = Essay::Post.where(params[:stage])
-    @post = Essay::Post.new
-  end
 
   #write fact of voting in db
   def vote
@@ -410,19 +342,51 @@ class PostsController < ApplicationController
     @table_name = current_model.table_name.sub('_posts','/posts')
   end
 
+  def new_note
+    @project = Core::Project.find(params[:project])
+    @post = current_model.find(params[:id])
+    @type = params[:type_field]
+    @post_note = note_model.new
+  end
 
-  def save_note(params, status, message, type_event)
-    post = current_model.find(params[:id])
-    if !params[:concept_post_note].nil? and params[:concept_post_note][:content]!= ''
-      @note = note_model.new(params[:concept_post_note])
-      @note.post = post
-      @note.user = current_user
-      @note.save
+  def create_note
+    @project = Core::Project.find(params[:project])
+    @post = current_model.find(params[:id])
+    @type = params[name_of_note_for_param][:type_field]
+    @post_note = @post.notes.build(params[name_of_note_for_param])
+    @post_note.user = current_user
+
+    current_user.journals.build(:type_event=>'my_'+name_of_note_for_param, :user_informed => @post.user, :project => @project, :body => trim_content(@post_note.content), :first_id => @post.id, :personal => true, :viewed=> false).save!
+
+    @post.update_attributes(column_for_type_field(name_of_note_for_param, @type.to_i) => 'f')
+
+    respond_to do |format|
+      if @post_note.save
+        format.js
+      else
+        format.js { render action: "new_note" }
+      end
     end
-    post.update_column(:status, status)
-    current_user.journals.build(:type_event=>type_event,  :project => Core::Project.find(params[:project]), :body=>post.id).save!
-    flash[:notice]=message
-    post
+  end
+
+  def destroy_note
+    @project = Core::Project.find(params[:project])
+    @post = current_model.find(params[:id])
+    @type = params[:type_field]
+    @post_note = note_model.find(params[:note_id])
+    @post_note.destroy if boss?
+  end
+
+  def status_post
+    @project = Core::Project.find(params[:project])
+    @post = current_model.find(params[:id])
+    @type = params[:type_field]
+    if @post.notes(@type.to_i).size == 0
+      @post.update_attributes(column_for_type_field(name_of_note_for_param, @type.to_i) => 't')
+    end
+    respond_to do |format|
+      format.js
+    end
   end
 
   def censored
@@ -445,8 +409,8 @@ class PostsController < ApplicationController
 
   def update_comment
     @comment = comment_model.find(params[:id])
-    if @comment.update_attributes(content: params[:content])
-      respond_to do |format|
+    respond_to do |format|
+      if @comment.update_attributes(content: params[:content])
         format.js
       end
     end
@@ -456,14 +420,12 @@ class PostsController < ApplicationController
     @project = Core::Project.find(params[:project])
     @comment = comment_model.find(params[:id])
     @comment.destroy if @comment.user == current_user or current_user.boss?
-
   end
 
   def set_important
     @project = Core::Project.find(params[:project])
     @post = current_model.find(params[:id])
-    @post.toggle(:important)
-    @post.update_attributes(important: @post.important)
+    @post.toggle!(:important)
   end
 
   def check_field
@@ -476,26 +438,7 @@ class PostsController < ApplicationController
   end
 
   def to_work
-    @project = Core::Project.find(params[:project])
-    if current_model == "LifeTape"
-      if @project.aspects.first
-        @path_link = "/project/#{@project.id}/" + current_model.table_name.sub('_posts','/posts') + "?asp=#{@project.aspects.first.id}"
-      else
-        @path_link = "/project/#{@project.id}/" + current_model.table_name.sub('_posts','/posts')
-      end
-    elsif ["Discontent","Concept"].include?(current_model)
-      if @project.proc_aspects.first
-        @path_link = "/project/#{@project.id}/" + current_model.table_name.sub('_posts','/posts') + "?asp=#{@project.proc_aspects.first.id}"
-      else
-        @path_link = "/project/#{@project.id}/" + current_model.table_name.sub('_posts','/posts')
-      end
-    else
-      @path_link = "/project/#{@project.id}/" + current_model.table_name.sub('_posts','/posts')
-    end
 
-    respond_to do |format|
-      format.html
-    end
   end
 
 end

@@ -4,13 +4,14 @@ class Plan::PostsController < PostsController
 
   def current_model
     Plan::Post
-  end 
+  end
+
   def comment_model
     Plan::Comment
   end
 
   def note_model
-    Plan::PostNote
+    Plan::Note
   end
 
   def voting_model  
@@ -28,7 +29,6 @@ class Plan::PostsController < PostsController
     end
 
   end
-
 
   def index
     @posts = current_model.where(:project_id => @project, :status => 0).order('created_at DESC').paginate(:page => params[:page])
@@ -563,45 +563,44 @@ class Plan::PostsController < PostsController
   end
 
   def new_note
-    @project = Core::Project.find(params[:project])
-    @post = Plan::Post.find(params[:id])
+    #@project = Core::Project.find(params[:project])
+    #@post = Plan::Post.find(params[:id])
+    #@post_aspect_note = Plan::PostAspect.find(params[:con_id])
+    #@type = params[:type_field]
+    #@post_note = Plan::Note.new
+    super()
     @post_aspect_note = Plan::PostAspect.find(params[:con_id])
-    @type = params[:type_field]
-    @post_note = Plan::Note.new
-    respond_to do |format|
-      format.js
-    end
   end
 
   def create_note
     @project = Core::Project.find(params[:project])
-    @post = Plan::Post.find(params[:id])
+    @post = current_model.find(params[:id])
+    @type = params[:plan_note][:type_field]
     @post_aspect_note = Plan::PostAspect.find(params[:con_id])
-    @post_note = Plan::Note.create(params[:plan_note])
-    @post_note.post_id = @post_aspect_note.id
-    @post_note.type_field = params[:type_field]
+    @post_note = @post_aspect_note.plan_notes.build(params[name_of_note_for_param])
     @post_note.user = current_user
-    @type = params[:type_field]
+
     current_user.journals.build(:type_event=>'my_plan_note', :user_informed => @post.user, :project => @project,  :body=>trim_content(@post_note.content),:body2=> trim_content(@post.name),:first_id => @post.id, :second_id => @post_aspect_note.id,:personal => true,  :viewed=> false).save!
 
     respond_to do |format|
       if @post_note.save
         format.js
       else
-        render "new_note"
+        format.js { render action: "new_note" }
       end
     end
   end
 
+
   def destroy_note
-    @project = Core::Project.find(params[:project])
-    @post = Plan::Post.find(params[:id])
     @post_aspect_note = Plan::PostAspect.find(params[:con_id])
-    @type = params[:type_field]
-    @post_note = Plan::Note.find(params[:note_id])
-    @post_note.destroy if boss?
-    respond_to do |format|
-      format.js
-    end
+    super()
+    #@project = Core::Project.find(params[:project])
+    #@post = Plan::Post.find(params[:id])
+    #@post_aspect_note = Plan::PostAspect.find(params[:con_id])
+    #@type = params[:type_field]
+    #@post_note = Plan::Note.find(params[:note_id])
+    #@post_note.destroy if boss?
   end
+
 end

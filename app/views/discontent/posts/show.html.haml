@@ -1,4 +1,4 @@
-%section.widget
+%section
   .body
     .media.option_for_selectize{id: "post_#{@post.id}", project: "#{@project.id}", post: "#{@post.id}"}
       - if @post.user
@@ -26,29 +26,6 @@
             = link_to 'Разгруппировать', {:action => :ungroup_union, :id => @post.id}, :method => :put, :confirm => 'Точно?', :class => 'btn btn-warning btn-xs'
             \|
           = render 'shared/post_edit_bar', :post => @post
-
-        - if can_union_discontents?(@project) and @post.status == 0
-          .panel.panel-default
-            %p
-              %h4 Подходящие для объединения несовершенства:
-            .panel-body
-              = form_tag "/project/#{@project.id}/discontent/posts/#{@post.id}/union", :id => "form_for_union_discontent" do
-                %br
-                %p Добавьте общее описание для объединенного несовершенства (обязательное поле):
-                %textarea{name: "union_post_descr", class:"form-control"}
-                %br
-                =render @post.get_posts_suitable_for_association
-                %br
-                %button#btn-union.btn.btn-sm.btn-success(type="submit")  Объединить их
-            %br
-            .text-success#dispost_success(style='display:none;')
-              Несовершенство успешно добавлено
-
-            =select_tag "selectize_tag_for_union",
-            options_from_collection_for_select(@post.get_posts_for_union_add_list(@project), "id", "show_content"),
-            class: 'selectized',
-            include_blank: true,
-            placeholder: "Добавьте несовершенство"
 
         - if @post.status == 2
           .panel.panel-default

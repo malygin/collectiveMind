@@ -27,7 +27,11 @@
           =render 'top_menu'
       .content.container
         %h2=@project.name
-        = yield
+        %section.widget.widget-tabs
+          %header
+            =render partial: 'application/stages', locals: {current_stage: current_stage_for_navbar(controller)}
+          .body.tab-content
+            = yield
 
     /
       Javascripts

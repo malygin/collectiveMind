@@ -15,7 +15,7 @@
 //@import "lib/_icheckbox";
 //@import "lib/_datepicker";
 //@import "lib/_select2";
-//@import "lib/_bootstrap-wysihtml5";
+@import "lib/_bootstrap-wysihtml5";
 //@import "lib/_bootstrap-switch";
 //@import "lib/_bootstrap-colorpicker";
 //@import "lib/_jqvmap";
@@ -30,6 +30,9 @@
 //@import "lib/messenger-1.4.1/messenger-spinner";
 //@import "lib/messenger-1.4.1/messenger-theme-air";
 //@import "lib/bootstrap-slider";
+@import "bootstrap3-editable/bootstrap-editable";
+@import "selectize";
+@import "selectize.default";
 
 @import "svg";
 @import "general";
@@ -59,3 +62,209 @@ $brand-estimate:        #663505 !default;
 .label-plan        { @include label-variant($brand-plan);}
 .label-estimate    { @include label-variant($brand-estimate);}
 
+
+/*todo my styles top*/
+
+.glyphicon {
+  cursor: pointer;
+  text-decoration: none;
+}
+.widget-tabs .tab-content .row {
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+}
+
+
+/* discontent posts */
+.label-t {
+  color: #0e7ccd !important;
+  background-color: #90d0ff !important;
+  font-weight: normal !important;
+}
+.label-n {
+  color: white !important;
+  background-color: #e5603b !important;
+  font-weight: normal !important;
+  /*font-size: 100% !important;*/
+}
+
+.label-p {
+  color: white !important;
+  background-color: #56bc76 !important;
+  font-weight: normal !important;
+  /*font-size: 100% !important;*/
+}
+
+.label-g {
+  background-color: #999999 !important;
+  font-weight: normal !important;
+}
+
+.news-list ul li {
+  border-top: 0px solid rgba(51, 51, 51, 0.25);
+  margin-bottom: 0 !important;
+  /*background-color: #ffb8a7 !important;*/
+}
+.news-list ul li:hover {
+  background: none;
+}
+.border_note {
+  border: 1px solid red !important;
+}
+.note_text {
+  text-decoration: none !important;
+}
+.discuss_comment {
+  background-color: rgba(240, 64, 106, 0.2) !important;
+}
+.expert_comment {
+  background-color: rgba(215, 233, 208, 0.3) !important;
+}
+
+p, a {
+  word-wrap: break-word;
+}
+
+.discontent-list .news-item-info {
+  margin-left: 62px;
+}
+
+/*Raiting users*/
+.top3 {
+  background: rgba(51, 51, 51, 0.4);
+}
+.top10 {
+  background: rgba(51, 51, 51, 0.2);
+}
+.ui-state-default {
+  border: none;
+  background: none;
+  color: white;
+}
+.ui-state-default a div{
+  color: white;
+}
+.widget-panel .tab-content {
+  overflow: visible !important;
+}
+
+.wizard-navigation.nav-pills li.active a {
+  background-color: #618FB0 !important;
+}
+
+.concept-name {
+  background-color: #f4f4f4;
+  border-top: 0.5px solid grey;
+  border-bottom: 0.5px solid grey;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  text-align: center;
+}
+
+.autocomplete,
+.ui-autocomplete-input,
+.ui-autocomplete {
+  max-height: 200px !important;
+  overflow-y: auto !important;
+  /* prevent horizontal scrollbar */
+  overflow-x: hidden !important;
+}
+
+.popover-concept {
+  max-width: 600px !important;
+  background-color: rgba(51, 51, 51, 1) !important;
+}
+.popover-concept-title {
+  background-color: rgba(43, 43, 43, 1) !important;
+}
+
+.popover-concept-modal {
+  background-color:#fff !important;
+  color: #555 !important;
+}
+
+.popover-title-modal {
+  background-color:#f7f7f7 !important;
+  border-bottom:1px solid #ebebeb !important;
+  color: #555 !important;
+}
+.example-concept {
+  cursor: pointer;
+}
+
+.plus-concept {
+  /*border-bottom: 1px solid #eac85e;*/
+  padding-bottom: 2px;
+  padding-top: 2px;
+}
+.concept-devider {
+  border-bottom: 1px solid #eac85e;
+}
+
+.dis-comment {
+  line-height: 20px !important;
+}
+
+.news-list li.union-list {
+  padding: 0;
+  margin: 0 0;
+}
+
+/*#toTop {*/
+/*width:100px;*/
+/*border:1px solid #ccc;*/
+/*background:#f7f7f7;*/
+/*text-align:center;*/
+/*padding:5px;*/
+/*position:fixed;*/
+/*bottom:10px; *//* отступ кнопки от нижнего края страницы*/
+/*left:10px;*/
+/*cursor:pointer;*/
+/*display:none;*/
+/*color:#333;*/
+/*font-family:verdana;*/
+/*font-size:11px;*/
+/*}*/
+/*.scrollup{*/
+/*width:40px;*/
+/*height:40px;*/
+/*opacity:0.3;*/
+/*position:fixed;*/
+/*bottom:50px;*/
+/*right:100px;*/
+/*display:none;*/
+/*text-indent:-9999px;*/
+/*background: url('/img/icon_top.png') no-repeat;*/
+/*}*/
+
+#toTop {
+  display:none;
+  text-decoration:none;
+  position:fixed;
+  bottom:10px;
+  left:10px;
+  overflow:hidden;
+  width:51px;
+  height:51px;
+  border:none;
+  text-indent:100%;
+  background:url(/assets/img/ui.totop.png) no-repeat left top;
+}
+
+#toTopHover {
+  background:url(/assets/img/ui.totop.png) no-repeat left -51px;
+  width:51px;
+  height:51px;
+  display:block;
+  overflow:hidden;
+  float:left;
+  opacity: 0;
+  -moz-opacity: 0;
+  filter:alpha(opacity=0);
+}
+
+#toTop:active, #toTop:focus {
+  outline:none;
+}
+
+/*todo my styles bottom*/

@@ -41,4 +41,6 @@
           -else
             %span.text-muted= "За #{child_comment.users_pro.count}"
             %span.glyphicon.glyphicon-thumbs-up.text-muted
+      .time.pull-left
+        =time_ago_in_words(child_comment.created_at)
       %br

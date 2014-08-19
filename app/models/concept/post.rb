@@ -10,7 +10,7 @@
   has_many :voted_users, :through => :final_votings, :source => :user
   has_many :final_votings,:foreign_key => 'concept_post_aspect_id', :class_name => "Concept::Voting"
 
-  has_many :concept_notes, :class_name => 'Concept::Note'
+  #has_many :concept_notes, :class_name => 'Concept::Note'
 
   has_many :concept_post_discussions, :class_name => 'Concept::PostDiscussion'
   has_many :concept_discussion_users, :through => :concept_post_discussions, :source => :user, :class_name => 'User'
@@ -42,9 +42,9 @@
     .order('count("concept_votings"."user_id") DESC')
   end
 
-  def post_notes(type_field)
-    self.concept_notes.by_type(type_field)
-  end
+  #def post_notes(type_field)
+  #  self.concept_notes.by_type(type_field)
+  #end
 
   def note_size?(type_fd)
     self.post_notes(type_fd).size > 0

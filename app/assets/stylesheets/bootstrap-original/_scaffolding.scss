@@ -25,7 +25,8 @@ html {
 }
 
 body {
-  font-family: $font-family-base;
+// @todo все цифры и английские символы отображаются с меньшим выделением (нужно настроить шрифты)
+//  font-family: $font-family-base;
   font-size: $font-size-base;
   line-height: $line-height-base;
   color: $text-color;

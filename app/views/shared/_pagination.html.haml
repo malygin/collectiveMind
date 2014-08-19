@@ -1,4 +1,4 @@
 %br
 - if @posts.next_page
-    = link_to 'Посмотреть еще', life_tape_posts_path(page: @posts.next_page, order: @order), class: 'btn btn-primary btn-sm',  style: 'width: 100%;',remote: true , id: 'load_more_product'
+  = link_to 'Посмотреть еще', life_tape_posts_path(page: @posts.next_page, order: @order), class: 'btn btn-primary btn-sm',  style: 'width: 100%;',remote: true , id: 'load_more_product'
 

@@ -1,7 +1,7 @@
 class Discontent::Aspect < ActiveRecord::Base
   include BasePost
 
-  attr_accessible :position, :short_desc, :user_add, :status
+  attr_accessible :short_desc, :status
    has_many :posts
    has_many :positive_posts, :class_name => 'Discontent::Post',
            :conditions => ['discontent_posts.style = ? ',0]
@@ -10,7 +10,7 @@ class Discontent::Aspect < ActiveRecord::Base
    has_many :accepted_posts, :class_name => 'Discontent::Post',
            :conditions => ['discontent_posts.status = ?',4]
   has_many :knowbase_posts, :class_name => 'Knowbase::Post'
-  has_many :life_tape_posts, :class_name => 'LifeTape::Post'
+  has_many :life_posts, :class_name => 'LifeTape::Post', foreign_key: 'aspect_id'
   has_many :discontent_post_aspects, :class_name => 'Discontent::PostAspect'
   has_many :aspect_posts, :through => :discontent_post_aspects, :source => :post, :class_name => 'Discontent::Post'
 
@@ -24,7 +24,7 @@ class Discontent::Aspect < ActiveRecord::Base
   has_many :final_votings,:foreign_key => 'discontent_aspect_id', :class_name => "LifeTape::Voiting"
 
   has_and_belongs_to_many :life_tape_posts, :class_name => 'LifeTape::Post', join_table: 'discontent_aspects_life_tape_posts', foreign_key: 'discontent_aspect_id', association_foreign_key: 'life_tape_post_id' #, :conditions => ['status = 0']
-  scope :procedurial_only,-> { where(:status, 0)}
+
   scope :by_project, ->(project_id) { where("discontent_aspects.project_id = ?", project_id) }
   scope :minus_view, ->(aspects) { where("discontent_aspects.id NOT IN (#{aspects.join(", ")})") unless aspects.empty? }
   scope :by_discussions, ->(aspects) { where("discontent_aspects.id NOT IN (#{aspects.join(", ")})") unless aspects.empty? }
@@ -48,24 +48,23 @@ class Discontent::Aspect < ActiveRecord::Base
   end
 
   def count_concept
-   unless  @count_concept
+   unless @count_concept
       pr = []
       overpr = {}
       self.aspect_posts.by_status(4).each do |ap|
-         if ap.dispost_concepts.size > 1
-           pr << 100
-           overpr[ap.id] = ( ap.dispost_concepts.size - 2) * 50
-         else
-           pr << (ap.dispost_concepts.size*50)
-         end
+        if ap.dispost_concepts.size > 1
+          pr << 100
+          overpr[ap.id] = ( ap.dispost_concepts.size - 2) * 50
+        else
+          pr << (ap.dispost_concepts.size*50)
+        end
       end
 
       if pr.size == 0
-            @count_concept =0
+        @count_concept =0
       else
         @count_concept =  pr.inject(0){ |sum,v| sum + v.abs } / pr.size
       end
-
     end
     return @count_concept
   end
@@ -85,24 +84,6 @@ class Discontent::Aspect < ActiveRecord::Base
     self.aspect_posts.
     joins("INNER JOIN concept_post_discontents ON concept_post_discontents.discontent_post_id = discontent_post_aspects.post_id").
     where("discontent_posts.status = ?", 4)
-  end
-
-  def improve_discontent_comments(stage)
-    if stage == 2
-      Discontent::Comment.joins("INNER JOIN discontent_posts ON discontent_comments.post_id = discontent_posts.id").
-      joins("INNER JOIN discontent_post_aspects ON discontent_post_aspects.post_id = discontent_posts.id").
-      where("discontent_post_aspects.aspect_id = ? and discontent_comments.discontent_status = 't'", self.id)
-    elsif stage == 3
-      Discontent::Comment.joins("INNER JOIN discontent_posts ON discontent_comments.post_id = discontent_posts.id").
-      joins("INNER JOIN discontent_post_aspects ON discontent_post_aspects.post_id = discontent_posts.id").
-      where("discontent_post_aspects.aspect_id = ? and discontent_comments.concept_status = 't'", self.id)
-    end
-  end
-  def improve_concept_comments
-    Concept::Comment.joins("INNER JOIN concept_posts ON concept_comments.post_id = concept_posts.id").
-    joins("INNER JOIN concept_post_discontents ON concept_post_discontents.post_id = concept_posts.id").
-    joins("INNER JOIN discontent_post_aspects ON discontent_post_aspects.post_id = concept_post_discontents.discontent_post_id").
-    where("discontent_post_aspects.aspect_id = ? and concept_comments.concept_status = 't'", self.id)
   end
 
 end

@@ -1,15 +1,12 @@
 .row
   .col-md-12
     %h3
-      2 этап: Анализ ситуации. Голосование
+      2 этап: Сбор несовершенств. Голосование
       %br
-      %small(style='font-size: 20px;line-height: 30px;')
-        Голосование за несовершенства в рамках процедуры:
-        =@project.name
 
-%section.widget
+%section
   %header
-    %h5 Определение наиболее важных проблем:
+    %h4 Определение наиболее важных проблем:
   .body
     %span Несовершенство:
     %span#prog_now=@votes != @post_all ? @votes+1 : @votes

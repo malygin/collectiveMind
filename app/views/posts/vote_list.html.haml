@@ -1,11 +1,8 @@
-.row
-  .col-md-12
-    %h3.text-info
-      1 этап: Сбор информации. Голосование
-      %br
-    %span(style='font-size: 20px;line-height: 30px;')
-      Определение наиболее важных тем процедуры:
-      =@project.name
+%h3.text-info
+  1 этап: Подготовка к процедуре. Голосование
+  %br
+%span(style='font-size: 20px;line-height: 30px;')
+  Определение наиболее важных тем процедуры
 
 %br
 - if boss?
@@ -20,7 +17,7 @@
   %br
 
 #stage_success(style="display:none;")
-  %section.widget
+  %section
     .body
       .text-center
         %h3 Спасибо за участие в голосовании!
@@ -34,7 +31,7 @@
 %br
 %br
 - unless @number_v<1  and not boss?
-  %section.widget#fixBlock
+  %section.widget
     %h4
       Вы можете выбрать
       %b=@project.stage1

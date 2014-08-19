@@ -45,16 +45,9 @@
               %span.text-success(id="plus_counter_comment_#{comment.id}")=comment.users_pro.count
               %span.glyphicon.glyphicon-thumbs-up.text-success
 
-            -#=link_to({:action => :plus_comment, :id => comment.id, :against => true, }, :remote => true, :method => :put, id: "minus_comment_#{comment.id}") do
-            -#  %span.text-danger Против
-            -#  %span.text-danger(id="minus_counter_comment_#{comment.id}")=comment.users_against.count
-            -#  %span.glyphicon.glyphicon-thumbs-down.text-danger
-
           -else
             %span.text-muted= "За #{comment.users_pro.count}"
             %span.glyphicon.glyphicon-thumbs-up.text-muted
-            -#%span.text-muted= "Против #{comment.users_against.count}"
-            -#%span.glyphicon.glyphicon-thumbs-down.text-muted
       .time.pull-left
         =time_ago_in_words(comment.created_at)
       %br

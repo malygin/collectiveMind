@@ -6,7 +6,7 @@ class Discontent::Post < ActiveRecord::Base
   belongs_to :aspect
   has_many :discontent_posts, :class_name => 'Discontent::Post', :foreign_key => 'discontent_post_id'
   belongs_to :discontent_post, :foreign_key => 'discontent_post_id',:class_name => 'Discontent::Post'
-  has_many :discontent_notes, :class_name => 'Discontent::Note'
+  #has_many :discontent_notes, :class_name => 'Discontent::Note'
   has_many :discontent_post_aspects, :class_name => 'Discontent::PostAspect'
   has_many :post_aspects, :through => :discontent_post_aspects, :source => :discontent_aspect, :class_name => 'Discontent::Aspect'
 
@@ -51,10 +51,8 @@ class Discontent::Post < ActiveRecord::Base
   scope :by_discussions, ->(posts) { where("discontent_posts.id NOT IN (#{posts.join(", ")})") unless posts.empty? }
 
   scope :not_view, ->(posts) { where("discontent_posts.id NOT IN (#{posts.join(", ")})") unless posts.empty? }
-  scope :created_order, order("created_at DESC")
-  scope :updated_order, order("updated_at DESC")
 
-  scope :by_status_for_post, ->(project){
+  scope :by_status_for_discontent, ->(project){
     if project.status == 4
       where(status: [0,1])
     elsif project.status == 5 or project.status == 6
@@ -64,7 +62,6 @@ class Discontent::Post < ActiveRecord::Base
     else
       where(status: 0)
     end
-    .created_order
   }
 
   def update_post_aspects(aspects_new)
@@ -99,8 +96,8 @@ class Discontent::Post < ActiveRecord::Base
 
     if aspects_for_ungroup.present? and union_posts_aspects.present?
       aspects_for_ungroup.each do |asp|
-        unless union_posts_aspects.include? asp.id
-          self.discontent_post_aspects.by_aspect(asp.id).destroy if boss?
+        unless union_posts_aspects.include? asp
+          self.discontent_post_aspects.by_aspect(asp).destroy_all
         end
       end
     end
@@ -118,9 +115,9 @@ class Discontent::Post < ActiveRecord::Base
     end
   end
 
-  def post_notes(type_field)
-    self.discontent_notes.by_type(type_field)
-  end
+  #def post_notes(type_field)
+  #  self.discontent_notes.by_type(type_field)
+  #end
 
   def voted(user)
     self.voted_users.where(:id => user)

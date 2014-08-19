@@ -248,9 +248,13 @@ samp {
 button,
 input,
 optgroup,
-select,
 textarea {
   color: inherit; // 1
+  font: inherit; // 2
+  margin: 0; // 3
+}
+//@todo текст в выпадающих списках не должен быть белым
+select {
   font: inherit; // 2
   margin: 0; // 3
 }
