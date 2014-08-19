@@ -29,19 +29,19 @@
           include_blank: true,
           placeholder: "Какие еще несовершенства решает ваше нововведение?"
           %br
-          -if boss? and !@post.persisted?
-            .row
-              .col-md-6
-                %br
-                %h5.text-right
-                  %b Выберите члена клуба
-                %br
-                %br
-              .com-md-6
-                %br
-                = select_tag 'select_for_clubers', options_from_collection_for_select(@users_rc, "id", "to_s"),
-                :prompt => 'Выберите члена клуба' , style:'margin-left:15px; margin-top:10px; height: 30px;'
-                %br
+          -#-if boss? and !@post.persisted?
+          -#  .row
+          -#    .col-md-6
+          -#      %br
+          -#      %h5.text-right
+          -#        %b Выберите члена клуба
+          -#      %br
+          -#      %br
+          -#    .com-md-6
+          -#      %br
+          -#      = select_tag 'select_for_clubers', options_from_collection_for_select(@users_rc, "id", "to_s"),
+          -#      :prompt => 'Выберите члена клуба' , style:'margin-left:15px; margin-top:10px; height: 30px;'
+          -#      %br
           %hr
           .row
             .col-md-12

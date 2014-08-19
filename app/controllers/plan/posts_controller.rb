@@ -133,13 +133,6 @@ class Plan::PostsController < PostsController
    end
  end
 
-  def get_concepts
-    @project = Core::Project.find(params[:project])
-    @concepts = Concept::PostAspect.plan_concepts(@project,params[:aspect_id].to_i)
-    respond_to do |format|
-      format.js
-    end
-  end
 
   def add_concept
     @project = Core::Project.find(params[:project])
