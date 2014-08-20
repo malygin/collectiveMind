@@ -285,6 +285,23 @@ module ApplicationHelper
     end
   end
 
+  def number_stage(current_stage)
+    case current_stage
+      when 'life_tape/posts'
+        1
+      when 'discontent/posts'
+        2
+      when 'concept/posts'
+        3
+      when 'plan/posts'
+        4
+      when 'estimate/posts'
+        5
+      else
+        1
+    end
+  end
+
   def label_dis_stat(comment)
     case comment.discontent_status
       when false
@@ -462,7 +479,7 @@ module ApplicationHelper
   end
 
   def current_controller_for_navbar?(controller)
-    if [LifeTape::PostsController,Discontent::PostsController,Concept::PostsController,Plan::PostsController,Estimate::PostsController].include?(controller.class)
+    if [LifeTape::PostsController,Discontent::PostsController,Concept::PostsController,Plan::PostsController,Estimate::PostsController,Essay::PostsController].include?(controller.class)
       return true
     end
     false

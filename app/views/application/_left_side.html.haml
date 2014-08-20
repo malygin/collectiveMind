@@ -17,7 +17,7 @@
       Помощь по этапу
       %i.fa.fa-question-circle
   %li
-    = link_to essay_posts_path(@project, 1), class: 'text-essay' do
+    = link_to essay_posts_path(@project, number_stage(current_stage)), class: 'text-essay' do
       Рефлексия по этапу
       %b="(#{@project.essay_count(1).count})"
       %i.fa.fa-refresh

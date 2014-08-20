@@ -26,7 +26,7 @@
 
       %br
       Создание проектов
-  %li(class="#{'active' if current_stage == :estimate} #{'disabled' if @project.status < 11}")
+  %li(class="#{'active' if current_stage == :estimate} #{'disabled' if @project.status < 10}")
     %a{ href: "#{@project.status < 11 ? '#' : "/project/#{@project.id}/estimate/posts"}"}
       5 этап
       %i.fa.fa-question-circle.tooltips(data-toggle="tooltip" data-placement="bottom" title="На этом этапе мы должны разобраться как работать с порталом и четко разобраться с темой!")
