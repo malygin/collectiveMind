@@ -16,7 +16,6 @@ describe 'Discontents ' do
     context 'discontent list' do
       before do
         visit discontent_posts_path(project)
-        # click_link 'to_work'
       end
 
       it ' can see all discontents in aspect' do
@@ -55,7 +54,6 @@ describe 'Discontents ' do
         click_button 'send_post'
         expect(page).to have_content 'dis comment 1'
       end
-      it_behaves_like 'validation links', :user, :project
     end
 
   end

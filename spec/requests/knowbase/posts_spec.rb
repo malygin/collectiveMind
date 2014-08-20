@@ -31,7 +31,6 @@ describe 'Knowbase ' do
         expect(page).to have_selector("li##{@post1.id}.active")
         expect(page).to_not have_selector("li##{@post2.id}.active")
       end
-      it_behaves_like 'validation links', :user, :project
     end
     context 'visit knowbase post 2' do
       before { visit knowbase_post_path(project,@post2) }
@@ -41,7 +40,6 @@ describe 'Knowbase ' do
         expect(page).to_not have_selector("li##{@post1.id}.active")
         expect(page).to have_selector("li##{@post2.id}.active")
       end
-      it_behaves_like 'validation links', :user, :project
     end
   end
 
@@ -64,33 +62,6 @@ describe 'Knowbase ' do
         expect(page).to_not have_selector("li##{@post2.id}.active")
       end
 
-      context 'add knowbase post' do
-        before { click_link "new_knowbase_post" }
-        it 'post without content' do
-          expect(page).to have_selector("ul.wysihtml5-toolbar")
-          expect(page).to have_selector '#send_post.disabled'
-          fill_in 'title-textfield', with: 'title'
-          expect(page).to have_content("Заполните поле контента")
-          expect(page).to_not have_selector '#send_post.disabled'
-        end
-        #@todo not focus on editor when set value(not work activate_button)
-        #it 'post with content', js:true do
-        #  fill_in_wysihtml5('some-textarea', with: 'content for post')
-        #end
-        #it ' add post with content' do
-        #  fill_in 'title-textfield', with: 'title for post'
-        #  #fill_in_wysihtml5('some-textarea', with: 'content for post')
-        #  #execute_script %Q{ $('.wysihtml5-editor').trigger("focus") }
-        #  #execute_script %Q{ $('.wysihtml5-editor').trigger("keyup") }
-        #  expect(page).to_not have_selector '#send_post.disabled'
-        #  expect {
-        #    click_button "send_post"
-        #    expect have_content 'title for post'
-        #    expect have_content 'content for post'
-        #  }.to change(Knowbase::Post, :count).by(1)
-        #end
-        it_behaves_like 'validation links', :user, :project
-      end
       context 'edit knowbase post' do
         before { click_link "edit_knowbase_post_#{@post1.id}" }
 
@@ -110,7 +81,6 @@ describe 'Knowbase ' do
             expect(page).to have_selector("span#edit_knowbase_post_title_#{@post2.id}", @post2.title)
           }.to change(Knowbase::Post, :count).by(-1)
         end
-        it_behaves_like 'validation links', :user, :project
       end
     end
   end

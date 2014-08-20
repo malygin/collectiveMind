@@ -24,13 +24,6 @@ shared_examples 'validation links' do
   end
 end
 
-shared_examples 'validation journal' do
-  it ' validate journal with content' do
-    visit journals_path(project)
-    expect(page).to have_content 'comment 1'
-    expect(page).to have_selector "a", @aspect1.content
-  end
-end
 
 #shared_examples 'with mini help'   do |stage_name|
 #

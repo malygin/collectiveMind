@@ -30,7 +30,7 @@
     - if signed_in?
       -if prime_admin?
         %li
-          =link_to list_projects_path, class:'btn btn-sm btn-info'  do
+          =link_to list_projects_path, class:'btn btn-sm btn-info', id: 'list_projects'  do
             Список процедур
             %i.fa.fa-arrow-right
 

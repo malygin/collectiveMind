@@ -177,28 +177,28 @@ module ApplicationHelper
     end
   end
 
-  #def column_for_concept_type(type_fd)
-  #  case type_fd
-  #    when 1
-  #      'status_name'
-  #    when 2
-  #      'status_content'
-  #    when 3
-  #      'status_positive'
-  #    when 4
-  #      'status_positive_r'
-  #    when 5
-  #      'status_negative'
-  #    when 6
-  #      'status_negative_r'
-  #    when 7
-  #      'status_problems'
-  #    when 8
-  #      'status_reality'
-  #    else
-  #      null
-  #  end
-  #end
+  def column_for_concept_type(type_fd)
+    case type_fd
+      when 1
+        'status_name'
+      when 2
+        'status_content'
+      when 3
+        'status_positive'
+      when 4
+        'status_positive_r'
+      when 5
+        'status_negative'
+      when 6
+        'status_negative_r'
+      when 7
+        'status_problems'
+      when 8
+        'status_reality'
+      else
+        null
+    end
+  end
   def fast_discussion_able?
     user_discussion_aspects = current_user.user_discussion_aspects.where(:project_id => @project).size
     if user_discussion_aspects == @project.aspects.size

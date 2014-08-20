@@ -3,7 +3,7 @@ class Core::ProjectsController < ApplicationController
   # GET /core/projects
   # GET /core/projects.json
   before_filter :boss_authenticate, :only => [:next_stage, :pr_stage]
-  before_filter :admin_authenticate, :only => [:list_projects]
+  before_filter :admin_authenticate, :only => [:new,:edit,:create,:update,:destroy,:list_projects]
   before_filter :project_by_id
   
   def  project_by_id
