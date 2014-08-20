@@ -26,12 +26,15 @@
         .navbar
           =render 'top_menu'
       .content.container
-        %h2=@project.name
-        %section.widget.widget-tabs
-          %header
-            =render partial: 'application/stages', locals: {current_stage: current_stage_for_navbar(controller)}
-          .body.tab-content
-            = yield
+        -if current_controller_for_navbar?(controller)
+          %h2=@project.name
+          %section.widget.widget-tabs
+            %header
+              =render partial: 'application/stages', locals: {current_stage: current_stage_for_navbar(controller)}
+            .body.tab-content
+              = yield
+        -else
+          = yield
 
     /
       Javascripts

@@ -461,4 +461,11 @@ module ApplicationHelper
     end
   end
 
+  def current_controller_for_navbar?(controller)
+    if [LifeTape::PostsController,Discontent::PostsController,Concept::PostsController,Plan::PostsController,Estimate::PostsController].include?(controller.class)
+      return true
+    end
+    false
+  end
+
 end

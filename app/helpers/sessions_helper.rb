@@ -36,7 +36,7 @@ module SessionsHelper
   end
 
   def admin_authenticate
-    deny_access unless prime_admin?
+    redirect_to(root_path) unless prime_admin?
   end
 
 

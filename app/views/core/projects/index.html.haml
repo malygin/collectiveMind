@@ -2,27 +2,27 @@
   -if @opened_projects.present?
     %h3
       %strong Открытые процедуры
-    %ul
-    - @opened_projects.each do |project|
-      %li
-        = project.name
-        %b="(#{status_project(project)})"
-        .pull-right
-          =link_to "/project/#{project.id}", class:'btn  btn-danger', id: 'go_to_project' do
-            Перейти к процедуре
+    %ul(style="line-height:30px;")
+      - @opened_projects.each do |project|
+        %li
+          = project.name
+          %b="(#{status_project(project)})"
+          .pull-right
+            =link_to "/project/#{project.id}", class:'btn btn-sm btn-danger', id: 'go_to_project' do
+              Перейти к процедуре
 
   %br
   %br
   -if @demo_projects.present?
     %h3
       %strong Демо процедуры
-    %ul
-    - @demo_projects.each do |project|
-      %li
-        = project.name
-        .pull-right
-          =link_to "/project/#{project.id}", class:'btn btn-sm btn-danger' do
-            Перейти к процедуре
+    %ul(style="line-height:30px;")
+      - @demo_projects.each do |project|
+        %li
+          = project.name
+          .pull-right
+            =link_to "/project/#{project.id}", class:'btn btn-sm btn-danger' do
+              Перейти к процедуре
 
 %h3
   %strong О проекте

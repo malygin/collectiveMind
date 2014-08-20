@@ -37,6 +37,24 @@ class UsersController < ApplicationController
     @users = User.joins(:core_project_scores).where("core_project_scores.project_id = ? AND core_project_scores.score > 0", @project.id).where(:users => {:type_user => [4,5,7,8,nil]}).order("core_project_scores.score DESC").paginate(:page =>params[:page])
   end
 
+  def add_user_for_project
+    @project = Core::Project.find(params[:project])
+    @user = User.find(params[:id])
+    @user.core_project_users.create(:project_id => @project.id)
+    respond_to do |format|
+      format.js
+    end
+  end
+
+  def remove_user_for_project
+    @project = Core::Project.find(params[:project])
+    @user = User.find(params[:id])
+    @user.core_project_users.where(:project_id => @project.id).destroy_all
+    respond_to do |format|
+      format.js
+    end
+  end
+
   def show_top
     @project = Core::Project.find(params[:project])
     @users = User.joins(:core_project_scores).where("core_project_scores.project_id = ? AND core_project_scores.score > 0", @project.id).where(:users => {:type_user => [4,5,7,8,nil]}).order("core_project_scores.#{params[:score_name]} DESC").paginate(:page =>params[:page])
@@ -56,24 +74,6 @@ class UsersController < ApplicationController
     @users = User.paginate(:page =>params[:page])
     respond_to do |format|
       format.html { render :layout => 'core/list_projects'}
-    end
-  end
-
-  def add_user_for_project
-    @project = Core::Project.find(params[:project])
-    @user = User.find(params[:id])
-    @user.core_project_users.create(:project_id => @project.id)
-    respond_to do |format|
-      format.js
-    end
-  end
-
-  def remove_user_for_project
-    @project = Core::Project.find(params[:project])
-    @user = User.find(params[:id])
-    @user.core_project_users.where(:project_id => @project.id).destroy_all
-    respond_to do |format|
-      format.js
     end
   end
 
