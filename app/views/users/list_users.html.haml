@@ -22,11 +22,11 @@
 
         %td{:id => "list_users_#{user.id}"}
           -if user.projects.include? @project
-            =link_to remove_user_for_project_user_path(@project, user), :remote => true, :method => :put, class:'btn btn-danger' do
+            =link_to remove_user_for_project_user_path(@project, user), :remote => true, :method => :put, class:'btn btn-danger',  id: "remove_user_#{user.id}" do
               %i.fa.fa-minus
               Удалить
           -else
-            =link_to add_user_for_project_user_path(@project, user), :remote => true, :method => :put, class:'btn btn-success' do
+            =link_to add_user_for_project_user_path(@project, user), :remote => true, :method => :put, class:'btn btn-success', id: "add_user_#{user.id}" do
               %i.fa.fa-plus
               Добавить
 

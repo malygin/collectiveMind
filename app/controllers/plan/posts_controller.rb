@@ -2,7 +2,6 @@
 
 class Plan::PostsController < PostsController
 
-  layout 'life_tape/posts2', :only => [:new, :edit, :show]
   #autocomplete :concept_post, :resource, :class_name => 'Concept::Post' , :full => true
 
   def current_model
@@ -39,7 +38,7 @@ class Plan::PostsController < PostsController
     post = Plan::Post.where(:project_id => @project, :status => 0).first
     @est_stat = post.estimate_status if post
     respond_to do |format|
-      format.html {render :layout => 'application_two_column'}
+      format.html
       format.json { render json: @posts }
     end
   end
@@ -49,7 +48,7 @@ class Plan::PostsController < PostsController
     @post = current_model.new
 
     respond_to do |format|
-      format.html {render :layout => 'application_two_column'}
+      format.html
     end
   end
 
@@ -106,9 +105,8 @@ class Plan::PostsController < PostsController
       @my_journals_count = @my_journals_count - 1
     end
     if current_model.column_names.include? 'number_views'
-      @post.update_column(:number_views, @post.number_views+1)
+      @post.update_column(:number_views, @post.number_views.nil? ? 1 : @post.number_views+1)
     end
-    render 'show' , :layout => 'application_two_column'
   end
 
   def edit
@@ -117,7 +115,6 @@ class Plan::PostsController < PostsController
 
     add_breadcrumb 'Редактирование записи', polymorphic_path(@post, :project => @project.id)
 
-    render 'edit' , :layout => 'application_two_column'
   end
 
 
@@ -346,7 +343,7 @@ end
     #  end
     #  @post_stage.plan_post_aspects.destroy_all
     #end
-    @post_stage.update_column(:status, 1) if current_user?(@post.user)
+    @post_stage.update_column(:status, 1) if current_user?(@post.user) or boss?
 
     respond_to do |format|
       format.js
@@ -424,7 +421,7 @@ end
     @post_stage = Plan::PostStage.find(params[:stage_id])
     @post_aspect = Plan::PostAspect.find(params[:con_id])
     @post_action = Plan::PostAction.find(params[:act_id])
-    @post_action.destroy if current_user?(@post.user)
+    @post_action.destroy if current_user?(@post.user) or boss?
     respond_to do |format|
       format.js
     end
@@ -580,7 +577,7 @@ end
     @post_stage = Plan::PostStage.find(params[:stage_id])
     @post_concept = Plan::PostAspect.find(params[:con_id])
     @post_actions = @post_concept.plan_post_actions.pluck(:id)
-    if current_user?(@post.user)
+    if current_user?(@post.user) or boss?
       @post_concept.destroy
       @post_concept.plan_post_actions.destroy_all
     end
