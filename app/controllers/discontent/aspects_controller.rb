@@ -1,60 +1,40 @@
 class Discontent::AspectsController  < ApplicationController
-  # GET /discontent/posts
-  # GET /discontent/posts.json
+
+  before_filter :prepare_data, :only => [:new, :edit]
+
   def current_model
     Discontent::Aspect
   end
 
-  def edit
+  def prepare_data
     @project = Core::Project.find(params[:project])
+  end
+
+  def new
+    @aspect = Discontent::Aspect.new
+  end
+
+  def create
+    @project = Core::Project.find(params[:project])
+    @aspect = @project.aspects.create(params[:discontent_aspect])
+    @post = @aspect.life_posts.build(:status => 0, :project => @project)
+    @aspect.life_tape_posts << @post
+    redirect_to "/project/#{@project.id}/life_tape/posts?asp=#{@aspect.id}" if @post.save
+  end
+
+  def edit
     @aspect = Discontent::Aspect.find(params[:id])
   end
 
   def update
     @aspect = Discontent::Aspect.find(params[:id])
-    @aspect.update_attributes( params[:discontent_aspect])
-    respond_to do |format|
-      format.js
-      format.html
-    end
+    @aspect.update_attributes(params[:discontent_aspect])
   end
 
   def destroy
-    @project = Core::Project.find(params[:project])
     @aspect = Discontent::Aspect.find(params[:id])
-    @aspect.update_attributes(:status => 1)
-    respond_to do |format|
-      format.js
-    end
-    #@aspect.destroy if current_user.boss?
-    #@aspect.life_tape_posts.destroy_all if current_user.boss?
-    #@aspect.life_tape_posts.first.destroy if current_user.boss?
-    #redirect_to life_tape_posts_path(@project)
+    @aspect.destroy if boss?
+    redirect_to life_tape_posts_path
   end
 
-  def new
-    @project = Core::Project.find(params[:project])
-    @aspect = Discontent::Aspect.new
-    respond_to do |format|
-      format.js
-    end
-  end
-
-  def create
-    @project = Core::Project.find(params[:project])
-    @aspect = Discontent::Aspect.create(params[:discontent_aspect])
-    @aspect.project = @project
-    @post = LifeTape::Post.create(:aspect => @aspect, :status => 0)
-    @post.project = @project
-    @aspect.life_tape_posts << @post
-    respond_to do |format|
-      if @aspect.save and @post.save
-        redirect_to "/project/#{@project.id}/life_tape/posts?asp=#{@aspect.id}"
-        return
-      else
-        #format.js {render :action => "new"}
-        render "new"
-      end
-    end
-  end
 end

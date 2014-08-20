@@ -17,10 +17,6 @@
     %div{:id => "validate_concept_#{post_concept.id}"}
       = check_validate_concept(post_concept).html_safe if check_validate_concept(post_concept)
 
-    -#-unless post_concept.plan_post_resources.by_type('positive_r').empty?
-    -#  %br
-    -#  - post_concept.plan_post_resources.by_type('positive_r').each do |res|
-    -#    .label.label-danger=res.name
 %tr(id="tr_new_action_#{post_concept.id}")
   %td
     =link_to new_action_plan_post_path(@project, @post, :con_id => post_concept.id, :stage_id => @post_stage.id), :method => :put, :remote => true, :class => "btn btn-sm btn-success pull-right", :id => "btn_new_concept", :style => "font-weight: normal;width:200px;" do

@@ -2,7 +2,7 @@
     .body
         %h3 Отредактируйте информацию о себе
         = form_for @user,:url => { :action => :update, :type =>@project.id }   do |f|
-            =render 'shared/error_messages', :object => f.object
+            =render 'shared/notice_messages', :object => f.object
             .field
                 = f.label :name, "Имя"
                 %br

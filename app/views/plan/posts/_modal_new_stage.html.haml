@@ -5,9 +5,8 @@
         %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} ×
         %h3#myModalLabel.modal-title Добавление этапа в проект
       .modal-body
-        -#= form_tag(plan_posts_add_new_stage_path(@project, add_dis_id: @plan_post, save_stage: true), {method: :post, remote: true, id: 'form_add_stage'}) do
         = form_for stage, :url => {:project => @project.id, :stage_id => stage.persisted? ? stage.id : nil, :action => stage.persisted? ? 'update_stage' : 'create_stage'}, :remote => true, :method => :put do |f|
-          = render 'shared/error_messages', :object => f.object
+          = render 'shared/notice_messages', :object => f.object
           .form-group(style="margin-left:0;")
             %label{:for => "name_stage"} Название этапа
             =f.text_field :name, :class => 'form-control', placeholder: 'Введите название этапа', id:'name_stage'
@@ -16,20 +15,16 @@
             .form-group(style="margin-left:0;")
               %label{:for => "date_begin"} Дата начала реализации
               =f.text_field :date_begin, :class => 'form-control datepicker', id:'date_begin'
-              -#%input#date_begin.form-control.datepicker{:name => "date_begin", :type => "text", :value => ""}/
           .col-md-6
             .form-group(style="margin-left:0;")
               %label{:for => "date_end"} Дата окончания реализации
               =f.text_field :date_end, :class => 'form-control datepicker', id:'date_end'
-              -#%input#date_end.form-control.datepicker{:name => "date_end", :type => "text", :value => ""}/
           .form-group(style="margin-left:0;")
             %label{:for => "desc_stage"} Эссе по этапу
             =f.text_area :desc, :class => 'form-control', :rows => 10, placeholder: 'Введите описание этапа', id:'desc_stage'
             %span.small Опишите ваше видение проекта в будущем в рамках данного этапа
           .pull-right
-            -#%button.btn.btn-default(type = "button" data-dismiss="modal") Закрыть
             %button.btn.btn-default(type = "button" data-dismiss="modal" style="margin-right:5px;") Закрыть
             =f.submit 'Сохранить', :id  => "send_post", class: 'btn btn-success'
       %br
       .modal-footer(style="margin-top:30px;padding-bottom:10px;")
-        -#%button.btn.btn-default(type = "button" data-dismiss="modal" style="margin-right:5px;") Закрыть

@@ -1,13 +1,7 @@
 %label{:for => "select_for_discussion_discontents"} Выберите несовершенство
 = select_tag 'select_for_discussion_discontents', options_from_collection_for_select(@disposts, "id", "content"), class: 'select-block-level', onchange: "discussion_select_discontent(this);"
 
--#=select_tag "select_for_discussion_discontents",
--#options_from_collection_for_select(@disposts, "id", "show_content"),
--#class: 'selectized'
-
 = form_tag(concept_posts_fast_discussion_concepts_path(@project, dis_id: @dispost, con_id: @post, save_form: true), {method: :get, remote: true, id: 'form_add_discussion'}) do
-  -#%label{:for => "select_for_aspects"} Выберите тему
-  -#= select_tag 'select_for_discussion_aspects', options_from_collection_for_select(@aspects, "id", "content"), class: 'select-block-level', onchange: "discussion_select_aspect(this);"
   %div{:id => "update_discontent_discussion"}
     %h4.text-success Несовершенство:
     = render partial: 'discontent/posts/post_short2', object: @dispost unless @dispost.nil?

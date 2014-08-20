@@ -1,8 +1,10 @@
 .media{id: "post_#{post.id}"}
-  = render 'users/user_post', :user => post.user
+  -if post.user
+    = render 'users/user_post', :user => post.user
   .media-body
-    .media-heading
-      =link_to post.user, user_path(@project, post.user)
+    -if post.user
+      .media-heading
+        =link_to post.user, user_path(@project, post.user)
     %span.color-green=post.name
     %span
       -if boss?
@@ -13,5 +15,4 @@
         =link_to 'подробнее', plan_post_path(@project, post)
     %br
     =post.goal
-    -#=link_to 'подробнее', plan_post_path(@project, post)
     = render 'shared/post_social_bar2', :post => post

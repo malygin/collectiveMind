@@ -8,7 +8,6 @@ class JournalController < ApplicationController
     @my_journals_count = @my_journals.size
 
     @journals_feed = Journal.events_for_user_feed(@project.id).paginate(:page => params[:page])
-    render 'index', :layout => 'application_two_column'
 
   end
 end

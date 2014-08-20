@@ -1,0 +1,74 @@
+.chat-message{id: "comment_#{improve_comment.id}"}
+  = render 'users/user_post', :user => improve_comment.user
+
+  .chat-message-body.stage_menu1{id: "comment_content_#{improve_comment.id}", class: "#{comment_stat_color(improve_comment)}"}
+    %span.arrow
+    .sender
+      =link_to improve_comment.user, user_path(@project, improve_comment.user)
+      = render partial: '/shared/user_online', object: improve_comment.user
+      = role_label(improve_comment)
+      %span.pull-right
+        - if current_user?(improve_comment.user) or boss?
+          =link_to({:controller => improve_comment.post.class.name.underscore.pluralize, :action => :comment_status, :id => improve_comment.post.id, :comment_id => improve_comment.id, :discontent_status => 1, :comment_stage => get_stage_for_improve(improve_comment.get_class)},  :remote => true, :method => :put,  id: "dis_stat_comment_#{improve_comment.id}") do
+            %span.label(class="#{label_dis_stat(improve_comment)}") Проблема
+          =link_to({:controller => improve_comment.post.class.name.underscore.pluralize, :action => :comment_status, :id => improve_comment.post.id, :comment_id => improve_comment.id, :concept_status => 1, :comment_stage => get_stage_for_improve(improve_comment.get_class)},  :remote => true, :method => :put,  id: "con_stat_comment_#{improve_comment.id}") do
+            %span.label(class="#{label_con_stat(improve_comment)}") Идея
+        - else
+          %span.label(class="#{label_dis_stat(improve_comment)}") Проблема
+          %span.label(class="#{label_con_stat(improve_comment)}") Идея
+
+        - if boss? or role_expert?
+          =link_to({:controller => improve_comment.post.class.name.underscore.pluralize, :action => :comment_status, :id => improve_comment.post.id, :comment_id => improve_comment.id, :discuss_status => 1, :comment_stage => get_stage_for_improve(improve_comment.get_class)},  :remote => true, :method => :put,  id: "discuss_stat_comment_#{improve_comment.id}") do
+            %span.label(class="#{label_discuss_stat(improve_comment)}") ТРЕБУЕТ ОБСУЖДЕНИЯ
+        - elsif improve_comment.discuss_status
+          %span.label-danger ТРЕБУЕТ ОБСУЖДЕНИЯ
+
+    .text
+      %div{id: "comment_text_#{improve_comment.id}"}
+        =simple_format(improve_comment.content)
+      - if current_user?(improve_comment.user) or boss?
+        %div.redactor{id: "redactor_comment_#{improve_comment.id}"}
+          =link_to 'Редактировать', {:action => :edit_comment, :id => improve_comment.id},:remote => true, :class => "text-success",id: "edit_comment_#{improve_comment.id}"
+          \|
+          = link_to 'Удалить', {:action => :destroy_comment, :id => improve_comment.id}, :method => :put, :remote => true, :confirm => 'Удалить комментарий?', :class => "text-danger",id: "destroy_comment_#{improve_comment.id}"
+
+      .pull-right
+        =link_for_improve(improve_comment).html_safe if link_for_improve(improve_comment)
+        =link_to({:action => :new, :asp => params[:asp], :improve_comment => improve_comment.id, :improve_stage => get_stage_for_improve(improve_comment.get_class) }, :method => :get,  id: "improve_comment_#{improve_comment.id}") do
+          %span.label.label-success Доработать
+        - if boss?
+          - if signed_in? and not improve_comment.users.include?(current_user)
+            =link_to({:action => :plus_comment, :id => improve_comment.id, :against => false},  :remote => true, :method => :put,  id: "plus_comment_#{improve_comment.id}") do
+              %span.text-success За
+              %span.text-success(id="plus_counter_comment_#{improve_comment.id}")=improve_comment.users_pro.count
+              %span.glyphicon.glyphicon-thumbs-up.text-success
+          -else
+            %span.text-muted= "За #{improve_comment.users_pro.count}"
+            %span.glyphicon.glyphicon-thumbs-up.text-muted
+
+      .time.pull-left
+        =time_ago_in_words(improve_comment.created_at)
+      %br
+      -if improve_comment.improve_disposts.present?
+        %br
+        %section
+          .body
+            %ul
+              - improve_comment.improve_disposts.each do |post|
+                %li(style="line-height:30px;")
+                  Доработано
+                  =link_to post.user, user_path(@project, post.user)
+                  =link_to 'подробнее', discontent_post_path(@project, post), :class=> 'btn btn-primary btn-xs'
+      -if improve_comment.improve_concepts.present?
+        %br
+        %section
+          .body
+            %ul
+              - improve_comment.improve_concepts.each do |post|
+                %li(style="line-height:30px;")
+                  Доработано
+                  =link_to post.user, user_path(@project, post.user)
+                  =link_to 'подробнее', concept_post_path(@project, post), :class=> 'btn btn-primary btn-xs'
+
+
+

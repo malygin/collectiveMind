@@ -1,18 +1,9 @@
-
 .media{id: "post_#{post.id}"}
   = render 'users/user_post', :user => post.user
   .media-body
     -post.post_aspects.each do |da|
       = render partial: 'discontent/aspects/aspect', object: da
-
     =discontent_style_name(post.style)
-    -if current_user.boss?
-      =link_to({:action => :set_important, :id => post.id}, :remote => true,:method => :put) do
-        -if post.important?
-          %span.glyphicon.text-success{:class=>'glyphicon-star', :style=>"cursor:pointer;text-decoration:none;font-size:15px;", :id=>"set_important_post_#{post.id}"}
-        -else
-          %span.glyphicon.text-success{:class=>'glyphicon-star-empty', :style=>"cursor:pointer;text-decoration:none;font-size:15px;", :id=>"set_important_post_#{post.id}"}
-    %br
     = render partial: 'discontent/posts/post_content', object: post
     .row
       .col-md-10

@@ -3,9 +3,7 @@
     =link_to post_for_vote.user, user_path(@project, post_for_vote.user)
   .media-body
     = render partial: 'post_content', object: post_for_vote
-
   %br
-
   =link_to  next_post_for_vote_discontent_post_path(@project,post_for_vote,against: true), :remote => true, :method => :put, class: "btn btn-success btn-sm vote-button", id: "vote_positive_#{post_for_vote.id}" do
     %span.glyphicon.glyphicon-thumbs-up
     -if boss?
@@ -16,16 +14,3 @@
     -if boss?
       %span.glyphicon=post_for_vote.final_votings.by_negative.size
     Не важная
-
--#- if can_vote?(post_for_vote.voted(current_user).size,  @number_v, @votes)
--#  =link_to   @path_for_voting+"vote/"+post_for_vote.id.to_s , :remote => true, :method => :put, class: "btn btn-default btn-sm vote-button", id: "vote_#{post_for_vote.id}" do
--#    %span.glyphicon.text-success.glyphicon-thumbs-up
--#    -if boss?
--#      %span.glyphicon.text-success=post_for_vote.voted_users.size
--#    Проголосовать
--#-else
--#  %a.btn.btn-success.btn-sm.disabled.vote-button
--#    %span.glyphicon.text-success.glyphicon-thumbs-up
--#    - if boss?
--#      %span.glyphicon.text-success=post_for_vote.voted_users.size
--#    Проголосовать

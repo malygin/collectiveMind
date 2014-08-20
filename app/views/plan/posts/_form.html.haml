@@ -121,8 +121,7 @@
                                     %br
                                     =concept.name
                                     %br
-                                    %div{:id => "validate_concept_#{concept.id}"}
-                                      = check_validate_concept(concept).html_safe if check_validate_concept(concept)
+                                    = check_validate_concept(concept).html_safe if check_validate_concept(concept)
                                     -#-unless concept.plan_post_resources.by_type('positive_r').empty?
                                     -#  %br
                                     -#  - concept.plan_post_resources.by_type('positive_r').each do |res|

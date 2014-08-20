@@ -1,2 +1,0 @@
-module Discontent::AspectsHelper
-end

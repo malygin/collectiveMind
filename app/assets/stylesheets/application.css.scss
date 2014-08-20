@@ -1,0 +1,255 @@
+
+
+//@import url(../lib/nvd3/src/nv.d3.css);
+
+@import "compass";
+@import "font";
+@import 'lib/fontello/css/fontello.css';
+
+@import "variables";
+
+@import "bootstrap-original/bootstrap";
+@import "bootstrap-original/_mixins";
+@import "bootstrap-override";
+@import "lib/font-awesome/font-awesome";
+//@import "lib/_icheckbox";
+//@import "lib/_datepicker";
+//@import "lib/_select2";
+@import "lib/_bootstrap-wysihtml5";
+//@import "lib/_bootstrap-switch";
+//@import "lib/_bootstrap-colorpicker";
+//@import "lib/_jqvmap";
+//@import "lib/_fullcalendar";
+//@import "lib/_jquery.fileupload-ui";
+//@import "lib/_backgrid";
+//@import "lib/_rickshaw";
+//@import "lib/_jquery.datatables";
+//@import "lib/_animate";
+//@import "lib/nestable";
+//@import "lib/messenger-1.4.1/messenger";
+//@import "lib/messenger-1.4.1/messenger-spinner";
+//@import "lib/messenger-1.4.1/messenger-theme-air";
+//@import "lib/bootstrap-slider";
+@import "bootstrap3-editable/bootstrap-editable";
+@import "selectize";
+@import "selectize.default";
+
+@import "svg";
+@import "general";
+@import "base";
+@import "responsive";
+//@import "print";
+
+
+// Brand colors
+// -------------------------
+
+$brand-lifetape:        $teal !default;
+$brand-discontent:      $pink !default;
+$brand-concept:         $orange !default;
+$brand-plan:            $lime !default;
+$brand-estimate:        #663505 !default;
+
+.text-lifetape         { color: $brand-lifetape; }
+.text-discontent       { color: $brand-discontent; }
+.text-concept          { color: $brand-concept; }
+.text-plan             { color: $brand-plan; }
+.text-estimate         { color: $brand-estimate; }
+.text-towork { color: $teal !important;}
+.text-essay {color: $green !important;}
+
+.label-lifetape    { @include label-variant($brand-lifetape);}
+.label-discontent  { @include label-variant($brand-discontent);}
+.label-concept     { @include label-variant($brand-concept);}
+.label-plan        { @include label-variant($brand-plan);}
+.label-estimate    { @include label-variant($brand-estimate);}
+
+
+/*todo my styles top*/
+
+
+
+/* discontent posts */
+.label-t {
+  @include label-variant($teal);
+}
+
+.label-n {
+  @include label-variant($brand-danger);
+}
+
+.label-p {
+  @include label-variant($green);
+}
+
+.label-g {
+  @include label-variant($gray-light);
+}
+
+
+
+
+.discuss_comment {
+  list-style: none;
+  background-color: lighten($brand-danger, 10%);
+  margin-left: 15px;
+  li {
+    margin-bottom: 0px !important;
+    margin-left: 15px !important;
+    padding: 5px;
+    border-top: none !important;
+    text-decoration: none !important;
+  }
+}
+
+.expert_comment {
+  background-color: rgba(215, 233, 208, 0.3) !important;
+}
+
+p, a {
+  word-wrap: break-word;
+}
+
+.discontent-list .news-item-info {
+  margin-left: 62px;
+}
+
+/*Raiting users*/
+.top3 {
+  background: rgba(51, 51, 51, 0.4);
+}
+.top10 {
+  background: rgba(51, 51, 51, 0.2);
+}
+.ui-state-default {
+  border: none;
+  background: none;
+  color: white;
+}
+.ui-state-default a div{
+  color: white;
+}
+.widget-panel .tab-content {
+  overflow: visible !important;
+}
+
+.wizard-navigation.nav-pills li.active a {
+  background-color: #618FB0 !important;
+}
+
+.concept-name {
+  background-color: #f4f4f4;
+  border-top: 0.5px solid grey;
+  border-bottom: 0.5px solid grey;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  text-align: center;
+}
+
+.autocomplete,
+.ui-autocomplete-input,
+.ui-autocomplete {
+  max-height: 200px !important;
+  overflow-y: auto !important;
+  /* prevent horizontal scrollbar */
+  overflow-x: hidden !important;
+}
+
+.popover-concept {
+  max-width: 600px !important;
+  background-color: rgba(51, 51, 51, 1) !important;
+}
+.popover-concept-title {
+  background-color: rgba(43, 43, 43, 1) !important;
+}
+
+.popover-concept-modal {
+  background-color:#fff !important;
+  color: #555 !important;
+}
+
+.popover-title-modal {
+  background-color:#f7f7f7 !important;
+  border-bottom:1px solid #ebebeb !important;
+  color: #555 !important;
+}
+.example-concept {
+  cursor: pointer;
+}
+
+.plus-concept {
+  /*border-bottom: 1px solid #eac85e;*/
+  padding-bottom: 2px;
+  padding-top: 2px;
+}
+.concept-devider {
+  border-bottom: 1px solid #eac85e;
+}
+
+.dis-comment {
+  line-height: 20px !important;
+}
+
+.news-list li.union-list {
+  padding: 0;
+  margin: 0 0;
+}
+
+/*#toTop {*/
+/*width:100px;*/
+/*border:1px solid #ccc;*/
+/*background:#f7f7f7;*/
+/*text-align:center;*/
+/*padding:5px;*/
+/*position:fixed;*/
+/*bottom:10px; *//* отступ кнопки от нижнего края страницы*/
+/*left:10px;*/
+/*cursor:pointer;*/
+/*display:none;*/
+/*color:#333;*/
+/*font-family:verdana;*/
+/*font-size:11px;*/
+/*}*/
+/*.scrollup{*/
+/*width:40px;*/
+/*height:40px;*/
+/*opacity:0.3;*/
+/*position:fixed;*/
+/*bottom:50px;*/
+/*right:100px;*/
+/*display:none;*/
+/*text-indent:-9999px;*/
+/*background: url('/img/icon_top.png') no-repeat;*/
+/*}*/
+
+#toTop {
+  display:none;
+  text-decoration:none;
+  position:fixed;
+  bottom:10px;
+  left:10px;
+  overflow:hidden;
+  width:51px;
+  height:51px;
+  border:none;
+  text-indent:100%;
+  background:url(/assets/img/ui.totop.png) no-repeat left top;
+}
+
+#toTopHover {
+  background:url(/assets/img/ui.totop.png) no-repeat left -51px;
+  width:51px;
+  height:51px;
+  display:block;
+  overflow:hidden;
+  float:left;
+  opacity: 0;
+  -moz-opacity: 0;
+  filter:alpha(opacity=0);
+}
+
+#toTop:active, #toTop:focus {
+  outline:none;
+}
+
+/*todo my styles bottom*/

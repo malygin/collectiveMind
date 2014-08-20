@@ -10,9 +10,7 @@ class Estimate::Post < ActiveRecord::Base
   belongs_to :post, :class_name => 'Plan::Post'
   has_many :post_aspects
   has_many :plan_post_aspects, :class_name => 'Plan::PostAspect'
-  #scope :by_firts_stage , lambda do |stage|
-  #  joins(:plan_post_aspects).where('plan_post_aspects.first_stage = ?', stage)
-  #end
+
 
   has_many :post_aspects_other, :foreign_key => 'post_id', :class_name => 'Estimate::PostAspect',
            :conditions =>  {:first_stage => false}
@@ -33,10 +31,6 @@ class Estimate::Post < ActiveRecord::Base
         on_i=(tr.on1+tr.on2+tr.on3+tr.on4) ==0 ? 0 :  (4*tr.on1+3*tr.on2+2*tr.on3+tr.op4)/(tr.on1+tr.on2+tr.on3+tr.on4)
         ozf_i=(tr.ozf1+tr.ozf2+tr.ozf3+tr.ozf4) ==0 ? 0 :  (4*tr.ozf1+3*tr.ozf2+2*tr.ozf3+tr.ozf4)/(tr.ozf1+tr.ozf2+tr.ozf3+tr.ozf4)
         ozs_i=(tr.ozs1+tr.ozs2+tr.ozs3+tr.ozs4) ==0 ? 0 : (4*tr.ozs1+3*tr.ozs2+2*tr.ozs3+tr.ozs4)/(tr.ozs1+tr.ozs2+tr.ozs3+tr.ozs4)
-        # op_i=(tr.op1+tr.op2+tr.op3+tr.op4) ==0 ? 0 :  ((95/100.to_f)*tr.op1+(70/100.to_f)*tr.op2+(30/100.to_f)*tr.op3)/(tr.op1+tr.op2+tr.op3+tr.op4).to_f
-        # on_i=(tr.on1+tr.on2+tr.on3+tr.on4) ==0 ? 0 :   ((95/100.to_f)*tr.on1+(70/100.to_f)*tr.on2+(30/100.to_f)*tr.on3)/(tr.on1+tr.on2+tr.on3+tr.on4).to_f
-        # ozf_i=(tr.ozf1+tr.ozf2+tr.ozf3+tr.ozf4) ==0 ? 0 : ((95/100.to_f)*tr.ozf1+(70/100.to_f)*tr.ozf2+(30/100.to_f)*tr.ozf3)/(tr.ozf1+tr.ozf2+tr.ozf3+tr.ozf4).to_f
-        # ozs_i=(tr.ozs1+tr.ozs2+tr.ozs3+tr.ozs4) ==0 ? 0 :  ((95/100.to_f)*tr.ozs1+(70/100.to_f)*tr.ozs2+(30/100.to_f)*tr.ozs3)/(tr.ozs1+tr.ozs2+tr.ozs3+tr.ozs4).to_f
         sum_tr = sum_tr + ( (ozf_i*ozs_i) ==0 ? 0 : (op_i*on_i)/(ozf_i*ozs_i))
         count+=1
 
@@ -49,10 +43,6 @@ class Estimate::Post < ActiveRecord::Base
         on_i=(tr.on1+tr.on2+tr.on3+tr.on4) ==0 ? 0 :  (4*tr.on1+3*tr.on2+2*tr.on3+tr.op4)/(tr.on1+tr.on2+tr.on3+tr.on4)
         ozf_i=(tr.ozf1+tr.ozf2+tr.ozf3+tr.ozf4) ==0 ? 0 :  (4*tr.ozf1+3*tr.ozf2+2*tr.ozf3+tr.ozf4)/(tr.ozf1+tr.ozf2+tr.ozf3+tr.ozf4)
         ozs_i=(tr.ozs1+tr.ozs2+tr.ozs3+tr.ozs4) ==0 ? 0 : (4*tr.ozs1+3*tr.ozs2+2*tr.ozs3+tr.ozs4)/(tr.ozs1+tr.ozs2+tr.ozs3+tr.ozs4)
-        # op_i=(tr.op1+tr.op2+tr.op3+tr.op4) ==0 ? 0 :  ((95/100.to_f)*tr.op1+(70/100.to_f)*tr.op2+(30/100.to_f)*tr.op3)/(tr.op1+tr.op2+tr.op3+tr.op4).to_f
-        # on_i=(tr.on1+tr.on2+tr.on3+tr.on4) ==0 ? 0 :   ((95/100.to_f)*tr.on1+(70/100.to_f)*tr.on2+(30/100.to_f)*tr.on3)/(tr.on1+tr.on2+tr.on3+tr.on4).to_f
-        # ozf_i=(tr.ozf1+tr.ozf2+tr.ozf3+tr.ozf4) ==0 ? 0 : ((95/100.to_f)*tr.ozf1+(70/100.to_f)*tr.ozf2+(30/100.to_f)*tr.ozf3)/(tr.ozf1+tr.ozf2+tr.ozf3+tr.ozf4).to_f
-        # ozs_i=(tr.ozs1+tr.ozs2+tr.ozs3+tr.ozs4) ==0 ? 0 :  ((95/100.to_f)*tr.ozs1+(70/100.to_f)*tr.ozs2+(30/100.to_f)*tr.ozs3)/(tr.ozs1+tr.ozs2+tr.ozs3+tr.ozs4).to_f
         sum_tr = sum_tr + ( (ozf_i*ozs_i) ==0 ? 0 : (op_i*on_i)/(ozf_i*ozs_i))
         count+=1
       end
@@ -63,7 +53,6 @@ class Estimate::Post < ActiveRecord::Base
       @first_c = (@first_c * 100).round / 100.0
       @second_c = (@second_c * 100).round / 100.0
       @third_c = ((th1 + th2)*100).round / 100.0
-      # max nov 4.82 min 1.43
       @max_score = ((count.to_f * 2.86 / (2 * 1.86))  *100).round / 100.0
       sum_all = @first_c+@second_c
       sum_all /= @third_c if @third_c != 0.0

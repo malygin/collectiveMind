@@ -99,10 +99,6 @@
                                     =concept.name
                                     %br
                                     = check_validate_concept(concept,true).html_safe if check_validate_concept(concept)
-                                    -#-unless concept.plan_post_resources.by_type('positive_r').empty?
-                                    -#  %br
-                                    -#  - concept.plan_post_resources.by_type('positive_r').each do |res|
-                                    -#    .label.label-danger=res.name
                                 - unless concept.plan_post_actions.nil?
                                   - concept.plan_post_actions.each do |action|
                                     %tr(id="tr_action_#{action.id}")
@@ -120,12 +116,6 @@
                                           %br
                                           -action.plan_post_action_resources.each  do |res|
                                             .label.label-danger=res.name
-
-
-
-
-
-
 
         #tab3.tab-pane
           .form-horizontal
@@ -147,8 +137,6 @@
                                   =concept.title
               .col-md-8
                 #render_get_concept
-              -#.col-md-4
-              -#  #render_get_concept_actions
 
         .description
           %ul.pager.wizard
@@ -160,7 +148,6 @@
               %button.btn.btn-primary.pull-right
                 Далее
                 %i.fa.fa-caret-right
-
 
 .row
   .col-md-12
@@ -174,115 +161,3 @@
         = will_paginate @comments
     - if signed_in?
       = render :partial => 'shared/comment_form', :locals => { :comment => @comment, :url_link => url_for(:controller => @post.class.name.underscore.pluralize, :action => 'add_comment')}
-
-
-
-
-
--#.col-md-8
--#  .media
--#    .media-body
--#      %span.h5.text-success=t('form.essay')
--#      %span
--#        %a(href="#" style="text-decoration=none;")
--#          -#%i.glyphicon.glyphicon-pencil
--#      %br
--#      =@post.content
--#
--#  %br
--#  %br
--#  %div.tab-content
--#    -#-@post.post_aspects_other.each do |pa|
--#    -#  =render partial: 'resolve_discontent_show', locals: { pa: pa }
--#    -#
--#    -#-@post.post_aspects_first.each do |pa|
--#    -#  =render partial: 'first_cond_show', locals: { pa: pa }
--#    -unless @post.post_aspects.nil?
--#      -@post.post_aspects.each do |cp|
--#        =render partial: 'first_cond_show', object: cp
--#    %div.tab-pane#essay2
--#      %hr
--#      %h3.text-success=t('form.essay1')
--#      %br
--#      .panel.panel-info
--#        .panel-heading=t('form.essay1_notice')
--#        .panel-body
--#          %br
--#          =@post.first_step
--#    %div.tab-pane#plan1
--#      %hr
--#      %h3.text-success=t('form.plan_all')
--#      %br
--#      .panel.panel-info
--#        .panel-heading=t('form.plan_all_notice')
--#        .panel-body
--#          %br
--#          =@post.plan_other
--#    %div.tab-pane#plan2
--#      %hr
--#      %h3.text-success=t('form.plan_first')
--#      %br
--#      .panel.panel-info
--#        .panel-heading=t('form.plan_first_notice')
--#        .panel-body
--#          %br
--#          =@post.plan_first
--#.col-md-4
--#  - if (current_user?(@post.user) and @post.status == 0 and @project.can_edit_on_current_stage(@post)) or boss?
--#    = link_to 'Редактировать', {:action => 'edit', :project => @project, :id => @post.id}, :class => "btn btn-success"
--#  %h5
--#    .small Выберите нововведение, кликнув по нужной вкладке:
--#  %ul.nav.nav-tabs.nav-justified
--#    %li.active
--#      %a(href="#theall" data-toggle="tab") Завершенный образ
--#    %li
--#      %a(href="#thefirst" data-toggle="tab") Первый этап
--#  .tab-content
--#    #theall.tab-pane.fade.in.active(onclick="$('#thefirst ul li').removeClass('active');" )
--#      %ul.nav.nav-tabs.nav-stacked
--#        %li
--#          %a.text-success(href="#plan1" data-toggle="tab" style='font-size:10px; font-weight: bold;')
--#            =t('form.plan_all')
--#        -unless @post.post_aspects_other.nil?
--#          -@post.post_aspects_other.each do |cp|
--#            %li
--#              %a(href="#asp_#{cp.id}" data-toggle="tab")
--#                =display_title(cp)
--#                -#-if not cp.title.nil? and cp.title!=''
--#                -#  =cp.title
--#                -#-else
--#                -#  =cp.discontent.display_content
--#
--#
--#        -#%li
--#        -#  %a.text-success(href="#modal_concept" data-toggle="modal" onclick="empty_modal_plan();" data-target="#modal_concept" style='font-size:10px; font-weight: bold;')
--#        -#    =t('form.plan_add_concept')
--#        -#-@post.post_aspects_other.each_with_index do |d,i|
--#        -#  %li
--#        -#    %a(href="#dis_#{d.id}" data-toggle="tab")="#{i+1}. #{d.title}"
--#            -#%a(href="#dis_#{d.discontent.id}" data-toggle="tab")="#{i+1}. #{d.discontent.display_content}"
--#
--#
--#    #thefirst.tab-pane.fade(onclick="$('#theall ul li').removeClass('active');" )
--#      %ul.nav.nav-tabs.nav-stacked
--#        %li
--#          %a.text-success(href="#essay2" data-toggle="tab" style='font-size:10px; font-weight: bold;')
--#            =t('form.essay1')
--#        %li
--#          %a.text-success(href="#plan2" data-toggle="tab" style='font-size:10px; font-weight: bold;')
--#            =t('form.plan_first')
--#        -unless @post.post_aspects_first.nil?
--#          -@post.post_aspects_first.each do |cp|
--#            %li
--#              %a(href="#asp_#{cp.id}" data-toggle="tab")
--#                =display_title(cp)
--#
--#        -#%li
--#        -#  %a.text-success(href="#modal_concept" data-toggle="modal" onclick="empty_modal_plan();" data-target="#modal_concept" style='font-size:10px; font-weight: bold;')
--#        -#    =t('form.plan_add_concept')
--#        -#-@post.post_aspects_first.each_with_index do |d,i|
--#        -#  - if d.name!=''
--#        -#    %li
--#        -#      %a(href="#fdis_#{d.id}" data-toggle="tab")="#{i+1}. #{d.title}"
--#              -#%a(href="#fdis_#{d.discontent.id}" data-toggle="tab")="#{i+1}. #{d.discontent.display_content}"
-

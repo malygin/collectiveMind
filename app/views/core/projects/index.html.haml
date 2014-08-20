@@ -2,33 +2,29 @@
   -if @opened_projects.present?
     %h3
       %strong Открытые процедуры
-    - @opened_projects.each do |project|
-      .row(style="font-weight:500;")
-        .col-md-8
+    %ul(style="line-height:30px;")
+      - @opened_projects.each do |project|
+        %li
           = project.name
-        .col-md-2
-          .badge.badge-success(style="color:white;")
-            =status_project(project)
-        .col-md-2
-          =link_to "/project/#{project.id}", class:'btn btn-sm btn-danger', id: 'go_to_project' do
-            Перейти к процедуре
-            %i.fa.fa-arrow-right
-      %br
+          %b="(#{status_project(project)})"
+          .pull-right
+            =link_to "/project/#{project.id}", class:'btn btn-sm btn-danger', id: 'go_to_project' do
+              Перейти к процедуре
 
+  %br
+  %br
   -if @demo_projects.present?
     %h3
       %strong Демо процедуры
-    - @demo_projects.each do |project|
-      .row(style="font-weight:500;")
-        .col-md-10
+    %ul(style="line-height:30px;")
+      - @demo_projects.each do |project|
+        %li
           = project.name
-        .col-md-2
-          =link_to "/project/#{project.id}", class:'btn btn-sm btn-danger' do
-            Перейти к процедуре
-            %i.fa.fa-arrow-right
-      %br
+          .pull-right
+            =link_to "/project/#{project.id}", class:'btn btn-sm btn-danger' do
+              Перейти к процедуре
 
-%h2
+%h3
   %strong О проекте
 %p
   %strong MASSDECISION
@@ -42,8 +38,8 @@
         .col-xs-4
           %p
             %span.icon.background-danger
-              %i.fa.eicon-flow-tree(style='margin-top: 7px;')
-        .col-xs-8(style="text-align: left;")
+              %i.fa.eicon-flow-tree
+        .col-xs-8
           %h4 Процедурная рациональность&nbsp;
           %p Оригинальные авторские модели и техники, которые помогают предотвратить нерациональность процесса выработки решения
   .col-sm-4
@@ -52,8 +48,8 @@
         .col-xs-4
           %p
             %span.icon.background-warning
-              %i.fa.fa-group(style='margin-top: 7px;')
-        .col-xs-8(style="text-align: left;")
+              %i.fa.fa-group
+        .col-xs-8
           %h4 Деловая игра
           %p Многие участники получают баллы и призы, а выигрывают все, так как побеждает проект, выбранный большинством в ходе демократичной дискуссии&nbsp;
   .col-sm-4
@@ -62,7 +58,7 @@
         .col-xs-4
           %p
             %span.icon.background-success
-              %i.fa.eicon-paper-plane(style='margin-top: 7px;')
-        .col-xs-8(style="text-align: left;")
+              %i.fa.eicon-paper-plane
+        .col-xs-8
           %h4 Осуществление проекта
           %p Решение вырабатывается его будущими исполнителями, что обеспечивает качественно новый уровень его понимания и повышает мотивацию к исполнению

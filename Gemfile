@@ -47,6 +47,8 @@ group :assets do
   gem 'sass-rails',   '~> 3.2.3'
   gem 'coffee-rails', '~> 3.2.1'
   gem 'uglifier', '>= 2.1.1'
+  gem 'compass'
+  gem 'compass-rails'
   gem 'therubyracer', '>=0.11.4'
 end
 
@@ -54,7 +56,7 @@ gem 'pg'
 gem 'activerecord-postgresql-adapter'
 
 gem 'russian'
-gem 'bootstrap-sass-rails'
+# gem 'bootstrap-sass-rails'
 gem 'bootstrap-x-editable-rails'
 gem "selectize-rails"
 gem 'rails3-jquery-autocomplete', '1.0.14'
@@ -74,6 +76,7 @@ gem 'faker'
 gem 'devise_lastseenable'
 gem 'memcachier'
 gem 'dalli'
+
 # Fast IO for memcache
 gem 'kgio'
 # Serve static assets through Rack + Memcache

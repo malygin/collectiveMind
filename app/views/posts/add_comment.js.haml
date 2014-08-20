@@ -1,8 +1,3 @@
--#$('#Send').animate({left: 0, opacity: 0},  "normal",  function(){$('#Send').css('display','none')})
--#$("#new_life_tape").animate({height: 0}, "normal", function(){$('#new_life_tape').css('display','none')})
--#$("#add_record").fadeIn('slow')
--#$('#send').addClass('disabled')
-
 -if @main_comment.nil?
   $("#comment_text_area").val('')
   $('.chat-messages').append("#{escape_javascript(render :partial => 'shared/comment', :object => @comment)}")
@@ -12,10 +7,6 @@
   $("#child_comments_#{@main_comment.id}").append("#{escape_javascript(render :partial => 'shared/child_comment', :object => @comment)}");
   $("#child_comments_form_#{@main_comment.id}").html('')
 
-
 $("#change_comment_stat label").removeClass('btn-success active').addClass('btn-default');
 $('#change_comment_stat .btn').button('reset');
--#$("#change_comment_stat input[type!='hidden']").val('0');
--#$("#change_comment_stat input[type='hidden']").val('1');
 
--#$("#change_comment_stat input:checkbox:enabled").attr('checked', false);

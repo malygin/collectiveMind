@@ -1,8 +1,6 @@
 .media{id: "post_#{post.id}"}
   = render 'users/user_post', :user => post.user
   .media-body
-    -#= render partial: 'discontent/aspects/aspect', collection: post.discontent_aspects
-    -#= render :partial => '/posts/set_important', locals: {post: post}
     -post.discontent_aspects.each do |asp|
       %b=asp.content
     %br

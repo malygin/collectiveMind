@@ -1,9 +1,3 @@
--#.content.container
--#  .row
--#    .col-md-12
--#      %h2.page-title
--#        Form Wizard
--#        %small Form validation
 #modal_fast_discussion_concepts.modal.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :style => "display: none;", :tabindex => "-1"}
   .modal-dialog.modal-lg
     .modal-content
@@ -19,11 +13,6 @@
                 %small
                   1.
                 %strong Обзор
-            -#%li
-            -#  %a{"data-toggle" => "tab", :href => "#tab2"}
-            -#    %small
-            -#      2.
-            -#    %strong Добавить
 
           #bar.progress.progress-small
             .progress-bar
@@ -32,24 +21,3 @@
               .form-horizontal
                 %fieldset
                   #form_fast_discussion_comment_concept
-
-
-      -#      #tab2.tab-pane
-      -#        .form-horizontal
-      -#          %fieldset
-      -#            #form_fast_discussion_add_concept
-      -#
-      -#
-      -#      .description
-      -#        %ul.pager.wizard
-      -#          %li.previous
-      -#            %button.btn.btn-primary.pull-left
-      -#              %i.fa.fa-caret-left
-      -#              Назад
-      -#          %li.next
-      -#            %button.btn.btn-primary.pull-right
-      -#              Далее
-      -#              %i.fa.fa-caret-right
-      -#
-      -#.modal-footer
-      -#  %button.btn.btn-default(type = "button" data-dismiss="modal") Закрыть

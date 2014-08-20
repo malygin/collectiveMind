@@ -1,6 +1,0 @@
-= form_for form_post_note, :html => {:class => 'new_or_edit', :id => "note_for_post_#{@post_aspect_note.id}_#{@type}",style: 'height: 0px;display:none;'}, remote: true, :url => {:project => @project.id,:id => @post.id, :con_id => @post_aspect_note.id,:type_field => @type, :action => 'create_note' }, :method => :put do |f|
-  = render 'shared/error_messages', :object =>f.object
-  =f.text_area :content, :class => 'form-control', style: 'height: 40px;', placeholder: 'Ваш комментарий', id:'edit_post_note_text_area'
-  .pull-right
-    %button.btn.btn-danger.btn-xs(type="button" onclick="reset_post_note_form(#{@post_aspect_note.id},#{@type}); return false;" ) Отменить
-    =f.submit 'Отправить', :id  => "send_post_#{@type}", class: 'btn btn-sm btn-success'

@@ -1,7 +1,0 @@
-$('#Send').animate({left: 0, opacity: 0},  "normal",  function(){$('#Send').css('display','none')})
-$("#new_life_tape").animate({height: 0}, "normal", function(){$('#new_life_tape').css('display','none')})
-$("#add_record").fadeIn('slow')
-$("#new_life_tape").val('')
-$('#posts').prepend("#{escape_javascript(render :partial => 'shared/post', :object => @post)}")
-$('#post_#{@post.id}').effect("highlight", {color: '#f5cecd'}, 1000);
-

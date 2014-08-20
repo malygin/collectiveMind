@@ -1,6 +1,0 @@
-.comments
-	= form_for [@question, @question.answers.build] do 
-		= label :answer, :text, 'впишите ответ сюда' 
-		%br
-			= text_area :answer,:text
-		= submit_tag '', class: 'btn'

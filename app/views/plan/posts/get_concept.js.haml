@@ -1,7 +1,4 @@
 -unless @view_post_concept
-  -#$('#send_post_concept').submit();
-  -#save_last_concept();
-
   $('#render_get_concept').html("#{escape_javascript(render :partial => 'form_concept', :object => @post_concept )}");
   autocomplete_initialized();
 -else

@@ -1,42 +1,12 @@
--#
--#%h3 Голосование за самые актуальные несовершенства
--#
--#- unless @number_v<1  and not boss?
--#  .alert.alert-info
--#    %h3.text-danger
--#      =t('voting.have_votes')
--#      %b#count_vote=@number_v
--#
--#%table.table
--#  -@aspects.each do |aspect|
--#    %tr
--#      %td(colspan=3)
--#        %span.label.label-t=aspect.content
--#    %tr
--#      %td
--#        %span.label.label-p  Отсутствующие достоинства
--#      %td
--#        %span.label.label-n(style='min-width: 300px;')  Имеющиеся недостатки
--#
--#    %tr
--#      %td
--#        =render partial:'post_for_vote', collection: aspect.negative_posts.by_status(@status)
--#
--#      %td
--#        =render partial:'post_for_vote', collection: aspect.positive_posts.by_status(@status)
 .row
   .col-md-12
     %h3
-      2 этап: Анализ ситуации. Голосование
+      2 этап: Сбор несовершенств. Голосование
       %br
-      %small(style='font-size: 20px;line-height: 30px;')
-        Голосование за несовершенства в рамках процедуры:
-        =@project.name
 
-
-%section.widget
+%section
   %header
-    %h5 Определение наиболее важных проблем:
+    %h4 Определение наиболее важных проблем:
   .body
     %span Несовершенство:
     %span#prog_now=@votes != @post_all ? @votes+1 : @votes

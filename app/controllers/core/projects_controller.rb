@@ -3,7 +3,7 @@ class Core::ProjectsController < ApplicationController
   # GET /core/projects
   # GET /core/projects.json
   before_filter :boss_authenticate, :only => [:next_stage, :pr_stage]
-  before_filter :admin_authenticate, :only => [:list_projects]
+  before_filter :admin_authenticate, :only => [:new,:edit,:create,:update,:destroy,:list_projects]
   before_filter :project_by_id
   
   def  project_by_id
@@ -15,7 +15,6 @@ class Core::ProjectsController < ApplicationController
   def index
     @core_projects = Core::Project.order(:id).all
     @core_project = @core_projects.last
-    #@view_projects = Core::Project.where(:type_access => list_type_projects_for_user).order(:id).limit(limit_projects_for_user)
     @opened_projects = Core::Project.where(:type_access => 0).order("id DESC")
     @demo_projects = Core::Project.where(:type_access => 3).order("id DESC").limit(2)
     respond_to do |format|
@@ -70,7 +69,6 @@ class Core::ProjectsController < ApplicationController
   def create
     @core_project = Core::Project.new(params[:core_project])
     @core_project.type_project  =  0
-    # @core_project.type_access  =  2
     @core_project.status  =  1
     respond_to do |format|
       if @core_project.save

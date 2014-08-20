@@ -6,10 +6,11 @@
       .row
         .col-md-2
           .media
-            = render 'users/user_post', :user => @post.user
-            .media-body
-              .media-heading
-                =link_to @post.user, user_path(@project, @post.user)
+            -if @post.user
+              = render 'users/user_post', :user => @post.user
+              .media-body
+                .media-heading
+                  =link_to @post.user, user_path(@project, @post.user)
         .col-md-5
           %h4 Решаемое несовершенство:
           =render partial:'discontent/posts/post_short2', object: tp.discontent if tp.discontent
@@ -28,9 +29,9 @@
         =improve_comment(@post).html_safe if improve_comment(@post)
         |
         - if boss? or role_expert?
-          =link_to({:action => :discuss_stat, :id => @post.id, :discuss_stat => 1},  :remote => true, :method => :put,  id: "discuss_stat_post_#{@post.id}") do
+          =link_to({:action => :discuss_status, :id => @post.id, :discuss_status => 1},  :remote => true, :method => :put,  id: "discuss_stat_post_#{@post.id}") do
             %span.label(class="#{label_discuss_stat(@post)}") ТРЕБУЕТ ОБСУЖДЕНИЯ
-        - elsif @post.discuss_stat
+        - elsif @post.discuss_status
           %span.label-danger ТРЕБУЕТ ОБСУЖДЕНИЯ
         = render '/shared/post_social_bar2', :post => @post
       %br
@@ -204,17 +205,6 @@
               -if @project.status == 7
                 = render partial: 'concept/posts/note_list', :locals => {:post_field => @post,:type_fd => 8}
 
-          -#%section.widget
-          -#  .body
-          -#    -if boss? and @project.status == 7
-          -#      =link_to({:controller => 'concept/posts', :action => :status_post, :id => @post.id, :type_field => 4},:remote => true,:method => :put, :id => "label_post_#{@post.id}",:class => "note_text") do
-          -#        %span(class= "#{class_for_concept_type_field(@post,4)}" id="#{id_for_concept_type(4)}") Какие ресурсы необходимы?
-          -#        =link_to({:controller => 'concept/posts', :action => :new_note, :id => @post.id, :type_field => 4},:remote => true,:method => :put, :id => "btn_note_4", :class => "note_text") do
-          -#          .label.label-danger замечание
-          -#    -else
-          -#      %span(class= "#{class_for_concept_type_field(@post,4)}" id="positive_r") Какие ресурсы необходимы?
-          -#    %br
-          -#    %br
           .pull-right
             = render 'shared/post_edit_bar', :post => @post
 

@@ -103,8 +103,6 @@ module ApplicationHelper
 				'открыта для просмотра'
 			when 2
 				'закрыта'
-		
-
 			else
 				'закрыта'
 		end 
@@ -116,7 +114,6 @@ module ApplicationHelper
 				''
 			when 1
 				'(демонстрационная)'
-
 		end 
 	end
 
@@ -144,37 +141,60 @@ module ApplicationHelper
     end
   end
 
-  def column_for_type_field(type_fd)
-    case type_fd
-      when 1
-        'status_content'
-      when 2
-        'status_whered'
-      when 3
-        'status_whend'
-      else
-        null
+  def column_for_type_field(table_name, type_fd)
+    if table_name == 'discontent_note'
+      case type_fd
+        when 1
+          'status_content'
+        when 2
+          'status_whered'
+        when 3
+          'status_whend'
+        else
+          ''
+      end
+    elsif table_name == 'concept_note'
+      case type_fd
+        when 1
+          'status_name'
+        when 2
+          'status_content'
+        when 3
+          'status_positive'
+        when 4
+          'status_positive_r'
+        when 5
+          'status_negative'
+        when 6
+          'status_negative_r'
+        when 7
+          'status_problems'
+        when 8
+          'status_reality'
+        else
+          ''
+      end
     end
   end
 
   def column_for_concept_type(type_fd)
     case type_fd
       when 1
-        'stat_name'
+        'status_name'
       when 2
-        'stat_content'
+        'status_content'
       when 3
-        'stat_positive'
+        'status_positive'
       when 4
-        'stat_positive_r'
+        'status_positive_r'
       when 5
-        'stat_negative'
+        'status_negative'
       when 6
-        'stat_negative_r'
+        'status_negative_r'
       when 7
-        'stat_problems'
+        'status_problems'
       when 8
-        'stat_reality'
+        'status_reality'
       else
         null
     end
@@ -237,15 +257,15 @@ module ApplicationHelper
   def stage_status(stage)
     case stage
       when 1
-        'Сбор информации.'
+        'Подготовка к процедуре'
       when 2
-        'Анализ ситуации.'
+        'Сбор несовершенств'
       when 3
-        'Формулирование проблемы.'
+        'Сбор нововведений'
       when 4
-        'Создание проектов.'
+        'Создание проектов'
       when 5
-        'Оценка проектов.'
+        'Выставление оценок'
     end
   end
 
@@ -266,7 +286,7 @@ module ApplicationHelper
   end
 
   def label_dis_stat(comment)
-    case comment.dis_stat
+    case comment.discontent_status
       when false
         'label-default'
       when true
@@ -276,7 +296,7 @@ module ApplicationHelper
     end
   end
   def label_con_stat(comment)
-    case comment.con_stat
+    case comment.concept_status
       when false
         'label-default'
       when true
@@ -286,7 +306,7 @@ module ApplicationHelper
     end
   end
   def label_discuss_stat(comment)
-    case comment.discuss_stat
+    case comment.discuss_status
       when false
         'label-default'
       when true
@@ -329,9 +349,9 @@ module ApplicationHelper
   end
 
   def improve_comment(post)
-    if post.imp_comment and post.imp_stage
-      comment = "#{get_class_for_improve(post.imp_stage)}::Comment".constantize.find(post.imp_comment)
-      case post.imp_stage
+    if post.improve_comment and post.improve_stage
+      comment = "#{get_class_for_improve(post.improve_stage)}::Comment".constantize.find(post.improve_comment)
+      case post.improve_stage
         when 1
           "| Доработано из " + (link_to "предложения ", "/project/#{@project.id}/life_tape/posts?asp=#{comment.post.discontent_aspects.first.id}#comment_#{comment.id}") + (link_to comment.user, user_path(@project, comment.user))
         when 2
@@ -343,8 +363,8 @@ module ApplicationHelper
   end
 
   def link_for_improve(comment)
-    com_class = get_stage_for_improve(comment.get_class)
-    case com_class
+    comment_class = get_stage_for_improve(comment.get_class)
+    case comment_class
       when 1
         link_to "/project/#{@project.id}/life_tape/posts?asp=#{comment.post.discontent_aspects.first.id}#comment_#{comment.id}" do
           content_tag :span, 'Источник', class: 'label label-primary'
@@ -361,7 +381,7 @@ module ApplicationHelper
   end
 
   def comment_stat_color(comment)
-    if comment.discuss_stat
+    if comment.discuss_status
       'discuss_comment'
     elsif comment.user.role_stat == 2
       'expert_comment'
@@ -415,6 +435,37 @@ module ApplicationHelper
     end
     flash.discard
     response
+  end
+
+  def role_label(post)
+    if post.user.boss?
+      content_tag :span, 'MD', class: 'label label-danger'
+    elsif post.user.role_expert?
+      content_tag :span, 'Эксперт', class: 'label label-success'
+    end
+  end
+
+  def current_stage_for_navbar(controller)
+    if controller.instance_of? LifeTape::PostsController
+      :lifetape
+    elsif controller.instance_of? Discontent::PostsController
+      :discontent
+    elsif controller.instance_of? Concept::PostsController
+      :concept
+    elsif controller.instance_of? Plan::PostsController
+      :plan
+    elsif controller.instance_of? Estimate::PostsController
+      :estimate
+    else
+      :lifetape
+    end
+  end
+
+  def current_controller_for_navbar?(controller)
+    if [LifeTape::PostsController,Discontent::PostsController,Concept::PostsController,Plan::PostsController,Estimate::PostsController].include?(controller.class)
+      return true
+    end
+    false
   end
 
 end

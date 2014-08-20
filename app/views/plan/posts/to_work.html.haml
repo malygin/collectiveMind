@@ -6,23 +6,20 @@
           4 этап: Создание проектов. Ознакомьтесь перед началом работы!
   .body
     #carousel-example-generic.carousel.slide{"data-ride" => "carousel"}
-      / Indicators
       %ol.carousel-indicators
         %li.active{"data-slide-to" => "0", "data-target" => "#carousel-example-generic"}
         %li{"data-slide-to" => "1", "data-target" => "#carousel-example-generic"}
         %li{"data-slide-to" => "2", "data-target" => "#carousel-example-generic"}
-      / Wrapper for slides
       .carousel-inner
         .item.active
           %img{alt: "", style: 'margin: auto;', src: "/assets/img/to_work/to_work_4_0.png"}/
-          -#.carousel-caption
+
         .item
           %img{alt: "", style: 'margin: auto;', src: "/assets/img/to_work/to_work_4_1.png"}/
-          -#.carousel-caption
+
         .item
           %img{alt: "", style: 'margin: auto;',src: "/assets/img/to_work/to_work_4_2.png"}/
-          -#.carousel-caption
-      / Controls
+
       %a.left.carousel-control{"data-slide" => "prev", href: "#carousel-example-generic", role: "button"}
         %span.glyphicon.glyphicon-chevron-left(style='color:#e5603b')
       %a.right.carousel-control{"data-slide" => "next", href: "#carousel-example-generic", role: "button"}
@@ -32,11 +29,5 @@
 %section.widget
   .body
     .row
-      -#.col-md-6
-      -#  #option_for_check_field(project="#{@project.id}" table_name="#{@table_name}")
-      -#  .control-group
-      -#    %label.checkbox{:for => "check-field"}
-      -#      %input#check-field{:name => "check-field", :type => "checkbox", :onchange => "user_check_field(this,'plan_posts_to_work');"}/
-      -#      Не показывать в следующий раз
       .col-md-12
-        =link_to "Приступить к работе!", @path_link, class: 'btn btn-lg btn-danger btn-block'
+        =link_to "Приступить к работе!", @path_link, class: 'btn btn-lg btn-danger btn-block', id: 'to_work'

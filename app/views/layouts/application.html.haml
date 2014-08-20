@@ -1,31 +1,3 @@
--#%html
--#  %head
--#    = render 'meta'
--#
--#  %body
--#    #wrapper
--#      #header
--#        = render 'header'
--#        = render 'stages'
--#        = render 'top_menu'
--#      #middle
--#        #container
--#          #content
--#            - flash.each do |key, value|
--#              -if key == :success or key == :notice
--#                .success
--#                  =value
--#              -else
--#                .error
--#                  =value
--#            = yield
--#        #sideLeft.sidebar
--#          = render 'left_side'
--#        #sideRight.sidebar
--#          = render 'right_side'
--#    #footer
--#      = render 'footer'
-
 !!! 5
 %html(lang="en")
   %head
@@ -36,29 +8,42 @@
     %title
       = content_for?(:title) ? yield(:title) : 'Massdecision'
     = csrf_meta_tags
-
     = stylesheet_link_tag 'application', media: 'all'
     -#%link(href="/assets/favicon.ico" rel="shortcut icon")
 
-
   %body
-    .row
-      =render 'top_menu'
-    .row
-      .col-md-10
-        -#.col-md-offset-1
-        -#=  render partial: 'stages', :locals => { :stage => :first }
-        .row
-          .col-md-3
-            = render partial: 'left_side'
-          .col-md-6
-            = yield
-          .col-md-3
-            = render partial: 'right_side'
+    .logo.hidden-sm.hidden-xs.hidden-md
+      %h4
+        %a{:href => "/project/#{@project.id}"}
+          %h3
+            MASS
+            %strong DECISION
+
+    %nav#sidebar.sidebar.nav-collapse.collapse
+      = render partial: 'left_side', :locals => { :current_stage => controller.controller_path }
+    .wrap
+      %header.page-header
+        .navbar
+          =render 'top_menu'
+      .content.container
+        -if current_controller_for_navbar?(controller)
+          %h2=@project.name
+          %section.widget.widget-tabs
+            %header
+              =render partial: 'application/stages', locals: {current_stage: current_stage_for_navbar(controller)}
+            .body.tab-content
+              = yield
+        -else
+          = yield
 
     /
       Javascripts
       \==================================================
     / Placed at the end of the document so the pages load faster
     = javascript_include_tag 'application'
+    <!-- BEGIN JIVOSITE CODE {literal} -->
+    <script type='text/javascript'>
+    (function(){ var widget_id = 'DChNaQSvOx';
+    var s = document.createElement('script'); s.type = 'text/javascript'; s.async = true; s.src = '//code.jivosite.com/script/widget/'+widget_id; var ss = document.getElementsByTagName('script')[0]; ss.parentNode.insertBefore(s, ss);})();</script>
+    <!-- {/literal} END JIVOSITE CODE -->
 

@@ -1,21 +1,8 @@
-
 %ul.side-nav
   %li.active
     = link_to  user_path(@project, current_user) do
       %i.glyphicon.glyphicon-user
       Профиль
-
-  %li.disabled
-    %a(href="#")
-      %i.glyphicon.glyphicon-list-alt
-      %span.badge.pull-right 0
-      Уведомления
-
-  %li.disabled
-    %a(href="#")
-      %i.glyphicon.glyphicon-envelope
-      %span.badge.pull-right 0
-      Сообщения
 
   - if current_user
     %li

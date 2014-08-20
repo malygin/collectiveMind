@@ -4,7 +4,7 @@ module BasePost  extend ActiveSupport::Concern
     attr_accessible :content, :status, :number_views, :user, :project, :censored
     belongs_to :user
     belongs_to :project, :class_name => "Core::Project"
-    has_many :post_notes
+    has_many :notes
     has_many :comments
 
    	has_many :post_votings
@@ -28,23 +28,59 @@ module BasePost  extend ActiveSupport::Concern
     scope :with_votes, -> {includes(:post_votings).where('"discontent_post_votings"."id" >0')}
     scope :with_concept_votes, -> {includes(:post_votings).where('"concept_post_votings"."id" >0')}
 
-    #validates :content, :presence => true
     scope :created_order,order("#{table_name}.created_at DESC")
+    scope :updated_order,order("#{table_name}.updated_at DESC")
     scope :popular_posts, order('number_views DESC')
 
     def show_content
     	content
     end
 
-     def self.order_by_param(order)
-       if order =='popular'
-         popular_posts
-       else
-         created_order
-       end
+    def self.order_by_param(order)
+      if order =='popular'
+        popular_posts
+      else
+        created_order
+      end
+    end
 
-     end
- 
+    def main_comments
+      self.comments.where(:comment_id => nil)
+    end
+
+    def get_class
+      self.class.name.deconstantize
+    end
+
+    def current_class?(stage)
+      case stage
+        when :life_tape, 'life_tape'
+          self.instance_of? LifeTape::Post
+        when :discontent, 'discontent'
+          self.instance_of? Discontent::Post
+        when :concept, 'concept'
+          self.instance_of? Concept::Post
+        when :plan, 'plan'
+          self.instance_of? Plan::Post
+        when :estimate, 'estimate'
+          self.instance_of? Estimate::Post
+        else
+          false
+      end
+      false
+    end
+
+    def stage_name
+      self.class.name.deconstantize.underscore
+    end
+
+    def post_notes(type_field)
+      self.notes.by_type(type_field)
+    end
+
+    def note_size?(type_field)
+      self.post_notes(type_field).size > 0
+    end
 
   end
 end

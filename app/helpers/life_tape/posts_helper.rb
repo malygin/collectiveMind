@@ -4,5 +4,7 @@ module LifeTape::PostsHelper
 			return content[0..size]+" ..."
 		end
 		return content
-	end
+  end
+
+
 end

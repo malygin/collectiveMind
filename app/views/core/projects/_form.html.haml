@@ -18,16 +18,8 @@
   .form-group
     = f.label 'Тип процедуры'
     = f.select :type_access, options_for_select([["Открытая", 0],["Для клубистов", 1], ["Закрытая", 2], ["Демо", 3], ["Тестовая", 4], ["Подготовка", 5]], @project.type_access),{}, {class: "form-control"}
-  -#.form-group
-  -#  = f.label :secret
-  -#  = f.text_field :secret , class: 'form-control'
-  -#.form-group
-  -#  = f.label :url_logo
-  -#  = f.text_field :url_logo, class: 'form-control'
-  -#.form-group
-  -#  = f.label :knowledge
-  -#  = f.text_area :knowledge, class: 'form-control', rows: 5
+
   %br
   %actions.pull-right
-    = f.submit 'Сохранить',  class: 'btn btn-primary btn-lg'
+    = f.submit 'Сохранить',  class: 'btn btn-primary btn-lg', id:'send_project'
 

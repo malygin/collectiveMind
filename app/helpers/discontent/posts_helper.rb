@@ -1,22 +1,6 @@
 # encoding: utf-8
 module Discontent::PostsHelper
-  #def render_post_notes(type_field, post)
-  #
-  #  text = "<div id='where_form_#{post}_#{type_field}'>"
-  #  Discontent::Post.find(post).post_notes(type_field).each do |dpn|
-  #    text = text + "<li id='li_note_#{dpn.id}'>#{dpn.content}</li>"
-  #  end
-  #  text + "</div>"
-  #end
   def render_post_notes(post_field,type_fd)
-    #content_tag :ul do
-    #  post_field.post_notes(type_fd).each do |dpn|
-    #    '<li>'+dpn.content+'</li>'
-    #    #content_tag :li do
-    #    #  dpn.content
-    #    #end
-    #  end
-    #end
     text = '<ul>'
     post_field.post_notes(type_fd).each do |dpn|
       text+='<li>'+dpn.content+'</li>'
@@ -93,18 +77,18 @@ module Discontent::PostsHelper
     end
   end
 
-  def column_for_type_field(type_fd)
-    case type_fd
-      when 1
-        'status_content'
-      when 2
-        'status_whered'
-      when 3
-        'status_whend'
-      else
-        nil
-    end
-  end
+  #def column_for_type_field(type_fd)
+  #  case type_fd
+  #    when 1
+  #      'status_content'
+  #    when 2
+  #      'status_whered'
+  #    when 3
+  #      'status_whend'
+  #    else
+  #      nil
+  #  end
+  #end
   def validate_dispost(pa,aspects)
     if pa[:content].empty?
       flash[:content]='Заполните поле "что"'

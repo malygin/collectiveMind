@@ -5,8 +5,6 @@
     %div.tab-pane.active#novation1
       %div.panel.panel-default
         %div.panel-body
-          -#%button.btn.btn-info.pull-right(data-toggle="modal" data-target="#modalStage3")
-          -#  Показать пример
           %h5 Устраняемые несовершенства:
           #panel_union
             -if @post.persisted?
@@ -31,19 +29,19 @@
           include_blank: true,
           placeholder: "Какие еще несовершенства решает ваше нововведение?"
           %br
-          -if boss? and !@post.persisted?
-            .row
-              .col-md-6
-                %br
-                %h5.text-right
-                  %b Выберите члена клуба
-                %br
-                %br
-              .com-md-6
-                %br
-                = select_tag 'select_for_clubers', options_from_collection_for_select(@users_rc, "id", "to_s"),
-                :prompt => 'Выберите члена клуба' , style:'margin-left:15px; margin-top:10px; height: 30px;'
-                %br
+          -#-if boss? and !@post.persisted?
+          -#  .row
+          -#    .col-md-6
+          -#      %br
+          -#      %h5.text-right
+          -#        %b Выберите члена клуба
+          -#      %br
+          -#      %br
+          -#    .com-md-6
+          -#      %br
+          -#      = select_tag 'select_for_clubers', options_from_collection_for_select(@users_rc, "id", "to_s"),
+          -#      :prompt => 'Выберите члена клуба' , style:'margin-left:15px; margin-top:10px; height: 30px;'
+          -#      %br
           %hr
           .row
             .col-md-12
@@ -83,7 +81,7 @@
             .col-md-6
               .form-group.has-danger
                 =text_area_tag "pa[#{@discontent_post.nil? ? 0 : @discontent_post.id}][name]",@pa.name, :class => "concept_cond form-control", rows: 12, style: 'width: 100%;'
-                -#=text_area_tag "pa[name]",@pa.name, :class => "concept_cond form-control", rows: 12, style: 'width: 100%;'
+
           .row
             .col-md-12
               .text-center
@@ -101,7 +99,7 @@
             .col-md-6
               .form-group.has-danger
                 =text_area_tag "pa[#{@discontent_post.nil? ? 0 : @discontent_post.id}][content]",@pa.content, :class => "concept_cond form-control", rows: 12, style: 'width: 100%;'
-                -#=text_area_tag "pa[content]",@pa.content, :class => "concept_cond form-control", rows: 12, style: 'width: 100%;'
+
           %hr
           .row
             .col-md-12
@@ -125,7 +123,7 @@
             .col-md-6
               .form-group.has-success
                 =text_area_tag "pa[#{@discontent_post.nil? ? 0 : @discontent_post.id}][positive]",@pa.positive,  :class => "concept_cond form-control", rows: 12, style: 'width: 100%;'
-                -#=text_area_tag "pa[positive]",@pa.positive, :placeholder => 'Подробно опишите весь процесс функционирования вашего нововведения в будущем.', :class => "concept_cond form-control", rows: 12, style: 'width: 100%;'
+
           .row
             .col-md-12
               .text-center
@@ -181,7 +179,6 @@
                       = text_area_tag "res_positive_r[]", '', class: 'form-control', placeholder: 'Пояснение к ресурсу'
               %a.btn.btn-warning{onclick:"return add_new_resource_to_concept('positive_r',#{@project.id}); "} Добавить ресурс
 
-              -#=text_area_tag "pa[#{@discontent_post.id}][positive_r]",@pa.positive_r, :placeholder => 'Перечислите все необходимое для успешного функционирования вашего нововедения в будущем', :class => "concept_cond form-control", rows: 12, style: 'width: 100%;'
 
           %hr
           .row
@@ -205,7 +202,6 @@
             .col-md-6
               .form-group.has-success
                 =text_area_tag "pa[#{@discontent_post.nil? ? 0 : @discontent_post.id}][negative]",@pa.negative,  :class => "concept_cond form-control", rows: 14,  style: 'width: 100%;'
-                -#=text_area_tag "pa[negative]",@pa.negative, :placeholder => 'К каким побочным эффектам может привести ваше нововведение в будущем?', :class => "concept_cond form-control", rows: 14,  style: 'width: 100%;'
 
           .row
             .col-md-12
@@ -250,8 +246,6 @@
                       = text_area_tag "res_negative_r[]", '', class: 'form-control', placeholder: 'Пояснение к ресурсу'
               %a.btn.btn-warning{onclick:"return add_new_resource_to_concept('negative_r','#{@project.id}');"} Добавить ресурс
 
-              -#=text_area_tag "pa[#{@discontent_post.nil? ? 0 : @discontent_post.id}][negative_r]",@pa.negative_r, :class => "concept_cond form-control", rows: 14,  style: 'width: 100%;'
-              -#=text_area_tag "pa[negative_r]",@pa.negative_r, :class => "concept_cond form-control", rows: 14,  style: 'width: 100%;'
 
           %hr
           .row
@@ -273,7 +267,6 @@
             .col-md-6
               .form-group.has-success
                 =text_area_tag "pa[#{@discontent_post.nil? ? 0 : @discontent_post.id}][problems]",@pa.problems, :class => "concept_cond form-control", rows: 12,  style: 'width: 100%;'
-                -#=text_area_tag "pa[problems]",@pa.problems, :class => "concept_cond form-control", rows: 12,  style: 'width: 100%;'
 
           .row
             .col-md-12
@@ -295,135 +288,9 @@
             .col-md-6
               .form-group.has-success
                 =text_area_tag "pa[#{@discontent_post.nil? ? 0 : @discontent_post.id}][reality]",@pa.reality, :class => "concept_cond form-control", rows: 12,  style: 'width: 100%;'
-                -#=text_area_tag "pa[reality]",@pa.reality, :class => "concept_cond form-control", rows: 12,  style: 'width: 100%;'
 
 
   %actions.pull-right
-    = f.submit 'Сохранить',  class: 'btn btn-warning btn-lg'
+    = f.submit 'Сохранить',  class: 'btn btn-warning btn-lg', id: 'send_post_concept'
   %br
   %br
-
-
-
-
-
-
-
-
-
--#= render 'shared/help/new_concept'
--#= form_for  @post, :url => {:project => @project.id, :action => @post.persisted? ? 'update' : 'create'},   :html => { :class => 'new_or_edit' }do |f|
--#  %h4 Нововведение (решение):
--#  %br
--#  %div.tab-content
--#    %div.tab-pane.active#novation1
--#      %div.panel.panel-default
--#        %div.panel-body
--#          %button.btn.btn-info.pull-right(data-toggle="modal" data-target="#modalStage3")
--#            Показать пример
--#          %h6.text-infoУстраняемое несовершенство (проблема):
--#
--#          =render partial:'discontent/posts/post_short2', object: @discontent_post
--#          %br
--#
--#          %hr
--#          %div.panel.panel-info
--#            .panel-heading
--#              %h6.text-success
--#                %b A.*
--#
--#
--#              %p.text-info
--#                =t('form.novation_what')
--#                %a.btn.btn-success.btn-xs{type: "button", "data-toggle"=>"modal", "data-target"=>"#prompt1", style:'font-size:10px;'} Пояснения
--#              .form-group.has-danger
--#                =text_area_tag "pa[#{@discontent_post.id}][name]",@pa.name, :class => "concept_cond", rows: 4, style: 'width: 100%;'
--#
--#
--#              %p.text-info
--#                =t('form.novation_how')
--#                %a.btn.btn-success.btn-xs{type: "button", "data-toggle"=>"modal", "data-target"=>"#prompt2", style:'font-size:10px;'} Пояснения
--#              .form-group.has-danger
--#                =text_area_tag "pa[#{@discontent_post.id}][content]",@pa.content, :class => "concept_cond", rows: 4, style: 'width: 100%;'
--#
--#
--#          .panel-group
--#            .panel.panel-info
--#              .panel-heading
--#                %h4.panel-title
--#                %a(data-toggle="collapse" data-parent="#accordion" href="#collapse1")
--#                  %b
--#                    В.
--#                    =t('form.cond_h')
--#
--#                    %span.glyphicon.glyphicon-chevron-down
--#              #collapse1.panel-collapse.collapse
--#                .panel-body
--#                  %p.text-info
--#                    =t('form.cond')
--#                    %a.btn.btn-success.btn-xs{type: "button", "data-toggle"=>"modal", "data-target"=>"#prompt3", style:'font-size:10px;'} Пояснения
--#                    .form-group.has-success
--#                      =text_area_tag "pa[#{@discontent_post.id}][positive]",@pa.positive, :placeholder => 'Подробно опишите весь процесс функционирования вашего нововведения в будущем.', :class => "concept_cond", rows: 4, style: 'width: 100%;'
--#                  %p.text-info
--#                    =t('form.cond_res')
--#                    %a.btn.btn-success.btn-xs{type: "button", "data-toggle"=>"modal", "data-target"=>"#prompt4", style:'font-size:10px;'} Пояснения
--#                    .form-group.has-success
--#                      =text_area_tag "pa[#{@discontent_post.id}][positive_r]",@pa.positive_r, :placeholder => 'Перечислите все необходимое для успешного функционирования вашего нововедения в будущем', :class => "concept_cond", rows: 4, style: 'width: 100%;'
--#
--#          .panel-group
--#            .panel.panel-info
--#              .panel-heading
--#                %h4.panel-title
--#                %a(data-toggle="collapse" data-parent="#accordion" href="#collapse2")
--#                  %b
--#                    C.
--#                    =t('form.negative_h')
--#                    %span.glyphicon.glyphicon-chevron-down
--#              #collapse2.panel-collapse.collapse
--#                .panel-body
--#                  %p.text-info
--#                    =t('form.negative')
--#                    %a.btn.btn-success.btn-xs{type: "button", "data-toggle"=>"modal", "data-target"=>"#prompt7", style:'font-size:10px;'} Пояснения
--#                    .form-group.has-success
--#                      =text_area_tag "pa[#{@discontent_post.id}][negative]",@pa.negative, :placeholder => 'К каким побочным эффектам может привести ваше нововведение в будущем?', :class => "concept_cond", rows: 4,  style: 'width: 100%;'
--#                  %p.text-info
--#                    =t('form.negative_res')
--#
--#                    %a.btn.btn-success.btn-xs{type: "button", "data-toggle"=>"modal", "data-target"=>"#prompt8", style:'font-size:10px;'} Пояснения
--#                    .form-group.has-success
--#                      =text_area_tag "pa[#{@discontent_post.id}][negative_r]",@pa.negative_r, :class => "concept_cond", rows: 4,  style: 'width: 100%;'
--#
--#
--#          .panel-group
--#            .panel.panel-info
--#              .panel-heading
--#                %h4.panel-title
--#                %a(data-toggle="collapse" data-parent="#accordion" href="#collapse3")
--#                  %b
--#                    D.
--#                    =t('form.problems_h')
--#                    %span.glyphicon.glyphicon-chevron-down
--#              #collapse3.panel-collapse.collapse
--#                .panel-body
--#                  %p.text-info
--#                    =t('form.problems')
--#
--#                    %a.btn.btn-success.btn-xs{type: "button", "data-toggle"=>"modal", "data-target"=>"#prompt5", style:'font-size:10px;'} Пояснения
--#                  .form-group.has-success
--#                    =text_area_tag "pa[#{@discontent_post.id}][problems]",@pa.problems, :class => "concept_cond", rows: 4,  style: 'width: 100%;'
--#
--#                  %p.text-info
--#                    =t('form.reality')
--#
--#                    %a.btn.btn-success.btn-xs{type: "button", "data-toggle"=>"modal", "data-target"=>"#prompt6", style:'font-size:10px;'} Пояснения
--#                  .form-group.has-success
--#                    =text_area_tag "pa[#{@discontent_post.id}][reality]",@pa.reality, :class => "concept_cond", rows: 4,  style: 'width: 100%;'
--#
--#
--#
--#  %actions
--#    = f.submit 'Сохранить',  class: 'btn btn-success btn-sm'
--#
--#
--#
--#

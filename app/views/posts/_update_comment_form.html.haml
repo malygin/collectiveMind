@@ -1,0 +1,5 @@
+= form_for comment, :html => {:class => 'new_or_edit'},  remote: true, :url => url_link, :method => :put do |f|
+  = render 'shared/notice_messages', :object =>f.object
+  =f.text_area :content, name: 'content', :class => 'form-control input-transparent', style: 'height: 70px;', placeholder: 'Ваш комментарий', id:'edit_comment_text_area'
+  .pull-right
+    =f.submit 'Отправить', :id  => "send_post_#{comment.id}", class: 'btn btn-sm btn-success', style: 'margin-left: 20px;'

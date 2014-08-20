@@ -17,7 +17,6 @@ module SessionsHelper
 		#if (current_user.nil? or !(current_user.projects.include? project))  and project.type_access == 2
 		#	redirect_to root_path, :notice => "У вас нет прав просматривать этот проект!"
 		#end
-
   end
 
   #@todo new permissions
@@ -37,7 +36,7 @@ module SessionsHelper
   end
 
   def admin_authenticate
-    deny_access unless prime_admin?
+    redirect_to(root_path) unless prime_admin?
   end
 
 

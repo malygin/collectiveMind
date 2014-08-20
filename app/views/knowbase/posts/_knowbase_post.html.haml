@@ -1,4 +1,6 @@
-%span.h3{:id => "edit_knowbase_post_title_#{knowbase_post.id}"}=knowbase_post.title
+%span.h3{:id => "edit_knowbase_post_title_#{knowbase_post.id}"}
+  =knowbase_post.title
+  %i.fa.fa-question-circle.tooltips(data-toggle="tooltip" data-placement="bottom" title="Статьи очень важны!")
 %span
   -if boss?
     =link_to edit_knowbase_post_path(@project,knowbase_post),:remote => true, :id => "edit_knowbase_post_#{knowbase_post.id}" do

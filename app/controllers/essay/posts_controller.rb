@@ -1,6 +1,5 @@
 # encoding: utf-8
 class Essay::PostsController < PostsController
-  layout 'application_two_column', :only => [:new, :edit, :show, :index]
   def current_model
     Essay::Post
   end 
@@ -12,7 +11,6 @@ class Essay::PostsController < PostsController
 def prepare_data      
     @project = Core::Project.find(params[:project]) 
     @journals = Journal.events_for_user_feed @project.id
-    @news = ExpertNews::Post.first 
     @stage = params[:stage]
 end
 
@@ -32,7 +30,7 @@ end
     end
     @posts = Essay::Post.where(:project_id => @project, :stage => @stage, :status => 0 )
     respond_to do |format|
-      format.html{render :layout  => 'application_two_column'}
+      format.html
     end
   end
 

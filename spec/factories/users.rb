@@ -10,8 +10,19 @@ FactoryGirl.define do
   end
 
   factory :admin, parent: :user do
-    admin true
+    type_user 1
   end
+
+  factory :expert, parent: :user do
+    type_user 2
+  end
+  factory :jury, parent: :user do
+    type_user 3
+  end
+  factory :rc_club, parent: :user do
+    type_user 4
+  end
+
 
   factory :invalid_user, class: 'Users' do
     sequence(:name) { |n| "Name #{n}" }

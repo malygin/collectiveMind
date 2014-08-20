@@ -1,55 +1,41 @@
-%section.widget
-  %header
-    .row
-      .col-md-9
-        %h3.text-info(style='line-height: 30px;')
-          1 этап: Сбор информации.
-          -if @aspect
-            %span{:id => "edit_aspect_content_#{@aspect.id}"}=@aspect.content
-            -if boss?
-              %span{:id => "redactor_aspect_#{@aspect.id}"}
-                =link_to edit_discontent_aspect_path(@project,@aspect),:remote => true, :id => "edit_aspect_#{@aspect.id}" do
-                  %span{:class=>"glyphicon glyphicon-pencil text-success", :style=>"cursor:pointer;text-decoration:none;"}
+-#%section.widget.widget-tabs
+-#  %header
+-#    =render partial: 'application/stages', locals:  {current_stage: :lifetape}
 
-          %br
-        %span(style='font-size: 20px;line-height: 30px;')
-          Обсуждение процедуры:
-          =@project.name
+-#.body.tab-content
+-if boss? or (signed_in? and @project.demo?)
+  %br
+  =link_to '+ Добавить новую тему', new_discontent_aspect_path(@project),:remote => true,:id => "new_aspect",  class: 'btn btn-primary'
 
-      .col-md-3
+%h3.text-lifetape
+  -if @aspect
+    %b Аспект:
+    %span{:id => "edit_aspect_content_#{@aspect.id}"}=@aspect.content
+    -if boss?
+      %span{:id => "redactor_aspect_#{@aspect.id}"}
+        =link_to edit_discontent_aspect_path(@project,@aspect),:remote => true, :id => "edit_aspect_#{@aspect.id}" do
+          %span{:class=>"glyphicon glyphicon-pencil text-success"}
+        =link_to discontent_aspect_path(@project,@aspect), :method => :delete, :confirm => 'Удалить тему?',:id => "destroy_aspect_#{@aspect.id}" do
+          %span{:class=>"glyphicon glyphicon-remove text-danger"}
 
-        - if signed_in? and (@project.status == 1 or @project.demo?)
-          .text-right
-            -if fast_discussion_able? or @project.demo?
-              = link_to 'Быстрый старт!', life_tape_posts_fast_discussion_topics_path(@project) ,remote: true, id: 'fast_discussion_topics',  class: 'btn btn-lg btn-info '
-            %br
-            -if boss? or @project.demo?
-              %br
-              =link_to '+ Добавить новую тему', new_discontent_aspect_path(@project),:remote => true,:id => "new_aspect",  class: 'btn btn-sm btn-primary'
-
-
-  .body
-    - if @post_show
-      .row
-        .col-md-6
-          - unless @aspect.knowbase_posts.nil?
+- if @post_show
+  .tab-pane.active#stage1
+    - if @aspect.knowbase_posts.present?
+      .col-md-12
+        %section
+          .body
             - @aspect.knowbase_posts.each do |post|
-              %section.widget
-                .body
-                  %div{:id => "knowbase_post_#{post.id}"}
-                    = render :partial => 'knowbase/posts/knowbase_post',:object => post
+              %div{:id => "knowbase_post_#{post.id}"}
+                = render :partial => 'knowbase/posts/knowbase_post',:object => post
+              %br
+        %br
+    .col-md-12
+      .text-center= will_paginate @comments
+      .chat-messages
+        = render :partial => 'shared/comment',:collection => @comments
+      .text-center= will_paginate @comments
 
-        .col-md-6
-          %section.widget
-            .body
-              .text-center= will_paginate @comments
-              .chat-messages
-                = render :partial => 'shared/comment',:collection => @comments
-              .text-center= will_paginate @comments
+      - if signed_in?
+        = render :partial => 'shared/comment_form', :locals => { :comment => @comment,:post =>@post_show, :url_link => "/project/#{@project.id}/life_tape/posts/#{@post_show.id}/add_comment"}
 
-              - if signed_in?
-                = render :partial => 'shared/comment_form', :locals => { :comment => @comment,:post =>@post_show, :url_link => "/project/#{@project.id}/life_tape/posts/#{@post_show.id}/add_comment"}
-
-
-#render_fast_discussion_topics
 #aspect_modal

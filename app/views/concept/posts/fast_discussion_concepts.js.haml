@@ -4,7 +4,6 @@
   activate_wizard();
   $("#form_fast_discussion_comment_concept").html('#{escape_javascript(render :partial => 'form_fast_discussion_comment_concept' )}');
   $("#form_fast_discussion_add_concept").html('#{escape_javascript(render :partial => 'form_fast_discussion_add_concept')}');
-  -#$("#update_discontent_discussion_add_concept").html('#{escape_javascript(render partial: 'discontent/posts/post_short2', object: @disposts.first)}');
   $("#select_for_discussion_discontents [value='#{@dispost.id}']").attr("selected", "selected");
   $('#modal_fast_discussion_concepts').modal('show');
   -if @post.nil?
@@ -21,7 +20,6 @@
       -if @dispost != @discontent_post
         $("#update_discontent_discussion").effect("highlight", {color: '#f5cecd'}, 1000);
     -else
-      -#$("#update_discontent_discussion_add_concept").html('#{escape_javascript(render partial: 'discontent/posts/post_short2', object: @dispost)}');
       $("#form_fast_discussion_add_concept").html('#{escape_javascript(render :partial => 'form_fast_discussion_add_concept')}');
       $("#update_discontent_discussion_add_concept").html('#{escape_javascript(render partial: 'discontent/posts/post_short2', object: @add_dispost)}');
       $("#update_discontent_discussion_add_concept").effect("highlight", {color: '#f5cecd'}, 1000);
@@ -45,7 +43,6 @@
     -if @dispost != @discontent_post
       $("#update_discontent_discussion").effect("highlight", {color: '#f5cecd'}, 1000);
   -else
-    -#$('#update_discontent_discussion').empty();
     $('#update_concept_discussion').empty();
     $('#comment_info').fadeIn('slow');
     $('#form_for_comment_concept').hide();
@@ -55,18 +52,14 @@
 
 -if !params[:save_form_concept].nil?
   -if !@concept.nil?
-    -#$('#concept_post_aspect_title').val('');
-    -#$('#concept_post_aspect_name').val('');
-    -#$('#concept_post_aspect_content').val('');
     $("#form_fast_discussion_add_concept").html('#{escape_javascript(render :partial => 'form_fast_discussion_add_concept')}');
     $('#concept_success').fadeIn('slow').delay(1000).fadeOut('slow');
-    -#$("#update_discontent_discussion_add_concept").html('#{escape_javascript(render partial: 'discontent/posts/post_short2', object: @add_dispost)}');
+
     $("#select_for_discussion_discontents_add_concept [value='#{@add_dispost.id}']").attr("selected", "selected");
     $("#update_discontent_discussion_add_concept").effect("highlight", {color: '#f5cecd'}, 1000);
   -else
     $('#concept_failed').fadeIn('slow').delay(1000).fadeOut('slow');
 -if !params[:empty_discontent].nil?
   $("#form_fast_discussion_add_concept").html('#{escape_javascript(render :partial => 'form_fast_discussion_add_concept')}');
-  -#$("#update_discontent_discussion_add_concept").html('#{escape_javascript(render partial: 'discontent/posts/post_short2', object: @add_dispost)}');
   $("#select_for_discussion_discontents_add_concept [value='#{@add_dispost.id}']").attr("selected", "selected");
   $("#update_discontent_discussion_add_concept").effect("highlight", {color: '#f5cecd'}, 1000);

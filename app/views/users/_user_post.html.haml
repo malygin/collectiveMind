@@ -8,26 +8,3 @@
                     =image_tag('/assets/awards/'+user.awards.for_project(@project).last.url+'_25_25.png', title: user.awards.for_project(@project).for_project(@project).last.name, style: 'height: 25px; width: 25px;')
 
 
-        -#- unless user.expert? or user.admin?
-        -#    .time
-        -#        = user.score
-        -#        %br
-        -#        баллов
-
-
-        -#= image_tag 'award.png', title: 'Награда за 3 добавленных поста'
-
-
--#.avatar
--#	= link_to gravatar_for(user), "/project/#{@project.id}/users/#{user.id}"
--#	%br
--#	- if user.expert? or user.admin?
--#		%span.role= user.role_name
--#		%br
--#
--#	- unless user.expert? or user.admin?
--#		%span.rate_small= user.score
--#		%span.role балов
--#		%br
--#		-user.awards.for_project(@project.id).each do |award|
--#			= image_tag award.url, :title => award.name

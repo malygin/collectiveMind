@@ -1,23 +1,11 @@
--#.success=link_to 'Вы также можете оставить свое мнение о прошедшей стадии или почитать другие', essay_posts_path(@project, @project.status), :id => 'essay_list'
-
-.row
-  .col-md-12
-    %h3.text-info
-      1 этап: Сбор информации. Голосование
-      %br
-    %span(style='font-size: 20px;line-height: 30px;')
-      Определение наиболее важных тем процедуры:
-      =@project.name
+%h3.text-info
+  1 этап: Подготовка к процедуре. Голосование
+  %br
+%span(style='font-size: 20px;line-height: 30px;')
+  Определение наиболее важных тем процедуры
 
 %br
 - if boss?
-  -#%b
-  -#проголосовало
-  -#=@voted_people
-  -#из
-  -#=@all_people
-  -#Отдано голосов
-  -#=@votes
   .pull-right
     Показана сортировка,
     =link_to "по умолчанию", {:action => :vote_list },:remote => true, class: "vote_class", id: "vote_all"
@@ -29,7 +17,7 @@
   %br
 
 #stage_success(style="display:none;")
-  %section.widget
+  %section
     .body
       .text-center
         %h3 Спасибо за участие в голосовании!
@@ -43,7 +31,7 @@
 %br
 %br
 - unless @number_v<1  and not boss?
-  %section.widget#fixBlock
+  %section.widget
     %h4
       Вы можете выбрать
       %b=@project.stage1
@@ -51,7 +39,6 @@
     %h3.text-info
       =t('voting.have_votes')
       %b#count_vote=@number_v
-
 
   #vote_container
     = render :partial => 'shared/post_for_vote', :collection => @posts,  :locals => { :path_for_voting => @path_for_voting, :count_voted => @number_v, :votes => @votes}

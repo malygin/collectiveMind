@@ -11,4 +11,14 @@ FactoryGirl.define do
   factory :discontent_union, :class => 'Discontent::Post'  do
     status 2
   end
+  factory :discontent_post_aspect, :class => 'Discontent::PostAspect'  do
+  end
 end
+
+#Factory.define :aspect do |f|
+#  f.life_tape_posts { |a| [a.association(:aspect)] }
+#end
+#
+#factory :aspect_with_post, :parent => :aspect do
+#  life_tape_posts {[FactoryGirl.create(:life_tape_post)]}
+#end

@@ -121,24 +121,6 @@
       -else
         %li
           %a Уведомлений нет
-  -#%li.dropdown
-  -#  %a.dropdown-toggle{"data-toggle" => "dropdown", :href => "#", :title => "События"}
-  -#    %i.fa.fa-group
-  -#  %ul#support-menu.dropdown-menu.support{:role => "menu"}
-  -#    -unless @journals.nil?
-  -#      - @journals.each do |journal|
-  -#        -  if journal_parser(journal, @project.id)
-  -#          %li{:role => "presentation"}
-  -#            %p.message{:href => "#", :style => 'margin-left: 10px;'}
-  -#              = link_to journal.user, user_path(@project,journal.user)
-  -#              = journal_parser(journal, @project.id).html_safe
-  -#              %br
-  -#              %small=Russian::strftime(journal.created_at,"%d %B %k:%M:%S ")
-  -#
-  -#    %li{:role => "presentation"}
-  -#      %a.text-align-center.see-all{:href => "/project/#{@project.id}/journals/"}
-  -#        Посмотреть все
-  -#        %i.fa.fa-arrow-right
 
   %li.divider
 
@@ -150,8 +132,7 @@
         %a.pull-left(href="/project/#{@project.id}/users/#{current_user.id}")
           = image_tag current_user.avatar.url(:thumb),  class: "media-object"
         =current_user.to_s
-        -#%p
-        -#  =link_to current_user, user_path(@project, current_user)
+
       %li{:role => "presentation"}
         = link_to 'Редактировать профиль', edit_user_path(@project, current_user)
 
@@ -164,41 +145,3 @@
   %li.hidden-xs
     %a{:href => "/users/sign_out/", "data-method" => "delete"}
       %i.fa.fa-sign-out
-  -#      -#%a.link{:href => "component_calendar.html"}
-  -#      -#  %i.fa.fa-calendar
-  -#      -#= link_to 'Уведомления', user_path(@project, current_user)
-  -#      -#- if @my_jounals > 0
-  -#      -#  %span.label.label-danger=@my_jounals
-  -#
-  -#      -#%li.disabled{:role => "presentation"}
-  -#      -#  %a.link{:href => "#"}
-  -#      -#    %i.fa.fa-inbox
-  -#      -#    Сообщения
-  -#%li.visible-xs
-  -#  %a.btn-navbar{"data-target" => ".sidebar", "data-toggle" => "collapse", :href => "#", :title => ""}
-  -#    %i.fa.fa-bars
-  -#%li.hidden-xs
-  -#  %a{:href => "/users/sign_out/", "data-method" => "delete"}
-  -#    %i.fa.fa-sign-out
-
--#%form#search-form.navbar-form.pull-right{:role => "search"}
--#  %input.search-query{:placeholder => "Search...", :type => "search"}/
--#.notifications.pull-right
--#  .alert.pull-right
--#    %a.close{"data-dismiss" => "alert", :href => "#"} &times;
--#    %i.fa.fa-info-circle
--#    Check out Light Blue
--#    %a#notification-link{:href => "#"} settings
--#    on the right!
-
--#            %li
--#              = link_to user_path(@project, current_user) do
--#                Уведомления
--#                - if @my_jounals > 0
--#                  %span.label.label-danger=@my_jounals
--#            %li.disabled
--#              %a{:href => "#"}
--#                Сообщения
--#                -#%span.label.label-danger 1
--#            %li
--#              = link_to 'Редактировать профиль', edit_user_path(@project, current_user)

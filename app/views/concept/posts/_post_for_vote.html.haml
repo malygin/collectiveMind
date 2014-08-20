@@ -8,7 +8,6 @@
 %section.widget
   .body
     .text-center
-      -#.badge.badge-mutted A 1
       %span.h5(class="#{class_for_concept_type_field(post_for_vote.concept_post,1)}" id="name")=t('form.novation_what')
     %br
     =simple_format(post_for_vote.name)
@@ -16,7 +15,6 @@
 %section.widget
   .body
     .text-center
-      -#.badge.badge-mutted A 2
       %span.h5(class= "#{class_for_concept_type_field(post_for_vote.concept_post,2)}" id="content")=t('form.novation_how')
     %br
     =simple_format(post_for_vote.content)
@@ -24,7 +22,7 @@
 %section.widget
   .body
     .text-center
-      -#.badge.badge-mutted B 1
+
       %span.h5(class= "#{class_for_concept_type_field(post_for_vote.concept_post,3)}" id="positive")=t('form.cond')
     %br
     =display_content(post_for_vote.positive)
@@ -57,7 +55,7 @@
 %section.widget
   .body
     .text-center
-      -#.badge.badge-mutted C 1
+
       %span.h5(class="#{class_for_concept_type_field(post_for_vote.concept_post,5)}" id= "negative")=t('form.negative')
     %br
     =display_content(post_for_vote.negative)
@@ -65,7 +63,7 @@
 %section.widget
   .body
     .text-center
-      -#.badge.badge-mutted C 2
+
       %span.h5(class= "#{class_for_concept_type_field(post_for_vote.concept_post,6)}" id= "negative_r")=t('form.negative_res')
     %br
     %table.table.table-striped.table-bordered
@@ -90,7 +88,7 @@
 %section.widget
   .body
     .text-center
-      -#.badge.badge-mutted D 1
+
       %span.h5(class= "#{class_for_concept_type_field(post_for_vote.concept_post,7)}" id="problems")=t('form.problems')
     %br
     =display_content(post_for_vote.problems)
@@ -98,7 +96,7 @@
 %section.widget
   .body
     .text-center
-      -#.badge.badge-mutted D 2
+
       %span.h5(class= "#{class_for_concept_type_field(post_for_vote.concept_post,8)}" id= "reality")=t('form.reality')
     %br
     =display_content(post_for_vote.reality)

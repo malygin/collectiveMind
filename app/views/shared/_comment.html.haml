@@ -1,36 +1,27 @@
 .chat-message{id: "comment_#{comment.id}"}
   = render 'users/user_post', :user => comment.user
-  -#-if comment.created_at > 1.day.ago
-  -#  %span.label.label-danger за последние сутки
+
   .chat-message-body.stage_menu1{id: "comment_content_#{comment.id}", class: "#{comment_stat_color(comment)}"}
+    %span.arrow
     .sender
       =link_to comment.user, user_path(@project, comment.user)
       = render partial: '/shared/user_online', object: comment.user
-      -#=club_status_show_user(comment.user)
-      - if comment.user.boss?
-        %span.label.label-danger MD
-      - if comment.user.role_expert?
-        %span.label.label-success Эксперт
-
-      - if boss? or role_expert?
-        .pull-right(style="margin-left:3px;")
-          =link_to({:action => :comment_stat, :id => comment.post.id, :comment_id => comment.id, :discuss_stat => 1, :com_stage => get_stage_for_improve(comment.get_class)},  :remote => true, :method => :put,  id: "discuss_stat_comment_#{comment.id}") do
-            %span.label(class="#{label_discuss_stat(comment)}") ТРЕБУЕТ ОБСУЖДЕНИЯ
-      - elsif comment.discuss_stat
-        .pull-right(style="margin-left:3px;")
-          %span.label-danger ТРЕБУЕТ ОБСУЖДЕНИЯ
-
-      - if current_user?(comment.user) or boss?
-        .pull-right
-          =link_to({:action => :comment_stat, :id => comment.post.id, :comment_id => comment.id, :dis_stat => 1, :com_stage => get_stage_for_improve(comment.get_class)},  :remote => true, :method => :put,  id: "dis_stat_comment_#{comment.id}") do
+      = role_label(comment)
+      %span.pull-right
+        - if current_user?(comment.user) or boss?
+          =link_to({:controller => comment.post.class.name.underscore.pluralize, :action => :comment_status, :id => comment.post.id, :comment_id => comment.id, :discontent_status => 1, :comment_stage => get_stage_for_improve(comment.get_class)},  :remote => true, :method => :put,  id: "dis_stat_comment_#{comment.id}") do
             %span.label(class="#{label_dis_stat(comment)}") Проблема
-          =link_to({:action => :comment_stat, :id => comment.post.id, :comment_id => comment.id, :con_stat => 1, :com_stage => get_stage_for_improve(comment.get_class)},  :remote => true, :method => :put,  id: "con_stat_comment_#{comment.id}") do
+          =link_to({:controller => comment.post.class.name.underscore.pluralize, :action => :comment_status, :id => comment.post.id, :comment_id => comment.id, :concept_status => 1, :comment_stage => get_stage_for_improve(comment.get_class)},  :remote => true, :method => :put,  id: "con_stat_comment_#{comment.id}") do
             %span.label(class="#{label_con_stat(comment)}") Идея
-      -else
-        .pull-right
+        - else
           %span.label(class="#{label_dis_stat(comment)}") Проблема
           %span.label(class="#{label_con_stat(comment)}") Идея
 
+        - if boss? or role_expert?
+          =link_to({:controller => comment.post.class.name.underscore.pluralize, :action => :comment_status, :id => comment.post.id, :comment_id => comment.id, :discuss_status => 1, :comment_stage => get_stage_for_improve(comment.get_class)},  :remote => true, :method => :put,  id: "discuss_stat_comment_#{comment.id}") do
+            %span.label(class="#{label_discuss_stat(comment)}") ТРЕБУЕТ ОБСУЖДЕНИЯ
+        - elsif comment.discuss_status
+          %span.label-danger ТРЕБУЕТ ОБСУЖДЕНИЯ
     .text
       %div{id: "comment_text_#{comment.id}"}
         =simple_format(comment.content)
@@ -45,13 +36,8 @@
             :prompt => 'Выберите тему', :onchange => "select_for_aspects_comments(this,#{@project.id},#{comment.id});"
 
       .pull-right
-        -if @imp_dis_comment or @imp_con_comment
-          =link_for_improve(comment).html_safe if link_for_improve(comment)
-          =link_to({:action => :new, :asp => params[:asp], :imp_comment => comment.id, :imp_stage => get_stage_for_improve(comment.get_class) }, :method => :get,  id: "improve_comment_#{comment.id}") do
-            %span.label.label-success Доработать
-        -else
-          =link_to({:action => :add_child_comment_form, :id => comment.post.id, :comment_id => comment.id },  :remote => true, :method => :put,  id: "add_child_comment_#{comment.id}") do
-            %span.label.label-success Ответить
+        =link_to({:action => :add_child_comment_form, :id => comment.post.id, :comment_id => comment.id },  :remote => true, :method => :put,  id: "add_child_comment_#{comment.id}") do
+          %span.label.label-success Ответить
         - if boss?
           - if signed_in? and not comment.users.include?(current_user)
             =link_to({:action => :plus_comment, :id => comment.id, :against => false},  :remote => true, :method => :put,  id: "plus_comment_#{comment.id}") do
@@ -59,47 +45,17 @@
               %span.text-success(id="plus_counter_comment_#{comment.id}")=comment.users_pro.count
               %span.glyphicon.glyphicon-thumbs-up.text-success
 
-            -#=link_to({:action => :plus_comment, :id => comment.id, :against => true, }, :remote => true, :method => :put, id: "minus_comment_#{comment.id}") do
-            -#  %span.text-danger Против
-            -#  %span.text-danger(id="minus_counter_comment_#{comment.id}")=comment.users_against.count
-            -#  %span.glyphicon.glyphicon-thumbs-down.text-danger
-
           -else
             %span.text-muted= "За #{comment.users_pro.count}"
             %span.glyphicon.glyphicon-thumbs-up.text-muted
-            -#%span.text-muted= "Против #{comment.users_against.count}"
-            -#%span.glyphicon.glyphicon-thumbs-down.text-muted
-
+      .time.pull-left
+        =time_ago_in_words(comment.created_at)
       %br
-      -if @imp_dis_comment
-        -if comment.imp_disposts.present?
-          %br
-          %section.widget
-            .body
-              %ul
-                - comment.imp_disposts.each do |post|
-                  %li(style="line-height:30px;")
-                    Доработано
-                    =link_to post.user, user_path(@project, post.user)
-                    =link_to 'подробнее', discontent_post_path(@project, post), :class=> 'btn btn-primary btn-xs'
-
-      -elsif @imp_con_comment
-        -if comment.imp_concepts.present?
-          %br
-          %section.widget
-            .body
-              %ul
-                - comment.imp_concepts.each do |post|
-                  %li(style="line-height:30px;")
-                    Доработано
-                    =link_to post.user, user_path(@project, post.user)
-                    =link_to 'подробнее', concept_post_path(@project, post), :class=> 'btn btn-primary btn-xs'
-      -else
-        .col-md-12
-          %br
-          %div{:id => "child_comments_#{comment.id}"}
-            -unless comment.comments.empty?
-              - comment.comments.each do |c|
-                = render :partial => 'shared/child_comment', object: c
-          %div{:id => "child_comments_form_#{comment.id}"}
+      .col-md-12
+        %br
+        %div{:id => "child_comments_#{comment.id}"}
+          -unless comment.comments.empty?
+            - comment.comments.each do |c|
+              = render :partial => 'shared/child_comment', object: c
+        %div{:id => "child_comments_form_#{comment.id}"}
 
