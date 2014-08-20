@@ -43,6 +43,7 @@ describe 'Discontents ' do
       end
 
       it 'can see right form' do
+        save_and_open_page
         expect(page).to have_content @discontent1.content
         expect(page).to have_content @discontent1.whend
         expect(page).to have_content @discontent1.whered
