@@ -13,11 +13,11 @@
           &nbsp;
           =" #{asp.content}"
   %li
-    = link_to "/project/#{@project.id}/#{current_stage}/to_work", :style => 'color:#2C509C;' do
+    = link_to "/project/#{@project.id}/#{current_stage}/to_work", class: 'text-towork' do
       Помощь по этапу
       %i.fa.fa-question-circle
   %li
-    = link_to essay_posts_path(@project, 1), :style => 'color:#16CC66;' do
+    = link_to essay_posts_path(@project, 1), class: 'text-essay' do
       Рефлексия по этапу
       %b="(#{@project.essay_count(1).count})"
       %i.fa.fa-refresh

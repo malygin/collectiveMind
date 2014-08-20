@@ -570,12 +570,12 @@ input.parsley-error{
     border-top: 1px solid $backgroundAddition;
     padding: 12px;
     margin: 0 -12px;
-    cursor: pointer;
+
 
     @include transition(background-color .2s ease-out);
 
     &:hover{
-      background: $backgroundAddition;
+//      background: $backgroundAddition;
     }
 
     &:last-child{
