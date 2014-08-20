@@ -1,3 +1,4 @@
+-#what field
 -if boss?
   =link_to({:controller => 'discontent/posts', :action => :status_post, :id => post_content.id, :type_field => 1},:remote => true,:method => :put, :id => "label_dispost_#{post_content.id}",:class => "note_text") do
     %span.label(class= "#{class_for_type_field(post_content,1)}" id="#{id_for_type_field(1)}_#{post_content.id}")=name_for_type_field(1)
@@ -10,7 +11,6 @@
   %ul(id="post_content_#{post_content.id}" style="list-style: disc inside;" )
     -post_content.discontent_posts.each do |dp|
       %li.union-list{:id => "li_id_#{dp.id}"}=dp.content
-
 -else
   -if boss? and @project.status == 3
     =link_to({:controller => 'discontent/posts', :action => :new_note, :id => post_content.id, :type_field => 1},:remote => true,:method => :put, :id => "content_dispost_#{post_content.id}_1", :class => "note_text") do
@@ -19,9 +19,8 @@
     %span.h55(id="#{id_for_type_field(1)}_content_#{post_content.id}")=post_content.content
     %br
 
--if @project.status == 3
-  %div
-  %ul{:id => "note_form_#{post_content.id}_1", :class => "#{'discuss_comment' if post_content.note_size?(1) }", :style => "list-style: none; "}
+-if @project.status == 3  and post_content.note_size?(1)
+  %ul{:id => "note_form_#{post_content.id}_1", :class => 'discuss_comment'}
     -post_content.post_notes(1).each do |dpn|
       %div{:id => "post_note_#{dpn.id}"}
         -if boss?
@@ -29,23 +28,21 @@
             %span{:class=>"glyphicon glyphicon-remove text-danger pull-right", :style=>"cursor:pointer;text-decoration:none;font-size:15px;"}
         %li{:id => "li_note_#{dpn.id}"}=dpn.content
 
+
+
+
+-# when field
 -if boss?
-  =link_to({:controller => 'discontent/posts', :action => :status_post, :id => post_content.id, :type_field => 2},:remote => true,:method => :put, :id => "label_dispost_#{post_content.id}",:class => "note_text") do
+  =link_to("/project/#{@project.id}/discontent/posts/#{post_content.id}/new_note?type_field=2",:remote => true,:method => :put, :id => "label_dispost_#{post_content.id}",:class => "note_text") do
     %span.label(class= "#{class_for_type_field(post_content,2)}" id="#{id_for_type_field(2)}_#{post_content.id}")=name_for_type_field(2)
--else
-  %span.label(class= "#{class_for_type_field(post_content,2)}" id="#{id_for_type_field(2)}_#{post_content.id}")=name_for_type_field(2)
-
-
--if boss? and @project.status == 3
-  =link_to({:controller => 'discontent/posts', :action => :new_note, :id => post_content.id, :type_field => 2},:remote => true,:method => :put, :id => "content_dispost_#{post_content.id}_2", :class => "note_text") do
     %span.h55(id="#{id_for_type_field(2)}_content_#{post_content.id}")=post_content.whered
 -else
-  %span.h55(id="#{id_for_type_field(2)}_content_#{post_content.id}")=post_content.whered
-  %br
+  %span.label(class= "#{class_for_type_field(post_content,2)}")=name_for_type_field(2)
+  %span.h55=post_content.whered
 
--if @project.status == 3
-  %div
-  %ul{:id => "note_form_#{post_content.id}_2", :class => "#{'discuss_comment' if post_content.note_size?(2) }", :style => "list-style: none; "}
+%br
+%ul{:id => "note_form_#{post_content.id}_2", :class => 'discuss_comment' }
+  -if @project.status == 3  and post_content.note_size?(2)
     -post_content.post_notes(2).each do |dpn|
       %div{:id => "post_note_#{dpn.id}"}
         -if boss?
@@ -54,23 +51,18 @@
         %li{:id => "li_note_#{dpn.id}"}=dpn.content
 
 
+
+-#where field
 -if boss?
-  =link_to({:controller => 'discontent/posts', :action => :status_post, :id => post_content.id, :type_field => 3},:remote => true,:method => :put, :id => "label_dispost_#{post_content.id}",:class => "note_text") do
+  =link_to("/project/#{@project.id}/discontent/posts/#{post_content.id}/new_note?type_field=3",:remote => true,:method => :put, :id => "label_dispost_#{post_content.id}",:class => "note_text") do
     %span.label(class= "#{class_for_type_field(post_content,3)}" id="#{id_for_type_field(3)}_#{post_content.id}")=name_for_type_field(3)
+    %span.h55(id="#{id_for_type_field(3)}_content_#{post_content.id}")=post_content.whered
 -else
-  %span.label(class= "#{class_for_type_field(post_content,3)}" id="#{id_for_type_field(3)}_#{post_content.id}")=name_for_type_field(3)
+  %span.label(class= "#{class_for_type_field(post_content,3)}")=name_for_type_field(3)
+  %span.h55=post_content.whered
 
-
--if boss? and @project.status == 3
-  =link_to({:controller => 'discontent/posts', :action => :new_note, :id => post_content.id, :type_field => 3},:remote => true,:method => :put, :id => "content_dispost_#{post_content.id}_3", :class => "note_text") do
-    %span.h55(id="#{id_for_type_field(3)}_content_#{post_content.id}")=post_content.whend
--else
-  %span.h55(id="#{id_for_type_field(3)}_content_#{post_content.id}")=post_content.whend
-  %br
-
--if @project.status == 3
-  %div
-  %ul{:id => "note_form_#{post_content.id}_3", :class => "#{'discuss_comment' if post_content.note_size?(3) }", :style => "list-style: none; "}
+%ul{:id => "note_form_#{post_content.id}_3", :class => 'discuss_comment' }
+  -if @project.status == 3  and post_content.note_size?(3)
     -post_content.post_notes(3).each do |dpn|
       %div{:id => "post_note_#{dpn.id}"}
         -if boss?

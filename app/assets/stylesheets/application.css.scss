@@ -55,6 +55,8 @@ $brand-estimate:        #663505 !default;
 .text-concept          { color: $brand-concept; }
 .text-plan             { color: $brand-plan; }
 .text-estimate         { color: $brand-estimate; }
+.text-towork { color: $teal !important;}
+.text-essay {color: $green !important;}
 
 .label-lifetape    { @include label-variant($brand-lifetape);}
 .label-discontent  { @include label-variant($brand-discontent);}
@@ -65,58 +67,41 @@ $brand-estimate:        #663505 !default;
 
 /*todo my styles top*/
 
-.glyphicon {
-  cursor: pointer;
-  text-decoration: none;
-}
-.widget-tabs .tab-content .row {
-  margin-left: 0 !important;
-  margin-right: 0 !important;
-}
 
 
 /* discontent posts */
 .label-t {
-  color: #0e7ccd !important;
-  background-color: #90d0ff !important;
-  font-weight: normal !important;
+  @include label-variant($teal);
 }
+
 .label-n {
-  color: white !important;
-  background-color: #e5603b !important;
-  font-weight: normal !important;
-  /*font-size: 100% !important;*/
+  @include label-variant($brand-danger);
 }
 
 .label-p {
-  color: white !important;
-  background-color: #56bc76 !important;
-  font-weight: normal !important;
-  /*font-size: 100% !important;*/
+  @include label-variant($green);
 }
 
 .label-g {
-  background-color: #999999 !important;
-  font-weight: normal !important;
+  @include label-variant($gray-light);
 }
 
-.news-list ul li {
-  border-top: 0px solid rgba(51, 51, 51, 0.25);
-  margin-bottom: 0 !important;
-  /*background-color: #ffb8a7 !important;*/
-}
-.news-list ul li:hover {
-  background: none;
-}
-.border_note {
-  border: 1px solid red !important;
-}
-.note_text {
-  text-decoration: none !important;
-}
+
+
+
 .discuss_comment {
-  background-color: rgba(240, 64, 106, 0.2) !important;
+  list-style: none;
+  background-color: lighten($brand-danger, 10%);
+  margin-left: 15px;
+  li {
+    margin-bottom: 0px !important;
+    margin-left: 15px !important;
+    padding: 5px;
+    border-top: none !important;
+    text-decoration: none !important;
+  }
 }
+
 .expert_comment {
   background-color: rgba(215, 233, 208, 0.3) !important;
 }

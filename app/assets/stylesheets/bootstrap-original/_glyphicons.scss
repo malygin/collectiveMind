@@ -28,7 +28,10 @@
   line-height: 1;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  cursor: pointer;
+  text-decoration: none;
 }
+
 
 // Individual icons
 .glyphicon-asterisk               { &:before { content: "\2a"; } }
