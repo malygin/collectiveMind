@@ -18,7 +18,7 @@ describe 'Core Project ' do
 
     context 'not links for admin' do
       it 'not have link' do
-        save_and_open_page
+        #save_and_open_page
         expect(page).not_to  have_selector '#list_projects'
         expect(page).to have_content 'Открытые процедуры'
         expect(page).to have_content 'test project'

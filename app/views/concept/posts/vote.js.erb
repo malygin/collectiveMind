@@ -1,7 +1,0 @@
-$("#vote_<%=@post_vote.id %>").addClass('disabled btn-success');
-$(".vote_dis_<%=@post_vote.discontent.id %>").addClass('disabled btn-success');
-
-var n = parseInt("<%=@votes %>")
-if (n == 0){
-  $(".vote-button").remove();}
-$('#count_vote').html(n);

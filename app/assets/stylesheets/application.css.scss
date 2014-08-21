@@ -38,6 +38,7 @@
 @import "general";
 @import "base";
 @import "responsive";
+@import 'jquery.ui.all';
 //@import "print";
 
 
@@ -86,7 +87,10 @@ $brand-estimate:        #663505 !default;
   @include label-variant($gray-light);
 }
 
-
+.widget-tabs .tab-content .row {
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+}
 
 
 .discuss_comment {

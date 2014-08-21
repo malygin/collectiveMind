@@ -192,14 +192,8 @@ class Discontent::PostsController < PostsController
      @project = Core::Project.find(params[:project])
      @post = Discontent::Post.find(params[:id])
      @union_post = Discontent::Post.find(params[:post_id])
-     @add_list = params[:add_list]
-     if @add_list.nil?
-        @union_post.update_attributes(status: 1, discontent_post_id: @post.id)
-        @post.update_union_post_aspects(@union_post.post_aspects)
-     end
-     respond_to do |format|
-       format.js
-     end
+     @union_post.update_attributes(status: 1, discontent_post_id: @post.id)
+     @post.update_union_post_aspects(@union_post.post_aspects)
    end
 
     def next_post_for_vote

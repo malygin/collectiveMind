@@ -1,4 +1,6 @@
 # encoding: utf-8
+require 'similar_text'
+require 'set'
 class Concept::PostsController < PostsController
 
   autocomplete :concept_post, :resource, :class_name => 'Concept::Post' , :full => true
@@ -35,7 +37,6 @@ class Concept::PostsController < PostsController
        pr.merge(Plan::PostActionResource.select("DISTINCT name as value").where("LOWER(name) like LOWER(?) AND project_id = ?", "%#{params[:term]}%", params[:project])
                 .map {|d| {:value => d.value } })
      end
-
      render json: pr.sort_by{|ha| ha[:value].downcase}
   end
 
@@ -44,28 +45,17 @@ class Concept::PostsController < PostsController
     @aspects = Discontent::Aspect.where(:project_id => @project, :status => 0)
     @disposts = Discontent::Post.where(:project_id => @project, :status => 4).order(:id)
     @status = 4
-    if @project.status == 8
-      @vote_all = Concept::Voting.by_posts_vote(@project.discontents.by_status(4).pluck(:id).join(", ")).uniq_user.count
-    end
+    @vote_all = Concept::Voting.by_posts_vote(@project.discontents.by_status(4).pluck(:id).join(", ")).uniq_user.count if @project.status == 8
   end
 
   def index
-    if @project.status == 8
-      if view_context.get_concept_posts_for_vote?(@project)
-        return redirect_to action: "vote_list"
-      end
-    end
-    @aspect_post =  params[:asp] ? Discontent::Aspect.find(params[:asp]) : @project.aspects.order(:id).first
-
-    life_tape_post = @aspect_post.life_tape_post
-    if life_tape_post
-      life_tape_comments = life_tape_post.comments.where(:concept_status => true)
-
-      discontent_comments = @project.improve_discontent_comments(3)
-      concept_comments = @project.improve_concept_comments
-      @comments_all = life_tape_comments | discontent_comments | concept_comments
-      @comments_all = @comments_all.sort_by{|c| c.improve_concepts.size}
-    end
+    return redirect_to action: "vote_list" if @project.status == 8 and view_context.get_concept_posts_for_vote?(@project)
+    @aspect =  params[:asp] ? Discontent::Aspect.find(params[:asp]) : @project.proc_aspects.order(:id).first
+    life_tape_comments = @project.improve_life_tape_comments(3)
+    discontent_comments = @project.improve_discontent_comments(3)
+    concept_comments = @project.improve_concept_comments
+    @comments_all = life_tape_comments | discontent_comments | concept_comments
+    @comments_all = @comments_all.sort_by{|c| c.improve_concepts.size}
   end
 
   def create
@@ -74,15 +64,15 @@ class Concept::PostsController < PostsController
     params[:pa].each do |pa|
       post_aspect = Concept::PostAspect.new(pa[1])
       if pa[0] == '0'
-        disc = Discontent::Post.find(params[:cd].first) if params[:cd].present?
+        disc = Discontent::Post.find(params[:cd].first) if params[:cd]
       else
         disc = Discontent::Post.find(pa[0])
       end
       post_aspect.discontent = disc
       @concept_post.post_aspects << post_aspect
     end
-    user_for_post = params[:select_for_clubers].present? ? User.find(params[:select_for_clubers]) : current_user
-    @concept_post.number_views =0
+    user_for_post = params[:select_for_clubers] ? User.find(params[:select_for_clubers]) : current_user
+    @concept_post.number_views = 0
     @concept_post.user = user_for_post
     @concept_post.status = 0
     @concept_post.project = @project
@@ -110,17 +100,14 @@ class Concept::PostsController < PostsController
         user_for_post.journals.build(:type_event=>'concept_post_save', :body=>trim_content(@concept_post.post_aspects.first.title),   :first_id => @concept_post.id,  :project => @project).save!
         aspect_id =  params[:asp_id]
         format.html { redirect_to  aspect_id.nil? ? "/project/#{@project.id}/concept/posts" : "/project/#{@project.id}/concept/posts?asp=#{aspect_id}" }
-        format.json { render json: @concept_post, status: :created, location: @concept_post }
       else
         format.html { render action: "new" }
-        format.json { render json: @concept_post.errors, status: :unprocessable_entity }
       end
     end
   end
 
   def update
     @project = Core::Project.find(params[:project])
-
     @concept_post = Concept::Post.find(params[:id])
     @concept_post.update_status_fields(params[:pa],params[:resor_positive_r],params[:res_positive_r],params[:resor_negative_r],params[:res_negative_r])
     @concept_post.post_aspects.destroy_all
@@ -159,20 +146,15 @@ class Concept::PostsController < PostsController
         current_user.journals.build(:type_event=>'concept_post_update', :body => trim_content(@concept_post.post_aspects.first.title), :first_id=>@concept_post.id,  :project => @project).save!
 
         format.html { redirect_to action: "show", :project => @project, :id => @concept_post.id }
-        format.json { head :no_content }
       else
         format.html { render action: "edit" }
-        format.json { render json: @concept_post.errors, status: :unprocessable_entity }
       end
     end
   end
 
   def vote_list
     @project = Core::Project.find(params[:project])
-    unless view_context.get_concept_posts_for_vote?(@project)
-      redirect_to action: "index"
-      return
-    end
+    return redirect_to action: "index" unless view_context.get_concept_posts_for_vote?(@project)
 
     disposts = Discontent::Post.where(:project_id => @project, :status => 4).order(:id)
     last_vote = current_user.concept_post_votings.by_project_votings(@project).last
@@ -207,7 +189,7 @@ class Concept::PostsController < PostsController
       count_create = 1
     else
       count_create = current_user.concept_post_votings.by_project_votings(@project).where(:discontent_post_id => @last_vote.discontent_post_id,
-                                                             :concept_post_aspect_id => @last_vote.concept_post_aspect_id).count + 1
+                                                 :concept_post_aspect_id => @last_vote.concept_post_aspect_id).count + 1
     end
     if view_context.get_concept_posts_for_vote?(@project)
       count_create.times do
@@ -244,9 +226,6 @@ class Concept::PostsController < PostsController
     @pa = Concept::PostAspect.new
     @comment = "#{get_class_for_improve(params[:improve_stage].to_i)}::Comment".constantize.find(params[:improve_comment]) if params[:improve_comment] and params[:improve_stage]
     @pa.name = @comment.content if @comment
-    respond_to do |format|
-      format.html
-    end
   end
 
    def edit
@@ -259,9 +238,6 @@ class Concept::PostsController < PostsController
      @project = Core::Project.find(params[:project])
      @dispost = Discontent::Post.find(params[:dispost_id])
      @remove_able = params[:remove_able]
-     respond_to do |format|
-       format.js
-     end
    end
 
 end

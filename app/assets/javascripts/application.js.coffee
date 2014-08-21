@@ -71,7 +71,7 @@ $ ->
     $(this).datepicker "hide"
     return
 
-  $select = $("#selectize_discontent,#selectize_concept").selectize
+  $select = $("#selectize_discontent").selectize
     labelField: "show_content"
     valueField: "id"
     sortField: "show_content"
@@ -83,6 +83,29 @@ $ ->
       project_id = parseInt(optsel.attr('project'))
       id = parseInt(optsel.attr('post'))
       select_discontent_for_union(project_id,id)
+      selectize = $select[0].selectize
+      selectize.removeOption(item)
+      selectize.refreshOptions()
+      selectize.close()
+    render:
+      item: (item, escape) ->
+        short_item = item.show_content.split('<br/>')[0].replace('<b> что: </b>', '')
+        return '<div>'+short_item+'</div>'
+      option: (item, escape) ->
+        return '<div>'+item.show_content+'</div>'
+
+  $select = $("#selectize_concept").selectize
+    labelField: "show_content"
+    valueField: "id"
+    sortField: "show_content"
+    searchField: "show_content"
+    create: false
+    hideSelected: true
+    onChange: (item) ->
+      optsel = $(".option_for_selectize")
+      project_id = parseInt(optsel.attr('project'))
+      id = parseInt(optsel.attr('post'))
+      select_discontent_for_concept(project_id)
       selectize = $select[0].selectize
       selectize.removeOption(item)
       selectize.refreshOptions()
@@ -182,7 +205,7 @@ activate_add_aspects()
 
 ###############################################
 # @todo work with concept_post
-@select_discontent_for_concept= (project,id)->
+@select_discontent_for_concept= (project)->
   sel = $('#selectize_concept :selected')
   if sel.val() != ''
     $.ajax

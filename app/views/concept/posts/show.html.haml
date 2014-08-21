@@ -1,7 +1,7 @@
 %h4=link_to ' << Вернуться к списку', "/project/#{@project.id}/concept/posts/"
 
 - @post.post_aspects.each do |tp|
-  %section.widget
+  %section
     .body
       .row
         .col-md-2
@@ -37,7 +37,7 @@
       %br
       .row
         .col-md-6
-          %section.widget
+          %section
             .body
               %h5.color-orange.text-center
                 %b=tp.title
@@ -55,7 +55,7 @@
               -if @project.status == 7
                 = render partial: 'concept/posts/note_list', :locals => {:post_field => @post,:type_fd => 1}
 
-          %section.widget
+          %section
             .body
               %p
                 .badge.badge-mutted A 2
@@ -72,7 +72,7 @@
               -if @project.status == 7
                 = render partial: 'concept/posts/note_list', :locals => {:post_field => @post,:type_fd => 2}
 
-          %section.widget
+          %section
             .body
               %p
                 .badge.badge-mutted В 1
@@ -87,7 +87,7 @@
               .form-group.has-success= display_content(tp.positive)
               -if @project.status == 7
                 = render partial: 'concept/posts/note_list', :locals => {:post_field => @post,:type_fd => 3}
-          %section.widget
+          %section
             .body
               %p
                 .badge.badge-mutted В 2
@@ -122,7 +122,7 @@
               -if @project.status == 7
                 = render partial: 'concept/posts/note_list', :locals => {:post_field => @post,:type_fd => 4}
 
-          %section.widget
+          %section
             .body
               %p
                 .badge.badge-mutted С 1
@@ -138,7 +138,7 @@
               -if @project.status == 7
                 = render partial: 'concept/posts/note_list', :locals => {:post_field => @post,:type_fd => 5}
 
-          %section.widget
+          %section
             .body
               %p
                 .badge.badge-mutted С 2
@@ -173,7 +173,7 @@
               -if @project.status == 7
                 = render partial: 'concept/posts/note_list', :locals => {:post_field => @post,:type_fd => 6}
 
-          %section.widget
+          %section
             .body
               %p
                 .badge.badge-mutted D 1
@@ -189,7 +189,7 @@
               -if @project.status == 7
                 = render partial: 'concept/posts/note_list', :locals => {:post_field => @post,:type_fd => 7}
 
-          %section.widget
+          %section
             .body
               %p
                 .badge.badge-mutted D 2
@@ -217,7 +217,7 @@
                   %br
 
         .col-md-6
-          %section.widget
+          %section
             .body
               %p Комментарии к нововведению
               .text-center= will_paginate @comments
