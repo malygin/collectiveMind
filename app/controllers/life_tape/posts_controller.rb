@@ -17,7 +17,7 @@ class LifeTape::PostsController < PostsController
     @page = params[:page]
     @aspect =  params[:asp] ? Discontent::Aspect.find(params[:asp]) : @project.aspects.order(:id).first
     @post_show = @aspect.life_tape_post unless @aspect.nil?
-    @comments= @post_show.main_comments.paginate(:page => @page ? @page: last_page, :per_page => 10) if @post_show
+    @comments= @post_show.main_comments.paginate(:page => @page ? @page: last_page, :per_page => 10).includes(:comments) if @post_show
     @comment = LifeTape::Comment.new
   end
 
