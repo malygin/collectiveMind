@@ -302,6 +302,41 @@ module ApplicationHelper
     end
   end
 
+  def stage_for_essay(stage)
+    case stage
+      when 1
+        'life_tape/posts'
+      when 2
+        'discontent/posts'
+      when 3
+        'concept/posts'
+      when 4
+        'plan/posts'
+      when 5
+        'estimate/posts'
+      else
+        'life_tape/posts'
+    end
+  end
+
+
+  def stage_for_essay_link(stage)
+    case stage
+      when 1
+        :life_tape
+      when 2
+        :discontent
+      when 3
+        :concept
+      when 4
+        :plan
+      when 5
+        :estimate
+      else
+        :life_tape
+    end
+  end
+
   def label_dis_stat(comment)
     case comment.discontent_status
       when false
@@ -462,7 +497,7 @@ module ApplicationHelper
     end
   end
 
-  def current_stage_for_navbar(controller)
+  def current_stage_for_navbar(controller, stage)
     if controller.instance_of? LifeTape::PostsController
       :lifetape
     elsif controller.instance_of? Discontent::PostsController
@@ -473,6 +508,8 @@ module ApplicationHelper
       :plan
     elsif controller.instance_of? Estimate::PostsController
       :estimate
+    elsif controller.instance_of? Essay::PostsController
+      stage_for_essay_link(stage.to_i)
     else
       :lifetape
     end

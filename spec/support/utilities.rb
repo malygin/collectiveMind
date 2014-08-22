@@ -11,22 +11,24 @@ def sign_out
   click_link 'sign_out'
 end
 
-def prepare_life_tape(project)
+def prepare_life_tape(project,user)
   @aspect1 = FactoryGirl.create :discontent_aspect, project: project, content: 'aspect 1'
   @aspect2 = FactoryGirl.create :discontent_aspect, project: project, content: 'aspect 2'
   @post1 = FactoryGirl.create :life_tape_post, project: project
   @post2 = FactoryGirl.create :life_tape_post, project: project
   @aspect_post1 = ActiveRecord::Base.connection.execute("insert into discontent_aspects_life_tape_posts (discontent_aspect_id,life_tape_post_id) values (#{@aspect1.id},#{@post1.id})")
   @aspect_post1 = ActiveRecord::Base.connection.execute("insert into discontent_aspects_life_tape_posts (discontent_aspect_id,life_tape_post_id) values (#{@aspect2.id},#{@post2.id})")
+  @comment1 = FactoryGirl.create :life_tape_comment, post: @post1, user: user, content: 'comment 1'
 end
 
-def prepare_discontents(project)
+def prepare_discontents(project,user)
   @aspect1 = FactoryGirl.create :aspect, project: project, content: 'aspect 1'
   @aspect2 = FactoryGirl.create :aspect, project: project, content: 'aspect 2'
   @discontent1 = FactoryGirl.create :discontent, project: project, content: 'discontent 1', whend: 'when 1', whered: 'where 1'
   @discontent2 = FactoryGirl.create :discontent, project: project, content: 'discontent 2', whend: 'when 2', whered: 'where 2'
   @disasp1 = FactoryGirl.create :discontent_post_aspect, post_id: @discontent1.id, aspect_id: @aspect1.id
   @disasp1 = FactoryGirl.create :discontent_post_aspect, post_id: @discontent2.id, aspect_id: @aspect1.id
+  @comment1 = FactoryGirl.create :discontent_comment, post: @discontent1, user: user, content: 'comment 1'
 end
 
 def prepare_concepts(project)

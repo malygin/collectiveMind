@@ -30,7 +30,7 @@
           %h2=@project.name
           %section.widget.widget-tabs
             %header
-              =render partial: 'application/stages', locals: {current_stage: current_stage_for_navbar(controller)}
+              =render partial: 'application/stages', locals: {current_stage: current_stage_for_navbar(controller, params[:stage])}
             .body.tab-content
               = yield
         -else

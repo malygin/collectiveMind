@@ -8,7 +8,7 @@ describe 'Discontents ' do
   let (:project) {create :core_project, status: 3 }
 
   before  do
-    prepare_discontents(project)
+    prepare_discontents(project,user)
     sign_in user
   end
 
@@ -54,6 +54,16 @@ describe 'Discontents ' do
         fill_in 'comment_text_area', with: 'dis comment 1'
         click_button 'send_post'
         expect(page).to have_content 'dis comment 1'
+      end
+
+      it ' add new answer comment', js: true do
+        click_link "add_child_comment_#{@comment1.id}"
+        #fill_in 'comment_text_area', with: 'new comment'
+        find('#comment_text_area').set('new child comment')
+        find("#child_comments_form_#{@comment1.id}").find('#comment_text_area').set "new child comment"
+        find("#child_comments_form_#{@comment1.id}").find('#send_post').click
+        expect(page).to have_content 'new child comment'
+        #screenshot_and_open_image
       end
     end
 

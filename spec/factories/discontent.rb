@@ -13,6 +13,9 @@ FactoryGirl.define do
   end
   factory :discontent_post_aspect, :class => 'Discontent::PostAspect'  do
   end
+  factory :discontent_comment, :class => 'Discontent::Comment'  do
+    content  "discontent comment for post"
+  end
 end
 
 #Factory.define :aspect do |f|

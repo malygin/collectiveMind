@@ -10,7 +10,7 @@ describe 'Life Tape ' do
   let (:closed_project) {create :core_project, status: 1 , type_access: 2, name: "closed project"}
 
   before  do
-    prepare_life_tape(project)
+    prepare_life_tape(project,user)
   end
 
   context  'ordinary user sign in ' do
@@ -46,9 +46,19 @@ describe 'Life Tape ' do
       end
 
       it ' add new comment list in aspect', js: true do
-        fill_in 'comment_text_area', with: 'comment 1'
+        fill_in 'comment_text_area', with: 'new comment'
         click_button 'send_post'
-        expect(page).to have_content 'comment 1'
+        expect(page).to have_content 'new comment'
+      end
+
+      it ' add new answer comment', js: true do
+        click_link "add_child_comment_#{@comment1.id}"
+        #fill_in 'comment_text_area', with: 'new comment'
+        find('#comment_text_area').set('new child comment')
+        find("#child_comments_form_#{@comment1.id}").find('#comment_text_area').set "new child comment"
+        find("#child_comments_form_#{@comment1.id}").find('#send_post').click
+        expect(page).to have_content 'new child comment'
+        #screenshot_and_open_image
       end
     end
   end
