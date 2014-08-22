@@ -4,16 +4,11 @@
     .sender
       =link_to child_comment.user, user_path(@project, child_comment.user)
       = render partial: '/shared/user_online', object: child_comment.user
-      = role_label(child_comment)
+      = role_label(child_comment.user)
       %span.pull-right
-        - if current_user?(child_comment.user) or boss?
-          =link_to({:controller => child_comment.post.class.name.underscore.pluralize, :action => :comment_status, :id => child_comment.post.id, :comment_id => child_comment.id, :discontent_status => 1,:comment_stage => get_stage_for_improve(child_comment.get_class)},  :remote => true, :method => :put,  id: "dis_stat_comment_#{child_comment.id}") do
-            %span.label(class="#{label_dis_stat(child_comment)}") Проблема
-          =link_to({:controller => child_comment.post.class.name.underscore.pluralize, :action => :comment_status, :id => child_comment.post.id, :comment_id => child_comment.id, :concept_status => 1,:comment_stage => get_stage_for_improve(child_comment.get_class)},  :remote => true, :method => :put,  id: "con_stat_comment_#{child_comment.id}") do
-            %span.label(class="#{label_con_stat(child_comment)}") Идея
-        - else
-          %span.label(class="#{label_dis_stat(child_comment)}") Проблема
-          %span.label(class="#{label_con_stat(child_comment)}") Идея
+        =render partial: '/shared/label_for_comment_status', locals: {comment: child_comment, status: 'discontent', title: 'Проблема'}
+        =render partial: '/shared/label_for_comment_status', locals: {comment: child_comment, status: 'concept', title: 'Идея'}
+
 
         - if boss? or role_expert?
           =link_to({:controller => child_comment.post.class.name.underscore.pluralize, :action => :comment_status, :id => child_comment.post.id, :comment_id => child_comment.id, :discuss_status => 1, :comment_stage => get_stage_for_improve(child_comment.get_class)},  :remote => true, :method => :put,  id: "discuss_stat_comment_#{child_comment.id}") do

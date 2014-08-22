@@ -90,7 +90,7 @@ class PostsController < ApplicationController
                                     :personal=> true, :viewed=> false).save!
       end
       if @main_comment and @main_comment.user!=current_user
-        current_user.journals.build(:type_event=>'reply_'+name_of_comment_for_param, :user_informed =>main_comment.user, :project => @project,
+        current_user.journals.build(:type_event=>'reply_'+name_of_comment_for_param, :user_informed =>@main_comment.user, :project => @project,
                                     :body=>"#{trim_content(@comment.content)}", :body2=>trim_content(@main_comment.content),
                                     :first_id=> (post.instance_of? LifeTape::Post) ? post.discontent_aspects.first.id : post.id, :second_id => @comment.id,
                                     :personal=> true, :viewed=> false).save!
@@ -126,8 +126,8 @@ class PostsController < ApplicationController
     if params[:comment_stage]
       @comment = "#{get_class_for_improve(params[:comment_stage].to_i)}::Comment".constantize.find(params[:comment_id]) unless params[:comment_id].nil?
     end
-    @comment.toggle!(:discontent_status) if params[:discontent_status]
-    @comment.toggle!(:concept_status) if params[:concept_status]
+    @comment.toggle!(:discontent_status) if params[:discontent]
+    @comment.toggle!(:concept_status) if params[:concept]
     @comment.toggle!(:discuss_status) if params[:discuss_status]
     if @comment.discuss_status
       current_user.journals.build(:type_event=>name_of_comment_for_param+'_discuss_stat', :project => @project,

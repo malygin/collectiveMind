@@ -337,26 +337,17 @@ module ApplicationHelper
     end
   end
 
-  def label_dis_stat(comment)
-    case comment.discontent_status
-      when false
-        'label-default'
-      when true
+  def css_label_status(status)
+    case status
+      when 'discontent'
         'label-danger'
-      else
-        'label-default'
-    end
-  end
-  def label_con_stat(comment)
-    case comment.concept_status
-      when false
-        'label-default'
-      when true
+      when 'concept'
         'label-warning'
       else
-        'label-default'
+        ''
     end
   end
+
   def label_discuss_stat(comment)
     case comment.discuss_status
       when false
@@ -489,10 +480,10 @@ module ApplicationHelper
     response
   end
 
-  def role_label(post)
-    if post.user.boss?
+  def role_label(user)
+    if user.boss?
       content_tag :span, 'MD', class: 'label label-danger'
-    elsif post.user.role_expert?
+    elsif user.role_expert?
       content_tag :span, 'Эксперт', class: 'label label-success'
     end
   end

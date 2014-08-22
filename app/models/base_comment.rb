@@ -24,6 +24,18 @@ module BaseComment  extend ActiveSupport::Concern
       self.class.name.deconstantize
     end
 
+    def controller_name_for_action
+      self.post.class.name.underscore.pluralize
+    end
+
+    def check_status_for_label(st)
+      if st == 'discontent'
+        self.discontent_status
+      else
+        self.concept_status
+      end
+    end
+
     def current_class?(stage)
       case stage
         when :life_tape, 'life_tape'
