@@ -4,8 +4,8 @@
   $(".chat-messages").scrollTop(10000);
   $('#comment_success').fadeIn('slow').delay(1000).fadeOut('slow');
 -else
-  $("#child_comments_#{@main_comment.id}").append("#{escape_javascript(render :partial => 'shared/child_comment', :object => @comment)}");
-  $("#child_comments_form_#{@main_comment.id}").html('')
+  $("#child_comments_#{@main_comment.id}").append("#{escape_javascript(render :partial => 'shared/comment', :object => @comment)}");
+  $("#child_comments_form_#{@main_comment.id}").html('');
 
 $("#change_comment_stat label").removeClass('btn-success active').addClass('btn-default');
 $('#change_comment_stat .btn').button('reset');

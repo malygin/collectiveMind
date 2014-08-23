@@ -95,8 +95,8 @@ $brand-estimate:        #663505 !default;
 
 .discuss_comment {
   list-style: none;
-  background-color: lighten($brand-danger, 10%);
-  margin-left: 15px;
+  background-color: lighten($message-warning, 10%);
+//  margin-left: 15px;
   li {
     margin-bottom: 0px !important;
     margin-left: 15px !important;

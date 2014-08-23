@@ -24,6 +24,10 @@ module BaseComment  extend ActiveSupport::Concern
       self.class.name.deconstantize
     end
 
+    def main_comment?
+      self.comment_id.nil?
+    end
+
     def controller_name_for_action
       self.post.class.name.underscore.pluralize
     end
