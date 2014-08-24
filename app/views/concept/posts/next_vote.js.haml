@@ -1,5 +1,5 @@
 -unless @discontent_post.nil?
-  -if @discontent_post.id != @last_now.discontent_post_id
+  -if @last_now.nil? or @discontent_post.id != @last_now.discontent_post_id
     $('#dispost').html("#{escape_javascript(render partial: 'discontent/posts/post_content', object: @discontent_post)}")
     $('#left-concept').html("#{escape_javascript(render partial: 'post_for_vote', object: @concept1, :locals => {:number => 1})}")
     $('#left-concept div.panel-body').effect("highlight", {color: '#f5cecd'}, 1000)

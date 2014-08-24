@@ -48,10 +48,7 @@ class Discontent::PostsController < PostsController
     return redirect_to action: "vote_list" if current_user.can_vote_for(:discontent,  @project)
     @aspect =  params[:asp] ? Discontent::Aspect.find(params[:asp]) : @project.proc_aspects.order(:id).first
     @accepted_posts = Discontent::Post.where(project_id: @project, status: 2)
-    life_tape_comments = @project.improve_life_tape_comments(2)
-    discontent_comments = @project.improve_discontent_comments(2)
-    @comments_all = life_tape_comments | discontent_comments
-    @comments_all = @comments_all.sort_by{|c| c.improve_disposts.size}
+    @comments_all = @project.problems_comments_for_improve
     @page = params[:page]
   end
 

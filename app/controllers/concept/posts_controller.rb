@@ -44,36 +44,27 @@ class Concept::PostsController < PostsController
     @project = Core::Project.find(params[:project])
     @aspects = Discontent::Aspect.where(:project_id => @project, :status => 0)
     @disposts = Discontent::Post.where(:project_id => @project, :status => 4).order(:id)
-    @status = 4
     @vote_all = Concept::Voting.by_posts_vote(@project.discontents.by_status(4).pluck(:id).join(", ")).uniq_user.count if @project.status == 8
   end
 
   def index
-    return redirect_to action: "vote_list" if @project.status == 8 and view_context.get_concept_posts_for_vote?(@project)
+    return redirect_to action: "vote_list" if current_user.can_vote_for(:concept, @project) #view_context.get_concept_posts_for_vote?(@project)
     @aspect =  params[:asp] ? Discontent::Aspect.find(params[:asp]) : @project.proc_aspects.order(:id).first
-    life_tape_comments = @project.improve_life_tape_comments(3)
-    discontent_comments = @project.improve_discontent_comments(3)
-    concept_comments = @project.improve_concept_comments
-    @comments_all = life_tape_comments | discontent_comments | concept_comments
-    @comments_all = @comments_all.sort_by{|c| c.improve_concepts.size}
+    @comments_all = @project.ideas_comments_for_improve
   end
 
   def create
     @project = Core::Project.find(params[:project])
     @concept_post = Concept::Post.new
-    params[:pa].each do |pa|
-      post_aspect = Concept::PostAspect.new(pa[1])
-      if pa[0] == '0'
-        disc = Discontent::Post.find(params[:cd].first) if params[:cd]
-      else
-        disc = Discontent::Post.find(pa[0])
+    post_aspect = Concept::PostAspect.new(params[:pa])
+    unless params[:cd].nil?
+      params[:cd].each do |cd|
+        @concept_post.concept_post_discontents.build(discontent_post_id: cd.to_i)
       end
-      post_aspect.discontent = disc
-      @concept_post.post_aspects << post_aspect
     end
-    user_for_post = params[:select_for_clubers] ? User.find(params[:select_for_clubers]) : current_user
+    @concept_post.post_aspects << post_aspect
     @concept_post.number_views = 0
-    @concept_post.user = user_for_post
+    @concept_post.user = current_user
     @concept_post.status = 0
     @concept_post.project = @project
     @concept_post.improve_comment = params[:improve_comment] if params[:improve_comment]
@@ -92,12 +83,7 @@ class Concept::PostsController < PostsController
 
    respond_to do |format|
       if @concept_post.save!
-        unless params[:cd].nil?
-          params[:cd].each do |cd|
-            Concept::PostDiscontent.create(post_id: @concept_post.id, discontent_post_id: cd.to_i)
-          end
-        end
-        user_for_post.journals.build(:type_event=>'concept_post_save', :body=>trim_content(@concept_post.post_aspects.first.title),   :first_id => @concept_post.id,  :project => @project).save!
+        current_user.journals.build(:type_event=>'concept_post_save', :body=>trim_content(@concept_post.post_aspects.first.title), :first_id => @concept_post.id,  :project => @project).save!
         aspect_id =  params[:asp_id]
         format.html { redirect_to  aspect_id.nil? ? "/project/#{@project.id}/concept/posts" : "/project/#{@project.id}/concept/posts?asp=#{aspect_id}" }
       else
@@ -111,17 +97,14 @@ class Concept::PostsController < PostsController
     @concept_post = Concept::Post.find(params[:id])
     @concept_post.update_status_fields(params[:pa],params[:resor_positive_r],params[:res_positive_r],params[:resor_negative_r],params[:res_negative_r])
     @concept_post.post_aspects.destroy_all
-
-    params[:pa].each do |pa|
-      post_aspect = Concept::PostAspect.new(pa[1])
-      if pa[0] == '0'
-        disc = Discontent::Post.find(params[:cd].first) if params[:cd].present?
-      else
-        disc = Discontent::Post.find(pa[0])
+    post_aspect = Concept::PostAspect.new(params[:pa])
+    @concept_post.concept_post_discontents.destroy_all
+    unless params[:cd].nil?
+      params[:cd].each do |cd|
+        @concept_post.concept_post_discontents.build(discontent_post_id: cd.to_i)
       end
-      post_aspect.discontent = disc
-      @concept_post.post_aspects << post_aspect
     end
+    @concept_post.post_aspects << post_aspect
     @concept_post.concept_post_resources.by_type('positive_r').destroy_all
     unless params[:resor_positive_r].nil?
       params[:resor_positive_r].each_with_index do |r,i|
@@ -137,14 +120,7 @@ class Concept::PostsController < PostsController
 
     respond_to do |format|
       if @concept_post.save!
-        @concept_post.concept_post_discontents.destroy_all
-        unless params[:cd].nil?
-          params[:cd].each do |cd|
-            Concept::PostDiscontent.create(post_id: @concept_post.id, discontent_post_id: cd.to_i)
-          end
-        end
         current_user.journals.build(:type_event=>'concept_post_update', :body => trim_content(@concept_post.post_aspects.first.title), :first_id=>@concept_post.id,  :project => @project).save!
-
         format.html { redirect_to action: "show", :project => @project, :id => @concept_post.id }
       else
         format.html { render action: "edit" }
@@ -154,30 +130,16 @@ class Concept::PostsController < PostsController
 
   def vote_list
     @project = Core::Project.find(params[:project])
-    return redirect_to action: "index" unless view_context.get_concept_posts_for_vote?(@project)
+    return redirect_to action: "index" unless current_user.can_vote_for(:concept,  @project)
 
     disposts = Discontent::Post.where(:project_id => @project, :status => 4).order(:id)
     last_vote = current_user.concept_post_votings.by_project_votings(@project).last
-
-    @discontent_post = view_context.able_concept_posts_for_vote(disposts,last_vote)
-    unless @discontent_post.nil?
-      @post_all = @discontent_post.dispost_concepts.by_status(0).size - 1
-      concept_posts = @discontent_post.dispost_concepts.by_status(0).order('concept_posts.id')
-      if last_vote.nil? or @discontent_post.id != last_vote.discontent_post_id
-        @concept1 = concept_posts[0].post_aspects.first
-        @concept2 = concept_posts[1].post_aspects.first
-        @votes = 1
-      else
-        @concept1 = last_vote.concept_post_aspect
-        count_now = current_user.concept_post_votings.by_project_votings(@project).where(:discontent_post_id => @discontent_post.id, :concept_post_aspect_id => @concept1.id).count
-        index = concept_posts.index @concept1.concept_post
-        index = count_now unless index == count_now
-        unless concept_posts[index+1].nil?
-          @concept2 = concept_posts[index+1].post_aspects.first
-          @votes = index+1
-        end
-      end
-    end
+    @discontent_post = current_user.able_concept_posts_for_vote(@project,disposts,last_vote)
+    var_for_vote = @discontent_post.concepts_for_vote(@project,current_user,last_vote) unless @discontent_post.nil?
+    @post_all = var_for_vote[0]
+    @concept1 = var_for_vote[1]
+    @concept2 = var_for_vote[2]
+    @votes = var_for_vote[3]
   end
 
   def next_vote
@@ -191,30 +153,17 @@ class Concept::PostsController < PostsController
       count_create = current_user.concept_post_votings.by_project_votings(@project).where(:discontent_post_id => @last_vote.discontent_post_id,
                                                  :concept_post_aspect_id => @last_vote.concept_post_aspect_id).count + 1
     end
-    if view_context.get_concept_posts_for_vote?(@project)
+    if current_user.can_vote_for(:concept, @project)
       count_create.times do
         @last_now = Concept::Voting.create(:user_id => current_user.id, :concept_post_aspect_id => params[:id], :discontent_post_id => params[:dis_id])
       end
     end
-    @discontent_post = view_context.able_concept_posts_for_vote(disposts,@last_now)
-    unless @discontent_post.nil?
-      @post_all = @discontent_post.dispost_concepts.size - 1
-      concept_posts = @discontent_post.dispost_concepts.order('concept_posts.id')
-      if @discontent_post.id != @last_now.discontent_post_id
-        @concept1 = concept_posts[0].post_aspects.first
-        @concept2 = concept_posts[1].post_aspects.first
-        @votes = 1
-      else
-        @concept1 = @last_now.concept_post_aspect
-        count_now = current_user.concept_post_votings.by_project_votings(@project).where(:discontent_post_id => @discontent_post.id, :concept_post_aspect_id => @concept1.id).count
-        index = concept_posts.index @concept1.concept_post
-        index = count_now unless index == count_now
-        unless concept_posts[index+1].nil?
-          @concept2 = concept_posts[index+1].post_aspects.first
-          @votes = index+1
-        end
-      end
-    end
+    @discontent_post = current_user.able_concept_posts_for_vote(@project,disposts,@last_now)
+    var_for_vote = @discontent_post.concepts_for_vote(@project,current_user,@last_now) unless @discontent_post.nil?
+    @post_all = var_for_vote[0]
+    @concept1 = var_for_vote[1]
+    @concept2 = var_for_vote[2]
+    @votes = var_for_vote[3]
   end
 
   def new
@@ -222,7 +171,6 @@ class Concept::PostsController < PostsController
     @post = current_model.new
     @discontent_post = Discontent::Post.find(params[:dis_id]) unless params[:dis_id].nil?
     @resources = Concept::Resource.where(:project_id => @project.id)
-    #@users_rc = User.where(:type_user => [4,7])
     @pa = Concept::PostAspect.new
     @comment = "#{get_class_for_improve(params[:improve_stage].to_i)}::Comment".constantize.find(params[:improve_comment]) if params[:improve_comment] and params[:improve_stage]
     @pa.name = @comment.content if @comment
@@ -237,7 +185,6 @@ class Concept::PostsController < PostsController
    def add_dispost
      @project = Core::Project.find(params[:project])
      @dispost = Discontent::Post.find(params[:dispost_id])
-     @remove_able = params[:remove_able]
    end
 
 end

@@ -52,7 +52,7 @@
             %ul
               - improve_comment.improve_disposts.each do |post|
                 %li(style="line-height:30px;")
-                  Доработано
+                  Доработано до несовершенства
                   =link_to post.user, user_path(@project, post.user)
                   =link_to 'подробнее', discontent_post_path(@project, post), :class=> 'btn btn-primary btn-xs'
       -if improve_comment.improve_concepts.present?
@@ -62,7 +62,7 @@
             %ul
               - improve_comment.improve_concepts.each do |post|
                 %li(style="line-height:30px;")
-                  Доработано
+                  Доработано до нововведения
                   =link_to post.user, user_path(@project, post.user)
                   =link_to 'подробнее', concept_post_path(@project, post), :class=> 'btn btn-primary btn-xs'
 

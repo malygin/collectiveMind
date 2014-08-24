@@ -231,27 +231,25 @@ class Core::Project < ActiveRecord::Base
     self.essays.by_stage(stage)
   end
 
-  def improve_life_tape_comments(stage)
-    if stage == 2
-      LifeTape::Comment.joins("INNER JOIN life_tape_posts ON life_tape_comments.post_id = life_tape_posts.id").
-      where("life_tape_posts.project_id = ? and life_tape_comments.discontent_status = 't'", self.id)
-    elsif stage == 3
-      LifeTape::Comment.joins("INNER JOIN life_tape_posts ON life_tape_comments.post_id = life_tape_posts.id").
-      where("life_tape_posts.project_id = ? and life_tape_comments.concept_status = 't'", self.id)
-    end
+  def problems_comments_for_improve
+    life_tape_comments = LifeTape::Comment.joins("INNER JOIN life_tape_posts ON life_tape_comments.post_id = life_tape_posts.id").
+        where("life_tape_posts.project_id = ? and life_tape_comments.discontent_status = 't'", self.id)
+    discontent_comments = Discontent::Comment.joins("INNER JOIN discontent_posts ON discontent_comments.post_id = discontent_posts.id").
+        where("discontent_posts.project_id = ? and discontent_comments.discontent_status = 't'", self.id)
+    comments_all = life_tape_comments | discontent_comments
+    comments_all.sort_by{|c| c.improve_disposts.size}
   end
-  def improve_discontent_comments(stage)
-    if stage == 2
-      Discontent::Comment.joins("INNER JOIN discontent_posts ON discontent_comments.post_id = discontent_posts.id").
-      where("discontent_posts.project_id = ? and discontent_comments.discontent_status = 't'", self.id)
-    elsif stage == 3
-      Discontent::Comment.joins("INNER JOIN discontent_posts ON discontent_comments.post_id = discontent_posts.id").
-      where("discontent_posts.project_id = ? and discontent_comments.concept_status = 't'", self.id)
-    end
+
+  def ideas_comments_for_improve
+    life_tape_comments = LifeTape::Comment.joins("INNER JOIN life_tape_posts ON life_tape_comments.post_id = life_tape_posts.id").
+        where("life_tape_posts.project_id = ? and life_tape_comments.concept_status = 't'", self.id)
+    discontent_comments = Discontent::Comment.joins("INNER JOIN discontent_posts ON discontent_comments.post_id = discontent_posts.id").
+        where("discontent_posts.project_id = ? and discontent_comments.concept_status = 't'", self.id)
+    concept_comments = Concept::Comment.joins("INNER JOIN concept_posts ON concept_comments.post_id = concept_posts.id").
+        where("concept_posts.project_id = ? and concept_comments.concept_status = 't'", self.id)
+    comments_all = life_tape_comments | discontent_comments | concept_comments
+    comments_all.sort_by{|c| c.improve_concepts.size}
   end
-  def improve_concept_comments
-    Concept::Comment.joins("INNER JOIN concept_posts ON concept_comments.post_id = concept_posts.id").
-    where("concept_posts.project_id = ? and concept_comments.concept_status = 't'", self.id)
-  end
+
 
 end
