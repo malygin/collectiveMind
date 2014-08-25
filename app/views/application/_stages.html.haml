@@ -4,7 +4,7 @@
       1 этап
       %i.fa.fa-question-circle.tooltips(data-toggle="tooltip" data-placement="bottom" title="На этом этапе мы должны разобраться как работать с порталом и четко разобраться с темой!")
       %br
-      Подготовка к процедуре
+      Сбор информации
   %li(class="#{'active' if current_stage == :discontent} #{'disabled' if @project.status < 3}")
     %a{ href: "#{@project.status < 3 ? '#' :  "/project/#{@project.id}/discontent/posts"}"}
       2 этап
