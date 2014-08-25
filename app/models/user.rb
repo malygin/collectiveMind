@@ -231,7 +231,59 @@ class User < ActiveRecord::Base
     if project.status == 6 and !project.get_united_posts_for_vote(self).empty?
       return true
     end
+    if project.status == 8
+      disposts = Discontent::Post.where(:project_id => project.id, :status => 4).order(:id)
+      last_vote = self.concept_post_votings.by_project_votings(project).last
+      return true if last_vote.nil?
+      unless last_vote.nil?
+        i = -1
+        while disposts[i].nil? ? false:true
+          concept_posts = disposts[i].dispost_concepts.order('concept_posts.id')
+          if concept_posts.size > 1
+            break
+          end
+          i -= 1
+        end
+        if disposts[i].id == last_vote.discontent_post_id
+          count_now = self.concept_post_votings.by_project_votings(project).where(:discontent_post_id => last_vote.discontent_post_id, :concept_post_aspect_id => last_vote.concept_post_aspect_id).count
+          index = concept_posts.index last_vote.concept_post_aspect.concept_post
+          index = count_now unless index == count_now
+          unless concept_posts[index+1].nil?
+            return true
+          end
+        end
+      end
+    end
     false
+  end
+
+  def able_concept_posts_for_vote(project,disposts,last_vote, num = 0)
+    unless last_vote.nil?
+      dis_post = last_vote.discontent_post
+      num = disposts.index dis_post
+    end
+    i = num.nil? ? 0 : num
+    while disposts[i].nil? ? false:true
+      discontent_post = disposts[i]
+      concept_posts = discontent_post.dispost_concepts.by_status(0).order('concept_posts.id')
+      if last_vote.nil?
+        if concept_posts.size > 1
+          return discontent_post
+        end
+      elsif discontent_post.id != last_vote.discontent_post_id
+        if concept_posts.size > 1
+          return discontent_post
+        end
+      else
+        count_now = self.concept_post_votings.by_project_votings(project).where(:discontent_post_id => last_vote.discontent_post_id, :concept_post_aspect_id => last_vote.concept_post_aspect_id).count
+        index = concept_posts.index last_vote.concept_post_aspect.concept_post
+        index = count_now unless index == count_now
+        unless concept_posts[index+1].nil?
+          return discontent_post
+        end
+      end
+      i += 1
+    end
   end
 
   private

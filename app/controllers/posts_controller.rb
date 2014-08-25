@@ -441,4 +441,8 @@ class PostsController < ApplicationController
 
   end
 
+  def vote_result
+
+  end
+
 end

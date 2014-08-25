@@ -12,9 +12,6 @@
 
   #has_many :concept_notes, :class_name => 'Concept::Note'
 
-  has_many :concept_post_discussions, :class_name => 'Concept::PostDiscussion'
-  has_many :concept_discussion_users, :through => :concept_post_discussions, :source => :user, :class_name => 'User'
-
   has_many :concept_post_discontents, :class_name => 'Concept::PostDiscontent'
   has_many :concept_disposts, :through => :concept_post_discontents, :source => :discontent_post , :class_name => 'Discontent::Post'
   has_many :concept_post_resources, :class_name => 'Concept::PostResource'

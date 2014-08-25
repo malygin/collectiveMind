@@ -3,6 +3,7 @@
 class Discontent::Post < ActiveRecord::Base
   include BasePost
   attr_accessible :whend, :whered, :aspect_id, :aspect, :style, :discontent_post_id, :important, :status_content, :status_whered, :status_whend, :improve_comment, :improve_stage, :discuss_status
+
   belongs_to :aspect
   has_many :discontent_posts, :class_name => 'Discontent::Post', :foreign_key => 'discontent_post_id'
   belongs_to :discontent_post, :foreign_key => 'discontent_post_id',:class_name => 'Discontent::Post'
@@ -172,6 +173,26 @@ class Discontent::Post < ActiveRecord::Base
 
   def note_size?(type_fd)
     self.post_notes(type_fd).size > 0
+  end
+
+  def concepts_for_vote(project,current_user,last_vote)
+    @post_all = self.dispost_concepts.by_status(0).size - 1
+    concept_posts = self.dispost_concepts.by_status(0).order('concept_posts.id')
+    if last_vote.nil? or self.id != last_vote.discontent_post_id
+      @concept1 = concept_posts[0].post_aspects.first
+      @concept2 = concept_posts[1].post_aspects.first
+      @votes = 1
+    else
+      @concept1 = last_vote.concept_post_aspect
+      count_now = current_user.concept_post_votings.by_project_votings(project).where(:discontent_post_id => self.id, :concept_post_aspect_id => @concept1.id).count
+      index = concept_posts.index @concept1.concept_post
+      index = count_now unless index == count_now
+      unless concept_posts[index+1].nil?
+        @concept2 = concept_posts[index+1].post_aspects.first
+        @votes = index+1
+      end
+    end
+    return @post_all,@concept1,@concept2,@votes
   end
 
 end
