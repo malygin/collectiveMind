@@ -72,7 +72,7 @@ class UsersController < ApplicationController
 
   def list_users
     @project = Core::Project.find(params[:project])
-    @users = User.order('id DESC').order('score DESC').order('score DESC').paginate(:page =>params[:page])
+    @users = User.order('id DESC').paginate(:page =>params[:page])
     respond_to do |format|
       format.html { render :layout => 'core/list_projects'}
     end
