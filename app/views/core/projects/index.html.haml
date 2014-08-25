@@ -1,4 +1,16 @@
 - if signed_in?
+  -if @closed_projects.present?
+    %h3
+      %strong Закрытые процедуры
+    %ul(style="line-height:30px;")
+      - @closed_projects.each do |project|
+        %li
+          = project.name
+          %b="(#{status_project(project)})"
+          .pull-right
+            =link_to "/project/#{project.id}", class:'btn btn-sm btn-danger', id: 'go_to_closed_project' do
+              Перейти к процедуре
+
   -if @opened_projects.present?
     %h3
       %strong Открытые процедуры

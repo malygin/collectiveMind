@@ -5,6 +5,7 @@ class UsersController < ApplicationController
 	before_filter :admin_user, :only => [:destroy]
   before_filter :journal_data, :only => [:index, :new, :edit, :show, :users_rc]
   before_filter :admin_authenticate, :only => [:list_users,:add_user_for_project,:remove_user_for_project]
+  before_filter :have_project_access
 	def new
 		@user = User.new
 		@title = "Sign up"
@@ -34,7 +35,7 @@ class UsersController < ApplicationController
 	def index
     @project = Core::Project.find(params[:project])
     add_breadcrumb I18n.t('menu.raiting'), users_path(@project)
-    @users = User.joins(:core_project_scores).where("core_project_scores.project_id = ? AND core_project_scores.score > 0", @project.id).where(:users => {:type_user => [4,5,7,8,nil]}).order("core_project_scores.score DESC").paginate(:page =>params[:page])
+    @users = User.joins(:core_project_scores).has_score(@project).where("core_project_scores.project_id = ?", @project.id).where(:users => {:type_user => [4,5,8,nil]}).order("core_project_scores.score DESC").paginate(:page =>params[:page])
   end
 
   def add_user_for_project
@@ -57,7 +58,7 @@ class UsersController < ApplicationController
 
   def show_top
     @project = Core::Project.find(params[:project])
-    @users = User.joins(:core_project_scores).where("core_project_scores.project_id = ? AND core_project_scores.score > 0", @project.id).where(:users => {:type_user => [4,5,7,8,nil]}).order("core_project_scores.#{params[:score_name]} DESC").paginate(:page =>params[:page])
+    @users = User.joins(:core_project_scores).has_score(@project).where("core_project_scores.project_id = ?", @project.id).where(:users => {:type_user => [4,5,8,nil]}).order("core_project_scores.#{params[:score_name]} DESC").paginate(:page =>params[:page])
     @score_name = params[:score_name]
     respond_to do |format|
       format.js
@@ -71,7 +72,7 @@ class UsersController < ApplicationController
 
   def list_users
     @project = Core::Project.find(params[:project])
-    @users = User.paginate(:page =>params[:page])
+    @users = User.order('id DESC').order('score DESC').order('score DESC').paginate(:page =>params[:page])
     respond_to do |format|
       format.html { render :layout => 'core/list_projects'}
     end

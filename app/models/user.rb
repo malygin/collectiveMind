@@ -71,6 +71,8 @@ class User < ActiveRecord::Base
 
   has_many :user_checks , :class_name => "UserCheck"
   scope :check_field, ->(p,c){ where(project: p.id, status: 't', check_field: c) }
+  scope :has_score, ->(project){ where("core_project_scores.score > 0") unless project.type_access == 2 }
+
   validates :name,
   				   :length => { :maximum => 50 }
 
@@ -100,7 +102,6 @@ class User < ActiveRecord::Base
 
   def last_event(project)
     Journal.last_event_for(self,project)
-
   end
 
   def user_project_scores(project)
@@ -113,7 +114,6 @@ class User < ActiveRecord::Base
 
   def answered_for_help_stage?(stage)
     self.help_posts.pluck(:stage).include? stage
-
   end
 
   def to_s

@@ -1,5 +1,5 @@
 class JournalController < ApplicationController
-
+  before_filter :have_project_access
   def index
     @project = Core::Project.find(params[:project])
     events  = Journal.events_for_my_feed @project.id, current_user.id
@@ -8,6 +8,5 @@ class JournalController < ApplicationController
     @my_journals_count = @my_journals.size
 
     @journals_feed = Journal.events_for_user_feed(@project.id).paginate(:page => params[:page])
-
   end
 end

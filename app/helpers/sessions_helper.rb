@@ -8,7 +8,16 @@ module SessionsHelper
 	def deny_access 
 	    store_location
 	    redirect_to signin_path, :notice => "Авторизуйтесь пожалуйста!"
-	end
+  end
+
+  def have_project_access
+    @project = Core::Project.find(params[:project])
+    if @project
+      unless @project.project_access(current_user)
+        redirect_to :root
+      end
+    end
+  end
 
 	def have_rights
 		# puts "_________________"+params[:project]
