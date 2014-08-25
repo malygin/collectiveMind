@@ -323,7 +323,7 @@ module ApplicationHelper
   def stage_for_essay_link(stage)
     case stage
       when 1
-        :life_tape
+        :lifetape
       when 2
         :discontent
       when 3
@@ -333,7 +333,7 @@ module ApplicationHelper
       when 5
         :estimate
       else
-        :life_tape
+        :lifetape
     end
   end
 

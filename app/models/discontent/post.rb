@@ -4,6 +4,10 @@ class Discontent::Post < ActiveRecord::Base
   include BasePost
   attr_accessible :whend, :whered, :aspect_id, :aspect, :style, :discontent_post_id, :important, :status_content, :status_whered, :status_whend, :improve_comment, :improve_stage, :discuss_status
 
+  validates :content, presence: true
+  validates :whend, presence: true
+  validates :whered, presence: true
+
   belongs_to :aspect
   has_many :discontent_posts, :class_name => 'Discontent::Post', :foreign_key => 'discontent_post_id'
   belongs_to :discontent_post, :foreign_key => 'discontent_post_id',:class_name => 'Discontent::Post'
@@ -64,6 +68,7 @@ class Discontent::Post < ActiveRecord::Base
       where(status: 0)
     end
   }
+
 
   def update_post_aspects(aspects_new)
     self.discontent_post_aspects.destroy_all

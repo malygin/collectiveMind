@@ -95,6 +95,9 @@ $brand-estimate:        #663505 !default;
 .disabled_award{
   opacity: 0.2;
 }
+.note_text {
+  text-decoration: none !important;
+}
 
 .discuss_comment {
   list-style: none;
@@ -201,7 +204,12 @@ p, a {
   padding: 0;
   margin: 0 0;
 }
-
+.ul-union-list {
+  list-style: disc inside;
+}
+.ul-union-list li {
+  border: none;
+}
 /*#toTop {*/
 /*width:100px;*/
 /*border:1px solid #ccc;*/

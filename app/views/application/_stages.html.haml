@@ -9,27 +9,23 @@
     %a{ href: "#{@project.status < 3 ? '#' :  "/project/#{@project.id}/discontent/posts"}"}
       2 этап
       %i.fa.fa-question-circle.tooltips(data-toggle="tooltip" data-placement="bottom" title="На этом этапе мы должны разобраться как работать с порталом и четко разобраться с темой!")
-
       %br
       Сбор несовершенств
   %li(class="#{'active' if current_stage == :concept} #{'disabled' if @project.status < 7}")
     %a{ href: "#{@project.status < 7 ? '#' : "/project/#{@project.id}/concept/posts"}"}
       3 этап
       %i.fa.fa-question-circle.tooltips(data-toggle="tooltip" data-placement="bottom" title="На этом этапе мы должны разобраться как работать с порталом и четко разобраться с темой!")
-
       %br
       Сбор нововведений
   %li(class="#{'active' if current_stage == :plan} #{'disabled' if @project.status < 9}")
     %a{ href: "#{@project.status < 9 ? '#' : "/project/#{@project.id}/plan/posts"}"}
       4 этап
       %i.fa.fa-question-circle.tooltips(data-toggle="tooltip" data-placement="bottom" title="На этом этапе мы должны разобраться как работать с порталом и четко разобраться с темой!")
-
       %br
       Создание проектов
   %li(class="#{'active' if current_stage == :estimate} #{'disabled' if @project.status < 10}")
     %a{ href: "#{@project.status < 10 ? '#' : "/project/#{@project.id}/estimate/posts"}"}
       5 этап
       %i.fa.fa-question-circle.tooltips(data-toggle="tooltip" data-placement="bottom" title="На этом этапе мы должны разобраться как работать с порталом и четко разобраться с темой!")
-
       %br
       Выставление оценок

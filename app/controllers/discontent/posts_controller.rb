@@ -53,9 +53,8 @@ class Discontent::PostsController < PostsController
   end
 
   def new
-    @asp = Discontent::Aspect.find(params[:asp]) unless params[:asp].nil?
+    @asp = params[:asp] ? Discontent::Aspect.find(params[:asp]) : @project.proc_aspects.order(:id).first
     @post = current_model.new
-    #@users_rc = User.where(:type_user => [4,7])
 
     if params[:improve_stage]
       @comment = "#{get_class_for_improve(params[:improve_stage].to_i)}::Comment".constantize.find(params[:improve_comment]) unless params[:improve_comment].nil?
@@ -83,29 +82,29 @@ class Discontent::PostsController < PostsController
 
   def create
     @project = Core::Project.find(params[:project])
+    #@aspects = Discontent::Aspect.where(:project_id => @project, :status => 0)
+    #@flash = view_context.validate_dispost(params[name_of_model_for_param],params[:discontent_post_aspects])
 
-    @flash = view_context.validate_dispost(params[name_of_model_for_param],params[:discontent_post_aspects])
-
-    if @flash.nil? or @flash.empty?
-     @post = @project.discontents.create(params[name_of_model_for_param])
-     user_for_post = params[:select_for_clubers] ? User.find(params[:select_for_clubers]) : current_user
-     @post.user = user_for_post
+     @post = @project.discontents.build(params[name_of_model_for_param])
+     @post.user = current_user
      @post.improve_comment = params[:improve_comment] if params[:improve_comment]
      @post.improve_stage = params[:improve_stage] if params[:improve_stage]
-     user_for_post.journals.build(:type_event=>'discontent_post_save', :body=>trim_content(@post.content),   :first_id => @post.id,  :project => @project).save!
-     user_for_post.add_score(:type => :add_discontent_post)
-     if !params[:discontent_post_aspects].nil? and @posts.nil? and (@flash.nil? or @flash.empty?)
+     if params[:discontent_post_aspects]
        @aspect_id =  params[:discontent_post_aspects].first
        params[:discontent_post_aspects].each do |asp|
          @post.discontent_post_aspects.build(aspect_id: asp.to_i)
        end
+     else
+       @post.errors.messages[:aspects] = ["не должны быть пустыми"]
      end
-    end
+
     respond_to do |format|
       if @post.save
+        current_user.journals.build(:type_event=>'discontent_post_save', :body=>trim_content(@post.content), :first_id => @post.id, :project => @project).save!
+        current_user.add_score(:type => :add_discontent_post)
         format.js
       else
-        render "new"
+        format.js
       end
     end
   end
@@ -116,7 +115,6 @@ class Discontent::PostsController < PostsController
     unless params[:discontent_post_aspects].nil?
       @post.update_status_fields(params[name_of_model_for_param])
       @post.update_attributes(params[name_of_model_for_param])
-
       @post.update_post_aspects(params[:discontent_post_aspects])
       @aspect_id =  params[:discontent_post_aspects].first
       current_user.journals.build(:type_event=>name_of_model_for_param+"_update", :project => @project, :body=>trim_content(@post.content), :first_id=> @post.id).save!

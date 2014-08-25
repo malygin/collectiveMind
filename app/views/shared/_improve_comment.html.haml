@@ -30,7 +30,7 @@
 
       .pull-right
         =link_for_improve(improve_comment).html_safe if link_for_improve(improve_comment)
-        =link_to({:action => :new, :asp => params[:asp], :improve_comment => improve_comment.id, :improve_stage => get_stage_for_improve(improve_comment.get_class) }, :method => :get,  id: "improve_comment_#{improve_comment.id}") do
+        =link_to({:action => :new, :asp => params[:asp] ? params[:asp] : @project.proc_aspects.order(:id).first, :improve_comment => improve_comment.id, :improve_stage => get_stage_for_improve(improve_comment.get_class) }, :method => :get,  id: "improve_comment_#{improve_comment.id}") do
           %span.label.label-success Доработать
         - if boss?
           - if signed_in? and not improve_comment.users.include?(current_user)

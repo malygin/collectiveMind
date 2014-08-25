@@ -1,6 +1,7 @@
-- if  !(@flash.nil? or @flash.empty?)
-  $("#discontent_success").fadeOut();
+- if @post.errors.any?
+  $("#notice_messages").html('#{escape_javascript(render partial: 'shared/notice_messages', :locals => {:object =>@post})}');
 - else
+  $("#notice_messages").html('')
   $('#render_success_discontent').empty();
   $("#render_success_discontent").html('#{escape_javascript(render partial: 'modal_post_save')}');
   $('#modal_save_discontent').modal('show');
@@ -18,9 +19,4 @@
   $('#select_for_aspects').append(new Option(text,value));
   }
   $('#add_post_aspects').empty();
--if @flash.nil? or @flash.empty?
-  $("#flash-panel").fadeOut();
--else
-  $('#flash-panel').fadeIn('slow');
-  $('#flash').html("#{escape_javascript(raw(flash_display))}");
 

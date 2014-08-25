@@ -1,8 +1,11 @@
 - if object.errors.any?
   .error_explanation
     %h2
-      = pluralize(object.errors.count, 'error')
+      -#= pluralize(notice_messages.errors.count, 'error')
+      = I18n.t("errors.messages.not_saved",:count => object.errors.count, :resource => object.class.model_name.deconstantize.downcase)
     %ul
       - object.errors.full_messages.each do |msg|
         %li
           = msg
+
+

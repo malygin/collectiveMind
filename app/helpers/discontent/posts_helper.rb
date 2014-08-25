@@ -20,8 +20,8 @@ module Discontent::PostsHelper
     end
   end
 
-  def id_for_type_field(type_fd)
-    case type_fd
+  def id_for_type_field(field)
+    case field
       when 1
         'what'
       when 2
@@ -33,62 +33,53 @@ module Discontent::PostsHelper
     end
   end
 
-  def name_for_type_field(type_fd)
-    case type_fd
-      when 1
+  def name_for_type_field(field)
+    case field
+      when 'what'
         'что'
-      when 2
+      when 'where'
         'где'
-      when 3
+      when 'when'
         'когда'
       else
         nil
     end
   end
-
-  def class_for_type_field(post_field,type_fd)
-    case type_fd
-      when 1
-        if post_field.status_content == true
-          'label-success'
-        elsif post_field.status_content == false
-          'label-danger'
-        else
-          'label-g'
-        end
-      when 2
-        if post_field.status_whered == true
-          'label-success'
-        elsif post_field.status_whered == false
-          'label-danger'
-        else
-          'label-g'
-        end
-      when 3
-        if post_field.status_whend == true
-          'label-success'
-        elsif post_field.status_whend == false
-          'label-danger'
-        else
-          'label-g'
-        end
+  def number_for_type_field(field)
+    case field
+      when 'what'
+        1
+      when 'where'
+        2
+      when 'when'
+        3
       else
         nil
     end
   end
 
-  #def column_for_type_field(type_fd)
-  #  case type_fd
-  #    when 1
-  #      'status_content'
-  #    when 2
-  #      'status_whered'
-  #    when 3
-  #      'status_whend'
-  #    else
-  #      nil
-  #  end
-  #end
+  def class_for_type_field(post,field)
+    if (field == 'what' and post.status_content == true) or (field == 'where' and post.status_whered == true) or (field == 'when' and post.status_whend == true)
+      'label-success'
+    elsif (field == 'what' and post.status_content == false) or (field == 'where' and post.status_whered == false) or (field == 'when' and post.status_whend == false)
+      'label-danger'
+    else
+      'label-g'
+    end
+  end
+
+  def column_for_type_field(field)
+    case field
+      when 'what'
+        'content'
+      when 'where'
+        'whered'
+      when 'when'
+        'whend'
+      else
+        ''
+    end
+  end
   def validate_dispost(pa,aspects)
     if pa[:content].empty?
       flash[:content]='Заполните поле "что"'
@@ -115,6 +106,44 @@ module Discontent::PostsHelper
     end
     flash.discard
     response
+  end
+
+  def content_for_field(post_content, field, link = false)
+    html = ''
+    if link
+      html << link_to({:action => :status_post, :id => post_content.id, :type_field => number_for_type_field(field)},:remote => true,:method => :put, :id => "label_dispost_#{post_content.id}",:class => "note_text") do
+        content_tag :span, name_for_type_field(field), class: "label #{class_for_type_field(post_content,field)}", id: "#{field}_#{post_content.id}"
+      end
+      html << link_to({:action => :new_note, :id => post_content.id, :type_field => number_for_type_field(field)},:remote => true,:method => :put, :id => "content_dispost_#{post_content.id}_#{number_for_type_field(field)}",:class => "note_text") do
+        content_tag :span, post_content.send(column_for_type_field(field)), id: "#{field}_content_#{post_content.id}"
+      end
+    else
+      html << content_tag(:span, name_for_type_field(field), class: "label #{class_for_type_field(post_content,field)}", id: "#{field}_#{post_content.id}")
+      html << content_tag(:span, post_content.send(column_for_type_field(field)),  id: "#{field}_content_#{post_content.id}")
+    end
+    if [2,4].include?(post_content.status) and field == 'what'
+      html << content_tag(:ul, '', class: "ul-union-list", id: "post_content_#{post_content.id}") do
+        post_content.discontent_posts.each do |dp|
+          concat content_tag(:li, dp.content, class: "union-list", id: "li_id_#{dp.id}")
+        end
+      end
+    end
+    html.html_safe
+  end
+
+  def content_for_note(post_content, field, link = false)
+    html = ''
+    html << content_tag(:ul, '', class: "discuss_comment", id: "note_form_#{post_content.id}_#{number_for_type_field(field)}") do
+      post_content.post_notes(number_for_type_field(field)).each do |dpn|
+        concat content_tag(:div,'', :id => "post_note_#{dpn.id}") {
+          (if link
+            link_to({:action => :destroy_note, :id => post_content.id,:note_id => dpn.id, :type_field => number_for_type_field(field)},:remote => true,:method => :put, :confirm => 'Удалить замечание?',:id => "destroy_post_note_#{dpn.id}") {content_tag(:span, '', class: "glyphicon glyphicon-remove text-danger pull-right")}
+          end) +
+          content_tag(:li, dpn.content, :id => "li_note_#{dpn.id}")
+        }
+      end
+    end
+    html.html_safe
   end
 
 end

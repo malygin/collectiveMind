@@ -4,14 +4,9 @@
       %h4 Аспекты:
   -@project.aspects.each do |asp|
     %li{class:"#{'active' if asp == @aspect}"}
-      -if current_stage == 'essay/posts'
-        = link_to "/project/#{@project.id}/stage/1/#{current_stage}?asp=#{asp.id}" do
-          &nbsp;
-          =" #{asp.content}"
-      -else
-        = link_to "/project/#{@project.id}/#{current_stage}?asp=#{asp.id}" do
-          &nbsp;
-          =" #{asp.content}"
+      = link_to "/project/#{@project.id}/#{current_stage == 'essay/posts' ? stage_for_essay(params[:stage].to_i) : current_stage}?asp=#{asp.id}" do
+        &nbsp;
+        =" #{asp.content}"
   %li
     = link_to "/project/#{@project.id}/#{current_stage == 'essay/posts' ? stage_for_essay(params[:stage].to_i) : current_stage}/to_work", class: 'text-towork' do
       Помощь по этапу
@@ -21,7 +16,7 @@
       Рефлексия по этапу
       %b="(#{@project.essay_count(current_stage == 'essay/posts' ? params[:stage].to_i : number_stage(current_stage)).count})"
       %i.fa.fa-refresh
--#@todo пока временные решения из-за линка stage/params[:stage], доработаю еще
+
 -#%li.panel#stage_life_tape{class:  @project.stage_style(:life_tape_posts) }
 -#  - if request.original_url.include? 'life_tape' or request.original_url.include? '/1/essay'
 -#    %a.stage_menu1.accordion-toggle(data-toggle="collapse" data-parent="#side-nav" href="#life_tape")
