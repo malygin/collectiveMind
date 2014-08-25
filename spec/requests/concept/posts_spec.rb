@@ -27,19 +27,19 @@ describe 'Concept ' do
         expect(page).to have_selector "#new_concept_#{@discontent2.id}"
       end
 
-      it ' add new concept' do
-        click_link "new_concept_#{@discontent1.id}"
-        expect(page).to have_content 'Краткое название вашего нововведения'
-        fill_in "pa_#{@discontent1.id}_title", with: 'con title'
-        fill_in "pa_#{@discontent1.id}_name", with: 'con name'
-        fill_in "pa_#{@discontent1.id}_content", with: 'con content'
-        fill_in "pa_#{@discontent1.id}_positive", with: 'con positive'
-        fill_in "pa_#{@discontent1.id}_negative", with: 'con negative'
-        fill_in "pa_#{@discontent1.id}_reality", with: 'con reality'
-        fill_in "pa_#{@discontent1.id}_problems", with: 'con problems'
-        click_button 'send_post_concept'
-        expect(page).to have_content 'con title'
-      end
+      #it ' add new concept' do
+      #  click_link "new_concept_#{@discontent1.id}"
+      #  expect(page).to have_content 'Краткое название вашего нововведения'
+      #  fill_in "pa_#{@discontent1.id}_title", with: 'con title'
+      #  fill_in "pa_#{@discontent1.id}_name", with: 'con name'
+      #  fill_in "pa_#{@discontent1.id}_content", with: 'con content'
+      #  fill_in "pa_#{@discontent1.id}_positive", with: 'con positive'
+      #  fill_in "pa_#{@discontent1.id}_negative", with: 'con negative'
+      #  fill_in "pa_#{@discontent1.id}_reality", with: 'con reality'
+      #  fill_in "pa_#{@discontent1.id}_problems", with: 'con problems'
+      #  click_button 'send_post_concept'
+      #  expect(page).to have_content 'con title'
+      #end
     end
 
     context 'show concept'   do

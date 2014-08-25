@@ -29,7 +29,9 @@ describe 'Discontents ' do
         fill_in 'discontent_post_content', with: 'dis content'
         fill_in 'discontent_post_whered', with: 'dis where'
         fill_in 'discontent_post_whend', with: 'dis when'
-        select('aspect 1', :from => 'select_for_aspects')
+        #screenshot_and_open_image
+        expect(page).to have_selector "span", 'aspect 1'
+        #select('aspect 1', :from => 'select_for_aspects')
         click_button 'send_post'
         expect(page).to have_content 'Перейти к списку'
         expect(page).to have_content 'Добавить еще одно'

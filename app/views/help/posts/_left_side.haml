@@ -3,8 +3,29 @@
     %a(href="/project/#{@project.id}/help/posts/0")
       0
       Введение
-  -@stages.each do |key, value|
-    %li{class: ('active' if key.to_s==params[:id])}
-      %a(href="/project/#{@project.id}/help/posts/#{key}")
-        =key
-        =value[:name]
+  %li{class: ('active' if params[:id] == '1')}
+    %a(href="/project/#{@project.id}/help/posts/1")
+      1
+      Подготовка к процедуре
+  %li{class: ('active' if params[:id] == '2')}
+    %a(href="/project/#{@project.id}/help/posts/2")
+      2
+      Сбор несовершенств
+  %li{class: ('active' if params[:id] == '3')}
+    %a(href="#")
+      3
+      Сбор нововведений
+  %li{class: ('active' if params[:id] == '4')}
+    %a(href="#")
+      4
+      Создание проектов
+  %li{class: ('active' if params[:id] == '5')}
+    %a(href="#")
+      5
+      Выставление оценок
+
+  -#-@stages.each do |key, value|
+  -#  %li{class: ('active' if key.to_s==params[:id])}
+  -#    %a(href="/project/#{@project.id}/help/posts/#{key}")
+  -#      =key
+  -#      =value[:name]

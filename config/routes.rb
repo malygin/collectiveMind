@@ -39,6 +39,7 @@ end
 
 scope '/project/:project' do
   get '/journals', :to => 'journal#index'
+  #get '/help/posts/0', :to => 'help/posts#new_help_0'
 
   namespace :help do
     resources :posts
