@@ -112,6 +112,10 @@ $brand-estimate:        #663505 !default;
   }
 }
 
+.tooltip-inner {
+  white-space:pre-wrap;
+}
+
 .expert_comment {
   background-color: rgba(215, 233, 208, 0.3) !important;
 }
