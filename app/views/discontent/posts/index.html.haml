@@ -1,8 +1,3 @@
-- if signed_in? and (@project.status ==3 or @project.demo?)
-  = link_to '+ Добавить свое несовершенство', new_discontent_post_path(@project, asp: params[:asp]) , id: 'add_record',  class: 'btn  btn-danger'
-  %br
-  %br
-
 - if can_union_discontents?(@project)
   %section
     .body.widget-panel
@@ -51,7 +46,11 @@
   .col-md-6
     %section
       .body
+        - if signed_in? and (@project.status ==3 or @project.demo?)
+          .pull-right
+            = link_to '+ Добавить', new_discontent_post_path(@project, asp: params[:asp]) , id: 'add_record',  class: 'btn btn-danger'
         %h4 Несовершенства
+
         %ul.news-list
           =render partial:'post_short', collection: @aspect.aspect_posts.by_status_for_discontent(@project)
 
@@ -61,4 +60,3 @@
         %h4 Неоформленные проблемы
         .chat-messages
           = render :partial => 'shared/improve_comment',:collection => @comments_all
-

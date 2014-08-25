@@ -1,4 +1,8 @@
 %ol.side-nav
+  %li{class: ('active' if params[:id] == '0')}
+    %a(href="/project/#{@project.id}/help/posts/0")
+      0
+      Введение
   -@stages.each do |key, value|
     %li{class: ('active' if key.to_s==params[:id])}
       %a(href="/project/#{@project.id}/help/posts/#{key}")

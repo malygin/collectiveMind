@@ -27,12 +27,11 @@
       %li
         = link_to "Зарегистрироваться", "/users/sign_up", class: "btn btn-sm btn-transparent"
   %ul.navbar-buttons.pull-right
-    - if signed_in?
-      -if prime_admin?
-        %li
-          =link_to list_projects_path, class:'btn btn-sm btn-info', id: 'list_projects'  do
-            Список процедур
-            %i.fa.fa-arrow-right
+    - if signed_in? and prime_admin?
+      %li
+        =link_to list_projects_path, class:'btn btn-sm btn-info', id: 'list_projects'  do
+          Список процедур
+          %i.fa.fa-arrow-right
 
 
 

@@ -1,16 +1,13 @@
 class Knowbase::PostsController <  PostsController
-  before_filter :project_by_id
+  before_filter :prepare_data
   before_filter :journal_data
 
   def current_model
     Knowbase::Post
   end
 
-  def  project_by_id
-    unless params[:project].nil?
-      @project = Core::Project.find(params[:project])
-    end
-    add_breadcrumb I18n.t('menu.base_knowledge'), knowbase_posts_path(@project)
+  def prepare_data
+    @project = Core::Project.find(params[:project])
   end
 
   def index
