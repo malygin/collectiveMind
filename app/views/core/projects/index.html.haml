@@ -10,9 +10,9 @@
           .pull-right
             =link_to "/project/#{project.id}", class:'btn btn-lg btn-danger', id: 'go_to_closed_project' do
               Перейти к процедуре
-    %hr
+
   -if @opened_projects.present?
-    %h3
+    %h5
       %strong Открытые процедуры
     %ul(style="line-height:30px;")
       - @opened_projects.each do |project|
@@ -25,15 +25,16 @@
 
   %br
   %br
+  %br
   -if @demo_projects.present?
-    %h3
+    %h5
       %strong Демо процедуры
     %ul(style="line-height:30px;")
       - @demo_projects.each do |project|
         %li
-          = project.name
+          %h3= project.name
           .pull-right
-            =link_to "/project/#{project.id}", class:'btn btn-sm btn-danger' do
+            =link_to "/project/#{project.id}", class:'btn btn-lg btn-danger' do
               Перейти к процедуре
 
 %h3
