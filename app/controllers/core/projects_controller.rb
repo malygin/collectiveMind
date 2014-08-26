@@ -18,6 +18,10 @@ class Core::ProjectsController < ApplicationController
     if signed_in?
       @closed_projects = Core::Project.joins("JOIN core_project_users ON core_project_users.project_id = core_projects.id").where("core_project_users.user_id = ?", current_user.id).where(:core_projects => {:type_access => 2}).order("core_projects.id DESC")
     end
+    if boss?
+      @closed_projects = Core::Project.where(:type_access => 2).order("id DESC")
+
+    end
     @opened_projects = Core::Project.where(:type_access => 0).order("id DESC")
     @demo_projects = Core::Project.where(:type_access => 3).order("id DESC").limit(2)
     respond_to do |format|
