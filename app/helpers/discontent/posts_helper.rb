@@ -111,10 +111,10 @@ module Discontent::PostsHelper
   def content_for_field(post_content, field, link = false)
     html = ''
     if link
-      html << link_to({:action => :status_post, :id => post_content.id, :type_field => number_for_type_field(field)},:remote => true,:method => :put, :id => "label_dispost_#{post_content.id}",:class => "note_text") do
+      html << link_to({:controller => 'discontent/posts',:action => :status_post, :id => post_content.id, :type_field => number_for_type_field(field)},:remote => true,:method => :put, :id => "label_dispost_#{post_content.id}",:class => "note_text") do
         content_tag :span, name_for_type_field(field), class: "label #{class_for_type_field(post_content,field)}", id: "#{field}_#{post_content.id}"
       end
-      html << link_to({:action => :new_note, :id => post_content.id, :type_field => number_for_type_field(field)},:remote => true,:method => :put, :id => "content_dispost_#{post_content.id}_#{number_for_type_field(field)}",:class => "note_text") do
+      html << link_to({:controller => 'discontent/posts',:action => :new_note, :id => post_content.id, :type_field => number_for_type_field(field)},:remote => true,:method => :put, :id => "content_dispost_#{post_content.id}_#{number_for_type_field(field)}",:class => "note_text") do
         content_tag :span, post_content.send(column_for_type_field(field)), id: "#{field}_content_#{post_content.id}"
       end
     else
@@ -136,7 +136,7 @@ module Discontent::PostsHelper
     html << content_tag(:ul, '', class: "discuss_comment", id: "note_form_#{post_content.id}_#{number_for_type_field(field)}") do
       post_content.post_notes(number_for_type_field(field)).each do |dpn|
         concat content_tag(:div,'', :id => "post_note_#{dpn.id}") {
-          link ? link_to({:action => :destroy_note, :id => post_content.id,:note_id => dpn.id, :type_field => number_for_type_field(field)},:remote => true,:method => :put, :confirm => 'Удалить замечание?',:id => "destroy_post_note_#{dpn.id}") {content_tag(:span, '', class: "glyphicon glyphicon-remove text-danger pull-right")}  + content_tag(:li, dpn.content, :id => "li_note_#{dpn.id}") : content_tag(:li, dpn.content, :id => "li_note_#{dpn.id}")
+          link ? link_to({:controller => 'discontent/posts', :action => :destroy_note, :id => post_content.id,:note_id => dpn.id, :type_field => number_for_type_field(field)},:remote => true,:method => :put, :confirm => 'Удалить замечание?',:id => "destroy_post_note_#{dpn.id}") {content_tag(:span, '', class: "glyphicon glyphicon-remove text-danger pull-right")}  + content_tag(:li, dpn.content, :id => "li_note_#{dpn.id}") : content_tag(:li, dpn.content, :id => "li_note_#{dpn.id}")
         }
       end
     end

@@ -71,11 +71,8 @@ class User < ActiveRecord::Base
 
   has_many :user_checks , :class_name => "UserCheck"
   scope :check_field, ->(p,c){ where(project: p.id, status: 't', check_field: c) }
-  scope :has_score, ->(project){ where("core_project_scores.score > 0") unless project.type_access == 2 }
 
-  validates :name,
-  				   :length => { :maximum => 50 }
-
+  validates :name, :length => { :maximum => 50 }
 
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
   validates :email, presence: true, format: { with: VALID_EMAIL_REGEX },

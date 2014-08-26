@@ -55,6 +55,10 @@ class Core::Project < ActiveRecord::Base
   has_many :knowbase_posts, :class_name => 'Knowbase::Post'
 
   has_many :core_project_scores, :class_name => 'Core::ProjectScore'
+
+  has_many :core_project_users, :class_name => 'Core::ProjectUser'
+  has_many :users_in_project, :through => :core_project_users, :source => :user, :class_name => "User"
+
   has_many :essays, :class_name => 'Essay::Post', :conditions => ['status = 0']
   #has_many :project_score_users, :class_name => 'User', :through => :core_project_scores, :source => :user
 

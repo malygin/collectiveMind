@@ -34,8 +34,11 @@ class UsersController < ApplicationController
 
 	def index
     @project = Core::Project.find(params[:project])
-    add_breadcrumb I18n.t('menu.raiting'), users_path(@project)
-    @users = User.joins(:core_project_scores).has_score(@project).where("core_project_scores.project_id = ?", @project.id).where(:users => {:type_user => [4,5,8,nil]}).order("core_project_scores.score DESC").paginate(:page =>params[:page])
+    if @project.type_access == 2
+      @users = @project.users_in_project.where(:users => {:type_user => [4,5,8,nil]}).sort_by{|c| c.core_project_scores.by_project(@project).first.nil? ? 0 : c.core_project_scores.by_project(@project).first.score}.reverse!.uniq
+    else
+      @users = User.joins(:core_project_scores).where("core_project_scores.project_id = ? AND core_project_scores.score > 0", @project.id).where(:users => {:type_user => [4,5,8,nil]}).order("core_project_scores.score DESC")
+    end
   end
 
   def add_user_for_project
@@ -58,7 +61,11 @@ class UsersController < ApplicationController
 
   def show_top
     @project = Core::Project.find(params[:project])
-    @users = User.joins(:core_project_scores).has_score(@project).where("core_project_scores.project_id = ?", @project.id).where(:users => {:type_user => [4,5,8,nil]}).order("core_project_scores.#{params[:score_name]} DESC").paginate(:page =>params[:page])
+    if @project.type_access == 2
+      @users = @project.users_in_project.where(:users => {:type_user => [4,5,8,nil]}).sort_by{|c| c.core_project_scores.by_project(@project).first.nil? ? 0 : c.core_project_scores.by_project(@project).first.send(params[:score_name])}.reverse!.uniq
+    else
+      @users = User.joins(:core_project_scores).where("core_project_scores.project_id = ? AND core_project_scores.score > 0", @project.id).where(:users => {:type_user => [4,5,8,nil]}).order("core_project_scores.#{params[:score_name]} DESC")
+    end
     @score_name = params[:score_name]
     respond_to do |format|
       format.js
