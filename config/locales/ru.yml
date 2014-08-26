@@ -145,54 +145,6 @@ ru:
               too_short: 'Пароль слишком короткий'
             email:
               blank: 'Вы не указали email'
-        discontent_post:
-          blank: 'Вы не заполнили поле'
 
 
-  errors:
-    messages:
-      not_saved:
-        one: "Сохранение не удалось из-за 1 ошибки:"
-        other: "Сохранение не удалась из-за %{count} ошибок:"
-        few: "Сохранение не удалась из-за %{count} ошибок:"
-#  errors:
-#    attributes:
-#      whered:
-#        blank: 'Вы не заполнили поле'
-#
-#  activemodel:
-#    errors:
-#      models:
-#        discontent_post:
-#          attributes:
-#            content:
-#              blank: 'Вы не заполнили поле'
-#            whered:
-#              blank: 'Вы не заполнили поле'
-#            whend:
-#              blank: 'Вы не заполнили поле'
 
-#  activerecord:
-#    models:
-#      order: Заказ
-#    attributes:
-#      order:
-#        link: Ссылка на модель часов
-#        name: Имя
-#        phone: Телефон
-#        accept_message: Комментарий к заказу
-#        decline_message: Причина отказа
-#        finish_message: Комментарий к заказу
-#    errors:
-#      models:
-#        order:
-#          attributes:
-#            link:
-#              blank: не может быть пустой
-#            phone:
-#              invalid: должен содержать только цифры. Пример: 9208003020 или 2716070.
-#              blank: не может быть пустым
-#            name:
-#              blank: не может быть пустым
-#            decline_message:
-#              blank: не может быть пустой
