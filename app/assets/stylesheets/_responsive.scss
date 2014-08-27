@@ -25,7 +25,7 @@
 
 @media (max-width: 1048px) {
 
-  @include sidebar-icons("");
+//  @include sidebar-icons("");
 
   .sidebar{
     @include sidebar-settings;
@@ -43,7 +43,7 @@
 
     .wrap{
       margin-left: 0;
-      margin-right: 62px;
+      margin-right: 200px;
     }
 
     .logo{
