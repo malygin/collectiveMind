@@ -40,17 +40,6 @@ module UsersHelper
     end
   end
 
-  def club_toggle_user(user)
-    case user.type_user
-      when 4
-        5
-      when 5
-        4
-      else
-        4
-    end
-  end
-
   def club_status_show_user(user)
     case user.type_user
       when 4,7
@@ -58,7 +47,7 @@ module UsersHelper
       when 5
         content_tag(:span, 'RC WATCHER',:class =>'label label-warning')
       else
-        # content_tag(:b, 'RC?',:class =>'color-orange', :style => 'text-decoration:none;', :id => "club_status_tag_#{user.id}")
+        content_tag(:b, 'RC?',:class =>'color-orange', :id => "club_status_tag_#{user.id}")
     end
   end
 

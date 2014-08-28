@@ -1,4 +1,4 @@
--if current_user.boss?
+-if boss?
   .pull-right
     =link_to new_knowbase_post_path(@project),:id => "new_knowbase_post", :onclick => "setTimeout(function() { activate_htmleditor() }, 2000);" do
       %span.label.label-success +добавить статью

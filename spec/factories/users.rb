@@ -1,4 +1,3 @@
-
 FactoryGirl.define do
   factory :user do
     sequence(:name) { |n| "Name #{n}" }
@@ -9,20 +8,27 @@ FactoryGirl.define do
     password_confirmation 'pascal2003'
   end
 
-  factory :admin, parent: :user do
+  factory :prime_admin, parent: :user do
     type_user 1
   end
-
+  factory :moderator, parent: :user do
+    type_user 6
+  end
   factory :expert, parent: :user do
     type_user 2
   end
   factory :jury, parent: :user do
     type_user 3
   end
-  factory :rc_club, parent: :user do
+  factory :club_user, parent: :user do
     type_user 4
   end
-
+  factory :club_watcher, parent: :user do
+    type_user 5
+  end
+  factory :ordinary_user, parent: :user do
+    type_user 8
+  end
 
   factory :invalid_user, class: 'Users' do
     sequence(:name) { |n| "Name #{n}" }
@@ -31,4 +37,5 @@ FactoryGirl.define do
     password "foobar1"
     password_confirmation "foobar"
   end
+
 end

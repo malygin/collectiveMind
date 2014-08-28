@@ -5,48 +5,49 @@
         Нововведения
       %hr
     .body
-      -@aspect.aspect_posts.by_status(4).each do |post|
-        %h4 Решаемая проблема
-        =render partial:'discontent/posts/post_short2', object: post
-        %h4 Предложенные решения
-        %br
-        %table.table.table-striped.table-bordered
-          %thead
-            %tr
-              %th
-                ="#"
-              %th
-                Название / Автор
-              %th
-                Статус
-              %th
-                Заполненность
-          %tbody
-            - post.dispost_concepts.each_with_index  do |pa, index|
-              - if pa.status == 0
-                %tr
-                  %td
-                    =index+1
-                  %td
-                    - if pa.post_aspects.first.title!=''
-                      =link_to pa.post_aspects.first.title , concept_post_path(@project, pa)
-                    -else
-                      =link_to 'Без названия' , concept_post_path(@project, pa)
-
-                  %td
-                    = status_for_concept_type(pa)
-                    -if pa.discuss_status
-                      %br
-                      %span.label-danger ТРЕБУЕТ ОБСУЖДЕНИЯ
-                  %td
-                    %span.h4.color-orange
-                      =status_for_concept(pa.post_aspects.first)
-            -if  @project.status == 7 or @project.demo?
+      - if @aspect
+        -@aspect.aspect_posts.by_status(4).each do |post|
+          %h4 Решаемая проблема
+          =render partial:'discontent/posts/post_short2', object: post
+          %h4 Предложенные решения
+          %br
+          %table.table.table-striped.table-bordered
+            %thead
               %tr
-                %td{:colspan => 4, :style => "font-weight: normal !important;"}
-                  %a.btn.btn-lg.btn-warning.btn-block(href="/project/#{@project.id}/concept/posts/new?dis_id=#{post.id}&asp_id=#{@aspect.id}" style="font-weight: normal !important;" id="new_concept_#{post.id}")
-                    Добавить свое решение
-        %hr
+                %th
+                  ="#"
+                %th
+                  Название / Автор
+                %th
+                  Статус
+                %th
+                  Заполненность
+            %tbody
+              - post.dispost_concepts.each_with_index  do |pa, index|
+                - if pa.status == 0
+                  %tr
+                    %td
+                      =index+1
+                    %td
+                      - if pa.post_aspects.first.title!=''
+                        =link_to pa.post_aspects.first.title , concept_post_path(@project, pa)
+                      -else
+                        =link_to 'Без названия' , concept_post_path(@project, pa)
+
+                    %td
+                      = status_for_concept_type(pa)
+                      -if pa.discuss_status
+                        %br
+                        %span.label-danger ТРЕБУЕТ ОБСУЖДЕНИЯ
+                    %td
+                      %span.h4.color-orange
+                        =status_for_concept(pa.post_aspects.first)
+              -if  @project.status == 7 or @project.demo?
+                %tr
+                  %td{:colspan => 4, :style => "font-weight: normal !important;"}
+                    %a.btn.btn-lg.btn-warning.btn-block(href="/project/#{@project.id}/concept/posts/new?dis_id=#{post.id}&asp_id=#{@aspect.id}" style="font-weight: normal !important;" id="new_concept_#{post.id}")
+                      Добавить свое решение
+          %hr
 .col-md-6
   %section
     %header

@@ -17,7 +17,7 @@
     = f.text_area :desc, class: 'form-control', rows: 5
   .form-group
     = f.label 'Тип процедуры'
-    = f.select :type_access, options_for_select([["Открытая", 0],["Для клубистов", 1], ["Закрытая", 2], ["Демо", 3], ["Тестовая", 4], ["Подготовка", 5]], @project.type_access),{}, {class: "form-control"}
+    = f.select :type_access, options_for_select([["Открытая", 0],["Клубная", 1], ["Закрытая", 2], ["Демо", 3], ["Тестовая", 4], ["Подготовка", 5]], @project.type_access),{}, {class: "form-control"}
 
   %br
   %actions.pull-right

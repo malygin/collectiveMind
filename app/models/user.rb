@@ -72,6 +72,17 @@ class User < ActiveRecord::Base
   has_many :user_checks , :class_name => "UserCheck"
   scope :check_field, ->(p,c){ where(project: p.id, status: 't', check_field: c) }
 
+  def current_projects_for_user
+    if prime_admin?
+      Core::Project.order(:id).all
+    else
+      opened_projects = Core::Project.where(:type_access => [0,3]).club_projects(self)
+      closed_projects = self.projects.where(:core_projects => {:type_access => 2})
+      projects = opened_projects | closed_projects
+      projects.sort_by{|c| c.id}
+    end
+  end
+
   validates :name, :length => { :maximum => 50 }
 
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
@@ -222,7 +233,7 @@ class User < ActiveRecord::Base
   end
 
   def can_vote_for(stage, project)
-    if project.status == 2 and ((project.stage1.to_i - self.voted_aspects.by_project(project).size) != 0)
+    if project.status == 2 and ((project.stage1.to_i > project.proc_aspects.size ? project.proc_aspects.size - self.voted_aspects.by_project(project).size : project.stage1.to_i - self.voted_aspects.by_project(project).size) > 0)
       return true
     end
     if project.status == 6 and !project.get_united_posts_for_vote(self).empty?

@@ -71,7 +71,7 @@ class Discontent::Aspect < ActiveRecord::Base
 
   def self.scope_vote_top(project,revers)
     includes(:final_votings).
-    group('"discontent_aspects"."id"').
+    group('"discontent_aspects"."id","life_tape_voitings"."id"').
     where('"discontent_aspects"."project_id" = ? and "discontent_aspects"."status" = 0', project)
     .vote_top(revers)
   end

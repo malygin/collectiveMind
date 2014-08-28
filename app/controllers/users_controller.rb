@@ -2,9 +2,10 @@
 class UsersController < ApplicationController
 	#before_filter :authenticate, :only => [:edit, :update, :show]
 	before_filter :correct_user, :only => [:edit, :update]
-	before_filter :admin_user, :only => [:destroy]
+	#before_filter :admin_user, :only => [:destroy]
   before_filter :journal_data, :only => [:index, :new, :edit, :show, :users_rc]
-  before_filter :admin_authenticate, :only => [:list_users,:add_user_for_project,:remove_user_for_project]
+  before_filter :boss_authenticate, :only => [:users_rc]
+  before_filter :prime_admin_authenticate, :only => [:destroy,:list_users,:add_user_for_project,:remove_user_for_project,:club_toggle,:update_score]
   before_filter :have_project_access
 	def new
 		@user = User.new
@@ -101,7 +102,7 @@ class UsersController < ApplicationController
     @project = Core::Project.find(params[:project])
     @user = User.find(params[:id])
     respond_to do |format|
-      if @user.update_attributes!(:type_user => view_context.club_toggle_user(@user))
+      if @user.update_attributes!(:type_user => club_toggle_user(@user))
         format.js
       end
     end

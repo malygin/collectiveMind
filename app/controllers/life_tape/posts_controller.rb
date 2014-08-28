@@ -3,6 +3,9 @@ class LifeTape::PostsController < PostsController
 
   after_filter :journal_viewed_life_tape, only: [:index]
 
+  def current_model
+    LifeTape::Post
+  end
   def voting_model
     Discontent::Aspect
   end
@@ -25,8 +28,8 @@ class LifeTape::PostsController < PostsController
     return redirect_to action: "index" unless current_user.can_vote_for(:life_tape, @project)
     @posts = voting_model.scope_vote_top(@project.id,params[:revers])
     @path_for_voting = "/project/#{@project.id}/life_tape/"
-    @votes = @project.stage1
-    @number_v = @project.get_free_votes_for(current_user, 'lifetape', @project)
+    @votes = @project.stage1_count
+    @number_v = @project.get_free_votes_for(current_user, 'lifetape')
     respond_to do |format|
       format.html
       format.js

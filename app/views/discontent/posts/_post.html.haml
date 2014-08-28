@@ -4,6 +4,7 @@
     -post.post_aspects.each do |da|
       = render partial: 'discontent/aspects/aspect', object: da
     =discontent_style_name(post.style)
+    %br
     = render partial: 'discontent/posts/post_content', object: post
     .row
       .col-md-10

@@ -6,8 +6,8 @@ module SessionsHelper
   end
 
 	def deny_access 
-	    store_location
-	    redirect_to signin_path, :notice => "Авторизуйтесь пожалуйста!"
+    store_location
+    redirect_to new_user_session_path, :notice => "Авторизуйтесь пожалуйста!"
   end
 
   def have_project_access
@@ -44,7 +44,7 @@ module SessionsHelper
 		deny_access unless boss?
   end
 
-  def admin_authenticate
+  def prime_admin_authenticate
     redirect_to(root_path) unless prime_admin?
   end
 

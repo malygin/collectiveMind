@@ -93,8 +93,6 @@ module ApplicationHelper
 		  return  image+'.png' 
 		end
 	end
-
-
 	def  type_title(pr)
 		case pr
 			when 0
@@ -257,7 +255,7 @@ module ApplicationHelper
   def stage_status(stage)
     case stage
       when 1
-        'Подготовка к процедуре'
+        'Сбор информации'
       when 2
         'Сбор несовершенств'
       when 3
@@ -485,6 +483,17 @@ module ApplicationHelper
       content_tag :span, 'MD', class: 'label label-danger'
     elsif user.role_expert?
       content_tag :span, 'Эксперт', class: 'label label-success'
+    end
+  end
+
+  def club_toggle_user(user)
+    case user.type_user
+      when 4
+        5
+      when 5
+        4
+      else
+        4
     end
   end
 

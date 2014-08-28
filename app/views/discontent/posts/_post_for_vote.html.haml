@@ -9,7 +9,7 @@
     -if boss?
       %span.glyphicon=post_for_vote.final_votings.by_positive.size
     Важная
-  =link_to  next_post_for_vote_discontent_post_path(@project,post_for_vote,against: false), :remote => true, :method => :put, class: "btn btn-danger btn-sm vote-button", id: "vote__negative_#{post_for_vote.id}" do
+  =link_to  next_post_for_vote_discontent_post_path(@project,post_for_vote,against: false), :remote => true, :method => :put, class: "btn btn-danger btn-sm vote-button", id: "vote_negative_#{post_for_vote.id}" do
     %span.glyphicon.glyphicon-thumbs-down
     -if boss?
       %span.glyphicon=post_for_vote.final_votings.by_negative.size

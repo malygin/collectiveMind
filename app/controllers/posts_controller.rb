@@ -5,6 +5,7 @@ class PostsController < ApplicationController
   before_filter :journal_data, :only => [:index, :new, :edit, :show, :vote_list, :to_work]
   before_filter :have_rights, :only =>[:edit]
   before_filter :have_project_access
+  before_filter :not_open_closed_stage
 
   def authenticate
     unless current_user
@@ -20,6 +21,13 @@ class PostsController < ApplicationController
   #    end
   #  end
   #end
+
+  def not_open_closed_stage
+    if params[:project]
+      @project = Core::Project.find(params[:project])
+      redirect_to polymorphic_path(@project.redirect_to_current_stage) if @project.status < @project.model_min_stage(current_model.table_name.singularize)
+    end
+  end
 
   def have_rights
     unless current_model != "Knowbase::Post"
@@ -338,7 +346,7 @@ class PostsController < ApplicationController
     @post_vote = voting_model.find(params[:post_id])
     @post_vote.final_votings.create(:user => current_user)
     stage = "#{self.class.name.deconstantize.downcase}"
-    @number_v = @project.get_free_votes_for(current_user, stage, @project)
+    @number_v = @project.get_free_votes_for(current_user, stage)
     @table_name = current_model.table_name.sub('_posts','/posts')
   end
 

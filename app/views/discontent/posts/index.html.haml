@@ -1,4 +1,4 @@
-- if can_union_discontents?(@project)
+- if can_union_discontents?(@project) and @aspect
   %section
     .body.widget-panel
       %ul.nav.nav-tabs#tab_posts
@@ -52,7 +52,7 @@
         %h4 Несовершенства
 
         %ul.news-list
-          =render partial:'post_short', collection: @aspect.aspect_posts.by_status_for_discontent(@project)
+          =render partial:'post_short', collection: @aspect.aspect_posts.by_status_for_discontent(@project) if @aspect
 
   .col-md-6
     %section

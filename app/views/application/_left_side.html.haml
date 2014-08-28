@@ -2,20 +2,20 @@
   %li
     %a
       %h4 Аспекты:
-  -@project.aspects.each do |asp|
+  -@project.current_aspects(current_stage).each do |asp|
     %li{class:"#{'active' if asp == @aspect}"}
       = link_to "/project/#{@project.id}/#{current_stage == 'essay/posts' ? stage_for_essay(params[:stage].to_i) : current_stage}?asp=#{asp.id}" do
         &nbsp;
         =" #{asp.content}"
   %li
-    = link_to "/project/#{@project.id}/#{current_stage == 'essay/posts' ? stage_for_essay(params[:stage].to_i) : current_stage}/to_work", class: 'text-towork' do
+    = link_to "/project/#{@project.id}/#{current_stage == 'essay/posts' ? stage_for_essay(params[:stage].to_i) : current_stage}/to_work", class: 'text-towork', id: 'go_to_work' do
       Помощь по этапу
       %i.fa.fa-question-circle
   %li
-    = link_to essay_posts_path(@project, current_stage == 'essay/posts' ? params[:stage].to_i : number_stage(current_stage)), class: 'text-essay' do
+    = link_to essay_posts_path(@project, current_stage == 'essay/posts' ? params[:stage].to_i : number_stage(current_stage)), class: 'text-essay', id: 'go_to_essay' do
       Рефлексия по этапу
       %b="(#{@project.essay_count(current_stage == 'essay/posts' ? params[:stage].to_i : number_stage(current_stage)).count})"
-      %i.fa.fa-refresh
+      -#%i.fa.fa-refresh
 
 -#%li.panel#stage_life_tape{class:  @project.stage_style(:life_tape_posts) }
 -#  - if request.original_url.include? 'life_tape' or request.original_url.include? '/1/essay'

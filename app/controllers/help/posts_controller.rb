@@ -2,6 +2,10 @@ class Help::PostsController < PostsController
 
   before_filter :prepare_data
 
+  def current_model
+    Help::Post
+  end
+
   def prepare_data
     @project = Core::Project.find(params[:project])
   end

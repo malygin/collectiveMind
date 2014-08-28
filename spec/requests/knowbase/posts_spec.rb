@@ -4,7 +4,7 @@ describe 'Knowbase ' do
   subject { page }
 
   let (:user) {create :user }
-  let (:admin) {create :admin }
+  let (:moderator) {create :moderator }
   let (:project) {create :core_project, status: 1 }
 
   before do
@@ -45,7 +45,7 @@ describe 'Knowbase ' do
 
   context  'knowbase post view sign in admin ' do
     before do
-      sign_in admin
+      sign_in moderator
       visit knowbase_posts_path(project)
     end
 

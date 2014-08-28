@@ -1,5 +1,6 @@
 - if @post.errors.any?
   $("#notice_messages").html('#{escape_javascript(render partial: 'shared/notice_messages', :locals => {:object =>@post})}');
+  window.scrollTo(0,0)
 - else
   $("#notice_messages").html('')
   $('#render_success_discontent').empty();

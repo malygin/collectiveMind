@@ -61,22 +61,32 @@ class Core::Project < ActiveRecord::Base
 
   has_many :essays, :class_name => 'Essay::Post', :conditions => ['status = 0']
   #has_many :project_score_users, :class_name => 'User', :through => :core_project_scores, :source => :user
+  scope :club_projects, ->(user){ where(type_access: 1) if user.cluber?  }
 
-  LIST_STAGES = {1 => {name: 'Подготовка к процедуре', :type_stage => :life_tape_posts, status: [0,1,2,20]},
+  LIST_STAGES = {1 => {name: 'Сбор информации', :type_stage => :life_tape_posts, status: [0,1,2,20]},
          2 => { name: 'Сбор несовершенств', :type_stage =>  :discontent_posts, status: [3,4,5,6]},
          3 => { name: 'Сбор нововведений', :type_stage => :concept_posts, status: [7,8]},
          4 => { name: 'Создание проектов', :type_stage =>  :plan_posts, status: [9]},
          5 => { name: 'Выставление оценок', :type_stage =>  :estimate_posts, status: [10,11,12,13]}}.freeze
 
 
-  def get_free_votes_for(user, stage, project)
+  def current_aspects(current_stage)
+    if current_stage == 'life_tape/posts'
+      self.aspects.order(:id)
+    else
+      self.proc_aspects.order(:id)
+    end
+  end
+
+  def stage1_count
+    self.stage1 > self.proc_aspects.size ? self.proc_aspects.size : self.stage1
+  end
+  def get_free_votes_for(user, stage)
     case stage
       when 'lifetape'
-        self.stage1.to_i - user.voted_aspects.by_project(project.id).size
-      when 'discontent'
-        self.stage2.to_i - user.voted_discontent_posts.by_project(project.id).size
+        self.stage1_count - user.voted_aspects.by_project(self.id).size
       when 'plan'
-        self.stage5.to_i - user.voted_plan_posts.by_project(project.id).size
+        self.stage5.to_i - user.voted_plan_posts.by_project(self.id).size
     end
   end
 
@@ -110,7 +120,7 @@ class Core::Project < ActiveRecord::Base
       when 0
         'Открытая'
       when 1
-        'Для клубистов'
+        'Клубная'
       when 2
         'Закрытая'
       when 3
@@ -163,7 +173,6 @@ class Core::Project < ActiveRecord::Base
     sort_list  = LIST_STAGES.select {|k,v| v[:status].include? self.status}
     sort_list.values[0][:type_stage]
   end
-
   def can_edit_on_current_stage(p)
     if p.instance_of? LifeTape::Post
         return true
@@ -192,6 +201,23 @@ class Core::Project < ActiveRecord::Base
       when :estimate_posts
         10
      end
+  end
+
+  def model_min_stage(model)
+    case model
+      when 'life_tape_post'
+        0
+      when 'discontent_post'
+        3
+      when 'concept_post'
+        7
+      when 'plan_post'
+        9
+      when 'estimate_post'
+        10
+      else
+        0
+    end
   end
 
   def demo?

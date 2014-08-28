@@ -1,1 +1,1 @@
-$("#list_users_#{@user.id}").html("<a href=\"/project/#{@project.id}/users/#{@user.id}/remove_user_for_project\" class=\"btn btn-danger\" data-method=\"put\" data-remote=\"true\" rel=\"nofollow\"><i class=\"fa fa-minus\"></i> Удалить </a>")
+$("#list_users_#{@user.id}").html("<a href=\"/project/#{@project.id}/users/#{@user.id}/remove_user_for_project\" id=\"remove_user_#{@user.id}\" class=\"btn btn-danger\" data-method=\"put\" data-remote=\"true\" rel=\"nofollow\"><i class=\"fa fa-minus\"></i> Удалить </a>")

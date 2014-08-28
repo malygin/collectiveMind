@@ -67,7 +67,6 @@ module BasePost  extend ActiveSupport::Concern
         else
           false
       end
-      false
     end
 
     def stage_name

@@ -20,17 +20,18 @@
             %br
             %span.text-muted
               Не состоит ни в одной группе
-            - if boss?
-              .scoreBar
-                =link_to "+30 баллов",  "/project/"+@project.id.to_s+"/users/"+@user.id.to_s+"/add_score/30", :remote => true, :method => :put, class: "voteCounter"
-                |
-                =link_to "+10 баллов",  "/project/"+@project.id.to_s+"/users/"+@user.id.to_s+"/add_score/10", :remote => true, :method => :put, class: "voteCounter"
+            -#- if boss?
+            -#  .scoreBar
+            -#    =link_to "+30 баллов",  "/project/"+@project.id.to_s+"/users/"+@user.id.to_s+"/add_score/30", :remote => true, :method => :put, class: "voteCounter"
+            -#    |
+            -#    =link_to "+10 баллов",  "/project/"+@project.id.to_s+"/users/"+@user.id.to_s+"/add_score/10", :remote => true, :method => :put, class: "voteCounter"
             %br
-            -if boss?
+            -if admin?
               %h4(style="font-weight: bold;")
                 %span.color-green.pull-left
-                  = link_to club_toggle_user_path(@project, @user), :remote => true, :method => :put, :style => 'text-decoration:none;', :id => "club_status_#{@user.id}" do
-                    =club_status_show_user(@user)
+                  -unless @user.boss?
+                    = link_to club_toggle_user_path(@project, @user), :remote => true, :method => :put, :style => 'text-decoration:none;', :id => "club_status_#{@user.id}" do
+                      =club_status_show_user(@user)
                   %a(href="#" id="userscore_#{@user.id}" class="userscore" data-pk="1" data-remote="true" data-resource="post" data-type="text" data-name="score" data-url="/project/#{@project.id}/users/#{@user.id}/update_score")
                     =@user.score
             -else

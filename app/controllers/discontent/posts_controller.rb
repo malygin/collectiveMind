@@ -28,6 +28,10 @@ class Discontent::PostsController < PostsController
     render json: pr
   end
 
+  def current_model
+    Discontent::Post
+  end
+
   def voting_model  
     Discontent::Post
   end
@@ -225,6 +229,7 @@ class Discontent::PostsController < PostsController
           Discontent::PostAspect.create(post_id: @post_group.id, aspect_id: asp.to_i).save!
         end
       end
+      @accepted_posts = Discontent::Post.where(project_id: @project, status: 2)
       respond_to do |format|
         format.js
       end
@@ -262,6 +267,7 @@ class Discontent::PostsController < PostsController
         @post_group.update_attributes(params[name_of_model_for_param])
         @post_group.update_post_aspects(params[:discontent_post_aspects])
       end
+      @accepted_posts = Discontent::Post.where(project_id: @project, status: 2)
       respond_to do |format|
         format.js
       end
