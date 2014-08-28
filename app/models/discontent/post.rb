@@ -4,9 +4,11 @@ class Discontent::Post < ActiveRecord::Base
   include BasePost
   attr_accessible :whend, :whered, :aspect_id, :aspect, :style, :discontent_post_id, :important, :status_content, :status_whered, :status_whend, :improve_comment, :improve_stage, :discuss_status
 
-  validates :content, presence: true
-  validates :whend, presence: true
-  validates :whered, presence: true
+  # validates :content, presence: true
+  # validates :whend, presence: true
+  # validates :whered, presence: true
+
+  validates_presence_of  :content, :whend, :whered,  :discontent_post_aspects
 
   belongs_to :aspect
   has_many :discontent_posts, :class_name => 'Discontent::Post', :foreign_key => 'discontent_post_id'

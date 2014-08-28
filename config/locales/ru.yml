@@ -1,4 +1,25 @@
 ru:
+  activerecord:
+    attributes:
+      discontent/post:
+        whend:  'Поле "Когда это происходит"'
+        whered:  'Поле "Где это происходит"'
+        discontent_post_aspects:  'Поле "Аспекты"'
+    errors:
+      models:
+        discontent/post:
+          attributes:
+
+        user:
+          attributes:
+            password:
+              blank: 'Вы не указали пароль'
+              confirmation: 'Пароли не совпадают'
+              too_short: 'Пароль слишком короткий'
+            email:
+              blank: 'Вы не указали email'
+
+
   date:
     formats:
       # Форматы указываются в виде, поддерживаемом strftime.
@@ -134,17 +155,7 @@ ru:
 
   voting:
     have_votes: 'Осталось голосов:'
-  activerecord:
-    errors:
-      models:
-        user:
-          attributes:
-            password:
-              blank: 'Вы не указали пароль'
-              confirmation: 'Пароли не совпадают'
-              too_short: 'Пароль слишком короткий'
-            email:
-              blank: 'Вы не указали email'
+
 
 
 

@@ -9,7 +9,7 @@
   z-index: $zindex-tooltip;
   display: block;
   visibility: visible;
-  font-size: $font-size-small;
+  font-size: $font-size-base;
   line-height: 1.4;
   @include opacity(0);
 
@@ -23,9 +23,11 @@
 // Wrapper for the tooltip content
 .tooltip-inner {
   max-width: $tooltip-max-width;
+  min-width: $tooltip-max-width;
   padding: 3px 8px;
   color: $tooltip-color;
-  text-align: center;
+  text-align: left;
+  font-size: $font-size-base;
   text-decoration: none;
   background-color: $tooltip-bg;
   border-radius: $border-radius-base;

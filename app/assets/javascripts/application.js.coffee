@@ -17,6 +17,19 @@
 
 # @todo load initialization
 $ ->
+
+  $sidebar = $("#sidebar")
+
+  $sidebar.on "show.bs.collapse", (e) ->
+    e.target is this and $sidebar.addClass("open")  and $sidebar.removeClass('nav-collapse') and  $(".content").css "margin-top", $sidebar.height() + 30;
+
+  $sidebar.on "hide.bs.collapse", (e) ->
+    if e.target is this
+      $sidebar.removeClass "open"
+      $sidebar.addClass('nav-collapse')
+      $(".content").css "margin-top", ""
+
+
   $('textarea.comment-textarea').on 'keyup', ->
     activate_button(this)
 
