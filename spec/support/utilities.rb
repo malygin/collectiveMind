@@ -334,6 +334,7 @@ def prepare_life_tape(project,user)
 end
 
 def prepare_discontents(project,user)
+  #@todo нужны ассоциации, чтобы сперва создать аспект, потом дисконтент со связью
   @aspect1 = FactoryGirl.create :aspect, project: project, content: 'aspect 1'
   @aspect2 = FactoryGirl.create :aspect, project: project, content: 'aspect 2'
   @discontent1 = FactoryGirl.create :discontent, project: project, content: 'discontent 1', whend: 'when 1', whered: 'where 1'

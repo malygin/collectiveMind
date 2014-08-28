@@ -587,7 +587,7 @@ describe 'Core Project ' do
         fill_in 'core_project_desc', with: 'new project_desc'
         page.select 'Закрытая', :from => 'core_project_type_access'
         click_button 'send_project'
-        save_and_open_page
+        #save_and_open_page
         expect(page).to have_content 'new project'
       end
     end

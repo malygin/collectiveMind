@@ -9,13 +9,4 @@ FactoryGirl.define do
     stage 1
   end
 
-  factory :help_question, class: 'Help::Question' do
-    sequence(:content) {|n| "content for question #{n}"}
-    style 1
-  end
-
-  factory :help_answer, class: 'Help::Answer' do
-    sequence(:content) {|n| "content for answer #{n}"}
-  end
-
 end

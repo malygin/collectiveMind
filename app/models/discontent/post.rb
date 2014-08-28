@@ -8,7 +8,7 @@ class Discontent::Post < ActiveRecord::Base
   # validates :whend, presence: true
   # validates :whered, presence: true
 
-  validates_presence_of  :content, :whend, :whered,  :discontent_post_aspects
+  validates_presence_of  :content, :whend, :whered  #,  :discontent_post_aspects
 
   belongs_to :aspect
   has_many :discontent_posts, :class_name => 'Discontent::Post', :foreign_key => 'discontent_post_id'

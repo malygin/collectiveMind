@@ -85,10 +85,8 @@ class Discontent::PostsController < PostsController
   end
 
   def create
-    @project = Core::Project.find(params[:project])
-    #@aspects = Discontent::Aspect.where(:project_id => @project, :status => 0)
-    #@flash = view_context.validate_dispost(params[name_of_model_for_param],params[:discontent_post_aspects])
-
+     @project = Core::Project.find(params[:project])
+     #@aspects = Discontent::Aspect.where(:project_id => @project, :status => 0)
      @post = @project.discontents.build(params[name_of_model_for_param])
      @post.user = current_user
      @post.improve_comment = params[:improve_comment] if params[:improve_comment]
@@ -98,8 +96,6 @@ class Discontent::PostsController < PostsController
        params[:discontent_post_aspects].each do |asp|
          @post.discontent_post_aspects.build(aspect_id: asp.to_i)
        end
-     else
-       @post.errors.messages[:aspects] = ["не должны быть пустыми"]
      end
 
     respond_to do |format|

@@ -17,6 +17,14 @@ FactoryGirl.define do
     content  "discontent comment for post"
   end
 end
+#@todo нужны ассоциации, чтобы сперва создать аспект, потом дисконтент со связью
+#Factory.define :aspect do |f|
+#  f.life_tape_posts { |a| [a.association(:aspect)] }
+#end
+
+#factory :discontent_with_aspect, :parent => :aspect do
+#  discontent_post_aspects {[FactoryGirl.create(:discontent_post, aspect_id: @aspect1.id)]}
+#end
 
 #Factory.define :aspect do |f|
 #  f.life_tape_posts { |a| [a.association(:aspect)] }
