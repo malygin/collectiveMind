@@ -44,18 +44,24 @@
 
       |
       - if boss?
-        - if signed_in? and not post.users.include?(current_user)
-          =link_to({:controller => post.class.name.underscore.pluralize ,:action => :plus, :project => @project,:status=>0, :aspect=>0,  :id => post.id, :against => false,  :remote => true},:method => :put, id: "plus_post_#{post.id}") do
-            %span.text-success За
-            %span.text-success(id="plus_counter_#{post.id}")=post.users_pro.count
-            %span.glyphicon.glyphicon-thumbs-up.text-success
-        -else
-          -if boss?
-            =link_to({:controller => post.class.name.underscore.pluralize ,:action => :plus, :project => @project,:status=>0, :aspect=>0,  :id => post.id, :against => false,  :remote => true},:method => :put, id: "plus_post_#{post.id}") do
-              %span.text-success
-                %b За
-              %span.text-success(id="plus_counter_#{post.id}")=post.users_pro.count
-              %span.glyphicon.glyphicon-thumbs-up.text-success
+        =link_to({:controller => post.class.name.underscore.pluralize, :action => :plus,:project => @project, :id => post.id},  :remote => true, :method => :put,  id: "plus_post_#{post.id}") do
+          -if post.useful
+            %span.text-danger Забрать баллы
           -else
-            %span.text-muted= "За #{post.users_pro.count}"
-            %span.glyphicon.glyphicon-thumbs-up.text-muted
+            %span.text-success Выдать баллы
+
+        -#- if signed_in? and not post.users.include?(current_user)
+        -#  =link_to({:controller => post.class.name.underscore.pluralize ,:action => :plus, :project => @project,:status=>0, :aspect=>0,  :id => post.id, :against => false,  :remote => true},:method => :put, id: "plus_post_#{post.id}") do
+        -#    %span.text-success За
+        -#    %span.text-success(id="plus_counter_#{post.id}")=post.users_pro.count
+        -#    %span.glyphicon.glyphicon-thumbs-up.text-success
+        -#-else
+        -#  -if boss?
+        -#    =link_to({:controller => post.class.name.underscore.pluralize ,:action => :plus, :project => @project,:status=>0, :aspect=>0,  :id => post.id, :against => false,  :remote => true},:method => :put, id: "plus_post_#{post.id}") do
+        -#      %span.text-success
+        -#        %b За
+        -#      %span.text-success(id="plus_counter_#{post.id}")=post.users_pro.count
+        -#      %span.glyphicon.glyphicon-thumbs-up.text-success
+        -#  -else
+        -#    %span.text-muted= "За #{post.users_pro.count}"
+        -#    %span.glyphicon.glyphicon-thumbs-up.text-muted

@@ -1,7 +1,8 @@
  class Concept::Post < ActiveRecord::Base
   include BasePost
   attr_accessible :goal, :reality,
-                  :status_name, :status_content, :status_negative, :status_positive, :status_reality, :status_problems, :status_positive_r, :status_negative_r, :discuss_status
+                  :status_name, :status_content, :status_negative, :status_positive, :status_reality, :status_problems, :status_positive_r, :status_negative_r, :discuss_status,
+                  :status_positive_s, :status_negative_s, :status_control, :status_control_r, :status_control_s, :status_obstacles
 
   belongs_to :life_tape_post,  :class_name => "LifeTape::Post"
   has_many :task_supply_pairs

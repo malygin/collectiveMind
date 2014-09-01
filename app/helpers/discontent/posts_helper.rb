@@ -134,7 +134,7 @@ module Discontent::PostsHelper
   def content_for_note(post_content, field, link = false)
     html = ''
     html << content_tag(:ul, '', class: "discuss_comment", id: "note_form_#{post_content.id}_#{number_for_type_field(field)}") do
-      post_content.post_notes(number_for_type_field(field)).each do |dpn|
+      post_content.notes.by_type(number_for_type_field(field)).each do |dpn|
         concat content_tag(:div,'', :id => "post_note_#{dpn.id}") {
           link ? link_to({:controller => 'discontent/posts', :action => :destroy_note, :id => post_content.id,:note_id => dpn.id, :type_field => number_for_type_field(field)},:remote => true,:method => :put, :confirm => 'Удалить замечание?',:id => "destroy_post_note_#{dpn.id}") {content_tag(:span, '', class: "glyphicon glyphicon-remove text-danger pull-right")}  + content_tag(:li, dpn.content, :id => "li_note_#{dpn.id}") : content_tag(:li, dpn.content, :id => "li_note_#{dpn.id}")
         }

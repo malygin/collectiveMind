@@ -90,6 +90,7 @@ scope '/project/:project' do
   get :autocomplete_discontent_post_whend_discontent_posts , to: 'discontent/posts#autocomplete_discontent_post_whend'
   get :autocomplete_discontent_post_whered_discontent_posts , to: 'discontent/posts#autocomplete_discontent_post_whered'
   get :autocomplete_concept_post_resource_concept_posts , to: 'concept/posts#autocomplete_concept_post_resource'
+  get :autocomplete_concept_post_mean_concept_posts , to: 'concept/posts#autocomplete_concept_post_mean'
 
   post 'discontent/posts/:id/union', to:  'discontent/posts#union_discontent'
   get 'discontent/posts/unions', to:  'discontent/posts#unions'

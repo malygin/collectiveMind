@@ -39,9 +39,12 @@
           =link_to({:action => :add_child_comment_form, :id => comment.comment.post.id, :comment_id => comment.comment.id,:answer_id => comment.id}, :remote => true, :method => :put,  id: "add_child_comment_#{comment.id}") do
             %span.text-success Ответить
 
-        - if boss? and not comment.users.include?(current_user)
-          =link_to({:action => :plus_comment, :id => comment.id, :against => false},  :remote => true, :method => :put,  id: "plus_comment_#{comment.id}") do
-            %span.text-success Выдать баллы
+        - if boss?
+          =link_to({:action => :plus_comment, :id => comment.id},  :remote => true, :method => :put,  id: "plus_comment_#{comment.id}") do
+            -if comment.useful
+              %span.text-danger Забрать баллы
+            -else
+              %span.text-success Выдать баллы
       .time.pull-left
         =time_ago_in_words(comment.created_at)
       %br

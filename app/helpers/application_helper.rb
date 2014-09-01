@@ -139,9 +139,9 @@ module ApplicationHelper
     end
   end
 
-  def column_for_type_field(table_name, type_fd)
+  def column_for_type_field(table_name, type_field)
     if table_name == 'discontent_note'
-      case type_fd
+      case type_field
         when 1
           'status_content'
         when 2
@@ -152,7 +152,7 @@ module ApplicationHelper
           ''
       end
     elsif table_name == 'concept_note'
-      case type_fd
+      case type_field
         when 1
           'status_name'
         when 2

@@ -21,11 +21,15 @@ class Concept::PostsController < PostsController
     Concept::Note
   end
 
+  #@todo два метода, можно потом будет в один сделать, плюс подгрузка для проектов
+  #@todo нужно решить делать для проектов отдельные юрлы или оставить так
+  #@todo нужно решить как объединить таблицы в проектах. Допустим Plan::PostResource и Plan::PostMean объединяются как тут.
+  #@todo Нужно ли таблицу ресурсов для мероприятий(Plan::PostActionResource) также объединять с основной и добавлять поле для id мероприятия?
   def autocomplete_concept_post_resource
      pr=Set.new
      pr.merge(Concept::Resource.where(:project_id => params[:project]).map {|d| {:value => d.name}})
 
-     pr.merge(Concept::PostResource.select("DISTINCT name as value").joins(:concept_post).where("LOWER(name) like LOWER(?) AND concept_posts.project_id = ?", "%#{params[:term]}%", params[:project] )
+     pr.merge(Concept::PostResource.select("DISTINCT name as value").joins(:concept_post).where("LOWER(name) like LOWER(?) AND concept_posts.project_id = ? AND concept_post_resources.style = 0", "%#{params[:term]}%", params[:project] )
               .map {|d| {:value => d.value } })
 
      @project = Core::Project.find(params[:project])
@@ -38,6 +42,25 @@ class Concept::PostsController < PostsController
                 .map {|d| {:value => d.value } })
      end
      render json: pr.sort_by{|ha| ha[:value].downcase}
+  end
+
+  def autocomplete_concept_post_mean
+    pr=Set.new
+    pr.merge(Concept::Resource.where(:project_id => params[:project]).map {|d| {:value => d.name}})
+
+    pr.merge(Concept::PostResource.select("DISTINCT name as value").joins(:concept_post).where("LOWER(name) like LOWER(?) AND concept_posts.project_id = ? AND concept_post_resources.style = 1", "%#{params[:term]}%", params[:project] )
+             .map {|d| {:value => d.value } })
+
+    @project = Core::Project.find(params[:project])
+    if @project.status == 9
+      pr.merge(Plan::PostResource.select("DISTINCT name as value").where("LOWER(name) like LOWER(?) AND project_id = ?", "%#{params[:term]}%", params[:project])
+               .map {|d| {:value => d.value } })
+      pr.merge(Plan::PostMean.select("DISTINCT name as value").where("LOWER(name) like LOWER(?) AND project_id = ?", "%#{params[:term]}%", params[:project])
+               .map {|d| {:value => d.value } })
+      pr.merge(Plan::PostActionResource.select("DISTINCT name as value").where("LOWER(name) like LOWER(?) AND project_id = ?", "%#{params[:term]}%", params[:project])
+               .map {|d| {:value => d.value } })
+    end
+    render json: pr.sort_by{|ha| ha[:value].downcase}
   end
 
   def prepare_data
@@ -72,12 +95,32 @@ class Concept::PostsController < PostsController
 
     unless params[:resor_positive_r].nil?
       params[:resor_positive_r].each_with_index do |r,i|
-        @concept_post.concept_post_resources.build(:name => r, :desc => params[:res_positive_r][i], :type_res => 'positive_r', :project_id => @project.id).save  if r!=''
+        @concept_post.concept_post_resources.build(:name => r, :desc => params[:res_positive_r][i], :type_res => 'positive_r', :project_id => @project.id, :style => 0).save  if r!=''
       end
     end
     unless params[:resor_negative_r].nil?
       params[:resor_negative_r].each_with_index do |r,i|
-        @concept_post.concept_post_resources.build(:name => r, :desc => params[:res_negative_r][i], :type_res => 'negative_r', :project_id => @project.id).save  if r!=''
+        @concept_post.concept_post_resources.build(:name => r, :desc => params[:res_negative_r][i], :type_res => 'negative_r', :project_id => @project.id, :style => 0).save  if r!=''
+      end
+    end
+    unless params[:resor_control_r].nil?
+      params[:resor_control_r].each_with_index do |r,i|
+        @concept_post.concept_post_resources.build(:name => r, :desc => params[:res_control_r][i], :type_res => 'control_r', :project_id => @project.id, :style => 0).save  if r!=''
+      end
+    end
+    unless params[:resor_positive_s].nil?
+      params[:resor_positive_s].each_with_index do |r,i|
+        @concept_post.concept_post_resources.build(:name => r, :desc => params[:res_positive_s][i], :type_res => 'positive_s', :project_id => @project.id, :style => 1).save  if r!=''
+      end
+    end
+    unless params[:resor_negative_s].nil?
+      params[:resor_negative_s].each_with_index do |r,i|
+        @concept_post.concept_post_resources.build(:name => r, :desc => params[:res_negative_s][i], :type_res => 'negative_s', :project_id => @project.id, :style => 1).save  if r!=''
+      end
+    end
+    unless params[:resor_control_s].nil?
+      params[:resor_control_s].each_with_index do |r,i|
+        @concept_post.concept_post_resources.build(:name => r, :desc => params[:res_control_s][i], :type_res => 'control_s', :project_id => @project.id, :style => 1).save  if r!=''
       end
     end
 
@@ -105,16 +148,41 @@ class Concept::PostsController < PostsController
       end
     end
     @concept_post.post_aspects << post_aspect
+
     @concept_post.concept_post_resources.by_type('positive_r').destroy_all
     unless params[:resor_positive_r].nil?
       params[:resor_positive_r].each_with_index do |r,i|
-        @concept_post.concept_post_resources.build(:name => r, :desc => params[:res_positive_r][i], :type_res => 'positive_r', :project_id => @project.id).save  if r!=''
+        @concept_post.concept_post_resources.build(:name => r, :desc => params[:res_positive_r][i], :type_res => 'positive_r', :project_id => @project.id, :style => 0).save  if r!=''
       end
     end
     @concept_post.concept_post_resources.by_type('negative_r').destroy_all
     unless params[:resor_negative_r].nil?
       params[:resor_negative_r].each_with_index do |r,i|
-        @concept_post.concept_post_resources.build(:name => r, :desc => params[:res_negative_r][i], :type_res => 'negative_r', :project_id => @project.id).save  if r!=''
+        @concept_post.concept_post_resources.build(:name => r, :desc => params[:res_negative_r][i], :type_res => 'negative_r', :project_id => @project.id, :style => 0).save  if r!=''
+      end
+    end
+    @concept_post.concept_post_resources.by_type('control_r').destroy_all
+    unless params[:resor_control_r].nil?
+      params[:resor_control_r].each_with_index do |r,i|
+        @concept_post.concept_post_resources.build(:name => r, :desc => params[:res_control_r][i], :type_res => 'control_r', :project_id => @project.id, :style => 0).save  if r!=''
+      end
+    end
+    @concept_post.concept_post_resources.by_type('positive_s').destroy_all
+    unless params[:resor_positive_s].nil?
+      params[:resor_positive_s].each_with_index do |r,i|
+        @concept_post.concept_post_resources.build(:name => r, :desc => params[:res_positive_s][i], :type_res => 'positive_s', :project_id => @project.id, :style => 1).save  if r!=''
+      end
+    end
+    @concept_post.concept_post_resources.by_type('negative_s').destroy_all
+    unless params[:resor_negative_s].nil?
+      params[:resor_negative_s].each_with_index do |r,i|
+        @concept_post.concept_post_resources.build(:name => r, :desc => params[:res_negative_s][i], :type_res => 'negative_s', :project_id => @project.id, :style => 1).save  if r!=''
+      end
+    end
+    @concept_post.concept_post_resources.by_type('control_s').destroy_all
+    unless params[:resor_control_s].nil?
+      params[:resor_control_s].each_with_index do |r,i|
+        @concept_post.concept_post_resources.build(:name => r, :desc => params[:res_control_s][i], :type_res => 'control_s', :project_id => @project.id, :style => 1).save  if r!=''
       end
     end
 
@@ -178,7 +246,7 @@ class Concept::PostsController < PostsController
 
    def edit
      @post = current_model.find(params[:id])
-     @pa =@post.post_aspects.first
+     @pa = @post.post_aspects.first
      @discontent_post = @pa.discontent
    end
 

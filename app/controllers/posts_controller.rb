@@ -291,29 +291,30 @@ class PostsController < ApplicationController
 
   #todo check if user already voted
   def plus
-    post = current_model.find(params[:id])
     @project= Core::Project.find(params[:project])
-
-    @against =  params[:against] == 'true'
-
-    if boss? and post.admins_vote.count != 0
-      post.admins_vote.destroy_all
-      @admin_pro= true
-    else
-      post.post_votings.create(:user => current_user, :post => post, :against => @against)  unless post.users.include? current_user
-      if (current_user.boss? or post.post_votings.count == 3) and not @against
-        Award.reward(user: post.user, post: post, project: @project, type: 'add')
-        post.user.add_score(:type => :plus_post, :project => Core::Project.find(params[:project]), :post => post, :path =>  post.class.name.underscore.pluralize)
-      end
+    @post = current_model.find(params[:id])
+    if boss?
+      @post.toggle!(:useful)
+      @post.user.add_score(:type => :plus_post, :project => @project, :post => @post, :path =>  @post.class.name.underscore.pluralize)
+      Award.reward(user: @post.user, post: @post, project: @project, type: 'add')
     end
-    if post.instance_of? Discontent::Post
-      post.update_attributes(:status_content => true, :status_whered => true,:status_whend => true)
-    elsif post.instance_of? Concept::Post
-      post.update_attributes(:stat_name => true, :stat_content => true,:stat_positive => true,:stat_positive_r => true, :stat_negative => true,:stat_negative_r => true,:stat_problems => true,:stat_reality => true)
+    if @post.instance_of? Discontent::Post
+      @post.update_attributes(:status_content => true, :status_whered => true,:status_whend => true)
+    elsif @post.instance_of? Concept::Post
+      @post.update_attributes(:status_name => true, :status_content => true,:status_positive => true,:status_positive_r => true, :status_negative => true,:status_negative_r => true,:status_problems => true,:status_reality => true, :status_positive_s => true,:status_negative_s => true,:status_control => true,:status_control_r => true,:status_control_s => true,:status_obstacles => true)
     end
 
-    @id= post.id
-    @post_vote = post
+    #@against =  params[:against] == 'true'
+    #if boss? and post.admins_vote.count != 0
+    #  post.admins_vote.destroy_all
+    #  @admin_pro= true
+    #else
+    #  post.post_votings.create(:user => current_user, :post => post, :against => @against)  unless post.users.include? current_user
+    #  if (current_user.boss? or post.post_votings.count == 3) and not @against
+    #    Award.reward(user: post.user, post: post, project: @project, type: 'add')
+    #    post.user.add_score(:type => :plus_post, :project => Core::Project.find(params[:project]), :post => post, :path =>  post.class.name.underscore.pluralize)
+    #  end
+    #end
     respond_to do |format|
       format.js
     end
@@ -322,12 +323,15 @@ class PostsController < ApplicationController
   def plus_comment
     @id = params[:id]
     @project= Core::Project.find(params[:project])
-    comment = comment_model.find(@id)
-    @against =  params[:against] == 'true'
-    comment.comment_votings.create(:user => current_user, :comment => comment,  :against => @against) unless comment.users.include? current_user
-    comment.user.add_score(:type => :plus_comment, :project => @project, :comment => comment, :path =>  comment.post.class.name.underscore.pluralize)  if current_user.boss? or comment.comment_votings.count == 3
-    Award.reward(user: comment.user, project: @project, type: 'like')
-    @main_comment = comment.comment.id unless comment.comment.nil?
+    @comment = comment_model.find(@id)
+    #@against =  params[:against] == 'true'
+    #comment.comment_votings.create(:user => current_user, :comment => comment,  :against => @against) unless comment.users.include? current_user
+    if boss?
+      @comment.toggle!(:useful)
+      @comment.user.add_score(:type => :plus_comment, :project => @project, :comment => @comment, :path =>  @comment.post.class.name.underscore.pluralize)  if boss?
+      Award.reward(user: @comment.user, project: @project, type: 'like')
+    end
+    @main_comment = @comment.comment.id unless @comment.comment.nil?
     respond_to do |format|
       format.js
     end
@@ -389,7 +393,7 @@ class PostsController < ApplicationController
     @project = Core::Project.find(params[:project])
     @post = current_model.find(params[:id])
     @type = params[:type_field]
-    if @post.notes(@type.to_i).size == 0
+    if @post.notes.by_type(@type.to_i).size == 0
       @post.update_attributes(column_for_type_field(name_of_note_for_param, @type.to_i) => 't')
     end
     respond_to do |format|
