@@ -13,19 +13,14 @@ namespace :db  do
 		Discontent::Aspect.create!(content: 'Учеба', project:  project)
 		Discontent::Aspect.create!(content: 'Новые профессии', project:  project)
 		Discontent::Aspect.create!(content: 'Создание профессионалов', project:  project)
-  		user1 = User.create!(:name => "Андрей",
-			:surname => "Малыгин",
-			:email =>"anmalygin@gmail.com",
-			:login => "malyginav",
-			:password => "pascal2003",
-			:password_confirmation => "pascal2003")
-		user1.toggle!(:admin)
-		user2 = User.create!(:name => "Иван",
-			:surname => "Дорошин",
-			:email =>"anmalygin@yandex.ru",
-			:login => "pisynka",
-			:password => "pascal2003",
-			:password_confirmation => "pascal2003")
+  		user1 = User.create!(:name => "Сергей",
+			:surname => "Кириллов",
+			:email =>"admin@mass-descion.ru",
+			:login => "admin",
+			:password => "adminpassword",
+			:password_confirmation => "adminpassword",
+      :type_user=> 1)
+
 		
 
 
