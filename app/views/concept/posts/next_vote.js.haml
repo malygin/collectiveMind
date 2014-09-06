@@ -1,5 +1,5 @@
 -unless @discontent_post.nil?
-  -if @last_now.nil? or @discontent_post.id != @last_now.discontent_post_id
+  -if (@last_now.nil? or @discontent_post.id != @last_now.discontent_post_id) and @concept1 and @concept2
     $('#dispost').html("#{escape_javascript(render partial: 'discontent/posts/post_content', object: @discontent_post)}")
     $('#left-concept').html("#{escape_javascript(render partial: 'post_for_vote', object: @concept1, :locals => {:number => 1})}")
     $('#left-concept div.panel-body').effect("highlight", {color: '#f5cecd'}, 1000)
@@ -12,13 +12,13 @@
     $('#dispost').effect("highlight", {color: '#f5cecd'}, 1000);
 
   -else
-    -if params[:num] == "1"
+    -if params[:num] == "1" and @concept2
       $('#right-concept').html("#{escape_javascript(render partial: 'post_for_vote', object: @concept2, :locals => {:number => 2})}")
-      $('#right-concept div.panel-body').effect("highlight", {color: '#f5cecd'}, 1000)
+      $('#right-concept').effect("highlight", {color: '#f5cecd'}, 1000)
 
-    -if params[:num] == "2"
+    -if params[:num] == "2" and @concept2
       $('#left-concept').html("#{escape_javascript(render partial: 'post_for_vote', object: @concept2, :locals => {:number => 1})}")
-      $('#left-concept div.panel-body').effect("highlight", {color: '#f5cecd'}, 1000)
+      $('#left-concept').effect("highlight", {color: '#f5cecd'}, 1000)
     $('#prog_now').html("#{@votes}");
     $('.progress-bar').css('width',"#{((@votes-1)/@post_all.to_f)*100}%");
 window.scrollTo(0,0)

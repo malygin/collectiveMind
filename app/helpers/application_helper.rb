@@ -190,8 +190,14 @@ module ApplicationHelper
       when 6
         'status_negative_r'
       when 7
-        'status_problems'
+        'status_control'
       when 8
+        'status_control_r'
+      when 9
+        'status_obstacles'
+      when 10
+        'status_problems'
+      when 11
         'status_reality'
       else
         null

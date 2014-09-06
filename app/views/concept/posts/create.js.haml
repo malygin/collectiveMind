@@ -1,0 +1,18 @@
+- if @post_aspect.errors.any?
+  $("#notice_messages").html('#{escape_javascript(render partial: 'shared/notice_messages', :locals => {:object =>@post_aspect})}');
+  window.scrollTo(0,0)
+- else
+  $("#notice_messages").html('')
+  $('#render_success_concept').empty();
+  $("#render_success_concept").html('#{escape_javascript(render partial: 'modal_post_save')}');
+  $('#modal_save_concept').modal('show');
+  $('#pa_title').val('');
+  $('#pa_name').val('');
+  $('#pa_content').val('');
+  $('#pa_positive').val('');
+  $('#pa_negative').val('');
+  $('#pa_control').val('');
+  $('#pa_obstacles').val('');
+  $('#pa_problems').val('');
+  $('#pa_reality').val('');
+  $('.main_resources').remove();

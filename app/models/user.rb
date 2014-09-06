@@ -240,25 +240,15 @@ class User < ActiveRecord::Base
       return true
     end
     if project.status == 8
-      disposts = Discontent::Post.where(:project_id => project.id, :status => 4).order(:id)
+      disposts = Discontent::Post.where(:project_id => project, :status => 4).order(:id)
       last_vote = self.concept_post_votings.by_project_votings(project).last
       return true if last_vote.nil?
-      unless last_vote.nil?
-        i = -1
-        while disposts[i].nil? ? false:true
-          concept_posts = disposts[i].dispost_concepts.order('concept_posts.id')
-          if concept_posts.size > 1
-            break
-          end
-          i -= 1
-        end
-        if disposts[i].id == last_vote.discontent_post_id
-          count_now = self.concept_post_votings.by_project_votings(project).where(:discontent_post_id => last_vote.discontent_post_id, :concept_post_aspect_id => last_vote.concept_post_aspect_id).count
-          index = concept_posts.index last_vote.concept_post_aspect.concept_post
-          index = count_now unless index == count_now
-          unless concept_posts[index+1].nil?
-            return true
-          end
+      dispost = self.able_concept_posts_for_vote(project,disposts,last_vote)
+      if dispost
+        concept_posts = dispost.dispost_concepts.by_status(0).order('concept_posts.id')
+        count_now = self.concept_post_votings.by_project_votings(project).where(:discontent_post_id => last_vote.discontent_post_id, :concept_post_aspect_id => last_vote.concept_post_aspect_id).count
+        unless concept_posts[dispost.id != last_vote.discontent_post_id ? 0 : count_now].nil?
+          return true
         end
       end
     end
@@ -266,6 +256,7 @@ class User < ActiveRecord::Base
   end
 
   def able_concept_posts_for_vote(project,disposts,last_vote, num = 0)
+    last_vote = self.concept_post_votings.by_project_votings(project).last if last_vote.nil?
     unless last_vote.nil?
       dis_post = last_vote.discontent_post
       num = disposts.index dis_post
@@ -284,9 +275,7 @@ class User < ActiveRecord::Base
         end
       else
         count_now = self.concept_post_votings.by_project_votings(project).where(:discontent_post_id => last_vote.discontent_post_id, :concept_post_aspect_id => last_vote.concept_post_aspect_id).count
-        index = concept_posts.index last_vote.concept_post_aspect.concept_post
-        index = count_now unless index == count_now
-        unless concept_posts[index+1].nil?
+        unless concept_posts[count_now+1].nil?
           return discontent_post
         end
       end

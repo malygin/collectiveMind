@@ -60,39 +60,32 @@
 
   end
 
-  def update_status_fields(pa,resor_pos,res_pos,resor_neg,res_neg)
-    aspect = self.post_aspects.first.discontent_aspect_id
-    unless aspect.nil?
-      if self.post_aspects.first.read_attribute('name') != pa["#{aspect}"]['name']
-        self.stat_name = nil
+  def update_status_fields(pa)
+    if self.post_aspects.first
+      if self.post_aspects.first.read_attribute('name') != pa['name']
+        self.status_name = nil
       end
-      if self.post_aspects.first.read_attribute('content') != pa["#{aspect}"]['content']
-        self.stat_content = nil
+      if self.post_aspects.first.read_attribute('content') != pa['content']
+        self.status_content = nil
       end
-      if self.post_aspects.first.read_attribute('negative') != pa["#{aspect}"]['negative']
-        self.stat_negative = nil
+      if self.post_aspects.first.read_attribute('negative') != pa['negative']
+        self.status_negative = nil
       end
-      if self.post_aspects.first.read_attribute('positive') != pa["#{aspect}"]['positive']
-        self.stat_positive = nil
+      if self.post_aspects.first.read_attribute('positive') != pa['positive']
+        self.status_positive = nil
       end
-      if self.post_aspects.first.read_attribute('reality') != pa["#{aspect}"]['reality']
-        self.stat_reality = nil
+      if self.post_aspects.first.read_attribute('control') != pa['control']
+        self.status_control = nil
       end
-      if self.post_aspects.first.read_attribute('problems') != pa["#{aspect}"]['problems']
-        self.stat_problems = nil
+      if self.post_aspects.first.read_attribute('obstacles') != pa['obstacles']
+        self.status_obstacles = nil
       end
-    end
-
-    resources_pos = self.concept_post_resources.by_type('positive_r').pluck(:name) unless self.concept_post_resources.by_type('positive_r').nil?
-    desc_pos = self.concept_post_resources.by_type('positive_r').pluck(:desc) unless self.concept_post_resources.by_type('positive_r').nil?
-    resources_neg = self.concept_post_resources.by_type('negative_r').pluck(:name) unless self.concept_post_resources.by_type('negative_r').nil?
-    desc_neg = self.concept_post_resources.by_type('negative_r').pluck(:desc) unless self.concept_post_resources.by_type('negative_r').nil?
-
-    unless resources_pos == resor_pos and desc_pos == res_pos
-      self.stat_positive_r = nil
-    end
-    unless resources_neg == resor_neg and desc_neg == res_neg
-      self.stat_negative_r = nil
+      if self.post_aspects.first.read_attribute('reality') != pa['reality']
+        self.status_reality = nil
+      end
+      if self.post_aspects.first.read_attribute('problems') != pa['problems']
+        self.status_problems = nil
+      end
     end
   end
 end

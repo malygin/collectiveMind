@@ -77,8 +77,14 @@ module Concept::PostsHelper
       when 6
         'negative_r'
       when 7
-        'problems'
+        'control'
       when 8
+        'control_r'
+      when 9
+        'obstacles'
+      when 10
+        'problems'
+      when 11
         'reality'
       else
         nil

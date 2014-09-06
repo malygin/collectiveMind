@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140901220951) do
+ActiveRecord::Schema.define(:version => 20140904211704) do
 
   create_table "answers", :force => true do |t|
     t.string   "text",        :limit => 700
@@ -1121,10 +1121,12 @@ ActiveRecord::Schema.define(:version => 20140901220951) do
     t.text     "desc"
     t.integer  "post_id"
     t.integer  "resource_id"
-    t.datetime "created_at",  :null => false
-    t.datetime "updated_at",  :null => false
+    t.datetime "created_at",            :null => false
+    t.datetime "updated_at",            :null => false
     t.string   "type_res"
     t.integer  "project_id"
+    t.integer  "plan_post_resource_id"
+    t.integer  "style"
   end
 
   create_table "plan_post_stages", :force => true do |t|

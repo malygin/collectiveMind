@@ -14,6 +14,8 @@ FactoryGirl.define do
   end
 
   factory :concept_post_discontent, :class => 'Concept::PostDiscontent'  do
-
+  end
+  factory :concept_comment, :class => 'Concept::Comment'  do
+    content "concept comment for post"
   end
 end

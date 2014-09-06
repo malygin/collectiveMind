@@ -19,7 +19,6 @@
 
 
 .text-center
-
   %span.h5(class= "#{class_for_concept_type_field(post_for_vote.concept_post,3)}" id="positive")=t('form.cond')
 %br
 =display_content(post_for_vote.positive)
@@ -27,7 +26,7 @@
 
 
 .text-center
-  %span.h5(class="#{class_for_concept_type_field(post_for_vote.concept_post,4)}" id="positive_r") Какие ресурсы необходимы?
+  %span.h5(class="#{class_for_concept_type_field(post_for_vote.concept_post,4)}" id="positive_r")=t('form.cond_res')
 %br
 %table.table.table-striped.table-bordered
   %thead
@@ -47,6 +46,14 @@
           =r.name
         %td
           =r.desc
+        - r.concept_post_resources.by_type('positive_s').each_with_index  do |res, ind|
+          %tr
+            %td
+              ="#{index+1}.#{ind+1}"
+            %td
+              =res.name
+            %td
+              =res.desc
 
 
 .text-center
@@ -78,18 +85,67 @@
           =r.name
         %td
           =r.desc
+        - r.concept_post_resources.by_type('negative_s').each_with_index  do |res, ind|
+          %tr
+            %td
+              ="#{index+1}.#{ind+1}"
+            %td
+              =res.name
+            %td
+              =res.desc
 
+.text-center
+  %span.h5(class="#{class_for_concept_type_field(post_for_vote.concept_post,7)}" id= "control")=t('form.control')
+%br
+=display_content(post_for_vote.control)
 
 .text-center
 
-  %span.h5(class= "#{class_for_concept_type_field(post_for_vote.concept_post,7)}" id="problems")=t('form.problems')
+  %span.h5(class= "#{class_for_concept_type_field(post_for_vote.concept_post,8)}" id= "control_r")=t('form.control_res')
+%br
+%table.table.table-striped.table-bordered
+  %thead
+    %tr
+      %th
+        ="#"
+      %th
+        Название
+      %th
+        Пояснение
+  %tbody
+    - post_for_vote.concept_post.concept_post_resources.by_type('control_r').each_with_index  do |r, index|
+      %tr
+        %td
+          =index+1
+        %td
+          =r.name
+        %td
+          =r.desc
+        - r.concept_post_resources.by_type('control_s').each_with_index  do |res, ind|
+          %tr
+            %td
+              ="#{index+1}.#{ind+1}"
+            %td
+              =res.name
+            %td
+              =res.desc
+
+.text-center
+
+  %span.h5(class= "#{class_for_concept_type_field(post_for_vote.concept_post,9)}" id="obstacles")=t('form.obstacles_bcd')
+%br
+=display_content(post_for_vote.obstacles)
+
+.text-center
+
+  %span.h5(class= "#{class_for_concept_type_field(post_for_vote.concept_post,10)}" id="problems")=t('form.problems')
 %br
 =display_content(post_for_vote.problems)
 
 
 .text-center
 
-  %span.h5(class= "#{class_for_concept_type_field(post_for_vote.concept_post,8)}" id= "reality")=t('form.reality')
+  %span.h5(class= "#{class_for_concept_type_field(post_for_vote.concept_post,11)}" id= "reality")=t('form.reality')
 %br
 =display_content(post_for_vote.reality)
 

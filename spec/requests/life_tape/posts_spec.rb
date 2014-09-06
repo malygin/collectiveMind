@@ -29,7 +29,7 @@ describe 'Life Tape ' do
         expect(page).to have_content @aspect2.content
         expect(page).not_to  have_selector '#new_aspect'
         expect(page).to have_selector 'textarea#comment_text_area'
-
+        expect(page).not_to have_link("plus_comment_#{@comment1.id}", :text => 'Выдать баллы', :href => plus_comment_life_tape_post_path(project,@comment1))
         validate_default_links_and_sidebar(project,user)
         validate_not_have_admin_links_for_user(project)
         validate_not_have_moderator_links_for_user(project)
@@ -127,6 +127,7 @@ describe 'Life Tape ' do
         expect(page).to have_content @comment1.content
         expect(page).to  have_selector '#new_aspect'
         expect(page).to have_selector 'textarea#comment_text_area'
+        expect(page).to have_link("plus_comment_#{@comment1.id}", :text => 'Выдать баллы', :href => plus_comment_life_tape_post_path(project,@comment1))
       end
       it 'add new comment in aspect ', js: true do
         fill_in 'comment_text_area', with: 'new comment'
@@ -139,6 +140,15 @@ describe 'Life Tape ' do
         find("#child_comments_form_#{@comment1.id}").find('#comment_text_area').set "new child comment"
         find("#child_comments_form_#{@comment1.id}").find('#send_post').click
         expect(page).to have_content 'new child comment'
+      end
+
+      it ' like comment', js: true do
+        prepare_awards
+        expect(page).to have_link("plus_comment_#{@comment1.id}", :text => 'Выдать баллы', :href => plus_comment_life_tape_post_path(project,@comment1))
+        click_link "plus_comment_#{@comment1.id}"
+        expect(page).to have_link("plus_comment_#{@comment1.id}", :text => 'Забрать баллы', :href => plus_comment_life_tape_post_path(project,@comment1))
+        click_link "plus_comment_#{@comment1.id}"
+        expect(page).to have_content 'Выдать баллы'
       end
     end
     context 'vote life tape '  do

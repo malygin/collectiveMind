@@ -192,12 +192,8 @@ class Discontent::Post < ActiveRecord::Base
     else
       @concept1 = last_vote.concept_post_aspect
       count_now = current_user.concept_post_votings.by_project_votings(project).where(:discontent_post_id => self.id, :concept_post_aspect_id => @concept1.id).count
-      index = concept_posts.index @concept1.concept_post
-      index = count_now unless index == count_now
-      unless concept_posts[index+1].nil?
-        @concept2 = concept_posts[index+1].post_aspects.first
-        @votes = index+1
-      end
+      @concept2 = concept_posts[count_now+1].post_aspects.first unless concept_posts[count_now+1].nil?
+      @votes = count_now == @post_all ? count_now : count_now + 1
     end
     return @post_all,@concept1,@concept2,@votes
   end

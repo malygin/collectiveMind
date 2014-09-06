@@ -33,14 +33,11 @@
         =link_to({:action => :new, :asp => params[:asp] ? params[:asp] : @project.proc_aspects.order(:id).first, :improve_comment => improve_comment.id, :improve_stage => get_stage_for_improve(improve_comment.get_class) }, :method => :get,  id: "improve_comment_#{improve_comment.id}") do
           %span.label.label-success Доработать
         - if boss?
-          - if signed_in? and not improve_comment.users.include?(current_user)
-            =link_to({:action => :plus_comment, :id => improve_comment.id, :against => false},  :remote => true, :method => :put,  id: "plus_comment_#{improve_comment.id}") do
-              %span.text-success За
-              %span.text-success(id="plus_counter_comment_#{improve_comment.id}")=improve_comment.users_pro.count
-              %span.glyphicon.glyphicon-thumbs-up.text-success
-          -else
-            %span.text-muted= "За #{improve_comment.users_pro.count}"
-            %span.glyphicon.glyphicon-thumbs-up.text-muted
+          =link_to({:action => :plus_comment, :id => improve_comment.id},  :remote => true, :method => :put,  id: "plus_comment_#{improve_comment.id}") do
+            -if improve_comment.useful
+              %span.text-danger Забрать баллы
+            -else
+              %span.text-success Выдать баллы
 
       .time.pull-left
         =time_ago_in_words(improve_comment.created_at)

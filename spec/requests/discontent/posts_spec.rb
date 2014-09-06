@@ -31,6 +31,7 @@ describe 'Discontent ' do
         expect(page).to have_content @discontent1.content
         expect(page).to have_content @discontent2.content
         expect(page).to have_selector '#add_record'
+        expect(page).not_to have_link("plus_post_#{@discontent1.id}", :text => 'Выдать баллы', :href => plus_discontent_post_path(project,@discontent1))
       end
 
       it ' add new discontent send', js: true do
@@ -61,6 +62,7 @@ describe 'Discontent ' do
         expect(page).to have_content @discontent1.whered
         expect(page).to have_selector "span", 'aspect 1'
         expect(page).to have_selector 'textarea#comment_text_area'
+        expect(page).not_to have_link("plus_post_#{@discontent1.id}", :text => 'Выдать баллы', :href => plus_discontent_post_path(project,@discontent1))
       end
 
       it ' can add  comments ', js: true  do
@@ -121,6 +123,7 @@ describe 'Discontent ' do
         expect(page).to have_content @discontent1.content
         expect(page).to have_content @discontent2.content
         expect(page).to have_selector '#add_record'
+        expect(page).to have_link("plus_post_#{@discontent1.id}", :text => 'Выдать баллы', :href => plus_discontent_post_path(project,@discontent1))
       end
 
       it ' add new discontent send', js: true do
@@ -162,6 +165,25 @@ describe 'Discontent ' do
         find("#child_comments_form_#{@comment1.id}").find('#send_post').click
         expect(page).to have_content 'new child comment'
       end
+
+      it ' like post', js: true do
+        prepare_awards
+        expect(page).to have_link("plus_post_#{@discontent1.id}", :text => 'Выдать баллы', :href => plus_discontent_post_path(project,@discontent1))
+        click_link "plus_post_#{@discontent1.id}"
+        expect(page).to have_link("plus_post_#{@discontent1.id}", :text => 'Забрать баллы', :href => plus_discontent_post_path(project,@discontent1))
+        click_link "plus_post_#{@discontent1.id}"
+        expect(page).to have_content 'Выдать баллы'
+      end
+
+      it ' like comment', js: true do
+        prepare_awards
+        expect(page).to have_link("plus_comment_#{@comment1.id}", :text => 'Выдать баллы', :href => plus_comment_discontent_post_path(project,@comment1))
+        click_link "plus_comment_#{@comment1.id}"
+        expect(page).to have_link("plus_comment_#{@comment1.id}", :text => 'Забрать баллы', :href => plus_comment_discontent_post_path(project,@comment1))
+        click_link "plus_comment_#{@comment1.id}"
+        expect(page).to have_content 'Выдать баллы'
+      end
+
     end
 
     context 'note for discontent '   do
