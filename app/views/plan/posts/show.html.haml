@@ -1,4 +1,4 @@
-%section.widget
+%section
   .body
     #wizard.form-wizard
       %ul.wizard-navigation.nav-justified
@@ -62,7 +62,7 @@
               #table_stages
                 - unless @post.post_stages.nil?
                   -@post.post_stages.each_with_index do |stage, ind|
-                    %section.widget
+                    %section
                       .body
                         %div(class="td_stage_#{stage.id}")
                           %h3

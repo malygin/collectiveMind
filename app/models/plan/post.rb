@@ -1,6 +1,6 @@
 class Plan::Post < ActiveRecord::Base
    include BasePost
-  attr_accessible :first_step, :goal, :other_steps, :plan_first, :plan_other,:plan_control, :step,:name,:estimate_status  #for form master
+  attr_accessible :goal, :step,:name,:estimate_status,:status,:content
 
    has_many :post_aspects_first, :foreign_key => 'plan_post_id', :class_name => 'Plan::PostAspect',
             :conditions => {:first_stage => 1}
@@ -8,8 +8,6 @@ class Plan::Post < ActiveRecord::Base
             :conditions =>  {:first_stage => 0}
 
    has_many :post_aspects, :foreign_key => 'plan_post_id', :class_name => 'Plan::PostAspect'
-
-   #has_many :post_first_conds, :class_name => 'Plan::PostFirstCond', :foreign_key => :plan_post_id
 
    has_many :estimates, :class_name => 'Estimate::Post'
    has_many :voted_users, :through => :final_votings, :source => :user
@@ -23,7 +21,7 @@ class Plan::Post < ActiveRecord::Base
    end
 
    def get_pa_by_discontent(d, column, first=0)
-     self.post_aspects.where(discontent_aspect_id: d, first_stage: first).first.send(column)  unless self.post_aspects.empty?
+     self.post_aspects.where(discontent_aspect_id: d, first_stage: first).first.send(column) unless self.post_aspects.empty?
    end
 
    def first_stage
