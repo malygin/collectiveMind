@@ -117,7 +117,7 @@
 
   %br
   %hr
-  %button#send_post.btn.btn-lg.btn-primary(type="submit" onclick='disontent_form_submit();'){:class => ('disabled' unless @post.content?)} Сохранить
+  %button.btn.btn-lg.btn-primary#send_post(type="submit" onclick="$(this).button('loading');discontent_form_submit();"){:class => ('disabled' unless @post.content?), "data-loading-text" => "Сохранение..."} Сохранить
   %br
   %br
   =link_to 'Назад', discontent_posts_path(@project)

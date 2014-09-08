@@ -718,7 +718,7 @@
 
 
   %actions.pull-right
-    = f.submit 'Сохранить',  class: 'btn btn-warning btn-lg', id: 'send_post_concept'
+    = f.submit 'Сохранить',  class: 'btn btn-warning btn-lg', id: 'send_post_concept',"data-loading-text" => "Сохранение...", onclick: "$(this).button('loading');"
   %br
   %br
 

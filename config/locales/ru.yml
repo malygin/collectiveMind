@@ -2,6 +2,7 @@ ru:
   activerecord:
     attributes:
       discontent/post:
+        content: 'Поле "Что вас не устраивает"'
         whend:  'Поле "Когда это происходит"'
         whered:  'Поле "Где это происходит"'
         discontent_post_aspects:  'Поле "Аспекты"'
