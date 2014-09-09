@@ -15,7 +15,7 @@ namespace :db  do
 		Discontent::Aspect.create!(content: 'Создание профессионалов', project:  project)
   		user1 = User.create!(:name => "Сергей",
 			:surname => "Кириллов",
-			:email =>"admin@mass-descion.ru",
+			:email =>"admin@mass-decision.ru",
 			:login => "admin",
 			:password => "adminpassword",
 			:password_confirmation => "adminpassword",
