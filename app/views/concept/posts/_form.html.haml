@@ -203,7 +203,7 @@
                   = text_area_tag "res_positive_s[1][]", '', class: 'form-control', placeholder: 'Пояснение к ресурсу'
                   %br
 
-      %a.btn.btn-warning{onclick:"return add_new_resource_to_concept('positive_r','positive_s',#{@project.id});", id:"add_positive_r"} Добавить ресурс
+      %a.btn.btn-warning.pull-left{onclick:"return add_new_resource_to_concept('positive_r','positive_s',#{@project.id});", id:"add_positive_r"} Добавить ресурс
 
       -#.col-md-12
       -#  .form-group.has-success{:id => "resources_positive_r"}
@@ -388,7 +388,7 @@
                   = text_area_tag "res_negative_s[1][]", '', class: 'form-control', placeholder: 'Пояснение к ресурсу'
                   %br
 
-      %a.btn.btn-warning{onclick:"return add_new_resource_to_concept('negative_r','negative_s',#{@project.id});", id:"add_negative_r"} Добавить ресурс
+      %a.btn.btn-warning.pull-left{onclick:"return add_new_resource_to_concept('negative_r','negative_s',#{@project.id});", id:"add_negative_r"} Добавить ресурс
 
     -#.col-md-12
     -#  .form-group.has-success{:id => "resources_negative_r"}
@@ -579,7 +579,7 @@
                   = text_area_tag "res_control_s[1][]", '', class: 'form-control', placeholder: 'Пояснение к ресурсу'
                   %br
 
-      %a.btn.btn-warning{onclick:"return add_new_resource_to_concept('control_r','control_s',#{@project.id});", id:"add_control_r"} Добавить ресурс
+      %a.btn.btn-warning.pull-left{onclick:"return add_new_resource_to_concept('control_r','control_s',#{@project.id});", id:"add_control_r"} Добавить ресурс
 
     -#.col-md-12
     -#  .form-group.has-success{:id => "resources_control_r"}

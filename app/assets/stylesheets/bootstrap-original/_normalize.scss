@@ -253,6 +253,10 @@ textarea {
   font: inherit; // 2
   margin: 0; // 3
 }
+
+.main_resources button {
+  margin: 1.6px !important; // 3
+}
 //@todo текст в выпадающих списках не должен быть белым
 select {
   font: inherit; // 2
