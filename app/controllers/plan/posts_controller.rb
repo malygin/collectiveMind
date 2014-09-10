@@ -158,9 +158,10 @@ class Plan::PostsController < PostsController
     @post_action.plan_post_aspect = @post_aspect
     @post_action.status = 0
     @post_action.save!
+
     unless params[:resor_action].nil?
       params[:resor_action].each_with_index do |r,i|
-        @post_action.plan_post_action_resources.build(:name => r, :desc => params[:res_action][i], :project_id => @project.id).save  if r!=''
+        @post_action.plan_post_resources.by_type('action_r').build(:name => r, :desc => params[:res_action][i], :project_id => @project.id, :style => 3).save  if r!=''
       end
     end
   end
@@ -175,7 +176,7 @@ class Plan::PostsController < PostsController
     @post_action.plan_post_action_resources.destroy_all
     unless params[:resor_action].nil?
       params[:resor_action].each_with_index do |r,i|
-        @post_action.plan_post_action_resources.build(:name => r, :desc => params[:res_action][i], :project_id => @project.id).save  if r!=''
+        @post_action.plan_post_resources.by_type('action_r').build(:name => r, :desc => params[:res_action][i], :project_id => @project.id, :style => 3).save  if r!=''
       end
     end
     respond_to do |format|
@@ -253,10 +254,10 @@ class Plan::PostsController < PostsController
           @cond.concept_post_aspect = @concept
           @cond.save!
           @concept.concept_post.concept_post_resources.by_type('positive_r').each do |rs|
-            @cond.plan_post_resources.build(:name => rs.name, :desc => rs.desc, :type_res => 'positive_r', :project_id => @project.id).save  if rs!=''
+            @cond.plan_post_resources.build(:name => rs.name, :desc => rs.desc, :type_res => 'positive_r', :project_id => @project.id, :style => 0).save  if rs!=''
           end
           @concept.concept_post.concept_post_resources.by_type('negative_r').each do |rs|
-            @cond.plan_post_resources.build(:name => rs.name, :desc => rs.desc, :type_res => 'negative_r', :project_id => @project.id).save  if rs!=''
+            @cond.plan_post_resources.build(:name => rs.name, :desc => rs.desc, :type_res => 'negative_r', :project_id => @project.id, :style => 0).save  if rs!=''
           end
         end
       else
@@ -287,57 +288,9 @@ class Plan::PostsController < PostsController
     @post_concept = Plan::PostAspect.find(params[:concept_id])
     @post_concept.update_attributes(params[:plan_post_aspect])
 
-    @post_concept.plan_post_resources.by_type('positive_r').destroy_all
-    @post_concept.plan_post_resources.by_type('positive_s').destroy_all
-    unless params[:resor_positive_r].nil?
-      params[:resor_positive_r].each_with_index do |r,i|
-        if r[1][0]!=''
-          resource = @post_concept.plan_post_resources.build(:name => r[1][0], :desc => params[:res_positive_r] ? params[:res_positive_r]["#{r[0]}"][0] : '', :type_res => 'positive_r', :project_id => @project.id, :style => 0)
-          if params[:resor_positive_s] and params[:resor_positive_s]["#{r[0]}"]
-            params[:resor_positive_s]["#{r[0]}"].each_with_index do |m,ii|
-              if m!=''
-                mean = @post_concept.plan_post_resources.build(:name => m, :desc => params[:res_positive_s] ? params[:res_positive_s]["#{r[0]}"][ii] : '',:type_res => 'positive_s', :project_id => @project.id, :style => 1)
-                mean.plan_post_resource = resource
-              end
-            end
-          end
-        end
-      end
-    end
-    @post_concept.plan_post_resources.by_type('negative_r').destroy_all
-    @post_concept.plan_post_resources.by_type('negative_s').destroy_all
-    unless params[:resor_negative_r].nil?
-      params[:resor_negative_r].each_with_index do |r,i|
-        if r[1][0]!=''
-          resource = @post_concept.plan_post_resources.build(:name => r[1][0], :desc => params[:res_negative_r] ? params[:res_negative_r]["#{r[0]}"][0] : '', :type_res => 'negative_r', :project_id => @project.id, :style => 0)
-          if params[:resor_negative_s] and params[:resor_negative_s]["#{r[0]}"]
-            params[:resor_negative_s]["#{r[0]}"].each_with_index do |m,ii|
-              if m!=''
-                mean = @post_concept.plan_post_resources.build(:name => m, :desc => params[:res_negative_s] ? params[:res_negative_s]["#{r[0]}"][ii] : '', :type_res => 'negative_s', :project_id => @project.id, :style => 1)
-                mean.plan_post_resource = resource
-              end
-            end
-          end
-        end
-      end
-    end
-    @post_concept.plan_post_resources.by_type('control_r').destroy_all
-    @post_concept.plan_post_resources.by_type('control_s').destroy_all
-    unless params[:resor_control_r].nil?
-      params[:resor_control_r].each_with_index do |r,i|
-        if r[1][0]!=''
-          resource = @post_concept.plan_post_resources.build(:name => r[1][0], :desc => params[:res_control_r] ? params[:res_control_r]["#{r[0]}"][0] : '', :type_res => 'control_r', :project_id => @project.id, :style => 0)
-          if params[:resor_control_s] and params[:resor_control_s]["#{r[0]}"]
-            params[:resor_control_s]["#{r[0]}"].each_with_index do |m,ii|
-              if m!=''
-                mean = @post_concept.plan_post_resources.build(:name => m, :desc => params[:res_control_s] ? params[:res_control_s]["#{r[0]}"][ii] : '',:type_res => 'control_s', :project_id => @project.id, :style => 1)
-                mean.plan_post_resource = resource
-              end
-            end
-          end
-        end
-      end
-    end
+    create_plan_resources_on_type(@project, @post_concept, 'positive_r', 'positive_s')
+    create_plan_resources_on_type(@project, @post_concept, 'negative_r', 'negative_s')
+    create_plan_resources_on_type(@project, @post_concept, 'control_r', 'control_s')
 
     respond_to do |format|
       if @post_concept.save
@@ -373,57 +326,10 @@ class Plan::PostsController < PostsController
     @post_concept_save = Plan::PostAspect.find(params[:con_id])
     @post_concept_save.update_attributes(params[:plan_post_aspect])
 
-    @post_concept_save.plan_post_resources.by_type('positive_r').destroy_all
-    @post_concept_save.plan_post_resources.by_type('positive_s').destroy_all
-    unless params[:resor_positive_r].nil?
-      params[:resor_positive_r].each_with_index do |r,i|
-        if r[1][0]!=''
-          resource = @post_concept_save.plan_post_resources.build(:name => r[1][0], :desc => params[:res_positive_r] ? params[:res_positive_r]["#{r[0]}"][0] : '', :type_res => 'positive_r', :project_id => @project.id, :style => 0)
-          if params[:resor_positive_s] and params[:resor_positive_s]["#{r[0]}"]
-            params[:resor_positive_s]["#{r[0]}"].each_with_index do |m,ii|
-              if m!=''
-                mean = @post_concept_save.plan_post_resources.build(:name => m, :desc => params[:res_positive_s] ? params[:res_positive_s]["#{r[0]}"][ii] : '',:type_res => 'positive_s', :project_id => @project.id, :style => 1)
-                mean.plan_post_resource = resource
-              end
-            end
-          end
-        end
-      end
-    end
-    @post_concept_save.plan_post_resources.by_type('negative_r').destroy_all
-    @post_concept_save.plan_post_resources.by_type('negative_s').destroy_all
-    unless params[:resor_negative_r].nil?
-      params[:resor_negative_r].each_with_index do |r,i|
-        if r[1][0]!=''
-          resource = @post_concept_save.plan_post_resources.build(:name => r[1][0], :desc => params[:res_negative_r] ? params[:res_negative_r]["#{r[0]}"][0] : '', :type_res => 'negative_r', :project_id => @project.id, :style => 0)
-          if params[:resor_negative_s] and params[:resor_negative_s]["#{r[0]}"]
-            params[:resor_negative_s]["#{r[0]}"].each_with_index do |m,ii|
-              if m!=''
-                mean = @post_concept_save.plan_post_resources.build(:name => m, :desc => params[:res_negative_s] ? params[:res_negative_s]["#{r[0]}"][ii] : '',:type_res => 'negative_s', :project_id => @project.id, :style => 1)
-                mean.plan_post_resource = resource
-              end
-            end
-          end
-        end
-      end
-    end
-    @post_concept_save.plan_post_resources.by_type('control_r').destroy_all
-    @post_concept_save.plan_post_resources.by_type('control_s').destroy_all
-    unless params[:resor_control_r].nil?
-      params[:resor_control_r].each_with_index do |r,i|
-        if r[1][0]!=''
-          resource = @post_concept_save.plan_post_resources.build(:name => r[1][0], :desc => params[:res_control_r] ? params[:res_control_r]["#{r[0]}"][0] : '', :type_res => 'control_r', :project_id => @project.id, :style => 0)
-          if params[:resor_control_s] and params[:resor_control_s]["#{r[0]}"]
-            params[:resor_control_s]["#{r[0]}"].each_with_index do |m,ii|
-              if m!=''
-                mean = @post_concept_save.plan_post_resources.build(:name => m, :desc => params[:res_control_s] ? params[:res_control_s]["#{r[0]}"][ii] : '',:type_res => 'control_s', :project_id => @project.id, :style => 1)
-                mean.plan_post_resource = resource
-              end
-            end
-          end
-        end
-      end
-    end
+    create_plan_resources_on_type(@project, @post_concept_save, 'positive_r', 'positive_s')
+    create_plan_resources_on_type(@project, @post_concept_save, 'negative_r', 'negative_s')
+    create_plan_resources_on_type(@project, @post_concept_save, 'control_r', 'control_s')
+
     respond_to do |format|
       if @post_concept_save.save
         format.js
@@ -509,4 +415,25 @@ class Plan::PostsController < PostsController
     @post_note = Plan::Note.find(params[:note_id])
     @post_note.destroy if boss?
   end
+
+  private
+    def create_plan_resources_on_type(project, post, type_r, type_s)
+      post.plan_post_resources.by_type(type_r).destroy_all
+      post.plan_post_resources.by_type(type_s).destroy_all
+      unless params[('resor_'+type_r).to_sym].nil?
+        params[('resor_'+type_r).to_sym].each_with_index do |r,i|
+          if r[1][0]!=''
+            resource = post.plan_post_resources.build(:name => r[1][0], :desc => params[('resor_'+type_r).to_sym] ? params[('resor_'+type_r).to_sym]["#{r[0]}"][0] : '', :type_res => type_r, :project_id => project.id, :style => 0)
+            if params[('resor_'+type_s).to_sym] and params[('resor_'+type_s).to_sym]["#{r[0]}"]
+              params[('resor_'+type_s).to_sym]["#{r[0]}"].each_with_index do |m,ii|
+                if m!=''
+                  mean = post.plan_post_resources.build(:name => m, :desc => params[('resor_'+type_s).to_sym] ? params[('resor_'+type_s).to_sym]["#{r[0]}"][ii] : '',:type_res => type_s, :project_id => project.id, :style => 1)
+                  mean.plan_post_resource = resource
+                end
+              end
+            end
+          end
+        end
+      end
+    end
 end
