@@ -253,12 +253,26 @@ class Plan::PostsController < PostsController
           @cond.discontent_aspect_id = @concept.discontent_aspect_id
           @cond.concept_post_aspect = @concept
           @cond.save!
+
           @concept.concept_post.concept_post_resources.by_type('positive_r').each do |rs|
             @cond.plan_post_resources.build(:name => rs.name, :desc => rs.desc, :type_res => 'positive_r', :project_id => @project.id, :style => 0).save  if rs!=''
           end
           @concept.concept_post.concept_post_resources.by_type('negative_r').each do |rs|
             @cond.plan_post_resources.build(:name => rs.name, :desc => rs.desc, :type_res => 'negative_r', :project_id => @project.id, :style => 0).save  if rs!=''
           end
+          @concept.concept_post.concept_post_resources.by_type('control_r').each do |rs|
+            @cond.plan_post_resources.build(:name => rs.name, :desc => rs.desc, :type_res => 'control_r', :project_id => @project.id, :style => 0).save  if rs!=''
+          end
+          @concept.concept_post.concept_post_resources.by_type('positive_s').each do |rs|
+            @cond.plan_post_resources.build(:name => rs.name, :desc => rs.desc, :type_res => 'positive_s', :project_id => @project.id, :style => 1).save  if rs!=''
+          end
+          @concept.concept_post.concept_post_resources.by_type('negative_s').each do |rs|
+            @cond.plan_post_resources.build(:name => rs.name, :desc => rs.desc, :type_res => 'negative_s', :project_id => @project.id, :style => 1).save  if rs!=''
+          end
+          @concept.concept_post.concept_post_resources.by_type('control_s').each do |rs|
+            @cond.plan_post_resources.build(:name => rs.name, :desc => rs.desc, :type_res => 'control_s', :project_id => @project.id, :style => 1).save  if rs!=''
+          end
+
         end
       else
           @cond = Plan::PostAspect.create(:title => 'Новое нововведение')
@@ -371,7 +385,7 @@ class Plan::PostsController < PostsController
     @project = Core::Project.find(params[:project])
     @est_stat = params[:est_stat]
     posts = Plan::Post.where(:project_id => @project, :status => 0)
-    if posts.present? and @est_stat.present?
+    if posts and @est_stat
       posts.each do |est|
         est.update_attributes(:estimate_status => @est_stat)
       end

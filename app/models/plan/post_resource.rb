@@ -8,4 +8,5 @@ class Plan::PostResource < ActiveRecord::Base
   scope :by_project, ->(p){ where(project_id: p) }
   has_many :plan_post_resources, :class_name => 'Plan::PostResource', :foreign_key => :plan_post_resource_id
   belongs_to :plan_post_resource, :class_name => 'Plan::PostResource', :foreign_key => :plan_post_resource_id
+  belongs_to :plan_post_action, :class_name => 'Plan::PostAction', :foreign_key => :post_id
 end

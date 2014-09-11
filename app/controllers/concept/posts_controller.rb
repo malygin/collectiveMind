@@ -59,7 +59,7 @@ class Concept::PostsController < PostsController
   end
 
   def index
-    return redirect_to action: "vote_list" if current_user.can_vote_for(:concept, @project) #view_context.get_concept_posts_for_vote?(@project)
+    return redirect_to action: "vote_list" if current_user.can_vote_for(:concept, @project)
     @aspect =  params[:asp] ? Discontent::Aspect.find(params[:asp]) : @project.proc_aspects.order(:id).first
     @comments_all = @project.ideas_comments_for_improve
   end
@@ -81,53 +81,11 @@ class Concept::PostsController < PostsController
     @concept_post.improve_comment = params[:improve_comment] if params[:improve_comment]
     @concept_post.improve_stage = params[:improve_stage] if params[:improve_stage]
 
-    unless params[:resor_positive_r].nil?
-      params[:resor_positive_r].each_with_index do |r,i|
-        if r[1][0]!=''
-          resource = @concept_post.concept_post_resources.build(:name => r[1][0], :desc => params[:res_positive_r] ? params[:res_positive_r]["#{r[0]}"][0] : '', :type_res => 'positive_r', :project_id => @project.id, :style => 0)
-          if params[:resor_positive_s] and params[:resor_positive_s]["#{r[0]}"]
-            params[:resor_positive_s]["#{r[0]}"].each_with_index do |m,ii|
-              if m!=''
-                mean = @concept_post.concept_post_resources.build(:name => m, :desc => params[:res_positive_s] ? params[:res_positive_s]["#{r[0]}"][ii] : '',:type_res => 'positive_s', :project_id => @project.id, :style => 1)
-                mean.concept_post_resource = resource
-              end
-            end
-          end
-        end
-      end
-    end
-    unless params[:resor_negative_r].nil?
-      params[:resor_negative_r].each_with_index do |r,i|
-        if r[1][0]!=''
-          resource = @concept_post.concept_post_resources.build(:name => r[1][0], :desc => params[:res_negative_r] ? params[:res_negative_r]["#{r[0]}"][0] : '', :type_res => 'negative_r', :project_id => @project.id, :style => 0)
-          if params[:resor_negative_s] and params[:resor_negative_s]["#{r[0]}"]
-            params[:resor_negative_s]["#{r[0]}"].each_with_index do |m,ii|
-              if m!=''
-                mean = @concept_post.concept_post_resources.build(:name => m, :desc => params[:res_negative_s] ? params[:res_negative_s]["#{r[0]}"][ii] : '',:type_res => 'negative_s', :project_id => @project.id, :style => 1)
-                mean.concept_post_resource = resource
-              end
-            end
-          end
-        end
-      end
-    end
-    unless params[:resor_control_r].nil?
-      params[:resor_control_r].each_with_index do |r,i|
-        if r[1][0]!=''
-          resource = @concept_post.concept_post_resources.build(:name => r[1][0], :desc => params[:res_control_r] ? params[:res_control_r]["#{r[0]}"][0] : '', :type_res => 'control_r', :project_id => @project.id, :style => 0)
-          if params[:resor_control_s] and params[:resor_control_s]["#{r[0]}"]
-            params[:resor_control_s]["#{r[0]}"].each_with_index do |m,ii|
-              if m!=''
-                mean = @concept_post.concept_post_resources.build(:name => m, :desc => params[:res_control_s] ? params[:res_control_s]["#{r[0]}"][ii] : '',:type_res => 'control_s', :project_id => @project.id, :style => 1)
-                mean.concept_post_resource = resource
-              end
-            end
-          end
-        end
-      end
-    end
+    create_concept_resources_on_type(@project, @concept_post, 'positive_r', 'positive_s',false)
+    create_concept_resources_on_type(@project, @concept_post, 'negative_r', 'negative_s',false)
+    create_concept_resources_on_type(@project, @concept_post, 'control_r', 'control_s',false)
 
-   respond_to do |format|
+    respond_to do |format|
       if @concept_post.save
         current_user.journals.build(:type_event=>'concept_post_save', :body=>trim_content(@concept_post.post_aspects.first.title), :first_id => @concept_post.id,  :project => @project).save!
         @aspect_id =  params[:asp_id]
@@ -156,57 +114,9 @@ class Concept::PostsController < PostsController
     end
     @concept_post.post_aspects << @post_aspect
 
-    @concept_post.concept_post_resources.by_type('positive_r').destroy_all
-    @concept_post.concept_post_resources.by_type('positive_s').destroy_all
-    unless params[:resor_positive_r].nil?
-      params[:resor_positive_r].each_with_index do |r,i|
-        if r[1][0]!=''
-          resource = @concept_post.concept_post_resources.build(:name => r[1][0], :desc => params[:res_positive_r] ? params[:res_positive_r]["#{r[0]}"][0] : '', :type_res => 'positive_r', :project_id => @project.id, :style => 0)
-          if params[:resor_positive_s] and params[:resor_positive_s]["#{r[0]}"]
-            params[:resor_positive_s]["#{r[0]}"].each_with_index do |m,ii|
-              if m!=''
-                mean = @concept_post.concept_post_resources.build(:name => m, :desc => params[:res_positive_s] ? params[:res_positive_s]["#{r[0]}"][ii] : '',:type_res => 'positive_s', :project_id => @project.id, :style => 1)
-                mean.concept_post_resource = resource
-              end
-            end
-          end
-        end
-      end
-    end
-    @concept_post.concept_post_resources.by_type('negative_r').destroy_all
-    @concept_post.concept_post_resources.by_type('negative_s').destroy_all
-    unless params[:resor_negative_r].nil?
-      params[:resor_negative_r].each_with_index do |r,i|
-        if r[1][0]!=''
-          resource = @concept_post.concept_post_resources.build(:name => r[1][0], :desc => params[:res_negative_r] ? params[:res_negative_r]["#{r[0]}"][0] : '', :type_res => 'negative_r', :project_id => @project.id, :style => 0)
-          if params[:resor_negative_s] and params[:resor_negative_s]["#{r[0]}"]
-            params[:resor_negative_s]["#{r[0]}"].each_with_index do |m,ii|
-              if m!=''
-                mean = @concept_post.concept_post_resources.build(:name => m, :desc => params[:res_negative_s] ? params[:res_negative_s]["#{r[0]}"][ii] : '',:type_res => 'negative_s', :project_id => @project.id, :style => 1)
-                mean.concept_post_resource = resource
-              end
-            end
-          end
-        end
-      end
-    end
-    @concept_post.concept_post_resources.by_type('control_r').destroy_all
-    @concept_post.concept_post_resources.by_type('control_s').destroy_all
-    unless params[:resor_control_r].nil?
-      params[:resor_control_r].each_with_index do |r,i|
-        if r[1][0]!=''
-          resource = @concept_post.concept_post_resources.build(:name => r[1][0], :desc => params[:res_control_r] ? params[:res_control_r]["#{r[0]}"][0] : '', :type_res => 'control_r', :project_id => @project.id, :style => 0)
-          if params[:resor_control_s] and params[:resor_control_s]["#{r[0]}"]
-            params[:resor_control_s]["#{r[0]}"].each_with_index do |m,ii|
-              if m!=''
-                mean = @concept_post.concept_post_resources.build(:name => m, :desc => params[:res_control_s] ? params[:res_control_s]["#{r[0]}"][ii] : '',:type_res => 'control_s', :project_id => @project.id, :style => 1)
-                mean.concept_post_resource = resource
-              end
-            end
-          end
-        end
-      end
-    end
+    create_concept_resources_on_type(@project, @concept_post, 'positive_r', 'positive_s',true)
+    create_concept_resources_on_type(@project, @concept_post, 'negative_r', 'negative_s',true)
+    create_concept_resources_on_type(@project, @concept_post, 'control_r', 'control_s',true)
 
     respond_to do |format|
       if @concept_post.save
@@ -234,6 +144,9 @@ class Concept::PostsController < PostsController
       @concept1 = var_for_vote[1]
       @concept2 = var_for_vote[2]
       @votes = var_for_vote[3]
+    else
+      @post_all = 1
+      @votes = 0
     end
   end
 
@@ -260,6 +173,9 @@ class Concept::PostsController < PostsController
       @concept1 = var_for_vote[1]
       @concept2 = var_for_vote[2]
       @votes = var_for_vote[3]
+    else
+      @post_all = 1
+      @votes = 0
     end
   end
 
@@ -299,5 +215,27 @@ class Concept::PostsController < PostsController
     def check_before_update(pa1,pa2)
       pa1 and pa2[:title] and pa2[:name] and pa2[:content] ? true : false
     end
+
+    def create_concept_resources_on_type(project, post, type_r, type_s, flag_destroy)
+      if flag_destroy
+        post.concept_post_resources.by_type(type_r).destroy_all
+        post.concept_post_resources.by_type(type_s).destroy_all
+      end
+      unless params[('resor_'+type_r).to_sym].nil?
+        params[('resor_'+type_r).to_sym].each_with_index do |r,i|
+          if r[1][0]!=''
+            resource = post.concept_post_resources.build(:name => r[1][0], :desc => params[('resor_'+type_r).to_sym] ? params[('resor_'+type_r).to_sym]["#{r[0]}"][0] : '', :type_res => type_r, :project_id => project.id, :style => 0)
+            if params[('resor_'+type_s).to_sym] and params[('resor_'+type_s).to_sym]["#{r[0]}"]
+              params[('resor_'+type_s).to_sym]["#{r[0]}"].each_with_index do |m,ii|
+                if m!=''
+                  mean = post.concept_post_resources.build(:name => m, :desc => params[('resor_'+type_s).to_sym] ? params[('resor_'+type_s).to_sym]["#{r[0]}"][ii] : '',:type_res => type_s, :project_id => project.id, :style => 1)
+                  mean.concept_post_resource = resource
+                end
+              end
+            end
+          end
+        end
+      end
+  end
 
 end

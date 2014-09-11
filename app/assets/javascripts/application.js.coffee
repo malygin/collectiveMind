@@ -129,6 +129,11 @@ $ ->
       option: (item, escape) ->
         return '<div>'+item.show_content+'</div>'
 
+# @todo обновление таблицы и списка
+$('#PlanTabs li#second a').on "click", (e) ->
+  render_table()
+$('#PlanTabs li#third a').on "click", (e) ->
+  render_concept_side()
 ###################################
 # @todo work with comment buttons
 @activate_button = (el)->

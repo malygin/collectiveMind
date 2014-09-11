@@ -1,1 +1,6 @@
-$('.stat_estimate').toggleClass('btn-success btn-default')
+-if @est_stat == "1"
+  $('#simple_estimate').removeClass('btn-default').addClass('btn-success');
+  $('#standart_estimate').removeClass('btn-success').addClass('btn-default');
+-else
+  $('#standart_estimate').removeClass('btn-default').addClass('btn-success');
+  $('#simple_estimate').removeClass('btn-success').addClass('btn-default');
