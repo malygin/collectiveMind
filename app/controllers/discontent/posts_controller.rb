@@ -204,6 +204,10 @@ class Discontent::PostsController < PostsController
       @post.update_attributes(:status => 4) if boss?
     end
 
+    def set_grouped
+      @post = Discontent::Post.find(params[:id])
+      @post.update_attributes(:status => 2) if boss?
+    end
 
     def new_group
       @project = Core::Project.find(params[:project])

@@ -145,9 +145,18 @@ class Concept::PostsController < PostsController
     @concept_post = Concept::Post.find(params[:id])
     @concept_post.update_status_fields(params[:pa])
     @post_aspect = Concept::PostAspect.new(params[:pa])
-    unless check_before_update(params[:cd],params[:pa])
+    if check_before_update(params[:cd],params[:pa])
       @concept_post.post_aspects.destroy_all
       @concept_post.concept_post_discontents.destroy_all
+
+      @concept_post.concept_post_resources.by_type('positive_r').destroy_all
+      @concept_post.concept_post_resources.by_type('positive_s').destroy_all
+
+      @concept_post.concept_post_resources.by_type('negative_r').destroy_all
+      @concept_post.concept_post_resources.by_type('negative_s').destroy_all
+
+      @concept_post.concept_post_resources.by_type('control_r').destroy_all
+      @concept_post.concept_post_resources.by_type('control_s').destroy_all
     end
     unless params[:cd].nil?
       params[:cd].each do |cd|
@@ -156,8 +165,6 @@ class Concept::PostsController < PostsController
     end
     @concept_post.post_aspects << @post_aspect
 
-    @concept_post.concept_post_resources.by_type('positive_r').destroy_all
-    @concept_post.concept_post_resources.by_type('positive_s').destroy_all
     unless params[:resor_positive_r].nil?
       params[:resor_positive_r].each_with_index do |r,i|
         if r[1][0]!=''
@@ -173,8 +180,6 @@ class Concept::PostsController < PostsController
         end
       end
     end
-    @concept_post.concept_post_resources.by_type('negative_r').destroy_all
-    @concept_post.concept_post_resources.by_type('negative_s').destroy_all
     unless params[:resor_negative_r].nil?
       params[:resor_negative_r].each_with_index do |r,i|
         if r[1][0]!=''
@@ -190,8 +195,6 @@ class Concept::PostsController < PostsController
         end
       end
     end
-    @concept_post.concept_post_resources.by_type('control_r').destroy_all
-    @concept_post.concept_post_resources.by_type('control_s').destroy_all
     unless params[:resor_control_r].nil?
       params[:resor_control_r].each_with_index do |r,i|
         if r[1][0]!=''

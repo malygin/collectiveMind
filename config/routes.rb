@@ -17,7 +17,6 @@ CollectiveMind::Application.routes.draw do
         put :plus
         get :edit_comment
         put :plus_comment
-        put :set_required
         put :add_child_comment_form
         put :comment_status
       end
@@ -115,6 +114,8 @@ scope '/project/:project' do
         put :destroy_group
         put :union_group
         put :discuss_status
+        put :set_required
+        put :set_grouped
       end
     end
   end
