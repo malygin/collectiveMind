@@ -13,7 +13,7 @@ class Concept::PostsController < PostsController
     Concept::Comment
   end
 
-  def voting_model  
+  def voting_model
     Concept::PostAspect
   end
 

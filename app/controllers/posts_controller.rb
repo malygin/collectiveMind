@@ -161,7 +161,7 @@ class PostsController < ApplicationController
       if @post.discuss_status
         current_user.journals.build(:type_event=>name_of_model_for_param+'_discuss_stat', :project => @project,
                                   :body=>"#{trim_content(@post.content)}", :first_id=> @post.id).save!
-        if @post.user!=current_user
+        if 1==1 #@post.user!=current_user
           current_user.journals.build(:type_event=>'my_'+name_of_model_for_param+'_discuss_stat', :user_informed => @post.user, :project => @project,
                                       :body=>"#{trim_content(@post.content)}", :first_id=> @post.id, :personal=> true, :viewed=> false).save!
         end
