@@ -1,5 +1,5 @@
 %h3.text-center Форма добавления несовершенства
-= form_for  @post, :url => {:project => @project.id,:improve_comment => params[:improve_comment],:improve_stage => params[:improve_stage], :action => @post.persisted? ? 'update' : 'create'},  :remote => true, :html => { :id => 'new_discontent' }do |f|
+= form_for  @post, :url => {:project => @project.id,:improve_comment => params[:improve_comment],:improve_stage => params[:improve_stage],:required => params[:required], :action => @post.persisted? ? 'update' : 'create'},  :remote => true, :html => { :id => 'new_discontent' }do |f|
   #notice_messages
   -#-if @post.errors.any?
   -#  #error_explanation

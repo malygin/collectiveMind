@@ -91,13 +91,13 @@ class Discontent::PostsController < PostsController
      @post.user = current_user
      @post.improve_comment = params[:improve_comment] if params[:improve_comment]
      @post.improve_stage = params[:improve_stage] if params[:improve_stage]
+     @post.status = 4 if params[:required]
      if params[:discontent_post_aspects]
        @aspect_id =  params[:discontent_post_aspects].first
        params[:discontent_post_aspects].each do |asp|
          @post.discontent_post_aspects.build(aspect_id: asp.to_i)
        end
      end
-
     respond_to do |format|
       if @post.save
         current_user.journals.build(:type_event=>'discontent_post_save', :body=>trim_content(@post.content), :first_id => @post.id, :project => @project).save!

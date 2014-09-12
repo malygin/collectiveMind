@@ -49,6 +49,9 @@
         - if signed_in? and (@project.status ==3 or @project.demo?)
           .pull-right
             = link_to '+ Добавить', new_discontent_post_path(@project, asp: params[:asp]) , id: 'add_record',  class: 'btn btn-danger'
+        - if boss? and @project.status == 7
+          .pull-right
+            = link_to '+ Добавить обязательное несовершенство', new_discontent_post_path(@project, asp: params[:asp], :required => true) , id: 'add_record',  class: 'btn btn-danger'
         %h4 Несовершенства
 
         %ul.news-list
