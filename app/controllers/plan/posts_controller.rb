@@ -219,24 +219,7 @@ class Plan::PostsController < PostsController
           @cond.reality = @concept.reality
           @cond.problems = @concept.problems
           @cond.save!
-          @concept.plan_post_resources.by_type('positive_r').each do |rs|
-            @cond.plan_post_resources.build(:name => rs.name, :desc => rs.desc, :type_res => 'positive_r', :project_id => @project.id, :style => 0).save  if rs!=''
-          end
-          @concept.plan_post_resources.by_type('negative_r').each do |rs|
-            @cond.plan_post_resources.build(:name => rs.name, :desc => rs.desc, :type_res => 'negative_r', :project_id => @project.id, :style => 0).save  if rs!=''
-          end
-          @concept.plan_post_resources.by_type('control_r').each do |rs|
-            @cond.plan_post_resources.build(:name => rs.name, :desc => rs.desc, :type_res => 'control_r', :project_id => @project.id, :style => 0).save  if rs!=''
-          end
-          @concept.plan_post_resources.by_type('positive_s').each do |rs|
-            @cond.plan_post_resources.build(:name => rs.name, :desc => rs.desc, :type_res => 'positive_s', :project_id => @project.id, :style => 1).save  if rs!=''
-          end
-          @concept.plan_post_resources.by_type('negative_s').each do |rs|
-            @cond.plan_post_resources.build(:name => rs.name, :desc => rs.desc, :type_res => 'negative_s', :project_id => @project.id, :style => 1).save  if rs!=''
-          end
-          @concept.plan_post_resources.by_type('control_s').each do |rs|
-            @cond.plan_post_resources.build(:name => rs.name, :desc => rs.desc, :type_res => 'control_s', :project_id => @project.id, :style => 1).save  if rs!=''
-          end
+          @cond.duplicate_plan_post_resources(@project,@concept)
         else
           @concept = Concept::PostAspect.find(params[:concept_id])
           @cond = Plan::PostAspect.new
@@ -253,26 +236,7 @@ class Plan::PostsController < PostsController
           @cond.discontent_aspect_id = @concept.discontent_aspect_id
           @cond.concept_post_aspect = @concept
           @cond.save!
-
-          @concept.concept_post.concept_post_resources.by_type('positive_r').each do |rs|
-            @cond.plan_post_resources.build(:name => rs.name, :desc => rs.desc, :type_res => 'positive_r', :project_id => @project.id, :style => 0).save  if rs!=''
-          end
-          @concept.concept_post.concept_post_resources.by_type('negative_r').each do |rs|
-            @cond.plan_post_resources.build(:name => rs.name, :desc => rs.desc, :type_res => 'negative_r', :project_id => @project.id, :style => 0).save  if rs!=''
-          end
-          @concept.concept_post.concept_post_resources.by_type('control_r').each do |rs|
-            @cond.plan_post_resources.build(:name => rs.name, :desc => rs.desc, :type_res => 'control_r', :project_id => @project.id, :style => 0).save  if rs!=''
-          end
-          @concept.concept_post.concept_post_resources.by_type('positive_s').each do |rs|
-            @cond.plan_post_resources.build(:name => rs.name, :desc => rs.desc, :type_res => 'positive_s', :project_id => @project.id, :style => 1).save  if rs!=''
-          end
-          @concept.concept_post.concept_post_resources.by_type('negative_s').each do |rs|
-            @cond.plan_post_resources.build(:name => rs.name, :desc => rs.desc, :type_res => 'negative_s', :project_id => @project.id, :style => 1).save  if rs!=''
-          end
-          @concept.concept_post.concept_post_resources.by_type('control_s').each do |rs|
-            @cond.plan_post_resources.build(:name => rs.name, :desc => rs.desc, :type_res => 'control_s', :project_id => @project.id, :style => 1).save  if rs!=''
-          end
-
+          @cond.duplicate_concept_post_resources(@project,@concept.concept_post)
         end
       else
           @cond = Plan::PostAspect.create(:title => 'Новое нововведение')

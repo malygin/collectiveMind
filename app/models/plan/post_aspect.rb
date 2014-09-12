@@ -57,4 +57,15 @@ class Plan::PostAspect  < ActiveRecord::Base
   def estimate_post_aspect(post)
     estimate_post_aspects.where(:post_id => post).first
   end
+
+  def duplicate_plan_post_resources(project,post)
+    post.plan_post_resources.each do |rs|
+      self.plan_post_resources.build(:name => rs.name, :desc => rs.desc, :type_res => rs.type_res, :project_id => project.id, :style => rs.style).save  if rs!=''
+    end
+  end
+  def duplicate_concept_post_resources(project,post)
+    post.concept_post_resources.each do |rs|
+      self.concept_post_resources.build(:name => rs.name, :desc => rs.desc, :type_res => rs.type_res, :project_id => project.id, :style => rs.style).save  if rs!=''
+    end
+  end
 end
