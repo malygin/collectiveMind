@@ -40,7 +40,7 @@ class PostsController < ApplicationController
   def journal_data
     if params[:viewed]
       post = current_model.where(:id => params[:id], :project_id => @project.id).first if params[:id]
-      post_id = current_model.instance_of?(LifeTape::Post) ? @aspect : post
+      post_id = current_model.to_s == "LifeTape::Post" ? (params[:asp] ? Discontent::Aspect.find(params[:asp]) : @project.aspects.order(:id).first) : post
       Journal.events_for_content(@project, current_user, post_id.id).update_all(:viewed => true) if post_id
     end
     super()
@@ -163,7 +163,7 @@ class PostsController < ApplicationController
       if @post.discuss_status
         current_user.journals.build(:type_event=>name_of_model_for_param+'_discuss_stat', :project => @project,
                                   :body=>"#{trim_content(@post.content)}", :first_id=> @post.id).save!
-        if 1==1 #@post.user!=current_user
+        if @post.user!=current_user
           current_user.journals.build(:type_event=>'my_'+name_of_model_for_param+'_discuss_stat', :user_informed => @post.user, :project => @project,
                                       :body=>"#{trim_content(@post.content)}", :first_id=> @post.id, :personal=> true, :viewed=> false).save!
         end
