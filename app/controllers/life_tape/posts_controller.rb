@@ -1,8 +1,6 @@
 # encoding: utf-8
 class LifeTape::PostsController < PostsController
 
-  after_filter :journal_viewed_life_tape, only: [:index]
-
   def current_model
     LifeTape::Post
   end

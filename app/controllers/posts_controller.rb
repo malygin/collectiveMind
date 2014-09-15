@@ -37,11 +37,13 @@ class PostsController < ApplicationController
     end
   end
 
-  def journal_viewed_life_tape
+  def journal_data
     if params[:viewed]
-      Journal.events_for_content(@project, current_user, @aspect.id).update_all("viewed = 'true'")
-      @my_journals_count = @my_journals_count - 1
+      post = current_model.where(:id => params[:id], :project_id => @project.id).first if params[:id]
+      post_id = current_model.instance_of?(LifeTape::Post) ? @aspect : post
+      Journal.events_for_content(@project, current_user, post_id.id).update_all(:viewed => true) if post_id
     end
+    super()
   end
 
   def current_model

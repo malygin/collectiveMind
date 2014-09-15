@@ -114,7 +114,7 @@
               - @user.concept_posts.by_project(@project.id).each do |cp|
                 .panel.panel-success
                   .panel-body.nov-list
-                    =cp.post_aspects.first.name
+                    =cp.post_aspects.first.title if cp.post_aspects.first
                     =link_to 'подробнее', concept_post_path(@project, cp)
                     = render 'shared/post_social_bar2', :post =>cp
 
