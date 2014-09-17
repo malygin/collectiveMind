@@ -4,7 +4,6 @@ ruby '1.9.3'
 gem 'rails', '3.2.18'
 
 group :development, :test do
-  gem 'sqlite3'
   #gem 'linecache19', :git => 'git://github.com/mark-moseley/linecache'
   gem 'ruby-debug-base19x', '~> 0.11.30.pre4'
   gem 'ruby-debug19'
@@ -19,12 +18,10 @@ group :production do
   gem 'newrelic_rpm', '>=3.7.3'
   gem 'heroku-deflater'
   gem 'unicorn'
-
 end
 
 group :test do
   gem 'rspec'
-
   gem 'spork'
   gem 'spork-rails'
   gem 'guard-spork'
@@ -33,24 +30,19 @@ group :test do
   gem 'guard-rspec'
   #gem 'rb-inotify'
   gem 'database_cleaner'
-  gem 'selenium-webdriver','~> 2.41.0'
+  gem 'selenium-webdriver', '~> 2.41.0'
   gem 'webdriver-user-agent'
-  gem "capybara-webkit"
+  gem 'capybara-webkit'
   gem 'capybara-screenshot'
   gem 'headless'
 end
 
-
-# Gems used only for assets and not required
-# in production environments by default.
-group :assets do
-  gem 'sass-rails',   '~> 3.2.3'
-  gem 'coffee-rails', '~> 3.2.1'
-  gem 'uglifier', '>= 2.1.1'
-  gem 'compass'
-  gem 'compass-rails'
-  gem 'therubyracer', '>=0.11.4'
-end
+gem 'sass-rails', '~> 3.2.3'
+gem 'coffee-rails', '~> 3.2.1'
+gem 'uglifier', '>= 2.1.1'
+gem 'compass'
+gem 'compass-rails'
+gem 'therubyracer', '>=0.11.4'
 
 gem 'pg'
 gem 'activerecord-postgresql-adapter'
@@ -58,7 +50,7 @@ gem 'activerecord-postgresql-adapter'
 gem 'russian'
 # gem 'bootstrap-sass-rails'
 gem 'bootstrap-x-editable-rails'
-gem "selectize-rails"
+gem 'selectize-rails'
 gem 'rails3-jquery-autocomplete', '1.0.14'
 gem 'html2haml', '1.0.0'
 gem 'devise'
@@ -69,7 +61,7 @@ gem 'jquery-ui-rails'
 gem 'paperclip'
 gem 'aws-sdk'
 gem 'autosize-rails'
-gem "highcharts-rails", "~> 3.0.0"
+gem 'highcharts-rails', '~> 3.0.0'
 gem 'json'
 gem 'will_paginate', '~> 3.0.0'
 gem 'faker'
@@ -83,10 +75,9 @@ gem 'kgio'
 # https://devcenter.heroku.com/articles/rack-cache-memcached-rails31
 gem 'rack-cache'
 
-
 gem 'settingslogic'
 #gem 'wymeditor'
-gem "bootstrap-wysihtml5-rails"
+gem 'bootstrap-wysihtml5-rails'
 gem 'rest-client'
 gem 'magic_encoding'
 
