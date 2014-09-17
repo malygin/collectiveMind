@@ -156,8 +156,8 @@ class Discontent::PostsController < PostsController
     @union_post = Discontent::Post.find(params[:post_id])
     if @post.one_last_post? and boss?
       @union_post.update_attributes(status: 0, discontent_post_id: nil)
-      @post.update_attributes(status: 3)
-      @post.discontent_post_aspects.destroy_all
+      @post.update_column(:status, 3)
+      #@post.discontent_post_aspects.destroy_all
       return redirect_to action: "index"
     else
       @union_post.update_attributes(status: 0, discontent_post_id: nil)
@@ -177,8 +177,8 @@ class Discontent::PostsController < PostsController
        end
      end
      if boss?
-       @post.update_attributes(status: 3)
-       @post.discontent_post_aspects.destroy_all
+       @post.update_column(:status, 3)
+       #@post.discontent_post_aspects.destroy_all
      end
      redirect_to action: "index"
    end
