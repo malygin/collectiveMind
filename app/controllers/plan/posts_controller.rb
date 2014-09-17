@@ -318,6 +318,7 @@ class Plan::PostsController < PostsController
   def render_table
     @project = Core::Project.find(params[:project])
     @post = Plan::Post.find(params[:id])
+    @render_type = params[:render_type]
   end
 
   def render_concept_side

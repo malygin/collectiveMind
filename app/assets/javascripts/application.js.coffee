@@ -131,8 +131,13 @@ $ ->
 
 # @todo обновление таблицы и списка
 $('#PlanTabs li#second a').on "click", (e) ->
-  render_table()
+  render_table('edit')
 $('#PlanTabs li#third a').on "click", (e) ->
+  render_concept_side()
+
+$('#PlanTabsShow li#second a').on "click", (e) ->
+  render_table('show')
+$('#PlanTabsShow li#third a').on "click", (e) ->
   render_concept_side()
 ###################################
 # @todo work with comment buttons
@@ -322,7 +327,7 @@ activate_add_aspects()
         data:
           con_id: new_concept
 
-@render_table= ->
+@render_table= (type)->
   optsel = $("#option_for_render_tab")
   project_id = parseInt(optsel.attr('project'))
   post_id = parseInt(optsel.attr('post'))
@@ -330,6 +335,8 @@ activate_add_aspects()
     $.ajax
       url: "/project/#{project_id}/plan/posts/#{post_id}/render_table"
       type: "put"
+      data:
+        render_type:type
 
 @render_concept_side= ->
   optsel = $("#option_for_render_tab")

@@ -1,0 +1,54 @@
+- unless @post.post_stages.nil?
+  -@post.post_stages.each_with_index do |stage, ind|
+    %div(class="td_stage_#{stage.id}")
+      %h3
+        %span="Этап #{ind+1}. "
+        %span.color-teal=stage.name
+      -if stage.date_begin and stage.date_end
+        %h3.color-green
+          =Russian::strftime(stage.date_begin, "%d %b %Y")
+          ="-"
+          =Russian::strftime(stage.date_end, "%d %b %Y")
+
+      =stage.desc
+      %br
+      %br
+    %table.table.table-striped.table-bordered
+      %thead
+        %tr
+          %th
+            ="#"
+          %th
+            Нововведения
+          %th
+            Мероприятия этапа
+      %tbody
+        - unless stage.plan_post_aspects.nil?
+          - stage.plan_post_aspects.each_with_index do |concept, index|
+            %tr(id="tr_concept_#{concept.id}")
+              %td(rowspan="#{rowspan_concept_show(concept)}" class="td_concept_#{concept.id}")
+                =index+1
+              %td(rowspan="#{rowspan_concept_show(concept)}" class="td_concept_#{concept.id}" id="td_concept_#{concept.id}")
+                =link_to view_concept_table_plan_post_path(@project, @post, :con_id => concept.id), :method => :get, :remote => true,:class => "color-white", :style => "text-decoration:none;border-bottom: 1px dashed #fafbfc;", :id => "view_post_concept_table_#{concept.id}" do
+                  %span.h5{:id => "name_post_concept_#{concept.id}"}=concept.title
+                %br
+                =concept.name
+                %br
+                = check_validate_concept(concept,true).html_safe if check_validate_concept(concept)
+            - unless concept.plan_post_actions.nil?
+              - concept.plan_post_actions.each do |action|
+                %tr(id="tr_action_#{action.id}")
+                  %td
+                    -if action.date_begin and action.date_end
+                      %small.color-green
+                        =Russian::strftime(action.date_begin, "%d %b %Y")
+                        ="-"
+                        =Russian::strftime(action.date_end, "%d %b %Y")
+                      %br
+                    %span.h5.color-teal{:id => "name_post_action_#{action.id}"}=action.name
+                    %br
+                    %span.h5=action.desc
+                    -unless action.plan_post_action_resources.nil?
+                      %br
+                      -action.plan_post_action_resources.each  do |res|
+                        .label.label-danger=res.name
