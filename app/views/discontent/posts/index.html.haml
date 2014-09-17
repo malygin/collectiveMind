@@ -3,12 +3,12 @@
     .body.widget-panel
       %ul.nav.nav-tabs#tab_posts
         %li#old.active
-          %a(href="#origin" data-toggle="tab" onclick="$('#new_posts').fadeOut();")
+          %a{:href => "#origin", "data-toggle" => "tab", :role => "tab"}
             Исходные #{@aspect.aspect_posts.count}
         %li#new
-          =link_to "Объединенные #{@project.discontent_accepted_post.count}", "/project/#{@project.id}/discontent/posts/unions", remote: true
+          =link_to "Объединенные #{@project.discontent_accepted_post.count}", "/project/#{@project.id}/discontent/posts/unions", remote: true, "data-toggle" => "tab", :role => "tab"
         %li#imp
-          %a(href="#improve" data-toggle="tab" onclick="$('#new_posts').fadeOut();")
+          %a{:href => "#improve", "data-toggle" => "tab", :role => "tab"}
             Неоформленные проблемы
       %br
       %br
