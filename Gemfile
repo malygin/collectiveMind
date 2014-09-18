@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 ruby '1.9.3'
 
-gem 'rails', '3.2.18'
+gem 'rails', '4.0.0'
 
 group :development, :test do
   #gem 'linecache19', :git => 'git://github.com/mark-moseley/linecache'
@@ -37,8 +37,8 @@ group :test do
   gem 'headless'
 end
 
-gem 'sass-rails', '~> 3.2.3'
-gem 'coffee-rails', '~> 3.2.1'
+gem 'sass-rails', '~> 4.0.0'
+gem 'coffee-rails', '~> 4.0.1'
 gem 'uglifier', '>= 2.1.1'
 gem 'compass'
 gem 'compass-rails'
