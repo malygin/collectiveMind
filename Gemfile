@@ -21,7 +21,7 @@ group :production do
 end
 
 group :test do
-  gem 'rspec'
+  gem 'rspec', '~> 2.99.0'
   gem 'spork'
   gem 'spork-rails'
   gem 'guard-spork'
