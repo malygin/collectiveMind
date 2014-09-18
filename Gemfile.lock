@@ -32,7 +32,6 @@ GEM
       thread_safe (~> 0.1)
       tzinfo (~> 0.3.37)
     addressable (2.3.6)
-    archive-tar-minitar (0.5.2)
     arel (4.0.2)
     autosize-rails (1.18.8)
       rails (>= 3.1)
@@ -79,7 +78,6 @@ GEM
       execjs
     coffee-script-source (1.8.0)
     colored (1.2)
-    columnize (0.8.9)
     compass (0.12.7)
       chunky_png (~> 1.2)
       fssm (>= 0.2.7)
@@ -89,7 +87,6 @@ GEM
     daemons (1.1.9)
     dalli (2.7.2)
     database_cleaner (1.3.0)
-    debugger-ruby_core_source (1.3.5)
     devise (3.3.0)
       bcrypt (~> 3.0)
       orm_adapter (~> 0.1)
@@ -164,8 +161,6 @@ GEM
     launchy (2.4.2)
       addressable (~> 2.3)
     libv8 (3.16.14.7)
-    linecache19 (0.5.12)
-      ruby_core_source (>= 0.1.4)
     listen (2.7.9)
       celluloid (>= 0.15.2)
       rb-fsevent (>= 0.9.3)
@@ -256,19 +251,6 @@ GEM
       rspec-core (~> 2.99.0)
       rspec-expectations (~> 2.99.0)
       rspec-mocks (~> 2.99.0)
-    ruby-debug-base19 (0.11.25)
-      columnize (>= 0.3.1)
-      linecache19 (>= 0.5.11)
-      ruby_core_source (>= 0.1.4)
-    ruby-debug-base19x (0.11.30.pre15)
-      debugger-ruby_core_source (> 0)
-      rake (>= 0.8.1)
-    ruby-debug19 (0.11.6)
-      columnize (>= 0.3.1)
-      linecache19 (>= 0.5.11)
-      ruby-debug-base19 (>= 0.11.19)
-    ruby_core_source (0.1.5)
-      archive-tar-minitar (>= 0.5.2)
     ruby_parser (3.1.3)
       sexp_processor (~> 4.1)
     rubyzip (1.1.6)
@@ -393,8 +375,6 @@ DEPENDENCIES
   rest-client
   rspec (~> 2.99.0)
   rspec-rails
-  ruby-debug-base19x (~> 0.11.30.pre4)
-  ruby-debug19
   russian
   sass-rails (~> 4.0.0)
   selectize-rails

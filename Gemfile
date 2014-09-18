@@ -5,8 +5,6 @@ gem 'rails', '4.0.0'
 
 group :development, :test do
   #gem 'linecache19', :git => 'git://github.com/mark-moseley/linecache'
-  gem 'ruby-debug-base19x', '~> 0.11.30.pre4'
-  gem 'ruby-debug19'
   gem 'quiet_assets'
   gem 'grizzled-rails-logger'
   gem 'rspec-rails'
