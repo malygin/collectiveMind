@@ -14,6 +14,7 @@
 #= require jquery.autosize
 #= require totop/jquery.ui.totop
 #= require totop/easing
+#= require ckeditor/init
 
 # @todo load initialization
 $ ->
@@ -454,16 +455,22 @@ $("#wizard").bootstrapWizard onTabShow: (tab, navigation, index) ->
         status: status
 
 # @todo wysihtml5 editor
+#@activate_htmleditor= ->
+#  @editor = $(".wysihtml5").each (i, elem) ->
+#    $(elem).wysihtml5
+#      "font-styles": true
+#      emphasis: true
+#      lists: true
+#      html: true
+#      link: true
+#      image: true
+#      color: true
+# @todo ckeditor
 @activate_htmleditor= ->
-  @editor = $(".wysihtml5").each (i, elem) ->
-    $(elem).wysihtml5
-      "font-styles": true
-      emphasis: true
-      lists: true
-      html: true
-      link: true
-      image: true
-      color: true
+  data = $(".ckeditor")
+  $.each data, (i) ->
+    CKEDITOR.replace data[i].id
+    return
 
 # @todo sortable for knowbase
 $('#sortable').sortable update: (event, ui) ->

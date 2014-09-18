@@ -93,3 +93,6 @@ gem 'magic_encoding'
 #gem 'dalli'
 gem 'similar_text'
 gem 'breadcrumbs_on_rails'
+
+#texteditor
+gem 'ckeditor'
