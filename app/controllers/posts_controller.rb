@@ -1,12 +1,12 @@
-# encoding: utf-8
 class PostsController < ApplicationController
   before_filter :authenticate
-  before_filter :prepare_data, :only => [:index, :new, :edit, :show,:vote_list, :to_work]
-  before_filter :journal_data, :only => [:index, :new, :edit, :show, :vote_list, :to_work]
-  before_filter :have_rights, :only =>[:edit]
+  before_filter :prepare_data, only: [:index, :new, :edit, :show, :vote_list, :to_work]
+  before_filter :journal_data, only: [:index, :new, :edit, :show, :vote_list, :to_work]
+  before_filter :have_rights, only: [:edit]
   before_filter :have_project_access
   before_filter :not_open_closed_stage
 
+  #@todo why not use authenticate_user! from devise?
   def authenticate
     unless current_user
       redirect_to '/users/sign_in'
@@ -39,9 +39,9 @@ class PostsController < ApplicationController
 
   def journal_data
     if params[:viewed]
-      post = current_model.where(:id => params[:id], :project_id => @project.id).first if params[:id]
+      post = current_model.where(id: params[:id], project_id: @project.id).first if params[:id]
       post_id = current_model.to_s == "LifeTape::Post" ? (params[:asp] ? Discontent::Aspect.find(params[:asp]) : @project.aspects.order(:id).first) : post
-      Journal.events_for_content(@project, current_user, post_id.id).update_all(:viewed => true) if post_id
+      Journal.events_for_content(@project, current_user, post_id.id).update_all(viewed: true) if post_id
     end
     super()
   end
@@ -80,36 +80,36 @@ class PostsController < ApplicationController
 
   def add_comment
     @project = Core::Project.find(params[:project])
-    @aspects = Discontent::Aspect.where(:project_id => @project)
+    @aspects = Discontent::Aspect.where(project_id: @project)
     post = current_model.find(params[:id])
     @main_comment = comment_model.find(params[:main_comment]) unless params[:main_comment].nil?
     main_comment_answer = comment_model.find(params[:answer_id]) unless params[:answer_id].nil?
     comment_user = main_comment_answer.user unless main_comment_answer.nil?
     content = comment_user ? "#{comment_user.to_s}, " + params[name_of_comment_for_param][:content] : params[name_of_comment_for_param][:content]
     unless  params[name_of_comment_for_param][:content]==''
-      @comment = post.comments.create(:content => content, :user =>current_user,:discontent_status => params[name_of_comment_for_param][:discontent_status],:concept_status => params[name_of_comment_for_param][:concept_status], :comment_id => @main_comment ? @main_comment.id : nil)
+      @comment = post.comments.create(content: content, user: current_user, discontent_status: params[name_of_comment_for_param][:discontent_status], concept_status: params[name_of_comment_for_param][:concept_status], comment_id: @main_comment ? @main_comment.id : nil)
       #@todo новости и информирование авторов
-      current_user.journals.build(:type_event=>name_of_comment_for_param+'_save', :project => @project,
-                                  :body=>"#{trim_content(@comment.content)}", :body2=>trim_content(field_for_journal(post)),
-                                  :first_id=> (post.instance_of? LifeTape::Post) ? post.discontent_aspects.first.id : post.id, :second_id => @comment.id).save!
+      current_user.journals.build(type_event: name_of_comment_for_param+'_save', project: @project,
+                                  body: "#{trim_content(@comment.content)}", body2: trim_content(field_for_journal(post)),
+                                  first_id: (post.instance_of? LifeTape::Post) ? post.discontent_aspects.first.id : post.id, second_id: @comment.id).save!
 
       if post.user!=current_user
-        current_user.journals.build(:type_event=>'my_'+name_of_comment_for_param, :user_informed => post.user, :project => @project,
-                                    :body=>"#{trim_content(@comment.content)}", :body2=>trim_content(field_for_journal(post)),
-                                    :first_id=> (post.instance_of? LifeTape::Post) ? post.discontent_aspects.first.id : post.id, :second_id => @comment.id,
-                                    :personal=> true, :viewed=> false).save!
+        current_user.journals.build(type_event: 'my_'+name_of_comment_for_param, user_informed: post.user, project: @project,
+                                    body: "#{trim_content(@comment.content)}", body2: trim_content(field_for_journal(post)),
+                                    first_id: (post.instance_of? LifeTape::Post) ? post.discontent_aspects.first.id : post.id, second_id: @comment.id,
+                                    personal: true, viewed: false).save!
       end
       if @main_comment and @main_comment.user!=current_user
-        current_user.journals.build(:type_event=>'reply_'+name_of_comment_for_param, :user_informed =>@main_comment.user, :project => @project,
-                                    :body=>"#{trim_content(@comment.content)}", :body2=>trim_content(@main_comment.content),
-                                    :first_id=> (post.instance_of? LifeTape::Post) ? post.discontent_aspects.first.id : post.id, :second_id => @comment.id,
-                                    :personal=> true, :viewed=> false).save!
+        current_user.journals.build(type_event: 'reply_'+name_of_comment_for_param, user_informed: @main_comment.user, project: @project,
+                                    body: "#{trim_content(@comment.content)}", body2: trim_content(@main_comment.content),
+                                    first_id: (post.instance_of? LifeTape::Post) ? post.discontent_aspects.first.id : post.id, second_id: @comment.id,
+                                    personal: true, viewed: false).save!
       end
       if main_comment_answer and main_comment_answer.user!=current_user
-        current_user.journals.build(:type_event=>'reply_'+name_of_comment_for_param, :user_informed => main_comment_answer.user, :project => @project,
-                                    :body=>"#{trim_content(@comment.content)}", :body2=>trim_content(main_comment_answer.content),
-                                    :first_id=> (post.instance_of? LifeTape::Post) ? post.discontent_aspects.first.id : post.id, :second_id => @comment.id,
-                                    :personal=> true, :viewed=> false).save!
+        current_user.journals.build(type_event: 'reply_'+name_of_comment_for_param, user_informed: main_comment_answer.user, project: @project,
+                                    body: "#{trim_content(@comment.content)}", body2: trim_content(main_comment_answer.content),
+                                    first_id: (post.instance_of? LifeTape::Post) ? post.discontent_aspects.first.id : post.id, second_id: @comment.id,
+                                    personal: true, viewed: false).save!
       end
     end
     respond_to do |format|
@@ -123,7 +123,7 @@ class PostsController < ApplicationController
     @main_comment = comment_model.find(params[:comment_id])
     main_comment_answer = comment_model.find(params[:answer_id]) unless params[:answer_id].nil?
     @comment = comment_model.new
-    @url_link = url_for(:controller => @post.class.name.underscore.pluralize, :action => 'add_comment', :main_comment => @main_comment.id, :answer_id => main_comment_answer ? main_comment_answer.id : nil)
+    @url_link = url_for(controller: @post.class.name.underscore.pluralize, action: 'add_comment', main_comment: @main_comment.id, answer_id: main_comment_answer ? main_comment_answer.id : nil)
     respond_to do |format|
       format.js
     end
@@ -140,32 +140,33 @@ class PostsController < ApplicationController
     @comment.toggle!(:concept_status) if params[:concept]
     @comment.toggle!(:discuss_status) if params[:discuss_status]
     if @comment.discuss_status
-      current_user.journals.build(:type_event=>name_of_comment_for_param+'_discuss_stat', :project => @project,
-                                  :body=>"#{trim_content(@comment.content)}", :body2=>trim_content(field_for_journal(@post)),
-                                  :first_id=> (@post.instance_of? LifeTape::Post) ? @post.discontent_aspects.first.id : @post.id, :second_id => @comment.id).save!
+      current_user.journals.build(type_event: name_of_comment_for_param+'_discuss_stat', project: @project,
+                                  body: "#{trim_content(@comment.content)}", body2: trim_content(field_for_journal(@post)),
+                                  first_id: (@post.instance_of? LifeTape::Post) ? @post.discontent_aspects.first.id : @post.id, second_id: @comment.id).save!
 
       if @comment.user!=current_user
-        current_user.journals.build(:type_event=>'my_'+name_of_comment_for_param+'_discuss_stat', :user_informed => @comment.user, :project => @project,
-                                    :body=>"#{trim_content(@comment.content)}", :body2=>trim_content(field_for_journal(@post)),
-                                    :first_id=> (@post.instance_of? LifeTape::Post) ? @post.discontent_aspects.first.id : @post.id, :second_id => @comment.id,
-                                    :personal=> true, :viewed=> false).save!
+        current_user.journals.build(type_event: 'my_'+name_of_comment_for_param+'_discuss_stat', user_informed: @comment.user, project: @project,
+                                    body: "#{trim_content(@comment.content)}", body2: trim_content(field_for_journal(@post)),
+                                    first_id: (@post.instance_of? LifeTape::Post) ? @post.discontent_aspects.first.id : @post.id, second_id: @comment.id,
+                                    personal: true, viewed: false).save!
       end
     end
     respond_to do |format|
       format.js
     end
   end
+
   def discuss_status
     @project = Core::Project.find(params[:project])
     @post = current_model.find(params[:id])
     if params[:discuss_status]
       @post.toggle!(:discuss_status)
       if @post.discuss_status
-        current_user.journals.build(:type_event=>name_of_model_for_param+'_discuss_stat', :project => @project,
-                                  :body=>"#{trim_content(@post.content)}", :first_id=> @post.id).save!
+        current_user.journals.build(type_event: name_of_model_for_param+'_discuss_stat', project: @project,
+                                    body: "#{trim_content(@post.content)}", first_id: @post.id).save!
         if @post.user!=current_user
-          current_user.journals.build(:type_event=>'my_'+name_of_model_for_param+'_discuss_stat', :user_informed => @post.user, :project => @project,
-                                      :body=>"#{trim_content(@post.content)}", :first_id=> @post.id, :personal=> true, :viewed=> false).save!
+          current_user.journals.build(type_event: 'my_'+name_of_model_for_param+'_discuss_stat', user_informed: @post.user, project: @project,
+                                      body: "#{trim_content(@post.content)}", first_id: @post.id, personal: true, viewed: false).save!
         end
       end
     end
@@ -175,20 +176,20 @@ class PostsController < ApplicationController
   end
 
   def index
-    @posts = current_model.where(:project_id => @project).paginate(:page => params[:page])
+    @posts = current_model.where(project_id: @project).paginate(page: params[:page])
     respond_to do |format|
       format.html
     end
   end
 
   def show
-    @post = current_model.where(:id => params[:id], :project_id => params[:project]).first
+    @post = current_model.where(id: params[:id], project_id: params[:project]).first
     if params[:viewed]
       Journal.events_for_content(@project, current_user, @post.id).update_all("viewed = 'true'")
       @my_journals_count = @my_journals_count - 1
     end
-    per_page = ["Concept","Essay"].include?(@post.class.name.deconstantize) ? 10 : 30
-    @comments = @post.main_comments.paginate(:page => params[:page] ? params[:page] : last_page, :per_page => per_page)
+    per_page = ["Concept", "Essay"].include?(@post.class.name.deconstantize) ? 10 : 30
+    @comments = @post.main_comments.paginate(page: params[:page] ? params[:page] : last_page, per_page: per_page)
 
     if current_model.column_names.include? 'number_views'
       @post.update_column(:number_views, @post.number_views.nil? ? 1 : @post.number_views+1)
@@ -204,7 +205,7 @@ class PostsController < ApplicationController
   def last_page
     total_results = @post.main_comments.count
     page = total_results / 10 + (total_results % 10 == 0 ? 0 : 1)
-    page == 0 ? 1 :page
+    page == 0 ? 1 : page
   end
 
   def new
@@ -222,34 +223,34 @@ class PostsController < ApplicationController
   end
 
   def create
-      @project = Core::Project.find(params[:project]) 
-      @post = current_model.new(params[name_of_model_for_param])
-      @post.project = @project
-      @post.user = current_user
+    @project = Core::Project.find(params[:project])
+    @post = current_model.new(params[name_of_model_for_param])
+    @post.project = @project
+    @post.user = current_user
 
-      @post.stage = params[:stage] unless params[:stage].nil?
-      @post.discontent_aspects  << Discontent::Aspect.find(params[:aspect_id]) unless params[:aspect_id].nil?
-      @post.style = params[:style] unless params[:style].nil?
-      @post.status = 0 if current_model.column_names.include? 'status'
+    @post.stage = params[:stage] unless params[:stage].nil?
+    @post.discontent_aspects << Discontent::Aspect.find(params[:aspect_id]) unless params[:aspect_id].nil?
+    @post.style = params[:style] unless params[:style].nil?
+    @post.status = 0 if current_model.column_names.include? 'status'
 
-      respond_to do |format|
-        if @post.save
-          current_user.journals.build(:type_event=>name_of_model_for_param+"_save", :project => @project, :body=>trim_content(@post.content), :first_id => @post.id).save!
-          current_user.add_score_by_type(@project, 50, :score_a)
+    respond_to do |format|
+      if @post.save
+        current_user.journals.build(type_event: name_of_model_for_param+"_save", project: @project, body: trim_content(@post.content), first_id: @post.id).save!
+        current_user.add_score_by_type(@project, 50, :score_a)
 
-          format.html { redirect_to  :action=>'show', :id => @post.id, :project => @project }
-          format.js
-        else
-          format.html { render action: "new" }
-          format.js
-        end
+        format.html { redirect_to action: 'show', id: @post.id, project: @project }
+        format.js
+      else
+        format.html { render action: "new" }
+        format.js
       end
-    
+    end
+
   end
 
   def update
     @post = current_model.find(params[:id])
-    @project = Core::Project.find(params[:project]) 
+    @project = Core::Project.find(params[:project])
 
     respond_to do |format|
       if @post.update_attributes(params[name_of_model_for_param])
@@ -257,9 +258,9 @@ class PostsController < ApplicationController
           @post.discontent_aspects.delete_all
           @post.discontent_aspects << Discontent::Aspect.find(params[:aspect_id])
         end
-        @post.update_attribute(:style,params[:style]) unless params[:style].nil?
+        @post.update_attribute(:style, params[:style]) unless params[:style].nil?
 
-        format.html { redirect_to  :action=>'show', :project => @project, :id => @post.id }
+        format.html { redirect_to action: 'show', project: @project, id: @post.id }
         format.js
       else
         format.html { render action: "edit" }
@@ -271,7 +272,7 @@ class PostsController < ApplicationController
   def destroy
     @post = current_model.find(params[:id])
     @post.destroy
-    @project = Core::Project.find(params[:project]) 
+    @project = Core::Project.find(params[:project])
 
     respond_to do |format|
       format.html { redirect_to root_model_path(@project) }
@@ -283,10 +284,10 @@ class PostsController < ApplicationController
     @post = current_model.find(params[:id])
     @post.update_column(:status, 3)
 
-    @project = Core::Project.find(params[:project]) 
+    @project = Core::Project.find(params[:project])
 
     respond_to do |format|
-      format.html { redirect_to url_for(:controller => @post.class.to_s.tableize, :action => :index) }
+      format.html { redirect_to url_for(controller: @post.class.to_s.tableize, action: :index) }
       format.json { head :no_content }
     end
   end
@@ -297,13 +298,13 @@ class PostsController < ApplicationController
     @post = current_model.find(params[:id])
     if boss?
       @post.toggle!(:useful)
-      @post.user.add_score(:type => :plus_post, :project => @project, :post => @post, :path =>  @post.class.name.underscore.pluralize)
+      @post.user.add_score(type: :plus_post, project: @project, post: @post, path: @post.class.name.underscore.pluralize)
       Award.reward(user: @post.user, post: @post, project: @project, type: 'add')
     end
     if @post.instance_of? Discontent::Post
-      @post.update_attributes(:status_content => true, :status_whered => true,:status_whend => true)
+      @post.update_attributes(status_content: true, status_whered: true, status_whend: true)
     elsif @post.instance_of? Concept::Post
-      @post.update_attributes(:status_name => true, :status_content => true,:status_positive => true,:status_positive_r => true, :status_negative => true,:status_negative_r => true,:status_problems => true,:status_reality => true, :status_positive_s => true,:status_negative_s => true,:status_control => true,:status_control_r => true,:status_control_s => true,:status_obstacles => true)
+      @post.update_attributes(status_name: true, status_content: true, status_positive: true, status_positive_r: true, status_negative: true, status_negative_r: true, status_problems: true, status_reality: true, status_positive_s: true, status_negative_s: true, status_control: true, status_control_r: true, status_control_s: true, status_obstacles: true)
     end
 
     #@against =  params[:against] == 'true'
@@ -311,10 +312,10 @@ class PostsController < ApplicationController
     #  post.admins_vote.destroy_all
     #  @admin_pro= true
     #else
-    #  post.post_votings.create(:user => current_user, :post => post, :against => @against)  unless post.users.include? current_user
+    #  post.post_votings.create(user: current_user, post: post, against: @against)  unless post.users.include? current_user
     #  if (current_user.boss? or post.post_votings.count == 3) and not @against
     #    Award.reward(user: post.user, post: post, project: @project, type: 'add')
-    #    post.user.add_score(:type => :plus_post, :project => Core::Project.find(params[:project]), :post => post, :path =>  post.class.name.underscore.pluralize)
+    #    post.user.add_score(type: :plus_post, project: Core::Project.find(params[:project]), post: post, path:  post.class.name.underscore.pluralize)
     #  end
     #end
     respond_to do |format|
@@ -327,10 +328,10 @@ class PostsController < ApplicationController
     @project= Core::Project.find(params[:project])
     @comment = comment_model.find(@id)
     #@against =  params[:against] == 'true'
-    #comment.comment_votings.create(:user => current_user, :comment => comment,  :against => @against) unless comment.users.include? current_user
+    #comment.comment_votings.create(user: current_user, comment: comment,  against: @against) unless comment.users.include? current_user
     if boss?
       @comment.toggle!(:useful)
-      @comment.user.add_score(:type => :plus_comment, :project => @project, :comment => @comment, :path =>  @comment.post.class.name.underscore.pluralize)  if boss?
+      @comment.user.add_score(type: :plus_comment, project: @project, comment: @comment, path: @comment.post.class.name.underscore.pluralize) if boss?
       Award.reward(user: @comment.user, project: @project, type: 'like')
     end
     @main_comment = @comment.comment.id unless @comment.comment.nil?
@@ -342,7 +343,7 @@ class PostsController < ApplicationController
   ### function for voiting
   #return list model for voiting, check stages
   def vote_list
-    @posts = voting_model.where(:project_id => @project)
+    @posts = voting_model.where(project_id: @project)
   end
 
 
@@ -350,10 +351,10 @@ class PostsController < ApplicationController
   def vote
     @project = Core::Project.find(params[:project])
     @post_vote = voting_model.find(params[:post_id])
-    @post_vote.final_votings.create(:user => current_user)
+    @post_vote.final_votings.create(user: current_user)
     stage = "#{self.class.name.deconstantize.downcase}"
     @number_v = @project.get_free_votes_for(current_user, stage)
-    @table_name = current_model.table_name.sub('_posts','/posts')
+    @table_name = current_model.table_name.sub('_posts', '/posts')
   end
 
   def new_note
@@ -370,7 +371,7 @@ class PostsController < ApplicationController
     @post_note = @post.notes.build(params[name_of_note_for_param])
     @post_note.user = current_user
 
-    current_user.journals.build(:type_event=>'my_'+name_of_note_for_param, :user_informed => @post.user, :project => @project, :body => trim_content(@post_note.content), :first_id => @post.id, :personal => true, :viewed=> false).save!
+    current_user.journals.build(type_event: 'my_'+name_of_note_for_param, user_informed: @post.user, project: @project, body: trim_content(@post_note.content), first_id: @post.id, personal: true, viewed: false).save!
 
     @post.update_attributes(column_for_type_field(name_of_note_for_param, @type.to_i) => 'f')
 
@@ -445,7 +446,7 @@ class PostsController < ApplicationController
   def check_field
     @project = Core::Project.find(params[:project])
     if !params[:check_field].nil? and !params[:status].nil?
-      current_user.user_checks.where(project_id: @project.id,check_field: params[:check_field]).destroy_all
+      current_user.user_checks.where(project_id: @project.id, check_field: params[:check_field]).destroy_all
       current_user.user_checks.create(project_id: @project.id, check_field: params[:check_field], status: params[:status]).save!
     end
     head :ok
