@@ -11,6 +11,8 @@
   has_many :voted_users, :through => :final_votings, :source => :user
   has_many :final_votings,:foreign_key => 'concept_post_aspect_id', :class_name => "Concept::Voting"
 
+  has_many :concept_post_discontent_complites,:foreign_key => 'post_id', :class_name => "Concept::PostDiscontentComplite"
+
   #has_many :concept_notes, :class_name => 'Concept::Note'
 
   has_many :concept_post_discontents, :class_name => 'Concept::PostDiscontent'

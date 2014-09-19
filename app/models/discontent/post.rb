@@ -40,6 +40,7 @@ class Discontent::Post < ActiveRecord::Base
   has_many :final_votings,:foreign_key => 'discontent_post_id', :class_name => 'Discontent::Voting'
 
   has_many :concept_votings, :foreign_key => 'discontent_post_id', :class_name => 'Concept::Voting'
+  has_many :concept_complites, :foreign_key => 'discontent_post_id', :class_name => 'Concept::PostDiscontentComplite'
 
   scope :by_project, ->(p){ where(project_id: p) }
   scope :by_status, ->(p){where(status: p)}

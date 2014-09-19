@@ -25,12 +25,13 @@
 - if post_content.status == 2 or post_content.status == 4
   =link_to({:controller => 'discontent/posts', :action => :new_note, :id => post_content.id, :type_field => 1},:remote => true,:method => :put, :id => "content_dispost_#{post_content.id}_1", :class => "note_text") do
     %span(id="#{id_for_type_field(1)}_content_#{post_content.id}")=post_content.content
+
   %br
   %ul.ul-union-list(id="post_content_#{post_content.id}" style="list-style: disc inside;" )
     -post_content.discontent_posts.each do |dp|
+      -if @concept_post or @post
+        %input#check-discontent.pull-left{:name => "check_discontent[#{dp.id}]", :type => "checkbox", :checked => "#{(@concept_post ? @concept_post : @post).concept_post_discontent_complites.by_discontent(dp.id).present? ? 'checked' : ''}"}/
       %li.union-list{:id => "li_id_#{dp.id}"}=dp.content
-      = label_tag 'несовершенство решается '
-      = select_tag "com[#{post_content.id}]", options_for_select([["в незначительной мере", 1], ["в значительной мере", 2], ["полностью", 3]], post_content.content)
   %br
 -else
   -if boss?

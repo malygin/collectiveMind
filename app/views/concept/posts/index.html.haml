@@ -1,8 +1,11 @@
 .col-md-6
   %section
     %header
-      %h4
-        Нововведения
+      .row
+        %h4
+          Нововведения
+          %a.btn.btn-warning.pull-right(href="/project/#{@project.id}/concept/posts/new?asp_id=#{@aspect.id}" style="font-weight: normal !important;" id="new_concept")
+            Добавить нововведение
       %hr
     .body
       - if @aspect

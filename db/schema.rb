@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140904211704) do
+ActiveRecord::Schema.define(:version => 20140919090444) do
 
   create_table "answers", :force => true do |t|
     t.string   "text",        :limit => 700
@@ -154,11 +154,20 @@ ActiveRecord::Schema.define(:version => 20140904211704) do
     t.text     "obstacles"
   end
 
+  create_table "concept_post_discontent_complites", :force => true do |t|
+    t.integer  "post_id"
+    t.integer  "discontent_post_id"
+    t.integer  "complite"
+    t.datetime "created_at",         :null => false
+    t.datetime "updated_at",         :null => false
+  end
+
   create_table "concept_post_discontents", :force => true do |t|
     t.integer  "post_id"
     t.integer  "discontent_post_id"
     t.datetime "created_at",         :null => false
     t.datetime "updated_at",         :null => false
+    t.integer  "complite"
   end
 
   create_table "concept_post_discussions", :force => true do |t|
