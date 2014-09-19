@@ -1,14 +1,87 @@
+-#-# what field
+-#=content_for_field(post_content, field = 'what', link = boss? ? true : false)
+-#=content_for_note(post_content,field = 'what', link = boss? ? true : false)
+-#
+-#-# where field
+-#=content_for_field(post_content, field = 'where', link = boss? ? true : false)
+-#=content_for_note(post_content, field = 'where', link = boss? ? true : false)
+-#
+-#-# when field
+-#=content_for_field(post_content, field = 'when', link = boss? ? true : false)
+-#=content_for_note(post_content, field = 'when', link = boss? ? true : false)
+
+
+-#.field
+-#  = f.label '-- 1) значительными '
+-#  = f.select :nepr1, [["невероятно", 1],["маловероятно", 2], ["вероятно", 3], ["очень вероятно", 4]]
+
 -# what field
-=content_for_field(post_content, field = 'what', link = boss? ? true : false)
+-if boss?
+  =link_to({:controller => 'discontent/posts', :action => :status_post, :id => post_content.id, :type_field => 1},:remote => true,:method => :put, :id => "label_dispost_#{post_content.id}",:class => "note_text") do
+    %span.label(class= "#{class_for_type_field(post_content,1)}" id="#{id_for_type_field(1)}_#{post_content.id}")=name_for_type_field(1)
+-else
+  %span.label(class= "#{class_for_type_field(post_content,1)}" id="#{id_for_type_field(1)}_#{post_content.id}")=name_for_type_field(1)
+
+- if post_content.status == 2 or post_content.status == 4
+  =link_to({:controller => 'discontent/posts', :action => :new_note, :id => post_content.id, :type_field => 1},:remote => true,:method => :put, :id => "content_dispost_#{post_content.id}_1", :class => "note_text") do
+    %span(id="#{id_for_type_field(1)}_content_#{post_content.id}")=post_content.content
+  %br
+  %ul.ul-union-list(id="post_content_#{post_content.id}" style="list-style: disc inside;" )
+    -post_content.discontent_posts.each do |dp|
+      %li.union-list{:id => "li_id_#{dp.id}"}=dp.content
+      = label_tag 'несовершенство решается '
+      = select_tag "com[#{post_content.id}]", options_for_select([["в незначительной мере", 1], ["в значительной мере", 2], ["полностью", 3]], post_content.content)
+  %br
+-else
+  -if boss?
+    =link_to({:controller => 'discontent/posts', :action => :new_note, :id => post_content.id, :type_field => 1},:remote => true,:method => :put, :id => "content_dispost_#{post_content.id}_1", :class => "note_text") do
+      %span(id="#{id_for_type_field(1)}_content_#{post_content.id}")=post_content.content
+  -else
+    %span(id="#{id_for_type_field(1)}_content_#{post_content.id}")=post_content.content
+
 =content_for_note(post_content,field = 'what', link = boss? ? true : false)
 
--# where field
-=content_for_field(post_content, field = 'where', link = boss? ? true : false)
+-#where field
+-if boss?
+  =link_to("/project/#{@project.id}/discontent/posts/#{post_content.id}/new_note?type_field=2",:remote => true,:method => :put, :id => "content_dispost__#{post_content.id}_#{number_for_type_field(id_for_type_field(2))}",:class => "note_text") do
+    %span.label(class= "#{class_for_type_field(post_content,2)}" id="#{id_for_type_field(2)}_#{post_content.id}")=name_for_type_field(2)
+  =link_to("/project/#{@project.id}/discontent/posts/#{post_content.id}/status_post?type_field=2",:remote => true,:method => :put, :id => "label_dispost_#{post_content.id}",:class => "note_text") do
+    %span(id="#{id_for_type_field(2)}_content_#{post_content.id}")=post_content.whered
+-else
+  %span.label(class= "#{class_for_type_field(post_content,2)}")=name_for_type_field(2)
+  %span=post_content.whered(id= "#{id_for_type_field(3)}_content_#{post_content.id}")
+
+%br
 =content_for_note(post_content, field = 'where', link = boss? ? true : false)
 
 -# when field
-=content_for_field(post_content, field = 'when', link = boss? ? true : false)
+-if boss?
+  =link_to("/project/#{@project.id}/discontent/posts/#{post_content.id}/new_note?type_field=3",:remote => true,:method => :put, :id => "content_dispost__#{post_content.id}_#{number_for_type_field(id_for_type_field(3))}",:class => "note_text") do
+    %span.label(class= "#{class_for_type_field(post_content,3)}" id="#{id_for_type_field(3)}_#{post_content.id}")=name_for_type_field(3)
+  =link_to("/project/#{@project.id}/discontent/posts/#{post_content.id}/status_post?type_field=3",:remote => true,:method => :put, :id => "label_dispost_#{post_content.id}",:class => "note_text") do
+    %span(id="#{id_for_type_field(3)}_content_#{post_content.id}")=post_content.whend
+-else
+  %span.label(class= "#{class_for_type_field(post_content,3)}" id= "#{id_for_type_field(3)}_content_#{post_content.id}")=name_for_type_field(3)
+  %span(id= "#{id_for_type_field(3)}_content_#{post_content.id}")=post_content.whend
+%br
 =content_for_note(post_content, field = 'when', link = boss? ? true : false)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 -#-if boss?

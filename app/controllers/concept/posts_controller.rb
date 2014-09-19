@@ -208,6 +208,7 @@ class Concept::PostsController < PostsController
    def add_dispost
      @project = Core::Project.find(params[:project])
      @dispost = Discontent::Post.find(params[:dispost_id])
+     @remove_able = true
    end
 
   private
