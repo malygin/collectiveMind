@@ -368,14 +368,12 @@ DEPENDENCIES
   jquery-rails
   jquery-ui-rails
   json
-  kgio
   magic_encoding
   memcachier
   newrelic_rpm (>= 3.7.3)
   paperclip
   pg
   quiet_assets
-  rack-cache
   rails (= 3.2.18)
   rails3-jquery-autocomplete (= 1.0.14)
   rails_12factor

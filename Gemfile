@@ -77,11 +77,11 @@ gem 'devise_lastseenable'
 gem 'memcachier'
 gem 'dalli'
 
-# Fast IO for memcache
-gem 'kgio'
-# Serve static assets through Rack + Memcache
-# https://devcenter.heroku.com/articles/rack-cache-memcached-rails31
-gem 'rack-cache'
+# # Fast IO for memcache
+# gem 'kgio'
+# # Serve static assets through Rack + Memcache
+# # https://devcenter.heroku.com/articles/rack-cache-memcached-rails31
+# gem 'rack-cache'
 
 
 gem 'settingslogic'
