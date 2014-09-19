@@ -1,6 +1,5 @@
 #= require jquery
 #= require jquery_ujs
-#= require_tree
 #= require jquery.ui.all
 #= require bootstrap/bootstrap.min
 #= require autocomplete-rails
@@ -8,7 +7,6 @@
 #= require bootstrap-wysihtml5/locales/ru-RU
 #= require selectize
 #= require liFixar/jquery.liFixar
-#= require wizard/jquery.bootstrap.wizard
 #= require datepicker/bootstrap-datepicker
 #= require bootstrap3-editable/bootstrap-editable
 #= require jquery.autosize
