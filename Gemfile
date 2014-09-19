@@ -50,6 +50,7 @@ group :assets do
   gem 'compass'
   gem 'compass-rails'
   gem 'therubyracer', '>=0.11.4'
+  gem 'turbo-sprockets-rails3'
 end
 
 gem 'pg'
