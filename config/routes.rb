@@ -24,10 +24,10 @@ CollectiveMind::Application.routes.draw do
   end
 
 devise_for :users
-match '/project/:project', :to => 'core/projects#to_project'
-match '/list_projects', :to => 'core/projects#list_projects'
+match '/project/:project', to: 'core/projects#to_project'
+match '/list_projects', to: 'core/projects#list_projects'
 
-namespace :core, :shallow => true do
+namespace :core, shallow: true do
   resources :projects do
     member do
       get :next_stage
@@ -37,22 +37,22 @@ namespace :core, :shallow => true do
 end
 
 scope '/project/:project' do
-  get '/journals', :to => 'journal#index'
-  #get '/help/posts/0', :to => 'help/posts#new_help_0'
+  get '/journals', to: 'journal#index'
+  #get '/help/posts/0', to: 'help/posts#new_help_0'
 
   namespace :help do
     resources :posts
   end
 
-  post 'knowbase/posts/sortable_save', to:  'knowbase/posts#sortable_save'
+  post 'knowbase/posts/sortable_save', to: 'knowbase/posts#sortable_save'
   namespace :knowbase do
     resources :posts
   end
 
   resources :users do
-    get :show_top, :on => :collection
-    get :users_rc, :on => :collection
-    get :list_users, :on => :collection
+    get :show_top, on: :collection
+    get :users_rc, on: :collection
+    get :list_users, on: :collection
     member do
       post :update_score
       put :club_toggle
@@ -62,24 +62,24 @@ scope '/project/:project' do
       match 'add_score_essay/:score' => 'users#add_score_essay'
     end
   end
+
   put 'life_tape/posts/transfer_comment' , to: 'life_tape/posts#transfer_comment'
+  get 'life_tape/posts/check_field', to: 'life_tape/posts#check_field'
+  get 'discontent/posts/check_field', to: 'discontent/posts#check_field'
+  get 'concept/posts/check_field', to: 'concept/posts#check_field'
+  get 'plan/posts/check_field', to: 'plan/posts#check_field'
+  get 'estimate/posts/check_field', to: 'estimate/posts#check_field'
 
-  get 'life_tape/posts/check_field', to:  'life_tape/posts#check_field'
-  get 'discontent/posts/check_field', to:  'discontent/posts#check_field'
-  get 'concept/posts/check_field', to:  'concept/posts#check_field'
-  get 'plan/posts/check_field', to:  'plan/posts#check_field'
-  get 'estimate/posts/check_field', to:  'estimate/posts#check_field'
-
-  get 'life_tape/posts/to_work', to:  'life_tape/posts#to_work'
-  get 'discontent/posts/to_work', to:  'discontent/posts#to_work'
-  get 'concept/posts/to_work', to:  'concept/posts#to_work'
-  get 'plan/posts/to_work', to:  'plan/posts#to_work'
-  get 'estimate/posts/to_work', to:  'estimate/posts#to_work'
+  get 'life_tape/posts/to_work', to: 'life_tape/posts#to_work'
+  get 'discontent/posts/to_work', to: 'discontent/posts#to_work'
+  get 'concept/posts/to_work', to: 'concept/posts#to_work'
+  get 'plan/posts/to_work', to: 'plan/posts#to_work'
+  get 'estimate/posts/to_work', to: 'estimate/posts#to_work'
 
   namespace :life_tape do
     posts_routes
     resources :posts do
-      get :vote_top, :on => :collection
+      get :vote_top, on: :collection
       member do
         put :set_aspect_status
       end
@@ -91,10 +91,10 @@ scope '/project/:project' do
   get :autocomplete_concept_post_resource_concept_posts , to: 'concept/posts#autocomplete_concept_post_resource'
   get :autocomplete_concept_post_mean_concept_posts , to: 'concept/posts#autocomplete_concept_post_mean'
 
-  post 'discontent/posts/:id/union', to:  'discontent/posts#union_discontent'
-  get 'discontent/posts/unions', to:  'discontent/posts#unions'
-  get 'discontent/posts/new_group', to:  'discontent/posts#new_group'
-  put 'discontent/posts/create_group', to:  'discontent/posts#create_group'
+  post 'discontent/posts/:id/union', to: 'discontent/posts#union_discontent'
+  get 'discontent/posts/unions', to: 'discontent/posts#unions'
+  get 'discontent/posts/new_group', to: 'discontent/posts#new_group'
+  put 'discontent/posts/create_group', to: 'discontent/posts#create_group'
 
   namespace :discontent do
     resources :aspects
@@ -120,8 +120,8 @@ scope '/project/:project' do
     end
   end
 
-  post 'concept/posts/add_dispost', to:  'concept/posts#add_dispost'
-  put 'concept/posts/next_vote', to:  'concept/posts#next_vote'
+  post 'concept/posts/add_dispost', to: 'concept/posts#add_dispost'
+  put 'concept/posts/next_vote', to: 'concept/posts#next_vote'
   namespace :concept do
     posts_routes
     resources :posts do
@@ -135,12 +135,12 @@ scope '/project/:project' do
     end
   end
 
-  put 'plan/posts/change_estimate_status', to:  'plan/posts#change_estimate_status'
+  put 'plan/posts/change_estimate_status', to: 'plan/posts#change_estimate_status'
 
   namespace :plan do
     posts_routes
     resources :posts do
-      post :get_concepts, :on => :collection
+      post :get_concepts, on: :collection
       member do
         put :add_concept
         put :new_stage
@@ -179,11 +179,10 @@ scope '/project/:project' do
       posts_routes
     end
   end
-
 end
 
 ############
 
-root :to => 'core/projects#index'
+root to: 'core/projects#index'
 
 end
