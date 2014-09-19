@@ -1,48 +1,25 @@
 %h3.text-info
   1 этап: Подготовка к процедуре. Ознакомьтесь перед началом работы!
 
-#carousel-example-generic.carousel.slide{"data-ride" => "carousel"}
+#carousel-example-generic.carousel.slide{'data-ride' => 'carousel'}
   %ol.carousel-indicators
-    %li.active{"data-slide-to" => "0", "data-target" => "#carousel-example-generic"}
-    %li{"data-slide-to" => "1", "data-target" => "#carousel-example-generic"}
-    %li{"data-slide-to" => "2", "data-target" => "#carousel-example-generic"}
-    %li{"data-slide-to" => "3", "data-target" => "#carousel-example-generic"}
-    %li{"data-slide-to" => "4", "data-target" => "#carousel-example-generic"}
-    %li{"data-slide-to" => "5", "data-target" => "#carousel-example-generic"}
-    %li{"data-slide-to" => "6", "data-target" => "#carousel-example-generic"}
-    %li{"data-slide-to" => "7", "data-target" => "#carousel-example-generic"}
-    %li{"data-slide-to" => "8", "data-target" => "#carousel-example-generic"}
+    %li.active{'data-slide-to' => '0', 'data-target' => '#carousel-example-generic'}
+    - 1.upto(8) do |index|
+      %li{'data-slide-to' => "#{index}", 'data-target' => '#carousel-example-generic'}
 
   .carousel-inner
     .item.active
-      %img{alt: "", style: 'margin: auto;', src: "/assets/img/to_work/1a.png"}/
-    .item
-      %img{alt: "", style: 'margin: auto;', src: "/assets/img/to_work/2a.png"}/
-    .item
-      %img{alt: "", style: 'margin: auto;', src: "/assets/img/to_work/3a.png"}/
-    .item
-      %img{alt: "", style: 'margin: auto;', src: "/assets/img/to_work/4a.png"}/
-    .item
-      %img{alt: "", style: 'margin: auto;', src: "/assets/img/to_work/5a.png"}/
-    .item
-      %img{alt: "", style: 'margin: auto;', src: "/assets/img/to_work/6a.png"}/
-    .item
-      %img{alt: "", style: 'margin: auto;', src: "/assets/img/to_work/7a.png"}/
-    .item
-      %img{alt: "", style: 'margin: auto;', src: "/assets/img/to_work/8a.png"}/
-    .item
-      %img{alt: "", style: 'margin: auto;', src: "/assets/img/to_work/9a.png"}/
+      %img{alt: '', style: 'margin: auto;', src: '/assets/img/to_work/1a.png'}/
+    - 2.upto(9) do |index|
+      .item
+        %img{alt: '', style: 'margin: auto;', src: "/assets/img/to_work/#{index}a.png"}/
 
-  %a.left.carousel-control{"data-slide" => "prev", href: "#carousel-example-generic", role: "button"}
+  %a.left.carousel-control{'data-slide' => 'prev', href: '#carousel-example-generic', role: 'button'}
     %span.glyphicon.glyphicon-chevron-left(style='font-size:30px;')
-  %a.right.carousel-control{"data-slide" => "next", href: "#carousel-example-generic", role: "button"}
+  %a.right.carousel-control{'data-slide' => 'next', href: '#carousel-example-generic', role: 'button'}
     %span.glyphicon.glyphicon-chevron-right(style='font-size:30px;')
-
 %br
 
 .text-center
-  =link_to  'Узнать больше!', "/project/#{@project.id}/help/posts/1", class: 'btn btn-lg btn-warning'
-  =link_to  'Приступить к работе!', "/project/#{@project.id}/life_tape/posts", class: 'btn btn-lg btn-primary'
-
-
-
+  = link_to 'Узнать больше!', "/project/#{@project.id}/help/posts/1", class: 'btn btn-lg btn-warning'
+  = link_to 'Приступить к работе!', "/project/#{@project.id}/life_tape/posts", class: 'btn btn-lg btn-primary'
