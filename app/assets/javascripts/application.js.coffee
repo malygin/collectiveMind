@@ -464,6 +464,7 @@ $("#wizard").bootstrapWizard onTabShow: (tab, navigation, index) ->
 #      image: true
 #      color: true
 # @todo ckeditor
+
 @activate_htmleditor= ->
   data = $(".ckeditor")
   $.each data, (i) ->
