@@ -17,7 +17,7 @@ class Discontent::Post < ActiveRecord::Base
   has_many :discontent_post_aspects, :class_name => 'Discontent::PostAspect'
   has_many :post_aspects, :through => :discontent_post_aspects, :source => :discontent_aspect, :class_name => 'Discontent::Aspect'
 
-  has_many :concept_post_discontents, :class_name => 'Concept::PostDiscontent', :foreign_key => 'discontent_post_id'
+  has_many :concept_post_discontents, :class_name => 'Concept::PostDiscontent', :foreign_key => 'discontent_post_id', :conditions => {:concept_post_discontents => {:status => [0,nil]}}
   has_many :dispost_concepts, :through => :concept_post_discontents, :source => :post, :class_name => "Concept::Post"
 
   has_many :concept_conditions, :class_name => 'Concept::PostAspect', :foreign_key => 'discontent_aspect_id'
@@ -40,7 +40,7 @@ class Discontent::Post < ActiveRecord::Base
   has_many :final_votings,:foreign_key => 'discontent_post_id', :class_name => 'Discontent::Voting'
 
   has_many :concept_votings, :foreign_key => 'discontent_post_id', :class_name => 'Concept::Voting'
-  has_many :concept_complites, :foreign_key => 'discontent_post_id', :class_name => 'Concept::PostDiscontentComplite'
+  has_many :concept_post_discontent_grouped, :class_name => "Concept::PostDiscontent",:foreign_key => 'discontent_post_id', :conditions => {:concept_post_discontents => {:status => [1]}}
 
   scope :by_project, ->(p){ where(project_id: p) }
   scope :by_status, ->(p){where(status: p)}

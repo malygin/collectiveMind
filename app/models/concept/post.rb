@@ -11,11 +11,11 @@
   has_many :voted_users, :through => :final_votings, :source => :user
   has_many :final_votings,:foreign_key => 'concept_post_aspect_id', :class_name => "Concept::Voting"
 
-  has_many :concept_post_discontent_complites,:foreign_key => 'post_id', :class_name => "Concept::PostDiscontentComplite"
+  has_many :concept_post_discontent_grouped, :class_name => "Concept::PostDiscontent", :conditions => {:concept_post_discontents => {:status => [1]}}
 
   #has_many :concept_notes, :class_name => 'Concept::Note'
 
-  has_many :concept_post_discontents, :class_name => 'Concept::PostDiscontent'
+  has_many :concept_post_discontents, :class_name => 'Concept::PostDiscontent', :conditions => {:concept_post_discontents => {:status => [0,nil]}}
   has_many :concept_disposts, :through => :concept_post_discontents, :source => :discontent_post , :class_name => 'Discontent::Post'
   has_many :concept_post_resources, :class_name => 'Concept::PostResource'
   scope :stat_fields_negative, ->(p){where(:id => p).where("status_name = 'f' or status_content = 'f' or status_negative = 'f'

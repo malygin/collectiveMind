@@ -1,11 +1,12 @@
 .media{id: "post_#{post_short2.id}"}
+  -#%input{name: "cd[#{post_short2.id}]", type: "hidden", value: "#{post_short2.id}"}
   -if  @project.status == 7
-    -#%input{name: "cd[#{post_short2.id}]", type: "hidden", value: "#{post_short2.id}"}
-    -if @concept_post or @post
+    -if @remove_able
       = label_tag 'несовершенство решается '
-      = select_tag "cd[#{post_short2.id}][complite]", options_for_select([["в незначительной мере", 1], ["в значительной мере", 2], ["полностью", 3]], post_short2.concept_post_discontents.by_concept(@concept_post ? @concept_post.id : nil).first.present? ? post_short2.concept_post_discontents.by_concept(@concept_post ? @concept_post.id : nil).first.complite : 3)
-    -unless @remove_able.nil?
+      = select_tag "cd[#{post_short2.id}][complite]", options_for_select([["в незначительной мере", 1], ["в значительной мере", 2], ["полностью", 3]], complite(post_short2))
       %span.glyphicon.glyphicon-remove.text-danger.pull-left{onclick: "remove_discontent_post('#{post_short2.id}');", style: "cursor:pointer;text-decoration:none;font-size:15px;"}
+    -elsif @post
+      = level_complite(complite(post_short2))
   %br
   =discontent_style_name(post_short2.style)
   .media-body
