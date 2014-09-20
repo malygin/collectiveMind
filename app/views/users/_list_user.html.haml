@@ -1,0 +1,20 @@
+.col-md-12{:id => "user_#{list_user.id}"}
+  .col-md-8
+    .media
+      %a.pull-left(href="/project/#{@project.id}/users/#{list_user.id}")
+        = image_tag list_user.avatar.url(:thumb),  class: "media-object"
+        %br
+        = link_to list_user, user_path(@project, list_user)
+        = render partial: '/shared/user_online', object: list_user
+        %br
+        = list_user.email
+
+  .col-md-4{:id => "list_users_#{list_user.id}"}
+    -if list_user.projects.include? @project
+      =link_to remove_user_for_project_user_path(@project, list_user), :remote => true, :method => :put, class:'btn btn-danger',  id: "remove_user_#{list_user.id}" do
+        %i.fa.fa-minus
+        Удалить
+    -else
+      =link_to add_user_for_project_user_path(@project, list_user), :remote => true, :method => :put, class:'btn btn-success', id: "add_user_#{list_user.id}" do
+        %i.fa.fa-plus
+        Добавить

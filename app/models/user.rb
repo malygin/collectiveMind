@@ -71,6 +71,8 @@ class User < ActiveRecord::Base
 
   has_many :user_checks , :class_name => "UserCheck"
   scope :check_field, ->(p,c){ where(project: p.id, status: 't', check_field: c) }
+  scope :without_added, ->(users){ where("users.id NOT IN (#{users.join(", ")})") unless users.empty? }
+
 
   def current_projects_for_user
     if prime_admin?

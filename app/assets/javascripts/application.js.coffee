@@ -131,6 +131,16 @@ $ ->
       option: (item, escape) ->
         return '<div>'+item.show_content+'</div>'
 
+#search_users
+$('#search_users_text').on 'change', ->
+  val=this.value
+  if val
+    $.ajax
+      url: "/project/1/users/search_users"
+      type: "get"
+      data:
+        search_users_text: val
+
 ###################################
 # @todo work with comment buttons
 @activate_button = (el)->

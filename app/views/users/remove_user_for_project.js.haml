@@ -1,1 +1,2 @@
 $("#list_users_#{@user.id}").html("<a href=\"/project/#{@project.id}/users/#{@user.id}/add_user_for_project\" id=\"add_user_#{@user.id}\" class=\"btn btn-success\" data-method=\"put\" data-remote=\"true\" rel=\"nofollow\"><i class=\"fa fa-plus\"></i> Добавить </a>")
+$("#user_#{@user.id}").animate({height: 0, opacity:0}, 1000, function() { $(this).remove(); });
