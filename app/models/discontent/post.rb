@@ -1,5 +1,3 @@
-# encoding: utf-8
-
 class Discontent::Post < ActiveRecord::Base
   include BasePost
   attr_accessible :whend, :whered, :aspect_id, :aspect, :style, :discontent_post_id, :important, :status_content, :status_whered, :status_whend, :improve_comment, :improve_stage, :discuss_status
@@ -8,68 +6,68 @@ class Discontent::Post < ActiveRecord::Base
   # validates :whend, presence: true
   # validates :whered, presence: true
 
-  validates_presence_of  :content, :whend, :whered  #,  :discontent_post_aspects
+  validates_presence_of :content, :whend, :whered #,  :discontent_post_aspects
 
   belongs_to :aspect
-  has_many :discontent_posts, :class_name => 'Discontent::Post', :foreign_key => 'discontent_post_id'
-  belongs_to :discontent_post, :foreign_key => 'discontent_post_id',:class_name => 'Discontent::Post'
-  #has_many :discontent_notes, :class_name => 'Discontent::Note'
-  has_many :discontent_post_aspects, :class_name => 'Discontent::PostAspect'
-  has_many :post_aspects, :through => :discontent_post_aspects, :source => :discontent_aspect, :class_name => 'Discontent::Aspect'
+  has_many :discontent_posts, class_name: 'Discontent::Post', foreign_key: 'discontent_post_id'
+  belongs_to :discontent_post, foreign_key: 'discontent_post_id', class_name: 'Discontent::Post'
+  #has_many :discontent_notes, class_name: 'Discontent::Note'
+  has_many :discontent_post_aspects, class_name: 'Discontent::PostAspect'
+  has_many :post_aspects, through: :discontent_post_aspects, source: :discontent_aspect, class_name: 'Discontent::Aspect'
 
-  has_many :concept_post_discontents, :class_name => 'Concept::PostDiscontent', :foreign_key => 'discontent_post_id'
-  has_many :dispost_concepts, :through => :concept_post_discontents, :source => :post, :class_name => "Concept::Post"
+  has_many :concept_post_discontents, class_name: 'Concept::PostDiscontent', foreign_key: 'discontent_post_id'
+  has_many :dispost_concepts, through: :concept_post_discontents, source: :post, class_name: "Concept::Post"
 
-  has_many :concept_conditions, :class_name => 'Concept::PostAspect', :foreign_key => 'discontent_aspect_id'
+  has_many :concept_conditions, class_name: 'Concept::PostAspect', foreign_key: 'discontent_aspect_id'
 
-  has_many :discontent_post_discussions, :class_name => 'Discontent::PostDiscussion'
-  has_many :dispost_discussion_users, :through => :discontent_post_discussions, :source => :user, :class_name => 'User'
+  has_many :discontent_post_discussions, class_name: 'Discontent::PostDiscussion'
+  has_many :dispost_discussion_users, through: :discontent_post_discussions, source: :user, class_name: 'User'
 
-  has_many :concept_post_discussions, :class_name => 'Concept::PostDiscussion'
-  has_many :dispost_discussion_users, :through => :concept_post_discussions, :source => :user, :class_name => 'User'
+  has_many :concept_post_discussions, class_name: 'Concept::PostDiscussion'
+  has_many :dispost_discussion_users, through: :concept_post_discussions, source: :user, class_name: 'User'
 
-  has_many :plan_conditions, :class_name => 'Plan::PostAspect', :foreign_key => 'discontent_aspect_id'
+  has_many :plan_conditions, class_name: 'Plan::PostAspect', foreign_key: 'discontent_aspect_id'
 
-  has_many :concept_posts, :through => :concept_conditions, :foreign_key => 'concept_post_id', :class_name => "Concept::Post"
+  has_many :concept_posts, through: :concept_conditions, foreign_key: 'concept_post_id', class_name: "Concept::Post"
 
-  has_many :post_replaced, :through => :post_replaces, :source => :replace_post, :class_name =>  'Discontent::Post'
+  has_many :post_replaced, through: :post_replaces, source: :replace_post, class_name: 'Discontent::Post'
 
-  has_many :post_replaced_it, :through => :post_it_replaces, :source => :replace_post, :class_name =>  'Discontent::Post'
+  has_many :post_replaced_it, through: :post_it_replaces, source: :replace_post, class_name: 'Discontent::Post'
 
-  has_many :voted_users, :through => :final_votings, :source => :user
-  has_many :final_votings,:foreign_key => 'discontent_post_id', :class_name => 'Discontent::Voting'
+  has_many :voted_users, through: :final_votings, source: :user
+  has_many :final_votings, foreign_key: 'discontent_post_id', class_name: 'Discontent::Voting'
 
-  has_many :concept_votings, :foreign_key => 'discontent_post_id', :class_name => 'Concept::Voting'
+  has_many :concept_votings, foreign_key: 'discontent_post_id', class_name: 'Concept::Voting'
 
-  scope :by_project, ->(p){ where(project_id: p) }
-  scope :by_status, ->(p){where(status: p)}
-  scope :by_style, ->(p){where(style: p)}
-  scope :by_positive, ->(p){where(style: 0, status: p)}
-  scope :by_negative, ->(p){where(style: 1, status: p)}
-  scope :by_positive_vote, ->(p){where(style: 0).where("status IN (#{p.join(", ")})", p)}
-  scope :by_negative_vote, ->(p){where(style: 1).where("status IN (#{p.join(", ")})", p)}
-  scope :required_posts, ->(p){where(status:4, project_id:p.id)}
-  scope :united_for_vote,  ->(project,voted){where(project_id: project, status: 2).where("discontent_posts.id NOT IN (?)", voted<<0).order(:id)}
+  scope :by_project, ->(p) { where(project_id: p) }
+  scope :by_status, ->(p) { where(status: p) }
+  scope :by_style, ->(p) { where(style: p) }
+  scope :by_positive, ->(p) { where(style: 0, status: p) }
+  scope :by_negative, ->(p) { where(style: 1, status: p) }
+  scope :by_positive_vote, ->(p) { where(style: 0).where("status IN (#{p.join(", ")})", p) }
+  scope :by_negative_vote, ->(p) { where(style: 1).where("status IN (#{p.join(", ")})", p) }
+  scope :required_posts, ->(p) { where(status: 4, project_id: p.id) }
+  scope :united_for_vote, ->(project, voted) { where(project_id: project, status: 2).where("discontent_posts.id NOT IN (?)", voted<<0).order(:id) }
 
-  scope :for_union, ->(project){ where("discontent_posts.status = 0 and discontent_posts.project_id = ? ", project) }
+  scope :for_union, ->(project) { where("discontent_posts.status = 0 and discontent_posts.project_id = ? ", project) }
 
-  scope :posts_for_discussions, ->(p){where(:project_id => p.id).where("discontent_posts.status_content = 't' and discontent_posts.status_whered = 't' and discontent_posts.status_whend = 't'")}
+  scope :posts_for_discussions, ->(p) { where(project_id: p.id).where("discontent_posts.status_content = 't' and discontent_posts.status_whered = 't' and discontent_posts.status_whend = 't'") }
 
   scope :by_discussions, ->(posts) { where("discontent_posts.id NOT IN (#{posts.join(", ")})") unless posts.empty? }
 
   scope :not_view, ->(posts) { where("discontent_posts.id NOT IN (#{posts.join(", ")})") unless posts.empty? }
 
-  scope :by_status_for_discontent, ->(project){
-    if project.status == 4
-      where(status: [0,1])
-    elsif project.status == 5 or project.status == 6
-      where(status: [2,4])
-    elsif project.status > 6
-      where(status: 1)
-    else
-      where(status: 0)
-    end
-  }
+  scope :by_status_for_discontent, ->(project) {
+        if project.status == 4
+          where(status: [0, 1])
+        elsif project.status == 5 or project.status == 6
+          where(status: [2, 4])
+        elsif project.status > 6
+          where(status: 1)
+        else
+          where(status: 0)
+        end
+      }
 
 
   def update_post_aspects(aspects_new)
@@ -128,7 +126,7 @@ class Discontent::Post < ActiveRecord::Base
   #end
 
   def voted(user)
-    self.voted_users.where(:id => user)
+    self.voted_users.where(id: user)
   end
 
   def get_posts_suitable_for_association
@@ -145,7 +143,7 @@ class Discontent::Post < ActiveRecord::Base
   end
 
   def conditions_for_plan(plan)
-    plan_conditions.where(:plan_post_id => plan)
+    plan_conditions.where(plan_post_id: plan)
   end
 
   def pure_conditions()
@@ -155,18 +153,18 @@ class Discontent::Post < ActiveRecord::Base
   def show_content
     unless self.content.nil?
       '<b> что: </b>' + self.content +
-      (self.whered.present? ? '<br/> <b> где: </b> ' + self.whered : '') +
-      (self.whend.present? ? '<br/> <b> когда: </b>' + self.whend : '') +
-      '<br/>'
+          (self.whered.present? ? '<br/> <b> где: </b> ' + self.whered : '') +
+          (self.whend.present? ? '<br/> <b> когда: </b>' + self.whend : '') +
+          '<br/>'
     end
   end
 
   def display_content
-    discontent_posts.first.content if status == 4 and  !discontent_posts.empty?
+    discontent_posts.first.content if status == 4 and !discontent_posts.empty?
   end
 
   def not_vote_for_other_post_aspects(user)
-    self.concept_conditions.each  do |asp|
+    self.concept_conditions.each do |asp|
       if asp.voted(user).size>0
         return false
       end
@@ -182,7 +180,7 @@ class Discontent::Post < ActiveRecord::Base
     self.post_notes(type_fd).size > 0
   end
 
-  def concepts_for_vote(project,current_user,last_vote)
+  def concepts_for_vote(project, current_user, last_vote)
     @post_all = self.dispost_concepts.by_status(0).size - 1
     concept_posts = self.dispost_concepts.by_status(0).order('concept_posts.id')
     if last_vote.nil? or self.id != last_vote.discontent_post_id
@@ -191,11 +189,11 @@ class Discontent::Post < ActiveRecord::Base
       @votes = 1
     else
       @concept1 = last_vote.concept_post_aspect
-      count_now = current_user.concept_post_votings.by_project_votings(project).where(:discontent_post_id => self.id, :concept_post_aspect_id => @concept1.id).count
+      count_now = current_user.concept_post_votings.by_project_votings(project).where(discontent_post_id: self.id, concept_post_aspect_id: @concept1.id).count
       @concept2 = concept_posts[count_now+1].post_aspects.first unless concept_posts[count_now+1].nil?
       @votes = count_now == @post_all ? count_now : count_now + 1
     end
-    return @post_all,@concept1,@concept2,@votes
+    return @post_all, @concept1, @concept2, @votes
   end
 
 end
