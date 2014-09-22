@@ -12,10 +12,8 @@ class Estimate::Post < ActiveRecord::Base
   has_many :plan_post_aspects, class_name: 'Plan::PostAspect'
 
 
-  has_many :post_aspects_other, foreign_key: 'post_id', class_name: 'Estimate::PostAspect',
-           conditions: {first_stage: false}
-  has_many :post_aspects_first, foreign_key: 'post_id', class_name: 'Estimate::PostAspect',
-           conditions: {first_stage: true}
+  has_many :post_aspects_other, -> { where first_stage: false }, foreign_key: 'post_id', class_name: 'Estimate::PostAspect'
+  has_many :post_aspects_first, -> { where first_stage: true }, foreign_key: 'post_id', class_name: 'Estimate::PostAspect'
   has_many :post_aspects_all, foreign_key: 'post_id', class_name: 'Estimate::PostAspect'
 
   #@todo replace sum in product
