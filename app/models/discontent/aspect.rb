@@ -3,12 +3,10 @@ class Discontent::Aspect < ActiveRecord::Base
 
   attr_accessible :short_desc, :status
   has_many :posts
-  has_many :positive_posts, class_name: 'Discontent::Post',
-           conditions: ['discontent_posts.style = ? ', 0]
-  has_many :negative_posts, class_name: 'Discontent::Post',
-           conditions: ['discontent_posts.style = ? ', 1]
-  has_many :accepted_posts, class_name: 'Discontent::Post',
-           conditions: ['discontent_posts.status = ?', 4]
+  has_many :discontent_posts, class_name: 'Discontent::Post'
+  scope :positive_posts, -> { joins(:discontent_posts).where('discontent_posts.style = ?', 0) }
+  scope :negative_posts, -> { joins(:discontent_posts).where('discontent_posts.style = ?', 1) }
+  scope :accepted_posts, -> { joins(:discontent_posts).where('discontent_posts.style = ?', 4) }
   has_many :knowbase_posts, class_name: 'Knowbase::Post'
   has_many :life_posts, class_name: 'LifeTape::Post', foreign_key: 'aspect_id'
   has_many :discontent_post_aspects, class_name: 'Discontent::PostAspect'
@@ -21,9 +19,10 @@ class Discontent::Aspect < ActiveRecord::Base
   has_many :disaspect_discussion_users, through: :discontent_post_discussions, source: :user, class_name: 'User'
 
   has_many :voted_users, through: :final_votings, source: :user
-  has_many :final_votings, foreign_key: 'discontent_aspect_id', class_name: "LifeTape::Voiting"
+  has_many :final_votings, foreign_key: 'discontent_aspect_id', class_name: 'LifeTape::Voiting'
 
-  has_and_belongs_to_many :life_tape_posts, class_name: 'LifeTape::Post', join_table: 'discontent_aspects_life_tape_posts', foreign_key: 'discontent_aspect_id', association_foreign_key: 'life_tape_post_id' #, conditions: ['status = 0']
+  has_and_belongs_to_many :life_tape_posts, class_name: 'LifeTape::Post', join_table: 'discontent_aspects_life_tape_posts',
+                          foreign_key: 'discontent_aspect_id', association_foreign_key: 'life_tape_post_id'
 
   scope :by_project, ->(project_id) { where("discontent_aspects.project_id = ?", project_id) }
   scope :minus_view, ->(aspects) { where("discontent_aspects.id NOT IN (#{aspects.join(", ")})") unless aspects.empty? }

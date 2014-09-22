@@ -195,5 +195,4 @@ class Discontent::Post < ActiveRecord::Base
     end
     return @post_all, @concept1, @concept2, @votes
   end
-
 end
