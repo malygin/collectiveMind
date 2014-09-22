@@ -24,8 +24,8 @@ CollectiveMind::Application.routes.draw do
   end
 
 devise_for :users
-match '/project/:project', to: 'core/projects#to_project'
-match '/list_projects', to: 'core/projects#list_projects'
+get '/project/:project', to: 'core/projects#to_project'
+get '/list_projects', to: 'core/projects#list_projects'
 
 namespace :core, shallow: true do
   resources :projects do
@@ -58,8 +58,8 @@ scope '/project/:project' do
       put :club_toggle
       put :add_user_for_project
       put :remove_user_for_project
-      match 'add_score/:score' => 'users#add_score'
-      match 'add_score_essay/:score' => 'users#add_score_essay'
+      get 'add_score/:score' => 'users#add_score'
+      get 'add_score_essay/:score' => 'users#add_score_essay'
     end
   end
 
