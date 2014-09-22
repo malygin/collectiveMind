@@ -32,21 +32,21 @@ class Core::Project < ActiveRecord::Base
   attr_accessible :desc, :postion, :secret, :type_project, :name, :short_desc, :knowledge, :status, :type_access,
                   :url_logo, :stage1, :stage2, :stage3, :stage4, :stage5
 
-  has_many :life_tape_posts, class_name: 'LifeTape::Post', conditions: ['status = 0']
+  has_many :life_tape_posts, -> { where status: 0 }, class_name: 'LifeTape::Post'
   has_many :aspects, class_name: 'Discontent::Aspect'
 
   has_many :discontents, class_name: 'Discontent::Post'
-  has_many :discontent_ongoing_post, conditions: 'status = 0  ', class_name: 'Discontent::Post'
-  has_many :discontent_accepted_post, conditions: 'status = 2  ', class_name: 'Discontent::Post'
-  has_many :discontent_for_admin_post, conditions: 'status = 1  ', class_name: 'Discontent::Post'
+  has_many :discontent_ongoing_post, -> { where status: 0 }, class_name: 'Discontent::Post'
+  has_many :discontent_accepted_post, -> { where status: 2 }, class_name: 'Discontent::Post'
+  has_many :discontent_for_admin_post, -> { where status: 1 }, class_name: 'Discontent::Post'
 
   has_many :concepts, class_name: 'Concept::Post'
-  has_many :concept_ongoing_post, conditions: 'status = 0  ', class_name: 'Concept::Post'
-  has_many :concept_accepted_post, conditions: 'status = 2  ', class_name: 'Concept::Post'
-  has_many :concept_for_admin_post, conditions: 'status = 1  ', class_name: 'Concept::Post'
+  has_many :concept_ongoing_post, -> { where status: 0 }, class_name: 'Concept::Post'
+  has_many :concept_accepted_post, -> { where status: 2 }, class_name: 'Concept::Post'
+  has_many :concept_for_admin_post, -> { where status: 1 }, class_name: 'Concept::Post'
 
-  has_many :plan_post, conditions: 'status = 0', class_name: 'Plan::Post'
-  has_many :estimate_posts, conditions: 'status = 0', class_name: 'Estimate::Post'
+  has_many :plan_post, -> { where status: 0 }, class_name: 'Plan::Post'
+  has_many :estimate_posts, -> { where status: 0 }, class_name: 'Estimate::Post'
 
   has_many :project_users
   has_many :users, through: :project_users
@@ -57,7 +57,7 @@ class Core::Project < ActiveRecord::Base
   has_many :core_project_users, class_name: 'Core::ProjectUser'
   has_many :users_in_project, through: :core_project_users, source: :user, class_name: 'User'
 
-  has_many :essays, class_name: 'Essay::Post', conditions: ['status = 0']
+  has_many :essays, -> { where status: 0 }, class_name: 'Essay::Post'
   #has_many :project_score_users, class_name: 'User', through: :core_project_scores, source: :user
   scope :club_projects, ->(user) { where(type_access: 1) if user.cluber? }
 
