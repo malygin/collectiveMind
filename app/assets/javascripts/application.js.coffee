@@ -1,10 +1,10 @@
 #= require jquery
 #= require jquery_ujs
 #= require_tree
-#= require jquery.ui.all
+#= require jquery-ui
 #= require bootstrap/bootstrap.min
 #= require autocomplete-rails
-#= require bootstrap-wysihtml5/b3
+#= require bootstrap-wysihtml5
 #= require bootstrap-wysihtml5/locales/ru-RU
 #= require selectize
 #= require liFixar/jquery.liFixar
