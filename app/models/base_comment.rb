@@ -12,14 +12,16 @@ module BaseComment
     has_many :users, through: :comment_votings
     default_scope order: 'created_at ASC'
 
-    has_many :comment_votings_pro, conditions: ['against = ?', false], source: :comment_votings, class_name: 'CommentVoting'
+    scope :comment_votings_pro, -> { joins(:comment_votings).where('comment_votings.against = ?', false) }
     has_many :users_pro, through: :comment_votings_pro, source: :user
 
-    has_many :comment_votings_against, conditions: ['against = ?', true], source: :comment_votings, class_name: 'CommentVoting'
+    scope :comment_votings_against, -> { joins(:comment_votings).where('comment_votings.against = ?', true) }
     has_many :users_against, through: :comment_votings_against, source: :user
 
-    has_many :improve_disposts, foreign_key: 'improve_comment', conditions: {improve_stage: [1, 2]}, source: :discontent_posts, class_name: 'Discontent::Post'
-    has_many :improve_concepts, foreign_key: 'improve_comment', conditions: {improve_stage: [1, 2, 3]}, source: :concept_posts, class_name: 'Concept::Post'
+    has_many :improve_disposts, -> { where improve_stage: [1, 2] }, foreign_key: 'improve_comment',
+             source: :discontent_posts, class_name: 'Discontent::Post'
+    has_many :improve_concepts, -> { where improve_stage: [1, 2, 3] }, foreign_key: 'improve_comment',
+             source: :concept_posts, class_name: 'Concept::Post'
 
     def get_class
       self.class.name.deconstantize
