@@ -1,1 +1,1 @@
-rvm --create use 2.1.2@collective_mind
+rvm use 2.1.2@rails_4.0.0
