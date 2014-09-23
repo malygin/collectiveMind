@@ -79,7 +79,6 @@ class Concept::PostsController < PostsController
       end
     end
 
-
     @concept_post.post_aspects << @post_aspect
     @concept_post.number_views = 0
     @concept_post.user = current_user
@@ -110,10 +109,17 @@ class Concept::PostsController < PostsController
     @concept_post = Concept::Post.find(params[:id])
     @concept_post.update_status_fields(params[:pa])
     @post_aspect = Concept::PostAspect.new(params[:pa])
-    unless check_before_update(params[:cd],params[:pa])
+    if check_before_update(params[:cd],params[:pa])
       @concept_post.post_aspects.destroy_all
       @concept_post.concept_post_discontents.destroy_all
       @concept_post.concept_post_discontent_grouped.destroy_all
+
+      post.concept_post_resources.by_type('positive_r').destroy_all
+      post.concept_post_resources.by_type('positive_s').destroy_all
+      post.concept_post_resources.by_type('negative_r').destroy_all
+      post.concept_post_resources.by_type('negative_s').destroy_all
+      post.concept_post_resources.by_type('control_r').destroy_all
+      post.concept_post_resources.by_type('control_s').destroy_all
     end
     unless params[:cd].nil?
       params[:cd].each do |cd|
@@ -231,10 +237,10 @@ class Concept::PostsController < PostsController
     end
 
     def create_concept_resources_on_type(project, post, type_r, type_s, flag_destroy)
-      if flag_destroy
-        post.concept_post_resources.by_type(type_r).destroy_all
-        post.concept_post_resources.by_type(type_s).destroy_all
-      end
+      #if flag_destroy
+      #  post.concept_post_resources.by_type(type_r).destroy_all
+      #  post.concept_post_resources.by_type(type_s).destroy_all
+      #end
 
       # unless params[:plan_post_resource].nil?
       #   params[:plan_post_resource].each do |t|

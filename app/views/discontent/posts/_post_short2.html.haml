@@ -1,6 +1,6 @@
 .media{id: "post_#{post_short2.id}"}
   -#%input{name: "cd[#{post_short2.id}]", type: "hidden", value: "#{post_short2.id}"}
-  -if  @project.status == 7
+  -if @project.status == 7
     -if @remove_able
       = label_tag 'несовершенство решается '
       = select_tag "cd[#{post_short2.id}][complite]", options_for_select([["в незначительной мере", 1], ["в значительной мере", 2], ["полностью", 3]], complite(post_short2))
