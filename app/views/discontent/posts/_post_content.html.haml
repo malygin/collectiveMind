@@ -50,7 +50,7 @@
     %span(id="#{id_for_type_field(2)}_content_#{post_content.id}")=post_content.whered
 -else
   %span.label(class= "#{class_for_type_field(post_content,2)}")=name_for_type_field(2)
-  %span=post_content.whered(id= "#{id_for_type_field(3)}_content_#{post_content.id}")
+  %span(id= "#{id_for_type_field(3)}_content_#{post_content.id}")=post_content.whered
 
 %br
 =content_for_note(post_content, field = 'where', link = boss? ? true : false)
