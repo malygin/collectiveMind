@@ -8,22 +8,24 @@
         Комментировать
         =post.comments.count
         %span.glyphicon.glyphicon-comment
-      -if boss? and @project.status == 6 and post.class.name.deconstantize == "Discontent"
-        |
-        %span.text-success За:
-        =post.final_votings.by_positive.uniq_user.size
-        |
-        %span.text-danger Против:
-        =post.final_votings.by_negative.uniq_user.size
-        |
-        %span.text-info Голосовавших:
-        =@vote_all
+      -if boss? and [4,5,6,7].include?(@project.status) and post.class.name.deconstantize == "Discontent"
         |
         =link_to({:controller => post.class.name.underscore.pluralize, :action => :set_required, :id => post.id, :project => @project},:remote => true,:method => :put,:id => "set_required_#{post.id}", :class => "note_text") do
           -if post.status == 4
             %span.text-success Добавлено
           -else
             %span.text-warning В обязательные
+        -if @project.status == 6
+          |
+          %span.text-success За:
+          =post.final_votings.by_positive.uniq_user.size
+          |
+          %span.text-danger Против:
+          =post.final_votings.by_negative.uniq_user.size
+          |
+          %span.text-info Голосовавших:
+          =@vote_all
+
       -if boss? and @project.status == 8 and post.class.name.deconstantize == "Concept"
         |
         %span.text-success Голосов:
