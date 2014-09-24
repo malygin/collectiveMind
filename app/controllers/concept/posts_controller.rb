@@ -114,12 +114,12 @@ class Concept::PostsController < PostsController
       @concept_post.concept_post_discontents.destroy_all
       @concept_post.concept_post_discontent_grouped.destroy_all
 
-      post.concept_post_resources.by_type('positive_r').destroy_all
-      post.concept_post_resources.by_type('positive_s').destroy_all
-      post.concept_post_resources.by_type('negative_r').destroy_all
-      post.concept_post_resources.by_type('negative_s').destroy_all
-      post.concept_post_resources.by_type('control_r').destroy_all
-      post.concept_post_resources.by_type('control_s').destroy_all
+      @concept_post.concept_post_resources.by_type('positive_r').destroy_all
+      @concept_post.concept_post_resources.by_type('positive_s').destroy_all
+      @concept_post.concept_post_resources.by_type('negative_r').destroy_all
+      @concept_post.concept_post_resources.by_type('negative_s').destroy_all
+      @concept_post.concept_post_resources.by_type('control_r').destroy_all
+      @concept_post.concept_post_resources.by_type('control_s').destroy_all
     end
     unless params[:cd].nil?
       params[:cd].each do |cd|

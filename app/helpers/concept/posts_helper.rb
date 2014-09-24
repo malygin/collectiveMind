@@ -170,7 +170,7 @@ module Concept::PostsHelper
     elsif level == 3
       'несовершенство решается полностью'
     else
-      ''
+      'не определено'
     end
   end
 
@@ -185,7 +185,7 @@ module Concept::PostsHelper
     elsif complite == 3
       'полностью'
     else
-      'полностью'
+      'не определено'
     end
   end
 

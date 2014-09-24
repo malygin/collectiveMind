@@ -29,7 +29,7 @@
                 %th
                   Решаемость
             %tbody
-              - post.dispost_concepts.sort_by{|c| c.complite(post)}.each_with_index  do |pa, index|
+              - post.dispost_concepts.sort_by{|c| c.complite(post).nil? ? 0 : -c.complite(post)}.each_with_index  do |pa, index|
                 - if pa.status == 0
                   %tr
                     %td
