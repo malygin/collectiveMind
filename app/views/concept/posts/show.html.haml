@@ -22,6 +22,7 @@
             -@post.concept_disposts.by_discussions([@post.concept_disposts.first.id]).each_with_index  do |cd, index|
               .label.label-success=index+1
               =cd.content
+              .color-green= level_complite(complite(cd))
               %br
       %br
       = render 'shared/post_edit_bar', :post => @post
