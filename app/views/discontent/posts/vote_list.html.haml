@@ -20,8 +20,8 @@
     #vote_success.text-internal.text-center(style="display:none;" )
       %h3 Спасибо за участие в голосовании!
       .col-md-6
-        =link_to "Перейти к рефлексии", new_essay_post_path(@project, 2),:class => "btn btn-lg btn-success"
+        =link_to "Перейти к рефлексии", new_essay_post_path(@project, 2),class: "btn btn-lg btn-success"
       .col-md-6
-        =link_to "Перейти к списку несовершенств", discontent_posts_path(@project),:class => "btn btn-lg btn-primary"
+        =link_to "Перейти к списку несовершенств", discontent_posts_path(@project),class: "btn btn-lg btn-primary"
       %br
       %br

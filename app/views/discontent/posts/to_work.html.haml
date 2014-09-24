@@ -1,44 +1,19 @@
 %h3.color-red
   2 этап: Сбор несовершенств. Ознакомьтесь перед началом работы!
 
-#carousel-example-generic.carousel.slide{"data-ride" => "carousel"}
+#carousel-example-generic.carousel.slide{'data-ride' => 'carousel'}
   %ol.carousel-indicators
-    %li.active{"data-slide-to" => "0", "data-target" => "#carousel-example-generic"}
-    %li{"data-slide-to" => "1", "data-target" => "#carousel-example-generic"}
-    %li{"data-slide-to" => "2", "data-target" => "#carousel-example-generic"}
-    %li{"data-slide-to" => "3", "data-target" => "#carousel-example-generic"}
-    %li{"data-slide-to" => "4", "data-target" => "#carousel-example-generic"}
-    %li{"data-slide-to" => "5", "data-target" => "#carousel-example-generic"}
-    %li{"data-slide-to" => "6", "data-target" => "#carousel-example-generic"}
-    %li{"data-slide-to" => "7", "data-target" => "#carousel-example-generic"}
-    %li{"data-slide-to" => "8", "data-target" => "#carousel-example-generic"}
-    %li{"data-slide-to" => "9", "data-target" => "#carousel-example-generic"}
-    %li{"data-slide-to" => "10", "data-target" => "#carousel-example-generic"}
+    %li.active{'data-slide-to' => '0', 'data-target' => '#carousel-example-generic'}
+    - 1.upto(10) do |index|
+      %li{'data-slide-to' => "#{index}", 'data-target' => '#carousel-example-generic'}
   .carousel-inner
     .item.active
-      %img{alt: "", style: 'margin: auto;', src: "/assets/img/to_work/1b.png"}/
-    .item
-      %img{alt: "", style: 'margin: auto;', src: "/assets/img/to_work/2b.png"}/
-    .item
-      %img{alt: "", style: 'margin: auto;',src: "/assets/img/to_work/3b.png"}/
-    .item
-      %img{alt: "", style: 'margin: auto;', src: "/assets/img/to_work/4b.png"}/
-    .item
-      %img{alt: "", style: 'margin: auto;', src: "/assets/img/to_work/5b.png"}/
-    .item
-      %img{alt: "", style: 'margin: auto;', src: "/assets/img/to_work/6b.png"}/
-    .item
-      %img{alt: "", style: 'margin: auto;', src: "/assets/img/to_work/7b.png"}/
-    .item
-      %img{alt: "", style: 'margin: auto;',src: "/assets/img/to_work/8b.png"}/
-    .item
-      %img{alt: "", style: 'margin: auto;', src: "/assets/img/to_work/9b.png"}/
-    .item
-      %img{alt: "", style: 'margin: auto;', src: "/assets/img/to_work/10b.png"}/
-    .item
-      %img{alt: "", style: 'margin: auto;', src: "/assets/img/to_work/11b.png"}/
-  %a.left.carousel-control{"data-slide" => "prev", href: "#carousel-example-generic", role: "button"}
-    %span.glyphicon.glyphicon-chevron-left(style='color:#e5603b')
-  %a.right.carousel-control{"data-slide" => "next", href: "#carousel-example-generic", role: "button"}
-    %span.glyphicon.glyphicon-chevron-right(style='color:#e5603b')
+      %img{alt: '', style: 'margin: auto;', src: '/assets/img/to_work/1b.png'}/
+    - 2.upto(11) do |index|
+      .item
+        %img{alt: '', style: 'margin: auto;', src: "/assets/img/to_work/#{index}b.png"}/
 
+  %a.left.carousel-control{'data-slide' => 'prev', href: '#carousel-example-generic', role: 'button'}
+    %span.glyphicon.glyphicon-chevron-left(style='color:#e5603b')
+  %a.right.carousel-control{'data-slide' => 'next', href: '#carousel-example-generic', role: 'button'}
+    %span.glyphicon.glyphicon-chevron-right(style='color:#e5603b')

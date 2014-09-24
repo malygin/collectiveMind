@@ -1,5 +1,5 @@
 %h3.text-center Форма добавления несовершенства
-= form_for  @post, :url => {:project => @project.id,:improve_comment => params[:improve_comment],:improve_stage => params[:improve_stage],:required => params[:required], :action => @post.persisted? ? 'update' : 'create'},  :remote => true, :html => { :id => 'new_discontent' }do |f|
+= form_for @post, url: {project: @project.id,improve_comment: params[:improve_comment], improve_stage: params[:improve_stage], required: params[:required], action: @post.persisted? ? 'update' : 'create'}, remote: true, html: {id: 'new_discontent'} do |f|
   #notice_messages
   -#-if @post.errors.any?
   -#  #error_explanation
@@ -30,15 +30,12 @@
           %span.label.label-success что
           Отсутствие меда
     .col-md-6
-
       .form-group
-
-        =f.text_area :content, class: 'form-control', rows: 5, placeholder: 'Отрицательное действие, явление, установление, черта', onkeyup: "activate_button(this);"
+        = f.text_area :content, class: 'form-control', rows: 5, placeholder: 'Отрицательное действие, явление, установление, черта', onkeyup: 'activate_button(this);'
   .row
     .col-md-12
       .text-center
         .h4
-
           Где это происходит?
         %br
   .row
@@ -54,7 +51,7 @@
           У Винни-Пуха
 
     .col-md-6
-      =f.autocomplete_field :whered, autocomplete_discontent_post_whered_discontent_posts_path, :"min-length" => 0, style: 'height: 44px', class: 'form-control autocomplete',placeholder: 'Место, организация, общность, в которой это происходит '
+      = f.autocomplete_field :whered, autocomplete_discontent_post_whered_discontent_posts_path, :'min-length' => 0, style: 'height: 44px', class: 'form-control autocomplete', placeholder: 'Место, организация, общность, в которой это происходит '
       %br
       %br
   .row
@@ -75,8 +72,7 @@
           %span.label.label-success когда
           Когда Винни хочет мед
     .col-md-6
-      =f.autocomplete_field :whend, autocomplete_discontent_post_whend_discontent_posts_path, :"min-length" => 0, style: 'height: 44px',  class: 'form-control autocomplete',placeholder: 'Во время какого события, мероприятия, процесса, ситуации '
-
+      = f.autocomplete_field :whend, autocomplete_discontent_post_whend_discontent_posts_path, :'min-length' => 0, style: 'height: 44px', class: 'form-control autocomplete', placeholder: 'Во время какого события, мероприятия, процесса, ситуации '
 
   .row
     .col-md-6
@@ -87,21 +83,22 @@
       %br
     .com-md-6
       %br
-      = select_tag 'select_for_aspects', options_from_collection_for_select(@aspects.minus_view(@aspects_for_post.nil? ? (@asp.nil? ? [] : [@asp.id]) : @aspects_for_post.pluck(:id)), "id", "content"),
-      :prompt => 'Выберите тему' , style:'margin-left:15px; margin-top:10px; height: 30px;'
+      = select_tag 'select_for_aspects', options_from_collection_for_select(@aspects.minus_view(@aspects_for_post.nil? ? (@asp.nil? ? [] : [@asp.id]) : @aspects_for_post.pluck(:id)), 'id', 'content'),
+      prompt: 'Выберите тему' , style:'margin-left:15px; margin-top:10px; height: 30px;'
       %br
       #add_post_aspects(style="margin-left: 52%;margin-top: 10px;")
-        -unless @aspects_for_post.nil?
+        - unless @aspects_for_post.nil?
           - @aspects_for_post.each do |ap|
             %div{id: "aspect_#{ap.id}"}
-              %input{name: "discontent_post_aspects[]", type: "hidden", value: "#{ap.id}"}/
-              %span.glyphicon.glyphicon-remove.text-danger.pull-left{onclick: "remove_discontent_aspect('#{ap.id}','#{ap.content}');", style: "cursor:pointer;text-decoration:none;font-size:15px;"}
+              %input{name: 'discontent_post_aspects[]', type: 'hidden', value: "#{ap.id}"}/
+              %span.glyphicon.glyphicon-remove.text-danger.pull-left{onclick: "remove_discontent_aspect('#{ap.id}','#{ap.content}');", style: 'cursor:pointer;text-decoration:none;font-size:15px;'}
               %span.span_aspect.label.label-t{id: "#{ap.id}"}=ap.content
         -unless @asp.nil?
           %div{id: "aspect_#{@asp.id}"}
             %input{name: "discontent_post_aspects[]", type: "hidden", value: "#{@asp.id}"}/
-            %span.glyphicon.glyphicon-remove.text-danger.pull-left{onclick: "remove_discontent_aspect('#{@asp.id}','#{@asp.content}');", style: "cursor:pointer;text-decoration:none;font-size:15px;"}
-            %span.span_aspect.label.label-t{id: "#{@asp.id}"}=@asp.content
+            %span.glyphicon.glyphicon-remove.text-danger.pull-left{onclick: "remove_discontent_aspect('#{@asp.id}','#{@asp.content}');", style: 'cursor:pointer;text-decoration:none;font-size:15px;'}
+            %span.span_aspect.label.label-t{id: "#{@asp.id}"}
+              = @asp.content
       %br
 
   .row
@@ -109,17 +106,17 @@
       .form-group.text-center
         %b  Выберите тип несовершенства
         %label.radio-inline
-          = f.radio_button :style,  '1', :checked => "checked"
+          = f.radio_button :style, '1', checked: 'checked'
           %span.label.label-danger Имеющиеся недостатки
         %label.radio-inline
-          = f.radio_button :style,  '0'
+          = f.radio_button :style, '0'
           %span.label.label-success Отсутствующие достоинства
 
   %br
   %hr
-  %button.btn.btn-lg.btn-primary#send_post(type="submit" onclick="$(this).button('loading');discontent_form_submit();"){:class => ('disabled' unless @post.content?), "data-loading-text" => "Сохранение..."} Сохранить
+  %button.btn.btn-lg.btn-primary#send_post(type="submit" onclick="$(this).button('loading');discontent_form_submit();"){class: ('disabled' unless @post.content?), 'data-loading-text' => 'Сохранение...'} Сохранить
   %br
   %br
-  =link_to 'Назад', discontent_posts_path(@project)
+  = link_to 'Назад', discontent_posts_path(@project)
 
 #render_success_discontent

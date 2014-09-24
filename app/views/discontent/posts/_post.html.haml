@@ -1,28 +1,27 @@
 .media{id: "post_#{post.id}"}
-  = render 'users/user_post', :user => post.user
+  = render 'users/user_post', user: post.user
   .media-body
-    -post.post_aspects.each do |da|
+    - post.post_aspects.each do |da|
       = render partial: 'discontent/aspects/aspect', object: da
-    =discontent_style_name(post.style)
+    = discontent_style_name(post.style)
     %br
     = render partial: 'discontent/posts/post_content', object: post
     .row
       .col-md-10
         %small.text-muted= Russian::strftime(post.created_at,'%d %B %k:%M:%S')
-    = render 'shared/post_social_bar2', :post => post
+    = render 'shared/post_social_bar2', post: post
     %span
-      -if post.status == 2 and boss?
-        = link_to 'Разгруппировать', {:action => :ungroup_union, :id => post.id}, :method => :put, :confirm => 'Точно?', :class => 'btn btn-danger btn-xs'
+      - if post.status == 2 and boss?
+        = link_to 'Разгруппировать', {action: :ungroup_union, id: post.id}, method: :put, confirm: 'Точно?', class: 'btn btn-danger btn-xs'
         \|
-        = link_to 'Редактировать группу', {:action => :edit_group, :id => post.id},:remote => true, :class => 'btn btn-primary btn-xs'
+        = link_to 'Редактировать группу', {action: :edit_group, id: post.id},remote: true, class: 'btn btn-primary btn-xs'
         \|
-      = render 'shared/post_edit_bar', :post => post
+      = render 'shared/post_edit_bar', post: post
     - if can_union_discontents?(@project) and post.status == 0
       = hidden_field_tag 'posts[]', post.id
       .pull-right
         %a.btn.btn-xs.btn-danger(onclick="remove_block('post_#{post.id}');" ) Удалить из объединения
     - if can_union_discontents?(@project) and post.status == 1
-      .pull-right{:id => "url_post_#{post.id}"}
-        =link_to({:action => :remove_union, :post_id => post.id}, :remote => @post.one_last_post? ? false : true, :method => :put) do
+      .pull-right{id: "url_post_#{post.id}"}
+        = link_to({action: :remove_union, post_id: post.id}, remote: @post.one_last_post? ? false : true, method: :put) do
           .btn.btn-xs.btn-danger Убрать
-
