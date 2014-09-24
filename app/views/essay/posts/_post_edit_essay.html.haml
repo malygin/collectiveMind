@@ -1,5 +1,5 @@
 - if (current_user?(post_edit_essay.user) and post_edit_essay.status == 0 and current_stage?(@stage.to_i)) or boss?
-  = link_to 'Редактировать',{ :action => 'edit', :project => @project.id, :stage => @stage.to_i, :id => post_edit_essay.id}, :class=> 'btn btn-info btn-xs'
+  = link_to 'Редактировать', {action: 'edit', project: @project.id, stage: @stage.to_i, id: post_edit_essay.id}, class: 'btn btn-info btn-xs'
   \|
-  = link_to 'Удалить', {:action => :to_archive, :project => @project.id, :stage => @stage.to_i, :id => post_edit_essay.id}, :class=> 'btn btn-danger btn-xs', :method => :put, :confirm => 'Точно?'
+  = link_to 'Удалить', {action: :to_archive, project: @project.id, stage: @stage.to_i, id: post_edit_essay.id}, class: 'btn btn-danger btn-xs', method: :put, confirm: 'Точно?'
 %br

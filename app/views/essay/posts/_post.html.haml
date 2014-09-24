@@ -1,12 +1,12 @@
 .media{id: "post_#{post.id}"}
-  = render 'users/user_post', :user => post.user
+  = render 'users/user_post', user: post.user
   .media-body
     .media-heading
-      =link_to post.user, user_path(@project, post.user)
+      = link_to post.user, user_path(@project, post.user)
     %span=trim_content(post.content)
     %br
-    =link_to 'подробнее', essay_post_path(@project,@stage, post), :class => "btn btn-primary btn-xs"
+    = link_to 'подробнее', essay_post_path(@project,@stage, post), class: 'btn btn-primary btn-xs'
     |
-    = render :partial => 'post_edit_essay', :object => post
+    = render partial: 'post_edit_essay', object: post
     %br
-    = render 'shared/post_social_bar2', :post => post
+    = render 'shared/post_social_bar2', post: post

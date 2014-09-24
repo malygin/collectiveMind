@@ -9,7 +9,7 @@
     .row
       .col-md-2
         .media
-          = render 'users/user_post', :user => @post.user
+          = render 'users/user_post', user: @post.user
           .media-body
             .media-heading
               =link_to @post.user, user_path(@project, @post.user)
@@ -43,11 +43,11 @@
             %p Комментарии к рефлексии
             .text-center= will_paginate @comments
             .chat-messages
-              = render :partial => 'shared/comment',:collection => @comments
+              = render partial: 'shared/comment',collection: @comments
             .text-center= will_paginate @comments
             - if signed_in?
-              = render :partial => 'shared/comment_form', :locals => { :comment => @comment, :url_link => url_for(:controller => @post.class.name.underscore.pluralize, :action => 'add_comment')}
+              = render partial: 'shared/comment_form', locals: { comment: @comment, url_link: url_for(controller: @post.class.name.underscore.pluralize, action: 'add_comment')}
 %br
-= render :partial => 'post_edit_essay', :object => @post
+= render partial: 'post_edit_essay', object: @post
 %br
 = link_to 'К списку', essay_posts_path(@project, @stage)

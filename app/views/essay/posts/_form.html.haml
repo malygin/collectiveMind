@@ -6,7 +6,7 @@
 
 %section
   .body
-    = form_for @post,:url => {:project => @project.id, :action => @post.persisted? ? 'update' : 'create'},  :html => { :class => 'lt_new' } do |f|
+    = form_for @post,url: {project: @project.id, action: @post.persisted? ? 'update' : 'create'},  html: {class: 'lt_new'} do |f|
       -if @post.errors.any?
         #error_explanation
           %h2= "#{pluralize(@post.errors.count, "error")} prohibited this post from being saved:"
@@ -34,7 +34,6 @@
             .h4
               2. Какие достоинства отсутствовали в этой работе?
 
-
       .row
         .col-md-12
           .form-group
@@ -51,7 +50,7 @@
           .form-group
             =f.text_area :change, class: 'form-control', rows: 5
 
-      -if @stage.to_i > 1 and @project.status > 2
+      - if @stage.to_i > 1 and @project.status > 2
         .row
           .col-md-12
             .text-left
@@ -61,8 +60,7 @@
         .row
           .col-md-12
             .form-group
-              =f.text_area :reaction, class: 'form-control', rows: 5
-
+              = f.text_area :reaction, class: 'form-control', rows: 5
 
       %actions.pull-right
         = f.submit 'Сохранить',  class: 'btn btn-success btn-lg'
