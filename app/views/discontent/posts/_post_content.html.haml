@@ -16,57 +16,62 @@
 -#  = f.select :nepr1, [["невероятно", 1],["маловероятно", 2], ["вероятно", 3], ["очень вероятно", 4]]
 
 -# what field
--if boss?
+-if boss? and @project.able_add_note?
   =link_to({:controller => 'discontent/posts', :action => :status_post, :id => post_content.id, :type_field => 1},:remote => true,:method => :put, :id => "label_dispost_#{post_content.id}",:class => "note_text") do
-    %span.label(class= "#{class_for_type_field(post_content,1)}" id="#{id_for_type_field(1)}_#{post_content.id}")=name_for_type_field(1)
+    %span.label(class= "#{class_for_type_field(post_content,'what')}" id="what_#{post_content.id}")=t('form.discontent_what')
 -else
-  %span.label(class= "#{class_for_type_field(post_content,1)}" id="#{id_for_type_field(1)}_#{post_content.id}")=name_for_type_field(1)
+  %span.label(class= "#{class_for_type_field(post_content,'what')}" id="what_#{post_content.id}")=t('form.discontent_what')
 
 - if post_content.status == 2 or post_content.status == 4
-  =link_to({:controller => 'discontent/posts', :action => :new_note, :id => post_content.id, :type_field => 1},:remote => true,:method => :put, :id => "content_dispost_#{post_content.id}_1", :class => "note_text") do
-    %span(id="#{id_for_type_field(1)}_content_#{post_content.id}")=post_content.content
+  -if boss? and @project.able_add_note?
+    =link_to({:controller => 'discontent/posts', :action => :new_note, :id => post_content.id, :type_field => 1},:remote => true,:method => :put, :id => "content_dispost_what_#{post_content.id}", :class => "note_text") do
+      %span(id="what_content_#{post_content.id}")=post_content.content
+  -else
+    %span(id="what_content_#{post_content.id}")=post_content.content
 
-  %br
   %ul.ul-union-list(id="post_content_#{post_content.id}" style="list-style: disc inside;" )
     -post_content.discontent_posts.each do |dp|
       -if @remove_able
         %input#check-discontent.pull-left{:name => "check_discontent[#{dp.id}]", :type => "checkbox", :checked => grouped_discontent?(dp) ? true : false }/
         %li.union-list{:id => "li_id_#{dp.id}"}=dp.content
-      -elsif grouped_discontent?(dp)
+      -elsif @post and @post.instance_of? Concept::Post
+        -if grouped_discontent?(dp)
+          %li.union-list{:id => "li_id_#{dp.id}"}=dp.content
+      -else
         %li.union-list{:id => "li_id_#{dp.id}"}=dp.content
-  %br
+
 -else
-  -if boss?
-    =link_to({:controller => 'discontent/posts', :action => :new_note, :id => post_content.id, :type_field => 1},:remote => true,:method => :put, :id => "content_dispost_#{post_content.id}_1", :class => "note_text") do
-      %span(id="#{id_for_type_field(1)}_content_#{post_content.id}")=post_content.content
+  -if boss? and @project.able_add_note?
+    =link_to({:controller => 'discontent/posts', :action => :new_note, :id => post_content.id, :type_field => 1},:remote => true,:method => :put, :id => "content_dispost_what_#{post_content.id}", :class => "note_text") do
+      %span(id="what_content_#{post_content.id}")=post_content.content
   -else
-    %span(id="#{id_for_type_field(1)}_content_#{post_content.id}")=post_content.content
+    %span(id="what_content_#{post_content.id}")=post_content.content
 
 =content_for_note(post_content,field = 'what', link = boss? ? true : false)
 
 -#where field
--if boss?
-  =link_to("/project/#{@project.id}/discontent/posts/#{post_content.id}/new_note?type_field=2",:remote => true,:method => :put, :id => "content_dispost__#{post_content.id}_#{number_for_type_field(id_for_type_field(2))}",:class => "note_text") do
-    %span.label(class= "#{class_for_type_field(post_content,2)}" id="#{id_for_type_field(2)}_#{post_content.id}")=name_for_type_field(2)
+-if boss? and @project.able_add_note?
   =link_to("/project/#{@project.id}/discontent/posts/#{post_content.id}/status_post?type_field=2",:remote => true,:method => :put, :id => "label_dispost_#{post_content.id}",:class => "note_text") do
-    %span(id="#{id_for_type_field(2)}_content_#{post_content.id}")=post_content.whered
+    %span.label(class= "#{class_for_type_field(post_content,'where')}" id="where_#{post_content.id}")=t('form.discontent_where')
+  =link_to("/project/#{@project.id}/discontent/posts/#{post_content.id}/new_note?type_field=2",:remote => true,:method => :put, :id => "content_dispost_where_#{post_content.id}",:class => "note_text") do
+    %span(id="where_content_#{post_content.id}")=post_content.whered
 -else
-  %span.label(class= "#{class_for_type_field(post_content,2)}")=name_for_type_field(2)
-  %span(id= "#{id_for_type_field(3)}_content_#{post_content.id}")=post_content.whered
+  %span.label(class= "#{class_for_type_field(post_content,'where')}")=t('form.discontent_where')
+  %span(id= "where_content_#{post_content.id}")=post_content.whered
 
-%br
+
 =content_for_note(post_content, field = 'where', link = boss? ? true : false)
 
 -# when field
--if boss?
-  =link_to("/project/#{@project.id}/discontent/posts/#{post_content.id}/new_note?type_field=3",:remote => true,:method => :put, :id => "content_dispost__#{post_content.id}_#{number_for_type_field(id_for_type_field(3))}",:class => "note_text") do
-    %span.label(class= "#{class_for_type_field(post_content,3)}" id="#{id_for_type_field(3)}_#{post_content.id}")=name_for_type_field(3)
+-if boss? and @project.able_add_note?
   =link_to("/project/#{@project.id}/discontent/posts/#{post_content.id}/status_post?type_field=3",:remote => true,:method => :put, :id => "label_dispost_#{post_content.id}",:class => "note_text") do
-    %span(id="#{id_for_type_field(3)}_content_#{post_content.id}")=post_content.whend
+    %span.label(class= "#{class_for_type_field(post_content,'when')}" id="when_#{post_content.id}")=t('form.discontent_when')
+  =link_to("/project/#{@project.id}/discontent/posts/#{post_content.id}/new_note?type_field=3",:remote => true,:method => :put, :id => "content_dispost_when_#{post_content.id}",:class => "note_text") do
+    %span(id="when_content_#{post_content.id}")=post_content.whend
 -else
-  %span.label(class= "#{class_for_type_field(post_content,3)}" id= "#{id_for_type_field(3)}_content_#{post_content.id}")=name_for_type_field(3)
-  %span(id= "#{id_for_type_field(3)}_content_#{post_content.id}")=post_content.whend
-%br
+  %span.label(class= "#{class_for_type_field(post_content,'when')}" id= "when_content_#{post_content.id}")=t('form.discontent_when')
+  %span(id= "when_content_#{post_content.id}")=post_content.whend
+
 =content_for_note(post_content, field = 'when', link = boss? ? true : false)
 
 

@@ -134,6 +134,10 @@ class Core::Project < ActiveRecord::Base
     end
   end
 
+  def able_add_note?
+    [3,4,5,6].include?(self.status)
+  end
+
   def proc_aspects
     self.aspects.where(status:0)
   end
