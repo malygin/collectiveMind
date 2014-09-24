@@ -12,7 +12,7 @@
     = render 'shared/post_social_bar2', post: post
     %span
       - if post.status == 2 and boss?
-        = link_to 'Разгруппировать', {action: :ungroup_union, id: post.id}, method: :put, confirm: 'Точно?', class: 'btn btn-danger btn-xs'
+        = link_to 'Разгруппировать', {action: :ungroup_union, id: post.id}, method: :put, data: {confirm: 'Точно?'}, class: 'btn btn-danger btn-xs'
         \|
         = link_to 'Редактировать группу', {action: :edit_group, id: post.id},remote: true, class: 'btn btn-primary btn-xs'
         \|
