@@ -174,4 +174,19 @@ module Concept::PostsHelper
     end
   end
 
+  def status_for_complite_discontent(post,pa)
+    if post.concept_post_discontents.by_concept(pa.id).first
+      complite = post.concept_post_discontents.by_concept(pa.id).first.complite
+    end
+    if complite == 1
+      'в незначительной мере'
+    elsif complite == 2
+      'в значительной мере'
+    elsif complite == 3
+      'полностью'
+    else
+      'полностью'
+    end
+  end
+
 end

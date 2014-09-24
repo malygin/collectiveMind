@@ -46,6 +46,11 @@
   #  self.concept_notes.by_type(type_field)
   #end
 
+  def complite(discontent)
+    post = discontent.concept_post_discontents.by_concept(self.id).first
+    post.complite if post
+  end
+
   def note_size?(type_fd)
     self.post_notes(type_fd).size > 0
   end

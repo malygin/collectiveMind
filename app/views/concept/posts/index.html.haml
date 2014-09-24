@@ -25,8 +25,10 @@
                   Статус
                 %th
                   Заполненность
+                %th
+                  Решаемость
             %tbody
-              - post.dispost_concepts.each_with_index  do |pa, index|
+              - post.dispost_concepts.sort_by{|c| c.complite(post)}.each_with_index  do |pa, index|
                 - if pa.status == 0
                   %tr
                     %td
@@ -45,6 +47,9 @@
                     %td
                       %span.h4.color-orange
                         =status_for_concept(pa.post_aspects.first)
+                    %td
+                      =status_for_complite_discontent(post,pa)
+
               -if  @project.status == 7 or @project.demo?
                 %tr
                   %td{:colspan => 4, :style => "font-weight: normal !important;"}
