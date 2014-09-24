@@ -73,7 +73,7 @@ class User < ActiveRecord::Base
 
   def current_projects_for_user
     if prime_admin?
-      Core::Project.order(:id).all
+      Core::Project.order(:id)
     else
       opened_projects = Core::Project.where(type_access: [0, 3]).club_projects(self)
       closed_projects = self.projects.where(core_projects: {type_access: 2})

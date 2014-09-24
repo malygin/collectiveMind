@@ -21,16 +21,16 @@ module BasePost
     has_many :admins_vote, -> { where users: {type_user: [1, 6]} }, through: :post_votings, source: :user
     has_many :admins_against, -> { where users: {type_user: [1, 6]} }, through: :post_votings_against, source: :user
 
-    scope :for_project, lambda { |project| where(project_id: project) }
-    scope :for_expert, lambda { where(status: 1) }
-    scope :accepted, lambda { where(status: 2) }
-    scope :archive, lambda { where(status: 3) }
+    scope :for_project, -> (project) { where(project_id: project) }
+    scope :for_expert, -> { where(status: 1) }
+    scope :accepted, -> { where(status: 2) }
+    scope :archive, -> { where(status: 3) }
     scope :with_votes, -> { includes(:post_votings).where('"discontent_post_votings"."id" >0') }
     scope :with_concept_votes, -> { includes(:post_votings).where('"concept_post_votings"."id" >0') }
 
-    scope :created_order, order("#{table_name}.created_at DESC")
-    scope :updated_order, order("#{table_name}.updated_at DESC")
-    scope :popular_posts, order('number_views DESC')
+    scope :created_order, -> { order("#{table_name}.created_at DESC") }
+    scope :updated_order, -> { order("#{table_name}.updated_at DESC") }
+    scope :popular_posts, -> { order('number_views DESC') }
 
     def show_content
       content
