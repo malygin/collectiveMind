@@ -20,7 +20,7 @@
               %section
                 .body
                   .pull-right
-                    = link_to '+ Добавить новую группу', discontent_posts_new_group_path(@project, asp: params[:asp]) ,:remote => true, id: 'add_record',  class: 'btn btn-danger'
+                    = link_to '+ Добавить новую группу', discontent_posts_new_group_path(@project, asp: params[:asp]) ,remote: true, id: 'add_record',  class: 'btn btn-danger'
                   %h4 Группы несовершенств
                   %ul.news-list#panel_union_group
                     - @aspect.aspect_posts.by_status(2).created_order.each do |post|
@@ -39,10 +39,10 @@
           .row
             .col-md-6
               .chat-messages
-                = render :partial => 'shared/improve_comment',:collection => @comments_all
+                = render partial: 'shared/improve_comment',collection: @comments_all
         #new_posts.tab-pane.fade
 
--else
+- else
   .col-md-6
     %section
       .body
@@ -51,7 +51,7 @@
             = link_to '+ Добавить', new_discontent_post_path(@project, asp: params[:asp]) , id: 'add_record',  class: 'btn btn-danger'
         - if boss? and @project.status == 7
           .pull-right
-            = link_to '+ Добавить обязательное несовершенство', new_discontent_post_path(@project, asp: params[:asp], :required => true) , id: 'add_record',  class: 'btn btn-danger'
+            = link_to '+ Добавить обязательное несовершенство', new_discontent_post_path(@project, asp: params[:asp], required: true) , id: 'add_record',  class: 'btn btn-danger'
         %h4 Несовершенства
 
         %ul.news-list
@@ -62,4 +62,4 @@
       .body
         %h4 Неоформленные проблемы
         .chat-messages
-          = render :partial => 'shared/improve_comment',:collection => @comments_all
+          = render partial: 'shared/improve_comment',collection: @comments_all

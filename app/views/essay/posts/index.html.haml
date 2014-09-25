@@ -1,10 +1,10 @@
 - if !current_user.have_essay_for_stage(@project, @stage) and current_stage?(@stage.to_i) or @project.demo?
   .pull-right
-    =link_to 'Добавить свой отзыв об этапе', new_essay_post_path(@project, @stage), id: 'new_essay',  class: 'btn btn-lg btn-success'
+    = link_to 'Добавить свой отзыв об этапе', new_essay_post_path(@project, @stage), id: 'new_essay',  class: 'btn btn-lg btn-success'
 %h3(class="#{color_stage(@stage.to_i)}")
   Рефлексия по этапу:
-  =stage_status(@stage.to_i)
+  = stage_status(@stage.to_i)
   %br
   %br
 
-=render @posts
+= render @posts

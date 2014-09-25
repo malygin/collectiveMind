@@ -1,5 +1,5 @@
 %h4
-  =link_to '/project/'+@project.id.to_s do
+  = link_to '/project/' + @project.id.to_s do
     %span.fa.fa-angle-double-left
     вернуться к процедуре
 
@@ -10,17 +10,19 @@
   .body
     .feed
       .wrapper
-        .text-center= will_paginate @journals_feed
+        .text-center
+          = will_paginate @journals_feed
         - @journals_feed.each do |journal|
           %section.feed-item
             .icon.pull-left
               %i(class="#{journal_icon(journal)}")
             .feed-item-body
-              -if journal.user
+              - if journal.user
                 = link_to journal.user, user_path(@project,journal.user)
                 = render partial: '/shared/user_online', object: journal.user
 
               = journal_parser(journal, @project.id).html_safe
               %br
-              .time.pull-left=Russian::strftime(journal.created_at,"%d %B %k:%M:%S ")
-        .text-center= will_paginate @journals_feed
+              .time.pull-left=Russian::strftime(journal.created_at, '%d %B %k:%M:%S ')
+        .text-center
+          = will_paginate @journals_feed

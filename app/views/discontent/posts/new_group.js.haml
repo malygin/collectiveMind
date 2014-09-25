@@ -1,5 +1,5 @@
 $("#form_for_group_discontent").empty();
-$("#form_for_group_discontent").html('#{escape_javascript(render :partial => 'modal_form_for_group')}');
+$("#form_for_group_discontent").html('#{escape_javascript(render partial: 'modal_form_for_group')}');
 autocomplete_initialized();
 activate_add_aspects();
 $('#modal_group_discontent').modal('show');

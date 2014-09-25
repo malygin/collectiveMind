@@ -1,12 +1,13 @@
 class JournalController < ApplicationController
   before_filter :have_project_access
+
   def index
     @project = Core::Project.find(params[:project])
-    events  = Journal.events_for_my_feed @project.id, current_user.id
+    events = Journal.events_for_my_feed @project.id, current_user.id
     g = events.group_by { |e| e.first_id }
-    @my_journals=g.collect{|k,v| [v.first, v.size]}
+    @my_journals=g.collect { |k, v| [v.first, v.size] }
     @my_journals_count = @my_journals.size
 
-    @journals_feed = Journal.events_for_user_feed(@project.id).paginate(:page => params[:page])
+    @journals_feed = Journal.events_for_user_feed(@project.id).paginate(page: params[:page])
   end
 end

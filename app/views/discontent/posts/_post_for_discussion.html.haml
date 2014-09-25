@@ -7,7 +7,7 @@
     - if post_for_discussion.status == 2 or post_for_discussion.status == 4
       %ul(id="post_content_#{post_for_discussion.id}" style="list-style: disc inside;")
         -post_for_discussion.discontent_posts.each do |dp|
-          %li{:id => "li_id_#{dp.id}"}=dp.content
+          %li{id: "li_id_#{dp.id}"}=dp.content
 
     %span.label(class= "#{class_for_type_field(post_for_discussion,2)}" id="#{id_for_type_field(2)}_#{post_for_discussion.id}")=name_for_type_field(2)
     %span.h55(id="#{id_for_type_field(2)}_content_#{post_for_discussion.id}")=post_for_discussion.whered

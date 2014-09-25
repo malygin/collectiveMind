@@ -1,10 +1,10 @@
 .media.option_for_selectize{id: "post_#{@post.id}", project: "#{@project.id}", post: "#{@post.id}"}
   - if @post.user
-    = render 'users/user_post', :user => @post.user
+    = render 'users/user_post', user: @post.user
   .media-body
     - if @post.user
       .media-heading
-        =link_to @post.user, user_path(@project, @post.user)
+        = link_to @post.user, user_path(@project, @post.user)
     %br
     -@post.post_aspects.each do |da|
       = render partial: 'discontent/aspects/aspect', object: da
@@ -15,37 +15,37 @@
     .row
       .col-md-10
         %small.text-muted
-          = Russian::strftime(@post.created_at,"%d %B %k:%M:%S ")
+          = Russian::strftime(@post.created_at, '%d %B %k:%M:%S ')
           =improve_comment(@post).html_safe if improve_comment(@post)
 
-    = render 'shared/post_social_bar2', :post => @post
+    = render 'shared/post_social_bar2', post: @post
     %span
       -if @post.status == 2 and boss?
-        = link_to 'Разгруппировать', {:action => :ungroup_union, :id => @post.id}, :method => :put, :confirm => 'Точно?', :class => 'btn btn-warning btn-xs'
+        = link_to 'Разгруппировать', {action: :ungroup_union, id: @post.id}, method: :put, data: {confirm: 'Точно?'}, class: 'btn btn-warning btn-xs'
         \|
-      = render 'shared/post_edit_bar', :post => @post
+      = render 'shared/post_edit_bar', post: @post
 
     - if @post.status == 2
       .panel.panel-default
         %p
           %h4 Объединяет:
-        .panel-body{:id => "panel_union"}
+        .panel-body{id: 'panel_union'}
           =render @post.discontent_posts
       %br
       - if boss?
         .text-success#dispost_success(style='display:none;')
           Несовершенство успешно добавлено
-        =select_tag "selectize_discontent",
-        options_from_collection_for_select(Discontent::Post.for_union(@project.id), "id", "show_content"),
+        =select_tag 'selectize_discontent',
+        options_from_collection_for_select(Discontent::Post.for_union(@project.id), 'id', 'show_content'),
         class: 'selectized',
         include_blank: true,
-        placeholder: "Добавьте несовершенство"
+        placeholder: 'Добавьте несовершенство'
 
     %br
     %br
       %ul.media-list#comments.chat-messages
-        = render :partial => 'shared/comment',:collection => @comments
+        = render partial: 'shared/comment',collection: @comments
       .text-center
         = will_paginate @comments
     - if signed_in?
-      = render :partial => 'shared/comment_form', :locals => { :comment => @comment, :url_link => url_for(:controller => @post.class.name.underscore.pluralize,  :action => 'add_comment')}
+      = render partial: 'shared/comment_form', locals: { comment: @comment, url_link: url_for(controller: @post.class.name.underscore.pluralize,  action: 'add_comment')}

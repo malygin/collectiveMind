@@ -10,7 +10,7 @@ module BaseComment
 
     has_many :comment_votings
     has_many :users, through: :comment_votings
-    default_scope order: 'created_at ASC'
+    default_scope -> { order 'created_at ASC' }
 
     scope :comment_votings_pro, -> { joins(:comment_votings).where('comment_votings.against = ?', false) }
     has_many :users_pro, through: :comment_votings_pro, source: :user
