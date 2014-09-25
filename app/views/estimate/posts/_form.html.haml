@@ -3,15 +3,15 @@
     #wizard.form-wizard
       %ul.wizard-navigation.nav-justified
         %li#first
-          %a{"data-toggle" => "tab", :href => "#tab1"}
+          %a{'data-toggle' => 'tab', href: "#tab1"}
             %small 1.
             %strong Описание проекта
         %li#second
-          %a{"data-toggle" => "tab", :href => "#tab2"}
+          %a{'data-toggle' => 'tab', href: "#tab2"}
             %small 2.
             %strong План мероприятий
         %li#third
-          %a{"data-toggle" => "tab", :href => "#tab3"}
+          %a{'data-toggle' => 'tab', href: "#tab3"}
             %small 3.
             %strong Просмотр нововведений
 
@@ -92,7 +92,7 @@
                         - stage.plan_post_aspects.each do |concept|
                           %tr(id="tr_concept_#{concept.id}")
                             %td(rowspan="#{1+concept.plan_post_actions.size}" id="td_concept_#{concept.id}")
-                              %span.h5{:id => "name_post_concept_#{concept.id}"}=concept.title
+                              %span.h5{id: "name_post_concept_#{concept.id}"}=concept.title
 
                           - unless concept.plan_post_actions.nil?
                             - concept.plan_post_actions.each do |action|
@@ -104,7 +104,7 @@
                                       ="-"
                                       =Russian::strftime(action.date_end, "%d %b %Y")
                                     %br
-                                  %span.h5{:id => "name_post_action_#{action.id}"}=action.name
+                                  %span.h5{id: "name_post_action_#{action.id}"}=action.name
                                   .pull-right
 
         #tab3.tab-pane
@@ -116,30 +116,30 @@
                   %ul#menu-levels-collapse.side-nav
                     -@plan_post.post_stages.each_with_index do |stage, index|
                       %li.panel
-                        %a.accordion-toggle{"data-parent" => "#menu-levels-collapse", "data-toggle" => "collapse", :href => "#sub-menu-#{index}-collapse"}
+                        %a.accordion-toggle{"data-parent" => "#menu-levels-collapse", 'data-toggle' => "collapse", href: "#sub-menu-#{index}-collapse"}
                           %b="Этап #{index+1}. "
                           =stage.name
                         - unless stage.plan_post_aspects.nil?
-                          %ul.panel-collapse.collapse.in{:id => "sub-menu-#{index}-collapse"}
+                          %ul.panel-collapse.collapse.in{id: "sub-menu-#{index}-collapse"}
                             - stage.plan_post_aspects.each_with_index do |concept, i|
-                              %li.concept_side{:id => "li_concept_#{concept.id}"}
-                                %a(href="#dis_#{concept.id}" data-toggle="tab")
+                              %li.concept_side{id: "li_concept_#{concept.id}"}
+                                %a(href="#dis_#{concept.id}" data-toggle='tab')
                                   ="#{i+1}. #{concept.title}"
                                   -if @post.persisted? and concept.estimate_post_aspect(@post.id)
                                     %span.color-green= concept.estimate_post_aspect(@post.id).score(@est_stat)
 
                     %li.panel
-                      %a.color-green(href="#negative" data-toggle="tab")
+                      %a.color-green(href="#negative" data-toggle='tab')
                         %b Оценка негативных явлений
                     %li.panel
-                      %a.color-green(href="#planwhole" data-toggle="tab")
+                      %a.color-green(href="#planwhole" data-toggle='tab')
                         %b Общая оценка проекта
 
 
               .col-md-8
-                = form_for @post, :url => {:project => @project.id, :action => @post.persisted? ? 'update' : 'create'},   :html => { :class => 'new_or_edit' } do |f|
+                = form_for @post, url: {project: @project.id, action: @post.persisted? ? 'update' : 'create'},   html: { class: 'new_or_edit' } do |f|
                   .pull-right
-                    =f.submit 'Сохранить', :id  => "send_post_estimate", class: 'btn btn-success'
+                    =f.submit 'Сохранить', id: "send_post_estimate", class: 'btn btn-success'
                   %br
                   %br
                   %div.tab-content
@@ -172,19 +172,19 @@
                         Наиболее вероятно, что эти побочные эффекты будут—
                         .field
                           %label
-                            = radio_button_tag "estimate_post[nepr1]", '4', @post.nepr1 == 4
+                            = radio_button_tag 'estimate_post[nepr1]', '4', @post.nepr1 == 4
                             = ' --1) значительными'
                         .field
                           %label
-                            = radio_button_tag "estimate_post[nepr1]", '3', @post.nepr1 == 3
+                            = radio_button_tag 'estimate_post[nepr1]', '3', @post.nepr1 == 3
                             = ' -- 2) средними'
                         .field
                           %label
-                            = radio_button_tag "estimate_post[nepr1]", '2', @post.nepr1 == 2
+                            = radio_button_tag 'estimate_post[nepr1]', '2', @post.nepr1 == 2
                             = ' -- 3) незначительными'
                         .field
                           %label
-                            = radio_button_tag "estimate_post[nepr1]", '1', @post.nepr1 == 1
+                            = radio_button_tag 'estimate_post[nepr1]', '1', @post.nepr1 == 1
                             = ' -- 4) нулевыми'
                         .field
                           = 'Объясните, почему вы так считаете'
@@ -197,19 +197,19 @@
                         Наиболее вероятно, что эти препятствия будут—
                         .field
                           %label
-                            = radio_button_tag "estimate_post[nep1]", '4', @post.nep1 == 4
+                            = radio_button_tag 'estimate_post[nep1]', '4', @post.nep1 == 4
                             = ' --1) значительными'
                         .field
                           %label
-                            = radio_button_tag "estimate_post[nep1]", '3', @post.nep1 == 3
+                            = radio_button_tag 'estimate_post[nep1]', '3', @post.nep1 == 3
                             = ' -- 2) средними'
                         .field
                           %label
-                            = radio_button_tag "estimate_post[nep1]", '2', @post.nep1 == 2
+                            = radio_button_tag 'estimate_post[nep1]', '2', @post.nep1 == 2
                             = ' -- 3) незначительными'
                         .field
                           %label
-                            = radio_button_tag "estimate_post[nep1]", '1', @post.nep1 == 1
+                            = radio_button_tag 'estimate_post[nep1]', '1', @post.nep1 == 1
                             = ' -- 4) нулевыми'
                         .field
                           = 'Объясните, почему вы так считаете'
@@ -225,16 +225,16 @@
 
                         .field
                           = f.label '-- 1) значительными '
-                          = f.select :nepr1, [["невероятно", 1],["маловероятно", 2], ["вероятно", 3], ["очень вероятно", 4]]
+                          = f.select :nepr1, [['невероятно', 1],['маловероятно', 2], ['вероятно', 3], ['очень вероятно', 4]]
                         .field
-                          = f.label "-- 2) средними "
-                          = f.select :nepr2, [["невероятно", 1],["маловероятно", 2], ["вероятно", 3], ["очень вероятно", 4]]
+                          = f.label '-- 2) средними '
+                          = f.select :nepr2, [['невероятно', 1],['маловероятно', 2], ['вероятно', 3], ['очень вероятно', 4]]
                         .field
-                          = f.label "-- 3) незначительными "
-                          = f.select :nepr3, [["невероятно", 1],["маловероятно", 2], ["вероятно", 3], ["очень вероятно", 4]]
+                          = f.label '-- 3) незначительными '
+                          = f.select :nepr3, [['невероятно', 1],['маловероятно', 2], ['вероятно', 3], ['очень вероятно', 4]]
                         .field
-                          = f.label "-- 4) нулевыми "
-                          = f.select :nepr4, [["невероятно", 1],["маловероятно", 2], ["вероятно", 3], ["очень вероятно", 4]]
+                          = f.label '-- 4) нулевыми '
+                          = f.select :nepr4, [['невероятно', 1],['маловероятно', 2], ['вероятно', 3], ['очень вероятно', 4]]
                         .field
                           %br
                           = f.label 'Объясните, почему вы так считаете'
@@ -248,16 +248,16 @@
 
                         .field
                           = f.label '-- 1) значительными '
-                          = f.select :nep1, [["невероятно", 1],["маловероятно", 2], ["вероятно", 3], ["очень вероятно", 4]]
+                          = f.select :nep1, [['невероятно', 1],['маловероятно', 2], ['вероятно', 3], ['очень вероятно', 4]]
                         .field
-                          = f.label "-- 2) средними "
-                          = f.select :nep2, [["невероятно", 1],["маловероятно", 2], ["вероятно", 3], ["очень вероятно", 4]]
+                          = f.label '-- 2) средними '
+                          = f.select :nep2, [['невероятно', 1],['маловероятно', 2], ['вероятно', 3], ['очень вероятно', 4]]
                         .field
-                          = f.label "-- 3) незначительными "
-                          = f.select :nep3, [["невероятно", 1],["маловероятно", 2], ["вероятно", 3], ["очень вероятно", 4]]
+                          = f.label '-- 3) незначительными '
+                          = f.select :nep3, [['невероятно', 1],['маловероятно', 2], ['вероятно', 3], ['очень вероятно', 4]]
                         .field
-                          = f.label "-- 4) нулевыми "
-                          = f.select :nep4, [["невероятно", 1],["маловероятно", 2], ["вероятно", 3], ["очень вероятно", 4]]
+                          = f.label '-- 4) нулевыми '
+                          = f.select :nep4, [['невероятно', 1],['маловероятно', 2], ['вероятно', 3], ['очень вероятно', 4]]
                         .field
                           %br
                           = f.label 'Объясните, почему вы так считаете'
@@ -265,7 +265,7 @@
                         %br
                   %br
                   .pull-right
-                    =f.submit 'Сохранить', :id  => "send_post_estimate", class: 'btn btn-success'
+                    =f.submit 'Сохранить', id: 'send_post_estimate', class: 'btn btn-success'
 
         .description
           %ul.pager.wizard

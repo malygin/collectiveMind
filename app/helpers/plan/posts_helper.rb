@@ -145,7 +145,7 @@ module Plan::PostsHelper
         if view
           link = content_tag :span, "#{field_for_concept(n+1)}", class: "badge badge-danger"
         else
-          link = link_to "#{field_for_concept(n+1)} ", "/project/#{@project.id}/plan/posts/#{@post.id}/edit_concept?con_id=#{concept.id}&tag_field=#{tag_for_concept(n+1)}", :method => :put, :remote => true, :class => "badge badge-danger"
+          link = link_to "#{field_for_concept(n+1)} ", "/project/#{@project.id}/plan/posts/#{@post.id}/edit_concept?con_id=#{concept.id}&tag_field=#{tag_for_concept(n+1)}", method: :put, remote: true, class: "badge badge-danger"
         end
         if [4,7].include?(n+1)
           if !concept.plan_post_resources.by_type(field_for_res(n+1)).present?

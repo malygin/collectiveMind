@@ -1,9 +1,9 @@
-= form_for @post_concept, :url => {:project => @project.id, :id => @post.id, con_id: @post_concept.id, :action => 'update_get_concept'}, :remote => true, :method => :put do |f|
+= form_for @post_concept, url: {project: @project.id, id: @post.id, con_id: @post_concept.id, action: 'update_get_concept'}, remote: true, method: :put do |f|
   #mod
   .color-green#concept_update_success(style='display:none;')
     Нововведение успешно обновлено
   .pull-right(style='display:none;')
-    =f.submit 'Сохранить', :id  => "send_post_concept", class: 'btn btn-success'
+    =f.submit 'Сохранить', id: "send_post_concept", class: 'btn btn-success'
   .row
     .col-md-12
       .text-center
@@ -19,7 +19,7 @@
         %h4.color-orange
           %b A1.
           =t('form.novation_what')
-          .label.label-success.example-concept{"data-toggle" => "collapse", "data-target" => "#novation_what"} Пример
+          .label.label-success.example-concept{"data-toggle"=> "collapse", "data-target"=> "#novation_what"} Пример
         %br
 
   .row#novation_what.collapse
@@ -43,14 +43,14 @@
   .row
     .col-md-12
       .form-group.has-danger
-        =f.text_area :name, :class => "concept_cond form-control", rows: 12, style: 'width: 100%;'
+        =f.text_area :name, class: "concept_cond form-control", rows: 12, style: 'width: 100%;'
   .row
     .col-md-12
       .text-center
         %h4.color-orange
           %b A2.
           =t('form.novation_how')
-          .label.label-success.example-concept{"data-toggle" => "collapse", "data-target" => "#novation_how"} Пример
+          .label.label-success.example-concept{"data-toggle"=> "collapse", "data-target"=> "#novation_how"} Пример
         %br
   .row#novation_how.collapse
     .col-md-12
@@ -62,14 +62,14 @@
   .row
     .col-md-12
       .form-group.has-danger
-        =f.text_area :content,  :class => "concept_cond form-control", rows: 12, style: 'width: 100%;'
+        =f.text_area :content,  class: "concept_cond form-control", rows: 12, style: 'width: 100%;'
   .row
     .col-md-12
       .text-center
         %h4.color-orange
           %b B1.
           =t('form.cond')
-          .label.label-success.example-concept{"data-toggle" => "collapse", "data-target" => "#cond"} Пример
+          .label.label-success.example-concept{"data-toggle"=> "collapse", "data-target"=> "#cond"} Пример
         %br
 
   .row#cond.collapse
@@ -84,14 +84,14 @@
   .row
     .col-md-12
       .form-group.has-success
-        =f.text_area :positive, :class => "concept_cond form-control", rows: 12, style: 'width: 100%;'
+        =f.text_area :positive, class: "concept_cond form-control", rows: 12, style: 'width: 100%;'
   .row
     .col-md-12
       .text-center
         %h4.color-orange
           %b B2.
           =t('form.cond_res')
-          .label.label-success.example-concept{"data-toggle" => "collapse", "data-target" => "#cond_res"} Пример
+          .label.label-success.example-concept{"data-toggle"=> "collapse", "data-target"=> "#cond_res"} Пример
         %br
 
   .row#cond_res.collapse
@@ -116,26 +116,26 @@
             помещение (для хранения технических средств)...
   .row
     .col-md-12
-      .form-group.has-success{:id => "resources_positive_r"}
+      .form-group.has-success{id: "resources_positive_r"}
         - unless form_concept.plan_post_resources.by_type('positive_r').empty?
           -form_concept.plan_post_resources.by_type('positive_r').each do |r|
             .panel.panel-default
               .panel-body
                 %span.glyphicon.glyphicon-remove.text-danger.pull-right{onclick: "$(this).parent().parent().remove();", style: "cursor:pointer;text-decoration:none;font-size:15px;"}
-                =autocomplete_field_tag "resor_positive_r[]",'', autocomplete_concept_post_resource_concept_posts_path,:append_to => "#mod", :"min-length" => 0, value: r.name,  class: 'form-control autocomplete',placeholder: 'Введите свой ресурс или выберите из списка'
+                =autocomplete_field_tag "resor_positive_r[]",'', autocomplete_concept_post_resource_concept_posts_path,append_to: "#mod", :"min-length"=> 0, value: r.name,  class: 'form-control autocomplete',placeholder: 'Введите свой ресурс или выберите из списка'
                 %br
                 = text_area_tag "res_positive_r[]", r.desc, class: 'form-control', placeholder: 'Пояснение к ресурсу'
         - else
           .panel.panel-default
             .panel-body
               %span.glyphicon.glyphicon-remove.text-danger.pull-right{onclick: "$(this).parent().parent().remove();", style: "cursor:pointer;text-decoration:none;font-size:15px;"}
-              =autocomplete_field_tag "resor_positive_r[]",'', autocomplete_concept_post_resource_concept_posts_path,:append_to => "#mod", :"min-length" => 0,  class: 'form-control autocomplete',placeholder: 'Введите свой ресурс или выберите из списка'
+              =autocomplete_field_tag "resor_positive_r[]",'', autocomplete_concept_post_resource_concept_posts_path,append_to: "#mod", :"min-length"=> 0,  class: 'form-control autocomplete',placeholder: 'Введите свой ресурс или выберите из списка'
               %br
               = text_area_tag "res_positive_r[]", '', class: 'form-control', placeholder: 'Пояснение к ресурсу'
           .panel.panel-default
             .panel-body
               %span.glyphicon.glyphicon-remove.text-danger.pull-right{onclick: "$(this).parent().parent().remove();", style: "cursor:pointer;text-decoration:none;font-size:15px;"}
-              =autocomplete_field_tag "resor_positive_r[]",'', autocomplete_concept_post_resource_concept_posts_path,:append_to => "#mod", :"min-length" => 0,  class: 'form-control autocomplete',placeholder: 'Введите свой ресурс или выберите из списка'
+              =autocomplete_field_tag "resor_positive_r[]",'', autocomplete_concept_post_resource_concept_posts_path,append_to: "#mod", :"min-length"=> 0,  class: 'form-control autocomplete',placeholder: 'Введите свой ресурс или выберите из списка'
               %br
               = text_area_tag "res_positive_r[]", '', class: 'form-control', placeholder: 'Пояснение к ресурсу'
       %a.btn.btn-success.pull-right{onclick:"return add_new_resource_to_plan('positive_r',#{@project.id});"} Добавить ресурс
@@ -146,7 +146,7 @@
         %h4.color-orange
           %b B3.
           =t('form.cond_s')
-          .label.label-success.example-concept{"data-toggle" => "collapse", "data-target" => "#cond_s"} Пример
+          .label.label-success.example-concept{"data-toggle"=> "collapse", "data-target"=> "#cond_s"} Пример
         %br
 
   .row#cond_s.collapse
@@ -160,26 +160,26 @@
             Объявление для найма работника; деньги, собранные с жильцов для оплаты работника, покупки инструментов и аренды помощения
   .row
     .col-md-12
-      .form-group.has-success{:id => "resources_positive_s"}
+      .form-group.has-success{id: "resources_positive_s"}
         - unless form_concept.plan_post_means.by_type('positive_s').empty?
           -form_concept.plan_post_means.by_type('positive_s').each do |r|
             .panel.panel-default
               .panel-body
                 %span.glyphicon.glyphicon-remove.text-danger.pull-right{onclick: "$(this).parent().parent().remove();", style: "cursor:pointer;text-decoration:none;font-size:15px;"}
-                =autocomplete_field_tag "resor_positive_s[]",'', autocomplete_concept_post_resource_concept_posts_path,:append_to => "#mod", :"min-length" => 0, value: r.name,  class: 'form-control autocomplete',placeholder: 'Введите свой ресурс или выберите из списка'
+                =autocomplete_field_tag "resor_positive_s[]",'', autocomplete_concept_post_resource_concept_posts_path,append_to: "#mod", :"min-length"=> 0, value: r.name,  class: 'form-control autocomplete',placeholder: 'Введите свой ресурс или выберите из списка'
                 %br
                 = text_area_tag "res_positive_s[]", r.desc, class: 'form-control', placeholder: 'Пояснение к ресурсу'
         - else
           .panel.panel-default
             .panel-body
               %span.glyphicon.glyphicon-remove.text-danger.pull-right{onclick: "$(this).parent().parent().remove();", style: "cursor:pointer;text-decoration:none;font-size:15px;"}
-              =autocomplete_field_tag "resor_positive_s[]",'', autocomplete_concept_post_resource_concept_posts_path,:append_to => "#mod", :"min-length" => 0,  class: 'form-control autocomplete',placeholder: 'Введите свой ресурс или выберите из списка'
+              =autocomplete_field_tag "resor_positive_s[]",'', autocomplete_concept_post_resource_concept_posts_path,append_to: "#mod", :"min-length"=> 0,  class: 'form-control autocomplete',placeholder: 'Введите свой ресурс или выберите из списка'
               %br
               = text_area_tag "res_positive_s[]", '', class: 'form-control', placeholder: 'Пояснение к ресурсу'
           .panel.panel-default
             .panel-body
               %span.glyphicon.glyphicon-remove.text-danger.pull-right{onclick: "$(this).parent().parent().remove();", style: "cursor:pointer;text-decoration:none;font-size:15px;"}
-              =autocomplete_field_tag "resor_positive_s[]",'', autocomplete_concept_post_resource_concept_posts_path,:append_to => "#mod", :"min-length" => 0,  class: 'form-control autocomplete',placeholder: 'Введите свой ресурс или выберите из списка'
+              =autocomplete_field_tag "resor_positive_s[]",'', autocomplete_concept_post_resource_concept_posts_path,append_to: "#mod", :"min-length"=> 0,  class: 'form-control autocomplete',placeholder: 'Введите свой ресурс или выберите из списка'
               %br
               = text_area_tag "res_positive_s[]", '', class: 'form-control', placeholder: 'Пояснение к ресурсу'
       %a.btn.btn-success.pull-right{onclick:"return add_new_resource_to_plan('positive_s',#{@project.id});"} Добавить ресурс
@@ -191,7 +191,7 @@
         %h4.color-orange
           %b C1.
           =t('form.negative_h')
-          .label.label-success.example-concept{"data-toggle" => "collapse", "data-target" => "#negative_h"} Пример
+          .label.label-success.example-concept{"data-toggle"=> "collapse", "data-target"=> "#negative_h"} Пример
         %br
 
   .row#negative_h.collapse
@@ -207,7 +207,7 @@
   .row
     .col-md-12
       .form-group.has-success
-        =f.text_area :negative,  :class => "concept_cond form-control", rows: 14,  style: 'width: 100%;'
+        =f.text_area :negative,  class: "concept_cond form-control", rows: 14,  style: 'width: 100%;'
 
   .row
     .col-md-12
@@ -215,7 +215,7 @@
         %h4.color-orange
           %b C2.
           =t('form.negative_res')
-          .label.label-success.example-concept{"data-toggle" => "collapse", "data-target" => "#negative_res"} Пример
+          .label.label-success.example-concept{"data-toggle"=> "collapse", "data-target"=> "#negative_res"} Пример
         %br
 
   .row#negative_res.collapse
@@ -237,26 +237,26 @@
 
   .row
     .col-md-12
-      .form-group.has-success{:id => "resources_negative_r"}
+      .form-group.has-success{id: "resources_negative_r"}
         - unless form_concept.plan_post_resources.by_type('negative_r').empty?
           -form_concept.plan_post_resources.by_type('negative_r').each do |r|
             .panel.panel-default
               .panel-body
                 %span.glyphicon.glyphicon-remove.text-danger.pull-right{onclick: "$(this).parent().parent().remove();", style: "cursor:pointer;text-decoration:none;font-size:15px;"}
-                =autocomplete_field_tag "resor_negative_r[]",'', autocomplete_concept_post_resource_concept_posts_path,:append_to => "#mod", :"min-length" => 0, value: r.name,  class: 'form-control autocomplete',placeholder: 'Введите свой ресурс или выберите из списка'
+                =autocomplete_field_tag "resor_negative_r[]",'', autocomplete_concept_post_resource_concept_posts_path,append_to: "#mod", :"min-length"=> 0, value: r.name,  class: 'form-control autocomplete',placeholder: 'Введите свой ресурс или выберите из списка'
                 %br
                 = text_area_tag "res_negative_r[]", r.desc, class: 'form-control', placeholder: 'Пояснение к ресурсу'
         - else
           .panel.panel-default
             .panel-body
               %span.glyphicon.glyphicon-remove.text-danger.pull-right{onclick: "$(this).parent().parent().remove();", style: "cursor:pointer;text-decoration:none;font-size:15px;"}
-              =autocomplete_field_tag "resor_negative_r[]",'', autocomplete_concept_post_resource_concept_posts_path,:append_to => "#mod", :"min-length" => 0,  class: 'form-control autocomplete',placeholder: 'Введите свой ресурс или выберите из списка'
+              =autocomplete_field_tag "resor_negative_r[]",'', autocomplete_concept_post_resource_concept_posts_path,append_to: "#mod", :"min-length"=> 0,  class: 'form-control autocomplete',placeholder: 'Введите свой ресурс или выберите из списка'
               %br
               = text_area_tag "res_negative_r[]", '', class: 'form-control', placeholder: 'Пояснение к ресурсу'
           .panel.panel-default
             .panel-body
               %span.glyphicon.glyphicon-remove.text-danger.pull-right{onclick: "$(this).parent().parent().remove();", style: "cursor:pointer;text-decoration:none;font-size:15px;"}
-              =autocomplete_field_tag "resor_negative_r[]",'', autocomplete_concept_post_resource_concept_posts_path,:append_to => "#mod", :"min-length" => 0,  class: 'form-control autocomplete',placeholder: 'Введите свой ресурс или выберите из списка'
+              =autocomplete_field_tag "resor_negative_r[]",'', autocomplete_concept_post_resource_concept_posts_path,append_to: "#mod", :"min-length"=> 0,  class: 'form-control autocomplete',placeholder: 'Введите свой ресурс или выберите из списка'
               %br
               = text_area_tag "res_negative_r[]", '', class: 'form-control', placeholder: 'Пояснение к ресурсу'
       %a.btn.btn-success.pull-right{onclick:"return add_new_resource_to_plan('negative_r','#{@project.id}');"} Добавить ресурс
@@ -267,7 +267,7 @@
         %h4.color-orange
           %b C3.
           =t('form.negative_s')
-          .label.label-success.example-concept{"data-toggle" => "collapse", "data-target" => "#negative_s"} Пример
+          .label.label-success.example-concept{"data-toggle"=> "collapse", "data-target"=> "#negative_s"} Пример
         %br
 
   .row#negative_s.collapse
@@ -284,26 +284,26 @@
             деньги на покупку доски объявлений, создание и ведение сайта в Интернет
   .row
     .col-md-12
-      .form-group.has-success{:id => "resources_negative_s"}
+      .form-group.has-success{id: "resources_negative_s"}
         - unless form_concept.plan_post_means.by_type('negative_s').empty?
           -form_concept.plan_post_means.by_type('negative_s').each do |r|
             .panel.panel-default
               .panel-body
                 %span.glyphicon.glyphicon-remove.text-danger.pull-right{onclick: "$(this).parent().parent().remove();", style: "cursor:pointer;text-decoration:none;font-size:15px;"}
-                =autocomplete_field_tag "resor_negative_s[]",'', autocomplete_concept_post_resource_concept_posts_path,:append_to => "#mod", :"min-length" => 0, value: r.name,  class: 'form-control autocomplete',placeholder: 'Введите свой ресурс или выберите из списка'
+                =autocomplete_field_tag "resor_negative_s[]",'', autocomplete_concept_post_resource_concept_posts_path,append_to: "#mod", :"min-length"=> 0, value: r.name,  class: 'form-control autocomplete',placeholder: 'Введите свой ресурс или выберите из списка'
                 %br
                 = text_area_tag "res_negative_s[]", r.desc, class: 'form-control', placeholder: 'Пояснение к ресурсу'
         - else
           .panel.panel-default
             .panel-body
               %span.glyphicon.glyphicon-remove.text-danger.pull-right{onclick: "$(this).parent().parent().remove();", style: "cursor:pointer;text-decoration:none;font-size:15px;"}
-              =autocomplete_field_tag "resor_negative_s[]",'', autocomplete_concept_post_resource_concept_posts_path,:append_to => "#mod", :"min-length" => 0,  class: 'form-control autocomplete',placeholder: 'Введите свой ресурс или выберите из списка'
+              =autocomplete_field_tag "resor_negative_s[]",'', autocomplete_concept_post_resource_concept_posts_path,append_to: "#mod", :"min-length"=> 0,  class: 'form-control autocomplete',placeholder: 'Введите свой ресурс или выберите из списка'
               %br
               = text_area_tag "res_negative_s[]", '', class: 'form-control', placeholder: 'Пояснение к ресурсу'
           .panel.panel-default
             .panel-body
               %span.glyphicon.glyphicon-remove.text-danger.pull-right{onclick: "$(this).parent().parent().remove();", style: "cursor:pointer;text-decoration:none;font-size:15px;"}
-              =autocomplete_field_tag "resor_negative_s[]",'', autocomplete_concept_post_resource_concept_posts_path,:append_to => "#mod", :"min-length" => 0,  class: 'form-control autocomplete',placeholder: 'Введите свой ресурс или выберите из списка'
+              =autocomplete_field_tag "resor_negative_s[]",'', autocomplete_concept_post_resource_concept_posts_path,append_to: "#mod", :"min-length"=> 0,  class: 'form-control autocomplete',placeholder: 'Введите свой ресурс или выберите из списка'
               %br
               = text_area_tag "res_negative_s[]", '', class: 'form-control', placeholder: 'Пояснение к ресурсу'
       %a.btn.btn-success.pull-right{onclick:"return add_new_resource_to_plan('negative_s',#{@project.id});"} Добавить ресурс
@@ -314,7 +314,7 @@
         %h4.color-orange
           %b D1.
           =t('form.control')
-          .label.label-success.example-concept{"data-toggle" => "collapse", "data-target" => "#control"} Пример
+          .label.label-success.example-concept{"data-toggle"=> "collapse", "data-target"=> "#control"} Пример
         %br
 
   .row#control.collapse
@@ -332,7 +332,7 @@
   .row
     .col-md-12
       .form-group.has-success
-        =f.text_area :control, :class => "concept_cond form-control", rows: 14,  style: 'width: 100%;'
+        =f.text_area :control, class: "concept_cond form-control", rows: 14,  style: 'width: 100%;'
 
   .row
     .col-md-12
@@ -340,7 +340,7 @@
         %h4.color-orange
           %b D2.
           =t('form.control_res')
-          .label.label-success.example-concept{"data-toggle" => "collapse", "data-target" => "#control_res"} Пример
+          .label.label-success.example-concept{"data-toggle"=> "collapse", "data-target"=> "#control_res"} Пример
         %br
 
   .row#control_res.collapse
@@ -357,26 +357,26 @@
             Ответсвенный за содержание территории.
   .row
     .col-md-12
-      .form-group.has-success{:id => "resources_control_r"}
+      .form-group.has-success{id: "resources_control_r"}
         - unless form_concept.plan_post_resources.by_type('control_r').empty?
           -form_concept.plan_post_resources.by_type('control_r').each do |r|
             .panel.panel-default
               .panel-body
                 %span.glyphicon.glyphicon-remove.text-danger.pull-right{onclick: "$(this).parent().parent().remove();", style: "cursor:pointer;text-decoration:none;font-size:15px;"}
-                =autocomplete_field_tag "resor_control_r[]",'', autocomplete_concept_post_resource_concept_posts_path,:append_to => "#mod", :"min-length" => 0, value: r.name,  class: 'form-control autocomplete',placeholder: 'Введите свой ресурс или выберите из списка'
+                =autocomplete_field_tag "resor_control_r[]",'', autocomplete_concept_post_resource_concept_posts_path,append_to: "#mod", :"min-length"=> 0, value: r.name,  class: 'form-control autocomplete',placeholder: 'Введите свой ресурс или выберите из списка'
                 %br
                 = text_area_tag "res_control_r[]", r.desc, class: 'form-control', placeholder: 'Пояснение к ресурсу'
         - else
           .panel.panel-default
             .panel-body
               %span.glyphicon.glyphicon-remove.text-danger.pull-right{onclick: "$(this).parent().parent().remove();", style: "cursor:pointer;text-decoration:none;font-size:15px;"}
-              =autocomplete_field_tag "resor_control_r[]",'', autocomplete_concept_post_resource_concept_posts_path,:append_to => "#mod", :"min-length" => 0,  class: 'form-control autocomplete',placeholder: 'Введите свой ресурс или выберите из списка'
+              =autocomplete_field_tag "resor_control_r[]",'', autocomplete_concept_post_resource_concept_posts_path,append_to: "#mod", :"min-length"=> 0,  class: 'form-control autocomplete',placeholder: 'Введите свой ресурс или выберите из списка'
               %br
               = text_area_tag "res_control_r[]", '', class: 'form-control', placeholder: 'Пояснение к ресурсу'
           .panel.panel-default
             .panel-body
               %span.glyphicon.glyphicon-remove.text-danger.pull-right{onclick: "$(this).parent().parent().remove();", style: "cursor:pointer;text-decoration:none;font-size:15px;"}
-              =autocomplete_field_tag "resor_control_r[]",'', autocomplete_concept_post_resource_concept_posts_path,:append_to => "#mod", :"min-length" => 0,  class: 'form-control autocomplete',placeholder: 'Введите свой ресурс или выберите из списка'
+              =autocomplete_field_tag "resor_control_r[]",'', autocomplete_concept_post_resource_concept_posts_path,append_to: "#mod", :"min-length"=> 0,  class: 'form-control autocomplete',placeholder: 'Введите свой ресурс или выберите из списка'
               %br
               = text_area_tag "res_control_r[]", '', class: 'form-control', placeholder: 'Пояснение к ресурсу'
       %a.btn.btn-success.pull-right{onclick:"return add_new_resource_to_plan('control_r',#{@project.id});"} Добавить ресурс
@@ -387,7 +387,7 @@
         %h4.color-orange
           %b D3.
           =t('form.control_s')
-          .label.label-success.example-concept{"data-toggle" => "collapse", "data-target" => "#control_s"} Пример
+          .label.label-success.example-concept{"data-toggle"=> "collapse", "data-target"=> "#control_s"} Пример
         %br
 
   .row#control_s.collapse
@@ -404,26 +404,26 @@
             Оплата инспекций
   .row
     .col-md-12
-      .form-group.has-success{:id => "resources_control_s"}
+      .form-group.has-success{id: "resources_control_s"}
         - unless form_concept.plan_post_means.by_type('control_s').empty?
           -form_concept.plan_post_means.by_type('control_s').each do |r|
             .panel.panel-default
               .panel-body
                 %span.glyphicon.glyphicon-remove.text-danger.pull-right{onclick: "$(this).parent().parent().remove();", style: "cursor:pointer;text-decoration:none;font-size:15px;"}
-                =autocomplete_field_tag "resor_control_s[]",'', autocomplete_concept_post_resource_concept_posts_path,:append_to => "#mod", :"min-length" => 0, value: r.name,  class: 'form-control autocomplete',placeholder: 'Введите свой ресурс или выберите из списка'
+                =autocomplete_field_tag "resor_control_s[]",'', autocomplete_concept_post_resource_concept_posts_path,append_to: "#mod", :"min-length"=> 0, value: r.name,  class: 'form-control autocomplete',placeholder: 'Введите свой ресурс или выберите из списка'
                 %br
                 = text_area_tag "res_control_s[]", r.desc, class: 'form-control', placeholder: 'Пояснение к ресурсу'
         - else
           .panel.panel-default
             .panel-body
               %span.glyphicon.glyphicon-remove.text-danger.pull-right{onclick: "$(this).parent().parent().remove();", style: "cursor:pointer;text-decoration:none;font-size:15px;"}
-              =autocomplete_field_tag "resor_control_s[]",'', autocomplete_concept_post_resource_concept_posts_path,:append_to => "#mod", :"min-length" => 0,  class: 'form-control autocomplete',placeholder: 'Введите свой ресурс или выберите из списка'
+              =autocomplete_field_tag "resor_control_s[]",'', autocomplete_concept_post_resource_concept_posts_path,append_to: "#mod", :"min-length"=> 0,  class: 'form-control autocomplete',placeholder: 'Введите свой ресурс или выберите из списка'
               %br
               = text_area_tag "res_control_s[]", '', class: 'form-control', placeholder: 'Пояснение к ресурсу'
           .panel.panel-default
             .panel-body
               %span.glyphicon.glyphicon-remove.text-danger.pull-right{onclick: "$(this).parent().parent().remove();", style: "cursor:pointer;text-decoration:none;font-size:15px;"}
-              =autocomplete_field_tag "resor_control_s[]",'', autocomplete_concept_post_resource_concept_posts_path,:append_to => "#mod", :"min-length" => 0,  class: 'form-control autocomplete',placeholder: 'Введите свой ресурс или выберите из списка'
+              =autocomplete_field_tag "resor_control_s[]",'', autocomplete_concept_post_resource_concept_posts_path,append_to: "#mod", :"min-length"=> 0,  class: 'form-control autocomplete',placeholder: 'Введите свой ресурс или выберите из списка'
               %br
               = text_area_tag "res_control_s[]", '', class: 'form-control', placeholder: 'Пояснение к ресурсу'
       %a.btn.btn-success.pull-right{onclick:"return add_new_resource_to_plan('control_s',#{@project.id});"} Добавить ресурс
@@ -435,7 +435,7 @@
         %h4.color-orange
           %b E1.
           =t('form.obstacles_bcd')
-          .label.label-success.example-concept{"data-toggle" => "collapse", "data-target" => "#obstacles_bcd"} Пример
+          .label.label-success.example-concept{"data-toggle"=> "collapse", "data-target"=> "#obstacles_bcd"} Пример
         %br
 
   .row#obstacles_bcd.collapse
@@ -451,7 +451,7 @@
   .row
     .col-md-12
       .form-group.has-success
-        =f.text_area :obstacles, :class => "concept_cond form-control", rows: 12,  style: 'width: 100%;'
+        =f.text_area :obstacles, class: "concept_cond form-control", rows: 12,  style: 'width: 100%;'
 
   %hr
   .row
@@ -460,7 +460,7 @@
         %h4.color-orange
           %b F1.
           =t('form.problems')
-          .label.label-success.example-concept{"data-toggle" => "collapse", "data-target" => "#problems"} Пример
+          .label.label-success.example-concept{"data-toggle"=> "collapse", "data-target"=> "#problems"} Пример
         %br
 
   .row#problems.collapse
@@ -474,7 +474,7 @@
   .row
     .col-md-12
       .form-group.has-success
-        =f.text_area :problems, :class => "concept_cond form-control", rows: 12,  style: 'width: 100%;'
+        =f.text_area :problems, class: "concept_cond form-control", rows: 12,  style: 'width: 100%;'
 
   .row
     .col-md-12
@@ -482,7 +482,7 @@
         %h4.color-orange
           %b F2.
           =t('form.reality')
-          .label.label-success.example-concept{"data-toggle" => "collapse", "data-target" => "#reality"} Пример
+          .label.label-success.example-concept{"data-toggle"=> "collapse", "data-target"=> "#reality"} Пример
         %br
 
   .row#reality.collapse
@@ -497,7 +497,7 @@
   .row
     .col-md-12
       .form-group.has-success
-        =f.text_area :reality, :class => "concept_cond form-control", rows: 12,  style: 'width: 100%;'
+        =f.text_area :reality, class: "concept_cond form-control", rows: 12,  style: 'width: 100%;'
 
   .pull-right
-    =f.submit 'Сохранить', :id  => "send_post_concept_bottom", class: 'btn btn-success'
+    =f.submit 'Сохранить', id: "send_post_concept_bottom", class: 'btn btn-success'

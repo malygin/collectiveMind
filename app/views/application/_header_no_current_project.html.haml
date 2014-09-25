@@ -1,6 +1,6 @@
 .navbar
   .logo.pull-left.hidden-xs
-    %a{:href => "/", :id => "go_to_logo"}
+    %a{href: '/', id: 'go_to_logo'}
       %h2
         %strong Mass
         Decision
@@ -18,14 +18,14 @@
           %a(class='btn btn-sm btn-transparent' id='user_profile')
             = current_user.to_s
       %li
-        = link_to destroy_user_session_path, :method => :delete, id: 'sign_out', class:'btn btn-sm btn-transparent' do
+        = link_to destroy_user_session_path, method: :delete, id: 'sign_out', class:'btn btn-sm btn-transparent' do
           Выйти
           %i.fa.fa-arrow-right
     -else
       %li
-        = link_to "Войти", "/users/sign_in", class: "btn btn-sm btn-transparent", id: 'sign_in'
+        = link_to 'Войти', '/users/sign_in', class: 'btn btn-sm btn-transparent', id: 'sign_in'
       %li
-        = link_to "Зарегистрироваться", "/users/sign_up", class: "btn btn-sm btn-transparent", id: 'sign_up'
+        = link_to 'Зарегистрироваться', '/users/sign_up', class: 'btn btn-sm btn-transparent', id: 'sign_up'
   %ul.navbar-buttons.pull-right
     - if signed_in? and prime_admin?
       %li

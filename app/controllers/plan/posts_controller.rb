@@ -2,7 +2,7 @@
 
 class Plan::PostsController < PostsController
 
-  #autocomplete :concept_post, :resource, :class_name => 'Concept::Post' , :full => true
+  #autocomplete :concept_post, :resource, :class_name: 'Concept::Post' , :full: true
 
   def current_model
     Plan::Post
@@ -23,8 +23,8 @@ class Plan::PostsController < PostsController
     @project = Core::Project.find(params[:project]) 
 
     @status = params[:status]
-    #@aspects = Discontent::Aspect.where(:project_id => @project)
-    @aspects = Discontent::Aspect.where(:project_id => @project, :status => 0)
+    #@aspects = Discontent::Aspect.where(:project_id: @project)
+    @aspects = Discontent::Aspect.where(project_id: @project, status: 0)
     add_breadcrumb I18n.t('stages.plan'), plan_posts_path(@project)
     if @project.status == 11
       @vote_all = Plan::Voting.where("plan_votings.plan_post_id IN (#{@project.plan_post.pluck(:id).join(", ")})").uniq_user.count
@@ -34,8 +34,8 @@ class Plan::PostsController < PostsController
 
 
   def index
-    @posts = current_model.where(:project_id => @project, :status => 0).order('created_at DESC').paginate(:page => params[:page])
-    post = Plan::Post.where(:project_id => @project, :status => 0).first
+    @posts = current_model.where(project_id: @project, status: 0).order('created_at DESC').paginate(page: params[:page])
+    post = Plan::Post.where(project_id: @project, status: 0).first
     @est_stat = post.estimate_status if post
     respond_to do |format|
       format.html
@@ -83,7 +83,7 @@ class Plan::PostsController < PostsController
 
     respond_to do |format|
       if @plan_post.save!
-        current_user.journals.build(:type_event=>'plan_post_save', :body =>trim_content(@plan_post.name),  :first_id=>@plan_post.id,   :project => @project).save!
+        current_user.journals.build(type_event:'plan_post_save', body:trim_content(@plan_post.name), first_id:@plan_post.id, project: @project).save!
         format.html { redirect_to   edit_plan_post_path(project: @project, id: @plan_post) }
         format.json { render json: @plan_post, status: :created, location: @plan_post }
         format.js #{head :ok}
@@ -97,9 +97,9 @@ class Plan::PostsController < PostsController
 
   def show
     @post = Plan::Post.find(params[:id])
-    add_breadcrumb 'Просмотр записи', polymorphic_path(@post, :project => @project.id)
+    add_breadcrumb 'Просмотр записи', polymorphic_path(@post,project: @project.id)
     @comment = comment_model.new
-    @comments = @post.comments.paginate(:page => params[:page], :per_page => 30)
+    @comments = @post.comments.paginate(page: params[:page], per_page: 30)
     if params[:viewed]
       Journal.events_for_content(@project, current_user, @post.id).update_all("viewed = 'true'")
       @my_journals_count = @my_journals_count - 1
@@ -113,7 +113,7 @@ class Plan::PostsController < PostsController
     @post = Plan::Post.find(params[:id])
     #@discontents = Discontent::Post.required_posts(@project)
 
-    add_breadcrumb 'Редактирование записи', polymorphic_path(@post, :project => @project.id)
+    add_breadcrumb 'Редактирование записи', polymorphic_path(@post, project: @project.id)
 
   end
 
@@ -146,7 +146,7 @@ class Plan::PostsController < PostsController
     #    Plan::PostResource.by_post(pa[0]).destroy_all
     #    unless params[:resor][pa[0]].nil?
     #      params[:resor][pa[0]].each_with_index do |r,i|
-    #        p.plan_post_resources.build(:name => r, :desc => params[:res][pa[0]][i]).save  if r!=''
+    #        p.plan_post_resources.build(:name: r, :desc: params[:res][pa[0]][i]).save  if r!=''
     #      end
     #    end
     #  end
@@ -154,7 +154,7 @@ class Plan::PostsController < PostsController
 
     respond_to do |format|
       @plan_post.save
-      current_user.journals.build(:type_event=>'plan_post_update',:body =>trim_content(@plan_post.name), :first_id=>@plan_post.id,   :project => @project).save!
+      current_user.journals.build(type_event:'plan_post_update',body:trim_content(@plan_post.name), first_id:@plan_post.id,   project: @project).save!
       format.html { redirect_to plan_post_path(project: @project, id: @plan_post) }
       format.js
     end
@@ -218,7 +218,7 @@ end
  def add_new_discontent
    @discontent = Discontent::Post.new
    @discontent.id = (0..10).map{rand(0..10)}.join
-   @aspects = Discontent::Aspect.where(:project_id =>params[:project])
+   @aspects = Discontent::Aspect.where(project_id:params[:project])
    if params[:plan_stage]
      @div_for_aspects = 'accordion_concept2'
    else
@@ -242,9 +242,9 @@ end
     @project = Core::Project.find(params[:project])
     @post = Plan::Post.find(params[:id])
     @post_stage = Plan::PostStage.find(params[:stage_id])
-    @aspects = Discontent::Aspect.where(:project_id => @project, :status => 0)
-    @disposts = Discontent::Post.where(:project_id => @project, :status => 4).order(:id)
-    @new_ideas = Plan::PostAspect.joins("INNER JOIN plan_posts ON plan_posts.id = plan_post_aspects.plan_post_id").where("plan_posts.project_id = ? and plan_posts.id = ?",@project.id,@post.id).where(:plan_post_aspects => {:concept_post_aspect_id => nil, :discontent_aspect_id => nil})
+    @aspects = Discontent::Aspect.where(project_id: @project, status: 0)
+    @disposts = Discontent::Post.where(project_id: @project, status: 4).order(:id)
+    @new_ideas = Plan::PostAspect.joins("INNER JOIN plan_posts ON plan_posts.id = plan_post_aspects.plan_post_id").where("plan_posts.project_id = ? and plan_posts.id = ?",@project.id,@post.id).where(plan_post_aspects: {concept_post_aspect_id: nil, discontent_aspect_id: nil})
     #@concept_posts = params[:plan_aspect_concepts]
     #@first_stage = params[:first_stage]
     #@concept_empty = params[:concept_empty]
@@ -252,7 +252,7 @@ end
     #if @save_form
     #  @cond_add = []
     #  if @concept_empty == "1"
-    #    @cond = Plan::PostAspect.create(:plan_post_id => @post.id, :first_stage => @first_stage.to_i, :title => params[:new_post_aspect_title])
+    #    @cond = Plan::PostAspect.create(:plan_post_id: @post.id, :first_stage: @first_stage.to_i, :title: params[:new_post_aspect_title])
     #    @cond_add << @cond
     #  else
     #    unless @concept_posts.nil?
@@ -273,7 +273,7 @@ end
     #        @cond.concept_post_aspect = @concept
     #        @cond.save
     #        @concept.concept_post.concept_post_resources.each do |rs|
-    #          @cond.plan_post_resources.build(:name => rs.name, :desc => rs.desc).save  if rs!=''
+    #          @cond.plan_post_resources.build(:name: rs.name, :desc: rs.desc).save  if rs!=''
     #        end
     #        @cond_add << @cond
     #      end
@@ -385,7 +385,7 @@ end
     @post_action.save!
     unless params[:resor_action].nil?
       params[:resor_action].each_with_index do |r,i|
-        @post_action.plan_post_action_resources.build(:name => r, :desc => params[:res_action][i], :project_id => @project.id).save  if r!=''
+        @post_action.plan_post_action_resources.build(name: r,desc: params[:res_action][i], project_id: @project.id).save  if r!=''
       end
     end
     respond_to do |format|
@@ -403,7 +403,7 @@ end
     @post_action.plan_post_action_resources.destroy_all
     unless params[:resor_action].nil?
       params[:resor_action].each_with_index do |r,i|
-        @post_action.plan_post_action_resources.build(:name => r, :desc => params[:res_action][i], :project_id => @project.id).save  if r!=''
+        @post_action.plan_post_action_resources.build(name: r, desc: params[:res_action][i], project_id: @project.id).save  if r!=''
       end
     end
     respond_to do |format|
@@ -450,22 +450,22 @@ end
           @cond.problems = @concept.problems
           @cond.save!
           @concept.plan_post_resources.by_type('positive_r').each do |rs|
-            @cond.plan_post_resources.build(:name => rs.name, :desc => rs.desc, :type_res => 'positive_r', :project_id => @project.id).save  if rs!=''
+            @cond.plan_post_resources.build(name: rs.name, desc: rs.desc, type_res: 'positive_r', project_id: @project.id).save  if rs!=''
           end
           @concept.plan_post_resources.by_type('negative_r').each do |rs|
-            @cond.plan_post_resources.build(:name => rs.name, :desc => rs.desc, :type_res => 'negative_r', :project_id => @project.id).save  if rs!=''
+            @cond.plan_post_resources.build(name: rs.name,desc: rs.desc, type_res: 'negative_r', project_id: @project.id).save  if rs!=''
           end
           @concept.plan_post_resources.by_type('control_r').each do |rs|
-            @cond.plan_post_resources.build(:name => rs.name, :desc => rs.desc, :type_res => 'control_r', :project_id => @project.id).save  if rs!=''
+            @cond.plan_post_resources.build(name: rs.name, desc: rs.desc, type_res: 'control_r', project_id: @project.id).save  if rs!=''
           end
           @concept.plan_post_means.by_type('positive_s').each do |rs|
-            @cond.plan_post_means.build(:name => rs.name, :desc => rs.desc, :type_res => 'positive_s', :project_id => @project.id).save  if rs!=''
+            @cond.plan_post_means.build(name: rs.name, desc: rs.desc, type_res: 'positive_s', project_id: @project.id).save  if rs!=''
           end
           @concept.plan_post_means.by_type('negative_s').each do |rs|
-            @cond.plan_post_means.build(:name => rs.name, :desc => rs.desc, :type_res => 'negative_s', :project_id => @project.id).save  if rs!=''
+            @cond.plan_post_means.build(name: rs.name, desc: rs.desc, type_res: 'negative_s', project_id: @project.id).save  if rs!=''
           end
           @concept.plan_post_means.by_type('control_s').each do |rs|
-            @cond.plan_post_means.build(:name => rs.name, :desc => rs.desc, :type_res => 'control_s', :project_id => @project.id).save  if rs!=''
+            @cond.plan_post_means.build(name: rs.name, desc: rs.desc, type_res: 'control_s', project_id: @project.id).save  if rs!=''
           end
         else
           @concept = Concept::PostAspect.find(params[:concept_id])
@@ -484,14 +484,14 @@ end
           @cond.concept_post_aspect = @concept
           @cond.save!
           @concept.concept_post.concept_post_resources.by_type('positive_r').each do |rs|
-            @cond.plan_post_resources.build(:name => rs.name, :desc => rs.desc, :type_res => 'positive_r', :project_id => @project.id).save  if rs!=''
+            @cond.plan_post_resources.build(name: rs.name, desc: rs.desc, type_res: 'positive_r', project_id: @project.id).save  if rs!=''
           end
           @concept.concept_post.concept_post_resources.by_type('negative_r').each do |rs|
-            @cond.plan_post_resources.build(:name => rs.name, :desc => rs.desc, :type_res => 'negative_r', :project_id => @project.id).save  if rs!=''
+            @cond.plan_post_resources.build(name: rs.name, desc: rs.desc, type_res: 'negative_r', project_id: @project.id).save  if rs!=''
           end
         end
       else
-          @cond = Plan::PostAspect.create(:title => 'Новое нововведение')
+          @cond = Plan::PostAspect.create(title: 'Новое нововведение')
           @cond.plan_post = @post
           @cond.plan_post_stage = @post_stage
           @cond.save!
@@ -527,38 +527,38 @@ end
     Plan::PostResource.by_post(@post_concept.id).by_type('positive_r').destroy_all
     unless params[:resor_positive_r].nil?
       params[:resor_positive_r].each_with_index do |r,i|
-        @post_concept.plan_post_resources.build(:name => r, :desc => params[:res_positive_r][i], :type_res => 'positive_r', :project_id => @project.id).save  if r!=''
+        @post_concept.plan_post_resources.build(name: r, desc: params[:res_positive_r][i], type_res: 'positive_r', project_id: @project.id).save  if r!=''
       end
     end
     Plan::PostResource.by_post(@post_concept.id).by_type('negative_r').destroy_all
     unless params[:resor_negative_r].nil?
       params[:resor_negative_r].each_with_index do |r,i|
-        @post_concept.plan_post_resources.build(:name => r, :desc => params[:res_negative_r][i], :type_res => 'negative_r', :project_id => @project.id).save  if r!=''
+        @post_concept.plan_post_resources.build(name: r, desc: params[:res_negative_r][i], type_res: 'negative_r', project_id: @project.id).save  if r!=''
       end
     end
     Plan::PostResource.by_post(@post_concept.id).by_type('control_r').destroy_all
     unless params[:resor_control_r].nil?
       params[:resor_control_r].each_with_index do |r,i|
-        @post_concept.plan_post_resources.build(:name => r, :desc => params[:res_control_r][i], :type_res => 'control_r', :project_id => @project.id).save  if r!=''
+        @post_concept.plan_post_resources.build(name: r, desc: params[:res_control_r][i], type_res: 'control_r', project_id: @project.id).save  if r!=''
       end
     end
 
     Plan::PostMean.by_post(@post_concept.id).by_type('positive_s').destroy_all
     unless params[:resor_positive_s].nil?
       params[:resor_positive_s].each_with_index do |r,i|
-        @post_concept.plan_post_means.build(:name => r, :desc => params[:res_positive_s][i], :type_res => 'positive_s', :project_id => @project.id).save  if r!=''
+        @post_concept.plan_post_means.build(name: r, desc: params[:res_positive_s][i], type_res: 'positive_s', project_id: @project.id).save  if r!=''
       end
     end
     Plan::PostMean.by_post(@post_concept.id).by_type('negative_s').destroy_all
     unless params[:resor_negative_s].nil?
       params[:resor_negative_s].each_with_index do |r,i|
-        @post_concept.plan_post_means.build(:name => r, :desc => params[:res_negative_s][i], :type_res => 'negative_s', :project_id => @project.id).save  if r!=''
+        @post_concept.plan_post_means.build(name: r, desc: params[:res_negative_s][i], type_res: 'negative_s', project_id: @project.id).save  if r!=''
       end
     end
     Plan::PostMean.by_post(@post_concept.id).by_type('control_s').destroy_all
     unless params[:resor_control_s].nil?
       params[:resor_control_s].each_with_index do |r,i|
-        @post_concept.plan_post_means.build(:name => r, :desc => params[:res_control_s][i], :type_res => 'control_s', :project_id => @project.id).save  if r!=''
+        @post_concept.plan_post_means.build(name: r, desc: params[:res_control_s][i], type_res: 'control_s', project_id: @project.id).save  if r!=''
       end
     end
 
@@ -605,38 +605,38 @@ end
     Plan::PostResource.by_post(@post_concept_save.id).by_type('positive_r').destroy_all
     unless params[:resor_positive_r].nil?
       params[:resor_positive_r].each_with_index do |r,i|
-        @post_concept_save.plan_post_resources.build(:name => r, :desc => params[:res_positive_r][i], :type_res => 'positive_r', :project_id => @project.id).save  if r!=''
+        @post_concept_save.plan_post_resources.build(name: r, desc: params[:res_positive_r][i], type_res: 'positive_r', project_id: @project.id).save  if r!=''
       end
     end
     Plan::PostResource.by_post(@post_concept_save.id).by_type('negative_r').destroy_all
     unless params[:resor_negative_r].nil?
       params[:resor_negative_r].each_with_index do |r,i|
-        @post_concept_save.plan_post_resources.build(:name => r, :desc => params[:res_negative_r][i], :type_res => 'negative_r', :project_id => @project.id).save  if r!=''
+        @post_concept_save.plan_post_resources.build(name: r, desc: params[:res_negative_r][i], type_res: 'negative_r', project_id: @project.id).save  if r!=''
       end
     end
     Plan::PostResource.by_post(@post_concept_save.id).by_type('control_r').destroy_all
     unless params[:resor_control_r].nil?
       params[:resor_control_r].each_with_index do |r,i|
-        @post_concept_save.plan_post_resources.build(:name => r, :desc => params[:res_control_r][i], :type_res => 'control_r', :project_id => @project.id).save  if r!=''
+        @post_concept_save.plan_post_resources.build(name: r, desc: params[:res_control_r][i], type_res: 'control_r', project_id: @project.id).save  if r!=''
       end
     end
 
     Plan::PostMean.by_post(@post_concept_save.id).by_type('positive_s').destroy_all
     unless params[:resor_positive_s].nil?
       params[:resor_positive_s].each_with_index do |r,i|
-        @post_concept_save.plan_post_means.build(:name => r, :desc => params[:res_positive_s][i], :type_res => 'positive_s', :project_id => @project.id).save  if r!=''
+        @post_concept_save.plan_post_means.build(name: r, desc: params[:res_positive_s][i], type_res: 'positive_s', project_id: @project.id).save  if r!=''
       end
     end
     Plan::PostMean.by_post(@post_concept_save.id).by_type('negative_s').destroy_all
     unless params[:resor_negative_s].nil?
       params[:resor_negative_s].each_with_index do |r,i|
-        @post_concept_save.plan_post_means.build(:name => r, :desc => params[:res_negative_s][i], :type_res => 'negative_s', :project_id => @project.id).save  if r!=''
+        @post_concept_save.plan_post_means.build(name: r, desc: params[:res_negative_s][i], type_res: 'negative_s', project_id: @project.id).save  if r!=''
       end
     end
     Plan::PostMean.by_post(@post_concept_save.id).by_type('control_s').destroy_all
     unless params[:resor_control_s].nil?
       params[:resor_control_s].each_with_index do |r,i|
-        @post_concept_save.plan_post_means.build(:name => r, :desc => params[:res_control_s][i], :type_res => 'control_s', :project_id => @project.id).save  if r!=''
+        @post_concept_save.plan_post_means.build(name: r, desc: params[:res_control_s][i], type_res: 'control_s', project_id: @project.id).save  if r!=''
       end
     end
 
@@ -689,10 +689,10 @@ end
   def change_estimate_status
     @project = Core::Project.find(params[:project])
     @est_stat = params[:est_stat]
-    posts = Plan::Post.where(:project_id => @project, :status => 0)
+    posts = Plan::Post.where(project_id: @project, status: 0)
     if posts.present? and @est_stat.present?
       posts.each do |est|
-        est.update_attributes(:estimate_status => @est_stat)
+        est.update_attributes(estimate_status: @est_stat)
       end
     end
     respond_to do |format|
@@ -720,7 +720,7 @@ end
     @post_note.type_field = params[:type_field]
     @post_note.user = current_user
     @type = params[:type_field]
-    current_user.journals.build(:type_event=>'my_plan_note', :user_informed => @post.user, :project => @project,  :body=>trim_content(@post_note.content),:body2=> trim_content(@post.name),:first_id => @post.id, :second_id => @post_aspect_note.id,:personal => true,  :viewed=> false).save!
+    current_user.journals.build(type_event:'my_plan_note', user_informed: @post.user, project: @project,  body:trim_content(@post_note.content),body2: trim_content(@post.name),first_id: @post.id, second_id: @post_aspect_note.id,personal: true,  viewed: false).save!
 
     respond_to do |format|
       if @post_note.save

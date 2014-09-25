@@ -1,4 +1,4 @@
-# encoding: utf-8
+
 
 module Estimate::PostsHelper
 	def estimate_trans(e)

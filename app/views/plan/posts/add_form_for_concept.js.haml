@@ -1,17 +1,17 @@
 -if @save_form
   -if @cond
     alert("Нововведение успешно добавлено");
-    $("#{escape_javascript(render :partial => 'post_concept', :object => @cond )}").insertBefore('#tr_new_concept_#{@post_stage.id}');
+    $("#{escape_javascript(render partial: 'post_concept', object: @cond )}").insertBefore('#tr_new_concept_#{@post_stage.id}');
     -if @concept
       $('.td_plus_concept_#{@concept.id}').html('<div class="label label-success">Добавлено</div>')
     -else
       $('#modal_concept').modal('hide');
       $('#render_modal_edit_concept').empty();
-      $('#render_modal_edit_concept').html("#{escape_javascript(render :partial => 'form_for_edit_concept', :object => @cond )}");
+      $('#render_modal_edit_concept').html("#{escape_javascript(render partial: 'form_for_edit_concept', object: @cond )}");
       autocomplete_initialized();
       $('#modal_edit_concept').modal('show');
       $('textarea').autosize();
   -else
     alert("Ошибка при добавлении! Попробуйте еще раз.");
 - else
-  $('#aspect_concepts').html("#{escape_javascript(render :partial => 'form_for_light_concept', :object => @post_concept )}");
+  $('#aspect_concepts').html("#{escape_javascript(render partial: 'form_for_light_concept', object: @post_concept )}");

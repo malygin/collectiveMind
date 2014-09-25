@@ -4,7 +4,7 @@
   %td
     .media
       %a.pull-left(href="/project/#{@project.id}/users/#{user.id}")
-        = image_tag user.avatar.url(:thumb),  class: "media-object"
+        = image_tag user.avatar.url(:thumb),  class: 'media-object'
         %br
         =link_to user, user_path(@project, user)
         = render partial: '/shared/user_online', object: user
@@ -15,16 +15,16 @@
         %small
           .time.pull-left=Russian::strftime(user.last_event(@project).created_at,"%d %B %k:%M:%S ")
 
-  %td(style="width:300px;")
+  %td(style='width:300px;')
     -if prime_admin?
-      = link_to club_toggle_user_path(@project, user), :remote => true, :method => :put, :style => 'text-decoration:none;', :id => "club_status_#{user.id}" do
+      = link_to club_toggle_user_path(@project, user), remote: true, method: :put, style: 'text-decoration:none;', id: "club_status_#{user.id}" do
         =club_status(user)
     -else
       =club_status(user)
   %td
     %span.text-inverse
       -if prime_admin?
-        %a(href="#" id="userscore_#{user.id}" class="userscore" data-pk="1" data-remote="true" data-resource="post" data-type="text" data-name="score" data-url="/project/#{@project.id}/users/#{user.id}/update_score")
+        %a(href='#' id="userscore_#{user.id}" class='userscore' data-pk='1' data-remote='true' data-resource='post' data-type='text' data-name='score' data-url="/project/#{@project.id}/users/#{user.id}/update_score")
           =user.score
       -else
         %span.rate= user.score

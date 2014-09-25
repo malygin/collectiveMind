@@ -3,15 +3,15 @@
     #wizard.form-wizard
       %ul.wizard-navigation.nav-justified
         %li#first
-          %a{"data-toggle" => "tab", :href => "#tab1"}
+          %a{"data-toggle" => "tab", href: "#tab1"}
             %small 1.
             %strong Описание проекта
         %li#second
-          %a{"data-toggle" => "tab", :href => "#tab2"}
+          %a{"data-toggle" => "tab", href: "#tab2"}
             %small 2.
             %strong План мероприятий
         %li#third
-          %a{"data-toggle" => "tab", :href => "#tab3"}
+          %a{"data-toggle" => "tab", href: "#tab3"}
             %small 3.
             %strong Просмотр нововведений
 
@@ -130,7 +130,7 @@
                         - stage.plan_post_aspects.each do |concept|
                           %tr(id="tr_concept_#{concept.id}")
                             %td(rowspan="#{1+concept.plan_post_actions.size}" id="td_concept_#{concept.id}")
-                              %span.h5{:id => "name_post_concept_#{concept.id}"}=concept.title
+                              %span.h5{id: "name_post_concept_#{concept.id}"}=concept.title
 
                           - unless concept.plan_post_actions.nil?
                             - concept.plan_post_actions.each do |action|
@@ -142,7 +142,7 @@
                                       ="-"
                                       =Russian::strftime(action.date_end, "%d %b %Y")
                                     %br
-                                  %span.h5{:id => "name_post_action_#{action.id}"}=action.name
+                                  %span.h5{id: "name_post_action_#{action.id}"}=action.name
                                   .pull-right
 
         #tab3.tab-pane
@@ -154,13 +154,13 @@
                   %ul#menu-levels-collapse.side-nav
                     -@plan_post.post_stages.each_with_index do |stage, index|
                       %li.panel
-                        %a.accordion-toggle{"data-parent" => "#menu-levels-collapse", "data-toggle" => "collapse", :href => "#sub-menu-#{index}-collapse"}
+                        %a.accordion-toggle{"data-parent" => "#menu-levels-collapse", "data-toggle" => "collapse", href: "#sub-menu-#{index}-collapse"}
                           %b="Этап #{index+1}. "
                           =stage.name
                         - unless stage.plan_post_aspects.nil?
-                          %ul.panel-collapse.collapse.in{:id => "sub-menu-#{index}-collapse"}
+                          %ul.panel-collapse.collapse.in{id: "sub-menu-#{index}-collapse"}
                             - stage.plan_post_aspects.each_with_index do |concept, i|
-                              %li.concept_side{:id => "li_concept_#{concept.id}"}
+                              %li.concept_side{id: "li_concept_#{concept.id}"}
                                 %a(href="#dis_#{concept.id}" data-toggle="tab")
                                   ="#{i+1}. #{concept.title}"
                                   -if concept.estimate_post_aspect(@post.id)
@@ -374,7 +374,7 @@
                       - if @est_stat == 1
                         Для создания ресурсов в проекте предлагаются определенные средства. Наиболее вероятно, что на базе этих средств ресурсы будут созданы --
                         %br
-                        %span{:class=>css_class_estimate_simple(tr.on1)}
+                        %span{class:css_class_estimate_simple(tr.on1)}
                           = estimate_trans_simple('on',tr.on1)
                         %br
                         %br
@@ -386,7 +386,7 @@
                         %br
                         Использование этих средств потребует материальных и трудовых затрат. Наиболее вероятно, что эти затраты окажутся--
                         %br
-                        %span{:class=>css_class_estimate_simple(tr.ozs1)}
+                        %span{class:css_class_estimate_simple(tr.ozs1)}
                           = estimate_trans_simple('ozs',tr.ozs1)
                         %br
 
@@ -397,7 +397,7 @@
                         %br
                         Предположим, что будущее уже наступило и все предложенные ресурсы созданы и работают. Наиболее вероятно, что с их помощью несовершенство будет устранено--
                         %br
-                        %span{:class=>css_class_estimate_simple(tr.op1)}
+                        %span{class:css_class_estimate_simple(tr.op1)}
                           = estimate_trans_simple('op',tr.op1)
                         %br
                         %br
@@ -408,7 +408,7 @@
                         %br
                         Функционирование ресурсов потребует материальных и трудовых затрат. Наиболе вероятно, что эти затраты окажутся—
                         %br
-                        %span{:class=>css_class_estimate_simple(tr.ozf1)}
+                        %span{class:css_class_estimate_simple(tr.ozf1)}
                           = estimate_trans_simple('ozf',tr.ozf1)
                         %br
                         %br
@@ -422,16 +422,16 @@
                           Проанализируйте их и оцените, какова вероятность того, что при помощи этих средств ресурсы будут созданы --
                         %br
                         в полном объеме (более 90%) -
-                        %span{:class=>css_class_estimate_all(tr.on1)}= estimate_trans_all(tr.on1)
+                        %span{class:css_class_estimate_all(tr.on1)}= estimate_trans_all(tr.on1)
                         %br
                         в значительном объеме (от 50% до 90%) -
-                        %span{:class=>css_class_estimate_all(tr.on2)}=estimate_trans_all(tr.on2)
+                        %span{class:css_class_estimate_all(tr.on2)}=estimate_trans_all(tr.on2)
                         %br
                         в небольшом объеме (от 10% до 50%) -
-                        %span{:class=>css_class_estimate_all(tr.on3)}=estimate_trans_all(tr.on3)
+                        %span{class:css_class_estimate_all(tr.on3)}=estimate_trans_all(tr.on3)
                         %br
                         в ничтожном объеме (менее 10%)-
-                        %span{:class=>css_class_estimate_all(tr.on4)}=estimate_trans_all(tr.on4)
+                        %span{class:css_class_estimate_all(tr.on4)}=estimate_trans_all(tr.on4)
                         %br
                         %br
                         - unless tr.on == ''
@@ -443,16 +443,16 @@
                         %b  Использование вышеназванных средств потребует материальных и трудовых затрат. Какова вероятность, что эти затраты окажутся--
                         %br
                         значительными -
-                        %span{:class=>css_class_estimate_all(tr.ozs1)}=estimate_trans_all(tr.ozs1)
+                        %span{class:css_class_estimate_all(tr.ozs1)}=estimate_trans_all(tr.ozs1)
                         %br
                         средними -
-                        %span{:class=>css_class_estimate_all(tr.ozs2)}=estimate_trans_all(tr.ozs2)
+                        %span{class:css_class_estimate_all(tr.ozs2)}=estimate_trans_all(tr.ozs2)
                         %br
                         незначительными -
-                        %span{:class=>css_class_estimate_all(tr.ozs3)}=estimate_trans_all(tr.ozs3)
+                        %span{class:css_class_estimate_all(tr.ozs3)}=estimate_trans_all(tr.ozs3)
                         %br
                         ничтожными -
-                        %span{:class=>css_class_estimate_all(tr.ozs4)}=estimate_trans_all(tr.ozs4)
+                        %span{class:css_class_estimate_all(tr.ozs4)}=estimate_trans_all(tr.ozs4)
                         %br
 
                         %br
@@ -465,16 +465,16 @@
                           Какова вероятность, что с их помощью несовершенство будет устранено--
                         %br
                         полностью (более 90%) -
-                        %span{:class=>css_class_estimate_all(tr.op1)}=estimate_trans_all(tr.op1)
+                        %span{class:css_class_estimate_all(tr.op1)}=estimate_trans_all(tr.op1)
                         %br
                         в значительной мере (от 50% до 90%) -
-                        %span{:class=>css_class_estimate_all(tr.op2)}=estimate_trans_all(tr.op2)
+                        %span{class:css_class_estimate_all(tr.op2)}=estimate_trans_all(tr.op2)
                         %br
                         в небольшой мере (от 10% до 50%) -
-                        %span{:class=>css_class_estimate_all(tr.op3)}=estimate_trans_all(tr.op3)
+                        %span{class:css_class_estimate_all(tr.op3)}=estimate_trans_all(tr.op3)
                         %br
                         в ничтожной мере (менее 10%) -
-                        %span{:class=>css_class_estimate_all(tr.op4)}=estimate_trans_all(tr.op4)
+                        %span{class:css_class_estimate_all(tr.op4)}=estimate_trans_all(tr.op4)
                         %br
                         %br
                         - unless tr.op == ''
@@ -485,16 +485,16 @@
                         %b Функционирование ресурсов потребует материальных и трудовых затрат. Какова вероятность, что эти затраты окажутся—
                         %br
                         значительными -
-                        %span{:class=>css_class_estimate_all(tr.ozf1)}=estimate_trans_all(tr.ozf1)
+                        %span{class:css_class_estimate_all(tr.ozf1)}=estimate_trans_all(tr.ozf1)
                         %br
                         средними -
-                        %span{:class=>css_class_estimate_all(tr.ozf2)}=estimate_trans_all(tr.ozf2)
+                        %span{class:css_class_estimate_all(tr.ozf2)}=estimate_trans_all(tr.ozf2)
                         %br
                         незначительными -
-                        %span{:class=>css_class_estimate_all(tr.ozf3)}=estimate_trans_all(tr.ozf3)
+                        %span{class:css_class_estimate_all(tr.ozf3)}=estimate_trans_all(tr.ozf3)
                         %br
                         ничтожными -
-                        %span{:class=>css_class_estimate_all(tr.ozf4)}=estimate_trans_all(tr.ozf4)
+                        %span{class:css_class_estimate_all(tr.ozf4)}=estimate_trans_all(tr.ozf4)
                         %br
                         %br
                         - unless tr.ozf == ''
@@ -510,7 +510,7 @@
                       %br
                       Наиболее вероятно, что эти побочные эффекты будут—
                       %br
-                      %span{:class=>css_class_estimate_all( @post.nepr1)}
+                      %span{class:css_class_estimate_all( @post.nepr1)}
                         = estimate_trans_simple('nepr1', @post.nepr1)
                       %br
                       %br
@@ -523,7 +523,7 @@
                       %br
                       Наиболее вероятно, что эти побочные эффекты будут—
                       %br
-                      %span{:class=>css_class_estimate_all( @post.nep1)}
+                      %span{class:css_class_estimate_all( @post.nep1)}
                         = estimate_trans_simple('nep1', @post.nep1 )
                       %br
                       %br
@@ -538,16 +538,16 @@
                       %b  Какова вероятность, что эти побочные эффекты будут—
                       %br
                       значительными  -
-                      %span{:class=>css_class_estimate_all( @post.nepr1)}= estimate_trans_all( @post.nepr1)
+                      %span{class:css_class_estimate_all( @post.nepr1)}= estimate_trans_all( @post.nepr1)
                       %br
                       средними   -
-                      %span{:class=>css_class_estimate_all( @post.nepr2)}= estimate_trans_all( @post.nepr2)
+                      %span{class:css_class_estimate_all( @post.nepr2)}= estimate_trans_all( @post.nepr2)
                       %br
                       незначительными  -
-                      %span{:class=>css_class_estimate_all( @post.nepr3)}= estimate_trans_all( @post.nepr3)
+                      %span{class:css_class_estimate_all( @post.nepr3)}= estimate_trans_all( @post.nepr3)
                       %br
                       нулевыми  -
-                      %span{:class=>css_class_estimate_all( @post.nepr4)}= estimate_trans_all( @post.nepr4)
+                      %span{class:css_class_estimate_all( @post.nepr4)}= estimate_trans_all( @post.nepr4)
                       %br
                       %br
 
@@ -558,16 +558,16 @@
                       %b  Второй тип – это препятствия, возникшие в процессе создания нововведений (например, сопротивление со стороны сотрудников, привыкших работать по-старому).
                       %br
                       значительными  -
-                      %span{:class=>css_class_estimate_all( @post.nep1)}= estimate_trans_all( @post.nep1)
+                      %span{class:css_class_estimate_all( @post.nep1)}= estimate_trans_all( @post.nep1)
                       %br
                       средними   -
-                      %span{:class=>css_class_estimate_all( @post.nep2)}= estimate_trans_all( @post.nep2)
+                      %span{class:css_class_estimate_all( @post.nep2)}= estimate_trans_all( @post.nep2)
                       %br
                       незначительными  -
-                      %span{:class=>css_class_estimate_all( @post.nep3)}= estimate_trans_all( @post.nep3)
+                      %span{class:css_class_estimate_all( @post.nep3)}= estimate_trans_all( @post.nep3)
                       %br
                       нулевыми  -
-                      %span{:class=>css_class_estimate_all( @post.nep4)}= estimate_trans_all( @post.nep4)
+                      %span{class:css_class_estimate_all( @post.nep4)}= estimate_trans_all( @post.nep4)
                       %br
                       %br
 
@@ -585,4 +585,4 @@
                 Далее
                 %i.fa.fa-caret-right
 
-= render 'shared/post_edit_bar', :post => @post
+= render 'shared/post_edit_bar', post: @post

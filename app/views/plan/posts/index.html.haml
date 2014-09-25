@@ -18,8 +18,8 @@
         .row
           .col-md-12
             .pull-right
-              = link_to 'Стандартная оценка', plan_posts_change_estimate_status_path(@project, :est_stat => "0"), :remote => true, :method => :put, id: 'standart_estimate',  class: "btn btn-sm stat_estimate #{@est_stat == 0 ? 'btn-success' : 'btn-default'}"
-              = link_to 'Упрощенная оценка', plan_posts_change_estimate_status_path(@project, :est_stat => "1"), :remote => true, :method => :put, id: 'simple_estimate',  class: "btn btn-sm stat_estimate #{@est_stat == 1 ? 'btn-success' : 'btn-default'}"
+              = link_to 'Стандартная оценка', plan_posts_change_estimate_status_path(@project, est_stat: "0"), remote: true, method: :put, id: 'standart_estimate',  class: "btn btn-sm stat_estimate #{@est_stat == 0 ? 'btn-success' : 'btn-default'}"
+              = link_to 'Упрощенная оценка', plan_posts_change_estimate_status_path(@project, est_stat: "1"), remote: true, method: :put, id: 'simple_estimate',  class: "btn btn-sm stat_estimate #{@est_stat == 1 ? 'btn-success' : 'btn-default'}"
       -else
         .row
           .col-md-12

@@ -21,81 +21,81 @@
   - if prime_admin?
     %li.divider.hidden-xs
     %li.dropdown
-      %a#settings.dropdown-toggle{"data-toggle" => "dropdown", :href => "#", :title => "Настройки"}
+      %a#settings.dropdown-toggle{'data-toggle' => 'dropdown', href: '#', title: 'Настройки'}
         %i.fa.fa-cog
-      %ul#settings-menu.dropdown-menu.messages{:role => "menu"}
+      %ul#settings-menu.dropdown-menu.messages{role: 'menu'}
         .text-internal.text-center Настройки Администратора
         %hr
-        %li{:role => "presentation"}
+        %li{role: 'presentation'}
           =link_to 'Список процедур', list_projects_path, id: 'list_projects'
         %br
         -if @project.status == 1
-          %li{:role => "presentation"}
+          %li{role: 'presentation'}
             =link_to 'Начать голосование за темы',  next_stage_core_project_path(@project), id: 'change_stage'
         -if @project.status == 2
-          %li{:role => "presentation"}
+          %li{role: 'presentation'}
             =link_to 'Вернуться к сбору тем',  pr_stage_core_project_path(@project), id: 'change_stage'
           %br
-          %li{:role => "presentation"}
+          %li{role: 'presentation'}
             =link_to 'Начать сбор несовершенств',  next_stage_core_project_path(@project), id: 'change_stage'
         -if @project.status == 3
-          %li{:role => "presentation"}
+          %li{role: 'presentation'}
             =link_to 'Вернуться к голосованию за темы',  pr_stage_core_project_path(@project), id: 'change_stage'
           %br
-          %li{:role => "presentation"}
+          %li{role: 'presentation'}
             =link_to 'Начать группировку несовершенств',  next_stage_core_project_path(@project), id: 'change_stage'
         -if @project.status == 4
-          %li{:role => "presentation"}
+          %li{role: 'presentation'}
             =link_to 'Вернуться к сбору несовершенств',  pr_stage_core_project_path(@project), id: 'change_stage'
           %br
-          %li{:role => "presentation"}
+          %li{role: 'presentation'}
             =link_to 'Начать обсуждение группировок',  next_stage_core_project_path(@project), id: 'change_stage'
         -if @project.status == 5
-          %li{:role => "presentation"}
+          %li{role: 'presentation'}
             =link_to 'Вернуться к группировке несовершенств',  pr_stage_core_project_path(@project), id: 'change_stage'
           %br
-          %li{:role => "presentation"}
+          %li{role: 'presentation'}
             =link_to 'Начать голосование за несовершенства',  next_stage_core_project_path(@project), id: 'change_stage'
         -if @project.status == 6
-          %li{:role => "presentation"}
+          %li{role: 'presentation'}
             =link_to 'Вернуться к обсуждению группировок',  pr_stage_core_project_path(@project), id: 'change_stage'
           %br
-          %li{:role => "presentation"}
+          %li{role: 'presentation'}
             =link_to 'Начать сбор нововведений',  next_stage_core_project_path(@project), id: 'change_stage'
         -if @project.status == 7
-          %li{:role => "presentation"}
+          %li{role: 'presentation'}
             =link_to 'Вернуться к голосованию за несовершенства',  pr_stage_core_project_path(@project), id: 'change_stage'
           %br
-          %li{:role => "presentation"}
+          %li{role: 'presentation'}
             =link_to 'Начать голосование за нововведения',  next_stage_core_project_path(@project), id: 'change_stage'
         -if @project.status == 8
-          %li{:role => "presentation"}
+          %li{role: 'presentation'}
             =link_to 'Вернуться к сбору нововведений',  pr_stage_core_project_path(@project), id: 'change_stage'
           %br
-          %li{:role => "presentation"}
+          %li{role: 'presentation'}
             =link_to 'Начать сбор проектов',  next_stage_core_project_path(@project), id: 'change_stage'
         -if @project.status == 9
-          %li{:role => "presentation"}
+          %li{role: 'presentation'}
             =link_to 'Вернуться к голосованию за нововведения',  pr_stage_core_project_path(@project), id: 'change_stage'
           %br
-          %li{:role => "presentation"}
+          %li{role: 'presentation'}
             =link_to 'Начать выставление оценок',  next_stage_core_project_path(@project), id: 'change_stage'
         -if @project.status == 10
-          %li{:role => "presentation"}
+          %li{role: 'presentation'}
             =link_to 'Вернуться к сбору проектов',  pr_stage_core_project_path(@project), id: 'change_stage'
           %br
-          %li{:role => "presentation"}
+          %li{role: 'presentation'}
             =link_to 'Начать голосование за проекты',  next_stage_core_project_path(@project), id: 'change_stage'
         -if @project.status == 11
-          %li{:role => "presentation"}
+          %li{role: 'presentation'}
             =link_to 'Вернуться к выставлению оценок',  pr_stage_core_project_path(@project), id: 'change_stage'
           %br
-          %li{:role => "presentation"}
+          %li{role: 'presentation'}
             =link_to 'Завершить процедуру', next_stage_core_project_path(@project), id: 'change_stage'
 
   %li.hidden-xs.divider
   %li.dropdown
-    %a#messages.dropdown-toggle{"data-toggle" => "dropdown", :href => "#", :title => "Уведомления"}
+    %a#messages.dropdown-toggle{'data-toggle' => 'dropdown', href: '#', title: 'Уведомления'}
       %i.fa.fa-comments
       - if @my_journals_count > 0
         %span.count(style='background: #e5603b;')=@my_journals_count
@@ -103,13 +103,13 @@
         %span.count=@my_journals_count
 
 
-    %ul#messages-menu.dropdown-menu.messages{:role => "menu"}
+    %ul#messages-menu.dropdown-menu.messages{role: 'menu'}
       -unless @my_journals.empty?
         - @my_journals.each do |journal, k|
-          %li{:role => "presentation"}
-            %p.message{:href => "#"}
+          %li{role: 'presentation'}
+            %p.message{href: '#'}
               =image_tag journal.user.avatar.url(:thumb), style: 'margin-left: 10px;'
-              .details(style="margin-left: 60px;")
+              .details(style='margin-left: 60px;')
                 .sender
                   %span.color-teal=journal.user
                   - if k >1
@@ -117,8 +117,8 @@
                     %span.color-red="и еще #{k-1} похожих"
                 .text
                   = journal_parser(journal, @project.id).html_safe
-        %li{:role => "presentation"}
-          %a.text-align-center.see-all{:href => "/project/#{@project.id}/users/#{current_user.id}"}
+        %li{role: 'presentation'}
+          %a.text-align-center.see-all{href: "/project/#{@project.id}/users/#{current_user.id}"}
             Очистить
             %i.fa.fa-arrow-right
       -else
@@ -128,23 +128,23 @@
   %li.divider
 
   %li.dropdown
-    %a#account.dropdown-toggle{"data-toggle" => "dropdown", :href => "#", :title => "Account"}
+    %a#account.dropdown-toggle{'data-toggle' => 'dropdown', href: '#', title: 'Account'}
       %i.fa.fa-user
-    %ul#account-menu.dropdown-menu.account{:role => "menu"}
-      %li.account-picture{:role => "presentation"}
+    %ul#account-menu.dropdown-menu.account{role: 'menu'}
+      %li.account-picture{role: 'presentation'}
         %a.pull-left(href="/project/#{@project.id}/users/#{current_user.id}" id='go_to_profile')
-          = image_tag current_user.avatar.url(:thumb),  class: "media-object"
+          = image_tag current_user.avatar.url(:thumb),  class: 'media-object'
         =current_user.to_s
 
-      %li{:role => "presentation"}
+      %li{role: 'presentation'}
         = link_to 'Редактировать профиль', edit_user_path(@project, current_user), id: 'go_to_edit_profile'
 
-      %li{:role => "presentation"}
+      %li{role: 'presentation'}
         =link_to 'Уведомления', user_path(@project, current_user)
   %li.visible-xs.divider
   %li.visible-xs
-    %a.btn-navbar{"data-target" => ".sidebar", "data-toggle" => "collapse", :href => "#", :title => ""}
+    %a.btn-navbar{'data-target' => '.sidebar', 'data-toggle' => 'collapse', href: '#', title: ''}
       %i.fa.fa-bars
   %li.hidden-xs
-    %a{:href => "/users/sign_out", "data-method" => "delete", id: 'sign_out'}
+    %a{href: '/users/sign_out', 'data-method' => 'delete', id: 'sign_out'}
       %i.fa.fa-sign-out

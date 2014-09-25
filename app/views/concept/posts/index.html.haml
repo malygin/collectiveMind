@@ -44,7 +44,7 @@
                         =status_for_concept(pa.post_aspects.first)
               -if  @project.status == 7 or @project.demo?
                 %tr
-                  %td{:colspan => 4, :style => "font-weight: normal !important;"}
+                  %td{colspan: 4, style: "font-weight: normal !important;"}
                     %a.btn.btn-lg.btn-warning.btn-block(href="/project/#{@project.id}/concept/posts/new?dis_id=#{post.id}&asp_id=#{@aspect.id}" style="font-weight: normal !important;" id="new_concept_#{post.id}")
                       Добавить свое решение
           %hr
@@ -56,4 +56,4 @@
       %hr
     .body
       .chat-messages
-        = render :partial => 'shared/improve_comment',:collection => @comments_all
+        = render partial: 'shared/improve_comment',collection: @comments_all

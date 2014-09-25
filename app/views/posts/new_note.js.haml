@@ -1,3 +1,3 @@
 $('#note_form_#{@post_aspect_note ?  @post_aspect_note.id : @post.id}_#{@type} form').remove();
-$('#note_form_#{@post_aspect_note ?  @post_aspect_note.id : @post.id}_#{@type}').append("#{escape_javascript(render  :partial => 'form_post_note', :object =>  @post_note)}");
+$('#note_form_#{@post_aspect_note ?  @post_aspect_note.id : @post.id}_#{@type}').append("#{escape_javascript(render  partial: 'form_post_note', object:  @post_note)}");
 $('#note_for_post_#{@post_aspect_note ? @post_aspect_note.id : @post.id}_#{@type}').css('display','block').animate({height: 65, opacity:1}, 500);

@@ -8,11 +8,11 @@
 - if boss?
   .pull-right
     Показана сортировка,
-    =link_to "по умолчанию", {:action => :vote_list },:remote => true, class: "vote_class", id: "vote_all"
+    =link_to "по умолчанию", {action: :vote_list },remote: true, class: "vote_class", id: "vote_all"
     |
-    =link_to "по голосам(убыванию)", {:action => :vote_list, :revers => 0 },:remote => true, class: "vote_class", id: "vote_all"
+    =link_to "по голосам(убыванию)", {action: :vote_list, revers: 0 },remote: true, class: "vote_class", id: "vote_all"
     |
-    =link_to "по голосам(возрастанию)", {:action => :vote_list, :revers => 1 },:remote => true, class: "vote_class", id: "vote_all"
+    =link_to "по голосам(возрастанию)", {action: :vote_list, revers: 1 },remote: true, class: "vote_class", id: "vote_all"
   %br
   %br
 
@@ -22,9 +22,9 @@
       .text-center
         %h3 Спасибо за участие в голосовании!
         .col-md-6
-          =link_to "Перейти к рефлексии", new_essay_post_path(@project, 1),:class => "btn btn-lg btn-success"
+          =link_to "Перейти к рефлексии", new_essay_post_path(@project, 1),class: "btn btn-lg btn-success"
         .col-md-6
-          =link_to "Перейти к списку тем", life_tape_posts_path(@project),:class => "btn btn-lg btn-primary"
+          =link_to "Перейти к списку тем", life_tape_posts_path(@project),class: "btn btn-lg btn-primary"
       %br
       %br
 %br
@@ -41,4 +41,4 @@
       %b#count_vote=@number_v
 
   #vote_container
-    = render :partial => 'shared/post_for_vote', :collection => @posts,  :locals => { :path_for_voting => @path_for_voting, :count_voted => @number_v, :votes => @votes}
+    = render partial: 'shared/post_for_vote', collection: @posts,  locals: { path_for_voting: @path_for_voting, count_voted: @number_v, votes: @votes}

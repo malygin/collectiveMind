@@ -1,6 +1,6 @@
 .media{id: "post_#{post.id}"}
   -if post.user
-    = render 'users/user_post', :user => post.user
+    = render 'users/user_post', user: post.user
   .media-body
     -if post.user
       .media-heading
@@ -8,11 +8,11 @@
     %span.color-green=post.name
     %span
       -if boss?
-        =link_to 'подробнее', plan_post_path(@project, post), :class => "btn btn-primary btn-xs"
+        =link_to 'подробнее', plan_post_path(@project, post), class: "btn btn-primary btn-xs"
         |
-        = render 'shared/post_edit_bar', :post => post
+        = render 'shared/post_edit_bar', post: post
       -else
         =link_to 'подробнее', plan_post_path(@project, post)
     %br
     =post.goal
-    = render 'shared/post_social_bar2', :post => post
+    = render 'shared/post_social_bar2', post: post

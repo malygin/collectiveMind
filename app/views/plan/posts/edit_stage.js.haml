@@ -1,4 +1,4 @@
 $('#modal_stage').empty();
-$('#modal_stage').html("#{escape_javascript(render :partial => 'modal_new_stage', :locals => { :stage => @post_stage })}");
+$('#modal_stage').html("#{escape_javascript(render partial: 'modal_new_stage', locals: { stage: @post_stage })}");
 $('#modal_new_stage').modal('show');
 activate_datepicker();

@@ -4,5 +4,5 @@
 %section.widget
   .body
     -if @post
-      %div{:id => "knowbase_post_#{@post.id}"}
-        =render  :partial => 'knowbase_post', :object => @post
+      %div{id: "knowbase_post_#{@post.id}"}
+        =render  partial: 'knowbase_post', object: @post

@@ -150,6 +150,6 @@
 =display_content(post_for_vote.reality)
 
 %hr
-=link_to({:controller => 'concept/posts', :action => :next_vote, :id => post_for_vote.id, :dis_id =>@discontent_post.id, :num => number},:remote => true,:method => :put, :id => "btn_vote_#{number}", :class => "note_text btn btn-lg btn-warning btn-block",  :style => "font-weight: normal !important;") do
+=link_to({controller: 'concept/posts', action: :next_vote, id: post_for_vote.id, dis_id:@discontent_post.id, num: number},remote: true,method: :put, id: "btn_vote_#{number}", class: "note_text btn btn-lg btn-warning btn-block",  style: "font-weight: normal !important;") do
   Нововведение
   =number
