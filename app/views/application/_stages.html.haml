@@ -1,30 +1,30 @@
-%ul.nav.nav-tabs{role: "tablist"}
+%ul.nav.nav-tabs{role: 'tablist'}
   %li(class="#{'active' if current_stage == :lifetape}")
-    %a{href: "/project/#{@project.id}/life_tape/posts", id: "go_to_life_tape"}
+    %a{href: "/project/#{@project.id}/life_tape/posts", id: 'go_to_life_tape'}
       1 этап
-      %i.fa.fa-question-circle.tooltips(data-toggle="tooltip" data-html="true" data-placement="bottom" title="<h5><b>Цель этапа:</b></h5> ознакомление участников с базой знаний (БЗ) по различным аспектов. <br/><b>Приветствуется:</b> активное обсуждение аспектов и предложения к рассмотрению новых аспектов. <br/> <b>Рекомендуется:</b> <br>- задавать как можно больше вопросов на понимание БЗ<br>- помечать свои сообщения как «Проблема» или «Идея» (если впоследствии вы собираетесь развить их до несовершенства или нововведения соответственно)")
+      %i.fa.fa-question-circle.tooltips(data-toggle='tooltip' data-html='true' data-placement='bottom' title='<h5><b>Цель этапа:</b></h5> ознакомление участников с базой знаний (БЗ) по различным аспектов. <br/><b>Приветствуется:</b> активное обсуждение аспектов и предложения к рассмотрению новых аспектов. <br/> <b>Рекомендуется:</b> <br>- задавать как можно больше вопросов на понимание БЗ<br>- помечать свои сообщения как «Проблема» или «Идея» (если впоследствии вы собираетесь развить их до несовершенства или нововведения соответственно)')
       %br
       %span.hidden-sm.hidden-xs Сбор информации
   %li(class="#{'active' if current_stage == :discontent} #{'disabled' if @project.status < 3}")
-    %a{ href: "#{@project.status < 3 ? '#' :  "/project/#{@project.id}/discontent/posts"}", id: "go_to_discontent"}
+    %a{ href: "#{@project.status < 3 ? '#' :  "/project/#{@project.id}/discontent/posts"}", id: 'go_to_discontent'}
       2 этап
-      %i.fa.fa-question-circle.tooltips(data-toggle="tooltip" data-html="true" data-placement="bottom" title="<h5><b>Цель этапа:</b></h5> выявление несовершенств по каждому из аспектов.<br/> <b>Приветствуется:</b> добавление максимального количества несовершенств.<br/> <b>Рекомендуется:</b><br> - формулировать несовершенства кратко и емко, а все пояснения оставлять в комментариях <br> - если понадобится, редактировать свои несовершенства в соответствии с рекомендациями модераторов.")
+      %i.fa.fa-question-circle.tooltips(data-toggle='tooltip' data-html='true' data-placement='bottom' title='<h5><b>Цель этапа:</b></h5> выявление несовершенств по каждому из аспектов.<br/> <b>Приветствуется:</b> добавление максимального количества несовершенств.<br/> <b>Рекомендуется:</b><br> - формулировать несовершенства кратко и емко, а все пояснения оставлять в комментариях <br> - если понадобится, редактировать свои несовершенства в соответствии с рекомендациями модераторов.')
       %br
       %span.hidden-sm.hidden-xs Сбор несовершенств
   %li(class="#{'active' if current_stage == :concept} #{'disabled' if @project.status < 7}")
-    %a{ href: "#{@project.status < 7 ? '#' : "/project/#{@project.id}/concept/posts"}", id: "go_to_concept"}
+    %a{ href: "#{@project.status < 7 ? '#' : "/project/#{@project.id}/concept/posts"}", id: 'go_to_concept'}
       3 этап
-      %i.fa.fa-question-circle.tooltips(data-toggle="tooltip" data-html="true" data-placement="bottom" title="<h5><b>Цель этапа:</b></h5> поиск решений для всех выявленных несовершенств. <br/><b>Приветствуется:</b> выдвижение любых идей и предложений.<br/> <b>Рекомендуется:</b><br> - заполнять все предусмотренные поля для максимально четкого описания идеи <br> - если понадобится, редактировать свои несовершенства в соответствии с рекомендациями модераторов.")
+      %i.fa.fa-question-circle.tooltips(data-toggle='tooltip' data-html='true' data-placement='bottom' title='<h5><b>Цель этапа:</b></h5> поиск решений для всех выявленных несовершенств. <br/><b>Приветствуется:</b> выдвижение любых идей и предложений.<br/> <b>Рекомендуется:</b><br> - заполнять все предусмотренные поля для максимально четкого описания идеи <br> - если понадобится, редактировать свои несовершенства в соответствии с рекомендациями модераторов.')
       %br
       %span.hidden-sm.hidden-xs Сбор нововведений
   %li(class="#{'active' if current_stage == :plan} #{'disabled' if @project.status < 9}")
-    %a{ href: "#{@project.status < 9 ? '#' : "/project/#{@project.id}/plan/posts"}", id: "go_to_plan"}
+    %a{ href: "#{@project.status < 9 ? '#' : "/project/#{@project.id}/plan/posts"}", id: 'go_to_plan'}
       4 этап
-      %i.fa.fa-question-circle.tooltips(data-toggle="tooltip" data-html="true" data-placement="bottom" title="<h5><b>Цель этапа:</b></h5> формирование проекта в рамках заданной темы процедуры.<br/> <b>Приветствуется:</b> составление индивидуальных или групповых проектов.<br/> <b>Рекомендуется:</b><br> - выбрав какое-либо нововведение, максимально подробно описать его именно для своего проекта <br> - следовать инструкциям на портале и указаниям модераторов.")
+      %i.fa.fa-question-circle.tooltips(data-toggle='tooltip' data-html='true' data-placement='bottom' title='<h5><b>Цель этапа:</b></h5> формирование проекта в рамках заданной темы процедуры.<br/> <b>Приветствуется:</b> составление индивидуальных или групповых проектов.<br/> <b>Рекомендуется:</b><br> - выбрав какое-либо нововведение, максимально подробно описать его именно для своего проекта <br> - следовать инструкциям на портале и указаниям модераторов.')
       %br
       %span.hidden-sm.hidden-xs Создание проектов
   %li(class="#{'active' if current_stage == :estimate} #{'disabled' if @project.status < 10}")
-    %a{ href: "#{@project.status < 10 ? '#' : "/project/#{@project.id}/estimate/posts"}", id: "go_to_estimate"}
+    %a{ href: "#{@project.status < 10 ? '#' : "/project/#{@project.id}/estimate/posts"}", id: 'go_to_estimate'}
       5 этап
       -#%i.fa.fa-question-circle.tooltips(data-toggle="tooltip" data-placement="bottom" title="На этом этапе мы должны разобраться как работать с порталом и четко разобраться с темой!")
       %br

@@ -1,8 +1,8 @@
-#modal_new_action.modal.fade{"aria-hidden" => "true", "data-backdrop" => "false", "aria-labelledby" => "myModalLabel", :role => "dialog", :style => "display: none;", :tabindex => "-1"}
+#modal_new_action.modal.fade{"aria-hidden"=> "true", "data-backdrop"=> "false", "aria-labelledby"=> "myModalLabel", role: "dialog", style: "display: none;", tabindex: "-1"}
   .modal-dialog
     .modal-content
       .modal-header
-        %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} ×
+        %button.close{"aria-hidden"=> "true", "data-dismiss"=> "modal", type: "button"} ×
         %h4#myModalLabel.modal-title(style="line-height:20px;" )
           Добавление мероприятия к нововведению:
           .color-teal=@post_aspect.title
@@ -20,49 +20,49 @@
             %br
           .color-teal=@post_stage.name
       .modal-body
-        = form_for action, :url => {:project => @project.id, :con_id => @post_aspect.id, :act_id => action ? action.id : nil, :stage_id => @post_stage ? @post_stage.id : nil, :view_concept => @view_concept, :action => action.persisted? ? 'update_action' : 'create_action'}, :remote => true, :method => :put do |f|
-          = render 'shared/notice_messages', :object => f.object
+        = form_for action, url: {project: @project.id, con_id: @post_aspect.id, act_id: action ? action.id : nil, stage_id: @post_stage ? @post_stage.id : nil, view_concept: @view_concept, action: action.persisted? ? 'update_action' : 'create_action'}, remote: true, method: :put do |f|
+          = render 'shared/notice_messages', object: f.object
           #mod2
           .form-group(style="margin-left:0;")
-            %label{:for => "name_stage"} Название мероприятия
-            =f.text_field :name, :class => 'form-control', placeholder: 'Введите название мероприятия', id:'name_stage'
+            %label{for: "name_stage"} Название мероприятия
+            =f.text_field :name, class: 'form-control', placeholder: 'Введите название мероприятия', id:'name_stage'
             %span.small Короткое название мероприятия
 
           .row
             .col-md-6
               .form-group(style="margin-left:0;")
-                %label{:for => "date_begin"} Дата начала реализации
-                =f.text_field :date_begin, :class => 'form-control datepicker', id:'date_begin_action'
+                %label{for: "date_begin"} Дата начала реализации
+                =f.text_field :date_begin, class: 'form-control datepicker', id:'date_begin_action'
             .col-md-6
               .form-group(style="margin-left:0;")
-                %label{:for => "date_end"} Дата окончания реализации
-                =f.text_field :date_end, :class => 'form-control datepicker', id:'date_end_action'
+                %label{for: "date_end"} Дата окончания реализации
+                =f.text_field :date_end, class: 'form-control datepicker', id:'date_end_action'
           .form-group(style="margin-left:0;")
-            %label{:for => "desc_stage"} Описание мероприятия
-            =f.text_area :desc, :class => 'form-control', :rows => 10, placeholder: 'Введите описание мероприятия', id:'desc_stage'
+            %label{for: "desc_stage"} Описание мероприятия
+            =f.text_area :desc, class: 'form-control', rows: 10, placeholder: 'Введите описание мероприятия', id:'desc_stage'
             %span.small Опишите подробно мероприятие
-          .form-group{:id => "action_resources", :style => "margin-left:0;"}
+          .form-group{id: "action_resources", style: "margin-left:0;"}
             - if action
               - unless action.plan_post_action_resources.empty?
                 -action.plan_post_action_resources.each do |r|
                   .panel.panel-default
                     .panel-body
                       %span.glyphicon.glyphicon-remove.text-danger.pull-right{onclick: "$(this).parent().parent().remove();", style: "cursor:pointer;text-decoration:none;font-size:15px;"}
-                      =autocomplete_field_tag "resor_action[]",'', autocomplete_concept_post_resource_concept_posts_path,:append_to => "#mod2", :"min-length" => 0, value: r.name,  class: 'form-control autocomplete',placeholder: 'Введите свой ресурс или выберите из списка'
+                      =autocomplete_field_tag "resor_action[]",'', autocomplete_concept_post_resource_concept_posts_path,append_to: "#mod2", :"min-length" => 0, value: r.name,  class: 'form-control autocomplete',placeholder: 'Введите свой ресурс или выберите из списка'
                       %br
                       = text_area_tag "res_action[]", r.desc, class: 'form-control', placeholder: 'Пояснение к ресурсу'
               - else
                 .panel.panel-default
                   .panel-body
                     %span.glyphicon.glyphicon-remove.text-danger.pull-right{onclick: "$(this).parent().parent().remove();", style: "cursor:pointer;text-decoration:none;font-size:15px;"}
-                    =autocomplete_field_tag "resor_action[]",'', autocomplete_concept_post_resource_concept_posts_path,:append_to => "#mod2", :"min-length" => 0,  class: 'form-control autocomplete',placeholder: 'Введите свой ресурс или выберите из списка'
+                    =autocomplete_field_tag "resor_action[]",'', autocomplete_concept_post_resource_concept_posts_path,append_to: "#mod2", :"min-length" => 0,  class: 'form-control autocomplete',placeholder: 'Введите свой ресурс или выберите из списка'
                     %br
                     = text_area_tag "res_action[]", '', class: 'form-control', placeholder: 'Пояснение к ресурсу'
             - else
               .panel.panel-default
                 .panel-body
                   %span.glyphicon.glyphicon-remove.text-danger.pull-right{onclick: "$(this).parent().parent().remove();", style: "cursor:pointer;text-decoration:none;font-size:15px;"}
-                  =autocomplete_field_tag "resor_action[]",'', autocomplete_concept_post_resource_concept_posts_path,:append_to => "#mod2", :"min-length" => 0,  class: 'form-control autocomplete',placeholder: 'Введите свой ресурс или выберите из списка'
+                  =autocomplete_field_tag "resor_action[]",'', autocomplete_concept_post_resource_concept_posts_path,append_to: "#mod2", :"min-length" => 0,  class: 'form-control autocomplete',placeholder: 'Введите свой ресурс или выберите из списка'
                   %br
                   = text_area_tag "res_action[]", '', class: 'form-control', placeholder: 'Пояснение к ресурсу'
           %a.btn.btn-primary.pull-right{onclick:"return add_new_action_resource_to_plan(#{@project.id});"} Добавить ресурс
@@ -70,7 +70,7 @@
           %br
           .pull-right
             %button.btn.btn-default(type = "button" data-dismiss="modal" style="margin-right:5px;") Закрыть
-            =f.submit 'Сохранить', :id  => "send_post", class: 'btn btn-success'
+            =f.submit 'Сохранить', id: "send_post", class: 'btn btn-success'
       %br
       .modal-footer(style="margin-top:30px;padding-bottom:10px;")
 

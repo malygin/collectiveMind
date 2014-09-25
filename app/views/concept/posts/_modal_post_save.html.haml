@@ -1,8 +1,8 @@
-#modal_save_concept.modal.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :style => "display: none;", :tabindex => "-1"}
+#modal_save_concept.modal.fade{"aria-hidden"=> "true", "aria-labelledby"=> "myModalLabel", role: "dialog", style: "display: none;", tabindex: "-1"}
   .modal-dialog
     .modal-content
       .modal-header
-        %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} ×
+        %button.close{"aria-hidden"=> "true", "data-dismiss"=> "modal", type: "button"} ×
       .modal-body
         %h3.text-center.color-green  Ваше нововведение добавлено! Вы можете добавить еще одно или перейти к просмотру списка нововведений.
         %hr
@@ -10,7 +10,7 @@
           .col-md-6
             %a.btn.btn-lg.btn-primary(data-dismiss="modal") Добавить еще одно
           .col-md-6
-            =link_to 'Перейти к списку', "/project/#{@project.id}/concept/posts?asp=#{@aspect_id}", :class => "btn btn-lg btn-success"
+            =link_to 'Перейти к списку', "/project/#{@project.id}/concept/posts?asp=#{@aspect_id}", class: "btn btn-lg btn-success"
         %br
         %br
 

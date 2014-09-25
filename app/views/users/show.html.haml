@@ -22,20 +22,20 @@
               Не состоит ни в одной группе
             -#- if boss?
             -#  .scoreBar
-            -#    =link_to "+30 баллов",  "/project/"+@project.id.to_s+"/users/"+@user.id.to_s+"/add_score/30", :remote => true, :method => :put, class: "voteCounter"
+            -#    =link_to '+30 баллов',  '/project/'+@project.id.to_s+'/users/'+@user.id.to_s+'/add_score/30', :remote: true, :method: :put, class: 'voteCounter'
             -#    |
-            -#    =link_to "+10 баллов",  "/project/"+@project.id.to_s+"/users/"+@user.id.to_s+"/add_score/10", :remote => true, :method => :put, class: "voteCounter"
+            -#    =link_to '+10 баллов',  '/project/'+@project.id.to_s+'/users/'+@user.id.to_s+'/add_score/10', :remote: true, :method: :put, class: 'voteCounter'
             %br
             -if admin?
-              %h4(style="font-weight: bold;")
+              %h4(style='font-weight: bold;')
                 %span.color-green.pull-left
                   -unless @user.boss?
-                    = link_to club_toggle_user_path(@project, @user), :remote => true, :method => :put, :style => 'text-decoration:none;', :id => "club_status_#{@user.id}" do
+                    = link_to club_toggle_user_path(@project, @user), remote: true, method: :put, style: 'text-decoration:none;', id: "club_status_#{@user.id}" do
                       =club_status_show_user(@user)
-                  %a(href="#" id="userscore_#{@user.id}" class="userscore" data-pk="1" data-remote="true" data-resource="post" data-type="text" data-name="score" data-url="/project/#{@project.id}/users/#{@user.id}/update_score")
+                  %a(href='#' id="userscore_#{@user.id}" class='userscore' data-pk='1' data-remote='true' data-resource='post' data-type='text' data-name='score' data-url="/project/#{@project.id}/users/#{@user.id}/update_score")
                     =@user.score
             -else
-              %h4(style="font-weight: bold;")
+              %h4(style='font-weight: bold;')
                 %span.color-green.pull-left
                   =club_status_show_user(@user)
                   -unless @user.user_project_scores(@project.id).nil?
@@ -81,13 +81,13 @@
           %header
             %ul.nav.nav-tabs
               %li.active
-                %a(href="#active_line" data-toggle="tab") Активность
+                %a(href='#active_line' data-toggle='tab') Активность
               %li
-                %a(href="#ideas" data-toggle="tab")="Темы (#{@user.life_tape_posts.by_project(@project.id).count})"
+                %a(href='#ideas' data-toggle='tab')="Темы (#{@user.life_tape_posts.by_project(@project.id).count})"
               %li
-                %a(href="#imperfections" data-toggle="tab")="Несовершенства (#{@user.discontent_posts.by_project(@project.id).count})"
+                %a(href='#imperfections' data-toggle='tab')="Несовершенства (#{@user.discontent_posts.by_project(@project.id).count})"
               %li
-                %a(href="#images" data-toggle="tab")="Нововв. (#{@user.concept_posts.by_project(@project.id).count})"
+                %a(href='#images' data-toggle='tab')="Нововв. (#{@user.concept_posts.by_project(@project.id).count})"
 
           .body.tab-content
             #active_line.tab-pane.fade.in.active
@@ -97,7 +97,7 @@
                   -  if journal_parser(journal, @project.id)
                     = link_to journal.user, user_path(@project,journal.user)
                     = journal_parser(journal, @project.id).html_safe
-                    %small=Russian::strftime(journal.created_at,"%d %B %k:%M:%S ")
+                    %small=Russian::strftime(journal.created_at,'%d %B %k:%M:%S ')
                     %br
 
             #ideas.tab-pane.fade.in
@@ -116,6 +116,6 @@
                   .panel-body.nov-list
                     =cp.post_aspects.first.title if cp.post_aspects.first
                     =link_to 'подробнее', concept_post_path(@project, cp)
-                    = render 'shared/post_social_bar2', :post =>cp
+                    = render 'shared/post_social_bar2', post:cp
 
 

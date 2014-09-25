@@ -3,7 +3,7 @@
 class Estimate::PostsController < PostsController
 
 
-  #layout 'life_tape/posts2', :only => [:new, :edit, :show]
+  #layout 'life_tape/posts2', :only: [:new, :edit, :show]
   def current_model
     Estimate::Post
   end
@@ -24,7 +24,7 @@ class Estimate::PostsController < PostsController
     @project = Core::Project.find(params[:project])
 
     @status = params[:status]
-    @aspects = Discontent::Aspect.where(:project_id => @project)
+    @aspects = Discontent::Aspect.where(project_id: @project)
     if @project.status == 11
       @vote_all = Plan::Voting.where("plan_votings.plan_post_id IN (#{@project.plan_post.pluck(:id).join(", ")})").uniq_user.count
     end
@@ -38,7 +38,7 @@ class Estimate::PostsController < PostsController
         return
       end
     end
-    @posts = Plan::Post.where(:project_id => @project, :status => 0).paginate(:page => params[:page])
+    @posts = Plan::Post.where(project_id: @project, status: 0).paginate(page: params[:page])
     @est_stat = @posts.first.estimate_status.nil? ? 0 : @posts.first.estimate_status if @posts.first
     respond_to do |format|
       format.html
@@ -51,7 +51,7 @@ class Estimate::PostsController < PostsController
     @plan_post = @post.post
     @est_stat = @plan_post.estimate_status.nil? ? 0 : @plan_post.estimate_status
     @comment = comment_model.new
-    @comments = @post.comments.paginate(:page => params[:page], :per_page => 30)
+    @comments = @post.comments.paginate(page: params[:page], per_page: 30)
   end
 
   def edit
@@ -177,7 +177,7 @@ class Estimate::PostsController < PostsController
 
     respond_to do |format|
       if @estimate_post.save
-        current_user.journals.build(:type_event=>'estimate_post_save', :body=>@estimate_post.id).save!
+        current_user.journals.build(type_event:'estimate_post_save', body:@estimate_post.id).save!
 
         format.html { redirect_to  action: "index"  }
         format.json { render json: @estimate_post, status: :created, location: @estimate_post }
@@ -260,7 +260,7 @@ class Estimate::PostsController < PostsController
 
     @estimate_post.save
     @estimate_post.update_attributes(params[:estimate_post])
-    current_user.journals.build(:type_event=>'estimate_post_update', :body=>@estimate_post.id).save!
+    current_user.journals.build(type_event:'estimate_post_update', body:@estimate_post.id).save!
 
     redirect_to estimate_post_path(@project,@estimate_post), notice: 'Оценка успешно обновлена.'
 
@@ -268,7 +268,7 @@ class Estimate::PostsController < PostsController
 
   def vote_list
     @project = Core::Project.find(params[:project])
-    @posts = Plan::Post.where(:project_id => @project, :status => 0).paginate(:page => params[:page])
+    @posts = Plan::Post.where(project_id: @project, status: 0).paginate(page: params[:page])
     @est_stat = @posts.first.estimate_status.nil? ? 0 : @posts.first.estimate_status
     @number_v = @project.stage5 - current_user.voted_plan_posts.by_project(@project.id).size
     @votes = @project.stage5

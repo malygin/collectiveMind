@@ -1,9 +1,9 @@
 $('#modal_action').empty();
 -unless @view_concept
-  $('#modal_action').html("#{escape_javascript(render :partial => 'modal_new_action', :locals => { :action => @post_action })}");
+  $('#modal_action').html("#{escape_javascript(render partial: 'modal_new_action', locals: { action: @post_action })}");
   autocomplete_initialized();
 -else
-  $('#modal_concept_action').html("#{escape_javascript(render :partial => 'modal_new_action', :locals => { :action => @post_action })}");
+  $('#modal_concept_action').html("#{escape_javascript(render partial: 'modal_new_action', locals: { action: @post_action })}");
   autocomplete_initialized();
 $('#modal_new_action').modal('show');
 

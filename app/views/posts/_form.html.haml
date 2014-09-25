@@ -1,4 +1,4 @@
-= form_for @post,:url => {:project => @project.id, :action => @post.persisted? ? 'update' : 'create'},  :html => { :class => 'lt_new' } do |f|
+= form_for @post,url: {project: @project.id, action: @post.persisted? ? 'update' : 'create'},  html: { class: 'lt_new' } do |f|
   = f.text_area :content, class: 'post',  onkeyup: "activate_button(this);" , style: 'width: 100%; height: 300px;'
   %br
   %br

@@ -14,13 +14,13 @@
   %body
     .logo.hidden-sm.hidden-xs
       %h4
-        %a{:href => "/project/#{@project.id}", :id => "go_to_logo"}
+        %a{href: "/project/#{@project.id}", id: "go_to_logo"}
           %h3
             %span.text-danger MASS
             %strong DECISION
 
     %nav#sidebar.sidebar.nav-collapse.collapse
-      = render partial: 'left_side', :locals => { :current_stage => controller.controller_path }
+      = render partial: 'left_side', locals: { current_stage: controller.controller_path }
     .wrap
       %header.page-header
         .navbar

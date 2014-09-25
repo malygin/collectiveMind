@@ -1,8 +1,8 @@
-#modal_edit_concept.modal.fade{"aria-hidden" => "true", "data-backdrop" => "false", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"}
+#modal_edit_concept.modal.fade{"aria-hidden" => "true", "data-backdrop" => "false", "aria-labelledby" => "myModalLabel", role: "dialog", tabindex: "-1"}
   .modal-dialog.modal-lg
     .modal-content
       .modal-header
-        %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} &times;
+        %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", type: "button"} &times;
         %h4#myModalLabel.modal-title
           Редактирование нововведения
           в рамках этапа:
@@ -15,7 +15,7 @@
             %br
           .color-teal=@post_stage.name
       .modal-body
-        =render :partial => 'form_for_light_concept', :object => form_for_edit_concept
+        =render partial: 'form_for_light_concept', object: form_for_edit_concept
         %br
         .text-success#concept_success(style='display:none;')
           Нововведение успешно отредактировано

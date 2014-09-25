@@ -1,2 +1,2 @@
-$("#view_post_concept_table_#{@concept_post.id}").popoverClosable({trigger: 'focus', html: true, placement: 'auto', title: "<div class='color-orange'><b>#{@concept_post.title}</b></div>", content: "#{escape_javascript(render :partial => 'light_concept', :object => @concept_post, :locals => { :table => true, :what_view => false } )}"});
+$("#view_post_concept_table_#{@concept_post.id}").popoverClosable({trigger: 'focus', html: true, placement: 'auto', title: "<div class='color-orange'><b>#{@concept_post.title}</b></div>", content: "#{escape_javascript(render partial: 'light_concept', object: @concept_post, locals: { table: true, what_view: false } )}"});
 if( !$(".popover").is(':visible')) { $("#view_post_concept_table_#{@concept_post.id}").popover('toggle'); }

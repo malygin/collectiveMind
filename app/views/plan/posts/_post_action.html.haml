@@ -1,11 +1,11 @@
 %tr(id="tr_action_#{post_action.id}")
   %td
     .pull-right
-      =link_to edit_action_plan_post_path(@project, @post, :act_id => post_action.id, :con_id => @post_aspect.id, :stage_id => @post_stage ? @post_stage.id : nil), :method => :put, :remote => true, :id => "edit_post_action_#{post_action.id}" do
-        %button.btn.btn-xs.btn-warning{:type => "button"}
+      =link_to edit_action_plan_post_path(@project, @post, act_id: post_action.id, con_id: @post_aspect.id, stage_id: @post_stage ? @post_stage.id : nil), method: :put, remote: true, id: "edit_post_action_#{post_action.id}" do
+        %button.btn.btn-xs.btn-warning{type: "button"}
           %i.fa.fa-pencil
-      =link_to destroy_action_plan_post_path(@project, @post, :act_id => post_action.id, :con_id => @post_aspect.id, :stage_id => @post_stage ? @post_stage.id : nil), :method => :delete, :remote => true, :confirm => 'Удалить нововведение?', :id => "destroy_post_action_#{post_action.id}" do
-        %button.btn.btn-xs.btn-danger{:type => "button"}
+      =link_to destroy_action_plan_post_path(@project, @post, act_id: post_action.id, con_id: @post_aspect.id, stage_id: @post_stage ? @post_stage.id : nil), method: :delete, remote: true, data: {confirm: 'Удалить нововведение?'}, id: "destroy_post_action_#{post_action.id}" do
+        %button.btn.btn-xs.btn-danger{type: "button"}
           %i.fa.fa-trash-o
 
     -if post_action.date_begin and post_action.date_end
@@ -14,7 +14,7 @@
         ="-"
         =Russian::strftime(post_action.date_end, "%d %b %Y")
       %br
-    %span.h5.color-teal{:id => "name_post_action_#{post_action.id}"}=post_action.name
+    %span.h5.color-teal{id: "name_post_action_#{post_action.id}"}=post_action.name
     %br
     %span.h5=post_action.desc
     -unless post_action.plan_post_action_resources.nil?

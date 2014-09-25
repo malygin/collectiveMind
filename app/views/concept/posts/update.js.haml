@@ -1,5 +1,5 @@
 - if @post_aspect.errors.any?
-  $("#notice_messages").html('#{escape_javascript(render partial: 'shared/notice_messages', :locals => {:object =>@post_aspect})}');
+  $("#notice_messages").html('#{escape_javascript(render partial: 'shared/notice_messages', locals: {object:@post_aspect})}');
   window.scrollTo(0,0)
 - else
   $('#render_success_concept').empty();

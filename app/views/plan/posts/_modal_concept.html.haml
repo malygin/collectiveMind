@@ -1,4 +1,4 @@
-#modal_concept.modal.fade{"aria-hidden" => "true", "data-backdrop" => "false", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"}
+#modal_concept.modal.fade{"aria-hidden"=> "true", "data-backdrop"=> "false", "aria-labelledby"=> "myModalLabel", role: "dialog", tabindex: "-1"}
   .modal-dialog.modal-lg
     .modal-content
       .modal-header
@@ -15,7 +15,7 @@
               =ind+1
             .col-md-8
               - if post.title!=''
-                =link_to view_concept_plan_post_path(@project, @post, :con_id => post.id, :new_idea => true), :method => :get, :remote => true, :class => "color-teal", "data-toggle" => "collapse", "data-target" => "collapse_plus_concept_#{post.id}", :style => "text-decoration:none;", :id => "view_post_concept_#{post.id}" do
+                =link_to view_concept_plan_post_path(@project, @post, con_id: post.id, new_idea: true), method: :get, remote: true, class: "color-teal", "data-toggle"=> "collapse", "data-target"=> "collapse_plus_concept_#{post.id}", style: "text-decoration:none;", id: "view_post_concept_#{post.id}" do
                   =post.title
               - else
                 Без названия
@@ -24,20 +24,20 @@
                 .label.label-success Добавлено
             .col-md-1
               .pull-right
-                =link_to add_form_for_concept_plan_post_path(@project, @post,:stage_id => @post_stage.id, :concept_id => post.id, :save_form => true, :new_idea => true), :method => :put, :remote => true, :id => "plus_post_concept_#{post.id}" do
-                  %button.btn.btn-sm.btn-warning{:type => "button"}
+                =link_to add_form_for_concept_plan_post_path(@project, @post,stage_id: @post_stage.id, concept_id: post.id, save_form: true, new_idea: true), method: :put, remote: true, id: "plus_post_concept_#{post.id}" do
+                  %button.btn.btn-sm.btn-warning{type: "button"}
                     %i.fa.fa-plus
           .concept-devider
         %br
         %h4.color-teal Выберите нововведение:
         - @disposts.each do |post|
           -if post.dispost_concepts.by_status(0).present?
-            %span{:id => "view_what_#{post.id}"}
+            %span{id: "view_what_#{post.id}"}
               %span.label(class= "#{class_for_type_field(post,1)}" id="#{id_for_type_field(1)}_#{post.id}")=name_for_type_field(1)
               =post.content
             %span
-              =link_to view_concept_plan_post_path(@project, @post,:stage_id => @post_stage.id, :post_id => post.id, :what_view => true), :method => :get, :remote => true, :class => "color-teal pull-right", "data-toggle" => "collapse", "data-target" => "collapse_dis_concept_#{post.id}", :style => "text-decoration:none;", :id => "view_dis_concept_#{post.id}" do
-                .label.label-success{:id => "view_concepts_#{post.id}"} Показать решения
+              =link_to view_concept_plan_post_path(@project, @post,stage_id: @post_stage.id, post_id: post.id, what_view: true), method: :get, remote: true, class: "color-teal pull-right", "data-toggle"=> "collapse", "data-target"=> "collapse_dis_concept_#{post.id}", style: "text-decoration:none;", id: "view_dis_concept_#{post.id}" do
+                .label.label-success{id: "view_concepts_#{post.id}"} Показать решения
             %br
             %br
         %br

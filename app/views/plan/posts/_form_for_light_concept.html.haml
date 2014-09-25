@@ -1,4 +1,4 @@
-= form_for form_for_light_concept, :url => {:project => @project.id, :stage_id => @post_stage ? @post_stage.id : nil, concept_id: @post_concept ? @post_concept.id : (@cond ? @cond.id : nil), save_form:true, :action => 'update_concept'}, :remote => true, :method => :put do |f|
+= form_for form_for_light_concept, url: {project: @project.id, stage_id: @post_stage ? @post_stage.id : nil, concept_id: @post_concept ? @post_concept.id : (@cond ? @cond.id : nil), save_form:true, action: 'update_concept'}, remote: true, method: :put do |f|
   #mod
   .row
     .col-md-12
@@ -17,10 +17,10 @@
           %b A1.
           =t('form.novation_what')
         %br
-        =f.text_area :name, :class => "concept_cond form-control", rows: 5, style: 'width: 100%;'
+        =f.text_area :name, class: "concept_cond form-control", rows: 5, style: 'width: 100%;'
         %br
   -if @project.status == 9
-    = render partial: 'plan/posts/note_list', :locals => {:post_field => form_for_light_concept,:type_fd => 1}
+    = render partial: 'plan/posts/note_list', locals: {post_field: form_for_light_concept,type_fd: 1}
   .row#novation_how
     .col-md-12
       .text-center
@@ -28,10 +28,10 @@
           %b A2.
           =t('form.novation_how')
         %br
-        =f.text_area :content, :class => "concept_cond form-control", rows: 5, style: 'width: 100%;'
+        =f.text_area :content, class: "concept_cond form-control", rows: 5, style: 'width: 100%;'
         %br
   -if @project.status == 9
-    = render partial: 'plan/posts/note_list', :locals => {:post_field => form_for_light_concept,:type_fd => 2}
+    = render partial: 'plan/posts/note_list', locals: {post_field: form_for_light_concept,type_fd: 2}
   .row#cond
     .col-md-12
       .text-center
@@ -39,10 +39,10 @@
           %b B1.
           =t('form.cond')
         %br
-        =f.text_area :positive, :class => "concept_cond form-control", rows: 5, style: 'width: 100%;'
+        =f.text_area :positive, class: "concept_cond form-control", rows: 5, style: 'width: 100%;'
         %br
   -if @project.status == 9
-    = render partial: 'plan/posts/note_list', :locals => {:post_field => form_for_light_concept,:type_fd => 3}
+    = render partial: 'plan/posts/note_list', locals: {post_field: form_for_light_concept,type_fd: 3}
   .row#cond_res
     .col-md-12
       .text-center
@@ -51,31 +51,31 @@
           =t('form.cond_res')
   .row
     .col-md-12
-      %div{:id => "resources_positive_r"}
+      %div{id: "resources_positive_r"}
         - unless form_for_light_concept.plan_post_resources.by_type('positive_r').empty?
           -form_for_light_concept.plan_post_resources.by_type('positive_r').each do |r|
             .panel.panel-default
               .panel-body
                 %span.glyphicon.glyphicon-remove.text-danger.pull-right{onclick: "$(this).parent().parent().remove();", style: "cursor:pointer;text-decoration:none;font-size:15px;"}
-                =autocomplete_field_tag "resor_positive_r[]",'', autocomplete_concept_post_resource_concept_posts_path,:append_to => "#mod", :"min-length" => 0, value: r.name,  class: 'form-control autocomplete',placeholder: 'Введите свой ресурс или выберите из списка'
+                =autocomplete_field_tag "resor_positive_r[]",'', autocomplete_concept_post_resource_concept_posts_path,append_to: "#mod", :"min-length"=> 0, value: r.name,  class: 'form-control autocomplete',placeholder: 'Введите свой ресурс или выберите из списка'
                 %br
                 = text_area_tag "res_positive_r[]", r.desc, class: 'form-control', placeholder: 'Пояснение к ресурсу'
         - else
           .panel.panel-default
             .panel-body
               %span.glyphicon.glyphicon-remove.text-danger.pull-right{onclick: "$(this).parent().parent().remove();", style: "cursor:pointer;text-decoration:none;font-size:15px;"}
-              =autocomplete_field_tag "resor_positive_r[]",'', autocomplete_concept_post_resource_concept_posts_path,:append_to => "#mod", :"min-length" => 0,  class: 'form-control autocomplete',placeholder: 'Введите свой ресурс или выберите из списка'
+              =autocomplete_field_tag "resor_positive_r[]",'', autocomplete_concept_post_resource_concept_posts_path,append_to: "#mod", :"min-length"=> 0,  class: 'form-control autocomplete',placeholder: 'Введите свой ресурс или выберите из списка'
               %br
               = text_area_tag "res_positive_r[]", '', class: 'form-control', placeholder: 'Пояснение к ресурсу'
           .panel.panel-default
             .panel-body
               %span.glyphicon.glyphicon-remove.text-danger.pull-right{onclick: "$(this).parent().parent().remove();", style: "cursor:pointer;text-decoration:none;font-size:15px;"}
-              =autocomplete_field_tag "resor_positive_r[]",'', autocomplete_concept_post_resource_concept_posts_path,:append_to => "#mod", :"min-length" => 0,  class: 'form-control autocomplete',placeholder: 'Введите свой ресурс или выберите из списка'
+              =autocomplete_field_tag "resor_positive_r[]",'', autocomplete_concept_post_resource_concept_posts_path,append_to: "#mod", :"min-length"=> 0,  class: 'form-control autocomplete',placeholder: 'Введите свой ресурс или выберите из списка'
               %br
               = text_area_tag "res_positive_r[]", '', class: 'form-control', placeholder: 'Пояснение к ресурсу'
       %a.btn.btn-success.pull-right{onclick:"return add_new_resource_to_plan('positive_r',#{@project.id});"} Добавить ресурс
   -if @project.status == 9
-    = render partial: 'plan/posts/note_list', :locals => {:post_field => form_for_light_concept,:type_fd => 4}
+    = render partial: 'plan/posts/note_list', locals: {post_field: form_for_light_concept,type_fd: 4}
   .row#cond_s
     .col-md-12
       .text-center
@@ -85,31 +85,31 @@
 
   .row
     .col-md-12
-      %div{:id => "resources_positive_s"}
+      %div{id: "resources_positive_s"}
         - unless form_for_light_concept.plan_post_means.by_type('positive_s').empty?
           -form_for_light_concept.plan_post_means.by_type('positive_s').each do |r|
             .panel.panel-default
               .panel-body
                 %span.glyphicon.glyphicon-remove.text-danger.pull-right{onclick: "$(this).parent().parent().remove();", style: "cursor:pointer;text-decoration:none;font-size:15px;"}
-                =autocomplete_field_tag "resor_positive_s[]",'', autocomplete_concept_post_resource_concept_posts_path,:append_to => "#mod", :"min-length" => 0, value: r.name,  class: 'form-control autocomplete',placeholder: 'Введите свой ресурс или выберите из списка'
+                =autocomplete_field_tag "resor_positive_s[]",'', autocomplete_concept_post_resource_concept_posts_path,append_to: "#mod", :"min-length"=> 0, value: r.name,  class: 'form-control autocomplete',placeholder: 'Введите свой ресурс или выберите из списка'
                 %br
                 = text_area_tag "res_positive_s[]", r.desc, class: 'form-control', placeholder: 'Пояснение к ресурсу'
         - else
           .panel.panel-default
             .panel-body
               %span.glyphicon.glyphicon-remove.text-danger.pull-right{onclick: "$(this).parent().parent().remove();", style: "cursor:pointer;text-decoration:none;font-size:15px;"}
-              =autocomplete_field_tag "resor_positive_s[]",'', autocomplete_concept_post_resource_concept_posts_path,:append_to => "#mod", :"min-length" => 0,  class: 'form-control autocomplete',placeholder: 'Введите свой ресурс или выберите из списка'
+              =autocomplete_field_tag "resor_positive_s[]",'', autocomplete_concept_post_resource_concept_posts_path,append_to: "#mod", :"min-length"=> 0,  class: 'form-control autocomplete',placeholder: 'Введите свой ресурс или выберите из списка'
               %br
               = text_area_tag "res_positive_s[]", '', class: 'form-control', placeholder: 'Пояснение к ресурсу'
           .panel.panel-default
             .panel-body
               %span.glyphicon.glyphicon-remove.text-danger.pull-right{onclick: "$(this).parent().parent().remove();", style: "cursor:pointer;text-decoration:none;font-size:15px;"}
-              =autocomplete_field_tag "resor_positive_s[]",'', autocomplete_concept_post_resource_concept_posts_path,:append_to => "#mod", :"min-length" => 0,  class: 'form-control autocomplete',placeholder: 'Введите свой ресурс или выберите из списка'
+              =autocomplete_field_tag "resor_positive_s[]",'', autocomplete_concept_post_resource_concept_posts_path,append_to: "#mod", :"min-length"=> 0,  class: 'form-control autocomplete',placeholder: 'Введите свой ресурс или выберите из списка'
               %br
               = text_area_tag "res_positive_s[]", '', class: 'form-control', placeholder: 'Пояснение к ресурсу'
       %a.btn.btn-success.pull-right{onclick:"return add_new_resource_to_plan('positive_s',#{@project.id});"} Добавить ресурс
   -if @project.status == 9
-    = render partial: 'plan/posts/note_list', :locals => {:post_field => form_for_light_concept,:type_fd => 5}
+    = render partial: 'plan/posts/note_list', locals: {post_field: form_for_light_concept,type_fd: 5}
   .row#negative_h
     .col-md-12
       .text-center
@@ -117,10 +117,10 @@
           %b C1.
           =t('form.negative_h')
         %br
-        =f.text_area :negative, :class => "concept_cond form-control", rows: 5, style: 'width: 100%;'
+        =f.text_area :negative, class: "concept_cond form-control", rows: 5, style: 'width: 100%;'
         %br
   -if @project.status == 9
-    = render partial: 'plan/posts/note_list', :locals => {:post_field => form_for_light_concept,:type_fd => 6}
+    = render partial: 'plan/posts/note_list', locals: {post_field: form_for_light_concept,type_fd: 6}
   .row#negative_res
     .col-md-12
       .text-center
@@ -130,31 +130,31 @@
 
   .row
     .col-md-12
-      %div{:id => "resources_negative_r"}
+      %div{id: "resources_negative_r"}
         - unless form_for_light_concept.plan_post_resources.by_type('negative_r').empty?
           -form_for_light_concept.plan_post_resources.by_type('negative_r').each do |r|
             .panel.panel-default
               .panel-body
                 %span.glyphicon.glyphicon-remove.text-danger.pull-right{onclick: "$(this).parent().parent().remove();", style: "cursor:pointer;text-decoration:none;font-size:15px;"}
-                =autocomplete_field_tag "resor_negative_r[]",'', autocomplete_concept_post_resource_concept_posts_path,:append_to => "#mod", :"min-length" => 0, value: r.name,  class: 'form-control autocomplete',placeholder: 'Введите свой ресурс или выберите из списка'
+                =autocomplete_field_tag "resor_negative_r[]",'', autocomplete_concept_post_resource_concept_posts_path,append_to: "#mod", :"min-length"=> 0, value: r.name,  class: 'form-control autocomplete',placeholder: 'Введите свой ресурс или выберите из списка'
                 %br
                 = text_area_tag "res_negative_r[]", r.desc, class: 'form-control', placeholder: 'Пояснение к ресурсу'
         - else
           .panel.panel-default
             .panel-body
               %span.glyphicon.glyphicon-remove.text-danger.pull-right{onclick: "$(this).parent().parent().remove();", style: "cursor:pointer;text-decoration:none;font-size:15px;"}
-              =autocomplete_field_tag "resor_negative_r[]",'', autocomplete_concept_post_resource_concept_posts_path,:append_to => "#mod", :"min-length" => 0,  class: 'form-control autocomplete',placeholder: 'Введите свой ресурс или выберите из списка'
+              =autocomplete_field_tag "resor_negative_r[]",'', autocomplete_concept_post_resource_concept_posts_path,append_to: "#mod", :"min-length"=> 0,  class: 'form-control autocomplete',placeholder: 'Введите свой ресурс или выберите из списка'
               %br
               = text_area_tag "res_negative_r[]", '', class: 'form-control', placeholder: 'Пояснение к ресурсу'
           .panel.panel-default
             .panel-body
               %span.glyphicon.glyphicon-remove.text-danger.pull-right{onclick: "$(this).parent().parent().remove();", style: "cursor:pointer;text-decoration:none;font-size:15px;"}
-              =autocomplete_field_tag "resor_negative_r[]",'', autocomplete_concept_post_resource_concept_posts_path,:append_to => "#mod", :"min-length" => 0,  class: 'form-control autocomplete',placeholder: 'Введите свой ресурс или выберите из списка'
+              =autocomplete_field_tag "resor_negative_r[]",'', autocomplete_concept_post_resource_concept_posts_path,append_to: "#mod", :"min-length"=> 0,  class: 'form-control autocomplete',placeholder: 'Введите свой ресурс или выберите из списка'
               %br
               = text_area_tag "res_negative_r[]", '', class: 'form-control', placeholder: 'Пояснение к ресурсу'
       %a.btn.btn-success.pull-right{onclick:"return add_new_resource_to_plan('negative_r','#{@project.id}');"} Добавить ресурс
   -if @project.status == 9
-    = render partial: 'plan/posts/note_list', :locals => {:post_field => form_for_light_concept,:type_fd => 7}
+    = render partial: 'plan/posts/note_list', locals: {post_field: form_for_light_concept,type_fd: 7}
   .row#negative_s
     .col-md-12
       .text-center
@@ -164,31 +164,31 @@
 
   .row
     .col-md-12
-      %div{:id => "resources_negative_s"}
+      %div{id: "resources_negative_s"}
         - unless form_for_light_concept.plan_post_means.by_type('negative_s').empty?
           -form_for_light_concept.plan_post_means.by_type('negative_s').each do |r|
             .panel.panel-default
               .panel-body
                 %span.glyphicon.glyphicon-remove.text-danger.pull-right{onclick: "$(this).parent().parent().remove();", style: "cursor:pointer;text-decoration:none;font-size:15px;"}
-                =autocomplete_field_tag "resor_negative_s[]",'', autocomplete_concept_post_resource_concept_posts_path,:append_to => "#mod", :"min-length" => 0, value: r.name,  class: 'form-control autocomplete',placeholder: 'Введите свой ресурс или выберите из списка'
+                =autocomplete_field_tag "resor_negative_s[]",'', autocomplete_concept_post_resource_concept_posts_path,append_to: "#mod", :"min-length"=> 0, value: r.name,  class: 'form-control autocomplete',placeholder: 'Введите свой ресурс или выберите из списка'
                 %br
                 = text_area_tag "res_negative_s[]", r.desc, class: 'form-control', placeholder: 'Пояснение к ресурсу'
         - else
           .panel.panel-default
             .panel-body
               %span.glyphicon.glyphicon-remove.text-danger.pull-right{onclick: "$(this).parent().parent().remove();", style: "cursor:pointer;text-decoration:none;font-size:15px;"}
-              =autocomplete_field_tag "resor_negative_s[]",'', autocomplete_concept_post_resource_concept_posts_path,:append_to => "#mod", :"min-length" => 0,  class: 'form-control autocomplete',placeholder: 'Введите свой ресурс или выберите из списка'
+              =autocomplete_field_tag "resor_negative_s[]",'', autocomplete_concept_post_resource_concept_posts_path,append_to: "#mod", :"min-length"=> 0,  class: 'form-control autocomplete',placeholder: 'Введите свой ресурс или выберите из списка'
               %br
               = text_area_tag "res_negative_s[]", '', class: 'form-control', placeholder: 'Пояснение к ресурсу'
           .panel.panel-default
             .panel-body
               %span.glyphicon.glyphicon-remove.text-danger.pull-right{onclick: "$(this).parent().parent().remove();", style: "cursor:pointer;text-decoration:none;font-size:15px;"}
-              =autocomplete_field_tag "resor_negative_s[]",'', autocomplete_concept_post_resource_concept_posts_path,:append_to => "#mod", :"min-length" => 0,  class: 'form-control autocomplete',placeholder: 'Введите свой ресурс или выберите из списка'
+              =autocomplete_field_tag "resor_negative_s[]",'', autocomplete_concept_post_resource_concept_posts_path,append_to: "#mod", :"min-length"=> 0,  class: 'form-control autocomplete',placeholder: 'Введите свой ресурс или выберите из списка'
               %br
               = text_area_tag "res_negative_s[]", '', class: 'form-control', placeholder: 'Пояснение к ресурсу'
       %a.btn.btn-success.pull-right{onclick:"return add_new_resource_to_plan('negative_s',#{@project.id});"} Добавить ресурс
   -if @project.status == 9
-    = render partial: 'plan/posts/note_list', :locals => {:post_field => form_for_light_concept,:type_fd => 8}
+    = render partial: 'plan/posts/note_list', locals: {post_field: form_for_light_concept,type_fd: 8}
   .row#control
     .col-md-12
       .text-center
@@ -196,10 +196,10 @@
           %b D1.
           =t('form.control')
         %br
-        =f.text_area :control, :class => "concept_cond form-control", rows: 5,  style: 'width: 100%;'
+        =f.text_area :control, class: "concept_cond form-control", rows: 5,  style: 'width: 100%;'
         %br
   -if @project.status == 9
-    = render partial: 'plan/posts/note_list', :locals => {:post_field => form_for_light_concept,:type_fd => 9}
+    = render partial: 'plan/posts/note_list', locals: {post_field: form_for_light_concept,type_fd: 9}
   .row#control_res
     .col-md-12
       .text-center
@@ -209,31 +209,31 @@
 
   .row
     .col-md-12
-      %div{:id => "resources_control_r"}
+      %div{id: "resources_control_r"}
         - unless form_for_light_concept.plan_post_resources.by_type('control_r').empty?
           -form_for_light_concept.plan_post_resources.by_type('control_r').each do |r|
             .panel.panel-default
               .panel-body
                 %span.glyphicon.glyphicon-remove.text-danger.pull-right{onclick: "$(this).parent().parent().remove();", style: "cursor:pointer;text-decoration:none;font-size:15px;"}
-                =autocomplete_field_tag "resor_control_r[]",'', autocomplete_concept_post_resource_concept_posts_path,:append_to => "#mod", :"min-length" => 0, value: r.name,  class: 'form-control autocomplete',placeholder: 'Введите свой ресурс или выберите из списка'
+                =autocomplete_field_tag "resor_control_r[]",'', autocomplete_concept_post_resource_concept_posts_path,append_to: "#mod", :"min-length"=> 0, value: r.name,  class: 'form-control autocomplete',placeholder: 'Введите свой ресурс или выберите из списка'
                 %br
                 = text_area_tag "res_control_r[]", r.desc, class: 'form-control', placeholder: 'Пояснение к ресурсу'
         - else
           .panel.panel-default
             .panel-body
               %span.glyphicon.glyphicon-remove.text-danger.pull-right{onclick: "$(this).parent().parent().remove();", style: "cursor:pointer;text-decoration:none;font-size:15px;"}
-              =autocomplete_field_tag "resor_control_r[]",'', autocomplete_concept_post_resource_concept_posts_path,:append_to => "#mod", :"min-length" => 0,  class: 'form-control autocomplete',placeholder: 'Введите свой ресурс или выберите из списка'
+              =autocomplete_field_tag "resor_control_r[]",'', autocomplete_concept_post_resource_concept_posts_path,append_to: "#mod", :"min-length"=> 0,  class: 'form-control autocomplete',placeholder: 'Введите свой ресурс или выберите из списка'
               %br
               = text_area_tag "res_control_r[]", '', class: 'form-control', placeholder: 'Пояснение к ресурсу'
           .panel.panel-default
             .panel-body
               %span.glyphicon.glyphicon-remove.text-danger.pull-right{onclick: "$(this).parent().parent().remove();", style: "cursor:pointer;text-decoration:none;font-size:15px;"}
-              =autocomplete_field_tag "resor_control_r[]",'', autocomplete_concept_post_resource_concept_posts_path,:append_to => "#mod", :"min-length" => 0,  class: 'form-control autocomplete',placeholder: 'Введите свой ресурс или выберите из списка'
+              =autocomplete_field_tag "resor_control_r[]",'', autocomplete_concept_post_resource_concept_posts_path,append_to: "#mod", :"min-length"=> 0,  class: 'form-control autocomplete',placeholder: 'Введите свой ресурс или выберите из списка'
               %br
               = text_area_tag "res_control_r[]", '', class: 'form-control', placeholder: 'Пояснение к ресурсу'
       %a.btn.btn-success.pull-right{onclick:"return add_new_resource_to_plan('control_r',#{@project.id});"} Добавить ресурс
   -if @project.status == 9
-    = render partial: 'plan/posts/note_list', :locals => {:post_field => form_for_light_concept,:type_fd => 10}
+    = render partial: 'plan/posts/note_list', locals: {post_field: form_for_light_concept,type_fd: 10}
   .row#control_s
     .col-md-12
       .text-center
@@ -243,31 +243,31 @@
 
   .row
     .col-md-12
-      %div{:id => "resources_control_s"}
+      %div{id: "resources_control_s"}
         - unless form_for_light_concept.plan_post_means.by_type('control_s').empty?
           -form_for_light_concept.plan_post_means.by_type('control_s').each do |r|
             .panel.panel-default
               .panel-body
                 %span.glyphicon.glyphicon-remove.text-danger.pull-right{onclick: "$(this).parent().parent().remove();", style: "cursor:pointer;text-decoration:none;font-size:15px;"}
-                =autocomplete_field_tag "resor_control_s[]",'', autocomplete_concept_post_resource_concept_posts_path,:append_to => "#mod", :"min-length" => 0, value: r.name,  class: 'form-control autocomplete',placeholder: 'Введите свой ресурс или выберите из списка'
+                =autocomplete_field_tag "resor_control_s[]",'', autocomplete_concept_post_resource_concept_posts_path,append_to: "#mod", :"min-length"=> 0, value: r.name,  class: 'form-control autocomplete',placeholder: 'Введите свой ресурс или выберите из списка'
                 %br
                 = text_area_tag "res_control_s[]", r.desc, class: 'form-control', placeholder: 'Пояснение к ресурсу'
         - else
           .panel.panel-default
             .panel-body
               %span.glyphicon.glyphicon-remove.text-danger.pull-right{onclick: "$(this).parent().parent().remove();", style: "cursor:pointer;text-decoration:none;font-size:15px;"}
-              =autocomplete_field_tag "resor_control_s[]",'', autocomplete_concept_post_resource_concept_posts_path,:append_to => "#mod", :"min-length" => 0,  class: 'form-control autocomplete',placeholder: 'Введите свой ресурс или выберите из списка'
+              =autocomplete_field_tag "resor_control_s[]",'', autocomplete_concept_post_resource_concept_posts_path,append_to: "#mod", :"min-length"=> 0,  class: 'form-control autocomplete',placeholder: 'Введите свой ресурс или выберите из списка'
               %br
               = text_area_tag "res_control_s[]", '', class: 'form-control', placeholder: 'Пояснение к ресурсу'
           .panel.panel-default
             .panel-body
               %span.glyphicon.glyphicon-remove.text-danger.pull-right{onclick: "$(this).parent().parent().remove();", style: "cursor:pointer;text-decoration:none;font-size:15px;"}
-              =autocomplete_field_tag "resor_control_s[]",'', autocomplete_concept_post_resource_concept_posts_path,:append_to => "#mod", :"min-length" => 0,  class: 'form-control autocomplete',placeholder: 'Введите свой ресурс или выберите из списка'
+              =autocomplete_field_tag "resor_control_s[]",'', autocomplete_concept_post_resource_concept_posts_path,append_to: "#mod", :"min-length"=> 0,  class: 'form-control autocomplete',placeholder: 'Введите свой ресурс или выберите из списка'
               %br
               = text_area_tag "res_control_s[]", '', class: 'form-control', placeholder: 'Пояснение к ресурсу'
       %a.btn.btn-success.pull-right{onclick:"return add_new_resource_to_plan('control_s',#{@project.id});"} Добавить ресурс
   -if @project.status == 9
-    = render partial: 'plan/posts/note_list', :locals => {:post_field => form_for_light_concept,:type_fd => 11}
+    = render partial: 'plan/posts/note_list', locals: {post_field: form_for_light_concept,type_fd: 11}
   .row#obstacles_bcd
     .col-md-12
       .text-center
@@ -275,10 +275,10 @@
           %b E1.
           =t('form.obstacles_bcd')
         %br
-        =f.text_area :obstacles, :class => "concept_cond form-control", rows: 5,  style: 'width: 100%;'
+        =f.text_area :obstacles, class: "concept_cond form-control", rows: 5,  style: 'width: 100%;'
         %br
   -if @project.status == 9
-    = render partial: 'plan/posts/note_list', :locals => {:post_field => form_for_light_concept,:type_fd => 12}
+    = render partial: 'plan/posts/note_list', locals: {post_field: form_for_light_concept,type_fd: 12}
   .row#problems
     .col-md-12
       .text-center
@@ -286,10 +286,10 @@
           %b F1.
           =t('form.problems')
         %br
-        =f.text_area :problems, :class => "concept_cond form-control", rows: 5, style: 'width: 100%;'
+        =f.text_area :problems, class: "concept_cond form-control", rows: 5, style: 'width: 100%;'
         %br
   -if @project.status == 9
-    = render partial: 'plan/posts/note_list', :locals => {:post_field => form_for_light_concept,:type_fd => 13}
+    = render partial: 'plan/posts/note_list', locals: {post_field: form_for_light_concept,type_fd: 13}
   .row#reality
     .col-md-12
       .text-center
@@ -297,10 +297,10 @@
           %b F2.
           =t('form.reality')
         %br
-        =f.text_area :reality, :class => "concept_cond form-control", rows: 5, style: 'width: 100%;'
+        =f.text_area :reality, class: "concept_cond form-control", rows: 5, style: 'width: 100%;'
         %br
   -if @project.status == 9
-    = render partial: 'plan/posts/note_list', :locals => {:post_field => form_for_light_concept,:type_fd => 14}
+    = render partial: 'plan/posts/note_list', locals: {post_field: form_for_light_concept,type_fd: 14}
 
   .pull-right
     =f.submit 'Сохранить', class: 'btn btn-success'

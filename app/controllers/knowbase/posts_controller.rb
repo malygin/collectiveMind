@@ -17,7 +17,7 @@ class Knowbase::PostsController <  PostsController
   end
 
   def new
-    @aspects = Discontent::Aspect.where(:project_id => @project)
+    @aspects = Discontent::Aspect.where(project_id: @project)
     @stages = current_model.stage_knowbase_order(@project.id)
     @post = current_model.new
     respond_to do |format|
@@ -41,11 +41,11 @@ class Knowbase::PostsController <  PostsController
         end
       end
     else
-      @aspects = Discontent::Aspect.where(:project_id => @project)
+      @aspects = Discontent::Aspect.where(project_id: @project)
       @stages = current_model.stage_knowbase_order(@project.id)
       @post = current_model.new
       respond_to do |format|
-        format.html {render :action => 'new'}
+        format.html {render action: 'new'}
       end
     end
   end
@@ -62,7 +62,7 @@ class Knowbase::PostsController <  PostsController
   end
 
   def edit
-    @aspects = Discontent::Aspect.where(:project_id => @project)
+    @aspects = Discontent::Aspect.where(project_id: @project)
     @post = current_model.find(params[:id])
   end
 

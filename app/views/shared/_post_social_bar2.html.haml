@@ -4,19 +4,19 @@
       =post.number_views
       %span.glyphicon.glyphicon-eye-open
       |
-      = link_to(:controller => post.class.name.underscore.pluralize, :action => :show, :project => @project, :id => post.id) do
+      = link_to(controller: post.class.name.underscore.pluralize, action: :show, project: @project, id: post.id) do
         Комментировать
         =post.comments.count
         %span.glyphicon.glyphicon-comment
       -if boss? and post.class.name.deconstantize == "Discontent" and [4,5,6,7].include?(@project.status)
         |
-        =link_to({:controller => post.class.name.underscore.pluralize, :action => :set_grouped, :id => post.id, :project => @project},:remote => true,:method => :put,:id => "set_grouped_#{post.id}", :class => "note_text") do
+        =link_to({controller: post.class.name.underscore.pluralize, action: :set_grouped, id: post.id, project: @project},remote: true,method: :put,id: "set_grouped_#{post.id}", class: "note_text") do
           -if post.status == 2
             %span.text-success Группа
           -else
             %span.text-warning Сделать группой
         |
-        =link_to({:controller => post.class.name.underscore.pluralize, :action => :set_required, :id => post.id, :project => @project},:remote => true,:method => :put,:id => "set_required_#{post.id}", :class => "note_text") do
+        =link_to({controller: post.class.name.underscore.pluralize, action: :set_required, id: post.id, project: @project},remote: true,method: :put,id: "set_required_#{post.id}", class: "note_text") do
           -if post.status == 4
             %span.text-success Добавлено
           -else
@@ -51,24 +51,8 @@
 
       |
       - if boss?
-        =link_to({:controller => post.class.name.underscore.pluralize, :action => :plus,:project => @project, :id => post.id},  :remote => true, :method => :put,  id: "plus_post_#{post.id}") do
+        =link_to({controller: post.class.name.underscore.pluralize, action: :plus,project: @project, id: post.id},  remote: true, method: :put,  id: "plus_post_#{post.id}") do
           -if post.useful
             %span.text-danger Забрать баллы
           -else
             %span.text-success Выдать баллы
-
-        -#- if signed_in? and not post.users.include?(current_user)
-        -#  =link_to({:controller => post.class.name.underscore.pluralize ,:action => :plus, :project => @project,:status=>0, :aspect=>0,  :id => post.id, :against => false,  :remote => true},:method => :put, id: "plus_post_#{post.id}") do
-        -#    %span.text-success За
-        -#    %span.text-success(id="plus_counter_#{post.id}")=post.users_pro.count
-        -#    %span.glyphicon.glyphicon-thumbs-up.text-success
-        -#-else
-        -#  -if boss?
-        -#    =link_to({:controller => post.class.name.underscore.pluralize ,:action => :plus, :project => @project,:status=>0, :aspect=>0,  :id => post.id, :against => false,  :remote => true},:method => :put, id: "plus_post_#{post.id}") do
-        -#      %span.text-success
-        -#        %b За
-        -#      %span.text-success(id="plus_counter_#{post.id}")=post.users_pro.count
-        -#      %span.glyphicon.glyphicon-thumbs-up.text-success
-        -#  -else
-        -#    %span.text-muted= "За #{post.users_pro.count}"
-        -#    %span.glyphicon.glyphicon-thumbs-up.text-muted

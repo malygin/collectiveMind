@@ -1,11 +1,11 @@
 # encoding: utf-8
 class UsersController < ApplicationController
-	#before_filter :authenticate, :only => [:edit, :update, :show]
-	before_filter :correct_user, :only => [:edit, :update]
-	#before_filter :admin_user, :only => [:destroy]
-  before_filter :journal_data, :only => [:index, :new, :edit, :show, :users_rc]
-  before_filter :boss_authenticate, :only => [:users_rc]
-  before_filter :prime_admin_authenticate, :only => [:destroy,:list_users,:add_user_for_project,:remove_user_for_project,:club_toggle,:update_score]
+	#before_filter :authenticate, :only: [:edit, :update, :show]
+	before_filter :correct_user, only: [:edit, :update]
+	#before_filter :admin_user, :only: [:destroy]
+  before_filter :journal_data, only: [:index, :new, :edit, :show, :users_rc]
+  before_filter :boss_authenticate, only: [:users_rc]
+  before_filter :prime_admin_authenticate, only: [:destroy,:list_users,:add_user_for_project,:remove_user_for_project,:club_toggle,:update_score]
   before_filter :have_project_access
 	def new
 		@user = User.new
@@ -36,16 +36,16 @@ class UsersController < ApplicationController
 	def index
     @project = Core::Project.find(params[:project])
     if @project.type_access == 2
-      @users = @project.users_in_project.where(:users => {:type_user => [4,5,8,nil]}).sort_by{|c| c.core_project_scores.by_project(@project).first.nil? ? 0 : c.core_project_scores.by_project(@project).first.score}.reverse!.uniq
+      @users = @project.users_in_project.where(users: {type_user: [4,5,8,nil]}).sort_by{|c| c.core_project_scores.by_project(@project).first.nil? ? 0 : c.core_project_scores.by_project(@project).first.score}.reverse!.uniq
     else
-      @users = User.joins(:core_project_scores).where("core_project_scores.project_id = ? AND core_project_scores.score > 0", @project.id).where(:users => {:type_user => [4,5,8,nil]}).order("core_project_scores.score DESC")
+      @users = User.joins(:core_project_scores).where("core_project_scores.project_id = ? AND core_project_scores.score > 0", @project.id).where(users: {type_user: [4,5,8,nil]}).order("core_project_scores.score DESC")
     end
   end
 
   def add_user_for_project
     @project = Core::Project.find(params[:project])
     @user = User.find(params[:id])
-    @user.core_project_users.create(:project_id => @project.id)
+    @user.core_project_users.create(project_id: @project.id)
     respond_to do |format|
       format.js
     end
@@ -54,7 +54,7 @@ class UsersController < ApplicationController
   def remove_user_for_project
     @project = Core::Project.find(params[:project])
     @user = User.find(params[:id])
-    @user.core_project_users.where(:project_id => @project.id).destroy_all
+    @user.core_project_users.where(project_id: @project.id).destroy_all
     respond_to do |format|
       format.js
     end
@@ -63,9 +63,9 @@ class UsersController < ApplicationController
   def show_top
     @project = Core::Project.find(params[:project])
     if @project.type_access == 2
-      @users = @project.users_in_project.where(:users => {:type_user => [4,5,8,nil]}).sort_by{|c| c.core_project_scores.by_project(@project).first.nil? ? 0 : c.core_project_scores.by_project(@project).first.send(params[:score_name])}.reverse!.uniq
+      @users = @project.users_in_project.where(users: {type_user: [4,5,8,nil]}).sort_by{|c| c.core_project_scores.by_project(@project).first.nil? ? 0 : c.core_project_scores.by_project(@project).first.send(params[:score_name])}.reverse!.uniq
     else
-      @users = User.joins(:core_project_scores).where("core_project_scores.project_id = ? AND core_project_scores.score > 0", @project.id).where(:users => {:type_user => [4,5,8,nil]}).order("core_project_scores.#{params[:score_name]} DESC")
+      @users = User.joins(:core_project_scores).where("core_project_scores.project_id = ? AND core_project_scores.score > 0", @project.id).where(users: {type_user: [4,5,8,nil]}).order("core_project_scores.#{params[:score_name]} DESC")
     end
     @score_name = params[:score_name]
     respond_to do |format|
@@ -75,14 +75,14 @@ class UsersController < ApplicationController
 
   def users_rc
     @project = Core::Project.find(params[:project])
-    @users = User.where(:type_user => [4,7]).order('score DESC').paginate(:page =>params[:page])
+    @users = User.where(type_user: [4,7]).order('score DESC').paginate(page:params[:page])
   end
 
   def list_users
     @project = Core::Project.find(params[:project])
-    @users = User.order('id DESC').paginate(:page =>params[:page])
+    @users = User.order('id DESC').paginate(page:params[:page])
     respond_to do |format|
-      format.html { render :layout => 'core/list_projects'}
+      format.html { render layout: 'core/list_projects'}
     end
   end
 
@@ -102,7 +102,7 @@ class UsersController < ApplicationController
     @project = Core::Project.find(params[:project])
     @user = User.find(params[:id])
     respond_to do |format|
-      if @user.update_attributes!(:type_user => club_toggle_user(@user))
+      if @user.update_attributes!(type_user: club_toggle_user(@user))
         format.js
       end
     end
@@ -132,8 +132,8 @@ class UsersController < ApplicationController
 		if boss?
       @project = Core::Project.find(params[:project])
       user.add_score_by_type(@project, params[:score].to_i, :score_a)
-      user.journals.build(:type_event=>'add_score', :project => @project, :body=>params[:score]).save
-      current_user.journals.build(:type_event=>'my_add_score', :user_informed => user, :project => @project, :body=>params[:score], :viewed=> false).save!
+      user.journals.build(type_event:'add_score', project: @project, body:params[:score]).save
+      current_user.journals.build(type_event:'my_add_score',user_informed: user, project: @project, body:params[:score], viewed: false).save!
     end
     respond_to do |format|
       format.js
@@ -144,7 +144,7 @@ class UsersController < ApplicationController
 		user = User.find(params[:id])
 		if boss?
       @project = Core::Project.find(params[:project])
-      user.journals.build(:type_event=>'add_score_essay', :project => @project, :body=>params[:score]).save
+      user.journals.build(type_event:'add_score_essay', project: @project, body:params[:score]).save
     end
 		render json: user.score
 	end

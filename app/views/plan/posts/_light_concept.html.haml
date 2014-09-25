@@ -14,7 +14,7 @@
       %p=light_concept.content
 
 -elsif what_view
-  %div.collapse{:id => "collapse_dis_concept_#{post.id}"}
+  %div.collapse{id: "collapse_dis_concept_#{post.id}"}
     =render partial:'discontent/posts/post_short2', object: post
     %br
     - post.dispost_concepts.by_status(0).each_with_index do |pa, index|
@@ -23,7 +23,7 @@
           =index+1
         .col-md-8
           - if pa.post_aspects.first.title!=''
-            =link_to view_concept_plan_post_path(@project, @post, :post_id => post.id, :con_id => pa.post_aspects.first.id), :method => :get, :remote => true, :class => "color-teal", "data-toggle" => "collapse", "data-target" => "collapse_plus_concept_#{post.id}_#{pa.post_aspects.first.id}", :style => "text-decoration:none;", :id => "view_post_concept_#{post.id}_#{pa.post_aspects.first.id}" do
+            =link_to view_concept_plan_post_path(@project, @post, post_id: post.id, con_id: pa.post_aspects.first.id), method: :get, remote: true, class: "color-teal", "data-toggle"=> "collapse", "data-target"=> "collapse_plus_concept_#{post.id}_#{pa.post_aspects.first.id}", style: "text-decoration:none;", id: "view_post_concept_#{post.id}_#{pa.post_aspects.first.id}" do
               =pa.post_aspects.first.title
           - else
             Без названия
@@ -32,8 +32,8 @@
             .label.label-success Добавлено
         .col-md-1
           .pull-right
-            =link_to add_form_for_concept_plan_post_path(@project, @post,:stage_id => @post_stage.id, :concept_id => pa.post_aspects.first.id, :save_form => true), :method => :put, :remote => true, :id => "plus_post_concept_#{pa.id}" do
-              %button.btn.btn-sm.btn-warning{:type => "button"}
+            =link_to add_form_for_concept_plan_post_path(@project, @post,stage_id: @post_stage.id, concept_id: pa.post_aspects.first.id, save_form: true), method: :put, remote: true, id: "plus_post_concept_#{pa.id}" do
+              %button.btn.btn-sm.btn-warning{type: "button"}
                 %i.fa.fa-plus
       .concept-devider
 -else
@@ -41,7 +41,7 @@
     -@id_collapse = "collapse_plus_concept_#{light_concept.id}"
   -else
     -@id_collapse = "collapse_plus_concept_#{dispost.id}_#{light_concept.id}"
-  %div.collapse.text-left{:id => @id_collapse}
+  %div.collapse.text-left{id: @id_collapse}
     -if light_concept.name.present?
       .color-teal
         %b A1.

@@ -9,5 +9,5 @@
         #flash.panel-body
           =raw(show_flash(@flash))
     -if @post
-      %div{:id => "knowbase_post_#{@post.id}"}
-        =render  :partial => 'knowbase_post_form', :locals => { :post => @post}
+      %div{id: "knowbase_post_#{@post.id}"}
+        =render  partial: 'knowbase_post_form', locals: { post: @post}

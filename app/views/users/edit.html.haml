@@ -1,26 +1,26 @@
 %section.widget
     .body
         %h3 Отредактируйте информацию о себе
-        = form_for @user,:url => { :action => :update, :type =>@project.id }   do |f|
-            =render 'shared/notice_messages', :object => f.object
+        = form_for @user, url: { action: :update, type:@project.id } do |f|
+            =render 'shared/notice_messages', object: f.object
             .field
-                = f.label :name, "Имя"
+                = f.label :name, 'Имя'
                 %br
                 = f.text_field :name
             .field
-                = f.label :surname, "Фамилия"
+                = f.label :surname, 'Фамилия'
                 %br
                 = f.text_field :surname
 
             .field
-                = f.label :email, "Почта"
+                = f.label :email, 'Почта'
                 %br
                 = f.text_field :email
 
 
             .field
                 %br
-                = f.label :avatar, "Выберите файл для аватара"
+                = f.label :avatar, 'Выберите файл для аватара'
                 %br
                 = f.file_field :avatar
             %br

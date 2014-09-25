@@ -2,12 +2,12 @@
 module SessionsHelper
 
 	def journal_enter
-  		current_user.journals.build(:type_event=>'enter').save!
+  		current_user.journals.build(type_event:'enter').save!
   end
 
 	def deny_access 
     store_location
-    redirect_to new_user_session_path, :notice => "Авторизуйтесь пожалуйста!"
+    redirect_to new_user_session_path, notice: "Авторизуйтесь пожалуйста!"
   end
 
   def have_project_access
@@ -24,7 +24,7 @@ module SessionsHelper
     #
 		#project = Core::Project.find(params[:project])
 		#if (current_user.nil? or !(current_user.projects.include? project))  and project.type_access == 2
-		#	redirect_to root_path, :notice => "У вас нет прав просматривать этот проект!"
+		#	redirect_to root_path, :notice: "У вас нет прав просматривать этот проект!"
 		#end
   end
 

@@ -33,7 +33,6 @@ module ApplicationHelper
     else
        'label-g'
     end
-
   end
 
   def display_content(content, default_string='---')
@@ -210,7 +209,7 @@ module ApplicationHelper
     end
   end
   def fast_discussion_able?
-    user_discussion_aspects = current_user.user_discussion_aspects.where(:project_id => @project).size
+    user_discussion_aspects = current_user.user_discussion_aspects.where(project_id: @project).size
     if user_discussion_aspects == @project.aspects.size
       return false
     end
@@ -484,7 +483,7 @@ module ApplicationHelper
   def show_flash(flash)
     response = ""
     flash.each do |name, msg|
-      response = response + content_tag(:div, msg, :id => "flash_#{name}",:class => "color-red",:style => "font-size:15px;")
+      response = response + content_tag(:div, msg, id: "flash_#{name}",class: "color-red",style: "font-size:15px;")
     end
     flash.discard
     response
@@ -537,16 +536,16 @@ module ApplicationHelper
   def label_for_comment_status(comment,status,title)
     if comment.check_status_for_label(status)
       if current_user?(comment.user) or boss?
-        link_to({:controller => comment.controller_name_for_action, :action => :comment_status, :id => comment.post.id, :comment_id => comment.id, status => 1, :comment_stage => get_stage_for_improve(comment.get_class)},  :remote => true, :method => :put,  id: "#{status}_comment_#{comment.id}") do
-          content_tag( :span, title, :class=>"label #{css_label_status(status)}")
+        link_to({controller: comment.controller_name_for_action, action: :comment_status, id: comment.post.id, comment_id: comment.id, status: 1, comment_stage: get_stage_for_improve(comment.get_class)},  remote: true, method: :put,  id: "#{status}_comment_#{comment.id}") do
+          content_tag( :span, title, class:"label #{css_label_status(status)}")
         end
       else
-        content_tag( :span, title, :class=>"label #{css_label_status(status)}")
+        content_tag( :span, title, class:"label #{css_label_status(status)}")
       end
     else
       if current_user?(comment.user) or boss?
-        link_to({:controller => comment.controller_name_for_action, :action => :comment_status, :id => comment.post.id, :comment_id => comment.id, status => 1, :comment_stage => get_stage_for_improve(comment.get_class)},  :remote => true, :method => :put,  id: "#{status}_comment_#{comment.id}") do
-          content_tag( :span, title, :class=>"label label-default")
+        link_to({controller: comment.controller_name_for_action, action: :comment_status, id: comment.post.id, comment_id: comment.id, status: 1, comment_stage: get_stage_for_improve(comment.get_class)},  remote: true, method: :put,  id: "#{status}_comment_#{comment.id}") do
+          content_tag( :span, title, class:"label label-default")
         end
       end
     end

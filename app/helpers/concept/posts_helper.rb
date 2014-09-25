@@ -1,4 +1,4 @@
-# encoding: utf-8
+
 module Concept::PostsHelper
 	def can_vote_for_task?(task)
 		task.voitings.each do |fr|
@@ -10,7 +10,7 @@ module Concept::PostsHelper
   end
 
   def get_concept_posts_for_vote?(project)
-    disposts = Discontent::Post.where(:project_id => project, :status => 4).order(:id)
+    disposts = Discontent::Post.where(project_id: project, status: 4).order(:id)
     last_vote = current_user.concept_post_votings.by_project_votings(project).last
     unless last_vote.nil?
       i = -1
@@ -22,7 +22,7 @@ module Concept::PostsHelper
         i -= 1
       end
       if disposts[i].id == last_vote.discontent_post_id
-        count_now = current_user.concept_post_votings.by_project_votings(project).where(:discontent_post_id => last_vote.discontent_post_id, :concept_post_aspect_id => last_vote.concept_post_aspect_id).count
+        count_now = current_user.concept_post_votings.by_project_votings(project).where(discontent_post_id: last_vote.discontent_post_id, concept_post_aspect_id: last_vote.concept_post_aspect_id).count
         index = @concept_posts.index last_vote.concept_post_aspect.concept_post
         index = count_now unless index == count_now
         if @concept_posts[index+1].nil?
@@ -51,7 +51,7 @@ module Concept::PostsHelper
           return @discontent_post
         end
       else
-        count_now = current_user.concept_post_votings.by_project_votings(@project).where(:discontent_post_id => last_vote.discontent_post_id, :concept_post_aspect_id => last_vote.concept_post_aspect_id).count
+        count_now = current_user.concept_post_votings.by_project_votings(@project).where(discontent_post_id: last_vote.discontent_post_id, concept_post_aspect_id: last_vote.concept_post_aspect_id).count
         index = concept_posts.index last_vote.concept_post_aspect.concept_post
         index = count_now unless index == count_now
         unless concept_posts[index+1].nil?

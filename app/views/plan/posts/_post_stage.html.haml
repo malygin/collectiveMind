@@ -1,4 +1,4 @@
-%tr{:id => "tr_post_stage_#{post_stage.id}"}
+%tr{id: "tr_post_stage_#{post_stage.id}"}
   %td
     -if post_stage.date_begin and post_stage.date_end
       %small.color-green
@@ -6,11 +6,11 @@
         ="-"
         =Russian::strftime(post_stage.date_end, "%d %b %Y")
       %br
-    %span.h5{:id => "name_post_stage_#{post_stage.id}"}=post_stage.name
+    %span.h5{id: "name_post_stage_#{post_stage.id}"}=post_stage.name
     .pull-right
-      =link_to edit_stage_plan_post_path(@project, @post, :stage_id => post_stage),:method => :put, :remote => true, :id => "edit_post_stage_#{post_stage.id}" do
-        %button.btn.btn-warning{:type => "button"}
+      =link_to edit_stage_plan_post_path(@project, @post, stage_id: post_stage),method: :put, remote: true, id: "edit_post_stage_#{post_stage.id}" do
+        %button.btn.btn-warning{type: "button"}
           %i.fa.fa-pencil
-      =link_to destroy_stage_plan_post_path(@project, @post, :stage_id => post_stage),:method => :delete, :remote => true, :confirm => 'Удалить этап?', :id => "destroy_post_stage_#{post_stage.id}" do
-        %button.btn.btn-danger{:type => "button"}
+      =link_to destroy_stage_plan_post_path(@project, @post, stage_id: post_stage),method: :delete, remote: true, data: {confirm: 'Удалить этап?'}, id: "destroy_post_stage_#{post_stage.id}" do
+        %button.btn.btn-danger{type: "button"}
           %i.fa.fa-trash-o

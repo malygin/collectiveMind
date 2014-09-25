@@ -3,15 +3,15 @@
     #wizard.form-wizard
       %ul.wizard-navigation.nav-justified
         %li#first
-          %a{"data-toggle" => "tab", :href => "#tab1"}
+          %a{"data-toggle" => "tab", href: "#tab1"}
             %small 1.
             %strong Описание проекта
         %li#second
-          %a{"data-toggle" => "tab", :href => "#tab2"}
+          %a{"data-toggle" => "tab", href: "#tab2"}
             %small 2.
             %strong План мероприятий
         %li#third
-          %a{"data-toggle" => "tab", :href => "#tab3"}
+          %a{"data-toggle" => "tab", href: "#tab3"}
             %small 3.
             %strong Просмотр нововведений
 
@@ -93,8 +93,8 @@
                                   %td(rowspan="#{rowspan_concept_show(concept)}" class="td_concept_#{concept.id}")
                                     =index+1
                                   %td(rowspan="#{rowspan_concept_show(concept)}" class="td_concept_#{concept.id}" id="td_concept_#{concept.id}")
-                                    =link_to view_concept_table_plan_post_path(@project, @post, :con_id => concept.id), :method => :get, :remote => true,:class => "color-white", :style => "text-decoration:none;border-bottom: 1px dashed #fafbfc;", :id => "view_post_concept_table_#{concept.id}" do
-                                      %span.h5{:id => "name_post_concept_#{concept.id}"}=concept.title
+                                    =link_to view_concept_table_plan_post_path(@project, @post, con_id: concept.id), method: :get, remote: true,class: "color-white", style: "text-decoration:none;border-bottom: 1px dashed #fafbfc;", id: "view_post_concept_table_#{concept.id}" do
+                                      %span.h5{id: "name_post_concept_#{concept.id}"}=concept.title
                                     %br
                                     =concept.name
                                     %br
@@ -109,7 +109,7 @@
                                             ="-"
                                             =Russian::strftime(action.date_end, "%d %b %Y")
                                           %br
-                                        %span.h5.color-teal{:id => "name_post_action_#{action.id}"}=action.name
+                                        %span.h5.color-teal{id: "name_post_action_#{action.id}"}=action.name
                                         %br
                                         %span.h5=action.desc
                                         -unless action.plan_post_action_resources.nil?
@@ -126,14 +126,14 @@
                   %ul#menu-levels-collapse.side-nav
                     -@post.post_stages.each_with_index do |stage, index|
                       %li.panel
-                        %a.accordion-toggle{"data-parent" => "#menu-levels-collapse", "data-toggle" => "collapse", :href => "#sub-menu-#{index}-collapse"}
+                        %a.accordion-toggle{"data-parent" => "#menu-levels-collapse", "data-toggle" => "collapse", href: "#sub-menu-#{index}-collapse"}
                           %b="Этап #{index+1}. "
                           =stage.name
                         - unless stage.plan_post_aspects.nil?
-                          %ul.panel-collapse.collapse.in{:id => "sub-menu-#{index}-collapse"}
+                          %ul.panel-collapse.collapse.in{id: "sub-menu-#{index}-collapse"}
                             - stage.plan_post_aspects.each_with_index do |concept, i|
-                              %li.concept_side{:id => "li_concept_#{concept.id}"}
-                                =link_to get_concept_plan_post_path(@project, @post, :con_id => concept.id, :view_post_concept => true), :method => :get, :remote => true do
+                              %li.concept_side{id: "li_concept_#{concept.id}"}
+                                =link_to get_concept_plan_post_path(@project, @post, con_id: concept.id, view_post_concept: true), method: :get, remote: true do
                                   =concept.title
               .col-md-8
                 #render_get_concept
@@ -151,13 +151,13 @@
 
 .row
   .col-md-12
-    = render 'shared/post_social_bar2', :post => @post
-    = render 'shared/post_edit_bar', :post => @post
+    = render 'shared/post_social_bar2', post: @post
+    = render 'shared/post_edit_bar', post: @post
     %br
     %br
       %ul.media-list#comments.chat-messages
-        = render :partial => 'shared/comment',:collection => @comments
+        = render partial: 'shared/comment',collection: @comments
       .text-center
         = will_paginate @comments
     - if signed_in?
-      = render :partial => 'shared/comment_form', :locals => { :comment => @comment, :url_link => url_for(:controller => @post.class.name.underscore.pluralize, :action => 'add_comment')}
+      = render partial: 'shared/comment_form', locals: { comment: @comment, url_link: url_for(controller: @post.class.name.underscore.pluralize, action: 'add_comment')}
