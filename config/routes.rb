@@ -53,6 +53,7 @@ scope '/project/:project' do
     get :show_top, on: :collection
     get :users_rc, on: :collection
     get :list_users, on: :collection
+    get :search_users, on: :collection
     member do
       post :update_score
       put :club_toggle

@@ -41,6 +41,7 @@ gem 'uglifier', '>= 2.1.1'
 gem 'compass'
 gem 'compass-rails'
 gem 'therubyracer', '>=0.11.4'
+gem 'turbo-sprockets-rails3'
 
 gem 'pg'
 gem 'activerecord-postgresql-adapter'
@@ -67,11 +68,11 @@ gem 'devise_lastseenable'
 gem 'memcachier'
 gem 'dalli'
 
-# Fast IO for memcache
-gem 'kgio'
-# Serve static assets through Rack + Memcache
-# https://devcenter.heroku.com/articles/rack-cache-memcached-rails31
-gem 'rack-cache'
+# # Fast IO for memcache
+# gem 'kgio'
+# # Serve static assets through Rack + Memcache
+# # https://devcenter.heroku.com/articles/rack-cache-memcached-rails31
+# gem 'rack-cache'
 
 gem 'settingslogic'
 #gem 'wymeditor'
@@ -89,3 +90,6 @@ gem 'rails-observers'
 gem 'actionpack-page_caching'
 gem 'actionpack-action_caching'
 gem 'activerecord-deprecated_finders'
+
+#texteditor
+gem 'ckeditor'

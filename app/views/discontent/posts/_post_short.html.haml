@@ -26,8 +26,9 @@
       %div.color-red{id: "add_disgroup_#{post_short.id}"}
         - if post_short.status == 1 and !post_short.discontent_post.nil?
           Добавлено в группу
-          = link_to post_short.discontent_post.content, discontent_post_path(@project, post_short.discontent_post)
-      .discontents_group_select{post: "#{post_short.id}"}
-        - if @accepted_posts
-          = select_tag 'select_for_discontents_group', options_from_collection_for_select(@accepted_posts, 'id', 'content'),
-          prompt: 'Выберите группу', onchange: "select_for_discontents_group(this,#{@project.id},#{post_short.id});"
+          =link_to post_short.discontent_post.content, discontent_post_path(@project, post_short.discontent_post)
+      .discontents_group_select{:post => "#{post_short.id}"}
+        -if @accepted_posts
+          = select_tag 'select_for_discontents_group', options_from_collection_for_select(@accepted_posts, "id", "content"),
+          :prompt => 'Выберите группу', :onchange => "select_for_discontents_group(this,#{@project.id},#{post_short.id});", :class => "form-control"
+

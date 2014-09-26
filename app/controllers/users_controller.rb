@@ -80,10 +80,17 @@ class UsersController < ApplicationController
 
   def list_users
     @project = Core::Project.find(params[:project])
-    @users = User.order('id DESC').paginate(page:params[:page])
+    @added_users = User.joins(:core_project_users).where("core_project_users.project_id = ?", @project.id).order('users.id DESC')
+    @users = User.without_added(@added_users.pluck(:id)).order('id DESC').paginate(page: params[:page])
     respond_to do |format|
       format.html { render layout: 'core/list_projects'}
+      format.js
     end
+  end
+
+  def search_users
+    @search_users = User.where("LOWER(name) like LOWER(?) OR LOWER(surname) like LOWER(?) OR LOWER(email) like LOWER(?)", "%#{params[:search_users_text]}%","%#{params[:search_users_text]}%","%#{params[:search_users_text]}%").order('id DESC')
+    @search_users.sort_by{|ha| ha[:name].downcase or ha[:surname].downcase or ha[:email].downcase}
   end
 
   def update_score

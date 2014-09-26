@@ -1,1 +1,3 @@
 $("#knowbase_post_#{@post.id}").html("#{escape_javascript(render  partial: 'knowbase_post_form', locals: { post: @post})}");
+CKEDITOR.replace('some-textarea');
+

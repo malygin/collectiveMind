@@ -5,33 +5,34 @@
 %h3 Выберите участников для закрытой процедуры
 %h2= @project.name
 %br
-%table.table
-  %tbody
-    - @users.each_with_index do |user, i|
-      %tr
-        %td
-          %span=i+1
-        %td
-          .media
-            %a.pull-left(href="/project/#{@project.id}/users/#{user.id}")
-              = image_tag user.avatar.url(:thumb),  class: 'media-object'
-              %br
-              =link_to user, user_path(@project, user)
-              = render partial: '/shared/user_online', object: user
-        %td
+=text_field_tag "search_users_text",'', style: 'width: 100%; height: 30px', placeholder:'Введите имя или email пользователя и нажмите Enter'
+%section
+  .body
+    %ul.nav.nav-tabs#tab_users
+      %li#others.active
+        -#%a{:href => "#others_users", "data-toggle" => "tab"}
+        -#  Пользователи #{@users.size}
+        =link_to "/project/#{@project.id}/users/list_users?others=true", remote: true, "data-toggle" => "tab", :role => "tab" do
+          %span Пользователи
+          %span#search_count
+      %li#added
+        -#%a{:href => "#added_users", "data-toggle" => "tab"}
+        -#  Добавленные #{@added_users.size}
+        =link_to "/project/#{@project.id}/users/list_users?added=true", remote: true, "data-toggle" => "tab", :role => "tab" do
+          %span Добавленные
+          %span#added_count=@added_users.size
+    -#%br
+    -#%br
+    .tab-content
+      #others_users.tab-pane.fade.in.active
+        = render :partial => 'list_user',:collection => @users
+        .text-center
+          = will_paginate @users
 
-        %td{id: "list_users_#{user.id}"}
-          -if user.projects.include? @project
-            =link_to remove_user_for_project_user_path(@project, user), remote: true, method: :put, class:'btn btn-danger',  id: "remove_user_#{user.id}" do
-              %i.fa.fa-minus
-              Удалить
-          -else
-            =link_to add_user_for_project_user_path(@project, user), remote: true, method: :put, class:'btn btn-success', id: "add_user_#{user.id}" do
-              %i.fa.fa-plus
-              Добавить
+      #added_users.tab-pane.fade
+        = render :partial => 'list_user',:collection => @added_users
+      #search_users.tab-pane.fade
 
-.text-center
-  = will_paginate @users
 %br
 =link_to list_projects_path do
   %span.fa.fa-angle-double-left

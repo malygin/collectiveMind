@@ -1,6 +1,5 @@
 #= require jquery
 #= require jquery_ujs
-#= require_tree
 #= require jquery-ui
 #= require bootstrap/bootstrap.min
 #= require autocomplete-rails
@@ -8,12 +7,12 @@
 #= require bootstrap-wysihtml5/locales/ru-RU
 #= require selectize
 #= require liFixar/jquery.liFixar
-#= require wizard/jquery.bootstrap.wizard
 #= require datepicker/bootstrap-datepicker
 #= require bootstrap3-editable/bootstrap-editable
 #= require jquery.autosize
 #= require totop/jquery.ui.totop
 #= require totop/easing
+#= require ckeditor/init
 
 # @todo load initialization
 $ ->
@@ -70,7 +69,6 @@ $ ->
 
   $('.userscore').editable()
 
-  activate_htmleditor()
 
   $('.carousel').carousel
     interval: 4000,
@@ -129,6 +127,16 @@ $ ->
         return '<div>'+short_item+'</div>'
       option: (item, escape) ->
         return '<div>'+item.show_content+'</div>'
+
+#search_users
+$('#search_users_text').on 'change', ->
+  val=this.value
+  if val
+    $.ajax
+      url: "/project/1/users/search_users"
+      type: "get"
+      data:
+        search_users_text: val
 
 ###################################
 # @todo work with comment buttons
@@ -398,43 +406,43 @@ $.fn.extend popoverClosable: (options) ->
     $('.popover').css 'display', 'none'
 
 # @todo wizard for plan_posts and other
-$("#wizard").bootstrapWizard onTabShow: (tab, navigation, index) ->
-  $total = navigation.find("li").length
-  $current = index + 1
-  $percent = ($current / $total) * 100
-  $wizard = $("#wizard")
-  $wizard.find(".progress-bar").css width: $percent + "%"
-  if $current >= $total
-    $wizard.find(".pager .next").hide()
-    $wizard.find(".pager .finish").show()
-    $wizard.find(".pager .finish").removeClass "disabled"
-  else
-    $wizard.find(".pager .next").show()
-    $wizard.find(".pager .finish").hide()
-  #  if $current is 1
-  #    $("#send_post_concept").submit()
-  if $current is 2
-    render_table()
-  #    $("#send_post_concept").submit()
-  if $current is 3
-    render_concept_side()
+#$("#wizard").bootstrapWizard onTabShow: (tab, navigation, index) ->
+#  $total = navigation.find("li").length
+#  $current = index + 1
+#  $percent = ($current / $total) * 100
+#  $wizard = $("#wizard")
+#  $wizard.find(".progress-bar").css width: $percent + "%"
+#  if $current >= $total
+#    $wizard.find(".pager .next").hide()
+#    $wizard.find(".pager .finish").show()
+#    $wizard.find(".pager .finish").removeClass "disabled"
+#  else
+#    $wizard.find(".pager .next").show()
+#    $wizard.find(".pager .finish").hide()
+#  #  if $current is 1
+#  #    $("#send_post_concept").submit()
+#  if $current is 2
+#    render_table()
+#  #    $("#send_post_concept").submit()
+#  if $current is 3
+#    render_concept_side()
 
 #for other
-@activate_wizard= ->
-  $("#wizard").bootstrapWizard onTabShow: (tab, navigation, index) ->
-    $total = navigation.find("li").length
-    $current = index + 1
-    $percent = ($current / $total) * 100
-    $wizard = $("#wizard")
-    $wizard.find(".progress-bar").css width: $percent + "%"
-    if $current >= $total
-      $wizard.find(".pager .next").hide()
-      $wizard.find(".pager .finish").show()
-      $wizard.find(".pager .finish").removeClass "disabled"
-    else
-      $wizard.find(".pager .next").show()
-      $wizard.find(".pager .finish").hide()
-    return
+#@activate_wizard= ->
+#  $("#wizard").bootstrapWizard onTabShow: (tab, navigation, index) ->
+#    $total = navigation.find("li").length
+#    $current = index + 1
+#    $percent = ($current / $total) * 100
+#    $wizard = $("#wizard")
+#    $wizard.find(".progress-bar").css width: $percent + "%"
+#    if $current >= $total
+#      $wizard.find(".pager .next").hide()
+#      $wizard.find(".pager .finish").show()
+#      $wizard.find(".pager .finish").removeClass "disabled"
+#    else
+#      $wizard.find(".pager .next").show()
+#      $wizard.find(".pager .finish").hide()
+#    return
 
 # @todo users checks
 @user_check_field= (el,check_field)->
@@ -454,16 +462,23 @@ $("#wizard").bootstrapWizard onTabShow: (tab, navigation, index) ->
         status: status
 
 # @todo wysihtml5 editor
-@activate_htmleditor= ->
-  @editor = $(".wysihtml5").each (i, elem) ->
-    $(elem).wysihtml5
-      "font-styles": true
-      emphasis: true
-      lists: true
-      html: true
-      link: true
-      image: true
-      color: true
+#@activate_htmleditor= ->
+#  @editor = $(".wysihtml5").each (i, elem) ->
+#    $(elem).wysihtml5
+#      "font-styles": true
+#      emphasis: true
+#      lists: true
+#      html: true
+#      link: true
+#      image: true
+#      color: true
+# @todo ckeditor
+
+#@activate_htmleditor= ->
+#  data = $(".ckeditor")
+#  $.each data, (i) ->
+#    CKEDITOR.replace data[i].id
+#    return
 
 # @todo sortable for knowbase
 $('#sortable').sortable update: (event, ui) ->

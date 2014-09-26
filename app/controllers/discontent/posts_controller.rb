@@ -152,11 +152,15 @@ class Discontent::PostsController < PostsController
     @project = Core::Project.find(params[:project])
     @post = Discontent::Post.find(params[:id])
     @union_post = Discontent::Post.find(params[:post_id])
+    dp = @post.discontent_posts
     if @post.one_last_post? and boss?
       @union_post.update_attributes(status: 0, discontent_post_id: nil)
-      @post.destroy
-      @post.discontent_post_aspects.destroy_all
-      return redirect_to action: 'index'
+      if dp.present?
+        @post.update_column(:status, 3)
+      else
+        @post.update_column(:status, 0)
+      end
+      return redirect_to action: "index"
     else
       @union_post.update_attributes(status: 0, discontent_post_id: nil)
       @post.destroy_ungroup_aspects(@union_post)
@@ -166,20 +170,24 @@ class Discontent::PostsController < PostsController
     end
   end
 
-  def ungroup_union
-    @project = Core::Project.find(params[:project])
-    @post = Discontent::Post.find(params[:id])
-    unless @post.discontent_posts.nil?
-      @post.discontent_posts.each do |post|
-        post.update_attributes(status: 0, discontent_post_id: nil)
-      end
-    end
-    if boss?
-      @post.destroy
-      @post.discontent_post_aspects.destroy_all
-    end
-    redirect_to action: 'index'
-  end
+   def ungroup_union
+     @project = Core::Project.find(params[:project])
+     @post = Discontent::Post.find(params[:id])
+     dp = @post.discontent_posts
+     unless @post.discontent_posts.nil?
+       @post.discontent_posts.each do |post|
+         post.update_attributes(status: 0, discontent_post_id: nil)
+       end
+     end
+     if boss?
+       if dp.present?
+         @post.update_column(:status, 3)
+       else
+         @post.update_column(:status, 0)
+       end
+     end
+     redirect_to action: "index"
+   end
 
   def add_union
     @project = Core::Project.find(params[:project])
