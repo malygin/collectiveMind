@@ -27,6 +27,10 @@ CollectiveMind::Application.configure do
   # number of complex assets.
   config.assets.debug = true
   config.quiet_assets = true
+  # Adds additional error checking when serving assets at runtime.
+  # Checks for improperly declared sprockets dependencies.
+  # Raises helpful error messages.
+  config.assets.raise_runtime_errors = true
 
   config.paperclip_defaults = {
       storage: :s3,
