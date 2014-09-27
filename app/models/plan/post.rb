@@ -13,7 +13,6 @@ class Plan::Post < ActiveRecord::Base
   has_many :final_votings, foreign_key: 'plan_post_id', class_name: 'Plan::Voting'
 
   has_many :post_st, class_name: 'Plan::PostStage'
-  scope :post_stages, -> { joins(:post_st).where('post_stages.status = ?', 0).order(:date_begin) }
   scope :by_project, ->(p) { where(project_id: p) }
 
   def voted(user)
@@ -26,5 +25,9 @@ class Plan::Post < ActiveRecord::Base
 
   def first_stage
     self.post_stages.first.id unless self.post_stages.first.nil?
+  end
+
+  def post_stages
+    post_st.where('plan_post_stages.status = ?', 0).order(:date_begin)
   end
 end
