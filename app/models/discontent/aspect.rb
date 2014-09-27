@@ -72,6 +72,7 @@ class Discontent::Aspect < ActiveRecord::Base
     includes(:final_votings).
         group('"discontent_aspects"."id","life_tape_voitings"."id"').
         where('"discontent_aspects"."project_id" = ? and "discontent_aspects"."status" = 0', project)
+        .references(:discontent_aspects)
         .vote_top(revers)
   end
 
