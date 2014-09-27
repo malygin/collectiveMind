@@ -2,7 +2,7 @@ source 'https://rubygems.org'
 
 ruby '2.1.2'
 
-gem 'rails', '4.0.10'
+gem 'rails', '4.1.6'
 
 group :development, :test do
   #gem 'linecache19', :git => 'git://github.com/mark-moseley/linecache'
