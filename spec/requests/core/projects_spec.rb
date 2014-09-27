@@ -656,7 +656,7 @@ describe 'Core Project ' do
         expect(page).to have_content user_for_closed_project.to_s
         expect(page).to have_content 'Добавить'
         expect {
-          screenshot_and_open_image
+          #screenshot_and_open_image
           click_link "add_user_#{user_for_closed_project.id}"
           expect(page).to have_selector "a", 'Удалить'
           sleep(1)

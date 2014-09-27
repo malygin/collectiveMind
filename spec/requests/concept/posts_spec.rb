@@ -272,6 +272,7 @@ describe 'Concept ' do
       end
 
       it ' can see all concepts in aspect' do
+        #save_and_open_page
         expect(page).to have_content 'Нововведения'
         expect(page).to have_content 'Неоформленные идеи'
         expect(page).to have_content @discontent1.content
@@ -366,8 +367,8 @@ describe 'Concept ' do
       it 'can add note ', js:true do
         click_link "btn_note_1"
         sleep(5)
-        save_and_open_page
-        screenshot_and_open_image
+        #save_and_open_page
+        #screenshot_and_open_image
         expect(page).to have_selector "form#note_for_post_#{@concept1.id}_1"
         find("#note_for_post_#{@concept1.id}_1").find('#edit_post_note_text_area').set "new note for first field concept post"
         find("#note_for_post_#{@concept1.id}_1").find("#send_post_1").click
