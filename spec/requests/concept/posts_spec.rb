@@ -336,23 +336,25 @@ describe 'Concept ' do
         find("#child_comments_form_#{@comment1.id}").find('#send_post').click
         expect(page).to have_content 'new child comment'
       end
+      context 'like concept'   do
+        before do
+          prepare_awards
+        end
+        it ' like post', js: true do
+          expect(page).to have_link("plus_post_#{@concept1.id}", :text => 'Выдать баллы', :href => plus_concept_post_path(project,@concept1))
+          click_link "plus_post_#{@concept1.id}"
+          expect(page).to have_link("plus_post_#{@concept1.id}", :text => 'Забрать баллы', :href => plus_concept_post_path(project,@concept1))
+          click_link "plus_post_#{@concept1.id}"
+          expect(page).to have_content 'Выдать баллы'
+        end
 
-      it ' like post', js: true do
-        prepare_awards
-        expect(page).to have_link("plus_post_#{@concept1.id}", :text => 'Выдать баллы', :href => plus_concept_post_path(project,@concept1))
-        click_link "plus_post_#{@concept1.id}"
-        expect(page).to have_link("plus_post_#{@concept1.id}", :text => 'Забрать баллы', :href => plus_concept_post_path(project,@concept1))
-        click_link "plus_post_#{@concept1.id}"
-        expect(page).to have_content 'Выдать баллы'
-      end
-
-      it ' like comment', js: true do
-        prepare_awards
-        expect(page).to have_link("plus_comment_#{@comment1.id}", :text => 'Выдать баллы', :href => plus_comment_concept_post_path(project,@comment1))
-        click_link "plus_comment_#{@comment1.id}"
-        expect(page).to have_link("plus_comment_#{@comment1.id}", :text => 'Забрать баллы', :href => plus_comment_concept_post_path(project,@comment1))
-        click_link "plus_comment_#{@comment1.id}"
-        expect(page).to have_content 'Выдать баллы'
+        it ' like comment', js: true do
+          expect(page).to have_link("plus_comment_#{@comment1.id}", :text => 'Выдать баллы', :href => plus_comment_concept_post_path(project,@comment1))
+          click_link "plus_comment_#{@comment1.id}"
+          expect(page).to have_link("plus_comment_#{@comment1.id}", :text => 'Забрать баллы', :href => plus_comment_concept_post_path(project,@comment1))
+          click_link "plus_comment_#{@comment1.id}"
+          expect(page).to have_content 'Выдать баллы'
+        end
       end
     end
 

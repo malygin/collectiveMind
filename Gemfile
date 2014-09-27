@@ -91,4 +91,5 @@ gem 'actionpack-action_caching'
 gem 'activerecord-deprecated_finders'
 
 #texteditor
-gem 'ckeditor'
+#gem 'ckeditor'
+gem 'tinymce-rails'

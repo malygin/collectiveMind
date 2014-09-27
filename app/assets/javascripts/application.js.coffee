@@ -12,7 +12,8 @@
 #= require jquery.autosize
 #= require totop/jquery.ui.totop
 #= require totop/easing
-#= require ckeditor/init
+# require ckeditor/init
+#= require tinymce
 
 # @todo load initialization
 $ ->
@@ -33,6 +34,8 @@ $ ->
     activate_button(this)
 
   $('.tooltips').tooltip()
+
+  activate_htmleditor()
 
   $("select.estimate_select").each ->
     switch $(this).val()
@@ -138,6 +141,16 @@ $('#search_users_text').on 'change', ->
       data:
         search_users_text: val
 
+@activate_htmleditor= ->
+  tinyMCE.init
+    selector: "textarea.tinymce"
+    plugins: [
+      "advlist autolink link image lists charmap print preview hr anchor pagebreak spellchecker",
+      "searchreplace wordcount visualblocks visualchars code fullscreen insertdatetime media nonbreaking",
+      "save table contextmenu directionality emoticons template paste textcolor"
+    ]
+    toolbar: "insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | l
+        ink image | print preview media fullpage | forecolor backcolor emoticons"
 ###################################
 # @todo work with comment buttons
 @activate_button = (el)->
