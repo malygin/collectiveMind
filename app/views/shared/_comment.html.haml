@@ -23,9 +23,9 @@
         =simple_format(comment.content)
       - if current_user?(comment.user) or boss?
         %div.redactor{id: "redactor_comment_#{comment.id}"}
-          =link_to 'Редактировать', {:action => :edit_comment, :id => comment.id},:remote => true, :class => "text-success",id: "edit_comment_#{comment.id}"
+          =link_to 'Редактировать', {:action => :edit_comment, :id => comment.id},:remote => true, :class=> 'btn btn-info btn-xs', id: "edit_comment_#{comment.id}"
           \|
-          = link_to 'Удалить', {:action => :destroy_comment, :id => comment.id}, :method => :put, :remote => true, :confirm => 'Удалить комментарий?', :class => "text-danger",id: "destroy_comment_#{comment.id}"
+          = link_to 'Удалить', {:action => :destroy_comment, :id => comment.id}, :method => :put, :remote => true, :confirm => 'Удалить комментарий?', :class=> 'btn btn-danger btn-xs',id: "destroy_comment_#{comment.id}"
           -if comment.get_class == "LifeTape" and boss? and comment.main_comment?
             \|
             = select_tag 'select_for_aspects_comments', options_from_collection_for_select(@aspects, "id", "content"),
@@ -33,11 +33,9 @@
 
       .pull-right
         -if comment.main_comment?
-          =link_to({:action => :add_child_comment_form, :id => comment.post.id, :comment_id => comment.id },  :remote => true, :method => :put,  id: "add_child_comment_#{comment.id}") do
-            %span.text-success Ответить
+          =link_to 'Ответить', {:action => :add_child_comment_form, :id => comment.post.id, :comment_id => comment.id },  :remote => true, :method => :put,  id: "add_child_comment_#{comment.id}", class: 'btn btn-success btn-xs'
         -else
-          =link_to({:action => :add_child_comment_form, :id => comment.comment.post.id, :comment_id => comment.comment.id,:answer_id => comment.id}, :remote => true, :method => :put,  id: "add_child_comment_#{comment.id}") do
-            %span.text-success Ответить
+          =link_to'Ответить', {:action => :add_child_comment_form, :id => comment.comment.post.id, :comment_id => comment.comment.id,:answer_id => comment.id}, :remote => true, :method => :put,  id: "add_child_comment_#{comment.id}", class: 'btn btn-success btn-xs'
 
         - if boss?
           =link_to({:action => :plus_comment, :id => comment.id},  :remote => true, :method => :put,  id: "plus_comment_#{comment.id}") do

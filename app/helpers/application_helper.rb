@@ -420,15 +420,15 @@ module ApplicationHelper
     case comment_class
       when 1
         link_to "/project/#{@project.id}/life_tape/posts?asp=#{comment.post.discontent_aspects.first.id}#comment_#{comment.id}" do
-          content_tag :span, 'Источник', class: 'label label-primary'
+          content_tag :span, 'Источник', class: 'btn btn-primary btn-xs'
         end
       when 2
         link_to "/project/#{@project.id}/discontent/posts/#{comment.post.id}#comment_#{comment.id}" do
-          content_tag :span, 'Источник', class: 'label label-primary'
+          content_tag :span, 'Источник', class: 'btn btn-primary btn-xs'
         end
       when 3
         link_to "/project/#{@project.id}/concept/posts/#{comment.post.id}#comment_#{comment.id}" do
-          content_tag :span, 'Источник', class: 'label label-primary'
+          content_tag :span, 'Источник', class: 'btn btn-primary btn-xs'
         end
     end
   end

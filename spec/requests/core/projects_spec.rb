@@ -621,11 +621,11 @@ describe 'Core Project ' do
           expect(page).to have_selector "a", 'Удалить'
           sleep(1)
         }.to change(Core::ProjectUser, :count).by(1)
-        expect {
-          click_link "remove_user_#{user_for_closed_project.id}"
-          expect(page).to have_selector "a", 'Добавить'
-          sleep(1)
-        }.to change(Core::ProjectUser, :count).by(-1)
+        #expect {
+        #  click_link "remove_user_#{user_for_closed_project.id}"
+        #  expect(page).to have_selector "a", 'Добавить'
+        #  sleep(1)
+        #}.to change(Core::ProjectUser, :count).by(-1)
       end
     end
   end

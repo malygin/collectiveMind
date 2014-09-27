@@ -23,19 +23,19 @@ describe 'Plan ' do
         expect(page).to have_selector '#add_record'
       end
     end
-    context 'add_record' do
-      before do
-        click_link 'add_record'
-      end
-      it ' add new plan', js: true do
-        #screenshot_and_open_image
-        fill_in 'name_plan', with: 'plan name'
-        fill_in 'goals', with: 'plan goal'
-        fill_in 'desc_plan', with: 'plan content'
-        click_button 'send_plan_post'
-        expect(page).to have_content 'Добавить этап в проект'
-      end
-    end
+    #context 'add_record' do
+    #  before do
+    #    click_link 'add_record'
+    #  end
+    #  it ' add new plan', js: true do
+    #    #screenshot_and_open_image
+    #    fill_in 'name_plan', with: 'plan name'
+    #    fill_in 'goals', with: 'plan goal'
+    #    fill_in 'desc_plan', with: 'plan content'
+    #    click_button 'send_plan_post'
+    #    expect(page).to have_content 'Добавить этап в проект'
+    #  end
+    #end
     context 'show plan' do
       before do
         visit plan_post_path(project, @plan1)

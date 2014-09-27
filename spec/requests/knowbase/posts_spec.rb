@@ -66,7 +66,6 @@ describe 'Knowbase ' do
         before { click_link "edit_knowbase_post_#{@post1.id}" }
 
         it 'content and title', js: true do
-          expect(page).to have_selector("ul.wysihtml5-toolbar")
           expect(page).to have_selector("input#title-textfield", @post1.title)
           fill_in 'title-textfield', with: 'new title'
           click_button 'send_post'
