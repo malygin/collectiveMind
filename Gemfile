@@ -22,8 +22,7 @@ group :production do
 end
 
 group :test do
-  #@todo Обновляться до rspec 3 будем потом
-  gem 'rspec', '~> 2.99.0'
+  gem 'rspec'
   gem 'spork'
   gem 'spork-rails'
   gem 'guard-spork'
