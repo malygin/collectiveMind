@@ -144,9 +144,6 @@ describe 'Discontent ' do
       before do
         visit discontent_post_path(project, @discontent1)
       end
-      before :all do
-        prepare_awards
-      end
 
       it 'can see right form' do
         expect(page).to have_content @discontent1.content

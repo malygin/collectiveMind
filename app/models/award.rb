@@ -41,7 +41,7 @@ class Award < ActiveRecord::Base
 
     elsif h[:type] == 'add'
       if h[:post].instance_of? Discontent::Post
-        count_d = h[:user].discontent_posts.by_project(h[:project]).with_votes.count
+        count_d = h[:user].discontent_posts.by_project(h[:project]).with_votes.references(:discontent_post_votings).count
         if count_d == 1
           a = Award.find_by_url('1imperfection')
           UserAward.create!(user: h[:user], award: a, project: h[:project])
@@ -64,7 +64,7 @@ class Award < ActiveRecord::Base
           h[:user].journals.build(type_event: 'my_award_15imperfection', user_informed: h[:user], project: h[:project], body: a.name, viewed: false, personal: true).save!
         end
       elsif  h[:post].instance_of? Concept::Post
-        count_d = h[:user].concept_posts.by_project(h[:project]).with_concept_votes.count
+        count_d = h[:user].concept_posts.by_project(h[:project]).with_concept_votes.references(:concept_post_votings).count
         if count_d == 1
           a = Award.find_by_url('1innovation')
           UserAward.create!(user: h[:user], award: a, project: h[:project])
