@@ -31,7 +31,7 @@ class Knowbase::PostsController <  PostsController
     @flash = view_context.validate_knowbase(params[:knowbase_post])
     unless @flash.present?
       @post = current_model.create(params[:knowbase_post])
-      @post.stage = current_model.maximum(:stage) + 1
+      @post.stage = current_model.maximum(:stage).nil? ? 1 : current_model.maximum(:stage) + 1
       @post.project_id = @project.id
       respond_to do |format|
         if @post.save
