@@ -18,6 +18,7 @@ class Discontent::Post < ActiveRecord::Base
   has_many :concept_post_discontents, class_name: 'Concept::PostDiscontent', foreign_key: 'discontent_post_id', conditions: {concept_post_discontents: {status: [0,nil]}}
   has_many :dispost_concepts, through: :concept_post_discontents, source: :post, class_name: "Concept::Post"
 
+
   has_many :concept_conditions, class_name: 'Concept::PostAspect', foreign_key: 'discontent_aspect_id'
 
   has_many :discontent_post_discussions, class_name: 'Discontent::PostDiscussion'
