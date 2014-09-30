@@ -371,7 +371,7 @@
           -@concept_post.concept_post_resources.by_type('control_r').each_with_index do |r,i|
             %div.main_resources(id="main_control_r_#{i+1}" position="#{i+1}")
               .col-md-10
-                = autocomplete_field_tag "resor_control_r[#{i+1}][]",'', autocomplete_concept_post_resource_concept_posts_path, :"min-length" => 0,value: r.name,  class: 'form-control autocomplete',placeholder: 'Введите свой ресурс или выберите из списка'
+                = autocomplete_field_tag "resor_control_r[#{i+1}][name]",'', autocomplete_concept_post_resource_concept_posts_path, :"min-length" => 0,value: r.name,  class: 'form-control autocomplete',placeholder: 'Введите свой ресурс или выберите из списка'
               .col-md-2
                 .pull-right
                   %button.btn.btn-danger{type: "button",title: "Удалить ресурс", onclick: "$(this).parent().parent().parent().remove();", id: "destroy_res"}
@@ -383,13 +383,13 @@
               %br
               %br
               %div.desc_resource(id="desc_control_r_#{i+1}" position="#{i+1}")
-                = text_area_tag "res_control_r[#{i+1}][]", r.desc, class: 'form-control', placeholder: 'Пояснение к ресурсу'
+                = text_area_tag "resor_control_r[#{i+1}][desc]", r.desc, class: 'form-control', placeholder: 'Пояснение к ресурсу'
                 %br
               %div.col-md-offset-1.col-md-11.means_to_resource(id="means_control_s_#{i+1}")
                 -r.concept_post_resources.by_type('control_s').each_with_index do |res,ind|
                   %div.main_means(id="main_control_s_#{i+1}" position="#{i+1}")
                     .col-md-10
-                      = autocomplete_field_tag "resor_control_s[#{i+1}][]",'', autocomplete_concept_post_mean_concept_posts_path, :"min-length" => 0, value: res.name, class: 'form-control autocomplete',placeholder: 'Введите свой ресурс или выберите из списка'
+                      = autocomplete_field_tag "resor_control_r[#{i+1}][sredstva][]",'', autocomplete_concept_post_mean_concept_posts_path, :"min-length" => 0, value: res.name, class: 'form-control autocomplete',placeholder: 'Введите свой ресурс или выберите из списка'
                     .col-md-2
                       .pull-right
                         %button.btn.btn-danger{type: "button",title: "Удалить ресурс", onclick: "$(this).parent().parent().parent().remove();", id: "destroy_res"}
@@ -399,13 +399,13 @@
                     %br
                     %br
                     %div.desc_mean(id="desc_control_s_#{i+1}" position="#{i+1}")
-                      = text_area_tag "res_control_s[#{i+1}][]", res.desc, class: 'form-control', placeholder: 'Пояснение к ресурсу'
+                      = text_area_tag "resor_control_s[#{i+1}][sredstva][]", res.desc, class: 'form-control', placeholder: 'Пояснение к ресурсу'
                       %br
 
         -else
-          %div.main_resources(id="main_control_r_1" position="1")
+          %div.main_resources(id="main_control_r_1" )
             .col-md-10
-              = autocomplete_field_tag "resor_control_r[1][]",'', autocomplete_concept_post_resource_concept_posts_path, :"min-length" => 0,  class: 'form-control autocomplete',placeholder: 'Введите свой ресурс или выберите из списка'
+              = autocomplete_field_tag "plan_post_resource[control_r][][name]",'', autocomplete_concept_post_resource_concept_posts_path, :"min-length" => 0,  class: 'form-control autocomplete',placeholder: 'Введите свой ресурс или выберите из списка'
             .col-md-2
               .pull-right
                 %button.btn.btn-danger{type: "button",title: "Удалить ресурс", onclick: "$(this).parent().parent().parent().remove();", id: "destroy_res"}
@@ -417,12 +417,14 @@
             %br
             %br
             %div.desc_resource(id="desc_control_r_1" position="1" style="display:none;")
-              = text_area_tag "res_control_r[1][]", '', class: 'form-control', placeholder: 'Пояснение к ресурсу'
+              = text_area_tag "plan_post_resource[control_r][][desc]", '', class: 'form-control', placeholder: 'Пояснение к ресурсу'
+              %input{name: "plan_post_resource[control_r][][style]", type: "hidden", value: "0"}/
               %br
             %div.col-md-offset-1.col-md-11.means_to_resource(id="means_control_s_1")
               %div.main_means(id="main_control_s_1" position="1")
                 .col-md-10
-                  = autocomplete_field_tag "resor_control_s[1][]",'', autocomplete_concept_post_mean_concept_posts_path, :"min-length" => 0,  class: 'form-control autocomplete',placeholder: 'Введите свой ресурс или выберите из списка'
+                  = autocomplete_field_tag "plan_post_resource[control_r][][sredstva][name]",'', autocomplete_concept_post_mean_concept_posts_path, :"min-length" => 0,  class: 'form-control autocomplete',placeholder: 'Введите свой ресурс или выберите из списка'
+                  %input{name: "plan_post_resource[control_r][][sredstva][style]", type: "hidden", value: "1"}/
                 .col-md-2
                   .pull-right
                     %button.btn.btn-danger{type: "button",title: "Удалить ресурс", onclick: "$(this).parent().parent().parent().remove();", id: "destroy_res"}
@@ -432,11 +434,114 @@
                 %br
                 %br
                 %div.desc_mean(id="desc_control_s_1" position="1" style="display:none;")
-                  = text_area_tag "res_control_s[1][]", '', class: 'form-control', placeholder: 'Пояснение к ресурсу'
+                  = text_area_tag "plan_post_resource[control_r][][sredstva][desc]", '', class: 'form-control', placeholder: 'Пояснение к ресурсу'
+                  %br
+          %div.main_resources(id="main_control_r_2" )
+            .col-md-10
+              = autocomplete_field_tag "plan_post_resource[control_r][][name]",'', autocomplete_concept_post_resource_concept_posts_path, :"min-length" => 0,  class: 'form-control autocomplete',placeholder: 'Введите свой ресурс или выберите из списка'
+            .col-md-2
+              .pull-right
+                %button.btn.btn-danger{:type => "button",:title => "Удалить ресурс", onclick: "$(this).parent().parent().parent().remove();", id: "destroy_res"}
+                  %i.fa.fa-trash-o
+                %button.btn.btn-warning{:type => "button", :title => "Добавить описание", onclick:"$(this).parent().parent().parent().find('.desc_resource').show();", id: "desc_to_res"}
+                  %i.fa.fa-edit
+                %button.btn.btn-success{:type => "button", :title => "Добавить средство",onclick:"return add_new_mean_to_resource(this,'control_s',#{@project.id});", id: "plus_mean"}
+                  %i.fa.fa-plus
+            %br
+            %br
+            %div.desc_resource(id="desc_control_r_2" position="2" style="display:none;")
+              = text_area_tag "plan_post_resource[control_r][][desc]", '', class: 'form-control', placeholder: 'Пояснение к ресурсу'
+              %input{name: "plan_post_resource[control_r][][style]", type: "hidden", value: "0"}/
+              %br
+            %div.col-md-offset-1.col-md-11.means_to_resource(id="means_control_s_2")
+              %div.main_means(id="main_control_s_2" position="2")
+                .col-md-10
+                  = autocomplete_field_tag "plan_post_resource[control_r][][sredstva][name]",'', autocomplete_concept_post_mean_concept_posts_path, :"min-length" => 0,  class: 'form-control autocomplete',placeholder: 'Введите свой ресурс или выберите из списка'
+                  %input{name: "plan_post_resource[control_r][][sredstva][style]", type: "hidden", value: "1"}/
+                .col-md-2
+                  .pull-right
+                    %button.btn.btn-danger{:type => "button",:title => "Удалить ресурс", onclick: "$(this).parent().parent().parent().remove();", id: "destroy_res"}
+                      %i.fa.fa-trash-o
+                    %button.btn.btn-warning{:type => "button", :title => "Добавить описание", onclick:"$(this).parent().parent().parent().find('.desc_mean').show();", id: "desc_to_res"}
+                      %i.fa.fa-edit
+                %br
+                %br
+                %div.desc_mean(id="desc_control_s_2" position="2" style="display:none;")
+                  = text_area_tag "plan_post_resource[control_r][][sredstva][desc]", '', class: 'form-control', placeholder: 'Пояснение к ресурсу'
                   %br
 
       %a.btn.btn-warning.pull-left{onclick:"return add_new_resource_to_concept('control_r','control_s',#{@project.id});", id:"add_control_r"} Добавить ресурс
 
+    -#.col-md-12
+    -#  .form-group.has-success{:id => "resources_control_r"}
+    -#    - if @post.persisted?
+    -#      -@post.concept_post_resources.by_type('control_r').each do |r|
+    -#        .panel.panel-default
+    -#          .panel-body
+    -#            %span.glyphicon.glyphicon-remove.text-danger.pull-right{onclick: "$(this).parent().parent().remove();", style: "cursor:pointer;text-decoration:none;font-size:15px;"}
+    -#            =autocomplete_field_tag "resor_control_r[]",'', autocomplete_concept_post_resource_concept_posts_path,:append_to => "#mod", :"min-length" => 0, value: r.name,  class: 'form-control autocomplete',placeholder: 'Введите свой ресурс или выберите из списка'
+    -#            %br
+    -#            = text_area_tag "res_control_r[]", r.desc, class: 'form-control', placeholder: 'Пояснение к ресурсу'
+    -#    - else
+    -#      .panel.panel-default
+    -#        .panel-body
+    -#          %span.glyphicon.glyphicon-remove.text-danger.pull-right{onclick: "$(this).parent().parent().remove();", style: "cursor:pointer;text-decoration:none;font-size:15px;"}
+    -#          =autocomplete_field_tag "resor_control_r[]",'', autocomplete_concept_post_resource_concept_posts_path,:append_to => "#mod", :"min-length" => 0,  class: 'form-control autocomplete',placeholder: 'Введите свой ресурс или выберите из списка'
+    -#          %br
+    -#          = text_area_tag "res_control_r[]", '', class: 'form-control', placeholder: 'Пояснение к ресурсу'
+    -#      .panel.panel-default
+    -#        .panel-body
+    -#          %span.glyphicon.glyphicon-remove.text-danger.pull-right{onclick: "$(this).parent().parent().remove();", style: "cursor:pointer;text-decoration:none;font-size:15px;"}
+    -#          =autocomplete_field_tag "resor_control_r[]",'', autocomplete_concept_post_resource_concept_posts_path,:append_to => "#mod", :"min-length" => 0,  class: 'form-control autocomplete',placeholder: 'Введите свой ресурс или выберите из списка'
+    -#          %br
+    -#          = text_area_tag "res_control_r[]", '', class: 'form-control', placeholder: 'Пояснение к ресурсу'
+    -#  %a.btn.btn-warning{onclick:"return add_new_resource_to_concept('control_r','#{@project.id}');"} Добавить ресурс
+
+  -#.row
+  -#  .col-md-12
+  -#    .text-center
+  -#      %h3.color-orange
+  -#        %b D3.
+  -#        =t('form.control_s')
+  -#      %br
+  -#
+  -#.row
+  -#  .col-md-6
+  -#    .text-right.hidden-sm
+  -#      %i
+  -#        %h6 Какие средства необходимы для создания ресурсов?
+  -#        %br
+  -#        %h6.color-green Пример:
+  -#
+  -#        %p
+  -#          %b Средства:
+  -#
+  -#          Оплата инспекций
+  -#
+  -#  .col-md-12
+  -#    .form-group.has-success{:id => "resources_control_s"}
+  -#      - if @post.persisted?
+  -#        -@post.concept_post_resources.by_type('control_s').each do |r|
+  -#          .panel.panel-default
+  -#            .panel-body
+  -#              %span.glyphicon.glyphicon-remove.text-danger.pull-right{onclick: "$(this).parent().parent().remove();", style: "cursor:pointer;text-decoration:none;font-size:15px;"}
+  -#              =autocomplete_field_tag "resor_control_s[]",'', autocomplete_concept_post_mean_concept_posts_path,:append_to => "#mod", :"min-length" => 0, value: r.name,  class: 'form-control autocomplete',placeholder: 'Введите свой ресурс или выберите из списка'
+  -#              %br
+  -#              = text_area_tag "res_control_s[]", r.desc, class: 'form-control', placeholder: 'Пояснение к ресурсу'
+  -#      - else
+  -#        .panel.panel-default
+  -#          .panel-body
+  -#            %span.glyphicon.glyphicon-remove.text-danger.pull-right{onclick: "$(this).parent().parent().remove();", style: "cursor:pointer;text-decoration:none;font-size:15px;"}
+  -#            =autocomplete_field_tag "resor_control_s[]",'', autocomplete_concept_post_mean_concept_posts_path,:append_to => "#mod", :"min-length" => 0,  class: 'form-control autocomplete',placeholder: 'Введите свой ресурс или выберите из списка'
+  -#            %br
+  -#            = text_area_tag "res_control_s[]", '', class: 'form-control', placeholder: 'Пояснение к ресурсу'
+  -#        .panel.panel-default
+  -#          .panel-body
+  -#            %span.glyphicon.glyphicon-remove.text-danger.pull-right{onclick: "$(this).parent().parent().remove();", style: "cursor:pointer;text-decoration:none;font-size:15px;"}
+  -#            =autocomplete_field_tag "resor_control_s[]",'', autocomplete_concept_post_mean_concept_posts_path,:append_to => "#mod", :"min-length" => 0,  class: 'form-control autocomplete',placeholder: 'Введите свой ресурс или выберите из списка'
+  -#            %br
+  -#            = text_area_tag "res_control_s[]", '', class: 'form-control', placeholder: 'Пояснение к ресурсу'
+  -#    %a.btn.btn-warning{onclick:"return add_new_resource_to_concept('control_s','#{@project.id}');"} Добавить ресурс
 
   %hr
   .row

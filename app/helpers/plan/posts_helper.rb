@@ -169,9 +169,9 @@ module Plan::PostsHelper
               notice_empty += link if link
             end
           else
-            if !concept.plan_post_means.by_type(field_for_res(n+1)).present?
-              notice_empty += link if link
-            end
+            #if !concept.plan_post_means.by_type(field_for_res(n+1)).present?
+            #  notice_empty += link if link
+            #end
           end
           if concept.note_size?(n+1)
             notice_note += link if link

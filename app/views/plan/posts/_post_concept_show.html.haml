@@ -2,13 +2,13 @@
   %b=post_concept_show.title
   %br
   %br
+
 %h4.color-orange.text-center
   %b A1.
   =t('form.novation_what')
   -if boss? and @project.status == 9
     =link_to({controller: 'plan/posts', action: :new_note, id: @post.id, con_id:post_concept_show.id, type_field: 1},remote: true,method: :put, id: "btn_note_1", class: "note_text") do
       .label.label-danger замечание
-
 .form-group
   =simple_format(post_concept_show.name)
 -if @project.status == 9
@@ -20,22 +20,22 @@
   -if boss? and @project.status == 9
     =link_to({controller: 'plan/posts', action: :new_note, id: @post.id, con_id:post_concept_show.id, type_field: 2},remote: true,method: :put, id: "btn_note_2", class: "note_text") do
       .label.label-danger замечание
-
 .form-group.has-danger
   =simple_format(post_concept_show.content)
 -if @project.status == 9
   = render partial: 'plan/posts/note_list', locals: {post_field: post_concept_show,type_fd: 2}
 %hr
+
 %h4.color-orange.text-center
   %b B1.
   =t('form.cond')
   -if boss? and @project.status == 9
     =link_to({controller: 'plan/posts', action: :new_note, id: @post.id, con_id:post_concept_show.id, type_field: 3},remote: true,method: :put, id: "btn_note_3", class: "note_text") do
       .label.label-danger замечание
-
 .form-group.has-success= display_content(post_concept_show.positive)
 -if @project.status == 9
   = render partial: 'plan/posts/note_list', locals: {post_field: post_concept_show,type_fd: 3}
+
 %h4.color-orange.text-center
   %b B2.
   =t('form.cond_res')
@@ -61,38 +61,21 @@
           =r.name
         %td
           =r.desc
+      - r.plan_post_resources.by_type('positive_s').each_with_index  do |res, ind|
+        %tr
+          %td
+            ="#{index+1}.#{ind+1}"
+          %td
+            =res.name
+          %td
+            =res.desc
 -if @project.status == 9
-  = render partial: 'plan/posts/note_list', locals: {post_field: post_concept_show,type_fd: 4}
-%h4.color-orange.text-center
-  %b B3.
-  =t('form.cond_s')
-  -if boss? and @project.status == 9
-    =link_to({controller: 'plan/posts', action: :new_note, id: @post.id, con_id:post_concept_show.id, type_field: 5},remote: true,method: :put, id: "btn_note_5", class: "note_text") do
-      .label.label-danger замечание
-%br
-%table.table.table-striped.table-bordered
-  %thead
-    %tr
-      %th
-        ="#"
-      %th
-        Название
-      %th
-        Пояснение
-  %tbody
-    - post_concept_show.plan_post_means.by_type('positive_s').each_with_index do |r, index|
-      %tr
-        %td
-          =index+1
-        %td
-          =r.name
-        %td
-          =r.desc
--if @project.status == 9
-  = render partial: 'plan/posts/note_list', locals: {post_field: post_concept_show,type_fd: 5}
+  = render partial: 'plan/posts/note_list', :locals => {:post_field => post_concept_show,:type_fd => 4}
+
 %hr
 #render_get_concept_actions
 %hr
+
 %h4.color-orange.text-center
   %b C1.
   =t('form.negative')
@@ -102,6 +85,7 @@
 .form-group.has-success= display_content(post_concept_show.negative)
 -if @project.status == 9
   = render partial: 'plan/posts/note_list', locals: {post_field: post_concept_show,type_fd: 6}
+
 %h4.color-orange.text-center
   %b C2.
   =t('form.negative_res')
@@ -127,37 +111,19 @@
           =r.name
         %td
           =r.desc
+      - r.plan_post_resources.by_type('negative_s').each_with_index  do |res, ind|
+        %tr
+          %td
+            ="#{index+1}.#{ind+1}"
+          %td
+            =res.name
+          %td
+            =res.desc
 -if @project.status == 9
   = render partial: 'plan/posts/note_list', locals: {post_field: post_concept_show,type_fd: 7}
 
-%h4.color-orange.text-center
-  %b C3.
-  =t('form.negative_s')
-  -if boss? and @project.status == 9
-    =link_to({controller: 'plan/posts', action: :new_note, id: @post.id, con_id:post_concept_show.id, type_field: 8},remote: true,method: :put, id: "btn_note_8", class: "note_text") do
-      .label.label-danger замечание
-%br
-%table.table.table-striped.table-bordered
-  %thead
-    %tr
-      %th
-        ="#"
-      %th
-        Название
-      %th
-        Пояснение
-  %tbody
-    - post_concept_show.plan_post_means.by_type('negative_s').each_with_index do |r, index|
-      %tr
-        %td
-          =index+1
-        %td
-          =r.name
-        %td
-          =r.desc
--if @project.status == 9
-  = render partial: 'plan/posts/note_list', locals: {post_field: post_concept_show,type_fd: 8}
 %hr
+
 %h4.color-orange.text-center
   %b D1.
   =t('form.control')
@@ -167,6 +133,7 @@
 .form-group.has-success= display_content(post_concept_show.control)
 -if @project.status == 9
   = render partial: 'plan/posts/note_list', locals: {post_field: post_concept_show,type_fd: 9}
+
 %h4.color-orange.text-center
   %b D2.
   =t('form.control_res')
@@ -192,36 +159,19 @@
           =r.name
         %td
           =r.desc
+      - r.plan_post_resources.by_type('control_s').each_with_index  do |res, ind|
+        %tr
+          %td
+            ="#{index+1}.#{ind+1}"
+          %td
+            =res.name
+          %td
+            =res.desc
 -if @project.status == 9
-  = render partial: 'plan/posts/note_list', locals: {post_field: post_concept_show,type_fd: 10}
-%h4.color-orange.text-center
-  %b D3.
-  =t('form.control_s')
-  -if boss? and @project.status == 9
-    =link_to({controller: 'plan/posts', action: :new_note, id: @post.id, con_id:post_concept_show.id, type_field: 11},remote: true,method: :put, id: "btn_note_11", class: "note_text") do
-      .label.label-danger замечание
-%br
-%table.table.table-striped.table-bordered
-  %thead
-    %tr
-      %th
-        ="#"
-      %th
-        Название
-      %th
-        Пояснение
-  %tbody
-    - post_concept_show.plan_post_means.by_type('control_s').each_with_index do |r, index|
-      %tr
-        %td
-          =index+1
-        %td
-          =r.name
-        %td
-          =r.desc
--if @project.status == 9
-  = render partial: 'plan/posts/note_list', locals: {post_field: post_concept_show,type_fd: 11}
+  = render partial: 'plan/posts/note_list', :locals => {:post_field => post_concept_show,:type_fd => 10}
+
 %hr
+
 %h4.color-orange.text-center
   %b E1.
   =t('form.obstacles_bcd')
@@ -232,6 +182,7 @@
 -if @project.status == 9
   = render partial: 'plan/posts/note_list', locals: {post_field: post_concept_show,type_fd: 12}
 %hr
+
 %h4.color-orange.text-center
   %b F1.
   =t('form.problems')
@@ -241,6 +192,7 @@
 .form-group.has-success= display_content(post_concept_show.problems)
 -if @project.status == 9
   = render partial: 'plan/posts/note_list', locals: {post_field: post_concept_show,type_fd: 13}
+
 %h4.color-orange.text-center
   %b F2.
   =t('form.reality')

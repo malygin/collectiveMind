@@ -1,196 +1,86 @@
-%section.widget
+%section
   .body
-    #wizard.form-wizard
-      %ul.wizard-navigation.nav-justified
-        %li#first
-          %a{"data-toggle"=> "tab", href: "#tab1"}
-            %small 1.
-            %strong Описание проекта
-        %li#second{class: @post.persisted? ? nil:"disabled"}
-          %a{"data-toggle"=> "tab", href: "#tab2"}
-            %small 2.
-            %strong План мероприятий
-          -if @post.persisted?
-            #option_for_render_tab(project="#{@project.id}" post="#{@post.id}")
-        %li#third{class: @post.persisted? ? nil:"disabled"}
-          %a{"data-toggle"=> "tab", href: "#tab3"}
-            %small 3.
-            %strong Просмотр нововведений
+    %ul.nav.nav-tabs.nav-justified{:role => "tablist" , :id => "PlanTabs"}
+      %li.active#first
+        %a{"data-toggle" => "tab", :href => "#tab1", :role => "tab"}
+          %small 1.
+          %strong Описание проекта
+      %li#second{:class => @post.persisted? ? nil:"disabled"}
+        %a{"data-toggle" => "tab", :href => "#tab2", :role => "tab"}
+          %small 2.
+          %strong План мероприятий
+        -if @post.persisted?
+          #option_for_render_tab(project="#{@project.id}" post="#{@post.id}")
+      %li#third{:class => @post.persisted? ? nil:"disabled"}
+        %a{"data-toggle" => "tab", :href => "#tab3", :role => "tab"}
+          %small 3.
+          %strong Просмотр нововведений
 
-      #bar.progress.progress-small
-        .progress-bar
-      .tab-content(style="overflow:visible;")
-        #tab1.tab-pane
-          .form-horizontal
-            %fieldset
-              .col-md-6#form_for_main_plan
-                = form_for  @post, url: {project: @project.id, action: @post.persisted? ? 'update' : 'create'}, remote: true, html: { class: 'new_or_edit' } do |f|
-                  %legend.section
-                    Описание проекта
-                  .form-group(style="margin-left:0;")
-                    %label.color-green{for: "name_plan"} Название проекта
-                    =f.text_field :name, type: "text", class: "form-control", id: "name_plan"
-                  .form-group(style="margin-left:0;")
-                    %label{for: "goals"}
-                      %span.color-green Коротко о проекте.
-                      %small
-                    =f.text_area :goal, rows: 8, style: 'width: 100%;', class: "form-control", id: "goals", placeholder: 'Попытайтесь кратко изложив суть проекта в тоже время привлечь этим внимание других участников'
-                    %span.help-block
-                      1) Цель: какую выгоду даст ваш проект? Зачем это нужно его реализаторам?
-                      %br
-                      2) Методы, средства и другие ресурсы:  как, при помощи чего эта выгода будет получаться?
-                      %br
-                      3) Этапность реализации:  с чего вы планируете начать, что делать потом и т. д.?
-                  .form-group(style="margin-left:0;")
-                    %label.color-green{for: "desc_plan"} Пояснения и обоснования
-                    =f.text_area :content, rows: 12, style: 'width: 100%;', class: "form-control", id: "desc_plan"
-                    %span.help-block Опишите ваше видение проекта в будущем
-                  .color-green#plan_success(style='display:none;')
-                    Проект успешно обновлен
-                  .form-group
-                    -if @post.persisted?
-                      %input.btn.btn-success.pull-right{type: "submit", id: "send_plan_post", value: "Сохранить"}
-                    -else
-                      %input.btn.btn-success.pull-right{type: "submit", id: "send_plan_post", value: "Сохранить и приступить к добавлению этапов"}
-              .col-md-6
+    .tab-content(style="overflow:visible;")
+      #tab1.tab-pane.fade.in.active
+        .form-horizontal
+          %fieldset
+            .col-md-6#form_for_main_plan
+              = form_for  @post, :url => {:project => @project.id, :action => @post.persisted? ? 'update' : 'create'}, :remote => true, :html => { :class => 'new_or_edit' } do |f|
                 %legend.section
-                  Этапы проекта
-                #post_stages
-                  %table.table.table-striped
-                    %tbody#table_stage_list
-                      -if @post.persisted? and @post.post_stages.present?
-                        -@post.post_stages.each do |ps|
-                          = render partial: 'post_stage', object: ps
-
-                #modal_stage
-                #add_new_stage
+                  Описание проекта
+                .form-group(style="margin-left:0;")
+                  %label.color-green{:for => "name_plan"} Название проекта
+                  =f.text_field :name, :type => "text", class: "form-control", id: "name_plan"
+                .form-group(style="margin-left:0;")
+                  %label{:for => "goals"}
+                    %span.color-green Коротко о проекте.
+                    %small
+                  =f.text_area :goal, rows: 8, style: 'width: 100%;', class: "form-control", id: "goals", placeholder: 'Попытайтесь кратко изложив суть проекта в тоже время привлечь этим внимание других участников'
+                  %span.help-block
+                    1) Цель: какую выгоду даст ваш проект? Зачем это нужно его реализаторам?
+                    %br
+                    2) Методы, средства и другие ресурсы:  как, при помощи чего эта выгода будет получаться?
+                    %br
+                    3) Этапность реализации:  с чего вы планируете начать, что делать потом и т. д.?
+                .form-group(style="margin-left:0;")
+                  %label.color-green{:for => "desc_plan"} Пояснения и обоснования
+                  =f.text_area :content, rows: 12, style: 'width: 100%;', class: "form-control", id: "desc_plan"
+                  %span.help-block Опишите ваше видение проекта в будущем
+                .color-green#plan_success(style='display:none;')
+                  Проект успешно обновлен
+                .form-group
                   -if @post.persisted?
-                    =link_to new_stage_plan_post_path(@project, @post), method: :put, remote: true, class: "btn btn-lg btn-success btn-block", id: "btn_new_stage", style: "font-weight: normal;" do
-                      Добавить этап в проект
-                  -#%button.btn.btn-lg.btn-success.btn-block.disabled#btn_new_stage(href="#" style="font-weight: normal;") Добавить этап в проект
-        #tab2.tab-pane
-          .form-horizontal
-            %fieldset
-              #render_modal_concept
-              #render_modal_edit_concept
-              #modal_action
+                    %input.btn.btn-success.pull-right{:type => "submit", :id  => "send_plan_post", :value => "Сохранить"}
+                  -else
+                    %input.btn.btn-success.pull-right{:type => "submit", :id  => "send_plan_post", :value => "Сохранить и приступить к добавлению этапов"}
+            .col-md-6
+              %legend.section
+                Этапы проекта
+              #post_stages
+                %table.table.table-striped
+                  %tbody#table_stage_list
+                    -if @post.persisted? and @post.post_stages.present?
+                      -@post.post_stages.each do |ps|
+                        = render :partial => 'post_stage', :object => ps
 
-              #table_stages
-                - unless @post.post_stages.nil?
-                  -@post.post_stages.each_with_index do |stage,ind|
-                    %section.widget
-                      .body
-                        %div(class="td_stage_#{stage.id}")
-                          %h3
-                            %span="Этап #{ind+1}. "
-                            %span.color-teal=stage.name
-                          -if stage.date_begin and stage.date_end
-                            %h3.color-green
-                              =Russian::strftime(stage.date_begin, "%d %b %Y")
-                              ="-"
-                              =Russian::strftime(stage.date_end, "%d %b %Y")
+              #modal_stage
+              #add_new_stage
+                -if @post.persisted?
+                  =link_to new_stage_plan_post_path(@project, @post), :method => :put, :remote => true, :class => "btn btn-lg btn-success btn-block", :id => "btn_new_stage", :style => "font-weight: normal;" do
+                    Добавить этап в проект
 
-                          =stage.desc
-                          %br
-                          %br
-                        %table.table.table-striped.table-bordered
-                          %thead
-                            %tr
-                              %th
-                                ="#"
-                              %th
-                                Нововведения
-                              %th
-                                Мероприятия этапа
-                          %tbody
-                            - unless stage.plan_post_aspects.nil?
-                              - stage.plan_post_aspects.each_with_index do |concept, index|
-                                %tr(id="tr_concept_#{concept.id}")
-                                  %td(rowspan="#{rowspan_concept(concept)}" class="td_concept_#{concept.id}")
-                                    =index+1
-                                  %td(rowspan="#{rowspan_concept(concept)}" class="td_concept_#{concept.id}" id="td_concept_#{concept.id}")
-                                    .pull-right
-                                      =link_to edit_concept_plan_post_path(@project, @post, con_id: concept.id), method: :put, remote: true, id: "edit_post_concept_#{concept.id}" do
-                                        %button.btn.btn-sm.btn-warning{type: "button"}
-                                          %i.fa.fa-pencil
-                                      =link_to destroy_concept_plan_post_path(@project, @post, con_id: concept.id, stage_id: stage.id), method: :delete, remote: true, data: { confirm: 'Удалить нововведение?' }, id: "destroy_post_concept_#{concept.id}" do
-                                        %button.btn.btn-sm.btn-danger{type: "button"}
-                                          %i.fa.fa-trash-o
-                                    =link_to view_concept_table_plan_post_path(@project, @post, con_id: concept.id), method: :get, remote: true,class: "color-white", style: "text-decoration:none;border-bottom: 1px dashed #fafbfc;", id: "view_post_concept_table_#{concept.id}" do
-                                      %span.h5{id: "name_post_concept_#{concept.id}"}=concept.title
-                                    %br
-                                    =concept.name
-                                    %br
-                                    = check_validate_concept(concept).html_safe if check_validate_concept(concept)
+      #tab2.tab-pane.fade
+        .form-horizontal
+          %fieldset
+            #render_modal_concept
+            #render_modal_edit_concept
+            #modal_action
+            #table_stages
 
-                                - unless concept.plan_post_actions.nil?
-                                  - concept.plan_post_actions.each do |action|
-                                    %tr(id="tr_action_#{action.id}")
-                                      %td
-                                        .pull-right
-                                          =link_to edit_action_plan_post_path(@project, @post, act_id: action.id, con_id: concept.id, stage_id: stage.id), method: :put, remote: true, id: "edit_post_action_#{action.id}" do
-                                            %button.btn.btn-xs.btn-warning{type: "button"}
-                                              %i.fa.fa-pencil
-                                          =link_to destroy_action_plan_post_path(@project, @post, act_id: action.id, con_id: concept.id, stage_id: stage.id), method: :delete, remote: true, data: { confirm: 'Удалить нововведение?' }, id: "destroy_post_action_#{action.id}" do
-                                            %button.btn.btn-xs.btn-danger{type: "button"}
-                                              %i.fa.fa-trash-o
-                                        -if action.date_begin and action.date_end
-                                          %small.color-green
-                                            =Russian::strftime(action.date_begin, "%d %b %Y")
-                                            ="-"
-                                            =Russian::strftime(action.date_end, "%d %b %Y")
-                                          %br
-                                        %span.h5.color-teal{id: "name_post_action_#{action.id}"}=action.name
-                                        %br
-                                        %span.h5=action.desc
-                                        -unless action.plan_post_action_resources.nil?
-                                          %br
-                                          -action.plan_post_action_resources.each  do |res|
-                                            .label.label-danger=res.name
+      #tab3.tab-pane.fade
+        .form-horizontal
+          %fieldset
+            #modal_concept_action
+            #render_old_concept_side
+            #render_new_concept_side
+            .col-md-4#concept_side
 
-                                  %tr(id="tr_new_action_#{concept.id}")
-                                    %td
-                                      =link_to new_action_plan_post_path(@project, @post, con_id: concept.id, stage_id: stage.id), method: :put, remote: true, class: "btn btn-sm btn-success pull-right", id: "btn_new_concept", style: "font-weight: normal;width:200px;" do
-                                        Запланировать мероприятие
+            .col-md-8
+              #render_get_concept
 
-                            %tr(id="tr_new_concept_#{stage.id}")
-                              %td(colspan="3")
-                                =link_to add_concept_plan_post_path(@project, @post, stage_id: stage.id), method: :put, remote: true, class: "btn btn-sm btn-warning pull-right", id: "btn_new_concept", style: "font-weight: normal;width:200px;" do
-                                  Добавить нововведение
-
-
-        #tab3.tab-pane
-          .form-horizontal
-            %fieldset
-              #modal_concept_action
-              #render_old_concept_side
-              #render_new_concept_side
-              .col-md-4#concept_side
-                - unless @post.post_stages.nil?
-                  %ul#menu-levels-collapse.side-nav
-                    -@post.post_stages.each_with_index do |stage, index|
-                      %li.panel
-                        %a.accordion-toggle{"data-parent"=> "#menu-levels-collapse", "data-toggle"=> "collapse", href: "#sub-menu-#{index}-collapse"}
-                          %b="Этап #{index+1}. "
-                          =stage.name
-                        - unless stage.plan_post_aspects.nil?
-                          %ul.concept_side_list.panel-collapse.collapse.in{id: "sub-menu-#{index}-collapse"}
-                            - stage.plan_post_aspects.each_with_index do |concept|
-                              %li.concept_side{id: "li_concept_#{concept.id}"}
-                                =link_to get_concept_plan_post_path(@project, @post, con_id: concept.id, view_post_concept: true), method: :get, remote: true do
-                                  =concept.title
-
-              .col-md-8
-                #render_get_concept
-
-
-        .description
-          %ul.pager.wizard
-            %li.previous
-              %button.btn.btn-primary.pull-left
-                %i.fa.fa-caret-left
-                Назад
-            %li.next
-              %button.btn.btn-primary.pull-right#btn_next{class: @post.persisted? ? nil:"disabled"}
-                Далее
-                %i.fa.fa-caret-right
