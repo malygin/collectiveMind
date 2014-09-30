@@ -31,6 +31,7 @@
           |
           %span.text-info Голосовавших:
           =@vote_all
+
       -if boss? and @project.status == 8 and post.class.name.deconstantize == "Concept"
         |
         %span.text-success Голосов:

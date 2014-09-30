@@ -70,9 +70,15 @@ class Concept::PostsController < PostsController
     @post_aspect = Concept::PostAspect.new(params[:pa])
     unless params[:cd].nil?
       params[:cd].each do |cd|
-        @concept_post.concept_post_discontents.build(discontent_post_id: cd.to_i)
+        @concept_post.concept_post_discontents.build(discontent_post_id: cd[0],complite: cd[1][:complite], status: 0)
       end
     end
+    unless params[:check_discontent].nil?
+      params[:check_discontent].each do |com|
+        @concept_post.concept_post_discontent_grouped.build(discontent_post_id: com[0], status: 1)
+      end
+    end
+
     @concept_post.post_aspects << @post_aspect
     @concept_post.number_views = 0
     @concept_post.user = current_user
@@ -106,19 +112,23 @@ class Concept::PostsController < PostsController
     if check_before_update(params[:cd],params[:pa])
       @concept_post.post_aspects.destroy_all
       @concept_post.concept_post_discontents.destroy_all
+      @concept_post.concept_post_discontent_grouped.destroy_all
 
       @concept_post.concept_post_resources.by_type('positive_r').destroy_all
       @concept_post.concept_post_resources.by_type('positive_s').destroy_all
-
       @concept_post.concept_post_resources.by_type('negative_r').destroy_all
       @concept_post.concept_post_resources.by_type('negative_s').destroy_all
-
       @concept_post.concept_post_resources.by_type('control_r').destroy_all
       @concept_post.concept_post_resources.by_type('control_s').destroy_all
     end
     unless params[:cd].nil?
       params[:cd].each do |cd|
-        @concept_post.concept_post_discontents.build(discontent_post_id: cd.to_i)
+        @concept_post.concept_post_discontents.build(discontent_post_id: cd[0],complite: cd[1][:complite], status: 0)
+      end
+    end
+    unless params[:check_discontent].nil?
+      params[:check_discontent].each do |com|
+        @concept_post.concept_post_discontent_grouped.build(discontent_post_id: com[0], status: 1)
       end
     end
     @concept_post.post_aspects << @post_aspect
@@ -217,6 +227,7 @@ class Concept::PostsController < PostsController
    def add_dispost
      @project = Core::Project.find(params[:project])
      @dispost = Discontent::Post.find(params[:dispost_id])
+     @remove_able = true
    end
 
   private
@@ -226,33 +237,33 @@ class Concept::PostsController < PostsController
     end
 
     def create_concept_resources_on_type(project, post, type_r, type_s, flag_destroy)
-      if flag_destroy
-        post.concept_post_resources.by_type(type_r).destroy_all
-        post.concept_post_resources.by_type(type_s).destroy_all
-      end
+      #if flag_destroy
+      #  post.concept_post_resources.by_type(type_r).destroy_all
+      #  post.concept_post_resources.by_type(type_s).destroy_all
+      #end
 
-      unless params[:plan_post_resource].nil?
-        params[:plan_post_resource].each do |t|
-          t[1].each_with_index do |r,i|
-            post.concept_post_resources.build(:name => r[:name], :desc => r[:desc],:style => r[:style], :type_res => t[0], :project_id => project.id)
-          end
+      # unless params[:plan_post_resource].nil?
+      #   params[:plan_post_resource].each do |t|
+      #     t[1].each_with_index do |r,i|
+      #       post.concept_post_resources.build(:name => r[:name], :desc => r[:desc],:style => r[:style], :type_res => t[0], :project_id => project.id)
+      #     end
+      #   end
+      # end
+      unless params[('resor_'+type_r).to_sym].nil?
+        params[('resor_'+type_r).to_sym].each_with_index do |r,i|
+           if r[1][0]!=''
+             resource = post.concept_post_resources.build(:name => r[1][0], :desc => params[('resor_'+type_r).to_sym] ? params[('resor_'+type_r).to_sym]["#{r[0]}"][0] : '', :type_res => type_r, :project_id => project.id, :style => 0)
+             if params[('resor_'+type_s).to_sym] and params[('resor_'+type_s).to_sym]["#{r[0]}"]
+               params[('resor_'+type_s).to_sym]["#{r[0]}"].each_with_index do |m,ii|
+                 if m!=''
+                   mean = post.concept_post_resources.build(:name => m, :desc => params[('resor_'+type_s).to_sym] ? params[('resor_'+type_s).to_sym]["#{r[0]}"][ii] : '',:type_res => type_s, :project_id => project.id, :style => 1)
+                   mean.concept_post_resource = resource
+                 end
+               end
+             end
+           end
         end
       end
-      #unless params[('resor_'+type_r).to_sym].nil?
-      #  params[('resor_'+type_r).to_sym].each_with_index do |r,i|
-      #    if r[1][0]!=''
-      #      resource = post.concept_post_resources.build(:name => r[1][0], :desc => params[('resor_'+type_r).to_sym] ? params[('resor_'+type_r).to_sym]["#{r[0]}"][0] : '', :type_res => type_r, :project_id => project.id, :style => 0)
-      #      if params[('resor_'+type_s).to_sym] and params[('resor_'+type_s).to_sym]["#{r[0]}"]
-      #        params[('resor_'+type_s).to_sym]["#{r[0]}"].each_with_index do |m,ii|
-      #          if m!=''
-      #            mean = post.concept_post_resources.build(:name => m, :desc => params[('resor_'+type_s).to_sym] ? params[('resor_'+type_s).to_sym]["#{r[0]}"][ii] : '',:type_res => type_s, :project_id => project.id, :style => 1)
-      #            mean.concept_post_resource = resource
-      #          end
-      #        end
-      #      end
-      #    end
-      #  end
-      #end
   end
 
 end

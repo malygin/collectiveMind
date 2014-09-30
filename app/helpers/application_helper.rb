@@ -551,4 +551,18 @@ module ApplicationHelper
     end
   end
 
+  def grouped_discontent?(post)
+    if @concept_post.present?
+      if @concept_post.persisted?
+        post.concept_post_discontent_grouped.by_concept(@concept_post.id).present?
+      else
+        true
+      end
+    elsif @post.present? and @post.persisted?
+      post.concept_post_discontent_grouped.by_concept(@post.id).present?
+    else
+      false
+    end
+  end
+
 end

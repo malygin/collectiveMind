@@ -156,4 +156,37 @@ module Concept::PostsHelper
     "#{(add_score/8.to_f)*100}%"
   end
 
+  def complite(post)
+    concept = (@concept_post or @post)
+    concept_post_discontent = post.concept_post_discontents.by_concept(concept.id).first if concept
+    concept_post_discontent.present? ? concept_post_discontent.complite : 3
+  end
+
+  def level_complite(level)
+    if level == 1
+      'несовершенство решается в незначительной мере'
+    elsif level == 2
+      'несовершенство решается в значительной мере'
+    elsif level == 3
+      'несовершенство решается полностью'
+    else
+      'не определено'
+    end
+  end
+
+  def status_for_complite_discontent(post,pa)
+    if post.concept_post_discontents.by_concept(pa.id).first
+      complite = post.concept_post_discontents.by_concept(pa.id).first.complite
+    end
+    if complite == 1
+      'в незначительной мере'
+    elsif complite == 2
+      'в значительной мере'
+    elsif complite == 3
+      'полностью'
+    else
+      'не определено'
+    end
+  end
+
 end

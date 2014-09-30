@@ -6,6 +6,7 @@ class Concept::Post < ActiveRecord::Base
 
   belongs_to :life_tape_post, class_name: "LifeTape::Post"
   has_many :task_supply_pairs
+
   has_many :post_aspects, foreign_key: 'concept_post_id', class_name: "Concept::PostAspect"
 
   has_many :voted_users, through: :final_votings, source: :user
@@ -13,14 +14,17 @@ class Concept::Post < ActiveRecord::Base
 
   #has_many :concept_notes, class_name: 'Concept::Note'
 
-  has_many :concept_post_discontents, class_name: 'Concept::PostDiscontent'
+  has_many :concept_post_discontents, class_name: 'Concept::PostDiscontent', conditions: {concept_post_discontents: {status: [0,nil]}}
   has_many :concept_disposts, through: :concept_post_discontents, source: :discontent_post, class_name: 'Discontent::Post'
   has_many :concept_post_resources, class_name: 'Concept::PostResource'
+
+  has_many :concept_post_discontent_grouped, class_name: "Concept::PostDiscontent", conditions: {concept_post_discontents: {status: [1]}}
 
   scope :stat_fields_negative, ->(p){where(id: p).where("status_name = 'f' or status_content = 'f' or status_negative = 'f'
             or status_positive = 'f' or status_control = 'f' or status_obstacles = 'f' or status_reality = 'f' or status_problems = 'f' ")}
   scope :stat_fields_positive, ->(p){where(id: p).where("status_name = 't' and status_content = 't' and status_negative = 't'
             and status_positive = 't' and status_control = 't' and status_obstacles = 't' and status_reality = 't' and status_problems = 't' ")}
+
   scope :by_status, ->(p){where(status: p)}
 
   scope :by_project, ->(p) { where(project_id: p) }
@@ -42,6 +46,11 @@ class Concept::Post < ActiveRecord::Base
   #def post_notes(type_field)
   #  self.concept_notes.by_type(type_field)
   #end
+
+  def complite(discontent)
+    post = discontent.concept_post_discontents.by_concept(self.id).first
+    post.complite if post
+  end
 
   def note_size?(type_fd)
     self.post_notes(type_fd).size > 0

@@ -1,26 +1,19 @@
-%h4=link_to ' << Вернуться к списку', "/project/#{@project.id}/concept/posts/"
-= form_for  @concept_post, url: {project: @project.id, asp_id: params[:asp_id].present? ? params[:asp_id] : params[:asp], imp_comment: params[:imp_comment], imp_stage: params[:imp_stage], action: @concept_post.persisted? ? 'update' : 'create'},  remote: true,  html: { class: 'new_or_edit' } do |f|
+-#%h4=link_to ' << Вернуться к списку', "/project/#{@project.id}/concept/posts/"
+= form_for  @concept_post, :url => {:project => @project.id, :asp_id => params[:asp_id].present? ? params[:asp_id] : params[:asp], :imp_comment => params[:imp_comment], :imp_stage => params[:imp_stage], :action => @concept_post.persisted? ? 'update' : 'create'},  :remote => true,  :html => { :class => 'new_or_edit' } do |f|
   #mod
   #notice_messages
-  %h5 Устраняемые несовершенства:
-  #panel_union
-    -if @concept_post.persisted?
-      -@concept_post.concept_disposts.each  do |cd|
-        =render partial:'discontent/posts/post_short2', object: cd
-    -else
-      =render partial:'discontent/posts/post_short2', object: @discontent_post unless @discontent_post.nil?
-  %br
-  .option_for_selectize{project: "#{@project.id}", post: "#{@concept_post.id}"}
-  .text-success#add_dispost_success(style='display:none;')
-    Несовершенство успешно добавлено
-  -if params[:improve_comment] and params[:improve_stage]
-    %h4.color-red#add_dispost_warning
-      Выберите хотя бы одно несовершенство, которое будет решаться нововведением!
-  =select_tag "selectize_concept",
-  options_from_collection_for_select(Discontent::Post.where("discontent_posts.id <> ? and project_id = ?", @discontent_post.nil? ? 0 : @discontent_post.id, @project.id).by_status(4), "id", "show_content"),
-  class: 'selectized', include_blank: true, placeholder: "Какие еще несовершенства решает ваше нововведение?"
-  %br
-  %hr
+
+  .row
+    .col-md-12
+      %h4.text-left
+        %p Правила заполнения нововведения:
+        %p 1) Заполните название и поле "А1"
+        %p
+          2) Добавьте те несовершенства, которые решаются вашим нововведением.
+          %p а) Вы можете выставить степень решаемости каждого добавленного несовершенства.
+          %p б) А также проставить галочки на тех несовешенствах, входящих в сгруппированные несовершенства, которые решаются нововведением.
+        %p 3) Далее вы можете заполнить остальные поля
+
   .row
     .col-md-12
       .text-center
@@ -34,7 +27,6 @@
       .text-center
         %h3.color-orange
           %b A1:
-
           =t('form.novation_what')
         %br
 
@@ -58,14 +50,45 @@
     -#      %p Большой зеленый газон по всему пустырю  с клумбой с посредине. Клумба засеяна красными многолетными цветами.
     .col-md-12
       .form-group.has-danger
-        =text_area_tag "pa[name]",@pa.name, class: "concept_cond form-control", rows: 5, style: 'width: 100%;'
+        =text_area_tag "pa[name]",@pa.name, :class => "concept_cond form-control", rows: 5, style: 'width: 100%;'
+    -if @project.status == 7
+      = render partial: 'concept/posts/note_list', :locals => {:post_field => @concept_post,:type_fd => 1}
+  %br
+  %hr
+  .row
+    .col-md-12
+      .text-center
+        %h3.color-orange
+          %b Выберите несовершенства, которые будут решаться нововведением!
+        %h4.text-left
+          %p Не забудьте выбрать степень решаемости выбранных несовершенств.
+          %p А также проставить галочки на сгруппированных несовершенствах, которые на ваш взгляд решаются нововведением.
+        %br
+  %h5 Устраняемые несовершенства:
+  #panel_union
+    -if @concept_post.persisted?
+      -@concept_post.concept_disposts.each  do |cd|
+        =render partial:'discontent/posts/post_short2', object: cd
+    -else
+      =render partial:'discontent/posts/post_short2', object: @discontent_post unless @discontent_post.nil?
+  %br
+  .option_for_selectize{project: "#{@project.id}", post: "#{@concept_post.id}"}
+  .text-success#add_dispost_success(style='display:none;')
+    Несовершенство успешно добавлено
+  -if params[:improve_comment] and params[:improve_stage]
+    %h4.color-red#add_dispost_warning
+      Выберите хотя бы одно несовершенство, которое будет решаться нововведением!
+  =select_tag "selectize_concept",
+  options_from_collection_for_select(Discontent::Post.where("discontent_posts.id <> ? and project_id = ?", @discontent_post.nil? ? 0 : @discontent_post.id, @project.id).by_status(4), "id", "show_content"),
+  class: 'selectized', include_blank: true, placeholder: "Какие еще несовершенства решает ваше нововведение?"
+  %br
+  %hr
 
   .row
     .col-md-12
       .text-center
         %h3.color-orange
           %b A2:
-
           =t('form.novation_how')
         %br
   .row
@@ -76,7 +99,9 @@
     -#      %p Трава газона и декоративные растения на клумбе будут привлекательны на вид и предотвращать появление пыли.
     .col-md-12
       .form-group.has-danger
-        =text_area_tag "pa[content]",@pa.content, class: "concept_cond form-control", rows: 5, style: 'width: 100%;'
+        =text_area_tag "pa[content]",@pa.content, :class => "concept_cond form-control", rows: 5, style: 'width: 100%;'
+    -if @project.status == 7
+      = render partial: 'concept/posts/note_list', :locals => {:post_field => @concept_post,:type_fd => 2}
 
   %hr
   .row
@@ -84,7 +109,6 @@
       .text-center
         %h3.color-orange
           %b B1:
-
           =t('form.cond')
         %br
 
@@ -100,7 +124,9 @@
     -#        регулярный полив;  нужно засевать газон травой, а на клумбу высаживать растения; почву периодически вскапывать, удобрять и пропалывать; необходимо весной собирать деньги у жильцов.
     .col-md-12
       .form-group.has-success
-        =text_area_tag "pa[positive]",@pa.positive,  class: "concept_cond form-control", rows: 5, style: 'width: 100%;'
+        =text_area_tag "pa[positive]",@pa.positive,  :class => "concept_cond form-control", rows: 5, style: 'width: 100%;'
+    -if @project.status == 7
+      = render partial: 'concept/posts/note_list', :locals => {:post_field => @concept_post,:type_fd => 3}
 
   .row
     .col-md-12
@@ -110,6 +136,31 @@
           =t('form.cond_res')
         %br
 
+  .row
+    .col-md-12
+      .text-left
+        Вы можете добавлять ресурсы функционирования, описания к ним, а также средства достижения этих ресурсов (с описанием).
+        %br
+        %b Назначения кнопок:
+        .row
+          %span.color-orange Добавить ресурс
+          %span - добавляет поле для нового ресурса
+        .row
+          %span.color-green
+            %i.fa.fa-plus
+            "Добавить средство"
+          %span - добавляет поле для нового средства к ресурсу
+        .row
+          %span.color-orange
+            %i.fa.fa-edit
+            "Добавить описание"
+          %span - добавляет поле описания для соответствующего ресурса или средства
+        .row
+          %span.text-danger
+            %i.fa.fa-trash-o
+            "Удалить ресурс"
+          %span - удаляет соответсвующий ресурс или средство
+        %br
   .row
     -#.col-md-6
     -#  .text-right.hidden-sm
@@ -203,6 +254,80 @@
 
       %a.btn.btn-warning.pull-left{onclick:"return add_new_resource_to_concept('positive_r','positive_s',#{@project.id});", id:"add_positive_r"} Добавить ресурс
 
+    -if @project.status == 7
+      = render partial: 'concept/posts/note_list', :locals => {:post_field => @concept_post,:type_fd => 4}
+      -#.col-md-12
+      -#  .form-group.has-success{:id => "resources_positive_r"}
+      -#    - if @post.persisted?
+      -#      -@post.concept_post_resources.by_type('positive_r').each do |r|
+      -#        .panel.panel-default
+      -#          .panel-body
+      -#            %span.glyphicon.glyphicon-remove.text-danger.pull-right{onclick: "$(this).parent().parent().remove();", style: "cursor:pointer;text-decoration:none;font-size:15px;"}
+      -#            =autocomplete_field_tag "resor_positive_r[]",'', autocomplete_concept_post_resource_concept_posts_path,:append_to => "#mod", :"min-length" => 0, value: r.name,  class: 'form-control autocomplete',placeholder: 'Введите свой ресурс или выберите из списка'
+      -#            %br
+      -#            = text_area_tag "res_positive_r[]", r.desc, class: 'form-control', placeholder: 'Пояснение к ресурсу'
+      -#    -else
+      -#      .panel.panel-default
+      -#        .panel-body
+      -#          %span.glyphicon.glyphicon-remove.text-danger.pull-right{onclick: "$(this).parent().parent().remove();", style: "cursor:pointer;text-decoration:none;font-size:15px;"}
+      -#          %br
+      -#          =autocomplete_field_tag "resor_positive_r[]",'', autocomplete_concept_post_resource_concept_posts_path, :"min-length" => 0,  class: 'form-control autocomplete',placeholder: 'Введите свой ресурс или выберите из списка'
+      -#          %br
+      -#          = text_area_tag "res_positive_r[]", '', class: 'form-control', placeholder: 'Пояснение к ресурсу'
+      -#      .panel.panel-default
+      -#        .panel-body
+      -#          %span.glyphicon.glyphicon-remove.text-danger.pull-right{onclick: "$(this).parent().parent().remove();", style: "cursor:pointer;text-decoration:none;font-size:15px;"}
+      -#          %br
+      -#          =autocomplete_field_tag "resor_positive_r[]",'', autocomplete_concept_post_resource_concept_posts_path, :"min-length" => 0,  class: 'form-control autocomplete',placeholder: 'Введите свой ресурс или выберите из списка'
+      -#          %br
+      -#          = text_area_tag "res_positive_r[]", '', class: 'form-control', placeholder: 'Пояснение к ресурсу'
+      -#  %a.btn.btn-warning{onclick:"return add_new_resource_to_concept('positive_r',#{@project.id}); "} Добавить ресурс
+
+
+  -#.row
+  -#  .col-md-12
+  -#    .text-center
+  -#      %h3.color-orange
+  -#        %b B3.
+  -#        =t('form.cond_s')
+  -#      %br
+  -#
+  -#.row
+  -#  .col-md-6
+  -#    .text-right.hidden-sm
+  -#      %i
+  -#        %h6.color-green Пример:
+  -#        %p
+  -#          %b Средства:
+  -#
+  -#          Объявление для найма работника; деньги, собранные с жильцов для оплаты работника, покупки инструментов и аренды помощения
+  -#
+  -#  .col-md-12
+  -#    .form-group.has-success{:id => "resources_positive_s"}
+  -#      - if @post.persisted?
+  -#        -@post.concept_post_resources.by_type('positive_s').each do |r|
+  -#          .panel.panel-default
+  -#            .panel-body
+  -#              %span.glyphicon.glyphicon-remove.text-danger.pull-right{onclick: "$(this).parent().parent().remove();", style: "cursor:pointer;text-decoration:none;font-size:15px;"}
+  -#              =autocomplete_field_tag "resor_positive_s[]",'', autocomplete_concept_post_mean_concept_posts_path,:append_to => "#mod", :"min-length" => 0, value: r.name,  class: 'form-control autocomplete',placeholder: 'Введите свой ресурс или выберите из списка'
+  -#              %br
+  -#              = text_area_tag "res_positive_s[]", r.desc, class: 'form-control', placeholder: 'Пояснение к ресурсу'
+  -#      - else
+  -#        .panel.panel-default
+  -#          .panel-body
+  -#            %span.glyphicon.glyphicon-remove.text-danger.pull-right{onclick: "$(this).parent().parent().remove();", style: "cursor:pointer;text-decoration:none;font-size:15px;"}
+  -#            =autocomplete_field_tag "resor_positive_s[]",'', autocomplete_concept_post_mean_concept_posts_path,:append_to => "#mod", :"min-length" => 0,  class: 'form-control autocomplete',placeholder: 'Введите свой ресурс или выберите из списка'
+  -#            %br
+  -#            = text_area_tag "res_positive_s[]", '', class: 'form-control', placeholder: 'Пояснение к ресурсу'
+  -#        .panel.panel-default
+  -#          .panel-body
+  -#            %span.glyphicon.glyphicon-remove.text-danger.pull-right{onclick: "$(this).parent().parent().remove();", style: "cursor:pointer;text-decoration:none;font-size:15px;"}
+  -#            =autocomplete_field_tag "resor_positive_s[]",'', autocomplete_concept_post_mean_concept_posts_path,:append_to => "#mod", :"min-length" => 0,  class: 'form-control autocomplete',placeholder: 'Введите свой ресурс или выберите из списка'
+  -#            %br
+  -#            = text_area_tag "res_positive_s[]", '', class: 'form-control', placeholder: 'Пояснение к ресурсу'
+  -#    %a.btn.btn-warning{onclick:"return add_new_resource_to_concept('positive_s',#{@project.id}); "} Добавить ресурс
+
+
   %hr
   .row
     .col-md-12
@@ -224,7 +349,9 @@
     -#        Конфликты из-за того, что некоторые жильцы могут отказаться делать денежные взносы.
     .col-md-12
       .form-group.has-success
-        =text_area_tag "pa[negative]",@pa.negative,  class: "concept_cond form-control", rows: 5,  style: 'width: 100%;'
+        =text_area_tag "pa[negative]",@pa.negative,  :class => "concept_cond form-control", rows: 5,  style: 'width: 100%;'
+    -if @project.status == 7
+      = render partial: 'concept/posts/note_list', :locals => {:post_field => @concept_post,:type_fd => 5}
 
   .row
     .col-md-12
@@ -233,7 +360,31 @@
           %b C2:
           =t('form.negative_res')
         %br
-
+  .row
+    .col-md-12
+      .text-left
+        Вы можете добавлять ресурсы функционирования, описания к ним, а также средства достижения этих ресурсов (с описанием).
+        %br
+        %b Назначения кнопок:
+        .row
+          %span.color-orange Добавить ресурс
+          %span - добавляет поле для нового ресурса
+        .row
+          %span.color-green
+            %i.fa.fa-plus
+            "Добавить средство"
+          %span - добавляет поле для нового средства к ресурсу
+        .row
+          %span.color-orange
+            %i.fa.fa-edit
+            "Добавить описание"
+          %span - добавляет поле описания для соответствующего ресурса или средства
+        .row
+          %span.text-danger
+            %i.fa.fa-trash-o
+            "Удалить ресурс"
+          %span - удаляет соответсвующий ресурс или средство
+        %br
   .row
     -#.col-md-6
     -#  .text-right.hidden-sm
@@ -316,6 +467,79 @@
                   %br
 
       %a.btn.btn-warning.pull-left{onclick:"return add_new_resource_to_concept('negative_r','negative_s',#{@project.id});", id:"add_negative_r"} Добавить ресурс
+    -if @project.status == 7
+      = render partial: 'concept/posts/note_list', :locals => {:post_field => @concept_post,:type_fd => 6}
+    -#.col-md-12
+    -#  .form-group.has-success{:id => "resources_negative_r"}
+    -#    - if @post.persisted?
+    -#      -@post.concept_post_resources.by_type('negative_r').each do |r|
+    -#        .panel.panel-default
+    -#          .panel-body
+    -#            %span.glyphicon.glyphicon-remove.text-danger.pull-right{onclick: "$(this).parent().parent().remove();", style: "cursor:pointer;text-decoration:none;font-size:15px;"}
+    -#            =autocomplete_field_tag "resor_negative_r[]",'', autocomplete_concept_post_resource_concept_posts_path, :"min-length" => 0, value: r.name,  class: 'form-control autocomplete',placeholder: 'Введите свой ресурс или выберите из списка'
+    -#            %br
+    -#            = text_area_tag "res_negative_r[]", r.desc, class: 'form-control', placeholder: 'Пояснение к ресурсу'
+    -#    - else
+    -#      .panel.panel-default
+    -#        .panel-body
+    -#          %span.glyphicon.glyphicon-remove.text-danger.pull-right{onclick: "$(this).parent().parent().remove();", style: "cursor:pointer;text-decoration:none;font-size:15px;"}
+    -#          =autocomplete_field_tag "resor_negative_r[]",'', autocomplete_concept_post_resource_concept_posts_path, :"min-length" => 0,  class: 'form-control autocomplete',placeholder: 'Введите свой ресурс или выберите из списка'
+    -#          %br
+    -#          = text_area_tag "res_negative_r[]", '', class: 'form-control', placeholder: 'Пояснение к ресурсу'
+    -#      .panel.panel-default
+    -#        .panel-body
+    -#          %span.glyphicon.glyphicon-remove.text-danger.pull-right{onclick: "$(this).parent().parent().remove();", style: "cursor:pointer;text-decoration:none;font-size:15px;"}
+    -#          =autocomplete_field_tag "resor_negative_r[]",'', autocomplete_concept_post_resource_concept_posts_path, :"min-length" => 0,  class: 'form-control autocomplete',placeholder: 'Введите свой ресурс или выберите из списка'
+    -#          %br
+    -#          = text_area_tag "res_negative_r[]", '', class: 'form-control', placeholder: 'Пояснение к ресурсу'
+    -#  %a.btn.btn-warning{onclick:"return add_new_resource_to_concept('negative_r','#{@project.id}');"} Добавить ресурс
+
+  -#.row
+  -#  .col-md-12
+  -#    .text-center
+  -#      %h3.color-orange
+  -#        %b C3.
+  -#        =t('form.negative_s')
+  -#      %br
+  -#
+  -#.row
+  -#  .col-md-6
+  -#    .text-right.hidden-sm
+  -#      %i
+  -#        %h6 Какие средства необходимы для создания ресурсов?
+  -#        %br
+  -#        %h6.color-green Пример:
+  -#
+  -#        %p
+  -#          %b Средства создания:
+  -#
+  -#          деньги на покупку доски объявлений, создание и ведение сайта в Интернет
+  -#
+  -#  .col-md-12
+  -#    .form-group.has-success{:id => "resources_negative_s"}
+  -#      - if @post.persisted?
+  -#        -@post.concept_post_resources.by_type('negative_s').each do |r|
+  -#          .panel.panel-default
+  -#            .panel-body
+  -#              %span.glyphicon.glyphicon-remove.text-danger.pull-right{onclick: "$(this).parent().parent().remove();", style: "cursor:pointer;text-decoration:none;font-size:15px;"}
+  -#              =autocomplete_field_tag "resor_negative_s[]",'', autocomplete_concept_post_mean_concept_posts_path,:append_to => "#mod", :"min-length" => 0, value: r.name,  class: 'form-control autocomplete',placeholder: 'Введите свой ресурс или выберите из списка'
+  -#              %br
+  -#              = text_area_tag "res_negative_s[]", r.desc, class: 'form-control', placeholder: 'Пояснение к ресурсу'
+  -#      - else
+  -#        .panel.panel-default
+  -#          .panel-body
+  -#            %span.glyphicon.glyphicon-remove.text-danger.pull-right{onclick: "$(this).parent().parent().remove();", style: "cursor:pointer;text-decoration:none;font-size:15px;"}
+  -#            =autocomplete_field_tag "resor_negative_s[]",'', autocomplete_concept_post_mean_concept_posts_path,:append_to => "#mod", :"min-length" => 0,  class: 'form-control autocomplete',placeholder: 'Введите свой ресурс или выберите из списка'
+  -#            %br
+  -#            = text_area_tag "res_negative_s[]", '', class: 'form-control', placeholder: 'Пояснение к ресурсу'
+  -#        .panel.panel-default
+  -#          .panel-body
+  -#            %span.glyphicon.glyphicon-remove.text-danger.pull-right{onclick: "$(this).parent().parent().remove();", style: "cursor:pointer;text-decoration:none;font-size:15px;"}
+  -#            =autocomplete_field_tag "resor_negative_s[]",'', autocomplete_concept_post_mean_concept_posts_path,:append_to => "#mod", :"min-length" => 0,  class: 'form-control autocomplete',placeholder: 'Введите свой ресурс или выберите из списка'
+  -#            %br
+  -#            = text_area_tag "res_negative_s[]", '', class: 'form-control', placeholder: 'Пояснение к ресурсу'
+  -#    %a.btn.btn-warning{onclick:"return add_new_resource_to_concept('negative_s','#{@project.id}');"} Добавить ресурс
+
 
   %hr
 
@@ -342,7 +566,9 @@
 
     .col-md-12
       .form-group.has-success
-        =text_area_tag "pa[control]",@pa.control, class: "concept_cond form-control", rows: 5,  style: 'width: 100%;'
+        =text_area_tag "pa[control]",@pa.control, :class => "concept_cond form-control", rows: 5,  style: 'width: 100%;'
+    -if @project.status == 7
+      = render partial: 'concept/posts/note_list', :locals => {:post_field => @concept_post,:type_fd => 7}
 
   .row
     .col-md-12
@@ -351,7 +577,31 @@
           %b D2:
           =t('form.control_res')
         %br
-
+  .row
+    .col-md-12
+      .text-left
+        Вы можете добавлять ресурсы функционирования, описания к ним, а также средства достижения этих ресурсов (с описанием).
+        %br
+        %b Назначения кнопок:
+        .row
+          %span.color-orange Добавить ресурс
+          %span - добавляет поле для нового ресурса
+        .row
+          %span.color-green
+            %i.fa.fa-plus
+            "Добавить средство"
+          %span - добавляет поле для нового средства к ресурсу
+        .row
+          %span.color-orange
+            %i.fa.fa-edit
+            "Добавить описание"
+          %span - добавляет поле описания для соответствующего ресурса или средства
+        .row
+          %span.text-danger
+            %i.fa.fa-trash-o
+            "Удалить ресурс"
+          %span - удаляет соответсвующий ресурс или средство
+        %br
   .row
     -#.col-md-6
     -#  .text-right.hidden-sm
@@ -371,7 +621,7 @@
           -@concept_post.concept_post_resources.by_type('control_r').each_with_index do |r,i|
             %div.main_resources(id="main_control_r_#{i+1}" position="#{i+1}")
               .col-md-10
-                = autocomplete_field_tag "resor_control_r[#{i+1}][name]",'', autocomplete_concept_post_resource_concept_posts_path, :"min-length" => 0,value: r.name,  class: 'form-control autocomplete',placeholder: 'Введите свой ресурс или выберите из списка'
+                = autocomplete_field_tag "resor_control_r[#{i+1}][]",'', autocomplete_concept_post_resource_concept_posts_path, :"min-length" => 0,value: r.name,  class: 'form-control autocomplete',placeholder: 'Введите свой ресурс или выберите из списка'
               .col-md-2
                 .pull-right
                   %button.btn.btn-danger{type: "button",title: "Удалить ресурс", onclick: "$(this).parent().parent().parent().remove();", id: "destroy_res"}
@@ -383,13 +633,13 @@
               %br
               %br
               %div.desc_resource(id="desc_control_r_#{i+1}" position="#{i+1}")
-                = text_area_tag "resor_control_r[#{i+1}][desc]", r.desc, class: 'form-control', placeholder: 'Пояснение к ресурсу'
+                = text_area_tag "res_control_r[#{i+1}][]", r.desc, class: 'form-control', placeholder: 'Пояснение к ресурсу'
                 %br
               %div.col-md-offset-1.col-md-11.means_to_resource(id="means_control_s_#{i+1}")
                 -r.concept_post_resources.by_type('control_s').each_with_index do |res,ind|
                   %div.main_means(id="main_control_s_#{i+1}" position="#{i+1}")
                     .col-md-10
-                      = autocomplete_field_tag "resor_control_r[#{i+1}][sredstva][]",'', autocomplete_concept_post_mean_concept_posts_path, :"min-length" => 0, value: res.name, class: 'form-control autocomplete',placeholder: 'Введите свой ресурс или выберите из списка'
+                      = autocomplete_field_tag "resor_control_s[#{i+1}][]",'', autocomplete_concept_post_mean_concept_posts_path, :"min-length" => 0, value: res.name, class: 'form-control autocomplete',placeholder: 'Введите свой ресурс или выберите из списка'
                     .col-md-2
                       .pull-right
                         %button.btn.btn-danger{type: "button",title: "Удалить ресурс", onclick: "$(this).parent().parent().parent().remove();", id: "destroy_res"}
@@ -399,13 +649,13 @@
                     %br
                     %br
                     %div.desc_mean(id="desc_control_s_#{i+1}" position="#{i+1}")
-                      = text_area_tag "resor_control_s[#{i+1}][sredstva][]", res.desc, class: 'form-control', placeholder: 'Пояснение к ресурсу'
+                      = text_area_tag "res_control_s[#{i+1}][]", res.desc, class: 'form-control', placeholder: 'Пояснение к ресурсу'
                       %br
 
         -else
-          %div.main_resources(id="main_control_r_1" )
+          %div.main_resources(id="main_control_r_1" position="1")
             .col-md-10
-              = autocomplete_field_tag "plan_post_resource[control_r][][name]",'', autocomplete_concept_post_resource_concept_posts_path, :"min-length" => 0,  class: 'form-control autocomplete',placeholder: 'Введите свой ресурс или выберите из списка'
+              = autocomplete_field_tag "resor_control_r[1][]",'', autocomplete_concept_post_resource_concept_posts_path, :"min-length" => 0,  class: 'form-control autocomplete',placeholder: 'Введите свой ресурс или выберите из списка'
             .col-md-2
               .pull-right
                 %button.btn.btn-danger{type: "button",title: "Удалить ресурс", onclick: "$(this).parent().parent().parent().remove();", id: "destroy_res"}
@@ -417,14 +667,12 @@
             %br
             %br
             %div.desc_resource(id="desc_control_r_1" position="1" style="display:none;")
-              = text_area_tag "plan_post_resource[control_r][][desc]", '', class: 'form-control', placeholder: 'Пояснение к ресурсу'
-              %input{name: "plan_post_resource[control_r][][style]", type: "hidden", value: "0"}/
+              = text_area_tag "res_control_r[1][]", '', class: 'form-control', placeholder: 'Пояснение к ресурсу'
               %br
             %div.col-md-offset-1.col-md-11.means_to_resource(id="means_control_s_1")
               %div.main_means(id="main_control_s_1" position="1")
                 .col-md-10
-                  = autocomplete_field_tag "plan_post_resource[control_r][][sredstva][name]",'', autocomplete_concept_post_mean_concept_posts_path, :"min-length" => 0,  class: 'form-control autocomplete',placeholder: 'Введите свой ресурс или выберите из списка'
-                  %input{name: "plan_post_resource[control_r][][sredstva][style]", type: "hidden", value: "1"}/
+                  = autocomplete_field_tag "resor_control_s[1][]",'', autocomplete_concept_post_mean_concept_posts_path, :"min-length" => 0,  class: 'form-control autocomplete',placeholder: 'Введите свой ресурс или выберите из списка'
                 .col-md-2
                   .pull-right
                     %button.btn.btn-danger{type: "button",title: "Удалить ресурс", onclick: "$(this).parent().parent().parent().remove();", id: "destroy_res"}
@@ -434,44 +682,49 @@
                 %br
                 %br
                 %div.desc_mean(id="desc_control_s_1" position="1" style="display:none;")
-                  = text_area_tag "plan_post_resource[control_r][][sredstva][desc]", '', class: 'form-control', placeholder: 'Пояснение к ресурсу'
+                  = text_area_tag "res_control_s[1][]", '', class: 'form-control', placeholder: 'Пояснение к ресурсу'
                   %br
-          %div.main_resources(id="main_control_r_2" )
-            .col-md-10
-              = autocomplete_field_tag "plan_post_resource[control_r][][name]",'', autocomplete_concept_post_resource_concept_posts_path, :"min-length" => 0,  class: 'form-control autocomplete',placeholder: 'Введите свой ресурс или выберите из списка'
-            .col-md-2
-              .pull-right
-                %button.btn.btn-danger{:type => "button",:title => "Удалить ресурс", onclick: "$(this).parent().parent().parent().remove();", id: "destroy_res"}
-                  %i.fa.fa-trash-o
-                %button.btn.btn-warning{:type => "button", :title => "Добавить описание", onclick:"$(this).parent().parent().parent().find('.desc_resource').show();", id: "desc_to_res"}
-                  %i.fa.fa-edit
-                %button.btn.btn-success{:type => "button", :title => "Добавить средство",onclick:"return add_new_mean_to_resource(this,'control_s',#{@project.id});", id: "plus_mean"}
-                  %i.fa.fa-plus
-            %br
-            %br
-            %div.desc_resource(id="desc_control_r_2" position="2" style="display:none;")
-              = text_area_tag "plan_post_resource[control_r][][desc]", '', class: 'form-control', placeholder: 'Пояснение к ресурсу'
-              %input{name: "plan_post_resource[control_r][][style]", type: "hidden", value: "0"}/
-              %br
-            %div.col-md-offset-1.col-md-11.means_to_resource(id="means_control_s_2")
-              %div.main_means(id="main_control_s_2" position="2")
-                .col-md-10
-                  = autocomplete_field_tag "plan_post_resource[control_r][][sredstva][name]",'', autocomplete_concept_post_mean_concept_posts_path, :"min-length" => 0,  class: 'form-control autocomplete',placeholder: 'Введите свой ресурс или выберите из списка'
-                  %input{name: "plan_post_resource[control_r][][sredstva][style]", type: "hidden", value: "1"}/
-                .col-md-2
-                  .pull-right
-                    %button.btn.btn-danger{:type => "button",:title => "Удалить ресурс", onclick: "$(this).parent().parent().parent().remove();", id: "destroy_res"}
-                      %i.fa.fa-trash-o
-                    %button.btn.btn-warning{:type => "button", :title => "Добавить описание", onclick:"$(this).parent().parent().parent().find('.desc_mean').show();", id: "desc_to_res"}
-                      %i.fa.fa-edit
-                %br
-                %br
-                %div.desc_mean(id="desc_control_s_2" position="2" style="display:none;")
-                  = text_area_tag "plan_post_resource[control_r][][sredstva][desc]", '', class: 'form-control', placeholder: 'Пояснение к ресурсу'
-                  %br
+
+      -#    %div.main_resources(id="main_control_r_2" )
+      -#      .col-md-10
+      -#        = autocomplete_field_tag "plan_post_resource[control_r][][name]",'', autocomplete_concept_post_resource_concept_posts_path, :"min-length" => 0,  class: 'form-control autocomplete',placeholder: 'Введите свой ресурс или выберите из списка'
+      -#      .col-md-2
+      -#        .pull-right
+      -#          %button.btn.btn-danger{:type => "button",:title => "Удалить ресурс", onclick: "$(this).parent().parent().parent().remove();", id: "destroy_res"}
+      -#            %i.fa.fa-trash-o
+      -#          %button.btn.btn-warning{:type => "button", :title => "Добавить описание", onclick:"$(this).parent().parent().parent().find('.desc_resource').show();", id: "desc_to_res"}
+      -#            %i.fa.fa-edit
+      -#          %button.btn.btn-success{:type => "button", :title => "Добавить средство",onclick:"return add_new_mean_to_resource(this,'control_s',#{@project.id});", id: "plus_mean"}
+      -#            %i.fa.fa-plus
+      -#      %br
+      -#      %br
+      -#      %div.desc_resource(id="desc_control_r_2" position="2" style="display:none;")
+      -#        = text_area_tag "plan_post_resource[control_r][][desc]", '', class: 'form-control', placeholder: 'Пояснение к ресурсу'
+      -#        %input{name: "plan_post_resource[control_r][][style]", type: "hidden", value: "0"}/
+      -#        %br
+      -#      %div.col-md-offset-1.col-md-11.means_to_resource(id="means_control_s_2")
+      -#        %div.main_means(id="main_control_s_2" position="2")
+      -#          .col-md-10
+      -#            = autocomplete_field_tag "plan_post_resource[control_r][][sredstva][name]",'', autocomplete_concept_post_mean_concept_posts_path, :"min-length" => 0,  class: 'form-control autocomplete',placeholder: 'Введите свой ресурс или выберите из списка'
+      -#            %input{name: "plan_post_resource[control_r][][sredstva][style]", type: "hidden", value: "1"}/
+      -#          .col-md-2
+      -#            .pull-right
+      -#              %button.btn.btn-danger{:type => "button",:title => "Удалить ресурс", onclick: "$(this).parent().parent().parent().remove();", id: "destroy_res"}
+      -#                %i.fa.fa-trash-o
+      -#              %button.btn.btn-warning{:type => "button", :title => "Добавить описание", onclick:"$(this).parent().parent().parent().find('.desc_mean').show();", id: "desc_to_res"}
+      -#                %i.fa.fa-edit
+      -#          %br
+      -#          %br
+      -#          %div.desc_mean(id="desc_control_s_2" position="2" style="display:none;")
+      -#            = text_area_tag "plan_post_resource[control_r][][sredstva][desc]", '', class: 'form-control', placeholder: 'Пояснение к ресурсу'
+      -#            %br
+      -#
+      -#%a.btn.btn-warning.pull-left{onclick:"return add_new_resource_to_concept('control_r','control_s',#{@project.id});", id:"add_control_r"} Добавить ресурс
+
 
       %a.btn.btn-warning.pull-left{onclick:"return add_new_resource_to_concept('control_r','control_s',#{@project.id});", id:"add_control_r"} Добавить ресурс
-
+    -if @project.status == 7
+      = render partial: 'concept/posts/note_list', :locals => {:post_field => @concept_post,:type_fd => 8}
     -#.col-md-12
     -#  .form-group.has-success{:id => "resources_control_r"}
     -#    - if @post.persisted?
@@ -565,7 +818,10 @@
 
     .col-md-12
       .form-group.has-success
-        =text_area_tag "pa[obstacles]",@pa.obstacles, class: "concept_cond form-control", rows: 5,  style: 'width: 100%;'
+        =text_area_tag "pa[obstacles]",@pa.obstacles, :class => "concept_cond form-control", rows: 5,  style: 'width: 100%;'
+    -if @project.status == 7
+      = render partial: 'concept/posts/note_list', :locals => {:post_field => @concept_post,:type_fd => 9}
+
   %hr
   .row
     .col-md-12
@@ -585,8 +841,9 @@
     -#      %p К сожалению, уход за клумбой потребует значительного труда, однако  ввиду ее красоты предлагается на это пойти.
     .col-md-12
       .form-group.has-success
-        =text_area_tag "pa[problems]",@pa.problems, class: "concept_cond form-control", rows: 5,  style: 'width: 100%;'
-
+        =text_area_tag "pa[problems]",@pa.problems, :class => "concept_cond form-control", rows: 5,  style: 'width: 100%;'
+    -if @project.status == 7
+      = render partial: 'concept/posts/note_list', :locals => {:post_field => @concept_post,:type_fd => 10}
   .row
     .col-md-12
       .text-center
@@ -606,8 +863,9 @@
     -#      %p Работника нанять недорого; инструменты и материалы приобрести и организовать полив вполне возможно; жильцы, вероятно, согласятся дать на это деньги.
     .col-md-12
       .form-group.has-success
-        =text_area_tag "pa[reality]",@pa.reality, class: "concept_cond form-control", rows: 5,  style: 'width: 100%;'
-
+        =text_area_tag "pa[reality]",@pa.reality, :class => "concept_cond form-control", rows: 5,  style: 'width: 100%;'
+    -if @project.status == 7
+      = render partial: 'concept/posts/note_list', :locals => {:post_field => @concept_post,:type_fd => 11}
 
   %actions.pull-right
     = f.submit 'Сохранить',  class: 'btn btn-warning btn-lg', id: 'send_post_concept', "data-loading-text" => "Сохранение...", onclick: "$(this).button('loading');"
