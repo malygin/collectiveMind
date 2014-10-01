@@ -1,0 +1,46 @@
+.container
+  #chat_window_1.row.chat-window.col-xs-5.col-md-3{style: 'margin-left:10px;'}
+    .col-xs-12.col-md-12
+      .panel.panel-default
+        .panel-heading.top-bar
+          .col-md-8.col-xs-8
+            %h3.panel-title
+              %span.glyphicon.glyphicon-comment
+              Модераторский чат
+          .col-md-4.col-xs-4{style: 'text-align: right;'}
+            %a{href: '#'}
+              %span#minim_chat_window.glyphicon.glyphicon-minus.icon_minim
+            %a{href: '#'}
+              %span.glyphicon.glyphicon-remove.icon_close{'data-id' => 'chat_window_1'}
+        .panel-body.msg_container_base#chat_history
+          .row.msg_container.base_sent
+            .col-md-10.col-xs-10
+              .messages.msg_sent
+                %p
+                  that mongodb thing looks good, huh?
+                  tiny master db, and huge document store
+                %time{datetime: '2009-11-13T20:00'} Timothy • 51 min
+            .col-md-2.col-xs-2.avatar
+              %img.img-responsive{src: 'http://www.bitrebels.com/wp-content/uploads/2011/02/Original-Facebook-Geek-Profile-Avatar-1.jpg'}/
+          .row.msg_container.base_receive
+            .col-md-2.col-xs-2.avatar
+              %img.img-responsive{src: 'http://www.bitrebels.com/wp-content/uploads/2011/02/Original-Facebook-Geek-Profile-Avatar-1.jpg'}/
+            .col-md-10.col-xs-10
+              .messages.msg_receive
+                %p
+                  that mongodb thing looks good, huh?
+                  tiny master db, and huge document store
+                %time{datetime: '2009-11-13T20:00'} Timothy • 51 min
+        .panel-footer
+          .input-group
+            %input#btn-input.form-control.input-sm.chat_input{placeholder: "Write your message here...", type: "text"}/
+            %span.input-group-btn
+              %button#btn-chat.btn.btn-primary.btn-sm Send
+
+.row.msg_container.base_sent#template_base_sent{style: 'display: none'}
+  .col-md-10.col-xs-10
+    .messages.msg_sent
+      %p
+      %time
+    .col-md-2.col-xs-2.avatar
+      %img.img-responsive
