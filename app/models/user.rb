@@ -68,9 +68,11 @@ class User < ActiveRecord::Base
   has_many :user_awards
   has_many :awards, through: :user_awards
 
+  has_many :moderator_messages
+
   has_many :user_checks, class_name: 'UserCheck'
   scope :check_field, ->(p, c) { where(project: p.id, status: 't', check_field: c) }
-  scope :without_added, ->(users){ where("users.id NOT IN (#{users.join(", ")})") unless users.empty? }
+  scope :without_added, ->(users) { where("users.id NOT IN (#{users.join(", ")})") unless users.empty? }
 
   def current_projects_for_user
     if prime_admin?
@@ -94,9 +96,9 @@ class User < ActiveRecord::Base
 
   # This method associates the attribute ":avatar" with a file attachment
   has_attached_file :avatar, styles: {
-          thumb: '57x74>',
-          normal: '250x295>'
-      }
+                               thumb: '57x74>',
+                               normal: '250x295>'
+                           }
 
   def valid_password?(password)
     begin
