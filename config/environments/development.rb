@@ -32,6 +32,8 @@ CollectiveMind::Application.configure do
   # Raises helpful error messages.
   config.assets.raise_runtime_errors = true
 
+  config.middleware.delete Rack::Lock
+
   config.paperclip_defaults = {
       storage: :s3,
       s3_credentials: {
