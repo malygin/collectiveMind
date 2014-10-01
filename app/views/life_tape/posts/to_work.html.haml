@@ -9,10 +9,10 @@
 
   .carousel-inner
     .item.active
-      %img{alt: '', style: 'margin: auto;', src: '/assets/img/to_work/1a.png'}/
+      = image_tag 'img/to_work/1a.png', style: 'margin: auto;'
     - 2.upto(9) do |index|
       .item
-        %img{alt: '', style: 'margin: auto;', src: "/assets/img/to_work/#{index}a.png"}/
+        = image_tag "img/to_work/#{index}a.png", style: 'margin: auto;'
 
   %a.left.carousel-control{'data-slide' => 'prev', href: '#carousel-example-generic', role: 'button'}
     %span.glyphicon.glyphicon-chevron-left(style='font-size:30px;')
