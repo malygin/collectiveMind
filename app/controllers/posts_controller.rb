@@ -433,7 +433,11 @@ class PostsController < ApplicationController
   def destroy_comment
     @project = Core::Project.find(params[:project])
     @comment = comment_model.find(params[:id])
-    @comment.destroy if @comment.user == current_user or current_user.boss?
+    if @comment.user == current_user or current_user.boss?
+      @comment.destroy
+      #@todo удаление комментариев из ленты
+      Journal.destroy_comment_journal(@project, @comment)
+    end
   end
 
   def set_important

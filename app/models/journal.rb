@@ -38,6 +38,10 @@ class Journal < ActiveRecord::Base
     end
   end
 
+  def self.destroy_comment_journal(project, comment)
+    where(:project_id => project.id, :user_id => comment.user, :second_id => comment.id).destroy_all
+  end
+
   private
     def self.journal_comment_update(project, comment, aspect_old_id, aspect_id)
       journal_comment = self.where(:type_event => 'life_tape_comment_save', :project_id => project.id, :user_id => comment.user, :first_id => aspect_old_id, :second_id => comment.id).first
