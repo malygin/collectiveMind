@@ -16,6 +16,7 @@ $(document).ready ->
     new_message.find('.msg_sent time').append(data['user'] + ' • ' + data['time']);
     new_message.find('.avatar img').attr('src', data['avatar']);
     $('#chat_history').append(new_message.show())
+    $('#chat_history').animate({"scrollTop":$('#chat_history .msg_container:last').height()}, 'slow');
 
   $('#btn-chat').on 'click', ->
     ws.trigger 'incoming_message', {text: $('#btn-input').val()}
