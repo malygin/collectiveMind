@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140904211704) do
+ActiveRecord::Schema.define(:version => 20141002221045) do
 
   create_table "answers", :force => true do |t|
     t.string   "text",        :limit => 700
@@ -72,6 +72,7 @@ ActiveRecord::Schema.define(:version => 20140904211704) do
     t.boolean  "discontent_status"
     t.boolean  "concept_status"
     t.boolean  "discuss_status"
+    t.boolean  "approve_status"
   end
 
   add_index "concept_comments", ["created_at"], :name => "index_concept_comments_on_created_at"
@@ -154,11 +155,21 @@ ActiveRecord::Schema.define(:version => 20140904211704) do
     t.text     "obstacles"
   end
 
+  create_table "concept_post_discontent_complites", :force => true do |t|
+    t.integer  "post_id"
+    t.integer  "discontent_post_id"
+    t.integer  "complite"
+    t.datetime "created_at",         :null => false
+    t.datetime "updated_at",         :null => false
+  end
+
   create_table "concept_post_discontents", :force => true do |t|
     t.integer  "post_id"
     t.integer  "discontent_post_id"
     t.datetime "created_at",         :null => false
     t.datetime "updated_at",         :null => false
+    t.integer  "complite"
+    t.integer  "status"
   end
 
   create_table "concept_post_discussions", :force => true do |t|
@@ -244,6 +255,7 @@ ActiveRecord::Schema.define(:version => 20140904211704) do
     t.boolean  "status_control_r"
     t.boolean  "status_control_s"
     t.boolean  "status_obstacles"
+    t.boolean  "approve_status"
   end
 
   add_index "concept_posts", ["created_at"], :name => "index_concept_posts_on_created_at"
@@ -388,6 +400,7 @@ ActiveRecord::Schema.define(:version => 20140904211704) do
     t.boolean  "concept_status"
     t.boolean  "discuss_status"
     t.boolean  "useful"
+    t.boolean  "approve_status"
   end
 
   create_table "discontent_notes", :force => true do |t|
@@ -480,6 +493,7 @@ ActiveRecord::Schema.define(:version => 20140904211704) do
     t.integer  "improve_stage"
     t.boolean  "discuss_status"
     t.boolean  "useful"
+    t.boolean  "approve_status"
   end
 
   add_index "discontent_posts", ["aspect_id"], :name => "index_discontent_posts_on_aspect_id"
@@ -519,6 +533,7 @@ ActiveRecord::Schema.define(:version => 20140904211704) do
     t.boolean  "concept_status"
     t.boolean  "discuss_status"
     t.boolean  "useful"
+    t.boolean  "approve_status"
   end
 
   add_index "essay_comments", ["post_id"], :name => "index_essay_comments_on_post_id"
@@ -539,15 +554,16 @@ ActiveRecord::Schema.define(:version => 20140904211704) do
     t.text     "content"
     t.integer  "status"
     t.integer  "stage"
-    t.datetime "created_at",                      :null => false
-    t.datetime "updated_at",                      :null => false
-    t.integer  "number_views", :default => 0
-    t.boolean  "censored",     :default => false
+    t.datetime "created_at",                        :null => false
+    t.datetime "updated_at",                        :null => false
+    t.integer  "number_views",   :default => 0
+    t.boolean  "censored",       :default => false
     t.text     "negative"
     t.text     "positive"
     t.text     "change"
     t.text     "reaction"
     t.boolean  "useful"
+    t.boolean  "approve_status"
   end
 
   create_table "estimate_comment_votings", :force => true do |t|
@@ -572,6 +588,7 @@ ActiveRecord::Schema.define(:version => 20140904211704) do
     t.boolean  "concept_status"
     t.boolean  "discuss_status"
     t.boolean  "useful"
+    t.boolean  "approve_status"
   end
 
   add_index "estimate_comments", ["post_id"], :name => "index_estimate_comments_on_post_id"
@@ -677,8 +694,8 @@ ActiveRecord::Schema.define(:version => 20140904211704) do
     t.integer  "nepr3"
     t.integer  "nepr4"
     t.text     "nepr"
-    t.datetime "created_at",                      :null => false
-    t.datetime "updated_at",                      :null => false
+    t.datetime "created_at",                        :null => false
+    t.datetime "updated_at",                        :null => false
     t.integer  "status"
     t.integer  "project_id"
     t.integer  "imp"
@@ -688,9 +705,10 @@ ActiveRecord::Schema.define(:version => 20140904211704) do
     t.integer  "nep4"
     t.text     "nep"
     t.integer  "all_grade"
-    t.integer  "number_views", :default => 0
-    t.boolean  "censored",     :default => false
+    t.integer  "number_views",   :default => 0
+    t.boolean  "censored",       :default => false
     t.boolean  "useful"
+    t.boolean  "approve_status"
   end
 
   add_index "estimate_posts", ["created_at"], :name => "index_estimate_posts_on_created_at"
@@ -942,6 +960,7 @@ ActiveRecord::Schema.define(:version => 20140904211704) do
     t.boolean  "concept_status"
     t.boolean  "discuss_status"
     t.boolean  "useful"
+    t.boolean  "approve_status"
   end
 
   add_index "life_tape_comments", ["created_at"], :name => "index_life_tape_comments_on_created_at"
@@ -1023,6 +1042,7 @@ ActiveRecord::Schema.define(:version => 20140904211704) do
     t.boolean  "concept_status"
     t.boolean  "discuss_status"
     t.boolean  "useful"
+    t.boolean  "approve_status"
   end
 
   add_index "plan_comments", ["post_id"], :name => "index_plan_comments_on_post_id"
@@ -1169,6 +1189,7 @@ ActiveRecord::Schema.define(:version => 20140904211704) do
     t.string   "name"
     t.integer  "estimate_status"
     t.boolean  "useful"
+    t.boolean  "approve_status"
   end
 
   add_index "plan_posts", ["created_at"], :name => "index_plan_posts_on_created_at"

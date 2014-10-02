@@ -139,6 +139,7 @@ class PostsController < ApplicationController
     @comment.toggle!(:discontent_status) if params[:discontent]
     @comment.toggle!(:concept_status) if params[:concept]
     @comment.toggle!(:discuss_status) if params[:discuss_status]
+    @comment.toggle!(:approve_status) if params[:approve_status]
     if @comment.discuss_status
       current_user.journals.build(:type_event=>name_of_comment_for_param+'_discuss_stat', :project => @project,
                                   :body=>"#{trim_content(@comment.content)}", :body2=>trim_content(field_for_journal(@post)),
@@ -151,6 +152,19 @@ class PostsController < ApplicationController
                                     :personal=> true, :viewed=> false).save!
       end
     end
+    if @comment.approve_status
+      current_user.journals.build(:type_event=>name_of_comment_for_param+'_approve_status', :project => @project,
+                                  :body=>"#{trim_content(@comment.content)}", :body2=>trim_content(field_for_journal(@post)),
+                                  :first_id=> (@post.instance_of? LifeTape::Post) ? @post.discontent_aspects.first.id : @post.id, :second_id => @comment.id).save!
+
+      if @comment.user!=current_user
+        current_user.journals.build(:type_event=>'my_'+name_of_comment_for_param+'_approve_status', :user_informed => @comment.user, :project => @project,
+                                    :body=>"#{trim_content(@comment.content)}", :body2=>trim_content(field_for_journal(@post)),
+                                    :first_id=> (@post.instance_of? LifeTape::Post) ? @post.discontent_aspects.first.id : @post.id, :second_id => @comment.id,
+                                    :personal=> true, :viewed=> false).save!
+      end
+    end
+
     respond_to do |format|
       format.js
     end
@@ -162,10 +176,21 @@ class PostsController < ApplicationController
       @post.toggle!(:discuss_status)
       if @post.discuss_status
         current_user.journals.build(:type_event=>name_of_model_for_param+'_discuss_stat', :project => @project,
-                                  :body=>"#{trim_content(@post.content)}", :first_id=> @post.id).save!
+                                  :body=>"#{trim_content(field_for_journal(@post))}", :first_id=> @post.id).save!
         if @post.user!=current_user
           current_user.journals.build(:type_event=>'my_'+name_of_model_for_param+'_discuss_stat', :user_informed => @post.user, :project => @project,
-                                      :body=>"#{trim_content(@post.content)}", :first_id=> @post.id, :personal=> true, :viewed=> false).save!
+                                      :body=>"#{trim_content(field_for_journal(@post))}", :first_id=> @post.id, :personal=> true, :viewed=> false).save!
+        end
+      end
+    end
+    if params[:approve_status]
+      @post.toggle!(:approve_status)
+      if @post.approve_status
+        current_user.journals.build(:type_event=>name_of_model_for_param+'_approve_status', :project => @project,
+                                    :body=>"#{trim_content(field_for_journal(@post))}", :first_id=> @post.id).save!
+        if @post.user!=current_user
+          current_user.journals.build(:type_event=>'my_'+name_of_model_for_param+'_approve_status', :user_informed => @post.user, :project => @project,
+                                      :body=>"#{trim_content(field_for_journal(@post))}", :first_id=> @post.id, :personal=> true, :viewed=> false).save!
         end
       end
     end

@@ -10,9 +10,15 @@
         .pull-right
           =link_to({:controller => post_short.class.name.underscore.pluralize, :action => :discuss_status, :id => post_short.id, :discuss_status => 1},  :remote => true, :method => :put,  id: "discuss_stat_post_#{post_short.id}") do
             %span.label(class="#{label_discuss_stat(post_short)}") ТРЕБУЕТ ОБСУЖДЕНИЯ
-      - elsif post_short.discuss_status
+          =link_to({:controller => post_short.class.name.underscore.pluralize, :action => :discuss_status, :id => post_short.id, :approve_status => 1},  :remote => true, :method => :put,  id: "approve_stat_post_#{post_short.id}") do
+            %span.label(class="#{label_approve_stat(post_short)}") ВАЖНОЕ
+      - else
         .pull-right
-          %span.label.label-warning ТРЕБУЕТ ОБСУЖДЕНИЯ
+          -if post_short.discuss_status
+            %span.label-danger ТРЕБУЕТ ОБСУЖДЕНИЯ
+          -elsif post_short.approve_status
+            %span.label-success ВАЖНОЕ
+
     =discontent_style_name(post_short.style)
     .comment.dis-comment
       = render partial: '/discontent/posts/post_content', object: post_short

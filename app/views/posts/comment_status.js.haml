@@ -5,6 +5,7 @@
 -if params[:discuss_status]
   $('#discuss_stat_comment_#{@comment.id} span').toggleClass('label-default label-danger')
   $('#comment_content_#{@comment.id}').toggleClass('discuss_comment')
-
+-if params[:approve_status]
+  $('#approve_stat_comment_#{@comment.id} span').toggleClass('label-default label-success')
 
 

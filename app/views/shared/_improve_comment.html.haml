@@ -16,8 +16,13 @@
         - if boss? or role_expert?
           =link_to({:controller => improve_comment.post.class.name.underscore.pluralize, :action => :comment_status, :id => improve_comment.post.id, :comment_id => improve_comment.id, :discuss_status => 1, :comment_stage => get_stage_for_improve(improve_comment.get_class)},  :remote => true, :method => :put,  id: "discuss_stat_comment_#{improve_comment.id}") do
             %span.label(class="#{label_discuss_stat(improve_comment)}") ТРЕБУЕТ ОБСУЖДЕНИЯ
-        - elsif improve_comment.discuss_status
-          %span.label-danger ТРЕБУЕТ ОБСУЖДЕНИЯ
+          =link_to({:controller => improve_comment.controller_name_for_action, :action => :comment_status, :id => improve_comment.post.id, :comment_id => improve_comment.id, :approve_status => 1, :comment_stage => get_stage_for_improve(improve_comment.get_class)},  :remote => true, :method => :put,  id: "approve_stat_comment_#{improve_comment.id}") do
+            %span.label(class="#{label_approve_stat(improve_comment)}") ВАЖНОЕ
+        - else
+          -if improve_comment.discuss_status
+            %span.label-danger ТРЕБУЕТ ОБСУЖДЕНИЯ
+          -elsif improve_comment.approve_status
+            %span.label-success ВАЖНОЕ
 
     .text
       %div{id: "comment_text_#{improve_comment.id}"}

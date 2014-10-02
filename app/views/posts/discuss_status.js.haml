@@ -1,7 +1,6 @@
--if @post and params[:discuss_status]
-  -if @post.class.name.deconstantize == "Discontent"
+-if @post and ["Discontent","Concept"].include? @post.class.name.deconstantize
+  -if params[:discuss_status]
     $('#discuss_stat_post_#{@post.id} span').toggleClass('label-default label-danger')
     $('#post_#{@post.id}').toggleClass('discuss_comment')
-  -elsif @post.class.name.deconstantize == "Concept"
-    $('#discuss_stat_post_#{@post.id} span').toggleClass('label-default label-danger')
-    $('#post_#{@post.id}').toggleClass('discuss_comment')
+  -elsif params[:approve_status]
+    $('#approve_stat_post_#{@post.id} span').toggleClass('label-default label-success')

@@ -368,6 +368,16 @@ module ApplicationHelper
         'label-default'
     end
   end
+  def label_approve_stat(comment)
+    case comment.approve_status
+      when false
+        'label-default'
+      when true
+        'label-success'
+      else
+        'label-default'
+    end
+  end
   def get_class_for_improve(stage)
     case stage
       when 1
