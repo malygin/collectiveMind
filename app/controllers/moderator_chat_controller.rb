@@ -10,11 +10,12 @@ class ModeratorChatController < WebsocketRails::BaseController
   end
 
   def incoming_message
-    moderator_message = @current_user.moderator_messages.create message: message[:text]
-    broadcast_message :new_message, {user: "#{@current_user.name} #{@current_user.surname}",
-                                     avatar: @current_user.avatar(:thumb), text: moderator_message.message,
-                                     id: moderator_message.id,
-                                     time: Russian::strftime(moderator_message.created_at, '%k:%M:%S')}
+    # moderator_message = @current_user.moderator_messages.create message: message[:text]
+    # broadcast_message :new_message, {user: "#{@current_user.name} #{@current_user.surname}",
+    #                                  avatar: @current_user.avatar(:thumb), text: moderator_message.message,
+    #                                  id: moderator_message.id,
+    #                                  time: Russian::strftime(moderator_message.created_at, '%k:%M:%S')}
+    broadcast_message :new_message, {text: message[:text]}
   end
 
   def user_disconnected
@@ -22,8 +23,9 @@ class ModeratorChatController < WebsocketRails::BaseController
   end
 
   def authorize_channels
-    if @current_user.admin?
-      accept_channel @current_user
+    session.inspect
+    if true
+      accept_channel
     else
       deny_channel
     end

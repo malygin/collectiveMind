@@ -1,5 +1,5 @@
 $(document).ready ->
-  ws = new WebSocketRails(window.document.location.host + '/websocket')
+  ws = new WebSocketRails('localhost:3001/websocket')#window.document.location.host + ':3001/websocket')
   ws.on_open = ->
     console.log 'socket opened'
 
