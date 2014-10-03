@@ -34,7 +34,8 @@ module JournalHelper
 
           'award_100points',   'award_500points', 'award_1000points', 'award_3000points'
         'fa fa-trophy '
-
+      when 'life_tape_comment_discuss_stat', 'life_tape_comment_approve_status'
+          'fa color-teal  fa-exclamation'
       when 'essay_post_save'
         'fa fa-plus'
       when 'essay_post_update'
