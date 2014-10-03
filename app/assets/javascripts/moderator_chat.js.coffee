@@ -2,6 +2,8 @@ $(document).ready ->
   ws = new WebSocketRails(document.location.hostname + ':3001/websocket')
   ws.on_open = ->
     console.log 'socket opened'
+  ws.on_failure = ->
+    console.log 'socket open error'
 
   private_channel = ws.subscribe_private('moderator_chat')
   private_channel.on_success = ->
