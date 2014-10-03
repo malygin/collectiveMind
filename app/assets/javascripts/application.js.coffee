@@ -75,8 +75,8 @@ $ ->
 
   $('.carousel').carousel
     interval: 4000,
-    pause: "hover",
-    wrap: false
+    pause: "hover"
+#    wrap: false
 
   $('.datepicker').datepicker(
     format: 'yyyy-mm-dd'

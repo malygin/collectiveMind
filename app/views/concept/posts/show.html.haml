@@ -316,7 +316,7 @@
         .col-md-6
           %section
             .body
-              %p Комментарии к нововведению
+              %p=t('show.comments_concept')
               .text-center= will_paginate @comments
               .chat-messages
                 = render partial:'shared/comment',collection:@comments

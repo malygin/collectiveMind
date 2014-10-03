@@ -4,12 +4,12 @@
       .modal-header
         %button.close{'aria-hidden' => 'true', 'data-dismiss' => 'modal', type: 'button'} ×
       .modal-body
-        %h3.text-center.color-green  Ваше несовершенство добавлено! Вы можете добавить еще одно или перейти к просмотру списка несовершенств.
+        %h3.text-center.color-green=t('form.create_success')
         %hr
         .text-center
           .col-md-6
-            %a.btn.btn-lg.btn-primary(data-dismiss="modal") Добавить еще одно
+            %a.btn.btn-lg.btn-primary(data-dismiss="modal")=t('form.create_more')
           .col-md-6
-            = link_to 'Перейти к списку', "/project/#{@project.id}/discontent/posts?asp=#{@aspect_id}", class: 'btn btn-lg btn-success'
+            = link_to t('link.go_list'), "/project/#{@project.id}/discontent/posts?asp=#{@aspect_id}", class: 'btn btn-lg btn-success'
         %br
         %br

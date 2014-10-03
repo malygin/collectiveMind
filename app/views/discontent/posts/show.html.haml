@@ -34,7 +34,7 @@
       %br
       - if boss?
         .text-success#dispost_success(style='display:none;')
-          Несовершенство успешно добавлено
+          =t('show.add_group_success')
         =select_tag 'selectize_discontent',
         options_from_collection_for_select(Discontent::Post.for_union(@project.id), 'id', 'show_content'),
         class: 'selectized',

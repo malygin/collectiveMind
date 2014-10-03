@@ -1,12 +1,12 @@
 .row
   .col-md-12
     %h3
-      2 этап: Сбор несовершенств. Голосование
+      =t('voting.second_title')
       %br
 
 %section
   %header
-    %h4 Определение наиболее важных проблем:
+    %h4=t('voting.imp_aspects')
   .body
     %span Несовершенство:
     %span#prog_now=@votes != @post_all ? @votes+1 : @votes
@@ -18,9 +18,9 @@
     -@posts.each do |post|
       =render partial: 'post_for_vote', object: post
     #vote_success.text-internal.text-center(style="display:none;" )
-      %h3 Спасибо за участие в голосовании!
+      %h3=t('voting.thanks')
       .col-md-6
-        =link_to "Перейти к рефлексии", new_essay_post_path(@project, 2),class: "btn btn-lg btn-success"
+        =link_to t('show.go_reflec'), new_essay_post_path(@project, 2),class: "btn btn-lg btn-success"
       .col-md-6
         =link_to "Перейти к списку несовершенств", discontent_posts_path(@project),class: "btn btn-lg btn-primary"
       %br

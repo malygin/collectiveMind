@@ -3,7 +3,7 @@
     .modal-content
       .modal-header
         %button.close{'aria-hidden' => 'true', 'data-dismiss' => 'modal', type: 'button'} ×
-        %h4.modal-title Добавление новой темы
+        %h4.modal-title=t('form.discontent_aspect')
       .modal-body
         %br
         = form_for aspect, url: {project: @project.id,  action: aspect.persisted? ? 'update' : 'create'}, remote: aspect.persisted? ? true : false do |f|

@@ -79,10 +79,10 @@
                   %br
                   %label.radio-inline
                     = f.radio_button :style, '1', checked: 'checked'
-                    %span.label.label-danger Имеющиеся недостатки
+                    %span.label.label-danger=t('form.style_negative')
                   %label.radio-inline
                     = f.radio_button :style, '0'
-                    %span.label.label-success Отсутствующие достоинства
+                    %span.label.label-success=t('form.style_positive')
 
             %br
             %button#send_post.btn.btn-primary.pull-right(type="submit" onclick='disontent_form_submit();'){class: ('disabled' unless @post_group.content?)} Сохранить

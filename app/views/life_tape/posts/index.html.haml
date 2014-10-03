@@ -5,7 +5,7 @@
 -#.body.tab-content
 - if boss? or (signed_in? and @project.demo?)
   %br
-  = link_to '+ Добавить новую тему', new_discontent_aspect_path(@project), remote: true, id: 'new_aspect', class: 'btn btn-primary'
+  = link_to t('link.new_aspect'), new_discontent_aspect_path(@project), remote: true, id: 'new_aspect', class: 'btn btn-primary'
 
 %h3.text-lifetape
   - if @aspect

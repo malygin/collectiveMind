@@ -22,7 +22,7 @@
     = render '/shared/post_social_bar2', post: post_short
     - if boss? and @project.status == 4
       %div(style="display:none;" id="add_group_success_#{post_short.id}")
-        .color-green Несовершенство успешно добавлено в группу
+        .color-green=t('show.add_group')
       %div.color-red{id: "add_disgroup_#{post_short.id}"}
         - if post_short.status == 1 and !post_short.discontent_post.nil?
           Добавлено в группу

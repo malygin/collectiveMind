@@ -20,8 +20,8 @@
               %section
                 .body
                   .pull-right
-                    = link_to '+ Добавить новую группу', discontent_posts_new_group_path(@project, asp: params[:asp]) ,remote: true, id: 'add_record',  class: 'btn btn-danger'
-                  %h4 Группы несовершенств
+                    = link_to t('show.add_new_group'), discontent_posts_new_group_path(@project, asp: params[:asp]) ,remote: true, id: 'add_record',  class: 'btn btn-danger'
+                  %h4=t('show.group_discontents')
                   %ul.news-list#panel_union_group
                     - @aspect.aspect_posts.by_status(2).created_order.each do |post|
                       %li{id: "post_union_#{post.id}"}
@@ -30,7 +30,7 @@
             .col-md-6
               %section
                 .body
-                  %h4 Несовершенства
+                  %h4=t('show.discontents')
                   %ul.news-list
                     =render partial:'post_short', collection: @aspect.aspect_posts.by_status([0,1]).sort_by{|c| c.discontent_post.nil? ? 0 : 1}
 
@@ -52,7 +52,7 @@
         - if boss? and @project.status == 7
           .pull-right
             = link_to '+ Добавить обязательное несовершенство', new_discontent_post_path(@project, asp: params[:asp], required: true) , id: 'add_record',  class: 'btn btn-danger'
-        %h4 Несовершенства
+        %h4=t('show.discontents')
 
         %ul.news-list
           =render partial:'post_short', collection: @aspect.aspect_posts.by_status_for_discontent(@project) if @aspect
@@ -60,6 +60,6 @@
   .col-md-6
     %section
       .body
-        %h4 Неоформленные проблемы
+        %h4=t('show.improve_discontents')
         .chat-messages
           = render partial: 'shared/improve_comment',collection: @comments_all

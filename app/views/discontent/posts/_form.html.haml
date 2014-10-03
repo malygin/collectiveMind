@@ -1,4 +1,4 @@
-%h3.text-center Форма добавления несовершенства
+%h3.text-center=t('form.name')
 = form_for @post, url: {project: @project.id,improve_comment: params[:improve_comment], improve_stage: params[:improve_stage], required: params[:required], action: @post.persisted? ? 'update' : 'create'}, remote: true, html: {id: 'new_discontent'} do |f|
   #notice_messages
   -#-if @post.errors.any?
@@ -11,7 +11,7 @@
     .col-md-12
       .text-center
         .h4
-          Что вас не устраивает?
+          =t('form.field_what')
         %br
 
   .row
@@ -36,7 +36,7 @@
     .col-md-12
       .text-center
         .h4
-          Где это происходит?
+          =t('form.field_where')
         %br
   .row
     .col-md-6
@@ -58,7 +58,7 @@
     .col-md-12
       .text-center
         .h4
-          Когда это происходит?
+          =t('form.field_when')
         %br
   .row
     .col-md-6
@@ -78,7 +78,7 @@
     .col-md-6
       %br
       %h5.text-right
-        %b К какой теме относится  несовершенство?
+        %b=t('form.select_aspect')
       %br
       %br
     .com-md-6
@@ -104,13 +104,13 @@
   .row
     .col-md-12
       .form-group.text-center
-        %b  Выберите тип несовершенства
+        %b=t('form.select_style')
         %label.radio-inline
           = f.radio_button :style, '1', checked: 'checked'
-          %span.label.label-danger Имеющиеся недостатки
+          %span.label.label-danger=t('form.style_negative')
         %label.radio-inline
           = f.radio_button :style, '0'
-          %span.label.label-success Отсутствующие достоинства
+          %span.label.label-success=t('form.style_positive')
 
   %br
   %hr

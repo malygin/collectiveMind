@@ -1,10 +1,8 @@
-%h3 Голосование за нововведения
+%h3=t('voting.concept')
 %section
   %header
     %h5
-      Выберите
-      %b одно из двух
-      нововведений, которое на Ваш взгляд является лучшим решением поставленной проблемы
+      =t('voting.select_concept')
   .body
     %span Пара:
     %span#prog_now=@votes
@@ -21,7 +19,7 @@
       %section
         .body
           .text-center
-            %h3 Спасибо за участие в голосовании!
+            %h3=t('voting.thanks')
             .col-md-6
               =link_to "Перейти к рефлексии", new_essay_post_path(@project, 3),class: "btn btn-lg btn-success"
             .col-md-6
