@@ -10,8 +10,8 @@
         %br
         %h3="Достижения (#{@user.awards.for_project(@project).count} из 22)"
         %br
-        -@awards.each do |a|
-          =image_tag('/assets/awards/'+a.url+'_70_70.png', title: a.name, class: "#{'disabled_award' if not @user.awards.for_project(@project).include? a}")
+        - @awards.each do |a|
+          = image_tag('awards/'+a.url+'_70_70.png', title: a.name, class: "#{'disabled_award' if not @user.awards.for_project(@project).include? a}")
       .col-md-8
         .row
           .col-md-9
@@ -117,5 +117,3 @@
                     =cp.post_aspects.first.title if cp.post_aspects.first
                     =link_to 'подробнее', concept_post_path(@project, cp)
                     = render 'shared/post_social_bar2', post:cp
-
-
