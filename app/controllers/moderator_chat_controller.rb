@@ -15,7 +15,7 @@ class ModeratorChatController < WebsocketRails::BaseController
     #                                  avatar: @current_user.avatar(:thumb), text: moderator_message.message,
     #                                  id: moderator_message.id,
     #                                  time: Russian::strftime(moderator_message.created_at, '%k:%M:%S')}
-    broadcast_message :new_message, {text: message[:text]}
+    broadcast_message :new_message, {text: message[:text], id: (1 + Random.rand(9999))}
   end
 
   def user_disconnected

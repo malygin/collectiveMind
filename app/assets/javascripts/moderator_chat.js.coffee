@@ -11,16 +11,19 @@ $(document).ready ->
 
   ws.bind 'new_message', (data) ->
     console.log data
-    new_message = $('#template_base_sent').clone().prop({id: 'message_' + data['id']});
+    new_message_id = 'message_' + data['id']
+    new_message = $('#template_base_sent').clone().prop({id: new_message_id});
     new_message.find('.msg_sent p').append(data['text']);
     new_message.find('.msg_sent time').append(data['user'] + ' • ' + data['time']);
     new_message.find('.avatar img').attr('src', data['avatar']);
     $('#chat_history').append(new_message.show())
-    $('#chat_history').animate({"scrollTop":$('#chat_history .msg_container:last').height()}, 'slow');
+    $("#chat_history").animate({scrollTop: $('#' + new_message_id).position().top}, 'slow');
 
-  $('#btn-chat').on 'click', ->
-    ws.trigger 'incoming_message', {text: $('#btn-input').val()}
-    $('#btn-input').val('')
+  $("input").keypress (event) ->
+    if (event.which == 13)
+      event.preventDefault()
+      ws.trigger 'incoming_message', {text: $('#btn-input').val()}
+      $('#btn-input').val('')
 
 $(document).on "click", ".panel-heading span.icon_minim", (e) ->
   $this = $(this)
