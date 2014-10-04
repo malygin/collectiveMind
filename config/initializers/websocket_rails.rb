@@ -17,7 +17,6 @@ WebsocketRails.setup do |config|
   # * Requires Redis
   config.standalone = true
 
-  config.redis_options = {host: 'localhost', port: '6379'}
   if ENV['REDISCLOUD_URL']
     uri = URI.parse(ENV['REDISCLOUD_URL'])
     config.redis_options = {host: uri.host, port: uri.port, user: uri.user, password: uri.password}
