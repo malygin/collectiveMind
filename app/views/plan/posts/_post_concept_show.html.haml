@@ -136,7 +136,7 @@
 
 %h4.color-orange.text-center
   %b D2.
-  =t('form.control_res')
+  =t('form.concept.control_res')
   -if boss? and @project.status == 9
     =link_to({controller: 'plan/posts', action: :new_note, id: @post.id, con_id:post_concept_show.id, type_field: 10},remote: true,method: :put, id: "btn_note_10", class: "note_text") do
       .label.label-danger=t('show.note')

@@ -1,3 +1,3 @@
 $('#panel_union_group').append("<li>#{escape_javascript(render partial: 'post', object: @post_group)}</li>");
-$('.discontents_group_select').html("#{escape_javascript(select_tag 'select_for_discontents_group', options_from_collection_for_select(@accepted_posts, "id", "content"), prompt: t('form.select_aspect_prompt'), onchange: "select_for_discontents_group(this,#{@project.id},$(this).parent().attr('post'));")}");
+$('.discontents_group_select').html("#{escape_javascript(select_tag 'select_for_discontents_group', options_from_collection_for_select(@accepted_posts, "id", "content"), prompt: t('form.discontent.select_aspect_prompt'), onchange: "select_for_discontents_group(this,#{@project.id},$(this).parent().attr('post'));")}");
 $('#modal_group_discontent').modal('hide');

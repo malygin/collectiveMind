@@ -30,5 +30,5 @@
       .discontents_group_select{:post => "#{post_short.id}"}
         -if @accepted_posts
           = select_tag 'select_for_discontents_group', options_from_collection_for_select(@accepted_posts, "id", "content"),
-          :prompt => t('form.select_aspect_prompt'), :onchange => "select_for_discontents_group(this,#{@project.id},#{post_short.id});", :class => "form-control"
+          :prompt => t('form.discontent.select_aspect_prompt'), :onchange => "select_for_discontents_group(this,#{@project.id},#{post_short.id});", :class => "form-control"
 

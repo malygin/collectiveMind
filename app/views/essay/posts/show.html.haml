@@ -20,27 +20,27 @@
       .col-md-6
         %section
           .body
-            %span(class="#{color_stage(@stage.to_i)}")  1. Какие недостатки вы заметили в процедуре, в вашей работе, а также в работе других участников, модераторов и жюри?
+            %span(class="#{color_stage(@stage.to_i)}")="1. #{t('form.essay.content')}"
             .form-group
               =simple_format(@post.content)
 
-            %span(class="#{color_stage(@stage.to_i)}") 2. Какие достоинства отсутствовали в этой работе?
+            %span(class="#{color_stage(@stage.to_i)}")="2. #{t('form.essay.positive')}"
             .form-group
               =simple_format(@post.positive)
 
-            %span(class="#{color_stage(@stage.to_i)}")  3. Что и как можно было бы изменить?
+            %span(class="#{color_stage(@stage.to_i)}")="3. #{t('form.essay.change')}"
             .form-group
               =simple_format(@post.change)
 
             -if @stage.to_i > 1 and @project.status > 2
-              %span(class="#{color_stage(@stage.to_i)}") 4. Что уже изменилось к лучшему в результате реакции на рефлексию?
+              %span(class="#{color_stage(@stage.to_i)}")="4. #{t('form.essay.reaction')}"
               .form-group
                 =simple_format(@post.reaction)
 
       .col-md-6
         %section
           .body
-            %p Комментарии к рефлексии
+            %p=t('show.essay.comment')
             .text-center= will_paginate @comments
             .chat-messages
               = render partial: 'shared/comment',collection: @comments
@@ -50,4 +50,4 @@
 %br
 = render partial: 'post_edit_essay', object: @post
 %br
-= link_to 'К списку', essay_posts_path(@project, @stage)
+= link_to t('link.back'), essay_posts_path(@project, @stage)

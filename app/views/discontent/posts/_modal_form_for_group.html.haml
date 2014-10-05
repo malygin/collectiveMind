@@ -3,7 +3,7 @@
     .modal-content
       .modal-header
         %button.close{'aria-hidden' => 'true', 'data-dismiss' => 'modal', type: 'button'} ×
-        %h3#myModalLabel.modal-title=t('form.discontent.group.title')
+        %h3#myModalLabel.modal-title=t('form.discontent.group')
       .modal-body
         = form_for  @post_group, url: {project: @project.id,id: @post_group, action: @post_group.persisted? ? 'update_group' : 'create_group'}, remote: true, method: :put, html: {id: 'new_discontent'} do |f|
           .col-md-12

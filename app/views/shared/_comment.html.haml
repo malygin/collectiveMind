@@ -29,7 +29,7 @@
           -if comment.get_class == "LifeTape" and boss? and comment.main_comment?
             \|
             = select_tag 'select_for_aspects_comments', options_from_collection_for_select(@aspects, "id", "content"),
-            prompt: t('form.select_aspect_prompt'), onchange: "select_for_aspects_comments(this,#{@project.id},#{comment.id});"
+            prompt: t('form.discontent.select_aspect_prompt'), onchange: "select_for_aspects_comments(this,#{@project.id},#{comment.id});"
 
       .pull-right
         -if comment.main_comment?
