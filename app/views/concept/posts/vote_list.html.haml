@@ -1,10 +1,10 @@
-%h3=t('voting.concept')
+%h3=t('voting.concept.title')
 %section
   %header
     %h5
-      =t('voting.select_concept')
+      =t('voting.concept.select')
   .body
-    %span Пара:
+    %span=t('voting.concept.pair')
     %span#prog_now=@votes
     из
     %span#prog_all=@post_all
@@ -21,9 +21,9 @@
           .text-center
             %h3=t('voting.thanks')
             .col-md-6
-              =link_to "Перейти к рефлексии", new_essay_post_path(@project, 3),class: "btn btn-lg btn-success"
+              =link_to t('voting.go_reflection'), new_essay_post_path(@project, 3), class: "btn btn-lg btn-success"
             .col-md-6
-              =link_to "Перейти к списку нововведений", concept_posts_path(@project),class: "btn btn-lg btn-primary"
+              =link_to t('voting.concept.go_list'), concept_posts_path(@project), class: "btn btn-lg btn-primary"
           %br
           %br
     .row

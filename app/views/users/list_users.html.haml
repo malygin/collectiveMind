@@ -1,11 +1,11 @@
 =link_to list_projects_path do
   %span.fa.fa-angle-double-left
-  вернуться к списку процедур
+  =t('show.back_list_proc')
 
-%h3 Выберите участников для закрытой процедуры
+%h3=t('show.user.select_users')
 %h2= @project.name
 %br
-=text_field_tag "search_users_text",'', style: 'width: 100%; height: 30px', placeholder:'Введите имя или email пользователя и нажмите Enter'
+=text_field_tag "search_users_text",'', style: 'width: 100%; height: 30px', placeholder: t('show.user.searsh_users_promt')
 %section
   .body
     %ul.nav.nav-tabs#tab_users
@@ -13,13 +13,13 @@
         -#%a{:href => "#others_users", "data-toggle" => "tab"}
         -#  Пользователи #{@users.size}
         =link_to "/project/#{@project.id}/users/list_users?others=true", remote: true, "data-toggle" => "tab", :role => "tab" do
-          %span Пользователи
+          %span=t('show.user.others')
           %span#search_count
       %li#added
         -#%a{:href => "#added_users", "data-toggle" => "tab"}
         -#  Добавленные #{@added_users.size}
         =link_to "/project/#{@project.id}/users/list_users?added=true", remote: true, "data-toggle" => "tab", :role => "tab" do
-          %span Добавленные
+          %span=t('show.user.added')
           %span#added_count=@added_users.size
     -#%br
     -#%br
@@ -36,4 +36,4 @@
 %br
 =link_to list_projects_path do
   %span.fa.fa-angle-double-left
-  вернуться к процедуре
+  =t('link.back_proc')

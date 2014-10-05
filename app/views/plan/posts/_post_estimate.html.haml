@@ -6,7 +6,7 @@
     .col-md-8
       %span=post_estimate.name
       %span
-        =link_to 'подробнее', plan_post_path(@project, post_estimate)
+        =link_to t('link.more'), plan_post_path(@project, post_estimate)
       %br
       =simple_format(post_estimate.goal)
       %br
@@ -18,16 +18,15 @@
             %i.fa.fa-thumbs-up
             -if boss?
               =post_estimate.voted_users.size
-            Проголосовать
+            =t('voting.vote')
         -else
           %a.btn.btn-lg.disabled.vote-button.pull-right{class: "#{vote_post?(post_estimate) ? 'btn-success' : 'btn-default'}"}
             %i.fa.fa-thumbs-up
             -if boss?
               =post_estimate.voted_users.size
-            Проголосовать
+            =t('voting.vote')
     = render 'shared/post_social_bar2', post: post_estimate
     -if @project.status == 10 or @project.demo?
       %br
-
-      = link_to '+Добавить оценку', '/project/'+@project.id.to_s+'/estimate/posts/new?plan_id='+post_estimate.id.to_s, class:'btn btn-xs btn-primary'
+      = link_to t('form.plan.add_est'), '/project/'+@project.id.to_s+'/estimate/posts/new?plan_id='+post_estimate.id.to_s, class:'btn btn-xs btn-primary'
     = render post_estimate.estimates

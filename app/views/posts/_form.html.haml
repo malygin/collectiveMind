@@ -3,5 +3,5 @@
   %br
   %br
   .input-group
-    =select_tag 'aspect_id', options_from_collection_for_select(@aspects, 'id', 'content', @post.discontent_aspects.first.id), promt: 'Выберите тему записи', class: 'form-control', style: 'width: 200px;'
-    = f.submit 'Сохранить',  class:'btn btn-success btn-sm', id:'send_post'
+    =select_tag 'aspect_id', options_from_collection_for_select(@aspects, 'id', 'content', @post.discontent_aspects.first.id), promt: t('form.select_topic'), class: 'form-control', style: 'width: 200px;'
+    = f.submit t('form.save'),  class:'btn btn-success btn-sm', id:'send_post'

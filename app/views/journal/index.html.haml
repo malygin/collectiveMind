@@ -1,11 +1,11 @@
 %h4
   = link_to '/project/' + @project.id.to_s do
     %span.fa.fa-angle-double-left
-    вернуться к процедуре
+    =t('link.back_proc')
 
 %section.widget
   %header
-    %h3.text-center События
+    %h3.text-center=t('show.journal_title')
 
   .body
     .feed

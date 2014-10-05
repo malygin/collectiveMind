@@ -13,8 +13,8 @@
     -if list_user.projects.include? @project
       =link_to remove_user_for_project_user_path(@project, list_user), :remote => true, :method => :put, class:'btn btn-danger',  id: "remove_user_#{list_user.id}" do
         %i.fa.fa-minus
-        Удалить
+        =t('link.delete')
     -else
       =link_to add_user_for_project_user_path(@project, list_user), :remote => true, :method => :put, class:'btn btn-success', id: "add_user_#{list_user.id}" do
         %i.fa.fa-plus
-        Добавить
+        =t('link.add')

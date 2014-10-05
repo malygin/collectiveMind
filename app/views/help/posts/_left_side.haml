@@ -2,27 +2,27 @@
   %li{class: ('active' if params[:id] == '0')}
     %a(href="/project/#{@project.id}/help/posts/0")
       0
-      Введение
+      =t('stages.intro')
   %li{class: ('active' if params[:id] == '1')}
     %a(href="/project/#{@project.id}/help/posts/1")
       1
-      Сбор информации
+      =t('stages.life_tape')
   %li{class: ('active' if params[:id] == '2')}
     %a(href="/project/#{@project.id}/help/posts/2")
       2
-      Сбор несовершенств
+      =t('stages.discontent')
   %li{class: ('active' if params[:id] == '3')}
     %a(href="/project/#{@project.id}/help/posts/3")
       3
-      Сбор нововведений
+      =t('stages.concept')
   %li{class: ('active' if params[:id] == '4')}
     %a(href="/project/#{@project.id}/help/posts/4")
       4
-      Создание проектов
+      =t('stages.plan')
   %li{class: ('active' if params[:id] == '5')}
     %a(href="/project/#{@project.id}/help/posts/5")
       5
-      Выставление оценок
+      =t('stages.estimate')
 
   -#-@stages.each do |key, value|
   -#  %li{class: ('active' if key.to_s==params[:id])}

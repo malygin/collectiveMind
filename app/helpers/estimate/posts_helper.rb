@@ -4,39 +4,39 @@ module Estimate::PostsHelper
 	def estimate_trans(e)
     case e
       when 0
-        'невероятно'
+        t('form.estimate.chance_1')
       when 0.125
-        'маловероятно'
+        t('form.estimate.chance_2')
       when 0.5
-        'вероятно'
+        t('form.estimate.chance_3')
       when 0.875
-        'очень вероятно'
+        t('form.estimate.chance_4')
     end
   end
 
   def estimate_trans_all(e)
     case e
       when 1
-        'невероятно'
+        t('form.estimate.chance_1')
       when 2
-        'маловероятно'
+        t('form.estimate.chance_2')
       when 3
-        'вероятно'
+        t('form.estimate.chance_3')
       when 4
-        'очень вероятно'
+        t('form.estimate.chance_4')
     end
   end
 
   def estimate_trans_project(e)
 		case e
       when 0
-        'Отличный проект'
+        t('form.estimate.grade_0')
 			when 1
-				'Хороший проект'
+        t('form.estimate.grade_1')
 			when 2
-				'Удовлетворительный проект'
+        t('form.estimate.grade_2')
       when 3
-				'Плохой проект'
+        t('form.estimate.grade_3')
 		end
 	end
 
@@ -70,46 +70,46 @@ module Estimate::PostsHelper
     if field == 'on'
       case val
         when 4
-          'в полном объеме'
+          t('form.estimate.fullness_9')
         when 3
-          'в значительном объеме'
+          t('form.estimate.fullness_10')
         when 2
-          'в небольшом объеме'
+          t('form.estimate.fullness_11')
         when 1
-          'в ничтожном объеме'
+          t('form.estimate.fullness_12')
       end
     elsif field == 'ozs'
       case val
         when 4
-          'значительными'
+          t('form.estimate.select_4')
         when 3
-          'средними'
+          t('form.estimate.select_3')
         when 2
-          'незначительными'
+          t('form.estimate.select_2')
         when 1
-          'ничтожными'
+          t('form.estimate.select_0')
       end
     elsif field == 'op'
       case val
         when 4
-          'полностью'
+          t('form.estimate.fullness_13')
         when 3
-          'в значительной мере'
+          t('form.estimate.fullness_14')
         when 2
-          'в небольшой мере'
+          t('form.estimate.fullness_15')
         when 1
-          'в ничтожной мере'
+          t('form.estimate.fullness_16')
       end
     elsif field == 'ozf' or field == 'nep1' or field == 'nepr1'
       case val
         when 4
-          'значительными'
+          t('form.estimate.select_4')
         when 3
-          'средними'
+          t('form.estimate.select_3')
         when 2
-          'незначительными'
+          t('form.estimate.select_2')
         when 1
-          'ничтожными'
+          t('form.estimate.select_0')
       end
     end
   end

@@ -1,5 +1,5 @@
 %h4
-  Нововведение
+  =t('show.concept.title')
   =number
 
 %h5.text-center
@@ -7,26 +7,26 @@
 
 
 .text-center
-  %span.h5(class="#{class_for_concept_type_field(post_for_vote.concept_post,1)}" id="name")=t('form.novation_what')
+  %span.h5(class="#{class_for_concept_type_field(post_for_vote.concept_post,1)}" id="name")=t('form.concept.novation_what')
 %br
 =simple_format(post_for_vote.name)
 
 
 .text-center
-  %span.h5(class= "#{class_for_concept_type_field(post_for_vote.concept_post,2)}" id="content")=t('form.novation_how')
+  %span.h5(class= "#{class_for_concept_type_field(post_for_vote.concept_post,2)}" id="content")=t('form.concept.novation_how')
 %br
 =simple_format(post_for_vote.content)
 
 
 .text-center
-  %span.h5(class= "#{class_for_concept_type_field(post_for_vote.concept_post,3)}" id="positive")=t('form.cond')
+  %span.h5(class= "#{class_for_concept_type_field(post_for_vote.concept_post,3)}" id="positive")=t('form.concept.cond')
 %br
 =display_content(post_for_vote.positive)
 
 
 
 .text-center
-  %span.h5(class="#{class_for_concept_type_field(post_for_vote.concept_post,4)}" id="positive_r")=t('form.cond_res')
+  %span.h5(class="#{class_for_concept_type_field(post_for_vote.concept_post,4)}" id="positive_r")=t('form.concept.cond_res')
 %br
 %table.table.table-striped.table-bordered
   %thead
@@ -34,9 +34,9 @@
       %th
         ="#"
       %th
-        Название
+        =t('show.concept.name_res')
       %th
-        Пояснение
+        =t('show.concept.desc_res')
   %tbody
     - post_for_vote.concept_post.concept_post_resources.by_type('positive_r').each_with_index  do |r, index|
       %tr
@@ -58,14 +58,14 @@
 
 .text-center
 
-  %span.h5(class="#{class_for_concept_type_field(post_for_vote.concept_post,5)}" id= "negative")=t('form.negative')
+  %span.h5(class="#{class_for_concept_type_field(post_for_vote.concept_post,5)}" id= "negative")=t('form.concept.negative')
 %br
 =display_content(post_for_vote.negative)
 
 
 .text-center
 
-  %span.h5(class= "#{class_for_concept_type_field(post_for_vote.concept_post,6)}" id= "negative_r")=t('form.negative_res')
+  %span.h5(class= "#{class_for_concept_type_field(post_for_vote.concept_post,6)}" id= "negative_r")=t('form.concept.negative_res')
 %br
 %table.table.table-striped.table-bordered
   %thead
@@ -73,9 +73,9 @@
       %th
         ="#"
       %th
-        Название
+        =t('show.concept.name_res')
       %th
-        Пояснение
+        =t('show.concept.desc_res')
   %tbody
     - post_for_vote.concept_post.concept_post_resources.by_type('negative_r').each_with_index  do |r, index|
       %tr
@@ -95,13 +95,13 @@
               =res.desc
 
 .text-center
-  %span.h5(class="#{class_for_concept_type_field(post_for_vote.concept_post,7)}" id= "control")=t('form.control')
+  %span.h5(class="#{class_for_concept_type_field(post_for_vote.concept_post,7)}" id= "control")=t('form.concept.control')
 %br
 =display_content(post_for_vote.control)
 
 .text-center
 
-  %span.h5(class= "#{class_for_concept_type_field(post_for_vote.concept_post,8)}" id= "control_r")=t('form.control_res')
+  %span.h5(class= "#{class_for_concept_type_field(post_for_vote.concept_post,8)}" id= "control_r")=t('form.concept.control_res')
 %br
 %table.table.table-striped.table-bordered
   %thead
@@ -109,9 +109,9 @@
       %th
         ="#"
       %th
-        Название
+        =t('show.concept.name_res')
       %th
-        Пояснение
+        =t('show.concept.desc_res')
   %tbody
     - post_for_vote.concept_post.concept_post_resources.by_type('control_r').each_with_index  do |r, index|
       %tr
@@ -132,24 +132,24 @@
 
 .text-center
 
-  %span.h5(class= "#{class_for_concept_type_field(post_for_vote.concept_post,9)}" id="obstacles")=t('form.obstacles_bcd')
+  %span.h5(class= "#{class_for_concept_type_field(post_for_vote.concept_post,9)}" id="obstacles")=t('form.concept.obstacles_bcd')
 %br
 =display_content(post_for_vote.obstacles)
 
 .text-center
 
-  %span.h5(class= "#{class_for_concept_type_field(post_for_vote.concept_post,10)}" id="problems")=t('form.problems')
+  %span.h5(class= "#{class_for_concept_type_field(post_for_vote.concept_post,10)}" id="problems")=t('form.concept.problems')
 %br
 =display_content(post_for_vote.problems)
 
 
 .text-center
 
-  %span.h5(class= "#{class_for_concept_type_field(post_for_vote.concept_post,11)}" id= "reality")=t('form.reality')
+  %span.h5(class= "#{class_for_concept_type_field(post_for_vote.concept_post,11)}" id= "reality")=t('form.concept.reality')
 %br
 =display_content(post_for_vote.reality)
 
 %hr
 =link_to({controller: 'concept/posts', action: :next_vote, id: post_for_vote.id, dis_id:@discontent_post.id, num: number},remote: true,method: :put, id: "btn_vote_#{number}", class: "note_text btn btn-lg btn-warning btn-block",  style: "font-weight: normal !important;") do
-  Нововведение
+  =t('show.concept.title')
   =number

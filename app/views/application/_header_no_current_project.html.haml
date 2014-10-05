@@ -19,18 +19,18 @@
             = current_user.to_s
       %li
         = link_to destroy_user_session_path, method: :delete, id: 'sign_out', class:'btn btn-sm btn-transparent' do
-          Выйти
+          =t('menu.sign_out')
           %i.fa.fa-arrow-right
     -else
       %li
-        = link_to 'Войти', '/users/sign_in', class: 'btn btn-sm btn-transparent', id: 'sign_in'
+        = link_to t('menu.sign_in'), '/users/sign_in', class: 'btn btn-sm btn-transparent', id: 'sign_in'
       %li
-        = link_to 'Зарегистрироваться', '/users/sign_up', class: 'btn btn-sm btn-transparent', id: 'sign_up'
+        = link_to t('menu.sign_up'), '/users/sign_up', class: 'btn btn-sm btn-transparent', id: 'sign_up'
   %ul.navbar-buttons.pull-right
     - if signed_in? and prime_admin?
       %li
         =link_to list_projects_path, class:'btn btn-sm btn-info', id: 'list_projects'  do
-          Список процедур
+          =t('menu.list_projects')
           %i.fa.fa-arrow-right
 
 

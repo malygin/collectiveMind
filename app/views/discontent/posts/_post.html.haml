@@ -12,16 +12,16 @@
     = render 'shared/post_social_bar2', post: post
     %span
       - if post.status == 2 and boss?
-        = link_to 'Разгруппировать', {action: :ungroup_union, id: post.id}, method: :put, data: {confirm: 'Точно?'}, class: 'btn btn-danger btn-xs'
+        = link_to t('show.discontent.ungroup'), {action: :ungroup_union, id: post.id}, method: :put, data: {confirm: t('confirm.accept')}, class: 'btn btn-danger btn-xs'
         \|
-        = link_to 'Редактировать группу', {action: :edit_group, id: post.id},remote: true, class: 'btn btn-primary btn-xs'
+        = link_to t('show.discontent.edit_group'), {action: :edit_group, id: post.id}, remote: true, class: 'btn btn-primary btn-xs'
         \|
       = render 'shared/post_edit_bar', post: post
     - if can_union_discontents?(@project) and post.status == 0
       = hidden_field_tag 'posts[]', post.id
       .pull-right
-        %a.btn.btn-xs.btn-danger(onclick="remove_block('post_#{post.id}');" ) Удалить из объединения
+        %a.btn.btn-xs.btn-danger(onclick="remove_block('post_#{post.id}');")=t('show.discontent.remove_from_group')
     - if can_union_discontents?(@project) and post.status == 1
       .pull-right{id: "url_post_#{post.id}"}
         = link_to({action: :remove_union, post_id: post.id}, remote: @post.one_last_post? ? false : true, method: :put) do
-          .btn.btn-xs.btn-danger Убрать
+          .btn.btn-xs.btn-danger=t('link.remove')

@@ -1,90 +1,85 @@
-%h3.text-center=t('form.name')
+%h3.text-center=t('form.discontent.title')
 = form_for @post, url: {project: @project.id,improve_comment: params[:improve_comment], improve_stage: params[:improve_stage], required: params[:required], action: @post.persisted? ? 'update' : 'create'}, remote: true, html: {id: 'new_discontent'} do |f|
   #notice_messages
-  -#-if @post.errors.any?
-  -#  #error_explanation
-  -#    %h2= "#{pluralize(@discontent_post.errors.count, "error")} prohibited this discontent_post from being saved:"
-  -#    %ul
-  -#      - @post.errors.full_messages.each do |msg|
-  -#        %li= msg
+
   .row
     .col-md-12
       .text-center
         .h4
-          =t('form.field_what')
+          =t('form.discontent.field_what')
         %br
 
   .row
     .col-md-6
       .text-right
         %i
-          %b Примеры:
+          %b=t('form.discontent.examples')
           %br
-          %span.label.label-danger  Имеющиеся недостатки
+          %span.label.label-danger=t('form.discontent.style_negative')
           %br
-          %span.label.label-danger что
+          %span.label.label-danger=t('form.discontent.what')
           Мед находится очень высоко
           %br
-          %span.label.label-success  Отсутствующие достоинства
+          %span.label.label-success=t('form.discontent.style_positive')
           %br
-          %span.label.label-success что
+          %span.label.label-success=t('form.discontent.what')
           Отсутствие меда
     .col-md-6
       .form-group
-        = f.text_area :content, class: 'form-control', rows: 5, placeholder: 'Отрицательное действие, явление, установление, черта', onkeyup: 'activate_button(this);'
+        = f.text_area :content, class: 'form-control', rows: 5, placeholder: t('form.discontent.field_what_promt'), onkeyup: 'activate_button(this);'
   .row
     .col-md-12
       .text-center
         .h4
-          =t('form.field_where')
+          =t('form.discontent.field_where')
         %br
   .row
     .col-md-6
       .text-right
         %i
-          %b Примеры:
+          %b=t('form.discontent.examples')
           %br
-          %span.label.label-danger где
+          %span.label.label-danger=t('form.discontent.where')
           На высоком дубу
           %br
-          %span.label.label-success где
+          %span.label.label-success=t('form.discontent.where')
           У Винни-Пуха
 
     .col-md-6
-      = f.autocomplete_field :whered, autocomplete_discontent_post_whered_discontent_posts_path, :'min-length' => 0, style: 'height: 44px', class: 'form-control autocomplete', placeholder: 'Место, организация, общность, в которой это происходит '
+      = f.autocomplete_field :whered, autocomplete_discontent_post_whered_discontent_posts_path, :'min-length' => 0, style: 'height: 44px', class: 'form-control autocomplete', placeholder: t('form.discontent.field_where_promt')
       %br
       %br
   .row
     .col-md-12
       .text-center
         .h4
-          =t('form.field_when')
+          =t('form.discontent.field_when')
         %br
   .row
     .col-md-6
       .text-right
         %i
-          %b Примеры:
+          %b=t('form.discontent.examples')
           %br
-          %span.label.label-danger когда
+          %span.label.label-danger=t('form.discontent.when')
           Когда есть потребность в меде
           %br
-          %span.label.label-success когда
+          %span.label.label-success=t('form.discontent.when')
           Когда Винни хочет мед
     .col-md-6
-      = f.autocomplete_field :whend, autocomplete_discontent_post_whend_discontent_posts_path, :'min-length' => 0, style: 'height: 44px', class: 'form-control autocomplete', placeholder: 'Во время какого события, мероприятия, процесса, ситуации '
+      = f.autocomplete_field :whend, autocomplete_discontent_post_whend_discontent_posts_path, :'min-length' => 0, style: 'height: 44px', class: 'form-control autocomplete', placeholder: t('form.discontent.field_when_promt')
 
   .row
     .col-md-6
       %br
       %h5.text-right
-        %b=t('form.select_aspect')
+        %b=t('form.discontent.select_aspect')
       %br
       %br
     .com-md-6
       %br
       = select_tag 'select_for_aspects', options_from_collection_for_select(@aspects.minus_view(@aspects_for_post.nil? ? (@asp.nil? ? [] : [@asp.id]) : @aspects_for_post.pluck(:id)), 'id', 'content'),
-      prompt: 'Выберите тему' , style:'margin-left:15px; margin-top:10px; height: 30px;'
+      prompt: t('form.discontent.select_aspect_prompt'), style:'margin-left:15px; margin-top:10px; height: 30px;'
       %br
       #add_post_aspects(style="margin-left: 52%;margin-top: 10px;")
         - unless @aspects_for_post.nil?
@@ -93,7 +88,7 @@
               %input{name: 'discontent_post_aspects[]', type: 'hidden', value: "#{ap.id}"}/
               %span.glyphicon.glyphicon-remove.text-danger.pull-left{onclick: "remove_discontent_aspect('#{ap.id}','#{ap.content}');", style: 'cursor:pointer;text-decoration:none;font-size:15px;'}
               %span.span_aspect.label.label-t{id: "#{ap.id}"}=ap.content
-        -unless @asp.nil?
+        - unless @asp.nil?
           %div{id: "aspect_#{@asp.id}"}
             %input{name: "discontent_post_aspects[]", type: "hidden", value: "#{@asp.id}"}/
             %span.glyphicon.glyphicon-remove.text-danger.pull-left{onclick: "remove_discontent_aspect('#{@asp.id}','#{@asp.content}');", style: 'cursor:pointer;text-decoration:none;font-size:15px;'}
@@ -104,19 +99,19 @@
   .row
     .col-md-12
       .form-group.text-center
-        %b=t('form.select_style')
+        %b=t('form.discontent.select_style')
         %label.radio-inline
           = f.radio_button :style, '1', checked: 'checked'
-          %span.label.label-danger=t('form.style_negative')
+          %span.label.label-danger=t('form.discontent.style_negative')
         %label.radio-inline
           = f.radio_button :style, '0'
-          %span.label.label-success=t('form.style_positive')
+          %span.label.label-success=t('form.discontent.style_positive')
 
   %br
   %hr
-  %button.btn.btn-lg.btn-primary#send_post(type="submit" onclick="$(this).button('loading');discontent_form_submit();"){class: ('disabled' unless @post.content?), 'data-loading-text' => 'Сохранение...'} Сохранить
+  %button.btn.btn-lg.btn-primary#send_post(type="submit" onclick="$(this).button('loading');discontent_form_submit();"){class: ('disabled' unless @post.content?), 'data-loading-text' => t('form.save_load')}=t('form.save')
   %br
   %br
-  = link_to 'Назад', discontent_posts_path(@project)
+  = link_to t('link.back'), discontent_posts_path(@project)
 
 #render_success_discontent

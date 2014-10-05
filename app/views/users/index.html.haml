@@ -1,19 +1,19 @@
 =link_to '/project/'+@project.id.to_s do
   %span.fa.fa-angle-double-left
-  вернуться к процедуре
+  =t('link.back_proc')
 %section.widget
   .body
-    %h1 Рейтинг участников
+    %h1=t('show.rating.title')
     #tabs
       .pull-right
-        Показан рейтинг,
-        =link_to 'по текущему этапу', {action: :show_top, score_name: 'score'},remote: true, class: 'score_class top_all', id: 'score_all'
+        =t('show.rating.sort')
+        =link_to t('show.rating.sort_default'), {action: :show_top, score_name: 'score'},remote: true, class: 'score_class top_all', id: 'score_all'
         |
-        =link_to 'Генераторов идей', {action: :show_top, score_name: 'score_g'},remote: true, class: 'score_class'
+        =link_to t('show.rating.sort_generators'), {action: :show_top, score_name: 'score_g'},remote: true, class: 'score_class'
         |
-        =link_to 'Аналитиков', {action: :show_top, score_name: 'score_a'},remote: true, class: 'score_class'
+        =link_to t('show.rating.sort_analysts'), {action: :show_top, score_name: 'score_a'},remote: true, class: 'score_class'
         |
-        =link_to 'Оценщиков', {action: :show_top, score_name: 'score_o'},remote: true, class: 'score_class'
+        =link_to t('show.rating.sort_voters'), {action: :show_top, score_name: 'score_o'},remote: true, class: 'score_class'
       %br
       %br
     #tabs-1
@@ -23,4 +23,4 @@
             = render partial: 'user', locals: {user: user, number: i+1}
 
     %br
-    =link_to 'вернуться к процедуре', '/project/'+@project.id.to_s
+    =link_to t('link.back_proc'), '/project/'+@project.id.to_s

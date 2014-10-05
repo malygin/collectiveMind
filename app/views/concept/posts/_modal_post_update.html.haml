@@ -4,12 +4,12 @@
       .modal-header
         %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", type: "button"} ×
       .modal-body
-        %h3.text-center.color-green=t('show.update_concept_success')
+        %h3.text-center.color-green=t('form..concept.update_success')
         %hr
         .text-center
           .col-md-6
-            =link_to 'Перейти к просмотру', concept_post_path(@project, @concept_post), class: "btn btn-lg btn-primary"
+            =link_to t('link.go_show'), concept_post_path(@project, @concept_post), class: "btn btn-lg btn-primary"
           .col-md-6
-            =link_to 'Перейти к списку', "/project/#{@project.id}/concept/posts?asp=#{@aspect_id}", class: "btn btn-lg btn-success"
+            =link_to t('link.go_list'), "/project/#{@project.id}/concept/posts?asp=#{@aspect_id}", class: "btn btn-lg btn-success"
         %br
         %br

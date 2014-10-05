@@ -3,7 +3,7 @@
     -@post.post_stages.each_with_index do |stage, index|
       %li.panel
         %a.accordion-toggle{"data-parent" => "#menu-levels-collapse", "data-toggle" => "collapse", href: "#sub-menu-#{index}-collapse"}
-          %b="Этап #{index+1}. "
+          %b="#{t('form.plan.stage.doc')} #{index+1}. "
           =stage.name
         - unless stage.plan_post_aspects.nil?
           %ul.concept_side_list.panel-collapse.in{id: "sub-menu-#{index}-collapse"}

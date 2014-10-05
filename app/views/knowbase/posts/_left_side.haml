@@ -1,13 +1,13 @@
 -if boss?
   .pull-right
     =link_to new_knowbase_post_path(@project),id: 'new_knowbase_post' do
-      %span.label.label-success +добавить статью
+      %span.label.label-success=t('form.knowbase.new_post')
   %br
   %br
 .text-success#sort_success(style='display:none;')
-  Список успешно обновлен
+  =t('form.knowbase.sort_success')
 .text-success#post_success(style='display:none;')
-  Статья успешно добавлена
+  =t('form.knowbase.post_success')
 %ul.side-nav{id: "#{'sortable' if boss?}"}
   -unless @stages.nil?
     -@stages.each do |s|

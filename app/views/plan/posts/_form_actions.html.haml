@@ -1,11 +1,11 @@
-%h3 Мероприятия по реализации
+%h3=t('form.plan.action.title')
 %table.table.table-striped.table-bordered
   %thead
     %tr
       %th
-        Мероприятия по реализации нововведения
+        =t('form.plan.action.title_full')
       %th(style="width:100px;")
-        Необходимые ресурсы
+        =t('form.plan.action.title_res')
   %tbody
     -unless form_actions.plan_post_actions.nil?
       - form_actions.plan_post_actions.each  do |action|
@@ -29,11 +29,11 @@
       %tr(id="tr_new_concept_action_#{form_actions.id}")
         %td(colspan="3")
           =link_to new_action_plan_post_path(@project, @post, con_id: form_actions.id, view_concept: true), method: :put, remote: true, class: "btn btn-default btn-success btn-block", id: "btn_new_concept", style: "font-weight: normal;" do
-            Добавить мероприятие
+            =t('form.plan.action.new')
 
 %br
-%h3 Обратите внимание!
-%h4 Для функционирования выбранного нововведения в будущем ему будут необходимы следующие ресурсы:
+%h3=t('show.warning')
+%h4=t('form.plan.action.desc_res')
 - unless form_actions.plan_post_resources.by_type('positive_r').empty?
   -form_actions.plan_post_resources.by_type('positive_r').each do |res|
     .label.label-danger=res.name

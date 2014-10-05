@@ -5,17 +5,17 @@
 -#.body.tab-content
 - if boss? or (signed_in? and @project.demo?)
   %br
-  = link_to t('link.new_aspect'), new_discontent_aspect_path(@project), remote: true, id: 'new_aspect', class: 'btn btn-primary'
+  = link_to t('show.aspect.new'), new_discontent_aspect_path(@project), remote: true, id: 'new_aspect', class: 'btn btn-primary'
 
 %h3.text-lifetape
   - if @aspect
-    %b Аспект:
+    %b=t('show.aspect.title')
     %span{id: "edit_aspect_content_#{@aspect.id}"}=@aspect.content
     - if boss?
       %span{id: "redactor_aspect_#{@aspect.id}"}
         = link_to edit_discontent_aspect_path(@project,@aspect), remote: true, id: "edit_aspect_#{@aspect.id}" do
           %span{class:'glyphicon glyphicon-pencil text-success'}
-        = link_to discontent_aspect_path(@project,@aspect), method: :delete, data: {confirm: 'Удалить тему?'}, id: "destroy_aspect_#{@aspect.id}" do
+        = link_to discontent_aspect_path(@project,@aspect), method: :delete, data: {confirm: t('confirm.delete_aspect')}, id: "destroy_aspect_#{@aspect.id}" do
           %span{class:'glyphicon glyphicon-remove text-danger'}
 
 - if @post_show

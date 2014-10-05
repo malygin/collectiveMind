@@ -1,3 +1,3 @@
-$('#add_disgroup_#{@post.id}').html("Добавлено в группу #{escape_javascript(link_to @post.discontent_post.content, discontent_post_path(@project, @post.discontent_post))}");
+$('#add_disgroup_#{@post.id}').html("#{t('show.discontent.add_group_success')} #{escape_javascript(link_to @post.discontent_post.content, discontent_post_path(@project, @post.discontent_post))}");
 $('#add_disgroup_#{@post.id}').effect("highlight", {color: '#f5cecd'}, 1000);
 $('#add_group_success_#{@post.id}').fadeIn('slow').delay(1000).fadeOut('slow');

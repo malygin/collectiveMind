@@ -4,17 +4,17 @@
       %li.active#first
         %a{"data-toggle" => "tab", :href => "#tab1", :role => "tab"}
           %small 1.
-          %strong Описание проекта
+          %strong=t('form.plan.desc')
       %li#second
         %a{"data-toggle" => "tab", :href => "#tab2", :role => "tab"}
           %small 2.
-          %strong План мероприятий
+          %strong=t('form.plan.actions')
         -if @post.persisted?
           #option_for_render_tab(project="#{@project.id}" post="#{@post.id}")
       %li#third
         %a{"data-toggle" => "tab", :href => "#tab3", :role => "tab"}
           %small 3.
-          %strong Просмотр нововведений
+          %strong=t('form.plan.concepts')
 
     .tab-content(style="overflow:visible;")
       #tab1.tab-pane.active
@@ -22,22 +22,22 @@
           %fieldset
             .col-md-6
               %legend.section
-                Описание проекта
+                =t('form.plan.desc')
               .text-left
-                %h4.color-green Название проекта
+                %h4.color-green=t('form.plan.name')
                 =@post.name
               %br
               .text-left
-                %h4.color-green Коротко о поекте
+                %h4.color-green=t('form.plan.short_desc')
                 =@post.goal
               %br
               .text-left
-                %h4.color-green Эссе по проекту. Пояснения и обоснования
+                %h4.color-green=t('form.plan.essay')
                 =@post.content
 
             .col-md-6
               %legend.section
-                Этапы проекта
+                =t('form.plan.stages')
               #post_stages
                 %table.table.table-striped
                   %tbody

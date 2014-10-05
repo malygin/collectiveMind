@@ -1,5 +1,5 @@
 - if (current_user?(post.user) and post.status == 0 and @project.can_edit_on_current_stage(post)) or boss?
-  = link_to 'Редактировать',{ action: 'edit', project: @project, id: post.id}, class: 'btn btn-info btn-xs'
+  = link_to t('link.edit'),{ action: 'edit', project: @project, id: post.id}, class: 'btn btn-info btn-xs'
   \|
-  = link_to 'Удалить', {action: :to_archive, id: post.id}, class: 'btn btn-danger btn-xs', method: :put, data: {confirm: 'Точно?'}
+  = link_to t('link.remove'), {action: :to_archive, id: post.id}, class: 'btn btn-danger btn-xs', method: :put, data: {confirm: t('confirm.accept')}
 %br

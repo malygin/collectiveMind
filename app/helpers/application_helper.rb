@@ -94,14 +94,14 @@ module ApplicationHelper
 	end
 	def  type_title(pr)
 		case pr
-			when 0
-				'открыта с возможностью участвовать'
-			when 1
-				'открыта для просмотра'
-			when 2
-				'закрыта'
-			else
-				'закрыта'
+      when 0
+        t('show.open_proc')
+      when 1
+        t('show.open_view_proc')
+      when 2
+        t('show.close_proc')
+      else
+        t('show.close_proc')
 		end 
 	end
 
@@ -110,7 +110,7 @@ module ApplicationHelper
 			when 0
 				''
 			when 1
-				'(демонстрационная)'
+				"(#{t('show.demo_proc')})"
 		end 
 	end
 
@@ -130,11 +130,11 @@ module ApplicationHelper
   def discontent_style_name(dis)
     case dis
       when 0
-        content_tag :span,'Отсутствующие достоинства', class: 'label label-p'
+        content_tag :span,t('form.discontent.style_positive'), class: 'label label-p'
       when 1
-        content_tag :span, 'Имеющиеся недостатки', class: 'label label-n'
+        content_tag :span,t('form.discontent.style_negative'), class: 'label label-n'
       else
-        'не определена'
+        t('form.discontent.style_nun')
     end
   end
 
@@ -266,15 +266,15 @@ module ApplicationHelper
   def stage_status(stage)
     case stage
       when 1
-        'Сбор информации'
+        t('stages.life_tape')
       when 2
-        'Сбор несовершенств'
+        t('stages.discontent')
       when 3
-        'Сбор нововведений'
+        t('stages.concept')
       when 4
-        'Создание проектов'
+        t('stages.plan')
       when 5
-        'Выставление оценок'
+        t('stages.estimate')
     end
   end
 
@@ -405,11 +405,11 @@ module ApplicationHelper
       comment = "#{get_class_for_improve(post.improve_stage)}::Comment".constantize.find(post.improve_comment)
       case post.improve_stage
         when 1
-          "| Доработано из " + (link_to "предложения ", "/project/#{@project.id}/life_tape/posts?asp=#{comment.post.discontent_aspects.first.id}#comment_#{comment.id}") + (link_to comment.user, user_path(@project, comment.user))
+          "| #{t('show.improved')} " + (link_to t('show.imrove_deal'), "/project/#{@project.id}/life_tape/posts?asp=#{comment.post.discontent_aspects.first.id}#comment_#{comment.id}") + (link_to comment.user, user_path(@project, comment.user))
         when 2
-          "| Доработано из " + (link_to "предложения ", "/project/#{@project.id}/discontent/posts/#{comment.post.id}#comment_#{comment.id}") + (link_to comment.user, user_path(@project, comment.user))
+          "| #{t('show.improved')} " + (link_to t('show.imrove_deal'), "/project/#{@project.id}/discontent/posts/#{comment.post.id}#comment_#{comment.id}") + (link_to comment.user, user_path(@project, comment.user))
         when 3
-          "| Доработано из " + (link_to "предложения ", "/project/#{@project.id}/concept/posts/#{comment.post.id}#comment_#{comment.id}") + (link_to comment.user, user_path(@project, comment.user))
+          "| #{t('show.improved')} " + (link_to t('show.imrove_deal'), "/project/#{@project.id}/concept/posts/#{comment.post.id}#comment_#{comment.id}") + (link_to comment.user, user_path(@project, comment.user))
       end
     end
   end
@@ -419,15 +419,15 @@ module ApplicationHelper
     case comment_class
       when 1
         link_to "/project/#{@project.id}/life_tape/posts?asp=#{comment.post.discontent_aspects.first.id}#comment_#{comment.id}" do
-          content_tag :span, 'Источник', class: 'label label-primary'
+          content_tag :span, t('show.improver'), class: 'label label-primary'
         end
       when 2
         link_to "/project/#{@project.id}/discontent/posts/#{comment.post.id}#comment_#{comment.id}" do
-          content_tag :span, 'Источник', class: 'label label-primary'
+          content_tag :span, t('show.improver'), class: 'label label-primary'
         end
       when 3
         link_to "/project/#{@project.id}/concept/posts/#{comment.post.id}#comment_#{comment.id}" do
-          content_tag :span, 'Источник', class: 'label label-primary'
+          content_tag :span, t('show.improver'), class: 'label label-primary'
         end
     end
   end
@@ -442,19 +442,19 @@ module ApplicationHelper
 
   def status_project(project)
     if project.status == 0 or project.type_access == 5
-      "Идет подготовка к процедуре"
+      t('show.prepare_proc')
     elsif [1,2].include? project.status
-      "Идет 1 этап"
+      t('show.go_proc', count: 1)
     elsif [3,4,5,6].include? project.status
-      "Идет 2 этап"
+      t('show.go_proc', count: 2)
     elsif [7,8].include? project.status
-      "Идет 3 этап"
+      t('show.go_proc', count: 3)
     elsif [9].include? project.status
-      "Идет 4 этап"
+      t('show.go_proc', count: 4)
     elsif [10,11,12].include? project.status
-      "Идет 5 этап"
+      t('show.go_proc', count: 5)
     elsif [20].include? project.status
-      "Завершена"
+      t('show.completed_proc')
     end
   end
 
@@ -493,7 +493,7 @@ module ApplicationHelper
     if user.boss?
       content_tag :span, 'MD', class: 'label label-danger'
     elsif user.role_expert?
-      content_tag :span, 'Эксперт', class: 'label label-success'
+      content_tag :span, t('show.expert'), class: 'label label-success'
     end
   end
 

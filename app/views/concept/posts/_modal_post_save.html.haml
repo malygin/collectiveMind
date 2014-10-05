@@ -2,15 +2,15 @@
   .modal-dialog
     .modal-content
       .modal-header
-        %button.close{"aria-hidden"=> "true", "data-dismiss"=> "modal", type: "button"} ×
+        %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", type: "button"} ×
       .modal-body
-        %h3.text-center.color-green=t('show.create_concept_success')
+        %h3.text-center.color-green=t('form.concept.create_success')
         %hr
         .text-center
           .col-md-6
-            %a.btn.btn-lg.btn-primary(data-dismiss="modal") Добавить еще одно
+            %a.btn.btn-lg.btn-primary(data-dismiss="modal")=t('form.add_more')
           .col-md-6
-            =link_to 'Перейти к списку', "/project/#{@project.id}/concept/posts?asp=#{@aspect_id}", class: "btn btn-lg btn-success"
+            =link_to t('link.go_list'), "/project/#{@project.id}/concept/posts?asp=#{@aspect_id}", class: "btn btn-lg btn-success"
         %br
         %br
 

@@ -8,36 +8,36 @@
       = render partial: '/shared/user_online', object: improve_comment.user
       = role_label(improve_comment.user) if improve_comment.user
       %span.pull-right
-        =label_for_comment_status(improve_comment,'discontent','Проблема')
-        =label_for_comment_status(improve_comment,'concept','Идея')
+        =label_for_comment_status(improve_comment,'discontent',t('show.problem'))
+        =label_for_comment_status(improve_comment,'concept',t('show.idea'))
         -#=render partial: '/shared/label_for_comment_status', locals: {comment: improve_comment, status: 'discontent', title: 'Проблема'}
         -#=render partial: '/shared/label_for_comment_status', locals: {comment: improve_comment, status: 'concept', title: 'Идея'}
 
         - if boss? or role_expert?
           =link_to({controller: improve_comment.post.class.name.underscore.pluralize, action: :comment_status, id: improve_comment.post.id, comment_id: improve_comment.id, discuss_status: 1, comment_stage: get_stage_for_improve(improve_comment.get_class)},  remote: true, method: :put,  id: "discuss_stat_comment_#{improve_comment.id}") do
-            %span.label(class="#{label_discuss_stat(improve_comment)}") ТРЕБУЕТ ОБСУЖДЕНИЯ
+            %span.label(class="#{label_discuss_stat(improve_comment)}")=t('show.discuss')
         - elsif improve_comment.discuss_status
-          %span.label-danger ТРЕБУЕТ ОБСУЖДЕНИЯ
+          %span.label-danger=t('show.discuss')
 
     .text
       %div{id: "comment_text_#{improve_comment.id}"}
         =simple_format(improve_comment.content)
       - if current_user?(improve_comment.user) or boss?
         %div.redactor{id: "redactor_comment_#{improve_comment.id}"}
-          =link_to 'Редактировать', {action: :edit_comment, id: improve_comment.id},remote: true, class: "text-success",id: "edit_comment_#{improve_comment.id}"
+          =link_to t('link.edit'), {action: :edit_comment, id: improve_comment.id},remote: true, class: "text-success",id: "edit_comment_#{improve_comment.id}"
           \|
-          = link_to 'Удалить', {action: :destroy_comment, id: improve_comment.id}, method: :put, remote: true, data: { confirm: 'Удалить комментарий?' }, class: "text-danger",id: "destroy_comment_#{improve_comment.id}"
+          = link_to t('link.remove'), {action: :destroy_comment, id: improve_comment.id}, method: :put, remote: true, data: { confirm: t('confirm.delete_comment') }, class: "text-danger",id: "destroy_comment_#{improve_comment.id}"
 
       .pull-right
         =link_for_improve(improve_comment).html_safe if link_for_improve(improve_comment)
         =link_to({action: :new, asp: params[:asp] ? params[:asp] : @project.proc_aspects.order(:id).first, improve_comment: improve_comment.id, improve_stage: get_stage_for_improve(improve_comment.get_class) }, method: :get,  id: "improve_comment_#{improve_comment.id}") do
-          %span.label.label-success Доработать
+          %span.label.label-success=t('show.improve.name')
         - if boss?
           =link_to({action: :plus_comment, id: improve_comment.id},  remote: true, method: :put,  id: "plus_comment_#{improve_comment.id}") do
             -if improve_comment.useful
-              %span.text-danger Забрать баллы
+              %span.text-danger=t('show.revert_score')
             -else
-              %span.text-success Выдать баллы
+              %span.text-success=t('show.add_score')
 
       .time.pull-left
         =time_ago_in_words(improve_comment.created_at)
@@ -49,9 +49,9 @@
             %ul
               - improve_comment.improve_disposts.each do |post|
                 %li(style="line-height:30px;")
-                  Доработано до несовершенства
+                  =t('show.improve.discontent')
                   =link_to post.user, user_path(@project, post.user)
-                  =link_to 'подробнее', discontent_post_path(@project, post), :class=> 'btn btn-primary btn-xs'
+                  =link_to t('link.more'), discontent_post_path(@project, post), :class=> 'btn btn-primary btn-xs'
       -if improve_comment.improve_concepts.present?
         %br
         %section
@@ -59,9 +59,9 @@
             %ul
               - improve_comment.improve_concepts.each do |post|
                 %li(style="line-height:30px;")
-                  Доработано до нововведения
+                  =t('show.improve.concept')
                   =link_to post.user, user_path(@project, post.user)
-                  =link_to 'подробнее', concept_post_path(@project, post), :class=> 'btn btn-primary btn-xs'
+                  =link_to t('link.more'), concept_post_path(@project, post), :class=> 'btn btn-primary btn-xs'
 
 
 

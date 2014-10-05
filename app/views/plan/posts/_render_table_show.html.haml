@@ -2,7 +2,7 @@
   -@post.post_stages.each_with_index do |stage, ind|
     %div(class="td_stage_#{stage.id}")
       %h3
-        %span="Этап #{ind+1}. "
+        %span="#{t('form.plan.stage.doc')} #{ind+1}. "
         %span.color-teal=stage.name
       -if stage.date_begin and stage.date_end
         %h3.color-green
@@ -19,9 +19,9 @@
           %th
             ="#"
           %th
-            Нововведения
+            =t('form.plan.concepts')
           %th
-            Мероприятия этапа
+            =t('form.plan.stage.actions')
       %tbody
         - unless stage.plan_post_aspects.nil?
           - stage.plan_post_aspects.each_with_index do |concept, index|

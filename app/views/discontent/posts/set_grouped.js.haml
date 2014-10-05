@@ -1,3 +1,3 @@
-alert('Несовершенство сделано группой');
-$('#set_grouped_#{@post.id} span').html('Группа');
+alert('#{t('show.discontent.grouped_success')}');
+$('#set_grouped_#{@post.id} span').html('#{t('show.discontent.grouped')}');
 $('#set_grouped_#{@post.id} span').removeClass('text-warning').addClass('text-success');

@@ -11,6 +11,6 @@
       =link_to edit_stage_plan_post_path(@project, @post, stage_id: post_stage),method: :put, remote: true, id: "edit_post_stage_#{post_stage.id}" do
         %button.btn.btn-warning{type: "button"}
           %i.fa.fa-pencil
-      =link_to destroy_stage_plan_post_path(@project, @post, stage_id: post_stage),method: :delete, remote: true, data: {confirm: 'Удалить этап?'}, id: "destroy_post_stage_#{post_stage.id}" do
+      =link_to destroy_stage_plan_post_path(@project, @post, stage_id: post_stage),method: :delete, remote: true, data: {confirm: t('confirm.delete_stage')}, id: "destroy_post_stage_#{post_stage.id}" do
         %button.btn.btn-danger{type: "button"}
           %i.fa.fa-trash-o

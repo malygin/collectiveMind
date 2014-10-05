@@ -5,55 +5,55 @@
       %span.glyphicon.glyphicon-eye-open
       |
       = link_to(controller: post.class.name.underscore.pluralize, action: :show, project: @project, id: post.id) do
-        Комментировать
+        =t('show.commenting')
         =post.comments.count
         %span.glyphicon.glyphicon-comment
       -if boss? and post.class.name.deconstantize == "Discontent" and [4,5,6,7].include?(@project.status)
         |
         =link_to({controller: post.class.name.underscore.pluralize, action: :set_grouped, id: post.id, project: @project},remote: true,method: :put,id: "set_grouped_#{post.id}", class: "note_text") do
           -if post.status == 2
-            %span.text-success Группа
+            %span.text-success=t('show.discontent.grouped')
           -else
-            %span.text-warning Сделать группой
+            %span.text-warning=t('show.discontent.do_group')
         |
         =link_to({controller: post.class.name.underscore.pluralize, action: :set_required, id: post.id, project: @project},remote: true,method: :put,id: "set_required_#{post.id}", class: "note_text") do
           -if post.status == 4
-            %span.text-success Добавлено
+            %span.text-success=t('show.discontent.required')
           -else
-            %span.text-warning В обязательные
+            %span.text-warning=t('show.discontent.do_require')
         -if @project.status == 6
           |
-          %span.text-success За:
+          %span.text-success=t('show.like')
           =post.final_votings.by_positive.uniq_user.size
           |
-          %span.text-danger Против:
+          %span.text-danger=t('show.unlike')
           =post.final_votings.by_negative.uniq_user.size
           |
-          %span.text-info Голосовавших:
+          %span.text-info=t('show.votes_users')
           =@vote_all
 
       -if boss? and @project.status == 8 and post.class.name.deconstantize == "Concept"
         |
-        %span.text-success Голосов:
+        %span.text-success=t('show.votes')
         =post.post_aspects.first.final_votings.by_dispost(post.dispost).size
         |
-        %span.text-success Всего за пост:
+        %span.text-success=t('show.all_from_post')
         =post.post_aspects.first.final_votings.by_dispost(post.dispost).uniq_user.size
         |
-        %span.text-info Голосовавших:
+        %span.text-info=t('show.votes_users')
         =@vote_all
       -if boss? and @project.status == 11 and post.class.name.deconstantize == "Plan"
         |
-        %span.text-success Голосов:
+        %span.text-success=t('show.votes')
         =post.voted_users.size
         |
-        %span.text-info Голосовавших:
+        %span.text-info=t('show.votes_users')
         =@vote_all
 
       |
       - if boss?
         =link_to({controller: post.class.name.underscore.pluralize, action: :plus,project: @project, id: post.id},  remote: true, method: :put,  id: "plus_post_#{post.id}") do
           -if post.useful
-            %span.text-danger Забрать баллы
+            %span.text-danger=t('show.revert_score')
           -else
-            %span.text-success Выдать баллы
+            %span.text-success=t('show.add_score')

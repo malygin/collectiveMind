@@ -4,17 +4,17 @@
       %li.active#first
         %a{"data-toggle" => "tab", :href => "#tab1", :role => "tab"}
           %small 1.
-          %strong Описание проекта
+          %strong=t('form.plan.desc')
       %li#second{:class => @post.persisted? ? nil:"disabled"}
         %a{"data-toggle" => "tab", :href => "#tab2", :role => "tab"}
           %small 2.
-          %strong План мероприятий
+          %strong=t('form.plan.actions')
         -if @post.persisted?
           #option_for_render_tab(project="#{@project.id}" post="#{@post.id}")
       %li#third{:class => @post.persisted? ? nil:"disabled"}
         %a{"data-toggle" => "tab", :href => "#tab3", :role => "tab"}
           %small 3.
-          %strong Просмотр нововведений
+          %strong=t('form.plan.concepts')
 
     .tab-content(style="overflow:visible;")
       #tab1.tab-pane.fade.in.active
@@ -23,35 +23,36 @@
             .col-md-6#form_for_main_plan
               = form_for  @post, :url => {:project => @project.id, :action => @post.persisted? ? 'update' : 'create'}, :remote => true, :html => { :class => 'new_or_edit' } do |f|
                 %legend.section
-                  Описание проекта
+                  =t('form.plan.desc')
                 .form-group(style="margin-left:0;")
-                  %label.color-green{:for => "name_plan"} Название проекта
+                  %label.color-green{:for => "name_plan"}=t('form.plan.name')
                   =f.text_field :name, :type => "text", class: "form-control", id: "name_plan"
                 .form-group(style="margin-left:0;")
                   %label{:for => "goals"}
-                    %span.color-green Коротко о проекте.
+                    %span.color-green=t('form.plan.short_desc')
                     %small
-                  =f.text_area :goal, rows: 8, style: 'width: 100%;', class: "form-control", id: "goals", placeholder: 'Попытайтесь кратко изложив суть проекта в тоже время привлечь этим внимание других участников'
+                  =f.text_area :goal, rows: 8, style: 'width: 100%;', class: "form-control", id: "goals", placeholder: t('form.plan.goal_promt')
                   %span.help-block
-                    1) Цель: какую выгоду даст ваш проект? Зачем это нужно его реализаторам?
+                    ="1) #{t('form.plan.goal_promt_1')}"
                     %br
-                    2) Методы, средства и другие ресурсы:  как, при помощи чего эта выгода будет получаться?
+                    ="2) #{t('form.plan.goal_promt_2')}"
                     %br
-                    3) Этапность реализации:  с чего вы планируете начать, что делать потом и т. д.?
+                    ="3) #{t('form.plan.goal_promt_3')}"
+
                 .form-group(style="margin-left:0;")
-                  %label.color-green{:for => "desc_plan"} Пояснения и обоснования
+                  %label.color-green{:for => "desc_plan"}=t('form.plan.study')
                   =f.text_area :content, rows: 12, style: 'width: 100%;', class: "form-control", id: "desc_plan"
-                  %span.help-block Опишите ваше видение проекта в будущем
+                  %span.help-block=t('form.plan.desc_future')
                 .color-green#plan_success(style='display:none;')
-                  Проект успешно обновлен
+                  =t('form.plan.update_success')
                 .form-group
                   -if @post.persisted?
-                    %input.btn.btn-success.pull-right{:type => "submit", :id  => "send_plan_post", :value => "Сохранить"}
+                    %input.btn.btn-success.pull-right{:type => "submit", :id  => "send_plan_post", :value => t('form.save')}
                   -else
-                    %input.btn.btn-success.pull-right{:type => "submit", :id  => "send_plan_post", :value => "Сохранить и приступить к добавлению этапов"}
+                    %input.btn.btn-success.pull-right{:type => "submit", :id  => "send_plan_post", :value => t('form.plan.save')}
             .col-md-6
               %legend.section
-                Этапы проекта
+                =t('form.plan.stages')
               #post_stages
                 %table.table.table-striped
                   %tbody#table_stage_list
@@ -63,7 +64,7 @@
               #add_new_stage
                 -if @post.persisted?
                   =link_to new_stage_plan_post_path(@project, @post), :method => :put, :remote => true, :class => "btn btn-lg btn-success btn-block", :id => "btn_new_stage", :style => "font-weight: normal;" do
-                    Добавить этап в проект
+                    =t('form.plan.stage.new')
 
       #tab2.tab-pane.fade
         .form-horizontal

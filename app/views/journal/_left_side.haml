@@ -2,10 +2,10 @@
   %li.active
     = link_to  user_path(@project, current_user) do
       %i.glyphicon.glyphicon-user
-      Профиль
+      =t('menu.account')
 
   - if current_user
     %li
       = link_to edit_user_path(@project, current_user) do
         %i.glyphicon.glyphicon-cog
-        Редактировать профиль
+        =t('menu.profile_edit')

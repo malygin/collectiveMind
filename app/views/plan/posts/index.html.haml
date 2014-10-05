@@ -1,17 +1,17 @@
 .row
   - if signed_in? and (@project.status == 9 or @project.demo?)
-    = link_to '+ Добавить Проект', new_plan_post_path(@project) , id: 'add_record',  class: 'btn btn-lg btn-success'
+    = link_to t('form.plan.new'), new_plan_post_path(@project) , id: 'add_record',  class: 'btn btn-lg btn-success'
   .pull-right
     -if boss? and (@project.status == 9 or @project.demo?)
-      = link_to 'Стандартная оценка', plan_posts_change_estimate_status_path(@project, :est_stat => 0), :remote => true, :method => :put, id: 'standart_estimate',  class: "btn btn-sm stat_estimate #{@est_stat == 0 ? 'btn-success' : 'btn-default'}"
-      = link_to 'Упрощенная оценка', plan_posts_change_estimate_status_path(@project, :est_stat => 1), :remote => true, :method => :put, id: 'simple_estimate',  class: "btn btn-sm stat_estimate #{@est_stat == 1 ? 'btn-success' : 'btn-default'}"
+      = link_to t('form.plan.est_normal'), plan_posts_change_estimate_status_path(@project, :est_stat => 0), :remote => true, :method => :put, id: 'standart_estimate',  class: "btn btn-sm stat_estimate #{@est_stat == 0 ? 'btn-success' : 'btn-default'}"
+      = link_to t('form.plan.est_easy'), plan_posts_change_estimate_status_path(@project, :est_stat => 1), :remote => true, :method => :put, id: 'simple_estimate',  class: "btn btn-sm stat_estimate #{@est_stat == 1 ? 'btn-success' : 'btn-default'}"
     -else
-      %a.btn.btn-sm.stat_estimate.disabled#standart_estimate{ class: @est_stat == 0 ? 'btn-success' : 'btn-default'} Стандартная оценка
-      %a.btn.btn-sm.stat_estimate.disabled#simple_estimate{ class: @est_stat == 1 ? 'btn-success' : 'btn-default'} Упрощенная оценка
+      %a.btn.btn-sm.stat_estimate.disabled#standart_estimate{ class: @est_stat == 0 ? 'btn-success' : 'btn-default'}=t('form.plan.est_normal')
+      %a.btn.btn-sm.stat_estimate.disabled#simple_estimate{ class: @est_stat == 1 ? 'btn-success' : 'btn-default'}=t('form.plan.est_easy')
 
 %br
 .row
   .col-md-12
     %section
       .body
-        = render  @posts
+        = render @posts

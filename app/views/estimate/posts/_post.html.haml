@@ -7,4 +7,4 @@
         .media-heading
             =link_to post.user, user_path(@project, post.user)
         %span.color-green= trim_string(post.content) if post.content.present?
-        = link_to 'Подробнее', {action: 'show', project: @project, id: post.id}, class: 'more'
+        = link_to t('link.more'), {action: 'show', project: @project, id: post.id}, class: 'more'

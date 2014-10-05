@@ -1,7 +1,7 @@
 %ul#side-nav.side-nav
   %li
     %a
-      %h4 Аспекты:
+      %h4=t('menu.list_aspects')
   -@project.current_aspects(current_stage).each do |asp|
     %li{class:"#{'active' if asp == @aspect}"}
       = link_to "/project/#{@project.id}/#{current_stage == 'essay/posts' ? stage_for_essay(params[:stage].to_i) : current_stage}?asp=#{asp.id}" do
@@ -9,11 +9,11 @@
         =" #{asp.content}"
   %li
     = link_to "/project/#{@project.id}/#{current_stage == 'essay/posts' ? stage_for_essay(params[:stage].to_i) : current_stage}/to_work", class: 'text-towork', id: 'go_to_work' do
-      Помощь по этапу
+      =t('menu.help_stage')
       %i.fa.fa-question-circle
   %li
     = link_to essay_posts_path(@project, current_stage == 'essay/posts' ? params[:stage].to_i : number_stage(current_stage)), class: 'text-essay', id: 'go_to_essay' do
-      Рефлексия по этапу
+      =t('menu.reflection_stage')
       %b="(#{@project.essay_count(current_stage == 'essay/posts' ? params[:stage].to_i : number_stage(current_stage)).count})"
       -#%i.fa.fa-refresh
 

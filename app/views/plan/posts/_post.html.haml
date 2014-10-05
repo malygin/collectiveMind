@@ -8,11 +8,11 @@
     %span.color-green=post.name
     %span
       -if boss?
-        =link_to 'подробнее', plan_post_path(@project, post), class: "btn btn-primary btn-xs"
+        =link_to t('link.more'), plan_post_path(@project, post), class: "btn btn-primary btn-xs"
         |
         = render 'shared/post_edit_bar', post: post
       -else
-        =link_to 'подробнее', plan_post_path(@project, post)
+        =link_to t('link.more'), plan_post_path(@project, post)
     %br
     =post.goal
     = render 'shared/post_social_bar2', post: post

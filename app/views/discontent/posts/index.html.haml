@@ -4,12 +4,12 @@
       %ul.nav.nav-tabs#tab_posts
         %li#old.active
           %a{:href => "#origin", "data-toggle" => "tab", :role => "tab"}
-            Исходные #{@aspect.aspect_posts.count}
+            ="#{t('show.discontent.origin')} #{@aspect.aspect_posts.count}"
         %li#new
-          =link_to "Объединенные #{@project.discontent_accepted_post.count}", "/project/#{@project.id}/discontent/posts/unions", remote: true, "data-toggle" => "tab", :role => "tab"
+          =link_to "#{t('show.discontent.unions')} #{@project.discontent_accepted_post.count}", "/project/#{@project.id}/discontent/posts/unions", remote: true, "data-toggle" => "tab", :role => "tab"
         %li#imp
           %a{:href => "#improve", "data-toggle" => "tab", :role => "tab"}
-            Неоформленные проблемы
+            =t('show.improve.problem')
       %br
       %br
       #form_for_group_discontent
@@ -20,8 +20,8 @@
               %section
                 .body
                   .pull-right
-                    = link_to t('show.add_new_group'), discontent_posts_new_group_path(@project, asp: params[:asp]) ,remote: true, id: 'add_record',  class: 'btn btn-danger'
-                  %h4=t('show.group_discontents')
+                    = link_to t('show.discontent.new_group'), discontent_posts_new_group_path(@project, asp: params[:asp]) ,remote: true, id: 'add_record',  class: 'btn btn-danger'
+                  %h4=t('show.discontent.groups')
                   %ul.news-list#panel_union_group
                     - @aspect.aspect_posts.by_status(2).created_order.each do |post|
                       %li{id: "post_union_#{post.id}"}
@@ -30,7 +30,7 @@
             .col-md-6
               %section
                 .body
-                  %h4=t('show.discontents')
+                  %h4=t('show.discontent.title')
                   %ul.news-list
                     =render partial:'post_short', collection: @aspect.aspect_posts.by_status([0,1]).sort_by{|c| c.discontent_post.nil? ? 0 : 1}
 
@@ -46,13 +46,13 @@
   .col-md-6
     %section
       .body
-        - if signed_in? and (@project.status ==3 or @project.demo?)
+        - if signed_in? and (@project.status == 3 or @project.demo?)
           .pull-right
-            = link_to '+ Добавить', new_discontent_post_path(@project, asp: params[:asp]) , id: 'add_record',  class: 'btn btn-danger'
+            = link_to t('link.add_record'), new_discontent_post_path(@project, asp: params[:asp]) , id: 'add_record',  class: 'btn btn-danger'
         - if boss? and @project.status == 7
           .pull-right
-            = link_to '+ Добавить обязательное несовершенство', new_discontent_post_path(@project, asp: params[:asp], required: true) , id: 'add_record',  class: 'btn btn-danger'
-        %h4=t('show.discontents')
+            = link_to t('show.discontent.add_required'), new_discontent_post_path(@project, asp: params[:asp], required: true) , id: 'add_record',  class: 'btn btn-danger'
+        %h4=t('show.discontent.title')
 
         %ul.news-list
           =render partial:'post_short', collection: @aspect.aspect_posts.by_status_for_discontent(@project) if @aspect
@@ -60,6 +60,6 @@
   .col-md-6
     %section
       .body
-        %h4=t('show.improve_discontents')
+        %h4=t('show.improve.problem')
         .chat-messages
           = render partial: 'shared/improve_comment',collection: @comments_all

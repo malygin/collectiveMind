@@ -1,9 +1,9 @@
 =link_to '/project/'+@project.id.to_s do
   %span.fa.fa-angle-double-left
-  вернуться к процедуре
+  =t('link.back_proc')
 %section.widget
   .body
-    %h1 Клубный рейтинг участников
+    %h1=t('show.user.club_rating')
     %table.table
       %tbody
         - @users.each_with_index do |user, i|
@@ -11,6 +11,6 @@
     .text-center
       = will_paginate @users
     %br
-    =link_to 'вернуться к процедуре', '/project/'+@project.id.to_s
+    =link_to t('link.back_proc'), '/project/'+@project.id.to_s
 
 

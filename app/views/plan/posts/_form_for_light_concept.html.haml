@@ -4,9 +4,9 @@
     .col-md-12
       .text-center
         %p.h5.color-teal
-          Краткое название вашего нововведения
+          =t('form.concept.title')
         %br
-        =f.text_field :title, style: 'width: 100%; height: 30px', placeholder:'Введите краткое название для своего нововведения'
+        =f.text_field :title, style: 'width: 100%; height: 30px', placeholder: t('form.concept.title_promt')
         %br
         %br
 
@@ -15,7 +15,7 @@
       .text-center
         %p.h5.color-teal
           %b A1.
-          =t('form.novation_what')
+          =t('form.concept.novation_what')
         %br
         =f.text_area :name, class: "concept_cond form-control", rows: 5, style: 'width: 100%;'
         %br
@@ -26,7 +26,7 @@
       .text-center
         %p.h5.color-teal
           %b A2.
-          =t('form.novation_how')
+          =t('form.concept.novation_how')
         %br
         =f.text_area :content, class: "concept_cond form-control", rows: 5, style: 'width: 100%;'
         %br
@@ -37,7 +37,7 @@
       .text-center
         %p.h5.color-teal
           %b B1.
-          =t('form.cond')
+          =t('form.concept.cond')
         %br
         =f.text_area :positive, class: "concept_cond form-control", rows: 5, style: 'width: 100%;'
         %br
@@ -48,7 +48,7 @@
       .text-center
         %p.h5.color-teal
           %b B2.
-          =t('form.cond_res')
+          =t('form.concept.cond_res')
   .row
     .col-md-12
       .form-group.has-success{:id => "resources_positive_r", :style => "line-height:20px;"}
@@ -131,7 +131,7 @@
       .text-center
         %p.h5.color-teal
           %b C1.
-          =t('form.negative_h')
+          =t('form.concept.negative_h')
         %br
         =f.text_area :negative, class: "concept_cond form-control", rows: 5, style: 'width: 100%;'
         %br
@@ -142,7 +142,7 @@
       .text-center
         %p.h5.color-teal
           %b C2.
-          =t('form.negative_res')
+          =t('form.concept.negative_res')
 
   .row
     .col-md-12
@@ -224,7 +224,7 @@
       .text-center
         %p.h5.color-teal
           %b D1.
-          =t('form.control')
+          =t('form.concept.control')
         %br
         =f.text_area :control, class: "concept_cond form-control", rows: 5,  style: 'width: 100%;'
         %br
@@ -235,7 +235,7 @@
       .text-center
         %p.h5.color-teal
           %b D2.
-          =t('form.control_res')
+          =t('form.concept.control_res')
 
   .row
     .col-md-12
@@ -318,7 +318,7 @@
       .text-center
         %p.h5.color-teal
           %b E1.
-          =t('form.obstacles_bcd')
+          =t('form.concept.obstacles_bcd')
         %br
         =f.text_area :obstacles, class: "concept_cond form-control", rows: 5,  style: 'width: 100%;'
         %br
@@ -329,7 +329,7 @@
       .text-center
         %p.h5.color-teal
           %b F1.
-          =t('form.problems')
+          =t('form.concept.problems')
         %br
         =f.text_area :problems, class: "concept_cond form-control", rows: 5, style: 'width: 100%;'
         %br
@@ -340,7 +340,7 @@
       .text-center
         %p.h5.color-teal
           %b F2.
-          =t('form.reality')
+          =t('form.concept.reality')
         %br
         =f.text_area :reality, class: "concept_cond form-control", rows: 5, style: 'width: 100%;'
         %br
@@ -348,4 +348,4 @@
     = render partial: 'plan/posts/note_list', locals: {post_field: form_for_light_concept,type_fd: 14}
 
   .pull-right
-    =f.submit 'Сохранить', class: 'btn btn-success'
+    =f.submit t('form.save'), class: 'btn btn-success'

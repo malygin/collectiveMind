@@ -4,11 +4,11 @@
       .modal-header
         %button.close{'aria-hidden' => 'true', 'data-dismiss' => 'modal', type: 'button'} ×
       .modal-body
-        %h3.text-center.color-green=t('form.create_success')
+        %h3.text-center.color-green=t('form.discontent.create_success')
         %hr
         .text-center
           .col-md-6
-            %a.btn.btn-lg.btn-primary(data-dismiss="modal")=t('form.create_more')
+            %a.btn.btn-lg.btn-primary(data-dismiss="modal")=t('form.add_more')
           .col-md-6
             = link_to t('link.go_list'), "/project/#{@project.id}/discontent/posts?asp=#{@aspect_id}", class: 'btn btn-lg btn-success'
         %br

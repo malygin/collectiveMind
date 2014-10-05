@@ -1,11 +1,11 @@
 =link_to '/project/'+@project.id.to_s do
   %span.fa.fa-angle-double-left
-  вернуться к процедуре
+  =t('link.back_proc')
 %section.widget
   .body
     -if @flash.present?
       #flash-panel.panel.panel-danger
-        %h4 Для сохранения статьи:
+        %h4=t('form.knowbase.save_notice')
         #flash.panel-body
           =raw(show_flash(@flash))
     -if @post

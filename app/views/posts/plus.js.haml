@@ -1,5 +1,5 @@
 $("#plus_post_#{@post.id}").effect("highlight", {color: '#f5cecd'}, 1000);
-$("#plus_post_#{@post.id}").find('span').html("#{@post.useful ? 'Забрать баллы' : 'Выдать баллы'}");
+$("#plus_post_#{@post.id}").find('span').html("#{@post.useful ? "#{t('show.revert_score')}" : "#{t('show.add_score')}"}");
 $("#plus_post_#{@post.id}").find('span').toggleClass('text-success text-danger');
 
 -if @post.instance_of? Discontent::Post

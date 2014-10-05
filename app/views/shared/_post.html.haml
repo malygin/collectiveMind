@@ -6,7 +6,7 @@
     %br
     %p.text-justify
       = trim_string(raw(post.content))
-      = link_to 'подробнее',  {controller: post.class.name.underscore.pluralize, action: :show, project: @project, id: post.id}
+      = link_to t('link.more'),  {controller: post.class.name.underscore.pluralize, action: :show, project: @project, id: post.id}
 
     .row
       .col-md-10

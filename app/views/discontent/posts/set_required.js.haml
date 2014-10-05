@@ -1,3 +1,3 @@
-alert('Несовершенство добавлено в обязательные');
-$('#set_required_#{@post.id} span').html('Добавлено');
+alert('#{t('show.discontent.required_success')}');
+$('#set_required_#{@post.id} span').html('#{t('show.discontent.required')}');
 $('#set_required_#{@post.id} span').removeClass('text-warning').addClass('text-success');

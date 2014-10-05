@@ -7,11 +7,11 @@
           %i.fa.fa-thumbs-up
           -if boss?
             =post_for_vote.voted_users.size
-          Проголосовать
+          =t('voting.vote')
         -if boss? and post_for_vote.status == 0
           =link_to({action: :set_aspect_status, id: post_for_vote.id},remote: true,method: :put,class: "btn btn-sm vote-button btn-danger", id: "set_vote_#{post_for_vote.id}") do
             %i.glyphicon.glyphicon-remove
-            %span Убрать
+            %span=t('link.remove')
   -else
     .box
       =simple_format(post_for_vote.content)
@@ -20,11 +20,11 @@
           %i.fa.fa-thumbs-up
           -if boss?
             =post_for_vote.voted_users.size
-          Проголосовать
+          =t('voting.vote')
         -if boss? and post_for_vote.status == 0
           =link_to({action: :set_aspect_status, id: post_for_vote.id},remote: true,method: :put,class: "btn btn-sm vote-button btn-danger", id: "set_vote_#{post_for_vote.id}") do
             %i.glyphicon.glyphicon-remove
-            %span Убрать
+            %span=t('link.remove')
 
   %br
   %br

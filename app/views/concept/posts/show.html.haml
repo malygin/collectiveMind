@@ -1,4 +1,4 @@
-%h4=link_to ' << Вернуться к списку', "/project/#{@project.id}/concept/posts/"
+%h4=link_to " << #{t('link.back_list')}", "/project/#{@project.id}/concept/posts/"
 
 - @post.post_aspects.each do |tp|
   %section
@@ -13,11 +13,11 @@
                   =link_to @post.user, user_path(@project, @post.user)
         .col-md-5
           %h4
-            Решаемое несовершенство:
+            =t('show.concept.solved_discontent')
             =render partial:'discontent/posts/post_short2', object: @post.concept_disposts.first
         .col-md-5
           %h4
-            Другие решаемые несовершенства:
+            =t('show.concept.solved_others_discontents')
             %br
             -@post.concept_disposts.by_discussions([@post.concept_disposts.first.id]).each_with_index  do |cd, index|
               .label.label-success=index+1
@@ -33,9 +33,9 @@
         |
         - if boss? or role_expert?
           =link_to({action: :discuss_status, id:@post.id, discuss_status:1},  remote:true, method: :put,  id: "discuss_stat_post_#{@post.id}") do
-            %span.label(class="#{label_discuss_stat(@post)}") ТРЕБУЕТ ОБСУЖДЕНИЯ
+            %span.label(class="#{label_discuss_stat(@post)}")=t('show.discuss')
         - elsif @post.discuss_status
-          %span.label-danger ТРЕБУЕТ ОБСУЖДЕНИЯ
+          %span.label-danger=t('show.discuss')
         = render '/shared/post_social_bar2', post:@post
       %br
       .row
@@ -48,11 +48,11 @@
                 .badge.badge-mutted A 1
                 -if boss? and @project.status == 7
                   =link_to({controller:'concept/posts', action: :status_post, id:@post.id, type_field:1},remote:true,method: :put, id:"label_post_#{@post.id}",class:"note_text") do
-                    %span(class= "#{class_for_concept_type_field(@post,1)}" id="#{id_for_concept_type(1)}")=t('form.novation_what')
+                    %span(class= "#{class_for_concept_type_field(@post,1)}" id="#{id_for_concept_type(1)}")=t('form.concept.novation_what')
                     =link_to({controller:'concept/posts', action: :new_note, id:@post.id, type_field:1},remote:true,method: :put, id:"btn_note_1", class:"note_text") do
-                      .label.label-danger замечание
+                      .label.label-danger=t('show.note')
                 -else
-                  %span(class= "#{class_for_concept_type_field(@post,1)}" id="name")=t('form.novation_what')
+                  %span(class= "#{class_for_concept_type_field(@post,1)}" id="name")=t('form.concept.novation_what')
               .form-group
                 =simple_format(tp.name)
               -if @project.status == 7
@@ -64,11 +64,11 @@
                 .badge.badge-mutted A 2
                 -if boss? and @project.status == 7
                   =link_to({controller:'concept/posts', action: :status_post, id:@post.id, type_field:2},remote:true,method: :put, id:"label_post_#{@post.id}",class:"note_text") do
-                    %span(class= "#{class_for_concept_type_field(@post,2)}" id="#{id_for_concept_type(2)}")=t('form.novation_how')
+                    %span(class= "#{class_for_concept_type_field(@post,2)}" id="#{id_for_concept_type(2)}")=t('form.concept.novation_how')
                     =link_to({controller:'concept/posts', action: :new_note, id:@post.id, type_field:2},remote:true,method: :put, id:"btn_note_2", class:"note_text") do
-                      .label.label-danger замечание
+                      .label.label-danger=t('show.note')
                 -else
-                  %span(class= "#{class_for_concept_type_field(@post,2)}" id="content")=t('form.novation_how')
+                  %span(class= "#{class_for_concept_type_field(@post,2)}" id="content")=t('form.concept.novation_how')
 
               .form-group.has-danger
                 =simple_format(tp.content)
@@ -81,11 +81,11 @@
                 .badge.badge-mutted В 1
                 -if boss? and @project.status == 7
                   =link_to({controller:'concept/posts', action: :status_post, id:@post.id, type_field:3},remote:true,method: :put, id:"label_post_#{@post.id}",class:"note_text") do
-                    %span(class= "#{class_for_concept_type_field(@post,3)}" id="#{id_for_concept_type(3)}")=t('form.cond')
+                    %span(class= "#{class_for_concept_type_field(@post,3)}" id="#{id_for_concept_type(3)}")=t('form.concept.cond')
                     =link_to({controller:'concept/posts', action: :new_note, id:@post.id, type_field:3},remote:true,method: :put, id:"btn_note_3", class:"note_text") do
-                      .label.label-danger замечание
+                      .label.label-danger=t('show.note')
                 -else
-                  %span(class= "#{class_for_concept_type_field(@post,3)}" id="positive")=t('form.cond')
+                  %span(class= "#{class_for_concept_type_field(@post,3)}" id="positive")=t('form.concept.cond')
 
               .form-group.has-success= display_content(tp.positive)
               -if @project.status == 7
@@ -96,11 +96,11 @@
                 .badge.badge-mutted В 2
                 -if boss? and @project.status == 7
                   =link_to({controller:'concept/posts', action: :status_post, id:@post.id, type_field:4},remote:true,method: :put, id:"label_post_#{@post.id}",class:"note_text") do
-                    %span(class= "#{class_for_concept_type_field(@post,4)}" id="#{id_for_concept_type(4)}")=t('form.cond_res')
+                    %span(class= "#{class_for_concept_type_field(@post,4)}" id="#{id_for_concept_type(4)}")=t('form.concept.cond_res')
                     =link_to({controller:'concept/posts', action: :new_note, id:@post.id, type_field:4},remote:true,method: :put, id:"btn_note_4", class:"note_text") do
-                      .label.label-danger замечание
+                      .label.label-danger=t('show.note')
                 -else
-                  %span(class= "#{class_for_concept_type_field(@post,4)}" id="positive_r")=t('form.cond_res')
+                  %span(class= "#{class_for_concept_type_field(@post,4)}" id="positive_r")=t('form.concept.cond_res')
               %br
               %br
               %table.table.table-striped.table-bordered
@@ -109,9 +109,9 @@
                     %th
                       ="#"
                     %th
-                      Название
+                      =t('show.concept.name_res')
                     %th
-                      Пояснение
+                      =t('show.concept.desc_res')
                 %tbody
                   - @post.concept_post_resources.by_type('positive_r').each_with_index  do |r, index|
                     %tr
@@ -139,11 +139,11 @@
                 .badge.badge-mutted С 1
                 -if boss? and @project.status == 7
                   =link_to({controller:'concept/posts', action: :status_post, id:@post.id, type_field:5},remote:true,method: :put, id:"label_post_#{@post.id}",class:"note_text") do
-                    %span(class= "#{class_for_concept_type_field(@post,5)}" id="#{id_for_concept_type(5)}")=t('form.negative')
+                    %span(class= "#{class_for_concept_type_field(@post,5)}" id="#{id_for_concept_type(5)}")=t('form.concept.negative')
                     =link_to({controller:'concept/posts', action: :new_note, id:@post.id, type_field:5},remote:true,method: :put, id:"btn_note_5", class:"note_text") do
-                      .label.label-danger замечание
+                      .label.label-danger=t('show.note')
                 -else
-                  %span(class= "#{class_for_concept_type_field(@post,5)}" id= "negative")=t('form.negative')
+                  %span(class= "#{class_for_concept_type_field(@post,5)}" id= "negative")=t('form.concept.negative')
 
               .form-group.has-success= display_content(tp.negative)
               -if @project.status == 7
@@ -155,11 +155,11 @@
                 .badge.badge-mutted С 2
                 -if boss? and @project.status == 7
                   =link_to({controller:'concept/posts', action: :status_post, id:@post.id, type_field:6},remote:true,method: :put, id:"label_post_#{@post.id}",class:"note_text") do
-                    %span(class= "#{class_for_concept_type_field(@post,6)}" id="#{id_for_concept_type(6)}")=t('form.negative_res')
+                    %span(class= "#{class_for_concept_type_field(@post,6)}" id="#{id_for_concept_type(6)}")=t('form.concept.negative_res')
                     =link_to({controller:'concept/posts', action: :new_note, id:@post.id, type_field:6},remote:true,method: :put, id:"btn_note_6", class:"note_text") do
-                      .label.label-danger замечание
+                      .label.label-danger=t('show.note')
                 -else
-                  %span(class= "#{class_for_concept_type_field(@post,6)}" id= "negative_r")=t('form.negative_res')
+                  %span(class= "#{class_for_concept_type_field(@post,6)}" id= "negative_r")=t('form.concept.negative_res')
 
               %br
               %br
@@ -169,9 +169,9 @@
                     %th
                       ="#"
                     %th
-                      Название
+                      =t('show.concept.name_res')
                     %th
-                      Пояснение
+                      =t('show.concept.desc_res')
                 %tbody
                   - @post.concept_post_resources.by_type('negative_r').each_with_index  do |r, index|
                     %tr
@@ -200,11 +200,11 @@
                 .badge.badge-mutted D 1
                 -if boss? and @project.status == 7
                   =link_to({controller:'concept/posts', action: :status_post, id:@post.id, type_field:7},remote:true,method: :put, id:"label_post_#{@post.id}",class:"note_text") do
-                    %span(class= "#{class_for_concept_type_field(@post,7)}" id="#{id_for_concept_type(7)}")=t('form.control')
+                    %span(class= "#{class_for_concept_type_field(@post,7)}" id="#{id_for_concept_type(7)}")=t('form.concept.control')
                     =link_to({controller:'concept/posts', action: :new_note, id:@post.id, type_field:7},remote:true,method: :put, id:"btn_note_7", class:"note_text") do
-                      .label.label-danger замечание
+                      .label.label-danger=t('show.note')
                 -else
-                  %span(class= "#{class_for_concept_type_field(@post,7)}" id= "control")=t('form.control')
+                  %span(class= "#{class_for_concept_type_field(@post,7)}" id= "control")=t('form.concept.control')
 
               .form-group.has-success= display_content(tp.control)
               -if @project.status == 7
@@ -216,11 +216,11 @@
                 .badge.badge-mutted D 2
                 -if boss? and @project.status == 7
                   =link_to({controller:'concept/posts', action: :status_post, id:@post.id, type_field:8},remote:true,method: :put, id:"label_post_#{@post.id}",class:"note_text") do
-                    %span(class= "#{class_for_concept_type_field(@post,8)}" id="#{id_for_concept_type(8)}")=t('form.control_res')
+                    %span(class= "#{class_for_concept_type_field(@post,8)}" id="#{id_for_concept_type(8)}")=t('form.concept.control_res')
                     =link_to({controller:'concept/posts', action: :new_note, id:@post.id, type_field:8},remote:true,method: :put, id:"btn_note_8", class:"note_text") do
-                      .label.label-danger замечание
+                      .label.label-danger=t('show.note')
                 -else
-                  %span(class= "#{class_for_concept_type_field(@post,8)}" id= "control_r")=t('form.control_res')
+                  %span(class= "#{class_for_concept_type_field(@post,8)}" id= "control_r")=t('form.concept.control_res')
 
               %br
               %br
@@ -230,9 +230,9 @@
                     %th
                       ="#"
                     %th
-                      Название
+                      =t('show.concept.name_res')
                     %th
-                      Пояснение
+                      =t('show.concept.desc_res')
                 %tbody
                   - @post.concept_post_resources.by_type('control_r').each_with_index  do |r, index|
                     %tr
@@ -260,11 +260,11 @@
                 .badge.badge-mutted E 1
                 -if boss? and @project.status == 7
                   =link_to({controller:'concept/posts', action: :status_post, id:@post.id, type_field:9},remote:true,method: :put, id:"label_post_#{@post.id}",class:"note_text") do
-                    %span(class= "#{class_for_concept_type_field(@post,9)}" id="#{id_for_concept_type(9)}")=t('form.obstacles_bcd')
+                    %span(class= "#{class_for_concept_type_field(@post,9)}" id="#{id_for_concept_type(9)}")=t('form.concept.obstacles_bcd')
                     =link_to({controller:'concept/posts', action: :new_note, id:@post.id, type_field:9},remote:true,method: :put, id:"btn_note_9", class:"note_text") do
-                      .label.label-danger замечание
+                      .label.label-danger=t('show.note')
                 -else
-                  %span(class= "#{class_for_concept_type_field(@post,9)}" id= "obstacles")=t('form.obstacles_bcd')
+                  %span(class= "#{class_for_concept_type_field(@post,9)}" id= "obstacles")=t('form.concept.obstacles_bcd')
 
               .form-group.has-success= display_content(tp.obstacles)
               -if @project.status == 7
@@ -276,11 +276,11 @@
                 .badge.badge-mutted F 1
                 -if boss? and @project.status == 7
                   =link_to({controller:'concept/posts', action: :status_post, id:@post.id, type_field:10},remote:true,method: :put, id:"label_post_#{@post.id}",class:"note_text") do
-                    %span(class= "#{class_for_concept_type_field(@post,10)}" id="#{id_for_concept_type(10)}")=t('form.problems')
+                    %span(class= "#{class_for_concept_type_field(@post,10)}" id="#{id_for_concept_type(10)}")=t('form.concept.problems')
                     =link_to({controller:'concept/posts', action: :new_note, id:@post.id, type_field:10},remote:true,method: :put, id:"btn_note_10", class:"note_text") do
-                      .label.label-danger замечание
+                      .label.label-danger=t('show.note')
                 -else
-                  %span(class= "#{class_for_concept_type_field(@post,10)}" id="problems")=t('form.problems')
+                  %span(class= "#{class_for_concept_type_field(@post,10)}" id="problems")=t('form.concept.problems')
 
               .form-group.has-success= display_content(tp.problems)
               -if @project.status == 7
@@ -292,11 +292,11 @@
                 .badge.badge-mutted F 2
                 -if boss? and @project.status == 7
                   =link_to({controller:'concept/posts', action: :status_post, id:@post.id, type_field:11},remote:true,method: :put, id:"label_post_#{@post.id}",class:"note_text") do
-                    %span(class= "#{class_for_concept_type_field(@post,11)}" id="#{id_for_concept_type(11)}")=t('form.reality')
+                    %span(class= "#{class_for_concept_type_field(@post,11)}" id="#{id_for_concept_type(11)}")=t('form.concept.reality')
                     =link_to({controller:'concept/posts', action: :new_note, id:@post.id, type_field:11},remote:true,method: :put, id:"btn_note_11", class:"note_text") do
-                      .label.label-danger замечание
+                      .label.label-danger=t('show.note')
                 -else
-                  %span(class= "#{class_for_concept_type_field(@post,11)}" id= "reality")=t('form.reality')
+                  %span(class= "#{class_for_concept_type_field(@post,11)}" id= "reality")=t('form.concept.reality')
 
               .form-group.has-success= display_content(tp.reality)
               -if @project.status == 7
@@ -306,7 +306,7 @@
             = render 'shared/post_edit_bar', post:@post
 
           %blockquote
-            %h4 Смотрите также другие решения:
+            %h4=t('show.concept.view_other_concepts')
             -if tp.discontent
               -tp.discontent.dispost_concepts.each do |pa|
                 - unless pa == @post

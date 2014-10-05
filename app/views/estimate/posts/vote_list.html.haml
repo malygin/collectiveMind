@@ -3,29 +3,24 @@
     .row
       .col-md-12
         %h3.color-grey
-          5 этап: Оценка проектов. Голосование.
+          =t('voting.plan.title')
           %br
-        %span(style='font-size: 20px;line-height: 30px;')
-          Голосование за проекты в рамках процедуры:
-          =@project.name
   .body
     %br
     #stage_success.text-center(style="display:none;" )
       %section.widget
         .body
-          %h3 Спасибо за участие в голосовании!
+          %h3=t('voting.thanks')
           .col-md-6
-            =link_to "Перейти к рефлексии", new_essay_post_path(@project, 5),class: "btn btn-lg btn-success"
+            =link_to t('voting.go_reflection'), new_essay_post_path(@project, 5),class: "btn btn-lg btn-success"
           .col-md-6
-            =link_to "Перейти к списку проектов", plan_posts_path(@project),class: "btn btn-lg btn-primary"
+            =link_to t('voting.plan.go_list'), plan_posts_path(@project),class: "btn btn-lg btn-primary"
           %br
           %br
     - unless @number_v<1  and not boss?
       %section.widget#fixBlock
         %h4
-          Вы можете выбрать
-          %b=@project.stage5
-          проект, который на Ваш взгляд является лучшим
+          =t('voting.plan.select', num: @project.stage5)
         %h3.text-info
           =t('voting.have_votes')
           %b#count_vote=@number_v

@@ -2,7 +2,7 @@
   -@post.post_stages.each_with_index do |stage,ind|
     %div(class="td_stage_#{stage.id}")
       %h3
-        %span="Этап #{ind+1}. "
+        %span="#{t('form.plan.stage.doc')} #{ind+1}. "
         %span.color-teal=stage.name
       -if stage.date_begin and stage.date_end
         %h3.color-green
@@ -18,9 +18,9 @@
           %th
             ="#"
           %th
-            Нововведения
+            =t('form.plan.concepts')
           %th
-            Мероприятия этапа
+            =t('form.plan.stage.actions')
       %tbody
         - unless stage.plan_post_aspects.nil?
           - stage.plan_post_aspects.each_with_index do |concept, index|
@@ -32,7 +32,7 @@
                   =link_to edit_concept_plan_post_path(@project, @post, :con_id => concept.id), :method => :put, :remote => true, :id => "edit_post_concept_#{concept.id}" do
                     %button.btn.btn-sm.btn-warning{:type => "button"}
                       %i.fa.fa-pencil
-                  =link_to destroy_concept_plan_post_path(@project, @post, :con_id => concept.id, :stage_id => stage.id), :method => :delete, :remote => true, :confirm => 'Удалить нововведение?', :id => "destroy_post_concept_#{concept.id}" do
+                  =link_to destroy_concept_plan_post_path(@project, @post, :con_id => concept.id, :stage_id => stage.id), :method => :delete, :remote => true, :confirm => t('confirm.delete_concept'), :id => "destroy_post_concept_#{concept.id}" do
                     %button.btn.btn-sm.btn-danger{:type => "button"}
                       %i.fa.fa-trash-o
                 =link_to view_concept_table_plan_post_path(@project, @post, :con_id => concept.id), :method => :get, :remote => true,:class => "color-white", :style => "text-decoration:none;border-bottom: 1px dashed #fafbfc;", :id => "view_post_concept_table_#{concept.id}" do
@@ -50,7 +50,7 @@
                       =link_to edit_action_plan_post_path(@project, @post, :act_id => action.id, :con_id => concept.id, :stage_id => stage.id), :method => :put, :remote => true, :id => "edit_post_action_#{action.id}" do
                         %button.btn.btn-xs.btn-warning{:type => "button"}
                           %i.fa.fa-pencil
-                      =link_to destroy_action_plan_post_path(@project, @post, :act_id => action.id, :con_id => concept.id, :stage_id => stage.id), :method => :delete, :remote => true, :confirm => 'Удалить нововведение?', :id => "destroy_post_action_#{action.id}" do
+                      =link_to destroy_action_plan_post_path(@project, @post, :act_id => action.id, :con_id => concept.id, :stage_id => stage.id), :method => :delete, :remote => true, :confirm => t('confirm.delete_concept'), :id => "destroy_post_action_#{action.id}" do
                         %button.btn.btn-xs.btn-danger{:type => "button"}
                           %i.fa.fa-trash-o
                     -if action.date_begin and action.date_end
@@ -70,10 +70,10 @@
               %tr(id="tr_new_action_#{concept.id}")
                 %td
                   =link_to new_action_plan_post_path(@project, @post, :con_id => concept.id, :stage_id => stage.id), :method => :put, :remote => true, :class => "btn btn-sm btn-success pull-right", :id => "btn_new_concept", :style => "font-weight: normal;width:200px;" do
-                    Запланировать мероприятие
+                    =t('form.plan.add_action')
 
         %tr(id="tr_new_concept_#{stage.id}")
           %td(colspan="3")
             =link_to add_concept_plan_post_path(@project, @post, :stage_id => stage.id), :method => :put, :remote => true, :class => "btn btn-sm btn-warning pull-right", :id => "btn_new_concept", :style => "font-weight: normal;width:200px;" do
-              Добавить нововведение
+              =t('form.plan.add_concept')
 

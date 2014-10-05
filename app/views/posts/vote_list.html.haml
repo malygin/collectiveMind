@@ -1,18 +1,18 @@
 %h3.text-info
-  1 этап: Сбор информации. Голосование
+  =t('voting.lifetape.title')
   %br
 %span(style='font-size: 20px;line-height: 30px;')
-  Определение наиболее важных тем процедуры
+  =t('voting.lifetape.name')
 
 %br
 - if boss?
   .pull-right
-    Показана сортировка,
-    =link_to "по умолчанию", {action: :vote_list },remote: true, class: "vote_class", id: "vote_all"
+    =t('show.sort')
+    =link_to t('show.sort_default'), {action: :vote_list },remote: true, class: "vote_class", id: "vote_all"
     |
-    =link_to "по голосам(убыванию)", {action: :vote_list, revers: 0 },remote: true, class: "vote_class", id: "vote_all"
+    =link_to t('show.sort_vote_asc'), {action: :vote_list, revers: 0 },remote: true, class: "vote_class", id: "vote_all"
     |
-    =link_to "по голосам(возрастанию)", {action: :vote_list, revers: 1 },remote: true, class: "vote_class", id: "vote_all"
+    =link_to t('show.sort_vote_desc'), {action: :vote_list, revers: 1 },remote: true, class: "vote_class", id: "vote_all"
   %br
   %br
 
@@ -20,11 +20,11 @@
   %section
     .body
       .text-center
-        %h3 Спасибо за участие в голосовании!
+        %h3=t('voting.thanks')
         .col-md-6
-          =link_to "Перейти к рефлексии", new_essay_post_path(@project, 1),class: "btn btn-lg btn-success"
+          =link_to t('voting.go_reflection'), new_essay_post_path(@project, 1),class: "btn btn-lg btn-success"
         .col-md-6
-          =link_to "Перейти к списку тем", life_tape_posts_path(@project),class: "btn btn-lg btn-primary"
+          =link_to t('voting.lifetape.go_list'), life_tape_posts_path(@project),class: "btn btn-lg btn-primary"
       %br
       %br
 %br
@@ -33,9 +33,7 @@
 - unless @number_v<1  and not boss?
   %section.widget
     %h4
-      Вы можете выбрать
-      %b=@project.stage1_count
-      тем(ы), которые на Ваш взгляд являются наиболее важными
+      =t('voting.lifetape.select', num: @project.stage1_count)
     %h3.text-info
       =t('voting.have_votes')
       %b#count_vote=@number_v

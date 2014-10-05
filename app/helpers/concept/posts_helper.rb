@@ -107,11 +107,11 @@ module Concept::PostsHelper
     stat_p = Concept::Post.stat_fields_positive(pa.id)
     stat_n = Concept::Post.stat_fields_negative(pa.id)
     if stat_p.present?
-      content_tag :span, 'Проверено', class: 'color-green'
+      content_tag :span, t('show.concept.check'), class: 'color-green'
     elsif stat_n.present?
-      content_tag :span, 'Замечания', class: 'color-red'
+      content_tag :span, t('show.concept.notes'), class: 'color-red'
     else
-      content_tag :span, 'Проверяется'
+      content_tag :span, t('show.concept.check_now')
     end
   end
 
@@ -164,13 +164,13 @@ module Concept::PostsHelper
 
   def level_complite(level)
     if level == 1
-      'несовершенство решается в незначительной мере'
+      "#{t('show.concept.complite')} #{t('show.concept.complite_1')}"
     elsif level == 2
-      'несовершенство решается в значительной мере'
+      "#{t('show.concept.complite')} #{t('show.concept.complite_2')}"
     elsif level == 3
-      'несовершенство решается полностью'
+      "#{t('show.concept.complite')} #{t('show.concept.complite_3')}"
     else
-      'не определено'
+      t('show.concept.not_use')
     end
   end
 
@@ -179,13 +179,13 @@ module Concept::PostsHelper
       complite = post.concept_post_discontents.by_concept(pa.id).first.complite
     end
     if complite == 1
-      'в незначительной мере'
+      t('show.concept.complite_1')
     elsif complite == 2
-      'в значительной мере'
+      t('show.concept.complite_2')
     elsif complite == 3
-      'полностью'
+      t('show.concept.complite_3')
     else
-      'не определено'
+      t('show.concept.not_use')
     end
   end
 

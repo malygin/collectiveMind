@@ -3,28 +3,28 @@
     .modal-content
       .modal-header
         %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", type: "button"} ×
-        %h3#myModalLabel.modal-title Добавление этапа в проект
+        %h3#myModalLabel.modal-title=t('form.plan.stage.title')
       .modal-body
         = form_for stage, url: {project: @project.id, stage_id: stage.persisted? ? stage.id : nil, action: stage.persisted? ? 'update_stage' : 'create_stage'}, remote: true, method: :put do |f|
           = render 'shared/notice_messages', object: f.object
           .form-group(style="margin-left:0;")
-            %label{for: "name_stage"} Название этапа
-            =f.text_field :name, class: 'form-control', placeholder: 'Введите название этапа', id:'name_stage'
-            %span.small Короткое название этапа
+            %label{for: "name_stage"}=t('form.plan.stage.name')
+            =f.text_field :name, class: 'form-control', placeholder: t('form.plan.stage.name_promt'), id:'name_stage'
+            %span.small=t('form.plan.stage.name_short')
           .col-md-6
             .form-group(style="margin-left:0;")
-              %label{for: "date_begin"} Дата начала реализации
+              %label{for: "date_begin"}=t('form.plan.stage.date_begin')
               =f.text_field :date_begin, class: 'form-control datepicker', id:'date_begin'
           .col-md-6
             .form-group(style="margin-left:0;")
-              %label{for: "date_end"} Дата окончания реализации
+              %label{for: "date_end"}=t('form.plan.stage.date_end')
               =f.text_field :date_end, class: 'form-control datepicker', id:'date_end'
           .form-group(style="margin-left:0;")
-            %label{for: "desc_stage"} Эссе по этапу
+            %label{for: "desc_stage"}=t('form.plan.stage.essay')
             =f.text_area :desc, class: 'form-control', rows: 10, placeholder: 'Введите описание этапа', id:'desc_stage'
-            %span.small Опишите ваше видение проекта в будущем в рамках данного этапа
+            %span.small=t('form.plan.stage.desc_future')
           .pull-right
-            %button.btn.btn-default(type = "button" data-dismiss="modal" style="margin-right:5px;") Закрыть
-            =f.submit 'Сохранить', id: "send_post", class: 'btn btn-success'
+            %button.btn.btn-default(type = "button" data-dismiss="modal" style="margin-right:5px;")=t('form.close')
+            =f.submit t('form.save'), id: "send_post", class: 'btn btn-success'
       %br
       .modal-footer(style="margin-top:30px;padding-bottom:10px;")

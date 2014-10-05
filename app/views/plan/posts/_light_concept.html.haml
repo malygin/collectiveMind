@@ -3,14 +3,14 @@
     .text-left
       %h5.color-orange
         %b A1.
-        =t('form.novation_what')
+        =t('form.concept.novation_what')
       %p=light_concept.name
 
   -if light_concept.content.present?
     .text-left
       %h5.color-orange
         %b A2.
-        =t('form.novation_how')
+        =t('form.concept.novation_how')
       %p=light_concept.content
 
 -elsif what_view
@@ -26,10 +26,10 @@
             =link_to view_concept_plan_post_path(@project, @post, post_id: post.id, con_id: pa.post_aspects.first.id), method: :get, remote: true, class: "color-teal", "data-toggle"=> "collapse", "data-target"=> "collapse_plus_concept_#{post.id}_#{pa.post_aspects.first.id}", style: "text-decoration:none;", id: "view_post_concept_#{post.id}_#{pa.post_aspects.first.id}" do
               =pa.post_aspects.first.title
           - else
-            Без названия
+          =t('show.without_name')
         .col-md-2(class="td_plus_concept_#{pa.post_aspects.first.id}")
           -if plus_concept?(@post_stage,pa)
-            .label.label-success Добавлено
+            .label.label-success=t('form.plan.concept.add')
         .col-md-1
           .pull-right
             =link_to add_form_for_concept_plan_post_path(@project, @post,stage_id: @post_stage.id, concept_id: pa.post_aspects.first.id, save_form: true), method: :put, remote: true, id: "plus_post_concept_#{pa.id}" do
@@ -45,18 +45,18 @@
     -if light_concept.name.present?
       .color-teal
         %b A1.
-        =t('form.novation_what')
+        =t('form.concept.novation_what')
       %p
         =light_concept.name
     -if light_concept.content.present?
       .color-teal
         %b A2.
-        =t('form.novation_how')
+        =t('form.concept.novation_how')
       %p
         =light_concept.content
     -if light_concept.positive.present?
       .color-teal
         %b B1.
-        =t('form.cond')
+        =t('form.concept.cond')
       %p
         =light_concept.positive

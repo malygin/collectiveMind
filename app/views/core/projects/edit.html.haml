@@ -1,7 +1,7 @@
-%h1 Форма редактирования процедуры
+%h1=t('form.project.edit')
 
 = render 'form'
 
-= link_to 'Перейти', "/project/#{@core_project.id}"
+= link_to t('link.move'), "/project/#{@core_project.id}"
 \|
-= link_to 'Назад', core_projects_path
+= link_to t('link.back'), core_projects_path

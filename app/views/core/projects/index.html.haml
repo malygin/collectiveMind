@@ -1,7 +1,7 @@
 - if signed_in?
   -if @closed_projects.present?
     %h4
-      %strong Закрытые процедуры
+      %strong=t('show.project.closed')
     - @closed_projects.each do |project|
       .row
         .col-md-9
@@ -9,12 +9,12 @@
           %b="(#{status_project(project)})"
         .col-md-3
           =link_to "/project/#{project.id}", class:'btn btn-lg btn-danger', id: 'go_to_closed_project' do
-            Перейти к процедуре
+            =t('link.go_to_project')
       %br
     %hr
   -if @opened_projects.present?
     %h4
-      %strong Открытые процедуры
+      %strong=t('show.project.opened')
     - @opened_projects.each do |project|
       .row
         .col-md-9
@@ -22,12 +22,12 @@
           %b="(#{status_project(project)})"
         .col-md-3
           =link_to "/project/#{project.id}", class:'btn btn-lg btn-danger', id: 'go_to_opened_project' do
-            Перейти к процедуре
+            =t('link.go_to_project')
       %br
     %hr
   -if @demo_projects.present?
     %h4
-      %strong Демо процедуры
+      %strong=t('show.project.demo')
     - @demo_projects.each do |project|
       .row
         .col-md-9
@@ -35,12 +35,12 @@
           %b="(#{status_project(project)})"
         .col-md-3
           =link_to "/project/#{project.id}", class:'btn btn-lg btn-danger', id: 'go_to_demo_project' do
-            Перейти к процедуре
+            =t('link.go_to_project')
       %br
     %hr
   -if @club_projects.present?
     %h4
-      %strong Клубные процедуры
+      %strong=t('show.project.club')
     - @club_projects.each do |project|
       .row
         .col-md-9
@@ -48,7 +48,7 @@
           %b="(#{status_project(project)})"
         .col-md-3
           =link_to "/project/#{project.id}", class:'btn btn-lg btn-danger', id: 'go_to_club_project' do
-            Перейти к процедуре
+            =t('link.go_to_project')
       %br
 
   %br

@@ -1,14 +1,14 @@
 .row
   .col-md-12
     %h3
-      =t('voting.second_title')
+      =t('voting.discontent.title')
       %br
 
 %section
   %header
-    %h4=t('voting.imp_aspects')
+    %h4=t('voting.discontent.important')
   .body
-    %span Несовершенство:
+    %span=t('voting.discontent.name')
     %span#prog_now=@votes != @post_all ? @votes+1 : @votes
     из
     %span#prog_all=@post_all
@@ -17,11 +17,11 @@
 
     -@posts.each do |post|
       =render partial: 'post_for_vote', object: post
-    #vote_success.text-internal.text-center(style="display:none;" )
+    #vote_success.text-internal.text-center(style="display:none;")
       %h3=t('voting.thanks')
       .col-md-6
-        =link_to t('show.go_reflec'), new_essay_post_path(@project, 2),class: "btn btn-lg btn-success"
+        =link_to t('voting.go_reflection'), new_essay_post_path(@project, 2),class: "btn btn-lg btn-success"
       .col-md-6
-        =link_to "Перейти к списку несовершенств", discontent_posts_path(@project),class: "btn btn-lg btn-primary"
+        =link_to t('voting.discontent.go_list'), discontent_posts_path(@project),class: "btn btn-lg btn-primary"
       %br
       %br

@@ -6,25 +6,25 @@
   %br
   %h4.color-orange.text-center
     %b A1.
-    =t('form.novation_what')
+    =t('form.concept.novation_what')
   .form-group
     =simple_format(pa.name)
 
   %h4.color-orange.text-center
     %b A2.
-    =t('form.novation_how')
+    =t('form.concept.novation_how')
   .form-group.has-danger
     =simple_format(pa.content)
 
   %hr
   %h4.color-orange.text-center
     %b B1.
-    =t('form.cond')
+    =t('form.concept.cond')
   .form-group.has-success= display_content(pa.positive)
 
   %h4.color-orange.text-center
     %b B2.
-    =t('form.cond_res')
+    =t('form.concept.cond_res')
   %br
   %table.table.table-striped.table-bordered
     %thead
@@ -32,9 +32,9 @@
         %th
           ="#"
         %th
-          Название
+          =t('show.concept.name_res')
         %th
-          Пояснение
+          =t('show.concept.desc_res')
     %tbody
       - pa.plan_post_resources.by_type('positive_r').each_with_index do |r, index|
         %tr
@@ -47,7 +47,7 @@
 
   %h4.color-orange.text-center
     %b B3.
-    =t('form.cond_s')
+    =t('form.concept.cond_s')
   %br
   %table.table.table-striped.table-bordered
     %thead
@@ -55,9 +55,9 @@
         %th
           ="#"
         %th
-          Название
+          =t('show.concept.name_res')
         %th
-          Пояснение
+          =t('show.concept.desc_res')
     %tbody
       - pa.plan_post_means.by_type('positive_s').each_with_index do |r, index|
         %tr
@@ -67,87 +67,88 @@
             =r.name
           %td
             =r.desc
+  %br
+  %br
 
-  Для создания ресурсов в проекте предлагаются определенные средства. Проанализируйте их и оцените, какова вероятность того, что на базе этих средств ресурсы будут созданы --
+  =t('form.estimate.title_5')
   .field
-    = f.label "-- 1) в полном объеме"
-    = select_tag "on[0][#{pa.id}][1]",   options_for_select([["невероятно", 1.0],["маловероятно", 2.0], ["вероятно", 3.0], ["очень вероятно", 4.0]], est.on1), onchange: "color_select(this)", class: "estimate_select"
-
+    = f.label "-- 1) #{t('form.estimate.fullness_9')}"
+    = select_tag "on[0][#{pa.id}][1]",   options_for_select([[t('form.estimate.chance_1'), 1.0],[t('form.estimate.chance_2'), 2.0], [t('form.estimate.chance_3'), 3.0], [t('form.estimate.chance_4'), 4.0]], est.on1), onchange: "color_select(this)", class: "estimate_select"
   .field
-    = f.label "-- 2) в значительном объеме"
-    = select_tag "on[0][#{pa.id}][2]",   options_for_select([["невероятно", 1.0],["маловероятно", 2.0], ["вероятно", 3.0], ["очень вероятно", 4.0]], est.on2), onchange: "color_select(this)", class: "estimate_select"
+    = f.label "-- 2) #{t('form.estimate.fullness_10')}"
+    = select_tag "on[0][#{pa.id}][2]",   options_for_select([[t('form.estimate.chance_1'), 1.0],[t('form.estimate.chance_2'), 2.0], [t('form.estimate.chance_3'), 3.0], [t('form.estimate.chance_4'), 4.0]], est.on2), onchange: "color_select(this)", class: "estimate_select"
   .field
-    = f.label "-- 3) в небольшом объеме"
-    = select_tag "on[0][#{pa.id}][3]",   options_for_select([["невероятно", 1.0],["маловероятно", 2.0], ["вероятно", 3.0], ["очень вероятно", 4.0]], est.on3), onchange: "color_select(this)", class: "estimate_select"
+    = f.label "-- 3) #{t('form.estimate.fullness_11')}"
+    = select_tag "on[0][#{pa.id}][3]",   options_for_select([[t('form.estimate.chance_1'), 1.0],[t('form.estimate.chance_2'), 2.0], [t('form.estimate.chance_3'), 3.0], [t('form.estimate.chance_4'), 4.0]], est.on3), onchange: "color_select(this)", class: "estimate_select"
   .field
-    = f.label "-- 4) в ничтожном  объеме"
-    = select_tag "on[0][#{pa.id}][4]",   options_for_select([["невероятно", 1.0],["маловероятно", 2.0], ["вероятно", 3.0], ["очень вероятно", 4.0]], est.on4), onchange: "color_select(this)", class: "estimate_select"
+    = f.label "-- 4) #{t('form.estimate.fullness_12')}"
+    = select_tag "on[0][#{pa.id}][4]",   options_for_select([[t('form.estimate.chance_1'), 1.0],[t('form.estimate.chance_2'), 2.0], [t('form.estimate.chance_3'), 3.0], [t('form.estimate.chance_4'), 4.0]], est.on4), onchange: "color_select(this)", class: "estimate_select"
   .field
     %br
-    = f.label 'Объясните, почему вы так считаете'
+    = f.label t('form.estimate.desc')
     %br
     = text_area_tag "on_text[0][#{pa.id}]", est.on ,   rows: 3, style: 'width: 100%;'
   %br
   %br
   %br
-  Использование этих средств потребует материальных и трудовых затрат. Какова вероятность, что эти затраты окажутся--
+  =t('form.estimate.title_6')
   .field
-    = f.label '--1) значительными '
-    = select_tag "ozs[0][#{pa.id}][1]",   options_for_select([["невероятно", 1.0],["маловероятно", 2.0], ["вероятно", 3.0], ["очень вероятно", 4.0]], est.ozs1), onchange: "color_select(this)", class: "estimate_select"
+    = f.label "-- 1) #{t('form.estimate.select_4')}"
+    = select_tag "ozs[0][#{pa.id}][1]",   options_for_select([[t('form.estimate.chance_1'), 1.0],[t('form.estimate.chance_2'), 2.0], [t('form.estimate.chance_3'), 3.0], [t('form.estimate.chance_4'), 4.0]], est.ozs1), onchange: "color_select(this)", class: "estimate_select"
   .field
-    = f.label "--2) средними "
-    = select_tag "ozs[0][#{pa.id}][2]",   options_for_select([["невероятно", 1.0],["маловероятно", 2.0], ["вероятно", 3.0], ["очень вероятно", 4.0]], est.ozs2), onchange: "color_select(this)", class: "estimate_select"
+    = f.label "-- 2) #{t('form.estimate.select_3')}"
+    = select_tag "ozs[0][#{pa.id}][2]",   options_for_select([[t('form.estimate.chance_1'), 1.0],[t('form.estimate.chance_2'), 2.0], [t('form.estimate.chance_3'), 3.0], [t('form.estimate.chance_4'), 4.0]], est.ozs2), onchange: "color_select(this)", class: "estimate_select"
   .field
-    = f.label "--3) незначительными "
-    = select_tag "ozs[0][#{pa.id}][3]",   options_for_select([["невероятно", 1.0],["маловероятно", 2.0], ["вероятно", 3.0], ["очень вероятно", 4.0]], est.ozs3), onchange: "color_select(this)", class: "estimate_select"
+    = f.label "-- 3) #{t('form.estimate.select_2')}"
+    = select_tag "ozs[0][#{pa.id}][3]",   options_for_select([[t('form.estimate.chance_1'), 1.0],[t('form.estimate.chance_2'), 2.0], [t('form.estimate.chance_3'), 3.0], [t('form.estimate.chance_4'), 4.0]], est.ozs3), onchange: "color_select(this)", class: "estimate_select"
   .field
-    = f.label "--4) ничтожными  "
-    = select_tag "ozs[0][#{pa.id}][4]",   options_for_select([["невероятно", 1.0],["маловероятно", 2.0], ["вероятно", 3.0], ["очень вероятно", 4.0]], est.ozs4), onchange: "color_select(this)", class: "estimate_select"
+    = f.label "-- 4) #{t('form.estimate.select_0')}"
+    = select_tag "ozs[0][#{pa.id}][4]",   options_for_select([[t('form.estimate.chance_1'), 1.0],[t('form.estimate.chance_2'), 2.0], [t('form.estimate.chance_3'), 3.0], [t('form.estimate.chance_4'), 4.0]], est.ozs4), onchange: "color_select(this)", class: "estimate_select"
   .field
     %br
-    = f.label 'Объясните, почему вы так считаете'
+    = f.label t('form.estimate.desc')
     %br
     = text_area_tag "ozs_text[0][#{pa.id}]", est.ozs,   rows: 3, style: 'width: 100%;'
   %br
   %br
   %br
-  Предположим, что будущее уже наступило и все предложенные ресурсы созданы и работают. Какова вероятность, что с их помощью несовершенство будет устранено--
+  =t('form.estimate.title_7')
   .field
-    = f.label "-- 1) полностью ?"
-    = select_tag "op[0][#{pa.id}][1]",   options_for_select([["невероятно", 1.0],["маловероятно", 2.0], ["вероятно", 3.0], ["очень вероятно", 4.0]], est.op1), onchange: "color_select(this)", class: "estimate_select"
+    = f.label "-- 1) #{t('form.estimate.fullness_13')} ?"
+    = select_tag "op[0][#{pa.id}][1]",  options_for_select([[t('form.estimate.chance_1'), 1.0],[t('form.estimate.chance_2'), 2.0], [t('form.estimate.chance_3'), 3.0], [t('form.estimate.chance_4'), 4.0]], est.op1), onchange: "color_select(this)", class: "estimate_select"
   .field
-    = f.label "-- 2) в значительной мере ?"
-    = select_tag "op[0][#{pa.id}][2]",   options_for_select([["невероятно", 1.0],["маловероятно", 2.0], ["вероятно", 3.0], ["очень вероятно", 4.0]], est.op2), onchange: "color_select(this)", class: "estimate_select"
+    = f.label "-- 2) #{t('form.estimate.fullness_14')} ?"
+    = select_tag "op[0][#{pa.id}][2]",  options_for_select([[t('form.estimate.chance_1'), 1.0],[t('form.estimate.chance_2'), 2.0], [t('form.estimate.chance_3'), 3.0], [t('form.estimate.chance_4'), 4.0]], est.op2), onchange: "color_select(this)", class: "estimate_select"
   .field
-    = f.label "-- 3) в небольшой мере?"
-    = select_tag "op[0][#{pa.id}][3]",   options_for_select([["невероятно", 1.0],["маловероятно", 2.0], ["вероятно", 3.0], ["очень вероятно", 4.0]], est.op3), onchange: "color_select(this)", class: "estimate_select"
+    = f.label "-- 3) #{t('form.estimate.fullness_15')} ?"
+    = select_tag "op[0][#{pa.id}][3]",  options_for_select([[t('form.estimate.chance_1'), 1.0],[t('form.estimate.chance_2'), 2.0], [t('form.estimate.chance_3'), 3.0], [t('form.estimate.chance_4'), 4.0]], est.op3), onchange: "color_select(this)", class: "estimate_select"
   .field
-    = f.label "-- 4) в ничтожной  мере ?"
-    = select_tag "op[0][#{pa.id}][4]",  options_for_select([["невероятно", 1.0],["маловероятно", 2.0], ["вероятно", 3.0], ["очень вероятно", 4.0]], est.op4), onchange: "color_select(this)", class: "estimate_select"
+    = f.label "-- 4) #{t('form.estimate.fullness_16')} ?"
+    = select_tag "op[0][#{pa.id}][4]",  options_for_select([[t('form.estimate.chance_1'), 1.0],[t('form.estimate.chance_2'), 2.0], [t('form.estimate.chance_3'), 3.0], [t('form.estimate.chance_4'), 4.0]], est.op4), onchange: "color_select(this)", class: "estimate_select"
   .field
     %br
-    = f.label 'Объясните, почему вы так считаете'
+    = f.label t('form.estimate.desc')
     %br
     = text_area_tag "op_text[0][#{pa.id}]", est.op,   rows: 3, style: 'width: 100%;'
   %br
   %br
   %br
-  Функционирование ресурсов потребует материальных и трудовых затрат. Какова вероятность, что эти затраты окажутся—
+  =t('form.estimate.title_8')
   .field
-    = f.label '--1) значительными '
-    = select_tag "ozf[0][#{pa.id}][1]",   options_for_select([["невероятно", 1.0],["маловероятно", 2.0], ["вероятно", 3.0], ["очень вероятно", 4.0]], est.ozf1), onchange: "color_select(this)", class: "estimate_select"
+    = f.label "-- 1) #{t('form.estimate.select_4')}"
+    = select_tag "ozf[0][#{pa.id}][1]",   options_for_select([[t('form.estimate.chance_1'), 1.0],[t('form.estimate.chance_2'), 2.0], [t('form.estimate.chance_3'), 3.0], [t('form.estimate.chance_4'), 4.0]], est.ozf1), onchange: "color_select(this)", class: "estimate_select"
   .field
-    = f.label '-- 2) средними '
-    = select_tag "ozf[0][#{pa.id}][2]",   options_for_select([["невероятно", 1.0],["маловероятно", 2.0], ["вероятно", 3.0], ["очень вероятно", 4.0]], est.ozf2), onchange: "color_select(this)", class: "estimate_select"
+    = f.label "-- 2) #{t('form.estimate.select_3')}"
+    = select_tag "ozf[0][#{pa.id}][2]",   options_for_select([[t('form.estimate.chance_1'), 1.0],[t('form.estimate.chance_2'), 2.0], [t('form.estimate.chance_3'), 3.0], [t('form.estimate.chance_4'), 4.0]], est.ozf2), onchange: "color_select(this)", class: "estimate_select"
   .field
-    = f.label '-- 3) незначительными '
-    = select_tag "ozf[0][#{pa.id}][3]",   options_for_select([["невероятно", 1.0],["маловероятно", 2.0], ["вероятно", 3.0], ["очень вероятно", 4.0]], est.ozf3), onchange: "color_select(this)", class: "estimate_select"
+    = f.label "-- 3) #{t('form.estimate.select_2')}"
+    = select_tag "ozf[0][#{pa.id}][3]",   options_for_select([[t('form.estimate.chance_1'), 1.0],[t('form.estimate.chance_2'), 2.0], [t('form.estimate.chance_3'), 3.0], [t('form.estimate.chance_4'), 4.0]], est.ozf3), onchange: "color_select(this)", class: "estimate_select"
   .field
-    = f.label '-- 4) ничтожными  '
-    = select_tag "ozf[0][#{pa.id}][4]",   options_for_select([["невероятно", 1.0],["маловероятно", 2.0], ["вероятно", 3.0], ["очень вероятно", 4.0]], est.ozf4), onchange: "color_select(this)", class: "estimate_select"
+    = f.label "-- 4) #{t('form.estimate.select_0')}"
+    = select_tag "ozf[0][#{pa.id}][4]",   options_for_select([[t('form.estimate.chance_1'), 1.0],[t('form.estimate.chance_2'), 2.0], [t('form.estimate.chance_3'), 3.0], [t('form.estimate.chance_4'), 4.0]], est.ozf4), onchange: "color_select(this)", class: "estimate_select"
   .field
     %br
-    = f.label 'Объясните, почему вы так считаете'
+    = f.label t('form.estimate.desc')
     %br
     = text_area_tag "ozf_text[0][#{pa.id}]", est.ozf ,   rows: 3, style: 'width: 100%;'
   %br
@@ -156,12 +157,12 @@
   %hr
   %h4.color-orange.text-center
     %b C1.
-    =t('form.negative')
+    =t('form.concept.negative')
   .form-group.has-success= display_content(pa.negative)
 
   %h4.color-orange.text-center
     %b C2.
-    =t('form.negative_res')
+    =t('form.concept.negative_res')
   %br
   %table.table.table-striped.table-bordered
     %thead
@@ -169,9 +170,9 @@
         %th
           ="#"
         %th
-          Название
+          =t('show.concept.name_res')
         %th
-          Пояснение
+          =t('show.concept.desc_res')
     %tbody
       - pa.plan_post_resources.by_type('negative_r').each_with_index do |r, index|
         %tr
@@ -185,7 +186,7 @@
 
   %h4.color-orange.text-center
     %b C3.
-    =t('form.negative_s')
+    =t('form.concept.negative_s')
   %br
   %table.table.table-striped.table-bordered
     %thead
@@ -193,9 +194,9 @@
         %th
           ="#"
         %th
-          Название
+          =t('show.concept.name_res')
         %th
-          Пояснение
+          =t('show.concept.desc_res')
     %tbody
       - pa.plan_post_means.by_type('negative_s').each_with_index do |r, index|
         %tr
@@ -209,12 +210,12 @@
   %hr
   %h4.color-orange.text-center
     %b D1.
-    =t('form.control')
+    =t('form.concept.control')
   .form-group.has-success= display_content(pa.control)
 
   %h4.color-orange.text-center
     %b D2.
-    =t('form.control_res')
+    =t('form.concept.control_res')
   %br
   %table.table.table-striped.table-bordered
     %thead
@@ -222,9 +223,9 @@
         %th
           ="#"
         %th
-          Название
+          =t('show.concept.name_res')
         %th
-          Пояснение
+          =t('show.concept.desc_res')
     %tbody
       - pa.plan_post_resources.by_type('control_r').each_with_index do |r, index|
         %tr
@@ -237,7 +238,7 @@
 
   %h4.color-orange.text-center
     %b D3.
-    =t('form.control_s')
+    =t('form.concept.control_s')
   %br
   %table.table.table-striped.table-bordered
     %thead
@@ -245,9 +246,9 @@
         %th
           ="#"
         %th
-          Название
+          =t('show.concept.name_res')
         %th
-          Пояснение
+          =t('show.concept.desc_res')
     %tbody
       - pa.plan_post_means.by_type('control_s').each_with_index do |r, index|
         %tr
@@ -261,16 +262,16 @@
   %hr
   %h4.color-orange.text-center
     %b E1.
-    =t('form.obstacles_bcd')
+    =t('form.concept.obstacles_bcd')
   .form-group.has-success= display_content(pa.obstacles)
 
   %hr
   %h4.color-orange.text-center
     %b F1.
-    =t('form.problems')
+    =t('form.concept.problems')
   .form-group.has-success= display_content(pa.problems)
 
   %h4.color-orange.text-center
     %b F2.
-    =t('form.reality')
+    =t('form.concept.reality')
   .form-group.has-success= display_content(pa.reality)

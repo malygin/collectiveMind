@@ -1,4 +1,4 @@
-$('#add_new_stage').html('<a id="btn_new_stage" class="btn btn-lg btn-success btn-block" data-remote="true" data-method="put" style="font-weight: normal;" href="/project/#{@project.id}/plan/posts/#{@plan_post.id}/new_stage">Добавить этап в проект</a>');
+$('#add_new_stage').html('<a id="btn_new_stage" class="btn btn-lg btn-success btn-block" data-remote="true" data-method="put" style="font-weight: normal;" href="/project/#{@project.id}/plan/posts/#{@plan_post.id}/new_stage">#{t('form.plan.stage.new')}</a>');
 $('#second').removeClass('disabled');
 $('#third').removeClass('disabled');
 $('#btn_next').removeClass('disabled');

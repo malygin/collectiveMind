@@ -5,7 +5,7 @@
       = link_to post.user, user_path(@project, post.user)
     %span=trim_content(post.content)
     %br
-    = link_to 'подробнее', essay_post_path(@project,@stage, post), class: 'btn btn-primary btn-xs'
+    = link_to t('link.more'), essay_post_path(@project,@stage, post), class: 'btn btn-primary btn-xs'
     |
     = render partial: 'post_edit_essay', object: post
     %br

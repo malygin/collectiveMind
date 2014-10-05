@@ -1,6 +1,6 @@
 =link_to '/project/'+@project.id.to_s do
   %span.fa.fa-angle-double-left
-  вернуться к процедуре
+  =t('link.back_proc')
 
 %section.widget
   .body
@@ -8,7 +8,7 @@
       .col-md-4
         = image_tag  @user.avatar(:normal)
         %br
-        %h3="Достижения (#{@user.awards.for_project(@project).count} из 22)"
+        %h3=t('show.user.award', num: @user.awards.for_project(@project).count, all: 22)
         %br
         -@awards.each do |a|
           =image_tag('/assets/awards/'+a.url+'_70_70.png', title: a.name, class: "#{'disabled_award' if not @user.awards.for_project(@project).include? a}")
@@ -19,7 +19,7 @@
               =link_to @user, '#'
             %br
             %span.text-muted
-              Не состоит ни в одной группе
+              =t('show.user.not_group')
             -#- if boss?
             -#  .scoreBar
             -#    =link_to '+30 баллов',  '/project/'+@project.id.to_s+'/users/'+@user.id.to_s+'/add_score/30', :remote: true, :method: :put, class: 'voteCounter'
@@ -45,21 +45,21 @@
         -unless @user.user_project_scores(@project.id).nil?
           .row
             .col-md-7
-              Генератор идей
+              =t('show.user.generator')
             .col-md-5
               %span.pull-right
                 %span.text-muted=@user.user_project_scores(@project.id).score_g
 
           .row
             .col-md-7
-              Аналитик
+              =t('show.user.analyst')
             .col-md-5
               %span.pull-right
                 %span.text-muted=@user.user_project_scores(@project.id).score_a
 
           .row
             .col-md-7
-              Оценщик
+              =t('show.user.voter')
             .col-md-5
               %span.pull-right
                 %span.text-muted=@user.user_project_scores(@project.id).score_o
@@ -71,7 +71,7 @@
 
             .col-md-5
               %span.pull-right
-                Всего:
+                =t('show.user.all_score')
                 %span.text-muted=@user.user_project_scores(@project.id).score
 
         %br
@@ -81,13 +81,13 @@
           %header
             %ul.nav.nav-tabs
               %li.active
-                %a(href='#active_line' data-toggle='tab') Активность
+                %a(href='#active_line' data-toggle='tab')=t('show.user.activity')
               %li
-                %a(href='#ideas' data-toggle='tab')="Темы (#{@user.life_tape_posts.by_project(@project.id).count})"
+                %a(href='#ideas' data-toggle='tab')="#{t('show.user.aspects')} (#{@user.life_tape_posts.by_project(@project.id).count})"
               %li
-                %a(href='#imperfections' data-toggle='tab')="Несовершенства (#{@user.discontent_posts.by_project(@project.id).count})"
+                %a(href='#imperfections' data-toggle='tab')="#{t('show.user.discontents')} (#{@user.discontent_posts.by_project(@project.id).count})"
               %li
-                %a(href='#images' data-toggle='tab')="Нововв. (#{@user.concept_posts.by_project(@project.id).count})"
+                %a(href='#images' data-toggle='tab')="#{t('show.user.concepts')} (#{@user.concept_posts.by_project(@project.id).count})"
 
           .body.tab-content
             #active_line.tab-pane.fade.in.active
@@ -115,7 +115,7 @@
                 .panel.panel-success
                   .panel-body.nov-list
                     =cp.post_aspects.first.title if cp.post_aspects.first
-                    =link_to 'подробнее', concept_post_path(@project, cp)
+                    =link_to t('link.more'), concept_post_path(@project, cp)
                     = render 'shared/post_social_bar2', post:cp
 
 

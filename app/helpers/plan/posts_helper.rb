@@ -135,9 +135,9 @@ module Plan::PostsHelper
       concept_aspect = concept.concept_post_aspect
       concept_post = concept_aspect.concept_post if concept_aspect
 
-      notice_prefix_empty = " Поля не заполнены: "
-      notice_prefix_adap = " Поля не адаптированы под текущий проект: "
-      notice_prefix_note = " Поля, имеющие замечания от модератора: "
+      notice_prefix_empty = t('form.plan.concept.notice_prefix_empty')
+      notice_prefix_adap = t('form.plan.concept.notice_prefix_adap')
+      notice_prefix_note = t('form.plan.concept.notice_prefix_note')
       notice_empty = ''
       notice_adap = ''
       notice_note = ''

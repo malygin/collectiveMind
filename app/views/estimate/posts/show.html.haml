@@ -1,137 +1,139 @@
-%section.widget
+%section
   .body
-    #wizard.form-wizard
-      %ul.wizard-navigation.nav-justified
-        %li#first
-          %a{"data-toggle" => "tab", href: "#tab1"}
-            %small 1.
-            %strong Описание проекта
-        %li#second
-          %a{"data-toggle" => "tab", href: "#tab2"}
-            %small 2.
-            %strong План мероприятий
-        %li#third
-          %a{"data-toggle" => "tab", href: "#tab3"}
-            %small 3.
-            %strong Просмотр нововведений
+    %ul.nav.nav-tabs.nav-justified{:role => "tablist", :id => "PlanTabsShow"}
+      %li.active#first
+        %a{"data-toggle" => "tab", :href => "#tab1", :role => "tab"}
+          %small 1.
+          %strong=t('form.plan.desc')
+      %li#second
+        %a{"data-toggle" => "tab", :href => "#tab2", :role => "tab"}
+          %small 2.
+          %strong=t('form.plan.actions')
+        -if @plan_post.persisted?
+          #option_for_render_tab(project="#{@project.id}" post="#{@plan_post.id}")
+      %li#third
+        %a{"data-toggle" => "tab", :href => "#tab3", :role => "tab"}
+          %small 3.
+          %strong=t('form.plan.concepts')
 
-      #bar.progress.progress-small
-        .progress-bar
-      .tab-content
-        #tab1.tab-pane
-          .form-horizontal
-            %fieldset
-              .col-md-6
-                %legend.section
-                  Описание проекта
-                .text-left
-                  %h4.color-green Название проекта
-                  =@plan_post.name
-                %br
-                .text-left
-                  %h4.color-green Коротко о поекте
-                  =@plan_post.goal
-                %br
-                .text-left
-                  %h4.color-green Эссе по проекту. Пояснения и обоснования
-                  =@plan_post.content
+    .tab-content(style="overflow:visible;")
+      #tab1.tab-pane.active
+        .form-horizontal
+          %fieldset
+            .col-md-6
+              %legend.section
+                =t('form.plan.desc')
+              .text-left
+                %h4.color-green=t('form.plan.name')
+                =@plan_post.name
+              %br
+              .text-left
+                %h4.color-green=t('form.plan.short_desc')
+                =@plan_post.goal
+              %br
+              .text-left
+                %h4.color-green=t('form.plan.essay')
+                =@plan_post.content
 
-              .col-md-6
-                %legend.section
-                  Общая оценка проекта
-                  .pull-right
-                    -if @est_stat == 1
-                      %span.label.label-info Упрощенная
-                    -else
-                      %span.label.label-success Стандартная
+            .col-md-6
+              %legend.section
+                =t('form.estimate.planwhole')
+                .pull-right
+                  -if @est_stat == 1
+                    %span.label.label-info=t('form.estimate.simple')
+                  -else
+                    %span.label.label-success=t('form.estimate.default')
+              = simple_format( @post.content)
+
+              -if not  @post.user.jury?
+                =t('form.estimate.planwhole')
+                %span.color-red(style='font-size: 30px;')="#{ @post.score(@est_stat) } %"
+                %br
+                %span.color-orange
+                  #{@post.sum_score} = ( #{@post.second_c} + #{@post.first_c} ) / #{@post.third_c}
+                  %br
+                  =t('form.estimate.max_score')
+                  %b(style='font-size: 15px;')= @post.max_score
+                %br
+                ="1) #{t('form.estimate.second_c')}"
+                %span.color-red #{ @post.second_c}
+                %br
+                ="2) #{t('form.estimate.first_c')}"
+                %span.color-red #{ @post.first_c}
+                %br
+                ="3) #{t('form.estimate.third_c')}"
+                %span.color-red #{ @post.third_c}
+                %br
+                %br
+                %b=t('form.estimate.content_est')
                 = simple_format( @post.content)
+                %br
+                %b=t('form.estimate.all_grade_est')
+                %br
+                =estimate_trans_project(@post.all_grade)
+              %br
+              %br
 
-                -if not  @post.user.jury?
-                  Общая оценка проекта
-                  %span.color-red(style='font-size: 30px;')="#{ @post.score(@est_stat) } %"
-                  %br
-                  %span.color-orange
-                    #{@post.sum_score} = ( #{@post.second_c} + #{@post.first_c} ) / #{@post.third_c}
+              %legend.section
+                =t('form.plan.stages')
+              #post_stages
+                %table.table.table-striped
+                  %tbody
+                    -if @plan_post.post_stages.present?
+                      -@plan_post.post_stages.each_with_index do |ps,index|
+                        %tr
+                          %td
+                            =index+1
+                          %td
+                            -if ps.date_begin and ps.date_end
+                              %small.color-green
+                                =Russian::strftime(ps.date_begin, "%d %b %Y")
+                                ="-"
+                                =Russian::strftime(ps.date_end, "%d %b %Y")
+                              %br
+                            %span.h5=ps.name
+
+      #tab2.tab-pane
+        .form-horizontal
+          %fieldset
+            #table_stages
+              - unless @plan_post.post_stages.nil?
+                -@plan_post.post_stages.each_with_index do |stage, ind|
+                  %div(class="td_stage_#{stage.id}")
+                    %h3
+                      %span="#{t('form.plan.stage.doc')} #{ind+1}. "
+                      %span.color-teal=stage.name
+                    -if stage.date_begin and stage.date_end
+                      %h3.color-green
+                        =Russian::strftime(stage.date_begin, "%d %b %Y")
+                        ="-"
+                        =Russian::strftime(stage.date_end, "%d %b %Y")
+
+                    =stage.desc
                     %br
-                    максимальная оценка проекта:
-                    %b(style='font-size: 15px;')= @post.max_score
-                  %br
-                  1) ожидаемая эффективность  первого шага проекта
-                  %span.color-red #{ @post.second_c}
-                  %br
-                  2) ожидаемая эффективность остальных этапов проекта
-                  %span.color-red #{ @post.first_c}
-                  %br
-                  3) ожидаемые неприятности в связи с осуществлением проекта
-                  %span.color-red #{ @post.third_c}
-                  %br
-                  %br
-                  %b Общее впечатление от проекта и рекомендации по улучшению
-                  = simple_format( @post.content)
-                  %br
-                  %bОценка проекта в целом:
-                  %br
-                  =estimate_trans_project(@post.all_grade)
-                %br
-                %br
-
-                %legend.section
-                  Этапы проекта
-                #post_stages
-                  %table.table.table-striped
-                    %tbody
-                      -if @plan_post.post_stages.present?
-                        -@plan_post.post_stages.each_with_index do |ps,index|
-                          %tr
-                            %td
-                              =index+1
-                            %td
-                              -if ps.date_begin and ps.date_end
-                                %small.color-green
-                                  =Russian::strftime(ps.date_begin, "%d %b %Y")
-                                  ="-"
-                                  =Russian::strftime(ps.date_end, "%d %b %Y")
-                                %br
-                              %span.h5=ps.name
-
-        #tab2.tab-pane
-          .form-horizontal
-            %fieldset
-              %table.table.table-striped.table-bordered
-                %thead
-                  %tr
-                    %th
-                      ="#"
-                    %th(style="width:150px;")
-                      Название этапа
-                    %th(style="width:300px;")
-                      Эссе по этапу
-                    %th
-                      Нововведения
-                    %th(colspan="2")
-                      Мероприятия этапа
-                %tbody
-                  - unless @plan_post.post_stages.nil?
-                    -@plan_post.post_stages.each_with_index do |stage, index|
+                    %br
+                  %table.table.table-striped.table-bordered
+                    %thead
                       %tr
-                        %td(rowspan="#{rowspan_stage_show(stage)}" class="td_stage_#{stage.id}")
-                          =index+1
-                        %td(rowspan="#{rowspan_stage_show(stage)}" class="td_stage_#{stage.id}")
-                          -if stage.date_begin and stage.date_end
-                            %small.color-green
-                              =Russian::strftime(stage.date_begin, "%d %b %Y")
-                              ="-"
-                              =Russian::strftime(stage.date_end, "%d %b %Y")
-                            %br
-                          =stage.name
-                        %td(rowspan="#{rowspan_stage_show(stage)}" class="td_stage_#{stage.id}")
-                          =stage.desc
-                      - unless stage.plan_post_aspects.empty?
-                        - stage.plan_post_aspects.each do |concept|
+                        %th
+                          ="#"
+                        %th
+                          =t('form.plan.concepts')
+                        %th
+                          =t('form.plan.stage.actions')
+                    %tbody
+                      - unless stage.plan_post_aspects.nil?
+                        - stage.plan_post_aspects.each_with_index do |concept, index|
                           %tr(id="tr_concept_#{concept.id}")
-                            %td(rowspan="#{1+concept.plan_post_actions.size}" id="td_concept_#{concept.id}")
-                              %span.h5{id: "name_post_concept_#{concept.id}"}=concept.title
-
+                            %td(rowspan="#{rowspan_concept_show(concept)}" class="td_concept_#{concept.id}")
+                              =index+1
+                            %td(rowspan="#{rowspan_concept_show(concept)}" class="td_concept_#{concept.id}" id="td_concept_#{concept.id}")
+                              =link_to view_concept_table_plan_post_path(@project, @plan_post, :con_id => concept.id), :method => :get, :remote => true,:class => "color-white", :style => "text-decoration:none;border-bottom: 1px dashed #fafbfc;", :id => "view_post_concept_table_#{concept.id}" do
+                                %span.h5{:id => "name_post_concept_#{concept.id}"}=concept.title
+                              %br
+                              =concept.name
+                              %br
+                              = check_validate_concept(concept,true).html_safe if check_validate_concept(concept)
                           - unless concept.plan_post_actions.nil?
                             - concept.plan_post_actions.each do |action|
                               %tr(id="tr_action_#{action.id}")
@@ -142,20 +144,25 @@
                                       ="-"
                                       =Russian::strftime(action.date_end, "%d %b %Y")
                                     %br
-                                  %span.h5{id: "name_post_action_#{action.id}"}=action.name
-                                  .pull-right
+                                  %span.h5.color-teal{:id => "name_post_action_#{action.id}"}=action.name
+                                  %br
+                                  %span.h5=action.desc
+                                  -unless action.plan_post_action_resources.nil?
+                                    %br
+                                    -action.plan_post_action_resources.each  do |res|
+                                      .label.label-danger=res.name
 
         #tab3.tab-pane
           .form-horizontal
             %fieldset
               #modal_concept_action
-              .col-md-4
+              .col-md-4#concept_side
                 - unless @plan_post.post_stages.nil?
                   %ul#menu-levels-collapse.side-nav
                     -@plan_post.post_stages.each_with_index do |stage, index|
                       %li.panel
                         %a.accordion-toggle{"data-parent" => "#menu-levels-collapse", "data-toggle" => "collapse", href: "#sub-menu-#{index}-collapse"}
-                          %b="Этап #{index+1}. "
+                          %b="#{t('form.plan.stage.doc')} #{index+1}. "
                           =stage.name
                         - unless stage.plan_post_aspects.nil?
                           %ul.panel-collapse.collapse.in{id: "sub-menu-#{index}-collapse"}
@@ -168,13 +175,13 @@
 
                     %li.panel
                       %a.color-green(href="#negative" data-toggle="tab")
-                        %b Оценка негативных явлений
+                        %b=t('form.estimate.negative')
 
               .col-md-8
                 %div.tab-content
                   - @post.post_aspects_all.each_with_index do |tr, index|
                     %div.tab-pane(id="dis_#{tr.plan_post_aspect.id}" style="padding-left:10px;")
-                      ожидаемая эффективность этой задачи:
+                      =t('form.estimate.effect')
                       %span.red_est=tr.score(@est_stat)
                       %br
                       %h3.color-orange.text-center
@@ -183,25 +190,25 @@
                         %br
                       %h4.color-orange.text-center
                         %b A1.
-                        =t('form.novation_what')
+                        =t('form.concept.novation_what')
                       .form-group
                         =simple_format(tr.plan_post_aspect.name)
 
                       %h4.color-orange.text-center
                         %b A2.
-                        =t('form.novation_how')
+                        =t('form.concept.novation_how')
                       .form-group.has-danger
                         =simple_format(tr.plan_post_aspect.content)
 
                       %hr
                       %h4.color-orange.text-center
                         %b B1.
-                        =t('form.cond')
+                        =t('form.concept.cond')
                       .form-group.has-success= display_content(tr.plan_post_aspect.positive)
 
                       %h4.color-orange.text-center
                         %b B2.
-                        =t('form.cond_res')
+                        =t('form.concept.cond_res')
                       %br
                       %table.table.table-striped.table-bordered
                         %thead
@@ -209,9 +216,9 @@
                             %th
                               ="#"
                             %th
-                              Название
+                              =t('show.concept.name_res')
                             %th
-                              Пояснение
+                              =t('show.concept.desc_res')
                         %tbody
                           - tr.plan_post_aspect.plan_post_resources.by_type('positive_r').each_with_index do |r, index|
                             %tr
@@ -224,7 +231,7 @@
 
                       %h4.color-orange.text-center
                         %b B3.
-                        =t('form.cond_s')
+                        =t('form.concept.cond_s')
                       %br
                       %table.table.table-striped.table-bordered
                         %thead
@@ -232,9 +239,9 @@
                             %th
                               ="#"
                             %th
-                              Название
+                              =t('show.concept.name_res')
                             %th
-                              Пояснение
+                              =t('show.concept.desc_res')
                         %tbody
                           - tr.plan_post_aspect.plan_post_means.by_type('positive_s').each_with_index do |r, index|
                             %tr
@@ -250,12 +257,12 @@
                       %hr
                       %h4.color-orange.text-center
                         %b C1.
-                        =t('form.negative')
+                        =t('form.concept.negative')
                       .form-group.has-success= display_content(tr.plan_post_aspect.negative)
 
                       %h4.color-orange.text-center
                         %b C2.
-                        =t('form.negative_res')
+                        =t('form.concept.negative_res')
                       %br
                       %table.table.table-striped.table-bordered
                         %thead
@@ -263,9 +270,9 @@
                             %th
                               ="#"
                             %th
-                              Название
+                              =t('show.concept.name_res')
                             %th
-                              Пояснение
+                              =t('show.concept.desc_res')
                         %tbody
                           - tr.plan_post_aspect.plan_post_resources.by_type('negative_r').each_with_index do |r, index|
                             %tr
@@ -279,7 +286,7 @@
 
                       %h4.color-orange.text-center
                         %b C3.
-                        =t('form.negative_s')
+                        =t('form.concept.negative_s')
                       %br
                       %table.table.table-striped.table-bordered
                         %thead
@@ -287,9 +294,9 @@
                             %th
                               ="#"
                             %th
-                              Название
+                              =t('show.concept.name_res')
                             %th
-                              Пояснение
+                              =t('show.concept.desc_res')
                         %tbody
                           - tr.plan_post_aspect.plan_post_means.by_type('negative_s').each_with_index do |r, index|
                             %tr
@@ -303,12 +310,12 @@
                       %hr
                       %h4.color-orange.text-center
                         %b D1.
-                        =t('form.control')
+                        =t('form.concept.control')
                       .form-group.has-success= display_content(tr.plan_post_aspect.control)
 
                       %h4.color-orange.text-center
                         %b D2.
-                        =t('form.control_res')
+                        =t('form.concept.control_res')
                       %br
                       %table.table.table-striped.table-bordered
                         %thead
@@ -316,9 +323,9 @@
                             %th
                               ="#"
                             %th
-                              Название
+                              =t('show.concept.name_res')
                             %th
-                              Пояснение
+                              =t('show.concept.desc_res')
                         %tbody
                           - tr.plan_post_aspect.plan_post_resources.by_type('control_r').each_with_index do |r, index|
                             %tr
@@ -331,7 +338,7 @@
 
                       %h4.color-orange.text-center
                         %b D3.
-                        =t('form.control_s')
+                        =t('form.concept.control_s')
                       %br
                       %table.table.table-striped.table-bordered
                         %thead
@@ -339,9 +346,9 @@
                             %th
                               ="#"
                             %th
-                              Название
+                              =t('show.concept.name_res')
                             %th
-                              Пояснение
+                              =t('show.concept.desc_res')
                         %tbody
                           - tr.plan_post_aspect.plan_post_means.by_type('control_s').each_with_index do |r, index|
                             %tr
@@ -355,36 +362,36 @@
                       %hr
                       %h4.color-orange.text-center
                         %b E1.
-                        =t('form.obstacles_bcd')
+                        =t('form.concept.obstacles_bcd')
                       .form-group.has-success= display_content(tr.plan_post_aspect.obstacles)
 
                       %hr
                       %h4.color-orange.text-center
                         %b F1.
-                        =t('form.problems')
+                        =t('form.concept.problems')
                       .form-group.has-success= display_content(tr.plan_post_aspect.problems)
 
                       %h4.color-orange.text-center
                         %b F2.
-                        =t('form.reality')
+                        =t('form.concept.reality')
                       .form-group.has-success= display_content(tr.plan_post_aspect.reality)
 
                       %br
                       %br
                       - if @est_stat == 1
-                        Для создания ресурсов в проекте предлагаются определенные средства. Наиболее вероятно, что на базе этих средств ресурсы будут созданы --
+                        =t('form.estimate.title_1')
                         %br
                         %span{class:css_class_estimate_simple(tr.on1)}
                           = estimate_trans_simple('on',tr.on1)
                         %br
                         %br
                         - unless tr.on == ''
-                          %b Объяснение:
+                          %b=t('form.estimate.descr')
                           = simple_format(tr.on)
                         %br
 
                         %br
-                        Использование этих средств потребует материальных и трудовых затрат. Наиболее вероятно, что эти затраты окажутся--
+                        =t('form.estimate.title_2')
                         %br
                         %span{class:css_class_estimate_simple(tr.ozs1)}
                           = estimate_trans_simple('ozs',tr.ozs1)
@@ -392,113 +399,109 @@
 
                         %br
                         - unless tr.ozs == ''
-                          %b Объяснение:
+                          %b=t('form.estimate.descr')
                           = simple_format(tr.ozs)
                         %br
-                        Предположим, что будущее уже наступило и все предложенные ресурсы созданы и работают. Наиболее вероятно, что с их помощью несовершенство будет устранено--
+                        =t('form.estimate.title_3')
                         %br
                         %span{class:css_class_estimate_simple(tr.op1)}
                           = estimate_trans_simple('op',tr.op1)
                         %br
                         %br
                         - unless tr.op == ''
-                          %b Объяснение:
+                          %b=t('form.estimate.descr')
                           = simple_format(tr.op)
 
                         %br
-                        Функционирование ресурсов потребует материальных и трудовых затрат. Наиболе вероятно, что эти затраты окажутся—
+                        =t('form.estimate.title_4')
                         %br
                         %span{class:css_class_estimate_simple(tr.ozf1)}
                           = estimate_trans_simple('ozf',tr.ozf1)
                         %br
                         %br
                         - unless tr.ozf == ''
-                          %b Объяснение:
+                          %b=t('form.estimate.descr')
                           = simple_format(tr.ozf)
                         %br
                       - else
-                        %b
-                          Для создания ресурсов, необходимых в будущем, в проекте предлагаются определенные средства.
-                          Проанализируйте их и оцените, какова вероятность того, что при помощи этих средств ресурсы будут созданы --
+                        %b=t('form.estimate.title_5')
                         %br
-                        в полном объеме (более 90%) -
+                        =t('form.estimate.fullness_1')
                         %span{class:css_class_estimate_all(tr.on1)}= estimate_trans_all(tr.on1)
                         %br
-                        в значительном объеме (от 50% до 90%) -
+                        =t('form.estimate.fullness_2')
                         %span{class:css_class_estimate_all(tr.on2)}=estimate_trans_all(tr.on2)
                         %br
-                        в небольшом объеме (от 10% до 50%) -
+                        =t('form.estimate.fullness_3')
                         %span{class:css_class_estimate_all(tr.on3)}=estimate_trans_all(tr.on3)
                         %br
-                        в ничтожном объеме (менее 10%)-
+                        =t('form.estimate.fullness_4')
                         %span{class:css_class_estimate_all(tr.on4)}=estimate_trans_all(tr.on4)
                         %br
                         %br
                         - unless tr.on == ''
-                          %b Объяснение:
+                          %b=t('form.estimate.descr')
                           = simple_format(tr.on)
                         %br
 
                         %br
-                        %b  Использование вышеназванных средств потребует материальных и трудовых затрат. Какова вероятность, что эти затраты окажутся--
+                        %b=t('form.estimate.title_6')
                         %br
-                        значительными -
+                        =t('form.estimate.select_4')
                         %span{class:css_class_estimate_all(tr.ozs1)}=estimate_trans_all(tr.ozs1)
                         %br
-                        средними -
+                        =t('form.estimate.select_3')
                         %span{class:css_class_estimate_all(tr.ozs2)}=estimate_trans_all(tr.ozs2)
                         %br
-                        незначительными -
+                        =t('form.estimate.select_2')
                         %span{class:css_class_estimate_all(tr.ozs3)}=estimate_trans_all(tr.ozs3)
                         %br
-                        ничтожными -
+                        =t('form.estimate.select_0')
                         %span{class:css_class_estimate_all(tr.ozs4)}=estimate_trans_all(tr.ozs4)
                         %br
 
                         %br
                         - unless tr.ozs == ''
-                          %b Объяснение:
+                          %b=t('form.estimate.descr')
                           = simple_format(tr.ozs)
                         %br
-                        %b
-                          Предположим, что будущее уже наступило и необходимые для него ресурсы созданы и работают.
-                          Какова вероятность, что с их помощью несовершенство будет устранено--
+                        %b=t('form.estimate.title_7')
                         %br
-                        полностью (более 90%) -
+                        =t('form.estimate.fullness_5')
                         %span{class:css_class_estimate_all(tr.op1)}=estimate_trans_all(tr.op1)
                         %br
-                        в значительной мере (от 50% до 90%) -
+                        =t('form.estimate.fullness_6')
                         %span{class:css_class_estimate_all(tr.op2)}=estimate_trans_all(tr.op2)
                         %br
-                        в небольшой мере (от 10% до 50%) -
+                        =t('form.estimate.fullness_7')
                         %span{class:css_class_estimate_all(tr.op3)}=estimate_trans_all(tr.op3)
                         %br
-                        в ничтожной мере (менее 10%) -
+                        =t('form.estimate.fullness_8')
                         %span{class:css_class_estimate_all(tr.op4)}=estimate_trans_all(tr.op4)
                         %br
                         %br
                         - unless tr.op == ''
-                          %b Объяснение:
+                          %b=t('form.estimate.descr')
                           = simple_format(tr.op)
 
                         %br
-                        %b Функционирование ресурсов потребует материальных и трудовых затрат. Какова вероятность, что эти затраты окажутся—
+                        %b=t('form.estimate.title_8')
                         %br
-                        значительными -
+                        =t('form.estimate.select_4')
                         %span{class:css_class_estimate_all(tr.ozf1)}=estimate_trans_all(tr.ozf1)
                         %br
-                        средними -
+                        =t('form.estimate.select_3')
                         %span{class:css_class_estimate_all(tr.ozf2)}=estimate_trans_all(tr.ozf2)
                         %br
-                        незначительными -
+                        =t('form.estimate.select_2')
                         %span{class:css_class_estimate_all(tr.ozf3)}=estimate_trans_all(tr.ozf3)
                         %br
-                        ничтожными -
+                        =t('form.estimate.select_0')
                         %span{class:css_class_estimate_all(tr.ozf4)}=estimate_trans_all(tr.ozf4)
                         %br
                         %br
                         - unless tr.ozf == ''
-                          %b Объяснение:
+                          %b=t('form.estimate.descr')
                           = simple_format(tr.ozf)
                         %br
 
@@ -506,83 +509,75 @@
                   %div.tab-pane#negative
                     -if @est_stat == 1
                       %br
-                      При осуществлении проекта могут возникать разные негативные явления. Рассмотрите два типа таких явлений. Первый тип – это побочные эффекты, возникшие наряду с улучшениями (например, нововведения работают, но обходятся слишком дорого).
+                      =t('form.estimate.desc_long_1')
                       %br
-                      Наиболее вероятно, что эти побочные эффекты будут—
+                      =t('form.estimate.group_select_1')
                       %br
                       %span{class:css_class_estimate_all( @post.nepr1)}
                         = estimate_trans_simple('nepr1', @post.nepr1)
                       %br
                       %br
 
-                      %b Объяснение:
-                      = simple_format( @post.nepr)
+                      %b=t('form.estimate.descr')
+                      = simple_format(@post.nepr)
                       %br
                       %br
-                      Второй тип – это препятствия, возникшие в процессе создания нововведений (например, сопротивление со стороны сотрудников, привыкших работать по-старому).
+                      =t('form.estimate.desc_long_2')
                       %br
-                      Наиболее вероятно, что эти побочные эффекты будут—
+                      =t('form.estimate.group_select_2')
                       %br
                       %span{class:css_class_estimate_all( @post.nep1)}
                         = estimate_trans_simple('nep1', @post.nep1 )
                       %br
                       %br
 
-                      %b Объяснение:
+                      %b=t('form.estimate.descr')
                       = simple_format( @post.nep)
 
                     -else
                       %br
-                      %b  При осуществлении проекта могут возникать разные негативные явления. Рассмотрите два типа таких явлений. Первый тип – это побочные эффекты, возникшие наряду с улучшениями (например, нововведения работают, но обходятся слишком дорого).
+                      %b=t('form.estimate.desc_long_1')
                       %br
-                      %b  Какова вероятность, что эти побочные эффекты будут—
+                      %b=t('form.estimate.group_select_3')
                       %br
-                      значительными  -
+                      =t('form.estimate.select_4')
                       %span{class:css_class_estimate_all( @post.nepr1)}= estimate_trans_all( @post.nepr1)
                       %br
-                      средними   -
+                      =t('form.estimate.select_3')
                       %span{class:css_class_estimate_all( @post.nepr2)}= estimate_trans_all( @post.nepr2)
                       %br
-                      незначительными  -
+                      =t('form.estimate.select_2')
                       %span{class:css_class_estimate_all( @post.nepr3)}= estimate_trans_all( @post.nepr3)
                       %br
-                      нулевыми  -
+                      =t('form.estimate.select_1')
                       %span{class:css_class_estimate_all( @post.nepr4)}= estimate_trans_all( @post.nepr4)
                       %br
                       %br
 
-                      %b Объяснение:
+                      %b=t('form.estimate.descr')
                       = simple_format( @post.nepr)
                       %br
                       %br
-                      %b  Второй тип – это препятствия, возникшие в процессе создания нововведений (например, сопротивление со стороны сотрудников, привыкших работать по-старому).
+                      %b=t('form.estimate.desc_long_2')
                       %br
-                      значительными  -
+                      %b=t('form.estimate.group_select_4')
+                      %br
+                      =t('form.estimate.select_4')
                       %span{class:css_class_estimate_all( @post.nep1)}= estimate_trans_all( @post.nep1)
                       %br
-                      средними   -
+                      =t('form.estimate.select_3')
                       %span{class:css_class_estimate_all( @post.nep2)}= estimate_trans_all( @post.nep2)
                       %br
-                      незначительными  -
+                      =t('form.estimate.select_2')
                       %span{class:css_class_estimate_all( @post.nep3)}= estimate_trans_all( @post.nep3)
                       %br
-                      нулевыми  -
+                      =t('form.estimate.select_1')
                       %span{class:css_class_estimate_all( @post.nep4)}= estimate_trans_all( @post.nep4)
                       %br
                       %br
 
-                      %b Объяснение:
+                      %b=t('form.estimate.descr')
                       = simple_format( @post.nep)
 
-        .description
-          %ul.pager.wizard
-            %li.previous
-              %button.btn.btn-primary.pull-left
-                %i.fa.fa-caret-left
-                Назад
-            %li.next
-              %button.btn.btn-primary.pull-right
-                Далее
-                %i.fa.fa-caret-right
 
 = render 'shared/post_edit_bar', post: @post

@@ -1,33 +1,33 @@
 %section.widget
     .body
-        %h3 Отредактируйте информацию о себе
+        %h3=t('form.user.title')
         = form_for @user, url: { action: :update, type:@project.id } do |f|
             =render 'shared/notice_messages', object: f.object
             .field
-                = f.label :name, 'Имя'
+                = f.label :name, t('form.user.name')
                 %br
                 = f.text_field :name
             .field
-                = f.label :surname, 'Фамилия'
+                = f.label :surname, t('form.user.surname')
                 %br
                 = f.text_field :surname
 
             .field
-                = f.label :email, 'Почта'
+                = f.label :email, t('form.user.email')
                 %br
                 = f.text_field :email
 
 
             .field
                 %br
-                = f.label :avatar, 'Выберите файл для аватара'
+                = f.label :avatar, t('form.user.avatar')
                 %br
                 = f.file_field :avatar
             %br
             %br
             %br
             .action
-                = f.submit 'Сохранить', class: 'btn btn-primary'
+                = f.submit t('form.save'), class: 'btn btn-primary'
         %br
 
 

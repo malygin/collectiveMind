@@ -1,13 +1,15 @@
 %p#notice= notice
 
 %p
-  %b Name:
+  %b=t('show.name')
   = @core_project.name
 
 %p
-  %b Status:
+  %b=t('show.status')
   = @core_project.status
+  %br
+  = status_project(@core_project)
 
-= link_to 'Edit', edit_core_project_path(@core_project)
+= link_to t('link.edit'), edit_core_project_path(@core_project)
 \|
-= link_to 'Back', core_projects_path
+= link_to t('link.back'), core_projects_path

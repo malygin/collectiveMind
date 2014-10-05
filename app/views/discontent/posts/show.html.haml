@@ -21,25 +21,25 @@
     = render 'shared/post_social_bar2', post: @post
     %span
       -if @post.status == 2 and boss?
-        = link_to 'Разгруппировать', {action: :ungroup_union, id: @post.id}, method: :put, data: {confirm: 'Точно?'}, class: 'btn btn-warning btn-xs'
+        = link_to t('show.discontent.ungroup'), {action: :ungroup_union, id: @post.id}, method: :put, data: {confirm: t('confirm.accept')}, class: 'btn btn-warning btn-xs'
         \|
       = render 'shared/post_edit_bar', post: @post
 
     - if @post.status == 2
       .panel.panel-default
         %p
-          %h4 Объединяет:
+          %h4=t('show.discontent.union')
         .panel-body{id: 'panel_union'}
           =render @post.discontent_posts
       %br
       - if boss?
         .text-success#dispost_success(style='display:none;')
-          =t('show.add_group_success')
+          =t('show.discontent.add_group_success')
         =select_tag 'selectize_discontent',
         options_from_collection_for_select(Discontent::Post.for_union(@project.id), 'id', 'show_content'),
         class: 'selectized',
         include_blank: true,
-        placeholder: 'Добавьте несовершенство'
+        placeholder: t('show.discontent.select_prompt')
 
     %br
     %br

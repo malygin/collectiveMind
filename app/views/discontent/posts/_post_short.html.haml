@@ -9,10 +9,10 @@
       - if boss? or role_expert?
         .pull-right
           = link_to({controller: post_short.class.name.underscore.pluralize, action: :discuss_status, id: post_short.id, discuss_status: 1}, remote: true, method: :put, id: "discuss_stat_post_#{post_short.id}") do
-            %span.label(class="#{label_discuss_stat(post_short)}") ТРЕБУЕТ ОБСУЖДЕНИЯ
+            %span.label(class="#{label_discuss_stat(post_short)}")=t('show.discuss')
       - elsif post_short.discuss_status
         .pull-right
-          %span.label.label-warning ТРЕБУЕТ ОБСУЖДЕНИЯ
+          %span.label.label-warning=t('show.discuss')
     =discontent_style_name(post_short.style)
     .comment.dis-comment
       = render partial: '/discontent/posts/post_content', object: post_short
@@ -22,13 +22,13 @@
     = render '/shared/post_social_bar2', post: post_short
     - if boss? and @project.status == 4
       %div(style="display:none;" id="add_group_success_#{post_short.id}")
-        .color-green=t('show.add_group')
+        .color-green=t('show.discontent.add_group_success')
       %div.color-red{id: "add_disgroup_#{post_short.id}"}
         - if post_short.status == 1 and !post_short.discontent_post.nil?
-          Добавлено в группу
+          =t('show.discontent.added_group')
           =link_to post_short.discontent_post.content, discontent_post_path(@project, post_short.discontent_post)
       .discontents_group_select{:post => "#{post_short.id}"}
         -if @accepted_posts
           = select_tag 'select_for_discontents_group', options_from_collection_for_select(@accepted_posts, "id", "content"),
-          :prompt => 'Выберите группу', :onchange => "select_for_discontents_group(this,#{@project.id},#{post_short.id});", :class => "form-control"
+          :prompt => t('form.select_aspect_prompt'), :onchange => "select_for_discontents_group(this,#{@project.id},#{post_short.id});", :class => "form-control"
 

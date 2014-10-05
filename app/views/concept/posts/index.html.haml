@@ -3,17 +3,17 @@
     %header
       .row
         %h4
-          Нововведения
+          =t('show.concept.title_plural')
           -if @project.status == 7
             %a.btn.btn-warning.pull-right(href="/project/#{@project.id}/concept/posts/new?asp_id=#{@aspect.id}" style="font-weight: normal !important;" id="new_concept")
-              Добавить нововведение
+              =t('show.concept.add_concept')
       %hr
     .body
       - if @aspect
         -@aspect.aspect_posts.by_status(4).each do |post|
-          %h4 Решаемая проблема
+          %h4=t('show.concept.solved_problem')
           =render partial:'discontent/posts/post_short2', object: post
-          %h4 Предложенные решения
+          %h4=t('show.concept.proposed_solutions')
           %br
           %table.table.table-striped.table-bordered
             %thead
@@ -21,13 +21,13 @@
                 %th
                   ="#"
                 %th
-                  Название / Автор
+                  =t('show.concept.name')
                 %th
-                  Статус
+                  =t('show.concept.status')
                 %th
-                  Заполненность
+                  =t('show.concept.fullness')
                 %th
-                  Решаемость
+                  =t('show.concept.solved')
             %tbody
               - post.dispost_concepts.sort_by{|c| c.complite(post).nil? ? 0 : -c.complite(post)}.each_with_index  do |pa, index|
                 - if pa.status == 0
@@ -38,30 +38,30 @@
                       - if pa.post_aspects.first.title!=''
                         =link_to pa.post_aspects.first.title , concept_post_path(@project, pa)
                       -else
-                        =link_to 'Без названия' , concept_post_path(@project, pa)
+                        =link_to t('show.without_name') , concept_post_path(@project, pa)
 
                     %td
                       = status_for_concept_type(pa)
                       -if pa.discuss_status
                         %br
-                        %span.label-danger ТРЕБУЕТ ОБСУЖДЕНИЯ
+                        %span.label-danger=t('show.discuss')
                     %td
                       %span.h4.color-orange
                         =status_for_concept(pa.post_aspects.first)
                     %td
                       =status_for_complite_discontent(post,pa)
 
-              -if  @project.status == 7 or @project.demo?
+              -if @project.status == 7 or @project.demo?
                 %tr
                   %td{colspan: 4, style: "font-weight: normal !important;"}
                     %a.btn.btn-lg.btn-warning.btn-block(href="/project/#{@project.id}/concept/posts/new?dis_id=#{post.id}&asp_id=#{@aspect.id}" style="font-weight: normal !important;" id="new_concept_#{post.id}")
-                      Добавить свое решение
+                      =t('show.concept.add_my_concept')
           %hr
 .col-md-6
   %section
     %header
       %h4
-        Неоформленные идеи
+        =t('show.improve.ideas')
       %hr
     .body
       .chat-messages
