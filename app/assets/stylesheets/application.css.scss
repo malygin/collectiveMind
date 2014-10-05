@@ -2,7 +2,7 @@
 
 @import "compass";
 @import "font";
-@import 'lib/fontello/css/fontello.css';
+@import 'lib/fontello/css/fontello';
 
 @import "variables";
 
@@ -251,11 +251,11 @@ p, a {
   height:51px;
   border:none;
   text-indent:100%;
-  background:url(/assets/img/ui.totop.png) no-repeat left top;
+  background:image-url("img/ui.totop.png") no-repeat left top;
 }
 
 #toTopHover {
-  background:url(/assets/img/ui.totop.png) no-repeat left -51px;
+  background:image-url("img/ui.totop.png") no-repeat left -51px;
   width:51px;
   height:51px;
   display:block;
