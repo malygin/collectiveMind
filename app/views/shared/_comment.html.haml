@@ -13,9 +13,9 @@
         -#=render partial: '/shared/label_for_comment_status', locals: {comment: comment, status: 'discontent', title: 'Проблема'}
         -#=render partial: '/shared/label_for_comment_status', locals: {comment: comment, status: 'concept', title: 'Идея'}
         - if boss? or role_expert?
-          =link_to({:controller => comment.controller_name_for_action, :action => :comment_status, :id => comment.post.id, :comment_id => comment.id, :discuss_status => 1, :comment_stage => get_stage_for_improve(comment.get_class)},  :remote => true, :method => :put,  id: "discuss_stat_comment_#{comment.id}") do
+          =link_to({:controller => comment.controller_name_for_action, :action => :comment_status, :id => comment.post.id, :comment_id => comment.id, discuss_status: 1, :comment_stage => get_stage_for_improve(comment.get_class)},  :remote => true, :method => :put,  id: "discuss_stat_comment_#{comment.id}") do
             %span.label(class="#{label_discuss_stat(comment)}")=t('show.discuss')
-          =link_to({:controller => comment.controller_name_for_action, :action => :comment_status, :id => comment.post.id, :comment_id => comment.id, :approve_status => 1, :comment_stage => get_stage_for_improve(comment.get_class)},  :remote => true, :method => :put,  id: "approve_stat_comment_#{comment.id}") do
+          =link_to({:controller => comment.controller_name_for_action, :action => :comment_status, :id => comment.post.id, :comment_id => comment.id, approve_status: 1, :comment_stage => get_stage_for_improve(comment.get_class)},  :remote => true, :method => :put,  id: "approve_stat_comment_#{comment.id}") do
             %span.label(class="#{label_approve_stat(comment)}")=t('show.important')
         - else
           -if comment.discuss_status

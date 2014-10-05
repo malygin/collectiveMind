@@ -90,7 +90,8 @@ describe 'Discontent ' do
       end
 
       it 'have content ', js:true do
-        expect(page).to have_content '2 этап: Сбор несовершенств. Голосование'
+        #expect(page).to have_content '2 этап: Сбор несовершенств. Голосование'
+        expect(page).to have_content 'Голосование за несовершенства'
         expect(page).to have_content 'Определение наиболее важных проблем'
         expect(page).to have_content 'Несовершенство: 1 из 1'
         expect(page).to have_content @discontent_group1.content
@@ -219,7 +220,7 @@ describe 'Discontent ' do
         expect(page).to have_content 'Неоформленные проблемы'
         expect(page).to have_content 'Группы несовершенств'
         expect(page).to have_content 'Несовершенства'
-        expect(page).to have_link('add_record', :text => '+ Добавить новую группу', :href => discontent_posts_new_group_path(project))
+        expect(page).to have_link('add_record', :text => 'Добавить новую группу', :href => discontent_posts_new_group_path(project))
       end
 
       it 'add new group ', js:true do
@@ -246,7 +247,8 @@ describe 'Discontent ' do
       end
 
       it 'have content ', js:true do
-        expect(page).to have_content '2 этап: Сбор несовершенств. Голосование'
+        #expect(page).to have_content '2 этап: Сбор несовершенств. Голосование'
+        expect(page).to have_content 'Голосование за несовершенства'
         expect(page).to have_content 'Определение наиболее важных проблем'
         expect(page).to have_content 'Несовершенство: 1 из 1'
         expect(page).to have_content @discontent_group1.content

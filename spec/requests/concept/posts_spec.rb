@@ -65,7 +65,7 @@ describe 'Concept ' do
         find(:css, "#main_control_s_1 input.autocomplete[name='resor_control_s[1][]']").set('control_s_1')
 
         click_button 'send_post_concept'
-        expect(page).to have_content 'Ваше нововведение добавлено! Вы можете добавить еще одно или перейти к просмотру списка нововведений.'
+        expect(page).to have_content 'Ваше нововведение успешно добавлено! Вы можете добавить еще одно или перейти к просмотру списка нововведений.'
         expect(page).to have_content 'Перейти к списку'
         expect(page).to have_content 'Добавить еще одно'
         click_link 'Перейти к списку'
@@ -161,7 +161,7 @@ describe 'Concept ' do
         expect(page).not_to have_selector '#main_positive_r_3'
 
         click_button 'send_post_concept'
-        expect(page).to have_content 'Ваше нововведение добавлено! Вы можете добавить еще одно или перейти к просмотру списка нововведений.'
+        expect(page).to have_content 'Ваше нововведение успешно добавлено! Вы можете добавить еще одно или перейти к просмотру списка нововведений.'
         expect(page).to have_content 'Перейти к списку'
         expect(page).to have_content 'Добавить еще одно'
         click_link 'Перейти к списку'
@@ -193,7 +193,7 @@ describe 'Concept ' do
         fill_in "pa_name", with: 'con name'
         #fill_in "pa_content", with: 'con content'
         click_button 'send_post_concept'
-        expect(page).to have_content 'Ваше нововведение добавлено!'
+        expect(page).to have_content 'Ваше нововведение успешно добавлено!'
         expect(page).to have_content 'Перейти к списку'
         expect(page).to have_content 'Добавить еще одно'
       end
@@ -297,7 +297,7 @@ describe 'Concept ' do
         fill_in "pa_reality", with: 'con reality'
         fill_in "pa_problems", with: 'con problems'
         click_button 'send_post_concept'
-        expect(page).to have_content 'Ваше нововведение добавлено! Вы можете добавить еще одно или перейти к просмотру списка нововведений.'
+        expect(page).to have_content 'Ваше нововведение успешно добавлено! Вы можете добавить еще одно или перейти к просмотру списка нововведений.'
         expect(page).to have_content 'Перейти к списку'
         expect(page).to have_content 'Добавить еще одно'
         click_link 'Перейти к списку'
