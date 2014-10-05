@@ -367,6 +367,16 @@ module ApplicationHelper
         'label-default'
     end
   end
+  def label_approve_stat(comment)
+    case comment.approve_status
+      when false
+        'label-default'
+      when true
+        'label-success'
+      else
+        'label-default'
+    end
+  end
   def get_class_for_improve(stage)
     case stage
       when 1
@@ -419,15 +429,15 @@ module ApplicationHelper
     case comment_class
       when 1
         link_to "/project/#{@project.id}/life_tape/posts?asp=#{comment.post.discontent_aspects.first.id}#comment_#{comment.id}" do
-          content_tag :span, t('show.improver'), class: 'label label-primary'
+          content_tag :span, t('show.improver'), class: 'btn btn-primary btn-xs'
         end
       when 2
         link_to "/project/#{@project.id}/discontent/posts/#{comment.post.id}#comment_#{comment.id}" do
-          content_tag :span, t('show.improver'), class: 'label label-primary'
+          content_tag :span, t('show.improver'), class: 'btn btn-primary btn-xs'
         end
       when 3
         link_to "/project/#{@project.id}/concept/posts/#{comment.post.id}#comment_#{comment.id}" do
-          content_tag :span, t('show.improver'), class: 'label label-primary'
+          content_tag :span, t('show.improver'), class: 'btn btn-primary btn-xs'
         end
     end
   end
@@ -492,8 +502,8 @@ module ApplicationHelper
   def role_label(user)
     if user.boss?
       content_tag :span, 'MD', class: 'label label-danger'
-    elsif user.role_expert?
-      content_tag :span, t('show.expert'), class: 'label label-success'
+    # elsif user.role_expert?
+    #   content_tag :span, t('show.expert'), class: 'label label-success'
     end
   end
 
@@ -535,7 +545,7 @@ module ApplicationHelper
 
   def label_for_comment_status(comment,status,title)
     if comment.check_status_for_label(status)
-      if current_user?(comment.user) or boss?
+      if current_user?(comment.user) or boss? or role_expert?
         link_to({controller: comment.controller_name_for_action, action: :comment_status, id: comment.post.id, comment_id: comment.id, status: 1, comment_stage: get_stage_for_improve(comment.get_class)},  remote: true, method: :put,  id: "#{status}_comment_#{comment.id}") do
           content_tag( :span, title, class:"label #{css_label_status(status)}")
         end
@@ -543,7 +553,7 @@ module ApplicationHelper
         content_tag( :span, title, class:"label #{css_label_status(status)}")
       end
     else
-      if current_user?(comment.user) or boss?
+      if current_user?(comment.user) or boss? or role_expert?
         link_to({controller: comment.controller_name_for_action, action: :comment_status, id: comment.post.id, comment_id: comment.id, status: 1, comment_stage: get_stage_for_improve(comment.get_class)},  remote: true, method: :put,  id: "#{status}_comment_#{comment.id}") do
           content_tag( :span, title, class:"label label-default")
         end

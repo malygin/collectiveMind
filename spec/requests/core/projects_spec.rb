@@ -662,7 +662,6 @@ describe 'Core Project ' do
           sleep(1)
         }.to change(Core::ProjectUser, :count).by(1)
         #expect {
-        #  screenshot_and_open_image
         #  click_link "remove_user_#{user_for_closed_project.id}"
         #  expect(page).to have_selector "a", 'Добавить'
         #  sleep(1)

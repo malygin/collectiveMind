@@ -34,7 +34,8 @@ module JournalHelper
 
           'award_100points',   'award_500points', 'award_1000points', 'award_3000points'
         'fa fa-trophy '
-
+      when 'life_tape_comment_discuss_stat', 'life_tape_comment_approve_status'
+          'fa color-teal  fa-exclamation'
       when 'essay_post_save'
         'fa fa-plus'
       when 'essay_post_update'
@@ -64,6 +65,12 @@ module JournalHelper
 
       when 'my_life_tape_comment_discuss_stat'
         "выделил(а) ваш комментарий: '#{j.body}'"+  link_to(' к теме ', "/project/#{project}/life_tape/posts?asp=#{j.first_id}&viewed=true#comment_#{j.second_id}") + ' как требующий обсуждения'
+
+      when 'life_tape_comment_approve_status'
+        "выделил(а) комментарий: '#{j.body}'"+  link_to(' к теме ', "/project/#{project}/life_tape/posts?asp=#{j.first_id}#comment_#{j.second_id}") + ' как важный'
+
+      when 'my_life_tape_comment_approve_status'
+        "выделил(а) ваш комментарий: '#{j.body}'"+  link_to(' к теме ', "/project/#{project}/life_tape/posts?asp=#{j.first_id}&viewed=true#comment_#{j.second_id}") + ' как важный'
 
       # DISCONTENTS
       when 'discontent_comment_save'
@@ -99,6 +106,14 @@ module JournalHelper
       when 'my_discontent_comment_discuss_stat'
         "выделил(а) ваш комментарий '#{j.body}...' к несовершенству "+  link_to(j.body2, "/project/#{project}/discontent/posts/#{j.first_id}?viewed=true#comment_#{j.second_id}") + ' как требующий обсуждения'
 
+      when 'discontent_post_approve_status'
+        'выделил(а) несовершенство  ' + link_to("#{j.body}", "/project/#{project}/discontent/posts/#{j.first_id}") + ' как важное'
+      when 'my_discontent_post_approve_status'
+        'выделил(а) ваше несовершенство  ' + link_to("#{j.body}", "/project/#{project}/discontent/posts/#{j.first_id}?viewed=true") + ' как важное'
+      when 'discontent_comment_approve_status'
+        "выделил(а) комментарий '#{j.body}...' к несовершенству "+  link_to(j.body2, "/project/#{project}/discontent/posts/#{j.first_id}#comment_#{j.second_id}") + ' как важный'
+      when 'my_discontent_comment_approve_status'
+        "выделил(а) ваш комментарий '#{j.body}...' к несовершенству "+  link_to(j.body2, "/project/#{project}/discontent/posts/#{j.first_id}?viewed=true#comment_#{j.second_id}") + ' как важный'
 
 
       # CONCEPTS
@@ -131,6 +146,14 @@ module JournalHelper
       when 'my_concept_comment_discuss_stat'
         "выделил(а) ваш комментарий '#{j.body}...' к нововведению "+  link_to(j.body2, "/project/#{project}/concept/posts/#{j.first_id}?viewed=true#comment_#{j.second_id}") + ' как требующий обсуждения'
 
+      when 'concept_post_approve_status'
+        'выделил(а) нововведение  ' + link_to("#{j.body}", "/project/#{project}/concept/posts/#{j.first_id}") + ' как важное'
+      when 'my_concept_post_approve_status'
+        'выделил(а) ваше нововведение  ' + link_to("#{j.body}", "/project/#{project}/concept/posts/#{j.first_id}?viewed=true") + ' как важное'
+      when 'concept_comment_approve_status'
+        "выделил(а) комментарий '#{j.body}...' к нововведению "+  link_to(j.body2, "/project/#{project}/concept/posts/#{j.first_id}#comment_#{j.second_id}") + ' как важный'
+      when 'my_concept_comment_approve_status'
+        "выделил(а) ваш комментарий '#{j.body}...' к нововведению "+  link_to(j.body2, "/project/#{project}/concept/posts/#{j.first_id}?viewed=true#comment_#{j.second_id}") + ' как важный'
 
       # PLANS
       when 'plan_comment_save'
@@ -156,6 +179,10 @@ module JournalHelper
       when 'my_plan_comment_discuss_stat'
         "выделил(а) ваш комментарий '#{j.body}...' к проекту "+  link_to(j.body2, "/project/#{project}/plan/posts/#{j.first_id}?viewed=true#comment_#{j.second_id}") + ' как требующий обсуждения'
 
+      when 'plan_comment_approve_status'
+        "выделил(а) комментарий '#{j.body}...' к проекту "+  link_to(j.body2, "/project/#{project}/plan/posts/#{j.first_id}#comment_#{j.second_id}") + ' как важный'
+      when 'my_plan_comment_approve_status'
+        "выделил(а) ваш комментарий '#{j.body}...' к проекту "+  link_to(j.body2, "/project/#{project}/plan/posts/#{j.first_id}?viewed=true#comment_#{j.second_id}") + ' как важный'
 
       # ESSAY
       when 'essay_comment_save'
@@ -178,6 +205,13 @@ module JournalHelper
 
       when 'my_essay_comment_discuss_stat'
         "выделил(а) ваш комментарий '#{j.body}...' к рефлексии "+  link_to(j.body2, "/project/#{project}/stage/1/essay/posts/#{j.first_id}?viewed=true#comment_#{j.second_id}") + ' как требующий обсуждения'
+
+      when 'essay_comment_approve_status'
+        "выделил(а) комментарий '#{j.body}...' к рефлексии "+  link_to(j.body2, "/project/#{project}/stage/1/essay/posts/#{j.first_id}#comment_#{j.second_id}") + ' как важный'
+
+      when 'my_essay_comment_approve_status'
+        "выделил(а) ваш комментарий '#{j.body}...' к рефлексии "+  link_to(j.body2, "/project/#{project}/stage/1/essay/posts/#{j.first_id}?viewed=true#comment_#{j.second_id}") + ' как важный'
+
 
       # AWARDS
 

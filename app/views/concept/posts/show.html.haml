@@ -32,11 +32,17 @@
         =improve_comment(@post).html_safe if improve_comment(@post)
         |
         - if boss? or role_expert?
-          =link_to({action: :discuss_status, id:@post.id, discuss_status:1},  remote:true, method: :put,  id: "discuss_stat_post_#{@post.id}") do
+          =link_to({:action => :discuss_status, :id => @post.id, :discuss_status => 1}, :remote => true, :method => :put,  id: "discuss_stat_post_#{@post.id}") do
             %span.label(class="#{label_discuss_stat(@post)}")=t('show.discuss')
-        - elsif @post.discuss_status
-          %span.label-danger=t('show.discuss')
-        = render '/shared/post_social_bar2', post:@post
+          =link_to({:action => :discuss_status, :id => @post.id, :approve_status => 1}, :remote => true, :method => :put,  id: "approve_stat_post_#{@post.id}") do
+            %span.label(class="#{label_approve_stat(@post)}")=t('show.important')
+        - else
+          -if @post.discuss_status
+            %span.label-danger=t('show.discuss')
+          -elsif @post.approve_status
+            %span.label-success=t('show.important')
+        = render '/shared/post_social_bar2', :post => @post
+
       %br
       .row
         .col-md-6
