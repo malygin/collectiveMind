@@ -7,16 +7,16 @@
           %li= msg
 
   .form-group
-    = f.label=t('form.project.name')
+    = f.label t('form.project.name')
     = f.text_field :name, class: 'form-control'
   .form-group
-    = f.label=t('form.project.short_desc')
+    = f.label t('form.project.short_desc')
     = f.text_area :short_desc, class: 'form-control', rows: 5
   .form-group
-    = f.label=t('form.project.desc')
+    = f.label t('form.project.desc')
     = f.text_area :desc, class: 'form-control', rows: 5
   .form-group
-    = f.label=t('form.project.type_access')
+    = f.label t('form.project.type_access')
     = f.select :type_access, options_for_select([[t('form.project.opened'), 0],[t('form.project.club'), 1], [t('form.project.closed'), 2], [t('form.project.demo'), 3], [t('form.project.test'), 4], [t('form.project.prepare'), 5]], @project.type_access),{}, {class: "form-control"}
 
   %br
