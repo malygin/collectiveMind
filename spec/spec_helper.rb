@@ -18,7 +18,9 @@ Spork.prefork do
 
   Capybara.javascript_driver = :webkit
 
-  Capybara.save_and_open_page_path = '/tmp/capybara-screenshot'
+  Capybara.save_and_open_page_path = 'tmp/capybara-screenshot'
+
+
   Capybara::Screenshot.register_filename_prefix_formatter(:rspec) do |example|
     "screen_#{example.full_description.gsub(' ', '-').gsub(/^.*\/spec\//, '')}"
   end

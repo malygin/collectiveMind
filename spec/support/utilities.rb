@@ -96,9 +96,9 @@ def have_content_for_club_user(opened_project,demo_project,club_project)
   #expect(page).to have_selector "a#go_to_opened_project[href='/project/#{opened_project.id}']", 'Перейти к процедуре'
   #expect(page).to have_selector "a#go_to_demo_project[href='/project/#{demo_project.id}']", 'Перейти к процедуре'
   #expect(page).to have_selector "a#go_to_club_project[href='/project/#{club_project.id}']", 'Перейти к процедуре'
-  expect(page).to have_link('go_to_opened_project', :text => 'Перейти к процедуре', :href => "/project/#{opened_project.id}")
-  expect(page).to have_link('go_to_demo_project', :text => 'Перейти к процедуре', :href => "/project/#{demo_project.id}")
-  expect(page).to have_link('go_to_club_project', :text => 'Перейти к процедуре', :href => "/project/#{club_project.id}")
+  expect(page).to have_link('go_to_open_project_'+opened_project.id, :text => 'Перейти к процедуре', :href => "/project/#{opened_project.id}")
+  expect(page).to have_link('go_to_demo_project_'+demo_project.id, :text => 'Перейти к процедуре', :href => "/project/#{demo_project.id}")
+  expect(page).to have_link('go_to_club_project_'+club_project.id, :text => 'Перейти к процедуре', :href => "/project/#{club_project.id}")
 end
 
 def have_content_for_invited_club_user(closed_project_for_invite,opened_project,demo_project,club_project)
