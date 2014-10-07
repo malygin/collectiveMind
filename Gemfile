@@ -36,6 +36,7 @@ group :test do
   gem 'headless'
 end
 
+gem 'foreman'
 gem 'thin'
 gem 'sass-rails', '~> 4.0.0'
 gem 'coffee-rails', '~> 4.0.1'
