@@ -2,6 +2,7 @@ scrollToLastMessage = ->
   container = $('#chat_history')
   scrollTo = $('#chat_history .msg_container:last')
   container.animate({scrollTop: scrollTo.offset().top - container.offset().top + container.scrollTop()})
+  return
 
 $(document).ready ->
   scrollToLastMessage()
@@ -47,18 +48,34 @@ $(document).on "click", ".panel-heading span.icon_minim", (e) ->
     $this.removeClass("glyphicon-plus").addClass "glyphicon-minus"
   return
 
-$(document).on "focus", ".panel-footer input.chat_input", (e) ->
-  $this = $(this)
-  if $("#minim_chat_window").hasClass("panel-collapsed")
-    $this.parents(".panel").find(".panel-body").slideDown()
-    $("#minim_chat_window").removeClass "panel-collapsed"
-    $("#minim_chat_window").removeClass("glyphicon-plus").addClass "glyphicon-minus"
+$(document).on "click", ".icon_close", ->
+  $("#moderator_chat_window").hide()
+  $("#show_open_moderator_chat").show()
   return
 
-$(document).on "click", ".icon_close", (e) ->
-
-  #$(this).parent().parent().parent().parent().remove();
-  $("#moderator_chat_window").remove()
+$(document).on 'click', '#show_open_moderator_chat', ->
+  $("#moderator_chat_window").show()
+  $("#show_open_moderator_chat").hide()
   return
+
+obj = $('#moderator_chat_window')
+offset = obj.offset()
+topOffset = offset.top
+leftOffset = offset.left
+marginTop = obj.css("marginTop")
+marginLeft = obj.css("marginLeft")
+
 $(window).scroll ->
-  $('#moderator_chat_window').css('top', $(document).scrollTop())
+  scrollTop = $(window).scrollTop()
+  if scrollTop >= topOffset
+    obj.css
+      marginTop: 0
+      marginLeft: leftOffset
+      position: "fixed"
+
+  if scrollTop < topOffset
+    obj.css
+      marginTop: marginTop
+      marginLeft: marginLeft
+      position: "relative"
+  return
