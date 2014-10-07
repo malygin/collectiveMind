@@ -26,7 +26,7 @@
             =link_to view_concept_plan_post_path(@project, @post, post_id: post.id, con_id: pa.post_aspects.first.id), method: :get, remote: true, class: "color-teal", "data-toggle"=> "collapse", "data-target"=> "collapse_plus_concept_#{post.id}_#{pa.post_aspects.first.id}", style: "text-decoration:none;", id: "view_post_concept_#{post.id}_#{pa.post_aspects.first.id}" do
               =pa.post_aspects.first.title
           - else
-          =t('show.without_name')
+            =t('show.without_name')
         .col-md-2(class="td_plus_concept_#{pa.post_aspects.first.id}")
           -if plus_concept?(@post_stage,pa)
             .label.label-success=t('form.plan.concept.add')

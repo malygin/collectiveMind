@@ -90,7 +90,7 @@
   %b C2.
   =t('form.concept.negative_res')
   -if boss? and @project.status == 9
-    =link_to({controller: 'plan/posts', action: new_note, id: @post.id, con_id:post_concept_show.id, type_field: 7},remote: true,method: :put, id: "btn_note_7", class: "note_text") do
+    =link_to({controller: 'plan/posts', action: :new_note, id: @post.id, con_id:post_concept_show.id, type_field: 7},remote: true,method: :put, id: "btn_note_7", class: "note_text") do
       .label.label-danger=t('show.note')
 %br
 %table.table.table-striped.table-bordered

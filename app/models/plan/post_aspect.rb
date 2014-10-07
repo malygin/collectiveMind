@@ -64,7 +64,7 @@ class Plan::PostAspect < ActiveRecord::Base
   end
   def duplicate_concept_post_resources(project,post)
     post.concept_post_resources.each do |rs|
-      self.concept_post_resources.build(:name => rs.name, :desc => rs.desc, :type_res => rs.type_res, :project_id => project.id, :style => rs.style).save  if rs!=''
+      self.plan_post_resources.build(:name => rs.name, :desc => rs.desc, :type_res => rs.type_res, :project_id => project.id, :style => rs.style).save  if rs!=''
     end
   end
 end

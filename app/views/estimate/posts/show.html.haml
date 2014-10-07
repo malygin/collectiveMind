@@ -243,7 +243,7 @@
                             %th
                               =t('show.concept.desc_res')
                         %tbody
-                          - tr.plan_post_aspect.plan_post_means.by_type('positive_s').each_with_index do |r, index|
+                          - tr.plan_post_aspect.plan_post_resources.by_type('positive_s').each_with_index do |r, index|
                             %tr
                               %td
                                 =index+1
@@ -298,7 +298,7 @@
                             %th
                               =t('show.concept.desc_res')
                         %tbody
-                          - tr.plan_post_aspect.plan_post_means.by_type('negative_s').each_with_index do |r, index|
+                          - tr.plan_post_aspect.plan_post_resources.by_type('negative_s').each_with_index do |r, index|
                             %tr
                               %td
                                 =index+1
@@ -350,7 +350,7 @@
                             %th
                               =t('show.concept.desc_res')
                         %tbody
-                          - tr.plan_post_aspect.plan_post_means.by_type('control_s').each_with_index do |r, index|
+                          - tr.plan_post_aspect.plan_post_resources.by_type('control_s').each_with_index do |r, index|
                             %tr
                               %td
                                 =index+1
