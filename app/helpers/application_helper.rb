@@ -482,10 +482,10 @@ module ApplicationHelper
 
   def validate_knowbase(post)
     if post[:title].empty?
-      flash[:title]='Заполните название статьи'
+      flash[:title] = t('form.knowbase.fail_name')
     end
     if post[:content].empty?
-      flash[:content]='Заполните поле контента'
+      flash[:content] = t('form.knowbase.fail_content')
     end
     flash
   end

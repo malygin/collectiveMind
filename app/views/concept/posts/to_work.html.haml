@@ -8,10 +8,10 @@
       %li{'data-slide-to' => "#{index}", 'data-target' => '#carousel-example-generic'}
   .carousel-inner
     .item.active
-      %img{alt: '', style: 'margin: auto;', src: '/assets/img/to_work/1c.png'}/
+      = image_tag "img/to_work/1c.png", alt: '', style: 'margin: auto;'
     - 2.upto(10) do |index|
       .item
-        %img{alt: '', style: 'margin: auto;', src: "/assets/img/to_work/#{index}c.png"}/
+        = image_tag "img/to_work/#{index}c.png", alt: '', style: 'margin: auto;'
 
 
   %a.left.carousel-control{"data-slide" => "prev", href: "#carousel-example-generic", role: "button"}
