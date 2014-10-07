@@ -1,10 +1,9 @@
--if  user
+-if user
   .sender.pull-left
     .icon(style='text-align: center;line-height: 53px;')
-      = link_to user_path( @project,user ) do
+      = link_to user_path(@project,user) do
         = image_tag user.avatar.url(:thumb)
-        - if not  user.awards.for_project(@project).empty?
+        - if not user.awards.for_project(@project).empty?
           %br
-          =image_tag('/assets/awards/'+user.awards.for_project(@project).last.url+'_25_25.png', title: user.awards.for_project(@project).for_project(@project).last.name, style: 'height: 25px; width: 25px;')
-
-
+          = image_tag('awards/'+user.awards.for_project(@project).last.url+'_25_25.png',
+          title: user.awards.for_project(@project).for_project(@project).last.name, style: 'height: 25px; width: 25px;')

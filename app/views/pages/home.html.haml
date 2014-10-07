@@ -2,7 +2,7 @@
 / - if signed_in? and (user? or admin?)
 / 	= link_to image_tag('/assets/add_dissatisfaction.png'), current_user
 / - if active_form_frustration?
-/ 	%h1{:class => "frustration"} Добавить неудовлетворенность
+/ 	%h1{class: "frustration"} Добавить неудовлетворенность
 / 	= render "shared/frustration_form"
 - if current_user.nil?
 
@@ -10,14 +10,14 @@
 	/ = link_to image_tag('add_discontent.png'), new_frustration_path
 - elsif @voted and !current_user.nil? and  current_user.frustration_forecasts.empty?
 	Перед началом голосования вы можете, если захотите, сделать свой прогноз! Если вы угадаете недовольство, которое по итогам голосования попадет в тройку набравших наибольшее число голосов, то получите 5 призовых баллов, а если вы угадаете еще и его точное место, то еще  + 5 баллов. 
-	= form_for current_user, :url => forecast_user_path(current_user) do |f|
-		= select_tag 'forecast[1]', options_from_collection_for_select(@frustrations_feed, "id", "what_short"), :prompt => "Выберите первое место"
+	= form_for current_user, url: forecast_user_path(current_user) do |f|
+		= select_tag 'forecast[1]', options_from_collection_for_select(@frustrations_feed, "id", "what_short"), prompt: "Выберите первое место"
 		%br
 		%br
-		= select_tag 'forecast[2]', options_from_collection_for_select(@frustrations_feed, "id", "what_short"), :prompt => "Выберите второе место"
+		= select_tag 'forecast[2]', options_from_collection_for_select(@frustrations_feed, "id", "what_short"), prompt: "Выберите второе место"
 		%br
 		%br
-		= select_tag 'forecast[3]', options_from_collection_for_select(@frustrations_feed, "id", "what_short"), :prompt => "Выберите третье место"
+		= select_tag 'forecast[3]', options_from_collection_for_select(@frustrations_feed, "id", "what_short"), prompt: "Выберите третье место"
 		%br
 		%br
 		%label 
