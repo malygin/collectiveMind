@@ -11,14 +11,12 @@ group :development, :test do
   gem 'quiet_assets'
   gem 'grizzled-rails-logger'
   gem 'rspec-rails'
-  gem 'thin'
 end
 
 group :production do
   gem 'rails_12factor'
   gem 'newrelic_rpm', '>=3.7.3'
   gem 'heroku-deflater'
-  gem 'unicorn'
 end
 
 group :test do
@@ -38,6 +36,7 @@ group :test do
   gem 'headless'
 end
 
+gem 'thin'
 gem 'sass-rails', '~> 4.0.0'
 gem 'coffee-rails', '~> 4.0.1'
 gem 'uglifier', '>= 2.1.1'
