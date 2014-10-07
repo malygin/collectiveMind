@@ -21,6 +21,8 @@
 
     %nav#sidebar.sidebar.nav-collapse.collapse
       = render partial: 'left_side', locals: { current_stage: controller.controller_path }
+    %nav.sidebar.nav-collapse.collapse
+    = render partial: 'shared/moderator_chat'
     .wrap
       %header.page-header
         .navbar
@@ -36,7 +38,6 @@
         -else
           = yield
 
-    = render partial: 'shared/moderator_chat'
     /
       Javascripts
       \==================================================
