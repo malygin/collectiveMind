@@ -97,4 +97,3 @@ gem 'activerecord-deprecated_finders'
 #texteditor
 #gem 'ckeditor'
 gem 'tinymce-rails'
-gem 'activerecord-session_store'
