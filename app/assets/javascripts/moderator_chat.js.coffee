@@ -6,6 +6,8 @@ scrollToLastMessage = ->
 
 $(document).ready ->
   scrollToLastMessage()
+  $('#moderator_chat_window').draggable()
+
   ws = new WebSocketRails(document.location.host + '/websocket')
   ws.on_open = ->
     console.log 'socket opened'
