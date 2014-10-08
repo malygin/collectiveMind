@@ -99,6 +99,7 @@ class User < ActiveRecord::Base
                                thumb: '57x74>',
                                normal: '250x295>'
                            }
+  validates_attachment_content_type :avatar, :content_type => /\Aimage\/.*\Z/
 
   def valid_password?(password)
     begin
