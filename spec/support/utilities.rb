@@ -137,7 +137,7 @@ def not_have_content_for_moderator(closed_project)
   expect(page).not_to have_content 'Закрытые процедуры'
   expect(page).not_to have_content 'closed project'
   #expect(page).not_to have_selector "a#go_to_closed_project[href='/project/#{closed_project.id}']", 'Перейти к процедуре'
-  expect(page).not_to have_link('go_to_closed_project', :text => 'Перейти к процедуре', :href => "/project/#{closed_project.id}")
+  # expect(page).not_to have_link('go_to_closed_project', :text => 'Перейти к процедуре', :href => "/project/#{closed_project.id}")
   validate_projects_links({closed: closed_project}, expect: false)
 end
 
@@ -340,9 +340,9 @@ end
 def validate_projects_links(projects, expect)
   if projects[:opened]
     if expect[:expect]
-      expect(page).to have_link('go_to_open_project_'+projects[:opened].id.to_s, :text => I18n.t('link.go_to_project'), :href => "/project/#{projects[:opened].id}")
+      expect(page).to have_link('go_to_opened_project_'+projects[:opened].id.to_s, :text => I18n.t('link.go_to_project'), :href => "/project/#{projects[:opened].id}")
     else
-      expect(page).not_to have_link('go_to_open_project_'+projects[:opened].id.to_s, :text => I18n.t('link.go_to_project'), :href => "/project/#{projects[:opened].id}")
+      expect(page).not_to have_link('go_to_opened_project_'+projects[:opened].id.to_s, :text => I18n.t('link.go_to_project'), :href => "/project/#{projects[:opened].id}")
     end
   end
   if projects[:closed]

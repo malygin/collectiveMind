@@ -22,7 +22,7 @@ describe 'Life Tape ' do
 
     context 'success go to project ' do
       before do
-        click_link "go_to_open_project_#{project.id}"
+        click_link "go_to_opened_project_#{project.id}"
       end
       it 'have content for user ' do
         expect(page).to have_content @aspect1.content
@@ -95,7 +95,7 @@ describe 'Life Tape ' do
 
     context 'success go to project ' do
       before do
-        click_link "go_to_open_project_#{project.id}"
+        click_link "go_to_opened_project_#{project.id}"
       end
       it 'have content for moderator ' do
         expect(page).to have_content @aspect1.content

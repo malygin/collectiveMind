@@ -242,7 +242,7 @@ describe 'Core Project ' do
           visit "/project/#{closed_project.id}"
           expect(page.current_path).to eq root_path
           not_have_content_for_club_user(closed_project)
-          # have_content_for_club_user(opened_project, demo_project, club_project)
+          have_content_for_club_user(opened_project, demo_project, club_project)
         end
 
         it 'for list projects ' do

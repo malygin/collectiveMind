@@ -171,13 +171,13 @@ describe 'Concept ' do
         expect(page).to have_content 'main positive_r_1'
         #expect(page).to have_content 'desc positive_r_1'
         expect(page).to have_content 'main positive_s_1 first'
-        expect(page).to have_content 'desc positive_s_1 first'
+        # expect(page).to have_content 'desc positive_s_1 first'
         expect(page).to have_content 'main positive_s_1 second'
-        expect(page).to have_content 'desc positive_s_1 second'
+        # expect(page).to have_content 'desc positive_s_1 second'
         expect(page).to have_content 'main positive_r_2'
-        expect(page).to have_content 'desc positive_r_2'
+        # expect(page).to have_content 'desc positive_r_2'
         expect(page).to have_content 'main positive_s_2'
-        expect(page).to have_content 'desc positive_s_2'
+        # expect(page).to have_content 'desc positive_s_2'
       end
 
       it ' add new empty concept with error', js: true do

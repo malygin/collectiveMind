@@ -196,11 +196,11 @@ describe 'Discontent ' do
 
       it 'can add note ', js:true do
         click_link "content_dispost_what_#{@discontent1.id}"
-        expect(page).to have_selector "form#note_for_post_what_#{@discontent1.id}"
-        find("#note_for_post_what_#{@discontent1.id}").find('#edit_post_note_text_area').set "new note for first field discontent post"
-        find("#note_for_post_what_#{@discontent1.id}").find("#send_post_#{@discontent1.id}").click
+        expect(page).to have_selector "form#note_for_post_#{@discontent1.id}_1"
+        find("#note_for_post_#{@discontent1.id}_1").find('#edit_post_note_text_area').set "new note for first field discontent post"
+        find("#note_for_post_#{@discontent1.id}_1").find("#send_post_#{@discontent1.id}").click
         expect(page).to have_content "new note for first field discontent post"
-        page.execute_script %($("ul#note_form_what_#{@discontent1.id} a").click())
+        page.execute_script %($("ul#note_form_#{@discontent1.id}_1 a").click())
         # @todo нужно ждать пока отработает анимация скрытия и элемент будет удален
         sleep(5)
         expect(page).not_to have_content "new note for first field discontent post"
