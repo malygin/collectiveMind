@@ -12,6 +12,8 @@ group :development, :test do
   gem 'grizzled-rails-logger'
   gem 'rspec-rails'
   gem 'thin'
+  gem 'better_errors'
+  gem 'binding_of_caller'
 end
 
 group :production do
