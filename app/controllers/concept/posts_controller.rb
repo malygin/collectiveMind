@@ -86,6 +86,7 @@ class Concept::PostsController < PostsController
     @concept_post.project = @project
     @concept_post.improve_comment = params[:improve_comment] if params[:improve_comment]
     @concept_post.improve_stage = params[:improve_stage] if params[:improve_stage]
+    # @improve = params[:improve_comment]
 
     create_concept_resources_on_type(@project, @concept_post, 'positive_r', 'positive_s',false)
     create_concept_resources_on_type(@project, @concept_post, 'negative_r', 'negative_s',false)

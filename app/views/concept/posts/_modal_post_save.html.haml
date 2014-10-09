@@ -8,9 +8,14 @@
         %hr
         .text-center
           .col-md-6
-            %a.btn.btn-lg.btn-primary(data-dismiss="modal")=t('form.add_more')
+            -if params[:improve_comment]
+              %a.btn.btn-lg.btn-success(href="/project/#{@project.id}/concept/posts/new?asp_id=#{@aspect_id}" style="font-weight: normal !important;" id="new_concept")
+                =t('show.concept.add_concept')
+            -else
+              %a.btn.btn-lg.btn-primary(data-dismiss="modal")=t('form.add_more')
           .col-md-6
             =link_to t('link.go_list'), "/project/#{@project.id}/concept/posts?asp=#{@aspect_id}", class: "btn btn-lg btn-success"
         %br
         %br
+
 

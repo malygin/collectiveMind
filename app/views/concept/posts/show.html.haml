@@ -59,10 +59,11 @@
                       .label.label-danger=t('show.note')
                 -else
                   %span(class= "#{class_for_concept_type_field(@post,1)}" id="name")=t('form.concept.novation_what')
-              .form-group
-                =simple_format(tp.name)
               -if @project.status == 7
                 = render partial: 'concept/posts/note_list', locals:{post_field:@post,type_fd:1}
+              .form-group
+                =simple_format(tp.name)
+
 
           %section
             .body
@@ -75,11 +76,11 @@
                       .label.label-danger=t('show.note')
                 -else
                   %span(class= "#{class_for_concept_type_field(@post,2)}" id="content")=t('form.concept.novation_how')
-
-              .form-group.has-danger
-                =simple_format(tp.content)
               -if @project.status == 7
                 = render partial: 'concept/posts/note_list', locals:{post_field:@post,type_fd:2}
+              .form-group.has-danger
+                =simple_format(tp.content)
+
 
           %section
             .body
@@ -92,10 +93,10 @@
                       .label.label-danger=t('show.note')
                 -else
                   %span(class= "#{class_for_concept_type_field(@post,3)}" id="positive")=t('form.concept.cond')
-
-              .form-group.has-success= display_content(tp.positive)
               -if @project.status == 7
                 = render partial: 'concept/posts/note_list', locals:{post_field:@post,type_fd:3}
+              .form-group.has-success= display_content(tp.positive)
+
           %section
             .body
               %p
@@ -108,6 +109,8 @@
                 -else
                   %span(class= "#{class_for_concept_type_field(@post,4)}" id="positive_r")=t('form.concept.cond_res')
               %br
+              -if @project.status == 7
+                = render partial: 'concept/posts/note_list', locals:{post_field:@post,type_fd:4}
               %br
               %table.table.table-striped.table-bordered
                 %thead
@@ -136,8 +139,7 @@
                         %td
                           =res.desc
 
-              -if @project.status == 7
-                = render partial: 'concept/posts/note_list', locals:{post_field:@post,type_fd:4}
+
 
           %section
             .body
@@ -150,10 +152,10 @@
                       .label.label-danger=t('show.note')
                 -else
                   %span(class= "#{class_for_concept_type_field(@post,5)}" id= "negative")=t('form.concept.negative')
-
-              .form-group.has-success= display_content(tp.negative)
               -if @project.status == 7
                 = render partial: 'concept/posts/note_list', locals:{post_field:@post,type_fd:5}
+              .form-group.has-success= display_content(tp.negative)
+
 
           %section
             .body
@@ -168,6 +170,8 @@
                   %span(class= "#{class_for_concept_type_field(@post,6)}" id= "negative_r")=t('form.concept.negative_res')
 
               %br
+              -if @project.status == 7
+                = render partial: 'concept/posts/note_list', locals:{post_field:@post,type_fd:6}
               %br
               %table.table.table-striped.table-bordered
                 %thead
@@ -197,8 +201,7 @@
                           =res.desc
 
 
-              -if @project.status == 7
-                = render partial: 'concept/posts/note_list', locals:{post_field:@post,type_fd:6}
+
 
           %section
             .body
@@ -211,10 +214,10 @@
                       .label.label-danger=t('show.note')
                 -else
                   %span(class= "#{class_for_concept_type_field(@post,7)}" id= "control")=t('form.concept.control')
-
-              .form-group.has-success= display_content(tp.control)
               -if @project.status == 7
                 = render partial: 'concept/posts/note_list', locals:{post_field:@post,type_fd:7}
+              .form-group.has-success= display_content(tp.control)
+
 
           %section
             .body
@@ -229,6 +232,8 @@
                   %span(class= "#{class_for_concept_type_field(@post,8)}" id= "control_r")=t('form.concept.control_res')
 
               %br
+              -if @project.status == 7
+                = render partial: 'concept/posts/note_list', locals:{post_field:@post,type_fd:8}
               %br
               %table.table.table-striped.table-bordered
                 %thead
@@ -257,8 +262,7 @@
                         %td
                           =res.desc
 
-              -if @project.status == 7
-                = render partial: 'concept/posts/note_list', locals:{post_field:@post,type_fd:8}
+
 
           %section
             .body
@@ -271,10 +275,10 @@
                       .label.label-danger=t('show.note')
                 -else
                   %span(class= "#{class_for_concept_type_field(@post,9)}" id= "obstacles")=t('form.concept.obstacles_bcd')
-
-              .form-group.has-success= display_content(tp.obstacles)
               -if @project.status == 7
                 = render partial: 'concept/posts/note_list', locals:{post_field:@post,type_fd:9}
+              .form-group.has-success= display_content(tp.obstacles)
+
 
           %section
             .body
@@ -287,10 +291,10 @@
                       .label.label-danger=t('show.note')
                 -else
                   %span(class= "#{class_for_concept_type_field(@post,10)}" id="problems")=t('form.concept.problems')
-
-              .form-group.has-success= display_content(tp.problems)
               -if @project.status == 7
                 = render partial: 'concept/posts/note_list', locals:{post_field:@post,type_fd:10}
+              .form-group.has-success= display_content(tp.problems)
+
 
           %section
             .body
@@ -303,10 +307,10 @@
                       .label.label-danger=t('show.note')
                 -else
                   %span(class= "#{class_for_concept_type_field(@post,11)}" id= "reality")=t('form.concept.reality')
-
-              .form-group.has-success= display_content(tp.reality)
               -if @project.status == 7
                 = render partial: 'concept/posts/note_list', locals:{post_field:@post,type_fd:11}
+              .form-group.has-success= display_content(tp.reality)
+
           %br
           .pull-right
             = render 'shared/post_edit_bar', post:@post
