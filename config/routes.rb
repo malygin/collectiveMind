@@ -118,8 +118,8 @@ scope '/project/:project' do
         put :set_required
         put :set_grouped
       end
-      resources :post_advices, except: [:index]
     end
+    resources :post_advices
   end
 
   post 'concept/posts/add_dispost', to: 'concept/posts#add_dispost'

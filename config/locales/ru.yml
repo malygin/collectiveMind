@@ -746,3 +746,5 @@ ru:
     auth: "Авторизуйтесь пожалуйста!"
 
 
+  left_side:
+    discontent_post_advices: "Неутвержденные советы"
