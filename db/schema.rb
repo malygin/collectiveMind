@@ -61,7 +61,6 @@ ActiveRecord::Schema.define(version: 20141007083440) do
     t.boolean  "against",    default: true
   end
 
-  add_index "concept_comment_votings", ["created_at", "comment_id"], name: "index_concept_comment_voitings_on_created_at_and_comment_id", using: :btree
   add_index "concept_comment_votings", ["created_at", "comment_id"], name: "index_concept_comment_votings_on_created_at_and_comment_id", using: :btree
 
   create_table "concept_comments", force: true do |t|
@@ -82,43 +81,6 @@ ActiveRecord::Schema.define(version: 20141007083440) do
   add_index "concept_comments", ["created_at"], name: "index_concept_comments_on_created_at", using: :btree
   add_index "concept_comments", ["post_id"], name: "index_concept_comments_on_post_id", using: :btree
   add_index "concept_comments", ["user_id"], name: "index_concept_comments_on_user_id", using: :btree
-
-  create_table "concept_essays", force: true do |t|
-    t.integer  "user_id"
-    t.text     "content"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  create_table "concept_final_voitings", force: true do |t|
-    t.integer  "score"
-    t.integer  "forecast_task_id"
-    t.integer  "user_id"
-    t.datetime "created_at",       null: false
-    t.datetime "updated_at",       null: false
-  end
-
-  add_index "concept_final_voitings", ["forecast_task_id"], name: "index_concept_final_voitings_on_forecast_task_id", using: :btree
-  add_index "concept_final_voitings", ["user_id"], name: "index_concept_final_voitings_on_user_id", using: :btree
-
-  create_table "concept_forecast_tasks", force: true do |t|
-    t.integer  "user_id"
-    t.text     "content"
-    t.text     "description"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
-  end
-
-  create_table "concept_forecasts", force: true do |t|
-    t.integer  "forecast_task_id"
-    t.integer  "position"
-    t.integer  "user_id"
-    t.datetime "created_at",       null: false
-    t.datetime "updated_at",       null: false
-  end
-
-  add_index "concept_forecasts", ["forecast_task_id"], name: "index_concept_forecasts_on_forecast_task_id", using: :btree
-  add_index "concept_forecasts", ["user_id"], name: "index_concept_forecasts_on_user_id", using: :btree
 
   create_table "concept_notes", force: true do |t|
     t.text     "content"
@@ -163,8 +125,8 @@ ActiveRecord::Schema.define(version: 20141007083440) do
     t.integer  "post_id"
     t.integer  "discontent_post_id"
     t.integer  "complite"
-    t.datetime "created_at",         null: false
-    t.datetime "updated_at",         null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "concept_post_discontents", force: true do |t|
@@ -172,6 +134,8 @@ ActiveRecord::Schema.define(version: 20141007083440) do
     t.integer  "discontent_post_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "complite"
+    t.integer  "status"
   end
 
   create_table "concept_post_discussions", force: true do |t|
@@ -223,11 +187,8 @@ ActiveRecord::Schema.define(version: 20141007083440) do
     t.datetime "updated_at"
   end
 
-  add_index "concept_post_votings", ["post_id", "user_id"], name: "index_concept_post_voitings_on_post_id_and_user_id", using: :btree
   add_index "concept_post_votings", ["post_id", "user_id"], name: "index_concept_post_votings_on_post_id_and_user_id", using: :btree
-  add_index "concept_post_votings", ["post_id"], name: "index_concept_post_voitings_on_post_id", using: :btree
   add_index "concept_post_votings", ["post_id"], name: "index_concept_post_votings_on_post_id", using: :btree
-  add_index "concept_post_votings", ["user_id"], name: "index_concept_post_voitings_on_user_id", using: :btree
   add_index "concept_post_votings", ["user_id"], name: "index_concept_post_votings_on_user_id", using: :btree
 
   create_table "concept_posts", force: true do |t|
@@ -296,7 +257,6 @@ ActiveRecord::Schema.define(version: 20141007083440) do
   end
 
   add_index "concept_votings", ["concept_post_aspect_id"], name: "index_concept_votings_on_concept_post_aspect_id", using: :btree
-  add_index "concept_votings", ["concept_post_aspect_id"], name: "index_concept_votings_on_concept_post_id", using: :btree
   add_index "concept_votings", ["user_id"], name: "index_concept_votings_on_user_id", using: :btree
 
   create_table "core_project_scores", force: true do |t|
@@ -392,7 +352,6 @@ ActiveRecord::Schema.define(version: 20141007083440) do
     t.boolean  "against",    default: true
   end
 
-  add_index "discontent_comment_votings", ["comment_id"], name: "index_discontent_comment_voitings_on_comment_id", using: :btree
   add_index "discontent_comment_votings", ["comment_id"], name: "index_discontent_comment_votings_on_comment_id", using: :btree
 
   create_table "discontent_comments", force: true do |t|
@@ -462,11 +421,8 @@ ActiveRecord::Schema.define(version: 20141007083440) do
     t.boolean  "against",    default: true
   end
 
-  add_index "discontent_post_votings", ["post_id", "user_id"], name: "index_discontent_post_voitings_on_post_id_and_user_id", using: :btree
   add_index "discontent_post_votings", ["post_id", "user_id"], name: "index_discontent_post_votings_on_post_id_and_user_id", using: :btree
-  add_index "discontent_post_votings", ["post_id"], name: "index_discontent_post_voitings_on_post_id", using: :btree
   add_index "discontent_post_votings", ["post_id"], name: "index_discontent_post_votings_on_post_id", using: :btree
-  add_index "discontent_post_votings", ["user_id"], name: "index_discontent_post_voitings_on_user_id", using: :btree
   add_index "discontent_post_votings", ["user_id"], name: "index_discontent_post_votings_on_user_id", using: :btree
 
   create_table "discontent_post_whens", force: true do |t|
@@ -528,7 +484,6 @@ ActiveRecord::Schema.define(version: 20141007083440) do
     t.boolean  "against"
   end
 
-  add_index "essay_comment_votings", ["comment_id"], name: "index_essay_comment_voitings_on_comment_id", using: :btree
   add_index "essay_comment_votings", ["comment_id"], name: "index_essay_comment_votings_on_comment_id", using: :btree
 
   create_table "essay_comments", force: true do |t|
@@ -556,7 +511,6 @@ ActiveRecord::Schema.define(version: 20141007083440) do
     t.boolean  "against"
   end
 
-  add_index "essay_post_votings", ["post_id"], name: "index_essay_post_voitings_on_post_id", using: :btree
   add_index "essay_post_votings", ["post_id"], name: "index_essay_post_votings_on_post_id", using: :btree
 
   create_table "essay_posts", force: true do |t|
@@ -585,7 +539,6 @@ ActiveRecord::Schema.define(version: 20141007083440) do
     t.boolean  "against",    default: true
   end
 
-  add_index "estimate_comment_votings", ["comment_id"], name: "index_estimate_comment_voitings_on_comment_id", using: :btree
   add_index "estimate_comment_votings", ["comment_id"], name: "index_estimate_comment_votings_on_comment_id", using: :btree
 
   create_table "estimate_comments", force: true do |t|
@@ -771,7 +724,6 @@ ActiveRecord::Schema.define(version: 20141007083440) do
     t.datetime "updated_at"
   end
 
-  add_index "expert_news_comment_votings", ["comment_id"], name: "index_expert_news_comment_voitings_on_comment_id", using: :btree
   add_index "expert_news_comment_votings", ["comment_id"], name: "index_expert_news_comment_votings_on_comment_id", using: :btree
 
   create_table "expert_news_comments", force: true do |t|
@@ -928,7 +880,6 @@ ActiveRecord::Schema.define(version: 20141007083440) do
   add_index "journals", ["project_id", "type_event", "user_informed", "viewed"], name: "pr_te_ui_viewd", using: :btree
   add_index "journals", ["project_id", "type_event"], name: "index_journals_on_project_id_and_type_event", using: :btree
   add_index "journals", ["project_id"], name: "index_journals_on_project_id", using: :btree
-  add_index "journals", ["type_event"], name: "index_journals_on_type", using: :btree
   add_index "journals", ["type_event"], name: "index_journals_on_type_event", using: :btree
   add_index "journals", ["user_id"], name: "index_journals_on_user_id", using: :btree
 
@@ -958,7 +909,6 @@ ActiveRecord::Schema.define(version: 20141007083440) do
     t.boolean  "against",    default: true
   end
 
-  add_index "life_tape_comment_votings", ["user_id", "comment_id"], name: "index_life_tape_comment_voitings_on_user_id_and_comment_id", using: :btree
   add_index "life_tape_comment_votings", ["user_id", "comment_id"], name: "index_life_tape_comment_votings_on_user_id_and_comment_id", using: :btree
 
   create_table "life_tape_comments", force: true do |t|
@@ -996,11 +946,8 @@ ActiveRecord::Schema.define(version: 20141007083440) do
     t.datetime "updated_at"
   end
 
-  add_index "life_tape_post_votings", ["post_id", "user_id"], name: "index_life_tape_post_voitings_on_post_id_and_user_id", using: :btree
   add_index "life_tape_post_votings", ["post_id", "user_id"], name: "index_life_tape_post_votings_on_post_id_and_user_id", using: :btree
-  add_index "life_tape_post_votings", ["post_id"], name: "index_life_tape_post_voitings_on_post_id", using: :btree
   add_index "life_tape_post_votings", ["post_id"], name: "index_life_tape_post_votings_on_post_id", using: :btree
-  add_index "life_tape_post_votings", ["user_id"], name: "index_life_tape_post_voitings_on_user_id", using: :btree
   add_index "life_tape_post_votings", ["user_id"], name: "index_life_tape_post_votings_on_user_id", using: :btree
 
   create_table "life_tape_posts", force: true do |t|
@@ -1053,7 +1000,6 @@ ActiveRecord::Schema.define(version: 20141007083440) do
     t.boolean  "against",    default: true
   end
 
-  add_index "plan_comment_votings", ["comment_id"], name: "index_plan_comment_voitings_on_comment_id", using: :btree
   add_index "plan_comment_votings", ["comment_id"], name: "index_plan_comment_votings_on_comment_id", using: :btree
 
   create_table "plan_comments", force: true do |t|
@@ -1194,7 +1140,6 @@ ActiveRecord::Schema.define(version: 20141007083440) do
     t.boolean  "against",    default: true
   end
 
-  add_index "plan_post_votings", ["post_id"], name: "index_plan_post_voitings_on_post_id", using: :btree
   add_index "plan_post_votings", ["post_id"], name: "index_plan_post_votings_on_post_id", using: :btree
 
   create_table "plan_posts", force: true do |t|
@@ -1251,17 +1196,6 @@ ActiveRecord::Schema.define(version: 20141007083440) do
     t.datetime "updated_at"
   end
 
-  create_table "projects", force: true do |t|
-    t.string   "name"
-    t.string   "description"
-    t.datetime "begin1st"
-    t.datetime "end1st"
-    t.datetime "begin1stvote"
-    t.datetime "end1stvote"
-    t.datetime "created_at",   null: false
-    t.datetime "updated_at",   null: false
-  end
-
   create_table "question_comment_votings", force: true do |t|
     t.integer  "user_id"
     t.integer  "comment_id"
@@ -1303,7 +1237,6 @@ ActiveRecord::Schema.define(version: 20141007083440) do
   end
 
   add_index "question_posts", ["project_id"], name: "index_question_posts_on_project_id", using: :btree
-  add_index "question_posts", ["project_id"], name: "index_questions_posts_on_project_id", using: :btree
 
   create_table "questions", force: true do |t|
     t.string   "text"
@@ -1323,63 +1256,6 @@ ActiveRecord::Schema.define(version: 20141007083440) do
 
   add_index "questions_users", ["question_id"], name: "index_questions_users_on_question_id", using: :btree
   add_index "questions_users", ["user_id"], name: "index_questions_users_on_user_id", using: :btree
-
-  create_table "test_answers", force: true do |t|
-    t.text     "name"
-    t.integer  "type_answer"
-    t.integer  "test_question_id"
-    t.datetime "created_at",       null: false
-    t.datetime "updated_at",       null: false
-  end
-
-  add_index "test_answers", ["test_question_id"], name: "index_test_answers_on_test_question_id", using: :btree
-
-  create_table "test_attempts", force: true do |t|
-    t.integer  "test_id"
-    t.integer  "user_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  add_index "test_attempts", ["test_id"], name: "index_test_attempts_on_test_id", using: :btree
-  add_index "test_attempts", ["user_id"], name: "index_test_attempts_on_user_id", using: :btree
-
-  create_table "test_question_attempts", force: true do |t|
-    t.integer  "test_attempt_id"
-    t.integer  "test_question_id"
-    t.string   "answer"
-    t.datetime "created_at",       null: false
-    t.datetime "updated_at",       null: false
-  end
-
-  add_index "test_question_attempts", ["test_attempt_id"], name: "index_test_question_attempts_on_test_attempt_id", using: :btree
-  add_index "test_question_attempts", ["test_question_id"], name: "index_test_question_attempts_on_test_question_id", using: :btree
-
-  create_table "test_questions", force: true do |t|
-    t.text     "name"
-    t.integer  "type_question"
-    t.integer  "test_id"
-    t.datetime "created_at",     null: false
-    t.datetime "updated_at",     null: false
-    t.integer  "order_question"
-  end
-
-  add_index "test_questions", ["order_question"], name: "index_test_questions_on_order_question", using: :btree
-  add_index "test_questions", ["test_id"], name: "index_test_questions_on_test_id", using: :btree
-
-  create_table "tests", force: true do |t|
-    t.string   "name"
-    t.string   "description"
-    t.integer  "project_id"
-    t.datetime "begin_date"
-    t.datetime "end_date"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
-    t.text     "preview"
-  end
-
-  add_index "tests", ["begin_date"], name: "index_tests_on_begin_date", using: :btree
-  add_index "tests", ["end_date"], name: "index_tests_on_end_date", using: :btree
 
   create_table "user_award_clicks", force: true do |t|
     t.integer  "user_id"
