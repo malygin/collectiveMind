@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141007083440) do
+ActiveRecord::Schema.define(version: 20141009084832) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -420,6 +420,18 @@ ActiveRecord::Schema.define(version: 20141007083440) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  create_table "discontent_post_advices", force: true do |t|
+    t.text     "content"
+    t.boolean  "approved",           default: false
+    t.integer  "user_id"
+    t.integer  "discontent_post_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "discontent_post_advices", ["discontent_post_id"], name: "index_discontent_post_advices_on_discontent_post_id", using: :btree
+  add_index "discontent_post_advices", ["user_id"], name: "index_discontent_post_advices_on_user_id", using: :btree
 
   create_table "discontent_post_aspects", force: true do |t|
     t.integer  "post_id"

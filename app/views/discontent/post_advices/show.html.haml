@@ -1,0 +1,18 @@
+%p#notice= notice
+
+%p
+  %b Content:
+  = @discontent_post_advice.content
+%p
+  %b Approved:
+  = @discontent_post_advice.approved
+%p
+  %b User:
+  = @discontent_post_advice.user
+%p
+  %b Discontent post:
+  = @discontent_post_advice.discontent_post
+
+= link_to 'Edit', edit_discontent_post_advice_path(@discontent_post_advice)
+\|
+= link_to 'Back', discontent_post_advices_path
