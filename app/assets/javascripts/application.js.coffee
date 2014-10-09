@@ -14,7 +14,6 @@
 #= require totop/easing
 # require ckeditor/init
 #= require tinymce
-#= require tinymce/langs/ru
 
 # @todo load initialization
 $ ->
