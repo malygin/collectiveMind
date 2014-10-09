@@ -145,7 +145,6 @@ $('#search_users_text').on 'change', ->
 @activate_htmleditor= ->
   tinyMCE.init
     selector: "textarea.tinymce"
-    language : 'ru'
     plugins: [
       "advlist autolink link image lists charmap print preview hr anchor pagebreak spellchecker",
       "searchreplace wordcount visualblocks visualchars code fullscreen insertdatetime media nonbreaking",
