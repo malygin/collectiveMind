@@ -7,4 +7,20 @@
   %br
   %br
 
-= render @posts
+%section.widget.widget-tabs
+  %header
+    %ul.nav.nav-tabs{role: 'tablist'}
+      %li.active
+        %a#go_to_posts{href: '#posts', role: 'tab', 'data-toggle' => 'tab'}
+          Посты
+          %br/
+      %li
+        %a#go_to_advices{href: '#advices', role: 'tab', 'data-toggle' => 'tab'}
+          Неутвержденные советы
+          %br/
+  .body.tab-content
+    .tab-pane.active#posts
+      = render @posts
+    .tab-pane.active#advices
+      - Discontent::PostAdvice.unapproved.each do |advice|
+        = render partial: 'discontent/post_advices/post_advice', locals: {post_advice: advice}
