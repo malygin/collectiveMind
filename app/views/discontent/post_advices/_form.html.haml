@@ -1,22 +1,10 @@
-= form_for @discontent_post_advice do |f|
-  - if @discontent_post_advice.errors.any?
-    #error_explanation
-      %h2= "#{pluralize(@discontent_post_advice.errors.count, "error")} prohibited this discontent_post_advice from being saved:"
-      %ul
-        - @discontent_post_advice.errors.full_messages.each do |msg|
-          %li= msg
+.row
+  .col-md-12
+    = form_for Discontent::PostAdvice.new, url: discontent_post_post_advices_path(@project, @post), remote: true do |f|
+      = render 'shared/notice_messages', object: f.object
+      = f.text_area :content, class: 'form-control input-transparent comment-textarea', placeholder: 'Ваш совет'
+      .pull-right
+        = f.submit t('form.send'), id: 'send_advice', class: 'btn btn-sm btn-info'
 
-  .field
-    = f.label :content
-    = f.text_area :content
-  .field
-    = f.label :approved
-    = f.check_box :approved
-  .field
-    = f.label :user
-    = f.text_field :user
-  .field
-    = f.label :discontent_post
-    = f.text_field :discontent_post
-  .actions
-    = f.submit 'Save'
+.text-success#advice_success_created(style='display:none;')
+  Ваш совет добавлен и ожидает проверки модератором
