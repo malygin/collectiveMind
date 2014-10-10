@@ -6,8 +6,9 @@
     %span
       = trim_content(post_advice.content)
     %br
-    /= link_to t('link.more'), essay_post_path(@project,@stage, post), class: 'btn btn-primary btn-xs'
-    /|
-    /= render partial: 'post_edit_essay', object: post
-    /%br
-    /= render 'shared/post_social_bar2', post: post
+    = link_to t('link.more'), discontent_post_advice_path(@project, post_advice), class: 'btn btn-primary btn-xs'
+    \|
+    = link_to discontent_post_advice_path(@project, post_advice), method: :delete, data: {confirm: t('confirm.delete_advice')} do
+      %button.btn.btn-xs.btn-danger{type: 'button'}
+        = t('link.delete')
+        %i.fa.fa-trash-o

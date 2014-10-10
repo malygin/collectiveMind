@@ -1,10 +1,10 @@
 .row
   .col-md-12
-    = form_for Discontent::PostAdvice.new, url: discontent_post_post_advices_path(@project, @post), remote: true do |f|
+    = form_for Discontent::PostAdvice.new, url: discontent_post_advices_path(@project).concat("?post_id=#{@post.id}"), remote: true do |f|
       = render 'shared/notice_messages', object: f.object
       = f.text_area :content, class: 'form-control input-transparent comment-textarea', placeholder: 'Ваш совет'
       .pull-right
         = f.submit t('form.send'), id: 'send_advice', class: 'btn btn-sm btn-info'
 
 .text-success#advice_success_created(style='display:none;')
-  Ваш совет добавлен и ожидает проверки модератором
+  = t('discontent.advice_success_created')

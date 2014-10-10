@@ -1,7 +1,12 @@
 class Discontent::PostAdvicesController < ApplicationController
   before_action :set_discontent_post_advice, only: [:show, :edit, :update, :destroy]
-  before_action :set_discontent_post
-  before_action :set_project
+  before_action :set_discontent_post, except: [:index, :destroy, :show]
+  before_action :journal_data
+  before_filter :only_moderators, only: [:index, :show]
+
+  def index
+    @unapproved_advices = Discontent::PostAdvice.unapproved
+  end
 
   # GET /discontent/post_advices/1
   def show
@@ -33,14 +38,15 @@ class Discontent::PostAdvicesController < ApplicationController
   # DELETE /discontent/post_advices/1
   def destroy
     @discontent_post_advice.destroy
-    redirect_to discontent_post_advices_url, notice: 'Post advice was successfully destroyed.'
+    redirect_to discontent_post_advices_url(@project), notice: 'Post advice was successfully destroyed.'
   end
 
   private
-  def set_project
-    @project = Core::Project.find(params[:project])
+  def only_moderators
+    redirect_back_or root_url unless current_user.admin?
   end
 
+  private
   def set_discontent_post
     @post = Discontent::Post.find params[:post_id]
   end

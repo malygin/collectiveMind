@@ -508,6 +508,7 @@ ru:
     delete_comment: Удалить комментарий?
     delete_concept: 'Удалить нововведение?'
     delete_stage: Удалить этап?
+    delete_advice: 'Удалить совет?'
 
   show:
     without_name: 'Без названия'
@@ -748,3 +749,6 @@ ru:
 
   left_side:
     discontent_post_advices: "Неутвержденные советы"
+  discontent:
+    unapproved_post_advices: "Неутвежденные советы"
+    advice_success_created: "Ваш совет добавлен и ожидает проверки модератором"

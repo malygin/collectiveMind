@@ -1,18 +1,9 @@
-%p#notice= notice
-
-%p
-  %b Content:
-  = @discontent_post_advice.content
-%p
-  %b Approved:
-  = @discontent_post_advice.approved
-%p
-  %b User:
-  = @discontent_post_advice.user
-%p
-  %b Discontent post:
-  = @discontent_post_advice.discontent_post
-
-= link_to 'Edit', edit_discontent_post_advice_path(@discontent_post_advice)
-\|
-= link_to 'Back', discontent_post_advices_path
+.media.option_for_selectize{id: "post_#{@discontent_post_advice.id}", project: "#{@project.id}", post: "#{@discontent_post_advice.id}"}
+  - if @discontent_post_advice.user
+    = render 'users/user_post', user: @discontent_post_advice.user
+  .media-body
+    - if @discontent_post_advice.user
+      .media-heading
+        = link_to @discontent_post_advice.user, user_path(@project, @discontent_post_advice.user)
+    %br
+= @discontent_post_advice.content
