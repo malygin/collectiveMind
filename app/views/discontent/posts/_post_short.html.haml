@@ -8,9 +8,9 @@
         = render partial: '/shared/user_online', object: post_short.user
       - if boss? or role_expert?
         .pull-right
-          =link_to({:controller => post_short.class.name.underscore.pluralize, :action => :discuss_status, :id => post_short.id, :discuss_status => 1},  :remote => true, :method => :put,  id: "discuss_stat_post_#{post_short.id}") do
+          =link_to({controller: post_short.class.name.underscore.pluralize, action: :discuss_status, id: post_short.id, discuss_status: 1},  remote: true, method: :put,  id: "discuss_stat_post_#{post_short.id}") do
             %span.label(class="#{label_discuss_stat(post_short)}")=t('show.discuss')
-          =link_to({:controller => post_short.class.name.underscore.pluralize, :action => :discuss_status, :id => post_short.id, :approve_status => 1},  :remote => true, :method => :put,  id: "approve_stat_post_#{post_short.id}") do
+          =link_to({controller: post_short.class.name.underscore.pluralize, action: :discuss_status, id: post_short.id, approve_status: 1},  remote: true, method: :put,  id: "approve_stat_post_#{post_short.id}") do
             %span.label(class="#{label_approve_stat(post_short)}")=t('show.important')
       - else
         .pull-right
@@ -33,8 +33,8 @@
         - if post_short.status == 1 and !post_short.discontent_post.nil?
           =t('show.discontent.added_group')
           =link_to post_short.discontent_post.content, discontent_post_path(@project, post_short.discontent_post)
-      .discontents_group_select{:post => "#{post_short.id}"}
+      .discontents_group_select{post: "#{post_short.id}"}
         -if @accepted_posts
           = select_tag 'select_for_discontents_group', options_from_collection_for_select(@accepted_posts, "id", "content"),
-          :prompt => t('form.discontent.select_aspect_prompt'), :onchange => "select_for_discontents_group(this,#{@project.id},#{post_short.id});", :class => "form-control"
+          prompt: t('form.discontent.select_aspect_prompt'), onchange: "select_for_discontents_group(this,#{@project.id},#{post_short.id});", class: "form-control"
 
