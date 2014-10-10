@@ -746,9 +746,9 @@ ru:
     memory: 'Запомнить меня'
     auth: "Авторизуйтесь пожалуйста!"
 
-
   left_side:
     discontent_post_advices: "Неутвержденные советы"
   discontent:
-    unapproved_post_advices: "Неутвежденные советы"
+    unapproved_post_advices: "Неутвержденные советы"
     advice_success_created: "Ваш совет добавлен и ожидает проверки модератором"
+    advice_success_approved: "Ваш совет добавлен и ожидает проверки модератором"

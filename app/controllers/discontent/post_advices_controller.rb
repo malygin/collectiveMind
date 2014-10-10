@@ -1,6 +1,6 @@
 class Discontent::PostAdvicesController < ApplicationController
   before_action :set_discontent_post_advice, only: [:show, :edit, :update, :destroy, :approve]
-  before_action :set_discontent_post, except: [:index, :destroy, :show]
+  before_action :set_discontent_post, except: [:index, :destroy, :show, :approve]
   before_action :journal_data
   before_filter :only_moderators, only: [:index, :show, :approve]
 
@@ -42,7 +42,7 @@ class Discontent::PostAdvicesController < ApplicationController
   end
 
   def approve
-    @discontent_post_advice.update_attribute approved: true
+    @discontent_post_advice.update_attributes! approved: true
   end
 
   private

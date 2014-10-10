@@ -2,7 +2,7 @@ class Discontent::PostAdvice < ActiveRecord::Base
   belongs_to :user
   belongs_to :discontent_post, class_name: 'Discontent::Post'
   #@todo remove
-  attr_accessible :content
+  attr_accessible :content, :approved
 
   scope :unapproved, -> { where approved: false }
   scope :approve, -> { where approved: true }

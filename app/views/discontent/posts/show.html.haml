@@ -52,5 +52,6 @@
     %br
     %ul.media-list#advices.chat-messages
       = render @post.advices.approve
+      = render current_user.discontent_post_advices.unapproved
     - if signed_in?
       = render 'discontent/post_advices/form'

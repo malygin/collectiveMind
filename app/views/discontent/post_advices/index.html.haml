@@ -1,5 +1,9 @@
-%h3
+%h2
   = t('discontent.unapproved_post_advices')
-  %br
-  %br
-= render @unapproved_advices
+%section.widget.widget-tabs
+  .body.tab-content
+    %br
+    %br
+    .text-success#advice_success_approved(style='display:none;')
+      = t('discontent.advice_success_approved')
+    = render @unapproved_advices

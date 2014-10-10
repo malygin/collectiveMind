@@ -8,10 +8,11 @@
     %br
     - if current_user.admin?
       = link_to 'Обсудить с автором', discontent_post_advice_path(@project, post_advice), class: 'btn btn-primary btn-xs'
-      \|
       - unless post_advice.approved?
+        \|
         %b
-          = link_to 'Утвердить', approve_discontent_post_advice_path(@project, post_advice), class: 'btn btn-success btn-xs'
+          = link_to 'Утвердить', approve_discontent_post_advice_path(@project, post_advice), method: :put, remote: true,
+          class: 'btn btn-success btn-xs'
       \|
       = link_to discontent_post_advice_path(@project, post_advice), method: :delete, data: {confirm: t('confirm.delete_advice')} do
         %button.btn.btn-xs.btn-danger{type: 'button'}
