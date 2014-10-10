@@ -10,7 +10,7 @@
           .col-md-6
             -if params[:improve_comment]
               %a.btn.btn-lg.btn-success(href="/project/#{@project.id}/concept/posts/new?asp_id=#{@aspect_id}" style="font-weight: normal !important;" id="new_concept")
-                =t('show.concept.add_concept')
+                =t('form.add_more')
             -else
               %a.btn.btn-lg.btn-primary(data-dismiss="modal")=t('form.add_more')
           .col-md-6
