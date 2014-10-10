@@ -39,7 +39,7 @@
         - else
           -if @post.discuss_status
             %span.label-danger=t('show.discuss')
-          -elsif @post.approve_status
+          -if @post.approve_status
             %span.label-success=t('show.important')
         = render '/shared/post_social_bar2', :post => @post
 

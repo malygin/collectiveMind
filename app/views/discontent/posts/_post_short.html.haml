@@ -16,7 +16,7 @@
         .pull-right
           -if post_short.discuss_status
             %span.label-danger=t('show.discuss')
-          -elsif post_short.approve_status
+          -if post_short.approve_status
             %span.label-success=t('show.important')
 
     =discontent_style_name(post_short.style)
