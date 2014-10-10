@@ -5,7 +5,7 @@
         %h4
           =t('show.concept.title_plural')
           -if @project.status == 7
-            %a.btn.btn-warning.pull-right(href="/project/#{@project.id}/concept/posts/new?asp_id=#{@aspect.id}" style="font-weight: normal !important;" id="new_concept")
+            %a.btn.btn-warning.pull-right(href="/project/#{@project.id}/concept/posts/new#{@aspect ? "?asp_id=#{@aspect.id}" : ''}" style="font-weight: normal !important;" id="new_concept")
               =t('show.concept.add_concept')
       %hr
     .body

@@ -9,11 +9,11 @@
         .text-center
           .col-md-6
             -if params[:improve_comment]
-              %a.btn.btn-lg.btn-success(href="/project/#{@project.id}/discontent/posts/new?asp_id=#{@aspect_id}" style="font-weight: normal !important;" id="new_discontent")
+              %a.btn.btn-lg.btn-primary(href="/project/#{@project.id}/discontent/posts/new#{@aspect_id ? "?asp_id=#{@aspect_id}" : ''}" style="font-weight: normal !important;" id="new_discontent")
                 =t('form.add_more')
             -else
               %a.btn.btn-lg.btn-primary(data-dismiss="modal")=t('form.add_more')
           .col-md-6
-            = link_to t('link.go_list'), "/project/#{@project.id}/discontent/posts?asp=#{@aspect_id}", class: 'btn btn-lg btn-success'
+            = link_to t('link.go_list'), "/project/#{@project.id}/discontent/posts#{@aspect_id ? "?asp=#{@aspect_id}" : ''}", class: 'btn btn-lg btn-success'
         %br
         %br

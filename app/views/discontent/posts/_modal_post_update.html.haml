@@ -10,6 +10,6 @@
           .col-md-6
             = link_to t('link.go_show'), discontent_post_path(@project, @post), class: 'btn btn-lg btn-primary'
           .col-md-6
-            = link_to t('link.go_list'), "/project/#{@project.id}/discontent/posts?asp=#{@aspect_id}", class: 'btn btn-lg btn-success'
+            = link_to t('link.go_list'), "/project/#{@project.id}/discontent/posts#{@aspect_id ? "?asp=#{@aspect_id}" : ''}", class: 'btn btn-lg btn-success'
         %br
         %br
