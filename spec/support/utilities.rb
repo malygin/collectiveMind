@@ -228,7 +228,7 @@ def validation_visit_links_for_user(project,user)
   # validate profile
   visit user_path(project,user)
   expect(page).to have_content user.to_s
-  expect(page).to have_content 'Достижения'
+  expect(page).to have_content 'Достижения' unless user.boss?
 
   # validate edit profile
   visit edit_user_path(project,user)
@@ -273,7 +273,6 @@ def validation_visit_not_have_links_for_moderator(project,user)
   # validate profile
   visit user_path(project,user)
   expect(page).to have_content user.to_s
-  expect(page).to have_content 'Достижения'
   expect(page).not_to have_link("club_status_#{user.id}", :href => club_toggle_user_path(project,user))
   expect(page).not_to have_link("userscore_#{user.id}", :href => update_score_user_path(project,user))
 end

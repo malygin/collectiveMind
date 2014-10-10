@@ -54,8 +54,8 @@ describe 'Life Tape ' do
         click_link "add_child_comment_#{@comment1.id}"
         #fill_in 'comment_text_area', with: 'new comment'
         #find('#comment_text_area').set('new comment')
-        find("#child_comments_form_#{@comment1.id}").find('#comment_text_area').set "new child comment"
-        find("#child_comments_form_#{@comment1.id}").find('#send_post').click
+        find("#main_comments_form_#{@comment1.id}").find('#comment_text_area').set "new child comment"
+        find("#main_comments_form_#{@comment1.id}").find('#send_post').click
         expect(page).to have_content 'new child comment'
         #screenshot_and_open_image
       end
@@ -137,8 +137,8 @@ describe 'Life Tape ' do
 
       it ' add new answer comment', js: true do
         click_link "add_child_comment_#{@comment1.id}"
-        find("#child_comments_form_#{@comment1.id}").find('#comment_text_area').set "new child comment"
-        find("#child_comments_form_#{@comment1.id}").find('#send_post').click
+        find("#main_comments_form_#{@comment1.id}").find('#comment_text_area').set "new child comment"
+        find("#main_comments_form_#{@comment1.id}").find('#send_post').click
         expect(page).to have_content 'new child comment'
       end
 
