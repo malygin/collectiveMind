@@ -118,7 +118,7 @@
                 .text
                   = journal_parser(journal, @project.id).html_safe
         %li{role: 'presentation'}
-          %a.text-align-center.see-all{href: "/project/#{@project.id}/users/#{current_user.id}"}
+          %a.text-align-center.see-all{href: "/project/#{@project.id}/users/#{current_user.id}/journal_clear", "data-method" => "put"}
             =t('menu.journal_clear')
             %i.fa.fa-arrow-right
       -else
