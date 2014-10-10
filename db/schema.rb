@@ -17,12 +17,12 @@ ActiveRecord::Schema.define(version: 20141007083440) do
   enable_extension "plpgsql"
 
   create_table "answers", force: true do |t|
-    t.string   "text"
-    t.integer  "raiting",     default: 0
+    t.string   "text",        limit: 700
+    t.integer  "raiting",                 default: 0
     t.integer  "user_id"
     t.integer  "question_id"
-    t.datetime "created_at",              null: false
-    t.datetime "updated_at",              null: false
+    t.datetime "created_at",                          null: false
+    t.datetime "updated_at",                          null: false
   end
 
   add_index "answers", ["created_at"], name: "index_answers_on_created_at", using: :btree
@@ -82,6 +82,43 @@ ActiveRecord::Schema.define(version: 20141007083440) do
   add_index "concept_comments", ["post_id"], name: "index_concept_comments_on_post_id", using: :btree
   add_index "concept_comments", ["user_id"], name: "index_concept_comments_on_user_id", using: :btree
 
+  create_table "concept_essays", force: true do |t|
+    t.integer  "user_id"
+    t.text     "content"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "concept_final_voitings", force: true do |t|
+    t.integer  "score"
+    t.integer  "forecast_task_id"
+    t.integer  "user_id"
+    t.datetime "created_at",       null: false
+    t.datetime "updated_at",       null: false
+  end
+
+  add_index "concept_final_voitings", ["forecast_task_id"], name: "index_concept_final_voitings_on_forecast_task_id", using: :btree
+  add_index "concept_final_voitings", ["user_id"], name: "index_concept_final_voitings_on_user_id", using: :btree
+
+  create_table "concept_forecast_tasks", force: true do |t|
+    t.integer  "user_id"
+    t.text     "content"
+    t.text     "description"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
+
+  create_table "concept_forecasts", force: true do |t|
+    t.integer  "forecast_task_id"
+    t.integer  "position"
+    t.integer  "user_id"
+    t.datetime "created_at",       null: false
+    t.datetime "updated_at",       null: false
+  end
+
+  add_index "concept_forecasts", ["forecast_task_id"], name: "index_concept_forecasts_on_forecast_task_id", using: :btree
+  add_index "concept_forecasts", ["user_id"], name: "index_concept_forecasts_on_user_id", using: :btree
+
   create_table "concept_notes", force: true do |t|
     t.text     "content"
     t.integer  "user_id"
@@ -93,14 +130,14 @@ ActiveRecord::Schema.define(version: 20141007083440) do
 
   create_table "concept_post_aspect_discontents", force: true do |t|
     t.integer  "post_aspect_id"
-    t.string   "name"
+    t.string   "name",               limit: 1000
     t.text     "content"
     t.integer  "discontent_post_id"
     t.text     "positive"
     t.text     "negative"
     t.text     "control"
-    t.datetime "created_at",         null: false
-    t.datetime "updated_at",         null: false
+    t.datetime "created_at",                      null: false
+    t.datetime "updated_at",                      null: false
   end
 
   create_table "concept_post_aspects", force: true do |t|
@@ -125,8 +162,8 @@ ActiveRecord::Schema.define(version: 20141007083440) do
     t.integer  "post_id"
     t.integer  "discontent_post_id"
     t.integer  "complite"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",         null: false
+    t.datetime "updated_at",         null: false
   end
 
   create_table "concept_post_discontents", force: true do |t|
@@ -447,6 +484,7 @@ ActiveRecord::Schema.define(version: 20141007083440) do
     t.integer  "project_id"
     t.integer  "aspect_id"
     t.integer  "replace_id"
+    t.integer  "original_id"
     t.integer  "style"
     t.boolean  "censored",           default: false
     t.integer  "discontent_post_id"
@@ -762,19 +800,21 @@ ActiveRecord::Schema.define(version: 20141007083440) do
   add_index "expert_news_posts", ["project_id"], name: "index_expert_news_posts_on_project_id", using: :btree
 
   create_table "frustration_comments", force: true do |t|
-    t.string   "content"
+    t.string   "content",                limit: 500
     t.integer  "user_id"
     t.integer  "frustration_id"
-    t.datetime "created_at",                             null: false
-    t.datetime "updated_at",                             null: false
-    t.boolean  "negative",               default: true
+    t.datetime "created_at",                                         null: false
+    t.datetime "updated_at",                                         null: false
+    t.boolean  "negative",                           default: true
     t.string   "comment_admin"
-    t.boolean  "trash",                  default: false
+    t.boolean  "trash",                              default: false
     t.integer  "frustration_comment_id"
+    t.integer  "useful_frustration_id"
   end
 
   add_index "frustration_comments", ["created_at"], name: "index_frustration_comments_on_created_at", using: :btree
   add_index "frustration_comments", ["frustration_id"], name: "index_frustration_comments_on_frustration_id", using: :btree
+  add_index "frustration_comments", ["useful_frustration_id"], name: "index_frustration_comments_on_useful_frustration_id", using: :btree
   add_index "frustration_comments", ["user_id"], name: "index_frustration_comments_on_user_id", using: :btree
 
   create_table "frustration_essays", force: true do |t|
@@ -798,28 +838,28 @@ ActiveRecord::Schema.define(version: 20141007083440) do
   add_index "frustration_forecasts", ["user_id"], name: "index_frustration_forecasts_on_user_id", using: :btree
 
   create_table "frustrations", force: true do |t|
-    t.string   "what"
-    t.string   "wherin"
-    t.string   "when"
-    t.string   "what_old"
-    t.string   "wherin_old"
+    t.string   "what",             limit: 500
+    t.string   "wherin",           limit: 500
+    t.string   "when",             limit: 500
+    t.string   "what_old",         limit: 500
+    t.string   "wherin_old",       limit: 500
     t.string   "when_old"
     t.integer  "user_id"
-    t.integer  "status",           default: 0
-    t.datetime "created_at",                       null: false
-    t.datetime "updated_at",                       null: false
-    t.string   "old_content"
+    t.integer  "status",                       default: 0
+    t.datetime "created_at",                                   null: false
+    t.datetime "updated_at",                                   null: false
+    t.string   "old_content",      limit: 500
     t.integer  "negative_user_id"
     t.integer  "struct_user_id"
     t.datetime "structuring_date"
     t.string   "comment_admin"
-    t.boolean  "trash",            default: false
-    t.string   "content_text"
-    t.string   "content_text_old"
-    t.integer  "project_id",       default: 1
-    t.string   "what_expert"
-    t.string   "wherin_expert"
-    t.string   "when_expert"
+    t.boolean  "trash",                        default: false
+    t.string   "content_text",     limit: 500
+    t.string   "content_text_old", limit: 500
+    t.integer  "project_id",                   default: 1
+    t.string   "what_expert",      limit: 500
+    t.string   "wherin_expert",    limit: 500
+    t.string   "when_expert",      limit: 500
   end
 
   add_index "frustrations", ["created_at"], name: "index_frustrations_on_created_at", using: :btree
@@ -1057,11 +1097,11 @@ ActiveRecord::Schema.define(version: 20141007083440) do
     t.text     "control"
     t.text     "problems"
     t.text     "reality"
-    t.integer  "first_stage"
     t.text     "name"
     t.text     "content"
     t.datetime "created_at",             null: false
     t.datetime "updated_at",             null: false
+    t.integer  "first_stage"
     t.integer  "concept_post_aspect_id"
     t.text     "positive_r"
     t.text     "negative_r"
@@ -1084,7 +1124,7 @@ ActiveRecord::Schema.define(version: 20141007083440) do
     t.text     "problems_with_resources"
     t.text     "reality"
     t.string   "name"
-    t.string   "content"
+    t.text     "content"
     t.datetime "created_at",              null: false
     t.datetime "updated_at",              null: false
   end
@@ -1196,6 +1236,17 @@ ActiveRecord::Schema.define(version: 20141007083440) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "projects", force: true do |t|
+    t.string   "name"
+    t.string   "description"
+    t.datetime "begin1st"
+    t.datetime "end1st"
+    t.datetime "begin1stvote"
+    t.datetime "end1stvote"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+  end
+
   create_table "question_comment_votings", force: true do |t|
     t.integer  "user_id"
     t.integer  "comment_id"
@@ -1239,11 +1290,11 @@ ActiveRecord::Schema.define(version: 20141007083440) do
   add_index "question_posts", ["project_id"], name: "index_questions_posts_on_project_id", using: :btree
 
   create_table "questions", force: true do |t|
-    t.string   "text"
-    t.integer  "raiting",    default: 0
+    t.string   "text",       limit: 700
+    t.integer  "raiting",                default: 0
     t.integer  "user_id"
-    t.datetime "created_at",             null: false
-    t.datetime "updated_at",             null: false
+    t.datetime "created_at",                         null: false
+    t.datetime "updated_at",                         null: false
   end
 
   add_index "questions", ["created_at"], name: "index_questions_on_created_at", using: :btree
@@ -1256,6 +1307,63 @@ ActiveRecord::Schema.define(version: 20141007083440) do
 
   add_index "questions_users", ["question_id"], name: "index_questions_users_on_question_id", using: :btree
   add_index "questions_users", ["user_id"], name: "index_questions_users_on_user_id", using: :btree
+
+  create_table "test_answers", force: true do |t|
+    t.text     "name"
+    t.integer  "type_answer"
+    t.integer  "test_question_id"
+    t.datetime "created_at",       null: false
+    t.datetime "updated_at",       null: false
+  end
+
+  add_index "test_answers", ["test_question_id"], name: "index_test_answers_on_test_question_id", using: :btree
+
+  create_table "test_attempts", force: true do |t|
+    t.integer  "test_id"
+    t.integer  "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "test_attempts", ["test_id"], name: "index_test_attempts_on_test_id", using: :btree
+  add_index "test_attempts", ["user_id"], name: "index_test_attempts_on_user_id", using: :btree
+
+  create_table "test_question_attempts", force: true do |t|
+    t.integer  "test_attempt_id"
+    t.integer  "test_question_id"
+    t.string   "answer"
+    t.datetime "created_at",       null: false
+    t.datetime "updated_at",       null: false
+  end
+
+  add_index "test_question_attempts", ["test_attempt_id"], name: "index_test_question_attempts_on_test_attempt_id", using: :btree
+  add_index "test_question_attempts", ["test_question_id"], name: "index_test_question_attempts_on_test_question_id", using: :btree
+
+  create_table "test_questions", force: true do |t|
+    t.text     "name"
+    t.integer  "type_question"
+    t.integer  "test_id"
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
+    t.integer  "order_question"
+  end
+
+  add_index "test_questions", ["order_question"], name: "index_test_questions_on_order_question", using: :btree
+  add_index "test_questions", ["test_id"], name: "index_test_questions_on_test_id", using: :btree
+
+  create_table "tests", force: true do |t|
+    t.string   "name"
+    t.string   "description"
+    t.integer  "project_id"
+    t.datetime "begin_date"
+    t.datetime "end_date"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+    t.text     "preview"
+  end
+
+  add_index "tests", ["begin_date"], name: "index_tests_on_begin_date", using: :btree
+  add_index "tests", ["end_date"], name: "index_tests_on_end_date", using: :btree
 
   create_table "user_award_clicks", force: true do |t|
     t.integer  "user_id"
