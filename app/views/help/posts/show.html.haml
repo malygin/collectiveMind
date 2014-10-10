@@ -2,7 +2,10 @@
   %span.fa.fa-angle-double-left
   =t('link.back_proc')
 %section.widget
-  = render partial: "new_help_#{params[:id]}"
+  -if @project.id == 17
+    = render partial: "new_help_invar_#{params[:id]}"
+  -else
+    = render partial: "new_help_#{params[:id]}"
 
 -#%section.widget.widget-tabs
 -#  %header
