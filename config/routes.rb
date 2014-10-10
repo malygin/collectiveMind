@@ -119,7 +119,11 @@ scope '/project/:project' do
         put :set_grouped
       end
     end
-    resources :post_advices
+    resources :post_advices do
+      member do
+        put :approve
+      end
+    end
   end
 
   post 'concept/posts/add_dispost', to: 'concept/posts#add_dispost'

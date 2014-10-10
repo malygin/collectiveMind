@@ -68,5 +68,11 @@ describe 'Discontent::PostAdvices' do
       expect(page).to have_content @advice.content
       expect(page).to have_content @advice.user
     end
+
+    it 'approve advice'
+
+    it 'delete advice'
+
+    context 'discuss with author advice'
   end
 end

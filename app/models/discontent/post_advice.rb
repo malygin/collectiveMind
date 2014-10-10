@@ -5,5 +5,6 @@ class Discontent::PostAdvice < ActiveRecord::Base
   attr_accessible :content
 
   scope :unapproved, -> { where approved: false }
+  scope :approve, -> { where approved: true }
   scope :by_project, -> (project) { joins(:discontent_post).where discontent_posts: {project_id: project.id} }
 end

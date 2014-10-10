@@ -1,8 +1,8 @@
 class Discontent::PostAdvicesController < ApplicationController
-  before_action :set_discontent_post_advice, only: [:show, :edit, :update, :destroy]
+  before_action :set_discontent_post_advice, only: [:show, :edit, :update, :destroy, :approve]
   before_action :set_discontent_post, except: [:index, :destroy, :show]
   before_action :journal_data
-  before_filter :only_moderators, only: [:index, :show]
+  before_filter :only_moderators, only: [:index, :show, :approve]
 
   def index
     @unapproved_advices = Discontent::PostAdvice.unapproved
@@ -39,6 +39,10 @@ class Discontent::PostAdvicesController < ApplicationController
   def destroy
     @discontent_post_advice.destroy
     redirect_to discontent_post_advices_url(@project), notice: 'Post advice was successfully destroyed.'
+  end
+
+  def approve
+    @discontent_post_advice.update_attribute approved: true
   end
 
   private

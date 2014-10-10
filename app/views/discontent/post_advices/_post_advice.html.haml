@@ -4,11 +4,16 @@
     .media-heading
       = link_to post_advice.user, user_path(@project, post_advice.user)
     %span
-      = trim_content(post_advice.content)
+      = post_advice.content
     %br
-    = link_to t('link.more'), discontent_post_advice_path(@project, post_advice), class: 'btn btn-primary btn-xs'
-    \|
-    = link_to discontent_post_advice_path(@project, post_advice), method: :delete, data: {confirm: t('confirm.delete_advice')} do
-      %button.btn.btn-xs.btn-danger{type: 'button'}
-        = t('link.delete')
-        %i.fa.fa-trash-o
+    - if current_user.admin?
+      = link_to 'Обсудить с автором', discontent_post_advice_path(@project, post_advice), class: 'btn btn-primary btn-xs'
+      \|
+      - unless post_advice.approved?
+        %b
+          = link_to 'Утвердить', approve_discontent_post_advice_path(@project, post_advice), class: 'btn btn-success btn-xs'
+      \|
+      = link_to discontent_post_advice_path(@project, post_advice), method: :delete, data: {confirm: t('confirm.delete_advice')} do
+        %button.btn.btn-xs.btn-danger{type: 'button'}
+          = t('link.delete')
+          %i.fa.fa-trash-o
