@@ -44,7 +44,7 @@
           =link_to t('show.answer'), {:action => :add_child_comment_form, :id => comment.comment.post.id, :comment_id => comment.comment.id,:answer_id => comment.id}, :remote => true, :method => :put,  id: "add_child_comment_#{comment.id}", class: 'btn btn-success btn-xs'
 
         - if boss?
-          =link_to({action: :plus_comment, id: comment.id},  remote: true, method: :put,  id: "plus_comment_#{comment.id}") do
+          =link_to({action: :plus_comment, id: comment.id}, remote: true, method: :put,  id: "plus_comment_#{comment.id}") do
             -if comment.useful
               %span.text-danger=t('show.revert_score')
             -else
@@ -54,10 +54,12 @@
       %br
       -if comment.main_comment?
         .col-md-12
+          %div{id: "main_comments_form_#{comment.id}"}
           %br
           %div{id: "child_comments_#{comment.id}"}
             -unless comment.comments.empty?
               - comment.comments.each do |c|
                 = render partial: 'shared/comment', object: c
+      -else
+        .col-md-12
           %div{id: "child_comments_form_#{comment.id}"}
-

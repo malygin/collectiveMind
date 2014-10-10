@@ -8,10 +8,11 @@
       .col-md-4
         = image_tag  @user.avatar(:normal)
         %br
-        %h3=t('show.user.award', num: @user.awards.for_project(@project).count, all: 22)
-        %br
-        - @awards.each do |a|
-          = image_tag('awards/'+a.url+'_70_70.png', title: a.name, class: "#{'disabled_award' if not @user.awards.for_project(@project).include? a}")
+        - unless boss?
+          %h3=t('show.user.award', num: @user.awards.for_project(@project).count, all: 22)
+          %br
+          - @awards.each do |a|
+            = image_tag('awards/'+a.url+'_70_70.png', title: a.name, class: "#{'disabled_award' if not @user.awards.for_project(@project).include? a}")
       .col-md-8
         .row
           .col-md-9

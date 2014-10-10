@@ -7,6 +7,7 @@ CollectiveMind::Application.routes.draw do
     get 'aspect/:aspect/posts/'  => 'posts#index'
 
     resources :posts do
+      get :vote_result, on: :collection
       member do
         put :set_important
         put :add_comment

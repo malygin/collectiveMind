@@ -1,10 +1,11 @@
 class PostsController < ApplicationController
   before_filter :authenticate
-  before_filter :prepare_data, only: [:index, :new, :edit, :show, :vote_list, :to_work]
-  before_filter :journal_data, only: [:index, :new, :edit, :show, :vote_list, :to_work]
+  before_filter :prepare_data, only: [:index, :new, :edit, :show, :vote_list, :vote_result, :to_work]
+  before_filter :journal_data, only: [:index, :new, :edit, :show, :vote_list, :vote_result, :to_work]
   before_filter :have_rights, only: [:edit]
   before_filter :have_project_access
   before_filter :not_open_closed_stage
+  before_filter :boss_authenticate, only: [:vote_result]
 
   #@todo why not use authenticate_user! from devise?
   def authenticate
@@ -83,10 +84,10 @@ class PostsController < ApplicationController
     @aspects = Discontent::Aspect.where(project_id: @project)
     post = current_model.find(params[:id])
     @main_comment = comment_model.find(params[:main_comment]) unless params[:main_comment].nil?
-    main_comment_answer = comment_model.find(params[:answer_id]) unless params[:answer_id].nil?
-    comment_user = main_comment_answer.user unless main_comment_answer.nil?
+    @main_comment_answer = comment_model.find(params[:answer_id]) unless params[:answer_id].nil?
+    comment_user = @main_comment_answer.user unless @main_comment_answer.nil?
     content = comment_user ? "#{comment_user.to_s}, " + params[name_of_comment_for_param][:content] : params[name_of_comment_for_param][:content]
-    unless  params[name_of_comment_for_param][:content]==''
+    unless params[name_of_comment_for_param][:content]==''
       @comment = post.comments.create(content: content, user: current_user, discontent_status: params[name_of_comment_for_param][:discontent_status], concept_status: params[name_of_comment_for_param][:concept_status], comment_id: @main_comment ? @main_comment.id : nil)
       #@todo новости и информирование авторов
       current_user.journals.build(type_event: name_of_comment_for_param+'_save', project: @project,
@@ -105,9 +106,9 @@ class PostsController < ApplicationController
                                     first_id: (post.instance_of? LifeTape::Post) ? post.discontent_aspects.first.id : post.id, second_id: @comment.id,
                                     personal: true, viewed: false).save!
       end
-      if main_comment_answer and main_comment_answer.user!=current_user
-        current_user.journals.build(type_event: 'reply_'+name_of_comment_for_param, user_informed: main_comment_answer.user, project: @project,
-                                    body: "#{trim_content(@comment.content)}", body2: trim_content(main_comment_answer.content),
+      if @main_comment_answer and @main_comment_answer.user!=current_user
+        current_user.journals.build(type_event: 'reply_'+name_of_comment_for_param, user_informed: @main_comment_answer.user, project: @project,
+                                    body: "#{trim_content(@comment.content)}", body2: trim_content(@main_comment_answer.content),
                                     first_id: (post.instance_of? LifeTape::Post) ? post.discontent_aspects.first.id : post.id, second_id: @comment.id,
                                     personal: true, viewed: false).save!
       end
@@ -121,9 +122,9 @@ class PostsController < ApplicationController
     @project = Core::Project.find(params[:project])
     @post = current_model.find(params[:id])
     @main_comment = comment_model.find(params[:comment_id])
-    main_comment_answer = comment_model.find(params[:answer_id]) unless params[:answer_id].nil?
+    @main_comment_answer = comment_model.find(params[:answer_id]) unless params[:answer_id].nil?
     @comment = comment_model.new
-    @url_link = url_for(controller: @post.class.name.underscore.pluralize, action: 'add_comment', main_comment: @main_comment.id, answer_id: main_comment_answer ? main_comment_answer.id : nil)
+    @url_link = url_for(controller: @post.class.name.underscore.pluralize, action: 'add_comment', main_comment: @main_comment.id, answer_id: @main_comment_answer ? @main_comment_answer.id : nil)
     respond_to do |format|
       format.js
     end

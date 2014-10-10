@@ -1,9 +1,13 @@
 -if user
   .sender.pull-left
-    .icon(style='text-align: center;line-height: 53px;')
+    .icon(style='text-align:center;line-height:20px;')
       = link_to user_path(@project,user) do
         = image_tag user.avatar.url(:thumb)
-        - if not user.awards.for_project(@project).empty?
-          %br
+        - if not (user.awards.for_project(@project).empty? or user.boss?)
+          - if user.user_project_scores(@project.id)
+            %a(style="text-decoration:none;")
+              =user.user_project_scores(@project.id).score
           = image_tag('awards/'+user.awards.for_project(@project).last.url+'_25_25.png',
-          title: user.awards.for_project(@project).for_project(@project).last.name, style: 'height: 25px; width: 25px;')
+          title: user.awards.for_project(@project).last.name, style: 'height:25px;width:25px;')
+
+

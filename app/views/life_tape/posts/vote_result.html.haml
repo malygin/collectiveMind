@@ -1,0 +1,15 @@
+%h4 Голосование за аспекты
+
+-@posts.each do |post|
+  .col-md-8
+    %a.btn.btn-sm.btn-success
+      =post.content
+  .col-md-2
+    %i.fa.fa-thumbs-up=post.voted_users.size
+  .col-md-2
+    -if post.status == 0
+      =link_to({action: :set_aspect_status, id: post.id}, remote: true, method: :put, class: "btn btn-sm btn-danger", id: "set_vote_#{post.id}") do
+        %i.glyphicon.glyphicon-remove
+        %span В дополнительные
+  %br
+  %br

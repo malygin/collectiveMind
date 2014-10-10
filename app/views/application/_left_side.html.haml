@@ -16,6 +16,10 @@
       =t('menu.reflection_stage')
       %b="(#{@project.essay_count(current_stage == 'essay/posts' ? params[:stage].to_i : number_stage(current_stage)).count})"
       -#%i.fa.fa-refresh
+  -if boss?
+    %li
+      = link_to "/project/#{@project.id}/#{current_stage == 'essay/posts' ? stage_for_essay(params[:stage].to_i) : current_stage}/vote_result", class: 'text-vote-result', id: 'vote_result' do
+        Результаты голосования
 
 -#%li.panel#stage_life_tape{class:  @project.stage_style(:life_tape_posts) }
 -#  - if request.original_url.include? 'life_tape' or request.original_url.include? '/1/essay'
