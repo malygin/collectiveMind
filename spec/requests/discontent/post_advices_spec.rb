@@ -59,6 +59,8 @@ describe 'Discontent::PostAdvices' do
       end
     end
 
+    it 'correct number of unapproved advices in left side'
+
     it 'list unapproved advices' do
       visit discontent_posts_path(project)
       click_link 'open_unapproved_advices'

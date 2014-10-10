@@ -21,7 +21,7 @@
       = link_to discontent_post_advices_path(@project), id: 'open_unapproved_advices' do
         = t('left_side.discontent_post_advices')
         %b
-          /= " (#{Discontent::PostAdvice.unapproved.by_project(@project).count})"
+          = " (#{Discontent::PostAdvice.unapproved.by_project(@project).count})"
 
 -#%li.panel#stage_life_tape{class:  @project.stage_style(:life_tape_posts) }
 -#  - if request.original_url.include? 'life_tape' or request.original_url.include? '/1/essay'
