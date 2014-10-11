@@ -3,8 +3,8 @@
 #= require jquery-ui
 #= require bootstrap/bootstrap.min
 #= require autocomplete-rails
-#= require bootstrap-wysihtml5
-#= require bootstrap-wysihtml5/locales/ru-RU
+# require bootstrap-wysihtml5
+# require bootstrap-wysihtml5/locales/ru-RU
 #= require selectize
 #= require liFixar/jquery.liFixar
 #= require datepicker/bootstrap-datepicker
@@ -145,13 +145,15 @@ $('#search_users_text').on 'change', ->
 @activate_htmleditor= ->
   tinyMCE.init
     selector: "textarea.tinymce"
-    plugins: [
-      "advlist autolink link image lists charmap print preview hr anchor pagebreak spellchecker",
+    setup: (ed) ->
+      ed.on "init", (ed) ->
+        tinyMCE.get(ed.target.id).show()
+
+    plugins:
+      ["advlist autolink link image lists charmap print preview hr anchor pagebreak spellchecker",
       "searchreplace wordcount visualblocks visualchars code fullscreen insertdatetime media nonbreaking",
-      "save table contextmenu directionality emoticons template paste textcolor"
-    ]
-    toolbar: "insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | l
-        ink image | print preview media fullpage | forecolor backcolor emoticons"
+      "save table contextmenu directionality emoticons template paste textcolor"]
+    toolbar: "insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image | print preview media fullpage | forecolor backcolor emoticons"
 
 # @todo обновление таблицы и списка
 $('#PlanTabs li#second a').on "click", (e) ->

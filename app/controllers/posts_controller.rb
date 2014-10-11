@@ -214,8 +214,8 @@ class PostsController < ApplicationController
       Journal.events_for_content(@project, current_user, @post.id).update_all("viewed = 'true'")
       @my_journals_count = @my_journals_count - 1
     end
-    per_page = ["Concept", "Essay"].include?(@post.class.name.deconstantize) ? 10 : 30
-    @comments = @post.main_comments.paginate(page: params[:page] ? params[:page] : last_page, per_page: per_page)
+    # per_page = ["Concept", "Essay"].include?(@post.class.name.deconstantize) ? 10 : 30
+    @comments = @post.main_comments.paginate(page: params[:page] ? params[:page] : last_page, per_page: 10)
 
     if current_model.column_names.include? 'number_views'
       @post.update_column(:number_views, @post.number_views.nil? ? 1 : @post.number_views+1)
@@ -261,7 +261,7 @@ class PostsController < ApplicationController
 
     respond_to do |format|
       if @post.save
-        current_user.journals.build(type_event: name_of_model_for_param+"_save", project: @project, body: trim_content(@post.content), first_id: @post.id).save!
+        current_user.journals.build(type_event: name_of_model_for_param+"_save", project: @project, body: @post.content == '' ? t('link.more') : trim_content(@post.content), first_id: @post.id).save!
         current_user.add_score_by_type(@project, 50, :score_a)
 
         format.html { redirect_to action: 'show', id: @post.id, project: @project }
@@ -357,8 +357,13 @@ class PostsController < ApplicationController
     #comment.comment_votings.create(user: current_user, comment: comment,  against: @against) unless comment.users.include? current_user
     if boss?
       @comment.toggle!(:useful)
-      @comment.user.add_score(type: :plus_comment, project: @project, comment: @comment, path: @comment.post.class.name.underscore.pluralize) if boss?
-      Award.reward(user: @comment.user, project: @project, type: 'like')
+      if @comment.useful
+        @comment.user.add_score(type: :plus_comment, project: @project, comment: @comment, path: @comment.post.class.name.underscore.pluralize) if boss?
+        Award.reward(user: @comment.user, project: @project, type: 'like')
+      else
+        @comment.user.add_score(type: :to_archive_plus_comment, project: @project, comment: @comment, path: @comment.post.class.name.underscore.pluralize) if boss?
+        Award.reward(user: @comment.user, project: @project, type: 'unlike')
+      end
     end
     @main_comment = @comment.comment.id unless @comment.comment.nil?
     respond_to do |format|

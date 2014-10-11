@@ -226,6 +226,8 @@ class User < ActiveRecord::Base
         self.add_score_by_type(h[:project], -10, :score_g)
       when :add_discontent_post
         self.add_score_by_type(h[:project], 20, :score_g)
+      when :to_archive_plus_comment
+        self.add_score_by_type(h[:project], -5, :score_a)
     end
   end
 

@@ -10,11 +10,16 @@ ru:
         title:  'Поле "Краткое название"'
         name:  'Поле "A1"'
         content: 'Поле "A2"'
+      knowbase/post:
+        title: 'Название'
+        content: 'Описание'
     errors:
       models:
         discontent/post:
           attributes:
         concept/post_aspect:
+          attributes:
+        knowbase/post:
           attributes:
         user:
           attributes:
