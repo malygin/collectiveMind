@@ -127,6 +127,7 @@ class Core::ProjectsController < ApplicationController
   def next_stage
     @core_project = Core::Project.find(params[:id])
     @core_project.update_column(:status, @core_project.status + 1)
+    @core_project.set_position_for_aspects if @core_project.status == 3
     redirect_to :back
   end
 

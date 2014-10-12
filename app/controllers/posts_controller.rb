@@ -6,6 +6,7 @@ class PostsController < ApplicationController
   before_filter :have_project_access
   before_filter :not_open_closed_stage
   before_filter :boss_authenticate, only: [:vote_result]
+  before_filter :comment_page, only: [:index,:show]
 
   #@todo why not use authenticate_user! from devise?
   def authenticate
@@ -497,5 +498,22 @@ class PostsController < ApplicationController
   def vote_result
 
   end
+
+  def comment_page
+    if params[:req_comment] and params[:page].nil?
+      stage = params[:controller].sub('/posts', '') if params[:controller]
+      if stage
+        post = stage == "life_tape" ? params[:asp] : params[:id]
+        page = page_for_comment(params[:project], stage, post, params[:req_comment])
+      end
+      path = page ? request.fullpath + "&page=#{page}#comment_#{params[:req_comment]}" : request.fullpath + "#comment_#{params[:req_comment]}"
+      redirect_to path
+    end
+  end
+
+  # def sort_aspects
+  #   @project = Core::Project.find(params[:project])
+  #   @project.set_position_for_aspects if @project.status == 3
+  # end
 
 end

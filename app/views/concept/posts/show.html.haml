@@ -4,26 +4,27 @@
   %section
     .body
       .row
-        .col-md-2
+        .col-md-3
           .media
             -if @post.user
               = render 'users/user_post', user:@post.user
               .media-body
                 .media-heading
                   =link_to @post.user, user_path(@project, @post.user)
-        .col-md-5
-          %h4
-            =t('show.concept.solved_discontent')
-            =render partial:'discontent/posts/post_short2', object: @post.concept_disposts.first
-        .col-md-5
-          %h4
-            =t('show.concept.solved_others_discontents')
-            %br
-            -@post.concept_disposts.by_discussions([@post.concept_disposts.first.id]).each_with_index  do |cd, index|
-              .label.label-success=index+1
-              =cd.content
-              .color-green= level_complite(complite(cd))
+        -if @post.concept_disposts.first
+          .col-md-5
+            %h4
+              =t('show.concept.solved_discontent')
+              =render partial:'discontent/posts/post_short2', object: @post.concept_disposts.first
+          .col-md-4
+            %h4
+              =t('show.concept.solved_others_discontents')
               %br
+              -@post.concept_disposts.by_discussions([@post.concept_disposts.first.id]).each_with_index  do |cd, index|
+                .label.label-success=index+1
+                =cd.content
+                .color-green= level_complite(complite(cd))
+                %br
       %br
       = render 'shared/post_edit_bar', post:@post
       %br
