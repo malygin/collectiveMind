@@ -1,20 +1,30 @@
-.media{id: "post_advice_#{post_advice.id}"}
+.chat-message{id: "post_advice_#{post_advice.id}"}
   = render 'users/user_post', user: post_advice.user
-  .media-body
-    .media-heading
+
+  .chat-message-body
+    %span.arrow
+    .sender
       = link_to post_advice.user, user_path(@project, post_advice.user)
-    %span
-      = post_advice.content
+      = render partial: '/shared/user_online', object: post_advice.user
+      = role_label(post_advice.user)
+    .text
+    %div
+      = simple_format(post_advice.content)
     %br
+    - if current_user == post_advice.user and !post_advice.approved?
+      %b Ваш совет находится на проверке модератором
+      %br
     - if current_user.admin?
       = link_to 'Обсудить с автором', discontent_post_advice_path(@project, post_advice), class: 'btn btn-primary btn-xs'
       - unless post_advice.approved?
         \|
         %b
           = link_to 'Утвердить', approve_discontent_post_advice_path(@project, post_advice), method: :put, remote: true,
-          class: 'btn btn-success btn-xs'
+          class: 'btn btn-success btn-xs', id: "approve_advice_#{post_advice.id}"
+    - if current_user == post_advice.user or current_user.admin?
       \|
-      = link_to discontent_post_advice_path(@project, post_advice), method: :delete, data: {confirm: t('confirm.delete_advice')} do
+      = link_to discontent_post_advice_path(@project, post_advice), method: :delete, data: {confirm: t('confirm.delete_advice')},
+      id: "remove_advice_#{post_advice.id}" do
         %button.btn.btn-xs.btn-danger{type: 'button'}
           = t('link.delete')
           %i.fa.fa-trash-o

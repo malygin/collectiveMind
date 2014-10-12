@@ -25,3 +25,4 @@ en:
     discontent_post_advices: "Advices"
   discontent:
     unapproved_post_advices: "Unapproved advices"
+    advice_success_approved: "Advice approved"

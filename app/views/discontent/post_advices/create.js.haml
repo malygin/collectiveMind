@@ -1,2 +1,3 @@
-$('#discontent_post_advice_content').val('')
+$('#discontent_post_advice_content').val('');
+$('#advices').append("#{escape_javascript(render @discontent_post_advice)}").fadeIn();
 $('#advice_success_created').fadeIn('slow').delay(1000).fadeOut('slow');

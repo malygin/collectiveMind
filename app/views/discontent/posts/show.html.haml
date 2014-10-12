@@ -54,4 +54,5 @@
       = render @post.advices.approve
       = render current_user.discontent_post_advices.unapproved
     - if signed_in?
+      %br
       = render 'discontent/post_advices/form'
