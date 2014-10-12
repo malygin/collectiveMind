@@ -11,6 +11,11 @@
     %div
       = simple_format(post_advice.content)
     %br
+    - if current_user.admin?
+      %b
+        К несовершенству:
+        = link_to post_advice.discontent_post.content, discontent_post_path(@project, post_advice.discontent_post), id: "open_post_#{post_advice.discontent_post.id}"
+    %br
     - if current_user == post_advice.user and !post_advice.approved?
       %b Ваш совет находится на проверке модератором
       %br

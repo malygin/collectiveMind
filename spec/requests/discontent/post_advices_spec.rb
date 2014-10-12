@@ -83,6 +83,14 @@ describe 'Discontent::PostAdvices' do
       expect(page).to have_content @advice.user
     end
 
+    it 'link to discontent' do
+      within :css, "#post_advice_#{@advice.id}" do
+        expect(page).to have_content @advice.discontent_post.content
+      end
+      click_link "open_post_#{@advice.discontent_post.id}"
+      expect(current_path) == discontent_post_path(project, @advice.discontent_post)
+    end
+
     it 'approve advice', js: true do
       expect {
         click_link "approve_advice_#{@advice.id}"
