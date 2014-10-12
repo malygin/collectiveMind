@@ -3,10 +3,8 @@ require 'spec_helper'
 describe 'Discontent::PostAdvices' do
   subject { page }
   let (:user) { create :user }
-  let (:prime_admin) { create :prime_admin }
   let (:moderator) { create :moderator }
   let (:project) { create :core_project, status: 3 }
-  let (:project_for_group) { create :core_project, status: 4 }
 
   before do
     prepare_discontents(project, user)
@@ -33,12 +31,32 @@ describe 'Discontent::PostAdvices' do
     end
 
     it 'create', js: true do
+      text_advice = 'Очень хороший совет'
       visit discontent_post_path(project, @discontent1)
       expect {
-        fill_in 'discontent_post_advice_content', with: 'Очень хороший совет'
+        fill_in 'discontent_post_advice_content', with: text_advice
         click_button 'send_advice'
         expect(page).to have_content I18n.t('discontent.advice_success_created')
+        expect(page).to have_content text_advice
       }.to change(Discontent::PostAdvice.unapproved, :count).by(1)
+    end
+
+    context 'remove' do
+      it 'if author - ok', js: true do
+        advice = create :advice, user: user, discontent_post: @discontent1
+        visit discontent_post_path(project, @discontent1)
+        expect {
+          click_link "remove_advice_#{advice.id}"
+          page.driver.browser.accept_js_confirms
+          expect(page).not_to have_content advice.content
+        }.to change(Discontent::PostAdvice, :count).by(-1)
+      end
+
+      it 'others - no' do
+        advice = create :advice, user: moderator, discontent_post: @discontent1
+        visit discontent_post_path(project, @discontent1)
+        expect(page).not_to have_link "remove_advice_#{advice.id}"
+      end
     end
   end
 
@@ -46,11 +64,10 @@ describe 'Discontent::PostAdvices' do
     before do
       @advice = create :advice, user: user, discontent_post: @discontent1
       sign_in moderator
-      visit root_path
+      visit discontent_post_advices_path(project)
     end
 
-    it 'openable link to unapproved advices' do
-      visit discontent_posts_path(project)
+    it 'link to list unapproved advices (with count of it)' do
       within :css, 'ul#side-nav' do
         expect(page).to have_content I18n.t('left_side.discontent_post_advices')
       end
@@ -59,19 +76,28 @@ describe 'Discontent::PostAdvices' do
       end
     end
 
-    it 'correct number of unapproved advices in left side'
-
     it 'list unapproved advices' do
-      visit discontent_posts_path(project)
       click_link 'open_unapproved_advices'
       expect(current_path) == discontent_post_advice_path(project, @advice)
       expect(page).to have_content @advice.content
       expect(page).to have_content @advice.user
     end
 
-    it 'approve advice'
+    it 'approve advice', js: true do
+      expect {
+        click_link "approve_advice_#{@advice.id}"
+        expect(page).to have_content I18n.t('discontent.advice_success_approved')
+        expect(page).not_to have_content @advice.content
+      }.to change(Discontent::PostAdvice.unapproved, :count).by(-1)
+    end
 
-    it 'delete advice'
+    it 'delete any advice', js: true do
+      expect {
+        click_link "remove_advice_#{@advice.id}"
+        page.driver.browser.accept_js_confirms
+        expect(page).not_to have_content @advice.content
+      }.to change(Discontent::PostAdvice.unapproved, :count).by(-1)
+    end
 
     context 'discuss with author advice'
   end
