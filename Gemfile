@@ -38,6 +38,7 @@ group :test do
   gem 'capybara-webkit'
   gem 'capybara-screenshot'
   gem 'headless'
+  gem 'simplecov'
 end
 
 gem 'sass-rails', '~> 4.0.0'
