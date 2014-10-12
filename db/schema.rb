@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141009084832) do
+ActiveRecord::Schema.define(version: 20141012183455) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -420,6 +420,19 @@ ActiveRecord::Schema.define(version: 20141009084832) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  create_table "discontent_post_advice_comments", force: true do |t|
+    t.integer  "post_advice_id"
+    t.integer  "user_id"
+    t.string   "content"
+    t.integer  "post_advice_comment_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "discontent_post_advice_comments", ["post_advice_comment_id"], name: "index_discontent_post_advice_comments_on_post_advice_comment_id", using: :btree
+  add_index "discontent_post_advice_comments", ["post_advice_id"], name: "index_discontent_post_advice_comments_on_post_advice_id", using: :btree
+  add_index "discontent_post_advice_comments", ["user_id"], name: "index_discontent_post_advice_comments_on_user_id", using: :btree
 
   create_table "discontent_post_advices", force: true do |t|
     t.text     "content"
