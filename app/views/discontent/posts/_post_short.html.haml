@@ -1,6 +1,7 @@
 %li{id: "post_#{post_short.id}", class: "#{'expert_comment' if post_short.discuss_status }"}
   -if post_short.user
-    = image_tag post_short.user.avatar.url(:thumb), class: 'pull-left img-circle'
+    = render 'users/user_post', user: post_short.user
+    -#= image_tag post_short.user.avatar.url(:thumb), class: 'pull-left'
   .news-item-info
     .name
       - if post_short.user
