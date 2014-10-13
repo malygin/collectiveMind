@@ -415,7 +415,7 @@ module ApplicationHelper
       comment = "#{get_class_for_improve(post.improve_stage)}::Comment".constantize.find(post.improve_comment)
       case post.improve_stage
         when 1
-          "| #{t('show.improved')} " + (link_to t('show.imrove_deal'), "/project/#{@project.id}/life_tape/posts?asp=#{comment.post.discontent_aspects.first.id}#comment_#{comment.id}") + (link_to comment.user, user_path(@project, comment.user))
+          "| #{t('show.improved')} " + (link_to"#{t('show.imrove_deal')} #{comment.user}", "/project/#{@project.id}/life_tape/posts?asp=#{comment.post.discontent_aspects.first.id}&req_comment=#{comment.id}#comment_#{comment.id}")
         when 2
           "| #{t('show.improved')} " + (link_to t('show.imrove_deal'), "/project/#{@project.id}/discontent/posts/#{comment.post.id}#comment_#{comment.id}") + (link_to comment.user, user_path(@project, comment.user))
         when 3
