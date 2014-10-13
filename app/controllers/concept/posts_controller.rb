@@ -60,7 +60,7 @@ class Concept::PostsController < PostsController
 
   def index
     return redirect_to action: "vote_list" if current_user.can_vote_for(:concept, @project)
-    @aspect =  params[:asp] ? Discontent::Aspect.find(params[:asp]) : @project.proc_aspects.order(:id).first
+    @aspect =  params[:asp] ? Discontent::Aspect.find(params[:asp]) : @project.proc_aspects.order("position DESC").first
     @comments_all = @project.ideas_comments_for_improve
   end
 
@@ -96,7 +96,7 @@ class Concept::PostsController < PostsController
       if @concept_post.save
         current_user.journals.build(type_event:'concept_post_save', body:trim_content(@concept_post.post_aspects.first.title), first_id: @concept_post.id,  project: @project).save!
         @aspect_id =  params[:asp_id]
-        format.html { redirect_to  aspect_id.nil? ? "/project/#{@project.id}/concept/posts" : "/project/#{@project.id}/concept/posts?asp=#{@aspect_id}" }
+        format.html { redirect_to  @aspect_id.nil? ? "/project/#{@project.id}/concept/posts" : "/project/#{@project.id}/concept/posts?asp=#{@aspect_id}" }
         format.js
       else
         format.html { render action: "new" }
