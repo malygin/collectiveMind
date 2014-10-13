@@ -1,9 +1,21 @@
-.media.option_for_selectize{id: "post_#{@discontent_post_advice.id}", project: "#{@project.id}", post: "#{@discontent_post_advice.id}"}
-  - if @discontent_post_advice.user
-    = render 'users/user_post', user: @discontent_post_advice.user
-  .media-body
-    - if @discontent_post_advice.user
-      .media-heading
-        = link_to @discontent_post_advice.user, user_path(@project, @discontent_post_advice.user)
+%h2
+  Обсуждение совета с автором
+%section.widget.widget-tabs
+  .body.tab-content
+    .media.option_for_selectize{id: "post_#{@discontent_post_advice.id}", project: "#{@project.id}", post: "#{@discontent_post_advice.id}"}
+      - if @discontent_post_advice.user
+        = render 'users/user_post', user: @discontent_post_advice.user
+      .media-body
+        - if @discontent_post_advice.user
+          .media-heading
+            = link_to @discontent_post_advice.user, user_path(@project, @discontent_post_advice.user)
+        %br
+    = @discontent_post_advice.content
+
     %br
-= @discontent_post_advice.content
+    %br
+    %ul.media-list.chat-messages#comments
+      = render @discontent_post_advice.comments.main
+    - if signed_in?
+      %br
+      = render partial: 'discontent/post_advice_comments/form'

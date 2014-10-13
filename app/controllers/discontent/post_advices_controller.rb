@@ -10,6 +10,7 @@ class Discontent::PostAdvicesController < ApplicationController
 
   # GET /discontent/post_advices/1
   def show
+    @advice_comment = Discontent::PostAdviceComment.new
   end
 
   # GET /discontent/post_advices/1/edit

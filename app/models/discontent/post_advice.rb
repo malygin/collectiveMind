@@ -1,6 +1,7 @@
 class Discontent::PostAdvice < ActiveRecord::Base
   belongs_to :user
   belongs_to :discontent_post, class_name: 'Discontent::Post'
+  has_many :comments, class_name: 'Discontent::PostAdviceComment'
   #@todo remove
   attr_accessible :content, :approved
 
