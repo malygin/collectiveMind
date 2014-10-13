@@ -107,6 +107,42 @@ describe 'Discontent::PostAdvices' do
       }.to change(Discontent::PostAdvice.unapproved, :count).by(-1)
     end
 
-    context 'discuss with author advice'
+    context 'discuss with author advice', js: true do
+      before do
+        @advice = create :advice, user: user, discontent_post: @discontent1
+        @comment = create :advice_comment, user: user, post_advice: @advice
+        visit discontent_post_advice_path(project, @advice)
+      end
+
+      it 'create comment' do
+        text_comment = 'Хороший совет, но нужно обсудить'
+        expect {
+          fill_in 'comment_text_area', with: text_comment
+          click_button 'send_comment'
+          expect(page).to have_content text_comment
+        }.to change(Discontent::PostAdviceComment, :count).by(1)
+      end
+
+      it 'reply to comment' do
+        text_comment = 'Ответ на коммент'
+        visit discontent_post_advice_path(project, @advice)
+        expect {
+          click_link "reply_to_#{@comment.id}"
+          within :css, "#comment_#{@comment.id}" do
+            fill_in 'comment_text_area', with: text_comment
+            click_button 'send_comment'
+          end
+          expect(page).to have_content text_comment
+        }.to change(Discontent::PostAdviceComment, :count).by(1)
+      end
+
+      it 'remove' do
+        expect {
+          click_link "destroy_comment_#{@comment.id}"
+          page.driver.browser.accept_js_confirms
+          expect(page).not_to have_content @comment.content
+        }.to change(Discontent::PostAdviceComment, :count).by(-1)
+      end
+    end
   end
 end
