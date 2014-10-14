@@ -42,6 +42,8 @@ module JournalHelper
         'fa fa-edit'
       when 'essay_comment_save'
         'fa fa-comment'
+      when 'discontent_post_discuss_stat'
+        'fa fa-exclamation color-red'
     end
   end
 	def journal_parser(j, project)
