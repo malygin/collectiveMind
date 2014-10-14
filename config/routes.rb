@@ -119,11 +119,11 @@ scope '/project/:project' do
         put :set_grouped
       end
     end
-    resources :post_advices do
+    resources :post_advices, controller: '/advices' do
       member do
         put :approve
       end
-      resources :comments, only: [:new, :create, :destroy], controller: 'post_advice_comments'
+      resources :comments, only: [:new, :create, :destroy], controller: 'advice_comments'
     end
   end
 
