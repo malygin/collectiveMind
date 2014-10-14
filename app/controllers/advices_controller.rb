@@ -1,16 +1,16 @@
-class Discontent::PostAdvicesController < ApplicationController
+class AdvicesController < ApplicationController
   before_action :set_discontent_post_advice, only: [:show, :edit, :update, :destroy, :approve]
   before_action :set_discontent_post, except: [:index, :destroy, :show, :approve]
   before_action :journal_data
   before_filter :only_moderators, only: [:index, :show, :approve]
 
   def index
-    @unapproved_advices = Discontent::PostAdvice.unapproved
+    @unapproved_advices = Advice.unapproved
   end
 
   # GET /discontent/post_advices/1
   def show
-    @advice_comment = Discontent::PostAdviceComment.new
+    @advice_comment = AdviceComment.new
   end
 
   # GET /discontent/post_advices/1/edit
@@ -19,9 +19,9 @@ class Discontent::PostAdvicesController < ApplicationController
 
   # POST /discontent/post_advices
   def create
-    @discontent_post_advice = current_user.discontent_post_advices.new discontent_post_advice_params
-    @discontent_post_advice.discontent_post = @post
-    @discontent_post_advice.save
+    @discontent_advice = current_user.discontent_post_advices.new advice_params
+    @discontent_advice.discontent_post = @post
+    @discontent_advice.save
     respond_to do |format|
       format.js
     end
@@ -29,8 +29,8 @@ class Discontent::PostAdvicesController < ApplicationController
 
   # PATCH/PUT /discontent/post_advices/1
   def update
-    if @discontent_post_advice.update(discontent_post_advice_params)
-      redirect_to @discontent_post_advice, notice: 'Post advice was successfully updated.'
+    if @discontent_advice.update(advice_params)
+      redirect_to @discontent_advice, notice: 'Post advice was successfully updated.'
     else
       render :edit
     end
@@ -38,12 +38,12 @@ class Discontent::PostAdvicesController < ApplicationController
 
   # DELETE /discontent/post_advices/1
   def destroy
-    @discontent_post_advice.destroy
+    @discontent_advice.destroy
     redirect_to discontent_post_advices_url(@project), notice: 'Post advice was successfully destroyed.'
   end
 
   def approve
-    @discontent_post_advice.update_attributes! approved: true
+    @discontent_advice.update_attributes! approved: true
   end
 
   private
@@ -58,11 +58,11 @@ class Discontent::PostAdvicesController < ApplicationController
 
   # Use callbacks to share common setup or constraints between actions.
   def set_discontent_post_advice
-    @discontent_post_advice = Discontent::PostAdvice.find(params[:id])
+    @discontent_advice = Advice.find(params[:id])
   end
 
   # Only allow a trusted parameter "white list" through.
-  def discontent_post_advice_params
-    params.require(:discontent_post_advice).permit(:content)
+  def advice_params
+    params.require(:discontent_advice).permit(:content)
   end
 end
