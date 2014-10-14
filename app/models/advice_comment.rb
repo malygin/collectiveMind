@@ -1,5 +1,5 @@
 class AdviceComment < ActiveRecord::Base
-  belongs_to :advice
+  belongs_to :advice, foreign_key: :post_advice_id
   belongs_to :user
   belongs_to :advice_comment
   has_many :comments, class_name: 'AdviceComment', foreign_key: :post_advice_comment_id

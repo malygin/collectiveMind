@@ -34,7 +34,7 @@ describe 'Advices' do
       text_advice = 'Очень хороший совет'
       visit discontent_post_path(project, @discontent1)
       expect {
-        fill_in 'discontent_post_advice_content', with: text_advice
+        fill_in 'advice_content', with: text_advice
         click_button 'send_advice'
         expect(page).to have_content I18n.t('discontent.advice_success_created')
         expect(page).to have_content text_advice
@@ -110,7 +110,7 @@ describe 'Advices' do
     context 'discuss with author advice', js: true do
       before do
         @advice = create :advice, user: user, discontent_post: @discontent1
-        @comment = create :advice_comment, user: user, post_advice: @advice
+        @comment = create :advice_comment, user: user, advice: @advice
         visit discontent_post_advice_path(project, @advice)
       end
 
