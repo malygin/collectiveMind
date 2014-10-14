@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe 'Discontent::PostAdvices' do
+describe 'Advices' do
   subject { page }
   let (:user) { create :user }
   let (:moderator) { create :moderator }
@@ -38,7 +38,7 @@ describe 'Discontent::PostAdvices' do
         click_button 'send_advice'
         expect(page).to have_content I18n.t('discontent.advice_success_created')
         expect(page).to have_content text_advice
-      }.to change(Discontent::PostAdvice.unapproved, :count).by(1)
+      }.to change(Advice.unapproved, :count).by(1)
     end
 
     context 'remove' do
@@ -49,7 +49,7 @@ describe 'Discontent::PostAdvices' do
           click_link "remove_advice_#{advice.id}"
           page.driver.browser.accept_js_confirms
           expect(page).not_to have_content advice.content
-        }.to change(Discontent::PostAdvice, :count).by(-1)
+        }.to change(Advice, :count).by(-1)
       end
 
       it 'others - no' do
@@ -96,7 +96,7 @@ describe 'Discontent::PostAdvices' do
         click_link "approve_advice_#{@advice.id}"
         expect(page).to have_content I18n.t('discontent.advice_success_approved')
         expect(page).not_to have_content @advice.content
-      }.to change(Discontent::PostAdvice.unapproved, :count).by(-1)
+      }.to change(Advice.unapproved, :count).by(-1)
     end
 
     it 'delete any advice', js: true do
@@ -104,7 +104,7 @@ describe 'Discontent::PostAdvices' do
         click_link "remove_advice_#{@advice.id}"
         page.driver.browser.accept_js_confirms
         expect(page).not_to have_content @advice.content
-      }.to change(Discontent::PostAdvice.unapproved, :count).by(-1)
+      }.to change(Advice.unapproved, :count).by(-1)
     end
 
     context 'discuss with author advice', js: true do
@@ -120,7 +120,7 @@ describe 'Discontent::PostAdvices' do
           fill_in 'comment_text_area', with: text_comment
           click_button 'send_comment'
           expect(page).to have_content text_comment
-        }.to change(Discontent::PostAdviceComment, :count).by(1)
+        }.to change(AdviceComment, :count).by(1)
       end
 
       it 'reply to comment' do
@@ -133,7 +133,7 @@ describe 'Discontent::PostAdvices' do
             click_button 'send_comment'
           end
           expect(page).to have_content text_comment
-        }.to change(Discontent::PostAdviceComment, :count).by(1)
+        }.to change(AdviceComment, :count).by(1)
       end
 
       it 'remove' do
@@ -141,7 +141,7 @@ describe 'Discontent::PostAdvices' do
           click_link "destroy_comment_#{@comment.id}"
           page.driver.browser.accept_js_confirms
           expect(page).not_to have_content @comment.content
-        }.to change(Discontent::PostAdviceComment, :count).by(-1)
+        }.to change(AdviceComment, :count).by(-1)
       end
     end
   end
