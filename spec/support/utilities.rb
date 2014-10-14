@@ -377,6 +377,13 @@ def prepare_life_tape(project,user)
   @comment1 = FactoryGirl.create :life_tape_comment, post: @post1, user: user, content: 'comment 1'
 end
 
+
+def prepare_journal(project,user)
+  @journal_today = FactoryGirl.create :journal, project: project, user: user, body: 'news_today', created_at: Time.zone.now.utc.to_date
+  @journal_yesterday = FactoryGirl.create :journal, project: project, user: user, body: 'news_yesterday', created_at: Time.zone.now.utc.to_date - 1
+  @journal_older = FactoryGirl.create :journal, project: project, user: user, body: 'news_older', created_at: Time.zone.now.utc.to_date - 2
+end
+
 def prepare_awards
   FactoryGirl.create :award, name: "1 лайк модератора", url: "1like", position: 1
   FactoryGirl.create :award, name: "3 лайка модератора", url: "3likes", position: 2

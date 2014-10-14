@@ -5,6 +5,10 @@ class Journal < ActiveRecord::Base
   belongs_to :user_informed, class_name: 'User', foreign_key: :user_informed
 
   belongs_to :project, class_name: 'Core::Project', foreign_key: 'project_id'
+  scope :today, -> { where('DATE(created_at) = ?',  Time.zone.now.utc.to_date) }
+  scope :yesterday, -> { where('DATE(created_at) = ?', Time.zone.now.utc.to_date - 1) }
+  scope :older, -> { where('DATE(created_at) < ?', Time.zone.now.utc.to_date - 1) }
+
   @types = []
   @my_types = [11]
 

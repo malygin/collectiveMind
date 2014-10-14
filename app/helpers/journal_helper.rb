@@ -31,11 +31,18 @@ module JournalHelper
       when  'award_1like', 'award_3likes','award_5likes','award_15likes','award_50likes',
           'award_1imperfection', 'award_3imperfection', 'award_5imperfection', 'award_15imperfection',
           'award_1innovation', 'award_3innovation', 'award_5innovation', 'award_15innovation',
-
           'award_100points',   'award_500points', 'award_1000points', 'award_3000points'
         'fa fa-trophy '
       when 'life_tape_comment_discuss_stat', 'life_tape_comment_approve_status'
           'fa color-teal  fa-exclamation'
+      when 'discontent_post_comment_stat','discontent_post_discuss_stat','discontent_comment_approve_status','discontent_post_approve_status'
+        'fa color-red  fa-exclamation'
+      when 'concept_comment_discuss_stat','concept_post_discuss_stat','concept_comment_approve_status','concept_post_approve_status'
+        'fa color-orange  fa-exclamation'
+      when 'plan_comment_discuss_stat','plan_comment_approve_status'
+        'fa fa-exclamation color-green'
+      when 'essay_comment_discuss_stat','essay_comment_approve_stat'
+        'fa fa-exclamation'
       when 'essay_post_save'
         'fa fa-plus'
       when 'essay_post_update'
