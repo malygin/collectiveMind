@@ -1,8 +1,8 @@
-class Discontent::PostAdviceComment < ActiveRecord::Base
-  belongs_to :post_advice
+class AdviceComment < ActiveRecord::Base
+  belongs_to :advice
   belongs_to :user
-  belongs_to :post_advice_comment
-  has_many :comments, class_name: 'Discontent::PostAdviceComment'
+  belongs_to :advice_comment
+  has_many :comments, class_name: 'AdviceComment', foreign_key: :post_advice_comment_id
 
   scope :main, -> { where post_advice_comment_id: nil }
 

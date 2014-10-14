@@ -24,7 +24,7 @@ class Discontent::Post < ActiveRecord::Base
   has_many :final_votings, foreign_key: 'discontent_post_id', class_name: 'Discontent::Voting'
   has_many :concept_votings, foreign_key: 'discontent_post_id', class_name: 'Concept::Voting'
   has_many :concept_post_discontent_grouped, -> { where concept_post_discontents: {status: [1]} }, class_name: 'Concept::PostDiscontent', foreign_key: 'discontent_post_id'
-  has_many :advices, class_name: 'Discontent::PostAdvice', foreign_key: :discontent_post_id
+  has_many :advices, class_name: 'Advice', foreign_key: :discontent_post_id
 
   # validates :content, presence: true
   # validates :whend, presence: true
