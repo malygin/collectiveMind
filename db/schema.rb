@@ -11,10 +11,35 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141012183455) do
+ActiveRecord::Schema.define(version: 20141014215807) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "advice_comments", force: true do |t|
+    t.integer  "post_advice_id"
+    t.integer  "user_id"
+    t.string   "content"
+    t.integer  "post_advice_comment_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "advice_comments", ["post_advice_comment_id"], name: "index_advice_comments_on_post_advice_comment_id", using: :btree
+  add_index "advice_comments", ["post_advice_id"], name: "index_advice_comments_on_post_advice_id", using: :btree
+  add_index "advice_comments", ["user_id"], name: "index_advice_comments_on_user_id", using: :btree
+
+  create_table "advices", force: true do |t|
+    t.text     "content"
+    t.boolean  "approved",           default: false
+    t.integer  "user_id"
+    t.integer  "discontent_post_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "advices", ["discontent_post_id"], name: "index_advices_on_discontent_post_id", using: :btree
+  add_index "advices", ["user_id"], name: "index_advices_on_user_id", using: :btree
 
   create_table "answers", force: true do |t|
     t.string   "text"
@@ -420,31 +445,6 @@ ActiveRecord::Schema.define(version: 20141012183455) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
-
-  create_table "discontent_post_advice_comments", force: true do |t|
-    t.integer  "post_advice_id"
-    t.integer  "user_id"
-    t.string   "content"
-    t.integer  "post_advice_comment_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  add_index "discontent_post_advice_comments", ["post_advice_comment_id"], name: "index_discontent_post_advice_comments_on_post_advice_comment_id", using: :btree
-  add_index "discontent_post_advice_comments", ["post_advice_id"], name: "index_discontent_post_advice_comments_on_post_advice_id", using: :btree
-  add_index "discontent_post_advice_comments", ["user_id"], name: "index_discontent_post_advice_comments_on_user_id", using: :btree
-
-  create_table "discontent_post_advices", force: true do |t|
-    t.text     "content"
-    t.boolean  "approved",           default: false
-    t.integer  "user_id"
-    t.integer  "discontent_post_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  add_index "discontent_post_advices", ["discontent_post_id"], name: "index_discontent_post_advices_on_discontent_post_id", using: :btree
-  add_index "discontent_post_advices", ["user_id"], name: "index_discontent_post_advices_on_user_id", using: :btree
 
   create_table "discontent_post_aspects", force: true do |t|
     t.integer  "post_id"
