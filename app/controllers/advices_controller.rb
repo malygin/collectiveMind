@@ -63,6 +63,6 @@ class AdvicesController < ApplicationController
 
   # Only allow a trusted parameter "white list" through.
   def advice_params
-    params.require(:discontent_advice).permit(:content)
+    params.require(:advice).permit(:content)
   end
 end

@@ -123,7 +123,7 @@ scope '/project/:project' do
       member do
         put :approve
       end
-      resources :comments, only: [:new, :create, :destroy], controller: 'advice_comments'
+      resources :comments, only: [:new, :create, :destroy], controller: '/advice_comments'
     end
   end
 

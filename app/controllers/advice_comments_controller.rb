@@ -34,6 +34,6 @@ class AdviceCommentsController < ApplicationController
 
   # Only allow a trusted parameter "white list" through.
   def advice_comment_params
-    params.require(:discontent_post_advice_comment).permit(:content, :post_advice_comment_id)
+    params.require(:advice_comment).permit(:content, :post_advice_comment_id)
   end
 end

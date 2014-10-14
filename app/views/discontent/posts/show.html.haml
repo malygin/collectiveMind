@@ -46,11 +46,11 @@
     %h3
       Советы участников
     %ul.media-list#advices.chat-messages
-      = render @post.advices.approve
-      = render current_user.discontent_post_advices.unapproved
+      - (@post.advices.approve + current_user.discontent_post_advices.unapproved).each do |advice|
+        = render partial: 'advices/advice', locals: {advice: advice}
     - if signed_in?
       %br
-      = render 'discontent/post_advices/form'
+      = render 'advices/form'
     %br
 
     %h3
