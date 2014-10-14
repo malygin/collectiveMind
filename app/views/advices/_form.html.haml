@@ -1,6 +1,6 @@
 .row
   .col-md-12
-    = form_for Discontent::PostAdvice.new, url: discontent_post_advices_path(@project).concat("?post_id=#{@post.id}"), remote: true do |f|
+    = form_for Discontent::Advice.new, url: discontent_post_advices_path(@project).concat("?post_id=#{@post.id}"), remote: true do |f|
       = render 'shared/notice_messages', object: f.object
       = f.text_area :content, class: 'form-control input-transparent comment-textarea', placeholder: 'Ваш совет'
       .pull-right

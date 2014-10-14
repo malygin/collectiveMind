@@ -1,0 +1,29 @@
+.chat-message{id: "comment_#{advice_comment.id}"}
+  = render 'users/user_post', user: advice_comment.user
+
+  .chat-message-body.stage_menu1
+    %span.arrow
+    .sender
+      = link_to advice_comment.user, user_path(@project, advice_comment.user)
+      = render partial: '/shared/user_online', object: advice_comment.user
+      = role_label(advice_comment.user)
+    .text
+      %div{id: "comment_text_#{advice_comment.id}"}
+        = simple_format(advice_comment.content)
+      - if current_user?(advice_comment.user) or current_user.admin?
+        = link_to 'Удалить', discontent_post_advice_comment_path(@project, @discontent_advice, advice_comment), method: :delete, remote: true,
+          data: {confirm: t('confirm.delete_comment')}, class: 'btn btn-danger btn-xs', id: "destroy_comment_#{advice_comment.id}"
+
+      .pull-right
+        = link_to 'Ответить', new_discontent_post_advice_comment_path(@project, @discontent_advice).concat("?comment_id=#{advice_comment.id}"),
+        remote: true, id: "reply_to_#{advice_comment.id}", class: 'btn btn-success btn-xs'
+      .time.pull-left
+        = time_ago_in_words(advice_comment.created_at)
+      %br
+      - if advice_comment.main_comment?
+        .col-md-12
+          %br
+          %div{id: "child_comments_#{advice_comment.id}"}
+            - unless advice_comment.comments.empty?
+              = render advice_comment.comments
+          %div{id: "child_comments_form_#{advice_comment.id}"}
