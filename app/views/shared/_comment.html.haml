@@ -26,6 +26,8 @@
     .text
       %div{id: "comment_text_#{comment.id}"}
         =simple_format(comment.content)
+        - if comment.image
+          =cl_image_tag(comment.image)
       - if current_user?(comment.user) or boss?
         %div.redactor{id: "redactor_comment_#{comment.id}"}
           =link_to t('link.edit'), {:action => :edit_comment, :id => comment.id},:remote => true, :class=> 'btn btn-info btn-xs', id: "edit_comment_#{comment.id}"

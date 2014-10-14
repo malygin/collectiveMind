@@ -88,8 +88,9 @@ class PostsController < ApplicationController
     @main_comment_answer = comment_model.find(params[:answer_id]) unless params[:answer_id].nil?
     comment_user = @main_comment_answer.user unless @main_comment_answer.nil?
     content = comment_user ? "#{comment_user.to_s}, " + params[name_of_comment_for_param][:content] : params[name_of_comment_for_param][:content]
+    img = Cloudinary::Uploader.upload(params[name_of_comment_for_param][:image], folder: 'comments')
     unless params[name_of_comment_for_param][:content]==''
-      @comment = post.comments.create(content: content, user: current_user, discontent_status: params[name_of_comment_for_param][:discontent_status], concept_status: params[name_of_comment_for_param][:concept_status], comment_id: @main_comment ? @main_comment.id : nil)
+      @comment = post.comments.create(content: content, image: img['public_id'] , user: current_user, discontent_status: params[name_of_comment_for_param][:discontent_status], concept_status: params[name_of_comment_for_param][:concept_status], comment_id: @main_comment ? @main_comment.id : nil)
       #@todo новости и информирование авторов
       current_user.journals.build(type_event: name_of_comment_for_param+'_save', project: @project,
                                   body: "#{trim_content(@comment.content)}", body2: trim_content(field_for_journal(post)),

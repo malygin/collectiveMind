@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141007083440) do
+ActiveRecord::Schema.define(version: 20141014135544) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -964,6 +964,7 @@ ActiveRecord::Schema.define(version: 20141007083440) do
     t.boolean  "discuss_status"
     t.boolean  "useful"
     t.boolean  "approve_status"
+    t.string   "image"
   end
 
   add_index "life_tape_comments", ["created_at"], name: "index_life_tape_comments_on_created_at", using: :btree

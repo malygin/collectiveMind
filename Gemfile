@@ -47,6 +47,9 @@ gem 'compass-rails'
 gem 'therubyracer', '>=0.11.4'
 gem 'websocket-rails'
 
+gem 'cloudinary'
+gem 'remotipart', '~> 1.2'
+
 gem 'pg'
 gem 'activerecord-postgresql-adapter'
 

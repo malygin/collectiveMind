@@ -14,6 +14,7 @@
 #= require totop/easing
 # require ckeditor/init
 #= require tinymce
+#= require jquery.remotipart
 
 # @todo load initialization
 $ ->
