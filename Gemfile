@@ -36,6 +36,7 @@ group :test do
   gem 'capybara-webkit'
   gem 'capybara-screenshot'
   gem 'headless'
+  gem "codeclimate-test-reporter", require: nil
 end
 
 gem 'sass-rails', '~> 4.0.0'
