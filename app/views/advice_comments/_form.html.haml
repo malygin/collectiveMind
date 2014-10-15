@@ -2,7 +2,7 @@
 .comments
   .row
     .col-md-12
-      = form_for @advice_comment, html: {class: 'new_or_edit'}, remote: true, url: discontent_post_advice_comments_path(@project, @discontent_advice) do |f|
+      = form_for @advice_comment, html: {class: 'new_or_edit'}, remote: true, url: discontent_advice_comments_path(@project, @discontent_advice) do |f|
         = render 'shared/notice_messages', object: f.object
         = f.hidden_field :post_advice_comment_id
         = f.text_area :content, class: 'form-control input-transparent comment-textarea', placeholder: t('form.comment_answer'), id:'comment_text_area'

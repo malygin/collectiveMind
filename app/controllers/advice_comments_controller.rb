@@ -29,7 +29,7 @@ class AdviceCommentsController < ApplicationController
 
   private
   def set_advice
-    @discontent_advice = Advice.find params[:post_advice_id]
+    @discontent_advice = Advice.find params[:advice_id]
   end
 
   # Only allow a trusted parameter "white list" through.

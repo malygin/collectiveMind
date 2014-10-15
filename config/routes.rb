@@ -119,7 +119,7 @@ scope '/project/:project' do
         put :set_grouped
       end
     end
-    resources :post_advices, controller: '/advices' do
+    resources :advices, controller: '/advices' do
       member do
         put :approve
       end

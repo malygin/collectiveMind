@@ -20,15 +20,15 @@
       %b Ваш совет находится на проверке модератором
       %br
     - if current_user.admin?
-      = link_to 'Обсудить с автором', discontent_post_advice_path(@project, advice), class: 'btn btn-primary btn-xs'
+      = link_to 'Обсудить с автором', discontent_advice_path(@project, advice), class: 'btn btn-primary btn-xs'
       - unless advice.approved?
         \|
         %b
-          = link_to 'Утвердить', approve_discontent_post_advice_path(@project, advice), method: :put, remote: true,
+          = link_to 'Утвердить', approve_discontent_advice_path(@project, advice), method: :put, remote: true,
           class: 'btn btn-success btn-xs', id: "approve_advice_#{advice.id}"
     - if current_user == advice.user or current_user.admin?
       \|
-      = link_to discontent_post_advice_path(@project, advice), method: :delete, data: {confirm: t('confirm.delete_advice')},
+      = link_to discontent_advice_path(@project, advice), method: :delete, data: {confirm: t('confirm.delete_advice')},
       id: "remove_advice_#{advice.id}" do
         %button.btn.btn-xs.btn-danger{type: 'button'}
           = t('link.delete')

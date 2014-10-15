@@ -20,12 +20,12 @@ describe 'Advices' do
       it 'not link in left side' do
         within :css, 'ul#side-nav' do
           expect(page).not_to have_content I18n.t('left_side.discontent_post_advices')
-          expect(page).not_to have_link discontent_post_advices_path(project)
+          expect(page).not_to have_link discontent_advices_path(project)
         end
       end
 
       it 'not available by url' do
-        visit discontent_post_advices_path(project)
+        visit discontent_advices_path(project)
         expect(current_path) == discontent_posts_path(project)
       end
     end
@@ -64,7 +64,7 @@ describe 'Advices' do
     before do
       @advice = create :advice, user: user, discontent_post: @discontent1
       sign_in moderator
-      visit discontent_post_advices_path(project)
+      visit discontent_advices_path(project)
     end
 
     it 'link to list unapproved advices (with count of it)' do
@@ -78,7 +78,7 @@ describe 'Advices' do
 
     it 'list unapproved advices' do
       click_link 'open_unapproved_advices'
-      expect(current_path) == discontent_post_advice_path(project, @advice)
+      expect(current_path) == discontent_advices_path(project, @advice)
       expect(page).to have_content @advice.content
       expect(page).to have_content @advice.user
     end
@@ -111,7 +111,7 @@ describe 'Advices' do
       before do
         @advice = create :advice, user: user, discontent_post: @discontent1
         @comment = create :advice_comment, user: user, advice: @advice
-        visit discontent_post_advice_path(project, @advice)
+        visit discontent_advice_path(project, @advice)
       end
 
       it 'create comment' do
@@ -125,7 +125,7 @@ describe 'Advices' do
 
       it 'reply to comment' do
         text_comment = 'Ответ на коммент'
-        visit discontent_post_advice_path(project, @advice)
+        visit discontent_advice_path(project, @advice)
         expect {
           click_link "reply_to_#{@comment.id}"
           within :css, "#comment_#{@comment.id}" do
