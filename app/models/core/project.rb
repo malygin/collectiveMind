@@ -30,7 +30,7 @@ class Core::Project < ActiveRecord::Base
 # 10 disabled
 
   attr_accessible :desc, :postion, :secret, :type_project, :name, :short_desc, :knowledge, :status, :type_access,
-                  :url_logo, :stage1, :stage2, :stage3, :stage4, :stage5
+                  :url_logo, :stage1, :stage2, :stage3, :stage4, :stage5, :advices_concept, :advices_discontent
 
   has_many :life_tape_posts, -> { where status: 0 }, class_name: 'LifeTape::Post'
   has_many :aspects, class_name: 'Discontent::Aspect'

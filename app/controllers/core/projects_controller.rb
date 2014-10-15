@@ -102,7 +102,7 @@ class Core::ProjectsController < ApplicationController
     @core_project = Core::Project.find(params[:id])
 
     respond_to do |format|
-      if @core_project.update_attributes(params[:core_project])
+      if @core_project.update_attributes(core_project_params)
         format.html { redirect_to list_projects_path, success: 'Процедура успешно отредактирована' }
         format.json { head :no_content }
       else
@@ -134,5 +134,10 @@ class Core::ProjectsController < ApplicationController
     @core_project = Core::Project.find(params[:id])
     @core_project.update_column(:status, @core_project.status - 1)
     redirect_to :back
+  end
+
+  private
+  def core_project_params
+    params.require(:core_project).permit(:name, :short_desc, :desc, :type_project, :advices_concept, :advices_discontent)
   end
 end

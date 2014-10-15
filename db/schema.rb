@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141014215807) do
+ActiveRecord::Schema.define(version: 20141015103000) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -349,7 +349,7 @@ ActiveRecord::Schema.define(version: 20141014215807) do
   add_index "core_project_users", ["user_id"], name: "index_core_project_users_on_user_id", using: :btree
 
   create_table "core_projects", force: true do |t|
-    t.string   "name",         limit: 500
+    t.string   "name",               limit: 500
     t.text     "desc"
     t.text     "short_desc"
     t.integer  "status"
@@ -357,17 +357,19 @@ ActiveRecord::Schema.define(version: 20141014215807) do
     t.datetime "updated_at"
     t.string   "url_logo"
     t.integer  "type_access"
-    t.integer  "stage1",                   default: 5
-    t.integer  "stage2",                   default: 5
-    t.integer  "stage3",                   default: 5
-    t.integer  "stage4",                   default: 5
-    t.integer  "stage5",                   default: 5
+    t.integer  "stage1",                         default: 5
+    t.integer  "stage2",                         default: 5
+    t.integer  "stage3",                         default: 5
+    t.integer  "stage4",                         default: 5
+    t.integer  "stage5",                         default: 5
     t.text     "knowledge"
-    t.integer  "type_project",             default: 0
-    t.integer  "position",                 default: 0
+    t.integer  "type_project",                   default: 0
+    t.integer  "position",                       default: 0
     t.string   "secret"
     t.string   "secret2"
     t.string   "secret3"
+    t.boolean  "advices_discontent"
+    t.boolean  "advices_concept"
   end
 
   add_index "core_projects", ["status"], name: "index_core_projects_on_status", using: :btree

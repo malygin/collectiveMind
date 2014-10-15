@@ -19,6 +19,13 @@
     = f.label t('form.project.type_access')
     = f.select :type_access, options_for_select([[t('form.project.opened'), 0],[t('form.project.club'), 1], [t('form.project.closed'), 2], [t('form.project.demo'), 3], [t('form.project.test'), 4], [t('form.project.prepare'), 5]], @project.type_access),{}, {class: "form-control"}
 
+  Включить механизм советов для
+  .form-group
+    = f.check_box :advices_discontent
+    = f.label 'Несовершенств'
+    %br
+    = f.check_box :advices_concept
+    = f.label 'Нововведений'
   %br
   %actions.pull-right
     = f.submit t('form.save'), class: 'btn btn-primary btn-lg', id:'send_project'
