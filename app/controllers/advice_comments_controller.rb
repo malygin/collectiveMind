@@ -4,8 +4,6 @@ class AdviceCommentsController < ApplicationController
 
   def new
     @advice_comment = AdviceComment.new
-    @main_comment = AdviceComment.find params[:comment_id]
-    @advice_comment.post_advice_comment_id = @main_comment.id
   end
 
   # POST /discontent/post_advice_comments
@@ -34,6 +32,6 @@ class AdviceCommentsController < ApplicationController
 
   # Only allow a trusted parameter "white list" through.
   def advice_comment_params
-    params.require(:advice_comment).permit(:content, :post_advice_comment_id)
+    params.require(:advice_comment).permit(:content)
   end
 end
