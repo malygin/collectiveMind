@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141015103000) do
+ActiveRecord::Schema.define(version: 20141015121813) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -31,14 +31,14 @@ ActiveRecord::Schema.define(version: 20141015103000) do
 
   create_table "advices", force: true do |t|
     t.text     "content"
-    t.boolean  "approved",           default: false
+    t.boolean  "approved",        default: false
     t.integer  "user_id"
-    t.integer  "discontent_post_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "adviseable_id",                   null: false
+    t.string   "adviseable_type",                 null: false
   end
 
-  add_index "advices", ["discontent_post_id"], name: "index_advices_on_discontent_post_id", using: :btree
   add_index "advices", ["user_id"], name: "index_advices_on_user_id", using: :btree
 
   create_table "answers", force: true do |t|
