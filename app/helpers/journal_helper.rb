@@ -42,6 +42,8 @@ module JournalHelper
         'fa fa-edit'
       when 'essay_comment_save'
         'fa fa-comment'
+      when 'discontent_post_discuss_stat'
+        'fa fa-exclamation color-red'
     end
   end
 	def journal_parser(j, project)
@@ -49,32 +51,32 @@ module JournalHelper
 
       #LIFETAPE
       when 'life_tape_comment_save'
-        "добавил комментарий: '#{j.body} ...' к теме:  "+  link_to("#{j.body2}", "/project/#{project}/life_tape/posts/?asp=#{j.first_id}#comment_#{j.second_id}" )
+        "добавил комментарий: '#{j.body} ...' к теме:  "+  link_to("#{j.body2}", "/project/#{project}/life_tape/posts/?asp=#{j.first_id}&req_comment=#{j.second_id}#comment_#{j.second_id}" )
 
       when 'life_tape_post_save'
         'добавил тему '+  link_to("#{j.body}..", "/project/#{project}/life_tape/posts/#{j.first_id}" )
 
       when 'my_life_tape_comment'
-        "добавил комментарий: '#{j.body}'"+  link_to(' к вашей теме ', "/project/#{project}/life_tape/posts?asp=#{j.first_id}&viewed=true#comment_#{j.second_id}")
+        "добавил комментарий: '#{j.body}'"+  link_to(' к вашей теме ', "/project/#{project}/life_tape/posts?asp=#{j.first_id}&viewed=true&req_comment=#{j.second_id}#comment_#{j.second_id}")
 
       when 'reply_life_tape_comment'
-        "добавил комментарий: '#{j.body}'"+  link_to(" в ответ на ваш '#{j.body2}'", "/project/#{project}/life_tape/posts?asp=#{j.first_id}&viewed=true#comment_#{j.second_id}")
+        "добавил комментарий: '#{j.body}'"+  link_to(" в ответ на ваш '#{j.body2}'", "/project/#{project}/life_tape/posts?asp=#{j.first_id}&viewed=true&req_comment=#{j.second_id}#comment_#{j.second_id}")
 
       when 'life_tape_comment_discuss_stat'
-        "выделил(а) комментарий: '#{j.body}'"+  link_to(' к теме ', "/project/#{project}/life_tape/posts?asp=#{j.first_id}#comment_#{j.second_id}") + ' как требующий обсуждения'
+        "выделил(а) комментарий: '#{j.body}'"+  link_to(' к теме ', "/project/#{project}/life_tape/posts?asp=#{j.first_id}&req_comment=#{j.second_id}#comment_#{j.second_id}") + ' как требующий обсуждения'
 
       when 'my_life_tape_comment_discuss_stat'
-        "выделил(а) ваш комментарий: '#{j.body}'"+  link_to(' к теме ', "/project/#{project}/life_tape/posts?asp=#{j.first_id}&viewed=true#comment_#{j.second_id}") + ' как требующий обсуждения'
+        "выделил(а) ваш комментарий: '#{j.body}'"+  link_to(' к теме ', "/project/#{project}/life_tape/posts?asp=#{j.first_id}&viewed=true&req_comment=#{j.second_id}#comment_#{j.second_id}") + ' как требующий обсуждения'
 
       when 'life_tape_comment_approve_status'
-        "выделил(а) комментарий: '#{j.body}'"+  link_to(' к теме ', "/project/#{project}/life_tape/posts?asp=#{j.first_id}#comment_#{j.second_id}") + ' как важный'
+        "выделил(а) комментарий: '#{j.body}'"+  link_to(' к теме ', "/project/#{project}/life_tape/posts?asp=#{j.first_id}&req_comment=#{j.second_id}#comment_#{j.second_id}") + ' как важный'
 
       when 'my_life_tape_comment_approve_status'
-        "выделил(а) ваш комментарий: '#{j.body}'"+  link_to(' к теме ', "/project/#{project}/life_tape/posts?asp=#{j.first_id}&viewed=true#comment_#{j.second_id}") + ' как важный'
+        "выделил(а) ваш комментарий: '#{j.body}'"+  link_to(' к теме ', "/project/#{project}/life_tape/posts?asp=#{j.first_id}&viewed=true&req_comment=#{j.second_id}#comment_#{j.second_id}") + ' как важный'
 
       # DISCONTENTS
       when 'discontent_comment_save'
-        "добавил(а) комментарий: '#{j.body}'"+ ' к несовершенству '+  link_to("#{j.body2} ... ", "/project/#{project}/discontent/posts/#{j.first_id}#comment_#{j.second_id}")
+        "добавил(а) комментарий: '#{j.body}'"+ ' к несовершенству '+  link_to("#{j.body2} ... ", "/project/#{project}/discontent/posts/#{j.first_id}?req_comment=#{j.second_id}#comment_#{j.second_id}")
 
       when 'discontent_post_save'
         'добавил(а) несовершенство  ' + link_to("#{j.body}", "/project/#{project}/discontent/posts/#{j.first_id}")
@@ -83,10 +85,10 @@ module JournalHelper
         'отредактировал(а) несовершенство '+ link_to("#{j.body}...", "/project/#{project}/discontent/posts/#{j.first_id}")
 
       when 'my_discontent_comment'
-        "добавил(а) комментарий '#{j.body}...' к вашему несовершенству "+  link_to(j.body2, "/project/#{project}/discontent/posts/#{j.first_id}?viewed=true#comment_#{j.second_id}")
+        "добавил(а) комментарий '#{j.body}...' к вашему несовершенству "+  link_to(j.body2, "/project/#{project}/discontent/posts/#{j.first_id}?viewed=true&req_comment=#{j.second_id}#comment_#{j.second_id}")
 
       when 'reply_discontent_comment'
-        "добавил(а) комментарий '#{j.body}...' в ответ на ваш "+  link_to( j.body2, "/project/#{project}/discontent/posts/#{j.first_id}?viewed=true#comment_#{j.second_id}")
+        "добавил(а) комментарий '#{j.body}...' в ответ на ваш "+  link_to( j.body2, "/project/#{project}/discontent/posts/#{j.first_id}?viewed=true&req_comment=#{j.second_id}#comment_#{j.second_id}")
 
       when 'my_add_score_discontent'
         "вы получили  #{j.body} баллов за несовершенство "+  link_to( j.body2, "/project/#{project}/discontent/posts/#{j.first_id}?viewed=true")
@@ -102,23 +104,23 @@ module JournalHelper
       when 'my_discontent_post_discuss_stat'
         'выделил(а) ваше несовершенство  ' + link_to("#{j.body}", "/project/#{project}/discontent/posts/#{j.first_id}?viewed=true") + ' как требующее обсуждения'
       when 'discontent_comment_discuss_stat'
-        "выделил(а) комментарий '#{j.body}...' к несовершенству "+  link_to(j.body2, "/project/#{project}/discontent/posts/#{j.first_id}#comment_#{j.second_id}") + ' как требующий обсуждения'
+        "выделил(а) комментарий '#{j.body}...' к несовершенству "+  link_to(j.body2, "/project/#{project}/discontent/posts/#{j.first_id}?req_comment=#{j.second_id}#comment_#{j.second_id}") + ' как требующий обсуждения'
       when 'my_discontent_comment_discuss_stat'
-        "выделил(а) ваш комментарий '#{j.body}...' к несовершенству "+  link_to(j.body2, "/project/#{project}/discontent/posts/#{j.first_id}?viewed=true#comment_#{j.second_id}") + ' как требующий обсуждения'
+        "выделил(а) ваш комментарий '#{j.body}...' к несовершенству "+  link_to(j.body2, "/project/#{project}/discontent/posts/#{j.first_id}?viewed=true&req_comment=#{j.second_id}#comment_#{j.second_id}") + ' как требующий обсуждения'
 
       when 'discontent_post_approve_status'
         'выделил(а) несовершенство  ' + link_to("#{j.body}", "/project/#{project}/discontent/posts/#{j.first_id}") + ' как важное'
       when 'my_discontent_post_approve_status'
         'выделил(а) ваше несовершенство  ' + link_to("#{j.body}", "/project/#{project}/discontent/posts/#{j.first_id}?viewed=true") + ' как важное'
       when 'discontent_comment_approve_status'
-        "выделил(а) комментарий '#{j.body}...' к несовершенству "+  link_to(j.body2, "/project/#{project}/discontent/posts/#{j.first_id}#comment_#{j.second_id}") + ' как важный'
+        "выделил(а) комментарий '#{j.body}...' к несовершенству "+  link_to(j.body2, "/project/#{project}/discontent/posts/#{j.first_id}?req_comment=#{j.second_id}#comment_#{j.second_id}") + ' как важный'
       when 'my_discontent_comment_approve_status'
-        "выделил(а) ваш комментарий '#{j.body}...' к несовершенству "+  link_to(j.body2, "/project/#{project}/discontent/posts/#{j.first_id}?viewed=true#comment_#{j.second_id}") + ' как важный'
+        "выделил(а) ваш комментарий '#{j.body}...' к несовершенству "+  link_to(j.body2, "/project/#{project}/discontent/posts/#{j.first_id}?viewed=true&req_comment=#{j.second_id}#comment_#{j.second_id}") + ' как важный'
 
 
       # CONCEPTS
       when 'concept_comment_save'
-        "добавил(а) комментарий: '#{j.body}'"+ ' к нововведению '+  link_to("#{j.body2} ... ", "/project/#{project}/concept/posts/#{j.first_id}#comment_#{j.second_id}")
+        "добавил(а) комментарий: '#{j.body}'"+ ' к нововведению '+  link_to("#{j.body2} ... ", "/project/#{project}/concept/posts/#{j.first_id}?req_comment=#{j.second_id}#comment_#{j.second_id}")
 
       when 'concept_post_save'
         'добавил(а) нововведение  ' + link_to("#{j.body}", "/project/#{project}/concept/posts/#{j.first_id}")
@@ -127,10 +129,10 @@ module JournalHelper
         'отредактировал(а) нововведение '+ link_to("#{j.body}...", "/project/#{project}/concept/posts/#{j.first_id}")
 
       when 'my_concept_comment'
-        "добавил(а) комментарий '#{j.body}...' к вашему нововведению "+  link_to(j.body2, "/project/#{project}/concept/posts/#{j.first_id}?viewed=true#comment_#{j.second_id}")
+        "добавил(а) комментарий '#{j.body}...' к вашему нововведению "+  link_to(j.body2, "/project/#{project}/concept/posts/#{j.first_id}?viewed=true&req_comment=#{j.second_id}#comment_#{j.second_id}")
 
       when 'reply_concept_comment'
-        "добавил(а) комментарий '#{j.body}...' в ответ на ваш "+  link_to( j.body2, "/project/#{project}/concept/posts/#{j.first_id}?viewed=true#comment_#{j.second_id}")
+        "добавил(а) комментарий '#{j.body}...' в ответ на ваш "+  link_to( j.body2, "/project/#{project}/concept/posts/#{j.first_id}?viewed=true&req_comment=#{j.second_id}#comment_#{j.second_id}")
 
       when 'my_concept_note'
         s = j.body.split(':')
@@ -142,22 +144,22 @@ module JournalHelper
       when 'my_concept_post_discuss_stat'
         'выделил(а) ваше нововведение  ' + link_to("#{j.body}", "/project/#{project}/concept/posts/#{j.first_id}?viewed=true") + ' как требующее обсуждения'
       when 'concept_comment_discuss_stat'
-        "выделил(а) комментарий '#{j.body}...' к нововведению "+  link_to(j.body2, "/project/#{project}/concept/posts/#{j.first_id}#comment_#{j.second_id}") + ' как требующий обсуждения'
+        "выделил(а) комментарий '#{j.body}...' к нововведению "+  link_to(j.body2, "/project/#{project}/concept/posts/#{j.first_id}?req_comment=#{j.second_id}#comment_#{j.second_id}") + ' как требующий обсуждения'
       when 'my_concept_comment_discuss_stat'
-        "выделил(а) ваш комментарий '#{j.body}...' к нововведению "+  link_to(j.body2, "/project/#{project}/concept/posts/#{j.first_id}?viewed=true#comment_#{j.second_id}") + ' как требующий обсуждения'
+        "выделил(а) ваш комментарий '#{j.body}...' к нововведению "+  link_to(j.body2, "/project/#{project}/concept/posts/#{j.first_id}?viewed=true&req_comment=#{j.second_id}#comment_#{j.second_id}") + ' как требующий обсуждения'
 
       when 'concept_post_approve_status'
         'выделил(а) нововведение  ' + link_to("#{j.body}", "/project/#{project}/concept/posts/#{j.first_id}") + ' как важное'
       when 'my_concept_post_approve_status'
         'выделил(а) ваше нововведение  ' + link_to("#{j.body}", "/project/#{project}/concept/posts/#{j.first_id}?viewed=true") + ' как важное'
       when 'concept_comment_approve_status'
-        "выделил(а) комментарий '#{j.body}...' к нововведению "+  link_to(j.body2, "/project/#{project}/concept/posts/#{j.first_id}#comment_#{j.second_id}") + ' как важный'
+        "выделил(а) комментарий '#{j.body}...' к нововведению "+  link_to(j.body2, "/project/#{project}/concept/posts/#{j.first_id}?req_comment=#{j.second_id}#comment_#{j.second_id}") + ' как важный'
       when 'my_concept_comment_approve_status'
-        "выделил(а) ваш комментарий '#{j.body}...' к нововведению "+  link_to(j.body2, "/project/#{project}/concept/posts/#{j.first_id}?viewed=true#comment_#{j.second_id}") + ' как важный'
+        "выделил(а) ваш комментарий '#{j.body}...' к нововведению "+  link_to(j.body2, "/project/#{project}/concept/posts/#{j.first_id}?viewed=true&req_comment=#{j.second_id}#comment_#{j.second_id}") + ' как важный'
 
       # PLANS
       when 'plan_comment_save'
-        "добавил(а) комментарий: '#{j.body}'"+ ' к проекту '+  link_to("#{j.body2} ... ", "/project/#{project}/plan/posts/#{j.first_id}#comment_#{j.second_id}")
+        "добавил(а) комментарий: '#{j.body}'"+ ' к проекту '+  link_to("#{j.body2} ... ", "/project/#{project}/plan/posts/#{j.first_id}?req_comment=#{j.second_id}#comment_#{j.second_id}")
 
       when 'plan_post_save'
         'добавил(а) проект  ' + link_to("#{j.body}", "/project/#{project}/plan/posts/#{j.first_id}")
@@ -166,51 +168,51 @@ module JournalHelper
         'отредактировал(а) проект '+ link_to("#{j.body}...", "/project/#{project}/plan/posts/#{j.first_id}")
 
       when 'my_plan_comment'
-        "добавил(а) комментарий '#{j.body}...' к вашему проекту "+  link_to(j.body2, "/project/#{project}/plan/posts/#{j.first_id}?viewed=true#comment_#{j.second_id}")
+        "добавил(а) комментарий '#{j.body}...' к вашему проекту "+  link_to(j.body2, "/project/#{project}/plan/posts/#{j.first_id}?viewed=true&req_comment=#{j.second_id}#comment_#{j.second_id}")
 
       when 'reply_plan_comment'
-        "добавил(а) комментарий '#{j.body}...' в ответ на ваш "+  link_to( j.body2, "/project/#{project}/plan/posts/#{j.first_id}?viewed=true#comment_#{j.second_id}")
+        "добавил(а) комментарий '#{j.body}...' в ответ на ваш "+  link_to( j.body2, "/project/#{project}/plan/posts/#{j.first_id}?viewed=true&req_comment=#{j.second_id}#comment_#{j.second_id}")
 
       when 'my_plan_note'
         "добавил(а) замечание  '#{j.body}...' к вашему проекту "+  link_to(j.body2, "/project/#{project}/plan/posts/#{j.first_id}?viewed=true")
 
       when 'plan_comment_discuss_stat'
-        "выделил(а) комментарий '#{j.body}...' к проекту "+  link_to(j.body2, "/project/#{project}/plan/posts/#{j.first_id}#comment_#{j.second_id}") + ' как требующий обсуждения'
+        "выделил(а) комментарий '#{j.body}...' к проекту "+  link_to(j.body2, "/project/#{project}/plan/posts/#{j.first_id}?req_comment=#{j.second_id}#comment_#{j.second_id}") + ' как требующий обсуждения'
       when 'my_plan_comment_discuss_stat'
-        "выделил(а) ваш комментарий '#{j.body}...' к проекту "+  link_to(j.body2, "/project/#{project}/plan/posts/#{j.first_id}?viewed=true#comment_#{j.second_id}") + ' как требующий обсуждения'
+        "выделил(а) ваш комментарий '#{j.body}...' к проекту "+  link_to(j.body2, "/project/#{project}/plan/posts/#{j.first_id}?viewed=true&req_comment=#{j.second_id}#comment_#{j.second_id}") + ' как требующий обсуждения'
 
       when 'plan_comment_approve_status'
-        "выделил(а) комментарий '#{j.body}...' к проекту "+  link_to(j.body2, "/project/#{project}/plan/posts/#{j.first_id}#comment_#{j.second_id}") + ' как важный'
+        "выделил(а) комментарий '#{j.body}...' к проекту "+  link_to(j.body2, "/project/#{project}/plan/posts/#{j.first_id}?req_comment=#{j.second_id}#comment_#{j.second_id}") + ' как важный'
       when 'my_plan_comment_approve_status'
-        "выделил(а) ваш комментарий '#{j.body}...' к проекту "+  link_to(j.body2, "/project/#{project}/plan/posts/#{j.first_id}?viewed=true#comment_#{j.second_id}") + ' как важный'
+        "выделил(а) ваш комментарий '#{j.body}...' к проекту "+  link_to(j.body2, "/project/#{project}/plan/posts/#{j.first_id}?viewed=true&req_comment=#{j.second_id}#comment_#{j.second_id}") + ' как важный'
 
       # ESSAY
       when 'essay_comment_save'
-        "добавил(а) комментарий: '#{j.body}'"+ ' к рефлексии '+  link_to("#{j.body2} ... ", "/project/#{project}/stage/1/essay/posts/#{j.first_id}#comment_#{j.second_id}")
+        "добавил(а) комментарий: '#{j.body}'"+ ' к рефлексии '+  link_to("#{j.body2 == '' ? 'подробнее' : j.body2} ... ", "/project/#{project}/stage/1/essay/posts/#{j.first_id}?req_comment=#{j.second_id}#comment_#{j.second_id}")
 
       when 'essay_post_save'
-        'добавил(а) свою рефлексию об этапе  ' + link_to("#{j.body}", "/project/#{project}/stage/1/essay/posts/#{j.first_id}")
+        'добавил(а) свою рефлексию об этапе  ' + link_to("#{j.body == '' ? 'подробнее' : j.body}", "/project/#{project}/stage/1/essay/posts/#{j.first_id}")
 
       when 'essay_post_update'
-        'отредактировал(а) рефлексию '+ link_to("#{j.body}...", "/project/#{project}/stage/1/essay/posts/#{j.first_id}")
+        'отредактировал(а) рефлексию '+ link_to("#{j.body == '' ? 'подробнее' : j.body}...", "/project/#{project}/stage/1/essay/posts/#{j.first_id}")
 
       when 'my_essay_comment'
-        "добавил(а) комментарий '#{j.body}...' к вашей рефлексии "+  link_to(j.body2, "/project/#{project}/stage/1/essay/posts/#{j.first_id}?viewed=true#comment_#{j.second_id}")
+        "добавил(а) комментарий '#{j.body}...' к вашей рефлексии "+  link_to("#{j.body2 == '' ? 'подробнее' : j.body2}", "/project/#{project}/stage/1/essay/posts/#{j.first_id}?viewed=true&req_comment=#{j.second_id}#comment_#{j.second_id}")
 
       when 'reply_essay_comment'
-        "добавил(а) комментарий '#{j.body}...' в ответ на ваш "+  link_to( j.body2, "/project/#{project}/stage/1/essay/posts/#{j.first_id}?viewed=true#comment_#{j.second_id}")
+        "добавил(а) комментарий '#{j.body}...' в ответ на ваш "+  link_to("#{j.body2 == '' ? 'подробнее' : j.body2}", "/project/#{project}/stage/1/essay/posts/#{j.first_id}?viewed=true&req_comment=#{j.second_id}#comment_#{j.second_id}")
 
       when 'essay_comment_discuss_stat'
-        "выделил(а) комментарий '#{j.body}...' к рефлексии "+  link_to(j.body2, "/project/#{project}/stage/1/essay/posts/#{j.first_id}#comment_#{j.second_id}") + ' как требующий обсуждения'
+        "выделил(а) комментарий '#{j.body}...' к рефлексии "+  link_to("#{j.body2 == '' ? 'подробнее' : j.body2}", "/project/#{project}/stage/1/essay/posts/#{j.first_id}?req_comment=#{j.second_id}#comment_#{j.second_id}") + ' как требующий обсуждения'
 
       when 'my_essay_comment_discuss_stat'
-        "выделил(а) ваш комментарий '#{j.body}...' к рефлексии "+  link_to(j.body2, "/project/#{project}/stage/1/essay/posts/#{j.first_id}?viewed=true#comment_#{j.second_id}") + ' как требующий обсуждения'
+        "выделил(а) ваш комментарий '#{j.body}...' к рефлексии "+  link_to("#{j.body2 == '' ? 'подробнее' : j.body2}", "/project/#{project}/stage/1/essay/posts/#{j.first_id}?viewed=true&req_comment=#{j.second_id}#comment_#{j.second_id}") + ' как требующий обсуждения'
 
       when 'essay_comment_approve_status'
-        "выделил(а) комментарий '#{j.body}...' к рефлексии "+  link_to(j.body2, "/project/#{project}/stage/1/essay/posts/#{j.first_id}#comment_#{j.second_id}") + ' как важный'
+        "выделил(а) комментарий '#{j.body}...' к рефлексии "+  link_to("#{j.body2 == '' ? 'подробнее' : j.body2}", "/project/#{project}/stage/1/essay/posts/#{j.first_id}?req_comment=#{j.second_id}#comment_#{j.second_id}") + ' как важный'
 
       when 'my_essay_comment_approve_status'
-        "выделил(а) ваш комментарий '#{j.body}...' к рефлексии "+  link_to(j.body2, "/project/#{project}/stage/1/essay/posts/#{j.first_id}?viewed=true#comment_#{j.second_id}") + ' как важный'
+        "выделил(а) ваш комментарий '#{j.body}...' к рефлексии "+  link_to("#{j.body2 == '' ? 'подробнее' : j.body2}", "/project/#{project}/stage/1/essay/posts/#{j.first_id}?viewed=true&req_comment=#{j.second_id}#comment_#{j.second_id}") + ' как важный'
 
 
       # AWARDS
@@ -279,5 +281,6 @@ module JournalHelper
        else
 				'что то другое'
 		end 
-	end
+  end
+
 end

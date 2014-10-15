@@ -75,6 +75,11 @@ class LifeTape::PostsController < PostsController
     page == 0 ? 1 : page
   end
 
+  def vote_result
+    @project = Core::Project.find(params[:project])
+    @posts = voting_model.scope_vote_top(@project.id, params[:revers])
+  end
+
   private
   def life_tape_post_params
     params.require(:life_tape_post).permit(:important, :aspect)

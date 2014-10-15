@@ -5,7 +5,6 @@
     - if @post.user
       .media-heading
         = link_to @post.user, user_path(@project, @post.user)
-    %br
     -@post.post_aspects.each do |da|
       = render partial: 'discontent/aspects/aspect', object: da
     =discontent_style_name(@post.style)

@@ -60,7 +60,7 @@ class Concept::PostsController < PostsController
 
   def index
     return redirect_to action: "vote_list" if current_user.can_vote_for(:concept, @project)
-    @aspect =  params[:asp] ? Discontent::Aspect.find(params[:asp]) : @project.proc_aspects.order(:id).first
+    @aspect =  params[:asp] ? Discontent::Aspect.find(params[:asp]) : @project.proc_aspects.order("position DESC").first
     @comments_all = @project.ideas_comments_for_improve
   end
 
@@ -86,6 +86,7 @@ class Concept::PostsController < PostsController
     @concept_post.project = @project
     @concept_post.improve_comment = params[:improve_comment] if params[:improve_comment]
     @concept_post.improve_stage = params[:improve_stage] if params[:improve_stage]
+    # @improve = params[:improve_comment]
 
     create_concept_resources_on_type(@project, @concept_post, 'positive_r', 'positive_s',false)
     create_concept_resources_on_type(@project, @concept_post, 'negative_r', 'negative_s',false)
@@ -95,7 +96,7 @@ class Concept::PostsController < PostsController
       if @concept_post.save
         current_user.journals.build(type_event:'concept_post_save', body:trim_content(@concept_post.post_aspects.first.title), first_id: @concept_post.id,  project: @project).save!
         @aspect_id =  params[:asp_id]
-        format.html { redirect_to  aspect_id.nil? ? "/project/#{@project.id}/concept/posts" : "/project/#{@project.id}/concept/posts?asp=#{@aspect_id}" }
+        format.html { redirect_to  @aspect_id.nil? ? "/project/#{@project.id}/concept/posts" : "/project/#{@project.id}/concept/posts?asp=#{@aspect_id}" }
         format.js
       else
         format.html { render action: "new" }

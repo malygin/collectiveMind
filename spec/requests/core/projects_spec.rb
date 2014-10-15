@@ -374,7 +374,6 @@ describe 'Core Project ' do
     it 'have content in profile ' do
       click_link 'user_profile'
       expect(page).to have_content 'Профиль'
-      expect(page).to have_content 'Достижения'
       expect(page).to have_content 'Активность'
     end
 
@@ -537,7 +536,6 @@ describe 'Core Project ' do
     it 'have content in profile ' do
       click_link 'user_profile'
       expect(page).to have_content 'Профиль'
-      expect(page).to have_content 'Достижения'
       expect(page).to have_content 'Активность'
     end
 

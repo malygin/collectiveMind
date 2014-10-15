@@ -21,7 +21,7 @@
         - else
           -if improve_comment.discuss_status
             %span.label-danger=t('show.discuss')
-          -elsif improve_comment.approve_status
+          -if improve_comment.approve_status
             %span.label-success=t('show.important')
 
     .text

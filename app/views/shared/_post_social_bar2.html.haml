@@ -50,10 +50,11 @@
         %span.text-info=t('show.votes_users')
         =@vote_all
 
-      |
+
       - if boss?
         =link_to({controller: post.class.name.underscore.pluralize, action: :plus,project: @project, id: post.id},  remote: true, method: :put,  id: "plus_post_#{post.id}") do
           -if post.useful
-            %span.text-danger=t('show.revert_score')
+            -#%span.text-danger=t('show.revert_score')
           -else
+            |
             %span.text-success=t('show.add_score')

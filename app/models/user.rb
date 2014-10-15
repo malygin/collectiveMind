@@ -207,7 +207,7 @@ class User < ActiveRecord::Base
         self.journals.build(type_event: 'my_add_score_comment', project: h[:project], user_informed: self, body: "5", viewed: false, personal: true).save!
 
       when :plus_post
-
+        self.add_score_by_type(h[:project], 25, :score_g) if h[:post].instance_of? Essay::Post
         self.add_score_by_type(h[:project], 50, :score_g) if h[:post].instance_of? Concept::Post
         self.add_score_by_type(h[:project], 500, :score_g) if h[:post].instance_of? Plan::Post
 
@@ -230,6 +230,8 @@ class User < ActiveRecord::Base
         self.add_score_by_type(h[:project], 20, :score_g)
       when :approve_advice
         self.add_score_by_type(h[:project], 10, :score_g)
+      when :to_archive_plus_comment
+        self.add_score_by_type(h[:project], -5, :score_a)
     end
   end
 

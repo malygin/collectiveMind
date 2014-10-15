@@ -171,13 +171,13 @@ describe 'Concept ' do
         expect(page).to have_content 'main positive_r_1'
         #expect(page).to have_content 'desc positive_r_1'
         expect(page).to have_content 'main positive_s_1 first'
-        expect(page).to have_content 'desc positive_s_1 first'
+        # expect(page).to have_content 'desc positive_s_1 first'
         expect(page).to have_content 'main positive_s_1 second'
-        expect(page).to have_content 'desc positive_s_1 second'
+        # expect(page).to have_content 'desc positive_s_1 second'
         expect(page).to have_content 'main positive_r_2'
-        expect(page).to have_content 'desc positive_r_2'
+        # expect(page).to have_content 'desc positive_r_2'
         expect(page).to have_content 'main positive_s_2'
-        expect(page).to have_content 'desc positive_s_2'
+        # expect(page).to have_content 'desc positive_s_2'
       end
 
       it ' add new empty concept with error', js: true do
@@ -227,8 +227,8 @@ describe 'Concept ' do
       end
       it ' add new answer comment', js: true do
         click_link "add_child_comment_#{@comment1.id}"
-        find("#child_comments_form_#{@comment1.id}").find('#comment_text_area').set "new child comment"
-        find("#child_comments_form_#{@comment1.id}").find('#send_post').click
+        find("#main_comments_form_#{@comment1.id}").find('#comment_text_area').set "new child comment"
+        find("#main_comments_form_#{@comment1.id}").find('#send_post').click
         expect(page).to have_content 'new child comment'
       end
     end
@@ -333,8 +333,8 @@ describe 'Concept ' do
       end
       it ' add new answer comment', js: true do
         click_link "add_child_comment_#{@comment1.id}"
-        find("#child_comments_form_#{@comment1.id}").find('#comment_text_area').set "new child comment"
-        find("#child_comments_form_#{@comment1.id}").find('#send_post').click
+        find("#main_comments_form_#{@comment1.id}").find('#comment_text_area').set "new child comment"
+        find("#main_comments_form_#{@comment1.id}").find('#send_post').click
         expect(page).to have_content 'new child comment'
       end
       context 'like concept'   do

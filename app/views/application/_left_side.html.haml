@@ -22,6 +22,10 @@
   -#      = t('left_side.discontent_post_advices')
   -#      %b
   -#        = " (#{Advice.unapproved.by_project(@project).count})"
+  -if boss?
+    %li
+      = link_to "/project/#{@project.id}/#{current_stage == 'essay/posts' ? stage_for_essay(params[:stage].to_i) : current_stage}/vote_result", class: 'text-vote-result', id: 'vote_result' do
+        Результаты голосования
 
 -#%li.panel#stage_life_tape{class:  @project.stage_style(:life_tape_posts) }
 -#  - if request.original_url.include? 'life_tape' or request.original_url.include? '/1/essay'

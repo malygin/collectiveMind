@@ -72,7 +72,7 @@ class Core::Project < ActiveRecord::Base
     if current_stage == 'life_tape/posts'
       self.aspects.order(:id)
     else
-      self.proc_aspects.order(:id)
+      self.proc_aspects.order("position DESC")
     end
   end
 
@@ -285,5 +285,15 @@ class Core::Project < ActiveRecord::Base
         where("concept_posts.project_id = ? and concept_comments.concept_status = 't'", self.id)
     comments_all = life_tape_comments | discontent_comments | concept_comments
     comments_all.sort_by { |c| c.improve_concepts.size }
+  end
+
+  def set_position_for_aspects
+    aspect = Discontent::Aspect.where(project_id: self, status: 0).first
+    unless aspect.position
+      aspects = Discontent::Aspect.scope_vote_top(self.id, "0")
+      aspects.each do |asp|
+        asp.update_attributes(position: asp.voted_users.size)
+      end
+    end
   end
 end

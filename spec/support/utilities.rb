@@ -137,7 +137,7 @@ def not_have_content_for_moderator(closed_project)
   expect(page).not_to have_content 'Закрытые процедуры'
   expect(page).not_to have_content 'closed project'
   #expect(page).not_to have_selector "a#go_to_closed_project[href='/project/#{closed_project.id}']", 'Перейти к процедуре'
-  expect(page).not_to have_link('go_to_closed_project', :text => 'Перейти к процедуре', :href => "/project/#{closed_project.id}")
+  # expect(page).not_to have_link('go_to_closed_project', :text => 'Перейти к процедуре', :href => "/project/#{closed_project.id}")
   validate_projects_links({closed: closed_project}, expect: false)
 end
 
@@ -228,7 +228,7 @@ def validation_visit_links_for_user(project,user)
   # validate profile
   visit user_path(project,user)
   expect(page).to have_content user.to_s
-  expect(page).to have_content 'Достижения'
+  expect(page).to have_content 'Достижения' unless user.boss?
 
   # validate edit profile
   visit edit_user_path(project,user)
@@ -273,7 +273,6 @@ def validation_visit_not_have_links_for_moderator(project,user)
   # validate profile
   visit user_path(project,user)
   expect(page).to have_content user.to_s
-  expect(page).to have_content 'Достижения'
   expect(page).not_to have_link("club_status_#{user.id}", :href => club_toggle_user_path(project,user))
   expect(page).not_to have_link("userscore_#{user.id}", :href => update_score_user_path(project,user))
 end
@@ -340,30 +339,30 @@ end
 def validate_projects_links(projects, expect)
   if projects[:opened]
     if expect[:expect]
-      expect(page).to have_link('go_to_open_project_'+projects[:opened].id.to_s, :text => t('link.go_to_project'), :href => "/project/#{projects[:opened].id}")
+      expect(page).to have_link('go_to_opened_project_'+projects[:opened].id.to_s, :text => I18n.t('link.go_to_project'), :href => "/project/#{projects[:opened].id}")
     else
-      expect(page).not_to have_link('go_to_open_project_'+projects[:opened].id.to_s, :text => t('link.go_to_project'), :href => "/project/#{projects[:opened].id}")
+      expect(page).not_to have_link('go_to_opened_project_'+projects[:opened].id.to_s, :text => I18n.t('link.go_to_project'), :href => "/project/#{projects[:opened].id}")
     end
   end
   if projects[:closed]
     if expect[:expect]
-      expect(page).to have_link('go_to_closed_project_'+projects[:closed].id.to_s, :text => t('link.go_to_project'), :href => "/project/#{projects[:closed].id}")
+      expect(page).to have_link('go_to_closed_project_'+projects[:closed].id.to_s, :text => I18n.t('link.go_to_project'), :href => "/project/#{projects[:closed].id}")
     else
-      expect(page).not_to have_link('go_to_closed_project_'+projects[:closed].id.to_s, :text => t('link.go_to_project'), :href => "/project/#{projects[:closed].id}")
+      expect(page).not_to have_link('go_to_closed_project_'+projects[:closed].id.to_s, :text => I18n.t('link.go_to_project'), :href => "/project/#{projects[:closed].id}")
     end
   end
   if projects[:club]
     if expect[:expect]
-      expect(page).to have_link('go_to_club_project_'+projects[:club].id.to_s, :text => t('link.go_to_project'), :href => "/project/#{projects[:club].id}")
+      expect(page).to have_link('go_to_club_project_'+projects[:club].id.to_s, :text => I18n.t('link.go_to_project'), :href => "/project/#{projects[:club].id}")
     else
-      expect(page).not_to have_link('go_to_club_project_'+projects[:club].id.to_s, :text => t('link.go_to_project'), :href => "/project/#{projects[:club].id}")
+      expect(page).not_to have_link('go_to_club_project_'+projects[:club].id.to_s, :text => I18n.t('link.go_to_project'), :href => "/project/#{projects[:club].id}")
     end
   end
   if projects[:demo]
     if expect[:expect]
-      expect(page).to have_link('go_to_demo_project_'+projects[:demo].id.to_s, :text => t('link.go_to_project'), :href => "/project/#{projects[:demo].id}")
+      expect(page).to have_link('go_to_demo_project_'+projects[:demo].id.to_s, :text => I18n.t('link.go_to_project'), :href => "/project/#{projects[:demo].id}")
     else
-      expect(page).not_to have_link('go_to_demo_project_'+projects[:demo].id.to_s, :text => t('link.go_to_project'), :href => "/project/#{projects[:demo].id}")
+      expect(page).not_to have_link('go_to_demo_project_'+projects[:demo].id.to_s, :text => I18n.t('link.go_to_project'), :href => "/project/#{projects[:demo].id}")
     end
   end
 end

@@ -7,6 +7,7 @@ CollectiveMind::Application.routes.draw do
     get 'aspect/:aspect/posts/'  => 'posts#index'
 
     resources :posts do
+      get :vote_result, on: :collection
       member do
         put :set_important
         put :add_comment
@@ -59,6 +60,7 @@ scope '/project/:project' do
       put :club_toggle
       put :add_user_for_project
       put :remove_user_for_project
+      put :journal_clear
       get 'add_score/:score' => 'users#add_score'
       get 'add_score_essay/:score' => 'users#add_score_essay'
     end
