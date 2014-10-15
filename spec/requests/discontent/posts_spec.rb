@@ -183,12 +183,16 @@ describe 'Discontent ' do
         before do
           prepare_awards
         end
-        it ' like post', js: true do
+        it ' like post and have award', js: true do
           expect(page).to have_link("plus_post_#{@discontent1.id}", :text => 'Выдать баллы', :href => plus_discontent_post_path(project,@discontent1))
           click_link "plus_post_#{@discontent1.id}"
-          expect(page).to have_link("plus_post_#{@discontent1.id}", :text => 'Забрать баллы', :href => plus_discontent_post_path(project,@discontent1))
-          click_link "plus_post_#{@discontent1.id}"
-          expect(page).to have_content 'Выдать баллы'
+          visit journals_path(project: project)
+          expect(page).to have_selector('i.fa.fa-trophy')
+          visit user_path(project: project, id: user.id)
+          expect(page).to have_content('25')
+          # expect(page).to have_link("plus_post_#{@discontent1.id}", :text => 'Забрать баллы', :href => plus_discontent_post_path(project,@discontent1))
+          # click_link "plus_post_#{@discontent1.id}"
+          # expect(page).to have_content 'Выдать баллы'
         end
 
         it ' like comment', js: true do
