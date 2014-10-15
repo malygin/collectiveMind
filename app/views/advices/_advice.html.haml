@@ -13,7 +13,7 @@
     %br
     - if current_user.admin?
       %b
-        К несовершенству:
+        = advice_type_name(advice)
         = link_to advice.adviseable.content, discontent_post_path(@project, advice.adviseable), id: "open_post_#{advice.adviseable.id}"
     %br
     - if current_user == advice.user and !advice.approved?
