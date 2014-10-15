@@ -8,7 +8,7 @@
       = render partial: '/shared/user_online', object: advice.user
       = role_label(advice.user)
     .text
-    %div
+    %div#advice_content
       = simple_format(advice.content)
     %br
     - if current_user.admin?
@@ -26,6 +26,11 @@
         %b
           = link_to 'Утвердить', approve_discontent_advice_path(@project, advice), method: :put, remote: true,
           class: 'btn btn-success btn-xs', id: "approve_advice_#{advice.id}"
+    - if current_user?(advice.user)
+      \|
+      = link_to edit_discontent_advice_path(@project, advice), remote: true do
+        %button.btn.btn-xs.btn-info
+          Редактировать
     - if current_user == advice.user or current_user.admin?
       \|
       = link_to discontent_advice_path(@project, advice), method: :delete, data: {confirm: t('confirm.delete_advice')},

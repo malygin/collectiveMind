@@ -15,6 +15,9 @@ class AdvicesController < ApplicationController
 
   # GET /discontent/post_advices/1/edit
   def edit
+    respond_to do |format|
+      format.js
+    end
   end
 
   # POST /discontent/post_advices
@@ -29,10 +32,9 @@ class AdvicesController < ApplicationController
 
   # PATCH/PUT /discontent/post_advices/1
   def update
-    if @advice.update(advice_params)
-      redirect_to @advice, notice: 'Post advice was successfully updated.'
-    else
-      render :edit
+    @advice.update(advice_params)
+    respond_to do |format|
+      format.js
     end
   end
 

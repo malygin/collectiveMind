@@ -51,7 +51,7 @@
           = render partial: 'advices/advice', locals: {advice: advice}
       - if signed_in?
         %br
-        = render partial: 'advices/form', locals: {url: discontent_advices_path(@project).concat("?discontent_id=#{@post.id}")}
+        = render partial: 'advices/form', locals: {advice: Advice.new, url: discontent_advices_path(@project).concat("?discontent_id=#{@post.id}")}
       %br
 
     %h3
