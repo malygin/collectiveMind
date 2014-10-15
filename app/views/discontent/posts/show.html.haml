@@ -50,7 +50,7 @@
         = render partial: 'advices/advice', locals: {advice: advice}
     - if signed_in?
       %br
-      = render 'advices/form'
+      = render partial: 'advices/form', locals: {url: discontent_advices_path(@project).concat("?discontent_id=#{@post.id}")}
     %br
 
     %h3

@@ -19,9 +19,9 @@ class AdvicesController < ApplicationController
 
   # POST /discontent/post_advices
   def create
-    @discontent_advice = current_user.discontent_post_advices.new advice_params
-    @discontent_advice.discontent_post = @post
-    @discontent_advice.save
+    @advice = @post.advices.new advice_params
+    @advice.user = current_user
+    @advice.save
     respond_to do |format|
       format.js
     end
@@ -29,8 +29,8 @@ class AdvicesController < ApplicationController
 
   # PATCH/PUT /discontent/post_advices/1
   def update
-    if @discontent_advice.update(advice_params)
-      redirect_to @discontent_advice, notice: 'Post advice was successfully updated.'
+    if @advice.update(advice_params)
+      redirect_to @advice, notice: 'Post advice was successfully updated.'
     else
       render :edit
     end
@@ -38,12 +38,12 @@ class AdvicesController < ApplicationController
 
   # DELETE /discontent/post_advices/1
   def destroy
-    @discontent_advice.destroy
-    redirect_to discontent_post_advices_url(@project), notice: 'Post advice was successfully destroyed.'
+    @advice.destroy
+    redirect_to discontent_advices_url(@project), notice: 'Post advice was successfully destroyed.'
   end
 
   def approve
-    @discontent_advice.update_attributes! approved: true
+    @advice.update_attributes! approved: true
   end
 
   private
@@ -53,12 +53,13 @@ class AdvicesController < ApplicationController
 
   private
   def set_discontent_post
-    @post = Discontent::Post.find params[:post_id]
+    @post = Discontent::Post.find params[:discontent_id] if params[:discontent_id]
+    @post = Concept::Post.find params[:concept_id] if params[:concept_id]
   end
 
   # Use callbacks to share common setup or constraints between actions.
   def set_discontent_post_advice
-    @discontent_advice = Advice.find(params[:id])
+    @advice = Advice.find(params[:id])
   end
 
   # Only allow a trusted parameter "white list" through.
