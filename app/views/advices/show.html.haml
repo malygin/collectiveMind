@@ -15,7 +15,7 @@
     %br
     %br
     %ul.media-list.chat-messages#comments
-      = render @advice.comments.main
+      = render @advice.comments
     - if signed_in?
       %br
       = render partial: 'advice_comments/form'
