@@ -4,6 +4,7 @@ class Core::ProjectsController < ApplicationController
   #before_filter :boss_authenticate, only: [:next_stage, :pr_stage]
   before_filter :prime_admin_authenticate, only: [:next_stage, :pr_stage, :show, :new, :edit, :create, :update, :destroy, :list_projects]
   before_filter :project_by_id
+  before_action :set_core_project, only: [:show, :edit, :update, :pr_stage, :next_stage, :destroy]
 
   def project_by_id
     unless params[:project].nil?
@@ -43,8 +44,6 @@ class Core::ProjectsController < ApplicationController
   # GET /core/projects/1
   # GET /core/projects/1.json
   def show
-    @core_project = Core::Project.find(params[:id])
-
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @core_project }
@@ -75,13 +74,12 @@ class Core::ProjectsController < ApplicationController
   # GET /core/projects/1/edit
   def edit
     @project = Core::Project.find(params[:id])
-    @core_project = Core::Project.find(params[:id])
   end
 
   # POST /core/projects
   # POST /core/projects.json
   def create
-    @core_project = Core::Project.new(params[:core_project])
+    @core_project = Core::Project.new(core_project_params)
     @core_project.type_project = 0
     @core_project.status = 1
 
@@ -99,8 +97,6 @@ class Core::ProjectsController < ApplicationController
   # PUT /core/projects/1
   # PUT /core/projects/1.json
   def update
-    @core_project = Core::Project.find(params[:id])
-
     respond_to do |format|
       if @core_project.update_attributes(core_project_params)
         format.html { redirect_to list_projects_path, success: 'Процедура успешно отредактирована' }
@@ -115,7 +111,6 @@ class Core::ProjectsController < ApplicationController
   # DELETE /core/projects/1
   # DELETE /core/projects/1.json
   def destroy
-    @core_project = Core::Project.find(params[:id])
     @core_project.update_attributes(type_access: 10)
 
     respond_to do |format|
@@ -125,15 +120,18 @@ class Core::ProjectsController < ApplicationController
   end
 
   def next_stage
-    @core_project = Core::Project.find(params[:id])
     @core_project.update_column(:status, @core_project.status + 1)
     redirect_to :back
   end
 
   def pr_stage
-    @core_project = Core::Project.find(params[:id])
     @core_project.update_column(:status, @core_project.status - 1)
     redirect_to :back
+  end
+
+  private
+  def set_core_project
+    @core_project = Core::Project.find(params[:id])
   end
 
   private
