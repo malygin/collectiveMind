@@ -52,14 +52,14 @@ describe 'Discontent ' do
 
       it 'user profile works fine after add discontent', js: true do
         click_link 'add_record'
-        fill_in 'discontent_post_content', with: 'dis content'
-        fill_in 'discontent_post_whered', with: 'dis where'
-        fill_in 'discontent_post_whend', with: 'dis when'
+        fill_in 'discontent_post_content', with: 'disсontent content'
+        fill_in 'discontent_post_whered', with: 'disсontent where'
+        fill_in 'discontent_post_whend', with: 'disсontent when'
         expect(page).to have_selector "span", 'aspect 1'
         click_button 'send_post'
         visit user_path(id: user.id, project: project)
         click_link 'tab-imperfections'
-        expect(page).to have_content 'dis content'
+        expect(page).to have_content 'disсontent'
       end
     end
 
