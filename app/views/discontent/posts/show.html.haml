@@ -43,15 +43,16 @@
 
     %br
     %br
-    %h3
-      Советы участников
-    %ul.media-list#advices.chat-messages
-      - (@post.advices.approve + current_user.discontent_post_advices.unapproved).each do |advice|
-        = render partial: 'advices/advice', locals: {advice: advice}
-    - if signed_in?
+    - if @project.advices_discontent?
+      %h3
+        Советы участников
+      %ul.media-list#advices.chat-messages
+        - (@post.advices.approve + current_user.discontent_post_advices.unapproved).each do |advice|
+          = render partial: 'advices/advice', locals: {advice: advice}
+      - if signed_in?
+        %br
+        = render partial: 'advices/form', locals: {url: discontent_advices_path(@project).concat("?discontent_id=#{@post.id}")}
       %br
-      = render partial: 'advices/form', locals: {url: discontent_advices_path(@project).concat("?discontent_id=#{@post.id}")}
-    %br
 
     %h3
       Комментарии участников
