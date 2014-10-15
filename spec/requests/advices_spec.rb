@@ -43,7 +43,7 @@ describe 'Advices' do
 
     context 'remove' do
       it 'if author - ok', js: true do
-        advice = create :advice, user: user, discontent_post: @discontent1
+        advice = create :advice, user: user, adviseable: @discontent1
         visit discontent_post_path(project, @discontent1)
         expect {
           click_link "remove_advice_#{advice.id}"
@@ -53,7 +53,7 @@ describe 'Advices' do
       end
 
       it 'others - no' do
-        advice = create :advice, user: moderator, discontent_post: @discontent1
+        advice = create :advice, user: moderator, adviseable: @discontent1
         visit discontent_post_path(project, @discontent1)
         expect(page).not_to have_link "remove_advice_#{advice.id}"
       end
@@ -62,7 +62,7 @@ describe 'Advices' do
 
   context 'moderator sign in' do
     before do
-      @advice = create :advice, user: user, discontent_post: @discontent1
+      @advice = create :advice, user: user, adviseable: @discontent1
       sign_in moderator
       visit discontent_advices_path(project)
     end
@@ -85,10 +85,10 @@ describe 'Advices' do
 
     it 'link to discontent' do
       within :css, "#post_advice_#{@advice.id}" do
-        expect(page).to have_content @advice.discontent_post.content
+        expect(page).to have_content @advice.adviseable.content
       end
-      click_link "open_post_#{@advice.discontent_post.id}"
-      expect(current_path) == discontent_post_path(project, @advice.discontent_post)
+      click_link "open_post_#{@advice.adviseable.id}"
+      expect(current_path) == discontent_post_path(project, @advice.adviseable)
     end
 
     it 'approve advice', js: true do
@@ -109,7 +109,7 @@ describe 'Advices' do
 
     context 'discuss with author advice', js: true do
       before do
-        @advice = create :advice, user: user, discontent_post: @discontent1
+        @advice = create :advice, user: user, adviseable: @discontent1
         @comment = create :advice_comment, user: user, advice: @advice
         visit discontent_advice_path(project, @advice)
       end
