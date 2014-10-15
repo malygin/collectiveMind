@@ -271,6 +271,11 @@ module JournalHelper
         "вы получили #{s[0]} баллов за полезный комментарий!"
         # "вы получили #{s[0]} баллов "  +  link_to("за полезный комментарий ", "/project/#{project}/#{s[1].gsub('#', "?viewed=#{j.id}#")}" )
 
+      when 'advice_create'
+        "добавил совет #{j.body}... "
+      when 'advice_approve'
+        s = 'утвердил совет '
+        s += link_to j.body, discontent_advice_path(j.project_id, j.first_id)
        else
 				'что то другое'
 		end 
