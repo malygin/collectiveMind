@@ -10,7 +10,7 @@ class AdviceCommentsController < ApplicationController
 
   # POST /discontent/post_advice_comments
   def create
-    @advice_comment = @discontent_advice.comments.new(advice_comment_params)
+    @advice_comment = @advice.comments.new(advice_comment_params)
     @advice_comment.user = current_user
     @advice_comment.save
     respond_to do |format|
@@ -29,7 +29,7 @@ class AdviceCommentsController < ApplicationController
 
   private
   def set_advice
-    @discontent_advice = Advice.find params[:advice_id]
+    @advice = Advice.find params[:advice_id]
   end
 
   # Only allow a trusted parameter "white list" through.

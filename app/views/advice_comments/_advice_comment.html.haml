@@ -11,11 +11,11 @@
       %div{id: "comment_text_#{advice_comment.id}"}
         = simple_format(advice_comment.content)
       - if current_user?(advice_comment.user) or current_user.admin?
-        = link_to 'Удалить', discontent_advice_comment_path(@project, @discontent_advice, advice_comment), method: :delete, remote: true,
+        = link_to 'Удалить', discontent_advice_comment_path(@project, @advice, advice_comment), method: :delete, remote: true,
           data: {confirm: t('confirm.delete_comment')}, class: 'btn btn-danger btn-xs', id: "destroy_comment_#{advice_comment.id}"
 
       .pull-right
-        = link_to 'Ответить', new_discontent_advice_comment_path(@project, @discontent_advice).concat("?comment_id=#{advice_comment.id}"),
+        = link_to 'Ответить', new_discontent_advice_comment_path(@project, @advice).concat("?comment_id=#{advice_comment.id}"),
         remote: true, id: "reply_to_#{advice_comment.id}", class: 'btn btn-success btn-xs'
       .time.pull-left
         = time_ago_in_words(advice_comment.created_at)
