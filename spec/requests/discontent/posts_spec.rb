@@ -48,6 +48,19 @@ describe 'Discontent ' do
         click_link 'Перейти к списку'
         expect(page).to have_content 'dis content'
       end
+
+
+      it 'user profile works fine after add discontent', js: true do
+        click_link 'add_record'
+        fill_in 'discontent_post_content', with: 'dis content'
+        fill_in 'discontent_post_whered', with: 'dis where'
+        fill_in 'discontent_post_whend', with: 'dis when'
+        expect(page).to have_selector "span", 'aspect 1'
+        click_button 'send_post'
+        visit user_path(id: user.id, project: project)
+        click_link 'imperfections'
+        expect(page).to have_content 'dis content'
+      end
     end
 
     context 'show discontents'   do
@@ -127,7 +140,7 @@ describe 'Discontent ' do
         expect(page).to have_link("plus_post_#{@discontent1.id}", :text => 'Выдать баллы', :href => plus_discontent_post_path(project,@discontent1))
       end
 
-      it ' add new discontent send', js: true do
+      it 'add new discontent send', js: true do
         click_link 'add_record'
         fill_in 'discontent_post_content', with: 'dis content'
         fill_in 'discontent_post_whered', with: 'dis where'

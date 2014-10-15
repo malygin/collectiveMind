@@ -86,7 +86,7 @@
               %li
                 %a(href='#ideas' data-toggle='tab')="#{t('show.user.aspects')} (#{@user.life_tape_posts.by_project(@project.id).count})"
               %li
-                %a(href='#imperfections' data-toggle='tab')="#{t('show.user.discontents')} (#{@user.discontent_posts.by_project(@project.id).count})"
+                %a(href='#imperfections' id='imperfections' data-toggle='tab')="#{t('show.user.discontents')} (#{@user.discontent_posts.by_project(@project.id).count})"
               %li
                 %a(href='#images' data-toggle='tab')="#{t('show.user.concepts')} (#{@user.concept_posts.by_project(@project.id).count})"
 
