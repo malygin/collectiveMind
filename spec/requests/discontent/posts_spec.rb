@@ -58,7 +58,7 @@ describe 'Discontent ' do
         expect(page).to have_selector "span", 'aspect 1'
         click_button 'send_post'
         visit user_path(id: user.id, project: project)
-        click_link 'imperfections'
+        click_link 'tab-imperfections'
         expect(page).to have_content 'dis content'
       end
     end
