@@ -14,7 +14,7 @@ $colorPickerAlphaImage:      "/assets/img/alpha.png";
 .colorpicker-saturation {
 	width: 170px;
 	height: 170px;
-	background-image: url($colorPickerSaturationImage);
+	background-image: image_url($colorPickerSaturationImage);
 	cursor: crosshair;
 	float: left;
 	i {
@@ -57,10 +57,10 @@ $colorPickerAlphaImage:      "/assets/img/alpha.png";
 	}
 }
 .colorpicker-hue {
-	background-image: url($colorPickerHueImage);
+	background-image: image_url($colorPickerHueImage);
 }
 .colorpicker-alpha {
-	background-image: url($colorPickerAlphaImage);
+	background-image: image_url($colorPickerAlphaImage);
 	display:none;
 }
 .colorpicker {
