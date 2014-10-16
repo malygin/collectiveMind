@@ -27,11 +27,16 @@
       %li
         = link_to t('menu.sign_up'), '/users/sign_up', class: 'btn btn-sm btn-transparent', id: 'sign_up'
   %ul.navbar-buttons.pull-right
-    - if signed_in? and prime_admin?
+    - if signed_in? and boss?
       %li
-        =link_to list_projects_path, class:'btn btn-sm btn-info', id: 'list_projects'  do
-          =t('menu.list_projects')
+        =link_to general_news_path, class:'btn btn-sm btn-success', id: 'general_news'  do
+          =t('menu.general_news')
           %i.fa.fa-arrow-right
+      - if prime_admin?
+        %li
+          =link_to list_projects_path, class:'btn btn-sm btn-info', id: 'list_projects'  do
+            =t('menu.list_projects')
+            %i.fa.fa-arrow-right
 
 
 

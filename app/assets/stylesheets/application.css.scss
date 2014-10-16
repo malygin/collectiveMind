@@ -98,6 +98,10 @@ $brand-estimate:        #663505 !default;
   text-decoration: none !important;
 }
 
+.unread_news {
+  background-color: #9934E9;
+}
+
 .discuss_comment {
   list-style: none;
   background-color: lighten($message-warning, 10%);

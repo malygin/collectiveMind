@@ -12,6 +12,14 @@ class Journal < ActiveRecord::Base
   @types = []
   @my_types = [11]
 
+  def self.events_for_all(list_type,closed_projects, events_ignore,lim = 1000)
+    Journal.joins("INNER JOIN core_projects ON journals.project_id = core_projects.id AND core_projects.type_access IN (#{list_type.join(", ")}) OR core_projects.id IN (#{closed_projects.join(", ")})").limit(lim).order('journals.created_at DESC')
+  end
+
+  def self.events_for_all_prime(events_ignore, lim = 1000)
+    Journal.limit(lim).order('created_at DESC')
+  end
+
   def self.events_for_user_feed(project_id, lim = 5)
     Journal.where(' project_id = ? AND personal = ? ', project_id, false).order('created_at DESC')
   end

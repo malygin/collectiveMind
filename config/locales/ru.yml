@@ -93,7 +93,10 @@ ru:
     sign_out: "Выйти"
     sign_up: "Зарегистрироваться"
     news: "Новости"
+    general_news: "Общие новости"
     list_projects: "Список процедур"
+    analytics: "Аналитика"
+    vote_result: Результаты голосования
     settings:
       settings_admin: 'Настройки Администратора'
       settings_title: 'Настройки'

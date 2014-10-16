@@ -18,8 +18,8 @@
   %li.active
     =link_to "/project/#{@project.id}/journals" , style:'width:auto; margin-right: 10px;', id: 'go_to_journals' do
       =t('menu.news')
-  - if prime_admin?
-    %li.divider.hidden-xs
+  - if boss?
+    %li.divider
     %li.dropdown
       %a#settings.dropdown-toggle{'data-toggle' => 'dropdown', href: '#', title: t('menu.settings.settings_title')}
         %i.fa.fa-cog
@@ -27,73 +27,78 @@
         .text-internal.text-center=t('menu.settings.settings_admin')
         %hr
         %li{role: 'presentation'}
-          =link_to t('menu.list_projects'), list_projects_path, id: 'list_projects'
-        %br
-        -if @project.status == 1
+          =link_to t('menu.main'), "/" , id: 'root_page'
+        %li{role: 'presentation'}
+          =link_to t('menu.general_news'), "/project/#{@project.id}/general_news" , id: 'general_news'
+        - if prime_admin?
           %li{role: 'presentation'}
-            =link_to t('menu.settings.admin_set_1'),  next_stage_core_project_path(@project), id: 'change_stage'
-        -if @project.status == 2
-          %li{role: 'presentation'}
-            =link_to t('menu.settings.admin_set_2'),  pr_stage_core_project_path(@project), id: 'change_stage'
+            =link_to t('menu.list_projects'), list_projects_path, id: 'list_projects'
           %br
-          %li{role: 'presentation'}
-            =link_to t('menu.settings.admin_set_3'),  next_stage_core_project_path(@project), id: 'change_stage'
-        -if @project.status == 3
-          %li{role: 'presentation'}
-            =link_to t('menu.settings.admin_set_4'),  pr_stage_core_project_path(@project), id: 'change_stage'
-          %br
-          %li{role: 'presentation'}
-            =link_to t('menu.settings.admin_set_5'),  next_stage_core_project_path(@project), id: 'change_stage'
-        -if @project.status == 4
-          %li{role: 'presentation'}
-            =link_to t('menu.settings.admin_set_6'),  pr_stage_core_project_path(@project), id: 'change_stage'
-          %br
-          %li{role: 'presentation'}
-            =link_to t('menu.settings.admin_set_7'),  next_stage_core_project_path(@project), id: 'change_stage'
-        -if @project.status == 5
-          %li{role: 'presentation'}
-            =link_to t('menu.settings.admin_set_8'),  pr_stage_core_project_path(@project), id: 'change_stage'
-          %br
-          %li{role: 'presentation'}
-            =link_to t('menu.settings.admin_set_9'),  next_stage_core_project_path(@project), id: 'change_stage'
-        -if @project.status == 6
-          %li{role: 'presentation'}
-            =link_to t('menu.settings.admin_set_10'),  pr_stage_core_project_path(@project), id: 'change_stage'
-          %br
-          %li{role: 'presentation'}
-            =link_to t('menu.settings.admin_set_11'),  next_stage_core_project_path(@project), id: 'change_stage'
-        -if @project.status == 7
-          %li{role: 'presentation'}
-            =link_to t('menu.settings.admin_set_12'),  pr_stage_core_project_path(@project), id: 'change_stage'
-          %br
-          %li{role: 'presentation'}
-            =link_to t('menu.settings.admin_set_13'),  next_stage_core_project_path(@project), id: 'change_stage'
-        -if @project.status == 8
-          %li{role: 'presentation'}
-            =link_to t('menu.settings.admin_set_14'),  pr_stage_core_project_path(@project), id: 'change_stage'
-          %br
-          %li{role: 'presentation'}
-            =link_to t('menu.settings.admin_set_15'),  next_stage_core_project_path(@project), id: 'change_stage'
-        -if @project.status == 9
-          %li{role: 'presentation'}
-            =link_to t('menu.settings.admin_set_16'),  pr_stage_core_project_path(@project), id: 'change_stage'
-          %br
-          %li{role: 'presentation'}
-            =link_to t('menu.settings.admin_set_17'),  next_stage_core_project_path(@project), id: 'change_stage'
-        -if @project.status == 10
-          %li{role: 'presentation'}
-            =link_to t('menu.settings.admin_set_18'),  pr_stage_core_project_path(@project), id: 'change_stage'
-          %br
-          %li{role: 'presentation'}
-            =link_to t('menu.settings.admin_set_19'),  next_stage_core_project_path(@project), id: 'change_stage'
-        -if @project.status == 11
-          %li{role: 'presentation'}
-            =link_to t('menu.settings.admin_set_20'),  pr_stage_core_project_path(@project), id: 'change_stage'
-          %br
-          %li{role: 'presentation'}
-            =link_to t('menu.settings.admin_set_21'), next_stage_core_project_path(@project), id: 'change_stage'
+          -if @project.status == 1
+            %li{role: 'presentation'}
+              =link_to t('menu.settings.admin_set_1'),  next_stage_core_project_path(@project), id: 'change_stage'
+          -if @project.status == 2
+            %li{role: 'presentation'}
+              =link_to t('menu.settings.admin_set_2'),  pr_stage_core_project_path(@project), id: 'change_stage'
+            %br
+            %li{role: 'presentation'}
+              =link_to t('menu.settings.admin_set_3'),  next_stage_core_project_path(@project), id: 'change_stage'
+          -if @project.status == 3
+            %li{role: 'presentation'}
+              =link_to t('menu.settings.admin_set_4'),  pr_stage_core_project_path(@project), id: 'change_stage'
+            %br
+            %li{role: 'presentation'}
+              =link_to t('menu.settings.admin_set_5'),  next_stage_core_project_path(@project), id: 'change_stage'
+          -if @project.status == 4
+            %li{role: 'presentation'}
+              =link_to t('menu.settings.admin_set_6'),  pr_stage_core_project_path(@project), id: 'change_stage'
+            %br
+            %li{role: 'presentation'}
+              =link_to t('menu.settings.admin_set_7'),  next_stage_core_project_path(@project), id: 'change_stage'
+          -if @project.status == 5
+            %li{role: 'presentation'}
+              =link_to t('menu.settings.admin_set_8'),  pr_stage_core_project_path(@project), id: 'change_stage'
+            %br
+            %li{role: 'presentation'}
+              =link_to t('menu.settings.admin_set_9'),  next_stage_core_project_path(@project), id: 'change_stage'
+          -if @project.status == 6
+            %li{role: 'presentation'}
+              =link_to t('menu.settings.admin_set_10'),  pr_stage_core_project_path(@project), id: 'change_stage'
+            %br
+            %li{role: 'presentation'}
+              =link_to t('menu.settings.admin_set_11'),  next_stage_core_project_path(@project), id: 'change_stage'
+          -if @project.status == 7
+            %li{role: 'presentation'}
+              =link_to t('menu.settings.admin_set_12'),  pr_stage_core_project_path(@project), id: 'change_stage'
+            %br
+            %li{role: 'presentation'}
+              =link_to t('menu.settings.admin_set_13'),  next_stage_core_project_path(@project), id: 'change_stage'
+          -if @project.status == 8
+            %li{role: 'presentation'}
+              =link_to t('menu.settings.admin_set_14'),  pr_stage_core_project_path(@project), id: 'change_stage'
+            %br
+            %li{role: 'presentation'}
+              =link_to t('menu.settings.admin_set_15'),  next_stage_core_project_path(@project), id: 'change_stage'
+          -if @project.status == 9
+            %li{role: 'presentation'}
+              =link_to t('menu.settings.admin_set_16'),  pr_stage_core_project_path(@project), id: 'change_stage'
+            %br
+            %li{role: 'presentation'}
+              =link_to t('menu.settings.admin_set_17'),  next_stage_core_project_path(@project), id: 'change_stage'
+          -if @project.status == 10
+            %li{role: 'presentation'}
+              =link_to t('menu.settings.admin_set_18'),  pr_stage_core_project_path(@project), id: 'change_stage'
+            %br
+            %li{role: 'presentation'}
+              =link_to t('menu.settings.admin_set_19'),  next_stage_core_project_path(@project), id: 'change_stage'
+          -if @project.status == 11
+            %li{role: 'presentation'}
+              =link_to t('menu.settings.admin_set_20'),  pr_stage_core_project_path(@project), id: 'change_stage'
+            %br
+            %li{role: 'presentation'}
+              =link_to t('menu.settings.admin_set_21'), next_stage_core_project_path(@project), id: 'change_stage'
 
-  %li.hidden-xs.divider
+  %li.divider
   %li.dropdown
     %a#messages.dropdown-toggle{'data-toggle' => 'dropdown', href: '#', title: t('menu.journal_title')}
       %i.fa.fa-comments
@@ -101,7 +106,6 @@
         %span.count(style='background: #e5603b;')=@my_journals_count
       -else
         %span.count=@my_journals_count
-
 
     %ul#messages-menu.dropdown-menu.messages{role: 'menu'}
       -unless @my_journals.empty?
@@ -126,7 +130,9 @@
           %a=t('menu.journal_empty')
 
   %li.divider
-
+  %li.hidden-xs
+    %a{href: '/', id: 'root_page', title: t('menu.main')}
+      %i.fa.fa-home
   %li.dropdown
     %a#account.dropdown-toggle{'data-toggle' => 'dropdown', href: '#', title: t('menu.account')}
       %i.fa.fa-user
@@ -140,7 +146,7 @@
         = link_to t('menu.profile_edit'), edit_user_path(@project, current_user), id: 'go_to_edit_profile'
 
       %li{role: 'presentation'}
-        =link_to t('menu.journal_title'), user_path(@project, current_user)
+        = link_to t('menu.journal_title'), user_path(@project, current_user)
   %li.visible-xs.divider
   %li.visible-xs
     %a.btn-navbar{'data-target' => '.sidebar', 'data-toggle' => 'collapse', href: '#', title: ''}

@@ -4,6 +4,9 @@ class Core::ProjectsController < ApplicationController
   #before_filter :boss_authenticate, only: [:next_stage, :pr_stage]
   before_filter :prime_admin_authenticate, only: [:next_stage, :pr_stage, :show, :new, :edit, :create, :update, :destroy, :list_projects]
   before_filter :project_by_id
+  before_filter :have_project_access , only: [:news]
+  after_filter :last_seen_news , only: [:news]
+  layout 'application', only: [:news]
 
   def project_by_id
     unless params[:project].nil?
@@ -135,5 +138,35 @@ class Core::ProjectsController < ApplicationController
     @core_project = Core::Project.find(params[:id])
     @core_project.update_column(:status, @core_project.status - 1)
     redirect_to :back
+  end
+
+
+  def news
+    @project = Core::Project.find(params[:project]) if params[:project]
+    @core_project = current_user.current_projects_for_user.last if current_user
+    if @project
+      events = Journal.events_for_my_feed @project.id, current_user.id
+      g = events.group_by { |e| e.first_id }
+      @my_journals=g.collect { |k, v| [v.first, v.size] }
+      @my_journals_count = @my_journals.size
+      @journals_feed = Journal.events_for_user_feed(@project.id).paginate(page: params[:page])
+    end
+    # if prime_admin?
+    #   @journals_feed_all = Journal.events_for_all_prime.paginate(page: params[:page])
+    # else
+    #   @journals_feed_all = Journal.events_for_all.paginate(page: params[:page])
+    # end
+    closed_projects = current_user.projects.where(core_projects: {type_access: 2}).pluck("core_projects.id")
+    @journals_feed_all = Journal.events_for_all(list_type_projects_for_user,closed_projects==[] ? [-1] : closed_projects, events_ignore).paginate(page: params[:page])
+    @j_count = {today:0, yesterday:0, older:0}
+
+    # @journals_feed_today = @journals_feed.today
+    # @journals_feed_yesterday = @journals_feed.yesterday
+    # @journals_feed_older = @journals_feed.older
+  end
+
+  private
+  def last_seen_news
+    current_user.update_attributes(last_seen_news: Time.zone.now.utc) if current_user and boss?
   end
 end

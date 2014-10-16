@@ -11,11 +11,9 @@ module SessionsHelper
   end
 
   def have_project_access
-    @project = Core::Project.find(params[:project])
+    @project = Core::Project.find(params[:project]) if params[:project]
     if @project
-      unless @project.project_access(current_user)
-        redirect_to :root
-      end
+      redirect_to :root unless @project.project_access(current_user)
     end
   end
 
@@ -117,6 +115,11 @@ module SessionsHelper
     else
       0
     end
+  end
+
+  def events_ignore
+    ['"reply_life_tape_comment"','"reply_discontent_comment"','"reply_concept_comment"','"reply_plan_comment"',
+     '"reply_essay_comment"']
   end
 
   def user?

@@ -1,0 +1,43 @@
+.col-md-9
+  %section.widget
+    %header
+      %h3.text-center=t('show.journal_title')
+
+    .body
+      .feed
+        .wrapper
+          .text-center
+            = will_paginate @journals_feed_all
+
+          - @journals_feed_all.each do |journal|
+            - if journal.created_at.to_date == Time.zone.now.to_date and @j_count[:today] == 0
+              %h4 Сегодня
+              -@j_count[:today]+=1
+            -elsif journal.created_at.to_date == Time.zone.now.to_date - 1 and @j_count[:yesterday] == 0
+              %h4 Вчера
+              -@j_count[:yesterday]+=1
+            -elsif journal.created_at.to_date < Time.zone.now.to_date - 1 and @j_count[:older] == 0
+              %h4 Ранее
+              -@j_count[:older]+=1
+
+            %section.feed-item(class="#{current_user.last_seen_news < journal.created_at ? 'unread_news': ''}")
+              .icon.pull-left
+                %i(class="#{journal_icon(journal)}")
+              .feed-item-body
+                - if journal.user
+                  = link_to journal.user, user_path(journal.project,journal.user)
+                  = render partial: '/shared/user_online', object: journal.user
+
+                = journal_parser(journal, journal.project_id).html_safe
+                %br
+                = link_to journal.project.name, "/project/#{journal.project_id}", class: "label label-success"
+                %br
+                .time.pull-left(style="color:#cabc7d;")=Russian::strftime(journal.created_at, '%d %B %k:%M:%S ')
+
+          .text-center
+            = will_paginate @journals_feed_all
+
+.col-md-3
+  %section.widget
+    %header
+      %h3 Фильтры
