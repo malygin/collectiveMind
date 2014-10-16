@@ -1,2 +1,2 @@
-$('#comments').html("#{escape_javascript(render @advice.comments)}")
+$('#comments').append("#{escape_javascript(render @advice_comment)}")
 $('#comment_text_area').val('');

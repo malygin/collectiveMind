@@ -15,9 +15,6 @@
         = link_to 'Удалить', discontent_advice_comment_path(@project, advice_comment.advice, advice_comment), method: :delete, remote: true,
           data: {confirm: t('confirm.delete_comment')}, class: 'btn btn-danger btn-xs', id: "destroy_comment_#{advice_comment.id}"
 
-      .pull-right
-        = link_to 'Ответить', new_discontent_advice_comment_path(@project, advice_comment.advice).concat("?comment_id=#{advice_comment.id}"),
-        remote: true, id: "reply_to_#{advice_comment.id}", class: 'btn btn-success btn-xs'
       .time.pull-left
         = time_ago_in_words(advice_comment.created_at)
       %br

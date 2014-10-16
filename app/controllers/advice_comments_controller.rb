@@ -4,6 +4,7 @@ class AdviceCommentsController < ApplicationController
 
   def new
     @advice_comment = AdviceComment.new
+    #respond_to do |format|
   end
 
   # POST /discontent/post_advice_comments

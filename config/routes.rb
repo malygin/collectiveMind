@@ -190,6 +190,7 @@ scope '/project/:project' do
   end
 
   get 'advices' => 'advices#index'
+  post 'advices/:advice_id/comments' => 'advice_comments#create'
 end
 
 ############

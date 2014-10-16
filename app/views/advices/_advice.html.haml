@@ -20,7 +20,6 @@
       %b Ваш совет находится на проверке модератором
       %br
     - if current_user.admin?
-      = link_to 'Обсудить с автором', discontent_advice_path(@project, advice), class: 'btn btn-primary btn-xs'
       - unless advice.approved?
         \|
         %b
@@ -38,9 +37,14 @@
         %button.btn.btn-xs.btn-danger{type: 'button'}
           = t('link.delete')
           %i.fa.fa-trash-o
--#%ul.media-list.chat-messages.chat-message-body.stage_menu1.col-md-12#comments
--#  Обсуждение с автором
--#  - advice.comments.each do |comment|
--#    = render partial: 'advice_comments/advice_comment', locals: {advice_comment: comment}
--#%br
--#%br
+%ul.media-list.chat-messages.chat-message-body.stage_menu1
+  Обсуждение с автором
+  %br
+  #comments
+    - advice.comments.each do |comment|
+      = render partial: 'advice_comments/advice_comment', locals: {advice_comment: comment}
+  - if current_user.admin?
+    %br
+    = render partial: 'advice_comments/form', locals: {advice: advice}
+%br
+%br
