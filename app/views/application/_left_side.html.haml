@@ -4,7 +4,7 @@
       %h4=t('menu.list_aspects')
   -@project.current_aspects(current_stage).each do |asp|
     %li{class:"#{'active' if asp == @aspect}"}
-      = link_to "/project/#{@project.id}/#{current_stage == 'essay/posts' ? stage_for_essay(params[:stage].to_i) : current_stage}?asp=#{asp.id}" do
+      = link_to link_for_aspects(asp, current_stage) do
         &nbsp;
         =" #{asp.content}"
   %li

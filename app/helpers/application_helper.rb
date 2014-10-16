@@ -611,4 +611,14 @@ module ApplicationHelper
     page == 0 ? 1 : page
   end
 
+  def link_for_aspects(asp, current_stage)
+    link = "/project/#{@project.id}/"
+    if current_stage == 'advices'
+      link += 'discontent/posts'
+    else
+      link += "#{current_stage == 'essay/posts' ? stage_for_essay(params[:stage].to_i) : current_stage}"
+    end
+    link += "?asp=#{asp.id}"
+    link
+  end
 end
