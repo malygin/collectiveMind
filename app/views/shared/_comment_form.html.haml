@@ -5,6 +5,9 @@
       = form_for comment, html: {class: 'new_or_edit',multipart: true }, remote: true,  url: url_link, method: :put do |f|
         = render 'shared/notice_messages', object: f.object
         =f.text_area :content, class: 'form-control input-transparent comment-textarea',  placeholder: t('form.comment_answer'), id:"comment_text_area"
+        .pull-left
+          = f.file_field :image
+
         .pull-right
           %div(class="btn-group" data-toggle="buttons" id="change_comment_stat")
             %label(class="btn btn-sm btn-default" onclick="color_button(this);")
@@ -15,7 +18,6 @@
               =t('show.idea')
           -if @main_comment
             %button.btn.btn-danger.btn-sm(type="button" onclick="reset_child_comment_form(#{@main_comment.id}); return false;" )=t('form.cancel')
-          = f.file_field :image
           =f.submit t('form.send'), id: "send_post", class: 'btn btn-sm btn-info'
 
       .text-success#comment_success(style='display:none;')

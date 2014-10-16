@@ -88,9 +88,19 @@ class PostsController < ApplicationController
     @main_comment_answer = comment_model.find(params[:answer_id]) unless params[:answer_id].nil?
     comment_user = @main_comment_answer.user unless @main_comment_answer.nil?
     content = comment_user ? "#{comment_user.to_s}, " + params[name_of_comment_for_param][:content] : params[name_of_comment_for_param][:content]
-    img = Cloudinary::Uploader.upload(params[name_of_comment_for_param][:image], folder: 'comments')
+    if params[name_of_comment_for_param][:image]
+      if  [ 'image/jpeg', 'image/png' ].include?  params[name_of_comment_for_param][:image].content_type
+        img = Cloudinary::Uploader.upload(params[name_of_comment_for_param][:image], folder: 'comments', :crop => :limit, :width => 800,
+                                       :eager => [{ :crop => :fill, :width => 150, :height => 150 }])
+        isFile = false
+      else
+        img = Cloudinary::Uploader.upload(params[name_of_comment_for_param][:image], folder: 'comments', :resource_type => :raw )
+        isFile = true
+      end
+    end
     unless params[name_of_comment_for_param][:content]==''
-      @comment = post.comments.create(content: content, image: img['public_id'] , user: current_user, discontent_status: params[name_of_comment_for_param][:discontent_status], concept_status: params[name_of_comment_for_param][:concept_status], comment_id: @main_comment ? @main_comment.id : nil)
+      @comment = post.comments.create(content: content, image:  img ? img['public_id'] : nil , isFile: img ? isFile : nil,   user: current_user, discontent_status: params[name_of_comment_for_param][:discontent_status], concept_status: params[name_of_comment_for_param][:concept_status], comment_id: @main_comment ? @main_comment.id : nil)
+
       #@todo новости и информирование авторов
       current_user.journals.build(type_event: name_of_comment_for_param+'_save', project: @project,
                                   body: "#{trim_content(@comment.content)}", body2: trim_content(field_for_journal(post)),
@@ -460,10 +470,27 @@ class PostsController < ApplicationController
 
   def update_comment
     @comment = comment_model.find(params[:id])
-    respond_to do |format|
-      if @comment.update_attributes(content: params[:content])
-        format.js
+    @aspects = Discontent::Aspect.where(project_id: @project)
+
+    if params[:image]
+      if  [ 'image/jpeg', 'image/png' ].include?  params[:image].content_type
+        img = Cloudinary::Uploader.upload(params[:image], folder: 'comments', :crop => :limit, :width => 800,
+                                          :eager => [{ :crop => :fill, :width => 150, :height => 150 }])
+        isFile = false
+      else
+        img = Cloudinary::Uploader.upload(params[:image], folder: 'comments', :resource_type => :raw )
+        isFile = true
       end
+    end
+
+    respond_to do |format|
+
+      @comment.update_attributes(content: params[:content])
+        if params[:image]
+          @comment.update_attributes( image:  img ? img['public_id'] : nil , isFile: img ? isFile : nil )
+         end
+      format.js
+
     end
   end
 

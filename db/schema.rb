@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141014135544) do
+ActiveRecord::Schema.define(version: 20141016130701) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -76,6 +76,8 @@ ActiveRecord::Schema.define(version: 20141014135544) do
     t.boolean  "concept_status"
     t.boolean  "discuss_status"
     t.boolean  "approve_status"
+    t.string   "image"
+    t.boolean  "isFile"
   end
 
   add_index "concept_comments", ["created_at"], name: "index_concept_comments_on_created_at", using: :btree
@@ -404,6 +406,8 @@ ActiveRecord::Schema.define(version: 20141014135544) do
     t.boolean  "discuss_status"
     t.boolean  "useful"
     t.boolean  "approve_status"
+    t.string   "image"
+    t.boolean  "isFile"
   end
 
   create_table "discontent_notes", force: true do |t|
@@ -537,6 +541,8 @@ ActiveRecord::Schema.define(version: 20141014135544) do
     t.boolean  "discuss_status"
     t.boolean  "useful"
     t.boolean  "approve_status"
+    t.string   "image"
+    t.boolean  "isFile"
   end
 
   add_index "essay_comments", ["post_id"], name: "index_essay_comments_on_post_id", using: :btree
@@ -592,6 +598,8 @@ ActiveRecord::Schema.define(version: 20141014135544) do
     t.boolean  "discuss_status"
     t.boolean  "useful"
     t.boolean  "approve_status"
+    t.string   "image"
+    t.boolean  "isFile"
   end
 
   add_index "estimate_comments", ["post_id"], name: "index_estimate_comments_on_post_id", using: :btree
@@ -965,6 +973,7 @@ ActiveRecord::Schema.define(version: 20141014135544) do
     t.boolean  "useful"
     t.boolean  "approve_status"
     t.string   "image"
+    t.boolean  "isFile"
   end
 
   add_index "life_tape_comments", ["created_at"], name: "index_life_tape_comments_on_created_at", using: :btree
@@ -1056,6 +1065,8 @@ ActiveRecord::Schema.define(version: 20141014135544) do
     t.boolean  "discuss_status"
     t.boolean  "useful"
     t.boolean  "approve_status"
+    t.string   "image"
+    t.boolean  "isFile"
   end
 
   add_index "plan_comments", ["post_id"], name: "index_plan_comments_on_post_id", using: :btree
