@@ -14,9 +14,13 @@
 #= require totop/easing
 # require ckeditor/init
 #= require tinymce
+#= require bootstrap-colorpicker
 
 # @todo load initialization
 $ ->
+
+  $("#color").colorpicker().on "changeColor", (ev) ->
+    $("#color-holder").css "backgroundColor", ev.color.toHex()
 
   $sidebar = $("#sidebar")
 

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141016092220) do
+ActiveRecord::Schema.define(version: 20141016203210) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -338,6 +338,8 @@ ActiveRecord::Schema.define(version: 20141016092220) do
     t.string   "secret"
     t.string   "secret2"
     t.string   "secret3"
+    t.string   "color"
+    t.string   "code"
   end
 
   add_index "core_projects", ["status"], name: "index_core_projects_on_status", using: :btree

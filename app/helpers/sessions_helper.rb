@@ -118,8 +118,8 @@ module SessionsHelper
   end
 
   def events_ignore
-    ['"reply_life_tape_comment"','"reply_discontent_comment"','"reply_concept_comment"','"reply_plan_comment"',
-     '"reply_essay_comment"']
+    ["'reply_life_tape_comment'","'reply_discontent_comment'","'reply_concept_comment'","'reply_plan_comment'",
+     "'reply_essay_comment'"]
   end
 
   def user?

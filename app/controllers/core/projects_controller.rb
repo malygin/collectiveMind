@@ -143,7 +143,8 @@ class Core::ProjectsController < ApplicationController
 
   def news
     @project = Core::Project.find(params[:project]) if params[:project]
-    @core_project = current_user.current_projects_for_user.last if current_user
+    @core_projects = current_user.current_projects_for_user.reverse_order
+    @core_project = @core_projects.first
     if @project
       events = Journal.events_for_my_feed @project.id, current_user.id
       g = events.group_by { |e| e.first_id }
@@ -152,8 +153,7 @@ class Core::ProjectsController < ApplicationController
       @journals_feed = Journal.events_for_user_feed(@project.id).paginate(page: params[:page])
     end
 
-    if @project and params[:asp]
-      @aspect = Discontent::Aspect.find(params[:asp])
+    if @project
       @journals_feed_all = Journal.events_for_project(@project.id, events_ignore).paginate(page: params[:page])
     elsif prime_admin?
       @journals_feed_all = Journal.events_for_all_prime(events_ignore).paginate(page: params[:page])
