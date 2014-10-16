@@ -151,18 +151,17 @@ class Core::ProjectsController < ApplicationController
       @my_journals_count = @my_journals.size
       @journals_feed = Journal.events_for_user_feed(@project.id).paginate(page: params[:page])
     end
-    # if prime_admin?
-    #   @journals_feed_all = Journal.events_for_all_prime.paginate(page: params[:page])
-    # else
-    #   @journals_feed_all = Journal.events_for_all.paginate(page: params[:page])
-    # end
-    closed_projects = current_user.projects.where(core_projects: {type_access: 2}).pluck("core_projects.id")
-    @journals_feed_all = Journal.events_for_all(list_type_projects_for_user,closed_projects==[] ? [-1] : closed_projects, events_ignore).paginate(page: params[:page])
-    @j_count = {today:0, yesterday:0, older:0}
 
-    # @journals_feed_today = @journals_feed.today
-    # @journals_feed_yesterday = @journals_feed.yesterday
-    # @journals_feed_older = @journals_feed.older
+    if @project and params[:asp]
+      @aspect = Discontent::Aspect.find(params[:asp])
+      @journals_feed_all = Journal.events_for_project(@project.id, events_ignore).paginate(page: params[:page])
+    elsif prime_admin?
+      @journals_feed_all = Journal.events_for_all_prime(events_ignore).paginate(page: params[:page])
+    else
+      closed_projects = current_user.projects.where(core_projects: {type_access: 2}).pluck("core_projects.id")
+      @journals_feed_all = Journal.events_for_all(list_type_projects_for_user,closed_projects==[] ? [-1] : closed_projects, events_ignore).paginate(page: params[:page])
+    end
+    @j_count = {today:0, yesterday:0, older:0}
   end
 
   private

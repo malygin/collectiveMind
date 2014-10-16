@@ -20,6 +20,14 @@ class Journal < ActiveRecord::Base
     Journal.limit(lim).order('created_at DESC')
   end
 
+  def self.events_for_project(project_id, events_ignore, lim = 1000)
+    Journal.where('project_id = ?', project_id).order('created_at DESC')
+  end
+
+  def self.events_for_aspect(project_id, aspect_id, events_ignore, lim = 1000)
+    Journal.where('project_id = ?', project_id).order('created_at DESC')
+  end
+
   def self.events_for_user_feed(project_id, lim = 5)
     Journal.where(' project_id = ? AND personal = ? ', project_id, false).order('created_at DESC')
   end

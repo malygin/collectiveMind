@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141015232649) do
+ActiveRecord::Schema.define(version: 20141016092220) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -914,6 +914,7 @@ ActiveRecord::Schema.define(version: 20141015232649) do
     t.integer  "second_id"
     t.boolean  "personal",      default: false
     t.string   "body2"
+    t.boolean  "visible",       default: true
   end
 
   add_index "journals", ["created_at"], name: "index_journals_on_created_at", using: :btree
