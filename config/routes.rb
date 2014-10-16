@@ -188,6 +188,8 @@ scope '/project/:project' do
       posts_routes
     end
   end
+
+  get 'advices' => 'advices#index'
 end
 
 ############

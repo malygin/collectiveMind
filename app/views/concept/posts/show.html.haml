@@ -330,7 +330,7 @@
               %h4
                 Советы участников
               %ul.media-list.chat-messages#advices
-                - (@post.advices.approve).each do |advice|
+                - (@post.advices.approve + current_user.advices_for(@post).unapproved).each do |advice|
                   = render partial: 'advices/advice', locals: {advice: advice}
               - if signed_in?
                 %br

@@ -9,70 +9,50 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable, :lastseenable
   # Setup accessible (or protected) attributes for your model
   attr_accessible :remember_me, :password, :password_confirmation
-
   attr_accessor :secret, :secret2, :secret3
-
   attr_accessible :login, :nickname, :anonym, :secret,
                   :dateActivation, :dateLastEnter, :dateRegistration, :email, :faculty, :group,
                   :name, :string, :string, :surname, :validate, :vkid,
                   :score, :score_a, :score_g, :score_o, :type_user
 
   has_many :core_project_scores, class_name: 'Core::ProjectScore'
-
   has_many :help_users_answerses, class_name: 'Help::UsersAnswers'
   has_many :help_answers, class_name: 'Help::Answer', through: :help_users_answerses
   has_many :help_questions, class_name: 'Help::Question', through: :help_answers
   has_many :help_posts, class_name: 'Help::Post', through: :help_questions, source: :post
-
   has_many :journals
-
   has_many :life_tape_comment_voitings
   has_many :life_tape_comments, through: :life_type_comment_voitings
   has_many :life_tape_posts, class_name: 'LifeTape::Post'
   has_many :discontent_posts, class_name: 'Discontent::Post'
-
   has_many :discontent_aspect_users, class_name: 'Discontent::AspectUser'
   has_many :discontent_aspects, class_name: 'Discontent::Aspect', through: :discontent_aspect_users
-
   has_many :essay_posts, class_name: 'Essay::Post'
-
   has_many :life_tape_post_discussions, class_name: 'LifeTape::PostDiscussion'
   has_many :user_discussion_posts, through: :life_tape_post_discussions, source: :post, class_name: 'LifeTape::Post'
   has_many :user_discussion_aspects, through: :life_tape_post_discussions, source: :aspect, class_name: 'Discontent::Aspect'
-
   has_many :discontent_post_discussions, class_name: 'Discontent::PostDiscussion'
   has_many :user_discussion_disposts, through: :discontent_post_discussions, source: :post, class_name: 'Discontent::Post'
   has_many :user_discussion_disaspects, through: :discontent_post_discussions, source: :aspect, class_name: 'Discontent::Aspect'
-
   has_many :concept_post_discussions, class_name: 'Concept::PostDiscussion'
   has_many :user_discussion_concepts, through: :concept_post_discussions, source: :post, class_name: 'Concept::Post'
   has_many :user_discussion_disposts, through: :concept_post_discussions, source: :discontent_post, class_name: 'Discontent::Post'
-
   has_many :concept_posts, class_name: 'Concept::Post'
-
   has_many :aspect_votings, class_name: 'LifeTape::Voiting'
   has_many :voted_aspects, through: :aspect_votings, source: :discontent_aspect, class_name: 'Discontent::Aspect'
-
   has_many :post_votings, class_name: 'Discontent::Voting'
   has_many :voted_discontent_posts, through: :post_votings, source: :discontent_post, class_name: 'Discontent::Post'
-
   has_many :concept_post_votings, class_name: 'Concept::Voting'
   has_many :voted_concept_post_aspects, through: :concept_post_votings, source: :concept_post_aspect, class_name: 'Concept::PostAspect'
-
   has_many :plan_post_votings, class_name: 'Plan::Voting'
   has_many :voted_plan_posts, through: :plan_post_votings, source: :plan_post, class_name: 'Plan::Post'
-
   has_many :core_project_users, class_name: 'Core::ProjectUser'
   has_many :projects, through: :core_project_users, source: :core_project, class_name: 'Core::Project'
-
   has_many :user_awards
   has_many :awards, through: :user_awards
-
   has_many :moderator_messages
-
   has_many :user_checks, class_name: 'UserCheck'
 
-  has_many :discontent_post_advices, class_name: 'Advice'
   scope :check_field, ->(p, c) { where(project: p.id, status: 't', check_field: c) }
   scope :without_added, ->(users) { where("users.id NOT IN (#{users.join(", ")})") unless users.empty? }
 
@@ -291,6 +271,10 @@ class User < ActiveRecord::Base
       end
       i += 1
     end
+  end
+
+  def advices_for(post)
+    post.advices.where(user: id)
   end
 
   private
