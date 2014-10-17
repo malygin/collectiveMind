@@ -5,7 +5,7 @@ describe 'Advices' do
   let (:user) { create :user }
   let (:moderator) { create :moderator }
   let (:prime_admin) { create :prime_admin }
-  let (:project) { create :core_project, status: 7 }
+  let (:project) { create :core_project, status: 7, advices_concept: true, advices_discontent: true }
 
   before do
     prepare_concepts(project, user)
@@ -14,28 +14,30 @@ describe 'Advices' do
 
   context 'prime admin can setup' do
     before do
+      @project = create :core_project, status: 7
+      prepare_concepts(@project, user)
       sign_in prime_admin
     end
 
     it 'in discontents' do
-      visit discontent_post_path(project, @discontent1)
+      visit discontent_post_path(@project, @discontent1)
       expect(page).not_to have_content I18n.t('advice.advices')
-      visit edit_core_project_path(project)
+      visit edit_core_project_path(@project)
       check 'core_project_advices_discontent'
       click_button 'send_project'
 
-      visit discontent_post_path(project, @discontent1)
+      visit discontent_post_path(@project, @discontent1)
       expect(page).to have_content I18n.t('advice.advices')
     end
 
-    it 'in concepts', js: true do
-      visit concept_posts_path(project, @concept1)
+    it 'in concepts' do
+      visit concept_post_path(@project, @concept1)
       expect(page).not_to have_content I18n.t('advice.advices')
-      visit edit_core_project_path(project)
+      visit edit_core_project_path(@project)
       check 'core_project_advices_concept'
       click_button 'send_project'
 
-      visit concept_posts_path(project, @concept1)
+      visit concept_post_path(@project, @concept1)
       expect(page).to have_content I18n.t('advice.advices')
     end
   end
