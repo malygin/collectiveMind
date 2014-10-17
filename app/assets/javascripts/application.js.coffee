@@ -2,7 +2,7 @@
 #= require jquery_ujs
 #= require jquery-ui
 #= require bootstrap/bootstrap.min
-#= require autocomplete-rails
+#= require autocomplete-rails-dev
 # require bootstrap-wysihtml5
 # require bootstrap-wysihtml5/locales/ru-RU
 #= require selectize

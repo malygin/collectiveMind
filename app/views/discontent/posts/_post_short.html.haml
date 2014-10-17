@@ -1,6 +1,7 @@
 %li{id: "post_#{post_short.id}", class: "#{'expert_comment' if post_short.discuss_status }"}
   -if post_short.user
-    = image_tag post_short.user.avatar.url(:thumb), class: 'pull-left img-circle'
+    = render 'users/user_post', user: post_short.user
+    -#= image_tag post_short.user.avatar.url(:thumb), class: 'pull-left'
   .news-item-info
     .name
       - if post_short.user
@@ -22,6 +23,7 @@
     =discontent_style_name(post_short.style)
     .comment.dis-comment
       = render partial: '/discontent/posts/post_content', object: post_short
+      = render 'shared/post_edit_bar', post: post_short
     .time
       = Russian::strftime(post_short.created_at,'%d %B %k:%M:%S')
       =improve_comment(post_short).html_safe if improve_comment(post_short)

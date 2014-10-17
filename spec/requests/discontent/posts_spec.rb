@@ -48,6 +48,19 @@ describe 'Discontent ' do
         click_link 'Перейти к списку'
         expect(page).to have_content 'dis content'
       end
+
+
+      it 'user profile works fine after add discontent', js: true do
+        click_link 'add_record'
+        fill_in 'discontent_post_content', with: 'disсontent content'
+        fill_in 'discontent_post_whered', with: 'disсontent where'
+        fill_in 'discontent_post_whend', with: 'disсontent when'
+        expect(page).to have_selector "span", 'aspect 1'
+        click_button 'send_post'
+        visit user_path(id: user.id, project: project)
+        click_link 'tab-imperfections'
+        expect(page).to have_content 'disсontent'
+      end
     end
 
     context 'show discontents'   do
@@ -127,7 +140,7 @@ describe 'Discontent ' do
         expect(page).to have_link("plus_post_#{@discontent1.id}", :text => 'Выдать баллы', :href => plus_discontent_post_path(project,@discontent1))
       end
 
-      it ' add new discontent send', js: true do
+      it 'add new discontent send', js: true do
         click_link 'add_record'
         fill_in 'discontent_post_content', with: 'dis content'
         fill_in 'discontent_post_whered', with: 'dis where'
@@ -170,12 +183,16 @@ describe 'Discontent ' do
         before do
           prepare_awards
         end
-        it ' like post', js: true do
+        it ' like post and have award', js: true do
           expect(page).to have_link("plus_post_#{@discontent1.id}", :text => 'Выдать баллы', :href => plus_discontent_post_path(project,@discontent1))
           click_link "plus_post_#{@discontent1.id}"
-          expect(page).to have_link("plus_post_#{@discontent1.id}", :text => 'Забрать баллы', :href => plus_discontent_post_path(project,@discontent1))
-          click_link "plus_post_#{@discontent1.id}"
-          expect(page).to have_content 'Выдать баллы'
+          visit journals_path(project: project)
+          expect(page).to have_selector('i.fa.fa-trophy')
+          visit user_path(project: project, id: user.id)
+          expect(page).to have_content('25')
+          # expect(page).to have_link("plus_post_#{@discontent1.id}", :text => 'Забрать баллы', :href => plus_discontent_post_path(project,@discontent1))
+          # click_link "plus_post_#{@discontent1.id}"
+          # expect(page).to have_content 'Выдать баллы'
         end
 
         it ' like comment', js: true do
