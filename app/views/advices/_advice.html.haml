@@ -1,50 +1,51 @@
-.chat-message{id: "post_advice_#{advice.id}"}
-  = render 'users/user_post', user: advice.user
+%div{id: "post_advice_#{advice.id}"}
+  .chat-message
+    = render 'users/user_post', user: advice.user
 
-  .chat-message-body
-    %span.arrow
-    .sender
-      = link_to advice.user, user_path(@project, advice.user)
-      = render partial: '/shared/user_online', object: advice.user
-      = role_label(advice.user)
-    .text
-    %div#advice_content
-      = simple_format(advice.content)
-    %br
-    - if current_user.admin?
-      %b
-        = advice_type_name(advice)
-        = link_to trim_content(advice.adviseable.content).concat('...'), discontent_post_path(@project, advice.adviseable), id: "open_post_#{advice.adviseable.id}"
-    %br
-    - if current_user == advice.user and !advice.approved?
-      %b Ваш совет находится на проверке модератором
+    .chat-message-body
+      %span.arrow
+      .sender
+        = link_to advice.user, user_path(@project, advice.user)
+        = render partial: '/shared/user_online', object: advice.user
+        = role_label(advice.user)
+      .text
+      %div#advice_content
+        = simple_format(advice.content)
       %br
-    - if current_user.admin?
-      - unless advice.approved?
-        \|
+      - if current_user.admin?
         %b
-          = link_to 'Утвердить', approve_discontent_advice_path(@project, advice), method: :put, remote: true,
-          class: 'btn btn-success btn-xs', id: "approve_advice_#{advice.id}"
-    - if current_user?(advice.user)
-      \|
-      = link_to edit_discontent_advice_path(@project, advice), remote: true do
-        %button.btn.btn-xs.btn-info
-          Редактировать
-    - if current_user == advice.user or current_user.admin?
-      \|
-      = link_to discontent_advice_path(@project, advice), method: :delete, data: {confirm: t('confirm.delete_advice')},
-      id: "remove_advice_#{advice.id}" do
-        %button.btn.btn-xs.btn-danger{type: 'button'}
-          = t('link.delete')
-          %i.fa.fa-trash-o
-%ul.media-list.chat-messages.chat-message-body.stage_menu1
-  Обсуждение с автором
-  %br
-  #comments
-    - advice.comments.each do |comment|
-      = render partial: 'advice_comments/advice_comment', locals: {advice_comment: comment}
-  - if current_user.admin?
+          = advice_type_name(advice)
+          = link_to trim_content(advice.adviseable.content).concat('...'), discontent_post_path(@project, advice.adviseable), id: "open_post_#{advice.adviseable.id}"
+      %br
+      - if current_user == advice.user and !advice.approved?
+        %b Ваш совет находится на проверке модератором
+        %br
+      - if current_user.admin?
+        - unless advice.approved?
+          \|
+          %b
+            = link_to 'Утвердить', approve_discontent_advice_path(@project, advice), method: :put, remote: true,
+            class: 'btn btn-success btn-xs', id: "approve_advice_#{advice.id}"
+      - if current_user?(advice.user)
+        \|
+        = link_to edit_discontent_advice_path(@project, advice), remote: true do
+          %button.btn.btn-xs.btn-info
+            Редактировать
+      - if current_user == advice.user or current_user.admin?
+        \|
+        = link_to discontent_advice_path(@project, advice), method: :delete, data: {confirm: t('confirm.delete_advice')},
+        id: "remove_advice_#{advice.id}" do
+          %button.btn.btn-xs.btn-danger{type: 'button'}
+            = t('link.delete')
+            %i.fa.fa-trash-o
+  %ul.media-list.chat-messages.chat-message-body.stage_menu1
+    Обсуждение с автором
     %br
-    = render partial: 'advice_comments/form', locals: {advice: advice}
-%br
-%br
+    #comments
+      - advice.comments.each do |comment|
+        = render partial: 'advice_comments/advice_comment', locals: {advice_comment: comment}
+    - if current_user.admin?
+      %br
+      = render partial: 'advice_comments/form', locals: {advice: advice}
+  %br
+  %br

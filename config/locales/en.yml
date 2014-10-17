@@ -26,3 +26,5 @@ en:
   discontent:
     unapproved_post_advices: "Unapproved advices"
     advice_success_approved: "Advice approved"
+  advice:
+    advices: "Advices"

@@ -757,3 +757,5 @@ ru:
     unapproved_post_advices: "Неутвержденные советы"
     advice_success_created: "Ваш совет добавлен и ожидает проверки модератором"
     advice_success_approved: "Совет одобрен"
+  advice:
+    advices: "Советы участников"
