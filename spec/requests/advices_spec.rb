@@ -4,10 +4,40 @@ describe 'Advices' do
   subject { page }
   let (:user) { create :user }
   let (:moderator) { create :moderator }
-  let (:project) { create :core_project, status: 3 }
+  let (:prime_admin) { create :prime_admin }
+  let (:project) { create :core_project, status: 7 }
 
   before do
-    prepare_discontents(project, user)
+    prepare_concepts(project, user)
+    @advice = create :advice, user: user, adviseable: @discontent1
+  end
+
+  context 'prime admin can setup' do
+    before do
+      sign_in prime_admin
+    end
+
+    it 'in discontents' do
+      visit discontent_post_path(project, @discontent1)
+      expect(page).not_to have_content I18n.t('advice.advices')
+      visit edit_core_project_path(project)
+      check 'core_project_advices_discontent'
+      click_button 'send_project'
+
+      visit discontent_post_path(project, @discontent1)
+      expect(page).to have_content I18n.t('advice.advices')
+    end
+
+    it 'in concepts', js: true do
+      visit concept_posts_path(project, @concept1)
+      expect(page).not_to have_content I18n.t('advice.advices')
+      visit edit_core_project_path(project)
+      check 'core_project_advices_concept'
+      click_button 'send_project'
+
+      visit concept_posts_path(project, @concept1)
+      expect(page).to have_content I18n.t('advice.advices')
+    end
   end
 
   context 'ordinary user sign in ' do
@@ -62,7 +92,6 @@ describe 'Advices' do
 
   context 'moderator sign in' do
     before do
-      @advice = create :advice, user: user, adviseable: @discontent1
       sign_in moderator
       visit discontent_advices_path(project)
     end
@@ -119,19 +148,6 @@ describe 'Advices' do
         expect {
           fill_in 'comment_text_area', with: text_comment
           click_button 'send_comment'
-          expect(page).to have_content text_comment
-        }.to change(AdviceComment, :count).by(1)
-      end
-
-      it 'reply to comment' do
-        text_comment = 'Ответ на коммент'
-        visit discontent_advice_path(project, @advice)
-        expect {
-          click_link "reply_to_#{@comment.id}"
-          within :css, "#comment_#{@comment.id}" do
-            fill_in 'comment_text_area', with: text_comment
-            click_button 'send_comment'
-          end
           expect(page).to have_content text_comment
         }.to change(AdviceComment, :count).by(1)
       end
