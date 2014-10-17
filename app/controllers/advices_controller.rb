@@ -25,7 +25,6 @@ class AdvicesController < ApplicationController
     @advice = @post.advices.new advice_params
     @advice.user = current_user
     @advice.save
-    current_user.journals.build(type_event: 'advice_create', body: trim_content(@advice.content), first_id: @advice.id, project: @project).save!
     respond_to do |format|
       format.js
     end
@@ -47,8 +46,12 @@ class AdvicesController < ApplicationController
 
   def approve
     @advice.update_attributes! approved: true
-    current_user.journals.build(type_event: 'advice_approve', body: trim_content(@advice.content), first_id: @advice.id, project: @project).save!
+    current_user.journals.build(type_event: 'advice_approve', body: trim_content(@advice.content),
+                                first_id: @advice.id, project: @project).save!
     current_user.add_score(type: :approve_advice)
+    current_user.journals.build(type_event: 'my_advice_approved', project: @project,
+                                body: "#{trim_content(@advice.content)}",
+                                first_id: @advice.id, personal: true, viewed: false).save!
   end
 
   private

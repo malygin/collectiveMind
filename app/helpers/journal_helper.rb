@@ -273,11 +273,17 @@ module JournalHelper
         "вы получили #{s[0]} баллов за полезный комментарий!"
         # "вы получили #{s[0]} баллов "  +  link_to("за полезный комментарий ", "/project/#{project}/#{s[1].gsub('#', "?viewed=#{j.id}#")}" )
 
-      when 'advice_create'
-        "добавил совет #{j.body}... "
       when 'advice_approve'
-        s = 'утвердил совет '
-        s += link_to j.body, discontent_advice_path(j.project_id, j.first_id)
+        s = 'добавил совет '
+        advice = Advice.find(j.first_id)
+        #@todo rewrite with polymorphic_path
+        if advice.adviseable instance_of? Discontent::Post
+          link_to_post = discontent_post_path(@project, advice.adviseable)
+        else
+          link_to_post = concept_post_path(@project, advice.adviseable)
+        end
+
+        s += link_to j.body, link_to_post
        else
 				'что то другое'
 		end 
