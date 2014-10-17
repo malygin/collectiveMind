@@ -18,7 +18,7 @@
       -#%i.fa.fa-refresh
   - if current_user.admin?
     %li
-      = link_to "/project/#{@project.id}/advices", id: 'open_unapproved_advices' do
+      = link_to advices_path(@project), id: 'open_unapproved_advices' do
         = t('left_side.discontent_post_advices')
         %b
           = " (#{Advice.unapproved.by_project(@project).count})"

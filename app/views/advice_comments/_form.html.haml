@@ -4,9 +4,9 @@
     .col-md-12
       = form_for AdviceComment.new, html: {class: 'new_or_edit'}, remote: true, url: "/project/#{@project.id}/advices/#{advice.id}/comments" do |f|
         = render 'shared/notice_messages', object: f.object
-        = f.text_area :content, class: 'form-control input-transparent comment-textarea', placeholder: t('form.comment_answer'), id:'comment_text_area'
+        = f.text_area :content, class: 'form-control input-transparent comment-textarea', placeholder: t('form.comment_answer'), id: "comment_text_for_#{advice.id}"
         .pull-right
-          = f.submit t('form.send'), id: 'send_comment', class: 'btn btn-sm btn-info'
+          = f.submit t('form.send'), class: 'btn btn-sm btn-info', id: "send_comment_for_#{advice.id}"
 
       .text-success#comment_success(style='display:none;')
         = t('form.comment_success')
