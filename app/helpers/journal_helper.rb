@@ -275,15 +275,8 @@ module JournalHelper
 
       when 'advice_approve'
         s = 'добавил совет '
-        advice = Advice.find(j.first_id)
-        #@todo rewrite with polymorphic_path
-        if advice.adviseable instance_of? Discontent::Post
-          link_to_post = discontent_post_path(@project, advice.adviseable)
-        else
-          link_to_post = concept_post_path(@project, advice.adviseable)
-        end
 
-        s += link_to j.body, link_to_post
+        s += link_to j.body, polymorphic_path(Advice.find(j.first_id).adviseable, project: @project)
        else
 				'что то другое'
 		end 
