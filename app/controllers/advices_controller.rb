@@ -1,8 +1,9 @@
 class AdvicesController < ApplicationController
-  before_action :set_discontent_post_advice, only: [:edit, :update, :destroy, :approve]
-  before_action :set_discontent_post, except: [:index, :destroy, :approve]
   before_action :journal_data
+  before_action :set_advice, except: [:index, :create]
+  before_action :set_adviseable_post, only: [:create]
   before_filter :only_moderators, only: [:index, :approve]
+  before_filter :only_author_of_post, only: [:useful, :not_useful]
 
   def index
     @unapproved_advices = Advice.unapproved
@@ -36,7 +37,7 @@ class AdvicesController < ApplicationController
   # DELETE /discontent/post_advices/1
   def destroy
     @advice.destroy
-    redirect_to discontent_advices_url(@project), notice: 'Post advice was successfully destroyed.'
+    redirect_back_or polymorphic_path(@advice.adviseable, project: @project)
   end
 
   def approve
@@ -49,19 +50,40 @@ class AdvicesController < ApplicationController
                                 first_id: @advice.id, personal: true, viewed: false).save!
   end
 
+  def useful
+    @advice.update_attributes! useful: true
+    current_user.add_score(type: :useful_advice)
+    current_user.journals.build(type_event: 'my_advice_approved', project: @project,
+                                body: "#{trim_content(@advice.content)}",
+                                first_id: @advice.id, personal: true, viewed: false).save!
+    respond_to do |format|
+      format.js { render action: 'update' }
+    end
+  end
+
+  def not_useful
+    @advice.update_attributes! useful: false
+    respond_to do |format|
+      format.js { render action: 'update' }
+    end
+  end
+
   private
+  def only_author_of_post
+    redirect_back_or root_url unless current_user?(@advice.adviseable.user)
+  end
+
   def only_moderators
     redirect_back_or root_url unless current_user.admin?
   end
 
-  private
-  def set_discontent_post
+  def set_adviseable_post
     @post = Discontent::Post.find params[:discontent_id] if params[:discontent_id]
     @post = Concept::Post.find params[:concept_id] if params[:concept_id]
   end
 
   # Use callbacks to share common setup or constraints between actions.
-  def set_discontent_post_advice
+  def set_advice
     @advice = Advice.find(params[:id])
   end
 
