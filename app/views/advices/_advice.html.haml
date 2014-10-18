@@ -17,21 +17,19 @@
           = advice_type_name(advice)
           = link_to trim_content(advice.adviseable.content).concat('...'), discontent_post_path(@project, advice.adviseable), id: "open_post_#{advice.adviseable.id}"
       %br
-      - if current_user == advice.user and !advice.approved?
-        %b Ваш совет находится на проверке модератором
-        %br
-      - if current_user.admin?
-        - unless advice.approved?
+      - unless advice.approved?
+        - if current_user?(advice.user)
+          %b Ваш совет находится на проверке модератором
+          %br
+          = link_to edit_discontent_advice_path(@project, advice), remote: true, id: "edit_advice_#{advice.id}" do
+            %button.btn.btn-xs.btn-info
+              Редактировать
+        - if current_user.admin?
           \|
           %b
             = link_to 'Утвердить', approve_discontent_advice_path(@project, advice), method: :put, remote: true,
             class: 'btn btn-success btn-xs', id: "approve_advice_#{advice.id}"
-      - if current_user?(advice.user)
-        \|
-        = link_to edit_discontent_advice_path(@project, advice), remote: true do
-          %button.btn.btn-xs.btn-info
-            Редактировать
-      - if current_user == advice.user or current_user.admin?
+      - if current_user?(advice.user) or current_user.admin?
         \|
         = link_to discontent_advice_path(@project, advice), method: :delete, data: {confirm: t('confirm.delete_advice')},
         id: "remove_advice_#{advice.id}" do
