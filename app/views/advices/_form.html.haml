@@ -1,5 +1,6 @@
 .row
   .col-md-12
+    /#@todo this can refactor with using polymorfic?
     = form_for advice, url: url, remote: true do |f|
       = render 'shared/notice_messages', object: f.object
       = f.text_area :content, class: 'form-control input-transparent comment-textarea', placeholder: 'Ваш совет'

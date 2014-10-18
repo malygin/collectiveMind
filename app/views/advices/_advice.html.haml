@@ -15,24 +15,28 @@
       - if current_user.admin?
         %b
           = advice_type_name(advice)
-          = link_to trim_content(advice.adviseable.content).concat('...'), discontent_post_path(@project, advice.adviseable), id: "open_post_#{advice.adviseable.id}"
+          = link_to trim_content(advice.adviseable.content).concat('...'), polymorphic_path(advice.adviseable, project: @project), id: "open_post_#{advice.adviseable.id}"
       %br
       - unless advice.approved?
         - if current_user?(advice.user)
           %b Ваш совет находится на проверке модератором
           %br
-          = link_to edit_discontent_advice_path(@project, advice), remote: true, id: "edit_advice_#{advice.id}" do
+          = link_to edit_advice_path(@project, advice), remote: true, id: "edit_advice_#{advice.id}" do
             %button.btn.btn-xs.btn-info
               Редактировать
         - if current_user.admin?
           \|
           %b
-            = link_to 'Утвердить', approve_discontent_advice_path(@project, advice), method: :put, remote: true,
+            = link_to 'Утвердить', approve_advice_path(@project, advice), method: :put, remote: true,
             class: 'btn btn-success btn-xs', id: "approve_advice_#{advice.id}"
+      - if advice.approved? and !advice.useful? and current_user?(advice.adviseable.user)
+        %b
+          Совет полезен?
+        = link_to 'Да', useful_advice_path(@project, advice), id: "set_useful_#{advice.id}", method: :put, remote: true, class: 'btn btn-success btn-xs'
+        = link_to 'Нет', not_useful_advice_path(@project, advice), id: "set_not_useful_#{advice.id}", method: :put, remote: true, class: 'btn btn-warning btn-xs'
       - if current_user?(advice.user) or current_user.admin?
-        \|
-        = link_to discontent_advice_path(@project, advice), method: :delete, data: {confirm: t('confirm.delete_advice')},
-        id: "remove_advice_#{advice.id}" do
+        %br
+        = link_to advice_path(@project, advice), method: :delete, data: {confirm: t('confirm.delete_advice')}, id: "remove_advice_#{advice.id}" do
           %button.btn.btn-xs.btn-danger{type: 'button'}
             = t('link.delete')
             %i.fa.fa-trash-o
