@@ -25,12 +25,7 @@ CollectiveMind::Application.routes.draw do
   end
 
   def advices_routes
-    resources :advices, only: [:create], controller: '/advices' do
-      member do
-        put :approve
-      end
-      resources :comments, only: [:new, :create, :destroy], controller: '/advice_comments'
-    end
+    resources :advices, only: [:create], controller: '/advices'
   end
 
 devise_for :users
@@ -194,8 +189,14 @@ scope '/project/:project' do
     end
   end
 
-  get 'advices' => 'advices#index'
-  post 'advices/:advice_id/comments' => 'advice_comments#create'
+  resources :advices, only: [:index, :edit, :update, :destroy] do
+    member do
+      put :approve
+      put :useful
+      put :not_useful
+    end
+    resources :comments, only: [:new, :create, :destroy], controller: 'advice_comments'
+  end
 end
 
 ############
