@@ -1,0 +1,19 @@
+---
+development:
+  cloud_name: hs2pm8fbp
+  api_key: '617629533258319'
+  api_secret: nv5SAA-1maX2jLqMplxM-Is9vOs
+  enhance_image_tag: true
+  static_image_support: false
+production:
+  cloud_name: hs2pm8fbp
+  api_key: '617629533258319'
+  api_secret: nv5SAA-1maX2jLqMplxM-Is9vOs
+  enhance_image_tag: true
+  static_image_support: true
+test:
+  cloud_name: hs2pm8fbp
+  api_key: '617629533258319'
+  api_secret: nv5SAA-1maX2jLqMplxM-Is9vOs
+  enhance_image_tag: true
+  static_image_support: false

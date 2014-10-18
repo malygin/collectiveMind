@@ -38,7 +38,7 @@ group :test do
   gem 'capybara-webkit'
   gem 'capybara-screenshot'
   gem 'headless'
-  gem 'simplecov'
+  gem "codeclimate-test-reporter", require: nil
 end
 
 gem 'sass-rails', '~> 4.0.0'
@@ -48,6 +48,9 @@ gem 'compass'
 gem 'compass-rails'
 gem 'therubyracer', '>=0.11.4'
 gem 'websocket-rails'
+
+gem 'cloudinary'
+gem 'remotipart', '~> 1.2'
 
 gem 'pg'
 gem 'activerecord-postgresql-adapter'

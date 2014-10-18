@@ -14,9 +14,20 @@
 #= require totop/easing
 # require ckeditor/init
 #= require tinymce
+#= require jquery.remotipart
+#= require jquery.magnific-popup.min
 
 # @todo load initialization
 $ ->
+  $(".image-popup-vertical-fit").magnificPopup
+    type: "image"
+    closeOnContentClick: true
+    mainClass: "mfp-img-mobile"
+    image:
+      verticalFit: true
+
+
+
 
   $sidebar = $("#sidebar")
 

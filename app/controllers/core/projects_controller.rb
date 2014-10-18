@@ -137,6 +137,6 @@ class Core::ProjectsController < ApplicationController
 
   private
   def core_project_params
-    params.require(:core_project).permit(:name, :short_desc, :desc, :type_project, :advices_concept, :advices_discontent)
+    params.require(:core_project).permit(:name, :type_access, :short_desc, :desc, :type_project, :advices_concept, :advices_discontent)
   end
 end
