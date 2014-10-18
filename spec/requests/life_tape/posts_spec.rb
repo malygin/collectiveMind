@@ -129,11 +129,24 @@ describe 'Life Tape ' do
         expect(page).to have_selector 'textarea#comment_text_area'
         expect(page).to have_link("plus_comment_#{@comment1.id}", :text => 'Выдать баллы', :href => plus_comment_life_tape_post_path(project,@comment1))
       end
+
       it 'add new comment in aspect ', js: true do
         fill_in 'comment_text_area', with: 'new comment'
         click_button 'send_post'
         expect(page).to have_content 'new comment'
       end
+
+      it 'add new comment in aspect with images ', js: true do
+        fill_in 'comment_text_area', with: 'new comment'
+        attach_file('life_tape_comment_image', "#{Rails.root}/spec/support/images/1.jpg")
+
+        click_button 'send_post'
+        expect(page).to have_content 'new comment'
+        expect(page).to have_selector 'a.image-popup-vertical-fit img'
+
+        Cloudinary::Api.delete_resources('comments/'+ page.first( 'a.image-popup-vertical-fit img')['alt'].downcase)
+      end
+
 
       it ' add new answer comment', js: true do
         click_link "add_child_comment_#{@comment1.id}"

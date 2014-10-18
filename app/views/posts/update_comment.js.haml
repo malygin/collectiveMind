@@ -1,3 +1,4 @@
-$('#comment_text_#{@comment.id}').html("#{escape_javascript( simple_format(@comment.content) )}");
+
+$('#comment_#{@comment.id}').replaceWith("#{escape_javascript(render partial: 'shared/comment', object: @comment)}");
 $("#redactor_comment_#{@comment.id}").show();
 $('#comment_#{@comment.id}').effect("highlight", {color: '#f5cecd'}, 1000);
