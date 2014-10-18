@@ -61,6 +61,13 @@ describe 'Advices' do
         visit discontent_advices_path(project)
         expect(current_path) == discontent_posts_path(project)
       end
+
+      it 'in list' do
+        advice_unapproved = create :advice_unapproved, user: moderator, adviseable: @discontent1
+        visit discontent_post_path(project, @discontent1)
+        expect(page).not_to have_content advice_unapproved.content
+        expect(page).to have_content @advice.content
+      end
     end
 
     it 'create', js: true do
@@ -73,27 +80,12 @@ describe 'Advices' do
       }.to change(Advice.unapproved, :count).by(1)
     end
 
-    it 'not view unapproved in list' do
-      advice_unapproved = create :advice_unapproved, user: moderator, adviseable: @discontent1
-      visit discontent_post_path(project, @discontent1)
-      expect(page).not_to have_content advice_unapproved.content
-      expect(page).to have_content @advice.content
-    end
-
     it 'edit' do
-
-    end
-
-    context 'correct link to advisable' do
-      it 'to discontent' do
-        #@todo
-        # within :css, "#post_advice_#{@advice_unapproved.id}" do
-        #   expect(page).to have_content @advice_unapproved.adviseable.content
-        # end
-        # click_link "open_post_#{@advice_unapproved.adviseable.id}"
-        # expect(current_path) == discontent_post_path(project, @advice_unapproved.adviseable)
-      end
-      it 'to concept'
+      click_link "edit_advice_#{@advice_unapproved.id}"
+      new_text_advice = 'Очень хороший совет 2'
+      fill_in 'advice_content', with: new_text_advice
+      click_button 'send_advice'
+      expect(page).to have_content new_text_advice
     end
 
     context 'remove' do
@@ -113,9 +105,32 @@ describe 'Advices' do
       end
     end
 
-    context 'show in news'
-    context 'show in personal notifications'
-    context 'receive balls'
+    context 'correct link to advisable' do
+      it 'to discontent' do
+        #@todo
+        # within :css, "#post_advice_#{@advice_unapproved.id}" do
+        #   expect(page).to have_content @advice_unapproved.adviseable.content
+        # end
+        # click_link "open_post_#{@advice_unapproved.adviseable.id}"
+        # expect(current_path) == discontent_post_path(project, @advice_unapproved.adviseable)
+      end
+      it 'to concept'
+    end
+
+    context 'show in news when' do
+      it 'unapproved - no'
+      it 'approved by moderator - yes'
+    end
+
+    context 'show in personal notifications when' do
+      it 'approved'
+      it 'moderator leave a comment'
+      it 'author of post set useful'
+    end
+    context 'receive balls when' do
+      it 'approve'
+      it 'set useful'
+    end
 
     context 'discuss with moderator'
 
