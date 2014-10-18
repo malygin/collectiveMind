@@ -6,7 +6,7 @@ class Advice < ActiveRecord::Base
              foreign_key: :adviseable_id
   has_many :comments, class_name: 'AdviceComment', foreign_key: :post_advice_id
   #@todo remove
-  attr_accessible :content, :approved, :adviseable_type
+  attr_accessible :content, :approved, :adviseable_type, :useful
 
   scope :unapproved, -> { where approved: false }
   scope :approve, -> { where approved: true }
