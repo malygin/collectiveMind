@@ -58,7 +58,7 @@ describe 'Advices' do
       end
 
       it 'not available by url' do
-        visit discontent_advices_path(project)
+        visit advices_path(project)
         expect(current_path) == discontent_posts_path(project)
       end
 
@@ -70,21 +70,27 @@ describe 'Advices' do
       end
     end
 
-    it 'create', js: true do
-      text_advice = 'Очень хороший совет'
-      expect {
+    context 'create', js: true do
+      let(:text_advice) { 'Очень хороший совет' }
+      subject { -> {
         fill_in 'advice_content', with: text_advice
         click_button 'send_advice'
         expect(page).to have_content I18n.t('discontent.advice_success_created')
         expect(page).to have_content text_advice
-      }.to change(Advice.unapproved, :count).by(1)
+      } }
+
+      it { expect change(Advice.unapproved, :count).by(1) }
+
+      it { expect {}.not_to change(Journal, :count) }
     end
 
-    it 'edit' do
+    it 'edit', js: true do
       click_link "edit_advice_#{@advice_unapproved.id}"
       new_text_advice = 'Очень хороший совет 2'
-      fill_in 'advice_content', with: new_text_advice
-      click_button 'send_advice'
+      within :css, "#post_advice_#{@advice_unapproved.id}" do
+        fill_in 'advice_content', with: new_text_advice
+        click_button 'send_advice'
+      end
       expect(page).to have_content new_text_advice
     end
 
@@ -117,24 +123,46 @@ describe 'Advices' do
       it 'to concept'
     end
 
-    context 'show in news when' do
-      it 'unapproved - no'
-      it 'approved by moderator - yes'
+    context 'discuss with moderator' do
+      it 'show comment'
+      it 'show in notifications'
     end
 
-    context 'show in personal notifications when' do
-      it 'approved'
-      it 'moderator leave a comment'
-      it 'author of post set useful'
-    end
-    context 'receive balls when' do
-      it 'approve'
-      it 'set useful'
-    end
+    context 'set useful', js: true do
+      before do
+        @discontent1 = create :discontent, project: project, status: 4, user: user
+        @advice_for_useful = create :advice_approved, user: moderator, adviseable: @discontent1
+        visit discontent_post_path(project, @discontent1)
+      end
 
-    context 'discuss with moderator'
+      context 'author of post' do
+        subject { -> { click_link "set_useful_#{@advice_for_useful.id}" } }
 
-    context 'set useful'
+        it { expect change(Advice.where(useful: true), :count).by(1) }
+
+        it { expect change(Award, :count).by(1) }
+
+        it { expect change(Journal, :count).by(1) }
+
+        it 'show in notification' do
+          sign_out
+          sign_in user
+          within :css, 'span.count' do
+            expect(page).to have_content '1'
+          end
+          within :css, 'ul#messages-menu' do
+            expect(page).to have_content '1'
+          end
+        end
+      end
+
+      it 'not a author' do
+        sign_out
+        sign_in moderator
+        visit discontent_post_path(project, @discontent1)
+        expect(page).not_to have_link "set_useful_#{@advice_for_useful.id}"
+      end
+    end
   end
 
   context 'moderator sign in' do
@@ -159,12 +187,35 @@ describe 'Advices' do
       expect(page).to have_content @advice_unapproved.user
     end
 
-    it 'approve advice', js: true do
-      expect {
+    context 'approve', js: true do
+      subject { -> {
         click_link "approve_advice_#{@advice_unapproved.id}"
         expect(page).to have_content I18n.t('discontent.advice_success_approved')
         expect(page).not_to have_content @advice_unapproved.content
-      }.to change(Advice.unapproved, :count).by(-1)
+      } }
+
+      it { expect change(Advice.unapproved, :count).by(-1) }
+
+      it { expect change(Journal, :count).by(2) }
+
+      it { expect change(Award, :count).by(1) }
+
+      it 'show in news' do
+        visit journals_path(project)
+        expect(page).to have_content @advice_unapproved.content[0..100]
+        expect(page).to have_content @advice_unapproved.user
+      end
+
+      it 'show in personal notification' do
+        sign_out
+        sign_in user
+        within :css, 'span.count' do
+          expect(page).to have_content '1'
+        end
+        within :css, 'ul#messages-menu' do
+          expect(page).to have_content '1'
+        end
+      end
     end
 
     it 'delete any advice', js: true do
