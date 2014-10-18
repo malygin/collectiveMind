@@ -1,16 +1,11 @@
 class AdvicesController < ApplicationController
-  before_action :set_discontent_post_advice, only: [:show, :edit, :update, :destroy, :approve]
-  before_action :set_discontent_post, except: [:index, :destroy, :show, :approve]
+  before_action :set_discontent_post_advice, only: [:edit, :update, :destroy, :approve]
+  before_action :set_discontent_post, except: [:index, :destroy, :approve]
   before_action :journal_data
-  before_filter :only_moderators, only: [:index, :show, :approve]
+  before_filter :only_moderators, only: [:index, :approve]
 
   def index
     @unapproved_advices = Advice.unapproved
-  end
-
-  # GET /discontent/post_advices/1
-  def show
-    @advice_comment = AdviceComment.new
   end
 
   # GET /discontent/post_advices/1/edit

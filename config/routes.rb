@@ -25,7 +25,7 @@ CollectiveMind::Application.routes.draw do
   end
 
   def advices_routes
-    resources :advices, controller: '/advices' do
+    resources :advices, only: [:create], controller: '/advices' do
       member do
         put :approve
       end
