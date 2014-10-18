@@ -426,7 +426,6 @@ DEPENDENCIES
   selenium-webdriver (~> 2.41.0)
   settingslogic
   similar_text
-  simplecov
   spork
   spork-rails
   spring
