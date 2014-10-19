@@ -60,7 +60,7 @@ class Concept::PostsController < PostsController
 
   def index
     return redirect_to action: "vote_list" if current_user.can_vote_for(:concept, @project)
-    @aspect =  params[:asp] ? Discontent::Aspect.find(params[:asp]) : @project.proc_aspects.order("position DESC").first
+    @aspect =  params[:asp] ? Discontent::Aspect.find(params[:asp]) : (@project.proc_aspects.first.position.nil? ? @project.proc_aspects.order(:id).first : @project.proc_aspects.order("position DESC").first)
     @comments_all = @project.ideas_comments_for_improve
   end
 

@@ -221,13 +221,13 @@ module JournalHelper
         "вы получили #{s[0]} баллов за полезный комментарий!"
       # "вы получили #{s[0]} баллов "  +  link_to("за полезный комментарий ", "/project/#{project}/#{s[1].gsub('#', "?viewed=#{j.id}#")}" )
       when 'advice_approve'
-        "добавил совет #{link_to j.body, polymorphic_path(Advice.find(j.first_id).adviseable, project: @project)}"
+        "добавил совет #{link_to j.body, polymorphic_path(Advice.find(j.first_id).adviseable, project: project)}"
       when 'my_advice_approved'
-        "ваш совет #{link_to j.body, polymorphic_path(Advice.find(j.first_id).adviseable, project: @project)} одобрен"
+        "ваш совет #{link_to j.body, polymorphic_path(Advice.find(j.first_id).adviseable, project: project)} одобрен"
       when 'my_advice_useful'
-        "ваш совет #{link_to j.body, polymorphic_path(Advice.find(j.first_id).adviseable, project: @project)} отмечен как полезный"
+        "ваш совет #{link_to j.body, polymorphic_path(Advice.find(j.first_id).adviseable, project: project)} отмечен как полезный"
       when 'my_advice_commented'
-        "ваш совет #{link_to j.body, polymorphic_path(Advice.find(j.first_id).adviseable, project: @project)} прокомментировали"
+        "ваш совет #{link_to j.body, polymorphic_path(Advice.find(j.first_id).adviseable, project: project)} прокомментировали"
       else
         'что то другое'
     end
