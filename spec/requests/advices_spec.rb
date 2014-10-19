@@ -111,27 +111,6 @@ describe 'Advices' do
       end
     end
 
-    context 'discuss with moderator' do
-      before do
-        @comment = create :advice_comment, user: moderator, advice: @advice_unapproved
-        visit discontent_post_path(project, @discontent1)
-      end
-
-      it 'show comment' do
-        expect(page).to have_content @comment.content
-      end
-
-      it 'show in notifications' do
-
-        within :css, 'span.count' do
-          expect(page).to have_content '1'
-        end
-        within :css, 'ul#messages-menu' do
-          expect(page).to have_content '1'
-        end
-      end
-    end
-
     context 'set useful', js: true do
       before do
         @discontent1 = create :discontent, project: project, status: 4, user: user
@@ -152,13 +131,14 @@ describe 'Advices' do
 
         it 'show in notification' do
           sign_out
-          sign_in user
+          sign_in moderator
           visit discontent_post_path(project, @discontent1)
           within :css, 'span.count' do
             expect(page).to have_content '1'
           end
+          click_link 'messages'
           within :css, 'ul#messages-menu' do
-            expect(page).to have_content '1'
+            expect(page).to have_content @advice_for_useful.content
           end
         end
       end
@@ -209,7 +189,7 @@ describe 'Advices' do
 
       it 'show in news' do
         visit journals_path(project)
-        expect(page).to have_content @advice_unapproved.content[0..100]
+        expect(page).to have_content @advice_unapproved.content
       end
 
       it 'show in personal notification' do
@@ -219,8 +199,9 @@ describe 'Advices' do
         within :css, 'span.count' do
           expect(page).to have_content '1'
         end
+        click_link 'messages'
         within :css, 'ul#messages-menu' do
-          expect(page).to have_content '1'
+          expect(page).to have_content @advice_unapproved.content
         end
       end
     end
@@ -247,6 +228,19 @@ describe 'Advices' do
       it { expect(page).to have_content text_comment }
 
       it { expect change(Journal, :count).by(1) }
+
+      it 'show in author advice notifications' do
+        sign_out
+        sign_in user
+        visit discontent_post_path(project, @discontent1)
+        within :css, 'span.count' do
+          expect(page).to have_content '1'
+        end
+        click_link 'messages'
+        within :css, 'ul#messages-menu' do
+          expect(page).to have_content @advice_unapproved.content
+        end
+      end
     end
 
     context 'correct link to advisable' do
