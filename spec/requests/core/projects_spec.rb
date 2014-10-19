@@ -367,7 +367,7 @@ describe 'Core Project ' do
     end
 
     it 'have base link ' do
-      expect(page).to have_link('user_profile', text: moderator.to_s, href: user_path(moderator.current_projects_for_user.last, moderator))
+      expect(page).to have_link('user_profile', text: moderator.to_s, href: user_path(moderator.current_projects_for_user.last , moderator))
       expect(page).to have_link('sign_out', text: 'Выйти', href: destroy_user_session_path)
     end
 
@@ -504,7 +504,7 @@ describe 'Core Project ' do
         visit root_path
         find_link("go_to_closed_project_#{closed_project_for_invite.id}", text: "Перейти к процедуре", href: "/project/#{closed_project_for_invite.id}").click
         validate_default_links_and_sidebar(closed_project_for_invite, moderator)
-        validate_not_have_admin_links_for_user(project)
+        validate_not_have_admin_links_for_moderator(project)
         validation_visit_links_for_user(closed_project_for_invite, moderator)
         validation_visit_not_have_links_for_moderator(closed_project_for_invite, moderator)
         validation_visit_links_for_moderator(project)

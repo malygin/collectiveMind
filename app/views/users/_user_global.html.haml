@@ -1,0 +1,46 @@
+%tr{class: set_class_for_top(number)}
+  %td
+    %span=number
+  %td
+    .media
+      %a.pull-left(href="/project/#{@project ? @project.id : @core_project.id}/users/#{user.id}")
+        = image_tag user.avatar.url(:thumb),  class: 'media-object'
+        %br
+        =link_to user, user_path(@project ? @project : @core_project, user)
+        = render partial: '/shared/user_online', object: user
+      -if prime_admin?
+        %br
+        = user.email
+        %br
+        Последний заход:
+        = user.last_seen
+        %br
+        Количество уникальных заходов:
+        = user.sign_in_count
+
+  %td
+    - if @project and !user.user_project_scores(@project.id).nil?
+      =t('show.user.generator')
+      %span.text-muted=user.user_project_scores(@project.id).score_g
+      %br
+      =t('show.user.analyst')
+      %span.text-muted=user.user_project_scores(@project.id).score_a
+      %br
+      =t('show.user.voter')
+      %span.text-muted=user.user_project_scores(@project.id).score_o
+      %br
+      =t('show.user.all_score')
+      %span.text-muted=user.user_project_scores(@project.id).score
+
+  %td
+    %span.text-inverse
+      - if @project
+        -if user.user_project_scores(@project.id).present?
+          %span.rate= user.user_project_scores(@project.id).send(@score_name ? @score_name : 'score')
+        -else
+          %span.rate 0
+      -else
+        -if user.score
+          %span.rate= user.score
+        -else
+          %span.rate 0

@@ -294,6 +294,10 @@ def validate_not_have_admin_links_for_user(project)
   expect(page).not_to have_link('change_stage', :href => next_stage_core_project_path(project))
   expect(page).not_to have_link('list_projects', :text => 'Список процедур', :href => list_projects_path)
 end
+def validate_not_have_admin_links_for_moderator(project)
+  expect(page).not_to have_link('change_stage', :href => next_stage_core_project_path(project))
+  expect(page).not_to have_link('list_projects', :text => 'Список процедур', :href => list_projects_path)
+end
 
 def validate_not_have_moderator_links_for_user(project)
   expect(page).not_to have_link('go_to_club_rating', :text => 'Клубный рейтинг', :href => users_rc_users_path(project))

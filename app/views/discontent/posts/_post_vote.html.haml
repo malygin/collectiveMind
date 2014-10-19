@@ -1,0 +1,25 @@
+.media{id: "post_#{post_vote.id}"}
+  .media-body
+    .pull-right
+      =link_to({:controller => post_vote.class.name.underscore.pluralize, :action => :discuss_status, :id => post_vote.id, :discuss_status => 1},  :remote => true, :method => :put,  id: "discuss_stat_post_#{post_vote.id}") do
+        %span.label(class="#{label_discuss_stat(post_vote)}")=t('show.discuss')
+      =link_to({:controller => post_vote.class.name.underscore.pluralize, :action => :discuss_status, :id => post_vote.id, :approve_status => 1},  :remote => true, :method => :put,  id: "approve_stat_post_#{post_vote.id}") do
+        %span.label(class="#{label_approve_stat(post_vote)}")=t('show.important')
+
+    =discontent_style_name(post_vote.style)
+    .comment.dis-comment
+      = render partial: '/discontent/posts/post_content', object: post_vote
+    .time
+      = Russian::strftime(post_vote.created_at,'%d %B %k:%M:%S')
+      =improve_comment(post_vote).html_safe if improve_comment(post_vote)
+    .row
+      .col-md-12
+        .pull-right
+          =post_vote.number_views
+          %span.glyphicon.glyphicon-eye-open
+          |
+          = link_to(controller: post_vote.class.name.underscore.pluralize, action: :show, project: @project, id: post_vote.id) do
+            =t('show.commenting')
+            =post_vote.comments.count
+            %span.glyphicon.glyphicon-comment
+

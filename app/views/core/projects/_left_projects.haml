@@ -1,16 +1,25 @@
 %ul#side-nav.side-nav
   %li
-    = link_to "/general_news", class: 'general_news color-green', id: 'go_to_general_news' do
-      %h4 ВСЕ НОВОСТИ
+    -if params[:action] == 'news'
+      = link_to "/general_news", class: 'general_news color-green', id: 'go_to_general_news' do
+        %h4=t('show.general_news')
+    -elsif params[:action] == 'users'
+      = link_to "/general_rating", class: 'general_rating color-green', id: 'go_to_general_rating' do
+        %h4=t('show.general_rating')
   %li
     %a
       %h4=t('menu.list_projects')
   -if @core_projects
     -@core_projects.each do |project|
       %li{class:"#{'active' if project == @project}", style: "color:#{project.color ? project.color : ''};"}
-        = link_to "/project/#{project.id}/general_news" do
-          &nbsp;
-          =" #{project.code.present? ? project.code : project.name}"
+        -if params[:action] == 'news'
+          = link_to "/project/#{project.id}/general_news", id: "go_to_project_#{project.id}" do
+            &nbsp;
+            =" #{project.code.present? ? project.code : project.name}"
+        -elsif params[:action] == 'users'
+          = link_to "/project/#{project.id}/general_rating", id: "go_to_project_#{project.id}" do
+            &nbsp;
+            =" #{project.code.present? ? project.code : project.name}"
 
   %li.visible-xs
     %a{href: '/', id: 'root_page', title: t('menu.main')}

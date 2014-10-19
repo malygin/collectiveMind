@@ -28,6 +28,7 @@ devise_for :users
 get '/project/:project', to: 'core/projects#to_project'
 get '/list_projects', to: 'core/projects#list_projects'
 get '/general_news', to: 'core/projects#news'
+get '/general_rating', to: 'core/projects#users'
 
 namespace :core, shallow: true do
   resources :projects do
@@ -41,6 +42,7 @@ end
 scope '/project/:project' do
   get '/journals', to: 'journal#index'
   get '/general_news', to: 'core/projects#news'
+  get '/general_rating', to: 'core/projects#users'
   #get '/help/posts/0', to: 'help/posts#new_help_0'
 
   namespace :help do

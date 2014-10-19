@@ -50,7 +50,7 @@ class UsersController < ApplicationController
   def add_user_for_project
     @project = Core::Project.find(params[:project])
     @user = User.find(params[:id])
-    @user.core_project_users.create(project_id: @project.id)
+    @user.core_project_users.create(project_id: @project.id) unless @user.core_project_users.by_project(@project.id).first
     respond_to do |format|
       format.js
     end

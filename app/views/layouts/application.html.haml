@@ -20,15 +20,15 @@
             %strong DECISION
 
     %nav#sidebar.sidebar.nav-collapse.collapse
-      - if params[:controller] == 'core/projects' and params[:action] == 'news'
+      - if params[:controller] == 'core/projects' and (params[:action] == 'news' or params[:action] == 'users')
         = render partial: 'core/projects/left_projects', locals: { current_stage: controller.controller_path }
       -else
         = render partial: 'left_side', locals: { current_stage: controller.controller_path }
     .wrap
       %header.page-header
         .navbar
-          - if params[:controller] == 'core/projects' and params[:action] == 'news'
-            =render 'core/projects/top_menu_news'
+          - if params[:controller] == 'core/projects' and (params[:action] == 'news' or params[:action] == 'users')
+            =render 'core/projects/top_menu_general'
           - else
             =render 'top_menu'
       .content.container

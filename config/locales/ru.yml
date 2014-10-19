@@ -94,6 +94,7 @@ ru:
     sign_up: "Зарегистрироваться"
     news: "Новости"
     general_news: "Общие новости"
+    general_rating: "Общий рейтинг"
     list_projects: "Список процедур"
     analytics: "Аналитика"
     vote_result: Результаты голосования
@@ -525,6 +526,8 @@ ru:
     warning: Обратите внимание!
     discuss: ТРЕБУЕТ ОБСУЖДЕНИЯ
     important: ВАЖНОЕ
+    general_news: ВСЕ НОВОСТИ
+    general_rating: ВСЕ УЧАСТНИКИ
     improve:
       name: Доработать
       problem: Неоформленные проблемы
