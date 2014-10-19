@@ -13,7 +13,7 @@ class User < ActiveRecord::Base
   attr_accessible :login, :nickname, :anonym, :secret,
                   :dateActivation, :dateLastEnter, :dateRegistration, :email, :faculty, :group,
                   :name, :string, :string, :surname, :validate, :vkid,
-                  :score, :score_a, :score_g, :score_o, :type_user
+                  :score, :score_a, :score_g, :score_o, :type_user,:last_seen_news
 
   has_many :core_project_scores, class_name: 'Core::ProjectScore'
   has_many :help_users_answerses, class_name: 'Help::UsersAnswers'
@@ -60,10 +60,11 @@ class User < ActiveRecord::Base
     if prime_admin?
       Core::Project.order(:id)
     else
-      opened_projects = Core::Project.where(type_access: [0, 3]).club_projects(self)
+      opened_projects = Core::Project.where(type_access: [0, 3])
+      club_projects = (self.cluber? or self.boss?) ? Core::Project.where(type_access: 1) : []
       closed_projects = self.projects.where(core_projects: {type_access: 2})
-      projects = opened_projects | closed_projects
-      projects.sort_by { |c| c.id }
+      projects = opened_projects | club_projects | closed_projects
+      projects.sort_by { |c| -c.id }
     end
   end
 

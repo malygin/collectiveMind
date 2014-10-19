@@ -294,6 +294,10 @@ def validate_not_have_admin_links_for_user(project)
   expect(page).not_to have_link('change_stage', :href => next_stage_core_project_path(project))
   expect(page).not_to have_link('list_projects', :text => 'Список процедур', :href => list_projects_path)
 end
+def validate_not_have_admin_links_for_moderator(project)
+  expect(page).not_to have_link('change_stage', :href => next_stage_core_project_path(project))
+  expect(page).not_to have_link('list_projects', :text => 'Список процедур', :href => list_projects_path)
+end
 
 def validate_not_have_moderator_links_for_user(project)
   expect(page).not_to have_link('go_to_club_rating', :text => 'Клубный рейтинг', :href => users_rc_users_path(project))
@@ -375,6 +379,13 @@ def prepare_life_tape(project,user)
   @aspect_post1 = ActiveRecord::Base.connection.execute("insert into discontent_aspects_life_tape_posts (discontent_aspect_id,life_tape_post_id) values (#{@aspect1.id},#{@post1.id})")
   @aspect_post1 = ActiveRecord::Base.connection.execute("insert into discontent_aspects_life_tape_posts (discontent_aspect_id,life_tape_post_id) values (#{@aspect2.id},#{@post2.id})")
   @comment1 = FactoryGirl.create :life_tape_comment, post: @post1, user: user, content: 'comment 1'
+end
+
+
+def prepare_journal(project,user)
+  @journal_today = FactoryGirl.create :journal, project: project, user: user, body: 'news_today', created_at: Time.zone.now.utc.to_date
+  @journal_yesterday = FactoryGirl.create :journal, project: project, user: user, body: 'news_yesterday', created_at: Time.zone.now.utc.to_date - 1
+  @journal_older = FactoryGirl.create :journal, project: project, user: user, body: 'news_older', created_at: Time.zone.now.utc.to_date - 2
 end
 
 def prepare_awards

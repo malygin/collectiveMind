@@ -16,6 +16,7 @@
 #= require tinymce
 #= require jquery.remotipart
 #= require jquery.magnific-popup.min
+#= require bootstrap-colorpicker
 
 # @todo load initialization
 $ ->
@@ -26,8 +27,8 @@ $ ->
     image:
       verticalFit: true
 
-
-
+  $("#color").colorpicker().on "changeColor", (ev) ->
+    $("#color-holder").css "backgroundColor", ev.color.toHex()
 
   $sidebar = $("#sidebar")
 

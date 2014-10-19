@@ -278,4 +278,10 @@ class Discontent::PostsController < PostsController
       format.js
     end
   end
+
+  def vote_result
+    @project = Core::Project.find(params[:project])
+    @posts = voting_model.where(project_id: @project, status: [2,4])
+  end
+
 end

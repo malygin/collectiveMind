@@ -364,6 +364,8 @@ ActiveRecord::Schema.define(version: 20141018163608) do
     t.string   "secret"
     t.string   "secret2"
     t.string   "secret3"
+    t.string   "color"
+    t.string   "code"
     t.boolean  "advices_discontent"
     t.boolean  "advices_concept"
   end
@@ -948,6 +950,7 @@ ActiveRecord::Schema.define(version: 20141018163608) do
     t.integer  "second_id"
     t.boolean  "personal",      default: false
     t.string   "body2"
+    t.boolean  "visible",       default: true
   end
 
   add_index "journals", ["created_at"], name: "index_journals_on_created_at", using: :btree
@@ -1472,6 +1475,7 @@ ActiveRecord::Schema.define(version: 20141018163608) do
     t.datetime "last_seen"
     t.integer  "type_user"
     t.integer  "role_stat"
+    t.datetime "last_seen_news"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree

@@ -15,7 +15,7 @@
 //@import "lib/_select2";
 @import "lib/_bootstrap-wysihtml5";
 //@import "lib/_bootstrap-switch";
-//@import "lib/_bootstrap-colorpicker";
+@import "lib/_bootstrap-colorpicker";
 //@import "lib/_jqvmap";
 //@import "lib/_fullcalendar";
 //@import "lib/_jquery.fileupload-ui";
@@ -96,6 +96,14 @@ $brand-estimate:        #663505 !default;
 }
 .note_text {
   text-decoration: none !important;
+}
+
+.unread_news {
+  background-color: #9934E9;
+}
+
+.help-orange {
+  color: #ebcd70;
 }
 
 .discuss_comment {

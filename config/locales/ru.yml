@@ -93,7 +93,11 @@ ru:
     sign_out: "Выйти"
     sign_up: "Зарегистрироваться"
     news: "Новости"
+    general_news: "Общие новости"
+    general_rating: "Общий рейтинг"
     list_projects: "Список процедур"
+    analytics: "Аналитика"
+    vote_result: Результаты голосования
     settings:
       settings_admin: 'Настройки Администратора'
       settings_title: 'Настройки'
@@ -247,6 +251,8 @@ ru:
       prepare: Подготовка
       edit: Форма редактирования процедуры
       new: Форма создания новой процедуры
+      code: Код
+      color: Цвет
 
     aspect:
       title: 'Добавление новой темы'
@@ -521,6 +527,8 @@ ru:
     warning: Обратите внимание!
     discuss: ТРЕБУЕТ ОБСУЖДЕНИЯ
     important: ВАЖНОЕ
+    general_news: ВСЕ НОВОСТИ
+    general_rating: ВСЕ УЧАСТНИКИ
     improve:
       name: Доработать
       problem: Неоформленные проблемы

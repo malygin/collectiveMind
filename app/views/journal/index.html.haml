@@ -12,7 +12,18 @@
       .wrapper
         .text-center
           = will_paginate @journals_feed
+
         - @journals_feed.each do |journal|
+          - if journal.created_at.to_date == Time.zone.now.utc.to_date and @j_count[:today] == 0
+            %h4 Сегодня
+            -@j_count[:today]+=1
+          -elsif journal.created_at.to_date == Time.zone.now.utc.to_date - 1 and @j_count[:yesterday] == 0
+            %h4 Вчера
+            -@j_count[:yesterday]+=1
+          -elsif journal.created_at.to_date < Time.zone.now.utc.to_date - 1 and @j_count[:older] == 0
+            %h4 Ранее
+            -@j_count[:older]+=1
+
           %section.feed-item
             .icon.pull-left
               %i(class="#{journal_icon(journal)}")
@@ -23,6 +34,7 @@
 
               = journal_parser(journal, @project.id).html_safe
               %br
-              .time.pull-left=Russian::strftime(journal.created_at, '%d %B %k:%M:%S ')
+              .time.pull-left(style="color:#cabc7d;")=Russian::strftime(journal.created_at, '%d %B %k:%M:%S ')
+
         .text-center
           = will_paginate @journals_feed

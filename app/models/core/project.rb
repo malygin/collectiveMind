@@ -30,7 +30,8 @@ class Core::Project < ActiveRecord::Base
 # 10 disabled
 
   attr_accessible :desc, :postion, :secret, :type_project, :name, :short_desc, :knowledge, :status, :type_access,
-                  :url_logo, :stage1, :stage2, :stage3, :stage4, :stage5, :advices_concept, :advices_discontent
+                  :url_logo, :stage1, :stage2, :stage3, :stage4, :stage5, :color, :code, :advices_concept, :advices_discontent
+
 
   has_many :life_tape_posts, -> { where status: 0 }, class_name: 'LifeTape::Post'
   has_many :aspects, class_name: 'Discontent::Aspect'
@@ -59,7 +60,7 @@ class Core::Project < ActiveRecord::Base
 
   has_many :essays, -> { where status: 0 }, class_name: 'Essay::Post'
   #has_many :project_score_users, class_name: 'User', through: :core_project_scores, source: :user
-  scope :club_projects, ->(user) { where(type_access: 1) if user.cluber? }
+  scope :club_projects, ->(user) { where(type_access: 1) if user.cluber? or user.boss? }
 
   LIST_STAGES = {1 => {name: 'Сбор информации', type_stage: :life_tape_posts, status: [0, 1, 2, 20]},
                  2 => {name: 'Сбор несовершенств', type_stage: :discontent_posts, status: [3, 4, 5, 6]},

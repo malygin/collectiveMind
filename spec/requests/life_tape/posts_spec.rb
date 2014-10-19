@@ -104,7 +104,7 @@ describe 'Life Tape ' do
         expect(page).to have_selector 'textarea#comment_text_area'
 
         validate_default_links_and_sidebar(project,moderator)
-        validate_not_have_admin_links_for_user(project)
+        validate_not_have_admin_links_for_moderator(project)
         validate_have_moderator_links(project)
 
         validation_visit_links_for_user(project,moderator)
