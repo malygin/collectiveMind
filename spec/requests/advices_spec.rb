@@ -71,13 +71,13 @@ describe 'Advices' do
     end
 
     context 'create', js: true do
-      let(:text_advice) { 'Очень хороший совет' }
-      subject { -> {
+      before do
+        text_advice = 'Очень хороший совет'
         fill_in 'advice_content', with: text_advice
         click_button 'send_advice'
         expect(page).to have_content I18n.t('discontent.advice_success_created')
         expect(page).to have_content text_advice
-      } }
+      end
 
       it { expect change(Advice.unapproved, :count).by(1) }
 
@@ -111,21 +111,25 @@ describe 'Advices' do
       end
     end
 
-    context 'correct link to advisable' do
-      it 'to discontent' do
-        #@todo
-        # within :css, "#post_advice_#{@advice_unapproved.id}" do
-        #   expect(page).to have_content @advice_unapproved.adviseable.content
-        # end
-        # click_link "open_post_#{@advice_unapproved.adviseable.id}"
-        # expect(current_path) == discontent_post_path(project, @advice_unapproved.adviseable)
-      end
-      it 'to concept'
-    end
-
     context 'discuss with moderator' do
-      it 'show comment'
-      it 'show in notifications'
+      before do
+        @comment = create :advice_comment, user: moderator, advice: @advice_unapproved
+        visit discontent_post_path(project, @discontent1)
+      end
+
+      it 'show comment' do
+        expect(page).to have_content @comment.content
+      end
+
+      it 'show in notifications' do
+
+        within :css, 'span.count' do
+          expect(page).to have_content '1'
+        end
+        within :css, 'ul#messages-menu' do
+          expect(page).to have_content '1'
+        end
+      end
     end
 
     context 'set useful', js: true do
@@ -136,7 +140,9 @@ describe 'Advices' do
       end
 
       context 'author of post' do
-        subject { -> { click_link "set_useful_#{@advice_for_useful.id}" } }
+        before do
+          click_link "set_useful_#{@advice_for_useful.id}"
+        end
 
         it { expect change(Advice.where(useful: true), :count).by(1) }
 
@@ -147,6 +153,7 @@ describe 'Advices' do
         it 'show in notification' do
           sign_out
           sign_in user
+          visit discontent_post_path(project, @discontent1)
           within :css, 'span.count' do
             expect(page).to have_content '1'
           end
@@ -188,11 +195,11 @@ describe 'Advices' do
     end
 
     context 'approve', js: true do
-      subject { -> {
+      before do
         click_link "approve_advice_#{@advice_unapproved.id}"
-        expect(page).to have_content I18n.t('discontent.advice_success_approved')
-        expect(page).not_to have_content @advice_unapproved.content
-      } }
+      end
+
+      it { expect(page).to have_content I18n.t('discontent.advice_success_approved') }
 
       it { expect change(Advice.unapproved, :count).by(-1) }
 
@@ -203,12 +210,12 @@ describe 'Advices' do
       it 'show in news' do
         visit journals_path(project)
         expect(page).to have_content @advice_unapproved.content[0..100]
-        expect(page).to have_content @advice_unapproved.user
       end
 
       it 'show in personal notification' do
         sign_out
         sign_in user
+        visit discontent_post_path(project, @discontent1)
         within :css, 'span.count' do
           expect(page).to have_content '1'
         end
@@ -227,18 +234,40 @@ describe 'Advices' do
     end
 
     context 'discuss with author advice', js: true do
+      let(:text_comment) { text_comment = 'Хороший совет, но нужно обсудить' }
+
       before do
-        @comment = create :advice_comment, user: user, advice: @advice_unapproved
+        fill_in "comment_text_for_#{@advice_unapproved.id}", with: text_comment
+        click_button "send_comment_for_#{@advice_unapproved.id}"
         visit advices_path(project)
       end
 
-      it 'create comment' do
-        text_comment = 'Хороший совет, но нужно обсудить'
-        expect {
-          fill_in "comment_text_for_#{@advice_unapproved.id}", with: text_comment
-          click_button "send_comment_for_#{@advice_unapproved.id}"
-          expect(page).to have_content text_comment
-        }.to change(AdviceComment, :count).by(1)
+      it { expect change(AdviceComment, :count).by(1) }
+
+      it { expect(page).to have_content text_comment }
+
+      it { expect change(Journal, :count).by(1) }
+    end
+
+    context 'correct link to advisable' do
+      it 'to discontent' do
+        advice = create :advice_approved, user: user, adviseable: @discontent1
+        visit discontent_post_path(project, @discontent1)
+        within :css, "#post_advice_#{advice.id}" do
+          expect(page).to have_content advice.adviseable.content
+          click_link "open_post_#{advice.adviseable.id}"
+        end
+        expect(current_path) == discontent_post_path(project, advice.adviseable)
+      end
+
+      it 'to concept' do
+        advice = create :advice_approved, user: user, adviseable: @concept1
+        visit concept_post_path(project, @concept1)
+        within :css, "#post_advice_#{advice.id}" do
+          expect(page).to have_content advice.adviseable.content
+        end
+        click_link "open_post_#{advice.adviseable.id}"
+        expect(current_path) == concept_post_path(project, advice.adviseable)
       end
     end
   end
