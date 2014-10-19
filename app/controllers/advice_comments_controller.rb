@@ -12,6 +12,12 @@ class AdviceCommentsController < ApplicationController
     @advice_comment = @advice.comments.new(advice_comment_params)
     @advice_comment.user = current_user
     @advice_comment.save
+    unless current_user?(@advice.user)
+      current_user.journals.build(type_event: 'my_advice_commented', project: @project,
+                                  user_informed: @advice.user,
+                                  body: "#{trim_content(@advice.content)}",
+                                  first_id: @advice.id, personal: true, viewed: false).save!
+    end
     respond_to do |format|
       format.js
     end

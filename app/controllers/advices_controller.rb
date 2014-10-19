@@ -42,18 +42,20 @@ class AdvicesController < ApplicationController
 
   def approve
     @advice.update_attributes! approved: true
-    current_user.journals.build(type_event: 'advice_approve', body: trim_content(@advice.content),
+    @advice.user.journals.build(type_event: 'advice_approve', body: trim_content(@advice.content),
                                 first_id: @advice.id, project: @project).save!
-    current_user.add_score(type: :approve_advice)
+    @advice.user.add_score(type: :approve_advice)
     current_user.journals.build(type_event: 'my_advice_approved', project: @project,
+                                user_informed: @advice.user,
                                 body: "#{trim_content(@advice.content)}",
                                 first_id: @advice.id, personal: true, viewed: false).save!
   end
 
   def useful
     @advice.update_attributes! useful: true
-    current_user.add_score(type: :useful_advice)
-    current_user.journals.build(type_event: 'my_advice_approved', project: @project,
+    @advice.user.add_score(type: :useful_advice)
+    current_user.journals.build(type_event: 'my_advice_useful', project: @project,
+                                user_informed: @advice.user,
                                 body: "#{trim_content(@advice.content)}",
                                 first_id: @advice.id, personal: true, viewed: false).save!
     respond_to do |format|
@@ -70,7 +72,7 @@ class AdvicesController < ApplicationController
 
   private
   def only_author_of_post
-    redirect_back_or root_url unless current_user?(@advice.adviseable.user)
+    redirect_back_or project_path(@project) unless current_user?(@advice.adviseable.user)
   end
 
   def only_moderators
