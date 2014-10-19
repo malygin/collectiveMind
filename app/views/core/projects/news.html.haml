@@ -24,13 +24,13 @@
               .icon.pull-left
                 %i(class="#{journal_icon(journal)}")
               .feed-item-body
-                - if journal.user
+                - if journal.user and journal.project
                   = link_to journal.user, user_path(journal.project,journal.user)
                   = render partial: '/shared/user_online', object: journal.user
 
                 = journal_parser(journal, journal.project_id).html_safe
                 %br
-                = link_to journal.project.name, "/project/#{journal.project_id}", class: "btn btn-xs", style: "background-color:#{journal.project.color ? journal.project.color : ''};"
+                = link_to journal.project.name, "/project/#{journal.project_id}", class: "btn btn-xs", style: "background-color:#{journal.project.color ? journal.project.color : ''};" if journal.project
                 %br
                 .time.pull-left(style="color:#cabc7d;")=Russian::strftime(journal.created_at, '%d %B %k:%M:%S ')
 

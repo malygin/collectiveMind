@@ -12,7 +12,7 @@
   -else
     %span(id="what_content_#{post_content.id}")=post_content.content
 
-  %ul.ul-union-list(id="post_content_#{post_content.id}" style="list-style: disc inside;" )
+  %ul.ul-union-list(id="post_content_#{post_content.id}" style="list-style: disc inside;")
     -post_content.discontent_posts.each do |dp|
       -if @remove_able
         %input#check-discontent.pull-left{name: "check_discontent[#{dp.id}]", type: "checkbox", checked: grouped_discontent?(dp) ? true : false }/
