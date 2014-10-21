@@ -19,7 +19,7 @@ module JournalHelper
         'fa fa-plus color-red'
       when 'discontent_post_update'
         'fa fa-edit color-red'
-      when 'discontent_comment_save'
+      when 'discontent_comment','save my_discontent_comment'
         'fa fa-comment color-red'
 
       when 'life_tape_post_save'
@@ -29,11 +29,16 @@ module JournalHelper
       when 'award_1like', 'award_3likes', 'award_5likes', 'award_15likes', 'award_50likes',
           'award_1imperfection', 'award_3imperfection', 'award_5imperfection', 'award_15imperfection',
           'award_1innovation', 'award_3innovation', 'award_5innovation', 'award_15innovation',
-          'award_100points',   'award_500points', 'award_1000points', 'award_3000points'
+          'award_100points',   'award_500points', 'award_1000points', 'award_3000points', 'my_add_score_discontent', 'my_add_score_comment',
+          'my_award_1like', 'my_award_3likes', 'my_award_5likes', 'my_award_15likes', 'my_award_50likes',
+          'my_award_1imperfection', 'my_award_3imperfection', 'my_award_5imperfection', 'my_award_15imperfection',
+          'my_award_1innovation', 'my_award_3innovation', 'my_award_5innovation', 'my_award_15innovation',
+          'my_award_100points', 'my_award_500points', 'my_award_1000points', 'my_award_3000points'
         'fa fa-trophy '
       when 'life_tape_comment_discuss_stat', 'life_tape_comment_approve_status'
           'fa color-teal  fa-exclamation'
-      when 'discontent_post_comment_stat','discontent_post_discuss_stat','discontent_comment_approve_status','discontent_post_approve_status'
+      when 'my_discontent_comment_discuss_stat', 'discontent_comment_discuss_stat','discontent_post_comment_stat','discontent_post_discuss_stat',
+          'discontent_comment_approve_status','discontent_post_approve_status'
         'fa color-red  fa-exclamation'
       when 'concept_comment_discuss_stat','concept_post_discuss_stat','concept_comment_approve_status','concept_post_approve_status'
         'fa color-orange  fa-exclamation'
@@ -49,6 +54,14 @@ module JournalHelper
         'fa fa-comment'
       when 'discontent_post_discuss_stat'
         'fa fa-exclamation color-red'
+      when 'my_concept_note'
+        'fa color-orange fa-hand-o-up'
+      when 'my_discontent_note'
+        'fa color-red fa-hand-o-up'
+      when 'my_life_tape_comment'
+        'fa color-teal fa-reply'
+      when 'reply_discontent_comment'
+        'fa color-red fa-reply'
     end
   end
 
