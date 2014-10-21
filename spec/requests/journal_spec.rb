@@ -113,7 +113,7 @@ describe 'Journal ' do
         expect(page).to have_content 'События'
         # expect(page).to have_content 'Сегодня'
         # expect(page).to have_content 'Вчера'
-        expect(page).to have_content 'Ранее'
+        # expect(page).to have_content 'Ранее'
         expect(page).to have_content 'news_today'
         expect(page).to have_content 'news_yesterday'
         # expect(page).to have_content 'news_older'
