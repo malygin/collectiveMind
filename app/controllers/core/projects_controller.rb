@@ -4,6 +4,10 @@ class Core::ProjectsController < ApplicationController
   #before_filter :boss_authenticate, only: [:next_stage, :pr_stage]
   before_filter :prime_admin_authenticate, only: [:next_stage, :pr_stage, :show, :new, :edit, :create, :update, :destroy, :list_projects]
   before_filter :project_by_id
+  before_action :set_core_project, only: [:show, :edit, :update, :pr_stage, :next_stage, :destroy]
+  before_filter :boss_news_authenticate , only: [:news,:users]
+  after_filter :last_seen_news , only: [:news]
+  layout 'application', only: [:news,:users]
 
   def project_by_id
     unless params[:project].nil?
@@ -43,8 +47,6 @@ class Core::ProjectsController < ApplicationController
   # GET /core/projects/1
   # GET /core/projects/1.json
   def show
-    @core_project = Core::Project.find(params[:id])
-
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @core_project }
@@ -75,13 +77,12 @@ class Core::ProjectsController < ApplicationController
   # GET /core/projects/1/edit
   def edit
     @project = Core::Project.find(params[:id])
-    @core_project = Core::Project.find(params[:id])
   end
 
   # POST /core/projects
   # POST /core/projects.json
   def create
-    @core_project = Core::Project.new(params[:core_project])
+    @core_project = Core::Project.new(core_project_params)
     @core_project.type_project = 0
     @core_project.status = 1
 
@@ -99,10 +100,8 @@ class Core::ProjectsController < ApplicationController
   # PUT /core/projects/1
   # PUT /core/projects/1.json
   def update
-    @core_project = Core::Project.find(params[:id])
-
     respond_to do |format|
-      if @core_project.update_attributes(params[:core_project])
+      if @core_project.update_attributes(core_project_params)
         format.html { redirect_to list_projects_path, success: 'Процедура успешно отредактирована' }
         format.json { head :no_content }
       else
@@ -115,7 +114,6 @@ class Core::ProjectsController < ApplicationController
   # DELETE /core/projects/1
   # DELETE /core/projects/1.json
   def destroy
-    @core_project = Core::Project.find(params[:id])
     @core_project.update_attributes(type_access: 10)
 
     respond_to do |format|
@@ -125,14 +123,63 @@ class Core::ProjectsController < ApplicationController
   end
 
   def next_stage
-    @core_project = Core::Project.find(params[:id])
     @core_project.update_column(:status, @core_project.status + 1)
+    @core_project.set_position_for_aspects if @core_project.status == 3
     redirect_to :back
   end
 
   def pr_stage
-    @core_project = Core::Project.find(params[:id])
     @core_project.update_column(:status, @core_project.status - 1)
     redirect_to :back
   end
+
+  def news
+    @project = Core::Project.find(params[:project]) if params[:project]
+    @core_projects = current_user.current_projects_for_user
+    @core_project = @core_projects.first
+    # if @project
+    #   events = Journal.events_for_my_feed @project.id, current_user.id
+    #   g = events.group_by { |e| e.first_id }
+    #   @my_journals=g.collect { |k, v| [v.first, v.size] }
+    #   @my_journals_count = @my_journals.size
+    #   @journals_feed = Journal.events_for_user_feed(@project.id).paginate(page: params[:page])
+    # end
+    if @project
+      @journals_feed_all = Journal.events_for_project(@project.project_access(current_user) ? @project.id : -1, events_ignore, check_dates).paginate(page: params[:page])
+    elsif prime_admin?
+      @journals_feed_all = Journal.events_for_all_prime(events_ignore,check_dates).paginate(page: params[:page])
+    else
+      closed_projects = current_user.projects.where(core_projects: {type_access: 2}).pluck("core_projects.id")
+      @journals_feed_all = Journal.events_for_all(list_type_projects_for_user,closed_projects==[] ? [-1] : closed_projects, events_ignore, check_dates).paginate(page: params[:page])
+    end
+    @j_count = {today:0, yesterday:0, older:0}
+  end
+
+  def users
+    @project = Core::Project.find(params[:project]) if params[:project]
+    @core_projects = current_user.current_projects_for_user
+    @core_project = @core_projects.first
+    if @project
+      if @project.type_access == 2
+        @users = @project.users_in_project.includes(:core_project_scores).where(users: {type_user: [4,5,8,nil]}).order("core_project_scores.score DESC NULLS LAST").paginate(page: params[:page])
+      else
+        @users = User.joins(:core_project_scores).where("core_project_scores.project_id = ? AND core_project_scores.score > 0", @project.id).where(users: {type_user: [4,5,8,nil]}).order("core_project_scores.score DESC").paginate(page: params[:page])
+      end
+    else
+      @users = User.where(type_user: [4,5,8,nil]).order("score DESC").paginate(page: params[:page])
+    end
+  end
+
+  private
+    def last_seen_news
+      current_user.update_attributes(last_seen_news: Time.zone.now.utc) if current_user and boss?
+    end
+
+    def set_core_project
+      @core_project = Core::Project.find(params[:id])
+    end
+
+    def core_project_params
+      params.require(:core_project).permit(:name, :type_access, :short_desc, :desc, :type_project, :code, :color, :advices_concept, :advices_discontent)
+    end
 end

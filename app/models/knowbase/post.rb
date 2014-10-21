@@ -1,6 +1,8 @@
 class Knowbase::Post < ActiveRecord::Base
   attr_accessible :content, :title, :stage, :aspect_id
 
+  validates_presence_of :title
+
   belongs_to :project, class_name: "Core::Project"
   belongs_to :discontent_aspect, class_name: 'Discontent::Aspect', foreign_key: :aspect_id
   scope :stage_knowbase_order, ->(project) { where(project_id: project).order(:stage) }

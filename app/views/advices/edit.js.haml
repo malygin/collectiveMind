@@ -1,0 +1,1 @@
+$("#post_advice_#{@advice.id} #advice_content").html("#{escape_javascript(render partial: 'form', locals: {advice: @advice, url: advice_path(@project, @advice)})}").fadeIn();

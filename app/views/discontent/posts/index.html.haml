@@ -3,12 +3,12 @@
     .body.widget-panel
       %ul.nav.nav-tabs#tab_posts
         %li#old.active
-          %a{:href => "#origin", "data-toggle" => "tab", :role => "tab"}
+          %a{href: "#origin", "data-toggle" => "tab", role: "tab"}
             ="#{t('show.discontent.origin')} #{@aspect.aspect_posts.count}"
         %li#new
-          =link_to "#{t('show.discontent.unions')} #{@project.discontent_accepted_post.count}", "/project/#{@project.id}/discontent/posts/unions", remote: true, "data-toggle" => "tab", :role => "tab"
+          =link_to "#{t('show.discontent.unions')} #{@project.discontent_accepted_post.count}", "/project/#{@project.id}/discontent/posts/unions", remote: true, "data-toggle" => "tab", role: "tab"
         %li#imp
-          %a{:href => "#improve", "data-toggle" => "tab", :role => "tab"}
+          %a{href: "#improve", "data-toggle" => "tab", role: "tab"}
             =t('show.improve.problem')
       %br
       %br

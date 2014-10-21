@@ -22,7 +22,7 @@ describe 'Life Tape ' do
 
     context 'success go to project ' do
       before do
-        click_link "go_to_open_project_#{project.id}"
+        click_link "go_to_opened_project_#{project.id}"
       end
       it 'have content for user ' do
         expect(page).to have_content @aspect1.content
@@ -54,8 +54,8 @@ describe 'Life Tape ' do
         click_link "add_child_comment_#{@comment1.id}"
         #fill_in 'comment_text_area', with: 'new comment'
         #find('#comment_text_area').set('new comment')
-        find("#child_comments_form_#{@comment1.id}").find('#comment_text_area').set "new child comment"
-        find("#child_comments_form_#{@comment1.id}").find('#send_post').click
+        find("#main_comments_form_#{@comment1.id}").find('#comment_text_area').set "new child comment"
+        find("#main_comments_form_#{@comment1.id}").find('#send_post').click
         expect(page).to have_content 'new child comment'
         #screenshot_and_open_image
       end
@@ -95,7 +95,7 @@ describe 'Life Tape ' do
 
     context 'success go to project ' do
       before do
-        click_link "go_to_open_project_#{project.id}"
+        click_link "go_to_opened_project_#{project.id}"
       end
       it 'have content for moderator ' do
         expect(page).to have_content @aspect1.content
@@ -104,7 +104,7 @@ describe 'Life Tape ' do
         expect(page).to have_selector 'textarea#comment_text_area'
 
         validate_default_links_and_sidebar(project,moderator)
-        validate_not_have_admin_links_for_user(project)
+        validate_not_have_admin_links_for_moderator(project)
         validate_have_moderator_links(project)
 
         validation_visit_links_for_user(project,moderator)
@@ -129,16 +129,29 @@ describe 'Life Tape ' do
         expect(page).to have_selector 'textarea#comment_text_area'
         expect(page).to have_link("plus_comment_#{@comment1.id}", :text => 'Выдать баллы', :href => plus_comment_life_tape_post_path(project,@comment1))
       end
+
       it 'add new comment in aspect ', js: true do
         fill_in 'comment_text_area', with: 'new comment'
         click_button 'send_post'
         expect(page).to have_content 'new comment'
       end
 
+      it 'add new comment in aspect with images ', js: true do
+        fill_in 'comment_text_area', with: 'new comment'
+        attach_file('life_tape_comment_image', "#{Rails.root}/spec/support/images/1.jpg")
+
+        click_button 'send_post'
+        expect(page).to have_content 'new comment'
+        expect(page).to have_selector 'a.image-popup-vertical-fit img'
+
+        Cloudinary::Api.delete_resources('comments/'+ page.first( 'a.image-popup-vertical-fit img')['alt'].downcase)
+      end
+
+
       it ' add new answer comment', js: true do
         click_link "add_child_comment_#{@comment1.id}"
-        find("#child_comments_form_#{@comment1.id}").find('#comment_text_area').set "new child comment"
-        find("#child_comments_form_#{@comment1.id}").find('#send_post').click
+        find("#main_comments_form_#{@comment1.id}").find('#comment_text_area').set "new child comment"
+        find("#main_comments_form_#{@comment1.id}").find('#send_post').click
         expect(page).to have_content 'new child comment'
       end
 

@@ -48,7 +48,7 @@ class Discontent::PostsController < PostsController
 
   def index
     return redirect_to action: 'vote_list' if current_user.can_vote_for(:discontent, @project)
-    @aspect = params[:asp] ? Discontent::Aspect.find(params[:asp]) : @project.proc_aspects.order(:id).first
+    @aspect = params[:asp] ? Discontent::Aspect.find(params[:asp]) : (@project.proc_aspects.first.position.nil? ? @project.proc_aspects.order(:id).first : @project.proc_aspects.order("position DESC").first)
     @accepted_posts = Discontent::Post.where(project_id: @project, status: 2)
     @comments_all = @project.problems_comments_for_improve
     @page = params[:page]
@@ -278,4 +278,10 @@ class Discontent::PostsController < PostsController
       format.js
     end
   end
+
+  def vote_result
+    @project = Core::Project.find(params[:project])
+    @posts = voting_model.where(project_id: @project, status: [2,4])
+  end
+
 end

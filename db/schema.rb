@@ -11,10 +11,34 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141007083440) do
+ActiveRecord::Schema.define(version: 20141018163608) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "advice_comments", force: true do |t|
+    t.integer  "post_advice_id"
+    t.integer  "user_id"
+    t.string   "content"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "advice_comments", ["post_advice_id"], name: "index_advice_comments_on_post_advice_id", using: :btree
+  add_index "advice_comments", ["user_id"], name: "index_advice_comments_on_user_id", using: :btree
+
+  create_table "advices", force: true do |t|
+    t.text     "content"
+    t.boolean  "approved",        default: false
+    t.integer  "user_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "adviseable_id",                   null: false
+    t.string   "adviseable_type",                 null: false
+    t.boolean  "useful"
+  end
+
+  add_index "advices", ["user_id"], name: "index_advices_on_user_id", using: :btree
 
   create_table "answers", force: true do |t|
     t.string   "text",        limit: 700
@@ -76,6 +100,8 @@ ActiveRecord::Schema.define(version: 20141007083440) do
     t.boolean  "concept_status"
     t.boolean  "discuss_status"
     t.boolean  "approve_status"
+    t.string   "image"
+    t.boolean  "isFile"
   end
 
   add_index "concept_comments", ["created_at"], name: "index_concept_comments_on_created_at", using: :btree
@@ -319,25 +345,29 @@ ActiveRecord::Schema.define(version: 20141007083440) do
   add_index "core_project_users", ["user_id"], name: "index_core_project_users_on_user_id", using: :btree
 
   create_table "core_projects", force: true do |t|
-    t.string   "name",         limit: 500
+    t.string   "name",               limit: 500
     t.text     "desc"
     t.text     "short_desc"
     t.integer  "status"
-    t.datetime "created_at",                           null: false
-    t.datetime "updated_at",                           null: false
+    t.datetime "created_at",                                 null: false
+    t.datetime "updated_at",                                 null: false
     t.string   "url_logo"
     t.integer  "type_access"
-    t.integer  "stage1",                   default: 5
-    t.integer  "stage2",                   default: 5
-    t.integer  "stage3",                   default: 5
-    t.integer  "stage4",                   default: 5
-    t.integer  "stage5",                   default: 5
+    t.integer  "stage1",                         default: 5
+    t.integer  "stage2",                         default: 5
+    t.integer  "stage3",                         default: 5
+    t.integer  "stage4",                         default: 5
+    t.integer  "stage5",                         default: 5
     t.text     "knowledge"
-    t.integer  "type_project",             default: 0
-    t.integer  "position",                 default: 0
+    t.integer  "type_project",                   default: 0
+    t.integer  "position",                       default: 0
     t.string   "secret"
     t.string   "secret2"
     t.string   "secret3"
+    t.string   "color"
+    t.string   "code"
+    t.boolean  "advices_discontent"
+    t.boolean  "advices_concept"
   end
 
   add_index "core_projects", ["status"], name: "index_core_projects_on_status", using: :btree
@@ -404,6 +434,8 @@ ActiveRecord::Schema.define(version: 20141007083440) do
     t.boolean  "discuss_status"
     t.boolean  "useful"
     t.boolean  "approve_status"
+    t.string   "image"
+    t.boolean  "isFile"
   end
 
   create_table "discontent_notes", force: true do |t|
@@ -537,6 +569,8 @@ ActiveRecord::Schema.define(version: 20141007083440) do
     t.boolean  "discuss_status"
     t.boolean  "useful"
     t.boolean  "approve_status"
+    t.string   "image"
+    t.boolean  "isFile"
   end
 
   add_index "essay_comments", ["post_id"], name: "index_essay_comments_on_post_id", using: :btree
@@ -592,6 +626,8 @@ ActiveRecord::Schema.define(version: 20141007083440) do
     t.boolean  "discuss_status"
     t.boolean  "useful"
     t.boolean  "approve_status"
+    t.string   "image"
+    t.boolean  "isFile"
   end
 
   add_index "estimate_comments", ["post_id"], name: "index_estimate_comments_on_post_id", using: :btree
@@ -914,6 +950,7 @@ ActiveRecord::Schema.define(version: 20141007083440) do
     t.integer  "second_id"
     t.boolean  "personal",      default: false
     t.string   "body2"
+    t.boolean  "visible",       default: true
   end
 
   add_index "journals", ["created_at"], name: "index_journals_on_created_at", using: :btree
@@ -964,6 +1001,8 @@ ActiveRecord::Schema.define(version: 20141007083440) do
     t.boolean  "discuss_status"
     t.boolean  "useful"
     t.boolean  "approve_status"
+    t.string   "image"
+    t.boolean  "isFile"
   end
 
   add_index "life_tape_comments", ["created_at"], name: "index_life_tape_comments_on_created_at", using: :btree
@@ -1055,6 +1094,8 @@ ActiveRecord::Schema.define(version: 20141007083440) do
     t.boolean  "discuss_status"
     t.boolean  "useful"
     t.boolean  "approve_status"
+    t.string   "image"
+    t.boolean  "isFile"
   end
 
   add_index "plan_comments", ["post_id"], name: "index_plan_comments_on_post_id", using: :btree
@@ -1434,6 +1475,7 @@ ActiveRecord::Schema.define(version: 20141007083440) do
     t.datetime "last_seen"
     t.integer  "type_user"
     t.integer  "role_stat"
+    t.datetime "last_seen_news"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree

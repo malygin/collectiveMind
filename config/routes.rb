@@ -7,6 +7,7 @@ CollectiveMind::Application.routes.draw do
     get 'aspect/:aspect/posts/'  => 'posts#index'
 
     resources :posts do
+      get :vote_result, on: :collection
       member do
         put :set_important
         put :add_comment
@@ -23,9 +24,15 @@ CollectiveMind::Application.routes.draw do
     end
   end
 
+  def advices_routes
+    resources :advices, only: [:create], controller: '/advices'
+  end
+
 devise_for :users
 get '/project/:project', to: 'core/projects#to_project'
 get '/list_projects', to: 'core/projects#list_projects'
+get '/general_news', to: 'core/projects#news'
+get '/general_rating', to: 'core/projects#users'
 
 namespace :core, shallow: true do
   resources :projects do
@@ -33,11 +40,13 @@ namespace :core, shallow: true do
       get :next_stage
       get :pr_stage
     end
-  end 
+  end
 end
 
 scope '/project/:project' do
   get '/journals', to: 'journal#index'
+  get '/general_news', to: 'core/projects#news'
+  get '/general_rating', to: 'core/projects#users'
   #get '/help/posts/0', to: 'help/posts#new_help_0'
 
   namespace :help do
@@ -59,6 +68,7 @@ scope '/project/:project' do
       put :club_toggle
       put :add_user_for_project
       put :remove_user_for_project
+      put :journal_clear
       get 'add_score/:score' => 'users#add_score'
       get 'add_score_essay/:score' => 'users#add_score_essay'
     end
@@ -119,6 +129,7 @@ scope '/project/:project' do
         put :set_grouped
       end
     end
+    advices_routes
   end
 
   post 'concept/posts/add_dispost', to: 'concept/posts#add_dispost'
@@ -134,6 +145,7 @@ scope '/project/:project' do
         put :discuss_status
       end
     end
+    advices_routes
   end
 
   put 'plan/posts/change_estimate_status', to: 'plan/posts#change_estimate_status'
@@ -179,6 +191,15 @@ scope '/project/:project' do
     namespace :essay do
       posts_routes
     end
+  end
+
+  resources :advices, only: [:index, :edit, :update, :destroy] do
+    member do
+      put :approve
+      put :useful
+      put :not_useful
+    end
+    resources :comments, only: [:new, :create, :destroy], controller: 'advice_comments'
   end
 end
 

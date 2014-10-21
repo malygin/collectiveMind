@@ -3,7 +3,7 @@ class UsersController < ApplicationController
 	#before_filter :authenticate, :only: [:edit, :update, :show]
 	before_filter :correct_user, only: [:edit, :update]
 	#before_filter :admin_user, :only: [:destroy]
-  before_filter :journal_data, only: [:index, :new, :edit, :show, :users_rc]
+  before_filter :journal_data, only: [:index, :new, :edit, :show, :users_rc, :journal_clear]
   before_filter :boss_authenticate, only: [:users_rc]
   before_filter :prime_admin_authenticate, only: [:destroy,:list_users,:add_user_for_project,:remove_user_for_project,:club_toggle,:update_score]
   before_filter :have_project_access
@@ -16,16 +16,21 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
     @project = Core::Project.find(params[:project])
     @awards = Award.all
-    add_breadcrumb  @user, user_path(@project, @user)
 
     if @user != current_user
      @journals = Journal.events_for_user_show @project.id, @user.id, 30
     else
       @journals = Journal.events_for_user_show @project.id, @user.id, 30
     end
+  end
+
+  def journal_clear
+    @project = Core::Project.find(params[:project])
+    @user = User.find(params[:id])
     if @my_journals_count > 0 and @user == current_user
       Journal.events_for_my_feed(@project.id, current_user).update_all(viewed: true)
     end
+    redirect_to :back
   end
 
 	def edit
@@ -45,7 +50,7 @@ class UsersController < ApplicationController
   def add_user_for_project
     @project = Core::Project.find(params[:project])
     @user = User.find(params[:id])
-    @user.core_project_users.create(project_id: @project.id)
+    @user.core_project_users.create(project_id: @project.id) unless @user.core_project_users.by_project(@project.id).first
     respond_to do |format|
       format.js
     end

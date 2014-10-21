@@ -20,12 +20,19 @@
         - else
           -if comment.discuss_status
             %span.label-danger=t('show.discuss')
-          -elsif comment.approve_status
+          -if comment.approve_status
             %span.label-success=t('show.important')
 
     .text
       %div{id: "comment_text_#{comment.id}"}
         =simple_format(comment.content)
+        - if comment.image
+          - if comment.isFile
+
+            = link_to  'скачать приложенный файл' , "http://res.cloudinary.com/hs2pm8fbp/raw/upload/#{comment.image}"
+          -else
+            = link_to "http://res.cloudinary.com/hs2pm8fbp/image/upload/#{comment.image}",  class: 'image-popup-vertical-fit' do
+              =cl_image_tag(comment.image, :width => 150, :height => 150, :crop => :fill)
       - if current_user?(comment.user) or boss?
         %div.redactor{id: "redactor_comment_#{comment.id}"}
           =link_to t('link.edit'), {:action => :edit_comment, :id => comment.id},:remote => true, :class=> 'btn btn-info btn-xs', id: "edit_comment_#{comment.id}"
@@ -44,7 +51,7 @@
           =link_to t('show.answer'), {:action => :add_child_comment_form, :id => comment.comment.post.id, :comment_id => comment.comment.id,:answer_id => comment.id}, :remote => true, :method => :put,  id: "add_child_comment_#{comment.id}", class: 'btn btn-success btn-xs'
 
         - if boss?
-          =link_to({action: :plus_comment, id: comment.id},  remote: true, method: :put,  id: "plus_comment_#{comment.id}") do
+          =link_to({action: :plus_comment, id: comment.id}, remote: true, method: :put,  id: "plus_comment_#{comment.id}") do
             -if comment.useful
               %span.text-danger=t('show.revert_score')
             -else
@@ -54,10 +61,12 @@
       %br
       -if comment.main_comment?
         .col-md-12
+          %div{id: "main_comments_form_#{comment.id}"}
           %br
           %div{id: "child_comments_#{comment.id}"}
             -unless comment.comments.empty?
               - comment.comments.each do |c|
                 = render partial: 'shared/comment', object: c
+      -else
+        .col-md-12
           %div{id: "child_comments_form_#{comment.id}"}
-

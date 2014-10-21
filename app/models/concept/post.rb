@@ -4,33 +4,25 @@ class Concept::Post < ActiveRecord::Base
                   :status_name, :status_content, :status_negative, :status_positive, :status_reality, :status_problems, :status_positive_r, :status_negative_r, :discuss_status,
                   :status_positive_s, :status_negative_s, :status_control, :status_control_r, :status_control_s, :status_obstacles
 
-  belongs_to :life_tape_post, class_name: "LifeTape::Post"
+  belongs_to :life_tape_post, class_name: 'LifeTape::Post'
   has_many :task_supply_pairs
-
-  has_many :post_aspects, foreign_key: 'concept_post_id', class_name: "Concept::PostAspect"
-
+  has_many :post_aspects, foreign_key: 'concept_post_id', class_name: 'Concept::PostAspect'
   has_many :voted_users, through: :final_votings, source: :user
-  has_many :final_votings, foreign_key: 'concept_post_aspect_id', class_name: "Concept::Voting"
-
+  has_many :final_votings, foreign_key: 'concept_post_aspect_id', class_name: 'Concept::Voting'
   #has_many :concept_notes, class_name: 'Concept::Note'
-
-  has_many :concept_post_discontents,-> { where concept_post_discontents: {status: [0,nil]} }, class_name: 'Concept::PostDiscontent'
+  has_many :concept_post_discontents, -> { where concept_post_discontents: {status: [0, nil]} }, class_name: 'Concept::PostDiscontent'
   has_many :concept_disposts, through: :concept_post_discontents, source: :discontent_post, class_name: 'Discontent::Post'
   has_many :concept_post_resources, class_name: 'Concept::PostResource'
+  has_many :concept_post_discontent_grouped, -> { where concept_post_discontents: {status: [1]} }, class_name: 'Concept::PostDiscontent'
+  has_many :advices, class_name: 'Advice', as: :adviseable
 
-  has_many :concept_post_discontent_grouped,-> { where concept_post_discontents: {status: [1]} }, class_name: "Concept::PostDiscontent"
-
-  scope :stat_fields_negative, ->(p){where(id: p).where("status_name = 'f' or status_content = 'f' or status_negative = 'f'
-            or status_positive = 'f' or status_control = 'f' or status_obstacles = 'f' or status_reality = 'f' or status_problems = 'f' ")}
-  scope :stat_fields_positive, ->(p){where(id: p).where("status_name = 't' and status_content = 't' and status_negative = 't'
-            and status_positive = 't' and status_control = 't' and status_obstacles = 't' and status_reality = 't' and status_problems = 't' ")}
-
-  scope :by_status, ->(p){where(status: p)}
-
+  scope :stat_fields_negative, ->(p) { where(id: p).where("status_name = 'f' or status_content = 'f' or status_negative = 'f'
+            or status_positive = 'f' or status_control = 'f' or status_obstacles = 'f' or status_reality = 'f' or status_problems = 'f' ") }
+  scope :stat_fields_positive, ->(p) { where(id: p).where("status_name = 't' and status_content = 't' and status_negative = 't'
+            and status_positive = 't' and status_control = 't' and status_obstacles = 't' and status_reality = 't' and status_problems = 't' ") }
+  scope :by_status, ->(p) { where(status: p) }
   scope :by_project, ->(p) { where(project_id: p) }
-
-  scope :by_discussions, ->(posts) { where("concept_posts.id NOT IN (#{posts.join(", ")})") unless posts.empty? }
-
+  scope :by_discussions, ->(posts) { where("concept_posts.id NOT IN (#{posts.join(', ')})") unless posts.empty? }
   scope :posts_for_discussions, ->(p) { where(project_id: p.id, status: 0).where("concept_posts.status_name = 't' and concept_posts.status_content = 't'") }
 
   def self.scope_vote_top(post)

@@ -2,9 +2,9 @@
 #= require jquery_ujs
 #= require jquery-ui
 #= require bootstrap/bootstrap.min
-#= require autocomplete-rails
-#= require bootstrap-wysihtml5
-#= require bootstrap-wysihtml5/locales/ru-RU
+#= require autocomplete-rails-dev
+# require bootstrap-wysihtml5
+# require bootstrap-wysihtml5/locales/ru-RU
 #= require selectize
 #= require liFixar/jquery.liFixar
 #= require datepicker/bootstrap-datepicker
@@ -16,9 +16,21 @@
 #= require tinymce
 #= require websocket_rails/main
 #= require moderator_chat
+#= require jquery.remotipart
+#= require jquery.magnific-popup.min
+#= require bootstrap-colorpicker
 
 # @todo load initialization
 $ ->
+  $(".image-popup-vertical-fit").magnificPopup
+    type: "image"
+    closeOnContentClick: true
+    mainClass: "mfp-img-mobile"
+    image:
+      verticalFit: true
+
+  $("#color").colorpicker().on "changeColor", (ev) ->
+    $("#color-holder").css "backgroundColor", ev.color.toHex()
 
   $sidebar = $("#sidebar")
 
@@ -147,13 +159,15 @@ $('#search_users_text').on 'change', ->
 @activate_htmleditor= ->
   tinyMCE.init
     selector: "textarea.tinymce"
-    plugins: [
-      "advlist autolink link image lists charmap print preview hr anchor pagebreak spellchecker",
+    setup: (ed) ->
+      ed.on "init", (ed) ->
+        tinyMCE.get(ed.target.id).show()
+
+    plugins:
+      ["advlist autolink link image lists charmap print preview hr anchor pagebreak spellchecker",
       "searchreplace wordcount visualblocks visualchars code fullscreen insertdatetime media nonbreaking",
-      "save table contextmenu directionality emoticons template paste textcolor"
-    ]
-    toolbar: "insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | l
-        ink image | print preview media fullpage | forecolor backcolor emoticons"
+      "save table contextmenu directionality emoticons template paste textcolor"]
+    toolbar: "insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image | print preview media fullpage | forecolor backcolor emoticons"
 
 # @todo обновление таблицы и списка
 $('#PlanTabs li#second a').on "click", (e) ->
@@ -272,14 +286,14 @@ activate_add_aspects()
 #  field = field.toString();
   position = parseInt($('#resources_'+field+' .main_resources').last().attr('position'))
   if not position then position = 1 else position+=1
-  $('#resources_'+field).append("<div class=\"main_resources\" id=\"main_#{field}_#{position}\" position=\"#{position}\"><div class=\"col-md-10\">"+"<span role=\"status\" aria-live=\"polite\" class=\"ui-helper-hidden-accessible\"></span>"+"<input class=\"form-control autocomplete ui-autocomplete-input\" data-autocomplete=\"/project/#{project}/autocomplete_concept_post_resource_concept_posts\" id=\"concept_post_resource\" min-length=\"0\" name=\"resor_#{field}[#{position}][]\" placeholder=\"Введите свой ресурс или выберите из списка\" type=\"text\" autocomplete=\"off\">"+"</div><div class=\"col-md-2\"><div class=\"pull-right\"><button class=\"btn btn-danger\" id=\"destroy_res\" onclick=\"$(this).parent().parent().parent().remove();\" title=\"Удалить ресурс\" type=\"button\">"+"<i class=\"fa fa-trash-o\"></i></button><button class=\"btn btn-warning\" id=\"desc_to_res\" onclick=\"$(this).parent().parent().parent().find('.desc_resource').show();\" title=\"Добавить описание\" type=\"button\"><i class=\"fa fa-edit\"></i></button><button class=\"btn btn-success\" id=\"plus_mean\" onclick=\"return add_new_mean_to_resource(this,'#{field2}',#{project});\" title=\"Добавить средство\" type=\"button\">"+"<i class=\"fa fa-plus\"></i></button></div></div><br><br><div class=\"desc_resource\" id=\"desc_#{field}_#{position}\" position=\"#{position}\" style=\"display:none;\">"+"<textarea class=\"form-control\" id=\"res\" name=\"res_#{field}[#{position}][]\" placeholder=\"Пояснение к ресурсу\" style=\"overflow: hidden; word-wrap: break-word; resize: horizontal; height: 50px;\"></textarea>"+"</div><div class=\"col-md-offset-1 col-md-11 means_to_resource\" id=\"means_#{field2}_#{position}\"></div></div>");
+  $('#resources_'+field).append("<div class=\"main_resources\" id=\"main_#{field}_#{position}\" position=\"#{position}\"><div class=\"col-md-8\">"+"<span role=\"status\" aria-live=\"polite\" class=\"ui-helper-hidden-accessible\"></span>"+"<input class=\"form-control autocomplete ui-autocomplete-input\" data-autocomplete=\"/project/#{project}/autocomplete_concept_post_resource_concept_posts\" id=\"concept_post_resource\" min-length=\"0\" name=\"resor_#{field}[#{position}][]\" placeholder=\"Введите свой ресурс или выберите из списка\" type=\"text\" autocomplete=\"off\">"+"</div><div class=\"col-md-4\"><div class=\"pull-right\"><button class=\"btn btn-warning\" id=\"desc_to_res\" onclick=\"$(this).parent().parent().parent().find('.desc_resource').show();\" title=\"Добавить описание\" type=\"button\"><i class=\"fa fa-edit\"></i>Описание</button><button class=\"btn btn-success\" id=\"plus_mean\" onclick=\"return add_new_mean_to_resource(this,'#{field2}',#{project});\" title=\"Добавить средство\" type=\"button\">"+"<i class=\"fa fa-plus\"></i>Средство</button><button class=\"btn btn-danger\" id=\"destroy_res\" onclick=\"$(this).parent().parent().parent().remove();\" title=\"Удалить ресурс\" type=\"button\">"+"<i class=\"fa fa-trash-o\"></i>Удалить</button></div></div><br><br><div class=\"desc_resource\" id=\"desc_#{field}_#{position}\" position=\"#{position}\" style=\"display:none;\">"+"<textarea class=\"form-control\" id=\"res\" name=\"res_#{field}[#{position}][]\" placeholder=\"Пояснение к ресурсу\" style=\"overflow: hidden; word-wrap: break-word; resize: horizontal; height: 50px;\"></textarea>"+"</div><div class=\"col-md-offset-1 col-md-11 means_to_resource\" id=\"means_#{field2}_#{position}\"></div></div>");
   autocomplete_initialized()
   $('textarea').autosize()
 
 @add_new_mean_to_resource= (el,field,project)->
 #  field = field.toString();
   position = $(el).parent().parent().parent().attr('position')
-  $('#means_'+field+'_'+position).append("<br><div class=\"main_means\" id=\"main_#{field}_#{position}\" position=\"#{position}\"><div class=\"col-md-10\">"+"<span role=\"status\" aria-live=\"polite\" class=\"ui-helper-hidden-accessible\"></span>"+"<input class=\"form-control autocomplete ui-autocomplete-input\" data-autocomplete=\"/project/#{project}/autocomplete_concept_post_mean_concept_posts\" id=\"res\" min-length=\"0\" name=\"resor_#{field}[#{position}][]\" placeholder=\"Введите свой ресурс или выберите из списка\" type=\"text\" autocomplete=\"off\">"+"</div><div class=\"col-md-2\"><div class=\"pull-right\"><button class=\"btn btn-danger\" id=\"destroy_res\" onclick=\"$(this).parent().parent().parent().remove();\" title=\"Удалить ресурс\" type=\"button\">"+"<i class=\"fa fa-trash-o\"></i></button><button class=\"btn btn-warning\" id=\"desc_to_res\" onclick=\"$(this).parent().parent().parent().find('.desc_mean').show();\" title=\"Добавить описание\" type=\"button\"><i class=\"fa fa-edit\"></i></button></div></div><br><br><div class=\"desc_mean\" id=\"desc_#{field}_#{position}\" position=\"#{position}\" style=\"display:none;\">"+"<textarea class=\"form-control\" id=\"res\" name=\"res_#{field}[#{position}][]\" placeholder=\"Пояснение к ресурсу\" style=\"overflow: hidden; word-wrap: break-word; resize: horizontal; height: 50px;\"></textarea><br></div></div>");
+  $('#means_'+field+'_'+position).append("<br><div class=\"main_means\" id=\"main_#{field}_#{position}\" position=\"#{position}\"><div class=\"col-md-8\">"+"<span role=\"status\" aria-live=\"polite\" class=\"ui-helper-hidden-accessible\"></span>"+"<input class=\"form-control autocomplete ui-autocomplete-input\" data-autocomplete=\"/project/#{project}/autocomplete_concept_post_mean_concept_posts\" id=\"res\" min-length=\"0\" name=\"resor_#{field}[#{position}][]\" placeholder=\"Введите свой ресурс или выберите из списка\" type=\"text\" autocomplete=\"off\">"+"</div><div class=\"col-md-4\"><div class=\"pull-right\"><button class=\"btn btn-warning\" id=\"desc_to_res\" onclick=\"$(this).parent().parent().parent().find('.desc_mean').show();\" title=\"Добавить описание\" type=\"button\"><i class=\"fa fa-edit\"></i>Описание</button><button class=\"btn btn-danger\" id=\"destroy_res\" onclick=\"$(this).parent().parent().parent().remove();\" title=\"Удалить ресурс\" type=\"button\">"+"<i class=\"fa fa-trash-o\"></i>Удалить</button></div></div><br><br><div class=\"desc_mean\" id=\"desc_#{field}_#{position}\" position=\"#{position}\" style=\"display:none;\">"+"<textarea class=\"form-control\" id=\"res\" name=\"res_#{field}[#{position}][]\" placeholder=\"Пояснение к ресурсу\" style=\"overflow: hidden; word-wrap: break-word; resize: horizontal; height: 50px;\"></textarea><br></div></div>");
   autocomplete_initialized()
   $('textarea').autosize()
 

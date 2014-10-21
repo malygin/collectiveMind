@@ -179,7 +179,7 @@ describe 'Core Project ' do
         create_invite_for_user(closed_project_for_invite, user)
         visit root_path
         #click_link "go_to_closed_project[href='/project/#{closed_project_for_invite.id}']"
-        find_link("go_to_closed_project", text: "Перейти к процедуре", href: "/project/#{closed_project_for_invite.id}").click
+        find_link("go_to_closed_project_#{closed_project_for_invite.id}", text: "Перейти к процедуре", href: "/project/#{closed_project_for_invite.id}").click
         validate_default_links_and_sidebar(closed_project_for_invite, user)
         validate_not_have_admin_links_for_user(project)
         validate_not_have_moderator_links_for_user(project)
@@ -190,7 +190,7 @@ describe 'Core Project ' do
       it 'success refirect if closed stage ' do
         create_invite_for_user(closed_project_for_invite, user)
         visit root_path
-        find_link("go_to_closed_project", text: "Перейти к процедуре", href: "/project/#{closed_project_for_invite.id}").click
+        find_link("go_to_closed_project_#{closed_project_for_invite.id}", text: "Перейти к процедуре", href: "/project/#{closed_project_for_invite.id}").click
         visit discontent_posts_path(closed_project_for_invite)
         expect(page.current_path).to eq life_tape_posts_path(closed_project_for_invite)
       end
@@ -342,7 +342,7 @@ describe 'Core Project ' do
       it 'success go to closed project for invited club user ' do
         create_invite_for_user(closed_project_for_invite, club_user)
         visit root_path
-        find_link("go_to_closed_project", text: "Перейти к процедуре", href: "/project/#{closed_project_for_invite.id}").click
+        find_link("go_to_closed_project_#{closed_project_for_invite.id}", text: "Перейти к процедуре", href: "/project/#{closed_project_for_invite.id}").click
         validate_default_links_and_sidebar(closed_project_for_invite, club_user)
         validate_not_have_admin_links_for_user(project)
         validate_not_have_moderator_links_for_user(project)
@@ -353,7 +353,7 @@ describe 'Core Project ' do
       it 'success refirect if closed stage ' do
         create_invite_for_user(closed_project_for_invite, club_user)
         visit root_path
-        find_link("go_to_closed_project", text: "Перейти к процедуре", href: "/project/#{closed_project_for_invite.id}").click
+        find_link("go_to_closed_project_#{closed_project_for_invite.id}", text: "Перейти к процедуре", href: "/project/#{closed_project_for_invite.id}").click
         visit discontent_posts_path(closed_project_for_invite)
         expect(page.current_path).to eq life_tape_posts_path(closed_project_for_invite)
       end
@@ -367,14 +367,13 @@ describe 'Core Project ' do
     end
 
     it 'have base link ' do
-      expect(page).to have_link('user_profile', text: moderator.to_s, href: user_path(moderator.current_projects_for_user.last, moderator))
+      expect(page).to have_link('user_profile', text: moderator.to_s, href: user_path(moderator.current_projects_for_user.last , moderator))
       expect(page).to have_link('sign_out', text: 'Выйти', href: destroy_user_session_path)
     end
 
     it 'have content in profile ' do
       click_link 'user_profile'
       expect(page).to have_content 'Профиль'
-      expect(page).to have_content 'Достижения'
       expect(page).to have_content 'Активность'
     end
 
@@ -503,9 +502,9 @@ describe 'Core Project ' do
       it 'success go to closed project for invited club user ' do
         create_invite_for_user(closed_project_for_invite, moderator)
         visit root_path
-        find_link("go_to_closed_project", text: "Перейти к процедуре", href: "/project/#{closed_project_for_invite.id}").click
+        find_link("go_to_closed_project_#{closed_project_for_invite.id}", text: "Перейти к процедуре", href: "/project/#{closed_project_for_invite.id}").click
         validate_default_links_and_sidebar(closed_project_for_invite, moderator)
-        validate_not_have_admin_links_for_user(project)
+        validate_not_have_admin_links_for_moderator(project)
         validation_visit_links_for_user(closed_project_for_invite, moderator)
         validation_visit_not_have_links_for_moderator(closed_project_for_invite, moderator)
         validation_visit_links_for_moderator(project)
@@ -514,7 +513,7 @@ describe 'Core Project ' do
       it 'success refirect if closed stage ' do
         create_invite_for_user(closed_project_for_invite, moderator)
         visit root_path
-        find_link("go_to_closed_project", text: "Перейти к процедуре", href: "/project/#{closed_project_for_invite.id}").click
+        find_link("go_to_closed_project_#{closed_project_for_invite.id}", text: "Перейти к процедуре", href: "/project/#{closed_project_for_invite.id}").click
         visit discontent_posts_path(closed_project_for_invite)
         expect(page.current_path).to eq life_tape_posts_path(closed_project_for_invite)
       end
@@ -537,7 +536,6 @@ describe 'Core Project ' do
     it 'have content in profile ' do
       click_link 'user_profile'
       expect(page).to have_content 'Профиль'
-      expect(page).to have_content 'Достижения'
       expect(page).to have_content 'Активность'
     end
 
@@ -555,7 +553,7 @@ describe 'Core Project ' do
       end
 
       it 'success go to closed project for prime admin ' do
-        find_link("go_to_closed_project", text: "Перейти к процедуре", href: "/project/#{closed_project.id}").click
+        find_link("go_to_closed_project_#{closed_project.id}", text: "Перейти к процедуре", href: "/project/#{closed_project.id}").click
         validate_default_links_and_sidebar(closed_project, prime_admin)
         validate_have_prime_admin_links(closed_project)
         validate_have_moderator_links(closed_project)
@@ -564,7 +562,7 @@ describe 'Core Project ' do
       end
 
       it 'success refirect if closed stage ' do
-        find_link("go_to_closed_project", text: "Перейти к процедуре", href: "/project/#{closed_project.id}").click
+        find_link("go_to_closed_project_#{closed_project.id}", text: "Перейти к процедуре", href: "/project/#{closed_project.id}").click
         visit discontent_posts_path(closed_project)
         expect(page.current_path).to eq life_tape_posts_path(closed_project)
       end

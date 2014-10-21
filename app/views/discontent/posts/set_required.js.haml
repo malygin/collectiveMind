@@ -1,3 +1,9 @@
 alert('#{t('show.discontent.required_success')}');
+if ($('#set_required_#{@post.id} span').attr('class')) {
 $('#set_required_#{@post.id} span').html('#{t('show.discontent.required')}');
 $('#set_required_#{@post.id} span').removeClass('text-warning').addClass('text-success');
+}
+else {
+$('#set_required_#{@post.id}').html('#{t('show.discontent.required')}');
+$('#set_required_#{@post.id}').removeClass('btn-default').addClass('btn-success');
+}

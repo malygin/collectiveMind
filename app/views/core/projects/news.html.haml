@@ -1,0 +1,107 @@
+.col-md-9
+  %section.widget
+    %header
+      %h3.text-center=t('show.journal_title')
+
+    .body
+      .feed
+        .wrapper
+          .text-center
+            = will_paginate @journals_feed_all
+
+          - @journals_feed_all.each do |journal|
+            - if journal.created_at.to_date == Time.zone.now.to_date and @j_count[:today] == 0
+              %h4 Сегодня
+              -@j_count[:today]+=1
+            -elsif journal.created_at.to_date == Time.zone.now.to_date - 1 and @j_count[:yesterday] == 0
+              %h4 Вчера
+              -@j_count[:yesterday]+=1
+            -elsif journal.created_at.to_date < Time.zone.now.to_date - 1 and @j_count[:older] == 0
+              %h4 Ранее
+              -@j_count[:older]+=1
+
+            %section.feed-item(class="#{(current_user.last_seen_news.nil? ? journal.created_at : current_user.last_seen_news) < journal.created_at ? 'unread_news': ''}")
+              .icon.pull-left
+                %i(class="#{journal_icon(journal)}")
+              .feed-item-body
+                - if journal.user and journal.project
+                  = link_to journal.user, user_path(journal.project,journal.user)
+                  = render partial: '/shared/user_online', object: journal.user
+
+                = journal_parser(journal, journal.project_id).html_safe
+                %br
+                = link_to journal.project.name, "/project/#{journal.project_id}", class: "btn btn-xs", style: "background-color:#{journal.project.color ? journal.project.color : ''};" if journal.project
+                %br
+                .time.pull-left(style="color:#cabc7d;")=Russian::strftime(journal.created_at, '%d %B %k:%M:%S ')
+
+          .text-center
+            = will_paginate @journals_feed_all
+
+.col-md-3
+  %section.widget
+    %header
+      %h3 Фильтры
+    .body
+      = form_tag(@project ? "/project/#{@project.id}/general_news" : general_news_path, {method: :get, id: 'filter_news'}) do
+        %h4 Даты
+        .form-group(style="margin-left:0;")
+          %label{for: "date_begin"} С
+          =text_field_tag "date_begin",params[:date_begin], class: 'form-control datepicker', id:'date_begin'
+        .form-group(style="margin-left:0;")
+          %label{for: "date_end"} По
+          =text_field_tag "date_end",params[:date_end], class: 'form-control datepicker', id:'date_end'
+        %input{:name => "check_date_all", :type => "checkbox", :checked => params[:check_date_all] ? true : false} Все
+
+        -#%h4 Статус
+        -#%input{:name => "check_like", :type => "checkbox"} Пролайкано
+        -#%br
+        -#%input{:name => "check_unlike", :type => "checkbox"} Не пролайкано
+        -#%br
+        -#%input{:name => "check_discuss", :type => "checkbox"} Требует обсуждения
+        -#%br
+        -#%input{:name => "check_improve", :type => "checkbox"} Важное
+        -#%br
+        -#%input{:name => "check_problem", :type => "checkbox"} Проблема
+        -#%br
+        -#%input{:name => "check_idea", :type => "checkbox"} Идея
+        -#%br
+        -#%input{:name => "check_improve", :type => "checkbox"} Доработано
+        -#%br
+        -#%input{:name => "check_has_note", :type => "checkbox"} Содержит замечания
+        -#%br
+        -#%input{:name => "check_not_has_note", :type => "checkbox"} Не содержит замечания
+        -#%br
+        -#%input{:name => "check_status_all", :type => "checkbox"} Все
+        -#%h4 Тип контента
+        -#%input{:name => "check_comment", :type => "checkbox"} Комментарии
+        -#%br
+        -#%input{:name => "check_discontent", :type => "checkbox"} Несовершенства
+        -#%br
+        -#%input{:name => "check_concept", :type => "checkbox"} Нововведения
+        -#%br
+        -#%input{:name => "check_plan", :type => "checkbox"} Проекты
+        -#%br
+        -#%input{:name => "check_estimate", :type => "checkbox"} Оценки
+        -#%br
+        -#%input{:name => "check_essay", :type => "checkbox"} Рефлексии
+        -#%br
+        -#%input{:name => "check_award", :type => "checkbox"} Достижения
+        -#%br
+        -#%input{:name => "check_score", :type => "checkbox"} Баллы
+        -#%br
+        -#%input{:name => "check_note", :type => "checkbox"} Замечания
+        -#%br
+        -#%input{:name => "check_type_content_all", :type => "checkbox"} Все
+        -#%h4 Тип события
+        -#%input{:name => "check_add", :type => "checkbox"} Добавление
+        -#%br
+        -#%input{:name => "check_edit", :type => "checkbox"} Редактирование
+        -#-#%br
+        -#-#%input{:name => "check_remove", :type => "checkbox"} Удаление
+        -#%br
+        -#%input{:name => "check_type_event_all", :type => "checkbox"} Все
+        %br
+        %br
+        %actions
+          %input.btn.btn-success{:type => "submit", :id  => "send_filter", :value => "Применить"}
+

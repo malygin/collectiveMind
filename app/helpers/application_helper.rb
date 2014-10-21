@@ -415,7 +415,7 @@ module ApplicationHelper
       comment = "#{get_class_for_improve(post.improve_stage)}::Comment".constantize.find(post.improve_comment)
       case post.improve_stage
         when 1
-          "| #{t('show.improved')} " + (link_to t('show.imrove_deal'), "/project/#{@project.id}/life_tape/posts?asp=#{comment.post.discontent_aspects.first.id}#comment_#{comment.id}") + (link_to comment.user, user_path(@project, comment.user))
+          "| #{t('show.improved')} " + (link_to"#{t('show.imrove_deal')} #{comment.user}", "/project/#{@project.id}/life_tape/posts?asp=#{comment.post.discontent_aspects.first.id}&req_comment=#{comment.id}#comment_#{comment.id}")
         when 2
           "| #{t('show.improved')} " + (link_to t('show.imrove_deal'), "/project/#{@project.id}/discontent/posts/#{comment.post.id}#comment_#{comment.id}") + (link_to comment.user, user_path(@project, comment.user))
         when 3
@@ -575,4 +575,50 @@ module ApplicationHelper
     end
   end
 
+
+  def page_for_comment(project,stage,first_id,second_id)
+    case stage
+      when "life_tape"
+        stage = 'LifeTape'
+      when 'discontent'
+        stage = 'Discontent'
+      when 'concept'
+        stage = 'Concept'
+      when 'plan'
+        stage = 'Plan'
+      when 'estimate'
+        stage = 'Estimate'
+      when 'essay'
+        stage = 'Essay'
+    end
+
+    comment = "#{stage}::Comment".constantize.where(id: second_id).first
+    if comment and comment.comment_id
+      second_id = comment.comment_id
+    end
+    if stage == 'LifeTape'
+      total_results = LifeTape::Comment
+      .joins("INNER JOIN life_tape_posts ON life_tape_comments.post_id = life_tape_posts.id")
+      .where("life_tape_posts.project_id = ? and life_tape_posts.aspect_id = ? and life_tape_comments.id <= ?", project, first_id, second_id)
+      .where(life_tape_comments: {comment_id: nil}).count
+    else
+      total_results = "#{stage}::Comment".constantize
+      .joins("INNER JOIN #{stage.downcase}_posts ON #{stage.downcase}_comments.post_id = #{stage.downcase}_posts.id")
+      .where("#{stage.downcase}_posts.project_id = ? and #{stage.downcase}_comments.post_id = ? and #{stage.downcase}_comments.id <= ?", project, first_id, second_id)
+      .where(comment_id: nil).count
+    end
+    page = total_results / 10 + (total_results % 10 == 0 ? 0 : 1)
+    page == 0 ? 1 : page
+  end
+
+  def link_for_aspects(asp, current_stage)
+    link = "/project/#{@project.id}/"
+    if current_stage == 'advices'
+      link += 'discontent/posts'
+    else
+      link += "#{current_stage == 'essay/posts' ? stage_for_essay(params[:stage].to_i) : current_stage}"
+    end
+    link += "?asp=#{asp.id}"
+    link
+  end
 end

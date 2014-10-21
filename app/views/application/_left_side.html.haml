@@ -4,7 +4,7 @@
       %h4=t('menu.list_aspects')
   -@project.current_aspects(current_stage).each do |asp|
     %li{class:"#{'active' if asp == @aspect}"}
-      = link_to "/project/#{@project.id}/#{current_stage == 'essay/posts' ? stage_for_essay(params[:stage].to_i) : current_stage}?asp=#{asp.id}" do
+      = link_to link_for_aspects(asp, current_stage) do
         &nbsp;
         =" #{asp.content}"
   %li
@@ -16,6 +16,32 @@
       =t('menu.reflection_stage')
       %b="(#{@project.essay_count(current_stage == 'essay/posts' ? params[:stage].to_i : number_stage(current_stage)).count})"
       -#%i.fa.fa-refresh
+  - if current_user.admin?
+    %li
+      = link_to advices_path(@project), id: 'open_unapproved_advices' do
+        = t('left_side.discontent_post_advices')
+        %b
+          = " (#{Advice.unapproved.by_project(@project).count})"
+  -if boss?
+    %li
+      = link_to "/project/#{@project.id}/#{current_stage == 'essay/posts' ? stage_for_essay(params[:stage].to_i) : current_stage}/vote_result", class: 'text-vote-result', id: 'vote_result' do
+        =t('menu.vote_result')
+
+  %li.visible-xs
+    %a{href: '/', id: 'root_page', title: t('menu.main')}
+      %i.fa.fa-home
+      =t('menu.main')
+
+  %li.visible-xs
+    =link_to t('menu.help'), help_posts_path(@project), style:'width:auto; margin-right: 10px;'
+
+  %li.visible-xs
+    =link_to t('menu.base_knowledge'), knowbase_posts_path(@project) , style:'width:auto; margin-right: 10px;'
+
+  %li.visible-xs
+    %a{:href => "/users/sign_out/", "data-method" => "delete", :id => "sign_out"}
+      %i.fa.fa-sign-out
+      =t('menu.sign_out')
 
 -#%li.panel#stage_life_tape{class:  @project.stage_style(:life_tape_posts) }
 -#  - if request.original_url.include? 'life_tape' or request.original_url.include? '/1/essay'

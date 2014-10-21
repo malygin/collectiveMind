@@ -11,6 +11,9 @@ group :development, :test do
   gem 'quiet_assets'
   gem 'grizzled-rails-logger'
   gem 'rspec-rails'
+  gem 'thin'
+  gem 'better_errors'
+  gem 'binding_of_caller'
 end
 
 group :production do
@@ -34,6 +37,7 @@ group :test do
   gem 'capybara-webkit'
   gem 'capybara-screenshot'
   gem 'headless'
+  gem "codeclimate-test-reporter", require: nil
 end
 
 gem 'foreman'
@@ -45,6 +49,9 @@ gem 'compass'
 gem 'compass-rails'
 gem 'therubyracer', '>=0.11.4'
 gem 'websocket-rails'
+
+gem 'cloudinary'
+gem 'remotipart', '~> 1.2'
 
 gem 'pg'
 gem 'activerecord-postgresql-adapter'

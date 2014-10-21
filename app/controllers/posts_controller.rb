@@ -1,10 +1,12 @@
 class PostsController < ApplicationController
   before_filter :authenticate
-  before_filter :prepare_data, only: [:index, :new, :edit, :show, :vote_list, :to_work]
-  before_filter :journal_data, only: [:index, :new, :edit, :show, :vote_list, :to_work]
+  before_filter :prepare_data, only: [:index, :new, :edit, :show, :vote_list, :vote_result, :to_work]
+  before_filter :journal_data, only: [:index, :new, :edit, :show, :vote_list, :vote_result, :to_work]
   before_filter :have_rights, only: [:edit]
   before_filter :have_project_access
   before_filter :not_open_closed_stage
+  before_filter :boss_authenticate, only: [:vote_result]
+  before_filter :comment_page, only: [:index,:show]
 
   #@todo why not use authenticate_user! from devise?
   def authenticate
@@ -83,11 +85,22 @@ class PostsController < ApplicationController
     @aspects = Discontent::Aspect.where(project_id: @project)
     post = current_model.find(params[:id])
     @main_comment = comment_model.find(params[:main_comment]) unless params[:main_comment].nil?
-    main_comment_answer = comment_model.find(params[:answer_id]) unless params[:answer_id].nil?
-    comment_user = main_comment_answer.user unless main_comment_answer.nil?
+    @main_comment_answer = comment_model.find(params[:answer_id]) unless params[:answer_id].nil?
+    comment_user = @main_comment_answer.user unless @main_comment_answer.nil?
     content = comment_user ? "#{comment_user.to_s}, " + params[name_of_comment_for_param][:content] : params[name_of_comment_for_param][:content]
-    unless  params[name_of_comment_for_param][:content]==''
-      @comment = post.comments.create(content: content, user: current_user, discontent_status: params[name_of_comment_for_param][:discontent_status], concept_status: params[name_of_comment_for_param][:concept_status], comment_id: @main_comment ? @main_comment.id : nil)
+    if params[name_of_comment_for_param][:image]
+      if  [ 'image/jpeg', 'image/png' ].include?  params[name_of_comment_for_param][:image].content_type
+        img = Cloudinary::Uploader.upload(params[name_of_comment_for_param][:image], folder: 'comments', :crop => :limit, :width => 800,
+                                       :eager => [{ :crop => :fill, :width => 150, :height => 150 }])
+        isFile = false
+      else
+        img = Cloudinary::Uploader.upload(params[name_of_comment_for_param][:image], folder: 'comments', :resource_type => :raw )
+        isFile = true
+      end
+    end
+    unless params[name_of_comment_for_param][:content]==''
+      @comment = post.comments.create(content: content, image:  img ? img['public_id'] : nil , isFile: img ? isFile : nil,   user: current_user, discontent_status: params[name_of_comment_for_param][:discontent_status], concept_status: params[name_of_comment_for_param][:concept_status], comment_id: @main_comment ? @main_comment.id : nil)
+
       #@todo новости и информирование авторов
       current_user.journals.build(type_event: name_of_comment_for_param+'_save', project: @project,
                                   body: "#{trim_content(@comment.content)}", body2: trim_content(field_for_journal(post)),
@@ -105,9 +118,9 @@ class PostsController < ApplicationController
                                     first_id: (post.instance_of? LifeTape::Post) ? post.discontent_aspects.first.id : post.id, second_id: @comment.id,
                                     personal: true, viewed: false).save!
       end
-      if main_comment_answer and main_comment_answer.user!=current_user
-        current_user.journals.build(type_event: 'reply_'+name_of_comment_for_param, user_informed: main_comment_answer.user, project: @project,
-                                    body: "#{trim_content(@comment.content)}", body2: trim_content(main_comment_answer.content),
+      if @main_comment_answer and @main_comment_answer.user!=current_user
+        current_user.journals.build(type_event: 'reply_'+name_of_comment_for_param, user_informed: @main_comment_answer.user, project: @project,
+                                    body: "#{trim_content(@comment.content)}", body2: trim_content(@main_comment_answer.content),
                                     first_id: (post.instance_of? LifeTape::Post) ? post.discontent_aspects.first.id : post.id, second_id: @comment.id,
                                     personal: true, viewed: false).save!
       end
@@ -121,9 +134,9 @@ class PostsController < ApplicationController
     @project = Core::Project.find(params[:project])
     @post = current_model.find(params[:id])
     @main_comment = comment_model.find(params[:comment_id])
-    main_comment_answer = comment_model.find(params[:answer_id]) unless params[:answer_id].nil?
+    @main_comment_answer = comment_model.find(params[:answer_id]) unless params[:answer_id].nil?
     @comment = comment_model.new
-    @url_link = url_for(controller: @post.class.name.underscore.pluralize, action: 'add_comment', main_comment: @main_comment.id, answer_id: main_comment_answer ? main_comment_answer.id : nil)
+    @url_link = url_for(controller: @post.class.name.underscore.pluralize, action: 'add_comment', main_comment: @main_comment.id, answer_id: @main_comment_answer ? @main_comment_answer.id : nil)
     respond_to do |format|
       format.js
     end
@@ -213,8 +226,8 @@ class PostsController < ApplicationController
       Journal.events_for_content(@project, current_user, @post.id).update_all("viewed = 'true'")
       @my_journals_count = @my_journals_count - 1
     end
-    per_page = ["Concept", "Essay"].include?(@post.class.name.deconstantize) ? 10 : 30
-    @comments = @post.main_comments.paginate(page: params[:page] ? params[:page] : last_page, per_page: per_page)
+    # per_page = ["Concept", "Essay"].include?(@post.class.name.deconstantize) ? 10 : 30
+    @comments = @post.main_comments.paginate(page: params[:page] ? params[:page] : last_page, per_page: 10)
 
     if current_model.column_names.include? 'number_views'
       @post.update_column(:number_views, @post.number_views.nil? ? 1 : @post.number_views+1)
@@ -260,7 +273,7 @@ class PostsController < ApplicationController
 
     respond_to do |format|
       if @post.save
-        current_user.journals.build(type_event: name_of_model_for_param+"_save", project: @project, body: trim_content(@post.content), first_id: @post.id).save!
+        current_user.journals.build(type_event: name_of_model_for_param+"_save", project: @project, body: @post.content == '' ? t('link.more') : trim_content(@post.content), first_id: @post.id).save!
         current_user.add_score_by_type(@project, 50, :score_a)
 
         format.html { redirect_to action: 'show', id: @post.id, project: @project }
@@ -356,8 +369,13 @@ class PostsController < ApplicationController
     #comment.comment_votings.create(user: current_user, comment: comment,  against: @against) unless comment.users.include? current_user
     if boss?
       @comment.toggle!(:useful)
-      @comment.user.add_score(type: :plus_comment, project: @project, comment: @comment, path: @comment.post.class.name.underscore.pluralize) if boss?
-      Award.reward(user: @comment.user, project: @project, type: 'like')
+      if @comment.useful
+        @comment.user.add_score(type: :plus_comment, project: @project, comment: @comment, path: @comment.post.class.name.underscore.pluralize) if boss?
+        Award.reward(user: @comment.user, project: @project, type: 'like')
+      else
+        @comment.user.add_score(type: :to_archive_plus_comment, project: @project, comment: @comment, path: @comment.post.class.name.underscore.pluralize) if boss?
+        Award.reward(user: @comment.user, project: @project, type: 'unlike')
+      end
     end
     @main_comment = @comment.comment.id unless @comment.comment.nil?
     respond_to do |format|
@@ -452,10 +470,27 @@ class PostsController < ApplicationController
 
   def update_comment
     @comment = comment_model.find(params[:id])
-    respond_to do |format|
-      if @comment.update_attributes(content: params[:content])
-        format.js
+    @aspects = Discontent::Aspect.where(project_id: @project)
+
+    if params[:image]
+      if  [ 'image/jpeg', 'image/png' ].include?  params[:image].content_type
+        img = Cloudinary::Uploader.upload(params[:image], folder: 'comments', :crop => :limit, :width => 800,
+                                          :eager => [{ :crop => :fill, :width => 150, :height => 150 }])
+        isFile = false
+      else
+        img = Cloudinary::Uploader.upload(params[:image], folder: 'comments', :resource_type => :raw )
+        isFile = true
       end
+    end
+
+    respond_to do |format|
+
+      @comment.update_attributes(content: params[:content])
+        if params[:image]
+          @comment.update_attributes( image:  img ? img['public_id'] : nil , isFile: img ? isFile : nil )
+         end
+      format.js
+
     end
   end
 
@@ -491,5 +526,22 @@ class PostsController < ApplicationController
   def vote_result
 
   end
+
+  def comment_page
+    if params[:req_comment] and params[:page].nil?
+      stage = params[:controller].sub('/posts', '') if params[:controller]
+      if stage
+        post = stage == "life_tape" ? params[:asp] : params[:id]
+        page = page_for_comment(params[:project], stage, post, params[:req_comment])
+      end
+      path = page ? request.fullpath + "&page=#{page}#comment_#{params[:req_comment]}" : request.fullpath + "#comment_#{params[:req_comment]}"
+      redirect_to path
+    end
+  end
+
+  # def sort_aspects
+  #   @project = Core::Project.find(params[:project])
+  #   @project.set_position_for_aspects if @project.status == 3
+  # end
 
 end

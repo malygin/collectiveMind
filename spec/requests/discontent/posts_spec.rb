@@ -48,6 +48,19 @@ describe 'Discontent ' do
         click_link 'Перейти к списку'
         expect(page).to have_content 'dis content'
       end
+
+
+      it 'user profile works fine after add discontent', js: true do
+        click_link 'add_record'
+        fill_in 'discontent_post_content', with: 'disсontent content'
+        fill_in 'discontent_post_whered', with: 'disсontent where'
+        fill_in 'discontent_post_whend', with: 'disсontent when'
+        expect(page).to have_selector "span", 'aspect 1'
+        click_button 'send_post'
+        visit user_path(id: user.id, project: project)
+        click_link 'tab-imperfections'
+        expect(page).to have_content 'disсontent'
+      end
     end
 
     context 'show discontents'   do
@@ -75,8 +88,8 @@ describe 'Discontent ' do
         click_link "add_child_comment_#{@comment1.id}"
         #fill_in 'comment_text_area', with: 'new comment'
         #find('#comment_text_area').set('new child comment')
-        find("#child_comments_form_#{@comment1.id}").find('#comment_text_area').set "new child comment"
-        find("#child_comments_form_#{@comment1.id}").find('#send_post').click
+        find("#main_comments_form_#{@comment1.id}").find('#comment_text_area').set "new child comment"
+        find("#main_comments_form_#{@comment1.id}").find('#send_post').click
         expect(page).to have_content 'new child comment'
         #screenshot_and_open_image
       end
@@ -127,7 +140,7 @@ describe 'Discontent ' do
         expect(page).to have_link("plus_post_#{@discontent1.id}", :text => 'Выдать баллы', :href => plus_discontent_post_path(project,@discontent1))
       end
 
-      it ' add new discontent send', js: true do
+      it 'add new discontent send', js: true do
         click_link 'add_record'
         fill_in 'discontent_post_content', with: 'dis content'
         fill_in 'discontent_post_whered', with: 'dis where'
@@ -162,20 +175,24 @@ describe 'Discontent ' do
 
       it ' add new answer comment', js: true do
         click_link "add_child_comment_#{@comment1.id}"
-        find("#child_comments_form_#{@comment1.id}").find('#comment_text_area').set "new child comment"
-        find("#child_comments_form_#{@comment1.id}").find('#send_post').click
+        find("#main_comments_form_#{@comment1.id}").find('#comment_text_area').set "new child comment"
+        find("#main_comments_form_#{@comment1.id}").find('#send_post').click
         expect(page).to have_content 'new child comment'
       end
       context 'like concept'   do
         before do
           prepare_awards
         end
-        it ' like post', js: true do
+        it ' like post and have award', js: true do
           expect(page).to have_link("plus_post_#{@discontent1.id}", :text => 'Выдать баллы', :href => plus_discontent_post_path(project,@discontent1))
           click_link "plus_post_#{@discontent1.id}"
-          expect(page).to have_link("plus_post_#{@discontent1.id}", :text => 'Забрать баллы', :href => plus_discontent_post_path(project,@discontent1))
-          click_link "plus_post_#{@discontent1.id}"
-          expect(page).to have_content 'Выдать баллы'
+          visit journals_path(project: project)
+          expect(page).to have_selector('i.fa.fa-trophy')
+          visit user_path(project: project, id: user.id)
+          expect(page).to have_content('25')
+          # expect(page).to have_link("plus_post_#{@discontent1.id}", :text => 'Забрать баллы', :href => plus_discontent_post_path(project,@discontent1))
+          # click_link "plus_post_#{@discontent1.id}"
+          # expect(page).to have_content 'Выдать баллы'
         end
 
         it ' like comment', js: true do
@@ -196,11 +213,11 @@ describe 'Discontent ' do
 
       it 'can add note ', js:true do
         click_link "content_dispost_what_#{@discontent1.id}"
-        expect(page).to have_selector "form#note_for_post_what_#{@discontent1.id}"
-        find("#note_for_post_what_#{@discontent1.id}").find('#edit_post_note_text_area').set "new note for first field discontent post"
-        find("#note_for_post_what_#{@discontent1.id}").find("#send_post_#{@discontent1.id}").click
+        expect(page).to have_selector "form#note_for_post_#{@discontent1.id}_1"
+        find("#note_for_post_#{@discontent1.id}_1").find('#edit_post_note_text_area').set "new note for first field discontent post"
+        find("#note_for_post_#{@discontent1.id}_1").find("#send_post_#{@discontent1.id}").click
         expect(page).to have_content "new note for first field discontent post"
-        page.execute_script %($("ul#note_form_what_#{@discontent1.id} a").click())
+        page.execute_script %($("ul#note_form_#{@discontent1.id}_1 a").click())
         # @todo нужно ждать пока отработает анимация скрытия и элемент будет удален
         sleep(5)
         expect(page).not_to have_content "new note for first field discontent post"

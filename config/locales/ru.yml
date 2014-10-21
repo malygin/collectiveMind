@@ -10,11 +10,16 @@ ru:
         title:  'Поле "Краткое название"'
         name:  'Поле "A1"'
         content: 'Поле "A2"'
+      knowbase/post:
+        title: 'Название'
+        content: 'Описание'
     errors:
       models:
         discontent/post:
           attributes:
         concept/post_aspect:
+          attributes:
+        knowbase/post:
           attributes:
         user:
           attributes:
@@ -88,7 +93,11 @@ ru:
     sign_out: "Выйти"
     sign_up: "Зарегистрироваться"
     news: "Новости"
+    general_news: "Общие новости"
+    general_rating: "Общий рейтинг"
     list_projects: "Список процедур"
+    analytics: "Аналитика"
+    vote_result: Результаты голосования
     settings:
       settings_admin: 'Настройки Администратора'
       settings_title: 'Настройки'
@@ -242,6 +251,8 @@ ru:
       prepare: Подготовка
       edit: Форма редактирования процедуры
       new: Форма создания новой процедуры
+      code: Код
+      color: Цвет
 
     aspect:
       title: 'Добавление новой темы'
@@ -275,7 +286,7 @@ ru:
     essay:
       desc: Рефлексия – это взгляд участника со стороны на деятельность и его роль в этой деятельности.
       content: Какие недостатки вы заметили в процедуре, в вашей работе, а также в работе других участников, модераторов и жюри?
-      positive: Какие достоинства отсутствовали в этой работе?
+      positive: Что вам не хватало в работе на данном этапе?
       change: Что и как можно было бы изменить?
       reaction: Что уже изменилось к лучшему в результате реакции на рефлексию?
 
@@ -508,6 +519,7 @@ ru:
     delete_comment: Удалить комментарий?
     delete_concept: 'Удалить нововведение?'
     delete_stage: Удалить этап?
+    delete_advice: 'Удалить совет?'
 
   show:
     without_name: 'Без названия'
@@ -515,6 +527,8 @@ ru:
     warning: Обратите внимание!
     discuss: ТРЕБУЕТ ОБСУЖДЕНИЯ
     important: ВАЖНОЕ
+    general_news: ВСЕ НОВОСТИ
+    general_rating: ВСЕ УЧАСТНИКИ
     improve:
       name: Доработать
       problem: Неоформленные проблемы
@@ -745,4 +759,11 @@ ru:
     memory: 'Запомнить меня'
     auth: "Авторизуйтесь пожалуйста!"
 
-
+  left_side:
+    discontent_post_advices: "Неутвержденные советы"
+  discontent:
+    unapproved_post_advices: "Неутвержденные советы"
+    advice_success_created: "Ваш совет добавлен и ожидает проверки модератором"
+    advice_success_approved: "Совет одобрен"
+  advice:
+    advices: "Советы участников"

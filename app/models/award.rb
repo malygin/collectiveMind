@@ -38,10 +38,28 @@ class Award < ActiveRecord::Base
         h[:user].journals.build(type_event: 'award_50likes', project: h[:project], body: a.nil? ? '': a.name).save!
         h[:user].journals.build(type_event: 'my_award_50likes', user_informed: h[:user], project: h[:project], body: a.nil? ? '': a.name, viewed: false, personal: true).save!
       end
-
+    elsif h[:type] == 'unlike'
+      awk = UserAwardClick.where(user_id: h[:user], project_id: h[:project]).first_or_create
+      awk.update_attributes(clicks: awk.clicks-1)
+      if awk.clicks < 1
+        a = Award.find_by_url('1like')
+        UserAward.where(user: h[:user], award: a, project: h[:project]).destroy_all
+      elsif awk.clicks < 3
+        a = Award.find_by_url('3likes')
+        UserAward.where(user: h[:user], award: a, project: h[:project]).destroy_all
+      elsif awk.clicks < 5
+        a = Award.find_by_url('5likes')
+        UserAward.where(user: h[:user], award: a, project: h[:project]).destroy_all
+      elsif awk.clicks < 15
+        a = Award.find_by_url('15likes')
+        UserAward.where(user: h[:user], award: a, project: h[:project]).destroy_all
+      elsif awk.clicks < 50
+        a = Award.find_by_url('50likes')
+        UserAward.where(user: h[:user], award: a, project: h[:project]).destroy_all
+      end
     elsif h[:type] == 'add'
       if h[:post].instance_of? Discontent::Post
-        count_d = h[:user].discontent_posts.by_project(h[:project]).with_votes.references(:discontent_post_votings).count
+        count_d = h[:user].discontent_posts.by_project(h[:project]).where(useful: true).count
         if count_d == 1
           a = Award.find_by_url('1imperfection')
           UserAward.create!(user: h[:user], award: a, project: h[:project])
@@ -64,7 +82,7 @@ class Award < ActiveRecord::Base
           h[:user].journals.build(type_event: 'my_award_15imperfection', user_informed: h[:user], project: h[:project], body: a.nil? ? '': a.name, viewed: false, personal: true).save!
         end
       elsif  h[:post].instance_of? Concept::Post
-        count_d = h[:user].concept_posts.by_project(h[:project]).with_concept_votes.references(:concept_post_votings).count
+        count_d = h[:user].concept_posts.by_project(h[:project]).where(useful: true).count
         if count_d == 1
           a = Award.find_by_url('1innovation')
           UserAward.create!(user: h[:user], award: a, project: h[:project])
@@ -109,7 +127,20 @@ class Award < ActiveRecord::Base
         UserAward.create!(user: h[:user], award: a, project: h[:project])
         h[:user].journals.build(type_event: 'award_3000points', project: h[:project], body: a.nil? ? '': a.name).save!
         h[:user].journals.build(type_event: 'my_award_3000points', user_informed: h[:user], project: h[:project], body: a.nil? ? '': a.name, viewed: false, personal: true).save!
-      end
+
+      elsif h[:old_score] >= 100 and h[:score] < 100
+        a = Award.find_by_url('100points')
+        UserAward.where(user: h[:user], award: a, project: h[:project]).destroy_all
+      elsif h[:old_score] >= 500 and h[:score] < 500
+        a = Award.find_by_url('500points')
+        UserAward.where(user: h[:user], award: a, project: h[:project]).destroy_all
+      elsif h[:old_score] >= 1000 and h[:score] < 1000
+        a = Award.find_by_url('1000points')
+        UserAward.where(user: h[:user], award: a, project: h[:project]).destroy_all
+      elsif h[:old_score] >= 3000 and h[:score] < 3000
+        a = Award.find_by_url('3000points')
+        UserAward.where(user: h[:user], award: a, project: h[:project]).destroy_all
+     end
     end
   end
 end

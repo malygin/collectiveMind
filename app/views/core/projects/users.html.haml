@@ -1,0 +1,38 @@
+.col-md-9
+  %section.widget
+    %header
+      %h3.text-center=t('show.rating.title')
+
+    .body
+      .feed
+        .wrapper
+          .text-center
+            = will_paginate @users
+
+          #tabs
+            -if @project
+              .pull-right
+                =t('show.rating.sort')
+                =link_to t('show.rating.sort_default'), {controller: '/users', action: :show_top, score_name: 'score'}, remote: true, class: 'score_class top_all', id: 'score_all'
+                |
+                =link_to t('show.rating.sort_generators'), {controller: '/users',action: :show_top, score_name: 'score_g'}, remote: true, class: 'score_class'
+                |
+                =link_to t('show.rating.sort_analysts'), {controller: '/users',action: :show_top, score_name: 'score_a'}, remote: true, class: 'score_class'
+                |
+                =link_to t('show.rating.sort_voters'), {controller: '/users',action: :show_top, score_name: 'score_o'}, remote: true, class: 'score_class'
+            %br
+            %br
+          #tabs-1
+            %table.table
+              %tbody
+                - @users.each_with_index do |user, i|
+                  = render partial: 'users/user_global', locals: {user: user, number: i+1}
+
+
+          .text-center
+            = will_paginate @users
+
+.col-md-3
+  %section.widget
+    %header
+      %h3 Фильтры

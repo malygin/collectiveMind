@@ -2,9 +2,12 @@
 .comments
   .row
     .col-md-12
-      = form_for comment, html: {class: 'new_or_edit'}, remote: true, url: url_link, method: :put do |f|
+      = form_for comment, html: {class: 'new_or_edit',multipart: true }, remote: true,  url: url_link, method: :put do |f|
         = render 'shared/notice_messages', object: f.object
         =f.text_area :content, class: 'form-control input-transparent comment-textarea',  placeholder: t('form.comment_answer'), id:"comment_text_area"
+        .pull-left
+          = f.file_field :image
+
         .pull-right
           %div(class="btn-group" data-toggle="buttons" id="change_comment_stat")
             %label(class="btn btn-sm btn-default" onclick="color_button(this);")

@@ -5,7 +5,6 @@
     - if @post.user
       .media-heading
         = link_to @post.user, user_path(@project, @post.user)
-    %br
     -@post.post_aspects.each do |da|
       = render partial: 'discontent/aspects/aspect', object: da
     =discontent_style_name(@post.style)
@@ -43,9 +42,22 @@
 
     %br
     %br
-      %ul.media-list#comments.chat-messages
-        = render partial: 'shared/comment',collection: @comments
-      .text-center
-        = will_paginate @comments
+    - if @project.advices_discontent?
+      %h3
+        = t('advice.advices')
+      %ul.media-list#advices.chat-messages
+        - (@post.advices.approve + current_user.advices_for(@post).unapproved).each do |advice|
+          = render partial: 'advices/advice', locals: {advice: advice}
+      - if signed_in?
+        %br
+        = render partial: 'advices/form', locals: {advice: Advice.new, url: discontent_advices_path(@project).concat("?discontent_id=#{@post.id}")}
+      %br
+
+    %h3
+      Комментарии участников
+    %ul.media-list#comments.chat-messages
+      = render partial: 'shared/comment',collection: @comments
+    .text-center
+      = will_paginate @comments
     - if signed_in?
       = render partial: 'shared/comment_form', locals: { comment: @comment, url_link: url_for(controller: @post.class.name.underscore.pluralize,  action: 'add_comment')}

@@ -1,3 +1,6 @@
+require "codeclimate-test-reporter"
+CodeClimate::TestReporter.start
+
 require 'rubygems'
 require 'spork'
 
@@ -8,13 +11,11 @@ Spork.prefork do
   require 'capybara/rails'
   require 'capybara/rspec'
   require 'capybara-screenshot/rspec'
-  # require 'simplecov'
-  # require 'simplecov-rcov'
   require 'capybara/webkit/matchers'
   require 'database_cleaner'
-  #
-  # SimpleCov.formatter = SimpleCov::Formatter::RcovFormatter
-  # SimpleCov.start 'rails'
+
+  require 'simplecov'
+  SimpleCov.start
 
   Capybara.javascript_driver = :webkit
 

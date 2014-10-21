@@ -5,8 +5,28 @@ class Journal < ActiveRecord::Base
   belongs_to :user_informed, class_name: 'User', foreign_key: :user_informed
 
   belongs_to :project, class_name: 'Core::Project', foreign_key: 'project_id'
+  scope :today, -> { where('DATE(created_at) = ?',  Time.zone.now.utc.to_date) }
+  scope :yesterday, -> { where('DATE(created_at) = ?', Time.zone.now.utc.to_date - 1) }
+  scope :older, -> { where('DATE(created_at) < ?', Time.zone.now.utc.to_date - 1) }
+
   @types = []
   @my_types = [11]
+
+  def self.events_for_all(list_type,closed_projects, events_ignore, check_dates, lim = 1000)
+    Journal.joins("INNER JOIN core_projects ON journals.project_id = core_projects.id").where("(core_projects.type_access IN (#{list_type.join(", ")}) OR core_projects.id IN (#{closed_projects.join(", ")})) AND journals.type_event NOT IN (#{events_ignore.join(', ')})").where("#{check_dates if check_dates!=""}").limit(lim).order('journals.created_at DESC')
+  end
+
+  def self.events_for_all_prime(events_ignore, check_dates, lim = 1000)
+    Journal.where("type_event NOT IN (#{events_ignore.join(', ')})").where("#{check_dates if check_dates!=""}").limit(lim).order('created_at DESC')
+  end
+
+  def self.events_for_project(project_id, events_ignore, check_dates, lim = 1000)
+    Journal.where('project_id = ?', project_id).where("type_event NOT IN (#{events_ignore.join(', ')})").where("#{check_dates if check_dates!=""}").order('created_at DESC')
+  end
+
+  def self.events_for_aspect(project_id, aspect_id, events_ignore, check_dates, lim = 1000)
+    Journal.where('project_id = ?', project_id).where("type_event NOT IN (#{events_ignore.join(', ')})").order('created_at DESC')
+  end
 
   def self.events_for_user_feed(project_id, lim = 5)
     Journal.where(' project_id = ? AND personal = ? ', project_id, false).order('created_at DESC')
