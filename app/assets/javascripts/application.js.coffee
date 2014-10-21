@@ -14,9 +14,11 @@
 #= require totop/easing
 # require ckeditor/init
 #= require tinymce
+#= require websocket_rails/main
 #= require jquery.remotipart
 #= require jquery.magnific-popup.min
 #= require bootstrap-colorpicker
+#= require news
 
 # @todo load initialization
 $ ->

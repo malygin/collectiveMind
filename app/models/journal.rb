@@ -8,6 +8,8 @@ class Journal < ActiveRecord::Base
   scope :today, -> { where('DATE(created_at) = ?',  Time.zone.now.utc.to_date) }
   scope :yesterday, -> { where('DATE(created_at) = ?', Time.zone.now.utc.to_date - 1) }
   scope :older, -> { where('DATE(created_at) < ?', Time.zone.now.utc.to_date - 1) }
+  
+  after_save :send_last_news
 
   @types = []
   @my_types = [11]
@@ -59,6 +61,11 @@ class Journal < ActiveRecord::Base
 
   def self.destroy_comment_journal(project, comment)
     where(:project_id => project.id, :user_id => comment.user, :second_id => comment.id).destroy_all
+  end
+
+  private
+  def send_last_news
+    WebsocketRails[:news].trigger 'broadcast_news', self
   end
 
   private
