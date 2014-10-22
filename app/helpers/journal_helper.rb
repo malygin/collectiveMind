@@ -232,4 +232,12 @@ module JournalHelper
         'что то другое'
     end
   end
+
+  def class_for_journal(current_user, journal)
+    if current_user && current_user.last_seen_news && current_user.last_seen_news > journal.created_at
+      ''
+    else
+      'unread_news'
+    end
+  end
 end
