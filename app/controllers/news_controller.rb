@@ -4,11 +4,10 @@ class NewsController < WebsocketRails::BaseController
   end
 
   def authorize_channels
-    accept_channel
-    # if current_user.nil?
-    #   deny_channel
-    # else
-    #   accept_channel current_user
-    # end
+    if current_user.nil?
+      deny_channel
+    else
+      accept_channel current_user
+    end
   end
 end
