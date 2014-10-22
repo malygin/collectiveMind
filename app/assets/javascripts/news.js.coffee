@@ -10,8 +10,6 @@ $(document).ready ->
     console.log("Has joined the channel")
   private_channel.on_failure = ->
     console.log("Authorization failed")
-
-
   private_channel.bind 'latest_news', (data) ->
+    $('.feed .wrapper .feed-item:first').before(data)
     console.log data
-
