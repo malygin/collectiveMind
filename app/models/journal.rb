@@ -20,15 +20,15 @@ class Journal < ActiveRecord::Base
   end
 
   def self.events_for_all_prime(events_ignore, check_dates, lim = 1000)
-    Journal.where("type_event NOT IN (#{events_ignore.join(', ')})").where("#{check_dates if check_dates!=""}").limit(lim).order('created_at DESC')
+    Journal.joins("INNER JOIN core_projects ON journals.project_id = core_projects.id").where("type_event NOT IN (#{events_ignore.join(', ')})").where("#{check_dates if check_dates!=""}").where("core_projects.status < 12").limit(lim).order('created_at DESC')
   end
 
   def self.events_for_project(project_id, events_ignore, check_dates, lim = 1000)
-    Journal.where('project_id = ?', project_id).where("type_event NOT IN (#{events_ignore.join(', ')})").where("#{check_dates if check_dates!=""}").order('created_at DESC')
+    Journal.joins("INNER JOIN core_projects ON journals.project_id = core_projects.id").where('project_id = ?', project_id).where("type_event NOT IN (#{events_ignore.join(', ')})").where("#{check_dates if check_dates!=""}").where("core_projects.status < 12").order('created_at DESC')
   end
 
   def self.events_for_aspect(project_id, aspect_id, events_ignore, check_dates, lim = 1000)
-    Journal.where('project_id = ?', project_id).where("type_event NOT IN (#{events_ignore.join(', ')})").order('created_at DESC')
+    Journal.joins("INNER JOIN core_projects ON journals.project_id = core_projects.id").where('project_id = ?', project_id).where("type_event NOT IN (#{events_ignore.join(', ')})").where("core_projects.status < 12").order('created_at DESC')
   end
 
   def self.events_for_user_feed(project_id, lim = 5)

@@ -383,9 +383,10 @@ end
 
 
 def prepare_journal(project,user)
-  @journal_today = FactoryGirl.create :journal, project: project, user: user, body: 'news_today', created_at: Time.zone.now.utc.to_date
-  @journal_yesterday = FactoryGirl.create :journal, project: project, user: user, body: 'news_yesterday', created_at: Time.zone.now.utc.to_date - 1
-  @journal_older = FactoryGirl.create :journal, project: project, user: user, body: 'news_older', created_at: Time.zone.now.utc.to_date - 2
+  Journal.destroy_all
+  @journal_today = FactoryGirl.create :journal, project: project, user: user, body: 'news_today', created_at: Time.zone.now.utc.to_date + 12.hours
+  @journal_yesterday = FactoryGirl.create :journal, project: project, user: user, body: 'news_yesterday', created_at: Time.zone.now.utc.yesterday.to_date + 12.hours
+  @journal_older = FactoryGirl.create :journal, project: project, user: user, body: 'news_older', created_at: Time.zone.now.utc.yesterday.to_date - 12.hours
 end
 
 def prepare_awards

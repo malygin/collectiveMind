@@ -30,7 +30,7 @@
 
                 = journal_parser(journal, journal.project_id).html_safe
                 %br
-                = link_to journal.project.name, "/project/#{journal.project_id}", class: "btn btn-xs", style: "background-color:#{journal.project.color ? journal.project.color : ''};" if journal.project
+                = link_to journal.project.code.present? ? journal.project.code : journal.project.name, "/project/#{journal.project_id}", class: "btn btn-xs", style: "background-color:#{journal.project.color ? journal.project.color : ''};" if journal.project
                 %br
                 .time.pull-left(style="color:#cabc7d;")=Russian::strftime(journal.created_at, '%d %B %k:%M:%S ')
 

@@ -135,7 +135,7 @@ class Core::ProjectsController < ApplicationController
 
   def news
     @project = Core::Project.find(params[:project]) if params[:project]
-    @core_projects = current_user.current_projects_for_user
+    @core_projects = current_user.current_projects_for_journal
     @core_project = @core_projects.first
     # if @project
     #   events = Journal.events_for_my_feed @project.id, current_user.id
@@ -149,7 +149,7 @@ class Core::ProjectsController < ApplicationController
     elsif prime_admin?
       @journals_feed_all = Journal.events_for_all_prime(events_ignore,check_dates).paginate(page: params[:page])
     else
-      closed_projects = current_user.projects.where(core_projects: {type_access: 2}).pluck("core_projects.id")
+      closed_projects = current_user.projects.where(core_projects: {type_access: 2}).where("core_projects.status < 12").pluck("core_projects.id")
       @journals_feed_all = Journal.events_for_all(list_type_projects_for_user,closed_projects==[] ? [-1] : closed_projects, events_ignore, check_dates).paginate(page: params[:page])
     end
     @j_count = {today:0, yesterday:0, older:0}
