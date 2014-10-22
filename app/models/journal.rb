@@ -1,20 +1,21 @@
 class Journal < ActiveRecord::Base
+  include Renderable
   attr_accessible :body, :body2, :type_event, :user, :project, :user_informed, :viewed,
                   :event, :first_id, :second_id, :personal
   belongs_to :user
   belongs_to :user_informed, class_name: 'User', foreign_key: :user_informed
 
   belongs_to :project, class_name: 'Core::Project', foreign_key: 'project_id'
-  scope :today, -> { where('DATE(created_at) = ?',  Time.zone.now.utc.to_date) }
+  scope :today, -> { where('DATE(created_at) = ?', Time.zone.now.utc.to_date) }
   scope :yesterday, -> { where('DATE(created_at) = ?', Time.zone.now.utc.to_date - 1) }
   scope :older, -> { where('DATE(created_at) < ?', Time.zone.now.utc.to_date - 1) }
-  
+
   after_save :send_last_news
 
   @types = []
   @my_types = [11]
 
-  def self.events_for_all(list_type,closed_projects, events_ignore, check_dates, lim = 1000)
+  def self.events_for_all(list_type, closed_projects, events_ignore, check_dates, lim = 1000)
     Journal.joins("INNER JOIN core_projects ON journals.project_id = core_projects.id").where("(core_projects.type_access IN (#{list_type.join(", ")}) OR core_projects.id IN (#{closed_projects.join(", ")})) AND journals.type_event NOT IN (#{events_ignore.join(', ')})").where("#{check_dates if check_dates!=""}").limit(lim).order('journals.created_at DESC')
   end
 
@@ -65,7 +66,9 @@ class Journal < ActiveRecord::Base
 
   private
   def send_last_news
-    WebsocketRails[:news].trigger 'latest_news', self.body
+    unless type_event.start_with? 'my_'
+      WebsocketRails[:news].trigger 'latest_news', render_anywhere('journal/journal', {journal: self, current_user: nil})
+    end
   end
 
   private
