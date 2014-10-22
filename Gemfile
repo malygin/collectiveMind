@@ -5,7 +5,6 @@ ruby '2.1.2'
 gem 'rails', '4.1.6'
 
 gem 'spring', group: :development
-gem 'thin'
 
 group :development, :test do
   #gem 'linecache19', :git => 'git://github.com/mark-moseley/linecache'
