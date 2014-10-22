@@ -15,6 +15,7 @@
 # require ckeditor/init
 #= require tinymce
 #= require websocket_rails/main
+#= require moderator_chat
 #= require jquery.remotipart
 #= require jquery.magnific-popup.min
 #= require bootstrap-colorpicker

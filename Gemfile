@@ -40,6 +40,8 @@ group :test do
   gem "codeclimate-test-reporter", require: nil
 end
 
+gem 'foreman'
+gem 'thin'
 gem 'sass-rails', '~> 4.0.0'
 gem 'coffee-rails', '~> 4.0.1'
 gem 'uglifier', '>= 2.1.1'

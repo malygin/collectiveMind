@@ -9,7 +9,7 @@
       = content_for?(:title) ? yield(:title) : 'Massdecision'
     = csrf_meta_tags
     = stylesheet_link_tag 'application', media: 'all'
-    -#%link(href="/assets/favicon.ico" rel="shortcut icon")
+  -#%link(href="/assets/favicon.ico" rel="shortcut icon")
 
   %body
     .logo.hidden-sm.hidden-xs
@@ -22,8 +22,9 @@
     %nav#sidebar.sidebar.nav-collapse.collapse
       - if params[:controller] == 'core/projects' and (params[:action] == 'news' or params[:action] == 'users')
         = render partial: 'core/projects/left_projects', locals: { current_stage: controller.controller_path }
-      -else
+      - else
         = render partial: 'left_side', locals: { current_stage: controller.controller_path }
+      = render partial: 'shared/moderator_chat'
     .wrap
       %header.page-header
         .navbar
@@ -42,7 +43,6 @@
         -else
           = yield
 
-    /= render partial: 'shared/moderator_chat'
     /
       Javascripts
       \==================================================
