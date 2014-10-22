@@ -6,7 +6,7 @@ WebsocketRails.setup do |config|
   # config.log_level = :debug
 
   # Uncomment to change the default log file path.
-  # config.log_path = "#{Rails.root}/log/websocket_rails.log"
+  config.log_path = "#{Rails.root}/log/production.log"
 
   # Set to true if you wish to log the internal websocket_rails events
   # such as the keepalive `websocket_rails.ping` event.
