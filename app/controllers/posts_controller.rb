@@ -81,6 +81,7 @@ class PostsController < ApplicationController
   end
 
   def add_comment
+
     @project = Core::Project.find(params[:project])
     @aspects = Discontent::Aspect.where(project_id: @project)
     post = current_model.find(params[:id])

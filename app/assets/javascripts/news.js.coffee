@@ -1,4 +1,3 @@
-console.log($('.feed .wrapper .feed-item:first'))
 $(document).ready ->
   ws = new WebSocketRails(document.location.hostname + ':3000/websocket')
   ws.on_open = ->
@@ -12,7 +11,7 @@ $(document).ready ->
   private_channel.on_failure = ->
     console.log("Authorization failed")
 
-  ws.trigger 'latest_news', {text: 'Test'}
 
-  ws.bind 'latest_news', (data) ->
+  private_channel.bind 'latest_news', (data) ->
     console.log data
+

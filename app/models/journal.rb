@@ -65,7 +65,7 @@ class Journal < ActiveRecord::Base
 
   private
   def send_last_news
-    WebsocketRails[:news].trigger 'broadcast_news', self
+    WebsocketRails[:news].trigger 'latest_news', self.body
   end
 
   private
