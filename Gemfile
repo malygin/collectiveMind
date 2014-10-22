@@ -5,13 +5,13 @@ ruby '2.1.2'
 gem 'rails', '4.1.6'
 
 gem 'spring', group: :development
+gem 'thin'
 
 group :development, :test do
   #gem 'linecache19', :git => 'git://github.com/mark-moseley/linecache'
   gem 'quiet_assets'
   gem 'grizzled-rails-logger'
   gem 'rspec-rails'
-  gem 'thin'
   gem 'better_errors'
   gem 'binding_of_caller'
 end
@@ -20,7 +20,6 @@ group :production do
   gem 'rails_12factor'
   gem 'newrelic_rpm', '>=3.7.3'
   gem 'heroku-deflater'
-  gem 'unicorn'
 end
 
 group :test do
