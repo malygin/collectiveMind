@@ -146,10 +146,11 @@ $ ->
 
 #search_users
 $('#search_users_text').on 'change', ->
+  project_id = $('#search_users_project').attr("data-project")
   val=this.value
-  if val
+  if project_id and val
     $.ajax
-      url: "/project/1/users/search_users"
+      url: "/project/#{project_id}/users/search_users"
       type: "get"
       data:
         search_users_text: val
