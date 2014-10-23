@@ -5,26 +5,53 @@ class Journal < ActiveRecord::Base
   belongs_to :user_informed, class_name: 'User', foreign_key: :user_informed
 
   belongs_to :project, class_name: 'Core::Project', foreign_key: 'project_id'
+
+  comment = ["life_tape_comment_save","my_life_tape_comment","discontent_comment_save","my_discontent_comment",
+             "concept_comment_save","my_concept_comment","plan_comment_save","my_plan_comment","essay_comment_save","my_essay_comment",
+             "life_tape_comment_discuss_stat","my_life_tape_comment_discuss_stat","life_tape_comment_approve_status","my_life_tape_comment_approve_status","discontent_comment_discuss_stat","my_discontent_comment_discuss_stat",
+             "discontent_comment_approve_status","my_discontent_comment_approve_status","concept_comment_discuss_stat","my_concept_comment_discuss_stat","concept_comment_approve_status","my_concept_comment_approve_status",
+             "plan_comment_discuss_stat","my_plan_comment_discuss_stat","plan_comment_approve_status","my_plan_comment_approve_status","essay_comment_discuss_stat","my_essay_comment_discuss_stat","essay_comment_approve_status","my_essay_comment_approve_status"
+            ]
+
+  content_add = ["life_tape_post_save","discontent_post_save","concept_post_save","plan_post_save","essay_post_save"]
+
+  content_edit = ["discontent_post_update","concept_post_update","plan_post_update","essay_post_update"]
+
+  note = ["my_discontent_note","my_concept_note","my_plan_note"]
+
+  scope :by_project, -> project { where(:project => project) }
+  scope :by_user, -> user { where(:user => user) }
+  scope :by_note, -> by_note { where(:type_event => note) }
+
+  scope :by_comment, -> by_comment { where(:type_event => comment) }
+
+  scope :by_content, -> by_content { where(:type_event => content_add | content_edit) }
+  scope :by_content_add, -> { where(:type_event => content_add) }
+  scope :by_content_edit, -> { where(:type_event => content_edit) }
+
   scope :today, -> { where('DATE(created_at) = ?',  Time.zone.now.utc.to_date) }
   scope :yesterday, -> { where('DATE(created_at) = ?', Time.zone.now.utc.to_date - 1) }
   scope :older, -> { where('DATE(created_at) < ?', Time.zone.now.utc.to_date - 1) }
 
+  scope :by_period, -> date_begin, date_end, date_all { where("DATE(journals.created_at + time '04:00') BETWEEN ? AND ?", ((date_begin.present? and date_all.nil?) ? date_begin : '1900-01-01'), ((date_end.present? and date_all.nil?) ? date_end : '2100-01-01')) }
+
+
   @types = []
   @my_types = [11]
 
-  def self.events_for_all(list_type,closed_projects, events_ignore, check_dates, lim = 1000)
-    Journal.joins("INNER JOIN core_projects ON journals.project_id = core_projects.id").where("(core_projects.type_access IN (#{list_type.join(", ")}) OR core_projects.id IN (#{closed_projects.join(", ")})) AND journals.type_event NOT IN (#{events_ignore.join(', ')})").where("#{check_dates if check_dates!=""}").where("core_projects.status < 12").limit(lim).order('journals.created_at DESC')
+  def self.events_for_all(list_type, closed_projects, events_ignore, lim = 1000)
+    Journal.joins("INNER JOIN core_projects ON journals.project_id = core_projects.id").where("(core_projects.type_access IN (#{list_type.join(", ")}) OR core_projects.id IN (#{closed_projects.join(", ")})) AND journals.type_event NOT IN (#{events_ignore.join(', ')})").where("core_projects.status < 12").limit(lim).order('journals.created_at DESC')
   end
 
-  def self.events_for_all_prime(events_ignore, check_dates, lim = 1000)
-    Journal.joins("INNER JOIN core_projects ON journals.project_id = core_projects.id").where("type_event NOT IN (#{events_ignore.join(', ')})").where("#{check_dates if check_dates!=""}").where("core_projects.status < 12").limit(lim).order('created_at DESC')
+  def self.events_for_all_prime(events_ignore, lim = 1000)
+    Journal.joins("INNER JOIN core_projects ON journals.project_id = core_projects.id").where("type_event NOT IN (#{events_ignore.join(', ')})").where("core_projects.status < 12").limit(lim).order('created_at DESC')
   end
 
-  def self.events_for_project(project_id, events_ignore, check_dates, lim = 1000)
-    Journal.joins("INNER JOIN core_projects ON journals.project_id = core_projects.id").where('project_id = ?', project_id).where("type_event NOT IN (#{events_ignore.join(', ')})").where("#{check_dates if check_dates!=""}").where("core_projects.status < 12").order('created_at DESC')
+  def self.events_for_project(project_id, events_ignore, lim = 1000)
+    Journal.joins("INNER JOIN core_projects ON journals.project_id = core_projects.id").where('project_id = ?', project_id).where("type_event NOT IN (#{events_ignore.join(', ')})").where("core_projects.status < 12").order('created_at DESC')
   end
 
-  def self.events_for_aspect(project_id, aspect_id, events_ignore, check_dates, lim = 1000)
+  def self.events_for_aspect(project_id, aspect_id, events_ignore, lim = 1000)
     Journal.joins("INNER JOIN core_projects ON journals.project_id = core_projects.id").where('project_id = ?', project_id).where("type_event NOT IN (#{events_ignore.join(', ')})").where("core_projects.status < 12").order('created_at DESC')
   end
 

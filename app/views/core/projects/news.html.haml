@@ -46,11 +46,26 @@
         %h4 Даты
         .form-group(style="margin-left:0;")
           %label{for: "date_begin"} С
-          =text_field_tag "date_begin",params[:date_begin], class: 'form-control datepicker', id:'date_begin'
+          =text_field_tag "by_period[date_begin]",params[:by_period] ? params[:by_period][:date_begin] : '', class: 'form-control datepicker', id:'date_begin'
         .form-group(style="margin-left:0;")
           %label{for: "date_end"} По
-          =text_field_tag "date_end",params[:date_end], class: 'form-control datepicker', id:'date_end'
-        %input{:name => "check_date_all", :type => "checkbox", :checked => params[:check_date_all] ? true : false} Все
+          =text_field_tag "by_period[date_end]",params[:by_period] ? params[:by_period][:date_end] : '', class: 'form-control datepicker', id:'date_end'
+        %input{:name => "by_period[date_all]", :type => "checkbox", :checked => (params[:by_period] ? params[:by_period][:date_all] : nil) ? true : false} Все
+
+        %br
+        %h4 Тип контента
+        %input{:name => "by_comment", :type => "checkbox", :checked => params[:by_comment] ? true : false} Комментарии
+        %br
+        %input{:name => "by_content", :type => "checkbox", :checked => params[:by_content] ? true : false} Контент
+        %br
+        %input{:name => "by_note", :type => "checkbox", :checked => params[:by_note] ? true : false} Замечания
+        %br
+        %input{:name => "content_all", :type => "checkbox", :checked => params[:content_all] ? true : false} Все
+        %h4 Пользователи
+        -if @users_for_news
+          = select_tag 'select_users_for_news', options_from_collection_for_select(@users_for_news, "id", "to_s"),
+          prompt: 'Выберите пользователя', class: "form-control"
+        -#%input{:name => "by_user", :type => "checkbox"} Пользователь
 
         -#%h4 Статус
         -#%input{:name => "check_like", :type => "checkbox"} Пролайкано
