@@ -1,5 +1,5 @@
 $(document).ready ->
-  if document.location.pathname.match('journals$|general_news')
+  if document.location.pathname.match('general_news')
     ws = new WebSocketRails(document.location.host + '/websocket')
     ws.on_open = ->
       console.log 'socket opened'
