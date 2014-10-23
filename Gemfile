@@ -48,7 +48,7 @@ gem 'compass'
 gem 'compass-rails'
 gem 'therubyracer', '>=0.11.4'
 gem 'websocket-rails'
-gem 'messengerjs-rails'
+
 gem 'cloudinary'
 gem 'remotipart', '~> 1.2'
 
