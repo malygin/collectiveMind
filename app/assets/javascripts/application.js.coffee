@@ -19,10 +19,12 @@
 #= require bootstrap-colorpicker
 #= require messenger.js
 #= require messenger-theme-future
-#= require ui-notifications
+#= require notifications
 
 # @todo load initialization
 $ ->
+  notificate_my_journals()
+
   $(".image-popup-vertical-fit").magnificPopup
     type: "image"
     closeOnContentClick: true
