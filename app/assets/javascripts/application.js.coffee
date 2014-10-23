@@ -19,6 +19,9 @@
 #= require jquery.magnific-popup.min
 #= require bootstrap-colorpicker
 #= require news
+#= require messenger.js
+#= require messenger-theme-future
+#= require ui-notifications
 
 # @todo load initialization
 $ ->
