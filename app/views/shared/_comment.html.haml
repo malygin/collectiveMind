@@ -2,7 +2,7 @@
   = render 'users/user_post', user: comment.user
 
   .chat-message-body.stage_menu1{id: "comment_content_#{comment.id}", class: "#{comment_stat_color(comment)}"}
-    %span.arrow
+    %span.arrow.hidden-xs
     .sender
       =link_to comment.user, user_path(@project, comment.user)
       = render partial: '/shared/user_online', object: comment.user
