@@ -38,6 +38,12 @@ describe 'Concept ' do
 
       it ' add new concept', js: true do
         click_link "new_concept_#{@discontent1.id}"
+        expect(page).to have_selector('#btn_improve', visible: true)
+        expect(page).to have_selector('#send_post_concept', visible: true)
+        expect(page).to have_selector('#pa_positive', visible: false)
+        # click_button 'btn_improve'
+        page.find("#btn_improve").click
+        expect(page).to have_selector('#pa_positive', visible: true)
         expect(page).to have_content 'Краткое название вашего нововведения'
         expect(page).to have_content @discontent1.content
         expect(page).to have_selector '#main_positive_r_1 input.autocomplete'
@@ -89,6 +95,12 @@ describe 'Concept ' do
 
       it ' can click button to resource', js: true do
         click_link "new_concept_#{@discontent1.id}"
+        expect(page).to have_selector('#btn_improve', visible: true)
+        expect(page).to have_selector('#send_post_concept', visible: true)
+        expect(page).to have_selector('#pa_positive', visible: false)
+        # click_button 'btn_improve'
+        page.find("#btn_improve").click
+        expect(page).to have_selector('#pa_positive', visible: true)
         expect(page).to have_content 'Краткое название вашего нововведения'
         expect(page).to have_content @discontent1.content
         expect(page).to have_content @discontent1.whered
@@ -185,13 +197,13 @@ describe 'Concept ' do
         expect(page).to have_content 'Краткое название вашего нововведения'
         expect(page).to have_content @discontent1.content
         click_button 'send_post_concept'
-        expect(page).to have_content 'Сохранение не удалось из-за 2 ошибок:'
+        expect(page).to have_content 'Сохранение не удалось из-за 3 ошибок:'
         expect(page).to have_content 'Поле "Краткое название" не может быть пустым'
         expect(page).to have_content 'Поле "A1" не может быть пустым'
-        #expect(page).to have_content 'Поле "A2" не может быть пустым'
+        expect(page).to have_content 'Поле "A2" не может быть пустым'
         fill_in "pa_title", with: 'con title'
         fill_in "pa_name", with: 'con name'
-        #fill_in "pa_content", with: 'con content'
+        fill_in "pa_content", with: 'con content'
         click_button 'send_post_concept'
         expect(page).to have_content 'Ваше нововведение успешно добавлено!'
         expect(page).to have_content 'Перейти к списку'
@@ -285,6 +297,12 @@ describe 'Concept ' do
 
       it ' add new concept', js: true do
         click_link "new_concept_#{@discontent1.id}"
+        expect(page).to have_selector('#btn_improve', visible: true)
+        expect(page).to have_selector('#send_post_concept', visible: true)
+        expect(page).to have_selector('#pa_positive', visible: false)
+        # click_button 'btn_improve'
+        page.find("#btn_improve").click
+        expect(page).to have_selector('#pa_positive', visible: true)
         expect(page).to have_content 'Краткое название вашего нововведения'
         expect(page).to have_content @discontent1.content
         fill_in "pa_title", with: 'con title'
