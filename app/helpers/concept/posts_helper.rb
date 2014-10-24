@@ -189,4 +189,9 @@ module Concept::PostsHelper
     end
   end
 
+  def mean?(res)
+    ['positive_s','negative_s','control_s'].include? res
+  end
+
+
 end
