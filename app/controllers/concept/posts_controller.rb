@@ -107,11 +107,17 @@ class Concept::PostsController < PostsController
     @concept_post = Concept::Post.find(params[:id])
     @concept_post.update_status_fields(params[:pa])
     @post_aspect = Concept::PostAspect.new(params[:pa])
-    if check_before_update(params[:cd],params[:pa])
-      @concept_post.post_aspects.destroy_all
-      @concept_post.concept_post_discontents.destroy_all
-      @concept_post.concept_post_discontent_grouped.destroy_all
 
+    unless params[:cd].nil?
+      if @post_aspect.valid?
+        @concept_post.post_aspects.destroy_all
+        @concept_post.concept_post_discontents.destroy_all
+      end
+      params[:cd].each do |cd|
+        @concept_post.concept_post_discontents.build(discontent_post_id: cd[0], complite: cd[1][:complite], status: 0)
+      end
+    end
+    if @post_aspect.valid?
       @concept_post.concept_post_resources.by_type('positive_r').destroy_all
       @concept_post.concept_post_resources.by_type('positive_s').destroy_all
       @concept_post.concept_post_resources.by_type('negative_r').destroy_all
@@ -119,12 +125,8 @@ class Concept::PostsController < PostsController
       @concept_post.concept_post_resources.by_type('control_r').destroy_all
       @concept_post.concept_post_resources.by_type('control_s').destroy_all
     end
-    unless params[:cd].nil?
-      params[:cd].each do |cd|
-        @concept_post.concept_post_discontents.build(discontent_post_id: cd[0],complite: cd[1][:complite], status: 0)
-      end
-    end
     unless params[:check_discontent].nil?
+      @concept_post.concept_post_discontent_grouped.destroy_all if @post_aspect.valid?
       params[:check_discontent].each do |com|
         @concept_post.concept_post_discontent_grouped.build(discontent_post_id: com[0], status: 1)
       end
