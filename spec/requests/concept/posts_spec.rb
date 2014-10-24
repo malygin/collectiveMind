@@ -38,7 +38,12 @@ describe 'Concept ' do
 
       it ' add new concept', js: true do
         click_link "new_concept_#{@discontent1.id}"
-        click_button 'btn-improve-concept'
+        expect(page).to have_selector('#btn_improve', visible: true)
+        expect(page).to have_selector('#send_post_concept', visible: true)
+        expect(page).to have_selector('#pa_positive', visible: false)
+        # click_button 'btn_improve'
+        page.find("#btn_improve").click
+        expect(page).to have_selector('#pa_positive', visible: true)
         expect(page).to have_content 'Краткое название вашего нововведения'
         expect(page).to have_content @discontent1.content
         expect(page).to have_selector '#main_positive_r_1 input.autocomplete'
@@ -90,7 +95,12 @@ describe 'Concept ' do
 
       it ' can click button to resource', js: true do
         click_link "new_concept_#{@discontent1.id}"
-        click_button 'btn-improve-concept'
+        expect(page).to have_selector('#btn_improve', visible: true)
+        expect(page).to have_selector('#send_post_concept', visible: true)
+        expect(page).to have_selector('#pa_positive', visible: false)
+        # click_button 'btn_improve'
+        page.find("#btn_improve").click
+        expect(page).to have_selector('#pa_positive', visible: true)
         expect(page).to have_content 'Краткое название вашего нововведения'
         expect(page).to have_content @discontent1.content
         expect(page).to have_content @discontent1.whered
@@ -287,7 +297,12 @@ describe 'Concept ' do
 
       it ' add new concept', js: true do
         click_link "new_concept_#{@discontent1.id}"
-        click_button 'btn-improve-concept'
+        expect(page).to have_selector('#btn_improve', visible: true)
+        expect(page).to have_selector('#send_post_concept', visible: true)
+        expect(page).to have_selector('#pa_positive', visible: false)
+        # click_button 'btn_improve'
+        page.find("#btn_improve").click
+        expect(page).to have_selector('#pa_positive', visible: true)
         expect(page).to have_content 'Краткое название вашего нововведения'
         expect(page).to have_content @discontent1.content
         fill_in "pa_title", with: 'con title'
