@@ -55,7 +55,7 @@
         %h4=t('show.discontent.title')
 
         %ul.news-list
-          =render partial:'post_short', collection: @aspect.aspect_posts.by_status_for_discontent(@project) if @aspect
+          =render partial:'post_short', collection: @aspect.aspect_posts.by_status_for_discontent(@project).order("discontent_posts.id DESC") if @aspect
 
   .col-md-6
     %section
