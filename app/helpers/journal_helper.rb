@@ -19,7 +19,7 @@ module JournalHelper
         'fa fa-plus color-red'
       when 'discontent_post_update'
         'fa fa-edit color-red'
-      when 'discontent_comment','save my_discontent_comment'
+      when 'discontent_comment_save','my_discontent_comment'
         'fa fa-comment color-red'
 
       when 'life_tape_post_save'
@@ -33,9 +33,9 @@ module JournalHelper
           'my_award_1like', 'my_award_3likes', 'my_award_5likes', 'my_award_15likes', 'my_award_50likes',
           'my_award_1imperfection', 'my_award_3imperfection', 'my_award_5imperfection', 'my_award_15imperfection',
           'my_award_1innovation', 'my_award_3innovation', 'my_award_5innovation', 'my_award_15innovation',
-          'my_award_100points', 'my_award_500points', 'my_award_1000points', 'my_award_3000points'
+          'my_award_100points', 'my_award_500points', 'my_award_1000points', 'my_award_3000points','my_add_score_discontent_improve'
         'fa fa-trophy '
-      when 'life_tape_comment_discuss_stat', 'life_tape_comment_approve_status'
+      when 'life_tape_comment_discuss_stat', 'life_tape_comment_approve_status', 'my_life_tape_comment_approve_status'
           'fa color-teal  fa-exclamation'
       when 'my_discontent_comment_discuss_stat', 'discontent_comment_discuss_stat','discontent_post_comment_stat','discontent_post_discuss_stat',
           'discontent_comment_approve_status','discontent_post_approve_status'

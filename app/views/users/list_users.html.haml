@@ -5,6 +5,7 @@
 %h3=t('show.user.select_users')
 %h2= @project.name
 %br
+#search_users_project{'data-project' => "#{@project.id}"}
 =text_field_tag "search_users_text",'', style: 'width: 100%; height: 30px', placeholder: t('show.user.searsh_users_promt')
 %section
   .body
