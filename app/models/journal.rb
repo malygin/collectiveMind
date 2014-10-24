@@ -1,4 +1,6 @@
 class Journal < ActiveRecord::Base
+  include Filterable
+
   attr_accessible :body, :body2, :type_event, :user, :project, :user_informed, :viewed,
                   :event, :first_id, :second_id, :personal
   belongs_to :user
@@ -6,34 +8,43 @@ class Journal < ActiveRecord::Base
 
   belongs_to :project, class_name: 'Core::Project', foreign_key: 'project_id'
 
-  comment = ["life_tape_comment_save","my_life_tape_comment","discontent_comment_save","my_discontent_comment",
-             "concept_comment_save","my_concept_comment","plan_comment_save","my_plan_comment","essay_comment_save","my_essay_comment",
-             "life_tape_comment_discuss_stat","my_life_tape_comment_discuss_stat","life_tape_comment_approve_status","my_life_tape_comment_approve_status","discontent_comment_discuss_stat","my_discontent_comment_discuss_stat",
-             "discontent_comment_approve_status","my_discontent_comment_approve_status","concept_comment_discuss_stat","my_concept_comment_discuss_stat","concept_comment_approve_status","my_concept_comment_approve_status",
-             "plan_comment_discuss_stat","my_plan_comment_discuss_stat","plan_comment_approve_status","my_plan_comment_approve_status","essay_comment_discuss_stat","my_essay_comment_discuss_stat","essay_comment_approve_status","my_essay_comment_approve_status"
-            ]
+  def self.select_type_content(type_content)
+    case type_content
+      when "by_comment"
+               ["life_tape_comment_save","my_life_tape_comment","discontent_comment_save","my_discontent_comment",
+                 "concept_comment_save","my_concept_comment","plan_comment_save","my_plan_comment","essay_comment_save","my_essay_comment",
+                 "life_tape_comment_discuss_stat","my_life_tape_comment_discuss_stat","life_tape_comment_approve_status","my_life_tape_comment_approve_status","discontent_comment_discuss_stat","my_discontent_comment_discuss_stat",
+                 "discontent_comment_approve_status","my_discontent_comment_approve_status","concept_comment_discuss_stat","my_concept_comment_discuss_stat","concept_comment_approve_status","my_concept_comment_approve_status",
+                 "plan_comment_discuss_stat","my_plan_comment_discuss_stat","plan_comment_approve_status","my_plan_comment_approve_status","essay_comment_discuss_stat","my_essay_comment_discuss_stat","essay_comment_approve_status","my_essay_comment_approve_status"
+                ]
+      when "by_content"
+       ["life_tape_post_save","discontent_post_save","concept_post_save","plan_post_save","essay_post_save"] |
+       ["discontent_post_update","concept_post_update","plan_post_update","essay_post_update"]
+      when "by_note"
+        ["my_discontent_note","my_concept_note","my_plan_note"]
+    end
+  end
 
-  content_add = ["life_tape_post_save","discontent_post_save","concept_post_save","plan_post_save","essay_post_save"]
+  # scope :by_project, -> project { where(:project => project) }
+  scope :select_users_for_news, -> user { where(:user => user) }
+  # scope :by_note, -> { where(:type_event => note) }
 
-  content_edit = ["discontent_post_update","concept_post_update","plan_post_update","essay_post_update"]
+  # scope :by_comment, -> { where(:type_event => comment) }
 
-  note = ["my_discontent_note","my_concept_note","my_plan_note"]
+  # scope :by_content, -> { where(:type_event => content_add | content_edit) }
+  # scope :by_content_add, -> { where(:type_event => content_add) }
+  # scope :by_content_edit, -> { where(:type_event => content_edit) }
 
-  scope :by_project, -> project { where(:project => project) }
-  scope :by_user, -> user { where(:user => user) }
-  scope :by_note, -> by_note { where(:type_event => note) }
+  scope :type_content, -> type_content { where(:type_event => self.select_type_content(type_content)) if type_content != '' and type_content != "content_all" }
 
-  scope :by_comment, -> by_comment { where(:type_event => comment) }
+  # scope :today, -> { where('DATE(created_at) = ?',  Time.zone.now.utc.to_date) }
+  # scope :yesterday, -> { where('DATE(created_at) = ?', Time.zone.now.utc.to_date - 1) }
+  # scope :older, -> { where('DATE(created_at) < ?', Time.zone.now.utc.to_date - 1) }
 
-  scope :by_content, -> by_content { where(:type_event => content_add | content_edit) }
-  scope :by_content_add, -> { where(:type_event => content_add) }
-  scope :by_content_edit, -> { where(:type_event => content_edit) }
+  # scope :by_period, -> date_begin, date_end, date_all { where("DATE(journals.created_at + time '04:00') BETWEEN ? AND ?", ((date_begin.present? and date_all.nil?) ? date_begin : '1900-01-01'), ((date_end.present? and date_all.nil?) ? date_end : '2100-01-01')) }
 
-  scope :today, -> { where('DATE(created_at) = ?',  Time.zone.now.utc.to_date) }
-  scope :yesterday, -> { where('DATE(created_at) = ?', Time.zone.now.utc.to_date - 1) }
-  scope :older, -> { where('DATE(created_at) < ?', Time.zone.now.utc.to_date - 1) }
-
-  scope :by_period, -> date_begin, date_end, date_all { where("DATE(journals.created_at + time '04:00') BETWEEN ? AND ?", ((date_begin.present? and date_all.nil?) ? date_begin : '1900-01-01'), ((date_end.present? and date_all.nil?) ? date_end : '2100-01-01')) }
+  scope :date_begin, -> date_begin { where("DATE(journals.created_at + time '04:00') >= ?", date_begin.present? ? date_begin : '1900-01-01') }
+  scope :date_end, -> date_end { where("DATE(journals.created_at + time '04:00') <= ?", date_end.present? ? date_end : '2100-01-01') }
 
 
   @types = []

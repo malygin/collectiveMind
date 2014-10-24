@@ -1,5 +1,6 @@
 module BaseComment
   extend ActiveSupport::Concern
+  include Filterable
   included do
     attr_accessible :content, :image, :isFile,  :user, :censored, :post_id, :comment_id, :discontent_status, :concept_status, :discuss_status, :useful
     belongs_to :user

@@ -52,6 +52,8 @@ class Discontent::PostsController < PostsController
     @accepted_posts = Discontent::Post.where(project_id: @project, status: 2)
     @comments_all = @project.problems_comments_for_improve
     @page = params[:page]
+    @users_for_news = User.where("name != ? OR surname != ?", '','').order(:id)
+    @posts = @aspect.aspect_posts.by_status_for_discontent(@project).filter(filtering_params(params))
   end
 
   def new
@@ -282,6 +284,11 @@ class Discontent::PostsController < PostsController
   def vote_result
     @project = Core::Project.find(params[:project])
     @posts = voting_model.where(project_id: @project, status: [2,4])
+  end
+
+  private
+  def filtering_params(params)
+    params.slice(:type_like, :type_note, :type_verify, :type_content, :select_users_for_news, :date_begin, :date_end, :by_note, :like, :unlike, :verified, :unverified)
   end
 
 end

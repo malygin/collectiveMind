@@ -10,11 +10,11 @@ class Core::ProjectsController < ApplicationController
   layout 'application', only: [:news,:users]
 
   # has_scope :by_project
-  has_scope :by_user
-  has_scope :by_note
-  has_scope :by_comment
-  has_scope :by_content
-  has_scope :by_period, :using => [:date_begin, :date_end, :date_all], :type => :hash
+  # has_scope :by_user
+  # has_scope :by_note
+  # has_scope :by_comment
+  # has_scope :by_content
+  # has_scope :by_period, :using => [:date_begin, :date_end, :date_all], :type => :hash
 
   def project_by_id
     unless params[:project].nil?
@@ -154,18 +154,18 @@ class Core::ProjectsController < ApplicationController
     # @journals_feed_all = apply_scopes(Journal).all
 
     if @project
-      @journals_feed_all = apply_scopes(Journal).events_for_project(@project.project_access(current_user) ? @project.id : -1, events_ignore).paginate(page: params[:page])
+      @journals_feed_all = Journal.filter(filtering_params(params)).events_for_project(@project.project_access(current_user) ? @project.id : -1, events_ignore).paginate(page: params[:page])
       # @journals_feed_all = Journal.events_for_project(@project.project_access(current_user) ? @project.id : -1, events_ignore, check_dates).paginate(page: params[:page])
     elsif prime_admin?
-      @journals_feed_all = apply_scopes(Journal).events_for_all_prime(events_ignore).paginate(page: params[:page])
+      @journals_feed_all = Journal.filter(filtering_params(params)).events_for_all_prime(events_ignore).paginate(page: params[:page])
       # @journals_feed_all = Journal.events_for_all_prime(events_ignore,check_dates).paginate(page: params[:page])
     else
       closed_projects = current_user.projects.where(core_projects: {type_access: 2}).where("core_projects.status < 12").pluck("core_projects.id")
       # @journals_feed_all = Journal.events_for_all(list_type_projects_for_user,closed_projects==[] ? [-1] : closed_projects, events_ignore, check_dates).paginate(page: params[:page])
-      @journals_feed_all = apply_scopes(Journal).events_for_all(list_type_projects_for_user,closed_projects==[] ? [-1] : closed_projects, events_ignore).paginate(page: params[:page])
+      @journals_feed_all = Journal.filter(filtering_params(params)).events_for_all(list_type_projects_for_user,closed_projects==[] ? [-1] : closed_projects, events_ignore).paginate(page: params[:page])
     end
     @j_count = {today:0, yesterday:0, older:0}
-    @users_for_news = User.order(:id)
+    @users_for_news = User.where("name != ? OR surname != ?", '','').order(:id)
   end
 
   def users
@@ -194,5 +194,9 @@ class Core::ProjectsController < ApplicationController
 
     def core_project_params
       params.require(:core_project).permit(:name, :type_access, :short_desc, :desc, :type_project, :code, :color, :advices_concept, :advices_discontent)
+    end
+
+    def filtering_params(params)
+      params.slice(:type_content, :select_users_for_news, :date_begin, :date_end)
     end
 end

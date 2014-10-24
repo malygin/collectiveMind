@@ -55,9 +55,54 @@
         %h4=t('show.discontent.title')
 
         %ul.news-list
-          =render partial:'post_short', collection: @aspect.aspect_posts.by_status_for_discontent(@project) if @aspect
+          =render partial:'post_short', collection: @posts
 
   .col-md-6
+    -if boss?
+      %section
+        %header
+          %h3 Фильтры
+        .body
+          = form_tag(@project ? "/project/#{@project.id}/general_news" : general_news_path, {method: :get, id: 'filter_news'}) do
+            %h4 Даты
+            .form-group(style="margin-left:0;")
+              %label{for: "date_begin"} С
+              =text_field_tag "date_begin",params[:by_period] ? params[:by_period][:date_begin] : '', class: 'form-control datepicker', id:'date_begin'
+            .form-group(style="margin-left:0;")
+              %label{for: "date_end"} По
+              =text_field_tag "date_end",params[:by_period] ? params[:by_period][:date_end] : '', class: 'form-control datepicker', id:'date_end'
+            %input{:name => "date_all", :type => "checkbox", :checked => (params[:by_period] ? params[:by_period][:date_all] : nil) ? true : false} Все
+
+            %br
+            %h4 Лайки
+            .form-group
+              %input{:name => "type_like", :type => "radio", :value => "by_like", :checked => params[:type_content] == "by_comment" ? 'checked' : nil} Пролайканы
+              %br
+              %input{:name => "type_like", :type => "radio", :value => "by_unlike", :checked => params[:by_content] == "by_content" ? 'checked' : nil} Не пролайканы
+              %br
+              %input{:name => "type_like", :type => "radio", :value => "content_all", :checked => params[:content_all] == "content_all" ? 'checked' : nil} Все
+            %h4 Замечания
+            .form-group
+              %input{:name => "type_note", :type => "radio", :value => "by_note", :checked => params[:type_content] == "by_comment" ? 'checked' : nil} Замечания
+              %br
+              %input{:name => "type_note", :type => "radio", :value => "content_all", :checked => params[:content_all] == "content_all" ? 'checked' : nil} Все
+            %h4 Проверено
+            .form-group
+              %input{:name => "type_verify", :type => "radio", :value => "by_verified", :checked => params[:type_content] == "by_comment" ? 'checked' : nil} Проверено
+              %br
+              %input{:name => "type_verify", :type => "radio", :value => "by_unverified", :checked => params[:by_content] == "by_content" ? 'checked' : nil} Не проверено
+              %br
+              %input{:name => "type_verify", :type => "radio", :value => "content_all", :checked => params[:content_all] == "content_all" ? 'checked' : nil} Все
+            %h4 Пользователи
+            -if @users_for_news
+              = select_tag 'select_users_for_news', options_from_collection_for_select(@users_for_news, "id", "to_s"),
+              prompt: 'Выберите пользователя', class: "form-control"
+
+            %br
+            %br
+            %actions
+              %input.btn.btn-success{:type => "submit", :id  => "send_filter", :value => "Применить"}
+      %br
     %section
       .body
         %h4=t('show.improve.problem')

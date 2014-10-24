@@ -56,6 +56,14 @@ class Discontent::Post < ActiveRecord::Base
     end
   }
 
+  scope :select_users_for_news, -> user { where(:user => user) }
+  scope :type_note, -> type_note { joins(:notes) unless type_note == "content_all" }
+  scope :type_like, -> type_like { where(:useful => type_like == "by_like" ? true:false) unless type_like == "content_all" }
+  scope :type_verify, -> type_verify { where(type_verify == "by_verified" ? "discontent_posts.status_content = 't' and discontent_posts.status_whered = 't' and discontent_posts.status_whend = 't'" : "discontent_posts.status_content = 'f' or discontent_posts.status_whered = 'f' or discontent_posts.status_whend = 'f'") unless type_verify == "content_all" }
+
+  scope :date_begin, -> date_begin { where("DATE(discontent_posts.created_at + time '04:00') >= ?", date_begin.present? ? date_begin : '1900-01-01') }
+  scope :date_end, -> date_end { where("DATE(discontent_posts.created_at + time '04:00') <= ?", date_end.present? ? date_end : '2100-01-01') }
+
   def update_post_aspects(aspects_new)
     self.discontent_post_aspects.destroy_all
     aspects_new.each do |asp|
