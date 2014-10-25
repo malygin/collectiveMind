@@ -19,6 +19,7 @@
 #= require bootstrap-colorpicker
 
 # @todo load initialization
+sidebarHeight = 0;
 $ ->
   $(".image-popup-vertical-fit").magnificPopup
     type: "image"
@@ -33,7 +34,11 @@ $ ->
   $sidebar = $("#sidebar")
 
   $sidebar.on "show.bs.collapse", (e) ->
-    e.target is this and $sidebar.addClass("open")  and $sidebar.removeClass('nav-collapse') and  $(".content").css "margin-top", $sidebar.height() + 30;
+
+    e.target is this and $sidebar.addClass("open") and $sidebar.removeClass('nav-collapse')
+    if $("#sidebar").height()  > 0
+      sidebarHeight =  $("#sidebar").height()
+    $(".content").css "margin-top", sidebarHeight + 30
 
   $sidebar.on "hide.bs.collapse", (e) ->
     if e.target is this
