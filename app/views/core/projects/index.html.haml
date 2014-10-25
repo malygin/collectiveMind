@@ -1,30 +1,33 @@
 - if signed_in?
-  -if @closed_projects.present?
-    %h4
-      %strong=t('show.project.closed')
-    - @closed_projects.each do |project|
-      .row
-        .col-md-9
-          %h3= project.name
-          %b="(#{status_project(project)})"
-        .col-md-3
-          =link_to "/project/#{project.id}", class:'btn btn-lg btn-danger', id: "go_to_closed_project_#{project.id}" do
-            =t('link.go_to_project')
-      %br
-    %hr
-  -if @opened_projects.present?
-    %h4
-      %strong=t('show.project.opened')
-    - @opened_projects.each do |project|
-      .row
-        .col-md-9
-          %h3= project.name
-          %b="(#{status_project(project)})"
-        .col-md-3
-          =link_to "/project/#{project.id}", class:'btn btn-lg btn-danger', id: "go_to_opened_project_#{project.id}" do
-            =t('link.go_to_project')
-      %br
-    %hr
+  -cache @closed_projects do
+    -if @closed_projects.present?
+      %h4
+        %strong=t('show.project.closed')
+      - @closed_projects.each do |project|
+        .row
+          .col-md-9
+            %h3= project.name
+            %b="(#{status_project(project)})"
+          .col-md-3
+            =link_to "/project/#{project.id}", class:'btn btn-lg btn-danger', id: "go_to_closed_project_#{project.id}" do
+              =t('link.go_to_project')
+        %br
+      %hr
+  -cache @opened_projects do
+    -if @opened_projects.present?
+
+      %h4
+        %strong=t('show.project.opened')
+      - @opened_projects.each do |project|
+        .row
+          .col-md-9
+            %h3= project.name
+            %b="(#{status_project(project)})"
+          .col-md-3
+            =link_to "/project/#{project.id}", class:'btn btn-lg btn-danger', id: "go_to_opened_project_#{project.id}" do
+              =t('link.go_to_project')
+        %br
+      %hr
   -if @demo_projects.present?
     %h4
       %strong=t('show.project.demo')
