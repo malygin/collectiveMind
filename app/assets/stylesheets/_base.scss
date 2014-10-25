@@ -598,6 +598,9 @@ input.parsley-error{
   }
 
   .news-item-info{
+    @media (max-width: 480px) {
+      margin-left: 0px;
+    }
     margin-left: 62px; /*50 + 12px padding*/
   }
 
