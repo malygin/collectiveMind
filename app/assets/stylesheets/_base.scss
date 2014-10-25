@@ -703,7 +703,10 @@ input.parsley-error{
       color: $transparentTextColor;
       width: 40px;
       padding: 0;
-      font-size: $font-size-base ;
+      font-size: $font-size-base *1.5 ;
+      @media (max-width: 480px) {
+        font-size: $font-size-base ;
+      }
       outline: 0;
       background: none;
       text-align: center;
