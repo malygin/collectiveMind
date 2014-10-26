@@ -66,9 +66,16 @@ class Journal < ActiveRecord::Base
 
   private
   def send_last_news
-    unless type_event.start_with? 'my_'
-      WebsocketRails[:news].trigger 'latest_news', render_anywhere('journal/journal', {journal: self, current_user: nil})
-    end
+    Fiber.new do
+      if type_event.start_with? 'my_'
+        WebsocketRails.users[user_informed.id].send_message(
+            :latest, render_anywhere('application/messages_menu', {current_user: user_informed, project: project,
+                                                                   my_journals: user_informed.my_journals(project)}),
+            channel: :notifications)
+      else
+        WebsocketRails[:news].trigger :latest_news, render_anywhere('journal/journal', {journal: self, current_user: nil})
+      end
+    end.resume
   end
 
   private

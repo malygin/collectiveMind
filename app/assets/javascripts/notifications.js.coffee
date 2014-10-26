@@ -15,3 +15,20 @@
             $('#messages').click()
 
   return
+
+$(document).ready ->
+  if document.location.pathname.match('project')
+    ws = new WebSocketRails(document.location.host + '/websocket')
+    ws.on_open = ->
+      console.log 'socket opened'
+    ws.on_failure = ->
+      console.log 'socket open error'
+
+    private_channel = ws.subscribe_private('notifications')
+    private_channel.on_success = ->
+      console.log("Has joined the channel notifications")
+    private_channel.on_failure = ->
+      console.log("Authorization failed channel notifications")
+    private_channel.bind 'latest', (data) ->
+      $('#notifications').html(data);
+      $(".count").effect("bounce", "slow")
