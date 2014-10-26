@@ -29,8 +29,12 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
     if @my_journals_count > 0 and @user == current_user
       Journal.events_for_my_feed(@project.id, current_user).update_all(viewed: true)
+      journal_data
     end
-    redirect_to :back
+
+    respond_to do |format|
+      format.js
+    end
   end
 
   def edit
