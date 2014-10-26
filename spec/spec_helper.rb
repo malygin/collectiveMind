@@ -1,4 +1,4 @@
-require "codeclimate-test-reporter"
+require 'codeclimate-test-reporter'
 CodeClimate::TestReporter.start
 
 require 'rubygems'
@@ -13,6 +13,7 @@ Spork.prefork do
   require 'capybara-screenshot/rspec'
   require 'capybara/webkit/matchers'
   require 'database_cleaner'
+  require 'websocket_rails/spec_helpers'
 
   require 'simplecov'
   SimpleCov.start
