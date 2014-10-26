@@ -364,10 +364,10 @@ ActiveRecord::Schema.define(version: 20141018163608) do
     t.string   "secret"
     t.string   "secret2"
     t.string   "secret3"
-    t.boolean  "advices_discontent"
-    t.boolean  "advices_concept"
     t.string   "color"
     t.string   "code"
+    t.boolean  "advices_discontent"
+    t.boolean  "advices_concept"
   end
 
   add_index "core_projects", ["status"], name: "index_core_projects_on_status", using: :btree

@@ -235,6 +235,22 @@ class Concept::PostsController < PostsController
     end
 
     def create_concept_resources_on_type(project, post)
+      unless params[:resor].nil?
+        params[:resor].each do |r|
+          if r[:name]!=''
+            resource = post.concept_post_resources.build(:name => r[:name], :desc => r[:desc], :type_res => r[:type_res], :project_id => project.id, :style => 0)
+            unless r[:means].nil?
+              r[:means].each  do |m|
+                if m[:name]!=''
+                  mean = post.concept_post_resources.build(:name => m[:name], :desc => m[:desc], :type_res => m[:type_res], :project_id => project.id, :style => 1)
+                  mean.concept_post_resource = resource
+                end
+              end
+            end
+          end
+        end
+      end
+
       #if flag_destroy
       #  post.concept_post_resources.by_type(type_r).destroy_all
       #  post.concept_post_resources.by_type(type_s).destroy_all
@@ -262,20 +278,6 @@ class Concept::PostsController < PostsController
       #      end
       #   end
       # end
-      unless params[:resor].nil?
-        params[:resor].each do |r|
-          if r[:name]!=''
-            resource = post.concept_post_resources.build(:name => r[:name], :desc => r[:desc], :type_res => r[:type_res], :project_id => project.id, :style => 0)
-            r[:means].each  do |m|
-              if m[:name]!=''
-                mean = post.concept_post_resources.build(:name => m[:name], :desc => m[:desc], :type_res => m[:type_res], :project_id => project.id, :style => 1)
-                mean.concept_post_resource = resource
-              end
-            end
-          end
-        end
-      end
-
   end
 
 end
