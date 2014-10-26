@@ -103,4 +103,4 @@ gem 'activerecord-deprecated_finders'
 #texteditor
 #gem 'ckeditor'
 gem 'tinymce-rails'
-gem 'has_scope'
+# gem 'has_scope'
