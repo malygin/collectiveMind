@@ -25,7 +25,7 @@
             .text
               = journal_parser(journal, project.id).html_safe
     %li{role: 'presentation'}
-      = link_to journal_clear_user_path(project, current_user), method: :put, remote: true, class: 'text-align-center see-all', id: 'clear_my_journals' do
+      = link_to "/project/#{project.id}/users/#{current_user.id}/journal_clear", method: :put, remote: true, class: 'text-align-center see-all', id: 'clear_my_journals' do
         = t('menu.journal_clear')
         %i.fa.fa-arrow-right
   - else
