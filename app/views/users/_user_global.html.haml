@@ -39,8 +39,8 @@
           %span.rate= user.user_project_scores(@project.id).send(@score_name ? @score_name : 'score')
         -else
           %span.rate 0
-      -else
-        -if user.score
-          %span.rate= user.score
-        -else
-          %span.rate 0
+      -#-else
+      -#  -if user.score
+      -#    %span.rate= user.score
+      -#  -else
+      -#    %span.rate 0

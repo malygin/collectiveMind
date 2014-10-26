@@ -22,6 +22,9 @@
 #= require messenger.js
 #= require messenger-theme-future
 #= require notifications
+#= require select2
+#= require jquery.icheck
+
 
 # @todo load initialization
 sidebarHeight = 0;
@@ -37,6 +40,13 @@ $ ->
 
   $("#color").colorpicker().on "changeColor", (ev) ->
     $("#color-holder").css "backgroundColor", ev.color.toHex()
+
+  $(".chzn-select").each ->
+    $(this).select2 $(this).data()
+
+  $(".iCheck").iCheck
+    checkboxClass: "icheckbox_square-grey"
+    radioClass: "iradio_square-grey"
 
   $sidebar = $("#sidebar")
 
@@ -515,6 +525,17 @@ $.fn.extend popoverClosable: (options) ->
       data:
         check_field: check_field
         status: status
+
+
+$("#date_all").on "ifChecked", (e) ->
+  $('#date_begin').val('')
+  $('#date_end').val('')
+
+$("#by_content").on "ifChecked", (e) ->
+  $('#by_create,#by_update,#event_content_all').iCheck('uncheck').iCheck('enable')
+
+$("#by_content").on "ifUnchecked", (e) ->
+  $('#by_create,#by_update,#event_content_all').iCheck('uncheck').iCheck('disable')
 
 # @todo wysihtml5 editor
 #@activate_htmleditor= ->

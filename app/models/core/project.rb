@@ -61,6 +61,8 @@ class Core::Project < ActiveRecord::Base
   has_many :essays, -> { where status: 0 }, class_name: 'Essay::Post'
   #has_many :project_score_users, class_name: 'User', through: :core_project_scores, source: :user
   scope :club_projects, ->(user) { where(type_access: 1) if user.cluber? or user.boss? }
+  scope :active_proc, -> { where("core_projects.status < ?", 20) }
+  scope :access_proc, -> access_proc { where(core_projects: {type_access: access_proc}) }
 
   LIST_STAGES = {1 => {name: 'Сбор информации', type_stage: :life_tape_posts, status: [0, 1, 2, 20]},
                  2 => {name: 'Сбор несовершенств', type_stage: :discontent_posts, status: [3, 4, 5, 6]},
@@ -73,7 +75,7 @@ class Core::Project < ActiveRecord::Base
     if current_stage == 'life_tape/posts'
       self.aspects.order(:id)
     else
-      self.proc_aspects.order("position DESC")
+      self.proc_aspects.first.position.present? ? self.proc_aspects.order("position DESC") : self.proc_aspects.order(:id)
     end
   end
 

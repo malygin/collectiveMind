@@ -133,29 +133,6 @@ module SessionsHelper
     end
   end
 
-  def events_ignore
-    ["'reply_life_tape_comment'","'reply_discontent_comment'","'reply_concept_comment'","'reply_plan_comment'",
-     "'reply_essay_comment'"]
-  end
-
-  def check_events
-    events = []
-    comment = ["'life_tape_comment_save'","'my_life_tape_comment'","'discontent_comment_save'","'my_discontent_comment'",
-               "'concept_comment_save'","'my_concept_comment'","'plan_comment_save'","'my_plan_comment'","'essay_comment_save'","'my_essay_comment'"]
-    discontent = ["'discontent_post_save'","'discontent_comment_save'","'my_discontent_comment'"]
-  end
-
-  def check_dates
-    if params[:check_date_all]
-      return ""
-    end
-    if params[:date_begin] and params[:date_begin] != "" and params[:date_end] and params[:date_end] != ""
-      return "DATE(journals.created_at + time '04:00') BETWEEN '#{params[:date_begin]}' AND '#{params[:date_end]}'"
-    end
-    return "DATE(journals.created_at + time '04:00') >= '#{params[:date_begin]}'" if params[:date_begin] and params[:date_begin] != ""
-    "DATE(journals.created_at + time '04:00') =< '#{params[:date_end]}'" if params[:date_end] and params[:date_end] != ""
-  end
-
   def user?
 		not (admin? or expert?)
 	end

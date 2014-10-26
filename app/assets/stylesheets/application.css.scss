@@ -10,9 +10,9 @@
 @import "bootstrap-original/_mixins";
 @import "bootstrap-override";
 @import "lib/font-awesome/font-awesome";
-//@import "lib/_icheckbox";
+@import "lib/_icheckbox";
 //@import "lib/_datepicker";
-//@import "lib/_select2";
+@import "lib/_select2";
 @import "lib/_bootstrap-wysihtml5";
 //@import "lib/_bootstrap-switch";
 @import "lib/_bootstrap-colorpicker";
@@ -121,6 +121,24 @@ $brand-estimate:        #663505 !default;
     border-top: none !important;
     text-decoration: none !important;
   }
+}
+
+.radio-filter,
+.checkbox-filter {
+  display: block;
+  min-height: $line-height-computed; // clear the floating input if there is no label text
+  margin-top: 10px;
+  margin-bottom: 10px;
+  //  padding-left: 20px;
+  label {
+    display: inline;
+    font-weight: normal;
+    cursor: pointer;
+  }
+}
+
+.sort_content {
+  background-color: rgb(110, 110, 174);
 }
 
 .tooltip-inner {
