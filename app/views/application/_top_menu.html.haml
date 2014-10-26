@@ -99,39 +99,8 @@
               =link_to t('menu.settings.admin_set_21'), next_stage_core_project_path(@project), id: 'change_stage'
 
   %li.divider
-  %li.dropdown
-    %a#messages.dropdown-toggle{'data-toggle' => 'dropdown', href: '#', title: t('menu.journal_title')}
-      %i.fa.fa-comments
-      - if @my_journals_count > 0
-        %span.count(style='background: #e5603b;')
-          = @my_journals_count
-        - if (Time.now - @my_journals.last.first.created_at) > 1.day
-          .hidden#set_notification_message
-      -else
-        %span.count
-          = @my_journals_count
-
-    %ul#messages-menu.dropdown-menu.messages{role: 'menu'}
-      -unless @my_journals.empty?
-        - @my_journals.each do |journal, k|
-          %li{role: 'presentation'}
-            %p.message{href: '#'}
-              =image_tag journal.user.avatar.url(:thumb), style: 'margin-left: 10px;'
-              .details(style='margin-left: 60px;')
-                .sender
-                  %span.color-teal=journal.user
-                  - if k > 1
-                    %br
-                    %span.color-red=t('menu.journal_count', count: k-1)
-                .text
-                  = journal_parser(journal, @project.id).html_safe
-        %li{role: 'presentation'}
-          %a.text-align-center.see-all{href: "/project/#{@project.id}/users/#{current_user.id}/journal_clear", "data-method" => "put"}
-            =t('menu.journal_clear')
-            %i.fa.fa-arrow-right
-      -else
-        %li
-          %a=t('menu.journal_empty')
+  %li.dropdown#notifications
+    = render 'messages_menu'
 
   %li.divider
   %li.hidden-xs
