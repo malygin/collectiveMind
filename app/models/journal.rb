@@ -66,6 +66,7 @@ class Journal < ActiveRecord::Base
 
   private
   def send_last_news
+    return if ENV['RAILS_ENV'] == 'test'
     Fiber.new do
       if type_event.start_with? 'my_'
         WebsocketRails.users[user_informed.id].send_message(
