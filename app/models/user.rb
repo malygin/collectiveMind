@@ -292,6 +292,12 @@ class User < ActiveRecord::Base
     post.advices.where(user: id)
   end
 
+  def my_journals(project)
+    events = Journal.events_for_my_feed project.id, id
+    g = events.group_by { |e| e.first_id }
+    g.collect { |k, v| [v.first, v.size] }
+  end
+
   private
 
   #def encrypt_password

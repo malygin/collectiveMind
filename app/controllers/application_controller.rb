@@ -10,9 +10,7 @@ class ApplicationController < ActionController::Base
 
   def journal_data
     @project = Core::Project.find(params[:project])
-    events = Journal.events_for_my_feed @project.id, current_user.id
-    g = events.group_by { |e| e.first_id }
-    @my_journals = g.collect { |k, v| [v.first, v.size] }
+    @my_journals = current_user.my_journals @project
     @my_journals_count = @my_journals.size
   end
 
