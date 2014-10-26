@@ -1,17 +1,17 @@
 %a#messages.dropdown-toggle{'data-toggle' => 'dropdown', href: '#', title: t('menu.journal_title')}
   %i.fa.fa-comments
-  - if @my_journals_count > 0
+  - if my_journals.size > 0
     %span.count(style='background: #e5603b;')
-      = @my_journals_count
-    - if (Time.now - @my_journals.last.first.created_at) > 1.day
+      = my_journals.size
+    - if (Time.now - my_journals.last.first.created_at) > 1.day
       #set_notification_message
   - else
     %span.count
-      = @my_journals_count
+      = my_journals.size
 
 %ul.dropdown-menu.messages#messages-menu{role: 'menu'}
-  - unless @my_journals.empty?
-    - @my_journals.each do |journal, k|
+  - unless my_journals.empty?
+    - my_journals.each do |journal, k|
       %li{role: 'presentation'}
         %p.message{href: '#'}
           = image_tag journal.user.avatar.url(:thumb), style: 'margin-left: 10px;'
@@ -23,9 +23,9 @@
                 %span.color-red
                   = t('menu.journal_count', count: k-1)
             .text
-              = journal_parser(journal, @project.id).html_safe
+              = journal_parser(journal, project.id).html_safe
     %li{role: 'presentation'}
-      = link_to journal_clear_user_path(@project, current_user), method: :put, remote: true, class: 'text-align-center see-all', id: 'clear_my_journals' do
+      = link_to journal_clear_user_path(project, current_user), method: :put, remote: true, class: 'text-align-center see-all', id: 'clear_my_journals' do
         = t('menu.journal_clear')
         %i.fa.fa-arrow-right
   - else

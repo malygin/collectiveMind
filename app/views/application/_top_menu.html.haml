@@ -100,7 +100,7 @@
 
   %li.divider
   %li.dropdown#notifications
-    = render 'messages_menu'
+    = render partial: 'messages_menu', locals: {my_journals: @my_journals, project: @project}
 
   %li.divider
   %li.hidden-xs

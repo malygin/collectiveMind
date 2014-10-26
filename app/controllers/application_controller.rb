@@ -11,7 +11,6 @@ class ApplicationController < ActionController::Base
   def journal_data
     @project = Core::Project.find(params[:project])
     @my_journals = current_user.my_journals @project
-    @my_journals_count = @my_journals.size
   end
 
   protected
