@@ -165,7 +165,6 @@ GEM
       activesupport (>= 4.0.1)
       haml (>= 3.1, < 5.0)
       railties (>= 4.0.1)
-    has_scope (0.5.1)
     headless (1.0.2)
     heroku-deflater (0.5.3)
       rack (>= 1.4.5)
@@ -401,7 +400,6 @@ DEPENDENCIES
   guard-spork
   haml
   haml-rails
-  has_scope
   headless
   heroku-deflater
   highcharts-rails (~> 3.0.0)
