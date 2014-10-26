@@ -27,7 +27,7 @@ class UsersController < ApplicationController
   def journal_clear
     @project = Core::Project.find(params[:project])
     @user = User.find(params[:id])
-    if @my_journals_count > 0 and @user == current_user
+    if @my_journals.size > 0 and current_user?(@user)
       Journal.events_for_my_feed(@project.id, current_user).update_all(viewed: true)
       journal_data
     end

@@ -1,1 +1,1 @@
-$('#notifications').html("#{j render('application/messages_menu')}");
+$('#notifications').html("#{j render(partial: 'application/messages_menu', locals: {my_journals: @my_journals, project: @project})}");
