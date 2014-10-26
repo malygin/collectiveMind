@@ -58,7 +58,7 @@ class User < ActiveRecord::Base
 
   def current_projects_for_user
     if prime_admin?
-      Core::Project.order(:id)
+      Core::Project.order("id DESC")
     else
       opened_projects = Core::Project.where(type_access: [0, 3])
       club_projects = (self.cluber? or self.boss?) ? Core::Project.where(type_access: 1) : []
@@ -70,7 +70,7 @@ class User < ActiveRecord::Base
 
   def current_projects_for_journal
     if prime_admin?
-      Core::Project.where("core_projects.status < 12").order(:id)
+      Core::Project.where("core_projects.status < 12").order("id DESC")
     else
       opened_projects = Core::Project.where("core_projects.status < 12").where(type_access: [0, 3])
       club_projects = (self.cluber? or self.boss?) ? Core::Project.where("core_projects.status < 12").where(type_access: 1) : []

@@ -29,9 +29,14 @@
   %ul.navbar-buttons.pull-right
     - if signed_in? and boss?
       %li
+        =link_to general_rating_path, class:'btn btn-sm btn-primary', id: 'general_rating'  do
+          =t('menu.general_rating')
+          %i.fa.fa-arrow-right
+      %li
         =link_to general_news_path, class:'btn btn-sm btn-success', id: 'general_news'  do
           =t('menu.general_news')
           %i.fa.fa-arrow-right
+
       - if prime_admin?
         %li
           =link_to list_projects_path, class:'btn btn-sm btn-info', id: 'list_projects'  do

@@ -30,6 +30,8 @@
           =link_to t('menu.main'), "/" , id: 'root_page'
         %li{role: 'presentation'}
           =link_to t('menu.general_news'), "/project/#{@project.id}/general_news" , id: 'general_news'
+        %li{role: 'presentation'}
+          =link_to t('menu.general_rating'), "/project/#{@project.id}/general_rating" , id: 'general_rating'
         - if prime_admin?
           %li{role: 'presentation'}
             =link_to t('menu.list_projects'), list_projects_path, id: 'list_projects'

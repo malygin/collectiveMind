@@ -53,56 +53,127 @@
           .pull-right
             = link_to t('show.discontent.add_required'), new_discontent_post_path(@project, asp: params[:asp], required: true) , id: 'add_record',  class: 'btn btn-danger'
         %h4=t('show.discontent.title')
+        %br
+        -if boss?
+          #sort_discontents
+            .pull-right
+              Показана сортировка
+              %span#sort_default
+                =link_to "по умолчанию", sort_content_discontent_posts_path(@project, asp: @aspect, sort_default: true,type_like: params[:type_like], type_note: params[:type_note], type_verify: params[:type_verify], type_status: params[:type_status]), remote: true, id: 'sort_default_link'
+              |
+              %span#sort_date
+                =link_to sort_content_discontent_posts_path(@project, asp: @aspect, sort_date: 'up', type_like: params[:type_like], type_note: params[:type_note], type_verify: params[:type_verify], type_status: params[:type_status]), remote: true, id: 'sort_date_link' do
+                  по дате
+                  %i.fa.fa-sort-down(title='по убыванию')
+                  -#%i.fa.fa-sort-up(title='по убыванию')
+              |
+              %span#sort_user
+                =link_to sort_content_discontent_posts_path(@project, asp: @aspect, sort_user: 'up',type_like: params[:type_like], type_note: params[:type_note], type_verify: params[:type_verify], type_status: params[:type_status]), remote: true, id: 'sort_user_link' do
+                  по пользователям
+                  %i.fa.fa-sort-down(title='по убыванию')
+                  -#%i.fa.fa-sort-up(title='по убыванию')
+              |
+              -#%span#sort_comment
+              -#  =link_to sort_content_discontent_posts_path(@project, asp: @aspect, sort_comment: 'up',type_like: params[:type_like], type_note: params[:type_note], type_verify: params[:type_verify], type_status: params[:type_status]), remote: true, id: 'sort_comment_link' do
+              -#    по комментариям
+              -#    %i.fa.fa-sort-down(title='по убыванию')
+              -#    -#%i.fa.fa-sort-up(title='по убыванию')
+              -#|
+              %span#sort_view
+                =link_to sort_content_discontent_posts_path(@project, asp: @aspect, sort_view: 'up',type_like: params[:type_like], type_note: params[:type_note], type_verify: params[:type_verify], type_status: params[:type_status]), remote: true, id: 'sort_view_link' do
+                  по просмотрам
+                  %i.fa.fa-sort-down(title='по убыванию')
+                  -#%i.fa.fa-sort-up(title='по убыванию')
+            %br
+            %br
 
-        %ul.news-list
+        %ul.news-list#tab_discontents
           =render partial:'post_short', collection: @posts
 
   .col-md-6
     -if boss?
       %section
-        %header
-          %h3 Фильтры
         .body
-          = form_tag(@project ? "/project/#{@project.id}/general_news" : general_news_path, {method: :get, id: 'filter_news'}) do
-            %h4 Даты
-            .form-group(style="margin-left:0;")
-              %label{for: "date_begin"} С
-              =text_field_tag "date_begin",params[:by_period] ? params[:by_period][:date_begin] : '', class: 'form-control datepicker', id:'date_begin'
-            .form-group(style="margin-left:0;")
-              %label{for: "date_end"} По
-              =text_field_tag "date_end",params[:by_period] ? params[:by_period][:date_end] : '', class: 'form-control datepicker', id:'date_end'
-            %input{:name => "date_all", :type => "checkbox", :checked => (params[:by_period] ? params[:by_period][:date_all] : nil) ? true : false} Все
+          .pull-right
+            = link_to "Сбросить все", discontent_posts_path(@project, asp: @aspect) , id: 'sort_clear',  class: 'btn btn-sm btn-danger'
+          %h4 Фильтры
+          = form_tag(discontent_posts_path(@project), {method: :get, id: 'filter_discontents'}) do
+            %input{name: "asp", type: "hidden", value: @aspect.id}
+            .col-md-6
+              .control-group
+                %label.control-label Лайки
+                .controls.form-group
+                  %label.radio-filter
+                    %input.iCheck{:name => "type_like", :type => "radio", :value => "by_like", :checked => params[:type_like] == "by_like" ? 'checked' : nil} Пролайканы
+                  %label.radio-filter
+                    %input.iCheck{:name => "type_like", :type => "radio", :value => "by_unlike", :checked => params[:type_like] == "by_unlike" ? 'checked' : nil} Не пролайканы
+                  %label.radio-filter
+                    %input.iCheck{:name => "type_like", :type => "radio", :value => "content_all", :checked => params[:type_like] == "content_all" ? 'checked' : nil} Все
 
-            %br
-            %h4 Лайки
-            .form-group
-              %input{:name => "type_like", :type => "radio", :value => "by_like", :checked => params[:type_content] == "by_comment" ? 'checked' : nil} Пролайканы
-              %br
-              %input{:name => "type_like", :type => "radio", :value => "by_unlike", :checked => params[:by_content] == "by_content" ? 'checked' : nil} Не пролайканы
-              %br
-              %input{:name => "type_like", :type => "radio", :value => "content_all", :checked => params[:content_all] == "content_all" ? 'checked' : nil} Все
-            %h4 Замечания
-            .form-group
-              %input{:name => "type_note", :type => "radio", :value => "by_note", :checked => params[:type_content] == "by_comment" ? 'checked' : nil} Замечания
-              %br
-              %input{:name => "type_note", :type => "radio", :value => "content_all", :checked => params[:content_all] == "content_all" ? 'checked' : nil} Все
-            %h4 Проверено
-            .form-group
-              %input{:name => "type_verify", :type => "radio", :value => "by_verified", :checked => params[:type_content] == "by_comment" ? 'checked' : nil} Проверено
-              %br
-              %input{:name => "type_verify", :type => "radio", :value => "by_unverified", :checked => params[:by_content] == "by_content" ? 'checked' : nil} Не проверено
-              %br
-              %input{:name => "type_verify", :type => "radio", :value => "content_all", :checked => params[:content_all] == "content_all" ? 'checked' : nil} Все
-            %h4 Пользователи
-            -if @users_for_news
-              = select_tag 'select_users_for_news', options_from_collection_for_select(@users_for_news, "id", "to_s"),
-              prompt: 'Выберите пользователя', class: "form-control"
+              .control-group
+                %label.control-label Замечания
+                .controls.form-group
+                  %label.radio-filter
+                    %input.iCheck{:name => "type_note", :type => "radio", :value => "by_note", :checked => params[:type_note] == "by_note" ? 'checked' : nil} С замечаниями
+                  %label.radio-filter
+                    %input.iCheck{:name => "type_note", :type => "radio", :value => "content_all", :checked => params[:type_note] == "content_all" ? 'checked' : nil} Все
+
+              -#%h4 Лайки
+              -#.form-group
+              -#  %input{:name => "type_like", :type => "radio", :value => "by_like", :checked => params[:type_like] == "by_like" ? 'checked' : nil} Пролайканы
+              -#  %br
+              -#  %input{:name => "type_like", :type => "radio", :value => "by_unlike", :checked => params[:type_like] == "by_unlike" ? 'checked' : nil} Не пролайканы
+              -#  %br
+              -#  %input{:name => "type_like", :type => "radio", :value => "content_all", :checked => params[:type_like] == "content_all" ? 'checked' : nil} Все
+              -#%h4 Замечания
+              -#.form-group
+              -#  %input{:name => "type_note", :type => "radio", :value => "by_note", :checked => params[:type_note] == "by_note" ? 'checked' : nil} С замечаниями
+              -#  %br
+              -#  %input{:name => "type_note", :type => "radio", :value => "content_all", :checked => params[:type_note] == "content_all" ? 'checked' : nil} Все
+
+            .col-md-6
+              .control-group
+                %label.control-label Проверка
+                .controls.form-group
+                  %label.radio-filter
+                    %input.iCheck{:name => "type_verify", :type => "radio", :value => "by_verified", :checked => params[:type_verify] == "by_verified" ? 'checked' : nil} Проверены
+                  %label.radio-filter
+                    %input.iCheck{:name => "type_verify", :type => "radio", :value => "by_unverified", :checked => params[:type_verify] == "by_unverified" ? 'checked' : nil} Не проверены
+                  %label.radio-filter
+                    %input.iCheck{:name => "type_verify", :type => "radio", :value => "content_all", :checked => params[:type_verify] == "content_all" ? 'checked' : nil} Все
+
+              .control-group
+                %label.control-label Статус
+                .controls.form-group
+                  %label.radio-filter
+                    %input.iCheck{:name => "type_status", :type => "radio", :value => "by_discuss", :checked => params[:type_status] == "by_discuss" ? 'checked' : nil} Требует обсуждения
+                  %label.radio-filter
+                    %input.iCheck{:name => "type_status", :type => "radio", :value => "by_approve", :checked => params[:type_status] == "by_approve" ? 'checked' : nil} Важное
+                  %label.radio-filter
+                    %input.iCheck{:name => "type_status", :type => "radio", :value => "content_all", :checked => params[:type_status] == "content_all" ? 'checked' : nil} Все
+
+              -#%h4 Проверка
+              -#.form-group
+              -#  %input{:name => "type_verify", :type => "radio", :value => "by_verified", :checked => params[:type_verify] == "by_verified" ? 'checked' : nil} Проверены
+              -#  %br
+              -#  %input{:name => "type_verify", :type => "radio", :value => "by_unverified", :checked => params[:type_verify] == "by_unverified" ? 'checked' : nil} Не проверены
+              -#  %br
+              -#  %input{:name => "type_verify", :type => "radio", :value => "content_all", :checked => params[:type_verify] == "content_all" ? 'checked' : nil} Все
+              -#
+              -#%h4 Статус
+              -#.form-group
+              -#  %input{:name => "type_status", :type => "radio", :value => "by_discuss", :checked => params[:type_status] == "by_discuss" ? 'checked' : nil} Требует обсуждения
+              -#  %br
+              -#  %input{:name => "type_status", :type => "radio", :value => "by_approve", :checked => params[:type_status] == "by_approve" ? 'checked' : nil} Важное
+              -#  %br
+              -#  %input{:name => "type_status", :type => "radio", :value => "content_all", :checked => params[:type_status] == "content_all" ? 'checked' : nil} Все
 
             %br
             %br
             %actions
               %input.btn.btn-success{:type => "submit", :id  => "send_filter", :value => "Применить"}
       %br
+
     %section
       .body
         %h4=t('show.improve.problem')

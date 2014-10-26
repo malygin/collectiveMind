@@ -55,14 +55,26 @@ class Discontent::Post < ActiveRecord::Base
       where(status: 0)
     end
   }
+  scope :by_verified, -> { where(discontent_posts: {status_content: 't', status_whered: 't', status_whend: 't'}) }
+  scope :by_unverified, -> { where(discontent_posts: { status_content: ['f',nil], status_whered: ['f',nil], status_whend: ['f',nil]}) }
 
-  scope :select_users_for_news, -> user { where(:user => user) }
-  scope :type_note, -> type_note { joins(:notes) unless type_note == "content_all" }
-  scope :type_like, -> type_like { where(:useful => type_like == "by_like" ? true:false) unless type_like == "content_all" }
-  scope :type_verify, -> type_verify { where(type_verify == "by_verified" ? "discontent_posts.status_content = 't' and discontent_posts.status_whered = 't' and discontent_posts.status_whend = 't'" : "discontent_posts.status_content = 'f' or discontent_posts.status_whered = 'f' or discontent_posts.status_whend = 'f'") unless type_verify == "content_all" }
+  scope :type_note, -> type_note { joins(:notes) if type_note.present? and type_note != "content_all" }
+  scope :type_like, -> type_like { where(:useful => type_like == "by_like" ? 't' : ['f',nil]) if type_like.present? and type_like != "content_all" }
+  scope :type_verify, -> type_verify { type_verify == "by_verified" ? by_verified : by_unverified if type_verify.present? and type_verify != "content_all" }
+  scope :type_status, -> type_status {
+    if type_status.present? and type_status != "content_all"
+      if type_status == "by_discuss"
+        where(:discuss_status => true)
+      elsif type_status == "by_approve"
+        where(:approve_status => true)
+      end
+    end
+    }
 
-  scope :date_begin, -> date_begin { where("DATE(discontent_posts.created_at + time '04:00') >= ?", date_begin.present? ? date_begin : '1900-01-01') }
-  scope :date_end, -> date_end { where("DATE(discontent_posts.created_at + time '04:00') <= ?", date_end.present? ? date_end : '2100-01-01') }
+  scope :sort_date, -> sort_date { sort_date == "up" ? order('discontent_posts.created_at DESC') : order('discontent_posts.created_at ASC') if sort_date.present? }
+  scope :sort_user, -> sort_user { sort_user == "up" ? order('discontent_posts.user_id DESC') : order('discontent_posts.user_id ASC') if sort_user.present? }
+  # scope :sort_comment, -> sort_comment { sort_comment == "up" ? includes(:comments).group('"discontent_posts"."id"').references(:comments).select('count("discontent_comments"."id")').order('count("discontent_comments"."id") DESC NULLS LAST') : includes(:comments).group('"discontent_posts"."id"').references(:comments).select('count("discontent_comments"."id") as count').order('count("discontent_comments"."id") ASC NULLS LAST') if sort_comment.present? }
+  scope :sort_view, -> sort_view { sort_view == "up" ? order('discontent_posts.number_views DESC') : order('discontent_posts.number_views ASC') if sort_view.present? }
 
   def update_post_aspects(aspects_new)
     self.discontent_post_aspects.destroy_all

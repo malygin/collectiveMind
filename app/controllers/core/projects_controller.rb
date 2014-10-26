@@ -154,15 +154,17 @@ class Core::ProjectsController < ApplicationController
     # @journals_feed_all = apply_scopes(Journal).all
 
     if @project
-      @journals_feed_all = Journal.filter(filtering_params(params)).events_for_project(@project.project_access(current_user) ? @project.id : -1, events_ignore).paginate(page: params[:page])
+      if @project.project_access(current_user)
+        @journals_feed_all = Journal.filter(filtering_params(params)).events_for_project(@project.id).paginate(page: params[:page])
+      end
       # @journals_feed_all = Journal.events_for_project(@project.project_access(current_user) ? @project.id : -1, events_ignore, check_dates).paginate(page: params[:page])
     elsif prime_admin?
-      @journals_feed_all = Journal.filter(filtering_params(params)).events_for_all_prime(events_ignore).paginate(page: params[:page])
+      @journals_feed_all = Journal.filter(filtering_params(params)).events_for_all_prime.paginate(page: params[:page])
       # @journals_feed_all = Journal.events_for_all_prime(events_ignore,check_dates).paginate(page: params[:page])
     else
-      closed_projects = current_user.projects.where(core_projects: {type_access: 2}).where("core_projects.status < 12").pluck("core_projects.id")
+      closed_projects = current_user.projects.where(core_projects: {type_access: 2}).active_proc.pluck("core_projects.id")
       # @journals_feed_all = Journal.events_for_all(list_type_projects_for_user,closed_projects==[] ? [-1] : closed_projects, events_ignore, check_dates).paginate(page: params[:page])
-      @journals_feed_all = Journal.filter(filtering_params(params)).events_for_all(list_type_projects_for_user,closed_projects==[] ? [-1] : closed_projects, events_ignore).paginate(page: params[:page])
+      @journals_feed_all = Journal.filter(filtering_params(params)).events_for_all(list_type_projects_for_user, closed_projects == [] ? [-1] : closed_projects).paginate(page: params[:page])
     end
     @j_count = {today:0, yesterday:0, older:0}
     @users_for_news = User.where("name != ? OR surname != ?", '','').order(:id)
@@ -197,6 +199,6 @@ class Core::ProjectsController < ApplicationController
     end
 
     def filtering_params(params)
-      params.slice(:type_content, :select_users_for_news, :date_begin, :date_end)
+      params.slice(:type_content, :type_event, :type_status, :select_users_for_news, :date_begin, :date_end)
     end
 end
