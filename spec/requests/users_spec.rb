@@ -44,6 +44,26 @@ describe 'Users ' do
         end
       end
     end
+
+    context 'unreaded notifications: show message', js: true do
+      context 'when' do
+        it '1 day - yes' do
+          @personal_journal = create :personal_journal, project: project, user: user, user_informed: user, created_at: 1.day.ago
+          visit "/project/#{project.id}"
+          expect(page).to have_css '#set_notification_message'
+          expect(page).not_to have_content @personal_journal.body
+          find('div.messenger-actions a').click
+          expect(page).to have_content @personal_journal.body
+        end
+
+        it ' < 1 day - no' do
+          @personal_journal = create :personal_journal, project: project, user: user, user_informed: user
+          visit "/project/#{project.id}"
+          expect(page).not_to have_css 'div#set_notification_message'
+          expect(page).not_to have_css 'div.messenger-message-inner'
+        end
+      end
+    end
   end
 
   context 'moderator sign in ' do
