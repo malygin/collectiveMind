@@ -571,7 +571,7 @@ module ApplicationHelper
     elsif @post.present? and @post.persisted?
       post.concept_post_discontent_grouped.by_concept(@post.id).present?
     else
-      false
+      true
     end
   end
 

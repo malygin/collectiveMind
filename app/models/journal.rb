@@ -18,6 +18,7 @@ class Journal < ActiveRecord::Base
   scope :by_project, -> project { where(journals: {project: project}) }
   scope :events_ignore, -> events_ignore { where.not(journals: {type_event: events_ignore})}
   scope :created_order, -> { order("journals.created_at DESC") }
+  scope :active_proc, -> { where("core_projects.status < ?", 20) }
 
   after_save :send_last_news
 

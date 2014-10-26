@@ -278,6 +278,6 @@ class Concept::PostsController < PostsController
       #      end
       #   end
       # end
-  end
+    end
 
 end

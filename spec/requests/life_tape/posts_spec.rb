@@ -139,8 +139,9 @@ describe 'Life Tape ' do
       it 'add new comment in aspect with images ', js: true do
         fill_in 'comment_text_area', with: 'new comment'
         attach_file('life_tape_comment_image', "#{Rails.root}/spec/support/images/1.jpg")
-
+        sleep(5)
         click_button 'send_post'
+        sleep(5)
         expect(page).to have_content 'new comment'
         expect(page).to have_selector 'a.image-popup-vertical-fit img'
 

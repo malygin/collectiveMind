@@ -76,6 +76,11 @@ class Discontent::Post < ActiveRecord::Base
   # scope :sort_comment, -> sort_comment { sort_comment == "up" ? includes(:comments).group('"discontent_posts"."id"').references(:comments).select('count("discontent_comments"."id")').order('count("discontent_comments"."id") DESC NULLS LAST') : includes(:comments).group('"discontent_posts"."id"').references(:comments).select('count("discontent_comments"."id") as count').order('count("discontent_comments"."id") ASC NULLS LAST') if sort_comment.present? }
   scope :sort_view, -> sort_view { sort_view == "up" ? order('discontent_posts.number_views DESC') : order('discontent_posts.number_views ASC') if sort_view.present? }
 
+  def complite(concept)
+    post = self.concept_post_discontents.by_concept(concept.id).first
+    post.complite if post
+  end
+
   def update_post_aspects(aspects_new)
     self.discontent_post_aspects.destroy_all
     aspects_new.each do |asp|

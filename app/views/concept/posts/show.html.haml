@@ -11,38 +11,52 @@
               .media-body
                 .media-heading
                   =link_to @post.user, user_path(@project, @post.user)
-        -if @post.concept_disposts.first
-          .col-md-5
-            %h4
-              =t('show.concept.solved_discontent')
-              =render partial:'discontent/posts/post_short2', object: @post.concept_disposts.first
-          .col-md-4
-            %h4
-              =t('show.concept.solved_others_discontents')
-              %br
-              -@post.concept_disposts.by_discussions([@post.concept_disposts.first.id]).each_with_index  do |cd, index|
-                .label.label-success=index+1
-                =cd.content
-                .color-green= level_complite(complite(cd))
-                %br
-      %br
-      = render 'shared/post_edit_bar', post:@post
-      %br
-      %span
-        = Russian::strftime(@post.created_at,'%d %B %k:%M:%S')
-        =improve_comment(@post).html_safe if improve_comment(@post)
-        |
-        - if boss? or role_expert?
-          =link_to({action: :discuss_status, id: @post.id, discuss_status: 1}, remote: true, method: :put,  id: "discuss_stat_post_#{@post.id}") do
-            %span.label(class="#{label_discuss_stat(@post)}")=t('show.discuss')
-          =link_to({action: :discuss_status, id: @post.id, approve_status: 1}, remote: true, method: :put,  id: "approve_stat_post_#{@post.id}") do
-            %span.label(class="#{label_approve_stat(@post)}")=t('show.important')
-        - else
-          -if @post.discuss_status
-            %span.label-danger=t('show.discuss')
-          -if @post.approve_status
-            %span.label-success=t('show.important')
-        = render '/shared/post_social_bar2', post: @post
+          %br
+          %span
+            =@post.number_views
+            %span.glyphicon.glyphicon-eye-open
+            |
+            = Russian::strftime(@post.created_at,'%d %B %k:%M:%S')
+          %br
+          -if improve_comment(@post)
+            =improve_comment(@post).html_safe
+            |
+          - if boss? or role_expert?
+            =link_to({action: :discuss_status, id: @post.id, discuss_status: 1}, remote: true, method: :put,  id: "discuss_stat_post_#{@post.id}") do
+              %span.label(class="#{label_discuss_stat(@post)}")=t('show.discuss')
+            =link_to({action: :discuss_status, id: @post.id, approve_status: 1}, remote: true, method: :put,  id: "approve_stat_post_#{@post.id}") do
+              %span.label(class="#{label_approve_stat(@post)}")=t('show.important')
+          - else
+            -if @post.discuss_status
+              %span.label-danger=t('show.discuss')
+            -if @post.approve_status
+              %span.label-success=t('show.important')
+          %br
+          %br
+          = render 'shared/post_edit_bar', post:@post
+
+        - if @post.concept_disposts.any?
+          .col-md-9
+            %h4 Решаемые несовершенства
+            %table.table.table-striped.table-bordered.table-condensed
+              %thead
+                %tr
+                  %th
+                    ="#"
+                  %th
+                    =t('show.concept.name')
+                  %th
+                    =t('show.concept.solved')
+              %tbody
+                -@post.concept_disposts.sort_by{|c| c.complite(@post).nil? ? 0 : -c.complite(@post)}.each_with_index  do |cd, index|
+                  %tr
+                    %td
+                      =index+1
+                    %td
+                      =cd.content
+                    %td
+                      =level_complite(cd)
+
 
       %br
       .row
@@ -306,27 +320,28 @@
           .pull-right
             = render 'shared/post_edit_bar', post:@post
 
-          %blockquote
-            %h4=t('show.concept.view_other_concepts')
-            -if tp.discontent
-              -tp.discontent.dispost_concepts.each do |pa|
-                - unless pa == @post
-                  =link_to pa.post_aspects.first.title, concept_post_path(@project, pa)
-                  %br
+          -#-if tp.discontent and tp.discontent.dispost_concepts.any?
+          -#  %blockquote
+          -#    %h4=t('show.concept.view_other_concepts')
+          -#    -tp.discontent.dispost_concepts.each do |pa|
+          -#      - unless pa == @post
+          -#        =link_to pa.post_aspects.first.title, concept_post_path(@project, pa)
+          -#        %br
 
         .col-md-6
           - if @project.advices_concept?
-            %br
-            .body
-              %h4
-                = t('advice.advices')
-              %ul.media-list.chat-messages#advices
-                - (@post.advices.approve + current_user.advices_for(@post).unapproved).each do |advice|
-                  = render partial: 'advices/advice', locals: {advice: advice}
-              - if signed_in?
+            %section
+              .body
+                %h4
+                  = t('advice.advices')
+                %ul.media-list#advices
+                  - (@post.advices.approve + current_user.advices_for(@post).unapproved).each do |advice|
+                    = render partial: 'advices/advice', locals: {advice: advice}
+                - if signed_in?
+                  %br
+                  = render partial: 'advices/form', locals: {advice: Advice.new, url: concept_advices_path(@project).concat("?concept_id=#{@post.id}")}
                 %br
-                = render partial: 'advices/form', locals: {advice: Advice.new, url: concept_advices_path(@project).concat("?concept_id=#{@post.id}")}
-              %br
+          %br
           %section
             .body
               %p=t('show.concept.comments')

@@ -162,13 +162,16 @@ module Concept::PostsHelper
     concept_post_discontent.present? ? concept_post_discontent.complite : 3
   end
 
-  def level_complite(level)
+  def level_complite(post)
+    concept = @concept_post || @post
+    concept_post_discontent = post.concept_post_discontents.by_concept(concept.id).first if concept
+    level = concept_post_discontent.complite if concept_post_discontent
     if level == 1
-      "#{t('show.concept.complite')} #{t('show.concept.complite_1')}"
+      t('show.concept.complite_1')
     elsif level == 2
-      "#{t('show.concept.complite')} #{t('show.concept.complite_2')}"
+      t('show.concept.complite_2')
     elsif level == 3
-      "#{t('show.concept.complite')} #{t('show.concept.complite_3')}"
+      t('show.concept.complite_3')
     else
       t('show.concept.not_use')
     end
