@@ -38,6 +38,12 @@ describe 'Concept ' do
 
       it ' add new concept', js: true do
         click_link "new_concept_#{@discontent1.id}"
+        expect(page).to have_selector('#btn_improve', visible: true)
+        expect(page).to have_selector('#send_post_concept', visible: true)
+        expect(page).to have_selector('#pa_positive', visible: false)
+        # click_button 'btn_improve'
+        page.find("#btn_improve").click
+        expect(page).to have_selector('#pa_positive', visible: true)
         expect(page).to have_content 'Краткое название вашего нововведения'
         expect(page).to have_content @discontent1.content
         expect(page).to have_selector '#main_positive_r_1 input.autocomplete'
@@ -57,12 +63,12 @@ describe 'Concept ' do
         fill_in "pa_reality", with: 'con reality'
         fill_in "pa_problems", with: 'con problems'
 
-        find(:css, "#main_positive_r_1 input.autocomplete[name='resor_positive_r[1][]']").set('positive_r_1')
-        find(:css, "#main_positive_s_1 input.autocomplete[name='resor_positive_s[1][]']").set('positive_s_1')
-        find(:css, "#main_negative_r_1 input.autocomplete[name='resor_negative_r[1][]']").set('negative_r_1')
-        find(:css, "#main_negative_s_1 input.autocomplete[name='resor_negative_s[1][]']").set('negative_s_1')
-        find(:css, "#main_control_r_1 input.autocomplete[name='resor_control_r[1][]']").set('control_r_1')
-        find(:css, "#main_control_s_1 input.autocomplete[name='resor_control_s[1][]']").set('control_s_1')
+        find(:css, "#main_positive_r_1 input.autocomplete[name='resor[][name]']").set('positive_r_1')
+        find(:css, "#main_positive_s_1 input.autocomplete[name='resor[][means][][name]']").set('positive_s_1')
+        find(:css, "#main_negative_r_1 input.autocomplete[name='resor[][name]']").set('negative_r_1')
+        find(:css, "#main_negative_s_1 input.autocomplete[name='resor[][means][][name]']").set('negative_s_1')
+        find(:css, "#main_control_r_1 input.autocomplete[name='resor[][name]']").set('control_r_1')
+        find(:css, "#main_control_s_1 input.autocomplete[name='resor[][means][][name]']").set('control_s_1')
 
         click_button 'send_post_concept'
         expect(page).to have_content 'Ваше нововведение успешно добавлено! Вы можете добавить еще одно или перейти к просмотру списка нововведений.'
@@ -89,6 +95,12 @@ describe 'Concept ' do
 
       it ' can click button to resource', js: true do
         click_link "new_concept_#{@discontent1.id}"
+        expect(page).to have_selector('#btn_improve', visible: true)
+        expect(page).to have_selector('#send_post_concept', visible: true)
+        expect(page).to have_selector('#pa_positive', visible: false)
+        # click_button 'btn_improve'
+        page.find("#btn_improve").click
+        expect(page).to have_selector('#pa_positive', visible: true)
         expect(page).to have_content 'Краткое название вашего нововведения'
         expect(page).to have_content @discontent1.content
         expect(page).to have_content @discontent1.whered
@@ -110,45 +122,45 @@ describe 'Concept ' do
         fill_in "pa_reality", with: 'con reality'
         fill_in "pa_problems", with: 'con problems'
 
-        find(:css, "#main_positive_r_1 input.autocomplete[name='resor_positive_r[1][]']").set('main positive_r_1')
+        find(:css, "#main_positive_r_1 input.autocomplete[name='resor[][name]']").set('main positive_r_1')
         #show desc resourse
         expect(page).to have_selector('#desc_positive_r_1', visible: false)
         first(:css, "#main_positive_r_1 button[id='desc_to_res']").click
         expect(page).to have_selector('#desc_positive_r_1', visible: true)
-        first(:css, "#main_positive_r_1 textarea[name='res_positive_r[1][]']").set('desc positive_r_1')
+        first(:css, "#main_positive_r_1 textarea[name='resor[][desc]']").set('desc positive_r_1')
 
-        find(:css, "#main_positive_s_1 input.autocomplete[name='resor_positive_s[1][]']").set('main positive_s_1 first')
+        find(:css, "#main_positive_s_1 input.autocomplete[name='resor[][means][][name]']").set('main positive_s_1 first')
         #show desc mean
         expect(page).to have_selector('#desc_positive_s_1', visible: false)
         first(:css, "#main_positive_s_1 button[id='desc_to_res']").click
         expect(page).to have_selector('#desc_positive_s_1', visible: true)
-        first(:css, "#main_positive_s_1 textarea[name='res_positive_s[1][]']").set('desc positive_s_1 first')
+        first(:css, "#main_positive_s_1 textarea[name='resor[][means][][desc]']").set('desc positive_s_1 first')
 
         #plus mean
         first(:css, "#main_positive_r_1 button[id='plus_mean']").click
         expect(page).to have_selector '#main_positive_s_1', count: 2
-        find(:xpath, "//div[@id=\"main_positive_s_1\"][2]//input[@name=\"resor_positive_s[1][]\"]").set('main positive_s_1 second')
+        find(:xpath, "//div[@id=\"main_positive_s_1\"][2]//input[@name=\"resor[][means][][name]\"]").set('main positive_s_1 second')
         find(:xpath, "//div[@id=\"main_positive_s_1\"][2]//button[@id=\"desc_to_res\"]").click
-        find(:xpath, "//div[@id=\"main_positive_s_1\"][2]//textarea[@name=\"res_positive_s[1][]\"]").visible? == true
-        find(:xpath, "//div[@id=\"main_positive_s_1\"][2]//textarea[@name=\"res_positive_s[1][]\"]").set('desc positive_s_1 second')
+        find(:xpath, "//div[@id=\"main_positive_s_1\"][2]//textarea[@name=\"resor[][means][][desc]\"]").visible? == true
+        find(:xpath, "//div[@id=\"main_positive_s_1\"][2]//textarea[@name=\"resor[][means][][desc]\"]").set('desc positive_s_1 second')
 
         #add resource
         expect(page).to have_selector '#add_positive_r', 'Добавить ресурс'
         find("#add_positive_r").click
         expect(page).to have_selector '#main_positive_r_2'
         #show desc resourse
-        find(:css, "#main_positive_r_2 input.autocomplete[name='resor_positive_r[2][]']").set('main positive_r_2')
+        find(:css, "#main_positive_r_2 input.autocomplete[name='resor[][name]']").set('main positive_r_2')
         expect(page).to have_selector('#desc_positive_r_2', visible: false)
         first(:css, "#main_positive_r_2 button[id='desc_to_res']").click
         expect(page).to have_selector('#desc_positive_r_2', visible: true)
-        first(:css, "#main_positive_r_2 textarea[name='res_positive_r[2][]']").set('desc positive_r_2')
+        first(:css, "#main_positive_r_2 textarea[name='resor[][desc]']").set('desc positive_r_2')
         #plus mean
         first(:css, "#main_positive_r_2 button[id='plus_mean']").click
         expect(page).to have_selector '#main_positive_s_2'
-        find(:css, "#main_positive_s_2 input.autocomplete[name='resor_positive_s[2][]']").set('main positive_s_2')
+        find(:css, "#main_positive_s_2 input.autocomplete[name='resor[][means][][name]']").set('main positive_s_2')
         first(:css, "#main_positive_s_2 button[id='desc_to_res']").click
         expect(page).to have_selector('#desc_positive_s_2', visible: true)
-        first(:css, "#main_positive_r_2 textarea[name='res_positive_s[2][]']").set('desc positive_s_2')
+        first(:css, "#main_positive_r_2 textarea[name='resor[][means][][desc]']").set('desc positive_s_2')
 
         #destroy element
         find("#add_positive_r").click
@@ -169,15 +181,15 @@ describe 'Concept ' do
         click_link 'con title'
         expect(page).to have_content 'con title'
         expect(page).to have_content 'main positive_r_1'
-        #expect(page).to have_content 'desc positive_r_1'
+        expect(page).to have_content 'desc positive_r_1'
         expect(page).to have_content 'main positive_s_1 first'
-        # expect(page).to have_content 'desc positive_s_1 first'
+        expect(page).to have_content 'desc positive_s_1 first'
         expect(page).to have_content 'main positive_s_1 second'
-        # expect(page).to have_content 'desc positive_s_1 second'
+        expect(page).to have_content 'desc positive_s_1 second'
         expect(page).to have_content 'main positive_r_2'
-        # expect(page).to have_content 'desc positive_r_2'
+        expect(page).to have_content 'desc positive_r_2'
         expect(page).to have_content 'main positive_s_2'
-        # expect(page).to have_content 'desc positive_s_2'
+        expect(page).to have_content 'desc positive_s_2'
       end
 
       it ' add new empty concept with error', js: true do
@@ -185,13 +197,13 @@ describe 'Concept ' do
         expect(page).to have_content 'Краткое название вашего нововведения'
         expect(page).to have_content @discontent1.content
         click_button 'send_post_concept'
-        expect(page).to have_content 'Сохранение не удалось из-за 2 ошибок:'
+        expect(page).to have_content 'Сохранение не удалось из-за 3 ошибок:'
         expect(page).to have_content 'Поле "Краткое название" не может быть пустым'
         expect(page).to have_content 'Поле "A1" не может быть пустым'
-        #expect(page).to have_content 'Поле "A2" не может быть пустым'
+        expect(page).to have_content 'Поле "A2" не может быть пустым'
         fill_in "pa_title", with: 'con title'
         fill_in "pa_name", with: 'con name'
-        #fill_in "pa_content", with: 'con content'
+        fill_in "pa_content", with: 'con content'
         click_button 'send_post_concept'
         expect(page).to have_content 'Ваше нововведение успешно добавлено!'
         expect(page).to have_content 'Перейти к списку'
@@ -285,6 +297,12 @@ describe 'Concept ' do
 
       it ' add new concept', js: true do
         click_link "new_concept_#{@discontent1.id}"
+        expect(page).to have_selector('#btn_improve', visible: true)
+        expect(page).to have_selector('#send_post_concept', visible: true)
+        expect(page).to have_selector('#pa_positive', visible: false)
+        # click_button 'btn_improve'
+        page.find("#btn_improve").click
+        expect(page).to have_selector('#pa_positive', visible: true)
         expect(page).to have_content 'Краткое название вашего нововведения'
         expect(page).to have_content @discontent1.content
         fill_in "pa_title", with: 'con title'

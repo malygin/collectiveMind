@@ -86,11 +86,8 @@ class Concept::PostsController < PostsController
     @concept_post.project = @project
     @concept_post.improve_comment = params[:improve_comment] if params[:improve_comment]
     @concept_post.improve_stage = params[:improve_stage] if params[:improve_stage]
-    # @improve = params[:improve_comment]
 
-    create_concept_resources_on_type(@project, @concept_post, 'positive_r', 'positive_s',false)
-    create_concept_resources_on_type(@project, @concept_post, 'negative_r', 'negative_s',false)
-    create_concept_resources_on_type(@project, @concept_post, 'control_r', 'control_s',false)
+    create_concept_resources_on_type(@project, @concept_post)
 
     respond_to do |format|
       if @concept_post.save
@@ -110,11 +107,17 @@ class Concept::PostsController < PostsController
     @concept_post = Concept::Post.find(params[:id])
     @concept_post.update_status_fields(params[:pa])
     @post_aspect = Concept::PostAspect.new(params[:pa])
-    if check_before_update(params[:cd],params[:pa])
-      @concept_post.post_aspects.destroy_all
-      @concept_post.concept_post_discontents.destroy_all
-      @concept_post.concept_post_discontent_grouped.destroy_all
 
+    unless params[:cd].nil?
+      if @post_aspect.valid?
+        @concept_post.post_aspects.destroy_all
+        @concept_post.concept_post_discontents.destroy_all
+      end
+      params[:cd].each do |cd|
+        @concept_post.concept_post_discontents.build(discontent_post_id: cd[0], complite: cd[1][:complite], status: 0)
+      end
+    end
+    if @post_aspect.valid?
       @concept_post.concept_post_resources.by_type('positive_r').destroy_all
       @concept_post.concept_post_resources.by_type('positive_s').destroy_all
       @concept_post.concept_post_resources.by_type('negative_r').destroy_all
@@ -122,21 +125,15 @@ class Concept::PostsController < PostsController
       @concept_post.concept_post_resources.by_type('control_r').destroy_all
       @concept_post.concept_post_resources.by_type('control_s').destroy_all
     end
-    unless params[:cd].nil?
-      params[:cd].each do |cd|
-        @concept_post.concept_post_discontents.build(discontent_post_id: cd[0],complite: cd[1][:complite], status: 0)
-      end
-    end
     unless params[:check_discontent].nil?
+      @concept_post.concept_post_discontent_grouped.destroy_all if @post_aspect.valid?
       params[:check_discontent].each do |com|
         @concept_post.concept_post_discontent_grouped.build(discontent_post_id: com[0], status: 1)
       end
     end
     @concept_post.post_aspects << @post_aspect
 
-    create_concept_resources_on_type(@project, @concept_post, 'positive_r', 'positive_s',true)
-    create_concept_resources_on_type(@project, @concept_post, 'negative_r', 'negative_s',true)
-    create_concept_resources_on_type(@project, @concept_post, 'control_r', 'control_s',true)
+    create_concept_resources_on_type(@project, @concept_post)
 
     respond_to do |format|
       if @concept_post.save
@@ -237,7 +234,7 @@ class Concept::PostsController < PostsController
       pa1 and pa2[:title] and pa2[:name] and pa2[:content] ? true : false
     end
 
-    def create_concept_resources_on_type(project, post, type_r, type_s, flag_destroy)
+    def create_concept_resources_on_type(project, post)
       #if flag_destroy
       #  post.concept_post_resources.by_type(type_r).destroy_all
       #  post.concept_post_resources.by_type(type_s).destroy_all
@@ -250,21 +247,35 @@ class Concept::PostsController < PostsController
       #     end
       #   end
       # end
-      unless params[('resor_'+type_r).to_sym].nil?
-        params[('resor_'+type_r).to_sym].each_with_index do |r,i|
-           if r[1][0]!=''
-             resource = post.concept_post_resources.build(:name => r[1][0], :desc => params[('resor_'+type_r).to_sym] ? params[('resor_'+type_r).to_sym]["#{r[0]}"][0] : '', :type_res => type_r, :project_id => project.id, :style => 0)
-             if params[('resor_'+type_s).to_sym] and params[('resor_'+type_s).to_sym]["#{r[0]}"]
-               params[('resor_'+type_s).to_sym]["#{r[0]}"].each_with_index do |m,ii|
-                 if m!=''
-                   mean = post.concept_post_resources.build(:name => m, :desc => params[('resor_'+type_s).to_sym] ? params[('resor_'+type_s).to_sym]["#{r[0]}"][ii] : '',:type_res => type_s, :project_id => project.id, :style => 1)
-                   mean.concept_post_resource = resource
-                 end
-               end
-             end
-           end
+      # unless params[('resor_'+type_r).to_sym].nil?
+      #   params[('resor_'+type_r).to_sym].each_with_index do |r,i|
+      #      if r[1][0]!=''
+      #        resource = post.concept_post_resources.build(:name => r[1][0], :desc => params[('resor_'+type_r).to_sym] ? params[('resor_'+type_r).to_sym]["#{r[0]}"][0] : '', :type_res => type_r, :project_id => project.id, :style => 0)
+      #        if params[('resor_'+type_s).to_sym] and params[('resor_'+type_s).to_sym]["#{r[0]}"]
+      #          params[('resor_'+type_s).to_sym]["#{r[0]}"].each_with_index do |m,ii|
+      #            if m!=''
+      #              mean = post.concept_post_resources.build(:name => m, :desc => params[('resor_'+type_s).to_sym] ? params[('resor_'+type_s).to_sym]["#{r[0]}"][ii] : '',:type_res => type_s, :project_id => project.id, :style => 1)
+      #              mean.concept_post_resource = resource
+      #            end
+      #          end
+      #        end
+      #      end
+      #   end
+      # end
+      unless params[:resor].nil?
+        params[:resor].each do |r|
+          if r[:name]!=''
+            resource = post.concept_post_resources.build(:name => r[:name], :desc => r[:desc], :type_res => r[:type_res], :project_id => project.id, :style => 0)
+            r[:means].each  do |m|
+              if m[:name]!=''
+                mean = post.concept_post_resources.build(:name => m[:name], :desc => m[:desc], :type_res => m[:type_res], :project_id => project.id, :style => 1)
+                mean.concept_post_resource = resource
+              end
+            end
+          end
         end
       end
+
   end
 
 end

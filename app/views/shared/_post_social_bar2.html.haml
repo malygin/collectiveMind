@@ -1,9 +1,10 @@
 .row
   .col-md-12
     .pull-right
-      =post.number_views
-      %span.glyphicon.glyphicon-eye-open
-      |
+      %span.hidden-xs
+        =post.number_views
+        %span.glyphicon.glyphicon-eye-open
+        |
       = link_to(controller: post.class.name.underscore.pluralize, action: :show, project: @project, id: post.id) do
         =t('show.commenting')
         =post.comments.count

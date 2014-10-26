@@ -1,30 +1,35 @@
 %ul.nav.nav-tabs{role: 'tablist'}
   %li(class="#{'active' if current_stage == :lifetape}")
     %a{href: "/project/#{@project.id}/life_tape/posts" + "#{params[:asp] ? "?asp=#{params[:asp]}" : ""}", id: "go_to_life_tape"}
-      =t('stages.stage', count: 1)
-      %i.fa.fa-question-circle.tooltips{"data-toggle" => 'tooltip', "data-html" => 'true', "data-placement" => 'bottom', title: t('stages.life_tape_title')}
+      1
+      %span.hidden-sm.hidden-xs=t('stages.stage', count: 1)
+      %i.hidden-sm.hidden-xs.fa.fa-question-circle.tooltips{"data-toggle" => 'tooltip', "data-html" => 'true', "data-placement" => 'bottom', title: t('stages.life_tape_title')}
       %br
       %span.hidden-sm.hidden-xs=t('stages.life_tape')
   %li(class="#{'active' if current_stage == :discontent} #{'disabled' if @project.status < 3}")
     %a{ href: "#{@project.status < 3 ? '#' :  "/project/#{@project.id}/discontent/posts" + "#{params[:asp] ? "?asp=#{params[:asp]}" : ""}"}", id: "go_to_discontent"}
-      =t('stages.stage', count: 2)
-      %i.fa.fa-question-circle.tooltips{"data-toggle" => 'tooltip', "data-html" => 'true', "data-placement" => 'bottom', title: t('stages.discontent_title')}
+      2
+      %span.hidden-sm.hidden-xs=t('stages.stage', count: 2)
+      %i.hidden-sm.hidden-xs.fa.fa-question-circle.tooltips{"data-toggle" => 'tooltip', "data-html" => 'true', "data-placement" => 'bottom', title: t('stages.discontent_title')}
       %br
       %span.hidden-sm.hidden-xs=t('stages.discontent')
   %li(class="#{'active' if current_stage == :concept} #{'disabled' if @project.status < 7}")
     %a{ href: "#{@project.status < 7 ? '#' : "/project/#{@project.id}/concept/posts" + "#{params[:asp] ? "?asp=#{params[:asp]}" : ""}"}", id: "go_to_concept"}
-      =t('stages.stage', count: 3)
-      %i.fa.fa-question-circle.tooltips{"data-toggle" => 'tooltip', "data-html" => 'true', "data-placement" => 'bottom', title: t('stages.concept_title')}
+      3
+      %span.hidden-sm.hidden-xs=t('stages.stage', count: 3)
+      %i.hidden-sm.hidden-xs.fa.fa-question-circle.tooltips{"data-toggle" => 'tooltip', "data-html" => 'true', "data-placement" => 'bottom', title: t('stages.concept_title')}
       %br
       %span.hidden-sm.hidden-xs=t('stages.concept')
   %li(class="#{'active' if current_stage == :plan} #{'disabled' if @project.status < 9}")
     %a{ href: "#{@project.status < 9 ? '#' : "/project/#{@project.id}/plan/posts"}", id: 'go_to_plan'}
-      =t('stages.stage', count: 4)
-      %i.fa.fa-question-circle.tooltips{"data-toggle" => 'tooltip', "data-html" => 'true', "data-placement" => 'bottom', title: t('stages.plan_title')}
+      4
+      %span.hidden-sm.hidden-xs=t('stages.stage', count: 4)
+      %i.hidden-sm.hidden-xs.fa.fa-question-circle.tooltips{"data-toggle" => 'tooltip', "data-html" => 'true', "data-placement" => 'bottom', title: t('stages.plan_title')}
       %br
       %span.hidden-sm.hidden-xs=t('stages.plan')
   %li(class="#{'active' if current_stage == :estimate} #{'disabled' if @project.status < 10}")
     %a{ href: "#{@project.status < 10 ? '#' : "/project/#{@project.id}/estimate/posts"}", id: 'go_to_estimate'}
-      =t('stages.stage', count: 5)
+      5
+      %span.hidden-sm.hidden-xs=t('stages.stage', count: 5)
       %br
       %span.hidden-sm.hidden-xs=t('stages.estimate')

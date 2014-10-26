@@ -34,7 +34,7 @@
             =render 'top_menu'
       .content.container
         -if current_controller_for_navbar?(controller)
-          %h2=@project.name
+          %h4=@project.name
           %section.widget.widget-tabs
             %header
               =render partial: 'application/stages', locals: {current_stage: current_stage_for_navbar(controller, params[:stage])}

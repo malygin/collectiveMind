@@ -1,22 +1,17 @@
 %ul.nav.navbar-nav.navbar-right.pull-right
   %li.hidden-xs.active
-    =link_to t('menu.help'), help_posts_path(@project), style:'width:auto; margin-right: 10px;', id: 'go_to_help'
-  %li.hidden-xs.divider
+    =link_to t('menu.help'), help_posts_path(@project), style:'width:auto; margin-right: 15px;', id: 'go_to_help'
+  -#%li.hidden-xs.divider
   %li.hidden-xs.active
-    =link_to t('menu.base_knowledge'),   knowbase_posts_path(@project) , style:'width:auto; margin-right: 10px;', id: 'go_to_knowbase'
-  %li.hidden-xs.divider
-
-  -if boss?
-    %li.hidden-xs.hidden-sm.hidden-md.active
-      =link_to t('menu.raiting_rc'), users_rc_users_path(@project), style:'width:auto; margin-right: 10px;', id: 'go_to_club_rating'
-    %li.hidden-xs.hidden-sm.hidden-md.divider
+    =link_to t('menu.base_knowledge'),   knowbase_posts_path(@project) , style:'width:auto; margin-right: 15px;', id: 'go_to_knowbase'
+  -#%li.hidden-xs.divider
 
   %li.active
-    =link_to t('menu.raiting'), "/project/#{@project.id}/users" , style:'width:auto; margin-right: 10px;', id: 'go_to_rating'
-  %li.divider
+    =link_to t('menu.raiting'), "/project/#{@project.id}/users" , style:'width:auto; margin-right: 15px;', id: 'go_to_rating'
+  -#%li.divider
 
   %li.active
-    =link_to "/project/#{@project.id}/journals" , style:'width:auto; margin-right: 10px;', id: 'go_to_journals' do
+    =link_to "/project/#{@project.id}/journals" , style:'width:auto; margin-right: 15px;', id: 'go_to_journals' do
       =t('menu.news')
   - if boss?
     %li.divider
@@ -102,10 +97,10 @@
   %li.dropdown#notifications
     = render partial: 'messages_menu', locals: {my_journals: @my_journals, project: @project}
 
-  %li.divider
-  %li.hidden-xs
-    %a{href: '/', id: 'root_page', title: t('menu.main')}
-      %i.fa.fa-home
+  -#%li.divider
+  -#%li.hidden-xs
+  -#  %a{href: '/', id: 'root_page', title: t('menu.main')}
+  -#    %i.fa.fa-home
   %li.dropdown
     %a#account.dropdown-toggle{'data-toggle' => 'dropdown', href: '#', title: t('menu.account')}
       %i.fa.fa-user
@@ -120,7 +115,7 @@
 
       %li{role: 'presentation'}
         = link_to t('menu.journal_title'), user_path(@project, current_user)
-  %li.visible-xs.divider
+  -#%li.visible-xs.divider
   %li.visible-xs
     %a.btn-navbar{'data-target' => '.sidebar', 'data-toggle' => 'collapse', href: '#', title: ''}
       %i.fa.fa-bars

@@ -310,7 +310,7 @@ def validate_have_prime_admin_links(project)
   expect(page).to have_link('list_projects', :text => 'Список процедур', :href => list_projects_path)
 end
 def validate_have_moderator_links(project)
-  expect(page).to have_link('go_to_club_rating', :text => 'Клубный рейтинг', :href => users_rc_users_path(project))
+  # expect(page).to have_link('go_to_club_rating', :text => 'Клубный рейтинг', :href => users_rc_users_path(project))
   expect(page).to have_link('new_aspect', :text => '+ Добавить новую тему', :href => new_discontent_aspect_path(project))
 end
 def validate_default_links_and_sidebar(project,user)
