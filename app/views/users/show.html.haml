@@ -108,7 +108,7 @@
             #imperfections.tab-pane.fade.in
               %br
               %ul.discontent-list
-                = render partial: 'discontent/posts/post_short', collection: @user.discontent_posts.by_project(@project.id)
+                = render partial: 'discontent/posts/post_short', collection: @user.discontent_posts.by_project_and_not_anonym(@project.id)
 
             #images.tab-pane.fade.in
               %br

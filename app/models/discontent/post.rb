@@ -1,6 +1,6 @@
 class Discontent::Post < ActiveRecord::Base
   include BasePost
-  attr_accessible :whend, :whered, :aspect_id, :aspect, :style, :discontent_post_id, :important, :status_content, :status_whered, :status_whend, :improve_comment, :improve_stage, :discuss_status
+  attr_accessible :whend, :whered, :aspect_id, :aspect, :style, :anonym, :discontent_post_id, :important, :status_content, :status_whered, :status_whend, :improve_comment, :improve_stage, :discuss_status
 
   belongs_to :aspect
   belongs_to :discontent_post, foreign_key: 'discontent_post_id', class_name: 'Discontent::Post'
@@ -32,6 +32,7 @@ class Discontent::Post < ActiveRecord::Base
   validates_presence_of :content, :whend, :whered #,  :discontent_post_aspects
 
   scope :by_project, ->(p) { where(project_id: p) }
+  scope :by_project_and_not_anonym, ->(p) { where(project_id: p, anonym: false) }
   scope :by_status, ->(p) { where(status: p) }
   scope :by_style, ->(p) { where(style: p) }
   scope :by_positive, ->(p) { where(style: 0, status: p) }

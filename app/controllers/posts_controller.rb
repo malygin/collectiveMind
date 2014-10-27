@@ -225,7 +225,7 @@ class PostsController < ApplicationController
     @post = current_model.where(id: params[:id], project_id: params[:project]).first
     if params[:viewed]
       Journal.events_for_content(@project, current_user, @post.id).update_all("viewed = 'true'")
-      @my_journals_count = @my_journals_count - 1
+      # @my_journals_count = @my_journals_count - 1
     end
     # per_page = ["Concept", "Essay"].include?(@post.class.name.deconstantize) ? 10 : 30
     @comments = @post.main_comments.paginate(page: params[:page] ? params[:page] : last_page, per_page: 10)

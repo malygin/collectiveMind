@@ -3,7 +3,7 @@ class Journal < ActiveRecord::Base
   include Filterable
 
   attr_accessible :body, :body2, :type_event, :user, :project, :user_informed, :viewed,
-                  :event, :first_id, :second_id, :personal
+                  :event, :first_id, :second_id, :personal, :anonym
   belongs_to :user
   belongs_to :user_informed, class_name: 'User', foreign_key: :user_informed
   belongs_to :project, class_name: 'Core::Project', foreign_key: 'project_id'

@@ -87,9 +87,18 @@ module JournalHelper
       when 'discontent_comment_save'
         "добавил(а) комментарий: '#{j.body}'"+ ' к несовершенству '+ link_to("#{j.body2} ... ", "/project/#{project}/discontent/posts/#{j.first_id}?req_comment=#{j.second_id}#comment_#{j.second_id}")
       when 'discontent_post_save'
-        'добавил(а) несовершенство  ' + link_to("#{j.body}", "/project/#{project}/discontent/posts/#{j.first_id}")
+        if j.anonym
+          ' анонимно добавлено несовершенство  ' + link_to("#{j.body}", "/project/#{project}/discontent/posts/#{j.first_id}")
+        else
+          'добавил(а) несовершенство  ' + link_to("#{j.body}", "/project/#{project}/discontent/posts/#{j.first_id}")
+        end
+
       when 'discontent_post_update'
-        'отредактировал(а) несовершенство '+ link_to("#{j.body}...", "/project/#{project}/discontent/posts/#{j.first_id}")
+        if j.anonym
+          ' анонимное несовершенство отредактировано ' + link_to("#{j.body}", "/project/#{project}/discontent/posts/#{j.first_id}")
+        else
+          'отредактировал(а) несовершенство '+ link_to("#{j.body}...", "/project/#{project}/discontent/posts/#{j.first_id}")
+         end
       when 'my_discontent_comment'
         "добавил(а) комментарий '#{j.body}...' к вашему несовершенству "+ link_to(j.body2, "/project/#{project}/discontent/posts/#{j.first_id}?viewed=true&req_comment=#{j.second_id}#comment_#{j.second_id}")
       when 'reply_discontent_comment'

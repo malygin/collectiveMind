@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141018163608) do
+ActiveRecord::Schema.define(version: 20141027100544) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -364,10 +364,10 @@ ActiveRecord::Schema.define(version: 20141018163608) do
     t.string   "secret"
     t.string   "secret2"
     t.string   "secret3"
-    t.string   "color"
-    t.string   "code"
     t.boolean  "advices_discontent"
     t.boolean  "advices_concept"
+    t.string   "color"
+    t.string   "code"
   end
 
   add_index "core_projects", ["status"], name: "index_core_projects_on_status", using: :btree
@@ -529,6 +529,7 @@ ActiveRecord::Schema.define(version: 20141018163608) do
     t.boolean  "discuss_status"
     t.boolean  "useful"
     t.boolean  "approve_status"
+    t.boolean  "anonym"
   end
 
   add_index "discontent_posts", ["aspect_id"], name: "index_discontent_posts_on_aspect_id", using: :btree
@@ -951,6 +952,7 @@ ActiveRecord::Schema.define(version: 20141018163608) do
     t.boolean  "personal",      default: false
     t.string   "body2"
     t.boolean  "visible",       default: true
+    t.boolean  "anonym",        default: false
   end
 
   add_index "journals", ["created_at"], name: "index_journals_on_created_at", using: :btree

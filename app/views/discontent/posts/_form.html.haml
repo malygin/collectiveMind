@@ -4,6 +4,12 @@
 
   .row
     .col-md-12
+
+      .text-right
+        %label.radio-inline
+        = f.check_box :anonym
+        %span.label.label-danger Подать несовершенство анонимно
+
       .text-center
         .h4
           =t('form.discontent.field_what')
@@ -112,6 +118,7 @@
   %button.btn.btn-lg.btn-primary#send_post(type="submit" onclick="$(this).button('loading');discontent_form_submit();"){class: ('disabled' unless @post.content?), 'data-loading-text' => t('form.save_load')}=t('form.save')
   %br
   %br
+
   = link_to t('link.back'), discontent_posts_path(@project)
 
 #render_success_discontent

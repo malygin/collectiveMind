@@ -99,8 +99,8 @@ class Discontent::PostsController < PostsController
     end
     respond_to do |format|
       if @post.save
-        current_user.journals.build(type_event: 'discontent_post_save', body: trim_content(@post.content), first_id: @post.id, project: @project).save!
-        current_user.add_score(type: :add_discontent_post)
+        current_user.journals.build(type_event: 'discontent_post_save', anonym: @post.anonym, body: trim_content(@post.content), first_id: @post.id, project: @project).save!
+        # current_user.add_score(type: :add_discontent_post)
         format.js
       else
         format.js
@@ -116,7 +116,7 @@ class Discontent::PostsController < PostsController
       @post.update_attributes(params[name_of_model_for_param])
       @post.update_post_aspects(params[:discontent_post_aspects])
       @aspect_id = params[:discontent_post_aspects].first
-      current_user.journals.build(type_event: name_of_model_for_param+'_update', project: @project, body: trim_content(@post.content), first_id: @post.id).save!
+      current_user.journals.build(type_event: name_of_model_for_param+'_update', anonym: @post.anonym , project: @project, body: trim_content(@post.content), first_id: @post.id).save!
     end
     respond_to do |format|
       format.html
