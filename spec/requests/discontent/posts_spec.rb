@@ -61,6 +61,20 @@ describe 'Discontent ' do
         click_link 'tab-imperfections'
         expect(page).to have_content 'disсontent'
       end
+
+      it  'add anonym discontent and get fine feed', js: true  do
+        click_link 'add_record'
+
+        fill_in 'discontent_post_content', with: 'disсontent content'
+        fill_in 'discontent_post_whered', with: 'disсontent where'
+        fill_in 'discontent_post_whend', with: 'disсontent when'
+        check 'discontent_post_anonym'
+        check 'discontent_post_anonym'
+
+        click_button 'send_post'
+        visit journals_path(project: project)
+        expect(page).to have_content 'анонимно добавлено несовершенство'
+      end
     end
 
     context 'show discontents'   do
