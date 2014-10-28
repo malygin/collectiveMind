@@ -6,7 +6,7 @@ class PostsController < ApplicationController
   before_filter :have_project_access
   before_filter :not_open_closed_stage
   before_filter :boss_authenticate, only: [:vote_result]
-  before_filter :comment_page, only: [:index,:show]
+  before_filter :comment_page, only: [:index, :show]
 
   #@todo why not use authenticate_user! from devise?
   def authenticate
@@ -32,7 +32,7 @@ class PostsController < ApplicationController
   end
 
   def have_rights
-    unless current_model != "Knowbase::Post"
+    unless current_model != 'Knowbase::Post'
       if current_model.find(params[:id]).user != current_user and not boss?
         redirect_to :back
       end
@@ -42,7 +42,11 @@ class PostsController < ApplicationController
   def journal_data
     if params[:viewed]
       post = current_model.where(id: params[:id], project_id: @project.id).first if params[:id]
-      post_id = current_model.to_s == "LifeTape::Post" ? (params[:asp] ? Discontent::Aspect.find(params[:asp]) : @project.aspects.order(:id).first) : post
+      post_id = if current_model.to_s == 'LifeTape::Post' then
+                  params[:asp] ? Discontent::Aspect.find(params[:asp]) : @project.aspects.order(:id).first
+                else
+                  post
+                end
       Journal.events_for_content(@project, current_user, post_id.id).update_all(viewed: true) if post_id
     end
     super()
@@ -127,15 +131,15 @@ class PostsController < ApplicationController
       end
     end
     if @comment.approve_status
-      current_user.journals.build(:type_event=>name_of_comment_for_param+'_approve_status', :project => @project,
-                                  :body=>"#{trim_content(@comment.content)}", :body2=>trim_content(field_for_journal(@post)),
-                                  :first_id=> (@post.instance_of? LifeTape::Post) ? @post.discontent_aspects.first.id : @post.id, :second_id => @comment.id).save!
+      current_user.journals.build(type_event: name_of_comment_for_param+'_approve_status', project: @project,
+                                  body: "#{trim_content(@comment.content)}", body2: trim_content(field_for_journal(@post)),
+                                  first_id: (@post.instance_of? LifeTape::Post) ? @post.discontent_aspects.first.id : @post.id, second_id: @comment.id).save!
 
       if @comment.user!=current_user
-        current_user.journals.build(:type_event=>'my_'+name_of_comment_for_param+'_approve_status', :user_informed => @comment.user, :project => @project,
-                                    :body=>"#{trim_content(@comment.content)}", :body2=>trim_content(field_for_journal(@post)),
-                                    :first_id=> (@post.instance_of? LifeTape::Post) ? @post.discontent_aspects.first.id : @post.id, :second_id => @comment.id,
-                                    :personal=> true, :viewed=> false).save!
+        current_user.journals.build(type_event: 'my_'+name_of_comment_for_param+'_approve_status', user_informed: @comment.user, project: @project,
+                                    body: "#{trim_content(@comment.content)}", body2: trim_content(field_for_journal(@post)),
+                                    first_id: (@post.instance_of? LifeTape::Post) ? @post.discontent_aspects.first.id : @post.id, second_id: @comment.id,
+                                    personal: true, viewed: false).save!
       end
     end
 
@@ -150,22 +154,22 @@ class PostsController < ApplicationController
     if params[:discuss_status]
       @post.toggle!(:discuss_status)
       if @post.discuss_status
-        current_user.journals.build(:type_event=>name_of_model_for_param+'_discuss_stat', :project => @project,
-                                  :body=>"#{trim_content(field_for_journal(@post))}", :first_id=> @post.id).save!
+        current_user.journals.build(type_event: name_of_model_for_param+'_discuss_stat', project: @project,
+                                    body: "#{trim_content(field_for_journal(@post))}", first_id: @post.id).save!
         if @post.user!=current_user
-          current_user.journals.build(:type_event=>'my_'+name_of_model_for_param+'_discuss_stat', :user_informed => @post.user, :project => @project,
-                                      :body=>"#{trim_content(field_for_journal(@post))}", :first_id=> @post.id, :personal=> true, :viewed=> false).save!
+          current_user.journals.build(type_event: 'my_'+name_of_model_for_param+'_discuss_stat', user_informed: @post.user, project: @project,
+                                      body: "#{trim_content(field_for_journal(@post))}", first_id: @post.id, personal: true, viewed: false).save!
         end
       end
     end
     if params[:approve_status]
       @post.toggle!(:approve_status)
       if @post.approve_status
-        current_user.journals.build(:type_event=>name_of_model_for_param+'_approve_status', :project => @project,
-                                    :body=>"#{trim_content(field_for_journal(@post))}", :first_id=> @post.id).save!
+        current_user.journals.build(type_event: name_of_model_for_param+'_approve_status', project: @project,
+                                    body: "#{trim_content(field_for_journal(@post))}", first_id: @post.id).save!
         if @post.user!=current_user
-          current_user.journals.build(:type_event=>'my_'+name_of_model_for_param+'_approve_status', :user_informed => @post.user, :project => @project,
-                                      :body=>"#{trim_content(field_for_journal(@post))}", :first_id=> @post.id, :personal=> true, :viewed=> false).save!
+          current_user.journals.build(type_event: 'my_'+name_of_model_for_param+'_approve_status', user_informed: @post.user, project: @project,
+                                      body: "#{trim_content(field_for_journal(@post))}", first_id: @post.id, personal: true, viewed: false).save!
         end
       end
     end
@@ -434,12 +438,12 @@ class PostsController < ApplicationController
     @aspects = Discontent::Aspect.where(project_id: @project)
 
     if params[:image]
-      if  [ 'image/jpeg', 'image/png' ].include?  params[:image].content_type
-        img = Cloudinary::Uploader.upload(params[:image], folder: 'comments', :crop => :limit, :width => 800,
-                                          :eager => [{ :crop => :fill, :width => 150, :height => 150 }])
+      if  ['image/jpeg', 'image/png'].include? params[:image].content_type
+        img = Cloudinary::Uploader.upload(params[:image], folder: 'comments', crop: :limit, width: 800,
+                                          eager: [{crop: :fill, width: 150, height: 150}])
         isFile = false
       else
-        img = Cloudinary::Uploader.upload(params[:image], folder: 'comments', :resource_type => :raw )
+        img = Cloudinary::Uploader.upload(params[:image], folder: 'comments', resource_type: :raw)
         isFile = true
       end
     end
@@ -447,9 +451,9 @@ class PostsController < ApplicationController
     respond_to do |format|
 
       @comment.update_attributes(content: params[:content])
-        if params[:image]
-          @comment.update_attributes( image:  img ? img['public_id'] : nil , isFile: img ? isFile : nil )
-         end
+      if params[:image]
+        @comment.update_attributes(image: img ? img['public_id'] : nil, isFile: img ? isFile : nil)
+      end
       format.js
 
     end
@@ -516,11 +520,11 @@ class PostsController < ApplicationController
     content = comment_user ? "#{comment_user.to_s}, " + params[name_of_comment_for_param][:content] : params[name_of_comment_for_param][:content]
     if params[name_of_comment_for_param][:image]
       if  ['image/jpeg', 'image/png'].include? params[name_of_comment_for_param][:image].content_type
-        img = Cloudinary::Uploader.upload(params[name_of_comment_for_param][:image], folder: 'comments', :crop => :limit, :width => 800,
-                                          :eager => [{:crop => :fill, :width => 150, :height => 150}])
+        img = Cloudinary::Uploader.upload(params[name_of_comment_for_param][:image], folder: 'comments', crop: :limit, width: 800,
+                                          eager: [{crop: :fill, width: 150, height: 150}])
         isFile = false
       else
-        img = Cloudinary::Uploader.upload(params[name_of_comment_for_param][:image], folder: 'comments', :resource_type => :raw)
+        img = Cloudinary::Uploader.upload(params[name_of_comment_for_param][:image], folder: 'comments', resource_type: :raw)
         isFile = true
       end
     end
