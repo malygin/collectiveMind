@@ -81,53 +81,13 @@ class PostsController < ApplicationController
   end
 
   def add_comment
-
     @project = Core::Project.find(params[:project])
     @aspects = Discontent::Aspect.where(project_id: @project)
     post = current_model.find(params[:id])
-    @main_comment = comment_model.find(params[:main_comment]) unless params[:main_comment].nil?
-    @main_comment_answer = comment_model.find(params[:answer_id]) unless params[:answer_id].nil?
-    comment_user = @main_comment_answer.user unless @main_comment_answer.nil?
-    content = comment_user ? "#{comment_user.to_s}, " + params[name_of_comment_for_param][:content] : params[name_of_comment_for_param][:content]
-    if params[name_of_comment_for_param][:image]
-      if  [ 'image/jpeg', 'image/png' ].include?  params[name_of_comment_for_param][:image].content_type
-        img = Cloudinary::Uploader.upload(params[name_of_comment_for_param][:image], folder: 'comments', :crop => :limit, :width => 800,
-                                       :eager => [{ :crop => :fill, :width => 150, :height => 150 }])
-        isFile = false
-      else
-        img = Cloudinary::Uploader.upload(params[name_of_comment_for_param][:image], folder: 'comments', :resource_type => :raw )
-        isFile = true
-      end
-    end
-    unless params[name_of_comment_for_param][:content]==''
-      @comment = post.comments.create(content: content, image:  img ? img['public_id'] : nil , isFile: img ? isFile : nil,   user: current_user, discontent_status: params[name_of_comment_for_param][:discontent_status], concept_status: params[name_of_comment_for_param][:concept_status], comment_id: @main_comment ? @main_comment.id : nil)
-
-      #@todo новости и информирование авторов
-      current_user.journals.build(type_event: name_of_comment_for_param+'_save', project: @project,
-                                  body: "#{trim_content(@comment.content)}", body2: trim_content(field_for_journal(post)),
-                                  first_id: (post.instance_of? LifeTape::Post) ? post.discontent_aspects.first.id : post.id, second_id: @comment.id).save!
-
-      if post.user!=current_user
-        current_user.journals.build(type_event: 'my_'+name_of_comment_for_param, user_informed: post.user, project: @project,
-                                    body: "#{trim_content(@comment.content)}", body2: trim_content(field_for_journal(post)),
-                                    first_id: (post.instance_of? LifeTape::Post) ? post.discontent_aspects.first.id : post.id, second_id: @comment.id,
-                                    personal: true, viewed: false).save!
-      end
-      if @main_comment and @main_comment.user!=current_user
-        current_user.journals.build(type_event: 'reply_'+name_of_comment_for_param, user_informed: @main_comment.user, project: @project,
-                                    body: "#{trim_content(@comment.content)}", body2: trim_content(@main_comment.content),
-                                    first_id: (post.instance_of? LifeTape::Post) ? post.discontent_aspects.first.id : post.id, second_id: @comment.id,
-                                    personal: true, viewed: false).save!
-      end
-      if @main_comment_answer and @main_comment_answer.user!=current_user
-        current_user.journals.build(type_event: 'reply_'+name_of_comment_for_param, user_informed: @main_comment_answer.user, project: @project,
-                                    body: "#{trim_content(@comment.content)}", body2: trim_content(@main_comment_answer.content),
-                                    first_id: (post.instance_of? LifeTape::Post) ? post.discontent_aspects.first.id : post.id, second_id: @comment.id,
-                                    personal: true, viewed: false).save!
-      end
-    end
-    respond_to do |format|
-      format.js
+    if params[:advice_status]
+      create_advice post
+    else
+      create_comment post
     end
   end
 
@@ -544,5 +504,55 @@ class PostsController < ApplicationController
   #   @project = Core::Project.find(params[:project])
   #   @project.set_position_for_aspects if @project.status == 3
   # end
+  private
+  def create_advice(post)
+    post.advices.new
+  end
 
+  def create_comment(post)
+    @main_comment = comment_model.find(params[:main_comment]) unless params[:main_comment].nil?
+    @main_comment_answer = comment_model.find(params[:answer_id]) unless params[:answer_id].nil?
+    comment_user = @main_comment_answer.user unless @main_comment_answer.nil?
+    content = comment_user ? "#{comment_user.to_s}, " + params[name_of_comment_for_param][:content] : params[name_of_comment_for_param][:content]
+    if params[name_of_comment_for_param][:image]
+      if  ['image/jpeg', 'image/png'].include? params[name_of_comment_for_param][:image].content_type
+        img = Cloudinary::Uploader.upload(params[name_of_comment_for_param][:image], folder: 'comments', :crop => :limit, :width => 800,
+                                          :eager => [{:crop => :fill, :width => 150, :height => 150}])
+        isFile = false
+      else
+        img = Cloudinary::Uploader.upload(params[name_of_comment_for_param][:image], folder: 'comments', :resource_type => :raw)
+        isFile = true
+      end
+    end
+    unless params[name_of_comment_for_param][:content]==''
+      @comment = post.comments.create(content: content, image: img ? img['public_id'] : nil, isFile: img ? isFile : nil, user: current_user, discontent_status: params[name_of_comment_for_param][:discontent_status], concept_status: params[name_of_comment_for_param][:concept_status], comment_id: @main_comment ? @main_comment.id : nil)
+
+      #@todo новости и информирование авторов
+      current_user.journals.build(type_event: name_of_comment_for_param+'_save', project: @project,
+                                  body: "#{trim_content(@comment.content)}", body2: trim_content(field_for_journal(post)),
+                                  first_id: (post.instance_of? LifeTape::Post) ? post.discontent_aspects.first.id : post.id, second_id: @comment.id).save!
+
+      if post.user!=current_user
+        current_user.journals.build(type_event: 'my_'+name_of_comment_for_param, user_informed: post.user, project: @project,
+                                    body: "#{trim_content(@comment.content)}", body2: trim_content(field_for_journal(post)),
+                                    first_id: (post.instance_of? LifeTape::Post) ? post.discontent_aspects.first.id : post.id, second_id: @comment.id,
+                                    personal: true, viewed: false).save!
+      end
+      if @main_comment and @main_comment.user!=current_user
+        current_user.journals.build(type_event: 'reply_'+name_of_comment_for_param, user_informed: @main_comment.user, project: @project,
+                                    body: "#{trim_content(@comment.content)}", body2: trim_content(@main_comment.content),
+                                    first_id: (post.instance_of? LifeTape::Post) ? post.discontent_aspects.first.id : post.id, second_id: @comment.id,
+                                    personal: true, viewed: false).save!
+      end
+      if @main_comment_answer and @main_comment_answer.user!=current_user
+        current_user.journals.build(type_event: 'reply_'+name_of_comment_for_param, user_informed: @main_comment_answer.user, project: @project,
+                                    body: "#{trim_content(@comment.content)}", body2: trim_content(@main_comment_answer.content),
+                                    first_id: (post.instance_of? LifeTape::Post) ? post.discontent_aspects.first.id : post.id, second_id: @comment.id,
+                                    personal: true, viewed: false).save!
+      end
+    end
+    respond_to do |format|
+      format.js
+    end
+  end
 end
