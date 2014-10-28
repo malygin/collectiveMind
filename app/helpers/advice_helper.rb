@@ -7,4 +7,8 @@ module AdviceHelper
     str += ': '
     str
   end
+
+  def advices_for_stage?(project, stage)
+    (stage == 'concept/posts' && project.advices_concept) || (stage == 'discontent/posts' && project.advices_discontent)
+  end
 end
