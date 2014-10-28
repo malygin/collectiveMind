@@ -1,7 +1,6 @@
 class AdvicesController < ApplicationController
   before_action :journal_data
-  before_action :set_advice, except: [:index, :create]
-  before_action :set_adviseable_post, only: [:create]
+  before_action :set_advice, except: [:index]
   before_filter :only_moderators, only: [:index, :approve]
   before_filter :only_author_of_post, only: [:useful, :not_useful]
 
@@ -11,16 +10,6 @@ class AdvicesController < ApplicationController
 
   # GET /discontent/post_advices/1/edit
   def edit
-    respond_to do |format|
-      format.js
-    end
-  end
-
-  # POST /discontent/post_advices
-  def create
-    @advice = @post.advices.new advice_params
-    @advice.user = current_user
-    @advice.save
     respond_to do |format|
       format.js
     end
@@ -77,11 +66,6 @@ class AdvicesController < ApplicationController
 
   def only_moderators
     redirect_back_or root_url unless current_user.admin?
-  end
-
-  def set_adviseable_post
-    @post = Discontent::Post.find params[:discontent_id] if params[:discontent_id]
-    @post = Concept::Post.find params[:concept_id] if params[:concept_id]
   end
 
   # Use callbacks to share common setup or constraints between actions.

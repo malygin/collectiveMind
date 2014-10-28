@@ -25,10 +25,6 @@ CollectiveMind::Application.routes.draw do
     end
   end
 
-  def advices_routes
-    resources :advices, only: [:create], controller: '/advices'
-  end
-
 devise_for :users
 get '/project/:project', to: 'core/projects#to_project'
 get '/list_projects', to: 'core/projects#list_projects'
@@ -130,7 +126,6 @@ scope '/project/:project' do
         put :set_grouped
       end
     end
-    advices_routes
   end
 
   post 'concept/posts/add_dispost', to: 'concept/posts#add_dispost'
@@ -146,7 +141,6 @@ scope '/project/:project' do
         put :discuss_status
       end
     end
-    advices_routes
   end
 
   put 'plan/posts/change_estimate_status', to: 'plan/posts#change_estimate_status'

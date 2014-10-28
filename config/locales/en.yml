@@ -682,6 +682,7 @@ en:
     fill_name_paper: 'Заполните название статьи'
     fill_content_paper: 'Заполните поле контента'
 
+    advice: "Advice"
   link:
     more: 'подробнее'
     top: наверх
