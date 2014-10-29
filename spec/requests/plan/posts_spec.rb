@@ -4,15 +4,15 @@ require 'spec_helper'
 describe 'Plan ' do
   subject { page }
 
-  let (:user) {create :user }
-  let (:project) {create :core_project, status: 9 }
+  let (:user) { create :user }
+  let (:project) { create :core_project, status: 9 }
 
-  before  do
+  before do
     prepare_plans(project)
     sign_in user
   end
 
-  context  'ordinary user sign in ' do
+  context 'ordinary user sign in ' do
     before do
       visit plan_posts_path(project)
     end
@@ -49,7 +49,7 @@ describe 'Plan ' do
         expect(page).to have_selector 'textarea#comment_text_area'
       end
 
-      it ' can add comments ' , js: true do
+      it ' can add comments ', js: true do
         #screenshot_and_open_image
         fill_in 'comment_text_area', with: 'plan comment 1'
         click_button 'send_post'
