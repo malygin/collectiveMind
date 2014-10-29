@@ -10,6 +10,7 @@ class Advice < ActiveRecord::Base
 
   scope :unapproved, -> { where approved: nil }
   scope :approve, -> { where approved: true }
+  scope :disapproved, -> { where approved: false }
   scope :by_project, -> (project) { joins(:discontent_post).where discontent_posts: {project_id: project.id} }
 
   def discontent?
@@ -21,7 +22,11 @@ class Advice < ActiveRecord::Base
   end
 
   def disapproved?
-    !approved
+    approved === false
+  end
+
+  def unapproved?
+    approved === nil
   end
 
   def notify_moderators(project, from_user)
