@@ -29,6 +29,10 @@ class Advice < ActiveRecord::Base
     approved === nil
   end
 
+  def not_useful?
+    useful === nil
+  end
+
   def notify_moderators(project, from_user)
     project.moderators.each do |user|
       from_user.journals.build(type_event: 'my_new_advices_in_project', user_informed: user, project: project,

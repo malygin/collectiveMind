@@ -766,5 +766,7 @@ en:
     unapproved_post_advices: "Unapproved advices"
     advice_success_created: "Ваш совет добавлен и ожидает проверки модератором"
     advice_success_approved: "Advice approved"
+    advice_success_not_approved: "Advice not approved"
   advice:
     advices: "Advices"
+    disapproved_notify_text: "Ваш совет не одобрен, Ознакомиться с причиной"

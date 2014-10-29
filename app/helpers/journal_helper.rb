@@ -244,6 +244,8 @@ module JournalHelper
         "#{j.user} добавил совет #{link_to j.body, advices_path}"
       when 'my_post_adviseable'
         "К вашему материалу добавлен совет #{link_to j.body, polymorphic_path(Advice.find(j.first_id).adviseable, project: project)}"
+      when 'my_advice_disapproved'
+        link_to t('advice.disapproved_notify_text'), polymorphic_path(Advice.find(j.first_id).adviseable, project: project)
       else
         'что то другое'
     end

@@ -19,34 +19,41 @@
       %br
       - unless advice.approved?
         - if current_user?(advice.user)
-          %b Ваш совет находится на проверке модератором
+          %b
+            = t('discontent.advice_success_created')
           %br
-          = link_to edit_advice_path(@project, advice), remote: true, id: "edit_advice_#{advice.id}" do
-            %button.btn.btn-xs.btn-info
-              Редактировать
-        - if current_user.admin?
-          \|
+          - if advice.disapproved?
+            = link_to edit_advice_path(@project, advice), remote: true, id: "edit_advice_#{advice.id}" do
+              %button.btn.btn-xs.btn-info
+                Редактировать
+            \|
+        - if current_user.admin? && advice.unapproved?
           %b
             = link_to 'Утвердить', approve_advice_path(@project, advice), method: :put, remote: true,
             class: 'btn btn-success btn-xs', id: "approve_advice_#{advice.id}"
-      - if advice.approved? and !advice.useful? and current_user?(advice.adviseable.user)
+            = link_to 'Не утверждать', not_approve_advice_path(@project, advice), method: :put, remote: true,
+            class: 'btn btn-danger btn-xs', id: "not_approve_advice_#{advice.id}"
+      - if advice.approved? and advice.not_useful? and current_user?(advice.adviseable.user)
         %b
           Совет полезен?
         = link_to 'Да', useful_advice_path(@project, advice), id: "set_useful_#{advice.id}", method: :put, remote: true, class: 'btn btn-success btn-xs'
         = link_to 'Нет', not_useful_advice_path(@project, advice), id: "set_not_useful_#{advice.id}", method: :put, remote: true, class: 'btn btn-warning btn-xs'
-      - if current_user?(advice.user) or current_user.admin?
+      - if (current_user?(advice.user) && advice.disapproved?) or current_user.admin?
         %br
         = link_to advice_path(@project, advice), method: :delete, data: {confirm: t('confirm.delete_advice')}, id: "remove_advice_#{advice.id}" do
           %button.btn.btn-xs.btn-danger{type: 'button'}
             = t('link.delete')
             %i.fa.fa-trash-o
+
   %ul.media-list.chat-message-body.stage_menu1
-    Обсуждение с автором
-    %br
+    - unless advice.comments.empty?
+      Обсуждение с автором
+      %br
     %div{id: "comments_#{advice.id}"}
       - advice.comments.each do |comment|
         = render partial: 'advice_comments/advice_comment', locals: {advice_comment: comment}
-    - if current_user.admin?
+    %div{id: "discuss_about_#{advice.id}_advice"}
+    - if current_user.admin? && advice.disapproved?
       %br
       = render partial: 'advice_comments/form', locals: {advice: advice}
   %br
