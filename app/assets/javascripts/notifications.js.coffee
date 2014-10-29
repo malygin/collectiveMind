@@ -1,9 +1,10 @@
+
 @notificate_my_journals = ->
   if $("#set_notification_message").length > 0
     Messenger.options =
-      extraClasses: "messenger-fixed messenger-on-top"
+      extraClasses: "messenger-fixed messenger-on-top messenger-on-right messenger-theme-air"
     msg = Messenger().post
-      extraClasses: "messenger-fixed messenger-on-top"
+      extraClasses: "messenger-fixed messenger-on-top  messenger-on-right messenger-theme-air"
       message: "Обратите внимание! У вас есть непрочитанные уведомления. <br>"
       type: "error"
       showCloseButton: true

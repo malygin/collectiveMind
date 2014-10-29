@@ -60,7 +60,7 @@ class Discontent::PostsController < PostsController
     @post = current_model.new
 
     if params[:improve_stage]
-      @comment = "#{get_class_for_improve(params[:improve_stage].to_i)}::Comment".constantize.find(params[:improve_comment]) unless params[:improve_comment].nil?
+      @comment = get_comment_for_stage(params[:improve_stage], params[:improve_comment]) unless params[:improve_comment].nil?
     end
     @post.content = @comment.content if @comment
   end

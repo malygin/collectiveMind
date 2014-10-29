@@ -11,6 +11,6 @@
     .text-center
       = will_paginate @users
     %br
-    =link_to t('link.back_proc'), '/project/'+@project.id.to_s
+    =link_to t('link.back_proc'), core_projects_path(@project.id)
 
 

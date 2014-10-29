@@ -1,30 +1,30 @@
 #= require jquery
 #= require jquery_ujs
 #= require jquery-ui
-#= require bootstrap/bootstrap.min
-#= require autocomplete-rails-dev
-# require bootstrap-wysihtml5
-# require bootstrap-wysihtml5/locales/ru-RU
-#= require selectize
-#= require liFixar/jquery.liFixar
-#= require datepicker/bootstrap-datepicker
-#= require bootstrap3-editable/bootstrap-editable
+#= require jquery.remotipart
+#= require jquery.magnific-popup.min
 #= require jquery.autosize
 #= require totop/jquery.ui.totop
 #= require totop/easing
-# require ckeditor/init
-#= require tinymce
-#= require websocket_rails/main
-#= require jquery.remotipart
-#= require jquery.magnific-popup.min
-#= require bootstrap-colorpicker
-#= require news
-#= require messenger.js
-#= require messenger-theme-future
-#= require notifications
-#= require select2
 #= require jquery.icheck
 
+
+#= require bootstrap/bootstrap.min
+#= require bootstrap-colorpicker
+#= require datepicker/bootstrap-datepicker
+#= require bootstrap3-editable/bootstrap-editable
+
+#= require autocomplete-rails-dev
+#= require selectize
+#= require liFixar/jquery.liFixar
+
+#= require tinymce
+#= require websocket_rails/main
+#= require messenger/messenger.min
+#= require select2
+
+#= require news
+#= require notifications
 
 # @todo load initialization
 sidebarHeight = 0;
