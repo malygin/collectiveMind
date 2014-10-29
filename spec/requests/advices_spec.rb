@@ -75,7 +75,6 @@ describe 'Advices' do
         text_advice = 'Очень хороший совет'
         fill_in 'comment_text_area', with: text_advice
         find(:css, 'label#label_advice_status').click
-        #page.check('advise_status')
         click_button 'send_post'
         expect(page).to have_content I18n.t('discontent.advice_success_created')
         expect(page).to have_content text_advice
@@ -83,7 +82,7 @@ describe 'Advices' do
 
       it { expect change(Advice.unapproved, :count).by(1) }
 
-      it { expect {}.not_to change(Journal, :count) }
+      it { expect change(Journal, :count).by(project.moderators.count) }
     end
 
     it 'edit', js: true do

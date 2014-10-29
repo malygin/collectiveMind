@@ -513,6 +513,10 @@ class PostsController < ApplicationController
     @advice = post.advices.new content: params[:discontent_comment][:content]
     @advice.user = current_user
     @advice.save
+    @project.moderators.each do |user|
+      current_user.journals.build(type_event: 'my_new_advices_in_project', user_informed: user, project: @project,
+                                  body: "#{trim_content(@advice.content)}", personal: true, viewed: false).save!
+    end
 
     render template: 'posts/add_advice'
   end

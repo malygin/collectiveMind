@@ -70,6 +70,9 @@ class Core::Project < ActiveRecord::Base
                  4 => {name: 'Создание проектов', type_stage: :plan_posts, status: [9]},
                  5 => {name: 'Выставление оценок', type_stage: :estimate_posts, status: [10, 11, 12, 13]}}.freeze
 
+  def moderators
+    users_in_project.where(users: {type_user: User::TYPES_USER[:admin]})
+  end
 
   def current_aspects(current_stage)
     if current_stage == 'life_tape/posts'
@@ -137,7 +140,7 @@ class Core::Project < ActiveRecord::Base
   end
 
   def able_add_note?
-    [3,4,5,6].include?(self.status)
+    [3, 4, 5, 6].include?(self.status)
   end
 
   def proc_aspects

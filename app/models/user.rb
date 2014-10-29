@@ -13,7 +13,7 @@ class User < ActiveRecord::Base
   attr_accessible :login, :nickname, :anonym, :secret,
                   :dateActivation, :dateLastEnter, :dateRegistration, :email, :faculty, :group,
                   :name, :string, :string, :surname, :validate, :vkid,
-                  :score, :score_a, :score_g, :score_o, :type_user,:last_seen_news
+                  :score, :score_a, :score_g, :score_o, :type_user, :last_seen_news
 
   has_many :core_project_scores, class_name: 'Core::ProjectScore'
   has_many :help_users_answerses, class_name: 'Help::UsersAnswers'
@@ -95,6 +95,10 @@ class User < ActiveRecord::Base
                                normal: '250x295>'
                            }
   validates_attachment_content_type :avatar, :content_type => /\Aimage\/.*\Z/
+
+  TYPES_USER = {
+      admin: [1, 6, 7]
+  }
 
   def valid_password?(password)
     begin

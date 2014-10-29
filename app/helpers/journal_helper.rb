@@ -235,11 +235,13 @@ module JournalHelper
       when 'advice_approve'
         "добавил совет #{link_to j.body, polymorphic_path(Advice.find(j.first_id).adviseable, project: project)}"
       when 'my_advice_approved'
-        "ваш совет #{link_to j.body, polymorphic_path(Advice.find(j.first_id).adviseable, project: project)} одобрен"
+        "Ваш совет проверен и одобрен #{link_to j.body, polymorphic_path(Advice.find(j.first_id).adviseable, project: project)}"
       when 'my_advice_useful'
         "ваш совет #{link_to j.body, polymorphic_path(Advice.find(j.first_id).adviseable, project: project)} отмечен как полезный"
       when 'my_advice_commented'
         "ваш совет #{link_to j.body, polymorphic_path(Advice.find(j.first_id).adviseable, project: project)} прокомментировали"
+      when 'my_new_advices_in_project'
+        "#{j.user} добавил совет #{link_to j.body, advices_path}"
       else
         'что то другое'
     end
