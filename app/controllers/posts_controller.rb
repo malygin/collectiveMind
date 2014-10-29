@@ -510,7 +510,7 @@ class PostsController < ApplicationController
   # end
   private
   def create_advice(post)
-    @advice = post.advices.new content: params[:discontent_comment][:content]
+    @advice = post.advices.new content: params[name_of_comment_for_param][:content]
     @advice.user = current_user
     @advice.save
     @advice.notify_moderators(@project, current_user)
