@@ -17,7 +17,7 @@
               = f.check_box :concept_status
               =t('show.idea')
             - if advices_for_stage?(@project, @post.class.name.underscore.pluralize)
-              %label(class="btn btn-sm btn-default" onclick="color_button(this);")
+              %label#label_advice_status(class="btn btn-sm btn-default" onclick="color_button(this);")
                 = check_box_tag :advise_status
                 = t('show.advice')
           -if @main_comment
@@ -26,3 +26,5 @@
 
       .text-success#comment_success(style='display:none;')
         =t('form.comment_success')
+      .text-success#advice_success_created(style='display:none;')
+        = t('discontent.advice_success_created')

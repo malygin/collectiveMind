@@ -88,7 +88,7 @@ class PostsController < ApplicationController
     @project = Core::Project.find(params[:project])
     @aspects = Discontent::Aspect.where(project_id: @project)
     post = current_model.find(params[:id])
-    if params[:advice_status]
+    if params[:advise_status]
       create_advice post
     else
       create_comment post
@@ -510,7 +510,11 @@ class PostsController < ApplicationController
   # end
   private
   def create_advice(post)
-    post.advices.new
+    @advice = post.advices.new content: params[:discontent_comment][:content]
+    @advice.user = current_user
+    @advice.save
+
+    render template: 'posts/add_advice'
   end
 
   def create_comment(post)
@@ -555,8 +559,7 @@ class PostsController < ApplicationController
                                     personal: true, viewed: false).save!
       end
     end
-    respond_to do |format|
-      format.js
-    end
+
+    render template: 'posts/add_comment'
   end
 end
