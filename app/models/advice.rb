@@ -8,7 +8,7 @@ class Advice < ActiveRecord::Base
   #@todo remove
   attr_accessible :content, :approved, :adviseable_type, :useful
 
-  scope :unapproved, -> { where approved: false }
+  scope :unapproved, -> { where approved: nil }
   scope :approve, -> { where approved: true }
   scope :by_project, -> (project) { joins(:discontent_post).where discontent_posts: {project_id: project.id} }
 

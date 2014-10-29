@@ -184,7 +184,7 @@ describe 'Advices' do
 
       it { expect change(Advice.unapproved, :count).by(-1) }
 
-      it { expect change(Journal, :count).by(2) }
+      it { expect change(Journal, :count).by(3) }
 
       it { expect change(Award, :count).by(1) }
 

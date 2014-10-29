@@ -38,6 +38,10 @@ class AdvicesController < ApplicationController
                                 user_informed: @advice.user,
                                 body: "#{trim_content(@advice.content)}",
                                 first_id: @advice.id, personal: true, viewed: false).save!
+    current_user.journals.build(type_event: 'my_post_adviseable', project: @project,
+                                user_informed: @advice.adviseable.user,
+                                body: "#{trim_content(@advice.content)}",
+                                first_id: @advice.id, personal: true, viewed: false).save!
   end
 
   def useful

@@ -242,6 +242,8 @@ module JournalHelper
         "ваш совет #{link_to j.body, polymorphic_path(Advice.find(j.first_id).adviseable, project: project)} прокомментировали"
       when 'my_new_advices_in_project'
         "#{j.user} добавил совет #{link_to j.body, advices_path}"
+      when 'my_post_adviseable'
+        "К вашему материалу добавлен совет #{link_to j.body, polymorphic_path(Advice.find(j.first_id).adviseable, project: project)}"
       else
         'что то другое'
     end
