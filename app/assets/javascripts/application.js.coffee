@@ -510,14 +510,19 @@ $.fn.extend popoverClosable: (options) ->
         $wizard.find(".pager .previous").hide()
         $wizard.find(".pager .next .btn").html('Перейти к описанию Идеи <i class="fa fa-caret-right"></i>')
       else if $current == 2
+        $wizard.find(".pager .previous").show()
         $wizard.find(".pager .next .btn").html('Перейти к описанию Функционирования <i class="fa fa-caret-right"></i>')
       else if $current == 3
+        $wizard.find(".pager .previous").show()
         $wizard.find(".pager .next .btn").html('Перейти к описанию Нежелательных побочных эффектов <i class="fa fa-caret-right"></i>')
       else if $current == 4
+        $wizard.find(".pager .previous").show()
         $wizard.find(".pager .next .btn").html('Перейти к описанию Контроля <i class="fa fa-caret-right"></i>')
       else if $current == 5
+        $wizard.find(".pager .previous").show()
         $wizard.find(".pager .next .btn").html('Перейти к описанию Целесообразности <i class="fa fa-caret-right"></i>')
       else if $current == 6
+        $wizard.find(".pager .previous").show()
         $wizard.find(".pager .next .btn").html('Перейти к добавлению Решаемых несовершенств <i class="fa fa-caret-right"></i>')
       else
         $wizard.find(".pager .previous").show()
