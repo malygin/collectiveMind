@@ -53,7 +53,7 @@ describe 'Advices' do
       it 'not link in left side' do
         within :css, 'ul#side-nav' do
           expect(page).not_to have_content I18n.t('left_side.discontent_post_advices')
-          expect(page).not_to have_link discontent_advices_path(project)
+          expect(page).not_to have_link advices_path(project)
         end
       end
 
@@ -73,8 +73,10 @@ describe 'Advices' do
     context 'create', js: true do
       before do
         text_advice = 'Очень хороший совет'
-        fill_in 'advice_content', with: text_advice
-        click_button 'send_advice'
+        fill_in 'comment_text_area', with: text_advice
+        find(:css, 'label#label_advice_status').click
+        #page.check('advise_status')
+        click_button 'send_post'
         expect(page).to have_content I18n.t('discontent.advice_success_created')
         expect(page).to have_content text_advice
       end
