@@ -191,6 +191,7 @@ scope '/project/:project' do
   resources :advices, only: [:index, :edit, :update, :destroy] do
     member do
       put :approve
+      put :not_approve
       put :useful
       put :not_useful
     end

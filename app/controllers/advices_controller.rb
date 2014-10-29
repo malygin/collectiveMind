@@ -17,7 +17,8 @@ class AdvicesController < ApplicationController
 
   # PATCH/PUT /discontent/post_advices/1
   def update
-    @advice.update(advice_params)
+    @advice.update(advice_params.merge(approved: nil))
+    @advice.notify_moderators(@project, current_user)
     respond_to do |format|
       format.js
     end
@@ -40,6 +41,14 @@ class AdvicesController < ApplicationController
                                 first_id: @advice.id, personal: true, viewed: false).save!
     current_user.journals.build(type_event: 'my_post_adviseable', project: @project,
                                 user_informed: @advice.adviseable.user,
+                                body: "#{trim_content(@advice.content)}",
+                                first_id: @advice.id, personal: true, viewed: false).save!
+  end
+
+  def not_approve
+    @advice.update_attributes! approved: false
+    current_user.journals.build(type_event: 'my_advice_disapproved', project: @project,
+                                user_informed: @advice.user,
                                 body: "#{trim_content(@advice.content)}",
                                 first_id: @advice.id, personal: true, viewed: false).save!
   end
