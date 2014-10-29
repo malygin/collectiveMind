@@ -202,7 +202,7 @@ class Concept::PostsController < PostsController
     @discontent_post = Discontent::Post.find(params[:dis_id]) unless params[:dis_id].nil?
     @resources = Concept::Resource.where(project_id: @project.id)
     @pa = Concept::PostAspect.new
-    @comment = "#{get_class_for_improve(params[:improve_stage].to_i)}::Comment".constantize.find(params[:improve_comment]) if params[:improve_comment] and params[:improve_stage]
+    @comment =   get_comment_for_stage(params[:improve_stage], params[:improve_comment]) if params[:improve_comment] and params[:improve_stage]
     @pa.name = @comment.content if @comment
     @remove_able = true
     respond_to do |format|

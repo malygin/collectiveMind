@@ -100,7 +100,10 @@ class PostsController < ApplicationController
       end
     end
     unless params[name_of_comment_for_param][:content]==''
-      @comment = post.comments.create(content: content, image:  img ? img['public_id'] : nil , isFile: img ? isFile : nil,   user: current_user, discontent_status: params[name_of_comment_for_param][:discontent_status], concept_status: params[name_of_comment_for_param][:concept_status], comment_id: @main_comment ? @main_comment.id : nil)
+      @comment = post.comments.create(content: content, image:  img ? img['public_id'] : nil , isFile: img ? isFile : nil,
+                                      user: current_user, discontent_status: params[name_of_comment_for_param][:discontent_status],
+                                      concept_status: params[name_of_comment_for_param][:concept_status],
+                                      comment_id: @main_comment ? @main_comment.id : nil)
 
       #@todo новости и информирование авторов
       current_user.journals.build(type_event: name_of_comment_for_param+'_save', project: @project,
@@ -148,7 +151,7 @@ class PostsController < ApplicationController
     @post = current_model.find(params[:id])
     #@todo безопасность
     if params[:comment_stage]
-      @comment = "#{get_class_for_improve(params[:comment_stage].to_i)}::Comment".constantize.find(params[:comment_id]) unless params[:comment_id].nil?
+      @comment = get_comment_for_stage(params[:comment_stage], params[:comment_id].to_i) unless params[:comment_id].nil?
     end
     @comment.toggle!(:discontent_status) if params[:discontent]
     @comment.toggle!(:concept_status) if params[:concept]
