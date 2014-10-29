@@ -19,4 +19,15 @@ class Advice < ActiveRecord::Base
   def concept?
     adviseable_type == 'Concept::Post'
   end
+
+  def disapproved?
+    !approved
+  end
+
+  def notify_moderators(project, from_user)
+    project.moderators.each do |user|
+      from_user.journals.build(type_event: 'my_new_advices_in_project', user_informed: user, project: project,
+                               body: content[0..100], personal: true, viewed: false).save!
+    end
+  end
 end
