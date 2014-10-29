@@ -1,0 +1,2 @@
+- (@post.advices.approve + current_user.advices_for(@post).unapproved + current_user.advices_for(@post).disapproved).each do |advice|
+  = render partial: 'advices/advice', locals: {advice: advice}

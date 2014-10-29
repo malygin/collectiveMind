@@ -46,8 +46,7 @@
       %h3
         = t('advice.advices')
       %ul.media-list#advices.chat-messages
-        - (@post.advices.approve + current_user.advices_for(@post).unapproved).each do |advice|
-          = render partial: 'advices/advice', locals: {advice: advice}
+        = render 'advices/advices'
       %br
 
     %h3

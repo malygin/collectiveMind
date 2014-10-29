@@ -339,8 +339,7 @@
                 %h4
                   = t('advice.advices')
                 %ul.media-list#advices
-                  - (@post.advices.approve + current_user.advices_for(@post).unapproved).each do |advice|
-                    = render partial: 'advices/advice', locals: {advice: advice}
+                  = render 'advices/advices'
                 %br
           %br
           %section
