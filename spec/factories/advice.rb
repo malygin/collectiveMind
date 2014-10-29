@@ -4,10 +4,14 @@ FactoryGirl.define do
 
     factory :advice_approved do
       approved true
+    end
 
-      factory :advice_useful do
-        useful true
-      end
+    factory :advice_useful do
+      useful true
+    end
+
+    factory :advice_disapproved do
+      approved false
     end
   end
 
