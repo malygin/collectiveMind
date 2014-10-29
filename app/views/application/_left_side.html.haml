@@ -43,6 +43,10 @@
       %i.fa.fa-sign-out
       =t('menu.sign_out')
 
+#sidebar-settings.settings
+  %button.btn-icons.btn.btn-transparent.btn-sm{"data-value" => "icons", :type => "button"} Icons
+  %button.btn-auto.btn.btn-transparent.btn-sm{"data-value" => "auto", :type => "button"} Auto
+
 -#%li.panel#stage_life_tape{class:  @project.stage_style(:life_tape_posts) }
 -#  - if request.original_url.include? 'life_tape' or request.original_url.include? '/1/essay'
 -#    %a.stage_menu1.accordion-toggle(data-toggle="collapse" data-parent="#side-nav" href="#life_tape")

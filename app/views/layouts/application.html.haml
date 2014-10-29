@@ -19,13 +19,13 @@
             %span.text-danger MASS
             %strong DECISION
 
-    %nav#sidebar.sidebar.nav-collapse.collapse
-      - if params[:controller] == 'core/projects' and (params[:action] == 'news' or params[:action] == 'users')
-        = render partial: 'core/projects/left_projects', locals: { current_stage: controller.controller_path }
-      - else
-        = render partial: 'left_side', locals: { current_stage: controller.controller_path }
-      /= render partial: 'shared/moderator_chat'
-    .wrap
+    -#%nav#sidebar.sidebar.nav-collapse.collapse
+    -#  - if params[:controller] == 'core/projects' and (params[:action] == 'news' or params[:action] == 'users')
+    -#    = render partial: 'core/projects/left_projects', locals: { current_stage: controller.controller_path }
+    -#  - else
+    -#    = render partial: 'left_side', locals: { current_stage: controller.controller_path }
+      -#= render partial: 'shared/moderator_chat'
+    .wrap1
       %header.page-header
         .navbar
           - if params[:controller] == 'core/projects' and (params[:action] == 'news' or params[:action] == 'users')

@@ -141,6 +141,10 @@ $brand-estimate:        #663505 !default;
   background-color: rgb(110, 110, 174);
 }
 
+.mean_otstup {
+  text-indent: 50px;
+}
+
 .tooltip-inner {
   white-space:pre-wrap;
 }
@@ -176,8 +180,22 @@ p, a {
   overflow: visible !important;
 }
 
+/***********************************/
+/*            WIZARD               */
+/***********************************/
 .wizard-navigation.nav-pills li.active a {
   background-color: #618FB0 !important;
+}
+
+.form-wizard .progress {
+  margin-bottom: 10px;
+}
+
+.wizard-navigation {
+  margin-bottom: 5px;
+}
+.wizard-navigation a {
+  color: #f8f8f8;
 }
 
 .concept-name {
