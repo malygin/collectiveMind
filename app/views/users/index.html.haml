@@ -23,4 +23,4 @@
             = render partial: 'user', locals: {user: user, number: i+1}
 
     %br
-    =link_to t('link.back_proc'), '/project/'+@project.id.to_s
+    =link_to t('link.back_proc'), core_projects_path(@project.id)

@@ -28,5 +28,5 @@
     = render 'shared/post_social_bar2', post: post_estimate
     -if @project.status == 10 or @project.demo?
       %br
-      = link_to t('form.plan.add_est'), '/project/'+@project.id.to_s+'/estimate/posts/new?plan_id='+post_estimate.id.to_s, class:'btn btn-xs btn-primary'
+      = link_to t('form.plan.add_est'), new_estimate_post_path(@project.id, plan_id: post_estimate.id), class:'btn btn-xs btn-primary'
     = render post_estimate.estimates
