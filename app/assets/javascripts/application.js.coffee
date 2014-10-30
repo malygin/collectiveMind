@@ -8,7 +8,6 @@
 #= require totop/easing
 #= require jquery.icheck
 
-
 #= require bootstrap/bootstrap.min
 #= require bootstrap-colorpicker
 #= require datepicker/bootstrap-datepicker
