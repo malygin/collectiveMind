@@ -122,6 +122,10 @@ $ ->
     $(this).datepicker "hide"
     return
 
+  selectize_discontent()
+  selectize_concept()
+
+@selectize_discontent= ->
   $select = $("#selectize_discontent").selectize
     labelField: "show_content"
     valueField: "id"
@@ -145,6 +149,7 @@ $ ->
       option: (item, escape) ->
         return '<div>'+item.show_content+'</div>'
 
+@selectize_concept= ->
   $select = $("#selectize_concept").selectize
     labelField: "show_content"
     valueField: "id"
@@ -503,6 +508,17 @@ $.fn.extend popoverClosable: (options) ->
     $percent = ($current / $total) * 100
     $wizard = $("#wizard")
     $wizard.find(".progress-bar").css width: $percent + "%"
+    project_id = $('#option_for_wizard_save').attr("data-project")
+    concept_id = $('#option_for_wizard_save').attr("data-post")
+    if concept_id and $current == 1
+      $('#second a').tab('show')
+    if $current == 1
+      $('#form_save').hide()
+    else
+      $('#form_save').show()
+
+    $('#option_for_wizard_tab').attr("data-tab","#{$current}")
+
     if $current >= $total
       $wizard.find(".pager .next").hide()
     else

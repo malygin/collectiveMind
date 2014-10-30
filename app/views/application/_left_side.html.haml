@@ -7,6 +7,11 @@
       = link_to link_for_aspects(asp, current_stage) do
         &nbsp;
         =" #{asp.content}"
+  %li{class:"#{'active' if params[:not_aspect]}"}
+    = link_to "#{link_for_aspects(nil, current_stage)}" + "?not_aspect=true" do
+      Без аспекта
+
+
   %li
     = link_to "/project/#{@project.id}/#{current_stage == 'essay/posts' ? stage_for_essay(params[:stage].to_i) : current_stage}/to_work", class: 'text-towork', id: 'go_to_work' do
       =t('menu.help_stage')
@@ -43,9 +48,9 @@
       %i.fa.fa-sign-out
       =t('menu.sign_out')
 
-#sidebar-settings.settings
-  %button.btn-icons.btn.btn-transparent.btn-sm{"data-value" => "icons", :type => "button"} Icons
-  %button.btn-auto.btn.btn-transparent.btn-sm{"data-value" => "auto", :type => "button"} Auto
+-##sidebar-settings.settings
+-#  %button.btn-icons.btn.btn-transparent.btn-sm{"data-value" => "icons", :type => "button"} Icons
+-#  %button.btn-auto.btn.btn-transparent.btn-sm{"data-value" => "auto", :type => "button"} Auto
 
 -#%li.panel#stage_life_tape{class:  @project.stage_style(:life_tape_posts) }
 -#  - if request.original_url.include? 'life_tape' or request.original_url.include? '/1/essay'
