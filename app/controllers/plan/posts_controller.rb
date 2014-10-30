@@ -23,7 +23,7 @@ class Plan::PostsController < PostsController
   def prepare_data
     @project = Core::Project.find(params[:project])
     @aspects = Discontent::Aspect.where(project_id: @project, status: 0)
-    @vote_all = Plan::Voting.where("plan_votings.plan_post_id IN (#{@project.plan_post.pluck(:id).join(", ")})").uniq_user.count if @project.status == 11
+    @vote_all = Plan::Voting.where(plan_votings: {plan_post_id: @project.plan_post.pluck(:id) }).uniq_user.count if @project.status == 11
   end
 
   def index

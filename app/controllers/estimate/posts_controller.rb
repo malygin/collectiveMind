@@ -26,7 +26,7 @@ class Estimate::PostsController < PostsController
     @status = params[:status]
     @aspects = Discontent::Aspect.where(project_id: @project)
     if @project.status == 11
-      @vote_all = Plan::Voting.where("plan_votings.plan_post_id IN (#{@project.plan_post.pluck(:id).join(", ")})").uniq_user.count
+      @vote_all = Plan::Voting.where(plan_votings: {plan_post_id: @project.plan_post.pluck(:id) }).uniq_user.count
     end
   end
 

@@ -143,13 +143,13 @@ class Discontent::Post < ActiveRecord::Base
   def get_posts_suitable_for_association
     aspects = self.post_aspects.pluck(:id)
 
-    Discontent::Post.includes(:discontent_post_aspects).where("discontent_post_aspects.aspect_id IN (#{aspects.join(', ')}) and discontent_posts.status = 0 and discontent_posts.id <> ? and (discontent_posts.whered = ? or discontent_posts.whend = ?)", self.id, self.whered, self.whend)
+    Discontent::Post.includes(:discontent_post_aspects).where(discontent_post_aspects: {aspect_id: aspects}).where("discontent_posts.status = 0 and discontent_posts.id <> ? and (discontent_posts.whered = ? or discontent_posts.whend = ?)", self.id, self.whered, self.whend)
   end
 
   def get_posts_for_union_add_list(project)
     aspects = self.post_aspects.pluck(:id)
 
-    posts = Discontent::Post.joins(:discontent_post_aspects).where("discontent_post_aspects.aspect_id IN (#{aspects.join(', ')}) and discontent_posts.status = 0 and discontent_posts.project_id = ? and (discontent_posts.whered = ? or discontent_posts.whend = ?)", project.id, self.whered, self.whend).pluck(:id)
+    posts = Discontent::Post.joins(:discontent_post_aspects).where(discontent_post_aspects: {aspect_id: aspects}).where("discontent_posts.status = 0 and discontent_posts.project_id = ? and (discontent_posts.whered = ? or discontent_posts.whend = ?)", project.id, self.whered, self.whend).pluck(:id)
     Discontent::Post.where("discontent_posts.status = 0 and discontent_posts.project_id = ?", project.id).not_view(posts)
   end
 

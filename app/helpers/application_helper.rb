@@ -621,4 +621,17 @@ module ApplicationHelper
     link += "?asp=#{asp.id}" if asp
     link
   end
+
+  def score_order(score_name)
+    case score_name
+      when 'score_g'
+        "core_project_scores.score_g DESC"
+      when 'score_a'
+        "core_project_scores.score_a DESC"
+      when 'score_o'
+        "core_project_scores.score_o DESC"
+      else
+        "core_project_scores.score DESC"
+    end
+  end
 end
