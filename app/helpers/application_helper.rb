@@ -618,7 +618,7 @@ module ApplicationHelper
     else
       link += "#{current_stage == 'essay/posts' ? stage_for_essay(params[:stage].to_i) : current_stage}"
     end
-    link += "?asp=#{asp.id}"
+    link += "?asp=#{asp.id}" if asp
     link
   end
 end

@@ -1,0 +1,867 @@
+= form_for  @concept_post, :url => {:project => @project.id, :id => @concept_post ? @concept_post.id : nil, :asp_id => params[:asp_id].present? ? params[:asp_id] : params[:asp], :improve_comment => params[:improve_comment], :improve_stage => params[:improve_stage], :fast_update => true, :action => @concept_post.persisted? ? 'update' : 'create'},  :remote => true, :method => :put, :html => { :class => 'new_or_edit' } do |f|
+  #mod
+  #notice_messages
+  #option_for_wizard_save(data-project="#{@project.id}" data-post="#{@concept_post.id}")
+
+  .tab-content
+    #tab1.tab-pane
+      .form-horizontal
+        %fieldset
+          %h4.text-center
+            На третьем этапе выработки проекта по процедуре MASSDECISION перед вами стоит задача
+            придумать и описать ваше решение проблем, которые выделили участники на 2-м этапе.
+            %br
+            Чтобы ваше решение носило гордое название «Нововведение», вам необходимо заполнить
+            несколько блоков, которые описывают его с разных сторон.
+          %br
+          %div(style="text-align:center;")
+            = image_tag 'img/concept_intro.png', border: '0', height: '600'
+
+
+    #tab2.tab-pane
+      .form-horizontal
+        %fieldset
+          .col-md-4
+            %section
+              .body
+                .text-center
+                  %h2(style="font-weight:800;") Идея
+                  %p
+                    В этом блоке мы просим вас описать саму концепцию вашего нововведения, т.е. «Что предлагается» и «Чем оно лучше текущего положения?».
+                    Дальнейшее заполнение дополнительных блоков не является обязательным, но крайне рекомендуется, так как это позволит глубже проанализировать
+                    ваше нововведение вами же, а другим участникам процедуры это позволит лучше понять его выгоду и преимущества.
+
+                    -#На этом вы имеете право завершить заполнение формы и в таком виде выдвинуть материал на всеобщее обсуждение.
+                    -#Если вы не станете заполнять остальные поля, то ваш материал приобретет статус «Идея».
+                    -#Впоследствии идею можно развить до полноценного нововведения, показав, что она работоспособна,
+                    -#реалистична, безопасна и эффективна. Развить идею можете как вы сами, так и любой другой участник.
+                    -#Для этого необходимо ответить на вопросы из следующих блоков. Заполнение каждого блока принесет участнику
+                    -#определенное количество баллов.
+            %br
+            %br
+            %section
+              .body
+                .text-center
+                  %h2(style="font-weight:800;") +30 очков!
+                  %p
+                    Вы получите после проверки модератором этого блока.
+
+          .col-md-8
+            .row
+              .col-md-12
+                .text-center
+                  %p.h3.color-orange
+                    =t('form.concept.title')
+                  %br
+                  =text_field_tag "pa[title]",@pa.title, style: 'width: 100%; height: 30px', placeholder: t('form.concept.title_promt')
+                  %br
+            %br
+            .row
+              .col-md-12
+                %h4.text-left
+                  %p
+                    В первых двух полях излагается основная идея нововведения, и они обязательны для заполнения.
+            .row
+              .col-md-12
+                .text-left
+                  %h4.color-orange
+                    %b A1:
+                    =t('form.concept.novation_what')
+                  %small
+                    В пункте А1 мы кратко описываем идею по решению проблемы.
+                    %br
+                    %b Например:
+                    %i.color-teal Цветник около Высокого дуба.
+                    -#%i «На регулярной основе проводится благотворительный вечер. Деньги, собранные на данном вечере, направляются в фонд защиты окружающей среды»
+                  %br
+
+              -if @project.status == 7
+                = render partial: 'concept/posts/note_list', :locals => {:post_field => @concept_post,:type_fd => 1}
+
+            .row
+              .col-md-12
+                =text_area_tag "pa[name]",@pa.name, :class => "concept_cond form-control", rows: 5, style: 'width: 100%;'
+            %br
+            .row
+              .col-md-12
+                .text-left
+                  %h4.color-orange
+                    %b A2:
+                    =t('form.concept.novation_how')
+                  %small
+                    Если в А1 мы просто описываем нашу идею, то в А2 надо описать все выгоды и плюсы от нововведения.
+                    %br
+                    %b Например:
+                    %i.color-teal Когда четвероногие разобьют около дуба цветник, пчелам не нужно будет тратить много времени и сил на перелеты за нектаром. В результате благодаря инициативе четвероногих пчелы колоссально повысят производство меда. В связи с новым положением дел четвероногие и пчелы заключат соглашение, регулирующее их отношения. По этому соглашению, в частности, в обмен на пользование цветником пчелы будут отдавать четвероногим половину того меда, который они произведут сверх нынешнего уровня. Таким образом, выиграют все: и пчелы будут иметь гораздо больше меда, чем теперь, и четвероногие получат его вдоволь. В результате взаимная агрессия и недоверие будут устранены. 
+                    -#%i «Мероприятие обратит внимание общественности на проблемы окружающей среды, а также позволит получить средства для реализации различных программ»
+                  %br
+
+              -if @project.status == 7
+                = render partial: 'concept/posts/note_list', :locals => {:post_field => @concept_post,:type_fd => 2}
+
+            .row
+              .col-md-12
+                =text_area_tag "pa[content]",@pa.content, :class => "concept_cond form-control", rows: 5, style: 'width: 100%;'
+
+            %br
+            .row
+              .col-md-12
+                %h4.text-left
+                  %p
+                    На этом вы имеете право завершить заполнение формы и в таком виде выдвинуть материал на всеобщее обсуждение.
+                    Если вы не станете заполнять остальные поля, то ваш материал приобретет статус «Идея».
+                    Впоследствии идею можно развить до полноценного нововведения, показав, что она
+                    %b.color-teal работоспособна, реалистична, безопасна и эффективна.
+                    Развить идею можете как вы сами, так и любой другой участник. Для этого необходимо ответить на вопросы из следующих блоков.
+                    Заполнение каждого блока принесет участнику определенное количество баллов.
+                    -#На этом блок концепций закончен. Если вы по каким либо причинам не можете заполнять остальные поля, то ваше решение приобретет статус «Концепция». Это значит, что ваше решение лишь незаконченный образ того, который можно развить до Нововведения.
+                    -#Для более детального рассмотрения вашего решения и поднятие его ценности в рамках процедуры мы рекомендуем вам ответить на вопросы из других блоков.
+
+
+
+    #tab3.tab-pane
+      .form-horizontal
+        %fieldset
+          .col-md-4
+            %section
+              .body
+                .text-center
+                  %h2(style="font-weight:800;") Функционирование
+                  %p
+                    Теперь, когда вы в общих чертах описали идею нововведения, необходимо понять, а работает ли оно.
+                    Для этого попытайтесь в своем воображении перенестись в будущее, в котором ваше нововведение успешно реализовано.
+                    -#Целью этого блока является подробное описание того, как ваше нововведение работает после его успешной реализации.
+                    -#Для этого необходимо перенестись в будущее и взглянуть на него со стороны.
+            %br
+            %br
+            %section
+              .body
+                .text-center
+                  %h2(style="font-weight:800;") +30 очков!
+                  %p
+                    Вы получите после проверки модератором этого блока.
+          .col-md-8
+            .row
+              .col-md-12
+                .text-left
+                  %h4.color-orange
+                    %b B1:
+                    =t('form.concept.cond')
+                  %small
+                    Описание воображаемого функционирования любой системы должно состоять из двух частей:
+                    %br
+                    1. Новая функциональная деятельность, рутинно осуществляемая в системе.
+                    %br
+                    2. Новое состояние, в которое эта система перешла.
+                    %br
+                    Рутинная функциональная деятельность состоит из регулярно или периодически повторяющихся действий.
+                    %br
+                    %b Например:
+                    %i.color-teal
+                      Пчелы собирают нектар  с медоносных растений цветника.
+                      В конце каждого сезона подсчитывается, сколько меда произведено сверх нынешнего уровня, и половина этого количества передается четвероногим.
+                    %br
+                    В описание нового состояния должно входить описание условий, которые созданы и поддерживаются в будущем для обеспечения функциональной деятельности.
+                    %br
+                    %b Например:
+                    %br
+                    %b.color-teal Условия:
+                    .color-teal В цветнике высажены медоносные растения, за которыми обеспечивается необходимый уход.
+                    %b.color-teal Поддержание:
+                    .color-teal Винни и его друзья делятся на две группы. Первая группа занимается поддержкой ассортимента медоносных растений, а вторая обеспечивает условия их роста – пропалывает почву и поливает цветник.
+
+                    -#Мы уже кратко описали в А1 наше решение, но в отличие от А1 здесь нам необходимо ПОДРОБНО описать нововведение в будущем.
+                    -#Это достаточно удобно делать, если начать описывать будущее решение при помощи «условий» и «регулярных действий».
+                    -#%br
+                    -#%br
+                    -#%b Условие -
+                    -#составная часть состояния вашего решения в будущем.
+                    -#В А1 вы описывали общую концепцию, а теперь разложите вашу идею на составляющие.
+                    -#%br
+                    -#%b Например:
+                    -#%i «Вечера проходят в официальном стиле. Дресс-код – вечерние костюмы. Играет классическая музыка. Организован «шведский стол»»
+                    -#%br
+                    -#%br
+                    -#%b Регулярные действия в будущем –
+                    -#действия, при помощи которых ваше решение работает.
+                    -#%br
+                    -#%b Например:
+                    -#%i
+                    -#  «За месяц до начала организуется рассылка дизайнерских писем с приглашением элиты общества на вечер.
+                    -#  Арендуется просторное помещение в викторианском стиле для проведения вечера. Нанимается оркестр.
+                    -#  Нанимаются повара, официанты и др обслуживающий персонал. Совместно с шеф-поваром уточняется меню.
+                    -#  Готовится небольшая программа для участников вечера.
+                    -#  При проведении вечера осуществляется контроль за персоналом, гостями и обстановкой».
+
+                  %br
+                  %br
+
+            .row
+              .col-md-12
+                =text_area_tag "pa[positive]",@pa.positive,  :class => "concept_cond form-control", rows: 5, style: 'width: 100%;'
+
+              -if @project.status == 7
+                = render partial: 'concept/posts/note_list', :locals => {:post_field => @concept_post,:type_fd => 3}
+
+            %br
+            .row
+              .col-md-12
+                .text-left
+                  %h4.color-orange
+                    %b B2:
+                    =t('form.concept.cond_res')
+                  %small
+                    Опираясь на то, что вы указали в поле В1, вам нужно перечислить все ресурсы, которые потребуются для будущего функционирования вашего нововведения.
+                    Тем, кто укажет, откуда возьмутся или как будут созданы эти ресурсы, будут начислены дополнительные баллы.
+                    %br
+                    %b Например:
+                    %div - Вода для полива
+                    .mean_otstup Воду можно набирать в пруду недалеко от дуба.
+                    %div - Садовый инвентарь
+                    .mean_otstup У мамы Кенги есть все необходимое для ухода за садом.
+                    %div - Карта леса, на которой отмечены все цветочные лужайки, где можно собирать семена и саженцы для цветника у Высокого дуба.
+                    .mean_otstup Такую карту могут составить пчелы.
+
+
+                    -#Опираясь на В1, нам нужно указать все то, что нам понадобится для будущего функционирования.
+                    -#%br
+                    -#%br
+                    -#Ресурсы делятся на 2 типа:
+                    -#%br
+                    -#%b Ресурсы функционирования -
+                    -#ресурсы, необходимые для работы каждого регулярного действия или поддержания условий в будущем.
+                    -#%br
+                    -#%b Например:
+                    -#%i «Помещение в викторианском стиле, классическая музыка, еда и напитки и т.д.»
+                    -#%br
+                    -#%br
+                    -#%b Ресурсы создания –
+                    -#ресурсы, необходимые для создания ресурсов функционирования
+                    -#%br
+                    -#%b Например:
+                    -#%i «Деньги на аренду помещения, оркестр, меню и т.д.»
+                    -#%br
+                    -#Вы, вероятно заметили, что каждому ресурсу функционирования соответствуют свои ресурсы создания.
+                  %br
+                  %br
+
+              -if @project.status == 7
+                = render partial: 'concept/posts/note_list', :locals => {:post_field => @concept_post,:type_fd => 4}
+            .row
+              .col-md-12
+                .text-left
+                  =t('form.concept.resources_rules')
+                  %br
+                  %b=t('form.concept.res_buttons')
+                  .row
+                    %span.color-orange
+                      %i.fa.fa-plus
+                      =t('form.concept.add_res_btn')
+                    %span=" - #{t('form.concept.add_res_btn_desc')}"
+                  .row
+                    %span.color-teal
+                      %i.fa.fa-edit
+                      =t('form.concept.add_desc_btn')
+                    %span=" - #{t('form.concept.add_desc_btn_desc')}"
+                  .row
+                    %span.color-green
+                      %i.fa.fa-plus
+                      =t('form.concept.add_mean_btn')
+                    %span=" - #{t('form.concept.add_mean_btn_desc')}"
+                  .row
+                    %span.text-danger
+                      %i.fa.fa-trash-o
+                      =t('form.concept.del_res_btn')
+                    %span=" - #{t('form.concept.del_res_btn_desc')}"
+                  %br
+            .row
+              .col-md-12
+                .form-group.has-success{id: "resources_positive_r", style: "line-height:20px;"}
+                  - if @concept_post.persisted? and @concept_post.concept_post_resources.by_type('positive_r').any?
+                    -@concept_post.concept_post_resources.by_type('positive_r').each_with_index do |r,i|
+                      %div.main_resources(id="main_positive_r_#{i+1}" position="#{i+1}")
+                        .col-md-8
+                          = autocomplete_field_tag "resor[][name]",'', autocomplete_concept_post_resource_concept_posts_path, :"min-length" => 0,value: r.name,  class: 'form-control autocomplete',placeholder: t('form.concept.res_promt')
+                          %input{name: "resor[][type_res]", type: "hidden", value: "positive_r"}
+                        .col-md-4
+                          .pull-right
+                            %button.btn.btn-info{type: "button", title: t('form.concept.add_desc_btn'), onclick:"$(this).parent().parent().parent().find('.desc_resource').show();", id: "desc_to_res"}
+                              %i.fa.fa-edit
+                            %button.btn.btn-success{type: "button", title: t('form.concept.add_mean_btn'),onclick:"return add_new_mean_to_resource(this,'positive_s',#{@project.id});", id: "plus_mean"}
+                              %i.fa.fa-plus
+                            %button.btn.btn-danger{type: "button",title: t('form.concept.del_res_btn'), onclick: "$(this).parent().parent().parent().remove();", id: "destroy_res"}
+                              %i.fa.fa-trash-o
+                        %br
+                        %br
+                        %div.desc_resource(id="desc_positive_r_#{i+1}" position="#{i+1}")
+                          = text_area_tag "resor[][desc]", r.desc, class: 'form-control', placeholder: t('form.concept.res_desc_promt')
+                          %br
+                        %div.col-md-offset-1.col-md-11.means_to_resource(id="means_positive_s_#{i+1}")
+                          -r.concept_post_resources.by_type('positive_s').each_with_index do |res,ind|
+                            %div.main_means(id="main_positive_s_#{i+1}" position="#{i+1}")
+                              .col-md-8
+                                = autocomplete_field_tag "resor[][means][][name]",'', autocomplete_concept_post_mean_concept_posts_path, :"min-length" => 0, value: res.name, class: 'form-control autocomplete',placeholder: t('form.concept.res_promt')
+                                %input{name: "resor[][means][][type_res]", type: "hidden", value: "positive_s"}
+                              .col-md-4
+                                .pull-right
+                                  %button.btn.btn-info{type: "button", title: t('form.concept.add_desc_btn'), onclick:"$(this).parent().parent().parent().find('.desc_mean').show();", id: "desc_to_res"}
+                                    %i.fa.fa-edit
+                                  %button.btn.btn-danger{type: "button",title: t('form.concept.del_res_btn'), onclick: "$(this).parent().parent().parent().remove();", id: "destroy_res"}
+                                    %i.fa.fa-trash-o
+                              %br
+                              %br
+                              %div.desc_mean(id="desc_positive_s_#{i+1}" position="#{i+1}")
+                                = text_area_tag "resor[][means][][desc]", res.desc, class: 'form-control', placeholder: t('form.concept.res_desc_promt')
+                                %br
+
+                  -else
+                    %div.main_resources(id="main_positive_r_1" position="1")
+                      .col-md-8
+                        = autocomplete_field_tag "resor[][name]",'', autocomplete_concept_post_resource_concept_posts_path, :"min-length" => 0,  class: 'form-control autocomplete',placeholder: t('form.concept.res_promt')
+                        %input{name: "resor[][type_res]", type: "hidden", value: "positive_r"}
+                      .col-md-4
+                        .pull-right
+                          %button.btn.btn-info{type: "button", title: t('form.concept.add_desc_btn'), onclick:"$(this).parent().parent().parent().find('.desc_resource').show();", id: "desc_to_res"}
+                            %i.fa.fa-edit
+                          %button.btn.btn-success{type: "button", title: t('form.concept.add_mean_btn'),onclick:"return add_new_mean_to_resource(this,'positive_s',#{@project.id});", id: "plus_mean"}
+                            %i.fa.fa-plus
+                          %button.btn.btn-danger{type: "button",title: t('form.concept.del_res_btn'), onclick: "$(this).parent().parent().parent().remove();", id: "destroy_res"}
+                            %i.fa.fa-trash-o
+                      %br
+                      %br
+                      %div.desc_resource(id="desc_positive_r_1" position="1" style="display:none;")
+                        = text_area_tag "resor[][desc]", '', class: 'form-control', placeholder: t('form.concept.res_desc_promt')
+                        %br
+                      %div.col-md-offset-1.col-md-11.means_to_resource(id="means_positive_s_1")
+                        %div.main_means(id="main_positive_s_1" position="1")
+                          .col-md-8
+                            = autocomplete_field_tag "resor[][means][][name]",'', autocomplete_concept_post_mean_concept_posts_path, :"min-length" => 0, class: 'form-control autocomplete', placeholder: t('form.concept.res_promt')
+                            %input{name: "resor[][means][][type_res]", type: "hidden", value: "positive_s"}
+                          .col-md-4
+                            .pull-right
+                              %button.btn.btn-info{type: "button", title: t('form.concept.add_desc_btn'), onclick:"$(this).parent().parent().parent().find('.desc_mean').show();", id: "desc_to_res"}
+                                %i.fa.fa-edit
+                              %button.btn.btn-danger{type: "button",title: t('form.concept.del_res_btn'), onclick: "$(this).parent().parent().parent().remove();", id: "destroy_res"}
+                                %i.fa.fa-trash-o
+                          %br
+                          %br
+                          %div.desc_mean(id="desc_positive_s_1" position="1" style="display:none;")
+                            = text_area_tag "resor[][means][][desc]", '', class: 'form-control', placeholder: t('form.concept.res_desc_promt')
+                            %br
+
+                %a.btn.btn-warning.pull-left{onclick:"return add_new_resource_to_concept('positive_r','positive_s',#{@project.id});", id:"add_positive_r"}
+                  %i.fa.fa-plus
+                  =t('form.concept.add_res_btn')
+            %br
+            %br
+            .row
+              .col-md-12
+                .text-left
+                  %p Описав эти 2 пункта, мы полностью описали работу нашего решения в будущем и сможем оценить все побочные эффекты.
+
+    #tab4.tab-pane
+      .form-horizontal
+        %fieldset
+          .col-md-4
+            %section
+              .body
+                .text-center
+                  %h2(style="font-weight:800;") Нежелательные побочные эффекты
+                  %p
+                    Заполнение предыдущего блока позволило вам понять, какие ресурсы потребуются для успешной работы вашего нововведения.
+                    Однако нередко случается так, что, улучшив ситуацию в одном отношении, вы ухудшаете ее в другом.
+                    Именно поэтому любое нововведение следует проверять на возможные отрицательные эффекты.
+                    Такую проверку эффективно делать при помощи техники контрнегативного мозгового штурма.
+                    Результаты проверки помещаются в следующее поле.
+                    -#Теперь, когда мы целиком представляем идею и подробное функционирование нововведения,
+                    -#можно проанализировать возможные побочные эффекты, связанные с выбором именно этого решения.
+            %br
+            %br
+            %section
+              .body
+                .text-center
+                  %h2(style="font-weight:800;") +20 очков!
+                  %p
+                    Вы получите после проверки модератором этого блока.
+          .col-md-8
+            .row
+              .col-md-12
+                .text-left
+                  %h4.color-orange
+                    %b C1:
+                    =t('form.concept.negative_h')
+                  %small
+                    Ответ подразумевает указание всех негативных эффектов, которые возникнут как результат работы вашего решения.
+                    %br
+                    %br
+                    %b Например:
+                    %i.color-teal
+                      Некоторые пчелы могут не захотеть делиться медом и внесут разлад в жизнь улья.
+                      Отдельным четвероногим будет лень работать, и это вызовет ссоры в компании Винни-Пуха.
+                    -#%i «Возможно, что кто-то из гостей переберет с алкогольными напитками и начнет портить окружающим вечер» или «Меню вызовет у гостей нежелание пробовать блюда»
+                  %br
+                  %br
+
+              -if @project.status == 7
+                = render partial: 'concept/posts/note_list', :locals => {:post_field => @concept_post,:type_fd => 5}
+
+            .row
+              .col-md-12
+                =text_area_tag "pa[negative]",@pa.negative,  :class => "concept_cond form-control", rows: 5,  style: 'width: 100%;'
+
+
+            .row
+              .col-md-12
+                .text-left
+                  %h4.color-orange
+                    %b C2:
+                    =t('form.concept.negative_res')
+                  %small
+                    Аналогично с В2 здесь описываются ресурсы функционирования и создания, но теперь нам нужны ресурсы, которые помогут избежать или минимизировать побочные эффекты.
+                    %br
+                    %br
+                    %b Например:
+                    %i.color-teal
+                      Угрозы санкций согласно контракту и Сова в качестве арбитра.
+                    -#%i «Список напитков (В карте напитков упор делается на безалкогольные или слабоалкогольные напитки, алкогольные напитки выносятся реже)»
+                  %br
+                  %br
+
+              -if @project.status == 7
+                = render partial: 'concept/posts/note_list', :locals => {:post_field => @concept_post, :type_fd => 6}
+
+            .row
+              .col-md-12
+                .text-left
+                  =t('form.concept.resources_rules')
+                  %br
+                  %b=t('form.concept.res_buttons')
+                  .row
+                    %span.color-orange
+                      %i.fa.fa-plus
+                      =t('form.concept.add_res_btn')
+                    %span=" - #{t('form.concept.add_res_btn_desc')}"
+                  .row
+                    %span.color-teal
+                      %i.fa.fa-edit
+                      =t('form.concept.add_desc_btn')
+                    %span=" - #{t('form.concept.add_desc_btn_desc')}"
+                  .row
+                    %span.color-green
+                      %i.fa.fa-plus
+                      =t('form.concept.add_mean_btn')
+                    %span=" - #{t('form.concept.add_mean_btn_desc')}"
+                  .row
+                    %span.text-danger
+                      %i.fa.fa-trash-o
+                      =t('form.concept.del_res_btn')
+                    %span=" - #{t('form.concept.del_res_btn_desc')}"
+                  %br
+
+
+            .row
+              .col-md-12
+                .form-group.has-success{id: "resources_negative_r", style: "line-height:20px;"}
+                  - if @concept_post.persisted? and @concept_post.concept_post_resources.by_type('negative_r').any?
+                    -@concept_post.concept_post_resources.by_type('negative_r').each_with_index do |r,i|
+                      %div.main_resources(id="main_negative_r_#{i+1}" position="#{i+1}")
+                        .col-md-8
+                          = autocomplete_field_tag "resor[][name]",'', autocomplete_concept_post_resource_concept_posts_path, :"min-length" => 0,value: r.name,  class: 'form-control autocomplete',placeholder: t('form.concept.res_promt')
+                          %input{name: "resor[][type_res]", type: "hidden", value: "negative_r"}
+                        .col-md-4
+                          .pull-right
+                            %button.btn.btn-info{type: "button", title: t('form.concept.add_desc_btn'), onclick:"$(this).parent().parent().parent().find('.desc_resource').show();", id: "desc_to_res"}
+                              %i.fa.fa-edit
+                            %button.btn.btn-success{type: "button", title: t('form.concept.add_mean_btn'),onclick:"return add_new_mean_to_resource(this,'negative_s',#{@project.id});", id: "plus_mean"}
+                              %i.fa.fa-plus
+                            %button.btn.btn-danger{type: "button",title: t('form.concept.del_res_btn'), onclick: "$(this).parent().parent().parent().remove();", id: "destroy_res"}
+                              %i.fa.fa-trash-o
+                        %br
+                        %br
+                        %div.desc_resource(id="desc_negative_r_#{i+1}" position="#{i+1}")
+                          = text_area_tag "resor[][desc]", r.desc, class: 'form-control', placeholder: t('form.concept.res_desc_promt')
+                          %br
+                        %div.col-md-offset-1.col-md-11.means_to_resource(id="means_negative_s_#{i+1}")
+                          -r.concept_post_resources.by_type('negative_s').each_with_index do |res,ind|
+                            %div.main_means(id="main_negative_s_#{i+1}" position="#{i+1}")
+                              .col-md-8
+                                = autocomplete_field_tag "resor[][means][][name]",'', autocomplete_concept_post_mean_concept_posts_path, :"min-length" => 0, value: res.name, class: 'form-control autocomplete',placeholder: t('form.concept.res_promt')
+                                %input{name: "resor[][means][][type_res]", type: "hidden", value: "negative_s"}
+                              .col-md-4
+                                .pull-right
+                                  %button.btn.btn-info{type: "button", title: t('form.concept.add_desc_btn'), onclick:"$(this).parent().parent().parent().find('.desc_mean').show();", id: "desc_to_res"}
+                                    %i.fa.fa-edit
+                                  %button.btn.btn-danger{type: "button",title: t('form.concept.del_res_btn'), onclick: "$(this).parent().parent().parent().remove();", id: "destroy_res"}
+                                    %i.fa.fa-trash-o
+                              %br
+                              %br
+                              %div.desc_mean(id="desc_negative_s_#{i+1}" position="#{i+1}")
+                                = text_area_tag "resor[][means][][desc]", res.desc, class: 'form-control', placeholder: t('form.concept.res_desc_promt')
+                                %br
+
+                  -else
+                    %div.main_resources(id="main_negative_r_1" position="1")
+                      .col-md-8
+                        = autocomplete_field_tag "resor[][name]",'', autocomplete_concept_post_resource_concept_posts_path, :"min-length" => 0,  class: 'form-control autocomplete',placeholder: t('form.concept.res_promt')
+                        %input{name: "resor[][type_res]", type: "hidden", value: "negative_r"}
+                      .col-md-4
+                        .pull-right
+                          %button.btn.btn-info{type: "button", title: t('form.concept.add_desc_btn'), onclick:"$(this).parent().parent().parent().find('.desc_resource').show();", id: "desc_to_res"}
+                            %i.fa.fa-edit
+                          %button.btn.btn-success{type: "button", title: t('form.concept.add_mean_btn'),onclick:"return add_new_mean_to_resource(this,'negative_s',#{@project.id});", id: "plus_mean"}
+                            %i.fa.fa-plus
+                          %button.btn.btn-danger{type: "button",title: t('form.concept.del_res_btn'), onclick: "$(this).parent().parent().parent().remove();", id: "destroy_res"}
+                            %i.fa.fa-trash-o
+                      %br
+                      %br
+                      %div.desc_resource(id="desc_negative_r_1" position="1" style="display:none;")
+                        = text_area_tag "resor[][desc]", '', class: 'form-control', placeholder: t('form.concept.res_desc_promt')
+                        %br
+                      %div.col-md-offset-1.col-md-11.means_to_resource(id="means_negative_s_1")
+                        %div.main_means(id="main_negative_s_1" position="1")
+                          .col-md-8
+                            = autocomplete_field_tag "resor[][means][][name]",'', autocomplete_concept_post_mean_concept_posts_path, :"min-length" => 0, class: 'form-control autocomplete', placeholder: t('form.concept.res_promt')
+                            %input{name: "resor[][means][][type_res]", type: "hidden", value: "negative_s"}
+                          .col-md-4
+                            .pull-right
+                              %button.btn.btn-info{type: "button", title: t('form.concept.add_desc_btn'), onclick:"$(this).parent().parent().parent().find('.desc_mean').show();", id: "desc_to_res"}
+                                %i.fa.fa-edit
+                              %button.btn.btn-danger{type: "button",title: t('form.concept.del_res_btn'), onclick: "$(this).parent().parent().parent().remove();", id: "destroy_res"}
+                                %i.fa.fa-trash-o
+                          %br
+                          %br
+                          %div.desc_mean(id="desc_negative_s_1" position="1" style="display:none;")
+                            = text_area_tag "resor[][means][][desc]", '', class: 'form-control', placeholder: t('form.concept.res_desc_promt')
+                            %br
+
+                %a.btn.btn-warning.pull-left{onclick:"return add_new_resource_to_concept('negative_r','negative_s',#{@project.id});", id:"add_negative_r"}
+                  %i.fa.fa-plus
+                  =t('form.concept.add_res_btn')
+
+    #tab5.tab-pane
+      .form-horizontal
+        %fieldset
+          .col-md-4
+            %section
+              .body
+                .text-center
+                  %h2(style="font-weight:800;") Контроль
+                  %p
+                    Вы уже знаете, что за нововведение вы хотите создать, какие для этого требуются ресурсы, как их создать и как предотвратить возможные негативные эффекты.
+                    Однако функционированием любой новой системы обычно надо управлять, а значит, требуется дать ответы на следующие вопросы.
+                    -#Итак, мы предложили концепцию и расписали ее функционирование в будущем, проанализировали возможные побочные эффекты.
+                    -#Остается подумать над тем, кто и при помочи чего будет контролировать реализацию предложенного нововведения.
+            %br
+            %br
+            %section
+              .body
+                .text-center
+                  %h2(style="font-weight:800;") +10 очков!
+                  %p
+                    Вы получите после проверки модератором этого блока.
+          .col-md-8
+            .row
+              .col-md-12
+                .text-left
+                  %h4.color-orange
+                    %b D1:
+                    =t('form.concept.control')
+                  %small
+                    В этом поле нужно перечислить ответственных лиц и средства, при помощи которых они будут контролировать работу нововведения.
+                    -#В данном пункте нужно указать основных лиц и средства, при помощи которых они будут контролировать реализацию решения.
+                    %br
+                    %br
+                    %b Например:
+                    %i.color-teal
+                      Контроль будут осуществлять Винни-Пух, Кролик и Сова. Винни следит за состоянием и пополнением цветника, а также за взаимодействием с пчелами.
+                      Кролик следит, чтобы жители леса по незнанию не совершали садоводческих ошибок. Сова осуществляет общий контроль.
+                      -#«По всему залы установлены видеокамеры. Организатор имеет доступ к камерам для наблюдения за работой.
+                      -#Назначается ответственное лицо, которое следит за поиском помещения, наймом персонала и согласованием всех вопросов.
+                      -#Выделяется бюджет на покрытие работ по контролю»
+                  %br
+                  %br
+
+              -if @project.status == 7
+                = render partial: 'concept/posts/note_list', :locals => {:post_field => @concept_post,:type_fd => 7}
+
+            .row
+              .col-md-12
+                =text_area_tag "pa[control]",@pa.control, :class => "concept_cond form-control", rows: 5,  style: 'width: 100%;'
+
+            %br
+            %br
+            .row
+              .col-md-12
+                .text-left
+                  %h4.color-orange
+                    %b D2:
+                    =t('form.concept.control_res')
+                  %small
+                    Аналогично с В2 и С2 описываем ресурсы, но теперь уже необходимые для контроля.
+                    %br
+                    %br
+                    %b Например:
+                    %div - Инструкции для каждой группы.
+                    %div - Регламент деятельности Совы.
+                    -#%i
+                    -#  «Ответственное лицо, камеры. Для ответственного необходимы заработная плата и бюджет на покрытие
+                    -#  расходов. Для камер необходима монтажная группа для установки и настройки, а так же сотрудник для
+                    -#  наблюдения через камеры»
+                  %br
+                  %br
+
+              -if @project.status == 7
+                = render partial: 'concept/posts/note_list', :locals => {:post_field => @concept_post,:type_fd => 8}
+            .row
+              .col-md-12
+                .text-left
+                  =t('form.concept.resources_rules')
+                  %br
+                  %b=t('form.concept.res_buttons')
+                  .row
+                    %span.color-orange
+                      %i.fa.fa-plus
+                      =t('form.concept.add_res_btn')
+                    %span=" - #{t('form.concept.add_res_btn_desc')}"
+                  .row
+                    %span.color-teal
+                      %i.fa.fa-edit
+                      =t('form.concept.add_desc_btn')
+                    %span=" - #{t('form.concept.add_desc_btn_desc')}"
+                  .row
+                    %span.color-green
+                      %i.fa.fa-plus
+                      =t('form.concept.add_mean_btn')
+                    %span=" - #{t('form.concept.add_mean_btn_desc')}"
+                  .row
+                    %span.text-danger
+                      %i.fa.fa-trash-o
+                      =t('form.concept.del_res_btn')
+                    %span=" - #{t('form.concept.del_res_btn_desc')}"
+                  %br
+
+            .row
+              .col-md-12
+                .form-group.has-success{id: "resources_control_r", style: "line-height:20px;"}
+                  - if @concept_post.persisted? and @concept_post.concept_post_resources.by_type('control_r').any?
+                    -@concept_post.concept_post_resources.by_type('control_r').each_with_index do |r,i|
+                      %div.main_resources(id="main_control_r_#{i+1}" position="#{i+1}")
+                        .col-md-8
+                          = autocomplete_field_tag "resor[][name]",'', autocomplete_concept_post_resource_concept_posts_path, :"min-length" => 0,value: r.name,  class: 'form-control autocomplete',placeholder: t('form.concept.res_promt')
+                          %input{name: "resor[][type_res]", type: "hidden", value: "control_r"}
+                        .col-md-4
+                          .pull-right
+                            %button.btn.btn-info{type: "button", title: t('form.concept.add_desc_btn'), onclick:"$(this).parent().parent().parent().find('.desc_resource').show();", id: "desc_to_res"}
+                              %i.fa.fa-edit
+                            %button.btn.btn-success{type: "button", title: t('form.concept.add_mean_btn'),onclick:"return add_new_mean_to_resource(this,'control_s',#{@project.id});", id: "plus_mean"}
+                              %i.fa.fa-plus
+                            %button.btn.btn-danger{type: "button",title: t('form.concept.del_res_btn'), onclick: "$(this).parent().parent().parent().remove();", id: "destroy_res"}
+                              %i.fa.fa-trash-o
+                        %br
+                        %br
+                        %div.desc_resource(id="desc_control_r_#{i+1}" position="#{i+1}")
+                          = text_area_tag "resor[][desc]", r.desc, class: 'form-control', placeholder: t('form.concept.res_desc_promt')
+                          %br
+                        %div.col-md-offset-1.col-md-11.means_to_resource(id="means_control_s_#{i+1}")
+                          -r.concept_post_resources.by_type('control_s').each_with_index do |res,ind|
+                            %div.main_means(id="main_control_s_#{i+1}" position="#{i+1}")
+                              .col-md-8
+                                = autocomplete_field_tag "resor[][means][][name]",'', autocomplete_concept_post_mean_concept_posts_path, :"min-length" => 0, value: res.name, class: 'form-control autocomplete',placeholder: t('form.concept.res_promt')
+                                %input{name: "resor[][means][][type_res]", type: "hidden", value: "control_s"}
+                              .col-md-4
+                                .pull-right
+                                  %button.btn.btn-info{type: "button", title: t('form.concept.add_desc_btn'), onclick:"$(this).parent().parent().parent().find('.desc_mean').show();", id: "desc_to_res"}
+                                    %i.fa.fa-edit
+                                  %button.btn.btn-danger{type: "button",title: t('form.concept.del_res_btn'), onclick: "$(this).parent().parent().parent().remove();", id: "destroy_res"}
+                                    %i.fa.fa-trash-o
+                              %br
+                              %br
+                              %div.desc_mean(id="desc_control_s_#{i+1}" position="#{i+1}")
+                                = text_area_tag "resor[][means][][desc]", res.desc, class: 'form-control', placeholder: t('form.concept.res_desc_promt')
+                                %br
+
+                  -else
+                    %div.main_resources(id="main_control_r_1" position="1")
+                      .col-md-8
+                        = autocomplete_field_tag "resor[][name]",'', autocomplete_concept_post_resource_concept_posts_path, :"min-length" => 0,  class: 'form-control autocomplete',placeholder: t('form.concept.res_promt')
+                        %input{name: "resor[][type_res]", type: "hidden", value: "control_r"}
+                      .col-md-4
+                        .pull-right
+                          %button.btn.btn-info{type: "button", title: t('form.concept.add_desc_btn'), onclick:"$(this).parent().parent().parent().find('.desc_resource').show();", id: "desc_to_res"}
+                            %i.fa.fa-edit
+                          %button.btn.btn-success{type: "button", title: t('form.concept.add_mean_btn'),onclick:"return add_new_mean_to_resource(this,'control_s',#{@project.id});", id: "plus_mean"}
+                            %i.fa.fa-plus
+                          %button.btn.btn-danger{type: "button",title: t('form.concept.del_res_btn'), onclick: "$(this).parent().parent().parent().remove();", id: "destroy_res"}
+                            %i.fa.fa-trash-o
+
+                      %br
+                      %br
+                      %div.desc_resource(id="desc_control_r_1" position="1" style="display:none;")
+                        = text_area_tag "resor[][desc]", '', class: 'form-control', placeholder: t('form.concept.res_desc_promt')
+                        %br
+                      %div.col-md-offset-1.col-md-11.means_to_resource(id="means_control_s_1")
+                        %div.main_means(id="main_control_s_1" position="1")
+                          .col-md-8
+                            = autocomplete_field_tag "resor[][means][][name]",'', autocomplete_concept_post_mean_concept_posts_path, :"min-length" => 0, class: 'form-control autocomplete', placeholder: t('form.concept.res_promt')
+                            %input{name: "resor[][means][][type_res]", type: "hidden", value: "control_s"}
+                          .col-md-4
+                            .pull-right
+                              %button.btn.btn-info{type: "button", title: t('form.concept.add_desc_btn'), onclick:"$(this).parent().parent().parent().find('.desc_mean').show();", id: "desc_to_res"}
+                                %i.fa.fa-edit
+                              %button.btn.btn-danger{type: "button",title: t('form.concept.del_res_btn'), onclick: "$(this).parent().parent().parent().remove();", id: "destroy_res"}
+                                %i.fa.fa-trash-o
+
+                          %br
+                          %br
+                          %div.desc_mean(id="desc_control_s_1" position="1" style="display:none;")
+                            = text_area_tag "resor[][means][][desc]", '', class: 'form-control', placeholder: t('form.concept.res_desc_promt')
+                            %br
+
+                %a.btn.btn-warning.pull-left{onclick:"return add_new_resource_to_concept('control_r','control_s',#{@project.id});", id:"add_control_r"}
+                  %i.fa.fa-plus
+                  =t('form.concept.add_res_btn')
+
+    #tab6.tab-pane
+      .form-horizontal
+        %fieldset
+          .col-md-4
+            %section
+              .body
+                .text-center
+                  %h2(style="font-weight:800;") Целесообразность
+                  %p
+                    Итак, вы описали идею, ресурсы и способы их достижения, рутинную деятельность, нежелательные побочные эффекты и способы их предотвращения.
+                    Кажется, вы предусмотрели буквально все, но на этом этапе мы предлагаем вам поразмышлять над проблемами, которые могут помешать
+                    успешному функционированию нововведения, а также еще раз взвесить все «за» и «против».
+                    -#После проделанного анализа нововведения предлагается поразмышлять над возможными проблемами,
+                    -#которые могут помешать успешному функционированию предложенного решения, а также еще раз взвесить все «за» и «против».
+            %br
+            %br
+            %section
+              .body
+                .text-center
+                  %h2(style="font-weight:800;") +10 очков!
+                  %p
+                    Вы получите после проверки модератором этого блока.
+          .col-md-8
+            .row
+              .col-md-12
+                .text-left
+                  %h4.color-orange
+                    %b E1:
+                    =t('form.concept.obstacles_bcd')
+                  %small
+                    В поле Е1 надо указать объективные препятствия, которые могут помешать работе нововведения после его внедрения.
+                    Эти препятствия тоже будет удобно выявить при помощи техники контрнегативного мозгового штурма.
+                    -#В Е1 стоит указывать те объективные препятствия, которые существовали и раньше, но мешают работе нашего нововведения.
+                    %br
+                    %br
+                    %b Например:
+                    %i.color-teal
+                      Главным препятствием может стать отсутствие слаженности действий из-за их новизны.
+                      Ее предстоит постепенно отработать, чтобы через некоторое время все адаптировались к нововведениям.
+                      -#«Элита города скупа и не любит подобных встреч»
+                  %br
+                  %br
+
+              -if @project.status == 7
+                = render partial: 'concept/posts/note_list', :locals => {:post_field => @concept_post,:type_fd => 9}
+            .row
+              .col-md-12
+                =text_area_tag "pa[obstacles]",@pa.obstacles, :class => "concept_cond form-control", rows: 5,  style: 'width: 100%;'
+
+
+            %br
+            .row
+              .col-md-12
+                .text-left
+                  %h4.color-orange
+                    %b F1:
+                    =t('form.concept.problems')
+                  %small
+                    Покажите, что игра стоит свеч и вложенные средства и усилия вернутся с лихвой.
+                    -#Покажите, что «игра стоит свеч», и вложенные средства вернутся с выгодой для организации.
+                    %br
+                    %br
+                    %b Например:
+                    %i.color-teal
+                      Благодаря этому решению, учитывающему интересы всех сторон, возникнет ситуация, в которой не будет проигравших (win-win):
+                      Винни и его друзья будут регулярно получать мед от пчел без всякого обмана, самим пчелам не придется улетать за нектаром далеко от улья,
+                      лес станет красивее, а его обитатели — дружнее.
+                      -#«Вечер позволит не только собрать сумму, но и завести необходимые знакомства, а так же привлечет всю общественность к проблеме природы.»
+                  %br
+                  %br
+
+              -if @project.status == 7
+                = render partial: 'concept/posts/note_list', :locals => {:post_field => @concept_post,:type_fd => 10}
+            .row
+              .col-md-12
+                =text_area_tag "pa[problems]",@pa.problems, :class => "concept_cond form-control", rows: 5,  style: 'width: 100%;'
+
+            %br
+            .row
+              .col-md-12
+                .text-left
+                  %h4.color-orange
+                    %b F2:
+                    =t('form.concept.reality')
+                  %small
+                    Здесь вы должны доказать, что нет таких препятствий, которые помешают созданию нововведения, а те препятствия, которые есть,
+                    можно сгладить при помощи предложенных вами ресурсов и средств.
+                    -#Последний вид препятствий, в котором нам надо показать или сказать, что их нет – это препятствия, которые будут мешать созданию нововведения. А если препятствия есть, то они реально решаемы указанными выше ресурсами и средствами.
+                    %br
+                    %br
+                    %b Например:
+                    %i.color-teal
+                      При грамотном контроле и распределении обязанностей серьезных проблем не возникнет.
+                      -#«В городе не будет ни одного оркестра»
+                  %br
+                  %br
+
+              -if @project.status == 7
+                = render partial: 'concept/posts/note_list', :locals => {:post_field => @concept_post,:type_fd => 11}
+            .row
+              .col-md-12
+                =text_area_tag "pa[reality]",@pa.reality, :class => "concept_cond form-control", rows: 5,  style: 'width: 100%;'
+
+
+    #tab7.tab-pane
+      .form-horizontal
+        %fieldset
+          .row
+            .col-md-12
+              .text-center
+                %h3.color-orange
+                  %b=t('form.concept.select_discontents')
+          %br
+          =select_tag "selectize_concept",
+          options_from_collection_for_select(Discontent::Post.where("discontent_posts.id <> ? and project_id = ?", @discontent_post.nil? ? 0 : @discontent_post.id, @project.id).by_status(4), "id", "show_content"),
+          class: 'selectized', include_blank: true, placeholder: t('form.concept.select_promt')
+          %br
+          .row
+            .col-md-12
+              .text-center
+                %h4.text-left
+                  %p Вы можете выставить степень решаемости каждого добавленного несовершенства.
+                  %p А также снять галочки с тех несовершенств (пунктов), которые на ваш взгляд не решаются нововведением.
+                %br
+          %h4=t('form.concept.solve_discontents')
+
+          #panel_union
+            -if @concept_post.persisted?
+              -@concept_post.concept_disposts.each  do |cd|
+                =render partial:'discontent/posts/post_short2', object: cd
+            -else
+              =render partial:'discontent/posts/post_short2', object: @discontent_post unless @discontent_post.nil?
+          %br
+          .option_for_selectize{project: "#{@project.id}", post: "#{@concept_post.id}"}
+          .text-success#add_dispost_success(style='display:none;')
+            =t('form.concept.add_success')
+          -if params[:improve_comment] and params[:improve_stage]
+            %h4.color-red#add_dispost_warning
+              =t('form.concept.has_one')
+
+    %br
+    %br
+    %actions.pull-right#form_save
+      = f.submit t('form.save'),  class: 'btn btn-warning btn-lg', id: 'send_post_concept', "data-loading-text" => t('form.save_load'), onclick: "$(this).button('loading');", style: "font-weight:800;"

@@ -82,6 +82,10 @@ class Core::Project < ActiveRecord::Base
     end
   end
 
+  def concepts_without_aspect
+    self.concepts.includes(:concept_post_discontents).where(concept_post_discontents: {post_id: nil})
+  end
+
   def stage1_count
     self.stage1 > self.proc_aspects.size ? self.proc_aspects.size : self.stage1
   end

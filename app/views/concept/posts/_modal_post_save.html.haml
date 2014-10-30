@@ -8,11 +8,12 @@
         %hr
         .text-center
           .col-md-6
-            -if params[:improve_comment]
-              %a.btn.btn-lg.btn-primary(href="/project/#{@project.id}/concept/posts/new#{@aspect_id ? "?asp_id=#{@aspect_id}" : ''}" style="font-weight: normal !important;" id="new_concept")
-                =t('form.add_more')
-            -else
-              %a.btn.btn-lg.btn-primary(data-dismiss="modal")=t('form.add_more')
+            -#-if params[:improve_comment]
+            -#  %a.btn.btn-lg.btn-primary(href="/project/#{@project.id}/concept/posts/new#{@aspect_id ? "?asp_id=#{@aspect_id}" : ''}" style="font-weight: normal !important;" id="new_concept")
+            -#    =t('form.add_more')
+            -#-else
+            -#  %a.btn.btn-lg.btn-primary(data-dismiss="modal")=t('form.add_more')
+            %button.btn.btn-lg.btn-primary(data-dismiss="modal") Продолжить заполнение
           .col-md-6
             =link_to t('link.go_list'), "/project/#{@project.id}/concept/posts#{@aspect_id ? "?asp=#{@aspect_id}" : ''}", class: "btn btn-lg btn-success"
         %br
