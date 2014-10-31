@@ -6,4 +6,6 @@
     %br
     .text-success#advice_success_approved(style='display:none;')
       = t('discontent.advice_success_approved')
+    .text-success#advice_success_disapproved(style='display:none;')
+      = t('discontent.advice_success_not_approved')
     = render @unapproved_advices

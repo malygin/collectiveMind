@@ -60,7 +60,11 @@ class Concept::PostsController < PostsController
 
   def index
     return redirect_to action: "vote_list" if current_user.can_vote_for(:concept, @project)
-    @aspect =  params[:asp] ? Discontent::Aspect.find(params[:asp]) : (@project.proc_aspects.first.position.nil? ? @project.proc_aspects.order(:id).first : @project.proc_aspects.order("position DESC").first)
+    if params[:not_aspect]
+      @concepts_without_aspect = @project.concepts_without_aspect
+    else
+      @aspect =  params[:asp] ? Discontent::Aspect.find(params[:asp]) : (@project.proc_aspects.first.position.nil? ? @project.proc_aspects.order(:id).first : @project.proc_aspects.order("position DESC").first)
+    end
     @comments_all = @project.ideas_comments_for_improve
   end
 
@@ -93,6 +97,9 @@ class Concept::PostsController < PostsController
       if @concept_post.save
         current_user.journals.build(type_event:'concept_post_save', body:trim_content(@concept_post.post_aspects.first.title), first_id: @concept_post.id,  project: @project).save!
         @aspect_id =  params[:asp_id]
+        @pa = @concept_post.post_aspects.first
+        @discontent_post = @pa.discontent
+        @remove_able = true
         format.html { redirect_to  @aspect_id.nil? ? "/project/#{@project.id}/concept/posts" : "/project/#{@project.id}/concept/posts?asp=#{@aspect_id}" }
         format.js
       else
@@ -137,7 +144,13 @@ class Concept::PostsController < PostsController
 
     respond_to do |format|
       if @concept_post.save
-        current_user.journals.build(type_event:'concept_post_update', body: trim_content(@concept_post.post_aspects.first.title), first_id:@concept_post.id,  project: @project).save!
+        unless params[:fast_update]
+          current_user.journals.build(type_event:'concept_post_update', body: trim_content(@concept_post.post_aspects.first.title), first_id: @concept_post.id,  project: @project).save!
+        else
+          @pa = @concept_post.post_aspects.first
+          @discontent_post = @pa.discontent
+          @remove_able = true
+        end
         @aspect_id =  @project.proc_aspects.order(:id).first.id
         format.html { redirect_to action: "show", project: @project, id: @concept_post.id }
         format.js
@@ -202,7 +215,7 @@ class Concept::PostsController < PostsController
     @discontent_post = Discontent::Post.find(params[:dis_id]) unless params[:dis_id].nil?
     @resources = Concept::Resource.where(project_id: @project.id)
     @pa = Concept::PostAspect.new
-    @comment = "#{get_class_for_improve(params[:improve_stage].to_i)}::Comment".constantize.find(params[:improve_comment]) if params[:improve_comment] and params[:improve_stage]
+    @comment =   get_comment_for_stage(params[:improve_stage], params[:improve_comment]) if params[:improve_comment] and params[:improve_stage]
     @pa.name = @comment.content if @comment
     @remove_able = true
     respond_to do |format|

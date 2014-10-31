@@ -682,6 +682,7 @@ ru:
     fill_name_paper: 'Заполните название статьи'
     fill_content_paper: 'Заполните поле контента'
 
+    advice: "Совет"
   link:
     more: 'подробнее'
     top: наверх
@@ -763,7 +764,9 @@ ru:
     discontent_post_advices: "Неутвержденные советы"
   discontent:
     unapproved_post_advices: "Неутвержденные советы"
-    advice_success_created: "Ваш совет добавлен и ожидает проверки модератором"
+    advice_success_created: "Ваш совет передан для проверки модераторам, после проверки вы получите уведомление и он появится в диалоге"
     advice_success_approved: "Совет одобрен"
+    advice_success_not_approved: "Совет помечен как неутвержденный"
   advice:
     advices: "Советы участников"
+    disapproved_notify_text: "Ваш совет не одобрен, Ознакомиться с причиной"

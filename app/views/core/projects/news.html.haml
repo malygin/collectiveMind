@@ -11,13 +11,13 @@
               = will_paginate @journals_feed_all
 
             - @journals_feed_all.each do |journal|
-              - if journal.created_at.to_date == Time.zone.now.to_date and @j_count[:today] == 0
+              - if journal.created_at.to_date == Time.zone.now.utc.to_date and @j_count[:today] == 0
                 %h4 Сегодня
                 -@j_count[:today]+=1
-              -elsif journal.created_at.to_date == Time.zone.now.to_date - 1 and @j_count[:yesterday] == 0
+              -elsif journal.created_at.to_date == Time.zone.now.utc.to_date - 1 and @j_count[:yesterday] == 0
                 %h4 Вчера
                 -@j_count[:yesterday]+=1
-              -elsif journal.created_at.to_date < Time.zone.now.to_date - 1 and @j_count[:older] == 0
+              -elsif journal.created_at.to_date < Time.zone.now.utc.to_date - 1 and @j_count[:older] == 0
                 %h4 Ранее
                 -@j_count[:older]+=1
 

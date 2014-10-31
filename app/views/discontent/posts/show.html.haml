@@ -50,11 +50,7 @@
       %h3
         = t('advice.advices')
       %ul.media-list#advices.chat-messages
-        - (@post.advices.approve + current_user.advices_for(@post).unapproved).each do |advice|
-          = render partial: 'advices/advice', locals: {advice: advice}
-      - if signed_in?
-        %br
-        = render partial: 'advices/form', locals: {advice: Advice.new, url: discontent_advices_path(@project).concat("?discontent_id=#{@post.id}")}
+        = render 'advices/advices'
       %br
 
     %h3

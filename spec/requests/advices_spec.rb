@@ -10,6 +10,7 @@ describe 'Advices' do
   before do
     prepare_concepts(project, user)
     @advice_unapproved = create :advice_unapproved, user: user, adviseable: @discontent1
+    @advice_disapproved = create :advice_disapproved, user: user, adviseable: @discontent1
     @advice = create :advice_approved, user: user, adviseable: @discontent1
   end
 
@@ -53,7 +54,7 @@ describe 'Advices' do
       it 'not link in left side' do
         within :css, 'ul#side-nav' do
           expect(page).not_to have_content I18n.t('left_side.discontent_post_advices')
-          expect(page).not_to have_link discontent_advices_path(project)
+          expect(page).not_to have_link advices_path(project)
         end
       end
 
@@ -73,33 +74,41 @@ describe 'Advices' do
     context 'create', js: true do
       before do
         text_advice = 'Очень хороший совет'
-        fill_in 'advice_content', with: text_advice
-        click_button 'send_advice'
+        fill_in 'comment_text_area', with: text_advice
+        find(:css, 'label#label_advice_status').click
+        click_button 'send_post'
         expect(page).to have_content I18n.t('discontent.advice_success_created')
         expect(page).to have_content text_advice
       end
 
       it { expect change(Advice.unapproved, :count).by(1) }
 
-      it { expect {}.not_to change(Journal, :count) }
+      it { expect change(Journal, :count).by(project.moderators.count) }
     end
 
-    it 'edit', js: true do
-      click_link "edit_advice_#{@advice_unapproved.id}"
-      new_text_advice = 'Очень хороший совет 2'
-      within :css, "#post_advice_#{@advice_unapproved.id}" do
-        fill_in 'advice_content', with: new_text_advice
-        click_button 'send_advice'
+    context 'edit', js: true do
+      let(:new_text_advice) { 'Очень хороший совет 2' }
+      before do
+        click_link "edit_advice_#{@advice_disapproved.id}"
+        within :css, "#post_advice_#{@advice_disapproved.id}" do
+          fill_in 'advice_content', with: new_text_advice
+          click_button 'send_advice'
+        end
       end
-      expect(page).to have_content new_text_advice
+
+      it { expect(page).to have_content new_text_advice }
+
+      it { expect change(Advice.disapproved, :count).by(-1) }
+
+      it { expect change(Advice.unapproved, :count).by(1) }
     end
 
     context 'remove' do
       it 'if author - ok', js: true do
         expect {
-          click_link "remove_advice_#{@advice_unapproved.id}"
+          click_link "remove_advice_#{@advice_disapproved.id}"
           page.driver.browser.accept_js_confirms
-          expect(page).not_to have_content @advice_unapproved.content
+          expect(page).not_to have_content @advice_disapproved.content
         }.to change(Advice, :count).by(-1)
       end
 
@@ -150,6 +159,19 @@ describe 'Advices' do
         expect(page).not_to have_link "set_useful_#{@advice_for_useful.id}"
       end
     end
+
+    context 'set not_useful', js: true do
+      before do
+        @discontent1 = create :discontent, project: project, status: 4, user: user
+        @advice_for_useful = create :advice_approved, user: moderator, adviseable: @discontent1
+        visit discontent_post_path(project, @discontent1)
+        click_link "set_not_useful_#{@advice_for_useful.id}"
+      end
+
+      it { expect change(Advice.where(useful: true), :count).by(-1) }
+
+      it { expect change(Advice.where(useful: false), :count).by(1) }
+    end
   end
 
   context 'moderator sign in' do
@@ -183,7 +205,7 @@ describe 'Advices' do
 
       it { expect change(Advice.unapproved, :count).by(-1) }
 
-      it { expect change(Journal, :count).by(2) }
+      it { expect change(Journal, :count).by(3) }
 
       it { expect change(Award, :count).by(1) }
 
@@ -206,41 +228,54 @@ describe 'Advices' do
       end
     end
 
+    context 'disapprove', js: true do
+      before do
+        click_link "not_approve_advice_#{@advice_unapproved.id}"
+      end
+
+      it { expect(page).to have_content I18n.t('discontent.advice_success_not_approved') }
+
+      it { expect change(Advice.disapproved, :count).by(1) }
+
+      it { expect change(Advice.unapproved, :count).by(-1) }
+
+      it { expect change(Journal, :count).by(1) }
+
+      context 'discuss with author advice', js: true do
+        let(:text_comment) { text_comment = 'Хороший совет, но нужно обсудить' }
+
+        before do
+          fill_in "comment_text_for_#{@advice_unapproved.id}", with: text_comment
+          click_button "send_comment_for_#{@advice_unapproved.id}"
+        end
+
+        it { expect change(AdviceComment, :count).by(1) }
+
+        it { expect(page).to have_content text_comment }
+
+        it { expect change(Journal, :count).by(1) }
+
+        it 'show in author advice notifications' do
+          sign_out
+          sign_in user
+          visit discontent_post_path(project, @discontent1)
+          within :css, 'span.count' do
+            expect(page).to have_content '1'
+          end
+          click_link 'messages'
+          within :css, 'ul#messages-menu' do
+            expect(page).to have_content I18n.t('advice.disapproved_notify_text')
+          end
+        end
+      end
+    end
+
     it 'delete any advice', js: true do
       expect {
         click_link "remove_advice_#{@advice_unapproved.id}"
         page.driver.browser.accept_js_confirms
         expect(page).not_to have_content @advice_unapproved.content
       }.to change(Advice.unapproved, :count).by(-1)
-    end
-
-    context 'discuss with author advice', js: true do
-      let(:text_comment) { text_comment = 'Хороший совет, но нужно обсудить' }
-
-      before do
-        fill_in "comment_text_for_#{@advice_unapproved.id}", with: text_comment
-        click_button "send_comment_for_#{@advice_unapproved.id}"
-        visit advices_path(project)
-      end
-
-      it { expect change(AdviceComment, :count).by(1) }
-
-      it { expect(page).to have_content text_comment }
-
-      it { expect change(Journal, :count).by(1) }
-
-      it 'show in author advice notifications' do
-        sign_out
-        sign_in user
-        visit discontent_post_path(project, @discontent1)
-        within :css, 'span.count' do
-          expect(page).to have_content '1'
-        end
-        click_link 'messages'
-        within :css, 'ul#messages-menu' do
-          expect(page).to have_content @advice_unapproved.content
-        end
-      end
     end
 
     context 'correct link to advisable' do

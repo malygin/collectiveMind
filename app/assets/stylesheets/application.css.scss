@@ -24,9 +24,9 @@
 //@import "lib/_jquery.datatables";
 //@import "lib/_animate";
 //@import "lib/nestable";
-//@import "lib/messenger-1.4.1/messenger";
-//@import "lib/messenger-1.4.1/messenger-spinner";
-//@import "lib/messenger-1.4.1/messenger-theme-air";
+@import "lib/messenger-1.4.1/messenger";
+@import "lib/messenger-1.4.1/messenger-spinner";
+@import "lib/messenger-1.4.1/messenger-theme-air";
 //@import "lib/bootstrap-slider";
 @import "bootstrap3-editable/bootstrap-editable";
 @import "selectize";
@@ -40,9 +40,6 @@
 @import "datepicker/datepicker3";
 //@import "print";
 @import "moderator_chat";
-@import "messenger";
-@import "messenger-spinner";
-@import "messenger-theme-future";
 
 
 // Brand colors
@@ -141,6 +138,10 @@ $brand-estimate:        #663505 !default;
   background-color: rgb(110, 110, 174);
 }
 
+.mean_otstup {
+  text-indent: 50px;
+}
+
 .tooltip-inner {
   white-space:pre-wrap;
 }
@@ -176,8 +177,22 @@ p, a {
   overflow: visible !important;
 }
 
+/***********************************/
+/*            WIZARD               */
+/***********************************/
 .wizard-navigation.nav-pills li.active a {
   background-color: #618FB0 !important;
+}
+
+.form-wizard .progress {
+  margin-bottom: 10px;
+}
+
+.wizard-navigation {
+  margin-bottom: 5px;
+}
+.wizard-navigation a {
+  color: #f8f8f8;
 }
 
 .concept-name {

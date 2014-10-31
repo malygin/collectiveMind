@@ -3,18 +3,23 @@
   window.scrollTo(0,0)
 - else
   $("#notice_messages").html('')
+  $("#form_for_concept").html('#{escape_javascript(render partial: 'form2')}');
+  selectize_concept();
+  -#$('#option_for_wizard_tab').attr("data-tab");
+  $("#third a").tab('show');
+
   $('#render_success_concept').empty();
   $("#render_success_concept").html('#{escape_javascript(render partial: 'modal_post_save')}');
   $('#modal_save_concept').modal('show');
-  $('#pa_title').val('');
-  $('#pa_name').val('');
-  $('#pa_content').val('');
-  $('#pa_positive').val('');
-  $('#pa_negative').val('');
-  $('#pa_control').val('');
-  $('#pa_obstacles').val('');
-  $('#pa_problems').val('');
-  $('#pa_reality').val('');
-  $('.main_resources').remove();
+  -#$('#pa_title').val('');
+  -#$('#pa_name').val('');
+  -#$('#pa_content').val('');
+  -#$('#pa_positive').val('');
+  -#$('#pa_negative').val('');
+  -#$('#pa_control').val('');
+  -#$('#pa_obstacles').val('');
+  -#$('#pa_problems').val('');
+  -#$('#pa_reality').val('');
+  -#$('.main_resources').remove();
 
 $('#send_post_concept').button('reset');

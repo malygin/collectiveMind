@@ -1,30 +1,29 @@
 #= require jquery
 #= require jquery_ujs
 #= require jquery-ui
-#= require bootstrap/bootstrap.min
-#= require autocomplete-rails-dev
-# require bootstrap-wysihtml5
-# require bootstrap-wysihtml5/locales/ru-RU
-#= require selectize
-#= require liFixar/jquery.liFixar
-#= require datepicker/bootstrap-datepicker
-#= require bootstrap3-editable/bootstrap-editable
+#= require jquery.remotipart
+#= require jquery.magnific-popup.min
 #= require jquery.autosize
 #= require totop/jquery.ui.totop
 #= require totop/easing
-# require ckeditor/init
-#= require tinymce
-#= require websocket_rails/main
-#= require jquery.remotipart
-#= require jquery.magnific-popup.min
-#= require bootstrap-colorpicker
-#= require news
-#= require messenger.js
-#= require messenger-theme-future
-#= require notifications
-#= require select2
 #= require jquery.icheck
 
+#= require bootstrap/bootstrap.min
+#= require bootstrap-colorpicker
+#= require datepicker/bootstrap-datepicker
+#= require bootstrap3-editable/bootstrap-editable
+
+#= require autocomplete-rails-dev
+#= require selectize
+#= require liFixar/jquery.liFixar
+
+#= require tinymce
+#= require websocket_rails/main
+#= require messenger/messenger.min
+#= require select2
+#= require wizard/jquery.bootstrap.wizard
+#= require news
+#= require notifications
 
 # @todo load initialization
 sidebarHeight = 0;
@@ -70,6 +69,8 @@ $ ->
   $('.tooltips').tooltip()
 
   activate_htmleditor()
+
+  activate_wizard()
 
   $("select.estimate_select").each ->
     switch $(this).val()
@@ -119,6 +120,10 @@ $ ->
     $(this).datepicker "hide"
     return
 
+  selectize_discontent()
+  selectize_concept()
+
+@selectize_discontent= ->
   $select = $("#selectize_discontent").selectize
     labelField: "show_content"
     valueField: "id"
@@ -142,6 +147,7 @@ $ ->
       option: (item, escape) ->
         return '<div>'+item.show_content+'</div>'
 
+@selectize_concept= ->
   $select = $("#selectize_concept").selectize
     labelField: "show_content"
     valueField: "id"
@@ -307,14 +313,14 @@ activate_add_aspects()
 #  field = field.toString();
   position = parseInt($('#resources_'+field+' .main_resources').last().attr('position'))
   if not position then position = 1 else position+=1
-  $('#resources_'+field).append("<div class=\"main_resources\" id=\"main_#{field}_#{position}\" position=\"#{position}\"><div class=\"col-md-8\">"+"<span role=\"status\" aria-live=\"polite\" class=\"ui-helper-hidden-accessible\"></span>"+"<input class=\"form-control autocomplete ui-autocomplete-input\" data-autocomplete=\"/project/#{project}/autocomplete_concept_post_resource_concept_posts\" id=\"concept_post_resource\" min-length=\"0\" name=\"resor[][name]\" placeholder=\"Введите свой ресурс или выберите из списка\" type=\"text\" autocomplete=\"off\"><input name=\"resor[][type_res]\" type=\"hidden\" value=\"#{field}\">"+"</div><div class=\"col-md-4\"><div class=\"pull-right\"><button class=\"btn btn-warning\" id=\"desc_to_res\" onclick=\"$(this).parent().parent().parent().find('.desc_resource').show();\" title=\"Добавить описание\" type=\"button\"><i class=\"fa fa-edit\"></i>Описание</button><button class=\"btn btn-success\" id=\"plus_mean\" onclick=\"return add_new_mean_to_resource(this,'#{field2}',#{project});\" title=\"Добавить средство\" type=\"button\">"+"<i class=\"fa fa-plus\"></i>Средство</button><button class=\"btn btn-danger\" id=\"destroy_res\" onclick=\"$(this).parent().parent().parent().remove();\" title=\"Удалить ресурс\" type=\"button\">"+"<i class=\"fa fa-trash-o\"></i>Удалить</button></div></div><br><br><div class=\"desc_resource\" id=\"desc_#{field}_#{position}\" position=\"#{position}\" style=\"display:none;\">"+"<textarea class=\"form-control\" id=\"res\" name=\"resor[][desc]\" placeholder=\"Пояснение к ресурсу\" style=\"overflow: hidden; word-wrap: break-word; resize: horizontal; height: 50px;\"></textarea>"+"</div><div class=\"col-md-offset-1 col-md-11 means_to_resource\" id=\"means_#{field2}_#{position}\"></div></div>");
+  $('#resources_'+field).append("<div class=\"main_resources\" id=\"main_#{field}_#{position}\" position=\"#{position}\"><div class=\"col-md-6\">"+"<span role=\"status\" aria-live=\"polite\" class=\"ui-helper-hidden-accessible\"></span>"+"<input class=\"form-control autocomplete ui-autocomplete-input\" data-autocomplete=\"/project/#{project}/autocomplete_concept_post_resource_concept_posts\" id=\"concept_post_resource\" min-length=\"0\" name=\"resor[][name]\" placeholder=\"Введите свой ресурс или выберите из списка\" type=\"text\" autocomplete=\"off\"><input name=\"resor[][type_res]\" type=\"hidden\" value=\"#{field}\">"+"</div><div class=\"col-md-6\"><div class=\"pull-right\"><button class=\"btn btn-info\" id=\"desc_to_res\" onclick=\"$(this).parent().parent().parent().find('.desc_resource').show();\" title=\"Добавить описание\" type=\"button\"><i class=\"fa fa-edit\"></i></button><button class=\"btn btn-success\" id=\"plus_mean\" onclick=\"return add_new_mean_to_resource(this,'#{field2}',#{project});\" title=\"Добавить средство\" type=\"button\">"+"<i class=\"fa fa-plus\"></i></button><button class=\"btn btn-danger\" id=\"destroy_res\" onclick=\"$(this).parent().parent().parent().remove();\" title=\"Удалить ресурс\" type=\"button\">"+"<i class=\"fa fa-trash-o\"></i></button></div></div><br><br><div class=\"desc_resource\" id=\"desc_#{field}_#{position}\" position=\"#{position}\" style=\"display:none;\">"+"<textarea class=\"form-control\" id=\"res\" name=\"resor[][desc]\" placeholder=\"Пояснение к ресурсу\" style=\"overflow: hidden; word-wrap: break-word; resize: horizontal; height: 50px;\"></textarea>"+"</div><div class=\"col-md-offset-1 col-md-11 means_to_resource\" id=\"means_#{field2}_#{position}\"></div></div>");
   autocomplete_initialized()
   $('textarea').autosize()
 
 @add_new_mean_to_resource= (el,field,project)->
 #  field = field.toString();
   position = $(el).parent().parent().parent().attr('position')
-  $('#means_'+field+'_'+position).append("<br><div class=\"main_means\" id=\"main_#{field}_#{position}\" position=\"#{position}\"><div class=\"col-md-8\">"+"<span role=\"status\" aria-live=\"polite\" class=\"ui-helper-hidden-accessible\"></span>"+"<input class=\"form-control autocomplete ui-autocomplete-input\" data-autocomplete=\"/project/#{project}/autocomplete_concept_post_mean_concept_posts\" id=\"res\" min-length=\"0\" name=\"resor[][means][][name]\" placeholder=\"Введите свой ресурс или выберите из списка\" type=\"text\" autocomplete=\"off\"><input name=\"resor[][means][][type_res]\" type=\"hidden\" value=\"#{field}\">"+"</div><div class=\"col-md-4\"><div class=\"pull-right\"><button class=\"btn btn-warning\" id=\"desc_to_res\" onclick=\"$(this).parent().parent().parent().find('.desc_mean').show();\" title=\"Добавить описание\" type=\"button\"><i class=\"fa fa-edit\"></i>Описание</button><button class=\"btn btn-danger\" id=\"destroy_res\" onclick=\"$(this).parent().parent().parent().remove();\" title=\"Удалить ресурс\" type=\"button\">"+"<i class=\"fa fa-trash-o\"></i>Удалить</button></div></div><br><br><div class=\"desc_mean\" id=\"desc_#{field}_#{position}\" position=\"#{position}\" style=\"display:none;\">"+"<textarea class=\"form-control\" id=\"res\" name=\"resor[][means][][desc]\" placeholder=\"Пояснение к ресурсу\" style=\"overflow: hidden; word-wrap: break-word; resize: horizontal; height: 50px;\"></textarea><br></div></div>");
+  $('#means_'+field+'_'+position).append("<br><div class=\"main_means\" id=\"main_#{field}_#{position}\" position=\"#{position}\"><div class=\"col-md-8\">"+"<span role=\"status\" aria-live=\"polite\" class=\"ui-helper-hidden-accessible\"></span>"+"<input class=\"form-control autocomplete ui-autocomplete-input\" data-autocomplete=\"/project/#{project}/autocomplete_concept_post_mean_concept_posts\" id=\"res\" min-length=\"0\" name=\"resor[][means][][name]\" placeholder=\"Введите свой ресурс или выберите из списка\" type=\"text\" autocomplete=\"off\"><input name=\"resor[][means][][type_res]\" type=\"hidden\" value=\"#{field}\">"+"</div><div class=\"col-md-4\"><div class=\"pull-right\"><button class=\"btn btn-info\" id=\"desc_to_res\" onclick=\"$(this).parent().parent().parent().find('.desc_mean').show();\" title=\"Добавить описание\" type=\"button\"><i class=\"fa fa-edit\"></i></button><button class=\"btn btn-danger\" id=\"destroy_res\" onclick=\"$(this).parent().parent().parent().remove();\" title=\"Удалить ресурс\" type=\"button\">"+"<i class=\"fa fa-trash-o\"></i></button></div></div><br><br><div class=\"desc_mean\" id=\"desc_#{field}_#{position}\" position=\"#{position}\" style=\"display:none;\">"+"<textarea class=\"form-control\" id=\"res\" name=\"resor[][means][][desc]\" placeholder=\"Пояснение к ресурсу\" style=\"overflow: hidden; word-wrap: break-word; resize: horizontal; height: 50px;\"></textarea><br></div></div>");
   autocomplete_initialized()
   $('textarea').autosize()
 
@@ -493,21 +499,51 @@ $.fn.extend popoverClosable: (options) ->
 #    render_concept_side()
 
 #for other
-#@activate_wizard= ->
-#  $("#wizard").bootstrapWizard onTabShow: (tab, navigation, index) ->
-#    $total = navigation.find("li").length
-#    $current = index + 1
-#    $percent = ($current / $total) * 100
-#    $wizard = $("#wizard")
-#    $wizard.find(".progress-bar").css width: $percent + "%"
-#    if $current >= $total
-#      $wizard.find(".pager .next").hide()
-#      $wizard.find(".pager .finish").show()
-#      $wizard.find(".pager .finish").removeClass "disabled"
-#    else
-#      $wizard.find(".pager .next").show()
-#      $wizard.find(".pager .finish").hide()
-#    return
+@activate_wizard= ->
+  $("#wizard").bootstrapWizard onTabShow: (tab, navigation, index) ->
+    $total = navigation.find("li").length
+    $current = index + 1
+    $percent = ($current / $total) * 100
+    $wizard = $("#wizard")
+    $wizard.find(".progress-bar").css width: $percent + "%"
+    project_id = $('#option_for_wizard_save').attr("data-project")
+    concept_id = $('#option_for_wizard_save').attr("data-post")
+    if concept_id and $current == 1
+      $('#second a').tab('show')
+    if $current == 1
+      $('#form_save').hide()
+    else
+      $('#form_save').show()
+
+    $('#option_for_wizard_tab').attr("data-tab","#{$current}")
+
+    if $current >= $total
+      $wizard.find(".pager .next").hide()
+    else
+      if $current == 1
+        $wizard.find(".pager .previous").hide()
+        $wizard.find(".pager .next .btn").html('Перейти к описанию Идеи <i class="fa fa-caret-right"></i>')
+      else if $current == 2
+        $wizard.find(".pager .previous").show()
+        $wizard.find(".pager .next .btn").html('Перейти к описанию Функционирования <i class="fa fa-caret-right"></i>')
+      else if $current == 3
+        $wizard.find(".pager .previous").show()
+        $wizard.find(".pager .next .btn").html('Перейти к описанию Нежелательных побочных эффектов <i class="fa fa-caret-right"></i>')
+      else if $current == 4
+        $wizard.find(".pager .previous").show()
+        $wizard.find(".pager .next .btn").html('Перейти к описанию Контроля <i class="fa fa-caret-right"></i>')
+      else if $current == 5
+        $wizard.find(".pager .previous").show()
+        $wizard.find(".pager .next .btn").html('Перейти к описанию Целесообразности <i class="fa fa-caret-right"></i>')
+      else if $current == 6
+        $wizard.find(".pager .previous").show()
+        $wizard.find(".pager .next .btn").html('Перейти к добавлению Решаемых несовершенств <i class="fa fa-caret-right"></i>')
+      else
+        $wizard.find(".pager .previous").show()
+        $wizard.find(".pager .next .btn").html('Далее <i class="fa fa-caret-right"></i>')
+
+      $wizard.find(".pager .next").show()
+    scrollTo(0,0)
 
 # @todo users checks
 @user_check_field= (el,check_field)->

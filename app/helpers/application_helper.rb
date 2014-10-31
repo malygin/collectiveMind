@@ -377,20 +377,20 @@ module ApplicationHelper
         'label-default'
     end
   end
-  def get_class_for_improve(stage)
+  def get_comment_for_stage(stage, id)
     case stage
-      when 1
-        'LifeTape'
-      when 2
-        'Discontent'
-      when 3
-        'Concept'
-      when 4
-        'Plan'
-      when 5
-        'Estimate'
-      when 6
-        'Essay'
+      when '1'
+        LifeTape::Comment.find(id)
+      when '2'
+        Discontent::Comment.find(id)
+      when '3'
+        Concept::Comment.find(id)
+      when '4'
+        Plan::Comment.find(id)
+      when '5'
+        Estimate::Comment.find(id)
+      when '6'
+        Essay::Comment.find(id)
     end
   end
   def get_stage_for_improve(c)
@@ -412,7 +412,7 @@ module ApplicationHelper
 
   def improve_comment(post)
     if post.improve_comment and post.improve_stage
-      comment = "#{get_class_for_improve(post.improve_stage)}::Comment".constantize.find(post.improve_comment)
+      comment =get_comment_for_stage(post.improve_stage.to_s,post.improve_comment )
       case post.improve_stage
         when 1
           "| #{t('show.improved')} " + (link_to"#{t('show.imrove_deal')} #{comment.user}", "/project/#{@project.id}/life_tape/posts?asp=#{comment.post.discontent_aspects.first.id}&req_comment=#{comment.id}#comment_#{comment.id}")
@@ -618,7 +618,20 @@ module ApplicationHelper
     else
       link += "#{current_stage == 'essay/posts' ? stage_for_essay(params[:stage].to_i) : current_stage}"
     end
-    link += "?asp=#{asp.id}"
+    link += "?asp=#{asp.id}" if asp
     link
+  end
+
+  def score_order(score_name)
+    case score_name
+      when 'score_g'
+        "core_project_scores.score_g DESC"
+      when 'score_a'
+        "core_project_scores.score_a DESC"
+      when 'score_o'
+        "core_project_scores.score_o DESC"
+      else
+        "core_project_scores.score DESC"
+    end
   end
 end
