@@ -24,6 +24,8 @@
 #= require wizard/jquery.bootstrap.wizard
 #= require news
 #= require notifications
+#= require jquery.ui.chatbox
+#= require moderator_chat
 
 # @todo load initialization
 sidebarHeight = 0;
