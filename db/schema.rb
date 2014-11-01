@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141029124827) do
+ActiveRecord::Schema.define(version: 20141101155052) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -36,6 +36,7 @@ ActiveRecord::Schema.define(version: 20141029124827) do
     t.integer  "adviseable_id",   null: false
     t.string   "adviseable_type", null: false
     t.boolean  "useful"
+    t.integer  "project_id",      null: false
   end
 
   add_index "advices", ["user_id"], name: "index_advices_on_user_id", using: :btree
@@ -529,7 +530,7 @@ ActiveRecord::Schema.define(version: 20141029124827) do
     t.boolean  "discuss_status"
     t.boolean  "useful"
     t.boolean  "approve_status"
-    t.boolean  "anonym"
+    t.boolean  "anonym",             default: false
   end
 
   add_index "discontent_posts", ["aspect_id"], name: "index_discontent_posts_on_aspect_id", using: :btree
