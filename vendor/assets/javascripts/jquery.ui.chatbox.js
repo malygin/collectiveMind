@@ -38,6 +38,7 @@
                     var self = this;
                     var box = self.elem.uiChatboxLog;
                     var e = document.createElement('div');
+                    $(e).addClass('row chat-window col-xs-5 col-md-3');
                     box.append(e);
                     $(e).hide();
 

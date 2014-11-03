@@ -20,8 +20,7 @@ $(document).ready ->
       msg = Messenger().post
         extraClasses: "messenger-fixed messenger-on-top  messenger-on-right messenger-theme-air"
         message: data['text']
-        type: "error"
-        showCloseButton: true
+        hideAfter: 2
 
     box = null
     $("#open_moderator_chat").click (event, ui) ->
@@ -39,4 +38,4 @@ $(document).ready ->
             return
         )
       return
-    $('#chat_div').draggable()
+    $('#moderator_chat_window').parent().draggable()
