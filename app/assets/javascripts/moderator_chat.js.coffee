@@ -1,4 +1,4 @@
-$(document).ready ->
+@create_moderator_chat = ->
   if document.location.pathname.match('project')
     ws = new WebSocketRails(document.location.host + '/websocket')
     ws.on_open = ->
@@ -11,31 +11,33 @@ $(document).ready ->
       console.log("Has joined the channel moderator chat")
     private_channel.on_failure = ->
       console.log("Authorization failed")
+    $("#moderator_chat_div").chatbox(
+      id: "moderator_chat_div"
+      user:
+        key: ''
+      title: "Модераторский чат"
+      messageSent: (id, user, msg) ->
+        ws.trigger 'incoming_message', {text: msg}
+        return
+    )
+    if $('#chat_log').length <= 0
+      $('span.ui-icon-minusthick').parent().click()
+    else
+      $('#chat_log').children().each ->
+        $("#moderator_chat_div").chatbox("option", "boxManager").addMsg($(this).find('b').text().trim(),
+          $(this).find('span').text().trim())
 
     ws.bind 'new_message', (data) ->
       console.log(data)
-      $("#chat_div").chatbox("option", "boxManager").addMsg data['user'], data['text']
-      Messenger.options =
-        extraClasses: "messenger-fixed messenger-on-top messenger-on-right messenger-theme-air"
-      msg = Messenger().post
-        extraClasses: "messenger-fixed messenger-on-top  messenger-on-right messenger-theme-air"
-        message: data['text']
-        hideAfter: 2
-
-    box = null
-    $("#open_moderator_chat").click (event, ui) ->
-      if box
-        box.chatbox("option", "boxManager").toggleBox()
-      else
-        box = $("#chat_div").chatbox(
-          id: "chat_div"
-          user:
-            key: "value"
-          title: "Модераторский чат"
-          messageSent: (id, user, msg) ->
-            ws.trigger 'incoming_message', {text: msg}
-            #$("#chat_div").chatbox("option", "boxManager").addMsg id, msg
-            return
-        )
-      return
-    $('#moderator_chat_window').parent().draggable()
+      $("#moderator_chat_div").chatbox("option", "boxManager").addMsg data['user'], data['text']
+      if $('#chat_log').length <= 0
+        Messenger.options =
+          extraClasses: "messenger-fixed messenger-on-top messenger-on-right messenger-theme-air"
+        msg = Messenger().post
+          extraClasses: "messenger-fixed messenger-on-top  messenger-on-right messenger-theme-air"
+          message: data['text']
+          hideAfter: 1
+    $('span.ui-icon-closethick').parent().click ->
+      $('a#close_moderator_chat').click()
+    $('span.ui-icon-minusthick').parent().click ->
+      $('a#open_moderator_chat').click()
