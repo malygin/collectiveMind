@@ -68,7 +68,8 @@ scope '/project/:project' do
       put :journal_clear
       get 'add_score/:score' => 'users#add_score'
       get 'add_score_essay/:score' => 'users#add_score_essay'
-      put :set_chat
+      put :open_moderator_chat
+      put :close_moderator_chat
     end
   end
 
