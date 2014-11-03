@@ -164,6 +164,11 @@ class UsersController < ApplicationController
     render json: user.score
   end
 
+  def set_chat
+    current_user.chat_open = !current_user.chat_open
+    current_user.save
+  end
+
   private
 
   def correct_user
