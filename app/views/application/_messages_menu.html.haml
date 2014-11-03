@@ -3,7 +3,7 @@
   - if my_journals.size > 0
     %span.count(style='background: #e5603b;')
       = my_journals.size
-    - if (Time.now - my_journals.last.first.created_at) > 1.day
+    - if (Time.now - my_journals.last.first.created_at) > 1.hour
       #set_notification_message
   - else
     %span.count
