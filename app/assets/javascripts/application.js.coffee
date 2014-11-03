@@ -24,11 +24,14 @@
 #= require wizard/jquery.bootstrap.wizard
 #= require news
 #= require notifications
+#= require jquery.ui.chatbox
+#= require moderator_chat
 
 # @todo load initialization
 sidebarHeight = 0;
 $ ->
   notificate_my_journals()
+  create_moderator_chat()
 
   $(".image-popup-vertical-fit").magnificPopup
     type: "image"
