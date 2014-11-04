@@ -127,6 +127,10 @@ class Core::Project < ActiveRecord::Base
     true
   end
 
+  def uniq_proc?
+    self.moderator_id.present?
+  end
+
   def type_access_name
     type_project = self.type_access
 

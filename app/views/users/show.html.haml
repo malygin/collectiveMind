@@ -8,7 +8,7 @@
       .col-md-4
         = image_tag  @user.avatar(:normal)
         %br
-        - unless @user.boss?
+        - if not @user.boss? or @project.uniq_proc?
           %h3=t('show.user.award', num: @user.awards.for_project(@project).count, all: 22)
           %br
           - @awards.each do |a|
