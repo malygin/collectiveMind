@@ -148,6 +148,11 @@ class User < ActiveRecord::Base
     end
   end
 
+  def uniq_proc_access?(project)
+    return false if project.moderator_id.present? and not (project.moderator_id == self.id or self.type_user == 7)
+    true
+  end
+
   def boss?
     [1, 2, 3, 6, 7].include? self.type_user
   end

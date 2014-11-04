@@ -59,13 +59,28 @@ module SessionsHelper
     else
       redirect_to :root unless boss?
     end
-
   end
 
+  def uniq_proc_users
+    @project = Core::Project.find(params[:project]) if params[:project]
+    if @project and @project.moderator_id.present?
+      [1,2,3,4,5,6,7,8,nil]
+    else
+      [4,5,8,nil]
+    end
+  end
+
+  def uniq_proc_access?
+    @project = Core::Project.find(params[:project]) if params[:project]
+    if @project and current_user
+      return false if @project.moderator_id.present? and not (@project.moderator_id == current_user.id or current_user.type_user == 7)
+    end
+    true
+  end
 
 	def redirect_back_or(default)
-	    redirect_to(session[:return_to] || default)
-	    clear_return_to
+	  redirect_to(session[:return_to] || default)
+	  clear_return_to
 	end
 
 	def current_user?(user)
@@ -77,11 +92,11 @@ module SessionsHelper
 	end	
 
 	def admin?
-    [1,6,7].include? current_user.type_user unless current_user.nil?
+    [1,6,7].include? current_user.type_user and uniq_proc_access? unless current_user.nil?
   end
 
   def prime_admin?
-    [1,7].include? current_user.type_user unless current_user.nil?
+    [1,7].include? current_user.type_user and uniq_proc_access? unless current_user.nil?
   end
 
   def role_expert?
@@ -93,7 +108,7 @@ module SessionsHelper
 	end
 
 	def boss?
-    [1,2,3,6,7].include? current_user.type_user unless current_user.nil?
+    [1,2,3,6,7].include? current_user.type_user and uniq_proc_access? unless current_user.nil?
 	end
 
   def watcher?
