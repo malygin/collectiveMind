@@ -166,6 +166,7 @@ class UsersController < ApplicationController
 
   def open_moderator_chat
     current_user.chat_open = !current_user.chat_open
+    current_user.save
     render json: {status: :ok}
   end
 
