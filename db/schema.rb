@@ -531,7 +531,7 @@ ActiveRecord::Schema.define(version: 20141103142309) do
     t.boolean  "discuss_status"
     t.boolean  "useful"
     t.boolean  "approve_status"
-    t.boolean  "anonym",             default: false
+    t.boolean  "anonym"
   end
 
   add_index "discontent_posts", ["aspect_id"], name: "index_discontent_posts_on_aspect_id", using: :btree
