@@ -165,7 +165,7 @@ class UsersController < ApplicationController
   end
 
   def open_moderator_chat
-    current_user.update_attributes! chat_open: true
+    current_user.chat_open = !current_user.chat_open
     render json: {status: :ok}
   end
 

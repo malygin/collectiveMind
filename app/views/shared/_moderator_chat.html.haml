@@ -26,4 +26,5 @@
   -#                    = message.message
   -#                  %time{datetime: message.created_at}
   -#                    = "#{message.user} • #{message.time}"
-#moderator_chat_div
+- if current_user.admin?
+  #moderator_chat_div

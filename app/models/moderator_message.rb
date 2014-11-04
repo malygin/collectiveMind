@@ -3,7 +3,7 @@ class ModeratorMessage < ActiveRecord::Base
   attr_accessible :message
   belongs_to :user
 
-  default_scope { order(:created_at) }
+  default_scope { order(created_at: :desc) }
   scope :recent, -> { limit(10) }
 
   def time

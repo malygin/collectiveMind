@@ -1,5 +1,5 @@
 @create_moderator_chat = ->
-  if document.location.pathname.match('project')
+  if document.location.pathname.match('project') && $('#moderator_chat_div').length > 0
     ws = new WebSocketRails(document.location.host + '/websocket')
     ws.on_open = ->
       console.log 'socket opened'
@@ -30,7 +30,7 @@
     ws.bind 'new_message', (data) ->
       console.log(data)
       $("#moderator_chat_div").chatbox("option", "boxManager").addMsg data['user'], data['text']
-      if $('#chat_log').length <= 0
+      if $('div.ui-widget-content.ui-chatbox-content').is(':hidden')
         Messenger.options =
           extraClasses: "messenger-fixed messenger-on-top messenger-on-right messenger-theme-air"
         msg = Messenger().post
