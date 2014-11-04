@@ -122,6 +122,11 @@ class Core::Project < ActiveRecord::Base
     end
   end
 
+  def uniq_proc_access?(user)
+    return false if self.moderator_id.present? and not (self.moderator_id == user.id or user.type_user == 7)
+    true
+  end
+
   def type_access_name
     type_project = self.type_access
 
