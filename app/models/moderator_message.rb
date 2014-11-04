@@ -3,8 +3,7 @@ class ModeratorMessage < ActiveRecord::Base
   attr_accessible :message
   belongs_to :user
 
-  default_scope { order(created_at: :desc) }
-  scope :recent, -> { limit(10) }
+  scope :recent, -> { last(15) }
 
   def time
     Russian::strftime(created_at, '%k:%M:%S')
