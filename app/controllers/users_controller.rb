@@ -164,6 +164,16 @@ class UsersController < ApplicationController
     render json: user.score
   end
 
+  def open_moderator_chat
+    current_user.update_attributes! chat_open: true
+    render json: {status: :ok}
+  end
+
+  def close_moderator_chat
+    current_user.update_attributes! chat_open: false
+    render json: {status: :ok}
+  end
+
   private
 
   def correct_user

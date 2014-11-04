@@ -24,7 +24,7 @@
         = render partial: 'core/projects/left_projects', locals: { current_stage: controller.controller_path }
       - else
         = render partial: 'left_side', locals: { current_stage: controller.controller_path }
-      -#= render partial: 'shared/moderator_chat'
+      = render partial: 'shared/moderator_chat'
     .wrap
       %header.page-header
         .navbar
@@ -48,8 +48,3 @@
       \==================================================
     / Placed at the end of the document so the pages load faster
     = javascript_include_tag 'application'
-    <!-- BEGIN JIVOSITE CODE {literal} -->
-    <script type='text/javascript'>
-    (function(){ var widget_id = 'DChNaQSvOx';
-    var s = document.createElement('script'); s.type = 'text/javascript'; s.async = true; s.src = '//code.jivosite.com/script/widget/'+widget_id; var ss = document.getElementsByTagName('script')[0]; ss.parentNode.insertBefore(s, ss);})();</script>
-    <!-- {/literal} END JIVOSITE CODE -->
