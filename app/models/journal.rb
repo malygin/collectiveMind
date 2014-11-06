@@ -55,6 +55,10 @@ class Journal < ActiveRecord::Base
     Journal.where(' project_id = ? AND user_informed = ? AND viewed =? AND personal =? AND first_id=?', project_id, user_id, false, true, first_id).order('created_at DESC')
   end
 
+  def self.events_for_comment(project_id, user_id, first_id, second_id)
+    Journal.where(' project_id = ? AND user_informed = ? AND viewed = ? AND personal = ? AND first_id = ? AND second_id = ?', project_id, user_id, false, true, first_id, second_id).order('created_at DESC')
+  end
+
   def self.last_event_for(user, project_id)
     Journal.where(' project_id = ? AND personal = ? ', project_id, false).where("user_id= (?)", user.id).order('created_at DESC').first
   end
