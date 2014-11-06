@@ -269,9 +269,7 @@ class Plan::PostsController < PostsController
     @post_concept = Plan::PostAspect.find(params[:concept_id])
     @post_concept.update_attributes(params[:plan_post_aspect])
 
-    create_plan_resources_on_type(@project, @post_concept, 'positive_r', 'positive_s')
-    create_plan_resources_on_type(@project, @post_concept, 'negative_r', 'negative_s')
-    create_plan_resources_on_type(@project, @post_concept, 'control_r', 'control_s')
+    create_plan_resources_on_type(@project, @post_concept)
 
     respond_to do |format|
       if @post_concept.save
@@ -307,9 +305,7 @@ class Plan::PostsController < PostsController
     @post_concept_save = Plan::PostAspect.find(params[:con_id])
     @post_concept_save.update_attributes(params[:plan_post_aspect])
 
-    create_plan_resources_on_type(@project, @post_concept_save, 'positive_r', 'positive_s')
-    create_plan_resources_on_type(@project, @post_concept_save, 'negative_r', 'negative_s')
-    create_plan_resources_on_type(@project, @post_concept_save, 'control_r', 'control_s')
+    create_plan_resources_on_type(@project, @post_concept_save)
 
     respond_to do |format|
       if @post_concept_save.save
@@ -399,17 +395,16 @@ class Plan::PostsController < PostsController
   end
 
   private
-    def create_plan_resources_on_type(project, post, type_r, type_s)
-      post.plan_post_resources.by_type(type_r).destroy_all
-      post.plan_post_resources.by_type(type_s).destroy_all
-      unless params[('resor_'+type_r).to_sym].nil?
-        params[('resor_'+type_r).to_sym].each_with_index do |r,i|
-          if r[1][0]!=''
-            resource = post.plan_post_resources.build(:name => r[1][0], :desc => params[('resor_'+type_r).to_sym] ? params[('resor_'+type_r).to_sym]["#{r[0]}"][0] : '', :type_res => type_r, :project_id => project.id, :style => 0)
-            if params[('resor_'+type_s).to_sym] and params[('resor_'+type_s).to_sym]["#{r[0]}"]
-              params[('resor_'+type_s).to_sym]["#{r[0]}"].each_with_index do |m,ii|
-                if m!=''
-                  mean = post.plan_post_resources.build(:name => m, :desc => params[('resor_'+type_s).to_sym] ? params[('resor_'+type_s).to_sym]["#{r[0]}"][ii] : '',:type_res => type_s, :project_id => project.id, :style => 1)
+    def create_plan_resources_on_type(project, post)
+      post.plan_post_resources.by_type(['positive_r','positive_s','negative_r','negative_s','control_r','control_s']).destroy_all
+      unless params[:resor].nil?
+        params[:resor].each do |r|
+          if r[:name]!=''
+            resource = post.plan_post_resources.build(:name => r[:name], :desc => r[:desc], :type_res => r[:type_res], :project_id => project.id, :style => 0)
+            unless r[:means].nil?
+              r[:means].each  do |m|
+                if m[:name]!=''
+                  mean = post.plan_post_resources.build(:name => m[:name], :desc => m[:desc], :type_res => m[:type_res], :project_id => project.id, :style => 1)
                   mean.plan_post_resource = resource
                 end
               end
@@ -418,4 +413,24 @@ class Plan::PostsController < PostsController
         end
       end
     end
+
+    # def create_plan_resources_on_type(project, post, type_r, type_s)
+    #   post.plan_post_resources.by_type(type_r).destroy_all
+    #   post.plan_post_resources.by_type(type_s).destroy_all
+    #   unless params[('resor_'+type_r).to_sym].nil?
+    #     params[('resor_'+type_r).to_sym].each_with_index do |r,i|
+    #       if r[1][0]!=''
+    #         resource = post.plan_post_resources.build(:name => r[1][0], :desc => params[('resor_'+type_r).to_sym] ? params[('resor_'+type_r).to_sym]["#{r[0]}"][0] : '', :type_res => type_r, :project_id => project.id, :style => 0)
+    #         if params[('resor_'+type_s).to_sym] and params[('resor_'+type_s).to_sym]["#{r[0]}"]
+    #           params[('resor_'+type_s).to_sym]["#{r[0]}"].each_with_index do |m,ii|
+    #             if m!=''
+    #               mean = post.plan_post_resources.build(:name => m, :desc => params[('resor_'+type_s).to_sym] ? params[('resor_'+type_s).to_sym]["#{r[0]}"][ii] : '',:type_res => type_s, :project_id => project.id, :style => 1)
+    #               mean.plan_post_resource = resource
+    #             end
+    #           end
+    #         end
+    #       end
+    #     end
+    #   end
+    # end
 end

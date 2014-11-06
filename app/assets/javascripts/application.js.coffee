@@ -27,6 +27,12 @@
 #= require jquery.ui.chatbox
 #= require moderator_chat
 
+#= require history_jquery
+#= require history_mootools
+#= require history_right
+#= require history_zepto
+#= require history_native
+
 # @todo load initialization
 sidebarHeight = 0;
 $ ->
@@ -201,13 +207,17 @@ $('#search_users_text').on 'change', ->
 
 # @todo обновление таблицы и списка
 $('#PlanTabs li#second a').on "click", (e) ->
+  $('#spinner_tab2').show()
   render_table('edit')
 $('#PlanTabs li#third a').on "click", (e) ->
+  $('#spinner_tab3').show()
   render_concept_side()
 
 $('#PlanTabsShow li#second a').on "click", (e) ->
+  $('#spinner_tab2').show()
   render_table('show')
 $('#PlanTabsShow li#third a').on "click", (e) ->
+  $('#spinner_tab3').show()
   render_concept_side()
 
 ###################################

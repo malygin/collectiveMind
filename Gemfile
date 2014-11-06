@@ -103,3 +103,4 @@ gem 'activerecord-deprecated_finders'
 #gem 'ckeditor'
 gem 'tinymce-rails'
 # gem 'has_scope'
+gem "historyjs-rails"
