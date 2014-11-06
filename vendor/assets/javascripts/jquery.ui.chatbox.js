@@ -120,7 +120,7 @@
                           'ui-dialog-header' // take advantage of dialog header style
                          )
                 .click(function(event) {
-                    self.toggleContent(event);
+                    //self.toggleContent(event);
                 })
                 .appendTo(uiChatbox),
             uiChatboxTitle = (self.uiChatboxTitle = $('<span></span>'))
@@ -152,7 +152,7 @@
                 .hover(function() { uiChatboxTitlebarMinimize.addClass('ui-state-hover'); },
                        function() { uiChatboxTitlebarMinimize.removeClass('ui-state-hover'); })
                 .click(function(event) {
-                    self.toggleContent(event);
+                    //self.toggleContent(event);
                     return false;
                 })
                 .appendTo(uiChatboxTitlebar),
@@ -211,7 +211,7 @@
             // switch focus to input box when whatever clicked
             uiChatboxContent.children().click(function() {
                 // click on any children, set focus on input box
-                self.uiChatboxInputBox.focus();
+                //self.uiChatboxInputBox.focus();
             });
 
             self._setWidth(self.options.width);
