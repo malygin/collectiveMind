@@ -1,9 +1,10 @@
-- unless current_user.chat_open?
-  = link_to '', open_moderator_chat_user_path(@project, current_user), id: 'open_moderator_chat', method: :put, remote: true, style: 'display: none'
-- else
-  = link_to '', close_moderator_chat_user_path(@project, current_user), id: 'close_moderator_chat', method: :put, remote: true, style: 'display: none'
+- if current_user.admin?
+  - if current_user.chat_open?
+    = link_to '', close_moderator_chat_user_path(@project, current_user), id: 'close_moderator_chat', method: :put, remote: true, style: 'display: none'
+  - else
+    = link_to '', open_moderator_chat_user_path(@project, current_user), id: 'open_moderator_chat', method: :put, remote: true, style: 'display: none'
 
-- if current_user.chat_open?
+  #moderator_chat_div
   #chat_log{style: 'display: none'}
     - ModeratorMessage.recent.each do |message|
       %div{id: "message_#{message.id}"}
@@ -11,20 +12,3 @@
           = "#{message.user}"
         %span
           = message.message
-  -#.container
-  -#  #moderator_chat_window.row.chat-window.col-xs-5.col-md-3
-  -#    .col-xs-12.col-md-12
-  -#      .panel.panel-default
-  -#        .panel-body.msg_container_base#chat_history
-  -#          - ModeratorMessage.recent.each do |message|
-  -#            .row.msg_container.base_receive
-  -#              .col-md-2.col-xs-2.avatar
-  -#                = image_tag message.user.avatar(:thumb), class: 'img-responsive'
-  -#              .col-md-10.col-xs-10
-  -#                .messages.msg_receive
-  -#                  %p
-  -#                    = message.message
-  -#                  %time{datetime: message.created_at}
-  -#                    = "#{message.user} • #{message.time}"
-- if current_user.admin?
-  #moderator_chat_div

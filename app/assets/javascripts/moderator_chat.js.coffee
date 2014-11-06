@@ -20,12 +20,11 @@
         ws.trigger 'incoming_message', {text: msg}
         return
     )
-    if $('#chat_log').length <= 0
+    $('#chat_log').children().each ->
+      $("#moderator_chat_div").chatbox("option", "boxManager").addMsg($(this).find('b').text().trim(),
+        $(this).find('span').text().trim())
+    if $('a#open_moderator_chat').length > 0
       $('span.ui-icon-minusthick').parent().click()
-    else
-      $('#chat_log').children().each ->
-        $("#moderator_chat_div").chatbox("option", "boxManager").addMsg($(this).find('b').text().trim(),
-          $(this).find('span').text().trim())
 
     ws.bind 'new_message', (data) ->
       console.log(data)
