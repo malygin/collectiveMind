@@ -5,10 +5,3 @@
     = link_to '', open_moderator_chat_user_path(@project, current_user), id: 'open_moderator_chat', method: :put, remote: true, style: 'display: none'
 
   #moderator_chat_div
-  #chat_log{style: 'display: none'}
-    - ModeratorMessage.recent.each do |message|
-      %div{id: "message_#{message.id}"}
-        %b
-          = "#{message.user}"
-        %span
-          = message.message
