@@ -20,8 +20,11 @@
               %label#label_advice_status(class="btn btn-sm btn-default" onclick="color_button(this);")
                 = check_box_tag :advise_status
                 = t('show.advice')
-          -if @main_comment
-            %button.btn.btn-danger.btn-sm(type="button" onclick="reset_child_comment_form(#{@main_comment.id}); return false;" )=t('form.cancel')
+          -if @main_comment_answer
+            %button.btn.btn-danger.btn-sm(type="button" onclick="reset_child_comment_form(#{@main_comment_answer.id}); return false;" )=t('form.cancel')
+          -elsif @main_comment
+            %button.btn.btn-danger.btn-sm(type="button" onclick="reset_main_comment_form(#{@main_comment.id}); return false;" )=t('form.cancel')
+
           =f.submit t('form.send'), id: "send_post", class: 'btn btn-sm btn-info'
 
       .text-success#comment_success(style='display:none;')
