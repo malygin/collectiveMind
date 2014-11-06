@@ -346,7 +346,7 @@
             .body
               %p=t('show.concept.comments')
               .text-center= will_paginate @comments
-              .chat-messages
+              #comments.chat-messages
                 = render partial:'shared/comment',collection:@comments
               .text-center= will_paginate @comments
               - if signed_in?
