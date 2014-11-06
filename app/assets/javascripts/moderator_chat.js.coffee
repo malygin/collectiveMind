@@ -62,7 +62,7 @@ addMsg = (data, highlight = true, append = true, scroll = true) ->
         return
     )
     ws.trigger 'get_history'
-    if $('a#open_moderator_chat').length > 0
+    if $('div#chat_opened').length <= 0
       $('span.ui-icon-minusthick').parent().click()
 
     ws.bind 'new_message', (data) ->
@@ -85,4 +85,4 @@ addMsg = (data, highlight = true, append = true, scroll = true) ->
     $('span.ui-icon-closethick').parent().click ->
       $('a#close_moderator_chat').click()
     $('span.ui-icon-minusthick').parent().click ->
-      $('a#open_moderator_chat').click()
+      $('a#hide_moderator_chat').click()

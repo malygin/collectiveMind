@@ -152,7 +152,7 @@
                 .hover(function() { uiChatboxTitlebarMinimize.addClass('ui-state-hover'); },
                        function() { uiChatboxTitlebarMinimize.removeClass('ui-state-hover'); })
                 .click(function(event) {
-                    //self.toggleContent(event);
+                    self.toggleContent(event);
                     return false;
                 })
                 .appendTo(uiChatboxTitlebar),
