@@ -10,18 +10,21 @@
         =post.comments.count
         %span.glyphicon.glyphicon-comment
       -if boss? and post.class.name.deconstantize == "Discontent" and [4,5,6,7].include?(@project.status)
-        |
-        =link_to({controller: post.class.name.underscore.pluralize, action: :set_grouped, id: post.id, project: @project},remote: true,method: :put,id: "set_grouped_#{post.id}", class: "note_text") do
-          -if post.status == 2
-            %span.text-success=t('show.discontent.grouped')
-          -else
-            %span.text-warning=t('show.discontent.do_group')
-        |
-        =link_to({controller: post.class.name.underscore.pluralize, action: :set_required, id: post.id, project: @project},remote: true,method: :put,id: "set_required_#{post.id}", class: "note_text") do
-          -if post.status == 4
-            %span.text-success=t('show.discontent.required')
-          -else
-            %span.text-warning=t('show.discontent.do_require')
+        -if post.status == 0
+          |
+          =link_to({controller: post.class.name.underscore.pluralize, action: :set_grouped, id: post.id, project: @project},remote: true,method: :put,id: "set_grouped_#{post.id}", class: "note_text") do
+            -if post.status == 2
+              %span.text-success=t('show.discontent.grouped')
+            -else
+              %span.text-warning=t('show.discontent.do_group')
+        -if post.status == 2 or post.status == 4
+          |
+          =link_to({controller: post.class.name.underscore.pluralize, action: :set_required, id: post.id, project: @project},remote: true,method: :put,id: "set_required_#{post.id}", class: "note_text") do
+            -if post.status == 4
+              %span.text-success=t('show.discontent.required')
+            -else
+              %span.text-warning=t('show.discontent.do_require')
+
         -if @project.status == 6
           |
           %span.text-success=t('show.like')
