@@ -47,7 +47,11 @@ class PostsController < ApplicationController
                 else
                   post
                 end
-      Journal.events_for_content(@project, current_user, post_id.id).update_all(viewed: true) if post_id
+      if params[:req_comment]
+        Journal.events_for_comment(@project, current_user, post_id.id, params[:req_comment].to_i).update_all(viewed: true) if post_id
+      else
+        Journal.events_for_content(@project, current_user, post_id.id).update_all(viewed: true) if post_id
+      end
     end
     super()
   end
@@ -522,8 +526,7 @@ class PostsController < ApplicationController
   def create_comment(post)
     @main_comment = comment_model.find(params[:main_comment]) unless params[:main_comment].nil?
     @main_comment_answer = comment_model.find(params[:answer_id]) unless params[:answer_id].nil?
-    comment_user = @main_comment_answer.user unless @main_comment_answer.nil?
-    content = comment_user ? "#{comment_user.to_s}, " + params[name_of_comment_for_param][:content] : params[name_of_comment_for_param][:content]
+    content = params[name_of_comment_for_param][:content]
     if params[name_of_comment_for_param][:image]
       if  ['image/jpeg', 'image/png'].include? params[name_of_comment_for_param][:image].content_type
         img = Cloudinary::Uploader.upload(params[name_of_comment_for_param][:image], folder: 'comments', crop: :limit, width: 800,
@@ -545,21 +548,21 @@ class PostsController < ApplicationController
                                   body: "#{trim_content(@comment.content)}", body2: trim_content(field_for_journal(post)),
                                   first_id: (post.instance_of? LifeTape::Post) ? post.discontent_aspects.first.id : post.id, second_id: @comment.id).save!
 
-      if post.user!=current_user
+      if post.user and post.user!=current_user
         current_user.journals.build(type_event: 'my_'+name_of_comment_for_param, user_informed: post.user, project: @project,
                                     body: "#{trim_content(@comment.content)}", body2: trim_content(field_for_journal(post)),
-                                    first_id: (post.instance_of? LifeTape::Post) ? post.discontent_aspects.first.id : post.id, second_id: @comment.id,
-                                    personal: true, viewed: false).save!
-      end
-      if @main_comment and @main_comment.user!=current_user
-        current_user.journals.build(type_event: 'reply_'+name_of_comment_for_param, user_informed: @main_comment.user, project: @project,
-                                    body: "#{trim_content(@comment.content)}", body2: trim_content(@main_comment.content),
                                     first_id: (post.instance_of? LifeTape::Post) ? post.discontent_aspects.first.id : post.id, second_id: @comment.id,
                                     personal: true, viewed: false).save!
       end
       if @main_comment_answer and @main_comment_answer.user!=current_user
         current_user.journals.build(type_event: 'reply_'+name_of_comment_for_param, user_informed: @main_comment_answer.user, project: @project,
                                     body: "#{trim_content(@comment.content)}", body2: trim_content(@main_comment_answer.content),
+                                    first_id: (post.instance_of? LifeTape::Post) ? post.discontent_aspects.first.id : post.id, second_id: @comment.id,
+                                    personal: true, viewed: false).save!
+
+      elsif @main_comment and @main_comment.user!=current_user
+        current_user.journals.build(type_event: 'reply_'+name_of_comment_for_param, user_informed: @main_comment.user, project: @project,
+                                    body: "#{trim_content(@comment.content)}", body2: trim_content(@main_comment.content),
                                     first_id: (post.instance_of? LifeTape::Post) ? post.discontent_aspects.first.id : post.id, second_id: @comment.id,
                                     personal: true, viewed: false).save!
       end

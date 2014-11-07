@@ -14,6 +14,18 @@ class ModeratorChatController < WebsocketRails::BaseController
                                      time: moderator_message.time}
   end
 
+  def send_history
+    if message.nil?
+      latest_id = ModeratorMessage.last.id
+    else
+      latest_id = message[:latest_id].to_i
+    end
+
+    WebsocketRails.users[current_user.id].send_message(:receive_history,
+                                                       ModeratorMessage.history(latest_id),
+                                                       channel: :moderator_chat)
+  end
+
   def user_disconnected
     p 'user disconnected'
   end

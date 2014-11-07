@@ -7,12 +7,13 @@ describe 'Concept ' do
   # screenshot_and_open_image
   # save_and_open_page
   let (:user) {create :user }
+  let (:user_data) {create :user }
   let (:prime_admin) {create :prime_admin }
   let (:moderator) {create :moderator }
   let (:project) {create :core_project, status: 7 }
 
   before  do
-    prepare_concepts(project,user)
+    prepare_concepts(project,user_data)
   end
 
   context  'ordinary user sign in ' do
@@ -279,15 +280,36 @@ describe 'Concept ' do
 
       it ' can add comments ', js: true do
         fill_in 'comment_text_area', with: 'con comment 1'
-        click_button 'send_post'
-        expect(page).to have_content 'con comment 1'
+        expect {
+          click_button 'send_post'
+          expect(page).to have_content 'con comment 1'
+        }.to change(Journal, :count).by(2)
       end
+
       it ' add new answer comment', js: true do
         click_link "add_child_comment_#{@comment1.id}"
         find("#main_comments_form_#{@comment1.id}").find('#comment_text_area').set "new child comment"
-        find("#main_comments_form_#{@comment1.id}").find('#send_post').click
-        expect(page).to have_content 'new child comment'
+        expect {
+          find("#main_comments_form_#{@comment1.id}").find('#send_post').click
+          expect(page).to have_content 'new child comment'
+        }.to change(Journal.events_for_my_feed(project, user_data), :count).by(2)
       end
+
+      context 'answer to answer comment' do
+        before do
+          @comment2 = FactoryGirl.create :concept_comment, post: @concept1, user: user_data, comment_id: @comment1.id, content: 'comment 2'
+          visit concept_post_path(project, @concept1)
+        end
+        it ' add new answer to answer comment', js: true do
+          click_link "add_child_comment_#{@comment2.id}"
+          find("#child_comments_form_#{@comment2.id}").find('#comment_text_area').set "new child to answer comment"
+          expect {
+            find("#child_comments_form_#{@comment2.id}").find('#send_post').click
+            expect(page).to have_content "new child to answer comment"
+          }.to change(Journal.events_for_my_feed(project, user_data), :count).by(2)
+        end
+      end
+
     end
 
     context 'vote discontent '   do
@@ -419,15 +441,36 @@ describe 'Concept ' do
 
       it ' can add comments ', js: true do
         fill_in 'comment_text_area', with: 'con comment 1'
-        click_button 'send_post'
-        expect(page).to have_content 'con comment 1'
+        expect {
+          click_button 'send_post'
+          expect(page).to have_content 'con comment 1'
+        }.to change(Journal, :count).by(2)
       end
+
       it ' add new answer comment', js: true do
         click_link "add_child_comment_#{@comment1.id}"
         find("#main_comments_form_#{@comment1.id}").find('#comment_text_area').set "new child comment"
-        find("#main_comments_form_#{@comment1.id}").find('#send_post').click
-        expect(page).to have_content 'new child comment'
+        expect {
+          find("#main_comments_form_#{@comment1.id}").find('#send_post').click
+          expect(page).to have_content 'new child comment'
+        }.to change(Journal.events_for_my_feed(project, user_data), :count).by(2)
       end
+
+      context 'answer to answer comment' do
+        before do
+          @comment2 = FactoryGirl.create :concept_comment, post: @concept1, user: user_data, comment_id: @comment1.id, content: 'comment 2'
+          visit concept_post_path(project, @concept1)
+        end
+        it ' add new answer to answer comment', js: true do
+          click_link "add_child_comment_#{@comment2.id}"
+          find("#child_comments_form_#{@comment2.id}").find('#comment_text_area').set "new child to answer comment"
+          expect {
+            find("#child_comments_form_#{@comment2.id}").find('#send_post').click
+            expect(page).to have_content "new child to answer comment"
+          }.to change(Journal.events_for_my_feed(project, user_data), :count).by(2)
+        end
+      end
+
       context 'like concept'   do
         before do
           prepare_awards

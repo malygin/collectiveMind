@@ -236,6 +236,8 @@ $('#PlanTabsShow li#third a').on "click", (e) ->
 # @todo work with comment form
 @reset_child_comment_form= (comment)->
   $('#child_comments_form_'+comment).empty()
+@reset_main_comment_form= (comment)->
+  $('#main_comments_form_'+comment).empty()
 
 # @todo work with comment on life_tape posts
 @select_for_aspects_comments= (el,project,post)->
