@@ -1,25 +1,27 @@
 @Comment_form = (el) ->
   if el.length > 0
-    commentTextarea = el.find('textarea')
     sendButton = el.find('#send_post')
     commentProblem =el.find('#comment_problem')
     commentIdea =el.find('#comment_idea')
 
     this.activate_button = ->
-      if (commentTextarea[0].value? and commentTextarea[0].value.length > 1)
+      form = $(this).closest('form');
+      sendButton = form.find('.send-comment')
+      console.log(sendButton)
+      if (this.value? and this.value.length > 1)
         sendButton.removeClass('disabled')
       else
        sendButton.addClass('disabled')
 
-    this.color_for_idea = (event) ->
-      commentIdea.toggleClass('btn-warning')
+    this.color_for_idea =  ->
+      $(this).closest('form').find('.comment-idea').toggleClass('btn-warning')
 
-    this.color_for_problem = (event) ->
-      commentProblem.toggleClass('btn-danger')
+    this.color_for_problem =  ->
+      $(this).closest('form').find('.comment-problem').toggleClass('btn-danger')
 
-    commentTextarea.on('keyup', this.activate_button)
-    commentProblem.on('click', this.color_for_problem)
-    commentIdea.on('click', this.color_for_idea)
+    $('.form-new-comment').on('keyup', 'textarea.comment-textarea', this.activate_button)
+    $('.form-new-comment').on('click', 'label.comment-problem', this.color_for_problem)
+    $('.form-new-comment').on('click','label.comment-idea', this.color_for_idea)
 
 
 @comments_feed = ->
@@ -29,16 +31,50 @@
     id = $(this).data('id')
     project = $(this).data('project')
     path = $(this).data('path')
-
-    form = $('<form accept-charset="UTF-8" action="/project/'+project+'/'+path+'/'+id+'/update_comment" class="new_or_edit" data-remote="true" enctype="multipart/form-data" id="edit_life_tape_comment_2537" method="post"/>')
-    form.append('<textarea name="content" placeholder="Ваш комментарий" >'+ $.trim($('#comment_text_'+id).html())+'</textarea>')
+    form = $('<form accept-charset="UTF-8" action="/project/'+project+'/'+path+'/'+id+'/update_comment" data-remote="true" enctype="multipart/form-data" id="form_edit_comment_'+id+'" method="post"/>')
+    form.append('<textarea class="form-control input-transparent" name="content" placeholder="Ваш комментарий" >'+ $.trim($('#comment_text_'+id).html())+'</textarea>')
     form.append('<div style="display:none"><input name="utf8" type="hidden" value="✓"><input name="_method" type="hidden" value="put"></div>')
-    form.append('<input class="btn btn-sm btn-success"  name="commit"  type="submit" value="Отправить">')
+    form.append('<input id="life_tape_comment_image" name="image" type="file"><br/>')
+    form.append('<button class="edit-cancel btn btn-xs btn-danger" data-id="' + id + '">Отменить</button> | ')
+    form.append('<input class="btn btn-xs btn-info"  name="commit"  type="submit" value="Отправить">')
     $('#comment_text_'+id).html(form)
+    $('#redactor_comment_'+id).fadeOut()
 
+  this.edit_cancel = (e) ->
+    e.preventDefault()
+    id = $(this).data('id')
+    $('#comment_text_'+id).html($('#form_edit_comment_'+id+' textarea').val())
+    $('#form_edit_comment_'+id).fadeOut().remove()
+    $('#comment_text_'+id).html()
+    $('#redactor_comment_'+id).fadeIn()
 
+  this.reply_comment =(e) ->
+    e.preventDefault()
+    id = $(this).data('id')
+    project = $(this).data('project')
+    path = $(this).data('path')
+    form = $('#form_reply_comment_'+id)
+    form.append('<br/><textarea class="form-control input-transparent comment-textarea"  name="life_tape_comment[content]" placeholder="Ваш комментарий или вопрос" ></textarea>')
+    form.append('<div style="display:none"><input name="utf8" type="hidden" value="✓"><input name="_method" type="hidden" value="put"></div>')
+    form.append('<div class="pull-right">
+                                  <div class="btn-group" data-toggle="buttons" id="change_comment_stat">
+                                    <label class="btn btn-sm btn-default comment-problem">
+                                      <input name="life_tape_comment[discontent_status]" type="hidden" value="0"><input id="life_tape_comment_discontent_status" name="life_tape_comment[discontent_status]" type="checkbox" value="1">
+                                      Проблема
+                                    </label>
+                                    <label class="btn btn-sm btn-default comment-idea">
+                                      <input name="life_tape_comment[concept_status]" type="hidden" value="0"><input id="life_tape_comment_concept_status" name="life_tape_comment[concept_status]" type="checkbox" value="1">
+                                      Идея
+                                    </label>
+                                  </div>
+                                  <input class="btn btn-sm btn-info send-comment disabled" iname="commit" type="submit" value="Отправить">
+                                </div> <br/>')
+    form.hide().fadeIn(2000)
+    $('#reply_comment_'+id).fadeOut()
 
-  $('.chat-messages').on('click','a.edit-comment', this.edit_comment)
+  $('.chat-messages').on('click','button.edit-comment', this.edit_comment)
+  $('.chat-messages').on('click','button.edit-cancel', this.edit_cancel)
+  $('.chat-messages').on('click','button.reply-comment', this.reply_comment)
 
 
 

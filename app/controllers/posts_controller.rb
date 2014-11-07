@@ -95,17 +95,17 @@ class PostsController < ApplicationController
     end
   end
 
-  def add_child_comment_form
-    @project = Core::Project.find(params[:project])
-    @post = current_model.find(params[:id])
-    @main_comment = comment_model.find(params[:comment_id])
-    @main_comment_answer = comment_model.find(params[:answer_id]) unless params[:answer_id].nil?
-    @comment = comment_model.new
-    @url_link = url_for(controller: @post.class.name.underscore.pluralize, action: 'add_comment', main_comment: @main_comment.id, answer_id: @main_comment_answer ? @main_comment_answer.id : nil)
-    respond_to do |format|
-      format.js
-    end
-  end
+  # def add_child_comment_form
+  #   @project = Core::Project.find(params[:project])
+  #   @post = current_model.find(params[:id])
+  #   @main_comment = comment_model.find(params[:comment_id])
+  #   @main_comment_answer = comment_model.find(params[:answer_id]) unless params[:answer_id].nil?
+  #   @comment = comment_model.new
+  #   @url_link = url_for(controller: @post.class.name.underscore.pluralize, action: 'add_comment', main_comment: @main_comment.id, answer_id: @main_comment_answer ? @main_comment_answer.id : nil)
+  #   respond_to do |format|
+  #     format.js
+  #   end
+  # end
 
   def comment_status
     @project = Core::Project.find(params[:project])
@@ -415,23 +415,23 @@ class PostsController < ApplicationController
     end
   end
 
-  def censored
-    if boss?
-      post = current_model.find(params[:post_id])
-      post.update_column(:censored, true)
-    end
-  end
+  # def censored
+  #   if boss?
+  #     post = current_model.find(params[:post_id])
+  #     post.update_column(:censored, true)
+  #   end
+  # end
+  #
+  # def censored_comment
+  #   if boss?
+  #     comment = comment_model.find(params[:id])
+  #     comment.update_column(:censored, true)
+  #   end
+  # end
 
-  def censored_comment
-    if boss?
-      comment = comment_model.find(params[:id])
-      comment.update_column(:censored, true)
-    end
-  end
-
-  def edit_comment
-    @comment = comment_model.find(params[:id])
-  end
+  # def edit_comment
+  #   @comment = comment_model.find(params[:id])
+  # end
 
   def update_comment
     @comment = comment_model.find(params[:id])
