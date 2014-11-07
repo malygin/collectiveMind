@@ -31,6 +31,7 @@
 
 $ ->
   new Comment_form($('#comment_form'))
+  comments_feed()
 
   notificate_my_journals()
   sidebar_for_small_screen()

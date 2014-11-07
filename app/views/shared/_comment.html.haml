@@ -25,17 +25,16 @@
 
     .text
       %div{id: "comment_text_#{comment.id}"}
-        =simple_format(comment.content)
+        =comment.content
         - if comment.image
           - if comment.isFile
-
             = link_to  'скачать приложенный файл' , "http://res.cloudinary.com/hs2pm8fbp/raw/upload/#{comment.image}"
           -else
             = link_to "http://res.cloudinary.com/hs2pm8fbp/image/upload/#{comment.image}",  class: 'image-popup-vertical-fit' do
               =cl_image_tag(comment.image, :width => 150, :height => 150, :crop => :fill)
       - if current_user?(comment.user) or boss?
-        %div.redactor{id: "redactor_comment_#{comment.id}"}
-          =link_to t('link.edit'), {:action => :edit_comment, :id => comment.id},:remote => true, :class=> 'btn btn-info btn-xs', id: "edit_comment_#{comment.id}"
+        %div{id: "redactor_comment_#{comment.id}"}
+          %a.edit-comment.btn.btn-info.btn-xs{href: '#', data:{ project: @project.id, id: comment.id, path: comment.post.class.name.underscore.pluralize},  id: "edit_comment_#{comment.id}"}= t('link.edit')
           \|
           = link_to t('link.remove'), {:action => :destroy_comment, :id => comment.id}, :method => :put, :remote => true, :confirm => t('confirm.delete_comment'), :class => 'btn btn-danger btn-xs', id: "destroy_comment_#{comment.id}"
 

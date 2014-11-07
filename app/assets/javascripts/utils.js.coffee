@@ -1,24 +1,45 @@
 @Comment_form = (el) ->
-  commentTextarea = el.find('textarea')
-  sendButton = el.find('#send_post')
-  commentProblem =el.find('#comment_problem')
-  commentIdea =el.find('#comment_idea')
+  if el.length > 0
+    commentTextarea = el.find('textarea')
+    sendButton = el.find('#send_post')
+    commentProblem =el.find('#comment_problem')
+    commentIdea =el.find('#comment_idea')
 
-  this.activate_button = ->
-    if (commentTextarea[0].value? and commentTextarea[0].value.length > 1)
-      sendButton.removeClass('disabled')
-    else
-     sendButton.addClass('disabled')
+    this.activate_button = ->
+      if (commentTextarea[0].value? and commentTextarea[0].value.length > 1)
+        sendButton.removeClass('disabled')
+      else
+       sendButton.addClass('disabled')
 
-  this.color_for_idea = (event) ->
-    commentIdea.toggleClass('btn-warning')
+    this.color_for_idea = (event) ->
+      commentIdea.toggleClass('btn-warning')
 
-  this.color_for_problem = (event) ->
-    commentProblem.toggleClass('btn-danger')
+    this.color_for_problem = (event) ->
+      commentProblem.toggleClass('btn-danger')
 
-  commentTextarea.on("keyup", this.activate_button)
-  commentProblem.on('click', this.color_for_problem)
-  commentIdea.on('click', this.color_for_idea)
+    commentTextarea.on('keyup', this.activate_button)
+    commentProblem.on('click', this.color_for_problem)
+    commentIdea.on('click', this.color_for_idea)
+
+
+@comments_feed = ->
+
+  this.edit_comment = (e)->
+    e.preventDefault()
+    id = $(this).data('id')
+    project = $(this).data('project')
+    path = $(this).data('path')
+
+    form = $('<form accept-charset="UTF-8" action="/project/'+project+'/'+path+'/'+id+'/update_comment" class="new_or_edit" data-remote="true" enctype="multipart/form-data" id="edit_life_tape_comment_2537" method="post"/>')
+    form.append('<textarea name="content" placeholder="Ваш комментарий" >'+ $.trim($('#comment_text_'+id).html())+'</textarea>')
+    form.append('<div style="display:none"><input name="utf8" type="hidden" value="✓"><input name="_method" type="hidden" value="put"></div>')
+    form.append('<input class="btn btn-sm btn-success"  name="commit"  type="submit" value="Отправить">')
+    $('#comment_text_'+id).html(form)
+
+
+
+  $('.chat-messages').on('click','a.edit-comment', this.edit_comment)
+
 
 
 
