@@ -28,9 +28,6 @@
 #= require moderator_chat
 
 #= require history_jquery
-#= require history_mootools
-#= require history_right
-#= require history_zepto
 #= require history_native
 
 # @todo load initialization
@@ -59,7 +56,6 @@ $ ->
   $sidebar = $("#sidebar")
 
   $sidebar.on "show.bs.collapse", (e) ->
-
     e.target is this and $sidebar.addClass("open") and $sidebar.removeClass('nav-collapse')
     if $("#sidebar").height()  > 0
       sidebarHeight =  $("#sidebar").height()
@@ -70,7 +66,6 @@ $ ->
       $sidebar.removeClass "open"
       $sidebar.addClass('nav-collapse')
       $(".content").css "margin-top", ""
-
 
   $('textarea.comment-textarea').on 'keyup', ->
     activate_button(this)
@@ -116,7 +111,6 @@ $ ->
 
   $('.userscore').editable()
 
-
   $('.carousel').carousel
     interval: 4000,
     pause: "hover"
@@ -131,6 +125,18 @@ $ ->
 
   selectize_discontent()
   selectize_concept()
+
+@history_click = (el)->
+  state =
+    title: el.getAttribute("title")
+    url: el.getAttribute("href", 2)
+  history.pushState state, state.title, state.url
+
+@history_change = (link)->
+  state =
+    title: "Massdecision"
+    url: link
+  history.pushState state, state.title, state.url
 
 @selectize_discontent= ->
   $select = $("#selectize_discontent").selectize

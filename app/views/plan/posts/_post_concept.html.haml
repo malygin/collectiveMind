@@ -12,7 +12,8 @@
     =link_to view_concept_table_plan_post_path(@project, @post, con_id: post_concept.id), method: :get, remote: true,class: "color-white", style: "text-decoration:none;border-bottom: 1px dashed #fafbfc;", id: "view_post_concept_table_#{post_concept.id}" do
       %span.h5{id: "name_post_concept_#{post_concept.id}"}=post_concept.title
     %br
-    =post_concept.name
+    %div{:id => "content_post_concept_#{post_concept.id}"}
+      =post_concept.name
     %br
     %div{id: "validate_concept_#{post_concept.id}"}
       = check_validate_concept(post_concept).html_safe if check_validate_concept(post_concept)
