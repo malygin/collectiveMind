@@ -775,3 +775,5 @@ en:
   groups:
     groups: "Groups"
     creating: "Creating group"
+    editing: "Editing group"
+    group: "Group"

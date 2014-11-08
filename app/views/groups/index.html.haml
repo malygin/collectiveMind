@@ -13,12 +13,20 @@
           %br
           = group.description
           %br
-          - if !group.users.include? current_user
+          - if group.users.include? current_user
             = link_to 'Зайти в группу', group_path(@project, group), id: "open_group_#{group.id}"
             %br
+            = link_to 'Покинуть группу', group_leave_path(@project, group), method: :put, id: "leave_group_#{group.id}"
+            %br
+          - else
+            = link_to 'Вступить в группу', group_become_member_path(@project, group), method: :put, id: "become_member_#{group.id}"
+            %br
+
           - if current_user.admin?
             = link_to 'Удалить группу', group_path(@project, group), id: "remove_group_#{group.id}", method: :delete,
             data: {confirm: t('confirm.delete_group')}, class: 'btn btn-danger btn-xs'
+            %br
+            = link_to 'Редактировать', edit_group_path(@project, group), id: "edit_group_#{group.id}", class: 'btn btn-primary btn-xs'
 
 - if current_user.admin?
   = link_to 'Добавить группу', new_group_path(@project), id: 'create_group', class: 'btn btn-success btn-xs'
