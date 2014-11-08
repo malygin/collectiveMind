@@ -52,6 +52,8 @@ class User < ActiveRecord::Base
   has_many :awards, through: :user_awards
   has_many :moderator_messages
   has_many :user_checks, class_name: 'UserCheck'
+  has_many :group_users
+  has_many :groups, through: :group_users
 
   scope :check_field, ->(p, c) { where(project: p.id, status: 't', check_field: c) }
   scope :without_added, ->(users) { where("users.id NOT IN (#{users.join(", ")})") unless users.empty? }
