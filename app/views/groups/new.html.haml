@@ -3,4 +3,4 @@
 
 %section.widget.widget-tabs
   .body.tab-content
-    = render 'form'
+    = render partial: 'form', locals: {url: groups_path(@project, @group)}
