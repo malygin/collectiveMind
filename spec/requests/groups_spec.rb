@@ -112,33 +112,62 @@ describe 'Groups' do
       let(:group_name) { 'Cool group name' }
       let(:group_description) { 'Cool group description' }
 
-      before do
-        visit new_group_path(project)
-        fill_in 'group_name', with: group_name
-        fill_in 'group_description', with: group_description
-        click_button 'save_group'
+      context 'ok' do
+        before do
+          visit new_group_path(project)
+          fill_in 'group_name', with: group_name
+          fill_in 'group_description', with: group_description
+          click_button 'save_group'
+        end
+
+        it { expect change(Group.by_project(project), :count).by(1) }
+
+        it { expect(current_path) == groups_path(project) }
+
+        it { expect(page).to have_content group_name }
+
+        it { expect(page).to have_content group_description }
       end
 
-      it { expect change(Group.by_project(project), :count).by(1) }
+      context 'empty name' do
+        before do
+          visit new_group_path(project)
+          click_button 'save_group'
+        end
 
-      it { expect(current_path) == groups_path(project) }
+        it { expect change(Group.by_project(project), :count).by(0) }
 
-      it { expect(page).to have_content group_name }
+        it { expect(current_path) == groups_path(project) }
 
-      it { expect(page).to have_content group_description }
+        it { expect(page).to have_css 'div.error_explanation' }
+      end
     end
 
     context 'edit' do
-      let (:new_name) { 'New cool name for group' }
-      before do
-        click_link "edit_group_#{group.id}"
-        fill_in 'group_name', with: new_name
-        click_button 'save_group'
+      context 'ok' do
+        let (:new_name) { 'New cool name for group' }
+        before do
+          click_link "edit_group_#{group.id}"
+          fill_in 'group_name', with: new_name
+          click_button 'save_group'
+        end
+
+        it { expect(current_path) == groups_path(project) }
+
+        it { expect(page).to have_content new_name }
       end
 
-      it { expect(current_path) == groups_path(project) }
+      context 'fill empty name' do
+        before do
+          click_link "edit_group_#{group.id}"
+          fill_in 'group_name', with: ''
+          click_button 'save_group'
+        end
 
-      it { expect(page).to have_content new_name }
+        it { expect(current_path) == groups_path(project) }
+
+        it { expect(page).to have_css 'div.error_explanation' }
+      end
     end
 
     it 'destroy', js: true do
