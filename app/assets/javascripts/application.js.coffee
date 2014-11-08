@@ -287,9 +287,10 @@ activate_add_aspects()
   $('#post_'+val).animate({height: 0, opacity: 0.000}, 1000, ->
     $(this).remove())
 
-@select_for_discontents_group= (el,project,post)->
+@select_for_discontents_group= (el,project,post,type,parent)->
   project_id = project
   dispost_id = post
+  parent_post = parent
   group_id = $(el).val()
   if group_id != '' and dispost_id != ''
     $.ajax
@@ -297,6 +298,8 @@ activate_add_aspects()
       type: "put"
       data:
         group_id: group_id
+        type_list: type
+        parent_post: parent_post
 
 ###############################################
 # @todo work with concept_post

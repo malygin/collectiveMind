@@ -12,6 +12,9 @@
   -else
     %span(id="what_content_#{post_content.id}")=post_content.content
 
+  - if boss? and @project.status == 4
+    %div(style="display:none;" id="change_group_success_#{post_content.id}")
+      .color-green Несовершенство успешно перенесено в группу
   %ul.ul-union-list(id="post_content_#{post_content.id}" style="list-style: disc inside;")
     -post_content.discontent_posts.each do |dp|
       -if @remove_able
@@ -22,6 +25,11 @@
           %li.union-list{id: "li_id_#{dp.id}"}=dp.content
       -else
         %li.union-list{id: "li_id_#{dp.id}"}=dp.content
+      - if boss? and @project.status == 4
+        .discontents_group_select{id: "group_select_#{dp.id}"}
+          -if @accepted_posts
+            = select_tag 'select_for_discontents_group', options_from_collection_for_select(@accepted_posts, "id", "content"),
+            prompt: t('form.discontent.select_aspect_prompt'), onchange: "select_for_discontents_group(this,#{@project.id},#{dp.id},'new_posts',#{post_content.id});"
 
 -else
   -if boss? and @project.able_add_note?

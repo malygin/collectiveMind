@@ -143,6 +143,7 @@ class Discontent::PostsController < PostsController
 
   def unions
     @project = Core::Project.find(params[:project])
+    @accepted_posts = Discontent::Post.where(project_id: @project, status: 2)
     @posts = current_model.where(project_id: @project).where(status: 2).order_by_param(@order).paginate(page: params[:page], per_page: 40)
     respond_to do |format|
       format.js
@@ -243,6 +244,9 @@ class Discontent::PostsController < PostsController
       @post.update_attributes(status: 1, discontent_post_id: @new_post.id)
       @new_post.update_union_post_aspects(@post.post_aspects)
     end
+    @type_list = params[:type_list]
+    @parent_post = params[:parent_post]
+    @accepted_posts = Discontent::Post.where(project_id: @project, status: 2)
     respond_to do |format|
       format.js
     end
