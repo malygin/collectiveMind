@@ -145,6 +145,7 @@ class Discontent::PostsController < PostsController
     @project = Core::Project.find(params[:project])
     @accepted_posts = Discontent::Post.where(project_id: @project, status: 2)
     @posts = current_model.where(project_id: @project).where(status: 2).order_by_param(@order).paginate(page: params[:page], per_page: 40)
+    @list_type = params[:list_type]
     respond_to do |format|
       format.js
     end

@@ -306,6 +306,8 @@ $('#tab_posts li#new a').on 'click', ->
   $.ajax
     url: "/project/#{project_id}/discontent/posts/unions"
     type: "get"
+    data:
+      list_type: 'new_posts'
 
 ###############################################
 # @todo work with concept_post
