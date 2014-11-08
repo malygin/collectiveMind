@@ -1,9 +1,10 @@
 class GroupsController < ApplicationController
+  before_action :journal_data
   before_action :set_group, only: [:show, :edit, :update, :destroy]
 
   # GET /groups
   def index
-    @groups = Group.all
+    @groups = Group.by_project(@project)
   end
 
   # GET /groups/1

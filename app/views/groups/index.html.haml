@@ -1,23 +1,24 @@
-%h1 Listing groups
+%h2
+  = t('groups.groups')
 
-%table
-  %tr
-    %th Name
-    %th Description
-    %th Project
-    %th
-    %th
-    %th
+%section.widget.widget-tabs
+  .body.tab-content
+    %br
+    %br
+    - @groups.each do |group|
+      .chat-message{id:"group_#{group.id}"}
+        .chat-message-body
+          %h4
+            = group.name
+          %br
+          = group.description
+          %br
+          - if !group.users.include? current_user
+            = link_to 'Зайти в группу', group_path(@project, group), id: "open_group_#{group.id}"
+            %br
+          - if current_user.admin?
+            = link_to 'Удалить группу', group_path(@project, group), id: "remove_group_#{group.id}", method: :delete,
+            data: {confirm: t('confirm.delete_group')}, class: 'btn btn-danger btn-xs'
 
-  - @groups.each do |group|
-    %tr
-      %td= group.name
-      %td= group.description
-      %td= group.project
-      %td= link_to 'Show', group
-      %td= link_to 'Edit', edit_group_path(group)
-      %td= link_to 'Destroy', group, :method => :delete, :data => { :confirm => 'Are you sure?' }
-
-%br
-
-= link_to 'New Group', new_group_path
+- if current_user.admin?
+  = link_to 'Добавить группу', new_group_path(@project), id: 'create_group', class: 'btn btn-success btn-xs'
