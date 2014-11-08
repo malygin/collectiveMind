@@ -5,13 +5,14 @@ describe 'Life Tape ' do
   # screenshot_and_open_image
   # save_and_open_page
   let (:user) {create :user }
+  let (:user_data) {create :user }
   let (:prime_admin) {create :prime_admin }
   let (:moderator) {create :moderator }
   let (:project) {create :core_project, status: 1 }
   let (:closed_project) {create :core_project, status: 1 , type_access: 2, name: "closed project"}
 
   before  do
-    prepare_life_tape(project,user)
+    prepare_life_tape(project,user_data)
   end
 
   context  'ordinary user sign in ' do
@@ -46,8 +47,10 @@ describe 'Life Tape ' do
 
       it 'add new comment in aspect ', js: true do
         fill_in 'comment_text_area', with: 'new comment'
-        click_button 'send_post'
-        expect(page).to have_content 'new comment'
+        expect {
+          click_button 'send_post'
+          expect(page).to have_content 'new comment'
+        }.to change(Journal, :count).by(1)
       end
 
       it ' add new answer comment', js: true do
@@ -55,10 +58,27 @@ describe 'Life Tape ' do
         #fill_in 'comment_text_area', with: 'new comment'
         #find('#comment_text_area').set('new comment')
         find("#main_comments_form_#{@comment1.id}").find('#comment_text_area').set "new child comment"
-        find("#main_comments_form_#{@comment1.id}").find('#send_post').click
-        expect(page).to have_content 'new child comment'
-        #screenshot_and_open_image
+        expect {
+          find("#main_comments_form_#{@comment1.id}").find('#send_post').click
+          expect(page).to have_content 'new child comment'
+        }.to change(Journal.events_for_my_feed(project, user_data), :count).by(1)
       end
+
+      context 'answer to answer comment' do
+        before do
+          @comment2 = FactoryGirl.create :life_tape_comment, post: @post1, user: user_data, comment_id: @comment1.id, content: 'comment 2'
+          visit life_tape_posts_path(project)
+        end
+        it ' add new answer to answer comment', js: true do
+          click_link "add_child_comment_#{@comment2.id}"
+          find("#child_comments_form_#{@comment2.id}").find('#comment_text_area').set "new child to answer comment"
+          expect {
+            find("#child_comments_form_#{@comment2.id}").find('#send_post').click
+            expect(page).to have_content "new child to answer comment"
+          }.to change(Journal.events_for_my_feed(project, user_data), :count).by(1)
+        end
+      end
+
     end
 
     context 'vote life tape '  do
@@ -132,8 +152,10 @@ describe 'Life Tape ' do
 
       it 'add new comment in aspect ', js: true do
         fill_in 'comment_text_area', with: 'new comment'
-        click_button 'send_post'
-        expect(page).to have_content 'new comment'
+        expect {
+          click_button 'send_post'
+          expect(page).to have_content 'new comment'
+        }.to change(Journal, :count).by(1)
       end
 
       it 'add new comment in aspect with images ', js: true do
@@ -152,8 +174,25 @@ describe 'Life Tape ' do
       it ' add new answer comment', js: true do
         click_link "add_child_comment_#{@comment1.id}"
         find("#main_comments_form_#{@comment1.id}").find('#comment_text_area').set "new child comment"
-        find("#main_comments_form_#{@comment1.id}").find('#send_post').click
-        expect(page).to have_content 'new child comment'
+        expect {
+          find("#main_comments_form_#{@comment1.id}").find('#send_post').click
+          expect(page).to have_content 'new child comment'
+        }.to change(Journal.events_for_my_feed(project, user_data), :count).by(1)
+      end
+
+      context 'answer to answer comment' do
+        before do
+          @comment2 = FactoryGirl.create :life_tape_comment, post: @post1, user: user_data, comment_id: @comment1.id, content: 'comment 2'
+          visit life_tape_posts_path(project)
+        end
+        it ' add new answer to answer comment', js: true do
+          click_link "add_child_comment_#{@comment2.id}"
+          find("#child_comments_form_#{@comment2.id}").find('#comment_text_area').set "new child to answer comment"
+          expect {
+            find("#child_comments_form_#{@comment2.id}").find('#send_post').click
+            expect(page).to have_content "new child to answer comment"
+          }.to change(Journal.events_for_my_feed(project, user_data), :count).by(1)
+        end
       end
 
       it ' like comment', js: true do

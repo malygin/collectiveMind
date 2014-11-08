@@ -5,13 +5,14 @@ describe 'Discontent ' do
   # screenshot_and_open_image
   # save_and_open_page
   let (:user) {create :user }
+  let (:user_data) {create :user }
   let (:prime_admin) {create :prime_admin }
   let (:moderator) {create :moderator }
   let (:project) {create :core_project, status: 3 }
   let (:project_for_group) {create :core_project, status: 4 }
 
   before  do
-    prepare_discontents(project,user)
+    prepare_discontents(project,user_data)
   end
 
   context  'ordinary user sign in ' do
@@ -94,8 +95,10 @@ describe 'Discontent ' do
 
       it ' can add  comments ', js: true  do
         fill_in 'comment_text_area', with: 'dis comment 1'
-        click_button 'send_post'
-        expect(page).to have_content 'dis comment 1'
+        expect {
+          click_button 'send_post'
+          expect(page).to have_content 'dis comment 1'
+        }.to change(Journal, :count).by(2)
       end
 
       it ' add new answer comment', js: true do
@@ -103,9 +106,25 @@ describe 'Discontent ' do
         #fill_in 'comment_text_area', with: 'new comment'
         #find('#comment_text_area').set('new child comment')
         find("#main_comments_form_#{@comment1.id}").find('#comment_text_area').set "new child comment"
-        find("#main_comments_form_#{@comment1.id}").find('#send_post').click
-        expect(page).to have_content 'new child comment'
-        #screenshot_and_open_image
+        expect {
+          find("#main_comments_form_#{@comment1.id}").find('#send_post').click
+          expect(page).to have_content 'new child comment'
+        }.to change(Journal.events_for_my_feed(project, user_data), :count).by(2)
+      end
+
+      context 'answer to answer comment' do
+        before do
+          @comment2 = FactoryGirl.create :discontent_comment, post: @discontent1, user: user_data, comment_id: @comment1.id, content: 'comment 2'
+          visit discontent_post_path(project, @discontent1)
+        end
+        it ' add new answer to answer comment', js: true do
+          click_link "add_child_comment_#{@comment2.id}"
+          find("#child_comments_form_#{@comment2.id}").find('#comment_text_area').set "new child to answer comment"
+          expect {
+            find("#child_comments_form_#{@comment2.id}").find('#send_post').click
+            expect(page).to have_content "new child to answer comment"
+          }.to change(Journal.events_for_my_feed(project, user_data), :count).by(2)
+        end
       end
     end
 
@@ -183,16 +202,36 @@ describe 'Discontent ' do
 
       it ' can add  comments ', js: true  do
         fill_in 'comment_text_area', with: 'dis comment 1'
-        click_button 'send_post'
-        expect(page).to have_content 'dis comment 1'
+        expect {
+          click_button 'send_post'
+          expect(page).to have_content 'dis comment 1'
+        }.to change(Journal, :count).by(2)
       end
 
       it ' add new answer comment', js: true do
         click_link "add_child_comment_#{@comment1.id}"
         find("#main_comments_form_#{@comment1.id}").find('#comment_text_area').set "new child comment"
-        find("#main_comments_form_#{@comment1.id}").find('#send_post').click
-        expect(page).to have_content 'new child comment'
+        expect {
+          find("#main_comments_form_#{@comment1.id}").find('#send_post').click
+          expect(page).to have_content 'new child comment'
+        }.to change(Journal.events_for_my_feed(project, user_data), :count).by(2)
       end
+
+      context 'answer to answer comment' do
+        before do
+          @comment2 = FactoryGirl.create :discontent_comment, post: @discontent1, user: user_data, comment_id: @comment1.id, content: 'comment 2'
+          visit discontent_post_path(project, @discontent1)
+        end
+        it ' add new answer to answer comment', js: true do
+          click_link "add_child_comment_#{@comment2.id}"
+          find("#child_comments_form_#{@comment2.id}").find('#comment_text_area').set "new child to answer comment"
+          expect {
+            find("#child_comments_form_#{@comment2.id}").find('#send_post').click
+            expect(page).to have_content "new child to answer comment"
+          }.to change(Journal.events_for_my_feed(project, user_data), :count).by(2)
+        end
+      end
+
       context 'like concept'   do
         before do
           prepare_awards
@@ -202,7 +241,7 @@ describe 'Discontent ' do
           click_link "plus_post_#{@discontent1.id}"
           visit journals_path(project: project)
           expect(page).to have_selector('i.fa.fa-trophy')
-          visit user_path(project: project, id: user.id)
+          visit user_path(project: project, id: user_data.id)
           expect(page).to have_content('25')
           # expect(page).to have_link("plus_post_#{@discontent1.id}", :text => 'Забрать баллы', :href => plus_discontent_post_path(project,@discontent1))
           # click_link "plus_post_#{@discontent1.id}"

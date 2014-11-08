@@ -1,8 +1,8 @@
-$('#new_posts').fadeOut(500, function() {$('#new_posts').html("#{escape_javascript(render  @posts)}").fadeIn();});
-$('li#new').toggleClass('active');
-$('li#old').removeClass('active');
-$('li#imp').removeClass('active');
-$('#tab_posts a[href="#new_posts"]').tab('show');
-$('#origin').removeClass('active in');
-$('#improve').removeClass('active in');
-$('#new_posts').toggleClass('active in');
+$('#new_posts').fadeOut(500, function() {$('#new_posts').html("#{escape_javascript(render partial: 'post', collection: @posts)}").fadeIn();});
+-#$('li#new').toggleClass('active');
+-#$('li#old').removeClass('active');
+-#$('li#imp').removeClass('active');
+-#$('#tab_posts a[href="#new_posts"]').tab('show');
+-#$('#origin').removeClass('active in');
+-#$('#improve').removeClass('active in');
+-#$('#new_posts').toggleClass('active in');

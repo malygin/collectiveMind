@@ -143,7 +143,9 @@ class Discontent::PostsController < PostsController
 
   def unions
     @project = Core::Project.find(params[:project])
-    @posts = current_model.where(project_id: @project).where(status: 2).order_by_param(@order).paginate(page: params[:page], per_page: 40)
+    @accepted_posts = Discontent::Post.where(project_id: @project, status: 2)
+    @posts = current_model.where(project_id: @project).where(status: 2).created_order
+    @type_tab = params[:type_tab]
     respond_to do |format|
       format.js
     end
@@ -153,14 +155,9 @@ class Discontent::PostsController < PostsController
     @project = Core::Project.find(params[:project])
     @post = Discontent::Post.find(params[:id])
     @union_post = Discontent::Post.find(params[:post_id])
-    dp = @post.discontent_posts
     if @post.one_last_post? and boss?
       @union_post.update_attributes(status: 0, discontent_post_id: nil)
-      if dp.present?
-        @post.update_column(:status, 3)
-      else
-        @post.update_column(:status, 0)
-      end
+      @post.update_column(:status, 3)
       return redirect_to action: "index"
     else
       @union_post.update_attributes(status: 0, discontent_post_id: nil)
@@ -174,19 +171,12 @@ class Discontent::PostsController < PostsController
    def ungroup_union
      @project = Core::Project.find(params[:project])
      @post = Discontent::Post.find(params[:id])
-     dp = @post.discontent_posts
      unless @post.discontent_posts.nil?
        @post.discontent_posts.each do |post|
          post.update_attributes(status: 0, discontent_post_id: nil)
        end
      end
-     if boss?
-       if dp.present?
-         @post.update_column(:status, 3)
-       else
-         @post.update_column(:status, 0)
-       end
-     end
+     @post.update_column(:status, 3)
      redirect_to action: "index"
    end
 
@@ -208,12 +198,17 @@ class Discontent::PostsController < PostsController
 
   def set_required
     @post = Discontent::Post.find(params[:id])
-    @post.update_attributes(status: 4) if boss?
+    if boss? and @post.status == 2
+      @post.update_attributes(status: 4)
+    end
   end
 
   def set_grouped
+    @project = Core::Project.find(params[:project])
     @post = Discontent::Post.find(params[:id])
-    @post.update_attributes(status: 2) if boss?
+    @new_post = Discontent::Post.create(status: 2, style: @post.style, project: @project, content: @post.content, whered: @post.whered, whend: @post.whend)
+    @post.update_attributes(status: 1, discontent_post_id: @new_post.id)
+    @new_post.update_union_post_aspects(@post.post_aspects)
   end
 
   def new_group
@@ -250,6 +245,9 @@ class Discontent::PostsController < PostsController
       @post.update_attributes(status: 1, discontent_post_id: @new_post.id)
       @new_post.update_union_post_aspects(@post.post_aspects)
     end
+    @type_tab = params[:type_tab]
+    @parent_post = params[:parent_post_id]
+    @accepted_posts = Discontent::Post.where(project_id: @project, status: 2)
     respond_to do |format|
       format.js
     end
