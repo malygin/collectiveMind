@@ -1,9 +1,4 @@
 CollectiveMind::Application.routes.draw do
-
-  resources :group_users
-
-  resources :groups
-
   def posts_routes
     get 'vote_list'  => 'posts#vote_list'
     put 'vote/:post_id'  => 'posts#vote'
@@ -49,6 +44,7 @@ scope '/project/:project' do
   get '/general_news', to: 'core/projects#news'
   get '/general_rating', to: 'core/projects#users'
   #get '/help/posts/0', to: 'help/posts#new_help_0'
+  resources :groups, :group_users
 
   namespace :help do
     resources :posts
