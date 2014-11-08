@@ -1,6 +1,10 @@
 %ul#side-nav.side-nav
   %li
     %a
+      %h4
+        = link_to t('menu.list_groups'), groups_path(@project), id: 'open_groups_list'
+  %li
+    %a
       %h4=t('menu.list_aspects')
   -@project.current_aspects(current_stage).each do |asp|
     %li{class:"#{'active' if asp == @aspect}"}
