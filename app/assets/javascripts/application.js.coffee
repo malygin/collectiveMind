@@ -301,6 +301,12 @@ activate_add_aspects()
         type_list: type
         parent_post: parent_post
 
+$('#tab_posts li#new a').on 'click', ->
+  project_id = $(this).attr("data-project")
+  $.ajax
+    url: "/project/#{project_id}/discontent/posts/unions"
+    type: "get"
+
 ###############################################
 # @todo work with concept_post
 @select_discontent_for_concept= (project)->
