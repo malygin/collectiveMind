@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141108172521) do
+ActiveRecord::Schema.define(version: 20141108173213) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -904,6 +904,16 @@ ActiveRecord::Schema.define(version: 20141108172521) do
   add_index "frustrations", ["created_at"], name: "index_frustrations_on_created_at", using: :btree
   add_index "frustrations", ["status"], name: "index_frustrations_on_status", using: :btree
   add_index "frustrations", ["user_id"], name: "index_frustrations_on_user_id", using: :btree
+
+  create_table "group_users", force: true do |t|
+    t.integer  "group_id"
+    t.integer  "user_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "group_users", ["group_id"], name: "index_group_users_on_group_id", using: :btree
+  add_index "group_users", ["user_id"], name: "index_group_users_on_user_id", using: :btree
 
   create_table "groups", force: true do |t|
     t.string   "name"

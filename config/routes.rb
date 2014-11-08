@@ -1,5 +1,7 @@
 CollectiveMind::Application.routes.draw do
 
+  resources :group_users
+
   resources :groups
 
   def posts_routes
