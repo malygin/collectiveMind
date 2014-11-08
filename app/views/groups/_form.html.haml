@@ -1,19 +1,11 @@
 = form_for @group do |f|
-  - if @group.errors.any?
-    #error_explanation
-      %h2= "#{pluralize(@group.errors.count, "error")} prohibited this group from being saved:"
-      %ul
-        - @group.errors.full_messages.each do |msg|
-          %li= msg
-
-  .field
+  = render partial: 'shared/notice_messages', locals: {object: @group}
+  .form-group
     = f.label :name
-    = f.text_field :name
-  .field
+    = f.text_field :name, class: 'form-control'
+  .form-group
     = f.label :description
-    = f.text_field :description
-  .field
-    = f.label :project
-    = f.text_field :project
-  .actions
-    = f.submit 'Save'
+    = f.text_area :description, class: 'form-control'
+  %br
+  %actions.pull-right
+    = f.submit t('form.save'), class: 'btn btn-primary btn-lg', id:'save_group'

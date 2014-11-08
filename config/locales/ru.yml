@@ -1,6 +1,9 @@
 ru:
   activerecord:
     attributes:
+      group:
+        name: 'Название группы'
+        description: 'Описание группы'
       discontent/post:
         content: 'Поле "Что вас не устраивает"'
         whend:  'Поле "Когда это происходит"'
@@ -135,6 +138,7 @@ ru:
     help_stage: Помощь по этапу
     reflection_stage: Рефлексия по этапу
     account: 'Профиль'
+    list_groups: "Список групп"
   stages:
     intro: Введение
     life_tape: 'Сбор информации'
@@ -529,6 +533,7 @@ ru:
     delete_stage: Удалить этап?
     delete_advice: 'Удалить совет?'
 
+    delete_group: "Удалить группу?"
   show:
     without_name: 'Без названия'
     note: замечание
@@ -778,3 +783,6 @@ ru:
   advice:
     advices: "Советы участников"
     disapproved_notify_text: "Ваш совет не одобрен, Ознакомиться с причиной"
+  groups:
+    groups: "Группы"
+    creating: "Добавление группы"

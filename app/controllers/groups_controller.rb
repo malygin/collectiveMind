@@ -1,6 +1,7 @@
 class GroupsController < ApplicationController
   before_action :journal_data
   before_action :set_group, only: [:show, :edit, :update, :destroy]
+  before_filter :check_admin, only: [:new, :edit, :create, :update, :destroy]
 
   # GET /groups
   def index
@@ -22,10 +23,10 @@ class GroupsController < ApplicationController
 
   # POST /groups
   def create
-    @group = Group.new(group_params)
+    @group = @project.groups.new group_params
 
     if @group.save
-      redirect_to @group, notice: 'Group was successfully created.'
+      redirect_to groups_path(@project)
     else
       render :new
     end
@@ -44,6 +45,11 @@ class GroupsController < ApplicationController
   def destroy
     @group.destroy
     redirect_to groups_url, notice: 'Group was successfully destroyed.'
+  end
+
+  private
+  def check_admin
+    redirect_back_or project_path(@project) unless current_user.admin?
   end
 
   private

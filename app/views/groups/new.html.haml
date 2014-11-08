@@ -1,5 +1,6 @@
-%h1 New group
+%h2
+  = t('groups.creating')
 
-= render 'form'
-
-= link_to 'Back', groups_path
+%section.widget.widget-tabs
+  .body.tab-content
+    = render 'form'
