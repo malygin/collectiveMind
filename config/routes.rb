@@ -1,5 +1,7 @@
 CollectiveMind::Application.routes.draw do
 
+  resources :groups
+
   def posts_routes
     get 'vote_list'  => 'posts#vote_list'
     put 'vote/:post_id'  => 'posts#vote'
