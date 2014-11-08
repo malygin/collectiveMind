@@ -1,4 +1,4 @@
-$('#new_posts').fadeOut(500, function() {$('#new_posts').html("#{escape_javascript(render partial:'post', collection: @posts)}").fadeIn();});
+$('#new_posts').fadeOut(500, function() {$('#new_posts').html("#{escape_javascript(render partial: 'post', collection: @posts)}").fadeIn();});
 -#$('li#new').toggleClass('active');
 -#$('li#old').removeClass('active');
 -#$('li#imp').removeClass('active');

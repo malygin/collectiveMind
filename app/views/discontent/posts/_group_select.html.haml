@@ -1,4 +1,4 @@
-.discontents_group_select{id: "group_select_#{group_select.id}"}
+.discontents_group_select{id: "group_select_#{group_select.id}", "data-type" => "#{@type_tab == 'new_posts' ? 'new_posts' : 'origin_posts'}"}
   -if @accepted_posts
     = select_tag 'select_for_discontents_group', options_from_collection_for_select(@accepted_posts, "id", "content"),
-    prompt: t('form.discontent.select_aspect_prompt'), onchange: "select_for_discontents_group(this,#{@project.id},#{group_select.id},#{@list_type ? "'new_posts'" : "'origin_posts'"},#{@new_post.id});"
+    prompt: t('form.discontent.select_aspect_prompt'), onchange: "select_for_discontents_group(this,#{@project.id},#{group_select.id},#{@new_post.id},#{@type_tab == "new_posts" ? "'new_posts'" : "'origin_posts'"});"
