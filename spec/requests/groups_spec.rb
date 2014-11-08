@@ -35,6 +35,12 @@ describe 'Groups' do
       expect(current_path) == groups_path(project)
     end
 
+    it 'links to my groups' do
+      create :group_user, user: user, group: group
+      visit groups_path(project)
+      expect(page).to have_link "ls_open_group_#{group.id}"
+    end
+
     context 'create group' do
       it 'not view link' do
         expect(page).not_to have_link 'create_group'
@@ -46,15 +52,45 @@ describe 'Groups' do
       end
     end
 
-    context 'show only if member' do
+    context 'inside group only if member' do
       it 'link' do
-        #@todo показывается только если юзер член группы
+        create :group_user, user: user, group: group
+        visit groups_path(project)
+        expect(page).to have_link "open_group_#{group.id}"
       end
 
       it 'by url' do
         visit group_path(project, group)
         expect(current_path) != group_path(project, group)
       end
+    end
+
+    context 'become a member' do
+      before do
+        click_link "become_member_#{group.id}"
+      end
+
+      it { expect change(GroupUser, :count).by(1) }
+
+      it { expect(current_path) == group_path(project, group) }
+
+      it { expect(page).to have_link "ls_open_group_#{group.id}" }
+    end
+
+    context 'leave group' do
+      before do
+        create :group_user, user: user, group: group
+        visit groups_path(project, group)
+        click_link "leave_group_#{group.id}"
+      end
+
+      it { expect change(GroupUser, :count).by(-1) }
+
+      it { expect(current_path) == groups_path(project) }
+
+      it { expect(page).not_to have_link "open_group_#{group.id}" }
+
+      it { expect(page).not_to have_link "become_member_#{group.id}" }
     end
 
     it 'not have link to destroy' do
@@ -88,7 +124,29 @@ describe 'Groups' do
       it { expect(current_path) == groups_path(project) }
 
       it { expect(page).to have_content group_name }
+
       it { expect(page).to have_content group_description }
+    end
+
+    context 'edit' do
+      let (:new_name) { 'New cool name for group' }
+      before do
+        click_link "edit_group_#{group.id}"
+        fill_in 'group_name', with: new_name
+        click_button 'save_group'
+      end
+
+      it { expect(current_path) == groups_path(project) }
+
+      it { expect(page).to have_content new_name }
+    end
+
+    it 'destroy', js: true do
+      expect {
+        click_link "remove_group_#{group.id}"
+        page.driver.browser.accept_js_confirms
+        expect(current_path) == groups_path(project)
+      }.to change(Group.by_project(project), :count).by(-1)
     end
   end
 end
