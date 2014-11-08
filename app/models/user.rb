@@ -247,7 +247,7 @@ class User < ActiveRecord::Base
   end
 
   def can_vote_for(stage, project)
-    if project.status == 2 and ((project.stage1.to_i > project.proc_aspects.size ? project.proc_aspects.size - self.voted_aspects.by_project(project).size : project.stage1.to_i - self.voted_aspects.by_project(project).size) > 0)
+    if project.status == 2 and project.get_free_votes_for(self, 'lifetape') > 0
       return true
     end
     if project.status == 6 and !project.get_united_posts_for_vote(self).empty?
@@ -265,6 +265,9 @@ class User < ActiveRecord::Base
           return true
         end
       end
+    end
+    if project.status == 11 and self.voted_plan_posts.by_project(project.id).size == 0
+      return true
     end
     false
   end
