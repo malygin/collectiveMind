@@ -5,9 +5,11 @@
   $('#comment_success').fadeIn('slow').delay(1000).fadeOut('slow');
 -else
   $("#child_comments_#{@main_comment.id}").append("#{escape_javascript(render partial: 'shared/comment', object: @comment)}");
-  $("#main_comments_form_#{@main_comment.id}").html('');
-  -if @main_comment_answer
-    $("#child_comments_form_#{@main_comment_answer.id}").html('');
+  $("#form_reply_comment_#{@main_comment.id}").fadeOut().empty()
+  $('html, body').animate({ scrollTop: $('#comment_content_#{@comment.id}').offset().top}, 1000);
+  $('#comment_content_#{@comment.id}').effect("highlight",3000);
+  $('#reply_comment_#{@main_comment.id}').fadeIn()
+
 
 $("#change_comment_stat label").removeClass('btn-success active').addClass('btn-default');
 $('#change_comment_stat .btn').button('reset');

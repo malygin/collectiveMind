@@ -48,7 +48,9 @@
           %button.reply-comment.btn.btn-success.btn-xs{data:{ project: @project.id, id: comment.id, path: comment.post.class.name.underscore.pluralize}, id: "reply_comment_#{comment.id}" }=t('show.answer')
           -#=link_to t('show.answer'), {:action => :add_child_comment_form, :id => comment.post.id, :comment_id => comment.id },  :remote => true, :method => :put,  id: "add_child_comment_#{comment.id}", class: 'btn btn-success btn-xs'
         -else
-          =link_to t('show.answer'), {:action => :add_child_comment_form, :id => comment.comment.post.id, :comment_id => comment.comment.id,:answer_id => comment.id}, :remote => true, :method => :put,  id: "add_child_comment_#{comment.id}", class: 'btn btn-success btn-xs'
+          %button.reply-comment.btn.btn-success.btn-xs{data:{ project: @project.id, id: comment.id, path: comment.post.class.name.underscore.pluralize}, id: "reply_comment_#{comment.id}" }=t('show.answer')
+
+          -#=link_to t('show.answer'), {:action => :add_child_comment_form, :id => comment.comment.post.id, :comment_id => comment.comment.id,:answer_id => comment.id}, :remote => true, :method => :put,  id: "add_child_comment_#{comment.id}", class: 'btn btn-success btn-xs'
 
         - if boss?
           =link_to({action: :plus_comment, id: comment.id}, remote: true, method: :put,  id: "plus_comment_#{comment.id}") do
@@ -64,12 +66,12 @@
     %form.form-new-comment( id = "form_reply_comment_#{comment.id}"accept-charset="UTF-8" action="/project/#{@project.id}/#{comment.post.class.name.underscore.pluralize}/#{comment.post.id}/add_comment?main_comment=#{comment.id}" data-remote="true" enctype="multipart/form-data"  method="post" )
 
     -if comment.main_comment?
-      %div{id: "main_comments_form_#{comment.id}"}
-      %br
       %div{id: "child_comments_#{comment.id}"}
         -unless comment.comments.empty?
+          %br
           - comment.comments.each do |c|
             = render partial: 'shared/comment', object: c
-            %br
-    -else
-      %div{id: "child_comments_form_#{comment.id}"}
+
+
+    %div{id: "child_comments_form_#{comment.id}"}
+%br

@@ -7,7 +7,6 @@
     this.activate_button = ->
       form = $(this).closest('form');
       sendButton = form.find('.send-comment')
-      console.log(sendButton)
       if (this.value? and this.value.length > 1)
         sendButton.removeClass('disabled')
       else
@@ -48,12 +47,17 @@
     $('#comment_text_'+id).html()
     $('#redactor_comment_'+id).fadeIn()
 
+  this.cancel_reply = (e) ->
+    $(this).closest('form').fadeOut().empty()
+    $('#reply_comment_'+$(this).data('id')).fadeIn()
+
   this.reply_comment =(e) ->
     e.preventDefault()
     id = $(this).data('id')
     project = $(this).data('project')
     path = $(this).data('path')
     form = $('#form_reply_comment_'+id)
+    console.log(id)
     form.append('<br/><textarea class="form-control input-transparent comment-textarea"  name="life_tape_comment[content]" placeholder="Ваш комментарий или вопрос" ></textarea>')
     form.append('<div style="display:none"><input name="utf8" type="hidden" value="✓"><input name="_method" type="hidden" value="put"></div>')
     form.append('<div class="pull-right">
@@ -67,14 +71,16 @@
                                       Идея
                                     </label>
                                   </div>
+                                  <button class="btn btn-danger btn-sm cancel-reply" data-id="'+id+'" type="button">Отмена</button>
                                   <input class="btn btn-sm btn-info send-comment disabled" iname="commit" type="submit" value="Отправить">
                                 </div> <br/>')
-    form.hide().fadeIn(2000)
+    form.hide().fadeIn()
     $('#reply_comment_'+id).fadeOut()
 
   $('.chat-messages').on('click','button.edit-comment', this.edit_comment)
   $('.chat-messages').on('click','button.edit-cancel', this.edit_cancel)
   $('.chat-messages').on('click','button.reply-comment', this.reply_comment)
+  $('.chat-messages').on('click','button.cancel-reply', this.cancel_reply)
 
 
 
