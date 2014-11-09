@@ -11,4 +11,8 @@ WebsocketRails::EventMap.describe do
   # subscribe :client_connected, to: ModeratorChatController, with_method: :user_connected
   subscribe :incoming_message, to: ModeratorChatController, with_method: :incoming_message
   subscribe :get_history, to: ModeratorChatController, with_method: :send_history
+
+  private_channel :group_chat
+  subscribe :groups_incoming_message, to: GroupsChatController, with_method: :incoming_message
+  subscribe :groups_get_history, to: GroupsChatController, with_method: :send_history
 end
