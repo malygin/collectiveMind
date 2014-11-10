@@ -20,15 +20,15 @@
             %strong DECISION
 
     %nav#sidebar.sidebar.nav-collapse.collapse
-      - if params[:controller] == 'core/projects' and (params[:action] == 'news' or params[:action] == 'users')
+      - if params[:controller] == 'core/projects' and (params[:action] == 'news' or params[:action] == 'users' or params[:action] == 'analytics')
         = render partial: 'core/projects/left_projects', locals: { current_stage: controller.controller_path }
       - else
         = render partial: 'left_side', locals: { current_stage: controller.controller_path }
-      = render partial: 'shared/moderator_chat'
+        = render partial: 'shared/moderator_chat'
     .wrap
       %header.page-header
         .navbar
-          - if params[:controller] == 'core/projects' and (params[:action] == 'news' or params[:action] == 'users')
+          - if params[:controller] == 'core/projects' and (params[:action] == 'news' or params[:action] == 'users' or params[:action] == 'analytics')
             =render 'core/projects/top_menu_general'
           - else
             =render 'top_menu'
