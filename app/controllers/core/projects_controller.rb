@@ -7,7 +7,7 @@ class Core::ProjectsController < ApplicationController
   before_action :set_core_project, only: [:show, :edit, :update, :pr_stage, :next_stage, :destroy]
   before_filter :boss_news_authenticate , only: [:news,:users]
   after_filter  :last_seen_news , only: [:news]
-  layout 'application', only: [:news,:users]
+  layout 'application', only: [:news,:users,:analytics]
 
   # has_scope :by_project
   # has_scope :by_user
@@ -171,6 +171,17 @@ class Core::ProjectsController < ApplicationController
       end
     else
       @users = User.where(type_user: uniq_proc_users).order("score DESC").paginate(page: params[:page])
+    end
+  end
+
+  def analytics
+    @project = Core::Project.find(params[:project]) if params[:project]
+    @core_projects = current_user.current_projects_for_user
+    @core_project = @core_projects.first
+    if params[:view_concept]
+      if @project
+
+      end
     end
   end
 

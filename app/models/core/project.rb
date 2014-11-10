@@ -316,4 +316,10 @@ class Core::Project < ActiveRecord::Base
       end
     end
   end
+
+  def concept_comments
+    Concept::Comment.joins("INNER JOIN concept_posts ON concept_comments.post_id = concept_posts.id").
+      where("concept_posts.project_id = ?", self.id)
+  end
+
 end
