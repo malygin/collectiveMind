@@ -2,7 +2,7 @@
   = render 'users/user_post', user: post_estimate.user
   .media-body
     .media-heading
-      =link_to post_estimate.user, user_path(@project, post_estimate.user)
+      =link_to post_estimate.user, user_path(@project, post_estimate.user) if post_estimate.user
     .col-md-8
       %span=post_estimate.name
       %span

@@ -1,16 +1,5 @@
-%section.widget
-  %header
-    .row
-      .col-md-9
-        %h3.color-grey(style='line-height: 30px;')
-          5 этап: Оценка проектов.
-          %br
-
-  .body
-    %br
-    %br
-    .row
-      .col-md-12
-        %section.widget
-          .body
-            = render partial: '/plan/posts/post_estimate', collection: @posts
+.row
+  .col-md-12
+    %section
+      .body
+        = render partial: '/plan/posts/post_estimate', collection: @posts

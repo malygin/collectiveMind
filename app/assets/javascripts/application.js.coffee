@@ -28,6 +28,9 @@
 #= require moderator_chat
 #= require groups
 
+#= require history_jquery
+#= require history_native
+
 # @todo load initialization
 sidebarHeight = 0;
 $ ->
@@ -56,7 +59,6 @@ $ ->
   $sidebar = $("#sidebar")
 
   $sidebar.on "show.bs.collapse", (e) ->
-
     e.target is this and $sidebar.addClass("open") and $sidebar.removeClass('nav-collapse')
     if $("#sidebar").height()  > 0
       sidebarHeight =  $("#sidebar").height()
@@ -67,7 +69,6 @@ $ ->
       $sidebar.removeClass "open"
       $sidebar.addClass('nav-collapse')
       $(".content").css "margin-top", ""
-
 
   $('textarea.comment-textarea').on 'keyup', ->
     activate_button(this)
@@ -113,7 +114,6 @@ $ ->
 
   $('.userscore').editable()
 
-
   $('.carousel').carousel
     interval: 4000,
     pause: "hover"
@@ -128,6 +128,18 @@ $ ->
 
   selectize_discontent()
   selectize_concept()
+
+@history_click = (el)->
+  state =
+    title: el.getAttribute("title")
+    url: el.getAttribute("href", 2)
+  history.pushState state, state.title, state.url
+
+@history_change = (link)->
+  state =
+    title: "Massdecision"
+    url: link
+  history.pushState state, state.title, state.url
 
 @selectize_discontent= ->
   $select = $("#selectize_discontent").selectize
@@ -204,13 +216,19 @@ $('#search_users_text').on 'change', ->
 
 # @todo обновление таблицы и списка
 $('#PlanTabs li#second a').on "click", (e) ->
+  unless $('#PlanTabs li#second').prop("class") == 'disabled'
+    $('#spinner_tab2').show()
   render_table('edit')
 $('#PlanTabs li#third a').on "click", (e) ->
+  unless $('#PlanTabs li#third').prop("class") == 'disabled'
+    $('#spinner_tab3').show()
   render_concept_side()
 
 $('#PlanTabsShow li#second a').on "click", (e) ->
+  $('#spinner_tab2').show()
   render_table('show')
 $('#PlanTabsShow li#third a').on "click", (e) ->
+  $('#spinner_tab3').show()
   render_concept_side()
 
 ###################################

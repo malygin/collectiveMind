@@ -22,12 +22,9 @@ class Estimate::PostsController < PostsController
 
   def prepare_data
     @project = Core::Project.find(params[:project])
-
     @status = params[:status]
     @aspects = Discontent::Aspect.where(project_id: @project)
-    if @project.status == 11
-      @vote_all = Plan::Voting.where(plan_votings: {plan_post_id: @project.plan_post.pluck(:id) }).uniq_user.count
-    end
+    @vote_all = Plan::Voting.where(plan_votings: {plan_post_id: @project.plan_post.pluck(:id) }).uniq_user.count if @project.status == 11
   end
 
 
@@ -110,7 +107,6 @@ class Estimate::PostsController < PostsController
         plan_post.post_aspects.each do |tr|
           if tr.plan_post_stage.status == 0
             est_tr = Estimate::PostAspect.new
-            #est_tr.first_stage = false
             est_tr.plan_post_aspect = tr
             op = params[:op]['0'][tr.id.to_s]
             est_tr.op1 = op['1']
@@ -146,7 +142,6 @@ class Estimate::PostsController < PostsController
         plan_post.post_aspects.each do |tr|
           if tr.plan_post_stage.status == 0
             est_tr = Estimate::PostAspect.new
-            #est_tr.first_stage = false
             est_tr.plan_post_aspect = tr
             op = params[:op] ? (params[:op]['0'][tr.id.to_s] ? params[:op]['0'][tr.id.to_s] : 0) : 0
             est_tr.op1 = op
@@ -169,16 +164,12 @@ class Estimate::PostsController < PostsController
       end
 
     end
-
     respond_to do |format|
       if @estimate_post.save
         current_user.journals.build(type_event:'estimate_post_save', body:@estimate_post.id).save!
-
         format.html { redirect_to  action: "index"  }
-        format.json { render json: @estimate_post, status: :created, location: @estimate_post }
       else
         format.html { render action: "new" }
-        format.json { render json: @estimate_post.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -256,9 +247,7 @@ class Estimate::PostsController < PostsController
     @estimate_post.save
     @estimate_post.update_attributes(params[:estimate_post])
     current_user.journals.build(type_event:'estimate_post_update', body:@estimate_post.id).save!
-
     redirect_to estimate_post_path(@project,@estimate_post), notice: 'Оценка успешно обновлена.'
-
   end
 
   def vote_list
