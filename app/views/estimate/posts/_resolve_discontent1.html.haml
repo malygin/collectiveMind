@@ -1,4 +1,4 @@
-%div.tab-pane(id="dis_#{pa.id}" style="padding-left:10px;")
+%div.tab-pane(id="dis_#{pa.id}" style="padding-left:20px;")
   %h3.color-orange.text-center
     %b=pa.title
     %br
@@ -44,29 +44,15 @@
             =r.name
           %td
             =r.desc
+        - r.plan_post_resources.by_type('positive_s').each_with_index  do |res, ind|
+          %tr
+            %td
+              ="#{index+1}.#{ind+1}"
+            %td
+              =res.name
+            %td
+              =res.desc
 
-  %h4.color-orange.text-center
-    %b B3.
-    =t('form.concept.cond_s')
-  %br
-  %table.table.table-striped.table-bordered
-    %thead
-      %tr
-        %th
-          ="#"
-        %th
-          =t('show.concept.name_res')
-        %th
-          =t('show.concept.desc_res')
-    %tbody
-      - pa.plan_post_resources.by_type('positive_s').each_with_index do |r, index|
-        %tr
-          %td
-            =index+1
-          %td
-            =r.name
-          %td
-            =r.desc
   %br
   %br
 
@@ -182,30 +168,14 @@
             =r.name
           %td
             =r.desc
-
-
-  %h4.color-orange.text-center
-    %b C3.
-    =t('form.concept.negative_s')
-  %br
-  %table.table.table-striped.table-bordered
-    %thead
-      %tr
-        %th
-          ="#"
-        %th
-          =t('show.concept.name_res')
-        %th
-          =t('show.concept.desc_res')
-    %tbody
-      - pa.plan_post_resources.by_type('negative_s').each_with_index do |r, index|
-        %tr
-          %td
-            =index+1
-          %td
-            =r.name
-          %td
-            =r.desc
+        - r.plan_post_resources.by_type('negative_s').each_with_index  do |res, ind|
+          %tr
+            %td
+              ="#{index+1}.#{ind+1}"
+            %td
+              =res.name
+            %td
+              =res.desc
 
   %hr
   %h4.color-orange.text-center
@@ -235,29 +205,14 @@
             =r.name
           %td
             =r.desc
-
-  %h4.color-orange.text-center
-    %b D3.
-    =t('form.concept.control_s')
-  %br
-  %table.table.table-striped.table-bordered
-    %thead
-      %tr
-        %th
-          ="#"
-        %th
-          =t('show.concept.name_res')
-        %th
-          =t('show.concept.desc_res')
-    %tbody
-      - pa.plan_post_resources.by_type('control_s').each_with_index do |r, index|
-        %tr
-          %td
-            =index+1
-          %td
-            =r.name
-          %td
-            =r.desc
+        - r.plan_post_resources.by_type('control_s').each_with_index  do |res, ind|
+          %tr
+            %td
+              ="#{index+1}.#{ind+1}"
+            %td
+              =res.name
+            %td
+              =res.desc
 
   %hr
   %h4.color-orange.text-center

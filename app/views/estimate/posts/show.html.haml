@@ -147,437 +147,391 @@
                                   %span.h5.color-teal{:id => "name_post_action_#{action.id}"}=action.name
                                   %br
                                   %span.h5=action.desc
-                                  -unless action.plan_post_action_resources.nil?
+                                  -unless action.plan_post_resources.by_type('action_r').nil?
                                     %br
-                                    -action.plan_post_action_resources.each  do |res|
+                                    -action.plan_post_resources.by_type('action_r').each  do |res|
                                       .label.label-danger=res.name
 
-        #tab3.tab-pane
-          .form-horizontal
-            %fieldset
-              #modal_concept_action
-              .col-md-4#concept_side
-                - unless @plan_post.post_stages.nil?
-                  %ul#menu-levels-collapse.side-nav
-                    -@plan_post.post_stages.each_with_index do |stage, index|
-                      %li.panel
-                        %a.accordion-toggle{"data-parent" => "#menu-levels-collapse", "data-toggle" => "collapse", href: "#sub-menu-#{index}-collapse"}
-                          %b="#{t('form.plan.stage.doc')} #{index+1}. "
-                          =stage.name
-                        - unless stage.plan_post_aspects.nil?
-                          %ul.panel-collapse.collapse.in{id: "sub-menu-#{index}-collapse"}
-                            - stage.plan_post_aspects.each_with_index do |concept, i|
-                              %li.concept_side{id: "li_concept_#{concept.id}"}
-                                %a(href="#dis_#{concept.id}" data-toggle="tab")
-                                  ="#{i+1}. #{concept.title}"
-                                  -if concept.estimate_post_aspect(@post.id)
-                                    %span.color-green= "#{concept.estimate_post_aspect(@post.id).score(@est_stat)} %"
-
+      #tab3.tab-pane
+        .form-horizontal
+          %fieldset
+            #modal_concept_action
+            .col-md-4#concept_side
+              - unless @plan_post.post_stages.nil?
+                %ul#menu-levels-collapse.side-nav
+                  -@plan_post.post_stages.each_with_index do |stage, index|
                     %li.panel
-                      %a.color-green(href="#negative" data-toggle="tab")
-                        %b=t('form.estimate.negative')
+                      %a.accordion-toggle{"data-parent" => "#menu-levels-collapse", "data-toggle" => "collapse", href: "#sub-menu-#{index}-collapse"}
+                        %b="#{t('form.plan.stage.doc')} #{index+1}. "
+                        =stage.name
+                      - unless stage.plan_post_aspects.nil?
+                        %ul.panel-collapse.collapse.in{id: "sub-menu-#{index}-collapse"}
+                          - stage.plan_post_aspects.each_with_index do |concept, i|
+                            %li.concept_side{id: "li_concept_#{concept.id}"}
+                              %a(href="#dis_#{concept.id}" data-toggle="tab")
+                                ="#{i+1}. #{concept.title}"
+                                -if concept.estimate_post_aspect(@post.id)
+                                  %span.color-green= "#{concept.estimate_post_aspect(@post.id).score(@est_stat)} %"
 
-              .col-md-8
-                %div.tab-content
-                  - @post.post_aspects_all.each_with_index do |tr, index|
-                    %div.tab-pane(id="dis_#{tr.plan_post_aspect.id}" style="padding-left:10px;")
-                      =t('form.estimate.effect')
-                      %span.red_est=tr.score(@est_stat)
+                  %li.panel
+                    %a.color-green(href="#negative" data-toggle="tab")
+                      %b=t('form.estimate.negative')
+
+            .col-md-8
+              %div.tab-content
+                - @post.post_aspects_all.each_with_index do |tr, index|
+                  %div.tab-pane(id="dis_#{tr.plan_post_aspect.id}" style="padding-left:20px;")
+                    =t('form.estimate.effect')
+                    %span.red_est=tr.score(@est_stat)
+                    %br
+                    %h3.color-orange.text-center
+                      %b=tr.plan_post_aspect.title
                       %br
-                      %h3.color-orange.text-center
-                        %b=tr.plan_post_aspect.title
-                        %br
-                        %br
-                      %h4.color-orange.text-center
-                        %b A1.
-                        =t('form.concept.novation_what')
-                      .form-group
-                        =simple_format(tr.plan_post_aspect.name)
-
-                      %h4.color-orange.text-center
-                        %b A2.
-                        =t('form.concept.novation_how')
-                      .form-group.has-danger
-                        =simple_format(tr.plan_post_aspect.content)
-
-                      %hr
-                      %h4.color-orange.text-center
-                        %b B1.
-                        =t('form.concept.cond')
-                      .form-group.has-success= display_content(tr.plan_post_aspect.positive)
-
-                      %h4.color-orange.text-center
-                        %b B2.
-                        =t('form.concept.cond_res')
                       %br
-                      %table.table.table-striped.table-bordered
-                        %thead
+                    %h4.color-orange.text-center
+                      %b A1.
+                      =t('form.concept.novation_what')
+                    .form-group
+                      =simple_format(tr.plan_post_aspect.name)
+
+                    %h4.color-orange.text-center
+                      %b A2.
+                      =t('form.concept.novation_how')
+                    .form-group.has-danger
+                      =simple_format(tr.plan_post_aspect.content)
+
+                    %hr
+                    %h4.color-orange.text-center
+                      %b B1.
+                      =t('form.concept.cond')
+                    .form-group.has-success= display_content(tr.plan_post_aspect.positive)
+
+                    %h4.color-orange.text-center
+                      %b B2.
+                      =t('form.concept.cond_res')
+                    %br
+                    %table.table.table-striped.table-bordered
+                      %thead
+                        %tr
+                          %th
+                            ="#"
+                          %th
+                            =t('show.concept.name_res')
+                          %th
+                            =t('show.concept.desc_res')
+                      %tbody
+                        - tr.plan_post_aspect.plan_post_resources.by_type('positive_r').each_with_index do |r, index|
                           %tr
-                            %th
-                              ="#"
-                            %th
-                              =t('show.concept.name_res')
-                            %th
-                              =t('show.concept.desc_res')
-                        %tbody
-                          - tr.plan_post_aspect.plan_post_resources.by_type('positive_r').each_with_index do |r, index|
+                            %td
+                              =index+1
+                            %td
+                              =r.name
+                            %td
+                              =r.desc
+                          - r.plan_post_resources.by_type('positive_s').each_with_index  do |res, ind|
                             %tr
                               %td
-                                =index+1
+                                ="#{index+1}.#{ind+1}"
                               %td
-                                =r.name
+                                =res.name
                               %td
-                                =r.desc
+                                =res.desc
 
-                      %h4.color-orange.text-center
-                        %b B3.
-                        =t('form.concept.cond_s')
-                      %br
-                      %table.table.table-striped.table-bordered
-                        %thead
+                    %hr
+                    #render_get_concept_actions
+                    %hr
+                    %h4.color-orange.text-center
+                      %b C1.
+                      =t('form.concept.negative')
+                    .form-group.has-success= display_content(tr.plan_post_aspect.negative)
+
+                    %h4.color-orange.text-center
+                      %b C2.
+                      =t('form.concept.negative_res')
+                    %br
+                    %table.table.table-striped.table-bordered
+                      %thead
+                        %tr
+                          %th
+                            ="#"
+                          %th
+                            =t('show.concept.name_res')
+                          %th
+                            =t('show.concept.desc_res')
+                      %tbody
+                        - tr.plan_post_aspect.plan_post_resources.by_type('negative_r').each_with_index do |r, index|
                           %tr
-                            %th
-                              ="#"
-                            %th
-                              =t('show.concept.name_res')
-                            %th
-                              =t('show.concept.desc_res')
-                        %tbody
-                          - tr.plan_post_aspect.plan_post_resources.by_type('positive_s').each_with_index do |r, index|
+                            %td
+                              =index+1
+                            %td
+                              =r.name
+                            %td
+                              =r.desc
+                          - r.plan_post_resources.by_type('negative_s').each_with_index  do |res, ind|
                             %tr
                               %td
-                                =index+1
+                                ="#{index+1}.#{ind+1}"
                               %td
-                                =r.name
+                                =res.name
                               %td
-                                =r.desc
+                                =res.desc
 
-                      %hr
-                      #render_get_concept_actions
-                      %hr
-                      %h4.color-orange.text-center
-                        %b C1.
-                        =t('form.concept.negative')
-                      .form-group.has-success= display_content(tr.plan_post_aspect.negative)
+                    %hr
+                    %h4.color-orange.text-center
+                      %b D1.
+                      =t('form.concept.control')
+                    .form-group.has-success= display_content(tr.plan_post_aspect.control)
 
-                      %h4.color-orange.text-center
-                        %b C2.
-                        =t('form.concept.negative_res')
-                      %br
-                      %table.table.table-striped.table-bordered
-                        %thead
+                    %h4.color-orange.text-center
+                      %b D2.
+                      =t('form.concept.control_res')
+                    %br
+                    %table.table.table-striped.table-bordered
+                      %thead
+                        %tr
+                          %th
+                            ="#"
+                          %th
+                            =t('show.concept.name_res')
+                          %th
+                            =t('show.concept.desc_res')
+                      %tbody
+                        - tr.plan_post_aspect.plan_post_resources.by_type('control_r').each_with_index do |r, index|
                           %tr
-                            %th
-                              ="#"
-                            %th
-                              =t('show.concept.name_res')
-                            %th
-                              =t('show.concept.desc_res')
-                        %tbody
-                          - tr.plan_post_aspect.plan_post_resources.by_type('negative_r').each_with_index do |r, index|
+                            %td
+                              =index+1
+                            %td
+                              =r.name
+                            %td
+                              =r.desc
+                          - r.plan_post_resources.by_type('control_s').each_with_index  do |res, ind|
                             %tr
                               %td
-                                =index+1
+                                ="#{index+1}.#{ind+1}"
                               %td
-                                =r.name
+                                =res.name
                               %td
-                                =r.desc
+                                =res.desc
 
+                    %hr
+                    %h4.color-orange.text-center
+                      %b E1.
+                      =t('form.concept.obstacles_bcd')
+                    .form-group.has-success= display_content(tr.plan_post_aspect.obstacles)
 
-                      %h4.color-orange.text-center
-                        %b C3.
-                        =t('form.concept.negative_s')
+                    %hr
+                    %h4.color-orange.text-center
+                      %b F1.
+                      =t('form.concept.problems')
+                    .form-group.has-success= display_content(tr.plan_post_aspect.problems)
+
+                    %h4.color-orange.text-center
+                      %b F2.
+                      =t('form.concept.reality')
+                    .form-group.has-success= display_content(tr.plan_post_aspect.reality)
+
+                    %br
+                    %br
+                    - if @est_stat == 1
+                      =t('form.estimate.title_1')
                       %br
-                      %table.table.table-striped.table-bordered
-                        %thead
-                          %tr
-                            %th
-                              ="#"
-                            %th
-                              =t('show.concept.name_res')
-                            %th
-                              =t('show.concept.desc_res')
-                        %tbody
-                          - tr.plan_post_aspect.plan_post_resources.by_type('negative_s').each_with_index do |r, index|
-                            %tr
-                              %td
-                                =index+1
-                              %td
-                                =r.name
-                              %td
-                                =r.desc
-
-                      %hr
-                      %h4.color-orange.text-center
-                        %b D1.
-                        =t('form.concept.control')
-                      .form-group.has-success= display_content(tr.plan_post_aspect.control)
-
-                      %h4.color-orange.text-center
-                        %b D2.
-                        =t('form.concept.control_res')
-                      %br
-                      %table.table.table-striped.table-bordered
-                        %thead
-                          %tr
-                            %th
-                              ="#"
-                            %th
-                              =t('show.concept.name_res')
-                            %th
-                              =t('show.concept.desc_res')
-                        %tbody
-                          - tr.plan_post_aspect.plan_post_resources.by_type('control_r').each_with_index do |r, index|
-                            %tr
-                              %td
-                                =index+1
-                              %td
-                                =r.name
-                              %td
-                                =r.desc
-
-                      %h4.color-orange.text-center
-                        %b D3.
-                        =t('form.concept.control_s')
-                      %br
-                      %table.table.table-striped.table-bordered
-                        %thead
-                          %tr
-                            %th
-                              ="#"
-                            %th
-                              =t('show.concept.name_res')
-                            %th
-                              =t('show.concept.desc_res')
-                        %tbody
-                          - tr.plan_post_aspect.plan_post_resources.by_type('control_s').each_with_index do |r, index|
-                            %tr
-                              %td
-                                =index+1
-                              %td
-                                =r.name
-                              %td
-                                =r.desc
-
-                      %hr
-                      %h4.color-orange.text-center
-                        %b E1.
-                        =t('form.concept.obstacles_bcd')
-                      .form-group.has-success= display_content(tr.plan_post_aspect.obstacles)
-
-                      %hr
-                      %h4.color-orange.text-center
-                        %b F1.
-                        =t('form.concept.problems')
-                      .form-group.has-success= display_content(tr.plan_post_aspect.problems)
-
-                      %h4.color-orange.text-center
-                        %b F2.
-                        =t('form.concept.reality')
-                      .form-group.has-success= display_content(tr.plan_post_aspect.reality)
-
+                      %span{class:css_class_estimate_simple(tr.on1)}
+                        = estimate_trans_simple('on',tr.on1)
                       %br
                       %br
-                      - if @est_stat == 1
-                        =t('form.estimate.title_1')
-                        %br
-                        %span{class:css_class_estimate_simple(tr.on1)}
-                          = estimate_trans_simple('on',tr.on1)
-                        %br
-                        %br
-                        - unless tr.on == ''
-                          %b=t('form.estimate.descr')
-                          = simple_format(tr.on)
-                        %br
-
-                        %br
-                        =t('form.estimate.title_2')
-                        %br
-                        %span{class:css_class_estimate_simple(tr.ozs1)}
-                          = estimate_trans_simple('ozs',tr.ozs1)
-                        %br
-
-                        %br
-                        - unless tr.ozs == ''
-                          %b=t('form.estimate.descr')
-                          = simple_format(tr.ozs)
-                        %br
-                        =t('form.estimate.title_3')
-                        %br
-                        %span{class:css_class_estimate_simple(tr.op1)}
-                          = estimate_trans_simple('op',tr.op1)
-                        %br
-                        %br
-                        - unless tr.op == ''
-                          %b=t('form.estimate.descr')
-                          = simple_format(tr.op)
-
-                        %br
-                        =t('form.estimate.title_4')
-                        %br
-                        %span{class:css_class_estimate_simple(tr.ozf1)}
-                          = estimate_trans_simple('ozf',tr.ozf1)
-                        %br
-                        %br
-                        - unless tr.ozf == ''
-                          %b=t('form.estimate.descr')
-                          = simple_format(tr.ozf)
-                        %br
-                      - else
-                        %b=t('form.estimate.title_5')
-                        %br
-                        =t('form.estimate.fullness_1')
-                        %span{class:css_class_estimate_all(tr.on1)}= estimate_trans_all(tr.on1)
-                        %br
-                        =t('form.estimate.fullness_2')
-                        %span{class:css_class_estimate_all(tr.on2)}=estimate_trans_all(tr.on2)
-                        %br
-                        =t('form.estimate.fullness_3')
-                        %span{class:css_class_estimate_all(tr.on3)}=estimate_trans_all(tr.on3)
-                        %br
-                        =t('form.estimate.fullness_4')
-                        %span{class:css_class_estimate_all(tr.on4)}=estimate_trans_all(tr.on4)
-                        %br
-                        %br
-                        - unless tr.on == ''
-                          %b=t('form.estimate.descr')
-                          = simple_format(tr.on)
-                        %br
-
-                        %br
-                        %b=t('form.estimate.title_6')
-                        %br
-                        =t('form.estimate.select_4')
-                        %span{class:css_class_estimate_all(tr.ozs1)}=estimate_trans_all(tr.ozs1)
-                        %br
-                        =t('form.estimate.select_3')
-                        %span{class:css_class_estimate_all(tr.ozs2)}=estimate_trans_all(tr.ozs2)
-                        %br
-                        =t('form.estimate.select_2')
-                        %span{class:css_class_estimate_all(tr.ozs3)}=estimate_trans_all(tr.ozs3)
-                        %br
-                        =t('form.estimate.select_0')
-                        %span{class:css_class_estimate_all(tr.ozs4)}=estimate_trans_all(tr.ozs4)
-                        %br
-
-                        %br
-                        - unless tr.ozs == ''
-                          %b=t('form.estimate.descr')
-                          = simple_format(tr.ozs)
-                        %br
-                        %b=t('form.estimate.title_7')
-                        %br
-                        =t('form.estimate.fullness_5')
-                        %span{class:css_class_estimate_all(tr.op1)}=estimate_trans_all(tr.op1)
-                        %br
-                        =t('form.estimate.fullness_6')
-                        %span{class:css_class_estimate_all(tr.op2)}=estimate_trans_all(tr.op2)
-                        %br
-                        =t('form.estimate.fullness_7')
-                        %span{class:css_class_estimate_all(tr.op3)}=estimate_trans_all(tr.op3)
-                        %br
-                        =t('form.estimate.fullness_8')
-                        %span{class:css_class_estimate_all(tr.op4)}=estimate_trans_all(tr.op4)
-                        %br
-                        %br
-                        - unless tr.op == ''
-                          %b=t('form.estimate.descr')
-                          = simple_format(tr.op)
-
-                        %br
-                        %b=t('form.estimate.title_8')
-                        %br
-                        =t('form.estimate.select_4')
-                        %span{class:css_class_estimate_all(tr.ozf1)}=estimate_trans_all(tr.ozf1)
-                        %br
-                        =t('form.estimate.select_3')
-                        %span{class:css_class_estimate_all(tr.ozf2)}=estimate_trans_all(tr.ozf2)
-                        %br
-                        =t('form.estimate.select_2')
-                        %span{class:css_class_estimate_all(tr.ozf3)}=estimate_trans_all(tr.ozf3)
-                        %br
-                        =t('form.estimate.select_0')
-                        %span{class:css_class_estimate_all(tr.ozf4)}=estimate_trans_all(tr.ozf4)
-                        %br
-                        %br
-                        - unless tr.ozf == ''
-                          %b=t('form.estimate.descr')
-                          = simple_format(tr.ozf)
-                        %br
-
-
-                  %div.tab-pane#negative
-                    -if @est_stat == 1
-                      %br
-                      =t('form.estimate.desc_long_1')
-                      %br
-                      =t('form.estimate.group_select_1')
-                      %br
-                      %span{class:css_class_estimate_all( @post.nepr1)}
-                        = estimate_trans_simple('nepr1', @post.nepr1)
-                      %br
+                      - unless tr.on == ''
+                        %b=t('form.estimate.descr')
+                        = simple_format(tr.on)
                       %br
 
-                      %b=t('form.estimate.descr')
-                      = simple_format(@post.nepr)
                       %br
+                      =t('form.estimate.title_2')
                       %br
-                      =t('form.estimate.desc_long_2')
-                      %br
-                      =t('form.estimate.group_select_2')
-                      %br
-                      %span{class:css_class_estimate_all( @post.nep1)}
-                        = estimate_trans_simple('nep1', @post.nep1 )
-                      %br
+                      %span{class:css_class_estimate_simple(tr.ozs1)}
+                        = estimate_trans_simple('ozs',tr.ozs1)
                       %br
 
-                      %b=t('form.estimate.descr')
-                      = simple_format( @post.nep)
+                      %br
+                      - unless tr.ozs == ''
+                        %b=t('form.estimate.descr')
+                        = simple_format(tr.ozs)
+                      %br
+                      =t('form.estimate.title_3')
+                      %br
+                      %span{class:css_class_estimate_simple(tr.op1)}
+                        = estimate_trans_simple('op',tr.op1)
+                      %br
+                      %br
+                      - unless tr.op == ''
+                        %b=t('form.estimate.descr')
+                        = simple_format(tr.op)
 
-                    -else
                       %br
-                      %b=t('form.estimate.desc_long_1')
+                      =t('form.estimate.title_4')
                       %br
-                      %b=t('form.estimate.group_select_3')
+                      %span{class:css_class_estimate_simple(tr.ozf1)}
+                        = estimate_trans_simple('ozf',tr.ozf1)
+                      %br
+                      %br
+                      - unless tr.ozf == ''
+                        %b=t('form.estimate.descr')
+                        = simple_format(tr.ozf)
+                      %br
+                    - else
+                      %b=t('form.estimate.title_5')
+                      %br
+                      =t('form.estimate.fullness_1')
+                      %span{class:css_class_estimate_all(tr.on1)}= estimate_trans_all(tr.on1)
+                      %br
+                      =t('form.estimate.fullness_2')
+                      %span{class:css_class_estimate_all(tr.on2)}=estimate_trans_all(tr.on2)
+                      %br
+                      =t('form.estimate.fullness_3')
+                      %span{class:css_class_estimate_all(tr.on3)}=estimate_trans_all(tr.on3)
+                      %br
+                      =t('form.estimate.fullness_4')
+                      %span{class:css_class_estimate_all(tr.on4)}=estimate_trans_all(tr.on4)
+                      %br
+                      %br
+                      - unless tr.on == ''
+                        %b=t('form.estimate.descr')
+                        = simple_format(tr.on)
+                      %br
+
+                      %br
+                      %b=t('form.estimate.title_6')
                       %br
                       =t('form.estimate.select_4')
-                      %span{class:css_class_estimate_all( @post.nepr1)}= estimate_trans_all( @post.nepr1)
+                      %span{class:css_class_estimate_all(tr.ozs1)}=estimate_trans_all(tr.ozs1)
                       %br
                       =t('form.estimate.select_3')
-                      %span{class:css_class_estimate_all( @post.nepr2)}= estimate_trans_all( @post.nepr2)
+                      %span{class:css_class_estimate_all(tr.ozs2)}=estimate_trans_all(tr.ozs2)
                       %br
                       =t('form.estimate.select_2')
-                      %span{class:css_class_estimate_all( @post.nepr3)}= estimate_trans_all( @post.nepr3)
+                      %span{class:css_class_estimate_all(tr.ozs3)}=estimate_trans_all(tr.ozs3)
                       %br
-                      =t('form.estimate.select_1')
-                      %span{class:css_class_estimate_all( @post.nepr4)}= estimate_trans_all( @post.nepr4)
-                      %br
+                      =t('form.estimate.select_0')
+                      %span{class:css_class_estimate_all(tr.ozs4)}=estimate_trans_all(tr.ozs4)
                       %br
 
-                      %b=t('form.estimate.descr')
-                      = simple_format( @post.nepr)
+                      %br
+                      - unless tr.ozs == ''
+                        %b=t('form.estimate.descr')
+                        = simple_format(tr.ozs)
+                      %br
+                      %b=t('form.estimate.title_7')
+                      %br
+                      =t('form.estimate.fullness_5')
+                      %span{class:css_class_estimate_all(tr.op1)}=estimate_trans_all(tr.op1)
+                      %br
+                      =t('form.estimate.fullness_6')
+                      %span{class:css_class_estimate_all(tr.op2)}=estimate_trans_all(tr.op2)
+                      %br
+                      =t('form.estimate.fullness_7')
+                      %span{class:css_class_estimate_all(tr.op3)}=estimate_trans_all(tr.op3)
+                      %br
+                      =t('form.estimate.fullness_8')
+                      %span{class:css_class_estimate_all(tr.op4)}=estimate_trans_all(tr.op4)
                       %br
                       %br
-                      %b=t('form.estimate.desc_long_2')
+                      - unless tr.op == ''
+                        %b=t('form.estimate.descr')
+                        = simple_format(tr.op)
+
                       %br
-                      %b=t('form.estimate.group_select_4')
+                      %b=t('form.estimate.title_8')
                       %br
                       =t('form.estimate.select_4')
-                      %span{class:css_class_estimate_all( @post.nep1)}= estimate_trans_all( @post.nep1)
+                      %span{class:css_class_estimate_all(tr.ozf1)}=estimate_trans_all(tr.ozf1)
                       %br
                       =t('form.estimate.select_3')
-                      %span{class:css_class_estimate_all( @post.nep2)}= estimate_trans_all( @post.nep2)
+                      %span{class:css_class_estimate_all(tr.ozf2)}=estimate_trans_all(tr.ozf2)
                       %br
                       =t('form.estimate.select_2')
-                      %span{class:css_class_estimate_all( @post.nep3)}= estimate_trans_all( @post.nep3)
+                      %span{class:css_class_estimate_all(tr.ozf3)}=estimate_trans_all(tr.ozf3)
                       %br
-                      =t('form.estimate.select_1')
-                      %span{class:css_class_estimate_all( @post.nep4)}= estimate_trans_all( @post.nep4)
+                      =t('form.estimate.select_0')
+                      %span{class:css_class_estimate_all(tr.ozf4)}=estimate_trans_all(tr.ozf4)
                       %br
+                      %br
+                      - unless tr.ozf == ''
+                        %b=t('form.estimate.descr')
+                        = simple_format(tr.ozf)
                       %br
 
-                      %b=t('form.estimate.descr')
-                      = simple_format( @post.nep)
 
+                %div.tab-pane#negative
+                  -if @est_stat == 1
+                    %br
+                    =t('form.estimate.desc_long_1')
+                    %br
+                    =t('form.estimate.group_select_1')
+                    %br
+                    %span{class:css_class_estimate_all( @post.nepr1)}
+                      = estimate_trans_simple('nepr1', @post.nepr1)
+                    %br
+                    %br
 
+                    %b=t('form.estimate.descr')
+                    = simple_format(@post.nepr)
+                    %br
+                    %br
+                    =t('form.estimate.desc_long_2')
+                    %br
+                    =t('form.estimate.group_select_2')
+                    %br
+                    %span{class:css_class_estimate_all( @post.nep1)}
+                      = estimate_trans_simple('nep1', @post.nep1 )
+                    %br
+                    %br
+
+                    %b=t('form.estimate.descr')
+                    = simple_format( @post.nep)
+
+                  -else
+                    %br
+                    %b=t('form.estimate.desc_long_1')
+                    %br
+                    %b=t('form.estimate.group_select_3')
+                    %br
+                    =t('form.estimate.select_4')
+                    %span{class:css_class_estimate_all( @post.nepr1)}= estimate_trans_all( @post.nepr1)
+                    %br
+                    =t('form.estimate.select_3')
+                    %span{class:css_class_estimate_all( @post.nepr2)}= estimate_trans_all( @post.nepr2)
+                    %br
+                    =t('form.estimate.select_2')
+                    %span{class:css_class_estimate_all( @post.nepr3)}= estimate_trans_all( @post.nepr3)
+                    %br
+                    =t('form.estimate.select_1')
+                    %span{class:css_class_estimate_all( @post.nepr4)}= estimate_trans_all( @post.nepr4)
+                    %br
+                    %br
+
+                    %b=t('form.estimate.descr')
+                    = simple_format( @post.nepr)
+                    %br
+                    %br
+                    %b=t('form.estimate.desc_long_2')
+                    %br
+                    %b=t('form.estimate.group_select_4')
+                    %br
+                    =t('form.estimate.select_4')
+                    %span{class:css_class_estimate_all( @post.nep1)}= estimate_trans_all( @post.nep1)
+                    %br
+                    =t('form.estimate.select_3')
+                    %span{class:css_class_estimate_all( @post.nep2)}= estimate_trans_all( @post.nep2)
+                    %br
+                    =t('form.estimate.select_2')
+                    %span{class:css_class_estimate_all( @post.nep3)}= estimate_trans_all( @post.nep3)
+                    %br
+                    =t('form.estimate.select_1')
+                    %span{class:css_class_estimate_all( @post.nep4)}= estimate_trans_all( @post.nep4)
+                    %br
+                    %br
+
+                    %b=t('form.estimate.descr')
+                    = simple_format( @post.nep)
+
+%br
 = render 'shared/post_edit_bar', post: @post

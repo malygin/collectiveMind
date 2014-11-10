@@ -213,10 +213,12 @@ $('#search_users_text').on 'change', ->
 
 # @todo обновление таблицы и списка
 $('#PlanTabs li#second a').on "click", (e) ->
-  $('#spinner_tab2').show()
+  unless $('#PlanTabs li#second').prop("class") == 'disabled'
+    $('#spinner_tab2').show()
   render_table('edit')
 $('#PlanTabs li#third a').on "click", (e) ->
-  $('#spinner_tab3').show()
+  unless $('#PlanTabs li#third').prop("class") == 'disabled'
+    $('#spinner_tab3').show()
   render_concept_side()
 
 $('#PlanTabsShow li#second a').on "click", (e) ->
