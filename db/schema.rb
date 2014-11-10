@@ -365,10 +365,10 @@ ActiveRecord::Schema.define(version: 20141109213228) do
     t.string   "secret"
     t.string   "secret2"
     t.string   "secret3"
-    t.boolean  "advices_discontent"
-    t.boolean  "advices_concept"
     t.string   "color"
     t.string   "code"
+    t.boolean  "advices_discontent"
+    t.boolean  "advices_concept"
     t.integer  "moderator_id"
   end
 
