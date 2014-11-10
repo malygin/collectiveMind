@@ -287,7 +287,7 @@ activate_add_aspects()
   $('#post_'+val).animate({height: 0, opacity: 0.000}, 1000, ->
     $(this).remove())
 
-@select_for_discontents_group= (el,project,post)->
+@select_for_discontents_group= (el,project,post,parent,type_tab)->
   project_id = project
   dispost_id = post
   group_id = $(el).val()
@@ -297,6 +297,17 @@ activate_add_aspects()
       type: "put"
       data:
         group_id: group_id
+        type_tab: type_tab
+        parent_post_id: parent
+
+$('#tab_posts li#new a').on 'click', ->
+  project_id = $(this).attr("data-project")
+  if project_id
+    $.ajax
+      url: "/project/#{project_id}/discontent/posts/unions"
+      type: "get"
+      data:
+        type_tab: "new_posts"
 
 ###############################################
 # @todo work with concept_post

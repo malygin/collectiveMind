@@ -14,16 +14,16 @@ class Essay::PostsController < PostsController
   end
 
   def index
-    if @stage == '1' and @project.status == 2 and (@project.stage1.to_i - current_user.voted_aspects.by_project(@project).size) != 0
+    if @stage == '1' and @project.status == 2 and current_user.can_vote_for(:life_tape, @project)
       redirect_to life_tape_posts_path(@project, action: 'vote_list')
       return
-    elsif @stage == '2' and @project.status == 6 and !@project.get_united_posts_for_vote(current_user).empty?
+    elsif @stage == '2' and @project.status == 6 and current_user.can_vote_for(:discontent, @project)
       redirect_to discontent_posts_path(@project, action: 'vote_list')
       return
-    elsif @stage == '3' and @project.status == 8 and view_context.get_concept_posts_for_vote?(@project)
+    elsif @stage == '3' and @project.status == 8 and current_user.can_vote_for(:concept, @project)
       redirect_to concept_posts_path(@project, action: 'vote_list')
       return
-    elsif @stage == '5' and @project.status == 11 and current_user.plan_post_votings.size == 0
+    elsif @stage == '5' and @project.status == 11 and current_user.can_vote_for(:plan, @project)
       redirect_to estimate_posts_path(@project, action: 'vote_list')
       return
     end

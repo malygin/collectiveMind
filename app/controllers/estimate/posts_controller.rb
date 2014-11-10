@@ -32,12 +32,7 @@ class Estimate::PostsController < PostsController
 
 
   def index
-    if @project.status == 11
-      if current_user.voted_plan_posts.by_project(@project.id).size == 0
-        redirect_to action: "vote_list"
-        return
-      end
-    end
+    return redirect_to action: 'vote_list' if current_user.can_vote_for(:plan, @project)
     @posts = Plan::Post.where(project_id: @project, status: 0).paginate(page: params[:page])
     @est_stat = @posts.first.estimate_status.nil? ? 0 : @posts.first.estimate_status if @posts.first
     respond_to do |format|
@@ -268,6 +263,7 @@ class Estimate::PostsController < PostsController
 
   def vote_list
     @project = Core::Project.find(params[:project])
+    return redirect_to action: 'vote_list' unless current_user.can_vote_for(:plan, @project)
     @posts = Plan::Post.where(project_id: @project, status: 0).paginate(page: params[:page])
     @est_stat = @posts.first.estimate_status.nil? ? 0 : @posts.first.estimate_status
     @number_v = @project.stage5 - current_user.voted_plan_posts.by_project(@project.id).size
