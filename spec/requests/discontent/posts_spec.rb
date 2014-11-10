@@ -295,6 +295,7 @@ describe 'Discontent ' do
 
       it 'add new group ', js:true do
         click_link "add_record"
+        sleep(5)
         fill_in 'discontent_post_content', with: 'new group content'
         fill_in 'discontent_post_whered', with: 'new group where'
         fill_in 'discontent_post_whend', with: 'new group when'

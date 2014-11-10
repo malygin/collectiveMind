@@ -39,6 +39,7 @@ describe 'Concept ' do
 
       it ' add new concept', js: true do
         click_link "new_concept_#{@discontent1.id}"
+        sleep(5)
         # expect(page).to have_selector('#btn_improve', visible: true)
         # expect(page).to have_selector('#send_post_concept', visible: true)
         # expect(page).to have_selector('#pa_positive', visible: false)
@@ -123,6 +124,7 @@ describe 'Concept ' do
 
       it ' can click button to resource', js: true do
         click_link "new_concept_#{@discontent1.id}"
+        sleep(5)
         # expect(page).to have_selector('#btn_improve', visible: true)
         # expect(page).to have_selector('#send_post_concept', visible: true)
         # expect(page).to have_selector('#pa_positive', visible: false)
@@ -239,6 +241,7 @@ describe 'Concept ' do
 
       it ' add new empty concept with error', js: true do
         click_link "new_concept_#{@discontent1.id}"
+        sleep(5)
         expect(page).to have_content 'Перейти к описанию Идеи'
         click_button 'Перейти к описанию Идеи'
         # expect(page).to have_content @discontent1.content
@@ -364,6 +367,7 @@ describe 'Concept ' do
 
       it ' add new concept', js: true do
         click_link "new_concept_#{@discontent1.id}"
+        sleep(10)
         # expect(page).to have_selector('#btn_improve', visible: true)
         # expect(page).to have_selector('#send_post_concept', visible: true)
         # expect(page).to have_selector('#pa_positive', visible: false)
