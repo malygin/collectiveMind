@@ -16,6 +16,10 @@
 #= require autocomplete-rails-dev
 #= require selectize
 #= require liFixar/jquery.liFixar
+#= require nvd3/d3.v3
+#= require nvd3/nv.d3.min
+
+
 
 #= require tinymce
 #= require websocket_rails/main
@@ -116,7 +120,7 @@ $ ->
   $('.carousel').carousel
     interval: 4000,
     pause: "hover"
-#    wrap: false
+  #    wrap: false
 
   $('.datepicker').datepicker(
     format: 'yyyy-mm-dd'
@@ -209,8 +213,8 @@ $('#search_users_text').on 'change', ->
 
     plugins:
       ["advlist autolink link image lists charmap print preview hr anchor pagebreak spellchecker",
-      "searchreplace wordcount visualblocks visualchars code fullscreen insertdatetime media nonbreaking",
-      "save table contextmenu directionality emoticons template paste textcolor"]
+       "searchreplace wordcount visualblocks visualchars code fullscreen insertdatetime media nonbreaking",
+       "save table contextmenu directionality emoticons template paste textcolor"]
     toolbar: "insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image | print preview media fullpage | forecolor backcolor emoticons"
 
 # @todo обновление таблицы и списка
