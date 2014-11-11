@@ -80,11 +80,11 @@
               %td
                 Все Аспекты
               %td
-                =@project.proc_aspects.count
+                =@project.concept_ongoing_post.count
               %td
-                =@project.proc_aspects.count
+                =@project.concept_ongoing_post.count
               %td
-                =@project.proc_aspects.count
+                =@project.concept_ongoing_post.count
 
             -@project.proc_aspects.order(:id).each do |asp|
               %tr
