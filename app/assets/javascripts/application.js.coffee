@@ -29,7 +29,6 @@
 #= require groups
 
 #= require history_jquery
-#= require history_native
 
 # @todo load initialization
 sidebarHeight = 0;

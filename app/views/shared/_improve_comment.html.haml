@@ -46,7 +46,7 @@
       .time.pull-left
         =time_ago_in_words(improve_comment.created_at)
       %br
-      -if improve_comment.improve_disposts.present?
+      -if improve_comment.improve_disposts.present? and @project.status < 7
         %br
         %section
           .body
