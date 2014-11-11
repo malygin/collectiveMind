@@ -1,25 +1,21 @@
-%section
-  %header
-    .row
-      .col-md-12
-        %h3.color-grey
-          =t('show.to_work.fifth_title')
-  .body
-    #carousel-example-generic.carousel.slide{"data-ride" => "carousel"}
-      %ol.carousel-indicators
-        %li.active{"data-slide-to" => "0", "data-target" => "#carousel-example-generic"}
-        %li{"data-slide-to" => "1", "data-target" => "#carousel-example-generic"}
-        %li{"data-slide-to" => "2", "data-target" => "#carousel-example-generic"}
+%h3.color-grey
+  =t('show.to_work.fifth_title')
 
-      .carousel-inner
-        .item.active
-          = image_tag 'img/to_work/to_work_5_0.png', style: 'margin: auto;'
-        .item
-          = image_tag 'img/to_work/to_work_5_1.png', style: 'margin: auto;'
-        .item
-          = image_tag 'img/to_work/to_work_5_2.png', style: 'margin: auto;'
+#carousel-example-generic.carousel.slide{"data-ride" => "carousel"}
+  %ol.carousel-indicators
+    %li.active{"data-slide-to" => "0", "data-target" => "#carousel-example-generic"}
+    %li{"data-slide-to" => "1", "data-target" => "#carousel-example-generic"}
+    %li{"data-slide-to" => "2", "data-target" => "#carousel-example-generic"}
 
-      %a.left.carousel-control{"data-slide" => "prev", href: "#carousel-example-generic", role: "button"}
-        %span.glyphicon.glyphicon-chevron-left(style='color:#e5603b')
-      %a.right.carousel-control{"data-slide" => "next", href: "#carousel-example-generic", role: "button"}
-        %span.glyphicon.glyphicon-chevron-right(style='color:#e5603b')
+  .carousel-inner
+    .item.active
+      = image_tag 'img/to_work/to_work_5_0.png', style: 'margin: auto;'
+    .item
+      = image_tag 'img/to_work/to_work_5_1.png', style: 'margin: auto;'
+    .item
+      = image_tag 'img/to_work/to_work_5_2.png', style: 'margin: auto;'
+
+  %a.left.carousel-control{"data-slide" => "prev", href: "#carousel-example-generic", role: "button"}
+    %span.glyphicon.glyphicon-chevron-left(style='color:#e5603b')
+  %a.right.carousel-control{"data-slide" => "next", href: "#carousel-example-generic", role: "button"}
+    %span.glyphicon.glyphicon-chevron-right(style='color:#e5603b')

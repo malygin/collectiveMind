@@ -1,6 +1,6 @@
 %section
   .body
-    %ul.nav.nav-tabs.nav-justified{:role => "tablist", :id => "PlanTabsShow"}
+    %ul.nav.nav-tabs.nav-justified{:role => "tablist"}
       %li.active#first
         %a{"data-toggle" => "tab", :href => "#tab1", :role => "tab"}
           %small 1.
@@ -109,12 +109,10 @@
                                   %span.h5.color-teal{:id => "name_post_action_#{action.id}"}=action.name
                                   %br
                                   %span.h5=action.desc
-                                  -unless action.plan_post_action_resources.nil?
+                                  -unless action.plan_post_resources.by_type('action_r').nil?
                                     %br
-                                    -action.plan_post_action_resources.each  do |res|
+                                    -action.plan_post_resources.by_type('action_r').each  do |res|
                                       .label.label-danger=res.name
-
-
 
 
       #tab3.tab-pane
@@ -147,6 +145,7 @@
 
             .col-md-8
               = form_for @post, url: {project: @project.id, action: @post.persisted? ? 'update' : 'create'},   html: { class: 'new_or_edit' } do |f|
+                %br
                 .pull-right
                   =f.submit t('form.save'), id: "send_post_estimate", class: 'btn btn-success'
                 %br

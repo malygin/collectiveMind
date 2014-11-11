@@ -1,0 +1,6 @@
+%h2
+  = t('groups.editing')
+
+%section.widget.widget-tabs
+  .body.tab-content
+    = render partial: 'form', locals: {url: group_path(@project, @group)}

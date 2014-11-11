@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141103142309) do
+ActiveRecord::Schema.define(version: 20141109213228) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -531,7 +531,7 @@ ActiveRecord::Schema.define(version: 20141103142309) do
     t.boolean  "discuss_status"
     t.boolean  "useful"
     t.boolean  "approve_status"
-    t.boolean  "anonym"
+    t.boolean  "anonym",             default: false
   end
 
   add_index "discontent_posts", ["aspect_id"], name: "index_discontent_posts_on_aspect_id", using: :btree
@@ -904,6 +904,37 @@ ActiveRecord::Schema.define(version: 20141103142309) do
   add_index "frustrations", ["created_at"], name: "index_frustrations_on_created_at", using: :btree
   add_index "frustrations", ["status"], name: "index_frustrations_on_status", using: :btree
   add_index "frustrations", ["user_id"], name: "index_frustrations_on_user_id", using: :btree
+
+  create_table "group_chat_messages", force: true do |t|
+    t.integer  "group_id"
+    t.integer  "user_id"
+    t.string   "content"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "group_chat_messages", ["group_id"], name: "index_group_chat_messages_on_group_id", using: :btree
+  add_index "group_chat_messages", ["user_id"], name: "index_group_chat_messages_on_user_id", using: :btree
+
+  create_table "group_users", force: true do |t|
+    t.integer  "group_id"
+    t.integer  "user_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "group_users", ["group_id"], name: "index_group_users_on_group_id", using: :btree
+  add_index "group_users", ["user_id"], name: "index_group_users_on_user_id", using: :btree
+
+  create_table "groups", force: true do |t|
+    t.string   "name"
+    t.string   "description"
+    t.integer  "project_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "groups", ["project_id"], name: "index_groups_on_project_id", using: :btree
 
   create_table "help_answers", force: true do |t|
     t.text     "content"

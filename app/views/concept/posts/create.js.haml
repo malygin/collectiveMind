@@ -11,6 +11,7 @@
   $('#render_success_concept').empty();
   $("#render_success_concept").html('#{escape_javascript(render partial: 'modal_post_save')}');
   $('#modal_save_concept').modal('show');
+  history_change("#{edit_concept_post_path(@project, @concept_post)}");
   -#$('#pa_title').val('');
   -#$('#pa_name').val('');
   -#$('#pa_content').val('');

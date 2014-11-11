@@ -135,6 +135,7 @@ en:
     help_stage: Stage Help
     reflection_stage: Stage Analysis
     account: 'Profile'
+    list_groups: "List of gorups"
   stages:
     intro: Intro
     life_tape: 'Data Gathering'
@@ -521,6 +522,7 @@ en:
     delete_stage: Удалить этап?
     delete_advice: 'Удалить совет?'
 
+    delete_group: "Delete group?"
   show:
     without_name: 'Без названия'
     note: замечание
@@ -529,6 +531,7 @@ en:
     important: ВАЖНОЕ
     general_news: ВСЕ НОВОСТИ
     general_rating: ВСЕ УЧАСТНИКИ
+    general_analytics: ВСЯ АНАЛИТИКА
     improve:
       name: Доработать
       problem: Неоформленные проблемы
@@ -770,3 +773,8 @@ en:
   advice:
     advices: "Advices"
     disapproved_notify_text: "Ваш совет не одобрен, Ознакомиться с причиной"
+  groups:
+    groups: "Groups"
+    creating: "Creating group"
+    editing: "Editing group"
+    group: "Group"

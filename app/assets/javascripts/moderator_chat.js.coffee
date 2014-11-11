@@ -77,14 +77,14 @@ addMsg = (data, highlight = true, append = true, scroll = true) ->
 
     private_channel.bind 'receive_history', (data) ->
       first_messages = false
-      if $('.ui-chatbox-msg').length == 0
+      if $('#moderator_chat_div .ui-chatbox-msg').length == 0
         first_messages = true
       $.each data, (index, value) ->
         addMsg value, false, false, false
       $("a#load_more_messages").remove()
       $("#moderator_chat_div").prepend "<a href='#' id='load_more_messages'>Загрузить еще</a>"
       $("a#load_more_messages").click ->
-        ws.trigger 'get_history', {latest_id: $('.ui-chatbox-msg').attr('id')}
+        ws.trigger 'get_history', {latest_id: $('#moderator_chat_div .ui-chatbox-msg').attr('id')}
       if first_messages
         $("#moderator_chat_div").chatbox("option", "boxManager")._scrollToBottom();
     $('span.ui-icon-closethick').parent().click ->

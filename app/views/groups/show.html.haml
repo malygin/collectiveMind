@@ -1,0 +1,9 @@
+%h2
+  = "#{t('groups.group')} #{@group.name}"
+
+%section.widget.widget-tabs
+  .body.tab-content
+    Чат группы
+
+    .id_group{id: @group.id}
+    #group_chat_div

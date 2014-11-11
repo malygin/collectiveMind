@@ -42,22 +42,14 @@
             =f.text_area :desc, class: 'form-control', rows: 10, placeholder: t('form.plan.action.desc_promt'), id:'desc_stage'
             %span.small=t('form.plan.action.desc_short')
           .form-group{id: "action_resources", style: "margin-left:0;"}
-            - if action
-              - unless action.plan_post_action_resources.empty?
-                -action.plan_post_action_resources.each do |r|
-                  .panel.panel-default
-                    .panel-body
-                      %span.glyphicon.glyphicon-remove.text-danger.pull-right{onclick: "$(this).parent().parent().remove();", style: "cursor:pointer;text-decoration:none;font-size:15px;"}
-                      =autocomplete_field_tag "resor_action[]",'', autocomplete_concept_post_resource_concept_posts_path,append_to: "#mod2", :"min-length" => 0, value: r.name,  class: 'form-control autocomplete',placeholder: t('form.plan.action.res_promt')
-                      %br
-                      = text_area_tag "res_action[]", r.desc, class: 'form-control', placeholder: t('form.plan.action.res_desc')
-              - else
+            - if action.persisted? and action.plan_post_resources.by_type('action_r').any?
+              -action.plan_post_resources.by_type('action_r').each do |r|
                 .panel.panel-default
                   .panel-body
                     %span.glyphicon.glyphicon-remove.text-danger.pull-right{onclick: "$(this).parent().parent().remove();", style: "cursor:pointer;text-decoration:none;font-size:15px;"}
-                    =autocomplete_field_tag "resor_action[]",'', autocomplete_concept_post_resource_concept_posts_path,append_to: "#mod2", :"min-length" => 0,  class: 'form-control autocomplete',placeholder: t('form.plan.action.res_promt')
+                    =autocomplete_field_tag "resor_action[]",'', autocomplete_concept_post_resource_concept_posts_path,append_to: "#mod2", :"min-length" => 0, value: r.name,  class: 'form-control autocomplete',placeholder: t('form.plan.action.res_promt')
                     %br
-                    = text_area_tag "res_action[]", '', class: 'form-control', placeholder: t('form.plan.action.res_desc')
+                    = text_area_tag "res_action[]", r.desc, class: 'form-control', placeholder: t('form.plan.action.res_desc')
             - else
               .panel.panel-default
                 .panel-body

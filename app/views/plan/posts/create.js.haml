@@ -4,6 +4,7 @@ $('#third').removeClass('disabled');
 $('#btn_next').removeClass('disabled');
 $('#form_for_main_plan').html("#{escape_javascript(render partial: 'form_for_main_plan', object: @plan_post )}");
 $('#second').append('<div id="option_for_render_tab" project="#{@project.id}" post="#{@plan_post.id}"></div>');
+history_change("#{edit_plan_post_path(@project, @plan_post)}");
 
 
 
