@@ -17,12 +17,14 @@ addMsg = (data, highlight = true, append = true, scroll = true) ->
 
   systemMessage = false
   if peer
-    timeText = document.createElement('div')
-    $(timeText).addClass('time pull-left').text time
+    timeText = document.createElement('span')
+    $(timeText).addClass('time').text time+ " "
     peerName = document.createElement("b")
-    $(peerName).text peer + ": "
+    $(peerName).addClass("text-lifetape").text peer + " "
     e.appendChild timeText
     e.appendChild peerName
+
+
   else
     systemMessage = true
   msgElement = document.createElement((if systemMessage then "i" else "span"))

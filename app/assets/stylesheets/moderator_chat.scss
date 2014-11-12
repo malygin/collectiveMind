@@ -1,4 +1,4 @@
-#moderator_chat_window {
+#moderator_chat_div {
   //colors
   $mercury: #e5e5e5;
   $color_storm_dust_approx: #666;
@@ -10,7 +10,13 @@
   $color_fuscous_gray_approx: #555;
 
   width: 400px;
-
+  .ui-chatbox-msg{
+    color: $fcError;
+    .time{
+      color: lighten($fcError, 80%);
+      font-size: smaller;
+    }
+  }
   .col-md-2 {
     padding: 0;
   }
