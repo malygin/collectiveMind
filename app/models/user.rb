@@ -213,7 +213,7 @@ class User < ActiveRecord::Base
 
       when :plus_post
         self.add_score_by_type(h[:project], 25, :score_g) if h[:post].instance_of? Essay::Post
-        self.add_score_by_type(h[:project], 50, :score_g) if h[:post].instance_of? Concept::Post
+        # self.add_score_by_type(h[:project], 50, :score_g) if h[:post].instance_of? Concept::Post
         self.add_score_by_type(h[:project], 500, :score_g) if h[:post].instance_of? Plan::Post
 
         if h[:post].instance_of? Discontent::Post
@@ -223,6 +223,15 @@ class User < ActiveRecord::Base
             comment = "#{get_class_for_improve(h[:post].improve_stage)}::Comment".constantize.find(h[:post].improve_comment)
             comment.user.add_score_by_type(h[:project], 10, :score_g)
             self.journals.build(type_event: 'my_add_score_discontent_improve', project: h[:project], user_informed: comment.user, body: "10", first_id: h[:post].id, body2: trim_content(h[:post].content), viewed: false, personal: true).save!
+          end
+        end
+        if h[:post].instance_of? Concept::Post
+          self.add_score_by_type(h[:project], h[:post].fullness + 39, :score_g)
+          self.journals.build(type_event: 'my_add_score_concept', project: h[:project], user_informed: self, body: "#{h[:post].fullness + 39}", first_id: h[:post].id, body2: trim_content(h[:post].content), viewed: false, personal: true).save!
+          if h[:post].improve_comment
+            comment = "#{get_class_for_improve(h[:post].improve_stage)}::Comment".constantize.find(h[:post].improve_comment)
+            comment.user.add_score_by_type(h[:project], 20, :score_g)
+            self.journals.build(type_event: 'my_add_score_concept_improve', project: h[:project], user_informed: comment.user, body: "20", first_id: h[:post].id, body2: trim_content(h[:post].content), viewed: false, personal: true).save!
           end
         end
         self.add_score_by_type(h[:project], 10, :score_g) if h[:post].instance_of? LifeTape::Post

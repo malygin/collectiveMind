@@ -93,6 +93,8 @@ class Concept::PostsController < PostsController
 
     create_concept_resources_on_type(@project, @concept_post)
 
+    @concept_post.fullness_apply(@post_aspect,params[:resor])
+
     respond_to do |format|
       if @concept_post.save
         current_user.journals.build(type_event:'concept_post_save', body:trim_content(@concept_post.post_aspects.first.title), first_id: @concept_post.id,  project: @project).save!
@@ -141,6 +143,8 @@ class Concept::PostsController < PostsController
     @concept_post.post_aspects << @post_aspect
 
     create_concept_resources_on_type(@project, @concept_post)
+
+    @concept_post.fullness_apply(@post_aspect,params[:resor])
 
     respond_to do |format|
       if @concept_post.save
@@ -215,7 +219,7 @@ class Concept::PostsController < PostsController
     @discontent_post = Discontent::Post.find(params[:dis_id]) unless params[:dis_id].nil?
     @resources = Concept::Resource.where(project_id: @project.id)
     @pa = Concept::PostAspect.new
-    @comment =   get_comment_for_stage(params[:improve_stage], params[:improve_comment]) if params[:improve_comment] and params[:improve_stage]
+    @comment = get_comment_for_stage(params[:improve_stage], params[:improve_comment]) if params[:improve_comment] and params[:improve_stage]
     @pa.name = @comment.content if @comment
     @remove_able = true
     respond_to do |format|
