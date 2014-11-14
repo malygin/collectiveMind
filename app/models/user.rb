@@ -226,8 +226,8 @@ class User < ActiveRecord::Base
           end
         end
         if h[:post].instance_of? Concept::Post
-          self.add_score_by_type(h[:project], h[:post].fullness + 39, :score_g)
-          self.journals.build(type_event: 'my_add_score_concept', project: h[:project], user_informed: self, body: "#{h[:post].fullness + 39}", first_id: h[:post].id, body2: trim_content(h[:post].content), viewed: false, personal: true).save!
+          self.add_score_by_type(h[:project], h[:post].fullness.nil? ? 40 : h[:post].fullness + 39, :score_g)
+          self.journals.build(type_event: 'my_add_score_concept', project: h[:project], user_informed: self, body: "#{h[:post].fullness.nil? ? 40 : h[:post].fullness + 39}", first_id: h[:post].id, body2: trim_content(h[:post].content), viewed: false, personal: true).save!
           if h[:post].improve_comment
             comment = "#{get_class_for_improve(h[:post].improve_stage)}::Comment".constantize.find(h[:post].improve_comment)
             comment.user.add_score_by_type(h[:project], 20, :score_g)
