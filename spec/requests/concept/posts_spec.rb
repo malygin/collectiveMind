@@ -240,6 +240,7 @@ describe 'Concept ' do
       it ' add new empty concept with error', js: true do
         click_link "new_concept_#{@discontent1.id}"
         expect(page).to have_content 'Перейти к описанию Идеи'
+        screenshot_and_open_image
         click_button 'Перейти к описанию Идеи'
         # expect(page).to have_content @discontent1.content
         click_button 'send_post_concept'
