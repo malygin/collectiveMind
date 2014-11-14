@@ -82,18 +82,18 @@
               %td
                 =@project.concept_ongoing_post.count
               %td
-                =@project.concept_ongoing_post.count
+                =@project.concept_ongoing_post.by_idea.count
               %td
-                =@project.concept_ongoing_post.count
+                =@project.concept_ongoing_post.by_novation.count
 
             -@project.proc_aspects.order(:id).each do |asp|
               %tr
                 %td
                   =asp.content
                 %td
-                  =asp.concept_count.count
+                  =asp.aspect_concept.count
                 %td
-                  =asp.concept_count.count
+                  =asp.aspect_concept.by_idea.count
                 %td
-                  =asp.concept_count.count
+                  =asp.aspect_concept.by_novation.count
 
