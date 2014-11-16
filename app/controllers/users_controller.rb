@@ -6,6 +6,7 @@ class UsersController < ApplicationController
   before_filter :boss_authenticate, only: [:users_rc]
   before_filter :prime_admin_authenticate, only: [:destroy, :list_users, :add_user_for_project, :remove_user_for_project, :club_toggle, :update_score]
   before_filter :have_project_access
+  before_filter :user_projects
 
   def new
     @user = User.new

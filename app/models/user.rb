@@ -83,6 +83,13 @@ class User < ActiveRecord::Base
     end
   end
 
+  def current_projects_for_ordinary_user
+    opened_projects = Core::Project.active_proc.where(type_access: [0, 3])
+    club_projects = self.cluber? ? Core::Project.active_proc.where(type_access: 1) : []
+    closed_projects = self.projects.active_proc.where(core_projects: {type_access: 2})
+    opened_projects | club_projects | closed_projects
+  end
+
   validates :name, length: {maximum: 50}
 
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i

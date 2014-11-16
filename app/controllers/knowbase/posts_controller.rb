@@ -1,6 +1,7 @@
 class Knowbase::PostsController <  PostsController
   before_filter :prepare_data
   before_filter :journal_data
+  before_filter :user_projects
 
   def current_model
     Knowbase::Post
