@@ -39,6 +39,10 @@
 
       - if prime_admin?
         %li
+          =link_to list_projects_path, class:'btn btn-sm btn-red', id: 'general_analytics' do
+            =t('menu.list_projects')
+            %i.fa.fa-arrow-right
+        %li
           =link_to list_projects_path, class:'btn btn-sm btn-info', id: 'list_projects'  do
             =t('menu.list_projects')
             %i.fa.fa-arrow-right

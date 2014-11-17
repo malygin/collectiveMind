@@ -127,7 +127,11 @@ $(function(){
 
             chart.xAxis
                 .showMaxMin(false)
-                .tickFormat(function(d) { return d3.time.format('%b %d')(new Date(d)) });
+//                .tickFormat(function(d) { return d3.time.format('%b %d')(new Date(d)) });
+                .tickFormat(function(d) {
+//                    console.log(d,Date.parse(d));
+                    return d3.time.format('%x')(new Date(d))
+                });
 
             d3.select('#sources-chart-bar svg')
                 .datum(exampleData())

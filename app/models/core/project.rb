@@ -30,7 +30,8 @@ class Core::Project < ActiveRecord::Base
 # 10 disabled
 
   attr_accessible :desc, :postion, :secret, :type_project, :name, :short_desc, :knowledge, :status, :type_access,
-                  :url_logo, :stage1, :stage2, :stage3, :stage4, :stage5, :color, :code, :advices_concept, :advices_discontent
+                  :url_logo, :stage1, :stage2, :stage3, :stage4, :stage5, :color, :code, :advices_concept, :advices_discontent,
+                  :date_12,:date_23,:date_34,:date_45,:date_56
 
 
   has_many :life_tape_posts, -> { where status: 0 }, class_name: 'LifeTape::Post'
@@ -314,6 +315,20 @@ class Core::Project < ActiveRecord::Base
       aspects.each do |asp|
         asp.update_attributes(position: asp.voted_users.size)
       end
+    end
+  end
+
+  def set_date_for_stage
+    if self.status == 3
+      self.update_attributes(date_12: Time.now.utc)
+    elsif self.status == 7
+      self.update_attributes(date_23: Time.now.utc)
+    elsif self.status == 9
+      self.update_attributes(date_34: Time.now.utc)
+    elsif self.status == 10
+      self.update_attributes(date_45: Time.now.utc)
+    elsif self.status == 20
+      self.update_attributes(date_56: Time.now.utc)
     end
   end
 

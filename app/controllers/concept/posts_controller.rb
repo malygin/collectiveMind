@@ -117,11 +117,10 @@ class Concept::PostsController < PostsController
     @concept_post.update_status_fields(params[:pa])
     @post_aspect = Concept::PostAspect.new(params[:pa])
 
+    @concept_post.post_aspects.destroy_all if @post_aspect.valid?
+
     unless params[:cd].nil?
-      if @post_aspect.valid?
-        @concept_post.post_aspects.destroy_all
-        @concept_post.concept_post_discontents.destroy_all
-      end
+      @concept_post.concept_post_discontents.destroy_all if @post_aspect.valid?
       params[:cd].each do |cd|
         @concept_post.concept_post_discontents.build(discontent_post_id: cd[0], complite: cd[1][:complite], status: 0)
       end
