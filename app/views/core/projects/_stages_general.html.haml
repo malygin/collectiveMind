@@ -1,0 +1,31 @@
+%ul.nav.nav-tabs{role: 'tablist'}
+  %li(class="#{'active' if current_stage == :lifetape}")
+    %a{href: "/project/#{@project.id}/lifetape_analytics", id: "go_to_life_tape"}
+      1
+      %span.hidden-sm.hidden-xs=t('stages.stage', count: 1)
+      %br
+      %span.hidden-sm.hidden-xs=t('stages.life_tape')
+  %li(class="#{'active' if current_stage == :discontent} #{'disabled' if @project.status < 3}")
+    %a{ href: "/project/#{@project.id}/discontent_analytics", id: "go_to_discontent"}
+      2
+      %span.hidden-sm.hidden-xs=t('stages.stage', count: 2)
+      %br
+      %span.hidden-sm.hidden-xs=t('stages.discontent')
+  %li(class="#{'active' if current_stage == :concept} #{'disabled' if @project.status < 7}")
+    %a{ href: "/project/#{@project.id}/concept_analytics", id: "go_to_concept"}
+      3
+      %span.hidden-sm.hidden-xs=t('stages.stage', count: 3)
+      %br
+      %span.hidden-sm.hidden-xs=t('stages.concept')
+  %li(class="#{'active' if current_stage == :plan} #{'disabled' if @project.status < 9}")
+    %a{ href: "/project/#{@project.id}/plan_analytics", id: 'go_to_plan'}
+      4
+      %span.hidden-sm.hidden-xs=t('stages.stage', count: 4)
+      %br
+      %span.hidden-sm.hidden-xs=t('stages.plan')
+  %li(class="#{'active' if current_stage == :estimate} #{'disabled' if @project.status < 10}")
+    %a{ href: "/project/#{@project.id}/estimate_analytics", id: 'go_to_estimate'}
+      5
+      %span.hidden-sm.hidden-xs=t('stages.stage', count: 5)
+      %br
+      %span.hidden-sm.hidden-xs=t('stages.estimate')

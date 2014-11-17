@@ -29,7 +29,13 @@ get '/project/:project', to: 'core/projects#to_project'
 get '/list_projects', to: 'core/projects#list_projects'
 get '/general_news', to: 'core/projects#news'
 get '/general_rating', to: 'core/projects#users'
-get '/general_analytics', to: 'core/projects#analytics'
+
+get '/general_analytics', to: 'core/projects#general_analytics'
+get '/lifetape_analytics', to: 'core/projects#lifetape_analytics'
+get '/discontent_analytics', to: 'core/projects#discontent_analytics'
+get '/concept_analytics', to: 'core/projects#concept_analytics'
+get '/plan_analytics', to: 'core/projects#plan_analytics'
+get '/estimate_analytics', to: 'core/projects#estimate_analytics'
 
 namespace :core, shallow: true do
   resources :projects do
@@ -44,7 +50,16 @@ scope '/project/:project' do
   get '/journals', to: 'journal#index'
   get '/general_news', to: 'core/projects#news'
   get '/general_rating', to: 'core/projects#users'
-  get '/general_analytics', to: 'core/projects#analytics'
+
+  get '/general_analytics', to: 'core/projects#general_analytics'
+  get '/lifetape_analytics', to: 'core/projects#lifetape_analytics'
+  get '/discontent_analytics', to: 'core/projects#discontent_analytics'
+  get '/concept_analytics', to: 'core/projects#concept_analytics'
+  get '/plan_analytics', to: 'core/projects#plan_analytics'
+  get '/estimate_analytics', to: 'core/projects#estimate_analytics'
+  get :graf_data, to: 'core/projects#graf_data'
+
+
   #get '/help/posts/0', to: 'help/posts#new_help_0'
   resources :groups do
     put :become_member

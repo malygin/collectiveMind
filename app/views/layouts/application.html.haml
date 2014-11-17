@@ -20,7 +20,7 @@
             %strong DECISION
 
     %nav#sidebar.sidebar.nav-collapse.collapse
-      - if params[:controller] == 'core/projects' and (params[:action] == 'news' or params[:action] == 'users' or params[:action] == 'analytics')
+      - if core_methods?(params[:controller],params[:action])
         = render partial: 'core/projects/left_projects', locals: { current_stage: controller.controller_path }
       - else
         = render partial: 'left_side', locals: { current_stage: controller.controller_path }
@@ -28,7 +28,7 @@
     .wrap
       %header.page-header
         .navbar
-          - if params[:controller] == 'core/projects' and (params[:action] == 'news' or params[:action] == 'users' or params[:action] == 'analytics')
+          - if core_methods?(params[:controller],params[:action])
             =render 'core/projects/top_menu_general'
           - else
             =render 'top_menu'
@@ -38,6 +38,13 @@
           %section.widget.widget-tabs
             %header
               =render partial: 'application/stages', locals: {current_stage: current_stage_for_navbar(controller, params[:stage])}
+            .body.tab-content
+              = yield
+        -elsif @project and core_methods?(params[:controller],params[:action],true)
+          %h4=@project.name
+          %section.widget-tabs
+            %header
+              =render partial: 'core/projects/stages_general', locals: {current_stage: current_stage_for_analytics(params[:action])}
             .body.tab-content
               = yield
         -else
