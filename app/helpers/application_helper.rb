@@ -541,6 +541,28 @@ module ApplicationHelper
     end
   end
 
+  def current_stage_for_analytics(action)
+    case action
+      when 'lifetape_analytics'
+        :lifetape
+      when 'discontent_analytics'
+        :discontent
+      when 'concept_analytics'
+        :concept
+      when 'plan_analytics'
+        :plan
+      when 'estimate_analytics'
+        :estimate
+      else
+        :lifetape
+    end
+  end
+
+  def core_methods?(controller,action,stages=false)
+    controller == 'core/projects' and
+    ( (['news','users'].include?(action) and not stages) or ['general_analytics','lifetape_analytics','discontent_analytics','concept_analytics','plan_analytics','estimate_analytics'].include?(action) )
+  end
+
   def current_controller_for_navbar?(controller)
     if [LifeTape::PostsController, Discontent::PostsController, Concept::PostsController, Plan::PostsController, Estimate::PostsController, Essay::PostsController].include?(controller.class)
       return true

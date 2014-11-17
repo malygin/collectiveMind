@@ -1,6 +1,6 @@
 class Help::PostsController < PostsController
-
   before_filter :prepare_data
+  before_filter :user_projects
 
   def current_model
     Help::Post

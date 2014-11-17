@@ -7,7 +7,7 @@ class Core::ProjectsController < ApplicationController
   before_action :set_core_project, only: [:show, :edit, :update, :pr_stage, :next_stage, :destroy]
   before_filter :boss_news_authenticate , only: [:news,:users]
   after_filter  :last_seen_news , only: [:news]
-  layout 'application', only: [:news,:users,:analytics]
+  layout 'application', only: [:news,:users,:general_analytics,:lifetape_analytics,:discontent_analytics,:concept_analytics,:plan_analytics,:estimate_analytics]
 
   # has_scope :by_project
   # has_scope :by_user
@@ -174,15 +174,52 @@ class Core::ProjectsController < ApplicationController
     end
   end
 
-  def analytics
+  def general_analytics
     @project = Core::Project.find(params[:project]) if params[:project]
     @core_projects = current_user.current_projects_for_user
     @core_project = @core_projects.first
-    if params[:view_concept]
-      if @project
+  end
 
-      end
+  def lifetape_analytics
+    @project = Core::Project.find(params[:project]) if params[:project]
+    @core_projects = current_user.current_projects_for_user
+    @core_project = @core_projects.first
+  end
+
+  def discontent_analytics
+    @project = Core::Project.find(params[:project]) if params[:project]
+    @core_projects = current_user.current_projects_for_user
+    @core_project = @core_projects.first
+  end
+
+  def concept_analytics
+    @project = Core::Project.find(params[:project]) if params[:project]
+    @core_projects = current_user.current_projects_for_user
+    @core_project = @core_projects.first
+  end
+
+  def plan_analytics
+    @project = Core::Project.find(params[:project]) if params[:project]
+    @core_projects = current_user.current_projects_for_user
+    @core_project = @core_projects.first
+  end
+
+  def estimate_analytics
+    @project = Core::Project.find(params[:project]) if params[:project]
+    @core_projects = current_user.current_projects_for_user
+    @core_project = @core_projects.first
+  end
+
+  def graf_data
+    @project = Core::Project.find(params[:project]) if params[:project]
+    if params[:data_stage] == "concept_analytics"
+      data_content = @project.concept_ongoing_post.order("concept_posts.created_at").pluck("concept_posts.id","date(concept_posts.created_at)")
+      data_comment = @project.concept_comments.reorder("concept_comments.created_at").pluck("concept_comments.id","date(concept_comments.created_at)")
+      data_content = data_content.map{|d| d[1]}.group_by{|i| i}.map{|k,v| {x: k,y: v.count} }
+      data_comment = data_comment.map{|d| d[1]}.group_by{|i| i}.map{|k,v| {x: k,y: v.count} }
+      data = [{key: "Concept", values: data_content},{key: "Comment", values: data_comment}]
     end
+    render json: data
   end
 
   private

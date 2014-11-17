@@ -1,0 +1,114 @@
+.col-md-12
+  %section
+    %header
+      %h3.text-center=t('menu.analytics')
+      #nvd3_project(data-project="#{@project.id if @project}" data-stage="#{params[:action]}")
+    .body
+      -if @project
+        %h3 График
+        %section.widget.large
+          %header
+            %h4
+              %i.fa.fa-bar-chart-o
+              Нововведения
+              %small.hidden-xs{:style => "display: inline !important;"} Комментарии и Контент
+          #sources-chart-bar.body.chart
+            %svg
+
+
+        %br
+        %br
+
+        %h3 Комментарии
+        %table.table.table-striped.table-bordered
+          %thead
+            %tr
+              %th
+                Тип комментария
+              %th
+                Кол-во постов
+
+          %tbody
+            %tr
+              %th
+                Всего комментариев
+              %td
+                =@project.concept_comments.count
+            %tr
+              %td
+                Комментарии без пометок
+              %td
+                =@project.concept_comments.not_check.count
+            %tr
+              %td
+                Проблема
+              %td
+                =@project.concept_comments.type_status("by_discontent").count
+            %tr
+              %td
+                Идея
+              %td
+                =@project.concept_comments.type_status("by_concept").count
+            %tr
+              %td
+                Проблема + Идея
+              %td
+                =@project.concept_comments.problem_idea.count
+            %tr
+              %td
+                Требует Обсуждения
+              %td
+                =@project.concept_comments.type_status('by_discuss').count
+            %tr
+              %td
+                Важное
+              %td
+                =@project.concept_comments.type_status('by_approve').count
+            %tr
+              %td
+                Требует Обсуждения + Важное
+              %td
+                =@project.concept_comments.discuss_approve.count
+            %tr
+              %td
+                Отмечены лайками
+              %td
+                =@project.concept_comments.type_like.count
+
+        %br
+        %br
+        %h3 Нововведения
+        %table.table.table-striped.table-bordered
+          %thead
+            %tr
+              %th
+                Тип нововведений
+              %th
+                Все нововведения
+              %th
+                Концепция
+              %th
+                Полные
+          %tbody
+            -if @project
+              %tr
+                %td
+                  Все Аспекты
+                %td
+                  =@project.concept_ongoing_post.count
+                %td
+                  =@project.concept_ongoing_post.by_idea.count
+                %td
+                  =@project.concept_ongoing_post.by_innovation.count
+
+              -@project.proc_aspects.order(:id).each do |asp|
+                %tr
+                  %td
+                    =asp.content
+                  %td
+                    =asp.concept_count.count
+                  %td
+                    =asp.concept_count.count
+                  %td
+                    =asp.concept_count.count
+

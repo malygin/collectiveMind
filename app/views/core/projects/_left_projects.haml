@@ -6,7 +6,7 @@
     -elsif params[:action] == 'users'
       = link_to "/general_rating", class: 'general_rating color-green', id: 'go_to_general_rating' do
         %h4=t('show.general_rating')
-    -elsif params[:action] == 'analytics'
+    -elsif ['general_analytics','lifetape_analytics','discontent_analytics','concept_analytics','plan_analytics','estimate_analytics'].include?(params[:action])
       = link_to "/general_analytics", class: 'general_analytics color-green', id: 'go_to_general_analytics' do
         %h4=t('show.general_analytics')
   %li
@@ -23,8 +23,8 @@
           = link_to "/project/#{project.id}/general_rating", id: "go_to_project_#{project.id}" do
             &nbsp;
             =" #{project.name}"
-        -elsif params[:action] == 'analytics'
-          = link_to "/project/#{project.id}/general_analytics?view_concept=true", id: "go_to_project_#{project.id}" do
+        -elsif ['general_analytics','lifetape_analytics','discontent_analytics','concept_analytics','plan_analytics','estimate_analytics'].include?(params[:action])
+          = link_to "/project/#{project.id}/general_analytics", id: "go_to_project_#{project.id}" do
             &nbsp;
             =" #{project.name}"
 

@@ -1,6 +1,6 @@
 #= require jquery
 #= require jquery_ujs
-#= require jquery-ui
+#= require jquery.ui.all
 #= require jquery.remotipart
 #= require jquery.magnific-popup.min
 #= require jquery.autosize
@@ -16,6 +16,15 @@
 #= require autocomplete-rails-dev
 #= require selectize
 #= require liFixar/jquery.liFixar
+#= require nvd3/d3.v2
+#= require nvd3/nv.d3.min
+#= require nvd3/stats
+#= require nvd3/stream_layers
+#= require nvd3/multiBar
+#= require nvd3/multiBarChart
+#= require nvd3/app
+#= require nvd3/axis
+#= require nvd3/legend
 
 #= require tinymce
 #= require websocket_rails/main
@@ -32,6 +41,22 @@
 
 # @todo load initialization
 sidebarHeight = 0;
+
+@exampleData = ->
+  project_id = $('#nvd3_project').attr("data-project")
+  stage = $('#nvd3_project').attr("data-stage")
+  if project_id
+    jqXHR = $.ajax(
+      url: "/project/#{project_id}/graf_data"
+      type: "get"
+      data:
+        data_stage: stage
+      dataType: "json"
+      async: false
+    );
+    return jqXHR.responseJSON;
+
+
 $ ->
   notificate_my_journals()
   create_moderator_chat()
@@ -116,7 +141,7 @@ $ ->
   $('.carousel').carousel
     interval: 4000,
     pause: "hover"
-#    wrap: false
+  #    wrap: false
 
   $('.datepicker').datepicker(
     format: 'yyyy-mm-dd'
@@ -209,8 +234,8 @@ $('#search_users_text').on 'change', ->
 
     plugins:
       ["advlist autolink link image lists charmap print preview hr anchor pagebreak spellchecker",
-      "searchreplace wordcount visualblocks visualchars code fullscreen insertdatetime media nonbreaking",
-      "save table contextmenu directionality emoticons template paste textcolor"]
+       "searchreplace wordcount visualblocks visualchars code fullscreen insertdatetime media nonbreaking",
+       "save table contextmenu directionality emoticons template paste textcolor"]
     toolbar: "insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image | print preview media fullpage | forecolor backcolor emoticons"
 
 # @todo обновление таблицы и списка

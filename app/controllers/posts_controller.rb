@@ -7,6 +7,7 @@ class PostsController < ApplicationController
   before_filter :not_open_closed_stage
   before_filter :boss_authenticate, only: [:vote_result]
   before_filter :comment_page, only: [:index, :show]
+  before_filter :user_projects
 
   #@todo why not use authenticate_user! from devise?
   def authenticate

@@ -37,6 +37,11 @@ class Concept::Post < ActiveRecord::Base
         .order('count("concept_votings"."user_id") DESC')
   end
 
+  scope :by_idea, -> { where(concept_posts: {fullness: [0,nil]}) }
+  scope :by_innovation, -> { where("concept_posts.fullness > 0") }
+
+  scope :date_stage, ->(project) { where(status: p) }
+
   #def post_notes(type_field)
   #  self.concept_notes.by_type(type_field)
   #end

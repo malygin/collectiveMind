@@ -13,6 +13,10 @@ class ApplicationController < ActionController::Base
     @my_journals = current_user.my_journals @project
   end
 
+  def user_projects
+    @user_projects = current_user.current_projects_for_ordinary_user if current_user
+  end
+
   protected
 
   def configure_permitted_parameters
