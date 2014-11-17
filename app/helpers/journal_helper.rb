@@ -137,6 +137,12 @@ module JournalHelper
         "добавил(а) комментарий '#{j.body}...' к вашему нововведению "+ link_to(j.body2, "/project/#{project}/concept/posts/#{j.first_id}?viewed=true&req_comment=#{j.second_id}#comment_#{j.second_id}")
       when 'reply_concept_comment'
         "добавил(а) комментарий '#{j.body}...' в ответ на ваш "+ link_to(j.body2, "/project/#{project}/concept/posts/#{j.first_id}?viewed=true&req_comment=#{j.second_id}#comment_#{j.second_id}")
+
+      when 'my_add_score_concept'
+        "вы получили  #{j.body} баллов за нововведение "+ link_to(j.body2, "/project/#{project}/concept/posts/#{j.first_id}?viewed=true")
+      when 'my_add_score_concept_improve'
+        "вы получили  #{j.body} баллов за то, что вашу идею доработали в нововведение "+ link_to(j.body2, "/project/#{project}/concept/posts/#{j.first_id}?viewed=true")
+
       when 'my_concept_note'
         s = j.body.split(':')
         "добавил(а) замечание  '#{j.body}...' к "+ link_to('вашему нововведению', "/project/#{project}/concept/posts/#{j.first_id}?viewed=true")

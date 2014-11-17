@@ -374,14 +374,14 @@ $('#tab_posts li#new a').on 'click', ->
 #  field = field.toString();
   position = parseInt($('#resources_'+field+' .main_resources').last().attr('position'))
   if not position then position = 1 else position+=1
-  $('#resources_'+field).append("<div class=\"main_resources\" id=\"main_#{field}_#{position}\" position=\"#{position}\"><div class=\"col-md-6\">"+"<span role=\"status\" aria-live=\"polite\" class=\"ui-helper-hidden-accessible\"></span>"+"<input class=\"form-control autocomplete ui-autocomplete-input\" data-autocomplete=\"/project/#{project}/autocomplete_concept_post_resource_concept_posts\" id=\"concept_post_resource\" min-length=\"0\" name=\"resor[][name]\" placeholder=\"Введите свой ресурс или выберите из списка\" type=\"text\" autocomplete=\"off\"><input name=\"resor[][type_res]\" type=\"hidden\" value=\"#{field}\">"+"</div><div class=\"col-md-6\"><div class=\"pull-right\"><button class=\"btn btn-info\" id=\"desc_to_res\" onclick=\"$(this).parent().parent().parent().find('.desc_resource').show();\" title=\"Добавить описание\" type=\"button\"><i class=\"fa fa-edit\"></i></button><button class=\"btn btn-success\" id=\"plus_mean\" onclick=\"return add_new_mean_to_resource(this,'#{field2}',#{project});\" title=\"Добавить средство\" type=\"button\">"+"<i class=\"fa fa-plus\"></i></button><button class=\"btn btn-danger\" id=\"destroy_res\" onclick=\"$(this).parent().parent().parent().remove();\" title=\"Удалить ресурс\" type=\"button\">"+"<i class=\"fa fa-trash-o\"></i></button></div></div><br><br><div class=\"desc_resource\" id=\"desc_#{field}_#{position}\" position=\"#{position}\" style=\"display:none;\">"+"<textarea class=\"form-control\" id=\"res\" name=\"resor[][desc]\" placeholder=\"Пояснение к ресурсу\" style=\"overflow: hidden; word-wrap: break-word; resize: horizontal; height: 50px;\"></textarea>"+"</div><div class=\"col-md-offset-1 col-md-11 means_to_resource\" id=\"means_#{field2}_#{position}\"></div></div>");
+  $('#resources_'+field).append("<div class=\"main_resources\" id=\"main_#{field}_#{position}\" position=\"#{position}\"><div class=\"col-md-6\">"+"<span role=\"status\" aria-live=\"polite\" class=\"ui-helper-hidden-accessible\"></span>"+"<input class=\"form-control autocomplete ui-autocomplete-input\" data-autocomplete=\"/project/#{project}/autocomplete_concept_post_resource_concept_posts\" id=\"concept_post_resource\" min-length=\"0\" name=\"resor[][name]\" placeholder=\"Введите свой ресурс или выберите из списка\" type=\"text\" autocomplete=\"off\"><input name=\"resor[][type_res]\" type=\"hidden\" value=\"#{field}\">"+"</div><div class=\"col-md-6\"><div class=\"pull-right\"><button class=\"btn btn-info\" id=\"desc_to_res\" onclick=\"$(this).parent().parent().parent().find('.desc_resource').show();\" title=\"Добавить описание\" type=\"button\"><i class=\"fa fa-edit\"></i></button><button class=\"btn btn-success\" id=\"plus_mean\" onclick=\"return add_new_mean_to_resource(this,'#{field2}',#{project});\" title=\"Добавить средство\" type=\"button\">"+"<i class=\"fa fa-plus\"></i></button><button class=\"btn btn-danger\" id=\"destroy_res\" onclick=\"$(this).parent().parent().parent().remove();\" title=\"Удалить ресурс\" type=\"button\">"+"<i class=\"fa fa-trash-o\"></i></button></div></div><br><br><div class=\"desc_resource\" id=\"desc_#{field}_#{position}\" position=\"#{position}\" style=\"display:none;\">"+"<textarea class=\"form-control\" id=\"res\" name=\"resor[][desc]\" placeholder=\"Пояснение к ресурсу\" style=\"overflow: hidden; word-wrap: break-word; resize: horizontal; height: 50px;\"></textarea>"+"</div><br><div class=\"col-md-offset-1 col-md-11 means_to_resource\" id=\"means_#{field2}_#{position}\"></div></div>");
   autocomplete_initialized()
   $('textarea').autosize()
 
 @add_new_mean_to_resource= (el,field,project)->
 #  field = field.toString();
   position = $(el).parent().parent().parent().attr('position')
-  $('#means_'+field+'_'+position).append("<br><div class=\"main_means\" id=\"main_#{field}_#{position}\" position=\"#{position}\"><div class=\"col-md-8\">"+"<span role=\"status\" aria-live=\"polite\" class=\"ui-helper-hidden-accessible\"></span>"+"<input class=\"form-control autocomplete ui-autocomplete-input\" data-autocomplete=\"/project/#{project}/autocomplete_concept_post_mean_concept_posts\" id=\"res\" min-length=\"0\" name=\"resor[][means][][name]\" placeholder=\"Введите свой ресурс или выберите из списка\" type=\"text\" autocomplete=\"off\"><input name=\"resor[][means][][type_res]\" type=\"hidden\" value=\"#{field}\">"+"</div><div class=\"col-md-4\"><div class=\"pull-right\"><button class=\"btn btn-info\" id=\"desc_to_res\" onclick=\"$(this).parent().parent().parent().find('.desc_mean').show();\" title=\"Добавить описание\" type=\"button\"><i class=\"fa fa-edit\"></i></button><button class=\"btn btn-danger\" id=\"destroy_res\" onclick=\"$(this).parent().parent().parent().remove();\" title=\"Удалить ресурс\" type=\"button\">"+"<i class=\"fa fa-trash-o\"></i></button></div></div><br><br><div class=\"desc_mean\" id=\"desc_#{field}_#{position}\" position=\"#{position}\" style=\"display:none;\">"+"<textarea class=\"form-control\" id=\"res\" name=\"resor[][means][][desc]\" placeholder=\"Пояснение к ресурсу\" style=\"overflow: hidden; word-wrap: break-word; resize: horizontal; height: 50px;\"></textarea><br></div></div>");
+  $('#means_'+field+'_'+position).append("<br><div class=\"main_means\" id=\"main_#{field}_#{position}\" position=\"#{position}\"><div class=\"col-md-8\">"+"<span role=\"status\" aria-live=\"polite\" class=\"ui-helper-hidden-accessible\"></span>"+"<input class=\"form-control autocomplete ui-autocomplete-input\" data-autocomplete=\"/project/#{project}/autocomplete_concept_post_mean_concept_posts\" id=\"res\" min-length=\"0\" name=\"resor[][means][][name]\" placeholder=\"Введите свое средство или выберите из списка\" type=\"text\" autocomplete=\"off\"><input name=\"resor[][means][][type_res]\" type=\"hidden\" value=\"#{field}\">"+"</div><div class=\"col-md-4\"><div class=\"pull-right\"><button class=\"btn btn-info\" id=\"desc_to_res\" onclick=\"$(this).parent().parent().parent().find('.desc_mean').show();\" title=\"Добавить описание\" type=\"button\"><i class=\"fa fa-edit\"></i></button><button class=\"btn btn-danger\" id=\"destroy_res\" onclick=\"$(this).parent().parent().parent().remove();\" title=\"Удалить средство\" type=\"button\">"+"<i class=\"fa fa-trash-o\"></i></button></div></div><br><br><div class=\"desc_mean\" id=\"desc_#{field}_#{position}\" position=\"#{position}\" style=\"display:none;\">"+"<textarea class=\"form-control\" id=\"res\" name=\"resor[][means][][desc]\" placeholder=\"Пояснение к средству\" style=\"overflow: hidden; word-wrap: break-word; resize: horizontal; height: 50px;\"></textarea><br></div></div>");
   autocomplete_initialized()
   $('textarea').autosize()
 
@@ -567,16 +567,16 @@ $.fn.extend popoverClosable: (options) ->
     $percent = ($current / $total) * 100
     $wizard = $("#wizard")
     $wizard.find(".progress-bar").css width: $percent + "%"
-    project_id = $('#option_for_wizard_save').attr("data-project")
-    concept_id = $('#option_for_wizard_save').attr("data-post")
-    if concept_id and $current == 1
-      $('#second a').tab('show')
-    if $current == 1
-      $('#form_save').hide()
-    else
-      $('#form_save').show()
-
-    $('#option_for_wizard_tab').attr("data-tab","#{$current}")
+    #project_id = $('#option_for_wizard_save').attr("data-project")
+    #concept_id = $('#option_for_wizard_save').attr("data-post")
+    #if concept_id and $current == 1
+    #  $('#second a').tab('show')
+    #  $('.wizard li.next').click()
+    #if $current == 1
+    #  $('#form_save').hide()
+    #else
+    #  $('#form_save').show()
+    #$('#option_for_wizard_tab').attr("data-tab","#{$current}")
 
     if $current >= $total
       $wizard.find(".pager .next").hide()
@@ -584,25 +584,31 @@ $.fn.extend popoverClosable: (options) ->
       if $current == 1
         $wizard.find(".pager .previous").hide()
         $wizard.find(".pager .next .btn").html('Перейти к описанию Идеи <i class="fa fa-caret-right"></i>')
+        $('#form_save').hide()
       else if $current == 2
         $wizard.find(".pager .previous").show()
         $wizard.find(".pager .next .btn").html('Перейти к описанию Функционирования <i class="fa fa-caret-right"></i>')
+        $('#form_save').show()
       else if $current == 3
         $wizard.find(".pager .previous").show()
         $wizard.find(".pager .next .btn").html('Перейти к описанию Нежелательных побочных эффектов <i class="fa fa-caret-right"></i>')
+        $('#form_save').show()
       else if $current == 4
         $wizard.find(".pager .previous").show()
         $wizard.find(".pager .next .btn").html('Перейти к описанию Контроля <i class="fa fa-caret-right"></i>')
+        $('#form_save').show()
       else if $current == 5
         $wizard.find(".pager .previous").show()
         $wizard.find(".pager .next .btn").html('Перейти к описанию Целесообразности <i class="fa fa-caret-right"></i>')
+        $('#form_save').show()
       else if $current == 6
         $wizard.find(".pager .previous").show()
         $wizard.find(".pager .next .btn").html('Перейти к добавлению Решаемых несовершенств <i class="fa fa-caret-right"></i>')
+        $('#form_save').show()
       else
         $wizard.find(".pager .previous").show()
         $wizard.find(".pager .next .btn").html('Далее <i class="fa fa-caret-right"></i>')
-
+        $('#form_save').show()
       $wizard.find(".pager .next").show()
     scrollTo(0,0)
 

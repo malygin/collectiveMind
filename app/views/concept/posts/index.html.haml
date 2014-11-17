@@ -12,7 +12,9 @@
       - if @aspect
         -@aspect.aspect_posts.by_status(4).each do |post|
           %h4=t('show.concept.solved_problem')
-          =render partial:'discontent/posts/post_short2', object: post
+          -cache post do
+            =render partial:'discontent/posts/post_short2', object: post
+
           %h4=t('show.concept.proposed_solutions')
           %br
           %table.table.table-striped.table-bordered.table-condensed
@@ -97,4 +99,5 @@
       %hr
     .body
       .chat-messages
-        = render partial: 'shared/improve_comment',collection: @comments_all
+        -cache @comments_all do
+          = render partial: 'shared/improve_comment',collection: @comments_all

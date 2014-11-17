@@ -86,4 +86,11 @@ class Discontent::Aspect < ActiveRecord::Base
         joins("INNER JOIN concept_posts ON concept_posts.id = concept_post_discontents.post_id").
         where("discontent_posts.status = ?", 4)
   end
+
+  def aspect_concept
+    Concept::Post.joins(:concept_disposts).
+        joins("INNER JOIN discontent_post_aspects ON concept_post_discontents.discontent_post_id = discontent_post_aspects.post_id").
+        where("discontent_posts.status = ?", 4).
+        where("discontent_post_aspects.aspect_id = ?", self.id)
+  end
 end
