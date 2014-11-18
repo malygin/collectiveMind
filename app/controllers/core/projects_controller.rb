@@ -2,7 +2,8 @@ class Core::ProjectsController < ApplicationController
   # GET /core/projects
   # GET /core/projects.json
   #before_filter :boss_authenticate, only: [:next_stage, :pr_stage]
-  before_filter :prime_admin_authenticate, only: [:next_stage, :pr_stage, :show, :new, :edit, :create, :update, :destroy, :list_projects]
+  before_filter :prime_admin_authenticate, only: [:next_stage, :pr_stage, :show, :new, :edit, :create, :update, :destroy, :list_projects,
+                :general_analytics, :lifetape_analytics, :discontent_analytics, :concept_analytics, :plan_analytics, :estimate_analytics]
   before_filter :project_by_id
   before_action :set_core_project, only: [:show, :edit, :update, :pr_stage, :next_stage, :destroy]
   before_filter :boss_news_authenticate , only: [:news,:users]
@@ -132,6 +133,7 @@ class Core::ProjectsController < ApplicationController
   def next_stage
     @core_project.update_column(:status, @core_project.status + 1)
     @core_project.set_position_for_aspects if @core_project.status == 3
+    @core_project.set_date_for_stage
     redirect_to :back
   end
 
@@ -213,11 +215,17 @@ class Core::ProjectsController < ApplicationController
   def graf_data
     @project = Core::Project.find(params[:project]) if params[:project]
     if params[:data_stage] == "concept_analytics"
-      data_content = @project.concept_ongoing_post.order("concept_posts.created_at").pluck("concept_posts.id","date(concept_posts.created_at)")
-      data_comment = @project.concept_comments.reorder("concept_comments.created_at").pluck("concept_comments.id","date(concept_comments.created_at)")
-      data_content = data_content.map{|d| d[1]}.group_by{|i| i}.map{|k,v| {x: k,y: v.count} }
-      data_comment = data_comment.map{|d| d[1]}.group_by{|i| i}.map{|k,v| {x: k,y: v.count} }
+      data_content = @project.concept_ongoing_post.date_stage(@project).order("concept_posts.created_at").pluck("concept_posts.id","date(concept_posts.created_at)")
+      data_comment = @project.concept_comments.date_stage(@project).reorder("concept_comments.created_at").pluck("concept_comments.id","date(concept_comments.created_at)")
+      data_content = data_content.map{|d| d[1]}.group_by{|i| i}.map{|k,v| {x: (k.to_datetime.to_f * 1000).to_i,y: v.count} }
+      data_comment = data_comment.map{|d| d[1]}.group_by{|i| i}.map{|k,v| {x: (k.to_datetime.to_f * 1000).to_i,y: v.count} }
       data = [{key: "Concept", values: data_content},{key: "Comment", values: data_comment}]
+    elsif params[:data_stage] == "discontent_analytics"
+      data_content = @project.discontents.by_status(@project.status > 4 ? 1 : 0).date_stage(@project).order("discontent_posts.created_at").pluck("discontent_posts.id","date(discontent_posts.created_at)")
+      data_comment = @project.discontent_comments.date_stage(@project).reorder("discontent_comments.created_at").pluck("discontent_comments.id","date(discontent_comments.created_at)")
+      data_content = data_content.map{|d| d[1]}.group_by{|i| i}.map{|k,v| {x: (k.to_datetime.to_f * 1000).to_i,y: v.count} }
+      data_comment = data_comment.map{|d| d[1]}.group_by{|i| i}.map{|k,v| {x: (k.to_datetime.to_f * 1000).to_i,y: v.count} }
+      data = [{key: "Discontent", values: data_content},{key: "Comment", values: data_comment}]
     end
     render json: data
   end

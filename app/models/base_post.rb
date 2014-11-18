@@ -33,6 +33,8 @@ module BasePost
     scope :updated_order, -> { order("#{table_name}.updated_at DESC") }
     scope :popular_posts, -> { order('number_views DESC') }
 
+    scope :date_stage, ->(project) { where("DATE(#{table_name}.created_at) >= ? AND DATE(#{table_name}.created_at) <= ?", project.date_begin_stage(table_name).to_date, project.date_end_stage(table_name).to_date) if project.date_begin_stage(table_name).present? and project.date_end_stage(table_name).present? }
+
     def show_content
       content
     end

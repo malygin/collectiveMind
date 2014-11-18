@@ -37,8 +37,10 @@ module BaseComment
       end
     }
     scope :problem_idea, -> { where("discontent_status = 't' and concept_status = 't'") }
-    scope :discuss_approve, -> { where("concept_comments.discuss_status = 't' and concept_comments.approve_status = 't'") }
+    scope :discuss_approve, -> { where("#{table_name}.discuss_status = 't' and #{table_name}.approve_status = 't'") }
     scope :not_check, -> { where(discontent_status: ['f',nil],concept_status: ['f',nil], discuss_status:['f',nil], approve_status: ['f',nil], useful: ['f',nil]) }
+
+    scope :date_stage, ->(project) { where("DATE(#{table_name}.created_at) >= ? AND DATE(#{table_name}.created_at) <= ?", project.date_begin_stage(table_name).to_date, project.date_end_stage(table_name).to_date) if project.date_begin_stage(table_name).present? and project.date_end_stage(table_name).present? }
 
     def get_class
       self.class.name.deconstantize

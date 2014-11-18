@@ -30,7 +30,8 @@ class Core::Project < ActiveRecord::Base
 # 10 disabled
 
   attr_accessible :desc, :postion, :secret, :type_project, :name, :short_desc, :knowledge, :status, :type_access,
-                  :url_logo, :stage1, :stage2, :stage3, :stage4, :stage5, :color, :code, :advices_concept, :advices_discontent
+                  :url_logo, :stage1, :stage2, :stage3, :stage4, :stage5, :color, :code, :advices_concept, :advices_discontent,
+                  :date_12,:date_23,:date_34,:date_45,:date_56
 
 
   has_many :life_tape_posts, -> { where status: 0 }, class_name: 'LifeTape::Post'
@@ -317,9 +318,58 @@ class Core::Project < ActiveRecord::Base
     end
   end
 
+  def set_date_for_stage
+    if self.status == 3
+      self.update_attributes(date_12: Time.now.utc)
+    elsif self.status == 7
+      self.update_attributes(date_23: Time.now.utc)
+    elsif self.status == 9
+      self.update_attributes(date_34: Time.now.utc)
+    elsif self.status == 10
+      self.update_attributes(date_45: Time.now.utc)
+    elsif self.status == 20
+      self.update_attributes(date_56: Time.now.utc)
+    end
+  end
+
   def concept_comments
     Concept::Comment.joins("INNER JOIN concept_posts ON concept_comments.post_id = concept_posts.id").
       where("concept_posts.project_id = ?", self.id)
+  end
+
+  def discontent_comments
+    Discontent::Comment.joins("INNER JOIN discontent_posts ON discontent_comments.post_id = discontent_posts.id").
+        where("discontent_posts.project_id = ?", self.id)
+  end
+
+  def date_begin_stage(table_name)
+    table_name = table_name.sub('_posts','').sub('_comments', '')
+    if table_name == 'life_tape'
+      self.created_at
+    elsif table_name == 'discontent'
+      self.date_12
+    elsif table_name == 'concept'
+      self.date_23
+    elsif table_name == 'plan'
+      self.date_34
+    elsif table_name == 'estimate'
+      self.date_45
+    end
+  end
+
+  def date_end_stage(table_name)
+    table_name = table_name.sub('_posts', '').sub('_comments', '')
+    if table_name == 'life_tape'
+      self.date_12
+    elsif table_name == 'discontent'
+      self.date_23
+    elsif table_name == 'concept'
+      self.date_34
+    elsif table_name == 'plan'
+      self.date_45
+    elsif table_name == 'estimate'
+      self.date_56
+    end
   end
 
 end

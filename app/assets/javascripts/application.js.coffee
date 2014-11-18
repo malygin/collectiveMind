@@ -18,7 +18,7 @@
 #= require liFixar/jquery.liFixar
 #= require nvd3/d3.v2
 #= require nvd3/nv.d3.min
-#= require nvd3/stats
+#= require stats.js
 #= require nvd3/stream_layers
 #= require nvd3/multiBar
 #= require nvd3/multiBarChart
