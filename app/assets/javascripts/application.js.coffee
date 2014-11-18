@@ -580,6 +580,7 @@ $.fn.extend popoverClosable: (options) ->
 
     if $current >= $total
       $wizard.find(".pager .next").hide()
+      $('#form_save').show()
     else
       if $current == 1
         $wizard.find(".pager .previous").hide()
