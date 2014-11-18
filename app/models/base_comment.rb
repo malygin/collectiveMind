@@ -65,5 +65,8 @@ module BaseComment
     def stage_name
       self.class.name.deconstantize.underscore
     end
+
+
+
   end
 end

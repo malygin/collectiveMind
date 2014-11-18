@@ -1,14 +1,14 @@
--if @main_comment.nil?
+-if @comment_answer.nil?
   $("#comment_text_area").val('')
   $('.chat-messages').append("#{escape_javascript(render partial: 'shared/comment', object: @comment)}")
   $(".chat-messages").scrollTop(10000);
   $('#comment_success').fadeIn('slow').delay(1000).fadeOut('slow');
 -else
-  $("#child_comments_#{@main_comment.id}").append("#{escape_javascript(render partial: 'shared/comment', object: @comment)}");
-  $("#form_reply_comment_#{@main_comment.id}").fadeOut().empty()
+  $("#child_comments_#{@comment_parent.id}").append("#{escape_javascript(render partial: 'shared/comment', object: @comment)}");
+  $("#form_reply_comment_#{@comment_answer.id}").fadeOut().empty()
   $('html, body').animate({ scrollTop: $('#comment_content_#{@comment.id}').offset().top}, 1000);
   $('#comment_content_#{@comment.id}').effect("highlight",3000);
-  $('#reply_comment_#{@main_comment.id}').fadeIn()
+  $('#reply_comment_#{@comment_answer.id}').fadeIn()
 
 
 $("#change_comment_stat label").removeClass('btn-success active').addClass('btn-default');

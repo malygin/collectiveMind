@@ -1,27 +1,3 @@
-@Comment_form = (el) ->
-  if el.length > 0
-    sendButton = el.find('#send_post')
-    commentProblem =el.find('#comment_problem')
-    commentIdea =el.find('#comment_idea')
-
-    this.activate_button = ->
-      form = $(this).closest('form');
-      sendButton = form.find('.send-comment')
-      if (this.value? and this.value.length > 1)
-        sendButton.removeClass('disabled')
-      else
-       sendButton.addClass('disabled')
-
-    this.color_for_idea =  ->
-      $(this).closest('form').find('.comment-idea').toggleClass('btn-warning')
-
-    this.color_for_problem =  ->
-      $(this).closest('form').find('.comment-problem').toggleClass('btn-danger')
-
-    $('.form-new-comment').on('keyup', 'textarea.comment-textarea', this.activate_button)
-    $('.form-new-comment').on('click', 'label.comment-problem', this.color_for_problem)
-    $('.form-new-comment').on('click','label.comment-idea', this.color_for_idea)
-
 
 @comments_feed = ->
 
@@ -48,7 +24,12 @@
     $('#redactor_comment_'+id).fadeIn()
 
   this.cancel_reply = (e) ->
-    $(this).closest('form').fadeOut().empty()
+    $(this).closest('form').animate
+      height: 0, opacity:0, 500, ->
+        $(this).empty()
+        $(this).css(opacity:1, height: '')
+
+
     $('#reply_comment_'+$(this).data('id')).fadeIn()
 
   this.reply_comment =(e) ->
@@ -77,10 +58,28 @@
     form.hide().fadeIn()
     $('#reply_comment_'+id).fadeOut()
 
+  this.activate_button = ->
+    form = $(this).closest('form');
+    sendButton = form.find('.send-comment')
+    if (this.value? and this.value.length > 1)
+      sendButton.removeClass('disabled')
+    else
+      sendButton.addClass('disabled')
+
+  this.color_for_idea =  ->
+    $(this).closest('form').find('.comment-idea').toggleClass('btn-warning')
+
+  this.color_for_problem =  ->
+    $(this).closest('form').find('.comment-problem').toggleClass('btn-danger')
+
   $('.chat-messages').on('click','button.edit-comment', this.edit_comment)
   $('.chat-messages').on('click','button.edit-cancel', this.edit_cancel)
   $('.chat-messages').on('click','button.reply-comment', this.reply_comment)
   $('.chat-messages').on('click','button.cancel-reply', this.cancel_reply)
+
+  $('.form-new-comment').on('keyup', 'textarea.comment-textarea', this.activate_button)
+  $('.form-new-comment').on('click', 'label.comment-problem', this.color_for_problem)
+  $('.form-new-comment').on('click','label.comment-idea', this.color_for_idea)
 
 
 
