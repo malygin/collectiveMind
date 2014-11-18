@@ -1,3 +1,5 @@
+-if @project
+  %h4=link_to " << Вернуться к процедуре", "/project/#{@project.id}"
 .col-md-12
   %section
     %header
@@ -5,16 +7,16 @@
       #nvd3_project(data-project="#{@project.id if @project}" data-stage="#{params[:action]}")
     .body
       -if @project
-        %h3 График посещаемость
-        %section.widget.large
-          %header
-            %h4
-              %i.fa.fa-arrow-circle-o-right
-              Нововведения
-          #sources-chart-line.body.chart
-            %svg
-        %br
-        %br
+        -#%h3 График посещаемость
+        -#%section.widget.large
+        -#  %header
+        -#    %h4
+        -#      %i.fa.fa-arrow-circle-o-right
+        -#      Нововведения
+        -#  #sources-chart-line.body.chart
+        -#    %svg
+        -#%br
+        -#%br
         %h3 График контент
         %section.widget.large
           %header

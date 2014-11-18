@@ -220,18 +220,12 @@ class Core::ProjectsController < ApplicationController
       data_content = data_content.map{|d| d[1]}.group_by{|i| i}.map{|k,v| {x: (k.to_datetime.to_f * 1000).to_i,y: v.count} }
       data_comment = data_comment.map{|d| d[1]}.group_by{|i| i}.map{|k,v| {x: (k.to_datetime.to_f * 1000).to_i,y: v.count} }
       data = [{key: "Concept", values: data_content},{key: "Comment", values: data_comment}]
-    end
-    render json: data
-  end
-
-  def user_data
-    @project = Core::Project.find(params[:project]) if params[:project]
-    if params[:data_stage] == "concept_analytics"
-      data_content = @project.concept_ongoing_post.date_stage(@project).order("concept_posts.created_at").pluck("concept_posts.id","date(concept_posts.created_at)")
-      data_comment = @project.concept_comments.date_stage(@project).reorder("concept_comments.created_at").pluck("concept_comments.id","date(concept_comments.created_at)")
-      data_content = data_content.map{|d| d[1]}.group_by{|i| i}.map{|k,v| {x: k,y: v.count} }
-      data_comment = data_comment.map{|d| d[1]}.group_by{|i| i}.map{|k,v| {x: k,y: v.count} }
-      data = [{key: "Concept", values: data_content},{key: "Comment", values: data_comment}]
+    elsif params[:data_stage] == "discontent_analytics"
+      data_content = @project.discontents.by_status(@project.status > 4 ? 1 : 0).date_stage(@project).order("discontent_posts.created_at").pluck("discontent_posts.id","date(discontent_posts.created_at)")
+      data_comment = @project.discontent_comments.date_stage(@project).reorder("discontent_comments.created_at").pluck("discontent_comments.id","date(discontent_comments.created_at)")
+      data_content = data_content.map{|d| d[1]}.group_by{|i| i}.map{|k,v| {x: (k.to_datetime.to_f * 1000).to_i,y: v.count} }
+      data_comment = data_comment.map{|d| d[1]}.group_by{|i| i}.map{|k,v| {x: (k.to_datetime.to_f * 1000).to_i,y: v.count} }
+      data = [{key: "Discontent", values: data_content},{key: "Comment", values: data_comment}]
     end
     render json: data
   end

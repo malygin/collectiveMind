@@ -92,4 +92,8 @@ class Discontent::Aspect < ActiveRecord::Base
         where("discontent_posts.status = ?", 4).
         where("discontent_post_aspects.aspect_id = ?", self.id)
   end
+  def aspect_discontent
+    Discontent::Post.joins(:post_aspects).
+        where("discontent_post_aspects.aspect_id = ?", self.id)
+  end
 end

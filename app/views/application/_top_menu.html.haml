@@ -29,6 +29,8 @@
           =link_to t('menu.general_rating'), "/project/#{@project.id}/general_rating" , id: 'general_rating'
         - if prime_admin?
           %li{role: 'presentation'}
+            =link_to t('menu.analytics'), "/project/#{@project.id}/general_analytics", id: 'general_analytics'
+          %li{role: 'presentation'}
             =link_to t('menu.list_projects'), list_projects_path, id: 'list_projects'
           %br
           -if @project.status == 1

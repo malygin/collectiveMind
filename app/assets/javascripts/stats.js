@@ -130,7 +130,7 @@ $(function(){
 //                .tickFormat(function(d) { return d3.time.format('%b %d')(new Date(d)) });
                 .tickFormat(function(d) {
 //                    console.log(d,Date.parse(d));
-                    return d3.time.format('%x')(new Date(d))
+                    return d3.time.format('%d/%m/%y')(new Date(d))
                 });
 
             d3.select('#sources-chart-bar svg')

@@ -337,4 +337,39 @@ class Core::Project < ActiveRecord::Base
       where("concept_posts.project_id = ?", self.id)
   end
 
+  def discontent_comments
+    Discontent::Comment.joins("INNER JOIN discontent_posts ON discontent_comments.post_id = discontent_posts.id").
+        where("discontent_posts.project_id = ?", self.id)
+  end
+
+  def date_begin_stage(table_name)
+    table_name = table_name.sub('_posts','').sub('_comments', '')
+    if table_name == 'life_tape'
+      self.created_at
+    elsif table_name == 'discontent'
+      self.date_12
+    elsif table_name == 'concept'
+      self.date_23
+    elsif table_name == 'plan'
+      self.date_34
+    elsif table_name == 'estimate'
+      self.date_45
+    end
+  end
+
+  def date_end_stage(table_name)
+    table_name = table_name.sub('_posts', '').sub('_comments', '')
+    if table_name == 'life_tape'
+      self.date_12
+    elsif table_name == 'discontent'
+      self.date_23
+    elsif table_name == 'concept'
+      self.date_34
+    elsif table_name == 'plan'
+      self.date_45
+    elsif table_name == 'estimate'
+      self.date_56
+    end
+  end
+
 end

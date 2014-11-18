@@ -1,3 +1,5 @@
+-if @project
+  %h4=link_to " << Вернуться к процедуре", "/project/#{@project.id}"
 .col-md-12
   %section
     %header
@@ -5,30 +7,27 @@
       #nvd3_project(data-project="#{@project.id if @project}" data-stage="#{params[:action]}")
     .body
       -if @project
-        %h3 График посещаемость
-        %section.widget.large
-          %header
-            %h4
-              %i.fa.fa-arrow-circle-o-right
-              Нововведения
-          #sources-chart-line.body.chart
-            %svg
-        %br
-        %br
+        -#%h3 График посещаемость
+        -#%section.widget.large
+        -#  %header
+        -#    %h4
+        -#      %i.fa.fa-arrow-circle-o-right
+        -#      Нововведения
+        -#  #sources-chart-line.body.chart
+        -#    %svg
+        -#%br
+        -#%br
         %h3 График контент
         %section.widget.large
           %header
             %h4
               %i.fa.fa-bar-chart-o
-              Нововведения
+              Несовершенства
               %small.hidden-xs{:style => "display: inline !important;"} Комментарии и Контент
           #sources-chart-bar.body.chart
             %svg
-
-
         %br
         %br
-
         %h3 Комментарии
         %table.table.table-striped.table-bordered
           %thead
@@ -43,82 +42,82 @@
               %th
                 Всего комментариев
               %td
-                =@project.concept_comments.count
+                =@project.discontent_comments.count
             %tr
               %td
                 Комментарии без пометок
               %td
-                =@project.concept_comments.not_check.count
+                =@project.discontent_comments.not_check.count
             %tr
               %td
                 Проблема
               %td
-                =@project.concept_comments.type_status("by_discontent").count
+                =@project.discontent_comments.type_status("by_discontent").count
             %tr
               %td
                 Идея
               %td
-                =@project.concept_comments.type_status("by_concept").count
+                =@project.discontent_comments.type_status("by_concept").count
             %tr
               %td
                 Проблема + Идея
               %td
-                =@project.concept_comments.problem_idea.count
+                =@project.discontent_comments.problem_idea.count
             %tr
               %td
                 Требует Обсуждения
               %td
-                =@project.concept_comments.type_status('by_discuss').count
+                =@project.discontent_comments.type_status('by_discuss').count
             %tr
               %td
                 Важное
               %td
-                =@project.concept_comments.type_status('by_approve').count
+                =@project.discontent_comments.type_status('by_approve').count
             %tr
               %td
                 Требует Обсуждения + Важное
               %td
-                =@project.concept_comments.discuss_approve.count
+                =@project.discontent_comments.discuss_approve.count
             %tr
               %td
                 Отмечены лайками
               %td
-                =@project.concept_comments.type_like.count
+                =@project.discontent_comments.type_like.count
 
         %br
         %br
-        %h3 Нововведения
+        %h3 Несовершенства
         %table.table.table-striped.table-bordered
           %thead
             %tr
               %th
-                Тип нововведений
+                Тип несовершенств
               %th
-                Все нововведения
+                Все несовершенства
               %th
-                Концепция
+                Имеющиеся недостатки
               %th
-                Полные
+                Отсутствующие достоинства
           %tbody
             -if @project
               %tr
                 %td
                   Все Аспекты
                 %td
-                  =@project.concept_ongoing_post.count
+                  =@project.discontents.by_status(@project.status > 4 ? 1 : 0).count
                 %td
-                  =@project.concept_ongoing_post.by_idea.count
+                  =@project.discontents.by_status(@project.status > 4 ? 1 : 0).by_style(1).count
                 %td
-                  =@project.concept_ongoing_post.by_novation.count
+                  =@project.discontents.by_status(@project.status > 4 ? 1 : 0).by_style(0).count
 
               -@project.proc_aspects.order(:id).each do |asp|
                 %tr
                   %td
                     =asp.content
                   %td
-                    =asp.aspect_concept.count
+                    =asp.aspect_discontent.by_status(@project.status > 4 ? 1 : 0).count
                   %td
-                    =asp.aspect_concept.by_idea.count
+                    =asp.aspect_discontent.by_status(@project.status > 4 ? 1 : 0).by_style(1).count
                   %td
-                    =asp.aspect_concept.by_novation.count
+                    =asp.aspect_discontent.by_status(@project.status > 4 ? 1 : 0).by_style(0).count
 
