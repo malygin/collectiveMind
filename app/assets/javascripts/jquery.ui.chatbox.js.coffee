@@ -26,27 +26,39 @@
           @elem = elem
           return
 
-        addMsg: (peer, msg) ->
+        addMsg: (data, highlight = true, append = true, scroll = true) ->
           self = this
           box = self.elem.uiChatboxLog
           e = document.createElement("div")
-          box.append e
+          $(e).attr('id', data['id'])
+
+          if append
+            box.append e
+          else
+            box.prepend e
           $(e).hide()
+
           systemMessage = false
-          if peer
+          if data['user']
+            timeText = document.createElement('span')
+            $(timeText).addClass('time').text data['time'] + " "
             peerName = document.createElement("b")
-            $(peerName).text peer + ": "
+            $(peerName).addClass("text-lifetape").text data['user'] + " "
+            e.appendChild timeText
             e.appendChild peerName
           else
             systemMessage = true
+
           msgElement = document.createElement((if systemMessage then "i" else "span"))
-          $(msgElement).text msg
+          $(msgElement).text data['text']
           e.appendChild msgElement
           $(e).addClass "ui-chatbox-msg"
           $(e).css "maxWidth", $(box).width()
           $(e).fadeIn()
-          self._scrollToBottom()
-          if not self.elem.uiChatboxTitlebar.hasClass("ui-state-focus") and not self.highlightLock
+
+          if scroll
+            self._scrollToBottom()
+          if not self.elem.uiChatboxTitlebar.hasClass("ui-state-focus") and not self.highlightLock and highlight
             self.highlightLock = true
             self.highlightBox()
           return
