@@ -30,6 +30,16 @@ class ModeratorChatController < WebsocketRails::BaseController
     current_user.looked_chat
   end
 
+  def close_chat
+    current_user.looked_chat
+    current_user.update_attributes! chat_open: false
+  end
+
+  def minus_chat
+    current_user.looked_chat
+    current_user.update_attributes! chat_open: message[:status]
+  end
+
   def user_disconnected
   end
 

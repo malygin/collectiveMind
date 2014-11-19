@@ -47,7 +47,15 @@
         ws.trigger 'get_history', {latest_id: $('#moderator_chat_div .ui-chatbox-msg').attr('id')}
       if first_messages
         $("#moderator_chat_div").chatbox("option", "boxManager")._scrollToBottom();
+
     $('span.ui-icon-closethick').parent().click ->
-      $('a#close_moderator_chat').click()
+      ws.trigger 'close_chat'
+      ws.disconnect()
+      return
     $('span.ui-icon-minusthick').parent().click ->
-      $('a#hide_moderator_chat').click()
+      if $('div.ui-widget-content.ui-chatbox-content').is(':hidden')
+        ws.trigger 'minus_chat', {status: false}
+      else
+        ws.trigger 'minus_chat', {status: true}
+      return
+    return
