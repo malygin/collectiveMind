@@ -31,6 +31,14 @@
               %span.label-danger=t('show.discuss')
             -if @post.approve_status
               %span.label-success=t('show.important')
+          -if boss?
+            |
+            =link_to({controller:'concept/posts', action: :status_post, id: @post.id, field_all: true}, remote: true, method: :put, id:"concept_field_all_#{@post.id}",class:"note_text") do
+              -if @post.status_all
+                %span.label.label-success Забрать все
+              -else
+                %span.label.label-danger Выдать все
+
           -#-if boss?
           -#  |
           -#  =link_to({action: :plus, project: @project, id: @post.id},  remote: true, method: :put,  id: "plus_post_#{@post.id}") do

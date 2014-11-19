@@ -43,6 +43,14 @@ class Concept::Post < ActiveRecord::Base
   #  self.concept_notes.by_type(type_field)
   #end
 
+  def get_status_concept?(status)
+    if status == 'positive'
+      self.status_name and self.status_content and self.status_negative and self.status_negative_r and self.status_positive and self.status_positive_r and self.status_control and self.status_control_r and self.status_obstacles and self.status_reality and self.status_problems
+    elsif status == 'negative'
+      self.status_name.nil? and self.status_content.nil? and self.status_negative.nil? and self.status_negative_r.nil? and self.status_positive.nil? and self.status_positive_r.nil? and self.status_control.nil? and self.status_control_r.nil? and self.status_obstacles.nil? and self.status_reality.nil? and self.status_problems.nil?
+    end
+  end
+
   def complite(discontent)
     post = discontent.concept_post_discontents.by_concept(self.id).first
     post.complite if post

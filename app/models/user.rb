@@ -255,6 +255,11 @@ class User < ActiveRecord::Base
             end
           end
         end
+      when :plus_field_all
+        if h[:post].instance_of? Concept::Post
+          self.add_score_by_type(h[:project], h[:post].fullness.nil? ? 40 : h[:post].fullness + 39, :score_g)
+          self.journals.build(type_event: 'my_add_score_concept', project: h[:project], user_informed: self, body: "#{h[:post].fullness.nil? ? 40 : h[:post].fullness + 39}", first_id: h[:post].id, body2: trim_content(h[:post].content), viewed: false, personal: true).save!
+        end
 
       # self.journals.build(type_event:'useful_post', project: h[:project], body:"#{h[:post].content[0..24]}:#{h[:path]}/#{h[:post].id}").save!
 
@@ -270,6 +275,8 @@ class User < ActiveRecord::Base
         self.add_score_by_type(h[:project], -score_for_plus_post(h[:post]), :score_g)
       when :to_archive_plus_field
         self.add_score_by_type(h[:project], -score_for_concept_field(h[:post],h[:type_field]), :score_g)
+      when :to_archive_plus_field_all
+        self.add_score_by_type(h[:project], -(h[:post].fullness.nil? ? 40 : h[:post].fullness + 39), :score_g)
       when :useful_advice
         add_score_by_type(h[:project], 10, :score_g)
     end

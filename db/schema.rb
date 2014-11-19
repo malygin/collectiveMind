@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141118005914) do
+ActiveRecord::Schema.define(version: 20141119164022) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -287,6 +287,7 @@ ActiveRecord::Schema.define(version: 20141118005914) do
     t.boolean  "status_obstacles"
     t.boolean  "approve_status"
     t.integer  "fullness"
+    t.boolean  "status_all"
   end
 
   add_index "concept_posts", ["created_at"], name: "index_concept_posts_on_created_at", using: :btree
