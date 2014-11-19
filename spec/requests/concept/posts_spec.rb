@@ -478,7 +478,6 @@ describe 'Concept ' do
         it ' like post', js: true do
           expect(page).to have_link("plus_post_#{@concept1.id}", :text => 'Выдать баллы', :href => plus_concept_post_path(project,@concept1))
           click_link "plus_post_#{@concept1.id}"
-          screenshot_and_open_image
           expect(page).to have_link("plus_post_#{@concept1.id}", :text => 'Забрать баллы', :href => plus_concept_post_path(project,@concept1))
           click_link "plus_post_#{@concept1.id}"
           expect(page).to have_content 'Выдать баллы'

@@ -31,10 +31,13 @@
               %span.label-danger=t('show.discuss')
             -if @post.approve_status
               %span.label-success=t('show.important')
-          -if boss? and not @post.useful
-            |
-            =link_to({action: :plus, project: @project, id: @post.id},  remote: true, method: :put,  id: "plus_post_#{@post.id}") do
-              %span.text-success=t('show.add_score')
+          -#-if boss?
+          -#  |
+          -#  =link_to({action: :plus, project: @project, id: @post.id},  remote: true, method: :put,  id: "plus_post_#{@post.id}") do
+          -#    -if @post.useful
+          -#      %span.text-danger=t('show.revert_score')
+          -#    -else
+          -#      %span.text-success=t('show.add_score')
           %br
           %br
           = render 'shared/post_edit_bar', post:@post

@@ -558,6 +558,51 @@ module ApplicationHelper
     end
   end
 
+  def score_for_concept_field(post, type_field)
+    case type_field
+      when 'status_name'
+        20
+      when 'status_content'
+        20
+      when 'status_positive'
+        15
+      when 'status_positive_r'
+        15
+      when 'status_negative'
+        10
+      when 'status_negative_r'
+        10
+      when 'status_control'
+        5
+      when 'status_control_r'
+        5
+      when 'status_obstacles'
+        3
+      when 'status_problems'
+        3
+      when 'status_reality'
+        3
+      else
+        0
+    end
+  end
+
+  def score_for_plus_post(post)
+    if post.instance_of? LifeTape::Post
+      10
+    elsif post.instance_of? Discontent::Post
+      25
+    elsif post.instance_of? Concept::Post
+      50
+    elsif post.instance_of? Plan::Post
+      500
+    elsif post.instance_of? Essay::Post
+      25
+    else
+      0
+    end
+  end
+
   def core_methods?(controller,action,stages=false)
     controller == 'core/projects' and
     ( (['news','users'].include?(action) and not stages) or ['general_analytics','lifetape_analytics','discontent_analytics','concept_analytics','plan_analytics','estimate_analytics'].include?(action) )
