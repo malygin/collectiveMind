@@ -61,7 +61,6 @@ $ ->
   notificate_my_journals()
   create_moderator_chat()
   create_group_chat()
-  $('.ui-chatbox').draggable()
 
   $(".image-popup-vertical-fit").magnificPopup
     type: "image"
