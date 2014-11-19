@@ -34,10 +34,12 @@
           time = new Date(data['time'])
           e = document.createElement("div")
           $(e).attr('id', data['id'])
-          if time > lastSeenTime
+          if time > lastSeenTime && $('#current_user_name').text().trim() != data['user'].trim()
+            $('.ui-widget-header').addClass('ui-state-active')
             $(e).addClass('unreaded')
             $(e).mouseenter ->
               $(this).removeClass('unreaded')
+              $('.ui-widget-header').removeClass('ui-state-active')
 
           if append
             box.append e

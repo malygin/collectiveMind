@@ -18,6 +18,7 @@
       title: "Модераторский чат"
       messageSent: (id, user, msg) ->
         ws.trigger 'incoming_message', {text: msg}
+        $('#last_seen_at').text(new Date())
         return
     )
     ws.trigger 'get_history'
@@ -32,7 +33,7 @@
         msg = Messenger().post
           extraClasses: "messenger-fixed messenger-on-top  messenger-on-right messenger-theme-air"
           message: data['text']
-          hideAfter: 1
+          hideAfter: 3
       else
         $('#last_seen_at').text(new Date())
         ws.trigger 'looked_chat'
@@ -49,6 +50,7 @@
         ws.trigger 'get_history', {latest_id: $('#moderator_chat_div .ui-chatbox-msg').attr('id')}
       if first_messages
         $("#moderator_chat_div").chatbox("option", "boxManager")._scrollToBottom();
+      $('#last_seen_at').text(new Date())
 
     $('span.ui-icon-closethick').parent().click ->
       ws.trigger 'close_chat'
@@ -57,7 +59,9 @@
     $('span.ui-icon-minusthick').parent().click ->
       if $('div.ui-widget-content.ui-chatbox-content').is(':hidden')
         ws.trigger 'minus_chat', {status: false}
+        $('#last_seen_at').text(new Date())
       else
         ws.trigger 'minus_chat', {status: true}
+        $('#last_seen_at').text(new Date())
       return
     return
