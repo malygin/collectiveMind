@@ -1,6 +1,7 @@
-- if current_user.admin?
-  #moderator_chat_div
-  - if current_user.chat_open?
-    #chat_opened
-  #last_seen_at{style: 'display: none'}
-    = current_user.last_seen_chat_at
+- unless ENV['RAILS_ENV'] == 'test'
+  - if current_user.admin?
+    #moderator_chat_div
+    - if current_user.chat_open?
+      #chat_opened
+    #last_seen_at{style: 'display: none'}
+      = current_user.last_seen_chat_at
