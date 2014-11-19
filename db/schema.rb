@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141118005914) do
+ActiveRecord::Schema.define(version: 20141118142744) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -366,10 +366,10 @@ ActiveRecord::Schema.define(version: 20141118005914) do
     t.string   "secret"
     t.string   "secret2"
     t.string   "secret3"
-    t.string   "color"
-    t.string   "code"
     t.boolean  "advices_discontent"
     t.boolean  "advices_concept"
+    t.string   "color"
+    t.string   "code"
     t.integer  "moderator_id"
     t.datetime "date_12"
     t.datetime "date_23"
@@ -1518,6 +1518,7 @@ ActiveRecord::Schema.define(version: 20141118005914) do
     t.integer  "role_stat"
     t.datetime "last_seen_news"
     t.boolean  "chat_open",              default: false
+    t.datetime "last_seen_chat_at"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
