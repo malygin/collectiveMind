@@ -227,21 +227,34 @@ class User < ActiveRecord::Base
           self.add_score_by_type(h[:project], 25, :score_g)
           self.journals.build(type_event: 'my_add_score_discontent', project: h[:project], user_informed: self, body: "25", first_id: h[:post].id, body2: trim_content(h[:post].content), viewed: false, personal: true).save!
           if h[:post].improve_comment
-            comment = "#{get_class_for_improve(h[:post].improve_stage)}::Comment".constantize.find(h[:post].improve_comment)
+            # comment = "#{get_class_for_improve(h[:post].improve_stage)}::Comment".constantize.find(h[:post].improve_comment)
+            comment = get_comment_for_stage(h[:post].improve_stage, h[:post].improve_comment)
             comment.user.add_score_by_type(h[:project], 10, :score_g)
             self.journals.build(type_event: 'my_add_score_discontent_improve', project: h[:project], user_informed: comment.user, body: "10", first_id: h[:post].id, body2: trim_content(h[:post].content), viewed: false, personal: true).save!
           end
         end
         if h[:post].instance_of? Concept::Post
-          self.add_score_by_type(h[:project], h[:post].fullness.nil? ? 40 : h[:post].fullness + 39, :score_g)
-          self.journals.build(type_event: 'my_add_score_concept', project: h[:project], user_informed: self, body: "#{h[:post].fullness.nil? ? 40 : h[:post].fullness + 39}", first_id: h[:post].id, body2: trim_content(h[:post].content), viewed: false, personal: true).save!
+          # self.add_score_by_type(h[:project], h[:post].fullness.nil? ? 40 : h[:post].fullness + 39, :score_g)
+          self.add_score_by_type(h[:project], 50, :score_g)
+          self.journals.build(type_event: 'my_add_score_concept', project: h[:project], user_informed: self, body: "50", first_id: h[:post].id, body2: trim_content(h[:post].content), viewed: false, personal: true).save!
           if h[:post].improve_comment
-            comment = "#{get_class_for_improve(h[:post].improve_stage)}::Comment".constantize.find(h[:post].improve_comment)
+            # comment = "#{get_class_for_improve(h[:post].improve_stage)}::Comment".constantize.find(h[:post].improve_comment)
+            comment = get_comment_for_stage(h[:post].improve_stage, h[:post].improve_comment)
             comment.user.add_score_by_type(h[:project], 20, :score_g)
             self.journals.build(type_event: 'my_add_score_concept_improve', project: h[:project], user_informed: comment.user, body: "20", first_id: h[:post].id, body2: trim_content(h[:post].content), viewed: false, personal: true).save!
           end
         end
         self.add_score_by_type(h[:project], 10, :score_g) if h[:post].instance_of? LifeTape::Post
+      when :plus_field
+        if h[:post].instance_of? Concept::Post
+          # self.add_score_by_type(h[:project], h[:post].fullness.nil? ? 40 : h[:post].fullness + 39, :score_g)
+          if h[:type_field] and score_for_concept_field(h[:post],h[:type_field]) > 0
+            self.add_score_by_type(h[:project], score_for_concept_field(h[:post],h[:type_field]), :score_g)
+            if ['status_name','status_content'].include? h[:type_field]
+              self.journals.build(type_event: 'my_add_score_concept', project: h[:project], user_informed: self, body: "#{score_for_concept_field(h[:post],h[:type_field])}", first_id: h[:post].id, body2: trim_content(h[:post].content), viewed: false, personal: true).save!
+            end
+          end
+        end
 
       # self.journals.build(type_event:'useful_post', project: h[:project], body:"#{h[:post].content[0..24]}:#{h[:path]}/#{h[:post].id}").save!
 
@@ -253,6 +266,10 @@ class User < ActiveRecord::Base
         self.add_score_by_type(h[:project], 10, :score_g)
       when :to_archive_plus_comment
         self.add_score_by_type(h[:project], -5, :score_a)
+      when :to_archive_plus_post
+        self.add_score_by_type(h[:project], -score_for_plus_post(h[:post]), :score_g)
+      when :to_archive_plus_field
+        self.add_score_by_type(h[:project], -score_for_concept_field(h[:post],h[:type_field]), :score_g)
       when :useful_advice
         add_score_by_type(h[:project], 10, :score_g)
     end
