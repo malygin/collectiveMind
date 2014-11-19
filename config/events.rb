@@ -10,6 +10,7 @@ WebsocketRails::EventMap.describe do
   private_channel :moderator_chat
   subscribe :incoming_message, to: ModeratorChatController, with_method: :incoming_message
   subscribe :get_history, to: ModeratorChatController, with_method: :send_history
+  subscribe :looked_chat, to: ModeratorChatController, with_method: :looked_chat
 
   # private_channel :group_chat
   # subscribe :groups_incoming_message, to: GroupsChatController, with_method: :incoming_message

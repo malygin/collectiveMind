@@ -33,6 +33,7 @@
           extraClasses: "messenger-fixed messenger-on-top  messenger-on-right messenger-theme-air"
           message: data['text']
           hideAfter: 1
+      ws.trigger 'looked_chat'
 
     private_channel.bind 'receive_history', (data) ->
       first_messages = false

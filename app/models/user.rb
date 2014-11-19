@@ -330,8 +330,12 @@ class User < ActiveRecord::Base
     g.collect { |k, v| [v.first, v.size] }
   end
 
-  private
 
+  def looked_chat
+    update_attributes! last_seen_chat_at: Time.now
+  end
+
+  private
   #def encrypt_password
   #	self.salt = make_salt if new_record?
   #	#self.encrypted_password = encrypt (password)

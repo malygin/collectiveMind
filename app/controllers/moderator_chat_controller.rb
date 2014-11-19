@@ -3,7 +3,6 @@ class ModeratorChatController < WebsocketRails::BaseController
   end
 
   def user_connected
-    send_message :user_info, {user: 'current_user.firstname'}
   end
 
   def incoming_message
@@ -15,6 +14,7 @@ class ModeratorChatController < WebsocketRails::BaseController
   end
 
   def send_history
+    current_user.looked_chat
     if message.nil?
       latest_id = ModeratorMessage.last.id
     else
@@ -26,8 +26,11 @@ class ModeratorChatController < WebsocketRails::BaseController
                                                        channel: :moderator_chat)
   end
 
+  def looked_chat
+    current_user.looked_chat
+  end
+
   def user_disconnected
-    p 'user disconnected'
   end
 
   def authorize_channels
