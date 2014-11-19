@@ -436,7 +436,7 @@ describe 'Concept ' do
         expect(page).to have_content @concept_aspect1.reality
         expect(page).to have_content @concept_aspect1.problems
         expect(page).to have_selector 'textarea#comment_text_area'
-        expect(page).to have_link("plus_post_#{@concept1.id}", :text => 'Выдать баллы', :href => plus_concept_post_path(project,@concept1))
+        # expect(page).to have_link("plus_post_#{@concept1.id}", :text => 'Выдать баллы', :href => plus_concept_post_path(project,@concept1))
       end
 
       it ' can add comments ', js: true do
@@ -475,14 +475,13 @@ describe 'Concept ' do
         before do
           prepare_awards
         end
-        it ' like post', js: true do
-          expect(page).to have_link("plus_post_#{@concept1.id}", :text => 'Выдать баллы', :href => plus_concept_post_path(project,@concept1))
-          click_link "plus_post_#{@concept1.id}"
-          screenshot_and_open_image
-          expect(page).to have_link("plus_post_#{@concept1.id}", :text => 'Забрать баллы', :href => plus_concept_post_path(project,@concept1))
-          click_link "plus_post_#{@concept1.id}"
-          expect(page).to have_content 'Выдать баллы'
-        end
+        # it ' like post', js: true do
+        #   expect(page).to have_link("plus_post_#{@concept1.id}", :text => 'Выдать баллы', :href => plus_concept_post_path(project,@concept1))
+        #   click_link "plus_post_#{@concept1.id}"
+        #   expect(page).to have_link("plus_post_#{@concept1.id}", :text => 'Забрать баллы', :href => plus_concept_post_path(project,@concept1))
+        #   click_link "plus_post_#{@concept1.id}"
+        #   expect(page).to have_content 'Выдать баллы'
+        # end
 
         it ' like comment', js: true do
           expect(page).to have_link("plus_comment_#{@comment1.id}", :text => 'Выдать баллы', :href => plus_comment_concept_post_path(project,@comment1))

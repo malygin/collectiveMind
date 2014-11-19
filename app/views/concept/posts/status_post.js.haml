@@ -1,2 +1,15 @@
--if @post.post_notes(@type.to_i).size == 0
-  $('##{id_for_concept_type(@type.to_i)}').removeClass('color-blue color-red').addClass('color-green');
+-if @field_all and @post.instance_of? Concept::Post
+  $("#concept_field_all_#{@post.id} span").html("#{@post.status_all ? 'Забрать все' : 'Выдать все'}");
+  $("#concept_field_all_#{@post.id} span").toggleClass('label-success label-danger')
+  -if @post.status_all
+    - 11.times do |n|
+      $('##{id_for_concept_type(n+1)}').removeClass('color-orange color-red').addClass('color-green');
+  -else
+    - 11.times do |n|
+      $('##{id_for_concept_type(n+1)}').removeClass('color-green color-red').addClass('color-orange');
+
+-elsif @type and @post.post_notes(@type.to_i).size == 0
+  -if @post.send(column_for_type_field('concept_note', @type.to_i)).nil?
+    $('##{id_for_concept_type(@type.to_i)}').removeClass('color-green color-red').addClass('color-orange');
+  -else
+    $('##{id_for_concept_type(@type.to_i)}').removeClass('color-orange color-red').addClass('color-green');

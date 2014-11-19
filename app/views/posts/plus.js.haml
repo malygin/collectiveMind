@@ -8,7 +8,7 @@ $("#plus_post_#{@post.id}").find('span').toggleClass('text-success text-danger')
   $('##{id_for_type_field(3)}_#{@post.id}').removeClass('label-danger label-g').addClass('label-success');
 
 -elsif @post.instance_of? Concept::Post
-  - 8.times do |n|
+  - 11.times do |n|
     $('##{id_for_concept_type(n+1)}').removeClass('color-orange color-red').addClass('color-green');
 
 
