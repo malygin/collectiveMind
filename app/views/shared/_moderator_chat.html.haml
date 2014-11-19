@@ -1,6 +1,4 @@
 - if current_user.admin?
-  = link_to '', open_moderator_chat_user_path(@project, current_user), id: 'hide_moderator_chat', method: :put, remote: true, style: 'display: none'
-  = link_to '', close_moderator_chat_user_path(@project, current_user), id: 'close_moderator_chat', method: :put, remote: true, style: 'display: none'
   #moderator_chat_div
   - if current_user.chat_open?
     #chat_opened
