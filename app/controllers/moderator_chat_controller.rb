@@ -7,10 +7,7 @@ class ModeratorChatController < WebsocketRails::BaseController
 
   def incoming_message
     moderator_message = current_user.moderator_messages.create message: message[:text]
-    broadcast_message :new_message, {user: "#{current_user.name} #{current_user.surname}",
-                                     avatar: current_user.avatar(:thumb), text: moderator_message.message,
-                                     id: moderator_message.id,
-                                     time: moderator_message.time}
+    broadcast_message :new_message, moderator_message.to_json
   end
 
   def send_history

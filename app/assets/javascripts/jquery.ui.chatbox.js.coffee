@@ -29,8 +29,15 @@
         addMsg: (data, highlight = true, append = true, scroll = true) ->
           self = this
           box = self.elem.uiChatboxLog
+          currentDate = new Date()
+          lastSeenTime = new Date($('#last_seen_at').text().trim())
+          time = new Date(data['time'])
           e = document.createElement("div")
           $(e).attr('id', data['id'])
+          if time > lastSeenTime
+            $(e).addClass('unreaded')
+            $(e).mouseenter ->
+              $(this).removeClass('unreaded')
 
           if append
             box.append e
@@ -38,10 +45,15 @@
             box.prepend e
           $(e).hide()
 
+          timeString = ''
+          if (currentDate.getDate()) > time.getDate()
+            timeString += time.getDate() + '.' + time.getMonth() + ' '
+          timeString += time.getHours() + ':' + time.getMinutes() + ':' + time.getSeconds()
+          timeText = document.createElement('span')
+          $(timeText).addClass('time').text timeString + " "
+
           systemMessage = false
           if data['user']
-            timeText = document.createElement('span')
-            $(timeText).addClass('time').text data['time'] + " "
             peerName = document.createElement("b")
             $(peerName).addClass("text-lifetape").text data['user'] + " "
             e.appendChild timeText
