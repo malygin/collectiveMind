@@ -60,7 +60,7 @@ sidebarHeight = 0;
 $ ->
   notificate_my_journals()
   create_moderator_chat()
-  create_group_chat()
+#  create_group_chat()
 
   $(".image-popup-vertical-fit").magnificPopup
     type: "image"
