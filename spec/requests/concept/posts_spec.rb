@@ -483,6 +483,16 @@ describe 'Concept ' do
         #   expect(page).to have_content 'Выдать баллы'
         # end
 
+        # it ' status all', js: true do
+        #   expect(page).to have_link("concept_field_all_#{@concept1.id}", :text => 'Выдать все', :href => status_post_concept_post_path(project,@concept1,field_all:true))
+        #   find("#concept_field_all_#{@concept1.id}").click
+        #   sleep(5)
+        #   expect(page).to have_link("concept_field_all_#{@concept1.id}", :text => 'Забрать все', :href => status_post_concept_post_path(project,@concept1,field_all:true))
+        #   click_link "concept_field_all_#{@concept1.id}"
+        #   sleep(5)
+        #   expect(page).to have_content 'Выдать все'
+        # end
+
         it ' like comment', js: true do
           expect(page).to have_link("plus_comment_#{@comment1.id}", :text => 'Выдать баллы', :href => plus_comment_concept_post_path(project,@comment1))
           click_link "plus_comment_#{@comment1.id}"

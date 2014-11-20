@@ -13,7 +13,8 @@ class User < ActiveRecord::Base
   attr_accessible :login, :nickname, :anonym, :secret,
                   :dateActivation, :dateLastEnter, :dateRegistration, :email, :faculty, :group,
                   :name, :string, :string, :surname, :validate, :vkid,
-                  :score, :score_a, :score_g, :score_o, :type_user, :last_seen_news, :chat_open
+                  :score, :score_a, :score_g, :score_o, :type_user, :last_seen_news, :chat_open,
+                  :last_seen_chat_at
 
   has_many :core_project_scores, class_name: 'Core::ProjectScore'
   has_many :help_users_answerses, class_name: 'Help::UsersAnswers'
@@ -248,12 +249,17 @@ class User < ActiveRecord::Base
       when :plus_field
         if h[:post].instance_of? Concept::Post
           # self.add_score_by_type(h[:project], h[:post].fullness.nil? ? 40 : h[:post].fullness + 39, :score_g)
-          if h[:type_field] and score_for_concept_field(h[:post],h[:type_field]) > 0
-            self.add_score_by_type(h[:project], score_for_concept_field(h[:post],h[:type_field]), :score_g)
-            if ['status_name','status_content'].include? h[:type_field]
-              self.journals.build(type_event: 'my_add_score_concept', project: h[:project], user_informed: self, body: "#{score_for_concept_field(h[:post],h[:type_field])}", first_id: h[:post].id, body2: trim_content(h[:post].content), viewed: false, personal: true).save!
+          if h[:type_field] and score_for_concept_field(h[:post], h[:type_field]) > 0
+            self.add_score_by_type(h[:project], score_for_concept_field(h[:post], h[:type_field]), :score_g)
+            if ['status_name','status_content'].include?(h[:type_field]) and h[:post].status_name and h[:post].status_content
+              self.journals.build(type_event: 'my_add_score_concept', project: h[:project], user_informed: self, body: "40", first_id: h[:post].id, body2: trim_content(h[:post].content), viewed: false, personal: true).save!
             end
           end
+        end
+      when :plus_field_all
+        if h[:post].instance_of? Concept::Post
+          self.add_score_by_type(h[:project], h[:post].fullness.nil? ? 40 : h[:post].fullness + 39, :score_g)
+          self.journals.build(type_event: 'my_add_score_concept', project: h[:project], user_informed: self, body: "#{h[:post].fullness.nil? ? 40 : h[:post].fullness + 39}", first_id: h[:post].id, body2: trim_content(h[:post].content), viewed: false, personal: true).save!
         end
 
       # self.journals.build(type_event:'useful_post', project: h[:project], body:"#{h[:post].content[0..24]}:#{h[:path]}/#{h[:post].id}").save!
@@ -269,7 +275,9 @@ class User < ActiveRecord::Base
       when :to_archive_plus_post
         self.add_score_by_type(h[:project], -score_for_plus_post(h[:post]), :score_g)
       when :to_archive_plus_field
-        self.add_score_by_type(h[:project], -score_for_concept_field(h[:post],h[:type_field]), :score_g)
+        self.add_score_by_type(h[:project], -score_for_concept_field(h[:post],h[:type_field], true), :score_g)
+      when :to_archive_plus_field_all
+        self.add_score_by_type(h[:project], -(h[:post].fullness.nil? ? 40 : h[:post].fullness + 39), :score_g)
       when :useful_advice
         add_score_by_type(h[:project], 10, :score_g)
     end
@@ -346,8 +354,12 @@ class User < ActiveRecord::Base
     g.collect { |k, v| [v.first, v.size] }
   end
 
-  private
 
+  def looked_chat
+    update_attributes! last_seen_chat_at: Time.now
+  end
+
+  private
   #def encrypt_password
   #	self.salt = make_salt if new_record?
   #	#self.encrypted_password = encrypt (password)

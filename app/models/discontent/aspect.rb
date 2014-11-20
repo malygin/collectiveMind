@@ -96,4 +96,8 @@ class Discontent::Aspect < ActiveRecord::Base
     Discontent::Post.joins(:post_aspects).
         where("discontent_post_aspects.aspect_id = ?", self.id)
   end
+  def aspect_life_tape
+    LifeTape::Comment.joins("INNER JOIN life_tape_posts ON life_tape_comments.post_id = life_tape_posts.id").
+        where("life_tape_posts.aspect_id = ?", self.id)
+  end
 end

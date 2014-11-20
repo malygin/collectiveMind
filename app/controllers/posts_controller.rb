@@ -424,7 +424,17 @@ class PostsController < ApplicationController
     @project = Core::Project.find(params[:project])
     @post = current_model.find(params[:id])
     @type = params[:type_field]
-    if @type and @post.send(column_for_type_field(name_of_note_for_param, @type.to_i)) == true
+    @field_all = params[:field_all]
+    if params[:field_all] and @post.instance_of? Concept::Post
+      @post.toggle!(:status_all)
+      if @post.status_all
+        @post.update_attributes(status_name: true, status_content: true, status_positive: true, status_positive_r: true, status_negative: true, status_negative_r: true, status_control: true, status_control_r: true, status_obstacles: true, status_problems: true, status_reality: true)
+        @post.user.add_score(type: :plus_field_all, project: @project, post: @post, path: @post.class.name.underscore.pluralize) if @post.instance_of? Concept::Post
+      else
+        @post.update_attributes(status_name: nil, status_content: nil, status_positive: nil, status_positive_r: nil, status_negative: nil, status_negative_r: nil, status_control: nil, status_control_r: nil, status_obstacles: nil, status_problems: nil, status_reality: nil)
+        @post.user.add_score(type: :to_archive_plus_field_all, project: @project, post: @post, path: @post.class.name.underscore.pluralize) if @post.instance_of? Concept::Post
+      end
+    elsif @type and @post.send(column_for_type_field(name_of_note_for_param, @type.to_i)) == true
       @post.update_attributes(column_for_type_field(name_of_note_for_param, @type.to_i) => nil)
       @post.user.add_score(type: :to_archive_plus_field, project: @project, post: @post, path: @post.class.name.underscore.pluralize, type_field: column_for_type_field(name_of_note_for_param, @type.to_i)) if @post.instance_of? Concept::Post
     elsif @post.notes.by_type(@type.to_i).size == 0

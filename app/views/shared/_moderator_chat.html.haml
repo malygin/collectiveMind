@@ -1,6 +1,9 @@
-- if current_user.admin?
-  = link_to '', open_moderator_chat_user_path(@project, current_user), id: 'hide_moderator_chat', method: :put, remote: true, style: 'display: none'
-  = link_to '', close_moderator_chat_user_path(@project, current_user), id: 'close_moderator_chat', method: :put, remote: true, style: 'display: none'
-  #moderator_chat_div
-  - if current_user.chat_open?
-    #chat_opened
+- unless ENV['RAILS_ENV'] == 'test'
+  - if current_user.admin?
+    #moderator_chat_div
+    - if current_user.chat_open?
+      #chat_opened
+    #last_seen_at{style: 'display: none'}
+      = current_user.last_seen_chat_at
+    #current_user_name{style: 'display: none'}
+      = "#{current_user.name} #{current_user.surname}"

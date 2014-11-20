@@ -3,18 +3,15 @@ class ModeratorChatController < WebsocketRails::BaseController
   end
 
   def user_connected
-    send_message :user_info, {user: 'current_user.firstname'}
   end
 
   def incoming_message
     moderator_message = current_user.moderator_messages.create message: message[:text]
-    broadcast_message :new_message, {user: "#{current_user.name} #{current_user.surname}",
-                                     avatar: current_user.avatar(:thumb), text: moderator_message.message,
-                                     id: moderator_message.id,
-                                     time: moderator_message.time}
+    broadcast_message :new_message, moderator_message.to_json
   end
 
   def send_history
+    current_user.looked_chat
     if message.nil?
       latest_id = ModeratorMessage.last.id
     else
@@ -26,8 +23,21 @@ class ModeratorChatController < WebsocketRails::BaseController
                                                        channel: :moderator_chat)
   end
 
+  def looked_chat
+    current_user.looked_chat
+  end
+
+  def close_chat
+    current_user.looked_chat
+    current_user.update_attributes! chat_open: false
+  end
+
+  def minus_chat
+    current_user.looked_chat
+    current_user.update_attributes! chat_open: message[:status]
+  end
+
   def user_disconnected
-    p 'user disconnected'
   end
 
   def authorize_channels

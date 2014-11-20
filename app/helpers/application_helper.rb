@@ -558,32 +558,35 @@ module ApplicationHelper
     end
   end
 
-  def score_for_concept_field(post, type_field)
-    case type_field
-      when 'status_name'
+  def score_for_concept_field(post, type_field, archive = false)
+    unless archive
+      if ['status_name','status_content'].include?(type_field) and post.status_name and post.status_content
+        40
+      elsif ['status_positive','status_positive_r'].include?(type_field) and post.status_positive and post.status_positive_r
+        30
+      elsif ['status_negative','status_negative_r'].include?(type_field) and post.status_negative and post.status_negative_r
         20
-      when 'status_content'
-        20
-      when 'status_positive'
-        15
-      when 'status_positive_r'
-        15
-      when 'status_negative'
+      elsif ['status_control','status_control_r'].include?(type_field) and post.status_control and post.status_control_r
         10
-      when 'status_negative_r'
+      elsif ['status_obstacles','status_problems','status_reality'].include?(type_field) and post.status_obstacles and post.status_problems and post.status_reality
         10
-      when 'status_control'
-        5
-      when 'status_control_r'
-        5
-      when 'status_obstacles'
-        3
-      when 'status_problems'
-        3
-      when 'status_reality'
-        3
       else
         0
+      end
+    else
+      if ['status_name','status_content'].include?(type_field) and (post.status_name or post.status_content)
+        40
+      elsif ['status_positive','status_positive_r'].include?(type_field) and (post.status_positive or post.status_positive_r)
+        30
+      elsif ['status_negative','status_negative_r'].include?(type_field) and (post.status_negative or post.status_negative_r)
+        20
+      elsif ['status_control','status_control_r'].include?(type_field) and (post.status_control or post.status_control_r)
+        10
+      elsif ['status_obstacles','status_problems','status_reality'].include?(type_field) and ((post.status_obstacles or post.status_problems) and (post.status_obstacles or post.status_reality) and (post.status_problems or post.status_reality))
+        10
+      else
+        0
+      end
     end
   end
 
