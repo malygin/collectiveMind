@@ -10,6 +10,9 @@
   $color_fuscous_gray_approx: #555;
 
   width: 400px;
+  .unreaded {
+    background-color: #8a4c4f;
+  }
   .ui-chatbox-msg{
     color: $fcError;
     .time{

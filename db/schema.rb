@@ -367,10 +367,10 @@ ActiveRecord::Schema.define(version: 20141119164022) do
     t.string   "secret"
     t.string   "secret2"
     t.string   "secret3"
-    t.string   "color"
-    t.string   "code"
     t.boolean  "advices_discontent"
     t.boolean  "advices_concept"
+    t.string   "color"
+    t.string   "code"
     t.integer  "moderator_id"
     t.datetime "date_12"
     t.datetime "date_23"
@@ -1519,6 +1519,7 @@ ActiveRecord::Schema.define(version: 20141119164022) do
     t.integer  "role_stat"
     t.datetime "last_seen_news"
     t.boolean  "chat_open",              default: false
+    t.datetime "last_seen_chat_at"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree

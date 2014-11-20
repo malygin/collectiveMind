@@ -13,7 +13,8 @@ class User < ActiveRecord::Base
   attr_accessible :login, :nickname, :anonym, :secret,
                   :dateActivation, :dateLastEnter, :dateRegistration, :email, :faculty, :group,
                   :name, :string, :string, :surname, :validate, :vkid,
-                  :score, :score_a, :score_g, :score_o, :type_user, :last_seen_news, :chat_open
+                  :score, :score_a, :score_g, :score_o, :type_user, :last_seen_news, :chat_open,
+                  :last_seen_chat_at
 
   has_many :core_project_scores, class_name: 'Core::ProjectScore'
   has_many :help_users_answerses, class_name: 'Help::UsersAnswers'
@@ -353,8 +354,12 @@ class User < ActiveRecord::Base
     g.collect { |k, v| [v.first, v.size] }
   end
 
-  private
 
+  def looked_chat
+    update_attributes! last_seen_chat_at: Time.now
+  end
+
+  private
   #def encrypt_password
   #	self.salt = make_salt if new_record?
   #	#self.encrypted_password = encrypt (password)

@@ -1,46 +1,3 @@
-addMsg = (data, highlight = true, append = true, scroll = true) ->
-  peer = data['user']
-  msg = data['text']
-  time = data['time']
-  id = data['id']
-
-  self = $("#moderator_chat_div").chatbox("option", "boxManager")
-  box = self.elem.uiChatboxLog
-  e = document.createElement("div")
-  $(e).attr('id', id)
-
-  if append
-    box.append e
-  else
-    box.prepend e
-  $(e).hide()
-
-  systemMessage = false
-  if peer
-    timeText = document.createElement('span')
-    $(timeText).addClass('time').text time+ " "
-    peerName = document.createElement("b")
-    $(peerName).addClass("text-lifetape").text peer + " "
-    e.appendChild timeText
-    e.appendChild peerName
-
-
-  else
-    systemMessage = true
-  msgElement = document.createElement((if systemMessage then "i" else "span"))
-  $(msgElement).text msg
-  e.appendChild msgElement
-  $(e).addClass "ui-chatbox-msg"
-  $(e).css "maxWidth", $(box).width()
-  $(e).fadeIn()
-
-  if scroll
-    self._scrollToBottom()
-  if not self.elem.uiChatboxTitlebar.hasClass("ui-state-focus") and not self.highlightLock and highlight
-    self.highlightLock = true
-    self.highlightBox()
-  return
-
 @create_moderator_chat = ->
   if document.location.pathname.match('project') && $('#moderator_chat_div').length > 0
     ws = new WebSocketRails(document.location.host + '/websocket')
@@ -61,6 +18,7 @@ addMsg = (data, highlight = true, append = true, scroll = true) ->
       title: "Модераторский чат"
       messageSent: (id, user, msg) ->
         ws.trigger 'incoming_message', {text: msg}
+        $('#last_seen_at').text(new Date())
         return
     )
     ws.trigger 'get_history'
@@ -68,28 +26,42 @@ addMsg = (data, highlight = true, append = true, scroll = true) ->
       $('span.ui-icon-minusthick').parent().click()
 
     ws.bind 'new_message', (data) ->
-      addMsg data
+      $("#moderator_chat_div").chatbox("option", "boxManager").addMsg data
       if $('div.ui-widget-content.ui-chatbox-content').is(':hidden')
         Messenger.options =
           extraClasses: "messenger-fixed messenger-on-top messenger-on-right messenger-theme-air"
         msg = Messenger().post
           extraClasses: "messenger-fixed messenger-on-top  messenger-on-right messenger-theme-air"
           message: data['text']
-          hideAfter: 1
+          hideAfter: 3
+      else
+        $('#last_seen_at').text(new Date())
+        ws.trigger 'looked_chat'
 
     private_channel.bind 'receive_history', (data) ->
       first_messages = false
       if $('#moderator_chat_div .ui-chatbox-msg').length == 0
         first_messages = true
       $.each data, (index, value) ->
-        addMsg value, false, false, false
+        $("#moderator_chat_div").chatbox("option", "boxManager").addMsg value, false, false, false
       $("a#load_more_messages").remove()
       $("#moderator_chat_div").prepend "<a href='#' id='load_more_messages'>Загрузить еще</a>"
       $("a#load_more_messages").click ->
         ws.trigger 'get_history', {latest_id: $('#moderator_chat_div .ui-chatbox-msg').attr('id')}
       if first_messages
         $("#moderator_chat_div").chatbox("option", "boxManager")._scrollToBottom();
+      $('#last_seen_at').text(new Date())
+
     $('span.ui-icon-closethick').parent().click ->
-      $('a#close_moderator_chat').click()
+      ws.trigger 'close_chat'
+      ws.disconnect()
+      return
     $('span.ui-icon-minusthick').parent().click ->
-      $('a#hide_moderator_chat').click()
+      if $('div.ui-widget-content.ui-chatbox-content').is(':hidden')
+        ws.trigger 'minus_chat', {status: false}
+        $('#last_seen_at').text(new Date())
+      else
+        ws.trigger 'minus_chat', {status: true}
+        $('#last_seen_at').text(new Date())
+      return
+    return
