@@ -226,6 +226,10 @@ class Core::ProjectsController < ApplicationController
       data_content = data_content.map{|d| d[1]}.group_by{|i| i}.map{|k,v| {x: (k.to_datetime.to_f * 1000).to_i,y: v.count} }
       data_comment = data_comment.map{|d| d[1]}.group_by{|i| i}.map{|k,v| {x: (k.to_datetime.to_f * 1000).to_i,y: v.count} }
       data = [{key: "Discontent", values: data_content},{key: "Comment", values: data_comment}]
+    elsif params[:data_stage] == "lifetape_analytics"
+      data_comment = @project.lifetape_comments.date_stage(@project).reorder("life_tape_comments.created_at").pluck("life_tape_comments.id","date(life_tape_comments.created_at)")
+      data_comment = data_comment.map{|d| d[1]}.group_by{|i| i}.map{|k,v| {x: (k.to_datetime.to_f * 1000).to_i,y: v.count} }
+      data = [{key: "Comment", values: data_comment}]
     end
     render json: data
   end

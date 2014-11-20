@@ -24,7 +24,7 @@
             &nbsp;
             =" #{project.name}"
         -elsif ['general_analytics','lifetape_analytics','discontent_analytics','concept_analytics','plan_analytics','estimate_analytics'].include?(params[:action])
-          = link_to "/project/#{project.id}/general_analytics", id: "go_to_project_#{project.id}" do
+          = link_to "/project/#{project.id}/lifetape_analytics", id: "go_to_project_#{project.id}" do
             &nbsp;
             =" #{project.name}"
 

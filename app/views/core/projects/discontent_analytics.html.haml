@@ -115,9 +115,9 @@
                   %td
                     =asp.content
                   %td
-                    =asp.aspect_discontent.by_status(@project.status > 4 ? 1 : 0).count
+                    =asp.aspect_discontent.by_status(@project.status > 4 ? 1 : 0).uniq.count
                   %td
-                    =asp.aspect_discontent.by_status(@project.status > 4 ? 1 : 0).by_style(1).count
+                    =asp.aspect_discontent.by_status(@project.status > 4 ? 1 : 0).by_style(1).uniq.count
                   %td
-                    =asp.aspect_discontent.by_status(@project.status > 4 ? 1 : 0).by_style(0).count
+                    =asp.aspect_discontent.by_status(@project.status > 4 ? 1 : 0).by_style(0).uniq.count
 

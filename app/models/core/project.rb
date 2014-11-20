@@ -342,6 +342,11 @@ class Core::Project < ActiveRecord::Base
         where("discontent_posts.project_id = ?", self.id)
   end
 
+  def lifetape_comments
+    LifeTape::Comment.joins("INNER JOIN life_tape_posts ON life_tape_comments.post_id = life_tape_posts.id").
+        where("life_tape_posts.project_id = ?", self.id)
+  end
+
   def date_begin_stage(table_name)
     table_name = table_name.sub('_posts','').sub('_comments', '')
     if table_name == 'life_tape'
