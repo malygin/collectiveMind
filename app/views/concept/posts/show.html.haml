@@ -18,6 +18,9 @@
             |
             = Russian::strftime(@post.created_at,'%d %B %k:%M:%S')
           %br
+          -if current_user?(@post.user) or boss?
+            %span.label.label-success="#{@post.fullness.nil? ? 40 : @post.fullness + 39} баллов из 110"
+          %br
           -if improve_comment(@post)
             =improve_comment(@post).html_safe
             |
@@ -48,7 +51,7 @@
           -#      %span.text-success=t('show.add_score')
           %br
           %br
-          = render 'shared/post_edit_bar', post:@post
+          = render 'shared/post_edit_bar', post: @post
 
         - if @post.concept_disposts.any?
           .col-md-9
@@ -71,7 +74,6 @@
                       =cd.content
                     %td
                       =level_complite(cd)
-
 
       %br
       .row

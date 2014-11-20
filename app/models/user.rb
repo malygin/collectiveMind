@@ -248,10 +248,10 @@ class User < ActiveRecord::Base
       when :plus_field
         if h[:post].instance_of? Concept::Post
           # self.add_score_by_type(h[:project], h[:post].fullness.nil? ? 40 : h[:post].fullness + 39, :score_g)
-          if h[:type_field] and score_for_concept_field(h[:post],h[:type_field]) > 0
-            self.add_score_by_type(h[:project], score_for_concept_field(h[:post],h[:type_field]), :score_g)
-            if ['status_name','status_content'].include? h[:type_field]
-              self.journals.build(type_event: 'my_add_score_concept', project: h[:project], user_informed: self, body: "#{score_for_concept_field(h[:post],h[:type_field])}", first_id: h[:post].id, body2: trim_content(h[:post].content), viewed: false, personal: true).save!
+          if h[:type_field] and score_for_concept_field(h[:post], h[:type_field]) > 0
+            self.add_score_by_type(h[:project], score_for_concept_field(h[:post], h[:type_field]), :score_g)
+            if ['status_name','status_content'].include?(h[:type_field]) and h[:post].status_name and h[:post].status_content
+              self.journals.build(type_event: 'my_add_score_concept', project: h[:project], user_informed: self, body: "40", first_id: h[:post].id, body2: trim_content(h[:post].content), viewed: false, personal: true).save!
             end
           end
         end
@@ -274,7 +274,7 @@ class User < ActiveRecord::Base
       when :to_archive_plus_post
         self.add_score_by_type(h[:project], -score_for_plus_post(h[:post]), :score_g)
       when :to_archive_plus_field
-        self.add_score_by_type(h[:project], -score_for_concept_field(h[:post],h[:type_field]), :score_g)
+        self.add_score_by_type(h[:project], -score_for_concept_field(h[:post],h[:type_field], true), :score_g)
       when :to_archive_plus_field_all
         self.add_score_by_type(h[:project], -(h[:post].fullness.nil? ? 40 : h[:post].fullness + 39), :score_g)
       when :useful_advice
