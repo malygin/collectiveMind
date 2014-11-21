@@ -7,3 +7,6 @@
       = current_user.last_seen_chat_at
     #current_user_name{style: 'display: none'}
       = "#{current_user.name} #{current_user.surname}"
+    #audio_new_message{style: 'display: none'}
+      = audio_tag '/assets/new_message.wav'
+    #old_title_page{style: 'display: none'}

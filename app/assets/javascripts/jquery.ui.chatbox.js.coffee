@@ -40,6 +40,7 @@
             $(e).mouseenter ->
               $(this).removeClass('unreaded')
               $('.ui-widget-header').removeClass('ui-state-active')
+              $('title').text($('#old_title_page').text())
 
           if append
             box.append e
