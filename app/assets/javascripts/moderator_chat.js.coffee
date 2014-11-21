@@ -1,5 +1,5 @@
 @create_moderator_chat = ->
-  if document.location.pathname.match('project') && $('#moderator_chat_div').length > 0
+  if $('#moderator_chat_div').length > 0
     ws = new WebSocketRails(document.location.host + '/websocket')
     ws.on_open = ->
       console.log 'socket opened'
