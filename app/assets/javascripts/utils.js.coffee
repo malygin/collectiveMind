@@ -1,6 +1,12 @@
 
 @comments_feed = ->
 
+#  check if url contain anchor
+  myLink = document.location.toString();
+  if (myLink.match(/comment_(\d+)/))
+    $('#comment_content_'+myLink.match(/comment_(\d+)/)[1]).effect("highlight",3000);
+    return false;
+
   this.edit_comment = (e)->
     e.preventDefault()
     id = $(this).data('id')
@@ -28,8 +34,6 @@
       height: 0, opacity:0, 500, ->
         $(this).empty()
         $(this).css(opacity:1, height: '')
-
-
     $('#reply_comment_'+$(this).data('id')).fadeIn()
 
   this.reply_comment =(e) ->
@@ -38,7 +42,6 @@
     project = $(this).data('project')
     path = $(this).data('path')
     form = $('#form_reply_comment_'+id)
-    console.log(id)
     form.append('<br/><textarea class="form-control input-transparent comment-textarea"  name="life_tape_comment[content]" placeholder="Ваш комментарий или вопрос" ></textarea>')
     form.append('<div style="display:none"><input name="utf8" type="hidden" value="✓"><input name="_method" type="hidden" value="put"></div>')
     form.append('<div class="pull-right">
