@@ -27,6 +27,7 @@ class GroupsController < ApplicationController
     @group = @project.groups.new group_params
 
     if @group.save
+      @group.group_users.create user_id: current_user.id, owner: true
       redirect_to groups_path(@project)
     else
       render :new

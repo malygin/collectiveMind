@@ -7,6 +7,7 @@ class Group < ActiveRecord::Base
   has_many :chat_messages, class_name: 'GroupChatMessage'
 
   scope :by_project, -> (project) { where project_id: project.id }
+  scope :owner, -> { joins(:group_users).where(owner: true) }
 
   validates :name, :project_id, presence: true
 end
