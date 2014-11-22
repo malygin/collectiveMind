@@ -2,6 +2,7 @@ class GroupChatMessage < ActiveRecord::Base
   #@todo remove
   attr_accessible :content, :group_id
   belongs_to :user
+  belongs_to :group
 
   scope :recent, -> { last(15) }
 

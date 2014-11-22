@@ -4,6 +4,7 @@ class Group < ActiveRecord::Base
   belongs_to :project, class_name: 'Core::Project'
   has_many :group_users, dependent: :destroy
   has_many :users, through: :group_users
+  has_many :chat_messages, class_name: 'GroupChatMessage'
 
   scope :by_project, -> (project) { where project_id: project.id }
 
