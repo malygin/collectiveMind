@@ -1,4 +1,10 @@
 @create_group_chat = ->
+  $("#chat-messages").slimscroll
+    height: "290px"
+    size: "5px"
+    alwaysVisible: true
+    railVisible: true
+
   if false
     ws = new WebSocketRails(document.location.host + '/websocket')
     ws.on_open = ->
