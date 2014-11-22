@@ -1,46 +1,5 @@
-addMsg = (data, highlight = true, append = true, scroll = true) ->
-  peer = data['user']
-  msg = data['text']
-  time = data['time']
-  id = data['id']
-
-  self = $("#group_chat_div").chatbox("option", "boxManager")
-  box = self.elem.uiChatboxLog
-  e = document.createElement("div")
-  $(e).attr('id', id)
-
-  if append
-    box.append e
-  else
-    box.prepend e
-  $(e).hide()
-
-  systemMessage = false
-  if peer
-    timeText = document.createElement('div')
-    $(timeText).addClass('time pull-left').text time
-    peerName = document.createElement("b")
-    $(peerName).text peer + ": "
-    e.appendChild timeText
-    e.appendChild peerName
-  else
-    systemMessage = true
-  msgElement = document.createElement((if systemMessage then "i" else "span"))
-  $(msgElement).text msg
-  e.appendChild msgElement
-  $(e).addClass "ui-chatbox-msg"
-  $(e).css "maxWidth", $(box).width()
-  $(e).fadeIn()
-
-  if scroll
-    self._scrollToBottom()
-  if not self.elem.uiChatboxTitlebar.hasClass("ui-state-focus") and not self.highlightLock and highlight
-    self.highlightLock = true
-    self.highlightBox()
-  return
-
 @create_group_chat = ->
-  if $('#group_chat_div').length > 0
+  if false
     ws = new WebSocketRails(document.location.host + '/websocket')
     ws.on_open = ->
       console.log 'socket opened'
@@ -64,13 +23,13 @@ addMsg = (data, highlight = true, append = true, scroll = true) ->
     )
     ws.trigger 'groups_get_history', {group_id: $('.id_group').attr('id')}
     private_channel.bind 'groups_new_message', (data) ->
-      addMsg data
+      $("#group_chat_div").chatbox("option", "boxManager") data
     private_channel.bind 'groups_receive_history', (data) ->
       first_messages = false
       if $('#group_chat_div .ui-chatbox-msg').length == 0
         first_messages = true
       $.each data, (index, value) ->
-        addMsg value, false, false, false
+        $("#group_chat_div").chatbox("option", "boxManager") value, false, false, false
       $("a#groups_load_more_messages").remove()
       $("#group_chat_div").prepend "<a href='#' id='groups_load_more_messages'>Загрузить еще</a>"
       $("a#groups_load_more_messages").click ->
