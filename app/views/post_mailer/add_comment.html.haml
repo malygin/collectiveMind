@@ -1,15 +1,15 @@
 %html
   %body
     %h3=t('show.mailer.title')
-    =  @comment.content
+    -#=  @comment.content
     %br
-    =link_to t('link.more'), "http://mass-decision.ru/project/9/#{@post.class.name.underscore.pluralize}/#{@post.id}"
+    -#=link_to t('link.more'), "http://mass-decision.ru/project/9/#{@post.class.name.underscore.pluralize}/#{@post.id}"
   %br
   %br
   %br
   %br
   %small
     =t('show.mailer.team')
-    =link_to 'massdecisoin', "http://mass-decision.ru/"
+    =link_to 'massdecision', "http://mass-decision.ru/"
 
 

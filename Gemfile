@@ -104,3 +104,9 @@ gem 'activerecord-deprecated_finders'
 gem 'tinymce-rails'
 # gem 'has_scope'
 gem "historyjs-rails"
+
+gem "resque" #, "~> 2.0.0.pre.1", github: "resque/resque"
+gem 'resque_mailer'
+gem 'resque-scheduler'
+gem 'resque-status'
+gem 'rufus-scheduler', '< 3.0.0'

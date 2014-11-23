@@ -594,6 +594,22 @@ class PostsController < ApplicationController
                                     personal: true, viewed: false).save!
       end
     end
+    # Resque.enqueue(SleepingJob)
+    # Resque.enqueue_in(60.seconds,SleepingJob)
+    # PostMailer.add_comment(post,@comment).deliver_in(2.minutes)
+    # PostMailer.add_comment(post,@comment).deliver
+    # moderators = User.where(users: {type_user: User::TYPES_USER[:admin]})
+    # events = Journal.events_for_moderator_mailer(Time.now.utc.yesterday, moderators)
+    #
+    # g = events.group_by { |e| [e.user_informed, e.project_id] }
+    # feed_journals = g.collect { |k, v| [v.first.user_informed.id, v.first.project_id, v.size] }
+    #
+    # h = {}
+    # feed_journals.each do |arr|
+    #   h[arr[0]] ||= []
+    #   h[arr[0]] << [arr[1],arr[2]]
+    # end
+
 
     render template: 'posts/add_comment'
   end

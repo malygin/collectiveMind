@@ -38,6 +38,11 @@ class Journal < ActiveRecord::Base
     Journal.joins(:project).where('project_id = ?', project_id).active_proc.events_ignore(self.events_ignore_list).created_order
   end
 
+  # scheduler_mailer
+  def self.events_for_moderator_mailer(date, moderators)
+    Journal.where('viewed = ? AND personal = ?', false, true).where(user_informed: moderators).where("journals.created_at >= ?", date).order('created_at DESC')
+  end
+
   # older methods
   def self.events_for_user_feed(project_id, lim = 5)
     Journal.where(' project_id = ? AND personal = ? ', project_id, false).order('created_at DESC')

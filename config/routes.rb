@@ -1,4 +1,9 @@
+require 'resque/server'
+require 'resque_scheduler'
+require 'resque_scheduler/server'
 CollectiveMind::Application.routes.draw do
+  mount Resque::Server.new, at: "/resque"
+
   def posts_routes
     get 'vote_list'  => 'posts#vote_list'
     put 'vote/:post_id'  => 'posts#vote'
