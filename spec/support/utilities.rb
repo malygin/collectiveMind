@@ -1,5 +1,3 @@
-# encoding: utf-8
-
 include SessionsHelper
 include ApplicationHelper
 
@@ -15,7 +13,7 @@ def sign_out
 end
 
 def not_have_content_for_not_auth_user(opened_project,demo_project,closed_project,club_project)
-  expect(page).not_to have_link('list_projects', :text => 'Список процедур', :href => list_projects_path)
+  expect(page).not_to have_link('list_projects', text: 'Список процедур', href: list_projects_path)
   expect(page).not_to have_content 'Закрытые процедуры'
   expect(page).not_to have_content 'Клубные процедуры'
   expect(page).not_to have_content 'closed project'
@@ -24,10 +22,10 @@ def not_have_content_for_not_auth_user(opened_project,demo_project,closed_projec
   expect(page).not_to have_content 'Демо процедуры'
   expect(page).not_to have_content 'opened project'
   expect(page).not_to have_content 'demo project'
-  # expect(page).not_to have_link('go_to_closed_project', :text => 'Перейти к процедуре', :href => "/project/#{closed_project.id}")
-  # expect(page).not_to have_link('go_to_club_project', :text => 'Перейти к процедуре', :href => "/project/#{club_project.id}")
-  # expect(page).not_to have_link('go_to_opened_project', :text => 'Перейти к процедуре', :href => "/project/#{opened_project.id}")
-  # expect(page).not_to have_link('go_to_demo_project', :text => 'Перейти к процедуре', :href => "/project/#{demo_project.id}")
+  # expect(page).not_to have_link('go_to_closed_project', text: 'Перейти к процедуре', href: "/project/#{closed_project.id}")
+  # expect(page).not_to have_link('go_to_club_project', text: 'Перейти к процедуре', href: "/project/#{club_project.id}")
+  # expect(page).not_to have_link('go_to_opened_project', text: 'Перейти к процедуре', href: "/project/#{opened_project.id}")
+  # expect(page).not_to have_link('go_to_demo_project', text: 'Перейти к процедуре', href: "/project/#{demo_project.id}")
   validate_projects_links({closed: closed_project, opened: opened_project, demo: demo_project, club: club_project}, expect: false)
 end
 
@@ -35,15 +33,15 @@ end
 def not_have_content_for_ordinary_user(closed_project,club_project)
   #expect(page).not_to have_selector '#list_projects'
   #expect(page).not_to have_selector "a#list_projects[href='/list_projects']", 'Список процедур'
-  expect(page).not_to have_link('list_projects', :text => 'Список процедур', :href => list_projects_path)
+  expect(page).not_to have_link('list_projects', text: 'Список процедур', href: list_projects_path)
   expect(page).not_to have_content 'Закрытые процедуры'
   expect(page).not_to have_content 'Клубные процедуры'
   expect(page).not_to have_content 'closed project'
   expect(page).not_to have_content 'club project'
   #expect(page).not_to have_selector "a#go_to_closed_project[href='/project/#{closed_project.id}']", 'Перейти к процедуре'
   #expect(page).not_to have_selector "a#go_to_club_project[href='/project/#{club_project.id}']", 'Перейти к процедуре'
-  # expect(page).not_to have_link('go_to_closed_project', :text => 'Перейти к процедуре', :href => "/project/#{closed_project.id}")
-  # expect(page).not_to have_link('go_to_club_project', :text => 'Перейти к процедуре', :href => "/project/#{club_project.id}")
+  # expect(page).not_to have_link('go_to_closed_project', text: 'Перейти к процедуре', href: "/project/#{closed_project.id}")
+  # expect(page).not_to have_link('go_to_club_project', text: 'Перейти к процедуре', href: "/project/#{club_project.id}")
   validate_projects_links({closed: closed_project, club: club_project}, expect: false)
 end
 
@@ -54,8 +52,8 @@ def have_content_for_ordinary_user(opened_project,demo_project)
   expect(page).to have_content 'demo project'
   #expect(page).to have_selector "a#go_to_opened_project[href='/project/#{opened_project.id}']", 'Перейти к процедуре'
   #expect(page).to have_selector "a#go_to_demo_project[href='/project/#{demo_project.id}']", 'Перейти к процедуре'
-  # expect(page).to have_link('go_to_opened_project', :text => 'Перейти к процедуре', :href => "/project/#{opened_project.id}")
-  # expect(page).to have_link('go_to_demo_project', :text => 'Перейти к процедуре', :href => "/project/#{demo_project.id}")
+  # expect(page).to have_link('go_to_opened_project', text: 'Перейти к процедуре', href: "/project/#{opened_project.id}")
+  # expect(page).to have_link('go_to_demo_project', text: 'Перейти к процедуре', href: "/project/#{demo_project.id}")
   validate_projects_links({opened: opened_project, demo: demo_project}, expect: true)
 end
 
@@ -66,29 +64,29 @@ def have_content_for_invited_ordinary_user(closed_project_for_invite,opened_proj
   expect(page).to have_content 'opened project'
   expect(page).to have_content 'demo project'
   expect(page).to have_content 'closed invited project'
-  # expect(page).to have_link('go_to_opened_project', :text => 'Перейти к процедуре', :href => "/project/#{opened_project.id}")
-  # expect(page).to have_link('go_to_demo_project', :text => 'Перейти к процедуре', :href => "/project/#{demo_project.id}")
-  # expect(page).to have_link('go_to_closed_project', :text => 'Перейти к процедуре', :href => "/project/#{closed_project_for_invite.id}")
+  # expect(page).to have_link('go_to_opened_project', text: 'Перейти к процедуре', href: "/project/#{opened_project.id}")
+  # expect(page).to have_link('go_to_demo_project', text: 'Перейти к процедуре', href: "/project/#{demo_project.id}")
+  # expect(page).to have_link('go_to_closed_project', text: 'Перейти к процедуре', href: "/project/#{closed_project_for_invite.id}")
   validate_projects_links({closed: closed_project_for_invite, opened: opened_project, demo: demo_project}, expect: true)
 end
 
 def not_have_content_for_invited_ordinary_user(closed_project,club_project)
-  expect(page).not_to have_link('list_projects', :text => 'Список процедур', :href => list_projects_path)
+  expect(page).not_to have_link('list_projects', text: 'Список процедур', href: list_projects_path)
   expect(page).not_to have_content 'closed project'
   expect(page).not_to have_content 'Клубные процедуры'
   expect(page).not_to have_content 'club project'
-  # expect(page).not_to have_link('go_to_closed_project', :text => 'Перейти к процедуре', :href => "/project/#{closed_project.id}")
-  # expect(page).not_to have_link('go_to_club_project', :text => 'Перейти к процедуре', :href => "/project/#{club_project.id}")
+  # expect(page).not_to have_link('go_to_closed_project', text: 'Перейти к процедуре', href: "/project/#{closed_project.id}")
+  # expect(page).not_to have_link('go_to_club_project', text: 'Перейти к процедуре', href: "/project/#{club_project.id}")
   validate_projects_links({closed: closed_project,club: club_project}, expect: false)
 end
 
 def not_have_content_for_club_user(closed_project)
   #expect(page).not_to have_selector '#list_projects'
-  expect(page).not_to have_link('list_projects', :text => 'Список процедур', :href => list_projects_path)
+  expect(page).not_to have_link('list_projects', text: 'Список процедур', href: list_projects_path)
   expect(page).not_to have_content 'Закрытые процедуры'
   expect(page).not_to have_content 'closed project'
   #expect(page).not_to have_selector "a#go_to_closed_project[href='/project/#{closed_project.id}']", 'Перейти к процедуре'
-  # expect(page).not_to have_link('go_to_closed_project', :text => 'Перейти к процедуре', :href => "/project/#{closed_project.id}")
+  # expect(page).not_to have_link('go_to_closed_project', text: 'Перейти к процедуре', href: "/project/#{closed_project.id}")
   validate_projects_links({closed: closed_project}, expect: false)
 end
 
@@ -102,9 +100,9 @@ def have_content_for_club_user(opened_project,demo_project,club_project)
   #expect(page).to have_selector "a#go_to_opened_project[href='/project/#{opened_project.id}']", 'Перейти к процедуре'
   #expect(page).to have_selector "a#go_to_demo_project[href='/project/#{demo_project.id}']", 'Перейти к процедуре'
   #expect(page).to have_selector "a#go_to_club_project[href='/project/#{club_project.id}']", 'Перейти к процедуре'
-  # expect(page).to have_link('go_to_open_project_'+opened_project.id, :text => 'Перейти к процедуре', :href => "/project/#{opened_project.id}")
-  # expect(page).to have_link('go_to_demo_project_'+demo_project.id, :text => 'Перейти к процедуре', :href => "/project/#{demo_project.id}")
-  # expect(page).to have_link('go_to_club_project_'+club_project.id, :text => 'Перейти к процедуре', :href => "/project/#{club_project.id}")
+  # expect(page).to have_link('go_to_open_project_'+opened_project.id, text: 'Перейти к процедуре', href: "/project/#{opened_project.id}")
+  # expect(page).to have_link('go_to_demo_project_'+demo_project.id, text: 'Перейти к процедуре', href: "/project/#{demo_project.id}")
+  # expect(page).to have_link('go_to_club_project_'+club_project.id, text: 'Перейти к процедуре', href: "/project/#{club_project.id}")
   validate_projects_links({opened: opened_project, demo: demo_project, club: club_project}, expect: true)
 end
 
@@ -117,27 +115,27 @@ def have_content_for_invited_club_user(closed_project_for_invite,opened_project,
   expect(page).to have_content 'demo project'
   expect(page).to have_content 'club project'
   expect(page).to have_content 'closed invited project'
-  # expect(page).to have_link('go_to_opened_project', :text => 'Перейти к процедуре', :href => "/project/#{opened_project.id}")
-  # expect(page).to have_link('go_to_demo_project', :text => 'Перейти к процедуре', :href => "/project/#{demo_project.id}")
-  # expect(page).to have_link('go_to_closed_project', :text => 'Перейти к процедуре', :href => "/project/#{closed_project_for_invite.id}")
-  # expect(page).to have_link('go_to_club_project', :text => 'Перейти к процедуре', :href => "/project/#{club_project.id}")
+  # expect(page).to have_link('go_to_opened_project', text: 'Перейти к процедуре', href: "/project/#{opened_project.id}")
+  # expect(page).to have_link('go_to_demo_project', text: 'Перейти к процедуре', href: "/project/#{demo_project.id}")
+  # expect(page).to have_link('go_to_closed_project', text: 'Перейти к процедуре', href: "/project/#{closed_project_for_invite.id}")
+  # expect(page).to have_link('go_to_club_project', text: 'Перейти к процедуре', href: "/project/#{club_project.id}")
   validate_projects_links({closed: closed_project_for_invite, opened: opened_project, demo: demo_project, club: club_project}, expect: true)
 end
 
 def not_have_content_for_invited_club_user(closed_project)
-  expect(page).not_to have_link('list_projects', :text => 'Список процедур', :href => list_projects_path)
+  expect(page).not_to have_link('list_projects', text: 'Список процедур', href: list_projects_path)
   expect(page).not_to have_content 'closed project'
-  # expect(page).not_to have_link('go_to_closed_project', :text => 'Перейти к процедуре', :href => "/project/#{closed_project.id}")
+  # expect(page).not_to have_link('go_to_closed_project', text: 'Перейти к процедуре', href: "/project/#{closed_project.id}")
   validate_projects_links({closed: closed_project}, expect: false)
 end
 
 def not_have_content_for_moderator(closed_project)
   #expect(page).not_to have_selector '#list_projects'
-  expect(page).not_to have_link('list_projects', :text => 'Список процедур', :href => list_projects_path)
+  expect(page).not_to have_link('list_projects', text: 'Список процедур', href: list_projects_path)
   expect(page).not_to have_content 'Закрытые процедуры'
   expect(page).not_to have_content 'closed project'
   #expect(page).not_to have_selector "a#go_to_closed_project[href='/project/#{closed_project.id}']", 'Перейти к процедуре'
-  # expect(page).not_to have_link('go_to_closed_project', :text => 'Перейти к процедуре', :href => "/project/#{closed_project.id}")
+  # expect(page).not_to have_link('go_to_closed_project', text: 'Перейти к процедуре', href: "/project/#{closed_project.id}")
   validate_projects_links({closed: closed_project}, expect: false)
 end
 
@@ -151,9 +149,9 @@ def have_content_for_moderator(opened_project,demo_project,club_project)
   #expect(page).to have_selector "a#go_to_opened_project[href='/project/#{opened_project.id}']", 'Перейти к процедуре'
   #expect(page).to have_selector "a#go_to_demo_project[href='/project/#{demo_project.id}']", 'Перейти к процедуре'
   #expect(page).to have_selector "a#go_to_club_project[href='/project/#{club_project.id}']", 'Перейти к процедуре'
-  # expect(page).to have_link('go_to_opened_project', :text => 'Перейти к процедуре', :href => "/project/#{opened_project.id}")
-  # expect(page).to have_link('go_to_demo_project', :text => 'Перейти к процедуре', :href => "/project/#{demo_project.id}")
-  # expect(page).to have_link('go_to_club_project', :text => 'Перейти к процедуре', :href => "/project/#{club_project.id}")
+  # expect(page).to have_link('go_to_opened_project', text: 'Перейти к процедуре', href: "/project/#{opened_project.id}")
+  # expect(page).to have_link('go_to_demo_project', text: 'Перейти к процедуре', href: "/project/#{demo_project.id}")
+  # expect(page).to have_link('go_to_club_project', text: 'Перейти к процедуре', href: "/project/#{club_project.id}")
   validate_projects_links({opened: opened_project, demo: demo_project, club: club_project}, expect: true)
 end
 
@@ -166,23 +164,23 @@ def have_content_for_invited_moderator(closed_project_for_invite,opened_project,
   expect(page).to have_content 'demo project'
   expect(page).to have_content 'club project'
   expect(page).to have_content 'closed invited project'
-  # expect(page).to have_link('go_to_opened_project', :text => 'Перейти к процедуре', :href => "/project/#{opened_project.id}")
-  # expect(page).to have_link('go_to_demo_project', :text => 'Перейти к процедуре', :href => "/project/#{demo_project.id}")
-  # expect(page).to have_link('go_to_closed_project', :text => 'Перейти к процедуре', :href => "/project/#{closed_project_for_invite.id}")
-  # expect(page).to have_link('go_to_club_project', :text => 'Перейти к процедуре', :href => "/project/#{club_project.id}")
+  # expect(page).to have_link('go_to_opened_project', text: 'Перейти к процедуре', href: "/project/#{opened_project.id}")
+  # expect(page).to have_link('go_to_demo_project', text: 'Перейти к процедуре', href: "/project/#{demo_project.id}")
+  # expect(page).to have_link('go_to_closed_project', text: 'Перейти к процедуре', href: "/project/#{closed_project_for_invite.id}")
+  # expect(page).to have_link('go_to_club_project', text: 'Перейти к процедуре', href: "/project/#{club_project.id}")
   validate_projects_links({closed: closed_project_for_invite, opened: opened_project, demo: demo_project, club: club_project}, expect: true)
 end
 
 def not_have_content_for_invited_moderator(closed_project)
-  expect(page).not_to have_link('list_projects', :text => 'Список процедур', :href => list_projects_path)
+  expect(page).not_to have_link('list_projects', text: 'Список процедур', href: list_projects_path)
   expect(page).not_to have_content 'closed project'
-  # expect(page).not_to have_link('go_to_closed_project', :text => 'Перейти к процедуре', :href => "/project/#{closed_project.id}")
+  # expect(page).not_to have_link('go_to_closed_project', text: 'Перейти к процедуре', href: "/project/#{closed_project.id}")
   validate_projects_links({closed: closed_project}, expect: false)
 end
 
 def have_content_for_prime_admin(closed_project,opened_project,demo_project,club_project)
   #expect(page).to have_selector '#list_projects'
-  expect(page).to have_link('list_projects', :text => 'Список процедур', :href => list_projects_path)
+  expect(page).to have_link('list_projects', text: 'Список процедур', href: list_projects_path)
   expect(page).to have_content 'Открытые процедуры'
   expect(page).to have_content 'Закрытые процедуры'
   expect(page).to have_content 'Демо процедуры'
@@ -195,10 +193,10 @@ def have_content_for_prime_admin(closed_project,opened_project,demo_project,club
   #expect(page).to have_selector "a#go_to_closed_project[href='/project/#{closed_project.id}']", 'Перейти к процедуре'
   #expect(page).to have_selector "a#go_to_demo_project[href='/project/#{demo_project.id}']", 'Перейти к процедуре'
   #expect(page).to have_selector "a#go_to_club_project[href='/project/#{club_project.id}']", 'Перейти к процедуре'
-  # expect(page).to have_link('go_to_opened_project', :text => 'Перейти к процедуре', :href => "/project/#{opened_project.id}")
-  # expect(page).to have_link('go_to_demo_project', :text => 'Перейти к процедуре', :href => "/project/#{demo_project.id}")
-  # expect(page).to have_link('go_to_closed_project', :text => 'Перейти к процедуре', :href => "/project/#{closed_project.id}")
-  # expect(page).to have_link('go_to_club_project', :text => 'Перейти к процедуре', :href => "/project/#{club_project.id}")
+  # expect(page).to have_link('go_to_opened_project', text: 'Перейти к процедуре', href: "/project/#{opened_project.id}")
+  # expect(page).to have_link('go_to_demo_project', text: 'Перейти к процедуре', href: "/project/#{demo_project.id}")
+  # expect(page).to have_link('go_to_closed_project', text: 'Перейти к процедуре', href: "/project/#{closed_project.id}")
+  # expect(page).to have_link('go_to_club_project', text: 'Перейти к процедуре', href: "/project/#{club_project.id}")
   validate_projects_links({closed: closed_project, opened: opened_project, demo: demo_project, club: club_project}, expect: true)
 end
 
@@ -239,7 +237,7 @@ def validation_visit_not_have_links_for_user(project,user)
   # validate knowbase
   visit knowbase_posts_path(project)
   expect(page).to have_selector "a", 'вернуться к процедуре'
-  expect(page).not_to have_link('new_knowbase_post', :text => '+добавить статью', :href => new_knowbase_post_path(project))
+  expect(page).not_to have_link('new_knowbase_post', text: '+добавить статью', href: new_knowbase_post_path(project))
 
   # validate club rating
   visit users_rc_users_path(project)
@@ -257,8 +255,8 @@ def validation_visit_not_have_links_for_user(project,user)
   visit user_path(project,user)
   expect(page).to have_content user.to_s
   expect(page).to have_content 'Достижения'
-  expect(page).not_to have_link("club_status_#{user.id}", :href => club_toggle_user_path(project,user))
-  expect(page).not_to have_link("userscore_#{user.id}", :href => update_score_user_path(project,user))
+  expect(page).not_to have_link("club_status_#{user.id}", href: club_toggle_user_path(project,user))
+  expect(page).not_to have_link("userscore_#{user.id}", href: update_score_user_path(project,user))
 end
 
 def validation_visit_not_have_links_for_moderator(project,user)
@@ -273,15 +271,15 @@ def validation_visit_not_have_links_for_moderator(project,user)
   # validate profile
   visit user_path(project,user)
   expect(page).to have_content user.to_s
-  expect(page).not_to have_link("club_status_#{user.id}", :href => club_toggle_user_path(project,user))
-  expect(page).not_to have_link("userscore_#{user.id}", :href => update_score_user_path(project,user))
+  expect(page).not_to have_link("club_status_#{user.id}", href: club_toggle_user_path(project,user))
+  expect(page).not_to have_link("userscore_#{user.id}", href: update_score_user_path(project,user))
 end
 
 def validation_visit_links_for_moderator(project)
   # validate knowbase
   visit knowbase_posts_path(project)
   expect(page).to have_selector "a", 'вернуться к процедуре'
-  expect(page).to have_link('new_knowbase_post', :text => '+добавить статью', :href => new_knowbase_post_path(project))
+  expect(page).to have_link('new_knowbase_post', text: '+добавить статью', href: new_knowbase_post_path(project))
 
   # validate club rating
   visit users_rc_users_path(project)
@@ -291,82 +289,82 @@ end
 
 def validate_not_have_admin_links_for_user(project)
   expect(page).not_to have_content 'Настройки Администратора'
-  expect(page).not_to have_link('change_stage', :href => next_stage_core_project_path(project))
-  expect(page).not_to have_link('list_projects', :text => 'Список процедур', :href => list_projects_path)
+  expect(page).not_to have_link('change_stage', href: next_stage_core_project_path(project))
+  expect(page).not_to have_link('list_projects', text: 'Список процедур', href: list_projects_path)
 end
 def validate_not_have_admin_links_for_moderator(project)
-  expect(page).not_to have_link('change_stage', :href => next_stage_core_project_path(project))
-  expect(page).not_to have_link('list_projects', :text => 'Список процедур', :href => list_projects_path)
+  expect(page).not_to have_link('change_stage', href: next_stage_core_project_path(project))
+  expect(page).not_to have_link('list_projects', text: 'Список процедур', href: list_projects_path)
 end
 
 def validate_not_have_moderator_links_for_user(project)
-  expect(page).not_to have_link('go_to_club_rating', :text => 'Клубный рейтинг', :href => users_rc_users_path(project))
-  expect(page).not_to have_link('new_aspect', :text => '+ Добавить новую тему', :href => new_discontent_aspect_path(project))
+  expect(page).not_to have_link('go_to_club_rating', text: 'Клубный рейтинг', href: users_rc_users_path(project))
+  expect(page).not_to have_link('new_aspect', text: '+ Добавить новую тему', href: new_discontent_aspect_path(project))
 end
 
 def validate_have_prime_admin_links(project)
   expect(page).to have_content 'Настройки Администратора'
-  expect(page).to have_link('change_stage', :href => next_stage_core_project_path(project))
-  expect(page).to have_link('list_projects', :text => 'Список процедур', :href => list_projects_path)
+  expect(page).to have_link('change_stage', href: next_stage_core_project_path(project))
+  expect(page).to have_link('list_projects', text: 'Список процедур', href: list_projects_path)
 end
 def validate_have_moderator_links(project)
-  # expect(page).to have_link('go_to_club_rating', :text => 'Клубный рейтинг', :href => users_rc_users_path(project))
-  expect(page).to have_link('new_aspect', :text => '+ Добавить новую тему', :href => new_discontent_aspect_path(project))
+  # expect(page).to have_link('go_to_club_rating', text: 'Клубный рейтинг', href: users_rc_users_path(project))
+  expect(page).to have_link('new_aspect', text: '+ Добавить новую тему', href: new_discontent_aspect_path(project))
 end
 def validate_default_links_and_sidebar(project,user)
   visit "/project/#{project.id}"
 
-  expect(page).to have_link('go_to_logo', :text => 'MASS DECISION', :href => "/project/#{project.id}")
+  expect(page).to have_link('go_to_logo', text: 'MASS DECISION', href: "/project/#{project.id}")
   expect(page).to have_content project.name
   expect(page).to have_content 'Аспекты'
 
-  expect(page).to have_link('go_to_work', :text => 'Помощь по этапу')
-  expect(page).to have_link('go_to_help', :text => 'Помощь', :href => help_posts_path(project))
-  expect(page).to have_link('go_to_knowbase', :text => 'База знаний', :href => knowbase_posts_path(project))
-  expect(page).to have_link('go_to_rating', :text => 'Рейтинг', :href => users_path(project))
-  expect(page).to have_link('go_to_journals', :text => 'Новости', :href => journals_path(project))
-  expect(page).to have_link('go_to_edit_profile', :text => 'Редактировать профиль', :href => edit_user_path(project,user))
-  expect(page).to have_link('go_to_profile', :href => user_path(project,user))
-  expect(page).to have_link('sign_out', :href => destroy_user_session_path)
+  expect(page).to have_link('go_to_work', text: 'Помощь по этапу')
+  expect(page).to have_link('go_to_help', text: 'Помощь', href: help_posts_path(project))
+  expect(page).to have_link('go_to_knowbase', text: 'База знаний', href: knowbase_posts_path(project))
+  expect(page).to have_link('go_to_rating', text: 'Рейтинг', href: users_path(project))
+  expect(page).to have_link('go_to_journals', text: 'Новости', href: journals_path(project))
+  expect(page).to have_link('go_to_edit_profile', text: 'Редактировать профиль', href: edit_user_path(project,user))
+  expect(page).to have_link('go_to_profile', href: user_path(project,user))
+  expect(page).to have_link('sign_out', href: destroy_user_session_path)
 
-  expect(page).to have_link('go_to_life_tape', :text => '1 этап Сбор информации', :href => life_tape_posts_path(project))
-  expect(page).to have_link('go_to_discontent', :text => '2 этап Сбор несовершенств')
-  expect(page).to have_link('go_to_concept', :text => '3 этап Сбор нововведений')
-  expect(page).to have_link('go_to_plan', :text => '4 этап Создание проектов')
-  expect(page).to have_link('go_to_estimate', :text => '5 этап Выставление оценок')
-  #expect(page).to have_link('go_to_discontent', :text => '2 этап', :href => discontent_posts_path(project))
-  #expect(page).to have_link('go_to_concept', :text => '3 этап', :href => concept_posts_path(project))
-  #expect(page).to have_link('go_to_plan', :text => '4 этап', :href => plan_posts_path(project))
-  #expect(page).to have_link('go_to_estimate', :text => '5 этап', :href => estimate_posts_path(project))
+  expect(page).to have_link('go_to_life_tape', text: '1 этап Сбор информации', href: life_tape_posts_path(project))
+  expect(page).to have_link('go_to_discontent', text: '2 этап Сбор несовершенств')
+  expect(page).to have_link('go_to_concept', text: '3 этап Сбор нововведений')
+  expect(page).to have_link('go_to_plan', text: '4 этап Создание проектов')
+  expect(page).to have_link('go_to_estimate', text: '5 этап Выставление оценок')
+  #expect(page).to have_link('go_to_discontent', text: '2 этап', href: discontent_posts_path(project))
+  #expect(page).to have_link('go_to_concept', text: '3 этап', href: concept_posts_path(project))
+  #expect(page).to have_link('go_to_plan', text: '4 этап', href: plan_posts_path(project))
+  #expect(page).to have_link('go_to_estimate', text: '5 этап', href: estimate_posts_path(project))
 end
 
 def validate_projects_links(projects, expect)
   if projects[:opened]
     if expect[:expect]
-      expect(page).to have_link('go_to_opened_project_'+projects[:opened].id.to_s, :text => I18n.t('link.go_to_project'), :href => "/project/#{projects[:opened].id}")
+      expect(page).to have_link('go_to_opened_project_'+projects[:opened].id.to_s, text: I18n.t('link.go_to_project'), href: "/project/#{projects[:opened].id}")
     else
-      expect(page).not_to have_link('go_to_opened_project_'+projects[:opened].id.to_s, :text => I18n.t('link.go_to_project'), :href => "/project/#{projects[:opened].id}")
+      expect(page).not_to have_link('go_to_opened_project_'+projects[:opened].id.to_s, text: I18n.t('link.go_to_project'), href: "/project/#{projects[:opened].id}")
     end
   end
   if projects[:closed]
     if expect[:expect]
-      expect(page).to have_link('go_to_closed_project_'+projects[:closed].id.to_s, :text => I18n.t('link.go_to_project'), :href => "/project/#{projects[:closed].id}")
+      expect(page).to have_link('go_to_closed_project_'+projects[:closed].id.to_s, text: I18n.t('link.go_to_project'), href: "/project/#{projects[:closed].id}")
     else
-      expect(page).not_to have_link('go_to_closed_project_'+projects[:closed].id.to_s, :text => I18n.t('link.go_to_project'), :href => "/project/#{projects[:closed].id}")
+      expect(page).not_to have_link('go_to_closed_project_'+projects[:closed].id.to_s, text: I18n.t('link.go_to_project'), href: "/project/#{projects[:closed].id}")
     end
   end
   if projects[:club]
     if expect[:expect]
-      expect(page).to have_link('go_to_club_project_'+projects[:club].id.to_s, :text => I18n.t('link.go_to_project'), :href => "/project/#{projects[:club].id}")
+      expect(page).to have_link('go_to_club_project_'+projects[:club].id.to_s, text: I18n.t('link.go_to_project'), href: "/project/#{projects[:club].id}")
     else
-      expect(page).not_to have_link('go_to_club_project_'+projects[:club].id.to_s, :text => I18n.t('link.go_to_project'), :href => "/project/#{projects[:club].id}")
+      expect(page).not_to have_link('go_to_club_project_'+projects[:club].id.to_s, text: I18n.t('link.go_to_project'), href: "/project/#{projects[:club].id}")
     end
   end
   if projects[:demo]
     if expect[:expect]
-      expect(page).to have_link('go_to_demo_project_'+projects[:demo].id.to_s, :text => I18n.t('link.go_to_project'), :href => "/project/#{projects[:demo].id}")
+      expect(page).to have_link('go_to_demo_project_'+projects[:demo].id.to_s, text: I18n.t('link.go_to_project'), href: "/project/#{projects[:demo].id}")
     else
-      expect(page).not_to have_link('go_to_demo_project_'+projects[:demo].id.to_s, :text => I18n.t('link.go_to_project'), :href => "/project/#{projects[:demo].id}")
+      expect(page).not_to have_link('go_to_demo_project_'+projects[:demo].id.to_s, text: I18n.t('link.go_to_project'), href: "/project/#{projects[:demo].id}")
     end
   end
 end
