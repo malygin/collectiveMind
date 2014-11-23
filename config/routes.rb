@@ -64,6 +64,9 @@ scope '/project/:project' do
   resources :groups do
     put :become_member
     put :leave
+    put 'invite_user/:user_id', action: 'invite_user'
+    put :take_invite
+    put :reject_invite
   end
 
   namespace :help do
