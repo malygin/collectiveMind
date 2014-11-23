@@ -3,7 +3,28 @@
 
 %section.widget.widget-tabs
   .body.tab-content
-    Чат группы
+    .row
+      .col-md-2
+        %button.btn.btn-success.btn-lg.btn-lock
+          Перейти к проекту
+        %button.btn.btn-info.btn-lg.btn-lock
+          Позвать модератора
+      .col-md-8
+        = render 'chat'
+      .col-md-2
+        Участники
+        %ul.news-list{id: "users_in_group_#{@group.id}"}
+          - @group.users.each do |user|
+            %li
+              = image_tag user.avatar.url(:thumb), class: 'pull-left'
+              .news-item-info
+                .name
+                  = link_to user, user_path(@project, user)
+                .position Product Designer
+                .time Last logged-in: Mar 20, 18:46
+                - if current_user?(user)
+                  = link_to 'Покинуть группу', group_leave_path(@project, @group), method: :put, id: "leave_group_#{@group.id}"
 
-    .id_group{id: @group.id}
-    #group_chat_div
+
+    -#.id_group{id: @group.id, style: 'display: hidden'}
+    -##group_chat_div
