@@ -5,4 +5,9 @@ FactoryGirl.define do
   end
 
   factory :group_user, class: 'GroupUser'
+
+  factory :group_owner, class: 'GroupUser' do
+    owner true
+    invite_accepted true
+  end
 end
