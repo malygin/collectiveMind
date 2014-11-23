@@ -94,29 +94,29 @@ CollectiveMind::Application.configure do
   # config.action_mailer.default_url_options = {host: 'localhost:3000'}
   # config.action_mailer.default_options = {from: 'mass-decision@yandex.ru'}
   # config.action_mailer.default charset = 'utf-8'
-  config.action_mailer.delivery_method = :smtp
-  config.action_mailer.smtp_settings = {
-      address: 'smtp.yandex.ru',
-      port: 465,
-      domain: "yandex.ru",
-      user_name: 'mass-decision@yandex.ru',
-      password: '11nekotyan',
-      authentication: :login,
-      enable_starttls_auto: true,
-      ssl: true
-      # authentication: 'plain',
-      # tls: true
-  }
-
-  # ActionMailer::Base.smtp_settings = {
-  #     port: '587',
-  #     address: 'smtp.mandrillapp.com',
-  #     user_name: ENV['MANDRILL_USERNAME'],
-  #     password: ENV['MANDRILL_APIKEY'],
-  #     domain: 'mandrillapp.com',
-  #     authentication: :plain
+  # config.action_mailer.delivery_method = :smtp
+  # config.action_mailer.smtp_settings = {
+  #     address: 'smtp.yandex.ru',
+  #     port: 465,
+  #     domain: "yandex.ru",
+  #     user_name: 'mass-decision@yandex.ru',
+  #     password: '11nekotyan',
+  #     authentication: :login,
+  #     enable_starttls_auto: true,
+  #     ssl: true
+  #     # authentication: 'plain',
+  #     # tls: true
   # }
-  # ActionMailer::Base.delivery_method = :smtp
+
+  ActionMailer::Base.smtp_settings = {
+      port: '587',
+      address: 'smtp.mandrillapp.com',
+      user_name: ENV['MANDRILL_USERNAME'],
+      password: ENV['MANDRILL_APIKEY'],
+      domain: 'mandrillapp.com',
+      authentication: :plain
+  }
+  ActionMailer::Base.delivery_method = :smtp
 
   config.cache_store = :dalli_store,
       (ENV["MEMCACHIER_SERVERS"] || "").split(","),
