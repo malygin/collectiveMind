@@ -90,7 +90,7 @@ CollectiveMind::Application.configure do
   config.action_mailer.perform_deliveries = true
   config.action_mailer.default charset: 'utf-8'
   config.action_mailer.raise_delivery_errors = false
-  ActionMailer::Base.smtp_settings = {
+  config.action_mailer.smtp_settings = {
       port: '587',
       address: 'smtp.mandrillapp.com',
       user_name: ENV['MANDRILL_USERNAME'],
@@ -98,7 +98,7 @@ CollectiveMind::Application.configure do
       domain: 'mandrillapp.com',
       authentication: :plain
   }
-  ActionMailer::Base.delivery_method = :smtp
+  config.action_mailer.delivery_method = :smtp
 
   config.cache_store = :dalli_store,
       (ENV["MEMCACHIER_SERVERS"] || "").split(","),
