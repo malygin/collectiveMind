@@ -14,4 +14,8 @@ class Group < ActiveRecord::Base
   def owner
     group_users.find_by(owner: true).user
   end
+
+  def moderators
+    users.where(type_user: [1, 6, 7])
+  end
 end

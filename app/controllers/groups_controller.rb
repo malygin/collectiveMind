@@ -79,6 +79,16 @@ class GroupsController < ApplicationController
     redirect_to groups_path(@project)
   end
 
+  def call_moderator
+    @group.moderators.each do |moderator|
+      current_user.journals.build(type_event: 'my_call_to_group', project: @project,
+                                  user_informed: moderator,
+                                  body: "Вас позвали в группу #{@group.name}",
+                                  first_id: @group.id, personal: true, viewed: false).save!
+    end
+    redirect_to group_path(@project, @group)
+  end
+
   private
   def check_owner
     redirect_back_or project_path(@project) unless current_user? @group.owner

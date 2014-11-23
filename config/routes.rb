@@ -67,6 +67,7 @@ scope '/project/:project' do
     put 'invite_user/:user_id', action: 'invite_user'
     put :take_invite
     put :reject_invite
+    put :call_moderator
   end
 
   namespace :help do

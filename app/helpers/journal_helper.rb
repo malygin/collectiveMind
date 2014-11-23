@@ -263,6 +263,8 @@ module JournalHelper
         link_to t('advice.disapproved_notify_text'), polymorphic_path(Advice.find(j.first_id).adviseable, project: project)
       when 'my_invite_to_group'
         link_to j.body, group_path(j.project_id, j.first_id)
+      when 'my_call_to_group'
+        link_to j.body, group_path(j.project_id, j.first_id)
       else
         'что то другое'
     end
