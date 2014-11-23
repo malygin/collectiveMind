@@ -1,7 +1,7 @@
 class GroupsController < ApplicationController
   before_action :journal_data
   before_action :set_group, except: [:index, :new, :create]
-  before_filter :check_admin, only: [:new, :edit, :create, :update, :destroy]
+  before_filter :check_owner, only: [:edit, :update, :destroy]
   before_filter :only_members, only: :show
 
   # GET /groups
@@ -65,8 +65,8 @@ class GroupsController < ApplicationController
     redirect_back_or project_path(@project) unless @group.users.include? current_user
   end
 
-  def check_admin
-    redirect_back_or project_path(@project) unless current_user.admin?
+  def check_owner
+    redirect_back_or project_path(@project) unless current_user? @group.owner
   end
 
   private
