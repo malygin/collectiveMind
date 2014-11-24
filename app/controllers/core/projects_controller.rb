@@ -214,22 +214,30 @@ class Core::ProjectsController < ApplicationController
 
   def graf_data
     @project = Core::Project.find(params[:project]) if params[:project]
+    hash_base = [{x: (Date.parse("2000-01-01").to_datetime.to_f * 1000).to_i, y: 0},{x: (Date.parse("2000-01-02").to_datetime.to_f * 1000).to_i, y: 0},{x: (Date.parse("2000-01-03").to_datetime.to_f * 1000).to_i, y: 0},
+                 {x: (Date.parse("2000-01-04").to_datetime.to_f * 1000).to_i, y: 0},{x: (Date.parse("2000-01-05").to_datetime.to_f * 1000).to_i, y: 0}]
+
     if params[:data_stage] == "concept_analytics"
       data_content = @project.concept_ongoing_post.date_stage(@project).order("concept_posts.created_at").pluck("concept_posts.id","date(concept_posts.created_at)")
       data_comment = @project.concept_comments.date_stage(@project).reorder("concept_comments.created_at").pluck("concept_comments.id","date(concept_comments.created_at)")
       data_content = data_content.map{|d| d[1]}.group_by{|i| i}.map{|k,v| {x: (k.to_datetime.to_f * 1000).to_i,y: v.count} }
       data_comment = data_comment.map{|d| d[1]}.group_by{|i| i}.map{|k,v| {x: (k.to_datetime.to_f * 1000).to_i,y: v.count} }
-      data = [{key: "Concept", values: data_content},{key: "Comment", values: data_comment}]
+      data_content = hash_base | data_content if data_content.size < 5
+      data_comment = hash_base | data_comment if data_comment.size < 5
+      data = [{key: "Нововведения", values: data_content},{key: "Комментарии", values: data_comment}]
     elsif params[:data_stage] == "discontent_analytics"
       data_content = @project.discontents.by_status(@project.status > 4 ? 1 : 0).date_stage(@project).order("discontent_posts.created_at").pluck("discontent_posts.id","date(discontent_posts.created_at)")
       data_comment = @project.discontent_comments.date_stage(@project).reorder("discontent_comments.created_at").pluck("discontent_comments.id","date(discontent_comments.created_at)")
       data_content = data_content.map{|d| d[1]}.group_by{|i| i}.map{|k,v| {x: (k.to_datetime.to_f * 1000).to_i,y: v.count} }
       data_comment = data_comment.map{|d| d[1]}.group_by{|i| i}.map{|k,v| {x: (k.to_datetime.to_f * 1000).to_i,y: v.count} }
-      data = [{key: "Discontent", values: data_content},{key: "Comment", values: data_comment}]
+      data_content = hash_base | data_content if data_content.size < 5
+      data_comment = hash_base | data_comment if data_comment.size < 5
+      data = [{key: "Несовершенства", values: data_content},{key: "Комментарии", values: data_comment}]
     elsif params[:data_stage] == "lifetape_analytics"
       data_comment = @project.lifetape_comments.date_stage(@project).reorder("life_tape_comments.created_at").pluck("life_tape_comments.id","date(life_tape_comments.created_at)")
       data_comment = data_comment.map{|d| d[1]}.group_by{|i| i}.map{|k,v| {x: (k.to_datetime.to_f * 1000).to_i,y: v.count} }
-      data = [{key: "Comment", values: data_comment}]
+      data_comment = hash_base | data_comment if data_comment.size < 5
+      data = [{key: "Комментарии", values: data_comment}]
     end
     render json: data
   end
