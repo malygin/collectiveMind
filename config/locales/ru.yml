@@ -625,6 +625,10 @@ ru:
     mailer:
       title: К вашему материалу на портале mass-decision.ru добавлен комментарий
       team: Команда проекта
+      messages:
+        one: '1 сообщение'
+        few: '%{count} сообщения'
+        other: '%{count} сообщений'
 
     rating:
       title: Рейтинг участников
