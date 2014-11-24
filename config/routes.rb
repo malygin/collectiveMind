@@ -2,7 +2,12 @@ require 'resque/server'
 require 'resque_scheduler'
 require 'resque_scheduler/server'
 CollectiveMind::Application.routes.draw do
-  mount Resque::Server.new, at: "/resque"
+  resque_constraint = lambda do |request|
+    request.env['warden'].authenticate? and request.env['warden'].user.prime_admin?
+  end
+  constraints resque_constraint do
+    mount Resque::Server.new, at: "/resque"
+  end
 
   def posts_routes
     get 'vote_list'  => 'posts#vote_list'

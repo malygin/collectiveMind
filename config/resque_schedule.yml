@@ -1,62 +1,7 @@
 feed_mailer:
-  every: "60s"
+  #  every: "1d"
+  cron: "0 19 * * *"
   class: FeedModeratorMailer
   queue: feed_mailer
   args:
   description: "This job..."
-
-
-
-#sleeping_job:
-##  every:
-##      - "10s"
-##      - :first_in: '30s'
-#  every: "10s"
-#  class: SleepingJob
-#  queue: sleeping_job
-#  args:
-#  description: "This job..."
-
-
-
-#breakfast:
-#  cron: 0 8 * * *
-#  class: SleepingJob
-#  args: scrambled egg
-#  description: Breakfast
-#lunch:
-#  cron: 0 12 * * *
-#  class: SleepingJob
-#  args: penut-butter and jelly sandwich
-#  description: Lunch
-#dinner:
-#  cron: 0 6 * * *
-#  class: SleepingJob
-#  args: Steak
-#  description: Dinner
-#midnight_snack:
-#  cron: 0 0 * * *
-#  class: SleepingJob
-#  args: Milk & Cookies
-#  description: Midnight Snack
-
-#CancelAbandonedOrders:
-#  cron: "*/5 * * * *"
-#
-#queue_documents_for_indexing:
-#  cron: "0 0 * * *"
-#  # you can use rufus-scheduler "every" syntax in place of cron if you prefer
-#  # every: 1h
-#  # By default the job name (hash key) will be taken as worker class name.
-#  # If you want to have a different job name and class name, provide the 'class' option
-#  class: "QueueDocuments"
-#  queue: high
-#  args:
-#  description: "This job queues all content for indexing in solr"
-#
-#clear_leaderboards_contributors:
-#  cron: "30 6 * * 1"
-#  class: "ClearLeaderboards"
-#  queue: low
-#  args: contributors
-#  description: "This job resets the weekly leaderboard for contributions"

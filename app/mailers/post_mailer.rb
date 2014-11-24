@@ -1,21 +1,19 @@
 class PostMailer < ActionMailer::Base
   include Resque::Mailer
 
-  default from: "mass-decision@yandex.ru"#, content_type: "text/html"
+  default from: "mass-decision@yandex.ru"
 
   def add_comment (post, comment)
-    # @user = post.user
-    # @comment  = comment
-    # @post = post
+    @user = post.user
+    @comment  = comment
+    @post = post
     #@todo тему нельзя писать кириллицей
-    # mail(to: @user.email, subject: 'Massdecision ')
-    # mail(to: 'mass-decision@yandex.ru', subject: 'Massdecision ')
-    mail(to: 'irivertime@list.ru', subject: 'Massdecision ')
+    mail(to: @user.email, subject: 'Massdecision ')
   end
 
-  def feed_moderator(user,arr)
+  def feed_moderator(user,feed)
     @user = User.find(user)
-    @projects_count = arr
-    mail(to: @user.email, subject: 'Massdecision ')
+    @projects_feed = feed
+    mail(to: @user.email, from: "massdecision@gmail.com", subject: 'Massdecision ')
   end
 end

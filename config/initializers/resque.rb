@@ -14,5 +14,4 @@ Resque.logger.formatter = Resque::VeryVerboseFormatter.new
 Dir["#{Rails.root}/app/jobs/*.rb"].each { |file| require file }
 Resque.after_fork = Proc.new { ActiveRecord::Base.establish_connection }
 # Resque.schedule = YAML.load_file("#{Rails.root}/config/resque_schedule.yml")
-# Resque.schedule = YAML.load_file('your_resque_schedule.yml')
 Resque.schedule = YAML.load_file(File.join(Rails.root, 'config/resque_schedule.yml'))

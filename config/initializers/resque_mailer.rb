@@ -1,1 +1,0 @@
-# Resque::Mailer.default_queue_name = 'application_specific_mailer'
