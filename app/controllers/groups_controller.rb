@@ -1,8 +1,7 @@
 class GroupsController < ApplicationController
   before_action :journal_data
   before_action :set_group, except: [:index, :new, :create]
-  before_filter :check_admin, only: [:new, :edit, :create, :update, :destroy]
-  before_filter :only_members, only: :show
+  before_filter :check_owner, only: [:edit, :update, :destroy]
 
   # GET /groups
   def index
@@ -11,6 +10,7 @@ class GroupsController < ApplicationController
 
   # GET /groups/1
   def show
+    @users_to_add = @project.users - @group.all_group_users
   end
 
   # GET /groups/new
@@ -27,6 +27,7 @@ class GroupsController < ApplicationController
     @group = @project.groups.new group_params
 
     if @group.save
+      @group.group_users.create user_id: current_user.id, owner: true, invite_accepted: true
       redirect_to groups_path(@project)
     else
       render :new
@@ -59,13 +60,38 @@ class GroupsController < ApplicationController
     redirect_to groups_path(@project)
   end
 
-  private
-  def only_members
-    redirect_back_or project_path(@project) unless @group.users.include? current_user
+  def invite_user
+    @user = User.find params[:user_id]
+    @group.all_group_users.create user_id: @user.id
+    current_user.journals.build(type_event: 'my_invite_to_group', project: @project,
+                                user_informed: @user,
+                                body: "Вас пригласили в группу #{@group.name}",
+                                first_id: @group.id, personal: true, viewed: false).save!
   end
 
-  def check_admin
-    redirect_back_or project_path(@project) unless current_user.admin?
+  def take_invite
+    @group.all_group_users.find_by(user_id: current_user.id).update_attributes(invite_accepted: true)
+    redirect_to group_path(@project, @group)
+  end
+
+  def reject_invite
+    @group.all_group_users.find_by(user_id: current_user.id).destroy
+    redirect_to groups_path(@project)
+  end
+
+  def call_moderator
+    @group.moderators.each do |moderator|
+      current_user.journals.build(type_event: 'my_call_to_group', project: @project,
+                                  user_informed: moderator,
+                                  body: "Вас позвали в группу #{@group.name}",
+                                  first_id: @group.id, personal: true, viewed: false).save!
+    end
+    redirect_to group_path(@project, @group)
+  end
+
+  private
+  def check_owner
+    redirect_back_or project_path(@project) unless current_user? @group.owner
   end
 
   private

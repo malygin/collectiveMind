@@ -114,11 +114,11 @@ $(function(){
 //        });
 
         nv.addGraph(function(){
-            var chart = nv.models.multiBarChart()
+            var chart = nv.models.multiBarChart().stacked(false).showControls(false)
                 .margin({left: 30, bottom: 20, right: 0})
                 .color(keyColor)
                 .controlsColor([$white, $white, $white])
-                .showLegend(false);
+//                .showLegend(false);
 
             chart.yAxis
                 .showMaxMin(false)
@@ -140,7 +140,26 @@ $(function(){
             nv.utils.windowResize(chart.update);
 //            PjaxApp.onResize(chart.update);
 
+//            var barOuterPad, barPad, x, elementWidth,data;
+//
+//            barOuterPad = .2;
+//
+//            barPad = .1;
+//            elementWidth = 600;
+//            data = exampleData();
+//
+//            x = d3.scale.ordinal().domain(data.map(function(d) {
+//                return d.letter;
+//            })).rangeRoundBands([0, elementWidth], barPad, barOuterPad);
+//
+//            svg.append('rect').data(data).enter().append('rect').attr('x', function(d) {
+//                return x(d.letter);
+//            }).attr('width', x.rangeBand());
+
+
             barChart = chart;
+//            chart.groupSpacing(0.5);
+//            chart.width(600);
 
             return chart;
         });

@@ -594,7 +594,6 @@ class PostsController < ApplicationController
                                     personal: true, viewed: false).save!
       end
     end
-
     render template: 'posts/add_comment'
   end
 end

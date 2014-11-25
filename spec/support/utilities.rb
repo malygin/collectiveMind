@@ -1,5 +1,3 @@
-# encoding: utf-8
-
 include SessionsHelper
 include ApplicationHelper
 
@@ -14,8 +12,8 @@ def sign_out
   click_link 'sign_out'
 end
 
-def not_have_content_for_not_auth_user(opened_project,demo_project,closed_project,club_project)
-  expect(page).not_to have_link('list_projects', :text => 'Список процедур', :href => list_projects_path)
+def not_have_content_for_not_auth_user(opened_project, demo_project, closed_project, club_project)
+  expect(page).not_to have_link('list_projects', text: 'Список процедур', href: list_projects_path)
   expect(page).not_to have_content 'Закрытые процедуры'
   expect(page).not_to have_content 'Клубные процедуры'
   expect(page).not_to have_content 'closed project'
@@ -24,75 +22,75 @@ def not_have_content_for_not_auth_user(opened_project,demo_project,closed_projec
   expect(page).not_to have_content 'Демо процедуры'
   expect(page).not_to have_content 'opened project'
   expect(page).not_to have_content 'demo project'
-  # expect(page).not_to have_link('go_to_closed_project', :text => 'Перейти к процедуре', :href => "/project/#{closed_project.id}")
-  # expect(page).not_to have_link('go_to_club_project', :text => 'Перейти к процедуре', :href => "/project/#{club_project.id}")
-  # expect(page).not_to have_link('go_to_opened_project', :text => 'Перейти к процедуре', :href => "/project/#{opened_project.id}")
-  # expect(page).not_to have_link('go_to_demo_project', :text => 'Перейти к процедуре', :href => "/project/#{demo_project.id}")
+  # expect(page).not_to have_link('go_to_closed_project', text: 'Перейти к процедуре', href: "/project/#{closed_project.id}")
+  # expect(page).not_to have_link('go_to_club_project', text: 'Перейти к процедуре', href: "/project/#{club_project.id}")
+  # expect(page).not_to have_link('go_to_opened_project', text: 'Перейти к процедуре', href: "/project/#{opened_project.id}")
+  # expect(page).not_to have_link('go_to_demo_project', text: 'Перейти к процедуре', href: "/project/#{demo_project.id}")
   validate_projects_links({closed: closed_project, opened: opened_project, demo: demo_project, club: club_project}, expect: false)
 end
 
 
-def not_have_content_for_ordinary_user(closed_project,club_project)
+def not_have_content_for_ordinary_user(closed_project, club_project)
   #expect(page).not_to have_selector '#list_projects'
   #expect(page).not_to have_selector "a#list_projects[href='/list_projects']", 'Список процедур'
-  expect(page).not_to have_link('list_projects', :text => 'Список процедур', :href => list_projects_path)
+  expect(page).not_to have_link('list_projects', text: 'Список процедур', href: list_projects_path)
   expect(page).not_to have_content 'Закрытые процедуры'
   expect(page).not_to have_content 'Клубные процедуры'
   expect(page).not_to have_content 'closed project'
   expect(page).not_to have_content 'club project'
   #expect(page).not_to have_selector "a#go_to_closed_project[href='/project/#{closed_project.id}']", 'Перейти к процедуре'
   #expect(page).not_to have_selector "a#go_to_club_project[href='/project/#{club_project.id}']", 'Перейти к процедуре'
-  # expect(page).not_to have_link('go_to_closed_project', :text => 'Перейти к процедуре', :href => "/project/#{closed_project.id}")
-  # expect(page).not_to have_link('go_to_club_project', :text => 'Перейти к процедуре', :href => "/project/#{club_project.id}")
+  # expect(page).not_to have_link('go_to_closed_project', text: 'Перейти к процедуре', href: "/project/#{closed_project.id}")
+  # expect(page).not_to have_link('go_to_club_project', text: 'Перейти к процедуре', href: "/project/#{club_project.id}")
   validate_projects_links({closed: closed_project, club: club_project}, expect: false)
 end
 
-def have_content_for_ordinary_user(opened_project,demo_project)
+def have_content_for_ordinary_user(opened_project, demo_project)
   expect(page).to have_content 'Открытые процедуры'
   expect(page).to have_content 'Демо процедуры'
   expect(page).to have_content 'opened project'
   expect(page).to have_content 'demo project'
   #expect(page).to have_selector "a#go_to_opened_project[href='/project/#{opened_project.id}']", 'Перейти к процедуре'
   #expect(page).to have_selector "a#go_to_demo_project[href='/project/#{demo_project.id}']", 'Перейти к процедуре'
-  # expect(page).to have_link('go_to_opened_project', :text => 'Перейти к процедуре', :href => "/project/#{opened_project.id}")
-  # expect(page).to have_link('go_to_demo_project', :text => 'Перейти к процедуре', :href => "/project/#{demo_project.id}")
+  # expect(page).to have_link('go_to_opened_project', text: 'Перейти к процедуре', href: "/project/#{opened_project.id}")
+  # expect(page).to have_link('go_to_demo_project', text: 'Перейти к процедуре', href: "/project/#{demo_project.id}")
   validate_projects_links({opened: opened_project, demo: demo_project}, expect: true)
 end
 
-def have_content_for_invited_ordinary_user(closed_project_for_invite,opened_project,demo_project)
+def have_content_for_invited_ordinary_user(closed_project_for_invite, opened_project, demo_project)
   expect(page).to have_content 'Закрытые процедуры'
   expect(page).to have_content 'Открытые процедуры'
   expect(page).to have_content 'Демо процедуры'
   expect(page).to have_content 'opened project'
   expect(page).to have_content 'demo project'
   expect(page).to have_content 'closed invited project'
-  # expect(page).to have_link('go_to_opened_project', :text => 'Перейти к процедуре', :href => "/project/#{opened_project.id}")
-  # expect(page).to have_link('go_to_demo_project', :text => 'Перейти к процедуре', :href => "/project/#{demo_project.id}")
-  # expect(page).to have_link('go_to_closed_project', :text => 'Перейти к процедуре', :href => "/project/#{closed_project_for_invite.id}")
+  # expect(page).to have_link('go_to_opened_project', text: 'Перейти к процедуре', href: "/project/#{opened_project.id}")
+  # expect(page).to have_link('go_to_demo_project', text: 'Перейти к процедуре', href: "/project/#{demo_project.id}")
+  # expect(page).to have_link('go_to_closed_project', text: 'Перейти к процедуре', href: "/project/#{closed_project_for_invite.id}")
   validate_projects_links({closed: closed_project_for_invite, opened: opened_project, demo: demo_project}, expect: true)
 end
 
-def not_have_content_for_invited_ordinary_user(closed_project,club_project)
-  expect(page).not_to have_link('list_projects', :text => 'Список процедур', :href => list_projects_path)
+def not_have_content_for_invited_ordinary_user(closed_project, club_project)
+  expect(page).not_to have_link('list_projects', text: 'Список процедур', href: list_projects_path)
   expect(page).not_to have_content 'closed project'
   expect(page).not_to have_content 'Клубные процедуры'
   expect(page).not_to have_content 'club project'
-  # expect(page).not_to have_link('go_to_closed_project', :text => 'Перейти к процедуре', :href => "/project/#{closed_project.id}")
-  # expect(page).not_to have_link('go_to_club_project', :text => 'Перейти к процедуре', :href => "/project/#{club_project.id}")
-  validate_projects_links({closed: closed_project,club: club_project}, expect: false)
+  # expect(page).not_to have_link('go_to_closed_project', text: 'Перейти к процедуре', href: "/project/#{closed_project.id}")
+  # expect(page).not_to have_link('go_to_club_project', text: 'Перейти к процедуре', href: "/project/#{club_project.id}")
+  validate_projects_links({closed: closed_project, club: club_project}, expect: false)
 end
 
 def not_have_content_for_club_user(closed_project)
   #expect(page).not_to have_selector '#list_projects'
-  expect(page).not_to have_link('list_projects', :text => 'Список процедур', :href => list_projects_path)
+  expect(page).not_to have_link('list_projects', text: 'Список процедур', href: list_projects_path)
   expect(page).not_to have_content 'Закрытые процедуры'
   expect(page).not_to have_content 'closed project'
   #expect(page).not_to have_selector "a#go_to_closed_project[href='/project/#{closed_project.id}']", 'Перейти к процедуре'
-  # expect(page).not_to have_link('go_to_closed_project', :text => 'Перейти к процедуре', :href => "/project/#{closed_project.id}")
+  # expect(page).not_to have_link('go_to_closed_project', text: 'Перейти к процедуре', href: "/project/#{closed_project.id}")
   validate_projects_links({closed: closed_project}, expect: false)
 end
 
-def have_content_for_club_user(opened_project,demo_project,club_project)
+def have_content_for_club_user(opened_project, demo_project, club_project)
   expect(page).to have_content 'Открытые процедуры'
   expect(page).to have_content 'Демо процедуры'
   expect(page).to have_content 'Клубные процедуры'
@@ -102,13 +100,13 @@ def have_content_for_club_user(opened_project,demo_project,club_project)
   #expect(page).to have_selector "a#go_to_opened_project[href='/project/#{opened_project.id}']", 'Перейти к процедуре'
   #expect(page).to have_selector "a#go_to_demo_project[href='/project/#{demo_project.id}']", 'Перейти к процедуре'
   #expect(page).to have_selector "a#go_to_club_project[href='/project/#{club_project.id}']", 'Перейти к процедуре'
-  # expect(page).to have_link('go_to_open_project_'+opened_project.id, :text => 'Перейти к процедуре', :href => "/project/#{opened_project.id}")
-  # expect(page).to have_link('go_to_demo_project_'+demo_project.id, :text => 'Перейти к процедуре', :href => "/project/#{demo_project.id}")
-  # expect(page).to have_link('go_to_club_project_'+club_project.id, :text => 'Перейти к процедуре', :href => "/project/#{club_project.id}")
+  # expect(page).to have_link('go_to_open_project_'+opened_project.id, text: 'Перейти к процедуре', href: "/project/#{opened_project.id}")
+  # expect(page).to have_link('go_to_demo_project_'+demo_project.id, text: 'Перейти к процедуре', href: "/project/#{demo_project.id}")
+  # expect(page).to have_link('go_to_club_project_'+club_project.id, text: 'Перейти к процедуре', href: "/project/#{club_project.id}")
   validate_projects_links({opened: opened_project, demo: demo_project, club: club_project}, expect: true)
 end
 
-def have_content_for_invited_club_user(closed_project_for_invite,opened_project,demo_project,club_project)
+def have_content_for_invited_club_user(closed_project_for_invite, opened_project, demo_project, club_project)
   expect(page).to have_content 'Закрытые процедуры'
   expect(page).to have_content 'Открытые процедуры'
   expect(page).to have_content 'Демо процедуры'
@@ -117,31 +115,31 @@ def have_content_for_invited_club_user(closed_project_for_invite,opened_project,
   expect(page).to have_content 'demo project'
   expect(page).to have_content 'club project'
   expect(page).to have_content 'closed invited project'
-  # expect(page).to have_link('go_to_opened_project', :text => 'Перейти к процедуре', :href => "/project/#{opened_project.id}")
-  # expect(page).to have_link('go_to_demo_project', :text => 'Перейти к процедуре', :href => "/project/#{demo_project.id}")
-  # expect(page).to have_link('go_to_closed_project', :text => 'Перейти к процедуре', :href => "/project/#{closed_project_for_invite.id}")
-  # expect(page).to have_link('go_to_club_project', :text => 'Перейти к процедуре', :href => "/project/#{club_project.id}")
+  # expect(page).to have_link('go_to_opened_project', text: 'Перейти к процедуре', href: "/project/#{opened_project.id}")
+  # expect(page).to have_link('go_to_demo_project', text: 'Перейти к процедуре', href: "/project/#{demo_project.id}")
+  # expect(page).to have_link('go_to_closed_project', text: 'Перейти к процедуре', href: "/project/#{closed_project_for_invite.id}")
+  # expect(page).to have_link('go_to_club_project', text: 'Перейти к процедуре', href: "/project/#{club_project.id}")
   validate_projects_links({closed: closed_project_for_invite, opened: opened_project, demo: demo_project, club: club_project}, expect: true)
 end
 
 def not_have_content_for_invited_club_user(closed_project)
-  expect(page).not_to have_link('list_projects', :text => 'Список процедур', :href => list_projects_path)
+  expect(page).not_to have_link('list_projects', text: 'Список процедур', href: list_projects_path)
   expect(page).not_to have_content 'closed project'
-  # expect(page).not_to have_link('go_to_closed_project', :text => 'Перейти к процедуре', :href => "/project/#{closed_project.id}")
+  # expect(page).not_to have_link('go_to_closed_project', text: 'Перейти к процедуре', href: "/project/#{closed_project.id}")
   validate_projects_links({closed: closed_project}, expect: false)
 end
 
 def not_have_content_for_moderator(closed_project)
   #expect(page).not_to have_selector '#list_projects'
-  expect(page).not_to have_link('list_projects', :text => 'Список процедур', :href => list_projects_path)
+  expect(page).not_to have_link('list_projects', text: 'Список процедур', href: list_projects_path)
   expect(page).not_to have_content 'Закрытые процедуры'
   expect(page).not_to have_content 'closed project'
   #expect(page).not_to have_selector "a#go_to_closed_project[href='/project/#{closed_project.id}']", 'Перейти к процедуре'
-  # expect(page).not_to have_link('go_to_closed_project', :text => 'Перейти к процедуре', :href => "/project/#{closed_project.id}")
+  # expect(page).not_to have_link('go_to_closed_project', text: 'Перейти к процедуре', href: "/project/#{closed_project.id}")
   validate_projects_links({closed: closed_project}, expect: false)
 end
 
-def have_content_for_moderator(opened_project,demo_project,club_project)
+def have_content_for_moderator(opened_project, demo_project, club_project)
   expect(page).to have_content 'Открытые процедуры'
   expect(page).to have_content 'Демо процедуры'
   expect(page).to have_content 'Клубные процедуры'
@@ -151,13 +149,13 @@ def have_content_for_moderator(opened_project,demo_project,club_project)
   #expect(page).to have_selector "a#go_to_opened_project[href='/project/#{opened_project.id}']", 'Перейти к процедуре'
   #expect(page).to have_selector "a#go_to_demo_project[href='/project/#{demo_project.id}']", 'Перейти к процедуре'
   #expect(page).to have_selector "a#go_to_club_project[href='/project/#{club_project.id}']", 'Перейти к процедуре'
-  # expect(page).to have_link('go_to_opened_project', :text => 'Перейти к процедуре', :href => "/project/#{opened_project.id}")
-  # expect(page).to have_link('go_to_demo_project', :text => 'Перейти к процедуре', :href => "/project/#{demo_project.id}")
-  # expect(page).to have_link('go_to_club_project', :text => 'Перейти к процедуре', :href => "/project/#{club_project.id}")
+  # expect(page).to have_link('go_to_opened_project', text: 'Перейти к процедуре', href: "/project/#{opened_project.id}")
+  # expect(page).to have_link('go_to_demo_project', text: 'Перейти к процедуре', href: "/project/#{demo_project.id}")
+  # expect(page).to have_link('go_to_club_project', text: 'Перейти к процедуре', href: "/project/#{club_project.id}")
   validate_projects_links({opened: opened_project, demo: demo_project, club: club_project}, expect: true)
 end
 
-def have_content_for_invited_moderator(closed_project_for_invite,opened_project,demo_project,club_project)
+def have_content_for_invited_moderator(closed_project_for_invite, opened_project, demo_project, club_project)
   expect(page).to have_content 'Закрытые процедуры'
   expect(page).to have_content 'Открытые процедуры'
   expect(page).to have_content 'Демо процедуры'
@@ -166,23 +164,23 @@ def have_content_for_invited_moderator(closed_project_for_invite,opened_project,
   expect(page).to have_content 'demo project'
   expect(page).to have_content 'club project'
   expect(page).to have_content 'closed invited project'
-  # expect(page).to have_link('go_to_opened_project', :text => 'Перейти к процедуре', :href => "/project/#{opened_project.id}")
-  # expect(page).to have_link('go_to_demo_project', :text => 'Перейти к процедуре', :href => "/project/#{demo_project.id}")
-  # expect(page).to have_link('go_to_closed_project', :text => 'Перейти к процедуре', :href => "/project/#{closed_project_for_invite.id}")
-  # expect(page).to have_link('go_to_club_project', :text => 'Перейти к процедуре', :href => "/project/#{club_project.id}")
+  # expect(page).to have_link('go_to_opened_project', text: 'Перейти к процедуре', href: "/project/#{opened_project.id}")
+  # expect(page).to have_link('go_to_demo_project', text: 'Перейти к процедуре', href: "/project/#{demo_project.id}")
+  # expect(page).to have_link('go_to_closed_project', text: 'Перейти к процедуре', href: "/project/#{closed_project_for_invite.id}")
+  # expect(page).to have_link('go_to_club_project', text: 'Перейти к процедуре', href: "/project/#{club_project.id}")
   validate_projects_links({closed: closed_project_for_invite, opened: opened_project, demo: demo_project, club: club_project}, expect: true)
 end
 
 def not_have_content_for_invited_moderator(closed_project)
-  expect(page).not_to have_link('list_projects', :text => 'Список процедур', :href => list_projects_path)
+  expect(page).not_to have_link('list_projects', text: 'Список процедур', href: list_projects_path)
   expect(page).not_to have_content 'closed project'
-  # expect(page).not_to have_link('go_to_closed_project', :text => 'Перейти к процедуре', :href => "/project/#{closed_project.id}")
+  # expect(page).not_to have_link('go_to_closed_project', text: 'Перейти к процедуре', href: "/project/#{closed_project.id}")
   validate_projects_links({closed: closed_project}, expect: false)
 end
 
-def have_content_for_prime_admin(closed_project,opened_project,demo_project,club_project)
+def have_content_for_prime_admin(closed_project, opened_project, demo_project, club_project)
   #expect(page).to have_selector '#list_projects'
-  expect(page).to have_link('list_projects', :text => 'Список процедур', :href => list_projects_path)
+  expect(page).to have_link('list_projects', text: 'Список процедур', href: list_projects_path)
   expect(page).to have_content 'Открытые процедуры'
   expect(page).to have_content 'Закрытые процедуры'
   expect(page).to have_content 'Демо процедуры'
@@ -195,18 +193,18 @@ def have_content_for_prime_admin(closed_project,opened_project,demo_project,club
   #expect(page).to have_selector "a#go_to_closed_project[href='/project/#{closed_project.id}']", 'Перейти к процедуре'
   #expect(page).to have_selector "a#go_to_demo_project[href='/project/#{demo_project.id}']", 'Перейти к процедуре'
   #expect(page).to have_selector "a#go_to_club_project[href='/project/#{club_project.id}']", 'Перейти к процедуре'
-  # expect(page).to have_link('go_to_opened_project', :text => 'Перейти к процедуре', :href => "/project/#{opened_project.id}")
-  # expect(page).to have_link('go_to_demo_project', :text => 'Перейти к процедуре', :href => "/project/#{demo_project.id}")
-  # expect(page).to have_link('go_to_closed_project', :text => 'Перейти к процедуре', :href => "/project/#{closed_project.id}")
-  # expect(page).to have_link('go_to_club_project', :text => 'Перейти к процедуре', :href => "/project/#{club_project.id}")
+  # expect(page).to have_link('go_to_opened_project', text: 'Перейти к процедуре', href: "/project/#{opened_project.id}")
+  # expect(page).to have_link('go_to_demo_project', text: 'Перейти к процедуре', href: "/project/#{demo_project.id}")
+  # expect(page).to have_link('go_to_closed_project', text: 'Перейти к процедуре', href: "/project/#{closed_project.id}")
+  # expect(page).to have_link('go_to_club_project', text: 'Перейти к процедуре', href: "/project/#{club_project.id}")
   validate_projects_links({closed: closed_project, opened: opened_project, demo: demo_project, club: club_project}, expect: true)
 end
 
-def create_invite_for_user(project,user)
+def create_invite_for_user(project, user)
   FactoryGirl.create :core_project_user, project_id: project.id, user_id: user.id
 end
 
-def validation_visit_links_for_user(project,user)
+def validation_visit_links_for_user(project, user)
   # validate journal
   visit journals_path(project)
   expect(page).to have_content 'События'
@@ -226,20 +224,20 @@ def validation_visit_links_for_user(project,user)
   expect(page).to have_selector "a", 'вернуться к процедуре'
 
   # validate profile
-  visit user_path(project,user)
+  visit user_path(project, user)
   expect(page).to have_content user.to_s
   expect(page).to have_content 'Достижения' unless user.boss?
 
   # validate edit profile
-  visit edit_user_path(project,user)
+  visit edit_user_path(project, user)
   expect(page).to have_content 'Отредактируйте информацию о себе'
 end
 
-def validation_visit_not_have_links_for_user(project,user)
+def validation_visit_not_have_links_for_user(project, user)
   # validate knowbase
   visit knowbase_posts_path(project)
   expect(page).to have_selector "a", 'вернуться к процедуре'
-  expect(page).not_to have_link('new_knowbase_post', :text => '+добавить статью', :href => new_knowbase_post_path(project))
+  expect(page).not_to have_link('new_knowbase_post', text: '+добавить статью', href: new_knowbase_post_path(project))
 
   # validate club rating
   visit users_rc_users_path(project)
@@ -254,14 +252,14 @@ def validation_visit_not_have_links_for_user(project,user)
   expect(page.current_path).to eq root_path
 
   # validate profile
-  visit user_path(project,user)
+  visit user_path(project, user)
   expect(page).to have_content user.to_s
   expect(page).to have_content 'Достижения'
-  expect(page).not_to have_link("club_status_#{user.id}", :href => club_toggle_user_path(project,user))
-  expect(page).not_to have_link("userscore_#{user.id}", :href => update_score_user_path(project,user))
+  expect(page).not_to have_link("club_status_#{user.id}", href: club_toggle_user_path(project, user))
+  expect(page).not_to have_link("userscore_#{user.id}", href: update_score_user_path(project, user))
 end
 
-def validation_visit_not_have_links_for_moderator(project,user)
+def validation_visit_not_have_links_for_moderator(project, user)
   # validate next_stage
   visit next_stage_core_project_path(project)
   expect(page.current_path).to eq root_path
@@ -271,17 +269,17 @@ def validation_visit_not_have_links_for_moderator(project,user)
   expect(page.current_path).to eq root_path
 
   # validate profile
-  visit user_path(project,user)
+  visit user_path(project, user)
   expect(page).to have_content user.to_s
-  expect(page).not_to have_link("club_status_#{user.id}", :href => club_toggle_user_path(project,user))
-  expect(page).not_to have_link("userscore_#{user.id}", :href => update_score_user_path(project,user))
+  expect(page).not_to have_link("club_status_#{user.id}", href: club_toggle_user_path(project, user))
+  expect(page).not_to have_link("userscore_#{user.id}", href: update_score_user_path(project, user))
 end
 
 def validation_visit_links_for_moderator(project)
   # validate knowbase
   visit knowbase_posts_path(project)
   expect(page).to have_selector "a", 'вернуться к процедуре'
-  expect(page).to have_link('new_knowbase_post', :text => '+добавить статью', :href => new_knowbase_post_path(project))
+  expect(page).to have_link('new_knowbase_post', text: '+добавить статью', href: new_knowbase_post_path(project))
 
   # validate club rating
   visit users_rc_users_path(project)
@@ -291,87 +289,90 @@ end
 
 def validate_not_have_admin_links_for_user(project)
   expect(page).not_to have_content 'Настройки Администратора'
-  expect(page).not_to have_link('change_stage', :href => next_stage_core_project_path(project))
-  expect(page).not_to have_link('list_projects', :text => 'Список процедур', :href => list_projects_path)
+  expect(page).not_to have_link('change_stage', href: next_stage_core_project_path(project))
+  expect(page).not_to have_link('list_projects', text: 'Список процедур', href: list_projects_path)
 end
+
 def validate_not_have_admin_links_for_moderator(project)
-  expect(page).not_to have_link('change_stage', :href => next_stage_core_project_path(project))
-  expect(page).not_to have_link('list_projects', :text => 'Список процедур', :href => list_projects_path)
+  expect(page).not_to have_link('change_stage', href: next_stage_core_project_path(project))
+  expect(page).not_to have_link('list_projects', text: 'Список процедур', href: list_projects_path)
 end
 
 def validate_not_have_moderator_links_for_user(project)
-  expect(page).not_to have_link('go_to_club_rating', :text => 'Клубный рейтинг', :href => users_rc_users_path(project))
-  expect(page).not_to have_link('new_aspect', :text => '+ Добавить новую тему', :href => new_discontent_aspect_path(project))
+  expect(page).not_to have_link('go_to_club_rating', text: 'Клубный рейтинг', href: users_rc_users_path(project))
+  expect(page).not_to have_link('new_aspect', text: '+ Добавить новую тему', href: new_discontent_aspect_path(project))
 end
 
 def validate_have_prime_admin_links(project)
   expect(page).to have_content 'Настройки Администратора'
-  expect(page).to have_link('change_stage', :href => next_stage_core_project_path(project))
-  expect(page).to have_link('list_projects', :text => 'Список процедур', :href => list_projects_path)
+  expect(page).to have_link('change_stage', href: next_stage_core_project_path(project))
+  expect(page).to have_link('list_projects', text: 'Список процедур', href: list_projects_path)
 end
+
 def validate_have_moderator_links(project)
-  # expect(page).to have_link('go_to_club_rating', :text => 'Клубный рейтинг', :href => users_rc_users_path(project))
-  expect(page).to have_link('new_aspect', :text => '+ Добавить новую тему', :href => new_discontent_aspect_path(project))
+  # expect(page).to have_link('go_to_club_rating', text: 'Клубный рейтинг', href: users_rc_users_path(project))
+  expect(page).to have_link('new_aspect', text: '+ Добавить новую тему', href: new_discontent_aspect_path(project))
 end
-def validate_default_links_and_sidebar(project,user)
+
+def validate_default_links_and_sidebar(project, user)
   visit "/project/#{project.id}"
 
-  expect(page).to have_link('go_to_logo', :text => 'MASS DECISION', :href => "/project/#{project.id}")
+  expect(page).to have_link('go_to_logo', text: 'MASS DECISION', href: "/project/#{project.id}")
   expect(page).to have_content project.name
   expect(page).to have_content 'Аспекты'
 
-  expect(page).to have_link('go_to_work', :text => 'Помощь по этапу')
-  expect(page).to have_link('go_to_help', :text => 'Помощь', :href => help_posts_path(project))
-  expect(page).to have_link('go_to_knowbase', :text => 'База знаний', :href => knowbase_posts_path(project))
-  expect(page).to have_link('go_to_rating', :text => 'Рейтинг', :href => users_path(project))
-  expect(page).to have_link('go_to_journals', :text => 'Новости', :href => journals_path(project))
-  expect(page).to have_link('go_to_edit_profile', :text => 'Редактировать профиль', :href => edit_user_path(project,user))
-  expect(page).to have_link('go_to_profile', :href => user_path(project,user))
-  expect(page).to have_link('sign_out', :href => destroy_user_session_path)
+  expect(page).to have_link('go_to_work', text: 'Помощь по этапу')
+  expect(page).to have_link('go_to_help', text: 'Помощь', href: help_posts_path(project))
+  expect(page).to have_link('go_to_knowbase', text: 'База знаний', href: knowbase_posts_path(project))
+  expect(page).to have_link('go_to_rating', text: 'Рейтинг', href: users_path(project))
+  expect(page).to have_link('go_to_journals', text: 'Новости', href: journals_path(project))
+  expect(page).to have_link('go_to_edit_profile', text: 'Редактировать профиль', href: edit_user_path(project, user))
+  expect(page).to have_link('go_to_profile', href: user_path(project, user))
+  expect(page).to have_link('sign_out', href: destroy_user_session_path)
 
-  expect(page).to have_link('go_to_life_tape', :text => '1 этап Сбор информации', :href => life_tape_posts_path(project))
-  expect(page).to have_link('go_to_discontent', :text => '2 этап Сбор несовершенств')
-  expect(page).to have_link('go_to_concept', :text => '3 этап Сбор нововведений')
-  expect(page).to have_link('go_to_plan', :text => '4 этап Создание проектов')
-  expect(page).to have_link('go_to_estimate', :text => '5 этап Выставление оценок')
-  #expect(page).to have_link('go_to_discontent', :text => '2 этап', :href => discontent_posts_path(project))
-  #expect(page).to have_link('go_to_concept', :text => '3 этап', :href => concept_posts_path(project))
-  #expect(page).to have_link('go_to_plan', :text => '4 этап', :href => plan_posts_path(project))
-  #expect(page).to have_link('go_to_estimate', :text => '5 этап', :href => estimate_posts_path(project))
+  expect(page).to have_link('go_to_life_tape', text: '1 этап Сбор информации', href: life_tape_posts_path(project))
+  expect(page).to have_link('go_to_discontent', text: '2 этап Сбор несовершенств')
+  expect(page).to have_link('go_to_concept', text: '3 этап Сбор нововведений')
+  expect(page).to have_link('go_to_plan', text: '4 этап Создание проектов')
+  expect(page).to have_link('go_to_estimate', text: '5 этап Выставление оценок')
+  #expect(page).to have_link('go_to_discontent', text: '2 этап', href: discontent_posts_path(project))
+  #expect(page).to have_link('go_to_concept', text: '3 этап', href: concept_posts_path(project))
+  #expect(page).to have_link('go_to_plan', text: '4 этап', href: plan_posts_path(project))
+  #expect(page).to have_link('go_to_estimate', text: '5 этап', href: estimate_posts_path(project))
 end
 
 def validate_projects_links(projects, expect)
   if projects[:opened]
     if expect[:expect]
-      expect(page).to have_link('go_to_opened_project_'+projects[:opened].id.to_s, :text => I18n.t('link.go_to_project'), :href => "/project/#{projects[:opened].id}")
+      expect(page).to have_link('go_to_opened_project_'+projects[:opened].id.to_s, text: I18n.t('link.go_to_project'), href: "/project/#{projects[:opened].id}")
     else
-      expect(page).not_to have_link('go_to_opened_project_'+projects[:opened].id.to_s, :text => I18n.t('link.go_to_project'), :href => "/project/#{projects[:opened].id}")
+      expect(page).not_to have_link('go_to_opened_project_'+projects[:opened].id.to_s, text: I18n.t('link.go_to_project'), href: "/project/#{projects[:opened].id}")
     end
   end
   if projects[:closed]
     if expect[:expect]
-      expect(page).to have_link('go_to_closed_project_'+projects[:closed].id.to_s, :text => I18n.t('link.go_to_project'), :href => "/project/#{projects[:closed].id}")
+      expect(page).to have_link('go_to_closed_project_'+projects[:closed].id.to_s, text: I18n.t('link.go_to_project'), href: "/project/#{projects[:closed].id}")
     else
-      expect(page).not_to have_link('go_to_closed_project_'+projects[:closed].id.to_s, :text => I18n.t('link.go_to_project'), :href => "/project/#{projects[:closed].id}")
+      expect(page).not_to have_link('go_to_closed_project_'+projects[:closed].id.to_s, text: I18n.t('link.go_to_project'), href: "/project/#{projects[:closed].id}")
     end
   end
   if projects[:club]
     if expect[:expect]
-      expect(page).to have_link('go_to_club_project_'+projects[:club].id.to_s, :text => I18n.t('link.go_to_project'), :href => "/project/#{projects[:club].id}")
+      expect(page).to have_link('go_to_club_project_'+projects[:club].id.to_s, text: I18n.t('link.go_to_project'), href: "/project/#{projects[:club].id}")
     else
-      expect(page).not_to have_link('go_to_club_project_'+projects[:club].id.to_s, :text => I18n.t('link.go_to_project'), :href => "/project/#{projects[:club].id}")
+      expect(page).not_to have_link('go_to_club_project_'+projects[:club].id.to_s, text: I18n.t('link.go_to_project'), href: "/project/#{projects[:club].id}")
     end
   end
   if projects[:demo]
     if expect[:expect]
-      expect(page).to have_link('go_to_demo_project_'+projects[:demo].id.to_s, :text => I18n.t('link.go_to_project'), :href => "/project/#{projects[:demo].id}")
+      expect(page).to have_link('go_to_demo_project_'+projects[:demo].id.to_s, text: I18n.t('link.go_to_project'), href: "/project/#{projects[:demo].id}")
     else
-      expect(page).not_to have_link('go_to_demo_project_'+projects[:demo].id.to_s, :text => I18n.t('link.go_to_project'), :href => "/project/#{projects[:demo].id}")
+      expect(page).not_to have_link('go_to_demo_project_'+projects[:demo].id.to_s, text: I18n.t('link.go_to_project'), href: "/project/#{projects[:demo].id}")
     end
   end
 end
 
-def prepare_life_tape(project,user)
+def prepare_life_tape(project, user)
   @aspect1 = FactoryGirl.create :discontent_aspect, project: project, content: 'aspect 1'
   @aspect2 = FactoryGirl.create :discontent_aspect, project: project, content: 'aspect 2'
   @post1 = FactoryGirl.create :life_tape_post, project: project
@@ -382,7 +383,7 @@ def prepare_life_tape(project,user)
 end
 
 
-def prepare_journal(project,user)
+def prepare_journal(project, user)
   Journal.destroy_all
   @journal_today = FactoryGirl.create :journal, project: project, user: user, body: 'news_today', created_at: Time.zone.now.utc.to_date + 12.hours
   @journal_yesterday = FactoryGirl.create :journal, project: project, user: user, body: 'news_yesterday', created_at: Time.zone.now.utc.yesterday.to_date + 12.hours
@@ -414,12 +415,12 @@ def prepare_awards
   FactoryGirl.create :award, name: "3000 рейтинга и более", url: "3000points", position: 22
 end
 
-def prepare_discontents(project,user)
+def prepare_discontents(project, user)
   #@todo нужны ассоциации, чтобы сперва создать аспект, потом дисконтент со связью
   @aspect1 = FactoryGirl.create :aspect, project: project, content: 'aspect 1'
   @aspect2 = FactoryGirl.create :aspect, project: project, content: 'aspect 2'
-  @discontent1 = FactoryGirl.create :discontent, project: project,user: user,  anonym: false, content: 'discontent 1', whend: 'when 1', whered: 'where 1'
-  @discontent2 = FactoryGirl.create :discontent, project: project,user: user, anonym: false, content: 'discontent 2', whend: 'when 2', whered: 'where 2'
+  @discontent1 = FactoryGirl.create :discontent, project: project, user: user, anonym: false, content: 'discontent 1', whend: 'when 1', whered: 'where 1'
+  @discontent2 = FactoryGirl.create :discontent, project: project, user: user, anonym: false, content: 'discontent 2', whend: 'when 2', whered: 'where 2'
   @disasp1 = FactoryGirl.create :discontent_post_aspect, post_id: @discontent1.id, aspect_id: @aspect1.id
   @disasp1 = FactoryGirl.create :discontent_post_aspect, post_id: @discontent2.id, aspect_id: @aspect1.id
   @comment1 = FactoryGirl.create :discontent_comment, post: @discontent1, user: user, content: 'comment 1'
@@ -429,18 +430,18 @@ def prepare_for_vote_discontents(project)
   @discontent_group1 = FactoryGirl.create :discontent, project: project, status: 2, content: 'discontent group 1', whend: 'when group 1', whered: 'where group 1'
 end
 
-def prepare_concepts(project,user)
+def prepare_concepts(project, user)
   @aspect1 = FactoryGirl.create :aspect, project: project, content: 'aspect 1'
   @aspect2 = FactoryGirl.create :aspect, project: project, content: 'aspect 2'
-  @discontent1 = FactoryGirl.create :discontent, project: project, status:4, content: 'discontent 1', whend: 'when 1', whered: 'where 1'
-  @discontent2 = FactoryGirl.create :discontent, project: project, status:4, content: 'discontent 2', whend: 'when 2', whered: 'where 2'
+  @discontent1 = FactoryGirl.create :discontent, project: project, status: 4, content: 'discontent 1', whend: 'when 1', whered: 'where 1'
+  @discontent2 = FactoryGirl.create :discontent, project: project, status: 4, content: 'discontent 2', whend: 'when 2', whered: 'where 2'
   @disasp1 = FactoryGirl.create :discontent_post_aspect, post_id: @discontent1.id, aspect_id: @aspect1.id
   @disasp1 = FactoryGirl.create :discontent_post_aspect, post_id: @discontent2.id, aspect_id: @aspect1.id
 
-  @concept1 = FactoryGirl.create :concept,user: user, project: project
-  @concept2 = FactoryGirl.create :concept,user: user, project: project
-  @concept_aspect1 = FactoryGirl.create :concept_aspect, discontent_aspect_id: @discontent1.id, concept_post_id: @concept1.id,positive:'positive 1', negative: 'negative 1', title: 'title 1', control:'control 1', content:'content 1',reality:'reality 1',problems:'problems 1',name:'name 1'
-  @concept_aspect2 = FactoryGirl.create :concept_aspect, discontent_aspect_id: @discontent1.id, concept_post_id: @concept2.id,positive:'positive 2', negative: 'negative 2', title: 'title 2', control:'control 2', content:'content 2',reality:'reality 2',problems:'problems 2',name:'name 2'
+  @concept1 = FactoryGirl.create :concept, user: user, project: project
+  @concept2 = FactoryGirl.create :concept, user: user, project: project
+  @concept_aspect1 = FactoryGirl.create :concept_aspect, discontent_aspect_id: @discontent1.id, concept_post_id: @concept1.id, positive: 'positive 1', negative: 'negative 1', title: 'title 1', control: 'control 1', content: 'content 1', reality: 'reality 1', problems: 'problems 1', name: 'name 1'
+  @concept_aspect2 = FactoryGirl.create :concept_aspect, discontent_aspect_id: @discontent1.id, concept_post_id: @concept2.id, positive: 'positive 2', negative: 'negative 2', title: 'title 2', control: 'control 2', content: 'content 2', reality: 'reality 2', problems: 'problems 2', name: 'name 2'
   @condis1 = FactoryGirl.create :concept_post_discontent, post_id: @concept1.id, discontent_post_id: @discontent1.id
   @condis2 = FactoryGirl.create :concept_post_discontent, post_id: @concept2.id, discontent_post_id: @discontent1.id
   @comment1 = FactoryGirl.create :concept_comment, post: @concept1, user: user, content: 'comment 1'
@@ -449,44 +450,44 @@ end
 def prepare_plans(project)
   @aspect1 = FactoryGirl.create :aspect, project: project, content: 'aspect 1'
   @aspect2 = FactoryGirl.create :aspect, project: project, content: 'aspect 2'
-  @discontent1 = FactoryGirl.create :discontent, project: project, status:4, content: 'discontent 1', whend: 'when 1', whered: 'where 1'
-  @discontent2 = FactoryGirl.create :discontent, project: project, status:4, content: 'discontent 2', whend: 'when 2', whered: 'where 2'
+  @discontent1 = FactoryGirl.create :discontent, project: project, status: 4, content: 'discontent 1', whend: 'when 1', whered: 'where 1'
+  @discontent2 = FactoryGirl.create :discontent, project: project, status: 4, content: 'discontent 2', whend: 'when 2', whered: 'where 2'
   @disasp1 = FactoryGirl.create :discontent_post_aspect, post_id: @discontent1.id, aspect_id: @aspect1.id
   @disasp1 = FactoryGirl.create :discontent_post_aspect, post_id: @discontent2.id, aspect_id: @aspect1.id
 
   @concept1 = FactoryGirl.create :concept, project: project
   @concept2 = FactoryGirl.create :concept, project: project
-  @concept_aspect1 = FactoryGirl.create :concept_aspect, discontent_aspect_id: @discontent1.id, concept_post_id: @concept1.id,positive:'positive 1', negative: 'negative 1', title: 'title 1', control:'control 1', content:'content 1',reality:'reality 1',problems:'problems 1',name:'name 1'
-  @concept_aspect2 = FactoryGirl.create :concept_aspect, discontent_aspect_id: @discontent1.id, concept_post_id: @concept2.id,positive:'positive 2', negative: 'negative 2', title: 'title 2', control:'control 2', content:'content 2',reality:'reality 2',problems:'problems 2',name:'name 2'
+  @concept_aspect1 = FactoryGirl.create :concept_aspect, discontent_aspect_id: @discontent1.id, concept_post_id: @concept1.id, positive: 'positive 1', negative: 'negative 1', title: 'title 1', control: 'control 1', content: 'content 1', reality: 'reality 1', problems: 'problems 1', name: 'name 1'
+  @concept_aspect2 = FactoryGirl.create :concept_aspect, discontent_aspect_id: @discontent1.id, concept_post_id: @concept2.id, positive: 'positive 2', negative: 'negative 2', title: 'title 2', control: 'control 2', content: 'content 2', reality: 'reality 2', problems: 'problems 2', name: 'name 2'
   @condis1 = FactoryGirl.create :concept_post_discontent, post_id: @concept1.id, discontent_post_id: @discontent1.id
   @condis2 = FactoryGirl.create :concept_post_discontent, post_id: @concept2.id, discontent_post_id: @discontent1.id
 
   @plan1 = FactoryGirl.create :plan, project: project, name: 'name 1', goal: 'goal 1', content: 'content 1'
   @plan_stage1 = FactoryGirl.create :plan_stage, post_id: @plan1.id, name: 'stage name 1', desc: 'stage desc 1'
-  @plan_aspect1 = FactoryGirl.create :plan_aspect, plan_post_id: @plan1.id, post_stage_id: @plan_stage1.id, positive:'concept positive 1', negative: 'concept negative 1', title: 'concept title 1', control:'control 1', content:'concept content 1',reality:'concept reality 1',problems:'concept problems 1',name:'concept name 1'
+  @plan_aspect1 = FactoryGirl.create :plan_aspect, plan_post_id: @plan1.id, post_stage_id: @plan_stage1.id, positive: 'concept positive 1', negative: 'concept negative 1', title: 'concept title 1', control: 'control 1', content: 'concept content 1', reality: 'concept reality 1', problems: 'concept problems 1', name: 'concept name 1'
   @plan_action1 = FactoryGirl.create :plan_action, plan_post_aspect_id: @plan_aspect1.id, name: 'action name 1', desc: 'action desc 1'
 end
 
-def prepare_estimates(project,user)
+def prepare_estimates(project, user)
   @aspect1 = FactoryGirl.create :aspect, project: project, content: 'aspect 1'
   @aspect2 = FactoryGirl.create :aspect, project: project, content: 'aspect 2'
-  @discontent1 = FactoryGirl.create :discontent, project: project, status:4, content: 'discontent 1', whend: 'when 1', whered: 'where 1'
-  @discontent2 = FactoryGirl.create :discontent, project: project, status:4, content: 'discontent 2', whend: 'when 2', whered: 'where 2'
+  @discontent1 = FactoryGirl.create :discontent, project: project, status: 4, content: 'discontent 1', whend: 'when 1', whered: 'where 1'
+  @discontent2 = FactoryGirl.create :discontent, project: project, status: 4, content: 'discontent 2', whend: 'when 2', whered: 'where 2'
   @disasp1 = FactoryGirl.create :discontent_post_aspect, post_id: @discontent1.id, aspect_id: @aspect1.id
   @disasp1 = FactoryGirl.create :discontent_post_aspect, post_id: @discontent2.id, aspect_id: @aspect1.id
 
   @concept1 = FactoryGirl.create :concept, project: project
   @concept2 = FactoryGirl.create :concept, project: project
-  @concept_aspect1 = FactoryGirl.create :concept_aspect, discontent_aspect_id: @discontent1.id, concept_post_id: @concept1.id,positive:'positive 1', negative: 'negative 1', title: 'title 1', control:'control 1', content:'content 1',reality:'reality 1',problems:'problems 1',name:'name 1'
-  @concept_aspect2 = FactoryGirl.create :concept_aspect, discontent_aspect_id: @discontent1.id, concept_post_id: @concept2.id,positive:'positive 2', negative: 'negative 2', title: 'title 2', control:'control 2', content:'content 2',reality:'reality 2',problems:'problems 2',name:'name 2'
+  @concept_aspect1 = FactoryGirl.create :concept_aspect, discontent_aspect_id: @discontent1.id, concept_post_id: @concept1.id, positive: 'positive 1', negative: 'negative 1', title: 'title 1', control: 'control 1', content: 'content 1', reality: 'reality 1', problems: 'problems 1', name: 'name 1'
+  @concept_aspect2 = FactoryGirl.create :concept_aspect, discontent_aspect_id: @discontent1.id, concept_post_id: @concept2.id, positive: 'positive 2', negative: 'negative 2', title: 'title 2', control: 'control 2', content: 'content 2', reality: 'reality 2', problems: 'problems 2', name: 'name 2'
   @condis1 = FactoryGirl.create :concept_post_discontent, post_id: @concept1.id, discontent_post_id: @discontent1.id
   @condis2 = FactoryGirl.create :concept_post_discontent, post_id: @concept2.id, discontent_post_id: @discontent1.id
 
   @plan1 = FactoryGirl.create :plan, project: project, name: 'name 1', goal: 'goal 1', content: 'content 1'
   @plan_stage1 = FactoryGirl.create :plan_stage, post_id: @plan1.id, name: 'stage name 1', desc: 'stage desc 1'
-  @plan_aspect1 = FactoryGirl.create :plan_aspect, plan_post_id: @plan1.id, post_stage_id: @plan_stage1.id, positive:'concept positive 1', negative: 'concept negative 1', title: 'concept title 1', control:'control 1', content:'concept content 1',reality:'concept reality 1',problems:'concept problems 1',name:'concept name 1'
+  @plan_aspect1 = FactoryGirl.create :plan_aspect, plan_post_id: @plan1.id, post_stage_id: @plan_stage1.id, positive: 'concept positive 1', negative: 'concept negative 1', title: 'concept title 1', control: 'control 1', content: 'concept content 1', reality: 'concept reality 1', problems: 'concept problems 1', name: 'concept name 1'
   @plan_action1 = FactoryGirl.create :plan_action, plan_post_aspect_id: @plan_aspect1.id, name: 'action name 1', desc: 'action desc 1'
 
-  @estimate1 = FactoryGirl.create :estimate, project: project, post_id: @plan1.id,user: user, content: 'estimate 1', nepr1:0,nepr2:0,nepr3:0,nepr4:0,nep1:0,nep2:0,nep3:0,nep4:0
-  @estimate_aspect1 = FactoryGirl.create :estimate_aspect, post_id: @plan1.id, plan_post_aspect_id: @plan_aspect1.id, op1: 0, op2: 0, op3: 0, op4: 0, on1: 0, on2: 0, on3: 0, on4: 0, ozf1: 0, ozf2: 0, ozf3: 0, ozf4: 0, ozs1: 0, ozs2:0, ozs3:0, ozs4:0
+  @estimate1 = FactoryGirl.create :estimate, project: project, post_id: @plan1.id, user: user, content: 'estimate 1', nepr1: 0, nepr2: 0, nepr3: 0, nepr4: 0, nep1: 0, nep2: 0, nep3: 0, nep4: 0
+  @estimate_aspect1 = FactoryGirl.create :estimate_aspect, post_id: @plan1.id, plan_post_aspect_id: @plan_aspect1.id, op1: 0, op2: 0, op3: 0, op4: 0, on1: 0, on2: 0, on3: 0, on4: 0, ozf1: 0, ozf2: 0, ozf3: 0, ozf4: 0, ozs1: 0, ozs2: 0, ozs3: 0, ozs4: 0
 end

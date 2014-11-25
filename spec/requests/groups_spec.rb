@@ -3,9 +3,10 @@ require 'spec_helper'
 describe 'Groups' do
   subject { page }
   let (:user) { create :user }
+  let (:user2) { create :user }
   let (:moderator) { create :moderator }
   let (:project) { create :core_project }
-  let! (:group) { create :group, project: project }
+  let! (:group) { create_group project, user }
 
   before do
     prepare_concepts(project, user)
@@ -41,17 +42,6 @@ describe 'Groups' do
       expect(page).to have_link "ls_open_group_#{group.id}"
     end
 
-    context 'create group' do
-      it 'not view link' do
-        expect(page).not_to have_link 'create_group'
-      end
-
-      it 'by url - not add' do
-        visit new_group_path(project)
-        expect(current_path) != new_group_path(project)
-      end
-    end
-
     context 'inside group only if member' do
       it 'link' do
         create :group_user, user: user, group: group
@@ -65,8 +55,11 @@ describe 'Groups' do
       end
     end
 
-    context 'become a member' do
+    context 'become a member', js: true do
       before do
+        sign_out
+        sign_in user2
+        visit groups_path(project)
         click_link "become_member_#{group.id}"
       end
 
@@ -80,7 +73,7 @@ describe 'Groups' do
     context 'leave group' do
       before do
         create :group_user, user: user, group: group
-        visit groups_path(project, group)
+        visit group_path(project, group)
         click_link "leave_group_#{group.id}"
       end
 
@@ -91,17 +84,6 @@ describe 'Groups' do
       it { expect(page).not_to have_link "open_group_#{group.id}" }
 
       it { expect(page).not_to have_link "become_member_#{group.id}" }
-    end
-
-    it 'not have link to destroy' do
-      expect(page).not_to have_link "remove_group_#{group.id}"
-    end
-  end
-
-  context 'moderator sign in' do
-    before do
-      sign_in moderator
-      visit groups_path(project)
     end
 
     it 'view link to create group' do

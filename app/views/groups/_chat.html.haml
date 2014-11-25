@@ -1,0 +1,30 @@
+%section.widget.large
+  %header
+    %h4
+      Чат группы
+    .widget-controls
+      %a{href: '#', title: 'Options'}
+        %i.glyphicon.glyphicon-cog
+      %a{'data-widgster' => 'close', href: '#', title: 'Close'}
+        %i.glyphicon.glyphicon-remove
+  .body
+    #chat.chat
+      #chat-messages.chat-messages
+        - @group.chat_messages.each do |message|
+          .chat-message
+            .sender{class: cycle('pull-left', 'pull-right')}
+              .icon
+                = image_tag message.user.avatar.url(:thumb)
+              .time
+                = message.time
+            .chat-message-body{class: cycle('', 'on-left')}
+              %span.arrow
+              .sender
+                = link_to message.user, user_path(@project, message.user)
+              .text
+                = message.content
+      %footer.chat-footer.row
+        .col-xs-9
+          %input#new-message.form-control.input-transparent{placeholder: 'Введите сообщение..', type: 'text'}/
+        .col-xs-3
+          %button#new-message-btn.btn.btn-transparent.btn-block{type: 'button'} Отправить

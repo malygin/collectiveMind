@@ -1,0 +1,7 @@
+feed_mailer:
+  #  every: "1d"
+  cron: "0 19 * * *"
+  class: FeedModeratorMailer
+  queue: feed_mailer
+  args:
+  description: "This job..."
