@@ -24,6 +24,24 @@ module BaseComment
     has_many :improve_concepts, -> { where improve_stage: [1, 2, 3] }, foreign_key: 'improve_comment',
              source: :concept_posts, class_name: 'Concept::Post'
 
+    scope :type_like, -> { where(:useful => 't') }
+    scope :type_status, -> type_status {
+      if type_status == "by_discuss"
+        where(:discuss_status => true)
+      elsif type_status == "by_approve"
+        where(:approve_status => true)
+      elsif type_status == "by_discontent"
+        where(:discontent_status => true)
+      elsif type_status == "by_concept"
+        where(:concept_status => true)
+      end
+    }
+    scope :problem_idea, -> { where("discontent_status = 't' and concept_status = 't'") }
+    scope :discuss_approve, -> { where("#{table_name}.discuss_status = 't' and #{table_name}.approve_status = 't'") }
+    scope :not_check, -> { where(discontent_status: ['f',nil],concept_status: ['f',nil], discuss_status:['f',nil], approve_status: ['f',nil], useful: ['f',nil]) }
+
+    scope :date_stage, ->(project) { where("DATE(#{table_name}.created_at) >= ? AND DATE(#{table_name}.created_at) <= ?", project.date_begin_stage(table_name).to_date, project.date_end_stage(table_name).to_date) if project.date_begin_stage(table_name).present? and project.date_end_stage(table_name).present? }
+
     def get_class
       self.class.name.deconstantize
     end

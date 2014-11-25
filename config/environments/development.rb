@@ -13,9 +13,6 @@ CollectiveMind::Application.configure do
   config.consider_all_requests_local = true
   config.action_controller.perform_caching = false
 
-  # Don't care if the mailer can't send.
-  config.action_mailer.raise_delivery_errors = false
-
   # Print deprecation notices to the Rails logger.
   config.active_support.deprecation = :log
 
@@ -42,12 +39,24 @@ CollectiveMind::Application.configure do
           secret_access_key: 'a2+5VXqKfMMyylWFCCz3/knekGnPS15EcveOWd0I'
       }
   }
-  ActionMailer::Base.smtp_settings = {
-      address: 'smtp.yandex.com',
-      port: 25,
-      user_name: 'mass-decision',
+
+  config.action_mailer.raise_delivery_errors = true
+  config.action_mailer.perform_deliveries = true
+
+  # config.action_mailer.default_url_options = {host: 'localhost:3000'}
+  # config.action_mailer.default_options = {from: 'mass-decision@yandex.ru'}
+  # config.action_mailer.default charset = 'utf-8'
+  config.action_mailer.delivery_method = :smtp
+  config.action_mailer.smtp_settings = {
+      address: 'smtp.yandex.ru',
+      port: 465,
+      domain: "yandex.ru",
+      user_name: 'mass-decision@yandex.ru',
       password: '11nekotyan',
-      authentication: 'plain',
-      enable_starttls_auto: true
+      authentication: :login,
+      enable_starttls_auto: true,
+      ssl: true
+      # authentication: 'plain',
+      # tls: true
   }
 end

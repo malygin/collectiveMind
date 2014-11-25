@@ -1,6 +1,6 @@
 class Discontent::Post < ActiveRecord::Base
   include BasePost
-  attr_accessible :whend, :whered, :aspect_id, :aspect, :style, :discontent_post_id, :important, :status_content, :status_whered, :status_whend, :improve_comment, :improve_stage, :discuss_status
+  attr_accessible :whend, :whered, :aspect_id, :aspect, :style, :anonym, :discontent_post_id, :important, :status_content, :status_whered, :status_whend, :improve_comment, :improve_stage, :discuss_status
 
   belongs_to :aspect
   belongs_to :discontent_post, foreign_key: 'discontent_post_id', class_name: 'Discontent::Post'
@@ -32,6 +32,7 @@ class Discontent::Post < ActiveRecord::Base
   validates_presence_of :content, :whend, :whered #,  :discontent_post_aspects
 
   scope :by_project, ->(p) { where(project_id: p) }
+  scope :by_project_and_not_anonym, ->(p) { where(project_id: p, anonym: false) }
   scope :by_status, ->(p) { where(status: p) }
   scope :by_style, ->(p) { where(style: p) }
   scope :by_positive, ->(p) { where(style: 0, status: p) }
@@ -143,13 +144,13 @@ class Discontent::Post < ActiveRecord::Base
   def get_posts_suitable_for_association
     aspects = self.post_aspects.pluck(:id)
 
-    Discontent::Post.includes(:discontent_post_aspects).where("discontent_post_aspects.aspect_id IN (#{aspects.join(', ')}) and discontent_posts.status = 0 and discontent_posts.id <> ? and (discontent_posts.whered = ? or discontent_posts.whend = ?)", self.id, self.whered, self.whend)
+    Discontent::Post.includes(:discontent_post_aspects).where(discontent_post_aspects: {aspect_id: aspects}).where("discontent_posts.status = 0 and discontent_posts.id <> ? and (discontent_posts.whered = ? or discontent_posts.whend = ?)", self.id, self.whered, self.whend)
   end
 
   def get_posts_for_union_add_list(project)
     aspects = self.post_aspects.pluck(:id)
 
-    posts = Discontent::Post.joins(:discontent_post_aspects).where("discontent_post_aspects.aspect_id IN (#{aspects.join(', ')}) and discontent_posts.status = 0 and discontent_posts.project_id = ? and (discontent_posts.whered = ? or discontent_posts.whend = ?)", project.id, self.whered, self.whend).pluck(:id)
+    posts = Discontent::Post.joins(:discontent_post_aspects).where(discontent_post_aspects: {aspect_id: aspects}).where("discontent_posts.status = 0 and discontent_posts.project_id = ? and (discontent_posts.whered = ? or discontent_posts.whend = ?)", project.id, self.whered, self.whend).pluck(:id)
     Discontent::Post.where("discontent_posts.status = 0 and discontent_posts.project_id = ?", project.id).not_view(posts)
   end
 

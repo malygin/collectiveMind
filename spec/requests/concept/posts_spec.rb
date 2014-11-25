@@ -7,12 +7,13 @@ describe 'Concept ' do
   # screenshot_and_open_image
   # save_and_open_page
   let (:user) {create :user }
+  let (:user_data) {create :user }
   let (:prime_admin) {create :prime_admin }
   let (:moderator) {create :moderator }
   let (:project) {create :core_project, status: 7 }
 
   before  do
-    prepare_concepts(project,user)
+    prepare_concepts(project,user_data)
   end
 
   context  'ordinary user sign in ' do
@@ -38,42 +39,69 @@ describe 'Concept ' do
 
       it ' add new concept', js: true do
         click_link "new_concept_#{@discontent1.id}"
-        expect(page).to have_selector('#btn_improve', visible: true)
-        expect(page).to have_selector('#send_post_concept', visible: true)
-        expect(page).to have_selector('#pa_positive', visible: false)
-        # click_button 'btn_improve'
-        page.find("#btn_improve").click
-        expect(page).to have_selector('#pa_positive', visible: true)
+        # expect(page).to have_selector('#btn_improve', visible: true)
+        # expect(page).to have_selector('#send_post_concept', visible: true)
+        # expect(page).to have_selector('#pa_positive', visible: false)
+        # # click_button 'btn_improve'
+        # page.find("#btn_improve").click
+        # expect(page).to have_selector('#pa_positive', visible: true)
+        expect(page).to have_content 'Перейти к описанию Идеи'
+        click_button 'Перейти к описанию Идеи'
         expect(page).to have_content 'Краткое название вашего нововведения'
-        expect(page).to have_content @discontent1.content
-        expect(page).to have_selector '#main_positive_r_1 input.autocomplete'
-        expect(page).to have_selector '#main_positive_s_1 input.autocomplete'
-        expect(page).to have_selector '#main_negative_r_1 input.autocomplete'
-        expect(page).to have_selector '#main_negative_s_1 input.autocomplete'
-        expect(page).to have_selector '#main_control_r_1 input.autocomplete'
-        expect(page).to have_selector '#main_control_s_1 input.autocomplete'
-
         fill_in "pa_title", with: 'con title'
         fill_in "pa_name", with: 'con name'
         fill_in "pa_content", with: 'con content'
-        fill_in "pa_positive", with: 'con positive'
-        fill_in "pa_negative", with: 'con negative'
-        fill_in "pa_control", with: 'con control'
-        fill_in "pa_obstacles", with: 'con obstacles'
-        fill_in "pa_reality", with: 'con reality'
-        fill_in "pa_problems", with: 'con problems'
-
-        find(:css, "#main_positive_r_1 input.autocomplete[name='resor[][name]']").set('positive_r_1')
-        find(:css, "#main_positive_s_1 input.autocomplete[name='resor[][means][][name]']").set('positive_s_1')
-        find(:css, "#main_negative_r_1 input.autocomplete[name='resor[][name]']").set('negative_r_1')
-        find(:css, "#main_negative_s_1 input.autocomplete[name='resor[][means][][name]']").set('negative_s_1')
-        find(:css, "#main_control_r_1 input.autocomplete[name='resor[][name]']").set('control_r_1')
-        find(:css, "#main_control_s_1 input.autocomplete[name='resor[][means][][name]']").set('control_s_1')
 
         click_button 'send_post_concept'
         expect(page).to have_content 'Ваше нововведение успешно добавлено! Вы можете добавить еще одно или перейти к просмотру списка нововведений.'
         expect(page).to have_content 'Перейти к списку'
-        expect(page).to have_content 'Добавить еще одно'
+        expect(page).to have_content 'Продолжить заполнение'
+        click_button 'Продолжить заполнение'
+
+        # click_button 'Перейти к описанию Функционирования'
+        expect(page).to have_content 'Функционирование'
+        expect(page).to have_selector '#main_positive_r_1 input.autocomplete'
+        expect(page).to have_selector '#main_positive_s_1 input.autocomplete'
+        fill_in "pa_positive", with: 'con positive'
+        find(:css, "#main_positive_r_1 input.autocomplete[name='resor[][name]']").set('positive_r_1')
+        find(:css, "#main_positive_s_1 input.autocomplete[name='resor[][means][][name]']").set('positive_s_1')
+
+        click_button 'send_post_concept'
+        expect(page).to have_content 'Ваше нововведение успешно отредактированно! Вы можете перейти к его просмотру или к просмотру списка нововведений.'
+        expect(page).to have_content 'Перейти к списку'
+        expect(page).to have_content 'Перейти к просмотру'
+        expect(page).to have_content 'Продолжить заполнение'
+        click_button 'Продолжить заполнение'
+
+        click_button 'Перейти к описанию Нежелательных побочных эффектов'
+        expect(page).to have_selector '#main_negative_r_1 input.autocomplete'
+        expect(page).to have_selector '#main_negative_s_1 input.autocomplete'
+        fill_in "pa_negative", with: 'con negative'
+        find(:css, "#main_negative_r_1 input.autocomplete[name='resor[][name]']").set('negative_r_1')
+        find(:css, "#main_negative_s_1 input.autocomplete[name='resor[][means][][name]']").set('negative_s_1')
+
+        click_button 'Перейти к описанию Контроля'
+        expect(page).to have_selector '#main_control_r_1 input.autocomplete'
+        expect(page).to have_selector '#main_control_s_1 input.autocomplete'
+        fill_in "pa_control", with: 'con control'
+        find(:css, "#main_control_r_1 input.autocomplete[name='resor[][name]']").set('control_r_1')
+        find(:css, "#main_control_s_1 input.autocomplete[name='resor[][means][][name]']").set('control_s_1')
+
+        click_button 'Перейти к описанию Целесообразности'
+        fill_in "pa_obstacles", with: 'con obstacles'
+        fill_in "pa_reality", with: 'con reality'
+        fill_in "pa_problems", with: 'con problems'
+
+        click_button 'Перейти к добавлению Решаемых несовершенств'
+        expect(page).to have_content @discontent1.content
+        expect(page).to have_content @discontent1.whered
+        expect(page).to have_content @discontent1.whend
+
+        click_button 'send_post_concept'
+        expect(page).to have_content 'Ваше нововведение успешно отредактированно! Вы можете перейти к его просмотру или к просмотру списка нововведений.'
+        expect(page).to have_content 'Перейти к списку'
+        expect(page).to have_content 'Перейти к просмотру'
+        expect(page).to have_content 'Продолжить заполнение'
         click_link 'Перейти к списку'
         expect(page).to have_content 'con title'
         click_link 'con title'
@@ -95,32 +123,25 @@ describe 'Concept ' do
 
       it ' can click button to resource', js: true do
         click_link "new_concept_#{@discontent1.id}"
-        expect(page).to have_selector('#btn_improve', visible: true)
-        expect(page).to have_selector('#send_post_concept', visible: true)
-        expect(page).to have_selector('#pa_positive', visible: false)
-        # click_button 'btn_improve'
-        page.find("#btn_improve").click
-        expect(page).to have_selector('#pa_positive', visible: true)
+        # expect(page).to have_selector('#btn_improve', visible: true)
+        # expect(page).to have_selector('#send_post_concept', visible: true)
+        # expect(page).to have_selector('#pa_positive', visible: false)
+        # # click_button 'btn_improve'
+        # page.find("#btn_improve").click
+        # expect(page).to have_selector('#pa_positive', visible: true)
+        expect(page).to have_content 'Перейти к описанию Идеи'
+        click_button 'Перейти к описанию Идеи'
         expect(page).to have_content 'Краткое название вашего нововведения'
-        expect(page).to have_content @discontent1.content
-        expect(page).to have_content @discontent1.whered
-        expect(page).to have_content @discontent1.whend
-        expect(page).to have_selector '#main_positive_r_1 input.autocomplete'
-        expect(page).to have_selector '#main_positive_s_1 input.autocomplete'
-        expect(page).to have_selector '#main_negative_r_1 input.autocomplete'
-        expect(page).to have_selector '#main_negative_s_1 input.autocomplete'
-        expect(page).to have_selector '#main_control_r_1 input.autocomplete'
-        expect(page).to have_selector '#main_control_s_1 input.autocomplete'
-
         fill_in "pa_title", with: 'con title'
         fill_in "pa_name", with: 'con name'
         fill_in "pa_content", with: 'con content'
+
+        click_button 'Перейти к описанию Функционирования'
+        expect(page).to have_selector '#main_positive_r_1 input.autocomplete'
+        expect(page).to have_selector '#main_positive_s_1 input.autocomplete'
         fill_in "pa_positive", with: 'con positive'
-        fill_in "pa_negative", with: 'con negative'
-        fill_in "pa_control", with: 'con control'
-        fill_in "pa_obstacles", with: 'con obstacles'
-        fill_in "pa_reality", with: 'con reality'
-        fill_in "pa_problems", with: 'con problems'
+        find(:css, "#main_positive_r_1 input.autocomplete[name='resor[][name]']").set('positive_r_1')
+        find(:css, "#main_positive_s_1 input.autocomplete[name='resor[][means][][name]']").set('positive_s_1')
 
         find(:css, "#main_positive_r_1 input.autocomplete[name='resor[][name]']").set('main positive_r_1')
         #show desc resourse
@@ -172,10 +193,34 @@ describe 'Concept ' do
         first(:css, "#main_positive_r_3 button[id='destroy_res']").click
         expect(page).not_to have_selector '#main_positive_r_3'
 
+        click_button 'Перейти к описанию Нежелательных побочных эффектов'
+        expect(page).to have_selector '#main_negative_r_1 input.autocomplete'
+        expect(page).to have_selector '#main_negative_s_1 input.autocomplete'
+        fill_in "pa_negative", with: 'con negative'
+        find(:css, "#main_negative_r_1 input.autocomplete[name='resor[][name]']").set('negative_r_1')
+        find(:css, "#main_negative_s_1 input.autocomplete[name='resor[][means][][name]']").set('negative_s_1')
+
+        click_button 'Перейти к описанию Контроля'
+        expect(page).to have_selector '#main_control_r_1 input.autocomplete'
+        expect(page).to have_selector '#main_control_s_1 input.autocomplete'
+        fill_in "pa_control", with: 'con control'
+        find(:css, "#main_control_r_1 input.autocomplete[name='resor[][name]']").set('control_r_1')
+        find(:css, "#main_control_s_1 input.autocomplete[name='resor[][means][][name]']").set('control_s_1')
+
+        click_button 'Перейти к описанию Целесообразности'
+        fill_in "pa_obstacles", with: 'con obstacles'
+        fill_in "pa_reality", with: 'con reality'
+        fill_in "pa_problems", with: 'con problems'
+
+        click_button 'Перейти к добавлению Решаемых несовершенств'
+        expect(page).to have_content @discontent1.content
+        expect(page).to have_content @discontent1.whered
+        expect(page).to have_content @discontent1.whend
+
         click_button 'send_post_concept'
         expect(page).to have_content 'Ваше нововведение успешно добавлено! Вы можете добавить еще одно или перейти к просмотру списка нововведений.'
         expect(page).to have_content 'Перейти к списку'
-        expect(page).to have_content 'Добавить еще одно'
+        expect(page).to have_content 'Продолжить заполнение'
         click_link 'Перейти к списку'
         expect(page).to have_content 'con title'
         click_link 'con title'
@@ -194,8 +239,9 @@ describe 'Concept ' do
 
       it ' add new empty concept with error', js: true do
         click_link "new_concept_#{@discontent1.id}"
-        expect(page).to have_content 'Краткое название вашего нововведения'
-        expect(page).to have_content @discontent1.content
+        expect(page).to have_content 'Перейти к описанию Идеи'
+        click_button 'Перейти к описанию Идеи'
+        # expect(page).to have_content @discontent1.content
         click_button 'send_post_concept'
         expect(page).to have_content 'Сохранение не удалось из-за 3 ошибок:'
         expect(page).to have_content 'Поле "Краткое название" не может быть пустым'
@@ -207,7 +253,7 @@ describe 'Concept ' do
         click_button 'send_post_concept'
         expect(page).to have_content 'Ваше нововведение успешно добавлено!'
         expect(page).to have_content 'Перейти к списку'
-        expect(page).to have_content 'Добавить еще одно'
+        expect(page).to have_content 'Продолжить заполнение'
       end
     end
 
@@ -234,15 +280,36 @@ describe 'Concept ' do
 
       it ' can add comments ', js: true do
         fill_in 'comment_text_area', with: 'con comment 1'
-        click_button 'send_post'
-        expect(page).to have_content 'con comment 1'
+        expect {
+          click_button 'send_post'
+          expect(page).to have_content 'con comment 1'
+        }.to change(Journal, :count).by(2)
       end
+
       it ' add new answer comment', js: true do
         click_link "add_child_comment_#{@comment1.id}"
         find("#main_comments_form_#{@comment1.id}").find('#comment_text_area').set "new child comment"
-        find("#main_comments_form_#{@comment1.id}").find('#send_post').click
-        expect(page).to have_content 'new child comment'
+        expect {
+          find("#main_comments_form_#{@comment1.id}").find('#send_post').click
+          expect(page).to have_content 'new child comment'
+        }.to change(Journal.events_for_my_feed(project, user_data), :count).by(2)
       end
+
+      context 'answer to answer comment' do
+        before do
+          @comment2 = FactoryGirl.create :concept_comment, post: @concept1, user: user_data, comment_id: @comment1.id, content: 'comment 2'
+          visit concept_post_path(project, @concept1)
+        end
+        it ' add new answer to answer comment', js: true do
+          click_link "add_child_comment_#{@comment2.id}"
+          find("#child_comments_form_#{@comment2.id}").find('#comment_text_area').set "new child to answer comment"
+          expect {
+            find("#child_comments_form_#{@comment2.id}").find('#send_post').click
+            expect(page).to have_content "new child to answer comment"
+          }.to change(Journal.events_for_my_feed(project, user_data), :count).by(2)
+        end
+      end
+
     end
 
     context 'vote discontent '   do
@@ -297,27 +364,55 @@ describe 'Concept ' do
 
       it ' add new concept', js: true do
         click_link "new_concept_#{@discontent1.id}"
-        expect(page).to have_selector('#btn_improve', visible: true)
-        expect(page).to have_selector('#send_post_concept', visible: true)
-        expect(page).to have_selector('#pa_positive', visible: false)
+        # expect(page).to have_selector('#btn_improve', visible: true)
+        # expect(page).to have_selector('#send_post_concept', visible: true)
+        # expect(page).to have_selector('#pa_positive', visible: false)
         # click_button 'btn_improve'
-        page.find("#btn_improve").click
-        expect(page).to have_selector('#pa_positive', visible: true)
+        # page.find("#btn_improve").click
+        # expect(page).to have_selector('#pa_positive', visible: true)
+
+        expect(page).to have_content 'Перейти к описанию Идеи'
+        click_button 'Перейти к описанию Идеи'
         expect(page).to have_content 'Краткое название вашего нововведения'
-        expect(page).to have_content @discontent1.content
         fill_in "pa_title", with: 'con title'
         fill_in "pa_name", with: 'con name'
         fill_in "pa_content", with: 'con content'
+
+        click_button 'Перейти к описанию Функционирования'
+        expect(page).to have_selector '#main_positive_r_1 input.autocomplete'
+        expect(page).to have_selector '#main_positive_s_1 input.autocomplete'
         fill_in "pa_positive", with: 'con positive'
+        find(:css, "#main_positive_r_1 input.autocomplete[name='resor[][name]']").set('positive_r_1')
+        find(:css, "#main_positive_s_1 input.autocomplete[name='resor[][means][][name]']").set('positive_s_1')
+
+        click_button 'Перейти к описанию Нежелательных побочных эффектов'
+        expect(page).to have_selector '#main_negative_r_1 input.autocomplete'
+        expect(page).to have_selector '#main_negative_s_1 input.autocomplete'
         fill_in "pa_negative", with: 'con negative'
+        find(:css, "#main_negative_r_1 input.autocomplete[name='resor[][name]']").set('negative_r_1')
+        find(:css, "#main_negative_s_1 input.autocomplete[name='resor[][means][][name]']").set('negative_s_1')
+
+        click_button 'Перейти к описанию Контроля'
+        expect(page).to have_selector '#main_control_r_1 input.autocomplete'
+        expect(page).to have_selector '#main_control_s_1 input.autocomplete'
         fill_in "pa_control", with: 'con control'
+        find(:css, "#main_control_r_1 input.autocomplete[name='resor[][name]']").set('control_r_1')
+        find(:css, "#main_control_s_1 input.autocomplete[name='resor[][means][][name]']").set('control_s_1')
+
+        click_button 'Перейти к описанию Целесообразности'
         fill_in "pa_obstacles", with: 'con obstacles'
         fill_in "pa_reality", with: 'con reality'
         fill_in "pa_problems", with: 'con problems'
+
+        click_button 'Перейти к добавлению Решаемых несовершенств'
+        expect(page).to have_content @discontent1.content
+        expect(page).to have_content @discontent1.whered
+        expect(page).to have_content @discontent1.whend
+
         click_button 'send_post_concept'
         expect(page).to have_content 'Ваше нововведение успешно добавлено! Вы можете добавить еще одно или перейти к просмотру списка нововведений.'
         expect(page).to have_content 'Перейти к списку'
-        expect(page).to have_content 'Добавить еще одно'
+        expect(page).to have_content 'Продолжить заполнение'
         click_link 'Перейти к списку'
         expect(page).to have_content 'con title'
       end
@@ -341,31 +436,62 @@ describe 'Concept ' do
         expect(page).to have_content @concept_aspect1.reality
         expect(page).to have_content @concept_aspect1.problems
         expect(page).to have_selector 'textarea#comment_text_area'
-        expect(page).to have_link("plus_post_#{@concept1.id}", :text => 'Выдать баллы', :href => plus_concept_post_path(project,@concept1))
+        # expect(page).to have_link("plus_post_#{@concept1.id}", :text => 'Выдать баллы', :href => plus_concept_post_path(project,@concept1))
       end
 
       it ' can add comments ', js: true do
         fill_in 'comment_text_area', with: 'con comment 1'
-        click_button 'send_post'
-        expect(page).to have_content 'con comment 1'
+        expect {
+          click_button 'send_post'
+          expect(page).to have_content 'con comment 1'
+        }.to change(Journal, :count).by(2)
       end
+
       it ' add new answer comment', js: true do
         click_link "add_child_comment_#{@comment1.id}"
         find("#main_comments_form_#{@comment1.id}").find('#comment_text_area').set "new child comment"
-        find("#main_comments_form_#{@comment1.id}").find('#send_post').click
-        expect(page).to have_content 'new child comment'
+        expect {
+          find("#main_comments_form_#{@comment1.id}").find('#send_post').click
+          expect(page).to have_content 'new child comment'
+        }.to change(Journal.events_for_my_feed(project, user_data), :count).by(2)
       end
+
+      context 'answer to answer comment' do
+        before do
+          @comment2 = FactoryGirl.create :concept_comment, post: @concept1, user: user_data, comment_id: @comment1.id, content: 'comment 2'
+          visit concept_post_path(project, @concept1)
+        end
+        it ' add new answer to answer comment', js: true do
+          click_link "add_child_comment_#{@comment2.id}"
+          find("#child_comments_form_#{@comment2.id}").find('#comment_text_area').set "new child to answer comment"
+          expect {
+            find("#child_comments_form_#{@comment2.id}").find('#send_post').click
+            expect(page).to have_content "new child to answer comment"
+          }.to change(Journal.events_for_my_feed(project, user_data), :count).by(2)
+        end
+      end
+
       context 'like concept'   do
         before do
           prepare_awards
         end
-        it ' like post', js: true do
-          expect(page).to have_link("plus_post_#{@concept1.id}", :text => 'Выдать баллы', :href => plus_concept_post_path(project,@concept1))
-          click_link "plus_post_#{@concept1.id}"
-          expect(page).to have_link("plus_post_#{@concept1.id}", :text => 'Забрать баллы', :href => plus_concept_post_path(project,@concept1))
-          click_link "plus_post_#{@concept1.id}"
-          expect(page).to have_content 'Выдать баллы'
-        end
+        # it ' like post', js: true do
+        #   expect(page).to have_link("plus_post_#{@concept1.id}", :text => 'Выдать баллы', :href => plus_concept_post_path(project,@concept1))
+        #   click_link "plus_post_#{@concept1.id}"
+        #   expect(page).to have_link("plus_post_#{@concept1.id}", :text => 'Забрать баллы', :href => plus_concept_post_path(project,@concept1))
+        #   click_link "plus_post_#{@concept1.id}"
+        #   expect(page).to have_content 'Выдать баллы'
+        # end
+
+        # it ' status all', js: true do
+        #   expect(page).to have_link("concept_field_all_#{@concept1.id}", :text => 'Выдать все', :href => status_post_concept_post_path(project,@concept1,field_all:true))
+        #   find("#concept_field_all_#{@concept1.id}").click
+        #   sleep(5)
+        #   expect(page).to have_link("concept_field_all_#{@concept1.id}", :text => 'Забрать все', :href => status_post_concept_post_path(project,@concept1,field_all:true))
+        #   click_link "concept_field_all_#{@concept1.id}"
+        #   sleep(5)
+        #   expect(page).to have_content 'Выдать все'
+        # end
 
         it ' like comment', js: true do
           expect(page).to have_link("plus_comment_#{@comment1.id}", :text => 'Выдать баллы', :href => plus_comment_concept_post_path(project,@comment1))

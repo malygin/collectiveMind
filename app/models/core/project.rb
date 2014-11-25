@@ -30,7 +30,8 @@ class Core::Project < ActiveRecord::Base
 # 10 disabled
 
   attr_accessible :desc, :postion, :secret, :type_project, :name, :short_desc, :knowledge, :status, :type_access,
-                  :url_logo, :stage1, :stage2, :stage3, :stage4, :stage5, :color, :code, :advices_concept, :advices_discontent
+                  :url_logo, :stage1, :stage2, :stage3, :stage4, :stage5, :color, :code, :advices_concept, :advices_discontent,
+                  :date_12,:date_23,:date_34,:date_45,:date_56
 
 
   has_many :life_tape_posts, -> { where status: 0 }, class_name: 'LifeTape::Post'
@@ -59,6 +60,7 @@ class Core::Project < ActiveRecord::Base
   has_many :users_in_project, through: :core_project_users, source: :user, class_name: 'User'
 
   has_many :essays, -> { where status: 0 }, class_name: 'Essay::Post'
+  has_many :groups
   #has_many :project_score_users, class_name: 'User', through: :core_project_scores, source: :user
   scope :club_projects, ->(user) { where(type_access: 1) if user.cluber? or user.boss? }
   scope :active_proc, -> { where("core_projects.status < ?", 20) }
@@ -80,6 +82,10 @@ class Core::Project < ActiveRecord::Base
     else
       self.proc_aspects.first.position.present? ? self.proc_aspects.order("position DESC") : self.proc_aspects.order(:id)
     end
+  end
+
+  def concepts_without_aspect
+    self.concepts.includes(:concept_post_discontents).where(concept_post_discontents: {post_id: nil})
   end
 
   def stage1_count
@@ -116,6 +122,15 @@ class Core::Project < ActiveRecord::Base
     else
       false
     end
+  end
+
+  def uniq_proc_access?(user)
+    return false if self.moderator_id.present? and not (self.moderator_id == user.id or user.type_user == 7)
+    true
+  end
+
+  def uniq_proc?
+    self.moderator_id.present?
   end
 
   def type_access_name
@@ -302,4 +317,64 @@ class Core::Project < ActiveRecord::Base
       end
     end
   end
+
+  def set_date_for_stage
+    if self.status == 3
+      self.update_attributes(date_12: Time.now.utc)
+    elsif self.status == 7
+      self.update_attributes(date_23: Time.now.utc)
+    elsif self.status == 9
+      self.update_attributes(date_34: Time.now.utc)
+    elsif self.status == 10
+      self.update_attributes(date_45: Time.now.utc)
+    elsif self.status == 20
+      self.update_attributes(date_56: Time.now.utc)
+    end
+  end
+
+  def concept_comments
+    Concept::Comment.joins("INNER JOIN concept_posts ON concept_comments.post_id = concept_posts.id").
+      where("concept_posts.project_id = ?", self.id)
+  end
+
+  def discontent_comments
+    Discontent::Comment.joins("INNER JOIN discontent_posts ON discontent_comments.post_id = discontent_posts.id").
+        where("discontent_posts.project_id = ?", self.id)
+  end
+
+  def lifetape_comments
+    LifeTape::Comment.joins("INNER JOIN life_tape_posts ON life_tape_comments.post_id = life_tape_posts.id").
+        where("life_tape_posts.project_id = ?", self.id)
+  end
+
+  def date_begin_stage(table_name)
+    table_name = table_name.sub('_posts','').sub('_comments', '')
+    if table_name == 'life_tape'
+      self.created_at
+    elsif table_name == 'discontent'
+      self.date_12
+    elsif table_name == 'concept'
+      self.date_23
+    elsif table_name == 'plan'
+      self.date_34
+    elsif table_name == 'estimate'
+      self.date_45
+    end
+  end
+
+  def date_end_stage(table_name)
+    table_name = table_name.sub('_posts', '').sub('_comments', '')
+    if table_name == 'life_tape'
+      self.date_12
+    elsif table_name == 'discontent'
+      self.date_23
+    elsif table_name == 'concept'
+      self.date_34
+    elsif table_name == 'plan'
+      self.date_45
+    elsif table_name == 'estimate'
+      self.date_56
+    end
+  end
+
 end

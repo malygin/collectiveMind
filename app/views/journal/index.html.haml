@@ -28,7 +28,7 @@
             .icon.pull-left
               %i(class="#{journal_icon(journal)}")
             .feed-item-body
-              - if journal.user
+              - if journal.user and not journal.anonym
                 = link_to journal.user, user_path(@project,journal.user)
                 = render partial: '/shared/user_online', object: journal.user
 

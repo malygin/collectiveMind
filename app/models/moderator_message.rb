@@ -3,10 +3,17 @@ class ModeratorMessage < ActiveRecord::Base
   attr_accessible :message
   belongs_to :user
 
-  default_scope { order(:created_at) }
-  scope :recent, -> { limit(10) }
+  scope :recent, -> { last(15) }
 
-  def time
-    Russian::strftime(created_at, '%k:%M:%S')
+  def self.history(to)
+    where(id: (to - 15)..to).reverse.collect { |message| message.to_json }
+  end
+
+  def to_json
+    {user: "#{user.name} #{user.surname}",
+     avatar: user.avatar(:thumb),
+     text: message,
+     id: id,
+     time: created_at}
   end
 end

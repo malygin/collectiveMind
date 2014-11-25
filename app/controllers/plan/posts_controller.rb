@@ -13,7 +13,7 @@ class Plan::PostsController < PostsController
   end
 
   def note_model
-    Plan::PostNote
+    Plan::Note
   end
 
   def voting_model  
@@ -23,7 +23,7 @@ class Plan::PostsController < PostsController
   def prepare_data
     @project = Core::Project.find(params[:project])
     @aspects = Discontent::Aspect.where(project_id: @project, status: 0)
-    @vote_all = Plan::Voting.where("plan_votings.plan_post_id IN (#{@project.plan_post.pluck(:id).join(", ")})").uniq_user.count if @project.status == 11
+    @vote_all = Plan::Voting.where(plan_votings: {plan_post_id: @project.plan_post.pluck(:id) }).uniq_user.count if @project.status == 11
   end
 
   def index
@@ -174,7 +174,7 @@ class Plan::PostsController < PostsController
     @post_aspect = Plan::PostAspect.find(params[:con_id])
     @post_action = Plan::PostAction.find(params[:act_id])
     @post_action.update_attributes(params[:plan_post_action])
-    @post_action.plan_post_action_resources.destroy_all
+    @post_action.plan_post_resources.by_type('action_r').destroy_all
     unless params[:resor_action].nil?
       params[:resor_action].each_with_index do |r,i|
         @post_action.plan_post_resources.by_type('action_r').build(:name => r, :desc => params[:res_action][i], :project_id => @project.id, :style => 3).save  if r!=''
@@ -269,9 +269,7 @@ class Plan::PostsController < PostsController
     @post_concept = Plan::PostAspect.find(params[:concept_id])
     @post_concept.update_attributes(params[:plan_post_aspect])
 
-    create_plan_resources_on_type(@project, @post_concept, 'positive_r', 'positive_s')
-    create_plan_resources_on_type(@project, @post_concept, 'negative_r', 'negative_s')
-    create_plan_resources_on_type(@project, @post_concept, 'control_r', 'control_s')
+    create_plan_resources_on_type(@project, @post_concept)
 
     respond_to do |format|
       if @post_concept.save
@@ -307,9 +305,7 @@ class Plan::PostsController < PostsController
     @post_concept_save = Plan::PostAspect.find(params[:con_id])
     @post_concept_save.update_attributes(params[:plan_post_aspect])
 
-    create_plan_resources_on_type(@project, @post_concept_save, 'positive_r', 'positive_s')
-    create_plan_resources_on_type(@project, @post_concept_save, 'negative_r', 'negative_s')
-    create_plan_resources_on_type(@project, @post_concept_save, 'control_r', 'control_s')
+    create_plan_resources_on_type(@project, @post_concept_save)
 
     respond_to do |format|
       if @post_concept_save.save
@@ -362,54 +358,45 @@ class Plan::PostsController < PostsController
 
   # @todo methods for note
   def new_note
-    @project = Core::Project.find(params[:project])
-    @post = Plan::Post.find(params[:id])
+    super()
     @post_aspect_note = Plan::PostAspect.find(params[:con_id])
-    @type = params[:type_field]
-    @post_note = Plan::Note.new
   end
 
   def create_note
     @project = Core::Project.find(params[:project])
-    @post = Plan::Post.find(params[:id])
+    @post = current_model.find(params[:id])
+    @type = params[:plan_note][:type_field]
     @post_aspect_note = Plan::PostAspect.find(params[:con_id])
-    @post_note = Plan::Note.create(params[:plan_note])
-    @post_note.post_id = @post_aspect_note.id
-    @post_note.type_field = params[:type_field]
+    @post_note = @post_aspect_note.plan_notes.build(params[name_of_note_for_param])
     @post_note.user = current_user
-    @type = params[:type_field]
-    current_user.journals.build(type_event:'my_plan_note', user_informed: @post.user, project: @project,  body:trim_content(@post_note.content),body2: trim_content(@post.name),first_id: @post.id, second_id: @post_aspect_note.id,personal: true,  viewed: false).save!
+
+    current_user.journals.build(:type_event=>'my_plan_note', :user_informed => @post.user, :project => @project,  :body=>trim_content(@post_note.content),:body2=> trim_content(@post.name),:first_id => @post.id, :second_id => @post_aspect_note.id,:personal => true,  :viewed=> false).save!
 
     respond_to do |format|
       if @post_note.save
         format.js
       else
-        render "new_note"
+        format.js { render action: "new_note" }
       end
     end
   end
 
   def destroy_note
-    @project = Core::Project.find(params[:project])
-    @post = Plan::Post.find(params[:id])
     @post_aspect_note = Plan::PostAspect.find(params[:con_id])
-    @type = params[:type_field]
-    @post_note = Plan::Note.find(params[:note_id])
-    @post_note.destroy if boss?
+    super()
   end
 
   private
-    def create_plan_resources_on_type(project, post, type_r, type_s)
-      post.plan_post_resources.by_type(type_r).destroy_all
-      post.plan_post_resources.by_type(type_s).destroy_all
-      unless params[('resor_'+type_r).to_sym].nil?
-        params[('resor_'+type_r).to_sym].each_with_index do |r,i|
-          if r[1][0]!=''
-            resource = post.plan_post_resources.build(:name => r[1][0], :desc => params[('resor_'+type_r).to_sym] ? params[('resor_'+type_r).to_sym]["#{r[0]}"][0] : '', :type_res => type_r, :project_id => project.id, :style => 0)
-            if params[('resor_'+type_s).to_sym] and params[('resor_'+type_s).to_sym]["#{r[0]}"]
-              params[('resor_'+type_s).to_sym]["#{r[0]}"].each_with_index do |m,ii|
-                if m!=''
-                  mean = post.plan_post_resources.build(:name => m, :desc => params[('resor_'+type_s).to_sym] ? params[('resor_'+type_s).to_sym]["#{r[0]}"][ii] : '',:type_res => type_s, :project_id => project.id, :style => 1)
+    def create_plan_resources_on_type(project, post)
+      post.plan_post_resources.by_type(['positive_r','positive_s','negative_r','negative_s','control_r','control_s']).destroy_all
+      unless params[:resor].nil?
+        params[:resor].each do |r|
+          if r[:name]!=''
+            resource = post.plan_post_resources.build(:name => r[:name], :desc => r[:desc], :type_res => r[:type_res], :project_id => project.id, :style => 0)
+            unless r[:means].nil?
+              r[:means].each  do |m|
+                if m[:name]!=''
+                  mean = post.plan_post_resources.build(:name => m[:name], :desc => m[:desc], :type_res => m[:type_res], :project_id => project.id, :style => 1)
                   mean.plan_post_resource = resource
                 end
               end
@@ -418,4 +405,24 @@ class Plan::PostsController < PostsController
         end
       end
     end
+
+    # def create_plan_resources_on_type(project, post, type_r, type_s)
+    #   post.plan_post_resources.by_type(type_r).destroy_all
+    #   post.plan_post_resources.by_type(type_s).destroy_all
+    #   unless params[('resor_'+type_r).to_sym].nil?
+    #     params[('resor_'+type_r).to_sym].each_with_index do |r,i|
+    #       if r[1][0]!=''
+    #         resource = post.plan_post_resources.build(:name => r[1][0], :desc => params[('resor_'+type_r).to_sym] ? params[('resor_'+type_r).to_sym]["#{r[0]}"][0] : '', :type_res => type_r, :project_id => project.id, :style => 0)
+    #         if params[('resor_'+type_s).to_sym] and params[('resor_'+type_s).to_sym]["#{r[0]}"]
+    #           params[('resor_'+type_s).to_sym]["#{r[0]}"].each_with_index do |m,ii|
+    #             if m!=''
+    #               mean = post.plan_post_resources.build(:name => m, :desc => params[('resor_'+type_s).to_sym] ? params[('resor_'+type_s).to_sym]["#{r[0]}"][ii] : '',:type_res => type_s, :project_id => project.id, :style => 1)
+    #               mean.plan_post_resource = resource
+    #             end
+    #           end
+    #         end
+    #       end
+    #     end
+    #   end
+    # end
 end

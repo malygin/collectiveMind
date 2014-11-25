@@ -85,4 +85,19 @@ class Discontent::Aspect < ActiveRecord::Base
         joins("INNER JOIN concept_post_discontents ON concept_post_discontents.discontent_post_id = discontent_post_aspects.post_id").
         where("discontent_posts.status = ?", 4)
   end
+
+  def aspect_concept
+    Concept::Post.joins(:concept_disposts).
+        joins("INNER JOIN discontent_post_aspects ON concept_post_discontents.discontent_post_id = discontent_post_aspects.post_id").
+        where("discontent_posts.status = ?", 4).
+        where("discontent_post_aspects.aspect_id = ?", self.id)
+  end
+  def aspect_discontent
+    Discontent::Post.joins(:post_aspects).
+        where("discontent_post_aspects.aspect_id = ?", self.id)
+  end
+  def aspect_life_tape
+    LifeTape::Comment.joins("INNER JOIN life_tape_posts ON life_tape_comments.post_id = life_tape_posts.id").
+        where("life_tape_posts.aspect_id = ?", self.id)
+  end
 end

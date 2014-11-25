@@ -20,15 +20,15 @@
             %strong DECISION
 
     %nav#sidebar.sidebar.nav-collapse.collapse
-      - if params[:controller] == 'core/projects' and (params[:action] == 'news' or params[:action] == 'users')
+      - if core_methods?(params[:controller],params[:action])
         = render partial: 'core/projects/left_projects', locals: { current_stage: controller.controller_path }
       - else
         = render partial: 'left_side', locals: { current_stage: controller.controller_path }
-      /= render partial: 'shared/moderator_chat'
+      = render partial: 'shared/moderator_chat'
     .wrap
       %header.page-header
         .navbar
-          - if params[:controller] == 'core/projects' and (params[:action] == 'news' or params[:action] == 'users')
+          - if core_methods?(params[:controller],params[:action])
             =render 'core/projects/top_menu_general'
           - else
             =render 'top_menu'
@@ -40,6 +40,13 @@
               =render partial: 'application/stages', locals: {current_stage: current_stage_for_navbar(controller, params[:stage])}
             .body.tab-content
               = yield
+        -elsif @project and core_methods?(params[:controller],params[:action],true)
+          %h4=@project.name
+          %section.widget-tabs
+            %header
+              =render partial: 'core/projects/stages_general', locals: {current_stage: current_stage_for_analytics(params[:action])}
+            .body.tab-content
+              = yield
         -else
           = yield
 
@@ -48,8 +55,3 @@
       \==================================================
     / Placed at the end of the document so the pages load faster
     = javascript_include_tag 'application'
-    <!-- BEGIN JIVOSITE CODE {literal} -->
-    <script type='text/javascript'>
-    (function(){ var widget_id = 'DChNaQSvOx';
-    var s = document.createElement('script'); s.type = 'text/javascript'; s.async = true; s.src = '//code.jivosite.com/script/widget/'+widget_id; var ss = document.getElementsByTagName('script')[0]; ss.parentNode.insertBefore(s, ss);})();</script>
-    <!-- {/literal} END JIVOSITE CODE -->

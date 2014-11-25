@@ -9,9 +9,9 @@ describe 'Advices' do
 
   before do
     prepare_concepts(project, user)
-    @advice_unapproved = create :advice_unapproved, user: user, adviseable: @discontent1
-    @advice_disapproved = create :advice_disapproved, user: user, adviseable: @discontent1
-    @advice = create :advice_approved, user: user, adviseable: @discontent1
+    @advice_unapproved = create :advice_unapproved, user: user, adviseable: @discontent1, project: project
+    @advice_disapproved = create :advice_disapproved, user: user, adviseable: @discontent1, project: project
+    @advice = create :advice_approved, user: user, adviseable: @discontent1, project: project
   end
 
   context 'prime admin can setup' do
@@ -64,7 +64,7 @@ describe 'Advices' do
       end
 
       it 'in list' do
-        advice_unapproved = create :advice_unapproved, user: moderator, adviseable: @discontent1
+        advice_unapproved = create :advice_unapproved, user: moderator, adviseable: @discontent1, project: project
         visit discontent_post_path(project, @discontent1)
         expect(page).not_to have_content advice_unapproved.content
         expect(page).to have_content @advice.content
@@ -113,7 +113,7 @@ describe 'Advices' do
       end
 
       it 'others - no' do
-        advice = create :advice_approved, user: moderator, adviseable: @discontent1
+        advice = create :advice_approved, user: moderator, adviseable: @discontent1, project: project
         visit discontent_post_path(project, @discontent1)
         expect(page).to have_content advice.content
         expect(page).not_to have_link "remove_advice_#{advice.id}"
@@ -123,7 +123,7 @@ describe 'Advices' do
     context 'set useful', js: true do
       before do
         @discontent1 = create :discontent, project: project, status: 4, user: user
-        @advice_for_useful = create :advice_approved, user: moderator, adviseable: @discontent1
+        @advice_for_useful = create :advice_approved, user: moderator, adviseable: @discontent1, project: project
         visit discontent_post_path(project, @discontent1)
       end
 
@@ -163,7 +163,7 @@ describe 'Advices' do
     context 'set not_useful', js: true do
       before do
         @discontent1 = create :discontent, project: project, status: 4, user: user
-        @advice_for_useful = create :advice_approved, user: moderator, adviseable: @discontent1
+        @advice_for_useful = create :advice_approved, user: moderator, adviseable: @discontent1, project: project
         visit discontent_post_path(project, @discontent1)
         click_link "set_not_useful_#{@advice_for_useful.id}"
       end
@@ -280,7 +280,7 @@ describe 'Advices' do
 
     context 'correct link to advisable' do
       it 'to discontent' do
-        advice = create :advice_approved, user: user, adviseable: @discontent1
+        advice = create :advice_approved, user: user, adviseable: @discontent1, project: project
         visit discontent_post_path(project, @discontent1)
         within :css, "#post_advice_#{advice.id}" do
           expect(page).to have_content advice.adviseable.content
@@ -290,7 +290,7 @@ describe 'Advices' do
       end
 
       it 'to concept' do
-        advice = create :advice_approved, user: user, adviseable: @concept1
+        advice = create :advice_approved, user: user, adviseable: @concept1, project: project
         visit concept_post_path(project, @concept1)
         within :css, "#post_advice_#{advice.id}" do
           expect(page).to have_content advice.adviseable.content

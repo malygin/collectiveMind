@@ -17,8 +17,8 @@
     %span.h5.color-teal{id: "name_post_action_#{post_action.id}"}=post_action.name
     %br
     %span.h5=post_action.desc
-    -unless post_action.plan_post_action_resources.nil?
+    -unless post_action.plan_post_resources.by_type('action_r').nil?
       %br
-      -post_action.plan_post_action_resources.each  do |res|
+      -post_action.plan_post_resources.by_type('action_r').each  do |res|
         .label.label-danger=res.name
 

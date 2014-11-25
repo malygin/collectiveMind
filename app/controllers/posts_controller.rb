@@ -7,6 +7,7 @@ class PostsController < ApplicationController
   before_filter :not_open_closed_stage
   before_filter :boss_authenticate, only: [:vote_result]
   before_filter :comment_page, only: [:index, :show]
+  before_filter :user_projects
 
   #@todo why not use authenticate_user! from devise?
   def authenticate
@@ -47,7 +48,11 @@ class PostsController < ApplicationController
                 else
                   post
                 end
-      Journal.events_for_content(@project, current_user, post_id.id).update_all(viewed: true) if post_id
+      if params[:req_comment]
+        Journal.events_for_comment(@project, current_user, post_id.id, params[:req_comment].to_i).update_all(viewed: true) if post_id
+      else
+        Journal.events_for_content(@project, current_user, post_id.id).update_all(viewed: true) if post_id
+      end
     end
     super()
   end
@@ -95,17 +100,7 @@ class PostsController < ApplicationController
     end
   end
 
-  # def add_child_comment_form
-  #   @project = Core::Project.find(params[:project])
-  #   @post = current_model.find(params[:id])
-  #   @main_comment = comment_model.find(params[:comment_id])
-  #   @main_comment_answer = comment_model.find(params[:answer_id]) unless params[:answer_id].nil?
-  #   @comment = comment_model.new
-  #   @url_link = url_for(controller: @post.class.name.underscore.pluralize, action: 'add_comment', main_comment: @main_comment.id, answer_id: @main_comment_answer ? @main_comment_answer.id : nil)
-  #   respond_to do |format|
-  #     format.js
-  #   end
-  # end
+  
 
   def comment_status
     @project = Core::Project.find(params[:project])
@@ -189,7 +184,7 @@ class PostsController < ApplicationController
     @post = current_model.where(id: params[:id], project_id: params[:project]).first
     if params[:viewed]
       Journal.events_for_content(@project, current_user, @post.id).update_all("viewed = 'true'")
-      @my_journals_count = @my_journals_count - 1
+      # @my_journals_count = @my_journals_count - 1
     end
     # per_page = ["Concept", "Essay"].include?(@post.class.name.deconstantize) ? 10 : 30
     @comments = @post.main_comments.paginate(page: params[:page] ? params[:page] : last_page, per_page: 10)
@@ -301,13 +296,17 @@ class PostsController < ApplicationController
     @post = current_model.find(params[:id])
     if boss?
       @post.toggle!(:useful)
-      @post.user.add_score(type: :plus_post, project: @project, post: @post, path: @post.class.name.underscore.pluralize)
-      Award.reward(user: @post.user, post: @post, project: @project, type: 'add')
+      if @post.useful
+        @post.user.add_score(type: :plus_post, project: @project, post: @post, path: @post.class.name.underscore.pluralize)
+        Award.reward(user: @post.user, post: @post, project: @project, type: 'add')
+      else
+        @post.user.add_score(type: :to_archive_plus_post, project: @project, post: @post, path: @post.class.name.underscore.pluralize)
+      end
     end
     if @post.instance_of? Discontent::Post
       @post.update_attributes(status_content: true, status_whered: true, status_whend: true)
-    elsif @post.instance_of? Concept::Post
-      @post.update_attributes(status_name: true, status_content: true, status_positive: true, status_positive_r: true, status_negative: true, status_negative_r: true, status_problems: true, status_reality: true, status_positive_s: true, status_negative_s: true, status_control: true, status_control_r: true, status_control_s: true, status_obstacles: true)
+    # elsif @post.instance_of? Concept::Post
+    #   @post.update_attributes(status_name: true, status_content: true, status_positive: true, status_positive_r: true, status_negative: true, status_negative_r: true, status_problems: true, status_reality: true, status_positive_s: true, status_negative_s: true, status_control: true, status_control_r: true, status_control_s: true, status_obstacles: true)
     end
 
     #@against =  params[:against] == 'true'
@@ -385,6 +384,9 @@ class PostsController < ApplicationController
     current_user.journals.build(type_event: 'my_'+name_of_note_for_param, user_informed: @post.user, project: @project, body: trim_content(@post_note.content), first_id: @post.id, personal: true, viewed: false).save!
 
     @post.update_attributes(column_for_type_field(name_of_note_for_param, @type.to_i) => 'f')
+    if @type and @post.instance_of? Concept::Post and @post.send(column_for_type_field(name_of_note_for_param, @type.to_i)) == true
+      @post.user.add_score(type: :to_archive_plus_field, project: @project, post: @post, path: @post.class.name.underscore.pluralize, type_field: column_for_type_field(name_of_note_for_param, @type.to_i))
+    end
 
     respond_to do |format|
       if @post_note.save
@@ -407,8 +409,22 @@ class PostsController < ApplicationController
     @project = Core::Project.find(params[:project])
     @post = current_model.find(params[:id])
     @type = params[:type_field]
-    if @post.notes.by_type(@type.to_i).size == 0
+    @field_all = params[:field_all]
+    if params[:field_all] and @post.instance_of? Concept::Post
+      @post.toggle!(:status_all)
+      if @post.status_all
+        @post.update_attributes(status_name: true, status_content: true, status_positive: true, status_positive_r: true, status_negative: true, status_negative_r: true, status_control: true, status_control_r: true, status_obstacles: true, status_problems: true, status_reality: true)
+        @post.user.add_score(type: :plus_field_all, project: @project, post: @post, path: @post.class.name.underscore.pluralize) if @post.instance_of? Concept::Post
+      else
+        @post.update_attributes(status_name: nil, status_content: nil, status_positive: nil, status_positive_r: nil, status_negative: nil, status_negative_r: nil, status_control: nil, status_control_r: nil, status_obstacles: nil, status_problems: nil, status_reality: nil)
+        @post.user.add_score(type: :to_archive_plus_field_all, project: @project, post: @post, path: @post.class.name.underscore.pluralize) if @post.instance_of? Concept::Post
+      end
+    elsif @type and @post.send(column_for_type_field(name_of_note_for_param, @type.to_i)) == true
+      @post.update_attributes(column_for_type_field(name_of_note_for_param, @type.to_i) => nil)
+      @post.user.add_score(type: :to_archive_plus_field, project: @project, post: @post, path: @post.class.name.underscore.pluralize, type_field: column_for_type_field(name_of_note_for_param, @type.to_i)) if @post.instance_of? Concept::Post
+    elsif @post.notes.by_type(@type.to_i).size == 0
       @post.update_attributes(column_for_type_field(name_of_note_for_param, @type.to_i) => 't')
+      @post.user.add_score(type: :plus_field, project: @project, post: @post, path: @post.class.name.underscore.pluralize, type_field: column_for_type_field(name_of_note_for_param, @type.to_i)) if @post.instance_of? Concept::Post
     end
     respond_to do |format|
       format.js
@@ -512,6 +528,7 @@ class PostsController < ApplicationController
   def create_advice(post)
     @advice = post.advices.new content: params[name_of_comment_for_param][:content]
     @advice.user = current_user
+    @advice.project = @project
     @advice.save
     @advice.notify_moderators(@project, current_user)
 

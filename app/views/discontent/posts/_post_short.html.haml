@@ -1,12 +1,17 @@
 %li{id: "post_#{post_short.id}", class: "#{'expert_comment' if post_short.discuss_status }"}
-  -if post_short.user
+  -if post_short.user and not post_short.anonym
     = render 'users/user_post', user: post_short.user
     -#= image_tag post_short.user.avatar.url(:thumb), class: 'pull-left'
+  - if post_short.anonym
+    = image_tag '/avatars/thumb/missing.png', class: 'pull-left'
+
   .news-item-info
     .name
-      - if post_short.user
+      - if post_short.user and not post_short.anonym
         =link_to post_short.user, user_path(@project, post_short.user)
         = render partial: '/shared/user_online', object: post_short.user
+      - if post_short.anonym
+        Добавлено анонимно
       - if boss? or role_expert?
         .pull-right
           =link_to({controller: post_short.class.name.underscore.pluralize, action: :discuss_status, id: post_short.id, discuss_status: 1},  remote: true, method: :put,  id: "discuss_stat_post_#{post_short.id}") do
@@ -38,5 +43,5 @@
       .discontents_group_select{post: "#{post_short.id}"}
         -if @accepted_posts
           = select_tag 'select_for_discontents_group', options_from_collection_for_select(@accepted_posts, "id", "content"),
-          prompt: t('form.discontent.select_aspect_prompt'), onchange: "select_for_discontents_group(this,#{@project.id},#{post_short.id});", class: "form-control"
+          prompt: t('form.discontent.select_aspect_prompt'), onchange: "select_for_discontents_group(this,#{@project.id},#{post_short.id},#{post_short.discontent_post ? post_short.discontent_post.id : 0},'origin');", class: "form-control"
 

@@ -2,12 +2,13 @@ class Core::ProjectsController < ApplicationController
   # GET /core/projects
   # GET /core/projects.json
   #before_filter :boss_authenticate, only: [:next_stage, :pr_stage]
-  before_filter :prime_admin_authenticate, only: [:next_stage, :pr_stage, :show, :new, :edit, :create, :update, :destroy, :list_projects]
+  before_filter :prime_admin_authenticate, only: [:next_stage, :pr_stage, :show, :new, :edit, :create, :update, :destroy, :list_projects,
+                :general_analytics, :lifetape_analytics, :discontent_analytics, :concept_analytics, :plan_analytics, :estimate_analytics]
   before_filter :project_by_id
   before_action :set_core_project, only: [:show, :edit, :update, :pr_stage, :next_stage, :destroy]
   before_filter :boss_news_authenticate , only: [:news,:users]
   after_filter  :last_seen_news , only: [:news]
-  layout 'application', only: [:news,:users]
+  layout 'application', only: [:news,:users,:general_analytics,:lifetape_analytics,:discontent_analytics,:concept_analytics,:plan_analytics,:estimate_analytics]
 
   # has_scope :by_project
   # has_scope :by_user
@@ -132,6 +133,7 @@ class Core::ProjectsController < ApplicationController
   def next_stage
     @core_project.update_column(:status, @core_project.status + 1)
     @core_project.set_position_for_aspects if @core_project.status == 3
+    @core_project.set_date_for_stage
     redirect_to :back
   end
 
@@ -165,13 +167,79 @@ class Core::ProjectsController < ApplicationController
     @core_project = @core_projects.first
     if @project
       if @project.type_access == 2
-        @users = @project.users_in_project.includes(:core_project_scores).where(users: {type_user: [4,5,8,nil]}).order("core_project_scores.score DESC NULLS LAST").paginate(page: params[:page])
+        @users = @project.users_in_project.includes(:core_project_scores).where(users: {type_user: uniq_proc_users}).order("core_project_scores.score DESC NULLS LAST").paginate(page: params[:page])
       else
-        @users = User.joins(:core_project_scores).where("core_project_scores.project_id = ? AND core_project_scores.score > 0", @project.id).where(users: {type_user: [4,5,8,nil]}).order("core_project_scores.score DESC").paginate(page: params[:page])
+        @users = User.joins(:core_project_scores).where("core_project_scores.project_id = ? AND core_project_scores.score > 0", @project.id).where(users: {type_user: uniq_proc_users}).order("core_project_scores.score DESC").paginate(page: params[:page])
       end
     else
-      @users = User.where(type_user: [4,5,8,nil]).order("score DESC").paginate(page: params[:page])
+      @users = User.where(type_user: uniq_proc_users).order("score DESC").paginate(page: params[:page])
     end
+  end
+
+  def general_analytics
+    @project = Core::Project.find(params[:project]) if params[:project]
+    @core_projects = current_user.current_projects_for_user
+    @core_project = @core_projects.first
+  end
+
+  def lifetape_analytics
+    @project = Core::Project.find(params[:project]) if params[:project]
+    @core_projects = current_user.current_projects_for_user
+    @core_project = @core_projects.first
+  end
+
+  def discontent_analytics
+    @project = Core::Project.find(params[:project]) if params[:project]
+    @core_projects = current_user.current_projects_for_user
+    @core_project = @core_projects.first
+  end
+
+  def concept_analytics
+    @project = Core::Project.find(params[:project]) if params[:project]
+    @core_projects = current_user.current_projects_for_user
+    @core_project = @core_projects.first
+  end
+
+  def plan_analytics
+    @project = Core::Project.find(params[:project]) if params[:project]
+    @core_projects = current_user.current_projects_for_user
+    @core_project = @core_projects.first
+  end
+
+  def estimate_analytics
+    @project = Core::Project.find(params[:project]) if params[:project]
+    @core_projects = current_user.current_projects_for_user
+    @core_project = @core_projects.first
+  end
+
+  def graf_data
+    @project = Core::Project.find(params[:project]) if params[:project]
+    hash_base = [{x: (Date.parse("2000-01-01").to_datetime.to_f * 1000).to_i, y: 0},{x: (Date.parse("2000-01-02").to_datetime.to_f * 1000).to_i, y: 0},{x: (Date.parse("2000-01-03").to_datetime.to_f * 1000).to_i, y: 0},
+                 {x: (Date.parse("2000-01-04").to_datetime.to_f * 1000).to_i, y: 0},{x: (Date.parse("2000-01-05").to_datetime.to_f * 1000).to_i, y: 0}]
+
+    if params[:data_stage] == "concept_analytics"
+      data_content = @project.concept_ongoing_post.date_stage(@project).order("concept_posts.created_at").pluck("concept_posts.id","date(concept_posts.created_at)")
+      data_comment = @project.concept_comments.date_stage(@project).reorder("concept_comments.created_at").pluck("concept_comments.id","date(concept_comments.created_at)")
+      data_content = data_content.map{|d| d[1]}.group_by{|i| i}.map{|k,v| {x: (k.to_datetime.to_f * 1000).to_i,y: v.count} }
+      data_comment = data_comment.map{|d| d[1]}.group_by{|i| i}.map{|k,v| {x: (k.to_datetime.to_f * 1000).to_i,y: v.count} }
+      data_content = hash_base | data_content if data_content.size < 5
+      data_comment = hash_base | data_comment if data_comment.size < 5
+      data = [{key: "Нововведения", values: data_content},{key: "Комментарии", values: data_comment}]
+    elsif params[:data_stage] == "discontent_analytics"
+      data_content = @project.discontents.by_status(@project.status > 4 ? 1 : 0).date_stage(@project).order("discontent_posts.created_at").pluck("discontent_posts.id","date(discontent_posts.created_at)")
+      data_comment = @project.discontent_comments.date_stage(@project).reorder("discontent_comments.created_at").pluck("discontent_comments.id","date(discontent_comments.created_at)")
+      data_content = data_content.map{|d| d[1]}.group_by{|i| i}.map{|k,v| {x: (k.to_datetime.to_f * 1000).to_i,y: v.count} }
+      data_comment = data_comment.map{|d| d[1]}.group_by{|i| i}.map{|k,v| {x: (k.to_datetime.to_f * 1000).to_i,y: v.count} }
+      data_content = hash_base | data_content if data_content.size < 5
+      data_comment = hash_base | data_comment if data_comment.size < 5
+      data = [{key: "Несовершенства", values: data_content},{key: "Комментарии", values: data_comment}]
+    elsif params[:data_stage] == "lifetape_analytics"
+      data_comment = @project.lifetape_comments.date_stage(@project).reorder("life_tape_comments.created_at").pluck("life_tape_comments.id","date(life_tape_comments.created_at)")
+      data_comment = data_comment.map{|d| d[1]}.group_by{|i| i}.map{|k,v| {x: (k.to_datetime.to_f * 1000).to_i,y: v.count} }
+      data_comment = hash_base | data_comment if data_comment.size < 5
+      data = [{key: "Комментарии", values: data_comment}]
+    end
+    render json: data
   end
 
   private

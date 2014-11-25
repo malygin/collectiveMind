@@ -29,6 +29,8 @@
           =link_to t('menu.general_rating'), "/project/#{@project.id}/general_rating" , id: 'general_rating'
         - if prime_admin?
           %li{role: 'presentation'}
+            =link_to t('menu.analytics'), "/project/#{@project.id}/general_analytics", id: 'general_analytics'
+          %li{role: 'presentation'}
             =link_to t('menu.list_projects'), list_projects_path, id: 'list_projects'
           %br
           -if @project.status == 1
@@ -94,6 +96,20 @@
             %br
             %li{role: 'presentation'}
               =link_to t('menu.settings.admin_set_21'), next_stage_core_project_path(@project), id: 'change_stage'
+  -else
+    %li.divider
+    %li.dropdown
+      %a#settings.dropdown-toggle{'data-toggle' => 'dropdown', href: '#', title: 'Процедуры'}
+        %i.fa.fa-cog
+      %ul#settings-menu.dropdown-menu.messages{role: 'menu'}
+        .text-internal.text-center Процедуры
+        %hr
+        -if @user_projects
+          -@user_projects.each do |project|
+            %li
+              = link_to "/project/#{project.id}", id: "go_to_project_#{project.id}" do
+                &nbsp;
+                =" #{project.name}"
 
   %li.divider
   %li.dropdown#notifications

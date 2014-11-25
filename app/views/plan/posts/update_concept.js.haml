@@ -1,2 +1,4 @@
 $('#modal_edit_concept').modal('hide');
 $("#name_post_concept_#{@post_concept.id}").html('#{@post_concept.title}');
+$("#content_post_concept_#{@post_concept.id}").html('#{@post_concept.name}');
+$('#validate_concept_#{@post_concept.id}').html('#{check_validate_concept(@post_concept).html_safe if check_validate_concept(@post_concept)}');

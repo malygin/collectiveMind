@@ -1,83 +1,71 @@
-scrollToLastMessage = ->
-  container = $('#chat_history')
-  scrollTo = $('#chat_history .msg_container:last')
-  container.animate({scrollTop: scrollTo.offset().top - container.offset().top + container.scrollTop()})
-  return
+@create_moderator_chat = ->
+  if $('#moderator_chat_div').length > 0
+    ws = new WebSocketRails(document.location.host + '/websocket')
+    ws.on_open = ->
+      console.log 'socket opened'
+    ws.on_failure = ->
+      console.log 'socket open error'
 
-$(document).ready ->
-  scrollToLastMessage()
-  $('#moderator_chat_window').draggable()
+    private_channel = ws.subscribe_private('moderator_chat')
+    private_channel.on_success = ->
+      console.log("Has joined the channel moderator chat")
+    private_channel.on_failure = ->
+      console.log("Authorization failed")
+    $("#moderator_chat_div").chatbox(
+      id: "moderator_chat_div"
+      user:
+        key: ''
+      title: "Модераторский чат"
+      messageSent: (id, user, msg) ->
+        ws.trigger 'incoming_message', {text: msg}
+        $('#last_seen_at').text(new Date())
+        return
+    )
+    $('#old_title_page').text($('title').text().trim())
+    ws.trigger 'get_history'
+    if $('div#chat_opened').length <= 0
+      $('span.ui-icon-minusthick').parent().click()
 
-  ws = new WebSocketRails(document.location.host + '/websocket')
-  ws.on_open = ->
-    console.log 'socket opened'
-  ws.on_failure = ->
-    console.log 'socket open error'
+    ws.bind 'new_message', (data) ->
+      $("#moderator_chat_div").chatbox("option", "boxManager").addMsg data
+      if $('#current_user_name').text().trim() != data['user'].trim()
+        $('#audio_new_message audio').trigger('play')
+        $('title').text('У вас новое сообщение')
+      if $('div.ui-widget-content.ui-chatbox-content').is(':hidden')
+        Messenger.options =
+          extraClasses: "messenger-fixed messenger-on-top messenger-on-right messenger-theme-air"
+        msg = Messenger().post
+          extraClasses: "messenger-fixed messenger-on-top  messenger-on-right messenger-theme-air"
+          message: data['text']
+          hideAfter: 3
+      else
+        $('#last_seen_at').text(new Date())
+        ws.trigger 'looked_chat'
 
-  private_channel = ws.subscribe_private('moderator_chat')
-  private_channel.on_success = ->
-    console.log("Has joined the channel")
-  private_channel.on_failure = ->
-    console.log("Authorization failed")
+    private_channel.bind 'receive_history', (data) ->
+      first_messages = false
+      if $('#moderator_chat_div .ui-chatbox-msg').length == 0
+        first_messages = true
+      $.each data, (index, value) ->
+        $("#moderator_chat_div").chatbox("option", "boxManager").addMsg value, false, false, false
+      $("a#load_more_messages").remove()
+      $("#moderator_chat_div").prepend "<a href='#' id='load_more_messages'>Загрузить еще</a>"
+      $("a#load_more_messages").click ->
+        ws.trigger 'get_history', {latest_id: $('#moderator_chat_div .ui-chatbox-msg').attr('id')}
+      if first_messages
+        $("#moderator_chat_div").chatbox("option", "boxManager")._scrollToBottom();
+      $('#last_seen_at').text(new Date())
 
-  ws.bind 'new_message', (data) ->
-    new_message_id = 'message_' + data['id']
-    if $('#chat_history .msg_container:last').hasClass('base_sent')
-      new_message = $('#template_base_receive').clone().prop({id: new_message_id});
-    else
-      new_message = $('#template_base_sent').clone().prop({id: new_message_id});
-    new_message.find('.messages p').append(data['text']);
-    new_message.find('.messages time').append(data['user'] + ' • ' + data['time']);
-    new_message.find('.avatar img').attr('src', data['avatar']);
-    $('#chat_history').append(new_message.show())
-    scrollToLastMessage()
-
-  $("input").keypress (event) ->
-    if (event.which == 13)
-      event.preventDefault()
-      ws.trigger 'incoming_message', {text: $('#btn-input').val()}
-      $('#btn-input').val('')
-
-$(document).on "click", ".panel-heading span.icon_minim", (e) ->
-  $this = $(this)
-  unless $this.hasClass("panel-collapsed")
-    $this.parents(".panel").find(".panel-body").slideUp()
-    $this.addClass "panel-collapsed"
-    $this.removeClass("glyphicon-minus").addClass "glyphicon-plus"
-  else
-    $this.parents(".panel").find(".panel-body").slideDown()
-    $this.removeClass "panel-collapsed"
-    $this.removeClass("glyphicon-plus").addClass "glyphicon-minus"
-  return
-
-$(document).on "click", ".icon_close", ->
-  $("#moderator_chat_window").hide()
-  $("#show_open_moderator_chat").show()
-  return
-
-$(document).on 'click', '#show_open_moderator_chat', ->
-  $("#moderator_chat_window").show()
-  $("#show_open_moderator_chat").hide()
-  return
-
-obj = $('#moderator_chat_window')
-offset = obj.offset()
-topOffset = offset.top
-leftOffset = offset.left
-marginTop = obj.css("marginTop")
-marginLeft = obj.css("marginLeft")
-
-$(window).scroll ->
-  scrollTop = $(window).scrollTop()
-  if scrollTop >= topOffset
-    obj.css
-      marginTop: 0
-      marginLeft: leftOffset
-      position: "fixed"
-
-  if scrollTop < topOffset
-    obj.css
-      marginTop: marginTop
-      marginLeft: marginLeft
-      position: "relative"
-  return
+    $('span.ui-icon-closethick').parent().click ->
+      ws.trigger 'close_chat'
+      ws.disconnect()
+      return
+    $('span.ui-icon-minusthick').parent().click ->
+      if $('div.ui-widget-content.ui-chatbox-content').is(':hidden')
+        ws.trigger 'minus_chat', {status: false}
+        $('#last_seen_at').text(new Date())
+      else
+        ws.trigger 'minus_chat', {status: true}
+        $('#last_seen_at').text(new Date())
+      return
+    return

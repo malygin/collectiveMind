@@ -1,57 +1,12 @@
-.container
-  #moderator_chat_window.row.chat-window.col-xs-5.col-md-3
-    .col-xs-12.col-md-12
-      .panel.panel-default
-        .panel-heading.top-bar
-          .col-md-8.col-xs-8
-            %h3.panel-title
-              %span.glyphicon.glyphicon-comment
-              Модераторский чат
-          .col-md-4.col-xs-4{style: 'text-align: right;'}
-            %a{href: '#'}
-              %span#minim_chat_window.glyphicon.glyphicon-minus.icon_minim
-            %a{href: '#'}
-              %span.glyphicon.glyphicon-remove.icon_close{'data-id' => 'moderator_chat_window'}
-        .panel-body.msg_container_base#chat_history
-          - ModeratorMessage.recent.each_with_index do |message, index|
-            - if index % 2 == 0
-              .row.msg_container.base_sent
-                .col-md-10.col-xs-10
-                  .messages.msg_sent
-                    %p
-                      = message.message
-                    %time{datetime: message.created_at}
-                      = "#{message.user} • #{message.time}"
-                .col-md-2.col-xs-2.avatar
-                  = image_tag message.user.avatar(:thumb), class: 'img-responsive'
-            - else
-              .row.msg_container.base_receive
-                .col-md-2.col-xs-2.avatar
-                  = image_tag message.user.avatar(:thumb), class: 'img-responsive'
-                .col-md-10.col-xs-10
-                  .messages.msg_receive
-                    %p
-                      = message.message
-                    %time{datetime: message.created_at}
-                      = "#{message.user} • #{message.time}"
-        .panel-footer
-          %input#btn-input.form-control.input-sm.chat_input{type: 'text'}/
-
-.row.msg_container.base_sent#template_base_sent{style: 'display: none'}
-  .col-md-10.col-xs-10
-    .messages.msg_sent
-      %p
-      %time
-  .col-md-2.col-xs-2.avatar
-    %img.img-responsive
-
-.row.msg_container.base_receive#template_base_receive{style: 'display: none'}
-  .col-md-2.col-xs-2.avatar
-    %img.img-responsive
-  .col-md-10.col-xs-10
-    .messages.msg_receive
-      %p
-      %time
-
-%button.glyphicon-plus.bold#show_open_moderator_chat{style: 'display: none'}
-  Open
+- unless ENV['RAILS_ENV'] == 'test'
+  - if current_user.admin?
+    #moderator_chat_div
+    - if current_user.chat_open?
+      #chat_opened
+    #last_seen_at{style: 'display: none'}
+      = current_user.last_seen_chat_at
+    #current_user_name{style: 'display: none'}
+      = "#{current_user.name} #{current_user.surname}"
+    #audio_new_message{style: 'display: none'}
+      = audio_tag 'new_message.wav'
+    #old_title_page{style: 'display: none'}

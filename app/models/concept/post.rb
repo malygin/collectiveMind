@@ -1,6 +1,6 @@
 class Concept::Post < ActiveRecord::Base
   include BasePost
-  attr_accessible :goal, :reality,
+  attr_accessible :goal, :reality, :fullness,
                   :status_name, :status_content, :status_negative, :status_positive, :status_reality, :status_problems, :status_positive_r, :status_negative_r, :discuss_status,
                   :status_positive_s, :status_negative_s, :status_control, :status_control_r, :status_control_s, :status_obstacles
 
@@ -24,6 +24,8 @@ class Concept::Post < ActiveRecord::Base
   scope :by_project, ->(p) { where(project_id: p) }
   scope :by_discussions, ->(posts) { where("concept_posts.id NOT IN (#{posts.join(', ')})") unless posts.empty? }
   scope :posts_for_discussions, ->(p) { where(project_id: p.id, status: 0).where("concept_posts.status_name = 't' and concept_posts.status_content = 't'") }
+  scope :by_idea, ->{ where(fullness: [0,nil]) }
+  scope :by_novation, ->{ where("concept_posts.fullness > 0") }
 
   def self.scope_vote_top(post)
     joins(:concept_post_discontents).
@@ -35,9 +37,19 @@ class Concept::Post < ActiveRecord::Base
         .order('count("concept_votings"."user_id") DESC')
   end
 
+  # scope :date_stage, ->(project) { where("DATE(concept_posts.created_at) >= ? AND DATE(concept_posts.created_at) <= ?", project.date_23.to_date, project.date_34.to_date) if project.date_23.present? and project.date_34.present? }
+
   #def post_notes(type_field)
   #  self.concept_notes.by_type(type_field)
   #end
+
+  def get_status_concept?(status)
+    if status == 'positive'
+      self.status_name and self.status_content and self.status_negative and self.status_negative_r and self.status_positive and self.status_positive_r and self.status_control and self.status_control_r and self.status_obstacles and self.status_reality and self.status_problems
+    elsif status == 'negative'
+      self.status_name.nil? and self.status_content.nil? and self.status_negative.nil? and self.status_negative_r.nil? and self.status_positive.nil? and self.status_positive_r.nil? and self.status_control.nil? and self.status_control_r.nil? and self.status_obstacles.nil? and self.status_reality.nil? and self.status_problems.nil?
+    end
+  end
 
   def complite(discontent)
     post = discontent.concept_post_discontents.by_concept(self.id).first
@@ -88,4 +100,26 @@ class Concept::Post < ActiveRecord::Base
       end
     end
   end
+
+  def fullness_apply(post_aspect,resor)
+    if post_aspect.title.present? and post_aspect.name.present? and post_aspect.content.present?
+      self.fullness = 0
+    end
+    if post_aspect.positive.present? or post_aspect.negative.present? or post_aspect.control.present? or post_aspect.obstacles.present? or post_aspect.reality.present? or post_aspect.problems.present? or resor.any? { |r| r[:name]!='' }
+      self.fullness = 1
+    end
+    if post_aspect.positive.present? and resor.any? { |r| r[:type_res] == 'positive_r' and r[:name]!='' }
+      self.fullness += 30
+    end
+    if post_aspect.negative.present? and resor.any? { |r| r[:type_res] == 'negative_r' and r[:name]!='' }
+      self.fullness += 20
+    end
+    if post_aspect.control.present? and resor.any? { |r| r[:type_res] == 'control_r' and r[:name]!='' }
+      self.fullness += 10
+    end
+    if post_aspect.obstacles.present? and post_aspect.reality.present? and post_aspect.problems.present?
+      self.fullness += 10
+    end
+  end
+
 end

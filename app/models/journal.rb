@@ -4,7 +4,7 @@ class Journal < ActiveRecord::Base
   extend ApplicationHelper
 
   attr_accessible :body, :body2, :type_event, :user, :project, :user_informed, :viewed,
-                  :event, :first_id, :second_id, :personal
+                  :event, :first_id, :second_id, :personal, :anonym
   belongs_to :user
   belongs_to :user_informed, class_name: 'User', foreign_key: :user_informed
   belongs_to :project, class_name: 'Core::Project', foreign_key: 'project_id'
@@ -39,6 +39,11 @@ class Journal < ActiveRecord::Base
     Journal.joins(:project).where('project_id = ?', project_id).active_proc.events_ignore(self.events_ignore_list).created_order
   end
 
+  # scheduler_mailer
+  def self.events_for_moderator_mailer(date, moderators)
+    Journal.where('viewed = ? AND personal = ?', false, true).where(user_informed: moderators).where("journals.created_at >= ?", date).order('created_at DESC')
+  end
+
   # older methods
   def self.events_for_user_feed(project_id, lim = 5)
     Journal.where(' project_id = ? AND personal = ? ', project_id, false).order('created_at DESC')
@@ -54,6 +59,10 @@ class Journal < ActiveRecord::Base
 
   def self.events_for_content(project_id, user_id, first_id)
     Journal.where(' project_id = ? AND user_informed = ? AND viewed =? AND personal =? AND first_id=?', project_id, user_id, false, true, first_id).order('created_at DESC')
+  end
+
+  def self.events_for_comment(project_id, user_id, first_id, second_id)
+    Journal.where(' project_id = ? AND user_informed = ? AND viewed = ? AND personal = ? AND first_id = ? AND second_id = ?', project_id, user_id, false, true, first_id, second_id).order('created_at DESC')
   end
 
   def self.last_event_for(user, project_id)

@@ -16,7 +16,7 @@
 
     %br
     %br
-      %ul.media-list#comments
+      %ul.media-list#comments.chat-messages
         = render partial: 'shared/comment',collection: @comments
     = will_paginate @comments
     - if signed_in?

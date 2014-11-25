@@ -11,5 +11,10 @@
             =link_to t('link.go_show'), concept_post_path(@project, @concept_post), class: "btn btn-lg btn-primary"
           .col-md-6
             =link_to t('link.go_list'), "/project/#{@project.id}/concept/posts#{@aspect_id ? "?asp=#{@aspect_id}" : ''}", class: "btn btn-lg btn-success"
+          %br
+          %br
+          %br
+          .col-md-12
+            %button.btn.btn-lg.btn-primary(data-dismiss="modal") Продолжить заполнение
         %br
         %br

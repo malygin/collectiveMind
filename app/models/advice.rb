@@ -1,9 +1,7 @@
 class Advice < ActiveRecord::Base
   belongs_to :adviseable, polymorphic: true
   belongs_to :user
-  belongs_to :discontent_post, -> { where(advices: {adviseable_type: 'Discontent::Post'}) },
-             class_name: 'Discontent::Post',
-             foreign_key: :adviseable_id
+  belongs_to :project, class_name: 'Core::Project'
   has_many :comments, class_name: 'AdviceComment', foreign_key: :post_advice_id
   #@todo remove
   attr_accessible :content, :approved, :adviseable_type, :useful
@@ -11,7 +9,7 @@ class Advice < ActiveRecord::Base
   scope :unapproved, -> { where approved: nil }
   scope :approve, -> { where approved: true }
   scope :disapproved, -> { where approved: false }
-  scope :by_project, -> (project) { joins(:discontent_post).where discontent_posts: {project_id: project.id} }
+  scope :by_project, -> (project) { where project_id: project.id }
 
   def discontent?
     adviseable_type == 'Discontent::Post'

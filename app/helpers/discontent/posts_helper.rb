@@ -68,7 +68,7 @@ module Discontent::PostsHelper
     end
   end
 
-  def column_for_type_field(field)
+  def column_for_type_field_discontent(field)
     case field
       when 'what'
         'content'
@@ -115,11 +115,11 @@ module Discontent::PostsHelper
         content_tag :span, name_for_type_field(field), class: "label #{class_for_type_field(post_content,field)}", id: "#{field}_#{post_content.id}"
       end
       html << link_to({controller: 'discontent/posts',action: :new_note, id: post_content.id, type_field: number_for_type_field(field)},remote: true,method: :put, id: "content_dispost_#{post_content.id}_#{number_for_type_field(field)}",class: "note_text") do
-        content_tag :span, post_content.send(column_for_type_field(field)), id: "#{field}_content_#{post_content.id}"
+        content_tag :span, post_content.send(column_for_type_field_discontent(field)), id: "#{field}_content_#{post_content.id}"
       end
     else
       html << content_tag(:span, name_for_type_field(field), class: "label #{class_for_type_field(post_content,field)}", id: "#{field}_#{post_content.id}")
-      html << content_tag(:span, post_content.send(column_for_type_field(field)),  id: "#{field}_content_#{post_content.id}")
+      html << content_tag(:span, post_content.send(column_for_type_field_discontent(field)),  id: "#{field}_content_#{post_content.id}")
     end
     if [2,4].include?(post_content.status) and field == 'what'
       html << content_tag(:ul, '', class: "ul-union-list", id: "post_content_#{post_content.id}") do

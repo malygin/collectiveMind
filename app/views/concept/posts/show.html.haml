@@ -18,6 +18,9 @@
             |
             = Russian::strftime(@post.created_at,'%d %B %k:%M:%S')
           %br
+          -if current_user?(@post.user) or boss?
+            %span.label.label-success="#{@post.fullness.nil? ? 40 : @post.fullness + 39} баллов из 110"
+          %br
           -if improve_comment(@post)
             =improve_comment(@post).html_safe
             |
@@ -31,13 +34,24 @@
               %span.label-danger=t('show.discuss')
             -if @post.approve_status
               %span.label-success=t('show.important')
-          -if boss? and not @post.useful
+          -if boss?
             |
-            =link_to({action: :plus, project: @project, id: @post.id},  remote: true, method: :put,  id: "plus_post_#{@post.id}") do
-              %span.text-success=t('show.add_score')
+            =link_to({controller:'concept/posts', action: :status_post, id: @post.id, field_all: true}, remote: true, method: :put, id:"concept_field_all_#{@post.id}",class:"note_text") do
+              -if @post.status_all
+                %span.label.label-success Забрать все
+              -else
+                %span.label.label-danger Выдать все
+
+          -#-if boss?
+          -#  |
+          -#  =link_to({action: :plus, project: @project, id: @post.id},  remote: true, method: :put,  id: "plus_post_#{@post.id}") do
+          -#    -if @post.useful
+          -#      %span.text-danger=t('show.revert_score')
+          -#    -else
+          -#      %span.text-success=t('show.add_score')
           %br
           %br
-          = render 'shared/post_edit_bar', post:@post
+          = render 'shared/post_edit_bar', post: @post
 
         - if @post.concept_disposts.any?
           .col-md-9
@@ -60,7 +74,6 @@
                       =cd.content
                     %td
                       =level_complite(cd)
-
 
       %br
       .row
@@ -346,7 +359,7 @@
             .body
               %p=t('show.concept.comments')
               .text-center= will_paginate @comments
-              .chat-messages
+              #comments.chat-messages
                 = render partial:'shared/comment',collection:@comments
               .text-center= will_paginate @comments
               - if signed_in?

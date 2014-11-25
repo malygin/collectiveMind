@@ -38,9 +38,11 @@
                 =link_to view_concept_table_plan_post_path(@project, @post, :con_id => concept.id), :method => :get, :remote => true,:class => "color-white", :style => "text-decoration:none;border-bottom: 1px dashed #fafbfc;", :id => "view_post_concept_table_#{concept.id}" do
                   %span.h5{:id => "name_post_concept_#{concept.id}"}=concept.title
                 %br
-                =concept.name
+                %div{:id => "content_post_concept_#{concept.id}"}
+                  =concept.name
                 %br
-                = check_validate_concept(concept).html_safe if check_validate_concept(concept)
+                %div{id: "validate_concept_#{concept.id}"}
+                  = check_validate_concept(concept).html_safe if check_validate_concept(concept)
 
             - unless concept.plan_post_actions.nil?
               - concept.plan_post_actions.each do |action|
@@ -62,9 +64,9 @@
                     %span.h5.color-teal{:id => "name_post_action_#{action.id}"}=action.name
                     %br
                     %span.h5=action.desc
-                    -unless action.plan_post_action_resources.nil?
+                    -unless action.plan_post_resources.by_type('action_r').nil?
                       %br
-                      -action.plan_post_action_resources.each  do |res|
+                      -action.plan_post_resources.by_type('action_r').each  do |res|
                         .label.label-danger=res.name
 
               %tr(id="tr_new_action_#{concept.id}")

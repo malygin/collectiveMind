@@ -16,6 +16,10 @@
 @import "lib/_bootstrap-wysihtml5";
 //@import "lib/_bootstrap-switch";
 @import "lib/_bootstrap-colorpicker";
+@import "lib/nv.d3.min";
+@import "lib/nv.d3";
+
+
 //@import "lib/_jqvmap";
 //@import "lib/_fullcalendar";
 //@import "lib/_jquery.fileupload-ui";
@@ -36,10 +40,14 @@
 @import "general";
 @import "base";
 @import "responsive";
-@import "jquery-ui";
+@import "themes/jquery.ui.ui-darkness";
+@import "jquery.ui.core";
+@import "jquery.ui.theme";
+@import "moderator_chat";
 @import "datepicker/datepicker3";
 //@import "print";
-@import "moderator_chat";
+
+@import "jquery.ui.chatbox";
 
 
 // Brand colors
@@ -68,7 +76,9 @@ $brand-estimate:        #663505 !default;
 
 /*todo my styles top*/
 
-
+textarea.concept_cond {
+  max-height: 200px !important;
+}
 
 
 /* discontent posts */
@@ -139,6 +149,10 @@ $brand-estimate:        #663505 !default;
   background-color: rgb(110, 110, 174);
 }
 
+.mean_otstup {
+  text-indent: 50px;
+}
+
 .tooltip-inner {
   white-space:pre-wrap;
 }
@@ -174,8 +188,22 @@ p, a {
   overflow: visible !important;
 }
 
+/***********************************/
+/*            WIZARD               */
+/***********************************/
 .wizard-navigation.nav-pills li.active a {
   background-color: #618FB0 !important;
+}
+
+.form-wizard .progress {
+  margin-bottom: 10px;
+}
+
+.wizard-navigation {
+  margin-bottom: 5px;
+}
+.wizard-navigation a {
+  color: #f8f8f8;
 }
 
 .concept-name {
@@ -662,3 +690,4 @@ img.mfp-img {
   top: 0;
   right: 0;
   padding-top: 0; }
+

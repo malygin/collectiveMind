@@ -87,9 +87,18 @@ module JournalHelper
       when 'discontent_comment_save'
         "добавил(а) комментарий: '#{j.body}'"+ ' к несовершенству '+ link_to("#{j.body2} ... ", "/project/#{project}/discontent/posts/#{j.first_id}?req_comment=#{j.second_id}#comment_#{j.second_id}")
       when 'discontent_post_save'
-        'добавил(а) несовершенство  ' + link_to("#{j.body}", "/project/#{project}/discontent/posts/#{j.first_id}")
+        if j.anonym
+          ' анонимно добавлено несовершенство  ' + link_to("#{j.body}", "/project/#{project}/discontent/posts/#{j.first_id}")
+        else
+          'добавил(а) несовершенство  ' + link_to("#{j.body}", "/project/#{project}/discontent/posts/#{j.first_id}")
+        end
+
       when 'discontent_post_update'
-        'отредактировал(а) несовершенство '+ link_to("#{j.body}...", "/project/#{project}/discontent/posts/#{j.first_id}")
+        if j.anonym
+          ' анонимное несовершенство отредактировано ' + link_to("#{j.body}", "/project/#{project}/discontent/posts/#{j.first_id}")
+        else
+          'отредактировал(а) несовершенство '+ link_to("#{j.body}...", "/project/#{project}/discontent/posts/#{j.first_id}")
+         end
       when 'my_discontent_comment'
         "добавил(а) комментарий '#{j.body}...' к вашему несовершенству "+ link_to(j.body2, "/project/#{project}/discontent/posts/#{j.first_id}?viewed=true&req_comment=#{j.second_id}#comment_#{j.second_id}")
       when 'reply_discontent_comment'
@@ -128,6 +137,12 @@ module JournalHelper
         "добавил(а) комментарий '#{j.body}...' к вашему нововведению "+ link_to(j.body2, "/project/#{project}/concept/posts/#{j.first_id}?viewed=true&req_comment=#{j.second_id}#comment_#{j.second_id}")
       when 'reply_concept_comment'
         "добавил(а) комментарий '#{j.body}...' в ответ на ваш "+ link_to(j.body2, "/project/#{project}/concept/posts/#{j.first_id}?viewed=true&req_comment=#{j.second_id}#comment_#{j.second_id}")
+
+      when 'my_add_score_concept'
+        "вы получили  #{j.body} баллов за нововведение "+ link_to(j.body2, "/project/#{project}/concept/posts/#{j.first_id}?viewed=true")
+      when 'my_add_score_concept_improve'
+        "вы получили  #{j.body} баллов за то, что вашу идею доработали в нововведение "+ link_to(j.body2, "/project/#{project}/concept/posts/#{j.first_id}?viewed=true")
+
       when 'my_concept_note'
         s = j.body.split(':')
         "добавил(а) замечание  '#{j.body}...' к "+ link_to('вашему нововведению', "/project/#{project}/concept/posts/#{j.first_id}?viewed=true")
@@ -246,6 +261,10 @@ module JournalHelper
         "К вашему материалу добавлен совет #{link_to j.body, polymorphic_path(Advice.find(j.first_id).adviseable, project: project)}"
       when 'my_advice_disapproved'
         link_to t('advice.disapproved_notify_text'), polymorphic_path(Advice.find(j.first_id).adviseable, project: project)
+      when 'my_invite_to_group'
+        link_to j.body, group_path(j.project_id, j.first_id)
+      when 'my_call_to_group'
+        link_to j.body, group_path(j.project_id, j.first_id)
       else
         'что то другое'
     end

@@ -1,0 +1,11 @@
+= form_for @group, url: url do |f|
+  = render partial: 'shared/notice_messages', locals: {object: @group}
+  .form-group
+    = f.label :name
+    = f.text_field :name, class: 'form-control'
+  .form-group
+    = f.label :description
+    = f.text_area :description, class: 'form-control'
+  %br
+  %actions.pull-right
+    = f.submit t('form.save'), class: 'btn btn-primary btn-lg', id:'save_group'

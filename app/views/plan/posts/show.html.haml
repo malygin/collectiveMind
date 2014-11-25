@@ -6,15 +6,21 @@
           %small 1.
           %strong=t('form.plan.desc')
       %li#second
+        -if @post.persisted?
+          #option_for_render_tab(project="#{@project.id}" post="#{@post.id}")
         %a{"data-toggle" => "tab", :href => "#tab2", :role => "tab"}
           %small 2.
           %strong=t('form.plan.actions')
-        -if @post.persisted?
-          #option_for_render_tab(project="#{@project.id}" post="#{@post.id}")
+        #spinner_tab2.loader.animated.handle(style="display:none;")
+          %span.spinner
+            %i.fa.fa-spinner.fa-spin
       %li#third
         %a{"data-toggle" => "tab", :href => "#tab3", :role => "tab"}
           %small 3.
           %strong=t('form.plan.concepts')
+        #spinner_tab3.loader.animated.handle(style="display:none;")
+          %span.spinner
+            %i.fa.fa-spinner.fa-spin
 
     .tab-content(style="overflow:visible;")
       #tab1.tab-pane.active

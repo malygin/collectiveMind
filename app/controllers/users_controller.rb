@@ -6,6 +6,7 @@ class UsersController < ApplicationController
   before_filter :boss_authenticate, only: [:users_rc]
   before_filter :prime_admin_authenticate, only: [:destroy, :list_users, :add_user_for_project, :remove_user_for_project, :club_toggle, :update_score]
   before_filter :have_project_access
+  before_filter :user_projects
 
   def new
     @user = User.new
@@ -45,9 +46,9 @@ class UsersController < ApplicationController
   def index
     @project = Core::Project.find(params[:project])
     if @project.type_access == 2
-      @users = @project.users_in_project.where(users: {type_user: [4, 5, 8, nil]}).sort_by { |c| c.core_project_scores.by_project(@project).first.nil? ? 0 : c.core_project_scores.by_project(@project).first.score }.reverse!.uniq
+      @users = @project.users_in_project.where(users: {type_user: uniq_proc_users}).sort_by { |c| c.core_project_scores.by_project(@project).first.nil? ? 0 : c.core_project_scores.by_project(@project).first.score }.reverse!.uniq
     else
-      @users = User.joins(:core_project_scores).where('core_project_scores.project_id = ? AND core_project_scores.score > 0', @project.id).where(users: {type_user: [4, 5, 8, nil]}).order("core_project_scores.score DESC")
+      @users = User.joins(:core_project_scores).where('core_project_scores.project_id = ? AND core_project_scores.score > 0', @project.id).where(users: {type_user: uniq_proc_users}).order("core_project_scores.score DESC")
     end
   end
 
@@ -72,9 +73,9 @@ class UsersController < ApplicationController
   def show_top
     @project = Core::Project.find(params[:project])
     if @project.type_access == 2
-      @users = @project.users_in_project.where(users: {type_user: [4, 5, 8, nil]}).sort_by { |c| c.core_project_scores.by_project(@project).first.nil? ? 0 : c.core_project_scores.by_project(@project).first.send(params[:score_name]) }.reverse!.uniq
+      @users = @project.users_in_project.where(users: {type_user: uniq_proc_users}).sort_by { |c| c.core_project_scores.by_project(@project).first.nil? ? 0 : c.core_project_scores.by_project(@project).first.send(params[:score_name]) }.reverse!.uniq
     else
-      @users = User.joins(:core_project_scores).where('core_project_scores.project_id = ? AND core_project_scores.score > 0', @project.id).where(users: {type_user: [4, 5, 8, nil]}).order("core_project_scores.#{params[:score_name]} DESC")
+      @users = User.joins(:core_project_scores).where('core_project_scores.project_id = ? AND core_project_scores.score > 0', @project.id).where(users: {type_user: uniq_proc_users}).order(score_order(params[:score_name]))
     end
     @score_name = params[:score_name]
     respond_to do |format|
