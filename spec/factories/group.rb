@@ -10,4 +10,9 @@ FactoryGirl.define do
     owner true
     invite_accepted true
   end
+
+  factory :group_task, class: 'GroupTask' do
+    sequence(:name) { |n| "Group task #{n}" }
+    sequence(:description) { |n| "Description for group task #{n}" }
+  end
 end

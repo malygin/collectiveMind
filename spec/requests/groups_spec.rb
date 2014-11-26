@@ -226,6 +226,8 @@ describe 'Groups' do
     end
 
     context 'tasks', js: true do
+      let!(:group_task) { create :group_task, group: group }
+
       before do
         visit group_path(project, group)
       end
@@ -286,7 +288,16 @@ describe 'Groups' do
       end
 
       context 'edit'
-      context 'destroy'
+
+      it 'destroy' do
+        expect {
+          click_link "remove_task_#{group_task.id}"
+          page.driver.browser.accept_js_confirms
+          sleep 2
+          expect(page).not_to have_content group_task.name
+          expect(page).not_to have_content group_task.description
+        }.to change(group.tasks, :count).by(-1)
+      end
 
       context 'assign to'
     end

@@ -28,7 +28,6 @@ class GroupTasksController < ApplicationController
   # DELETE /group_tasks/1
   def destroy
     @group_task.destroy
-    redirect_to group_tasks_url, notice: 'Group task was successfully destroyed.'
   end
 
   private
