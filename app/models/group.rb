@@ -6,6 +6,7 @@ class Group < ActiveRecord::Base
   has_many :group_users, -> { where invite_accepted: true }
   has_many :users, through: :group_users
   has_many :chat_messages, class_name: 'GroupChatMessage'
+  has_many :tasks, class_name: 'GroupTask'
 
   scope :by_project, -> (project) { where project_id: project.id }
 
