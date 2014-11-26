@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141126011942) do
+ActiveRecord::Schema.define(version: 20141126012330) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -922,6 +922,16 @@ ActiveRecord::Schema.define(version: 20141126011942) do
 
   add_index "group_chat_messages", ["group_id"], name: "index_group_chat_messages_on_group_id", using: :btree
   add_index "group_chat_messages", ["user_id"], name: "index_group_chat_messages_on_user_id", using: :btree
+
+  create_table "group_task_users", force: true do |t|
+    t.integer  "user_id"
+    t.integer  "group_task_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "group_task_users", ["group_task_id"], name: "index_group_task_users_on_group_task_id", using: :btree
+  add_index "group_task_users", ["user_id"], name: "index_group_task_users_on_user_id", using: :btree
 
   create_table "group_tasks", force: true do |t|
     t.string   "name"
