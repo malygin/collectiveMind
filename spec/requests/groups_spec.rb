@@ -230,6 +230,15 @@ describe 'Groups' do
         visit group_path(project, group)
       end
 
+      it 'not member - not view' do
+        sign_out
+        sign_in user2
+        visit group_path(project, group)
+        expect(page).not_to have_css '#count_of_tasks'
+        expect(page).not_to have_css '#button_create_task'
+        expect(page).not_to have_css '#createTask'
+      end
+
       context 'create' do
         before do
           click_button 'button_create_task'

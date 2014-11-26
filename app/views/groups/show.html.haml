@@ -39,7 +39,7 @@
 
   -#.id_group{id: @group.id, style: 'display: hidden'}
   -##group_chat_div
-
+- if @group.users.include? current_user
   #inviteUser.modal.fade{'aria-hidden' => 'true', 'aria-labelledby' => 'myModalLabel', role: 'dialog', style: 'display: none;', tabindex: '-1'}
     .modal-dialog
       .modal-content
