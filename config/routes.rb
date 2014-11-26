@@ -79,6 +79,7 @@ scope '/project/:project' do
     put :reject_invite
     put :call_moderator
   end
+  resources :group_tasks, only: [:new, :edit, :create, :update, :destroy]
 
   namespace :help do
     resources :posts

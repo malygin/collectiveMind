@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141123113652) do
+ActiveRecord::Schema.define(version: 20141126011942) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -367,10 +367,10 @@ ActiveRecord::Schema.define(version: 20141123113652) do
     t.string   "secret"
     t.string   "secret2"
     t.string   "secret3"
-    t.string   "color"
-    t.string   "code"
     t.boolean  "advices_discontent"
     t.boolean  "advices_concept"
+    t.string   "color"
+    t.string   "code"
     t.integer  "moderator_id"
     t.datetime "date_12"
     t.datetime "date_23"
@@ -922,6 +922,16 @@ ActiveRecord::Schema.define(version: 20141123113652) do
 
   add_index "group_chat_messages", ["group_id"], name: "index_group_chat_messages_on_group_id", using: :btree
   add_index "group_chat_messages", ["user_id"], name: "index_group_chat_messages_on_user_id", using: :btree
+
+  create_table "group_tasks", force: true do |t|
+    t.string   "name"
+    t.text     "description"
+    t.integer  "group_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "group_tasks", ["group_id"], name: "index_group_tasks_on_group_id", using: :btree
 
   create_table "group_users", force: true do |t|
     t.integer  "group_id"
