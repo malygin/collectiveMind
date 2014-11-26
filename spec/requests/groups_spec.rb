@@ -72,7 +72,6 @@ describe 'Groups' do
 
     context 'leave group' do
       before do
-        create :group_user, user: user, group: group
         visit group_path(project, group)
         click_link "leave_group_#{group.id}"
       end
@@ -83,7 +82,7 @@ describe 'Groups' do
 
       it { expect(page).not_to have_link "open_group_#{group.id}" }
 
-      it { expect(page).not_to have_link "become_member_#{group.id}" }
+      it { expect(page).to have_link "become_member_#{group.id}" }
     end
 
     it 'view link to create group' do
@@ -158,6 +157,44 @@ describe 'Groups' do
         page.driver.browser.accept_js_confirms
         expect(current_path) == groups_path(project)
       }.to change(Group.by_project(project), :count).by(-1)
+    end
+
+    context 'show page', js: true do
+      before do
+        create :group_user, group: group, user: moderator, invite_accepted: true
+        create :core_project_user, core_project: project, user: user2
+        visit group_path(project, group)
+      end
+
+      it 'link to project' do
+        click_link "go_to_project_#{project.id}"
+        expect(current_path) == "/project/#{project.id}/life_tape/posts"
+      end
+
+      it 'call moderator' do
+        expect {
+          click_link "call_moderator_for_#{group.id}"
+          expect(page).to have_content I18n.t('groups.call_moderator_success')
+        }.to change(Journal, :count).by(1)
+      end
+
+      it 'send invite' do
+        expect {
+          click_button 'button_invite_user'
+          click_link "invite_user_#{user2.id}"
+          within :css, 'div#inviteUser' do
+            expect(page).not_to have_content user.to_s
+          end
+        }.to change(Journal, :count).by(1)
+      end
+
+      it 'list members' do
+        within :css, "div#users_in_group_#{group.id}" do
+          [user, moderator].each do |user|
+            expect(page).to have_content user.to_s
+          end
+        end
+      end
     end
   end
 end
