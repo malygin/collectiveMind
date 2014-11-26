@@ -1,9 +1,10 @@
 #= require jquery
 #= require jquery_ujs
-#= require jquery-ui
+#= require jquery.ui.all
 #= require jquery.remotipart
 #= require jquery.magnific-popup.min
 #= require jquery.autosize
+
 #= require totop/jquery.ui.totop
 #= require totop/easing
 #= require jquery.icheck
@@ -39,7 +40,6 @@
 #= require jquery.slimscroll
 #= require moderator_chat
 #= require groups
-
 #= require history_jquery
 
 # @todo load initialization

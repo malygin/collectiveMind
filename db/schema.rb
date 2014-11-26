@@ -367,10 +367,10 @@ ActiveRecord::Schema.define(version: 20141123113652) do
     t.string   "secret"
     t.string   "secret2"
     t.string   "secret3"
-    t.string   "color"
-    t.string   "code"
     t.boolean  "advices_discontent"
     t.boolean  "advices_concept"
+    t.string   "color"
+    t.string   "code"
     t.integer  "moderator_id"
     t.datetime "date_12"
     t.datetime "date_23"
@@ -538,7 +538,7 @@ ActiveRecord::Schema.define(version: 20141123113652) do
     t.boolean  "discuss_status"
     t.boolean  "useful"
     t.boolean  "approve_status"
-    t.boolean  "anonym",             default: false
+    t.boolean  "anonym"
   end
 
   add_index "discontent_posts", ["aspect_id"], name: "index_discontent_posts_on_aspect_id", using: :btree
