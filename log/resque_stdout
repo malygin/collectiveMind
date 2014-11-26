@@ -1,0 +1,953 @@
+** [01:52:02 2014-11-27] 8558: Starting worker pc:8558:*
+** [01:52:02 2014-11-27] 8558: Registered signals
+** [01:52:02 2014-11-27] 8558: Running before_first_fork hooks
+** [01:52:02 2014-11-27] 8558: Checking feed_mailer
+** [01:52:02 2014-11-27] 8558: Checking mailer
+** [01:52:02 2014-11-27] 8558: Checking sleeping_job
+** [01:52:02 2014-11-27] 8558: Sleeping for 5.0 seconds
+** [01:52:02 2014-11-27] 8558: resque-1.25.2: Waiting for *
+** [01:52:07 2014-11-27] 8558: Checking feed_mailer
+** [01:52:07 2014-11-27] 8558: Checking mailer
+** [01:52:07 2014-11-27] 8558: Checking sleeping_job
+** [01:52:07 2014-11-27] 8558: Sleeping for 5.0 seconds
+** [01:52:07 2014-11-27] 8558: resque-1.25.2: Waiting for *
+** [01:52:12 2014-11-27] 8558: Checking feed_mailer
+** [01:52:12 2014-11-27] 8558: Checking mailer
+** [01:52:12 2014-11-27] 8558: Checking sleeping_job
+** [01:52:12 2014-11-27] 8558: Sleeping for 5.0 seconds
+** [01:52:12 2014-11-27] 8558: resque-1.25.2: Waiting for *
+** [01:52:17 2014-11-27] 8558: Checking feed_mailer
+** [01:52:17 2014-11-27] 8558: Checking mailer
+** [01:52:17 2014-11-27] 8558: Checking sleeping_job
+** [01:52:17 2014-11-27] 8558: Sleeping for 5.0 seconds
+** [01:52:17 2014-11-27] 8558: resque-1.25.2: Waiting for *
+** [01:52:22 2014-11-27] 8558: Checking feed_mailer
+** [01:52:22 2014-11-27] 8558: Checking mailer
+** [01:52:22 2014-11-27] 8558: Checking sleeping_job
+** [01:52:22 2014-11-27] 8558: Sleeping for 5.0 seconds
+** [01:52:22 2014-11-27] 8558: resque-1.25.2: Waiting for *
+** [01:52:27 2014-11-27] 8558: Checking feed_mailer
+** [01:52:27 2014-11-27] 8558: Checking mailer
+** [01:52:27 2014-11-27] 8558: Checking sleeping_job
+** [01:52:27 2014-11-27] 8558: Sleeping for 5.0 seconds
+** [01:52:27 2014-11-27] 8558: resque-1.25.2: Waiting for *
+** [01:52:32 2014-11-27] 8558: Checking feed_mailer
+** [01:52:32 2014-11-27] 8558: Checking mailer
+** [01:52:32 2014-11-27] 8558: Checking sleeping_job
+** [01:52:32 2014-11-27] 8558: Sleeping for 5.0 seconds
+** [01:52:32 2014-11-27] 8558: resque-1.25.2: Waiting for *
+** [01:52:37 2014-11-27] 8558: Checking feed_mailer
+** [01:52:37 2014-11-27] 8558: Checking mailer
+** [01:52:37 2014-11-27] 8558: Checking sleeping_job
+** [01:52:37 2014-11-27] 8558: Sleeping for 5.0 seconds
+** [01:52:37 2014-11-27] 8558: resque-1.25.2: Waiting for *
+** [01:52:42 2014-11-27] 8558: Checking feed_mailer
+** [01:52:42 2014-11-27] 8558: Checking mailer
+** [01:52:42 2014-11-27] 8558: Checking sleeping_job
+** [01:52:42 2014-11-27] 8558: Sleeping for 5.0 seconds
+** [01:52:42 2014-11-27] 8558: resque-1.25.2: Waiting for *
+** [01:52:47 2014-11-27] 8558: Checking feed_mailer
+** [01:52:47 2014-11-27] 8558: Checking mailer
+** [01:52:47 2014-11-27] 8558: Checking sleeping_job
+** [01:52:47 2014-11-27] 8558: Sleeping for 5.0 seconds
+** [01:52:47 2014-11-27] 8558: resque-1.25.2: Waiting for *
+** [01:52:52 2014-11-27] 8558: Checking feed_mailer
+** [01:52:52 2014-11-27] 8558: Checking mailer
+** [01:52:52 2014-11-27] 8558: Checking sleeping_job
+** [01:52:52 2014-11-27] 8558: Sleeping for 5.0 seconds
+** [01:52:52 2014-11-27] 8558: resque-1.25.2: Waiting for *
+** [01:52:57 2014-11-27] 8558: Checking feed_mailer
+** [01:52:57 2014-11-27] 8558: Checking mailer
+** [01:52:57 2014-11-27] 8558: Checking sleeping_job
+** [01:52:57 2014-11-27] 8558: Sleeping for 5.0 seconds
+** [01:52:57 2014-11-27] 8558: resque-1.25.2: Waiting for *
+** [01:53:02 2014-11-27] 8558: Checking feed_mailer
+** [01:53:02 2014-11-27] 8558: Checking mailer
+** [01:53:02 2014-11-27] 8558: Checking sleeping_job
+** [01:53:02 2014-11-27] 8558: Sleeping for 5.0 seconds
+** [01:53:02 2014-11-27] 8558: resque-1.25.2: Waiting for *
+** [01:53:07 2014-11-27] 8558: Checking feed_mailer
+** [01:53:07 2014-11-27] 8558: Checking mailer
+** [01:53:07 2014-11-27] 8558: Checking sleeping_job
+** [01:53:07 2014-11-27] 8558: Sleeping for 5.0 seconds
+** [01:53:07 2014-11-27] 8558: resque-1.25.2: Waiting for *
+** [01:53:12 2014-11-27] 8558: Checking feed_mailer
+** [01:53:12 2014-11-27] 8558: Checking mailer
+** [01:53:12 2014-11-27] 8558: Checking sleeping_job
+** [01:53:12 2014-11-27] 8558: Sleeping for 5.0 seconds
+** [01:53:12 2014-11-27] 8558: resque-1.25.2: Waiting for *
+** [01:53:17 2014-11-27] 8558: Checking feed_mailer
+** [01:53:17 2014-11-27] 8558: Checking mailer
+** [01:53:17 2014-11-27] 8558: Checking sleeping_job
+** [01:53:17 2014-11-27] 8558: Sleeping for 5.0 seconds
+** [01:53:17 2014-11-27] 8558: resque-1.25.2: Waiting for *
+** [01:53:22 2014-11-27] 8558: Checking feed_mailer
+** [01:53:22 2014-11-27] 8558: Checking mailer
+** [01:53:22 2014-11-27] 8558: Checking sleeping_job
+** [01:53:22 2014-11-27] 8558: Sleeping for 5.0 seconds
+** [01:53:22 2014-11-27] 8558: resque-1.25.2: Waiting for *
+** [01:53:27 2014-11-27] 8558: Checking feed_mailer
+** [01:53:27 2014-11-27] 8558: Checking mailer
+** [01:53:27 2014-11-27] 8558: Checking sleeping_job
+** [01:53:27 2014-11-27] 8558: Sleeping for 5.0 seconds
+** [01:53:27 2014-11-27] 8558: resque-1.25.2: Waiting for *
+** [01:53:32 2014-11-27] 8558: Checking feed_mailer
+** [01:53:32 2014-11-27] 8558: Checking mailer
+** [01:53:32 2014-11-27] 8558: Checking sleeping_job
+** [01:53:32 2014-11-27] 8558: Sleeping for 5.0 seconds
+** [01:53:32 2014-11-27] 8558: resque-1.25.2: Waiting for *
+** [01:53:37 2014-11-27] 8558: Checking feed_mailer
+** [01:53:37 2014-11-27] 8558: Checking mailer
+** [01:53:37 2014-11-27] 8558: Checking sleeping_job
+** [01:53:37 2014-11-27] 8558: Sleeping for 5.0 seconds
+** [01:53:37 2014-11-27] 8558: resque-1.25.2: Waiting for *
+** [01:53:42 2014-11-27] 8558: Checking feed_mailer
+** [01:53:42 2014-11-27] 8558: Checking mailer
+** [01:53:42 2014-11-27] 8558: Checking sleeping_job
+** [01:53:42 2014-11-27] 8558: Sleeping for 5.0 seconds
+** [01:53:42 2014-11-27] 8558: resque-1.25.2: Waiting for *
+** [01:53:47 2014-11-27] 8558: Checking feed_mailer
+** [01:53:47 2014-11-27] 8558: Checking mailer
+** [01:53:47 2014-11-27] 8558: Checking sleeping_job
+** [01:53:47 2014-11-27] 8558: Sleeping for 5.0 seconds
+** [01:53:47 2014-11-27] 8558: resque-1.25.2: Waiting for *
+** [01:53:52 2014-11-27] 8558: Checking feed_mailer
+** [01:53:52 2014-11-27] 8558: Checking mailer
+** [01:53:52 2014-11-27] 8558: Checking sleeping_job
+** [01:53:52 2014-11-27] 8558: Sleeping for 5.0 seconds
+** [01:53:52 2014-11-27] 8558: resque-1.25.2: Waiting for *
+** [01:53:57 2014-11-27] 8558: Checking feed_mailer
+** [01:53:57 2014-11-27] 8558: Checking mailer
+** [01:53:57 2014-11-27] 8558: Checking sleeping_job
+** [01:53:57 2014-11-27] 8558: Sleeping for 5.0 seconds
+** [01:53:57 2014-11-27] 8558: resque-1.25.2: Waiting for *
+** [01:54:02 2014-11-27] 8558: Checking feed_mailer
+** [01:54:02 2014-11-27] 8558: Checking mailer
+** [01:54:02 2014-11-27] 8558: Checking sleeping_job
+** [01:54:02 2014-11-27] 8558: Sleeping for 5.0 seconds
+** [01:54:02 2014-11-27] 8558: resque-1.25.2: Waiting for *
+** [01:54:07 2014-11-27] 8558: Checking feed_mailer
+** [01:54:07 2014-11-27] 8558: Checking mailer
+** [01:54:07 2014-11-27] 8558: Checking sleeping_job
+** [01:54:07 2014-11-27] 8558: Sleeping for 5.0 seconds
+** [01:54:07 2014-11-27] 8558: resque-1.25.2: Waiting for *
+** [01:54:12 2014-11-27] 8558: Checking feed_mailer
+** [01:54:12 2014-11-27] 8558: Checking mailer
+** [01:54:12 2014-11-27] 8558: Checking sleeping_job
+** [01:54:12 2014-11-27] 8558: Sleeping for 5.0 seconds
+** [01:54:12 2014-11-27] 8558: resque-1.25.2: Waiting for *
+** [01:54:17 2014-11-27] 8558: Checking feed_mailer
+** [01:54:17 2014-11-27] 8558: Checking mailer
+** [01:54:17 2014-11-27] 8558: Checking sleeping_job
+** [01:54:17 2014-11-27] 8558: Sleeping for 5.0 seconds
+** [01:54:17 2014-11-27] 8558: resque-1.25.2: Waiting for *
+** [01:54:22 2014-11-27] 8558: Checking feed_mailer
+** [01:54:22 2014-11-27] 8558: Checking mailer
+** [01:54:22 2014-11-27] 8558: Checking sleeping_job
+** [01:54:22 2014-11-27] 8558: Sleeping for 5.0 seconds
+** [01:54:22 2014-11-27] 8558: resque-1.25.2: Waiting for *
+** [01:54:27 2014-11-27] 8558: Checking feed_mailer
+** [01:54:27 2014-11-27] 8558: Checking mailer
+** [01:54:27 2014-11-27] 8558: Checking sleeping_job
+** [01:54:27 2014-11-27] 8558: Sleeping for 5.0 seconds
+** [01:54:27 2014-11-27] 8558: resque-1.25.2: Waiting for *
+** [01:54:32 2014-11-27] 8558: Checking feed_mailer
+** [01:54:32 2014-11-27] 8558: Checking mailer
+** [01:54:32 2014-11-27] 8558: Checking sleeping_job
+** [01:54:32 2014-11-27] 8558: Sleeping for 5.0 seconds
+** [01:54:32 2014-11-27] 8558: resque-1.25.2: Waiting for *
+** [01:54:37 2014-11-27] 8558: Checking feed_mailer
+** [01:54:37 2014-11-27] 8558: Checking mailer
+** [01:54:37 2014-11-27] 8558: Checking sleeping_job
+** [01:54:37 2014-11-27] 8558: Sleeping for 5.0 seconds
+** [01:54:37 2014-11-27] 8558: resque-1.25.2: Waiting for *
+** [01:54:42 2014-11-27] 8558: Checking feed_mailer
+** [01:54:42 2014-11-27] 8558: Checking mailer
+** [01:54:42 2014-11-27] 8558: Checking sleeping_job
+** [01:54:42 2014-11-27] 8558: Sleeping for 5.0 seconds
+** [01:54:42 2014-11-27] 8558: resque-1.25.2: Waiting for *
+** [01:54:47 2014-11-27] 8558: Checking feed_mailer
+** [01:54:47 2014-11-27] 8558: Checking mailer
+** [01:54:47 2014-11-27] 8558: Checking sleeping_job
+** [01:54:47 2014-11-27] 8558: Sleeping for 5.0 seconds
+** [01:54:47 2014-11-27] 8558: resque-1.25.2: Waiting for *
+** [01:54:52 2014-11-27] 8558: Checking feed_mailer
+** [01:54:52 2014-11-27] 8558: Checking mailer
+** [01:54:52 2014-11-27] 8558: Checking sleeping_job
+** [01:54:52 2014-11-27] 8558: Sleeping for 5.0 seconds
+** [01:54:52 2014-11-27] 8558: resque-1.25.2: Waiting for *
+** [01:54:57 2014-11-27] 8558: Checking feed_mailer
+** [01:54:57 2014-11-27] 8558: Checking mailer
+** [01:54:57 2014-11-27] 8558: Checking sleeping_job
+** [01:54:57 2014-11-27] 8558: Sleeping for 5.0 seconds
+** [01:54:57 2014-11-27] 8558: resque-1.25.2: Waiting for *
+** [01:55:02 2014-11-27] 8558: Checking feed_mailer
+** [01:55:02 2014-11-27] 8558: Checking mailer
+** [01:55:02 2014-11-27] 8558: Checking sleeping_job
+** [01:55:02 2014-11-27] 8558: Sleeping for 5.0 seconds
+** [01:55:02 2014-11-27] 8558: resque-1.25.2: Waiting for *
+** [01:55:07 2014-11-27] 8558: Checking feed_mailer
+** [01:55:07 2014-11-27] 8558: Checking mailer
+** [01:55:07 2014-11-27] 8558: Checking sleeping_job
+** [01:55:07 2014-11-27] 8558: Sleeping for 5.0 seconds
+** [01:55:07 2014-11-27] 8558: resque-1.25.2: Waiting for *
+** [01:55:12 2014-11-27] 8558: Checking feed_mailer
+** [01:55:12 2014-11-27] 8558: Checking mailer
+** [01:55:12 2014-11-27] 8558: Checking sleeping_job
+** [01:55:12 2014-11-27] 8558: Sleeping for 5.0 seconds
+** [01:55:12 2014-11-27] 8558: resque-1.25.2: Waiting for *
+** [01:55:17 2014-11-27] 8558: Checking feed_mailer
+** [01:55:17 2014-11-27] 8558: Checking mailer
+** [01:55:17 2014-11-27] 8558: Checking sleeping_job
+** [01:55:17 2014-11-27] 8558: Sleeping for 5.0 seconds
+** [01:55:17 2014-11-27] 8558: resque-1.25.2: Waiting for *
+** [01:55:22 2014-11-27] 8558: Checking feed_mailer
+** [01:55:22 2014-11-27] 8558: Checking mailer
+** [01:55:22 2014-11-27] 8558: Checking sleeping_job
+** [01:55:22 2014-11-27] 8558: Sleeping for 5.0 seconds
+** [01:55:22 2014-11-27] 8558: resque-1.25.2: Waiting for *
+** [01:55:27 2014-11-27] 8558: Checking feed_mailer
+** [01:55:27 2014-11-27] 8558: Checking mailer
+** [01:55:27 2014-11-27] 8558: Checking sleeping_job
+** [01:55:27 2014-11-27] 8558: Sleeping for 5.0 seconds
+** [01:55:27 2014-11-27] 8558: resque-1.25.2: Waiting for *
+** [01:55:32 2014-11-27] 8558: Checking feed_mailer
+** [01:55:32 2014-11-27] 8558: Checking mailer
+** [01:55:32 2014-11-27] 8558: Checking sleeping_job
+** [01:55:32 2014-11-27] 8558: Sleeping for 5.0 seconds
+** [01:55:32 2014-11-27] 8558: resque-1.25.2: Waiting for *
+** [01:55:37 2014-11-27] 8558: Checking feed_mailer
+** [01:55:37 2014-11-27] 8558: Checking mailer
+** [01:55:37 2014-11-27] 8558: Checking sleeping_job
+** [01:55:37 2014-11-27] 8558: Sleeping for 5.0 seconds
+** [01:55:37 2014-11-27] 8558: resque-1.25.2: Waiting for *
+** [01:55:42 2014-11-27] 8558: Checking feed_mailer
+** [01:55:42 2014-11-27] 8558: Checking mailer
+** [01:55:42 2014-11-27] 8558: Checking sleeping_job
+** [01:55:42 2014-11-27] 8558: Sleeping for 5.0 seconds
+** [01:55:42 2014-11-27] 8558: resque-1.25.2: Waiting for *
+** [01:55:47 2014-11-27] 8558: Checking feed_mailer
+** [01:55:47 2014-11-27] 8558: Checking mailer
+** [01:55:47 2014-11-27] 8558: Checking sleeping_job
+** [01:55:47 2014-11-27] 8558: Sleeping for 5.0 seconds
+** [01:55:47 2014-11-27] 8558: resque-1.25.2: Waiting for *
+** [01:55:52 2014-11-27] 8558: Checking feed_mailer
+** [01:55:52 2014-11-27] 8558: Checking mailer
+** [01:55:52 2014-11-27] 8558: Checking sleeping_job
+** [01:55:52 2014-11-27] 8558: Sleeping for 5.0 seconds
+** [01:55:52 2014-11-27] 8558: resque-1.25.2: Waiting for *
+** [01:55:57 2014-11-27] 8558: Checking feed_mailer
+** [01:55:57 2014-11-27] 8558: Checking mailer
+** [01:55:57 2014-11-27] 8558: Checking sleeping_job
+** [01:55:57 2014-11-27] 8558: Sleeping for 5.0 seconds
+** [01:55:57 2014-11-27] 8558: resque-1.25.2: Waiting for *
+** [01:56:02 2014-11-27] 8558: Checking feed_mailer
+** [01:56:02 2014-11-27] 8558: Checking mailer
+** [01:56:02 2014-11-27] 8558: Checking sleeping_job
+** [01:56:02 2014-11-27] 8558: Sleeping for 5.0 seconds
+** [01:56:02 2014-11-27] 8558: resque-1.25.2: Waiting for *
+** [01:56:07 2014-11-27] 8558: Checking feed_mailer
+** [01:56:07 2014-11-27] 8558: Checking mailer
+** [01:56:07 2014-11-27] 8558: Checking sleeping_job
+** [01:56:07 2014-11-27] 8558: Sleeping for 5.0 seconds
+** [01:56:07 2014-11-27] 8558: resque-1.25.2: Waiting for *
+** [01:56:12 2014-11-27] 8558: Checking feed_mailer
+** [01:56:12 2014-11-27] 8558: Checking mailer
+** [01:56:12 2014-11-27] 8558: Checking sleeping_job
+** [01:56:12 2014-11-27] 8558: Sleeping for 5.0 seconds
+** [01:56:12 2014-11-27] 8558: resque-1.25.2: Waiting for *
+** [01:56:17 2014-11-27] 8558: Checking feed_mailer
+** [01:56:17 2014-11-27] 8558: Checking mailer
+** [01:56:17 2014-11-27] 8558: Checking sleeping_job
+** [01:56:17 2014-11-27] 8558: Sleeping for 5.0 seconds
+** [01:56:17 2014-11-27] 8558: resque-1.25.2: Waiting for *
+** [01:56:22 2014-11-27] 8558: Checking feed_mailer
+** [01:56:22 2014-11-27] 8558: Checking mailer
+** [01:56:22 2014-11-27] 8558: Checking sleeping_job
+** [01:56:22 2014-11-27] 8558: Sleeping for 5.0 seconds
+** [01:56:22 2014-11-27] 8558: resque-1.25.2: Waiting for *
+** [01:56:27 2014-11-27] 8558: Checking feed_mailer
+** [01:56:27 2014-11-27] 8558: Checking mailer
+** [01:56:27 2014-11-27] 8558: Checking sleeping_job
+** [01:56:27 2014-11-27] 8558: Sleeping for 5.0 seconds
+** [01:56:27 2014-11-27] 8558: resque-1.25.2: Waiting for *
+** [01:56:32 2014-11-27] 8558: Checking feed_mailer
+** [01:56:32 2014-11-27] 8558: Checking mailer
+** [01:56:32 2014-11-27] 8558: Checking sleeping_job
+** [01:56:32 2014-11-27] 8558: Sleeping for 5.0 seconds
+** [01:56:32 2014-11-27] 8558: resque-1.25.2: Waiting for *
+** [01:56:37 2014-11-27] 8558: Checking feed_mailer
+** [01:56:37 2014-11-27] 8558: Checking mailer
+** [01:56:37 2014-11-27] 8558: Checking sleeping_job
+** [01:56:37 2014-11-27] 8558: Sleeping for 5.0 seconds
+** [01:56:37 2014-11-27] 8558: resque-1.25.2: Waiting for *
+** [01:56:42 2014-11-27] 8558: Checking feed_mailer
+** [01:56:42 2014-11-27] 8558: Checking mailer
+** [01:56:42 2014-11-27] 8558: Checking sleeping_job
+** [01:56:42 2014-11-27] 8558: Sleeping for 5.0 seconds
+** [01:56:42 2014-11-27] 8558: resque-1.25.2: Waiting for *
+** [01:56:47 2014-11-27] 8558: Checking feed_mailer
+** [01:56:47 2014-11-27] 8558: Checking mailer
+** [01:56:47 2014-11-27] 8558: Checking sleeping_job
+** [01:56:47 2014-11-27] 8558: Sleeping for 5.0 seconds
+** [01:56:47 2014-11-27] 8558: resque-1.25.2: Waiting for *
+** [01:56:52 2014-11-27] 8558: Checking feed_mailer
+** [01:56:52 2014-11-27] 8558: Checking mailer
+** [01:56:52 2014-11-27] 8558: Checking sleeping_job
+** [01:56:52 2014-11-27] 8558: Sleeping for 5.0 seconds
+** [01:56:52 2014-11-27] 8558: resque-1.25.2: Waiting for *
+** [01:56:57 2014-11-27] 8558: Checking feed_mailer
+** [01:56:57 2014-11-27] 8558: Checking mailer
+** [01:56:57 2014-11-27] 8558: Checking sleeping_job
+** [01:56:57 2014-11-27] 8558: Sleeping for 5.0 seconds
+** [01:56:57 2014-11-27] 8558: resque-1.25.2: Waiting for *
+** [01:57:02 2014-11-27] 8558: Checking feed_mailer
+** [01:57:02 2014-11-27] 8558: Checking mailer
+** [01:57:02 2014-11-27] 8558: Checking sleeping_job
+** [01:57:02 2014-11-27] 8558: Sleeping for 5.0 seconds
+** [01:57:02 2014-11-27] 8558: resque-1.25.2: Waiting for *
+** [01:57:07 2014-11-27] 8558: Checking feed_mailer
+** [01:57:07 2014-11-27] 8558: Checking mailer
+** [01:57:07 2014-11-27] 8558: Checking sleeping_job
+** [01:57:07 2014-11-27] 8558: Sleeping for 5.0 seconds
+** [01:57:07 2014-11-27] 8558: resque-1.25.2: Waiting for *
+** [01:57:12 2014-11-27] 8558: Checking feed_mailer
+** [01:57:12 2014-11-27] 8558: Checking mailer
+** [01:57:12 2014-11-27] 8558: Checking sleeping_job
+** [01:57:12 2014-11-27] 8558: Sleeping for 5.0 seconds
+** [01:57:12 2014-11-27] 8558: resque-1.25.2: Waiting for *
+** [01:57:17 2014-11-27] 8558: Checking feed_mailer
+** [01:57:17 2014-11-27] 8558: Checking mailer
+** [01:57:17 2014-11-27] 8558: Checking sleeping_job
+** [01:57:17 2014-11-27] 8558: Sleeping for 5.0 seconds
+** [01:57:17 2014-11-27] 8558: resque-1.25.2: Waiting for *
+** [01:57:22 2014-11-27] 8558: Checking feed_mailer
+** [01:57:22 2014-11-27] 8558: Checking mailer
+** [01:57:22 2014-11-27] 8558: Checking sleeping_job
+** [01:57:22 2014-11-27] 8558: Sleeping for 5.0 seconds
+** [01:57:22 2014-11-27] 8558: resque-1.25.2: Waiting for *
+** [01:57:27 2014-11-27] 8558: Checking feed_mailer
+** [01:57:27 2014-11-27] 8558: Checking mailer
+** [01:57:27 2014-11-27] 8558: Checking sleeping_job
+** [01:57:27 2014-11-27] 8558: Sleeping for 5.0 seconds
+** [01:57:27 2014-11-27] 8558: resque-1.25.2: Waiting for *
+** [01:57:32 2014-11-27] 8558: Checking feed_mailer
+** [01:57:32 2014-11-27] 8558: Checking mailer
+** [01:57:32 2014-11-27] 8558: Checking sleeping_job
+** [01:57:32 2014-11-27] 8558: Sleeping for 5.0 seconds
+** [01:57:32 2014-11-27] 8558: resque-1.25.2: Waiting for *
+** [01:57:37 2014-11-27] 8558: Checking feed_mailer
+** [01:57:37 2014-11-27] 8558: Checking mailer
+** [01:57:37 2014-11-27] 8558: Checking sleeping_job
+** [01:57:37 2014-11-27] 8558: Sleeping for 5.0 seconds
+** [01:57:37 2014-11-27] 8558: resque-1.25.2: Waiting for *
+** [01:57:42 2014-11-27] 8558: Checking feed_mailer
+** [01:57:42 2014-11-27] 8558: Checking mailer
+** [01:57:42 2014-11-27] 8558: Checking sleeping_job
+** [01:57:42 2014-11-27] 8558: Sleeping for 5.0 seconds
+** [01:57:42 2014-11-27] 8558: resque-1.25.2: Waiting for *
+** [01:57:47 2014-11-27] 8558: Checking feed_mailer
+** [01:57:47 2014-11-27] 8558: Checking mailer
+** [01:57:47 2014-11-27] 8558: Checking sleeping_job
+** [01:57:47 2014-11-27] 8558: Sleeping for 5.0 seconds
+** [01:57:47 2014-11-27] 8558: resque-1.25.2: Waiting for *
+** [01:57:52 2014-11-27] 8558: Checking feed_mailer
+** [01:57:52 2014-11-27] 8558: Checking mailer
+** [01:57:52 2014-11-27] 8558: Checking sleeping_job
+** [01:57:52 2014-11-27] 8558: Sleeping for 5.0 seconds
+** [01:57:52 2014-11-27] 8558: resque-1.25.2: Waiting for *
+** [01:57:57 2014-11-27] 8558: Checking feed_mailer
+** [01:57:57 2014-11-27] 8558: Checking mailer
+** [01:57:57 2014-11-27] 8558: Checking sleeping_job
+** [01:57:57 2014-11-27] 8558: Sleeping for 5.0 seconds
+** [01:57:57 2014-11-27] 8558: resque-1.25.2: Waiting for *
+** [01:58:02 2014-11-27] 8558: Checking feed_mailer
+** [01:58:02 2014-11-27] 8558: Checking mailer
+** [01:58:02 2014-11-27] 8558: Checking sleeping_job
+** [01:58:02 2014-11-27] 8558: Sleeping for 5.0 seconds
+** [01:58:02 2014-11-27] 8558: resque-1.25.2: Waiting for *
+** [01:58:07 2014-11-27] 8558: Checking feed_mailer
+** [01:58:07 2014-11-27] 8558: Checking mailer
+** [01:58:07 2014-11-27] 8558: Checking sleeping_job
+** [01:58:07 2014-11-27] 8558: Sleeping for 5.0 seconds
+** [01:58:07 2014-11-27] 8558: resque-1.25.2: Waiting for *
+** [01:58:12 2014-11-27] 8558: Checking feed_mailer
+** [01:58:12 2014-11-27] 8558: Checking mailer
+** [01:58:12 2014-11-27] 8558: Checking sleeping_job
+** [01:58:12 2014-11-27] 8558: Sleeping for 5.0 seconds
+** [01:58:12 2014-11-27] 8558: resque-1.25.2: Waiting for *
+** [01:58:17 2014-11-27] 8558: Checking feed_mailer
+** [01:58:17 2014-11-27] 8558: Checking mailer
+** [01:58:17 2014-11-27] 8558: Checking sleeping_job
+** [01:58:17 2014-11-27] 8558: Sleeping for 5.0 seconds
+** [01:58:17 2014-11-27] 8558: resque-1.25.2: Waiting for *
+** [01:58:22 2014-11-27] 8558: Checking feed_mailer
+** [01:58:22 2014-11-27] 8558: Checking mailer
+** [01:58:22 2014-11-27] 8558: Checking sleeping_job
+** [01:58:22 2014-11-27] 8558: Sleeping for 5.0 seconds
+** [01:58:22 2014-11-27] 8558: resque-1.25.2: Waiting for *
+** [01:58:27 2014-11-27] 8558: Checking feed_mailer
+** [01:58:27 2014-11-27] 8558: Checking mailer
+** [01:58:27 2014-11-27] 8558: Checking sleeping_job
+** [01:58:27 2014-11-27] 8558: Sleeping for 5.0 seconds
+** [01:58:27 2014-11-27] 8558: resque-1.25.2: Waiting for *
+** [01:58:32 2014-11-27] 8558: Checking feed_mailer
+** [01:58:32 2014-11-27] 8558: Checking mailer
+** [01:58:32 2014-11-27] 8558: Checking sleeping_job
+** [01:58:32 2014-11-27] 8558: Sleeping for 5.0 seconds
+** [01:58:32 2014-11-27] 8558: resque-1.25.2: Waiting for *
+** [01:58:37 2014-11-27] 8558: Checking feed_mailer
+** [01:58:37 2014-11-27] 8558: Checking mailer
+** [01:58:37 2014-11-27] 8558: Checking sleeping_job
+** [01:58:37 2014-11-27] 8558: Sleeping for 5.0 seconds
+** [01:58:37 2014-11-27] 8558: resque-1.25.2: Waiting for *
+** [01:58:42 2014-11-27] 8558: Checking feed_mailer
+** [01:58:42 2014-11-27] 8558: Checking mailer
+** [01:58:42 2014-11-27] 8558: Checking sleeping_job
+** [01:58:42 2014-11-27] 8558: Sleeping for 5.0 seconds
+** [01:58:42 2014-11-27] 8558: resque-1.25.2: Waiting for *
+** [01:58:47 2014-11-27] 8558: Checking feed_mailer
+** [01:58:47 2014-11-27] 8558: Checking mailer
+** [01:58:47 2014-11-27] 8558: Checking sleeping_job
+** [01:58:47 2014-11-27] 8558: Sleeping for 5.0 seconds
+** [01:58:47 2014-11-27] 8558: resque-1.25.2: Waiting for *
+** [01:58:52 2014-11-27] 8558: Checking feed_mailer
+** [01:58:52 2014-11-27] 8558: Checking mailer
+** [01:58:52 2014-11-27] 8558: Checking sleeping_job
+** [01:58:52 2014-11-27] 8558: Sleeping for 5.0 seconds
+** [01:58:52 2014-11-27] 8558: resque-1.25.2: Waiting for *
+** [01:58:57 2014-11-27] 8558: Checking feed_mailer
+** [01:58:57 2014-11-27] 8558: Checking mailer
+** [01:58:57 2014-11-27] 8558: Checking sleeping_job
+** [01:58:57 2014-11-27] 8558: Sleeping for 5.0 seconds
+** [01:58:57 2014-11-27] 8558: resque-1.25.2: Waiting for *
+** [01:59:02 2014-11-27] 8558: Checking feed_mailer
+** [01:59:02 2014-11-27] 8558: Checking mailer
+** [01:59:02 2014-11-27] 8558: Checking sleeping_job
+** [01:59:02 2014-11-27] 8558: Sleeping for 5.0 seconds
+** [01:59:02 2014-11-27] 8558: resque-1.25.2: Waiting for *
+** [01:59:07 2014-11-27] 8558: Checking feed_mailer
+** [01:59:07 2014-11-27] 8558: Checking mailer
+** [01:59:07 2014-11-27] 8558: Checking sleeping_job
+** [01:59:07 2014-11-27] 8558: Sleeping for 5.0 seconds
+** [01:59:07 2014-11-27] 8558: resque-1.25.2: Waiting for *
+** [01:59:12 2014-11-27] 8558: Checking feed_mailer
+** [01:59:12 2014-11-27] 8558: Checking mailer
+** [01:59:12 2014-11-27] 8558: Checking sleeping_job
+** [01:59:12 2014-11-27] 8558: Sleeping for 5.0 seconds
+** [01:59:12 2014-11-27] 8558: resque-1.25.2: Waiting for *
+** [01:59:17 2014-11-27] 8558: Checking feed_mailer
+** [01:59:17 2014-11-27] 8558: Checking mailer
+** [01:59:17 2014-11-27] 8558: Checking sleeping_job
+** [01:59:17 2014-11-27] 8558: Sleeping for 5.0 seconds
+** [01:59:17 2014-11-27] 8558: resque-1.25.2: Waiting for *
+** [01:59:22 2014-11-27] 8558: Checking feed_mailer
+** [01:59:22 2014-11-27] 8558: Checking mailer
+** [01:59:22 2014-11-27] 8558: Checking sleeping_job
+** [01:59:22 2014-11-27] 8558: Sleeping for 5.0 seconds
+** [01:59:22 2014-11-27] 8558: resque-1.25.2: Waiting for *
+** [01:59:27 2014-11-27] 8558: Checking feed_mailer
+** [01:59:27 2014-11-27] 8558: Checking mailer
+** [01:59:27 2014-11-27] 8558: Checking sleeping_job
+** [01:59:27 2014-11-27] 8558: Sleeping for 5.0 seconds
+** [01:59:27 2014-11-27] 8558: resque-1.25.2: Waiting for *
+** [01:59:32 2014-11-27] 8558: Checking feed_mailer
+** [01:59:32 2014-11-27] 8558: Checking mailer
+** [01:59:32 2014-11-27] 8558: Checking sleeping_job
+** [01:59:32 2014-11-27] 8558: Sleeping for 5.0 seconds
+** [01:59:32 2014-11-27] 8558: resque-1.25.2: Waiting for *
+** [01:59:37 2014-11-27] 8558: Checking feed_mailer
+** [01:59:37 2014-11-27] 8558: Checking mailer
+** [01:59:37 2014-11-27] 8558: Checking sleeping_job
+** [01:59:37 2014-11-27] 8558: Sleeping for 5.0 seconds
+** [01:59:37 2014-11-27] 8558: resque-1.25.2: Waiting for *
+** [01:59:42 2014-11-27] 8558: Checking feed_mailer
+** [01:59:42 2014-11-27] 8558: Checking mailer
+** [01:59:42 2014-11-27] 8558: Checking sleeping_job
+** [01:59:42 2014-11-27] 8558: Sleeping for 5.0 seconds
+** [01:59:42 2014-11-27] 8558: resque-1.25.2: Waiting for *
+** [01:59:47 2014-11-27] 8558: Checking feed_mailer
+** [01:59:47 2014-11-27] 8558: Checking mailer
+** [01:59:47 2014-11-27] 8558: Checking sleeping_job
+** [01:59:47 2014-11-27] 8558: Sleeping for 5.0 seconds
+** [01:59:47 2014-11-27] 8558: resque-1.25.2: Waiting for *
+** [01:59:52 2014-11-27] 8558: Checking feed_mailer
+** [01:59:52 2014-11-27] 8558: Checking mailer
+** [01:59:52 2014-11-27] 8558: Checking sleeping_job
+** [01:59:52 2014-11-27] 8558: Sleeping for 5.0 seconds
+** [01:59:52 2014-11-27] 8558: resque-1.25.2: Waiting for *
+** [01:59:57 2014-11-27] 8558: Checking feed_mailer
+** [01:59:57 2014-11-27] 8558: Checking mailer
+** [01:59:57 2014-11-27] 8558: Checking sleeping_job
+** [01:59:57 2014-11-27] 8558: Sleeping for 5.0 seconds
+** [01:59:57 2014-11-27] 8558: resque-1.25.2: Waiting for *
+** [02:00:02 2014-11-27] 8558: Checking feed_mailer
+** [02:00:02 2014-11-27] 8558: Checking mailer
+** [02:00:02 2014-11-27] 8558: Checking sleeping_job
+** [02:00:02 2014-11-27] 8558: Sleeping for 5.0 seconds
+** [02:00:02 2014-11-27] 8558: resque-1.25.2: Waiting for *
+** [02:00:07 2014-11-27] 8558: Checking feed_mailer
+** [02:00:07 2014-11-27] 8558: Checking mailer
+** [02:00:07 2014-11-27] 8558: Checking sleeping_job
+** [02:00:07 2014-11-27] 8558: Sleeping for 5.0 seconds
+** [02:00:07 2014-11-27] 8558: resque-1.25.2: Waiting for *
+** [02:00:12 2014-11-27] 8558: Checking feed_mailer
+** [02:00:12 2014-11-27] 8558: Checking mailer
+** [02:00:12 2014-11-27] 8558: Checking sleeping_job
+** [02:00:12 2014-11-27] 8558: Sleeping for 5.0 seconds
+** [02:00:12 2014-11-27] 8558: resque-1.25.2: Waiting for *
+** [02:00:17 2014-11-27] 8558: Checking feed_mailer
+** [02:00:17 2014-11-27] 8558: Checking mailer
+** [02:00:17 2014-11-27] 8558: Checking sleeping_job
+** [02:00:17 2014-11-27] 8558: Sleeping for 5.0 seconds
+** [02:00:17 2014-11-27] 8558: resque-1.25.2: Waiting for *
+** [02:00:22 2014-11-27] 8558: Checking feed_mailer
+** [02:00:22 2014-11-27] 8558: Checking mailer
+** [02:00:22 2014-11-27] 8558: Checking sleeping_job
+** [02:00:22 2014-11-27] 8558: Sleeping for 5.0 seconds
+** [02:00:22 2014-11-27] 8558: resque-1.25.2: Waiting for *
+** [02:00:27 2014-11-27] 8558: Checking feed_mailer
+** [02:00:27 2014-11-27] 8558: Checking mailer
+** [02:00:27 2014-11-27] 8558: Checking sleeping_job
+** [02:00:27 2014-11-27] 8558: Sleeping for 5.0 seconds
+** [02:00:27 2014-11-27] 8558: resque-1.25.2: Waiting for *
+** [02:00:32 2014-11-27] 8558: Checking feed_mailer
+** [02:00:32 2014-11-27] 8558: Checking mailer
+** [02:00:32 2014-11-27] 8558: Checking sleeping_job
+** [02:00:32 2014-11-27] 8558: Sleeping for 5.0 seconds
+** [02:00:32 2014-11-27] 8558: resque-1.25.2: Waiting for *
+** [02:00:37 2014-11-27] 8558: Checking feed_mailer
+** [02:00:37 2014-11-27] 8558: Checking mailer
+** [02:00:37 2014-11-27] 8558: Checking sleeping_job
+** [02:00:37 2014-11-27] 8558: Sleeping for 5.0 seconds
+** [02:00:37 2014-11-27] 8558: resque-1.25.2: Waiting for *
+** [02:00:42 2014-11-27] 8558: Checking feed_mailer
+** [02:00:42 2014-11-27] 8558: Checking mailer
+** [02:00:42 2014-11-27] 8558: Checking sleeping_job
+** [02:00:42 2014-11-27] 8558: Sleeping for 5.0 seconds
+** [02:00:42 2014-11-27] 8558: resque-1.25.2: Waiting for *
+** [02:00:47 2014-11-27] 8558: Checking feed_mailer
+** [02:00:47 2014-11-27] 8558: Checking mailer
+** [02:00:47 2014-11-27] 8558: Checking sleeping_job
+** [02:00:47 2014-11-27] 8558: Sleeping for 5.0 seconds
+** [02:00:47 2014-11-27] 8558: resque-1.25.2: Waiting for *
+** [02:00:52 2014-11-27] 8558: Checking feed_mailer
+** [02:00:52 2014-11-27] 8558: Checking mailer
+** [02:00:52 2014-11-27] 8558: Checking sleeping_job
+** [02:00:52 2014-11-27] 8558: Sleeping for 5.0 seconds
+** [02:00:52 2014-11-27] 8558: resque-1.25.2: Waiting for *
+** [02:00:57 2014-11-27] 8558: Checking feed_mailer
+** [02:00:57 2014-11-27] 8558: Checking mailer
+** [02:00:57 2014-11-27] 8558: Checking sleeping_job
+** [02:00:57 2014-11-27] 8558: Sleeping for 5.0 seconds
+** [02:00:57 2014-11-27] 8558: resque-1.25.2: Waiting for *
+** [02:01:02 2014-11-27] 8558: Checking feed_mailer
+** [02:01:02 2014-11-27] 8558: Checking mailer
+** [02:01:02 2014-11-27] 8558: Checking sleeping_job
+** [02:01:02 2014-11-27] 8558: Sleeping for 5.0 seconds
+** [02:01:02 2014-11-27] 8558: resque-1.25.2: Waiting for *
+** [02:01:07 2014-11-27] 8558: Checking feed_mailer
+** [02:01:07 2014-11-27] 8558: Checking mailer
+** [02:01:07 2014-11-27] 8558: Checking sleeping_job
+** [02:01:07 2014-11-27] 8558: Sleeping for 5.0 seconds
+** [02:01:07 2014-11-27] 8558: resque-1.25.2: Waiting for *
+** [02:01:12 2014-11-27] 8558: Checking feed_mailer
+** [02:01:12 2014-11-27] 8558: Checking mailer
+** [02:01:12 2014-11-27] 8558: Checking sleeping_job
+** [02:01:12 2014-11-27] 8558: Sleeping for 5.0 seconds
+** [02:01:12 2014-11-27] 8558: resque-1.25.2: Waiting for *
+** [02:01:17 2014-11-27] 8558: Checking feed_mailer
+** [02:01:17 2014-11-27] 8558: Checking mailer
+** [02:01:17 2014-11-27] 8558: Checking sleeping_job
+** [02:01:17 2014-11-27] 8558: Sleeping for 5.0 seconds
+** [02:01:17 2014-11-27] 8558: resque-1.25.2: Waiting for *
+** [02:01:22 2014-11-27] 8558: Checking feed_mailer
+** [02:01:22 2014-11-27] 8558: Checking mailer
+** [02:01:22 2014-11-27] 8558: Checking sleeping_job
+** [02:01:22 2014-11-27] 8558: Sleeping for 5.0 seconds
+** [02:01:22 2014-11-27] 8558: resque-1.25.2: Waiting for *
+** [02:01:27 2014-11-27] 8558: Checking feed_mailer
+** [02:01:27 2014-11-27] 8558: Checking mailer
+** [02:01:27 2014-11-27] 8558: Checking sleeping_job
+** [02:01:27 2014-11-27] 8558: Sleeping for 5.0 seconds
+** [02:01:27 2014-11-27] 8558: resque-1.25.2: Waiting for *
+** [02:01:32 2014-11-27] 8558: Checking feed_mailer
+** [02:01:32 2014-11-27] 8558: Checking mailer
+** [02:01:32 2014-11-27] 8558: Checking sleeping_job
+** [02:01:32 2014-11-27] 8558: Sleeping for 5.0 seconds
+** [02:01:32 2014-11-27] 8558: resque-1.25.2: Waiting for *
+** [02:01:37 2014-11-27] 8558: Checking feed_mailer
+** [02:01:37 2014-11-27] 8558: Checking mailer
+** [02:01:37 2014-11-27] 8558: Checking sleeping_job
+** [02:01:37 2014-11-27] 8558: Sleeping for 5.0 seconds
+** [02:01:37 2014-11-27] 8558: resque-1.25.2: Waiting for *
+** [02:01:42 2014-11-27] 8558: Checking feed_mailer
+** [02:01:42 2014-11-27] 8558: Checking mailer
+** [02:01:42 2014-11-27] 8558: Checking sleeping_job
+** [02:01:42 2014-11-27] 8558: Sleeping for 5.0 seconds
+** [02:01:42 2014-11-27] 8558: resque-1.25.2: Waiting for *
+** [02:01:47 2014-11-27] 8558: Checking feed_mailer
+** [02:01:47 2014-11-27] 8558: Checking mailer
+** [02:01:47 2014-11-27] 8558: Checking sleeping_job
+** [02:01:47 2014-11-27] 8558: Sleeping for 5.0 seconds
+** [02:01:47 2014-11-27] 8558: resque-1.25.2: Waiting for *
+** [02:01:52 2014-11-27] 8558: Checking feed_mailer
+** [02:01:52 2014-11-27] 8558: Checking mailer
+** [02:01:52 2014-11-27] 8558: Checking sleeping_job
+** [02:01:52 2014-11-27] 8558: Sleeping for 5.0 seconds
+** [02:01:52 2014-11-27] 8558: resque-1.25.2: Waiting for *
+** [02:01:57 2014-11-27] 8558: Checking feed_mailer
+** [02:01:57 2014-11-27] 8558: Checking mailer
+** [02:01:57 2014-11-27] 8558: Checking sleeping_job
+** [02:01:57 2014-11-27] 8558: Sleeping for 5.0 seconds
+** [02:01:57 2014-11-27] 8558: resque-1.25.2: Waiting for *
+** [02:02:02 2014-11-27] 8558: Checking feed_mailer
+** [02:02:02 2014-11-27] 8558: Checking mailer
+** [02:02:02 2014-11-27] 8558: Checking sleeping_job
+** [02:02:02 2014-11-27] 8558: Sleeping for 5.0 seconds
+** [02:02:02 2014-11-27] 8558: resque-1.25.2: Waiting for *
+** [02:02:07 2014-11-27] 8558: Checking feed_mailer
+** [02:02:07 2014-11-27] 8558: Checking mailer
+** [02:02:07 2014-11-27] 8558: Checking sleeping_job
+** [02:02:07 2014-11-27] 8558: Sleeping for 5.0 seconds
+** [02:02:07 2014-11-27] 8558: resque-1.25.2: Waiting for *
+** [02:02:12 2014-11-27] 8558: Checking feed_mailer
+** [02:02:12 2014-11-27] 8558: Checking mailer
+** [02:02:12 2014-11-27] 8558: Checking sleeping_job
+** [02:02:12 2014-11-27] 8558: Sleeping for 5.0 seconds
+** [02:02:12 2014-11-27] 8558: resque-1.25.2: Waiting for *
+** [02:02:17 2014-11-27] 8558: Checking feed_mailer
+** [02:02:17 2014-11-27] 8558: Checking mailer
+** [02:02:17 2014-11-27] 8558: Checking sleeping_job
+** [02:02:17 2014-11-27] 8558: Sleeping for 5.0 seconds
+** [02:02:17 2014-11-27] 8558: resque-1.25.2: Waiting for *
+** [02:02:22 2014-11-27] 8558: Checking feed_mailer
+** [02:02:22 2014-11-27] 8558: Checking mailer
+** [02:02:22 2014-11-27] 8558: Checking sleeping_job
+** [02:02:22 2014-11-27] 8558: Sleeping for 5.0 seconds
+** [02:02:22 2014-11-27] 8558: resque-1.25.2: Waiting for *
+** [02:02:27 2014-11-27] 8558: Checking feed_mailer
+** [02:02:27 2014-11-27] 8558: Checking mailer
+** [02:02:27 2014-11-27] 8558: Checking sleeping_job
+** [02:02:27 2014-11-27] 8558: Sleeping for 5.0 seconds
+** [02:02:27 2014-11-27] 8558: resque-1.25.2: Waiting for *
+** [02:02:32 2014-11-27] 8558: Checking feed_mailer
+** [02:02:32 2014-11-27] 8558: Checking mailer
+** [02:02:32 2014-11-27] 8558: Checking sleeping_job
+** [02:02:32 2014-11-27] 8558: Sleeping for 5.0 seconds
+** [02:02:32 2014-11-27] 8558: resque-1.25.2: Waiting for *
+** [02:02:37 2014-11-27] 8558: Checking feed_mailer
+** [02:02:37 2014-11-27] 8558: Checking mailer
+** [02:02:37 2014-11-27] 8558: Checking sleeping_job
+** [02:02:37 2014-11-27] 8558: Sleeping for 5.0 seconds
+** [02:02:37 2014-11-27] 8558: resque-1.25.2: Waiting for *
+** [02:02:42 2014-11-27] 8558: Checking feed_mailer
+** [02:02:42 2014-11-27] 8558: Checking mailer
+** [02:02:42 2014-11-27] 8558: Checking sleeping_job
+** [02:02:42 2014-11-27] 8558: Sleeping for 5.0 seconds
+** [02:02:42 2014-11-27] 8558: resque-1.25.2: Waiting for *
+** [02:02:47 2014-11-27] 8558: Checking feed_mailer
+** [02:02:47 2014-11-27] 8558: Checking mailer
+** [02:02:47 2014-11-27] 8558: Checking sleeping_job
+** [02:02:47 2014-11-27] 8558: Sleeping for 5.0 seconds
+** [02:02:47 2014-11-27] 8558: resque-1.25.2: Waiting for *
+** [02:02:52 2014-11-27] 8558: Checking feed_mailer
+** [02:02:52 2014-11-27] 8558: Checking mailer
+** [02:02:52 2014-11-27] 8558: Checking sleeping_job
+** [02:02:52 2014-11-27] 8558: Sleeping for 5.0 seconds
+** [02:02:52 2014-11-27] 8558: resque-1.25.2: Waiting for *
+** [02:02:57 2014-11-27] 8558: Checking feed_mailer
+** [02:02:57 2014-11-27] 8558: Checking mailer
+** [02:02:57 2014-11-27] 8558: Checking sleeping_job
+** [02:02:57 2014-11-27] 8558: Sleeping for 5.0 seconds
+** [02:02:57 2014-11-27] 8558: resque-1.25.2: Waiting for *
+** [02:03:02 2014-11-27] 8558: Checking feed_mailer
+** [02:03:02 2014-11-27] 8558: Checking mailer
+** [02:03:02 2014-11-27] 8558: Checking sleeping_job
+** [02:03:02 2014-11-27] 8558: Sleeping for 5.0 seconds
+** [02:03:02 2014-11-27] 8558: resque-1.25.2: Waiting for *
+** [02:03:07 2014-11-27] 8558: Checking feed_mailer
+** [02:03:07 2014-11-27] 8558: Checking mailer
+** [02:03:07 2014-11-27] 8558: Checking sleeping_job
+** [02:03:07 2014-11-27] 8558: Sleeping for 5.0 seconds
+** [02:03:07 2014-11-27] 8558: resque-1.25.2: Waiting for *
+** [02:03:12 2014-11-27] 8558: Checking feed_mailer
+** [02:03:12 2014-11-27] 8558: Checking mailer
+** [02:03:12 2014-11-27] 8558: Checking sleeping_job
+** [02:03:12 2014-11-27] 8558: Sleeping for 5.0 seconds
+** [02:03:12 2014-11-27] 8558: resque-1.25.2: Waiting for *
+** [02:03:17 2014-11-27] 8558: Checking feed_mailer
+** [02:03:17 2014-11-27] 8558: Checking mailer
+** [02:03:17 2014-11-27] 8558: Checking sleeping_job
+** [02:03:17 2014-11-27] 8558: Sleeping for 5.0 seconds
+** [02:03:17 2014-11-27] 8558: resque-1.25.2: Waiting for *
+** [02:03:22 2014-11-27] 8558: Checking feed_mailer
+** [02:03:22 2014-11-27] 8558: Checking mailer
+** [02:03:22 2014-11-27] 8558: Checking sleeping_job
+** [02:03:22 2014-11-27] 8558: Sleeping for 5.0 seconds
+** [02:03:22 2014-11-27] 8558: resque-1.25.2: Waiting for *
+** [02:03:27 2014-11-27] 8558: Checking feed_mailer
+** [02:03:27 2014-11-27] 8558: Checking mailer
+** [02:03:27 2014-11-27] 8558: Checking sleeping_job
+** [02:03:27 2014-11-27] 8558: Sleeping for 5.0 seconds
+** [02:03:27 2014-11-27] 8558: resque-1.25.2: Waiting for *
+** [02:03:32 2014-11-27] 8558: Checking feed_mailer
+** [02:03:32 2014-11-27] 8558: Checking mailer
+** [02:03:32 2014-11-27] 8558: Checking sleeping_job
+** [02:03:32 2014-11-27] 8558: Sleeping for 5.0 seconds
+** [02:03:32 2014-11-27] 8558: resque-1.25.2: Waiting for *
+** [02:03:37 2014-11-27] 8558: Checking feed_mailer
+** [02:03:37 2014-11-27] 8558: Checking mailer
+** [02:03:37 2014-11-27] 8558: Checking sleeping_job
+** [02:03:37 2014-11-27] 8558: Sleeping for 5.0 seconds
+** [02:03:37 2014-11-27] 8558: resque-1.25.2: Waiting for *
+** [02:03:43 2014-11-27] 8558: Checking feed_mailer
+** [02:03:43 2014-11-27] 8558: Checking mailer
+** [02:03:43 2014-11-27] 8558: Checking sleeping_job
+** [02:03:43 2014-11-27] 8558: Sleeping for 5.0 seconds
+** [02:03:43 2014-11-27] 8558: resque-1.25.2: Waiting for *
+** [02:03:48 2014-11-27] 8558: Checking feed_mailer
+** [02:03:48 2014-11-27] 8558: Checking mailer
+** [02:03:48 2014-11-27] 8558: Checking sleeping_job
+** [02:03:48 2014-11-27] 8558: Sleeping for 5.0 seconds
+** [02:03:48 2014-11-27] 8558: resque-1.25.2: Waiting for *
+** [02:03:53 2014-11-27] 8558: Checking feed_mailer
+** [02:03:53 2014-11-27] 8558: Checking mailer
+** [02:03:53 2014-11-27] 8558: Checking sleeping_job
+** [02:03:53 2014-11-27] 8558: Sleeping for 5.0 seconds
+** [02:03:53 2014-11-27] 8558: resque-1.25.2: Waiting for *
+** [02:03:58 2014-11-27] 8558: Checking feed_mailer
+** [02:03:58 2014-11-27] 8558: Checking mailer
+** [02:03:58 2014-11-27] 8558: Checking sleeping_job
+** [02:03:58 2014-11-27] 8558: Sleeping for 5.0 seconds
+** [02:03:58 2014-11-27] 8558: resque-1.25.2: Waiting for *
+** [02:04:03 2014-11-27] 8558: Checking feed_mailer
+** [02:04:03 2014-11-27] 8558: Checking mailer
+** [02:04:03 2014-11-27] 8558: Checking sleeping_job
+** [02:04:03 2014-11-27] 8558: Sleeping for 5.0 seconds
+** [02:04:03 2014-11-27] 8558: resque-1.25.2: Waiting for *
+** [02:04:08 2014-11-27] 8558: Checking feed_mailer
+** [02:04:08 2014-11-27] 8558: Checking mailer
+** [02:04:08 2014-11-27] 8558: Checking sleeping_job
+** [02:04:08 2014-11-27] 8558: Sleeping for 5.0 seconds
+** [02:04:08 2014-11-27] 8558: resque-1.25.2: Waiting for *
+** [02:04:13 2014-11-27] 8558: Checking feed_mailer
+** [02:04:13 2014-11-27] 8558: Checking mailer
+** [02:04:13 2014-11-27] 8558: Checking sleeping_job
+** [02:04:13 2014-11-27] 8558: Sleeping for 5.0 seconds
+** [02:04:13 2014-11-27] 8558: resque-1.25.2: Waiting for *
+** [02:04:18 2014-11-27] 8558: Checking feed_mailer
+** [02:04:18 2014-11-27] 8558: Checking mailer
+** [02:04:18 2014-11-27] 8558: Checking sleeping_job
+** [02:04:18 2014-11-27] 8558: Sleeping for 5.0 seconds
+** [02:04:18 2014-11-27] 8558: resque-1.25.2: Waiting for *
+** [02:04:23 2014-11-27] 8558: Checking feed_mailer
+** [02:04:23 2014-11-27] 8558: Checking mailer
+** [02:04:23 2014-11-27] 8558: Checking sleeping_job
+** [02:04:23 2014-11-27] 8558: Sleeping for 5.0 seconds
+** [02:04:23 2014-11-27] 8558: resque-1.25.2: Waiting for *
+** [02:04:28 2014-11-27] 8558: Checking feed_mailer
+** [02:04:28 2014-11-27] 8558: Checking mailer
+** [02:04:28 2014-11-27] 8558: Checking sleeping_job
+** [02:04:28 2014-11-27] 8558: Sleeping for 5.0 seconds
+** [02:04:28 2014-11-27] 8558: resque-1.25.2: Waiting for *
+** [02:04:33 2014-11-27] 8558: Checking feed_mailer
+** [02:04:33 2014-11-27] 8558: Checking mailer
+** [02:04:33 2014-11-27] 8558: Checking sleeping_job
+** [02:04:33 2014-11-27] 8558: Sleeping for 5.0 seconds
+** [02:04:33 2014-11-27] 8558: resque-1.25.2: Waiting for *
+** [02:04:38 2014-11-27] 8558: Checking feed_mailer
+** [02:04:38 2014-11-27] 8558: Checking mailer
+** [02:04:38 2014-11-27] 8558: Checking sleeping_job
+** [02:04:38 2014-11-27] 8558: Sleeping for 5.0 seconds
+** [02:04:38 2014-11-27] 8558: resque-1.25.2: Waiting for *
+** [02:04:43 2014-11-27] 8558: Checking feed_mailer
+** [02:04:43 2014-11-27] 8558: Checking mailer
+** [02:04:43 2014-11-27] 8558: Checking sleeping_job
+** [02:04:43 2014-11-27] 8558: Sleeping for 5.0 seconds
+** [02:04:43 2014-11-27] 8558: resque-1.25.2: Waiting for *
+** [02:04:48 2014-11-27] 8558: Checking feed_mailer
+** [02:04:48 2014-11-27] 8558: Checking mailer
+** [02:04:48 2014-11-27] 8558: Checking sleeping_job
+** [02:04:48 2014-11-27] 8558: Sleeping for 5.0 seconds
+** [02:04:48 2014-11-27] 8558: resque-1.25.2: Waiting for *
+** [02:04:53 2014-11-27] 8558: Checking feed_mailer
+** [02:04:53 2014-11-27] 8558: Checking mailer
+** [02:04:53 2014-11-27] 8558: Checking sleeping_job
+** [02:04:53 2014-11-27] 8558: Sleeping for 5.0 seconds
+** [02:04:53 2014-11-27] 8558: resque-1.25.2: Waiting for *
+** [02:04:58 2014-11-27] 8558: Checking feed_mailer
+** [02:04:58 2014-11-27] 8558: Checking mailer
+** [02:04:58 2014-11-27] 8558: Checking sleeping_job
+** [02:04:58 2014-11-27] 8558: Sleeping for 5.0 seconds
+** [02:04:58 2014-11-27] 8558: resque-1.25.2: Waiting for *
+** [02:05:03 2014-11-27] 8558: Checking feed_mailer
+** [02:05:03 2014-11-27] 8558: Checking mailer
+** [02:05:03 2014-11-27] 8558: Checking sleeping_job
+** [02:05:03 2014-11-27] 8558: Sleeping for 5.0 seconds
+** [02:05:03 2014-11-27] 8558: resque-1.25.2: Waiting for *
+** [02:05:08 2014-11-27] 8558: Checking feed_mailer
+** [02:05:08 2014-11-27] 8558: Checking mailer
+** [02:05:08 2014-11-27] 8558: Checking sleeping_job
+** [02:05:08 2014-11-27] 8558: Sleeping for 5.0 seconds
+** [02:05:08 2014-11-27] 8558: resque-1.25.2: Waiting for *
+** [02:05:13 2014-11-27] 8558: Checking feed_mailer
+** [02:05:13 2014-11-27] 8558: Checking mailer
+** [02:05:13 2014-11-27] 8558: Checking sleeping_job
+** [02:05:13 2014-11-27] 8558: Sleeping for 5.0 seconds
+** [02:05:13 2014-11-27] 8558: resque-1.25.2: Waiting for *
+** [02:05:18 2014-11-27] 8558: Checking feed_mailer
+** [02:05:18 2014-11-27] 8558: Checking mailer
+** [02:05:18 2014-11-27] 8558: Checking sleeping_job
+** [02:05:18 2014-11-27] 8558: Sleeping for 5.0 seconds
+** [02:05:18 2014-11-27] 8558: resque-1.25.2: Waiting for *
+** [02:05:23 2014-11-27] 8558: Checking feed_mailer
+** [02:05:23 2014-11-27] 8558: Checking mailer
+** [02:05:23 2014-11-27] 8558: Checking sleeping_job
+** [02:05:23 2014-11-27] 8558: Sleeping for 5.0 seconds
+** [02:05:23 2014-11-27] 8558: resque-1.25.2: Waiting for *
+** [02:05:28 2014-11-27] 8558: Checking feed_mailer
+** [02:05:28 2014-11-27] 8558: Checking mailer
+** [02:05:28 2014-11-27] 8558: Checking sleeping_job
+** [02:05:28 2014-11-27] 8558: Sleeping for 5.0 seconds
+** [02:05:28 2014-11-27] 8558: resque-1.25.2: Waiting for *
+** [02:05:33 2014-11-27] 8558: Checking feed_mailer
+** [02:05:33 2014-11-27] 8558: Checking mailer
+** [02:05:33 2014-11-27] 8558: Checking sleeping_job
+** [02:05:33 2014-11-27] 8558: Sleeping for 5.0 seconds
+** [02:05:33 2014-11-27] 8558: resque-1.25.2: Waiting for *
+** [02:05:38 2014-11-27] 8558: Checking feed_mailer
+** [02:05:38 2014-11-27] 8558: Checking mailer
+** [02:05:38 2014-11-27] 8558: Checking sleeping_job
+** [02:05:38 2014-11-27] 8558: Sleeping for 5.0 seconds
+** [02:05:38 2014-11-27] 8558: resque-1.25.2: Waiting for *
+** [02:05:43 2014-11-27] 8558: Checking feed_mailer
+** [02:05:43 2014-11-27] 8558: Checking mailer
+** [02:05:43 2014-11-27] 8558: Checking sleeping_job
+** [02:05:43 2014-11-27] 8558: Sleeping for 5.0 seconds
+** [02:05:43 2014-11-27] 8558: resque-1.25.2: Waiting for *
+** [02:05:48 2014-11-27] 8558: Checking feed_mailer
+** [02:05:48 2014-11-27] 8558: Checking mailer
+** [02:05:48 2014-11-27] 8558: Checking sleeping_job
+** [02:05:48 2014-11-27] 8558: Sleeping for 5.0 seconds
+** [02:05:48 2014-11-27] 8558: resque-1.25.2: Waiting for *
+** [02:05:53 2014-11-27] 8558: Checking feed_mailer
+** [02:05:53 2014-11-27] 8558: Checking mailer
+** [02:05:53 2014-11-27] 8558: Checking sleeping_job
+** [02:05:53 2014-11-27] 8558: Sleeping for 5.0 seconds
+** [02:05:53 2014-11-27] 8558: resque-1.25.2: Waiting for *
+** [02:05:58 2014-11-27] 8558: Checking feed_mailer
+** [02:05:58 2014-11-27] 8558: Checking mailer
+** [02:05:58 2014-11-27] 8558: Checking sleeping_job
+** [02:05:58 2014-11-27] 8558: Sleeping for 5.0 seconds
+** [02:05:58 2014-11-27] 8558: resque-1.25.2: Waiting for *
+** [02:06:03 2014-11-27] 8558: Checking feed_mailer
+** [02:06:03 2014-11-27] 8558: Checking mailer
+** [02:06:03 2014-11-27] 8558: Checking sleeping_job
+** [02:06:03 2014-11-27] 8558: Sleeping for 5.0 seconds
+** [02:06:03 2014-11-27] 8558: resque-1.25.2: Waiting for *
+** [02:06:08 2014-11-27] 8558: Checking feed_mailer
+** [02:06:08 2014-11-27] 8558: Checking mailer
+** [02:06:08 2014-11-27] 8558: Checking sleeping_job
+** [02:06:08 2014-11-27] 8558: Sleeping for 5.0 seconds
+** [02:06:08 2014-11-27] 8558: resque-1.25.2: Waiting for *
+** [02:06:13 2014-11-27] 8558: Checking feed_mailer
+** [02:06:13 2014-11-27] 8558: Checking mailer
+** [02:06:13 2014-11-27] 8558: Checking sleeping_job
+** [02:06:13 2014-11-27] 8558: Sleeping for 5.0 seconds
+** [02:06:13 2014-11-27] 8558: resque-1.25.2: Waiting for *
+** [02:06:18 2014-11-27] 8558: Checking feed_mailer
+** [02:06:18 2014-11-27] 8558: Checking mailer
+** [02:06:18 2014-11-27] 8558: Checking sleeping_job
+** [02:06:18 2014-11-27] 8558: Sleeping for 5.0 seconds
+** [02:06:18 2014-11-27] 8558: resque-1.25.2: Waiting for *
+** [02:06:23 2014-11-27] 8558: Checking feed_mailer
+** [02:06:23 2014-11-27] 8558: Checking mailer
+** [02:06:23 2014-11-27] 8558: Checking sleeping_job
+** [02:06:23 2014-11-27] 8558: Sleeping for 5.0 seconds
+** [02:06:23 2014-11-27] 8558: resque-1.25.2: Waiting for *
+** [02:06:28 2014-11-27] 8558: Checking feed_mailer
+** [02:06:28 2014-11-27] 8558: Checking mailer
+** [02:06:28 2014-11-27] 8558: Checking sleeping_job
+** [02:06:28 2014-11-27] 8558: Sleeping for 5.0 seconds
+** [02:06:28 2014-11-27] 8558: resque-1.25.2: Waiting for *
+** [02:06:33 2014-11-27] 8558: Checking feed_mailer
+** [02:06:33 2014-11-27] 8558: Checking mailer
+** [02:06:33 2014-11-27] 8558: Checking sleeping_job
+** [02:06:33 2014-11-27] 8558: Sleeping for 5.0 seconds
+** [02:06:33 2014-11-27] 8558: resque-1.25.2: Waiting for *
+** [02:06:38 2014-11-27] 8558: Checking feed_mailer
+** [02:06:38 2014-11-27] 8558: Checking mailer
+** [02:06:38 2014-11-27] 8558: Checking sleeping_job
+** [02:06:38 2014-11-27] 8558: Sleeping for 5.0 seconds
+** [02:06:38 2014-11-27] 8558: resque-1.25.2: Waiting for *
+** [02:06:43 2014-11-27] 8558: Checking feed_mailer
+** [02:06:43 2014-11-27] 8558: Checking mailer
+** [02:06:43 2014-11-27] 8558: Checking sleeping_job
+** [02:06:43 2014-11-27] 8558: Sleeping for 5.0 seconds
+** [02:06:43 2014-11-27] 8558: resque-1.25.2: Waiting for *
+** [02:06:48 2014-11-27] 8558: Checking feed_mailer
+** [02:06:48 2014-11-27] 8558: Checking mailer
+** [02:06:48 2014-11-27] 8558: Checking sleeping_job
+** [02:06:48 2014-11-27] 8558: Sleeping for 5.0 seconds
+** [02:06:48 2014-11-27] 8558: resque-1.25.2: Waiting for *
+** [02:06:53 2014-11-27] 8558: Checking feed_mailer
+** [02:06:53 2014-11-27] 8558: Checking mailer
+** [02:06:53 2014-11-27] 8558: Checking sleeping_job
+** [02:06:53 2014-11-27] 8558: Sleeping for 5.0 seconds
+** [02:06:53 2014-11-27] 8558: resque-1.25.2: Waiting for *
+** [02:06:58 2014-11-27] 8558: Checking feed_mailer
+** [02:06:58 2014-11-27] 8558: Checking mailer
+** [02:06:58 2014-11-27] 8558: Checking sleeping_job
+** [02:06:58 2014-11-27] 8558: Sleeping for 5.0 seconds
+** [02:06:58 2014-11-27] 8558: resque-1.25.2: Waiting for *
+** [02:07:03 2014-11-27] 8558: Checking feed_mailer
+** [02:07:03 2014-11-27] 8558: Checking mailer
+** [02:07:03 2014-11-27] 8558: Checking sleeping_job
+** [02:07:03 2014-11-27] 8558: Sleeping for 5.0 seconds
+** [02:07:03 2014-11-27] 8558: resque-1.25.2: Waiting for *
+** [02:07:08 2014-11-27] 8558: Checking feed_mailer
+** [02:07:08 2014-11-27] 8558: Checking mailer
+** [02:07:08 2014-11-27] 8558: Checking sleeping_job
+** [02:07:08 2014-11-27] 8558: Sleeping for 5.0 seconds
+** [02:07:08 2014-11-27] 8558: resque-1.25.2: Waiting for *
+** [02:07:13 2014-11-27] 8558: Checking feed_mailer
+** [02:07:13 2014-11-27] 8558: Checking mailer
+** [02:07:13 2014-11-27] 8558: Checking sleeping_job
+** [02:07:13 2014-11-27] 8558: Sleeping for 5.0 seconds
+** [02:07:13 2014-11-27] 8558: resque-1.25.2: Waiting for *
+** [02:07:18 2014-11-27] 8558: Checking feed_mailer
+** [02:07:18 2014-11-27] 8558: Checking mailer
+** [02:07:18 2014-11-27] 8558: Checking sleeping_job
+** [02:07:18 2014-11-27] 8558: Sleeping for 5.0 seconds
+** [02:07:18 2014-11-27] 8558: resque-1.25.2: Waiting for *
+** [02:07:23 2014-11-27] 8558: Checking feed_mailer
+** [02:07:23 2014-11-27] 8558: Checking mailer
+** [02:07:23 2014-11-27] 8558: Checking sleeping_job
+** [02:07:23 2014-11-27] 8558: Sleeping for 5.0 seconds
+** [02:07:23 2014-11-27] 8558: resque-1.25.2: Waiting for *
+** [02:07:28 2014-11-27] 8558: Checking feed_mailer
+** [02:07:28 2014-11-27] 8558: Checking mailer
+** [02:07:28 2014-11-27] 8558: Checking sleeping_job
+** [02:07:28 2014-11-27] 8558: Sleeping for 5.0 seconds
+** [02:07:28 2014-11-27] 8558: resque-1.25.2: Waiting for *
+** [02:07:33 2014-11-27] 8558: Checking feed_mailer
+** [02:07:33 2014-11-27] 8558: Checking mailer
+** [02:07:33 2014-11-27] 8558: Checking sleeping_job
+** [02:07:33 2014-11-27] 8558: Sleeping for 5.0 seconds
+** [02:07:33 2014-11-27] 8558: resque-1.25.2: Waiting for *
+** [02:07:38 2014-11-27] 8558: Checking feed_mailer
+** [02:07:38 2014-11-27] 8558: Checking mailer
+** [02:07:38 2014-11-27] 8558: Checking sleeping_job
+** [02:07:38 2014-11-27] 8558: Sleeping for 5.0 seconds
+** [02:07:38 2014-11-27] 8558: resque-1.25.2: Waiting for *
+** [02:07:43 2014-11-27] 8558: Checking feed_mailer
+** [02:07:43 2014-11-27] 8558: Checking mailer
+** [02:07:43 2014-11-27] 8558: Checking sleeping_job
+** [02:07:43 2014-11-27] 8558: Sleeping for 5.0 seconds
+** [02:07:43 2014-11-27] 8558: resque-1.25.2: Waiting for *
+** [02:07:48 2014-11-27] 8558: Checking feed_mailer
+** [02:07:48 2014-11-27] 8558: Checking mailer
+** [02:07:48 2014-11-27] 8558: Checking sleeping_job
+** [02:07:48 2014-11-27] 8558: Sleeping for 5.0 seconds
+** [02:07:48 2014-11-27] 8558: resque-1.25.2: Waiting for *
