@@ -1,7 +1,16 @@
 feed_mailer:
   #  every: "1d"
-  cron: "0 0-23 * * *"
+  cron: "0-59/5 * * * *"
   class: FeedModeratorMailer
   queue: feed_mailer
+  args:
+  description: "This job..."
+
+
+log_proc:
+  #  every: "1d"
+  cron: "0-59 * * * *"
+  class: LogTask
+  queue: log_proc
   args:
   description: "This job..."
