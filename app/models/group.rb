@@ -12,7 +12,7 @@ class Group < ActiveRecord::Base
   validates :name, :project_id, presence: true
 
   def owner
-    group_users.find_by(owner: true).user
+    group_users.find_by(owner: true).try(:user)
   end
 
   def moderators
