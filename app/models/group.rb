@@ -16,6 +16,6 @@ class Group < ActiveRecord::Base
   end
 
   def moderators
-    users.where(type_user: [1, 6, 7])
+    users.where(type_user: User::TYPES_USER[:admin])
   end
 end
