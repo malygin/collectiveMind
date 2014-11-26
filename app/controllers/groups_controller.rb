@@ -56,7 +56,7 @@ class GroupsController < ApplicationController
   end
 
   def leave
-    current_user.group_users.where(group_id: @group.id).destroy
+    current_user.group_users.where(group_id: @group.id).destroy_all
     redirect_to groups_path(@project)
   end
 
@@ -86,7 +86,6 @@ class GroupsController < ApplicationController
                                   body: "Вас позвали в группу #{@group.name}",
                                   first_id: @group.id, personal: true, viewed: false).save!
     end
-    redirect_to group_path(@project, @group)
   end
 
   private
