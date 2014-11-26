@@ -1,4 +1,5 @@
 class GroupTasksController < ApplicationController
+  before_action :journal_data
   before_action :set_group_task, only: [:edit, :update, :destroy]
 
   # GET /group_tasks/new
@@ -18,11 +19,7 @@ class GroupTasksController < ApplicationController
 
   # PATCH/PUT /group_tasks/1
   def update
-    if @group_task.update(group_task_params)
-      redirect_to @group_task, notice: 'Group task was successfully updated.'
-    else
-      render :edit
-    end
+    @group_task.update(group_task_params)
   end
 
   # DELETE /group_tasks/1

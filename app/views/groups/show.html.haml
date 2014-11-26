@@ -19,7 +19,7 @@
             = @group.tasks.count
           %button.btn.btn-success.btn-block#button_create_task{'data-target' => '#createTask', 'data-toggle' => 'modal', type: 'button'}
             + Добавить задачу
-          %ul.news-list{id: "group_tasks_#{@group.id}"}
+          %ul.news-list.group-tasks{id: "group_tasks_#{@group.id}"}
             = render @group.tasks
       .col-md-8
         - if @group.users.include? current_user

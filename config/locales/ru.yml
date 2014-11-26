@@ -540,6 +540,7 @@ ru:
     delete_advice: 'Удалить совет?'
 
     delete_group: "Удалить группу?"
+    delete_group_task: "Удалить задачу?"
   show:
     without_name: 'Без названия'
     note: замечание
