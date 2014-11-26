@@ -225,12 +225,61 @@ describe 'Groups' do
       end
     end
 
-    context 'tasks' do
-      context 'create'
-      context 'assign to'
+    context 'tasks', js: true do
+      before do
+        visit group_path(project, group)
+      end
+
+      context 'create' do
+        before do
+          click_button 'button_create_task'
+        end
+
+        context 'correct' do
+          let(:name_for_task) { 'Cool task' }
+          let(:description_for_task) { 'Cool task' }
+
+          before do
+            fill_in 'group_task_name', with: name_for_task
+            fill_in 'group_task_description', with: description_for_task
+            click_button 'save_task'
+          end
+
+          it { expect change(group.tasks, :count).by(1) }
+
+          it 'show content' do
+            within :css, "#group_tasks_#{group.id}" do
+              expect(page).to have_content name_for_task
+              expect(page).to have_content description_for_task
+            end
+          end
+
+          it 'count tasks' do
+            within :css, '#count_of_tasks' do
+              expect(page).to have_content group.tasks.count
+            end
+          end
+        end
+
+        context 'with empty fields' do
+          before do
+            click_button 'save_task'
+          end
+
+          it { expect change(group.tasks, :count).by(0) }
+
+          it 'message about error' do
+            within :css, '#createTask' do
+              expect(page).to have_css 'div.error_explanation'
+            end
+          end
+        end
+      end
+
       context 'edit'
       context 'destroy'
-      context 'list'
+
+      context 'assign to'
     end
 
     context 'chat'
