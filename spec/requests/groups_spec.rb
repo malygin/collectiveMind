@@ -178,14 +178,42 @@ describe 'Groups' do
         }.to change(Journal, :count).by(1)
       end
 
-      it 'send invite' do
-        expect {
+      context 'send invite' do
+        before do
           click_button 'button_invite_user'
           click_link "invite_user_#{user2.id}"
+        end
+
+        it 'no info about invited user' do
           within :css, 'div#inviteUser' do
             expect(page).not_to have_content user.to_s
           end
-        }.to change(Journal, :count).by(1)
+        end
+
+        it { expect change(Journal, :count).by(1) }
+
+        context 'as second user' do
+          before do
+            find('#inviteUser button.close').click
+            sign_out
+            sign_in user2
+            visit group_path(project, group)
+          end
+
+          it 'take' do
+            expect {
+              click_link 'take_invite'
+              expect(current_path) == group_path(project, group)
+            }.to change(GroupUser.where(invite_accepted: true), :count).by(1)
+          end
+
+          it 'reject' do
+            expect {
+              click_link 'reject_invite'
+              expect(current_path) == group_path(project, group)
+            }.to change(GroupUser, :count).by(-1)
+          end
+        end
       end
 
       it 'list members' do
@@ -196,5 +224,15 @@ describe 'Groups' do
         end
       end
     end
+
+    context 'tasks' do
+      context 'create'
+      context 'assign to'
+      context 'edit'
+      context 'destroy'
+      context 'list'
+    end
+
+    context 'chat'
   end
 end
