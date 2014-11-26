@@ -25,8 +25,9 @@ def run_worker(queue, count = 1)
   puts "Starting #{count} worker(s) with QUEUE: #{queue}"
 
   ##  make sure log/resque_err, log/resque_stdout are writable.
-  ops = {:pgroup => true, :err => [(Rails.root + "log/resque_err").to_s, "a"],
-         :out => [(Rails.root + "log/resque_stdout").to_s, "a"]}
+  # ops = {:pgroup => true, :err => [(Rails.root + "log/resque_err").to_s, "a"],
+  #        :out => [(Rails.root + "log/resque_stdout").to_s, "a"]}
+  ops = {:pgroup => true}
   env_vars = {"QUEUE" => queue.to_s, 'RAILS_ENV' => Rails.env.to_s}
 
   pids = []
