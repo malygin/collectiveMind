@@ -1,3 +1,18 @@
+@editable_groups = ->
+  this.edit_task = (e)->
+    e.preventDefault()
+    modal_form = $('#createTask').clone().attr('id', 'editTask')
+    $(modal_form).find('#createTaskLabel').text('Редактирование задачи')
+    id_task = $(this).parent().attr('id').replace(/^\D+/g, '')
+    form = $(modal_form).find('form')
+    form.attr('action', form.attr('action').replace('group_tasks', 'group_tasks/' + id_task))
+    form.find('div:hidden').append('<input name="_method" type="hidden" value="patch">')
+    form.find('#group_task_name').val($(this).parent().find('.name').text().trim())
+    form.find('#group_task_description').text($(this).parent().find('.description').text().trim())
+    $(modal_form).modal('show')
+  $('.group-tasks').on('click', 'button.edit-task', this.edit_task)
+  return
+
 @create_group_chat = ->
   $("#chat-messages").slimscroll
     height: "290px"
