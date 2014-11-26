@@ -287,7 +287,20 @@ describe 'Groups' do
         end
       end
 
-      context 'edit'
+      it 'edit' do
+        new_name = 'New cool name'
+        new_description = 'New cool description'
+        expect {
+          click_button "edit_task_#{group_task.id}"
+          within :css, '#editTask' do
+            fill_in 'group_task_name', with: new_name
+            fill_in 'group_task_description', with: new_description
+            click_button 'save_task'
+          end
+          expect(page).to have_content new_name
+          expect(page).to have_content new_description
+        }.not_to change(group.tasks, :count)
+      end
 
       it 'destroy' do
         expect {
