@@ -1,6 +1,9 @@
 ru:
   activerecord:
     attributes:
+      group_task:
+        name: 'Название задачи'
+        description: 'Описание задачи'
       group:
         name: 'Название группы'
         description: 'Описание группы'

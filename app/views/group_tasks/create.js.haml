@@ -1,0 +1,8 @@
+- if @group_task.errors.any?
+  $('#for_errors').html("#{escape_javascript(render partial: 'shared/notice_messages', locals: {object: @group_task})}");
+- else
+  $('#group_task_name').val('');
+  $('#group_task_description').val('');
+  $('#closeCreatingTask').click();
+  $("#group_tasks_#{@group_task.group_id}").prepend("#{escape_javascript(render @group_task)}").fadeIn();
+  $("#count_of_tasks").text(parseInt($("#count_of_tasks").text()) + 1).fadeIn();

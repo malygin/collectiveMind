@@ -13,12 +13,7 @@ class GroupTasksController < ApplicationController
   # POST /group_tasks
   def create
     @group_task = GroupTask.new(group_task_params)
-
-    if @group_task.save
-      redirect_to @group_task, notice: 'Group task was successfully created.'
-    else
-      render :new
-    end
+    @group_task.save
   end
 
   # PATCH/PUT /group_tasks/1

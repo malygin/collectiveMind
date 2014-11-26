@@ -13,6 +13,14 @@
         - else
           = link_to 'Принять приглашение', group_take_invite_path(@project, @group), method: :put, id: 'take_invite', class: 'btn btn-success btn-lock'
           = link_to 'Отклонить приглашение', group_reject_invite_path(@project, @group), method: :put, id: 'reject_invite', class: 'btn btn-danger btn-lock'
+        - if @group.users.include? current_user
+          Задачи
+          %span.badge.badge-success#count_of_tasks
+            = @group.tasks.count
+          %button.btn.btn-success.btn-block#button_create_task{'data-target' => '#createTask', 'data-toggle' => 'modal', type: 'button'}
+            + Добавить задачу
+          %ul.news-list{id: "group_tasks_#{@group.id}"}
+            = render @group.tasks
       .col-md-8
         - if @group.users.include? current_user
           = render 'chat'
@@ -52,3 +60,29 @@
                   method: :put, class: 'btn btn-success', id: "invite_user_#{user.id}"
         .modal-footer
           %button.btn.btn-default{'data-dismiss' => 'modal', type: 'button'} Закрыть
+
+  #createTask.modal.fade{'aria-hidden' => 'true', 'aria-labelledby' => 'createTaskLabel', role: 'dialog', style: 'display: none;', tabindex: '-1'}
+    .modal-dialog
+      .modal-content
+        .modal-header
+          %button.close{'aria-hidden' => 'true', 'data-dismiss' => 'modal', type: 'button'} ×
+          %h4#createTaskLabel.modal-title
+            Добавление новой задачи
+        = form_for GroupTask.new, remote: true do |f|
+          #for_errors
+          .modal-body
+            .form-group
+              %label.control-label
+                = f.label :name
+              .col-md-10
+                = f.text_field :name, class: 'form-control'
+            %br
+            .form-group
+              %label.control-label
+                = f.label :description
+              .col-md-10
+                = f.text_area :description, class: 'form-control'
+            = f.hidden_field :group_id, value: @group.id
+          .modal-footer
+            %button.btn.btn-default#closeCreatingTask{'data-dismiss' => 'modal', type: 'button'} Закрыть
+            = f.submit 'Сохранить', class: 'btn btn-primary', id: 'save_task'
