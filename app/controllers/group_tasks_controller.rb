@@ -1,6 +1,6 @@
 class GroupTasksController < ApplicationController
   before_action :journal_data
-  before_action :set_group_task, only: [:edit, :update, :destroy]
+  before_action :set_group_task, except: [:new, :create]
 
   # GET /group_tasks/new
   def new
@@ -27,10 +27,15 @@ class GroupTasksController < ApplicationController
     @group_task.destroy
   end
 
+  def assign_user
+    @user = User.find(params[:user_id])
+    @group_task.group_task_users.create user_id: @user.id unless @group_task.users.include?(@user)
+  end
+
   private
   # Use callbacks to share common setup or constraints between actions.
   def set_group_task
-    @group_task = GroupTask.find(params[:id])
+    @group_task = GroupTask.find(params[:id] || params[:group_task_id])
   end
 
   # Only allow a trusted parameter "white list" through.

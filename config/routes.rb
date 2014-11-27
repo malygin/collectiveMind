@@ -79,7 +79,9 @@ scope '/project/:project' do
     put :reject_invite
     put :call_moderator
   end
-  resources :group_tasks, only: [:new, :edit, :create, :update, :destroy]
+  resources :group_tasks, only: [:new, :edit, :create, :update, :destroy] do
+    put 'assign_user/:user_id', action: 'assign_user'
+  end
 
   namespace :help do
     resources :posts

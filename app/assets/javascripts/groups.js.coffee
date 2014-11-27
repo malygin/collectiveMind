@@ -10,7 +10,17 @@
     form.find('#group_task_name').val($(this).parent().find('.name').text().trim())
     form.find('#group_task_description').text($(this).parent().find('.description').text().trim())
     $(modal_form).modal('show')
+
+  this.assign_user = (e)->
+    e.preventDefault()
+    id_task = $(this).parent().attr('id').replace(/^\D+/g, '')
+    modal_form = $('#assignTaskToUser').clone().attr('id', 'assignTaskToUser' + id_task)
+    $(modal_form).find('.link_to_assign').each ->
+      $(this).find('a').attr('href', $(this).find('a').attr('href').replace('_group_task_id_', id_task))
+    $(modal_form).modal('show')
+
   $('.group-tasks').on('click', 'button.edit-task', this.edit_task)
+  $('.group-tasks').on('click', 'button.assign-user', this.assign_user)
   return
 
 @create_group_chat = ->

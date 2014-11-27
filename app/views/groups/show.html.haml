@@ -86,3 +86,24 @@
           .modal-footer
             %button.btn.btn-default#closeCreatingTask{'data-dismiss' => 'modal', type: 'button'} Закрыть
             = f.submit 'Сохранить', class: 'btn btn-primary', id: 'save_task'
+
+  #assignTaskToUser.modal.fade{'aria-hidden' => 'true', 'aria-labelledby' => 'assignLabel', role: 'dialog', style: 'display: none;', tabindex: '-1'}
+    .modal-dialog
+      .modal-content
+        .modal-header
+          %button.close{'aria-hidden' => 'true', 'data-dismiss' => 'modal', type: 'button'} ×
+          %h4#assignLabel.modal-title
+            Прикрепить задачу к пользователю
+        .modal-body
+          %table
+            - @group.users.each do |user|
+              %tr{id: "tr_assign_to_#{user.id}"}
+                %td
+                  = image_tag user.avatar.url(:thumb), class: 'pull-left'
+                %td
+                  = link_to user, user_path(@project, user)
+                %td.link_to_assign
+                  = link_to '+', "/project/#{@project.id}/group_tasks/_group_task_id_/assign_user/#{user.id}", remote: true,
+                  method: :put, class: 'btn btn-success', id: "assign_user_#{user.id}_to_"
+        .modal-footer
+          %button.btn.btn-default{'data-dismiss' => 'modal', type: 'button'} Закрыть
