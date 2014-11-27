@@ -2,6 +2,10 @@
 
 require 'resque/tasks'    # Require Resque tasks
 
+def start_worker
+  `rake resque:work QUEUE=*`
+end
+
 namespace :workers do
 
   # = $ rake workers:start
