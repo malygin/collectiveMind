@@ -2,9 +2,6 @@
 
 require 'resque/tasks'    # Require Resque tasks
 
-def start_worker
-  `rake resque:work QUEUE=*`
-end
 
 namespace :workers do
 
@@ -40,6 +37,14 @@ namespace :workers do
   # A task for killing all workers on the machine (`rake workers:killall`) is also provided,
   # for pruning orphaned workers etc.
   #
+  task :start_worker do
+    start_worker
+  end
+
+  def start_worker
+    `rake resque:work QUEUE=*`
+  end
+
   desc "Run and manage group of Resque workers with some default options"
   task :start => :environment do
 
