@@ -37,9 +37,8 @@
         %button.btn.btn-success.btn-block#button_invite_user{'data-target' => '#inviteUser', 'data-toggle' => 'modal', type: 'button'}
           + Пригласить участника
 
-  -#.id_group{id: @group.id, style: 'display: hidden'}
-  -##group_chat_div
 - if @group.users.include? current_user
+  .id_group{id: @group.id, style: 'display: hidden'}
   #inviteUser.modal.fade{'aria-hidden' => 'true', 'aria-labelledby' => 'myModalLabel', role: 'dialog', style: 'display: none;', tabindex: '-1'}
     .modal-dialog
       .modal-content

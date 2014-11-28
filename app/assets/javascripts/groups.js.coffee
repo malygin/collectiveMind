@@ -30,7 +30,7 @@
     alwaysVisible: true
     railVisible: true
 
-  if false
+  if $('.group-chat#chat').length > 0 && $('.id_group').length > 0
     ws = new WebSocketRails(document.location.host + '/websocket')
     ws.on_open = ->
       console.log 'socket opened'
@@ -42,16 +42,8 @@
       console.log("Has joined the channel group_chat")
     private_channel.on_failure = ->
       console.log("Authorization failed")
-    $("#group_chat_div").chatbox(
-      id: "group_chat_div"
-      offset: 350
-      user:
-        key: ''
-      title: "Чат группы"
-      messageSent: (id, user, msg) ->
-        ws.trigger 'groups_incoming_message', {text: msg, group_id: $('.id_group').attr('id')}
-        return
-    )
+    $('#send_message-btn').on 'click', ->
+      ws.trigger 'groups_incoming_message', {text: $(this).parent().find('#new-message').val().trim(), group_id: $('.id_group').attr('id')}
     ws.trigger 'groups_get_history', {group_id: $('.id_group').attr('id')}
     private_channel.bind 'groups_new_message', (data) ->
       $("#group_chat_div").chatbox("option", "boxManager") data
