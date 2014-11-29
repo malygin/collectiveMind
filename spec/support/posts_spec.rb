@@ -1,17 +1,30 @@
 # encoding: utf-8
-shared_examples 'content with comments' do
+shared_examples 'content with comments' do |project,user_data,moderator = false|
+
+  if moderator == true
+    it ' like comment', js: true do
+      prepare_awards
+      expect(page).to have_link("plus_comment_#{@comment1.id}", :text => 'Выдать баллы', :href => plus_comment_life_tape_post_path(project,@comment1))
+      click_link "plus_comment_#{@comment1.id}"
+      expect(page).to have_link("plus_comment_#{@comment1.id}", :text => 'Забрать баллы', :href => plus_comment_life_tape_post_path(project,@comment1))
+      click_link "plus_comment_#{@comment1.id}"
+      expect(page).to have_content 'Выдать баллы'
+    end
+  end
 
   it 'view comments ' do
     expect(page).to have_content @comment1.content
-    expect(page).to  have_selector '#new_aspect'
+    expect(page).to have_selector '#new_aspect'
     expect(page).to have_selector 'textarea#comment_text_area'
-    expect(page).to have_link("plus_comment_#{@comment1.id}", :text => 'Выдать баллы', :href => plus_comment_life_tape_post_path(project,@comment1))
+    # expect(page).to have_link("plus_comment_#{@comment1.id}", :text => 'Выдать баллы', :href => plus_comment_life_tape_post_path(project,@comment1))
   end
 
   it 'add new comment in aspect ', js: true do
     fill_in 'comment_text_area', with: 'new comment'
-    find('input.send-comment').click
-    expect(page).to have_content 'new comment'
+    expect {
+      find('input.send-comment').click
+      expect(page).to have_content 'new comment'
+    }.to change(Journal, :count).by(1)
   end
 
   it 'add new comment in aspect with images ', js: true do
@@ -35,15 +48,6 @@ shared_examples 'content with comments' do
     }.to change(Journal.events_for_my_feed(project, user_data), :count).by(1)
   end
 
-  it ' like comment', js: true do
-    prepare_awards
-    expect(page).to have_link("plus_comment_#{@comment1.id}", :text => 'Выдать баллы', :href => plus_comment_life_tape_post_path(project,@comment1))
-    click_link "plus_comment_#{@comment1.id}"
-    expect(page).to have_link("plus_comment_#{@comment1.id}", :text => 'Забрать баллы', :href => plus_comment_life_tape_post_path(project,@comment1))
-    click_link "plus_comment_#{@comment1.id}"
-    expect(page).to have_content 'Выдать баллы'
-  end
-
   context 'answer to answer comment' do
     before do
       @comment2 = FactoryGirl.create :life_tape_comment, post: @post1, user: user_data, comment_id: @comment1.id, content: 'comment 2'
@@ -58,7 +62,6 @@ shared_examples 'content with comments' do
       }.to change(Journal.events_for_my_feed(project, user_data), :count).by(1)
     end
   end
-
 
 end
 

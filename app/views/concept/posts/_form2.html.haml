@@ -769,7 +769,7 @@
             -else
               =render partial:'discontent/posts/post_short2', object: @discontent_post unless @discontent_post.nil?
           %br
-          .option_for_selectize{project: "#{@project.id}", post: "#{@concept_post.id}"}
+          .option_for_selectize(data-project="#{@project.id}" data-post="#{@concept_post.id}" data-stage="concept")
           .text-success#add_dispost_success(style='display:none;')
             =t('form.concept.add_success')
           -if params[:improve_comment] and params[:improve_stage]

@@ -790,7 +790,7 @@
                         %h3.color-orange
                           %b=t('form.concept.select_discontents')
                   %br
-                  =select_tag "selectize_concept",
+                  =select_tag "selectize_for_discontents",
                   options_from_collection_for_select(Discontent::Post.where("discontent_posts.id <> ? and project_id = ?", @discontent_post.nil? ? 0 : @discontent_post.id, @project.id).by_status(4), "id", "show_content"),
                   class: 'selectized', include_blank: true, placeholder: t('form.concept.select_promt')
                   %br
@@ -810,7 +810,7 @@
                     -else
                       =render partial:'discontent/posts/post_short2', object: @discontent_post unless @discontent_post.nil?
                   %br
-                  .option_for_selectize{project: "#{@project.id}", post: "#{@concept_post.id}"}
+                  .option_for_selectize(data-project="#{@project.id}" data-post="#{@concept_post.id}" data-stage="concept")
                   .text-success#add_dispost_success(style='display:none;')
                     =t('form.concept.add_success')
                   -if params[:improve_comment] and params[:improve_stage]

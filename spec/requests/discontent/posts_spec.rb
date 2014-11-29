@@ -200,7 +200,7 @@ describe 'Discontent ' do
         expect(page).to have_selector 'textarea#comment_text_area'
       end
 
-      it ' can add  comments ', js: true  do
+      it ' can add comments ', js: true  do
         fill_in 'comment_text_area', with: 'dis comment 1'
         expect {
           click_button 'send_post'

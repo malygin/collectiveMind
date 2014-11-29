@@ -84,26 +84,74 @@
   $('.form-new-comment').on('click', 'label.comment-idea', this.color_for_idea)
 
 
-@remove_block = (el)->
-  $('#' + el).remove()
+@selectize = ->
+  $select = $("#selectize_for_discontents").selectize
+    labelField: "show_content"
+    valueField: "id"
+    sortField: "show_content"
+    searchField: "show_content"
+    create: false
+    hideSelected: true
+    onChange: (item) ->
+      optsel = $(".option_for_selectize")
+      project_id = parseInt(optsel.attr('data-project'))
+      id = parseInt(optsel.attr('data-post'))
+      stage = optsel.attr('data-stage')
+      if stage = "discontent"
+        select_discontent_for_union(project_id,id)
+      else if stage = "concept"
+        select_discontent_for_concept(project_id)
+      selectize = $select[0].selectize
+      selectize.removeOption(item)
+      selectize.refreshOptions()
+      selectize.close()
+    render:
+      item: (item, escape) ->
+        short_item = item.show_content.split('<br/>')[0].replace('<b> что: </b>', '')
+        return '<div>'+short_item+'</div>'
+      option: (item, escape) ->
+        return '<div>'+item.show_content+'</div>'
 
 
-@sidebar_for_small_screen = ->
-  sidebarHeight = 0;
-  $sidebar = $("#sidebar")
-  $sidebar.on "show.bs.collapse", (e) ->
-    e.target is this and $sidebar.addClass("open") and $sidebar.removeClass('nav-collapse')
-    if $("#sidebar").height() > 0
-      sidebarHeight = $("#sidebar").height()
-    $(".content").css "margin-top", sidebarHeight + 30
+@filterable = ->
+  this.icheck_date = ->
+    $('#date_begin').val('')
+    $('#date_end').val('')
 
-  $sidebar.on "hide.bs.collapse", (e) ->
-    if e.target is this
-      $sidebar.removeClass "open"
-      $sidebar.addClass('nav-collapse')
-      $(".content").css "margin-top", ""
+  this.icheck_enable = ->
+    $('#by_create,#by_update,#event_content_all').iCheck('uncheck').iCheck('enable')
 
-@estimate_color_select_init = ->
+  this.icheck_disable = ->
+    $('#by_create,#by_update,#event_content_all').iCheck('uncheck').iCheck('disable')
+
+  $('form.filter_news').on('ifChecked', 'input.iCheck#date_all', this.icheck_date)
+
+  $('form.filter_news').on('ifChecked', 'input.iCheck#by_content', this.icheck_enable)
+  $('form.filter_news').on('ifUnchecked', 'input.iCheck#by_content', this.icheck_disable)
+
+
+@search = ->
+  this.search_users = ->
+    project_id = $('#search_users_project').attr("data-project")
+    val = this.value
+    if project_id and val
+      $.ajax
+        url: "/project/#{project_id}/users/search_users"
+        type: "get"
+        data:
+          search_users_text: val
+
+  $('.search_text').on('change', 'input#search_users_text', this.search_users)
+
+
+@plan_stage = ->
+  $('.plan_tabs').on('click', 'ul#PlanTabs li#second a', render_table('edit'))
+  $('.plan_tabs').on('click', 'ul#PlanTabs li#third a', render_concept_side())
+  $('.plan_tabs').on('click', 'ul#PlanTabsShow li#second a', render_table('show'))
+  $('.plan_tabs').on('click', 'ul#PlanTabsShow li#third a', render_concept_side())
+
+
+@estimate_stage = ->
   $("select.estimate_select").each ->
     switch $(this).val()
       when '1.0'
@@ -123,16 +171,61 @@
     $(this).find("option[value='3.0']").css 'color', '#fd8605'
     $(this).find("option[value='4.0']").css 'color', '#56bc76'
 
-#search_users
-$('#search_users_text').on 'change', ->
-  project_id = $('#search_users_project').attr("data-project")
-  val = this.value
-  if project_id and val
-    $.ajax
-      url: "/project/#{project_id}/users/search_users"
-      type: "get"
-      data:
-        search_users_text: val
+  this.color_select = ->
+    switch $(this).val()
+      when '1.0'
+        color = '#999'
+      when '2.0'
+        color = '#e5603b'
+      when '3.0'
+        color = '#fd8605'
+      when '4.0'
+        color = '#56bc76'
+      else
+        color = '#999'
+    $(this).css 'color', color
+
+  $('.form-new-estimate').on('change', 'select.estimate_select', this.color_select)
+
+
+#@todo history js
+@history_click = (el)->
+  state =
+    title: el.getAttribute("title")
+    url: el.getAttribute("href", 2)
+  history.pushState state, state.title, state.url
+
+@history_change = (link)->
+  state =
+    title: "Massdecision"
+    url: link
+  history.pushState state, state.title, state.url
+
+@remove_block = (el)->
+  $('#' + el).remove()
+
+@sidebar_for_small_screen = ->
+  sidebarHeight = 0;
+  $sidebar = $("#sidebar")
+  $sidebar.on "show.bs.collapse", (e) ->
+    e.target is this and $sidebar.addClass("open") and $sidebar.removeClass('nav-collapse')
+    if $("#sidebar").height() > 0
+      sidebarHeight = $("#sidebar").height()
+    $(".content").css "margin-top", sidebarHeight + 30
+
+  $sidebar.on "hide.bs.collapse", (e) ->
+    if e.target is this
+      $sidebar.removeClass "open"
+      $sidebar.addClass('nav-collapse')
+      $(".content").css "margin-top", ""
+
+# @todo autocomplete
+@autocomplete_initialized = ->
+  $("input.autocomplete").autocomplete(
+    minLength: 0
+  ).click ->
+    $(this).autocomplete "search", ""
+    return
 
 @activate_htmleditor = ->
   tinyMCE.init
@@ -140,26 +233,11 @@ $('#search_users_text').on 'change', ->
     setup: (ed) ->
       ed.on "init", (ed) ->
         tinyMCE.get(ed.target.id).show()
-
     plugins:
       ["advlist autolink link image lists charmap print preview hr anchor pagebreak spellchecker",
        "searchreplace wordcount visualblocks visualchars code fullscreen insertdatetime media nonbreaking",
        "save table contextmenu directionality emoticons template paste textcolor"]
     toolbar: "insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image | print preview media fullpage | forecolor backcolor emoticons"
-
-# @todo обновление таблицы и списка
-$('#PlanTabs li#second a').on "click", (e) ->
-  render_table('edit')
-$('#PlanTabs li#third a').on "click", (e) ->
-  render_concept_side()
-
-$('#PlanTabsShow li#second a').on "click", (e) ->
-  render_table('show')
-$('#PlanTabsShow li#third a').on "click", (e) ->
-  render_concept_side()
-
-###################################
-# @todo work with comment buttons
 
 
 # @todo work with comment form
@@ -184,7 +262,8 @@ $('#PlanTabsShow li#third a').on "click", (e) ->
   $('#note_for_post_' + post + '_' + type).remove();
 
 ############################################
-# @todo work with discontent_post and group
+# @todo work with discontent posts and groups
+
 @select_discontent_for_union = (project, id)->
   sel = $('#selectize_discontent :selected')
   if sel.val() != ''
@@ -203,8 +282,6 @@ $('#PlanTabsShow li#third a').on "click", (e) ->
     $('#add_post_aspects').append('<div id="aspect_' + val + '" style="display:none;height:0;"><input type="hidden" name="discontent_post_aspects[]" value="' + val + '"/><span class="glyphicon glyphicon-remove text-danger pull-left" onclick="remove_discontent_aspect(' + func + ');" style="cursor:pointer;text-decoration:none;font-size:15px;"></span><span id="' + val + '" class="span_aspect label label-t">' + text + '</span></br></div>')
     $('#aspect_' + val).css('display', 'block').animate({height: 20, opacity: 1}, 500).effect("highlight",
       {color: '#f5cecd'}, 500)
-
-activate_add_aspects()
 
 @remove_discontent_aspect = (val, text)->
   $('#aspect_' + val).animate({height: 0, opacity: 0.000}, 1000, ->
@@ -227,7 +304,8 @@ activate_add_aspects()
         group_id: group_id
 
 ###############################################
-# @todo work with concept_post
+# @todo work with concept posts
+
 @select_discontent_for_concept = (project)->
   sel = $('#selectize_concept :selected')
   if sel.val() != ''
@@ -238,12 +316,7 @@ activate_add_aspects()
         dispost_id: sel.val()
         remove_able: 1
 
-#@add_new_resource_to_concept= (field,project)->
-#  $('#resources_'+field).append('<div class="panel panel-default"><div class="panel-body"><span class="glyphicon glyphicon-remove text-danger pull-right" onclick="$(this).parent().parent().remove();" style="cursor:pointer;text-decoration:none;font-size:15px;"></span><span role="status" aria-live="polite" class="ui-helper-hidden-accessible"></span><input class="form-control autocomplete ui-autocomplete-input" data-autocomplete="/project/'+project+'/autocomplete_concept_post_resource_concept_posts" id="concept_post_resource" min-length="0" name="resor_'+field+'[]" placeholder="Введите свой ресурс или выберите из списка" size="30" type="text" autocomplete="off"><br><textarea class="form-control" id="res" name="res_'+field+'[]" placeholder="Пояснение к ресурсу" style="overflow: hidden; word-wrap: break-word; resize: horizontal; height: 54px;"></textarea></div></div>')
-#  autocomplete_initialized()
-
 @add_new_resource_to_concept = (field, field2, project)->
-#  field = field.toString();
   position = parseInt($('#resources_' + field + ' .main_resources').last().attr('position'))
   if not position then position = 1 else position += 1
   $('#resources_' + field).append("<div class=\"main_resources\" id=\"main_#{field}_#{position}\" position=\"#{position}\"><div class=\"col-md-8\">" + "<span role=\"status\" aria-live=\"polite\" class=\"ui-helper-hidden-accessible\"></span>" + "<input class=\"form-control autocomplete ui-autocomplete-input\" data-autocomplete=\"/project/#{project}/autocomplete_concept_post_resource_concept_posts\" id=\"concept_post_resource\" min-length=\"0\" name=\"resor[][name]\" placeholder=\"Введите свой ресурс или выберите из списка\" type=\"text\" autocomplete=\"off\"><input name=\"resor[][type_res]\" type=\"hidden\" value=\"#{field}\">" + "</div><div class=\"col-md-4\"><div class=\"pull-right\"><button class=\"btn btn-warning\" id=\"desc_to_res\" onclick=\"$(this).parent().parent().parent().find('.desc_resource').show();\" title=\"Добавить описание\" type=\"button\"><i class=\"fa fa-edit\"></i>Описание</button><button class=\"btn btn-success\" id=\"plus_mean\" onclick=\"return add_new_mean_to_resource(this,'#{field2}',#{project});\" title=\"Добавить средство\" type=\"button\">" + "<i class=\"fa fa-plus\"></i>Средство</button><button class=\"btn btn-danger\" id=\"destroy_res\" onclick=\"$(this).parent().parent().parent().remove();\" title=\"Удалить ресурс\" type=\"button\">" + "<i class=\"fa fa-trash-o\"></i>Удалить</button></div></div><br><br><div class=\"desc_resource\" id=\"desc_#{field}_#{position}\" position=\"#{position}\" style=\"display:none;\">" + "<textarea class=\"form-control\" id=\"res\" name=\"resor[][desc]\" placeholder=\"Пояснение к ресурсу\" style=\"overflow: hidden; word-wrap: break-word; resize: horizontal; height: 50px;\"></textarea>" + "</div><div class=\"col-md-offset-1 col-md-11 means_to_resource\" id=\"means_#{field2}_#{position}\"></div></div>");
@@ -251,14 +324,14 @@ activate_add_aspects()
   $('textarea').autosize()
 
 @add_new_mean_to_resource = (el, field, project)->
-#  field = field.toString();
   position = $(el).parent().parent().parent().attr('position')
   $('#means_' + field + '_' + position).append("<br><div class=\"main_means\" id=\"main_#{field}_#{position}\" position=\"#{position}\"><div class=\"col-md-8\">" + "<span role=\"status\" aria-live=\"polite\" class=\"ui-helper-hidden-accessible\"></span>" + "<input class=\"form-control autocomplete ui-autocomplete-input\" data-autocomplete=\"/project/#{project}/autocomplete_concept_post_mean_concept_posts\" id=\"res\" min-length=\"0\" name=\"resor[][means][][name]\" placeholder=\"Введите свой ресурс или выберите из списка\" type=\"text\" autocomplete=\"off\"><input name=\"resor[][means][][type_res]\" type=\"hidden\" value=\"#{field}\">" + "</div><div class=\"col-md-4\"><div class=\"pull-right\"><button class=\"btn btn-warning\" id=\"desc_to_res\" onclick=\"$(this).parent().parent().parent().find('.desc_mean').show();\" title=\"Добавить описание\" type=\"button\"><i class=\"fa fa-edit\"></i>Описание</button><button class=\"btn btn-danger\" id=\"destroy_res\" onclick=\"$(this).parent().parent().parent().remove();\" title=\"Удалить ресурс\" type=\"button\">" + "<i class=\"fa fa-trash-o\"></i>Удалить</button></div></div><br><br><div class=\"desc_mean\" id=\"desc_#{field}_#{position}\" position=\"#{position}\" style=\"display:none;\">" + "<textarea class=\"form-control\" id=\"res\" name=\"resor[][means][][desc]\" placeholder=\"Пояснение к ресурсу\" style=\"overflow: hidden; word-wrap: break-word; resize: horizontal; height: 50px;\"></textarea><br></div></div>");
   autocomplete_initialized()
   $('textarea').autosize()
 
 ##############################################
-# @todo work with plan_post
+# @todo work with plan posts
+
 @scroll_to_elem = (el)->
   $(".modal").on "shown.bs.modal", ->
     if $("#" + el)
@@ -293,7 +366,7 @@ activate_add_aspects()
 
 @save_last_concept = ->
   last_id = $("#option_for_render_old_concept_side").attr('concept')
-  -if last_id != ''
+  if last_id != ''
     $("#li_concept_#{last_id} a").append('<i class="color-green fa fa-save" style="opacity:0;"></i>')
     $("#li_concept_#{last_id} a i").animate {
       opacity: 1
@@ -369,30 +442,8 @@ activate_add_aspects()
   else
     return true
 
-###################################
-# @todo work with estimate_post
-@color_select = (el)->
-  switch $(el).val()
-    when '1.0'
-      color = '#999'
-    when '2.0'
-      color = '#e5603b'
-    when '3.0'
-      color = '#fd8605'
-    when '4.0'
-      color = '#56bc76'
-    else
-      color = '#999'
-  $(el).css 'color', color
 
 ##################################
-# @todo autocomplete
-@autocomplete_initialized = ->
-  $("input.autocomplete").autocomplete(
-    minLength: 0
-  ).click ->
-    $(this).autocomplete "search", ""
-    return
 
 # @todo popover-tooltip for plan_posts
 $.fn.extend popoverClosable: (options) ->
@@ -410,44 +461,35 @@ $.fn.extend popoverClosable: (options) ->
     $popover_togglers.popover "hide"
     $('.popover').css 'display', 'none'
 
-# @todo wizard for plan_posts and other
-#$("#wizard").bootstrapWizard onTabShow: (tab, navigation, index) ->
-#  $total = navigation.find("li").length
-#  $current = index + 1
-#  $percent = ($current / $total) * 100
-#  $wizard = $("#wizard")
-#  $wizard.find(".progress-bar").css width: $percent + "%"
-#  if $current >= $total
-#    $wizard.find(".pager .next").hide()
-#    $wizard.find(".pager .finish").show()
-#    $wizard.find(".pager .finish").removeClass "disabled"
-#  else
-#    $wizard.find(".pager .next").show()
-#    $wizard.find(".pager .finish").hide()
-#  #  if $current is 1
-#  #    $("#send_post_concept").submit()
-#  if $current is 2
-#    render_table()
-#  #    $("#send_post_concept").submit()
-#  if $current is 3
-#    render_concept_side()
-
-#for other
-#@activate_wizard= ->
-#  $("#wizard").bootstrapWizard onTabShow: (tab, navigation, index) ->
-#    $total = navigation.find("li").length
-#    $current = index + 1
-#    $percent = ($current / $total) * 100
-#    $wizard = $("#wizard")
-#    $wizard.find(".progress-bar").css width: $percent + "%"
-#    if $current >= $total
-#      $wizard.find(".pager .next").hide()
-#      $wizard.find(".pager .finish").show()
-#      $wizard.find(".pager .finish").removeClass "disabled"
-#    else
-#      $wizard.find(".pager .next").show()
-#      $wizard.find(".pager .finish").hide()
-#    return
+# @todo wizard for concept_posts
+@activate_wizard= ->
+  $("#wizard").bootstrapWizard onTabShow: (tab, navigation, index) ->
+    $total = navigation.find("li").length
+    $current = index + 1
+    $percent = ($current / $total) * 100
+    $wizard = $("#wizard")
+    $wizard.find(".progress-bar").css width: $percent + "%"
+    #$('#option_for_wizard_tab').attr("data-tab","#{$current}")
+    go_string = 'Перейти к описанию'
+    names_blocks = ['Идеи','Функционирования','Нежелательных побочных эффектов','Контроля','Целесообразности','Решаемых несовершенств']
+    if $current >= $total
+      $wizard.find(".pager .next").hide()
+      $('#form_save').show()
+    else
+      if $current == 1
+        $wizard.find(".pager .previous").hide()
+        $wizard.find(".pager .next .btn").html("#{go_string} #{names_blocks[$current - 1]} <i class=\"fa fa-caret-right\"></i>")
+        $('#form_save').hide()
+      else if $current in [2,3,4,5,6]
+        $wizard.find(".pager .previous").show()
+        $wizard.find(".pager .next .btn").html("#{go_string} #{names_blocks[$current - 1]} <i class=\"fa fa-caret-right\"></i>")
+        $('#form_save').show()
+      else
+        $wizard.find(".pager .previous").show()
+        $wizard.find(".pager .next .btn").html('Далее <i class="fa fa-caret-right"></i>')
+        $('#form_save').show()
+      $wizard.find(".pager .next").show()
+    scrollTo(0,0)
 
 # @todo users checks
 @user_check_field = (el, check_field)->
@@ -466,36 +508,6 @@ $.fn.extend popoverClosable: (options) ->
         check_field: check_field
         status: status
 
-
-$("#date_all").on "ifChecked", (e) ->
-  $('#date_begin').val('')
-  $('#date_end').val('')
-
-$("#by_content").on "ifChecked", (e) ->
-  $('#by_create,#by_update,#event_content_all').iCheck('uncheck').iCheck('enable')
-
-$("#by_content").on "ifUnchecked", (e) ->
-  $('#by_create,#by_update,#event_content_all').iCheck('uncheck').iCheck('disable')
-
-# @todo wysihtml5 editor
-#@activate_htmleditor= ->
-#  @editor = $(".wysihtml5").each (i, elem) ->
-#    $(elem).wysihtml5
-#      "font-styles": true
-#      emphasis: true
-#      lists: true
-#      html: true
-#      link: true
-#      image: true
-#      color: true
-# @todo ckeditor
-
-#@activate_htmleditor= ->
-#  data = $(".ckeditor")
-#  $.each data, (i) ->
-#    CKEDITOR.replace data[i].id
-#    return
-
 # @todo sortable for knowbase
 $('#sortable').sortable update: (event, ui) ->
   order = {}
@@ -508,63 +520,68 @@ $('#sortable').sortable update: (event, ui) ->
     data:
       sortable: order
 
-# @todo datepicker for plan_posts
+# @todo datepicker for plan posts
+
 @activate_datepicker = ->
-  $("#date_begin").datepicker("refresh")
-  $("#date_end").datepicker("refresh")
+  $date_begin = $("#date_begin")
+  $date_end = $("#date_end")
+  $date_begin.datepicker("refresh")
+  $date_end.datepicker("refresh")
 
   nowTemp = new Date()
   now = new Date(nowTemp.getFullYear(), nowTemp.getMonth(), nowTemp.getDate(), 0, 0, 0, 0)
-  $("#date_begin").datepicker("setStartDate", now);
-  $("#date_end").datepicker("setStartDate", now);
+  $date_begin.datepicker("setStartDate", now);
+  $date_end.datepicker("setStartDate", now);
 
-  checkin = $("#date_begin").datepicker(
+  checkin = $date_begin.datepicker(
   ).on("changeDate", (ev) ->
     newDate = new Date(ev.date)
-    $("#date_end").datepicker("setStartDate", newDate)
-    if $("#date_end").val() == ''
-      $("#date_end").datepicker("setDate", newDate)
+    $date_end.datepicker("setStartDate", newDate)
+    if $date_end.val() == ''
+      $date_end.datepicker("setDate", newDate)
     else
-      if ev.date.valueOf() > Date.parse($("#date_end").val())
+      if ev.date.valueOf() > Date.parse($date_end.val())
         newDate.setDate newDate.getDate() + 1
-        $("#date_end").datepicker("setDate", newDate)
-        $("#date_end")[0].focus()
+        $date_end.datepicker("setDate", newDate)
+        $date_end[0].focus()
     checkin.hide()
   ).data("datepicker")
-  checkout = $("#date_end").datepicker(
+  checkout = $date_end.datepicker(
   ).on("changeDate", (ev) ->
     checkout.hide()
   ).data("datepicker")
 
 @activate_datepicker_action = (date_begin, date_end)->
-  $("#date_begin_action").datepicker("refresh")
-  $("#date_end_action").datepicker("refresh")
+  $date_begin_action = $("#date_begin_action")
+  $date_end_action = $("#date_end_action")
+  $date_begin_action.datepicker("refresh")
+  $date_end_action.datepicker("refresh")
 
   nowTemp = new Date()
   now = new Date(nowTemp.getFullYear(), nowTemp.getMonth(), nowTemp.getDate(), 0, 0, 0, 0)
   if date_begin and date_end
-    $("#date_begin_action").datepicker("setStartDate", new Date(Date.parse(date_begin)));
-    $("#date_begin_action").datepicker("setEndDate", new Date(Date.parse(date_end)));
-    $("#date_end_action").datepicker("setStartDate", new Date(Date.parse(date_begin)));
-    $("#date_end_action").datepicker("setEndDate", new Date(Date.parse(date_end)));
+    $date_begin_action.datepicker("setStartDate", new Date(Date.parse(date_begin)));
+    $date_begin_action.datepicker("setEndDate", new Date(Date.parse(date_end)));
+    $date_end_action.datepicker("setStartDate", new Date(Date.parse(date_begin)));
+    $date_end_action.datepicker("setEndDate", new Date(Date.parse(date_end)));
   else
-    $("#date_begin_action").datepicker("setStartDate", now);
-    $("#date_end_action").datepicker("setStartDate", now);
+    $date_begin_action.datepicker("setStartDate", now);
+    $date_end_action.datepicker("setStartDate", now);
 
-  checkin = $("#date_begin_action").datepicker(
+  checkin = $date_begin_action.datepicker(
   ).on("changeDate", (ev) ->
     newDate = new Date(ev.date)
-    $("#date_end_action").datepicker("setStartDate", newDate)
-    if $("#date_end_action").val() == ''
-      $("#date_end_action").datepicker("setDate", newDate)
+    $date_end_action.datepicker("setStartDate", newDate)
+    if $date_end_action.val() == ''
+      $date_end_action.datepicker("setDate", newDate)
     else
-      if ev.date.valueOf() > Date.parse($("#date_end_action").val())
+      if ev.date.valueOf() > Date.parse($date_end_action.val())
         newDate.setDate newDate.getDate() + 1
-        $("#date_end_action").datepicker("setDate", newDate)
-        $("#date_end_action")[0].focus()
+        $date_end_action.datepicker("setDate", newDate)
+        $date_end_action[0].focus()
     checkin.hide()
   ).data("datepicker")
-  checkout = $("#date_end_action").datepicker(
+  checkout = $date_end_action.datepicker(
   ).on("changeDate", (ev) ->
     checkout.hide()
   ).data("datepicker")
