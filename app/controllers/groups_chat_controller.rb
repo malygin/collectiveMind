@@ -1,6 +1,6 @@
 class GroupsChatController < WebsocketRails::BaseController
-  before_action :set_group, only: [:incoming_message, :send_history]
-  before_action :user_looked_at_chat, only: [:incoming_message, :send_history]
+  before_action :set_group, only: [:incoming_message, :send_history, :load_history]
+  before_action :user_looked_at_chat, only: [:incoming_message, :send_history, :load_history]
 
   def initialize_session
   end
@@ -17,14 +17,14 @@ class GroupsChatController < WebsocketRails::BaseController
   end
 
   def send_history
-    if message.nil? or message[:latest_id].nil?
-      latest_id = GroupChatMessage.last.id
-    else
-      latest_id = message[:latest_id].to_i
-    end
-
     WebsocketRails.users[current_user.id].send_message(:groups_receive_history,
-                                                       @group.chat_messages.history(latest_id),
+                                                       @group.chat_messages.history(message[:latest_id].to_i),
+                                                       channel: :group_chat)
+  end
+
+  def load_history
+    WebsocketRails.users[current_user.id].send_message(:groups_receive_history,
+                                                       @group.chat_messages.recent.collect { |message| message.to_json },
                                                        channel: :group_chat)
   end
 
@@ -46,6 +46,6 @@ class GroupsChatController < WebsocketRails::BaseController
   end
 
   def set_group
-    @group = Group.find message[:group_id]
+    @group = Group.find message[:group_id].to_i
   end
 end

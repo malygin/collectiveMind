@@ -17,4 +17,5 @@ WebsocketRails::EventMap.describe do
   private_channel :group_chat
   subscribe :groups_incoming_message, to: GroupsChatController, with_method: :incoming_message
   subscribe :groups_get_history, to: GroupsChatController, with_method: :send_history
+  subscribe :groups_load_history, to: GroupsChatController, with_method: :load_history
 end

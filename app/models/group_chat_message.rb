@@ -5,19 +5,15 @@ class GroupChatMessage < ActiveRecord::Base
   belongs_to :group
 
   COUNT_LAST_MESSAGES = 15
-  scope :recent, -> { last(COUNT_LAST_MESSAGES) }
+  scope :recent, -> { last(COUNT_LAST_MESSAGES).reverse }
 
   def time
     Russian::strftime(created_at, '%k:%M')
   end
 
-  def self.history(to)
-    start_message_id = to - COUNT_LAST_MESSAGES
-    if start_message_id >= 0
-      where(id: start_message_id..to).collect { |message| message.to_json }
-    else
-      []
-    end
+
+  def self.history(last_id)
+    where(id: ((last_id - COUNT_LAST_MESSAGES)..(last_id - 1)).to_a).reverse.collect { |message| message.to_json }
   end
 
   def to_json

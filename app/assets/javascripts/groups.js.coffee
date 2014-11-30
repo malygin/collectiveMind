@@ -28,6 +28,7 @@
 
   this.scrollToBottom = ->
     $(this.chat_div).slimscroll({scrollTo: $(this.chat_div).prop('scrollHeight') + 'px'});
+
   this.addMsg = (data, append = true) ->
     message = $('#template_chat_message').clone().attr('id', data['id'])
     $(message).find('.sender .icon').append("<img src=" + data['avatar'] + '>')
@@ -40,12 +41,19 @@
       $(message).addClass('unreaded')
       $(message).mouseenter ->
         $(this).removeClass('unreaded')
+    $(message).show()
     if append
       $(this.chat_div).append(message)
       scrollToBottom()
     else
       $(this.chat_div).prepend(message)
-    $(message).show()
+
+  this.sendMessage = (message_text) ->
+    ws.trigger 'groups_incoming_message', {
+      text: message_text,
+      group_id: $('.id_group').attr('id')
+    }
+    $('input#new-message').val('')
 
   if $('.group-chat#chat').length > 0 && $('.id_group').length > 0
     ws = new WebSocketRails(document.location.host + '/websocket')
@@ -78,14 +86,16 @@
           group_id: $('.id_group').attr('id')
         }
     $('#send_message-btn').on 'click', ->
-      ws.trigger 'groups_incoming_message', {
-        text: $(this).parent().parent().find('#new-message').val(),
-        group_id: $('.id_group').attr('id')
-      }
+      sendMessage($(this).parent().parent().find('#new-message').val())
+    $('input#new-message').bind 'keypress', (e) ->
+      code = e.keyCode || e.which;
+      if(code == 13)
+        e.preventDefault();
+        sendMessage($('input#new-message').val())
     $(this.chat_div).slimscroll
       height: "290px"
       size: "5px"
       alwaysVisible: true
       railVisible: true
 
-    ws.trigger 'groups_get_history', {group_id: $('.id_group').attr('id')}
+    ws.trigger 'groups_load_history', {group_id: $('.id_group').attr('id')}
