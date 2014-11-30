@@ -38,7 +38,6 @@
           + Пригласить участника
 
 - if @group.users.include? current_user
-  .id_group{id: @group.id, style: 'display: hidden'}
   #inviteUser.modal.fade{'aria-hidden' => 'true', 'aria-labelledby' => 'myModalLabel', role: 'dialog', style: 'display: none;', tabindex: '-1'}
     .modal-dialog
       .modal-content

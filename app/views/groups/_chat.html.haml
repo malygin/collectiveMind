@@ -5,21 +5,23 @@
   .body
     #chat.chat.group-chat
       #chat-messages.chat-messages
-        - @group.chat_messages.each do |message|
-          .chat-message
-            .sender{class: cycle('pull-left', 'pull-right')}
-              .icon
-                = image_tag message.user.avatar.url(:thumb)
-              .time
-                = message.time
-            .chat-message-body{class: cycle('', 'on-left')}
-              %span.arrow
-              .sender
-                = link_to message.user, user_path(@project, message.user)
-              .text
-                = message.content
       %footer.chat-footer.row
         .col-xs-9
           %input#new-message.form-control.input-transparent{placeholder: 'Введите сообщение..', type: 'text'}/
         .col-xs-3
           %button#send_message-btn.btn.btn-transparent.btn-block{type: 'button'} Отправить
+
+
+.chat-message#template_chat_message{style: 'display: none'}
+  .sender.pull-left
+    .icon
+    .time
+  .chat-message-body
+    %span.arrow
+    .sender
+    .text
+.id_group{id: @group.id, style: 'display: none'}
+.last_seen_chat_at{style: 'display: none'}
+  = current_user.group_users.by_group(@group).last_seen_chat_at
+.current_user_name{style: 'display: none'}
+  = current_user.to_s
