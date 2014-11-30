@@ -8,6 +8,10 @@
         %br
         = form_for aspect, url: {project: @project.id,  action: aspect.persisted? ? 'update' : 'create'}, remote: aspect.persisted? ? true : false do |f|
           = render 'shared/notice_messages', object: f.object
+          %h4 Выберите аспект к которому будет принадлежать тема
+          = select_tag 'discontent_aspect[discontent_aspect_id]', options_from_collection_for_select(@aspects, "id", "content", selected: aspect.discontent_aspect_id), prompt: t('form.discontent.select_aspect_prompt')
+          %br
+          %br
           = f.text_field :content, class: 'form-control', placeholder: t('form.aspect.name'), id: 'aspect_text_field_content'
           %br
           = f.text_area :short_desc, class: 'form-control', style: 'height: 70px;', placeholder: t('form.aspect.desc'), id: 'aspect_text_area'

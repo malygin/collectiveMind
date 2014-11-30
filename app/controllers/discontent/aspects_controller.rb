@@ -7,6 +7,7 @@ class Discontent::AspectsController < ApplicationController
 
   def prepare_data
     @project = Core::Project.find(params[:project])
+    @aspects = Discontent::Aspect.where(project_id: @project)
   end
 
   def new

@@ -1,0 +1,4 @@
+%li{class:"#{'active' if aspect == @aspect}"}
+  = link_to link_for_aspects(aspect, current_stage) do
+    &nbsp;
+    =" #{aspect.content}"

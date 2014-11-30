@@ -78,9 +78,13 @@ class Core::Project < ActiveRecord::Base
 
   def current_aspects(current_stage)
     if current_stage == 'life_tape/posts'
-      self.aspects.order(:id)
+      self.aspects.main_aspects.order(:id)
     else
-      self.proc_aspects.first.position.present? ? self.proc_aspects.order("position DESC") : self.proc_aspects.order(:id)
+      if self.proc_aspects.main_aspects.first.present? and self.proc_aspects.main_aspects.first.position.present?
+        self.proc_aspects.main_aspects.order("position DESC")
+      else
+        self.proc_aspects.main_aspects.order(:id)
+      end
     end
   end
 

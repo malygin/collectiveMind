@@ -63,7 +63,7 @@ class Concept::PostsController < PostsController
     if params[:not_aspect]
       @concepts_without_aspect = @project.concepts_without_aspect
     else
-      @aspect =  params[:asp] ? Discontent::Aspect.find(params[:asp]) : (@project.proc_aspects.first.position.nil? ? @project.proc_aspects.order(:id).first : @project.proc_aspects.order("position DESC").first)
+      @aspect =  params[:asp] ? Discontent::Aspect.find(params[:asp]) : ((@project.proc_aspects.first.present? and @project.proc_aspects.first.position.present?) ? @project.proc_aspects.order("position DESC").first : @project.proc_aspects.order(:id).first)
     end
     @comments_all = @project.ideas_comments_for_improve
   end

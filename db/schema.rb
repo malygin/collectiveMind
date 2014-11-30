@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141123113652) do
+ActiveRecord::Schema.define(version: 20141130133143) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -394,12 +394,13 @@ ActiveRecord::Schema.define(version: 20141123113652) do
     t.text     "content"
     t.integer  "user_id"
     t.integer  "position"
-    t.datetime "created_at",             null: false
-    t.datetime "updated_at",             null: false
+    t.datetime "created_at",                       null: false
+    t.datetime "updated_at",                       null: false
     t.integer  "project_id"
     t.text     "short_desc"
-    t.integer  "status",     default: 0
+    t.integer  "status",               default: 0
     t.boolean  "user_add"
+    t.integer  "discontent_aspect_id"
   end
 
   add_index "discontent_aspects", ["project_id"], name: "index_discontent_aspects_on_project_id", using: :btree

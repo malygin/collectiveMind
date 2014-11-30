@@ -100,7 +100,7 @@
             = link_to "Сбросить все", discontent_posts_path(@project, asp: @aspect) , id: 'sort_clear',  class: 'btn btn-sm btn-danger'
           %h4 Фильтры
           = form_tag(discontent_posts_path(@project), {method: :get, id: 'filter_discontents'}) do
-            %input{name: "asp", type: "hidden", value: @aspect.id}
+            %input{name: "asp", type: "hidden", value: @aspect ? @aspect.id : nil}
             .col-md-6
               .control-group
                 %label.control-label Лайки
