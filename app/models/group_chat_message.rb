@@ -4,14 +4,20 @@ class GroupChatMessage < ActiveRecord::Base
   belongs_to :user
   belongs_to :group
 
-  scope :recent, -> { last(15) }
+  COUNT_LAST_MESSAGES = 15
+  scope :recent, -> { last(COUNT_LAST_MESSAGES) }
 
   def time
     Russian::strftime(created_at, '%k:%M')
   end
 
   def self.history(to)
-    where(id: (to - 15)..to).reverse.collect { |message| message.to_json }
+    start_message_id = to - COUNT_LAST_MESSAGES
+    if start_message_id >= 0
+      where(id: start_message_id..to).collect { |message| message.to_json }
+    else
+      []
+    end
   end
 
   def to_json
@@ -19,6 +25,7 @@ class GroupChatMessage < ActiveRecord::Base
      avatar: user.avatar(:thumb),
      text: content,
      id: id,
-     time: time}
+     time: time,
+     created_at: created_at}
   end
 end
