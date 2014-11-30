@@ -1,4 +1,7 @@
 class GroupsChatController < WebsocketRails::BaseController
+  before_action :set_group, only: [:incoming_message, :send_history, :load_history]
+  before_action :user_looked_at_chat, only: [:incoming_message, :send_history, :load_history]
+
   def initialize_session
   end
 
@@ -7,22 +10,21 @@ class GroupsChatController < WebsocketRails::BaseController
   end
 
   def incoming_message
-    group = Group.find message[:group_id]
-    group_message = current_user.group_chat_messages.create content: message[:text], group_id: group.id
-    group.users.each do |user|
+    group_message = current_user.group_chat_messages.create content: message[:text], group_id: @group.id
+    @group.users.each do |user|
       WebsocketRails.users[user.id].send_message(:groups_new_message, group_message.to_json, channel: :group_chat)
     end
   end
 
   def send_history
-    if message.nil? or message[:latest_id].nil?
-      latest_id = GroupChatMessage.last.id
-    else
-      latest_id = message[:latest_id].to_i
-    end
-
     WebsocketRails.users[current_user.id].send_message(:groups_receive_history,
-                                                       GroupChatMessage.history(latest_id),
+                                                       @group.chat_messages.history(message[:latest_id].to_i),
+                                                       channel: :group_chat)
+  end
+
+  def load_history
+    WebsocketRails.users[current_user.id].send_message(:groups_receive_history,
+                                                       @group.chat_messages.recent.collect { |message| message.to_json },
                                                        channel: :group_chat)
   end
 
@@ -36,5 +38,14 @@ class GroupsChatController < WebsocketRails::BaseController
     else
       deny_channel
     end
+  end
+
+  private
+  def user_looked_at_chat
+    current_user.group_users.by_group(@group).update_attributes! last_seen_chat_at: Time.now
+  end
+
+  def set_group
+    @group = Group.find message[:group_id].to_i
   end
 end

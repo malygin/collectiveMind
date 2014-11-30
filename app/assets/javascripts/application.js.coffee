@@ -43,6 +43,8 @@
 # @todo load initialization
 sidebarHeight = 0;
 
+editable_groups()
+
 @exampleData = ->
   project_id = $('#nvd3_project').attr("data-project")
   stage = $('#nvd3_project').attr("data-stage")

@@ -523,6 +523,7 @@ en:
     delete_advice: 'Удалить совет?'
 
     delete_group: "Delete group?"
+    delete_group_task: "Delete?"
   show:
     without_name: 'Без названия'
     note: замечание
