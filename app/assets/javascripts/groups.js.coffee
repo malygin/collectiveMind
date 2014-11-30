@@ -24,11 +24,28 @@
   return
 
 @create_group_chat = ->
-  $("#chat-messages").slimscroll
-    height: "290px"
-    size: "5px"
-    alwaysVisible: true
-    railVisible: true
+  this.chat_div = $('#chat-messages.chat-messages')
+
+  this.scrollToBottom = ->
+    $(this.chat_div).slimscroll({scrollTo: $(this.chat_div).prop('scrollHeight') + 'px'});
+  this.addMsg = (data, append = true) ->
+    message = $('#template_chat_message').clone().attr('id', data['id'])
+    $(message).find('.sender .icon').append("<img src=" + data['avatar'] + '>')
+    $(message).find('.sender .time').text(data['time'])
+    $(message).find('.chat-message-body .sender').text(data['user'])
+    $(message).find('.chat-message-body .text').text(data['text'])
+    lastSeenTime = new Date($('.last_seen_at').text().trim())
+    time = new Date(data['created_at'])
+    if time > lastSeenTime && $('.current_user_name').text().trim() != data['user'].trim()
+      $(message).addClass('unreaded')
+      $(message).mouseenter ->
+        $(this).removeClass('unreaded')
+    if append
+      $(this.chat_div).append(message)
+      scrollToBottom()
+    else
+      $(this.chat_div).prepend(message)
+    $(message).show()
 
   if $('.group-chat#chat').length > 0 && $('.id_group').length > 0
     ws = new WebSocketRails(document.location.host + '/websocket')
@@ -42,20 +59,33 @@
       console.log("Has joined the channel group_chat")
     private_channel.on_failure = ->
       console.log("Authorization failed")
-    $('#send_message-btn').on 'click', ->
-      ws.trigger 'groups_incoming_message', {text: $(this).parent().find('#new-message').val().trim(), group_id: $('.id_group').attr('id')}
-    ws.trigger 'groups_get_history', {group_id: $('.id_group').attr('id')}
+
     private_channel.bind 'groups_new_message', (data) ->
-      $("#group_chat_div").chatbox("option", "boxManager") data
+      addMsg(data)
     private_channel.bind 'groups_receive_history', (data) ->
       first_messages = false
-      if $('#group_chat_div .ui-chatbox-msg').length == 0
+      if $(this.chat_div).find('.chat-message').length == 0
         first_messages = true
       $.each data, (index, value) ->
-        $("#group_chat_div").chatbox("option", "boxManager") value, false, false, false
-      $("a#groups_load_more_messages").remove()
-      $("#group_chat_div").prepend "<a href='#' id='groups_load_more_messages'>Загрузить еще</a>"
-      $("a#groups_load_more_messages").click ->
-        ws.trigger 'groups_get_history', {latest_id: $('#group_chat_div .ui-chatbox-msg').attr('id'), group_id: $('.id_group').attr('id')}
+        addMsg(value, false)
       if first_messages
-        $("#group_chat_div").chatbox("option", "boxManager")._scrollToBottom();
+        scrollToBottom()
+      $("a#groups_load_more_messages").remove()
+      $(this.chat_div).prepend "<a href='#' id='groups_load_more_messages'>Загрузить еще</a>"
+      $("a#groups_load_more_messages").click ->
+        ws.trigger 'groups_get_history', {
+          latest_id: $(chat_div).find('.chat-message:first').attr('id'),
+          group_id: $('.id_group').attr('id')
+        }
+    $('#send_message-btn').on 'click', ->
+      ws.trigger 'groups_incoming_message', {
+        text: $(this).parent().parent().find('#new-message').val(),
+        group_id: $('.id_group').attr('id')
+      }
+    $(this.chat_div).slimscroll
+      height: "290px"
+      size: "5px"
+      alwaysVisible: true
+      railVisible: true
+
+    ws.trigger 'groups_get_history', {group_id: $('.id_group').attr('id')}
