@@ -99,7 +99,7 @@
     position = parseInt($('#resources_' + field + ' .main_resources').last().data('position'))
     if not position then position = 1 else position += 1
     resource = $('#resources_' + field)
-    resource.append('<div class="main_resources" id="main_' + field + '_' + position + '" data-position="' + position + '">
+    resource.append('<div class="main_resources main_res" id="main_' + field + '_' + position + '" data-position="' + position + '">
                         <div class="col-md-8">
                           <span role="status" aria-live="polite" class="ui-helper-hidden-accessible"></span>
                           <input class="form-control autocomplete ui-autocomplete-input" data-autocomplete="/project/' + project + '/autocomplete_concept_post_resource_concept_posts" id="concept_post_resource" min-length="0" name="resor[][name]" placeholder="Введите свой ресурс или выберите из списка" type="text" autocomplete="off">
@@ -107,15 +107,15 @@
                         </div>
                         <div class="col-md-4">
                           <div class="pull-right">
-                            <button class="btn btn-warning" id="desc_to_res" title="Добавить описание" type="button">
+                            <button class="btn btn-warning desc_to_res" title="Добавить описание" type="button">
                               <i class="fa fa-edit"></i>
                               Описание
                             </button>
-                            <button class="btn btn-success" id="plus_mean" title="Добавить средство" type="button">
+                            <button class="btn btn-success plus_mean" title="Добавить средство" type="button">
                               <i class="fa fa-plus"></i>
                               Средство
                             </button>
-                            <button class="btn btn-danger" id="destroy_res" title="Удалить ресурс" type="button">
+                            <button class="btn btn-danger destroy_res" title="Удалить ресурс" type="button">
                               <i class="fa fa-trash-o"></i>
                               Удалить
                             </button>
@@ -135,7 +135,7 @@
     section = $(this).closest('.section-resources').data('section')
     field = section + '_s'
     mean = $('#means_' + field + '_' + position)
-    mean.append('<br/><div class="main_means" id="main_' + field + '_' + position + '" data-position="' + position + '">
+    mean.append('<br/><div class="main_means main_res" id="main_' + field + '_' + position + '" data-position="' + position + '">
                         <div class="col-md-8">
                             <span role="status" aria-live="polite" class="ui-helper-hidden-accessible"></span>
                             <input class="form-control autocomplete ui-autocomplete-input" data-autocomplete="/project/' + project + '/autocomplete_concept_post_mean_concept_posts" id="res" min-length="0" name="resor[][means][][name]" placeholder="Введите свой ресурс или выберите из списка" type="text" autocomplete="off">
@@ -143,11 +143,11 @@
                         </div>
                         <div class="col-md-4">
                             <div class="pull-right">
-                                <button class="btn btn-warning" id="desc_to_res" title="Добавить описание" type="button">
+                                <button class="btn btn-warning desc_to_res" title="Добавить описание" type="button">
                                   <i class="fa fa-edit"></i>
                                   Описание
                                 </button>
-                                <button class="btn btn-danger" id="destroy_res" title="Удалить ресурс" type="button">
+                                <button class="btn btn-danger destroy_res" title="Удалить ресурс" type="button">
                                   <i class="fa fa-trash-o"></i>
                                   Удалить
                                 </button>
