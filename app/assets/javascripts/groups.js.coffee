@@ -35,7 +35,7 @@
     $(message).find('.sender .time').text(data['time'])
     $(message).find('.chat-message-body .sender').text(data['user'])
     $(message).find('.chat-message-body .text').text(data['text'])
-    lastSeenTime = new Date($('.last_seen_at').text().trim())
+    lastSeenTime = new Date($('.last_seen_chat_at').text().trim())
     time = new Date(data['created_at'])
     if time > lastSeenTime && $('.current_user_name').text().trim() != data['user'].trim()
       $(message).addClass('unreaded')
