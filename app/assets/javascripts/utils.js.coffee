@@ -84,7 +84,97 @@
   $('.form-new-comment').on('click', 'label.comment-idea', this.color_for_idea)
 
 
+@resources = ->
+  project = $("#option_for_project").attr('data-project')
+
+  this.desc_show = ->
+    $(this).closest('.main_res').find('.desc_mean').show()
+  this.res_delete = ->
+    $(this).closest('.main_res').remove()
+
+  this.add_new_resource_to_concept = ->
+    section = $(this).closest('.section-resources').data('section')
+    field = section + '_r'
+    field2 = section + '_s'
+    position = parseInt($('#resources_' + field + ' .main_resources').last().data('position'))
+    if not position then position = 1 else position += 1
+    resource = $('#resources_' + field)
+    resource.append('<div class="main_resources" id="main_' + field + '_' + position + '" data-position="' + position + '">
+                        <div class="col-md-8">
+                          <span role="status" aria-live="polite" class="ui-helper-hidden-accessible"></span>
+                          <input class="form-control autocomplete ui-autocomplete-input" data-autocomplete="/project/' + project + '/autocomplete_concept_post_resource_concept_posts" id="concept_post_resource" min-length="0" name="resor[][name]" placeholder="Введите свой ресурс или выберите из списка" type="text" autocomplete="off">
+                          <input name="resor[][type_res]" type="hidden" value="' + field + '">
+                        </div>
+                        <div class="col-md-4">
+                          <div class="pull-right">
+                            <button class="btn btn-warning" id="desc_to_res" title="Добавить описание" type="button">
+                              <i class="fa fa-edit"></i>
+                              Описание
+                            </button>
+                            <button class="btn btn-success" id="plus_mean" title="Добавить средство" type="button">
+                              <i class="fa fa-plus"></i>
+                              Средство
+                            </button>
+                            <button class="btn btn-danger" id="destroy_res" title="Удалить ресурс" type="button">
+                              <i class="fa fa-trash-o"></i>
+                              Удалить
+                            </button>
+                          </div>
+                        </div>
+                        <br><br>
+                        <div class="desc_resource" id="desc_' + field + '_' + position + '" data-position="' + position + '" style="display:none;">
+                          <textarea class="form-control" id="res" name="resor[][desc]" placeholder="Пояснение к ресурсу" style="overflow: hidden; word-wrap: break-word; resize: horizontal; height: 50px;"></textarea>
+                        </div>
+                        <div class="col-md-offset-1 col-md-11 means_to_resource" id="means_' + field2 + '_' + position +'"></div>
+                    </div>')
+    autocomplete_initialized()
+    $('textarea').autosize()
+
+  this.add_new_mean_to_resource = ->
+    position = $(this).closest('.main_resources').data('position')
+    section = $(this).closest('.section-resources').data('section')
+    field = section + '_s'
+    mean = $('#means_' + field + '_' + position)
+    mean.append('<br/><div class="main_means" id="main_' + field + '_' + position + '" data-position="' + position + '">
+                        <div class="col-md-8">
+                            <span role="status" aria-live="polite" class="ui-helper-hidden-accessible"></span>
+                            <input class="form-control autocomplete ui-autocomplete-input" data-autocomplete="/project/' + project + '/autocomplete_concept_post_mean_concept_posts" id="res" min-length="0" name="resor[][means][][name]" placeholder="Введите свой ресурс или выберите из списка" type="text" autocomplete="off">
+                            <input name="resor[][means][][type_res]" type="hidden" value="' + field + '">
+                        </div>
+                        <div class="col-md-4">
+                            <div class="pull-right">
+                                <button class="btn btn-warning" id="desc_to_res" title="Добавить описание" type="button">
+                                  <i class="fa fa-edit"></i>
+                                  Описание
+                                </button>
+                                <button class="btn btn-danger" id="destroy_res" title="Удалить ресурс" type="button">
+                                  <i class="fa fa-trash-o"></i>
+                                  Удалить
+                                </button>
+                            </div>
+                        </div>
+                        <br/><br/>
+                        <div class="desc_mean" id="desc_' + field + '_' + position + '" data-position="' + position + '" style="display:none;">
+                          <textarea class="form-control" id="res" name="resor[][means][][desc]" placeholder="Пояснение к ресурсу" style="overflow: hidden; word-wrap: break-word; resize: horizontal; height: 50px;"></textarea>
+                          <br>
+                        </div>
+                      </div>')
+    autocomplete_initialized()
+    $('textarea').autosize()
+
+  $('#form_for_concept').on('click', 'button.plus_mean', this.add_new_mean_to_resource)
+  $('#form_for_concept').on('click', 'button.plus_resource', this.add_new_mean_to_resource)
+
+  $('#form_for_concept').on('click', 'button.desc_to_res', this.desc_show)
+  $('#form_for_concept').on('click', 'button.destroy_res', this.res_delete)
+
+
+
+
+
+
 @selectize = ->
+
   $select = $("#selectize_for_discontents").selectize
     labelField: "show_content"
     valueField: "id"
@@ -316,18 +406,18 @@
         dispost_id: sel.val()
         remove_able: 1
 
-@add_new_resource_to_concept = (field, field2, project)->
-  position = parseInt($('#resources_' + field + ' .main_resources').last().attr('position'))
-  if not position then position = 1 else position += 1
-  $('#resources_' + field).append("<div class=\"main_resources\" id=\"main_#{field}_#{position}\" position=\"#{position}\"><div class=\"col-md-8\">" + "<span role=\"status\" aria-live=\"polite\" class=\"ui-helper-hidden-accessible\"></span>" + "<input class=\"form-control autocomplete ui-autocomplete-input\" data-autocomplete=\"/project/#{project}/autocomplete_concept_post_resource_concept_posts\" id=\"concept_post_resource\" min-length=\"0\" name=\"resor[][name]\" placeholder=\"Введите свой ресурс или выберите из списка\" type=\"text\" autocomplete=\"off\"><input name=\"resor[][type_res]\" type=\"hidden\" value=\"#{field}\">" + "</div><div class=\"col-md-4\"><div class=\"pull-right\"><button class=\"btn btn-warning\" id=\"desc_to_res\" onclick=\"$(this).parent().parent().parent().find('.desc_resource').show();\" title=\"Добавить описание\" type=\"button\"><i class=\"fa fa-edit\"></i>Описание</button><button class=\"btn btn-success\" id=\"plus_mean\" onclick=\"return add_new_mean_to_resource(this,'#{field2}',#{project});\" title=\"Добавить средство\" type=\"button\">" + "<i class=\"fa fa-plus\"></i>Средство</button><button class=\"btn btn-danger\" id=\"destroy_res\" onclick=\"$(this).parent().parent().parent().remove();\" title=\"Удалить ресурс\" type=\"button\">" + "<i class=\"fa fa-trash-o\"></i>Удалить</button></div></div><br><br><div class=\"desc_resource\" id=\"desc_#{field}_#{position}\" position=\"#{position}\" style=\"display:none;\">" + "<textarea class=\"form-control\" id=\"res\" name=\"resor[][desc]\" placeholder=\"Пояснение к ресурсу\" style=\"overflow: hidden; word-wrap: break-word; resize: horizontal; height: 50px;\"></textarea>" + "</div><div class=\"col-md-offset-1 col-md-11 means_to_resource\" id=\"means_#{field2}_#{position}\"></div></div>");
-  autocomplete_initialized()
-  $('textarea').autosize()
-
-@add_new_mean_to_resource = (el, field, project)->
-  position = $(el).parent().parent().parent().attr('position')
-  $('#means_' + field + '_' + position).append("<br><div class=\"main_means\" id=\"main_#{field}_#{position}\" position=\"#{position}\"><div class=\"col-md-8\">" + "<span role=\"status\" aria-live=\"polite\" class=\"ui-helper-hidden-accessible\"></span>" + "<input class=\"form-control autocomplete ui-autocomplete-input\" data-autocomplete=\"/project/#{project}/autocomplete_concept_post_mean_concept_posts\" id=\"res\" min-length=\"0\" name=\"resor[][means][][name]\" placeholder=\"Введите свой ресурс или выберите из списка\" type=\"text\" autocomplete=\"off\"><input name=\"resor[][means][][type_res]\" type=\"hidden\" value=\"#{field}\">" + "</div><div class=\"col-md-4\"><div class=\"pull-right\"><button class=\"btn btn-warning\" id=\"desc_to_res\" onclick=\"$(this).parent().parent().parent().find('.desc_mean').show();\" title=\"Добавить описание\" type=\"button\"><i class=\"fa fa-edit\"></i>Описание</button><button class=\"btn btn-danger\" id=\"destroy_res\" onclick=\"$(this).parent().parent().parent().remove();\" title=\"Удалить ресурс\" type=\"button\">" + "<i class=\"fa fa-trash-o\"></i>Удалить</button></div></div><br><br><div class=\"desc_mean\" id=\"desc_#{field}_#{position}\" position=\"#{position}\" style=\"display:none;\">" + "<textarea class=\"form-control\" id=\"res\" name=\"resor[][means][][desc]\" placeholder=\"Пояснение к ресурсу\" style=\"overflow: hidden; word-wrap: break-word; resize: horizontal; height: 50px;\"></textarea><br></div></div>");
-  autocomplete_initialized()
-  $('textarea').autosize()
+#@add_new_resource_to_concept = (field, field2, project)->
+#  position = parseInt($('#resources_' + field + ' .main_resources').last().attr('position'))
+#  if not position then position = 1 else position += 1
+#  $('#resources_' + field).append("<div class=\"main_resources\" id=\"main_#{field}_#{position}\" position=\"#{position}\"><div class=\"col-md-8\">" + "<span role=\"status\" aria-live=\"polite\" class=\"ui-helper-hidden-accessible\"></span>" + "<input class=\"form-control autocomplete ui-autocomplete-input\" data-autocomplete=\"/project/#{project}/autocomplete_concept_post_resource_concept_posts\" id=\"concept_post_resource\" min-length=\"0\" name=\"resor[][name]\" placeholder=\"Введите свой ресурс или выберите из списка\" type=\"text\" autocomplete=\"off\"><input name=\"resor[][type_res]\" type=\"hidden\" value=\"#{field}\">" + "</div><div class=\"col-md-4\"><div class=\"pull-right\"><button class=\"btn btn-warning\" id=\"desc_to_res\" onclick=\"$(this).parent().parent().parent().find('.desc_resource').show();\" title=\"Добавить описание\" type=\"button\"><i class=\"fa fa-edit\"></i>Описание</button><button class=\"btn btn-success\" id=\"plus_mean\" onclick=\"return add_new_mean_to_resource(this,'#{field2}',#{project});\" title=\"Добавить средство\" type=\"button\">" + "<i class=\"fa fa-plus\"></i>Средство</button><button class=\"btn btn-danger\" id=\"destroy_res\" onclick=\"$(this).parent().parent().parent().remove();\" title=\"Удалить ресурс\" type=\"button\">" + "<i class=\"fa fa-trash-o\"></i>Удалить</button></div></div><br><br><div class=\"desc_resource\" id=\"desc_#{field}_#{position}\" position=\"#{position}\" style=\"display:none;\">" + "<textarea class=\"form-control\" id=\"res\" name=\"resor[][desc]\" placeholder=\"Пояснение к ресурсу\" style=\"overflow: hidden; word-wrap: break-word; resize: horizontal; height: 50px;\"></textarea>" + "</div><div class=\"col-md-offset-1 col-md-11 means_to_resource\" id=\"means_#{field2}_#{position}\"></div></div>");
+#  autocomplete_initialized()
+#  $('textarea').autosize()
+#
+#@add_new_mean_to_resource = (el, field, project)->
+#  position = $(el).parent().parent().parent().attr('position')
+#  $('#means_' + field + '_' + position).append("<br><div class=\"main_means\" id=\"main_#{field}_#{position}\" position=\"#{position}\"><div class=\"col-md-8\">" + "<span role=\"status\" aria-live=\"polite\" class=\"ui-helper-hidden-accessible\"></span>" + "<input class=\"form-control autocomplete ui-autocomplete-input\" data-autocomplete=\"/project/#{project}/autocomplete_concept_post_mean_concept_posts\" id=\"res\" min-length=\"0\" name=\"resor[][means][][name]\" placeholder=\"Введите свой ресурс или выберите из списка\" type=\"text\" autocomplete=\"off\"><input name=\"resor[][means][][type_res]\" type=\"hidden\" value=\"#{field}\">" + "</div><div class=\"col-md-4\"><div class=\"pull-right\"><button class=\"btn btn-warning\" id=\"desc_to_res\" onclick=\"$(this).parent().parent().parent().find('.desc_mean').show();\" title=\"Добавить описание\" type=\"button\"><i class=\"fa fa-edit\"></i>Описание</button><button class=\"btn btn-danger\" id=\"destroy_res\" onclick=\"$(this).parent().parent().parent().remove();\" title=\"Удалить ресурс\" type=\"button\">" + "<i class=\"fa fa-trash-o\"></i>Удалить</button></div></div><br><br><div class=\"desc_mean\" id=\"desc_#{field}_#{position}\" position=\"#{position}\" style=\"display:none;\">" + "<textarea class=\"form-control\" id=\"res\" name=\"resor[][means][][desc]\" placeholder=\"Пояснение к ресурсу\" style=\"overflow: hidden; word-wrap: break-word; resize: horizontal; height: 50px;\"></textarea><br></div></div>");
+#  autocomplete_initialized()
+#  $('textarea').autosize()
 
 ##############################################
 # @todo work with plan posts
@@ -340,9 +430,9 @@
         scrollTop: pos
       }, 500
 
-@add_new_resource_to_plan = (field, project)->
-  $('#resources_' + field).append('<div class="panel panel-default"><div class="panel-body"><span class="glyphicon glyphicon-remove text-danger pull-right" onclick="$(this).parent().parent().remove();" style="cursor:pointer;text-decoration:none;font-size:15px;"></span><span role="status" aria-live="polite" class="ui-helper-hidden-accessible"></span><input class="form-control autocomplete ui-autocomplete-input" data-append-to="#mod" data-autocomplete="/project/' + project + '/autocomplete_concept_post_resource_concept_posts" id="concept_post_resource" min-length="0" name="resor_' + field + '[]" placeholder="Введите свой ресурс или выберите из списка" size="30" type="text" autocomplete="off"><br><textarea class="form-control" id="res" name="res_' + field + '[]" placeholder="Пояснение к ресурсу" style="overflow: hidden; word-wrap: break-word; resize: horizontal; height: 54px;"></textarea></div></div>')
-  autocomplete_initialized()
+#@add_new_resource_to_plan = (field, project)->
+#  $('#resources_' + field).append('<div class="panel panel-default"><div class="panel-body"><span class="glyphicon glyphicon-remove text-danger pull-right" onclick="$(this).parent().parent().remove();" style="cursor:pointer;text-decoration:none;font-size:15px;"></span><span role="status" aria-live="polite" class="ui-helper-hidden-accessible"></span><input class="form-control autocomplete ui-autocomplete-input" data-append-to="#mod" data-autocomplete="/project/' + project + '/autocomplete_concept_post_resource_concept_posts" id="concept_post_resource" min-length="0" name="resor_' + field + '[]" placeholder="Введите свой ресурс или выберите из списка" size="30" type="text" autocomplete="off"><br><textarea class="form-control" id="res" name="res_' + field + '[]" placeholder="Пояснение к ресурсу" style="overflow: hidden; word-wrap: break-word; resize: horizontal; height: 54px;"></textarea></div></div>')
+#  autocomplete_initialized()
 
 @add_new_action_resource_to_plan = (project)->
   $('#action_resources').append('<div class="panel panel-default"><div class="panel-body"><span class="glyphicon glyphicon-remove text-danger pull-right" onclick="$(this).parent().parent().remove();" style="cursor:pointer;text-decoration:none;font-size:15px;"></span><span role="status" aria-live="polite" class="ui-helper-hidden-accessible"></span><input class="form-control autocomplete ui-autocomplete-input" data-append-to="#mod2" data-autocomplete="/project/' + project + '/autocomplete_concept_post_resource_concept_posts" id="concept_post_resource" min-length="0" name="resor_action[]" placeholder="Введите свой ресурс или выберите из списка" size="30" type="text" autocomplete="off"><br><textarea class="form-control" id="res" name="res_action[]" placeholder="Пояснение к ресурсу" style="overflow: hidden; word-wrap: break-word; resize: horizontal; height: 54px;"></textarea></div></div>')
@@ -525,6 +615,7 @@ $('#sortable').sortable update: (event, ui) ->
 @activate_datepicker = ->
   $date_begin = $("#date_begin")
   $date_end = $("#date_end")
+
   $date_begin.datepicker("refresh")
   $date_end.datepicker("refresh")
 
@@ -554,6 +645,7 @@ $('#sortable').sortable update: (event, ui) ->
 @activate_datepicker_action = (date_begin, date_end)->
   $date_begin_action = $("#date_begin_action")
   $date_end_action = $("#date_end_action")
+
   $date_begin_action.datepicker("refresh")
   $date_end_action.datepicker("refresh")
 

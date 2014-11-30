@@ -57,6 +57,8 @@ $ ->
 
   search()
 
+  resources()
+
   notificate_my_journals()
   sidebar_for_small_screen()
   activate_htmleditor()

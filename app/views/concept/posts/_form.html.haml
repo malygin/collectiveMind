@@ -39,9 +39,10 @@
 
       #option_for_wizard_tab(data-tab="1")
       #form_for_concept
-        = form_for  @concept_post, :url => {:project => @project.id, :asp_id => params[:asp_id].present? ? params[:asp_id] : params[:asp], :improve_comment => params[:improve_comment], :improve_stage => params[:improve_stage], :action => @concept_post.persisted? ? 'update' : 'create'},  :remote => true,  :html => { :class => 'new_or_edit' } do |f|
+        = form_for  @concept_post, :url => {:project => @project.id, :asp_id => params[:asp_id].present? ? params[:asp_id] : params[:asp], :improve_comment => params[:improve_comment], :improve_stage => params[:improve_stage], :action => @concept_post.persisted? ? 'update' : 'create'},  :remote => true,  :html => { :class => 'new_or_edit form-new-concept' } do |f|
           #mod
           #notice_messages
+          #option_for_project(data-project="#{@project.id}")
           #option_for_wizard_save(data-project="#{@project.id}" data-post="#{@concept_post.id}")
 
           .tab-content

@@ -63,7 +63,7 @@
       %br
 .row
   .col-md-11.col-md-offset-1
-    %form.form-new-comment( id = "form_reply_comment_#{comment.id}"accept-charset="UTF-8" action="/project/#{@project.id}/#{comment.post.class.name.underscore.pluralize}/#{comment.post.id}/add_comment?main_comment=#{comment.id}" data-remote="true" enctype="multipart/form-data"  method="post" )
+    %form.form-new-comment( id = "form_reply_comment_#{comment.id}" accept-charset="UTF-8" action="/project/#{@project.id}/#{comment.post.class.name.underscore.pluralize}/#{comment.post.id}/add_comment?main_comment=#{comment.id}" data-remote="true" enctype="multipart/form-data"  method="post" )
 
     -if comment.main_comment?
       %div{id: "child_comments_#{comment.id}"}
