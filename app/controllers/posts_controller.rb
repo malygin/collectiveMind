@@ -508,7 +508,7 @@ class PostsController < ApplicationController
 
   def check_field
     @project = Core::Project.find(params[:project])
-    if !params[:check_field].nil? and !params[:status].nil?
+    if params[:check_field] and params[:status]
       current_user.user_checks.where(project_id: @project.id, check_field: params[:check_field]).destroy_all
       current_user.user_checks.create(project_id: @project.id, check_field: params[:check_field], status: params[:status]).save!
     end

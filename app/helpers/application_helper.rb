@@ -713,4 +713,17 @@ module ApplicationHelper
         "core_project_scores.score DESC"
     end
   end
+
+  def date_stage_for_project(project)
+    date_now = 1.day.ago.utc
+    if project.date12 >= date_now
+      'Сбор несовершенств'
+    elsif project.date23 >= date_now
+      'Сбор нововведений'
+    elsif project.date34 >= date_now
+      'Создание проектов'
+    elsif project.date45 >= date_now
+      'Выставление оценок'
+    end
+  end
 end

@@ -103,17 +103,19 @@ scope '/project/:project' do
       put :add_user_for_project
       put :remove_user_for_project
       put :journal_clear
+      get :edit_notice
+      post :create_notice
       get 'add_score/:score' => 'users#add_score'
       get 'add_score_essay/:score' => 'users#add_score_essay'
     end
   end
 
   put 'life_tape/posts/transfer_comment' , to: 'life_tape/posts#transfer_comment'
-  get 'life_tape/posts/check_field', to: 'life_tape/posts#check_field'
-  get 'discontent/posts/check_field', to: 'discontent/posts#check_field'
-  get 'concept/posts/check_field', to: 'concept/posts#check_field'
-  get 'plan/posts/check_field', to: 'plan/posts#check_field'
-  get 'estimate/posts/check_field', to: 'estimate/posts#check_field'
+  put 'life_tape/posts/check_field', to: 'life_tape/posts#check_field'
+  put 'discontent/posts/check_field', to: 'discontent/posts#check_field'
+  put 'concept/posts/check_field', to: 'concept/posts#check_field'
+  put 'plan/posts/check_field', to: 'plan/posts#check_field'
+  put 'estimate/posts/check_field', to: 'estimate/posts#check_field'
 
   get 'life_tape/posts/to_work', to: 'life_tape/posts#to_work'
   get 'discontent/posts/to_work', to: 'discontent/posts#to_work'

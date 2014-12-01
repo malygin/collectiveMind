@@ -1,13 +1,36 @@
-feed_mailer:
+every_hour_from_10_to_24_hours:
   #  every: "1d"
-  cron: "0 0-23 * * *"
+  cron: "0 10-24 * * *"
   class: FeedModeratorMailer
-  queue: feed_mailer
+  queue: feed_moderator_mailer
   args:
   description: "This job..."
 
+every_day_at_20_hours:
+  #  every: "1d"
+  cron: "0 20 * * *"
+  class: FeedUserMailer
+  queue: feed_user_mailer
+  args:
+  description: "This job..."
 
-log_proc:
+every_hour:
+  #  every: "1d"
+  cron: "0 0-23 * * *"
+  class: ModeratorMailer
+  queue: moderator_mailer
+  args:
+  description: "This job..."
+
+every_day:
+  #  every: "1d"
+  cron: "0 20 * * *"
+  class: StagesMailer
+  queue: stages_mailer
+  args:
+  description: "This job..."
+
+every_minute_puts_time_in_console:
   #  every: "1d"
   cron: "0-59 * * * *"
   class: LogTask

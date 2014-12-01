@@ -131,6 +131,7 @@ en:
       few: "and %{count} similar results"
       other: " and %{count} similar results"
     profile_edit: Edit profile
+    notice_edit: Edit notice
     list_aspects: 'Aspects:'
     help_stage: Stage Help
     reflection_stage: Stage Analysis

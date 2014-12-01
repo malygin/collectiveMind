@@ -2,7 +2,7 @@ class UsersController < ApplicationController
   #before_filter :authenticate, :only: [:edit, :update, :show]
   before_filter :correct_user, only: [:edit, :update]
   #before_filter :admin_user, :only: [:destroy]
-  before_filter :journal_data, only: [:index, :new, :edit, :show, :users_rc, :journal_clear]
+  before_filter :journal_data, only: [:index, :new, :edit, :show, :users_rc, :journal_clear, :edit_notice]
   before_filter :boss_authenticate, only: [:users_rc]
   before_filter :prime_admin_authenticate, only: [:destroy, :list_users, :add_user_for_project, :remove_user_for_project, :club_toggle, :update_score]
   before_filter :have_project_access
@@ -163,6 +163,26 @@ class UsersController < ApplicationController
       user.journals.build(type_event: 'add_score_essay', project: @project, body: params[:score]).save
     end
     render json: user.score
+  end
+
+  def edit_notice
+    @project = Core::Project.find(params[:project])
+    @auto_feed_mailer = current_user.user_checks.where(project_id: @project.id, check_field: 'auto_feed_mailer').first
+    @journal_mailer = JournalMailer.new
+    @mailers = prime_admin? ? @project.journal_mailers : @project.journal_mailers.mailers_for_moderator(current_user)
+  end
+
+  def create_notice
+    @project = Core::Project.find(params[:project])
+    @post = @project.journal_mailers.build(params[:journal_mailer])
+    @post.user = current_user
+    @post.project = @project
+    @post.status = 0
+    respond_to do |format|
+      if @post.save!
+        format.js
+      end
+    end
   end
 
   private

@@ -616,22 +616,38 @@ $.fn.extend popoverClosable: (options) ->
     scrollTo(0,0)
 
 # @todo users checks
+#@user_check_field= (el,check_field)->
+#  optsel = $("#option_for_check_field")
+#  project_id = parseInt(optsel.attr('project'))
+#  table_name = optsel.attr('table_name')
+#  if ( $(el).is( ":checked" ) )
+#    status = true
+#  else
+#    status = false
+#  if check_field != ''
+#    $.ajax
+#      url: "/project/#{project_id}/#{table_name}/posts/check_field"
+#      type: "get"
+#      data:
+#        check_field: check_field
+#        status: status
+
 @user_check_field= (el,check_field)->
-  optsel = $("#option_for_check_field")
-  project_id = parseInt(optsel.attr('project'))
-  table_name = optsel.attr('table_name')
+  $option = $("#option_for_check_field")
+  project = $option.data('project')
+  table_name = $option.data('table_name')
+  unless table_name then table_name = 'life_tape'
   if ( $(el).is( ":checked" ) )
     status = true
   else
     status = false
-  if check_field != ''
+  if project and table_name and check_field != ''
     $.ajax
-      url: "/project/#{project_id}/#{table_name}/posts/check_field"
-      type: "get"
+      url: "/project/#{project}/#{table_name}/posts/check_field"
+      type: "put"
       data:
         check_field: check_field
         status: status
-
 
 $("#date_all").on "ifChecked", (e) ->
   $('#date_begin').val('')
@@ -642,6 +658,11 @@ $("#by_content").on "ifChecked", (e) ->
 
 $("#by_content").on "ifUnchecked", (e) ->
   $('#by_create,#by_update,#event_content_all').iCheck('uncheck').iCheck('disable')
+
+
+$(".auto_feed_mailer").on "ifToggled", (e) ->
+  user_check_field(this, 'auto_feed_mailer')
+
 
 # @todo wysihtml5 editor
 #@activate_htmleditor= ->
