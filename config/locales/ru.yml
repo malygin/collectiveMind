@@ -134,6 +134,7 @@ ru:
       few: "и еще %{count} похожих"
       other: "и еще %{count} похожих"
     profile_edit: Редактировать профиль
+    notice_edit: Настройка уведомлений
     list_aspects: 'Аспекты:'
     help_stage: Помощь по этапу
     reflection_stage: Рефлексия по этапу

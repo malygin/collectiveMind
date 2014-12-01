@@ -9,3 +9,7 @@
       = link_to edit_user_path(@project, current_user) do
         %i.glyphicon.glyphicon-cog
         =t('menu.profile_edit')
+    %li
+      = link_to edit_notice_user_path(@project, current_user) do
+        %i.glyphicon.glyphicon-envelope
+        =t('menu.notice_edit')

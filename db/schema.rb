@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141126012330) do
+ActiveRecord::Schema.define(version: 20141130222317) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -367,10 +367,10 @@ ActiveRecord::Schema.define(version: 20141126012330) do
     t.string   "secret"
     t.string   "secret2"
     t.string   "secret3"
-    t.boolean  "advices_discontent"
-    t.boolean  "advices_concept"
     t.string   "color"
     t.string   "code"
+    t.boolean  "advices_discontent"
+    t.boolean  "advices_concept"
     t.integer  "moderator_id"
     t.datetime "date_12"
     t.datetime "date_23"
@@ -394,12 +394,13 @@ ActiveRecord::Schema.define(version: 20141126012330) do
     t.text     "content"
     t.integer  "user_id"
     t.integer  "position"
-    t.datetime "created_at",             null: false
-    t.datetime "updated_at",             null: false
+    t.datetime "created_at",                       null: false
+    t.datetime "updated_at",                       null: false
     t.integer  "project_id"
     t.text     "short_desc"
-    t.integer  "status",     default: 0
+    t.integer  "status",               default: 0
     t.boolean  "user_add"
+    t.integer  "discontent_aspect_id"
   end
 
   add_index "discontent_aspects", ["project_id"], name: "index_discontent_aspects_on_project_id", using: :btree
@@ -997,6 +998,21 @@ ActiveRecord::Schema.define(version: 20141126012330) do
     t.integer  "answer_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "journal_mailers", force: true do |t|
+    t.string   "title"
+    t.text     "content"
+    t.integer  "user_id"
+    t.integer  "project_id"
+    t.integer  "status"
+    t.boolean  "sent"
+    t.boolean  "viewed",     default: false
+    t.boolean  "visible",    default: true
+    t.integer  "receiver"
+    t.integer  "group_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "journals", force: true do |t|
