@@ -13,7 +13,7 @@ class GroupsController < ApplicationController
     if @project.type_access == 2
       @users_to_add = @project.users_in_project - @group.all_group_users
     else
-      @users_to_add = User.all - @group.all_group_users
+      @users_to_add = User.all.where.not(id: @group.all_group_users)
     end
   end
 
