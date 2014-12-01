@@ -12,11 +12,16 @@
       - @groups.each do |group|
         %tr{id:"group_#{group.id}"}
           %td
-            %h4
+            %h4.color-green
+              =group.name
               - if group.users.include? current_user
-                = link_to group.name, group_path(@project, group), id: "open_group_#{group.id}"
-              - else
-                = group.name
+                = link_to "подробнее", group_path(@project, group), id: "open_group_#{group.id}", class: "btn btn-primary btn-xs"
+              - if current_user?(group.owner)
+                |
+                = link_to 'Удалить группу', group_path(@project, group), id: "remove_group_#{group.id}", method: :delete,
+                  data: {confirm: t('confirm.delete_group')}, class: 'btn btn-danger btn-xs'
+                |
+                = link_to 'Редактировать', edit_group_path(@project, group), id: "edit_group_#{group.id}", class: 'btn btn-primary btn-xs'
             %br
             = group.description
           -#%td
@@ -27,9 +32,3 @@
               = link_to 'Подать заявку', group_become_member_path(@project, group), method: :put, id: "become_member_#{group.id}", class: 'btn btn-success'
               %br
 
-          %td
-            - if current_user?(group.owner)
-              = link_to 'Удалить группу', group_path(@project, group), id: "remove_group_#{group.id}", method: :delete,
-                data: {confirm: t('confirm.delete_group')}, class: 'btn btn-danger btn-xs'
-              %br
-              = link_to 'Редактировать', edit_group_path(@project, group), id: "edit_group_#{group.id}", class: 'btn btn-primary btn-xs'

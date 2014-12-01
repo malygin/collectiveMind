@@ -10,7 +10,11 @@ class GroupsController < ApplicationController
 
   # GET /groups/1
   def show
-    @users_to_add = @project.users - @group.all_group_users
+    if @project.type_access == 2
+      @users_to_add = @project.users_in_project - @group.all_group_users
+    else
+      @users_to_add = User.all - @group.all_group_users
+    end
   end
 
   # GET /groups/new
