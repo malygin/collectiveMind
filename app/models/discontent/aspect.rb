@@ -1,7 +1,7 @@
 class Discontent::Aspect < ActiveRecord::Base
   include BasePost
 
-  attr_accessible :short_desc, :status, :position
+  attr_accessible :short_desc, :status, :position, :discontent_aspect_id
   has_many :posts
   has_many :discontent_posts, class_name: 'Discontent::Post'
   scope :positive_posts, -> { joins(:discontent_posts).where('discontent_posts.style = ?', 0) }
@@ -21,12 +21,16 @@ class Discontent::Aspect < ActiveRecord::Base
   has_many :voted_users, through: :final_votings, source: :user
   has_many :final_votings, foreign_key: 'discontent_aspect_id', class_name: 'LifeTape::Voiting'
 
+  has_many :discontent_aspects, class_name: 'Discontent::Aspect', foreign_key: 'discontent_aspect_id'
+  belongs_to :discontent_aspect, class_name: 'Discontent::Aspect', foreign_key: 'discontent_aspect_id'
+
   has_and_belongs_to_many :life_tape_posts, class_name: 'LifeTape::Post', join_table: 'discontent_aspects_life_tape_posts',
                           foreign_key: 'discontent_aspect_id', association_foreign_key: 'life_tape_post_id'
 
   scope :by_project, ->(project_id) { where("discontent_aspects.project_id = ?", project_id) }
   scope :minus_view, ->(aspects) { where("discontent_aspects.id NOT IN (#{aspects.join(", ")})") unless aspects.empty? }
   scope :by_discussions, ->(aspects) { where("discontent_aspects.id NOT IN (#{aspects.join(", ")})") unless aspects.empty? }
+  scope :main_aspects, -> { where(discontent_aspects: { discontent_aspect_id: nil }) }
 
   scope :vote_top, ->(revers) {
         if revers == "0"

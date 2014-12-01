@@ -144,6 +144,12 @@ input.parsley-error{
         font-size: inherit;
       }
     }
+//     for child discontent aspects
+    li.active a{
+      border-left: 4px solid $white;
+      background: $sidebarActiveColor;
+      color: $text-color;
+    }
 
     .panel-collapse{ //third level
       .panel-collapse > li a{ //fourth level

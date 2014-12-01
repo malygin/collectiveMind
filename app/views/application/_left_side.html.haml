@@ -7,15 +7,21 @@
   %li
     %a
       %h4=t('menu.list_aspects')
+
   -@project.current_aspects(current_stage).each do |asp|
-    %li{class:"#{'active' if asp == @aspect}"}
-      = link_to link_for_aspects(asp, current_stage) do
-        &nbsp;
-        =" #{asp.content}"
+    = render partial: 'aspect', object: asp, locals: {current_stage: current_stage}
+    - if asp.discontent_aspects.present?
+      %ul.panel-collapse
+        - asp.discontent_aspects.each do |asp1|
+          = render partial: 'aspect', object: asp1, locals: {current_stage: current_stage}
+          - if asp1.discontent_aspects.present?
+            %ul.panel-collapse
+              - asp1.discontent_aspects.each do |asp2|
+                = render partial: 'aspect', object: asp2, locals: {current_stage: current_stage}
+
   %li{class:"#{'active' if params[:not_aspect]}"}
     = link_to "#{link_for_aspects(nil, current_stage)}" + "?not_aspect=true" do
       Без аспекта
-
 
   %li
     = link_to "/project/#{@project.id}/#{current_stage == 'essay/posts' ? stage_for_essay(params[:stage].to_i) : current_stage}/to_work", class: 'text-towork', id: 'go_to_work' do
