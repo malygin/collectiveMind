@@ -56,11 +56,7 @@
     $('input#new-message').val('')
 
   if $('.group-chat#chat').length > 0 && $('.id_group').length > 0
-    ws = new WebSocketRails(document.location.host + '/websocket')
-    ws.on_open = ->
-      console.log 'socket opened'
-    ws.on_failure = ->
-      console.log 'socket open error'
+    ws = Websockets.connection()
 
     private_channel = ws.subscribe_private('group_chat')
     private_channel.on_success = ->

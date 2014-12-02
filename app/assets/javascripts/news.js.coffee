@@ -1,10 +1,6 @@
-$(document).ready ->
+@notificate_news = ->
   if document.location.pathname.match('general_news')
-    ws = new WebSocketRails(document.location.host + '/websocket')
-    ws.on_open = ->
-      console.log 'socket opened'
-    ws.on_failure = ->
-      console.log 'socket open error'
+    ws = Websockets.connection()
 
     private_channel = ws.subscribe_private('news')
     private_channel.on_success = ->

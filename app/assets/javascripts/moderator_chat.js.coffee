@@ -1,10 +1,6 @@
 @create_moderator_chat = ->
   if $('#moderator_chat_div').length > 0
-    ws = new WebSocketRails(document.location.host + '/websocket')
-    ws.on_open = ->
-      console.log 'socket opened'
-    ws.on_failure = ->
-      console.log 'socket open error'
+    ws = Websockets.connection()
 
     private_channel = ws.subscribe_private('moderator_chat')
     private_channel.on_success = ->

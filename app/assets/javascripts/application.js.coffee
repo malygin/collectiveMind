@@ -28,6 +28,7 @@
 
 #= require tinymce
 #= require websocket_rails/main
+#= require websockets
 #= require messenger/messenger.min
 #= require select2
 #= require wizard/jquery.bootstrap.wizard
@@ -42,8 +43,6 @@
 
 # @todo load initialization
 sidebarHeight = 0;
-
-editable_groups()
 
 @exampleData = ->
   project_id = $('#nvd3_project').attr("data-project")
@@ -61,9 +60,12 @@ editable_groups()
 
 
 $ ->
+  notificate_news()
   notificate_my_journals()
+  notifications()
   create_moderator_chat()
   create_group_chat()
+  editable_groups()
 
   $(".image-popup-vertical-fit").magnificPopup
     type: "image"

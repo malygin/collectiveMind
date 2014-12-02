@@ -1,4 +1,3 @@
-
 @notificate_my_journals = ->
   if $("#set_notification_message").length > 0
     Messenger.options =
@@ -17,13 +16,9 @@
 
   return
 
-$(document).ready ->
+@notifications = ->
   if document.location.pathname.match('project')
-    ws = new WebSocketRails(document.location.host + '/websocket')
-    ws.on_open = ->
-      console.log 'socket opened'
-    ws.on_failure = ->
-      console.log 'socket open error'
+    ws = Websockets.connection()
 
     private_channel = ws.subscribe_private('notifications')
     private_channel.on_success = ->
