@@ -3,12 +3,12 @@
     e.preventDefault()
     modal_form = $('#createTask').clone().attr('id', 'editTask')
     $(modal_form).find('#createTaskLabel').text('Редактирование задачи')
-    id_task = $(this).parent().attr('id').replace(/^\D+/g, '')
+    id_task = $(this).attr('id').replace(/^\D+/g, '')
     form = $(modal_form).find('form')
     form.attr('action', form.attr('action').replace('group_tasks', 'group_tasks/' + id_task))
-    form.find('div:hidden').append('<input name="_method" type="hidden" value="patch">')
-    form.find('#group_task_name').val($(this).parent().find('.name').text().trim())
-    form.find('#group_task_description').text($(this).parent().find('.description').text().trim())
+    form.find('div:hidden:first').append('<input name="_method" type="hidden" value="patch">')
+    form.find('#group_task_name').val($("#task_name_" + id_task).text().trim())
+    form.find('#group_task_description').text($("#task_description_" + id_task).text().trim())
     $(modal_form).modal('show')
 
   this.assign_user = (e)->
