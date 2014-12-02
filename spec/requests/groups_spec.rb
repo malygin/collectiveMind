@@ -162,6 +162,8 @@ describe 'Groups' do
     context 'show page', js: true do
       before do
         create :group_user, group: group, user: moderator, invite_accepted: true
+        project.type_access = 2
+        project.save
         create :core_project_user, core_project: project, user: user2
         visit group_path(project, group)
       end
@@ -184,7 +186,7 @@ describe 'Groups' do
           click_link "invite_user_#{user2.id}"
         end
 
-        xit 'no info about invited user' do
+        it 'no info about invited user' do
           within :css, 'div#inviteUser' do
             expect(page).not_to have_content user.to_s
           end
@@ -287,7 +289,7 @@ describe 'Groups' do
         end
       end
 
-      xit 'edit' do
+      it 'edit' do
         new_name = 'New cool name'
         new_description = 'New cool description'
         expect {

@@ -5,9 +5,9 @@
     = link_to group_task_path(@project, group_task), remote: true, method: :delete, data: {confirm: t('confirm.delete_group_task')}, id: "remove_task_#{group_task.id}" do
       %button.btn.btn-xs.btn-danger{type: 'button'}
         %i.fa.fa-trash-o
-  .name
+  .name{id: "task_name_#{group_task.id}"}
     = group_task.name
-  %small.description
+  %small.description{id: "task_description_#{group_task.id}"}
     = group_task.description
   %br
   %span.color-green Ответственные:
