@@ -21,7 +21,7 @@
                             </div>
                             <div class="col-md-4">
                               <div class="pull-right">
-                                <button class="btn btn-warning desc_to_res" title="Добавить описание" type="button">
+                                <button class="btn btn-info desc_to_res" title="Добавить описание" type="button">
                                   <i class="fa fa-edit"></i>
                                 </button>
                                 <button class="btn btn-success plus_mean" title="Добавить средство" type="button">
@@ -54,7 +54,7 @@
                             </div>
                             <div class="col-md-4">
                                 <div class="pull-right">
-                                    <button class="btn btn-warning desc_to_res" title="Добавить описание" type="button">
+                                    <button class="btn btn-info desc_to_res" title="Добавить описание" type="button">
                                       <i class="fa fa-edit"></i>
                                     </button>
                                     <button class="btn btn-danger destroy_res" title="Удалить ресурс" type="button">
