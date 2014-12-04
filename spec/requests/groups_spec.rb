@@ -348,6 +348,14 @@ describe 'Groups' do
       end
     end
 
-    context 'chat'
+    context 'chat', js: true do
+      xit 'attach file' do
+        visit group_path(project, group)
+        expect {
+          attach_file('file', "#{Rails.root}/spec/support/images/1.jpg")
+        }.to change(GroupChatMessage, :count).by(1)
+        Cloudinary::Api.delete_resources(GroupChatMessage::GROUP_FOLDER + '/' + page.first('a.image-popup-vertical-fit img')['alt'].downcase)
+      end
+    end
   end
 end
