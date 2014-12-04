@@ -72,6 +72,7 @@ scope '/project/:project' do
 
   #get '/help/posts/0', to: 'help/posts#new_help_0'
   resources :groups do
+    put :upload_file
     put :become_member
     put :leave
     put 'invite_user/:user_id', action: 'invite_user'

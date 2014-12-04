@@ -1,0 +1,5 @@
+- if file['resource_type'] == 'raw'
+  = link_to 'Скачать приложенный файл', file['url']
+- else
+  = link_to file['url'], class: 'image-popup-vertical-fit' do
+    = cl_image_tag(file['public_id'], width: 150, height: 150, crop: :fill)

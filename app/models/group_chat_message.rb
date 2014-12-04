@@ -5,6 +5,7 @@ class GroupChatMessage < ActiveRecord::Base
   belongs_to :group
 
   COUNT_LAST_MESSAGES = 15
+  GROUP_FOLDER = 'group_files'
   scope :recent, -> { last(COUNT_LAST_MESSAGES).reverse }
 
   def time
