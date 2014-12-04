@@ -21,6 +21,11 @@
 
   $('.group-tasks').on('click', 'button.edit-task', this.edit_task)
   $('.group-tasks').on('click', 'button.assign-user', this.assign_user)
+  input_file = $('form#group_send_file input#file')
+  $('form#group_send_file').bind 'ajax:complete', ->
+    input_file.replaceWith(input_file = input_file.clone(true));
+  input_file.change ->
+    $('form#group_send_file').submit()
   return
 
 @create_group_chat = ->
@@ -34,7 +39,7 @@
     $(message).find('.sender .icon').append("<img src=" + data['avatar'] + '>')
     $(message).find('.sender .time').text(data['time'])
     $(message).find('.chat-message-body .sender').text(data['user'])
-    $(message).find('.chat-message-body .text').text(data['text'])
+    $(message).find('.chat-message-body .text').append($.parseHTML(data['text'])[0])
     lastSeenTime = new Date($('.last_seen_chat_at').text().trim())
     time = new Date(data['created_at'])
     if time > lastSeenTime && $('.current_user_name').text().trim() != data['user'].trim()
