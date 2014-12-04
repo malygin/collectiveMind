@@ -41,6 +41,9 @@
 #= require moderator_chat
 #= require groups
 #= require history_jquery
+#= require plugins
+#= require comments
+#= require resources
 
 # @todo load initialization
 sidebarHeight = 0;
@@ -62,6 +65,7 @@ $ ->
   notificate_my_journals()
   sidebar_for_small_screen()
   activate_htmleditor()
+  activate_wizard()
   autocomplete_initialized()
   create_moderator_chat()
   create_group_chat()
