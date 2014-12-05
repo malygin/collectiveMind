@@ -1,7 +1,7 @@
 # encoding: utf-8
-shared_examples 'content with comments' do |project,user_data,moderator = false|
+shared_examples 'content with comments' do | moderator = false|
 
-  if moderator == true
+  if moderator
     it ' like comment', js: true do
       prepare_awards
       expect(page).to have_link("plus_comment_#{@comment1.id}", :text => 'Выдать баллы', :href => plus_comment_life_tape_post_path(project,@comment1))
@@ -13,6 +13,7 @@ shared_examples 'content with comments' do |project,user_data,moderator = false|
   end
 
   it 'view comments ' do
+    p project, user_data
     expect(page).to have_content @comment1.content
     expect(page).to have_selector '#new_aspect'
     expect(page).to have_selector 'textarea#comment_text_area'

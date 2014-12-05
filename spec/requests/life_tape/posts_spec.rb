@@ -45,7 +45,7 @@ describe 'Life Tape ' do
         visit life_tape_posts_path(project)
       end
 
-      it_behaves_like 'content with comments', project, user_data, moderator = false
+      it_behaves_like 'content with comments'
 
     end
 
@@ -111,7 +111,7 @@ describe 'Life Tape ' do
         expect(page).to have_content @aspect2.content
       end
 
-      it_behaves_like 'content with comments', project, user_data, moderator = true
+      it_behaves_like 'content with comments',  true
 
     end
     context 'vote life tape '  do
