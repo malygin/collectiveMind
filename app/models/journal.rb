@@ -1,6 +1,7 @@
 class Journal < ActiveRecord::Base
   include Renderable
   include Filterable
+  extend ApplicationHelper
 
   attr_accessible :body, :body2, :type_event, :user, :project, :user_informed, :viewed,
                   :event, :first_id, :second_id, :personal, :anonym
@@ -147,6 +148,27 @@ class Journal < ActiveRecord::Base
          "essay_comment_approve_status","my_essay_comment_approve_status"]
       when "by_like"
         ["my_add_score_discontent","my_add_score_discontent_improve","add_score_essay","add_score","add_score_anal","add_score_anal_concept_post","my_add_score_comment"]
+    end
+  end
+
+  def self.comment_event(current_user, project, name_of_comment_for_param, post, comment, comment_answer)
+    #@todo новости и информирование авторов
+    current_user.journals.build(type_event: name_of_comment_for_param+'_save', project: project,
+                                body: "#{trim_content(comment.content)}", body2: trim_content(field_for_journal(post)),
+                                first_id: (post.instance_of? LifeTape::Post) ? post.discontent_aspects.first.id : post.id, second_id: comment.id).save!
+
+    if post.user!=current_user
+      current_user.journals.build(type_event: 'my_'+name_of_comment_for_param, user_informed: post.user, project: project,
+                                  body: "#{trim_content(comment.content)}", body2: trim_content(field_for_journal(post)),
+                                  first_id: (post.instance_of? LifeTape::Post) ? post.discontent_aspects.first.id : post.id, second_id: comment.id,
+                                  personal: true, viewed: false).save!
+    end
+
+    if comment_answer and comment_answer.user!=current_user
+      current_user.journals.build(type_event: 'reply_'+name_of_comment_for_param, user_informed: comment_answer.user, project: project,
+                                  body: "#{trim_content(comment.content)}", body2: trim_content(comment_answer.content),
+                                  first_id: (post.instance_of? LifeTape::Post) ? post.discontent_aspects.first.id : post.id, second_id: comment.id,
+                                  personal: true, viewed: false).save!
     end
   end
 end

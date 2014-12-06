@@ -1,33 +1,32 @@
 %br
-.comments
-  .row
-    .col-md-12
-      = form_for comment, html: {class: 'new_or_edit',multipart: true }, remote: true,  url: url_link, method: :put do |f|
-        = render 'shared/notice_messages', object: f.object
-        =f.text_area :content, class: 'form-control input-transparent comment-textarea',  placeholder: t('form.comment_answer'), id:"comment_text_area"
-        .pull-left.hidden-xs
-          = f.file_field :image
 
-        .pull-right
-          %div(class="btn-group" data-toggle="buttons" id="change_comment_stat")
-            %label(class="btn btn-sm btn-default" onclick="color_button(this);")
-              = f.check_box :discontent_status
-              =t('show.problem')
-            %label(class="btn btn-sm btn-default" onclick="color_button(this);")
-              = f.check_box :concept_status
-              =t('show.idea')
-            - if advices_for_stage?(@project, @post.class.name.underscore.pluralize)
-              %label#label_advice_status(class="btn btn-sm btn-default" onclick="color_button(this);")
-                = check_box_tag :advise_status
-                = t('show.advice')
-          -if @main_comment_answer
-            %button.btn.btn-danger.btn-sm(type="button" onclick="reset_child_comment_form(#{@main_comment_answer.id}); return false;" )=t('form.cancel')
-          -elsif @main_comment
-            %button.btn.btn-danger.btn-sm(type="button" onclick="reset_main_comment_form(#{@main_comment.id}); return false;" )=t('form.cancel')
+.row
+  .col-md-12
+    = form_for comment, html: {multipart: true, id: 'comment_form', class:'form-new-comment' }, remote: true,  url: url_link, method: :put do |f|
+      = render 'shared/notice_messages', object: f.object
+      =f.text_area :content, class: 'form-control input-transparent comment-textarea',  placeholder: t('form.comment_answer'), id:"comment_text_area"
+      .pull-left.hidden-xs
+        = f.file_field :image
 
-          =f.submit t('form.send'), id: "send_post", class: 'btn btn-sm btn-info'
+      .pull-right
+        %div(class="btn-group" data-toggle="buttons" id="change_comment_stat")
+          %label(class="btn btn-sm btn-default comment-problem" )
+            = f.check_box :discontent_status
+            =t('show.problem')
+          %label(class="btn btn-sm btn-default comment-idea" )
+            = f.check_box :concept_status
+            =t('show.idea')
 
-      .text-success#comment_success(style='display:none;')
-        =t('form.comment_success')
-      .text-success#advice_success_created(style='display:none;')
-        = t('discontent.advice_success_created')
+          - if advices_for_stage?(@project, @post.class.name.underscore.pluralize)
+            %label#label_advice_status(class="btn btn-sm btn-default" onclick="color_button(this);")
+              = check_box_tag :advise_status
+              = t('show.advice')
+
+        -if @main_comment
+          %button.btn.btn-danger.btn-sm(type="button" onclick="reset_child_comment_form(#{@main_comment.id}); return false;" )=t('form.cancel')
+        =f.submit t('form.send'), class: 'btn btn-sm btn-info disabled send-comment', id: 'send_comment'
+
+    .text-success#comment_success(style='display:none;')
+      =t('form.comment_success')
+    .text-success#advice_success_created(style='display:none;')
+      = t('discontent.advice_success_created')

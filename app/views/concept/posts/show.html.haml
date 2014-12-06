@@ -87,8 +87,8 @@
                 -if boss? and @project.status == 7
                   =link_to({controller:'concept/posts', action: :status_post, id:@post.id, type_field:1},remote:true,method: :put, id:"label_post_#{@post.id}",class:"note_text") do
                     %span(class= "#{class_for_concept_type_field(@post,1)}" id="#{id_for_concept_type(1)}")=t('form.concept.novation_what')
-                    =link_to({controller:'concept/posts', action: :new_note, id:@post.id, type_field:1},remote:true,method: :put, id:"btn_note_1", class:"note_text") do
-                      .label.label-danger=t('show.note')
+                  =link_to({controller:'concept/posts', action: :new_note, id:@post.id, type_field:1},remote:true,method: :put, id:"btn_note_1", class:"note_text") do
+                    .label.label-danger=t('show.note')
                 -else
                   %span(class= "#{class_for_concept_type_field(@post,1)}" id="name")=t('form.concept.novation_what')
               -if @project.status == 7

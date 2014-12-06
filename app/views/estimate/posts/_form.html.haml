@@ -144,7 +144,7 @@
 
 
             .col-md-8
-              = form_for @post, url: {project: @project.id, action: @post.persisted? ? 'update' : 'create'},   html: { class: 'new_or_edit' } do |f|
+              = form_for @post, url: {project: @project.id, action: @post.persisted? ? 'update' : 'create'},   html: { class: 'new_or_edit form-new-estimate' } do |f|
                 %br
                 .pull-right
                   =f.submit t('form.save'), id: "send_post_estimate", class: 'btn btn-success'

@@ -76,7 +76,7 @@ describe 'Advices' do
         text_advice = 'Очень хороший совет'
         fill_in 'comment_text_area', with: text_advice
         find(:css, 'label#label_advice_status').click
-        click_button 'send_post'
+        click_button 'send_comment'
         expect(page).to have_content I18n.t('discontent.advice_success_created')
         expect(page).to have_content text_advice
       end

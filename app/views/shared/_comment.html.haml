@@ -25,17 +25,16 @@
 
     .text
       %div{id: "comment_text_#{comment.id}"}
-        =simple_format(comment.content)
+        =comment.content
         - if comment.image
           - if comment.isFile
-
             = link_to  'скачать приложенный файл' , "http://res.cloudinary.com/hs2pm8fbp/raw/upload/#{comment.image}"
           -else
             = link_to "http://res.cloudinary.com/hs2pm8fbp/image/upload/#{comment.image}",  class: 'image-popup-vertical-fit' do
               =cl_image_tag(comment.image, :width => 150, :height => 150, :crop => :fill)
       - if current_user?(comment.user) or boss?
-        %div.redactor{id: "redactor_comment_#{comment.id}"}
-          =link_to t('link.edit'), {:action => :edit_comment, :id => comment.id},:remote => true, :class=> 'btn btn-info btn-xs', id: "edit_comment_#{comment.id}"
+        %div{id: "redactor_comment_#{comment.id}"}
+          %button.edit-comment.btn.btn-info.btn-xs{ data:{ project: @project.id, id: comment.id, path: comment.post.class.name.underscore.pluralize},  id: "edit_comment_#{comment.id}"}= t('link.edit')
           \|
           = link_to t('link.remove'), {:action => :destroy_comment, :id => comment.id}, :method => :put, :remote => true, :confirm => t('confirm.delete_comment'), :class => 'btn btn-danger btn-xs', id: "destroy_comment_#{comment.id}"
 
@@ -46,9 +45,12 @@
 
       .pull-right
         -if comment.main_comment?
-          =link_to t('show.answer'), {:action => :add_child_comment_form, :id => comment.post.id, :comment_id => comment.id },  :remote => true, :method => :put,  id: "add_child_comment_#{comment.id}", class: 'btn btn-success btn-xs'
+          %button.reply-comment.btn.btn-success.btn-xs{data:{ project: @project.id, id: comment.id, path: comment.post.class.name.underscore.pluralize}, id: "reply_comment_#{comment.id}" }=t('show.answer')
+          -#=link_to t('show.answer'), {:action => :add_child_comment_form, :id => comment.post.id, :comment_id => comment.id },  :remote => true, :method => :put,  id: "add_child_comment_#{comment.id}", class: 'btn btn-success btn-xs'
         -else
-          =link_to t('show.answer'), {:action => :add_child_comment_form, :id => comment.comment.post.id, :comment_id => comment.comment.id,:answer_id => comment.id}, :remote => true, :method => :put,  id: "add_child_comment_#{comment.id}", class: 'btn btn-success btn-xs'
+          %button.reply-comment.btn.btn-success.btn-xs{data:{ project: @project.id, id: comment.id, path: comment.post.class.name.underscore.pluralize}, id: "reply_comment_#{comment.id}" }=t('show.answer')
+
+          -#=link_to t('show.answer'), {:action => :add_child_comment_form, :id => comment.comment.post.id, :comment_id => comment.comment.id,:answer_id => comment.id}, :remote => true, :method => :put,  id: "add_child_comment_#{comment.id}", class: 'btn btn-success btn-xs'
 
         - if boss?
           =link_to({action: :plus_comment, id: comment.id}, remote: true, method: :put,  id: "plus_comment_#{comment.id}") do
@@ -59,14 +61,17 @@
       .time.pull-left
         =time_ago_in_words(comment.created_at)
       %br
-      -if comment.main_comment?
-        .col-md-12
-          %div{id: "main_comments_form_#{comment.id}"}
+.row
+  .col-md-11.col-md-offset-1
+    %form.form-new-comment( id = "form_reply_comment_#{comment.id}" accept-charset="UTF-8" action="/project/#{@project.id}/#{comment.post.class.name.underscore.pluralize}/#{comment.post.id}/add_comment?main_comment=#{comment.id}" data-remote="true" enctype="multipart/form-data"  method="post" )
+    %br
+    -if comment.main_comment?
+      %div{id: "child_comments_#{comment.id}"}
+        -unless comment.comments.empty?
           %br
-          %div{id: "child_comments_#{comment.id}"}
-            -unless comment.comments.empty?
-              - comment.comments.each do |c|
-                = render partial: 'shared/comment', object: c
-      -else
-        .col-md-12
-          %div{id: "child_comments_form_#{comment.id}"}
+          - comment.comments.each do |c|
+            = render partial: 'shared/comment', object: c
+
+
+    %div{id: "child_comments_form_#{comment.id}"}
+%br

@@ -1,5 +1,5 @@
 %h3.text-center=t('form.discontent.title')
-= form_for @post, url: {project: @project.id,improve_comment: params[:improve_comment], improve_stage: params[:improve_stage], required: params[:required], action: @post.persisted? ? 'update' : 'create'}, remote: true, html: {id: 'new_discontent'} do |f|
+= form_for @post, url: {project: @project.id,improve_comment: params[:improve_comment], improve_stage: params[:improve_stage], required: params[:required], action: @post.persisted? ? 'update' : 'create'}, remote: true, html: {id: 'new_discontent',class:'form-new-post'} do |f|
   #notice_messages
 
   .row
@@ -32,7 +32,7 @@
           Отсутствие меда
     .col-md-6
       .form-group
-        = f.text_area :content, class: 'form-control', rows: 5, placeholder: t('form.discontent.field_what_promt'), onkeyup: 'activate_button(this);'
+        = f.text_area :content, class: 'form-control post-textarea', rows: 5, placeholder: t('form.discontent.field_what_promt')
   .row
     .col-md-12
       .text-center
@@ -115,7 +115,7 @@
 
   %br
   %hr
-  %button.btn.btn-lg.btn-primary#send_post(type="submit" onclick="$(this).button('loading');discontent_form_submit();"){class: ('disabled' unless @post.content?), 'data-loading-text' => t('form.save_load')}=t('form.save')
+  %button.btn.btn-lg.btn-primary.send-post#send_post(type="submit" onclick="$(this).button('loading');"){class: ('disabled' unless @post.content?), 'data-loading-text' => t('form.save_load')}=t('form.save')
   %br
   %br
 
