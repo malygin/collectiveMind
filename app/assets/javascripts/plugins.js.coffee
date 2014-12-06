@@ -133,6 +133,7 @@ $.fn.extend popoverClosable: (options) ->
     $wizard.find(".progress-bar").css width: $percent + "%"
     #$('#option_for_wizard_tab').attr("data-tab","#{$current}")
     go_string = 'Перейти к описанию'
+    go_string2 = 'Перейти к добавлению'
     names_blocks = ['Идеи','Функционирования','Нежелательных побочных эффектов','Контроля','Целесообразности','Решаемых несовершенств']
     if $current >= $total
       $wizard.find(".pager .next").hide()
@@ -143,6 +144,7 @@ $.fn.extend popoverClosable: (options) ->
         $wizard.find(".pager .next .btn").html(go_string + " " + names_blocks[$current - 1] + " <i class=\"fa fa-caret-right\"></i>")
         $('#form_save').hide()
       else if $current in [2,3,4,5,6]
+        if $current == 6 then go_string = go_string2
         $wizard.find(".pager .previous").show()
         $wizard.find(".pager .next .btn").html(go_string + " " + names_blocks[$current - 1] + " <i class=\"fa fa-caret-right\"></i>")
         $('#form_save').show()

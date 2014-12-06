@@ -1,6 +1,5 @@
 # encoding: utf-8
-shared_examples 'content with comments' do | moderator = false|
-
+shared_examples 'content with comments' do | moderator = false, count = 1|
   if moderator
     it ' like comment', js: true do
       prepare_awards
@@ -15,7 +14,7 @@ shared_examples 'content with comments' do | moderator = false|
   it 'view comments ' do
     p project, user_data
     expect(page).to have_content @comment1.content
-    expect(page).to have_selector '#new_aspect'
+    expect(page).to have_selector '#new_aspect' if moderator
     expect(page).to have_selector 'textarea#comment_text_area'
     # expect(page).to have_link("plus_comment_#{@comment1.id}", :text => 'Выдать баллы', :href => plus_comment_life_tape_post_path(project,@comment1))
   end
@@ -25,7 +24,7 @@ shared_examples 'content with comments' do | moderator = false|
     expect {
       find('input.send-comment').click
       expect(page).to have_content 'new comment'
-    }.to change(Journal, :count).by(1)
+    }.to change(Journal, :count).by(count)
   end
 
   it 'add new comment in aspect with images ', js: true do

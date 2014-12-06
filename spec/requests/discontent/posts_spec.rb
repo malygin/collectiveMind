@@ -96,19 +96,18 @@ describe 'Discontent ' do
       it ' can add  comments ', js: true  do
         fill_in 'comment_text_area', with: 'dis comment 1'
         expect {
-          click_button 'send_post'
+          find('input.send-comment').click
           expect(page).to have_content 'dis comment 1'
         }.to change(Journal, :count).by(2)
       end
 
       it ' add new answer comment', js: true do
-        click_link "add_child_comment_#{@comment1.id}"
-        #fill_in 'comment_text_area', with: 'new comment'
-        #find('#comment_text_area').set('new child comment')
-        find("#main_comments_form_#{@comment1.id}").find('#comment_text_area').set "new child comment"
+        click_button "reply_comment_#{@comment1.id}"
+        find("#form_reply_comment_#{@comment1.id}").find('.comment-textarea').set "new child comment"
         expect {
-          find("#main_comments_form_#{@comment1.id}").find('#send_post').click
+          find("#form_reply_comment_#{@comment1.id}").find('.send-comment').click
           expect(page).to have_content 'new child comment'
+          sleep(5)
         }.to change(Journal.events_for_my_feed(project, user_data), :count).by(2)
       end
 
@@ -118,10 +117,11 @@ describe 'Discontent ' do
           visit discontent_post_path(project, @discontent1)
         end
         it ' add new answer to answer comment', js: true do
-          click_link "add_child_comment_#{@comment2.id}"
-          find("#child_comments_form_#{@comment2.id}").find('#comment_text_area').set "new child to answer comment"
+          click_button "reply_comment_#{@comment2.id}"
+          find("#form_reply_comment_#{@comment2.id}").find('.comment-textarea').set "new child to answer comment"
           expect {
-            find("#child_comments_form_#{@comment2.id}").find('#send_post').click
+            find("#form_reply_comment_#{@comment2.id}").find('.send-comment').click
+            sleep(5)
             expect(page).to have_content "new child to answer comment"
           }.to change(Journal.events_for_my_feed(project, user_data), :count).by(2)
         end
@@ -203,16 +203,17 @@ describe 'Discontent ' do
       it ' can add comments ', js: true  do
         fill_in 'comment_text_area', with: 'dis comment 1'
         expect {
-          click_button 'send_post'
+          find('input.send-comment').click
           expect(page).to have_content 'dis comment 1'
         }.to change(Journal, :count).by(2)
       end
 
       it ' add new answer comment', js: true do
-        click_link "add_child_comment_#{@comment1.id}"
-        find("#main_comments_form_#{@comment1.id}").find('#comment_text_area').set "new child comment"
+        click_button "reply_comment_#{@comment1.id}"
+        find("#form_reply_comment_#{@comment1.id}").find('.comment-textarea').set "new child comment"
         expect {
-          find("#main_comments_form_#{@comment1.id}").find('#send_post').click
+          find("#form_reply_comment_#{@comment1.id}").find('.send-comment').click
+          sleep(5)
           expect(page).to have_content 'new child comment'
         }.to change(Journal.events_for_my_feed(project, user_data), :count).by(2)
       end
@@ -223,10 +224,11 @@ describe 'Discontent ' do
           visit discontent_post_path(project, @discontent1)
         end
         it ' add new answer to answer comment', js: true do
-          click_link "add_child_comment_#{@comment2.id}"
-          find("#child_comments_form_#{@comment2.id}").find('#comment_text_area').set "new child to answer comment"
+          click_button "reply_comment_#{@comment2.id}"
+          find("#form_reply_comment_#{@comment2.id}").find('.comment-textarea').set "new child to answer comment"
           expect {
-            find("#child_comments_form_#{@comment2.id}").find('#send_post').click
+            find("#form_reply_comment_#{@comment2.id}").find('.send-comment').click
+            sleep(5)
             expect(page).to have_content "new child to answer comment"
           }.to change(Journal.events_for_my_feed(project, user_data), :count).by(2)
         end

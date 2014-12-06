@@ -146,22 +146,22 @@ describe 'Concept ' do
         find(:css, "#main_positive_r_1 input.autocomplete[name='resor[][name]']").set('main positive_r_1')
         #show desc resourse
         expect(page).to have_selector('#desc_positive_r_1', visible: false)
-        first(:css, "#main_positive_r_1 button[id='desc_to_res']").click
+        first(:css, "#main_positive_r_1 button[class~='desc_to_res']").click
         expect(page).to have_selector('#desc_positive_r_1', visible: true)
         first(:css, "#main_positive_r_1 textarea[name='resor[][desc]']").set('desc positive_r_1')
 
         find(:css, "#main_positive_s_1 input.autocomplete[name='resor[][means][][name]']").set('main positive_s_1 first')
         #show desc mean
         expect(page).to have_selector('#desc_positive_s_1', visible: false)
-        first(:css, "#main_positive_s_1 button[id='desc_to_res']").click
+        first(:css, "#main_positive_s_1 button[class~='desc_to_res']").click
         expect(page).to have_selector('#desc_positive_s_1', visible: true)
         first(:css, "#main_positive_s_1 textarea[name='resor[][means][][desc]']").set('desc positive_s_1 first')
 
         #plus mean
-        first(:css, "#main_positive_r_1 button[id='plus_mean']").click
+        first(:css, "#main_positive_r_1 button[class~='plus_mean']").click
         expect(page).to have_selector '#main_positive_s_1', count: 2
         find(:xpath, "//div[@id=\"main_positive_s_1\"][2]//input[@name=\"resor[][means][][name]\"]").set('main positive_s_1 second')
-        find(:xpath, "//div[@id=\"main_positive_s_1\"][2]//button[@id=\"desc_to_res\"]").click
+        find(:xpath, "//div[@id=\"main_positive_s_1\"][2]//button[contains(@class,\"desc_to_res\")]").click
         find(:xpath, "//div[@id=\"main_positive_s_1\"][2]//textarea[@name=\"resor[][means][][desc]\"]").visible? == true
         find(:xpath, "//div[@id=\"main_positive_s_1\"][2]//textarea[@name=\"resor[][means][][desc]\"]").set('desc positive_s_1 second')
 
@@ -172,25 +172,25 @@ describe 'Concept ' do
         #show desc resourse
         find(:css, "#main_positive_r_2 input.autocomplete[name='resor[][name]']").set('main positive_r_2')
         expect(page).to have_selector('#desc_positive_r_2', visible: false)
-        first(:css, "#main_positive_r_2 button[id='desc_to_res']").click
+        first(:css, "#main_positive_r_2 button[class~='desc_to_res']").click
         expect(page).to have_selector('#desc_positive_r_2', visible: true)
         first(:css, "#main_positive_r_2 textarea[name='resor[][desc]']").set('desc positive_r_2')
         #plus mean
-        first(:css, "#main_positive_r_2 button[id='plus_mean']").click
+        first(:css, "#main_positive_r_2 button[class~='plus_mean']").click
         expect(page).to have_selector '#main_positive_s_2'
         find(:css, "#main_positive_s_2 input.autocomplete[name='resor[][means][][name]']").set('main positive_s_2')
-        first(:css, "#main_positive_s_2 button[id='desc_to_res']").click
+        first(:css, "#main_positive_s_2 button[class~='desc_to_res']").click
         expect(page).to have_selector('#desc_positive_s_2', visible: true)
         first(:css, "#main_positive_r_2 textarea[name='resor[][means][][desc]']").set('desc positive_s_2')
 
         #destroy element
         find("#add_positive_r").click
         expect(page).to have_selector '#main_positive_r_3'
-        first(:css, "#main_positive_r_3 button[id='plus_mean']").click
+        first(:css, "#main_positive_r_3 button[class~='plus_mean']").click
         expect(page).to have_selector '#main_positive_s_3'
-        first(:css, "#main_positive_s_3 button[id='destroy_res']").click
+        first(:css, "#main_positive_s_3 button[class~='destroy_res']").click
         expect(page).not_to have_selector '#main_positive_s_3'
-        first(:css, "#main_positive_r_3 button[id='destroy_res']").click
+        first(:css, "#main_positive_r_3 button[class~='destroy_res']").click
         expect(page).not_to have_selector '#main_positive_r_3'
 
         click_button 'Перейти к описанию Нежелательных побочных эффектов'
@@ -281,16 +281,17 @@ describe 'Concept ' do
       it ' can add comments ', js: true do
         fill_in 'comment_text_area', with: 'con comment 1'
         expect {
-          click_button 'send_post'
+          find('input.send-comment').click
           expect(page).to have_content 'con comment 1'
         }.to change(Journal, :count).by(2)
       end
 
       it ' add new answer comment', js: true do
-        click_link "add_child_comment_#{@comment1.id}"
-        find("#main_comments_form_#{@comment1.id}").find('#comment_text_area').set "new child comment"
+        click_button "reply_comment_#{@comment1.id}"
+        find("#form_reply_comment_#{@comment1.id}").find('.comment-textarea').set "new child comment"
         expect {
-          find("#main_comments_form_#{@comment1.id}").find('#send_post').click
+          find("#form_reply_comment_#{@comment1.id}").find('.send-comment').click
+          sleep(5)
           expect(page).to have_content 'new child comment'
         }.to change(Journal.events_for_my_feed(project, user_data), :count).by(2)
       end
@@ -301,10 +302,11 @@ describe 'Concept ' do
           visit concept_post_path(project, @concept1)
         end
         it ' add new answer to answer comment', js: true do
-          click_link "add_child_comment_#{@comment2.id}"
-          find("#child_comments_form_#{@comment2.id}").find('#comment_text_area').set "new child to answer comment"
+          click_button "reply_comment_#{@comment2.id}"
+          find("#form_reply_comment_#{@comment2.id}").find('.comment-textarea').set "new child to answer comment"
           expect {
-            find("#child_comments_form_#{@comment2.id}").find('#send_post').click
+            find("#form_reply_comment_#{@comment2.id}").find('.send-comment').click
+            sleep(5)
             expect(page).to have_content "new child to answer comment"
           }.to change(Journal.events_for_my_feed(project, user_data), :count).by(2)
         end
@@ -442,16 +444,17 @@ describe 'Concept ' do
       it ' can add comments ', js: true do
         fill_in 'comment_text_area', with: 'con comment 1'
         expect {
-          click_button 'send_post'
+          find('input.send-comment').click
           expect(page).to have_content 'con comment 1'
         }.to change(Journal, :count).by(2)
       end
 
       it ' add new answer comment', js: true do
-        click_link "add_child_comment_#{@comment1.id}"
-        find("#main_comments_form_#{@comment1.id}").find('#comment_text_area').set "new child comment"
+        click_button "reply_comment_#{@comment1.id}"
+        find("#form_reply_comment_#{@comment1.id}").find('.comment-textarea').set "new child comment"
         expect {
-          find("#main_comments_form_#{@comment1.id}").find('#send_post').click
+          find("#form_reply_comment_#{@comment1.id}").find('.send-comment').click
+          sleep(5)
           expect(page).to have_content 'new child comment'
         }.to change(Journal.events_for_my_feed(project, user_data), :count).by(2)
       end
@@ -462,10 +465,11 @@ describe 'Concept ' do
           visit concept_post_path(project, @concept1)
         end
         it ' add new answer to answer comment', js: true do
-          click_link "add_child_comment_#{@comment2.id}"
-          find("#child_comments_form_#{@comment2.id}").find('#comment_text_area').set "new child to answer comment"
+          click_button "reply_comment_#{@comment2.id}"
+          find("#form_reply_comment_#{@comment2.id}").find('.comment-textarea').set "new child to answer comment"
           expect {
-            find("#child_comments_form_#{@comment2.id}").find('#send_post').click
+            find("#form_reply_comment_#{@comment2.id}").find('.send-comment').click
+            sleep(5)
             expect(page).to have_content "new child to answer comment"
           }.to change(Journal.events_for_my_feed(project, user_data), :count).by(2)
         end

@@ -17,7 +17,7 @@
             .row
               .col-md-12
                 .form-group
-                  = f.text_area :content, class: 'form-control', rows: 5, placeholder: t('form.discontent.field_what_promt'), onkeyup: 'activate_button(this);'
+                  = f.text_area :content, class: 'form-control post-textarea', rows: 5, placeholder: t('form.discontent.field_what_promt')
 
             .row
               .col-md-12
@@ -85,5 +85,5 @@
                     %span.label.label-success=t('form.discontent.style_positive')
 
             %br
-            %button#send_post.btn.btn-primary.pull-right(type="submit" onclick='disontent_form_submit();'){class: ('disabled' unless @post_group.content?)}=t('form.save')
+            %button#send_post.btn.btn-primary.pull-right.send-post(type="submit"){class: ('disabled' unless @post_group.content?)}=t('form.save')
       .modal-footer

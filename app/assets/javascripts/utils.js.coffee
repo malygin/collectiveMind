@@ -19,6 +19,19 @@
   $('.plan_tabs').on('click', 'ul#PlanTabsShow li#third a', render_concept_side())
 
 
+@post_form = ->
+  this.activate_button = ->
+    form = $(this).closest('form');
+    sendButton = form.find('.send-post')
+    if (this.value? and this.value.length > 1)
+      sendButton.removeClass('disabled')
+    else
+      sendButton.addClass('disabled')
+
+  $('.form-new-post').on('keyup', 'textarea.post-textarea', this.activate_button)
+  $('#form_for_group_discontent').on('keyup', 'textarea.post-textarea', this.activate_button)
+
+
 @estimate_stage = ->
   $("select.estimate_select").each ->
     switch $(this).val()

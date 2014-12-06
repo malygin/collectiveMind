@@ -2,7 +2,7 @@
   project = $("#option_for_project").attr('data-project')
 
   this.desc_show = ->
-    $(this).closest('.main_res').find('.desc_resource').show()
+    $(this).closest('.main_res').find('.desc_resource:first').show()
   this.res_delete = ->
     $(this).closest('.main_res').remove()
 

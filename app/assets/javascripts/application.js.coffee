@@ -62,6 +62,8 @@ $ ->
 
   resources()
 
+  post_form()
+
   notificate_my_journals()
   sidebar_for_small_screen()
   activate_htmleditor()
@@ -103,8 +105,8 @@ $ ->
       $sidebar.addClass('nav-collapse')
       $(".content").css "margin-top", ""
 
-  $('textarea.comment-textarea').on 'keyup', ->
-    activate_button(this)
+#  $('textarea.comment-textarea').on 'keyup', ->
+#    activate_button(this)
 
   if ($(window).width() > 1030)
     $('ul.panel-collapse.collapse').removeClass('collapse').addClass('open in')
