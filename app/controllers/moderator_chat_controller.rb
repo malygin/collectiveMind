@@ -39,12 +39,4 @@ class ModeratorChatController < WebsocketRails::BaseController
 
   def user_disconnected
   end
-
-  def authorize_channels
-    if current_user.admin?
-      accept_channel
-    else
-      deny_channel
-    end
-  end
 end

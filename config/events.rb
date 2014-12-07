@@ -1,6 +1,5 @@
 WebsocketRails::EventMap.describe do
   namespace :websocket_rails do
-    subscribe :subscribe_private, to: ModeratorChatController, with_method: :authorize_channels
     subscribe :subscribe_private, to: AuthWebsocketController, with_method: :authorize_channels
   end
 
