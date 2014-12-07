@@ -72,7 +72,7 @@ describe 'Plan ' do
       it ' can add comments ', js: true do
         # screenshot_and_open_image
         fill_in 'comment_text_area', with: 'plan comment 1'
-        click_button 'send_post'
+        click_button 'send_comment'
         expect(page).to have_content 'plan comment 1'
       end
 
@@ -232,7 +232,7 @@ describe 'Plan ' do
       it ' can add comments ', js: true do
         # screenshot_and_open_image
         fill_in 'comment_text_area', with: 'plan comment 1'
-        click_button 'send_post'
+        find('input.send-comment').click
         expect(page).to have_content 'plan comment 1'
       end
 

@@ -100,17 +100,7 @@ class PostsController < ApplicationController
     end
   end
 
-  def add_child_comment_form
-    @project = Core::Project.find(params[:project])
-    @post = current_model.find(params[:id])
-    @main_comment = comment_model.find(params[:comment_id])
-    @main_comment_answer = comment_model.find(params[:answer_id]) unless params[:answer_id].nil?
-    @comment = comment_model.new
-    @url_link = url_for(controller: @post.class.name.underscore.pluralize, action: 'add_comment', main_comment: @main_comment.id, answer_id: @main_comment_answer ? @main_comment_answer.id : nil)
-    respond_to do |format|
-      format.js
-    end
-  end
+  
 
   def comment_status
     @project = Core::Project.find(params[:project])
@@ -304,11 +294,6 @@ class PostsController < ApplicationController
   def plus
     @project= Core::Project.find(params[:project])
     @post = current_model.find(params[:id])
-    # if boss?
-    #   @post.toggle!(:useful)
-    #   @post.user.add_score(type: :plus_post, project: @project, post: @post, path: @post.class.name.underscore.pluralize)
-    #   Award.reward(user: @post.user, post: @post, project: @project, type: 'add')
-    # end
     if boss?
       @post.toggle!(:useful)
       if @post.useful
@@ -446,23 +431,23 @@ class PostsController < ApplicationController
     end
   end
 
-  def censored
-    if boss?
-      post = current_model.find(params[:post_id])
-      post.update_column(:censored, true)
-    end
-  end
+  # def censored
+  #   if boss?
+  #     post = current_model.find(params[:post_id])
+  #     post.update_column(:censored, true)
+  #   end
+  # end
+  #
+  # def censored_comment
+  #   if boss?
+  #     comment = comment_model.find(params[:id])
+  #     comment.update_column(:censored, true)
+  #   end
+  # end
 
-  def censored_comment
-    if boss?
-      comment = comment_model.find(params[:id])
-      comment.update_column(:censored, true)
-    end
-  end
-
-  def edit_comment
-    @comment = comment_model.find(params[:id])
-  end
+  # def edit_comment
+  #   @comment = comment_model.find(params[:id])
+  # end
 
   def update_comment
     @comment = comment_model.find(params[:id])
@@ -551,48 +536,23 @@ class PostsController < ApplicationController
   end
 
   def create_comment(post)
-    @main_comment = comment_model.find(params[:main_comment]) unless params[:main_comment].nil?
-    @main_comment_answer = comment_model.find(params[:answer_id]) unless params[:answer_id].nil?
-    content = params[name_of_comment_for_param][:content]
-    if params[name_of_comment_for_param][:image]
-      if  ['image/jpeg', 'image/png'].include? params[name_of_comment_for_param][:image].content_type
-        img = Cloudinary::Uploader.upload(params[name_of_comment_for_param][:image], folder: 'comments', crop: :limit, width: 800,
-                                          eager: [{crop: :fill, width: 150, height: 150}])
-        isFile = false
-      else
-        img = Cloudinary::Uploader.upload(params[name_of_comment_for_param][:image], folder: 'comments', resource_type: :raw)
-        isFile = true
-      end
+    if params[:main_comment]
+      @comment_answer = comment_model.find(params[:main_comment]) unless params[:main_comment].nil?
+      @comment_parent = @comment_answer.comment ?  @comment_answer.comment : @comment_answer
     end
-    unless params[name_of_comment_for_param][:content]==''
+    content = params[name_of_comment_for_param][:content]
+
+    if params[name_of_comment_for_param][:image]
+      img, isFile = Util::ImageLoader.load(params[name_of_comment_for_param])
+    end
+
+    unless content==''
       @comment = post.comments.create(content: content, image: img ? img['public_id'] : nil, isFile: img ? isFile : nil,
                                       user: current_user, discontent_status: params[name_of_comment_for_param][:discontent_status],
                                       concept_status: params[name_of_comment_for_param][:concept_status],
-                                      comment_id: @main_comment ? @main_comment.id : nil)
+                                      comment_id: @comment_parent ? @comment_parent.id : nil)
 
-      #@todo новости и информирование авторов
-      current_user.journals.build(type_event: name_of_comment_for_param+'_save', project: @project,
-                                  body: "#{trim_content(@comment.content)}", body2: trim_content(field_for_journal(post)),
-                                  first_id: (post.instance_of? LifeTape::Post) ? post.discontent_aspects.first.id : post.id, second_id: @comment.id).save!
-
-      if post.user and post.user!=current_user
-        current_user.journals.build(type_event: 'my_'+name_of_comment_for_param, user_informed: post.user, project: @project,
-                                    body: "#{trim_content(@comment.content)}", body2: trim_content(field_for_journal(post)),
-                                    first_id: (post.instance_of? LifeTape::Post) ? post.discontent_aspects.first.id : post.id, second_id: @comment.id,
-                                    personal: true, viewed: false).save!
-      end
-      if @main_comment_answer and @main_comment_answer.user!=current_user
-        current_user.journals.build(type_event: 'reply_'+name_of_comment_for_param, user_informed: @main_comment_answer.user, project: @project,
-                                    body: "#{trim_content(@comment.content)}", body2: trim_content(@main_comment_answer.content),
-                                    first_id: (post.instance_of? LifeTape::Post) ? post.discontent_aspects.first.id : post.id, second_id: @comment.id,
-                                    personal: true, viewed: false).save!
-
-      elsif @main_comment and @main_comment.user!=current_user
-        current_user.journals.build(type_event: 'reply_'+name_of_comment_for_param, user_informed: @main_comment.user, project: @project,
-                                    body: "#{trim_content(@comment.content)}", body2: trim_content(@main_comment.content),
-                                    first_id: (post.instance_of? LifeTape::Post) ? post.discontent_aspects.first.id : post.id, second_id: @comment.id,
-                                    personal: true, viewed: false).save!
-      end
+      Journal.comment_event(current_user, @project, name_of_comment_for_param, post, @comment, @comment_answer)
     end
     render template: 'posts/add_comment'
   end
