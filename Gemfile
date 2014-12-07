@@ -47,7 +47,7 @@ gem 'uglifier', '>= 2.1.1'
 gem 'compass'
 gem 'compass-rails'
 gem 'therubyracer', '>=0.11.4'
-gem 'websocket-rails'
+gem 'websocket-rails', git: 'https://github.com/samhane/websocket-rails.git'
 gem 'cloudinary'
 gem 'remotipart', '~> 1.2'
 
