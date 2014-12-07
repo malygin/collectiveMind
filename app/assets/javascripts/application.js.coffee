@@ -74,6 +74,7 @@ $ ->
   create_moderator_chat()
   create_group_chat()
   activate_add_aspects()
+  group_actions()
 
   $('.tooltips').tooltip()
   $("#sortable").sortable()
@@ -107,8 +108,8 @@ $ ->
       $sidebar.addClass('nav-collapse')
       $(".content").css "margin-top", ""
 
-#  $('textarea.comment-textarea').on 'keyup', ->
-#    activate_button(this)
+  #  $('textarea.comment-textarea').on 'keyup', ->
+  #    activate_button(this)
 
   if ($(window).width() > 1030)
     $('ul.panel-collapse.collapse').removeClass('collapse').addClass('open in')
@@ -123,4 +124,3 @@ $ ->
   ).on "changeDate", (e) ->
     $(this).datepicker "hide"
     return
-

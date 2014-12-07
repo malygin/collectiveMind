@@ -100,3 +100,18 @@
       railVisible: true
 
     ws.trigger 'groups_load_history', {group_id: $('.id_group').attr('id')}
+
+@group_actions = ->
+  if $('#edit_plan_post_model').length > 0
+    ws = Websockets.connection()
+    private_channel = ws.subscribe_private('group.actions')
+    private_channel.on_success = ->
+      console.log("Has joined the channel group actions")
+    private_channel.on_failure = ->
+      console.log("Authorization failed on group actions")
+    private_channel.bind 'already_editing', (data) ->
+      alert('already editing')
+    ws.trigger 'group.start_edit', {
+      model_name: 'Plan::Post',
+      id: $('#edit_plan_post_model').find('form').attr('id').replace(/^\D+/g, '')
+    }
