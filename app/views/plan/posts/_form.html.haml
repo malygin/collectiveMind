@@ -1,24 +1,26 @@
 %section
   .body
-    %ul.nav.nav-tabs.nav-justified{:role => "tablist" , :id => "PlanTabs"}
+    %ul.nav.nav-tabs.nav-justified{role: 'tablist' , id: 'PlanTabs'}
       %li.active#first
-        %a{"data-toggle" => "tab", :href => "#tab1", :role => "tab"}
+        %a{'data-toggle' => 'tab', href: '#tab1', role: 'tab'}
           %small 1.
-          %strong=t('form.plan.desc')
-      %li#second{:class => @post.persisted? ? nil:"disabled"}
-        -if @post.persisted?
+          %strong
+            = t('form.plan.desc')
+      %li#second{class: @post.persisted? ? nil:'disabled'}
+        - if @post.persisted?
           #option_for_render_tab(project="#{@project.id}" post="#{@post.id}")
-        %a{"data-toggle" => "tab", :href => "#tab2", :role => "tab"}
+        %a{'data-toggle' => 'tab', href: '#tab2', role: 'tab'}
           %small 2.
-          %strong=t('form.plan.actions')
+          %strong
+            = t('form.plan.actions')
         #spinner_tab2.loader.animated.handle(style="display:none;")
           %span.spinner
             %i.fa.fa-spinner.fa-spin
-
-      %li#third{:class => @post.persisted? ? nil:"disabled"}
-        %a{"data-toggle" => "tab", :href => "#tab3", :role => "tab"}
+      %li#third{class: @post.persisted? ? nil:'disabled'}
+        %a{'data-toggle' => 'tab', href: '#tab3', role: 'tab'}
           %small 3.
-          %strong=t('form.plan.concepts')
+          %strong
+            = t('form.plan.concepts')
         #spinner_tab3.loader.animated.handle(style="display:none;")
           %span.spinner
             %i.fa.fa-spinner.fa-spin
@@ -28,17 +30,18 @@
         .form-horizontal
           %fieldset
             .col-md-6#form_for_main_plan
-              = form_for  @post, :url => {:project => @project.id, :action => @post.persisted? ? 'update' : 'create'}, :remote => true, :html => { :class => 'new_or_edit' } do |f|
+              = form_for  @post, url: {project: @project.id, action: @post.persisted? ? 'update' : 'create'}, remote: true, html: { class: 'new_or_edit' } do |f|
                 %legend.section
                   =t('form.plan.desc')
                 .form-group(style="margin-left:0;")
-                  %label.color-green{:for => "name_plan"}=t('form.plan.name')
-                  =f.text_field :name, :type => "text", class: "form-control", id: "name_plan"
+                  %label.color-green{for: 'name_plan'}=t('form.plan.name')
+                  = f.text_field :name, type: 'text', class: 'form-control', id: 'name_plan'
                 .form-group(style="margin-left:0;")
-                  %label{:for => "goals"}
-                    %span.color-green=t('form.plan.short_desc')
+                  %label{for: 'goal'}
+                    %span.color-green
+                      = t('form.plan.short_desc')
                     %small
-                  =f.text_area :goal, rows: 8, style: 'width: 100%;', class: "form-control", id: "goals", placeholder: t('form.plan.goal_promt')
+                  = f.text_area :goal, rows: 8, style: 'width: 100%;', class: 'form-control', id: 'goals', placeholder: t('form.plan.goal_promt')
                   %span.help-block
                     ="1) #{t('form.plan.goal_promt_1')}"
                     %br
@@ -47,31 +50,32 @@
                     ="3) #{t('form.plan.goal_promt_3')}"
 
                 .form-group(style="margin-left:0;")
-                  %label.color-green{:for => "desc_plan"}=t('form.plan.study')
-                  =f.text_area :content, rows: 12, style: 'width: 100%;', class: "form-control", id: "desc_plan"
-                  %span.help-block=t('form.plan.desc_future')
+                  %label.color-green{for: 'desc_plan'}=t('form.plan.study')
+                  = f.text_area :content, rows: 12, style: 'width: 100%;', class: 'form-control', id: 'desc_plan'
+                  %span.help-block
+                    = t('form.plan.desc_future')
                 .color-green#plan_success(style='display:none;')
-                  =t('form.plan.update_success')
+                  = t('form.plan.update_success')
                 .form-group
-                  -if @post.persisted?
-                    %input.btn.btn-success.pull-right{:type => "submit", :id  => "send_plan_post", :value => t('form.save')}
-                  -else
-                    %input.btn.btn-success.pull-right{:type => "submit", :id  => "send_plan_post", :value => t('form.plan.save')}
+                  - if @post.persisted?
+                    %input.btn.btn-success.pull-right{type: 'submit', id: 'send_plan_post', value: t('form.save')}
+                  - else
+                    %input.btn.btn-success.pull-right{type: 'submit', id: 'send_plan_post', value: t('form.plan.save')}
             .col-md-6
               %legend.section
-                =t('form.plan.stages')
+                = t('form.plan.stages')
               #post_stages
                 %table.table.table-striped
                   %tbody#table_stage_list
-                    -if @post.persisted? and @post.post_stages.present?
-                      -@post.post_stages.each do |ps|
-                        = render :partial => 'post_stage', :object => ps
+                    - if @post.persisted? and @post.post_stages.present?
+                      - @post.post_stages.each do |ps|
+                        = render partial: 'post_stage', object: ps
 
               #modal_stage
               #add_new_stage
-                -if @post.persisted?
-                  =link_to new_stage_plan_post_path(@project, @post), :method => :put, :remote => true, :class => "btn btn-lg btn-success btn-block", :id => "btn_new_stage", :style => "font-weight: normal;" do
-                    =t('form.plan.stage.new')
+                - if @post.persisted?
+                  = link_to new_stage_plan_post_path(@project, @post), method: :put, remote: true, class: 'btn btn-lg btn-success btn-block', id: 'btn_new_stage', style: 'font-weight: normal;' do
+                    = t('form.plan.stage.new')
 
       #tab2.tab-pane.fade
         .form-horizontal

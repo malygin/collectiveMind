@@ -1,5 +1,3 @@
-# encoding: utf-8
-
 class Plan::PostsController < PostsController
 
   #autocomplete :concept_post, :resource, :class_name: 'Concept::Post' , :full: true
@@ -16,14 +14,14 @@ class Plan::PostsController < PostsController
     Plan::Note
   end
 
-  def voting_model  
+  def voting_model
     Plan::Post
   end
 
   def prepare_data
     @project = Core::Project.find(params[:project])
     @aspects = Discontent::Aspect.where(project_id: @project, status: 0)
-    @vote_all = Plan::Voting.where(plan_votings: {plan_post_id: @project.plan_post.pluck(:id) }).uniq_user.count if @project.status == 11
+    @vote_all = Plan::Voting.where(plan_votings: {plan_post_id: @project.plan_post.pluck(:id)}).uniq_user.count if @project.status == 11
   end
 
   def index
@@ -49,8 +47,8 @@ class Plan::PostsController < PostsController
     @plan_post.status = 0
     respond_to do |format|
       if @plan_post.save!
-        current_user.journals.build(type_event:'plan_post_save', body:trim_content(@plan_post.name), first_id:@plan_post.id, project: @project).save!
-        format.html { redirect_to   edit_plan_post_path(project: @project, id: @plan_post) }
+        current_user.journals.build(type_event: 'plan_post_save', body: trim_content(@plan_post.name), first_id: @plan_post.id, project: @project).save!
+        format.html { redirect_to edit_plan_post_path(project: @project, id: @plan_post) }
         format.js
       else
         format.html { render action: 'new' }
@@ -65,7 +63,7 @@ class Plan::PostsController < PostsController
     @plan_post.update_attributes(params[:plan_post])
     respond_to do |format|
       if @plan_post.save
-        current_user.journals.build(:type_event=>'plan_post_update',:body =>trim_content(@plan_post.name), :first_id=>@plan_post.id,   :project => @project).save!
+        current_user.journals.build(:type_event => 'plan_post_update', :body => trim_content(@plan_post.name), :first_id => @plan_post.id, :project => @project).save!
         format.html { redirect_to plan_post_path(project: @project, id: @plan_post) }
         format.js
       end
@@ -79,7 +77,7 @@ class Plan::PostsController < PostsController
 
     @aspects = Discontent::Aspect.where(project_id: @project, status: 0)
     @disposts = Discontent::Post.where(project_id: @project, status: 4).order(:id)
-    @new_ideas = Plan::PostAspect.joins("INNER JOIN plan_posts ON plan_posts.id = plan_post_aspects.plan_post_id").where("plan_posts.project_id = ? and plan_posts.id = ?",@project.id,@post.id).where(plan_post_aspects: {concept_post_aspect_id: nil, discontent_aspect_id: nil})
+    @new_ideas = Plan::PostAspect.joins("INNER JOIN plan_posts ON plan_posts.id = plan_post_aspects.plan_post_id").where("plan_posts.project_id = ? and plan_posts.id = ?", @project.id, @post.id).where(plan_post_aspects: {concept_post_aspect_id: nil, discontent_aspect_id: nil})
   end
 
   # @todo methods for stage
@@ -161,8 +159,8 @@ class Plan::PostsController < PostsController
     @post_action.save!
 
     unless params[:resor_action].nil?
-      params[:resor_action].each_with_index do |r,i|
-        @post_action.plan_post_resources.by_type('action_r').build(:name => r, :desc => params[:res_action][i], :project_id => @project.id, :style => 3).save  if r!=''
+      params[:resor_action].each_with_index do |r, i|
+        @post_action.plan_post_resources.by_type('action_r').build(:name => r, :desc => params[:res_action][i], :project_id => @project.id, :style => 3).save if r!=''
       end
     end
   end
@@ -176,8 +174,8 @@ class Plan::PostsController < PostsController
     @post_action.update_attributes(params[:plan_post_action])
     @post_action.plan_post_resources.by_type('action_r').destroy_all
     unless params[:resor_action].nil?
-      params[:resor_action].each_with_index do |r,i|
-        @post_action.plan_post_resources.by_type('action_r').build(:name => r, :desc => params[:res_action][i], :project_id => @project.id, :style => 3).save  if r!=''
+      params[:resor_action].each_with_index do |r, i|
+        @post_action.plan_post_resources.by_type('action_r').build(:name => r, :desc => params[:res_action][i], :project_id => @project.id, :style => 3).save if r!=''
       end
     end
     respond_to do |format|
@@ -221,7 +219,7 @@ class Plan::PostsController < PostsController
           @cond.problems = @concept.problems
           @cond.save!
 
-          @cond.duplicate_plan_post_resources(@project,@concept)
+          @cond.duplicate_plan_post_resources(@project, @concept)
         else
           @concept = Concept::PostAspect.find(params[:concept_id])
           @cond = Plan::PostAspect.new
@@ -239,13 +237,13 @@ class Plan::PostsController < PostsController
           @cond.concept_post_aspect = @concept
           @cond.save!
 
-          @cond.duplicate_concept_post_resources(@project,@concept.concept_post)
+          @cond.duplicate_concept_post_resources(@project, @concept.concept_post)
         end
       else
-          @cond = Plan::PostAspect.create(title: 'Новое нововведение')
-          @cond.plan_post = @post
-          @cond.plan_post_stage = @post_stage
-          @cond.save!
+        @cond = Plan::PostAspect.create(title: 'Новое нововведение')
+        @cond.plan_post = @post
+        @cond.plan_post_stage = @post_stage
+        @cond.save!
       end
     else
       if params[:new_concept]
@@ -370,7 +368,7 @@ class Plan::PostsController < PostsController
     @post_note = @post_aspect_note.plan_notes.build(params[name_of_note_for_param])
     @post_note.user = current_user
 
-    current_user.journals.build(:type_event=>'my_plan_note', :user_informed => @post.user, :project => @project,  :body=>trim_content(@post_note.content),:body2=> trim_content(@post.name),:first_id => @post.id, :second_id => @post_aspect_note.id,:personal => true,  :viewed=> false).save!
+    current_user.journals.build(:type_event => 'my_plan_note', :user_informed => @post.user, :project => @project, :body => trim_content(@post_note.content), :body2 => trim_content(@post.name), :first_id => @post.id, :second_id => @post_aspect_note.id, :personal => true, :viewed => false).save!
 
     respond_to do |format|
       if @post_note.save
@@ -387,42 +385,42 @@ class Plan::PostsController < PostsController
   end
 
   private
-    def create_plan_resources_on_type(project, post)
-      post.plan_post_resources.by_type(['positive_r','positive_s','negative_r','negative_s','control_r','control_s']).destroy_all
-      unless params[:resor].nil?
-        params[:resor].each do |r|
-          if r[:name]!=''
-            resource = post.plan_post_resources.build(:name => r[:name], :desc => r[:desc], :type_res => r[:type_res], :project_id => project.id, :style => 0)
-            unless r[:means].nil?
-              r[:means].each  do |m|
-                if m[:name]!=''
-                  mean = post.plan_post_resources.build(:name => m[:name], :desc => m[:desc], :type_res => m[:type_res], :project_id => project.id, :style => 1)
-                  mean.plan_post_resource = resource
-                end
+  def create_plan_resources_on_type(project, post)
+    post.plan_post_resources.by_type(['positive_r', 'positive_s', 'negative_r', 'negative_s', 'control_r', 'control_s']).destroy_all
+    unless params[:resor].nil?
+      params[:resor].each do |r|
+        if r[:name]!=''
+          resource = post.plan_post_resources.build(:name => r[:name], :desc => r[:desc], :type_res => r[:type_res], :project_id => project.id, :style => 0)
+          unless r[:means].nil?
+            r[:means].each do |m|
+              if m[:name]!=''
+                mean = post.plan_post_resources.build(:name => m[:name], :desc => m[:desc], :type_res => m[:type_res], :project_id => project.id, :style => 1)
+                mean.plan_post_resource = resource
               end
             end
           end
         end
       end
     end
+  end
 
-    # def create_plan_resources_on_type(project, post, type_r, type_s)
-    #   post.plan_post_resources.by_type(type_r).destroy_all
-    #   post.plan_post_resources.by_type(type_s).destroy_all
-    #   unless params[('resor_'+type_r).to_sym].nil?
-    #     params[('resor_'+type_r).to_sym].each_with_index do |r,i|
-    #       if r[1][0]!=''
-    #         resource = post.plan_post_resources.build(:name => r[1][0], :desc => params[('resor_'+type_r).to_sym] ? params[('resor_'+type_r).to_sym]["#{r[0]}"][0] : '', :type_res => type_r, :project_id => project.id, :style => 0)
-    #         if params[('resor_'+type_s).to_sym] and params[('resor_'+type_s).to_sym]["#{r[0]}"]
-    #           params[('resor_'+type_s).to_sym]["#{r[0]}"].each_with_index do |m,ii|
-    #             if m!=''
-    #               mean = post.plan_post_resources.build(:name => m, :desc => params[('resor_'+type_s).to_sym] ? params[('resor_'+type_s).to_sym]["#{r[0]}"][ii] : '',:type_res => type_s, :project_id => project.id, :style => 1)
-    #               mean.plan_post_resource = resource
-    #             end
-    #           end
-    #         end
-    #       end
-    #     end
-    #   end
-    # end
+  # def create_plan_resources_on_type(project, post, type_r, type_s)
+  #   post.plan_post_resources.by_type(type_r).destroy_all
+  #   post.plan_post_resources.by_type(type_s).destroy_all
+  #   unless params[('resor_'+type_r).to_sym].nil?
+  #     params[('resor_'+type_r).to_sym].each_with_index do |r,i|
+  #       if r[1][0]!=''
+  #         resource = post.plan_post_resources.build(:name => r[1][0], :desc => params[('resor_'+type_r).to_sym] ? params[('resor_'+type_r).to_sym]["#{r[0]}"][0] : '', :type_res => type_r, :project_id => project.id, :style => 0)
+  #         if params[('resor_'+type_s).to_sym] and params[('resor_'+type_s).to_sym]["#{r[0]}"]
+  #           params[('resor_'+type_s).to_sym]["#{r[0]}"].each_with_index do |m,ii|
+  #             if m!=''
+  #               mean = post.plan_post_resources.build(:name => m, :desc => params[('resor_'+type_s).to_sym] ? params[('resor_'+type_s).to_sym]["#{r[0]}"][ii] : '',:type_res => type_s, :project_id => project.id, :style => 1)
+  #               mean.plan_post_resource = resource
+  #             end
+  #           end
+  #         end
+  #       end
+  #     end
+  #   end
+  # end
 end
