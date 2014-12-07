@@ -20,8 +20,7 @@ WebsocketRails::EventMap.describe do
 
   namespace :group do
     private_channel :actions
-    subscribe :client_connected, :to => GroupActionsController, :with_method => :client_connected
-    subscribe :client_disconnected, :to => GroupActionsController, :with_method => :client_disconnected
     subscribe :start_edit, to: GroupActionsController, with_method: :start_edit
   end
+  subscribe :client_disconnected, to: GroupActionsController, with_method: :client_disconnected
 end
