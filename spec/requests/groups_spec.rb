@@ -168,11 +168,6 @@ describe 'Groups' do
         visit group_path(project, group)
       end
 
-      it 'link to project' do
-        click_link "go_to_project_#{project.id}"
-        expect(current_path) == "/project/#{project.id}/life_tape/posts"
-      end
-
       it 'call moderator' do
         expect {
           click_link "call_moderator_for_#{group.id}"
@@ -349,13 +344,29 @@ describe 'Groups' do
     end
 
     context 'chat', js: true do
-      xit 'attach file' do
+      before do
         visit group_path(project, group)
+      end
+
+      it 'attach file' do
         expect {
           attach_file('file', "#{Rails.root}/spec/support/images/1.jpg")
+          sleep(5)
+          m = /[A-z0-9]*.jpg/.match GroupChatMessage.last.content
+          file_name = m[0][0..m[0].length - 5]
+          Cloudinary::Api.delete_resources("#{GroupChatMessage::GROUP_FOLDER}/#{file_name}")
         }.to change(GroupChatMessage, :count).by(1)
-        Cloudinary::Api.delete_resources(GroupChatMessage::GROUP_FOLDER + '/' + page.first('a.image-popup-vertical-fit img')['alt'].downcase)
       end
+    end
+
+    it 'users projects' do
+      plan = create :plan, user: user, project: project
+      project.status = 9
+      project.save
+      visit group_path(project, group)
+      expect(page).to have_content plan.name
+      click_link "open_user_project_#{plan.id}"
+      expect(current_path) == plan_post_path(project, plan)
     end
   end
 end

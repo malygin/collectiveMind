@@ -11,7 +11,7 @@
           .btn.btn-success.btn-block
             = @group.user_projects.count
           - @group.user_projects.each do |project|
-            = link_to project.name, plan_post_path(@project, project)
+            = link_to project.name, plan_post_path(@project, project), id: "open_user_project_#{project.id}"
             %br
           .text-success#call_moderator_success{style: 'display: none'}
             = t('groups.call_moderator_success')
