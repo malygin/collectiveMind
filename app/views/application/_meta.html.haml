@@ -8,7 +8,6 @@
 
 = stylesheet_link_tag 'application', media: 'all'
 %link(href='/assets/favicon.ico' rel='shortcut icon')
-
   :javascript
     var _gaq = _gaq || [];
     _gaq.push(['_setAccount', 'UA-35663792-1']);
@@ -19,4 +18,12 @@
       ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
       var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
     })();
+/[if IE]
+  <style type="text/css">
+  html{filter:alpha(opacity=0); opacity: 0;}
+  </style>
+  <script type="text/javascript">
+  alert('Internet Explorer Error 403! Попробуйте воспользоватся другим браузером!');
+  </script>
+
 %title Massdecision - гуманитарная интернет-технология для демократичной выработки стратегических решений в массовых сообществах и подготовки будущих исполнителей к их реализации

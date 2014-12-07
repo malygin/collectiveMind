@@ -9,6 +9,13 @@
       = content_for?(:title) ? yield(:title) : 'Massdecision'
     = csrf_meta_tags
     = stylesheet_link_tag 'application', media: 'all'
+    /[if IE]
+      <style type="text/css">
+      html{filter:alpha(opacity=0); opacity: 0;}
+      </style>
+      <script type="text/javascript">
+      alert('Internet Explorer Error 403! Попробуйте воспользоватся другим браузером!');
+      </script>
   -#%link(href="/assets/favicon.ico" rel="shortcut icon")
 
   %body
@@ -55,6 +62,6 @@
       \==================================================
     / Placed at the end of the document so the pages load faster
     = javascript_include_tag 'application'
-    <!--[if lt IE 8]>
-      <p class="danger"> Для эффективной работы настоятельно рекомендуем вам скачать брузер хром (<a href="https://www.google.ru/chrome/browser/desktop/">ссылка<a/>)</p>
-    <![endif]-->
+    -#<!--[if lt IE 8]>
+    -#  <p class="danger"> Для эффективной работы настоятельно рекомендуем вам скачать брузер хром (<a href="https://www.google.ru/chrome/browser/desktop/">ссылка<a/>)</p>
+    -#<![endif]-->
