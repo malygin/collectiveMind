@@ -1,6 +1,6 @@
 class Group < ActiveRecord::Base
   #@todo remove
-  attr_accessible :name, :description, :project_id, :status
+  attr_accessible :name, :description, :project_id
   belongs_to :project, class_name: 'Core::Project'
   has_many :all_group_users, class_name: 'GroupUser', dependent: :destroy
   has_many :group_users, -> { where invite_accepted: true }
@@ -11,14 +11,7 @@ class Group < ActiveRecord::Base
 
   scope :by_project, -> (project) { where project_id: project.id }
 
-  STATUSES = {
-      10 => 'Создана',
-      20 => 'Выполняется',
-      30 => 'Требует обсуждения',
-      40 => 'Выполнена'
-  }
   validates :name, :project_id, presence: true
-  validates :status, inclusion: {in: STATUSES.keys}
 
   def user_projects
     user_plan_posts.by_project(project_id)
