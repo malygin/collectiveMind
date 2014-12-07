@@ -17,4 +17,11 @@ WebsocketRails::EventMap.describe do
   subscribe :groups_incoming_message, to: GroupsChatController, with_method: :incoming_message
   subscribe :groups_get_history, to: GroupsChatController, with_method: :send_history
   subscribe :groups_load_history, to: GroupsChatController, with_method: :load_history
+
+  namespace :group do
+    private_channel :actions
+    subscribe :client_connected, :to => GroupActionsController, :with_method => :client_connected
+    subscribe :client_disconnected, :to => GroupActionsController, :with_method => :client_disconnected
+    subscribe :start_edit, to: GroupActionsController, with_method: :start_edit
+  end
 end
