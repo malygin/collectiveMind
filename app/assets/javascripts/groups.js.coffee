@@ -113,5 +113,5 @@
       alert('already editing')
     ws.trigger 'group.start_edit', {
       model_name: 'Plan::Post',
-      id: $('#edit_plan_post_model').find('form').attr('id').replace(/^\D+/g, '')
+      model_id: $('#edit_plan_post_model').find('form').attr('id').replace(/^\D+/g, '')
     }
