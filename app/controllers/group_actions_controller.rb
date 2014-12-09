@@ -1,5 +1,18 @@
 class GroupActionsController < WebsocketRails::BaseController
   def start_edit
+    # По умолчанию считаем, что эту запись никто не редактирует
+    # Перебираем массив, который имеет примерно такой вид
+    # {
+    #   "plan/post": [
+    #     {
+    #       "model_id": "42",
+    #       "user_id": 2984
+    #     },
+    #     .......
+    #   ],
+    #   ....
+    # }
+    # И если есть юзер, который уже редактирует запись - отправляем current_user-у сообщение об этом и блокируем у него все
     no_edits = true
     if editable[message[:model_name]].present?
       JSON.parse(editable[message[:model_name]]).each do |current_model|
@@ -13,6 +26,8 @@ class GroupActionsController < WebsocketRails::BaseController
       end
     end
 
+    # Если никто не редактирует запись, то начинаем это делать)
+    # И сообщаем всем об этом событии
     if no_edits
       if editable[message[:model_name]].present?
         editing_array = JSON.parse(editable[message[:model_name]])
@@ -21,6 +36,14 @@ class GroupActionsController < WebsocketRails::BaseController
       end
       editing_array << {model_id: message[:model_id], user_id: current_user.id}
       redis.hset redis_key, message[:model_name], editing_array.to_json
+
+      begin
+        model = message[:model_name].classify.constantize.find(message[:model_id].to_i)
+        # @todo подисаться на этот евент в нужных местах
+        broadcast_message :user_start_edit, {user: current_user, model: model}.to_json
+      rescue Exception => e
+        Rails.logger.info "#{Time.now} exception in groups_action_controller - #{e}"
+      end
     end
   end
 
