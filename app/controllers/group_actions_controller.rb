@@ -25,17 +25,17 @@ class GroupActionsController < WebsocketRails::BaseController
   end
 
   def client_disconnected
-    # editable.each do |current_edit|
-    #   tmp = []
-    #   save_again = false
-    #   current_edit.each do |current_model|
-    #     if current_model['user_id'] != current_user.id
-    #       tmp << current_model
-    #       save_again = true
-    #     end
-    #   end
-    #   redis.hset(redis_key, current_edit[0], tmp[1].to_json) if save_again && current_edit
-    # end
+    editable.each do |current_edit|
+      save_again = false
+      editing_models = JSON.parse(current_edit[1])
+      editing_models.each do |current_model|
+        if current_model['user_id'] == current_user.id
+          editing_models.delete current_model
+          save_again = true
+        end
+      end
+      redis.hset(redis_key, current_edit[0], editing_models.to_json) if save_again
+    end
   end
 
   private
