@@ -102,6 +102,20 @@
     ws.trigger 'groups_load_history', {group_id: $('.id_group').attr('id')}
 
 @group_actions = ->
+  this.prepare_to_edit = (e) ->
+    e.preventDefault()
+    model_with_id = $(this).attr('id').replace('edit_', '')
+    id = model_with_id.replace(/^\D+/g, '')
+    model = model_with_id.replace(/[0-9]/g, '').replace('_', '/')
+    model = model.substring(0, model.length - 1)
+    start_edit model, id
+
+  this.start_edit = (model_name, model_id) ->
+    ws.trigger 'group.start_edit', {
+      model_name: model_name,
+      model_id: model_id
+    }
+
   if $('#edit_plan_post_model').length > 0
     ws = Websockets.connection()
     private_channel = ws.subscribe_private('group.actions')
@@ -110,8 +124,10 @@
     private_channel.on_failure = ->
       console.log("Authorization failed on group actions")
     private_channel.bind 'already_editing', (data) ->
-      alert('already editing')
-    ws.trigger 'group.start_edit', {
-      model_name: 'Plan::Post',
-      model_id: $('#edit_plan_post_model').find('form').attr('id').replace(/^\D+/g, '')
-    }
+      $("form[id*='" + data['model_name'].replace('/', '_') + "'] :input").prop('disabled', true)
+      console.log(data)
+
+    start_edit 'plan/post', $('#edit_plan_post_model').find('form').attr('id').replace(/^\D+/g, '')
+
+    $("a[id*='edit'").on('click', this.prepare_to_edit)
+    return
