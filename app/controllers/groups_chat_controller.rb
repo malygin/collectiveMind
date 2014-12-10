@@ -12,7 +12,7 @@ class GroupsChatController < WebsocketRails::BaseController
   def incoming_message
     group_message = current_user.group_chat_messages.create content: message[:text], group_id: @group.id
     # @todo удалить отправку в очередь после окончания тестирования
-    Resque.enqueue(WebsocketNotification, @group.users.collect(&:id), :groups_new_message, :group_chat, group_message)
+    Resque.enqueue(WebsocketNotification, @group.users.collect(&:id), :groups_new_message, :group_chat, group_message.id)
     # @group.users.each do |user|
     #   WebsocketRails.users[user.id].send_message(:groups_new_message, group_message.to_json, channel: :group_chat)
     # end
