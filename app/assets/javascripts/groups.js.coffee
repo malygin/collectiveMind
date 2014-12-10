@@ -108,7 +108,8 @@
     id = model_with_id.replace(/^\D+/g, '')
     model = model_with_id.replace(/[0-9]/g, '').replace('_', '/')
     model = model.substring(0, model.length - 1)
-    start_edit model, id
+    $(document).ajaxComplete ->
+      start_edit model, id
 
   this.start_edit = (model_name, model_id) ->
     ws.trigger 'group.start_edit', {
@@ -124,10 +125,11 @@
     private_channel.on_failure = ->
       console.log("Authorization failed on group actions")
     private_channel.bind 'already_editing', (data) ->
-      $("form[id*='" + data['model_name'].replace('/', '_') + "'] :input").prop('disabled', true)
+      $("form[id*='" + data['model_name'].replace('/',
+        '_') + "'][id*='" + data['model_id'] + "'] :input").prop('disabled', true)
       console.log(data)
 
     start_edit 'plan/post', $('#edit_plan_post_model').find('form').attr('id').replace(/^\D+/g, '')
 
-    $("a[id*='edit'").on('click', this.prepare_to_edit)
+    $("a[id*='edit']").on('click', this.prepare_to_edit)
     return
