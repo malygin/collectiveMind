@@ -2,7 +2,7 @@
 #= require jquery_ujs
 #= require jquery.ui.all
 #= require jquery.remotipart
-#= require jquery.magnific-popup.min
+#= require brave/jquery.magnific-popup.min.js
 #= require jquery.autosize
 
 #= require totop/jquery.ui.totop
@@ -45,6 +45,13 @@
 #= require plugins
 #= require comments
 #= require resources
+
+#= require brave/html5shiv
+#= require brave/jquery.magnific-popup.min
+#= require brave/main
+#= require brave/owl.carousel.min
+#= require brave/placeholders
+#= require brave/respond.min
 
 # @todo load initialization
 sidebarHeight = 0;
