@@ -11,9 +11,9 @@
       project_id = parseInt(optsel.attr('data-project'))
       id = parseInt(optsel.attr('data-post'))
       stage = optsel.attr('data-stage')
-      if stage = "discontent"
+      if stage == "discontent"
         select_discontent_for_union(project_id,id)
-      else if stage = "concept"
+      else if stage == "concept"
         select_discontent_for_concept(project_id)
       selectize = $select[0].selectize
       selectize.removeOption(item)
