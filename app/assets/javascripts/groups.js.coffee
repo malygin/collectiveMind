@@ -101,6 +101,13 @@
 
     ws.trigger 'groups_load_history', {group_id: $('.id_group').attr('id')}
 
+    private_channel.bind 'user_start_edit', (data) ->
+#      data = $.parseJSON(data)
+#      info_edit = $('#editing_models').clone().attr('id', 'editing_models_' + data.model.id)
+#      $(info_edit).text(data.model.name)
+#      $("users_in_group_" + data.user.id).append(info_edit)
+      console.log(data)
+
 @group_actions = ->
   this.prepare_to_edit = (e) ->
     e.preventDefault()
@@ -110,6 +117,17 @@
     model = model.substring(0, model.length - 1)
     $(document).ajaxComplete ->
       start_edit model, id
+
+  this.stop_edit = (e) ->
+    e.preventDefault()
+    form = $(this).closest('form')
+    unless form.length > 0
+      form = $(this).closest('div.modal-content').find('form')
+    form_id = form.attr('id')
+    model_id = form_id.replace(/^\D+/g, '')
+    model_name = form_id.replace('edit_', '').replace(/[0-9]/g, '').replace('_', '/')
+    model_name = model_name.substring(0, model_name.length - 1)
+    ws.trigger 'group.stop_edit', {model_id: model_id, model_name: model_name}
 
   this.start_edit = (model_name, model_id) ->
     ws.trigger 'group.start_edit', {
@@ -132,4 +150,6 @@
     start_edit 'plan/post', $('#edit_plan_post_model').find('form').attr('id').replace(/^\D+/g, '')
 
     $("a[id*='edit']").on('click', this.prepare_to_edit)
+    $("#modal_stage").on('click', "button[data-dismiss='modal']", this.stop_edit)
+    $("#modal_stage").on('click', "input[type='submit']", this.stop_edit)
     return
