@@ -42,6 +42,7 @@
               .news-item-info
                 .name
                   = link_to user.user, user_path(@project, user.user)
+              .news-item-info#editing_models
             %br
             %br
         = link_to 'Покинуть группу', group_leave_path(@project, @group), method: :put, id: "leave_group_#{@group.id}"

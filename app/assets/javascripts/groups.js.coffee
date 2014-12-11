@@ -102,10 +102,10 @@
     ws.trigger 'groups_load_history', {group_id: $('.id_group').attr('id')}
 
     private_channel.bind 'user_start_edit', (data) ->
-#      data = $.parseJSON(data)
-#      info_edit = $('#editing_models').clone().attr('id', 'editing_models_' + data.model.id)
-#      $(info_edit).text(data.model.name)
-#      $("users_in_group_" + data.user.id).append(info_edit)
+      data = $.parseJSON(data)
+      info_edit = $('#editing_models').clone().attr('id', 'editing_models_' + data.model.id)
+      $(info_edit).text(data.model.name)
+      $("#users_in_group_" + data.user.id).append(info_edit)
       console.log(data)
 
 @group_actions = ->
