@@ -47,6 +47,14 @@ class GroupActionsController < WebsocketRails::BaseController
     end
   end
 
+  def stop_edit
+    if editable[message[:model_name]].present?
+      editing_models = JSON.parse(editable[message[:model_name]])
+      editing_models.delete Hash['model_id', message[:model_id], 'user_id', current_user.id]
+      redis.hset(redis_key, message[:model_name], editing_models.to_json)
+    end
+  end
+
   def client_disconnected
     editable.each do |current_edit|
       save_again = false
