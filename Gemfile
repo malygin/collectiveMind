@@ -93,10 +93,6 @@ gem 'similar_text'
 gem 'breadcrumbs_on_rails'
 
 #@todo После полного переезда можно удалять
-gem 'protected_attributes'
-gem 'rails-observers'
-gem 'actionpack-page_caching'
-gem 'actionpack-action_caching'
 gem 'activerecord-deprecated_finders'
 
 #texteditor
