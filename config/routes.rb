@@ -3,6 +3,8 @@ require 'resque_scheduler'
 require 'resque_scheduler/server'
 
 CollectiveMind::Application.routes.draw do
+  resources :user_roles
+
   resque_constraint = lambda do |request|
     request.env['warden'].authenticate? and request.env['warden'].user.prime_admin?
   end

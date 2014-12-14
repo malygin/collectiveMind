@@ -1,4 +1,7 @@
 class Role < ActiveRecord::Base
+  has_many :user_roles
+  has_many :user, through: :user_roles
+
   validates :name, :code, presence: true
   before_validation :set_code
 
