@@ -123,7 +123,7 @@ $('#PlanTabsShow li#third a').on "click", (e) ->
 # @todo work with discontent posts and groups
 
 @select_discontent_for_union = (project, id)->
-  sel = $('#selectize_discontent :selected')
+  sel = $('#selectize_for_discontents :selected')
   if sel.val() != ''
     $.ajax
       url: "/project/#{project}/discontent/posts/#{id}/add_union"
@@ -165,7 +165,7 @@ $('#PlanTabsShow li#third a').on "click", (e) ->
 # @todo work with concept posts
 
 @select_discontent_for_concept = (project)->
-  sel = $('#selectize_concept :selected')
+  sel = $('#selectize_for_discontents :selected')
   if sel.val() != ''
     $.ajax
       url: "/project/#{project}/concept/posts/add_dispost"
