@@ -48,6 +48,8 @@ CollectiveMind::Application.routes.draw do
   get '/plan_analytics', to: 'core/projects#plan_analytics'
   get '/estimate_analytics', to: 'core/projects#estimate_analytics'
 
+  resources :roles
+
   namespace :core, shallow: true do
     resources :projects do
       member do
