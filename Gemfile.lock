@@ -311,6 +311,7 @@ GEM
       sass (~> 3.2.0)
       sprockets (~> 2.8, <= 2.11.0)
       sprockets-rails (~> 2.0.0)
+    seed_migration (1.0.5)
     selectize-rails (0.11.0)
     selenium-webdriver (2.41.0)
       childprocess (>= 0.5.0)
@@ -449,6 +450,7 @@ DEPENDENCIES
   rufus-scheduler (< 3.0.0)
   russian
   sass-rails (~> 4.0.0)
+  seed_migration
   selectize-rails
   selenium-webdriver (~> 2.41.0)
   settingslogic

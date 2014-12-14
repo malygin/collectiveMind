@@ -80,6 +80,7 @@ gem 'similar_text'
 gem 'breadcrumbs_on_rails'
 gem 'tinymce-rails'
 gem 'historyjs-rails'
+gem 'seed_migration'
 
 gem 'resque'
 gem 'resque_mailer'
