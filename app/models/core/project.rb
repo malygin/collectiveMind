@@ -17,10 +17,7 @@ class Core::Project < ActiveRecord::Base
 # 0 open for everyone and everyone may be participant
 # 1 open for everyone but participant may be only with rights
 # 2  closed, only for participant
-####### type_project
-# 0 normal
-# 1 invisible
-####### new type_access
+####### new type_access - удалить
 # 0 opened for all
 # 1 only for ratio club and all moderators
 # 2 closed, only for invited and prime moderators
@@ -29,7 +26,7 @@ class Core::Project < ActiveRecord::Base
 # 5 preparing procedure
 # 10 disabled
 
-  attr_accessible :desc, :postion, :secret, :type_project, :name, :short_desc, :knowledge, :status, :type_access,
+  attr_accessible :desc, :postion, :secret, :name, :short_desc, :knowledge, :status, :type_access,
                   :url_logo, :stage1, :stage2, :stage3, :stage4, :stage5, :color, :code, :advices_concept, :advices_discontent,
                   :date_12,:date_23,:date_34,:date_45,:date_56
 
@@ -107,7 +104,6 @@ class Core::Project < ActiveRecord::Base
   end
 
   def project_access(user)
-    type_project = self.type_access
     type_user = user.type_user
 
     if [1, 7].include?(type_user) and [0, 1, 2, 3, 4, 5].include?(type_project)
@@ -139,9 +135,7 @@ class Core::Project < ActiveRecord::Base
   end
 
   def type_access_name
-    type_project = self.type_access
-
-    case type_project
+    case self.type_access
       when 0
         'Открытая'
       when 1

@@ -667,10 +667,4 @@ describe 'Core Project ' do
       end
     end
   end
-
-  context 'expert sign in' do
-  end
-
-  context 'jury sign in' do
-  end
 end

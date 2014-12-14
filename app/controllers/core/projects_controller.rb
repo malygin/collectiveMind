@@ -89,7 +89,6 @@ class Core::ProjectsController < ApplicationController
   # POST /core/projects.json
   def create
     @core_project = Core::Project.new(core_project_params)
-    @core_project.type_project = 0
     @core_project.status = 1
 
     respond_to do |format|
@@ -250,7 +249,7 @@ class Core::ProjectsController < ApplicationController
   end
 
   def core_project_params
-    params.require(:core_project).permit(:name, :type_access, :short_desc, :desc, :type_project, :code, :color, :advices_concept, :advices_discontent)
+    params.require(:core_project).permit(:name, :type_access, :short_desc, :desc, :code, :color, :advices_concept, :advices_discontent)
   end
 
   def filtering_params(params)

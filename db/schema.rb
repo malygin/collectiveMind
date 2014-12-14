@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141130222317) do
+ActiveRecord::Schema.define(version: 20141214095012) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -362,15 +362,14 @@ ActiveRecord::Schema.define(version: 20141130222317) do
     t.integer  "stage4",                         default: 5
     t.integer  "stage5",                         default: 5
     t.text     "knowledge"
-    t.integer  "type_project",                   default: 0
     t.integer  "position",                       default: 0
     t.string   "secret"
     t.string   "secret2"
     t.string   "secret3"
-    t.string   "color"
-    t.string   "code"
     t.boolean  "advices_discontent"
     t.boolean  "advices_concept"
+    t.string   "color"
+    t.string   "code"
     t.integer  "moderator_id"
     t.datetime "date_12"
     t.datetime "date_23"
@@ -916,7 +915,7 @@ ActiveRecord::Schema.define(version: 20141130222317) do
   create_table "group_chat_messages", force: true do |t|
     t.integer  "group_id"
     t.integer  "user_id"
-    t.string   "content"
+    t.text     "content"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -940,6 +939,7 @@ ActiveRecord::Schema.define(version: 20141130222317) do
     t.integer  "group_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "status",      default: 10
   end
 
   add_index "group_tasks", ["group_id"], name: "index_group_tasks_on_group_id", using: :btree
@@ -963,7 +963,6 @@ ActiveRecord::Schema.define(version: 20141130222317) do
     t.integer  "project_id"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "status",      default: 10
   end
 
   add_index "groups", ["project_id"], name: "index_groups_on_project_id", using: :btree
