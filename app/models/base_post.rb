@@ -3,7 +3,6 @@ module BasePost
   include Filterable
   included do
     # status 0 - new, 1 -post expert, 2 - expeted, 3- archive
-    attr_accessible :content, :status, :number_views, :user, :project, :censored, :useful
     belongs_to :user
     belongs_to :project, class_name: 'Core::Project'
     has_many :notes

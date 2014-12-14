@@ -1,6 +1,5 @@
 class Plan::Post < ActiveRecord::Base
   include BasePost
-  attr_accessible :goal, :step, :name, :estimate_status, :status, :content
 
   has_many :post_aspects, foreign_key: 'plan_post_id', class_name: 'Plan::PostAspect'
   scope :post_aspects_first, -> { joins(:post_aspects).where('post_aspects.first_stage = ?', 1) }

@@ -26,11 +26,6 @@ class Core::Project < ActiveRecord::Base
 # 5 preparing procedure
 # 10 disabled
 
-  attr_accessible :desc, :postion, :secret, :name, :short_desc, :knowledge, :status, :type_access,
-                  :url_logo, :stage1, :stage2, :stage3, :stage4, :stage5, :color, :code, :advices_concept, :advices_discontent,
-                  :date_12, :date_23, :date_34, :date_45, :date_56
-
-
   has_many :life_tape_posts, -> { where status: 0 }, class_name: 'LifeTape::Post'
   has_many :aspects, class_name: 'Discontent::Aspect'
 

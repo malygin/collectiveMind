@@ -1,6 +1,4 @@
 class Group < ActiveRecord::Base
-  #@todo remove
-  attr_accessible :name, :description, :project_id, :status
   belongs_to :project, class_name: 'Core::Project'
   has_many :all_group_users, class_name: 'GroupUser', dependent: :destroy
   has_many :group_users, -> { where invite_accepted: true }
