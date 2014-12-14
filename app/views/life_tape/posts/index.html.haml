@@ -14,8 +14,8 @@
 
             -@project.aspects.main_aspects.order(:id).each_with_index do |asp, index|
               %li
-                %a.bg-orange{"data-toggle" => "tab", :href => "#tab-#{index+1}"}
-                  %button.btn.btn-round.btn-orange
+                %a{"data-toggle" => "tab", :href => "#tab-#{index+1}", style: "background-color:#{aspect_color(asp)}"}
+                  %button.btn.btn-round{style: "color:#ffffff;background:#{aspect_color(asp)};border:1px solid #{aspect_color(asp)};"}
                     %span
                       -if asp.final_votings.present?   #.where('project_id = ? AND type_check = ?', @project.id, 'question_check').present?
                         %i.fa.fa-check
@@ -79,8 +79,8 @@
                     .col-md-12
                       .blog-two-item
                         .blog-two-content
-                          .panel.panel-orange
-                            .panel-heading
+                          .panel{style: "border-color:#{aspect_color(asp)}"}
+                            .panel-heading{style: "color:#ffffff;background:#{aspect_color(asp)};border-color:#{aspect_color(asp)};"}
                               %strong=asp.content
                             .panel-body
                               - if asp.knowbase_posts.present?

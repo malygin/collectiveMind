@@ -19,6 +19,8 @@ class Discontent::AspectsController < ApplicationController
     @aspect = @project.aspects.create(params[:discontent_aspect])
     @post = @aspect.life_posts.build(status: 0, project: @project)
     @aspect.life_tape_posts << @post
+    color = "%06x" % (rand * 0xffffff)
+    @aspect.color = color
     redirect_to "/project/#{@project.id}/life_tape/posts?asp=#{@aspect.id}" if @post.save
   end
 

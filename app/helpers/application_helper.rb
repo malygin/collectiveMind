@@ -726,4 +726,8 @@ module ApplicationHelper
       'Выставление оценок'
     end
   end
+
+  def aspect_color(asp)
+    '#' + (asp.color.present? ? asp.color : 'f8a841')
+  end
 end
