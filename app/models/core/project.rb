@@ -28,7 +28,7 @@ class Core::Project < ActiveRecord::Base
 
   attr_accessible :desc, :postion, :secret, :name, :short_desc, :knowledge, :status, :type_access,
                   :url_logo, :stage1, :stage2, :stage3, :stage4, :stage5, :color, :code, :advices_concept, :advices_discontent,
-                  :date_12,:date_23,:date_34,:date_45,:date_56
+                  :date_12, :date_23, :date_34, :date_45, :date_56
 
 
   has_many :life_tape_posts, -> { where status: 0 }, class_name: 'LifeTape::Post'
@@ -106,19 +106,17 @@ class Core::Project < ActiveRecord::Base
   def project_access(user)
     type_user = user.type_user
 
-    if [1, 7].include?(type_user) and [0, 1, 2, 3, 4, 5].include?(type_project)
+    if [1, 7].include?(type_user)
       true
-    elsif [6].include?(type_user) and [0, 1, 3, 4, 5].include?(type_project)
+    elsif [6].include?(type_user)
       true
-    elsif [2, 3].include?(type_user) and [0, 1, 3].include?(type_project)
+    elsif [2, 3].include?(type_user)
       true
-    elsif [4, 5].include?(type_user) and [0, 1, 3].include?(type_project)
+    elsif [4, 5].include?(type_user)
       true
-    elsif [8].include?(type_user) and [0, 3].include?(type_project)
+    elsif [8].include?(type_user)
       true
-    elsif [0, 3].include?(type_project)
-      true
-    elsif [2].include?(type_project) and user.projects.include?(self)
+    elsif user.projects.include?(self)
       true
     else
       false
@@ -333,7 +331,7 @@ class Core::Project < ActiveRecord::Base
 
   def concept_comments
     Concept::Comment.joins("INNER JOIN concept_posts ON concept_comments.post_id = concept_posts.id").
-      where("concept_posts.project_id = ?", self.id)
+        where("concept_posts.project_id = ?", self.id)
   end
 
   def discontent_comments
@@ -347,7 +345,7 @@ class Core::Project < ActiveRecord::Base
   end
 
   def date_begin_stage(table_name)
-    table_name = table_name.sub('_posts','').sub('_comments', '')
+    table_name = table_name.sub('_posts', '').sub('_comments', '')
     if table_name == 'life_tape'
       self.created_at
     elsif table_name == 'discontent'
