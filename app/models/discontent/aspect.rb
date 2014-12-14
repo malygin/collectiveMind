@@ -27,6 +27,8 @@ class Discontent::Aspect < ActiveRecord::Base
   has_and_belongs_to_many :life_tape_posts, class_name: 'LifeTape::Post', join_table: 'discontent_aspects_life_tape_posts',
                           foreign_key: 'discontent_aspect_id', association_foreign_key: 'life_tape_post_id'
 
+  has_many :questions, -> { where questions: {parent_post_type: 'discontent_aspect'} }, class_name: 'Question', foreign_key: 'post_id'
+
   scope :by_project, ->(project_id) { where("discontent_aspects.project_id = ?", project_id) }
   scope :minus_view, ->(aspects) { where("discontent_aspects.id NOT IN (#{aspects.join(", ")})") unless aspects.empty? }
   scope :by_discussions, ->(aspects) { where("discontent_aspects.id NOT IN (#{aspects.join(", ")})") unless aspects.empty? }

@@ -1,43 +1,203 @@
+.ui-4
+  .container
+    .block-content
+      .row
+        .col-md-3
+          %h2 Выберите аспект:
+        .col-md-9
+          %ul.nav.nav-tabs
+            %li.active
+              %a.bg-lblue{"data-toggle" => "tab", :href => "#tab-0"}
+                %button.btn.btn-round.btn-white
+                  %span
+                    %i.fa.fa-wrench
+
+            -@project.aspects.main_aspects.order(:id).each_with_index do |asp, index|
+              %li
+                %a.bg-orange{"data-toggle" => "tab", :href => "#tab-#{index+1}"}
+                  %button.btn.btn-round.btn-orange
+                    %span
+                      -if asp.final_votings.present?   #.where('project_id = ? AND type_check = ?', @project.id, 'question_check').present?
+                        %i.fa.fa-check
+                      -else
+                        %i.fa.fa-question
+            -#%li
+            -#  %a.bg-purple{"data-toggle" => "tab", :href => "#tab-#{index}"}
+            -#    %button.btn.btn-round.btn-purple
+            -#      %span
+            -#        %i.fa.fa-check
+            -#%li
+            -#  %a.bg-yellow{"data-toggle" => "tab", :href => "#tab-#{index}"}
+            -#    %button.btn.btn-round.btn-yellow
+            -#      %span
+            -#        %i.fa.fa-question
+            -#%li
+            -#  %a.bg-green{"data-toggle" => "tab", :href => "#tab-#{index}"}
+            -#    %button.btn.btn-round.btn-green
+            -#      %span
+            -#        %i.fa.fa-question
+            -#%li
+            -#  %a.bg-blue{"data-toggle" => "tab", :href => "#tab-#{index}"}
+            -#    %button.btn.btn-round.btn-blue
+            -#      %span
+            -#        %i.fa.fa-question
+
+      .tab-content
+        #tab-0.tab-pane.active.fade.in
+          .row
+            .col-md-12.col-sm-4
+              .bg-grey.padd-15
+                %h3
+                  %i.fa.fa-flag
+                  %span.color
+                    %strong ЦЕЛЬ ЭТАПА
+                %p
+                  Подробное изучение базы знаний по каждому аспекту всеми участниками процедуры выработки проекта.
+                  %br/
+                  %span.color
+                    %strong ЭТО ВАЖНО!
+                  Второй этап выработки проекта будет доступен только после того, как средний уровень готовности участников будет не менее 80%!
+              %br/
+              .bg-grey.padd-15
+                %h3
+                  %i.fa.fa-sign-in
+                  %span.color
+                    %strong С ЧЕГО НАЧАТЬ:
+                %ul.list-6
+                  %li Выберите аспект в списке ниже
+                  %li Ознакомьтесь с базой знаний внутри этого аспекта
+                  %li Пройдите короткое тестирование по полученным знаниям
+                  %li Переходите к следующему аспекту
+                  %li Проголосуйте за самые важные на ваш взгляд аспекты (будет доступно в конце этапа)
+
+        -@project.aspects.main_aspects.order(:id).each_with_index do |asp, index|
+          %div.tab-pane.fade{id: "tab-#{index+1}"}
+            .row
+              .col-md-12.col-sm-4
+                .blog-two
+                  .row
+                    .col-md-12
+                      .blog-two-item
+                        .blog-two-content
+                          .panel.panel-orange
+                            .panel-heading
+                              %strong=asp.content
+                            .panel-body
+                              - if asp.knowbase_posts.present?
+                                %section
+                                  .body
+                                    - asp.knowbase_posts.each do |post|
+                                      %div{id: "knowbase_post_#{post.id}"}
+                                        = render partial: 'knowbase/posts/knowbase_post', object: post
+                                      %br
+                                %br
+
+
+                                -##bs-carousel-1.carousel.slide{"data-interval" => "5000", "data-pause" => "hover", "data-ride" => "carousel", "data-wrap" => "true"}
+                                -#  %ol.carousel-indicators
+                                -#    %li.active{"data-slide-to" => "0", "data-target" => "#bs-carousel-1"}
+                                -#    %li{"data-slide-to" => "1", "data-target" => "#bs-carousel-1"}
+                                -#    %li{"data-slide-to" => "2", "data-target" => "#bs-carousel-1"}
+                                -#  .carousel-inner
+                                -#    .item.active
+                                -#      = image_tag "img/backgrounds/s1.jpg"
+                                -#    .item
+                                -#      = image_tag "img/backgrounds/s2.jpg"
+                                -#    .item
+                                -#      = image_tag "img/backgrounds/s3.jpg"
+                                -#
+                                -#  %a.left.carousel-control{"data-slide" => "prev", :href => "#bs-carousel-1", :role => "button"}
+                                -#    %span.fa.fa-chevron-left
+                                -#  %a.right.carousel-control{"data-slide" => "next", :href => "#bs-carousel-1", :role => "button"}
+                                -#    %span.fa.fa-chevron-right
+                                -#%p Temporibus autem quibusdam et aut officiis debitis aut rerum necessitatibus saepe eveniet ut et voluptates repudiandae sint et molestiae non recusandae  rerum hic tenetur. Temporibus autem quibusdam et aut officiis debitis aut rerum necessitatibus saepe eveniet ut et voluptates repudiandae sint et molestiae non recusandae  rerum hic tenetur.Temporibus autem quibusdam et aut officiis debitis aut rerum necessitatibus saepe eveniet ut et voluptates repudiandae sint et molestiae non recusandae  rerum hic tenetur. Temporibus autem quibusdam et aut officiis debitis aut rerum necessitatibus saepe eveniet ut et voluptates repudiandae sint et molestiae non recusandae  rerum hic tenetur.
+                                -#.box-shadow-outer
+                                -#  .box-shadow-block.box-shadow-2.text-center
+                                -#    %h5 Какие из указанных ниже инструментов использовались в прошлой стратегии Инвара по ОТС?
+                                -#    %p.text-left
+                                -#      %button.btn.btn-xs.btn-white Инструмент 1
+                                -#      %button.btn.btn-xs.btn-white Инструмент 2
+                                -#      %button.btn.btn-xs.btn-white Хитрый инструмент 3
+                                -#      %button.btn.btn-xs.btn-white Инструмент с подвохом
+                                -#      %button.btn.btn-xs.btn-white Инструмент 1
+                                -#    %ul.pager
+                                -#      %li.previous
+                                -#        %a{:href => "#"} Подсказка
+                                -#      %li.next
+                                -#        %a{:href => "#"} Ответить
+                                %br/
+                                - asp.questions.by_project(@project.id).by_status(0).each do |question|
+                                  .box-shadow-outer
+                                    .box-shadow-block.box-shadow-2.text-center
+                                      %h5= question.content
+                                      %p.text-left
+                                        = form_tag(answer_question_discontent_aspect_path(@project, id: asp.id, question_id: question.id), {method: :put, remote: true, id: 'form_answer_question', multipart: true}) do
+                                          %div(class="btn-group" data-toggle="buttons" id="answer_buttons")
+                                            - question.answers.by_status(0).each do |answer|
+                                              %label(class="btn btn-xs btn-white answer-question")
+                                                = check_box_tag "answers[]", answer.id
+                                                = answer.content
+
+                                          -#%button.btn.btn-xs.btn-white=answer.content
+                                          %ul.pager
+                                            %li.previous
+                                              %a{:href => "#"} Подсказка
+                                            %li.next
+                                              -#%a{:href => "#"} Ответить
+                                              = submit_tag "Ответить", id: "send_answers"
+
+
+
+
+
+
+
+
+
+
+
+
+
 -#%section.widget.widget-tabs
 -#  %header
 -#    =render partial: 'application/stages', locals:  {current_stage: :lifetape}
 
 -#.body.tab-content
-- if boss? or (signed_in? and @project.demo?)
-  %br
-  = link_to t('show.aspect.new'), new_discontent_aspect_path(@project), remote: true, id: 'new_aspect', class: 'btn btn-primary'
-
-%h4.text-lifetape
-  - if @aspect
-    %b=t('show.aspect.title')
-    %span{id: "edit_aspect_content_#{@aspect.id}"}=@aspect.content
-    - if boss?
-      %span{id: "redactor_aspect_#{@aspect.id}"}
-        = link_to edit_discontent_aspect_path(@project,@aspect), remote: true, id: "edit_aspect_#{@aspect.id}" do
-          %span{class:'glyphicon glyphicon-pencil text-success'}
-        = link_to discontent_aspect_path(@project,@aspect), method: :delete, data: {confirm: t('confirm.delete_aspect')}, id: "destroy_aspect_#{@aspect.id}" do
-          %span{class:'glyphicon glyphicon-remove text-danger'}
-
-- if @post_show
-  .tab-pane.active#stage1
-    - if @aspect.knowbase_posts.present?
-      .col-md-12
-        %section
-          .body
-            - @aspect.knowbase_posts.each do |post|
-              %div{id: "knowbase_post_#{post.id}"}
-                = render partial: 'knowbase/posts/knowbase_post', object: post
-              %br
-        %br
-    .col-md-12.comments
-      .text-center
-        = will_paginate @comments
-      #comments.chat-messages
-        = render partial: 'shared/comment',collection: @comments
-      .text-center
-        = will_paginate @comments
-
-      - if signed_in?
-        = render partial: 'shared/comment_form', locals: {comment: @comment, post:@post_show, url_link: "/project/#{@project.id}/life_tape/posts/#{@post_show.id}/add_comment"}
-
-#aspect_modal
+-#- if boss? or (signed_in? and @project.demo?)
+-#  %br
+-#  = link_to t('show.aspect.new'), new_discontent_aspect_path(@project), remote: true, id: 'new_aspect', class: 'btn btn-primary'
+-#
+-#%h4.text-lifetape
+-#  - if @aspect
+-#    %b=t('show.aspect.title')
+-#    %span{id: "edit_aspect_content_#{@aspect.id}"}=@aspect.content
+-#    - if boss?
+-#      %span{id: "redactor_aspect_#{@aspect.id}"}
+-#        = link_to edit_discontent_aspect_path(@project,@aspect), remote: true, id: "edit_aspect_#{@aspect.id}" do
+-#          %span{class:'glyphicon glyphicon-pencil text-success'}
+-#        = link_to discontent_aspect_path(@project,@aspect), method: :delete, data: {confirm: t('confirm.delete_aspect')}, id: "destroy_aspect_#{@aspect.id}" do
+-#          %span{class:'glyphicon glyphicon-remove text-danger'}
+-#
+-#- if @post_show
+-#  .tab-pane.active#stage1
+-#    - if @aspect.knowbase_posts.present?
+-#      .col-md-12
+-#        %section
+-#          .body
+-#            - @aspect.knowbase_posts.each do |post|
+-#              %div{id: "knowbase_post_#{post.id}"}
+-#                = render partial: 'knowbase/posts/knowbase_post', object: post
+-#              %br
+-#        %br
+-#    .col-md-12.comments
+-#      .text-center
+-#        = will_paginate @comments
+-#      #comments.chat-messages
+-#        = render partial: 'shared/comment',collection: @comments
+-#      .text-center
+-#        = will_paginate @comments
+-#
+-#      - if signed_in?
+-#        = render partial: 'shared/comment_form', locals: {comment: @comment, post:@post_show, url_link: "/project/#{@project.id}/life_tape/posts/#{@post_show.id}/add_comment"}
+-#
+-##aspect_modal

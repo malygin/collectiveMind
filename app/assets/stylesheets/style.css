@@ -34,11 +34,11 @@ h2 {
 	line-height: 40px;
 }
 h3 {
-	font-size: 22px;
+	font-size: 20px;
 	line-height: 37px;
 }
 h4 {
-	font-size: 18px;
+	font-size: 16px;
 	line-height: 33px;
 }
 h5 {
@@ -129,6 +129,10 @@ dl dd{
 .para-big{
 	font-size:17px;
 	line-height:32px;
+}	
+.para-big-my{
+	font-size:25px;
+	line-height:35px;
 }	
 /* Transition */
 .transition{
@@ -424,19 +428,19 @@ blockquote small{
 /* Dividers */
 .divider-1{
 	height:8px;
-	background:url("../../img/dividers/1.png") repeat-x;
+	background: image-url('img/dividers/1.png') repeat-x;
 	background-size:20px 20px;
 	margin:20px 0px;
 }
 .divider-2{
 	height:7px;
-	background:url("../../img/dividers/2.png") repeat-x;
+	background: image-url('img/dividers/2.png') repeat-x;
 	background-size:7px 7px;
 	margin:20px 0px;
 }
 .divider-3{
 	height:10px;
-	background:url("../../img/dividers/3.png") repeat-x;
+	background: image-url('img/dividers/3.png') repeat-x;
 	background-size:10px 10px;
 	margin:20px 0px;
 }
@@ -725,10 +729,10 @@ a.brown:focus {
 }
 /* Round button */
 .btn.btn-round {
-	width: 60px;
-	height: 60px;
+	width: 50px;
+	height: 50px;
 	border-radius: 100%;
-	font-size: 15px;
+	font-size: 20px;
 	text-align: center;
 }
 .btn.btn-round i {
@@ -1374,7 +1378,7 @@ a.brown:focus {
 }
 /* Nav tabs */
 .tab-content {
-	padding-top: 10px;
+	padding-top: 0px;
 }
 /* Nav tabs style #1 */
 .nav-tabs-one ul.nav-tabs  li{
@@ -3535,28 +3539,28 @@ body.boxed.img-5 {
 	margin-top:10px;
 }
 .our-process .our-process-item{
-	margin:15px auto;
-	width:170px;
+	margin:0px auto;
+	width: auto;
 	text-align:center;
 	color:#fff;
 }
 .our-process a{
-	width:170px;
-	height:170px;
-	border-radius:100px;
+	width:75px;
+	height:75px;
+	border-radius:15px;
 	display:inline-block;
 	border:3px solid #fff;
 	box-shadow:0px 0px 2px #ddd;
 	position:relative;
 }
 .our-process a  i{
-	font-size:50px;
-	line-height:170px;
+	font-size:30px;
+	line-height:85px;
 }
 .our-process img{
 	position:absolute;
 	right:-50px;
-	top:70px;
+	top: 50px;
 }
 /* Our process one */
 .our-process-one .op-one-item{

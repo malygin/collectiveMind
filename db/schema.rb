@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141130222317) do
+ActiveRecord::Schema.define(version: 20141213221937) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -42,24 +42,25 @@ ActiveRecord::Schema.define(version: 20141130222317) do
   add_index "advices", ["user_id"], name: "index_advices_on_user_id", using: :btree
 
   create_table "answers", force: true do |t|
-    t.string   "text",        limit: 700
-    t.integer  "raiting",                 default: 0
+    t.text     "content"
+    t.integer  "raiting",     default: 0
     t.integer  "user_id"
     t.integer  "question_id"
-    t.datetime "created_at",                          null: false
-    t.datetime "updated_at",                          null: false
+    t.datetime "created_at",              null: false
+    t.datetime "updated_at",              null: false
+    t.integer  "style"
+    t.integer  "status"
   end
 
   add_index "answers", ["created_at"], name: "index_answers_on_created_at", using: :btree
   add_index "answers", ["user_id"], name: "index_answers_on_user_id", using: :btree
 
-  create_table "answers_users", id: false, force: true do |t|
-    t.integer "answer_id"
-    t.integer "user_id"
+  create_table "answers_users", force: true do |t|
+    t.integer  "answer_id"
+    t.integer  "user_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
-
-  add_index "answers_users", ["answer_id"], name: "index_answers_users_on_answer_id", using: :btree
-  add_index "answers_users", ["user_id"], name: "index_answers_users_on_user_id", using: :btree
 
   create_table "awards", force: true do |t|
     t.string  "name"
@@ -916,7 +917,7 @@ ActiveRecord::Schema.define(version: 20141130222317) do
   create_table "group_chat_messages", force: true do |t|
     t.integer  "group_id"
     t.integer  "user_id"
-    t.string   "content"
+    t.text     "content"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -940,6 +941,7 @@ ActiveRecord::Schema.define(version: 20141130222317) do
     t.integer  "group_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "status",      default: 10
   end
 
   add_index "group_tasks", ["group_id"], name: "index_group_tasks_on_group_id", using: :btree
@@ -963,7 +965,6 @@ ActiveRecord::Schema.define(version: 20141130222317) do
     t.integer  "project_id"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "status",      default: 10
   end
 
   add_index "groups", ["project_id"], name: "index_groups_on_project_id", using: :btree
@@ -1413,11 +1414,16 @@ ActiveRecord::Schema.define(version: 20141130222317) do
   add_index "question_posts", ["project_id"], name: "index_questions_posts_on_project_id", using: :btree
 
   create_table "questions", force: true do |t|
-    t.string   "text",       limit: 700
-    t.integer  "raiting",                default: 0
+    t.text     "content"
+    t.integer  "raiting",          default: 0
     t.integer  "user_id"
-    t.datetime "created_at",                         null: false
-    t.datetime "updated_at",                         null: false
+    t.datetime "created_at",                   null: false
+    t.datetime "updated_at",                   null: false
+    t.integer  "post_id"
+    t.string   "parent_post_type"
+    t.text     "hint"
+    t.integer  "project_id"
+    t.integer  "status"
   end
 
   add_index "questions", ["created_at"], name: "index_questions_on_created_at", using: :btree

@@ -36,4 +36,15 @@ class Discontent::AspectsController < ApplicationController
     @aspect.destroy if boss?
     redirect_to life_tape_posts_path
   end
+
+  def answer_question
+    @project = Core::Project.find(params[:project])
+    @aspect = Discontent::Aspect.find(params[:id])
+    @question = Question.find(params[:question_id])
+    if params[:answers]
+      params[:answers].each do |answer|
+        current_user.answers_users.create(answer_id: answer.to_i)
+      end
+    end
+  end
 end

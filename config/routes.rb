@@ -144,7 +144,11 @@ scope '/project/:project' do
   put 'discontent/posts/create_group', to: 'discontent/posts#create_group'
 
   namespace :discontent do
-    resources :aspects
+    resources :aspects do
+      member do
+        put :answer_question
+      end
+    end
     posts_routes
     resources :posts do
       member do

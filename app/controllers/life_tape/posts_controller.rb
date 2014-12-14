@@ -19,6 +19,7 @@ class LifeTape::PostsController < PostsController
     @post_show = @aspect.life_tape_post unless @aspect.nil?
     @comments= @post_show.main_comments.paginate(page: @page ? @page : last_page, per_page: 10).includes(:comments) if @post_show
     @comment = LifeTape::Comment.new
+    # render 'brave/index'
   end
 
   def vote_list

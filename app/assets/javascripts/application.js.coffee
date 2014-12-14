@@ -2,7 +2,7 @@
 #= require jquery_ujs
 #= require jquery.ui.all
 #= require jquery.remotipart
-#= require brave/jquery.magnific-popup.min.js
+# require brave/jquery.magnific-popup.min.js
 #= require jquery.autosize
 
 #= require totop/jquery.ui.totop
@@ -12,27 +12,27 @@
 
 #= require bootstrap/bootstrap.min
 #= require bootstrap-colorpicker
-#= require datepicker/bootstrap-datepicker
+# require datepicker/bootstrap-datepicker
 #= require bootstrap3-editable/bootstrap-editable
 
-#= require autocomplete-rails-dev
+# require autocomplete-rails-dev
 #= require selectize
 #= require liFixar/jquery.liFixar
-#= require nvd3/d3.v2
-#= require nvd3/nv.d3.min
-#= require stats.js
-#= require nvd3/stream_layers
-#= require nvd3/multiBar
-#= require nvd3/multiBarChart
-#= require nvd3/app
-#= require nvd3/axis
-#= require nvd3/legend
+# require nvd3/d3.v2
+# require nvd3/nv.d3.min
+# require stats.js
+# require nvd3/stream_layers
+# require nvd3/multiBar
+# require nvd3/multiBarChart
+# require nvd3/app
+# require nvd3/axis
+# require nvd3/legend
 
 #= require tinymce
 #= require websocket_rails/main
 #= require websockets
 #= require messenger/messenger.min
-#= require select2
+# require select2
 #= require wizard/jquery.bootstrap.wizard
 #= require news
 #= require notifications
@@ -41,7 +41,7 @@
 #= require jquery.slimscroll
 #= require moderator_chat
 #= require groups
-#= require history_jquery
+# require history_jquery
 #= require plugins
 #= require comments
 #= require resources
@@ -52,6 +52,14 @@
 #= require brave/owl.carousel.min
 #= require brave/placeholders
 #= require brave/respond.min
+
+#= require brave/jquery.countTo
+#= require brave/jquery.themepunch.revolution.min
+#= require brave/jquery.themepunch.tools.min
+#= require brave/waypoints.min
+#= require brave/jquery.knob
+#= require brave
+
 
 # @todo load initialization
 sidebarHeight = 0;
