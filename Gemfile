@@ -78,10 +78,6 @@ gem 'rest-client'
 gem 'magic_encoding'
 gem 'similar_text'
 gem 'breadcrumbs_on_rails'
-
-#@todo После полного переезда можно удалять
-gem 'activerecord-deprecated_finders'
-
 gem 'tinymce-rails'
 gem 'historyjs-rails'
 

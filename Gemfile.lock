@@ -21,7 +21,6 @@ GEM
       activemodel (= 4.1.6)
       activesupport (= 4.1.6)
       arel (~> 5.0.0)
-    activerecord-deprecated_finders (1.0.3)
     activerecord-postgresql-adapter (0.0.1)
       pg
     activesupport (4.1.6)
@@ -394,7 +393,6 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  activerecord-deprecated_finders
   activerecord-postgresql-adapter
   autosize-rails
   aws-sdk
