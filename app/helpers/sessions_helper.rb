@@ -1,11 +1,9 @@
-# encoding: utf-8
 module SessionsHelper
-
-	def journal_enter
-  		current_user.journals.build(type_event:'enter').save!
+  def journal_enter
+    current_user.journals.build(type_event: 'enter').save!
   end
 
-	def deny_access 
+  def deny_access
     store_location
     redirect_to new_user_session_path, notice: "Авторизуйтесь пожалуйста!"
   end
@@ -17,15 +15,6 @@ module SessionsHelper
     else
       redirect_to :root unless boss?
     end
-  end
-
-	def have_rights
-		# puts "_________________"+params[:project]
-    #
-		#project = Core::Project.find(params[:project])
-		#if (current_user.nil? or !(current_user.projects.include? project))  and project.type_access == 2
-		#	redirect_to root_path, :notice: "У вас нет прав просматривать этот проект!"
-		#end
   end
 
   #@todo new permissions
@@ -41,7 +30,7 @@ module SessionsHelper
   #####
 
   def boss_authenticate
-		deny_access unless boss?
+    deny_access unless boss?
   end
 
   def prime_admin_authenticate
@@ -64,9 +53,9 @@ module SessionsHelper
   def uniq_proc_users
     @project = Core::Project.find(params[:project]) if params[:project]
     if @project and @project.moderator_id.present?
-      [1,2,3,4,5,6,7,8,nil]
+      [1, 2, 3, 4, 5, 6, 7, 8, nil]
     else
-      [4,5,8,nil]
+      [4, 5, 8, nil]
     end
   end
 
@@ -78,25 +67,25 @@ module SessionsHelper
     true
   end
 
-	def redirect_back_or(default)
-	  redirect_to(session[:return_to] || default)
-	  clear_return_to
-	end
+  def redirect_back_or(default)
+    redirect_to(session[:return_to] || default)
+    clear_return_to
+  end
 
-	def current_user?(user)
-	    user == current_user
-	end
+  def current_user?(user)
+    user == current_user
+  end
 
-	def expert?
+  def expert?
     current_user.type_user == 2 unless current_user.nil?
-	end	
+  end
 
-	def admin?
-    [1,6,7].include? current_user.type_user and uniq_proc_access? unless current_user.nil?
+  def admin?
+    [1, 6, 7].include? current_user.type_user and uniq_proc_access? unless current_user.nil?
   end
 
   def prime_admin?
-    [1,7].include? current_user.type_user and uniq_proc_access? unless current_user.nil?
+    [1, 7].include? current_user.type_user and uniq_proc_access? unless current_user.nil?
   end
 
   def role_expert?
@@ -105,35 +94,35 @@ module SessionsHelper
 
   def jury?
     current_user.type_user == 3 unless current_user.nil?
-	end
+  end
 
-	def boss?
-    [1,2,3,6,7].include? current_user.type_user and uniq_proc_access? unless current_user.nil?
-	end
+  def boss?
+    [1, 2, 3, 6, 7].include? current_user.type_user and uniq_proc_access? unless current_user.nil?
+  end
 
   def watcher?
     current_user.type_user == 5 unless current_user.nil?
   end
 
   def cluber?
-    [4,5,7].include? current_user.type_user unless current_user.nil?
+    [4, 5, 7].include? current_user.type_user unless current_user.nil?
   end
 
   def list_type_projects_for_user
     unless current_user.nil?
       case current_user.type_user
-        when 1,7
-          [0,1,2,3,4,5]
+        when 1, 7
+          [0, 1, 2, 3, 4, 5]
         when 6
-          [0,1,3,4,5]
-        when 2,3
-          [0,1,3]
-        when 4,5
-          [0,1,3]
+          [0, 1, 3, 4, 5]
+        when 2, 3
+          [0, 1, 3]
+        when 4, 5
+          [0, 1, 3]
         when 8
-          [0,3]
+          [0, 3]
         else
-          [0,3]
+          [0, 3]
       end
     else
       [-1]
@@ -142,38 +131,37 @@ module SessionsHelper
 
   def limit_projects_for_user
     unless current_user.nil?
-      [1,6,7].include?(current_user.type_user) ? 0 : 2
+      [1, 6, 7].include?(current_user.type_user) ? 0 : 2
     else
       0
     end
   end
 
   def user?
-		not (admin? or expert?)
-	end
+    not (admin? or expert?)
+  end
 
   def can_union_discontents?(project)
     project.status == 4 and boss?
   end
 
-	def to_bool(arg)
+  def to_bool(arg)
     return true if arg =~ (/^(true|t|yes|y|1)$/i)
     return false if arg.empty? || arg =~ (/^(false|f|no|n|0)$/i)
     raise ArgumentError.new "invalid value: #{arg}"
   end
 
   def admin_user
-		redirect_to(root_path) if current_user.nil? or not admin?
-	end
+    redirect_to(root_path) if current_user.nil? or not admin?
+  end
 
   private
-    
-	    def store_location
-	      session[:return_to] = request.fullpath
-	    end
 
-	    def clear_return_to
-	      session[:return_to] = nil
-	    end
+  def store_location
+    session[:return_to] = request.fullpath
+  end
 
+  def clear_return_to
+    session[:return_to] = nil
+  end
 end
