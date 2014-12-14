@@ -367,7 +367,7 @@ describe 'Core Project ' do
     end
 
     it 'have base link ' do
-      expect(page).to have_link('user_profile', text: moderator.to_s, href: user_path(moderator.current_projects_for_user.last , moderator))
+      expect(page).to have_link('user_profile', text: moderator.to_s, href: user_path(moderator.current_projects_for_user.last, moderator))
       expect(page).to have_link('sign_out', text: 'Выйти', href: destroy_user_session_path)
     end
 
