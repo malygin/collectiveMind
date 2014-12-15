@@ -88,16 +88,16 @@ class Core::ProjectsController < ApplicationController
   # POST /core/projects
   # POST /core/projects.json
   def create
-    @core_project = Core::Project.new(core_project_params)
-    @core_project.project_users.build user_id: current_user.id, owner: true
+    @project = Core::Project.new(core_project_params)
+    @project.project_users.build user_id: current_user.id, owner: true
 
     respond_to do |format|
-      if @core_project.save
+      if @project.save
         format.html { redirect_to list_projects_path, success: 'Project was successfully created.' }
-        format.json { render json: @core_project, status: :created, location: @core_project }
+        format.json { render json: @project, status: :created, location: @project }
       else
-        format.html { render action: "new" }
-        format.json { render json: @core_project.errors, status: :unprocessable_entity }
+        format.html { render action: 'new' }
+        format.json { render json: @project.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -249,7 +249,8 @@ class Core::ProjectsController < ApplicationController
   end
 
   def core_project_params
-    params.require(:core_project).permit(:name, :type_access, :short_desc, :desc, :code, :color, :advices_concept, :advices_discontent)
+    params.require(:core_project).permit(:name, :type_access, :short_desc, :desc, :code, :color, :advices_concept,
+                                         :advices_discontent, :date_start, :date_end, :count_stages)
   end
 
   def filtering_params(params)
