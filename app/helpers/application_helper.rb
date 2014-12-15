@@ -1,5 +1,3 @@
-# encoding: utf-8
-
 module ApplicationHelper
 ##### status 
 # 0 - prepare to procedure
@@ -26,7 +24,7 @@ module ApplicationHelper
   end
 
   def class_post_content(pro, ag)
-    if  pro > 0
+    if pro > 0
       'label-success'
     elsif ag > 0
       'label-danger'
@@ -36,7 +34,7 @@ module ApplicationHelper
   end
 
   def display_content(content, default_string='---')
-    if  not content.nil? and content != ''
+    if not content.nil? and content != ''
       simple_format(content)
     else
       content_tag(:b, default_string)
@@ -560,29 +558,29 @@ module ApplicationHelper
 
   def score_for_concept_field(post, type_field, archive = false)
     unless archive
-      if ['status_name','status_content'].include?(type_field) and post.status_name and post.status_content
+      if ['status_name', 'status_content'].include?(type_field) and post.status_name and post.status_content
         40
-      elsif ['status_positive','status_positive_r'].include?(type_field) and post.status_positive and post.status_positive_r
+      elsif ['status_positive', 'status_positive_r'].include?(type_field) and post.status_positive and post.status_positive_r
         30
-      elsif ['status_negative','status_negative_r'].include?(type_field) and post.status_negative and post.status_negative_r
+      elsif ['status_negative', 'status_negative_r'].include?(type_field) and post.status_negative and post.status_negative_r
         20
-      elsif ['status_control','status_control_r'].include?(type_field) and post.status_control and post.status_control_r
+      elsif ['status_control', 'status_control_r'].include?(type_field) and post.status_control and post.status_control_r
         10
-      elsif ['status_obstacles','status_problems','status_reality'].include?(type_field) and post.status_obstacles and post.status_problems and post.status_reality
+      elsif ['status_obstacles', 'status_problems', 'status_reality'].include?(type_field) and post.status_obstacles and post.status_problems and post.status_reality
         10
       else
         0
       end
     else
-      if ['status_name','status_content'].include?(type_field) and (post.status_name or post.status_content)
+      if ['status_name', 'status_content'].include?(type_field) and (post.status_name or post.status_content)
         40
-      elsif ['status_positive','status_positive_r'].include?(type_field) and (post.status_positive or post.status_positive_r)
+      elsif ['status_positive', 'status_positive_r'].include?(type_field) and (post.status_positive or post.status_positive_r)
         30
-      elsif ['status_negative','status_negative_r'].include?(type_field) and (post.status_negative or post.status_negative_r)
+      elsif ['status_negative', 'status_negative_r'].include?(type_field) and (post.status_negative or post.status_negative_r)
         20
-      elsif ['status_control','status_control_r'].include?(type_field) and (post.status_control or post.status_control_r)
+      elsif ['status_control', 'status_control_r'].include?(type_field) and (post.status_control or post.status_control_r)
         10
-      elsif ['status_obstacles','status_problems','status_reality'].include?(type_field) and ((post.status_obstacles or post.status_problems) and (post.status_obstacles or post.status_reality) and (post.status_problems or post.status_reality))
+      elsif ['status_obstacles', 'status_problems', 'status_reality'].include?(type_field) and ((post.status_obstacles or post.status_problems) and (post.status_obstacles or post.status_reality) and (post.status_problems or post.status_reality))
         10
       else
         0
@@ -606,9 +604,9 @@ module ApplicationHelper
     end
   end
 
-  def core_methods?(controller,action,stages=false)
+  def core_methods?(controller, action, stages=false)
     controller == 'core/projects' and
-    ( (['news','users'].include?(action) and not stages) or ['general_analytics','lifetape_analytics','discontent_analytics','concept_analytics','plan_analytics','estimate_analytics'].include?(action) )
+        ((['news', 'users'].include?(action) and not stages) or ['general_analytics', 'lifetape_analytics', 'discontent_analytics', 'concept_analytics', 'plan_analytics', 'estimate_analytics'].include?(action))
   end
 
   def current_controller_for_navbar?(controller)

@@ -1,9 +1,7 @@
-# encoding: utf-8
 require 'spec_helper'
+
 describe 'Discontent ' do
   subject { page }
-  # screenshot_and_open_image
-  # save_and_open_page
   let (:user) {create :user }
   let (:user_data) {create :user }
   let (:prime_admin) {create :prime_admin }

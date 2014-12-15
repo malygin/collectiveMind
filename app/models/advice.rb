@@ -3,8 +3,6 @@ class Advice < ActiveRecord::Base
   belongs_to :user
   belongs_to :project, class_name: 'Core::Project'
   has_many :comments, class_name: 'AdviceComment', foreign_key: :post_advice_id
-  #@todo remove
-  attr_accessible :content, :approved, :adviseable_type, :useful
 
   scope :unapproved, -> { where approved: nil }
   scope :approve, -> { where approved: true }

@@ -1,4 +1,3 @@
-# encoding: utf-8
 module Plan::PostsHelper
   def display_title(cp)
     if not cp.title.nil? and cp.title != ''
@@ -12,14 +11,14 @@ module Plan::PostsHelper
     end
   end
 
-  def plus_concept?(stage,concept)
+  def plus_concept?(stage, concept)
     if stage.plan_post_aspects.pluck(:concept_post_aspect_id).include? concept.post_aspects.first.id
       return true
     end
     false
   end
 
-  def plus_concept_new_idea?(stage,concept)
+  def plus_concept_new_idea?(stage, concept)
     if stage.plan_post_aspects.pluck(:id).include? concept.id
       return true
     end
@@ -147,7 +146,7 @@ module Plan::PostsHelper
         else
           link = link_to "#{field_for_concept(n+1)} ", "/project/#{@project.id}/plan/posts/#{@post.id}/edit_concept?con_id=#{concept.id}&tag_field=#{tag_for_concept(n+1)}", method: :put, remote: true, class: "badge badge-danger"
         end
-        if [4,7].include?(n+1)
+        if [4, 7].include?(n+1)
           if !concept.plan_post_resources.by_type(field_for_res(n+1)).present?
             notice_empty += link if link
           elsif concept_post
@@ -163,7 +162,7 @@ module Plan::PostsHelper
           if concept.note_size?(n+1)
             notice_note += link if link
           end
-        elsif [5,8,10,11].include?(n+1)
+        elsif [5, 8, 10, 11].include?(n+1)
           if n+1 == 10
             if !concept.plan_post_resources.by_type(field_for_res(n+1)).present?
               notice_empty += link if link
@@ -180,7 +179,7 @@ module Plan::PostsHelper
           if !concept.send(column_for_concept(n+1)).present?
             notice_empty += link if link
           elsif concept_aspect
-            if ![9,12].include?(n+1) and concept.send(column_for_concept(n+1)) == concept_aspect.send(column_for_concept(n+1))
+            if ![9, 12].include?(n+1) and concept.send(column_for_concept(n+1)) == concept_aspect.send(column_for_concept(n+1))
               notice_adap += link if link
             end
           end
@@ -198,6 +197,4 @@ module Plan::PostsHelper
       (notice_empty.present? ? "<i class=\"fa fa-exclamation-triangle\"></i>" + notice_prefix_empty + notice_empty + "<br/>" : '') + (notice_adap.present? ? "<i class=\"fa fa-bell\"></i>" + notice_prefix_adap + notice_adap + "<br/>" : '') + (notice_note.present? ? "<i class=\"fa fa-comment\"></i>" + notice_prefix_note + notice_note + "<br/>" : '')
     end
   end
-
-
 end

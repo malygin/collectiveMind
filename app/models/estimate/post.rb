@@ -2,9 +2,6 @@ class Estimate::Post < ActiveRecord::Base
   include BasePost
 
   # 0 - new post, 1 - accepted post, 2 - declined post
-  attr_accessible :imp, :nepr, :nepr1, :nepr2, :nepr3, :nepr4,
-                  :nep, :nep1, :nep2, :nep3, :nep4, :all_grade,
-                  :onpsh, :onpsh1, :onpsh2, :onpsh3, :oppsh, :oppsh1, :oppsh2, :oppsh3, :ozpshf, :ozpshf1, :ozpshf2, :ozpshf3, :ozpshs, :ozpshs1, :ozpshs2, :ozpshs3
   attr_accessor :first_c, :second_c, :third_c, :max_score, :sum_score
 
   belongs_to :post, class_name: 'Plan::Post'
