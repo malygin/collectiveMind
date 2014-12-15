@@ -97,22 +97,13 @@ class Core::Project < ActiveRecord::Base
   end
 
   def project_access(user)
-    type_user = user.type_user
-
-    if [1, 7].include?(type_user)
-      true
-    elsif [6].include?(type_user)
-      true
-    elsif [2, 3].include?(type_user)
-      true
-    elsif [4, 5].include?(type_user)
-      true
-    elsif [8].include?(type_user)
-      true
-    elsif user.projects.include?(self)
-      true
-    else
-      false
+    case type_access
+      when 0
+        return true
+      when 1
+        (user.cluber? && users.include?(user)) || user.boss?
+      when 2
+        user.boss?
     end
   end
 
