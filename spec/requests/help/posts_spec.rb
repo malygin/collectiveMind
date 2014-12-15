@@ -1,7 +1,7 @@
-# encoding: utf-8
 require 'spec_helper'
+
 describe 'Help ' do
-  context  'ordinary user sign in ' do
+  context 'ordinary user sign in ' do
 
   end
 

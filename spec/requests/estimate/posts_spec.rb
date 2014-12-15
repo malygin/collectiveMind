@@ -1,9 +1,8 @@
-# encoding: utf-8
 require 'spec_helper'
+
 describe 'Estimate ' do
   subject { page }
-  # screenshot_and_open_image
-  # save_and_open_page
+
   let (:user) { create :user }
   let (:project) { create :core_project, status: 10 }
   let (:prime_admin) {create :prime_admin }
@@ -137,9 +136,5 @@ describe 'Estimate ' do
         expect(page).to have_content @plan_aspect1.title
       end
     end
-  end
-
-  context 'expert sign in ' do
-
   end
 end

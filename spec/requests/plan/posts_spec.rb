@@ -1,4 +1,3 @@
-# encoding: utf-8
 require 'spec_helper'
 
 describe 'Plan ' do
@@ -7,8 +6,8 @@ describe 'Plan ' do
   # save_and_open_page
   let (:user) { create :user }
   let (:project) { create :core_project, status: 9 }
-  let (:prime_admin) {create :prime_admin }
-  let (:moderator) {create :moderator }
+  let (:prime_admin) { create :prime_admin }
+  let (:moderator) { create :moderator }
 
   before do
     prepare_plans(project)
@@ -30,15 +29,15 @@ describe 'Plan ' do
 
     context 'add_record' do
       before do
-         click_link 'add_record'
+        click_link 'add_record'
       end
 
       it ' add new plan', js: true do
-         fill_in 'name_plan', with: 'plan name'
-         fill_in 'goals', with: 'plan goal'
-         fill_in 'desc_plan', with: 'plan content'
-         click_button 'send_plan_post'
-         expect(page).to have_content 'Добавить этап в проект'
+        fill_in 'name_plan', with: 'plan name'
+        fill_in 'goals', with: 'plan goal'
+        fill_in 'desc_plan', with: 'plan content'
+        click_button 'send_plan_post'
+        expect(page).to have_content 'Добавить этап в проект'
       end
 
       it ' add new stage', js: true do
@@ -62,7 +61,6 @@ describe 'Plan ' do
       end
 
       it 'can see right form' do
-        #save_and_open_page
         expect(page).to have_content @plan1.name
         expect(page).to have_content @plan1.goal
         expect(page).to have_content @plan1.content
@@ -70,7 +68,6 @@ describe 'Plan ' do
       end
 
       it ' can add comments ', js: true do
-        # screenshot_and_open_image
         fill_in 'comment_text_area', with: 'plan comment 1'
         click_button 'send_comment'
         expect(page).to have_content 'plan comment 1'
@@ -119,17 +116,6 @@ describe 'Plan ' do
         click_button 'send_post'
         expect(page).to have_content 'new name_stage'
       end
-
-      # it 'can see edit concept modal', js: true do
-      #   find("li#second a").click
-      #   expect(page).to have_content 'Этап 1. stage name 1'
-      #   find("#edit_post_concept_#{@plan_aspect1.id}").click
-      #   expect(page).to have_content 'Редактирование нововведения в рамках этапа:'
-      #   fill_in 'plan_post_aspect_title', with: 'new title concept'
-      #   click_button 'send_post'
-      #   sleep(20)
-      #   expect(page).to have_content 'new title concept'
-      # end
 
       it 'can see edit action modal', js: true do
         find("li#second a").click
@@ -343,8 +329,4 @@ describe 'Plan ' do
       end
     end
   end
-
-  context 'expert sign in' do
-  end
-
 end
