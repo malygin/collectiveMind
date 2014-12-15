@@ -13,18 +13,6 @@ class Core::Project < ActiveRecord::Base
 # 10 - final vote
 # 11 - wait for decision
 # 20  - complete
-####### type_access
-# 0 open for everyone and everyone may be participant
-# 1 open for everyone but participant may be only with rights
-# 2  closed, only for participant
-####### new type_access - удалить
-# 0 opened for all
-# 1 only for ratio club and all moderators
-# 2 closed, only for invited and prime moderators
-# 3 demo (opened for all)
-# 4 testing
-# 5 preparing procedure
-# 10 disabled
 
   has_many :life_tape_posts, -> { where status: 0 }, class_name: 'LifeTape::Post'
   has_many :aspects, class_name: 'Discontent::Aspect'
@@ -64,6 +52,16 @@ class Core::Project < ActiveRecord::Base
                  3 => {name: 'Сбор нововведений', type_stage: :concept_posts, status: [7, 8]},
                  4 => {name: 'Создание проектов', type_stage: :plan_posts, status: [9]},
                  5 => {name: 'Выставление оценок', type_stage: :estimate_posts, status: [10, 11, 12, 13]}}.freeze
+
+  TYPE_ACCESS = {
+      0 => I18n.t('form.project.opened'),
+      1 => I18n.t('form.project.club'),
+      2 => I18n.t('form.project.closed'),
+  }.freeze
+
+  def closed?
+    type_access == 2
+  end
 
   def moderators
     users_in_project.where(users: {type_user: User::TYPES_USER[:admin]})
