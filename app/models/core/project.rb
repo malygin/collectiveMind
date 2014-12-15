@@ -66,6 +66,10 @@ class Core::Project < ActiveRecord::Base
       complete: 20
   }.freeze
 
+  validates :name, presence: true
+  validates :status, inclusion: {in: STATUS_CODES.values}
+  validates :type_access, inclusion: {in: TYPE_ACCESS_CODE.values}
+
   def closed?
     type_access == 2
   end
