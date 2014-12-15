@@ -89,7 +89,7 @@ class Core::ProjectsController < ApplicationController
   # POST /core/projects.json
   def create
     @core_project = Core::Project.new(core_project_params)
-
+    @core_project.project_users.build user_id: current_user.id, owner: true
 
     respond_to do |format|
       if @core_project.save
