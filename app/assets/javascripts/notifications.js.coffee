@@ -18,6 +18,8 @@
 
 @notifications = ->
   if document.location.pathname.match('project')
+    unless (typeof Websockets == 'function')
+      return
     ws = Websockets.connection()
 
     private_channel = ws.subscribe_private('notifications')

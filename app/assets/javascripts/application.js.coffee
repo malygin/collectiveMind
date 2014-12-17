@@ -30,7 +30,6 @@
 
 #= require tinymce
 #= require websocket_rails/main
-#= require websockets
 #= require messenger/messenger.min
 #= require select2
 #= require wizard/jquery.bootstrap.wizard
@@ -40,7 +39,8 @@
 #= require jquery.ui.chatbox
 #= require jquery.slimscroll
 #= require moderator_chat
-#= require groups_load.js.erb
+#= require websockets_load.js.erb
+#= require groups
 #= require history_jquery
 #= require plugins
 #= require comments

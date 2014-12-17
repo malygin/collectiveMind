@@ -1,5 +1,7 @@
 @notificate_news = ->
   if document.location.pathname.match('general_news')
+    unless (typeof Websockets == 'function')
+      return
     ws = Websockets.connection()
 
     private_channel = ws.subscribe_private('news')
