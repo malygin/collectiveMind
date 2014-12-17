@@ -1,7 +1,4 @@
 @comments_feed = ->
-
-
-
   this.edit_comment = (e)->
     e.preventDefault()
     id = $(this).data('id')
@@ -80,6 +77,7 @@
   $('.form-new-comment,.chat-messages').on('keyup', 'textarea.comment-textarea', this.activate_button)
   $('.form-new-comment,.chat-messages').on('click', 'label.comment-problem', this.color_for_problem)
   $('.form-new-comment,.chat-messages').on('click', 'label.comment-idea', this.color_for_idea)
+
   #  check if url contain anchor
   myLink = document.location.toString();
   if (myLink.match(/comment_(\d+)/))

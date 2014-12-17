@@ -11,59 +11,89 @@
     = stylesheet_link_tag 'application', media: 'all'
     /[if lte IE 9]
       <script src="http://phpbbex.com/oldies/oldies.js" charset="utf-8"></script>
-    -#/[if IE]
-    -#  <style type="text/css">
-    -#  html{filter:alpha(opacity=0); opacity: 0;}
-    -#  </style>
-    -#  <script type="text/javascript">
-    -#  alert('Internet Explorer Error 403! Попробуйте воспользоватся другим браузером! <a href="https://www.google.ru/chrome/browser/desktop/">ссылка<a/>');
-    -#  </script>
   -#%link(href="/assets/favicon.ico" rel="shortcut icon")
 
   %body
-    .logo.hidden-sm.hidden-xs
-      %h4
-        %a{href: @project ? "/project/#{@project.id}" : "/", id: "go_to_logo"}
-          %h3
-            %span.text-danger MASS
-            %strong DECISION
-
-    %nav#sidebar.sidebar.nav-collapse.collapse
-      - if core_methods?(params[:controller],params[:action])
-        = render partial: 'core/projects/left_projects', locals: { current_stage: controller.controller_path }
-      - else
-        = render partial: 'left_side', locals: { current_stage: controller.controller_path }
-      = render partial: 'shared/moderator_chat'
-    .wrap
-      %header.page-header
-        .navbar
-          - if core_methods?(params[:controller],params[:action])
-            =render 'core/projects/top_menu_general'
-          - else
-            =render 'top_menu'
-      .content.container
-        -if current_controller_for_navbar?(controller)
-          %h4=@project.name
-          %section.widget.widget-tabs
-            %header
+    .outer
+      .top-bar
+        .container
+          .tb-contact.pull-left
+            %strong
+              %a{href: @project ? "/project/#{@project.id}" : "/", id: "go_to_logo"}
+                %i.fa.fa-laptop
+                = succeed "DECISION" do
+                  %span.color MASS
+            %i.fa.fa-envelope.color
+            %a{:href => "mailto:Slava.Gorlytsa@gmail.com"} Slava.Gorlytsa@gmail.com
+            %i.fa.fa-phone.color
+            +7 (937) - (242) - 8881
+          .tb-social.pull-right
+            .brand-bg.text-right
+              %button.btn.btn-sm.btn-lblue Процедура
+              %button.btn.btn-sm.btn-lblue.btn-outline Кабинет
+              %button.btn.btn-sm.btn-lblue.btn-outline Новости
+          .clearfix
+      .container
+        .row
+          .col-md-12
+            %h2.color
+              -if current_controller_for_navbar?(controller)
+                = @project.name
+      %br/
+      .main-block
+        .container
+          .our-process
+            .row
               =render partial: 'application/stages', locals: {current_stage: current_stage_for_navbar(controller, params[:stage])}
-            .body.tab-content
-              = yield
-        -elsif @project and core_methods?(params[:controller],params[:action],true)
-          %h4=@project.name
-          %section.widget-tabs
-            %header
-              =render partial: 'core/projects/stages_general', locals: {current_stage: current_stage_for_analytics(params[:action])}
-            .body.tab-content
-              = yield
-        -else
-          = yield
+
+          .divider-1
+          .row
+            =render partial: 'application/progress_bar', locals: {current_stage: current_stage_for_navbar(controller, params[:stage])}
+          %hr
+          .row
+            = yield
+
+    %br/
+    %br/
+    %span.totop
+      %a{:href => "#"}
+        %i.fa.fa-angle-up.bg-color
+
+
+
+    -#%nav#sidebar.sidebar.nav-collapse.collapse
+    -#  - if core_methods?(params[:controller],params[:action])
+    -#    = render partial: 'core/projects/left_projects', locals: { current_stage: controller.controller_path }
+    -#  - else
+    -#    = render partial: 'left_side', locals: { current_stage: controller.controller_path }
+    -#  = render partial: 'shared/moderator_chat'
+    -#.wrap
+    -#  %header.page-header
+    -#    .navbar
+    -#      - if core_methods?(params[:controller],params[:action])
+    -#        =render 'core/projects/top_menu_general'
+    -#      - else
+    -#        =render 'top_menu'
+    -#  .content.container
+    -#    -if current_controller_for_navbar?(controller)
+    -#      %h4=@project.name
+    -#      %section.widget.widget-tabs
+    -#        %header
+    -#          =render partial: 'application/stages', locals: {current_stage: current_stage_for_navbar(controller, params[:stage])}
+    -#        .body.tab-content
+    -#          = yield
+    -#    -elsif @project and core_methods?(params[:controller],params[:action],true)
+    -#      %h4=@project.name
+    -#      %section.widget-tabs
+    -#        %header
+    -#          =render partial: 'core/projects/stages_general', locals: {current_stage: current_stage_for_analytics(params[:action])}
+    -#        .body.tab-content
+    -#          = yield
+    -#    -else
+    -#      = yield
 
     /
       Javascripts
       \==================================================
     / Placed at the end of the document so the pages load faster
     = javascript_include_tag 'application'
-    -#<!--[if lt IE 8]>
-    -#  <p class="danger"> Для эффективной работы настоятельно рекомендуем вам скачать брузер хром (<a href="https://www.google.ru/chrome/browser/desktop/">ссылка<a/>)</p>
-    -#<![endif]-->

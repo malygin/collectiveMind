@@ -1,35 +1,77 @@
-%ul.nav.nav-tabs{role: 'tablist'}
-  %li(class="#{'active' if current_stage == :lifetape}")
-    %a{href: "/project/#{@project.id}/life_tape/posts" + "#{params[:asp] ? "?asp=#{params[:asp]}" : ""}", id: "go_to_life_tape"}
-      1
-      %span.hidden-sm.hidden-xs=t('stages.stage', count: 1)
-      %i.hidden-sm.hidden-xs.fa.fa-question-circle.tooltips{"data-toggle" => 'tooltip', "data-html" => 'true', "data-placement" => 'bottom', title: t('stages.life_tape_title')}
-      %br
-      %span.hidden-sm.hidden-xs=t('stages.life_tape')
-  %li(class="#{'active' if current_stage == :discontent} #{'disabled' if @project.status < 3}")
-    %a{ href: "#{@project.status < 3 ? '#' :  "/project/#{@project.id}/discontent/posts" + "#{params[:asp] ? "?asp=#{params[:asp]}" : ""}"}", id: "go_to_discontent"}
-      2
-      %span.hidden-sm.hidden-xs=t('stages.stage', count: 2)
-      %i.hidden-sm.hidden-xs.fa.fa-question-circle.tooltips{"data-toggle" => 'tooltip', "data-html" => 'true', "data-placement" => 'bottom', title: t('stages.discontent_title')}
-      %br
-      %span.hidden-sm.hidden-xs=t('stages.discontent')
-  %li(class="#{'active' if current_stage == :concept} #{'disabled' if @project.status < 7}")
-    %a{ href: "#{@project.status < 7 ? '#' : "/project/#{@project.id}/concept/posts" + "#{params[:asp] ? "?asp=#{params[:asp]}" : ""}"}", id: "go_to_concept"}
-      3
-      %span.hidden-sm.hidden-xs=t('stages.stage', count: 3)
-      %i.hidden-sm.hidden-xs.fa.fa-question-circle.tooltips{"data-toggle" => 'tooltip', "data-html" => 'true', "data-placement" => 'bottom', title: t('stages.concept_title')}
-      %br
-      %span.hidden-sm.hidden-xs=t('stages.concept')
-  %li(class="#{'active' if current_stage == :plan} #{'disabled' if @project.status < 9}")
-    %a{ href: "#{@project.status < 9 ? '#' : "/project/#{@project.id}/plan/posts"}", id: 'go_to_plan'}
-      4
-      %span.hidden-sm.hidden-xs=t('stages.stage', count: 4)
-      %i.hidden-sm.hidden-xs.fa.fa-question-circle.tooltips{"data-toggle" => 'tooltip', "data-html" => 'true', "data-placement" => 'bottom', title: t('stages.plan_title')}
-      %br
-      %span.hidden-sm.hidden-xs=t('stages.plan')
-  %li(class="#{'active' if current_stage == :estimate} #{'disabled' if @project.status < 10}")
-    %a{ href: "#{@project.status < 10 ? '#' : "/project/#{@project.id}/estimate/posts"}", id: 'go_to_estimate'}
-      5
-      %span.hidden-sm.hidden-xs=t('stages.stage', count: 5)
-      %br
-      %span.hidden-sm.hidden-xs=t('stages.estimate')
+.col-md-2.col-sm-6
+  .our-process-item
+    %a.white.bg-lblue{href: "/project/#{@project.id}/life_tape/posts" + "#{params[:asp] ? "?asp=#{params[:asp]}" : ""}", id: "go_to_life_tape"}
+      %span.para-big-my
+        %strong 1
+      %br/
+      ЭТАП
+
+.col-md-3.col-sm-6
+  .our-process-item
+    %h4.text-left
+      %small
+        %strong ЭТАП 1:
+        %i.color текущий
+      %br/
+      Изучение Базы Знаний
+
+.col-md-7.col-sm-6
+  .our-process-item
+    %a.white.bg-green{ href: "#{@project.status < 3 ? '#' :  "/project/#{@project.id}/discontent/posts" + "#{params[:asp] ? "?asp=#{params[:asp]}" : ""}"}", id: "go_to_discontent"}
+      %span.para-big-my
+        %strong 2
+      %br/
+      ЭТАП
+    %a.white.bg-red{ href: "#{@project.status < 7 ? '#' : "/project/#{@project.id}/concept/posts" + "#{params[:asp] ? "?asp=#{params[:asp]}" : ""}"}", id: "go_to_concept"}
+      %span.para-big-my
+        %strong 3
+      %br/
+      ЭТАП
+    %a.white.bg-purple{ href: "#{@project.status < 9 ? '#' : "/project/#{@project.id}/plan/posts"}", id: 'go_to_plan'}
+      %span.para-big-my
+        %strong 4
+      %br/
+      ЭТАП
+    %a.white.bg-yellow{ href: "#{@project.status < 10 ? '#' : "/project/#{@project.id}/estimate/posts"}", id: 'go_to_estimate'}
+      %span.para-big-my
+        %strong 5
+      %br/
+      ЭТАП
+
+
+
+-#%ul.nav.nav-tabs{role: 'tablist'}
+-#  %li(class="#{'active' if current_stage == :lifetape}")
+-#    %a{href: "/project/#{@project.id}/life_tape/posts" + "#{params[:asp] ? "?asp=#{params[:asp]}" : ""}", id: "go_to_life_tape"}
+-#      1
+-#      %span.hidden-sm.hidden-xs=t('stages.stage', count: 1)
+-#      %i.hidden-sm.hidden-xs.fa.fa-question-circle.tooltips{"data-toggle" => 'tooltip', "data-html" => 'true', "data-placement" => 'bottom', title: t('stages.life_tape_title')}
+-#      %br
+-#      %span.hidden-sm.hidden-xs=t('stages.life_tape')
+-#  %li(class="#{'active' if current_stage == :discontent} #{'disabled' if @project.status < 3}")
+-#    %a{ href: "#{@project.status < 3 ? '#' :  "/project/#{@project.id}/discontent/posts" + "#{params[:asp] ? "?asp=#{params[:asp]}" : ""}"}", id: "go_to_discontent"}
+-#      2
+-#      %span.hidden-sm.hidden-xs=t('stages.stage', count: 2)
+-#      %i.hidden-sm.hidden-xs.fa.fa-question-circle.tooltips{"data-toggle" => 'tooltip', "data-html" => 'true', "data-placement" => 'bottom', title: t('stages.discontent_title')}
+-#      %br
+-#      %span.hidden-sm.hidden-xs=t('stages.discontent')
+-#  %li(class="#{'active' if current_stage == :concept} #{'disabled' if @project.status < 7}")
+-#    %a{ href: "#{@project.status < 7 ? '#' : "/project/#{@project.id}/concept/posts" + "#{params[:asp] ? "?asp=#{params[:asp]}" : ""}"}", id: "go_to_concept"}
+-#      3
+-#      %span.hidden-sm.hidden-xs=t('stages.stage', count: 3)
+-#      %i.hidden-sm.hidden-xs.fa.fa-question-circle.tooltips{"data-toggle" => 'tooltip', "data-html" => 'true', "data-placement" => 'bottom', title: t('stages.concept_title')}
+-#      %br
+-#      %span.hidden-sm.hidden-xs=t('stages.concept')
+-#  %li(class="#{'active' if current_stage == :plan} #{'disabled' if @project.status < 9}")
+-#    %a{ href: "#{@project.status < 9 ? '#' : "/project/#{@project.id}/plan/posts"}", id: 'go_to_plan'}
+-#      4
+-#      %span.hidden-sm.hidden-xs=t('stages.stage', count: 4)
+-#      %i.hidden-sm.hidden-xs.fa.fa-question-circle.tooltips{"data-toggle" => 'tooltip', "data-html" => 'true', "data-placement" => 'bottom', title: t('stages.plan_title')}
+-#      %br
+-#      %span.hidden-sm.hidden-xs=t('stages.plan')
+-#  %li(class="#{'active' if current_stage == :estimate} #{'disabled' if @project.status < 10}")
+-#    %a{ href: "#{@project.status < 10 ? '#' : "/project/#{@project.id}/estimate/posts"}", id: 'go_to_estimate'}
+-#      5
+-#      %span.hidden-sm.hidden-xs=t('stages.stage', count: 5)
+-#      %br
+-#      %span.hidden-sm.hidden-xs=t('stages.estimate')

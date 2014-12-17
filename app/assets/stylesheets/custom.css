@@ -1,0 +1,26 @@
+/* Your CSS codes here */
+
+.pager li > input, .pager li > button{
+    display: inline-block;
+    padding: 5px 14px;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 15px;
+}
+
+.pager li input, .pager li button{
+    background-color: #32c8de;
+    color: #ffffff;
+    border-color: #1faabe;
+}
+.pager li input:hover,.pager li button:hover {
+    background: #1faabe;
+}
+
+.pager .next > input{
+    float: right;
+}
+
+.pager .previous > button{
+    float: left;
+}

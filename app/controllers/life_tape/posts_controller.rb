@@ -19,6 +19,12 @@ class LifeTape::PostsController < PostsController
     @post_show = @aspect.life_tape_post unless @aspect.nil?
     @comments= @post_show.main_comments.paginate(page: @page ? @page : last_page, per_page: 10).includes(:comments) if @post_show
     @comment = LifeTape::Comment.new
+
+    @count_aspects = @project.aspects.main_aspects.count
+    @count_aspects_check = 0
+    @project.aspects.main_aspects.each do |asp|
+      @count_aspects_check += 1 if asp.question_complete(@project, current_user).count == asp.questions.by_project(@project.id).by_status(0).count
+    end
   end
 
   def vote_list

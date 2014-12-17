@@ -26,6 +26,8 @@ class Discontent::Aspect < ActiveRecord::Base
   has_and_belongs_to_many :life_tape_posts, class_name: 'LifeTape::Post', join_table: 'discontent_aspects_life_tape_posts',
                           foreign_key: 'discontent_aspect_id', association_foreign_key: 'life_tape_post_id'
 
+  has_many :questions, -> { where questions: {parent_post_type: 'discontent_aspect'} }, class_name: 'Question', foreign_key: 'post_id'
+
   scope :by_project, ->(project_id) { where("discontent_aspects.project_id = ?", project_id) }
   scope :minus_view, ->(aspects) { where("discontent_aspects.id NOT IN (#{aspects.join(", ")})") unless aspects.empty? }
   scope :by_discussions, ->(aspects) { where("discontent_aspects.id NOT IN (#{aspects.join(", ")})") unless aspects.empty? }
@@ -95,12 +97,18 @@ class Discontent::Aspect < ActiveRecord::Base
         where("discontent_posts.status = ?", 4).
         where("discontent_post_aspects.aspect_id = ?", self.id)
   end
+
   def aspect_discontent
     Discontent::Post.joins(:post_aspects).
         where("discontent_post_aspects.aspect_id = ?", self.id)
   end
+
   def aspect_life_tape
     LifeTape::Comment.joins("INNER JOIN life_tape_posts ON life_tape_comments.post_id = life_tape_posts.id").
         where("life_tape_posts.aspect_id = ?", self.id)
+  end
+
+  def question_complete(project, user)
+    self.questions.joins("INNER JOIN answers_users ON answers_users.question_id = questions.id").where('answers_users.user_id = ?', user.id).by_project(project.id).by_status(0).select("distinct questions.id")
   end
 end
