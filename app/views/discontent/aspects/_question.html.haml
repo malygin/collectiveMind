@@ -1,0 +1,17 @@
+.box-shadow-outer
+  .box-shadow-block.box-shadow-2.text-center
+    %h5= @next_question.content
+    %p.text-left
+      = form_tag(answer_question_discontent_aspect_path(@project, id: @aspect.id, question_id: @next_question.id), {method: :put, remote: true, id: 'form_answer_question', multipart: true}) do
+        %div(class="btn-group" data-toggle="buttons" id="answer_buttons")
+          - @next_question.answers.by_status(0).each do |answer|
+            %label(class="btn btn-xs btn-white answer-question")
+              = check_box_tag "answers[]", answer.id
+              = answer.content
+
+        %ul.pager
+          %li.previous
+            %button{"data-content" => "And here's some amazing content. It's very engaging. Right?", "data-toggle" => "popover", :role => "button", :title => "Popover title", :type => "button"} Подсказка
+
+          %li.next
+            = submit_tag "Ответить", id: "send_answers"

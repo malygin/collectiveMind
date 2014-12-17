@@ -1,5 +1,5 @@
 class Question < ActiveRecord::Base
-  attr_accessible :post, :user, :project, :parent_post_type, :hint, :status, :content
+  # attr_accessible :post, :user, :project, :parent_post_type, :hint, :status, :content
   belongs_to :post
   belongs_to :user
   belongs_to :project

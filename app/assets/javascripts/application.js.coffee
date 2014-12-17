@@ -97,6 +97,7 @@ $ ->
   $('.userscore').editable()
   $("#sortable").disableSelection()
   $().UItoTop easingType: "easeOutQuart"
+  $("[data-toggle=\"popover\"]").popover()
 
   $(".image-popup-vertical-fit").magnificPopup
     type: "image"

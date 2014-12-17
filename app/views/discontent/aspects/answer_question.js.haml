@@ -1,0 +1,13 @@
+- @question.answers.by_status(0).by_style(1).each do |answer|
+  $('#answer_#{answer.id}').toggleClass('btn-white btn-lblue');
+
+-if @next_question
+  $("#question_#{@question.id}").animate({height: 0, opacity:0}, 1000, function() { $(this).remove(); });
+  $("#question_#{@next_question.id}").fadeIn();
+-else
+  $('#check_question_#{@aspect.id}').html('<i class="fa fa-check"></i>');
+  $('#progress-bar-main').css('width',"#{(@count_aspects_check/@count_aspects.to_f)*100}%");
+
+
+$('#count_questions_now_#{@aspect.id}').html("#{@count_now}");
+$('#progress_bar_#{@aspect.id}').css('width',"#{(@count_now/@count_all.to_f)*100}%");

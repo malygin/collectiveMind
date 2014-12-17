@@ -97,12 +97,18 @@ class Discontent::Aspect < ActiveRecord::Base
         where("discontent_posts.status = ?", 4).
         where("discontent_post_aspects.aspect_id = ?", self.id)
   end
+
   def aspect_discontent
     Discontent::Post.joins(:post_aspects).
         where("discontent_post_aspects.aspect_id = ?", self.id)
   end
+
   def aspect_life_tape
     LifeTape::Comment.joins("INNER JOIN life_tape_posts ON life_tape_comments.post_id = life_tape_posts.id").
         where("life_tape_posts.aspect_id = ?", self.id)
+  end
+
+  def question_complete(project, user)
+    self.questions.joins("INNER JOIN answers_users ON answers_users.question_id = questions.id").where('answers_users.user_id = ?', user.id).by_project(project.id).by_status(0).select("distinct questions.id")
   end
 end
