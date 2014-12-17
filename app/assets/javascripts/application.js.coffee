@@ -40,7 +40,7 @@
 #= require jquery.ui.chatbox
 #= require jquery.slimscroll
 #= require moderator_chat
-#= require groups
+#= require groups_load.js.erb
 #= require history_jquery
 #= require plugins
 #= require comments
