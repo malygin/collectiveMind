@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141207142148) do
+ActiveRecord::Schema.define(version: 20141215103750) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -339,9 +339,10 @@ ActiveRecord::Schema.define(version: 20141207142148) do
   create_table "core_project_users", force: true do |t|
     t.integer  "project_id"
     t.integer  "user_id"
-    t.integer  "status"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
+    t.boolean  "owner",      default: false
+    t.integer  "role_id"
   end
 
   add_index "core_project_users", ["project_id"], name: "index_core_project_users_on_project_id", using: :btree
@@ -351,7 +352,7 @@ ActiveRecord::Schema.define(version: 20141207142148) do
     t.string   "name",               limit: 500
     t.text     "desc"
     t.text     "short_desc"
-    t.integer  "status"
+    t.integer  "status",                         default: 1
     t.datetime "created_at",                                 null: false
     t.datetime "updated_at",                                 null: false
     t.string   "url_logo"
@@ -362,7 +363,6 @@ ActiveRecord::Schema.define(version: 20141207142148) do
     t.integer  "stage4",                         default: 5
     t.integer  "stage5",                         default: 5
     t.text     "knowledge"
-    t.integer  "type_project",                   default: 0
     t.integer  "position",                       default: 0
     t.string   "secret"
     t.string   "secret2"
@@ -377,6 +377,9 @@ ActiveRecord::Schema.define(version: 20141207142148) do
     t.datetime "date_34"
     t.datetime "date_45"
     t.datetime "date_56"
+    t.date     "date_start"
+    t.date     "date_end"
+    t.integer  "count_stages"
   end
 
   add_index "core_projects", ["status"], name: "index_core_projects_on_status", using: :btree
@@ -539,7 +542,7 @@ ActiveRecord::Schema.define(version: 20141207142148) do
     t.boolean  "discuss_status"
     t.boolean  "useful"
     t.boolean  "approve_status"
-    t.boolean  "anonym"
+    t.boolean  "anonym",             default: false
   end
 
   add_index "discontent_posts", ["aspect_id"], name: "index_discontent_posts_on_aspect_id", using: :btree
@@ -1431,6 +1434,19 @@ ActiveRecord::Schema.define(version: 20141207142148) do
   add_index "questions_users", ["question_id"], name: "index_questions_users_on_question_id", using: :btree
   add_index "questions_users", ["user_id"], name: "index_questions_users_on_user_id", using: :btree
 
+  create_table "roles", force: true do |t|
+    t.string   "name"
+    t.integer  "code"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "seed_migration_data_migrations", force: true do |t|
+    t.string   "version"
+    t.integer  "runtime"
+    t.datetime "migrated_on"
+  end
+
   create_table "test_answers", force: true do |t|
     t.text     "name"
     t.integer  "type_answer"
@@ -1514,6 +1530,16 @@ ActiveRecord::Schema.define(version: 20141207142148) do
     t.datetime "updated_at",  null: false
     t.string   "value"
   end
+
+  create_table "user_roles", force: true do |t|
+    t.integer  "user_id"
+    t.integer  "role_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "user_roles", ["role_id"], name: "index_user_roles_on_role_id", using: :btree
+  add_index "user_roles", ["user_id"], name: "index_user_roles_on_user_id", using: :btree
 
   create_table "users", force: true do |t|
     t.string   "name"

@@ -3,7 +3,7 @@ require 'spec_helper'
 describe 'Users ' do
   subject { page }
   let (:user) { create :user }
-  let (:project) { create :core_project, status: 1, advices_concept: true, advices_discontent: true }
+  let (:project) { create :core_project, advices_concept: true, advices_discontent: true }
 
   context 'ordinary user sign in ' do
     before do

@@ -1,7 +1,5 @@
-
-
 module Estimate::PostsHelper
-	def estimate_trans(e)
+  def estimate_trans(e)
     case e
       when 0
         t('form.estimate.chance_1')
@@ -28,29 +26,29 @@ module Estimate::PostsHelper
   end
 
   def estimate_trans_project(e)
-		case e
+    case e
       when 0
         t('form.estimate.grade_0')
-			when 1
+      when 1
         t('form.estimate.grade_1')
-			when 2
+      when 2
         t('form.estimate.grade_2')
       when 3
         t('form.estimate.grade_3')
-		end
-	end
+    end
+  end
 
-	def css_class_estimate(e)
-		case e
+  def css_class_estimate(e)
+    case e
       when 0
         'text-danger'
-			when 0.125
-				'text-danger'
-			when 0.5
-				'text-warning'
+      when 0.125
+        'text-danger'
+      when 0.5
+        'text-warning'
       when 0.875
-				'text-success'
-		end
+        'text-success'
+    end
   end
 
   def css_class_estimate_all(e)
@@ -66,7 +64,7 @@ module Estimate::PostsHelper
     end
   end
 
-  def estimate_trans_simple(field,val)
+  def estimate_trans_simple(field, val)
     if field == 'on'
       case val
         when 4
@@ -113,6 +111,7 @@ module Estimate::PostsHelper
       end
     end
   end
+
   def css_class_estimate_simple(e)
     case e
       when 1

@@ -1,5 +1,4 @@
 class Concept::PostDiscontentComplite < ActiveRecord::Base
-  attr_accessible :complite, :discontent_post_id, :post_id
   belongs_to :post
   belongs_to :discontent_post
 

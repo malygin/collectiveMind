@@ -1,5 +1,4 @@
 class Discontent::Voting < ActiveRecord::Base
-  attr_accessible :discontent_post, :user, :against
   belongs_to :user
   belongs_to :discontent_post
 

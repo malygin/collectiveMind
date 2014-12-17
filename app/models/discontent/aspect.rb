@@ -1,7 +1,6 @@
 class Discontent::Aspect < ActiveRecord::Base
   include BasePost
 
-  attr_accessible :short_desc, :status, :position, :discontent_aspect_id
   has_many :posts
   has_many :discontent_posts, class_name: 'Discontent::Post'
   scope :positive_posts, -> { joins(:discontent_posts).where('discontent_posts.style = ?', 0) }

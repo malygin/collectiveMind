@@ -1,19 +1,19 @@
-# encoding: utf-8
 require 'spec_helper'
+
 describe 'Knowbase ' do
   subject { page }
 
-  let (:user) {create :user }
-  let (:moderator) {create :moderator }
-  let (:project) {create :core_project, status: 1 }
+  let (:user) { create :user }
+  let (:moderator) { create :moderator }
+  let (:project) { create :core_project, status: 1 }
 
   before do
-    @post1 =  FactoryGirl.create :knowbase_post, project: project, title: 'title first knowbase', content: 'content first knowbase', stage: 1
-    @post2 =  FactoryGirl.create :knowbase_post, project: project, title: 'title second knowbase', content: 'content second knowbase', stage: 2
+    @post1 = create :knowbase_post, project: project, title: 'title first knowbase', content: 'content first knowbase', stage: 1
+    @post2 = create :knowbase_post, project: project, title: 'title second knowbase', content: 'content second knowbase', stage: 2
   end
 
 
-  context  'knowbase post view sign in user ' do
+  context 'knowbase post view sign in user ' do
     before do
       sign_in user
       visit knowbase_posts_path(project)
@@ -33,7 +33,7 @@ describe 'Knowbase ' do
       end
     end
     context 'visit knowbase post 2' do
-      before { visit knowbase_post_path(project,@post2) }
+      before { visit knowbase_post_path(project, @post2) }
       it ' has all tags' do
         expect(page).to have_selector("span#edit_knowbase_post_title_#{@post2.id}", @post1.title)
         expect(page).to have_selector("div#edit_knowbase_post_content_#{@post2.id}", @post1.content)
@@ -43,7 +43,7 @@ describe 'Knowbase ' do
     end
   end
 
-  context  'knowbase post view sign in admin ' do
+  context 'knowbase post view sign in admin ' do
     before do
       sign_in moderator
       visit knowbase_posts_path(project)

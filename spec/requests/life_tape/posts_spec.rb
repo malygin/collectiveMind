@@ -1,21 +1,21 @@
-# encoding: utf-8
 require 'spec_helper'
+
 describe 'Life Tape ' do
   subject { page }
   # screenshot_and_open_image
   # save_and_open_page
-  let (:user) {create :user }
-  let (:user_data) {create :user }
-  let (:prime_admin) {create :prime_admin }
-  let (:moderator) {create :moderator }
-  let (:project) {create :core_project, status: 1 }
-  let (:closed_project) {create :core_project, status: 1 , type_access: 2, name: "closed project"}
+  let (:user) { create :user }
+  let (:user_data) { create :user }
+  let (:prime_admin) { create :prime_admin }
+  let (:moderator) { create :moderator }
+  let (:project) { create :core_project }
+  let (:closed_project) { create :closed_project, name: 'closed project' }
 
-  before  do
-    prepare_life_tape(project,user_data)
+  before do
+    prepare_life_tape(project, user_data)
   end
 
-  context  'ordinary user sign in ' do
+  context 'ordinary user sign in ' do
     before do
       sign_in user
       visit root_path
@@ -28,15 +28,15 @@ describe 'Life Tape ' do
       it 'have content for user ' do
         expect(page).to have_content @aspect1.content
         expect(page).to have_content @aspect2.content
-        expect(page).not_to  have_selector '#new_aspect'
+        expect(page).not_to have_selector '#new_aspect'
         expect(page).to have_selector 'textarea#comment_text_area'
-        expect(page).not_to have_link("plus_comment_#{@comment1.id}", :text => 'Выдать баллы', :href => plus_comment_life_tape_post_path(project,@comment1))
-        validate_default_links_and_sidebar(project,user)
+        expect(page).not_to have_link("plus_comment_#{@comment1.id}", :text => 'Выдать баллы', :href => plus_comment_life_tape_post_path(project, @comment1))
+        validate_default_links_and_sidebar(project, user)
         validate_not_have_admin_links_for_user(project)
         validate_not_have_moderator_links_for_user(project)
 
-        validation_visit_links_for_user(project,user)
-        validation_visit_not_have_links_for_user(project,user)
+        validation_visit_links_for_user(project, user)
+        validation_visit_not_have_links_for_user(project, user)
       end
     end
 
@@ -49,13 +49,13 @@ describe 'Life Tape ' do
 
     end
 
-    context 'vote life tape '  do
+    context 'vote life tape ' do
       before do
         project.update_attributes(:status => 2)
         visit life_tape_posts_path(project)
       end
 
-      it 'have content ', js:true do
+      it 'have content ', js: true do
         expect(page).to have_content '1 этап: Сбор информации. Голосование'
         expect(page).to have_content 'Определение наиболее важных тем процедуры'
         expect(page).to have_content "Вы можете выбрать #{project.stage1_count} тем(ы), которые на Ваш взгляд являются наиболее важными"
@@ -91,13 +91,13 @@ describe 'Life Tape ' do
         expect(page).to have_selector '#new_aspect'
         expect(page).to have_selector 'textarea#comment_text_area'
 
-        validate_default_links_and_sidebar(project,moderator)
+        validate_default_links_and_sidebar(project, moderator)
         validate_not_have_admin_links_for_moderator(project)
         validate_have_moderator_links(project)
 
-        validation_visit_links_for_user(project,moderator)
+        validation_visit_links_for_user(project, moderator)
         validation_visit_links_for_moderator(project)
-        validation_visit_not_have_links_for_moderator(project,moderator)
+        validation_visit_not_have_links_for_moderator(project, moderator)
       end
     end
 
@@ -114,13 +114,13 @@ describe 'Life Tape ' do
       it_behaves_like 'content with comments', true, 2
 
     end
-    context 'vote life tape '  do
+    context 'vote life tape ' do
       before do
         project.update_attributes(:status => 2)
         visit life_tape_posts_path(project)
       end
 
-      it 'have content ', js:true do
+      it 'have content ', js: true do
         expect(page).to have_content '1 этап: Сбор информации. Голосование'
         expect(page).to have_content 'Определение наиболее важных тем процедуры'
         expect(page).to have_content "Вы можете выбрать #{project.stage1_count} тем(ы), которые на Ваш взгляд являются наиболее важными"
@@ -128,11 +128,11 @@ describe 'Life Tape ' do
         expect(page).to have_content @aspect1.content
         expect(page).to have_content @aspect2.content
         expect(page).to have_selector 'a', 'Перейти к рефлексии'
-        expect(page).to have_link("set_vote_#{@aspect1.id}", :text => 'Убрать', :href => set_aspect_status_life_tape_post_path(project,@aspect1))
+        expect(page).to have_link("set_vote_#{@aspect1.id}", :text => 'Убрать', :href => set_aspect_status_life_tape_post_path(project, @aspect1))
         click_link "set_vote_#{@aspect1.id}"
-        expect(page).to have_link("set_vote_#{@aspect1.id}", :text => 'Вернуть', :href => set_aspect_status_life_tape_post_path(project,@aspect1))
+        expect(page).to have_link("set_vote_#{@aspect1.id}", :text => 'Вернуть', :href => set_aspect_status_life_tape_post_path(project, @aspect1))
         click_link "set_vote_#{@aspect1.id}"
-        expect(page).to have_link("set_vote_#{@aspect1.id}", :text => 'Убрать', :href => set_aspect_status_life_tape_post_path(project,@aspect1))
+        expect(page).to have_link("set_vote_#{@aspect1.id}", :text => 'Убрать', :href => set_aspect_status_life_tape_post_path(project, @aspect1))
         click_link "vote_#{@aspect1.id}"
         expect(page).to have_content "Осталось голосов: #{project.stage1_count - 1}"
         click_link "vote_#{@aspect2.id}"
@@ -146,8 +146,4 @@ describe 'Life Tape ' do
     end
 
   end
-
-  context 'expert sign in' do
-  end
-
 end

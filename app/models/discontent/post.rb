@@ -1,6 +1,5 @@
 class Discontent::Post < ActiveRecord::Base
   include BasePost
-  attr_accessible :whend, :whered, :aspect_id, :aspect, :style, :anonym, :discontent_post_id, :important, :status_content, :status_whered, :status_whend, :improve_comment, :improve_stage, :discuss_status
 
   belongs_to :aspect
   belongs_to :discontent_post, foreign_key: 'discontent_post_id', class_name: 'Discontent::Post'

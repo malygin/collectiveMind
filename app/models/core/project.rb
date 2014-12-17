@@ -1,39 +1,4 @@
 class Core::Project < ActiveRecord::Base
-##### status 
-# 0 - prepare to procedure
-# 1 - life_tape
-# 2 - vote fo aspects
-# 3 - Discontent
-# 4 - voting for Discontent
-# 5 - Concept 
-# 6 - voiting for Concept
-# 7 - plan
-# 8 - voiting for plan
-# 9 - estimate
-# 10 - final vote
-# 11 - wait for decision
-# 20  - complete
-####### type_access
-# 0 open for everyone and everyone may be participant
-# 1 open for everyone but participant may be only with rights
-# 2  closed, only for participant
-####### type_project
-# 0 normal
-# 1 invisible
-####### new type_access
-# 0 opened for all
-# 1 only for ratio club and all moderators
-# 2 closed, only for invited and prime moderators
-# 3 demo (opened for all)
-# 4 testing
-# 5 preparing procedure
-# 10 disabled
-
-  attr_accessible :desc, :postion, :secret, :type_project, :name, :short_desc, :knowledge, :status, :type_access,
-                  :url_logo, :stage1, :stage2, :stage3, :stage4, :stage5, :color, :code, :advices_concept, :advices_discontent,
-                  :date_12,:date_23,:date_34,:date_45,:date_56
-
-
   has_many :life_tape_posts, -> { where status: 0 }, class_name: 'LifeTape::Post'
   has_many :aspects, class_name: 'Discontent::Aspect'
 
@@ -55,7 +20,6 @@ class Core::Project < ActiveRecord::Base
   has_many :knowbase_posts, class_name: 'Knowbase::Post'
 
   has_many :core_project_scores, class_name: 'Core::ProjectScore'
-
   has_many :core_project_users, class_name: 'Core::ProjectUser'
   has_many :users_in_project, through: :core_project_users, source: :user, class_name: 'User'
 
@@ -63,8 +27,9 @@ class Core::Project < ActiveRecord::Base
   has_many :groups
   has_many :journal_mailers, class_name: 'JournalMailer'
   #has_many :project_score_users, class_name: 'User', through: :core_project_scores, source: :user
-  scope :club_projects, ->(user) { where(type_access: 1) if user.cluber? or user.boss? }
-  scope :active_proc, -> { where("core_projects.status < ?", 20) }
+
+  scope :club_projects, ->(user) { where(type_access: TYPE_ACCESS_CODE[:club]) if user.cluber? or user.boss? }
+  scope :active_proc, -> { where('core_projects.status < ?', STATUS_CODES[:complete]) }
   scope :access_proc, -> access_proc { where(core_projects: {type_access: access_proc}) }
 
   LIST_STAGES = {1 => {name: 'Сбор информации', type_stage: :life_tape_posts, status: [0, 1, 2, 20]},
@@ -72,6 +37,42 @@ class Core::Project < ActiveRecord::Base
                  3 => {name: 'Сбор нововведений', type_stage: :concept_posts, status: [7, 8]},
                  4 => {name: 'Создание проектов', type_stage: :plan_posts, status: [9]},
                  5 => {name: 'Выставление оценок', type_stage: :estimate_posts, status: [10, 11, 12, 13]}}.freeze
+
+  TYPE_ACCESS = {
+      0 => I18n.t('form.project.opened'),
+      1 => I18n.t('form.project.club'),
+      2 => I18n.t('form.project.closed'),
+  }.freeze
+
+  TYPE_ACCESS_CODE = {
+      opened: 0,
+      club: 1,
+      closed: 2
+  }.freeze
+
+  STATUS_CODES = {
+      prepare: 0,
+      life_tape: 1,
+      vote_aspects: 2,
+      discontent: 3,
+      vote_discontent: 4,
+      concept: 5,
+      vote_concept: 6,
+      plan: 7,
+      vote_plan: 8,
+      estimate: 9,
+      vote_final: 10,
+      wait_decision: 11,
+      complete: 20
+  }.freeze
+
+  validates :name, presence: true
+  validates :status, inclusion: {in: STATUS_CODES.values}
+  validates :type_access, inclusion: {in: TYPE_ACCESS_CODE.values}
+
+  def closed?
+    type_access == 2
+  end
 
   def moderators
     users_in_project.where(users: {type_user: User::TYPES_USER[:admin]})
@@ -107,25 +108,13 @@ class Core::Project < ActiveRecord::Base
   end
 
   def project_access(user)
-    type_project = self.type_access
-    type_user = user.type_user
-
-    if [1, 7].include?(type_user) and [0, 1, 2, 3, 4, 5].include?(type_project)
-      true
-    elsif [6].include?(type_user) and [0, 1, 3, 4, 5].include?(type_project)
-      true
-    elsif [2, 3].include?(type_user) and [0, 1, 3].include?(type_project)
-      true
-    elsif [4, 5].include?(type_user) and [0, 1, 3].include?(type_project)
-      true
-    elsif [8].include?(type_user) and [0, 3].include?(type_project)
-      true
-    elsif [0, 3].include?(type_project)
-      true
-    elsif [2].include?(type_project) and user.projects.include?(self)
-      true
-    else
-      false
+    case type_access
+      when 0
+        return true
+      when 1
+        (user.cluber? && users.include?(user)) || user.boss?
+      when 2
+        user.boss?
     end
   end
 
@@ -139,9 +128,7 @@ class Core::Project < ActiveRecord::Base
   end
 
   def type_access_name
-    type_project = self.type_access
-
-    case type_project
+    case self.type_access
       when 0
         'Открытая'
       when 1
@@ -339,7 +326,7 @@ class Core::Project < ActiveRecord::Base
 
   def concept_comments
     Concept::Comment.joins("INNER JOIN concept_posts ON concept_comments.post_id = concept_posts.id").
-      where("concept_posts.project_id = ?", self.id)
+        where("concept_posts.project_id = ?", self.id)
   end
 
   def discontent_comments
@@ -353,7 +340,7 @@ class Core::Project < ActiveRecord::Base
   end
 
   def date_begin_stage(table_name)
-    table_name = table_name.sub('_posts','').sub('_comments', '')
+    table_name = table_name.sub('_posts', '').sub('_comments', '')
     if table_name == 'life_tape'
       self.created_at
     elsif table_name == 'discontent'
@@ -381,5 +368,4 @@ class Core::Project < ActiveRecord::Base
       self.date_56
     end
   end
-
 end

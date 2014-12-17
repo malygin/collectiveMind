@@ -7,14 +7,7 @@ class User < ActiveRecord::Base
 
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable, :lastseenable
-  # Setup accessible (or protected) attributes for your model
-  attr_accessible :remember_me, :password, :password_confirmation
   attr_accessor :secret, :secret2, :secret3
-  attr_accessible :login, :nickname, :anonym, :secret,
-                  :dateActivation, :dateLastEnter, :dateRegistration, :email, :faculty, :group,
-                  :name, :string, :string, :surname, :validate, :vkid,
-                  :score, :score_a, :score_g, :score_o, :type_user, :last_seen_news, :chat_open,
-                  :last_seen_chat_at
 
   has_many :core_project_scores, class_name: 'Core::ProjectScore'
   has_many :help_users_answerses, class_name: 'Help::UsersAnswers'
@@ -99,7 +92,6 @@ class User < ActiveRecord::Base
             uniqueness: {case_sensitive: false}
 
   #before_save :encrypt_password
-  attr_accessible :avatar
 
   # This method associates the attribute ":avatar" with a file attachment
   has_attached_file :avatar, styles: {
