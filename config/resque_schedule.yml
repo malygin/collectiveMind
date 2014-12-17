@@ -1,6 +1,6 @@
 every_hour_from_10_to_24_hours:
   #  every: "1d"
-  cron: "0 10-24/4 * * *"
+  cron: "0 10-24 * * *"
   class: FeedModeratorMailer
   queue: feed_moderator_mailer
   args:
