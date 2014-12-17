@@ -61,6 +61,8 @@
     $('input#new-message').val('')
 
   if $('.group-chat#chat').length > 0 && $('.id_group').length > 0
+    unless (typeof Websockets == 'function')
+      return
     ws = Websockets.connection()
 
     private_channel = ws.subscribe_private('group_chat')
@@ -136,6 +138,8 @@
     }
 
   if $('#edit_plan_post_model').length > 0
+    unless (typeof Websockets == 'function')
+      return
     ws = Websockets.connection()
     private_channel = ws.subscribe_private('group.actions')
     private_channel.on_success = ->

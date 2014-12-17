@@ -1,5 +1,7 @@
 @create_moderator_chat = ->
   if $('#moderator_chat_div').length > 0
+    unless (typeof Websockets == 'function')
+      return
     ws = Websockets.connection()
 
     private_channel = ws.subscribe_private('moderator_chat')
