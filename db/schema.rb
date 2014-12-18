@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141216120135) do
+ActiveRecord::Schema.define(version: 20141218195419) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -408,6 +408,7 @@ ActiveRecord::Schema.define(version: 20141216120135) do
     t.boolean  "user_add"
     t.integer  "discontent_aspect_id"
     t.string   "color"
+    t.string   "short_name"
   end
 
   add_index "discontent_aspects", ["project_id"], name: "index_discontent_aspects_on_project_id", using: :btree

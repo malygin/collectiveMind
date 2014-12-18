@@ -134,7 +134,9 @@ module Discontent::PostsHelper
   end
 
   def content_for_note(post_content, field, link = false)
+    note_able = post_content.notes.by_type(number_for_type_field(field)).present?
     html = ''
+    html << '<br></br><code><strong> Рекомендация: </strong>' if note_able
     html << content_tag(:ul, '', class: "discuss_comment", id: "note_form_#{post_content.id}_#{number_for_type_field(field)}") do
       post_content.notes.by_type(number_for_type_field(field)).each do |dpn|
         concat content_tag(:div, '', id: "post_note_#{dpn.id}") {
@@ -142,6 +144,7 @@ module Discontent::PostsHelper
                }
       end
     end
+    html << '</code>' if note_able
     html.html_safe
   end
 end

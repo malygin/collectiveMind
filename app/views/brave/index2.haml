@@ -1,0 +1,929 @@
+!!!
+%html
+  %head
+    %meta{:charset => "utf-8"}/
+    %title Home - Brave
+    / Description, Keywords and Author
+    %meta{:content => "Your description", :name => "description"}/
+    %meta{:content => "Your,Keywords", :name => "keywords"}/
+    %meta{:content => "ResponsiveWebInc", :name => "author"}/
+    %meta{:content => "width=device-width, initial-scale=1.0", :name => "viewport"}/
+    / Styles
+    / Bootstrap CSS
+    %link{:href => "css/bootstrap.min.css", :rel => "stylesheet"}/
+    / Font awesome CSS
+    %link{:href => "css/font-awesome.min.css", :rel => "stylesheet"}/
+    / Magnific Popup
+    %link{:href => "css/magnific-popup.css", :rel => "stylesheet"}/
+    / Owl carousel
+    %link{:href => "css/owl.carousel.css", :rel => "stylesheet"}/
+    %link{:href => "css/style-4.css", :rel => "stylesheet"}/
+    %link{:href => "css/style-29.css", :rel => "stylesheet"}/
+    %link{:href => "css/style-11.css", :rel => "stylesheet"}/
+    / CSS for this page
+    / Revolution Slider
+    %link{:href => "css/settings.css", :rel => "stylesheet"}/
+    / Base style
+    %link{:href => "css/styles/style.css", :rel => "stylesheet"}/
+    / Skin CSS
+    %link#color_theme{:href => "css/styles/skin-lblue.css", :rel => "stylesheet"}/
+    / Custom CSS. Type your CSS code in custom.css file
+    %link{:href => "css/custom.css", :rel => "stylesheet"}/
+    / Favicon
+    %link{:href => "#", :rel => "shortcut icon"}/
+  / Add class "boxed" along with body for boxed layout.
+  / Add "pattern-x" (1 to 5) for background patterns.
+  / Add "img-x" (1 to 5) for background images.
+  %body
+    / Outer Starts
+    .outer
+      / Top bar starts
+      .top-bar
+        .container
+          / Contact starts
+          .tb-contact.pull-left
+            %strong
+              %a{:href => "#"}
+                %i.fa.fa-laptop
+                = succeed "DECISION" do
+                  %span.color MASS
+            \&nbsp;&nbsp;
+            / Email
+            %i.fa.fa-envelope.color
+            \&nbsp;
+            %a{:href => "mailto:Slava.Gorlytsa@gmail.com"} Slava.Gorlytsa@gmail.com
+            \&nbsp;&nbsp;
+            / Phone
+            %i.fa.fa-phone.color
+            \&nbsp; +7 (937) - (242) - 8881
+          / Contact ends
+          / Langauge starts
+          .tb-language.dropdown.pull-right
+            %a{"data-target" => "#", "data-toggle" => "dropdown", :href => "#"}
+              %i.fa.fa-globe
+              English
+              %i.fa.fa-angle-down.color
+            / Dropdown menu with languages
+            %ul.dropdown-menu.dropdown-mini{:role => "menu"}
+              %li
+                %a{:href => "#"} Hindi
+              %li
+                %a{:href => "#"} Tamil
+              %li
+                %a{:href => "#"} Kanada
+          / Language ends
+          / Social media starts
+          .tb-social.pull-right
+            .brand-bg.text-right
+              / Brand Icons
+              = succeed "&amp;nbsp;&amp;nbsp;" do
+                %button.btn.btn-sm.btn-lblue Процедура
+              = succeed "&amp;nbsp;&amp;nbsp;" do
+                %button.btn.btn-sm.btn-lblue.btn-outline Кабинет
+              %button.btn.btn-sm.btn-lblue.btn-outline Новости
+          / Social media ends
+          .clearfix
+      / Top bar ends
+      .container
+        .row
+          .col-md-12
+            %h2.color
+              Максимизация эффективности работы в аптеках
+              %small с учетом новой стратегии Инвара по ОТС
+      %br/
+      / Header two ends
+      / Main content starts
+      .main-block
+        .container
+          .our-process
+            .row
+              .col-md-2.col-sm-6
+                / Our Process Item
+                .our-process-item
+                  / Icon
+                  %a.white.bg-lblue{:href => "#"}
+                    %span.para-big-my
+                      %strong 1
+                    = succeed "\u{42d}\u{422}\u{410}\u{41f}" do
+                      %br/
+                  -#/ Arrow Image
+                  -#/ Heading
+              .col-md-3.col-sm-6
+                .our-process-item
+                  %h4.text-left
+                    %small
+                      %strong ЭТАП 1:
+                      %i.color текущий
+                    = succeed "\u{418}\u{437}\u{443}\u{447}\u{435}\u{43d}\u{438}\u{435}" do
+                      %br/
+                    Базы Знаний
+              .col-md-7.col-sm-6
+                .our-process-item
+                  %a.white.bg-green{:href => "#"}
+                    %span.para-big-my
+                      %strong 2
+                    = succeed "\u{42d}\u{422}\u{410}\u{41f}" do
+                      %br/
+                  %a.white.bg-red{:href => "#"}
+                    %span.para-big-my
+                      %strong 3
+                    = succeed "\u{42d}\u{422}\u{410}\u{41f}" do
+                      %br/
+                  %a.white.bg-purple{:href => "#"}
+                    %span.para-big-my
+                      %strong 4
+                    = succeed "\u{42d}\u{422}\u{410}\u{41f}" do
+                      %br/
+                  %a.white.bg-yellow{:href => "#"}
+                    %span.para-big-my
+                      %strong 5
+                    = succeed "\u{42d}\u{422}\u{410}\u{41f}" do
+                      %br/
+          .divider-1
+          .row
+            .col-md-6
+              %h5 Ваш прогресс на 1 этапе
+              .progress.pb-sm
+                / White color (progress-bar-white)
+                .progress-bar.progress-bar-blue{"aria-valuemax" => "100", "aria-valuemin" => "0", "aria-valuenow" => "40", :role => "progressbar", :style => "width: 40%"}
+                  %span.sr-only 40% Complete (success)
+            .col-md-6
+              / UI eleven
+              .ui-11
+                .container
+                  / UI content
+                  .block-content
+                    .menu-container
+                      .row
+                        .col-md-12
+                          / Drop down menu
+                          .dd-menu.dd-one
+                            %a.dd-link{:href => "#"}
+                              -#/ Image
+                              -#/ Heading
+                            %h5
+                              Прогресс других участников
+                              %i
+                                %small (подробнее)
+                            .progress.pb-sm
+                              / White color (progress-bar-white)
+                              .progress-bar.progress-bar-green{"aria-valuemax" => "100", "aria-valuemin" => "0", "aria-valuenow" => "85", :role => "progressbar", :style => "width: 85%"}
+                                %span.sr-only 85% Complete (success)
+                            .clearfix
+                            .dd-dropdown
+                              %ul.list-unstyled{:role => "menu"}
+                                %li
+                                  %a{:href => "#"}
+                                  %h6 Малыгин Андрей
+                                  .progress.pb-sm
+                                    / White color (progress-bar-white)
+                                    .progress-bar.progress-bar-red{"aria-valuemax" => "100", "aria-valuemin" => "0", "aria-valuenow" => "40", :role => "progressbar", :style => "width: 40%"}
+                                      %span.sr-only 40% Complete (success)
+                                %li
+                                  %a{:href => "#"}
+                                  %h6 Малыгин Андрей
+                                  .progress.pb-sm
+                                    / White color (progress-bar-white)
+                                    .progress-bar.progress-bar-red{"aria-valuemax" => "100", "aria-valuemin" => "0", "aria-valuenow" => "40", :role => "progressbar", :style => "width: 40%"}
+                                      %span.sr-only 40% Complete (success)
+                                %li
+                                  %a{:href => "#"}
+                                  %h6 Малыгин Андрей
+                                  .progress.pb-sm
+                                    / White color (progress-bar-white)
+                                    .progress-bar.progress-bar-red{"aria-valuemax" => "100", "aria-valuemin" => "0", "aria-valuenow" => "40", :role => "progressbar", :style => "width: 40%"}
+                                      %span.sr-only 40% Complete (success)
+                                %li
+                                  %a{:href => "#"}
+                                  %h6 Малыгин Андрей
+                                  .progress.pb-sm
+                                    / White color (progress-bar-white)
+                                    .progress-bar.progress-bar-red{"aria-valuemax" => "100", "aria-valuemin" => "0", "aria-valuenow" => "40", :role => "progressbar", :style => "width: 40%"}
+                                      %span.sr-only 40% Complete (success)
+              -#/ UI eleven end
+          %hr/
+          / UI four
+          .ui-4
+            .container
+              / UI content
+              .block-content
+                / Tabs
+                / Nav tabs
+                .row
+                  .col-md-3
+                    %h2 Выберите аспект:
+                  .col-md-9
+                    %ul.nav.nav-tabs
+                      %li.active
+                        %a.bg-lblue{"data-toggle" => "tab", :href => "#tab-one"}
+                          %button.btn.btn-round.btn-white
+                            %span FD
+                      %li
+                        %a.bg-orange{"data-toggle" => "tab", :href => "#tab-two"}
+                          %button.btn.btn-round.btn-orange
+                            %span FB
+                      %li
+                        %a.bg-purple{"data-toggle" => "tab", :href => "#tab-three"}
+                          %button.btn.btn-round.btn-purple
+                            %span SD
+                      %li
+                        %a.bg-yellow{"data-toggle" => "tab", :href => "#tab-four"}
+                          %button.btn.btn-round.btn-yellow
+                            %span RT
+                      %li
+                        %a.bg-green{"data-toggle" => "tab", :href => "#tab-five"}
+                          %button.btn.btn-round.btn-green
+                            %span KP
+                      %li
+                        %a.bg-blue{"data-toggle" => "tab", :href => "#tab-six"}
+                          %button.btn.btn-round.btn-blue
+                            %span
+                              IS
+                / Tab panes
+                .tab-content
+                  #tab-one.tab-pane.active.fade.in
+                    .row
+                      .col-md-12.text-center
+                        %h3 Бизнес-процессы в аптеке
+                      .col-md-4.col-sm-4
+                        .table-responsive
+                          %table.table.table-bordered.green-discontent
+                            %tr
+                              %th{:colspan => "2"}
+                                .text-right
+                                  %span.label.label-red АВ
+                            %tr
+                              %td
+                                %small Что:
+                              %td
+                                %strong
+                                  %big Нечем дышать
+                                %br/
+                                %code
+                                  %strong> Рекомендация:
+                                  Поправьте формуировку
+                            %tr
+                              %td
+                                %small Где:
+                              %td
+                                В офисе
+                                %br/
+                                %code
+                                  %strong> Рекомендация:
+                                  Поправьте формуировку
+                            %tr
+                              %td
+                                %small Когда:
+                              %td Во время переговоров
+                            %tr
+                              %td{:colspan => "2"}
+                                .text-right
+                                  %i
+                                    31 дек. 2014 |
+                                    %a{:href => "#"}
+                                      25
+                                      %strong (+5)
+                                      %i.fa.fa-comment-o
+                                    |
+                                    %a{:href => "#"}
+                                      5
+                                      %i.fa.fa-thumbs-up
+                                    |
+                                    %a{:href => "#"}
+                                      7
+                                      %i.fa.fa-thumbs-down
+                        .table-responsive
+                          %table.table.table-bordered.red-discontent
+                            %tr
+                              %th{:colspan => "2"}
+                                .text-right
+                                  %span.label.label-red АВ
+                                  %span.label.label-yellow EF
+                            %tr
+                              %td
+                                %small Что:
+                              %td
+                                %strong
+                                  %big Нечем дышать
+                            %tr
+                              %td
+                                %small Где:
+                              %td В офисе
+                            %tr
+                              %td
+                                %small Когда:
+                              %td Во время переговоров
+                            %tr
+                              %td{:colspan => "2"}
+                                .text-right
+                                  %i
+                                    31 дек. 2014 |
+                                    %a{:href => "#"}
+                                      25
+                                      %i.fa.fa-comment-o
+                                    |
+                                    %a{:href => "#"}
+                                      5
+                                      %i.fa.fa-thumbs-up
+                                    |
+                                    %a{:href => "#"}
+                                      7
+                                      %i.fa.fa-thumbs-down
+                        .table-responsive
+                          %table.table.table-bordered.green-discontent
+                            %tr
+                              %th{:colspan => "2"}
+                                .text-right
+                                  %span.label.label-orange CD
+                                  %span.label.label-blue DE
+                                  %span.label.label-yellow EF
+                            %tr
+                              %td
+                                %small Что:
+                              %td
+                                %strong
+                                  %big Нечем дышать
+                            %tr
+                              %td
+                                %small Где:
+                              %td В офисе
+                            %tr
+                              %td
+                                %small Когда:
+                              %td Во время переговоров
+                            %tr
+                              %td{:colspan => "2"}
+                                .text-right
+                                  %i
+                                    31 дек. 2014 |
+                                    %a{:href => "#"}
+                                      25
+                                      %i.fa.fa-comment-o
+                                    |
+                                    %a{:href => "#"}
+                                      5
+                                      %i.fa.fa-thumbs-up
+                                    |
+                                    %a{:href => "#"}
+                                      7
+                                      %i.fa.fa-thumbs-down
+                      .col-md-4.col-sm-4
+                        .table-responsive
+                          %table.table.table-bordered.red-discontent
+                            %tr
+                              %th{:colspan => "2"}
+                                .text-right
+                                  %span.label.label-green BC
+                                  %span.label.label-orange CD
+                                  %span.label.label-blue DE
+                            %tr
+                              %td
+                                %small Что:
+                              %td
+                                %strong
+                                  %big Нечем дышать
+                            %tr
+                              %td
+                                %small Где:
+                              %td В офисе
+                            %tr
+                              %td
+                                %small Когда:
+                              %td Во время переговоров
+                            %tr
+                              %td{:colspan => "2"}
+                                .text-right
+                                  %i
+                                    31 дек. 2014 |
+                                    %a{:href => "#"}
+                                      25
+                                      %i.fa.fa-comment-o
+                                    |
+                                    %a{:href => "#"}
+                                      5
+                                      %i.fa.fa-thumbs-up
+                                    |
+                                    %a{:href => "#"}
+                                      7
+                                      %i.fa.fa-thumbs-down
+                        .table-responsive
+                          %table.table.table-bordered.green-discontent
+                            %tr
+                              %th{:colspan => "2"}
+                                .text-right
+                                  %span.label.label-red АВ
+                                  %span.label.label-yellow EF
+                            %tr
+                              %td
+                                %small Что:
+                              %td
+                                %strong
+                                  %big Нечем дышать
+                            %tr
+                              %td
+                                %small Где:
+                              %td В офисе
+                            %tr
+                              %td
+                                %small Когда:
+                              %td Во время переговоров
+                            %tr
+                              %td{:colspan => "2"}
+                                .text-right
+                                  %i
+                                    31 дек. 2014 |
+                                    %a{:href => "#"}
+                                      25
+                                      %i.fa.fa-comment-o
+                                    |
+                                    %a{:href => "#"}
+                                      5
+                                      %i.fa.fa-thumbs-up
+                                    |
+                                    %a{:href => "#"}
+                                      7
+                                      %i.fa.fa-thumbs-down
+                        .table-responsive
+                          %table.table.table-bordered.red-discontent
+                            %tr
+                              %th{:colspan => "2"}
+                                .text-right
+                                  %span.label.label-red АВ
+                                  %span.label.label-green BC
+                            %tr
+                              %td
+                                %small Что:
+                              %td
+                                %strong
+                                  %big Нечем дышать
+                            %tr
+                              %td
+                                %small Где:
+                              %td В офисе
+                            %tr
+                              %td
+                                %small Когда:
+                              %td Во время переговоров
+                            %tr
+                              %td{:colspan => "2"}
+                                .text-right
+                                  %i
+                                    31 дек. 2014 |
+                                    %a{:href => "#"}
+                                      25
+                                      %i.fa.fa-comment-o
+                                    |
+                                    %a{:href => "#"}
+                                      5
+                                      %i.fa.fa-thumbs-up
+                                    |
+                                    %a{:href => "#"}
+                                      7
+                                      %i.fa.fa-thumbs-down
+                        .table-responsive
+                          %table.table.table-bordered.green-discontent
+                            %tr
+                              %th{:colspan => "2"}
+                                .text-right
+                                  %span.label.label-red АВ
+                                  %span.label.label-blue DE
+                                  %span.label.label-yellow EF
+                            %tr
+                              %td
+                                %small Что:
+                              %td
+                                %strong
+                                  %big Нечем дышать
+                            %tr
+                              %td
+                                %small Где:
+                              %td В офисе
+                            %tr
+                              %td
+                                %small Когда:
+                              %td Во время переговоров
+                            %tr
+                              %td{:colspan => "2"}
+                                .text-right
+                                  %i
+                                    31 дек. 2014 |
+                                    %a{:href => "#"}
+                                      25
+                                      %i.fa.fa-comment-o
+                                    |
+                                    %a{:href => "#"}
+                                      5
+                                      %i.fa.fa-thumbs-up
+                                    |
+                                    %a{:href => "#"}
+                                      7
+                                      %i.fa.fa-thumbs-down
+                      .col-md-4.col-sm-4
+                        .table-responsive
+                          %table.table.table-bordered.red-discontent
+                            %tr
+                              %th{:colspan => "2"}
+                                .text-right
+                                  %span.label.label-yellow EF
+                            %tr
+                              %td
+                                %small Что:
+                              %td
+                                %strong
+                                  %big Нечем дышать
+                            %tr
+                              %td
+                                %small Где:
+                              %td В офисе
+                            %tr
+                              %td
+                                %small Когда:
+                              %td Во время переговоров
+                            %tr
+                              %td{:colspan => "2"}
+                                .text-right
+                                  %i
+                                    31 дек. 2014 |
+                                    %a{:href => "#"}
+                                      25
+                                      %i.fa.fa-comment-o
+                                    |
+                                    %a{:href => "#"}
+                                      5
+                                      %i.fa.fa-thumbs-up
+                                    |
+                                    %a{:href => "#"}
+                                      7
+                                      %i.fa.fa-thumbs-down
+                        .table-responsive
+                          %table.table.table-bordered.green-discontent
+                            %tr
+                              %th{:colspan => "2"}
+                                .text-right
+                                  %span.label.label-red АВ
+                                  %span.label.label-orange CD
+                                  %span.label.label-yellow EF
+                            %tr
+                              %td
+                                %small Что:
+                              %td
+                                %strong
+                                  %big Нечем дышать
+                            %tr
+                              %td
+                                %small Где:
+                              %td В офисе
+                            %tr
+                              %td
+                                %small Когда:
+                              %td Во время переговоров
+                            %tr
+                              %td{:colspan => "2"}
+                                .text-right
+                                  %i
+                                    31 дек. 2014 |
+                                    %a{:href => "#"}
+                                      25
+                                      %i.fa.fa-comment-o
+                                    |
+                                    %a{:href => "#"}
+                                      5
+                                      %i.fa.fa-thumbs-up
+                                    |
+                                    %a{:href => "#"}
+                                      7
+                                      %i.fa.fa-thumbs-down
+                        .table-responsive
+                          %table.table.table-bordered.red-discontent
+                            %tr
+                              %th{:colspan => "2"}
+                                .text-right
+                                  %span.label.label-green BC
+                            %tr
+                              %td
+                                %small Что:
+                              %td
+                                %strong
+                                  %big Нечем дышать
+                            %tr
+                              %td
+                                %small Где:
+                              %td В офисе
+                            %tr
+                              %td
+                                %small Когда:
+                              %td Во время переговоров
+                            %tr
+                              %td{:colspan => "2"}
+                                .text-right
+                                  %i
+                                    31 дек. 2014 |
+                                    %a{:href => "#"}
+                                      25
+                                      %i.fa.fa-comment-o
+                                    |
+                                    %a{:href => "#"}
+                                      5
+                                      %i.fa.fa-thumbs-up
+                                    |
+                                    %a{:href => "#"}
+                                      7
+                                      %i.fa.fa-thumbs-down
+                  #tab-two.tab-pane.fade
+                    .row
+                      .col-md-12.col-sm-4
+                        .blog-two
+                          .row
+                            / Mainbar column
+                            .col-md-12
+                              / Blog item starts
+                              .blog-two-item
+                                / blog two Content
+                                .blog-two-content
+                                  .panel.panel-orange
+                                    / Panel heading
+                                    .panel-heading
+                                      %strong Персонал как инструмент продаж
+                                    / Panel body
+                                    .panel-body
+                                      / Heading
+                                      / Carousel
+                                      /
+                                        Bootstrap carousel usage
+                                        Bootstrap carousel should have id. Below i am using "bs-carousel-X". Where "X" denotes number". If a page has more than 1 carousel, then add the new carousel with the id "bs-carousel-1", "bs-carousel-2". You also need to update the id in, "carousel indicators" section and "carousel control" section.
+                                        
+                                        Carousel comes with 3 main data attributes which you can customize. They are...
+                                        data-interval - Time delay between item cycle. Default value "5000".
+                                        data-pause - Pause on hover. Default value "pause".
+                                        data-wrap - Continues cycle or stop at the end. Default value "true".
+                                      / Outer layer
+                                      #bs-carousel-1.carousel.slide{"data-interval" => "5000", "data-pause" => "hover", "data-ride" => "carousel", "data-wrap" => "true"}
+                                        / Bootstrap indicators. If you don't need indicators, remove the below section
+                                        %ol.carousel-indicators
+                                          %li.active{"data-slide-to" => "0", "data-target" => "#bs-carousel-1"}
+                                          %li{"data-slide-to" => "1", "data-target" => "#bs-carousel-1"}
+                                          %li{"data-slide-to" => "2", "data-target" => "#bs-carousel-1"}
+                                        / Slides. You can also add captions
+                                        .carousel-inner
+                                          / Item, First item should have extra class "active"
+                                          .item.active
+                                            / Image
+                                            %img{:alt => "", :src => "img/backgrounds/s1.jpg"}/
+                                          .item
+                                            %img{:alt => "", :src => "img/backgrounds/s2.jpg"}/
+                                          .item
+                                            %img{:alt => "", :src => "img/backgrounds/s3.jpg"}/
+                                        / Carousel controls (arrows). If you don't need controls, remove the below section
+                                        %a.left.carousel-control{"data-slide" => "prev", :href => "#bs-carousel-1", :role => "button"}
+                                          %span.fa.fa-chevron-left
+                                        %a.right.carousel-control{"data-slide" => "next", :href => "#bs-carousel-1", :role => "button"}
+                                          %span.fa.fa-chevron-right
+                                      %p Temporibus autem quibusdam et aut officiis debitis aut rerum necessitatibus saepe eveniet ut et voluptates repudiandae sint et molestiae non recusandae  rerum hic tenetur. Temporibus autem quibusdam et aut officiis debitis aut rerum necessitatibus saepe eveniet ut et voluptates repudiandae sint et molestiae non recusandae  rerum hic tenetur.Temporibus autem quibusdam et aut officiis debitis aut rerum necessitatibus saepe eveniet ut et voluptates repudiandae sint et molestiae non recusandae  rerum hic tenetur. Temporibus autem quibusdam et aut officiis debitis aut rerum necessitatibus saepe eveniet ut et voluptates repudiandae sint et molestiae non recusandae  rerum hic tenetur.
+                                      %br/
+                                      / Comment Form
+                                      .box-shadow-outer
+                                        .box-shadow-block.box-shadow-2.text-center
+                                          %h5 Какие из указанных ниже инструментов использовались в прошлой стратегии Инвара по ОТС?
+                                          %p.text-left
+                                            %button.btn.btn-xs.btn-white Инструмент 1
+                                            %button.btn.btn-xs.btn-white Инструмент 2
+                                            %button.btn.btn-xs.btn-white Хитрый инструмент 3
+                                            %button.btn.btn-xs.btn-white Инструмент с подвохом
+                                            %button.btn.btn-xs.btn-white Инструмент 1
+                                          %ul.pager
+                                            %li.previous
+                                              %a{:href => "#"} Подсказка
+                                            %li.next
+                                              %a{:href => "#"} Ответить
+                              -#      / Panel footer
+                              -#    / Paragraph
+                              -#/ Blog item ends
+                              -#/ Comments section
+                              -#/ Pager
+                  #tab-three.tab-pane.fade
+                    .row
+                      .col-md-12.col-sm-4
+                  #tab-four.tab-pane.fade
+                    .row
+                      .col-md-12.col-sm-4
+                  #tab-five.tab-pane.fade
+                    .row
+                      .col-md-12.col-sm-4
+                  #tab-six.tab-pane.fade
+                    .row
+                      .col-md-12.col-sm-4
+      -#    / UI four end
+      -#/ Main content ends
+    %br/
+    %br/
+    / Outer Ends
+    / Scroll to top
+    %span.totop
+      %a{:href => "#"}
+        %i.fa.fa-angle-up.bg-color
+    / Javascript files
+    / jQuery
+    %script{:src => "js/jquery.js"}
+    / Bootstrap JS
+    %script{:src => "js/bootstrap.min.js"}
+    / Placeholders JS
+    %script{:src => "js/placeholders.js"}
+    / Magnific Popup
+    %script{:src => "js/jquery.magnific-popup.min.js"}
+    / Owl carousel
+    %script{:src => "js/owl.carousel.min.js"}
+    / Respond JS for IE8
+    %script{:src => "js/respond.min.js"}
+    / HTML5 Support for IE
+    %script{:src => "js/html5shiv.js"}
+    / Main JS
+    %script{:src => "js/main.js"}
+    / Javascript for this page
+    / Revolution slider
+    %script{:src => "js/jquery.themepunch.tools.min.js"}
+    %script{:src => "js/jquery.themepunch.revolution.min.js"}
+    / Waypoints
+    %script{:src => "js/waypoints.min.js"}
+    / jQuery CountTo
+    %script{:src => "js/jquery.countTo.js"}
+    :javascript
+      $(document).ready(function(){
+      	// Way Points With Count To()
+      	$('.number-count').waypoint(function(down){
+      		if(!$(this).hasClass('stop-counter'))
+      		{
+      			$(this).countTo();
+      			$(this).addClass('stop-counter');
+      		}
+      	}, { 
+      		offset: '90%' 
+      	});
+      });		
+    :javascript
+      jQuery(document).ready(function() {
+      	jQuery('.r-slider .banner').revolution({
+      		delay:7000,
+      		startheight:400,
+      		startwidth:1000,
+      		startWithSlide:0,
+
+      		fullScreenAlignForce:"off",
+      		autoHeight:"off",
+
+      		shuffle:"off",
+
+      		onHoverStop:"on",
+
+      		thumbWidth:100,
+      		thumbHeight:50,
+      		thumbAmount:3,
+
+      		hideThumbsOnMobile:"on",
+      		hideNavDelayOnMobile:1500,
+      		hideBulletsOnMobile:"off",
+      		hideArrowsOnMobile:"off",
+      		hideThumbsUnderResoluition:0,
+
+      		hideThumbs:10,
+      		hideTimerBar:"on",
+
+      		keyboardNavigation:"on",
+
+      		navigationType:"bullet",
+      		navigationArrows:"solo",
+      		navigationStyle:"round",
+
+      		navigationHAlign:"center",
+      		navigationVAlign:"bottom",
+
+      		soloArrowLeftHalign:"left",
+      		soloArrowLeftValign:"center",
+      		soloArrowLeftHOffset:20,
+      		soloArrowLeftVOffset:0,
+
+      		soloArrowRightHalign:"right",
+      		soloArrowRightValign:"center",
+      		soloArrowRightHOffset:20,
+      		soloArrowRightVOffset:0,
+
+      		touchenabled:"on",
+      		swipe_velocity:"0.7",
+      		swipe_max_touches:"1",
+      		swipe_min_touches:"1",
+      		drag_block_vertical:"false",
+
+      		stopAtSlide:-1,
+      		stopAfterLoops:-1,
+      		hideCaptionAtLimit:0,
+      		hideAllCaptionAtLilmit:0,
+      		hideSliderAtLimit:0,
+
+      		dottedOverlay:"none",
+
+      		spinned:"spinner4",
+
+      		fullWidth:"off",
+      		forceFullWidth:"off",
+      		fullScreen:"off",
+      		fullScreenOffsetContainer:"#topheader-to-offset",
+
+        });
+      });
+    %script{:src => "js/jquery.knob.js"}
+    :javascript
+      $(document).ready(function(){
+      	$(function() {
+      		$(".knob-one .knob").knob({
+      			width: 150,
+      			height: 150,
+      			readOnly: true
+      		});
+      	});
+      	
+      	$(function() {
+      		$(".knob-two .knob").knob({
+      			height: 160,
+      			readOnly: true
+      		});
+      	});
+      		
+      });
+
+      $(document).ready(function(){
+      	$('.knob').each(function(){
+      	var cur = $(this);
+      	// Knob counting script
+      	if(cur.val() == 0){
+      		$({value: 0}).animate({value: cur.attr("data-end")}, {
+      			duration: 2800,
+      			easing:'swing',
+      			step: function() 
+      			{
+      				cur.val(Math.ceil(this.value)).trigger('change');
+      				cur.val(cur.val() + '%');
+      			}
+      		})
+      	}
+      	});
+      	
+      });
+
+    :javascript
+      $(function() {
+      		
+      	setTimeout(function(){
+      	
+      		$('.fill-limit').each(function() {
+      			var me = $(this);
+      			var perc = me.attr("data-limit");
+      			var current_perc = 10;
+      			
+      			if(!$(this).hasClass('stop')){
+      			
+      				var progress = setInterval(function() {
+      												
+      					if (current_perc>=perc) {
+      						clearInterval(progress);
+      					} else {
+      						current_perc +=1;
+      						me.parent().children().children('.filler').css('height', (current_perc)+'%');
+      						me.html(current_perc+'<span>%</span>');
+      					}
+      			
+      				}, 6);
+      				
+      				me.addClass('stop');
+      				me.parent().children().children('.filler').addClass('stop');
+      				
+      			}
+      			
+      		});
+      		
+      	}, 0);
+      	
+      });
+
+    / Custom JS. Type your JS code in custom.js file
+    %script{:src => "js/custom.js"}
+    :javascript
+      /* Drop Down */
+      $(document).ready(function() {
+      	var hidden = true;
+      	$('.dd-link').click(function(e) {
+      		e.preventDefault();
+      		if (hidden){
+      		   $(this).next('.dd-dropdown').fadeToggle(100, function(){hidden = false;});
+      		}
+      	});
+
+      	$('html').click(function() {
+      		if (!hidden) {
+      			$('.dd-dropdown').fadeOut();
+      			hidden=true;
+      		}
+      	});
+
+      	$('.dd-dropdown').click(function(event) {
+      		event.stopPropagation();
+      	});
+      });

@@ -24,3 +24,19 @@
 .pager .previous > button{
     float: left;
 }
+
+
+table.red-discontent {
+    margin: 10 0px 0px 10px;
+    background-color:#F9FFF9;
+}
+
+table.green-discontent {
+    margin: 10 0px 0px 10px;
+    background-color:#FFF9F9;
+}
+
+table.neutral-discontent {
+    margin: 10 0px 0px 10px;
+    background-color:#FFF;
+}
