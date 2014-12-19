@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141216120135) do
+ActiveRecord::Schema.define(version: 20141219122522) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -55,7 +55,7 @@ ActiveRecord::Schema.define(version: 20141216120135) do
   add_index "answers", ["created_at"], name: "index_answers_on_created_at", using: :btree
   add_index "answers", ["user_id"], name: "index_answers_on_user_id", using: :btree
 
-  create_table "answers_users", force: true do |t|
+  create_table "answers_users", id: false, force: true do |t|
     t.integer  "answer_id"
     t.integer  "user_id"
     t.datetime "created_at"
@@ -63,6 +63,9 @@ ActiveRecord::Schema.define(version: 20141216120135) do
     t.integer  "project_id"
     t.integer  "question_id"
   end
+
+  add_index "answers_users", ["answer_id"], name: "index_answers_users_on_answer_id", using: :btree
+  add_index "answers_users", ["user_id"], name: "index_answers_users_on_user_id", using: :btree
 
   create_table "awards", force: true do |t|
     t.string  "name"
@@ -345,7 +348,7 @@ ActiveRecord::Schema.define(version: 20141216120135) do
     t.datetime "created_at",                 null: false
     t.datetime "updated_at",                 null: false
     t.boolean  "owner",      default: false
-    t.integer  "role_id"
+    t.integer  "type_user"
   end
 
   add_index "core_project_users", ["project_id"], name: "index_core_project_users_on_project_id", using: :btree
@@ -370,10 +373,10 @@ ActiveRecord::Schema.define(version: 20141216120135) do
     t.string   "secret"
     t.string   "secret2"
     t.string   "secret3"
-    t.string   "color"
-    t.string   "code"
     t.boolean  "advices_discontent"
     t.boolean  "advices_concept"
+    t.string   "color"
+    t.string   "code"
     t.integer  "moderator_id"
     t.datetime "date_12"
     t.datetime "date_23"
@@ -1425,11 +1428,11 @@ ActiveRecord::Schema.define(version: 20141216120135) do
     t.integer  "user_id"
     t.datetime "created_at",                   null: false
     t.datetime "updated_at",                   null: false
+    t.integer  "project_id"
+    t.integer  "status"
     t.integer  "post_id"
     t.string   "parent_post_type"
     t.text     "hint"
-    t.integer  "project_id"
-    t.integer  "status"
   end
 
   add_index "questions", ["created_at"], name: "index_questions_on_created_at", using: :btree
