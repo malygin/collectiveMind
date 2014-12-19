@@ -71,7 +71,7 @@ class Core::Project < ActiveRecord::Base
   validates :type_access, inclusion: {in: TYPE_ACCESS_CODE.values}
 
   def closed?
-    type_access == 2
+    type_access == TYPE_ACCESS_CODE[:closed]
   end
 
   def moderators
@@ -128,22 +128,7 @@ class Core::Project < ActiveRecord::Base
   end
 
   def type_access_name
-    case self.type_access
-      when 0
-        'Открытая'
-      when 1
-        'Клубная'
-      when 2
-        'Закрытая'
-      when 3
-        'Демо'
-      when 4
-        'Тестовая'
-      when 5
-        'Подготовка'
-      else
-        'Не задано'
-    end
+    TYPE_ACCESS[type_access]
   end
 
   def able_add_note?

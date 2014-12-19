@@ -454,7 +454,7 @@ module ApplicationHelper
   end
 
   def status_project(project)
-    if project.status == 0 or project.type_access == 5
+    if project.status == 0
       t('show.prepare_proc')
     elsif [1, 2].include? project.status
       t('show.go_proc', count: 1)

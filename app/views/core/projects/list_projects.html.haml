@@ -2,7 +2,8 @@
   .pull-right
     = link_to t('show.project.new'), new_core_project_path, class: 'btn btn-lg btn-primary', id: 'new_project'
   %h2
-    %strong=t('menu.list_projects')
+    %strong
+      = t('menu.list_projects')
   %br
   %br
   %h5
@@ -12,28 +13,21 @@
           = project.name
         .col-md-2
           .badge.badge-success
-            =status_project(project)
+            = status_project(project)
         .col-md-1
           .badge.badge-primary
             = project.type_access_name
-        -if project.type_access == 2
-          .col-md-1
-            =link_to list_users_users_path(project), class:'btn btn-sm btn-primary' do
-              =t('link.users')
-              %i.fa.fa-arrow-right
-        -else
-          .col-md-1
         .col-md-2
-          =link_to edit_core_project_path(project), class:'btn btn-sm btn-info' do
-            =t('link.edit')
+          = link_to edit_core_project_path(project), class:'btn btn-sm btn-info' do
+            = t('link.edit')
             %i.fa.fa-arrow-right
         .col-md-2
-          -if project.status == 20
-            =link_to "/project/#{project.id}/life_tape/posts", class:'btn btn-sm btn-danger' do
-              =t('link.go_to_project')
+          - if project.status == 20
+            = link_to "/project/#{project.id}/life_tape/posts", class:'btn btn-sm btn-danger' do
+              = t('link.go_to_project')
               %i.fa.fa-arrow-right
-          -else
-            =link_to "/project/#{project.id}", class:'btn btn-sm btn-danger' do
-              =t('link.go_to_project')
+          - else
+            = link_to "/project/#{project.id}", class:'btn btn-sm btn-danger' do
+              = t('link.go_to_project')
               %i.fa.fa-arrow-right
       %br
