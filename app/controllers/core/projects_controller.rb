@@ -22,26 +22,22 @@ class Core::ProjectsController < ApplicationController
   end
 
   def index
-    #@core_projects = Core::Project.order(:id).all
-    #@core_project = @core_projects.last
     if signed_in?
       if prime_admin?
-        @closed_projects = Core::Project.where(type_access: 2).order('id DESC')
+        @closed_projects = Core::Project.where(type_access: Core::Project::TYPE_ACCESS_CODE[:closed])
       elsif boss?
-        @closed_projects = current_user.projects.where(core_projects: {type_access: 2}).order('core_projects.id DESC')
+        @closed_projects = current_user.projects.where(core_projects: {type_access: Core::Project::TYPE_ACCESS_CODE[:closed]})
       else
-        @closed_projects = current_user.projects.where(core_projects: {type_access: 2}).order('core_projects.id DESC')
+        @closed_projects = current_user.projects.where(core_projects: {type_access: Core::Project::TYPE_ACCESS_CODE[:closed]})
       end
       @core_projects = current_user.current_projects_for_user
       @core_project = @core_projects.last
-      @club_projects = Core::Project.where(type_access: 1).order('id DESC') if cluber? or boss?
-      @opened_projects = Core::Project.where(type_access: 0).order('id DESC')
-      @demo_projects = Core::Project.where(type_access: 3).order('id DESC').limit(2)
+      @club_projects = Core::Project.where(type_access: Core::Project::TYPE_ACCESS_CODE[:club]) if cluber? or boss?
+      @opened_projects = Core::Project.where(type_access: Core::Project::TYPE_ACCESS_CODE[:opened])
     end
 
     respond_to do |format|
-      format.html # index.html.erb
-      format.json { render json: @core_projects }
+      format.html
     end
   end
 
@@ -60,7 +56,7 @@ class Core::ProjectsController < ApplicationController
   end
 
   def list_projects
-    @view_projects = Core::Project.where(type_access: list_type_projects_for_user).order('id DESC')
+    @view_projects = Core::Project.where(type_access: list_type_projects_for_user)
     @core_project = @view_projects.first
 
     respond_to do |format|
