@@ -111,10 +111,12 @@ CollectiveMind::Application.routes.draw do
     end
 
     resources :users do
-      get :show_top, on: :collection
-      get :users_rc, on: :collection
-      get :list_users, on: :collection
-      get :search_users, on: :collection
+      collection do
+        get :show_top
+        get :users_rc
+        get :list_users
+        get :search
+      end
       member do
         post :update_score
         put :club_toggle
