@@ -50,6 +50,7 @@ class User < ActiveRecord::Base
   has_many :plan_posts, class_name: 'Plan::Post'
   has_many :answers_users, class_name: 'AnswersUser'
 
+  default_scope { order('id DESC') }
   scope :check_field, ->(p, c) { where(project: p.id, status: 't', check_field: c) }
   scope :without_added, ->(users) { where.not(id: users) unless users.empty? }
 
@@ -337,5 +338,10 @@ class User < ActiveRecord::Base
 
   def looked_chat
     update_attributes! last_seen_chat_at: Time.now
+  end
+
+  def self.search(name, surname, email)
+    where('LOWER(name) like LOWER(?) OR LOWER(surname) like LOWER(?) OR LOWER(email) like LOWER(?)', "%#{name}%", "%#{surname}%", "%#{email}%").
+        sort_by { |user| user[:name].downcase or user[:surname].downcase or user[:email].downcase }
   end
 end
