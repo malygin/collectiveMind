@@ -1,18 +1,4 @@
 module ApplicationHelper
-##### status 
-# 0 - prepare to procedure
-# 1 - life_tape
-# 2 - vote fo aspects
-# 3 - Discontent
-# 4 - voting for Discontent
-# 5 - Concept 
-# 6 - voiting for Concept
-# 7 - plan
-# 8 - voiting for plan
-# 9 - estimate
-# 10 - final vote
-# 11 - wait for
-
   def escape_text(t)
     t.gsub("\n", "\\n").gsub("\r", "\\r").gsub("\t", "\\t").gsub("'", "\\'")
   end

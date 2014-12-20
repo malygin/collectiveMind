@@ -646,7 +646,7 @@ ru:
     user:
       others: Пользователи
       added: Добавленные
-      select_users: Выберите участников для закрытой процедуры
+      select_users: Выберите участников
       searsh_users_promt: 'Введите имя или email пользователя и нажмите Enter'
       generator: Генератор идей
       analyst: Аналитик

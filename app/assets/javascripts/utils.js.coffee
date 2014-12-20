@@ -1,13 +1,15 @@
 @search = ->
   this.search_users = ->
     project_id = $('#search_users_project').attr("data-project")
+    code_user = $('#search_users_project').attr("data-code")
     val = this.value
     if project_id and val
       $.ajax
-        url: "/project/#{project_id}/users/search_users"
+        url: "/project/#{project_id}/users/search"
         type: "get"
         data:
           search_users_text: val
+          code: code_user
 
   $('.search_text').on('change', 'input#search_users_text', this.search_users)
 
