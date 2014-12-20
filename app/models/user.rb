@@ -1,5 +1,3 @@
-require 'digest/sha1'
-
 class User < ActiveRecord::Base
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
@@ -50,50 +48,15 @@ class User < ActiveRecord::Base
   has_many :groups, through: :group_users
   has_many :group_chat_messages
   has_many :plan_posts, class_name: 'Plan::Post'
-
   has_many :answers_users, class_name: 'AnswersUser'
 
   scope :check_field, ->(p, c) { where(project: p.id, status: 't', check_field: c) }
-  scope :without_added, ->(users) { where("users.id NOT IN (#{users.join(", ")})") unless users.empty? }
-
-  def current_projects_for_user
-    if prime_admin?
-      Core::Project.order("id DESC")
-    else
-      opened_projects = Core::Project.where(type_access: [0, 3])
-      club_projects = (self.cluber? or self.boss?) ? Core::Project.where(type_access: 1) : []
-      closed_projects = self.projects.where(core_projects: {type_access: 2})
-      projects = opened_projects | club_projects | closed_projects
-      projects.sort_by { |c| -c.id }
-    end
-  end
-
-  def current_projects_for_journal
-    if prime_admin?
-      Core::Project.active_proc.order("id DESC")
-    else
-      opened_projects = Core::Project.active_proc.where(type_access: [0, 3])
-      club_projects = (self.cluber? or self.boss?) ? Core::Project.active_proc.where(type_access: 1) : []
-      closed_projects = self.projects.active_proc.where(core_projects: {type_access: 2})
-      projects = opened_projects | club_projects | closed_projects
-      projects.sort_by { |c| -c.id }
-    end
-  end
-
-  def current_projects_for_ordinary_user
-    opened_projects = Core::Project.active_proc.where(type_access: [0, 3])
-    club_projects = self.cluber? ? Core::Project.active_proc.where(type_access: 1) : []
-    closed_projects = self.projects.active_proc.where(core_projects: {type_access: 2})
-    opened_projects | club_projects | closed_projects
-  end
+  scope :without_added, ->(users) { where.not(id: users) unless users.empty? }
 
   validates :name, length: {maximum: 50}
-
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
   validates :email, presence: true, format: {with: VALID_EMAIL_REGEX},
             uniqueness: {case_sensitive: false}
-
-  #before_save :encrypt_password
 
   # This method associates the attribute ":avatar" with a file attachment
   has_attached_file :avatar, styles: {
@@ -105,6 +68,37 @@ class User < ActiveRecord::Base
   TYPES_USER = {
       admin: [1, 6, 7]
   }
+
+  def current_projects_for_user
+    if prime_admin?
+      Core::Project.all
+    else
+      opened_projects = Core::Project.where(type_access: Core::Project::TYPE_ACCESS_CODE[:opened])
+      club_projects = (self.cluber? or self.boss?) ? Core::Project.where(type_access: Core::Project::TYPE_ACCESS_CODE[:club]) : []
+      closed_projects = self.projects.where(core_projects: {type_access: Core::Project::TYPE_ACCESS_CODE[:closed]})
+      projects = opened_projects | club_projects | closed_projects
+      projects.sort_by { |c| -c.id }
+    end
+  end
+
+  def current_projects_for_journal
+    if prime_admin?
+      Core::Project.active_proc
+    else
+      opened_projects = Core::Project.active_proc.where(type_access: Core::Project::TYPE_ACCESS_CODE[:opened])
+      club_projects = (self.cluber? or self.boss?) ? Core::Project.active_proc.where(type_access: Core::Project::TYPE_ACCESS_CODE[:club]) : []
+      closed_projects = self.projects.active_proc.where(core_projects: {type_access: Core::Project::TYPE_ACCESS_CODE[:closed]})
+      projects = opened_projects | club_projects | closed_projects
+      projects.sort_by { |c| -c.id }
+    end
+  end
+
+  def current_projects_for_ordinary_user
+    opened_projects = Core::Project.active_proc.where(type_access: Core::Project::TYPE_ACCESS_CODE[:opened])
+    club_projects = self.cluber? ? Core::Project.active_proc.where(type_access: Core::Project::TYPE_ACCESS_CODE[:club]) : []
+    closed_projects = self.projects.active_proc.where(core_projects: {type_access: Core::Project::TYPE_ACCESS_CODE[:closed]})
+    opened_projects | club_projects | closed_projects
+  end
 
   def valid_password?(password)
     begin
@@ -124,11 +118,6 @@ class User < ActiveRecord::Base
   def user_project_scores(project)
     self.core_project_scores.where('core_project_scores.project_id = ?', project).first
   end
-
-  #def add_score(score, type=:score_g)
-  #  self.update_column(:score, self.score + score)
-  #  self.update_column(type.to_sym, self.attributes[type.to_s] + score)
-  #end
 
   def answered_for_help_stage?(stage)
     self.help_posts.pluck(:stage).include? stage
@@ -192,7 +181,6 @@ class User < ActiveRecord::Base
   end
 
   def have_essay_for_stage(project, stage)
-    # puts self.essay_posts.where(stage: stage)
     !self.essay_posts.where(project_id: project, stage: stage, status: 0).empty?
   end
 
@@ -246,7 +234,7 @@ class User < ActiveRecord::Base
           # self.add_score_by_type(h[:project], h[:post].fullness.nil? ? 40 : h[:post].fullness + 39, :score_g)
           if h[:type_field] and score_for_concept_field(h[:post], h[:type_field]) > 0
             self.add_score_by_type(h[:project], score_for_concept_field(h[:post], h[:type_field]), :score_g)
-            if ['status_name','status_content'].include?(h[:type_field]) and h[:post].status_name and h[:post].status_content
+            if ['status_name', 'status_content'].include?(h[:type_field]) and h[:post].status_name and h[:post].status_content
               self.journals.build(type_event: 'my_add_score_concept', project: h[:project], user_informed: self, body: "40", first_id: h[:post].id, body2: trim_content(h[:post].content), viewed: false, personal: true).save!
             end
           end
@@ -256,9 +244,6 @@ class User < ActiveRecord::Base
           self.add_score_by_type(h[:project], h[:post].fullness.nil? ? 40 : h[:post].fullness + 39, :score_g)
           self.journals.build(type_event: 'my_add_score_concept', project: h[:project], user_informed: self, body: "#{h[:post].fullness.nil? ? 40 : h[:post].fullness + 39}", first_id: h[:post].id, body2: trim_content(h[:post].content), viewed: false, personal: true).save!
         end
-
-      # self.journals.build(type_event:'useful_post', project: h[:project], body:"#{h[:post].content[0..24]}:#{h[:path]}/#{h[:post].id}").save!
-
       when :to_archive_life_tape_post
         self.add_score_by_type(h[:project], -10, :score_g)
       when :add_discontent_post
@@ -270,7 +255,7 @@ class User < ActiveRecord::Base
       when :to_archive_plus_post
         self.add_score_by_type(h[:project], -score_for_plus_post(h[:post]), :score_g)
       when :to_archive_plus_field
-        self.add_score_by_type(h[:project], -score_for_concept_field(h[:post],h[:type_field], true), :score_g)
+        self.add_score_by_type(h[:project], -score_for_concept_field(h[:post], h[:type_field], true), :score_g)
       when :to_archive_plus_field_all
         self.add_score_by_type(h[:project], -(h[:post].fullness.nil? ? 40 : h[:post].fullness + 39), :score_g)
       when :useful_advice
@@ -353,24 +338,4 @@ class User < ActiveRecord::Base
   def looked_chat
     update_attributes! last_seen_chat_at: Time.now
   end
-
-  private
-  #def encrypt_password
-  #	self.salt = make_salt if new_record?
-  #	#self.encrypted_password = encrypt (password)
-  #
-  # self.encrypted_password = password unless password.blank?
-  #end
-  #
-  ## def encrypt(string)
-  ## 	secure_hash("#{salt}--#{string}")
-  ## end
-  #
-  #def make_salt
-  #	secure_hash("#{Time.now.utc}--#{password}")
-  #end
-  #
-  #def secure_hash(string)
-  #	Digest::SHA2.hexdigest(string)
-  #end
 end
