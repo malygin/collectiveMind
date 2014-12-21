@@ -6,10 +6,10 @@
         %h4.modal-title=t('form.aspect.title')
       .modal-body
         %br
-        = form_for aspect, url: {project: @project.id,  action: aspect.persisted? ? 'update' : 'create'}, remote: aspect.persisted? ? true : false do |f|
+        = form_for aspect, url: {project: @project.id, action: aspect.persisted? ? 'update' : 'create'}, remote: aspect.persisted? ? true : false do |f|
           = render 'shared/notice_messages', object: f.object
           %h4 Выберите аспект к которому будет принадлежать тема
-          = select_tag 'discontent_aspect[discontent_aspect_id]', options_from_collection_for_select(@aspects, "id", "content", selected: aspect.discontent_aspect_id), prompt: t('form.discontent.select_aspect_prompt')
+          = f.select :discontent_aspect_id, options_from_collection_for_select(@aspects, :id, :content, selected: aspect.discontent_aspect_id), prompt: t('form.discontent.select_aspect_prompt')
           %br
           %br
           = f.text_field :content, class: 'form-control', placeholder: t('form.aspect.name'), id: 'aspect_text_field_content'
@@ -19,12 +19,14 @@
           .form-group
             %label.radio-inline
               = f.radio_button :status, '0'
-              %span.label.label-success=t('form.aspect.status_main')
+              %span.label.label-success
+                = t('form.aspect.status_main')
             %label.radio-inline
               = f.radio_button :status, '1'
-              %span.label.label-danger=t('form.aspect.status_other')
+              %span.label.label-danger
+                = t('form.aspect.status_other')
           .pull-right
             = f.submit t('form.save'), id: 'send_post_aspect', class: 'btn btn-success'
-
       .modal-footer
-        %button.btn.btn-default{'data-dismiss' => 'modal', type: 'button'}=t('form.cancel')
+        %button.btn.btn-default{'data-dismiss' => 'modal', type: 'button'}
+          = t('form.cancel')

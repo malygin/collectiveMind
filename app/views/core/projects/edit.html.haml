@@ -1,3 +1,34 @@
-%h1=t('form.project.edit')
+%h1
+  = t('form.project.edit')
 
-= render 'form'
+.nav-tabs-one
+  %ul.nav.nav-tabs
+    %li.active
+      %a{'data-toggle' => 'tab', href: '#edit_project'} Редактирование процедуры
+    %li
+      %a{'data-toggle' => 'tab', href: '#edit_aspects'} Аспекты
+  .tab-content
+    #edit_project.tab-pane.fade.active.in
+      = render 'form'
+    #edit_aspects.tab-pane.fade
+      %ul.panel-collapse
+        - @project.aspects.main_aspects.each do |asp1|
+          = asp1.content
+          %span{id: "redactor_aspect_#{asp1.id}"}
+            = link_to edit_discontent_aspect_path(@project, asp1), remote: true, id: "edit_aspect_#{asp1.id}" do
+              %span{class:'fa fa-pencil text-success'}
+            = link_to discontent_aspect_path(@project, asp1), method: :delete, data: {confirm: t('confirm.delete_aspect')}, id: "destroy_aspect_#{asp1.id}" do
+              %span{class:'fa fa-remove text-danger'}
+            %br
+
+          - if asp1.discontent_aspects.present?
+            %ul.panel-collapse
+              - asp1.discontent_aspects.each do |asp2|
+                = asp2.content
+                %span{id: "redactor_aspect_#{asp2.id}"}
+                  = link_to edit_discontent_aspect_path(@project, asp2), remote: true, id: "edit_aspect_#{asp2.id}" do
+                    %span{class:'fa fa-pencil text-success'}
+                  = link_to discontent_aspect_path(@project, asp2), method: :delete, data: {confirm: t('confirm.delete_aspect')}, id: "destroy_aspect_#{asp2.id}" do
+                    %span{class:'fa fa-remove text-danger'}
+                  %br
+#aspect_modal
