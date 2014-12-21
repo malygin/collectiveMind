@@ -1,22 +1,13 @@
 class Discontent::AspectsController < ApplicationController
-  before_filter :prepare_data, only: [:new, :edit]
-
-  def current_model
-    Discontent::Aspect
-  end
-
-  def prepare_data
-    @project = Core::Project.find(params[:project])
-    @aspects = Discontent::Aspect.where(project_id: @project)
-  end
+  before_action :prepare_data, except: [:update, :destroy]
+  before_action :set_aspect, except: [:new, :create]
 
   def new
     @aspect = Discontent::Aspect.new
   end
 
   def create
-    @project = Core::Project.find(params[:project])
-    @aspect = @project.aspects.create(params[:discontent_aspect])
+    @aspect = @project.aspects.create discontent_aspect_params
     @post = @aspect.life_posts.build(status: 0, project: @project)
     @aspect.life_tape_posts << @post
     color = "%06x" % (rand * 0xffffff)
@@ -25,23 +16,18 @@ class Discontent::AspectsController < ApplicationController
   end
 
   def edit
-    @aspect = Discontent::Aspect.find(params[:id])
   end
 
   def update
-    @aspect = Discontent::Aspect.find(params[:id])
-    @aspect.update_attributes(params[:discontent_aspect])
+    @aspect.update_attributes discontent_aspect_params
   end
 
   def destroy
-    @aspect = Discontent::Aspect.find(params[:id])
     @aspect.destroy if boss?
-    redirect_to life_tape_posts_path
+    redirect_back_or life_tape_posts_path
   end
 
   def answer_question
-    @project = Core::Project.find(params[:project])
-    @aspect = Discontent::Aspect.find(params[:id])
     @question = Question.find(params[:question_id])
     aspect_questions = @aspect.questions.by_project(@project.id).by_status(0).order("questions.id")
     if params[:answers]
@@ -59,5 +45,23 @@ class Discontent::AspectsController < ApplicationController
         @count_aspects_check += 1 if asp.question_complete(@project, current_user).count == asp.questions.by_project(@project.id).by_status(0).count
       end
     end
+  end
+
+  private
+  def set_aspect
+    @aspect = Discontent::Aspect.find(params[:id])
+  end
+
+  def discontent_aspect_params
+    params.require(:discontent_aspect).permit(:content, :position, :discontent_aspect_id, :short_desc, :status)
+  end
+
+  def current_model
+    Discontent::Aspect
+  end
+
+  def prepare_data
+    @project = Core::Project.find(params[:project])
+    @aspects = Discontent::Aspect.where(project_id: @project)
   end
 end
