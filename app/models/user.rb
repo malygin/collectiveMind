@@ -344,4 +344,14 @@ class User < ActiveRecord::Base
     where('LOWER(name) like LOWER(?) OR LOWER(surname) like LOWER(?) OR LOWER(email) like LOWER(?)', "%#{name}%", "%#{surname}%", "%#{email}%").
         sort_by { |user| user[:name].downcase or user[:surname].downcase or user[:email].downcase }
   end
+
+  def moderator_in_project?(project)
+    project.project_users.by_type(1).include? self
+  end
+
+  def can_edit_project?(project)
+    #@todo нужно мигрировать все данные всех проектов
+    true
+    #project.project_users.by_type(1).include?(self) || project.project_users.by_type(0).include?(self)
+  end
 end

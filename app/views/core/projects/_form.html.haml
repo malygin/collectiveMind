@@ -51,12 +51,13 @@
       = t('show.user.select_users')
     %br
     - Core::ProjectUser::TYPE_USER.each do |code, text|
-      = text
-      %br
-      = render partial: 'users/list_user', collection: @project.project_users.by_type(code)
-      %br
-      #search_users_project(data-project="#{@project.id}" data-code="#{code}")
-      .search_text
-        = text_field_tag 'search_users_text','', style: 'width: 100%; height: 30px', placeholder: t('show.user.searsh_users_promt')
-
-      %div{id: "search_users_#{code}"}
+      -# @todo рефактор всего этого, нужно определиться с одной механикой
+      - unless current_user.moderator_in_project?(@project) && code == 1
+        = text
+        %br
+        = render partial: 'users/list_user', collection: @project.project_users.by_type(code)
+        %br
+        #search_users_project(data-project="#{@project.id}" data-code="#{code}")
+        .search_text
+          = text_field_tag 'search_users_text','', style: 'width: 100%; height: 30px', placeholder: t('show.user.searsh_users_promt')
+        %div{id: "search_users_#{code}"}
