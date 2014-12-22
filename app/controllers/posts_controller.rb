@@ -294,32 +294,34 @@ class PostsController < ApplicationController
   def plus
     @project= Core::Project.find(params[:project])
     @post = current_model.find(params[:id])
-    if boss?
-      @post.toggle!(:useful)
-      if @post.useful
-        @post.user.add_score(type: :plus_post, project: @project, post: @post, path: @post.class.name.underscore.pluralize)
-        Award.reward(user: @post.user, post: @post, project: @project, type: 'add')
-      else
-        @post.user.add_score(type: :to_archive_plus_post, project: @project, post: @post, path: @post.class.name.underscore.pluralize)
-      end
-    end
-    if @post.instance_of? Discontent::Post
-      @post.update_attributes(status_content: true, status_whered: true, status_whend: true)
-    # elsif @post.instance_of? Concept::Post
-    #   @post.update_attributes(status_name: true, status_content: true, status_positive: true, status_positive_r: true, status_negative: true, status_negative_r: true, status_problems: true, status_reality: true, status_positive_s: true, status_negative_s: true, status_control: true, status_control_r: true, status_control_s: true, status_obstacles: true)
-    end
 
-    #@against =  params[:against] == 'true'
-    #if boss? and post.admins_vote.count != 0
-    #  post.admins_vote.destroy_all
-    #  @admin_pro= true
-    #else
-    #  post.post_votings.create(user: current_user, post: post, against: @against)  unless post.users.include? current_user
-    #  if (current_user.boss? or post.post_votings.count == 3) and not @against
-    #    Award.reward(user: post.user, post: post, project: @project, type: 'add')
-    #    post.user.add_score(type: :plus_post, project: Core::Project.find(params[:project]), post: post, path:  post.class.name.underscore.pluralize)
-    #  end
-    #end
+    # if boss?
+    #   @post.toggle!(:useful)
+    #   if @post.useful
+    #     @post.user.add_score(type: :plus_post, project: @project, post: @post, path: @post.class.name.underscore.pluralize)
+    #     Award.reward(user: @post.user, post: @post, project: @project, type: 'add')
+    #   else
+    #     @post.user.add_score(type: :to_archive_plus_post, project: @project, post: @post, path: @post.class.name.underscore.pluralize)
+    #   end
+    # end
+    # if @post.instance_of? Discontent::Post
+    #   @post.update_attributes(status_content: true, status_whered: true, status_whend: true)
+    # # elsif @post.instance_of? Concept::Post
+    # #   @post.update_attributes(status_name: true, status_content: true, status_positive: true, status_positive_r: true, status_negative: true, status_negative_r: true, status_problems: true, status_reality: true, status_positive_s: true, status_negative_s: true, status_control: true, status_control_r: true, status_control_s: true, status_obstacles: true)
+    # end
+
+    @against = params[:against]
+    @vote = @post.post_votings.create(user: current_user, post: @post, against: @against) unless @post.users.include? current_user
+    # if boss? and @post.admins_vote.count != 0
+    #   @post.admins_vote.destroy_all
+    #   @admin_pro = true
+    # else
+    #   @post.post_votings.create(user: current_user, post: @post, against: @against) unless @post.users.include? current_user
+    #   # if (current_user.boss? or post.post_votings.count == 3) and not @against
+    #   #    Award.reward(user: post.user, post: post, project: @project, type: 'add')
+    #   #    post.user.add_score(type: :plus_post, project: Core::Project.find(params[:project]), post: post, path:  post.class.name.underscore.pluralize)
+    #   # end
+    # end
     respond_to do |format|
       format.js
     end

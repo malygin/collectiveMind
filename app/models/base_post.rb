@@ -11,10 +11,10 @@ module BasePost
     has_many :post_votings
     has_many :users, through: :post_votings
 
-    scope :post_votings_pro, -> { joins(:post_votings).where('post_votings.against = ?', false) }
+    has_many :post_votings_pro, -> { joins(:post_votings).where("#{table_name}.against = ?", false) }, class_name: 'PostVoting'
     has_many :users_pro, through: :post_votings_pro, source: :user
 
-    scope :post_votings_against, -> { joins(:post_votings).where('post_votings.against = ?', true) }
+    has_many :post_votings_against, -> { joins(:post_votings).where("#{table_name}.against = ?", true) }, class_name: 'PostVoting'
     has_many :users_against, through: :post_votings_against, source: :user
 
     has_many :admins_pro, -> { where users: {type_user: [1, 6]} }, through: :post_votings_pro, source: :user
@@ -25,8 +25,8 @@ module BasePost
     scope :for_expert, -> { where(status: 1) }
     scope :accepted, -> { where(status: 2) }
     scope :archive, -> { where(status: 3) }
-    scope :with_votes, -> { includes(:post_votings).where('"discontent_post_votings"."id" >0') }
-    scope :with_concept_votes, -> { includes(:post_votings).where('"concept_post_votings"."id" >0') }
+    scope :with_votes, -> { includes(:post_votings).where('"discontent_post_votings"."id" > 0') }
+    scope :with_concept_votes, -> { includes(:post_votings).where('"concept_post_votings"."id" > 0') }
 
     scope :created_order, -> { order("#{table_name}.created_at DESC") }
     scope :updated_order, -> { order("#{table_name}.updated_at DESC") }

@@ -1,0 +1,57 @@
+-#.pull-right
+-#  = link_to "Сбросить все", discontent_posts_path(@project, asp: asp) , id: 'sort_clear',  class: 'btn btn-sm btn-danger'
+-#%h4 Фильтры
+.smart-forms
+  = form_tag(discontent_posts_path(@project), {method: :get, remote: true, "data-aspect" => asp.id, class: 'filter_discontents'}) do
+    %input{name: "asp", type: "hidden", value: asp.id}
+    .option-group.field
+      %label.option
+        %input.check-filter{:name => "type_like", :type => "radio", :value => "by_like", :checked => params[:type_like] == "by_like" ? 'checked' : nil}
+          %span.radio
+          %small Пролайканы
+      %label.option
+        %input.check-filter{:name => "type_like", :type => "radio", :value => "by_unlike", :checked => params[:type_like] == "by_unlike" ? 'checked' : nil}
+          %span.radio
+          %small Не пролайканы
+      %label.option
+        %input.check-filter{:name => "type_like", :type => "radio", :value => "content_all", :checked => params[:type_like] == "content_all" ? 'checked' : nil}
+          %span.radio
+          %small Все
+      |
+      %label.option
+        %input.check-filter{:name => "type_note", :type => "radio", :value => "by_note", :checked => params[:type_note] == "by_note" ? 'checked' : nil}
+          %span.radio
+          %small С замечаниями
+      %label.option
+        %input.check-filter{:name => "type_note", :type => "radio", :value => "content_all", :checked => params[:type_note] == "content_all" ? 'checked' : nil}
+          %span.radio
+          %small Все
+      |
+      %label.option
+        %input.check-filter{:name => "type_verify", :type => "radio", :value => "by_verified", :checked => params[:type_verify] == "by_verified" ? 'checked' : nil}
+          %span.radio
+          %small Проверены
+      %label.option
+        %input.check-filter{:name => "type_verify", :type => "radio", :value => "by_unverified", :checked => params[:type_verify] == "by_unverified" ? 'checked' : nil}
+          %span.radio
+          %small Не проверены
+      %label.option
+        %input.check-filter{:name => "type_verify", :type => "radio", :value => "content_all", :checked => params[:type_verify] == "content_all" ? 'checked' : nil}
+          %span.radio
+          %small Все
+      |
+      %label.option
+        %input.check-filter{:name => "type_status", :type => "radio", :value => "by_discuss", :checked => params[:type_status] == "by_discuss" ? 'checked' : nil}
+          %span.radio
+          %small Требует обсуждения
+      %label.option
+        %input.check-filter{:name => "type_status", :type => "radio", :value => "by_approve", :checked => params[:type_status] == "by_approve" ? 'checked' : nil}
+          %span.radio
+          %small Важное
+      %label.option
+        %input.check-filter{:name => "type_status", :type => "radio", :value => "content_all", :checked => params[:type_status] == "content_all" ? 'checked' : nil}
+          %span.radio
+          %small Все
+
+    %actions
+      %input.btn.btn-success{:type => "submit", :class  => "send_filter", :value => "Применить", style: "display:none;"}

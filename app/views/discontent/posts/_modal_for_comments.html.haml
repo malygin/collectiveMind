@@ -1,0 +1,16 @@
+#modal_show_comments.modal.fade{'aria-hidden' => 'true', 'aria-labelledby' => 'myModalLabel', role: 'dialog', style: 'display: none;', tabindex: '-1'}
+  .modal-dialog.modal-lg
+    .modal-content
+      .modal-header
+        %button.close{'aria-hidden' => 'true', 'data-dismiss' => 'modal', type: 'button'} ×
+        %h3#myModalLabel.modal-title Комментарии
+      .modal-body
+        .blog-comments
+          %h4
+            %i.fa.fa-comments.color>
+            =@post.comments.size
+            комментариев
+          %hr/
+          = render partial: 'shared/comment',collection: @comments
+
+      .modal-footer
