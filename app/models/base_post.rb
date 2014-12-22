@@ -25,8 +25,8 @@ module BasePost
     scope :for_expert, -> { where(status: 1) }
     scope :accepted, -> { where(status: 2) }
     scope :archive, -> { where(status: 3) }
-    scope :with_votes, -> { includes(:post_votings).where('"discontent_post_votings"."id" >0') }
-    scope :with_concept_votes, -> { includes(:post_votings).where('"concept_post_votings"."id" >0') }
+    scope :with_votes, -> { includes(:post_votings).where('"discontent_post_votings"."id" > 0') }
+    scope :with_concept_votes, -> { includes(:post_votings).where('"concept_post_votings"."id" > 0') }
 
     scope :created_order, -> { order("#{table_name}.created_at DESC") }
     scope :updated_order, -> { order("#{table_name}.updated_at DESC") }

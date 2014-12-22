@@ -1,43 +1,214 @@
-.col-md-2.col-sm-6
-  .our-process-item
-    %a.white.bg-lblue{href: "/project/#{@project.id}/life_tape/posts" + "#{params[:asp] ? "?asp=#{params[:asp]}" : ""}", id: "go_to_life_tape"}
-      %span.para-big-my
-        %strong 1
-      %br/
-      ЭТАП
+-if current_stage == :lifetape
+  .col-md-2.col-sm-6
+    .our-process-item
+      %a.white.bg-lblue{href: "/project/#{@project.id}/life_tape/posts" + "#{params[:asp] ? "?asp=#{params[:asp]}" : ""}", id: "go_to_life_tape"}
+        %span.para-big-my
+          %strong 1
+        %br/
+        ЭТАП
 
-.col-md-3.col-sm-6
-  .our-process-item
-    %h4.text-left
-      %small
-        %strong ЭТАП 1:
-        %i.color текущий
-      %br/
-      Изучение Базы Знаний
+  .col-md-3.col-sm-6
+    .our-process-item
+      %h4.text-left
+        %small
+          %strong ЭТАП 1:
+          %i.color текущий
+        %br/
+        Изучение Базы Знаний
 
-.col-md-7.col-sm-6
-  .our-process-item
-    %a.white.bg-green{ href: "#{@project.status < 3 ? '#' :  "/project/#{@project.id}/discontent/posts" + "#{params[:asp] ? "?asp=#{params[:asp]}" : ""}"}", id: "go_to_discontent"}
-      %span.para-big-my
-        %strong 2
-      %br/
-      ЭТАП
-    %a.white.bg-red{ href: "#{@project.status < 7 ? '#' : "/project/#{@project.id}/concept/posts" + "#{params[:asp] ? "?asp=#{params[:asp]}" : ""}"}", id: "go_to_concept"}
-      %span.para-big-my
-        %strong 3
-      %br/
-      ЭТАП
-    %a.white.bg-purple{ href: "#{@project.status < 9 ? '#' : "/project/#{@project.id}/plan/posts"}", id: 'go_to_plan'}
-      %span.para-big-my
-        %strong 4
-      %br/
-      ЭТАП
-    %a.white.bg-yellow{ href: "#{@project.status < 10 ? '#' : "/project/#{@project.id}/estimate/posts"}", id: 'go_to_estimate'}
-      %span.para-big-my
-        %strong 5
-      %br/
-      ЭТАП
+  .col-md-7.col-sm-6
+    .our-process-item
+      %a.white.bg-green{ href: "#{@project.status < 3 ? '#' :  "/project/#{@project.id}/discontent/posts" + "#{params[:asp] ? "?asp=#{params[:asp]}" : ""}"}", id: "go_to_discontent"}
+        %span.para-big-my
+          %strong 2
+        %br/
+        ЭТАП
+      %a.white.bg-red{ href: "#{@project.status < 7 ? '#' : "/project/#{@project.id}/concept/posts" + "#{params[:asp] ? "?asp=#{params[:asp]}" : ""}"}", id: "go_to_concept"}
+        %span.para-big-my
+          %strong 3
+        %br/
+        ЭТАП
+      %a.white.bg-purple{ href: "#{@project.status < 9 ? '#' : "/project/#{@project.id}/plan/posts"}", id: 'go_to_plan'}
+        %span.para-big-my
+          %strong 4
+        %br/
+        ЭТАП
+      %a.white.bg-yellow{ href: "#{@project.status < 10 ? '#' : "/project/#{@project.id}/estimate/posts"}", id: 'go_to_estimate'}
+        %span.para-big-my
+          %strong 5
+        %br/
+        ЭТАП
 
+-elsif current_stage == :discontent
+  .col-md-3.col-sm-6
+    .our-process-item
+      %a.white.bg-lblue{href: "/project/#{@project.id}/life_tape/posts" + "#{params[:asp] ? "?asp=#{params[:asp]}" : ""}", id: "go_to_life_tape"}
+        %span.para-big-my
+          %strong 1
+        %br/
+        ЭТАП
+
+      %a.white.bg-green{ href: "#{@project.status < 3 ? '#' :  "/project/#{@project.id}/discontent/posts" + "#{params[:asp] ? "?asp=#{params[:asp]}" : ""}"}", id: "go_to_discontent"}
+        %span.para-big-my
+          %strong 2
+        %br/
+        ЭТАП
+
+  .col-md-3.col-sm-6
+    .our-process-item
+      %h4.text-left
+        %small
+          %strong ЭТАП 2:
+          %i.color текущий
+        %br/
+        Сбор несовершенств
+
+  .col-md-6.col-sm-6
+    .our-process-item
+      %a.white.bg-red{ href: "#{@project.status < 7 ? '#' : "/project/#{@project.id}/concept/posts" + "#{params[:asp] ? "?asp=#{params[:asp]}" : ""}"}", id: "go_to_concept"}
+        %span.para-big-my
+          %strong 3
+        %br/
+        ЭТАП
+      %a.white.bg-purple{ href: "#{@project.status < 9 ? '#' : "/project/#{@project.id}/plan/posts"}", id: 'go_to_plan'}
+        %span.para-big-my
+          %strong 4
+        %br/
+        ЭТАП
+      %a.white.bg-yellow{ href: "#{@project.status < 10 ? '#' : "/project/#{@project.id}/estimate/posts"}", id: 'go_to_estimate'}
+        %span.para-big-my
+          %strong 5
+        %br/
+        ЭТАП
+
+-elsif current_stage == :concept
+  .col-md-4.col-sm-6
+    .our-process-item
+      %a.white.bg-lblue{href: "/project/#{@project.id}/life_tape/posts" + "#{params[:asp] ? "?asp=#{params[:asp]}" : ""}", id: "go_to_life_tape"}
+        %span.para-big-my
+          %strong 1
+        %br/
+        ЭТАП
+
+      %a.white.bg-green{ href: "#{@project.status < 3 ? '#' :  "/project/#{@project.id}/discontent/posts" + "#{params[:asp] ? "?asp=#{params[:asp]}" : ""}"}", id: "go_to_discontent"}
+        %span.para-big-my
+          %strong 2
+        %br/
+        ЭТАП
+
+      %a.white.bg-red{ href: "#{@project.status < 7 ? '#' : "/project/#{@project.id}/concept/posts" + "#{params[:asp] ? "?asp=#{params[:asp]}" : ""}"}", id: "go_to_concept"}
+        %span.para-big-my
+          %strong 3
+        %br/
+        ЭТАП
+
+  .col-md-3.col-sm-6
+    .our-process-item
+      %h4.text-left
+        %small
+          %strong ЭТАП 3:
+          %i.color текущий
+        %br/
+        Сбор нововведений
+
+  .col-md-5.col-sm-6
+    .our-process-item
+      %a.white.bg-purple{ href: "#{@project.status < 9 ? '#' : "/project/#{@project.id}/plan/posts"}", id: 'go_to_plan'}
+        %span.para-big-my
+          %strong 4
+        %br/
+        ЭТАП
+      %a.white.bg-yellow{ href: "#{@project.status < 10 ? '#' : "/project/#{@project.id}/estimate/posts"}", id: 'go_to_estimate'}
+        %span.para-big-my
+          %strong 5
+        %br/
+        ЭТАП
+
+-elsif current_stage == :plan
+  .col-md-5.col-sm-6
+    .our-process-item
+      %a.white.bg-lblue{href: "/project/#{@project.id}/life_tape/posts" + "#{params[:asp] ? "?asp=#{params[:asp]}" : ""}", id: "go_to_life_tape"}
+        %span.para-big-my
+          %strong 1
+        %br/
+        ЭТАП
+
+      %a.white.bg-green{ href: "#{@project.status < 3 ? '#' :  "/project/#{@project.id}/discontent/posts" + "#{params[:asp] ? "?asp=#{params[:asp]}" : ""}"}", id: "go_to_discontent"}
+        %span.para-big-my
+          %strong 2
+        %br/
+        ЭТАП
+
+      %a.white.bg-red{ href: "#{@project.status < 7 ? '#' : "/project/#{@project.id}/concept/posts" + "#{params[:asp] ? "?asp=#{params[:asp]}" : ""}"}", id: "go_to_concept"}
+        %span.para-big-my
+          %strong 3
+        %br/
+        ЭТАП
+
+      %a.white.bg-purple{ href: "#{@project.status < 9 ? '#' : "/project/#{@project.id}/plan/posts"}", id: 'go_to_plan'}
+        %span.para-big-my
+          %strong 4
+        %br/
+        ЭТАП
+
+  .col-md-3.col-sm-6
+    .our-process-item
+      %h4.text-left
+        %small
+          %strong ЭТАП 4:
+          %i.color текущий
+        %br/
+        Создание проектов
+
+  .col-md-4.col-sm-6
+    .our-process-item
+      %a.white.bg-yellow{ href: "#{@project.status < 10 ? '#' : "/project/#{@project.id}/estimate/posts"}", id: 'go_to_estimate'}
+        %span.para-big-my
+          %strong 5
+        %br/
+        ЭТАП
+
+-elsif current_stage == :estimate
+  .col-md-6.col-sm-6
+    .our-process-item
+      %a.white.bg-lblue{href: "/project/#{@project.id}/life_tape/posts" + "#{params[:asp] ? "?asp=#{params[:asp]}" : ""}", id: "go_to_life_tape"}
+        %span.para-big-my
+          %strong 1
+        %br/
+        ЭТАП
+
+      %a.white.bg-green{ href: "#{@project.status < 3 ? '#' :  "/project/#{@project.id}/discontent/posts" + "#{params[:asp] ? "?asp=#{params[:asp]}" : ""}"}", id: "go_to_discontent"}
+        %span.para-big-my
+          %strong 2
+        %br/
+        ЭТАП
+
+      %a.white.bg-red{ href: "#{@project.status < 7 ? '#' : "/project/#{@project.id}/concept/posts" + "#{params[:asp] ? "?asp=#{params[:asp]}" : ""}"}", id: "go_to_concept"}
+        %span.para-big-my
+          %strong 3
+        %br/
+        ЭТАП
+
+      %a.white.bg-purple{ href: "#{@project.status < 9 ? '#' : "/project/#{@project.id}/plan/posts"}", id: 'go_to_plan'}
+        %span.para-big-my
+          %strong 4
+        %br/
+        ЭТАП
+
+      %a.white.bg-yellow{ href: "#{@project.status < 10 ? '#' : "/project/#{@project.id}/estimate/posts"}", id: 'go_to_estimate'}
+        %span.para-big-my
+          %strong 5
+        %br/
+        ЭТАП
+
+  .col-md-6.col-sm-6
+    .our-process-item
+      %h4.text-left
+        %small
+          %strong ЭТАП 5:
+          %i.color текущий
+        %br/
+        Выставление оценок
 
 
 -#%ul.nav.nav-tabs{role: 'tablist'}

@@ -40,3 +40,7 @@ table.neutral-discontent {
     margin: 10 0px 0px 10px;
     background-color:#FFF;
 }
+
+.sort_content {
+    background-color: rgba(55, 179, 234, 0.35);
+}

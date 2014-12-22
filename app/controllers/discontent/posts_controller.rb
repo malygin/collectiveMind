@@ -53,6 +53,10 @@ class Discontent::PostsController < PostsController
     @comments_all = @project.problems_comments_for_improve
     @page = params[:page]
     @posts = @aspect.aspect_posts.by_status_for_discontent(@project).order("discontent_posts.id DESC").filter(filtering_params(params)) if @aspect
+    respond_to do |format|
+      format.html
+      format.js
+    end
   end
 
   def new
@@ -294,11 +298,13 @@ class Discontent::PostsController < PostsController
   end
 
   private
-  def filtering_params(params)
-    params.slice(:type_like, :type_note, :type_verify, :type_status)
-  end
-  def sorting_params(params)
-    params.slice(:sort_date, :sort_user, :sort_comment, :sort_view)
-  end
+
+    def filtering_params(params)
+      params.slice(:type_like, :type_note, :type_verify, :type_status)
+    end
+
+    def sorting_params(params)
+      params.slice(:sort_date, :sort_user, :sort_comment, :sort_view)
+    end
 
 end

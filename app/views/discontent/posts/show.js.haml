@@ -1,0 +1,3 @@
+$('#render_discontent_comments').empty();
+$("#render_discontent_comments").html('#{escape_javascript(render partial: 'modal_for_comments')}');
+$('#modal_show_comments').modal('show');

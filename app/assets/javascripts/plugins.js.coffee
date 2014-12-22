@@ -38,9 +38,28 @@
   this.icheck_disable = ->
     $('#by_create,#by_update,#event_content_all').iCheck('uncheck').iCheck('disable')
 
+  this.send_filter = ->
+    form = $(this).closest('form')
+    sendButton = form.find('.send_filter')
+    sendButton.click()
+
+  this.load_aspect = (e) ->
+    e.preventDefault()
+    project = $(this).data('project')
+    aspect = $(this).data('aspect')
+    if project and aspect
+      $.ajax
+        url: "/project/#{project}/discontent/posts"
+        type: "get"
+        data:
+          asp: aspect
+
   $('form.filter_news').on('ifChecked', 'input.iCheck#date_all', this.icheck_date)
   $('form.filter_news').on('ifChecked', 'input.iCheck#by_content', this.icheck_enable)
   $('form.filter_news').on('ifUnchecked', 'input.iCheck#by_content', this.icheck_disable)
+
+  $('form.filter_discontents').on('change', 'input:radio', this.send_filter)
+  $('.tabs-discontents').on('click', "li[id^='link_aspect_']", this.load_aspect)
 
 
 #@todo analytics

@@ -32,17 +32,17 @@
             %i
               =Russian::strftime(post_short.created_at,'%d %B %k:%M:%S')
               |
-              %a{:href => "#"}
+              = link_to({controller: post_short.class.name.underscore.pluralize, action: :show, project: @project, id: post_short.id, :remote => true}) do
                 =post_short.comments.count
                 %strong (+5)
                 %i.fa.fa-comment-o
               |
-              %a{:href => "#"}
-                =post_short.users_pro.count
+              =link_to({:controller => post_short.class.name.underscore.pluralize ,:action => :plus, :project => @project, :id => post_short.id, :against => false,  :remote => true},:method => :put, id: "plus_post_#{post_short.id}") do
+                %span(id="plus_counter_#{post_short.id}")=post_short.users_pro.count
                 %i.fa.fa-thumbs-up
               |
-              %a{:href => "#"}
-                =post_short.users_against.count
+              =link_to({:controller => post_short.class.name.underscore.pluralize ,:action => :plus, :project => @project,  :id => post_short.id, :against => true, :remote => true}, :method => :put, id: "minus_post_#{post_short.id}") do
+                %span(id="minus_counter_#{post_short.id}")=post_short.users_against.count
                 %i.fa.fa-thumbs-down
 
 
