@@ -1,0 +1,227 @@
+!!!
+%html
+  %head
+    %meta{:charset => "utf-8"}/
+    %title
+    / Description, Keywords and Author
+    %meta{:content => "Your description", :name => "description"}/
+    %meta{:content => "Your,Keywords", :name => "keywords"}/
+    %meta{:content => "Ian", :name => "author"}/
+    %meta{:content => "width=device-width, initial-scale=1.0", :name => "viewport"}/
+    / Styles
+    / Bootstrap CSS
+    %link{:href => "css/bootstrap.min.css", :rel => "stylesheet"}/
+    / Font awesome CSS
+    %link{:href => "css/font-awesome.min.css", :rel => "stylesheet"}/
+    / Magnific Popup
+    %link{:href => "css/magnific-popup.css", :rel => "stylesheet"}/
+    / Owl carousel
+    %link{:href => "css/owl.carousel.css", :rel => "stylesheet"}/
+    / Base style
+    %link{:href => "css/style.css", :rel => "stylesheet"}/
+    %link#color_theme{:href => "css/skin-lblue.css", :rel => "stylesheet"}/
+    %link{:href => "css/style-4.css", :rel => "stylesheet"}/
+    / Custom CSS. Type your CSS code in custom.css file
+    %link{:href => "css/custom.css", :rel => "stylesheet"}/
+  %body
+    .outer
+      / Top bar starts
+      %header.top-bar
+        .container
+          / Logo starts
+          .tb-logo.pull-left
+            %a{:href => "#"}
+              %img{:src => "img/logo.jpg"}/
+          / Logo ends
+          .clearfix.visible-xs
+          / Nav starts
+          %nav.header-buttons.pull-left
+            %a.btn.btn-lblue.rounded-3{:href => "#"} процедура
+            .clearfix.visible-xs
+            %a.btn.btn-lblue.btn-outline.rounded-3{:href => "#"} кабинет
+            .clearfix.visible-xs
+            %a.btn.btn-lblue.btn-outline.rounded-3{:href => "#"} новости
+          / Nav ends
+          / Langauge starts
+          .tb-language.dropdown.pull-right
+            %a{"data-target" => "#", "data-toggle" => "dropdown", :href => "#"}
+              %i.fa.fa-globe
+              English
+              %i.fa.fa-angle-down.color
+            / Dropdown menu with languages
+            %ul.dropdown-menu.dropdown-mini{:role => "menu"}
+              %li
+                %a{:href => "#"} Hindi
+              %li
+                %a{:href => "#"} Tamil
+              %li
+                %a{:href => "#"} Kanada
+          / Language ends
+          / User starts
+          .user-block.pull-right
+            %span Горлицкий Вячеслав
+            .rating.five-rating.pull-right
+            .call-operator.pull-left
+          / User ends
+          .clearfix
+      / Top Bar ends
+      / Header-2 starts
+      .header-2
+        .container.col-lg-thin
+          .row
+            .col-xs-10
+              %h1.color.lblue Максимизация эффективности работы в аптеках
+              %span.sub-heading.color.lblue с учётом новой стратегии "Инвара" по ОТС.
+            .col-xs-2
+              / Search section
+              .head-search.pull-right
+                %a.b-dropdown{:href => "#"}
+                  %i.fa.fa-search.square-2.rounded-1.bg-color.white
+                .b-dropdown-block
+                  %form{:role => "form"}
+                    / Input Group
+                    .input-group
+                      %input.form-control{:placeholder => "Type Something", :type => "text"}/
+                      %span.input-group-btn
+                        %button.btn.btn-color{:type => "button"} Search
+              / Search section ends
+              .clearfix
+      / Header-2 ends
+      / Main Block starts
+      .main-block
+        .container
+          .divider-1.clear-top-margin
+          / Stages block starts
+          .row.stages
+            .col-md-8.col-sm-8.col-xs-12
+              .row
+                .col-md-offset-1.col-md-2.col-sm-2.col-xs-12.first-stage
+                  %a.btn.rounded-3.btn-lblue.pull-right.selected
+                    %span.bigger> 1
+                    стадия
+                .clearfix.visible-xs
+                .col-md-9.col-sm-9.col-xs-12.texts
+                  .top-text
+                    текущий
+                  .bottom-text
+                    %h4 Изучение базы знаний
+            .col-md-4.col-sm-4.col-xs-12.right-buttons
+              %a.btn.rounded-3.btn-lblue
+                %span.bigger> 2
+                стадия
+              %a.btn.rounded-3.btn-lblue
+                %span.bigger> 3
+                стадия
+              %a.btn.rounded-3.btn-lblue
+                %span.bigger> 4
+                стадия
+          / Stages block ends
+          .divider-1
+          / Progress bars block starts
+          .row.progress-bars
+            .col-md-6.col-sm-6
+              .container
+                .row
+                  .col-md-5.col-sm-5
+                    %span.progress-label Ваш прогресс на 1 этапе
+                  .col-md-7.col-sm-7
+                    .progress.pb-sm
+                      .progress-bar.progress-bar-lblue{"aria-valuemax" => "100", "aria-valuemin" => "0", "aria-valuenow" => "60", :role => "progressbar", :style => "width: 60%"}
+                        %span.sr-only 60% Complete (success)
+            .col-md-6.col-sm-6
+              .container
+                .row
+                  .col-md-5.col-sm-5
+                    %span.progress-label Прогресс других участников
+                  .col-md-7.col-sm-7
+                    .progress.pb-sm
+                      .progress-bar.progress-bar-lblue{"aria-valuemax" => "100", "aria-valuemin" => "0", "aria-valuenow" => "45", :role => "progressbar", :style => "width: 45%"}
+                        %span.sr-only 45% Complete (success)
+          / Progress bars block ends
+          .clearfix
+          / Aspects block (UI four) starts
+          .ui-4
+            .container
+              / UI content
+              .block-content
+                / Tabs
+                / Nav tabs
+                %ul.nav.nav-tabs
+                  %li
+                    %button.btn.btn-round.btn-gray{"data-toggle" => "tab", :href => "#tab-one"}
+                      %i.fa.fa-wrench.fa-2x
+                  %li.active
+                    %button.btn.btn-round.btn-orange{"data-toggle" => "tab", :href => "#tab-two"} Аспект
+                  %li
+                    %button.btn.btn-round.btn-purple{"data-toggle" => "tab", :href => "#tab-three"} Аспект
+                  %li
+                    %button.btn.btn-round.btn-yellow{"data-toggle" => "tab", :href => "#tab-four"} Аспект
+                  %li
+                    %button.btn.btn-round.btn-green{"data-toggle" => "tab", :href => "#tab-five"} Аспект
+                  %li
+                    %button.btn.btn-round.btn-blue{"data-toggle" => "tab", :href => "#tab-six"} Аспект
+                / Tab panes
+                .tab-content
+                  #tab-one.tab-pane.fade
+                  #tab-two.tab-pane.active.fade.in
+                    .top-colored-bar.padd-5.rounded-2 Персонал как инструмент продаж
+                    .container
+                      .row
+                        .col-md-8.col-sm-8.tab-image-block
+                          %img.img-responsive{:alt => "", :src => "img/woman.jpg"}/
+                        / Questions block starts
+                        .col-md-4.col-sm-4.questions-block
+                          %h4.block-with-left-icon
+                            %i.left-icon.fa.fa-2x.color.orange.fa-comments.pull-left>
+                            Вопросы по теме
+                          .bg-color.rounded-1.notice
+                            Читайте вторую страничку презентации
+                            %span.close-button
+                          %p.text.block-with-left-icon
+                            %span.left-icon.pull-right 2.
+                            Какие из указанных ниже инструментов
+                            использовались в прошлой стратегии
+                            Инвара по ОТС?
+                          %form.form.instruments-block
+                            .btn-group{"data-toggle" => "buttons"}
+                              %button.btn.btn-xs.btn-white.pull-left Инструмент 1
+                              %button.btn.btn-xs.btn-white.pull-left Инструмент 2
+                              %button.btn.btn-xs.btn-white.pull-left Хитрый инструмент 3
+                              %button.btn.btn-xs.btn-white.pull-left Инструмент с подвохом
+                              %button.btn.btn-xs.btn-white.pull-left Инструмент 1
+                            .clearfix
+                            .form-group.bottom-buttons
+                              %a.btn.btn-outline.btn-orange.notice-button Подсказка
+                              %button.btn.btn-color.btn-orange{:type => "submit"} Ответить
+                        -#/ Questions block ends
+                  #tab-three.tab-pane.fade
+                  #tab-four.tab-pane.fade
+                  #tab-five.tab-pane.fade
+                  #tab-six.tab-pane.fade
+          -#/ Aspects block (UI four) ends
+      -#/ Main Block ends
+    / Outer Ends
+    / Scroll to top
+    %span.totop
+      %a{:href => "#"}
+        %i.fa.fa-angle-up.bg-color
+    / Javascript files
+    / jQuery
+    %script{:src => "js/jquery.js"}
+    / Bootstrap JS
+    %script{:src => "js/bootstrap.min.js"}
+    / Placeholders JS
+    %script{:src => "js/placeholders.js"}
+    / Magnific Popup
+    %script{:src => "js/jquery.magnific-popup.min.js"}
+    / Owl carousel
+    %script{:src => "js/owl.carousel.min.js"}
+    / Respond JS for IE8
+    %script{:src => "js/respond.min.js"}
+    / HTML5 Support for IE
+    %script{:src => "js/html5shiv.js"}
+    / Main JS
+    %script{:src => "js/main.js"}
+    / Javascript for this page
+    / Custom JS. Type your JS code in custom.js file
+    %script{:src => "js/custom.js"}

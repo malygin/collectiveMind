@@ -1,3 +1,12 @@
+$(document).ready(function() {
+    $('.close-button').click(function(){
+        $('.notice').addClass("close-notice");
+    });
+    $('.notice-button').click(function(){
+        $('.notice').removeClass("close-notice");
+    });
+});
+
 //$(document).ready(function(){
 //    // Way Points With Count To()
 //    $('.number-count').waypoint(function(down){

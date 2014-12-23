@@ -51,6 +51,7 @@
       $.ajax
         url: "/project/#{project}/discontent/posts"
         type: "get"
+        dataType: "script"
         data:
           asp: aspect
 
@@ -59,7 +60,7 @@
   $('form.filter_news').on('ifUnchecked', 'input.iCheck#by_content', this.icheck_disable)
 
   $('form.filter_discontents').on('change', 'input:radio', this.send_filter)
-  $('.tabs-discontents').on('click', "li[id^='link_aspect_']", this.load_aspect)
+  $('.tabs-discontents').on('click', "li button[id^='link_aspect_']", this.load_aspect)
 
 
 #@todo analytics

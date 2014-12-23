@@ -1,30 +1,22 @@
-.ui-4
-  .container
-    .block-content
-      .row
-        .col-md-3
-          %h2 Выберите аспект:
-        .col-md-9
-          %ul.nav.nav-tabs.tabs-discontents
-            -@project.aspects.main_aspects.order("discontent_aspects.id").each_with_index do |asp, index|
-              %li{class: "#{'active' if asp == @aspect}", id: "link_aspect_#{asp.id}", "data-project" => @project.id, "data-aspect" => asp.id}
-                %a{"data-toggle" => "tab", :href => "#tab_aspect_#{asp.id}", style: "background-color:#{aspect_color(asp)}"}
-                  -#=link_to '', "/project/#{@project.id}/discontent/posts?asp=#{asp.id}", remote: true
-                  %button.btn.btn-round{style: "color:#ffffff;background:#{aspect_color(asp)};border:1px solid #{aspect_color(asp)};"}
-                    %span= asp.short_name.present? ? asp.short_name : asp.content[0,2].mb_chars.upcase
+%ul.nav.nav-tabs.tabs-discontents
+  -@project.aspects.main_aspects.order("discontent_aspects.id").each_with_index do |asp, index|
+    %li{class: "#{'active' if asp == @aspect}"}
+      -#%a{"data-toggle" => "tab", :href => "#tab_aspect_#{asp.id}", id: "link_aspect_#{asp.id}", "data-project" => @project.id, "data-aspect" => asp.id, style: "background-color:#{aspect_color(asp)}"}
+      %button.btn.btn-round{"data-toggle" => "tab", :href => "#tab_aspect_#{asp.id}", id: "link_aspect_#{asp.id}", "data-project" => @project.id, "data-aspect" => asp.id, style: "color:#ffffff;background:#{aspect_color(asp)};border:1px solid #{aspect_color(asp)};"}
+        %span= asp.short_name.present? ? asp.short_name : asp.content[0,2].mb_chars.upcase
 
-      .tab-content
-        -@project.aspects.main_aspects.order("discontent_aspects.id").each_with_index do |asp, index|
-          %div.tab-pane.fade{id: "tab_aspect_#{asp.id}", class:"#{'active in' if asp == @aspect}"}
-            = render partial: 'shared/sort_bar', locals: {asp: asp}
-            %br
-            = render partial: 'shared/filter_bar', locals: {asp: asp}
-            .row
-              .col-md-12.text-center
-                %h3= asp.content
-              %div{id: "tab_aspect_posts_#{asp.id}"}
-                -if asp == @aspect and @posts.present?
-                  = render partial: 'post_short', collection: @posts
+.tab-content
+  -@project.aspects.main_aspects.order("discontent_aspects.id").each_with_index do |asp, index|
+    %div.tab-pane.fade{id: "tab_aspect_#{asp.id}", class:"#{'active in' if asp == @aspect}"}
+      -#= render partial: 'shared/sort_bar', locals: {asp: asp}
+      -#%br
+      -#= render partial: 'shared/filter_bar', locals: {asp: asp}
+      .row
+        .col-md-12.text-center
+          %h3= asp.content
+        %div{id: "tab_aspect_posts_#{asp.id}"}
+          -if asp == @aspect and @posts.present?
+            = render partial: 'post_short', collection: @posts
 
 
 #render_discontent_comments

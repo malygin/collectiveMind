@@ -1,108 +1,191 @@
-.ui-4
-  .container
-    .block-content
-      .row
-        .col-md-3
-          %h2 Выберите аспект:
-        .col-md-9
-          %ul.nav.nav-tabs
-            %li.active
-              %a.bg-lblue{"data-toggle" => "tab", :href => "#tab-0"}
-                %button.btn.btn-round.btn-white
-                  %span
-                    %i.fa.fa-wrench
+%ul.nav.nav-tabs
+  %li.active
+    %button.btn.btn-round.btn-gray{"data-toggle" => "tab", :href => "#tab-0"}
+      %i.fa.fa-wrench.fa-2x
 
-            -@project.aspects.main_aspects.order(:id).each_with_index do |asp, index|
-              %li
-                %a{"data-toggle" => "tab", :href => "#tab-#{index+1}", style: "background-color:#{aspect_color(asp)}"}
-                  %button.btn.btn-round{style: "color:#ffffff;background:#{aspect_color(asp)};border:1px solid #{aspect_color(asp)};"}
-                    %span{id: "check_question_#{asp.id}"}
-                      -if asp.question_complete(@project, current_user).count == asp.questions.by_project(@project.id).by_status(0).count
-                        %i.fa.fa-check
-                      -else
-                        %i.fa.fa-question
+  -@project.aspects.main_aspects.order(:id).each_with_index do |asp, index|
+    %li
+      %button.btn.btn-round{"data-toggle" => "tab", :href => "#tab-#{index+1}", style: "color:#ffffff;background:#{aspect_color(asp)};border:1px solid #{aspect_color(asp)};"}
+        %span= asp.short_name.present? ? asp.short_name : asp.content[0,2].mb_chars.upcase
+        -#%span{id: "check_question_#{asp.id}"}
+        -#  -if asp.question_complete(@project, current_user).count == asp.questions.by_project(@project.id).by_status(0).count
+        -#    %i.fa.fa-check
+        -#  -else
+        -#    %i.fa.fa-question
 
-      .tab-content
-        #tab-0.tab-pane.active.fade.in
-          .row
-            .col-md-12.col-sm-4
-              .bg-grey.padd-15
-                %h3
-                  %i.fa.fa-flag
-                  %span.color
-                    %strong ЦЕЛЬ ЭТАПА
-                %p
-                  Подробное изучение базы знаний по каждому аспекту всеми участниками процедуры выработки проекта.
-                  %br/
-                  %span.color
-                    %strong ЭТО ВАЖНО!
-                  Второй этап выработки проекта будет доступен только после того, как средний уровень готовности участников будет не менее 80%!
-              %br/
-              .bg-grey.padd-15
-                %h3
-                  %i.fa.fa-sign-in
-                  %span.color
-                    %strong С ЧЕГО НАЧАТЬ:
-                %ul.list-6
-                  %li Выберите аспект в списке ниже
-                  %li Ознакомьтесь с базой знаний внутри этого аспекта
-                  %li Пройдите короткое тестирование по полученным знаниям
-                  %li Переходите к следующему аспекту
-                  %li Проголосуйте за самые важные на ваш взгляд аспекты (будет доступно в конце этапа)
+.tab-content
+  #tab-0.tab-pane.active.fade.in
+    .row
+      .col-md-12.col-sm-4
+        .bg-grey.padd-15
+          %h3
+            %i.fa.fa-flag
+            %span.color
+              %strong ЦЕЛЬ ЭТАПА
+          %p
+            Подробное изучение базы знаний по каждому аспекту всеми участниками процедуры выработки проекта.
+            %br/
+            %span.color
+              %strong ЭТО ВАЖНО!
+            Второй этап выработки проекта будет доступен только после того, как средний уровень готовности участников будет не менее 80%!
+        %br/
+        .bg-grey.padd-15
+          %h3
+            %i.fa.fa-sign-in
+            %span.color
+              %strong С ЧЕГО НАЧАТЬ:
+          %ul.list-6
+            %li Выберите аспект в списке ниже
+            %li Ознакомьтесь с базой знаний внутри этого аспекта
+            %li Пройдите короткое тестирование по полученным знаниям
+            %li Переходите к следующему аспекту
+            %li Проголосуйте за самые важные на ваш взгляд аспекты (будет доступно в конце этапа)
 
-        -@project.aspects.main_aspects.order("discontent_aspects.id").each_with_index do |asp, index|
-          %div.tab-pane.fade{id: "tab-#{index+1}"}
-            .row
-              .col-md-12.col-sm-4
-                .blog-two
-                  .row
-                    .col-md-12
-                      .blog-two-item
-                        .blog-two-content
-                          .panel{style: "border-color:#{aspect_color(asp)}"}
-                            .panel-heading{style: "color:#ffffff;background:#{aspect_color(asp)};border-color:#{aspect_color(asp)};"}
-                              %strong=asp.content
-                            .panel-body
-                              - if asp.knowbase_posts.present?
-                                %section
-                                  .body
-                                    - asp.knowbase_posts.each do |post|
-                                      %div{id: "knowbase_post_#{post.id}"}
-                                        = render partial: 'knowbase/posts/knowbase_post', object: post
-                                      %br
-                                %br
-                                %br
-                                - if asp.questions.by_project(@project.id).by_status(0).present?
-                                  %h5
-                                    - @count_now = @count_now ? @count_now : asp.question_complete(@project, current_user).count
-                                    - @count_all = asp.questions.by_project(@project.id).by_status(0).count
-                                    Отвечено на
-                                    %span{id: "count_questions_now_#{asp.id}"}= @count_now
-                                    вопросов из
-                                    %span.count_questions_all= @count_all
-                                  .progress.pb-sm
-                                    .progress-bar.progress-bar-blue{id: "progress_bar_#{asp.id}", "aria-valuemax" => "100", "aria-valuemin" => "0", "aria-valuenow" => "#{(@count_now/@count_all.to_f)*100}", :role => "progressbar", :style => "width: #{(@count_now/@count_all.to_f)*100}%;"}
-                                      %span.sr-only
-                                  %br
-                                - asp.questions.by_project(@project.id).by_status(0).order("questions.id").each do |question|
-                                  %div{id: "question_#{question.id}", style: "#{'display:none;' if asp.questions.by_project(@project.id).by_status(0).order("questions.id").first != question}"}
-                                    .box-shadow-outer
-                                      .box-shadow-block.box-shadow-2.text-center
-                                        %h5= question.content
-                                        %p.text-left
-                                          = form_tag(answer_question_discontent_aspect_path(@project, id: asp.id, question_id: question.id), {method: :put, remote: true, id: 'form_answer_question', multipart: true}) do
-                                            %div(class="btn-group" data-toggle="buttons" id="answer_buttons")
-                                              - question.answers.by_status(0).each do |answer|
-                                                %label(id="answer_#{answer.id}" class="btn btn-xs btn-white answer-question")
-                                                  = check_box_tag "answers[]", answer.id
-                                                  = answer.content
+  -@project.aspects.main_aspects.order("discontent_aspects.id").each_with_index do |asp, index|
+    %div.tab-pane.fade{id: "tab-#{index+1}"}
+      .top-colored-bar.padd-5.rounded-2= asp.content
+      .container
+        .row
+          .col-md-8.col-sm-8.tab-image-block
+            - if asp.knowbase_posts.present?
+              %section
+                .body
+                  - asp.knowbase_posts.each do |post|
+                    %div{id: "knowbase_post_#{post.id}"}
+                      = render partial: 'knowbase/posts/knowbase_post', object: post
+                    %br
+          .col-md-4.col-sm-4.questions-block
+            %h4.block-with-left-icon
+              %i.left-icon.fa.fa-2x.color.orange.fa-comments.pull-left>
+              Вопросы по теме
+            .bg-color.rounded-1.notice
+              Читайте вторую страничку презентации
+              %span.close-button
+            - asp.questions.by_project(@project.id).by_status(0).order("questions.id").each_with_index do |question, ind|
+              %div{id: "question_#{question.id}", style: "#{'display:none;' if asp.questions.by_project(@project.id).by_status(0).order("questions.id").first != question}"}
+                %p.text.block-with-left-icon
+                  %span.left-icon.pull-right="#{ind+1}."
+                  = question.content
+                = form_tag(answer_question_discontent_aspect_path(@project, id: asp.id, question_id: question.id), {method: :put, remote: true,class: 'form instruments-block', id: 'form_answer_question', multipart: true}) do
+                  %div(class="btn-group" data-toggle="buttons" id="answer_buttons")
+                    - question.answers.by_status(0).each do |answer|
+                      %label(id="answer_#{answer.id}" class="btn btn-xs btn-white answer-question")
+                        = check_box_tag "answers[]", answer.id
+                        = answer.content
+                  .clearfix
+                  .form-group.bottom-buttons
+                    %a.btn.btn-outline.btn-orange.notice-button Подсказка
+                    = submit_tag "Ответить", id: "send_answers", class: "btn btn-color btn-orange"
 
-                                            %ul.pager
-                                              %li.previous
-                                                %button{"data-content" => "And here's some amazing content. It's very engaging. Right?", "data-toggle" => "popover", :role => "button", :title => "Popover title", :type => "button"} Подсказка
 
-                                              %li.next
-                                                = submit_tag "Ответить", id: "send_answers"
+
+
+
+-#.ui-4
+-#  .container
+-#    .block-content
+-#      .row
+-#        .col-md-3
+-#          %h2 Выберите аспект:
+-#        .col-md-9
+-#          %ul.nav.nav-tabs
+-#            %li.active
+-#              %a.bg-lblue{"data-toggle" => "tab", :href => "#tab-0"}
+-#                %button.btn.btn-round.btn-white
+-#                  %span
+-#                    %i.fa.fa-wrench
+-#
+-#            -@project.aspects.main_aspects.order(:id).each_with_index do |asp, index|
+-#              %li
+-#                %a{"data-toggle" => "tab", :href => "#tab-#{index+1}", style: "background-color:#{aspect_color(asp)}"}
+-#                  %button.btn.btn-round{style: "color:#ffffff;background:#{aspect_color(asp)};border:1px solid #{aspect_color(asp)};"}
+-#                    %span{id: "check_question_#{asp.id}"}
+-#                      -if asp.question_complete(@project, current_user).count == asp.questions.by_project(@project.id).by_status(0).count
+-#                        %i.fa.fa-check
+-#                      -else
+-#                        %i.fa.fa-question
+-#
+-#      .tab-content
+-#        #tab-0.tab-pane.active.fade.in
+-#          .row
+-#            .col-md-12.col-sm-4
+-#              .bg-grey.padd-15
+-#                %h3
+-#                  %i.fa.fa-flag
+-#                  %span.color
+-#                    %strong ЦЕЛЬ ЭТАПА
+-#                %p
+-#                  Подробное изучение базы знаний по каждому аспекту всеми участниками процедуры выработки проекта.
+-#                  %br/
+-#                  %span.color
+-#                    %strong ЭТО ВАЖНО!
+-#                  Второй этап выработки проекта будет доступен только после того, как средний уровень готовности участников будет не менее 80%!
+-#              %br/
+-#              .bg-grey.padd-15
+-#                %h3
+-#                  %i.fa.fa-sign-in
+-#                  %span.color
+-#                    %strong С ЧЕГО НАЧАТЬ:
+-#                %ul.list-6
+-#                  %li Выберите аспект в списке ниже
+-#                  %li Ознакомьтесь с базой знаний внутри этого аспекта
+-#                  %li Пройдите короткое тестирование по полученным знаниям
+-#                  %li Переходите к следующему аспекту
+-#                  %li Проголосуйте за самые важные на ваш взгляд аспекты (будет доступно в конце этапа)
+-#
+-#        -@project.aspects.main_aspects.order("discontent_aspects.id").each_with_index do |asp, index|
+-#          %div.tab-pane.fade{id: "tab-#{index+1}"}
+-#            .row
+-#              .col-md-12.col-sm-4
+-#                .blog-two
+-#                  .row
+-#                    .col-md-12
+-#                      .blog-two-item
+-#                        .blog-two-content
+-#                          .panel{style: "border-color:#{aspect_color(asp)}"}
+-#                            .panel-heading{style: "color:#ffffff;background:#{aspect_color(asp)};border-color:#{aspect_color(asp)};"}
+-#                              %strong=asp.content
+-#                            .panel-body
+-#                              - if asp.knowbase_posts.present?
+-#                                %section
+-#                                  .body
+-#                                    - asp.knowbase_posts.each do |post|
+-#                                      %div{id: "knowbase_post_#{post.id}"}
+-#                                        = render partial: 'knowbase/posts/knowbase_post', object: post
+-#                                      %br
+-#                                %br
+-#                                %br
+-#                                - if asp.questions.by_project(@project.id).by_status(0).present?
+-#                                  %h5
+-#                                    - @count_now = @count_now ? @count_now : asp.question_complete(@project, current_user).count
+-#                                    - @count_all = asp.questions.by_project(@project.id).by_status(0).count
+-#                                    Отвечено на
+-#                                    %span{id: "count_questions_now_#{asp.id}"}= @count_now
+-#                                    вопросов из
+-#                                    %span.count_questions_all= @count_all
+-#                                  .progress.pb-sm
+-#                                    .progress-bar.progress-bar-blue{id: "progress_bar_#{asp.id}", "aria-valuemax" => "100", "aria-valuemin" => "0", "aria-valuenow" => "#{(@count_now/@count_all.to_f)*100}", :role => "progressbar", :style => "width: #{(@count_now/@count_all.to_f)*100}%;"}
+-#                                      %span.sr-only
+-#                                  %br
+-#                                - asp.questions.by_project(@project.id).by_status(0).order("questions.id").each do |question|
+-#                                  %div{id: "question_#{question.id}", style: "#{'display:none;' if asp.questions.by_project(@project.id).by_status(0).order("questions.id").first != question}"}
+-#                                    .box-shadow-outer
+-#                                      .box-shadow-block.box-shadow-2.text-center
+-#                                        %h5= question.content
+-#                                        %p.text-left
+-#                                          = form_tag(answer_question_discontent_aspect_path(@project, id: asp.id, question_id: question.id), {method: :put, remote: true, id: 'form_answer_question', multipart: true}) do
+-#                                            %div(class="btn-group" data-toggle="buttons" id="answer_buttons")
+-#                                              - question.answers.by_status(0).each do |answer|
+-#                                                %label(id="answer_#{answer.id}" class="btn btn-xs btn-white answer-question")
+-#                                                  = check_box_tag "answers[]", answer.id
+-#                                                  = answer.content
+-#
+-#                                            %ul.pager
+-#                                              %li.previous
+-#                                                %button{"data-content" => "And here's some amazing content. It's very engaging. Right?", "data-toggle" => "popover", :role => "button", :title => "Popover title", :type => "button"} Подсказка
+-#
+-#                                              %li.next
+-#                                                = submit_tag "Ответить", id: "send_answers"
 
 
 

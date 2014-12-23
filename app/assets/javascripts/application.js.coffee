@@ -5,8 +5,8 @@
 # require brave/jquery.magnific-popup.min.js
 #= require jquery.autosize
 
-#= require totop/jquery.ui.totop
-#= require totop/easing
+# require totop/jquery.ui.totop
+# require totop/easing
 #= require jquery.icheck
 
 
@@ -97,7 +97,7 @@ $ ->
   $('.liFixar').liFixar()
   $('.userscore').editable()
   $("#sortable").disableSelection()
-  $().UItoTop easingType: "easeOutQuart"
+#  $().UItoTop easingType: "easeOutQuart"
   $("[data-toggle=\"popover\"]").popover()
 
   $(".image-popup-vertical-fit").magnificPopup
