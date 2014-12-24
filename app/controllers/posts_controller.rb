@@ -1,33 +1,13 @@
-class PostsController < ApplicationController
-  before_filter :authenticate
-  before_filter :prepare_data, only: [:index, :new, :edit, :show, :vote_list, :vote_result, :to_work]
+class PostsController < ProjectsController
   before_filter :journal_data, only: [:index, :new, :edit, :show, :vote_list, :vote_result, :to_work]
   before_filter :have_rights, only: [:edit]
-  before_filter :have_project_access
   before_filter :not_open_closed_stage
   before_filter :boss_authenticate, only: [:vote_result]
   before_filter :comment_page, only: [:index, :show]
   before_filter :user_projects
 
-  #@todo why not use authenticate_user! from devise?
-  def authenticate
-    unless current_user
-      redirect_to '/users/sign_in'
-    end
-  end
-
-  #def have_project_access
-  #  @project = Core::Project.find(params[:project])
-  #  if @project
-  #    unless @project.project_access(current_user)
-  #      redirect_to :root
-  #    end
-  #  end
-  #end
-
   def not_open_closed_stage
     if params[:project]
-      @project = Core::Project.find(params[:project])
       redirect_to polymorphic_path(@project.redirect_to_current_stage) if @project.status < @project.model_min_stage(current_model.table_name.singularize)
     end
   end
@@ -85,12 +65,7 @@ class PostsController < ApplicationController
     Discontent::Post
   end
 
-  def prepare_data
-    @project = Core::Project.find(params[:project])
-  end
-
   def add_comment
-    @project = Core::Project.find(params[:project])
     @aspects = Discontent::Aspect.where(project_id: @project)
     post = current_model.find(params[:id])
     if params[:advise_status]
@@ -103,7 +78,6 @@ class PostsController < ApplicationController
   
 
   def comment_status
-    @project = Core::Project.find(params[:project])
     @post = current_model.find(params[:id])
     #@todo безопасность
     if params[:comment_stage]
@@ -144,7 +118,6 @@ class PostsController < ApplicationController
   end
 
   def discuss_status
-    @project = Core::Project.find(params[:project])
     @post = current_model.find(params[:id])
     if params[:discuss_status]
       @post.toggle!(:discuss_status)
@@ -221,7 +194,6 @@ class PostsController < ApplicationController
   end
 
   def create
-    @project = Core::Project.find(params[:project])
     @post = current_model.new(params[name_of_model_for_param])
     @post.project = @project
     @post.user = current_user
@@ -248,7 +220,6 @@ class PostsController < ApplicationController
 
   def update
     @post = current_model.find(params[:id])
-    @project = Core::Project.find(params[:project])
 
     respond_to do |format|
       if @post.update_attributes(params[name_of_model_for_param])
@@ -270,7 +241,6 @@ class PostsController < ApplicationController
   def destroy
     @post = current_model.find(params[:id])
     @post.destroy
-    @project = Core::Project.find(params[:project])
 
     respond_to do |format|
       format.html { redirect_to root_model_path(@project) }
@@ -281,8 +251,6 @@ class PostsController < ApplicationController
   def to_archive
     @post = current_model.find(params[:id])
     @post.update_column(:status, 3)
-
-    @project = Core::Project.find(params[:project])
 
     respond_to do |format|
       format.html { redirect_to url_for(controller: @post.class.to_s.tableize, action: :index) }
@@ -358,7 +326,6 @@ class PostsController < ApplicationController
 
   #write fact of voting in db
   def vote
-    @project = Core::Project.find(params[:project])
     @post_vote = voting_model.find(params[:post_id])
 
     #@todo Денис, нужно правильно задать атрибут через life_tape_voiting_params, чтобы сохранялся current_user
@@ -370,14 +337,12 @@ class PostsController < ApplicationController
   end
 
   def new_note
-    @project = Core::Project.find(params[:project])
     @post = current_model.find(params[:id])
     @type = params[:type_field]
     @post_note = note_model.new
   end
 
   def create_note
-    @project = Core::Project.find(params[:project])
     @post = current_model.find(params[:id])
     @type = params[name_of_note_for_param][:type_field]
     @post_note = @post.notes.build(params[name_of_note_for_param])
@@ -400,7 +365,6 @@ class PostsController < ApplicationController
   end
 
   def destroy_note
-    @project = Core::Project.find(params[:project])
     @post = current_model.find(params[:id])
     @type = params[:type_field]
     @post_note = note_model.find(params[:note_id])
@@ -408,7 +372,6 @@ class PostsController < ApplicationController
   end
 
   def status_post
-    @project = Core::Project.find(params[:project])
     @post = current_model.find(params[:id])
     @type = params[:type_field]
     @field_all = params[:field_all]
@@ -478,7 +441,6 @@ class PostsController < ApplicationController
   end
 
   def destroy_comment
-    @project = Core::Project.find(params[:project])
     @comment = comment_model.find(params[:id])
     if @comment.user == current_user or current_user.boss?
       @comment.destroy
@@ -488,13 +450,11 @@ class PostsController < ApplicationController
   end
 
   def set_important
-    @project = Core::Project.find(params[:project])
     @post = current_model.find(params[:id])
     @post.toggle!(:important)
   end
 
   def check_field
-    @project = Core::Project.find(params[:project])
     if params[:check_field] and params[:status]
       current_user.user_checks.where(project_id: @project.id, check_field: params[:check_field]).destroy_all
       current_user.user_checks.create(project_id: @project.id, check_field: params[:check_field], status: params[:status]).save!
@@ -523,7 +483,6 @@ class PostsController < ApplicationController
   end
 
   # def sort_aspects
-  #   @project = Core::Project.find(params[:project])
   #   @project.set_position_for_aspects if @project.status == 3
   # end
   private
