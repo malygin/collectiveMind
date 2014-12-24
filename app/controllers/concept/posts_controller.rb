@@ -1,4 +1,3 @@
-# encoding: utf-8
 require 'similar_text'
 require 'set'
 class Concept::PostsController < PostsController
@@ -8,7 +7,7 @@ class Concept::PostsController < PostsController
   def current_model
     Concept::Post
   end
-  
+
   def comment_model
     Concept::Comment
   end
@@ -28,7 +27,6 @@ class Concept::PostsController < PostsController
      pr.merge(Concept::PostResource.select("DISTINCT name as value").where("LOWER(name) like LOWER(?)", "%#{params[:term]}%")
               .where(project_id: params[:project], style: 0).map {|d| {value: d.value } })
 
-     @project = Core::Project.find(params[:project])
      if @project.status == 9
        pr.merge(Plan::PostResource.select("DISTINCT name as value").where("LOWER(name) like LOWER(?)", "%#{params[:term]}%")
                 .where(project_id: params[:project], style: 0).map {|d| {value: d.value } })
@@ -43,7 +41,6 @@ class Concept::PostsController < PostsController
     pr.merge(Concept::PostResource.select("DISTINCT name as value").where("LOWER(name) like LOWER(?)", "%#{params[:term]}%")
              .where(project_id: params[:project], style: 1).map {|d| {value: d.value } })
 
-    @project = Core::Project.find(params[:project])
     if @project.status == 9
       pr.merge(Plan::PostResource.select("DISTINCT name as value").where("LOWER(name) like LOWER(?)", "%#{params[:term]}%")
                .where(project_id: params[:project], style: 1).map {|d| {value: d.value } })
@@ -52,7 +49,6 @@ class Concept::PostsController < PostsController
   end
 
   def prepare_data
-    @project = Core::Project.find(params[:project])
     @aspects = Discontent::Aspect.where(project_id: @project, status: 0)
     @disposts = Discontent::Post.where(project_id: @project, status: 4).order(:id)
     @vote_all = Concept::Voting.by_posts_vote(@project.discontents.by_status(4).pluck(:id).join(", ")).uniq_user.count if @project.status == 8
@@ -69,7 +65,6 @@ class Concept::PostsController < PostsController
   end
 
   def create
-    @project = Core::Project.find(params[:project])
     @concept_post = Concept::Post.new
     @post_aspect = Concept::PostAspect.new(params[:pa])
     unless params[:cd].nil?
@@ -112,7 +107,6 @@ class Concept::PostsController < PostsController
   end
 
   def update
-    @project = Core::Project.find(params[:project])
     @concept_post = Concept::Post.find(params[:id])
     @concept_post.update_status_fields(params[:pa])
     @post_aspect = Concept::PostAspect.new(params[:pa])
@@ -165,7 +159,6 @@ class Concept::PostsController < PostsController
   end
 
   def vote_list
-    @project = Core::Project.find(params[:project])
     return redirect_to action: "index" unless current_user.can_vote_for(:concept,  @project)
 
     disposts = Discontent::Post.where(project_id: @project, status: 4).order(:id)
@@ -184,7 +177,6 @@ class Concept::PostsController < PostsController
   end
 
   def next_vote
-    @project = Core::Project.find(params[:project])
     disposts = Discontent::Post.where(project_id: @project, status: 4).order(:id)
     @last_vote = current_user.concept_post_votings.by_project_votings(@project).last
 
@@ -239,7 +231,6 @@ class Concept::PostsController < PostsController
    end
 
    def add_dispost
-     @project = Core::Project.find(params[:project])
      @dispost = Discontent::Post.find(params[:dispost_id])
      @remove_able = true
    end
