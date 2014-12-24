@@ -1,10 +1,8 @@
 class Estimate::PostsController < PostsController
-
-
-  #layout 'life_tape/posts2', :only: [:new, :edit, :show]
   def current_model
     Estimate::Post
   end
+
   def comment_model
     Estimate::Comment
   end
@@ -17,13 +15,11 @@ class Estimate::PostsController < PostsController
     Plan::Post
   end
 
-
   def prepare_data
     @status = params[:status]
     @aspects = Discontent::Aspect.where(project_id: @project)
-    @vote_all = Plan::Voting.where(plan_votings: {plan_post_id: @project.plan_post.pluck(:id) }).uniq_user.count if @project.status == 11
+    @vote_all = Plan::Voting.where(plan_votings: {plan_post_id: @project.plan_post.pluck(:id)}).uniq_user.count if @project.status == 11
   end
-
 
   def index
     return redirect_to action: 'vote_list' if current_user.can_vote_for(:plan, @project)
@@ -60,7 +56,6 @@ class Estimate::PostsController < PostsController
       format.html
     end
   end
-
 
   def new
     @post = current_model.new
@@ -162,14 +157,13 @@ class Estimate::PostsController < PostsController
     end
     respond_to do |format|
       if @estimate_post.save
-        current_user.journals.build(type_event:'estimate_post_save', body:@estimate_post.id).save!
-        format.html { redirect_to  action: "index"  }
+        current_user.journals.build(type_event: 'estimate_post_save', body: @estimate_post.id).save!
+        format.html { redirect_to action: "index" }
       else
         format.html { render action: "new" }
       end
     end
   end
-
 
 
   # PUT /estimate/posts/1
@@ -241,8 +235,8 @@ class Estimate::PostsController < PostsController
 
     @estimate_post.save
     @estimate_post.update_attributes(params[:estimate_post])
-    current_user.journals.build(type_event:'estimate_post_update', body:@estimate_post.id).save!
-    redirect_to estimate_post_path(@project,@estimate_post), notice: 'Оценка успешно обновлена.'
+    current_user.journals.build(type_event: 'estimate_post_update', body: @estimate_post.id).save!
+    redirect_to estimate_post_path(@project, @estimate_post), notice: 'Оценка успешно обновлена.'
   end
 
   def vote_list
@@ -255,5 +249,4 @@ class Estimate::PostsController < PostsController
       format.html
     end
   end
-
 end
