@@ -39,7 +39,6 @@ class Discontent::PostsController < PostsController
   end
 
   def prepare_data
-    @project = Core::Project.find(params[:project])
     @aspects = Discontent::Aspect.where(project_id: @project, status: 0)
     if @project.status == 6
       @vote_all = Discontent::Voting.by_posts_vote(@project.discontents.by_status([2, 4]).pluck(:id).join(", ")).uniq_user.count
@@ -88,7 +87,6 @@ class Discontent::PostsController < PostsController
   end
 
   def create
-    @project = Core::Project.find(params[:project])
     #@aspects = Discontent::Aspect.where(project_id: @project, status: 0)
     @post = @project.discontents.build(params[name_of_model_for_param])
     @post.user = current_user
@@ -114,7 +112,6 @@ class Discontent::PostsController < PostsController
 
   def update
     @post = current_model.find(params[:id])
-    @project = Core::Project.find(params[:project])
     unless params[:discontent_post_aspects].nil?
       @post.update_status_fields(params[name_of_model_for_param])
       @post.update_attributes(params[name_of_model_for_param])
@@ -129,7 +126,6 @@ class Discontent::PostsController < PostsController
   end
 
   def union_discontent
-    @project = Core::Project.find(params[:project])
     @post = Discontent::Post.find(params[:id])
     @new_post =Discontent::Post.create(status: 2, style: @post.style, project: @project, content: params[:union_post_descr], whered: @post.whered, whend: @post.whend)
     @new_post.save!
@@ -146,7 +142,6 @@ class Discontent::PostsController < PostsController
   end
 
   def unions
-    @project = Core::Project.find(params[:project])
     @accepted_posts = Discontent::Post.where(project_id: @project, status: 2)
     @posts = current_model.where(project_id: @project).where(status: 2).created_order
     @type_tab = params[:type_tab]
@@ -156,7 +151,6 @@ class Discontent::PostsController < PostsController
   end
 
   def remove_union
-    @project = Core::Project.find(params[:project])
     @post = Discontent::Post.find(params[:id])
     @union_post = Discontent::Post.find(params[:post_id])
     if @post.one_last_post? and boss?
@@ -173,7 +167,6 @@ class Discontent::PostsController < PostsController
   end
 
    def ungroup_union
-     @project = Core::Project.find(params[:project])
      @post = Discontent::Post.find(params[:id])
      unless @post.discontent_posts.nil?
        @post.discontent_posts.each do |post|
@@ -185,7 +178,6 @@ class Discontent::PostsController < PostsController
    end
 
   def add_union
-    @project = Core::Project.find(params[:project])
     @post = Discontent::Post.find(params[:id])
     @union_post = Discontent::Post.find(params[:post_id])
     @union_post.update_attributes(status: 1, discontent_post_id: @post.id)
@@ -193,7 +185,6 @@ class Discontent::PostsController < PostsController
   end
 
   def next_post_for_vote
-    @project = Core::Project.find(params[:project])
     @post_vote = voting_model.find(params[:id])
     @post_vote.final_votings.create(user: current_user, against: params[:against]) unless @post_vote.voted_users.include? current_user
     @votes = current_user.voted_discontent_posts.where(project_id: @project).count
@@ -208,7 +199,6 @@ class Discontent::PostsController < PostsController
   end
 
   def set_grouped
-    @project = Core::Project.find(params[:project])
     @post = Discontent::Post.find(params[:id])
     @new_post = Discontent::Post.create(status: 2, style: @post.style, project: @project, content: @post.content, whered: @post.whered, whend: @post.whend)
     @post.update_attributes(status: 1, discontent_post_id: @new_post.id)
@@ -216,7 +206,6 @@ class Discontent::PostsController < PostsController
   end
 
   def new_group
-    @project = Core::Project.find(params[:project])
     @asp = Discontent::Aspect.find(params[:asp]) unless params[:asp].nil?
     @aspects = Discontent::Aspect.where(project_id: @project, status: 0)
     @post_group = current_model.new
@@ -226,7 +215,6 @@ class Discontent::PostsController < PostsController
   end
 
   def create_group
-    @project = Core::Project.find(params[:project])
     @post_group = @project.discontents.create(params[name_of_model_for_param])
     @post_group.status = 2
     @post_group.save
@@ -242,7 +230,6 @@ class Discontent::PostsController < PostsController
   end
 
   def union_group
-    @project = Core::Project.find(params[:project])
     @post = Discontent::Post.find(params[:id])
     @new_post = Discontent::Post.find(params[:group_id])
     if @post and @new_post
@@ -258,7 +245,6 @@ class Discontent::PostsController < PostsController
   end
 
   def edit_group
-    @project = Core::Project.find(params[:project])
     @asp = Discontent::Aspect.find(params[:asp]) unless params[:asp].nil?
     @aspects = Discontent::Aspect.where(project_id: @project, status: 0)
     @post_group = current_model.find(params[:id])
@@ -269,7 +255,6 @@ class Discontent::PostsController < PostsController
   end
 
   def update_group
-    @project = Core::Project.find(params[:project])
     @post_group = current_model.find(params[:id])
     unless params[:discontent_post_aspects].nil?
       @post_group.update_status_fields(params[name_of_model_for_param])
@@ -283,12 +268,10 @@ class Discontent::PostsController < PostsController
   end
 
   def vote_result
-    @project = Core::Project.find(params[:project])
     @posts = voting_model.where(project_id: @project, status: [2,4])
   end
 
   def sort_content
-    @project = Core::Project.find(params[:project])
     @aspect = Discontent::Aspect.find(params[:asp])
     if params[:sort_default]
       @posts = @aspect.aspect_posts.by_status_for_discontent(@project).order("discontent_posts.id DESC").filter(filtering_params(params))
