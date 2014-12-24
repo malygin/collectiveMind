@@ -31,17 +31,17 @@ class Discontent::Aspect < ActiveRecord::Base
   scope :by_project, ->(project_id) { where("discontent_aspects.project_id = ?", project_id) }
   scope :minus_view, ->(aspects) { where("discontent_aspects.id NOT IN (#{aspects.join(", ")})") unless aspects.empty? }
   scope :by_discussions, ->(aspects) { where("discontent_aspects.id NOT IN (#{aspects.join(", ")})") unless aspects.empty? }
-  scope :main_aspects, -> { where(discontent_aspects: { discontent_aspect_id: nil }) }
+  scope :main_aspects, -> { where(discontent_aspects: {discontent_aspect_id: nil}) }
 
   scope :vote_top, ->(revers) {
-        if revers == "0"
-          order('count("life_tape_voitings"."user_id") DESC')
-        elsif revers == "1"
-          order('count("life_tape_voitings"."user_id") ASC')
-        else
-          nil
-        end
-      }
+    if revers == "0"
+      order('count("life_tape_voitings"."user_id") DESC')
+    elsif revers == "1"
+      order('count("life_tape_voitings"."user_id") ASC')
+    else
+      nil
+    end
+  }
 
   def life_tape_post
     self.life_tape_posts.first
@@ -110,5 +110,10 @@ class Discontent::Aspect < ActiveRecord::Base
 
   def question_complete(project, user)
     self.questions.joins("INNER JOIN answers_users ON answers_users.question_id = questions.id").where('answers_users.user_id = ?', user.id).by_project(project.id).by_status(0).select("distinct questions.id")
+  end
+
+  def color
+    color = read_attribute(:color)
+    color.nil? ? '#eac85e' : color
   end
 end
