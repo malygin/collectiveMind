@@ -1,17 +1,10 @@
 class Help::PostsController < PostsController
-  before_filter :prepare_data
-  before_filter :user_projects
-
   def current_model
     Help::Post
   end
 
-  def prepare_data
-    @project = Core::Project.find(params[:project])
-  end
-
   def index
-    redirect_to help_post_path(@project, id:1)
+    redirect_to help_post_path(@project, id: 1)
   end
 
   def show
@@ -19,7 +12,7 @@ class Help::PostsController < PostsController
     @posts = {}
     @help_partial = case params[:id]
                       when '0'
-                         'new_help_0'
+                        'new_help_0'
                       when '1'
                         'new_help_1'
                       when '2'
