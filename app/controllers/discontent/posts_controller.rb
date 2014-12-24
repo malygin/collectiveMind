@@ -47,7 +47,7 @@ class Discontent::PostsController < PostsController
 
   def index
     return redirect_to action: 'vote_list' if current_user.can_vote_for(:discontent, @project)
-    @aspect =  params[:asp] ? Discontent::Aspect.find(params[:asp]) : ((@project.proc_aspects.first.present? and @project.proc_aspects.first.position.present?) ? @project.proc_aspects.order("position DESC").first : @project.proc_aspects.order(:id).first)
+    @aspect = params[:asp] ? Discontent::Aspect.find(params[:asp]) : ((@project.proc_aspects.first.present? and @project.proc_aspects.first.position.present?) ? @project.proc_aspects.order("position DESC").first : @project.proc_aspects.order(:id).first)
     @accepted_posts = Discontent::Post.where(project_id: @project, status: 2)
     @comments_all = @project.problems_comments_for_improve
     @page = params[:page]
@@ -117,7 +117,7 @@ class Discontent::PostsController < PostsController
       @post.update_attributes(params[name_of_model_for_param])
       @post.update_post_aspects(params[:discontent_post_aspects])
       @aspect_id = params[:discontent_post_aspects].first
-      current_user.journals.build(type_event: name_of_model_for_param+'_update', anonym: @post.anonym , project: @project, body: trim_content(@post.content), first_id: @post.id).save!
+      current_user.journals.build(type_event: name_of_model_for_param+'_update', anonym: @post.anonym, project: @project, body: trim_content(@post.content), first_id: @post.id).save!
     end
     respond_to do |format|
       format.html
@@ -166,16 +166,16 @@ class Discontent::PostsController < PostsController
     end
   end
 
-   def ungroup_union
-     @post = Discontent::Post.find(params[:id])
-     unless @post.discontent_posts.nil?
-       @post.discontent_posts.each do |post|
-         post.update_attributes(status: 0, discontent_post_id: nil)
-       end
-     end
-     @post.update_column(:status, 3)
-     redirect_to action: "index"
-   end
+  def ungroup_union
+    @post = Discontent::Post.find(params[:id])
+    unless @post.discontent_posts.nil?
+      @post.discontent_posts.each do |post|
+        post.update_attributes(status: 0, discontent_post_id: nil)
+      end
+    end
+    @post.update_column(:status, 3)
+    redirect_to action: "index"
+  end
 
   def add_union
     @post = Discontent::Post.find(params[:id])
@@ -268,7 +268,7 @@ class Discontent::PostsController < PostsController
   end
 
   def vote_result
-    @posts = voting_model.where(project_id: @project, status: [2,4])
+    @posts = voting_model.where(project_id: @project, status: [2, 4])
   end
 
   def sort_content
@@ -281,13 +281,11 @@ class Discontent::PostsController < PostsController
   end
 
   private
+  def filtering_params(params)
+    params.slice(:type_like, :type_note, :type_verify, :type_status)
+  end
 
-    def filtering_params(params)
-      params.slice(:type_like, :type_note, :type_verify, :type_status)
-    end
-
-    def sorting_params(params)
-      params.slice(:sort_date, :sort_user, :sort_comment, :sort_view)
-    end
-
+  def sorting_params(params)
+    params.slice(:sort_date, :sort_user, :sort_comment, :sort_view)
+  end
 end

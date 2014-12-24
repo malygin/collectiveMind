@@ -1,4 +1,4 @@
-class Discontent::AspectsController < ApplicationController
+class Discontent::AspectsController < ProjectsController
   before_action :prepare_data, except: [:update, :destroy]
   before_action :set_aspect, except: [:new, :create]
 
