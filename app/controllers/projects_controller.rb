@@ -11,6 +11,7 @@ class ProjectsController < ApplicationController
 
   def journal_data
     @my_journals = current_user.my_journals @project
+    @my_journals_count = @my_journals.size
   end
 
   def user_projects
