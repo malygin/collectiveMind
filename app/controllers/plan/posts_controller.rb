@@ -19,7 +19,6 @@ class Plan::PostsController < PostsController
   end
 
   def prepare_data
-    @project = Core::Project.find(params[:project])
     @aspects = Discontent::Aspect.where(project_id: @project, status: 0)
     @vote_all = Plan::Voting.where(plan_votings: {plan_post_id: @project.plan_post.pluck(:id)}).uniq_user.count if @project.status == 11
   end
@@ -39,7 +38,6 @@ class Plan::PostsController < PostsController
   end
 
   def create
-    @project = Core::Project.find(params[:project])
     @plan_post = Plan::Post.new(params[:plan_post])
     @plan_post.number_views = 0
     @plan_post.project = @project
@@ -58,7 +56,6 @@ class Plan::PostsController < PostsController
   end
 
   def update
-    @project = Core::Project.find(params[:project])
     @plan_post = Plan::Post.find(params[:id])
     @plan_post.update_attributes(params[:plan_post])
     respond_to do |format|
@@ -71,7 +68,6 @@ class Plan::PostsController < PostsController
   end
 
   def add_concept
-    @project = Core::Project.find(params[:project])
     @post = Plan::Post.find(params[:id])
     @post_stage = Plan::PostStage.find(params[:stage_id])
 
@@ -82,19 +78,16 @@ class Plan::PostsController < PostsController
 
   # @todo methods for stage
   def new_stage
-    @project = Core::Project.find(params[:project])
     @post = Plan::Post.find(params[:id])
     @post_stage = Plan::PostStage.new
   end
 
   def edit_stage
-    @project = Core::Project.find(params[:project])
     @post = Plan::Post.find(params[:id])
     @post_stage = Plan::PostStage.find(params[:stage_id])
   end
 
   def create_stage
-    @project = Core::Project.find(params[:project])
     @post = Plan::Post.find(params[:id])
     @post_stage = Plan::PostStage.new(params[:plan_post_stage])
     @post_stage.post = @post
@@ -109,7 +102,6 @@ class Plan::PostsController < PostsController
   end
 
   def update_stage
-    @project = Core::Project.find(params[:project])
     @post = Plan::Post.find(params[:id])
     @post_stage = Plan::PostStage.find(params[:stage_id])
     @post_stage.update_attributes(params[:plan_post_stage])
@@ -123,7 +115,6 @@ class Plan::PostsController < PostsController
   end
 
   def destroy_stage
-    @project = Core::Project.find(params[:project])
     @post = Plan::Post.find(params[:id])
     @post_stage = Plan::PostStage.find(params[:stage_id])
     @post_stage.update_column(:status, 1) if current_user?(@post.user) or boss?
@@ -131,7 +122,6 @@ class Plan::PostsController < PostsController
 
   # @todo methods for action
   def new_action
-    @project = Core::Project.find(params[:project])
     @post = Plan::Post.find(params[:id])
     @post_stage = Plan::PostStage.find(params[:stage_id]) unless params[:stage_id].nil?
     @post_aspect = Plan::PostAspect.find(params[:con_id])
@@ -140,7 +130,6 @@ class Plan::PostsController < PostsController
   end
 
   def edit_action
-    @project = Core::Project.find(params[:project])
     @post = Plan::Post.find(params[:id])
     @post_aspect = Plan::PostAspect.find(params[:con_id])
     @post_stage = Plan::PostStage.find(params[:stage_id]) unless params[:stage_id].nil?
@@ -148,7 +137,6 @@ class Plan::PostsController < PostsController
   end
 
   def create_action
-    @project = Core::Project.find(params[:project])
     @post = Plan::Post.find(params[:id])
     @post_stage = Plan::PostStage.find(params[:stage_id]) unless params[:stage_id].nil?
     @post_aspect = Plan::PostAspect.find(params[:con_id])
@@ -166,7 +154,6 @@ class Plan::PostsController < PostsController
   end
 
   def update_action
-    @project = Core::Project.find(params[:project])
     @post = Plan::Post.find(params[:id])
     @post_stage = Plan::PostStage.find(params[:stage_id]) unless params[:stage_id].nil?
     @post_aspect = Plan::PostAspect.find(params[:con_id])
@@ -188,7 +175,6 @@ class Plan::PostsController < PostsController
   end
 
   def destroy_action
-    @project = Core::Project.find(params[:project])
     @post = Plan::Post.find(params[:id])
     @post_stage = Plan::PostStage.find(params[:stage_id])
     @post_aspect = Plan::PostAspect.find(params[:con_id])
@@ -197,7 +183,6 @@ class Plan::PostsController < PostsController
   end
 
   def add_form_for_concept
-    @project = Core::Project.find(params[:project])
     @post = Plan::Post.find(params[:id])
     @post_stage = Plan::PostStage.find(params[:stage_id])
     @save_form = params[:save_form]
@@ -255,14 +240,12 @@ class Plan::PostsController < PostsController
   end
 
   def edit_concept
-    @project = Core::Project.find(params[:project])
     @post = Plan::Post.find(params[:id])
     @post_concept = Plan::PostAspect.find(params[:con_id])
     @post_stage = @post_concept.plan_post_stage
   end
 
   def update_concept
-    @project = Core::Project.find(params[:project])
     @post = Plan::Post.find(params[:id])
     @post_concept = Plan::PostAspect.find(params[:concept_id])
     @post_concept.update_attributes(params[:plan_post_aspect])
@@ -279,7 +262,6 @@ class Plan::PostsController < PostsController
   end
 
   def destroy_concept
-    @project = Core::Project.find(params[:project])
     @post = Plan::Post.find(params[:id])
     @post_stage = Plan::PostStage.find(params[:stage_id])
     @post_concept = Plan::PostAspect.find(params[:con_id])
@@ -291,14 +273,12 @@ class Plan::PostsController < PostsController
   end
 
   def get_concept
-    @project = Core::Project.find(params[:project])
     @post = Plan::Post.find(params[:id])
     @post_concept = Plan::PostAspect.find(params[:con_id])
     @view_post_concept = params[:view_post_concept]
   end
 
   def update_get_concept
-    @project = Core::Project.find(params[:project])
     @post = Plan::Post.find(params[:id])
     @post_concept_save = Plan::PostAspect.find(params[:con_id])
     @post_concept_save.update_attributes(params[:plan_post_aspect])
@@ -313,18 +293,15 @@ class Plan::PostsController < PostsController
   end
 
   def render_table
-    @project = Core::Project.find(params[:project])
     @post = Plan::Post.find(params[:id])
     @render_type = params[:render_type]
   end
 
   def render_concept_side
-    @project = Core::Project.find(params[:project])
     @post = Plan::Post.find(params[:id])
   end
 
   def view_concept
-    @project = Core::Project.find(params[:project])
     @post = Plan::Post.find(params[:id])
     if params[:new_idea]
       @concept_post = Plan::PostAspect.find(params[:con_id])
@@ -338,13 +315,11 @@ class Plan::PostsController < PostsController
   end
 
   def view_concept_table
-    @project = Core::Project.find(params[:project])
     @post = Plan::Post.find(params[:id])
     @concept_post = Plan::PostAspect.find(params[:con_id])
   end
 
   def change_estimate_status
-    @project = Core::Project.find(params[:project])
     @est_stat = params[:est_stat]
     posts = Plan::Post.where(project_id: @project, status: 0)
     if posts.present? and @est_stat.present?
@@ -361,7 +336,6 @@ class Plan::PostsController < PostsController
   end
 
   def create_note
-    @project = Core::Project.find(params[:project])
     @post = current_model.find(params[:id])
     @type = params[:plan_note][:type_field]
     @post_aspect_note = Plan::PostAspect.find(params[:con_id])
