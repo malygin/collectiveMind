@@ -19,6 +19,7 @@ class ProjectsController < ApplicationController
   end
 
   def check_access_to_project
+    #@todo Рефакторинг model_min_stage
     if @project.status < @project.model_min_stage(current_model.table_name.singularize)
       redirect_to polymorphic_path(@project.redirect_to_current_stage)
     end
