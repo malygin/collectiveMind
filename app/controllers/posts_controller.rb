@@ -243,7 +243,6 @@ class PostsController < ProjectsController
 
   #todo check if user already voted
   def plus
-    @project= Core::Project.find(params[:project])
     @post = current_model.find(params[:id])
 
     # if boss?
@@ -270,7 +269,7 @@ class PostsController < ProjectsController
     #   @post.post_votings.create(user: current_user, post: @post, against: @against) unless @post.users.include? current_user
     #   # if (current_user.boss? or post.post_votings.count == 3) and not @against
     #   #    Award.reward(user: post.user, post: post, project: @project, type: 'add')
-    #   #    post.user.add_score(type: :plus_post, project: Core::Project.find(params[:project]), post: post, path:  post.class.name.underscore.pluralize)
+    #   #    post.user.add_score(type: :plus_post, project: @project, post: post, path:  post.class.name.underscore.pluralize)
     #   # end
     # end
     respond_to do |format|
@@ -280,7 +279,6 @@ class PostsController < ProjectsController
 
   def plus_comment
     @id = params[:id]
-    @project= Core::Project.find(params[:project])
     @comment = comment_model.find(@id)
     #@against =  params[:against] == 'true'
     #comment.comment_votings.create(user: current_user, comment: comment,  against: @against) unless comment.users.include? current_user
