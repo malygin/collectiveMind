@@ -8,7 +8,6 @@ class LifeTape::PostsController < PostsController
   end
 
   def prepare_data
-    @project = Core::Project.find(params[:project])
     @aspects = Discontent::Aspect.where(project_id: @project)
   end
 
@@ -41,7 +40,6 @@ class LifeTape::PostsController < PostsController
 
   #@todo перенос комментов(вместе с ответами) между темами
   def transfer_comment
-    @project = Core::Project.find(params[:project])
     aspect = Discontent::Aspect.find(params[:aspect_id])
     post = aspect.life_tape_post
     @comment = LifeTape::Comment.find(params[:comment_id])
@@ -82,7 +80,6 @@ class LifeTape::PostsController < PostsController
   end
 
   def vote_result
-    @project = Core::Project.find(params[:project])
     @posts = voting_model.scope_vote_top(@project.id, params[:revers])
   end
 
