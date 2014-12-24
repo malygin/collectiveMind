@@ -1,0 +1,7 @@
+= aspect.content
+%span{id: "redactor_aspect_#{aspect.id}"}
+  = link_to edit_discontent_aspect_path(@project, aspect), remote: true, id: "edit_aspect_#{aspect.id}" do
+    %span{class:'fa fa-pencil text-success'}
+  = link_to discontent_aspect_path(@project, aspect), method: :delete, data: {confirm: t('confirm.delete_aspect')}, id: "destroy_aspect_#{aspect.id}" do
+    %span{class:'fa fa-remove text-danger'}
+  %br
