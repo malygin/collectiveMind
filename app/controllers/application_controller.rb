@@ -8,17 +8,7 @@ class ApplicationController < ActionController::Base
     request.env['omniauth.origin'] || stored_location_for(resource) || root_path
   end
 
-  def journal_data
-    @project = Core::Project.find(params[:project])
-    @my_journals = current_user.my_journals @project
-  end
-
-  def user_projects
-    @user_projects = current_user.current_projects_for_ordinary_user if current_user
-  end
-
   protected
-
   def configure_permitted_parameters
     devise_parameter_sanitizer.for(:sign_up) << :name
   end
