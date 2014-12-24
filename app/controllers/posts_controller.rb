@@ -1,24 +1,7 @@
 class PostsController < ProjectsController
   before_filter :journal_data, only: [:index, :new, :edit, :show, :vote_list, :vote_result, :to_work]
-  before_filter :have_rights, only: [:edit]
-  before_filter :not_open_closed_stage
   before_filter :boss_authenticate, only: [:vote_result]
   before_filter :comment_page, only: [:index, :show]
-  before_filter :user_projects
-
-  def not_open_closed_stage
-    if params[:project]
-      redirect_to polymorphic_path(@project.redirect_to_current_stage) if @project.status < @project.model_min_stage(current_model.table_name.singularize)
-    end
-  end
-
-  def have_rights
-    unless current_model != 'Knowbase::Post'
-      if current_model.find(params[:id]).user != current_user and not boss?
-        redirect_to :back
-      end
-    end
-  end
 
   def journal_data
     if params[:viewed]
