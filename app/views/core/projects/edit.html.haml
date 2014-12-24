@@ -5,50 +5,43 @@
   %ul.nav.nav-tabs
     %li.active
       %a{'data-toggle' => 'tab', href: '#edit_project'} Редактирование процедуры
-    %li
-      %a{'data-toggle' => 'tab', href: '#edit_aspects'} Аспекты
-    %li
-      %a{'data-toggle' => 'tab', href: '#edit_stages'} Этапы
+    - if @project.persisted?
+      %li
+        %a{'data-toggle' => 'tab', href: '#edit_aspects'} Аспекты
+      %li
+        %a{'data-toggle' => 'tab', href: '#edit_stages'} Этапы
   .tab-content
     #edit_project.tab-pane.fade.active.in
       = render 'form'
-    #edit_aspects.tab-pane.fade
-      %ul.panel-collapse
-        - @project.aspects.main_aspects.each do |asp1|
-          = asp1.content
-          %span{id: "redactor_aspect_#{asp1.id}"}
-            = link_to edit_discontent_aspect_path(@project, asp1), remote: true, id: "edit_aspect_#{asp1.id}" do
-              %span{class:'fa fa-pencil text-success'}
-            = link_to discontent_aspect_path(@project, asp1), method: :delete, data: {confirm: t('confirm.delete_aspect')}, id: "destroy_aspect_#{asp1.id}" do
-              %span{class:'fa fa-remove text-danger'}
-            %br
+    - if @project.persisted?
+      #edit_aspects.tab-pane.fade
+        %ul.panel-collapse{id: "aspects_for_#{@project.id}"}
+          = link_to 'Добавить аспект', new_discontent_aspect_path(@project), remote: true, id: "add_aspect_for_#{@project.id}"
+          %br
+          - @project.aspects.main_aspects.each do |asp1|
+            = render partial: 'aspect', locals: {aspect: asp1}
 
-          - if asp1.discontent_aspects.present?
-            %ul.panel-collapse
-              - asp1.discontent_aspects.each do |asp2|
-                = asp2.content
-                %span{id: "redactor_aspect_#{asp2.id}"}
-                  = link_to edit_discontent_aspect_path(@project, asp2), remote: true, id: "edit_aspect_#{asp2.id}" do
-                    %span{class:'fa fa-pencil text-success'}
-                  = link_to discontent_aspect_path(@project, asp2), method: :delete, data: {confirm: t('confirm.delete_aspect')}, id: "destroy_aspect_#{asp2.id}" do
-                    %span{class:'fa fa-remove text-danger'}
-                  %br
-    #edit_stages.tab-pane.fade
-      .nav-tabs-three
-        .nav-tabs-three-sidebar
-          %ul.nav
-            %li.active
-              %a{'data-toggle' => 'tab', href: '#stage-1'} Этап 1
-            - (2..5).each do |stage_num|
-              %li
-                %a{'data-toggle' => 'tab', href: "#stage-#{stage_num}"}
-                  = "Этап #{stage_num}"
-        .nav-tabs-three-content
-          .tab-content
-            - (1..5).each do |stage_num|
-              .tab-pane.fade{id: "stage-#{stage_num}"}
-                %h4
-                  = Core::Project::LIST_STAGES[stage_num][:name]
-        .clearfix
+            - if asp1.discontent_aspects.present?
+              %ul.panel-collapse{id: "aspects_for_aspect_#{asp1.id}"}
+                - asp1.discontent_aspects.each do |asp2|
+                  = render partial: 'aspect', locals: {aspect: asp2}
+
+      #edit_stages.tab-pane.fade
+        .nav-tabs-three
+          .nav-tabs-three-sidebar
+            %ul.nav
+              %li.active
+                %a{'data-toggle' => 'tab', href: '#stage-1'} Этап 1
+              - (2..5).each do |stage_num|
+                %li
+                  %a{'data-toggle' => 'tab', href: "#stage-#{stage_num}"}
+                    = "Этап #{stage_num}"
+          .nav-tabs-three-content
+            .tab-content
+              - (1..5).each do |stage_num|
+                .tab-pane.fade{id: "stage-#{stage_num}"}
+                  %h4
+                    = Core::Project::LIST_STAGES[stage_num][:name]
+          .clearfix
 
 #aspect_modal

@@ -10,9 +10,9 @@ class Discontent::AspectsController < ProjectsController
     @aspect = @project.aspects.create discontent_aspect_params
     @post = @aspect.life_posts.build(status: 0, project: @project)
     @aspect.life_tape_posts << @post
-    color = "%06x" % (rand * 0xffffff)
-    @aspect.color = color
-    redirect_to "/project/#{@project.id}/life_tape/posts?asp=#{@aspect.id}" if @post.save
+    respond_to do |format|
+      format.js
+    end
   end
 
   def edit
@@ -53,7 +53,7 @@ class Discontent::AspectsController < ProjectsController
   end
 
   def discontent_aspect_params
-    params.require(:discontent_aspect).permit(:content, :position, :discontent_aspect_id, :short_desc, :status)
+    params.require(:discontent_aspect).permit(:content, :position, :discontent_aspect_id, :short_desc, :status, :short_name, :color)
   end
 
   def current_model
