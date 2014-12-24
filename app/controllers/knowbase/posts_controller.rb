@@ -1,14 +1,6 @@
-class Knowbase::PostsController <  PostsController
-  before_filter :prepare_data
-  before_filter :journal_data
-  before_filter :user_projects
-
+class Knowbase::PostsController < PostsController
   def current_model
     Knowbase::Post
-  end
-
-  def prepare_data
-    @project = Core::Project.find(params[:project])
   end
 
   def index
