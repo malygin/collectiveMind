@@ -89,7 +89,7 @@ class Core::ProjectsController < ApplicationController
 
     respond_to do |format|
       if @project.save
-        format.html { redirect_to list_projects_path, success: 'Project was successfully created.' }
+        format.html { redirect_to edit_project_path(@project), success: 'Project was successfully created.' }
         format.json { render json: @project, status: :created, location: @project }
       else
         format.html { render action: 'new' }
