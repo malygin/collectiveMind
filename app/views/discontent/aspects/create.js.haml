@@ -1,1 +1,5 @@
 $('#modal_aspect_view').modal('hide');
+- if @aspect.discontent_aspect.nil?
+  $("ul#aspects_for_#{@project.id}").append("#{escape_javascript(render partial: 'core/projects/aspect', locals: {aspect: @aspect})}");
+- else
+  $("ul#aspects_for_aspect_#{@aspect.discontent_aspect.id}").append("#{escape_javascript(render partial: 'core/projects/aspect', locals: {aspect: @aspect})}");
