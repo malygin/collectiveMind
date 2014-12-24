@@ -8,7 +8,6 @@ class Essay::PostsController < PostsController
   end
 
   def prepare_data
-    @project = Core::Project.find(params[:project])
     @journals = Journal.events_for_user_feed @project.id
     @stage = params[:stage]
   end

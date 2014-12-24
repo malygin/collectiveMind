@@ -1,5 +1,3 @@
-# encoding: utf-8
-
 class Estimate::PostsController < PostsController
 
 
@@ -21,7 +19,6 @@ class Estimate::PostsController < PostsController
 
 
   def prepare_data
-    @project = Core::Project.find(params[:project])
     @status = params[:status]
     @aspects = Discontent::Aspect.where(project_id: @project)
     @vote_all = Plan::Voting.where(plan_votings: {plan_post_id: @project.plan_post.pluck(:id) }).uniq_user.count if @project.status == 11
@@ -87,7 +84,6 @@ class Estimate::PostsController < PostsController
 
   def create
     @estimate_post = Estimate::Post.new(params[:estimate_post])
-    @project = Core::Project.find(params[:project])
 
     plan_post = Plan::Post.find(params[:post_id])
     @estimate_post.post = plan_post
@@ -180,7 +176,6 @@ class Estimate::PostsController < PostsController
   # PUT /estimate/posts/1.json
   def update
     @estimate_post = Estimate::Post.find(params[:id])
-    @project = Core::Project.find(params[:project])
     plan_post = Plan::Post.find(params[:post_id])
     @estimate_post.post_aspects.destroy_all
     @est_stat = plan_post.estimate_status.nil? ? 0 : plan_post.estimate_status
@@ -251,7 +246,6 @@ class Estimate::PostsController < PostsController
   end
 
   def vote_list
-    @project = Core::Project.find(params[:project])
     return redirect_to action: 'vote_list' unless current_user.can_vote_for(:plan, @project)
     @posts = Plan::Post.where(project_id: @project, status: 0).paginate(page: params[:page])
     @est_stat = @posts.first.estimate_status.nil? ? 0 : @posts.first.estimate_status
