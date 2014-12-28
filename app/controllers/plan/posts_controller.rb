@@ -1,10 +1,6 @@
 class Plan::PostsController < PostsController
   #autocomplete :concept_post, :resource, :class_name: 'Concept::Post' , :full: true
 
-  def note_model
-    Plan::Note
-  end
-
   def voting_model
     Plan::Post
   end

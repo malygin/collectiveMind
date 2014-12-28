@@ -28,6 +28,10 @@ class PostsController < ProjectsController
     "#{self.class.name.deconstantize}::Comment".constantize
   end
 
+  def note_model
+    "#{self.class.name.deconstantize}::Note".constantize
+  end
+
   def name_of_model_for_param
     current_model.table_name.singularize
   end

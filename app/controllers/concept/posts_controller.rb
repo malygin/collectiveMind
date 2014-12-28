@@ -8,10 +8,6 @@ class Concept::PostsController < PostsController
     Concept::PostAspect
   end
 
-  def note_model
-    Concept::Note
-  end
-
   def autocomplete_concept_post_resource
     pr=Set.new
     pr.merge(Concept::Resource.where(project_id: params[:project]).map { |d| {value: d.name} })

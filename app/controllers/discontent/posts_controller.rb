@@ -30,10 +30,6 @@ class Discontent::PostsController < PostsController
     Discontent::Post
   end
 
-  def note_model
-    Discontent::Note
-  end
-
   def prepare_data
     @aspects = Discontent::Aspect.where(project_id: @project, status: 0)
     if @project.status == 6
