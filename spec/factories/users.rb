@@ -11,21 +11,27 @@ FactoryGirl.define do
   factory :prime_admin, parent: :user do
     type_user 1
   end
+
   factory :moderator, parent: :user do
     type_user 6
   end
+
   factory :expert, parent: :user do
     type_user 2
   end
+
   factory :jury, parent: :user do
     type_user 3
   end
+
   factory :club_user, parent: :user do
     type_user 4
   end
+
   factory :club_watcher, parent: :user do
     type_user 5
   end
+
   factory :ordinary_user, parent: :user do
     type_user 8
   end
@@ -34,8 +40,7 @@ FactoryGirl.define do
     sequence(:name) { |n| "Name #{n}" }
     sequence(:surname) { |n| "Surname #{n}" }
     sequence(:email) { |n| "person_b#{n}@example.com" }
-    password "foobar1"
-    password_confirmation "foobar"
+    password 'foobar1'
+    password_confirmation 'foobar'
   end
-
 end
