@@ -62,8 +62,6 @@ class PostsController < ProjectsController
     end
   end
 
-  
-
   def comment_status
     @post = current_model.find(params[:id])
     #@todo безопасность
@@ -404,7 +402,7 @@ class PostsController < ProjectsController
     @aspects = Discontent::Aspect.where(project_id: @project)
 
     if params[:image]
-      if  ['image/jpeg', 'image/png'].include? params[:image].content_type
+      if ['image/jpeg', 'image/png'].include? params[:image].content_type
         img = Cloudinary::Uploader.upload(params[:image], folder: 'comments', crop: :limit, width: 800,
                                           eager: [{crop: :fill, width: 150, height: 150}])
         isFile = false
@@ -484,7 +482,7 @@ class PostsController < ProjectsController
   def create_comment(post)
     if params[:main_comment]
       @comment_answer = comment_model.find(params[:main_comment]) unless params[:main_comment].nil?
-      @comment_parent = @comment_answer.comment ?  @comment_answer.comment : @comment_answer
+      @comment_parent = @comment_answer.comment ? @comment_answer.comment : @comment_answer
     end
     content = params[name_of_comment_for_param][:content]
 

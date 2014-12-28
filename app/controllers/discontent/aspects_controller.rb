@@ -56,10 +56,6 @@ class Discontent::AspectsController < ProjectsController
     params.require(:discontent_aspect).permit(:content, :position, :discontent_aspect_id, :short_desc, :status, :short_name, :color)
   end
 
-  def current_model
-    Discontent::Aspect
-  end
-
   def prepare_data
     @aspects = Discontent::Aspect.where(project_id: @project)
   end
