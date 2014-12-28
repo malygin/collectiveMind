@@ -18,3 +18,4 @@
 .idea
 config/database.yml
 coverage/
+dump.rdb
