@@ -17,6 +17,16 @@ end
 group :development do
   gem 'spring'
   gem 'html2haml', '1.0.0'
+  gem 'rubocop'
+  gem 'ruby-prof'
+  gem 'rspec-prof'
+  gem 'brakeman', require: false
+  gem 'rails_best_practices'
+  gem 'guard-livereload'
+  gem 'lol_dba'
+  gem 'yard'
+  gem 'rubycritic'
+  gem 'traceroute'
 end
 
 group :production do

@@ -15,6 +15,7 @@ GIT
 GEM
   remote: https://rubygems.org/
   specs:
+    abstract_type (0.0.7)
     actionmailer (4.1.6)
       actionpack (= 4.1.6)
       actionview (= 4.1.6)
@@ -43,16 +44,27 @@ GEM
       minitest (~> 5.1)
       thread_safe (~> 0.1)
       tzinfo (~> 1.1)
+    adamantium (0.2.0)
+      ice_nine (~> 0.11.0)
+      memoizable (~> 0.4.0)
     addressable (2.3.6)
     arel (5.0.1.20140414130214)
+    ast (2.0.0)
+    astrolabe (1.3.0)
+      parser (>= 2.2.0.pre.3, < 3.0)
     autosize-rails (1.18.8)
       rails (>= 3.1)
+    awesome_print (1.2.0)
     aws-sdk (1.54.0)
       aws-sdk-v1 (= 1.54.0)
     aws-sdk-v1 (1.54.0)
       json (~> 1.4)
       nokogiri (>= 1.4.4)
     aws_cf_signer (0.1.3)
+    axiom-types (0.1.1)
+      descendants_tracker (~> 0.0.4)
+      ice_nine (~> 0.11.0)
+      thread_safe (~> 0.3, >= 0.3.1)
     bcrypt (3.1.7)
     better_errors (2.0.0)
       coderay (>= 1.0.0)
@@ -64,6 +76,17 @@ GEM
       railties (>= 3.0)
     bootstrap-x-editable-rails (1.5.1.1)
       railties (>= 3.0)
+    brakeman (1.9.4)
+      erubis (~> 2.6)
+      fastercsv (~> 1.5)
+      haml (>= 3.0, < 5.0)
+      highline (~> 1.6)
+      multi_json (~> 1.2)
+      ruby2ruby (~> 2.0)
+      ruby_parser (~> 3.1.1)
+      sass (~> 3.0)
+      slim (~> 1.3.6)
+      terminal-table (~> 1.4)
     breadcrumbs_on_rails (2.3.0)
     builder (3.2.2)
     bullet (4.14.0)
@@ -94,9 +117,13 @@ GEM
       rest-client
     cocaine (0.5.4)
       climate_control (>= 0.0.3, < 1.0)
+    code_analyzer (0.4.5)
+      sexp_processor
     codeclimate-test-reporter (0.4.1)
       simplecov (>= 0.7.1, < 1.0.0)
     coderay (1.1.0)
+    coercible (1.0.0)
+      descendants_tracker (~> 0.0.1)
     coffee-rails (4.0.1)
       coffee-script (>= 2.2.0)
       railties (>= 4.0.0, < 5.0)
@@ -111,10 +138,15 @@ GEM
       sass (~> 3.2.19)
     compass-rails (2.0.0)
       compass (>= 0.12.2)
+    concord (0.1.5)
+      adamantium (~> 0.2.0)
+      equalizer (~> 0.0.9)
     daemons (1.1.9)
     dalli (2.7.2)
     database_cleaner (1.3.0)
     debug_inspector (0.0.2)
+    descendants_tracker (0.0.4)
+      thread_safe (~> 0.3, >= 0.3.1)
     devise (3.3.0)
       bcrypt (~> 3.0)
       orm_adapter (~> 0.1)
@@ -135,6 +167,10 @@ GEM
     dotenv-deployment (0.0.2)
     em-synchrony (1.0.3)
       eventmachine (>= 1.0.0.beta.1)
+    em-websocket (0.5.1)
+      eventmachine (>= 0.12.9)
+      http_parser.rb (~> 0.6.0)
+    equalizer (0.0.9)
     erubis (2.7.0)
     eventmachine (1.0.3)
     execjs (2.2.1)
@@ -146,10 +182,17 @@ GEM
       railties (>= 3.0.0)
     faker (1.4.3)
       i18n (~> 0.5)
+    fastercsv (1.5.5)
     faye-websocket (0.8.0)
       eventmachine (>= 0.12.0)
       websocket-driver (>= 0.4.0)
     ffi (1.9.5)
+    flay (2.4.0)
+      ruby_parser (~> 3.0)
+      sexp_processor (~> 4.0)
+    flog (4.2.1)
+      ruby_parser (~> 3.1, > 3.1.0)
+      sexp_processor (~> 4.4)
     foreman (0.75.0)
       dotenv (~> 0.11.1)
       thor (~> 0.19.1)
@@ -163,6 +206,10 @@ GEM
       lumberjack (~> 1.0)
       pry (>= 0.9.12)
       thor (>= 0.18.1)
+    guard-livereload (2.3.1)
+      em-websocket (~> 0.5)
+      guard (~> 2.0)
+      multi_json (~> 1.8)
     guard-rspec (4.3.1)
       guard (~> 2.1)
       rspec (>= 2.14, < 4.0)
@@ -182,6 +229,7 @@ GEM
       rack (>= 1.4.5)
     highcharts-rails (3.0.10)
       railties (>= 3.1)
+    highline (1.6.21)
     hike (1.2.3)
     hiredis (0.5.2)
     historyjs-rails (1.0.1)
@@ -193,7 +241,9 @@ GEM
       haml (>= 4.0.0.rc.1)
       hpricot (~> 0.8.6)
       ruby_parser (~> 3.1.1)
+    http_parser.rb (0.6.0)
     i18n (0.6.11)
+    ice_nine (0.11.1)
     jquery-rails (3.1.2)
       railties (>= 3.0, < 5.0)
       thor (>= 0.14, < 2.0)
@@ -212,11 +262,17 @@ GEM
       celluloid (>= 0.15.2)
       rb-fsevent (>= 0.9.3)
       rb-inotify (>= 0.9)
+    lol_dba (1.6.4)
+      actionpack (>= 3.0)
+      activerecord (>= 3.0)
+      railties (>= 3.0)
     lumberjack (1.0.9)
     magic_encoding (0.0.2)
     mail (2.6.1)
       mime-types (>= 1.16, < 3)
     memcachier (0.0.2)
+    memoizable (0.4.2)
+      thread_safe (~> 0.3, >= 0.3.1)
     method_source (0.8.2)
     mime-types (2.3)
     mini_portile (0.6.0)
@@ -233,7 +289,12 @@ GEM
       activesupport (>= 3.0.0)
       cocaine (~> 0.5.3)
       mime-types
+    parser (2.2.0.1)
+      ast (>= 1.1, < 3.0)
+      slop (~> 3.4, >= 3.4.5)
     pg (0.17.1)
+    powerpack (0.0.9)
+    procto (0.0.2)
     pry (0.10.1)
       coderay (~> 1.1.0)
       method_source (~> 0.8.1)
@@ -260,6 +321,16 @@ GEM
     rails_12factor (0.0.2)
       rails_serve_static_assets
       rails_stdout_logging
+    rails_best_practices (1.15.4)
+      activesupport
+      awesome_print
+      code_analyzer (>= 0.4.3)
+      colored
+      erubis
+      i18n
+      json
+      require_all
+      ruby-progressbar
     rails_serve_static_assets (0.0.2)
     rails_stdout_logging (0.0.3)
     railties (4.1.6)
@@ -267,6 +338,7 @@ GEM
       activesupport (= 4.1.6)
       rake (>= 0.8.7)
       thor (>= 0.18.1, < 2.0)
+    rainbow (2.0.0)
     rake (10.3.2)
     rb-fsevent (0.9.4)
     rb-inotify (0.9.5)
@@ -276,8 +348,13 @@ GEM
       redis (~> 3.0, >= 3.0.4)
     redis-objects (1.0.1)
       redis (>= 3.0.2)
+    reek (1.6.0)
+      parser (~> 2.2.0.pre.7)
+      rainbow (>= 1.99, < 3.0)
+      unparser (~> 0.1.16)
     ref (1.0.5)
     remotipart (1.2.1)
+    require_all (1.3.2)
     resque (1.25.2)
       mono_logger (~> 1.0)
       multi_json (~> 1.0)
@@ -306,6 +383,9 @@ GEM
       rspec-support (~> 3.1.0)
     rspec-mocks (3.1.2)
       rspec-support (~> 3.1.0)
+    rspec-prof (0.0.5)
+      rspec
+      ruby-prof
     rspec-rails (3.1.0)
       actionpack (>= 3.0)
       activesupport (>= 3.0)
@@ -315,8 +395,26 @@ GEM
       rspec-mocks (~> 3.1.0)
       rspec-support (~> 3.1.0)
     rspec-support (3.1.1)
+    rubocop (0.28.0)
+      astrolabe (~> 1.3)
+      parser (>= 2.2.0.pre.7, < 3.0)
+      powerpack (~> 0.0.6)
+      rainbow (>= 1.99.1, < 3.0)
+      ruby-progressbar (~> 1.4)
+    ruby-prof (0.15.2)
+    ruby-progressbar (1.7.1)
+    ruby2ruby (2.1.3)
+      ruby_parser (~> 3.1)
+      sexp_processor (~> 4.0)
     ruby_parser (3.1.3)
       sexp_processor (~> 4.1)
+    rubycritic (1.2.0)
+      flay (= 2.4.0)
+      flog (= 4.2.1)
+      parser (>= 2.2.0.pre.5, < 3.0)
+      reek (= 1.6.0)
+      ruby2ruby (>= 2.1.1, < 3.0)
+      virtus (~> 1.0)
     rubyzip (1.1.6)
     rufus-scheduler (2.0.24)
       tzinfo (>= 0.3.22)
@@ -347,6 +445,9 @@ GEM
       rack (~> 1.4)
       rack-protection (~> 1.4)
       tilt (~> 1.3, >= 1.3.4)
+    slim (1.3.9)
+      temple (~> 0.6.3)
+      tilt (~> 1.3, >= 1.3.3)
     slop (3.6.0)
     spork (1.0.0rc4)
     spork-rails (4.0.0)
@@ -362,8 +463,10 @@ GEM
       actionpack (>= 3.0)
       activesupport (>= 3.0)
       sprockets (~> 2.8)
+    temple (0.6.10)
     term-ansicolor (1.3.0)
       tins (~> 1.0)
+    terminal-table (1.4.5)
     therubyracer (0.12.1)
       libv8 (~> 3.16.14.0)
       ref
@@ -379,14 +482,28 @@ GEM
     tins (1.3.3)
     tinymce-rails (4.1.5)
       railties (>= 3.1.1)
+    traceroute (0.4.0)
+      rails (>= 3.0.0)
     tzinfo (1.2.2)
       thread_safe (~> 0.1)
     uglifier (2.5.3)
       execjs (>= 0.3.0)
       json (>= 1.8.0)
     uniform_notifier (1.6.2)
+    unparser (0.1.16)
+      abstract_type (~> 0.0.7)
+      adamantium (~> 0.2.0)
+      concord (~> 0.1.5)
+      equalizer (~> 0.0.9)
+      parser (~> 2.2.0.pre.7)
+      procto (~> 0.0.2)
     vegas (0.1.11)
       rack (>= 1.0.0)
+    virtus (1.0.3)
+      axiom-types (~> 0.1)
+      coercible (~> 1.0)
+      descendants_tracker (~> 0.0, >= 0.0.3)
+      equalizer (~> 0.0, >= 0.0.9)
     warden (1.2.3)
       rack (>= 1.0)
     webdriver-user-agent (7.1)
@@ -398,6 +515,7 @@ GEM
     will_paginate (3.0.7)
     xpath (2.0.0)
       nokogiri (~> 1.3)
+    yard (0.8.7.6)
 
 PLATFORMS
   ruby
@@ -410,6 +528,7 @@ DEPENDENCIES
   binding_of_caller
   bootstrap-wysihtml5-rails
   bootstrap-x-editable-rails
+  brakeman
   breadcrumbs_on_rails
   bullet
   capybara
@@ -428,6 +547,7 @@ DEPENDENCIES
   faker
   foreman
   grizzled-rails-logger
+  guard-livereload
   guard-rspec
   guard-spork
   haml
@@ -440,6 +560,7 @@ DEPENDENCIES
   jquery-rails
   jquery-ui-sass-rails
   json
+  lol_dba
   magic_encoding
   memcachier
   newrelic_rpm (>= 3.7.3)
@@ -449,6 +570,7 @@ DEPENDENCIES
   rails (= 4.1.6)
   rails3-jquery-autocomplete (= 1.0.14)
   rails_12factor
+  rails_best_practices
   remotipart (~> 1.2)
   resque
   resque-scheduler
@@ -456,7 +578,11 @@ DEPENDENCIES
   resque_mailer
   rest-client
   rspec
+  rspec-prof
   rspec-rails
+  rubocop
+  ruby-prof
+  rubycritic
   rufus-scheduler (< 3.0.0)
   russian
   sass-rails (~> 4.0.0)
@@ -471,7 +597,9 @@ DEPENDENCIES
   therubyracer (>= 0.11.4)
   thin
   tinymce-rails
+  traceroute
   uglifier (>= 2.1.1)
   webdriver-user-agent
   websocket-rails!
   will_paginate (~> 3.0.0)
+  yard
