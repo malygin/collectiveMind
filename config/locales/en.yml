@@ -781,3 +781,5 @@ en:
     editing: "Editing group"
     group: "Group"
     call_moderator_success: "Moderator get notification"
+  project_settings:
+    success_update: "Dates successful update"

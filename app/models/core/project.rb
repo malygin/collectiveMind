@@ -1,5 +1,5 @@
 class Core::Project < ActiveRecord::Base
-  has_one :settings, dependent: :destroy
+  has_one :settings, class_name: 'Core::ProjectSetting', dependent: :destroy
   accepts_nested_attributes_for :settings
   has_many :life_tape_posts, -> { where status: 0 }, class_name: 'LifeTape::Post'
   has_many :aspects, class_name: 'Discontent::Aspect'
@@ -231,7 +231,7 @@ class Core::Project < ActiveRecord::Base
     self.type_access == 3
   end
 
-  def status_title(status = self.status)
+  def self.status_title(status)
     case status
       when 0
         'подготовка к процедуре'

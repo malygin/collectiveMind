@@ -802,3 +802,5 @@ ru:
     editing: "Редактирование группы"
     group: "Группа"
     call_moderator_success: "Модератор получил уведомление"
+  project_settings:
+    success_update: "Даты обновлены"

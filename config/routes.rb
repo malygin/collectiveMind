@@ -72,6 +72,7 @@ CollectiveMind::Application.routes.draw do
         get :pr_stage
       end
     end
+    resources :project_settings, only: :update
   end
 
   scope '/project/:project' do
