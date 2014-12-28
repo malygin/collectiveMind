@@ -1,4 +1,6 @@
 class Core::Project < ActiveRecord::Base
+  has_one :settings, dependent: :destroy
+  accepts_nested_attributes_for :settings
   has_many :life_tape_posts, -> { where status: 0 }, class_name: 'LifeTape::Post'
   has_many :aspects, class_name: 'Discontent::Aspect'
 
