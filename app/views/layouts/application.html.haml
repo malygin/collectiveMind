@@ -18,27 +18,27 @@
       %header.top-bar
         .container
           .tb-logo.pull-left
-            %a{href: @project ? "/project/#{@project.id}" : "/", id: "go_to_logo"}
-              = image_tag "img/logo.jpg", style: 'margin: auto;'
+            %a{href: @project ? "/project/#{@project.id}" : '/', id: 'go_to_logo'}
+              = image_tag 'img/logo.jpg', style: 'margin: auto;'
           .clearfix.visible-xs
           %nav.header-buttons.pull-left
-            %a.btn.btn-lblue.rounded-3{:href => "#"} процедура
+            %a.btn.btn-lblue.rounded-3{href: '#'} процедура
             .clearfix.visible-xs
-            %a.btn.btn-lblue.btn-outline.rounded-3{:href => "#"} кабинет
+            %a.btn.btn-lblue.btn-outline.rounded-3{href: '#'} кабинет
             .clearfix.visible-xs
-            %a.btn.btn-lblue.btn-outline.rounded-3{:href => "#"} новости
+            %a.btn.btn-lblue.btn-outline.rounded-3{href: '#'} новости
           .tb-language.dropdown.pull-right
-            %a{"data-target" => "#", "data-toggle" => "dropdown", :href => "#"}
+            %a{'data-target' => '#', 'data-toggle' => 'dropdown', href: '#'}
               %i.fa.fa-globe
               English
               %i.fa.fa-angle-down.color
-            %ul.dropdown-menu.dropdown-mini{:role => "menu"}
+            %ul.dropdown-menu.dropdown-mini{role: 'menu'}
               %li
-                %a{:href => "#"} Hindi
+                %a{href: '#'} Hindi
               %li
-                %a{:href => "#"} Tamil
+                %a{href: '#'} Tamil
               %li
-                %a{:href => "#"} Kanada
+                %a{href: '#'} Kanada
           .user-block.pull-right
             %span
               = current_user.to_s if current_user
@@ -51,19 +51,19 @@
           .row
             .col-xs-10
               %h1.color.lblue
-                -if current_controller_for_navbar?(controller)
+                - if current_controller_for_navbar?(controller)
                   = @project.name
               %span.sub-heading.color.lblue
             .col-xs-2
               .head-search.pull-right
-                %a.b-dropdown{:href => "#"}
+                %a.b-dropdown{href: "#"}
                   %i.fa.fa-search.square-2.rounded-1.bg-color.white
                 .b-dropdown-block
-                  %form{:role => "form"}
+                  %form{role: "form"}
                     .input-group
-                      %input.form-control{:placeholder => "Type Something", :type => "text"}/
+                      %input.form-control{placeholder: "Type Something", type: "text"}/
                       %span.input-group-btn
-                        %button.btn.btn-color{:type => "button"} Search
+                        %button.btn.btn-color{type: "button"} Search
               .clearfix
 
       .main-block
@@ -91,7 +91,7 @@
     -#            = succeed "DECISION" do
     -#              %span.color MASS
     -#        %i.fa.fa-envelope.color
-    -#        %a{:href => "mailto:Slava.Gorlytsa@gmail.com"} Slava.Gorlytsa@gmail.com
+    -#        %a{href: "mailto:Slava.Gorlytsa@gmail.com"} Slava.Gorlytsa@gmail.com
     -#        %i.fa.fa-phone.color
     -#        +7 (937) - (242) - 8881
     -#      .tb-social.pull-right
@@ -124,7 +124,7 @@
     %br/
     %br/
     %span.totop
-      %a{:href => "#"}
+      %a{href: "#"}
         %i.fa.fa-angle-up.bg-color
 
 
