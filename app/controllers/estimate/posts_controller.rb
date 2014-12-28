@@ -1,12 +1,4 @@
 class Estimate::PostsController < PostsController
-  def current_model
-    Estimate::Post
-  end
-
-  def comment_model
-    Estimate::Comment
-  end
-
   def note_model
     Estimate::PostNote
   end

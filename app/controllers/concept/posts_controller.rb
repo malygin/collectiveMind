@@ -4,14 +4,6 @@ class Concept::PostsController < PostsController
 
   autocomplete :concept_post, :resource, class_name: 'Concept::Post', full: true
 
-  def current_model
-    Concept::Post
-  end
-
-  def comment_model
-    Concept::Comment
-  end
-
   def voting_model
     Concept::PostAspect
   end

@@ -1,8 +1,4 @@
 class Help::PostsController < PostsController
-  def current_model
-    Help::Post
-  end
-
   def index
     redirect_to help_post_path(@project, id: 1)
   end

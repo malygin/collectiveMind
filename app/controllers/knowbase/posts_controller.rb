@@ -1,8 +1,4 @@
 class Knowbase::PostsController < PostsController
-  def current_model
-    Knowbase::Post
-  end
-
   def index
     @stages = current_model.stage_knowbase_order(@project.id)
     @post = current_model.min_stage_knowbase_post(@project.id).first

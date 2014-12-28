@@ -26,10 +26,6 @@ class Discontent::PostsController < PostsController
     render json: pr
   end
 
-  def current_model
-    Discontent::Post
-  end
-
   def voting_model
     Discontent::Post
   end
@@ -76,7 +72,6 @@ class Discontent::PostsController < PostsController
       format.js
     end
   end
-
 
   def vote_list
     @posts = @project.get_united_posts_for_vote(current_user)

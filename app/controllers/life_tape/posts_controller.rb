@@ -1,8 +1,4 @@
 class LifeTape::PostsController < PostsController
-  def current_model
-    LifeTape::Post
-  end
-
   def voting_model
     Discontent::Aspect
   end

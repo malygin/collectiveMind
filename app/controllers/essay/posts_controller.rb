@@ -1,12 +1,4 @@
 class Essay::PostsController < PostsController
-  def current_model
-    Essay::Post
-  end
-
-  def comment_model
-    Essay::Comment
-  end
-
   def prepare_data
     @journals = Journal.events_for_user_feed @project.id
     @stage = params[:stage]
