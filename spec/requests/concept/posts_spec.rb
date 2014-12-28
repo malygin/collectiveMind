@@ -3,17 +3,17 @@ require 'spec_helper'
 describe 'Concept ' do
   subject { page }
 
-  let (:user) {create :user }
-  let (:user_data) {create :user }
-  let (:prime_admin) {create :prime_admin }
-  let (:moderator) {create :moderator }
-  let (:project) {create :core_project, status: 7 }
+  let (:user) { create :user }
+  let (:user_data) { create :user }
+  let (:prime_admin) { create :prime_admin }
+  let (:moderator) { create :moderator }
+  let (:project) { create :core_project, status: 7 }
 
-  before  do
-    prepare_concepts(project,user_data)
+  before do
+    prepare_concepts(project, user_data)
   end
 
-  context  'ordinary user sign in ' do
+  context 'ordinary user sign in ' do
     before do
       sign_in user
       visit root_path
@@ -254,7 +254,7 @@ describe 'Concept ' do
       end
     end
 
-    context 'show concept'   do
+    context 'show concept' do
       before do
         visit concept_post_path(project, @concept1)
       end
@@ -272,7 +272,7 @@ describe 'Concept ' do
         expect(page).to have_content @concept_aspect1.reality
         expect(page).to have_content @concept_aspect1.problems
         expect(page).to have_selector 'textarea#comment_text_area'
-        expect(page).not_to have_link("plus_post_#{@concept1.id}", :text => 'Выдать баллы', :href => plus_concept_post_path(project,@concept1))
+        expect(page).not_to have_link("plus_post_#{@concept1.id}", text: 'Выдать баллы', href: plus_concept_post_path(project, @concept1))
       end
 
       it ' can add comments ', js: true do
@@ -311,13 +311,13 @@ describe 'Concept ' do
 
     end
 
-    context 'vote discontent '   do
+    context 'vote discontent ' do
       before do
-        project.update_attributes(:status => 8)
+        project.update_attributes(status: 8)
         visit concept_posts_path(project)
       end
 
-      it 'have content ', js:true do
+      it 'have content ', js: true do
         expect(page).to have_content 'Голосование за нововведения'
         expect(page).to have_content @discontent1.content
         expect(page).to have_content 'Пара: 1 из 1'
@@ -417,7 +417,7 @@ describe 'Concept ' do
       end
     end
 
-    context 'show concept'   do
+    context 'show concept' do
       before do
         visit concept_post_path(project, @concept1)
       end
@@ -435,7 +435,7 @@ describe 'Concept ' do
         expect(page).to have_content @concept_aspect1.reality
         expect(page).to have_content @concept_aspect1.problems
         expect(page).to have_selector 'textarea#comment_text_area'
-        # expect(page).to have_link("plus_post_#{@concept1.id}", :text => 'Выдать баллы', :href => plus_concept_post_path(project,@concept1))
+        # expect(page).to have_link("plus_post_#{@concept1.id}", text: 'Выдать баллы', href: plus_concept_post_path(project,@concept1))
       end
 
       it ' can add comments ', js: true do
@@ -472,44 +472,44 @@ describe 'Concept ' do
         end
       end
 
-      context 'like concept'   do
+      context 'like concept' do
         before do
           prepare_awards
         end
         # it ' like post', js: true do
-        #   expect(page).to have_link("plus_post_#{@concept1.id}", :text => 'Выдать баллы', :href => plus_concept_post_path(project,@concept1))
+        #   expect(page).to have_link("plus_post_#{@concept1.id}", text: 'Выдать баллы', href: plus_concept_post_path(project,@concept1))
         #   click_link "plus_post_#{@concept1.id}"
-        #   expect(page).to have_link("plus_post_#{@concept1.id}", :text => 'Забрать баллы', :href => plus_concept_post_path(project,@concept1))
+        #   expect(page).to have_link("plus_post_#{@concept1.id}", text: 'Забрать баллы', href: plus_concept_post_path(project,@concept1))
         #   click_link "plus_post_#{@concept1.id}"
         #   expect(page).to have_content 'Выдать баллы'
         # end
 
         # it ' status all', js: true do
-        #   expect(page).to have_link("concept_field_all_#{@concept1.id}", :text => 'Выдать все', :href => status_post_concept_post_path(project,@concept1,field_all:true))
+        #   expect(page).to have_link("concept_field_all_#{@concept1.id}", text: 'Выдать все', href: status_post_concept_post_path(project,@concept1,field_all:true))
         #   find("#concept_field_all_#{@concept1.id}").click
         #   sleep(5)
-        #   expect(page).to have_link("concept_field_all_#{@concept1.id}", :text => 'Забрать все', :href => status_post_concept_post_path(project,@concept1,field_all:true))
+        #   expect(page).to have_link("concept_field_all_#{@concept1.id}", text: 'Забрать все', href: status_post_concept_post_path(project,@concept1,field_all:true))
         #   click_link "concept_field_all_#{@concept1.id}"
         #   sleep(5)
         #   expect(page).to have_content 'Выдать все'
         # end
 
         it ' like comment', js: true do
-          expect(page).to have_link("plus_comment_#{@comment1.id}", :text => 'Выдать баллы', :href => plus_comment_concept_post_path(project,@comment1))
+          expect(page).to have_link("plus_comment_#{@comment1.id}", text: 'Выдать баллы', href: plus_comment_concept_post_path(project, @comment1))
           click_link "plus_comment_#{@comment1.id}"
-          expect(page).to have_link("plus_comment_#{@comment1.id}", :text => 'Забрать баллы', :href => plus_comment_concept_post_path(project,@comment1))
+          expect(page).to have_link("plus_comment_#{@comment1.id}", text: 'Забрать баллы', href: plus_comment_concept_post_path(project, @comment1))
           click_link "plus_comment_#{@comment1.id}"
           expect(page).to have_content 'Выдать баллы'
         end
       end
     end
 
-    context 'note for concept '   do
+    context 'note for concept ' do
       before do
         visit concept_post_path(project, @concept1)
       end
 
-      it 'can add note ', js:true do
+      it 'can add note ', js: true do
         click_link "btn_note_1"
         #save_and_open_page
         sleep(5)
@@ -527,11 +527,11 @@ describe 'Concept ' do
 
     context 'vote discontent ' do
       before do
-        project.update_attributes(:status => 8)
+        project.update_attributes(status: 8)
         visit concept_posts_path(project)
       end
 
-      it 'have content ', js:true do
+      it 'have content ', js: true do
         expect(page).to have_content 'Голосование за нововведения'
         expect(page).to have_content @discontent1.content
         expect(page).to have_content 'Пара: 1 из 1'

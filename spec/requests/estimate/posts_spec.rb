@@ -5,14 +5,14 @@ describe 'Estimate ' do
 
   let (:user) { create :user }
   let (:project) { create :core_project, status: 10 }
-  let (:prime_admin) {create :prime_admin }
-  let (:moderator) {create :moderator }
+  let (:prime_admin) { create :prime_admin }
+  let (:moderator) { create :moderator }
 
   before do
-    prepare_estimates(project,user)
+    prepare_estimates(project, user)
   end
 
-  context  'ordinary user sign in ' do
+  context 'ordinary user sign in ' do
     before do
       sign_in user
       visit estimate_posts_path(project)
@@ -36,7 +36,7 @@ describe 'Estimate ' do
 
     context 'estimate edit' do
       before do
-        visit estimate_post_path(project,@estimate1)
+        visit estimate_post_path(project, @estimate1)
       end
 
       it ' can see estimate' do
@@ -99,7 +99,7 @@ describe 'Estimate ' do
 
     context 'estimate edit' do
       before do
-        visit estimate_post_path(project,@estimate1)
+        visit estimate_post_path(project, @estimate1)
       end
 
       it ' can see estimate' do

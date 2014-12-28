@@ -30,7 +30,7 @@ describe 'Life Tape ' do
         expect(page).to have_content @aspect2.content
         expect(page).not_to have_selector '#new_aspect'
         expect(page).to have_selector 'textarea#comment_text_area'
-        expect(page).not_to have_link("plus_comment_#{@comment1.id}", :text => 'Выдать баллы', :href => plus_comment_life_tape_post_path(project, @comment1))
+        expect(page).not_to have_link("plus_comment_#{@comment1.id}", text: 'Выдать баллы', href: plus_comment_life_tape_post_path(project, @comment1))
         validate_default_links_and_sidebar(project, user)
         validate_not_have_admin_links_for_user(project)
         validate_not_have_moderator_links_for_user(project)
@@ -51,7 +51,7 @@ describe 'Life Tape ' do
 
     context 'vote life tape ' do
       before do
-        project.update_attributes(:status => 2)
+        project.update_attributes(status: 2)
         visit life_tape_posts_path(project)
       end
 
@@ -116,7 +116,7 @@ describe 'Life Tape ' do
     end
     context 'vote life tape ' do
       before do
-        project.update_attributes(:status => 2)
+        project.update_attributes(status: 2)
         visit life_tape_posts_path(project)
       end
 
@@ -128,11 +128,11 @@ describe 'Life Tape ' do
         expect(page).to have_content @aspect1.content
         expect(page).to have_content @aspect2.content
         expect(page).to have_selector 'a', 'Перейти к рефлексии'
-        expect(page).to have_link("set_vote_#{@aspect1.id}", :text => 'Убрать', :href => set_aspect_status_life_tape_post_path(project, @aspect1))
+        expect(page).to have_link("set_vote_#{@aspect1.id}", text: 'Убрать', href: set_aspect_status_life_tape_post_path(project, @aspect1))
         click_link "set_vote_#{@aspect1.id}"
-        expect(page).to have_link("set_vote_#{@aspect1.id}", :text => 'Вернуть', :href => set_aspect_status_life_tape_post_path(project, @aspect1))
+        expect(page).to have_link("set_vote_#{@aspect1.id}", text: 'Вернуть', href: set_aspect_status_life_tape_post_path(project, @aspect1))
         click_link "set_vote_#{@aspect1.id}"
-        expect(page).to have_link("set_vote_#{@aspect1.id}", :text => 'Убрать', :href => set_aspect_status_life_tape_post_path(project, @aspect1))
+        expect(page).to have_link("set_vote_#{@aspect1.id}", text: 'Убрать', href: set_aspect_status_life_tape_post_path(project, @aspect1))
         click_link "vote_#{@aspect1.id}"
         expect(page).to have_content "Осталось голосов: #{project.stage1_count - 1}"
         click_link "vote_#{@aspect2.id}"
@@ -144,6 +144,5 @@ describe 'Life Tape ' do
         expect(page).to have_content "Рефлексия по этапу: Сбор информации"
       end
     end
-
   end
 end
