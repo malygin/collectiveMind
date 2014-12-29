@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141207142148) do
+ActiveRecord::Schema.define(version: 20141219122522) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -42,24 +42,27 @@ ActiveRecord::Schema.define(version: 20141207142148) do
   add_index "advices", ["user_id"], name: "index_advices_on_user_id", using: :btree
 
   create_table "answers", force: true do |t|
-    t.string   "text",        limit: 700
-    t.integer  "raiting",                 default: 0
+    t.text     "content"
+    t.integer  "raiting",     default: 0
     t.integer  "user_id"
     t.integer  "question_id"
-    t.datetime "created_at",                          null: false
-    t.datetime "updated_at",                          null: false
+    t.datetime "created_at",              null: false
+    t.datetime "updated_at",              null: false
+    t.integer  "style"
+    t.integer  "status"
   end
 
   add_index "answers", ["created_at"], name: "index_answers_on_created_at", using: :btree
   add_index "answers", ["user_id"], name: "index_answers_on_user_id", using: :btree
 
-  create_table "answers_users", id: false, force: true do |t|
-    t.integer "answer_id"
-    t.integer "user_id"
+  create_table "answers_users", force: true do |t|
+    t.integer  "answer_id"
+    t.integer  "user_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "project_id"
+    t.integer  "question_id"
   end
-
-  add_index "answers_users", ["answer_id"], name: "index_answers_users_on_answer_id", using: :btree
-  add_index "answers_users", ["user_id"], name: "index_answers_users_on_user_id", using: :btree
 
   create_table "awards", force: true do |t|
     t.string  "name"
@@ -339,9 +342,10 @@ ActiveRecord::Schema.define(version: 20141207142148) do
   create_table "core_project_users", force: true do |t|
     t.integer  "project_id"
     t.integer  "user_id"
-    t.integer  "status"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
+    t.boolean  "owner",      default: false
+    t.integer  "type_user"
   end
 
   add_index "core_project_users", ["project_id"], name: "index_core_project_users_on_project_id", using: :btree
@@ -351,7 +355,7 @@ ActiveRecord::Schema.define(version: 20141207142148) do
     t.string   "name",               limit: 500
     t.text     "desc"
     t.text     "short_desc"
-    t.integer  "status"
+    t.integer  "status",                         default: 1
     t.datetime "created_at",                                 null: false
     t.datetime "updated_at",                                 null: false
     t.string   "url_logo"
@@ -362,21 +366,23 @@ ActiveRecord::Schema.define(version: 20141207142148) do
     t.integer  "stage4",                         default: 5
     t.integer  "stage5",                         default: 5
     t.text     "knowledge"
-    t.integer  "type_project",                   default: 0
     t.integer  "position",                       default: 0
     t.string   "secret"
     t.string   "secret2"
     t.string   "secret3"
-    t.boolean  "advices_discontent"
-    t.boolean  "advices_concept"
     t.string   "color"
     t.string   "code"
+    t.boolean  "advices_discontent"
+    t.boolean  "advices_concept"
     t.integer  "moderator_id"
     t.datetime "date_12"
     t.datetime "date_23"
     t.datetime "date_34"
     t.datetime "date_45"
     t.datetime "date_56"
+    t.date     "date_start"
+    t.date     "date_end"
+    t.integer  "count_stages"
   end
 
   add_index "core_projects", ["status"], name: "index_core_projects_on_status", using: :btree
@@ -401,6 +407,8 @@ ActiveRecord::Schema.define(version: 20141207142148) do
     t.integer  "status",               default: 0
     t.boolean  "user_add"
     t.integer  "discontent_aspect_id"
+    t.string   "color"
+    t.string   "short_name"
   end
 
   add_index "discontent_aspects", ["project_id"], name: "index_discontent_aspects_on_project_id", using: :btree
@@ -539,7 +547,7 @@ ActiveRecord::Schema.define(version: 20141207142148) do
     t.boolean  "discuss_status"
     t.boolean  "useful"
     t.boolean  "approve_status"
-    t.boolean  "anonym"
+    t.boolean  "anonym",             default: false
   end
 
   add_index "discontent_posts", ["aspect_id"], name: "index_discontent_posts_on_aspect_id", using: :btree
@@ -1413,11 +1421,16 @@ ActiveRecord::Schema.define(version: 20141207142148) do
   add_index "question_posts", ["project_id"], name: "index_questions_posts_on_project_id", using: :btree
 
   create_table "questions", force: true do |t|
-    t.string   "text",       limit: 700
-    t.integer  "raiting",                default: 0
+    t.text     "content"
+    t.integer  "raiting",          default: 0
     t.integer  "user_id"
-    t.datetime "created_at",                         null: false
-    t.datetime "updated_at",                         null: false
+    t.datetime "created_at",                   null: false
+    t.datetime "updated_at",                   null: false
+    t.integer  "post_id"
+    t.string   "parent_post_type"
+    t.text     "hint"
+    t.integer  "project_id"
+    t.integer  "status"
   end
 
   add_index "questions", ["created_at"], name: "index_questions_on_created_at", using: :btree
@@ -1430,6 +1443,19 @@ ActiveRecord::Schema.define(version: 20141207142148) do
 
   add_index "questions_users", ["question_id"], name: "index_questions_users_on_question_id", using: :btree
   add_index "questions_users", ["user_id"], name: "index_questions_users_on_user_id", using: :btree
+
+  create_table "roles", force: true do |t|
+    t.string   "name"
+    t.integer  "code"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "seed_migration_data_migrations", force: true do |t|
+    t.string   "version"
+    t.integer  "runtime"
+    t.datetime "migrated_on"
+  end
 
   create_table "test_answers", force: true do |t|
     t.text     "name"
@@ -1514,6 +1540,16 @@ ActiveRecord::Schema.define(version: 20141207142148) do
     t.datetime "updated_at",  null: false
     t.string   "value"
   end
+
+  create_table "user_roles", force: true do |t|
+    t.integer  "user_id"
+    t.integer  "role_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "user_roles", ["role_id"], name: "index_user_roles_on_role_id", using: :btree
+  add_index "user_roles", ["user_id"], name: "index_user_roles_on_user_id", using: :btree
 
   create_table "users", force: true do |t|
     t.string   "name"
