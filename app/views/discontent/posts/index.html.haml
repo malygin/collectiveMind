@@ -8,8 +8,8 @@
 .tab-content
   -@project.aspects.main_aspects.order("discontent_aspects.id").each_with_index do |asp, index|
     %div.tab-pane.fade{id: "tab_aspect_#{asp.id}", class:"#{'active in' if asp == @aspect}"}
-      -#= render partial: 'shared/sort_bar', locals: {asp: asp}
-      -#%br
+      = render partial: 'shared/sort_bar', locals: {asp: asp}
+      %br
       -#= render partial: 'shared/filter_bar', locals: {asp: asp}
       .row
         .col-md-12.text-center
