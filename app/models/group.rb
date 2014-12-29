@@ -24,4 +24,8 @@ class Group < ActiveRecord::Base
   def moderators
     users.where(type_user: User::TYPES_USER[:admin])
   end
+
+  def count_new_messages_for(group_user)
+    chat_messages.where('created_at > ?', group_user.last_seen_chat_at).count
+  end
 end
