@@ -28,6 +28,13 @@ describe 'Groups' do
       it { expect(page).not_to have_content @group_not_in_project.name }
 
       it { expect(page).to have_content group.name }
+
+      it 'in left side' do
+        within :css, 'div#left_side_list_groups' do
+          expect(page).to have_content group.name
+          expect(page).not_to have_content @group_not_in_project.name
+        end
+      end
     end
 
     it 'link to groups on project page' do
@@ -322,6 +329,8 @@ describe 'Groups' do
         it { expect change(task_for_assign.group_task_users, :count).by(1) }
 
         it { expect change(group_task.group_task_users, :count).by(0) }
+
+        it { expect change(Journal, :count).by(1) }
 
         it 'not show user in list to assign' do
           sleep 5

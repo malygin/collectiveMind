@@ -354,4 +354,11 @@ class User < ActiveRecord::Base
     true
     #project.project_users.by_type(1).include?(self) || project.project_users.by_type(0).include?(self)
   end
+
+  def group_include_user?(user)
+    groups.each do |group|
+      return true if group.users.include?(user)
+    end
+    false
+  end
 end

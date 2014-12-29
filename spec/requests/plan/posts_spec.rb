@@ -10,7 +10,7 @@ describe 'Plan ' do
   let (:moderator) { create :moderator }
 
   before do
-    prepare_plans(project)
+    prepare_plans(project, user)
   end
 
   context 'ordinary user sign in ' do

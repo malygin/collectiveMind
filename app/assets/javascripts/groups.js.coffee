@@ -24,7 +24,7 @@
   input_file = $('form#group_send_file input#file')
   $('form#group_send_file').bind 'ajax:complete', ->
     input_file.replaceWith(input_file = input_file.clone(true));
-  input_file.change ->
+  $('form#group_send_file').on 'change', 'input#file', ->
     $('form#group_send_file').submit()
   return
 
