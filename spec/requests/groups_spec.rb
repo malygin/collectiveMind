@@ -323,6 +323,8 @@ describe 'Groups' do
 
         it { expect change(group_task.group_task_users, :count).by(0) }
 
+        it { expect change(Journal, :count).by(1) }
+
         it 'not show user in list to assign' do
           sleep 5
           within :css, "#assignTaskToUser#{task_for_assign.id}" do
