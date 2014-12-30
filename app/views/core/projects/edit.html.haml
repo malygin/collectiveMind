@@ -31,7 +31,7 @@
           .nav-tabs-three-sidebar
             %ul.nav
               - (1..5).each do |stage_num|
-                %li
+                %li{class:('active' if @project.current_stage?(stage_num))}
                   %a{'data-toggle' => 'tab', href: "#stage-#{stage_num}"}
                     = "Этап #{stage_num}"
           .nav-tabs-three-content
@@ -39,10 +39,16 @@
               .text-success#settings_success_update(style='display:none;')
                 = t 'project_settings.success_update'
               - (1..5).each do |stage_num|
-                .tab-pane.fade{id: "stage-#{stage_num}"}
+                .tab-pane.fade{id: "stage-#{stage_num}", class:('active in' if @project.current_stage?(stage_num))}
                   %h4
                     = Core::Project::LIST_STAGES[stage_num][:name]
                   - Core::Project::LIST_STAGES[stage_num][:status].each do |status|
+                    - if @project.status == status
+                      - if @project.prev_status
+                        = link_to t("menu.settings.admin_set_#{@project.status * 2 - 2}"), pr_stage_core_project_path(@project), method: :put, id: "down_to_#{@project.prev_status}"
+                        %br
+                      - if @project.next_status
+                        = link_to t("menu.settings.admin_set_#{@project.status * 2 - 1}"), next_stage_core_project_path(@project), method: :put, id: "up_to_#{@project.next_status}"
                     %h5
                       = Core::Project.status_title(status)
                     = form_for @project.settings, remote: true do |f|

@@ -124,14 +124,21 @@ class Core::ProjectsController < ApplicationController
   end
 
   def next_stage
-    @core_project.update_column(:status, @core_project.status + 1)
+    @core_project.settings.stage_dates[@core_project.status.to_s]['real']['end'] = Date.today
+    @core_project.status = @core_project.status + 1
+    @core_project.settings.stage_dates[@core_project.status.to_s]['real']['start'] = Date.today
+    @core_project.settings.stage_dates_will_change!
+    @core_project.save
     @core_project.set_position_for_aspects if @core_project.status == 3
     @core_project.set_date_for_stage
     redirect_to :back
   end
 
   def pr_stage
-    @core_project.update_column(:status, @core_project.status - 1)
+    @core_project.settings.stage_dates[@core_project.status.to_s]['real']['start'] = ''
+    @core_project.status = @core_project.status - 1
+    @core_project.settings.stage_dates[@core_project.status.to_s]['real']['end'] = ''
+    @core_project.save
     redirect_to :back
   end
 

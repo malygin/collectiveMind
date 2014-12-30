@@ -158,6 +158,28 @@ class Core::Project < ActiveRecord::Base
     sort_list.values[0][:status].include? self.status
   end
 
+  def current_stage?(stage)
+    Core::Project::LIST_STAGES[stage][:status].include? status
+  end
+
+  def prev_status
+    # @todo здесь круто войдет https://github.com/pluginaweek/state_machine
+    # займусь позже)
+    if status > 1
+      status - 1
+    else
+      nil
+    end
+  end
+
+  def next_status
+    if status != 20
+      status + 1
+    else
+      nil
+    end
+  end
+
   def stage_style(status)
     return 'disabled' if self.status < status_number(status)
     return 'active' if current_status?(status)
