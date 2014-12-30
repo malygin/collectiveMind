@@ -13,8 +13,8 @@ class Core::ProjectSetting < ActiveRecord::Base
                 end: Date.today + 7.day
             },
             real: {
-                start: Date.today,
-                end: Date.today + 7.day
+                start: '',
+                end: ''
             },
         }
       end
