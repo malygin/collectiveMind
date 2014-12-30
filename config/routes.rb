@@ -68,8 +68,8 @@ CollectiveMind::Application.routes.draw do
   namespace :core, shallow: true do
     resources :projects do
       member do
-        get :next_stage
-        get :pr_stage
+        put :next_stage
+        put :pr_stage
       end
     end
     resources :project_settings, only: :update
