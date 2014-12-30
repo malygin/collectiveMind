@@ -19,15 +19,15 @@ class ProjectsController < ApplicationController
   end
 
   def check_access_to_project
-    #@todo Рефакторинг model_min_stage
-    if @project.status < @project.model_min_stage(current_model.table_name.singularize)
-      redirect_to polymorphic_path(@project.redirect_to_current_stage)
+    if %w(lifetape_posts discontent_posts concept_posts plan_posts estimate_posts essay_posts).include? params[:controller]
+      # @todo Рефакторинг model_min_stage
+      if @project.status < @project.model_min_stage(current_model.table_name.singularize)
+        redirect_to polymorphic_path(@project.redirect_to_current_stage)
+      end
     end
 
-    unless current_model == 'Knowbase::Post'
-      unless @project.users.include? current_user
-        redirect_back_or root_url
-      end
+    unless @project.users.include?(current_user) or prime_admin?
+      redirect_back_or root_url
     end
   end
 end

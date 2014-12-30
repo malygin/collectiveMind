@@ -52,10 +52,11 @@
     %br
     - Core::ProjectUser::TYPE_USER.each do |code, text|
       -# @todo рефактор всего этого, нужно определиться с одной механикой
+      = text
+      %br
+      - @project.project_users.by_type(code).each do |project_user|
+        = render partial: 'users/list_user', locals: {list_user: project_user.user}
       - unless current_user.moderator_in_project?(@project) && code == 1
-        = text
-        %br
-        = render partial: 'users/list_user', collection: @project.project_users.by_type(code)
         %br
         #search_users_project(data-project="#{@project.id}" data-code="#{code}")
         .search_text
