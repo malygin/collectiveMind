@@ -360,6 +360,13 @@ class User < ActiveRecord::Base
     update_attributes! last_seen_chat_at: Time.now
   end
 
+  def group_include_user?(user)
+    groups.each do |group|
+      return true if group.users.include?(user)
+    end
+    false
+  end
+
   private
   #def encrypt_password
   #	self.salt = make_salt if new_record?

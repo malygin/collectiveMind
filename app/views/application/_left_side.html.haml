@@ -2,8 +2,10 @@
   %li
     %h4
       = link_to t('menu.list_groups'), groups_path(@project), id: 'open_groups_list'
-    - current_user.groups.each do |group|
-      = link_to group.name, group_path(@project, group), id: "ls_open_group_#{group.id}"
+    #left_side_list_groups
+      - current_user.groups.by_project(@project).each do |group|
+        = link_to group_path(@project, group), id: "ls_open_group_#{group.id}" do
+          = group_side_name(group)
   %li
     %a
       %h4=t('menu.list_aspects')
