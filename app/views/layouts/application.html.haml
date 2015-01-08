@@ -15,71 +15,78 @@
 
   %body
     .outer
+      -if controller.instance_of? Concept::PostsController
+        =render partial: 'application/right_rollover', locals: {current_stage: current_stage_for_navbar(controller, params[:stage])}
       %header.top-bar
         .container
-          .tb-logo.pull-left
-            %a{href: @project ? "/project/#{@project.id}" : '/', id: 'go_to_logo'}
-              = image_tag 'img/logo.jpg', style: 'margin: auto;'
+          .box-shadow-outer
+            .tb-logo.box-shadow-5.rounded-1.pull-left
+              %a{href: @project ? "/project/#{@project.id}" : '/', id: 'go_to_logo'}
+                = image_tag 'img/logo-red.jpg', style: 'margin: auto;'
           .clearfix.visible-xs
           %nav.header-buttons.pull-left
-            %a.btn.btn-lblue.rounded-3{href: '#'} процедура
+            %a.btn.btn-white.rounded-2{:href => "#"} Процедура
             .clearfix.visible-xs
-            %a.btn.btn-lblue.btn-outline.rounded-3{href: '#'} кабинет
+            %a.btn.btn-grey.rounded-2{:href => "#"} Кабинет
             .clearfix.visible-xs
-            %a.btn.btn-lblue.btn-outline.rounded-3{href: '#'} новости
-          .tb-language.dropdown.pull-right
-            %a{'data-target' => '#', 'data-toggle' => 'dropdown', href: '#'}
-              %i.fa.fa-globe
-              English
-              %i.fa.fa-angle-down.color
-            %ul.dropdown-menu.dropdown-mini{role: 'menu'}
-              %li
-                %a{href: '#'} Hindi
-              %li
-                %a{href: '#'} Tamil
-              %li
-                %a{href: '#'} Kanada
-          .user-block.pull-right
-            %span
-              = current_user.to_s if current_user
-            .rating.five-rating.pull-right
-            .call-operator.pull-left
+            %a.btn.btn-grey.rounded-2{:href => "#"} Новости
+            .clearfix.visible-xs
+            %a.btn.btn-grey.rounded-2{:href => "#"} Рефлексия
+          .pull-right.header-right
+            .tb-language.dropdown.pull-right
+              %a{'data-target' => '#', 'data-toggle' => 'dropdown', href: '#'}
+                English
+                %i.fa.fa-angle-down.color.mass-dark-blue
+              %ul.dropdown-menu.dropdown-mini{role: 'menu'}
+                %li
+                  %a{href: '#'} Hindi
+                %li
+                  %a{href: '#'} Tamil
+                %li
+                  %a{href: '#'} Kanada
+            = image_tag 'img/call.png', class: 'pull-right operator-pic'
+            .clearfix
+            .tb-language.dropdown.pull-right.user-block
+              %span.rating-block.rounded-1 500
+              %a{"data-target" => "#", "data-toggle" => "dropdown", :href => "#"}
+                = current_user.to_s if current_user
+                %i.fa.fa-angle-down.color.mass-dark-blue
+              %ul.dropdown-menu.dropdown-mini{:role => "menu"}
+                %li
+                  %a{:href => "#"} Вариант
           .clearfix
-
-      .header-2
-        .container.col-lg-thin
-          .row
-            .col-xs-10
-              %h1.color.lblue
-                - if current_controller_for_navbar?(controller)
-                  = @project.name
-              %span.sub-heading.color.lblue
-            .col-xs-2
-              .head-search.pull-right
-                %a.b-dropdown{href: "#"}
-                  %i.fa.fa-search.square-2.rounded-1.bg-color.white
-                .b-dropdown-block
-                  %form{role: "form"}
-                    .input-group
-                      %input.form-control{placeholder: "Type Something", type: "text"}/
-                      %span.input-group-btn
-                        %button.btn.btn-color{type: "button"} Search
-              .clearfix
+      -#.header-2
+      -#  .container.col-lg-thin
+      -#    .row
+      -#      .col-xs-10
+      -#        %h1.color.lblue
+      -#          - if current_controller_for_navbar?(controller)
+      -#            = @project.name
+      -#        %span.sub-heading.color.lblue
+      -#      .col-xs-2
+      -#        .head-search.pull-right
+      -#          %a.b-dropdown{href: "#"}
+      -#            %i.fa.fa-search.square-2.rounded-1.bg-color.white
+      -#          .b-dropdown-block
+      -#            %form{role: "form"}
+      -#              .input-group
+      -#                %input.form-control{placeholder: "Type Something", type: "text"}/
+      -#                %span.input-group-btn
+      -#                  %button.btn.btn-color{type: "button"} Search
+      -#        .clearfix
 
       .main-block
         .container
-          .divider-1.clear-top-margin
-          .row.stages
+          .clearfix
+          .stages
             = render partial: 'application/stages', locals: {current_stage: current_stage_for_navbar(controller, params[:stage])}
-          .divider-1
+          .clearfix
           -if controller.instance_of? LifeTape::PostsController
             .row.progress-bars
               =render partial: 'application/progress_bar', locals: {current_stage: current_stage_for_navbar(controller, params[:stage])}
           .clearfix
-          .ui-4
-            .container
-              .block-content
-                = yield
+          .innov
+            = yield
 
     -#.outer
     -#  .top-bar

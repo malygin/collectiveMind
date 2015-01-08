@@ -5,7 +5,7 @@
         %th{:colspan => "2"}
           .text-right
             - post_short.post_aspects.each do |asp|
-              %span.label{style: "color:#ffffff;background:#{aspect_color(asp)};border:1px solid #{aspect_color(asp)};"}= asp.short_name.present? ? asp.short_name : asp.content[0,2].mb_chars.upcase
+              %span.label{style: "color:#ffffff;background:#{asp.color};border:1px solid #{asp.color};"}= asp.short_name.present? ? asp.short_name : asp.content[0,2].mb_chars.upcase
       %tr
         %td
           %small Что:

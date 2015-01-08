@@ -5,7 +5,7 @@
 
   -@project.aspects.main_aspects.order(:id).each_with_index do |asp, index|
     %li
-      %button.btn.btn-round{"data-toggle" => "tab", :href => "#tab-#{index+1}", style: "color:#ffffff;background:#{aspect_color(asp)};border:1px solid #{aspect_color(asp)};"}
+      %button.btn.btn-round{"data-toggle" => "tab", :href => "#tab-#{index+1}", style: "color:#ffffff;background:#{asp.color};border:1px solid #{asp.color};"}
         %span= asp.short_name.present? ? asp.short_name : asp.content[0,2].mb_chars.upcase
         -#%span{id: "check_question_#{asp.id}"}
         -#  -if asp.question_complete(@project, current_user).count == asp.questions.by_project(@project.id).by_status(0).count
