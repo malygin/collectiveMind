@@ -1,11 +1,5 @@
 %ul#side-nav.side-nav
-  %li
-    %h4
-      = link_to t('menu.list_groups'), groups_path(@project), id: 'open_groups_list'
-    #left_side_list_groups
-      - current_user.groups.by_project(@project).each do |group|
-        = link_to group_path(@project, group), id: "ls_open_group_#{group.id}" do
-          = group_side_name(group)
+
   %li
     %a
       %h4=t('menu.list_aspects')
@@ -23,12 +17,13 @@
 
   %li{class:"#{'active' if params[:not_aspect]}"}
     = link_to "#{link_for_aspects(nil, current_stage)}" + "?not_aspect=true" do
+      %i.fa.fa-book
       Без аспекта
-
+  %hr
   %li
     = link_to "/project/#{@project.id}/#{current_stage == 'essay/posts' ? stage_for_essay(params[:stage].to_i) : current_stage}/to_work", class: 'text-towork', id: 'go_to_work' do
       =t('menu.help_stage')
-      %i.fa.fa-question-circle
+      -#%i.fa.fa-question-circle
   %li
     = link_to essay_posts_path(@project, current_stage == 'essay/posts' ? params[:stage].to_i : number_stage(current_stage)), class: 'text-essay', id: 'go_to_essay' do
       =t('menu.reflection_stage')
@@ -40,6 +35,13 @@
         = t('left_side.discontent_post_advices')
         %b
           = " (#{Advice.unapproved.by_project(@project).count})"
+  %li
+    = link_to t('menu.list_groups'), groups_path(@project), id: 'open_groups_list'
+    #left_side_list_groups
+      - current_user.groups.by_project(@project).each do |group|
+        = link_to group_path(@project, group), id: "ls_open_group_#{group.id}" do
+          = group_side_name(group)
+
   -if boss?
     %li
       = link_to "/project/#{@project.id}/#{current_stage == 'essay/posts' ? stage_for_essay(params[:stage].to_i) : current_stage}/vote_result", class: 'text-vote-result', id: 'vote_result' do
