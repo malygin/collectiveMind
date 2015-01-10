@@ -4,13 +4,13 @@
 #carousel-example-generic.carousel.slide{'data-ride' => 'carousel'}
   %ol.carousel-indicators
     %li.active{'data-slide-to' => '0', 'data-target' => '#carousel-example-generic'}
-    - 1.upto(8) do |index|
+    - 1.upto(3) do |index|
       %li{'data-slide-to' => "#{index}", 'data-target' => '#carousel-example-generic'}
 
   .carousel-inner
     .item.active
       = image_tag 'img/to_work/stage1slide1.png', style: 'margin: auto;'
-    - 2.upto(9) do |index|
+    - 2.upto(4) do |index|
       .item
         = image_tag "img/to_work/stage1slide#{index}.png", style: 'margin: auto;'
 
