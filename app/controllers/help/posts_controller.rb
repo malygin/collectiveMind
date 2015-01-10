@@ -28,9 +28,12 @@ class Help::PostsController < PostsController
                         'new_help_3'
                       when '4'
                         'new_help_4'
-                      else
+                      when '5'
                         'new_help_5'
-
+                      when '6'
+                        'new_help_6'
+                      else
+                        'new_help_0'
                     end
 
     # Help::Post.where(stage: id, mini: false).each {|f| @posts[f.style] = f }

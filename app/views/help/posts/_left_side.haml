@@ -23,7 +23,9 @@
     %a(href="/project/#{@project.id}/help/posts/5")
       5
       =t('stages.estimate')
-
+  %li{class: ('active' if params[:id] == '6')}
+    %a(href="/project/#{@project.id}/help/posts/6")
+      =t('stages.glossary')
   -#-@stages.each do |key, value|
   -#  %li{class: ('active' if key.to_s==params[:id])}
   -#    %a(href="/project/#{@project.id}/help/posts/#{key}")
