@@ -14,4 +14,6 @@
   .col-md-12
     %section
       .body
+        = link_to t('menu.help_note'), "/project/#{@project.id}/#{controller.controller_path == 'essay/posts' ? stage_for_essay(params[:stage].to_i) : controller.controller_path}/to_work", class: 'btn btn-info pull-right'
+
         = render collection: @posts, partial: '/plan/posts/post'
