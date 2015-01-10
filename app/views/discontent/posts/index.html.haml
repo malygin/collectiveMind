@@ -177,9 +177,11 @@
       %br
 
     %section
+      %header
+        %h4
+          =t('show.improve.problem')
+          = link_to t('menu.help_note'), "/project/#{@project.id}/#{controller.controller_path == 'essay/posts' ? stage_for_essay(params[:stage].to_i) : controller.controller_path}/to_work", class: 'btn btn-sm btn-info pull-right'
+        %hr
       .body
-        = link_to t('menu.help_note'), "/project/#{@project.id}/#{controller.controller_path == 'essay/posts' ? stage_for_essay(params[:stage].to_i) : controller.controller_path}/to_work", class: 'btn btn-info pull-right'
-
-        %h4=t('show.improve.problem')
         .chat-messages
           = render partial: 'shared/improve_comment',collection: @comments_all

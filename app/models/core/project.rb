@@ -67,11 +67,11 @@ class Core::Project < ActiveRecord::Base
   scope :active_proc, -> { where("core_projects.status < ?", 20) }
   scope :access_proc, -> access_proc { where(core_projects: {type_access: access_proc}) }
 
-  LIST_STAGES = {1 => {name: 'Сбор информации', type_stage: :life_tape_posts, status: [0, 1, 2, 20]},
-                 2 => {name: 'Сбор несовершенств', type_stage: :discontent_posts, status: [3, 4, 5, 6]},
-                 3 => {name: 'Сбор нововведений', type_stage: :concept_posts, status: [7, 8]},
-                 4 => {name: 'Создание проектов', type_stage: :plan_posts, status: [9]},
-                 5 => {name: 'Выставление оценок', type_stage: :estimate_posts, status: [10, 11, 12, 13]}}.freeze
+  LIST_STAGES = {1 => {name: 'Введение в процедуру', type_stage: :life_tape_posts, status: [0, 1, 2, 20]},
+                 2 => {name: 'Анализ ситуации', type_stage: :discontent_posts, status: [3, 4, 5, 6]},
+                 3 => {name: 'Дизайн будущего', type_stage: :concept_posts, status: [7, 8]},
+                 4 => {name: 'Разработка проектов', type_stage: :plan_posts, status: [9]},
+                 5 => {name: 'Оценивание проектов', type_stage: :estimate_posts, status: [10, 11, 12, 13]}}.freeze
 
   def moderators
     users_in_project.where(users: {type_user: User::TYPES_USER[:admin]})
