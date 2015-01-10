@@ -4,14 +4,14 @@
 #carousel-example-generic.carousel.slide{'data-ride' => 'carousel'}
   %ol.carousel-indicators
     %li.active{'data-slide-to' => '0', 'data-target' => '#carousel-example-generic'}
-    - 1.upto(10) do |index|
+    - 1.upto(3) do |index|
       %li{'data-slide-to' => "#{index}", 'data-target' => '#carousel-example-generic'}
   .carousel-inner
     .item.active
-      = image_tag 'img/to_work/1b.png', style: 'margin: auto;'
-    - 2.upto(11) do |index|
+      = image_tag 'img/to_work/stage2slide1.png', style: 'margin: auto;'
+    - 2.upto(4) do |index|
       .item
-        = image_tag "img/to_work/#{index}b.png", style: 'margin: auto;'
+        = image_tag "img/to_work/stage2slide#{index}.png", style: 'margin: auto;'
 
   %a.left.carousel-control{'data-slide' => 'prev', href: '#carousel-example-generic', role: 'button'}
     %span.glyphicon.glyphicon-chevron-left(style='color:#e5603b')
