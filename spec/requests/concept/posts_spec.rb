@@ -28,7 +28,7 @@ describe 'Concept ' do
 
       it ' can see all concepts in aspect' do
         expect(page).to have_content 'Нововведения'
-        expect(page).to have_content 'Неоформленные идеи'
+        expect(page).to have_content I18n.t('show.improve.ideas')
         expect(page).to have_content @discontent1.content
         expect(page).to have_content @discontent2.content
         expect(page).to have_content @concept_aspect1.title
@@ -336,7 +336,7 @@ describe 'Concept ' do
         expect(page).to have_selector 'a', 'Перейти к списку нововведений'
         click_link "Перейти к списку нововведений"
         expect(page).to have_content 'Нововведения'
-        expect(page).to have_content 'Неоформленные идеи'
+        expect(page).to have_content I18n.t('show.improve.ideas')
       end
     end
   end
@@ -355,7 +355,7 @@ describe 'Concept ' do
       it ' can see all concepts in aspect' do
         #save_and_open_page
         expect(page).to have_content 'Нововведения'
-        expect(page).to have_content 'Неоформленные идеи'
+        expect(page).to have_content I18n.t('show.improve.ideas')
         expect(page).to have_content @discontent1.content
         expect(page).to have_content @discontent2.content
         expect(page).to have_content @concept_aspect1.title
@@ -550,7 +550,7 @@ describe 'Concept ' do
         expect(page).to have_selector 'a', 'Перейти к списку нововведений'
         click_link "Перейти к списку нововведений"
         expect(page).to have_content 'Нововведения'
-        expect(page).to have_content 'Неоформленные идеи'
+        expect(page).to have_content I18n.t('show.improve.ideas')
       end
     end
   end

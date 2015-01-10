@@ -56,7 +56,7 @@ describe 'Life Tape ' do
       end
 
       it 'have content ', js:true do
-        expect(page).to have_content '1 этап: Сбор информации. Голосование'
+        expect(page).to have_content I18n.t('voting.lifetape.title')
         expect(page).to have_content 'Определение наиболее важных тем процедуры'
         expect(page).to have_content "Вы можете выбрать #{project.stage1_count} тем(ы), которые на Ваш взгляд являются наиболее важными"
         expect(page).to have_content "Осталось голосов: #{project.stage1_count}"
@@ -67,10 +67,10 @@ describe 'Life Tape ' do
         click_link "vote_#{@aspect2.id}"
         expect(page).to have_content "Осталось голосов: 0"
         expect(page).to have_content 'Спасибо за участие в голосовании!'
-        expect(page).to have_selector 'a', 'Перейти к рефлексии'
+        expect(page).to have_selector 'a', I18n.t('voting.go_reflection')
         expect(page).to have_selector 'a', 'Перейти к списку тем'
-        click_link "Перейти к рефлексии"
-        expect(page).to have_content "Рефлексия по этапу: Сбор информации"
+        click_link I18n.t('voting.go_reflection')
+        expect(page).to have_content "#{I18n.t('show.essay.title')} #{I18n.t('stages.life_tape')}"
       end
     end
   end
@@ -121,27 +121,27 @@ describe 'Life Tape ' do
       end
 
       it 'have content ', js:true do
-        expect(page).to have_content '1 этап: Сбор информации. Голосование'
+        expect(page).to have_content I18n.t('voting.lifetape.title')
         expect(page).to have_content 'Определение наиболее важных тем процедуры'
         expect(page).to have_content "Вы можете выбрать #{project.stage1_count} тем(ы), которые на Ваш взгляд являются наиболее важными"
         expect(page).to have_content "Осталось голосов: #{project.stage1_count}"
         expect(page).to have_content @aspect1.content
         expect(page).to have_content @aspect2.content
-        expect(page).to have_selector 'a', 'Перейти к рефлексии'
-        expect(page).to have_link("set_vote_#{@aspect1.id}", :text => 'Убрать', :href => set_aspect_status_life_tape_post_path(project,@aspect1))
+        expect(page).to have_selector 'a', I18n.t('voting.go_reflection')
+        expect(page).to have_link("set_vote_#{@aspect1.id}", :text => 'Удалить', :href => set_aspect_status_life_tape_post_path(project,@aspect1))
         click_link "set_vote_#{@aspect1.id}"
         expect(page).to have_link("set_vote_#{@aspect1.id}", :text => 'Вернуть', :href => set_aspect_status_life_tape_post_path(project,@aspect1))
         click_link "set_vote_#{@aspect1.id}"
-        expect(page).to have_link("set_vote_#{@aspect1.id}", :text => 'Убрать', :href => set_aspect_status_life_tape_post_path(project,@aspect1))
+        expect(page).to have_link("set_vote_#{@aspect1.id}", :text => 'Удалить', :href => set_aspect_status_life_tape_post_path(project,@aspect1))
         click_link "vote_#{@aspect1.id}"
         expect(page).to have_content "Осталось голосов: #{project.stage1_count - 1}"
         click_link "vote_#{@aspect2.id}"
         expect(page).to have_content "Осталось голосов: 0"
         expect(page).to have_content 'Спасибо за участие в голосовании!'
-        expect(page).to have_selector 'a', 'Перейти к рефлексии'
+        expect(page).to have_selector 'a', I18n.t('voting.go_reflection')
         expect(page).to have_selector 'a', 'Перейти к списку тем'
-        click_link "Перейти к рефлексии"
-        expect(page).to have_content "Рефлексия по этапу: Сбор информации"
+        click_link I18n.t('voting.go_reflection')
+        expect(page).to have_content "#{I18n.t('show.essay.title')} #{I18n.t('stages.life_tape')}"
       end
     end
 

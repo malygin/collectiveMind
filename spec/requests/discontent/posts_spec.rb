@@ -28,7 +28,7 @@ describe 'Discontent ' do
 
       it ' can see all discontents in aspect' do
         expect(page).to have_content 'Несовершенства'
-        expect(page).to have_content 'Неоформленные проблемы'
+        expect(page).to have_content I18n.t('show.improve.problem')
         expect(page).to have_content @discontent1.content
         expect(page).to have_content @discontent2.content
         expect(page).to have_selector '#add_record'
@@ -147,7 +147,7 @@ describe 'Discontent ' do
         expect(page).to have_selector 'a', 'Перейти к списку несовершенств'
         click_link "Перейти к списку несовершенств"
         expect(page).to have_content 'Несовершенства'
-        expect(page).to have_content 'Неоформленные проблемы'
+        expect(page).to have_content I18n.t('show.improve.problem')
       end
     end
 
@@ -166,7 +166,7 @@ describe 'Discontent ' do
 
       it ' can see all discontents in aspect' do
         expect(page).to have_content 'Несовершенства'
-        expect(page).to have_content 'Неоформленные проблемы'
+        expect(page).to have_content I18n.t('show.improve.problem')
         expect(page).to have_content @discontent1.content
         expect(page).to have_content @discontent2.content
         expect(page).to have_selector '#add_record'
@@ -289,7 +289,7 @@ describe 'Discontent ' do
       it 'have content ' do
         expect(page).to have_content 'Исходные'
         expect(page).to have_content 'Объединенные'
-        expect(page).to have_content 'Неоформленные проблемы'
+        expect(page).to have_content I18n.t('show.improve.problem')
         expect(page).to have_content 'Группы несовершенств'
         expect(page).to have_content 'Несовершенства'
         expect(page).to have_link('add_record', :text => 'Добавить новую группу', :href => discontent_posts_new_group_path(project))
@@ -331,7 +331,7 @@ describe 'Discontent ' do
         expect(page).to have_selector 'a', 'Перейти к списку несовершенств'
         click_link "Перейти к списку несовершенств"
         expect(page).to have_content 'Несовершенства'
-        expect(page).to have_content 'Неоформленные проблемы'
+        expect(page).to have_content I18n.t('show.improve.problem')
       end
     end
 
