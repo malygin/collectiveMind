@@ -33,3 +33,9 @@
       %span.hidden-sm.hidden-xs=t('stages.stage', count: 5)
       %br
       %span.hidden-sm.hidden-xs=t('stages.estimate')
+  %li(class="#{'active' if current_stage == :result} disabled")
+    %a{ href: '#', id: 'go_to_result'}
+      6
+      %span.hidden-sm.hidden-xs=t('stages.stage', count: 6)
+      %br
+      %span.hidden-sm.hidden-xs=t('stages.result')
