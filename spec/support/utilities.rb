@@ -29,22 +29,6 @@ def not_have_content_for_not_auth_user(opened_project, demo_project, closed_proj
   validate_projects_links({closed: closed_project, opened: opened_project, demo: demo_project, club: club_project}, expect: false)
 end
 
-
-def not_have_content_for_ordinary_user(closed_project, club_project)
-  #expect(page).not_to have_selector '#list_projects'
-  #expect(page).not_to have_selector "a#list_projects[href='/list_projects']", 'Список процедур'
-  expect(page).not_to have_link('list_projects', text: 'Список процедур', href: list_projects_path)
-  expect(page).not_to have_content 'Закрытые процедуры'
-  expect(page).not_to have_content 'Клубные процедуры'
-  expect(page).not_to have_content 'closed project'
-  expect(page).not_to have_content 'club project'
-  #expect(page).not_to have_selector "a#go_to_closed_project[href='/project/#{closed_project.id}']", 'Перейти к процедуре'
-  #expect(page).not_to have_selector "a#go_to_club_project[href='/project/#{club_project.id}']", 'Перейти к процедуре'
-  # expect(page).not_to have_link('go_to_closed_project', text: 'Перейти к процедуре', href: "/project/#{closed_project.id}")
-  # expect(page).not_to have_link('go_to_club_project', text: 'Перейти к процедуре', href: "/project/#{club_project.id}")
-  validate_projects_links({closed: closed_project, club: club_project}, expect: false)
-end
-
 def have_content_for_ordinary_user(opened_project, demo_project)
   expect(page).to have_content 'Открытые процедуры'
   expect(page).to have_content 'Демо процедуры'
@@ -377,6 +361,7 @@ def prepare_life_tape(project, user)
   @aspect2 = FactoryGirl.create :discontent_aspect, project: project, content: 'aspect 2'
   @post1 = FactoryGirl.create :life_tape_post, project: project
   @post2 = FactoryGirl.create :life_tape_post, project: project
+  #@todo здесь показать ассоциации для фактори
   @aspect_post1 = ActiveRecord::Base.connection.execute("insert into discontent_aspects_life_tape_posts (discontent_aspect_id,life_tape_post_id) values (#{@aspect1.id},#{@post1.id})")
   @aspect_post1 = ActiveRecord::Base.connection.execute("insert into discontent_aspects_life_tape_posts (discontent_aspect_id,life_tape_post_id) values (#{@aspect2.id},#{@post2.id})")
   @comment1 = FactoryGirl.create :life_tape_comment, post: @post1, user: user, content: 'comment 1'
