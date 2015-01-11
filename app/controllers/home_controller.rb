@@ -1,4 +1,6 @@
 class HomeController < ApplicationController
+  layout 'core/projects'
+
   def index
     if signed_in?
       if prime_admin?

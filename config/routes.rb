@@ -265,6 +265,5 @@ CollectiveMind::Application.routes.draw do
 
   ############
 
-  root to: 'core/projects#index'
-  #root to: 'home#index'
+  root to: 'home#index'
 end
