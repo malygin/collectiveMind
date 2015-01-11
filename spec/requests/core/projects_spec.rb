@@ -28,6 +28,15 @@ describe 'Core Project ' do
     end
   end
 
+  shared_examples 'not_have_content_for_club_user' do
+    it '' do
+      expect(page).not_to have_link('list_projects', text: 'Список процедур', href: list_projects_path)
+      expect(page).not_to have_content 'Закрытые процедуры'
+      expect(page).not_to have_content 'closed project'
+      validate_projects_links({closed: closed_project}, expect: false)
+    end
+  end
+
   context 'ordinary user sign in ' do
     before do
       sign_in user
@@ -167,10 +176,19 @@ describe 'Core Project ' do
     end
 
     context 'have content ' do
-      it 'closed project for invited user ' do
-        create_invite_for_user(closed_project_for_invite, user)
-        visit root_path
-        not_have_content_for_invited_ordinary_user(closed_project, club_project)
+      describe 'closed project for invited user ' do
+        before do
+          create_invite_for_user(closed_project_for_invite, user)
+          visit root_path
+        end
+
+        it '' do
+          expect(page).not_to have_link('list_projects', text: 'Список процедур', href: list_projects_path)
+          expect(page).not_to have_content 'closed project'
+          expect(page).not_to have_content 'Клубные процедуры'
+          expect(page).not_to have_content 'club project'
+          validate_projects_links({closed: closed_project, club: club_project}, expect: false)
+        end
       end
 
       it 'success go to closed project for invited user ' do
@@ -200,92 +218,123 @@ describe 'Core Project ' do
     end
 
     context 'not have content ' do
-      it 'closed project ' do
-        not_have_content_for_club_user(closed_project)
-      end
+      it_behaves_like 'not_have_content_for_club_user'
 
       context 'success redirect to root path ' do
-        it 'for show closed project ' do
-          visit core_project_path(closed_project)
-          expect(page.current_path).to eq root_path
-          not_have_content_for_club_user(closed_project)
-        end
-
-        it 'for closed project ' do
-          visit "/project/#{closed_project.id}"
-          expect(page.current_path).to eq root_path
-          not_have_content_for_club_user(closed_project)
-        end
-
-        it 'for list projects ' do
-          visit list_projects_path
-          expect(page.current_path).to eq root_path
-          expect(page).not_to have_content 'Список процедур'
-          expect(page).not_to have_link('new_project', text: 'Создать проект', href: new_core_project_path)
-          not_have_content_for_club_user(closed_project)
-        end
-
-        it 'for new project ' do
-          visit new_core_project_path
-          expect(page.current_path).to eq root_path
-          expect(page).not_to have_selector 'form#new_core_project'
-          expect(page).not_to have_content 'Форма создания новой процедуры'
-          not_have_content_for_club_user(closed_project)
-        end
-
-        it 'for edit project ' do
-          visit edit_core_project_path(closed_project)
-          expect(page.current_path).to eq root_path
-          expect(page).not_to have_selector "form#edit_core_project_#{closed_project.id}"
-          expect(page).not_to have_content 'Форма редактирования процедуры'
-          not_have_content_for_club_user(closed_project)
-        end
-
-        it 'for list users' do
-          visit list_users_users_path(closed_project)
-          expect(page.current_path).to eq root_path
-          expect(page).not_to have_content 'Выберите участников для закрытой процедуры'
-          not_have_content_for_club_user(closed_project)
-        end
-
-        it 'for next_stage' do
-          expect {
-            visit next_stage_core_project_path(closed_project)
+        describe 'for show closed project ' do
+          before do
+            visit core_project_path(closed_project)
             expect(page.current_path).to eq root_path
-            not_have_content_for_club_user(closed_project)
-          }.to change { closed_project.status }.by(0)
+          end
+
+          it_behaves_like 'not_have_content_for_club_user'
         end
 
-        it 'for pr_stage' do
-          expect {
-            visit pr_stage_core_project_path(closed_project)
+        describe 'for closed project ' do
+          before do
+            visit "/project/#{closed_project.id}"
             expect(page.current_path).to eq root_path
-            not_have_content_for_club_user(closed_project)
-          }.to change { closed_project.status }.by(0)
+          end
+
+          it_behaves_like 'not_have_content_for_club_user'
         end
 
-        it 'for create project' do
-          expect {
-            page.driver.submit :post, "/core/projects", {}
+        describe 'for list projects ' do
+          before do
+            visit list_projects_path
             expect(page.current_path).to eq root_path
-            not_have_content_for_club_user(closed_project)
-          }.to change(Core::Project, :count).by(0)
+            expect(page).not_to have_content 'Список процедур'
+            expect(page).not_to have_link('new_project', text: 'Создать проект', href: new_core_project_path)
+          end
+
+          it_behaves_like 'not_have_content_for_club_user'
         end
 
-        it 'for update project' do
-          expect {
-            page.driver.submit :put, "/core/projects/#{closed_project.id}", {core_project: {status: 0}}
+        describe 'for new project ' do
+          before do
+            visit new_core_project_path
             expect(page.current_path).to eq root_path
-            not_have_content_for_club_user(closed_project)
-          }.to change { closed_project.status }.by(0)
+            expect(page).not_to have_selector 'form#new_core_project'
+            expect(page).not_to have_content 'Форма создания новой процедуры'
+          end
+
+          it_behaves_like 'not_have_content_for_club_user'
         end
 
-        it 'for destroy project' do
-          expect {
-            page.driver.submit :delete, "/core/projects/#{closed_project.id}", {}
+        describe 'for edit project ' do
+          before do
+            visit edit_core_project_path(closed_project)
             expect(page.current_path).to eq root_path
-            not_have_content_for_club_user(closed_project)
-          }.to change { closed_project.type_access }.by(0)
+            expect(page).not_to have_selector "form#edit_core_project_#{closed_project.id}"
+            expect(page).not_to have_content 'Форма редактирования процедуры'
+          end
+
+          it_behaves_like 'not_have_content_for_club_user'
+        end
+
+        describe 'for list users' do
+          before do
+            visit list_users_users_path(closed_project)
+            expect(page.current_path).to eq root_path
+            expect(page).not_to have_content 'Выберите участников для закрытой процедуры'
+          end
+
+          it_behaves_like 'not_have_content_for_club_user'
+        end
+
+        describe 'for next_stage' do
+          before do
+            expect {
+              visit next_stage_core_project_path(closed_project)
+              expect(page.current_path).to eq root_path
+            }.to change { closed_project.status }.by(0)
+          end
+
+          it_behaves_like 'not_have_content_for_club_user'
+        end
+
+        describe 'for pr_stage' do
+          before do
+            expect {
+              visit pr_stage_core_project_path(closed_project)
+              expect(page.current_path).to eq root_path
+            }.to change { closed_project.status }.by(0)
+          end
+
+          it_behaves_like 'not_have_content_for_club_user'
+        end
+
+        describe 'for create project' do
+          before do
+            expect {
+              page.driver.submit :post, "/core/projects", {}
+              expect(page.current_path).to eq root_path
+            }.to change(Core::Project, :count).by(0)
+          end
+
+          it_behaves_like 'not_have_content_for_club_user'
+        end
+
+        describe 'for update project' do
+          before do
+            expect {
+              page.driver.submit :put, "/core/projects/#{closed_project.id}", {core_project: {status: 0}}
+              expect(page.current_path).to eq root_path
+            }.to change { closed_project.status }.by(0)
+          end
+
+          it_behaves_like 'not_have_content_for_club_user'
+        end
+
+        describe 'for destroy project' do
+          before do
+            expect {
+              page.driver.submit :delete, "/core/projects/#{closed_project.id}", {}
+              expect(page.current_path).to eq root_path
+            }.to change { closed_project.type_access }.by(0)
+          end
+
+          it_behaves_like 'not_have_content_for_club_user'
         end
       end
     end
