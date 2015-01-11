@@ -19,7 +19,7 @@ describe 'Core Project ' do
 
   shared_examples 'not_have_content_for_ordinary_user' do
     it '' do
-      expect(page).not_to have_link('list_projects', text: 'Список процедур', href: list_projects_path)
+      expect(page).not_to have_link('list_projects', text: 'Список процедур', href: core_projects_path)
       expect(page).not_to have_content 'Закрытые процедуры'
       expect(page).not_to have_content 'Клубные процедуры'
       expect(page).not_to have_content 'closed project'
@@ -30,7 +30,7 @@ describe 'Core Project ' do
 
   shared_examples 'not_have_content_for_club_user' do
     it '' do
-      expect(page).not_to have_link('list_projects', text: 'Список процедур', href: list_projects_path)
+      expect(page).not_to have_link('list_projects', text: 'Список процедур', href: core_projects_path)
       expect(page).not_to have_content 'Закрытые процедуры'
       expect(page).not_to have_content 'closed project'
       validate_projects_links({closed: closed_project}, expect: false)
@@ -39,7 +39,7 @@ describe 'Core Project ' do
 
   shared_examples 'not_have_content_for_moderator' do
     it '' do
-      expect(page).not_to have_link('list_projects', text: 'Список процедур', href: list_projects_path)
+      expect(page).not_to have_link('list_projects', text: 'Список процедур', href: core_projects_path)
       expect(page).not_to have_content 'Закрытые процедуры'
       expect(page).not_to have_content 'closed project'
       validate_projects_links({closed: closed_project}, expect: false)
@@ -86,7 +86,7 @@ describe 'Core Project ' do
 
         describe 'for list projects ' do
           before do
-            visit list_projects_path
+            visit core_projects_path
             expect(page.current_path).to eq root_path
             expect(page).not_to have_content 'Список процедур'
             expect(page).not_to have_link('new_project', text: 'Создать проект', href: new_core_project_path)
@@ -192,7 +192,7 @@ describe 'Core Project ' do
         end
 
         it '' do
-          expect(page).not_to have_link('list_projects', text: 'Список процедур', href: list_projects_path)
+          expect(page).not_to have_link('list_projects', text: 'Список процедур', href: core_projects_path)
           expect(page).not_to have_content 'closed project'
           expect(page).not_to have_content 'Клубные процедуры'
           expect(page).not_to have_content 'club project'
@@ -250,7 +250,7 @@ describe 'Core Project ' do
 
         describe 'for list projects ' do
           before do
-            visit list_projects_path
+            visit core_projects_path
             expect(page.current_path).to eq root_path
             expect(page).not_to have_content 'Список процедур'
             expect(page).not_to have_link('new_project', text: 'Создать проект', href: new_core_project_path)
@@ -352,7 +352,7 @@ describe 'Core Project ' do
       it 'closed project for invited club user ' do
         create_invite_for_user(closed_project_for_invite, club_user)
         visit root_path
-        expect(page).not_to have_link('list_projects', text: 'Список процедур', href: list_projects_path)
+        expect(page).not_to have_link('list_projects', text: 'Список процедур', href: core_projects_path)
         expect(page).not_to have_content 'closed project'
         validate_projects_links({closed: closed_project}, expect: false)
       end
@@ -407,7 +407,7 @@ describe 'Core Project ' do
 
         describe 'for list projects ' do
           before do
-            visit list_projects_path
+            visit core_projects_path
             expect(page.current_path).to eq root_path
             expect(page).not_to have_content 'Список процедур'
             expect(page).not_to have_link('new_project', text: 'Создать проект', href: new_core_project_path)
@@ -509,7 +509,7 @@ describe 'Core Project ' do
       it 'closed project for invited club user ' do
         create_invite_for_user(closed_project_for_invite, moderator)
         visit root_path
-        expect(page).not_to have_link('list_projects', text: 'Список процедур', href: list_projects_path)
+        expect(page).not_to have_link('list_projects', text: 'Список процедур', href: core_projects_path)
         expect(page).not_to have_content 'closed project'
         validate_projects_links({closed: closed_project}, expect: false)
       end
@@ -571,8 +571,8 @@ describe 'Core Project ' do
         end
 
         it 'for list projects ' do
-          visit list_projects_path
-          expect(page.current_path).to eq list_projects_path
+          visit core_projects_path
+          expect(page.current_path).to eq core_projects_path
           expect(page).to have_content 'Список процедур'
           expect(page).to have_link('new_project', text: 'Создать проект', href: new_core_project_path)
         end
