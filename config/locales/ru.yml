@@ -145,7 +145,7 @@ ru:
     account: 'Профиль'
     list_groups: "Список групп"
   stages:
-    intro: Введение
+    intro: Знакомство
     life_tape: 'Введение в процедуру'
     discontent: 'Анализ ситуации'
     concept: 'Дизайн будущего'
