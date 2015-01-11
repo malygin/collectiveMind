@@ -30,18 +30,9 @@ class Core::ProjectsController < ApplicationController
     end
   end
 
-  def to_project
-    @project = Core::Project.find(params[:project])
-    redirect_to polymorphic_path(@project.redirect_to_current_stage)
-  end
-
-  # GET /core/projects/1
-  # GET /core/projects/1.json
   def show
-    respond_to do |format|
-      format.html # show.html.erb
-      format.json { render json: @core_project }
-    end
+    @project = Core::Project.find(params[:id])
+    redirect_to polymorphic_path(@project.redirect_to_current_stage, project: @project)
   end
 
   # GET /core/projects/new

@@ -107,7 +107,7 @@
         -if @user_projects
           -@user_projects.each do |project|
             %li
-              = link_to "/project/#{project.id}", id: "go_to_project_#{project.id}" do
+              = link_to core_project_path(project), id: "go_to_project_#{project.id}" do
                 &nbsp;
                 =" #{project.name}"
 
