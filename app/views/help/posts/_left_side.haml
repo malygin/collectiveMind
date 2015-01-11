@@ -1,7 +1,6 @@
 %ol.side-nav
   %li{class: ('active' if params[:id] == '0')}
     %a(href="/project/#{@project.id}/help/posts/0")
-      0
       =t('stages.intro')
   %li{class: ('active' if params[:id] == '1')}
     %a(href="/project/#{@project.id}/help/posts/1")

@@ -1,8 +1,27 @@
 =link_to '/project/'+@project.id.to_s do
   %span.fa.fa-angle-double-left
   =t('link.back_proc')
-%section.widget
-  = render partial:  @help_partial
+- if ['0','6'].include? params[:id]
+  %section.widget
+    = render partial:  @help_partial_1
+- else
+  %section.widget.widget-tabs
+    %header
+      %ul.nav.nav-tabs
+        %li.active
+          %a(href="#short_desc" data-toggle="tab") Теория
+        %li
+          %a(href="#long_desc" data-toggle="tab") Практика
+
+    .body.tab-content
+      #short_desc.tab-pane.clearfix.active
+        %br
+        = render partial:  @help_partial_1
+      #long_desc.tab-pane
+        %br
+        -if ['1','2'].include? params[:id]
+          = render partial:  @help_partial_2
+
 
 -#%section.widget.widget-tabs
 -#  %header
