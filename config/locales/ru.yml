@@ -285,9 +285,9 @@ ru:
 
     discontent:
       title:  Форма добавления несовершенства
-      what: 'ЧТО?'
-      where: 'ГДЕ?'
-      when: 'КОГДА?'
+      what: 'что?'
+      where: 'где?'
+      when: 'когда?'
       field_what: Что вас не устраивает?
       field_where: Где это происходит?
       field_when: Когда это происходит?

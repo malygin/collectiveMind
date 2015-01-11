@@ -23,8 +23,8 @@
           %br
           %span.label.label-danger=t('form.discontent.style_negative')
           %br
-          %span.label.label-danger=t('form.discontent.what')
-          ПЧЕЛЫ ТРАТЯТ МНОГО ВРЕМЕНИ НА ПЕРЕЛЕТЫ ДО ЛУЧШИХ ИСТОЧНИКОВ НЕКТАРА
+          %span.label.label-default=t('form.discontent.what')
+          пчелы тратят много времени на перелеты до лучших источников нектара
     .col-md-6
       .form-group
         = f.text_area :content, class: 'form-control post-textarea', rows: 5, placeholder: t('form.discontent.field_what_promt')
@@ -38,12 +38,10 @@
     .col-md-6
       .text-right
         %i
-          %b=t('form.discontent.examples')
+          =t('form.discontent.examples')
           %br
-          %span.label.label-danger=t('form.discontent.style_negative')
-          %br
-          %span.label.label-danger КОГДА?
-          ПРИ СБОРЕ НЕКТАРА
+          %span.label.label-default=t('form.discontent.when')
+          При сборе нектара
     .col-md-6
       = f.autocomplete_field :whend, autocomplete_discontent_post_whend_discontent_posts_path, :'min-length' => 0, style: 'height: 44px', class: 'form-control autocomplete', placeholder: t('form.discontent.field_when_promt')
       %br
@@ -59,12 +57,10 @@
     .col-md-6
       .text-right
         %i
-          %b=t('form.discontent.examples')
+          =t('form.discontent.examples')
           %br
-          %span.label.label-danger=t('form.discontent.style_negative')
-          %br
-          %span.label.label-danger ГДЕ?
-          НА ЛУЖАЙКАХ, ОТДАЛЕННЫХ ОТ ВЫСОКОГО ДУБА
+          %span.label.label-default=t('form.discontent.where')
+          На лужайках, отдаленных от высокого дуба
 
     .col-md-6
       = f.autocomplete_field :whered, autocomplete_discontent_post_whered_discontent_posts_path, :'min-length' => 0, style: 'height: 44px', class: 'form-control autocomplete', placeholder: t('form.discontent.field_where_promt')
@@ -73,7 +69,7 @@
     .col-md-6
       %br
       %h5.text-right
-        %b=t('form.discontent.select_aspect')
+        =t('form.discontent.select_aspect')
       %br
       %br
     .com-md-6
@@ -99,7 +95,7 @@
   .row
     .col-md-12
       .form-group.text-center
-        %b=t('form.discontent.select_style')
+        =t('form.discontent.select_style')
         %label.radio-inline
           = f.radio_button :style, '1', checked: 'checked'
           %span.label.label-danger=t('form.discontent.style_negative')
