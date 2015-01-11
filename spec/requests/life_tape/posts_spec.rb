@@ -57,8 +57,8 @@ describe 'Life Tape ' do
 
       it 'have content ', js:true do
         expect(page).to have_content I18n.t('voting.lifetape.title')
-        expect(page).to have_content 'Определение наиболее важных тем процедуры'
-        expect(page).to have_content "Вы можете выбрать #{project.stage1_count} тем(ы), которые на Ваш взгляд являются наиболее важными"
+        expect(page).to have_content I18n.t('voting.lifetape.name')
+        expect(page).to have_content I18n.t('voting.lifetape.select', num: project.stage1_count)
         expect(page).to have_content "Осталось голосов: #{project.stage1_count}"
         expect(page).to have_content @aspect1.content
         expect(page).to have_content @aspect2.content
@@ -68,7 +68,7 @@ describe 'Life Tape ' do
         expect(page).to have_content "Осталось голосов: 0"
         expect(page).to have_content 'Спасибо за участие в голосовании!'
         expect(page).to have_selector 'a', I18n.t('voting.go_reflection')
-        expect(page).to have_selector 'a', 'Перейти к списку тем'
+        expect(page).to have_selector 'a', I18n.t('voting.lifetape.go_list')
         click_link I18n.t('voting.go_reflection')
         expect(page).to have_content "#{I18n.t('show.essay.title')} #{I18n.t('stages.life_tape')}"
       end
@@ -122,8 +122,8 @@ describe 'Life Tape ' do
 
       it 'have content ', js:true do
         expect(page).to have_content I18n.t('voting.lifetape.title')
-        expect(page).to have_content 'Определение наиболее важных тем процедуры'
-        expect(page).to have_content "Вы можете выбрать #{project.stage1_count} тем(ы), которые на Ваш взгляд являются наиболее важными"
+        expect(page).to have_content I18n.t('voting.lifetape.name')
+        expect(page).to have_content I18n.t('voting.lifetape.select', num: project.stage1_count)
         expect(page).to have_content "Осталось голосов: #{project.stage1_count}"
         expect(page).to have_content @aspect1.content
         expect(page).to have_content @aspect2.content
@@ -139,7 +139,7 @@ describe 'Life Tape ' do
         expect(page).to have_content "Осталось голосов: 0"
         expect(page).to have_content 'Спасибо за участие в голосовании!'
         expect(page).to have_selector 'a', I18n.t('voting.go_reflection')
-        expect(page).to have_selector 'a', 'Перейти к списку тем'
+        expect(page).to have_selector 'a', I18n.t('voting.lifetape.go_list')
         click_link I18n.t('voting.go_reflection')
         expect(page).to have_content "#{I18n.t('show.essay.title')} #{I18n.t('stages.life_tape')}"
       end
