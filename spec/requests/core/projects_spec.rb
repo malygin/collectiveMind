@@ -20,26 +20,6 @@ describe 'Core Project ' do
   context 'ordinary user sign in ' do
     before do
       sign_in user
-      visit root_path
-    end
-
-    it 'have base link ' do
-      expect(page).to have_link('user_profile', text: user.to_s, href: user_path(user.current_projects_for_user.last, user))
-      expect(page).to have_link('sign_out', text: 'Выйти', href: destroy_user_session_path)
-    end
-
-    it 'have content in profile ' do
-      click_link 'user_profile'
-      expect(page).to have_content 'Профиль'
-      expect(page).to have_content 'Достижения'
-      expect(page).to have_content 'Активность'
-    end
-
-    it 'success sign out ', js: true do
-      click_link 'sign_out'
-      expect(page).to have_link('sign_in', text: 'Войти', href: new_user_session_path)
-      expect(page).to have_link('sign_up', text: 'Зарегистрироваться', href: new_user_registration_path)
-      expect(page).to have_content 'О проекте'
     end
 
     context 'not have content ' do
@@ -170,19 +150,6 @@ describe 'Core Project ' do
   context 'club user sign in' do
     before do
       sign_in club_user
-      visit root_path
-    end
-
-    it 'have base link ' do
-      expect(page).to have_content club_user.to_s
-      expect(page).to have_link('sign_out', text: 'Выйти', href: destroy_user_session_path)
-    end
-
-    it 'success sign out ', js: true do
-      click_link 'sign_out'
-      expect(page).to have_link('sign_in', text: 'Войти', href: new_user_session_path)
-      expect(page).to have_link('sign_up', text: 'Зарегистрироваться', href: new_user_registration_path)
-      expect(page).to have_content 'О проекте'
     end
 
     context 'not have content ' do
@@ -307,25 +274,6 @@ describe 'Core Project ' do
   context 'moderator sign in' do
     before do
       sign_in moderator
-      visit root_path
-    end
-
-    it 'have base link ' do
-      expect(page).to have_link('user_profile', text: moderator.to_s, href: user_path(moderator.current_projects_for_user.last, moderator))
-      expect(page).to have_link('sign_out', text: 'Выйти', href: destroy_user_session_path)
-    end
-
-    it 'have content in profile ' do
-      click_link 'user_profile'
-      expect(page).to have_content 'Профиль'
-      expect(page).to have_content 'Активность'
-    end
-
-    it 'success sign out ', js: true do
-      click_link 'sign_out'
-      expect(page).to have_link('sign_in', text: 'Войти', href: new_user_session_path)
-      expect(page).to have_link('sign_up', text: 'Зарегистрироваться', href: new_user_registration_path)
-      expect(page).to have_content 'О проекте'
     end
 
     context 'not have content ' do
@@ -451,26 +399,6 @@ describe 'Core Project ' do
   context 'prime admin sign in' do
     before do
       sign_in prime_admin
-      visit root_path
-    end
-
-    it 'have base link ' do
-      expect(page).to have_link('user_profile', text: prime_admin.to_s, href: user_path(prime_admin.current_projects_for_user.last, prime_admin))
-      expect(page).to have_link('sign_out', text: 'Выйти', href: destroy_user_session_path)
-      expect(page).to have_link('list_projects', text: 'Список процедур', href: list_projects_path)
-    end
-
-    it 'have content in profile ' do
-      click_link 'user_profile'
-      expect(page).to have_content 'Профиль'
-      expect(page).to have_content 'Активность'
-    end
-
-    it 'success sign out ', js: true do
-      click_link 'sign_out'
-      expect(page).to have_link('sign_in', text: 'Войти', href: new_user_session_path)
-      expect(page).to have_link('sign_up', text: 'Зарегистрироваться', href: new_user_registration_path)
-      expect(page).to have_content 'О проекте'
     end
 
     context 'have content ' do
