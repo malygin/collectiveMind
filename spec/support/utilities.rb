@@ -12,59 +12,6 @@ def sign_out
   click_link 'sign_out'
 end
 
-def not_have_content_for_not_auth_user(opened_project, demo_project, closed_project, club_project)
-  expect(page).not_to have_link('list_projects', text: 'Список процедур', href: list_projects_path)
-  expect(page).not_to have_content 'Закрытые процедуры'
-  expect(page).not_to have_content 'Клубные процедуры'
-  expect(page).not_to have_content 'closed project'
-  expect(page).not_to have_content 'club project'
-  expect(page).not_to have_content 'Открытые процедуры'
-  expect(page).not_to have_content 'Демо процедуры'
-  expect(page).not_to have_content 'opened project'
-  expect(page).not_to have_content 'demo project'
-  validate_projects_links({closed: closed_project, opened: opened_project, demo: demo_project, club: club_project}, expect: false)
-end
-
-def have_content_for_ordinary_user(opened_project, demo_project)
-  expect(page).to have_content 'Открытые процедуры'
-  expect(page).to have_content 'Демо процедуры'
-  expect(page).to have_content 'opened project'
-  expect(page).to have_content 'demo project'
-  validate_projects_links({opened: opened_project, demo: demo_project}, expect: true)
-end
-
-def have_content_for_invited_ordinary_user(closed_project_for_invite, opened_project, demo_project)
-  expect(page).to have_content 'Закрытые процедуры'
-  expect(page).to have_content 'Открытые процедуры'
-  expect(page).to have_content 'Демо процедуры'
-  expect(page).to have_content 'opened project'
-  expect(page).to have_content 'demo project'
-  expect(page).to have_content 'closed invited project'
-  validate_projects_links({closed: closed_project_for_invite, opened: opened_project, demo: demo_project}, expect: true)
-end
-
-def have_content_for_club_user(opened_project, demo_project, club_project)
-  expect(page).to have_content 'Открытые процедуры'
-  expect(page).to have_content 'Демо процедуры'
-  expect(page).to have_content 'Клубные процедуры'
-  expect(page).to have_content 'opened project'
-  expect(page).to have_content 'demo project'
-  expect(page).to have_content 'club project'
-  validate_projects_links({opened: opened_project, demo: demo_project, club: club_project}, expect: true)
-end
-
-def have_content_for_invited_club_user(closed_project_for_invite, opened_project, demo_project, club_project)
-  expect(page).to have_content 'Закрытые процедуры'
-  expect(page).to have_content 'Открытые процедуры'
-  expect(page).to have_content 'Демо процедуры'
-  expect(page).to have_content 'Клубные процедуры'
-  expect(page).to have_content 'opened project'
-  expect(page).to have_content 'demo project'
-  expect(page).to have_content 'club project'
-  expect(page).to have_content 'closed invited project'
-  validate_projects_links({closed: closed_project_for_invite, opened: opened_project, demo: demo_project, club: club_project}, expect: true)
-end
-
 def not_have_content_for_invited_club_user(closed_project)
   expect(page).not_to have_link('list_projects', text: 'Список процедур', href: list_projects_path)
   expect(page).not_to have_content 'closed project'
@@ -78,45 +25,10 @@ def not_have_content_for_moderator(closed_project)
   validate_projects_links({closed: closed_project}, expect: false)
 end
 
-def have_content_for_moderator(opened_project, demo_project, club_project)
-  expect(page).to have_content 'Открытые процедуры'
-  expect(page).to have_content 'Демо процедуры'
-  expect(page).to have_content 'Клубные процедуры'
-  expect(page).to have_content 'opened project'
-  expect(page).to have_content 'demo project'
-  expect(page).to have_content 'club project'
-  validate_projects_links({opened: opened_project, demo: demo_project, club: club_project}, expect: true)
-end
-
-def have_content_for_invited_moderator(closed_project_for_invite, opened_project, demo_project, club_project)
-  expect(page).to have_content 'Закрытые процедуры'
-  expect(page).to have_content 'Открытые процедуры'
-  expect(page).to have_content 'Демо процедуры'
-  expect(page).to have_content 'Клубные процедуры'
-  expect(page).to have_content 'opened project'
-  expect(page).to have_content 'demo project'
-  expect(page).to have_content 'club project'
-  expect(page).to have_content 'closed invited project'
-  validate_projects_links({closed: closed_project_for_invite, opened: opened_project, demo: demo_project, club: club_project}, expect: true)
-end
-
 def not_have_content_for_invited_moderator(closed_project)
   expect(page).not_to have_link('list_projects', text: 'Список процедур', href: list_projects_path)
   expect(page).not_to have_content 'closed project'
   validate_projects_links({closed: closed_project}, expect: false)
-end
-
-def have_content_for_prime_admin(closed_project, opened_project, demo_project, club_project)
-  expect(page).to have_link('list_projects', text: 'Список процедур', href: list_projects_path)
-  expect(page).to have_content 'Открытые процедуры'
-  expect(page).to have_content 'Закрытые процедуры'
-  expect(page).to have_content 'Демо процедуры'
-  expect(page).to have_content 'Клубные процедуры'
-  expect(page).to have_content 'opened project'
-  expect(page).to have_content 'closed project'
-  expect(page).to have_content 'demo project'
-  expect(page).to have_content 'club project'
-  validate_projects_links({closed: closed_project, opened: opened_project, demo: demo_project, club: club_project}, expect: true)
 end
 
 def create_invite_for_user(project, user)
