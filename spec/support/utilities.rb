@@ -12,25 +12,6 @@ def sign_out
   click_link 'sign_out'
 end
 
-def not_have_content_for_invited_club_user(closed_project)
-  expect(page).not_to have_link('list_projects', text: 'Список процедур', href: list_projects_path)
-  expect(page).not_to have_content 'closed project'
-  validate_projects_links({closed: closed_project}, expect: false)
-end
-
-def not_have_content_for_moderator(closed_project)
-  expect(page).not_to have_link('list_projects', text: 'Список процедур', href: list_projects_path)
-  expect(page).not_to have_content 'Закрытые процедуры'
-  expect(page).not_to have_content 'closed project'
-  validate_projects_links({closed: closed_project}, expect: false)
-end
-
-def not_have_content_for_invited_moderator(closed_project)
-  expect(page).not_to have_link('list_projects', text: 'Список процедур', href: list_projects_path)
-  expect(page).not_to have_content 'closed project'
-  validate_projects_links({closed: closed_project}, expect: false)
-end
-
 def create_invite_for_user(project, user)
   FactoryGirl.create :core_project_user, project_id: project.id, user_id: user.id
 end
