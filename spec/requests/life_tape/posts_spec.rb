@@ -12,7 +12,11 @@ describe 'Life Tape ' do
   let (:closed_project) { create :closed_project, name: 'closed project' }
 
   before do
-    prepare_life_tape(project, user_data)
+    @post1 = create :life_tape_post, project: project
+    @post2 = create :life_tape_post, project: project
+    @aspect1 = @post1.aspect
+    @aspect2 = @post2.aspect
+    @comment1 = create :life_tape_comment, post: @post1, user: user, content: 'comment 1'
   end
 
   context 'ordinary user sign in ' do
