@@ -5,15 +5,20 @@
   |
   %span{id: "sort_date_#{asp.id}"}
     =link_to sort_content_discontent_posts_path(@project, asp: asp, sort_date: 'up', type_like: params[:type_like], type_note: params[:type_note], type_verify: params[:type_verify], type_status: params[:type_status]), remote: true, id: 'sort_date_link' do
-      по дате
+      по новизне
       %i.fa.fa-sort-down(title='по убыванию')
   |
-  %span{id: "sort_user_#{asp.id}"}
-    =link_to sort_content_discontent_posts_path(@project, asp: asp, sort_user: 'up',type_like: params[:type_like], type_note: params[:type_note], type_verify: params[:type_verify], type_status: params[:type_status]), remote: true, id: 'sort_user_link' do
-      по пользователям
-      %i.fa.fa-sort-down(title='по убыванию')
-  |
-  %span{id: "sort_view_#{asp.id}"}
-    =link_to sort_content_discontent_posts_path(@project, asp: asp, sort_view: 'up',type_like: params[:type_like], type_note: params[:type_note], type_verify: params[:type_verify], type_status: params[:type_status]), remote: true, id: 'sort_view_link' do
-      по просмотрам
+  -#%span{id: "sort_user_#{asp.id}"}
+  -#  =link_to sort_content_discontent_posts_path(@project, asp: asp, sort_user: 'up',type_like: params[:type_like], type_note: params[:type_note], type_verify: params[:type_verify], type_status: params[:type_status]), remote: true, id: 'sort_user_link' do
+  -#    по пользователям
+  -#    %i.fa.fa-sort-down(title='по убыванию')
+  -#|
+  -#%span{id: "sort_view_#{asp.id}"}
+  -#  =link_to sort_content_discontent_posts_path(@project, asp: asp, sort_view: 'up',type_like: params[:type_like], type_note: params[:type_note], type_verify: params[:type_verify], type_status: params[:type_status]), remote: true, id: 'sort_view_link' do
+  -#    по просмотрам
+  -#    %i.fa.fa-sort-down(title='по убыванию')
+
+  %span{id: "sort_popular_#{asp.id}"}
+    =link_to sort_content_discontent_posts_path(@project, asp: asp, sort_popular: 'up',type_like: params[:type_like], type_note: params[:type_note], type_verify: params[:type_verify], type_status: params[:type_status]), remote: true, id: 'sort_popular_link' do
+      по популярности
       %i.fa.fa-sort-down(title='по убыванию')
