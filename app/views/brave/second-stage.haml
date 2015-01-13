@@ -1,0 +1,532 @@
+!!!
+%html
+  %head
+    %meta{:charset => "utf-8"}/
+    %title
+    / Description, Keywords and Author
+    %meta{:content => "Your description", :name => "description"}/
+    %meta{:content => "Your,Keywords", :name => "keywords"}/
+    %meta{:content => "Ian", :name => "author"}/
+    %meta{:content => "width=device-width, initial-scale=1.0", :name => "viewport"}/
+    / Styles
+    / Bootstrap CSS
+    %link{:href => "css/bootstrap.min.css", :rel => "stylesheet"}/
+    / Font awesome CSS
+    %link{:href => "css/font-awesome.min.css", :rel => "stylesheet"}/
+    / Magnific Popup
+    %link{:href => "css/magnific-popup.css", :rel => "stylesheet"}/
+    / Owl carousel
+    %link{:href => "css/owl.carousel.css", :rel => "stylesheet"}/
+    / Base style
+    %link{:href => "css/style.css", :rel => "stylesheet"}/
+    %link{:href => "css/style-4.css", :rel => "stylesheet"}/
+    / Custom CSS. Type your CSS code in custom.css file
+    %link{:href => "css/custom.css", :rel => "stylesheet"}/
+  %body
+    .outer.second-stage
+      .right-rollover-outer
+        .round-button-outer
+          %a{:href => "#"}/
+          .round-button.circle-5
+        .right-rollover.box-shadow-1.rounded-3
+          %h5
+            Индекс аспектов
+          .index-of-aspects
+            .aspect
+              .circle-tag.back-color.orange нд
+              %span.aspect-text Нечем дышать
+            .aspect
+              .circle-tag.back-color.light-blue нс
+              %span.aspect-text Нечем дышать и слишком высокие потолки
+            .aspect
+              .circle-tag.back-color.green мл
+              %span.aspect-text Мало платят
+            .aspect
+              .circle-tag.back-color.purple нж
+              %span.aspect-text Негде жить
+            .aspect
+              .circle-tag.back-color.yellow од
+              %span.aspect-text Отсутствие диалога
+            .aspect
+              .circle-tag.back-color.blue му
+              %span.aspect-text Много участников
+      / Top bar starts
+      %header.top-bar
+        .container
+          / Logo starts
+          .box-shadow-outer
+            .tb-logo.box-shadow-5.rounded-1.pull-left
+              %a{:href => "#"}
+                %img{:src => "img/logo-red.jpg"}/
+          / Logo ends
+          .clearfix.visible-xs
+          / Nav starts
+          %nav.header-buttons.pull-left
+            %a.btn.btn-white.rounded-2{:href => "#"} Процедура
+            .clearfix.visible-xs
+            %a.btn.btn-grey.rounded-2{:href => "#"} Кабинет
+            .clearfix.visible-xs
+            %a.btn.btn-grey.rounded-2{:href => "#"} Новости
+            .clearfix.visible-xs
+            %a.btn.btn-grey.rounded-2{:href => "#"} Рефлексия
+          / Nav ends
+          .pull-right.header-right
+            / Langauge starts
+            .tb-language.dropdown.pull-right
+              %a{"data-target" => "#", "data-toggle" => "dropdown", :href => "#"}
+                English
+                %i.fa.fa-angle-down.color.mass-dark-blue
+              / Dropdown menu with languages
+              %ul.dropdown-menu.dropdown-mini{:role => "menu"}
+                %li
+                  %a{:href => "#"} Hindi
+                %li
+                  %a{:href => "#"} Tamil
+                %li
+                  %a{:href => "#"} Kanada
+            / Language ends
+            %img.pull-right.operator-pic{:src => "img/call.png"}/
+            .clearfix
+            / User starts
+            .tb-language.dropdown.pull-right.user-block
+              %span.rating-block.rounded-1 500
+              %a{"data-target" => "#", "data-toggle" => "dropdown", :href => "#"}
+                Горлицкий Вячеслав
+                %i.fa.fa-angle-down.color.mass-dark-blue
+              / Dropdown menu with languages
+              %ul.dropdown-menu.dropdown-mini{:role => "menu"}
+                %li
+                  %a{:href => "#"} Вариант
+            -#/ User ends
+          .clearfix
+      / Top Bar ends
+      / Main Block starts
+      .main-block
+        .container
+          .clearfix
+          / Stages block starts
+          .stages
+            %a.btn.rounded-1
+              %span.bigger> 1
+              стадия
+            .clearfix.visible-sm.visible-xs
+            .current-stage
+              %a.btn.rounded-1
+                %span.bigger> 2
+                стадия
+              .current-stage-text.pull-left
+                .top-text
+                  Максимизация работы в аптеках инвара (с учетом новой стратегии инвара)
+                .bottom-text
+                  %h4 Сбор нововведений
+            .clearfix.visible-md.visible-sm.visible-xs
+            %a.btn.rounded-1.next-steps-stage
+              %span.bigger> 3
+              стадия
+            .clearfix.visible-sm.visible-xs
+            %a.btn.rounded-1.next-steps-stage
+              %span.bigger> 4
+              стадия
+          .clearfix
+          / Innovations' block starts
+          %h4
+            Выберите аспект
+            %i.fa.fa-question-circle
+          / 
+          .ui-4.second-stage
+            .container
+              .sort-block
+                Сортировать:
+                %span.sort-item
+                  %img{:src => "img/sort-date.jpg"}/
+                %span.sort-item
+                  %img{:src => "img/sort-rate.jpg"}/
+                %span.sort-item ВСЕ
+              / UI content
+              %div
+                / Tabs
+                / Nav tabs
+                %ul.nav.nav-tabs.second-stage.ui-29
+                  %li
+                    %button{"data-toggle" => "tab", :href => "#tab-one"}
+                      .block-content
+                        / Filling block
+                        .fill-container.custom-bg-orange
+                          %span.fill-limit{"data-limit" => "65"}
+                          / Circle fill by color background
+                          .filler-outer
+                            .filler
+                  %li
+                    %button{"data-toggle" => "tab", :href => "#tab-two"}
+                      .block-content
+                        / Filling block
+                        .fill-container.custom-bg-light-blue
+                          %span.fill-limit{"data-limit" => "100"}
+                          / Circle fill by color background
+                          .filler-outer
+                            .filler
+                  %li
+                    %button{"data-toggle" => "tab", :href => "#tab-three"}
+                      .block-content
+                        / Filling block
+                        .fill-container.custom-bg-green
+                          %span.fill-limit{"data-limit" => "15"}
+                          / Circle fill by color background
+                          .filler-outer
+                            .filler
+                  %li.active
+                    %button{"data-toggle" => "tab", :href => "#tab-four"}
+                      .block-content
+                        / Filling block
+                        .fill-container.custom-bg-purple
+                          %span.fill-limit{"data-limit" => "55"}
+                          / Circle fill by color background
+                          .filler-outer
+                            .filler
+                  %li
+                    %button{"data-toggle" => "tab", :href => "#tab-five"}
+                      .block-content
+                        / Filling block
+                        .fill-container.custom-bg-yellow
+                          %span.fill-limit{"data-limit" => "75"}
+                          / Circle fill by color background
+                          .filler-outer
+                            .filler
+                  %li
+                    %button{"data-toggle" => "tab", :href => "#tab-six"}
+                      .block-content
+                        / Filling block
+                        .fill-container.custom-bg-blue
+                          %span.fill-limit{"data-limit" => "35"}
+                          / Circle fill by color background
+                          .filler-outer
+                            .filler
+                / Tab panes
+                .tab-content.second-stage.second-stage
+                  #tab-one.tab-pane.fade
+                  #tab-two.tab-pane.fade
+                  #tab-three.tab-pane.fade
+                  #tab-four.tab-pane.active.fade.in
+                    .row
+                      .col-md-4
+                        .imperfection-add-block.lined-block
+                          .add-imperf
+                            %a{:href => "#"}
+                              .plus-circle +
+                              %span Добавить несовершенство
+                          %table
+                            %tr
+                              %td.imperf-left-column
+                              %td.imperf-right-column
+                            %tr
+                              %td.imperf-left-column.what-cell
+                              %td.imperf-right-column
+                            %tr
+                              %td.imperf-left-column
+                              %td.imperf-right-column
+                            %tr
+                              %td.imperf-left-column
+                              %td.imperf-right-column
+                            %tr
+                              %td.imperf-left-column
+                              %td.imperf-right-column
+                            %tr
+                              %td.imperf-left-column
+                              %td.imperf-right-column
+                        / второй блок
+                        .imperfection.imperf-pale-pink.lined-block
+                          %table
+                            %tr
+                              %td.imperf-left-column
+                              %td.imperf-right-column
+                                .aspects-indexes
+                                  .circle-tag.back-color.orange нд
+                                  .circle-tag.back-color.light-blue нс
+                                  .circle-tag.back-color.green мл
+                                  .circle-tag.back-color.purple нж
+                                  .circle-tag.back-color.yellow од
+                                  .circle-tag.back-color.blue му
+                            %tr
+                              / ячейка с "Что?", красит верхний бордер в более тёмный цвет этого блока
+                              %td.imperf-left-column.what-cell
+                                Что
+                              %td.imperf-right-column
+                                Нечем дышать
+                            %tr
+                              %td.imperf-left-column
+                                Где
+                              %td.imperf-right-column
+                                При большом числе людей в комнате
+                            %tr
+                              %td.imperf-left-column
+                                Когда
+                              %td.imperf-right-column
+                                Во время совещаний
+                            %tr
+                              / ячейка с "Что?", красит верхний бордер в более тёмный цвет этого блока
+                              %td.imperf-left-column.what-cell
+                                Что
+                              %td.imperf-right-column
+                                Нечем дышать и слишком низкие потолки
+                            %tr
+                              / ячейка с "Что?", красит верхний бордер в более тёмный цвет этого блока
+                              %td.imperf-left-column.what-cell
+                                Что
+                              %td.imperf-right-column
+                                Мало платят
+                            %tr
+                              %td.imperf-left-column
+                                .imperf-bottom-line
+                              %td.imperf-right-column
+                                .imperf-bottom-line
+                                  .info-stripe
+                                    %span.popup-date 31.дек. 2014
+                                    %span.popup-comments
+                                      +5
+                                      %i.fa.fa-comment-o
+                                    %span.popup-likes
+                                      +9
+                                      %i.fa.fa-thumbs-o-up
+                                    %span.popup-dislikes
+                                      +1
+                                      %i.fa.fa-thumbs-o-down
+                      .col-md-4
+                        .imperfection.imperf-pale-pink.lined-block.popup-link-1
+                          %table
+                            %tr
+                              %td.imperf-left-column.admin-notice
+                                %span.admin-notice-sign !
+                                .admin-notice-displayable
+                                  Замечание модератора
+                                  .close-admin-button
+                              %td.imperf-right-column
+                                .aspects-indexes
+                                  .circle-tag.back-color.orange нд
+                                  .circle-tag.back-color.light-blue нс
+                                  .circle-tag.back-color.green мл
+                                  .circle-tag.back-color.purple нж
+                                  .circle-tag.back-color.yellow од
+                                  .circle-tag.back-color.blue му
+                            %tr
+                              / ячейка с "Что?", красит верхний бордер в более тёмный цвет этого блока
+                              %td.imperf-left-column.what-cell
+                                Что
+                              %td.imperf-right-column
+                                Нечем дышать
+                            %tr
+                              %td.imperf-left-column
+                                Где
+                              %td.imperf-right-column
+                                При большом числе людей в комнате
+                            %tr
+                              %td.imperf-left-column
+                                Когда
+                              %td.imperf-right-column
+                                Во время совещаний
+                            %tr
+                              %td.imperf-left-column
+                                .imperf-bottom-line
+                              %td.imperf-right-column
+                                .imperf-bottom-line
+                                  .info-stripe
+                                    %span.popup-date 31.дек. 2014
+                                    %span.popup-comments
+                                      +5
+                                      %i.fa.fa-comment-o
+                                    %span.popup-likes
+                                      +9
+                                      %i.fa.fa-thumbs-o-up
+                                    %span.popup-dislikes
+                                      +1
+                                      %i.fa.fa-thumbs-o-down
+                        .imperfection.imperf-pale-blue.lined-block
+                          %table
+                            %tr
+                              %td.imperf-left-column
+                              %td.imperf-right-column
+                                .aspects-indexes
+                                  .circle-tag.back-color.orange нд
+                                  .circle-tag.back-color.purple нж
+                                  .circle-tag.back-color.yellow од
+                                  .circle-tag.back-color.blue му
+                            %tr
+                              / ячейка с "Что?", красит верхний бордер в более тёмный цвет этого блока
+                              %td.imperf-left-column.what-cell
+                                Что
+                              %td.imperf-right-column
+                                Нечем дышать и слишком низкие потолки
+                            %tr
+                              %td.imperf-left-column
+                                Где
+                              %td.imperf-right-column
+                                При большом числе людей в комнате
+                            %tr
+                              %td.imperf-left-column
+                                Когда
+                              %td.imperf-right-column
+                                Во время совещаний
+                            %tr
+                              %td.imperf-left-column
+                                .imperf-bottom-line
+                              %td.imperf-right-column
+                                .imperf-bottom-line
+                                  .info-stripe
+                                    %span.popup-date 31.дек. 2014
+                                    %span.popup-comments
+                                      +5
+                                      %i.fa.fa-comment-o
+                                    %span.popup-likes
+                                      +9
+                                      %i.fa.fa-thumbs-o-up
+                                    %span.popup-dislikes
+                                      +1
+                                      %i.fa.fa-thumbs-o-down
+                      .col-md-4
+                        .imperfection.imperf-pale-blue.lined-block
+                          %table
+                            %tr
+                              %td.imperf-left-column
+                              %td.imperf-right-column
+                                .aspects-indexes
+                                  .circle-tag.back-color.orange нд
+                                  .circle-tag.back-color.purple нж
+                                  .circle-tag.back-color.yellow од
+                                  .circle-tag.back-color.blue му
+                            %tr
+                              / ячейка с "Что?", красит верхний бордер в более тёмный цвет этого блока
+                              %td.imperf-left-column.what-cell
+                                Что
+                              %td.imperf-right-column
+                                Нечем дышать и слишком низкие потолки
+                            %tr
+                              %td.imperf-left-column
+                                Где
+                              %td.imperf-right-column
+                                При большом числе людей в комнате
+                            %tr
+                              %td.imperf-left-column
+                                Когда
+                              %td.imperf-right-column
+                                Во время совещаний
+                            %tr
+                              %td.imperf-left-column
+                                .imperf-bottom-line
+                              %td.imperf-right-column
+                                .imperf-bottom-line
+                                  .info-stripe
+                                    %span.popup-date 31.дек. 2014
+                                    %span.popup-comments
+                                      +5
+                                      %i.fa.fa-comment-o
+                                    %span.popup-likes
+                                      +9
+                                      %i.fa.fa-thumbs-o-up
+                                    %span.popup-dislikes
+                                      +1
+                                      %i.fa.fa-thumbs-o-down
+                        .imperfection.imperf-pale-pink.lined-block
+                          %table
+                            %tr
+                              %td.imperf-left-column
+                              %td.imperf-right-column
+                                .aspects-indexes
+                                  .circle-tag.back-color.yellow од
+                                  .circle-tag.back-color.blue му
+                            %tr
+                              / ячейка с "Что?", красит верхний бордер в более тёмный цвет этого блока
+                              %td.imperf-left-column.what-cell
+                                Что
+                              %td.imperf-right-column
+                                Нечем дышать
+                            %tr
+                              %td.imperf-left-column
+                                Где
+                              %td.imperf-right-column
+                                При большом числе людей в комнате
+                            %tr
+                              %td.imperf-left-column
+                                Когда
+                              %td.imperf-right-column
+                                Во время совещаний
+                            %tr
+                              %td.imperf-left-column
+                                .imperf-bottom-line
+                              %td.imperf-right-column
+                                .imperf-bottom-line
+                                  .info-stripe
+                                    %span.popup-date 31.дек. 2014
+                                    %span.popup-comments
+                                      +5
+                                      %i.fa.fa-comment-o
+                                    %span.popup-likes
+                                      +9
+                                      %i.fa.fa-thumbs-o-up
+                                    %span.popup-dislikes
+                                      +1
+                                      %i.fa.fa-thumbs-o-down
+                  #tab-five.tab-pane.fade
+                  #tab-six.tab-pane.fade
+      -#    / Aspects block (UI four) ends
+      -#    / Innovations' block ends
+      -#/ Main Block ends
+    / Outer Ends
+    / Scroll to top
+    %span.totop
+      %a{:href => "#"}
+        %i.fa.fa-angle-up.bg-color
+    / Javascript files
+    / jQuery
+    %script{:src => "js/jquery.js"}
+    / Bootstrap JS
+    %script{:src => "js/bootstrap.min.js"}
+    / Placeholders JS
+    %script{:src => "js/placeholders.js"}
+    / Magnific Popup
+    %script{:src => "js/jquery.magnific-popup.min.js"}
+    / Owl carousel
+    %script{:src => "js/owl.carousel.min.js"}
+    / Respond JS for IE8
+    %script{:src => "js/respond.min.js"}
+    / HTML5 Support for IE
+    %script{:src => "js/html5shiv.js"}
+    / Main JS
+    %script{:src => "js/main.js"}
+    / Javascript for this page
+    / Custom JS. Type your JS code in custom.js file
+    %script{:src => "js/custom.js"}
+    :javascript
+      $(function() {
+
+          setTimeout(function(){
+
+              $('.fill-limit').each(function() {
+                  var me = $(this);
+                  var perc = me.attr("data-limit");
+                  var current_perc = 10;
+
+                  if(!$(this).hasClass('stop')){
+
+                      var progress = setInterval(function() {
+
+                          if (current_perc>=perc) {
+                              clearInterval(progress);
+                          } else {
+                              current_perc +=1;
+                              me.parent().children().children('.filler').css('height', (current_perc/2)+'%');
+                              me.html(current_perc+'<span>%</span>');
+                          }
+
+                      }, 6);
+
+                      me.addClass('stop');
+                      me.parent().children().children('.filler').addClass('stop');
+
+                  }
+
+              });
+
+          }, 0);
+
+      });
+
+        

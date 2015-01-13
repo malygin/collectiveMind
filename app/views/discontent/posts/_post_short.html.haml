@@ -1,52 +1,106 @@
-.col-md-4.col-sm-4
-  .table-responsive
-    %table.table.table-bordered.green-discontent
+.col-md-4
+  .imperfection.lined-block
+    %table
       %tr
-        %th{:colspan => "2"}
-          .text-right
+        -if post_short.notes.present?
+          %td.imperf-left-column.admin-notice
+            %span.admin-notice-sign !
+            .admin-notice-displayable
+              Замечание модератора
+              .close-admin-button
+        -else
+          %td.imperf-left-column
+
+        %td.imperf-right-column
+          .aspects-indexes
             - post_short.post_aspects.each do |asp|
-              %span.label{style: "color:#ffffff;background:#{asp.color};border:1px solid #{asp.color};"}= asp.short_name.present? ? asp.short_name : asp.content[0,2].mb_chars.upcase
+              .circle-tag.back-color{style: "background-color:#{asp.color};"}= asp.short_name.present? ? asp.short_name : asp.content[0,2].mb_chars.downcase
+
       %tr
-        %td
-          %small Что:
-        %td
-          %strong
-            %big
-              =post_short.content
-          =content_for_note(post_short,field = 'what', link = boss? ? true : false)
+        %td.imperf-left-column.what-cell
+          Что
+        %td.imperf-right-column
+          =post_short.content
       %tr
-        %td
-          %small Где:
-        %td
+        %td.imperf-left-column
+          Где
+        %td.imperf-right-column
           =post_short.whered
-          =content_for_note(post_short, field = 'where', link = boss? ? true : false)
       %tr
-        %td
-          %small Когда:
-        %td
+        %td.imperf-left-column
+          Когда
+        %td.imperf-right-column
           =post_short.whend
-          =content_for_note(post_short, field = 'when', link = boss? ? true : false)
       %tr
-        %td{:colspan => "2"}
-          .text-right
-            %i
-              =Russian::strftime(post_short.created_at,'%d %B %k:%M:%S')
-              |
-              =post_short.number_views
-              %span.glyphicon.glyphicon-eye-open
-              |
+        %td.imperf-left-column
+          .imperf-bottom-line
+        %td.imperf-right-column
+          .imperf-bottom-line
+            .info-stripe
+              %span.popup-date=Russian::strftime(post_short.created_at,'%d %B %k:%M:%S')
               = link_to({controller: post_short.class.name.underscore.pluralize, action: :show, project: @project, id: post_short.id, :remote => true}) do
-                =post_short.comments.count
-                %strong (+5)
-                %i.fa.fa-comment-o
-              |
+                %span.popup-comments
+                  =post_short.comments.count
+                  %i.fa.fa-comment-o
               =link_to({:controller => post_short.class.name.underscore.pluralize ,:action => :plus, :project => @project, :id => post_short.id, :against => false,  :remote => true},:method => :put, id: "plus_post_#{post_short.id}") do
-                %span(id="plus_counter_#{post_short.id}")=post_short.users_pro.count
-                %i.fa.fa-thumbs-up
-              |
+                %span.popup-likes(id="plus_counter_#{post_short.id}")
+                  =post_short.users_pro.count
+                  %i.fa.fa-thumbs-o-up
               =link_to({:controller => post_short.class.name.underscore.pluralize ,:action => :plus, :project => @project,  :id => post_short.id, :against => true, :remote => true}, :method => :put, id: "minus_post_#{post_short.id}") do
-                %span(id="minus_counter_#{post_short.id}")=post_short.users_against.count
-                %i.fa.fa-thumbs-down
+                %span.popup-dislikes(id="minus_counter_#{post_short.id}")
+                  =post_short.users_against.count
+                  %i.fa.fa-thumbs-o-down
+
+
+
+  -#.table-responsive
+  -#  %table.table.table-bordered.green-discontent
+  -#    %tr
+  -#      %th{:colspan => "2"}
+  -#        .text-right
+  -#          - post_short.post_aspects.each do |asp|
+  -#            %span.label{style: "color:#ffffff;background:#{asp.color};border:1px solid #{asp.color};"}= asp.short_name.present? ? asp.short_name : asp.content[0,2].mb_chars.upcase
+  -#    %tr
+  -#      %td
+  -#        %small Что:
+  -#      %td
+  -#        %strong
+  -#          %big
+  -#            =post_short.content
+  -#        =content_for_note(post_short,field = 'what', link = boss? ? true : false)
+  -#    %tr
+  -#      %td
+  -#        %small Где:
+  -#      %td
+  -#        =post_short.whered
+  -#        =content_for_note(post_short, field = 'where', link = boss? ? true : false)
+  -#    %tr
+  -#      %td
+  -#        %small Когда:
+  -#      %td
+  -#        =post_short.whend
+  -#        =content_for_note(post_short, field = 'when', link = boss? ? true : false)
+  -#    %tr
+  -#      %td{:colspan => "2"}
+  -#        .text-right
+  -#          %i
+  -#            =Russian::strftime(post_short.created_at,'%d %B %k:%M:%S')
+  -#            |
+  -#            =post_short.number_views
+  -#            %span.glyphicon.glyphicon-eye-open
+  -#            |
+  -#            = link_to({controller: post_short.class.name.underscore.pluralize, action: :show, project: @project, id: post_short.id, :remote => true}) do
+  -#              =post_short.comments.count
+  -#              %strong (+5)
+  -#              %i.fa.fa-comment-o
+  -#            |
+  -#            =link_to({:controller => post_short.class.name.underscore.pluralize ,:action => :plus, :project => @project, :id => post_short.id, :against => false,  :remote => true},:method => :put, id: "plus_post_#{post_short.id}") do
+  -#              %span(id="plus_counter_#{post_short.id}")=post_short.users_pro.count
+  -#              %i.fa.fa-thumbs-up
+  -#            |
+  -#            =link_to({:controller => post_short.class.name.underscore.pluralize ,:action => :plus, :project => @project,  :id => post_short.id, :against => true, :remote => true}, :method => :put, id: "minus_post_#{post_short.id}") do
+  -#              %span(id="minus_counter_#{post_short.id}")=post_short.users_against.count
+  -#              %i.fa.fa-thumbs-down
 
 
 

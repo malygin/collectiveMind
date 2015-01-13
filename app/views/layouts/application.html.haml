@@ -15,7 +15,7 @@
 
   %body
     .outer
-      -if controller.instance_of? Concept::PostsController
+      -if controller.instance_of? Concept::PostsController or controller.instance_of? Discontent::PostsController
         =render partial: 'application/right_rollover', locals: {current_stage: current_stage_for_navbar(controller, params[:stage])}
       %header.top-bar
         .container
@@ -82,11 +82,12 @@
             = render partial: 'application/stages', locals: {current_stage: current_stage_for_navbar(controller, params[:stage])}
           .clearfix
           -if controller.instance_of? LifeTape::PostsController
+            .divider-grey
             .row.progress-bars
               =render partial: 'application/progress_bar', locals: {current_stage: current_stage_for_navbar(controller, params[:stage])}
-          .clearfix
-          .innov
-            = yield
+            .clearfix
+            .divider-grey
+          = yield
 
     -#.outer
     -#  .top-bar
