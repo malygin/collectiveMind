@@ -372,17 +372,6 @@ def validate_projects_links(projects, expect)
   end
 end
 
-def prepare_life_tape(project, user)
-  @aspect1 = FactoryGirl.create :discontent_aspect, project: project, content: 'aspect 1'
-  @aspect2 = FactoryGirl.create :discontent_aspect, project: project, content: 'aspect 2'
-  @post1 = FactoryGirl.create :life_tape_post, project: project
-  @post2 = FactoryGirl.create :life_tape_post, project: project
-  @aspect_post1 = ActiveRecord::Base.connection.execute("insert into discontent_aspects_life_tape_posts (discontent_aspect_id,life_tape_post_id) values (#{@aspect1.id},#{@post1.id})")
-  @aspect_post1 = ActiveRecord::Base.connection.execute("insert into discontent_aspects_life_tape_posts (discontent_aspect_id,life_tape_post_id) values (#{@aspect2.id},#{@post2.id})")
-  @comment1 = FactoryGirl.create :life_tape_comment, post: @post1, user: user, content: 'comment 1'
-end
-
-
 def prepare_journal(project, user)
   Journal.destroy_all
   @journal_today = FactoryGirl.create :journal, project: project, user: user, body: 'news_today', created_at: Time.zone.now.utc.to_date + 12.hours
