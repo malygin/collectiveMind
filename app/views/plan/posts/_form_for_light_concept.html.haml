@@ -77,81 +77,81 @@
           %span=" - #{t('form.concept.del_res_btn_desc')}"
         %br
   .row
-    .col-md-12
+    .col-md-12.section-resources{ data: { section: "positive" } }
       .form-group{id: "resources_positive_r", style: "line-height:20px;"}
         - if form_for_light_concept.persisted? and form_for_light_concept.plan_post_resources.by_type('positive_r').any?
           -form_for_light_concept.plan_post_resources.by_type('positive_r').each_with_index do |r,i|
-            %div.main_resources(id="main_positive_r_#{i+1}" position="#{i+1}")
+            %div.main_resources.main_res(id="main_positive_r_#{i+1}" data-position="#{i+1}")
               .col-md-8
-                = autocomplete_field_tag "resor[][name]",'', autocomplete_concept_post_resource_concept_posts_path, :"min-length" => 0,value: r.name,  class: 'form-control autocomplete',placeholder: t('form.concept.res_promt')
+                = autocomplete_field_tag "resor[][name]",'', autocomplete_concept_post_resource_concept_posts_path, :"min-length" => 0, value: r.name,  class: 'form-control autocomplete',placeholder: t('form.concept.res_promt')
                 %input{name: "resor[][type_res]", type: "hidden", value: "positive_r"}
               .col-md-4
                 .pull-right
-                  %button.btn.btn-info{type: "button", title: t('form.concept.add_desc_btn'), onclick:"$(this).parent().parent().parent().find('.desc_resource').show();", id: "desc_to_res"}
+                  %button.btn.btn-info{type: "button", title: t('form.concept.add_desc_btn'), class: "desc_to_res"}
                     %i.fa.fa-edit
-                  %button.btn.btn-success{type: "button", title: t('form.concept.add_mean_btn'),onclick:"return add_new_mean_to_resource(this,'positive_s',#{@project.id});", id: "plus_mean"}
+                  %button.btn.btn-success{type: "button", title: t('form.concept.add_mean_btn'), class: "plus_mean"}
                     %i.fa.fa-plus
-                  %button.btn.btn-danger{type: "button",title: t('form.concept.del_res_btn'), onclick: "$(this).parent().parent().parent().remove();", id: "destroy_res"}
+                  %button.btn.btn-danger{type: "button",title: t('form.concept.del_res_btn'), class: "destroy_res"}
                     %i.fa.fa-trash-o
               %br
               %br
-              %div.desc_resource(id="desc_positive_r_#{i+1}" position="#{i+1}")
+              %div.desc_resource(id="desc_positive_r_#{i+1}" data-position="#{i+1}")
                 = text_area_tag "resor[][desc]", r.desc, class: 'form-control', placeholder: t('form.concept.res_desc_promt')
                 %br
               %div.col-md-offset-1.col-md-11.means_to_resource(id="means_positive_s_#{i+1}")
                 -r.plan_post_resources.by_type('positive_s').each_with_index do |res,ind|
-                  %div.main_means(id="main_positive_s_#{i+1}" position="#{i+1}")
+                  %div.main_means.main_res(id="main_positive_s_#{i+1}" data-position="#{i+1}")
                     .col-md-8
-                      = autocomplete_field_tag "resor[][means][][name]",'', autocomplete_concept_post_mean_concept_posts_path, :"min-length" => 0, value: res.name, class: 'form-control autocomplete',placeholder: t('form.concept.res_promt')
+                      = autocomplete_field_tag "resor[][means][][name]",'', autocomplete_concept_post_mean_concept_posts_path, :"min-length" => 0, value: res.name, class: 'form-control autocomplete',placeholder: t('form.concept.mean_promt')
                       %input{name: "resor[][means][][type_res]", type: "hidden", value: "positive_s"}
                     .col-md-4
                       .pull-right
-                        %button.btn.btn-info{type: "button", title: t('form.concept.add_desc_btn'), onclick:"$(this).parent().parent().parent().find('.desc_mean').show();", id: "desc_to_res"}
+                        %button.btn.btn-info{type: "button", title: t('form.concept.add_desc_btn'), class: "desc_to_res"}
                           %i.fa.fa-edit
-                        %button.btn.btn-danger{type: "button",title: t('form.concept.del_res_btn'), onclick: "$(this).parent().parent().parent().remove();", id: "destroy_res"}
+                        %button.btn.btn-danger{type: "button",title: t('form.concept.del_mean_btn'), class: "destroy_res"}
                           %i.fa.fa-trash-o
                     %br
                     %br
-                    %div.desc_mean(id="desc_positive_s_#{i+1}" position="#{i+1}")
-                      = text_area_tag "resor[][means][][desc]", res.desc, class: 'form-control', placeholder: t('form.concept.res_desc_promt')
+                    %div.desc_resource(id="desc_positive_s_#{i+1}" data-position="#{i+1}")
+                      = text_area_tag "resor[][means][][desc]", res.desc, class: 'form-control', placeholder: t('form.concept.mean_desc_promt')
                       %br
 
         -else
-          %div.main_resources(id="main_positive_r_1" position="1")
+          %div.main_resources.main_res(id="main_positive_r_1" data-position="1")
             .col-md-8
               = autocomplete_field_tag "resor[][name]",'', autocomplete_concept_post_resource_concept_posts_path, :"min-length" => 0,  class: 'form-control autocomplete',placeholder: t('form.concept.res_promt')
               %input{name: "resor[][type_res]", type: "hidden", value: "positive_r"}
             .col-md-4
               .pull-right
-                %button.btn.btn-info{type: "button", title: t('form.concept.add_desc_btn'), onclick:"$(this).parent().parent().parent().find('.desc_resource').show();", id: "desc_to_res"}
+                %button.btn.btn-info{type: "button", title: t('form.concept.add_desc_btn'), class: "desc_to_res"}
                   %i.fa.fa-edit
-                %button.btn.btn-success{type: "button", title: t('form.concept.add_mean_btn'),onclick:"return add_new_mean_to_resource(this,'positive_s',#{@project.id});", id: "plus_mean"}
+                %button.btn.btn-success{type: "button", title: t('form.concept.add_mean_btn'), class: "plus_mean"}
                   %i.fa.fa-plus
-                %button.btn.btn-danger{type: "button",title: t('form.concept.del_res_btn'), onclick: "$(this).parent().parent().parent().remove();", id: "destroy_res"}
+                %button.btn.btn-danger{type: "button",title: t('form.concept.del_res_btn'), class: "destroy_res"}
                   %i.fa.fa-trash-o
             %br
             %br
-            %div.desc_resource(id="desc_positive_r_1" position="1" style="display:none;")
+            %div.desc_resource(id="desc_positive_r_1" data-position="1" style="display:none;")
               = text_area_tag "resor[][desc]", '', class: 'form-control', placeholder: t('form.concept.res_desc_promt')
               %br
             %div.col-md-offset-1.col-md-11.means_to_resource(id="means_positive_s_1")
-              %div.main_means(id="main_positive_s_1" position="1")
+              %div.main_means.main_res(id="main_positive_s_1" data-position="1")
                 .col-md-8
-                  = autocomplete_field_tag "resor[][means][][name]",'', autocomplete_concept_post_mean_concept_posts_path, :"min-length" => 0, class: 'form-control autocomplete', placeholder: t('form.concept.res_promt')
+                  = autocomplete_field_tag "resor[][means][][name]",'', autocomplete_concept_post_mean_concept_posts_path, :"min-length" => 0, class: 'form-control autocomplete', placeholder: t('form.concept.mean_promt')
                   %input{name: "resor[][means][][type_res]", type: "hidden", value: "positive_s"}
                 .col-md-4
                   .pull-right
-                    %button.btn.btn-info{type: "button", title: t('form.concept.add_desc_btn'), onclick:"$(this).parent().parent().parent().find('.desc_mean').show();", id: "desc_to_res"}
+                    %button.btn.btn-info{type: "button", title: t('form.concept.add_desc_btn'), class: "desc_to_res"}
                       %i.fa.fa-edit
-                    %button.btn.btn-danger{type: "button",title: t('form.concept.del_res_btn'), onclick: "$(this).parent().parent().parent().remove();", id: "destroy_res"}
+                    %button.btn.btn-danger{type: "button",title: t('form.concept.del_mean_btn'), class: "destroy_res"}
                       %i.fa.fa-trash-o
                 %br
                 %br
-                %div.desc_mean(id="desc_positive_s_1" position="1" style="display:none;")
-                  = text_area_tag "resor[][means][][desc]", '', class: 'form-control', placeholder: t('form.concept.res_desc_promt')
+                %div.desc_resource(id="desc_positive_s_1" data-position="1" style="display:none;")
+                  = text_area_tag "resor[][means][][desc]", '', class: 'form-control', placeholder: t('form.concept.mean_desc_promt')
                   %br
 
-      %a.btn.btn-warning.pull-left{onclick:"return add_new_resource_to_concept('positive_r','positive_s',#{@project.id});", id:"add_positive_r"}
+      %a.btn.btn-warning.pull-left{class: "plus_resource", id:"add_positive_r"}
         %i.fa.fa-plus
         =t('form.concept.add_res_btn')
 
@@ -207,81 +207,81 @@
 
 
   .row
-    .col-md-12
+    .col-md-12.section-resources{ data: { section: "negative" } }
       .form-group{id: "resources_negative_r", style: "line-height:20px;"}
         - if form_for_light_concept.persisted? and form_for_light_concept.plan_post_resources.by_type('negative_r').any?
           -form_for_light_concept.plan_post_resources.by_type('negative_r').each_with_index do |r,i|
-            %div.main_resources(id="main_negative_r_#{i+1}" position="#{i+1}")
+            %div.main_resources.main_res(id="main_negative_r_#{i+1}" data-position="#{i+1}")
               .col-md-8
                 = autocomplete_field_tag "resor[][name]",'', autocomplete_concept_post_resource_concept_posts_path, :"min-length" => 0,value: r.name,  class: 'form-control autocomplete',placeholder: t('form.concept.res_promt')
                 %input{name: "resor[][type_res]", type: "hidden", value: "negative_r"}
               .col-md-4
                 .pull-right
-                  %button.btn.btn-info{type: "button", title: t('form.concept.add_desc_btn'), onclick:"$(this).parent().parent().parent().find('.desc_resource').show();", id: "desc_to_res"}
+                  %button.btn.btn-info{type: "button", title: t('form.concept.add_desc_btn'), class: "desc_to_res"}
                     %i.fa.fa-edit
-                  %button.btn.btn-success{type: "button", title: t('form.concept.add_mean_btn'),onclick:"return add_new_mean_to_resource(this,'negative_s',#{@project.id});", id: "plus_mean"}
+                  %button.btn.btn-success{type: "button", title: t('form.concept.add_mean_btn'), class: "plus_mean"}
                     %i.fa.fa-plus
-                  %button.btn.btn-danger{type: "button",title: t('form.concept.del_res_btn'), onclick: "$(this).parent().parent().parent().remove();", id: "destroy_res"}
+                  %button.btn.btn-danger{type: "button",title: t('form.concept.del_res_btn'), class: "destroy_res"}
                     %i.fa.fa-trash-o
               %br
               %br
-              %div.desc_resource(id="desc_negative_r_#{i+1}" position="#{i+1}")
+              %div.desc_resource(id="desc_negative_r_#{i+1}" data-position="#{i+1}")
                 = text_area_tag "resor[][desc]", r.desc, class: 'form-control', placeholder: t('form.concept.res_desc_promt')
                 %br
               %div.col-md-offset-1.col-md-11.means_to_resource(id="means_negative_s_#{i+1}")
                 -r.plan_post_resources.by_type('negative_s').each_with_index do |res,ind|
-                  %div.main_means(id="main_negative_s_#{i+1}" position="#{i+1}")
+                  %div.main_means.main_res(id="main_negative_s_#{i+1}" data-position="#{i+1}")
                     .col-md-8
-                      = autocomplete_field_tag "resor[][means][][name]",'', autocomplete_concept_post_mean_concept_posts_path, :"min-length" => 0, value: res.name, class: 'form-control autocomplete',placeholder: t('form.concept.res_promt')
+                      = autocomplete_field_tag "resor[][means][][name]",'', autocomplete_concept_post_mean_concept_posts_path, :"min-length" => 0, value: res.name, class: 'form-control autocomplete',placeholder: t('form.concept.mean_promt')
                       %input{name: "resor[][means][][type_res]", type: "hidden", value: "negative_s"}
                     .col-md-4
                       .pull-right
-                        %button.btn.btn-info{type: "button", title: t('form.concept.add_desc_btn'), onclick:"$(this).parent().parent().parent().find('.desc_mean').show();", id: "desc_to_res"}
+                        %button.btn.btn-info{type: "button", title: t('form.concept.add_desc_btn'), class: "desc_to_res"}
                           %i.fa.fa-edit
-                        %button.btn.btn-danger{type: "button",title: t('form.concept.del_res_btn'), onclick: "$(this).parent().parent().parent().remove();", id: "destroy_res"}
+                        %button.btn.btn-danger{type: "button",title: t('form.concept.del_mean_btn'), class: "destroy_res"}
                           %i.fa.fa-trash-o
                     %br
                     %br
-                    %div.desc_mean(id="desc_negative_s_#{i+1}" position="#{i+1}")
-                      = text_area_tag "resor[][means][][desc]", res.desc, class: 'form-control', placeholder: t('form.concept.res_desc_promt')
+                    %div.desc_resource(id="desc_negative_s_#{i+1}" data-position="#{i+1}")
+                      = text_area_tag "resor[][means][][desc]", res.desc, class: 'form-control', placeholder: t('form.concept.mean_desc_promt')
                       %br
 
         -else
-          %div.main_resources(id="main_negative_r_1" position="1")
+          %div.main_resources.main_res(id="main_negative_r_1" data-position="1")
             .col-md-8
               = autocomplete_field_tag "resor[][name]",'', autocomplete_concept_post_resource_concept_posts_path, :"min-length" => 0,  class: 'form-control autocomplete',placeholder: t('form.concept.res_promt')
               %input{name: "resor[][type_res]", type: "hidden", value: "negative_r"}
             .col-md-4
               .pull-right
-                %button.btn.btn-info{type: "button", title: t('form.concept.add_desc_btn'), onclick:"$(this).parent().parent().parent().find('.desc_resource').show();", id: "desc_to_res"}
+                %button.btn.btn-info{type: "button", title: t('form.concept.add_desc_btn'), class: "desc_to_res"}
                   %i.fa.fa-edit
-                %button.btn.btn-success{type: "button", title: t('form.concept.add_mean_btn'),onclick:"return add_new_mean_to_resource(this,'negative_s',#{@project.id});", id: "plus_mean"}
+                %button.btn.btn-success{type: "button", title: t('form.concept.add_mean_btn'), class: "plus_mean"}
                   %i.fa.fa-plus
-                %button.btn.btn-danger{type: "button",title: t('form.concept.del_res_btn'), onclick: "$(this).parent().parent().parent().remove();", id: "destroy_res"}
+                %button.btn.btn-danger{type: "button",title: t('form.concept.del_res_btn'), class: "destroy_res"}
                   %i.fa.fa-trash-o
             %br
             %br
-            %div.desc_resource(id="desc_negative_r_1" position="1" style="display:none;")
+            %div.desc_resource(id="desc_negative_r_1" data-position="1" style="display:none;")
               = text_area_tag "resor[][desc]", '', class: 'form-control', placeholder: t('form.concept.res_desc_promt')
               %br
             %div.col-md-offset-1.col-md-11.means_to_resource(id="means_negative_s_1")
-              %div.main_means(id="main_negative_s_1" position="1")
+              %div.main_means.main_res(id="main_negative_s_1" data-position="1")
                 .col-md-8
-                  = autocomplete_field_tag "resor[][means][][name]",'', autocomplete_concept_post_mean_concept_posts_path, :"min-length" => 0, class: 'form-control autocomplete', placeholder: t('form.concept.res_promt')
+                  = autocomplete_field_tag "resor[][means][][name]",'', autocomplete_concept_post_mean_concept_posts_path, :"min-length" => 0, class: 'form-control autocomplete', placeholder: t('form.concept.mean_promt')
                   %input{name: "resor[][means][][type_res]", type: "hidden", value: "negative_s"}
                 .col-md-4
                   .pull-right
-                    %button.btn.btn-info{type: "button", title: t('form.concept.add_desc_btn'), onclick:"$(this).parent().parent().parent().find('.desc_mean').show();", id: "desc_to_res"}
+                    %button.btn.btn-info{type: "button", title: t('form.concept.add_desc_btn'), id: "desc_to_res"}
                       %i.fa.fa-edit
-                    %button.btn.btn-danger{type: "button",title: t('form.concept.del_res_btn'), onclick: "$(this).parent().parent().parent().remove();", id: "destroy_res"}
+                    %button.btn.btn-danger{type: "button",title: t('form.concept.del_mean_btn'), id: "destroy_res"}
                       %i.fa.fa-trash-o
                 %br
                 %br
-                %div.desc_mean(id="desc_negative_s_1" position="1" style="display:none;")
-                  = text_area_tag "resor[][means][][desc]", '', class: 'form-control', placeholder: t('form.concept.res_desc_promt')
+                %div.desc_resource(id="desc_negative_s_1" data-position="1" style="display:none;")
+                  = text_area_tag "resor[][means][][desc]", '', class: 'form-control', placeholder: t('form.concept.mean_desc_promt')
                   %br
 
-      %a.btn.btn-warning.pull-left{onclick:"return add_new_resource_to_concept('negative_r','negative_s',#{@project.id});", id:"add_negative_r"}
+      %a.btn.btn-warning.pull-left{class:"plus_resource", id:"add_negative_r"}
         %i.fa.fa-plus
         =t('form.concept.add_res_btn')
 
@@ -335,83 +335,83 @@
         %br
 
   .row
-    .col-md-12
+    .col-md-12.section-resources{ data: { section: "control" } }
       .form-group{id: "resources_control_r", style: "line-height:20px;"}
         - if form_for_light_concept.persisted? and form_for_light_concept.plan_post_resources.by_type('control_r').any?
           -form_for_light_concept.plan_post_resources.by_type('control_r').each_with_index do |r,i|
-            %div.main_resources(id="main_control_r_#{i+1}" position="#{i+1}")
+            %div.main_resources.main_res(id="main_control_r_#{i+1}" data-position="#{i+1}")
               .col-md-8
                 = autocomplete_field_tag "resor[][name]",'', autocomplete_concept_post_resource_concept_posts_path, :"min-length" => 0,value: r.name,  class: 'form-control autocomplete',placeholder: t('form.concept.res_promt')
                 %input{name: "resor[][type_res]", type: "hidden", value: "control_r"}
               .col-md-4
                 .pull-right
-                  %button.btn.btn-info{type: "button", title: t('form.concept.add_desc_btn'), onclick:"$(this).parent().parent().parent().find('.desc_resource').show();", id: "desc_to_res"}
+                  %button.btn.btn-info{type: "button", title: t('form.concept.add_desc_btn'),  class: "desc_to_res"}
                     %i.fa.fa-edit
-                  %button.btn.btn-success{type: "button", title: t('form.concept.add_mean_btn'),onclick:"return add_new_mean_to_resource(this,'control_s',#{@project.id});", id: "plus_mean"}
+                  %button.btn.btn-success{type: "button", title: t('form.concept.add_mean_btn'), class: "plus_mean"}
                     %i.fa.fa-plus
-                  %button.btn.btn-danger{type: "button",title: t('form.concept.del_res_btn'), onclick: "$(this).parent().parent().parent().remove();", id: "destroy_res"}
+                  %button.btn.btn-danger{type: "button",title: t('form.concept.del_res_btn'),  class: "destroy_res"}
                     %i.fa.fa-trash-o
               %br
               %br
-              %div.desc_resource(id="desc_control_r_#{i+1}" position="#{i+1}")
+              %div.desc_resource(id="desc_control_r_#{i+1}" data-position="#{i+1}")
                 = text_area_tag "resor[][desc]", r.desc, class: 'form-control', placeholder: t('form.concept.res_desc_promt')
                 %br
               %div.col-md-offset-1.col-md-11.means_to_resource(id="means_control_s_#{i+1}")
                 -r.plan_post_resources.by_type('control_s').each_with_index do |res,ind|
-                  %div.main_means(id="main_control_s_#{i+1}" position="#{i+1}")
+                  %div.main_means.main_res(id="main_control_s_#{i+1}" data-position="#{i+1}")
                     .col-md-8
-                      = autocomplete_field_tag "resor[][means][][name]",'', autocomplete_concept_post_mean_concept_posts_path, :"min-length" => 0, value: res.name, class: 'form-control autocomplete',placeholder: t('form.concept.res_promt')
+                      = autocomplete_field_tag "resor[][means][][name]",'', autocomplete_concept_post_mean_concept_posts_path, :"min-length" => 0, value: res.name, class: 'form-control autocomplete',placeholder: t('form.concept.mean_promt')
                       %input{name: "resor[][means][][type_res]", type: "hidden", value: "control_s"}
                     .col-md-4
                       .pull-right
-                        %button.btn.btn-info{type: "button", title: t('form.concept.add_desc_btn'), onclick:"$(this).parent().parent().parent().find('.desc_mean').show();", id: "desc_to_res"}
+                        %button.btn.btn-info{type: "button", title: t('form.concept.add_desc_btn'), class: "desc_to_res"}
                           %i.fa.fa-edit
-                        %button.btn.btn-danger{type: "button",title: t('form.concept.del_res_btn'), onclick: "$(this).parent().parent().parent().remove();", id: "destroy_res"}
+                        %button.btn.btn-danger{type: "button",title: t('form.concept.del_mean_btn'), class: "destroy_res"}
                           %i.fa.fa-trash-o
                     %br
                     %br
-                    %div.desc_mean(id="desc_control_s_#{i+1}" position="#{i+1}")
-                      = text_area_tag "resor[][means][][desc]", res.desc, class: 'form-control', placeholder: t('form.concept.res_desc_promt')
+                    %div.desc_resource(id="desc_control_s_#{i+1}" data-position="#{i+1}")
+                      = text_area_tag "resor[][means][][desc]", res.desc, class: 'form-control', placeholder: t('form.concept.mean_desc_promt')
                       %br
 
         -else
-          %div.main_resources(id="main_control_r_1" position="1")
+          %div.main_resources.main_res(id="main_control_r_1" data-position="1")
             .col-md-8
               = autocomplete_field_tag "resor[][name]",'', autocomplete_concept_post_resource_concept_posts_path, :"min-length" => 0,  class: 'form-control autocomplete',placeholder: t('form.concept.res_promt')
               %input{name: "resor[][type_res]", type: "hidden", value: "control_r"}
             .col-md-4
               .pull-right
-                %button.btn.btn-info{type: "button", title: t('form.concept.add_desc_btn'), onclick:"$(this).parent().parent().parent().find('.desc_resource').show();", id: "desc_to_res"}
+                %button.btn.btn-info{type: "button", title: t('form.concept.add_desc_btn'),  class: "desc_to_res"}
                   %i.fa.fa-edit
-                %button.btn.btn-success{type: "button", title: t('form.concept.add_mean_btn'),onclick:"return add_new_mean_to_resource(this,'control_s',#{@project.id});", id: "plus_mean"}
+                %button.btn.btn-success{type: "button", title: t('form.concept.add_mean_btn'), class: "plus_mean"}
                   %i.fa.fa-plus
-                %button.btn.btn-danger{type: "button",title: t('form.concept.del_res_btn'), onclick: "$(this).parent().parent().parent().remove();", id: "destroy_res"}
+                %button.btn.btn-danger{type: "button",title: t('form.concept.del_res_btn'), class: "destroy_res"}
                   %i.fa.fa-trash-o
 
             %br
             %br
-            %div.desc_resource(id="desc_control_r_1" position="1" style="display:none;")
+            %div.desc_resource(id="desc_control_r_1" data-position="1" style="display:none;")
               = text_area_tag "resor[][desc]", '', class: 'form-control', placeholder: t('form.concept.res_desc_promt')
               %br
             %div.col-md-offset-1.col-md-11.means_to_resource(id="means_control_s_1")
-              %div.main_means(id="main_control_s_1" position="1")
+              %div.main_means.main_res(id="main_control_s_1" data-position="1")
                 .col-md-8
-                  = autocomplete_field_tag "resor[][means][][name]",'', autocomplete_concept_post_mean_concept_posts_path, :"min-length" => 0, class: 'form-control autocomplete', placeholder: t('form.concept.res_promt')
+                  = autocomplete_field_tag "resor[][means][][name]",'', autocomplete_concept_post_mean_concept_posts_path, :"min-length" => 0, class: 'form-control autocomplete', placeholder: t('form.concept.mean_promt')
                   %input{name: "resor[][means][][type_res]", type: "hidden", value: "control_s"}
                 .col-md-4
                   .pull-right
-                    %button.btn.btn-info{type: "button", title: t('form.concept.add_desc_btn'), onclick:"$(this).parent().parent().parent().find('.desc_mean').show();", id: "desc_to_res"}
+                    %button.btn.btn-info{type: "button", title: t('form.concept.add_desc_btn'), class: "desc_to_res"}
                       %i.fa.fa-edit
-                    %button.btn.btn-danger{type: "button",title: t('form.concept.del_res_btn'), onclick: "$(this).parent().parent().parent().remove();", id: "destroy_res"}
+                    %button.btn.btn-danger{type: "button",title: t('form.concept.del_mean_btn'), class: "destroy_res"}
                       %i.fa.fa-trash-o
 
                 %br
                 %br
-                %div.desc_mean(id="desc_control_s_1" position="1" style="display:none;")
-                  = text_area_tag "resor[][means][][desc]", '', class: 'form-control', placeholder: t('form.concept.res_desc_promt')
+                %div.desc_resource(id="desc_control_s_1" data-position="1" style="display:none;")
+                  = text_area_tag "resor[][means][][desc]", '', class: 'form-control', placeholder: t('form.concept.mean_desc_promt')
                   %br
 
-      %a.btn.btn-warning.pull-left{onclick:"return add_new_resource_to_concept('control_r','control_s',#{@project.id});", id:"add_control_r"}
+      %a.btn.btn-warning.pull-left{class:"plus_resource", id:"add_control_r"}
         %i.fa.fa-plus
         =t('form.concept.add_res_btn')
 

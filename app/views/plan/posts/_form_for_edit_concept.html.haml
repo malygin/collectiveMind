@@ -14,7 +14,8 @@
             %br
           .color-teal=@post_stage.name
       .modal-body
-        =render partial: 'form_for_light_concept', object: form_for_edit_concept
+        #form_for_concept
+          =render partial: 'form_for_light_concept', object: form_for_edit_concept
         %br
         .text-success#concept_success(style='display:none;')
           =t('form.plan.concept.update_success')
