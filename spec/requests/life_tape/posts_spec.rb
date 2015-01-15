@@ -2,27 +2,32 @@ require 'spec_helper'
 
 describe 'Life Tape ' do
   subject { page }
-  # screenshot_and_open_image
-  # save_and_open_page
+
   let (:user) { create :user }
   let (:user_data) { create :user }
   let (:prime_admin) { create :prime_admin }
   let (:moderator) { create :moderator }
   let (:project) { create :core_project, status: 1 }
-  let (:closed_project) { create :core_project, status: 1, type_access: 2, name: "closed project" }
 
   before do
     @post1 = create :life_tape_post, project: project
     @post2 = create :life_tape_post, project: project
     @aspect1 = @post1.aspect
     @aspect2 = @post2.aspect
-    @comment1 = create :life_tape_comment, post: @post1, user: user, content: 'comment 1'
+    @comment1 = create :life_tape_comment, post: @post1, user: user
   end
 
   context 'ordinary user sign in ' do
     before do
       sign_in user
-      visit root_path
+    end
+
+    context 'life tape list ' do
+      before do
+        visit life_tape_posts_path(project)
+      end
+
+      it_behaves_like 'content with comments'
     end
 
     context 'success go to project ' do
@@ -43,15 +48,6 @@ describe 'Life Tape ' do
         validation_visit_links_for_user(project, user)
         validation_visit_not_have_links_for_user(project, user)
       end
-    end
-
-    context 'life tape list ' do
-      before do
-        visit life_tape_posts_path(project)
-      end
-
-      it_behaves_like 'content with comments', false, 2
-
     end
 
     context 'vote life tape ' do
@@ -116,7 +112,7 @@ describe 'Life Tape ' do
         expect(page).to have_content @aspect2.content
       end
 
-      it_behaves_like 'content with comments', true, 2
+      it_behaves_like 'content with comments', 2, true
 
     end
     context 'vote life tape ' do
