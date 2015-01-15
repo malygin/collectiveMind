@@ -1,5 +1,5 @@
-%div.col-md-4{id: "discontent_post_#{post_short.id}"}
-  .imperfection.lined-block
+%div.col-md-4.discontent-block{id: "discontent_post_#{post_short.id}", class: "#{post_aspect_classes(post_short)}"}
+  .imperfection.lined-block{class: "#{post_short.style == 1 ? 'imperf-pale-pink' : 'imperf-pale-blue'}"}
     %table
       %tr
         -if post_short.notes.present?

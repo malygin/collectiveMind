@@ -35,34 +35,37 @@
             =simple_format(@post.post_aspects.first.name)
         .col-sm-12
           .question-stripe
-            Чем ваше нововведение улучшит текущую ситуацию и почему?
+            =t('form.concept.novation_how')
           .answer-stripe
-            На новом портале будет приятно работать
+            =simple_format(@post.post_aspects.first.content)
         .col-sm-12
           .question-stripe
-            Чем ваше нововведение улучшит текущую ситуацию и почему?
+            =t('form.concept.cond')
           .answer-stripe
-            Новый портал удобен и прекрасно сделан с точки зрения дизайна, и участникам не только полезно, но и приятно проводить на нём время
+            =simple_format(@post.post_aspects.first.positive)
         .col-sm-12
           .question-stripe
-            Какие ресурсы потребуются в будущем для работы нововведения?
+            =t('form.concept.cond_res')
           .answer-stripe
-            %span.rounded-N-mark 1
-            %span.text-after-mark Олег и Андрей для концептуализации видения, вся команда для брейнсторминга по разработанному видению, дизайнеры и программисты
+            - @post.concept_post_resources.by_type('positive_r').each_with_index  do |r, index|
+              %span.rounded-N-mark=index+1
+              %span.text-after-mark=r.name
+              %br
         .col-sm-12
           .question-stripe
-            Какие нежелательные эффекты могут возникнуть в будущем в связи с поддержанием условий и решением задач?
+            =t('form.concept.negative')
           .answer-stripe
-            Мы можем вложить в создание нового портала массу времени и денег, а участникам все равно будет неудобно на нем работать
+            =simple_format(@post.post_aspects.first.negative)
         .col-sm-12
           .question-stripe
-            Какие ресурсы потребуются в будущем для работы нововведения?
+            =t('form.concept.negative_res')
           .answer-stripe
-            %span.rounded-N-mark 1
-            %span.text-after-mark Постоянные обсуждения и проверки предлагаемых идей
+            - @post.concept_post_resources.by_type('negative_r').each_with_index  do |r, index|
+              %span.rounded-N-mark=index+1
+              %span.text-after-mark=r.name
+              %br
   .popup.popup-bottom-rounded.popup-top-rounded
     #comment-tabs.nav-tabs-one
-      / Nav tabs
       %ul.nav.navig-tabs
         %li.active
           %a{"data-toggle" => "tab", :href => "#tab-1"} Ваш комментарий
@@ -70,31 +73,25 @@
           %a{"data-toggle" => "tab", :href => "#tab-2"} Все комментарии
         %li
           %a{"data-toggle" => "tab", :href => "#tab-3"} Советы
-      / Tab content
       .tab-content
         #tab-1.tab-pane.fade.in.active
-          .comment
-            %img.comment-ava{:src => "img/no-ava.png"}/
-            .comment-name Лиза Школьник
-            .comment-text текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст
+          -@post.comments.where(user: current_user.id).each  do |comment|
+            .comment
+              = image_tag comment.user.avatar.url(:thumb), class: "comment-ava"
+              .comment-name= comment.user.to_s
+              .comment-text= comment.content
         #tab-2.tab-pane.fade
-          .comment
-            %img.comment-ava{:src => "img/no-ava.png"}/
-            .comment-name Лиза Школьник
-            .comment-text текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст
-          .comment
-            %img.comment-ava{:src => "img/no-ava.png"}/
-            .comment-name Лиза Школьник
-            .comment-text текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст
-          .comment
-            %img.comment-ava{:src => "img/no-ava.png"}/
-            .comment-name Лиза Школьник
-            .comment-text текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст
+          -@comments.each  do |comment|
+            .comment
+              = image_tag comment.user.avatar.url(:thumb), class: "comment-ava"
+              .comment-name= comment.user.to_s
+              .comment-text= comment.content
         #tab-3.tab-pane.fade
-          .comment
-            %img.comment-ava{:src => "img/no-ava.png"}/
-            .comment-name Лиза Школьник
-            .comment-text текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст
+          - (@post.advices.approve + current_user.advices_for(@post).unapproved + current_user.advices_for(@post).disapproved).each do |advice|
+            .comment
+              = image_tag advice.user.avatar.url(:thumb), class: "comment-ava"
+              .comment-name= advice.user.to_s
+              .comment-text= simple_format(advice.content)
 
 
 

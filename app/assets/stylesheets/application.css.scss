@@ -19,7 +19,7 @@
 //@import 'style';
 //@import 'skin-lblue';
 //@import 'custom';
-//@import 'custom-ts';
+@import 'custom-ts';
 @import 'custom_12';
 
 //@import url(../lib/nvd3/src/nv.d3.css);
@@ -100,7 +100,11 @@
 //
 //
 ///*todo my styles top*/
-//
+
+.select_aspect{
+  background-color: gray;
+}
+
 //textarea.concept_cond {
 //  max-height: 200px !important;
 //}

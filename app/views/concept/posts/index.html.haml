@@ -7,9 +7,9 @@
     -#  %a.btn.btn-warning.pull-right(href="/project/#{@project.id}/concept/posts/new#{@aspect ? "?asp_id=#{@aspect.id}" : ''}" style="font-weight: normal !important;" id="new_concept")
     -#    =t('show.concept.add_concept')
   .container
-    .row.innovs
+    .row.innovs#tab_concept_posts
       - @project.concept_ongoing_post.order("concept_posts.id").each_with_index  do |pa, index1|
-        .col-lg-6.box-shadow-outer
+        .col-lg-6.box-shadow-outer.concept-block{id: "concept_post_#{pa.id}", class: "#{post_discontent_classes(pa)}"}
           .innov-single.box-shadow-1.rounded-3
             .row.post-header
               .col-xs-10
@@ -37,108 +37,6 @@
                   %a.tag-stripe{id: "stripe#{index2+1}", class: "#{'active' if index2 == 0} color-N#{index2+1}", :href => "#"}
                     %span.tag=trim_content(cd.content, 50)
 
-  - @project.concept_ongoing_post.order("concept_posts.id").each_with_index  do |pa, index1|
-    .popup-wrapper{id: "popup-#{index1+1}"}
-      .close-btn
-        %i.fa.fa-times
-      #win1.popup-box.box-shadow-1.rounded-3
-        .popup
-          .popup-header
-            %h2.color.mass-red=trim_content(pa.post_aspects.first.title)
-          .row.popup-post-info
-            .col-lg-6.popup-post-block
-              = image_tag pa.user.avatar.url(:thumb)
-              %span= pa.user.to_s
-              .info-stripe
-                %span.popup-date= Russian::strftime(pa.created_at,"%d.%m.%Y")
-                %span.popup-comments
-                  +5
-                  %i.fa.fa-comment-o
-                %span.popup-likes
-                  +9
-                  %i.fa.fa-thumbs-o-up
-                %span.popup-dislikes
-                  +1
-                  %i.fa.fa-thumbs-o-down
-            .col-lg-6.popup-tags
-              %span.popup-tag.color-N1
-                Низкие потолки и нечем дышать в офисах
-              %span.popup-tag.color-N2
-                Низкие старые потолки и нечем дышать в офисах
-              %span.popup-tag.color-N3
-                Низкие потолки
-              %span.popup-tag.color-N4
-                Низкие потолки и нечем дышать
-          .container.popup-post-questions
-            .row
-              .col-sm-12
-                .question-stripe
-                  Что новое появится в будущем, чтобы исправить несовершенство?
-                .answer-stripe
-                  Новый, удобный и современный портал
-              .col-sm-12
-                .question-stripe
-                  Чем ваше нововведение улучшит текущую ситуацию и почему?
-                .answer-stripe
-                  На новом портале будет приятно работать
-              .col-sm-12
-                .question-stripe
-                  Чем ваше нововведение улучшит текущую ситуацию и почему?
-                .answer-stripe
-                  Новый портал удобен и прекрасно сделан с точки зрения дизайна, и участникам не только полезно, но и приятно проводить на нём время
-              .col-sm-12
-                .question-stripe
-                  Какие ресурсы потребуются в будущем для работы нововведения?
-                .answer-stripe
-                  %span.rounded-N-mark 1
-                  %span.text-after-mark Олег и Андрей для концептуализации видения, вся команда для брейнсторминга по разработанному видению, дизайнеры и программисты
-              .col-sm-12
-                .question-stripe
-                  Какие нежелательные эффекты могут возникнуть в будущем в связи с поддержанием условий и решением задач?
-                .answer-stripe
-                  Мы можем вложить в создание нового портала массу времени и денег, а участникам все равно будет неудобно на нем работать
-              .col-sm-12
-                .question-stripe
-                  Какие ресурсы потребуются в будущем для работы нововведения?
-                .answer-stripe
-                  %span.rounded-N-mark 1
-                  %span.text-after-mark Постоянные обсуждения и проверки предлагаемых идей
-      #win2.popup-box.box-shadow-1.rounded-3
-        .popup
-          #comment-tabs.nav-tabs-one
-            / Nav tabs
-            %ul.nav.navig-tabs
-              %li.active
-                %a{"data-toggle" => "tab", :href => "#tab-1"} Ваш комментарий
-              %li
-                %a{"data-toggle" => "tab", :href => "#tab-2"} Все комментарии
-              %li
-                %a{"data-toggle" => "tab", :href => "#tab-3"} Советы
-            / Tab content
-            .tab-content
-              #tab-1.tab-pane.fade.in.active
-                .comment
-                  = image_tag pa.user.avatar.url(:thumb), class: "comment-ava"
-                  .comment-name Лиза Школьник
-                  .comment-text текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст
-              #tab-2.tab-pane.fade
-                .comment
-                  = image_tag pa.user.avatar.url(:thumb), class: "comment-ava"
-                  .comment-name Лиза Школьник
-                  .comment-text текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст
-                .comment
-                  = image_tag pa.user.avatar.url(:thumb), class: "comment-ava"
-                  .comment-name Лиза Школьник
-                  .comment-text текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст
-                .comment
-                  = image_tag pa.user.avatar.url(:thumb), class: "comment-ava"
-                  .comment-name Лиза Школьник
-                  .comment-text текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст
-              #tab-3.tab-pane.fade
-                .comment
-                  = image_tag pa.user.avatar.url(:thumb), class: "comment-ava"
-                  .comment-name Лиза Школьник
-                  .comment-text текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст
 
 
 #render_concept_post
