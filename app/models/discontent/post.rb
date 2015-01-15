@@ -26,11 +26,6 @@ class Discontent::Post < ActiveRecord::Base
   has_many :concept_post_discontent_grouped, -> { where concept_post_discontents: {status: [1]} }, class_name: 'Concept::PostDiscontent', foreign_key: 'discontent_post_id'
   has_many :advices, class_name: 'Advice', as: :adviseable
 
-  # validates :content, presence: true
-  # validates :whend, presence: true
-  # validates :whered, presence: true
-  validates_presence_of :content, :whend, :whered #,  :discontent_post_aspects
-
   scope :by_project, ->(p) { where(project_id: p) }
   scope :by_project_and_not_anonym, ->(p) { where(project_id: p, anonym: false) }
   scope :by_status, ->(p) { where(status: p) }
@@ -76,6 +71,8 @@ class Discontent::Post < ActiveRecord::Base
   scope :sort_user, -> sort_user { sort_user == "up" ? order('discontent_posts.user_id DESC') : order('discontent_posts.user_id ASC') if sort_user.present? }
   # scope :sort_comment, -> sort_comment { sort_comment == "up" ? includes(:comments).group('"discontent_posts"."id"').references(:comments).select('count("discontent_comments"."id")').order('count("discontent_comments"."id") DESC NULLS LAST') : includes(:comments).group('"discontent_posts"."id"').references(:comments).select('count("discontent_comments"."id") as count').order('count("discontent_comments"."id") ASC NULLS LAST') if sort_comment.present? }
   scope :sort_view, -> sort_view { sort_view == "up" ? order('discontent_posts.number_views DESC') : order('discontent_posts.number_views ASC') if sort_view.present? }
+
+  validates :content, :whend, :whered, :user_id, :project_id, presence: true
 
   def complite(concept)
     post = self.concept_post_discontents.by_concept(concept.id).first

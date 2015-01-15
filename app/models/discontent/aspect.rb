@@ -42,6 +42,8 @@ class Discontent::Aspect < ActiveRecord::Base
         end
       }
 
+  validates :project_id, presence: true
+
   def life_tape_post
     self.life_tape_posts.first
   end
