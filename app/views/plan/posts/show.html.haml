@@ -34,12 +34,16 @@
                 =@post.name
               %br
               .text-left
-                %h4.color-green=t('form.plan.short_desc')
-                =@post.goal
+                %h4.color-green
+                  =t('form.plan.short_desc')+":"
+                  %small(style="font-size: 11px;") 1) Цель: какую выгоду даст  проект? Зачем это нужно его реализаторам? 2) Методы, средства и другие ресурсы: как, при помощи чего эта выгода будет получаться?
+                =simple_format(@post.goal)
               %br
               .text-left
-                %h4.color-green=t('form.plan.essay')
-                =@post.content
+                %h4.color-green
+                  =t('form.plan.essay')
+                  %small(style="font-size: 11px;")= t('form.plan.desc_future')
+                =simple_format(@post.content)
 
             .col-md-6
               %legend.section
