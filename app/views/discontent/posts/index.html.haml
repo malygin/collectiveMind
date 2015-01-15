@@ -9,7 +9,9 @@
         = image_tag 'img/sort-date.jpg'
       %span.sort-item
         = image_tag 'img/sort-rate.jpg'
-      %span.sort-item ВСЕ
+      -#
+      -#=link_to({action: :sort_content, project: @project, asp: params[:asp], sort_default: true, type_like: params[:type_like], type_note: params[:type_note], type_verify: params[:type_verify], type_status: params[:type_status]}, remote: true, id: 'sort_default_link') do
+      -#  %span.sort-item ВСЕ
     %div
       %ul.nav.nav-tabs.second-stage.ui-29.tabs-discontents
         -@project.aspects.main_aspects.order("discontent_aspects.id").each_with_index do |asp, index|
