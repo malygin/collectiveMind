@@ -404,17 +404,6 @@ def prepare_awards
   FactoryGirl.create :award, name: "3000 рейтинга и более", url: "3000points", position: 22
 end
 
-def prepare_discontents(project, user)
-  #@todo нужны ассоциации, чтобы сперва создать аспект, потом дисконтент со связью
-  @aspect1 = FactoryGirl.create :aspect, project: project, content: 'aspect 1'
-  @aspect2 = FactoryGirl.create :aspect, project: project, content: 'aspect 2'
-  @discontent1 = FactoryGirl.create :discontent, project: project, user: user, anonym: false, content: 'discontent 1', whend: 'when 1', whered: 'where 1'
-  @discontent2 = FactoryGirl.create :discontent, project: project, user: user, anonym: false, content: 'discontent 2', whend: 'when 2', whered: 'where 2'
-  @disasp1 = FactoryGirl.create :discontent_post_aspect, post_id: @discontent1.id, aspect_id: @aspect1.id
-  @disasp1 = FactoryGirl.create :discontent_post_aspect, post_id: @discontent2.id, aspect_id: @aspect1.id
-  @comment1 = FactoryGirl.create :discontent_comment, post: @discontent1, user: user, content: 'comment 1'
-end
-
 def prepare_for_vote_discontents(project)
   @discontent_group1 = FactoryGirl.create :discontent, project: project, status: 2, content: 'discontent group 1', whend: 'when group 1', whered: 'where group 1'
 end
