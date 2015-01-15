@@ -2,6 +2,7 @@ FactoryGirl.define do
   factory :concept, class: 'Concept::Post' do
     status 0
   end
+
   factory :concept_aspect, class: 'Concept::PostAspect' do
     sequence(:positive) { |n| "positive #{n}" }
     sequence(:negative) { |n| "negative #{n}" }
@@ -15,7 +16,8 @@ FactoryGirl.define do
 
   factory :concept_post_discontent, class: 'Concept::PostDiscontent' do
   end
+
   factory :concept_comment, class: 'Concept::Comment' do
-    content "concept comment for post"
+    sequence(:content) { |n| "concept comment #{n}" }
   end
 end
