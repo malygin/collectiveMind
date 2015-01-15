@@ -10,7 +10,10 @@ describe 'Plan ' do
   let (:moderator) {create :moderator }
 
   before do
-    prepare_plans(project, user)
+    @plan1 = create :plan, project: project, user: user
+    @plan_stage1 = create :plan_stage, post_id: @plan1.id
+    @plan_aspect1 = create :plan_aspect, plan_post_id: @plan1.id, post_stage_id: @plan_stage1.id
+    @plan_action1 = create :plan_action, plan_post_aspect_id: @plan_aspect1.id
   end
 
   context 'ordinary user sign in ' do
@@ -132,7 +135,7 @@ describe 'Plan ' do
 
       it 'can see edit action modal', js: true do
         find("li#second a").click
-        expect(page).to have_content 'Этап 1. stage name 1'
+        expect(page).to have_content "Этап 1. #{@plan_stage1.name}"
         find("#edit_post_action_#{@plan_action1.id}").click
         expect(page).to have_content 'Добавление мероприятия к нововведению:'
         fill_in 'name_stage', with: 'new name stage'
@@ -159,7 +162,7 @@ describe 'Plan ' do
 
       it 'can see edit link action add modal', js: true do
         find("li#third a").click
-        expect(page).to have_content 'Этап 1. stage name 1'
+        expect(page).to have_content "Этап 1. #{@plan_stage1.name}"
         find("#li_concept_#{@plan_aspect1.id} a").click
         expect(page).to have_content @plan_aspect1.name
         expect(page).to have_content @plan_aspect1.content
@@ -292,7 +295,7 @@ describe 'Plan ' do
 
       it 'can see edit action modal', js: true do
         find("li#second a").click
-        expect(page).to have_content 'Этап 1. stage name 1'
+        expect(page).to have_content "Этап 1. #{@plan_stage1.name}"
         find("#edit_post_action_#{@plan_action1.id}").click
         expect(page).to have_content 'Добавление мероприятия к нововведению:'
         fill_in 'name_stage', with: 'new name stage'
