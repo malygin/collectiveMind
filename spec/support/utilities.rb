@@ -409,20 +409,17 @@ def prepare_for_vote_discontents(project)
 end
 
 def prepare_concepts(project, user)
-  @aspect1 = create :aspect, project: project, content: 'aspect 1'
-  @aspect2 = create :aspect, project: project, content: 'aspect 2'
-  @discontent1 = create :discontent, project: project, status: 4, content: 'discontent 1', whend: 'when 1', whered: 'where 1'
-  @discontent2 = create :discontent, project: project, status: 4, content: 'discontent 2', whend: 'when 2', whered: 'where 2'
-  @disasp1 = create :discontent_post_aspect, post_id: @discontent1.id, aspect_id: @aspect1.id
-  @disasp1 = create :discontent_post_aspect, post_id: @discontent2.id, aspect_id: @aspect1.id
-
+  @discontent1 = create :discontent, project: project, status: 4
+  @discontent2 = create :discontent, project: project, status: 4
   @concept1 = create :concept, user: user, project: project
   @concept2 = create :concept, user: user, project: project
+  @comment1 = create :concept_comment, post: @concept1, user: user
+
+  # @todo move to factory
   @concept_aspect1 = create :concept_aspect, discontent_aspect_id: @discontent1.id, concept_post_id: @concept1.id
   @concept_aspect2 = create :concept_aspect, discontent_aspect_id: @discontent1.id, concept_post_id: @concept2.id
   @condis1 = create :concept_post_discontent, post_id: @concept1.id, discontent_post_id: @discontent1.id
   @condis2 = create :concept_post_discontent, post_id: @concept2.id, discontent_post_id: @discontent1.id
-  @comment1 = create :concept_comment, post: @concept1, user: user, content: 'comment 1'
 end
 
 def prepare_estimates(project, user)
