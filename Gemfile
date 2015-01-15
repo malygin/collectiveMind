@@ -16,7 +16,7 @@ end
 
 group :development do
   gem 'spring'
-  gem 'html2haml', '1.0.0'
+  gem 'html2haml' #, '1.0.0'
   gem 'rubocop'
   gem 'ruby-prof'
   gem 'rspec-prof'

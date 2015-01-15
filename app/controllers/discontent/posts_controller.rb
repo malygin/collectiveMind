@@ -57,7 +57,13 @@ class Discontent::PostsController < PostsController
     if params[:improve_stage]
       @comment = get_comment_for_stage(params[:improve_stage], params[:improve_comment]) unless params[:improve_comment].nil?
     end
+
     @post.content = @comment.content if @comment
+    @aspects = Discontent::Aspect.where(project_id: @project, status: 0)
+    respond_to do |format|
+      format.html
+      format.js
+    end
   end
 
   def edit
@@ -79,7 +85,7 @@ class Discontent::PostsController < PostsController
 
   def create
     #@aspects = Discontent::Aspect.where(project_id: @project, status: 0)
-    @post = @project.discontents.build(params[name_of_model_for_param])
+    @post = @project.discontents.build(discontent_post_params)
     @post.user = current_user
     @post.improve_comment = params[:improve_comment] if params[:improve_comment]
     @post.improve_stage = params[:improve_stage] if params[:improve_stage]
@@ -272,6 +278,10 @@ class Discontent::PostsController < PostsController
   end
 
   private
+  def discontent_post_params
+    params.require(:discontent_post).permit(:content, :whend, :whered, :style)
+  end
+
   def filtering_params(params)
     params.slice(:type_like, :type_note, :type_verify, :type_status)
   end

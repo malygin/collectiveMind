@@ -1,24 +1,33 @@
 - if @post.errors.any?
   $("#notice_messages").html('#{escape_javascript(render partial: 'shared/notice_messages', locals: {object:@post})}');
-  window.scrollTo(0,0)
+  window.scrollTo(0,0);
 - else
-  $("#notice_messages").html('')
-  $('#render_success_discontent').empty();
-  $("#render_success_discontent").html('#{escape_javascript(render partial: 'modal_post_save')}');
-  $('#modal_save_discontent').modal('show');
-  $("#discontent_warning").fadeOut();
-  $('#send_post').toggleClass('disabled');
-  $('#discontent_post_content').val('');
-  $('#discontent_post_whered').val('');
-  $('#discontent_post_whend').val('');
-  $('#new_discontent_hidden').remove();
+  $('#modal_discontent_form').modal('hide');
+  $("#{escape_javascript(render partial: 'post_short', object: @post )}").insertBefore("div[id^='tab_aspect_'].active.in div[id^='tab_aspect_posts_'] > div:first");
+  $("#discontent_post_#{@post.id}").effect("highlight",{color: '#f5cecd'}, 3000);
 
-  sel_aspect = $('#add_post_aspects').find('span.span_aspect');
-  for (i=0; i<sel_aspect.length; i++) {
-  var value = sel_aspect[i].id;
-  var text = sel_aspect[i].textContent;
-  $('#select_for_aspects').append(new Option(text,value));
-  }
-  $('#add_post_aspects').empty();
 
-$('#send_post').button('reset');
+-#- if @post.errors.any?
+-#  $("#notice_messages").html('#{escape_javascript(render partial: 'shared/notice_messages', locals: {object:@post})}');
+-#  window.scrollTo(0,0)
+-#- else
+-#  $("#notice_messages").html('')
+-#  $('#render_success_discontent').empty();
+-#  $("#render_success_discontent").html('#{escape_javascript(render partial: 'modal_post_save')}');
+-#  $('#modal_save_discontent').modal('show');
+-#  $("#discontent_warning").fadeOut();
+-#  $('#send_post').toggleClass('disabled');
+-#  $('#discontent_post_content').val('');
+-#  $('#discontent_post_whered').val('');
+-#  $('#discontent_post_whend').val('');
+-#  $('#new_discontent_hidden').remove();
+-#
+-#  sel_aspect = $('#add_post_aspects').find('span.span_aspect');
+-#  for (i=0; i<sel_aspect.length; i++) {
+-#  var value = sel_aspect[i].id;
+-#  var text = sel_aspect[i].textContent;
+-#  $('#select_for_aspects').append(new Option(text,value));
+-#  }
+-#  $('#add_post_aspects').empty();
+-#
+-#$('#send_post').button('reset');

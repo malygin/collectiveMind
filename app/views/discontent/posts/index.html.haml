@@ -22,40 +22,75 @@
                     .filler{style: "background-color: #{asp.color};"}
 
       .tab-content.second-stage
+        %br
+        .col-md-4
+          .imperfection-add-block.lined-block
+            .add-imperf
+              -#= link_to({new_discontent_post_path(@project, asp: params[:asp])} , remote: true, id: 'add_record',  class: 'btn btn-danger') do
+              -#= link_to '45', new_discontent_post_path(@project, asp: params[:asp]) , id: 'add_record',  class: 'btn btn-danger'
+              =link_to({action: :new, project: @project, asp: params[:asp]}, remote: true, id: "add_record" ) do
+                .plus-circle +
+                %span Добавить несовершенство
+            %table
+              %tr
+                %td.imperf-left-column
+                %td.imperf-right-column
+              %tr
+                %td.imperf-left-column.what-cell
+                %td.imperf-right-column
+              %tr
+                %td.imperf-left-column
+                %td.imperf-right-column
+              %tr
+                %td.imperf-left-column
+                %td.imperf-right-column
+              %tr
+                %td.imperf-left-column
+                %td.imperf-right-column
+              %tr
+                %td.imperf-left-column
+                %td.imperf-right-column
+
         -@project.aspects.main_aspects.order("discontent_aspects.id").each_with_index do |asp, index|
           %div.tab-pane.fade{id: "tab_aspect_#{asp.id}", class:"#{'active in' if asp == @aspect}"}
             .row
-              .col-md-4
-                .imperfection-add-block.lined-block
-                  .add-imperf
-                    %a{:href => "#"}
-                      .plus-circle +
-                      %span Добавить несовершенство
-                  %table
-                    %tr
-                      %td.imperf-left-column
-                      %td.imperf-right-column
-                    %tr
-                      %td.imperf-left-column.what-cell
-                      %td.imperf-right-column
-                    %tr
-                      %td.imperf-left-column
-                      %td.imperf-right-column
-                    %tr
-                      %td.imperf-left-column
-                      %td.imperf-right-column
-                    %tr
-                      %td.imperf-left-column
-                      %td.imperf-right-column
-                    %tr
-                      %td.imperf-left-column
-                      %td.imperf-right-column
+              -#.col-md-4
+              -#  .imperfection-add-block.lined-block
+              -#    .add-imperf
+              -#      -#= link_to({new_discontent_post_path(@project, asp: params[:asp])} , remote: true, id: 'add_record',  class: 'btn btn-danger') do
+              -#      -#= link_to '45', new_discontent_post_path(@project, asp: params[:asp]) , id: 'add_record',  class: 'btn btn-danger'
+              -#      =link_to({action: :new, project: @project, asp: params[:asp]}, remote: true, id: "add_record" ) do
+              -#        .plus-circle +
+              -#        %span Добавить несовершенство
+              -#    %table
+              -#      %tr
+              -#        %td.imperf-left-column
+              -#        %td.imperf-right-column
+              -#      %tr
+              -#        %td.imperf-left-column.what-cell
+              -#        %td.imperf-right-column
+              -#      %tr
+              -#        %td.imperf-left-column
+              -#        %td.imperf-right-column
+              -#      %tr
+              -#        %td.imperf-left-column
+              -#        %td.imperf-right-column
+              -#      %tr
+              -#        %td.imperf-left-column
+              -#        %td.imperf-right-column
+              -#      %tr
+              -#        %td.imperf-left-column
+              -#        %td.imperf-right-column
 
               %div{id: "tab_aspect_posts_#{asp.id}"}
                 -if asp == @aspect and @posts.present?
                   = render partial: 'post_short', collection: @posts
 
 #render_discontent_comments
+#render_discontent_form
+
+
+
 
 -#%ul.nav.nav-tabs.tabs-discontents
 -#  -@project.aspects.main_aspects.order("discontent_aspects.id").each_with_index do |asp, index|

@@ -1,0 +1,199 @@
+#popup-innov.popup-window.info-popup.mfp-hide
+  .popup.popup-top-rounded
+    .row.popup-post-info
+      .popup-header.popup-top-rounded.col-sm-12
+        %h2.color.mass-red Совершенствование портала
+      .col-lg-6.popup-post-block
+        %img{:src => "img/ava1.jpg"}/
+        %span Лиза Школьник
+        .info-stripe
+          %span.popup-date 17.12.2014
+          %span.popup-comments
+            +5
+            %i.fa.fa-comment-o
+          %span.popup-likes
+            +9
+            %i.fa.fa-thumbs-o-up
+          %span.popup-dislikes
+            +1
+            %i.fa.fa-thumbs-o-down
+      .col-lg-6.popup-tags
+        %span.popup-tag.color-N1
+          Низкие потолки и нечем дышать в офисах
+        %span.popup-tag.color-N2
+          Низкие старые потолки и нечем дышать в офисах
+        %span.popup-tag.color-N3
+          Низкие потолки
+        %span.popup-tag.color-N4
+          Низкие потолки и нечем дышать
+    .container.popup-post-questions.popup-bottom-rounded
+      .row
+        .col-sm-12
+          .question-stripe
+            Что новое появится в будущем, чтобы исправить несовершенство?
+          .answer-stripe
+            Новый, удобный и современный портал
+        .col-sm-12
+          .question-stripe
+            Чем ваше нововведение улучшит текущую ситуацию и почему?
+          .answer-stripe
+            На новом портале будет приятно работать
+        .col-sm-12
+          .question-stripe
+            Чем ваше нововведение улучшит текущую ситуацию и почему?
+          .answer-stripe
+            Новый портал удобен и прекрасно сделан с точки зрения дизайна, и участникам не только полезно, но и приятно проводить на нём время
+        .col-sm-12
+          .question-stripe
+            Какие ресурсы потребуются в будущем для работы нововведения?
+          .answer-stripe
+            %span.rounded-N-mark 1
+            %span.text-after-mark Олег и Андрей для концептуализации видения, вся команда для брейнсторминга по разработанному видению, дизайнеры и программисты
+        .col-sm-12
+          .question-stripe
+            Какие нежелательные эффекты могут возникнуть в будущем в связи с поддержанием условий и решением задач?
+          .answer-stripe
+            Мы можем вложить в создание нового портала массу времени и денег, а участникам все равно будет неудобно на нем работать
+        .col-sm-12
+          .question-stripe
+            Какие ресурсы потребуются в будущем для работы нововведения?
+          .answer-stripe
+            %span.rounded-N-mark 1
+            %span.text-after-mark Постоянные обсуждения и проверки предлагаемых идей
+  .popup.popup-bottom-rounded.popup-top-rounded
+    #comment-tabs.nav-tabs-one
+      / Nav tabs
+      %ul.nav.navig-tabs
+        %li.active
+          %a{"data-toggle" => "tab", :href => "#tab-1"} Ваш комментарий
+        %li
+          %a{"data-toggle" => "tab", :href => "#tab-2"} Все комментарии
+        %li
+          %a{"data-toggle" => "tab", :href => "#tab-3"} Советы
+      / Tab content
+      .tab-content
+        #tab-1.tab-pane.fade.in.active
+          .comment
+            %img.comment-ava{:src => "img/no-ava.png"}/
+            .comment-name Лиза Школьник
+            .comment-text текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст
+        #tab-2.tab-pane.fade
+          .comment
+            %img.comment-ava{:src => "img/no-ava.png"}/
+            .comment-name Лиза Школьник
+            .comment-text текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст
+          .comment
+            %img.comment-ava{:src => "img/no-ava.png"}/
+            .comment-name Лиза Школьник
+            .comment-text текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст
+          .comment
+            %img.comment-ava{:src => "img/no-ava.png"}/
+            .comment-name Лиза Школьник
+            .comment-text текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст
+        #tab-3.tab-pane.fade
+          .comment
+            %img.comment-ava{:src => "img/no-ava.png"}/
+            .comment-name Лиза Школьник
+            .comment-text текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст
+
+-#.popup-wrapper{id: "popup-#{index1+1}"}
+-#  .close-btn
+-#    %i.fa.fa-times
+-#  #win1.popup-box.box-shadow-1.rounded-3
+-#    .popup
+-#      .popup-header
+-#        %h2.color.mass-red=trim_content(pa.post_aspects.first.title)
+-#      .row.popup-post-info
+-#        .col-lg-6.popup-post-block
+-#          = image_tag pa.user.avatar.url(:thumb)
+-#          %span= pa.user.to_s
+-#          .info-stripe
+-#            %span.popup-date= Russian::strftime(pa.created_at,"%d.%m.%Y")
+-#            %span.popup-comments
+-#              +5
+-#              %i.fa.fa-comment-o
+-#            %span.popup-likes
+-#              +9
+-#              %i.fa.fa-thumbs-o-up
+-#            %span.popup-dislikes
+-#              +1
+-#              %i.fa.fa-thumbs-o-down
+-#        .col-lg-6.popup-tags
+-#          %span.popup-tag.color-N1
+-#            Низкие потолки и нечем дышать в офисах
+-#          %span.popup-tag.color-N2
+-#            Низкие старые потолки и нечем дышать в офисах
+-#          %span.popup-tag.color-N3
+-#            Низкие потолки
+-#          %span.popup-tag.color-N4
+-#            Низкие потолки и нечем дышать
+-#      .container.popup-post-questions
+-#        .row
+-#          .col-sm-12
+-#            .question-stripe
+-#              Что новое появится в будущем, чтобы исправить несовершенство?
+-#            .answer-stripe
+-#              Новый, удобный и современный портал
+-#          .col-sm-12
+-#            .question-stripe
+-#              Чем ваше нововведение улучшит текущую ситуацию и почему?
+-#            .answer-stripe
+-#              На новом портале будет приятно работать
+-#          .col-sm-12
+-#            .question-stripe
+-#              Чем ваше нововведение улучшит текущую ситуацию и почему?
+-#            .answer-stripe
+-#              Новый портал удобен и прекрасно сделан с точки зрения дизайна, и участникам не только полезно, но и приятно проводить на нём время
+-#          .col-sm-12
+-#            .question-stripe
+-#              Какие ресурсы потребуются в будущем для работы нововведения?
+-#            .answer-stripe
+-#              %span.rounded-N-mark 1
+-#              %span.text-after-mark Олег и Андрей для концептуализации видения, вся команда для брейнсторминга по разработанному видению, дизайнеры и программисты
+-#          .col-sm-12
+-#            .question-stripe
+-#              Какие нежелательные эффекты могут возникнуть в будущем в связи с поддержанием условий и решением задач?
+-#            .answer-stripe
+-#              Мы можем вложить в создание нового портала массу времени и денег, а участникам все равно будет неудобно на нем работать
+-#          .col-sm-12
+-#            .question-stripe
+-#              Какие ресурсы потребуются в будущем для работы нововведения?
+-#            .answer-stripe
+-#              %span.rounded-N-mark 1
+-#              %span.text-after-mark Постоянные обсуждения и проверки предлагаемых идей
+-#  #win2.popup-box.box-shadow-1.rounded-3
+-#    .popup
+-#      #comment-tabs.nav-tabs-one
+-#        / Nav tabs
+-#        %ul.nav.navig-tabs
+-#          %li.active
+-#            %a{"data-toggle" => "tab", :href => "#tab-1"} Ваш комментарий
+-#          %li
+-#            %a{"data-toggle" => "tab", :href => "#tab-2"} Все комментарии
+-#          %li
+-#            %a{"data-toggle" => "tab", :href => "#tab-3"} Советы
+-#        / Tab content
+-#        .tab-content
+-#          #tab-1.tab-pane.fade.in.active
+-#            .comment
+-#              = image_tag pa.user.avatar.url(:thumb), class: "comment-ava"
+-#              .comment-name Лиза Школьник
+-#              .comment-text текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст
+-#          #tab-2.tab-pane.fade
+-#            .comment
+-#              = image_tag pa.user.avatar.url(:thumb), class: "comment-ava"
+-#              .comment-name Лиза Школьник
+-#              .comment-text текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст
+-#            .comment
+-#              = image_tag pa.user.avatar.url(:thumb), class: "comment-ava"
+-#              .comment-name Лиза Школьник
+-#              .comment-text текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст
+-#            .comment
+-#              = image_tag pa.user.avatar.url(:thumb), class: "comment-ava"
+-#              .comment-name Лиза Школьник
+-#              .comment-text текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст
+-#          #tab-3.tab-pane.fade
+-#            .comment
+-#              = image_tag pa.user.avatar.url(:thumb), class: "comment-ava"
+-#              .comment-name Лиза Школьник
+-#              .comment-text текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст

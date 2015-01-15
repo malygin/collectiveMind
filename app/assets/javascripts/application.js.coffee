@@ -52,7 +52,7 @@
 #= require brave/respond.min
 #= require brave/html5shiv
 #= require brave/main
-#= require brave/custom
+#= require custom.js
 
 
 #= require brave/jquery.countTo
