@@ -3,7 +3,7 @@
   window.scrollTo(0,0);
 - else
   $('#modal_discontent_form').modal('hide');
-  $("#{escape_javascript(render partial: 'post_short', object: @post )}").insertBefore("div[id^='tab_aspect_'].active.in div[id^='tab_aspect_posts_'] > div:first");
+  $("#{escape_javascript(render partial: 'post_short', object: @post )}").insertBefore("#tab_aspect_posts > div:first");
   $("#discontent_post_#{@post.id}").effect("highlight",{color: '#f5cecd'}, 3000);
 
 
