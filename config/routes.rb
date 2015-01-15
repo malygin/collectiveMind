@@ -85,7 +85,9 @@ scope '/project/:project' do
   end
 
   namespace :help do
-    resources :posts
+    resources :posts do
+      get :about, on: :collection
+    end
   end
 
   post 'knowbase/posts/sortable_save', to: 'knowbase/posts#sortable_save'

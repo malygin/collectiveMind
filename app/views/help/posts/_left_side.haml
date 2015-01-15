@@ -29,6 +29,11 @@
       =t('stages.estimate')
   %li{class: ('active' if params[:id] == '6')}
     %a(href="/project/#{@project.id}/help/posts/6")
+      Стадия 6
+      %br
+      =t('stages.result')
+  %li{class: ('active' if params[:id] == '7')}
+    %a(href="/project/#{@project.id}/help/posts/7")
       =t('stages.glossary')
   -#-@stages.each do |key, value|
   -#  %li{class: ('active' if key.to_s==params[:id])}

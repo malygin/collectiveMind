@@ -32,6 +32,8 @@ class Help::PostsController < PostsController
                         'new_help_5'
                       when '6'
                         'new_help_6'
+                      when '7'
+                        'new_help_7'
                       else
                         'new_help_0'
                     end
@@ -49,7 +51,9 @@ class Help::PostsController < PostsController
                       when '5'
                         'new_help_5_s'
                       when '6'
-                        'new_help_6'
+                        'new_help_6_s'
+                      when '7'
+                        'new_help_7'
                       else
                         'new_help_0'
                     end

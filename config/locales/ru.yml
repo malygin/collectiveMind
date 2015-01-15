@@ -89,6 +89,7 @@ ru:
   menu:
     main: "Главная"
     help: "Помощь"
+    about: "O проекте"
     base_knowledge: "База знаний"
     raiting: "Рейтинг"
     raiting_rc: "Клубный рейтинг"

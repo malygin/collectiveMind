@@ -1,7 +1,7 @@
 =link_to '/project/'+@project.id.to_s do
   %span.fa.fa-angle-double-left
   =t('link.back_proc')
-- if ['0','6'].include? params[:id]
+- if ['0','7'].include? params[:id]
   %section.widget
     = render partial:  @help_partial_1
 - else
@@ -19,7 +19,7 @@
         = render partial:  @help_partial_1
       #long_desc.tab-pane
         %br
-        -if ['1','2'].include? params[:id]
+        -if ['1','2','3','4'].include? params[:id]
           = render partial:  @help_partial_2
 
 

@@ -1,5 +1,7 @@
 %ul.nav.navbar-nav.navbar-right.pull-right
   %li.hidden-xs.active
+    =link_to t('menu.about'), about_help_posts_path(@project), style:'width:auto; margin-right: 15px;', id: 'go_to_about'
+  %li.hidden-xs.active
     =link_to t('menu.help'), help_posts_path(@project), style:'width:auto; margin-right: 15px;', id: 'go_to_help'
   -#%li.hidden-xs.divider
   %li.hidden-xs.active
