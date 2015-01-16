@@ -156,4 +156,11 @@ module Discontent::PostsHelper
     end
     classes
   end
+
+  def rate_aspect(asp)
+    status = @project.status > 6 ? 1 : 0
+    count_all = @project.discontents.by_status(status).count
+    count_aspect = asp.aspect_posts.by_status(status).count
+    count_all == 0 ? 0 : ((count_aspect.to_f/count_all.to_f)*100).round
+  end
 end

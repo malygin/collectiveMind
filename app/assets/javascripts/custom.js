@@ -89,22 +89,24 @@ $(document).ready(function() {
     });
 
 
-    /* подсказка */
+//    /* подсказка */
     $('.hint .close-button').click(function(){
         $('.hint').addClass("close-notice");
     });
     $('.notice-button').click(function(){
-        $('.hint').removeClass("close-notice");
+        var questionId;
+        questionId = $(this).data('question');
+        $('.hint#hint_question_'+questionId).removeClass("close-notice");
     });
-
-
-    /* неверный ответ */
+//
+//
+//    /* неверный ответ */
     $('.wrong-answer .close-button').click(function(){
         $('.wrong-answer').addClass("close-notice");
     });
-    $('.answer-button').click(function(){
-        $('.wrong-answer').removeClass("close-notice");
-    });
+//    $('.answer-button').click(function(){
+//        $('.wrong-answer').removeClass("close-notice");
+//    });
 
 
     /* вывод замечания при наведении на знак */

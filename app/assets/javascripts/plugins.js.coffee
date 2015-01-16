@@ -83,7 +83,32 @@
   $('.index-of-aspects').on('click', "div[id^='button_aspect_']", this.filter_aspects)
   $('.index-of-discontents').on('click', "button[id^='button_discontent_']", this.filter_discontents)
 
+@sorterable = ->
+  SORTER = {}
+  SORTER.sort = (which, type, dir) ->
+    SORTER.dir = (if (dir is "desc") then -1 else 1)
+    $(which).each ->
+      # Find the list items and sort them
+      sorted = $(this).find("> div").sort((a, b) ->
+        if type == "date"
+          (if parseFloat($(a).attr('data-created')) > parseFloat($(b).attr('data-created')) then SORTER.dir else -SORTER.dir)
+        else if type == "rate"
+          (if parseFloat($(a).attr('data-popular')) > parseFloat($(b).attr('data-popular')) then SORTER.dir else -SORTER.dir)
+        else 0
+      )
+      $(this).append sorted
 
+  this.sorter_discontents = (e) ->
+    e.preventDefault()
+    type = $(this).data('type')
+    data_desc = $(this).attr('data-desc')
+    if data_desc == "1" then desc = "desc" else desc = ""
+    if data_desc == "1" then num = "-1" else num = "1"
+    $(this).attr("data-desc","#{num}")
+    SORTER.sort "#tab_aspect_posts", type, desc
+
+
+  $('.sort-block').on('click', ".sort-date,.sort-rate,.sort-all", this.sorter_discontents)
 
 #@todo analytics
 @exampleData = ->

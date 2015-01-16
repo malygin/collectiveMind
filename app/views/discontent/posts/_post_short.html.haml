@@ -1,4 +1,4 @@
-%div.col-md-4.discontent-block{id: "discontent_post_#{post_short.id}", class: "#{post_aspect_classes(post_short)}"}
+%div.col-md-4.discontent-block{id: "discontent_post_#{post_short.id}", class: "#{post_aspect_classes(post_short)}", data: {created: "#{(post_short.created_at.to_datetime.to_f)}", popular: "#{post_short.users_pro.count + (post_short.number_views * 0.3)}"}}
   .imperfection.lined-block{class: "#{post_short.style == 1 ? 'imperf-pale-pink' : 'imperf-pale-blue'}"}
     %table
       %tr
@@ -6,7 +6,10 @@
           %td.imperf-left-column.admin-notice
             %span.admin-notice-sign !
             .admin-notice-displayable
-              Замечание модератора
+              -post_short.notes.each do |note|
+                %li=note.content
+                %br
+              -#Замечание модератора
               .close-admin-button
         -else
           %td.imperf-left-column
@@ -43,12 +46,14 @@
                   =post_short.comments.count
                   %i.fa.fa-comment-o
               =link_to({:controller => post_short.class.name.underscore.pluralize ,:action => :plus, :project => @project, :id => post_short.id, :against => false,  :remote => true},:method => :put, id: "plus_post_#{post_short.id}") do
-                %span.popup-likes(id="plus_counter_#{post_short.id}")
-                  =post_short.users_pro.count
+                %span.popup-likes
+                  %span(id="plus_counter_#{post_short.id}" style="margin-right:0;")
+                    =post_short.users_pro.count
                   %i.fa.fa-thumbs-o-up
               =link_to({:controller => post_short.class.name.underscore.pluralize ,:action => :plus, :project => @project,  :id => post_short.id, :against => true, :remote => true}, :method => :put, id: "minus_post_#{post_short.id}") do
-                %span.popup-dislikes(id="minus_counter_#{post_short.id}")
-                  =post_short.users_against.count
+                %span.popup-dislikes
+                  %span(id="minus_counter_#{post_short.id}" style="margin-right:0;")
+                    =post_short.users_against.count
                   %i.fa.fa-thumbs-o-down
 
 

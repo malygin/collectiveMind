@@ -5,11 +5,11 @@
   .container
     .sort-block
       Сортировать:
-      %span.sort-item
+      %span.sort-item.sort-date{data: {desc: -1, type: "date"}}
         = image_tag 'img/sort-date.jpg'
-      %span.sort-item
+      %span.sort-item.sort-rate{data: {desc: 0, type: "rate"}}
         = image_tag 'img/sort-rate.jpg'
-      -#
+      %span.sort-item.sort-all{data: {desc: 0, type: "all"}} ВСЕ
       -#=link_to({action: :sort_content, project: @project, asp: params[:asp], sort_default: true, type_like: params[:type_like], type_note: params[:type_note], type_verify: params[:type_verify], type_status: params[:type_status]}, remote: true, id: 'sort_default_link') do
       -#  %span.sort-item ВСЕ
     %div
@@ -19,7 +19,7 @@
             %button{"data-toggle" => "tab", :href => "#tab_aspect_#{asp.id}", id: "link_aspect_#{asp.id}", "data-project" => @project.id, "data-aspect" => asp.id}
               .block-content
                 .fill-container{style: "border-color: #{asp.color};"}
-                  %span.fill-limit{"data-limit" => "65", style: "color: #{asp.color};"}
+                  %span.fill-limit{"data-limit" => "#{rate_aspect(asp)}", style: "color: #{asp.color};"}
                   .filler-outer
                     .filler{style: "background-color: #{asp.color};"}
 

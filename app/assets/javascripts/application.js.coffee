@@ -74,6 +74,8 @@ $ ->
 
   filterable()
 
+  sorterable()
+
   search()
 
   resources()

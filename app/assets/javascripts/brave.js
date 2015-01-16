@@ -15,7 +15,7 @@ $(function() {
         $('.fill-limit').each(function() {
             var me = $(this);
             var perc = me.attr("data-limit");
-            var current_perc = 10;
+            var current_perc = -1;
 
             if(!$(this).hasClass('stop')){
 
