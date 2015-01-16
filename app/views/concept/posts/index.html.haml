@@ -24,10 +24,13 @@
                 = image_tag pa.user.avatar.url(:thumb)
                 .clearfix
                 %span.poster-name= pa.user.to_s
-              %a{class: "post-text popup-link-#{index1+1}", :href => "#"}
+              =link_to({action: :show, project: @project, id: pa.id, asp: params[:asp]}, remote: true, id: "add_record", class: "post-text" ) do
                 .text-arrow.pull-right
-                %span
-                  =trim_string(pa.post_aspects.first.name)
+                %span=trim_string(pa.post_aspects.first.name)
+              -#%a{class: "post-text popup-link-#{index1+1}", :href => "#"}
+              -#  .text-arrow.pull-right
+              -#  %span
+              -#    =trim_string(pa.post_aspects.first.name)
             .post-themes{id: "stripe#{index1+1}"}
               - if pa.concept_disposts.any?
                 -pa.concept_disposts.each_with_index do |cd, index2|
@@ -138,7 +141,7 @@
                   .comment-text текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст
 
 
-
+#render_concept_post
 
 
 

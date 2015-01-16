@@ -2,37 +2,37 @@
   .popup.popup-top-rounded
     .row.popup-post-info
       .popup-header.popup-top-rounded.col-sm-12
-        %h2.color.mass-red Совершенствование портала
+        %h2.color.mass-red=trim_content(@post.post_aspects.first.title)
       .col-lg-6.popup-post-block
-        %img{:src => "img/ava1.jpg"}/
-        %span Лиза Школьник
+        = image_tag @post.user.avatar.url(:thumb)
+        %span= @post.user.to_s
         .info-stripe
-          %span.popup-date 17.12.2014
+          %span.popup-date= Russian::strftime(@post.created_at,"%d.%m.%Y")
           %span.popup-comments
-            +5
+            =@post.comments.count
             %i.fa.fa-comment-o
-          %span.popup-likes
-            +9
-            %i.fa.fa-thumbs-o-up
-          %span.popup-dislikes
-            +1
-            %i.fa.fa-thumbs-o-down
+          =link_to({:controller => @post.class.name.underscore.pluralize ,:action => :plus, :project => @project, :id => @post.id, :against => false,  :remote => true},:method => :put, id: "plus_post_#{@post.id}") do
+            %span.popup-likes(id="plus_counter_#{@post.id}")
+              =@post.users_pro.count
+              %i.fa.fa-thumbs-o-up
+          =link_to({:controller => @post.class.name.underscore.pluralize ,:action => :plus, :project => @project,  :id => @post.id, :against => true, :remote => true}, :method => :put, id: "minus_post_#{@post.id}") do
+            %span.popup-dislikes(id="minus_counter_#{@post.id}")
+              =@post.users_against.count
+              %i.fa.fa-thumbs-o-down
+
       .col-lg-6.popup-tags
-        %span.popup-tag.color-N1
-          Низкие потолки и нечем дышать в офисах
-        %span.popup-tag.color-N2
-          Низкие старые потолки и нечем дышать в офисах
-        %span.popup-tag.color-N3
-          Низкие потолки
-        %span.popup-tag.color-N4
-          Низкие потолки и нечем дышать
+        - if @post.concept_disposts.any?
+          -@post.concept_disposts.each_with_index do |cd, index1|
+            %span.popup-tag{class: "color-N#{index1+1}"}
+              =trim_content(cd.content, 50)
+
     .container.popup-post-questions.popup-bottom-rounded
       .row
         .col-sm-12
           .question-stripe
-            Что новое появится в будущем, чтобы исправить несовершенство?
+            =t('form.concept.novation_what')
           .answer-stripe
-            Новый, удобный и современный портал
+            =simple_format(@post.post_aspects.first.name)
         .col-sm-12
           .question-stripe
             Чем ваше нововведение улучшит текущую ситуацию и почему?
@@ -95,6 +95,8 @@
             %img.comment-ava{:src => "img/no-ava.png"}/
             .comment-name Лиза Школьник
             .comment-text текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст
+
+
 
 -#.popup-wrapper{id: "popup-#{index1+1}"}
 -#  .close-btn

@@ -1,3 +1,13 @@
+function magnificPopupOpen(){
+    $.magnificPopup.open({
+        items: {
+            src: '#popup-innov', // can be a HTML string, jQuery object, or CSS selector
+            type: 'inline'
+        }
+    });
+};
+
+
 /* Your JS codes here */
 $(document).ready(function() {
 
