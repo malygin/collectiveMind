@@ -7,7 +7,8 @@ class LifeTape::Post < ActiveRecord::Base
                           association_foreign_key: 'discontent_aspect_id'
 
   scope :by_project, ->(p) { where(project_id: p) }
-  scope :by_discussions, ->(posts) { where 'life_tape_posts.id NOT IN (?)', posts }
+  # @todo кандидат на удаление, нигде не используется
+  # scope :by_discussions, ->(posts) { where 'life_tape_posts.id NOT IN (?)', posts }
 
   validates :user_id, :project_id, presence: true
 end
