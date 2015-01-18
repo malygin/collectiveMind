@@ -78,11 +78,15 @@
           %a{"data-toggle" => "tab", :href => "#tab-3"} Советы
       .tab-content
         #tab-1.tab-pane.fade.in.active
-          -@post.comments.where(user: current_user.id).each  do |comment|
-            .comment
-              = image_tag comment.user.avatar.url(:thumb), class: "comment-ava"
-              .comment-name= comment.user.to_s
-              .comment-text= comment.content
+          #comments.chat-messages
+            -@post.comments.where(user: current_user.id).each  do |comment|
+              .comment
+                = image_tag comment.user.avatar.url(:thumb), class: "comment-ava"
+                .comment-name= comment.user.to_s
+                .comment-text= comment.content
+          - if signed_in?
+            .col-md-12
+              = render partial:'shared/comment_form', locals:{ comment:@comment, url_link:url_for(controller:@post.class.name.underscore.pluralize, action:'add_comment')}
         #tab-2.tab-pane.fade
           -@comments.each  do |comment|
             .comment

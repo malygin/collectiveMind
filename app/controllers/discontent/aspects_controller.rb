@@ -28,6 +28,7 @@ class Discontent::AspectsController < ProjectsController
   end
 
   def answer_question
+    @aspect = params[:id] ? Discontent::Aspect.find(params[:id]) : @project.aspects.order(:id).first
     @question = Question.find(params[:question_id])
     aspect_questions = @aspect.questions.by_project(@project.id).by_status(0).order("questions.id")
     @answers = @question.answers.by_status(0).by_style(0).pluck("answers.id")

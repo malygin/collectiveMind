@@ -75,6 +75,7 @@
   $('.chat-messages').on('click', 'button.cancel-reply', this.cancel_reply)
 
   $('.form-new-comment,.chat-messages').on('keyup', 'textarea.comment-textarea', this.activate_button)
+#  $('#render_discontent_comments,#popup-innov').on('keyup', 'textarea.comment-textarea', this.activate_button)
   $('.form-new-comment,.chat-messages').on('click', 'label.comment-problem', this.color_for_problem)
   $('.form-new-comment,.chat-messages').on('click', 'label.comment-idea', this.color_for_idea)
 

@@ -12,7 +12,7 @@
     $("#question_#{@question.id}").animate({height: 0, opacity:0}, 1000, function() { $(this).remove(); });
     $("#question_#{@next_question.id}").fadeIn();
   -else
-    -#$('#check_question_#{@aspect.id}').html('<i class="fa fa-check"></i>');
+    $('#check_question_#{@aspect.id}').html('<i class="fa fa-check" style="font-size:15px;margin:0;"></i>');
     $('#progress-bar-main').css('width',"#{(@count_aspects_check/@count_aspects.to_f)*100}%");
     $('li.li_aspect.active').next().find('button').tab('show');
 

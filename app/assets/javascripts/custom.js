@@ -104,6 +104,9 @@ $(document).ready(function() {
     $('.wrong-answer .close-button').click(function(){
         $('.wrong-answer').addClass("close-notice");
     });
+    $('.li_aspect button[data-toggle="tab"]').on('show.bs.tab', function (e) {
+        $('.wrong-answer').addClass("close-notice");
+    });
 //    $('.answer-button').click(function(){
 //        $('.wrong-answer').removeClass("close-notice");
 //    });
