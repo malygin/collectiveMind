@@ -8,4 +8,5 @@ class Question < ActiveRecord::Base
 
   scope :by_project, ->(project) { where(questions: {project_id: project}) }
   scope :by_status, ->(status) { where(questions: {status: status}) }
+  scope :by_complete, ->(ids) { where.not(questions: {id: ids}) }
 end
