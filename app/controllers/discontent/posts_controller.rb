@@ -279,6 +279,15 @@ class Discontent::PostsController < PostsController
     end
   end
 
+  def show_comments
+    @post = current_model.find(params[:id])
+    @comments = @post.main_comments.paginate(page: params[:page] ? params[:page] : last_page, per_page: 10)
+    @comment = comment_model.new
+    respond_to do |format|
+      format.js
+    end
+  end
+
   private
   def discontent_post_params
     params.require(:discontent_post).permit(:content, :whend, :whered, :style)

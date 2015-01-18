@@ -2,7 +2,7 @@
 
 .row
   .col-md-12
-    = form_for comment, html: {id: 'comment_form', class:'form-new-comment' }, remote: true,  url: url_link, method: :put do |f|
+    = form_for comment, html: {multipart: true, id: 'comment_form', class:'form-new-comment' }, remote: true,  url: url_link, method: :put do |f|
       = render 'shared/notice_messages', object: f.object
       =f.text_area :content, class: 'form-control input-transparent comment-textarea',  placeholder: t('form.comment_answer'), id:"comment_text_area"
       -#.pull-left.hidden-xs

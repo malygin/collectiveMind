@@ -1,0 +1,68 @@
+#popup-imperf.popup-window.info-popup.mfp-hide
+  .popup.popup-top-rounded
+    .popup-post-info.back-color{class: "#{@post.style == 1 ? 'pale-pink' : 'pale-blue'}"}
+      .popup-header.popup-top-rounded
+        %h2.color.mass-red=@post.content
+      .clearfix
+      .popup-imperf-detailed{class: "#{@post.style == 1 ? 'imperf-pale-pink' : 'imperf-pale-blue'}"}
+        -if @post.notes.present?
+          .popup-imperf-admin-notice
+            %span.popup-notice-sign !
+            %p.popup-notice-text
+              -@post.notes.each do |note|
+                %li=note.content
+                %br
+        -else
+          .popup-imperf-admin-notice{style: "padding-bottom:40px;"}
+
+        .aspects-indexes
+          - @post.post_aspects.each do |asp|
+            .circle-tag.back-color{style: "background-color:#{asp.color};"}= asp.short_name.present? ? asp.short_name : asp.content[0,2].mb_chars.downcase
+        .clearfix
+        %table
+          %tr
+            %td.imperf-left-column.what-cell
+              Что
+            %td.imperf-right-column
+              =@post.content
+          %tr
+            %td.imperf-left-column
+              Где
+            %td.imperf-right-column
+              =@post.whered
+          %tr
+            %td.imperf-left-column
+              Когда
+            %td.imperf-right-column
+              =@post.whend
+          %tr
+            %td.imperf-left-column
+            %td.imperf-right-column
+              .imperf-bottom-line
+                .info-stripe
+                  %span.popup-date=Russian::strftime(@post.created_at,'%d %B %k:%M:%S')
+                  = link_to({controller: @post.class.name.underscore.pluralize, action: :show, project: @project, id: @post.id, :remote => true}) do
+                    %span.popup-comments
+                      =@post.comments.count
+                      %i.fa.fa-comment-o
+                  =link_to({:controller => @post.class.name.underscore.pluralize ,:action => :plus, :project => @project, :id => @post.id, :against => false,  :remote => true},:method => :put, id: "plus_post_#{@post.id}") do
+                    %span.popup-likes
+                      %span(id="plus_counter_#{@post.id}" style="margin-right:0;")
+                        =@post.users_pro.count
+                      %i.fa.fa-thumbs-o-up
+                  =link_to({:controller => @post.class.name.underscore.pluralize ,:action => :plus, :project => @project,  :id => @post.id, :against => true, :remote => true}, :method => :put, id: "minus_post_#{@post.id}") do
+                    %span.popup-dislikes
+                      %span(id="minus_counter_#{@post.id}" style="margin-right:0;")
+                        =@post.users_against.count
+                      %i.fa.fa-thumbs-o-down
+
+    .popup-comments-block.popup-bottom-rounded
+      #comments.chat-messages
+        -@comments.each  do |comment|
+          .comment
+            = image_tag comment.user.avatar.url(:thumb), class: "comment-ava"
+            .comment-name= comment.user.to_s
+            .comment-text= comment.content
+      - if signed_in?
+        .col-md-12
+          = render partial:'shared/comment_form', locals:{ comment:@comment, url_link:url_for(controller:@post.class.name.underscore.pluralize, action:'add_comment')}

@@ -1,8 +1,9 @@
-function magnificPopupOpen(){
+function magnificPopupOpen(tag){
     $.magnificPopup.open({
         items: {
-            src: '#popup-innov', // can be a HTML string, jQuery object, or CSS selector
-            type: 'inline'
+            src: tag, // can be a HTML string, jQuery object, or CSS selector
+            type: 'inline',
+            midClick: true
         }
     });
 };

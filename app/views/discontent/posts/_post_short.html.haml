@@ -1,5 +1,6 @@
 %div.col-md-4.discontent-block{id: "discontent_post_#{post_short.id}", class: "#{post_aspect_classes(post_short)}", data: {created: "#{(post_short.created_at.to_datetime.to_f)}", popular: "#{post_short.users_pro.count + (post_short.number_views * 0.3)}"}}
-  .imperfection.lined-block{class: "#{post_short.style == 1 ? 'imperf-pale-pink' : 'imperf-pale-blue'}"}
+  =link_to({action: :show, project: @project, id: post_short.id, asp: params[:asp]}, remote: true, id: "show_record", class: "imperfection lined-block #{post_short.style == 1 ? 'imperf-pale-pink' : 'imperf-pale-blue'}" ) do
+    -#.imperfection.lined-block{class: "#{post_short.style == 1 ? 'imperf-pale-pink' : 'imperf-pale-blue'}"}
     %table
       %tr
         -if post_short.notes.present?
@@ -41,7 +42,7 @@
           .imperf-bottom-line
             .info-stripe
               %span.popup-date=Russian::strftime(post_short.created_at,'%d %B %k:%M:%S')
-              = link_to({controller: post_short.class.name.underscore.pluralize, action: :show, project: @project, id: post_short.id, :remote => true}) do
+              = link_to({controller: post_short.class.name.underscore.pluralize, action: :show_comments, project: @project, id: post_short.id, :remote => true}) do
                 %span.popup-comments
                   =post_short.comments.count
                   %i.fa.fa-comment-o
