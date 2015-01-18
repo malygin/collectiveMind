@@ -4,9 +4,11 @@ FactoryGirl.define do
     sequence(:number_views) { |n| n * 10 }
 
     association :user, factory: :ordinary_user
-    aspect { create :aspect, project: project }
+    association :project, factory: :core_project
 
     after(:create) do |post|
+      post.aspect = create :aspect, project: post.project
+      post.save
       create :discontent_aspects_life_tape_posts, discontent_aspect: post.aspect, life_tape_post: post
     end
   end
