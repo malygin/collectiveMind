@@ -3,10 +3,10 @@ require 'spec_helper'
 describe 'Life Tape ' do
   subject { page }
 
-  let (:user) { create :user }
+  let!(:user) { @user = create :user }
   let (:user_data) { create :user }
   let (:prime_admin) { create :prime_admin }
-  let (:moderator) { create :moderator }
+  let!(:moderator) { @moderator = create :moderator }
   let (:project) { create :core_project, status: 1 }
 
   before do
@@ -14,7 +14,6 @@ describe 'Life Tape ' do
     @post2 = create :life_tape_post, project: project
     @aspect1 = @post1.aspect
     @aspect2 = @post2.aspect
-    @comment1 = create :life_tape_comment, post: @post1, user: user
   end
 
   context 'ordinary user sign in ' do
@@ -35,12 +34,11 @@ describe 'Life Tape ' do
         click_link "go_to_opened_project_#{project.id}"
       end
 
-      it 'have content for user ' do
+      it 'have content' do
         expect(page).to have_content @aspect1.content
         expect(page).to have_content @aspect2.content
-        expect(page).not_to have_selector '#new_aspect'
         expect(page).to have_selector 'textarea#comment_text_area'
-        expect(page).not_to have_link("plus_comment_#{@comment1.id}", text: 'Выдать баллы', href: plus_comment_life_tape_post_path(project, @comment1))
+
         validate_default_links_and_sidebar(project, user)
         validate_not_have_admin_links_for_user(project)
         validate_not_have_moderator_links_for_user(project)
@@ -74,22 +72,25 @@ describe 'Life Tape ' do
         expect(page).to have_content "#{I18n.t('show.essay.title')} #{I18n.t('stages.life_tape')}"
       end
     end
+
+    context 'show help' do
+
+    end
   end
 
   context 'moderator sign in' do
     before do
       sign_in moderator
-      visit root_path
     end
 
     context 'success go to project ' do
       before do
         click_link "go_to_opened_project_#{project.id}"
       end
+
       it 'have content for moderator ' do
         expect(page).to have_content @aspect1.content
         expect(page).to have_content @aspect2.content
-        expect(page).to have_selector '#new_aspect'
         expect(page).to have_selector 'textarea#comment_text_area'
 
         validate_default_links_and_sidebar(project, moderator)
@@ -107,14 +108,10 @@ describe 'Life Tape ' do
         visit life_tape_posts_path(project)
       end
 
-      it 'view aspects ' do
-        expect(page).to have_content @aspect1.content
-        expect(page).to have_content @aspect2.content
-      end
-
       it_behaves_like 'content with comments', 2, true
 
     end
+
     context 'vote life tape ' do
       before do
         project.update_attributes(status: 2)
