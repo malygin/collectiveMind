@@ -8,7 +8,10 @@ FactoryGirl.define do
     sequence(:whend) { |n| "whend #{n}" }
     sequence(:whered) { |n| "whered #{n}" }
 
+    status 0
+
     association :user, factory: :ordinary_user
+    association :project, factory: :core_project
 
     after(:create) do |post|
       aspect1 = create :aspect, project: post.project
