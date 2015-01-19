@@ -22,26 +22,16 @@ def not_have_content_for_not_auth_user(opened_project, demo_project, closed_proj
   expect(page).not_to have_content 'Демо процедуры'
   expect(page).not_to have_content 'opened project'
   expect(page).not_to have_content 'demo project'
-  # expect(page).not_to have_link('go_to_closed_project', text: 'Перейти к процедуре', href: "/project/#{closed_project.id}")
-  # expect(page).not_to have_link('go_to_club_project', text: 'Перейти к процедуре', href: "/project/#{club_project.id}")
-  # expect(page).not_to have_link('go_to_opened_project', text: 'Перейти к процедуре', href: "/project/#{opened_project.id}")
-  # expect(page).not_to have_link('go_to_demo_project', text: 'Перейти к процедуре', href: "/project/#{demo_project.id}")
   validate_projects_links({closed: closed_project, opened: opened_project, demo: demo_project, club: club_project}, expect: false)
 end
 
 
 def not_have_content_for_ordinary_user(closed_project, club_project)
-  #expect(page).not_to have_selector '#list_projects'
-  #expect(page).not_to have_selector "a#list_projects[href='/list_projects']", 'Список процедур'
   expect(page).not_to have_link('list_projects', text: 'Список процедур', href: list_projects_path)
   expect(page).not_to have_content 'Закрытые процедуры'
   expect(page).not_to have_content 'Клубные процедуры'
   expect(page).not_to have_content 'closed project'
   expect(page).not_to have_content 'club project'
-  #expect(page).not_to have_selector "a#go_to_closed_project[href='/project/#{closed_project.id}']", 'Перейти к процедуре'
-  #expect(page).not_to have_selector "a#go_to_club_project[href='/project/#{club_project.id}']", 'Перейти к процедуре'
-  # expect(page).not_to have_link('go_to_closed_project', text: 'Перейти к процедуре', href: "/project/#{closed_project.id}")
-  # expect(page).not_to have_link('go_to_club_project', text: 'Перейти к процедуре', href: "/project/#{club_project.id}")
   validate_projects_links({closed: closed_project, club: club_project}, expect: false)
 end
 
@@ -50,10 +40,6 @@ def have_content_for_ordinary_user(opened_project, demo_project)
   expect(page).to have_content 'Демо процедуры'
   expect(page).to have_content 'opened project'
   expect(page).to have_content 'demo project'
-  #expect(page).to have_selector "a#go_to_opened_project[href='/project/#{opened_project.id}']", 'Перейти к процедуре'
-  #expect(page).to have_selector "a#go_to_demo_project[href='/project/#{demo_project.id}']", 'Перейти к процедуре'
-  # expect(page).to have_link('go_to_opened_project', text: 'Перейти к процедуре', href: "/project/#{opened_project.id}")
-  # expect(page).to have_link('go_to_demo_project', text: 'Перейти к процедуре', href: "/project/#{demo_project.id}")
   validate_projects_links({opened: opened_project, demo: demo_project}, expect: true)
 end
 
@@ -64,9 +50,6 @@ def have_content_for_invited_ordinary_user(closed_project_for_invite, opened_pro
   expect(page).to have_content 'opened project'
   expect(page).to have_content 'demo project'
   expect(page).to have_content 'closed invited project'
-  # expect(page).to have_link('go_to_opened_project', text: 'Перейти к процедуре', href: "/project/#{opened_project.id}")
-  # expect(page).to have_link('go_to_demo_project', text: 'Перейти к процедуре', href: "/project/#{demo_project.id}")
-  # expect(page).to have_link('go_to_closed_project', text: 'Перейти к процедуре', href: "/project/#{closed_project_for_invite.id}")
   validate_projects_links({closed: closed_project_for_invite, opened: opened_project, demo: demo_project}, expect: true)
 end
 
@@ -75,18 +58,13 @@ def not_have_content_for_invited_ordinary_user(closed_project, club_project)
   expect(page).not_to have_content 'closed project'
   expect(page).not_to have_content 'Клубные процедуры'
   expect(page).not_to have_content 'club project'
-  # expect(page).not_to have_link('go_to_closed_project', text: 'Перейти к процедуре', href: "/project/#{closed_project.id}")
-  # expect(page).not_to have_link('go_to_club_project', text: 'Перейти к процедуре', href: "/project/#{club_project.id}")
   validate_projects_links({closed: closed_project, club: club_project}, expect: false)
 end
 
 def not_have_content_for_club_user(closed_project)
-  #expect(page).not_to have_selector '#list_projects'
   expect(page).not_to have_link('list_projects', text: 'Список процедур', href: list_projects_path)
   expect(page).not_to have_content 'Закрытые процедуры'
   expect(page).not_to have_content 'closed project'
-  #expect(page).not_to have_selector "a#go_to_closed_project[href='/project/#{closed_project.id}']", 'Перейти к процедуре'
-  # expect(page).not_to have_link('go_to_closed_project', text: 'Перейти к процедуре', href: "/project/#{closed_project.id}")
   validate_projects_links({closed: closed_project}, expect: false)
 end
 
@@ -97,12 +75,6 @@ def have_content_for_club_user(opened_project, demo_project, club_project)
   expect(page).to have_content 'opened project'
   expect(page).to have_content 'demo project'
   expect(page).to have_content 'club project'
-  #expect(page).to have_selector "a#go_to_opened_project[href='/project/#{opened_project.id}']", 'Перейти к процедуре'
-  #expect(page).to have_selector "a#go_to_demo_project[href='/project/#{demo_project.id}']", 'Перейти к процедуре'
-  #expect(page).to have_selector "a#go_to_club_project[href='/project/#{club_project.id}']", 'Перейти к процедуре'
-  # expect(page).to have_link('go_to_open_project_'+opened_project.id, text: 'Перейти к процедуре', href: "/project/#{opened_project.id}")
-  # expect(page).to have_link('go_to_demo_project_'+demo_project.id, text: 'Перейти к процедуре', href: "/project/#{demo_project.id}")
-  # expect(page).to have_link('go_to_club_project_'+club_project.id, text: 'Перейти к процедуре', href: "/project/#{club_project.id}")
   validate_projects_links({opened: opened_project, demo: demo_project, club: club_project}, expect: true)
 end
 
@@ -115,27 +87,19 @@ def have_content_for_invited_club_user(closed_project_for_invite, opened_project
   expect(page).to have_content 'demo project'
   expect(page).to have_content 'club project'
   expect(page).to have_content 'closed invited project'
-  # expect(page).to have_link('go_to_opened_project', text: 'Перейти к процедуре', href: "/project/#{opened_project.id}")
-  # expect(page).to have_link('go_to_demo_project', text: 'Перейти к процедуре', href: "/project/#{demo_project.id}")
-  # expect(page).to have_link('go_to_closed_project', text: 'Перейти к процедуре', href: "/project/#{closed_project_for_invite.id}")
-  # expect(page).to have_link('go_to_club_project', text: 'Перейти к процедуре', href: "/project/#{club_project.id}")
   validate_projects_links({closed: closed_project_for_invite, opened: opened_project, demo: demo_project, club: club_project}, expect: true)
 end
 
 def not_have_content_for_invited_club_user(closed_project)
   expect(page).not_to have_link('list_projects', text: 'Список процедур', href: list_projects_path)
   expect(page).not_to have_content 'closed project'
-  # expect(page).not_to have_link('go_to_closed_project', text: 'Перейти к процедуре', href: "/project/#{closed_project.id}")
   validate_projects_links({closed: closed_project}, expect: false)
 end
 
 def not_have_content_for_moderator(closed_project)
-  #expect(page).not_to have_selector '#list_projects'
   expect(page).not_to have_link('list_projects', text: 'Список процедур', href: list_projects_path)
   expect(page).not_to have_content 'Закрытые процедуры'
   expect(page).not_to have_content 'closed project'
-  #expect(page).not_to have_selector "a#go_to_closed_project[href='/project/#{closed_project.id}']", 'Перейти к процедуре'
-  # expect(page).not_to have_link('go_to_closed_project', text: 'Перейти к процедуре', href: "/project/#{closed_project.id}")
   validate_projects_links({closed: closed_project}, expect: false)
 end
 
@@ -146,12 +110,6 @@ def have_content_for_moderator(opened_project, demo_project, club_project)
   expect(page).to have_content 'opened project'
   expect(page).to have_content 'demo project'
   expect(page).to have_content 'club project'
-  #expect(page).to have_selector "a#go_to_opened_project[href='/project/#{opened_project.id}']", 'Перейти к процедуре'
-  #expect(page).to have_selector "a#go_to_demo_project[href='/project/#{demo_project.id}']", 'Перейти к процедуре'
-  #expect(page).to have_selector "a#go_to_club_project[href='/project/#{club_project.id}']", 'Перейти к процедуре'
-  # expect(page).to have_link('go_to_opened_project', text: 'Перейти к процедуре', href: "/project/#{opened_project.id}")
-  # expect(page).to have_link('go_to_demo_project', text: 'Перейти к процедуре', href: "/project/#{demo_project.id}")
-  # expect(page).to have_link('go_to_club_project', text: 'Перейти к процедуре', href: "/project/#{club_project.id}")
   validate_projects_links({opened: opened_project, demo: demo_project, club: club_project}, expect: true)
 end
 
@@ -164,22 +122,16 @@ def have_content_for_invited_moderator(closed_project_for_invite, opened_project
   expect(page).to have_content 'demo project'
   expect(page).to have_content 'club project'
   expect(page).to have_content 'closed invited project'
-  # expect(page).to have_link('go_to_opened_project', text: 'Перейти к процедуре', href: "/project/#{opened_project.id}")
-  # expect(page).to have_link('go_to_demo_project', text: 'Перейти к процедуре', href: "/project/#{demo_project.id}")
-  # expect(page).to have_link('go_to_closed_project', text: 'Перейти к процедуре', href: "/project/#{closed_project_for_invite.id}")
-  # expect(page).to have_link('go_to_club_project', text: 'Перейти к процедуре', href: "/project/#{club_project.id}")
   validate_projects_links({closed: closed_project_for_invite, opened: opened_project, demo: demo_project, club: club_project}, expect: true)
 end
 
 def not_have_content_for_invited_moderator(closed_project)
   expect(page).not_to have_link('list_projects', text: 'Список процедур', href: list_projects_path)
   expect(page).not_to have_content 'closed project'
-  # expect(page).not_to have_link('go_to_closed_project', text: 'Перейти к процедуре', href: "/project/#{closed_project.id}")
   validate_projects_links({closed: closed_project}, expect: false)
 end
 
 def have_content_for_prime_admin(closed_project, opened_project, demo_project, club_project)
-  #expect(page).to have_selector '#list_projects'
   expect(page).to have_link('list_projects', text: 'Список процедур', href: list_projects_path)
   expect(page).to have_content 'Открытые процедуры'
   expect(page).to have_content 'Закрытые процедуры'
@@ -189,14 +141,6 @@ def have_content_for_prime_admin(closed_project, opened_project, demo_project, c
   expect(page).to have_content 'closed project'
   expect(page).to have_content 'demo project'
   expect(page).to have_content 'club project'
-  #expect(page).to have_selector "a#go_to_opened_project[href='/project/#{opened_project.id}']", 'Перейти к процедуре'
-  #expect(page).to have_selector "a#go_to_closed_project[href='/project/#{closed_project.id}']", 'Перейти к процедуре'
-  #expect(page).to have_selector "a#go_to_demo_project[href='/project/#{demo_project.id}']", 'Перейти к процедуре'
-  #expect(page).to have_selector "a#go_to_club_project[href='/project/#{club_project.id}']", 'Перейти к процедуре'
-  # expect(page).to have_link('go_to_opened_project', text: 'Перейти к процедуре', href: "/project/#{opened_project.id}")
-  # expect(page).to have_link('go_to_demo_project', text: 'Перейти к процедуре', href: "/project/#{demo_project.id}")
-  # expect(page).to have_link('go_to_closed_project', text: 'Перейти к процедуре', href: "/project/#{closed_project.id}")
-  # expect(page).to have_link('go_to_club_project', text: 'Перейти к процедуре', href: "/project/#{club_project.id}")
   validate_projects_links({closed: closed_project, opened: opened_project, demo: demo_project, club: club_project}, expect: true)
 end
 
@@ -310,7 +254,6 @@ def validate_have_prime_admin_links(project)
 end
 
 def validate_have_moderator_links(project)
-  # expect(page).to have_link('go_to_club_rating', text: 'Клубный рейтинг', href: users_rc_users_path(project))
   expect(page).to have_link('new_aspect', text: I18n.t('link.new_aspect'), href: new_discontent_aspect_path(project))
 end
 
@@ -335,10 +278,6 @@ def validate_default_links_and_sidebar(project, user)
   expect(page).to have_link('go_to_concept', text: "3#{I18n.t('stages.stage', count: 3)} #{I18n.t('stages.concept')}")
   expect(page).to have_link('go_to_plan', text: "4#{I18n.t('stages.stage', count: 4)} #{I18n.t('stages.plan')}")
   expect(page).to have_link('go_to_estimate', text: "5#{I18n.t('stages.stage', count: 5)} #{I18n.t('stages.estimate')}")
-  #expect(page).to have_link('go_to_discontent', text: '2 этап', href: discontent_posts_path(project))
-  #expect(page).to have_link('go_to_concept', text: '3 этап', href: concept_posts_path(project))
-  #expect(page).to have_link('go_to_plan', text: '4 этап', href: plan_posts_path(project))
-  #expect(page).to have_link('go_to_estimate', text: '5 этап', href: estimate_posts_path(project))
 end
 
 def validate_projects_links(projects, expect)
@@ -380,28 +319,28 @@ def prepare_journal(project, user)
 end
 
 def prepare_awards
-  create :award, name: "1 лайк модератора", url: "1like", position: 1
-  create :award, name: "3 лайка модератора", url: "3likes", position: 2
-  create :award, name: "5 лайков модератора", url: "5likes", position: 3
-  create :award, name: "15 лайков модератора", url: "15likes", position: 4
-  create :award, name: "50 лайков модератора", url: "50likes", position: 5
-  create :award, name: "Первое несовершенство в аспекте", url: "1stimperfection", position: 6
-  create :award, name: "1 несовершенство в аспекте", url: "1imperfection", position: 7
-  create :award, name: "3 несовершенства в аспекте", url: "3imperfection", position: 8
-  create :award, name: "5 несовершенств в аспекте", url: "5imperfection", position: 9
-  create :award, name: "15 и более несовершенств в аспекте", url: "15imperfection", position: 10
-  create :award, name: "50 процентов и более несовершенств одного автора в одном аспекте", url: "50imperfection", position: 11
-  create :award, name: "Первое нововведение в аспекте", url: "1stinnovation", position: 12
-  create :award, name: "1 нововведение в аспекте", url: "1innovation", position: 13
-  create :award, name: "3 нововведение в аспекте", url: "3innovation", position: 14
-  create :award, name: "5 нововведение в аспекте", url: "5innovation", position: 15
-  create :award, name: "15 и более нововведений в аспекте", url: "15innovation", position: 16
-  create :award, name: "50 процентов и более нововведений одного автора в одном аспекте", url: "50innovation", position: 17
-  create :award, name: "За проект", url: "project", position: 18
-  create :award, name: "100 очков рейтинга", url: "100points", position: 19
-  create :award, name: "500 очков рейтинга", url: "500points", position: 20
-  create :award, name: "1000 очков рейтинга", url: "1000points", position: 21
-  create :award, name: "3000 рейтинга и более", url: "3000points", position: 22
+  create :award, name: '1 лайк модератора', url: '1like', position: 1
+  create :award, name: '3 лайка модератора', url: '3likes', position: 2
+  create :award, name: '5 лайков модератора', url: '5likes', position: 3
+  create :award, name: '15 лайков модератора', url: '15likes', position: 4
+  create :award, name: '50 лайков модератора', url: '50likes', position: 5
+  create :award, name: 'Первое несовершенство в аспекте', url: '1stimperfection', position: 6
+  create :award, name: '1 несовершенство в аспекте', url: '1imperfection', position: 7
+  create :award, name: '3 несовершенства в аспекте', url: '3imperfection', position: 8
+  create :award, name: '5 несовершенств в аспекте', url: '5imperfection', position: 9
+  create :award, name: '15 и более несовершенств в аспекте', url: '15imperfection', position: 10
+  create :award, name: '50 процентов и более несовершенств одного автора в одном аспекте', url: '50imperfection', position: 11
+  create :award, name: 'Первое нововведение в аспекте', url: '1stinnovation', position: 12
+  create :award, name: '1 нововведение в аспекте', url: '1innovation', position: 13
+  create :award, name: '3 нововведение в аспекте', url: '3innovation', position: 14
+  create :award, name: '5 нововведение в аспекте', url: '5innovation', position: 15
+  create :award, name: '15 и более нововведений в аспекте', url: '15innovation', position: 16
+  create :award, name: '50 процентов и более нововведений одного автора в одном аспекте', url: '50innovation', position: 17
+  create :award, name: 'За проект', url: 'project', position: 18
+  create :award, name: '100 очков рейтинга', url: '100points', position: 19
+  create :award, name: '500 очков рейтинга', url: '500points', position: 20
+  create :award, name: '1000 очков рейтинга', url: '1000points', position: 21
+  create :award, name: '3000 рейтинга и более', url: '3000points', position: 22
 end
 
 def prepare_for_vote_discontents(project)
@@ -423,12 +362,8 @@ def prepare_concepts(project, user)
 end
 
 def prepare_estimates(project, user)
-  @aspect1 = create :aspect, project: project, content: 'aspect 1'
-  @aspect2 = create :aspect, project: project, content: 'aspect 2'
-  @discontent1 = create :discontent, project: project, status: 4, content: 'discontent 1', whend: 'when 1', whered: 'where 1'
-  @discontent2 = create :discontent, project: project, status: 4, content: 'discontent 2', whend: 'when 2', whered: 'where 2'
-  @disasp1 = create :discontent_post_aspect, post_id: @discontent1.id, aspect_id: @aspect1.id
-  @disasp1 = create :discontent_post_aspect, post_id: @discontent2.id, aspect_id: @aspect1.id
+  @discontent1 = create :discontent, project: project, status: 4
+  @discontent2 = create :discontent, project: project, status: 4
 
   @concept1 = create :concept, project: project
   @concept2 = create :concept, project: project
@@ -437,11 +372,11 @@ def prepare_estimates(project, user)
   @condis1 = create :concept_post_discontent, post_id: @concept1.id, discontent_post_id: @discontent1.id
   @condis2 = create :concept_post_discontent, post_id: @concept2.id, discontent_post_id: @discontent1.id
 
-  @plan1 = create :plan, project: project, name: 'name 1', goal: 'goal 1', content: 'content 1'
-  @plan_stage1 = create :plan_stage, post_id: @plan1.id, name: 'stage name 1', desc: 'stage desc 1'
-  @plan_aspect1 = create :plan_aspect, plan_post_id: @plan1.id, post_stage_id: @plan_stage1.id, positive: 'concept positive 1', negative: 'concept negative 1', title: 'concept title 1', control: 'control 1', content: 'concept content 1', reality: 'concept reality 1', problems: 'concept problems 1', name: 'concept name 1'
-  @plan_action1 = create :plan_action, plan_post_aspect_id: @plan_aspect1.id, name: 'action name 1', desc: 'action desc 1'
+  @plan1 = create :plan, project: project
+  @plan_stage1 = create :plan_stage, post_id: @plan1.id
+  @plan_aspect1 = create :plan_aspect, plan_post_id: @plan1.id, post_stage_id: @plan_stage1.id
+  @plan_action1 = create :plan_action, plan_post_aspect_id: @plan_aspect1.id
 
-  @estimate1 = create :estimate, project: project, post_id: @plan1.id, user: user, content: 'estimate 1', nepr1: 0, nepr2: 0, nepr3: 0, nepr4: 0, nep1: 0, nep2: 0, nep3: 0, nep4: 0
-  @estimate_aspect1 = create :estimate_aspect, post_id: @plan1.id, plan_post_aspect_id: @plan_aspect1.id, op1: 0, op2: 0, op3: 0, op4: 0, on1: 0, on2: 0, on3: 0, on4: 0, ozf1: 0, ozf2: 0, ozf3: 0, ozf4: 0, ozs1: 0, ozs2: 0, ozs3: 0, ozs4: 0
+  @estimate1 = create :estimate, project: project, post_id: @plan1.id, user: user
+  @estimate_aspect1 = create :estimate_aspect, post_id: @plan1.id, plan_post_aspect_id: @plan_aspect1.id
 end
