@@ -17,6 +17,8 @@ class Estimate::Post < ActiveRecord::Base
   #has_many :post_aspects_other, -> { where first_stage: false }, foreign_key: 'post_id', class_name: 'Estimate::PostAspect'
   #has_many :post_aspects_first, -> { where first_stage: true }, foreign_key: 'post_id', class_name: 'Estimate::PostAspect'
 
+  validates :user_id, :post_id, :status, :project_id, presence: true
+
   #@todo replace sum in product
   def score(status)
     if status.nil? or status == 0
