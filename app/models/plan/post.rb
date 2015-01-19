@@ -16,6 +16,8 @@ class Plan::Post < ActiveRecord::Base
   has_many :post_st, class_name: 'Plan::PostStage'
   scope :by_project, ->(p) { where(project_id: p) }
 
+  validates :project_id, :user_id, :status, presence: true
+
   def voted(user)
     self.voted_users.where(id: user)
   end

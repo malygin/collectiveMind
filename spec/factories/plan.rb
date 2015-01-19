@@ -4,6 +4,9 @@ FactoryGirl.define do
     sequence(:goal) { |n| "goal #{n}" }
     sequence(:content) { |n| "content #{n}" }
     status 0
+
+    association :user, factory: :ordinary_user
+    association :project, factory: :core_project
   end
 
   factory :plan_stage, class: 'Plan::PostStage' do
