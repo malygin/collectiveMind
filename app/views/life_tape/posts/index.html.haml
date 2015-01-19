@@ -9,7 +9,7 @@
         -@project.aspects.main_aspects.order(:id).each_with_index do |asp, index|
           %li.li_aspect{id: "li_aspect_#{asp.id}"}
             %button.btn.btn-round{id: "aspect_#{asp.id}", "data-toggle" => "tab", :href => "#tab-#{index+1}", style: "color:#ffffff;background:#{asp.color};border:1px solid #{asp.color};"}
-              %span= asp.short_name.present? ? asp.short_name : asp.content[0,2].mb_chars.upcase
+              %span= asp.short_name.present? ? asp.short_name.upcase : asp.content[0,2].mb_chars.upcase
               %span{id: "check_question_#{asp.id}"}
                 -if asp.question_complete(@project, current_user).count == asp.questions.by_project(@project.id).by_status(0).count
                   %i.fa.fa-check{style: "font-size:15px;margin:0;"}

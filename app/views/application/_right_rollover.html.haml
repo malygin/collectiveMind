@@ -9,8 +9,8 @@
         Индекс аспектов
       .index-of-aspects
         -@project.aspects.main_aspects.order("discontent_aspects.id").each_with_index do |asp, index|
-          .aspect{id: "button_aspect_#{asp.id}", "data-project" => @project.id, "data-aspect" => asp.id, style: "cursor:pointer;border: 1px solid gray;border-radius: 4px;"}
-            .circle-tag.back-color{style: "background-color:#{asp.color};"}= asp.short_name.present? ? asp.short_name : asp.content[0,2].mb_chars.downcase
+          .aspect{id: "button_aspect_#{asp.id}", "data-project" => @project.id, "data-aspect" => asp.id, style: "cursor:pointer;border-radius: 4px;"}
+            .circle-tag.back-color{style: "background-color:#{asp.color};"}= asp.short_name.present? ? asp.short_name.downcase : asp.content[0,2].mb_chars.downcase
             %span.aspect-text=asp.content
 
     -elsif current_stage == :concept
