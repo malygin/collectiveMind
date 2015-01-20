@@ -2,6 +2,7 @@
   $('.wrong-answer').removeClass("close-notice");
   - @question.answers.by_status(0).by_style(0).each do |answer|
     $('#answer_#{answer.id}.active').removeClass('btn-white btn-red btn-blue').addClass('btn-red');
+  $('button.answer-question').button('reset').removeClass("active");
 -else
   $('.wrong-answer').addClass("close-notice");
   $('.hint').addClass("close-notice");
@@ -18,3 +19,4 @@
 
   $('#count_questions_now_#{@aspect.id}').html("#{@count_now}");
   $('#progress_bar_#{@aspect.id}').css('width',"#{(@count_now/@count_all.to_f)*100}%");
+  $('button.answer-question').button('reset').removeClass("active");
