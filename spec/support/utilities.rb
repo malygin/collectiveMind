@@ -344,7 +344,7 @@ def prepare_awards
 end
 
 def prepare_for_vote_discontents(project)
-  @discontent_group1 = create :discontent, project: project, status: 2, content: 'discontent group 1', whend: 'when group 1', whered: 'where group 1'
+  @discontent_group1 = create :discontent, project: project, status: 2
 end
 
 def prepare_concepts(project, user)

@@ -17,5 +17,6 @@ FactoryGirl.define do
     sequence(:content) { |n| "life tape comment #{n}" }
 
     association :user, factory: :ordinary_user
+    association :post, factory: :life_tape_post
   end
 end
