@@ -261,7 +261,7 @@ describe 'Concept ' do
       end
 
       context 'concept comments' do
-        it_behaves_like 'content with comments', 2, false, 'Concept::Comment'
+        it_behaves_like 'content with comments', 'Concept::Comment'
       end
     end
 
@@ -383,7 +383,7 @@ describe 'Concept ' do
       end
 
       context 'concept comments' do
-        it_behaves_like 'content with comments', 2, true, 'Concept::Comment'
+        it_behaves_like 'content with comments', 'Concept::Comment', true
       end
     end
 

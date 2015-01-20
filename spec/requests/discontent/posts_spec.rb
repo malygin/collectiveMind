@@ -5,21 +5,19 @@ describe 'Discontent ' do
 
   let (:user) { create :user }
   let (:user_data) { create :user }
-  let (:prime_admin) { create :prime_admin }
   let (:moderator) { create :moderator }
   let (:project) { create :core_project, status: 3 }
   let (:project_for_group) { create :core_project, status: 4 }
 
   before do
-    @discontent1 = create :discontent, project: project, user: user_data, anonym: false
-    @discontent2 = create :discontent, project: project, user: user_data, anonym: false
-    @comment1 = create :discontent_comment, post: @discontent1, user: user_data
+    @discontent1 = create :discontent, project: project, user: user, anonym: false
+    @discontent2 = create :discontent, project: project, user: user, anonym: false
+    @post1 = @discontent1
   end
 
   context 'ordinary user sign in ' do
     before do
       sign_in user
-      visit root_path
     end
 
     context 'discontent list' do
@@ -41,7 +39,7 @@ describe 'Discontent ' do
         fill_in 'discontent_post_content', with: 'dis content'
         fill_in 'discontent_post_whered', with: 'dis where'
         fill_in 'discontent_post_whend', with: 'dis when'
-        expect(page).to have_selector "span", 'aspect 1'
+        expect(page).to have_selector 'span', 'aspect 1'
         click_button 'send_post'
         expect(page).to have_content 'Перейти к списку'
         expect(page).to have_content 'Добавить еще одно'
@@ -54,7 +52,7 @@ describe 'Discontent ' do
         fill_in 'discontent_post_content', with: 'disсontent content'
         fill_in 'discontent_post_whered', with: 'disсontent where'
         fill_in 'discontent_post_whend', with: 'disсontent when'
-        expect(page).to have_selector "span", 'aspect 1'
+        expect(page).to have_selector 'span', 'aspect 1'
         click_button 'send_post'
         visit user_path(id: user.id, project: project)
         click_link 'tab-imperfections'
@@ -91,7 +89,7 @@ describe 'Discontent ' do
         expect(page).not_to have_link("plus_post_#{@discontent1.id}", text: 'Выдать баллы', href: plus_discontent_post_path(project, @discontent1))
       end
 
-      it_behaves_like 'content with comments', 2, true
+      it_behaves_like 'content with comments', 'Discontent::Comment', true
     end
 
     context 'vote discontent ' do
@@ -167,7 +165,7 @@ describe 'Discontent ' do
       end
 
 
-      it_behaves_like 'content with comments', 2, true
+      it_behaves_like 'content with comments', 'Discontent::Comment', true
 
       context 'like concept' do
         before do

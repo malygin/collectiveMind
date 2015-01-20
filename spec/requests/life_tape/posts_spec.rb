@@ -5,7 +5,6 @@ describe 'Life Tape ' do
 
   let!(:user) { @user = create :user }
   let (:user_data) { create :user }
-  let (:prime_admin) { create :prime_admin }
   let!(:moderator) { @moderator = create :moderator }
   let (:project) { create :core_project, status: 1 }
 
@@ -108,7 +107,7 @@ describe 'Life Tape ' do
         visit life_tape_posts_path(project)
       end
 
-      it_behaves_like 'content with comments', 2, true
+      it_behaves_like 'content with comments', 'LifeTape::Comment', true
 
     end
 
