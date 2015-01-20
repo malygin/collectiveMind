@@ -1,5 +1,5 @@
-shared_examples 'content with comments' do |count = 2, moderator = false|
-  let(:text_comment) { 'new child to answer comment' }
+shared_examples 'content with comments' do |comment_model = 'LifeTape::Comment', moderator = false, count = 2|
+  let(:text_comment) { attributes_for(:life_tape_comment)[:content] }
   let!(:comment_1) { create :life_tape_comment, post: @post1, user: user }
   let!(:comment_2) { create :life_tape_comment, post: @post1, comment_id: comment_1.id }
 
@@ -61,7 +61,7 @@ shared_examples 'content with comments' do |count = 2, moderator = false|
 
     it { expect(page).to have_content text_comment }
 
-    it { expect change(LifeTape::Comment, :count).by(1) }
+    it { expect change(comment_model.constantize, :count).by(1) }
 
     it { expect change(Journal.events_for_my_feed(project, user_data), :count).by(1) }
   end
@@ -75,13 +75,13 @@ shared_examples 'content with comments' do |count = 2, moderator = false|
 
     it { expect(page).to have_content text_comment }
 
-    it { expect change(LifeTape::Comment, :count).by(1) }
+    it { expect change(comment_model.constantize, :count).by(1) }
 
     it { expect change(Journal.events_for_my_feed(project, user_data), :count).by(1) }
   end
 
   it 'paginate comments' do
-    create_list :life_tape_comment, 11, post: @post1
+    create_list :life_tape_comment, 11, post: comment_1.post
     refresh_page
     expect(page).to have_css 'div.pagination'
     expect(page).to have_css 'a.previous_page'
@@ -108,30 +108,44 @@ shared_examples 'content with comments' do |count = 2, moderator = false|
       end
     end
 
-    it 'discuss' do
-      within :css, "a#discuss_stat_comment_#{comment_1.id}" do
-        expect(page).to have_css 'span.label-default'
+    if moderator
+      it 'discuss' do
+        within :css, "a#discuss_stat_comment_#{comment_1.id}" do
+          expect(page).to have_css 'span.label-default'
+        end
+        click_link "discuss_stat_comment_#{comment_1.id}"
+        within :css, "a#discuss_stat_comment_#{comment_1.id}" do
+          expect(page).to have_css 'span.label-danger'
+        end
       end
-      click_link "discuss_stat_comment_#{comment_1.id}"
-      within :css, "a#discuss_stat_comment_#{comment_1.id}" do
-        expect(page).to have_css 'span.label-danger'
-      end
-    end
 
-    it 'approve' do
-      within :css, "a#approve_stat_comment_#{comment_1.id}" do
-        expect(page).to have_css 'span.label-default'
+      it 'approve' do
+        within :css, "a#approve_stat_comment_#{comment_1.id}" do
+          expect(page).to have_css 'span.label-default'
+        end
+        click_link "approve_stat_comment_#{comment_1.id}"
+        within :css, "a#approve_stat_comment_#{comment_1.id}" do
+          expect(page).to have_css 'span.label-success'
+        end
       end
-      click_link "approve_stat_comment_#{comment_1.id}"
-      within :css, "a#approve_stat_comment_#{comment_1.id}" do
-        expect(page).to have_css 'span.label-success'
+    else
+      it 'show discuss label' do
+        comment_1.update_attributes(discuss_status: true)
+        refresh_page
+        expect(page).to have_css "span.label-danger#discuss_stat_comment_#{comment_1.id}"
+      end
+
+      it 'show approve label' do
+        comment_1.update_attributes(approve_status: true)
+        refresh_page
+        expect(page).to have_css "span.label-success#approve_stat_comment_#{comment_1.id}"
       end
     end
   end
 
   context 'edit comment', js: true do
     it 'i owner - ok' do
-      click_link "edit_comment_#{comment_1.id}"
+      click_button "edit_comment_#{comment_1.id}"
       find("#form_edit_comment_#{comment_1.id}").find('.comment-textarea').set text_comment
       find("#form_edit_comment_#{comment_1.id}").find('.send-comment').click
     end
@@ -146,8 +160,9 @@ shared_examples 'content with comments' do |count = 2, moderator = false|
     it 'i owner - ok' do
       expect {
         click_link "destroy_comment_#{comment_1.id}"
+        sleep 5
         expect(page).not_to have_content comment_1.content
-      }.to change(LifeTape::Comment, :count).by(-1)
+      }.to change(comment_model.constantize, :count).by(-1)
     end
 
     it 'from other users - error' do
