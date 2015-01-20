@@ -19,4 +19,7 @@ FactoryGirl.define do
   factory :discontent_comment, class: 'Discontent::Comment' do
     content 'discontent comment for post'
   end
+
+  factory :discontent_aspects_life_tape_posts, class: 'Discontent::AspectsLifeTapePost' do
+  end
 end

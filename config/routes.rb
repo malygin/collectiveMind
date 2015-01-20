@@ -38,8 +38,6 @@ CollectiveMind::Application.routes.draw do
   end
 
   devise_for :users
-  get '/project/:project', to: 'core/projects#to_project'
-  get '/list_projects', to: 'core/projects#list_projects'
   get '/general_news', to: 'core/projects#news'
   get '/general_rating', to: 'core/projects#users'
 
@@ -266,6 +264,5 @@ CollectiveMind::Application.routes.draw do
 
   ############
 
-  root to: 'core/projects#index'
-  #root to: 'home#index'
+  root to: 'home#index'
 end

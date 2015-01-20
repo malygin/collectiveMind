@@ -10,6 +10,26 @@ describe 'Users ' do
       sign_in user
     end
 
+    context 'base links' do
+      it { expect(page).to have_link('user_profile', text: user.to_s, href: user_path(user.current_projects_for_user.last, user)) }
+
+      it { expect(page).to have_link('sign_out', text: 'Выйти', href: destroy_user_session_path) }
+    end
+
+    it 'have content in profile ' do
+      click_link 'user_profile'
+      expect(page).to have_content 'Профиль'
+      expect(page).to have_content 'Достижения'
+      expect(page).to have_content 'Активность'
+    end
+
+    it 'success sign out ', js: true do
+      click_link 'sign_out'
+      expect(page).to have_link('sign_in', text: 'Войти', href: new_user_session_path)
+      expect(page).to have_link('sign_up', text: 'Зарегистрироваться', href: new_user_registration_path)
+      expect(page).to have_content 'О проекте'
+    end
+
     context 'my journal', js: true do
       before do
         @personal_journal = create :personal_journal, project: project, user: user, user_informed: user

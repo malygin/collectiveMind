@@ -1,6 +1,6 @@
 class Core::ProjectsController < ApplicationController
   #before_filter :boss_authenticate, only: [:next_stage, :pr_stage]
-  before_filter :prime_admin_authenticate, only: [:next_stage, :pr_stage, :show, :new, :edit, :create, :update, :destroy, :list_projects,
+  before_filter :prime_admin_authenticate, only: [:next_stage, :pr_stage, :show, :new, :edit, :create, :update, :destroy, :index,
                                                   :general_analytics, :lifetape_analytics, :discontent_analytics, :concept_analytics, :plan_analytics, :estimate_analytics]
   before_filter :project_by_id
   before_action :set_core_project, only: [:show, :edit, :update, :pr_stage, :next_stage, :destroy]
@@ -22,46 +22,17 @@ class Core::ProjectsController < ApplicationController
   end
 
   def index
-    if signed_in?
-      if prime_admin?
-        @closed_projects = Core::Project.where(type_access: Core::Project::TYPE_ACCESS_CODE[:closed])
-      elsif boss?
-        @closed_projects = current_user.projects.where(core_projects: {type_access: Core::Project::TYPE_ACCESS_CODE[:closed]})
-      else
-        @closed_projects = current_user.projects.where(core_projects: {type_access: Core::Project::TYPE_ACCESS_CODE[:closed]})
-      end
-      @core_projects = current_user.current_projects_for_user
-      @core_project = @core_projects.last
-      @club_projects = Core::Project.where(type_access: Core::Project::TYPE_ACCESS_CODE[:club]) if cluber? or boss?
-      @opened_projects = Core::Project.where(type_access: Core::Project::TYPE_ACCESS_CODE[:opened])
-    end
-
-    respond_to do |format|
-      format.html
-    end
-  end
-
-  def to_project
-    @project = Core::Project.find(params[:project])
-    redirect_to polymorphic_path(@project.redirect_to_current_stage)
-  end
-
-  # GET /core/projects/1
-  # GET /core/projects/1.json
-  def show
-    respond_to do |format|
-      format.html # show.html.erb
-      format.json { render json: @core_project }
-    end
-  end
-
-  def list_projects
     @view_projects = Core::Project.where(type_access: list_type_projects_for_user)
     @core_project = @view_projects.first
 
     respond_to do |format|
       format.html { render layout: 'core/list_projects' }
     end
+  end
+
+  def show
+    @project = Core::Project.find(params[:id])
+    redirect_to polymorphic_path(@project.redirect_to_current_stage, project: @project)
   end
 
   # GET /core/projects/new
@@ -103,7 +74,7 @@ class Core::ProjectsController < ApplicationController
   def update
     respond_to do |format|
       if @core_project.update_attributes(core_project_params)
-        format.html { redirect_to list_projects_path, success: 'Процедура успешно отредактирована' }
+        format.html { redirect_to core_projects_path, success: 'Процедура успешно отредактирована' }
         format.json { head :no_content }
       else
         format.html { render action: 'edit' }

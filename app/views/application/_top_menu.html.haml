@@ -31,7 +31,7 @@
           %li{role: 'presentation'}
             =link_to t('menu.analytics'), "/project/#{@project.id}/general_analytics", id: 'general_analytics'
           %li{role: 'presentation'}
-            =link_to t('menu.list_projects'), list_projects_path, id: 'list_projects'
+            =link_to t('menu.list_projects'), core_projects_path, id: 'list_projects'
           %br
           -if @project.status == 1
             %li{role: 'presentation'}
@@ -107,7 +107,7 @@
         -if @user_projects
           -@user_projects.each do |project|
             %li
-              = link_to "/project/#{project.id}", id: "go_to_project_#{project.id}" do
+              = link_to core_project_path(project), id: "go_to_project_#{project.id}" do
                 &nbsp;
                 =" #{project.name}"
 
