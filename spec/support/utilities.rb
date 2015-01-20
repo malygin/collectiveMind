@@ -360,23 +360,3 @@ def prepare_concepts(project, user)
   @condis1 = create :concept_post_discontent, post_id: @concept1.id, discontent_post_id: @discontent1.id
   @condis2 = create :concept_post_discontent, post_id: @concept2.id, discontent_post_id: @discontent1.id
 end
-
-def prepare_estimates(project, user)
-  @discontent1 = create :discontent, project: project, status: 4
-  @discontent2 = create :discontent, project: project, status: 4
-
-  @concept1 = create :concept, project: project
-  @concept2 = create :concept, project: project
-  @concept_aspect1 = create :concept_aspect, discontent_aspect_id: @discontent1.id, concept_post_id: @concept1.id
-  @concept_aspect2 = create :concept_aspect, discontent_aspect_id: @discontent1.id, concept_post_id: @concept2.id
-  @condis1 = create :concept_post_discontent, post_id: @concept1.id, discontent_post_id: @discontent1.id
-  @condis2 = create :concept_post_discontent, post_id: @concept2.id, discontent_post_id: @discontent1.id
-
-  @plan1 = create :plan, project: project
-  @plan_stage1 = create :plan_stage, post_id: @plan1.id
-  @plan_aspect1 = create :plan_aspect, plan_post_id: @plan1.id, post_stage_id: @plan_stage1.id
-  @plan_action1 = create :plan_action, plan_post_aspect_id: @plan_aspect1.id
-
-  @estimate1 = create :estimate, project: project, post_id: @plan1.id, user: user
-  @estimate_aspect1 = create :estimate_aspect, post_id: @plan1.id, plan_post_aspect_id: @plan_aspect1.id
-end
