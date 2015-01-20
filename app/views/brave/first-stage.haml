@@ -1,0 +1,222 @@
+!!!
+%html
+  %head
+    %meta{:charset => "utf-8"}/
+    %title
+    / Description, Keywords and Author
+    %meta{:content => "Your description", :name => "description"}/
+    %meta{:content => "Your,Keywords", :name => "keywords"}/
+    %meta{:content => "Ian", :name => "author"}/
+    %meta{:content => "width=device-width, initial-scale=1.0", :name => "viewport"}/
+    / Styles
+    / Bootstrap CSS
+    %link{:href => "css/bootstrap.min.css", :rel => "stylesheet"}/
+    / Font awesome CSS
+    %link{:href => "css/font-awesome.min.css", :rel => "stylesheet"}/
+    / Magnific Popup
+    %link{:href => "css/magnific-popup.css", :rel => "stylesheet"}/
+    / Owl carousel
+    %link{:href => "css/owl.carousel.css", :rel => "stylesheet"}/
+    / Base style
+    %link{:href => "css/style.css", :rel => "stylesheet"}/
+    %link#color_theme{:href => "css/skin-lblue.css", :rel => "stylesheet"}/
+    %link{:href => "css/style-4.css", :rel => "stylesheet"}/
+    / Custom CSS. Type your CSS code in custom.css file
+    %link{:href => "css/custom.css", :rel => "stylesheet"}/
+  %body
+    .outer
+      / Top bar starts
+      %header.top-bar
+        .container
+          / Logo starts
+          .box-shadow-outer
+            .tb-logo.box-shadow-5.rounded-1.pull-left
+              %a{:href => "#"}
+                %img{:src => "img/logo-red.jpg"}/
+          / Logo ends
+          .clearfix.visible-xs
+          / Nav starts
+          %nav.header-buttons.pull-left
+            %a.btn.btn-white.rounded-2{:href => "#"} Процедура
+            .clearfix.visible-xs
+            %a.btn.btn-grey.rounded-2{:href => "#"} Кабинет
+            .clearfix.visible-xs
+            %a.btn.btn-grey.rounded-2{:href => "#"} Новости
+            .clearfix.visible-xs
+            %a.btn.btn-grey.rounded-2{:href => "#"} Рефлексия
+          / Nav ends
+          .pull-right.header-right
+            / Langauge starts
+            .tb-language.dropdown.pull-right
+              %a{"data-target" => "#", "data-toggle" => "dropdown", :href => "#"}
+                English
+                %i.fa.fa-angle-down.color.mass-dark-blue
+              / Dropdown menu with languages
+              %ul.dropdown-menu.dropdown-mini{:role => "menu"}
+                %li
+                  %a{:href => "#"} Hindi
+                %li
+                  %a{:href => "#"} Tamil
+                %li
+                  %a{:href => "#"} Kanada
+            / Language ends
+            %img.pull-right.operator-pic{:src => "img/call.png"}/
+            .clearfix
+            / User starts
+            .tb-language.dropdown.pull-right.user-block
+              %span.rating-block.rounded-1 500
+              %a{"data-target" => "#", "data-toggle" => "dropdown", :href => "#"}
+                Горлицкий Вячеслав
+                %i.fa.fa-angle-down.color.mass-dark-blue
+              / Dropdown menu with languages
+              %ul.dropdown-menu.dropdown-mini{:role => "menu"}
+                %li
+                  %a{:href => "#"} Вариант
+            -#/ User ends
+          .clearfix
+      / Top Bar ends
+      / Main Block starts
+      .main-block
+        .container
+          / Stages block starts
+          .stages.first-stage
+            .current-stage
+              %a.btn.rounded-1
+                %span.bigger> 1
+                стадия
+              .current-stage-text.pull-left
+                .top-text
+                  Максимизация работы в аптеках инвара (с учетом новой стратегии инвара)
+                .bottom-text
+                  %h4 Изучение базы знаний
+            .clearfix.visible-md.visible-sm.visible-xs
+            %a.btn.rounded-1
+              %span.bigger> 2
+              стадия
+            .clearfix.visible-sm.visible-xs
+            %a.btn.rounded-1.next-steps-stage
+              %span.bigger> 3
+              стадия
+            .clearfix.visible-sm.visible-xs
+            %a.btn.rounded-1.next-steps-stage
+              %span.bigger> 4
+              стадия
+          .clearfix
+          .divider-grey
+          / Progress bars block starts
+          .row.progress-bars
+            .col-md-6.col-sm-6
+              %span.progress-label Ваш прогресс на 1-ой стадии
+              .progress.pb-md
+                .progress-bar{"aria-valuemax" => "100", "aria-valuemin" => "0", "aria-valuenow" => "20", :role => "progressbar", :style => "width: 20%"}
+                  %span.sr-only 20% Complete (success)
+            .clearfix.visible-sm.visible-xs
+            .col-md-6.col-sm-6
+              %span.progress-label Прогресс других участников
+              .progress.pb-md
+                .progress-bar{"aria-valuemax" => "100", "aria-valuemin" => "0", "aria-valuenow" => "90", :role => "progressbar", :style => "width: 90%"}
+                  %span.sr-only 90% Complete (success)
+          / Progress bars block ends
+          .clearfix
+          .divider-grey
+          / Aspects block (UI four) starts
+          .ui-4.first-stage
+            .container
+              / UI content
+              .block-content
+                / Tabs
+                / Nav tabs
+                %ul.nav.nav-tabs
+                  %li.active
+                    %button.btn.btn-round.btn-gray.uncolored-arrow{"data-toggle" => "tab", :href => "#tab-one"}
+                      %i.fa.fa-wrench.fa-2x
+                  %li
+                    %button.btn.btn-round.btn-orange{"data-toggle" => "tab", :href => "#tab-two"} ПК
+                  %li
+                    %button.btn.btn-round.btn-purple.uncolored-arrow{"data-toggle" => "tab", :href => "#tab-three"} ЛС
+                  %li
+                    %button.btn.btn-round.btn-yellow.uncolored-arrow{"data-toggle" => "tab", :href => "#tab-four"} ИТ
+                  %li
+                    %button.btn.btn-round.btn-green.uncolored-arrow{"data-toggle" => "tab", :href => "#tab-five"} БЮ
+                  %li
+                    %button.btn.btn-round.btn-blue.uncolored-arrow{"data-toggle" => "tab", :href => "#tab-six"} РЗ
+                / Tab panes
+                .tab-content
+                  #tab-one.tab-pane.active.fade.in
+                    .rounded-2.info-section.point
+                      %h3 Цель этапа
+                      %p Подробное изучение базы знаний по каждому аспекту всеми участниками процедуры выработки проекта
+                      .attention
+                        %span.exclam !
+                        %span.text
+                          Второй этап выработки проекта будет доступен только после того, как средний уровень готовности участников будет не менее 80%!
+                    .rounded-2.info-section.begin
+                      %h3 С чего начать?
+                      %ol
+                        %li Выберите аспект в списке ниже
+                        %li Ознакомьтесь с базой знаний внутри этого аспекта
+                        %li Пройдите короткое тестирование по полученным знаниям
+                        %li Переходите к следующему аспекту
+                        %li Проголосуйте за самые важные на ваш взгляд аспекты (будет доступно в конце этапа)
+                  #tab-two.tab-pane.fade
+                    .top-colored-bar.padd-5 Персонал как инструмент продаж
+                    .container
+                      .row
+                        .col-md-8.col-sm-8.tab-image-block
+                          %img.img-responsive{:alt => "", :src => "img/woman.jpg"}/
+                        / Questions block starts
+                        .col-md-4.col-sm-4.questions-block
+                          %h4.block-with-left-icon
+                            %i.left-icon.fa.fa-2x.custom-firstStage-orange.fa-comments.pull-left>
+                            Вопросы по теме
+                          .rounded-1.hint.close-notice
+                            Читайте вторую страничку презентации
+                            %span.close-button
+                          .rounded-1.wrong-answer
+                            Неправильный ответ!
+                            Воспользуйтесь подсказкой
+                            %span.close-button
+                          %p.text.block-with-left-icon
+                            %span.left-icon.pull-right 2.
+                            Какие из указанных ниже инструментов
+                            использовались в прошлой стратегии
+                            Инвара по ОТС?
+                          %form.form.instruments-block
+                            .btn-group{"data-toggle" => "buttons"}
+                              %button.btn.btn-xs.btn-white.pull-left Инструмент 1
+                              %button.btn.btn-xs.btn-white.pull-left Инструмент 2
+                              %button.btn.btn-xs.btn-white.pull-left Хитрый инструмент 3
+                              %button.btn.btn-xs.btn-white.pull-left Инструмент с подвохом
+                              %button.btn.btn-xs.btn-white.pull-left Инструмент 1
+                            .clearfix
+                            .form-group.bottom-buttons
+                              %a.btn.btn-outline.notice-button Подсказка
+                              %button.btn.answer-button.popup-link-1{:type => "submit"} Ответить
+                        -#/ Questions block ends
+                  #tab-three.tab-pane.fade
+                  #tab-four.tab-pane.fade
+                  #tab-five.tab-pane.fade
+                  #tab-six.tab-pane.fade
+      -#    / Aspects block (UI four) ends
+      -#/ Main Block ends
+    / Outer Ends
+    / Javascript files
+    / jQuery
+    %script{:src => "js/jquery.js"}
+    / Bootstrap JS
+    %script{:src => "js/bootstrap.min.js"}
+    / Placeholders JS
+    %script{:src => "js/placeholders.js"}
+    / Magnific Popup
+    %script{:src => "js/jquery.magnific-popup.min.js"}
+    / Owl carousel
+    %script{:src => "js/owl.carousel.min.js"}
+    / Respond JS for IE8
+    %script{:src => "js/respond.min.js"}
+    / HTML5 Support for IE
+    %script{:src => "js/html5shiv.js"}
+    / Main JS
+    %script{:src => "js/main.js"}
+    / Javascript for this page
+    / Custom JS. Type your JS code in custom.js file
+    %script{:src => "js/custom.js"}

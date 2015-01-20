@@ -711,10 +711,6 @@ module ApplicationHelper
     end
   end
 
-  def aspect_color(asp)
-    '#' + (asp.color.present? ? asp.color : 'f8a841')
-  end
-
   def group_side_name(group)
     name = group.name
     count_messages = group.count_new_messages_for(current_user.group_users.by_group(group))

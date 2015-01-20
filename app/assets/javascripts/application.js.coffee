@@ -46,12 +46,14 @@
 #= require comments
 #= require resources
 
-#= require brave/html5shiv
-#= require brave/jquery.magnific-popup.min
-#= require brave/main
-#= require brave/owl.carousel.min
 #= require brave/placeholders
+#= require brave/jquery.magnific-popup.min
+#= require brave/owl.carousel.min
 #= require brave/respond.min
+#= require brave/html5shiv
+#= require brave/main
+#= require custom.js
+
 
 #= require brave/jquery.countTo
 #= require brave/jquery.themepunch.revolution.min
@@ -71,6 +73,8 @@ $ ->
   selectize()
 
   filterable()
+
+  sorterable()
 
   search()
 

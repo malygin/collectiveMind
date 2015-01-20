@@ -188,6 +188,7 @@ CollectiveMind::Application.routes.draw do
           put :discuss_status
           put :set_required
           put :set_grouped
+          get :show_comments
         end
       end
     end

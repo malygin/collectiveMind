@@ -194,4 +194,12 @@ module Concept::PostsHelper
   def mean?(res)
     %w(positive_s negative_s control_s).include? res
   end
+
+  def post_discontent_classes(post)
+    classes = ''
+    post.concept_disposts.each do |dispost|
+      classes += "discontent_#{dispost.id} "
+    end
+    classes
+  end
 end

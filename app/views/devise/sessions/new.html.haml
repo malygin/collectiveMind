@@ -34,3 +34,17 @@
           = link_to 'Создать аккаунт', '/users/sign_up', class:'forgot'
           |
           = link_to 'Вернуться', '/', class:'forgot'
+
+
+      #popup-auth.popup-window.auth-popup.mfp-hide
+        .popup.popup-bottom-rounded.popup-top-rounded
+          .popup-logo
+          %form#auth-form1.form-horizontal.auth-form{:role => "form"}
+            %h4 Зайти на сайт
+            %input{:name => "email", :placeholder => "Email or Username", :type => "email"}/
+            %input{:name => "psswrd", :placeholder => "Пароль", :type => "password"}/
+            %button.btn.btn-lg.btn-mass-red{:type => "submit"} Войти
+          .auth-bottom-links
+            %a.pull-left{:href => "#"} Забыли пароль?
+            %span.auth-divider |
+            %a.pull-right{:href => "#"} Зарегистрироваться

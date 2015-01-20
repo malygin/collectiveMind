@@ -1,104 +1,158 @@
-.col-md-6
-  %section
-    %header
-      .row
-        %h4
-          =t('show.concept.title_plural')
-          -if @project.status == 7
-            %a.btn.btn-warning.pull-right(href="/project/#{@project.id}/concept/posts/new#{@aspect ? "?asp_id=#{@aspect.id}" : ''}" style="font-weight: normal !important;" id="new_concept")
-              =t('show.concept.add_concept')
-      %hr
-    .body
-      - if @aspect
-        -@aspect.aspect_posts.by_status(4).each do |post|
-          %h4=t('show.concept.solved_problem')
-          -cache post do
-            =render partial:'discontent/posts/post_short2', object: post
+.innov
+  %h4
+    =t('show.concept.title_plural')
+    %span.innov-header-smaller (27)
+    %i.fa.fa-question-circle
+    -#-if @project.status == 7
+    -#  %a.btn.btn-warning.pull-right(href="/project/#{@project.id}/concept/posts/new#{@aspect ? "?asp_id=#{@aspect.id}" : ''}" style="font-weight: normal !important;" id="new_concept")
+    -#    =t('show.concept.add_concept')
+  .container
+    .row.innovs#tab_concept_posts
+      - @project.concept_ongoing_post.order("concept_posts.id").each_with_index  do |pa, index1|
+        .col-lg-6.box-shadow-outer.concept-block{id: "concept_post_#{pa.id}", class: "#{post_discontent_classes(pa)}"}
+          .innov-single.box-shadow-1.rounded-3
+            .row.post-header
+              .col-xs-10
+                %span.post-header-text.color.mass-red
+                  %i.fa.fa-check-circle.color.mass-red>
+                  =trim_content(pa.post_aspects.first.title)
+              .col-xs-2.post-header-date
+                %span
+                  = Russian::strftime(pa.created_at,"%d.%m.%Y")
+            .post-center-block
+              .post-poster
+                = image_tag pa.user.avatar.url(:thumb)
+                .clearfix
+                %span.poster-name= pa.user.to_s
+              =link_to({action: :show, project: @project, id: pa.id, asp: params[:asp]}, remote: true, id: "add_record", class: "post-text" ) do
+                .text-arrow.pull-right
+                %span=trim_string(pa.post_aspects.first.name)
+              -#%a{class: "post-text popup-link-#{index1+1}", :href => "#"}
+              -#  .text-arrow.pull-right
+              -#  %span
+              -#    =trim_string(pa.post_aspects.first.name)
+            .post-themes{id: "stripe#{index1+1}"}
+              - if pa.concept_disposts.any?
+                -pa.concept_disposts.each_with_index do |cd, index2|
+                  %a.tag-stripe{id: "stripe#{index2+1}", class: "#{'active' if index2 == 0} color-N#{index2+1}", :href => "#"}
+                    %span.tag=trim_content(cd.content, 50)
 
-          %h4=t('show.concept.proposed_solutions')
-          %br
-          %table.table.table-striped.table-bordered.table-condensed
-            %thead
-              %tr
-                %th
-                  ="#"
-                %th
-                  =t('show.concept.name')
-                %th
-                  =t('show.concept.status')
-                %th
-                  =t('show.concept.fullness')
-                %th
-                  =t('show.concept.solved')
-            %tbody
-              - post.dispost_concepts.sort_by{|c| c.complite(post).nil? ? 0 : -c.complite(post)}.each_with_index  do |pa, index|
-                - if pa.status == 0
-                  %tr
-                    %td
-                      =index+1
-                    %td
-                      - if pa.post_aspects.first.title!=''
-                        =link_to pa.post_aspects.first.title , concept_post_path(@project, pa)
-                      -else
-                        =link_to t('show.without_name') , concept_post_path(@project, pa)
 
-                    %td
-                      = status_for_concept_type(pa)
-                      -if pa.discuss_status
-                        %br
-                        %span.label-danger=t('show.discuss')
-                    %td
-                      %span.h4.color-orange
-                        =status_for_concept(pa.post_aspects.first)
-                    %td
-                      =status_for_complite_discontent(post,pa)
 
-              -if @project.status == 7 or @project.demo?
-                %tr
-                  %td{colspan: 5, style: "font-weight: normal !important;"}
-                    %a.btn.btn-lg.btn-warning.btn-block(href="/project/#{@project.id}/concept/posts/new?dis_id=#{post.id}&asp_id=#{@aspect.id}" style="font-weight: normal !important;" id="new_concept_#{post.id}")
-                      =t('show.concept.add_my_concept')
-          %hr
-      - else
-        %table.table.table-striped.table-bordered.table-condensed
-          %thead
-            %tr
-              %th
-                ="#"
-              %th
-                =t('show.concept.name')
-              %th
-                =t('show.concept.status')
-              %th
-                =t('show.concept.fullness')
-          %tbody
-            -if @concepts_without_aspect
-              - @concepts_without_aspect.each_with_index  do |pa, index|
-                - if pa.status == 0
-                  %tr
-                    %td
-                      =index+1
-                    %td
-                      - if pa.post_aspects.first.title!=''
-                        =link_to pa.post_aspects.first.title , concept_post_path(@project, pa)
-                      -else
-                        =link_to t('show.without_name') , concept_post_path(@project, pa)
+#render_concept_post
 
-                    %td
-                      = status_for_concept_type(pa)
-                      -if pa.discuss_status
-                        %br
-                        %span.label-danger=t('show.discuss')
-                    %td
-                      %span.h4.color-orange
-                        =status_for_concept(pa.post_aspects.first)
-.col-md-6
-  %section
-    %header
-      %h4
-        =t('show.improve.ideas')
-      %hr
-    .body
-      .chat-messages
-        -cache @comments_all do
-          = render partial: 'shared/improve_comment',collection: @comments_all
+
+
+
+
+
+
+
+
+
+
+
+-#.col-md-6
+-#  %section
+-#    %header
+-#      .row
+-#        %h4
+-#          =t('show.concept.title_plural')
+-#          -if @project.status == 7
+-#            %a.btn.btn-warning.pull-right(href="/project/#{@project.id}/concept/posts/new#{@aspect ? "?asp_id=#{@aspect.id}" : ''}" style="font-weight: normal !important;" id="new_concept")
+-#              =t('show.concept.add_concept')
+-#      %hr
+-#    .body
+-#      - if @aspect
+-#        -@aspect.aspect_posts.by_status(4).each do |post|
+-#          %h4=t('show.concept.solved_problem')
+-#          -cache post do
+-#            =render partial:'discontent/posts/post_short2', object: post
+-#
+-#          %h4=t('show.concept.proposed_solutions')
+-#          %br
+-#          %table.table.table-striped.table-bordered.table-condensed
+-#            %thead
+-#              %tr
+-#                %th
+-#                  ="#"
+-#                %th
+-#                  =t('show.concept.name')
+-#                %th
+-#                  =t('show.concept.status')
+-#                %th
+-#                  =t('show.concept.fullness')
+-#                %th
+-#                  =t('show.concept.solved')
+-#            %tbody
+-#              - post.dispost_concepts.sort_by{|c| c.complite(post).nil? ? 0 : -c.complite(post)}.each_with_index  do |pa, index|
+-#                - if pa.status == 0
+-#                  %tr
+-#                    %td
+-#                      =index+1
+-#                    %td
+-#                      - if pa.post_aspects.first.title!=''
+-#                        =link_to pa.post_aspects.first.title , concept_post_path(@project, pa)
+-#                      -else
+-#                        =link_to t('show.without_name') , concept_post_path(@project, pa)
+-#
+-#                    %td
+-#                      = status_for_concept_type(pa)
+-#                      -if pa.discuss_status
+-#                        %br
+-#                        %span.label-danger=t('show.discuss')
+-#                    %td
+-#                      %span.h4.color-orange
+-#                        =status_for_concept(pa.post_aspects.first)
+-#                    %td
+-#                      =status_for_complite_discontent(post,pa)
+-#
+-#              -if @project.status == 7 or @project.demo?
+-#                %tr
+-#                  %td{colspan: 5, style: "font-weight: normal !important;"}
+-#                    %a.btn.btn-lg.btn-warning.btn-block(href="/project/#{@project.id}/concept/posts/new?dis_id=#{post.id}&asp_id=#{@aspect.id}" style="font-weight: normal !important;" id="new_concept_#{post.id}")
+-#                      =t('show.concept.add_my_concept')
+-#          %hr
+-#      - else
+-#        %table.table.table-striped.table-bordered.table-condensed
+-#          %thead
+-#            %tr
+-#              %th
+-#                ="#"
+-#              %th
+-#                =t('show.concept.name')
+-#              %th
+-#                =t('show.concept.status')
+-#              %th
+-#                =t('show.concept.fullness')
+-#          %tbody
+-#            -if @concepts_without_aspect
+-#              - @concepts_without_aspect.each_with_index  do |pa, index|
+-#                - if pa.status == 0
+-#                  %tr
+-#                    %td
+-#                      =index+1
+-#                    %td
+-#                      - if pa.post_aspects.first.title!=''
+-#                        =link_to pa.post_aspects.first.title , concept_post_path(@project, pa)
+-#                      -else
+-#                        =link_to t('show.without_name') , concept_post_path(@project, pa)
+-#
+-#                    %td
+-#                      = status_for_concept_type(pa)
+-#                      -if pa.discuss_status
+-#                        %br
+-#                        %span.label-danger=t('show.discuss')
+-#                    %td
+-#                      %span.h4.color-orange
+-#                        =status_for_concept(pa.post_aspects.first)
+-#.col-md-6
+-#  %section
+-#    %header
+-#      %h4
+-#        =t('show.improve.ideas')
+-#      %hr
+-#    .body
+-#      .chat-messages
+-#        -cache @comments_all do
+-#          = render partial: 'shared/improve_comment',collection: @comments_all

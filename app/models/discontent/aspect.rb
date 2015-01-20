@@ -114,6 +114,6 @@ class Discontent::Aspect < ActiveRecord::Base
 
   def color
     color = read_attribute(:color)
-    color.nil? ? '#eac85e' : color
+    color.present? ? color : '#eac85e'
   end
 end

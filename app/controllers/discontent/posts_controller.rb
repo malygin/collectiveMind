@@ -39,11 +39,13 @@ class Discontent::PostsController < PostsController
 
   def index
     return redirect_to action: 'vote_list' if current_user.can_vote_for(:discontent, @project)
-    @aspect = params[:asp] ? Discontent::Aspect.find(params[:asp]) : ((@project.proc_aspects.first.present? and @project.proc_aspects.first.position.present?) ? @project.proc_aspects.order("position DESC").first : @project.proc_aspects.order(:id).first)
+    #@aspect = params[:asp] ? Discontent::Aspect.find(params[:asp]) : ((@project.proc_aspects.first.present? and @project.proc_aspects.first.position.present?) ? @project.proc_aspects.order("position DESC").first : @project.proc_aspects.order(:id).first)
+    @aspect = Discontent::Aspect.find(params[:asp]) if params[:asp]
     @accepted_posts = Discontent::Post.where(project_id: @project, status: 2)
     @comments_all = @project.problems_comments_for_improve
     @page = params[:page]
-    @posts = @aspect.aspect_posts.by_status_for_discontent(@project).order("discontent_posts.id DESC").filter(filtering_params(params)) if @aspect
+    #@posts = @aspect.aspect_posts.by_status_for_discontent(@project).order("discontent_posts.id DESC").filter(filtering_params(params))
+    @posts = @project.discontents.by_status_for_discontent(@project).order("discontent_posts.id DESC").filter(filtering_params(params))
     respond_to do |format|
       format.html
       format.js
@@ -57,7 +59,13 @@ class Discontent::PostsController < PostsController
     if params[:improve_stage]
       @comment = get_comment_for_stage(params[:improve_stage], params[:improve_comment]) unless params[:improve_comment].nil?
     end
+
     @post.content = @comment.content if @comment
+    @aspects = Discontent::Aspect.where(project_id: @project, status: 0)
+    respond_to do |format|
+      format.html
+      format.js
+    end
   end
 
   def edit
@@ -79,7 +87,7 @@ class Discontent::PostsController < PostsController
 
   def create
     #@aspects = Discontent::Aspect.where(project_id: @project, status: 0)
-    @post = @project.discontents.build(params[name_of_model_for_param])
+    @post = @project.discontents.build(discontent_post_params)
     @post.user = current_user
     @post.improve_comment = params[:improve_comment] if params[:improve_comment]
     @post.improve_stage = params[:improve_stage] if params[:improve_stage]
@@ -271,7 +279,20 @@ class Discontent::PostsController < PostsController
     end
   end
 
+  def show_comments
+    @post = current_model.find(params[:id])
+    @comments = @post.main_comments.paginate(page: params[:page] ? params[:page] : last_page, per_page: 10)
+    @comment = comment_model.new
+    respond_to do |format|
+      format.js
+    end
+  end
+
   private
+  def discontent_post_params
+    params.require(:discontent_post).permit(:content, :whend, :whered, :style)
+  end
+
   def filtering_params(params)
     params.slice(:type_like, :type_note, :type_verify, :type_status)
   end
