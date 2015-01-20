@@ -13,6 +13,8 @@ describe 'Discontent ' do
     @discontent1 = create :discontent, project: project, user: user, anonym: false
     @discontent2 = create :discontent, project: project, user: user, anonym: false
     @post1 = @discontent1
+    @comment_1 = create :discontent_comment, post: @post1, user: user
+    @comment_2 = create :discontent_comment, post: @post1, comment: @comment_1
   end
 
   context 'ordinary user sign in ' do

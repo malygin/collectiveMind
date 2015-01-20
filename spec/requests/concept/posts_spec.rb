@@ -11,6 +11,9 @@ describe 'Concept ' do
 
   before do
     prepare_concepts(project, user_data)
+    @post1 = @concept1
+    @comment_1 = create :concept_comment, post: @post1, user: user
+    @comment_2 = create :concept_comment, post: @post1, comment: @comment_1
   end
 
   context 'ordinary user sign in ' do

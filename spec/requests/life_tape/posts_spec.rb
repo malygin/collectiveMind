@@ -13,6 +13,8 @@ describe 'Life Tape ' do
     @post2 = create :life_tape_post, project: project
     @aspect1 = @post1.aspect
     @aspect2 = @post2.aspect
+    @comment_1 = create :life_tape_comment, post: @post1, user: user
+    @comment_2 = create :life_tape_comment, post: @post1, comment: @comment_1
   end
 
   context 'ordinary user sign in ' do
