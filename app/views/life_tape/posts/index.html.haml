@@ -207,6 +207,7 @@
 -#    =render partial: 'application/stages', locals:  {current_stage: :lifetape}
 
 -#.body.tab-content
+<<<<<<< HEAD
 -#- if boss? or (signed_in? and @project.demo?)
 -#  %br
 -#  = link_to t('show.aspect.new'), new_discontent_aspect_path(@project), remote: true, id: 'new_aspect', class: 'btn btn-primary'
@@ -245,3 +246,44 @@
 -#        = render partial: 'shared/comment_form', locals: {comment: @comment, post:@post_show, url_link: "/project/#{@project.id}/life_tape/posts/#{@post_show.id}/add_comment"}
 -#
 -##aspect_modal
+=======
+- if boss? or (signed_in? and @project.demo?)
+  %br
+  = link_to t('show.aspect.new'), new_discontent_aspect_path(@project), remote: true, id: 'new_aspect', class: 'btn btn-primary'
+
+= link_to t('menu.help_note'), "/project/#{@project.id}/#{controller.controller_path == 'essay/posts' ? stage_for_essay(params[:stage].to_i) : controller.controller_path}/to_work", class: 'btn btn-info pull-right'
+%h4.text-lifetape
+  - if @aspect
+    %b=t('show.aspect.title')
+    %span{id: "edit_aspect_content_#{@aspect.id}"}=@aspect.content
+    - if boss?
+      %span{id: "redactor_aspect_#{@aspect.id}"}
+        = link_to edit_discontent_aspect_path(@project,@aspect), remote: true, id: "edit_aspect_#{@aspect.id}" do
+          %span{class:'glyphicon glyphicon-pencil text-success'}
+        = link_to discontent_aspect_path(@project,@aspect), method: :delete, data: {confirm: t('confirm.delete_aspect')}, id: "destroy_aspect_#{@aspect.id}" do
+          %span{class:'glyphicon glyphicon-remove text-danger'}
+
+- if @post_show
+  .tab-pane.active#stage1
+    - if @aspect.knowbase_posts.present?
+      .col-md-12
+        %section
+          .body
+            - @aspect.knowbase_posts.each do |post|
+              %div{id: "knowbase_post_#{post.id}"}
+                = render partial: 'knowbase/posts/knowbase_post', object: post
+              %br
+        %br
+    .col-md-12.comments
+      .text-center
+        = will_paginate @comments
+      #comments.chat-messages
+        = render partial: 'shared/comment',collection: @comments
+      .text-center
+        = will_paginate @comments
+
+      - if signed_in?
+        = render partial: 'shared/comment_form', locals: {comment: @comment, post:@post_show, url_link: "/project/#{@project.id}/life_tape/posts/#{@post_show.id}/add_comment"}
+
+#aspect_modal
+>>>>>>> feat-refactor-tests-2.10

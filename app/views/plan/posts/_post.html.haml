@@ -14,5 +14,5 @@
       -else
         =link_to t('link.more'), plan_post_path(@project, post)
     %br
-    =post.goal
+    =simple_format(post.goal)
     = render 'shared/post_social_bar2', post: post

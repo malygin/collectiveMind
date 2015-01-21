@@ -1,4 +1,4 @@
--if current_stage == :lifetape
+- if current_stage == :lifetape
   .current-stage
     %a.btn.rounded-1{href: "/project/#{@project.id}/life_tape/posts" + "#{params[:asp] ? "?asp=#{params[:asp]}" : ""}", id: "go_to_life_tape"}
       %span.bigger> 1
@@ -46,8 +46,7 @@
     стадия
 
 
-
--elsif current_stage == :concept
+- elsif current_stage == :concept
   %a.btn.rounded-1{href: "/project/#{@project.id}/life_tape/posts" + "#{params[:asp] ? "?asp=#{params[:asp]}" : ""}", id: "go_to_life_tape"}
     %span.bigger> 1
     стадия
@@ -71,7 +70,7 @@
     стадия
 
 
--elsif current_stage == :plan
+- elsif current_stage == :plan
   %a.btn.rounded-1{href: "/project/#{@project.id}/life_tape/posts" + "#{params[:asp] ? "?asp=#{params[:asp]}" : ""}", id: "go_to_life_tape"}
     %span.bigger> 1
     стадия

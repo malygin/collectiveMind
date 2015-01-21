@@ -13,7 +13,7 @@
       id: "moderator_chat_div"
       user:
         key: ''
-      title: "Модераторский чат"
+      title: "Задать вопрос модератору"
       messageSent: (id, user, msg) ->
         ws.trigger 'incoming_message', {text: msg}
         $('#last_seen_at').text(new Date())

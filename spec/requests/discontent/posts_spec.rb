@@ -4,19 +4,21 @@ describe 'Discontent ' do
   subject { page }
   let (:user) { create :user }
   let (:user_data) { create :user }
-  let (:prime_admin) { create :prime_admin }
   let (:moderator) { create :moderator }
   let (:project) { create :core_project, status: 3 }
   let (:project_for_group) { create :core_project, status: 4 }
 
   before do
-    prepare_discontents(project, user_data)
+    @discontent1 = create :discontent, project: project, user: user, anonym: false
+    @discontent2 = create :discontent, project: project, user: user, anonym: false
+    @post1 = @discontent1
+    @comment_1 = create :discontent_comment, post: @post1, user: user
+    @comment_2 = create :discontent_comment, post: @post1, comment: @comment_1
   end
 
   context 'ordinary user sign in ' do
     before do
       sign_in user
-      visit root_path
     end
 
     context 'discontent list' do
@@ -26,7 +28,7 @@ describe 'Discontent ' do
 
       it ' can see all discontents in aspect' do
         expect(page).to have_content 'Несовершенства'
-        expect(page).to have_content 'Неоформленные проблемы'
+        expect(page).to have_content I18n.t('show.improve.problem')
         expect(page).to have_content @discontent1.content
         expect(page).to have_content @discontent2.content
         expect(page).to have_selector '#add_record'
@@ -38,9 +40,8 @@ describe 'Discontent ' do
         fill_in 'discontent_post_content', with: 'dis content'
         fill_in 'discontent_post_whered', with: 'dis where'
         fill_in 'discontent_post_whend', with: 'dis when'
-        #screenshot_and_open_image
         expect(page).to have_selector "span", 'aspect 1'
-        #select('aspect 1', from: 'select_for_aspects')
+        expect(page).to have_selector 'span', 'aspect 1'
         click_button 'send_post'
         expect(page).to have_content 'Перейти к списку'
         expect(page).to have_content 'Добавить еще одно'
@@ -48,13 +49,12 @@ describe 'Discontent ' do
         expect(page).to have_content 'dis content'
       end
 
-
       it 'user profile works fine after add discontent', js: true do
         click_link 'add_record'
         fill_in 'discontent_post_content', with: 'disсontent content'
         fill_in 'discontent_post_whered', with: 'disсontent where'
         fill_in 'discontent_post_whend', with: 'disсontent when'
-        expect(page).to have_selector "span", 'aspect 1'
+        expect(page).to have_selector 'span', 'aspect 1'
         click_button 'send_post'
         visit user_path(id: user.id, project: project)
         click_link 'tab-imperfections'
@@ -91,39 +91,7 @@ describe 'Discontent ' do
         expect(page).not_to have_link("plus_post_#{@discontent1.id}", text: 'Выдать баллы', href: plus_discontent_post_path(project, @discontent1))
       end
 
-      it ' can add  comments ', js: true do
-        fill_in 'comment_text_area', with: 'dis comment 1'
-        expect {
-          find('input.send-comment').click
-          expect(page).to have_content 'dis comment 1'
-        }.to change(Journal, :count).by(2)
-      end
-
-      it ' add new answer comment', js: true do
-        click_button "reply_comment_#{@comment1.id}"
-        find("#form_reply_comment_#{@comment1.id}").find('.comment-textarea').set "new child comment"
-        expect {
-          find("#form_reply_comment_#{@comment1.id}").find('.send-comment').click
-          expect(page).to have_content 'new child comment'
-          sleep(5)
-        }.to change(Journal.events_for_my_feed(project, user_data), :count).by(2)
-      end
-
-      context 'answer to answer comment' do
-        before do
-          @comment2 = FactoryGirl.create :discontent_comment, post: @discontent1, user: user_data, comment_id: @comment1.id, content: 'comment 2'
-          visit discontent_post_path(project, @discontent1)
-        end
-        it ' add new answer to answer comment', js: true do
-          click_button "reply_comment_#{@comment2.id}"
-          find("#form_reply_comment_#{@comment2.id}").find('.comment-textarea').set "new child to answer comment"
-          expect {
-            find("#form_reply_comment_#{@comment2.id}").find('.send-comment').click
-            sleep(5)
-            expect(page).to have_content "new child to answer comment"
-          }.to change(Journal.events_for_my_feed(project, user_data), :count).by(2)
-        end
-      end
+      it_behaves_like 'content with comments', 'Discontent::Comment', true
     end
 
     context 'vote discontent ' do
@@ -145,7 +113,7 @@ describe 'Discontent ' do
         expect(page).to have_selector 'a', 'Перейти к списку несовершенств'
         click_link "Перейти к списку несовершенств"
         expect(page).to have_content 'Несовершенства'
-        expect(page).to have_content 'Неоформленные проблемы'
+        expect(page).to have_content I18n.t('show.improve.problem')
       end
     end
 
@@ -164,7 +132,7 @@ describe 'Discontent ' do
 
       it ' can see all discontents in aspect' do
         expect(page).to have_content 'Несовершенства'
-        expect(page).to have_content 'Неоформленные проблемы'
+        expect(page).to have_content I18n.t('show.improve.problem')
         expect(page).to have_content @discontent1.content
         expect(page).to have_content @discontent2.content
         expect(page).to have_selector '#add_record'
@@ -198,44 +166,13 @@ describe 'Discontent ' do
         expect(page).to have_selector 'textarea#comment_text_area'
       end
 
-      it ' can add comments ', js: true do
-        fill_in 'comment_text_area', with: 'dis comment 1'
-        expect {
-          find('input.send-comment').click
-          expect(page).to have_content 'dis comment 1'
-        }.to change(Journal, :count).by(2)
-      end
-
-      it ' add new answer comment', js: true do
-        click_button "reply_comment_#{@comment1.id}"
-        find("#form_reply_comment_#{@comment1.id}").find('.comment-textarea').set "new child comment"
-        expect {
-          find("#form_reply_comment_#{@comment1.id}").find('.send-comment').click
-          sleep(5)
-          expect(page).to have_content 'new child comment'
-        }.to change(Journal.events_for_my_feed(project, user_data), :count).by(2)
-      end
-
-      context 'answer to answer comment' do
-        before do
-          @comment2 = FactoryGirl.create :discontent_comment, post: @discontent1, user: user_data, comment_id: @comment1.id, content: 'comment 2'
-          visit discontent_post_path(project, @discontent1)
-        end
-        it ' add new answer to answer comment', js: true do
-          click_button "reply_comment_#{@comment2.id}"
-          find("#form_reply_comment_#{@comment2.id}").find('.comment-textarea').set "new child to answer comment"
-          expect {
-            find("#form_reply_comment_#{@comment2.id}").find('.send-comment').click
-            sleep(5)
-            expect(page).to have_content "new child to answer comment"
-          }.to change(Journal.events_for_my_feed(project, user_data), :count).by(2)
-        end
-      end
+      it_behaves_like 'content with comments', 'Discontent::Comment', true
 
       context 'like concept' do
         before do
           prepare_awards
         end
+
         it ' like post and have award', js: true do
           expect(page).to have_link("plus_post_#{@discontent1.id}", text: 'Выдать баллы', href: plus_discontent_post_path(project, @discontent1))
           click_link "plus_post_#{@discontent1.id}"
@@ -243,20 +180,8 @@ describe 'Discontent ' do
           expect(page).to have_selector('i.fa.fa-trophy')
           visit user_path(project: project, id: user_data.id)
           expect(page).to have_content('25')
-          # expect(page).to have_link("plus_post_#{@discontent1.id}", text: 'Забрать баллы', href: plus_discontent_post_path(project,@discontent1))
-          # click_link "plus_post_#{@discontent1.id}"
-          # expect(page).to have_content 'Выдать баллы'
-        end
-
-        it ' like comment', js: true do
-          expect(page).to have_link("plus_comment_#{@comment1.id}", text: 'Выдать баллы', href: plus_comment_discontent_post_path(project, @comment1))
-          click_link "plus_comment_#{@comment1.id}"
-          expect(page).to have_link("plus_comment_#{@comment1.id}", text: 'Забрать баллы', href: plus_comment_discontent_post_path(project, @comment1))
-          click_link "plus_comment_#{@comment1.id}"
-          expect(page).to have_content 'Выдать баллы'
         end
       end
-
     end
 
     context 'note for discontent ' do
@@ -287,7 +212,7 @@ describe 'Discontent ' do
       it 'have content ' do
         expect(page).to have_content 'Исходные'
         expect(page).to have_content 'Объединенные'
-        expect(page).to have_content 'Неоформленные проблемы'
+        expect(page).to have_content I18n.t('show.improve.problem')
         expect(page).to have_content 'Группы несовершенств'
         expect(page).to have_content 'Несовершенства'
         expect(page).to have_link('add_record', text: 'Добавить новую группу', href: discontent_posts_new_group_path(project))
@@ -318,7 +243,6 @@ describe 'Discontent ' do
       end
 
       it 'have content ', js: true do
-        #expect(page).to have_content '2 этап: Сбор несовершенств. Голосование'
         expect(page).to have_content 'Голосование за несовершенства'
         expect(page).to have_content 'Определение наиболее важных проблем'
         expect(page).to have_content 'Несовершенство: 1 из 1'
@@ -329,13 +253,8 @@ describe 'Discontent ' do
         expect(page).to have_selector 'a', 'Перейти к списку несовершенств'
         click_link "Перейти к списку несовершенств"
         expect(page).to have_content 'Несовершенства'
-        expect(page).to have_content 'Неоформленные проблемы'
+        expect(page).to have_content I18n.t('show.improve.problem')
       end
     end
-
   end
-
-  context 'expert sign in' do
-  end
-
 end

@@ -6,11 +6,11 @@
     path = $(this).data('path')
     stage = path.split('/')[0]
     form = $('<form accept-charset="UTF-8" action="/project/' + project + '/' + path + '/' + id + '/update_comment" data-remote="true" enctype="multipart/form-data" id="form_edit_comment_' + id + '" method="post"/>')
-    form.append('<textarea class="form-control input-transparent" name="content" placeholder="Ваш комментарий" >' + $.trim($('#comment_text_' + id).html()) + '</textarea>')
+    form.append('<textarea class="form-control input-transparent comment-textarea" name="content" placeholder="Ваш комментарий" >' + $.trim($('#comment_text_' + id).html()) + '</textarea>')
     form.append('<div style="display:none"><input name="utf8" type="hidden" value="✓"><input name="_method" type="hidden" value="put"></div>')
     form.append('<input id="' + stage + '_comment_image" name="image" type="file"><br/>')
     form.append('<button class="edit-cancel btn btn-xs btn-danger" data-id="' + id + '">Отменить</button> | ')
-    form.append('<input class="btn btn-xs btn-info"  name="commit"  type="submit" value="Отправить">')
+    form.append('<input class="btn btn-xs btn-info send-comment"  name="commit"  type="submit" value="Отправить">')
     $('#comment_text_' + id).html(form)
     $('#redactor_comment_' + id).fadeOut()
 

@@ -1,6 +1,12 @@
 FactoryGirl.define do
   factory :concept, class: 'Concept::Post' do
     status 0
+
+    after :create do |post|
+      discontent = create :discontent, project: post.project, status: 4
+      create :concept_aspect, discontent_aspect_id: discontent.id, concept_post_id: post.id
+      create :concept_post_discontent, post_id: post.id, discontent_post_id: discontent.id
+    end
   end
 
   factory :concept_aspect, class: 'Concept::PostAspect' do
@@ -18,6 +24,6 @@ FactoryGirl.define do
   end
 
   factory :concept_comment, class: 'Concept::Comment' do
-    content 'concept comment for post'
+    sequence(:content) { |n| "concept comment #{n}" }
   end
 end

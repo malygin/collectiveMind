@@ -23,19 +23,6 @@
               .col-md-12
                 .text-center
                   .h5
-                    =t('form.discontent.field_where')
-                  %br
-
-            .row
-              .col-md-12
-                #mod2
-                = f.autocomplete_field :whered, autocomplete_discontent_post_whered_discontent_posts_path, append_to: '#mod2', :'min-length' => 0, style: 'height: 44px', class: 'form-control autocomplete', placeholder: t('form.discontent.field_where_promt')
-                %br
-                %br
-            .row
-              .col-md-12
-                .text-center
-                  .h5
                     =t('form.discontent.field_when')
                   %br
 
@@ -45,6 +32,21 @@
                 = f.autocomplete_field :whend, autocomplete_discontent_post_whend_discontent_posts_path, :'min-length' => 0, append_to: '#mod',  style: 'height: 44px', class: 'form-control autocomplete', placeholder: t('form.discontent.field_when_promt')
                 %br
                 %br
+
+            .row
+              .col-md-12
+                .text-center
+                  .h5
+                    =t('form.discontent.field_where')
+                  %br
+
+            .row
+              .col-md-12
+                #mod2
+                = f.autocomplete_field :whered, autocomplete_discontent_post_whered_discontent_posts_path, append_to: '#mod2', :'min-length' => 0, style: 'height: 44px', class: 'form-control autocomplete', placeholder: t('form.discontent.field_where_promt')
+                %br
+                %br
+
             .row
               .col-md-12
                 .text-center
