@@ -52,7 +52,11 @@ class Discontent::PostsController < PostsController
     @accepted_posts = Discontent::Post.where(project_id: @project, status: 2)
     @comments_all = @project.problems_comments_for_improve
     @page = params[:page]
-    @posts = @aspect.aspect_posts.by_status_for_discontent(@project).order("discontent_posts.id DESC").filter(filtering_params(params)) if @aspect
+    if params[:not_aspect]
+      @posts = @project.discontents_without_aspect.by_status_for_discontent(@project).order("discontent_posts.id DESC").filter(filtering_params(params))
+    else
+      @posts = @aspect.aspect_posts.by_status_for_discontent(@project).order("discontent_posts.id DESC").filter(filtering_params(params)) if @aspect
+    end
   end
 
   def new
