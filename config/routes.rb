@@ -38,6 +38,7 @@ CollectiveMind::Application.routes.draw do
   end
 
   devise_for :users
+  get '/project/:id', to: 'core/projects#show'
   get '/general_news', to: 'core/projects#news'
   get '/general_rating', to: 'core/projects#users'
 
@@ -106,9 +107,9 @@ CollectiveMind::Application.routes.draw do
       end
     end
 
-    post 'knowbase/posts/sortable_save', to: 'knowbase/posts#sortable_save'
+    # post 'knowbase/posts/sortable_save', to: 'knowbase/posts#sortable_save'
     namespace :knowbase do
-      resources :posts
+      resources :posts, :controller => 'core/knowbase/posts'
     end
 
     resources :users do

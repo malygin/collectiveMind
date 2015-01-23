@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141228171316) do
+ActiveRecord::Schema.define(version: 20150122215640) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -330,6 +330,16 @@ ActiveRecord::Schema.define(version: 20141228171316) do
 
   add_index "concept_votings", ["concept_post_aspect_id"], name: "index_concept_votings_on_concept_post_id", using: :btree
   add_index "concept_votings", ["user_id"], name: "index_concept_votings_on_user_id", using: :btree
+
+  create_table "core_knowbase_posts", force: true do |t|
+    t.text     "content"
+    t.integer  "project_id"
+    t.integer  "stage"
+    t.string   "title"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer  "aspect_id"
+  end
 
   create_table "core_project_scores", force: true do |t|
     t.integer  "user_id"
@@ -1061,16 +1071,6 @@ ActiveRecord::Schema.define(version: 20141228171316) do
   add_index "journals", ["project_id"], name: "index_journals_on_project_id", using: :btree
   add_index "journals", ["type_event"], name: "index_journals_on_type", using: :btree
   add_index "journals", ["user_id"], name: "index_journals_on_user_id", using: :btree
-
-  create_table "knowbase_posts", force: true do |t|
-    t.text     "content"
-    t.integer  "project_id"
-    t.integer  "stage"
-    t.string   "title"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.integer  "aspect_id"
-  end
 
   create_table "life_tape_categories", force: true do |t|
     t.string   "name"

@@ -1,5 +1,5 @@
-module Help
+module Poll
   def self.table_name_prefix
-    'help_'
+    'poll_'
   end
 end

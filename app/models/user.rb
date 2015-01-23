@@ -8,30 +8,14 @@ class User < ActiveRecord::Base
   attr_accessor :secret, :secret2, :secret3
 
   has_many :core_project_scores, class_name: 'Core::ProjectScore'
-  has_many :help_users_answerses, class_name: 'Help::UsersAnswers'
-  has_many :help_answers, class_name: 'Help::Answer', through: :help_users_answerses
-  has_many :help_questions, class_name: 'Help::Question', through: :help_answers
-  has_many :help_posts, class_name: 'Help::Post', through: :help_questions, source: :post
+  has_many :help_posts, class_name: 'Core::Help::Post', through: :help_questions, source: :post
   has_many :journals
-  has_many :life_tape_comment_voitings
-  has_many :life_tape_comments, through: :life_type_comment_voitings
-  has_many :life_tape_posts, class_name: 'LifeTape::Post'
   has_many :discontent_posts, class_name: 'Discontent::Post'
-  has_many :discontent_aspect_users, class_name: 'Discontent::AspectUser'
-  has_many :discontent_aspects, class_name: 'Discontent::Aspect', through: :discontent_aspect_users
-  has_many :essay_posts, class_name: 'Essay::Post'
-  has_many :life_tape_post_discussions, class_name: 'LifeTape::PostDiscussion'
-  has_many :user_discussion_posts, through: :life_tape_post_discussions, source: :post, class_name: 'LifeTape::Post'
-  has_many :user_discussion_aspects, through: :life_tape_post_discussions, source: :aspect, class_name: 'Discontent::Aspect'
-  has_many :discontent_post_discussions, class_name: 'Discontent::PostDiscussion'
-  has_many :user_discussion_disposts, through: :discontent_post_discussions, source: :post, class_name: 'Discontent::Post'
-  has_many :user_discussion_disaspects, through: :discontent_post_discussions, source: :aspect, class_name: 'Discontent::Aspect'
-  has_many :concept_post_discussions, class_name: 'Concept::PostDiscussion'
-  has_many :user_discussion_concepts, through: :concept_post_discussions, source: :post, class_name: 'Concept::Post'
-  has_many :user_discussion_disposts, through: :concept_post_discussions, source: :discontent_post, class_name: 'Discontent::Post'
+  has_many :core_aspects, class_name: 'Core::Aspect'
+  has_many :essay_posts, class_name: 'Core::Essay::Post'
   has_many :concept_posts, class_name: 'Concept::Post'
   has_many :aspect_votings, class_name: 'LifeTape::Voiting'
-  has_many :voted_aspects, through: :aspect_votings, source: :discontent_aspect, class_name: 'Discontent::Aspect'
+  has_many :voted_aspects, through: :aspect_votings, source: :core_aspect, class_name: 'Core::Aspect'
   has_many :post_votings, class_name: 'Discontent::Voting'
   has_many :voted_discontent_posts, through: :post_votings, source: :discontent_post, class_name: 'Discontent::Post'
   has_many :concept_post_votings, class_name: 'Concept::Voting'
@@ -48,7 +32,7 @@ class User < ActiveRecord::Base
   has_many :groups, through: :group_users
   has_many :group_chat_messages
   has_many :plan_posts, class_name: 'Plan::Post'
-  has_many :answers_users, class_name: 'AnswersUser'
+  has_many :answers_users, class_name: 'Util::Poll::AnswersUser'
 
   default_scope { order('id DESC') }
   scope :check_field, ->(p, c) { where(project: p.id, status: 't', check_field: c) }
@@ -187,9 +171,9 @@ class User < ActiveRecord::Base
 
   def aspects(id)
     if self.discontent_aspects.empty?
-      Discontent::Aspect.where(project_id: id)
+      Core::Aspect.where(project_id: id)
     else
-      self.discontent_aspects
+      self.core_aspects
     end
   end
 

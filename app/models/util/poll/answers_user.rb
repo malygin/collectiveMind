@@ -1,5 +1,4 @@
-class AnswersUser < ActiveRecord::Base
-  # attr_accessible :user, :answer_id
+class Poll::AnswersUser < ActiveRecord::Base
   belongs_to :answer
   belongs_to :user
   scope :by_project, ->(project) { where(answers_users: {project_id: project}) }

@@ -10,10 +10,6 @@ class Estimate::Post < ActiveRecord::Base
   has_many :plan_post_aspects, class_name: 'Plan::PostAspect'
   has_many :post_aspects_all, foreign_key: 'post_id', class_name: 'Estimate::PostAspect'
 
-  # @todo кандидат на удаление, нигде не используется?
-  #has_many :post_aspects_other, -> { where first_stage: false }, foreign_key: 'post_id', class_name: 'Estimate::PostAspect'
-  #has_many :post_aspects_first, -> { where first_stage: true }, foreign_key: 'post_id', class_name: 'Estimate::PostAspect'
-
   validates :user_id, :post_id, :status, :project_id, presence: true
 
   #@todo replace sum in product
@@ -31,7 +27,6 @@ class Estimate::Post < ActiveRecord::Base
         count+=1
 
       end
-      #puts "__________", sum_tr
       @first_c = sum_tr
       sum_tr=0.0
       post_aspects.firsts(self.post).each do |tr|
@@ -100,9 +95,7 @@ class Estimate::Post < ActiveRecord::Base
       @third_c = (th1.nil? or th2.nil?) ? 0.0 : ((th1 + th2)*100).round / 100.0
       @max_score = count * 50
       sum_all /= @third_c if @third_c != 0.0
-      # result = @third_c == 0 ? 0.0 : ((@second_c+@first_c)/@third_c)
       @max_score == 0 ? 0 : ((sum_all*100/ @max_score) *100).round / 100.0
     end
-    # oppsh_i=(1*oppsh1+2*oppsh2+3*oppsh3)/(oppsh1+oppsh2+oppsh3)
   end
 end

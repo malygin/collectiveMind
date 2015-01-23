@@ -6,7 +6,7 @@ class Discontent::Post < ActiveRecord::Base
 
   has_many :discontent_posts, class_name: 'Discontent::Post', foreign_key: 'discontent_post_id'
   has_many :discontent_post_aspects, class_name: 'Discontent::PostAspect'
-  has_many :post_aspects, through: :discontent_post_aspects, source: :discontent_aspect, class_name: 'Discontent::Aspect'
+  has_many :post_aspects, through: :discontent_post_aspects, source: :discontent_aspect, class_name: 'Core::Aspect'
   has_many :concept_post_discontents, -> { where concept_post_discontents: {status: [0, nil]} }, class_name: 'Concept::PostDiscontent', foreign_key: 'discontent_post_id'
   has_many :dispost_concepts, through: :concept_post_discontents, source: :post, class_name: 'Concept::Post'
   has_many :concept_conditions, class_name: 'Concept::PostAspect', foreign_key: 'discontent_aspect_id'
@@ -24,22 +24,6 @@ class Discontent::Post < ActiveRecord::Base
   scope :by_style, ->(p) { where(style: p) }
   scope :by_positive, ->(p) { where(style: 0, status: p) }
   scope :by_negative, ->(p) { where(style: 1, status: p) }
-
-  # @todo кандидаты на удаление, нигде не используется?
-  # has_many :discontent_post_discussions, class_name: 'Discontent::PostDiscussion'
-  # has_many :concept_post_discussions, class_name: 'Concept::PostDiscussion'
-  # has_many :discontent_notes, class_name: 'Discontent::Note'
-  # has_many :post_replaced, through: :post_replaces, source: :replace_post, class_name: 'Discontent::Post'
-  # has_many :post_replaced_it, through: :post_it_replaces, source: :replace_post, class_name: 'Discontent::Post'
-  # has_many :dispost_discussion_users, through: :discontent_post_discussions, source: :user, class_name: 'User'
-  # has_many :dispost_discussion_users, through: :concept_post_discussions, source: :user, class_name: 'User'
-  # scope :by_positive_vote, ->(p) { where(style: 0).where("status IN (#{p.join(", ")})", p) }
-  # scope :by_negative_vote, ->(p) { where(style: 1).where("status IN (#{p.join(", ")})", p) }
-  # scope :required_posts, ->(p) { where(status: 4, project_id: p.id) }
-  # scope :by_discussions, ->(posts) { where("discontent_posts.id NOT IN (#{posts.join(", ")})") unless posts.empty? }
-  # scope :not_view, ->(posts) { where("discontent_posts.id NOT IN (#{posts.join(", ")})") unless posts.empty? }
-  # scope :posts_for_discussions, ->(p) { where(project_id: p.id).where("discontent_posts.status_content = 't' and discontent_posts.status_whered = 't' and discontent_posts.status_whend = 't'") }
-  # scope :sort_comment, -> sort_comment { sort_comment == "up" ? includes(:comments).group('"discontent_posts"."id"').references(:comments).select('count("discontent_comments"."id")').order('count("discontent_comments"."id") DESC NULLS LAST') : includes(:comments).group('"discontent_posts"."id"').references(:comments).select('count("discontent_comments"."id") as count').order('count("discontent_comments"."id") ASC NULLS LAST') if sort_comment.present? }
 
   scope :united_for_vote, ->(project, voted) { where(project_id: project, status: 2).where("discontent_posts.id NOT IN (?)", voted<<0).order(:id) }
   scope :for_union, ->(project) { where("discontent_posts.status = 0 and discontent_posts.project_id = ? ", project) }
@@ -61,15 +45,6 @@ class Discontent::Post < ActiveRecord::Base
   scope :type_note, -> type_note { joins(:notes) if type_note.present? and type_note != "content_all" }
   scope :type_like, -> type_like { where(:useful => type_like == "by_like" ? 't' : ['f', nil]) if type_like.present? and type_like != "content_all" }
   scope :type_verify, -> type_verify { type_verify == "by_verified" ? by_verified : by_unverified if type_verify.present? and type_verify != "content_all" }
-  scope :type_status, -> type_status {
-    if type_status.present? and type_status != "content_all"
-      if type_status == "by_discuss"
-        where(:discuss_status => true)
-      elsif type_status == "by_approve"
-        where(:approve_status => true)
-      end
-    end
-  }
 
   scope :sort_date, -> sort_date { sort_date == "up" ? order('discontent_posts.created_at DESC') : order('discontent_posts.created_at ASC') if sort_date.present? }
   scope :sort_user, -> sort_user { sort_user == "up" ? order('discontent_posts.user_id DESC') : order('discontent_posts.user_id ASC') if sort_user.present? }
@@ -137,36 +112,6 @@ class Discontent::Post < ActiveRecord::Base
   def voted(user)
     self.voted_users.where(id: user)
   end
-
-  # @todo кандидат на удаление, нигде не используется
-  #def post_notes(type_field)
-  #  self.discontent_notes.by_type(type_field)
-  #end
-
-  # @todo кандидат на удаление, нигде не используется
-  # def get_posts_suitable_for_association
-  #   aspects = self.post_aspects.pluck(:id)
-  #
-  #   Discontent::Post.includes(:discontent_post_aspects).where(discontent_post_aspects: {aspect_id: aspects}).where("discontent_posts.status = 0 and discontent_posts.id <> ? and (discontent_posts.whered = ? or discontent_posts.whend = ?)", self.id, self.whered, self.whend)
-  # end
-
-  # @todo кандидат на удаление, нигде не используется
-  # def get_posts_for_union_add_list(project)
-  #   aspects = self.post_aspects.pluck(:id)
-  #
-  #   posts = Discontent::Post.joins(:discontent_post_aspects).where(discontent_post_aspects: {aspect_id: aspects}).where("discontent_posts.status = 0 and discontent_posts.project_id = ? and (discontent_posts.whered = ? or discontent_posts.whend = ?)", project.id, self.whered, self.whend).pluck(:id)
-  #   Discontent::Post.where("discontent_posts.status = 0 and discontent_posts.project_id = ?", project.id).not_view(posts)
-  # end
-
-  # @todo кандидат на удаление, нигде не используется
-  # def conditions_for_plan(plan)
-  #   plan_conditions.where(plan_post_id: plan)
-  # end
-
-  # @todo кандидат на удаление, нигде не используется
-  # def pure_conditions
-  #   concept_conditions.where("concept_post_id IS NOT NULL")
-  # end
 
   def show_content
     unless self.content.nil?

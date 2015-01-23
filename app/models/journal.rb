@@ -19,8 +19,6 @@ class Journal < ActiveRecord::Base
   scope :created_order, -> { order("journals.created_at DESC") }
   scope :active_proc, -> { where("core_projects.status < ?", 20) }
 
-  # has_many :user_checks, class_name: 'UserCheck'
-  # scope :user_checks_proc, -> { joins("LEFT OUTER JOIN user_checks ON journals.user_informed = user_checks.user_id AND journals.project_id = user_checks.project_id AND user_checks.check_field = 'auto_feed_mailer' AND (user_checks.status = 'f' OR user_checks.status IS NULL)") }
   scope :auto_feed_mailer, -> { joins("LEFT OUTER JOIN user_checks ON journals.user_informed = user_checks.user_id AND journals.project_id = user_checks.project_id AND user_checks.check_field = 'auto_feed_mailer'").where(user_checks: {status: ['f',nil] }) }
 
   after_save :send_last_news

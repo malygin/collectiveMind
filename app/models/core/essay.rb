@@ -1,5 +1,5 @@
-module Knowbase
+module Core::Essay
   def self.table_name_prefix
-    'knowbase_'
+    'core_essay_'
   end
 end

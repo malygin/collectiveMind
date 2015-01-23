@@ -1,8 +1,7 @@
 class Core::Project < ActiveRecord::Base
   has_one :settings, class_name: 'Core::ProjectSetting', dependent: :destroy
   accepts_nested_attributes_for :settings
-  has_many :life_tape_posts, -> { where status: 0 }, class_name: 'LifeTape::Post'
-  has_many :aspects, class_name: 'Discontent::Aspect'
+  has_many :aspects, class_name: 'Core::Aspect'
 
   has_many :discontents, class_name: 'Discontent::Post'
   has_many :discontent_ongoing_post, -> { where status: 0 }, class_name: 'Discontent::Post'
@@ -20,16 +19,15 @@ class Core::Project < ActiveRecord::Base
 
   has_many :project_users
   has_many :users, through: :project_users
-  has_many :knowbase_posts, class_name: 'Knowbase::Post'
+  has_many :knowbase_posts, class_name: 'Core::Knowbase::Post'
 
   has_many :core_project_scores, class_name: 'Core::ProjectScore'
   has_many :core_project_users, class_name: 'Core::ProjectUser'
   has_many :users_in_project, through: :core_project_users, source: :user, class_name: 'User'
 
-  has_many :essays, -> { where status: 0 }, class_name: 'Essay::Post'
+  has_many :essays, -> { where status: 0 }, class_name: 'Core::Essay::Post'
   has_many :groups
   has_many :journal_mailers, class_name: 'JournalMailer'
-  #has_many :project_score_users, class_name: 'User', through: :core_project_scores, source: :user
 
   default_scope { order('id DESC') }
   scope :club_projects, ->(user) { where(type_access: TYPE_ACCESS_CODE[:club]) if user.cluber? or user.boss? }
@@ -195,7 +193,6 @@ class Core::Project < ActiveRecord::Base
   def current_page?(page, status)
     sort_list = LIST_STAGES.select { |k, v| v[:type_stage] == status }
     sort_list.values[0][:name] == page
-
   end
 
   def redirect_to_current_stage
@@ -291,30 +288,10 @@ class Core::Project < ActiveRecord::Base
     self.essays.by_stage(stage)
   end
 
-  def problems_comments_for_improve
-    life_tape_comments = LifeTape::Comment.joins("INNER JOIN life_tape_posts ON life_tape_comments.post_id = life_tape_posts.id").
-        where("life_tape_posts.project_id = ? and life_tape_comments.discontent_status = 't'", self.id)
-    discontent_comments = Discontent::Comment.joins("INNER JOIN discontent_posts ON discontent_comments.post_id = discontent_posts.id").
-        where("discontent_posts.project_id = ? and discontent_comments.discontent_status = 't'", self.id)
-    comments_all = life_tape_comments | discontent_comments
-    comments_all.sort_by { |c| c.improve_disposts.size }
-  end
-
-  def ideas_comments_for_improve
-    life_tape_comments = LifeTape::Comment.joins("INNER JOIN life_tape_posts ON life_tape_comments.post_id = life_tape_posts.id").
-        where("life_tape_posts.project_id = ? and life_tape_comments.concept_status = 't'", self.id)
-    discontent_comments = Discontent::Comment.joins("INNER JOIN discontent_posts ON discontent_comments.post_id = discontent_posts.id").
-        where("discontent_posts.project_id = ? and discontent_comments.concept_status = 't'", self.id)
-    concept_comments = Concept::Comment.joins("INNER JOIN concept_posts ON concept_comments.post_id = concept_posts.id").
-        where("concept_posts.project_id = ? and concept_comments.concept_status = 't'", self.id)
-    comments_all = life_tape_comments | discontent_comments | concept_comments
-    comments_all.sort_by { |c| c.improve_concepts.size }
-  end
-
   def set_position_for_aspects
-    aspect = Discontent::Aspect.where(project_id: self, status: 0).first
+    aspect = Core::Aspect.where(project_id: self, status: 0).first
     unless aspect.position
-      aspects = Discontent::Aspect.scope_vote_top(self.id, "0")
+      aspects = Core::Aspect.scope_vote_top(self.id, "0")
       aspects.each do |asp|
         asp.update_attributes(position: asp.voted_users.size)
       end
@@ -343,11 +320,6 @@ class Core::Project < ActiveRecord::Base
   def discontent_comments
     Discontent::Comment.joins("INNER JOIN discontent_posts ON discontent_comments.post_id = discontent_posts.id").
         where("discontent_posts.project_id = ?", self.id)
-  end
-
-  def lifetape_comments
-    LifeTape::Comment.joins("INNER JOIN life_tape_posts ON life_tape_comments.post_id = life_tape_posts.id").
-        where("life_tape_posts.project_id = ?", self.id)
   end
 
   def date_begin_stage(table_name)
