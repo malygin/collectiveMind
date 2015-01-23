@@ -90,7 +90,11 @@ class Core::Project < ActiveRecord::Base
   end
 
   def concepts_without_aspect
-    self.concepts.includes(:concept_post_discontents).where(concept_post_discontents: {post_id: nil})
+    self.concept_ongoing_post.includes(:concept_post_discontents).where(concept_post_discontents: {post_id: nil})
+  end
+
+  def discontents_without_aspect
+    self.discontents.includes(:discontent_post_aspects).where(discontent_post_aspects: {post_id: nil})
   end
 
   def stage1_count
