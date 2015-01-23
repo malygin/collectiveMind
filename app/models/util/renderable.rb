@@ -1,4 +1,4 @@
-module Renderable
+module Util::Renderable
   extend ActiveSupport::Concern
 
   private

@@ -13,14 +13,14 @@ class Core::Aspect < ActiveRecord::Base
   has_many :voted_users, through: :final_votings, source: :user
   has_many :final_votings, foreign_key: 'discontent_aspect_id', class_name: 'LifeTape::Voiting'
 
-  has_many :core_aspects, class_name: 'Core::Aspect', foreign_key: 'core_aspect_id'
-  belongs_to :core_aspect, class_name: 'Core::Aspect', foreign_key: 'core_aspect_id'
+  has_many :core_aspects, class_name: 'Core::Aspect', foreign_key: 'discontent_aspect_id'
+  belongs_to :core_aspect, class_name: 'Core::Aspect', foreign_key: 'discontent_aspect_id'
 
-  has_many :questions, -> { where questions: {parent_post_type: 'core_aspect'} }, class_name: 'Util::Poll::Question', foreign_key: 'post_id'
+  has_many :questions, -> { where questions: {parent_post_type: 'core_aspect'} }, class_name: 'Poll::Question', foreign_key: 'post_id'
 
   scope :by_project, ->(project_id) { where("core_aspects.project_id = ?", project_id) }
   scope :minus_view, ->(aspects) { where("core_aspects.id NOT IN (#{aspects.join(", ")})") unless aspects.empty? }
-  scope :main_aspects, -> { where(core_aspects: {core_aspect_id: nil}) }
+  scope :main_aspects, -> { where(core_aspects: {discontent_aspect_id: nil}) }
 
   scope :vote_top, ->(revers) {
     if revers == "0"
@@ -59,11 +59,6 @@ class Core::Aspect < ActiveRecord::Base
   def aspect_discontent
     Discontent::Post.joins(:post_aspects).
         where("discontent_post_aspects.aspect_id = ?", self.id)
-  end
-
-  def aspect_life_tape
-    LifeTape::Comment.joins("INNER JOIN life_tape_posts ON life_tape_comments.post_id = life_tape_posts.id").
-        where("life_tape_posts.aspect_id = ?", self.id)
   end
 
   def question_complete(project, user)

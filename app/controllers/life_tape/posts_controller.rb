@@ -10,10 +10,10 @@ class LifeTape::PostsController < PostsController
   def index
     return redirect_to action: 'vote_list' if current_user.can_vote_for(:life_tape, @project)
     @page = params[:page]
-    @aspect = params[:asp] ? Discontent::Aspect.find(params[:asp]) : @project.aspects.order(:id).first
-    @post_show = @aspect.life_tape_post unless @aspect.nil?
-    @comments= @post_show.main_comments.paginate(page: @page ? @page : last_page, per_page: 10).includes(:comments) if @post_show
-    @comment = LifeTape::Comment.new
+    @aspect = params[:asp] ? Core::Aspect.find(params[:asp]) : @project.aspects.order(:id).first
+    # @post_show = @aspect.life_tape_post unless @aspect.nil?
+    # @comments= @post_show.main_comments.paginate(page: @page ? @page : last_page, per_page: 10).includes(:comments) if @post_show
+    # @comment = LifeTape::Comment.new
 
     @count_aspects = @project.aspects.main_aspects.count
     @count_aspects_check = 0

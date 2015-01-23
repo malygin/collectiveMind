@@ -1,5 +1,5 @@
 class Journal < ActiveRecord::Base
-  include Renderable
+  include Util::Renderable
   include Filterable
   extend ApplicationHelper
 

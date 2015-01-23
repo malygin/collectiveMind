@@ -1,4 +1,4 @@
-module Filterable
+module Util::Filterable
   extend ActiveSupport::Concern
 
   module ClassMethods
