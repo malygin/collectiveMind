@@ -18,7 +18,7 @@
             |
             = Russian::strftime(@post.created_at,'%d %B %k:%M:%S')
           %br
-          -if current_user?(@post.user) or boss?
+          -if current_user?(@post.user) or boss? or role_expert?
             %span.label.label-success="#{@post.fullness.nil? ? 40 : @post.fullness + 39} баллов из 110"
           %br
           -if improve_comment(@post)
@@ -34,7 +34,7 @@
               %span.label-danger=t('show.discuss')
             -if @post.approve_status
               %span.label-success=t('show.important')
-          -if boss?
+          -if boss? or role_expert?
             |
             =link_to({controller:'concept/posts', action: :status_post, id: @post.id, field_all: true}, remote: true, method: :put, id:"concept_field_all_#{@post.id}",class:"note_text") do
               -if @post.status_all

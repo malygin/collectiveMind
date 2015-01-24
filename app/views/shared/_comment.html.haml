@@ -56,9 +56,9 @@
           %button.reply-comment.btn.btn-success.btn-xs{data:{ project: @project.id, id: comment.id, path: comment.post.class.name.underscore.pluralize}, id: "reply_comment_#{comment.id}" }
             = t('show.answer')
 
-        - if boss?
-          = link_to({action: :plus_comment, id: comment.id}, remote: true, method: :put, id: "plus_comment_#{comment.id}") do
-            - if comment.useful
+        - if boss? or role_expert?
+          =link_to({action: :plus_comment, id: comment.id}, remote: true, method: :put,  id: "plus_comment_#{comment.id}") do
+            -if comment.useful
               %span.text-danger=t('show.revert_score')
             - else
               %span.text-success=t('show.add_score')
