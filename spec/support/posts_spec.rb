@@ -1,5 +1,8 @@
-shared_examples 'content with comments' do |comment_model = 'LifeTape::Comment', moderator = false, count = 2|
-  let(:text_comment) { attributes_for(:life_tape_comment)[:content] }
+shared_examples 'content with comments' do |moderator = false, count = 2|
+  let(:comment_model) { @comment_2.class.name.underscore.gsub('/comment', '_comment') }
+  let(:comment_model_name) { @comment_2.class.name.constantize }
+  let(:comment_post_model) { @comment_2.class.name.underscore.gsub('/comment', '_post') }
+  let(:text_comment) { attributes_for(comment_model.to_sym)[:content] }
 
   before do
     refresh_page
@@ -8,14 +11,13 @@ shared_examples 'content with comments' do |comment_model = 'LifeTape::Comment',
   if moderator
     it ' like comment', js: true do
       prepare_awards
-      expect(page).to have_link("plus_comment_#{@comment_1.id}", text: 'Выдать баллы', href: plus_comment_life_tape_post_path(project, @comment_1))
+      plus_comment_path = Rails.application.routes.url_helpers.send("plus_comment_#{comment_post_model}_path", project, @comment_1)
 
+      expect(page).to have_link("plus_comment_#{@comment_1.id}", text: 'Выдать баллы', href: plus_comment_path)
       click_link "plus_comment_#{@comment_1.id}"
-
-      expect(page).to have_link("plus_comment_#{@comment_1.id}", text: 'Забрать баллы', href: plus_comment_life_tape_post_path(project, @comment_1))
+      expect(page).to have_link("plus_comment_#{@comment_1.id}", text: 'Забрать баллы', href: plus_comment_path)
       click_link "plus_comment_#{@comment_1.id}"
-
-      expect(page).to have_link("plus_comment_#{@comment_1.id}", text: 'Забрать баллы', href: plus_comment_life_tape_post_path(project, @comment_1))
+      expect(page).to have_link("plus_comment_#{@comment_1.id}", text: 'Забрать баллы', href: plus_comment_path)
     end
   else
     it ' not button like' do
@@ -40,7 +42,7 @@ shared_examples 'content with comments' do |comment_model = 'LifeTape::Comment',
 
   it 'add new comment with image', js: true do
     fill_in 'comment_text_area', with: text_comment
-    attach_file('life_tape_comment_image', "#{Rails.root}/spec/support/images/1.jpg")
+    attach_file("#{comment_model}_image", "#{Rails.root}/spec/support/images/1.jpg")
     sleep(5)
     find('input.send-comment').click
     sleep(5)
@@ -59,7 +61,7 @@ shared_examples 'content with comments' do |comment_model = 'LifeTape::Comment',
 
     it { expect(page).to have_content text_comment }
 
-    it { expect change(comment_model.constantize, :count).by(1) }
+    it { expect change(comment_model_name, :count).by(1) }
 
     it { expect change(Journal.events_for_my_feed(project, user_data), :count).by(1) }
   end
@@ -73,13 +75,13 @@ shared_examples 'content with comments' do |comment_model = 'LifeTape::Comment',
 
     it { expect(page).to have_content text_comment }
 
-    it { expect change(comment_model.constantize, :count).by(1) }
+    it { expect change(comment_model_name, :count).by(1) }
 
     it { expect change(Journal.events_for_my_feed(project, user_data), :count).by(1) }
   end
 
   it 'paginate comments' do
-    create_list :life_tape_comment, 11, post: @comment_1.post
+    create_list comment_model.to_sym, 11, post: @comment_1.post
     refresh_page
     expect(page).to have_css 'div.pagination'
     expect(page).to have_css 'a.previous_page'
@@ -159,7 +161,7 @@ shared_examples 'content with comments' do |comment_model = 'LifeTape::Comment',
         click_link "destroy_comment_#{@comment_1.id}"
         sleep 5
         expect(page).not_to have_content @comment_1.content
-      }.to change(comment_model.constantize, :count).by(-1)
+      }.to change(comment_model_name, :count).by(-1)
     end
 
     unless moderator
@@ -170,9 +172,10 @@ shared_examples 'content with comments' do |comment_model = 'LifeTape::Comment',
       it 'post request - error' do
         expect {
           page.driver.submit :put,
-                             Rails.application.routes.url_helpers.send("destroy_comment_#{@comment_2.class.name.underscore.gsub('/comment', '_post')}_path", @comment_2.post.project, @comment_2), {}
+                             Rails.application.routes.url_helpers.send(
+                                 "destroy_comment_#{comment_post_model}_path", @comment_2.post.project, @comment_2), {}
           expect(current_path).to eq root_path
-        }.not_to change(comment_model.constantize, :count)
+        }.not_to change(comment_model_name, :count)
       end
     end
   end
