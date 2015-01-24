@@ -153,9 +153,8 @@ shared_examples 'content with comments' do |comment_model = 'LifeTape::Comment',
     end
   end
 
-  context 'destroy comment', js: true do
-    # @todo добавить тесты контроллера на прямую отправку пост запроса
-    it 'i owner - ok' do
+  context 'destroy comment' do
+    it 'i owner - ok', js: true do
       expect {
         click_link "destroy_comment_#{@comment_1.id}"
         sleep 5
@@ -163,12 +162,18 @@ shared_examples 'content with comments' do |comment_model = 'LifeTape::Comment',
       }.to change(comment_model.constantize, :count).by(-1)
     end
 
-    it 'from other users - error' do
-      unless moderator
+    unless moderator
+      it 'from other users - error' do
         expect(page).not_to have_link "destroy_comment_#{@comment_2.id}"
+      end
+
+      it 'post request - error' do
+        expect {
+          page.driver.submit :put,
+                             Rails.application.routes.url_helpers.send("destroy_comment_#{@comment_2.class.name.underscore.gsub('/comment', '_post')}_path", @comment_2.post.project, @comment_2), {}
+          expect(current_path).to eq root_path
+        }.not_to change(comment_model.constantize, :count)
       end
     end
   end
-
-  it 'choose aspect'
 end
