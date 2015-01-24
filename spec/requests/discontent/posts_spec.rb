@@ -10,8 +10,11 @@ describe 'Discontent ' do
   let (:project_for_group) { create :core_project, status: 4 }
 
   before do
+    @aspect1 = create :aspect, project: project
     @discontent1 = create :discontent, project: project, user: user, anonym: false
+    create :discontent_post_aspect, post_id: @discontent1.id, aspect_id: @aspect1.id
     @discontent2 = create :discontent, project: project, user: user, anonym: false
+    create :discontent_post_aspect, post_id: @discontent2.id, aspect_id: @aspect1.id
     @post1 = @discontent1
     @comment_1 = create :discontent_comment, post: @post1, user: user
     @comment_2 = create :discontent_comment, post: @post1, comment: @comment_1
@@ -82,16 +85,15 @@ describe 'Discontent ' do
       end
 
       it 'can see right form' do
-        #save_and_open_page
         expect(page).to have_content @discontent1.content
         expect(page).to have_content @discontent1.whend
         expect(page).to have_content @discontent1.whered
-        expect(page).to have_selector "span", 'aspect 1'
+        expect(page).to have_selector "span", @aspect1.content
         expect(page).to have_selector 'textarea#comment_text_area'
         expect(page).not_to have_link("plus_post_#{@discontent1.id}", text: 'Выдать баллы', href: plus_discontent_post_path(project, @discontent1))
       end
 
-      it_behaves_like 'content with comments', 'Discontent::Comment', true
+      it_behaves_like 'content with comments'
     end
 
     context 'vote discontent ' do
@@ -102,7 +104,6 @@ describe 'Discontent ' do
       end
 
       it 'have content ', js: true do
-        #expect(page).to have_content '2 этап: Сбор несовершенств. Голосование'
         expect(page).to have_content 'Голосование за несовершенства'
         expect(page).to have_content 'Определение наиболее важных проблем'
         expect(page).to have_content 'Несовершенство: 1 из 1'
@@ -116,13 +117,11 @@ describe 'Discontent ' do
         expect(page).to have_content I18n.t('show.improve.problem')
       end
     end
-
   end
 
   context 'moderator sign in' do
     before do
       sign_in moderator
-      visit root_path
     end
 
     context 'discontent list' do
@@ -166,8 +165,7 @@ describe 'Discontent ' do
         expect(page).to have_selector 'textarea#comment_text_area'
       end
 
-
-      it_behaves_like 'content with comments', 'Discontent::Comment', true
+      it_behaves_like 'content with comments', true
 
       context 'like concept' do
         before do
@@ -179,7 +177,7 @@ describe 'Discontent ' do
           click_link "plus_post_#{@discontent1.id}"
           visit journals_path(project: project)
           expect(page).to have_selector('i.fa.fa-trophy')
-          visit user_path(project: project, id: user_data.id)
+          visit user_path(project: project, id: user.id)
           expect(page).to have_content('25')
         end
       end
@@ -225,7 +223,7 @@ describe 'Discontent ' do
         fill_in 'discontent_post_content', with: 'new group content'
         fill_in 'discontent_post_whered', with: 'new group where'
         fill_in 'discontent_post_whend', with: 'new group when'
-        page.select('aspect 1', from: 'select_for_aspects')
+        page.select(@aspect1.content, from: 'select_for_aspects')
         click_button 'send_post'
         expect(page).to have_content 'new group content'
         expect(page).to have_content 'Разгруппировать'
