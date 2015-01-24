@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150123183636) do
+ActiveRecord::Schema.define(version: 20141228171316) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -40,6 +40,32 @@ ActiveRecord::Schema.define(version: 20150123183636) do
   end
 
   add_index "advices", ["user_id"], name: "index_advices_on_user_id", using: :btree
+
+  create_table "answers", force: true do |t|
+    t.text     "content"
+    t.integer  "raiting",     default: 0
+    t.integer  "user_id"
+    t.integer  "question_id"
+    t.datetime "created_at",              null: false
+    t.datetime "updated_at",              null: false
+    t.integer  "style"
+    t.integer  "status"
+  end
+
+  add_index "answers", ["created_at"], name: "index_answers_on_created_at", using: :btree
+  add_index "answers", ["user_id"], name: "index_answers_on_user_id", using: :btree
+
+  create_table "answers_users", id: false, force: true do |t|
+    t.integer  "answer_id"
+    t.integer  "user_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "project_id"
+    t.integer  "question_id"
+  end
+
+  add_index "answers_users", ["answer_id"], name: "index_answers_users_on_answer_id", using: :btree
+  add_index "answers_users", ["user_id"], name: "index_answers_users_on_user_id", using: :btree
 
   create_table "awards", force: true do |t|
     t.string  "name"
@@ -305,90 +331,6 @@ ActiveRecord::Schema.define(version: 20150123183636) do
   add_index "concept_votings", ["concept_post_aspect_id"], name: "index_concept_votings_on_concept_post_id", using: :btree
   add_index "concept_votings", ["user_id"], name: "index_concept_votings_on_user_id", using: :btree
 
-  create_table "core_aspects", force: true do |t|
-    t.text     "content"
-    t.integer  "user_id"
-    t.integer  "position"
-    t.datetime "created_at",                       null: false
-    t.datetime "updated_at",                       null: false
-    t.integer  "project_id"
-    t.text     "short_desc"
-    t.integer  "status",               default: 0
-    t.boolean  "user_add"
-    t.integer  "discontent_aspect_id"
-    t.string   "color"
-    t.string   "short_name"
-  end
-
-  add_index "core_aspects", ["project_id"], name: "index_core_aspects_on_project_id", using: :btree
-
-  create_table "core_essay_comments", force: true do |t|
-    t.integer  "user_id"
-    t.integer  "post_id"
-    t.text     "content"
-    t.datetime "created_at",                        null: false
-    t.datetime "updated_at",                        null: false
-    t.boolean  "censored",          default: false
-    t.integer  "comment_id"
-    t.boolean  "discontent_status"
-    t.boolean  "concept_status"
-    t.boolean  "discuss_status"
-    t.boolean  "useful"
-    t.boolean  "approve_status"
-    t.string   "image"
-    t.boolean  "isFile"
-  end
-
-  add_index "core_essay_comments", ["post_id"], name: "index_core_essay_comments_on_post_id", using: :btree
-
-  create_table "core_essay_post_votings", force: true do |t|
-    t.integer  "user_id"
-    t.integer  "post_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.boolean  "against"
-  end
-
-  add_index "core_essay_post_votings", ["post_id"], name: "index_essay_post_voitings_on_post_id", using: :btree
-
-  create_table "core_essay_posts", force: true do |t|
-    t.integer  "user_id"
-    t.integer  "project_id"
-    t.text     "content"
-    t.integer  "status"
-    t.integer  "stage"
-    t.datetime "created_at",                     null: false
-    t.datetime "updated_at",                     null: false
-    t.integer  "number_views",   default: 0
-    t.boolean  "censored",       default: false
-    t.text     "negative"
-    t.text     "positive"
-    t.text     "change"
-    t.text     "reaction"
-    t.boolean  "useful"
-    t.boolean  "approve_status"
-  end
-
-  create_table "core_help_posts", force: true do |t|
-    t.text     "content"
-    t.integer  "stage"
-    t.boolean  "mini"
-    t.integer  "style"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.string   "title"
-  end
-
-  create_table "core_knowbase_posts", force: true do |t|
-    t.text     "content"
-    t.integer  "project_id"
-    t.integer  "stage"
-    t.string   "title"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.integer  "aspect_id"
-  end
-
   create_table "core_project_scores", force: true do |t|
     t.integer  "user_id"
     t.integer  "project_id"
@@ -465,6 +407,23 @@ ActiveRecord::Schema.define(version: 20150123183636) do
   end
 
   add_index "discontent_aspect_users", ["user_id"], name: "index_discontent_aspect_users_on_user_id", using: :btree
+
+  create_table "discontent_aspects", force: true do |t|
+    t.text     "content"
+    t.integer  "user_id"
+    t.integer  "position"
+    t.datetime "created_at",                       null: false
+    t.datetime "updated_at",                       null: false
+    t.integer  "project_id"
+    t.text     "short_desc"
+    t.integer  "status",               default: 0
+    t.boolean  "user_add"
+    t.integer  "discontent_aspect_id"
+    t.string   "color"
+    t.string   "short_name"
+  end
+
+  add_index "discontent_aspects", ["project_id"], name: "index_discontent_aspects_on_project_id", using: :btree
 
   create_table "discontent_aspects_life_tape_posts", force: true do |t|
     t.integer "discontent_aspect_id"
@@ -627,6 +586,53 @@ ActiveRecord::Schema.define(version: 20150123183636) do
   end
 
   add_index "essay_comment_votings", ["comment_id"], name: "index_essay_comment_voitings_on_comment_id", using: :btree
+
+  create_table "essay_comments", force: true do |t|
+    t.integer  "user_id"
+    t.integer  "post_id"
+    t.text     "content"
+    t.datetime "created_at",                        null: false
+    t.datetime "updated_at",                        null: false
+    t.boolean  "censored",          default: false
+    t.integer  "comment_id"
+    t.boolean  "discontent_status"
+    t.boolean  "concept_status"
+    t.boolean  "discuss_status"
+    t.boolean  "useful"
+    t.boolean  "approve_status"
+    t.string   "image"
+    t.boolean  "isFile"
+  end
+
+  add_index "essay_comments", ["post_id"], name: "index_essay_comments_on_post_id", using: :btree
+
+  create_table "essay_post_votings", force: true do |t|
+    t.integer  "user_id"
+    t.integer  "post_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.boolean  "against"
+  end
+
+  add_index "essay_post_votings", ["post_id"], name: "index_essay_post_voitings_on_post_id", using: :btree
+
+  create_table "essay_posts", force: true do |t|
+    t.integer  "user_id"
+    t.integer  "project_id"
+    t.text     "content"
+    t.integer  "status"
+    t.integer  "stage"
+    t.datetime "created_at",                     null: false
+    t.datetime "updated_at",                     null: false
+    t.integer  "number_views",   default: 0
+    t.boolean  "censored",       default: false
+    t.text     "negative"
+    t.text     "positive"
+    t.text     "change"
+    t.text     "reaction"
+    t.boolean  "useful"
+    t.boolean  "approve_status"
+  end
 
   create_table "estimate_comment_votings", force: true do |t|
     t.integer  "user_id"
@@ -990,6 +996,16 @@ ActiveRecord::Schema.define(version: 20150123183636) do
     t.datetime "updated_at",  null: false
   end
 
+  create_table "help_posts", force: true do |t|
+    t.text     "content"
+    t.integer  "stage"
+    t.boolean  "mini"
+    t.integer  "style"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string   "title"
+  end
+
   create_table "help_questions", force: true do |t|
     t.text     "content"
     t.integer  "post_id"
@@ -1045,6 +1061,16 @@ ActiveRecord::Schema.define(version: 20150123183636) do
   add_index "journals", ["project_id"], name: "index_journals_on_project_id", using: :btree
   add_index "journals", ["type_event"], name: "index_journals_on_type", using: :btree
   add_index "journals", ["user_id"], name: "index_journals_on_user_id", using: :btree
+
+  create_table "knowbase_posts", force: true do |t|
+    t.text     "content"
+    t.integer  "project_id"
+    t.integer  "stage"
+    t.string   "title"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer  "aspect_id"
+  end
 
   create_table "life_tape_categories", force: true do |t|
     t.string   "name"
@@ -1346,48 +1372,6 @@ ActiveRecord::Schema.define(version: 20150123183636) do
     t.datetime "updated_at",   null: false
   end
 
-  create_table "poll_answers", force: true do |t|
-    t.text     "content"
-    t.integer  "raiting",     default: 0
-    t.integer  "user_id"
-    t.integer  "question_id"
-    t.datetime "created_at",              null: false
-    t.datetime "updated_at",              null: false
-    t.integer  "style"
-    t.integer  "status"
-  end
-
-  add_index "poll_answers", ["created_at"], name: "index_poll_answers_on_created_at", using: :btree
-  add_index "poll_answers", ["user_id"], name: "index_poll_answers_on_user_id", using: :btree
-
-  create_table "poll_answers_users", id: false, force: true do |t|
-    t.integer  "answer_id"
-    t.integer  "user_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.integer  "project_id"
-    t.integer  "question_id"
-  end
-
-  add_index "poll_answers_users", ["answer_id"], name: "index_poll_answers_users_on_answer_id", using: :btree
-  add_index "poll_answers_users", ["user_id"], name: "index_poll_answers_users_on_user_id", using: :btree
-
-  create_table "poll_questions", force: true do |t|
-    t.text     "content"
-    t.integer  "raiting",          default: 0
-    t.integer  "user_id"
-    t.datetime "created_at",                   null: false
-    t.datetime "updated_at",                   null: false
-    t.integer  "project_id"
-    t.integer  "status"
-    t.integer  "post_id"
-    t.string   "parent_post_type"
-    t.text     "hint"
-  end
-
-  add_index "poll_questions", ["created_at"], name: "index_poll_questions_on_created_at", using: :btree
-  add_index "poll_questions", ["user_id"], name: "index_poll_questions_on_user_id", using: :btree
-
   create_table "posts", force: true do |t|
     t.string   "title"
     t.text     "text"
@@ -1447,6 +1431,22 @@ ActiveRecord::Schema.define(version: 20150123183636) do
   end
 
   add_index "question_posts", ["project_id"], name: "index_questions_posts_on_project_id", using: :btree
+
+  create_table "questions", force: true do |t|
+    t.text     "content"
+    t.integer  "raiting",          default: 0
+    t.integer  "user_id"
+    t.datetime "created_at",                   null: false
+    t.datetime "updated_at",                   null: false
+    t.integer  "project_id"
+    t.integer  "status"
+    t.integer  "post_id"
+    t.string   "parent_post_type"
+    t.text     "hint"
+  end
+
+  add_index "questions", ["created_at"], name: "index_questions_on_created_at", using: :btree
+  add_index "questions", ["user_id"], name: "index_questions_on_user_id", using: :btree
 
   create_table "questions_users", id: false, force: true do |t|
     t.integer "question_id"
