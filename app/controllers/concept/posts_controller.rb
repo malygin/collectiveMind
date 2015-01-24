@@ -1,4 +1,3 @@
-# encoding: utf-8
 require 'similar_text'
 require 'set'
 class Concept::PostsController < PostsController

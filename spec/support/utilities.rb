@@ -209,8 +209,11 @@ def prepare_for_vote_discontents(project)
 end
 
 def prepare_concepts(project, user)
+  @aspect1 = create :aspect, project: project
   @discontent1 = create :discontent, project: project, status: 4
+  create :discontent_post_aspect, post_id: @discontent1.id, aspect_id: @aspect1.id
   @discontent2 = create :discontent, project: project, status: 4
+  create :discontent_post_aspect, post_id: @discontent2.id, aspect_id: @aspect1.id
   @concept1 = create :concept, user: user, project: project
   @concept2 = create :concept, user: user, project: project
   @comment1 = create :concept_comment, post: @concept1, user: user
@@ -218,6 +221,6 @@ def prepare_concepts(project, user)
   # @todo move to factory
   @concept_aspect1 = create :concept_aspect, discontent_aspect_id: @discontent1.id, concept_post_id: @concept1.id
   @concept_aspect2 = create :concept_aspect, discontent_aspect_id: @discontent1.id, concept_post_id: @concept2.id
-  @condis1 = create :concept_post_discontent, post_id: @concept1.id, discontent_post_id: @discontent1.id
-  @condis2 = create :concept_post_discontent, post_id: @concept2.id, discontent_post_id: @discontent1.id
+  create :concept_post_discontent, post_id: @concept1.id, discontent_post_id: @discontent1.id
+  create :concept_post_discontent, post_id: @concept2.id, discontent_post_id: @discontent1.id
 end
