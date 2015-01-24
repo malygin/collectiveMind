@@ -6,7 +6,7 @@ describe 'Life Tape ' do
   let!(:user) { @user = create :user }
   let (:user_data) { create :user }
   let!(:moderator) { @moderator = create :moderator }
-  let (:project) { create :core_project, status: 1 }
+  let (:project) { create :core_project }
 
   before do
     @post1 = create :life_tape_post, project: project
@@ -109,7 +109,7 @@ describe 'Life Tape ' do
         visit life_tape_posts_path(project)
       end
 
-      it_behaves_like 'content with comments', 'LifeTape::Comment', true
+      it_behaves_like 'content with comments', true
 
     end
 
