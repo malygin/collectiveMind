@@ -17,7 +17,7 @@ class Discontent::AspectsController < ApplicationController
   def create
     @project = Core::Project.find(params[:project])
     @aspect = @project.aspects.create(params[:discontent_aspect])
-    @post = @aspect.life_posts.build(status: 0, project: @project)
+    @post = @aspect.life_posts.build(status: 0, project: @project, user: current_user)
     @aspect.life_tape_posts << @post
     redirect_to "/project/#{@project.id}/life_tape/posts?asp=#{@aspect.id}" if @post.save
   end
