@@ -52,7 +52,7 @@
 
           -#=link_to t('show.answer'), {:action => :add_child_comment_form, :id => comment.comment.post.id, :comment_id => comment.comment.id,:answer_id => comment.id}, :remote => true, :method => :put,  id: "add_child_comment_#{comment.id}", class: 'btn btn-success btn-xs'
 
-        - if boss?
+        - if boss? or role_expert?
           =link_to({action: :plus_comment, id: comment.id}, remote: true, method: :put,  id: "plus_comment_#{comment.id}") do
             -if comment.useful
               %span.text-danger=t('show.revert_score')
