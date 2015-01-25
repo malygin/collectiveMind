@@ -34,7 +34,7 @@ class Core::Project < ActiveRecord::Base
   scope :active_proc, -> { where('core_projects.status < ?', STATUS_CODES[:complete]) }
   scope :access_proc, -> access_proc { where(core_projects: {type_access: access_proc}) }
 
-  LIST_STAGES = {1 => {name: 'Введение в процедуру', type_stage: :life_tape_posts, status: [0, 1, 2, 20]},
+  LIST_STAGES = {1 => {name: 'Введение в процедуру', type_stage: :collect_info_posts, status: [0, 1, 2, 20]},
                  2 => {name: 'Анализ ситуации', type_stage: :discontent_posts, status: [3, 4, 5, 6]},
                  3 => {name: 'Дизайн будущего', type_stage: :concept_posts, status: [7, 8]},
                  4 => {name: 'Разработка проектов', type_stage: :plan_posts, status: [9]},
@@ -54,7 +54,7 @@ class Core::Project < ActiveRecord::Base
 
   STATUS_CODES = {
       prepare: 0,
-      life_tape: 1,
+      collect_info: 1,
       vote_aspects: 2,
       discontent: 3,
       vote_discontent: 4,
@@ -81,7 +81,7 @@ class Core::Project < ActiveRecord::Base
   end
 
   def current_aspects(current_stage)
-    if current_stage == 'life_tape/posts'
+    if current_stage == 'collect_info/posts'
       self.aspects.main_aspects.order(:id)
     else
       if self.proc_aspects.main_aspects.first.present? and self.proc_aspects.main_aspects.first.position.present?
@@ -102,7 +102,7 @@ class Core::Project < ActiveRecord::Base
 
   def get_free_votes_for(user, stage)
     case stage
-      when 'lifetape'
+      when 'collect_info'
         self.stage1_count - user.voted_aspects.by_project(self.id).size
       when 'plan'
         self.stage5.to_i - user.voted_plan_posts.by_project(self.id).size
@@ -201,7 +201,7 @@ class Core::Project < ActiveRecord::Base
   end
 
   def can_edit_on_current_stage(p)
-    if p.instance_of? LifeTape::Post
+    if p.instance_of? CollectInfo::Post
       return true
     elsif p.instance_of? Discontent::Post
       return self.status == 3
@@ -217,7 +217,7 @@ class Core::Project < ActiveRecord::Base
 
   def status_number(status)
     case status
-      when :life_tape_posts
+      when :collect_info_posts
         1
       when :discontent_posts
         3
@@ -232,7 +232,7 @@ class Core::Project < ActiveRecord::Base
 
   def model_min_stage(model)
     case model
-      when 'life_tape_post'
+      when 'collect_info_post'
         0
       when 'discontent_post'
         3
@@ -255,7 +255,7 @@ class Core::Project < ActiveRecord::Base
     case status
       when 0
         'подготовка к процедуре'
-      when 1, :life_tape_posts
+      when 1, :collect_info_posts
         I18n.t('stages.life_tape')
       when 2
         'голосование за темы и рефлексия'
@@ -324,7 +324,7 @@ class Core::Project < ActiveRecord::Base
 
   def date_begin_stage(table_name)
     table_name = table_name.sub('_posts', '').sub('_comments', '')
-    if table_name == 'life_tape'
+    if table_name == 'collect_info'
       self.created_at
     elsif table_name == 'discontent'
       self.date_12
@@ -339,7 +339,7 @@ class Core::Project < ActiveRecord::Base
 
   def date_end_stage(table_name)
     table_name = table_name.sub('_posts', '').sub('_comments', '')
-    if table_name == 'life_tape'
+    if table_name == 'collect_info'
       self.date_12
     elsif table_name == 'discontent'
       self.date_23

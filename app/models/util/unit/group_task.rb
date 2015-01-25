@@ -1,6 +1,6 @@
-class GroupTask < ActiveRecord::Base
+class Util::Unit::GroupTask < ActiveRecord::Base
   belongs_to :group
-  has_many :group_task_users, class_name: 'GroupTaskUser'
+  has_many :group_task_users, class_name: 'Util::Unit::GroupTaskUser'
   has_many :users, through: :group_task_users
 
   STATUSES = {

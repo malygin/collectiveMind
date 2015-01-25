@@ -1,11 +1,11 @@
-class Group < ActiveRecord::Base
+class Util::Unit::Group < ActiveRecord::Base
   belongs_to :project, class_name: 'Core::Project'
-  has_many :all_group_users, class_name: 'GroupUser', dependent: :destroy
+  has_many :all_group_users, class_name: 'Util::Unit::GroupUser', dependent: :destroy
   has_many :group_users, -> { where invite_accepted: true }
   has_many :users, through: :group_users
   has_many :user_plan_posts, through: :users, source: :plan_posts
-  has_many :chat_messages, class_name: 'GroupChatMessage'
-  has_many :tasks, class_name: 'GroupTask'
+  has_many :chat_messages, class_name: 'Util::Unit::GroupChatMessage'
+  has_many :tasks, class_name: 'Util::Unit::GroupTask'
 
   scope :by_project, -> (project) { where project_id: project.id }
 

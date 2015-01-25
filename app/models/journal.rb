@@ -23,6 +23,8 @@ class Journal < ActiveRecord::Base
 
   after_save :send_last_news
 
+  validates :body, :type_event, :project_id, presence: true
+
   @types = []
   @my_types = [11]
 
@@ -151,19 +153,19 @@ class Journal < ActiveRecord::Base
     #@todo новости и информирование авторов
     current_user.journals.build(type_event: name_of_comment_for_param+'_save', project: project,
                                 body: "#{trim_content(comment.content)}", body2: trim_content(field_for_journal(post)),
-                                first_id: (post.instance_of? LifeTape::Post) ? post.discontent_aspects.first.id : post.id, second_id: comment.id).save!
+                                first_id: (post.instance_of? CollectInfo::Post) ? post.discontent_aspects.first.id : post.id, second_id: comment.id).save!
 
     if post.user!=current_user
       current_user.journals.build(type_event: 'my_'+name_of_comment_for_param, user_informed: post.user, project: project,
                                   body: "#{trim_content(comment.content)}", body2: trim_content(field_for_journal(post)),
-                                  first_id: (post.instance_of? LifeTape::Post) ? post.discontent_aspects.first.id : post.id, second_id: comment.id,
+                                  first_id: (post.instance_of? CollectInfo::Post) ? post.discontent_aspects.first.id : post.id, second_id: comment.id,
                                   personal: true, viewed: false).save!
     end
 
     if comment_answer and comment_answer.user!=current_user
       current_user.journals.build(type_event: 'reply_'+name_of_comment_for_param, user_informed: comment_answer.user, project: project,
                                   body: "#{trim_content(comment.content)}", body2: trim_content(comment_answer.content),
-                                  first_id: (post.instance_of? LifeTape::Post) ? post.discontent_aspects.first.id : post.id, second_id: comment.id,
+                                  first_id: (post.instance_of? CollectInfo::Post) ? post.discontent_aspects.first.id : post.id, second_id: comment.id,
                                   personal: true, viewed: false).save!
     end
   end

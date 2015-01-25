@@ -5,7 +5,7 @@ class Essay::PostsController < PostsController
   end
 
   def index
-    if @stage == '1' and @project.status == 2 and current_user.can_vote_for(:life_tape, @project)
+    if @stage == '1' and @project.status == 2 and current_user.can_vote_for(:collect_info, @project)
       redirect_to life_tape_posts_path(@project, action: 'vote_list')
       return
     elsif @stage == '2' and @project.status == 6 and current_user.can_vote_for(:discontent, @project)

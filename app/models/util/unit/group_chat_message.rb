@@ -1,4 +1,4 @@
-class GroupChatMessage < ActiveRecord::Base
+class Util::Unit::GroupChatMessage < ActiveRecord::Base
   belongs_to :user
   belongs_to :group
 

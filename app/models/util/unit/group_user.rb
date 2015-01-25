@@ -1,4 +1,4 @@
-class GroupUser < ActiveRecord::Base
+class Util::Unit::GroupUser < ActiveRecord::Base
   belongs_to :group
   belongs_to :user
 

@@ -49,7 +49,6 @@ class Discontent::Post < ActiveRecord::Base
   scope :sort_date, -> sort_date { sort_date == "up" ? order('discontent_posts.created_at DESC') : order('discontent_posts.created_at ASC') if sort_date.present? }
   scope :sort_user, -> sort_user { sort_user == "up" ? order('discontent_posts.user_id DESC') : order('discontent_posts.user_id ASC') if sort_user.present? }
   scope :sort_view, -> sort_view { sort_view == "up" ? order('discontent_posts.number_views DESC') : order('discontent_posts.number_views ASC') if sort_view.present? }
-  scope :sort_popular, -> sort_popular { sort_popular == "up" ? joins(:users_pro).order('(count("discontent_post_votings"."user_id") + 0.3 * count("discontent_posts"."number_views")) DESC') : joins(:users_pro).order('(count("discontent_post_votings"."user_id") + 0.3 * count("discontent_posts"."number_views")) ASC') if sort_popular.present? }
 
   validates :content, :whend, :whered, :project_id, presence: true
 

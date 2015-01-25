@@ -1,5 +1,5 @@
-module Poll
+module Util
   def self.table_name_prefix
-    'poll_'
+    ''
   end
 end

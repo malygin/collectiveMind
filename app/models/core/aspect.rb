@@ -11,12 +11,12 @@ class Core::Aspect < ActiveRecord::Base
   has_many :aspect_posts, through: :discontent_post_aspects, source: :post, class_name: 'Discontent::Post'
 
   has_many :voted_users, through: :final_votings, source: :user
-  has_many :final_votings, foreign_key: 'discontent_aspect_id', class_name: 'LifeTape::Voiting'
+  has_many :final_votings, foreign_key: 'discontent_aspect_id', class_name: 'CollectInfo::Voting'
 
   has_many :core_aspects, class_name: 'Core::Aspect', foreign_key: 'discontent_aspect_id'
   belongs_to :core_aspect, class_name: 'Core::Aspect', foreign_key: 'discontent_aspect_id'
 
-  has_many :questions, -> { where questions: {parent_post_type: 'core_aspect'} }, class_name: 'Poll::Question', foreign_key: 'post_id'
+  has_many :questions, -> { where questions: {parent_post_type: 'core_aspect'} }, class_name: 'CollectInfo::Question', foreign_key: 'post_id'
 
   scope :by_project, ->(project_id) { where("core_aspects.project_id = ?", project_id) }
   scope :minus_view, ->(aspects) { where("core_aspects.id NOT IN (#{aspects.join(", ")})") unless aspects.empty? }
@@ -24,9 +24,9 @@ class Core::Aspect < ActiveRecord::Base
 
   scope :vote_top, ->(revers) {
     if revers == "0"
-      order('count("life_tape_voitings"."user_id") DESC')
+      order('count("collect_info_votings"."user_id") DESC')
     elsif revers == "1"
-      order('count("life_tape_voitings"."user_id") ASC')
+      order('count("collect_info_votings"."user_id") ASC')
     else
       nil
     end
@@ -39,9 +39,9 @@ class Core::Aspect < ActiveRecord::Base
 
   def self.scope_vote_top(project, revers)
     includes(:final_votings).
-        group('"core_aspects"."id","life_tape_voitings"."id"').
+        group('"core_aspects"."id","collect_info_votings"."id"').
         where('"core_aspects"."project_id" = ? and "core_aspects"."status" = 0', project)
-        .references(:life_tape_voitings)
+        .references(:collect_info_votings)
         .vote_top(revers)
   end
 
@@ -62,7 +62,7 @@ class Core::Aspect < ActiveRecord::Base
   end
 
   def question_complete(project, user)
-    self.questions.joins("INNER JOIN poll_answers_users ON poll_answers_users.question_id = questions.id").where('poll_answers_users.user_id = ?', user.id).by_project(project.id).by_status(0).select("distinct questions.id")
+    self.questions.joins("INNER JOIN collect_info_answers_users ON collect_info_answers_users.question_id = collect_info_questions.id").where('collect_info_answers_users.user_id = ?', user.id).by_project(project.id).by_status(0).select("distinct collect_info_questions.id")
   end
 
   def color

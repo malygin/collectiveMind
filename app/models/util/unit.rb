@@ -1,5 +1,5 @@
-module LifeTape
+module Util::Unit
   def self.table_name_prefix
-    'life_tape_'
+    'unit_'
   end
 end

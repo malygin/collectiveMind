@@ -3,6 +3,8 @@ class Award < ActiveRecord::Base
   has_many :users, through: :user_awards
   scope :for_project, lambda { |project| where('user_awards.project_id' => project) }
 
+  validates :name, :url, presence: true
+
   def self.reward(h={})
     if h[:type] == 'like'
       awk = UserAwardClick.where(user_id: h[:user], project_id: h[:project]).first_or_create

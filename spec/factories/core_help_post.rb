@@ -1,5 +1,5 @@
 FactoryGirl.define do
-  factory :help_post, class: 'Help::Post' do
+  factory :core_help_post, class: 'Core::Help::Post' do
     sequence(:content) { |n| "content for help #{n}" }
     sequence(:title) { |n| "title for help #{n}" }
     mini false

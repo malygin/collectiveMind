@@ -38,7 +38,7 @@ namespace :db  do
 		User.all(:limit => 13).each do |user|
 			3.times do
         d =Discontent::Aspect.order("RANDOM()").first
-				l = LifeTape::Post.create!(:content => Faker::Lorem.sentence(30), :project => project, :user => user )
+				l = CollectInfo::Post.create!(:content => Faker::Lorem.sentence(30), :project => project, :user => user )
 			  l.discontent_aspects << d
         l.save!
       end

@@ -1,4 +1,4 @@
-class LifeTape::PostsController < PostsController
+class CollectInfo::PostsController < PostsController
   def voting_model
     Discontent::Aspect
   end
@@ -8,12 +8,12 @@ class LifeTape::PostsController < PostsController
   end
 
   def index
-    return redirect_to action: 'vote_list' if current_user.can_vote_for(:life_tape, @project)
+    return redirect_to action: 'vote_list' if current_user.can_vote_for(:collect_info, @project)
     @page = params[:page]
     @aspect = params[:asp] ? Core::Aspect.find(params[:asp]) : @project.aspects.order(:id).first
     # @post_show = @aspect.life_tape_post unless @aspect.nil?
     # @comments= @post_show.main_comments.paginate(page: @page ? @page : last_page, per_page: 10).includes(:comments) if @post_show
-    # @comment = LifeTape::Comment.new
+    # @comment = CollectInfo::Comment.new
 
     @count_aspects = @project.aspects.main_aspects.count
     @count_aspects_check = 0
@@ -23,9 +23,9 @@ class LifeTape::PostsController < PostsController
   end
 
   def vote_list
-    return redirect_to action: 'index' unless current_user.can_vote_for(:life_tape, @project)
+    return redirect_to action: 'index' unless current_user.can_vote_for(:collect_info, @project)
     @posts = voting_model.scope_vote_top(@project.id, params[:revers])
-    @path_for_voting = "/project/#{@project.id}/life_tape/"
+    @path_for_voting = "/project/#{@project.id}/collect_info/"
     @votes = @project.stage1_count
     @number_v = @project.get_free_votes_for(current_user, 'lifetape')
     respond_to do |format|
@@ -38,7 +38,7 @@ class LifeTape::PostsController < PostsController
   def transfer_comment
     aspect = Discontent::Aspect.find(params[:aspect_id])
     post = aspect.life_tape_post
-    @comment = LifeTape::Comment.find(params[:comment_id])
+    @comment = CollectInfo::Comment.find(params[:comment_id])
     aspect_old = @comment.post.discontent_aspects.first
     unless post.nil?
       @comment.update_attributes(post_id: post.id)

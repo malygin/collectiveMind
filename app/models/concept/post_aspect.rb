@@ -10,13 +10,4 @@ class Concept::PostAspect < ActiveRecord::Base
   def voted(user)
     self.voted_users.where(id: user)
   end
-
-  def not_vote_for_other_post_aspects(dis, user)
-    dis.concept_conditions.each do |asp|
-      if asp.voted(user).size>0
-        return false
-      end
-    end
-    return true
-  end
 end

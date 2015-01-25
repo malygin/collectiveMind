@@ -6,7 +6,7 @@ class PostsController < ProjectsController
   def journal_data
     if params[:viewed]
       post = current_model.where(id: params[:id], project_id: @project.id).first if params[:id]
-      post_id = if current_model.to_s == 'LifeTape::Post' then
+      post_id = if current_model.to_s == 'CollectInfo::Post' then
                   params[:asp] ? Discontent::Aspect.find(params[:asp]) : @project.aspects.order(:id).first
                 else
                   post
@@ -75,24 +75,24 @@ class PostsController < ProjectsController
     if @comment.discuss_status
       current_user.journals.build(type_event: name_of_comment_for_param+'_discuss_stat', project: @project,
                                   body: "#{trim_content(@comment.content)}", body2: trim_content(field_for_journal(@post)),
-                                  first_id: (@post.instance_of? LifeTape::Post) ? @post.discontent_aspects.first.id : @post.id, second_id: @comment.id).save!
+                                  first_id: (@post.instance_of? CollectInfo::Post) ? @post.discontent_aspects.first.id : @post.id, second_id: @comment.id).save!
 
       if @comment.user!=current_user
         current_user.journals.build(type_event: 'my_'+name_of_comment_for_param+'_discuss_stat', user_informed: @comment.user, project: @project,
                                     body: "#{trim_content(@comment.content)}", body2: trim_content(field_for_journal(@post)),
-                                    first_id: (@post.instance_of? LifeTape::Post) ? @post.discontent_aspects.first.id : @post.id, second_id: @comment.id,
+                                    first_id: (@post.instance_of? CollectInfo::Post) ? @post.discontent_aspects.first.id : @post.id, second_id: @comment.id,
                                     personal: true, viewed: false).save!
       end
     end
     if @comment.approve_status
       current_user.journals.build(type_event: name_of_comment_for_param+'_approve_status', project: @project,
                                   body: "#{trim_content(@comment.content)}", body2: trim_content(field_for_journal(@post)),
-                                  first_id: (@post.instance_of? LifeTape::Post) ? @post.discontent_aspects.first.id : @post.id, second_id: @comment.id).save!
+                                  first_id: (@post.instance_of? CollectInfo::Post) ? @post.discontent_aspects.first.id : @post.id, second_id: @comment.id).save!
 
       if @comment.user!=current_user
         current_user.journals.build(type_event: 'my_'+name_of_comment_for_param+'_approve_status', user_informed: @comment.user, project: @project,
                                     body: "#{trim_content(@comment.content)}", body2: trim_content(field_for_journal(@post)),
-                                    first_id: (@post.instance_of? LifeTape::Post) ? @post.discontent_aspects.first.id : @post.id, second_id: @comment.id,
+                                    first_id: (@post.instance_of? CollectInfo::Post) ? @post.discontent_aspects.first.id : @post.id, second_id: @comment.id,
                                     personal: true, viewed: false).save!
       end
     end
@@ -457,7 +457,7 @@ class PostsController < ProjectsController
     if params[:req_comment] and params[:page].nil?
       stage = params[:controller].sub('/posts', '') if params[:controller]
       if stage
-        post = stage == "life_tape" ? params[:asp] : params[:id]
+        post = stage == "collect_info" ? params[:asp] : params[:id]
         page = page_for_comment(params[:project], stage, post, params[:req_comment])
       end
       path = page ? request.fullpath + "&page=#{page}#comment_#{params[:req_comment]}" : request.fullpath + "#comment_#{params[:req_comment]}"

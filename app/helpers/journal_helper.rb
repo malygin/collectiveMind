@@ -68,21 +68,21 @@ module JournalHelper
     case j.type_event
       #LIFETAPE
       when 'life_tape_comment_save'
-        "добавил комментарий: '#{j.body} ...' к теме:  "+ link_to("#{j.body2}", "/project/#{project}/life_tape/posts/?asp=#{j.first_id}&req_comment=#{j.second_id}#comment_#{j.second_id}")
+        "добавил комментарий: '#{j.body} ...' к теме:  "+ link_to("#{j.body2}", "/project/#{project}/collect_info/posts/?asp=#{j.first_id}&req_comment=#{j.second_id}#comment_#{j.second_id}")
       when 'life_tape_post_save'
-        'добавил тему '+ link_to("#{j.body}..", "/project/#{project}/life_tape/posts/#{j.first_id}")
+        'добавил тему '+ link_to("#{j.body}..", "/project/#{project}/collect_info/posts/#{j.first_id}")
       when 'my_life_tape_comment'
-        "добавил комментарий: '#{j.body}'"+ link_to(' к вашей теме ', "/project/#{project}/life_tape/posts?asp=#{j.first_id}&viewed=true&req_comment=#{j.second_id}#comment_#{j.second_id}")
+        "добавил комментарий: '#{j.body}'"+ link_to(' к вашей теме ', "/project/#{project}/collect_info/posts?asp=#{j.first_id}&viewed=true&req_comment=#{j.second_id}#comment_#{j.second_id}")
       when 'reply_life_tape_comment'
-        "добавил комментарий: '#{j.body}'"+ link_to(" в ответ на ваш '#{j.body2}'", "/project/#{project}/life_tape/posts?asp=#{j.first_id}&viewed=true&req_comment=#{j.second_id}#comment_#{j.second_id}")
+        "добавил комментарий: '#{j.body}'"+ link_to(" в ответ на ваш '#{j.body2}'", "/project/#{project}/collect_info/posts?asp=#{j.first_id}&viewed=true&req_comment=#{j.second_id}#comment_#{j.second_id}")
       when 'life_tape_comment_discuss_stat'
-        "выделил(а) комментарий: '#{j.body}'"+ link_to(' к теме ', "/project/#{project}/life_tape/posts?asp=#{j.first_id}&req_comment=#{j.second_id}#comment_#{j.second_id}") + ' как требующий обсуждения'
+        "выделил(а) комментарий: '#{j.body}'"+ link_to(' к теме ', "/project/#{project}/collect_info/posts?asp=#{j.first_id}&req_comment=#{j.second_id}#comment_#{j.second_id}") + ' как требующий обсуждения'
       when 'my_life_tape_comment_discuss_stat'
-        "выделил(а) ваш комментарий: '#{j.body}'"+ link_to(' к теме ', "/project/#{project}/life_tape/posts?asp=#{j.first_id}&viewed=true&req_comment=#{j.second_id}#comment_#{j.second_id}") + ' как требующий обсуждения'
+        "выделил(а) ваш комментарий: '#{j.body}'"+ link_to(' к теме ', "/project/#{project}/collect_info/posts?asp=#{j.first_id}&viewed=true&req_comment=#{j.second_id}#comment_#{j.second_id}") + ' как требующий обсуждения'
       when 'life_tape_comment_approve_status'
-        "выделил(а) комментарий: '#{j.body}'"+ link_to(' к теме ', "/project/#{project}/life_tape/posts?asp=#{j.first_id}&req_comment=#{j.second_id}#comment_#{j.second_id}") + ' как важный'
+        "выделил(а) комментарий: '#{j.body}'"+ link_to(' к теме ', "/project/#{project}/collect_info/posts?asp=#{j.first_id}&req_comment=#{j.second_id}#comment_#{j.second_id}") + ' как важный'
       when 'my_life_tape_comment_approve_status'
-        "выделил(а) ваш комментарий: '#{j.body}'"+ link_to(' к теме ', "/project/#{project}/life_tape/posts?asp=#{j.first_id}&viewed=true&req_comment=#{j.second_id}#comment_#{j.second_id}") + ' как важный'
+        "выделил(а) ваш комментарий: '#{j.body}'"+ link_to(' к теме ', "/project/#{project}/collect_info/posts?asp=#{j.first_id}&viewed=true&req_comment=#{j.second_id}#comment_#{j.second_id}") + ' как важный'
       # DISCONTENTS
       when 'discontent_comment_save'
         "добавил(а) комментарий: '#{j.body}'"+ ' к несовершенству '+ link_to("#{j.body2} ... ", "/project/#{project}/discontent/posts/#{j.first_id}?req_comment=#{j.second_id}#comment_#{j.second_id}")

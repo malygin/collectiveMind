@@ -14,7 +14,7 @@ class User < ActiveRecord::Base
   has_many :core_aspects, class_name: 'Core::Aspect'
   has_many :essay_posts, class_name: 'Core::Essay::Post'
   has_many :concept_posts, class_name: 'Concept::Post'
-  has_many :aspect_votings, class_name: 'LifeTape::Voiting'
+  has_many :aspect_votings, class_name: 'CollectInfo::Voting'
   has_many :voted_aspects, through: :aspect_votings, source: :core_aspect, class_name: 'Core::Aspect'
   has_many :post_votings, class_name: 'Discontent::Voting'
   has_many :voted_discontent_posts, through: :post_votings, source: :discontent_post, class_name: 'Discontent::Post'
@@ -27,12 +27,12 @@ class User < ActiveRecord::Base
   has_many :user_awards
   has_many :awards, through: :user_awards
   has_many :moderator_messages
-  has_many :user_checks, class_name: 'UserCheck'
+  has_many :user_checks, class_name: 'Util::Unit::UserCheck'
   has_many :group_users
   has_many :groups, through: :group_users
   has_many :group_chat_messages
   has_many :plan_posts, class_name: 'Plan::Post'
-  has_many :answers_users, class_name: 'Util::Poll::AnswersUser'
+  has_many :answers_users, class_name: 'CollectInfo::AnswersUser'
 
   default_scope { order('id DESC') }
   scope :check_field, ->(p, c) { where(project: p.id, status: 't', check_field: c) }
@@ -213,7 +213,7 @@ class User < ActiveRecord::Base
             self.journals.build(type_event: 'my_add_score_concept_improve', project: h[:project], user_informed: comment.user, body: "20", first_id: h[:post].id, body2: trim_content(h[:post].content), viewed: false, personal: true).save!
           end
         end
-        self.add_score_by_type(h[:project], 10, :score_g) if h[:post].instance_of? LifeTape::Post
+        self.add_score_by_type(h[:project], 10, :score_g) if h[:post].instance_of? CollectInfo::Post
       when :plus_field
         if h[:post].instance_of? Concept::Post
           # self.add_score_by_type(h[:project], h[:post].fullness.nil? ? 40 : h[:post].fullness + 39, :score_g)
