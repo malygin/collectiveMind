@@ -45,6 +45,7 @@
 #= require plugins
 #= require comments
 #= require resources
+#= require visits
 
 # @todo load initialization
 sidebarHeight = 0;
@@ -63,6 +64,7 @@ $ ->
 
   post_form()
 
+  record_visit()
   notificate_news()
   notifications()
   editable_groups()

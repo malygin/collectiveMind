@@ -3,7 +3,7 @@ class Journal < ActiveRecord::Base
   include Filterable
   extend ApplicationHelper
 
-  attr_accessible :body, :body2, :type_event, :user, :project, :user_informed, :viewed,
+  attr_accessible :body, :body2, :type_event, :user, :project, :user_informed, :viewed, :project_id,
                   :event, :first_id, :second_id, :personal, :anonym
   belongs_to :user
   belongs_to :user_informed, class_name: 'User', foreign_key: :user_informed
