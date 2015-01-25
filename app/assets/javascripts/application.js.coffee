@@ -46,6 +46,7 @@
 #= require comments
 #= require resources
 #= require visits
+#= require visit_chart
 
 # @todo load initialization
 sidebarHeight = 0;
@@ -77,6 +78,7 @@ $ ->
   create_group_chat()
   activate_add_aspects()
   group_actions()
+  visit_chart()
 
   $('.tooltips').tooltip()
   $("#sortable").sortable()

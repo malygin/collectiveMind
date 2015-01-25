@@ -62,6 +62,7 @@ class Core::Project < ActiveRecord::Base
   has_many :essays, -> { where status: 0 }, class_name: 'Essay::Post'
   has_many :groups
   has_many :journal_mailers, class_name: 'JournalMailer'
+  has_many :journals
   #has_many :project_score_users, class_name: 'User', through: :core_project_scores, source: :user
   scope :club_projects, ->(user) { where(type_access: 1) if user.cluber? or user.boss? }
   scope :active_proc, -> { where("core_projects.status < ?", 20) }
