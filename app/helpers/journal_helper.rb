@@ -34,16 +34,16 @@ module JournalHelper
           'my_award_1innovation', 'my_award_3innovation', 'my_award_5innovation', 'my_award_15innovation',
           'my_award_100points', 'my_award_500points', 'my_award_1000points', 'my_award_3000points', 'my_add_score_discontent_improve'
         'fa fa-trophy '
-      when 'life_tape_comment_discuss_stat', 'life_tape_comment_approve_status', 'my_life_tape_comment_approve_status'
+      when 'life_tape_comment_discuss_status', 'life_tape_comment_approve_status', 'my_life_tape_comment_approve_status'
         'fa color-teal  fa-exclamation'
-      when 'my_discontent_comment_discuss_stat', 'discontent_comment_discuss_stat', 'discontent_post_comment_stat', 'discontent_post_discuss_stat',
+      when 'my_discontent_comment_discuss_status', 'discontent_comment_discuss_status', 'discontent_post_comment_stat', 'discontent_post_discuss_status',
           'discontent_comment_approve_status', 'discontent_post_approve_status'
         'fa color-red  fa-exclamation'
-      when 'concept_comment_discuss_stat', 'concept_post_discuss_stat', 'concept_comment_approve_status', 'concept_post_approve_status'
+      when 'concept_comment_discuss_status', 'concept_post_discuss_status', 'concept_comment_approve_status', 'concept_post_approve_status'
         'fa color-orange  fa-exclamation'
-      when 'plan_comment_discuss_stat', 'plan_comment_approve_status'
+      when 'plan_comment_discuss_status', 'plan_comment_approve_status'
         'fa fa-exclamation color-green'
-      when 'essay_comment_discuss_stat', 'essay_comment_approve_stat'
+      when 'essay_comment_discuss_status', 'essay_comment_approve_stat'
         'fa fa-exclamation'
       when 'essay_post_save'
         'fa fa-plus'
@@ -51,7 +51,7 @@ module JournalHelper
         'fa fa-edit'
       when 'essay_comment_save'
         'fa fa-comment'
-      when 'discontent_post_discuss_stat'
+      when 'discontent_post_discuss_status'
         'fa fa-exclamation color-red'
       when 'my_concept_note'
         'fa color-orange fa-hand-o-up'
@@ -75,9 +75,9 @@ module JournalHelper
         "добавил комментарий: '#{j.body}'"+ link_to(' к вашей теме ', "/project/#{project}/life_tape/posts?asp=#{j.first_id}&viewed=true&req_comment=#{j.second_id}#comment_#{j.second_id}")
       when 'reply_life_tape_comment'
         "добавил комментарий: '#{j.body}'"+ link_to(" в ответ на ваш '#{j.body2}'", "/project/#{project}/life_tape/posts?asp=#{j.first_id}&viewed=true&req_comment=#{j.second_id}#comment_#{j.second_id}")
-      when 'life_tape_comment_discuss_stat'
+      when 'life_tape_comment_discuss_status'
         "выделил(а) комментарий: '#{j.body}'"+ link_to(' к теме ', "/project/#{project}/life_tape/posts?asp=#{j.first_id}&req_comment=#{j.second_id}#comment_#{j.second_id}") + ' как требующий обсуждения'
-      when 'my_life_tape_comment_discuss_stat'
+      when 'my_life_tape_comment_discuss_status'
         "выделил(а) ваш комментарий: '#{j.body}'"+ link_to(' к теме ', "/project/#{project}/life_tape/posts?asp=#{j.first_id}&viewed=true&req_comment=#{j.second_id}#comment_#{j.second_id}") + ' как требующий обсуждения'
       when 'life_tape_comment_approve_status'
         "выделил(а) комментарий: '#{j.body}'"+ link_to(' к теме ', "/project/#{project}/life_tape/posts?asp=#{j.first_id}&req_comment=#{j.second_id}#comment_#{j.second_id}") + ' как важный'
@@ -110,13 +110,13 @@ module JournalHelper
       when 'my_discontent_note'
         s = j.body.split(':')
         "добавил(а) замечание  '#{j.body}...' к "+ link_to('вашему несовершенству', "/project/#{project}/discontent/posts/#{j.first_id}?viewed=true")
-      when 'discontent_post_discuss_stat'
+      when 'discontent_post_discuss_status'
         'выделил(а) несовершенство  ' + link_to("#{j.body}", "/project/#{project}/discontent/posts/#{j.first_id}") + ' как требующее обсуждения'
-      when 'my_discontent_post_discuss_stat'
+      when 'my_discontent_post_discuss_status'
         'выделил(а) ваше несовершенство  ' + link_to("#{j.body}", "/project/#{project}/discontent/posts/#{j.first_id}?viewed=true") + ' как требующее обсуждения'
-      when 'discontent_comment_discuss_stat'
+      when 'discontent_comment_discuss_status'
         "выделил(а) комментарий '#{j.body}...' к несовершенству "+ link_to(j.body2, "/project/#{project}/discontent/posts/#{j.first_id}?req_comment=#{j.second_id}#comment_#{j.second_id}") + ' как требующий обсуждения'
-      when 'my_discontent_comment_discuss_stat'
+      when 'my_discontent_comment_discuss_status'
         "выделил(а) ваш комментарий '#{j.body}...' к несовершенству "+ link_to(j.body2, "/project/#{project}/discontent/posts/#{j.first_id}?viewed=true&req_comment=#{j.second_id}#comment_#{j.second_id}") + ' как требующий обсуждения'
       when 'discontent_post_approve_status'
         'выделил(а) несовершенство  ' + link_to("#{j.body}", "/project/#{project}/discontent/posts/#{j.first_id}") + ' как важное'
@@ -146,13 +146,13 @@ module JournalHelper
       when 'my_concept_note'
         s = j.body.split(':')
         "добавил(а) замечание  '#{j.body}...' к "+ link_to('вашему нововведению', "/project/#{project}/concept/posts/#{j.first_id}?viewed=true")
-      when 'concept_post_discuss_stat'
+      when 'concept_post_discuss_status'
         'выделил(а) нововведение  ' + link_to("#{j.body}", "/project/#{project}/concept/posts/#{j.first_id}") + ' как требующее обсуждения'
-      when 'my_concept_post_discuss_stat'
+      when 'my_concept_post_discuss_status'
         'выделил(а) ваше нововведение  ' + link_to("#{j.body}", "/project/#{project}/concept/posts/#{j.first_id}?viewed=true") + ' как требующее обсуждения'
-      when 'concept_comment_discuss_stat'
+      when 'concept_comment_discuss_status'
         "выделил(а) комментарий '#{j.body}...' к нововведению "+ link_to(j.body2, "/project/#{project}/concept/posts/#{j.first_id}?req_comment=#{j.second_id}#comment_#{j.second_id}") + ' как требующий обсуждения'
-      when 'my_concept_comment_discuss_stat'
+      when 'my_concept_comment_discuss_status'
         "выделил(а) ваш комментарий '#{j.body}...' к нововведению "+ link_to(j.body2, "/project/#{project}/concept/posts/#{j.first_id}?viewed=true&req_comment=#{j.second_id}#comment_#{j.second_id}") + ' как требующий обсуждения'
       when 'concept_post_approve_status'
         'выделил(а) нововведение  ' + link_to("#{j.body}", "/project/#{project}/concept/posts/#{j.first_id}") + ' как важное'
@@ -175,9 +175,9 @@ module JournalHelper
         "добавил(а) комментарий '#{j.body}...' в ответ на ваш "+ link_to(j.body2, "/project/#{project}/plan/posts/#{j.first_id}?viewed=true&req_comment=#{j.second_id}#comment_#{j.second_id}")
       when 'my_plan_note'
         "добавил(а) замечание  '#{j.body}...' к вашему проекту "+ link_to(j.body2, "/project/#{project}/plan/posts/#{j.first_id}?viewed=true")
-      when 'plan_comment_discuss_stat'
+      when 'plan_comment_discuss_status'
         "выделил(а) комментарий '#{j.body}...' к проекту "+ link_to(j.body2, "/project/#{project}/plan/posts/#{j.first_id}?req_comment=#{j.second_id}#comment_#{j.second_id}") + ' как требующий обсуждения'
-      when 'my_plan_comment_discuss_stat'
+      when 'my_plan_comment_discuss_status'
         "выделил(а) ваш комментарий '#{j.body}...' к проекту "+ link_to(j.body2, "/project/#{project}/plan/posts/#{j.first_id}?viewed=true&req_comment=#{j.second_id}#comment_#{j.second_id}") + ' как требующий обсуждения'
       when 'plan_comment_approve_status'
         "выделил(а) комментарий '#{j.body}...' к проекту "+ link_to(j.body2, "/project/#{project}/plan/posts/#{j.first_id}?req_comment=#{j.second_id}#comment_#{j.second_id}") + ' как важный'
@@ -194,9 +194,9 @@ module JournalHelper
         "добавил(а) комментарий '#{j.body}...' к вашей рефлексии "+ link_to("#{j.body2 == '' ? 'подробнее' : j.body2}", "/project/#{project}/stage/1/essay/posts/#{j.first_id}?viewed=true&req_comment=#{j.second_id}#comment_#{j.second_id}")
       when 'reply_essay_comment'
         "добавил(а) комментарий '#{j.body}...' в ответ на ваш "+ link_to("#{j.body2 == '' ? 'подробнее' : j.body2}", "/project/#{project}/stage/1/essay/posts/#{j.first_id}?viewed=true&req_comment=#{j.second_id}#comment_#{j.second_id}")
-      when 'essay_comment_discuss_stat'
+      when 'essay_comment_discuss_status'
         "выделил(а) комментарий '#{j.body}...' к рефлексии "+ link_to("#{j.body2 == '' ? 'подробнее' : j.body2}", "/project/#{project}/stage/1/essay/posts/#{j.first_id}?req_comment=#{j.second_id}#comment_#{j.second_id}") + ' как требующий обсуждения'
-      when 'my_essay_comment_discuss_stat'
+      when 'my_essay_comment_discuss_status'
         "выделил(а) ваш комментарий '#{j.body}...' к рефлексии "+ link_to("#{j.body2 == '' ? 'подробнее' : j.body2}", "/project/#{project}/stage/1/essay/posts/#{j.first_id}?viewed=true&req_comment=#{j.second_id}#comment_#{j.second_id}") + ' как требующий обсуждения'
       when 'essay_comment_approve_status'
         "выделил(а) комментарий '#{j.body}...' к рефлексии "+ link_to("#{j.body2 == '' ? 'подробнее' : j.body2}", "/project/#{project}/stage/1/essay/posts/#{j.first_id}?req_comment=#{j.second_id}#comment_#{j.second_id}") + ' как важный'

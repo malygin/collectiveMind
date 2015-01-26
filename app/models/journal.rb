@@ -121,9 +121,9 @@ class Journal < ActiveRecord::Base
       when "by_comment"
         ["life_tape_comment_save","my_life_tape_comment","discontent_comment_save","my_discontent_comment",
          "concept_comment_save","my_concept_comment","plan_comment_save","my_plan_comment","essay_comment_save","my_essay_comment",
-         "life_tape_comment_discuss_stat","my_life_tape_comment_discuss_stat","life_tape_comment_approve_status","my_life_tape_comment_approve_status","discontent_comment_discuss_stat","my_discontent_comment_discuss_stat",
-         "discontent_comment_approve_status","my_discontent_comment_approve_status","concept_comment_discuss_stat","my_concept_comment_discuss_stat","concept_comment_approve_status","my_concept_comment_approve_status",
-         "plan_comment_discuss_stat","my_plan_comment_discuss_stat","plan_comment_approve_status","my_plan_comment_approve_status","essay_comment_discuss_stat","my_essay_comment_discuss_stat","essay_comment_approve_status","my_essay_comment_approve_status"
+         "life_tape_comment_discuss_status","my_life_tape_comment_discuss_status","life_tape_comment_approve_status","my_life_tape_comment_approve_status","discontent_comment_discuss_status","my_discontent_comment_discuss_status",
+         "discontent_comment_approve_status","my_discontent_comment_approve_status","concept_comment_discuss_status","my_concept_comment_discuss_status","concept_comment_approve_status","my_concept_comment_approve_status",
+         "plan_comment_discuss_status","my_plan_comment_discuss_status","plan_comment_approve_status","my_plan_comment_approve_status","essay_comment_discuss_status","my_essay_comment_discuss_status","essay_comment_approve_status","my_essay_comment_approve_status"
         ]
       when "by_advice"
         ["advice_approve","my_advice_approved","my_advice_useful","my_advice_commented"]
@@ -137,10 +137,10 @@ class Journal < ActiveRecord::Base
       when "by_note"
         ["my_discontent_note","my_concept_note","my_plan_note"]
       when "by_discuss"
-        ["life_tape_comment_discuss_stat","my_life_tape_comment_discuss_stat","discontent_post_discuss_stat","my_discontent_post_discuss_stat",
-         "discontent_comment_discuss_stat","my_discontent_comment_discuss_stat","concept_post_discuss_stat","my_concept_post_discuss_stat",
-         "concept_comment_discuss_stat","my_concept_comment_discuss_stat","plan_comment_discuss_stat","my_plan_comment_discuss_stat",
-         "essay_comment_discuss_stat","my_essay_comment_discuss_stat"]
+        ["life_tape_comment_discuss_status","my_life_tape_comment_discuss_status","discontent_post_discuss_status","my_discontent_post_discuss_status",
+         "discontent_comment_discuss_status","my_discontent_comment_discuss_status","concept_post_discuss_status","my_concept_post_discuss_status",
+         "concept_comment_discuss_status","my_concept_comment_discuss_status","plan_comment_discuss_status","my_plan_comment_discuss_status",
+         "essay_comment_discuss_status","my_essay_comment_discuss_status"]
       when "by_approve"
         ["life_tape_comment_approve_status","my_life_tape_comment_approve_status","discontent_post_approve_status","my_discontent_post_approve_status",
          "discontent_comment_approve_status","my_discontent_comment_approve_status","concept_post_approve_status","my_concept_post_approve_status",
