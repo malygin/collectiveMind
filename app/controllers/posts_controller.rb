@@ -113,28 +113,16 @@ class PostsController < ApplicationController
     @comment.toggle!(:concept_status) if params[:concept]
     @comment.toggle!(:discuss_status) if params[:discuss_status]
     @comment.toggle!(:approve_status) if params[:approve_status]
+
     if @comment.discuss_status
-      current_user.journals.build(type_event: name_of_comment_for_param+'_discuss_stat', project: @project,
-                                  body: "#{trim_content(@comment.content)}", body2: trim_content(field_for_journal(@post)),
-                                  first_id: (@post.instance_of? LifeTape::Post) ? @post.discontent_aspects.first.id : @post.id, second_id: @comment.id).save!
-
-      if @comment.user!=current_user
-        current_user.journals.build(type_event: 'my_'+name_of_comment_for_param+'_discuss_stat', user_informed: @comment.user, project: @project,
-                                    body: "#{trim_content(@comment.content)}", body2: trim_content(field_for_journal(@post)),
-                                    first_id: (@post.instance_of? LifeTape::Post) ? @post.discontent_aspects.first.id : @post.id, second_id: @comment.id,
-                                    personal: true, viewed: false).save!
-      end
+      type = 'discuss_status'
+    elsif @comment.approve_status
+      type = 'approve_status'
     end
-    if @comment.approve_status
-      current_user.journals.build(type_event: name_of_comment_for_param+'_approve_status', project: @project,
-                                  body: "#{trim_content(@comment.content)}", body2: trim_content(field_for_journal(@post)),
-                                  first_id: (@post.instance_of? LifeTape::Post) ? @post.discontent_aspects.first.id : @post.id, second_id: @comment.id).save!
-
-      if @comment.user!=current_user
-        current_user.journals.build(type_event: 'my_'+name_of_comment_for_param+'_approve_status', user_informed: @comment.user, project: @project,
-                                    body: "#{trim_content(@comment.content)}", body2: trim_content(field_for_journal(@post)),
-                                    first_id: (@post.instance_of? LifeTape::Post) ? @post.discontent_aspects.first.id : @post.id, second_id: @comment.id,
-                                    personal: true, viewed: false).save!
+    comment_notice(type, @comment.user, personal = false)
+    if @project.closed?
+      @project.users_in_project.access_proc(2).each do |user|
+        comment_notice(type, user, personal = true) if (user != current_user and user != @comment.user)
       end
     end
 
@@ -146,28 +134,25 @@ class PostsController < ApplicationController
   def discuss_status
     @project = Core::Project.find(params[:project])
     @post = current_model.find(params[:id])
+
     if params[:discuss_status]
       @post.toggle!(:discuss_status)
       if @post.discuss_status
-        current_user.journals.build(type_event: name_of_model_for_param+'_discuss_stat', project: @project,
-                                    body: "#{trim_content(field_for_journal(@post))}", first_id: @post.id).save!
-        if @post.user!=current_user
-          current_user.journals.build(type_event: 'my_'+name_of_model_for_param+'_discuss_stat', user_informed: @post.user, project: @project,
-                                      body: "#{trim_content(field_for_journal(@post))}", first_id: @post.id, personal: true, viewed: false).save!
-        end
+        type = 'discuss_status'
       end
-    end
-    if params[:approve_status]
+    elsif params[:approve_status]
       @post.toggle!(:approve_status)
       if @post.approve_status
-        current_user.journals.build(type_event: name_of_model_for_param+'_approve_status', project: @project,
-                                    body: "#{trim_content(field_for_journal(@post))}", first_id: @post.id).save!
-        if @post.user!=current_user
-          current_user.journals.build(type_event: 'my_'+name_of_model_for_param+'_approve_status', user_informed: @post.user, project: @project,
-                                      body: "#{trim_content(field_for_journal(@post))}", first_id: @post.id, personal: true, viewed: false).save!
-        end
+        type = 'approve_status'
       end
     end
+    post_notice(type, @post.user, personal = false)
+    if @project.closed?
+      @project.users_in_project.access_proc(2).each do |user|
+        post_notice(type, user, personal = true) if (user != current_user and user != @post.user)
+      end
+    end
+
     respond_to do |format|
       format.js
     end
@@ -555,5 +540,32 @@ class PostsController < ApplicationController
       Journal.comment_event(current_user, @project, name_of_comment_for_param, post, @comment, @comment_answer)
     end
     render template: 'posts/add_comment'
+  end
+
+  def comment_notice(type, user = @comment.user, personal = false)
+    unless personal
+      current_user.journals.build(type_event: name_of_comment_for_param+'_'+type, project: @project,
+                                  body: "#{trim_content(@comment.content)}", body2: trim_content(field_for_journal(@post)),
+                                  first_id: (@post.instance_of? LifeTape::Post) ? @post.discontent_aspects.first.id : @post.id, second_id: @comment.id).save!
+    end
+
+    if personal or (@comment.user!=current_user and !personal)
+      current_user.journals.build(type_event: "#{user == @comment.user ? 'my_' : ''}"+name_of_comment_for_param+'_'+type, user_informed: user, project: @project,
+                                  body: "#{trim_content(@comment.content)}", body2: trim_content(field_for_journal(@post)),
+                                  first_id: (@post.instance_of? LifeTape::Post) ? @post.discontent_aspects.first.id : @post.id, second_id: @comment.id,
+                                  personal: true, viewed: false).save!
+    end
+  end
+
+  def post_notice(type, user = @post.user, personal = false)
+    unless personal
+      current_user.journals.build(type_event: name_of_model_for_param+'_'+type, project: @project,
+                                  body: "#{trim_content(field_for_journal(@post))}", first_id: @post.id).save!
+    end
+
+    if personal or (@post.user!=current_user and !personal)
+      current_user.journals.build(type_event: "#{user == @post.user ? 'my_' : ''}"+name_of_model_for_param+'_'+type, user_informed: user, project: @project,
+                                  body: "#{trim_content(field_for_journal(@post))}", first_id: @post.id, personal: true, viewed: false).save!
+    end
   end
 end

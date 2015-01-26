@@ -261,6 +261,10 @@ class Core::Project < ActiveRecord::Base
     self.type_access == 3
   end
 
+  def closed?
+    self.type_access == 2
+  end
+
   def status_title(status = self.status)
     case status
       when 0
