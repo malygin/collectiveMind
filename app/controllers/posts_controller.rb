@@ -294,7 +294,7 @@ class PostsController < ApplicationController
   def plus
     @project= Core::Project.find(params[:project])
     @post = current_model.find(params[:id])
-    if boss?
+    if boss? or role_expert?
       @post.toggle!(:useful)
       if @post.useful
         @post.user.add_score(type: :plus_post, project: @project, post: @post, path: @post.class.name.underscore.pluralize)
@@ -331,13 +331,13 @@ class PostsController < ApplicationController
     @comment = comment_model.find(@id)
     #@against =  params[:against] == 'true'
     #comment.comment_votings.create(user: current_user, comment: comment,  against: @against) unless comment.users.include? current_user
-    if boss?
+    if boss? or role_expert?
       @comment.toggle!(:useful)
       if @comment.useful
-        @comment.user.add_score(type: :plus_comment, project: @project, comment: @comment, path: @comment.post.class.name.underscore.pluralize) if boss?
+        @comment.user.add_score(type: :plus_comment, project: @project, comment: @comment, path: @comment.post.class.name.underscore.pluralize)
         Award.reward(user: @comment.user, project: @project, type: 'like')
       else
-        @comment.user.add_score(type: :to_archive_plus_comment, project: @project, comment: @comment, path: @comment.post.class.name.underscore.pluralize) if boss?
+        @comment.user.add_score(type: :to_archive_plus_comment, project: @project, comment: @comment, path: @comment.post.class.name.underscore.pluralize)
         Award.reward(user: @comment.user, project: @project, type: 'unlike')
       end
     end
