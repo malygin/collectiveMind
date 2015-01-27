@@ -33,14 +33,14 @@
 #= require messenger/messenger.min
 # require select2
 #= require wizard/jquery.bootstrap.wizard
-#= require news
-#= require notifications
+# require news
+# require notifications
 #= require utils
 #= require jquery.ui.chatbox
 #= require jquery.slimscroll
-#= require moderator_chat
-#= require websockets_load.js.erb
-#= require groups
+# require moderator_chat
+# require websockets_load.js.erb
+# require groups
 #= require history_jquery
 #= require plugins
 #= require comments
@@ -85,19 +85,19 @@ $ ->
   post_form()
 
   record_visit()
-  notificate_news()
-  notifications()
-  editable_groups()
-  notificate_my_journals()
+#  notificate_news()
+#  notifications()
+#  editable_groups()
+#  notificate_my_journals()
   sidebar_for_small_screen()
   activate_htmleditor()
   activate_wizard()
   autocomplete_initialized()
-  create_moderator_chat()
-  create_group_chat()
+#  create_moderator_chat()
+#  create_group_chat()
   activate_add_aspects()
-  group_actions()
   visit_chart()
+#  group_actions()
 
   $('.tooltips').tooltip()
   $("#sortable").sortable()
