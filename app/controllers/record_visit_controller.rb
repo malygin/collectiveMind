@@ -5,6 +5,6 @@ class RecordVisitController < WebsocketRails::BaseController
   end
 
   def stop_visit
-    current_user.journals.order(created_at: :desc).find_by(type_event: 'visit_save').update_attribute(:body2, DateTime.now)
+    current_user.journals.unscoped.order(created_at: :desc).find_by(type_event: 'visit_save').update_attribute(:body2, DateTime.now)
   end
 end

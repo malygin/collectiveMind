@@ -9,6 +9,7 @@ class Journal < ActiveRecord::Base
   belongs_to :user_informed, class_name: 'User', foreign_key: :user_informed
   belongs_to :project, class_name: 'Core::Project', foreign_key: 'project_id'
 
+  default_scope { where("type_event != 'visit_save'") }
   scope :select_users_for_news, -> user { where(:user => user) }
   scope :type_content, -> type_content { where(:type_event => self.select_type_content(type_content)) if type_content.present? and type_content != "content_all" }
   scope :type_event, -> type_event { rewhere(:type_event => self.select_type_content(type_event)) if type_event.present? and type_event != "content_all" }
