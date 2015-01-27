@@ -104,14 +104,14 @@ $('#PlanTabsShow li#third a').on "click", (e) ->
 @reset_child_comment_form = (comment)->
   $('#child_comments_form_' + comment).empty()
 
-# @todo work with comment on life_tape posts
+# @todo work with comment on collect_info posts
 @select_for_aspects_comments = (el, project, post)->
   project_id = project
   comment_id = post
   aspect_id = $(el).val()
   if aspect_id != '' and comment_id != ''
     $.ajax
-      url: "/project/#{project_id}/life_tape/posts/transfer_comment"
+      url: "/project/#{project_id}/collect_info/posts/transfer_comment"
       type: "put"
       data:
         comment_id: comment_id

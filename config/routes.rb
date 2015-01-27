@@ -38,6 +38,7 @@ CollectiveMind::Application.routes.draw do
   end
 
   devise_for :users
+  get '/project/:id', to: 'core/projects#show'
   get '/general_news', to: 'core/projects#news'
   get '/general_rating', to: 'core/projects#users'
 
@@ -108,9 +109,9 @@ CollectiveMind::Application.routes.draw do
       end
     end
 
-    post 'knowbase/posts/sortable_save', to: 'knowbase/posts#sortable_save'
+    # post 'knowbase/posts/sortable_save', to: 'knowbase/posts#sortable_save'
     namespace :knowbase do
-      resources :posts
+      resources :posts, :controller => 'core/knowbase/posts'
     end
 
     resources :users do
@@ -133,20 +134,20 @@ CollectiveMind::Application.routes.draw do
       end
     end
 
-    put 'life_tape/posts/transfer_comment', to: 'life_tape/posts#transfer_comment'
-    put 'life_tape/posts/check_field', to: 'life_tape/posts#check_field'
+    put 'collect_info/posts/transfer_comment', to: 'collect_info/posts#transfer_comment'
+    put 'collect_info/posts/check_field', to: 'collect_info/posts#check_field'
     put 'discontent/posts/check_field', to: 'discontent/posts#check_field'
     put 'concept/posts/check_field', to: 'concept/posts#check_field'
     put 'plan/posts/check_field', to: 'plan/posts#check_field'
     put 'estimate/posts/check_field', to: 'estimate/posts#check_field'
 
-    get 'life_tape/posts/to_work', to: 'life_tape/posts#to_work'
+    get 'collect_info/posts/to_work', to: 'collect_info/posts#to_work'
     get 'discontent/posts/to_work', to: 'discontent/posts#to_work'
     get 'concept/posts/to_work', to: 'concept/posts#to_work'
     get 'plan/posts/to_work', to: 'plan/posts#to_work'
     get 'estimate/posts/to_work', to: 'estimate/posts#to_work'
 
-    namespace :life_tape do
+    namespace :collect_info do
       posts_routes
       resources :posts do
         get :vote_top, on: :collection

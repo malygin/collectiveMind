@@ -24,7 +24,7 @@
               %i.fa.fa-arrow-right
         .col-md-2
           - if project.status == 20
-            = link_to "/project/#{project.id}/life_tape/posts", class:'btn btn-sm btn-danger' do
+            = link_to "/project/#{project.id}/collect_info/posts", class:'btn btn-sm btn-danger' do
               = t('link.go_to_project')
               %i.fa.fa-arrow-right
           - else

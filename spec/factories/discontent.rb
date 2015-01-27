@@ -1,7 +1,7 @@
 FactoryGirl.define do
-  factory :aspect, class: 'Discontent::Aspect' do
-    sequence(:content) { |n| "aspect #{n}" }
-  end
+  # factory :aspect, class: 'Discontent::Aspect' do
+  #   sequence(:content) { |n| "aspect #{n}" }
+  # end
 
   factory :discontent, class: 'Discontent::Post' do
     sequence(:content) { |n| "what #{n}" }

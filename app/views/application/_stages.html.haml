@@ -1,6 +1,6 @@
 - if current_stage == :lifetape
   .current-stage
-    %a.btn.rounded-1{href: "/project/#{@project.id}/life_tape/posts" + "#{params[:asp] ? "?asp=#{params[:asp]}" : ""}", id: "go_to_life_tape"}
+    %a.btn.rounded-1{href: "/project/#{@project.id}/collect_info/posts" + "#{params[:asp] ? "?asp=#{params[:asp]}" : ""}", id: "go_to_life_tape"}
       %span.bigger> 1
       стадия
     .current-stage-text.pull-left
@@ -23,7 +23,7 @@
 
 
 -elsif current_stage == :discontent
-  %a.btn.rounded-1{href: "/project/#{@project.id}/life_tape/posts" + "#{params[:asp] ? "?asp=#{params[:asp]}" : ""}", id: "go_to_life_tape"}
+  %a.btn.rounded-1{href: "/project/#{@project.id}/collect_info/posts" + "#{params[:asp] ? "?asp=#{params[:asp]}" : ""}", id: "go_to_life_tape"}
     %span.bigger> 1
     стадия
   .clearfix.visible-md.visible-sm.visible-xs
@@ -47,7 +47,7 @@
 
 
 - elsif current_stage == :concept
-  %a.btn.rounded-1{href: "/project/#{@project.id}/life_tape/posts" + "#{params[:asp] ? "?asp=#{params[:asp]}" : ""}", id: "go_to_life_tape"}
+  %a.btn.rounded-1{href: "/project/#{@project.id}/collect_info/posts" + "#{params[:asp] ? "?asp=#{params[:asp]}" : ""}", id: "go_to_life_tape"}
     %span.bigger> 1
     стадия
   .clearfix.visible-sm.visible-xs
@@ -71,7 +71,7 @@
 
 
 - elsif current_stage == :plan
-  %a.btn.rounded-1{href: "/project/#{@project.id}/life_tape/posts" + "#{params[:asp] ? "?asp=#{params[:asp]}" : ""}", id: "go_to_life_tape"}
+  %a.btn.rounded-1{href: "/project/#{@project.id}/collect_info/posts" + "#{params[:asp] ? "?asp=#{params[:asp]}" : ""}", id: "go_to_life_tape"}
     %span.bigger> 1
     стадия
   .clearfix.visible-sm.visible-xs
@@ -96,12 +96,12 @@
 
 -#%ul.nav.nav-tabs{role: 'tablist'}
 -#  %li(class="#{'active' if current_stage == :lifetape}")
--#    %a{href: "/project/#{@project.id}/life_tape/posts" + "#{params[:asp] ? "?asp=#{params[:asp]}" : ""}", id: "go_to_life_tape"}
+-#    %a{href: "/project/#{@project.id}/collect_info/posts" + "#{params[:asp] ? "?asp=#{params[:asp]}" : ""}", id: "go_to_life_tape"}
 -#      1
 -#      %span.hidden-sm.hidden-xs=t('stages.stage', count: 1)
 -#      %i.hidden-sm.hidden-xs.fa.fa-question-circle.tooltips{"data-toggle" => 'tooltip', "data-html" => 'true', "data-placement" => 'bottom', title: t('stages.life_tape_title')}
 -#      %br
--#      %span.hidden-sm.hidden-xs=t('stages.life_tape')
+-#      %span.hidden-sm.hidden-xs=t('stages.collect_info')
 -#  %li(class="#{'active' if current_stage == :discontent} #{'disabled' if @project.status < 3}")
 -#    %a{ href: "#{@project.status < 3 ? '#' :  "/project/#{@project.id}/discontent/posts" + "#{params[:asp] ? "?asp=#{params[:asp]}" : ""}"}", id: "go_to_discontent"}
 -#      2

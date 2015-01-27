@@ -34,7 +34,7 @@ module ApplicationHelper
   end
 
   def cp(stage)
-    if stage =='life_tape' and ([0, 1, 2].include? @project.status)
+    if stage =='collect_info' and ([0, 1, 2].include? @project.status)
       'current'
     elsif stage == 'discontent' and ([3, 4].include? @project.status)
       'current'
@@ -48,7 +48,7 @@ module ApplicationHelper
   end
 
   def stage_vote?(stage)
-    if stage =='life_tape' and (@project.status==2)
+    if stage =='collect_info' and (@project.status==2)
       true
     elsif stage =='discontent' and (@project.status==6)
       true
@@ -62,7 +62,7 @@ module ApplicationHelper
   end
 
   def image_for_stages(image, stage)
-    if stage =='life_tape' and ([0, 1, 2].include? @project.status)
+    if stage =='collect_info' and ([0, 1, 2].include? @project.status)
       return image+'green.png'
     elsif stage == 'discontent' and ([3, 4].include? @project.status)
       return image+'green.png'
@@ -106,10 +106,6 @@ module ApplicationHelper
 
   def can_vote?(this_v, all_v, all)
     this_v<1 and all_v!=0
-  end
-
-  def can_vote_cond?(this_v, all_v, all, dis)
-    this_v<1 and all_v!=0 and dis.not_vote_for_other_post_aspects(current_user)
   end
 
   def discontent_style_name(dis)
@@ -282,7 +278,7 @@ module ApplicationHelper
 
   def number_stage(current_stage)
     case current_stage
-      when 'life_tape/posts'
+      when 'collect_info/posts'
         1
       when 'discontent/posts'
         2
@@ -300,7 +296,7 @@ module ApplicationHelper
   def stage_for_essay(stage)
     case stage
       when 1
-        'life_tape/posts'
+        'collect_info/posts'
       when 2
         'discontent/posts'
       when 3
@@ -310,7 +306,7 @@ module ApplicationHelper
       when 5
         'estimate/posts'
       else
-        'life_tape/posts'
+        'collect_info/posts'
     end
   end
 
@@ -368,7 +364,7 @@ module ApplicationHelper
   def get_comment_for_stage(stage, id)
     case stage
       when '1'
-        LifeTape::Comment.find(id)
+        CollectInfo::Comment.find(id)
       when '2'
         Discontent::Comment.find(id)
       when '3'
@@ -384,7 +380,7 @@ module ApplicationHelper
 
   def get_stage_for_improve(c)
     case c
-      when 'LifeTape'
+      when 'CollectInfo'
         1
       when 'Discontent'
         2
@@ -404,7 +400,7 @@ module ApplicationHelper
       comment =get_comment_for_stage(post.improve_stage.to_s, post.improve_comment)
       case post.improve_stage
         when 1
-          "| #{t('show.improved')} " + (link_to "#{t('show.imrove_deal')} #{comment.user}", "/project/#{@project.id}/life_tape/posts?asp=#{comment.post.discontent_aspects.first.id}&req_comment=#{comment.id}#comment_#{comment.id}")
+          "| #{t('show.improved')} " + (link_to "#{t('show.imrove_deal')} #{comment.user}", "/project/#{@project.id}/collect_info/posts?asp=#{comment.post.discontent_aspects.first.id}&req_comment=#{comment.id}#comment_#{comment.id}")
         when 2
           "| #{t('show.improved')} " + (link_to t('show.imrove_deal'), "/project/#{@project.id}/discontent/posts/#{comment.post.id}#comment_#{comment.id}") + (link_to comment.user, user_path(@project, comment.user))
         when 3
@@ -417,7 +413,7 @@ module ApplicationHelper
     comment_class = get_stage_for_improve(comment.get_class)
     case comment_class
       when 1
-        link_to "/project/#{@project.id}/life_tape/posts?asp=#{comment.post.discontent_aspects.first.id}#comment_#{comment.id}" do
+        link_to "/project/#{@project.id}/collect_info/posts?asp=#{comment.post.discontent_aspects.first.id}#comment_#{comment.id}" do
           content_tag :span, t('show.improver'), class: 'btn btn-primary btn-xs'
         end
       when 2
@@ -458,7 +454,7 @@ module ApplicationHelper
   end
 
   def field_for_journal(post)
-    if post.instance_of? LifeTape::Post
+    if post.instance_of? CollectInfo::Post
       post.discontent_aspects.first.content unless post.discontent_aspects.first.nil?
     elsif post.instance_of? Concept::Post
       post.post_aspects.first.title unless post.post_aspects.first.nil?
@@ -508,7 +504,7 @@ module ApplicationHelper
   end
 
   def current_stage_for_navbar(controller, stage)
-    if controller.instance_of? LifeTape::PostsController
+    if controller.instance_of? CollectInfo::PostsController
       :lifetape
     elsif controller.instance_of? Discontent::PostsController
       :discontent
@@ -575,7 +571,7 @@ module ApplicationHelper
   end
 
   def score_for_plus_post(post)
-    if post.instance_of? LifeTape::Post
+    if post.instance_of? CollectInfo::Post
       10
     elsif post.instance_of? Discontent::Post
       25
@@ -596,7 +592,7 @@ module ApplicationHelper
   end
 
   def current_controller_for_navbar?(controller)
-    if [LifeTape::PostsController, Discontent::PostsController, Concept::PostsController, Plan::PostsController, Estimate::PostsController, Essay::PostsController].include?(controller.class)
+    if [CollectInfo::PostsController, Discontent::PostsController, Concept::PostsController, Plan::PostsController, Estimate::PostsController, Essay::PostsController].include?(controller.class)
       return true
     end
     false
@@ -637,8 +633,8 @@ module ApplicationHelper
 
   def page_for_comment(project, stage, first_id, second_id)
     case stage
-      when "life_tape"
-        stage = 'LifeTape'
+      when "collect_info"
+        stage = 'CollectInfo'
       when 'discontent'
         stage = 'Discontent'
       when 'concept'
@@ -655,8 +651,8 @@ module ApplicationHelper
     if comment and comment.comment_id
       second_id = comment.comment_id
     end
-    if stage == 'LifeTape'
-      total_results = LifeTape::Comment
+    if stage == 'CollectInfo'
+      total_results = CollectInfo::Comment
                           .joins("INNER JOIN life_tape_posts ON life_tape_comments.post_id = life_tape_posts.id")
                           .where("life_tape_posts.project_id = ? and life_tape_posts.aspect_id = ? and life_tape_comments.id <= ?", project, first_id, second_id)
                           .where(life_tape_comments: {comment_id: nil}).count

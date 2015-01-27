@@ -34,6 +34,8 @@ module BasePost
 
     scope :date_stage, ->(project) { where("DATE(#{table_name}.created_at) >= ? AND DATE(#{table_name}.created_at) <= ?", project.date_begin_stage(table_name).to_date, project.date_end_stage(table_name).to_date) if project.date_begin_stage(table_name).present? and project.date_end_stage(table_name).present? }
 
+    validates :user_id, :project_id, presence: true
+
     def show_content
       content
     end
@@ -56,8 +58,8 @@ module BasePost
 
     def current_class?(stage)
       case stage
-        when :life_tape, 'life_tape'
-          self.instance_of? LifeTape::Post
+        when :collect_info, 'collect_info'
+          self.instance_of? CollectInfo::Post
         when :discontent, 'discontent'
           self.instance_of? Discontent::Post
         when :concept, 'concept'

@@ -1,4 +1,4 @@
-shared_examples 'content with comments' do |comment_model = 'LifeTape::Comment', moderator = false, count = 2|
+shared_examples 'content with comments' do |comment_model = 'CollectInfo::Comment', moderator = false, count = 2|
   let(:text_comment) { attributes_for(:life_tape_comment)[:content] }
 
   before do

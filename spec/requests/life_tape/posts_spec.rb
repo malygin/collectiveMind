@@ -9,8 +9,8 @@ describe 'Life Tape ' do
   let (:project) { create :core_project, status: 1 }
 
   before do
-    @post1 = create :life_tape_post, project: project
-    @post2 = create :life_tape_post, project: project
+    @post1 = create :collect_info_post, project: project
+    @post2 = create :collect_info_post, project: project
     @aspect1 = @post1.aspect
     @aspect2 = @post2.aspect
     @comment_1 = create :life_tape_comment, post: @post1, user: user
@@ -108,7 +108,7 @@ describe 'Life Tape ' do
         visit life_tape_posts_path(project)
       end
 
-      it_behaves_like 'content with comments', 'LifeTape::Comment', true
+      it_behaves_like 'content with comments', 'CollectInfo::Comment', true
 
     end
 

@@ -3,8 +3,6 @@ class Estimate::PostAspect < ActiveRecord::Base
   belongs_to :post
   belongs_to :plan_post_aspect, class_name: 'Plan::PostAspect'
 
-  # @todo кандидат на удаление, нигде не используется?
-  #belongs_to :plan_post_first_cond, class_name: 'Plan::PostFirstCond'
 
   scope :by_plan_fc, ->(id) { where("plan_post_first_cond_id = ?", id) }
   scope :by_plan_pa, ->(id) { where("plan_post_aspect_id = ?", id) }

@@ -1,5 +1,5 @@
 class Journal < ActiveRecord::Base
-  include Renderable
+  include Util::Renderable
   include Filterable
   extend ApplicationHelper
 
@@ -20,11 +20,11 @@ class Journal < ActiveRecord::Base
   scope :created_order, -> { order("journals.created_at DESC") }
   scope :active_proc, -> { where("core_projects.status < ?", 20) }
 
-  # has_many :user_checks, class_name: 'UserCheck'
-  # scope :user_checks_proc, -> { joins("LEFT OUTER JOIN user_checks ON journals.user_informed = user_checks.user_id AND journals.project_id = user_checks.project_id AND user_checks.check_field = 'auto_feed_mailer' AND (user_checks.status = 'f' OR user_checks.status IS NULL)") }
   scope :auto_feed_mailer, -> { joins("LEFT OUTER JOIN user_checks ON journals.user_informed = user_checks.user_id AND journals.project_id = user_checks.project_id AND user_checks.check_field = 'auto_feed_mailer'").where(user_checks: {status: ['f',nil] }) }
 
   after_save :send_last_news
+
+  validates :body, :type_event, :project_id, presence: true
 
   @types = []
   @my_types = [11]
@@ -154,19 +154,19 @@ class Journal < ActiveRecord::Base
     #@todo новости и информирование авторов
     current_user.journals.build(type_event: name_of_comment_for_param+'_save', project: project,
                                 body: "#{trim_content(comment.content)}", body2: trim_content(field_for_journal(post)),
-                                first_id: (post.instance_of? LifeTape::Post) ? post.discontent_aspects.first.id : post.id, second_id: comment.id).save!
+                                first_id: (post.instance_of? CollectInfo::Post) ? post.discontent_aspects.first.id : post.id, second_id: comment.id).save!
 
     if post.user!=current_user
       current_user.journals.build(type_event: 'my_'+name_of_comment_for_param, user_informed: post.user, project: project,
                                   body: "#{trim_content(comment.content)}", body2: trim_content(field_for_journal(post)),
-                                  first_id: (post.instance_of? LifeTape::Post) ? post.discontent_aspects.first.id : post.id, second_id: comment.id,
+                                  first_id: (post.instance_of? CollectInfo::Post) ? post.discontent_aspects.first.id : post.id, second_id: comment.id,
                                   personal: true, viewed: false).save!
     end
 
     if comment_answer and comment_answer.user!=current_user
       current_user.journals.build(type_event: 'reply_'+name_of_comment_for_param, user_informed: comment_answer.user, project: project,
                                   body: "#{trim_content(comment.content)}", body2: trim_content(comment_answer.content),
-                                  first_id: (post.instance_of? LifeTape::Post) ? post.discontent_aspects.first.id : post.id, second_id: comment.id,
+                                  first_id: (post.instance_of? CollectInfo::Post) ? post.discontent_aspects.first.id : post.id, second_id: comment.id,
                                   personal: true, viewed: false).save!
     end
   end
