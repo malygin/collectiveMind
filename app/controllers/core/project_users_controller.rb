@@ -10,4 +10,13 @@ class Core::ProjectUsersController < ApplicationController
 
     render json: [{key: 'Посетителей', values: visits}]
   end
+
+  def average_time
+    @project = Core::Project.find(params[:project]) if params[:project]
+
+    visits = @project.journals.unscoped.select("DATE_TRUNC('day', created_at), sum(updated_at - created_at)").where(type_event: 'visit_save').where('created_at > ?', 5.days.ago).group("DATE_TRUNC('day', created_at)")
+    visits = visits.map { |k, v| {x: (k.to_datetime.to_f * 1000).to_i, y: v} }
+
+    render json: [{key: 'Посетителей', values: visits}]
+  end
 end
