@@ -119,13 +119,14 @@ class PostsController < ApplicationController
     elsif @comment.approve_status
       type = 'approve_status'
     end
-    comment_notice(type, @comment.user, personal = false)
-    if @project.closed?
-      @project.users_in_project.access_proc(2).each do |user|
-        comment_notice(type, user, personal = true) if (user != current_user and user != @comment.user)
+    if type
+      comment_notice(type, @comment.user, personal = false)
+      if @project.closed?
+        @project.users_in_project.each do |user|
+          comment_notice(type, user, personal = true) if (user != current_user and user != @comment.user)
+        end
       end
     end
-
     respond_to do |format|
       format.js
     end
@@ -146,13 +147,14 @@ class PostsController < ApplicationController
         type = 'approve_status'
       end
     end
-    post_notice(type, @post.user, personal = false)
-    if @project.closed?
-      @project.users_in_project.access_proc(2).each do |user|
-        post_notice(type, user, personal = true) if (user != current_user and user != @post.user)
+    if type
+      post_notice(type, @post.user, personal = false)
+      if @project.closed?
+        @project.users_in_project.each do |user|
+          post_notice(type, user, personal = true) if (user != current_user and user != @post.user)
+        end
       end
     end
-
     respond_to do |format|
       format.js
     end
