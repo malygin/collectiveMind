@@ -32,15 +32,15 @@ class Journal < ActiveRecord::Base
 
   # new methods
   def self.events_for_all(list_type, closed_projects)
-    Journal.joins(:project).active_proc.where("core_projects.type_access IN (?) OR core_projects.id IN (?)",list_type,closed_projects).events_ignore(self.events_ignore_list).created_order
+    Journal.joins(:project).active_proc.where(" type_event !='visit_save' AND core_projects.type_access IN (?) OR core_projects.id IN (?)",list_type,closed_projects).events_ignore(self.events_ignore_list).created_order
   end
 
   def self.events_for_all_prime
-    Journal.joins(:project).active_proc.events_ignore(self.events_ignore_list).created_order
+    Journal.joins(:project).active_proc.events_ignore(self.events_ignore_list).where('type_event !=\'visit_save\'').created_order
   end
 
   def self.events_for_project(project_id)
-    Journal.joins(:project).where('project_id = ?', project_id).active_proc.events_ignore(self.events_ignore_list).created_order
+    Journal.joins(:project).where('type_event !=\'visit_save\' AND project_id = ?', project_id).active_proc.events_ignore(self.events_ignore_list).created_order
   end
 
   # scheduler_mailer
@@ -50,7 +50,7 @@ class Journal < ActiveRecord::Base
 
   # older methods
   def self.events_for_user_feed(project_id, lim = 5)
-    Journal.where(' project_id = ? AND personal = ? ', project_id, false).order('created_at DESC')
+    Journal.where('type_event !=\'visit_save\' AND project_id = ? AND personal = ? ', project_id, false).order('created_at DESC')
   end
 
   def self.events_for_user_show(project_id, user_id, lim = 5)
