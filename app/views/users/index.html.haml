@@ -20,7 +20,7 @@
       %table.table
         %tbody
           - @users.each_with_index do |user, i|
-            = render partial: 'user', locals: {user: user, number: i+1}
+            = render partial: 'user', locals: {user: user, number: i+1} unless user.role_expert?
 
     %br
     =link_to t('link.back_proc'), core_projects_path(@project.id)

@@ -45,6 +45,8 @@
 #= require plugins
 #= require comments
 #= require resources
+#= require visits
+#= require visit_chart
 
 #= require brave/placeholders
 #= require brave/jquery.magnific-popup.min
@@ -82,6 +84,7 @@ $ ->
 
   post_form()
 
+  record_visit()
   notificate_news()
   notifications()
   editable_groups()
@@ -94,6 +97,7 @@ $ ->
   create_group_chat()
   activate_add_aspects()
   group_actions()
+  visit_chart()
 
   $('.tooltips').tooltip()
   $("#sortable").sortable()

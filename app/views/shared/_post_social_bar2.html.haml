@@ -55,7 +55,7 @@
         =@vote_all
 
 
-      - if boss?
+      - if boss? or role_expert?
         =link_to({controller: post.class.name.underscore.pluralize, action: :plus,project: @project, id: post.id},  remote: true, method: :put,  id: "plus_post_#{post.id}") do
           |
           -if post.useful
