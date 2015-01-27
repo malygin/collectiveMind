@@ -2,9 +2,7 @@ class AuthWebsocketController < WebsocketRails::BaseController
   def authorize_channels
     channel = message[:channel]
     case channel
-      when 'moderator_chat'
-        auth_moderator
-      when 'news', 'notifications', 'group.actions'
+      when 'news', 'notifications', 'group.actions', 'moderator_chat'
         auth_user
       when 'group_chat'
         auth_group_user
@@ -19,14 +17,6 @@ class AuthWebsocketController < WebsocketRails::BaseController
       deny_channel
     else
       accept_channel current_user
-    end
-  end
-
-  def auth_moderator
-    if current_user.admin?
-      accept_channel current_user
-    else
-      deny_channel
     end
   end
 
