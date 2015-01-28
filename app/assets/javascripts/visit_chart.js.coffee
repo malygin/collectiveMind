@@ -13,7 +13,7 @@
     chart.xAxis.showMaxMin(false).tickFormat (d) ->
       d3.time.format("%d.%m.%y") new Date(d)
 
-    data = get_data()
+    data = get_data_for_count_users()
     d3.select("#user_visits_graph svg").datum(data).transition().duration(500).call chart
     nv.utils.windowResize chart.update
     chart
@@ -31,17 +31,39 @@
     chart.xAxis.showMaxMin(false).tickFormat (d) ->
       d3.time.format("%d.%m.%y") new Date(d)
 
-    data = get_data()
+    data = get_data_for_count_users()
     d3.select("#average_time_graph svg").datum(data).transition().duration(500).call chart
     nv.utils.windowResize chart.update
     chart
   return
 
-get_data = ->
+get_data_for_count_users = ->
+  project_id = $('#nvd3_project').attr("data-project")
+  if project_id
+    jqXHR = $.ajax(
+      url: "/project/#{project_id}/project_users/analytics"
+      type: "get"
+      dataType: "json"
+      async: false
+    );
+    return jqXHR.responseJSON;
+
+get_data_for_average_time = ->
   project_id = $('#nvd3_project').attr("data-project")
   if project_id
     jqXHR = $.ajax(
       url: "/project/#{project_id}/project_users/average_time"
+      type: "get"
+      dataType: "json"
+      async: false
+    );
+    return jqXHR.responseJSON;
+
+get_data_for_lazy_users = ->
+  project_id = $('#nvd3_project').attr("data-project")
+  if project_id
+    jqXHR = $.ajax(
+      url: "/project/#{project_id}/project_users/lazy_users"
       type: "get"
       dataType: "json"
       async: false
