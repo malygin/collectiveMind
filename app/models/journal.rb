@@ -4,7 +4,7 @@ class Journal < ActiveRecord::Base
   extend ApplicationHelper
 
   attr_accessible :body, :body2, :type_event, :user, :project, :user_informed, :viewed, :project_id,
-                  :event, :first_id, :second_id, :personal, :anonym
+                  :event, :first_id, :second_id, :personal, :anonym, :visible
   belongs_to :user
   belongs_to :user_informed, class_name: 'User', foreign_key: :user_informed
   belongs_to :project, class_name: 'Core::Project', foreign_key: 'project_id'

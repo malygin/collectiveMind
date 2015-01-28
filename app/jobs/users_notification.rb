@@ -15,7 +15,7 @@ class CommentNotification
         current_user.journals.build(type_event: name_of_comment_for_param+'_'+type, user_informed: user, project: project,
                                     body: "#{trim_content(comment.content)}", body2: trim_content(field_for_journal(post)),
                                     first_id: (post.instance_of? LifeTape::Post) ? post.discontent_aspects.first.id : post.id, second_id: comment.id,
-                                    personal: true, viewed: false).save!
+                                    personal: true, viewed: false, visible: false).save!
       end
     end
   end
@@ -32,7 +32,7 @@ class PostNotification
     project.users_in_project.each do |user|
       if user != current_user and user != post.user
         current_user.journals.build(type_event: name_of_model_for_param+'_'+type, user_informed: user, project: project,
-                                    body: "#{trim_content(field_for_journal(post))}", first_id: post.id, personal: true, viewed: false).save!
+                                    body: "#{trim_content(field_for_journal(post))}", first_id: post.id, personal: true, viewed: false, visible: false).save!
       end
     end
   end
