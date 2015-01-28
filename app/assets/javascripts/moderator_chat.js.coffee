@@ -54,16 +54,14 @@
         $("#moderator_chat_div").chatbox("option", "boxManager")._scrollToBottom();
       $('#last_seen_at').text(new Date())
 
-    $('span.ui-icon-closethick').parent().click ->
+    $('a.ui-close-chat').click ->
       ws.trigger 'close_chat'
       ws.disconnect()
       return
-    $('span.ui-icon-minusthick').parent().click ->
-      if $('div.ui-widget-content.ui-chatbox-content').is(':hidden')
-        ws.trigger 'minus_chat', {status: false}
-        $('#last_seen_at').text(new Date())
-      else
-        ws.trigger 'minus_chat', {status: true}
-        $('#last_seen_at').text(new Date())
+    $('a.ui-minimize-chat').click ->
+      ws.trigger 'minus_chat', {status: $('div.ui-widget-content.ui-chatbox-content').is(':hidden')}
+      $('#last_seen_at').text(new Date())
       return
+    $('div.ui-chatbox-titlebar').click ->
+      $('a.ui-minimize-chat').click()
     return
