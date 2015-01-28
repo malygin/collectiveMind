@@ -114,17 +114,28 @@ class PostsController < ApplicationController
     @comment.toggle!(:discuss_status) if params[:discuss_status]
     @comment.toggle!(:approve_status) if params[:approve_status]
 
-    if @comment.discuss_status
-      type = 'discuss_status'
-    elsif @comment.approve_status
-      type = 'approve_status'
+    if params[:discuss_status]
+      if @comment.discuss_status
+        type = 'discuss_status'
+      end
+    elsif params[:approve_status]
+      if @comment.approve_status
+        type = 'approve_status'
+      end
     end
     if type
-      comment_notice(type, @comment.user, personal = false)
+      current_user.journals.build(type_event: name_of_comment_for_param+'_'+type, project: @project,
+                                  body: "#{trim_content(@comment.content)}", body2: trim_content(field_for_journal(@post)),
+                                  first_id: (@post.instance_of? LifeTape::Post) ? @post.discontent_aspects.first.id : @post.id, second_id: @comment.id).save!
+
+      if @comment.user!=current_user
+        current_user.journals.build(type_event: 'my_'+name_of_comment_for_param+'_'+type, user_informed: @comment.user, project: @project,
+                                    body: "#{trim_content(@comment.content)}", body2: trim_content(field_for_journal(@post)),
+                                    first_id: (@post.instance_of? LifeTape::Post) ? @post.discontent_aspects.first.id : @post.id, second_id: @comment.id,
+                                    personal: true, viewed: false).save!
+      end
       if @project.closed?
-        @project.users_in_project.each do |user|
-          comment_notice(type, user, personal = true) if (user != current_user and user != @comment.user)
-        end
+        Resque.enqueue(CommentNotification, current_model.to_s, @project.id, current_user.id, name_of_comment_for_param, type, @post.id, @comment.id, params[:comment_stage])
       end
     end
     respond_to do |format|
@@ -148,11 +159,14 @@ class PostsController < ApplicationController
       end
     end
     if type
-      post_notice(type, @post.user, personal = false)
+      current_user.journals.build(type_event: name_of_model_for_param+'_'+type, project: @project,
+                                  body: "#{trim_content(field_for_journal(@post))}", first_id: @post.id).save!
+      if @post.user!=current_user
+        current_user.journals.build(type_event: 'my_'+name_of_model_for_param+'_'+type, user_informed: @post.user, project: @project,
+                                    body: "#{trim_content(field_for_journal(@post))}", first_id: @post.id, personal: true, viewed: false).save!
+      end
       if @project.closed?
-        @project.users_in_project.each do |user|
-          post_notice(type, user, personal = true) if (user != current_user and user != @post.user)
-        end
+        Resque.enqueue(PostNotification, current_model, @project.id, current_user.id, name_of_model_for_param, type, @post.id)
       end
     end
     respond_to do |format|
@@ -542,32 +556,5 @@ class PostsController < ApplicationController
       Journal.comment_event(current_user, @project, name_of_comment_for_param, post, @comment, @comment_answer)
     end
     render template: 'posts/add_comment'
-  end
-
-  def comment_notice(type, user = @comment.user, personal = false)
-    unless personal
-      current_user.journals.build(type_event: name_of_comment_for_param+'_'+type, project: @project,
-                                  body: "#{trim_content(@comment.content)}", body2: trim_content(field_for_journal(@post)),
-                                  first_id: (@post.instance_of? LifeTape::Post) ? @post.discontent_aspects.first.id : @post.id, second_id: @comment.id).save!
-    end
-
-    if personal or (@comment.user!=current_user and !personal)
-      current_user.journals.build(type_event: "#{user == @comment.user ? 'my_' : ''}"+name_of_comment_for_param+'_'+type, user_informed: user, project: @project,
-                                  body: "#{trim_content(@comment.content)}", body2: trim_content(field_for_journal(@post)),
-                                  first_id: (@post.instance_of? LifeTape::Post) ? @post.discontent_aspects.first.id : @post.id, second_id: @comment.id,
-                                  personal: true, viewed: false).save!
-    end
-  end
-
-  def post_notice(type, user = @post.user, personal = false)
-    unless personal
-      current_user.journals.build(type_event: name_of_model_for_param+'_'+type, project: @project,
-                                  body: "#{trim_content(field_for_journal(@post))}", first_id: @post.id).save!
-    end
-
-    if personal or (@post.user!=current_user and !personal)
-      current_user.journals.build(type_event: "#{user == @post.user ? 'my_' : ''}"+name_of_model_for_param+'_'+type, user_informed: user, project: @project,
-                                  body: "#{trim_content(field_for_journal(@post))}", first_id: @post.id, personal: true, viewed: false).save!
-    end
   end
 end
