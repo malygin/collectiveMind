@@ -103,6 +103,10 @@ module SessionsHelper
     current_user.role_stat == 2 unless current_user.nil?
   end
 
+  def stat_expert?
+    current_user.role_stat == 3 unless current_user.nil?
+  end
+
   def jury?
     current_user.type_user == 3 unless current_user.nil?
 	end

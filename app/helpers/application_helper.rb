@@ -620,7 +620,7 @@ module ApplicationHelper
 
   def label_for_comment_status(comment, status, title)
     if comment.check_status_for_label(status)
-      if current_user?(comment.user) or boss? or role_expert?
+      if current_user?(comment.user) or boss? or role_expert? or stat_expert?
         link_to({controller: comment.controller_name_for_action, action: :comment_status, id: comment.post.id, comment_id: comment.id, status => 1, comment_stage: get_stage_for_improve(comment.get_class)}, remote: true, method: :put, id: "#{status}_comment_#{comment.id}") do
           content_tag(:span, title, class: "label #{css_label_status(status)}")
         end
@@ -628,7 +628,7 @@ module ApplicationHelper
         content_tag(:span, title, class: "label #{css_label_status(status)}")
       end
     else
-      if current_user?(comment.user) or boss? or role_expert?
+      if current_user?(comment.user) or boss? or role_expert? or stat_expert?
         link_to({controller: comment.controller_name_for_action, action: :comment_status, id: comment.post.id, comment_id: comment.id, status => 1, comment_stage: get_stage_for_improve(comment.get_class)}, remote: true, method: :put, id: "#{status}_comment_#{comment.id}") do
           content_tag(:span, title, class: "label label-default")
         end
