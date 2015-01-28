@@ -31,7 +31,7 @@ class Core::Project < ActiveRecord::Base
 
   attr_accessible :desc, :postion, :secret, :type_project, :name, :short_desc, :knowledge, :status, :type_access,
                   :url_logo, :stage1, :stage2, :stage3, :stage4, :stage5, :color, :code, :advices_concept, :advices_discontent,
-                  :date_12,:date_23,:date_34,:date_45,:date_56
+                  :date_12, :date_23, :date_34, :date_45, :date_56
 
 
   has_many :life_tape_posts, -> { where status: 0 }, class_name: 'LifeTape::Post'
@@ -348,7 +348,7 @@ class Core::Project < ActiveRecord::Base
 
   def concept_comments
     Concept::Comment.joins("INNER JOIN concept_posts ON concept_comments.post_id = concept_posts.id").
-      where("concept_posts.project_id = ?", self.id)
+        where("concept_posts.project_id = ?", self.id)
   end
 
   def discontent_comments
@@ -362,7 +362,7 @@ class Core::Project < ActiveRecord::Base
   end
 
   def date_begin_stage(table_name)
-    table_name = table_name.sub('_posts','').sub('_comments', '')
+    table_name = table_name.sub('_posts', '').sub('_comments', '')
     if table_name == 'life_tape'
       self.created_at
     elsif table_name == 'discontent'
@@ -391,4 +391,7 @@ class Core::Project < ActiveRecord::Base
     end
   end
 
+  def statistic_visits(duration = 5.days.ago)
+    journals.unscoped.where(type_event: 'visit_save').where('created_at > ?', duration)
+  end
 end
