@@ -97,7 +97,8 @@ class Journal < ActiveRecord::Base
             :latest, render_anywhere('application/messages_menu', {current_user: user_informed, project: project,
                                                                    my_journals: user_informed.my_journals(project)}),
             channel: :notifications)
-      else
+      end
+      if type_event != 'visit_save'
         WebsocketRails[:news].trigger :latest_news, render_anywhere('journal/journal', {journal: self, current_user: nil})
       end
     end.resume
