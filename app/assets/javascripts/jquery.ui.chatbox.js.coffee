@@ -11,7 +11,6 @@
       offset: 0 # relative to right edge of the browser window
       width: 300 # width of the chatbox
       messageSent: (id, user, msg) ->
-
         # override this
         @boxManager.addMsg user.first_name, msg
         return
@@ -132,7 +131,7 @@
       uiChatboxTitlebar = (self.uiChatboxTitlebar = $("<div></div>")).addClass("ui-widget-header " + "ui-corner-top " + "ui-chatbox-titlebar " + "ui-dialog-header").click((event) ->
       ).appendTo(uiChatbox)
       uiChatboxTitle = (self.uiChatboxTitle = $("<span></span>")).html(title).appendTo(uiChatboxTitlebar)
-      uiChatboxTitlebarClose = (self.uiChatboxTitlebarClose = $("<a href=\"#\"></a>")).addClass("ui-corner-all " + "ui-chatbox-icon ").attr("role",
+      uiChatboxTitlebarClose = (self.uiChatboxTitlebarClose = $("<a href=\"#\"></a>")).addClass("ui-corner-all " + "ui-chatbox-icon " + 'ui-close-chat').attr("role",
         "button").hover(->
         uiChatboxTitlebarClose.addClass "ui-state-hover"
         return
@@ -145,7 +144,7 @@
         false
       ).appendTo(uiChatboxTitlebar)
       uiChatboxTitlebarCloseText = $("<span></span>").addClass("ui-icon " + "ui-icon-closethick").text("close").appendTo(uiChatboxTitlebarClose)
-      uiChatboxTitlebarMinimize = (self.uiChatboxTitlebarMinimize = $("<a href=\"#\"></a>")).addClass("ui-corner-all " + "ui-chatbox-icon").attr("role",
+      uiChatboxTitlebarMinimize = (self.uiChatboxTitlebarMinimize = $("<a href=\"#\"></a>")).addClass("ui-corner-all " + "ui-chatbox-icon " + 'ui-minimize-chat').attr("role",
         "button").hover(->
         uiChatboxTitlebarMinimize.addClass "ui-state-hover"
         return
@@ -186,8 +185,6 @@
 
       # switch focus to input box when whatever clicked
       uiChatboxContent.children().click ->
-
-
         # click on any children, set focus on input box
         #self.uiChatboxInputBox.focus();
       self._setWidth self.options.width
