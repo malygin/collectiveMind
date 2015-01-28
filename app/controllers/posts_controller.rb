@@ -166,7 +166,7 @@ class PostsController < ApplicationController
                                     body: "#{trim_content(field_for_journal(@post))}", first_id: @post.id, personal: true, viewed: false).save!
       end
       if @project.closed?
-        Resque.enqueue(PostNotification, current_model, @project.id, current_user.id, name_of_model_for_param, type, @post.id)
+        Resque.enqueue(PostNotification, current_model.to_s, @project.id, current_user.id, name_of_model_for_param, type, @post.id)
       end
     end
     respond_to do |format|
