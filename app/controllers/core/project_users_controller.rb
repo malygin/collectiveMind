@@ -15,7 +15,7 @@ class Core::ProjectUsersController < ApplicationController
     visits = @project.statistic_visits.select("DATE_TRUNC('day', created_at) as day, sum(updated_at - created_at) as sum").group("DATE_TRUNC('day', created_at)")
     visit_data = []
     visits.each do |visit|
-      visit_data << {x: (visit.day.to_datetime.to_f * 1000).to_i, y: (visit.sum.to_datetime.to_f * 1000).to_i}
+      visit_data << {x: (visit.day.to_datetime.to_f * 1000).to_i, y: visit.sum}
     end
 
     render json: [{key: 'Посетителей', values: visit_data}]

@@ -19,7 +19,7 @@
     chart
   nv.addGraph ->
     chart = nv.models.multiBarChart().stacked(false).showControls(false).margin(
-      left: 30
+      left: 50
       bottom: 20
       right: 0
     ).color(keyColor).controlsColor([
@@ -27,11 +27,10 @@
         $white
         $white
       ])
-    chart.yAxis.showMaxMin(false).ticks(0).tickFormat d3.format("4d")
+    chart.yAxis.showMaxMin(false).ticks(0).tickFormat
     chart.xAxis.showMaxMin(false).tickFormat (d) ->
       d3.time.format("%d.%m.%y") new Date(d)
-
-    data = get_data_for_count_users()
+    data = get_data_for_average_time()
     d3.select("#average_time_graph svg").datum(data).transition().duration(500).call chart
     nv.utils.windowResize chart.update
     chart
