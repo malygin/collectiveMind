@@ -59,7 +59,7 @@
       ws.disconnect()
       return
     $('a.ui-minimize-chat').click ->
-      ws.trigger 'minus_chat', {status: $('div.ui-widget-content.ui-chatbox-content').is(':hidden')}
+      ws.trigger 'minus_chat', {status: !$('div.ui-widget-content.ui-chatbox-content').is(':hidden')}
       $('#last_seen_at').text(new Date())
       return
     $('div.ui-chatbox-titlebar').click ->
