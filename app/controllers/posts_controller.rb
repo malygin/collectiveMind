@@ -235,7 +235,7 @@ class PostsController < ApplicationController
     respond_to do |format|
       if @post.save
         current_user.journals.build(type_event: name_of_model_for_param+"_save", project: @project, body: @post.content == '' ? t('link.more') : trim_content(@post.content), first_id: @post.id).save!
-        current_user.add_score_by_type(@project, 50, :score_a)
+        # current_user.add_score_by_type(@project, 50, :score_a)
 
         format.html { redirect_to action: 'show', id: @post.id, project: @project }
         format.js
