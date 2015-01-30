@@ -15,3 +15,20 @@
         Время
   #average_time_graph.body.chart
     %svg
+
+%h3 Количество просмотренных страниц
+%table.table.table-striped.table-bordered
+  %thead
+    %tr
+      %th
+        Пользователь
+
+      %th
+        Кол-во постов
+
+  %tbody
+    %tr
+      %td
+        Всего комментариев
+      %td
+        =@project.lifetape_comments.count
