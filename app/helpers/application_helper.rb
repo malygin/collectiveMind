@@ -553,6 +553,10 @@ module ApplicationHelper
         :plan
       when 'estimate_analytics'
         :estimate
+      when 'user_analytics'
+        :user_analytics
+      when 'moderator_analytics'
+        :moderator_analytics
       else
         :lifetape
     end
@@ -616,6 +620,10 @@ module ApplicationHelper
       return true
     end
     false
+  end
+
+  def analytics?
+    %w(user_analytics moderator_analytics).include? params[:action]
   end
 
   def label_for_comment_status(comment, status, title)

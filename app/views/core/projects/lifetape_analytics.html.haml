@@ -128,20 +128,3 @@
                     =asp.aspect_life_tape.type_status('by_approve').uniq.count
                   %td
                     =asp.voted_users.size
-
-      %h3 График посещений
-      %section.widget.large
-        %header
-          %h4
-            %i.fa.fa-bar-chart-o
-              Пользователи
-        #user_visits_graph.body.chart
-          %svg
-      %h3 Среднее время, проведенное на портале
-      %section.widget.large
-        %header
-          %h4
-            %i.fa.fa-bar-chart-o
-              Время
-        #average_time_graph.body.chart
-          %svg

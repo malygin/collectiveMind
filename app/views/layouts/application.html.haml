@@ -49,7 +49,7 @@
               =render partial: 'application/stages', locals: {current_stage: current_stage_for_navbar(controller, params[:stage])}
             .body.tab-content
               = yield
-        -elsif @project and core_methods?(params[:controller],params[:action],true)
+        - elsif @project and (core_methods?(params[:controller], params[:action], true) || analytics?)
           %h4="Тема процедуры: #{@project.name}"
           %section.widget-tabs
             %header
