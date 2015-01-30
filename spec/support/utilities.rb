@@ -218,9 +218,9 @@ def prepare_concepts(project, user)
   @concept2 = create :concept, user: user, project: project
   @comment1 = create :concept_comment, post: @concept1, user: user
 
+  @concept_aspect1 = @concept1.post_aspects.first
+  @concept_aspect2 = @concept2.post_aspects.first
   # @todo move to factory
-  @concept_aspect1 = create :concept_aspect, discontent_aspect_id: @discontent1.id, concept_post_id: @concept1.id
-  @concept_aspect2 = create :concept_aspect, discontent_aspect_id: @discontent1.id, concept_post_id: @concept2.id
   create :concept_post_discontent, post_id: @concept1.id, discontent_post_id: @discontent1.id
   create :concept_post_discontent, post_id: @concept2.id, discontent_post_id: @discontent1.id
 end

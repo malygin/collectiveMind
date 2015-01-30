@@ -419,17 +419,17 @@ describe 'Concept ' do
         expect(page).to have_content 'Голосование за нововведения'
         expect(page).to have_content @discontent1.content
         expect(page).to have_content 'Пара: 1 из 1'
-        expect(page).to have_content 'Нововведение 1'
+        expect(page).to have_content "#{I18n.t('show.concept.title')} 1"
         expect(page).to have_content @concept_aspect1.title
-        expect(page).to have_content 'Нововведение 2'
+        expect(page).to have_content "#{I18n.t('show.concept.title')} 2"
         expect(page).to have_content @concept_aspect2.title
-        expect(page).to have_selector '#btn_vote_1', 'Нововведение 1'
-        expect(page).to have_selector '#btn_vote_2', 'Нововведение 2'
-        click_link "btn_vote_1"
+        expect(page).to have_selector '#btn_vote_1', "#{I18n.t('show.concept.title')} 1"
+        expect(page).to have_selector '#btn_vote_2', "#{I18n.t('show.concept.title')} 2"
+        click_link 'btn_vote_1'
         expect(page).to have_content 'Спасибо за участие в голосовании!'
         expect(page).to have_selector 'a', 'Перейти к рефлексии'
         expect(page).to have_selector 'a', 'Перейти к списку нововведений'
-        click_link "Перейти к списку нововведений"
+        click_link 'Перейти к списку нововведений'
         expect(page).to have_content 'Нововведения'
         expect(page).to have_content I18n.t('show.improve.ideas')
       end
