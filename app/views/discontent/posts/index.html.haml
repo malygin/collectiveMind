@@ -188,4 +188,5 @@
         %hr
       .body
         .chat-messages
-          = render partial: 'shared/improve_comment',collection: @comments_all
+          -cache @comments_all do
+            = render partial: 'shared/improve_comment',collection: @comments_all
