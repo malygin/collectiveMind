@@ -733,4 +733,31 @@ module ApplicationHelper
     name = name + "(#{count_messages})" if count_messages > 0
     name
   end
+
+  def last_time_visit_post(post)
+    notice = current_user.journals.unscoped.where(type_event: 'visit_save', project_id: @project.id, body: "http://www.mass-decision.ru/project/#{@project.id}/discontent/posts/#{post.id}").order(created_at: :desc).first
+    if notice
+      notice.created_at
+    else
+      "2000-01-01 00:00:00"
+    end
+  end
+
+  def last_time_visit_aspect(aspect)
+    notice = current_user.journals.unscoped.where(type_event: 'visit_save', project_id: @project.id, body: "http://www.mass-decision.ru/project/#{@project.id}/discontent/posts?asp=#{aspect.id}").order(created_at: :desc).first
+    if notice
+      notice.created_at
+    else
+      "2000-01-01 00:00:00"
+    end
+  end
+
+  def last_time_visit_journals
+    notice = current_user.journals.unscoped.where(type_event: 'visit_save', project_id: @project.id, body: "http://www.mass-decision.ru/project/#{@project.id}/journals" + "#{params[:page] ? '?page='+params[:page] : ''}").order(created_at: :desc).first
+    if notice
+      notice.created_at
+    else
+      "2000-01-01 00:00:00"
+    end
+  end
 end

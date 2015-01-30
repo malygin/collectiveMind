@@ -6,6 +6,11 @@
 
   -@project.current_aspects(current_stage).each do |asp|
     = render partial: 'aspect', object: asp, locals: {current_stage: current_stage}
+    -#%span.pull-right
+    -#  %small="(#{asp.aspect_posts.by_status_for_discontent(@project).count})"
+    -#  ="(+ "
+    -#  =asp.aspect_posts.by_status_for_discontent(@project).where("discontent_posts.created_at >= ?", last_time_visit_aspect(asp)).count
+    -#  =")"
     - if asp.discontent_aspects.present?
       %ul.panel-collapse
         - asp.discontent_aspects.each do |asp1|

@@ -3,3 +3,8 @@
     %i.fa.fa-book
 
     =" #{aspect.content}"
+    %span.pull-right
+      %small="(#{aspect.aspect_posts.by_status_for_discontent(@project).count})"
+      ="(+ "
+      =aspect.aspect_posts.by_status_for_discontent(@project).where("discontent_posts.created_at >= ?", last_time_visit_aspect(aspect)).count
+      =")"

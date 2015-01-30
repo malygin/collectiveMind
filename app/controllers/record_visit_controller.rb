@@ -1,6 +1,6 @@
 class RecordVisitController < WebsocketRails::BaseController
   def start_visit
-    current_user.journals.create type_event: 'visit_save', project_id: message['location']['0']['pathname'].gsub(/[^0-9]/, '').to_i,
+    current_user.journals.create type_event: 'visit_save', project_id: message['location']['0']['pathname'].split('/')[2].to_i,
                                  body: message['location']['0']['href']
   end
 

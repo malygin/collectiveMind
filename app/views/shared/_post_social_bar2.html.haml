@@ -9,6 +9,9 @@
         =t('show.commenting')
         =post.comments.count
         %span.glyphicon.glyphicon-comment
+        ="(+ "
+        =post.comments.where("created_at >= ?", last_time_visit_post(post)).count
+        =")"
       -if boss? and post.class.name.deconstantize == "Discontent" and [4,5,6,7].include?(@project.status)
         -if post.status == 0
           |
