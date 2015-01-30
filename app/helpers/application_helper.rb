@@ -735,7 +735,7 @@ module ApplicationHelper
   end
 
   def last_time_visit_post(post)
-    notice = current_user.journals.unscoped.where(type_event: 'visit_save', project_id: @project.id, body: "http://www.mass-decision.ru/project/#{@project.id}/discontent/posts/#{post.id}").order(created_at: :desc).first
+    notice = current_user.journals.unscoped.where(type_event: 'visit_save', project_id: @project.id, user_id: current_user.id).where(" body like ? ", "%/project/#{@project.id}/discontent/posts/#{post.id}").order(created_at: :desc).first
     if notice
       notice.created_at
     else
@@ -744,7 +744,7 @@ module ApplicationHelper
   end
 
   def last_time_visit_aspect(aspect)
-    notice = current_user.journals.unscoped.where(type_event: 'visit_save', project_id: @project.id, body: "http://www.mass-decision.ru/project/#{@project.id}/discontent/posts?asp=#{aspect.id}").order(created_at: :desc).first
+    notice = current_user.journals.unscoped.where(type_event: 'visit_save', project_id: @project.id, user_id: current_user.id).where(" body like ? ", "%/project/#{@project.id}/discontent/posts?asp=#{aspect.id}").order(created_at: :desc).first
     if notice
       notice.created_at
     else
@@ -753,7 +753,7 @@ module ApplicationHelper
   end
 
   def last_time_visit_journals
-    notice = current_user.journals.unscoped.where(type_event: 'visit_save', project_id: @project.id, body: "http://www.mass-decision.ru/project/#{@project.id}/journals" + "#{params[:page] ? '?page='+params[:page] : ''}").order(created_at: :desc).first
+    notice = current_user.journals.unscoped.where(type_event: 'visit_save', project_id: @project.id, body: "%/project/#{@project.id}/journals" + "#{params[:page] ? '?page='+params[:page] : ''}").order(created_at: :desc).first
     if notice
       notice.created_at
     else

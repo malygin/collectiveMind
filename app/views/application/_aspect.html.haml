@@ -8,7 +8,8 @@
       .pull-lefte
         %small всего:
         =aspect.aspect_posts.by_status_for_discontent(@project).count
-
-        %small , новых:
-        %span.badge=aspect.aspect_posts.by_status_for_discontent(@project).where("discontent_posts.created_at >= ?", last_time_visit_aspect(aspect)).count
+        - count = aspect.aspect_posts.by_status_for_discontent(@project).where("discontent_posts.created_at >= ?", last_time_visit_aspect(aspect)).count
+        - if count > 0
+          %small , новых:
+          %span.badge=aspect.aspect_posts.by_status_for_discontent(@project).where("discontent_posts.created_at >= ?", last_time_visit_aspect(aspect)).count
 
