@@ -21,6 +21,8 @@ class Journal < ActiveRecord::Base
   scope :events_ignore, -> events_ignore { where.not(journals: {type_event: events_ignore})}
   scope :created_order, -> { order("journals.created_at DESC") }
   scope :active_proc, -> { where("core_projects.status < ?", 20) }
+  scope :not_moderators, -> { joins(:user).where('users.type_user is null') }
+  scope :for_moderators, -> { joins(:user).where('users.type_user in (?)', User::TYPES_USER[:admin]) }
 
   # has_many :user_checks, class_name: 'UserCheck'
   # scope :user_checks_proc, -> { joins("LEFT OUTER JOIN user_checks ON journals.user_informed = user_checks.user_id AND journals.project_id = user_checks.project_id AND user_checks.check_field = 'auto_feed_mailer' AND (user_checks.status = 'f' OR user_checks.status IS NULL)") }
