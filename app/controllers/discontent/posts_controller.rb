@@ -48,7 +48,15 @@ class Discontent::PostsController < PostsController
 
   def index
     return redirect_to action: 'vote_list' if current_user.can_vote_for(:discontent, @project)
-    @aspect =  params[:asp] ? Discontent::Aspect.find(params[:asp]) : ((@project.proc_aspects.first.present? and @project.proc_aspects.first.position.present?) ? @project.proc_aspects.order("position DESC").first : @project.proc_aspects.order(:id).first)
+
+    if params[:asp]
+     @aspect =  Discontent::Aspect.find(params[:asp])
+    else
+      if not params[:not_aspect]
+        redirect_to "/project/#{@project.id}/discontent/posts?asp=#{@project.proc_aspects.order("position DESC").first.id}"
+        return
+      end
+    end
     @accepted_posts = Discontent::Post.where(project_id: @project, status: 2)
     @comments_all = @project.problems_comments_for_improve
     @page = params[:page]
