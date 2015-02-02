@@ -391,7 +391,40 @@ class Core::Project < ActiveRecord::Base
     end
   end
 
-  def statistic_visits(duration = 5.days.ago)
+  # Аналитика
+  def statistic_visits(duration)
     journals.unscoped.where(type_event: 'visit_save').where(project_id: id).where('journals.created_at > ?', duration)
+  end
+
+  def count_pages(type_users = 'not_moderators', duration = 5.days.ago)
+    statistic_visits(duration).send(type_users).
+        select("COUNT(*) AS count_pages, DATE_TRUNC('day', journals.created_at) as day, user_id AS user_id").
+        group("DATE_TRUNC('day', journals.created_at), user_id")
+  end
+
+  def count_people(type_users = 'not_moderators', duration = 5.days.ago)
+    # Запрос возвращает хеш, где ключ - дата, значение - количество юзеров
+    # например, {2015-01-25 00:00:00 +0300=>1, 2015-01-26 00:00:00 +0300=>1}
+    # и затем мы преобразуем дату для работы на клиенте (хз, почему именно так)
+    visits = statistic_visits(duration).send(type_users).select('DISTINCT user_id').group("DATE_TRUNC('day', journals.created_at)").count
+    visits.map { |k, v| {x: (k.to_datetime.to_f * 1000).to_i, y: v} }
+    [{key: 'Посетителей', values: visits}]
+  end
+
+  def average_time(type_users = 'not_moderators', duration = 5.days.ago)
+    visits = statistic_visits(duration).send(type_users).select("DATE_TRUNC('day', journals.created_at) as day,
+                  round(CAST(float8 (extract(epoch from sum(journals.updated_at - journals.created_at)::INTERVAL)/60) as numeric), 2) / count(DISTINCT journals.user_id) as minutes").
+        group("DATE_TRUNC('day', journals.created_at)")
+    visit_data = []
+    visits.each do |visit|
+      visit_data << {x: (visit.day.to_datetime.to_f * 1000).to_i, y: visit.minutes}
+    end
+    [{key: 'Среднее время', values: visit_data}]
+  end
+
+
+  def count_actions(type_users = 'for_moderators', duration = 5.days.ago)
+    journals.where('journals.created_at > ?', duration).send(type_users).select("COUNT(*) AS count_actions, DATE_TRUNC('day', journals.created_at) as day, user_id AS user_id").
+        group("DATE_TRUNC('day', journals.created_at), user_id")
   end
 end
