@@ -396,10 +396,21 @@ class Core::Project < ActiveRecord::Base
     journals.unscoped.where(type_event: 'visit_save').where(project_id: id).where('journals.created_at > ?', duration)
   end
 
+  # Возвращает статистику открытых страниц пользователями
+  # Формат дата: user.to_s: кол-во посещенных страниц
+  # type_users - строка, соответствующая скоупу в журнале
   def count_pages(type_users = 'not_moderators', duration = 5.days.ago)
-    statistic_visits(duration).send(type_users).
+    pages = statistic_visits(duration).send(type_users).joins(:user).
         select("COUNT(*) AS count_pages, DATE_TRUNC('day', journals.created_at) as day, user_id AS user_id").
-        group("DATE_TRUNC('day', journals.created_at), user_id")
+        group("DATE_TRUNC('day', journals.created_at), user_id").order('count_pages DESC')
+    dates = []
+    users = {}
+    pages.each do |page|
+      dates << page.day
+      users[page.user] ||= {}
+      users[page.user][page.day] = page.count_pages
+    end
+    {dates: dates.uniq.sort, users: users}
   end
 
   def count_people(type_users = 'not_moderators', duration = 5.days.ago)
@@ -424,7 +435,16 @@ class Core::Project < ActiveRecord::Base
 
 
   def count_actions(type_users = 'for_moderators', duration = 5.days.ago)
-    journals.where('journals.created_at > ?', duration).send(type_users).select("COUNT(*) AS count_actions, DATE_TRUNC('day', journals.created_at) as day, user_id AS user_id").
-        group("DATE_TRUNC('day', journals.created_at), user_id")
+    actions = journals.joins(:user).where('journals.created_at > ?', duration).send(type_users).
+        select("COUNT(*) AS count_actions, DATE_TRUNC('day', journals.created_at) as day, user_id AS user_id").
+        group("DATE_TRUNC('day', journals.created_at), user_id").order('count_actions DESC')
+    dates = []
+    users = {}
+    actions.each do |action|
+      dates << action.day
+      users[action.user] ||= {}
+      users[action.user][action.day] = action.count_actions
+    end
+    {dates: dates.uniq.sort, users: users}
   end
 end
