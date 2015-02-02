@@ -1,4 +1,4 @@
-#nvd3_project(data-project="#{@project.id}" data-stage="#{params[:action]}")
+#nvd3_project(data-count_people="#{@count_people}" data-average_time="#{@average_time}")
 %h3 График посещений
 %section.widget.large
   %header
@@ -22,13 +22,12 @@
     %tr
       %th
         Пользователь
-
-      %th
-        Кол-во постов
-
+      - # список дней
+      - @project.count_pages.each do |page|
+        %th
+          = page.day
   %tbody
     %tr
-      %td
-        Всего комментариев
-      %td
-        =@project.lifetape_comments.count
+      - @project.count_pages.each do |page|
+        %td
+          = page.user

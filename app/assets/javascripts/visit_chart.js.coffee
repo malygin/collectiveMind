@@ -14,7 +14,7 @@
       chart.xAxis.showMaxMin(false).tickFormat (d) ->
         d3.time.format("%d.%m.%y") new Date(d)
 
-      data = get_data_for_count_users()
+      data = JSON.parse $('#nvd3_project').attr("data-count_people")
       console.log(data)
       d3.select("#user_visits_graph svg").datum(data).transition().duration(500).call chart
       nv.utils.windowResize chart.update
@@ -32,31 +32,9 @@
       chart.yAxis.showMaxMin(false).ticks(0).tickFormat
       chart.xAxis.showMaxMin(false).tickFormat (d) ->
         d3.time.format("%d.%m.%y") new Date(d)
-      data = get_data_for_average_time()
+      data = JSON.parse $('#nvd3_project').attr("data-average_time")
       console.log(data)
       d3.select("#average_time_graph svg").datum(data).transition().duration(500).call chart
       nv.utils.windowResize chart.update
       chart
   return
-
-get_data_for_count_users = ->
-  project_id = $('#nvd3_project').attr("data-project")
-  if project_id
-    jqXHR = $.ajax(
-      url: "/project/#{project_id}/project_users/count_people"
-      type: "get"
-      dataType: "json"
-      async: false
-    );
-    return jqXHR.responseJSON;
-
-get_data_for_average_time = ->
-  project_id = $('#nvd3_project').attr("data-project")
-  if project_id
-    jqXHR = $.ajax(
-      url: "/project/#{project_id}/project_users/average_time"
-      type: "get"
-      dataType: "json"
-      async: false
-    );
-    return jqXHR.responseJSON;
