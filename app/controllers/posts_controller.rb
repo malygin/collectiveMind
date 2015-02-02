@@ -483,6 +483,8 @@ class PostsController < ApplicationController
       @comment.destroy
       #@todo удаление комментариев из ленты
       Journal.destroy_comment_journal(@project, @comment)
+    else
+      redirect_to root_url
     end
   end
 

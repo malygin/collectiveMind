@@ -1,30 +1,22 @@
-
 FactoryGirl.define do
+  factory :life_tape_post, class: 'LifeTape::Post' do
+    sequence(:content) { |n| "life tape post #{n}" }
+    sequence(:number_views) { |n| n * 10 }
 
-  factory :discontent_aspect, :class => 'Discontent::Aspect'  do
-    sequence(:content) { |n| "aspect #{n}" }
+    association :user, factory: :ordinary_user
+    association :project, factory: :core_project
+
+    after(:create) do |post|
+      post.aspect = create :aspect, project: post.project
+      post.save
+      create :discontent_aspects_life_tape_posts, discontent_aspect: post.aspect, life_tape_post: post
+    end
   end
 
-  factory :life_tape_post, :class => 'LifeTape::Post'  do
-    content  "life tape post for project"
-    sequence(:number_views) { |n| n*10 }
-    #factory :life_tape_post_with_discontent_aspect do
-    #  after(:create) do |life_tape_post|
-    #    FactoryGirl.create_list(:discontent_aspect, life_tape_posts: [life_tape_post])
-    #  end
-    #end
+  factory :life_tape_comment, class: 'LifeTape::Comment' do
+    sequence(:content) { |n| "life tape comment #{n}" }
+
+    association :user, factory: :ordinary_user
+    association :post, factory: :life_tape_post
   end
-
-  factory :life_tape_comment, :class => 'LifeTape::Comment'  do
-    content  "life tape comment for post"
-  end
-
-  #factory :life_tape_post_with_discontent_aspect, :parent => :life_tape_post do
-  #  discontent_aspects {[FactoryGirl.create(:discontent_aspect)]}
-  #end
-  #after(:create) {|life_tape_post| life_tape_post.discontent_aspects = [create(:discontent_aspect)]}
-  #factory :life_tape_post, :class => 'LifeTape::Post' do |f|
-  #  f.discontent_aspects { |a| [a.association(:discontent_aspect)] }
-  #end
-
 end

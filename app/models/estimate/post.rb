@@ -8,13 +8,16 @@ class Estimate::Post < ActiveRecord::Base
   attr_accessor :first_c, :second_c, :third_c, :max_score, :sum_score
 
   belongs_to :post, class_name: 'Plan::Post'
+
   has_many :post_aspects
   has_many :plan_post_aspects, class_name: 'Plan::PostAspect'
-
-
-  has_many :post_aspects_other, -> { where first_stage: false }, foreign_key: 'post_id', class_name: 'Estimate::PostAspect'
-  has_many :post_aspects_first, -> { where first_stage: true }, foreign_key: 'post_id', class_name: 'Estimate::PostAspect'
   has_many :post_aspects_all, foreign_key: 'post_id', class_name: 'Estimate::PostAspect'
+
+  # @todo кандидат на удаление, нигде не используется?
+  #has_many :post_aspects_other, -> { where first_stage: false }, foreign_key: 'post_id', class_name: 'Estimate::PostAspect'
+  #has_many :post_aspects_first, -> { where first_stage: true }, foreign_key: 'post_id', class_name: 'Estimate::PostAspect'
+
+  validates :user_id, :post_id, :status, :project_id, presence: true
 
   #@todo replace sum in product
   def score(status)
