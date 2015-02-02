@@ -31,7 +31,7 @@ class Core::Project < ActiveRecord::Base
 
   attr_accessible :desc, :postion, :secret, :type_project, :name, :short_desc, :knowledge, :status, :type_access,
                   :url_logo, :stage1, :stage2, :stage3, :stage4, :stage5, :color, :code, :advices_concept, :advices_discontent,
-                  :date_12,:date_23,:date_34,:date_45,:date_56
+                  :date_12, :date_23, :date_34, :date_45, :date_56
 
 
   has_many :life_tape_posts, -> { where status: 0 }, class_name: 'LifeTape::Post'
@@ -348,7 +348,7 @@ class Core::Project < ActiveRecord::Base
 
   def concept_comments
     Concept::Comment.joins("INNER JOIN concept_posts ON concept_comments.post_id = concept_posts.id").
-      where("concept_posts.project_id = ?", self.id)
+        where("concept_posts.project_id = ?", self.id)
   end
 
   def discontent_comments
@@ -362,7 +362,7 @@ class Core::Project < ActiveRecord::Base
   end
 
   def date_begin_stage(table_name)
-    table_name = table_name.sub('_posts','').sub('_comments', '')
+    table_name = table_name.sub('_posts', '').sub('_comments', '')
     if table_name == 'life_tape'
       self.created_at
     elsif table_name == 'discontent'
@@ -391,4 +391,60 @@ class Core::Project < ActiveRecord::Base
     end
   end
 
+  # Аналитика
+  def statistic_visits(duration)
+    journals.unscoped.where(type_event: 'visit_save').where(project_id: id).where('journals.created_at > ?', duration)
+  end
+
+  # Возвращает статистику открытых страниц пользователями
+  # Формат дата: user.to_s: кол-во посещенных страниц
+  # type_users - строка, соответствующая скоупу в журнале
+  def count_pages(type_users = 'not_moderators', duration = 5.days.ago)
+    pages = statistic_visits(duration).send(type_users).joins(:user).
+        select("COUNT(*) AS count_pages, DATE_TRUNC('day', journals.created_at) as day, user_id AS user_id").
+        group("DATE_TRUNC('day', journals.created_at), user_id").order('count_pages DESC')
+    dates = []
+    users = {}
+    pages.each do |page|
+      dates << page.day
+      users[page.user] ||= {}
+      users[page.user][page.day] = page.count_pages
+    end
+    {dates: dates.uniq.sort, users: users}
+  end
+
+  def count_people(type_users = 'not_moderators', duration = 5.days.ago)
+    # Запрос возвращает хеш, где ключ - дата, значение - количество юзеров
+    # например, {2015-01-25 00:00:00 +0300=>1, 2015-01-26 00:00:00 +0300=>1}
+    # и затем мы преобразуем дату для работы на клиенте (хз, почему именно так)
+    visits = statistic_visits(duration).send(type_users).select('DISTINCT user_id').group("DATE_TRUNC('day', journals.created_at)").count
+    visits.map { |k, v| {x: (k.to_datetime.to_f * 1000).to_i, y: v} }
+    [{key: 'Посетителей', values: visits}]
+  end
+
+  def average_time(type_users = 'not_moderators', duration = 5.days.ago)
+    visits = statistic_visits(duration).send(type_users).select("DATE_TRUNC('day', journals.created_at) as day,
+                  round(CAST(float8 (extract(epoch from sum(journals.updated_at - journals.created_at)::INTERVAL)/60) as numeric), 2) / count(DISTINCT journals.user_id) as minutes").
+        group("DATE_TRUNC('day', journals.created_at)")
+    visit_data = []
+    visits.each do |visit|
+      visit_data << {x: (visit.day.to_datetime.to_f * 1000).to_i, y: visit.minutes}
+    end
+    [{key: 'Среднее время', values: visit_data}]
+  end
+
+
+  def count_actions(type_users = 'for_moderators', duration = 5.days.ago)
+    actions = journals.joins(:user).where('journals.created_at > ?', duration).send(type_users).
+        select("COUNT(*) AS count_actions, DATE_TRUNC('day', journals.created_at) as day, user_id AS user_id").
+        group("DATE_TRUNC('day', journals.created_at), user_id").order('count_actions DESC')
+    dates = []
+    users = {}
+    actions.each do |action|
+      dates << action.day
+      users[action.user] ||= {}
+      users[action.user][action.day] = action.count_actions
+    end
+    {dates: dates.uniq.sort, users: users}
+  end
 end

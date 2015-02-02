@@ -1,13 +1,26 @@
 class Core::ProjectUsersController < ApplicationController
-  def analytics
+  before_filter :prime_admin_authenticate
+  before_action :set_project
+  before_action :journal_data, only: [:user_analytics, :moderator_analytics]
+  layout 'application'
+
+  def user_analytics
+    @count_people = @project.count_people.to_json
+    @average_time = @project.average_time.to_json
+    @count_pages = @project.count_pages
+    @count_actions = @project.count_actions('not_moderators')
+  end
+
+  def moderator_analytics
+    @count_people = @project.count_people('for_moderators').to_json
+    @average_time = @project.average_time('for_moderators').to_json
+    @count_pages = @project.count_pages('for_moderators')
+    @count_actions = @project.count_actions
+    render action: :user_analytics
+  end
+
+  private
+  def set_project
     @project = Core::Project.find(params[:project]) if params[:project]
-
-    # Запрос возвращает хеш, где ключ - дата, значение - количество юзеров
-    # например, {2015-01-25 00:00:00 +0300=>1, 2015-01-26 00:00:00 +0300=>1}
-    # и затем мы преобразуем дату для работы на клиенте (хз, почему именно так)
-    visits = @project.journals.unscoped.select('DISTINCT user_id').where(type_event: 'visit_save').where('created_at > ?', 5.days.ago).group("DATE_TRUNC('day', created_at)").count
-    visits = visits.map { |k, v| {x: (k.to_datetime.to_f * 1000).to_i, y: v} }
-
-    render json: [{key: 'Посетителей', values: visits}]
   end
 end

@@ -67,7 +67,8 @@ scope '/project/:project' do
   get '/concept_analytics', to: 'core/projects#concept_analytics'
   get '/plan_analytics', to: 'core/projects#plan_analytics'
   get '/estimate_analytics', to: 'core/projects#estimate_analytics'
-  get '/project_users/analytics', to: 'core/project_users#analytics'
+  get '/project_users/user_analytics', to: 'core/project_users#user_analytics'
+  get '/project_users/moderator_analytics', to: 'core/project_users#moderator_analytics'
   get :graf_data, to: 'core/projects#graf_data'
 
 
