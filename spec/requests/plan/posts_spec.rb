@@ -105,9 +105,9 @@ describe 'Plan ' do
       end
 
       it 'can see right form' do
-        expect(page).to have_content @plan1.name
-        expect(page).to have_content @plan1.goal
-        expect(page).to have_content @plan1.content
+        expect(page).to have_field('name_plan',with: @plan1.name)
+        expect(page).to have_css('textarea#goals',text: @plan1.goal)
+        expect(page).to have_css('textarea#desc_plan',text: @plan1.content)
       end
 
       it 'can see edit stage modal', js: true do
@@ -251,9 +251,9 @@ describe 'Plan ' do
       end
 
       it 'can see right form' do
-        expect(page).to have_content @plan1.name
-        expect(page).to have_content @plan1.goal
-        expect(page).to have_content @plan1.content
+        expect(page).to have_field('name_plan',with: @plan1.name)
+        expect(page).to have_css('textarea#goals',text: @plan1.goal)
+        expect(page).to have_css('textarea#desc_plan',text: @plan1.content)
       end
 
       it 'can see edit stage modal', js: true do
