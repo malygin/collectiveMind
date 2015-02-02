@@ -110,3 +110,5 @@ gem 'resque_mailer'
 gem 'resque-scheduler'
 gem 'resque-status'
 gem 'rufus-scheduler', '< 3.0.0'
+
+gem "bugsnag"

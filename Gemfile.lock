@@ -70,6 +70,8 @@ GEM
     bootstrap-x-editable-rails (1.5.1.1)
       railties (>= 3.0)
     breadcrumbs_on_rails (2.3.0)
+    bugsnag (2.7.1)
+      multi_json (~> 1.0)
     builder (3.2.2)
     capybara (2.4.3)
       mime-types (>= 1.16)
@@ -420,6 +422,7 @@ DEPENDENCIES
   bootstrap-wysihtml5-rails
   bootstrap-x-editable-rails
   breadcrumbs_on_rails
+  bugsnag
   capybara
   capybara-screenshot
   capybara-webkit
