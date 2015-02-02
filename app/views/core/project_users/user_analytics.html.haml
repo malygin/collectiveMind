@@ -7,6 +7,7 @@
         Пользователи
   #user_visits_graph.body.chart
     %svg
+
 %h3 Среднее время, проведенное на портале
 %section.widget.large
   %header
@@ -22,12 +23,32 @@
     %tr
       %th
         Пользователь
-      - # список дней
-      - @project.count_pages.each do |page|
+      - @count_pages[:dates].each do |day|
         %th
-          = page.day
+          = Russian::strftime(day, '%d %B')
   %tbody
-    %tr
-      - @project.count_pages.each do |page|
+    - @count_pages[:users].each do |user, pages|
+      %tr
         %td
-          = page.user
+          = user
+        - @count_pages[:dates].each do |day|
+          %td{class: ('text-warning' if pages[day].nil?)}
+            = pages[day].nil? ? 0 : pages[day]
+
+%h3 Количество совершенных действий
+%table.table.table-striped.table-bordered
+  %thead
+    %tr
+      %th
+        Пользователь
+      - @count_actions[:dates].each do |day|
+        %th
+          = Russian::strftime(day, '%d %B')
+  %tbody
+    - @count_actions[:users].each do |user, pages|
+      %tr
+        %td
+          = user
+        - @count_actions[:dates].each do |day|
+          %td{class: ('text-warning' if pages[day].nil?)}
+            = pages[day].nil? ? 0 : pages[day]
