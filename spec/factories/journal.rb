@@ -9,5 +9,7 @@ FactoryGirl.define do
     factory :personal_journal do
       personal true
     end
+
+    association :user, factory: :ordinary_user
   end
 end

@@ -392,6 +392,6 @@ class Core::Project < ActiveRecord::Base
   end
 
   def statistic_visits(duration = 5.days.ago)
-    journals.unscoped.where(type_event: 'visit_save').where('journals.created_at > ?', duration)
+    journals.unscoped.where(type_event: 'visit_save').where(project_id: id).where('journals.created_at > ?', duration)
   end
 end
