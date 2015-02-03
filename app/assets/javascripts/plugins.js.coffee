@@ -85,15 +85,22 @@
 @activate_htmleditor = ->
   tinyMCE.init
     selector: "textarea.tinymce"
-    setup: (ed) ->
-      ed.on "init", (ed) ->
-        tinyMCE.get(ed.target.id).show()
+    language: "ru"
     plugins:
       ["advlist autolink link image lists charmap print preview hr anchor pagebreak spellchecker",
        "searchreplace wordcount visualblocks visualchars code fullscreen insertdatetime media nonbreaking",
        "save table contextmenu directionality emoticons template paste textcolor"]
     toolbar: "insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image | print preview media fullpage | forecolor backcolor emoticons"
+#    setup: (ed) ->
+#      ed.on "init", (ed) ->
+#        tinyMCE.get(ed.target.id).show()
 
+@сommand_htmleditor = (сommand, id) ->
+  #tinyMCE.get('some-textarea').show();
+  if сommand == 'remove'
+    tinymce.EditorManager.execCommand('mceRemoveEditor', false, id);
+  else if сommand == 'add'
+    tinymce.EditorManager.execCommand('mceAddEditor', false, id);
 
 # @todo sortable for knowbase
 $('#sortable').sortable update: (event, ui) ->
