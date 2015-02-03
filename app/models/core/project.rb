@@ -418,8 +418,11 @@ class Core::Project < ActiveRecord::Base
     # например, {2015-01-25 00:00:00 +0300=>1, 2015-01-26 00:00:00 +0300=>1}
     # и затем мы преобразуем дату для работы на клиенте (хз, почему именно так)
     visits = statistic_visits(duration).send(type_users).select('DISTINCT user_id').group("DATE_TRUNC('day', journals.created_at)").count
-    visits.map { |k, v| {x: (k.to_datetime.to_f * 1000).to_i, y: v} }
-    [{key: 'Посетителей', values: visits}]
+    visit_data = []
+    visits.each do |visit, minutes|
+      visit_data << {x: (visit.to_datetime.to_f * 1000).to_i, y: minutes}
+    end
+    [{key: 'Посетителей', values: visit_data}]
   end
 
   def average_time(type_users = 'not_moderators', duration = 5.days.ago)
