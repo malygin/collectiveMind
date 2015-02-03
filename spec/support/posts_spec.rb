@@ -203,9 +203,7 @@ shared_examples 'content with comments' do |moderator = false, count = 2|
 end
 
 
-shared_examples 'likes posts' do |moderator = false, count = 2|
-  let(:comment_model) { @comment_2.class.name.underscore.gsub('/comment', '_comment') }
-  let(:comment_model_name) { @comment_2.class.name.constantize }
+shared_examples 'likes posts' do |moderator = false|
   let(:post_model) { @post1.class.name.underscore.gsub('/post', '_post') }
 
   before do
