@@ -42,7 +42,7 @@ class Discontent::Post < ActiveRecord::Base
   # scope :posts_for_discussions, ->(p) { where(project_id: p.id).where("discontent_posts.status_content = 't' and discontent_posts.status_whered = 't' and discontent_posts.status_whend = 't'") }
   # scope :sort_comment, -> sort_comment { sort_comment == "up" ? includes(:comments).group('"discontent_posts"."id"').references(:comments).select('count("discontent_comments"."id")').order('count("discontent_comments"."id") DESC NULLS LAST') : includes(:comments).group('"discontent_posts"."id"').references(:comments).select('count("discontent_comments"."id") as count').order('count("discontent_comments"."id") ASC NULLS LAST') if sort_comment.present? }
 
-  scope :united_for_vote, ->(project, voted) { where(project_id: project, status: 2).where("discontent_posts.id NOT IN (?)", voted<<0).order(:id) }
+  scope :united_for_vote, ->(project, voted) { where(project_id: project, status: [2,4]).where("discontent_posts.id NOT IN (?)", voted<<0).order(:id) }
   scope :for_union, ->(project) { where("discontent_posts.status = 0 and discontent_posts.project_id = ? ", project) }
 
   scope :by_status_for_discontent, ->(project) {
