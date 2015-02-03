@@ -10,6 +10,8 @@ describe 'Knowbase ' do
   before do
     @post1 =  FactoryGirl.create :knowbase_post, project: project, title: 'title first knowbase', content: 'content first knowbase', stage: 1
     @post2 =  FactoryGirl.create :knowbase_post, project: project, title: 'title second knowbase', content: 'content second knowbase', stage: 2
+    @aspect1 = FactoryGirl.create :aspect, project: project, content: 'aspect 1'
+    @aspect2 = FactoryGirl.create :aspect, project: project, content: 'aspect 2'
   end
 
 
@@ -69,6 +71,7 @@ describe 'Knowbase ' do
           expect(page).to have_selector("input#title-textfield", @post1.title)
           fill_in 'title-textfield', with: 'new title'
           click_button 'send_post'
+          sleep 5
           expect(page).to have_selector("span#edit_knowbase_post_title_#{@post1.id}", 'new title')
         end
       end

@@ -61,6 +61,9 @@ module JournalHelper
         'fa color-teal fa-reply'
       when 'reply_discontent_comment'
         'fa color-red fa-reply'
+
+      when 'knowbase_edit'
+        'fa fa-plus'
     end
   end
 
@@ -267,6 +270,9 @@ module JournalHelper
         link_to j.body, group_path(j.project_id, j.first_id)
       when 'my_assigned_task'
         link_to j.body, group_path(j.project_id, j.first_id)
+      when 'knowbase_edit'
+
+        'обновил базу знаний по аспекту ' +link_to(j.body, "/project/#{project}/life_tape/posts?asp=#{j.first_id}")
       else
         'что то другое'
     end
