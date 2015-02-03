@@ -58,6 +58,9 @@ class Knowbase::PostsController <  PostsController
   def update
     @post = current_model.find(params[:id])
     @post.update_attributes(params[:knowbase_post])
+    current_user.journals.build(type_event: 'knowbase_edit',  project: @project,
+                                first_id: @post.discontent_aspect.id, body: @post.discontent_aspect.content,
+                                personal: false).save!
     respond_to do |format|
       format.js
     end
