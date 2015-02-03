@@ -12,7 +12,7 @@
       %br
       %br
       %div.help-content{id: "help_content_#{@posts[1].id}", data: {style: 1}, style: "margin-left:60px;margin-right:60px;"}
-        = @posts[1].content.html_safe
+        = @posts[1].content.html_safe if @posts[1].content
 - else
   %section.widget.widget-tabs
     %header
@@ -33,7 +33,7 @@
           %br
           %br
           %div.help-content{id: "help_content_#{@posts[1].id}", data: {style: 1}, style: "margin-left:60px;margin-right:60px;" }
-            = @posts[1].content.html_safe
+            = @posts[1].content.html_safe if @posts[1].content
       #long_desc.tab-pane
         -unless @posts[2].nil?
           -if boss?
@@ -44,7 +44,7 @@
           %br
           %br
           %div.help-content{id: "help_content_#{@posts[2].id}", data: {style: 2}, style: "margin-left:60px;margin-right:60px;"}
-            = @posts[2].content.html_safe
+            = @posts[2].content.html_safe if @posts[2].content
 
 
 
