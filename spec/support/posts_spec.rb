@@ -25,6 +25,27 @@ shared_examples 'content with comments' do |moderator = false, count = 2|
     end
   end
 
+  it ' user likes comment', js: true do
+    like_comment_path = Rails.application.routes.url_helpers.send("like_comment_#{comment_post_model}_path", project, @comment_1)
+
+    expect(page).to have_link("like_comment_#{@comment_1.id}", href: like_comment_path + '?against=false')
+    expect(page).to have_link("dislike_comment_#{@comment_1.id}", href: like_comment_path + '?against=true')
+    click_link "like_comment_#{@comment_1.id}"
+    within :css, "span#plus_counter_#{@comment_1.id}" do
+      expect(page).to have_content '1'
+    end
+
+    click_link "like_comment_#{@comment_1.id}"
+    within :css, "span#plus_counter_#{@comment_1.id}" do
+      expect(page).to have_content '1'
+    end
+
+    click_link "dislike_comment_#{@comment_1.id}"
+    within :css, "span#minus_counter_#{@comment_1.id}" do
+      expect(page).to have_content '0'
+    end
+  end
+
   it 'view comments ' do
     expect(page).to have_content @comment_1.content
   end
@@ -177,6 +198,55 @@ shared_examples 'content with comments' do |moderator = false, count = 2|
           expect(current_path).to eq root_path
         }.not_to change(comment_model_name, :count)
       end
+    end
+  end
+end
+
+
+shared_examples 'likes posts' do |moderator = false, count = 2|
+  let(:comment_model) { @comment_2.class.name.underscore.gsub('/comment', '_comment') }
+  let(:comment_model_name) { @comment_2.class.name.constantize }
+  let(:post_model) { @post1.class.name.underscore.gsub('/post', '_post') }
+
+  before do
+    refresh_page
+  end
+
+  if moderator
+    it ' like post', js: true do
+      prepare_awards
+      plus_post_path = Rails.application.routes.url_helpers.send("plus_#{post_model}_path", project, @post1)
+
+      expect(page).to have_link("plus_post_#{@post1.id}", text: 'Выдать баллы', href: plus_post_path)
+      click_link "plus_post_#{@post1.id}"
+      expect(page).to have_link("plus_post_#{@post1.id}", text: 'Забрать баллы', href: plus_post_path)
+      click_link "plus_post_#{@post1.id}"
+      expect(page).to have_link("plus_post_#{@post1.id}", text: 'Выдать баллы', href: plus_post_path)
+    end
+  else
+    it ' not button like' do
+      expect(page).not_to have_link("plus_post_#{@post1.id}")
+    end
+  end
+
+  it ' user likes post', js: true do
+    like_post_path = Rails.application.routes.url_helpers.send("like_#{post_model}_path", project, @post1)
+
+    expect(page).to have_link("like_post_#{@post1.id}", href: like_post_path + '?against=false')
+    expect(page).to have_link("dislike_post_#{@post1.id}", href: like_post_path + '?against=true')
+    click_link "like_post_#{@post1.id}"
+    within :css, "span#plus_counter_#{@post1.id}" do
+      expect(page).to have_content '1'
+    end
+
+    click_link "like_post_#{@post1.id}"
+    within :css, "span#plus_counter_#{@post1.id}" do
+      expect(page).to have_content '1'
+    end
+
+    click_link "dislike_post_#{@post1.id}"
+    within :css, "span#minus_counter_#{@post1.id}" do
+      expect(page).to have_content '0'
     end
   end
 end

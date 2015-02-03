@@ -95,6 +95,7 @@ describe 'Discontent ' do
       end
 
       it_behaves_like 'content with comments'
+      it_behaves_like 'likes posts'
     end
 
     context 'vote discontent ' do
@@ -169,6 +170,7 @@ describe 'Discontent ' do
       end
 
       it_behaves_like 'content with comments', true
+      it_behaves_like 'likes posts', true
 
       context 'like concept' do
         before do
