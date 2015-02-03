@@ -72,7 +72,6 @@ describe 'Discontent ' do
         fill_in 'discontent_post_whered', with: 'disсontent where'
         fill_in 'discontent_post_whend', with: 'disсontent when'
         check 'discontent_post_anonym'
-        check 'discontent_post_anonym'
 
         click_button 'send_post'
         visit journals_path(project: project)
