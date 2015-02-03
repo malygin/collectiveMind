@@ -30,6 +30,8 @@ CollectiveMind::Application.routes.draw do
         put :plus_comment
         put :add_child_comment_form
         put :comment_status
+        put :like
+        put :like_comment
       end
     end
   end

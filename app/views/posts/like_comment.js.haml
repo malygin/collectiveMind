@@ -1,0 +1,9 @@
+-if @vote
+  -if @against == 'true'
+    $("#minus_counter_#{@comment.id}").effect("highlight", {color: '#f5cecd'}, 1000);
+    $("#minus_counter_#{@comment.id}").html(parseInt($("#minus_counter_#{@comment.id}").html())+1)
+    $("#minus_counter_#{@comment.id}").click(function(e) { return false; });
+  -else
+    $("#plus_counter_#{@comment.id}").effect("highlight", {color: '#f5cecd'}, 1000);
+    $("#plus_counter_#{@comment.id}").html(parseInt($("#plus_counter_#{@comment.id}").html())+1)
+    $("#plus_counter_#{@comment.id}").click(function(e) { return false; });

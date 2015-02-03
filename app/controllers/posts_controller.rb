@@ -348,6 +348,25 @@ class PostsController < ApplicationController
     end
   end
 
+
+  def like
+    @post = current_model.find(params[:id])
+    @against = params[:against]
+    @vote = @post.post_votings.create(user: current_user, post: @post, against: @against) unless @post.users.include? current_user
+    respond_to do |format|
+      format.js
+    end
+  end
+
+  def like_comment
+    @comment = comment_model.find(params[:id])
+    @against =  params[:against]
+    @vote = @comment.comment_votings.create(user: current_user, comment: @comment,  against: @against) unless @comment.users.include? current_user
+    respond_to do |format|
+      format.js
+    end
+  end
+
   ### function for voiting
   #return list model for voiting, check stages
   def vote_list
