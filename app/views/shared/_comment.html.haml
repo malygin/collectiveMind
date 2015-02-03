@@ -56,7 +56,21 @@
           %button.reply-comment.btn.btn-success.btn-xs{data:{ project: @project.id, id: comment.id, path: comment.post.class.name.underscore.pluralize}, id: "reply_comment_#{comment.id}" }
             = t('show.answer')
 
+        |
+        =link_to({:action => :like_comment, :project => @project, :id => comment.id, :against => false}, :remote => true, :method => :put, class: "popup-likes", id: "like_comment_#{comment.id}") do
+          %span
+            %span(id="plus_counter_#{comment.id}" style="margin-right:0;")
+              =comment.users_pro.count
+            %i.fa.fa-thumbs-o-up
+        |
+        =link_to({:action => :like_comment, :project => @project,  :id => comment.id, :against => true}, :remote => true, :method => :put, class: "popup-dislikes", id: "dislike_comment_#{comment.id}") do
+          %span
+            %span(id="minus_counter_#{comment.id}" style="margin-right:0;")
+              =comment.users_against.count
+            %i.fa.fa-thumbs-o-down
+
         - if boss? or role_expert?
+          |
           =link_to({action: :plus_comment, id: comment.id}, remote: true, method: :put,  id: "plus_comment_#{comment.id}") do
             -if comment.useful
               %span.text-danger=t('show.revert_score')

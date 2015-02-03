@@ -12,10 +12,10 @@ module BasePost
     has_many :post_votings
     has_many :users, through: :post_votings
 
-    scope :post_votings_pro, -> { joins(:post_votings).where('post_votings.against = ?', false) }
+    has_many :post_votings_pro, -> { joins(:post_votings).where("#{table_name}.against = ?", false) }, class_name: 'PostVoting'
     has_many :users_pro, through: :post_votings_pro, source: :user
 
-    scope :post_votings_against, -> { joins(:post_votings).where('post_votings.against = ?', true) }
+    has_many :post_votings_against, -> { joins(:post_votings).where("#{table_name}.against = ?", true) }, class_name: 'PostVoting'
     has_many :users_against, through: :post_votings_against, source: :user
 
     has_many :admins_pro, -> { where users: {type_user: [1, 6]} }, through: :post_votings_pro, source: :user

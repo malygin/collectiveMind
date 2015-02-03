@@ -81,6 +81,10 @@ textarea.concept_cond {
   max-height: 200px !important;
 }
 
+a.popup-likes, a.popup-dislikes, a.popup-likes:hover, a.popup-dislikes:hover {
+  text-decoration: none !important;
+  cursor: pointer !important;
+}
 
 /* discontent posts */
 .label-t {

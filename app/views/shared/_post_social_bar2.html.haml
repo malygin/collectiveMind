@@ -13,6 +13,18 @@
         - if(count > 0)
           | новых:
           %span.badge=post.comments.where("created_at >= ?", last_time_visit_post(post)).count
+      |
+      =link_to({:controller => post.class.name.underscore.pluralize ,:action => :like, :project => @project, :id => post.id, :against => false}, :remote => true, :method => :put, class: "popup-likes", id: "like_post_#{post.id}") do
+        %span
+          %span(id="plus_counter_#{post.id}" style="margin-right:0;")
+            =post.users_pro.count
+          %i.fa.fa-thumbs-o-up
+      |
+      =link_to({:controller => post.class.name.underscore.pluralize ,:action => :like, :project => @project,  :id => post.id, :against => true}, :remote => true, :method => :put, class: "popup-dislikes", id: "dislike_post_#{post.id}") do
+        %span
+          %span(id="minus_counter_#{post.id}" style="margin-right:0;")
+            =post.users_against.count
+          %i.fa.fa-thumbs-o-down
 
       -if boss? and post.class.name.deconstantize == "Discontent" and [4,5,6,7].include?(@project.status)
         -if post.status == 0
