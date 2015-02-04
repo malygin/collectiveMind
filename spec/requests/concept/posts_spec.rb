@@ -59,6 +59,7 @@ describe 'Concept ' do
         find(:css, "#main_positive_r_1 input.autocomplete[name='resor[][name]']").set('positive_r_1')
         find(:css, "#main_positive_s_1 input.autocomplete[name='resor[][means][][name]']").set('positive_s_1')
 
+        sleep 2
         click_button 'send_post_concept'
         expect(page).to have_content 'Ваше нововведение успешно отредактированно! Вы можете перейти к его просмотру или к просмотру списка нововведений.'
         expect(page).to have_content 'Перейти к списку'
