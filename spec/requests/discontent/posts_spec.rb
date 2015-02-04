@@ -72,11 +72,10 @@ describe 'Discontent ' do
         fill_in 'discontent_post_whered', with: 'disсontent where'
         fill_in 'discontent_post_whend', with: 'disсontent when'
         check 'discontent_post_anonym'
-        check 'discontent_post_anonym'
-
         click_button 'send_post'
+        sleep 2
         visit journals_path(project: project)
-        expect(page).to have_content 'анонимно добавлено несовершенство'
+        expect(page).to have_content I18n.t('journal.add_anonym_discontent')
       end
     end
 
@@ -180,6 +179,7 @@ describe 'Discontent ' do
         it ' like post and have award', js: true do
           expect(page).to have_link("plus_post_#{@discontent1.id}", text: 'Выдать баллы', href: plus_discontent_post_path(project, @discontent1))
           click_link "plus_post_#{@discontent1.id}"
+          sleep 2
           visit journals_path(project: project)
           expect(page).to have_selector('i.fa.fa-trophy')
           visit user_path(project: project, id: user.id)

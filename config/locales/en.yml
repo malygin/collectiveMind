@@ -753,6 +753,7 @@ en:
     self_score: "вы получили #{count} баллов за полезный комментарий!"
     other: 'что то другое'
 
+    add_anonym_discontent: "Add anonym discontent"
   devise:
     mailer: Кто-то (вероятнее все вы) послал запрос на восстанволение пароля на сайте http://mass-decision.ru
     ignor: If you did not send the request, please ignore this message.

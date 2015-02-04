@@ -91,7 +91,7 @@ module JournalHelper
         "добавил(а) комментарий: '#{j.body}'"+ ' к несовершенству '+ link_to("#{j.body2} ... ", "/project/#{project}/discontent/posts/#{j.first_id}?req_comment=#{j.second_id}#comment_#{j.second_id}")
       when 'discontent_post_save'
         if j.anonym
-          ' анонимно добавлено несовершенство  ' + link_to("#{j.body}", "/project/#{project}/discontent/posts/#{j.first_id}")
+          " #{t('journal.add_anonym_discontent')} #{link_to("#{j.body}", "/project/#{project}/discontent/posts/#{j.first_id}")}"
         else
           'добавил(а) несовершенство  ' + link_to("#{j.body}", "/project/#{project}/discontent/posts/#{j.first_id}")
         end
