@@ -45,6 +45,7 @@
 #= require plugins
 #= require comments
 #= require resources
+#= require visits
 #= require visit_chart
 
 # @todo load initialization
@@ -64,6 +65,7 @@ $ ->
 
   post_form()
 
+  record_visit()
   notificate_news()
   notifications()
   editable_groups()

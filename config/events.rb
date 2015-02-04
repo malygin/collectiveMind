@@ -7,6 +7,7 @@ WebsocketRails::EventMap.describe do
   private_channel :notifications
 
   private_channel :visits
+  subscribe :start_visit, to: RecordVisitController, with_method: :start_visit
   subscribe :client_disconnected, to: RecordVisitController, with_method: :stop_visit
 
   private_channel :moderator_chat
