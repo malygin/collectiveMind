@@ -59,13 +59,13 @@
         |
         =link_to({:action => :like_comment, :project => @project, :id => comment.id, :against => false}, :remote => true, :method => :put, class: "popup-likes", id: "like_comment_#{comment.id}") do
           %span
-            %span(id="plus_comment_#{comment.id}" style="margin-right:0;")
+            %span(id="lk_comment_#{comment.id}" style="margin-right:0;")
               =comment.users_pro.count
             %i.fa.fa-thumbs-o-up
         |
         =link_to({:action => :like_comment, :project => @project,  :id => comment.id, :against => true}, :remote => true, :method => :put, class: "popup-dislikes", id: "dislike_comment_#{comment.id}") do
           %span
-            %span(id="minus_comment_#{comment.id}" style="margin-right:0;")
+            %span(id="dlk_comment_#{comment.id}" style="margin-right:0;")
               =comment.users_against.count
             %i.fa.fa-thumbs-o-down
 

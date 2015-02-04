@@ -1,9 +1,9 @@
 -if @vote
   -if @against == 'true'
-    $("#minus_comment_#{@comment.id}").effect("highlight", {color: '#f5cecd'}, 1000);
-    $("#minus_comment_#{@comment.id}").html(parseInt($("#minus_comment_#{@comment.id}").html())+1)
-    $("#minus_comment_#{@comment.id}").click(function(e) { return false; });
+    $("#dlk_comment_#{@comment.id}").effect("highlight", {color: '#f5cecd'}, 1000);
+    $("#dlk_comment_#{@comment.id}").html(parseInt($("#dlk_comment_#{@comment.id}").html())+1)
+    $("#dlk_comment_#{@comment.id}").click(function(e) { return false; });
   -else
-    $("#plus_comment_#{@comment.id}").effect("highlight", {color: '#f5cecd'}, 1000);
-    $("#plus_comment_#{@comment.id}").html(parseInt($("#plus_comment_#{@comment.id}").html())+1)
-    $("#plus_comment_#{@comment.id}").click(function(e) { return false; });
+    $("#lk_comment_#{@comment.id}").effect("highlight", {color: '#f5cecd'}, 1000);
+    $("#lk_comment_#{@comment.id}").html(parseInt($("#lk_comment_#{@comment.id}").html())+1)
+    $("#lk_comment_#{@comment.id}").click(function(e) { return false; });
