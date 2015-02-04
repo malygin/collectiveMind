@@ -199,6 +199,7 @@ describe 'Advices' do
     context 'approve', js: true do
       before do
         click_link "approve_advice_#{@advice_unapproved.id}"
+        sleep 2
       end
 
       it { expect(page).to have_content I18n.t('discontent.advice_success_approved') }
