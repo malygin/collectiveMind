@@ -14,10 +14,10 @@
         Добавлено анонимно
       - if boss? or role_expert? or stat_expert?
         .pull-right
-          =link_to({controller: post_short.class.name.underscore.pluralize, action: :discuss_status, id: post_short.id, discuss_status: 1},  remote: true, method: :put,  id: "discuss_stat_post_#{post_short.id}") do
-            %span.label(class="#{label_discuss_stat(post_short)}")=t('show.discuss')
-          =link_to({controller: post_short.class.name.underscore.pluralize, action: :discuss_status, id: post_short.id, approve_status: 1},  remote: true, method: :put,  id: "approve_stat_post_#{post_short.id}") do
-            %span.label(class="#{label_approve_stat(post_short)}")=t('show.important')
+          =link_to({controller: post_short.class.name.underscore.pluralize, action: :discuss_status, id: post_short.id, discuss_status: 1},  remote: true, method: :put, class: "link_status", id: "discuss_stat_post_#{post_short.id}") do
+            %span.label_discuss.label(class="#{label_discuss_stat(post_short)}")=t('show.discuss')
+          =link_to({controller: post_short.class.name.underscore.pluralize, action: :discuss_status, id: post_short.id, approve_status: 1},  remote: true, method: :put, class: "link_status", id: "approve_stat_post_#{post_short.id}") do
+            %span.label_approve.label(class="#{label_approve_stat(post_short)}")=t('show.important')
       - else
         .pull-right
           -if post_short.discuss_status
