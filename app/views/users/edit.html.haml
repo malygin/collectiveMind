@@ -1,33 +1,34 @@
-%section.widget
-    .body
-        %h3=t('form.user.title')
-        = form_for @user, url: { action: :update, type:@project.id } do |f|
-            =render 'shared/notice_messages', object: f.object
-            .field
-                = f.label :name, t('form.user.name')
-                %br
-                = f.text_field :name
-            .field
-                = f.label :surname, t('form.user.surname')
-                %br
-                = f.text_field :surname
-
-            .field
-                = f.label :email, t('form.user.email')
-                %br
-                = f.text_field :email
-
-
-            .field
-                %br
-                = f.label :avatar, t('form.user.avatar')
-                %br
-                = f.file_field :avatar
-            %br
-            %br
-            %br
-            .action
-                = f.submit t('form.save'), class: 'btn btn-primary'
-        %br
-
-
+%section.widget.col-md-8
+  .body
+    %h3
+      = t('form.user.title')
+    = form_for @user, url: {action: :update, type: @project.id}, class: 'form form-horizontal' do |f|
+      = render 'shared/notice_messages', object: f.object
+      %fieldset
+        .form-group
+          %i.fa.fa-male
+          = f.label :name, t('form.user.name')
+          = f.text_field :name, class: 'form-control'
+        .form-group
+          %i.fa.fa-male
+          = f.label :surname, t('form.user.surname')
+          = f.text_field :surname, class: 'form-control'
+        .form-group
+          %i.fa.fa-male
+          = f.label :email, t('form.user.email')
+          = f.text_field :email, class: 'form-control'
+        .form-group
+          %i.fa.fa-skype
+          = f.label :skype, t('form.user.skype')
+          = f.text_field :skype, class: 'form-control'
+        .form-group
+          %i.fa.fa-phone
+          = f.label :phone, t('form.user.phone')
+          = f.text_field :phone, class: 'form-control'
+        .form-group
+          %i.fa.fa-file-image-o
+          = f.label :avatar, t('form.user.avatar')
+          = f.file_field :avatar, class: 'form-control'
+        .form-group
+          .col-sm-offset-2
+            = f.submit t('form.save'), class: 'button btn btn-success pull-right'
