@@ -104,13 +104,15 @@ shared_examples 'content with comments' do |moderator = false, count = 2|
   end
 
   context 'mark comment as', js: true do
-    it 'discontent' do
-      within :css, "a#discontent_comment_#{@comment_1.id}" do
-        expect(page).to have_css 'span.label-default'
-      end
-      click_link "discontent_comment_#{@comment_1.id}"
-      within :css, "a#discontent_comment_#{@comment_1.id}" do
-        expect(page).to have_css 'span.label-danger'
+    if project.status < 7
+      it 'discontent' do
+        within :css, "a#discontent_comment_#{@comment_1.id}" do
+          expect(page).to have_css 'span.label-default'
+        end
+        click_link "discontent_comment_#{@comment_1.id}"
+        within :css, "a#discontent_comment_#{@comment_1.id}" do
+          expect(page).to have_css 'span.label-danger'
+        end
       end
     end
 

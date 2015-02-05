@@ -128,19 +128,19 @@ class Concept::Post < ActiveRecord::Base
   def fullness_title
     fullness = 0
     if self.fullness.present?
-      if post.status_name and post.status_content
+      if self.status_name and self.status_content
         fullness+=40
       end
-      if post.status_positive and post.status_positive_r
+      if self.status_positive and self.status_positive_r
         fullness+=30
       end
-      if post.status_negative and post.status_negative_r
+      if self.status_negative and self.status_negative_r
         fullness+=20
       end
-      if post.status_control and post.status_control_r
+      if self.status_control and self.status_control_r
         fullness+=10
       end
-      if post.status_obstacles and post.status_problems and post.status_reality
+      if self.status_obstacles and self.status_problems and self.status_reality
         fullness+=10
       end
     end
