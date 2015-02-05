@@ -52,7 +52,7 @@ class Discontent::PostsController < PostsController
     if params[:asp]
      @aspect =  Discontent::Aspect.find(params[:asp])
     else
-      if not params[:not_aspect]
+      if not (params[:not_aspect] or params[:all_aspects])
         redirect_to "/project/#{@project.id}/discontent/posts?asp=#{@project.proc_aspects.order("position DESC").first.id}"
         return
       end
@@ -62,6 +62,8 @@ class Discontent::PostsController < PostsController
     @page = params[:page]
     if params[:not_aspect]
       @posts = @project.discontents_without_aspect.by_status_for_discontent(@project).order("discontent_posts.id DESC").filter(filtering_params(params))
+    elsif params[:all_aspects]
+      @posts = @project.discontents.by_status([0,1]).order("discontent_posts.id DESC").filter(filtering_params(params))
     else
       @posts = @aspect.aspect_posts.by_status_for_discontent(@project).order("discontent_posts.id DESC").filter(filtering_params(params)) if @aspect
     end

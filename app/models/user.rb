@@ -222,7 +222,7 @@ class User < ActiveRecord::Base
       when :plus_comment
         self.add_score_by_type(h[:project], 5, :score_a)
         # self.journals.build(type_event:'useful_comment', project: h[:project], body:"#{h[:comment].content[0..24]}:#{h[:path]}/#{h[:comment].post.id}#comment_#{h[:comment].id}").save!
-        self.journals.build(type_event: 'my_add_score_comment', project: h[:project], user_informed: self, body: "5", viewed: false, personal: true).save!
+        self.journals.build(type_event: 'my_add_score_comment', project: h[:project], user_informed: self, body: "5", first_id: h[:comment].id, viewed: false, personal: true).save!
 
       when :plus_post
         self.add_score_by_type(h[:project], 25, :score_g) if h[:post].instance_of? Essay::Post
@@ -250,7 +250,7 @@ class User < ActiveRecord::Base
             self.journals.build(type_event: 'my_add_score_concept_improve', project: h[:project], user_informed: comment.user, body: "20", first_id: h[:post].id, body2: trim_content(h[:post].content), viewed: false, personal: true).save!
           end
         end
-        self.add_score_by_type(h[:project], 10, :score_g) if h[:post].instance_of? LifeTape::Post
+        # self.add_score_by_type(h[:project], 10, :score_g) if h[:post].instance_of? LifeTape::Post
       when :plus_field
         if h[:post].instance_of? Concept::Post
           # self.add_score_by_type(h[:project], h[:post].fullness.nil? ? 40 : h[:post].fullness + 39, :score_g)
@@ -277,12 +277,29 @@ class User < ActiveRecord::Base
         self.add_score_by_type(h[:project], 10, :score_g)
       when :to_archive_plus_comment
         self.add_score_by_type(h[:project], -5, :score_a)
+        Journal.destroy_journal_record(h[:project],'my_add_score_comment', self, h[:comment], true)
       when :to_archive_plus_post
         self.add_score_by_type(h[:project], -score_for_plus_post(h[:post]), :score_g)
+
+        if h[:post].instance_of? Discontent::Post
+          Journal.destroy_journal_record(h[:project],'my_add_score_discontent', self, h[:post], true)
+          if h[:post].improve_comment
+            comment = get_comment_for_stage(h[:post].improve_stage, h[:post].improve_comment)
+            comment.user.add_score_by_type(h[:project], -10, :score_g)
+            Journal.destroy_journal_record(h[:project],'my_add_score_discontent_improve', comment.user, h[:post], true)
+          end
+        end
+
       when :to_archive_plus_field
-        self.add_score_by_type(h[:project], -score_for_concept_field(h[:post],h[:type_field], true), :score_g)
+        self.add_score_by_type(h[:project], -score_for_concept_field(h[:post], h[:type_field], true), :score_g)
+        if h[:post].instance_of? Concept::Post and ['status_name','status_content'].include?(h[:type_field])
+          Journal.destroy_journal_record(h[:project],'my_add_score_concept', self, h[:post], true)
+        end
       when :to_archive_plus_field_all
         self.add_score_by_type(h[:project], -(h[:post].fullness.nil? ? 40 : h[:post].fullness), :score_g)
+        if h[:post].instance_of? Concept::Post
+          Journal.destroy_journal_record(h[:project],'my_add_score_concept', self, h[:post], true)
+        end
       when :useful_advice
         add_score_by_type(h[:project], 10, :score_g)
     end

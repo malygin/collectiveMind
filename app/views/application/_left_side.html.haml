@@ -4,6 +4,12 @@
     %a
       %h4=t('menu.list_aspects')
 
+  -if (boss? or role_expert?) and current_stage == 'discontent/posts'
+    %li{class:"#{'active' if params[:all_aspects]}"}
+      = link_to "#{discontent_posts_path(@project)}" + "?all_aspects=true" do
+        %i.fa.fa-book
+        Все несовершенства
+
   -@project.current_aspects(current_stage).each do |asp|
     = render partial: 'aspect', object: asp, locals: {current_stage: current_stage}
     -#%span.pull-right

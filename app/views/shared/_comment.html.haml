@@ -73,9 +73,9 @@
           |
           =link_to({action: :plus_comment, id: comment.id}, remote: true, method: :put,  id: "plus_comment_#{comment.id}") do
             -if comment.useful
-              %span.text-danger=t('show.revert_score')
+              %span.label.label-danger=t('show.revert_score')
             - else
-              %span.text-success=t('show.add_score')
+              %span.label.label-success=t('show.add_score')
       .time.pull-left
         = time_ago_in_words(comment.created_at)
       %br

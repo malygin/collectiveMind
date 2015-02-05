@@ -44,18 +44,28 @@ class Award < ActiveRecord::Base
       if awk.clicks < 1
         a = Award.find_by_url('1like')
         UserAward.where(user: h[:user], award: a, project: h[:project]).destroy_all
+        Journal.destroy_journal_award(h[:project], 'award_1like', false)
+        Journal.destroy_journal_award(h[:project],'my_award_1like', true, h[:user])
       elsif awk.clicks < 3
         a = Award.find_by_url('3likes')
         UserAward.where(user: h[:user], award: a, project: h[:project]).destroy_all
+        Journal.destroy_journal_award(h[:project], 'award_3likes', false)
+        Journal.destroy_journal_award(h[:project],'my_award_3likes', true, h[:user])
       elsif awk.clicks < 5
         a = Award.find_by_url('5likes')
         UserAward.where(user: h[:user], award: a, project: h[:project]).destroy_all
+        Journal.destroy_journal_award(h[:project], 'award_5likes', false)
+        Journal.destroy_journal_award(h[:project],'my_award_5likes', true, h[:user])
       elsif awk.clicks < 15
         a = Award.find_by_url('15likes')
         UserAward.where(user: h[:user], award: a, project: h[:project]).destroy_all
+        Journal.destroy_journal_award(h[:project], 'award_15likes', false)
+        Journal.destroy_journal_award(h[:project],'my_award_15likes', true, h[:user])
       elsif awk.clicks < 50
         a = Award.find_by_url('50likes')
         UserAward.where(user: h[:user], award: a, project: h[:project]).destroy_all
+        Journal.destroy_journal_award(h[:project], 'award_50likes', false)
+        Journal.destroy_journal_award(h[:project],'my_award_50likes', true, h[:user])
       end
     elsif h[:type] == 'add'
       if h[:post].instance_of? Discontent::Post

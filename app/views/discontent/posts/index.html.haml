@@ -1,4 +1,4 @@
-- if can_union_discontents?(@project) and @aspect
+- if can_union_discontents?(@project) and @aspect and params[:all_aspects].nil?
   %section
     .body.widget-panel
       %ul.nav.nav-tabs#tab_posts
@@ -43,6 +43,7 @@
             .col-md-6
               .chat-messages
                 = render partial: 'shared/improve_comment',collection: @comments_all
+
         #new_posts.tab-pane.fade
 
 - else

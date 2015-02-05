@@ -74,9 +74,9 @@
 
       - if boss? or role_expert?
         - if not (post.class.name.deconstantize == "Discontent" and [2,4].include?(post.status))
-          =link_to({controller: post.class.name.underscore.pluralize, action: :plus,project: @project, id: post.id},  remote: true, method: :put,  id: "plus_post_#{post.id}") do
-            |
+          |
+          =link_to({controller: post.class.name.underscore.pluralize, action: :plus, project: @project, id: post.id},  remote: true, method: :put,  id: "plus_post_#{post.id}") do
             -if post.useful
-              %span.text-danger=t('show.revert_score')
+              %span.label.label-danger=t('show.revert_score')
             -else
-              %span.text-success=t('show.add_score')
+              %span.label.label-success=t('show.add_score')

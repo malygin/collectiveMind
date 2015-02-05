@@ -89,6 +89,14 @@ class Journal < ActiveRecord::Base
     where(:project_id => project.id, :user_id => comment.user, :second_id => comment.id).destroy_all
   end
 
+  def self.destroy_journal_record(project, type_event, user_informed, post, personal)
+    where(:project_id => project.id, :type_event => type_event, :user_informed => user_informed, :first_id => post.id, :personal => personal).destroy_all
+  end
+
+  def self.destroy_journal_award(project, type_event, personal, user_informed = nil)
+    where(:project_id => project.id, :type_event => type_event, :user_informed => user_informed, :personal => personal).last.destroy
+  end
+
   private
 
   def send_last_news
