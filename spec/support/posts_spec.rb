@@ -31,17 +31,12 @@ shared_examples 'content with comments' do |moderator = false, count = 2|
     expect(page).to have_link("like_comment_#{@comment_1.id}", href: like_comment_path + '?against=false')
     expect(page).to have_link("dislike_comment_#{@comment_1.id}", href: like_comment_path + '?against=true')
     click_link "like_comment_#{@comment_1.id}"
-    within :css, "span#plus_counter_#{@comment_1.id}" do
-      expect(page).to have_content '1'
-    end
-
-    click_link "like_comment_#{@comment_1.id}"
-    within :css, "span#plus_counter_#{@comment_1.id}" do
+    within :css, "span#lk_comment_#{@comment_1.id}" do
       expect(page).to have_content '1'
     end
 
     click_link "dislike_comment_#{@comment_1.id}"
-    within :css, "span#minus_counter_#{@comment_1.id}" do
+    within :css, "span#dlk_comment_#{@comment_1.id}" do
       expect(page).to have_content '0'
     end
   end

@@ -382,6 +382,8 @@ en:
       email: 'Почта'
       avatar: 'Выберите файл для аватара'
 
+      skype: "Skype"
+      phone: "Phone"
     estimate:
       negative: Оценка негативных явлений
       planwhole: Общая оценка проекта

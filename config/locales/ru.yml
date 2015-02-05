@@ -404,6 +404,8 @@ ru:
       email: 'Почта'
       avatar: 'Выберите файл для аватара'
 
+      skype: "Skype"
+      phone: "Телефон"
     estimate:
       negative: Оценка негативных явлений
       planwhole: Общая оценка проекта
