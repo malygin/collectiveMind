@@ -1,4 +1,4 @@
-.media.option_for_selectize(id="post_#{@post.id}" data-project="#{@project.id}" data-post="#{@post.id}" data-stage="discontent")
+.media.show_discontent_block.option_for_selectize(id="post_#{@post.id}" data-project="#{@project.id}" data-post="#{@post.id}" data-stage="discontent")
   - if @post.user and not @post.anonym
     = render 'users/user_post', user: @post.user
   .media-body
