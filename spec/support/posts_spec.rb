@@ -15,9 +15,11 @@ shared_examples 'content with comments' do |moderator = false, count = 2, projec
 
       expect(page).to have_link("plus_comment_#{@comment_1.id}", text: 'Выдать баллы', href: plus_comment_path)
       click_link "plus_comment_#{@comment_1.id}"
+      sleep(5)
       expect(page).to have_link("plus_comment_#{@comment_1.id}", text: 'Забрать баллы', href: plus_comment_path)
+      sleep(5)
       click_link "plus_comment_#{@comment_1.id}"
-      expect(page).to have_link("plus_comment_#{@comment_1.id}", text: 'Забрать баллы', href: plus_comment_path)
+      expect(page).to have_link("plus_comment_#{@comment_1.id}", text: 'Выдать баллы', href: plus_comment_path)
     end
   else
     it ' not button like' do
@@ -214,7 +216,9 @@ shared_examples 'likes posts' do |moderator = false|
 
       expect(page).to have_link("plus_post_#{@post1.id}", text: 'Выдать баллы', href: plus_post_path)
       click_link "plus_post_#{@post1.id}"
+      sleep(5)
       expect(page).to have_link("plus_post_#{@post1.id}", text: 'Забрать баллы', href: plus_post_path)
+      sleep(5)
       click_link "plus_post_#{@post1.id}"
       expect(page).to have_link("plus_post_#{@post1.id}", text: 'Выдать баллы', href: plus_post_path)
     end
