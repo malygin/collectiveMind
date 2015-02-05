@@ -1,4 +1,4 @@
-shared_examples 'content with comments' do |moderator = false, count = 2|
+shared_examples 'content with comments' do |moderator = false, count = 2, project_status = 1|
   let(:comment_model) { @comment_2.class.name.underscore.gsub('/comment', '_comment') }
   let(:comment_model_name) { @comment_2.class.name.constantize }
   let(:comment_post_model) { @comment_2.class.name.underscore.gsub('/comment', '_post') }
@@ -104,7 +104,7 @@ shared_examples 'content with comments' do |moderator = false, count = 2|
   end
 
   context 'mark comment as', js: true do
-    if project.status < 7
+    if project_status < 7
       it 'discontent' do
         within :css, "a#discontent_comment_#{@comment_1.id}" do
           expect(page).to have_css 'span.label-default'
