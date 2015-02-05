@@ -3,11 +3,41 @@ require 'spec_helper'
 describe 'Users ' do
   subject { page }
   let (:user) { create :user }
+  let (:moderator) { create :moderator }
   let (:project) { create :core_project, status: 1, advices_concept: true, advices_discontent: true }
+  let!(:project_user) { create :core_project_user, user: user, core_project: project }
+  let!(:project_user2) { create :core_project_user, user: moderator, core_project: project }
 
   context 'ordinary user sign in ' do
     before do
       sign_in user
+    end
+
+    context 'edit profile' do
+      it 'owner - ok' do
+        new_name = 'Cool new name'
+        new_surname = 'My cool surname'
+        click_link 'user_profile'
+        click_link 'edit_profile'
+        fill_in 'user_name', with: new_name
+        fill_in 'user_surname', with: new_surname
+        click_button 'update_profile'
+        expect(current_path).to eq user_path(project.id, user.id)
+        expect(page).to have_content new_name
+        expect(page).to have_content new_surname
+      end
+
+      context 'other user' do
+        it 'not show link' do
+          visit user_path(project, moderator)
+          expect(page).not_to have_link 'edit_profile'
+        end
+
+        it 'not access by direct link' do
+          visit edit_user_path(project, moderator)
+          expect(current_path).to eq root_path
+        end
+      end
     end
 
     context 'my journal', js: true do
@@ -67,10 +97,6 @@ describe 'Users ' do
   end
 
   context 'moderator sign in ' do
-
-  end
-
-  context 'expert sign in ' do
 
   end
 end

@@ -1,15 +1,15 @@
 %ul.side-nav
   %li.active
-    = link_to  user_path(@project, current_user) do
+    = link_to user_path(@project, current_user) do
       %i.glyphicon.glyphicon-user
-      =t('menu.account')
+      = t('menu.account')
 
-  - if current_user
+  - if current_user == @user
     %li
-      = link_to edit_user_path(@project, current_user) do
+      = link_to edit_user_path(@project, current_user), id: 'edit_profile' do
         %i.glyphicon.glyphicon-cog
-        =t('menu.profile_edit')
+        = t('menu.profile_edit')
     %li
       = link_to edit_notice_user_path(@project, current_user) do
         %i.glyphicon.glyphicon-envelope
-        =t('menu.notice_edit')
+        = t('menu.notice_edit')
