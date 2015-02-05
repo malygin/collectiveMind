@@ -35,7 +35,8 @@
 
       .pull-right
         =link_for_improve(improve_comment).html_safe if link_for_improve(improve_comment)
-        =link_to "#{@project.status < 7 ? t('show.improve.name_discontent') : t('show.improve.name_concept')}", {:action => :new, :asp => params[:asp] ? params[:asp] : @project.proc_aspects.order(:id).first, :improve_comment => improve_comment.id, :improve_stage => get_stage_for_improve(improve_comment.get_class) }, :method => :get,  id: "improve_comment_#{improve_comment.id}", class: 'btn btn-success btn-xs'
+        -if [3,7].include? @project.status
+          =link_to "#{@project.status < 7 ? t('show.improve.name_discontent') : t('show.improve.name_concept')}", {:action => :new, :asp => params[:asp] ? params[:asp] : @project.proc_aspects.order(:id).first, :improve_comment => improve_comment.id, :improve_stage => get_stage_for_improve(improve_comment.get_class) }, :method => :get,  id: "improve_comment_#{improve_comment.id}", class: 'btn btn-success btn-xs'
         |
         =link_to({controller: improve_comment.class.name.underscore.pluralize.gsub('/comments', '/posts'), :action => :like_comment, :project => @project, :id => improve_comment.id, :against => false}, :remote => true, :method => :put, class: "popup-likes", id: "like_comment_#{improve_comment.id}") do
           %span
@@ -48,13 +49,13 @@
             %span(id="minus_counter_#{improve_comment.id}" style="margin-right:0;")
               =improve_comment.users_against.count
             %i.fa.fa-thumbs-o-down
-        - if boss?
-          |
-          =link_to({action: :plus_comment, id: improve_comment.id},  remote: true, method: :put,  id: "plus_comment_#{improve_comment.id}") do
-            -if improve_comment.useful
-              %span.text-danger=t('show.revert_score')
-            -else
-              %span.text-success=t('show.add_score')
+        -#- if boss?
+        -#  |
+        -#  =link_to({action: :plus_comment, id: improve_comment.id},  remote: true, method: :put,  id: "plus_comment_#{improve_comment.id}") do
+        -#    -if improve_comment.useful
+        -#      %span.text-danger=t('show.revert_score')
+        -#    -else
+        -#      %span.text-success=t('show.add_score')
 
       .time.pull-left
         =time_ago_in_words(improve_comment.created_at)

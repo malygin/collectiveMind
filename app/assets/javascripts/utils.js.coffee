@@ -28,6 +28,14 @@ $('#PlanTabsShow li#third a').on "click", (e) ->
   $('#spinner_tab3').show()
   render_concept_side()
 
+
+$('#tab_posts li#new a').on "click", (e) ->
+  project_id = $(this).data('project')
+  if project_id
+    $.ajax
+      url: "/project/#{project_id}/discontent/posts/unions"
+      type: "get"
+
 @post_form = ->
   this.activate_button = ->
     form = $(this).closest('form');
@@ -39,6 +47,8 @@ $('#PlanTabsShow li#third a').on "click", (e) ->
 
   $('.form-new-post').on('keyup', 'textarea.post-textarea', this.activate_button)
   $('#form_for_group_discontent').on('keyup', 'textarea.post-textarea', this.activate_button)
+  $('#modal_stage').on('keyup', 'input.name-stage', this.activate_button)
+
 
 
 @estimate_stage = ->

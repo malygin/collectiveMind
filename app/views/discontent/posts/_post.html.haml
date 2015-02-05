@@ -11,7 +11,7 @@
         %small.text-muted= Russian::strftime(post.created_at,'%d %B %k:%M:%S')
     = render 'shared/post_social_bar2', post: post
     %span
-      - if post.status == 2 and boss?
+      - if (post.status == 2 or post.status == 4) and boss?
         = link_to t('show.discontent.ungroup'), {action: :ungroup_union, id: post.id}, method: :put, data: {confirm: t('confirm.accept')}, class: 'btn btn-danger btn-xs'
         \|
         = link_to t('show.discontent.edit_group'), {action: :edit_group, id: post.id}, remote: true, class: 'btn btn-primary btn-xs'
