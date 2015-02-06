@@ -50,7 +50,7 @@ class Discontent::PostsController < PostsController
     return redirect_to action: 'vote_list' if current_user.can_vote_for(:discontent, @project)
 
     if params[:asp]
-     @aspect =  Discontent::Aspect.find(params[:asp])
+      @aspect =  Discontent::Aspect.find(params[:asp])
     else
       if not (params[:not_aspect] or params[:all_aspects])
         redirect_to "/project/#{@project.id}/discontent/posts?asp=#{@project.proc_aspects.order("position DESC").first.id}"

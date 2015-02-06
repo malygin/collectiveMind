@@ -12,7 +12,7 @@
   -else
     %span(id="what_content_#{post_content.id}")=post_content.content
 
-  - if boss? and @project.status == 4
+  - if boss? and (@project.status == 4 or @project.status == 5)
     %div(style="display:none;" id="change_group_success_#{post_content.id}" data-type="#{@type_tab == 'new_posts' ? 'new_posts' : 'origin_posts'}")
       .color-green Несовершенство успешно перенесено в группу
   %ul.ul-union-list(id="post_content_#{post_content.id}" data-type="#{@type_tab == 'new_posts' ? 'new_posts' : 'origin_posts'}" style="list-style: disc inside;")
@@ -25,7 +25,7 @@
           %li.union-list{id: "li_id_#{dp.id}"}=dp.content
       -else
         %li.union-list{id: "li_id_#{dp.id}", "data-type" => "#{@type_tab == 'new_posts' ? 'new_posts' : 'origin_posts'}"}=dp.content
-      - if boss? and @project.status == 4
+      - if boss? and (@project.status == 4 or @project.status == 5)
         .discontents_group_select{id: "group_select_#{dp.id}", "data-type" => "#{@type_tab == 'new_posts' ? 'new_posts' : 'origin_posts'}"}
           -if @accepted_posts
             = select_tag 'select_for_discontents_group', options_from_collection_for_select(@accepted_posts, "id", "content"),
