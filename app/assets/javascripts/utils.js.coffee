@@ -31,6 +31,7 @@ $('#PlanTabsShow li#third a').on "click", (e) ->
 
 $('#tab_posts li#new a').on "click", (e) ->
   project_id = $(this).data('project')
+  $('#spinner_tab_unions').show()
   if project_id
     $.ajax
       url: "/project/#{project_id}/discontent/posts/unions"

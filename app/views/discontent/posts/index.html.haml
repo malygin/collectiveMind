@@ -9,6 +9,9 @@
           %a{href: "#new_posts", "data-toggle" => "tab", role: "tab", "data-project" => "#{@project.id}"}
             ="#{t('show.discontent.unions')} #{@project.discontents.by_status([2,4]).count}"
             -#=link_to "#{t('show.discontent.unions')} #{@project.discontent_accepted_post.count}", "/project/#{@project.id}/discontent/posts/unions", remote: true, "data-toggle" => "tab", role: "tab"
+          #spinner_tab_unions.loader.animated.handle(style="display:none;")
+            %span.spinner
+              %i.fa.fa-spinner.fa-spin
         %li#imp
           %a{href: "#improve", "data-toggle" => "tab", role: "tab"}
             =t('show.improve.problem')
@@ -32,6 +35,7 @@
             .col-md-6
               %section
                 %header
+                  .pull-right
                   %h4=t('show.discontent.title')
                 .body
                   %ul.news-list
