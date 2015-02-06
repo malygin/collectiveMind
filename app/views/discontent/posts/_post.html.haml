@@ -21,7 +21,7 @@
       = hidden_field_tag 'posts[]', post.id
       .pull-right
         %a.btn.btn-xs.btn-danger(onclick="remove_block('post_#{post.id}');")=t('show.discontent.remove_from_group')
-    - if can_union_discontents?(@project) and post.status == 1
+    - if can_union_discontents?(@project) and post.status == 1 and @post
       .pull-right{id: "url_post_#{post.id}"}
         = link_to({action: :remove_union, post_id: post.id}, remote: @post.one_last_post? ? false : true, method: :put) do
           .btn.btn-xs.btn-danger=t('link.remove')
