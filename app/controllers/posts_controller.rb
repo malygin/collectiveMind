@@ -302,6 +302,7 @@ class PostsController < ApplicationController
         Award.reward(user: @post.user, post: @post, project: @project, type: 'add')
       else
         @post.user.add_score(type: :to_archive_plus_post, project: @project, post: @post, path: @post.class.name.underscore.pluralize)
+        Award.reward(user: @post.user, post: @post, project: @project, type: 'remove')
       end
     end
     if @post.instance_of? Discontent::Post

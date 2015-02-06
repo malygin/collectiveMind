@@ -93,8 +93,8 @@ class Journal < ActiveRecord::Base
     where(:project_id => project.id, :type_event => type_event, :user_informed => user_informed, :first_id => post.id, :personal => personal).destroy_all
   end
 
-  def self.destroy_journal_award(project, type_event, personal, user_informed = nil)
-    where(:project_id => project.id, :type_event => type_event, :user_informed => user_informed, :personal => personal).last.destroy
+  def self.destroy_journal_award(project, type_event, personal, user, user_informed = nil)
+    where(:project_id => project.id, :type_event => type_event, :user_id => user.id, :user_informed => user_informed, :personal => personal).last.destroy
   end
 
   private

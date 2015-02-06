@@ -383,17 +383,17 @@ module ApplicationHelper
 
   def get_comment_for_stage(stage, id)
     case stage
-      when '1'
+      when '1', 1
         LifeTape::Comment.find(id)
-      when '2'
+      when '2', 2
         Discontent::Comment.find(id)
-      when '3'
+      when '3', 3
         Concept::Comment.find(id)
-      when '4'
+      when '4', 4
         Plan::Comment.find(id)
-      when '5'
+      when '5', 5
         Estimate::Comment.find(id)
-      when '6'
+      when '6', 6
         Essay::Comment.find(id)
     end
   end
