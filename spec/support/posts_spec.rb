@@ -13,13 +13,13 @@ shared_examples 'content with comments' do |moderator = false, count = 2, projec
       prepare_awards
       plus_comment_path = Rails.application.routes.url_helpers.send("plus_comment_#{comment_post_model}_path", project, @comment_1)
 
-      expect(page).to have_link("plus_comment_#{@comment_1.id}", text: 'Выдать баллы', href: plus_comment_path)
+      # expect(page).to have_css("a#plus_comment_#{@comment_1.id}", text: 'Выдать баллы')
       click_link "plus_comment_#{@comment_1.id}"
       sleep(5)
-      expect(page).to have_link("plus_comment_#{@comment_1.id}", text: 'Забрать баллы', href: plus_comment_path)
+      expect(page).to have_css("a#plus_comment_#{@comment_1.id}", text: 'Забрать баллы', href: plus_comment_path)
       sleep(5)
       click_link "plus_comment_#{@comment_1.id}"
-      expect(page).to have_link("plus_comment_#{@comment_1.id}", text: 'Выдать баллы', href: plus_comment_path)
+      expect(page).to have_css("a#plus_comment_#{@comment_1.id}", text: 'Выдать баллы', href: plus_comment_path)
     end
   else
     it ' not button like' do

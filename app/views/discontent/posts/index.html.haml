@@ -98,7 +98,11 @@
           %br
 
         %ul.news-list#tab_discontents
-          =render partial:'post_short', collection: @posts
+          - if params[:all_aspects]
+            =render partial:'post', collection: @posts
+          -else
+            =render partial:'post_short', collection: @posts
+
 
 
   .col-md-6
