@@ -215,7 +215,7 @@ class Discontent::Post < ActiveRecord::Base
   end
 
   def self.united_for_vote_new(project, voted)
-    all_posts = self.where(project_id: project, status: [2,4]).where.not(id: voted).order(:id)
+    all_posts = self.where(project_id: project, status: [2,4]).where.not(id: voted).includes(:post_aspects).order("discontent_aspects.id")
     one_posts = []
     many_posts = []
     all_posts.each do |post|
