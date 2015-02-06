@@ -15,16 +15,17 @@ shared_examples 'content with comments' do |moderator = false, count = 2, projec
 
       expect(page).to have_css("a#plus_comment_#{@comment_1.id} span", text: 'Выдать баллы')
       click_link("plus_comment_#{@comment_1.id}")
+      sleep 5
       expect(page).to have_css("a#plus_comment_#{@comment_1.id} span", text: 'Забрать баллы')
 
     end
   else
-    xit ' not button like' do
+    it ' not button like' do
       expect(page).not_to have_link("plus_comment_#{@comment_1.id}")
     end
   end
 
-  xit ' user likes comment', js: true do
+  it ' user likes comment', js: true do
     like_comment_path = Rails.application.routes.url_helpers.send("like_comment_#{comment_post_model}_path", project, @comment_1)
 
     expect(page).to have_link("like_comment_#{@comment_1.id}", href: like_comment_path + '?against=false')
@@ -40,11 +41,11 @@ shared_examples 'content with comments' do |moderator = false, count = 2, projec
     end
   end
 
-  xit 'view comments ' do
+  it 'view comments ' do
     expect(page).to have_content @comment_1.content
   end
 
-  context 'add new comment',skip: true, js: true do
+  context 'add new comment',js: true do
     before do
       fill_in 'comment_text_area', with: text_comment
       find('input.send-comment').click
@@ -55,7 +56,7 @@ shared_examples 'content with comments' do |moderator = false, count = 2, projec
     it { expect change(Journal, :count).by(count) }
   end
 
-  xit 'add new comment with image', js: true do
+  it 'add new comment with image', js: true do
     fill_in 'comment_text_area', with: text_comment
     attach_file("#{comment_model}_image", "#{Rails.root}/spec/support/images/1.jpg")
     sleep(5)
@@ -67,21 +68,21 @@ shared_examples 'content with comments' do |moderator = false, count = 2, projec
     Cloudinary::Api.delete_resources('comments/'+ page.first('a.image-popup-vertical-fit img')['alt'].downcase)
   end
 
-  context ' add new answer comment', skip: true,js: true do
+  context ' add new answer comment',js: true do
     before do
       click_button "reply_comment_#{@comment_1.id}"
       find("#form_reply_comment_#{@comment_1.id}").find('.comment-textarea').set text_comment
       find("#form_reply_comment_#{@comment_1.id}").find('.send-comment').click
     end
 
-    xit { expect(page).to have_content text_comment }
+    it { expect(page).to have_content text_comment }
 
-    xit { expect change(comment_model_name, :count).by(1) }
+    it { expect change(comment_model_name, :count).by(1) }
 
-    xit { expect change(Journal.events_for_my_feed(project, user_data), :count).by(1) }
+    it { expect change(Journal.events_for_my_feed(project, user_data), :count).by(1) }
   end
 
-  context 'add new answer to answer comment', skip: true,js: true do
+  context 'add new answer to answer comment', js: true do
     before do
       click_button "reply_comment_#{@comment_2.id}"
       find("#form_reply_comment_#{@comment_2.id}").find('.comment-textarea').set text_comment
@@ -95,14 +96,14 @@ shared_examples 'content with comments' do |moderator = false, count = 2, projec
     it { expect change(Journal.events_for_my_feed(project, user_data), :count).by(1) }
   end
 
-  xit 'paginate comments' do
+  it 'paginate comments' do
     create_list comment_model.to_sym, 11, post: @comment_1.post
     refresh_page
     expect(page).to have_css 'div.pagination'
     expect(page).to have_css 'a.previous_page'
   end
 
-  context 'mark comment as', skip: true,js: true do
+  context 'mark comment as',js: true do
     if project_status < 7
       it 'discontent' do
         within :css, "a#discontent_comment_#{@comment_1.id}" do
@@ -160,7 +161,7 @@ shared_examples 'content with comments' do |moderator = false, count = 2, projec
     end
   end
 
-  context 'edit comment', skip: true,js: true do
+  context 'edit comment', js: true do
     it 'i owner - ok' do
       click_button "edit_comment_#{@comment_1.id}"
       find("#form_edit_comment_#{@comment_1.id}").find('.comment-textarea').set text_comment
@@ -172,7 +173,7 @@ shared_examples 'content with comments' do |moderator = false, count = 2, projec
     end
   end
 
-  context 'destroy comment', skip: true do
+  context 'destroy comment'do
     it 'i owner - ok', js: true do
       expect {
         click_link "destroy_comment_#{@comment_1.id}"
