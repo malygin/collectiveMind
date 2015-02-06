@@ -174,14 +174,15 @@ class Core::Project < ActiveRecord::Base
 
   def get_united_posts_for_vote(user)
     voted = user.voted_discontent_posts.pluck(:id)
-    Discontent::Post.united_for_vote(self.id, voted)
+    Discontent::Post.united_for_vote_new(self.id, voted)
+
+    # Discontent::Post.united_for_vote(self.id, voted)
   end
 
   def get_concept_posts_for_vote(user)
     voted = user.concept_post_votings.pluck(:id)
     Concept::Post.united_for_vote(self.id, voted)
   end
-
 
   def current_status?(status)
     sort_list = LIST_STAGES.select { |k, v| v[:type_stage] == status }
@@ -202,7 +203,6 @@ class Core::Project < ActiveRecord::Base
   def current_page?(page, status)
     sort_list = LIST_STAGES.select { |k, v| v[:type_stage] == status }
     sort_list.values[0][:name] == page
-
   end
 
   def redirect_to_current_stage
