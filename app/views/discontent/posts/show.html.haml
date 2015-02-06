@@ -1,4 +1,4 @@
-.media.show_discontent_block.option_for_selectize(id="post_#{@post.id}" data-project="#{@project.id}" data-post="#{@post.id}" data-stage="discontent")
+.media.option_for_selectize(id="post_#{@post.id}" data-project="#{@project.id}" data-post="#{@post.id}" data-stage="discontent")
   - if @post.user and not @post.anonym
     = render 'users/user_post', user: @post.user
   .media-body
@@ -21,7 +21,8 @@
           = Russian::strftime(@post.created_at, '%d %B %k:%M:%S ')
           =improve_comment(@post).html_safe if improve_comment(@post)
 
-    = render 'shared/post_social_bar2', post: @post
+    .show_discontent_block
+      = render 'shared/post_social_bar2', post: @post
     %span
       -if @post.status == 2 and boss?
         = link_to t('show.discontent.ungroup'), {action: :ungroup_union, id: @post.id}, method: :put, data: {confirm: t('confirm.accept')}, class: 'btn btn-warning btn-xs'
