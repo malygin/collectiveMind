@@ -47,10 +47,13 @@
 #= require resources
 #= require visits
 #= require visit_chart
+#= require jquery.tube.min
+#= require concept_play_movie.coffee
 
 # @todo load initialization
 sidebarHeight = 0;
 $ ->
+  start_play()
   comments_feed()
 
   estimate_stage()

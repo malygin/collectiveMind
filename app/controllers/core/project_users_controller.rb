@@ -1,5 +1,5 @@
 class Core::ProjectUsersController < ApplicationController
-  before_filter :prime_admin_authenticate
+  before_filter :prime_admin_authenticate, except: :ready_to_concept
   before_action :set_project
   before_action :journal_data, only: [:user_analytics, :moderator_analytics]
   layout 'application'
@@ -17,6 +17,11 @@ class Core::ProjectUsersController < ApplicationController
     @count_pages = @project.count_pages('for_moderators')
     @count_actions = @project.count_actions
     render action: :user_analytics
+  end
+
+  def ready_to_concept
+    current_user.project_user_for(@project).update ready_to_concept: true
+    render json: {head: :ok}
   end
 
   private
