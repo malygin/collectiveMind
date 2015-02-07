@@ -340,8 +340,9 @@ ActiveRecord::Schema.define(version: 20150205141656) do
     t.integer  "project_id"
     t.integer  "user_id"
     t.integer  "status"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.boolean  "ready_to_concept", default: false
   end
 
   add_index "core_project_users", ["project_id"], name: "index_core_project_users_on_project_id", using: :btree
