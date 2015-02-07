@@ -388,6 +388,10 @@ class User < ActiveRecord::Base
     false
   end
 
+  def project_user_for(project)
+    core_project_users.find_by(project_id: project.id)
+  end
+
   private
   #def encrypt_password
   #	self.salt = make_salt if new_record?
