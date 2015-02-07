@@ -1,12 +1,11 @@
-
 module Concept::PostsHelper
-	def can_vote_for_task?(task)
-		task.voitings.each do |fr|
-			if fr.user == current_user	
-				return false
-			end
-		end
-		return true
+  def can_vote_for_task?(task)
+    task.voitings.each do |fr|
+      if fr.user == current_user
+        return false
+      end
+    end
+    return true
   end
 
   def get_concept_posts_for_vote?(project)
@@ -14,7 +13,7 @@ module Concept::PostsHelper
     last_vote = current_user.concept_post_votings.by_project_votings(project).last
     unless last_vote.nil?
       i = -1
-      while disposts[i].nil? ? false:true
+      while disposts[i].nil? ? false : true
         @concept_posts = disposts[i].dispost_concepts.order('concept_posts.id')
         if @concept_posts.size > 1
           break
@@ -33,13 +32,13 @@ module Concept::PostsHelper
     true
   end
 
-  def able_concept_posts_for_vote(disposts,last_vote, num = 0)
+  def able_concept_posts_for_vote(disposts, last_vote, num = 0)
     unless last_vote.nil?
       dis_post = last_vote.discontent_post
       num = disposts.index dis_post
     end
     i = num.nil? ? 0 : num
-    while disposts[i].nil? ? false:true
+    while disposts[i].nil? ? false : true
       @discontent_post = disposts[i]
       concept_posts = @discontent_post.dispost_concepts.by_status(0).order('concept_posts.id')
       if last_vote.nil?
@@ -115,7 +114,7 @@ module Concept::PostsHelper
     end
   end
 
-  def class_for_concept_type_field(post,type_fd)
+  def class_for_concept_type_field(post, type_fd)
     stat = post.send(column_for_concept_type(type_fd))
     if stat == true
       'color-green'
@@ -186,7 +185,7 @@ module Concept::PostsHelper
     end
   end
 
-  def status_for_complite_discontent(post,pa)
+  def status_for_complite_discontent(post, pa)
     if post.concept_post_discontents.by_concept(pa.id).first
       complite = post.concept_post_discontents.by_concept(pa.id).first.complite
     end
@@ -202,8 +201,6 @@ module Concept::PostsHelper
   end
 
   def mean?(res)
-    ['positive_s','negative_s','control_s'].include? res
+    ['positive_s', 'negative_s', 'control_s'].include? res
   end
-
-
 end
