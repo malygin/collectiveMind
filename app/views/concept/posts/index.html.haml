@@ -1,10 +1,16 @@
 - if current_user.not_ready_for_concept?(@project)
   .col-md-9
     .col-md-offset-3
+      %h4#message-before-movie
+        %strong.text-align-center
+          Перед началом работы ознакомьтесь, пожалуйста с небольшим видео, которое введет вас в курс дела
       #player-container
       = link_to '', "/project/#{@project.id}/project_users/ready_to_concept", remote: true, id: 'movie_watched', style: 'display: none'
-      .btn.btn-success#play_video
-        Начать просмотр
+      .preview.text-align-center
+        .btn.btn-success.btn-lg.btn-block#play_video{'data-stage' => 'play'}
+          Начать просмотр
+      .alert.alert-success#message-after-movie{style: 'display: none'}
+        Спасибо за просмотр, ролик вы можете посмотреть еще раз в разделе помощь
 
 .col-md-6#concept-main{style:('display: none' if current_user.not_ready_for_concept?(@project))}
   %section
