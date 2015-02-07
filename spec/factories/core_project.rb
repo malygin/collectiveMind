@@ -9,5 +9,4 @@ FactoryGirl.define do
 
   factory :core_project_user, class: 'Core::ProjectUser' do
   end
-
 end
