@@ -15,4 +15,14 @@ describe 'User', type: :model do
     expect(user.project_user_for(project_1)).to eq cpu_1
     expect(user.project_user_for(project_2)).to eq cpu_2
   end
+
+  it 'not_ready_for_concept?' do
+    project = create :core_project
+    moderator = create :moderator
+    user = create :user
+    create :core_project_user, user: user, core_project: project
+
+    expect(user.not_ready_for_concept?(project)).to be true
+    expect(moderator.not_ready_for_concept?(project)).to be false
+  end
 end

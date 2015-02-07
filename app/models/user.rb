@@ -392,6 +392,10 @@ class User < ActiveRecord::Base
     core_project_users.find_by(project_id: project.id)
   end
 
+  def not_ready_for_concept?(project)
+    !admin? and !project_user_for(project).ready_to_concept?
+  end
+
   private
   #def encrypt_password
   #	self.salt = make_salt if new_record?
