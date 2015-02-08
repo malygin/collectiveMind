@@ -21,7 +21,7 @@
           = Russian::strftime(@post.created_at, '%d %B %k:%M:%S ')
           =improve_comment(@post).html_safe if improve_comment(@post)
 
-    .show_discontent_block
+    .show_bar_block
       = render 'shared/post_social_bar2', post: @post
     %span
       -if @post.status == 2 and boss?

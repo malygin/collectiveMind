@@ -742,8 +742,8 @@ module ApplicationHelper
     name
   end
 
-  def last_time_visit_post(post)
-    notice = current_user.journals.unscoped.where(type_event: 'visit_save', project_id: @project.id, user_id: current_user.id).where(" body like ? ", "%/project/#{@project.id}/discontent/posts/#{post.id}").order(created_at: :desc).first
+  def last_time_visit_post(post, stage)
+    notice = current_user.journals.unscoped.where(type_event: 'visit_save', project_id: @project.id, user_id: current_user.id).where(" body like ? ", "%/project/#{@project.id}/#{stage}/posts/#{post.id}").order(created_at: :desc).first
     if notice
       notice.created_at
     else
@@ -751,8 +751,8 @@ module ApplicationHelper
     end
   end
 
-  def last_time_visit_aspect(aspect)
-    notice = current_user.journals.unscoped.where(type_event: 'visit_save', project_id: @project.id, user_id: current_user.id).where(" body like ? ", "%/project/#{@project.id}/discontent/posts?asp=#{aspect.id}").order(created_at: :desc).first
+  def last_time_visit_aspect(aspect, stage)
+    notice = current_user.journals.unscoped.where(type_event: 'visit_save', project_id: @project.id, user_id: current_user.id).where(" body like ? ", "%/project/#{@project.id}/#{stage}/posts?asp=#{aspect.id}").order(created_at: :desc).first
     if notice
       notice.created_at
     else
@@ -766,6 +766,12 @@ module ApplicationHelper
       notice.created_at
     else
       "2000-01-01 00:00:00"
+    end
+  end
+
+  def label_for_last_time_visit_status(comment)
+    if comment.created_at >= last_time_visit_post(comment.post, comment.post.class.name.underscore.pluralize.gsub('/posts', ''))
+      content_tag(:span, 'новый', class: "label label-success")
     end
   end
 end

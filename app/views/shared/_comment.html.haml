@@ -7,6 +7,7 @@
       = link_to comment.user, user_path(@project, comment.user)
       = render partial: '/shared/user_online', object: comment.user
       = role_label(comment.user)
+      = label_for_last_time_visit_status(comment)
       %span.pull-right
         = label_for_comment_status(comment,'discontent',t('show.problem'))
         = label_for_comment_status(comment,'concept',t('show.idea'))

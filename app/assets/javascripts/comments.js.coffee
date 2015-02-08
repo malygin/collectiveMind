@@ -93,10 +93,10 @@
   $('.form-new-comment,.chat-messages').on('click', 'label.comment-problem', this.color_for_problem)
   $('.form-new-comment,.chat-messages').on('click', 'label.comment-idea', this.color_for_idea)
 
-  $('.chat-messages, .news-list').on('click', 'a.link_status span.label_discuss', this.toggle_discuss)
-  $('.chat-messages, .news-list').on('click', 'a.link_status span.label_approve', this.toggle_approve)
+  $('.chat-messages, .news-list, .show_bar_block').on('click', 'a.link_status span.label_discuss', this.toggle_discuss)
+  $('.chat-messages, .news-list, .show_bar_block').on('click', 'a.link_status span.label_approve', this.toggle_approve)
 
-  $('.chat-messages, .news-list, .show_discontent_block').on('click', 'a.link_status span.label_give_scores', this.toggle_scores)
+  $('.chat-messages, .news-list, .show_bar_block').on('click', 'a.link_status span.label_give_scores', this.toggle_scores)
 
   #  check if url contain anchor
   myLink = document.location.toString();

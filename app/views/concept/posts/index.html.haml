@@ -42,11 +42,26 @@
                       -else
                         =link_to t('show.without_name') , concept_post_path(@project, pa)
 
+                      %br
+                      Комментариев
+                      =pa.comments.count
+                      %span.glyphicon.glyphicon-comment
+                      - count = pa.comments.where("created_at >= ?", last_time_visit_post(pa, 'concept')).count
+                      - if(count > 0)
+                        | новых:
+                        %span.badge=pa.comments.where("created_at >= ?", last_time_visit_post(pa, 'concept')).count
+
                     %td
                       = status_for_concept_type(pa)
+                      -if (current_user?(pa.user) or  boss? or role_expert?) and pa.fullness_title > 0
+                        %br
+                        %span.label.label-success="#{pa.fullness_title} баллов из 110"
                       -if pa.discuss_status
                         %br
-                        %span.label-danger=t('show.discuss')
+                        %span.label.label-danger=t('show.discuss')
+                      -if pa.approve_status
+                        %br
+                        %span.label.label-success=t('show.important')
                     %td
                       %span.h4.color-orange
                         =status_for_concept(pa.post_aspects.first)
@@ -72,8 +87,8 @@
               %th
                 =t('show.concept.fullness')
           %tbody
-            -if @concepts_without_aspect
-              - @concepts_without_aspect.each_with_index  do |pa, index|
+            -if @concepts
+              - @concepts.each_with_index  do |pa, index|
                 - if pa.status == 0
                   %tr
                     %td
@@ -84,11 +99,26 @@
                       -else
                         =link_to t('show.without_name') , concept_post_path(@project, pa)
 
+                      %br
+                      Комментариев
+                      =pa.comments.count
+                      %span.glyphicon.glyphicon-comment
+                      - count = pa.comments.where("created_at >= ?", last_time_visit_post(pa, 'concept')).count
+                      - if(count > 0)
+                        | новых:
+                        %span.badge=pa.comments.where("created_at >= ?", last_time_visit_post(pa, 'concept')).count
+
                     %td
                       = status_for_concept_type(pa)
+                      -if boss? or role_expert?
+                        %br
+                        %span.label.label-success="#{pa.fullness_title} баллов из 110"
                       -if pa.discuss_status
                         %br
-                        %span.label-danger=t('show.discuss')
+                        %span.label.label-danger=t('show.discuss')
+                      -if pa.approve_status
+                        %br
+                        %span.label.label-success=t('show.important')
                     %td
                       %span.h4.color-orange
                         =status_for_concept(pa.post_aspects.first)
