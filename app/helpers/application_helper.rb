@@ -743,7 +743,14 @@ module ApplicationHelper
   end
 
   def last_time_visit_post(post, stage)
-    notice = current_user.journals.unscoped.where(type_event: 'visit_save', project_id: @project.id, user_id: current_user.id).where(" body like ? ", "%/project/#{@project.id}/#{stage}/posts/#{post.id}").order(created_at: :desc).first
+    last_page = last_page(post)
+    if params[:page] and params[:page].to_i != last_page
+      notice = current_user.journals.unscoped.where(type_event: 'visit_save', project_id: @project.id, user_id: current_user.id).where(" body like ? ", "%/project/#{@project.id}/#{stage}/posts/#{post.id}?%page=#{params[:page]}%").order(created_at: :desc).first
+    elsif params[:page].nil? or (params[:page] and params[:page].to_i == last_page)
+      notice = current_user.journals.unscoped.where(type_event: 'visit_save', project_id: @project.id, user_id: current_user.id).where(" body like ? or body like ? ", "%/project/#{@project.id}/#{stage}/posts/#{post.id}", "%/project/#{@project.id}/#{stage}/posts/#{post.id}?%page=#{last_page}%").order(created_at: :desc).first
+    else
+      notice = current_user.journals.unscoped.where(type_event: 'visit_save', project_id: @project.id, user_id: current_user.id).where(" body like ? ", "%/project/#{@project.id}/#{stage}/posts/#{post.id}").order(created_at: :desc).first
+    end
     if notice
       notice.created_at
     else
@@ -752,7 +759,14 @@ module ApplicationHelper
   end
 
   def last_time_visit_aspect(aspect, stage)
-    notice = current_user.journals.unscoped.where(type_event: 'visit_save', project_id: @project.id, user_id: current_user.id).where(" body like ? ", "%/project/#{@project.id}/#{stage}/posts?asp=#{aspect.id}").order(created_at: :desc).first
+    last_page = last_page(aspect.life_posts.first)
+    if params[:page] and params[:page].to_i != last_page
+      notice = current_user.journals.unscoped.where(type_event: 'visit_save', project_id: @project.id, user_id: current_user.id).where(" body like ? ", "%/project/#{@project.id}/#{stage}/posts?asp=#{aspect.id}%page=#{params[:page]}%").order(created_at: :desc).first
+    elsif params[:page].nil? or (params[:page] and params[:page].to_i == last_page)
+      notice = current_user.journals.unscoped.where(type_event: 'visit_save', project_id: @project.id, user_id: current_user.id).where(" body like ? or body like ? ", "%/project/#{@project.id}/#{stage}/posts?asp=#{aspect.id}", "%/project/#{@project.id}/#{stage}/posts?asp=#{aspect.id}%page=#{last_page}%").order(created_at: :desc).first
+    else
+      notice = current_user.journals.unscoped.where(type_event: 'visit_save', project_id: @project.id, user_id: current_user.id).where(" body like ? ", "%/project/#{@project.id}/#{stage}/posts?asp=#{aspect.id}").order(created_at: :desc).first
+    end
     if notice
       notice.created_at
     else
@@ -770,8 +784,21 @@ module ApplicationHelper
   end
 
   def label_for_last_time_visit_status(comment)
-    if comment.created_at >= last_time_visit_post(comment.post, comment.post.class.name.underscore.pluralize.gsub('/posts', ''))
-      content_tag(:span, 'новый', class: "label label-success")
+    stage = comment.post.class.name.underscore.pluralize.gsub('/posts', '')
+    if ['discontent', 'concept'].include? stage
+      if comment.created_at >= last_time_visit_post(comment.post, stage)
+        content_tag(:span, 'новый', class: "label label-success")
+      end
+    elsif stage == 'life_tape'
+      if comment.created_at >= last_time_visit_aspect(comment.post.aspect, stage)
+        content_tag(:span, 'новый', class: "label label-success")
+      end
     end
+  end
+
+  def last_page(post)
+    total_results = post.main_comments.count
+    page = total_results / 10 + (total_results % 10 == 0 ? 0 : 1)
+    page == 0 ? 1 : page
   end
 end

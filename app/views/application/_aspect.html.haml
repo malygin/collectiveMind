@@ -3,18 +3,29 @@
     %i.fa.fa-book
 
     =" #{aspect.content}"
+    - if current_stage == 'life_tape/posts'
+      %br
+      %div
+        %small всего:
+        =aspect.aspect_life_tape.count
+        - count = aspect.aspect_life_tape.where("life_tape_comments.created_at >= ?", last_time_visit_aspect(aspect, 'life_tape')).count
+        - if count > 0
+          %small , новых:
+          %span.badge=aspect.aspect_life_tape.where("life_tape_comments.created_at >= ?", last_time_visit_aspect(aspect, 'life_tape')).count
+
     - if current_stage == 'discontent/posts'
       %br
-      .pull-lefte
+      %div
         %small всего:
         =aspect.aspect_posts.by_status_for_discontent(@project).count
         - count = aspect.aspect_posts.by_status_for_discontent(@project).where("discontent_posts.created_at >= ?", last_time_visit_aspect(aspect, 'discontent')).count
         - if count > 0
           %small , новых:
           %span.badge=aspect.aspect_posts.by_status_for_discontent(@project).where("discontent_posts.created_at >= ?", last_time_visit_aspect(aspect, 'discontent')).count
+
     - if current_stage == 'concept/posts'
       %br
-      .pull-lefte
+      %div
         %small всего:
         =aspect.aspect_concept.by_status(0).count
         - count = aspect.aspect_concept.by_status(0).where("concept_posts.created_at >= ?", last_time_visit_aspect(aspect, 'concept')).count
