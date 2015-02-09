@@ -172,7 +172,7 @@ class UsersController < ApplicationController
 
   def edit_locale
     @user = User.find(params[:id]) if params[:id]
-    @available_locales = I18n.available_locales.map(&:to_s)
+    @available_locales = I18n.available_locales.map(&:to_s).collect{ |u| [locale_translate(u), u] }
   end
 
   def change_locale

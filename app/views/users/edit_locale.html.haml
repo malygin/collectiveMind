@@ -1,8 +1,9 @@
 %section.widget
   .body
     %h3=t('menu.locale_edit')
+
     -if @available_locales
-      = select_tag 'select_for_locales', options_for_select(@available_locales.collect{ |u| [u, u] }), class: "form-control"
+      = select_tag 'set_locale', options_for_select(@available_locales), class: "form-control"
 
     -#-if @available_locales
     -#  = select_tag 'select_for_locales', options_from_collection_for_select(@available_locales, "id", "content"),

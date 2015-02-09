@@ -15,6 +15,19 @@
   %li.active
     =link_to "/project/#{@project.id}/journals" , style:'width:auto; margin-right: 15px;', id: 'go_to_journals' do
       =t('menu.news')
+
+  %li.divider
+  %li.header-right
+    .tb-language.dropdown.pull-right
+      %a{'data-target' => '#', 'data-toggle' => 'dropdown', href: '#'}
+        Русский
+        %i.fa.fa-angle-down.color.mass-dark-blue
+      %ul.dropdown-menu.dropdown-mini{role: 'menu'}
+        %li
+          %a{href: '#'} English
+        %li
+          %a{href: '#'} עברית
+
   - if boss?
     %li.divider
     %li.dropdown

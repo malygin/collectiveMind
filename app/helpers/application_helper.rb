@@ -802,4 +802,17 @@ module ApplicationHelper
     page = total_results / 10 + (total_results % 10 == 0 ? 0 : 1)
     page == 0 ? 1 : page
   end
+
+  def locale_translate(locale)
+    case locale
+      when 'ru'
+        'Русский'
+      when 'en'
+        'English'
+      when 'he'
+        'עברית'
+      else
+        'Русский'
+    end
+  end
 end

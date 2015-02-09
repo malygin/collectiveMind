@@ -77,6 +77,33 @@ $brand-estimate:        #663505 !default;
 
 /*todo my styles top*/
 
+//locale
+.dropdown-menu.dropdown-mini {
+  min-width: 120px;
+}
+.pull-right > .dropdown-menu {
+  right: 0;
+  left: auto;
+}
+.tb-language a {
+  text-decoration: none;
+  font-size: 15px;
+  color: white;
+}
+
+//.tb-language a:hover {
+//  color: #c6c6c6;
+//}
+
+.color.mass-dark-blue{
+  color: #033481;
+}
+.header-right{
+  margin-top: 10px;
+}
+
+//end locale
+
 textarea.concept_cond {
   max-height: 200px !important;
 }
