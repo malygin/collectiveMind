@@ -1,9 +1,9 @@
 @start_play = ->
   $('#player-container').tubeplayer
-    width: 570
+    width: $('#play_video').width()
     height: 450
     allowFullScreen: 'true'
-    initialVideo: '8fs6U3MdEpE'
+    initialVideo: 'YA1S941EdAY'
     preferredQuality: 'default'
     showControls: 0
     modestbranding: false
