@@ -6,6 +6,7 @@ FactoryGirl.define do
     sequence(:nickname) { |n| "Nickname #{n}" }
     password 'pascal2003'
     password_confirmation 'pascal2003'
+    type_user nil
   end
 
   factory :prime_admin, parent: :user do
@@ -34,8 +35,7 @@ FactoryGirl.define do
     sequence(:name) { |n| "Name #{n}" }
     sequence(:surname) { |n| "Surname #{n}" }
     sequence(:email) { |n| "person_b#{n}@example.com" }
-    password "foobar1"
-    password_confirmation "foobar"
+    password 'foobar1'
+    password_confirmation 'foobar'
   end
-
 end

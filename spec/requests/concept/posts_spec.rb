@@ -8,6 +8,7 @@ describe 'Concept ' do
   let (:prime_admin) { create :prime_admin }
   let (:moderator) { create :moderator }
   let (:project) { create :core_project, status: 7 }
+  let!(:project_user) { create :core_project_user, user: user, core_project: project, ready_to_concept: true }
 
   before do
     prepare_concepts(project, user_data)
@@ -24,6 +25,16 @@ describe 'Concept ' do
     context 'concept list' do
       before do
         visit concept_posts_path(project)
+      end
+
+      it 'show movie before start', js: true do
+        project_user.update ready_to_concept: false
+        refresh_page
+        expect(page).to have_css 'div#player-container'
+        execute_script("$('#movie_watched').click()")
+        refresh_page
+        expect(page).to have_content 'Нововведения'
+        expect(page).to have_content I18n.t('show.improve.ideas')
       end
 
       it ' can see all concepts in aspect' do
@@ -299,12 +310,15 @@ describe 'Concept ' do
   context 'moderator sign in' do
     before do
       sign_in moderator
-      visit root_path
     end
 
     context 'concept list' do
       before do
         visit concept_posts_path(project)
+      end
+
+      it 'not see movie' do
+        expect(page).not_to have_css 'div#player-container'
       end
 
       it ' can see all concepts in aspect' do
@@ -396,7 +410,7 @@ describe 'Concept ' do
         visit concept_post_path(project, @concept1)
       end
 
-      it 'can add note ', js: true do
+      xit 'can add note ', js: true do
         click_link 'btn_note_1'
         sleep(5)
         expect(page).to have_selector "form#note_for_post_#{@concept1.id}_1"

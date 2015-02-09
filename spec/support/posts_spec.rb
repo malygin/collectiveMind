@@ -9,7 +9,7 @@ shared_examples 'content with comments' do |moderator = false, count = 2, projec
   end
 
   if moderator
-    it ' like comment', js: true do
+    xit ' like comment', js: true do
       prepare_awards
       plus_comment_path = Rails.application.routes.url_helpers.send("plus_comment_#{comment_post_model}_path", project, @comment_1)
 
