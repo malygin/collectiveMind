@@ -1,82 +1,79 @@
-=link_to '/project/'+@project.id.to_s do
+= link_to "/project/#{@project.id}" do
   %span.fa.fa-angle-double-left
-  =t('link.back_proc')
+  = t('link.back_proc')
 
 %section.widget
   .body
     .row
       .col-md-4
-        = image_tag  @user.avatar(:normal)
+        = image_tag @user.avatar(:normal)
         %br
         - if not @user.boss? or @project.uniq_proc?
-          %h3=t('show.user.award', num: @user.awards.for_project(@project).count, all: 22)
+          %h3
+            = t('show.user.award', num: @user.awards.for_project(@project).count, all: 22)
           %br
           - @awards.each do |a|
-            = image_tag('awards/'+a.url+'_70_70.png', title: a.name, class: "#{'disabled_award' if not @user.awards.for_project(@project).include? a}")
+            = image_tag("awards/#{a.url}_70_70.png", title: a.name, class: "#{'disabled_award' if not @user.awards.for_project(@project).include? a}")
       .col-md-8
         .row
           .col-md-9
             %b
-              =link_to @user, '#'
+              = link_to @user, '#'
             %br
             %span.text-muted
-              =t('show.user.not_group')
-            -#- if boss?
-            -#  .scoreBar
-            -#    =link_to '+30 баллов',  '/project/'+@project.id.to_s+'/users/'+@user.id.to_s+'/add_score/30', :remote: true, :method: :put, class: 'voteCounter'
-            -#    |
-            -#    =link_to '+10 баллов',  '/project/'+@project.id.to_s+'/users/'+@user.id.to_s+'/add_score/10', :remote: true, :method: :put, class: 'voteCounter'
+              = t('show.user.not_group')
             %br
-            -if admin?
+            - if admin?
               %h4(style='font-weight: bold;')
                 %span.color-green.pull-left
-                  -unless @user.boss?
+                  - unless @user.boss?
                     = link_to club_toggle_user_path(@project, @user), remote: true, method: :put, style: 'text-decoration:none;', id: "club_status_#{@user.id}" do
-                      =club_status_show_user(@user)
+                      = club_status_show_user(@user)
                   %a(href='#' id="userscore_#{@user.id}" class='userscore' data-pk='1' data-remote='true' data-resource='post' data-type='text' data-name='score' data-url="/project/#{@project.id}/users/#{@user.id}/update_score")
-                    =@user.score
-            -else
+                    = @user.score
+            - else
               %h4(style='font-weight: bold;')
                 %span.color-green.pull-left
-                  =club_status_show_user(@user)
-                  -unless @user.user_project_scores(@project.id).nil?
-                    =@user.user_project_scores(@project.id).score
+                  = club_status_show_user(@user)
+                  - unless @user.user_project_scores(@project.id).nil?
+                    = @user.user_project_scores(@project.id).score
           .col-md-3
 
-        -unless @user.user_project_scores(@project.id).nil?
+        - unless @user.user_project_scores(@project.id).nil?
           .row
             .col-md-7
-              =t('show.user.generator')
+              = t('show.user.generator')
             .col-md-5
               %span.pull-right
-                %span.text-muted=@user.user_project_scores(@project.id).score_g
+                %span.text-muted
+                  = @user.user_project_scores(@project.id).score_g
 
           .row
             .col-md-7
-              =t('show.user.analyst')
+              = t('show.user.analyst')
             .col-md-5
               %span.pull-right
-                %span.text-muted=@user.user_project_scores(@project.id).score_a
+                %span.text-muted
+                  = @user.user_project_scores(@project.id).score_a
 
           .row
             .col-md-7
               =t('show.user.voter')
             .col-md-5
               %span.pull-right
-                %span.text-muted=@user.user_project_scores(@project.id).score_o
+                %span.text-muted
+                  = @user.user_project_scores(@project.id).score_o
 
           %hr
-
           .row
             .col-md-7
-
             .col-md-5
               %span.pull-right
-                =t('show.user.all_score')
-                %span.text-muted=@user.user_project_scores(@project.id).score
+                = t('show.user.all_score')
+                %span.text-muted
+                  = @user.user_project_scores(@project.id).score
 
         %br
-
         %br
         %section.widget.widget-tabs
           %header
@@ -93,12 +90,13 @@
           .body.tab-content
             #active_line.tab-pane.fade.in.active
               %br
-              -unless @journals.nil?
+              - unless @journals.nil?
                 - @journals.each do |journal|
-                  -  if journal_parser(journal, @project.id)
+                  - if journal_parser(journal, @project.id)
                     = link_to journal.user, user_path(@project,journal.user)
                     = journal_parser(journal, @project.id).html_safe
-                    %small=Russian::strftime(journal.created_at,'%d %B %k:%M:%S ')
+                    %small
+                      = Russian::strftime(journal.created_at,'%d %B %k:%M:%S ')
                     %br
 
             #ideas.tab-pane.fade.in
@@ -115,6 +113,6 @@
               - @user.concept_posts.by_project(@project.id).each do |cp|
                 .panel.panel-success
                   .panel-body.nov-list
-                    =cp.post_aspects.first.title if cp.post_aspects.first
-                    =link_to t('link.more'), concept_post_path(@project, cp)
+                    = cp.post_aspects.first.title if cp.post_aspects.first
+                    = link_to t('link.more'), concept_post_path(@project, cp)
                     = render 'shared/post_social_bar2', post:cp
