@@ -625,8 +625,9 @@ ru:
       groups: Группы несовершенств
       grouped_success: Несовершенство сделано группой
       required_success: Несовершенство добавлено в обязательные
+      required_revert: Несовершенство возвращено в обычные
       grouped: Группа
-      required: Добавлено
+      required: В обычные
       do_require: В обязательные
       select_prompt: Добавьте несовершенство
       do_group: Сделать группой

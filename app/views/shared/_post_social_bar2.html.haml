@@ -26,8 +26,8 @@
             =post.users_against.count
           %i.fa.fa-thumbs-o-down
 
-      -if boss? and post.class.name.deconstantize == "Discontent" and [4,5,6,7].include?(@project.status)
-        -if post.status == 0
+      -if (boss? or role_expert?) and post.class.name.deconstantize == "Discontent" and [4,5,6,7].include?(@project.status)
+        -if boss? and post.status == 0
           |
           =link_to({controller: post.class.name.underscore.pluralize, action: :set_grouped, id: post.id, project: @project},remote: true,method: :put,id: "set_grouped_#{post.id}", class: "note_text") do
             -if post.status == 2
@@ -45,10 +45,10 @@
         -if @project.status == 6
           |
           %span.text-success=t('show.like')
-          =post.final_votings.by_positive.uniq_user.size
+          =post.final_votings.by_positive.not_admins.uniq_user.size
           |
           %span.text-danger=t('show.unlike')
-          =post.final_votings.by_negative.uniq_user.size
+          =post.final_votings.by_negative.not_admins.uniq_user.size
           |
           %span.text-info=t('show.votes_users')
           =@vote_all
