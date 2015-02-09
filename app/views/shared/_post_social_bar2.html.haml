@@ -73,7 +73,7 @@
 
 
       - if boss? or role_expert?
-        - if not (post.class.name.deconstantize == "Discontent" and [2,4].include?(post.status))
+        - if not (post.class.name.deconstantize == "Concept" or (post.class.name.deconstantize == "Discontent" and [2,4].include?(post.status)))
           |
           =link_to({controller: post.class.name.underscore.pluralize, action: :plus, project: @project, id: post.id}, remote: true, method: :put, class: "link_status", id: "plus_post_#{post.id}") do
             -if post.useful
