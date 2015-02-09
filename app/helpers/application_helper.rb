@@ -743,7 +743,7 @@ module ApplicationHelper
   end
 
   def last_time_visit_post(post, stage)
-    last_page = last_page(post)
+    last_page = post.present? ? last_page(post) : 1
     if params[:page] and params[:page].to_i != last_page
       notice = current_user.journals.unscoped.where(type_event: 'visit_save', project_id: @project.id, user_id: current_user.id).where(" body like ? ", "%/project/#{@project.id}/#{stage}/posts/#{post.id}?%page=#{params[:page]}%").order(created_at: :desc).first
     elsif params[:page].nil? or (params[:page] and params[:page].to_i == last_page)
@@ -759,7 +759,8 @@ module ApplicationHelper
   end
 
   def last_time_visit_aspect(aspect, stage)
-    last_page = last_page(aspect.life_posts.first)
+    post = aspect.life_posts.first
+    last_page = post.present? ? last_page(post) : 1
     if params[:page] and params[:page].to_i != last_page
       notice = current_user.journals.unscoped.where(type_event: 'visit_save', project_id: @project.id, user_id: current_user.id).where(" body like ? ", "%/project/#{@project.id}/#{stage}/posts?asp=#{aspect.id}%page=#{params[:page]}%").order(created_at: :desc).first
     elsif params[:page].nil? or (params[:page] and params[:page].to_i == last_page)

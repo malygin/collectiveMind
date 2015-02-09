@@ -14,9 +14,10 @@
             %label(class="btn btn-sm btn-default comment-problem" )
               = f.check_box :discontent_status
               =t('show.problem')
-          %label(class="btn btn-sm btn-default comment-idea" )
-            = f.check_box :concept_status
-            =t('show.idea')
+          -if @project.status < 8
+            %label(class="btn btn-sm btn-default comment-idea" )
+              = f.check_box :concept_status
+              =t('show.idea')
 
           - if advices_for_stage?(@project, @post.class.name.underscore.pluralize)
             %label#label_advice_status(class="btn btn-sm btn-default" onclick="color_button(this);")
