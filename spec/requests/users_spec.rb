@@ -40,6 +40,13 @@ describe 'Users ' do
       end
     end
 
+    it 'link to user analytic' do
+      visit user_path(project, user)
+      click_link 'go_to_user_analytics'
+      expect(page).to have_content I18n.t('analytic.graph_visits')
+      expect(page).not_to have_css 'ul#general_stages'
+    end
+
     context 'my journal', js: true do
       before do
         @personal_journal = create :personal_journal, project: project, user: user, user_informed: user

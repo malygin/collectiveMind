@@ -50,13 +50,15 @@
             .body.tab-content
               = yield
         - elsif @project and (core_methods?(params[:controller], params[:action], true) || analytics?)
-          %h4="Тема процедуры: #{@project.name}"
+          %h4
+            = "Тема процедуры: #{@project.name}"
           %section.widget-tabs
             %header
-              =render partial: 'core/projects/stages_general', locals: {current_stage: current_stage_for_analytics(params[:action])}
+              - if prime_admin?
+                = render partial: 'core/projects/stages_general', locals: {current_stage: current_stage_for_analytics(params[:action])}
             .body.tab-content
               = yield
-        -else
+        - else
           = yield
 
     /
