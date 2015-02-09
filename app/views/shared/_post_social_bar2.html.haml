@@ -9,10 +9,10 @@
         =t('show.commenting')
         =post.comments.count
         %span.glyphicon.glyphicon-comment
-        - count = post.comments.where("created_at >= ?", last_time_visit_post(post)).count
+        - count = post.comments.where("created_at >= ?", last_time_visit_post(post, post.class.name.underscore.pluralize.gsub('/posts', ''))).count
         - if(count > 0)
           | новых:
-          %span.badge=post.comments.where("created_at >= ?", last_time_visit_post(post)).count
+          %span.badge=post.comments.where("created_at >= ?", last_time_visit_post(post, post.class.name.underscore.pluralize.gsub('/posts', ''))).count
       |
       =link_to({:controller => post.class.name.underscore.pluralize ,:action => :like, :project => @project, :id => post.id, :against => false}, :remote => true, :method => :put, class: "popup-likes", id: "like_post_#{post.id}") do
         %span

@@ -9,6 +9,11 @@
       = link_to "#{discontent_posts_path(@project)}" + "?all_aspects=true" do
         %i.fa.fa-book
         Все несовершенства
+  -if (boss? or role_expert?) and current_stage == 'concept/posts'
+    %li{class:"#{'active' if params[:all_aspects]}"}
+      = link_to "#{concept_posts_path(@project)}" + "?all_aspects=true" do
+        %i.fa.fa-book
+        Все нововведения
 
   -@project.current_aspects(current_stage).each do |asp|
     = render partial: 'aspect', object: asp, locals: {current_stage: current_stage}
