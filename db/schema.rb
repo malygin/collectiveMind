@@ -340,8 +340,8 @@ ActiveRecord::Schema.define(version: 20150206203903) do
     t.integer  "project_id"
     t.integer  "user_id"
     t.integer  "status"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",                       null: false
+    t.datetime "updated_at",                       null: false
     t.boolean  "ready_to_concept", default: false
   end
 
