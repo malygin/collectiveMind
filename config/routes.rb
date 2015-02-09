@@ -112,6 +112,8 @@ scope '/project/:project' do
       put :journal_clear
       get :edit_notice
       post :create_notice
+      get :edit_locale
+      put :change_locale
       get 'add_score/:score' => 'users#add_score'
       get 'add_score_essay/:score' => 'users#add_score_essay'
     end

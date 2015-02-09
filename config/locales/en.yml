@@ -1,6 +1,12 @@
 en:
   activerecord:
     attributes:
+      group_task:
+        name: 'Название задачи'
+        description: 'Описание задачи'
+      group:
+        name: 'Название группы'
+        description: 'Описание группы'
       discontent/post:
         content: 'What is that you do not like about the current situation? field'
         whend:  'When does it happen? field'
@@ -83,6 +89,7 @@ en:
   menu:
     main: "Main Page"
     help: "Help"
+    about: "O проекте"
     base_knowledge: "Knowledge Data Base"
     raiting: "Rating"
     raiting_rc: "Club Rating"
@@ -134,9 +141,12 @@ en:
     notice_edit: Edit notice
     list_aspects: 'Aspects:'
     help_stage: Stage Help
+    help_note: Посмотреть помощь по стадии
     reflection_stage: Stage Analysis
     account: 'Profile'
     list_groups: "List of gorups"
+    locale_edit: "Настройка языка"
+
   stages:
     intro: Intro
     life_tape: 'Data Gathering'
@@ -144,6 +154,8 @@ en:
     concept: 'Gathering Changes'
     plan: 'Development of Projects'
     estimate: 'Estimation of Projects'
+    result: Подведение итогов
+    glossary: Глоссарий
     stage:
       one: 'First Stage'
       few: '%{count} Stage'
@@ -210,6 +222,9 @@ en:
       add_desc: Description
       res_desc_promt: 'A resource explanation'
       res_promt: 'Please enter your resource or choose from the list'
+      mean_promt: 'Введите свое средство или выберите из списка'
+      mean_desc_promt: 'Пояснение к средству'
+      del_mean_btn: 'Удалить средство'
 
       create_success: Your suggested change was added successfully. You can add another change or go to the list of changes.
       update_success: Your suggested change was modified successfully. You can now review your entry or go to the list of suggested changes.
@@ -496,7 +511,7 @@ en:
       important: Важная
       not_important: Не важная
       go_list: Перейти к списку несовершенств
-      important: 'Определение наиболее важных проблем:'
+      important_aspects: 'Определение наиболее важных проблем:'
 
     plan:
       title: Голосование за проеты
@@ -538,6 +553,8 @@ en:
     general_analytics: ВСЯ АНАЛИТИКА
     improve:
       name: Доработать
+      name_discontent: Сформулировать как несовершенство
+      name_concept: Сформулировать как нововведение
       problem: Неоформленные проблемы
       ideas: Неоформленные идеи
       discontent: Доработано до несовершенства
@@ -615,6 +632,10 @@ en:
     mailer:
       title: К вашему материалу на портале mass-decision.ru добавлен комментарий
       team: Команда проекта
+      messages:
+        one: '1 сообщение'
+        few: '%{count} сообщения'
+        other: '%{count} сообщений'
 
     rating:
       title: Рейтинг участников

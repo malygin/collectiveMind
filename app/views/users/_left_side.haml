@@ -1,15 +1,19 @@
 %ul.side-nav
-  %li.active
+  %li{class: "#{'active' if params[:action] == 'show'}"}
     = link_to user_path(@project, current_user) do
       %i.glyphicon.glyphicon-user
       = t('menu.account')
 
   - if current_user == @user
-    %li
+    %li{class: "#{'active' if params[:action] == 'edit'}"}
       = link_to edit_user_path(@project, current_user), id: 'edit_profile' do
         %i.glyphicon.glyphicon-cog
         = t('menu.profile_edit')
-    %li
+    %li{class: "#{'active' if params[:action] == 'edit_notice'}"}
       = link_to edit_notice_user_path(@project, current_user) do
         %i.glyphicon.glyphicon-envelope
         = t('menu.notice_edit')
+    %li{class: "#{'active' if params[:action] == 'edit_locale'}"}
+      = link_to edit_locale_user_path(@project, current_user) do
+        %i.glyphicon.glyphicon-globe
+        = t('menu.locale_edit')

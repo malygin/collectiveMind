@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
   before_action :set_user
   before_filter :correct_user, only: [:edit, :update]
-  before_filter :journal_data, only: [:index, :new, :edit, :show, :users_rc, :journal_clear, :edit_notice]
+  before_filter :journal_data, only: [:index, :new, :edit, :show, :users_rc, :journal_clear, :edit_notice, :edit_locale]
   before_filter :boss_authenticate, only: [:users_rc]
   before_filter :prime_admin_authenticate, only: [:destroy, :list_users, :add_user_for_project, :remove_user_for_project, :club_toggle, :update_score]
   before_filter :have_project_access
@@ -167,6 +167,18 @@ class UsersController < ApplicationController
       if @post.save!
         format.js
       end
+    end
+  end
+
+  def edit_locale
+    @user = User.find(params[:id]) if params[:id]
+    @available_locales = I18n.available_locales.map(&:to_s)
+  end
+
+  def change_locale
+    @user = User.find(params[:id]) if params[:id]
+    if @user and @user == current_user and params[:set_locale]
+      @user.update_attributes(locale: params[:set_locale]) if I18n.available_locales.map(&:to_s).include?(params[:set_locale])
     end
   end
 
