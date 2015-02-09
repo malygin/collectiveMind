@@ -9,7 +9,7 @@ class ApplicationController < ActionController::Base
   end
 
   def journal_data
-    @project = Core::Project.find(params[:project])
+    set_project
     @my_journals = current_user.my_journals @project
   end
 
@@ -21,5 +21,16 @@ class ApplicationController < ActionController::Base
 
   def configure_permitted_parameters
     devise_parameter_sanitizer.for(:sign_up) << :name
+  end
+
+  def start_visit
+    if current_user and @project
+      j = current_user.journals.create type_event: 'visit_save', project_id: @project.id,
+                                       body: request.original_url
+    end
+  end
+
+  def set_project
+    @project = Core::Project.find params[:project] if params[:project]
   end
 end
