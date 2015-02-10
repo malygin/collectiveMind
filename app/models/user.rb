@@ -393,7 +393,11 @@ class User < ActiveRecord::Base
   end
 
   def not_ready_for_concept?(project)
-    !admin? and !project_user_for(project).ready_to_concept?
+    if project_user_for(project).nil?
+      false
+    else
+      !project_user_for(project).ready_to_concept
+    end
   end
 
   private
