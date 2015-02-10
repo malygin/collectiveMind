@@ -13,7 +13,8 @@
       = link_to edit_notice_user_path(@project, current_user) do
         %i.glyphicon.glyphicon-envelope
         = t('menu.notice_edit')
-    %li
-      = link_to "/project/#{@project.id}/project_users/user_analytics", id: 'go_to_user_analytics' do
-        %i.glyphicon.glyphicon-signal
-        = t('menu.user_analytic')
+    - if role_expert?
+      %li
+        = link_to "/project/#{@project.id}/project_users/user_analytics", id: 'go_to_user_analytics' do
+          %i.glyphicon.glyphicon-signal
+          = t('menu.user_analytic')

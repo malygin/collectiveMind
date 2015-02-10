@@ -4,6 +4,7 @@ describe 'Users ' do
   subject { page }
   let (:user) { create :user }
   let (:moderator) { create :moderator }
+  let (:expert) { create :expert }
   let (:project) { create :core_project, status: 1, advices_concept: true, advices_discontent: true }
   let!(:project_user) { create :core_project_user, user: user, core_project: project }
   let!(:project_user2) { create :core_project_user, user: moderator, core_project: project }
@@ -40,11 +41,12 @@ describe 'Users ' do
       end
     end
 
-    it 'link to user analytic' do
+    it 'no link to user analytic' do
       visit user_path(project, user)
-      click_link 'go_to_user_analytics'
-      expect(page).to have_content I18n.t('analytic.graph_visits')
-      expect(page).not_to have_css 'ul#general_stages'
+      expect(page).not_to have_link 'go_to_user_analytics'
+      visit "/project/#{project.id}/project_users/user_analytics"
+      expect(current_path).to eq root_path
+      expect(page).not_to have_content I18n.t('analytic.graph_visits')
     end
 
     context 'my journal', js: true do
@@ -105,5 +107,18 @@ describe 'Users ' do
 
   context 'moderator sign in ' do
 
+  end
+
+  context 'expert sign in' do
+    before do
+      sign_in expert
+    end
+
+    it 'link to user analytic' do
+      visit user_path(project, expert)
+      click_link 'go_to_user_analytics'
+      expect(page).to have_content I18n.t('analytic.graph_visits')
+      expect(page).not_to have_css 'ul#general_stages'
+    end
   end
 end

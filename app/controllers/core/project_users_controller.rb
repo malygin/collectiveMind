@@ -4,8 +4,7 @@ class Core::ProjectUsersController < ApplicationController
   layout 'application'
 
   def user_analytics
-    #@todo check not for current_user, but for have access to analytic
-    redirect_to(root_path) unless prime_admin? or current_user
+    redirect_to(root_path) unless prime_admin? or role_expert?
     @count_people = @project.count_people.to_json
     @average_time = @project.average_time.to_json
     @count_pages = @project.count_pages
