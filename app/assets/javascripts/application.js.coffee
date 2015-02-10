@@ -45,7 +45,6 @@
 #= require plugins
 #= require comments
 #= require resources
-#= require visits
 #= require visit_chart
 #= require jquery.tube.min
 #= require concept_play_movie.coffee
@@ -68,7 +67,6 @@ $ ->
 
   post_form()
 
-  record_visit()
   notificate_news()
   notifications()
   editable_groups()
