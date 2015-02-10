@@ -16,7 +16,7 @@ FactoryGirl.define do
     type_user 6
   end
   factory :expert, parent: :user do
-    type_user 2
+    role_stat 2
   end
   factory :jury, parent: :user do
     type_user 3

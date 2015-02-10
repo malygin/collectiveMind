@@ -145,6 +145,7 @@ ru:
     reflection_stage: Отзывы о стадии
     account: 'Профиль'
     list_groups: "Список групп"
+    user_analytic: "Статистика по пользователям"
   stages:
     intro: Знакомство
     life_tape: 'Введение в процедуру'
@@ -812,3 +813,5 @@ ru:
     editing: "Редактирование группы"
     group: "Группа"
     call_moderator_success: "Модератор получил уведомление"
+  analytic:
+    graph_visits: "График посещений"

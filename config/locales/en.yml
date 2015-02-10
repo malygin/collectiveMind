@@ -137,6 +137,7 @@ en:
     reflection_stage: Stage Analysis
     account: 'Profile'
     list_groups: "List of gorups"
+    user_analytic: "User analytic"
   stages:
     intro: Intro
     life_tape: 'Data Gathering'
@@ -784,3 +785,5 @@ en:
     editing: "Editing group"
     group: "Group"
     call_moderator_success: "Moderator get notification"
+  analytic:
+    graph_visits: "Graph visits"

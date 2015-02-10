@@ -1,10 +1,10 @@
 class Core::ProjectUsersController < ApplicationController
-  before_filter :prime_admin_authenticate, except: :ready_to_concept
   before_action :set_project
   before_action :journal_data, only: [:user_analytics, :moderator_analytics]
   layout 'application'
 
   def user_analytics
+    redirect_to(root_path) unless prime_admin? or role_expert?
     @count_people = @project.count_people.to_json
     @average_time = @project.average_time.to_json
     @count_pages = @project.count_pages
@@ -12,6 +12,7 @@ class Core::ProjectUsersController < ApplicationController
   end
 
   def moderator_analytics
+    prime_admin_authenticate
     @count_people = @project.count_people('for_moderators').to_json
     @average_time = @project.average_time('for_moderators').to_json
     @count_pages = @project.count_pages('for_moderators')
