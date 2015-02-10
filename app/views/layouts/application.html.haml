@@ -20,7 +20,7 @@
     -#  </script>
   -#%link(href="/assets/favicon.ico" rel="shortcut icon")
 
-  %body
+  %body{class: "locale-#{locale_for_user(current_user)}"}
     .logo.hidden-sm.hidden-xs
       %h4
         %a{href: @project ? "/project/#{@project.id}" : "/", id: "go_to_logo"}
@@ -28,7 +28,7 @@
             %span.text-danger MASS
             %strong DECISION
 
-    %nav#sidebar.sidebar.nav-collapse.collapse
+    %nav#sidebar.sidebar.nav-collapse.collapse{style: "text-align: left !important;"}
       - if core_methods?(params[:controller],params[:action])
         = render partial: 'core/projects/left_projects', locals: { current_stage: controller.controller_path }
       - else

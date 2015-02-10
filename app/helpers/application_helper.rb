@@ -815,4 +815,15 @@ module ApplicationHelper
         'Русский'
     end
   end
+
+  def locale_for_user(user)
+    if params[:locale]
+      locale = params[:locale]
+    elsif user.present? and user.locale.present?
+      locale = user.locale
+    else
+      locale = request.env['HTTP_ACCEPT_LANGUAGE'].scan(/^[a-z]{2}/).first
+    end
+    I18n.available_locales.map(&:to_s).include?(locale) ? locale : I18n.default_locale
+  end
 end

@@ -102,6 +102,30 @@ $brand-estimate:        #663505 !default;
   margin-top: 10px;
 }
 
+.rtl {
+  direction: rtl !important;
+  text-align: right !important;
+  unicode-bidi: bidi-override !important;
+}
+
+.ltr {
+  direction: ltr !important;
+  text-align: left !important;
+  unicode-bidi: bidi-override !important;
+}
+
+.locale-ru, .locale-en {
+  direction: ltr !important;
+  text-align: left !important;
+  unicode-bidi: bidi-override !important;
+}
+
+.locale-he {
+  direction: rtl !important;
+  text-align: right !important;
+  unicode-bidi: bidi-override !important;
+}
+
 //end locale
 
 textarea.concept_cond {

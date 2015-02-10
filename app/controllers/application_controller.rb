@@ -31,7 +31,7 @@ class ApplicationController < ActionController::Base
   def extract_locale_from_user
     if params[:locale]
       parsed_locale = params[:locale]
-    elsif signed_in? and current_user.locale
+    elsif signed_in? and current_user.locale.present?
       parsed_locale = current_user.locale
     else
       parsed_locale = request.env['HTTP_ACCEPT_LANGUAGE'].scan(/^[a-z]{2}/).first
