@@ -444,10 +444,10 @@ class PostsController < ApplicationController
       end
     elsif @type and @post.send(column_for_type_field(name_of_note_for_param, @type.to_i)) == true
       @post.update_attributes(column_for_type_field(name_of_note_for_param, @type.to_i) => nil)
-      @post.user.add_score(type: :to_archive_plus_field, project: @project, post: @post, path: @post.class.name.underscore.pluralize, type_field: column_for_type_field(name_of_note_for_param, @type.to_i)) if @post.instance_of? Concept::Post
+      # @post.user.add_score(type: :to_archive_plus_field, project: @project, post: @post, path: @post.class.name.underscore.pluralize, type_field: column_for_type_field(name_of_note_for_param, @type.to_i)) if @post.instance_of? Concept::Post
     elsif @post.notes.by_type(@type.to_i).size == 0
       @post.update_attributes(column_for_type_field(name_of_note_for_param, @type.to_i) => 't')
-      @post.user.add_score(type: :plus_field, project: @project, post: @post, path: @post.class.name.underscore.pluralize, type_field: column_for_type_field(name_of_note_for_param, @type.to_i)) if @post.instance_of? Concept::Post
+      # @post.user.add_score(type: :plus_field, project: @project, post: @post, path: @post.class.name.underscore.pluralize, type_field: column_for_type_field(name_of_note_for_param, @type.to_i)) if @post.instance_of? Concept::Post
     end
     @post.save!
     respond_to do |format|
