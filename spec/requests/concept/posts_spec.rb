@@ -24,7 +24,8 @@ describe 'Concept ' do
 
     context 'concept list' do
       before do
-        visit concept_posts_path(project)
+        # visit concept_posts_path(project)
+        visit ("/project/#{project.id}/concept/posts?asp=#{@aspect1.id}")
       end
 
       it 'show movie before start', js: true do
@@ -314,7 +315,7 @@ describe 'Concept ' do
 
     context 'concept list' do
       before do
-        visit concept_posts_path(project)
+        visit ("/project/#{project.id}/concept/posts?asp=#{@aspect1.id}")
       end
 
       it 'not see movie' do
@@ -410,16 +411,14 @@ describe 'Concept ' do
         visit concept_post_path(project, @concept1)
       end
 
-      xit 'can add note ', js: true do
-        click_link 'btn_note_1'
-        sleep(5)
+      it 'can add note ', js: true do
+        find(:css, "a#btn_note_1 div").trigger('click')
         expect(page).to have_selector "form#note_for_post_#{@concept1.id}_1"
         find("#note_for_post_#{@concept1.id}_1").find('#edit_post_note_text_area').set 'new note for first field concept post'
         find("#note_for_post_#{@concept1.id}_1").find("#send_post_1").click
         expect(page).to have_content "new note for first field concept post"
-        page.execute_script %($("ul#note_form_#{@concept1.id}_1 a").click())
-        # @todo нужно ждать пока отработает анимация скрытия и элемент будет удален
-        sleep(5)
+        find("ul#note_form_#{@concept1.id}_1 a").trigger('click')
+        sleep 5
         expect(page).not_to have_content 'new note for first field concept post'
       end
     end

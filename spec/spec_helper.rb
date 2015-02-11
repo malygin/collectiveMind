@@ -17,7 +17,7 @@ Spork.prefork do
 
   require 'simplecov'
   SimpleCov.start
-
+  DatabaseCleaner.clean
   Capybara.javascript_driver = :webkit
 
   Capybara.save_and_open_page_path = 'tmp/capybara-screenshot'
