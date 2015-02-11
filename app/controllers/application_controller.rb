@@ -26,7 +26,7 @@ class ApplicationController < ActionController::Base
   end
 
   def start_visit
-    if current_user and @project
+    if current_user and @project and request.method == 'GET'
       current_user.journals.create type_event: 'visit_save', project_id: @project.id,
                                    body: request.original_url
     end
