@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150206203903) do
+ActiveRecord::Schema.define(version: 20150211202805) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -189,8 +189,8 @@ ActiveRecord::Schema.define(version: 20150206203903) do
     t.integer  "post_id"
     t.integer  "discontent_post_id"
     t.integer  "complite"
-    t.datetime "created_at",         null: false
-    t.datetime "updated_at",         null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "concept_post_discontents", force: true do |t|
@@ -540,7 +540,7 @@ ActiveRecord::Schema.define(version: 20150206203903) do
     t.boolean  "discuss_status"
     t.boolean  "useful"
     t.boolean  "approve_status"
-    t.boolean  "anonym"
+    t.boolean  "anonym",             default: false
   end
 
   add_index "discontent_posts", ["aspect_id"], name: "index_discontent_posts_on_aspect_id", using: :btree
@@ -1021,7 +1021,7 @@ ActiveRecord::Schema.define(version: 20150206203903) do
   create_table "journals", force: true do |t|
     t.integer  "user_id"
     t.string   "type_event"
-    t.string   "body"
+    t.text     "body"
     t.datetime "created_at",                    null: false
     t.datetime "updated_at",                    null: false
     t.integer  "project_id"
