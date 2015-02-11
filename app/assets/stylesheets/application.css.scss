@@ -115,18 +115,35 @@ $brand-estimate:        #663505 !default;
 }
 
 .locale-ru, .locale-en {
-  direction: ltr !important;
+//  direction: ltr !important;
   text-align: left !important;
   unicode-bidi: bidi-override !important;
 }
 
+.locale-ru input, .locale-en input, .locale-ru textarea, .locale-en textarea {
+    direction: ltr !important;
+}
+
 .locale-he {
-  direction: rtl !important;
+//  direction: rtl !important;
   text-align: right !important;
   unicode-bidi: bidi-override !important;
 }
 
+.locale-he input, .locale-he textarea {
+    direction: rtl !important;
+}
+
+.table-he th {
+  text-align: right !important;
+}
+
+
 //end locale
+
+.table-words {
+  word-break: break-all;
+}
 
 textarea.concept_cond {
   max-height: 200px !important;
@@ -746,4 +763,3 @@ img.mfp-img {
   top: 0;
   right: 0;
   padding-top: 0; }
-

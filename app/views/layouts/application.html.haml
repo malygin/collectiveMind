@@ -1,5 +1,6 @@
 !!! 5
-%html(lang="en")
+%html
+  -#(lang="en")
   %head
     %meta(charset="utf-8")
     %meta(http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1")
@@ -28,7 +29,7 @@
             %span.text-danger MASS
             %strong DECISION
 
-    %nav#sidebar.sidebar.nav-collapse.collapse{style: "text-align: left !important;"}
+    %nav#sidebar.sidebar.nav-collapse.collapse.ltr
       - if core_methods?(params[:controller],params[:action])
         = render partial: 'core/projects/left_projects', locals: { current_stage: controller.controller_path }
       - else

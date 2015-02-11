@@ -3,48 +3,40 @@
   =t('link.back_proc')
 %section.widget
   .body
-    %h6 * В процедуре MASSDECISION™ баллы не начисляются автоматически.
-    %h6 * На каждой стадии начисление баллов производится вручную модераторами и экспертами.
-    %table.table.table-striped
+    %h6=t('show.rating.title_1')
+    %h6=t('show.rating.title_2')
+    %table.table.table-striped{class: "table-#{locale_for_user(current_user)}"}
       %thead
         %tr.success
           %th
-            %b Введение в процедуру
+            %b=t('show.rating.stage_collect_info')
           %th
-            %b Анализ ситуации
+            %b=t('show.rating.stage_discontent')
           %th
-            %b
-              Дизайн будущего
+            %b=t('show.rating.stage_concept')
           %th
-            %b
-              Разработка проектов
+            %b=t('show.rating.stage_plan')
           %th
-            %b
-              Отзывы
+            %b=t('show.rating.stage_essay')
       %tbody
         %tr.warning
-          %td Комментарий 5 баллов
-          %td Комментарий 5 баллов
-          %td Комментарий 5 баллов
-          %td Комментарий 5 баллов
-          %td Комментарий 5 баллов
+          %td=t('show.rating.comment', count: 5)
+          %td=t('show.rating.comment', count: 5)
+          %td=t('show.rating.comment', count: 5)
+          %td=t('show.rating.comment', count: 5)
+          %td=t('show.rating.comment', count: 5)
         %tr.info
           %td
           %td
-            Несовершенство 25 баллов,
+            =t('show.rating.discontent', count: 25)
             %br
-            Комментарий, ставший основой
-            %br
-            для несовершенства
-            10 баллов
-
+            =t('show.rating.discontent_improve', count: 10)
           %td
-            Максимальное количество баллов
-            %br
-            за одно нововведение — 110 баллов
-            %br (в зависимости от заполненности)
-          %td Проект 300 баллов
-          %td Отзыв 25 баллов
+            =t('show.rating.concept', count: 110)
+          %td
+            =t('show.rating.plan', count: 300)
+          %td
+            =t('show.rating.essay', count: 25)
 
 
     %h1=t('show.rating.title')

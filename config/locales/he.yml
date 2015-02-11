@@ -88,10 +88,10 @@ ru:
     pm: "вечера"
   menu:
     main: "Главная"
-    help: "Помощь"
-    about: "O проекте"
-    base_knowledge: "База знаний"
-    raiting: "Рейтинг"
+    help: "עזרה"
+    about: "על הפרויקט"
+    base_knowledge: "אוסף מידע בנושא"
+    raiting: "דירוג"
     raiting_rc: "Клубный рейтинг"
     search_text: "что я ищу"
     search: "Поиск"
@@ -99,7 +99,7 @@ ru:
     sign_in: "Войти"
     sign_out: "Выйти"
     sign_up: "Зарегистрироваться"
-    news: "Новости"
+    news: "חדשות"
     general_news: "Общие новости"
     general_rating: "Общий рейтинг"
     list_projects: "Список процедур"
@@ -137,13 +137,13 @@ ru:
       one: "и еще 1 похожих"
       few: "и еще %{count} похожих"
       other: "и еще %{count} похожих"
-    profile_edit: Редактировать профиль
-    notice_edit: Настройка уведомлений
+    profile_edit: 'עריכה של פרופיל'
+    notice_edit: 'הגדרות של הודעות'
     list_aspects: 'Аспекты:'
     help_stage: Помощь по стадии
     help_note: Посмотреть помощь по стадии
     reflection_stage: Отзывы о стадии
-    account: 'Профиль'
+    account: 'פרופיל'
     list_groups: "Список групп"
     locale_edit: "Настройка языка"
 
@@ -551,6 +551,7 @@ ru:
 
     delete_group: "Удалить группу?"
     delete_group_task: "Удалить задачу?"
+
   show:
     without_name: 'Без названия'
     note: замечание
@@ -647,12 +648,43 @@ ru:
         other: '%{count} сообщений'
 
     rating:
-      title: Рейтинг участников
-      sort: Показан рейтинг
-      sort_default: по текущей стадии
-      sort_generators: Генераторов идей
-      sort_analysts: Аналитиков
-      sort_voters: Оценщиков
+      title: דירוג משתמשים
+      sort: 'הדירוג הוצג לפי'
+      sort_default: 'השלב הנוכחי'
+      sort_generators: 'יוצרי רעיונות'
+      sort_analysts: 'אנליסטים'
+      sort_voters: 'מעריכים'
+      title_1: '*נקודות פרוצדורה ™MASSDECISION אינם מוענקים באופן אוטומטי.'
+      title_2: '*בכל שלב ניקוד מתבצע באופן ידני על ידי מנהלי הפרוצדורה ומומחים.'
+      stage_collect_info: 'מבוא לפרוצדורה'
+      stage_discontent: 'ניתוח המצב הקיים'
+      stage_concept: 'עיצוב העתיד'
+      stage_plan: 'פיתוח הפרויקטים'
+      stage_essay: 'משובים'
+      comment:
+        one: 'תגובה — 1 נקודות'
+        few: 'תגובה — %{count} נקודות'
+        other: 'תגובה — %{count} נקודות'
+      discontent:
+        one: 'פגם — 1 נקודות'
+        few: 'פגם — %{count} נקודות'
+        other: 'פגם — %{count} נקודות'
+      discontent_improve:
+        one: 'התגובה המשמשת כבסיס לפגם – 1 נקודות'
+        few: 'התגובה המשמשת כבסיס לפגם – %{count} נקודות'
+        other: 'התגובה המשמשת כבסיס לפגם – %{count} נקודות'
+      concept:
+        one: 'כמות מאקסימלית של נקודות עבור חידוש אחד – 1 נקודות (בהתאם לרמת המילוי)'
+        few: 'כמות מאקסימלית של נקודות עבור חידוש אחד – %{count} נקודות (בהתאם לרמת המילוי)'
+        other: 'כמות מאקסימלית של נקודות עבור חידוש אחד – %{count} נקודות (בהתאם לרמת המילוי)'
+      plan:
+        one: 'פרויקט — 1 נקודות'
+        few: 'פרויקט — %{count} נקודות'
+        other: 'פרויקט — %{count} נקודות'
+      essay:
+        one: 'משוב — 1 נקודות'
+        few: 'משוב — %{count} נקודות'
+        other: 'משוב — %{count} נקודות'
 
     user:
       others: Пользователи
@@ -740,7 +772,7 @@ ru:
     remove: Удалить
     add_record: '+ Добавить'
     back_list: Вернуться к списку
-    back_proc: вернуться к процедуре
+    back_proc: 'לחזור לפרוצדורה'
     profile: Профиль
     know_more: 'Узнать больше!'
     to_work: 'Приступить к работе!'
