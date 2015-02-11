@@ -76,13 +76,13 @@
   this.toggle_approve = ->
     $(this).toggleClass('label-default label-success')
 
-  this.toggle_scores = ->
-    $(this).toggleClass('label-danger label-success')
-    text = $(this).text().trim()
-    if text == 'Выдать баллы'
-      $(this).html('Забрать баллы')
-    else
-      $(this).html('Выдать баллы')
+#  this.toggle_scores = ->
+#    $(this).toggleClass('label-danger label-success')
+#    text = $(this).text().trim()
+#    if text == 'Выдать баллы'
+#      $(this).html('Забрать баллы')
+#    else
+#      $(this).html('Выдать баллы')
 
   $('.chat-messages').on('click', 'button.edit-comment', this.edit_comment)
   $('.chat-messages').on('click', 'button.edit-cancel', this.edit_cancel)
@@ -96,7 +96,7 @@
   $('.chat-messages, .news-list, .show_bar_block').on('click', 'a.link_status span.label_discuss', this.toggle_discuss)
   $('.chat-messages, .news-list, .show_bar_block').on('click', 'a.link_status span.label_approve', this.toggle_approve)
 
-  $('.chat-messages, .news-list, .show_bar_block').on('click', 'a.link_status span.label_give_scores', this.toggle_scores)
+#  $('.chat-messages, .news-list, .show_bar_block').on('click', 'a.link_status span.label_give_scores', this.toggle_scores)
 
   #  check if url contain anchor
   myLink = document.location.toString();
