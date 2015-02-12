@@ -146,6 +146,7 @@ ru:
     account: 'Профиль'
     list_groups: "Список групп"
     locale_edit: "Настройка языка"
+    user_analytic: "Статистика по пользователям"
 
   stages:
     intro: Знакомство
@@ -627,8 +628,9 @@ ru:
       groups: Группы несовершенств
       grouped_success: Несовершенство сделано группой
       required_success: Несовершенство добавлено в обязательные
+      required_revert: Несовершенство возвращено в обычные
       grouped: Группа
-      required: Добавлено
+      required: В обычные
       do_require: В обязательные
       select_prompt: Добавьте несовершенство
       do_group: Сделать группой
@@ -845,3 +847,5 @@ ru:
     editing: "Редактирование группы"
     group: "Группа"
     call_moderator_success: "Модератор получил уведомление"
+  analytic:
+    graph_visits: "График посещений"

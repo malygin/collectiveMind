@@ -1,4 +1,19 @@
-.col-md-6
+- if current_user.not_ready_for_concept?(@project)
+  .col-md-9
+    .col-md-offset-3
+      .text-align-left
+        Дорогие друзья, вы успешно завершили вторую стадию и высказали ряд ценных и полезных замечаний. Мы обязательно воспользуемся ими для улучшения процедуры.
+        Прежде чем продолжить работу, мы предлагаем вам просмотреть видеоролик, который поможет вам продуктивно действовать на следующей стадии. Обращаем ваше внимание на два разных подхода к разработке нововведений: от несовершенства и от идеи.
+        В ролике описан второй случай, поскольку он более сложный, однако большая часть инструкций применима и в первом случае.
+      #player-container
+      = link_to '', "/project/#{@project.id}/project_users/ready_to_concept", remote: true, id: 'movie_watched', style: 'display: none'
+      .preview.text-align-center
+        .btn.btn-success.btn-lg.btn-block#play_video{'data-stage' => 'play'}
+          Начать просмотр
+      .alert.alert-success#message-after-movie{style: 'display: none'}
+        Спасибо за просмотр, ролик вы можете посмотреть еще раз в разделе помощь
+
+.col-md-6#concept-main{style:('display: none' if current_user.not_ready_for_concept?(@project))}
   %section
     %header
       .row
@@ -122,7 +137,7 @@
                     %td
                       %span.h4.color-orange
                         =status_for_concept(pa.post_aspects.first)
-.col-md-6
+.col-md-6#concept-comments-main{style:('display: none' if current_user.not_ready_for_concept?(@project))}
   %section
     %header
       %h4

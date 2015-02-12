@@ -17,3 +17,8 @@
       = link_to edit_locale_user_path(@project, current_user) do
         %i.glyphicon.glyphicon-globe
         = t('menu.locale_edit')
+    - if role_expert?
+      %li
+        = link_to "/project/#{@project.id}/project_users/user_analytics", id: 'go_to_user_analytics' do
+          %i.glyphicon.glyphicon-signal
+          = t('menu.user_analytic')

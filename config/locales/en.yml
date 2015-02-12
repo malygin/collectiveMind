@@ -146,6 +146,7 @@ en:
     account: 'Profile'
     list_groups: "List of gorups"
     locale_edit: "Настройка языка"
+    user_analytic: "User analytic"
 
   stages:
     intro: Intro
@@ -836,3 +837,5 @@ en:
     editing: "Editing group"
     group: "Group"
     call_moderator_success: "Moderator get notification"
+  analytic:
+    graph_visits: "Graph visits"

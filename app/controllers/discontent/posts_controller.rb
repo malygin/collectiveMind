@@ -42,7 +42,7 @@ class Discontent::PostsController < PostsController
     @project = Core::Project.find(params[:project])
     @aspects = Discontent::Aspect.where(project_id: @project, status: 0)
     if @project.status == 6
-      @vote_all = Discontent::Voting.by_posts_vote(@project.discontents.by_status([2, 4]).pluck(:id).join(", ")).uniq_user.count
+      @vote_all = Discontent::Voting.by_posts_vote(@project.discontents.by_status([2, 4]).pluck(:id).join(", ")).not_admins.uniq_user.count
     end
   end
 
@@ -212,8 +212,12 @@ class Discontent::PostsController < PostsController
 
   def set_required
     @post = Discontent::Post.find(params[:id])
-    if boss? and @post.status == 2
-      @post.update_attributes(status: 4)
+    if boss? or role_expert?
+      if @post.status == 2
+        @post.update_attributes(status: 4)
+      elsif @post.status == 4
+        @post.update_attributes(status: 2)
+      end
     end
   end
 

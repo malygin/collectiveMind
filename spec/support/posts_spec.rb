@@ -5,7 +5,7 @@ shared_examples 'content with comments' do |moderator = false, count = 2, projec
   let(:text_comment) { attributes_for(comment_model.to_sym)[:content] }
 
   before do
-    refresh_page
+    # refresh_page
   end
 
   if moderator
@@ -13,13 +13,11 @@ shared_examples 'content with comments' do |moderator = false, count = 2, projec
       prepare_awards
       plus_comment_path = Rails.application.routes.url_helpers.send("plus_comment_#{comment_post_model}_path", project, @comment_1)
 
-      # expect(page).to have_css("a#plus_comment_#{@comment_1.id}", text: 'Выдать баллы')
-      click_link "plus_comment_#{@comment_1.id}"
-      sleep(5)
-      expect(page).to have_link("plus_comment_#{@comment_1.id}", text: 'Забрать баллы', href: plus_comment_path)
-      sleep(5)
-      click_link "plus_comment_#{@comment_1.id}"
-      expect(page).to have_link("plus_comment_#{@comment_1.id}", text: 'Выдать баллы', href: plus_comment_path)
+      expect(page).to have_css("a#plus_comment_#{@comment_1.id} span", text: 'Выдать баллы')
+      click_link("plus_comment_#{@comment_1.id}")
+      sleep 5
+      expect(page).to have_css("a#plus_comment_#{@comment_1.id} span", text: 'Забрать баллы')
+
     end
   else
     it ' not button like' do
@@ -47,7 +45,7 @@ shared_examples 'content with comments' do |moderator = false, count = 2, projec
     expect(page).to have_content @comment_1.content
   end
 
-  context 'add new comment', js: true do
+  context 'add new comment',js: true do
     before do
       fill_in 'comment_text_area', with: text_comment
       find('input.send-comment').click
@@ -70,7 +68,7 @@ shared_examples 'content with comments' do |moderator = false, count = 2, projec
     Cloudinary::Api.delete_resources('comments/'+ page.first('a.image-popup-vertical-fit img')['alt'].downcase)
   end
 
-  context ' add new answer comment', js: true do
+  context ' add new answer comment',js: true do
     before do
       click_button "reply_comment_#{@comment_1.id}"
       find("#form_reply_comment_#{@comment_1.id}").find('.comment-textarea').set text_comment
@@ -105,13 +103,14 @@ shared_examples 'content with comments' do |moderator = false, count = 2, projec
     expect(page).to have_css 'a.previous_page'
   end
 
-  context 'mark comment as', js: true do
+  context 'mark comment as',js: true do
     if project_status < 7
       it 'discontent' do
         within :css, "a#discontent_comment_#{@comment_1.id}" do
           expect(page).to have_css 'span.label-default'
         end
-        click_link "discontent_comment_#{@comment_1.id}"
+        find(:css, "a#discontent_comment_#{@comment_1.id} span").trigger('click')
+
         within :css, "a#discontent_comment_#{@comment_1.id}" do
           expect(page).to have_css 'span.label-danger'
         end
@@ -122,7 +121,8 @@ shared_examples 'content with comments' do |moderator = false, count = 2, projec
       within :css, "a#concept_comment_#{@comment_1.id}" do
         expect(page).to have_css 'span.label-default'
       end
-      click_link "concept_comment_#{@comment_1.id}"
+      find(:css, "a#concept_comment_#{@comment_1.id} span").trigger('click')
+      # click_link "concept_comment_#{@comment_1.id}"
       within :css, "a#concept_comment_#{@comment_1.id}" do
         expect(page).to have_css 'span.label-warning'
       end
@@ -133,7 +133,9 @@ shared_examples 'content with comments' do |moderator = false, count = 2, projec
         within :css, "a#discuss_stat_comment_#{@comment_1.id}" do
           expect(page).to have_css 'span.label-default'
         end
-        click_link "discuss_stat_comment_#{@comment_1.id}"
+        find(:css, "a#discuss_stat_comment_#{@comment_1.id} span").trigger('click')
+
+        # click_link "discuss_stat_comment_#{@comment_1.id}"
         within :css, "a#discuss_stat_comment_#{@comment_1.id}" do
           expect(page).to have_css 'span.label-danger'
         end
@@ -143,7 +145,9 @@ shared_examples 'content with comments' do |moderator = false, count = 2, projec
         within :css, "a#approve_stat_comment_#{@comment_1.id}" do
           expect(page).to have_css 'span.label-default'
         end
-        click_link "approve_stat_comment_#{@comment_1.id}"
+        find(:css, "a#approve_stat_comment_#{@comment_1.id} span").trigger('click')
+
+        # click_link "approve_stat_comment_#{@comment_1.id}"
         within :css, "a#approve_stat_comment_#{@comment_1.id}" do
           expect(page).to have_css 'span.label-success'
         end
@@ -175,7 +179,7 @@ shared_examples 'content with comments' do |moderator = false, count = 2, projec
     end
   end
 
-  context 'destroy comment' do
+  context 'destroy comment'do
     it 'i owner - ok', js: true do
       expect {
         click_link "destroy_comment_#{@comment_1.id}"
@@ -212,15 +216,14 @@ shared_examples 'likes posts' do |moderator = false|
   if moderator
     it ' like post', js: true do
       prepare_awards
-      plus_post_path = Rails.application.routes.url_helpers.send("plus_#{post_model}_path", project, @post1)
-
-      expect(page).to have_link("plus_post_#{@post1.id}", text: 'Выдать баллы', href: plus_post_path)
-      click_link "plus_post_#{@post1.id}"
+      # plus_post_path = Rails.application.routes.url_helpers.send("plus_#{post_model}_path", project, @post1)
+      expect(page).to have_css("a#plus_post_#{@comment_1.id} span", text: 'Выдать баллы')
+      find(:css, "a#plus_post_#{@post1.id} span").trigger('click')
       sleep(5)
-      expect(page).to have_link("plus_post_#{@post1.id}", text: 'Забрать баллы', href: plus_post_path)
+      expect(page).to have_css("a#plus_post_#{@comment_1.id} span", text: 'Забрать баллы')
       sleep(5)
-      click_link "plus_post_#{@post1.id}"
-      expect(page).to have_link("plus_post_#{@post1.id}", text: 'Выдать баллы', href: plus_post_path)
+      find(:css, "a#plus_post_#{@post1.id} span").trigger('click')
+      expect(page).to have_css("a#plus_post_#{@comment_1.id} span", text: 'Выдать баллы')
     end
   else
     it ' not button like' do

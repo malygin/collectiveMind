@@ -73,6 +73,7 @@
         - if boss? or role_expert?
           |
           =link_to({action: :plus_comment, id: comment.id}, remote: true, method: :put, class: "link_status", id: "plus_comment_#{comment.id}") do
+            &nbsp;
             -if comment.useful
               %span.label_give_scores.label.label-danger=t('show.revert_score')
             - else

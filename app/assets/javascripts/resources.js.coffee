@@ -49,7 +49,7 @@
     mean.append('<br/><div class="main_means main_res" id="main_' + field + '_' + position + '" data-position="' + position + '">
                             <div class="col-md-8">
                                 <span role="status" aria-live="polite" class="ui-helper-hidden-accessible"></span>
-                                <input class="form-control autocomplete ui-autocomplete-input" data-autocomplete="/project/' + project + '/autocomplete_concept_post_mean_concept_posts" id="res" min-length="0" name="resor[][means][][name]" placeholder="Введите свой ресурс или выберите из списка" type="text" autocomplete="off">
+                                <input class="form-control autocomplete ui-autocomplete-input" data-autocomplete="/project/' + project + '/autocomplete_concept_post_mean_concept_posts" id="res" min-length="0" name="resor[][means][][name]" placeholder="Введите свое средство или выберите из списка" type="text" autocomplete="off">
                                 <input name="resor[][means][][type_res]" type="hidden" value="' + field + '">
                             </div>
                             <div class="col-md-4">

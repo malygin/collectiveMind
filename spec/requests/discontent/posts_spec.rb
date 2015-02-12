@@ -27,11 +27,10 @@ describe 'Discontent ' do
 
     context 'discontent list' do
       before do
-        visit discontent_posts_path(project)
+        visit "/project/#{project.id}/discontent/posts?asp=#{@aspect1.id}"
       end
 
       it ' can see all discontents in aspect' do
-        visit "/project/#{project.id}/discontent/posts?asp=#{@aspect1.id}"
         expect(page).to have_content 'Несовершенства'
         expect(page).to have_content I18n.t('show.improve.problem')
         expect(page).to have_content @discontent1.content
@@ -65,16 +64,15 @@ describe 'Discontent ' do
         expect(page).to have_content 'disсontent'
       end
 
-      it 'add anonym discontent and get fine feed', js: true do
+      it 'add anonym discontent and get fine feed' do
         click_link 'add_record'
 
         fill_in 'discontent_post_content', with: 'disсontent content'
         fill_in 'discontent_post_whered', with: 'disсontent where'
         fill_in 'discontent_post_whend', with: 'disсontent when'
-        check 'discontent_post_anonym'
-        sleep 2
+        find(:css, "#discontent_post_anonym[value='1']").set(true)
+
         click_button 'send_post'
-        sleep 2
         visit journals_path(project: project)
         expect(page).to have_content I18n.t('journal.add_anonym_discontent')
       end
@@ -178,8 +176,11 @@ describe 'Discontent ' do
         end
 
         it ' like post and have award', js: true do
-          expect(page).to have_link("plus_post_#{@discontent1.id}", text: 'Выдать баллы', href: plus_discontent_post_path(project, @discontent1))
-          click_link "plus_post_#{@discontent1.id}"
+          expect(page).to have_css("a#plus_post_#{@comment_1.id} span", text: 'Выдать баллы')
+
+          # expect(page).to have_link("plus_post_#{@discontent1.id}", text: 'Выдать баллы', href: plus_discontent_post_path(project, @discontent1))
+          find(:css, "a#plus_post_#{@discontent1.id} span").trigger('click')
+
           sleep 2
           visit journals_path(project: project)
           expect(page).to have_selector('i.fa.fa-trophy')

@@ -4,13 +4,15 @@ class ApplicationController < ActionController::Base
   include ApplicationHelper
   before_action :configure_permitted_parameters, if: :devise_controller?
   before_action :set_locale
+  before_action :set_project
+  before_action :start_visit
 
   def after_sign_in_path_for(resource)
     request.env['omniauth.origin'] || stored_location_for(resource) || root_path
   end
 
   def journal_data
-    @project = Core::Project.find(params[:project])
+    set_project
     @my_journals = current_user.my_journals @project
   end
 
@@ -23,6 +25,7 @@ class ApplicationController < ActionController::Base
   def configure_permitted_parameters
     devise_parameter_sanitizer.for(:sign_up) << :name
   end
+
 
   def set_locale
     I18n.locale = extract_locale_from_user || I18n.default_locale
@@ -37,5 +40,16 @@ class ApplicationController < ActionController::Base
       parsed_locale = request.env['HTTP_ACCEPT_LANGUAGE'].scan(/^[a-z]{2}/).first
     end
     I18n.available_locales.map(&:to_s).include?(parsed_locale) ? parsed_locale : nil
+  end
+
+  def start_visit
+    if current_user and @project and request.method == 'GET'
+      current_user.journals.create type_event: 'visit_save', project_id: @project.id,
+                                   body: request.original_url
+    end
+  end
+
+  def set_project
+    @project = Core::Project.find params[:project] if params[:project]
   end
 end

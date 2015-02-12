@@ -8,6 +8,7 @@ describe 'Concept ' do
   let (:prime_admin) { create :prime_admin }
   let (:moderator) { create :moderator }
   let (:project) { create :core_project, status: 7 }
+  let!(:project_user) { create :core_project_user, user: user, core_project: project, ready_to_concept: true }
 
   before do
     prepare_concepts(project, user_data)
@@ -23,7 +24,18 @@ describe 'Concept ' do
 
     context 'concept list' do
       before do
-        visit concept_posts_path(project)
+        # visit concept_posts_path(project)
+        visit ("/project/#{project.id}/concept/posts?asp=#{@aspect1.id}")
+      end
+
+      it 'show movie before start', js: true do
+        project_user.update ready_to_concept: false
+        refresh_page
+        expect(page).to have_css 'div#player-container'
+        execute_script("$('#movie_watched').click()")
+        refresh_page
+        expect(page).to have_content 'Нововведения'
+        expect(page).to have_content I18n.t('show.improve.ideas')
       end
 
       it ' can see all concepts in aspect' do
@@ -299,12 +311,15 @@ describe 'Concept ' do
   context 'moderator sign in' do
     before do
       sign_in moderator
-      visit root_path
     end
 
     context 'concept list' do
       before do
-        visit concept_posts_path(project)
+        visit ("/project/#{project.id}/concept/posts?asp=#{@aspect1.id}")
+      end
+
+      it 'not see movie' do
+        expect(page).not_to have_css 'div#player-container'
       end
 
       it ' can see all concepts in aspect' do
@@ -397,15 +412,13 @@ describe 'Concept ' do
       end
 
       it 'can add note ', js: true do
-        click_link 'btn_note_1'
-        sleep(5)
+        find(:css, "a#btn_note_1 div").trigger('click')
         expect(page).to have_selector "form#note_for_post_#{@concept1.id}_1"
         find("#note_for_post_#{@concept1.id}_1").find('#edit_post_note_text_area').set 'new note for first field concept post'
         find("#note_for_post_#{@concept1.id}_1").find("#send_post_1").click
         expect(page).to have_content "new note for first field concept post"
-        page.execute_script %($("ul#note_form_#{@concept1.id}_1 a").click())
-        # @todo нужно ждать пока отработает анимация скрытия и элемент будет удален
-        sleep(5)
+        find("ul#note_form_#{@concept1.id}_1 a").trigger('click')
+        sleep 5
         expect(page).not_to have_content 'new note for first field concept post'
       end
     end
