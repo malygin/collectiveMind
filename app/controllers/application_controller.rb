@@ -6,7 +6,6 @@ class ApplicationController < ActionController::Base
   before_action :set_project
   before_action :start_visit
   before_action :set_locale
-  # around_action :with_locale
 
   def after_sign_in_path_for(resource)
     request.env['omniauth.origin'] || stored_location_for(resource) || root_path
@@ -29,29 +28,18 @@ class ApplicationController < ActionController::Base
 
 
   def set_locale
-    # I18n.load_path += Dir[Rails.root.join('config', 'locales', '*.yml')]
-    # I18n.default_locale = extract_locale_from_user
-    # I18n.reload!
     I18n.locale = (extract_locale_from_user || I18n.default_locale).to_sym
     I18n.load_path += Dir[Rails.root.join("config/locales/**/*.yml")]
     session[:locale] = I18n.locale
-    # I18n.reload!
-    # session[:locale] = I18n.locale
-    # redirect_to :back
-    # I18n.load_path += Dir[Rails.root.join('config', 'locales', "#{I18n.locale}.yml").to_s]
-  end
-
-  def with_locale
-    I18n.with_locale(params[:locale]) { yield }
   end
 
   def extract_locale_from_user
     if params[:locale]
       parsed_locale = params[:locale]
-    elsif signed_in? and current_user.locale.present?
+    elsif current_user and current_user.locale.present?
       parsed_locale = current_user.locale
     else
-      parsed_locale = request.env['HTTP_ACCEPT_LANGUAGE'].scan(/^[a-z]{2}/).first
+      parsed_locale = request.env['HTTP_ACCEPT_LANGUAGE'].scan(/^[a-z]{2}/).first if request.env['HTTP_ACCEPT_LANGUAGE']
     end
     I18n.available_locales.map(&:to_s).include?(parsed_locale) ? parsed_locale : nil
   end

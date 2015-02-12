@@ -724,13 +724,13 @@ module ApplicationHelper
 
   def date_stage_for_project(project)
     date_now = 1.day.ago.utc
-    if project.date12 >= date_now
+    if project.date_12 >= date_now
       'Сбор несовершенств'
-    elsif project.date23 >= date_now
+    elsif project.date_23 >= date_now
       'Сбор нововведений'
-    elsif project.date34 >= date_now
+    elsif project.date_34 >= date_now
       'Создание проектов'
-    elsif project.date45 >= date_now
+    elsif project.date_45 >= date_now
       'Выставление оценок'
     end
   end
@@ -828,7 +828,7 @@ module ApplicationHelper
     elsif user.present? and user.locale.present?
       locale = user.locale
     else
-      locale = request.env['HTTP_ACCEPT_LANGUAGE'].scan(/^[a-z]{2}/).first
+      locale = request.env['HTTP_ACCEPT_LANGUAGE'].scan(/^[a-z]{2}/).first if request.env['HTTP_ACCEPT_LANGUAGE']
     end
     I18n.available_locales.map(&:to_s).include?(locale) ? locale : I18n.default_locale
   end

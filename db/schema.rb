@@ -1563,6 +1563,7 @@ ActiveRecord::Schema.define(version: 20150211202805) do
     t.datetime "last_seen_chat_at"
     t.string   "skype"
     t.string   "phone"
+    t.string   "locale"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
