@@ -21,7 +21,8 @@
           = Russian::strftime(@post.created_at, '%d %B %k:%M:%S ')
           =improve_comment(@post).html_safe if improve_comment(@post)
 
-    = render 'shared/post_social_bar2', post: @post
+    .show_bar_block
+      = render 'shared/post_social_bar2', post: @post
     %span
       -if @post.status == 2 and boss?
         = link_to t('show.discontent.ungroup'), {action: :ungroup_union, id: @post.id}, method: :put, data: {confirm: t('confirm.accept')}, class: 'btn btn-warning btn-xs'

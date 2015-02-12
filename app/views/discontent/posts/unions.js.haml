@@ -1,4 +1,8 @@
 $('#new_posts').fadeOut(500, function() {$('#new_posts').html("#{escape_javascript(render partial: 'post', collection: @posts)}").fadeIn();});
+$('#spinner_tab_unions').hide();
+
+
+
 -#$('li#new').toggleClass('active');
 -#$('li#old').removeClass('active');
 -#$('li#imp').removeClass('active');

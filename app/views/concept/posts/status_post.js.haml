@@ -2,8 +2,8 @@
   $("#concept_field_all_#{@post.id} span").html("#{@post.status_all ? 'Забрать все' : 'Выдать все'}");
   $("#concept_field_all_#{@post.id} span").toggleClass('label-success label-danger')
   -if @post.status_all
-    - 11.times do |n|
-      $('##{id_for_concept_type(n+1)}').removeClass('color-orange color-red').addClass('color-green');
+    - @statuses.each do |type|
+      $('##{type}').removeClass('color-orange color-red').addClass('color-green');
   -else
     - 11.times do |n|
       $('##{id_for_concept_type(n+1)}').removeClass('color-green color-red').addClass('color-orange');

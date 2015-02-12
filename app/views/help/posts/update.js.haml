@@ -1,0 +1,3 @@
+сommand_htmleditor('remove','some-textarea');
+$('#help_content_#{@post.id}').html("#{escape_javascript(@post.content.html_safe)}");
+$('#edit_help_post_#{@post.id}').show();

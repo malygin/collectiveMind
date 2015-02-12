@@ -19,28 +19,38 @@
             = Russian::strftime(@post.created_at,'%d %B %k:%M:%S')
           %br
           -if current_user?(@post.user) or boss? or role_expert?
-            %span.label.label-success="#{@post.fullness.nil? ? 40 : @post.fullness + 39} баллов из 110"
+            %span.label.label-success="#{@post.fullness_title} баллов из 110"
           %br
           -if improve_comment(@post)
             =improve_comment(@post).html_safe
-            |
-          - if boss? or role_expert?
-            =link_to({action: :discuss_status, id: @post.id, discuss_status: 1}, remote: true, method: :put,  id: "discuss_stat_post_#{@post.id}") do
-              %span.label(class="#{label_discuss_stat(@post)}")=t('show.discuss')
-            =link_to({action: :discuss_status, id: @post.id, approve_status: 1}, remote: true, method: :put,  id: "approve_stat_post_#{@post.id}") do
-              %span.label(class="#{label_approve_stat(@post)}")=t('show.important')
+            %br
+          - if boss? or role_expert? or stat_expert?
+            .show_bar_block
+              =link_to({action: :discuss_status, id: @post.id, discuss_status: 1}, remote: true, method: :put, class: "link_status", id: "discuss_stat_post_#{@post.id}") do
+                %span.label_discuss.label(class="#{label_discuss_stat(@post)}")=t('show.discuss')
+              =link_to({action: :discuss_status, id: @post.id, approve_status: 1}, remote: true, method: :put, class: "link_status", id: "approve_stat_post_#{@post.id}") do
+                %span.label_approve.label(class="#{label_approve_stat(@post)}")=t('show.important')
           - else
             -if @post.discuss_status
               %span.label-danger=t('show.discuss')
             -if @post.approve_status
               %span.label-success=t('show.important')
           -if boss? or role_expert?
-            |
-            =link_to({controller:'concept/posts', action: :status_post, id: @post.id, field_all: true}, remote: true, method: :put, id:"concept_field_all_#{@post.id}",class:"note_text") do
+            =link_to({controller:'concept/posts', action: :status_post, id: @post.id, field_all: true}, remote: true, method: :put, id:"concept_field_all_#{@post.id}", class:"note_text") do
               -if @post.status_all
-                %span.label.label-success Забрать все
+                %span.label.label-danger Забрать все
               -else
-                %span.label.label-danger Выдать все
+                %span.label.label-success Выдать все
+          %br
+          Комментариев
+          =@post.comments.count
+          %span.glyphicon.glyphicon-comment
+          - count = @post.comments.where("created_at >= ?", last_time_visit_post(@post, 'concept')).count
+          - if(count > 0)
+            | новых:
+            %span.badge=@post.comments.where("created_at >= ?", last_time_visit_post(@post, 'concept')).count
+          |
+          = render 'shared/post_social_bar3', post: @post
 
           -#-if boss?
           -#  |

@@ -1,0 +1,55 @@
+#nvd3_project(data-count_people="#{@count_people}" data-average_time="#{@average_time}")
+%h3
+  = t 'analytic.graph_visits'
+%section.widget.large
+  %header
+    %h4
+      %i.fa.fa-bar-chart-o
+        Пользователи
+  #user_visits_graph.body.chart
+    %svg
+
+%h3 Среднее время, проведенное на портале
+%section.widget.large
+  %header
+    %h4
+      %i.fa.fa-bar-chart-o
+        Время
+  #average_time_graph.body.chart
+    %svg
+
+%h3 Количество просмотренных страниц
+%table.table.table-striped.table-bordered
+  %thead
+    %tr
+      %th
+        Пользователь
+      - @count_pages[:dates].each do |day|
+        %th
+          = Russian::strftime(day, '%d %B')
+  %tbody
+    - @count_pages[:users].each do |user, pages|
+      %tr
+        %td
+          = user
+        - @count_pages[:dates].each do |day|
+          %td{class: ('text-warning' if pages[day].nil?)}
+            = pages[day].nil? ? 0 : pages[day]
+
+%h3 Количество совершенных действий
+%table.table.table-striped.table-bordered
+  %thead
+    %tr
+      %th
+        Пользователь
+      - @count_actions[:dates].each do |day|
+        %th
+          = Russian::strftime(day, '%d %B')
+  %tbody
+    - @count_actions[:users].each do |user, pages|
+      %tr
+        %td
+          = user
+        - @count_actions[:dates].each do |day|
+          %td{class: ('text-warning' if pages[day].nil?)}
+            = pages[day].nil? ? 0 : pages[day]

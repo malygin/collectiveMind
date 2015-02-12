@@ -137,6 +137,7 @@ en:
     reflection_stage: Stage Analysis
     account: 'Profile'
     list_groups: "List of gorups"
+    user_analytic: "User analytic"
   stages:
     intro: Intro
     life_tape: 'Data Gathering'
@@ -382,6 +383,8 @@ en:
       email: 'Почта'
       avatar: 'Выберите файл для аватара'
 
+      skype: "Skype"
+      phone: "Phone"
     estimate:
       negative: Оценка негативных явлений
       planwhole: Общая оценка проекта
@@ -753,6 +756,7 @@ en:
     self_score: "вы получили #{count} баллов за полезный комментарий!"
     other: 'что то другое'
 
+    add_anonym_discontent: "Add anonym discontent"
   devise:
     mailer: Кто-то (вероятнее все вы) послал запрос на восстанволение пароля на сайте http://mass-decision.ru
     ignor: If you did not send the request, please ignore this message.
@@ -783,3 +787,5 @@ en:
     call_moderator_success: "Moderator get notification"
   project_settings:
     success_update: "Dates successful update"
+  analytic:
+    graph_visits: "Graph visits"

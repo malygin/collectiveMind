@@ -8,6 +8,7 @@ describe 'Concept ' do
   let (:prime_admin) { create :prime_admin }
   let (:moderator) { create :moderator }
   let (:project) { create :core_project, status: 7 }
+  let!(:project_user) { create :core_project_user, user: user, core_project: project, ready_to_concept: true }
 
   before do
     prepare_concepts(project, user_data)
@@ -23,7 +24,18 @@ describe 'Concept ' do
 
     context 'concept list' do
       before do
-        visit concept_posts_path(project)
+        # visit concept_posts_path(project)
+        visit ("/project/#{project.id}/concept/posts?asp=#{@aspect1.id}")
+      end
+
+      it 'show movie before start', js: true do
+        project_user.update ready_to_concept: false
+        refresh_page
+        expect(page).to have_css 'div#player-container'
+        execute_script("$('#movie_watched').click()")
+        refresh_page
+        expect(page).to have_content 'Нововведения'
+        expect(page).to have_content I18n.t('show.improve.ideas')
       end
 
       it ' can see all concepts in aspect' do
@@ -59,6 +71,7 @@ describe 'Concept ' do
         find(:css, "#main_positive_r_1 input.autocomplete[name='resor[][name]']").set('positive_r_1')
         find(:css, "#main_positive_s_1 input.autocomplete[name='resor[][means][][name]']").set('positive_s_1')
 
+        sleep 2
         click_button 'send_post_concept'
         expect(page).to have_content 'Ваше нововведение успешно отредактированно! Вы можете перейти к его просмотру или к просмотру списка нововведений.'
         expect(page).to have_content 'Перейти к списку'
@@ -264,7 +277,7 @@ describe 'Concept ' do
       end
 
       context 'concept comments' do
-        it_behaves_like 'content with comments', 'Concept::Comment'
+        it_behaves_like 'content with comments', false, 2, 7
       end
     end
 
@@ -298,12 +311,15 @@ describe 'Concept ' do
   context 'moderator sign in' do
     before do
       sign_in moderator
-      visit root_path
     end
 
     context 'concept list' do
       before do
-        visit concept_posts_path(project)
+        visit ("/project/#{project.id}/concept/posts?asp=#{@aspect1.id}")
+      end
+
+      it 'not see movie' do
+        expect(page).not_to have_css 'div#player-container'
       end
 
       it ' can see all concepts in aspect' do
@@ -387,7 +403,7 @@ describe 'Concept ' do
 
 
       context 'concept comments' do
-        it_behaves_like 'content with comments', 'Concept::Comment', true
+        it_behaves_like 'content with comments', true, 2, 7
       end
     end
 
@@ -397,15 +413,13 @@ describe 'Concept ' do
       end
 
       it 'can add note ', js: true do
-        click_link 'btn_note_1'
-        sleep(5)
+        find(:css, "a#btn_note_1 div").trigger('click')
         expect(page).to have_selector "form#note_for_post_#{@concept1.id}_1"
         find("#note_for_post_#{@concept1.id}_1").find('#edit_post_note_text_area').set 'new note for first field concept post'
         find("#note_for_post_#{@concept1.id}_1").find("#send_post_1").click
         expect(page).to have_content "new note for first field concept post"
-        page.execute_script %($("ul#note_form_#{@concept1.id}_1 a").click())
-        # @todo нужно ждать пока отработает анимация скрытия и элемент будет удален
-        sleep(5)
+        find("ul#note_form_#{@concept1.id}_1 a").trigger('click')
+        sleep 5
         expect(page).not_to have_content 'new note for first field concept post'
       end
     end
@@ -420,17 +434,17 @@ describe 'Concept ' do
         expect(page).to have_content 'Голосование за нововведения'
         expect(page).to have_content @discontent1.content
         expect(page).to have_content 'Пара: 1 из 1'
-        expect(page).to have_content 'Нововведение 1'
+        expect(page).to have_content "#{I18n.t('show.concept.title')} 1"
         expect(page).to have_content @concept_aspect1.title
-        expect(page).to have_content 'Нововведение 2'
+        expect(page).to have_content "#{I18n.t('show.concept.title')} 2"
         expect(page).to have_content @concept_aspect2.title
-        expect(page).to have_selector '#btn_vote_1', 'Нововведение 1'
-        expect(page).to have_selector '#btn_vote_2', 'Нововведение 2'
-        click_link "btn_vote_1"
+        expect(page).to have_selector '#btn_vote_1', "#{I18n.t('show.concept.title')} 1"
+        expect(page).to have_selector '#btn_vote_2', "#{I18n.t('show.concept.title')} 2"
+        click_link 'btn_vote_1'
         expect(page).to have_content 'Спасибо за участие в голосовании!'
         expect(page).to have_selector 'a', 'Перейти к рефлексии'
         expect(page).to have_selector 'a', 'Перейти к списку нововведений'
-        click_link "Перейти к списку нововведений"
+        click_link 'Перейти к списку нововведений'
         expect(page).to have_content 'Нововведения'
         expect(page).to have_content I18n.t('show.improve.ideas')
       end

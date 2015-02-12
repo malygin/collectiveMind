@@ -33,6 +33,8 @@ CollectiveMind::Application.routes.draw do
         put :plus_comment
         put :add_child_comment_form
         put :comment_status
+        put :like
+        put :like_comment
       end
     end
   end
@@ -48,7 +50,9 @@ CollectiveMind::Application.routes.draw do
   get '/concept_analytics', to: 'core/projects#concept_analytics'
   get '/plan_analytics', to: 'core/projects#plan_analytics'
   get '/estimate_analytics', to: 'core/projects#estimate_analytics'
-  get '/project_users/analytics', to: 'core/project_users#analytics'
+  get '/project_users/user_analytics', to: 'core/project_users#user_analytics'
+  get '/project_users/moderator_analytics', to: 'core/project_users#moderator_analytics'
+  get '/project_users/ready_to_concept', to: 'core/project_users#ready_to_concept'
   get :graf_data, to: 'core/projects#graf_data'
 
   resources :roles

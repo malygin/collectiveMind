@@ -24,7 +24,7 @@
             %h4 Ранее
             -@j_count[:older]+=1
 
-          %section.feed-item
+          %section.feed-item{class: "#{journal.created_at > last_time_visit_journals ? 'unread_news' : ''}"}
             .icon.pull-left
               %i(class="#{journal_icon(journal)}")
             .feed-item-body

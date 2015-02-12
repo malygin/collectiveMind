@@ -72,31 +72,30 @@ class PostsController < ProjectsController
     @comment.toggle!(:concept_status) if params[:concept]
     @comment.toggle!(:discuss_status) if params[:discuss_status]
     @comment.toggle!(:approve_status) if params[:approve_status]
-    if @comment.discuss_status
-      current_user.journals.build(type_event: name_of_comment_for_param+'_discuss_stat', project: @project,
-                                  body: "#{trim_content(@comment.content)}", body2: trim_content(field_for_journal(@post)),
-                                  first_id: (@post.instance_of? CollectInfo::Post) ? @post.discontent_aspects.first.id : @post.id, second_id: @comment.id).save!
-
-      if @comment.user!=current_user
-        current_user.journals.build(type_event: 'my_'+name_of_comment_for_param+'_discuss_stat', user_informed: @comment.user, project: @project,
-                                    body: "#{trim_content(@comment.content)}", body2: trim_content(field_for_journal(@post)),
-                                    first_id: (@post.instance_of? CollectInfo::Post) ? @post.discontent_aspects.first.id : @post.id, second_id: @comment.id,
-                                    personal: true, viewed: false).save!
+    if params[:discuss_status]
+      if @comment.discuss_status
+        type = 'discuss_status'
+      end
+    elsif params[:approve_status]
+      if @comment.approve_status
+        type = 'approve_status'
       end
     end
-    if @comment.approve_status
-      current_user.journals.build(type_event: name_of_comment_for_param+'_approve_status', project: @project,
+    if type
+      current_user.journals.build(type_event: name_of_comment_for_param+'_'+type, project: @project,
                                   body: "#{trim_content(@comment.content)}", body2: trim_content(field_for_journal(@post)),
-                                  first_id: (@post.instance_of? CollectInfo::Post) ? @post.discontent_aspects.first.id : @post.id, second_id: @comment.id).save!
+                                  first_id: (@post.instance_of? LifeTape::Post) ? @post.discontent_aspects.first.id : @post.id, second_id: @comment.id).save!
 
       if @comment.user!=current_user
-        current_user.journals.build(type_event: 'my_'+name_of_comment_for_param+'_approve_status', user_informed: @comment.user, project: @project,
+        current_user.journals.build(type_event: 'my_'+name_of_comment_for_param+'_'+type, user_informed: @comment.user, project: @project,
                                     body: "#{trim_content(@comment.content)}", body2: trim_content(field_for_journal(@post)),
-                                    first_id: (@post.instance_of? CollectInfo::Post) ? @post.discontent_aspects.first.id : @post.id, second_id: @comment.id,
+                                    first_id: (@post.instance_of? LifeTape::Post) ? @post.discontent_aspects.first.id : @post.id, second_id: @comment.id,
                                     personal: true, viewed: false).save!
       end
+      if @project.closed?
+        Resque.enqueue(CommentNotification, current_model.to_s, @project.id, current_user.id, name_of_comment_for_param, type, @post.id, @comment.id, params[:comment_stage])
+      end
     end
-
     respond_to do |format|
       format.js
     end
@@ -116,13 +115,17 @@ class PostsController < ProjectsController
         type = 'approve_status'
       end
     end
-    post_notice(type, @post.user, personal = false)
-    if @project.closed?
-      @project.users_in_project.access_proc(2).each do |user|
-        post_notice(type, user, personal = true) if (user != current_user and user != @post.user)
+    if type
+      current_user.journals.build(type_event: name_of_model_for_param+'_'+type, project: @project,
+                                  body: "#{trim_content(field_for_journal(@post))}", first_id: @post.id).save!
+      if @post.user!=current_user
+        current_user.journals.build(type_event: 'my_'+name_of_model_for_param+'_'+type, user_informed: @post.user, project: @project,
+                                    body: "#{trim_content(field_for_journal(@post))}", first_id: @post.id, personal: true, viewed: false).save!
+      end
+      if @project.closed?
+        Resque.enqueue(PostNotification, current_model.to_s, @project.id, current_user.id, name_of_model_for_param, type, @post.id)
       end
     end
-
     respond_to do |format|
       format.js
     end
@@ -188,7 +191,7 @@ class PostsController < ProjectsController
     respond_to do |format|
       if @post.save
         current_user.journals.build(type_event: name_of_model_for_param+"_save", project: @project, body: @post.content == '' ? t('link.more') : trim_content(@post.content), first_id: @post.id).save!
-        current_user.add_score_by_type(@project, 50, :score_a)
+        # current_user.add_score_by_type(@project, 50, :score_a)
 
         format.html { redirect_to action: 'show', id: @post.id, project: @project }
         format.js
@@ -243,33 +246,33 @@ class PostsController < ProjectsController
   #todo check if user already voted
   def plus
     @post = current_model.find(params[:id])
-    # if boss? or role_expert?
-    #   @post.toggle!(:useful)
-    #   if @post.useful
-    #     @post.user.add_score(type: :plus_post, project: @project, post: @post, path: @post.class.name.underscore.pluralize)
-    #     Award.reward(user: @post.user, post: @post, project: @project, type: 'add')
-    #   else
-    #     @post.user.add_score(type: :to_archive_plus_post, project: @project, post: @post, path: @post.class.name.underscore.pluralize)
-    #   end
-    # end
-    # if @post.instance_of? Discontent::Post
-    #   @post.update_attributes(status_content: true, status_whered: true, status_whend: true)
-    #   # elsif @post.instance_of? Concept::Post
-    #   #   @post.update_attributes(status_name: true, status_content: true, status_positive: true, status_positive_r: true, status_negative: true, status_negative_r: true, status_problems: true, status_reality: true, status_positive_s: true, status_negative_s: true, status_control: true, status_control_r: true, status_control_s: true, status_obstacles: true)
-    # end
+    if boss? or role_expert?
+      @post.toggle!(:useful)
+      if @post.useful
+        @post.user.add_score(type: :plus_post, project: @project, post: @post, path: @post.class.name.underscore.pluralize)
+        Award.reward(user: @post.user, post: @post, project: @project, type: 'add')
+      else
+        @post.user.add_score(type: :to_archive_plus_post, project: @project, post: @post, path: @post.class.name.underscore.pluralize)
+        Award.reward(user: @post.user, post: @post, project: @project, type: 'remove')
+      end
+    end
+    if @post.instance_of? Discontent::Post
+      @post.update_attributes(status_content: true, status_whered: true, status_whend: true)
+    # elsif @post.instance_of? Concept::Post
+    #   @post.update_attributes(status_name: true, status_content: true, status_positive: true, status_positive_r: true, status_negative: true, status_negative_r: true, status_problems: true, status_reality: true, status_positive_s: true, status_negative_s: true, status_control: true, status_control_r: true, status_control_s: true, status_obstacles: true)
+    end
 
-    @against = params[:against]
-    @vote = @post.post_votings.create(user: current_user, post: @post, against: @against) unless @post.users.include? current_user
-    # if boss? and @post.admins_vote.count != 0
-    #   @post.admins_vote.destroy_all
-    #   @admin_pro = true
-    # else
-    #   @post.post_votings.create(user: current_user, post: @post, against: @against) unless @post.users.include? current_user
-    #   # if (current_user.boss? or post.post_votings.count == 3) and not @against
-    #   #    Award.reward(user: post.user, post: post, project: @project, type: 'add')
-    #   #    post.user.add_score(type: :plus_post, project: @project, post: post, path:  post.class.name.underscore.pluralize)
-    #   # end
-    # end
+    #@against =  params[:against] == 'true'
+    #if boss? and post.admins_vote.count != 0
+    #  post.admins_vote.destroy_all
+    #  @admin_pro= true
+    #else
+    #  post.post_votings.create(user: current_user, post: post, against: @against)  unless post.users.include? current_user
+    #  if (current_user.boss? or post.post_votings.count == 3) and not @against
+    #    Award.reward(user: post.user, post: post, project: @project, type: 'add')
+    #    post.user.add_score(type: :plus_post, project: Core::Project.find(params[:project]), post: post, path:  post.class.name.underscore.pluralize)
+    #  end
+    #end
     respond_to do |format|
       format.js
     end
@@ -291,6 +294,25 @@ class PostsController < ProjectsController
       end
     end
     @main_comment = @comment.comment.id unless @comment.comment.nil?
+    respond_to do |format|
+      format.js
+    end
+  end
+
+
+  def like
+    @post = current_model.find(params[:id])
+    @against = params[:against]
+    @vote = @post.post_votings.create(user: current_user, post: @post, against: @against) unless @post.users.include? current_user
+    respond_to do |format|
+      format.js
+    end
+  end
+
+  def like_comment
+    @comment = comment_model.find(params[:id])
+    @against =  params[:against]
+    @vote = @comment.comment_votings.create(user: current_user, comment: @comment,  against: @against) unless @comment.users.include? current_user
     respond_to do |format|
       format.js
     end
@@ -354,10 +376,12 @@ class PostsController < ProjectsController
     @post = current_model.find(params[:id])
     @type = params[:type_field]
     @field_all = params[:field_all]
+    @statuses = []
     if params[:field_all] and @post.instance_of? Concept::Post
       @post.toggle!(:status_all)
       if @post.status_all
-        @post.update_attributes(status_name: true, status_content: true, status_positive: true, status_positive_r: true, status_negative: true, status_negative_r: true, status_control: true, status_control_r: true, status_obstacles: true, status_problems: true, status_reality: true)
+        @statuses = @post.update_statuses
+        # @post.update_attributes(status_name: true, status_content: true, status_positive: true, status_positive_r: true, status_negative: true, status_negative_r: true, status_control: true, status_control_r: true, status_obstacles: true, status_problems: true, status_reality: true)
         @post.user.add_score(type: :plus_field_all, project: @project, post: @post, path: @post.class.name.underscore.pluralize) if @post.instance_of? Concept::Post
       else
         @post.update_attributes(status_name: nil, status_content: nil, status_positive: nil, status_positive_r: nil, status_negative: nil, status_negative_r: nil, status_control: nil, status_control_r: nil, status_obstacles: nil, status_problems: nil, status_reality: nil)
@@ -365,11 +389,12 @@ class PostsController < ProjectsController
       end
     elsif @type and @post.send(column_for_type_field(name_of_note_for_param, @type.to_i)) == true
       @post.update_attributes(column_for_type_field(name_of_note_for_param, @type.to_i) => nil)
-      @post.user.add_score(type: :to_archive_plus_field, project: @project, post: @post, path: @post.class.name.underscore.pluralize, type_field: column_for_type_field(name_of_note_for_param, @type.to_i)) if @post.instance_of? Concept::Post
+      # @post.user.add_score(type: :to_archive_plus_field, project: @project, post: @post, path: @post.class.name.underscore.pluralize, type_field: column_for_type_field(name_of_note_for_param, @type.to_i)) if @post.instance_of? Concept::Post
     elsif @post.notes.by_type(@type.to_i).size == 0
       @post.update_attributes(column_for_type_field(name_of_note_for_param, @type.to_i) => 't')
-      @post.user.add_score(type: :plus_field, project: @project, post: @post, path: @post.class.name.underscore.pluralize, type_field: column_for_type_field(name_of_note_for_param, @type.to_i)) if @post.instance_of? Concept::Post
+      # @post.user.add_score(type: :plus_field, project: @project, post: @post, path: @post.class.name.underscore.pluralize, type_field: column_for_type_field(name_of_note_for_param, @type.to_i)) if @post.instance_of? Concept::Post
     end
+    @post.save!
     respond_to do |format|
       format.js
     end
@@ -425,6 +450,8 @@ class PostsController < ProjectsController
       @comment.destroy
       #@todo удаление комментариев из ленты
       Journal.destroy_comment_journal(@project, @comment)
+    else
+      redirect_to root_url
     end
   end
 
@@ -495,32 +522,5 @@ class PostsController < ProjectsController
       Journal.comment_event(current_user, @project, name_of_comment_for_param, post, @comment, @comment_answer)
     end
     render template: 'posts/add_comment'
-  end
-
-  def comment_notice(type, user = @comment.user, personal = false)
-    unless personal
-      current_user.journals.build(type_event: name_of_comment_for_param+'_'+type, project: @project,
-                                  body: "#{trim_content(@comment.content)}", body2: trim_content(field_for_journal(@post)),
-                                  first_id: (@post.instance_of? LifeTape::Post) ? @post.discontent_aspects.first.id : @post.id, second_id: @comment.id).save!
-    end
-
-    if personal or (@comment.user!=current_user and !personal)
-      current_user.journals.build(type_event: "#{user == @comment.user ? 'my_' : ''}"+name_of_comment_for_param+'_'+type, user_informed: user, project: @project,
-                                  body: "#{trim_content(@comment.content)}", body2: trim_content(field_for_journal(@post)),
-                                  first_id: (@post.instance_of? LifeTape::Post) ? @post.discontent_aspects.first.id : @post.id, second_id: @comment.id,
-                                  personal: true, viewed: false).save!
-    end
-  end
-
-  def post_notice(type, user = @post.user, personal = false)
-    unless personal
-      current_user.journals.build(type_event: name_of_model_for_param+'_'+type, project: @project,
-                                  body: "#{trim_content(field_for_journal(@post))}", first_id: @post.id).save!
-    end
-
-    if personal or (@post.user!=current_user and !personal)
-      current_user.journals.build(type_event: "#{user == @post.user ? 'my_' : ''}"+name_of_model_for_param+'_'+type, user_informed: user, project: @project,
-                                  body: "#{trim_content(field_for_journal(@post))}", first_id: @post.id, personal: true, viewed: false).save!
-    end
   end
 end

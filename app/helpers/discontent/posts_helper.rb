@@ -12,7 +12,7 @@ module Discontent::PostsHelper
     if @project.get_united_posts_for_vote(current_user).size == 1
       false
     else
-      if @project.get_united_posts_for_vote(current_user).pluck(:id).min != post
+      if @project.get_united_posts_for_vote(current_user).first != post
         true
       else
         false

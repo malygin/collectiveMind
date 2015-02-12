@@ -9,7 +9,7 @@
           = render 'shared/notice_messages', object: f.object
           .form-group(style="margin-left:0;")
             %label{for: "name_stage"}=t('form.plan.stage.name')
-            =f.text_field :name, class: 'form-control', placeholder: t('form.plan.stage.name_promt'), id:'name_stage'
+            =f.text_field :name, class: 'form-control name-stage', placeholder: t('form.plan.stage.name_promt'), id:'name_stage'
             %span.small=t('form.plan.stage.name_short')
           .col-md-6
             .form-group(style="margin-left:0;")
@@ -25,6 +25,6 @@
             %span.small=t('form.plan.stage.desc_future')
           .pull-right
             %button.btn.btn-default(type = "button" data-dismiss="modal" style="margin-right:5px;")=t('form.close')
-            %button#send_post.btn.btn-success=t('form.save')
+            %button#send_post.send-post.disabled.btn.btn-success=t('form.save')
       %br
       .modal-footer(style="margin-top:30px;padding-bottom:10px;")

@@ -92,6 +92,10 @@ module SessionsHelper
     current_user.role_stat == 2 unless current_user.nil?
   end
 
+  def stat_expert?
+    current_user.role_stat == 3 unless current_user.nil?
+  end
+
   def jury?
     current_user.type_user == 3 unless current_user.nil?
   end
@@ -142,7 +146,7 @@ module SessionsHelper
   end
 
   def can_union_discontents?(project)
-    project.status == 4 and boss?
+    (project.status == 4 or project.status == 5) and boss?
   end
 
   def to_bool(arg)

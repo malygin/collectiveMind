@@ -45,8 +45,9 @@
 #= require plugins
 #= require comments
 #= require resources
-#= require visits
 #= require visit_chart
+#= require jquery.tube.min
+#= require concept_play_movie.coffee
 
 #= require brave/placeholders
 #= require brave/jquery.magnific-popup.min
@@ -68,6 +69,7 @@
 # @todo load initialization
 sidebarHeight = 0;
 $ ->
+  start_play()
   comments_feed()
 
   estimate_stage()
@@ -84,7 +86,6 @@ $ ->
 
   post_form()
 
-  record_visit()
 #  notificate_news()
 #  notifications()
 #  editable_groups()

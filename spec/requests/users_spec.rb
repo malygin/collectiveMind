@@ -3,31 +3,50 @@ require 'spec_helper'
 describe 'Users ' do
   subject { page }
   let (:user) { create :user }
-  let (:project) { create :core_project, advices_concept: true, advices_discontent: true }
+  let (:moderator) { create :moderator }
+  let (:expert) { create :expert }
+  let (:project) { create :core_project, status: 1, advices_concept: true, advices_discontent: true }
+  let!(:project_user) { create :core_project_user, user: user, core_project: project }
+  let!(:project_user2) { create :core_project_user, user: moderator, core_project: project }
 
   context 'ordinary user sign in ' do
     before do
       sign_in user
     end
 
-    context 'base links' do
-      it { expect(page).to have_link('user_profile', text: user.to_s, href: user_path(user.current_projects_for_user.last, user)) }
+    context 'edit profile' do
+      it 'owner - ok' do
+        new_name = 'Cool new name'
+        new_surname = 'My cool surname'
+        click_link 'user_profile'
+        click_link 'edit_profile'
+        fill_in 'user_name', with: new_name
+        fill_in 'user_surname', with: new_surname
+        click_button 'update_profile'
+        expect(current_path).to eq user_path(project.id, user.id)
+        expect(page).to have_content new_name
+        expect(page).to have_content new_surname
+      end
 
-      it { expect(page).to have_link('sign_out', text: 'Выйти', href: destroy_user_session_path) }
+      context 'other user' do
+        it 'not show link' do
+          visit user_path(project, moderator)
+          expect(page).not_to have_link 'edit_profile'
+        end
+
+        it 'not access by direct link' do
+          visit edit_user_path(project, moderator)
+          expect(current_path).to eq root_path
+        end
+      end
     end
 
-    it 'have content in profile ' do
-      click_link 'user_profile'
-      expect(page).to have_content 'Профиль'
-      expect(page).to have_content 'Достижения'
-      expect(page).to have_content 'Активность'
-    end
-
-    it 'success sign out ', js: true do
-      click_link 'sign_out'
-      expect(page).to have_link('sign_in', text: 'Войти', href: new_user_session_path)
-      expect(page).to have_link('sign_up', text: 'Зарегистрироваться', href: new_user_registration_path)
-      expect(page).to have_content 'О проекте'
+    it 'no link to user analytic' do
+      visit user_path(project, user)
+      expect(page).not_to have_link 'go_to_user_analytics'
+      visit "/project/#{project.id}/project_users/user_analytics"
+      expect(current_path).to eq root_path
+      expect(page).not_to have_content I18n.t('analytic.graph_visits')
     end
 
     context 'my journal', js: true do
@@ -90,7 +109,16 @@ describe 'Users ' do
 
   end
 
-  context 'expert sign in ' do
+  context 'expert sign in' do
+    before do
+      sign_in expert
+    end
 
+    it 'link to user analytic' do
+      visit user_path(project, expert)
+      click_link 'go_to_user_analytics'
+      expect(page).to have_content I18n.t('analytic.graph_visits')
+      expect(page).not_to have_css 'ul#general_stages'
+    end
   end
 end

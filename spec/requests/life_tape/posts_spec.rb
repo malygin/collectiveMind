@@ -6,7 +6,7 @@ describe 'Life Tape ' do
   let!(:user) { @user = create :user }
   let (:user_data) { create :user }
   let!(:moderator) { @moderator = create :moderator }
-  let (:project) { create :core_project, status: 1 }
+  let (:project) { create :core_project }
 
   before do
     @post1 = create :collect_info_post, project: project
@@ -109,7 +109,6 @@ describe 'Life Tape ' do
       end
 
       it_behaves_like 'content with comments', 'CollectInfo::Comment', true
-
     end
 
     context 'vote life tape ' do

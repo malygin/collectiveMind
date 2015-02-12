@@ -4,8 +4,24 @@
     %a
       %h4=t('menu.list_aspects')
 
+  -if (boss? or role_expert?) and current_stage == 'discontent/posts'
+    %li{class:"#{'active' if params[:all_aspects]}"}
+      = link_to "#{discontent_posts_path(@project)}" + "?all_aspects=true" do
+        %i.fa.fa-book
+        Все несовершенства
+  -if (boss? or role_expert?) and current_stage == 'concept/posts'
+    %li{class:"#{'active' if params[:all_aspects]}"}
+      = link_to "#{concept_posts_path(@project)}" + "?all_aspects=true" do
+        %i.fa.fa-book
+        Все нововведения
+
   -@project.current_aspects(current_stage).each do |asp|
     = render partial: 'aspect', object: asp, locals: {current_stage: current_stage}
+    -#%span.pull-right
+    -#  %small="(#{asp.aspect_posts.by_status_for_discontent(@project).count})"
+    -#  ="(+ "
+    -#  =asp.aspect_posts.by_status_for_discontent(@project).where("discontent_posts.created_at >= ?", last_time_visit_aspect(asp)).count
+    -#  =")"
     - if asp.discontent_aspects.present?
       %ul.panel-collapse
         - asp.discontent_aspects.each do |asp1|
@@ -42,7 +58,7 @@
         = link_to group_path(@project, group), id: "ls_open_group_#{group.id}" do
           = group_side_name(group)
 
-  -if boss?
+  -if boss? or role_expert?
     %li
       = link_to "/project/#{@project.id}/#{current_stage == 'essay/posts' ? stage_for_essay(params[:stage].to_i) : current_stage}/vote_result", class: 'text-vote-result', id: 'vote_result' do
         =t('menu.vote_result')

@@ -1,4 +1,4 @@
-%ul.nav.nav-tabs{role: 'tablist'}
+%ul.nav.nav-tabs#general_stages{role: 'tablist'}
   %li(class="#{'active' if current_stage == :lifetape}")
     %a{href: "/project/#{@project.id}/lifetape_analytics", id: "go_to_life_tape"}
       1
@@ -29,3 +29,15 @@
       %span.hidden-sm.hidden-xs=t('stages.stage', count: 5)
       %br
       %span.hidden-sm.hidden-xs=t('stages.estimate')
+  %li(class="#{'active' if current_stage == :user_analytics}")
+    = link_to "/project/#{@project.id}/project_users/user_analytics", id: 'go_to_user_analytics' do
+      Статистика
+      %br
+      %span.hidden-sm.hidden-xs
+        по пользователям
+  %li(class="#{'active' if current_stage == :moderator_analytics}")
+    = link_to "/project/#{@project.id}/project_users/moderator_analytics", id: 'go_to_moderator_analytics' do
+      Статистика
+      %br
+      %span.hidden-sm.hidden-xs
+        по модераторам

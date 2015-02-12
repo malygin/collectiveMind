@@ -12,10 +12,10 @@ module BaseComment
     has_many :users, through: :comment_votings
     default_scope -> { order 'created_at ASC' }
 
-    scope :comment_votings_pro, -> { joins(:comment_votings).where('comment_votings.against = ?', false) }
+    has_many :comment_votings_pro, -> { joins(:comment_votings).where("#{table_name}.against = ?", false) }, class_name: 'CommentVoting'
     has_many :users_pro, through: :comment_votings_pro, source: :user
 
-    scope :comment_votings_against, -> { joins(:comment_votings).where('comment_votings.against = ?', true) }
+    has_many :comment_votings_against, -> { joins(:comment_votings).where("#{table_name}.against = ?", true) }, class_name: 'CommentVoting'
     has_many :users_against, through: :comment_votings_against, source: :user
 
     has_many :improve_disposts, -> { where improve_stage: [1, 2] }, foreign_key: 'improve_comment',

@@ -19,6 +19,8 @@ class Journal < ActiveRecord::Base
   scope :events_ignore, -> events_ignore { where.not(journals: {type_event: events_ignore})}
   scope :created_order, -> { order("journals.created_at DESC") }
   scope :active_proc, -> { where("core_projects.status < ?", 20) }
+  scope :not_moderators, -> { joins(:user).where('users.type_user is null') }
+  scope :for_moderators, -> { joins(:user).where('users.type_user in (?)', User::TYPES_USER[:admin]) }
 
   scope :auto_feed_mailer, -> { joins("LEFT OUTER JOIN user_checks ON journals.user_informed = user_checks.user_id AND journals.project_id = user_checks.project_id AND user_checks.check_field = 'auto_feed_mailer'").where(user_checks: {status: ['f',nil] }) }
 
@@ -85,6 +87,14 @@ class Journal < ActiveRecord::Base
     where(:project_id => project.id, :user_id => comment.user, :second_id => comment.id).destroy_all
   end
 
+  def self.destroy_journal_record(project, type_event, user_informed, post, personal)
+    where(:project_id => project.id, :type_event => type_event, :user_informed => user_informed, :first_id => post.id, :personal => personal).destroy_all
+  end
+
+  def self.destroy_journal_award(project, type_event, personal, user, user_informed = nil)
+    where(:project_id => project.id, :type_event => type_event, :user_id => user.id, :user_informed => user_informed, :personal => personal).destroy_all
+  end
+
   private
 
   def send_last_news
@@ -95,7 +105,8 @@ class Journal < ActiveRecord::Base
             :latest, render_anywhere('application/messages_menu', {current_user: user_informed, project: project,
                                                                    my_journals: user_informed.my_journals(project)}),
             channel: :notifications)
-      else
+      end
+      if type_event != 'visit_save'
         WebsocketRails[:news].trigger :latest_news, render_anywhere('journal/journal', {journal: self, current_user: nil})
       end
     end.resume

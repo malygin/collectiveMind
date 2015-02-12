@@ -17,14 +17,13 @@ Spork.prefork do
 
   require 'simplecov'
   SimpleCov.start
-
+  DatabaseCleaner.clean
   Capybara.javascript_driver = :webkit
 
   Capybara.save_and_open_page_path = 'tmp/capybara-screenshot'
 
-
   Capybara::Screenshot.register_filename_prefix_formatter(:rspec) do |example|
-    "screen_#{example.full_description.gsub(' ', '-').gsub(/^.*\/spec\//, '')}"
+    "#{example.full_description.gsub(' ', '-').gsub(/^.*\/spec\//, '')}"
   end
 
   Dir[Rails.root.join('spec/support/**/*.rb')].each { |f| require f }
@@ -40,5 +39,31 @@ Spork.prefork do
     config.use_transactional_fixtures = false
     config.infer_base_class_for_anonymous_controllers = false
     config.order = 'random'
+
+    config.before :each, js: true do
+      page.driver.block_unknown_urls
+      page.driver.allow_url '0.0.0.0'
+      page.driver.allow_url 'res.cloudinary.com'
+      Capybara.default_wait_time = 5
+    end
+    config.before(:suite) do
+      DatabaseCleaner.clean_with(:truncation)
+    end
+
+    config.before(:each) do
+      DatabaseCleaner.strategy = :transaction
+    end
+
+    config.before(:each, js: true) do
+      DatabaseCleaner.strategy = :truncation
+    end
+
+    config.before(:each) do
+      DatabaseCleaner.start
+    end
+
+    config.after(:each) do
+      DatabaseCleaner.clean
+    end
   end
 end

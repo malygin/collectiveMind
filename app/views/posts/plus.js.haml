@@ -1,26 +1,3 @@
--if @vote
-  -if @against == 'true'
-    $("#minus_counter_#{@post.id}").effect("highlight", {color: '#f5cecd'}, 1000);
-    $("#minus_counter_#{@post.id}").html(parseInt($("#minus_counter_#{@post.id}").html())+1)
-    $("#minus_counter_#{@post.id}").click(function(e) { return false; });
-  -else
-    $("#plus_counter_#{@post.id}").effect("highlight", {color: '#f5cecd'}, 1000);
-    $("#plus_counter_#{@post.id}").html(parseInt($("#plus_counter_#{@post.id}").html())+1)
-    $("#plus_counter_#{@post.id}").click(function(e) { return false; });
-
-
--#$("#plus_post_#{@post.id}").effect("highlight", {color: '#f5cecd'}, 1000);
--#$("#plus_post_#{@post.id}").find('span').html("#{@post.useful ? "#{t('show.revert_score')}" : "#{t('show.add_score')}"}");
--#$("#plus_post_#{@post.id}").find('span').toggleClass('text-success text-danger');
--#-if @post.instance_of? Discontent::Post
--#  $('##{id_for_type_field(1)}_#{@post.id}').removeClass('label-danger label-g').addClass('label-success');
--#  $('##{id_for_type_field(2)}_#{@post.id}').removeClass('label-danger label-g').addClass('label-success');
--#  $('##{id_for_type_field(3)}_#{@post.id}').removeClass('label-danger label-g').addClass('label-success');
--#
--#-elsif @post.instance_of? Concept::Post
--#  - 11.times do |n|
--#    $('##{id_for_concept_type(n+1)}').removeClass('color-orange color-red').addClass('color-green');
-
-
-
-
+$("#plus_post_#{@post.id}").effect("highlight", {color: '#f5cecd'}, 1000);
+$("#plus_post_#{@post.id}").find('span').html("#{@post.useful ? "#{t('show.revert_score')}" : "#{t('show.add_score')}"}");
+$("#plus_post_#{@post.id}").find('span').toggleClass('label-success label-danger');

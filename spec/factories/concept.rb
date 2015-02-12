@@ -25,5 +25,8 @@ FactoryGirl.define do
 
   factory :concept_comment, class: 'Concept::Comment' do
     sequence(:content) { |n| "concept comment #{n}" }
+
+    association :user, factory: :ordinary_user
+    association :post, factory: :concept
   end
 end

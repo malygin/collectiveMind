@@ -92,9 +92,12 @@ gem 'breadcrumbs_on_rails'
 gem 'tinymce-rails'
 gem 'historyjs-rails'
 gem 'seed_migration'
+gem 'tinymce-rails-langs'
 
 gem 'resque'
 gem 'resque_mailer'
 gem 'resque-scheduler'
 gem 'resque-status'
 gem 'rufus-scheduler', '< 3.0.0'
+
+gem "bugsnag"

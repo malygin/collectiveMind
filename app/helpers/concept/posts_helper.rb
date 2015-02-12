@@ -140,6 +140,12 @@ module Concept::PostsHelper
     if concept.negative.present?
       add_score+=1
     end
+    if concept.control.present?
+      add_score+=1
+    end
+    if concept.obstacles.present?
+      add_score+=1
+    end
     if concept.problems.present?
       add_score+=1
     end
@@ -152,7 +158,10 @@ module Concept::PostsHelper
     if concept.concept_post.concept_post_resources.by_type('negative_r').present?
       add_score+=1
     end
-    "#{(add_score/8.to_f)*100}%"
+    if concept.concept_post.concept_post_resources.by_type('control_r').present?
+      add_score+=1
+    end
+    "#{((add_score/11.to_f)*100).round}%"
   end
 
   def complite(post)

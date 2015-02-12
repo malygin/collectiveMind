@@ -120,13 +120,13 @@ class Core::ProjectsController < ApplicationController
 
     if @project
       if @project.project_access(current_user)
-        @journals_feed_all = Journal.filter(filtering_params(params)).events_for_project(@project.id).paginate(page: params[:page])
+        @journals_feed_all = Journal.filter(filtering_params(params)).events_for_project(@project.id).where(journals: {visible: true}).paginate(page: params[:page])
       end
     elsif prime_admin?
-      @journals_feed_all = Journal.filter(filtering_params(params)).events_for_all_prime.paginate(page: params[:page])
+      @journals_feed_all = Journal.filter(filtering_params(params)).events_for_all_prime.where(journals: {visible: true}).paginate(page: params[:page])
     else
       closed_projects = current_user.projects.where(core_projects: {type_access: 2}).active_proc.pluck("core_projects.id")
-      @journals_feed_all = Journal.filter(filtering_params(params)).events_for_all(list_type_projects_for_user, closed_projects == [] ? [-1] : closed_projects).paginate(page: params[:page])
+      @journals_feed_all = Journal.filter(filtering_params(params)).events_for_all(list_type_projects_for_user, closed_projects == [] ? [-1] : closed_projects).where(journals: {visible: true}).paginate(page: params[:page])
     end
     @j_count = {today: 0, yesterday: 0, older: 0}
     @users_for_news = User.where("name != ? OR surname != ?", '', '').order(:id)

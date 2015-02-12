@@ -44,12 +44,21 @@ class Concept::PostsController < PostsController
 
   def index
     return redirect_to action: "vote_list" if current_user.can_vote_for(:concept, @project)
-    if params[:not_aspect]
-      @concepts_without_aspect = @project.concepts_without_aspect
+
+    if params[:asp]
+      @aspect =  Discontent::Aspect.find(params[:asp])
     else
-      @aspect = params[:asp] ? Discontent::Aspect.find(params[:asp]) : ((@project.proc_aspects.first.present? and @project.proc_aspects.first.position.present?) ? @project.proc_aspects.order("position DESC").first : @project.proc_aspects.order(:id).first)
+      if not (params[:not_aspect] or params[:all_aspects])
+        redirect_to "/project/#{@project.id}/concept/posts?asp=#{@project.proc_aspects.order("position DESC").first.id}"
+        return
+      end
     end
     @comments_all = @project.ideas_comments_for_improve
+    if params[:not_aspect]
+      @concepts = @project.concepts_without_aspect
+    elsif params[:all_aspects]
+      @concepts = @project.concept_ongoing_post.order('concept_posts.id')
+    end
   end
 
   def create

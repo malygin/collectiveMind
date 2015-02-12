@@ -2,25 +2,25 @@ require 'spec_helper'
 
 describe 'Journal ' do
   subject { page }
-  # screenshot_and_open_image
-  # save_and_open_page
+
   let (:user) { create :user }
-  let (:prime_admin) { create :prime_admin }
   let (:moderator) { create :moderator }
   let (:project) { create :core_project }
-  let (:closed_project) { create :closed_project, name: 'closed project' }
-  let! (:opened_project) { create :core_project, name: 'opened project' }
-  let! (:club_project) { create :club_project, name: 'club project' }
+  let! (:opened_project) { create :core_project }
+  let! (:club_project) { create :core_project }
 
   before do
-    prepare_journal(project, user)
+    Journal.destroy_all
+    @journal_today = create :journal, project: project, user: user, body: 'news_today', created_at: Time.zone.now.utc.to_date + 12.hours
+    @journal_yesterday = create :journal, project: project, user: user, body: 'news_yesterday', created_at: Time.zone.now.utc.yesterday.to_date + 12.hours
+    @journal_older = create :journal, project: project, user: user, body: 'news_older', created_at: Time.zone.now.utc.yesterday.to_date - 12.hours
   end
 
   context 'ordinary user sign in ' do
     before do
       sign_in user
-      visit root_path
     end
+
     context 'success go to project ' do
       before do
         click_link "go_to_opened_project_#{project.id}"
@@ -41,6 +41,7 @@ describe 'Journal ' do
         expect(page).to have_content 'news_older'
       end
     end
+
     context 'not have go to general_news ' do
       it 'not have news ' do
         expect(page).not_to have_content 'Общие новости'
@@ -56,16 +57,19 @@ describe 'Journal ' do
         expect(page.current_path).to eq root_path
         expect(page).not_to have_content 'Общие новости'
       end
+
       it 'for general_news project ' do
         visit "/project/#{project.id}/general_news"
         expect(page.current_path).to eq root_path
         expect(page).not_to have_content 'Общие новости'
       end
+
       it 'for general_rating ' do
         visit '/general_rating'
         expect(page.current_path).to eq root_path
         expect(page).not_to have_content 'Общие новости'
       end
+
       it 'for general_rating project ' do
         visit "/project/#{project.id}/general_rating"
         expect(page.current_path).to eq root_path
@@ -77,8 +81,8 @@ describe 'Journal ' do
   context 'moderator sign in ' do
     before do
       sign_in moderator
-      visit root_path
     end
+
     context 'success go to project ' do
       before do
         click_link "go_to_opened_project_#{project.id}"
@@ -119,8 +123,8 @@ describe 'Journal ' do
       end
 
       it 'have project list ' do
-        expect(page).to have_content 'opened project'
-        expect(page).to have_content 'club project'
+        expect(page).to have_content opened_project.name
+        expect(page).to have_content club_project.name
       end
 
       it 'have filter list ' do

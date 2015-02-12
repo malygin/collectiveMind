@@ -33,19 +33,27 @@ class Discontent::PostsController < PostsController
   def prepare_data
     @aspects = Discontent::Aspect.where(project_id: @project, status: 0)
     if @project.status == 6
-      @vote_all = Discontent::Voting.by_posts_vote(@project.discontents.by_status([2, 4]).pluck(:id).join(", ")).uniq_user.count
+      @vote_all = Discontent::Voting.by_posts_vote(@project.discontents.by_status([2, 4]).pluck(:id).join(", ")).not_admins.uniq_user.count
     end
   end
 
   def index
     return redirect_to action: 'vote_list' if current_user.can_vote_for(:discontent, @project)
-    #@aspect = params[:asp] ? Discontent::Aspect.find(params[:asp]) : ((@project.proc_aspects.first.present? and @project.proc_aspects.first.position.present?) ? @project.proc_aspects.order("position DESC").first : @project.proc_aspects.order(:id).first)
-    @aspect = Discontent::Aspect.find(params[:asp]) if params[:asp]
-    @accepted_posts = Discontent::Post.where(project_id: @project, status: 2)
+    if params[:asp]
+      @aspect =  Discontent::Aspect.find(params[:asp])
+    else
+      if not (params[:not_aspect] or params[:all_aspects])
+        redirect_to "/project/#{@project.id}/discontent/posts?asp=#{@project.proc_aspects.order("position DESC").first.id}"
+        return
+      end
+    end
+    @accepted_posts = Discontent::Post.where(project_id: @project, status: [2,4])
     @comments_all = @project.problems_comments_for_improve
     @page = params[:page]
     if params[:not_aspect]
       @posts = @project.discontents_without_aspect.by_status_for_discontent(@project).order("discontent_posts.id DESC").filter(filtering_params(params))
+    elsif params[:all_aspects]
+      @posts = @project.discontents.by_status([0,1]).order("discontent_posts.id DESC").filter(filtering_params(params))
     else
       @posts = @aspect.aspect_posts.by_status_for_discontent(@project).order("discontent_posts.id DESC").filter(filtering_params(params)) if @aspect
       respond_to do |format|
@@ -83,9 +91,9 @@ class Discontent::PostsController < PostsController
   def vote_list
     @posts = @project.get_united_posts_for_vote(current_user)
     return redirect_to action: 'index' if @posts.empty?
-    @post_all = current_model.where(project_id: @project, status: 2).count
+    @post_all = current_model.where(project_id: @project, status: [2,4]).count
     @votes = current_user.voted_discontent_posts.where(project_id: @project).count
-    @status = 2
+    # @status = 2
   end
 
   def create
@@ -144,9 +152,8 @@ class Discontent::PostsController < PostsController
   end
 
   def unions
-    @accepted_posts = Discontent::Post.where(project_id: @project, status: 2)
-    @posts = current_model.where(project_id: @project).where(status: 2).created_order
-    @type_tab = params[:type_tab]
+    @accepted_posts = Discontent::Post.where(project_id: @project, status: [2,4])
+    @posts = current_model.where(project_id: @project).where(status: [2,4]).created_order
     respond_to do |format|
       format.js
     end
@@ -190,13 +197,17 @@ class Discontent::PostsController < PostsController
     @post_vote = voting_model.find(params[:id])
     @post_vote.final_votings.create(user: current_user, against: params[:against]) unless @post_vote.voted_users.include? current_user
     @votes = current_user.voted_discontent_posts.where(project_id: @project).count
-    @post_all = current_model.where(project_id: @project, status: 2).count
+    @post_all = current_model.where(project_id: @project, status: [2,4]).count
   end
 
   def set_required
     @post = Discontent::Post.find(params[:id])
-    if boss? and @post.status == 2
-      @post.update_attributes(status: 4)
+    if boss? or role_expert?
+      if @post.status == 2
+        @post.update_attributes(status: 4)
+      elsif @post.status == 4
+        @post.update_attributes(status: 2)
+      end
     end
   end
 
@@ -225,7 +236,7 @@ class Discontent::PostsController < PostsController
         Discontent::PostAspect.create(post_id: @post_group.id, aspect_id: asp.to_i).save!
       end
     end
-    @accepted_posts = Discontent::Post.where(project_id: @project, status: 2)
+    @accepted_posts = Discontent::Post.where(project_id: @project, status: [2,4])
     respond_to do |format|
       format.js
     end
@@ -240,7 +251,7 @@ class Discontent::PostsController < PostsController
     end
     @type_tab = params[:type_tab]
     @parent_post = params[:parent_post_id]
-    @accepted_posts = Discontent::Post.where(project_id: @project, status: 2)
+    @accepted_posts = Discontent::Post.where(project_id: @project, status: [2,4])
     respond_to do |format|
       format.js
     end
@@ -263,7 +274,7 @@ class Discontent::PostsController < PostsController
       @post_group.update_attributes(params[name_of_model_for_param])
       @post_group.update_post_aspects(params[:discontent_post_aspects])
     end
-    @accepted_posts = Discontent::Post.where(project_id: @project, status: 2)
+    @accepted_posts = Discontent::Post.where(project_id: @project, status: [2,4])
     respond_to do |format|
       format.js
     end

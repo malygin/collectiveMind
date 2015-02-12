@@ -69,6 +69,20 @@
   this.color_for_problem = ->
     $(this).closest('form').find('.comment-problem').toggleClass('btn-danger')
 
+  this.toggle_discuss = ->
+    $(this).toggleClass('label-default label-danger')
+
+  this.toggle_approve = ->
+    $(this).toggleClass('label-default label-success')
+
+#  this.toggle_scores = ->
+#    $(this).toggleClass('label-danger label-success')
+#    text = $(this).text().trim()
+#    if text == 'Выдать баллы'
+#      $(this).html('Забрать баллы')
+#    else
+#      $(this).html('Выдать баллы')
+
   $('.chat-messages').on('click', 'button.edit-comment', this.edit_comment)
   $('.chat-messages').on('click', 'button.edit-cancel', this.edit_cancel)
   $('.chat-messages').on('click', 'button.reply-comment', this.reply_comment)
@@ -79,6 +93,8 @@
   $('.form-new-comment,.chat-messages').on('click', 'label.comment-problem', this.color_for_problem)
   $('.form-new-comment,.chat-messages').on('click', 'label.comment-idea', this.color_for_idea)
 
+  $('.chat-messages, .news-list, .show_bar_block').on('click', 'a.link_status span.label_discuss', this.toggle_discuss)
+  $('.chat-messages, .news-list, .show_bar_block').on('click', 'a.link_status span.label_approve', this.toggle_approve)
   #  check if url contain anchor
   myLink = document.location.toString();
   if (myLink.match(/comment_(\d+)/))

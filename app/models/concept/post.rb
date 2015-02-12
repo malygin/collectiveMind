@@ -78,11 +78,11 @@ class Concept::Post < ActiveRecord::Base
 
   def fullness_apply(post_aspect, resor)
     if post_aspect.title.present? and post_aspect.name.present? and post_aspect.content.present?
-      self.fullness = 0
+      self.fullness = 40
     end
-    if post_aspect.positive.present? or post_aspect.negative.present? or post_aspect.control.present? or post_aspect.obstacles.present? or post_aspect.reality.present? or post_aspect.problems.present? or resor.any? { |r| r[:name]!='' }
-      self.fullness = 1
-    end
+    # if post_aspect.positive.present? or post_aspect.negative.present? or post_aspect.control.present? or post_aspect.obstacles.present? or post_aspect.reality.present? or post_aspect.problems.present? or resor.any? { |r| r[:name]!='' }
+    #   self.fullness = 1
+    # end
     if post_aspect.positive.present? and resor.any? { |r| r[:type_res] == 'positive_r' and r[:name]!='' }
       self.fullness += 30
     end
@@ -95,5 +95,79 @@ class Concept::Post < ActiveRecord::Base
     if post_aspect.obstacles.present? and post_aspect.reality.present? and post_aspect.problems.present?
       self.fullness += 10
     end
+  end
+
+  def fullness_title
+    fullness = 0
+    if self.fullness.present?
+      if self.status_name and self.status_content
+        fullness+=40
+      end
+      if self.status_positive and self.status_positive_r
+        fullness+=30
+      end
+      if self.status_negative and self.status_negative_r
+        fullness+=20
+      end
+      if self.status_control and self.status_control_r
+        fullness+=10
+      end
+      if self.status_obstacles and self.status_problems and self.status_reality
+        fullness+=10
+      end
+    end
+    fullness
+  end
+
+  def update_statuses
+    post_aspect = self.post_aspects.first
+    statuses = []
+    if post_aspect
+      if post_aspect.name.present?
+        self.status_name = true
+        statuses << 'name'
+      end
+      if post_aspect.content.present?
+        self.status_content = true
+        statuses << 'content'
+      end
+      if post_aspect.positive.present?
+        self.status_positive = true
+        statuses << 'positive'
+      end
+      if post_aspect.negative.present?
+        self.status_negative = true
+        statuses << 'negative'
+      end
+      if post_aspect.control.present?
+        self.status_control = true
+        statuses << 'control'
+      end
+      if post_aspect.obstacles.present?
+        self.status_obstacles = true
+        statuses << 'obstacles'
+      end
+      if post_aspect.reality.present?
+        self.status_reality = true
+        statuses << 'reality'
+      end
+      if post_aspect.problems.present?
+        self.status_problems = true
+        statuses << 'problems'
+      end
+      if self.concept_post_resources.by_type('positive_r').present?
+        self.status_positive_r = true
+        statuses << 'positive_r'
+      end
+      if self.concept_post_resources.by_type('negative_r').present?
+        self.status_negative_r = true
+        statuses << 'negative_r'
+      end
+      if self.concept_post_resources.by_type('control_r').present?
+        self.status_control_r = true
+        statuses << 'control_r'
+      end
+    end
+    statuses
   end
 end

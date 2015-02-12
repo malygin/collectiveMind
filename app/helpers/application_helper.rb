@@ -367,13 +367,13 @@ module ApplicationHelper
         CollectInfo::Comment.find(id)
       when '2'
         Discontent::Comment.find(id)
-      when '3'
+      when '3', 3
         Concept::Comment.find(id)
-      when '4'
+      when '4', 4
         Plan::Comment.find(id)
-      when '5'
+      when '5', 5
         Estimate::Comment.find(id)
-      when '6'
+      when '6', 6
         Essay::Comment.find(id)
     end
   end
@@ -533,6 +533,10 @@ module ApplicationHelper
         :plan
       when 'estimate_analytics'
         :estimate
+      when 'user_analytics'
+        :user_analytics
+      when 'moderator_analytics'
+        :moderator_analytics
       else
         :lifetape
     end
@@ -598,9 +602,13 @@ module ApplicationHelper
     false
   end
 
+  def analytics?
+    %w(user_analytics moderator_analytics).include? params[:action]
+  end
+
   def label_for_comment_status(comment, status, title)
     if comment.check_status_for_label(status)
-      if current_user?(comment.user) or boss? or role_expert?
+      if (current_user?(comment.user) or boss? or role_expert? or stat_expert?) and (status == 'concept' or (status == 'discontent' and @project.status < 4))
         link_to({controller: comment.controller_name_for_action, action: :comment_status, id: comment.post.id, comment_id: comment.id, status => 1, comment_stage: get_stage_for_improve(comment.get_class)}, remote: true, method: :put, id: "#{status}_comment_#{comment.id}") do
           content_tag(:span, title, class: "label #{css_label_status(status)}")
         end
@@ -608,7 +616,7 @@ module ApplicationHelper
         content_tag(:span, title, class: "label #{css_label_status(status)}")
       end
     else
-      if current_user?(comment.user) or boss? or role_expert?
+      if (current_user?(comment.user) or boss? or role_expert? or stat_expert?) and (status == 'concept' or (status == 'discontent' and @project.status < 4))
         link_to({controller: comment.controller_name_for_action, action: :comment_status, id: comment.post.id, comment_id: comment.id, status => 1, comment_stage: get_stage_for_improve(comment.get_class)}, remote: true, method: :put, id: "#{status}_comment_#{comment.id}") do
           content_tag(:span, title, class: "label label-default")
         end
@@ -712,5 +720,66 @@ module ApplicationHelper
     count_messages = group.count_new_messages_for(current_user.group_users.by_group(group))
     name = name + "(#{count_messages})" if count_messages > 0
     name
+  end
+
+  def last_time_visit_post(post, stage)
+    last_page = post.present? ? last_page(post) : 1
+    if params[:page] and params[:page].to_i != last_page
+      notice = current_user.journals.unscoped.where(type_event: 'visit_save', project_id: @project.id, user_id: current_user.id).where(" body like ? ", "%/project/#{@project.id}/#{stage}/posts/#{post.id}?%page=#{params[:page]}%").order(created_at: :desc).first
+    elsif params[:page].nil? or (params[:page] and params[:page].to_i == last_page)
+      notice = current_user.journals.unscoped.where(type_event: 'visit_save', project_id: @project.id, user_id: current_user.id).where(" body like ? or body like ? ", "%/project/#{@project.id}/#{stage}/posts/#{post.id}", "%/project/#{@project.id}/#{stage}/posts/#{post.id}?%page=#{last_page}%").order(created_at: :desc).first
+    else
+      notice = current_user.journals.unscoped.where(type_event: 'visit_save', project_id: @project.id, user_id: current_user.id).where(" body like ? ", "%/project/#{@project.id}/#{stage}/posts/#{post.id}").order(created_at: :desc).first
+    end
+    if notice
+      notice.created_at
+    else
+      "2000-01-01 00:00:00"
+    end
+  end
+
+  def last_time_visit_aspect(aspect, stage)
+    post = aspect.life_posts.first
+    last_page = post.present? ? last_page(post) : 1
+    if params[:page] and params[:page].to_i != last_page
+      notice = current_user.journals.unscoped.where(type_event: 'visit_save', project_id: @project.id, user_id: current_user.id).where(" body like ? ", "%/project/#{@project.id}/#{stage}/posts?asp=#{aspect.id}%page=#{params[:page]}%").order(created_at: :desc).first
+    elsif params[:page].nil? or (params[:page] and params[:page].to_i == last_page)
+      notice = current_user.journals.unscoped.where(type_event: 'visit_save', project_id: @project.id, user_id: current_user.id).where(" body like ? or body like ? ", "%/project/#{@project.id}/#{stage}/posts?asp=#{aspect.id}", "%/project/#{@project.id}/#{stage}/posts?asp=#{aspect.id}%page=#{last_page}%").order(created_at: :desc).first
+    else
+      notice = current_user.journals.unscoped.where(type_event: 'visit_save', project_id: @project.id, user_id: current_user.id).where(" body like ? ", "%/project/#{@project.id}/#{stage}/posts?asp=#{aspect.id}").order(created_at: :desc).first
+    end
+    if notice
+      notice.created_at
+    else
+      "2000-01-01 00:00:00"
+    end
+  end
+
+  def last_time_visit_journals
+    notice = current_user.journals.unscoped.where(type_event: 'visit_save', project_id: @project.id, user_id: current_user.id).where(" body like ? ", "%/project/#{@project.id}/journals" + "#{params[:page] ? '?page='+params[:page] : ''}").order(created_at: :desc).first
+    if notice
+      notice.created_at
+    else
+      "2000-01-01 00:00:00"
+    end
+  end
+
+  def label_for_last_time_visit_status(comment)
+    stage = comment.post.class.name.underscore.pluralize.gsub('/posts', '')
+    if ['discontent', 'concept'].include? stage
+      if comment.created_at >= last_time_visit_post(comment.post, stage)
+        content_tag(:span, 'новый', class: "label label-success")
+      end
+    elsif stage == 'life_tape'
+      if comment.created_at >= last_time_visit_aspect(comment.post.aspect, stage)
+        content_tag(:span, 'новый', class: "label label-success")
+      end
+    end
+  end
+
+  def last_page(post)
+    total_results = post.main_comments.count
+    page = total_results / 10 + (total_results % 10 == 0 ? 0 : 1)
+    page == 0 ? 1 : page
   end
 end

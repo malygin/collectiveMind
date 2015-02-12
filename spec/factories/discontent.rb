@@ -30,6 +30,9 @@ FactoryGirl.define do
 
   factory :discontent_comment, class: 'Discontent::Comment' do
     sequence(:content) { |n| "discontent comment #{n}" }
+
+    association :user, factory: :ordinary_user
+    association :post, factory: :discontent
   end
 
   factory :discontent_aspects_life_tape_posts, class: 'Discontent::AspectsLifeTapePost' do
