@@ -20,13 +20,12 @@
   %li.header-right
     .tb-language.dropdown.pull-right
       %a{'data-target' => '#', 'data-toggle' => 'dropdown', href: '#'}
-        Русский
+        =locale_translate(I18n.locale.to_s)
         %i.fa.fa-angle-down.color.mass-dark-blue
       %ul.dropdown-menu.dropdown-mini{role: 'menu'}
-        %li
-          %a{href: '#'} English
-        %li
-          %a{href: '#'} עברית
+        -locale_translate_other(locale.to_s).each do |lang|
+          %li
+            %a{href: '#', data: {project: "#{@project.id}", user: "#{current_user.id}", lang: "#{lang[0]}"}}=lang[1]
 
   - if boss?
     %li.divider

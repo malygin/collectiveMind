@@ -37,6 +37,36 @@ $('#tab_posts li#new a').on "click", (e) ->
       url: "/project/#{project_id}/discontent/posts/unions"
       type: "get"
 
+
+
+$('.tb-language ul.dropdown-menu li a').on "click", (e) ->
+  project_id = $(this).data('project')
+  user_id = $(this).data('user')
+  lang = $(this).data('lang')
+  if project_id and user_id and lang
+    $.ajax
+      url: "/project/#{project_id}/users/#{user_id}/change_locale"
+      type: "put"
+      data:
+        set_locale: lang
+
+    location.reload(true);
+
+
+$('#select_set_locale').on "change", (e) ->
+  project_id = $(this).data('project')
+  user_id = $(this).data('user')
+  lang = $(this).val()
+  if project_id and user_id and lang
+    $.ajax
+      url: "/project/#{project_id}/users/#{user_id}/change_locale"
+      type: "put"
+      data:
+        set_locale: lang
+
+    location.reload(true);
+
+
 @post_form = ->
   this.activate_button = ->
     form = $(this).closest('form');

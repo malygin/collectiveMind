@@ -14,7 +14,7 @@ class User < ActiveRecord::Base
                   :dateActivation, :dateLastEnter, :dateRegistration, :email, :faculty, :group,
                   :name, :string, :string, :surname, :validate, :vkid,
                   :score, :score_a, :score_g, :score_o, :type_user, :last_seen_news, :chat_open,
-                  :last_seen_chat_at
+                  :last_seen_chat_at, :locale
 
   has_many :core_project_scores, class_name: 'Core::ProjectScore'
   has_many :help_users_answerses, class_name: 'Help::UsersAnswers'

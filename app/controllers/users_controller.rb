@@ -180,6 +180,7 @@ class UsersController < ApplicationController
     if @user and @user == current_user and params[:set_locale]
       @user.update_attributes(locale: params[:set_locale]) if I18n.available_locales.map(&:to_s).include?(params[:set_locale])
     end
+    format.js { head :no_content }
   end
 
   private

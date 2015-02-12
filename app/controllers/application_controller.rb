@@ -3,9 +3,10 @@ class ApplicationController < ActionController::Base
   include SessionsHelper
   include ApplicationHelper
   before_action :configure_permitted_parameters, if: :devise_controller?
-  before_action :set_locale
   before_action :set_project
   before_action :start_visit
+  before_action :set_locale
+  # around_action :with_locale
 
   def after_sign_in_path_for(resource)
     request.env['omniauth.origin'] || stored_location_for(resource) || root_path
@@ -28,7 +29,20 @@ class ApplicationController < ActionController::Base
 
 
   def set_locale
-    I18n.locale = extract_locale_from_user || I18n.default_locale
+    # I18n.load_path += Dir[Rails.root.join('config', 'locales', '*.yml')]
+    # I18n.default_locale = extract_locale_from_user
+    # I18n.reload!
+    I18n.locale = (extract_locale_from_user || I18n.default_locale).to_sym
+    I18n.load_path += Dir[Rails.root.join("config/locales/**/*.yml")]
+    session[:locale] = I18n.locale
+    # I18n.reload!
+    # session[:locale] = I18n.locale
+    # redirect_to :back
+    # I18n.load_path += Dir[Rails.root.join('config', 'locales', "#{I18n.locale}.yml").to_s]
+  end
+
+  def with_locale
+    I18n.with_locale(params[:locale]) { yield }
   end
 
   def extract_locale_from_user
