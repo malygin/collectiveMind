@@ -59,7 +59,7 @@ describe 'Concept ' do
         fill_in 'pa_content', with: 'con content'
 
         click_button 'send_post_concept'
-        expect(page).to have_content 'Ваше нововведение успешно добавлено! Вы можете добавить еще одно или перейти к просмотру списка нововведений.'
+        expect(page).to have_content I18n.t('form.concept.create_success')
         expect(page).to have_content 'Перейти к списку'
         expect(page).to have_content 'Продолжить заполнение'
         click_button 'Продолжить заполнение'
@@ -73,7 +73,7 @@ describe 'Concept ' do
 
         sleep 2
         click_button 'send_post_concept'
-        expect(page).to have_content 'Ваше нововведение успешно отредактированно! Вы можете перейти к его просмотру или к просмотру списка нововведений.'
+        expect(page).to have_content I18n.t('form.concept.update_success')
         expect(page).to have_content 'Перейти к списку'
         expect(page).to have_content 'Перейти к просмотру'
         expect(page).to have_content 'Продолжить заполнение'
@@ -104,7 +104,7 @@ describe 'Concept ' do
         expect(page).to have_content @discontent1.whend
 
         click_button 'send_post_concept'
-        expect(page).to have_content 'Ваше нововведение успешно отредактированно! Вы можете перейти к его просмотру или к просмотру списка нововведений.'
+        expect(page).to have_content I18n.t('form.concept.update_success')
         expect(page).to have_content 'Перейти к списку'
         expect(page).to have_content 'Перейти к просмотру'
         expect(page).to have_content 'Продолжить заполнение'
@@ -218,7 +218,7 @@ describe 'Concept ' do
         expect(page).to have_content @discontent1.whend
 
         click_button 'send_post_concept'
-        expect(page).to have_content 'Ваше нововведение успешно добавлено! Вы можете добавить еще одно или перейти к просмотру списка нововведений.'
+        expect(page).to have_content I18n.t('form.concept.create_success')
         expect(page).to have_content 'Перейти к списку'
         expect(page).to have_content 'Продолжить заполнение'
         click_link 'Перейти к списку'
@@ -249,8 +249,8 @@ describe 'Concept ' do
         fill_in 'pa_name', with: 'con name'
         fill_in 'pa_content', with: 'con content'
         click_button 'send_post_concept'
-        expect(page).to have_content 'Ваше нововведение успешно добавлено!'
-        expect(page).to have_content 'Перейти к списку'
+        expect(page).to have_content I18n.t('form.concept.create_success')
+        expect(page).to have_content I18n.t('link.go_list')
         expect(page).to have_content 'Продолжить заполнение'
       end
     end
@@ -373,7 +373,7 @@ describe 'Concept ' do
         expect(page).to have_content @discontent1.whend
 
         click_button 'send_post_concept'
-        expect(page).to have_content 'Ваше нововведение успешно добавлено! Вы можете добавить еще одно или перейти к просмотру списка нововведений.'
+        expect(page).to have_content I18n.t('form.concept.create_success')
         expect(page).to have_content 'Перейти к списку'
         expect(page).to have_content 'Продолжить заполнение'
         click_link 'Перейти к списку'

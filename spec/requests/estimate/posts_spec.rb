@@ -28,7 +28,7 @@ describe 'Estimate ' do
     context 'estimate list' do
       it ' can see estimate' do
         expect(page).to have_content @estimate1.content
-        expect(page).to have_content '+ Добавить оценку'
+        expect(page).to have_content I18n.t('form.plan.add_est')
       end
 
       it ' can see estimate' do
@@ -90,11 +90,11 @@ describe 'Estimate ' do
     context 'estimate list' do
       it ' can see estimate' do
         expect(page).to have_content @estimate1.content
-        expect(page).to have_content '+ Добавить оценку'
+        expect(page).to have_content I18n.t('form.plan.add_est')
       end
 
       it ' can see estimate' do
-        click_link '+ Добавить оценку'
+        click_link I18n.t('form.plan.add_est')
         expect(page).to have_content @plan1.name
         expect(page).to have_content @plan1.goal
         expect(page).to have_content @plan1.content

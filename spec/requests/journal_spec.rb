@@ -118,7 +118,7 @@ describe 'Journal ' do
         expect(page).to have_content 'news_yesterday'
         expect(page).to have_content 'news_older'
         expect(page).to have_content 'ВСЕ НОВОСТИ'
-        expect(page).to have_content 'Список процедур'
+        expect(page).to have_content I18n.t('menu.list_projects')
         expect(page).to have_content 'Фильтры'
       end
 
@@ -171,7 +171,7 @@ describe 'Journal ' do
       it 'have content status and links ' do
         expect(page).to have_content 'Рейтинг участников'
         expect(page).to have_content 'ВСЕ УЧАСТНИКИ'
-        expect(page).to have_content 'Список процедур'
+        expect(page).to have_content I18n.t('menu.list_projects')
         expect(page).to have_content 'Фильтры'
       end
     end

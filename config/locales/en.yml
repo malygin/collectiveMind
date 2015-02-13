@@ -690,7 +690,7 @@ en:
       not_group: Не состоит ни в одной группе
       award: Достижения (%{num} из %{all})
       activity: Активность
-      aspects: Темы
+      aspects: Аспекты
       discontents: Несовершенства
       concepts: Нововведения
       club_rating: Клубный рейтинг участников
@@ -761,7 +761,7 @@ en:
     issue: Выдано!
     add: Добавить
     users: Участники
-    remove: Убрать
+    remove: Удалить
     add_record: '+ Добавить'
     back_list: Back to списку
     back_proc: Back to процедуре

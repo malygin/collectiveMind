@@ -26,7 +26,7 @@ describe 'Core Project ' do
   shared_examples 'not_have_content_for_not_auth_user' do
     it '' do
       click_link 'sign_out'
-      expect(page).not_to have_link('list_projects', text: 'Список процедур', href: list_projects_path)
+      expect(page).not_to have_link('list_projects', text: I18n.t('menu.list_projects'), href: list_projects_path)
       expect(page).not_to have_content 'Закрытые процедуры'
       expect(page).not_to have_content 'Клубные процедуры'
       expect(page).not_to have_content closed_project.name
@@ -41,7 +41,7 @@ describe 'Core Project ' do
 
   shared_examples 'not_have_content_for_ordinary_user' do
     it '' do
-      expect(page).not_to have_link('list_projects', text: 'Список процедур', href: list_projects_path)
+      expect(page).not_to have_link('list_projects', text: I18n.t('menu.list_projects'), href: list_projects_path)
       expect(page).not_to have_content 'Закрытые процедуры'
       expect(page).not_to have_content 'Клубные процедуры'
       expect(page).not_to have_content closed_project.name
@@ -62,7 +62,7 @@ describe 'Core Project ' do
 
   shared_examples 'not_have_content_for_club_user' do
     it '' do
-      expect(page).not_to have_link('list_projects', text: 'Список процедур', href: list_projects_path)
+      expect(page).not_to have_link('list_projects', text: I18n.t('menu.list_projects'), href: list_projects_path)
       expect(page).not_to have_content 'Закрытые процедуры'
       expect(page).not_to have_content closed_project.name
       validate_projects_links({closed: closed_project}, expect: false)
@@ -83,7 +83,7 @@ describe 'Core Project ' do
 
   shared_examples 'not_have_content_for_moderator' do
     it '' do
-      expect(page).not_to have_link('list_projects', text: 'Список процедур', href: list_projects_path)
+      expect(page).not_to have_link('list_projects', text: I18n.t('menu.list_projects'), href: list_projects_path)
       expect(page).not_to have_content 'Закрытые процедуры'
       expect(page).not_to have_content closed_project.name
       validate_projects_links({closed: closed_project}, expect: false)
@@ -121,7 +121,7 @@ describe 'Core Project ' do
 
     it 'have content in profile ' do
       click_link 'user_profile'
-      expect(page).to have_content 'Профиль'
+      expect(page).to have_content I18n.t('menu.account')
       expect(page).to have_content 'Достижения'
       expect(page).to have_content 'Активность'
     end
@@ -153,7 +153,7 @@ describe 'Core Project ' do
         it 'for list projects ' do
           visit list_projects_path
           expect(page.current_path).to eq root_path
-          expect(page).not_to have_content 'Список процедур'
+          expect(page).not_to have_content I18n.t('menu.list_projects')
           expect(page).not_to have_link('new_project', text: 'Создать проект', href: new_core_project_path)
         end
 
@@ -161,14 +161,14 @@ describe 'Core Project ' do
           visit new_core_project_path
           expect(page.current_path).to eq root_path
           expect(page).not_to have_selector 'form#new_core_project'
-          expect(page).not_to have_content 'Форма создания новой процедуры'
+          expect(page).not_to have_content I18n.t('form.project.new')
         end
 
         it 'for edit project ' do
           visit edit_core_project_path(closed_project)
           expect(page.current_path).to eq root_path
           expect(page).not_to have_selector "form#edit_core_project_#{closed_project.id}"
-          expect(page).not_to have_content 'Форма редактирования процедуры'
+          expect(page).not_to have_content I18n.t('form.project.edit')
         end
 
         it 'for list users' do
@@ -225,7 +225,7 @@ describe 'Core Project ' do
         expect(page).to have_content demo_project.name
         expect(page).to have_content closed_project_for_invite.name
         validate_projects_links({closed: closed_project_for_invite, opened: opened_project, demo: demo_project}, expect: true)
-        expect(page).not_to have_link('list_projects', text: 'Список процедур', href: list_projects_path)
+        expect(page).not_to have_link('list_projects', text: I18n.t('menu.list_projects'), href: list_projects_path)
         expect(page).not_to have_content closed_project.name
         expect(page).not_to have_content 'Клубные процедуры'
         expect(page).not_to have_content club_project.name
@@ -292,7 +292,7 @@ describe 'Core Project ' do
         it 'for list projects ' do
           visit list_projects_path
           expect(page.current_path).to eq root_path
-          expect(page).not_to have_content 'Список процедур'
+          expect(page).not_to have_content I18n.t('menu.list_projects')
           expect(page).not_to have_link('new_project', text: 'Создать проект', href: new_core_project_path)
         end
 
@@ -300,14 +300,14 @@ describe 'Core Project ' do
           visit new_core_project_path
           expect(page.current_path).to eq root_path
           expect(page).not_to have_selector 'form#new_core_project'
-          expect(page).not_to have_content 'Форма создания новой процедуры'
+          expect(page).not_to have_content I18n.t('form.project.new')
         end
 
         it 'for edit project ' do
           visit edit_core_project_path(closed_project)
           expect(page.current_path).to eq root_path
           expect(page).not_to have_selector "form#edit_core_project_#{closed_project.id}"
-          expect(page).not_to have_content 'Форма редактирования процедуры'
+          expect(page).not_to have_content I18n.t('form.project.edit')
         end
 
         it 'for list users' do
@@ -366,7 +366,7 @@ describe 'Core Project ' do
         expect(page).to have_content club_project.name
         expect(page).to have_content closed_project_for_invite.name
         validate_projects_links({closed: closed_project_for_invite, opened: opened_project, demo: demo_project, club: club_project}, expect: true)
-        expect(page).not_to have_link('list_projects', text: 'Список процедур', href: list_projects_path)
+        expect(page).not_to have_link('list_projects', text: I18n.t('menu.list_projects'), href: list_projects_path)
         expect(page).not_to have_content 'closed project'
         validate_projects_links({closed: closed_project}, expect: false)
       end
@@ -411,7 +411,7 @@ describe 'Core Project ' do
 
     it 'have content in profile ' do
       click_link 'user_profile'
-      expect(page).to have_content 'Профиль'
+      expect(page).to have_content I18n.t('menu.account')
       expect(page).to have_content 'Активность'
     end
 
@@ -437,7 +437,7 @@ describe 'Core Project ' do
         it 'for list projects ' do
           visit list_projects_path
           expect(page.current_path).to eq root_path
-          expect(page).not_to have_content 'Список процедур'
+          expect(page).not_to have_content I18n.t('menu.list_projects')
           expect(page).not_to have_link('new_project', text: 'Создать проект', href: new_core_project_path)
         end
 
@@ -445,14 +445,14 @@ describe 'Core Project ' do
           visit new_core_project_path
           expect(page.current_path).to eq root_path
           expect(page).not_to have_selector 'form#new_core_project'
-          expect(page).not_to have_content 'Форма создания новой процедуры'
+          expect(page).not_to have_content I18n.t('form.project.new')
         end
 
         it 'for edit project ' do
           visit edit_core_project_path(closed_project)
           expect(page.current_path).to eq root_path
           expect(page).not_to have_selector "form#edit_core_project_#{closed_project.id}"
-          expect(page).not_to have_content 'Форма редактирования процедуры'
+          expect(page).not_to have_content I18n.t('form.project.edit')
         end
 
         it 'for list users' do
@@ -511,7 +511,7 @@ describe 'Core Project ' do
         expect(page).to have_content club_project.name
         expect(page).to have_content closed_project_for_invite.name
         validate_projects_links({closed: closed_project_for_invite, opened: opened_project, demo: demo_project, club: club_project}, expect: true)
-        expect(page).not_to have_link('list_projects', text: 'Список процедур', href: list_projects_path)
+        expect(page).not_to have_link('list_projects', text: I18n.t('menu.list_projects'), href: list_projects_path)
         expect(page).not_to have_content closed_project.name
         validate_projects_links({closed: closed_project}, expect: false)
       end
@@ -549,12 +549,12 @@ describe 'Core Project ' do
     it 'have base link ' do
       expect(page).to have_link('user_profile', text: prime_admin.to_s, href: user_path(prime_admin.current_projects_for_user.last, prime_admin))
       expect(page).to have_link('sign_out', text: I18n.t('menu.sign_out'), href: destroy_user_session_path)
-      expect(page).to have_link('list_projects', text: 'Список процедур', href: list_projects_path)
+      expect(page).to have_link('list_projects', text: I18n.t('menu.list_projects'), href: list_projects_path)
     end
 
     it 'have content in profile ' do
       click_link 'user_profile'
-      expect(page).to have_content 'Профиль'
+      expect(page).to have_content I18n.t('menu.account')
       expect(page).to have_content 'Активность'
     end
 
@@ -567,7 +567,7 @@ describe 'Core Project ' do
 
     context 'have content ' do
       it 'opened and demo project ' do
-        expect(page).to have_link('list_projects', text: 'Список процедур', href: list_projects_path)
+        expect(page).to have_link('list_projects', text: I18n.t('menu.list_projects'), href: list_projects_path)
         expect(page).to have_content 'Открытые процедуры'
         expect(page).to have_content 'Закрытые процедуры'
         expect(page).to have_content 'Демо процедуры'
@@ -610,7 +610,7 @@ describe 'Core Project ' do
         it 'for list projects ' do
           visit list_projects_path
           expect(page.current_path).to eq list_projects_path
-          expect(page).to have_content 'Список процедур'
+          expect(page).to have_content I18n.t('menu.list_projects')
           expect(page).to have_link('new_project', text: 'Создать проект', href: new_core_project_path)
         end
 
@@ -618,14 +618,14 @@ describe 'Core Project ' do
           visit new_core_project_path
           expect(page.current_path).to eq new_core_project_path
           expect(page).to have_selector 'form#new_core_project'
-          expect(page).to have_content 'Форма создания новой процедуры'
+          expect(page).to have_content I18n.t('form.project.new')
         end
 
         it 'for edit project ' do
           visit edit_core_project_path(closed_project)
           expect(page.current_path).to eq edit_core_project_path(closed_project)
           expect(page).to have_selector "form#edit_core_project_#{closed_project.id}"
-          expect(page).to have_content 'Форма редактирования процедуры'
+          expect(page).to have_content I18n.t('form.project.edit')
         end
 
         it 'for list users' do
@@ -642,7 +642,7 @@ describe 'Core Project ' do
       end
 
       it 'success new project' do
-        expect(page).to have_content 'Форма создания новой процедуры'
+        expect(page).to have_content I18n.t('form.project.new')
         fill_in 'core_project_name', with: 'new project'
         fill_in 'core_project_short_desc', with: 'new project_short_desc'
         fill_in 'core_project_desc', with: 'new project_desc'
@@ -658,7 +658,7 @@ describe 'Core Project ' do
       end
 
       it 'success edit project' do
-        expect(page).to have_content 'Форма редактирования процедуры'
+        expect(page).to have_content I18n.t('form.project.edit')
         fill_in 'core_project_name', with: 'edit project'
         fill_in 'core_project_short_desc', with: 'edit project_short_desc'
         fill_in 'core_project_desc', with: 'edit project_desc'
