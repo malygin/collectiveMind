@@ -646,7 +646,7 @@ describe 'Core Project ' do
         fill_in 'core_project_name', with: 'new project'
         fill_in 'core_project_short_desc', with: 'new project_short_desc'
         fill_in 'core_project_desc', with: 'new project_desc'
-        page.select 'Закрытая', from: 'core_project_type_access'
+        page.select I18n.t('form.project.closed'), from: 'core_project_type_access'
         click_button 'send_project'
         expect(page).to have_content 'new project'
       end
@@ -662,7 +662,7 @@ describe 'Core Project ' do
         fill_in 'core_project_name', with: 'edit project'
         fill_in 'core_project_short_desc', with: 'edit project_short_desc'
         fill_in 'core_project_desc', with: 'edit project_desc'
-        page.select 'Клубная', from: 'core_project_type_access'
+        page.select I18n.t('form.project.club'), from: 'core_project_type_access'
         click_button 'send_project'
         expect(page).to have_content 'edit project'
       end

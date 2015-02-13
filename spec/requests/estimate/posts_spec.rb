@@ -32,7 +32,7 @@ describe 'Estimate ' do
       end
 
       it ' can see estimate' do
-        click_link '+ Добавить оценку'
+        click_link I18n.t('form.plan.add_est')
         expect(page).to have_content @plan1.name
         expect(page).to have_content @plan1.goal
         expect(page).to have_content @plan1.content
