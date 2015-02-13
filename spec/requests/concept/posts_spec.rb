@@ -53,7 +53,7 @@ describe 'Concept ' do
         click_link "new_concept_#{@discontent1.id}"
         expect(page).to have_content 'Перейти к описанию Идеи'
         click_button 'Перейти к описанию Идеи'
-        expect(page).to have_content 'Краткое название вашего нововведения'
+        expect(page).to have_content I18n.t('form.concept.title')
         fill_in 'pa_title', with: 'con title'
         fill_in 'pa_name', with: 'con name'
         fill_in 'pa_content', with: 'con content'
@@ -131,7 +131,7 @@ describe 'Concept ' do
         click_link "new_concept_#{@discontent1.id}"
         expect(page).to have_content 'Перейти к описанию Идеи'
         click_button 'Перейти к описанию Идеи'
-        expect(page).to have_content 'Краткое название вашего нововведения'
+        expect(page).to have_content I18n.t('form.concept.title')
         fill_in 'pa_title', with: 'con title'
         fill_in 'pa_name', with: 'con name'
         fill_in 'pa_content', with: 'con content'
@@ -242,10 +242,9 @@ describe 'Concept ' do
         expect(page).to have_content 'Перейти к описанию Идеи'
         click_button 'Перейти к описанию Идеи'
         click_button 'send_post_concept'
-        expect(page).to have_content 'Сохранение не удалось из-за 3 ошибок:'
-        expect(page).to have_content 'Поле "Краткое название" не может быть пустым'
-        expect(page).to have_content 'Поле "A1" не может быть пустым'
-        expect(page).to have_content 'Поле "A2" не может быть пустым'
+        expect(page).to have_content I18n.t('activerecord.attributes.concept/post_aspect.title')
+        expect(page).to have_content I18n.t('activerecord.attributes.concept/post_aspect.name')
+        expect(page).to have_content I18n.t('activerecord.attributes.concept/post_aspect.content')
         fill_in 'pa_title', with: 'con title'
         fill_in 'pa_name', with: 'con name'
         fill_in 'pa_content', with: 'con content'
@@ -337,7 +336,7 @@ describe 'Concept ' do
         click_link "new_concept_#{@discontent1.id}"
         expect(page).to have_content 'Перейти к описанию Идеи'
         click_button 'Перейти к описанию Идеи'
-        expect(page).to have_content 'Краткое название вашего нововведения'
+        expect(page).to have_content I18n.t('form.concept.title')
         fill_in 'pa_title', with: 'con title'
         fill_in 'pa_name', with: 'con name'
         fill_in 'pa_content', with: 'con content'

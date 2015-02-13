@@ -130,16 +130,16 @@ describe 'Plan ' do
 
       it 'can see edit link concept add modal', js: true do
         find('li#second a').click
-        expect(page).to have_content 'Добавить нововведение'
+        expect(page).to have_content I18n.t('form.plan.add_concept')
         expect(page).to have_content 'Запланировать мероприятие'
-        click_link 'Добавить нововведение'
+        click_link I18n.t('form.plan.add_concept')
         expect(page).to have_content 'Добавление нововведений'
         expect(page).to have_content 'Добавить пустое нововведение'
       end
 
       it 'can see edit link action add modal', js: true do
         find('li#second a').click
-        expect(page).to have_content 'Добавить нововведение'
+        expect(page).to have_content I18n.t('form.plan.add_concept')
         expect(page).to have_content 'Запланировать мероприятие'
         click_link 'Запланировать мероприятие'
         expect(page).to have_content 'Добавление мероприятия к нововведению:'
@@ -276,16 +276,16 @@ describe 'Plan ' do
 
       it 'can see edit link concept add modal', js: true do
         find('li#second a').click
-        expect(page).to have_content 'Добавить нововведение'
+        expect(page).to have_content I18n.t('form.plan.add_concept')
         expect(page).to have_content 'Запланировать мероприятие'
-        click_link 'Добавить нововведение'
+        click_link I18n.t('form.plan.add_concept')
         expect(page).to have_content 'Добавление нововведений'
         expect(page).to have_content 'Добавить пустое нововведение'
       end
 
       it 'can see edit link action add modal', js: true do
         find('li#second a').click
-        expect(page).to have_content 'Добавить нововведение'
+        expect(page).to have_content I18n.t('form.plan.add_concept')
         expect(page).to have_content 'Запланировать мероприятие'
         click_link 'Запланировать мероприятие'
         expect(page).to have_content 'Добавление мероприятия к нововведению:'

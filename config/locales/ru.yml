@@ -552,6 +552,7 @@ ru:
 
     delete_group: "Удалить группу?"
     delete_group_task: "Удалить задачу?"
+
   show:
     without_name: 'Без названия'
     note: замечание
@@ -753,6 +754,7 @@ ru:
     fill_content_paper: 'Заполните поле контента'
 
     advice: "Совет"
+
   link:
     more: 'подробнее'
     top: наверх
