@@ -100,6 +100,8 @@ scope '/project/:project' do
     resources :posts
   end
 
+  resources :news
+
   resources :users do
     get :show_top, on: :collection
     get :users_rc, on: :collection
