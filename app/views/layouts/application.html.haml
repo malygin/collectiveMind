@@ -43,7 +43,18 @@
             =render 'top_menu'
       .content.container
         -if current_controller_for_navbar?(controller)
-          %h4="Тема процедуры: #{@project.name}"
+          %h4
+            = "Тема процедуры: #{@project.name}"
+          - if @project.news.for_last_day.any?
+            .alert.alert-success
+              %strong
+                %i.fa.fa-check
+                %strong
+                  Новости от экспертов:
+                - @project.news.for_last_day.each do |news|
+                  = link_to news_path(@project, news), style: 'color: white' do
+                    %p
+                      = news.title
           %section.widget.widget-tabs
             %header
               =render partial: 'application/stages', locals: {current_stage: current_stage_for_navbar(controller, params[:stage])}
