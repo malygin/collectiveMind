@@ -40,6 +40,11 @@ Spork.prefork do
     config.infer_base_class_for_anonymous_controllers = false
     config.order = 'random'
 
+
+    config.before :each do
+      I18n.default_locale = :en
+    end
+
     config.before :each, js: true do
       page.driver.block_unknown_urls
       page.driver.allow_url '0.0.0.0'
