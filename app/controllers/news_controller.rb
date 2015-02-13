@@ -4,7 +4,7 @@ class NewsController < ApplicationController
 
   # GET /news
   def index
-    @news = News.all
+    @news = @project.news
   end
 
   # GET /news/1
@@ -22,10 +22,11 @@ class NewsController < ApplicationController
 
   # POST /news
   def create
-    @news = @project.newses.new(news_params)
+    @news = @project.news.create(news_params)
+    @news.user = current_user
 
     if @news.save
-      redirect_to @news, notice: 'News was successfully created.'
+      redirect_to news_path(@project, @news), notice: 'News was successfully created.'
     else
       render :new
     end
@@ -34,7 +35,7 @@ class NewsController < ApplicationController
   # PATCH/PUT /news/1
   def update
     if @news.update(news_params)
-      redirect_to @news, notice: 'News was successfully updated.'
+      redirect_to news_path(@project, @news), notice: 'News was successfully updated.'
     else
       render :edit
     end

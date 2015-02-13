@@ -146,6 +146,7 @@ ru:
     account: 'Профиль'
     list_groups: "Список групп"
     user_analytic: "Статистика по пользователям"
+    news_from_expert: "Новости от экспертов"
   stages:
     intro: Знакомство
     life_tape: 'Введение в процедуру'
@@ -550,6 +551,7 @@ ru:
 
     delete_group: "Удалить группу?"
     delete_group_task: "Удалить задачу?"
+    delete_news: "Удалить новость?"
   show:
     without_name: 'Без названия'
     note: замечание
@@ -816,3 +818,6 @@ ru:
     call_moderator_success: "Модератор получил уведомление"
   analytic:
     graph_visits: "График посещений"
+  news:
+    title: "Анонс"
+    body: "Полный текст"

@@ -1,5 +1,7 @@
-%h1 New news
-
-= render 'form'
-
-= link_to 'Back', news_index_path
+%section.widget.padding-increased
+  %header
+    %h4
+      Добавление новости
+      %hr/
+  = link_to 'Венрнуться к списку новостей', news_index_path
+  = render 'form'

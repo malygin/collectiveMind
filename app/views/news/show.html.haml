@@ -1,15 +1,17 @@
-%p#notice= notice
-
-%p
-  %b Title:
-  = @news.title
-%p
-  %b Body:
-  = @news.body
-%p
-  %b Project:
-  = @news.project
-
-= link_to 'Edit', edit_news_path(@news)
-\|
-= link_to 'Back', news_index_path
+= link_to "/project/#{@project.id}" do
+  %span.fa.fa-angle-double-left
+  = t('link.back_proc')
+%section.widget
+  .body
+    %h4
+      = @news.title
+    %span
+      - if current_user?(@news.user)
+        = link_to edit_news_path(@project, @news), id: "edit_news_#{@news.id}" do
+          %span.glyphicon.glyphicon-pencil.text-success
+        = link_to news_path(@project, @news), method: :delete, data: {confirm: t('confirm.delete_news')}, id: "destroy_news_#{@news.id}" do
+          %span.glyphicon.glyphicon-remove.text-danger
+    %hr/
+    %br
+    %br
+      = @news.body.html_safe

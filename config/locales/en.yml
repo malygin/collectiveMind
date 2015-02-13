@@ -138,6 +138,7 @@ en:
     account: 'Profile'
     list_groups: "List of gorups"
     user_analytic: "User analytic"
+    news_from_expert: "News from expert"
   stages:
     intro: Intro
     life_tape: 'Data Gathering'
@@ -528,6 +529,7 @@ en:
 
     delete_group: "Delete group?"
     delete_group_task: "Delete?"
+    delete_news: "Delete news?"
   show:
     without_name: 'Без названия'
     note: замечание
@@ -787,3 +789,6 @@ en:
     call_moderator_success: "Moderator get notification"
   analytic:
     graph_visits: "Graph visits"
+  news:
+    title: "Announce"
+    body: "Full text"
