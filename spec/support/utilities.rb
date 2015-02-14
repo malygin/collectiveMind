@@ -116,9 +116,9 @@ def validate_not_have_moderator_links_for_user(project)
 end
 
 def validate_have_prime_admin_links(project)
-  expect(page).to have_content 'Настройки Администратора'
+  expect(page).to have_content I18n.t('menu.settings.settings_admin')
   expect(page).to have_link('change_stage', href: next_stage_core_project_path(project))
-  expect(page).to have_link('list_projects', text: 'Список процедур', href: list_projects_path)
+  expect(page).to have_link('list_projects', text: I18n.t('menu.list_projects'), href: list_projects_path)
 end
 
 def validate_have_moderator_links(project)
