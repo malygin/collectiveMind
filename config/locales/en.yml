@@ -158,9 +158,9 @@ en:
     result: Подведение итогов
     glossary: Глоссарий
     stage:
-      one: 'First Stage'
-      few: '%{count} Stage'
-      other: '%{count} Stage'
+      one: ' stage'
+      few: ' stage'
+      other: ' stage'
     life_tape_title: '<h5><b>The main goal of the stage</b></h5> is to introduce the users to different aspects presented in the Knowledge Data Base. <br/><b>The participants are encouraged</b> to hold active discussions on the aspects and introduce new aspects for consideration. <br/> <b> It is recommended to</b> <br>- ask as many questions as possible to better understand the content of the Knowledge Data Base, <br>- and flag your messages as PROBLEMS or IDEAS for further developing of Shortfalls or Changes, respectively.'
     discontent_title: '<h5><b>The main goal of the stage</b></h5> is to identify shortfalls for every aspect. <br/> <b>The participants are encouraged to</b> add as many shortfalls as possible.<br/> <b>It is recommended to</b><br> lay down the shortfalls in a short and clear manner while using the comments field for all explanations. <br> If needed, the shortfalls should be modified on a moderator’s request.'
     concept_title: '<h5><b>The main goal of the stage</b></h5> is to find the solutions for all identified shortfalls. <br/><b>The participants are encouraged to</b> bring forward any ideas and suggestions.<br/> <b>It is recommended to</b><br> to fill all provided fields in order to describe the idea as  accurately as possible. <br> If needed, the shortfalls should be modified on a moderator’s request.'
@@ -830,7 +830,7 @@ en:
     advice_success_approved: "Advice approved"
     advice_success_not_approved: "Advice not approved"
   advice:
-    advices: "Advices"
+    advices: "Советы участников"
     disapproved_notify_text: "Ваш совет не одобрен, Ознакомиться с причиной"
   groups:
     groups: "Groups"
