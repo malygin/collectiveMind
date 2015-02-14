@@ -27,8 +27,8 @@
       %br
       %div
         %small всего:
-        =aspect.aspect_concept.by_status(0).count
-        - count = aspect.aspect_concept.by_status(0).where("concept_posts.created_at >= ?", last_time_visit_aspect(aspect, 'concept')).count
+        =aspect.aspect_concept.uniq.by_status(0).count
+        - count = aspect.aspect_concept.uniq.by_status(0).where("concept_posts.created_at >= ?", last_time_visit_aspect(aspect, 'concept')).count
         - if count > 0
           %small , новых:
-          %span.badge=aspect.aspect_concept.by_status(0).where("concept_posts.created_at >= ?", last_time_visit_aspect(aspect, 'concept')).count
+          %span.badge=aspect.aspect_concept.uniq.by_status(0).where("concept_posts.created_at >= ?", last_time_visit_aspect(aspect, 'concept')).count
