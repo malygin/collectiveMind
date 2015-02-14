@@ -130,7 +130,7 @@ def validate_default_links_and_sidebar(project, user)
 
   expect(page).to have_link('go_to_logo', text: 'MASS DECISION', href: "/project/#{project.id}")
   expect(page).to have_content project.name
-  expect(page).to have_content I18n.t('show.user.aspects')
+  expect(page).to have_content I18n.t('menu.list_aspects')
 
   expect(page).to have_link('go_to_work', text: I18n.t('menu.help_stage'))
   expect(page).to have_link('go_to_help', text: 'Помощь', href: help_posts_path(project))
