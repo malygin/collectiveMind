@@ -24,14 +24,14 @@ describe 'Discontent::Post', type: :model do
   end
 
   it 'by project' do
-    post1 = create :discontent
+    create :discontent
     post2 = create :discontent
     post3 = create :discontent, project: post2.project
     expect(Discontent::Post.by_project(post2.project.id)).to match_array([post2, post3])
   end
 
   it 'for union' do
-    post1 = create :discontent
+    create :discontent
     post2 = create :discontent, status: 1
     post3 = create :discontent, project: post2.project
     expect(Discontent::Post.for_union(post2.project.id)).to match_array([post3])

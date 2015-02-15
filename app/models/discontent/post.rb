@@ -7,7 +7,8 @@ class Discontent::Post < ActiveRecord::Base
   has_many :discontent_posts, class_name: 'Discontent::Post', foreign_key: 'discontent_post_id'
   has_many :discontent_post_aspects, class_name: 'Discontent::PostAspect'
   has_many :post_aspects, through: :discontent_post_aspects, source: :core_aspect, class_name: 'Core::Aspect'
-  has_many :concept_post_discontents, -> { where concept_post_discontents: {status: [0, nil]} }, class_name: 'Concept::PostDiscontent', foreign_key: 'discontent_post_id'
+  has_many :concept_post_discontents, -> { where concept_post_discontents: {status: [0, nil]} },
+           class_name: 'Concept::PostDiscontent', foreign_key: 'discontent_post_id'
   has_many :dispost_concepts, through: :concept_post_discontents, source: :post, class_name: 'Concept::Post'
   has_many :concept_conditions, class_name: 'Concept::PostAspect', foreign_key: 'core_aspect_id'
   has_many :plan_conditions, class_name: 'Plan::PostAspect', foreign_key: 'core_aspect_id'
@@ -15,8 +16,11 @@ class Discontent::Post < ActiveRecord::Base
   has_many :voted_users, through: :final_votings, source: :user
   has_many :final_votings, foreign_key: 'discontent_post_id', class_name: 'Discontent::Voting'
   has_many :concept_votings, foreign_key: 'discontent_post_id', class_name: 'Concept::Voting'
-  has_many :concept_post_discontent_grouped, -> { where concept_post_discontents: {status: [1]} }, class_name: 'Concept::PostDiscontent', foreign_key: 'discontent_post_id'
+  has_many :concept_post_discontent_grouped, -> { where concept_post_discontents: {status: [1]} },
+           class_name: 'Concept::PostDiscontent', foreign_key: 'discontent_post_id'
   has_many :advices, class_name: 'Advice', as: :adviseable
+
+  validates :content, :whend, :whered, :project_id, presence: true
 
   scope :by_project, ->(p) { where(project_id: p) }
   scope :by_project_and_not_anonym, ->(p) { where(project_id: p, anonym: false) }
@@ -24,10 +28,8 @@ class Discontent::Post < ActiveRecord::Base
   scope :by_style, ->(p) { where(style: p) }
   scope :by_positive, ->(p) { where(style: 0, status: p) }
   scope :by_negative, ->(p) { where(style: 1, status: p) }
-
-  scope :united_for_vote, ->(project, voted) { where(project_id: project, status: [2,4]).where.not(id: voted).order(:id) }
-  scope :for_union, ->(project) { where("discontent_posts.status = 0 and discontent_posts.project_id = ? ", project) }
-
+  scope :united_for_vote, ->(project, voted) { where(project_id: project, status: [2, 4]).where.not(id: voted).order(:id) }
+  scope :for_union, ->(project) { where('discontent_posts.status = 0 and discontent_posts.project_id = ? ', project) }
   scope :by_status_for_discontent, ->(project) {
     if project.status == 4
       where(status: [0, 1])
@@ -41,16 +43,12 @@ class Discontent::Post < ActiveRecord::Base
   }
   scope :by_verified, -> { where(discontent_posts: {status_content: 't', status_whered: 't', status_whend: 't'}) }
   scope :by_unverified, -> { where(discontent_posts: {status_content: ['f', nil], status_whered: ['f', nil], status_whend: ['f', nil]}) }
-
-  scope :type_note, -> type_note { joins(:notes) if type_note.present? and type_note != "content_all" }
-  scope :type_like, -> type_like { where(:useful => type_like == "by_like" ? 't' : ['f', nil]) if type_like.present? and type_like != "content_all" }
-  scope :type_verify, -> type_verify { type_verify == "by_verified" ? by_verified : by_unverified if type_verify.present? and type_verify != "content_all" }
-
-  scope :sort_date, -> sort_date { sort_date == "up" ? order('discontent_posts.created_at DESC') : order('discontent_posts.created_at ASC') if sort_date.present? }
-  scope :sort_user, -> sort_user { sort_user == "up" ? order('discontent_posts.user_id DESC') : order('discontent_posts.user_id ASC') if sort_user.present? }
-  scope :sort_view, -> sort_view { sort_view == "up" ? order('discontent_posts.number_views DESC') : order('discontent_posts.number_views ASC') if sort_view.present? }
-
-  validates :content, :whend, :whered, :project_id, presence: true
+  scope :type_note, -> (type_note) { joins(:notes) if type_note.present? and type_note != 'content_all' }
+  scope :type_like, -> type_like { where(useful: type_like == 'by_like' ? 't' : ['f', nil]) if type_like.present? and type_like != 'content_all' }
+  scope :type_verify, -> type_verify { type_verify == 'by_verified' ? by_verified : by_unverified if type_verify.present? and type_verify != 'content_all' }
+  scope :sort_date, -> sort_date { sort_date == 'up' ? order('discontent_posts.created_at DESC') : order('discontent_posts.created_at ASC') if sort_date.present? }
+  scope :sort_user, -> sort_user { sort_user == 'up' ? order('discontent_posts.user_id DESC') : order('discontent_posts.user_id ASC') if sort_user.present? }
+  scope :sort_view, -> sort_view { sort_view == 'up' ? order('discontent_posts.number_views DESC') : order('discontent_posts.number_views ASC') if sort_view.present? }
 
   def complite(concept)
     post = self.concept_post_discontents.by_concept(concept.id).first
@@ -79,7 +77,7 @@ class Discontent::Post < ActiveRecord::Base
 
   def destroy_ungroup_aspects(ungroup_post)
     aspects_for_ungroup = ungroup_post.post_aspects.pluck(:id)
-    union_posts = self.discontent_posts.where("discontent_posts.id <> ?", ungroup_post.id)
+    union_posts = self.discontent_posts.where('discontent_posts.id <> ?', ungroup_post.id)
     union_posts_aspects = []
     if union_posts.present?
       union_posts.each do |p|
@@ -143,23 +141,23 @@ class Discontent::Post < ActiveRecord::Base
   end
 
   def concepts_for_vote(project, current_user, last_vote)
-    @post_all = self.dispost_concepts.by_status(0).size - 1
-    concept_posts = self.dispost_concepts.by_status(0).order('concept_posts.id')
-    if last_vote.nil? or self.id != last_vote.discontent_post_id
-      @concept1 = concept_posts[0].post_aspects.first
-      @concept2 = concept_posts[1].post_aspects.first
-      @votes = 1
+    post_all = dispost_concepts.by_status(0).size - 1
+    concept_posts = dispost_concepts.by_status(0).order('concept_posts.id')
+    if last_vote.nil? or id != last_vote.discontent_post_id
+      concept1 = concept_posts[0].post_aspects.first
+      concept2 = concept_posts[1].post_aspects.first
+      votes = 1
     else
-      @concept1 = last_vote.concept_post_aspect
-      count_now = current_user.concept_post_votings.by_project_votings(project).where(discontent_post_id: self.id, concept_post_aspect_id: @concept1.id).count
-      @concept2 = concept_posts[count_now+1].post_aspects.first unless concept_posts[count_now+1].nil?
-      @votes = count_now == @post_all ? count_now : count_now + 1
+      concept1 = last_vote.concept_post_aspect
+      count_now = current_user.concept_post_votings.by_project_votings(project).where(discontent_post_id: id, concept_post_aspect_id: concept1.id).count
+      concept2 = concept_posts[count_now + 1].post_aspects.first unless concept_posts[count_now + 1].nil?
+      votes = count_now == post_all ? count_now : count_now + 1
     end
-    return @post_all, @concept1, @concept2, @votes
+    return post_all, concept1, concept2, votes
   end
 
   def self.united_for_vote_new(project, voted)
-    all_posts = self.where(project_id: project, status: [2,4]).where.not(id: voted).includes(:post_aspects).order("core_aspects.id")
+    all_posts = united_for_vote(project, voted).includes(:post_aspects).order('core_aspects.id')
     one_posts = []
     many_posts = []
     all_posts.each do |post|
