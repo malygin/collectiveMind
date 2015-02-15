@@ -289,15 +289,15 @@ he:
 
     discontent:
       title:  Форма добавления несовершенства
-      what: 'что?'
-      where: 'где?'
-      when: 'когда?'
+      what: '?מה'
+      where: '?איפה'
+      when: '?מתי'
       field_what: Что вас не устраивает?
       field_where: Где это происходит?
       field_when: Когда это происходит?
-      style_negative: Имеющиеся недостатки
-      style_positive: Отсутствующие достоинства
-      style_nun: не определена
+      style_negative: חסרונות
+      style_positive: חוסר הכבוד
+      style_nun: לא נקבע
       examples: 'Пример:'
       field_what_promt: 'Отрицательное действие, явление, установление, черта'
       field_where_promt: 'Место, организация, общность, в которой это происходит'
@@ -476,9 +476,9 @@ he:
     enter_name: 'Введите название ...'
     enter_text: 'Введите текст ...'
     select_topic: Выберите аспект записи
-    send: Отправить
+    send: לשלוח
     comment_promt: Ваш комментарий
-    comment_answer: Ваш комментарий или вопрос
+    comment_answer: התגובה או השאלה שלך
     comment_success: Комментарий успешно добавлен
     example: Пример
     close: Закрыть
@@ -556,8 +556,8 @@ he:
     without_name: 'Без названия'
     note: замечание
     warning: Обратите внимание!
-    discuss: ТРЕБУЕТ ОБСУЖДЕНИЯ
-    important: ВАЖНОЕ
+    discuss: דיון דורש
+    important: חשוב
     general_news: ВСЕ НОВОСТИ
     general_rating: ВСЕ УЧАСТНИКИ
     general_analytics: ВСЯ АНАЛИТИКА
@@ -654,8 +654,8 @@ he:
       sort_generators: 'יוצרי רעיונות'
       sort_analysts: 'אנליסטים'
       sort_voters: 'מעריכים'
-      title_1: '*נקודות פרוצדורה ™MASSDECISION אינם מוענקים באופן אוטומטי.'
-      title_2: '*בכל שלב ניקוד מתבצע באופן ידני על ידי מנהלי הפרוצדורה ומומחים.'
+      title_1: '.נקודות פרוצדורה ™MASSDECISION אינם מוענקים באופן אוטומטי*'
+      title_2: '.בכל שלב ניקוד מתבצע באופן ידני על ידי מנהלי הפרוצדורה ומומחים*'
       stage_collect_info: 'מבוא לפרוצדורה'
       stage_discontent: 'ניתוח המצב הקיים'
       stage_concept: 'עיצוב העתיד'
@@ -710,11 +710,11 @@ he:
       fourth_title: '4 стадия: Разработка проектов. Ознакомьтесь перед началом работы!'
       fifth_title: '5 стадия: Оценивание проектов. Ознакомьтесь перед началом работы!'
 
-    problem: Проблема
-    idea: Идея
-    answer: Ответить
-    revert_score: Забрать баллы
-    add_score: Выдать баллы
+    problem: בעיה
+    idea: רעיון
+    answer: להגיב
+    revert_score: לאסוף נקודות
+    add_score: נקודות להעניק
     like: 'За:'
     unlike: 'Против:'
     votes_users: 'Голосовавших:'
@@ -729,7 +729,7 @@ he:
     reset: Отменить
     activity: 'Активность:'
     view_more: Посмотреть еще
-    commenting: Комментировать
+    commenting: תגובה
     support: Поддержать
     name: Название
     status: Статус
@@ -750,8 +750,9 @@ he:
       other: "Идет %{count} стадия"
     fill_name_paper: 'Заполните название статьи'
     fill_content_paper: 'Заполните поле контента'
-
     advice: "Совет"
+    users_comments: משתתפי תגובות
+
   link:
     more: 'подробнее'
     top: наверх
@@ -764,12 +765,12 @@ he:
     back: Назад
     go_to_project: Перейти к процедуре
     new_project: Создать проект
-    edit: Редактировать
+    edit: לערוך
     delete: Удалить
     issue: Выдано!
     add: Добавить
     users: Участники
-    remove: Удалить
+    remove: למחוק
     add_record: '+ Добавить'
     back_list: Вернуться к списку
     back_proc: 'לחזור לפרוצדורה'

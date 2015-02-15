@@ -55,7 +55,7 @@
       %br
 
     %h3
-      Комментарии участников
+      = t('show.users_comments')
     %ul.media-list#comments.chat-messages
       = render partial: 'shared/comment',collection: @comments
     .text-center

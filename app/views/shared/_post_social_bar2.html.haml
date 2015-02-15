@@ -4,7 +4,7 @@
       %span.hidden-xs
         =post.number_views
         %span.glyphicon.glyphicon-eye-open
-        |
+      |
       = link_to(controller: post.class.name.underscore.pluralize, action: :show, project: @project, id: post.id) do
         =t('show.commenting')
         =post.comments.count
@@ -76,6 +76,7 @@
         - if not (post.class.name.deconstantize == "Concept" or (post.class.name.deconstantize == "Discontent" and [2,4].include?(post.status)))
           |
           =link_to({controller: post.class.name.underscore.pluralize, action: :plus, project: @project, id: post.id}, remote: true, method: :put, class: "link_status", id: "plus_post_#{post.id}") do
+            &nbsp;
             -if post.useful
               %span.label_give_scores.label.label-danger=t('show.revert_score')
             -else

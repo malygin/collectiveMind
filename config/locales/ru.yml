@@ -752,8 +752,8 @@ ru:
       other: "Идет %{count} стадия"
     fill_name_paper: 'Заполните название статьи'
     fill_content_paper: 'Заполните поле контента'
-
     advice: "Совет"
+    users_comments: Комментарии участников
 
   link:
     more: 'подробнее'
