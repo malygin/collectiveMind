@@ -1,4 +1,5 @@
 class Discontent::AspectsController < ApplicationController
+  before_filter :authenticate_user!
   before_filter :prepare_data, only: [:new, :edit]
 
   def current_model

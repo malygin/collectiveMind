@@ -1,4 +1,5 @@
 class JournalController < ApplicationController
+  before_filter :authenticate_user!
   before_filter :have_project_access
   before_filter :user_projects
 

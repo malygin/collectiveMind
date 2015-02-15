@@ -1,4 +1,5 @@
 class UsersController < ApplicationController
+  before_filter :authenticate_user!
   before_action :set_user
   before_filter :correct_user, only: [:edit, :update]
   before_filter :journal_data, only: [:index, :new, :edit, :show, :users_rc, :journal_clear, :edit_notice]

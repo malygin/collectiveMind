@@ -1,5 +1,6 @@
 class PostsController < ApplicationController
-  before_filter :authenticate
+  # before_filter :authenticate
+  before_filter :authenticate_user!
   before_filter :prepare_data, only: [:index, :new, :edit, :show, :vote_list, :vote_result, :to_work, :about]
   before_filter :journal_data, only: [:index, :new, :edit, :show, :vote_list, :vote_result, :to_work, :about]
   before_filter :have_rights, only: [:edit]

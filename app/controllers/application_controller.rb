@@ -12,7 +12,7 @@ class ApplicationController < ActionController::Base
 
   def journal_data
     set_project
-    @my_journals = current_user.my_journals @project
+    @my_journals = current_user.my_journals(@project) if current_user
   end
 
   def user_projects
