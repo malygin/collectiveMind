@@ -1,6 +1,6 @@
 module BaseComment
   extend ActiveSupport::Concern
-  include Filterable
+  include Util::Filterable
   included do
     belongs_to :user
     belongs_to :post

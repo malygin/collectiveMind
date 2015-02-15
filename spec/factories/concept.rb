@@ -4,7 +4,7 @@ FactoryGirl.define do
 
     after :create do |post|
       discontent = create :discontent, project: post.project, status: 4
-      create :concept_aspect, discontent_aspect_id: discontent.id, concept_post_id: post.id
+      create :concept_aspect, core_aspect_id: discontent.id, concept_post_id: post.id
       create :concept_post_discontent, post_id: post.id, discontent_post_id: discontent.id
     end
   end

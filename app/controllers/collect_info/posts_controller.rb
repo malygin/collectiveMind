@@ -1,10 +1,10 @@
 class CollectInfo::PostsController < PostsController
   def voting_model
-    Discontent::Aspect
+    Core::Aspect
   end
 
   def prepare_data
-    @aspects = Discontent::Aspect.where(project_id: @project)
+    @aspects = Core::Aspect.where(project_id: @project)
   end
 
   def index
@@ -36,10 +36,10 @@ class CollectInfo::PostsController < PostsController
 
   #@todo перенос комментов(вместе с ответами) между темами
   def transfer_comment
-    aspect = Discontent::Aspect.find(params[:aspect_id])
+    aspect = Core::Aspect.find(params[:aspect_id])
     post = aspect.life_tape_post
     @comment = CollectInfo::Comment.find(params[:comment_id])
-    aspect_old = @comment.post.discontent_aspects.first
+    aspect_old = @comment.post.core_aspects.first
     unless post.nil?
       @comment.update_attributes(post_id: post.id)
       unless @comment.comments.nil?

@@ -22,13 +22,13 @@
     -#  ="(+ "
     -#  =asp.aspect_posts.by_status_for_discontent(@project).where("discontent_posts.created_at >= ?", last_time_visit_aspect(asp)).count
     -#  =")"
-    - if asp.discontent_aspects.present?
+    - if asp.core_aspects.present?
       %ul.panel-collapse
-        - asp.discontent_aspects.each do |asp1|
+        - asp.core_aspects.each do |asp1|
           = render partial: 'aspect', object: asp1, locals: {current_stage: current_stage}
-          - if asp1.discontent_aspects.present?
+          - if asp1.core_aspects.present?
             %ul.panel-collapse
-              - asp1.discontent_aspects.each do |asp2|
+              - asp1.core_aspects.each do |asp2|
                 = render partial: 'aspect', object: asp2, locals: {current_stage: current_stage}
 
   %li{class:"#{'active' if params[:not_aspect]}"}

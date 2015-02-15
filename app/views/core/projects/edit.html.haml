@@ -16,14 +16,14 @@
     - if @project.persisted?
       #edit_aspects.tab-pane.fade
         %ul.panel-collapse{id: "aspects_for_#{@project.id}"}
-          = link_to 'Добавить аспект', new_discontent_aspect_path(@project), remote: true, id: "add_aspect_for_#{@project.id}"
+          = link_to 'Добавить аспект', new_core_aspect_path(@project), remote: true, id: "add_aspect_for_#{@project.id}"
           %br
           - @project.aspects.main_aspects.each do |asp1|
             = render partial: 'aspect', locals: {aspect: asp1}
 
-            - if asp1.discontent_aspects.present?
+            - if asp1.core_aspects.present?
               %ul.panel-collapse{id: "aspects_for_aspect_#{asp1.id}"}
-                - asp1.discontent_aspects.each do |asp2|
+                - asp1.core_aspects.each do |asp2|
                   = render partial: 'aspect', locals: {aspect: asp2}
 
       #edit_stages.tab-pane.fade

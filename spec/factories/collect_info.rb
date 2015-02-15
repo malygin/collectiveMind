@@ -9,7 +9,7 @@ FactoryGirl.define do
   #   after(:create) do |post|
   #     post.aspect = create :aspect, project: post.project
   #     post.save
-  #     create :discontent_aspects_life_tape_posts, discontent_aspect: post.aspect, collect_info_post: post
+  #     create :core_aspects_life_tape_posts, core_aspect: post.aspect, collect_info_post: post
   #   end
   # end
 

@@ -6,7 +6,7 @@ class Plan::PostsController < PostsController
   end
 
   def prepare_data
-    @aspects = Discontent::Aspect.where(project_id: @project, status: 0)
+    @aspects = Core::Aspect.where(project_id: @project, status: 0)
     @vote_all = Plan::Voting.where(plan_votings: {plan_post_id: @project.plan_post.pluck(:id)}).uniq_user.count if @project.status == 11
   end
 
@@ -58,9 +58,9 @@ class Plan::PostsController < PostsController
     @post = Plan::Post.find(params[:id])
     @post_stage = Plan::PostStage.find(params[:stage_id])
 
-    @aspects = Discontent::Aspect.where(project_id: @project, status: 0)
+    @aspects = Core::Aspect.where(project_id: @project, status: 0)
     @disposts = Discontent::Post.where(project_id: @project, status: 4).order(:id)
-    @new_ideas = Plan::PostAspect.joins("INNER JOIN plan_posts ON plan_posts.id = plan_post_aspects.plan_post_id").where("plan_posts.project_id = ? and plan_posts.id = ?", @project.id, @post.id).where(plan_post_aspects: {concept_post_aspect_id: nil, discontent_aspect_id: nil})
+    @new_ideas = Plan::PostAspect.joins("INNER JOIN plan_posts ON plan_posts.id = plan_post_aspects.plan_post_id").where("plan_posts.project_id = ? and plan_posts.id = ?", @project.id, @post.id).where(plan_post_aspects: {concept_post_aspect_id: nil, core_aspect_id: nil})
   end
 
   # @todo methods for stage
@@ -205,7 +205,7 @@ class Plan::PostsController < PostsController
           @cond.obstacles = @concept.obstacles
           @cond.reality = @concept.reality
           @cond.problems = @concept.problems
-          @cond.discontent_aspect_id = @concept.discontent_aspect_id
+          @cond.core_aspect_id = @concept.core_aspect_id
           @cond.concept_post_aspect = @concept
           @cond.save!
 

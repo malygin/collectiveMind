@@ -37,7 +37,7 @@ class Concept::PostsController < PostsController
   end
 
   def prepare_data
-    @aspects = Discontent::Aspect.where(project_id: @project, status: 0)
+    @aspects = Core::Aspect.where(project_id: @project, status: 0)
     @disposts = Discontent::Post.where(project_id: @project, status: 4).order(:id)
     @vote_all = Concept::Voting.by_posts_vote(@project.discontents.by_status(4).pluck(:id).join(", ")).uniq_user.count if @project.status == 8
   end
@@ -46,14 +46,14 @@ class Concept::PostsController < PostsController
     return redirect_to action: "vote_list" if current_user.can_vote_for(:concept, @project)
 
     if params[:asp]
-      @aspect =  Discontent::Aspect.find(params[:asp])
+      @aspect =  Core::Aspect.find(params[:asp])
     else
       if not (params[:not_aspect] or params[:all_aspects])
         redirect_to "/project/#{@project.id}/concept/posts?asp=#{@project.proc_aspects.order("position DESC").first.id}"
         return
       end
     end
-    @comments_all = @project.ideas_comments_for_improve
+    # @comments_all = @project.ideas_comments_for_improve
     if params[:not_aspect]
       @concepts = @project.concepts_without_aspect
     elsif params[:all_aspects]
@@ -202,7 +202,7 @@ class Concept::PostsController < PostsController
   end
 
   def new
-    @asp = Discontent::Aspect.find(params[:asp]) unless params[:asp].nil?
+    @asp = Core::Aspect.find(params[:asp]) unless params[:asp].nil?
     @concept_post = current_model.new
     @discontent_post = Discontent::Post.find(params[:dis_id]) unless params[:dis_id].nil?
     @resources = Concept::Resource.where(project_id: @project.id)

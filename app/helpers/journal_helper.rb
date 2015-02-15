@@ -272,7 +272,7 @@ module JournalHelper
         link_to j.body, group_path(j.project_id, j.first_id)
       when 'knowbase_edit'
 
-        'обновил базу знаний по аспекту ' +link_to(j.body, "/project/#{project}/life_tape/posts?asp=#{j.first_id}")
+        'обновил базу знаний по аспекту ' +link_to(j.body, "/project/#{project}/collect_info/posts?asp=#{j.first_id}")
       else
         'что то другое'
     end

@@ -14,7 +14,7 @@
       -#  %span.sort-item ВСЕ
     %div
       %ul.nav.nav-tabs.second-stage.ui-29.tabs-discontents
-        -@project.aspects.main_aspects.order("discontent_aspects.id").each_with_index do |asp, index|
+        -@project.aspects.main_aspects.order("core_aspects.id").each_with_index do |asp, index|
           %li{class: "#{'active' if asp == @aspect}"}
             %button{"data-toggle" => "tab", :href => "#tab_aspect_#{asp.id}", id: "link_aspect_#{asp.id}", "data-project" => @project.id, "data-aspect" => asp.id}
               .block-content
@@ -57,7 +57,7 @@
             %div{id: "tab_aspect_posts"}
               = render partial: 'post_short', collection: @posts
 
-        -#-@project.aspects.main_aspects.order("discontent_aspects.id").each_with_index do |asp, index|
+        -#-@project.aspects.main_aspects.order("core_aspects.id").each_with_index do |asp, index|
         -#  %div.tab-pane.fade{id: "tab_aspect_#{asp.id}", class:"#{'active in' if asp == @aspect}"}
         -#    .row
         -#      %div{id: "tab_aspect_posts_#{asp.id}"}
@@ -81,14 +81,14 @@
 
 
 -#%ul.nav.nav-tabs.tabs-discontents
--#  -@project.aspects.main_aspects.order("discontent_aspects.id").each_with_index do |asp, index|
+-#  -@project.aspects.main_aspects.order("core_aspects.id").each_with_index do |asp, index|
 -#    %li{class: "#{'active' if asp == @aspect}"}
 -#      -#%a{"data-toggle" => "tab", :href => "#tab_aspect_#{asp.id}", id: "link_aspect_#{asp.id}", "data-project" => @project.id, "data-aspect" => asp.id, style: "background-color:#{aspect_color(asp)}"}
 -#      %button.btn.btn-round{"data-toggle" => "tab", :href => "#tab_aspect_#{asp.id}", id: "link_aspect_#{asp.id}", "data-project" => @project.id, "data-aspect" => asp.id, style: "color:#ffffff;background: #{asp.color};border:1px solid #{asp.color};"}
 -#        %span= asp.short_name.present? ? asp.short_name : asp.content[0,2].mb_chars.upcase
 -#
 -#.tab-content
--#  -@project.aspects.main_aspects.order("discontent_aspects.id").each_with_index do |asp, index|
+-#  -@project.aspects.main_aspects.order("core_aspects.id").each_with_index do |asp, index|
 -#    %div.tab-pane.fade{id: "tab_aspect_#{asp.id}", class:"#{'active in' if asp == @aspect}"}
 -#      -#= render partial: 'shared/sort_bar', locals: {asp: asp}
 -#      -#%br

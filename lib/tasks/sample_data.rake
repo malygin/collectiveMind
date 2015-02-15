@@ -7,12 +7,12 @@ namespace :db  do
 		project = Core::Project.create(:id=>2, 
 			:name => "Стратегия развития ДО в СГУ на 2012-2013 год")
 
-		Discontent::Aspect.create!(content: 'Социальные ', project:  project)
-		Discontent::Aspect.create!(content: 'Технологические', project:  project)
-		Discontent::Aspect.create!(content: 'Брендинг', project:  project)
-		Discontent::Aspect.create!(content: 'Учеба', project:  project)
-		Discontent::Aspect.create!(content: 'Новые профессии', project:  project)
-		Discontent::Aspect.create!(content: 'Создание профессионалов', project:  project)
+		Core::Aspect.create!(content: 'Социальные ', project:  project)
+		Core::Aspect.create!(content: 'Технологические', project:  project)
+		Core::Aspect.create!(content: 'Брендинг', project:  project)
+		Core::Aspect.create!(content: 'Учеба', project:  project)
+		Core::Aspect.create!(content: 'Новые профессии', project:  project)
+		Core::Aspect.create!(content: 'Создание профессионалов', project:  project)
   		user1 = User.create!(:name => "Сергей",
 			:surname => "Кириллов",
 			:email =>"admin@mass-decision.ru",
@@ -37,9 +37,9 @@ namespace :db  do
 		end
 		User.all(:limit => 13).each do |user|
 			3.times do
-        d =Discontent::Aspect.order("RANDOM()").first
+        d =Core::Aspect.order("RANDOM()").first
 				l = CollectInfo::Post.create!(:content => Faker::Lorem.sentence(30), :project => project, :user => user )
-			  l.discontent_aspects << d
+			  l.core_aspects << d
         l.save!
       end
 		end
