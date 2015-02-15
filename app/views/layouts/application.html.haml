@@ -47,14 +47,11 @@
             = "Тема процедуры: #{@project.name}"
           - if @project.news.for_last_day.any?
             .alert.alert-success
-              %strong
-                %i.fa.fa-check
-                %strong
-                  Новости от экспертов:
-                - @project.news.for_last_day.each do |news|
+              - @project.news.for_last_day.each do |news|
+                %p
+                  =news.title
                   = link_to news_path(@project, news), style: 'color: white' do
-                    %p
-                      = news.title
+                    %b подробнее..
           %section.widget.widget-tabs
             %header
               =render partial: 'application/stages', locals: {current_stage: current_stage_for_navbar(controller, params[:stage])}

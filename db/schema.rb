@@ -189,8 +189,8 @@ ActiveRecord::Schema.define(version: 20150213120323) do
     t.integer  "post_id"
     t.integer  "discontent_post_id"
     t.integer  "complite"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",         null: false
+    t.datetime "updated_at",         null: false
   end
 
   create_table "concept_post_discontents", force: true do |t|
@@ -540,7 +540,7 @@ ActiveRecord::Schema.define(version: 20150213120323) do
     t.boolean  "discuss_status"
     t.boolean  "useful"
     t.boolean  "approve_status"
-    t.boolean  "anonym",             default: false
+    t.boolean  "anonym"
   end
 
   add_index "discontent_posts", ["aspect_id"], name: "index_discontent_posts_on_aspect_id", using: :btree
@@ -1575,6 +1575,7 @@ ActiveRecord::Schema.define(version: 20150213120323) do
     t.datetime "last_seen_chat_at"
     t.string   "skype"
     t.string   "phone"
+    t.string   "locale"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree

@@ -1,6 +1,6 @@
 %section.widget.padding-increased
   %header
-    %h4
+    %h3.text-center
       Новости от экспертов
     - if current_user.prime_admin? or current_user.expert?
       = link_to 'Добавить новость', new_news_path, class: 'btn btn-success'
@@ -14,4 +14,4 @@
         %p
           = "#{news.body[0..100]}..."
         %p
-          = link_to 'Подробнее', news_path(@project, news), id: "show_news_#{news.id}", class: 'btn btn-success'
+          = link_to 'Подробнее', news_path(@project, news), id: "show_news_#{news.id}"
