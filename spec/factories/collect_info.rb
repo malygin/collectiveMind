@@ -35,7 +35,7 @@ FactoryGirl.define do
     association :question, factory: :collect_info_question
   end
 
-  factory :collect_info_answers_user, class: 'CollectInfo::AnswersUser' do
+  factory :collect_info_answers_user, class: 'CollectInfo::UserAnswers' do
 
     association :user, factory: :ordinary_user
     association :answer, factory: :collect_info_answer

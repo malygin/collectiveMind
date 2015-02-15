@@ -1,17 +1,17 @@
 class Core::Aspect < ActiveRecord::Base
-  include BasePost
 
   belongs_to :core_aspect, class_name: 'Core::Aspect', foreign_key: 'core_aspect_id'
 
-  has_many :posts
   has_many :discontent_posts, class_name: 'Discontent::Post'
   has_many :knowbase_posts, class_name: 'Core::Knowbase::Post'
   has_many :discontent_post_aspects, class_name: 'Discontent::PostAspect'
   has_many :aspect_posts, through: :discontent_post_aspects, source: :post, class_name: 'Discontent::Post'
   has_many :voted_users, through: :final_votings, source: :user
-  has_many :final_votings, foreign_key: 'core_aspect_id', class_name: 'CollectInfo::Voting'
+  has_many :final_votings, foreign_key: 'aspect_id', class_name: 'CollectInfo::Voting'
+
   has_many :core_aspects, class_name: 'Core::Aspect', foreign_key: 'core_aspect_id'
-  has_many :questions, -> { where collect_info_questions: {parent_post_type: 'core_aspect'} }, class_name: 'CollectInfo::Question', foreign_key: 'post_id'
+
+  has_many :questions, class_name: 'CollectInfo::Question'
 
   validates :project_id, presence: true
 
@@ -60,7 +60,7 @@ class Core::Aspect < ActiveRecord::Base
   end
 
   def question_complete(project, user)
-    self.questions.joins("INNER JOIN collect_info_answers_users ON collect_info_answers_users.question_id = collect_info_questions.id").where('collect_info_answers_users.user_id = ?', user.id).by_project(project.id).by_status(0).select("distinct collect_info_questions.id")
+    self.questions.joins("INNER JOIN collect_info_user_answers ON collect_info_user_answers.question_id = collect_info_questions.id").where('collect_info_user_answers.user_id = ?', user.id).by_project(project.id).by_status(0).select("distinct collect_info_questions.id")
   end
 
   def color

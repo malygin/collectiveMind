@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe 'CollectInfo::AnswersUser', type: :model do
+describe 'CollectInfo::UserAnswers', type: :model do
   it 'default factory - valid' do
     expect(build(:collect_info_answers_user)).to be_valid
   end

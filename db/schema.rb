@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150215184933) do
+ActiveRecord::Schema.define(version: 20150215212130) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -50,54 +50,58 @@ ActiveRecord::Schema.define(version: 20150215184933) do
 
   create_table "collect_info_answers", force: true do |t|
     t.text     "content"
-    t.integer  "raiting",     default: 0
     t.integer  "user_id"
     t.integer  "question_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.integer  "style"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
     t.integer  "status"
+    t.boolean  "correct"
   end
 
   add_index "collect_info_answers", ["created_at"], name: "index_collect_info_answers_on_created_at", using: :btree
   add_index "collect_info_answers", ["user_id"], name: "index_collect_info_answers_on_user_id", using: :btree
 
-  create_table "collect_info_answers_users", id: false, force: true do |t|
-    t.integer  "answer_id"
-    t.integer  "user_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.integer  "project_id"
-    t.integer  "question_id"
-  end
-
-  add_index "collect_info_answers_users", ["answer_id"], name: "index_collect_info_answers_users_on_answer_id", using: :btree
-  add_index "collect_info_answers_users", ["user_id"], name: "index_collect_info_answers_users_on_user_id", using: :btree
-
   create_table "collect_info_questions", force: true do |t|
     t.text     "content"
-    t.integer  "raiting",          default: 0
     t.integer  "user_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.integer  "project_id"
     t.integer  "status"
-    t.integer  "post_id"
-    t.string   "parent_post_type"
     t.text     "hint"
+    t.integer  "aspect_id"
   end
 
   add_index "collect_info_questions", ["created_at"], name: "index_collect_info_questions_on_created_at", using: :btree
   add_index "collect_info_questions", ["user_id"], name: "index_collect_info_questions_on_user_id", using: :btree
+
+  create_table "collect_info_user_answers", force: true do |t|
+    t.integer  "user_id"
+    t.integer  "answer_id"
+    t.integer  "question_id"
+    t.integer  "aspect_id"
+    t.integer  "project_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "collect_info_user_answers", ["answer_id"], name: "index_collect_info_user_answers_on_answer_id", using: :btree
+  add_index "collect_info_user_answers", ["aspect_id"], name: "index_collect_info_user_answers_on_aspect_id", using: :btree
+  add_index "collect_info_user_answers", ["project_id"], name: "index_collect_info_user_answers_on_project_id", using: :btree
+  add_index "collect_info_user_answers", ["question_id"], name: "index_collect_info_user_answers_on_question_id", using: :btree
+  add_index "collect_info_user_answers", ["user_id"], name: "index_collect_info_user_answers_on_user_id", using: :btree
 
   create_table "collect_info_votings", force: true do |t|
     t.integer  "user_id"
     t.integer  "discontent_aspect_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "aspect_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
-  add_index "collect_info_votings", ["discontent_aspect_id"], name: "index_collect_info_votings_on_discontent_aspect_id", using: :btree
+  add_index "collect_info_votings", ["aspect_id"], name: "index_collect_info_votings_on_aspect_id", using: :btree
   add_index "collect_info_votings", ["user_id"], name: "index_collect_info_votings_on_user_id", using: :btree
 
   create_table "comments", force: true do |t|
@@ -329,7 +333,6 @@ ActiveRecord::Schema.define(version: 20150215184933) do
     t.integer  "project_id"
     t.text     "short_desc"
     t.integer  "status",         default: 0
-    t.boolean  "user_add"
     t.integer  "core_aspect_id"
     t.string   "color"
     t.string   "short_name"

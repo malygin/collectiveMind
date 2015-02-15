@@ -2,6 +2,7 @@ class Core::Project < ActiveRecord::Base
   has_one :settings, class_name: 'Core::ProjectSetting', dependent: :destroy
   accepts_nested_attributes_for :settings
   has_many :aspects, class_name: 'Core::Aspect'
+  has_many :main_aspects, -> { where core_aspect_id: nil }, class_name: 'Core::Aspect'
 
   has_many :discontents, class_name: 'Discontent::Post'
   has_many :discontent_ongoing_post, -> { where status: 0 }, class_name: 'Discontent::Post'
