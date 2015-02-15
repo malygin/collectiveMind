@@ -27,6 +27,8 @@ FactoryGirl.define do
   end
 
   factory :discontent_post_aspect, class: 'Discontent::PostAspect' do
+    association :core_aspect, factory: :aspect
+    association :post, factory: :discontent
   end
 
   factory :discontent_comment, class: 'Discontent::Comment' do

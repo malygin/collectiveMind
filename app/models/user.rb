@@ -37,6 +37,7 @@ class User < ActiveRecord::Base
   default_scope { order('id DESC') }
   scope :check_field, ->(p, c) { where(project: p.id, status: 't', check_field: c) }
   scope :without_added, ->(users) { where.not(id: users) unless users.empty? }
+  scope :not_admins, -> { where 'users.type_user NOT IN (?) or users.type_user IS NULL', TYPES_USER[:admin] }
 
   validates :name, length: {maximum: 50}
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
