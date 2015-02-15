@@ -109,60 +109,6 @@
 .btn.answer-question{
   text-align: left;
   white-space: normal;
-=======
-$brand-lifetape:        $teal !default;
-$brand-discontent:      $pink !default;
-$brand-concept:         $orange !default;
-$brand-plan:            $lime !default;
-$brand-estimate:        #663505 !default;
-
-.text-lifetape         { color: $brand-lifetape; }
-.text-discontent       { color: $brand-discontent; }
-.text-concept          { color: $brand-concept; }
-.text-plan             { color: $brand-plan; }
-.text-estimate         { color: $brand-estimate; }
-.text-towork { color: $teal !important;}
-.text-essay {color: $green !important;}
-
-.label-lifetape    { @include label-variant($brand-lifetape);}
-.label-discontent  { @include label-variant($brand-discontent);}
-.label-concept     { @include label-variant($brand-concept);}
-.label-plan        { @include label-variant($brand-plan);}
-.label-estimate    { @include label-variant($brand-estimate);}
-
-
-/*todo my styles top*/
-
-textarea.concept_cond {
-  max-height: 200px !important;
-}
-
-a.popup-likes, a.popup-dislikes, a.popup-likes:hover, a.popup-dislikes:hover {
-  text-decoration: none !important;
-  cursor: pointer !important;
-}
-
-/* discontent posts */
-.label-t {
-  @include label-variant($teal);
-}
-
-.label-n {
-  @include label-variant($brand-danger);
-}
-
-.label-p {
-  @include label-variant($green);
-}
-
-.label-g {
-  @include label-variant($gray-light);
-}
-
-.widget-tabs .tab-content .row {
-  margin-left: 0 !important;
-  margin-right: 0 !important;
->>>>>>> develop
 }
 
 .text-align-center {

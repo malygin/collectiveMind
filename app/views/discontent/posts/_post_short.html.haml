@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 %div.col-md-4.discontent-block{id: "discontent_post_#{post_short.id}", class: "#{post_aspect_classes(post_short)}", data: {created: "#{(post_short.created_at.to_datetime.to_f)}", popular: "#{post_short.users_pro.count + (post_short.number_views * 0.3)}"}}
   =link_to({action: :show, project: @project, id: post_short.id, asp: params[:asp]}, remote: true, id: "show_record", class: "imperfection lined-block #{post_short.style == 1 ? 'imperf-pale-pink' : 'imperf-pale-blue'}" ) do
     -#.imperfection.lined-block{class: "#{post_short.style == 1 ? 'imperf-pale-pink' : 'imperf-pale-blue'}"}
@@ -15,54 +14,6 @@
               .close-admin-button
         -else
           %td.imperf-left-column
-=======
-%li{id: "post_#{post_short.id}", class: "#{'expert_comment' if post_short.discuss_status }"}
-  -if post_short.user and not post_short.anonym
-    = render 'users/user_post', user: post_short.user
-    -#= image_tag post_short.user.avatar.url(:thumb), class: 'pull-left'
-  - if post_short.anonym
-    = image_tag '/avatars/thumb/missing.png', class: 'pull-left'
-
-  .news-item-info
-    .name
-      - if post_short.user and not post_short.anonym
-        =link_to post_short.user, user_path(@project, post_short.user)
-        = render partial: '/shared/user_online', object: post_short.user
-      - if post_short.anonym
-        Добавлено анонимно
-      - if boss? or role_expert? or stat_expert?
-        .pull-right
-          =link_to({controller: post_short.class.name.underscore.pluralize, action: :discuss_status, id: post_short.id, discuss_status: 1},  remote: true, method: :put, class: "link_status", id: "discuss_stat_post_#{post_short.id}") do
-            %span.label_discuss.label(class="#{label_discuss_stat(post_short)}")=t('show.discuss')
-          =link_to({controller: post_short.class.name.underscore.pluralize, action: :discuss_status, id: post_short.id, approve_status: 1},  remote: true, method: :put, class: "link_status", id: "approve_stat_post_#{post_short.id}") do
-            %span.label_approve.label(class="#{label_approve_stat(post_short)}")=t('show.important')
-      - else
-        .pull-right
-          -if post_short.discuss_status
-            %span.label-danger=t('show.discuss')
-          -if post_short.approve_status
-            %span.label-success=t('show.important')
-
-    =discontent_style_name(post_short.style)
-    .comment.dis-comment
-      = render partial: '/discontent/posts/post_content', object: post_short
-      = render 'shared/post_edit_bar', post: post_short
-    .time
-      = Russian::strftime(post_short.created_at,'%d %B %k:%M:%S')
-      =improve_comment(post_short).html_safe if improve_comment(post_short)
-    = render '/shared/post_social_bar2', post: post_short
-    - if boss? and (@project.status == 4 or @project.status == 5)
-      %div(style="display:none;" id="add_group_success_#{post_short.id}")
-        .color-green=t('show.discontent.add_group_success')
-      %div.color-red{id: "add_disgroup_#{post_short.id}"}
-        - if post_short.status == 1 and !post_short.discontent_post.nil?
-          =t('show.discontent.added_group')
-          =link_to post_short.discontent_post.content, discontent_post_path(@project, post_short.discontent_post)
-      .discontents_group_select{post: "#{post_short.id}"}
-        -if @accepted_posts
-          = select_tag 'select_for_discontents_group', options_from_collection_for_select(@accepted_posts, "id", "content"),
-          prompt: t('form.discontent.select_aspect_prompt'), onchange: "select_for_discontents_group(this,#{@project.id},#{post_short.id},#{post_short.discontent_post ? post_short.discontent_post.id : 0},'origin');", class: "form-control"
->>>>>>> develop
 
         %td.imperf-right-column
           .aspects-indexes
