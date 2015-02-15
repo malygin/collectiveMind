@@ -1,6 +1,6 @@
 module BasePost
   extend ActiveSupport::Concern
-  include Filterable
+  include Util::Filterable
   included do
     # status 0 - new, 1 -post expert, 2 - expeted, 3- archive
     belongs_to :user
