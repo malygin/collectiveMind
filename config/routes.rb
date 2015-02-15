@@ -81,6 +81,11 @@ CollectiveMind::Application.routes.draw do
   end
 
   scope '/project/:project' do
+    resources :aspects do
+      member do
+        put :answer_question
+      end
+    end
     get '/journals', to: 'journal#index'
     get '/general_news', to: 'core/projects#news'
     get '/general_rating', to: 'core/projects#users'
@@ -172,11 +177,6 @@ CollectiveMind::Application.routes.draw do
     put 'discontent/posts/create_group', to: 'discontent/posts#create_group'
 
     namespace :discontent do
-      resources :aspects do
-        member do
-          put :answer_question
-        end
-      end
       posts_routes
       resources :posts do
         member do
