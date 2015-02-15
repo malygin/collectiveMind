@@ -400,7 +400,7 @@ module ApplicationHelper
       comment =get_comment_for_stage(post.improve_stage.to_s, post.improve_comment)
       case post.improve_stage
         when 1
-          "| #{t('show.improved')} " + (link_to "#{t('show.imrove_deal')} #{comment.user}", "/project/#{@project.id}/collect_info/posts?asp=#{comment.post.discontent_aspects.first.id}&req_comment=#{comment.id}#comment_#{comment.id}")
+          "| #{t('show.improved')} " + (link_to "#{t('show.imrove_deal')} #{comment.user}", "/project/#{@project.id}/collect_info/posts?asp=#{comment.post.core_aspects.first.id}&req_comment=#{comment.id}#comment_#{comment.id}")
         when 2
           "| #{t('show.improved')} " + (link_to t('show.imrove_deal'), "/project/#{@project.id}/discontent/posts/#{comment.post.id}#comment_#{comment.id}") + (link_to comment.user, user_path(@project, comment.user))
         when 3
@@ -413,7 +413,7 @@ module ApplicationHelper
     comment_class = get_stage_for_improve(comment.get_class)
     case comment_class
       when 1
-        link_to "/project/#{@project.id}/collect_info/posts?asp=#{comment.post.discontent_aspects.first.id}#comment_#{comment.id}" do
+        link_to "/project/#{@project.id}/collect_info/posts?asp=#{comment.post.core_aspects.first.id}#comment_#{comment.id}" do
           content_tag :span, t('show.improver'), class: 'btn btn-primary btn-xs'
         end
       when 2
@@ -455,7 +455,7 @@ module ApplicationHelper
 
   def field_for_journal(post)
     if post.instance_of? CollectInfo::Post
-      post.discontent_aspects.first.content unless post.discontent_aspects.first.nil?
+      post.core_aspects.first.content unless post.core_aspects.first.nil?
     elsif post.instance_of? Concept::Post
       post.post_aspects.first.title unless post.post_aspects.first.nil?
     elsif post.instance_of? Plan::Post
@@ -770,7 +770,7 @@ module ApplicationHelper
       if comment.created_at >= last_time_visit_post(comment.post, stage)
         content_tag(:span, 'новый', class: "label label-success")
       end
-    elsif stage == 'life_tape'
+    elsif stage == 'collect_info'
       if comment.created_at >= last_time_visit_aspect(comment.post.aspect, stage)
         content_tag(:span, 'новый', class: "label label-success")
       end

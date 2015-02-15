@@ -1,5 +1,5 @@
 FactoryGirl.define do
-  # factory :aspect, class: 'Discontent::Aspect' do
+  # factory :aspect, class: 'Core::Aspect' do
   #   sequence(:content) { |n| "aspect #{n}" }
   # end
 
@@ -35,6 +35,6 @@ FactoryGirl.define do
     association :post, factory: :discontent
   end
 
-  factory :discontent_aspects_life_tape_posts, class: 'Discontent::AspectsLifeTapePost' do
+  factory :core_aspects_life_tape_posts, class: 'Core::AspectsLifeTapePost' do
   end
 end

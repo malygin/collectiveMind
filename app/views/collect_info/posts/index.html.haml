@@ -34,7 +34,7 @@
               %li Переходите к следующему аспекту
               %li Проголосуйте за самые важные на ваш взгляд аспекты (будет доступно в конце стадии)
 
-        -@project.aspects.main_aspects.order("discontent_aspects.id").each_with_index do |asp, index|
+        -@project.aspects.main_aspects.order("core_aspects.id").each_with_index do |asp, index|
           %div.tab-pane.fade{id: "tab-#{index+1}", style: "border:1px solid #{asp.color};"}
             .top-colored-bar.padd-5{style: "background:#{asp.color};"}= asp.content
             .container
@@ -58,16 +58,16 @@
                     Неправильный ответ!
                     Воспользуйтесь подсказкой
                     %span.close-button
-                  - asp.questions.by_project(@project.id).by_status(0).order("questions.id").each_with_index do |question, ind|
+                  - asp.questions.by_project(@project.id).by_status(0).order("collect_info_questions.id").each_with_index do |question, ind|
                     -unless question.answers_users.by_project(@project.id).by_user(current_user.id).present?
-                      %div{id: "question_#{question.id}", style: "#{'display:none;' if asp.questions.by_project(@project.id).by_status(0).by_complete(asp.question_complete(@project, current_user).pluck(:id)).order("questions.id").first != question}"}
+                      %div{id: "question_#{question.id}", style: "#{'display:none;' if asp.questions.by_project(@project.id).by_status(0).by_complete(asp.question_complete(@project, current_user).pluck(:id)).order("collect_info_questions.id").first != question}"}
                         .rounded-1.hint.close-notice{id:"hint_question_#{question.id}"}
                           =question.hint
                           %span.close-button
                         %p.text.block-with-left-icon
                           %span.left-icon.pull-right="#{ind+1}."
                           = question.content
-                        = form_tag(answer_question_discontent_aspect_path(@project, id: asp.id, question_id: question.id), {method: :put, remote: true,class: 'form instruments-block', id: 'form_answer_question', multipart: true}) do
+                        = form_tag(answer_question_core_aspect_path(@project, id: asp.id, question_id: question.id), {method: :put, remote: true,class: 'form instruments-block', id: 'form_answer_question', multipart: true}) do
                           %div(class="btn-group" data-toggle="buttons" id="answer_buttons")
                             - question.answers.by_status(0).each do |answer|
                               %button(id="answer_#{answer.id}" class="btn btn-xs btn-white pull-left answer-question")
@@ -135,7 +135,7 @@
 -#                  %li Переходите к следующему аспекту
 -#                  %li Проголосуйте за самые важные на ваш взгляд аспекты (будет доступно в конце этапа)
 -#
--#        -@project.aspects.main_aspects.order("discontent_aspects.id").each_with_index do |asp, index|
+-#        -@project.aspects.main_aspects.order("core_aspects.id").each_with_index do |asp, index|
 -#          %div.tab-pane.fade{id: "tab-#{index+1}"}
 -#            .row
 -#              .col-md-12.col-sm-4
@@ -175,7 +175,7 @@
 -#                                      .box-shadow-block.box-shadow-2.text-center
 -#                                        %h5= question.content
 -#                                        %p.text-left
--#                                          = form_tag(answer_question_discontent_aspect_path(@project, id: asp.id, question_id: question.id), {method: :put, remote: true, id: 'form_answer_question', multipart: true}) do
+-#                                          = form_tag(answer_question_core_aspect_path(@project, id: asp.id, question_id: question.id), {method: :put, remote: true, id: 'form_answer_question', multipart: true}) do
 -#                                            %div(class="btn-group" data-toggle="buttons" id="answer_buttons")
 -#                                              - question.answers.by_status(0).each do |answer|
 -#                                                %label(id="answer_#{answer.id}" class="btn btn-xs btn-white answer-question")
@@ -209,7 +209,7 @@
 -#.body.tab-content
 -#- if boss? or (signed_in? and @project.demo?)
 -#  %br
--#  = link_to t('show.aspect.new'), new_discontent_aspect_path(@project), remote: true, id: 'new_aspect', class: 'btn btn-primary'
+-#  = link_to t('show.aspect.new'), new_core_aspect_path(@project), remote: true, id: 'new_aspect', class: 'btn btn-primary'
 -#
 -#%h4.text-lifetape
 -#  - if @aspect
@@ -217,9 +217,9 @@
 -#    %span{id: "edit_aspect_content_#{@aspect.id}"}=@aspect.content
 -#    - if boss?
 -#      %span{id: "redactor_aspect_#{@aspect.id}"}
--#        = link_to edit_discontent_aspect_path(@project,@aspect), remote: true, id: "edit_aspect_#{@aspect.id}" do
+-#        = link_to edit_core_aspect_path(@project,@aspect), remote: true, id: "edit_aspect_#{@aspect.id}" do
 -#          %span{class:'glyphicon glyphicon-pencil text-success'}
--#        = link_to discontent_aspect_path(@project,@aspect), method: :delete, data: {confirm: t('confirm.delete_aspect')}, id: "destroy_aspect_#{@aspect.id}" do
+-#        = link_to core_aspect_path(@project,@aspect), method: :delete, data: {confirm: t('confirm.delete_aspect')}, id: "destroy_aspect_#{@aspect.id}" do
 -#          %span{class:'glyphicon glyphicon-remove text-danger'}
 -#
 -#- if @post_show

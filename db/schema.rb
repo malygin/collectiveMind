@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150211202805) do
+ActiveRecord::Schema.define(version: 20150215184933) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -361,13 +361,13 @@ ActiveRecord::Schema.define(version: 20150211202805) do
     t.text     "content"
     t.integer  "user_id"
     t.integer  "position"
-    t.datetime "created_at",                       null: false
-    t.datetime "updated_at",                       null: false
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
     t.integer  "project_id"
     t.text     "short_desc"
-    t.integer  "status",               default: 0
+    t.integer  "status",         default: 0
     t.boolean  "user_add"
-    t.integer  "discontent_aspect_id"
+    t.integer  "core_aspect_id"
     t.string   "color"
     t.string   "short_name"
   end
@@ -509,6 +509,23 @@ ActiveRecord::Schema.define(version: 20150211202805) do
   end
 
   add_index "core_projects", ["status"], name: "index_core_projects_on_status", using: :btree
+
+  create_table "core_user_award_clicks", force: true do |t|
+    t.integer  "user_id"
+    t.integer  "project_id"
+    t.integer  "clicks",     default: 0
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
+  end
+
+  create_table "core_user_awards", force: true do |t|
+    t.integer  "user_id"
+    t.integer  "award_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer  "project_id"
+    t.integer  "position"
+  end
 
   create_table "discontent_aspect_users", force: true do |t|
     t.integer  "user_id"
@@ -1527,23 +1544,6 @@ ActiveRecord::Schema.define(version: 20150211202805) do
   add_index "tests", ["begin_date"], name: "index_tests_on_begin_date", using: :btree
   add_index "tests", ["end_date"], name: "index_tests_on_end_date", using: :btree
 
-  create_table "user_award_clicks", force: true do |t|
-    t.integer  "user_id"
-    t.integer  "project_id"
-    t.integer  "clicks",     default: 0
-    t.datetime "created_at",             null: false
-    t.datetime "updated_at",             null: false
-  end
-
-  create_table "user_awards", force: true do |t|
-    t.integer  "user_id"
-    t.integer  "award_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.integer  "project_id"
-    t.integer  "position"
-  end
-
   create_table "user_checks", force: true do |t|
     t.integer  "user_id"
     t.string   "check_field"
@@ -1609,6 +1609,7 @@ ActiveRecord::Schema.define(version: 20150211202805) do
     t.datetime "last_seen_news"
     t.boolean  "chat_open",              default: false
     t.datetime "last_seen_chat_at"
+    t.string   "locale"
     t.string   "skype"
     t.string   "phone"
   end

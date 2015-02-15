@@ -31,7 +31,7 @@ class Discontent::PostsController < PostsController
   end
 
   def prepare_data
-    @aspects = Discontent::Aspect.where(project_id: @project, status: 0)
+    @aspects = Core::Aspect.where(project_id: @project, status: 0)
     if @project.status == 6
       @vote_all = Discontent::Voting.by_posts_vote(@project.discontents.by_status([2, 4]).pluck(:id).join(", ")).not_admins.uniq_user.count
     end
@@ -40,7 +40,7 @@ class Discontent::PostsController < PostsController
   def index
     return redirect_to action: 'vote_list' if current_user.can_vote_for(:discontent, @project)
     if params[:asp]
-      @aspect =  Discontent::Aspect.find(params[:asp])
+      @aspect =  Core::Aspect.find(params[:asp])
     else
       if not (params[:not_aspect] or params[:all_aspects])
         redirect_to "/project/#{@project.id}/discontent/posts?asp=#{@project.proc_aspects.order("position DESC").first.id}"
@@ -48,7 +48,7 @@ class Discontent::PostsController < PostsController
       end
     end
     @accepted_posts = Discontent::Post.where(project_id: @project, status: [2,4])
-    @comments_all = @project.problems_comments_for_improve
+    # @comments_all = @project.problems_comments_for_improve
     @page = params[:page]
     if params[:not_aspect]
       @posts = @project.discontents_without_aspect.by_status_for_discontent(@project).order("discontent_posts.id DESC").filter(filtering_params(params))
@@ -64,7 +64,7 @@ class Discontent::PostsController < PostsController
   end
 
   def new
-    @asp = params[:asp] ? Discontent::Aspect.find(params[:asp]) : @project.proc_aspects.order(:id).first
+    @asp = params[:asp] ? Core::Aspect.find(params[:asp]) : @project.proc_aspects.order(:id).first
     @post = current_model.new
 
     if params[:improve_stage]
@@ -72,7 +72,7 @@ class Discontent::PostsController < PostsController
     end
 
     @post.content = @comment.content if @comment
-    @aspects = Discontent::Aspect.where(project_id: @project, status: 0)
+    @aspects = Core::Aspect.where(project_id: @project, status: 0)
     respond_to do |format|
       format.html
       format.js
@@ -97,7 +97,7 @@ class Discontent::PostsController < PostsController
   end
 
   def create
-    #@aspects = Discontent::Aspect.where(project_id: @project, status: 0)
+    #@aspects = Core::Aspect.where(project_id: @project, status: 0)
     @post = @project.discontents.build(discontent_post_params)
     @post.user = current_user
     @post.improve_comment = params[:improve_comment] if params[:improve_comment]
@@ -219,8 +219,8 @@ class Discontent::PostsController < PostsController
   end
 
   def new_group
-    @asp = Discontent::Aspect.find(params[:asp]) unless params[:asp].nil?
-    @aspects = Discontent::Aspect.where(project_id: @project, status: 0)
+    @asp = Core::Aspect.find(params[:asp]) unless params[:asp].nil?
+    @aspects = Core::Aspect.where(project_id: @project, status: 0)
     @post_group = current_model.new
     respond_to do |format|
       format.js
@@ -258,8 +258,8 @@ class Discontent::PostsController < PostsController
   end
 
   def edit_group
-    @asp = Discontent::Aspect.find(params[:asp]) unless params[:asp].nil?
-    @aspects = Discontent::Aspect.where(project_id: @project, status: 0)
+    @asp = Core::Aspect.find(params[:asp]) unless params[:asp].nil?
+    @aspects = Core::Aspect.where(project_id: @project, status: 0)
     @post_group = current_model.find(params[:id])
     @aspects_for_post = @post_group.post_aspects
     respond_to do |format|
@@ -285,7 +285,7 @@ class Discontent::PostsController < PostsController
   end
 
   def sort_content
-    @aspect = Discontent::Aspect.find(params[:asp])
+    @aspect = Core::Aspect.find(params[:asp])
     if params[:sort_default]
       @posts = @aspect.aspect_posts.by_status_for_discontent(@project).order("discontent_posts.id DESC").filter(filtering_params(params))
     else

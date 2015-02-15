@@ -9,7 +9,7 @@
         = form_for aspect, url: {project: @project.id, action: aspect.persisted? ? 'update' : 'create'}, remote: true do |f|
           = render 'shared/notice_messages', object: f.object
           %h4 Выберите аспект к которому будет принадлежать тема
-          = f.select :discontent_aspect_id, options_from_collection_for_select(@aspects, :id, :content, selected: aspect.discontent_aspect_id), prompt: t('form.discontent.select_aspect_prompt')
+          = f.select :core_aspect_id, options_from_collection_for_select(@aspects, :id, :content, selected: aspect.core_aspect_id), prompt: t('form.discontent.select_aspect_prompt')
           %br
           %br
           = f.text_field :content, class: 'form-control', placeholder: t('form.aspect.name'), id: 'aspect_text_field_content'

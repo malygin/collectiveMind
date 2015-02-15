@@ -1,5 +1,5 @@
 class AddShortNameToDiscontentAspect < ActiveRecord::Migration
   def change
-    add_column :discontent_aspects, :short_name, :string
+    add_column :core_aspects, :short_name, :string
   end
 end

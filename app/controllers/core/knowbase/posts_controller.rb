@@ -6,7 +6,7 @@ class Core::Knowbase::PostsController < PostsController
   end
 
   def new
-    @aspects = Discontent::Aspect.where(project_id: @project)
+    @aspects = Core::Aspect.where(project_id: @project)
     @stages = current_model.stage_knowbase_order(@project.id)
     @post = current_model.new
     respond_to do |format|
@@ -39,7 +39,7 @@ class Core::Knowbase::PostsController < PostsController
   end
 
   def edit
-    @aspects = Discontent::Aspect.where(project_id: @project)
+    @aspects = Core::Aspect.where(project_id: @project)
     @post = current_model.find(params[:id])
   end
 
@@ -47,7 +47,7 @@ class Core::Knowbase::PostsController < PostsController
     @post = current_model.find(params[:id])
     @post.update_attributes(params[:knowbase_post])
     current_user.journals.build(type_event: 'knowbase_edit',  project: @project,
-                                first_id: @post.discontent_aspect.id, body: @post.discontent_aspect.content,
+                                first_id: @post.core_aspect.id, body: @post.core_aspect.content,
                                 personal: false).save!
     respond_to do |format|
       format.js

@@ -11,16 +11,16 @@ class Core::Aspect < ActiveRecord::Base
   has_many :aspect_posts, through: :discontent_post_aspects, source: :post, class_name: 'Discontent::Post'
 
   has_many :voted_users, through: :final_votings, source: :user
-  has_many :final_votings, foreign_key: 'discontent_aspect_id', class_name: 'CollectInfo::Voting'
+  has_many :final_votings, foreign_key: 'core_aspect_id', class_name: 'CollectInfo::Voting'
 
-  has_many :core_aspects, class_name: 'Core::Aspect', foreign_key: 'discontent_aspect_id'
-  belongs_to :core_aspect, class_name: 'Core::Aspect', foreign_key: 'discontent_aspect_id'
+  has_many :core_aspects, class_name: 'Core::Aspect', foreign_key: 'core_aspect_id'
+  belongs_to :core_aspect, class_name: 'Core::Aspect', foreign_key: 'core_aspect_id'
 
-  has_many :questions, -> { where questions: {parent_post_type: 'core_aspect'} }, class_name: 'CollectInfo::Question', foreign_key: 'post_id'
+  has_many :questions, -> { where collect_info_questions: {parent_post_type: 'core_aspect'} }, class_name: 'CollectInfo::Question', foreign_key: 'post_id'
 
   scope :by_project, ->(project_id) { where("core_aspects.project_id = ?", project_id) }
   scope :minus_view, ->(aspects) { where("core_aspects.id NOT IN (#{aspects.join(", ")})") unless aspects.empty? }
-  scope :main_aspects, -> { where(core_aspects: {discontent_aspect_id: nil}) }
+  scope :main_aspects, -> { where(core_aspects: {core_aspect_id: nil}) }
 
   scope :vote_top, ->(revers) {
     if revers == "0"

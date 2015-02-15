@@ -2,7 +2,7 @@
   .box-shadow-block.box-shadow-2.text-center
     %h5= @next_question.content
     %p.text-left
-      = form_tag(answer_question_discontent_aspect_path(@project, id: @aspect.id, question_id: @next_question.id), {method: :put, remote: true, id: 'form_answer_question', multipart: true}) do
+      = form_tag(answer_question_core_aspect_path(@project, id: @aspect.id, question_id: @next_question.id), {method: :put, remote: true, id: 'form_answer_question', multipart: true}) do
         %div(class="btn-group" data-toggle="buttons" id="answer_buttons")
           - @next_question.answers.by_status(0).each do |answer|
             %label(class="btn btn-xs btn-white answer-question")

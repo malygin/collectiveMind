@@ -24,7 +24,7 @@ class User < ActiveRecord::Base
   has_many :voted_plan_posts, through: :plan_post_votings, source: :plan_post, class_name: 'Plan::Post'
   has_many :core_project_users, class_name: 'Core::ProjectUser'
   has_many :projects, through: :core_project_users, source: :core_project, class_name: 'Core::Project'
-  has_many :user_awards
+  has_many :user_awards, class_name: 'Core::UserAward'
   has_many :awards, through: :user_awards
   has_many :moderator_messages
   has_many :user_checks, class_name: 'Util::Unit::UserCheck'
@@ -174,7 +174,7 @@ class User < ActiveRecord::Base
   end
 
   def aspects(id)
-    if self.discontent_aspects.empty?
+    if self.core_aspects.empty?
       Core::Aspect.where(project_id: id)
     else
       self.core_aspects
