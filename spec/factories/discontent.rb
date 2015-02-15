@@ -1,8 +1,4 @@
 FactoryGirl.define do
-  # factory :aspect, class: 'Discontent::Aspect' do
-  #   sequence(:content) { |n| "aspect #{n}" }
-  # end
-
   factory :discontent, class: 'Discontent::Post' do
     sequence(:content) { |n| "what #{n}" }
     sequence(:whend) { |n| "whend #{n}" }
@@ -19,6 +15,11 @@ FactoryGirl.define do
       create :discontent_post_aspect, post_id: post.id, aspect_id: aspect1.id
       create :discontent_post_aspect, post_id: post.id, aspect_id: aspect2.id
     end
+  end
+
+  factory :discontent_voting, class: 'Discontent::Voting' do
+    association :user, factory: :ordinary_user
+    association :discontent_post, factory: :discontent
   end
 
   factory :discontent_union, class: 'Discontent::Post' do
