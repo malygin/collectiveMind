@@ -1,22 +1,9 @@
 module Discontent::PostsHelper
-  def render_post_notes(post_field, type_fd)
-    text = '<ul>'
-    post_field.post_notes(type_fd).each do |dpn|
-      text+='<li>'+dpn.content+'</li>'
-    end
-    text+='</ul>'
-    text.html_safe
-  end
-
   def first_post_for_vote?(post)
     if @project.get_united_posts_for_vote(current_user).size == 1
       false
     else
-      if @project.get_united_posts_for_vote(current_user).first != post
-        true
-      else
-        false
-      end
+      @project.get_united_posts_for_vote(current_user).first != post
     end
   end
 
@@ -59,6 +46,7 @@ module Discontent::PostsHelper
     end
   end
 
+  #@todo может декораторы?
   def class_for_type_field(post, field)
     if (field == 'what' and post.status_content == true) or (field == 'where' and post.status_whered == true) or (field == 'when' and post.status_whend == true)
       'label-success'
@@ -155,12 +143,5 @@ module Discontent::PostsHelper
       classes += "aspect_#{asp.id} "
     end
     classes
-  end
-
-  def rate_aspect(asp)
-    status = @project.status > 6 ? 1 : 0
-    count_all = @project.discontents.by_status(status).count
-    count_aspect = asp.aspect_posts.by_status(status).count
-    count_all == 0 ? 0 : ((count_aspect.to_f/count_all.to_f)*100).round
   end
 end

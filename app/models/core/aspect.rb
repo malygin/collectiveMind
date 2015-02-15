@@ -1,37 +1,35 @@
 class Core::Aspect < ActiveRecord::Base
   include BasePost
 
+  belongs_to :core_aspect, class_name: 'Core::Aspect', foreign_key: 'core_aspect_id'
+
   has_many :posts
   has_many :discontent_posts, class_name: 'Discontent::Post'
-  scope :positive_posts, -> { joins(:discontent_posts).where('discontent_posts.style = ?', 0) }
-  scope :negative_posts, -> { joins(:discontent_posts).where('discontent_posts.style = ?', 1) }
-  scope :accepted_posts, -> { joins(:discontent_posts).where('discontent_posts.style = ?', 4) }
   has_many :knowbase_posts, class_name: 'Core::Knowbase::Post'
   has_many :discontent_post_aspects, class_name: 'Discontent::PostAspect'
   has_many :aspect_posts, through: :discontent_post_aspects, source: :post, class_name: 'Discontent::Post'
-
   has_many :voted_users, through: :final_votings, source: :user
   has_many :final_votings, foreign_key: 'core_aspect_id', class_name: 'CollectInfo::Voting'
-
   has_many :core_aspects, class_name: 'Core::Aspect', foreign_key: 'core_aspect_id'
-  belongs_to :core_aspect, class_name: 'Core::Aspect', foreign_key: 'core_aspect_id'
-
   has_many :questions, -> { where collect_info_questions: {parent_post_type: 'core_aspect'} }, class_name: 'CollectInfo::Question', foreign_key: 'post_id'
 
-  scope :by_project, ->(project_id) { where("core_aspects.project_id = ?", project_id) }
-  scope :minus_view, ->(aspects) { where("core_aspects.id NOT IN (#{aspects.join(", ")})") unless aspects.empty? }
-  scope :main_aspects, -> { where(core_aspects: {core_aspect_id: nil}) }
+  validates :project_id, presence: true
 
+  scope :positive_posts, -> { joins(:discontent_posts).where('discontent_posts.style = ?', 0) }
+  scope :negative_posts, -> { joins(:discontent_posts).where('discontent_posts.style = ?', 1) }
+  scope :accepted_posts, -> { joins(:discontent_posts).where('discontent_posts.style = ?', 4) }
+  scope :by_project, ->(project_id) { where('core_aspects.project_id = ?', project_id) }
+  scope :minus_view, ->(aspects) { where('core_aspects.id NOT IN (?)', aspects) }
+  scope :main_aspects, -> { where(core_aspects: {core_aspect_id: nil}) }
   scope :vote_top, ->(revers) {
-    if revers == "0"
+    if revers == '0'
       order('count("collect_info_votings"."user_id") DESC')
-    elsif revers == "1"
+    elsif revers == '1'
       order('count("collect_info_votings"."user_id") ASC')
     else
       nil
     end
   }
-  validates :project_id, presence: true
 
   def voted(user)
     self.voted_users.where(id: user)
@@ -68,5 +66,12 @@ class Core::Aspect < ActiveRecord::Base
   def color
     color = read_attribute(:color)
     color.present? ? color : '#eac85e'
+  end
+
+  def rate_aspect
+    status = project.status > 6 ? 1 : 0
+    count_all = project.discontents.by_status(status).count
+    count_aspect = aspect_posts.by_status(status).count
+    count_all == 0 ? 0 : ((count_aspect.to_f / count_all.to_f) * 100).round
   end
 end
