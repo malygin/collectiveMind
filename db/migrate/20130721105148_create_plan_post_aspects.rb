@@ -1,7 +1,7 @@
 class CreatePlanPostAspects < ActiveRecord::Migration
   def change
     create_table :plan_post_aspects do |t|
-      t.integer :core_aspect_id
+      t.integer :discontent_aspect_id
       t.integer :concept_post_id
       t.text :positive
       t.text :negative
