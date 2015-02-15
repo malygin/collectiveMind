@@ -53,8 +53,8 @@ ActiveRecord::Schema.define(version: 20150211202805) do
     t.integer  "raiting",     default: 0
     t.integer  "user_id"
     t.integer  "question_id"
-    t.datetime "created_at",              null: false
-    t.datetime "updated_at",              null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
     t.integer  "style"
     t.integer  "status"
   end
@@ -78,8 +78,8 @@ ActiveRecord::Schema.define(version: 20150211202805) do
     t.text     "content"
     t.integer  "raiting",          default: 0
     t.integer  "user_id"
-    t.datetime "created_at",                   null: false
-    t.datetime "updated_at",                   null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
     t.integer  "project_id"
     t.integer  "status"
     t.integer  "post_id"
@@ -93,8 +93,8 @@ ActiveRecord::Schema.define(version: 20150211202805) do
   create_table "collect_info_votings", force: true do |t|
     t.integer  "user_id"
     t.integer  "discontent_aspect_id"
-    t.datetime "created_at",           null: false
-    t.datetime "updated_at",           null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   add_index "collect_info_votings", ["discontent_aspect_id"], name: "index_collect_info_votings_on_discontent_aspect_id", using: :btree
@@ -104,8 +104,8 @@ ActiveRecord::Schema.define(version: 20150211202805) do
     t.string   "commenter"
     t.text     "body"
     t.integer  "post_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   add_index "comments", ["post_id"], name: "index_comments_on_post_id", using: :btree
@@ -113,20 +113,20 @@ ActiveRecord::Schema.define(version: 20150211202805) do
   create_table "concept_comment_votings", force: true do |t|
     t.integer  "user_id"
     t.integer  "comment_id"
-    t.datetime "created_at",                null: false
-    t.datetime "updated_at",                null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
     t.boolean  "against",    default: true
   end
 
-  add_index "concept_comment_votings", ["created_at", "comment_id"], name: "index_concept_comment_voitings_on_created_at_and_comment_id", using: :btree
+  add_index "concept_comment_votings", ["created_at", "comment_id"], name: "index_concept_comment_votings_on_created_at_and_comment_id", using: :btree
 
   create_table "concept_comments", force: true do |t|
     t.text     "content"
     t.integer  "user_id"
     t.integer  "post_id"
     t.boolean  "useful"
-    t.datetime "created_at",                        null: false
-    t.datetime "updated_at",                        null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
     t.boolean  "censored",          default: false
     t.integer  "comment_id"
     t.boolean  "discontent_status"
@@ -141,69 +141,32 @@ ActiveRecord::Schema.define(version: 20150211202805) do
   add_index "concept_comments", ["post_id"], name: "index_concept_comments_on_post_id", using: :btree
   add_index "concept_comments", ["user_id"], name: "index_concept_comments_on_user_id", using: :btree
 
-  create_table "concept_essays", force: true do |t|
-    t.integer  "user_id"
-    t.text     "content"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  create_table "concept_final_voitings", force: true do |t|
-    t.integer  "score"
-    t.integer  "forecast_task_id"
-    t.integer  "user_id"
-    t.datetime "created_at",       null: false
-    t.datetime "updated_at",       null: false
-  end
-
-  add_index "concept_final_voitings", ["forecast_task_id"], name: "index_concept_final_voitings_on_forecast_task_id", using: :btree
-  add_index "concept_final_voitings", ["user_id"], name: "index_concept_final_voitings_on_user_id", using: :btree
-
-  create_table "concept_forecast_tasks", force: true do |t|
-    t.integer  "user_id"
-    t.text     "content"
-    t.text     "description"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
-  end
-
-  create_table "concept_forecasts", force: true do |t|
-    t.integer  "forecast_task_id"
-    t.integer  "position"
-    t.integer  "user_id"
-    t.datetime "created_at",       null: false
-    t.datetime "updated_at",       null: false
-  end
-
-  add_index "concept_forecasts", ["forecast_task_id"], name: "index_concept_forecasts_on_forecast_task_id", using: :btree
-  add_index "concept_forecasts", ["user_id"], name: "index_concept_forecasts_on_user_id", using: :btree
-
   create_table "concept_notes", force: true do |t|
     t.text     "content"
     t.integer  "user_id"
     t.integer  "post_id"
     t.integer  "type_field"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "concept_post_aspect_discontents", force: true do |t|
     t.integer  "post_aspect_id"
-    t.string   "name",               limit: 1000
+    t.string   "name"
     t.text     "content"
     t.integer  "discontent_post_id"
     t.text     "positive"
     t.text     "negative"
     t.text     "control"
-    t.datetime "created_at",                      null: false
-    t.datetime "updated_at",                      null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "concept_post_aspects", force: true do |t|
     t.integer  "discontent_aspect_id"
     t.integer  "concept_post_id"
-    t.datetime "created_at",           null: false
-    t.datetime "updated_at",           null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
     t.text     "positive"
     t.text     "negative"
     t.text     "control"
@@ -221,15 +184,15 @@ ActiveRecord::Schema.define(version: 20150211202805) do
     t.integer  "post_id"
     t.integer  "discontent_post_id"
     t.integer  "complite"
-    t.datetime "created_at",         null: false
-    t.datetime "updated_at",         null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "concept_post_discontents", force: true do |t|
     t.integer  "post_id"
     t.integer  "discontent_post_id"
-    t.datetime "created_at",         null: false
-    t.datetime "updated_at",         null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
     t.integer  "complite"
     t.integer  "status"
   end
@@ -238,8 +201,8 @@ ActiveRecord::Schema.define(version: 20150211202805) do
     t.integer  "user_id"
     t.integer  "discontent_post_id"
     t.integer  "post_id"
-    t.datetime "created_at",         null: false
-    t.datetime "updated_at",         null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "concept_post_means", force: true do |t|
@@ -248,16 +211,16 @@ ActiveRecord::Schema.define(version: 20150211202805) do
     t.integer  "post_id"
     t.integer  "resource_id"
     t.string   "type_res"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "concept_post_notes", force: true do |t|
     t.integer  "post_id"
     t.integer  "user_id"
     t.text     "content"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   add_index "concept_post_notes", ["post_id"], name: "index_concept_post_notes_on_post_id", using: :btree
@@ -267,8 +230,8 @@ ActiveRecord::Schema.define(version: 20150211202805) do
     t.text     "desc"
     t.integer  "post_id"
     t.integer  "resource_id"
-    t.datetime "created_at",               null: false
-    t.datetime "updated_at",               null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
     t.integer  "project_id"
     t.string   "type_res"
     t.integer  "concept_post_resource_id"
@@ -279,13 +242,13 @@ ActiveRecord::Schema.define(version: 20150211202805) do
     t.integer  "user_id"
     t.integer  "post_id"
     t.boolean  "against"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
-  add_index "concept_post_votings", ["post_id", "user_id"], name: "index_concept_post_voitings_on_post_id_and_user_id", using: :btree
-  add_index "concept_post_votings", ["post_id"], name: "index_concept_post_voitings_on_post_id", using: :btree
-  add_index "concept_post_votings", ["user_id"], name: "index_concept_post_voitings_on_user_id", using: :btree
+  add_index "concept_post_votings", ["post_id", "user_id"], name: "index_concept_post_votings_on_post_id_and_user_id", using: :btree
+  add_index "concept_post_votings", ["post_id"], name: "index_concept_post_votings_on_post_id", using: :btree
+  add_index "concept_post_votings", ["user_id"], name: "index_concept_post_votings_on_user_id", using: :btree
 
   create_table "concept_posts", force: true do |t|
     t.text     "goal"
@@ -293,8 +256,8 @@ ActiveRecord::Schema.define(version: 20150211202805) do
     t.integer  "user_id"
     t.integer  "number_views"
     t.integer  "life_tape_post_id"
-    t.datetime "created_at",                        null: false
-    t.datetime "updated_at",                        null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
     t.integer  "status"
     t.integer  "project_id"
     t.text     "content"
@@ -340,8 +303,8 @@ ActiveRecord::Schema.define(version: 20150211202805) do
     t.text     "supply"
     t.integer  "post_id"
     t.integer  "order"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   add_index "concept_task_supply_pairs", ["post_id"], name: "index_concept_task_supply_pairs_on_post_id", using: :btree
@@ -349,20 +312,20 @@ ActiveRecord::Schema.define(version: 20150211202805) do
   create_table "concept_votings", force: true do |t|
     t.integer  "user_id"
     t.integer  "concept_post_aspect_id"
-    t.datetime "created_at",             null: false
-    t.datetime "updated_at",             null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
     t.integer  "discontent_post_id"
   end
 
-  add_index "concept_votings", ["concept_post_aspect_id"], name: "index_concept_votings_on_concept_post_id", using: :btree
+  add_index "concept_votings", ["concept_post_aspect_id"], name: "index_concept_votings_on_concept_post_aspect_id", using: :btree
   add_index "concept_votings", ["user_id"], name: "index_concept_votings_on_user_id", using: :btree
 
   create_table "core_aspects", force: true do |t|
     t.text     "content"
     t.integer  "user_id"
     t.integer  "position"
-    t.datetime "created_at",                       null: false
-    t.datetime "updated_at",                       null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
     t.integer  "project_id"
     t.text     "short_desc"
     t.integer  "status",               default: 0
@@ -378,8 +341,8 @@ ActiveRecord::Schema.define(version: 20150211202805) do
     t.integer  "user_id"
     t.integer  "post_id"
     t.text     "content"
-    t.datetime "created_at",                        null: false
-    t.datetime "updated_at",                        null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
     t.boolean  "censored",          default: false
     t.integer  "comment_id"
     t.boolean  "discontent_status"
@@ -396,12 +359,12 @@ ActiveRecord::Schema.define(version: 20150211202805) do
   create_table "core_essay_post_votings", force: true do |t|
     t.integer  "user_id"
     t.integer  "post_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
     t.boolean  "against"
   end
 
-  add_index "core_essay_post_votings", ["post_id"], name: "index_essay_post_voitings_on_post_id", using: :btree
+  add_index "core_essay_post_votings", ["post_id"], name: "index_core_essay_post_votings_on_post_id", using: :btree
 
   create_table "core_essay_posts", force: true do |t|
     t.integer  "user_id"
@@ -409,8 +372,8 @@ ActiveRecord::Schema.define(version: 20150211202805) do
     t.text     "content"
     t.integer  "status"
     t.integer  "stage"
-    t.datetime "created_at",                     null: false
-    t.datetime "updated_at",                     null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
     t.integer  "number_views",   default: 0
     t.boolean  "censored",       default: false
     t.text     "negative"
@@ -426,8 +389,8 @@ ActiveRecord::Schema.define(version: 20150211202805) do
     t.integer  "stage"
     t.boolean  "mini"
     t.integer  "style"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
     t.string   "title"
   end
 
@@ -436,8 +399,8 @@ ActiveRecord::Schema.define(version: 20150211202805) do
     t.integer  "project_id"
     t.integer  "stage"
     t.string   "title"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
     t.integer  "aspect_id"
   end
 
@@ -448,8 +411,8 @@ ActiveRecord::Schema.define(version: 20150211202805) do
     t.integer  "score_a",    default: 0
     t.integer  "score_g",    default: 0
     t.integer  "score_o",    default: 0
-    t.datetime "created_at",             null: false
-    t.datetime "updated_at",             null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "core_project_settings", force: true do |t|
@@ -464,8 +427,8 @@ ActiveRecord::Schema.define(version: 20150211202805) do
   create_table "core_project_users", force: true do |t|
     t.integer  "project_id"
     t.integer  "user_id"
-    t.datetime "created_at",                       null: false
-    t.datetime "updated_at",                       null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
     t.boolean  "owner",            default: false
     t.integer  "type_user"
     t.boolean  "ready_to_concept", default: false
@@ -479,8 +442,8 @@ ActiveRecord::Schema.define(version: 20150211202805) do
     t.text     "desc"
     t.text     "short_desc"
     t.integer  "status",                         default: 1
-    t.datetime "created_at",                                 null: false
-    t.datetime "updated_at",                                 null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
     t.string   "url_logo"
     t.integer  "type_access"
     t.integer  "stage1",                         default: 5
@@ -513,8 +476,8 @@ ActiveRecord::Schema.define(version: 20150211202805) do
   create_table "discontent_aspect_users", force: true do |t|
     t.integer  "user_id"
     t.integer  "aspect_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   add_index "discontent_aspect_users", ["user_id"], name: "index_discontent_aspect_users_on_user_id", using: :btree
@@ -531,26 +494,26 @@ ActiveRecord::Schema.define(version: 20150211202805) do
     t.integer  "user_id"
     t.integer  "post_id"
     t.integer  "type_field"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "discontent_comment_votings", force: true do |t|
     t.integer  "user_id"
     t.integer  "comment_id"
-    t.datetime "created_at",                null: false
-    t.datetime "updated_at",                null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
     t.boolean  "against",    default: true
   end
 
-  add_index "discontent_comment_votings", ["comment_id"], name: "index_discontent_comment_voitings_on_comment_id", using: :btree
+  add_index "discontent_comment_votings", ["comment_id"], name: "index_discontent_comment_votings_on_comment_id", using: :btree
 
   create_table "discontent_comments", force: true do |t|
     t.text     "content"
     t.integer  "user_id"
     t.integer  "post_id"
-    t.datetime "created_at",                        null: false
-    t.datetime "updated_at",                        null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
     t.boolean  "censored",          default: false
     t.integer  "comment_id"
     t.boolean  "discontent_status"
@@ -567,31 +530,31 @@ ActiveRecord::Schema.define(version: 20150211202805) do
     t.integer  "user_id"
     t.integer  "post_id"
     t.integer  "type_field"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "discontent_post_aspects", force: true do |t|
     t.integer  "post_id"
     t.integer  "aspect_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "discontent_post_discussions", force: true do |t|
     t.integer  "user_id"
     t.integer  "aspect_id"
     t.integer  "post_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "discontent_post_notes", force: true do |t|
     t.integer  "post_id"
     t.integer  "user_id"
     t.text     "content"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   add_index "discontent_post_notes", ["post_id"], name: "index_discontent_post_notes_on_post_id", using: :btree
@@ -599,8 +562,8 @@ ActiveRecord::Schema.define(version: 20150211202805) do
   create_table "discontent_post_replaces", force: true do |t|
     t.integer  "post_id"
     t.integer  "replace_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   add_index "discontent_post_replaces", ["post_id"], name: "index_discontent_post_replaces_on_post_id", using: :btree
@@ -609,14 +572,14 @@ ActiveRecord::Schema.define(version: 20150211202805) do
   create_table "discontent_post_votings", force: true do |t|
     t.integer  "user_id"
     t.integer  "post_id"
-    t.datetime "created_at",                null: false
-    t.datetime "updated_at",                null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
     t.boolean  "against",    default: true
   end
 
-  add_index "discontent_post_votings", ["post_id", "user_id"], name: "index_discontent_post_voitings_on_post_id_and_user_id", using: :btree
-  add_index "discontent_post_votings", ["post_id"], name: "index_discontent_post_voitings_on_post_id", using: :btree
-  add_index "discontent_post_votings", ["user_id"], name: "index_discontent_post_voitings_on_user_id", using: :btree
+  add_index "discontent_post_votings", ["post_id", "user_id"], name: "index_discontent_post_votings_on_post_id_and_user_id", using: :btree
+  add_index "discontent_post_votings", ["post_id"], name: "index_discontent_post_votings_on_post_id", using: :btree
+  add_index "discontent_post_votings", ["user_id"], name: "index_discontent_post_votings_on_user_id", using: :btree
 
   create_table "discontent_post_whens", force: true do |t|
     t.string  "content"
@@ -634,13 +597,12 @@ ActiveRecord::Schema.define(version: 20150211202805) do
     t.text     "whered"
     t.integer  "user_id"
     t.integer  "status",             default: 0
-    t.datetime "created_at",                         null: false
-    t.datetime "updated_at",                         null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
     t.integer  "number_views",       default: 0
     t.integer  "project_id"
     t.integer  "aspect_id"
     t.integer  "replace_id"
-    t.integer  "original_id"
     t.integer  "style"
     t.boolean  "censored",           default: false
     t.integer  "discontent_post_id"
@@ -663,8 +625,8 @@ ActiveRecord::Schema.define(version: 20150211202805) do
   create_table "discontent_votings", force: true do |t|
     t.integer  "user_id"
     t.integer  "discontent_post_id"
-    t.datetime "created_at",         null: false
-    t.datetime "updated_at",         null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
     t.boolean  "against"
   end
 
@@ -674,29 +636,29 @@ ActiveRecord::Schema.define(version: 20150211202805) do
   create_table "essay_comment_votings", force: true do |t|
     t.integer  "user_id"
     t.integer  "comment_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
     t.boolean  "against"
   end
 
-  add_index "essay_comment_votings", ["comment_id"], name: "index_essay_comment_voitings_on_comment_id", using: :btree
+  add_index "essay_comment_votings", ["comment_id"], name: "index_essay_comment_votings_on_comment_id", using: :btree
 
   create_table "estimate_comment_votings", force: true do |t|
     t.integer  "user_id"
     t.integer  "comment_id"
-    t.datetime "created_at",                null: false
-    t.datetime "updated_at",                null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
     t.boolean  "against",    default: true
   end
 
-  add_index "estimate_comment_votings", ["comment_id"], name: "index_estimate_comment_voitings_on_comment_id", using: :btree
+  add_index "estimate_comment_votings", ["comment_id"], name: "index_estimate_comment_votings_on_comment_id", using: :btree
 
   create_table "estimate_comments", force: true do |t|
     t.integer  "user_id"
     t.integer  "post_id"
     t.text     "content"
-    t.datetime "created_at",                        null: false
-    t.datetime "updated_at",                        null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
     t.boolean  "censored",          default: false
     t.integer  "comment_id"
     t.boolean  "discontent_status"
@@ -714,8 +676,8 @@ ActiveRecord::Schema.define(version: 20150211202805) do
     t.integer  "user_id"
     t.integer  "post_id"
     t.integer  "score"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   add_index "estimate_final_voitings", ["user_id"], name: "index_estimate_final_voitings_on_user_id", using: :btree
@@ -724,8 +686,8 @@ ActiveRecord::Schema.define(version: 20150211202805) do
     t.integer  "user_id"
     t.integer  "best_student_post_id"
     t.integer  "best_jury_post_id"
-    t.datetime "created_at",           null: false
-    t.datetime "updated_at",           null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   add_index "estimate_forecasts", ["user_id"], name: "index_estimate_forecasts_on_user_id", using: :btree
@@ -749,8 +711,8 @@ ActiveRecord::Schema.define(version: 20150211202805) do
     t.float    "on2"
     t.float    "on3"
     t.text     "on"
-    t.datetime "created_at",              null: false
-    t.datetime "updated_at",              null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
     t.integer  "imp"
     t.float    "op4"
     t.float    "ozf4"
@@ -770,16 +732,16 @@ ActiveRecord::Schema.define(version: 20150211202805) do
     t.integer  "post_id"
     t.integer  "user_id"
     t.text     "content"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "estimate_post_votings", force: true do |t|
     t.integer  "user_id"
     t.integer  "post_id"
     t.boolean  "against"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   add_index "estimate_post_votings", ["post_id", "user_id"], name: "index_estimate_post_votings_on_post_id_and_user_id", using: :btree
@@ -811,8 +773,8 @@ ActiveRecord::Schema.define(version: 20150211202805) do
     t.integer  "nepr3"
     t.integer  "nepr4"
     t.text     "nepr"
-    t.datetime "created_at",                     null: false
-    t.datetime "updated_at",                     null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
     t.integer  "status"
     t.integer  "project_id"
     t.integer  "imp"
@@ -853,8 +815,8 @@ ActiveRecord::Schema.define(version: 20150211202805) do
     t.integer  "on2"
     t.integer  "on3"
     t.text     "on"
-    t.datetime "created_at",      null: false
-    t.datetime "updated_at",      null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   add_index "estimate_task_triplets", ["post_id"], name: "index_estimate_task_triplets_on_post_id", using: :btree
@@ -862,8 +824,8 @@ ActiveRecord::Schema.define(version: 20150211202805) do
   create_table "estimate_votings", force: true do |t|
     t.integer  "user_id"
     t.integer  "estimate_post_id"
-    t.datetime "created_at",       null: false
-    t.datetime "updated_at",       null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   add_index "estimate_votings", ["estimate_post_id"], name: "index_estimate_votings_on_estimate_post_id", using: :btree
@@ -872,18 +834,18 @@ ActiveRecord::Schema.define(version: 20150211202805) do
   create_table "expert_news_comment_votings", force: true do |t|
     t.integer  "user_id"
     t.integer  "comment_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
-  add_index "expert_news_comment_votings", ["comment_id"], name: "index_expert_news_comment_voitings_on_comment_id", using: :btree
+  add_index "expert_news_comment_votings", ["comment_id"], name: "index_expert_news_comment_votings_on_comment_id", using: :btree
 
   create_table "expert_news_comments", force: true do |t|
     t.integer  "user_id"
     t.integer  "post_id"
     t.text     "content"
-    t.datetime "created_at",                 null: false
-    t.datetime "updated_at",                 null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
     t.boolean  "censored",   default: false
   end
 
@@ -892,8 +854,8 @@ ActiveRecord::Schema.define(version: 20150211202805) do
   create_table "expert_news_post_votings", force: true do |t|
     t.integer  "post_id"
     t.integer  "user_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   add_index "expert_news_post_votings", ["post_id"], name: "index_expert_news_post_votings_on_post_id", using: :btree
@@ -903,8 +865,8 @@ ActiveRecord::Schema.define(version: 20150211202805) do
     t.text     "anons"
     t.text     "content"
     t.integer  "user_id"
-    t.datetime "created_at",                   null: false
-    t.datetime "updated_at",                   null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
     t.integer  "project_id"
     t.integer  "number_views", default: 0
     t.boolean  "censored",     default: false
@@ -914,28 +876,26 @@ ActiveRecord::Schema.define(version: 20150211202805) do
   add_index "expert_news_posts", ["project_id"], name: "index_expert_news_posts_on_project_id", using: :btree
 
   create_table "frustration_comments", force: true do |t|
-    t.string   "content",                limit: 500
+    t.string   "content"
     t.integer  "user_id"
     t.integer  "frustration_id"
-    t.datetime "created_at",                                         null: false
-    t.datetime "updated_at",                                         null: false
-    t.boolean  "negative",                           default: true
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.boolean  "negative",               default: true
     t.string   "comment_admin"
-    t.boolean  "trash",                              default: false
+    t.boolean  "trash",                  default: false
     t.integer  "frustration_comment_id"
-    t.integer  "useful_frustration_id"
   end
 
   add_index "frustration_comments", ["created_at"], name: "index_frustration_comments_on_created_at", using: :btree
   add_index "frustration_comments", ["frustration_id"], name: "index_frustration_comments_on_frustration_id", using: :btree
-  add_index "frustration_comments", ["useful_frustration_id"], name: "index_frustration_comments_on_useful_frustration_id", using: :btree
   add_index "frustration_comments", ["user_id"], name: "index_frustration_comments_on_user_id", using: :btree
 
   create_table "frustration_essays", force: true do |t|
     t.integer  "user_id"
     t.string   "content"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   add_index "frustration_essays", ["user_id"], name: "index_frustration_essays_on_user_id", using: :btree
@@ -944,36 +904,36 @@ ActiveRecord::Schema.define(version: 20150211202805) do
     t.integer  "user_id"
     t.integer  "frustration_id"
     t.integer  "order"
-    t.datetime "created_at",     null: false
-    t.datetime "updated_at",     null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   add_index "frustration_forecasts", ["frustration_id"], name: "index_frustration_forecasts_on_frustration_id", using: :btree
   add_index "frustration_forecasts", ["user_id"], name: "index_frustration_forecasts_on_user_id", using: :btree
 
   create_table "frustrations", force: true do |t|
-    t.string   "what",             limit: 500
-    t.string   "wherin",           limit: 500
-    t.string   "when",             limit: 500
-    t.string   "what_old",         limit: 500
-    t.string   "wherin_old",       limit: 500
+    t.string   "what"
+    t.string   "wherin"
+    t.string   "when"
+    t.string   "what_old"
+    t.string   "wherin_old"
     t.string   "when_old"
     t.integer  "user_id"
-    t.integer  "status",                       default: 0
-    t.datetime "created_at",                                   null: false
-    t.datetime "updated_at",                                   null: false
-    t.string   "old_content",      limit: 500
+    t.integer  "status",           default: 0
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "old_content"
     t.integer  "negative_user_id"
     t.integer  "struct_user_id"
     t.datetime "structuring_date"
     t.string   "comment_admin"
-    t.boolean  "trash",                        default: false
-    t.string   "content_text",     limit: 500
-    t.string   "content_text_old", limit: 500
-    t.integer  "project_id",                   default: 1
-    t.string   "what_expert",      limit: 500
-    t.string   "wherin_expert",    limit: 500
-    t.string   "when_expert",      limit: 500
+    t.boolean  "trash",            default: false
+    t.string   "content_text"
+    t.string   "content_text_old"
+    t.integer  "project_id",       default: 1
+    t.string   "what_expert"
+    t.string   "wherin_expert"
+    t.string   "when_expert"
   end
 
   add_index "frustrations", ["created_at"], name: "index_frustrations_on_created_at", using: :btree
@@ -1039,8 +999,8 @@ ActiveRecord::Schema.define(version: 20150211202805) do
     t.text     "content"
     t.integer  "question_id"
     t.integer  "order"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "help_questions", force: true do |t|
@@ -1048,15 +1008,15 @@ ActiveRecord::Schema.define(version: 20150211202805) do
     t.integer  "post_id"
     t.integer  "order"
     t.integer  "style"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "help_users_answers", force: true do |t|
     t.integer  "user_id"
     t.integer  "answer_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "journal_mailers", force: true do |t|
@@ -1078,8 +1038,8 @@ ActiveRecord::Schema.define(version: 20150211202805) do
     t.integer  "user_id"
     t.string   "type_event"
     t.text     "body"
-    t.datetime "created_at",                    null: false
-    t.datetime "updated_at",                    null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
     t.integer  "project_id"
     t.integer  "user_informed"
     t.boolean  "viewed"
@@ -1096,33 +1056,33 @@ ActiveRecord::Schema.define(version: 20150211202805) do
   add_index "journals", ["project_id", "type_event", "user_informed", "viewed"], name: "pr_te_ui_viewd", using: :btree
   add_index "journals", ["project_id", "type_event"], name: "index_journals_on_project_id_and_type_event", using: :btree
   add_index "journals", ["project_id"], name: "index_journals_on_project_id", using: :btree
-  add_index "journals", ["type_event"], name: "index_journals_on_type", using: :btree
+  add_index "journals", ["type_event"], name: "index_journals_on_type_event", using: :btree
   add_index "journals", ["user_id"], name: "index_journals_on_user_id", using: :btree
 
   create_table "life_tape_categories", force: true do |t|
     t.string   "name"
     t.text     "short_desc"
     t.text     "long_desc"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "life_tape_comment_votings", force: true do |t|
     t.integer  "user_id"
     t.integer  "comment_id"
-    t.datetime "created_at",                null: false
-    t.datetime "updated_at",                null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
     t.boolean  "against",    default: true
   end
 
-  add_index "life_tape_comment_votings", ["user_id", "comment_id"], name: "index_life_tape_comment_voitings_on_user_id_and_comment_id", using: :btree
+  add_index "life_tape_comment_votings", ["user_id", "comment_id"], name: "index_life_tape_comment_votings_on_user_id_and_comment_id", using: :btree
 
   create_table "life_tape_comments", force: true do |t|
     t.text     "content"
     t.integer  "user_id"
     t.integer  "post_id"
-    t.datetime "created_at",                        null: false
-    t.datetime "updated_at",                        null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
     t.boolean  "censored",          default: false
     t.integer  "comment_id"
     t.boolean  "discontent_status"
@@ -1141,8 +1101,8 @@ ActiveRecord::Schema.define(version: 20150211202805) do
   create_table "life_tape_post_discussions", force: true do |t|
     t.integer  "user_id"
     t.integer  "post_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
     t.integer  "aspect_id"
   end
 
@@ -1150,21 +1110,21 @@ ActiveRecord::Schema.define(version: 20150211202805) do
     t.integer  "user_id"
     t.integer  "post_id"
     t.boolean  "against",    default: true
-    t.datetime "created_at",                null: false
-    t.datetime "updated_at",                null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
-  add_index "life_tape_post_votings", ["post_id", "user_id"], name: "index_life_tape_post_voitings_on_post_id_and_user_id", using: :btree
-  add_index "life_tape_post_votings", ["post_id"], name: "index_life_tape_post_voitings_on_post_id", using: :btree
-  add_index "life_tape_post_votings", ["user_id"], name: "index_life_tape_post_voitings_on_user_id", using: :btree
+  add_index "life_tape_post_votings", ["post_id", "user_id"], name: "index_life_tape_post_votings_on_post_id_and_user_id", using: :btree
+  add_index "life_tape_post_votings", ["post_id"], name: "index_life_tape_post_votings_on_post_id", using: :btree
+  add_index "life_tape_post_votings", ["user_id"], name: "index_life_tape_post_votings_on_user_id", using: :btree
 
   create_table "life_tape_posts", force: true do |t|
     t.text     "content"
     t.integer  "user_id"
     t.integer  "post_id"
     t.integer  "category_id"
-    t.datetime "created_at",                   null: false
-    t.datetime "updated_at",                   null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
     t.integer  "number_views", default: 0
     t.integer  "project_id"
     t.boolean  "important",    default: false
@@ -1193,19 +1153,19 @@ ActiveRecord::Schema.define(version: 20150211202805) do
   create_table "plan_comment_votings", force: true do |t|
     t.integer  "user_id"
     t.integer  "comment_id"
-    t.datetime "created_at",                null: false
-    t.datetime "updated_at",                null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
     t.boolean  "against",    default: true
   end
 
-  add_index "plan_comment_votings", ["comment_id"], name: "index_plan_comment_voitings_on_comment_id", using: :btree
+  add_index "plan_comment_votings", ["comment_id"], name: "index_plan_comment_votings_on_comment_id", using: :btree
 
   create_table "plan_comments", force: true do |t|
     t.integer  "user_id"
     t.integer  "post_id"
     t.text     "content"
-    t.datetime "created_at",                        null: false
-    t.datetime "updated_at",                        null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
     t.boolean  "censored",          default: false
     t.integer  "comment_id"
     t.boolean  "discontent_status"
@@ -1224,8 +1184,8 @@ ActiveRecord::Schema.define(version: 20150211202805) do
     t.integer  "post_id"
     t.integer  "user_id"
     t.integer  "type_field"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "plan_post_action_resources", force: true do |t|
@@ -1233,8 +1193,8 @@ ActiveRecord::Schema.define(version: 20150211202805) do
     t.string   "name"
     t.text     "desc"
     t.integer  "resource_id"
-    t.datetime "created_at",     null: false
-    t.datetime "updated_at",     null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
     t.integer  "project_id"
   end
 
@@ -1245,8 +1205,8 @@ ActiveRecord::Schema.define(version: 20150211202805) do
     t.date     "date_begin"
     t.date     "date_end"
     t.integer  "status"
-    t.datetime "created_at",          null: false
-    t.datetime "updated_at",          null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "plan_post_aspects", force: true do |t|
@@ -1257,11 +1217,11 @@ ActiveRecord::Schema.define(version: 20150211202805) do
     t.text     "control"
     t.text     "problems"
     t.text     "reality"
+    t.integer  "first_stage"
     t.text     "name"
     t.text     "content"
-    t.datetime "created_at",             null: false
-    t.datetime "updated_at",             null: false
-    t.integer  "first_stage"
+    t.datetime "created_at"
+    t.datetime "updated_at"
     t.integer  "concept_post_aspect_id"
     t.text     "positive_r"
     t.text     "negative_r"
@@ -1284,9 +1244,9 @@ ActiveRecord::Schema.define(version: 20150211202805) do
     t.text     "problems_with_resources"
     t.text     "reality"
     t.string   "name"
-    t.text     "content"
-    t.datetime "created_at",              null: false
-    t.datetime "updated_at",              null: false
+    t.string   "content"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "plan_post_means", force: true do |t|
@@ -1295,8 +1255,8 @@ ActiveRecord::Schema.define(version: 20150211202805) do
     t.integer  "post_id"
     t.integer  "resource_id"
     t.string   "type_res"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
     t.integer  "project_id"
   end
 
@@ -1304,8 +1264,8 @@ ActiveRecord::Schema.define(version: 20150211202805) do
     t.integer  "post_id"
     t.integer  "user_id"
     t.text     "content"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "plan_post_resources", force: true do |t|
@@ -1313,8 +1273,8 @@ ActiveRecord::Schema.define(version: 20150211202805) do
     t.text     "desc"
     t.integer  "post_id"
     t.integer  "resource_id"
-    t.datetime "created_at",            null: false
-    t.datetime "updated_at",            null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
     t.string   "type_res"
     t.integer  "project_id"
     t.integer  "plan_post_resource_id"
@@ -1328,19 +1288,19 @@ ActiveRecord::Schema.define(version: 20150211202805) do
     t.date     "date_begin"
     t.date     "date_end"
     t.integer  "status"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "plan_post_votings", force: true do |t|
     t.integer  "user_id"
     t.integer  "post_id"
-    t.datetime "created_at",                null: false
-    t.datetime "updated_at",                null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
     t.boolean  "against",    default: true
   end
 
-  add_index "plan_post_votings", ["post_id"], name: "index_plan_post_voitings_on_post_id", using: :btree
+  add_index "plan_post_votings", ["post_id"], name: "index_plan_post_votings_on_post_id", using: :btree
 
   create_table "plan_posts", force: true do |t|
     t.integer  "user_id"
@@ -1349,8 +1309,8 @@ ActiveRecord::Schema.define(version: 20150211202805) do
     t.text     "other_steps"
     t.integer  "status"
     t.integer  "number_views"
-    t.datetime "created_at",                      null: false
-    t.datetime "updated_at",                      null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
     t.integer  "project_id"
     t.text     "content"
     t.integer  "step",            default: 1
@@ -1376,8 +1336,8 @@ ActiveRecord::Schema.define(version: 20150211202805) do
     t.text     "task"
     t.text     "supply"
     t.text     "howto"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   add_index "plan_task_triplets", ["post_id"], name: "index_plan_task_triplets_on_post_id", using: :btree
@@ -1385,33 +1345,22 @@ ActiveRecord::Schema.define(version: 20150211202805) do
   create_table "plan_votings", force: true do |t|
     t.integer  "user_id"
     t.integer  "plan_post_id"
-    t.datetime "created_at",   null: false
-    t.datetime "updated_at",   null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "posts", force: true do |t|
     t.string   "title"
     t.text     "text"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  create_table "projects", force: true do |t|
-    t.string   "name"
-    t.string   "description"
-    t.datetime "begin1st"
-    t.datetime "end1st"
-    t.datetime "begin1stvote"
-    t.datetime "end1stvote"
-    t.datetime "created_at",   null: false
-    t.datetime "updated_at",   null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "question_comment_votings", force: true do |t|
     t.integer  "user_id"
     t.integer  "comment_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   add_index "question_comment_votings", ["comment_id"], name: "index_question_comment_votings_on_comment_id", using: :btree
@@ -1420,8 +1369,8 @@ ActiveRecord::Schema.define(version: 20150211202805) do
     t.integer  "user_id"
     t.integer  "post_id"
     t.text     "content"
-    t.datetime "created_at",                 null: false
-    t.datetime "updated_at",                 null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
     t.boolean  "censored",   default: false
   end
 
@@ -1430,8 +1379,8 @@ ActiveRecord::Schema.define(version: 20150211202805) do
   create_table "question_post_votings", force: true do |t|
     t.integer  "user_id"
     t.integer  "post_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   add_index "question_post_votings", ["post_id"], name: "index_question_post_votings_on_post_id", using: :btree
@@ -1441,13 +1390,13 @@ ActiveRecord::Schema.define(version: 20150211202805) do
     t.integer  "project_id"
     t.text     "content"
     t.integer  "status"
-    t.datetime "created_at",                   null: false
-    t.datetime "updated_at",                   null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
     t.integer  "number_views", default: 0
     t.boolean  "censored",     default: false
   end
 
-  add_index "question_posts", ["project_id"], name: "index_questions_posts_on_project_id", using: :btree
+  add_index "question_posts", ["project_id"], name: "index_question_posts_on_project_id", using: :btree
 
   create_table "questions_users", id: false, force: true do |t|
     t.integer "question_id"
@@ -1470,76 +1419,19 @@ ActiveRecord::Schema.define(version: 20150211202805) do
     t.datetime "migrated_on"
   end
 
-  create_table "test_answers", force: true do |t|
-    t.text     "name"
-    t.integer  "type_answer"
-    t.integer  "test_question_id"
-    t.datetime "created_at",       null: false
-    t.datetime "updated_at",       null: false
-  end
-
-  add_index "test_answers", ["test_question_id"], name: "index_test_answers_on_test_question_id", using: :btree
-
-  create_table "test_attempts", force: true do |t|
-    t.integer  "test_id"
-    t.integer  "user_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  add_index "test_attempts", ["test_id"], name: "index_test_attempts_on_test_id", using: :btree
-  add_index "test_attempts", ["user_id"], name: "index_test_attempts_on_user_id", using: :btree
-
-  create_table "test_question_attempts", force: true do |t|
-    t.integer  "test_attempt_id"
-    t.integer  "test_question_id"
-    t.string   "answer"
-    t.datetime "created_at",       null: false
-    t.datetime "updated_at",       null: false
-  end
-
-  add_index "test_question_attempts", ["test_attempt_id"], name: "index_test_question_attempts_on_test_attempt_id", using: :btree
-  add_index "test_question_attempts", ["test_question_id"], name: "index_test_question_attempts_on_test_question_id", using: :btree
-
-  create_table "test_questions", force: true do |t|
-    t.text     "name"
-    t.integer  "type_question"
-    t.integer  "test_id"
-    t.datetime "created_at",     null: false
-    t.datetime "updated_at",     null: false
-    t.integer  "order_question"
-  end
-
-  add_index "test_questions", ["order_question"], name: "index_test_questions_on_order_question", using: :btree
-  add_index "test_questions", ["test_id"], name: "index_test_questions_on_test_id", using: :btree
-
-  create_table "tests", force: true do |t|
-    t.string   "name"
-    t.string   "description"
-    t.integer  "project_id"
-    t.datetime "begin_date"
-    t.datetime "end_date"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
-    t.text     "preview"
-  end
-
-  add_index "tests", ["begin_date"], name: "index_tests_on_begin_date", using: :btree
-  add_index "tests", ["end_date"], name: "index_tests_on_end_date", using: :btree
-
   create_table "user_award_clicks", force: true do |t|
     t.integer  "user_id"
     t.integer  "project_id"
     t.integer  "clicks",     default: 0
-    t.datetime "created_at",             null: false
-    t.datetime "updated_at",             null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "user_awards", force: true do |t|
     t.integer  "user_id"
     t.integer  "award_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
     t.integer  "project_id"
     t.integer  "position"
   end
@@ -1549,8 +1441,8 @@ ActiveRecord::Schema.define(version: 20150211202805) do
     t.string   "check_field"
     t.boolean  "status"
     t.integer  "project_id"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
     t.string   "value"
   end
 
@@ -1576,8 +1468,8 @@ ActiveRecord::Schema.define(version: 20150211202805) do
     t.date     "dateActivation"
     t.date     "dateLastEnter"
     t.string   "vkid"
-    t.datetime "created_at",                             null: false
-    t.datetime "updated_at",                             null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
     t.string   "encrypted_password"
     t.string   "login"
     t.string   "salt"
@@ -1620,8 +1512,8 @@ ActiveRecord::Schema.define(version: 20150211202805) do
     t.integer  "user_id"
     t.integer  "frustration_id"
     t.integer  "score"
-    t.datetime "created_at",     null: false
-    t.datetime "updated_at",     null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
 end
