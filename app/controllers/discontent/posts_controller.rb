@@ -49,7 +49,7 @@ class Discontent::PostsController < PostsController
         return
       end
     end
-    @accepted_posts = @project.discontent_post.by_status([2, 4])
+    @accepted_posts = @project.discontents.by_status([2, 4])
     # @comments_all = @project.problems_comments_for_improve
     @page = params[:page]
     if params[:not_aspect]
