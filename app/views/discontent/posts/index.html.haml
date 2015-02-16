@@ -17,7 +17,7 @@
             %button{'data-toggle' => 'tab', href: "#tab_aspect_#{asp.id}", id: "link_aspect_#{asp.id}", 'data-project' => @project.id, 'data-aspect' => asp.id}
               .block-content
                 .fill-container{style: "border-color: #{asp.color};"}
-                  %span.fill-limit{'data-limit' => "#{asp.rate_aspect(@project)}", style: "color: #{asp.color};"}
+                  %span.fill-limit{'data-limit' => "#{asp.rate_aspect}", style: "color: #{asp.color};"}
                   .filler-outer
                     .filler{style: "background-color: #{asp.color};"}
 

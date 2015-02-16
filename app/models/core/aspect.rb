@@ -16,11 +16,12 @@ class Core::Aspect < ActiveRecord::Base
   validates :project_id, presence: true
 
   default_scope { order :id }
+
   scope :positive_posts, -> { joins(:discontent_posts).where('discontent_posts.style = ?', 0) }
   scope :negative_posts, -> { joins(:discontent_posts).where('discontent_posts.style = ?', 1) }
   scope :accepted_posts, -> { joins(:discontent_posts).where('discontent_posts.style = ?', 4) }
   scope :by_project, ->(project_id) { where('core_aspects.project_id = ?', project_id) }
-  scope :minus_view, ->(aspects) { where('core_aspects.id NOT IN (?)', aspects) }
+  scope :minus_view, ->(aspects) { where.not(core_aspects: {id: aspects }) }
   scope :main_aspects, -> { where(core_aspects: {core_aspect_id: nil}) }
   scope :vote_top, ->(revers) {
     if revers == '0'
@@ -69,7 +70,8 @@ class Core::Aspect < ActiveRecord::Base
     color.present? ? color : '#eac85e'
   end
 
-  def rate_aspect(project)
+  def rate_aspect
+    project = self.project
     status = project.status > 6 ? 1 : 0
     count_all = project.discontents.by_status(status).count
     count_aspect = self.aspect_posts.by_status(status).count
