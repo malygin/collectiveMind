@@ -30,6 +30,7 @@ class Core::Project < ActiveRecord::Base
   has_many :groups
   has_many :journal_mailers, class_name: 'JournalMailer'
   has_many :journals
+  has_many :news, class_name: 'News'
   #has_many :project_score_users, class_name: 'User', through: :core_project_scores, source: :user
 
   default_scope { order('id DESC') }

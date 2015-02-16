@@ -1,5 +1,10 @@
 class PostsController < ProjectsController
-  before_filter :journal_data, only: [:index, :new, :edit, :show, :vote_list, :vote_result, :to_work]
+  before_filter :authenticate_user!
+  before_filter :prepare_data, only: [:index, :new, :edit, :show, :vote_list, :vote_result, :to_work, :about]
+  before_filter :journal_data, only: [:index, :new, :edit, :show, :vote_list, :vote_result, :to_work, :about]
+  before_filter :have_rights, only: [:edit]
+  before_filter :have_project_access
+  before_filter :not_open_closed_stage
   before_filter :boss_authenticate, only: [:vote_result]
   before_filter :comment_page, only: [:index, :show]
 
@@ -258,8 +263,8 @@ class PostsController < ProjectsController
     end
     if @post.instance_of? Discontent::Post
       @post.update_attributes(status_content: true, status_whered: true, status_whend: true)
-    # elsif @post.instance_of? Concept::Post
-    #   @post.update_attributes(status_name: true, status_content: true, status_positive: true, status_positive_r: true, status_negative: true, status_negative_r: true, status_problems: true, status_reality: true, status_positive_s: true, status_negative_s: true, status_control: true, status_control_r: true, status_control_s: true, status_obstacles: true)
+      # elsif @post.instance_of? Concept::Post
+      #   @post.update_attributes(status_name: true, status_content: true, status_positive: true, status_positive_r: true, status_negative: true, status_negative_r: true, status_problems: true, status_reality: true, status_positive_s: true, status_negative_s: true, status_control: true, status_control_r: true, status_control_s: true, status_obstacles: true)
     end
 
     #@against =  params[:against] == 'true'
@@ -311,8 +316,8 @@ class PostsController < ProjectsController
 
   def like_comment
     @comment = comment_model.find(params[:id])
-    @against =  params[:against]
-    @vote = @comment.comment_votings.create(user: current_user, comment: @comment,  against: @against) unless @comment.users.include? current_user
+    @against = params[:against]
+    @vote = @comment.comment_votings.create(user: current_user, comment: @comment, against: @against) unless @comment.users.include? current_user
     respond_to do |format|
       format.js
     end

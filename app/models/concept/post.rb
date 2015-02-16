@@ -17,8 +17,10 @@ class Concept::Post < ActiveRecord::Base
             and status_positive = 't' and status_control = 't' and status_obstacles = 't' and status_reality = 't' and status_problems = 't' ") }
   scope :by_status, ->(p) { where(status: p) }
   scope :by_project, ->(p) { where(project_id: p) }
-  scope :by_idea, -> { where(fullness: [0, nil]) }
-  scope :by_novation, -> { where("concept_posts.fullness > 0") }
+  scope :by_discussions, ->(posts) { where("concept_posts.id NOT IN (#{posts.join(', ')})") unless posts.empty? }
+  scope :posts_for_discussions, ->(p) { where(project_id: p.id, status: 0).where("concept_posts.status_name = 't' and concept_posts.status_content = 't'") }
+  scope :by_idea, -> { where("concept_posts.fullness <= 40 or concept_posts.fullness IS NULL") }
+  scope :by_novation, -> { where("concept_posts.fullness > 40") }
 
   def self.scope_vote_top(post)
     joins(:concept_post_discontents).

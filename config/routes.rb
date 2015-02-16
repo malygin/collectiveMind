@@ -90,28 +90,7 @@ CollectiveMind::Application.routes.draw do
     get '/general_news', to: 'core/projects#news'
     get '/general_rating', to: 'core/projects#users'
 
-    get '/general_analytics', to: 'core/projects#general_analytics'
-    get '/lifetape_analytics', to: 'core/projects#lifetape_analytics'
-    get '/discontent_analytics', to: 'core/projects#discontent_analytics'
-    get '/concept_analytics', to: 'core/projects#concept_analytics'
-    get '/plan_analytics', to: 'core/projects#plan_analytics'
-    get '/estimate_analytics', to: 'core/projects#estimate_analytics'
-    get :graf_data, to: 'core/projects#graf_data'
-
-
-    #get '/help/posts/0', to: 'help/posts#new_help_0'
-    resources :groups do
-      put :become_member
-      put :leave
-      put 'invite_user/:user_id', action: 'invite_user'
-      put :take_invite
-      put :reject_invite
-      put :call_moderator
-    end
-    resources :group_tasks, only: [:new, :edit, :create, :update, :destroy] do
-      put 'assign_user/:user_id', action: 'assign_user'
-    end
-
+    resources :news
     namespace :help do
       resources :posts do
         get :about, on: :collection

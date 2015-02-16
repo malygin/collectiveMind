@@ -138,6 +138,7 @@ en:
     account: 'Profile'
     list_groups: "List of gorups"
     user_analytic: "User analytic"
+    news_from_expert: "News from expert"
   stages:
     intro: Intro
     life_tape: 'Data Gathering'
@@ -528,6 +529,7 @@ en:
 
     delete_group: "Delete group?"
     delete_group_task: "Delete?"
+    delete_news: "Delete news?"
   show:
     without_name: 'Без названия'
     note: замечание
@@ -591,7 +593,7 @@ en:
       add_group_success: Несовершенство успешно добавлено в группу
       added_group: Добавлено в группу
       complite: 'несовершенство решается '
-      complite_1: в незначительной мере
+      complite_1: частично
       complite_2: в значительной мере
       complite_3: полностью
       origin: Исходные
@@ -789,3 +791,6 @@ en:
     success_update: "Dates successful update"
   analytic:
     graph_visits: "Graph visits"
+  news:
+    title: "Announce"
+    body: "Full text"

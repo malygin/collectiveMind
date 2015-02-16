@@ -271,8 +271,9 @@ module JournalHelper
       when 'my_assigned_task'
         link_to j.body, group_path(j.project_id, j.first_id)
       when 'knowbase_edit'
-
         'обновил базу знаний по аспекту ' +link_to(j.body, "/project/#{project}/collect_info/posts?asp=#{j.first_id}")
+      when 'my_new_expert_news'
+        "экспертом добавлена новость #{link_to j.body, news_path(project, j.first_id)}"
       else
         'что то другое'
     end

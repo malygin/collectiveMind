@@ -678,9 +678,7 @@ module ApplicationHelper
     link = "/project/#{@project.id}/"
     #@todo прежний current_stage потерялся, и по хорошему нужно это переписать
     case current_stage
-      when 'advices'
-        link += 'discontent/posts'
-      when 'groups'
+      when 'advices', 'groups', 'news'
         link += 'discontent/posts'
       else
         link += "#{current_stage == 'essay/posts' ? stage_for_essay(params[:stage].to_i) : current_stage}"
@@ -704,13 +702,13 @@ module ApplicationHelper
 
   def date_stage_for_project(project)
     date_now = 1.day.ago.utc
-    if project.date12 >= date_now
+    if project.date_12 >= date_now
       'Сбор несовершенств'
-    elsif project.date23 >= date_now
+    elsif project.date_23 >= date_now
       'Сбор нововведений'
-    elsif project.date34 >= date_now
+    elsif project.date_34 >= date_now
       'Создание проектов'
-    elsif project.date45 >= date_now
+    elsif project.date_45 >= date_now
       'Выставление оценок'
     end
   end

@@ -52,8 +52,8 @@ ActiveRecord::Schema.define(version: 20150215212130) do
     t.text     "content"
     t.integer  "user_id"
     t.integer  "question_id"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
     t.integer  "status"
     t.boolean  "correct"
   end
@@ -64,8 +64,8 @@ ActiveRecord::Schema.define(version: 20150215212130) do
   create_table "collect_info_questions", force: true do |t|
     t.text     "content"
     t.integer  "user_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
     t.integer  "project_id"
     t.integer  "status"
     t.text     "hint"
@@ -93,12 +93,9 @@ ActiveRecord::Schema.define(version: 20150215212130) do
 
   create_table "collect_info_votings", force: true do |t|
     t.integer  "user_id"
-    t.integer  "discontent_aspect_id"
+    t.integer  "aspect_id"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "aspect_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
   end
 
   add_index "collect_info_votings", ["aspect_id"], name: "index_collect_info_votings_on_aspect_id", using: :btree
@@ -1169,6 +1166,18 @@ ActiveRecord::Schema.define(version: 20150215212130) do
   end
 
   add_index "moderator_messages", ["user_id"], name: "index_moderator_messages_on_user_id", using: :btree
+
+  create_table "news", force: true do |t|
+    t.string   "title"
+    t.text     "body"
+    t.integer  "project_id"
+    t.integer  "user_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "news", ["project_id"], name: "index_news_on_project_id", using: :btree
+  add_index "news", ["user_id"], name: "index_news_on_user_id", using: :btree
 
   create_table "plan_comment_votings", force: true do |t|
     t.integer  "user_id"
