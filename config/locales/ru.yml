@@ -146,7 +146,7 @@ ru:
     account: 'Профиль'
     list_groups: "Список групп"
     user_analytic: "Статистика по пользователям"
-    news_from_expert: "Новости от экспертов"
+    news_from_expert: "Обращение заказчика"
   stages:
     intro: Знакомство
     life_tape: 'Введение в процедуру'
