@@ -1,6 +1,7 @@
 class Core::Aspect < ActiveRecord::Base
 
   belongs_to :core_aspect, class_name: 'Core::Aspect', foreign_key: 'core_aspect_id'
+  belongs_to :project, class_name: 'Core::Project'
 
   has_many :discontent_posts, class_name: 'Discontent::Post'
   has_many :knowbase_posts, class_name: 'Core::Knowbase::Post'
