@@ -1,6 +1,7 @@
 require 'resque/status_server'
-require 'resque_scheduler'
-require 'resque_scheduler/server'
+#@todo
+#require 'resque_scheduler'
+#require 'resque_scheduler/server'
 
 # Resque.redis = "localhost:6379"
 if ENV['REDISCLOUD_URL']
