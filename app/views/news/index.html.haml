@@ -1,9 +1,9 @@
 %section.widget.padding-increased
   %header
     %h3.text-center
-      Новости от экспертов
+      Обращения к пользователям
     - if current_user.prime_admin? or current_user.expert?
-      = link_to 'Добавить новость', new_news_path, class: 'btn btn-success'
+      = link_to 'Добавить обращение', new_news_path, class: 'btn btn-success'
     %hr/
 
   .body.no-margin
