@@ -698,9 +698,7 @@ module ApplicationHelper
     link = "/project/#{@project.id}/"
     #@todo прежний current_stage потерялся, и по хорошему нужно это переписать
     case current_stage
-      when 'advices'
-        link += 'discontent/posts'
-      when 'groups'
+      when 'advices', 'groups', 'news'
         link += 'discontent/posts'
       else
         link += "#{current_stage == 'essay/posts' ? stage_for_essay(params[:stage].to_i) : current_stage}"
