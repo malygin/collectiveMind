@@ -429,9 +429,9 @@ ActiveRecord::Schema.define(version: 20150215212130) do
     t.integer  "user_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.boolean  "ready_to_concept", default: false
     t.boolean  "owner",            default: false
     t.integer  "type_user"
-    t.boolean  "ready_to_concept", default: false
   end
 
   add_index "core_project_users", ["project_id"], name: "index_core_project_users_on_project_id", using: :btree
@@ -1175,9 +1175,6 @@ ActiveRecord::Schema.define(version: 20150215212130) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
-
-  add_index "news", ["project_id"], name: "index_news_on_project_id", using: :btree
-  add_index "news", ["user_id"], name: "index_news_on_user_id", using: :btree
 
   create_table "plan_comment_votings", force: true do |t|
     t.integer  "user_id"
