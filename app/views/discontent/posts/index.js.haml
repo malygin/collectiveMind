@@ -1,8 +1,3 @@
 -if @aspect
   $('#tab_aspect_posts div.discontent-block').fadeOut();
   $('#tab_aspect_posts div[class~="aspect_#{@aspect.id}"]').fadeIn();
-
-
-
--#$('#tab_aspect_posts_#{@aspect.id}').html('#{escape_javascript(render partial: 'post_short', collection: @posts)}');
--#$('#tab_aspect_posts_#{@aspect.id}').append('#{escape_javascript(render partial: 'post_short', collection: @posts)}');

@@ -5,21 +5,10 @@ $('#tab_aspect_posts_#{@aspect.id}').html('#{escape_javascript(render partial: '
 -elsif params[:sort_date] == 'down'
   $('#sort_date_#{@aspect.id}').html('<a data-remote="true" href="/project/#{@project.id}/discontent/posts/sort_content?asp=#{@aspect.id}&sort_date=up&type_like=#{params[:type_like]}&type_note=#{params[:type_note]}&type_verify=#{params[:type_verify]}&type_status=#{params[:type_status]}" id="sort_date_link_#{@aspect.id}">по новизне<i class="fa fa-sort-down" title="по возрастанию"></i></a>');
 
--#-if params[:sort_user] == 'up'
--#  $('#sort_user_#{@aspect.id}').html('<a data-remote="true" href="/project/#{@project.id}/discontent/posts/sort_content?asp=#{@aspect.id}&sort_user=down&type_like=#{params[:type_like]}&type_note=#{params[:type_note]}&type_verify=#{params[:type_verify]}&type_status=#{params[:type_status]}" id="sort_user_link_#{@aspect.id}">по пользователям<i class="fa fa-sort-up" title="по убыванию"></i></a>');
--#-elsif params[:sort_user] == 'down'
--#  $('#sort_user_#{@aspect.id}').html('<a data-remote="true" href="/project/#{@project.id}/discontent/posts/sort_content?asp=#{@aspect.id}&sort_user=up&type_like=#{params[:type_like]}&type_note=#{params[:type_note]}&type_verify=#{params[:type_verify]}&type_status=#{params[:type_status]}" id="sort_user_link_#{@aspect.id}">по пользователям<i class="fa fa-sort-down" title="по возрастанию"></i></a>');
-
--#-if params[:sort_view] == 'up'
--#  $('#sort_view_#{@aspect.id}').html('<a data-remote="true" href="/project/#{@project.id}/discontent/posts/sort_content?asp=#{@aspect.id}&sort_view=down&type_like=#{params[:type_like]}&type_note=#{params[:type_note]}&type_verify=#{params[:type_verify]}&type_status=#{params[:type_status]}" id="sort_view_link_#{@aspect.id}">по просмотрам<i class="fa fa-sort-up" title="по убыванию"></i></a>');
--#-elsif params[:sort_view] == 'down'
--#  $('#sort_view_#{@aspect.id}').html('<a data-remote="true" href="/project/#{@project.id}/discontent/posts/sort_content?asp=#{@aspect.id}&sort_view=up&type_like=#{params[:type_like]}&type_note=#{params[:type_note]}&type_verify=#{params[:type_verify]}&type_status=#{params[:type_status]}" id="sort_view_link_#{@aspect.id}">по просмотрам<i class="fa fa-sort-down" title="по возрастанию"></i></a>');
-
 -if params[:sort_popular] == 'up'
   $('#sort_popular_#{@aspect.id}').html('<a data-remote="true" href="/project/#{@project.id}/discontent/posts/sort_content?asp=#{@aspect.id}&sort_popular=down&type_like=#{params[:type_like]}&type_note=#{params[:type_note]}&type_verify=#{params[:type_verify]}&type_status=#{params[:type_status]}" id="sort_popular_link_#{@aspect.id}">по популярности<i class="fa fa-sort-up" title="по убыванию"></i></a>');
 -elsif params[:sort_popular] == 'down'
   $('#sort_popular_#{@aspect.id}').html('<a data-remote="true" href="/project/#{@project.id}/discontent/posts/sort_content?asp=#{@aspect.id}&sort_popular=up&type_like=#{params[:type_like]}&type_note=#{params[:type_note]}&type_verify=#{params[:type_verify]}&type_status=#{params[:type_status]}" id="sort_popular_link_#{@aspect.id}">по популярности<i class="fa fa-sort-down" title="по возрастанию"></i></a>');
-
 
 $('#sort_date_link_#{@aspect.id},#sort_user_link_#{@aspect.id},#sort_view_link_#{@aspect.id},#sort_popular_link_#{@aspect.id}').removeClass('sort_content');
 -if params[:sort_date]

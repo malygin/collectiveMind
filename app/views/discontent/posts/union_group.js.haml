@@ -8,20 +8,3 @@
   $('#add_disgroup_#{@post.id}').html("#{t('show.discontent.added_group')} #{escape_javascript(link_to @post.discontent_post.content, discontent_post_path(@project, @post.discontent_post))}");
   $('#add_disgroup_#{@post.id}').effect("highlight", {color: '#f5cecd'}, 1000);
   $('#add_group_success_#{@post.id}').fadeIn('slow').delay(1000).fadeOut('slow');
-
--#-if @add_list.nil?
--#  $('#panel_union').append("#{escape_javascript(render partial: 'post', object: @union_post)}")
--#  $('#post_content_#{@post.id}').append('<li id="li_id_#{@union_post.id}">#{@union_post.content}</li>');
--#-else
--#  $("#{escape_javascript(render partial: 'post', object: @union_post)}").insertBefore('#btn-union');
--#$('#dispost_success').fadeIn('slow').delay(1000).fadeOut('slow');
--#$("#post_#{@union_post.id}").effect("highlight", {color: '#f5cecd'}, 1000);
--#$('#post_content_#{@post.id}').append('<li id="li_id_#{@union_post.id}">#{@union_post.content}</li>');
--#$("#post_#{@union_post.id}").animate({height: 0, opacity:0}, 500, function() { $(this).remove(); });
--#$('#li_id_#{@union_post.id}').remove();
--#-elsif @type_tab == 'new_posts'
--#  $('#new_posts #li_id_#{@post.id}').remove();
--#  $('#new_posts #group_select_#{@post.id}').remove();
--#  $('#new_posts #post_content_#{@new_post.id}').append('<li id="li_id_#{@post.id} data-type="#{@type_tab}">#{@post.content}</li>');
--#  $('#new_posts #post_content_#{@new_post.id}').append("#{escape_javascript(render partial: 'group_select', object: @post)}");
--#  $('#new_posts #change_group_success_#{@parent_post}').fadeIn('slow').delay(1000).fadeOut('slow');

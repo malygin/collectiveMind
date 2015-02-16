@@ -2,5 +2,4 @@ $('#send_post').toggleClass('disabled');
 $('#render_success_discontent').empty();
 $("#render_success_discontent").html('#{escape_javascript(render partial: 'modal_post_update')}');
 $('#modal_update_discontent').modal('show');
-
 $('#send_post').button('reset');
