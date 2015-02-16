@@ -1,68 +1,71 @@
-%div.col-md-4.discontent-block{id: "discontent_post_#{post_short.id}", class: "#{post_aspect_classes(post_short)}", data: {created: "#{(post_short.created_at.to_datetime.to_f)}", popular: "#{post_short.users_pro.count + (post_short.number_views * 0.3)}"}}
-  =link_to({action: :show, project: @project, id: post_short.id, asp: params[:asp]}, remote: true, id: "show_record", class: "imperfection lined-block #{post_short.style == 1 ? 'imperf-pale-pink' : 'imperf-pale-blue'}" ) do
-    -#.imperfection.lined-block{class: "#{post_short.style == 1 ? 'imperf-pale-pink' : 'imperf-pale-blue'}"}
+%div.col-md-4.discontent-block{id: "discontent_post_#{post_short.id}", class: "#{post_aspect_classes(post_short)}",
+data: {created: "#{(post_short.created_at.to_datetime.to_f)}", popular: "#{post_short.users_pro.count + (post_short.number_views * 0.3)}"}}
+  = link_to({action: :show, project: @project, id: post_short.id, asp: params[:asp]}, remote: true, id: 'show_record',
+  class: "imperfection lined-block #{post_short.style == 1 ? 'imperf-pale-pink' : 'imperf-pale-blue'}" ) do
     %table
       %tr
-        -if post_short.notes.present?
+        - if post_short.notes.present?
           %td.imperf-left-column.admin-notice
             %span.admin-notice-sign !
             .admin-notice-displayable
-              -post_short.notes.each do |note|
-                %li=note.content
+              - post_short.notes.each do |note|
+                %li
+                  = note.content
                 %br
               -#Замечание модератора
               .close-admin-button
-        -else
+        - else
           %td.imperf-left-column
 
         %td.imperf-right-column
           .aspects-indexes
             - post_short.post_aspects.each do |asp|
-              .circle-tag.back-color{style: "background-color:#{asp.color};"}= asp.short_name.present? ? asp.short_name : asp.content[0,2].mb_chars.downcase
-
+              .circle-tag.back-color{style: "background-color:#{asp.color};"}
+                = asp.short_name.present? ? asp.short_name : asp.content[0,2].mb_chars.downcase
       %tr
         %td.imperf-left-column.what-cell
           Что
         %td.imperf-right-column
-          =post_short.content
+          = post_short.content
       %tr
         %td.imperf-left-column
           Где
         %td.imperf-right-column
-          =post_short.whered
+          = post_short.whered
       %tr
         %td.imperf-left-column
           Когда
         %td.imperf-right-column
-          =post_short.whend
+          = post_short.whend
       %tr
         %td.imperf-left-column
           .imperf-bottom-line
         %td.imperf-right-column
           .imperf-bottom-line
             .info-stripe
-              %span.popup-date=Russian::strftime(post_short.created_at,'%d %B %k:%M:%S')
-              = link_to({controller: post_short.class.name.underscore.pluralize, action: :show_comments, project: @project, id: post_short.id, :remote => true}) do
+              %span.popup-date
+                = Russian::strftime(post_short.created_at,'%d %B %k:%M:%S')
+              = link_to({controller: post_short.class.name.underscore.pluralize, action: :show_comments, project: @project, id: post_short.id, remote: true}) do
                 %span.popup-comments
-                  =post_short.comments.count
+                  = post_short.comments.count
                   %i.fa.fa-comment-o
-              =link_to({:controller => post_short.class.name.underscore.pluralize ,:action => :plus, :project => @project, :id => post_short.id, :against => false,  :remote => true},:method => :put, id: "plus_post_#{post_short.id}") do
+              = link_to({controller: post_short.class.name.underscore.pluralize ,action: :plus, project: @project, id: post_short.id, against: false,  remote: true},method: :put, id: "plus_post_#{post_short.id}") do
                 %span.popup-likes
                   %span(id="plus_counter_#{post_short.id}" style="margin-right:0;")
-                    =post_short.users_pro.count
+                    = post_short.users_pro.count
                   %i.fa.fa-thumbs-o-up
-              =link_to({:controller => post_short.class.name.underscore.pluralize ,:action => :plus, :project => @project,  :id => post_short.id, :against => true, :remote => true}, :method => :put, id: "minus_post_#{post_short.id}") do
+              = link_to({controller: post_short.class.name.underscore.pluralize ,action: :plus, project: @project,  id: post_short.id, against: true, remote: true}, method: :put, id: "minus_post_#{post_short.id}") do
                 %span.popup-dislikes
                   %span(id="minus_counter_#{post_short.id}" style="margin-right:0;")
-                    =post_short.users_against.count
+                    = post_short.users_against.count
                   %i.fa.fa-thumbs-o-down
 
 
-
+- #@todo Старая верстка не нужна?
   -#.table-responsive
   -#  %table.table.table-bordered.green-discontent
   -#    %tr
-  -#      %th{:colspan => "2"}
+  -#      %th{colspan: "2"}
   -#        .text-right
   -#          - post_short.post_aspects.each do |asp|
   -#            %span.label{style: "color:#ffffff;background:#{asp.color};border:1px solid #{asp.color};"}= asp.short_name.present? ? asp.short_name : asp.content[0,2].mb_chars.upcase
@@ -87,7 +90,7 @@
   -#        =post_short.whend
   -#        =content_for_note(post_short, field = 'when', link = boss? ? true : false)
   -#    %tr
-  -#      %td{:colspan => "2"}
+  -#      %td{colspan: "2"}
   -#        .text-right
   -#          %i
   -#            =Russian::strftime(post_short.created_at,'%d %B %k:%M:%S')
@@ -95,16 +98,16 @@
   -#            =post_short.number_views
   -#            %span.glyphicon.glyphicon-eye-open
   -#            |
-  -#            = link_to({controller: post_short.class.name.underscore.pluralize, action: :show, project: @project, id: post_short.id, :remote => true}) do
+  -#            = link_to({controller: post_short.class.name.underscore.pluralize, action: :show, project: @project, id: post_short.id, remote: true}) do
   -#              =post_short.comments.count
   -#              %strong (+5)
   -#              %i.fa.fa-comment-o
   -#            |
-  -#            =link_to({:controller => post_short.class.name.underscore.pluralize ,:action => :plus, :project => @project, :id => post_short.id, :against => false,  :remote => true},:method => :put, id: "plus_post_#{post_short.id}") do
+  -#            =link_to({controller: post_short.class.name.underscore.pluralize ,action: :plus, project: @project, id: post_short.id, against: false,  remote: true},method: :put, id: "plus_post_#{post_short.id}") do
   -#              %span(id="plus_counter_#{post_short.id}")=post_short.users_pro.count
   -#              %i.fa.fa-thumbs-up
   -#            |
-  -#            =link_to({:controller => post_short.class.name.underscore.pluralize ,:action => :plus, :project => @project,  :id => post_short.id, :against => true, :remote => true}, :method => :put, id: "minus_post_#{post_short.id}") do
+  -#            =link_to({controller: post_short.class.name.underscore.pluralize ,action: :plus, project: @project,  id: post_short.id, against: true, remote: true}, method: :put, id: "minus_post_#{post_short.id}") do
   -#              %span(id="minus_counter_#{post_short.id}")=post_short.users_against.count
   -#              %i.fa.fa-thumbs-down
 

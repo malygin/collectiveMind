@@ -1,13 +1,11 @@
-require 'similar_text'
-require 'set'
-
 class Discontent::PostsController < PostsController
-  autocomplete :discontent_post, :whend, class_name: 'Discontent::Post', full: true
-  autocomplete :discontent_post, :whered, class_name: 'Discontent::Post', full: true
-
-  #@todo объединить autocomplete в один метод
 
   #@todo Здесь все еще нужен будет автокомплит? Если да, то лучше использовать полнотекстовый постгрес поиск
+  require 'similar_text'
+  require 'set'
+  autocomplete :discontent_post, :whend, class_name: 'Discontent::Post', full: true
+  autocomplete :discontent_post, :whered, class_name: 'Discontent::Post', full: true
+  #@todo объединить autocomplete в один метод
   def autocomplete_discontent_post_whend
     pr=Set.new
     pr.merge(Discontent::PostWhen.where(project_id: params[:project]).map { |d| {value: d.content} })
@@ -26,17 +24,6 @@ class Discontent::PostsController < PostsController
                    .where(project_id: params[:project]).map { |d| {value: d.value} })
     end
     render json: pr
-  end
-
-  def voting_model
-    Discontent::Post
-  end
-
-  def prepare_data
-    @aspects = Core::Aspect.where(project_id: @project, status: 0)
-    if @project.status == 6
-      @project.discontents.by_status([2, 4]).final_votings.not_admins.uniq_user.count
-    end
   end
 
   def index
@@ -99,7 +86,6 @@ class Discontent::PostsController < PostsController
   end
 
   def create
-    #@aspects = Core::Aspect.where(project_id: @project, status: 0)
     @post = @project.discontents.build(discontent_post_params)
     @post.user = current_user
     @post.improve_comment = params[:improve_comment] if params[:improve_comment]

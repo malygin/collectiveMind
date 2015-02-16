@@ -14,12 +14,12 @@
       -#  %span.sort-item ВСЕ
     %div
       %ul.nav.nav-tabs.second-stage.ui-29.tabs-discontents
-        -@project.aspects.main_aspects.order("core_aspects.id").each_with_index do |asp, index|
+        - @project.aspects.main_aspects.each do |asp|
           %li{class: "#{'active' if asp == @aspect}"}
-            %button{"data-toggle" => "tab", :href => "#tab_aspect_#{asp.id}", id: "link_aspect_#{asp.id}", "data-project" => @project.id, "data-aspect" => asp.id}
+            %button{'data-toggle' => 'tab', href: "#tab_aspect_#{asp.id}", id: "link_aspect_#{asp.id}", 'data-project' => @project.id, 'data-aspect' => asp.id}
               .block-content
                 .fill-container{style: "border-color: #{asp.color};"}
-                  %span.fill-limit{"data-limit" => "#{asp.rate_aspect(@project)}", style: "color: #{asp.color};"}
+                  %span.fill-limit{'data-limit' => "#{asp.rate_aspect(@project)}", style: "color: #{asp.color};"}
                   .filler-outer
                     .filler{style: "background-color: #{asp.color};"}
 
@@ -30,7 +30,7 @@
               .add-imperf
                 -#= link_to({new_discontent_post_path(@project, asp: params[:asp])} , remote: true, id: 'add_record',  class: 'btn btn-danger') do
                 -#= link_to '45', new_discontent_post_path(@project, asp: params[:asp]) , id: 'add_record',  class: 'btn btn-danger'
-                =link_to({action: :new, project: @project, asp: params[:asp]}, remote: true, id: "add_record" ) do
+                = link_to({action: :new, project: @project, asp: params[:asp]}, remote: true, id: 'add_record' ) do
                   .plus-circle +
                   %span Добавить несовершенство
               %table
@@ -54,7 +54,7 @@
                   %td.imperf-right-column
         %div
           .row
-            %div{id: "tab_aspect_posts"}
+            %div#tab_aspect_posts
               = render partial: 'post_short', collection: @posts
 
         -#-@project.aspects.main_aspects.order("core_aspects.id").each_with_index do |asp, index|
@@ -79,7 +79,7 @@
 
 
 
-
+- #@todo Старая верстка не нужна?
 -#%ul.nav.nav-tabs.tabs-discontents
 -#  -@project.aspects.main_aspects.order("core_aspects.id").each_with_index do |asp, index|
 -#    %li{class: "#{'active' if asp == @aspect}"}

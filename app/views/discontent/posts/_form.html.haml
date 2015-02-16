@@ -1,29 +1,29 @@
 %h3.text-center=t('form.discontent.title')
-= form_for @post, url: {project: @project.id,improve_comment: params[:improve_comment], improve_stage: params[:improve_stage], required: params[:required], action: @post.persisted? ? 'update' : 'create'}, remote: true, html: {id: 'new_discontent',class:'form-new-post'} do |f|
+= form_for @post, url: {project: @project.id, improve_comment: params[:improve_comment], improve_stage: params[:improve_stage],
+required: params[:required], action: @post.persisted? ? 'update' : 'create'}, remote: true, html: {id: 'new_discontent',class:'form-new-post'} do |f|
   #notice_messages
-
   .row
     .col-md-12
-
       .text-right
         %label.radio-inline
         = f.check_box :anonym
         %span.label.label-danger Подать несовершенство анонимно
-
       .text-center
         .h4
-          =t('form.discontent.field_what')
+          = t('form.discontent.field_what')
         %br
-
   .row
     .col-md-6
       .text-right
         %i
-          %b=t('form.discontent.examples')
+          %b
+            = t('form.discontent.examples')
           %br
-          %span.label.label-danger=t('form.discontent.style_negative')
+          %span.label.label-danger
+            = t('form.discontent.style_negative')
           %br
-          %span.label.label-default=t('form.discontent.what')
+          %span.label.label-default
+            = t('form.discontent.what')
           пчелы тратят много времени на перелеты до лучших источников нектара
     .col-md-6
       .form-group
@@ -51,20 +51,19 @@
     .col-md-12
       .text-center
         .h4
-          =t('form.discontent.field_where')
+          = t('form.discontent.field_where')
         %br
   .row
     .col-md-6
       .text-right
         %i
-          =t('form.discontent.examples')
+          = t('form.discontent.examples')
           %br
-          %span.label.label-default=t('form.discontent.where')
+          %span.label.label-default
+            = t('form.discontent.where')
           На лужайках, отдаленных от высокого дуба
-
     .col-md-6
-      = f.autocomplete_field :whered, autocomplete_discontent_post_whered_discontent_posts_path, :'min-length' => 0, style: 'height: 44px', class: 'form-control autocomplete', placeholder: t('form.discontent.field_where_promt')
-
+      = f.autocomplete_field :whered, autocomplete_discontent_post_whered_discontent_posts_path, 'min-length' => 0, style: 'height: 44px', class: 'form-control autocomplete', placeholder: t('form.discontent.field_where_promt')
   .row
     .col-md-6
       %br
@@ -91,17 +90,17 @@
             %span.span_aspect.label.label-t{id: "#{@asp.id}"}
               = @asp.content
       %br
-
   .row
     .col-md-12
       .form-group.text-center
-        =t('form.discontent.select_style')
+        = t('form.discontent.select_style')
         %label.radio-inline
           = f.radio_button :style, '1', checked: 'checked'
           %span.label.label-danger=t('form.discontent.style_negative')
         %label.radio-inline
           = f.radio_button :style, '0'
-          %span.label.label-success=t('form.discontent.style_positive')
+          %span.label.label-success
+            = t('form.discontent.style_positive')
 
   %br
   %hr

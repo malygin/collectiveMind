@@ -15,6 +15,7 @@ class Core::Aspect < ActiveRecord::Base
 
   validates :project_id, presence: true
 
+  default_scope { order :id }
   scope :positive_posts, -> { joins(:discontent_posts).where('discontent_posts.style = ?', 0) }
   scope :negative_posts, -> { joins(:discontent_posts).where('discontent_posts.style = ?', 1) }
   scope :accepted_posts, -> { joins(:discontent_posts).where('discontent_posts.style = ?', 4) }
