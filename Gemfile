@@ -25,7 +25,8 @@ gem 'bootstrap-x-editable-rails'
 #@todo а этот гем используется?
 gem 'selectize-rails'
 #@todo посмотреть, может заменить чем нужно
-gem 'rails3-jquery-autocomplete', '1.0.14'
+gem 'rails3-jquery-autocomplete'
+gem 'pg_search'
 gem 'devise'
 gem 'haml'
 gem 'haml-rails'
