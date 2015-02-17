@@ -1,6 +1,7 @@
 require 'resque/server'
-require 'resque_scheduler'
-require 'resque_scheduler/server'
+#@todo их почему то больше нет
+#require 'resque_scheduler'
+#require 'resque_scheduler/server'
 
 CollectiveMind::Application.routes.draw do
   resources :user_roles
