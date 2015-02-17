@@ -4,19 +4,82 @@ ruby '2.2.0'
 
 gem 'rails', '4.2.0'
 
+gem 'foreman'
+gem 'thin'
+gem 'sass-rails'
+gem 'coffee-rails'
+gem 'uglifier'
+gem 'compass'
+gem 'compass-rails'
+gem 'therubyracer'
+gem 'websocket-rails', git: 'https://github.com/samhane/websocket-rails.git'
+gem 'cloudinary'
+#@todo загрузка файлов через аякс, используется где гем?
+gem 'remotipart', '~> 1.2'
+gem 'pg'
+#@todo вроде тоже не нужен
+#gem 'activerecord-postgresql-adapter'
+gem 'russian'
+# @todo а это крутая штука, но нужна ли она? Можно заменить на bootstrap-editable-rails
+gem 'bootstrap-x-editable-rails'
+#@todo а этот гем используется?
+gem 'selectize-rails'
+#@todo посмотреть, может заменить чем нужно
+gem 'rails3-jquery-autocomplete', '1.0.14'
+gem 'devise'
+gem 'haml'
+gem 'haml-rails'
+gem 'jquery-rails'
+gem 'jquery-ui-sass-rails'
+#@todo нужен? или заменить на cloudinary?
+gem 'paperclip'
+#@todo нужен?
+gem 'aws-sdk'
+#@todo ставить авто размер для textarea, гем старый
+gem 'autosize-rails'
+gem 'highcharts-rails', '~> 3.0.0'
+gem 'json'
+#@todo обновить?
+gem 'will_paginate', '~> 3.0.0'
+gem 'devise_lastseenable'
+gem 'memcachier'
+gem 'dalli'
+#@todo можно писать erb в haml, нужен еще?
+gem 'settingslogic'
+gem 'bootstrap-wysihtml5-rails'
+#@todo нужен? делать запросы по rest
+gem 'rest-client'
+#@todo он только для 1.9 рубей, удаляем
+#gem 'magic_encoding'
+gem 'similar_text'
+gem 'breadcrumbs_on_rails'
+#@todo несколько редакторов?
+gem 'tinymce-rails'
+gem 'tinymce-rails-langs'
+gem 'historyjs-rails'
+gem 'seed_migration'
+gem 'resque'
+gem 'resque_mailer'
+gem 'resque-scheduler'
+gem 'resque-status'
+#@todo оба шедулера нужны?
+gem 'rufus-scheduler', '< 3.0.0'
+gem 'bugsnag'
+
 group :development, :test do
   gem 'quiet_assets'
-  gem 'grizzled-rails-logger'
   gem 'rspec-rails'
   gem 'better_errors'
   gem 'binding_of_caller'
-  gem 'faker'
   gem 'bullet'
+  # @todo думаю тоже не нужен, фактори хватит
+  #gem 'faker'
+  #@todo удалить? Давно не обновлялся, и он только для 3 рельсы и вроде ничего не делает
+  #gem 'grizzled-rails-logger'
 end
 
 group :development do
   gem 'spring'
-  gem 'html2haml' #, '1.0.0'
   gem 'rubocop'
   gem 'ruby-prof'
   gem 'rspec-prof'
@@ -27,6 +90,8 @@ group :development do
   gem 'yard'
   gem 'rubycritic'
   gem 'traceroute'
+  # @todo нужно держать этот гем тут? Есть сайт, его должно хватить
+  #gem 'html2haml' #, '1.0.0'
 end
 
 group :production do
@@ -44,60 +109,12 @@ group :test do
   gem 'capybara'
   gem 'guard-rspec'
   gem 'database_cleaner'
-  gem 'selenium-webdriver', '~> 2.41.0'
-  gem 'webdriver-user-agent'
   gem 'capybara-webkit'
   gem 'capybara-screenshot'
   gem 'headless'
-  gem 'codeclimate-test-reporter', require: nil
+  #@todo им еще будем пользоваться?
+  #gem 'codeclimate-test-reporter', require: nil
+  # @todo селениум тоже нужен?
+  #gem 'selenium-webdriver', '~> 2.41.0'
+  #gem 'webdriver-user-agent'
 end
-
-gem 'foreman'
-gem 'thin'
-gem 'sass-rails', '~> 4.0.0'
-gem 'coffee-rails', '~> 4.0.1'
-gem 'uglifier', '>= 2.1.1'
-gem 'compass'
-gem 'compass-rails'
-gem 'therubyracer', '>=0.11.4'
-gem 'websocket-rails', git: 'https://github.com/samhane/websocket-rails.git'
-gem 'cloudinary'
-gem 'remotipart', '~> 1.2'
-gem 'pg'
-gem 'activerecord-postgresql-adapter'
-gem 'russian'
-gem 'bootstrap-x-editable-rails'
-gem 'selectize-rails'
-gem 'rails3-jquery-autocomplete', '1.0.14'
-gem 'devise'
-gem 'haml'
-gem 'haml-rails'
-gem 'jquery-rails'
-gem 'jquery-ui-sass-rails'
-gem 'paperclip'
-gem 'aws-sdk'
-gem 'autosize-rails'
-gem 'highcharts-rails', '~> 3.0.0'
-gem 'json'
-gem 'will_paginate', '~> 3.0.0'
-gem 'devise_lastseenable'
-gem 'memcachier'
-gem 'dalli'
-gem 'settingslogic'
-gem 'bootstrap-wysihtml5-rails'
-gem 'rest-client'
-gem 'magic_encoding'
-gem 'similar_text'
-gem 'breadcrumbs_on_rails'
-gem 'tinymce-rails'
-gem 'historyjs-rails'
-gem 'seed_migration'
-gem 'tinymce-rails-langs'
-
-gem 'resque'
-gem 'resque_mailer'
-gem 'resque-scheduler'
-gem 'resque-status'
-gem 'rufus-scheduler', '< 3.0.0'
-
-gem "bugsnag"
