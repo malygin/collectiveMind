@@ -92,4 +92,5 @@ group :test do
   gem 'capybara-webkit'
   gem 'capybara-screenshot'
   gem 'headless'
+  gem 'simplecov'
 end
