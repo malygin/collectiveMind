@@ -76,14 +76,6 @@ class Discontent::PostsController < PostsController
     end
   end
 
-  def vote_list
-    @posts = @project.get_united_posts_for_vote(current_user)
-    return redirect_to action: 'index' if @posts.empty?
-    @post_all = current_model.where(project_id: @project, status: [2, 4]).count
-    @votes = current_user.voted_discontent_posts.where(project_id: @project).count
-    # @status = 2
-  end
-
   def create
     @post = @project.discontents.build(discontent_post_params)
     @post.user = current_user
@@ -120,6 +112,14 @@ class Discontent::PostsController < PostsController
       format.html
       format.js
     end
+  end
+
+  def vote_list
+    @posts = @project.get_united_posts_for_vote(current_user)
+    return redirect_to action: 'index' if @posts.empty?
+    @post_all = current_model.where(project_id: @project, status: [2, 4]).count
+    @votes = current_user.voted_discontent_posts.where(project_id: @project).count
+    # @status = 2
   end
 
   def union_discontent
