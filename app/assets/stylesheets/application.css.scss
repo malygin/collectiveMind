@@ -122,6 +122,7 @@ $brand-estimate:        #663505 !default;
 
 .locale-ru input, .locale-en input, .locale-ru textarea, .locale-en textarea {
     direction: ltr !important;
+    unicode-bidi: bidi-override !important;
 }
 
 .locale-he {
@@ -132,6 +133,7 @@ $brand-estimate:        #663505 !default;
 
 .locale-he input, .locale-he textarea {
     direction: rtl !important;
+    unicode-bidi: bidi-override !important;
 }
 
 .table-he th {

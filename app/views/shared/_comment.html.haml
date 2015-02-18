@@ -30,7 +30,8 @@
 
     .text
       %div{id: "comment_text_#{comment.id}"}
-        = comment.content
+        %div{class: "#{I18n.locale.to_s == 'he' ? 'rtl' : 'ltr'}"}
+          = comment.content
         - if comment.image
           - if comment.isFile
             = link_to  'скачать приложенный файл' , "http://res.cloudinary.com/hs2pm8fbp/raw/upload/#{comment.image}"
