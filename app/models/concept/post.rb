@@ -126,25 +126,22 @@ class Concept::Post < ActiveRecord::Base
   end
 
   def fullness_title
-    fullness = 0
-    if self.fullness.present?
-      if self.status_name and self.status_content
-        fullness+=40
-      end
-      if self.status_positive and self.status_positive_r
-        fullness+=30
-      end
-      if self.status_negative and self.status_negative_r
-        fullness+=20
-      end
-      if self.status_control and self.status_control_r
-        fullness+=10
-      end
-      if self.status_obstacles and self.status_problems and self.status_reality
-        fullness+=10
-      end
-    end
-    fullness
+    (self.status_all and self.fullness.present?) ? self.fullness : 0
+    # if self.status_name and self.status_content
+    #   fullness+=40
+    # end
+    # if self.status_positive and self.status_positive_r
+    #   fullness+=30
+    # end
+    # if self.status_negative and self.status_negative_r
+    #   fullness+=20
+    # end
+    # if self.status_control and self.status_control_r
+    #   fullness+=10
+    # end
+    # if self.status_obstacles and self.status_problems and self.status_reality
+    #   fullness+=10
+    # end
   end
 
   def update_statuses
@@ -198,4 +195,26 @@ class Concept::Post < ActiveRecord::Base
     end
     statuses
   end
+
+  def fullness_add_score
+    fullness = 0
+    if self.status_name and self.status_content
+      fullness+=40
+    end
+    if self.status_positive and self.status_positive_r
+      fullness+=30
+    end
+    if self.status_negative and self.status_negative_r
+      fullness+=20
+    end
+    if self.status_control and self.status_control_r
+      fullness+=10
+    end
+    if self.status_obstacles and self.status_problems and self.status_reality
+      fullness+=10
+    end
+    write_attribute(:fullness, fullness) if fullness > 0
+    fullness
+  end
+
 end

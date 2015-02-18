@@ -21,9 +21,9 @@
       - else
         .pull-right
           -if post_short.discuss_status
-            %span.label-danger=t('show.discuss')
+            %span.label.label-danger=t('show.discuss')
           -if post_short.approve_status
-            %span.label-success=t('show.important')
+            %span.label.label-success=t('show.important')
 
     =discontent_style_name(post_short.style)
     .comment.dis-comment

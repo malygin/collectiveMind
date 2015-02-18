@@ -263,9 +263,9 @@ class User < ActiveRecord::Base
           end
         end
       when :plus_field_all
-        if h[:post].instance_of? Concept::Post
-          self.add_score_by_type(h[:project], h[:post].fullness.nil? ? 40 : h[:post].fullness, :score_g)
-          self.journals.build(type_event: 'my_add_score_concept', project: h[:project], user_informed: self, body: "#{h[:post].fullness.nil? ? 40 : h[:post].fullness}", first_id: h[:post].id, body2: trim_content(h[:post].content), viewed: false, personal: true).save!
+        if h[:post].instance_of? Concept::Post and h[:post].fullness_add_score > 0
+          self.add_score_by_type(h[:project], h[:post].fullness_add_score, :score_g)
+          self.journals.build(type_event: 'my_add_score_concept', project: h[:project], user_informed: self, body: "#{h[:post].fullness_add_score}", first_id: h[:post].id, body2: trim_content(h[:post].content), viewed: false, personal: true).save!
         end
 
       # self.journals.build(type_event:'useful_post', project: h[:project], body:"#{h[:post].content[0..24]}:#{h[:path]}/#{h[:post].id}").save!
@@ -297,8 +297,8 @@ class User < ActiveRecord::Base
           Journal.destroy_journal_record(h[:project],'my_add_score_concept', self, h[:post], true)
         end
       when :to_archive_plus_field_all
-        self.add_score_by_type(h[:project], -(h[:post].fullness.nil? ? 40 : h[:post].fullness), :score_g)
-        if h[:post].instance_of? Concept::Post
+        if h[:post].instance_of? Concept::Post and h[:post].fullness and h[:post].fullness > 0
+          self.add_score_by_type(h[:project], -h[:post].fullness, :score_g)
           Journal.destroy_journal_record(h[:project],'my_add_score_concept', self, h[:post], true)
         end
       when :useful_advice

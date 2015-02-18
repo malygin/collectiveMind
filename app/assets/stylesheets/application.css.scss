@@ -86,6 +86,10 @@ a.popup-likes, a.popup-dislikes, a.popup-likes:hover, a.popup-dislikes:hover {
   cursor: pointer !important;
 }
 
+.table-words {
+  word-break: break-all;
+}
+
 /* discontent posts */
 .label-t {
   @include label-variant($teal);

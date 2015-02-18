@@ -20,9 +20,9 @@
             %span.label_approve.label(class="#{label_approve_stat(improve_comment)}")=t('show.important')
         - else
           -if improve_comment.discuss_status
-            %span.label-danger=t('show.discuss')
+            %span.label.label-danger=t('show.discuss')
           -if improve_comment.approve_status
-            %span.label-success=t('show.important')
+            %span.label.label-success=t('show.important')
 
     .text
       %div{id: "comment_text_#{improve_comment.id}"}

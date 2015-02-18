@@ -101,7 +101,7 @@ class Concept::PostsController < PostsController
 
     create_concept_resources_on_type(@project, @concept_post)
 
-    @concept_post.fullness_apply(@post_aspect,params[:resor])
+    # @concept_post.fullness_apply(@post_aspect,params[:resor])
 
     respond_to do |format|
       if @concept_post.save
@@ -151,7 +151,7 @@ class Concept::PostsController < PostsController
 
     create_concept_resources_on_type(@project, @concept_post)
 
-    @concept_post.fullness_apply(@post_aspect,params[:resor])
+    # @concept_post.fullness_apply(@post_aspect,params[:resor])
 
     respond_to do |format|
       if @concept_post.save
@@ -275,33 +275,5 @@ class Concept::PostsController < PostsController
         end
       end
     end
-
-    #if flag_destroy
-    #  post.concept_post_resources.by_type(type_r).destroy_all
-    #  post.concept_post_resources.by_type(type_s).destroy_all
-    #end
-
-    # unless params[:plan_post_resource].nil?
-    #   params[:plan_post_resource].each do |t|
-    #     t[1].each_with_index do |r,i|
-    #       post.concept_post_resources.build(:name => r[:name], :desc => r[:desc],:style => r[:style], :type_res => t[0], :project_id => project.id)
-    #     end
-    #   end
-    # end
-    # unless params[('resor_'+type_r).to_sym].nil?
-    #   params[('resor_'+type_r).to_sym].each_with_index do |r,i|
-    #      if r[1][0]!=''
-    #        resource = post.concept_post_resources.build(:name => r[1][0], :desc => params[('resor_'+type_r).to_sym] ? params[('resor_'+type_r).to_sym]["#{r[0]}"][0] : '', :type_res => type_r, :project_id => project.id, :style => 0)
-    #        if params[('resor_'+type_s).to_sym] and params[('resor_'+type_s).to_sym]["#{r[0]}"]
-    #          params[('resor_'+type_s).to_sym]["#{r[0]}"].each_with_index do |m,ii|
-    #            if m!=''
-    #              mean = post.concept_post_resources.build(:name => m, :desc => params[('resor_'+type_s).to_sym] ? params[('resor_'+type_s).to_sym]["#{r[0]}"][ii] : '',:type_res => type_s, :project_id => project.id, :style => 1)
-    #              mean.concept_post_resource = resource
-    #            end
-    #          end
-    #        end
-    #      end
-    #   end
-    # end
 
 end

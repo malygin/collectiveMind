@@ -34,7 +34,7 @@
           %br
           %table.table.table-striped.table-bordered.table-condensed
             %thead
-              %tr
+              %tr.table-words
                 %th
                   ="#"
                 %th
@@ -92,7 +92,7 @@
       - else
         %table.table.table-striped.table-bordered.table-condensed
           %thead
-            %tr
+            %tr.table-words
               %th
                 ="#"
               %th
@@ -125,7 +125,7 @@
 
                     %td
                       = status_for_concept_type(pa)
-                      -if boss? or role_expert?
+                      -if (boss? or role_expert?) and pa.fullness_title > 0
                         %br
                         %span.label.label-success="#{pa.fullness_title} баллов из 110"
                       -if pa.discuss_status
