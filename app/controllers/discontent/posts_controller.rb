@@ -63,7 +63,6 @@ class Discontent::PostsController < PostsController
     @post.content = @comment.content if @comment
     @aspects = Core::Aspect.where(project_id: @project, status: 0)
     respond_to do |format|
-      format.html
       format.js
     end
   end

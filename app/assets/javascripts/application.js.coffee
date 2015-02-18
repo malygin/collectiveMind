@@ -15,7 +15,7 @@
 # require datepicker/bootstrap-datepicker
 #= require bootstrap3-editable/bootstrap-editable
 
-# require autocomplete-rails-dev
+#= require autocomplete-rails
 #= require selectize
 #= require liFixar/jquery.liFixar
 # require nvd3/d3.v2
