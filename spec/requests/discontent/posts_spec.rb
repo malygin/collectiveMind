@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe 'Discontent ' do
+describe 'Discontent' do
   subject { page }
   let (:user) { create :user }
   let (:user_data) { create :user }
@@ -190,77 +190,10 @@ describe 'Discontent ' do
       end
     end
 
-    context 'note for discontent ' do
-      before do
-        visit discontent_posts_path(project)
-      end
+    context 'note for discontent'
 
-      it 'can add note ', js: true do
-        visit "/project/#{project.id}/discontent/posts?asp=#{@aspect1.id}"
-        click_link "content_dispost_what_#{@discontent1.id}"
-        expect(page).to have_selector "form#note_for_post_#{@discontent1.id}_1"
-        find("#note_for_post_#{@discontent1.id}_1").find('#edit_post_note_text_area').set "new note for first field discontent post"
-        find("#note_for_post_#{@discontent1.id}_1").find("#send_post_#{@discontent1.id}").click
-        expect(page).to have_content "new note for first field discontent post"
-        page.execute_script %($("ul#note_form_#{@discontent1.id}_1 a").click())
-        # @todo нужно ждать пока отработает анимация скрытия и элемент будет удален
-        sleep(5)
-        expect(page).not_to have_content 'new note for first field discontent post'
-      end
-    end
+    context 'group discontent'
 
-    context 'group discontent ' do
-      before do
-        project.update_attributes(status: 4)
-        visit discontent_posts_path(project)
-      end
-
-      it 'have content ' do
-        visit "/project/#{project.id}/discontent/posts?asp=#{@aspect1.id}"
-        expect(page).to have_content 'Исходные'
-        expect(page).to have_content 'Объединенные'
-        expect(page).to have_content I18n.t('show.improve.problem')
-        expect(page).to have_content 'Группы несовершенств'
-        expect(page).to have_content 'Несовершенства'
-        expect(page).to have_link('add_record', text: 'Добавить новую группу')
-      end
-
-      it 'add new group ', js: true do
-        visit "/project/#{project.id}/discontent/posts?asp=#{@aspect1.id}"
-        click_link 'add_record'
-        sleep(5)
-        fill_in 'discontent_post_content', with: 'new group content'
-        fill_in 'discontent_post_whered', with: 'new group where'
-        fill_in 'discontent_post_whend', with: 'new group when'
-        click_button 'send_post'
-        expect(page).to have_content 'new group content'
-        expect(page).to have_content 'Разгруппировать'
-        expect(page).to have_content 'Редактировать группу'
-        find("#post_#{@discontent1.id} #select_for_discontents_group").find(:xpath, 'option[2]').select_option
-        expect(page).to have_content 'Добавлено в группу new group content'
-      end
-    end
-
-    context 'vote discontent ' do
-      before do
-        project.update_attributes(status: 6)
-        prepare_for_vote_discontents(project)
-        visit discontent_posts_path(project)
-      end
-
-      it 'have content ', js: true do
-        expect(page).to have_content 'Голосование за несовершенства'
-        expect(page).to have_content 'Определение наиболее важных проблем'
-        expect(page).to have_content 'Несовершенство: 1 из 1'
-        expect(page).to have_content @discontent_group1.content
-        click_link "vote_positive_#{@discontent_group1.id}"
-        expect(page).to have_content 'Спасибо за участие в голосовании!'
-        expect(page).to have_selector 'a', 'Перейти к рефлексии'
-        expect(page).to have_selector 'a', 'Перейти к списку несовершенств'
-        click_link 'Перейти к списку несовершенств'
-        expect(page).to have_content 'Несовершенства'
-        expect(page).to have_content I18n.t('show.improve.problem')
-      end
-    end
+    context 'vote discontent'
   end
 end
