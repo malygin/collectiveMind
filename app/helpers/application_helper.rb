@@ -454,9 +454,7 @@ module ApplicationHelper
   end
 
   def field_for_journal(post)
-    if post.instance_of? CollectInfo::Post
-      post.core_aspects.first.content unless post.core_aspects.first.nil?
-    elsif post.instance_of? Concept::Post
+    if post.instance_of? Concept::Post
       post.post_aspects.first.title unless post.post_aspects.first.nil?
     elsif post.instance_of? Plan::Post
       post.name

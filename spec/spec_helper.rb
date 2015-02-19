@@ -1,6 +1,3 @@
-require 'codeclimate-test-reporter'
-CodeClimate::TestReporter.start
-
 require 'rubygems'
 require 'spork'
 
@@ -31,7 +28,10 @@ Spork.prefork do
   ActiveRecord::Migration.maintain_test_schema!
 
   RSpec.configure do |config|
-    #config.infer_spec_type_from_file_location!
+    config.infer_spec_type_from_file_location!
+    config.profile_examples = 10
+    config.order = :random
+    Kernel.srand config.seed
     config.include Rails.application.routes.url_helpers
     config.fail_fast = false
     config.include FactoryGirl::Syntax::Methods

@@ -4,6 +4,11 @@ class PostsController < ProjectsController
   before_filter :boss_authenticate, only: [:vote_result]
   before_filter :comment_page, only: [:index, :show]
 
+  def autocomplete
+    results = current_model.autocomplete params[:term]
+    render json: results
+  end
+
   def journal_data
     if params[:viewed]
       post = current_model.where(id: params[:id], project_id: @project.id).first if params[:id]
