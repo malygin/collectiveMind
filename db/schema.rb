@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150217195127) do
+ActiveRecord::Schema.define(version: 20150219180725) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -255,11 +255,11 @@ ActiveRecord::Schema.define(version: 20150217195127) do
     t.text     "goal"
     t.text     "reality"
     t.integer  "user_id"
-    t.integer  "number_views"
+    t.integer  "number_views",      default: 0
     t.integer  "life_tape_post_id"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "status"
+    t.integer  "status",            default: 0
     t.integer  "project_id"
     t.text     "content"
     t.boolean  "censored",          default: false
