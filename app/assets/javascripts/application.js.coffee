@@ -48,7 +48,7 @@
 #= require visit_chart
 #= require jquery.tube.min
 #= require concept_play_movie.coffee
-
+#=require lang
 # @todo load initialization
 sidebarHeight = 0;
 $ ->

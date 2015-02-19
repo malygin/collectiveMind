@@ -132,8 +132,8 @@ $brand-estimate:        #663505 !default;
 }
 
 .locale-he input, .locale-he textarea {
-    direction: rtl !important;
-    unicode-bidi: bidi-override !important;
+    direction: rtl ;
+//    unicode-bidi: bidi-override !important;
 }
 
 .table-he th {
