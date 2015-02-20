@@ -1,5 +1,5 @@
 class News < ActiveRecord::Base
-  attr_accessible :title, :body, :user_id, :project_id
+  # attr_accessible :title, :body, :user_id, :project_id
   belongs_to :project, class_name: 'Core::Project'
   belongs_to :user
 
