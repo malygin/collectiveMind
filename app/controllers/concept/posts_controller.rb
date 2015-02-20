@@ -1,7 +1,7 @@
-require 'similar_text'
-require 'set'
 class Concept::PostsController < PostsController
-
+  before_action :set_concept_post, only: [:edit, :update]
+  require 'similar_text'
+  require 'set'
   autocomplete :concept_post, :resource, class_name: 'Concept::Post', full: true
 
   def voting_model
@@ -36,33 +36,40 @@ class Concept::PostsController < PostsController
     render json: pr.sort_by { |ha| ha[:value].downcase }
   end
 
-  def prepare_data
-    @aspects = Core::Aspect.where(project_id: @project, status: 0)
-    @disposts = Discontent::Post.where(project_id: @project, status: 4).order(:id)
-    @vote_all = Concept::Voting.by_posts_vote(@project.discontents.by_status(4).pluck(:id).join(", ")).uniq_user.count if @project.status == 8
+  def index
+    #@todo сразу все новые выводить, а уже потом он может фильтровать
+    if current_user.can_vote_for(:concept, @project)
+      redirect_to action: 'vote_list'
+    elsif params[:not_aspect].present?
+      @concepts = @project.concepts_without_aspect
+    elsif params[:all_aspects].present?
+      @concepts = @project.concept_ongoing_post.order('concept_posts.id')
+    elsif params[:asp].present?
+      @aspect = Core::Aspect.find(params[:asp])
+    else
+      redirect_to "/project/#{@project.id}/concept/posts?asp=#{@project.proc_aspects.order('position DESC').first.id}"
+    end
   end
 
-  def index
-    return redirect_to action: "vote_list" if current_user.can_vote_for(:concept, @project)
-
-    if params[:asp]
-      @aspect =  Core::Aspect.find(params[:asp])
-    else
-      if not (params[:not_aspect] or params[:all_aspects])
-        redirect_to "/project/#{@project.id}/concept/posts?asp=#{@project.proc_aspects.order("position DESC").first.id}"
-        return
-      end
+  def new
+    @asp = Core::Aspect.find(params[:asp]) unless params[:asp].nil?
+    @concept_post = current_model.new
+    @discontent_post = Discontent::Post.find(params[:dis_id]) unless params[:dis_id].nil?
+    @resources = Concept::Resource.where(project_id: @project.id)
+    @pa = Concept::PostAspect.new
+    if params[:improve_comment] and params[:improve_stage]
+      @comment = get_comment_for_stage(params[:improve_stage], params[:improve_comment])
+      @pa.name = @comment.content if @comment
     end
-    # @comments_all = @project.ideas_comments_for_improve
-    if params[:not_aspect]
-      @concepts = @project.concepts_without_aspect
-    elsif params[:all_aspects]
-      @concepts = @project.concept_ongoing_post.order('concept_posts.id')
+    @remove_able = true
+    respond_to do |format|
+      format.html
+      format.js
     end
   end
 
   def create
-    @concept_post = Concept::Post.new
+    @concept_post = current_model.new
     @post_aspect = Concept::PostAspect.new(params[:pa])
     unless params[:cd].nil?
       params[:cd].each do |cd|
@@ -76,9 +83,7 @@ class Concept::PostsController < PostsController
     end
 
     @concept_post.post_aspects << @post_aspect
-    @concept_post.number_views = 0
     @concept_post.user = current_user
-    @concept_post.status = 0
     @concept_post.project = @project
     @concept_post.improve_comment = params[:improve_comment] if params[:improve_comment]
     @concept_post.improve_stage = params[:improve_stage] if params[:improve_stage]
@@ -97,14 +102,23 @@ class Concept::PostsController < PostsController
         format.html { redirect_to @aspect_id.nil? ? "/project/#{@project.id}/concept/posts" : "/project/#{@project.id}/concept/posts?asp=#{@aspect_id}" }
         format.js
       else
-        format.html { render action: "new" }
+        format.html { render action: 'new' }
         format.js
       end
     end
   end
 
+  def edit
+    @pa = @concept_post.post_aspects.first
+    @discontent_post = @pa.discontent
+    @remove_able = true
+    respond_to do |format|
+      format.html
+      format.js
+    end
+  end
+
   def update
-    @concept_post = Concept::Post.find(params[:id])
     @concept_post.update_status_fields(params[:pa])
     @post_aspect = Concept::PostAspect.new(params[:pa])
 
@@ -146,10 +160,10 @@ class Concept::PostsController < PostsController
           @remove_able = true
         end
         @aspect_id = @project.proc_aspects.order(:id).first.id
-        format.html { redirect_to action: "show", project: @project, id: @concept_post.id }
+        format.html { redirect_to action: 'show', project: @project, id: @concept_post.id }
         format.js
       else
-        format.html { render action: "edit" }
+        format.html { render action: 'edit' }
         format.js
       end
     end
@@ -189,41 +203,15 @@ class Concept::PostsController < PostsController
       end
     end
     @discontent_post = current_user.able_concept_posts_for_vote(@project, disposts, @last_now)
-    unless @discontent_post.nil?
+    if @discontent_post.nil?
+      @post_all = 1
+      @votes = 0
+    else
       var_for_vote = @discontent_post.concepts_for_vote(@project, current_user, @last_now)
       @post_all = var_for_vote[0]
       @concept1 = var_for_vote[1]
       @concept2 = var_for_vote[2]
       @votes = var_for_vote[3]
-    else
-      @post_all = 1
-      @votes = 0
-    end
-  end
-
-  def new
-    @asp = Core::Aspect.find(params[:asp]) unless params[:asp].nil?
-    @concept_post = current_model.new
-    @discontent_post = Discontent::Post.find(params[:dis_id]) unless params[:dis_id].nil?
-    @resources = Concept::Resource.where(project_id: @project.id)
-    @pa = Concept::PostAspect.new
-    @comment = get_comment_for_stage(params[:improve_stage], params[:improve_comment]) if params[:improve_comment] and params[:improve_stage]
-    @pa.name = @comment.content if @comment
-    @remove_able = true
-    respond_to do |format|
-      format.html
-      format.js
-    end
-  end
-
-  def edit
-    @concept_post = current_model.find(params[:id])
-    @pa = @concept_post.post_aspects.first
-    @discontent_post = @pa.discontent
-    @remove_able = true
-    respond_to do |format|
-      format.html
-      format.js
     end
   end
 
@@ -233,6 +221,19 @@ class Concept::PostsController < PostsController
   end
 
   private
+  def concept_post_params
+    params.require(:concept_post).permit(:content, :whend, :whered, :style)
+  end
+
+  def set_concept_post
+    @concept_post = Concept::Post.find(params[:id])
+  end
+
+  def prepare_data
+    @aspects = Core::Aspect.where(project_id: @project, status: 0)
+    @disposts = Discontent::Post.where(project_id: @project, status: 4).order(:id)
+    @vote_all = Concept::Voting.by_posts_vote(@project.discontents.by_status(4).pluck(:id).join(", ")).uniq_user.count if @project.status == 8
+  end
 
   def check_before_update(pa1, pa2)
     pa1 and pa2[:title] and pa2[:name] and pa2[:content] ? true : false
@@ -255,32 +256,4 @@ class Concept::PostsController < PostsController
       end
     end
   end
-
-  #if flag_destroy
-  #  post.concept_post_resources.by_type(type_r).destroy_all
-  #  post.concept_post_resources.by_type(type_s).destroy_all
-  #end
-
-  # unless params[:plan_post_resource].nil?
-  #   params[:plan_post_resource].each do |t|
-  #     t[1].each_with_index do |r,i|
-  #       post.concept_post_resources.build(:name => r[:name], :desc => r[:desc],:style => r[:style], :type_res => t[0], :project_id => project.id)
-  #     end
-  #   end
-  # end
-  # unless params[('resor_'+type_r).to_sym].nil?
-  #   params[('resor_'+type_r).to_sym].each_with_index do |r,i|
-  #      if r[1][0]!=''
-  #        resource = post.concept_post_resources.build(:name => r[1][0], :desc => params[('resor_'+type_r).to_sym] ? params[('resor_'+type_r).to_sym]["#{r[0]}"][0] : '', :type_res => type_r, :project_id => project.id, :style => 0)
-  #        if params[('resor_'+type_s).to_sym] and params[('resor_'+type_s).to_sym]["#{r[0]}"]
-  #          params[('resor_'+type_s).to_sym]["#{r[0]}"].each_with_index do |m,ii|
-  #            if m!=''
-  #              mean = post.concept_post_resources.build(:name => m, :desc => params[('resor_'+type_s).to_sym] ? params[('resor_'+type_s).to_sym]["#{r[0]}"][ii] : '',:type_res => type_s, :project_id => project.id, :style => 1)
-  #              mean.concept_post_resource = resource
-  #            end
-  #          end
-  #        end
-  #      end
-  #   end
-  # end
 end
