@@ -18,8 +18,7 @@
   %li.active
     = link_to news_index_path(@project), style:'width:auto; margin-right: 15px;', id: 'go_to_news_from_experts' do
       = t('menu.news_from_expert')
-      %span.label.label-important
-        new!
+
 
   - if boss?
     %li.divider
