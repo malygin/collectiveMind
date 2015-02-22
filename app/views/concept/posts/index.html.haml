@@ -1,7 +1,8 @@
 .innov
   %h4
     = t('show.concept.title_plural')
-    %span.innov-header-smaller (27)
+    %span.innov-header-smaller
+      = @project.concept_ongoing_post.count
     %i.fa.fa-question-circle
   .container
     .row.innovs#tab_concept_posts
