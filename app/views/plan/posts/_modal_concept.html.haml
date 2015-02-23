@@ -64,17 +64,14 @@
                   - @concepts.each do |post|
                     -if post.concept_disposts.present?
                       .row
-                        .col-md-7
+                        .col-md-8
                           %span{id: "view_what_#{post.id}"}
                             - if post.post_aspect.title!=''
                               =post.post_aspect.title
                             - else
                               =t('show.without_name')
 
-                        .col-md-2(class="td_plus_concept_#{post.post_aspect.id}")
-                          -if plus_concept?(@post, @post_stage, post)
-                            .label.label-success=t('form.plan.concept.add')
-                        .col-md-2
+                        .col-md-3
                           %span
                             =link_to view_concept_plan_post_path(@project, @post, stage_id: @post_stage, con_id: post.id, what_view_concept: true), method: :get, remote: true, class: "color-teal pull-right", "data-toggle"=> "collapse", "data-target"=> "collapse_dis_concept_#{post.id}", style: "text-decoration:none;" do
                               .label.label-success{id: "view_concepts_#{post.id}"} Показать несовершенства
@@ -83,7 +80,7 @@
                             =link_to add_form_for_concept_plan_post_path(@project, @post, stage_id: @post_stage, concept_id: post.post_aspect.id, save_form: true), method: :put, remote: true, id: "plus_post_concept_#{post.id}" do
                               %button.btn.btn-sm.btn-warning{type: "button"}
                                 %i.fa.fa-plus
-                        %div{id: "view_dis_concept_#{post.id}"}
+                      %div{id: "view_dis_concept_#{post.id}"}
                       .plan-devider
 
 
