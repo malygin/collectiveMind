@@ -1,7 +1,6 @@
 class Concept::Post < ActiveRecord::Base
   include BasePost
 
-  has_many :post_aspects, foreign_key: 'concept_post_id', class_name: 'Concept::PostAspect'
   has_many :voted_users, through: :final_votings, source: :user
   has_many :final_votings, foreign_key: 'concept_post_aspect_id', class_name: 'Concept::Voting'
 
@@ -21,8 +20,8 @@ class Concept::Post < ActiveRecord::Base
   scope :by_project, ->(p) { where(project_id: p) }
   scope :by_discussions, ->(posts) { where("concept_posts.id NOT IN (#{posts.join(', ')})") unless posts.empty? }
   scope :posts_for_discussions, ->(p) { where(project_id: p.id, status: 0).where("concept_posts.status_name = 't' and concept_posts.status_content = 't'") }
-  scope :by_idea, -> { where("concept_posts.fullness <= 40 or concept_posts.fullness IS NULL") }
-  scope :by_novation, -> { where("concept_posts.fullness > 40") }
+  scope :by_idea, -> { where("concept_posts.new_fullness <= 40 or concept_posts.new_fullness IS NULL") }
+  scope :by_novation, -> { where("concept_posts.new_fullness > 40") }
 
   def self.scope_vote_top(post)
     joins(:concept_post_discontents).
@@ -43,40 +42,30 @@ class Concept::Post < ActiveRecord::Base
     self.post_notes(type_fd).size > 0
   end
 
-  def content
-    self.post_aspects.first.content
-  end
-
-  def dispost
-    self.post_aspects.first.core_aspect_id
-  end
-
   def update_status_fields(pa)
-    if self.post_aspects.first
-      if self.post_aspects.first.read_attribute('name') != pa['name']
-        self.status_name = nil
-      end
-      if self.post_aspects.first.read_attribute('content') != pa['content']
-        self.status_content = nil
-      end
-      if self.post_aspects.first.read_attribute('negative') != pa['negative']
-        self.status_negative = nil
-      end
-      if self.post_aspects.first.read_attribute('positive') != pa['positive']
-        self.status_positive = nil
-      end
-      if self.post_aspects.first.read_attribute('control') != pa['control']
-        self.status_control = nil
-      end
-      if self.post_aspects.first.read_attribute('obstacles') != pa['obstacles']
-        self.status_obstacles = nil
-      end
-      if self.post_aspects.first.read_attribute('reality') != pa['reality']
-        self.status_reality = nil
-      end
-      if self.post_aspects.first.read_attribute('problems') != pa['problems']
-        self.status_problems = nil
-      end
+    if read_attribute('name') != pa['name']
+      self.status_name = nil
+    end
+    if read_attribute('content') != pa['content']
+      self.status_content = nil
+    end
+    if read_attribute('negative') != pa['negative']
+      self.status_negative = nil
+    end
+    if read_attribute('positive') != pa['positive']
+      self.status_positive = nil
+    end
+    if read_attribute('control') != pa['control']
+      self.status_control = nil
+    end
+    if read_attribute('obstacles') != pa['obstacles']
+      self.status_obstacles = nil
+    end
+    if read_attribute('reality') != pa['reality']
+      self.status_reality = nil
+    end
+    if read_attribute('problems') != pa['problems']
+      self.status_problems = nil
     end
   end
 
@@ -84,9 +73,6 @@ class Concept::Post < ActiveRecord::Base
     if post_aspect.title.present? and post_aspect.name.present? and post_aspect.content.present?
       self.fullness = 40
     end
-    # if post_aspect.positive.present? or post_aspect.negative.present? or post_aspect.control.present? or post_aspect.obstacles.present? or post_aspect.reality.present? or post_aspect.problems.present? or resor.any? { |r| r[:name]!='' }
-    #   self.fullness = 1
-    # end
     if post_aspect.positive.present? and resor.any? { |r| r[:type_res] == 'positive_r' and r[:name]!='' }
       self.fullness += 30
     end
@@ -102,75 +88,72 @@ class Concept::Post < ActiveRecord::Base
   end
 
   def fullness_title
-    fullness = 0
-    if self.fullness.present?
-      if self.status_name and self.status_content
-        fullness+=40
+    new_fullness = 0
+    if fullness.present?
+      if status_name and status_content
+        new_fullness += 40
       end
-      if self.status_positive and self.status_positive_r
-        fullness+=30
+      if status_positive and status_positive_r
+        new_fullness += 30
       end
-      if self.status_negative and self.status_negative_r
-        fullness+=20
+      if status_negative and status_negative_r
+        new_fullness += 20
       end
-      if self.status_control and self.status_control_r
-        fullness+=10
+      if status_control and status_control_r
+        new_fullness += 10
       end
-      if self.status_obstacles and self.status_problems and self.status_reality
-        fullness+=10
+      if status_obstacles and status_problems and status_reality
+        new_fullness += 10
       end
     end
-    fullness
+    new_fullness
   end
 
   def update_statuses
-    post_aspect = self.post_aspects.first
     statuses = []
-    if post_aspect
-      if post_aspect.name.present?
-        self.status_name = true
-        statuses << 'name'
-      end
-      if post_aspect.content.present?
-        self.status_content = true
-        statuses << 'content'
-      end
-      if post_aspect.positive.present?
-        self.status_positive = true
-        statuses << 'positive'
-      end
-      if post_aspect.negative.present?
-        self.status_negative = true
-        statuses << 'negative'
-      end
-      if post_aspect.control.present?
-        self.status_control = true
-        statuses << 'control'
-      end
-      if post_aspect.obstacles.present?
-        self.status_obstacles = true
-        statuses << 'obstacles'
-      end
-      if post_aspect.reality.present?
-        self.status_reality = true
-        statuses << 'reality'
-      end
-      if post_aspect.problems.present?
-        self.status_problems = true
-        statuses << 'problems'
-      end
-      if self.concept_post_resources.by_type('positive_r').present?
-        self.status_positive_r = true
-        statuses << 'positive_r'
-      end
-      if self.concept_post_resources.by_type('negative_r').present?
-        self.status_negative_r = true
-        statuses << 'negative_r'
-      end
-      if self.concept_post_resources.by_type('control_r').present?
-        self.status_control_r = true
-        statuses << 'control_r'
-      end
+    if name.present?
+      self.status_name = true
+      statuses << 'name'
+    end
+    if content.present?
+      self.status_content = true
+      statuses << 'content'
+    end
+    if positive.present?
+      self.status_positive = true
+      statuses << 'positive'
+    end
+    if negative.present?
+      self.status_negative = true
+      statuses << 'negative'
+    end
+    if control.present?
+      self.status_control = true
+      statuses << 'control'
+    end
+    if obstacles.present?
+      self.status_obstacles = true
+      statuses << 'obstacles'
+    end
+    if reality.present?
+      self.status_reality = true
+      statuses << 'reality'
+    end
+    if problems.present?
+      self.status_problems = true
+      statuses << 'problems'
+    end
+    if self.concept_post_resources.by_type('positive_r').present?
+      self.status_positive_r = true
+      statuses << 'positive_r'
+    end
+    if self.concept_post_resources.by_type('negative_r').present?
+      self.status_negative_r = true
+      statuses << 'negative_r'
+    end
+    if self.concept_post_resources.by_type('control_r').present?
+      self.status_control_r = true
+      statuses << 'control_r'
     end
     statuses
   end
