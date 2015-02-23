@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150223132923) do
+ActiveRecord::Schema.define(version: 20150223142128) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -304,13 +304,13 @@ ActiveRecord::Schema.define(version: 20150223132923) do
 
   create_table "concept_votings", force: :cascade do |t|
     t.integer  "user_id"
-    t.integer  "concept_post_aspect_id"
+    t.integer  "concept_post_id"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "discontent_post_id"
   end
 
-  add_index "concept_votings", ["concept_post_aspect_id"], name: "index_concept_votings_on_concept_post_aspect_id", using: :btree
+  add_index "concept_votings", ["concept_post_id"], name: "index_concept_votings_on_concept_post_id", using: :btree
   add_index "concept_votings", ["user_id"], name: "index_concept_votings_on_user_id", using: :btree
 
   create_table "core_aspects", force: :cascade do |t|
@@ -1240,7 +1240,7 @@ ActiveRecord::Schema.define(version: 20150223132923) do
     t.text     "content"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "concept_post_aspect_id"
+    t.integer  "concept_post_id"
     t.text     "positive_r"
     t.text     "negative_r"
     t.text     "obstacles"
