@@ -5,7 +5,7 @@ class Concept::PostsController < PostsController
   autocomplete :concept_post, :resource, class_name: 'Concept::Post', full: true
 
   def voting_model
-    Concept::PostAspect
+    Concept::Post
   end
 
   def autocomplete_concept_post_resource
@@ -56,10 +56,9 @@ class Concept::PostsController < PostsController
     @concept_post = current_model.new
     @discontent_post = Discontent::Post.find(params[:dis_id]) unless params[:dis_id].nil?
     @resources = Concept::Resource.where(project_id: @project.id)
-    @pa = Concept::PostAspect.new
     if params[:improve_comment] and params[:improve_stage]
       @comment = get_comment_for_stage(params[:improve_stage], params[:improve_comment])
-      @pa.name = @comment.content if @comment
+      @concept_post.name = @comment.content if @comment
     end
     @remove_able = true
     respond_to do |format|
@@ -69,8 +68,7 @@ class Concept::PostsController < PostsController
   end
 
   def create
-    @concept_post = current_model.new
-    @post_aspect = Concept::PostAspect.new(params[:pa])
+    @concept_post = current_model.new params[:pa]
     unless params[:cd].nil?
       params[:cd].each do |cd|
         @concept_post.concept_post_discontents.build(discontent_post_id: cd[0], complite: cd[1][:complite], status: 0)
@@ -82,7 +80,6 @@ class Concept::PostsController < PostsController
       end
     end
 
-    @concept_post.post_aspects << @post_aspect
     @concept_post.user = current_user
     @concept_post.project = @project
     @concept_post.improve_comment = params[:improve_comment] if params[:improve_comment]
@@ -90,7 +87,7 @@ class Concept::PostsController < PostsController
 
     create_concept_resources_on_type(@project, @concept_post)
 
-    @concept_post.fullness_apply(@post_aspect, params[:resor])
+    @concept_post.fullness_apply(@concept_post, params[:resor])
 
     respond_to do |format|
       if @concept_post.save
@@ -120,9 +117,6 @@ class Concept::PostsController < PostsController
 
   def update
     @concept_post.update_status_fields(params[:pa])
-    @post_aspect = Concept::PostAspect.new(params[:pa])
-
-    @concept_post.post_aspects.destroy_all if @post_aspect.valid?
 
     unless params[:cd].nil?
       @concept_post.concept_post_discontents.destroy_all if @post_aspect.valid?
@@ -130,25 +124,16 @@ class Concept::PostsController < PostsController
         @concept_post.concept_post_discontents.build(discontent_post_id: cd[0], complite: cd[1][:complite], status: 0)
       end
     end
-    if @post_aspect.valid?
-      @concept_post.concept_post_resources.by_type('positive_r').destroy_all
-      @concept_post.concept_post_resources.by_type('positive_s').destroy_all
-      @concept_post.concept_post_resources.by_type('negative_r').destroy_all
-      @concept_post.concept_post_resources.by_type('negative_s').destroy_all
-      @concept_post.concept_post_resources.by_type('control_r').destroy_all
-      @concept_post.concept_post_resources.by_type('control_s').destroy_all
-    end
     unless params[:check_discontent].nil?
       @concept_post.concept_post_discontent_grouped.destroy_all if @post_aspect.valid?
       params[:check_discontent].each do |com|
         @concept_post.concept_post_discontent_grouped.build(discontent_post_id: com[0], status: 1)
       end
     end
-    @concept_post.post_aspects << @post_aspect
 
     create_concept_resources_on_type(@project, @concept_post)
 
-    @concept_post.fullness_apply(@post_aspect, params[:resor])
+    @concept_post.fullness_apply(@concept_post, params[:resor])
 
     respond_to do |format|
       if @concept_post.save

@@ -193,7 +193,7 @@ class Plan::PostsController < PostsController
 
           @cond.duplicate_plan_post_resources(@project, @concept)
         else
-          @concept = Concept::PostAspect.find(params[:concept_id])
+          @concept = Concept::Post.find(params[:concept_id])
           @cond = Plan::PostAspect.new
           @cond.plan_post = @post
           @cond.plan_post_stage = @post_stage
@@ -221,7 +221,7 @@ class Plan::PostsController < PostsController
       if params[:new_concept]
         @post_concept = Plan::PostAspect.new
       else
-        @post_concept = Concept::PostAspect.find(params[:concept_id])
+        @post_concept = Concept::Post.find(params[:concept_id])
       end
     end
   end
@@ -297,7 +297,7 @@ class Plan::PostsController < PostsController
       @post_stage = Plan::PostStage.find(params[:stage_id])
     else
       @dispost = Discontent::Post.find(params[:post_id])
-      @concept_post = Concept::PostAspect.find(params[:con_id])
+      @concept_post = Concept::Post.find(params[:con_id])
     end
   end
 
