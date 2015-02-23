@@ -1,8 +1,8 @@
 module CollectInfo::PostsHelper
   def trim_string(content, size = 200)
-    if content.length > size
+    if !content.nil? and content.length > size
       return content[0..size] + ' ...'
     end
-    return content
+    content
   end
 end

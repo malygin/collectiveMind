@@ -31,13 +31,9 @@ class Discontent::PostsController < PostsController
     if params[:asp]
       @aspect = Core::Aspect.find(params[:asp])
     else
-      unless params[:not_aspect] or params[:all_aspects]
-        redirect_to "/project/#{@project.id}/discontent/posts?asp=#{@project.proc_aspects.order("position DESC").first.id}"
-        return
-      end
+      @aspect = @project.proc_aspects.order('position DESC').first
     end
     @accepted_posts = @project.discontents.by_status([2, 4])
-    # @comments_all = @project.problems_comments_for_improve
     @page = params[:page]
     if params[:not_aspect]
       @posts = @project.discontents_without_aspect.by_status_for_discontent(@project).order("discontent_posts.id DESC").filter(filtering_params(params))
@@ -79,8 +75,8 @@ class Discontent::PostsController < PostsController
   def create
     @post = @project.discontents.build(discontent_post_params)
     @post.user = current_user
-    @post.improve_comment = params[:improve_comment] if params[:improve_comment]
-    @post.improve_stage = params[:improve_stage] if params[:improve_stage]
+    @post.improve_comment = params[:improve_comment]
+    @post.improve_stage = params[:improve_stage]
     @post.status = 4 if params[:required]
     if params[:discontent_post_aspects]
       @aspect_id = params[:discontent_post_aspects].first
@@ -88,14 +84,8 @@ class Discontent::PostsController < PostsController
         @post.discontent_post_aspects.build(aspect_id: asp.to_i)
       end
     end
-    respond_to do |format|
-      if @post.save
-        current_user.journals.build(type_event: 'discontent_post_save', anonym: @post.anonym, body: trim_content(@post.content), first_id: @post.id, project: @project).save!
-        # current_user.add_score(type: :add_discontent_post)
-        format.js
-      else
-        format.js
-      end
+    if @post.save
+      current_user.journals.create!(type_event: 'discontent_post_save', anonym: @post.anonym, body: trim_content(@post.content), first_id: @post.id, project: @project)
     end
   end
 
