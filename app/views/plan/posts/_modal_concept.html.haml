@@ -60,7 +60,11 @@
               -if post.concept_disposts.present?
                 .col-md-7
                   %span{id: "view_what_#{post.id}"}
-                    =post.post_aspect.title
+                    - if post.post_aspect.title!=''
+                      =post.post_aspect.title
+                    - else
+                      =t('show.without_name')
+
                 .col-md-2(class="td_plus_concept_#{post.post_aspect.id}")
                   -if plus_concept?(@post, @post_stage, post)
                     .label.label-success=t('form.plan.concept.add')

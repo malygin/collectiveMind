@@ -385,8 +385,8 @@ ru:
         new_ideas: 'Новые идеи:'
         select: 'Выберите нововведение:'
         add_empty: 'Добавить пустое нововведение'
-        show_decision: Показать решения
-        hide_decision: Скрыть решения
+        show_decision: Показать нововведения
+        hide_decision: Скрыть нововведения
         notice_prefix_empty: 'Поля не заполнены: '
         notice_prefix_adap: "Поля не адаптированы под текущий проект: "
         notice_prefix_note: "Поля, имеющие замечания от модератора: "

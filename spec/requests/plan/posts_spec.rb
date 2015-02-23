@@ -132,7 +132,7 @@ describe 'Plan ' do
         find('li#second a').click
         expect(page).to have_content 'Добавить нововведение'
         expect(page).to have_content 'Запланировать мероприятие'
-        click_link 'Добавить нововведение'
+        find('a#btn_new_concept.btn-warning').click
         expect(page).to have_content 'Добавление нововведений'
         expect(page).to have_content 'Добавить пустое нововведение'
       end
@@ -278,7 +278,7 @@ describe 'Plan ' do
         find('li#second a').click
         expect(page).to have_content 'Добавить нововведение'
         expect(page).to have_content 'Запланировать мероприятие'
-        click_link 'Добавить нововведение'
+        find('a#btn_new_concept.btn-warning').click
         expect(page).to have_content 'Добавление нововведений'
         expect(page).to have_content 'Добавить пустое нововведение'
       end
