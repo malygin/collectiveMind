@@ -10,16 +10,12 @@ describe 'CollectInfo::Answer', type: :model do
       expect(build(:collect_info_answer, content: nil)).to be_invalid
     end
 
-    it 'post' do
-      expect(build(:collect_info_answer, post: nil)).to be_invalid
-    end
-
     it 'project' do
       expect(build(:collect_info_answer, question: nil)).to be_invalid
     end
 
-    it 'style' do
-      expect(build(:collect_info_answer, style: nil)).to be_invalid
+    it 'correct' do
+      expect(build(:collect_info_answer, correct: nil)).to be_invalid
     end
   end
 end
