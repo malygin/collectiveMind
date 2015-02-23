@@ -1,5 +1,5 @@
 #modal_concept.modal.fade{"aria-hidden"=> "true", "data-backdrop"=> "false", "aria-labelledby"=> "myModalLabel", role: "dialog", tabindex: "-1"}
-  .modal-dialog.modal-lg
+  .modal-dialog.modal-xxl
     .modal-content
       .modal-header
         %button.btn.btn-primary.pull-right(type = "button" data-dismiss="modal")=t('form.close')
@@ -8,78 +8,106 @@
         #option_for_select_concept(project="#{@project.id}" post="#{@post.id}" stage="#{@post_stage ? @post_stage.id : nil}")
         = link_to t('form.plan.concept.add_empty'), add_form_for_concept_plan_post_path(@project, @post, stage_id: @post_stage, save_form: true), remote: true, method: :put, id: 'new_concept', class: 'btn btn-success pull-right'
         %br
-        -if @new_ideas.present?
-          %h4.color-green=t('form.plan.concept.new_ideas')
-          - @new_ideas.each_with_index do |post, ind|
-            .row.plus-concept(id="tr_plus_concept_#{post.id}")
-              .col-md-1
-                =ind+1
-              .col-md-8
-                - if post.title!=''
-                  =link_to view_concept_plan_post_path(@project, @post, con_id: post.id, new_idea: true), method: :get, remote: true, class: "color-teal", "data-toggle"=> "collapse", "data-target"=> "collapse_plus_concept_#{post.id}", style: "text-decoration:none;", id: "view_post_concept_#{post.id}" do
-                    =post.title
-                - else
-                  =t('show.without_name')
-              .col-md-2(class="td_plus_concept_#{post.id}")
-                -if plus_concept_new_idea?(@post, @post_stage, post)
-                  .label.label-success=t('form.plan.concept.add')
-              .col-md-1
-                .pull-right
-                  =link_to add_form_for_concept_plan_post_path(@project, @post, stage_id: @post_stage, concept_id: post.id, save_form: true, new_idea: true), method: :put, remote: true, id: "plus_post_concept_#{post.id}" do
-                    %button.btn.btn-sm.btn-warning{type: "button"}
-                      %i.fa.fa-plus
-            .concept-devider
-        %br
-        %h4.color-teal=t('form.plan.concept.select')
+        .row
+          .col-md-12
+            .col-md-6
+              -if @new_ideas.present?
+                %h4.color-green=t('form.plan.concept.new_ideas')
+                - @new_ideas.each_with_index do |post, ind|
+                  .row.plus-concept(id="tr_plus_concept_#{post.id}")
+                    .col-md-1
+                      =ind+1
+                    .col-md-8
+                      - if post.title!=''
+                        =link_to view_concept_plan_post_path(@project, @post, con_id: post.id, new_idea: true), method: :get, remote: true, class: "color-teal", "data-toggle"=> "collapse", "data-target"=> "collapse_plus_concept_#{post.id}", style: "text-decoration:none;", id: "view_post_concept_#{post.id}" do
+                          =post.title
+                      - else
+                        =t('show.without_name')
+                    .col-md-2(class="td_plus_concept_#{post.id}")
+                      -if plus_concept_new_idea?(@post, @post_stage, post)
+                        .label.label-success=t('form.plan.concept.add')
+                    .col-md-1
+                      .pull-right
+                        =link_to add_form_for_concept_plan_post_path(@project, @post, stage_id: @post_stage, concept_id: post.id, save_form: true, new_idea: true), method: :put, remote: true, id: "plus_post_concept_#{post.id}" do
+                          %button.btn.btn-sm.btn-warning{type: "button"}
+                            %i.fa.fa-plus
+                  .concept-devider
+              %br
+              %h4.color-teal=t('form.plan.concept.select')
 
-        %div(role="tabpanel")
-        %ul.nav.nav-tabs(role="tablist")
-          %li.active(role="presentation")
-            %a{href: "#tab_plan_discontents", "aria-controls" => "tab_plan_discontents", "data-toggle" => "tab", role: "tab"}
-              По несовершенствам
-          %li(role="presentation")
-            %a{href: "#tab_plan_concepts", "aria-controls" => "tab_plan_concepts", "data-toggle" => "tab", role: "tab"}
-              По нововведениям
-        %br
-        %br
-        .tab-content
-          #tab_plan_discontents.tab-pane.fade.in.active(role="tabpanel")
-            - @disposts.each do |post|
-              -if post.dispost_concepts.by_status(0).present?
-                %span{id: "view_what_#{post.id}"}
-                  %span.label(class="#{class_for_type_field(post,1)}" id="#{id_for_type_field(1)}_#{post.id}")=name_for_type_field(1)
-                  =post.content
-                %span
-                  =link_to view_concept_plan_post_path(@project, @post, stage_id: @post_stage, post_id: post.id, what_view: true), method: :get, remote: true, class: "color-teal pull-right", "data-toggle"=> "collapse", "data-target"=> "collapse_dis_concept_#{post.id}", style: "text-decoration:none;", id: "view_dis_concept_#{post.id}" do
-                    .label.label-success{id: "view_concepts_#{post.id}"}=t('form.plan.concept.show_decision')
-                %br
-                %br
+              %div.modal-plan-concepts-tabs(role="tabpanel")
+                %ul.nav.nav-tabs(role="tablist")
+                  %li.active(role="presentation")
+                    %a{href: "#tab_plan_discontents", "aria-controls" => "tab_plan_discontents", "data-toggle" => "tab", role: "tab"}
+                      По несовершенствам
+                  %li(role="presentation")
+                    %a{href: "#tab_plan_concepts", "aria-controls" => "tab_plan_concepts", "data-toggle" => "tab", role: "tab"}
+                      По нововведениям
 
-          #tab_plan_concepts.tab-pane.fade(role="tabpanel")
-            - @concepts.each do |post|
-              -if post.concept_disposts.present?
-                .col-md-7
-                  %span{id: "view_what_#{post.id}"}
-                    - if post.post_aspect.title!=''
-                      =post.post_aspect.title
-                    - else
-                      =t('show.without_name')
+              .tab-content
+                #tab_plan_discontents.tab-pane.fade.clearfix.in.active(role="tabpanel")
+                  - @disposts.each do |post|
+                    -if post.dispost_concepts.by_status(0).present?
+                      .row
+                        .col-md-8
+                          %span{id: "view_what_#{post.id}"}
+                            =post.content
+                        .col-md-4
+                          %span
+                            =link_to view_concept_plan_post_path(@project, @post, stage_id: @post_stage, post_id: post.id, what_view: true), method: :get, remote: true, class: "color-teal pull-right", "data-toggle"=> "collapse", "data-target"=> "collapse_dis_concept_#{post.id}", style: "text-decoration:none;" do
+                              .label.label-success{id: "view_concepts_#{post.id}"}=t('form.plan.concept.show_decision')
+                      %div{id: "view_dis_concept_#{post.id}"}
+                      .plan-devider
 
-                .col-md-2(class="td_plus_concept_#{post.post_aspect.id}")
-                  -if plus_concept?(@post, @post_stage, post)
-                    .label.label-success=t('form.plan.concept.add')
-                .col-md-2
-                  %span
-                    =link_to view_concept_plan_post_path(@project, @post, stage_id: @post_stage, con_id: post.id, what_view_concept: true), method: :get, remote: true, class: "color-teal pull-right", "data-toggle"=> "collapse", "data-target"=> "collapse_dis_concept_#{post.id}", style: "text-decoration:none;" do
-                      .label.label-success{id: "view_concepts_#{post.id}"} Показать несовершенства
-                .col-md-1
-                  .pull-right
-                    =link_to add_form_for_concept_plan_post_path(@project, @post, stage_id: @post_stage, concept_id: post.post_aspect.id, save_form: true), method: :put, remote: true, id: "plus_post_concept_#{post.id}" do
-                      %button.btn.btn-sm.btn-warning{type: "button"}
-                        %i.fa.fa-plus
-                %div{id: "view_dis_concept_#{post.id}"}
-                %br
-                %br
+
+                #tab_plan_concepts.tab-pane.fade(role="tabpanel")
+                  - @concepts.each do |post|
+                    -if post.concept_disposts.present?
+                      .row
+                        .col-md-7
+                          %span{id: "view_what_#{post.id}"}
+                            - if post.post_aspect.title!=''
+                              =post.post_aspect.title
+                            - else
+                              =t('show.without_name')
+
+                        .col-md-2(class="td_plus_concept_#{post.post_aspect.id}")
+                          -if plus_concept?(@post, @post_stage, post)
+                            .label.label-success=t('form.plan.concept.add')
+                        .col-md-2
+                          %span
+                            =link_to view_concept_plan_post_path(@project, @post, stage_id: @post_stage, con_id: post.id, what_view_concept: true), method: :get, remote: true, class: "color-teal pull-right", "data-toggle"=> "collapse", "data-target"=> "collapse_dis_concept_#{post.id}", style: "text-decoration:none;" do
+                              .label.label-success{id: "view_concepts_#{post.id}"} Показать несовершенства
+                        .col-md-1
+                          .pull-right
+                            =link_to add_form_for_concept_plan_post_path(@project, @post, stage_id: @post_stage, concept_id: post.post_aspect.id, save_form: true), method: :put, remote: true, id: "plus_post_concept_#{post.id}" do
+                              %button.btn.btn-sm.btn-warning{type: "button"}
+                                %i.fa.fa-plus
+                        %div{id: "view_dis_concept_#{post.id}"}
+                      .plan-devider
+
+
+            .col-md-6
+              -if @post.post_aspects.present?
+                %h4.color-green Добавленные нововведения
+                - @post.post_aspects.each_with_index do |post, ind|
+                  .row.plus-concept(id="tr_plus_concept_#{post.id}")
+                    .col-md-1
+                      =ind+1
+                    .col-md-10
+                      - if post.title!=''
+                        =link_to view_concept_plan_post_path(@project, @post, con_id: post.id, new_idea: true), method: :get, remote: true, class: "color-teal", "data-toggle"=> "collapse", "data-target"=> "collapse_plus_concept_#{post.id}", style: "text-decoration:none;", id: "view_post_concept_#{post.id}" do
+                          =post.title
+                      - else
+                        =t('show.without_name')
+                    .col-md-1
+                      .pull-right
+                        =link_to add_form_for_concept_plan_post_path(@project, @post, stage_id: @post_stage, concept_id: post.id, save_form: true, new_idea: true), method: :put, remote: true, id: "plus_post_concept_#{post.id}" do
+                          %button.btn.btn-sm.btn-danger{type: "button"}
+                            %i.fa.fa-minus
+                  .concept-devider
+              %br
+
 
         %br
         = link_to t('form.plan.concept.add_empty'), add_form_for_concept_plan_post_path(@project, @post, stage_id: @post_stage, save_form: true), remote: true, method: :put, id: 'new_concept', class: 'btn btn-success pull-right'
