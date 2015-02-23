@@ -31,4 +31,9 @@ FactoryGirl.define do
     sequence(:desc) { |n| "desc #{n}" }
     status 0
   end
+
+  factory :plan_voting, class: 'Plan::Voting' do
+    association :user
+    association :plan_post, factory: :plan
+  end
 end
