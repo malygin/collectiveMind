@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150223102817) do
+ActiveRecord::Schema.define(version: 20150223132923) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -163,24 +163,6 @@ ActiveRecord::Schema.define(version: 20150223102817) do
     t.datetime "updated_at"
   end
 
-  create_table "concept_post_aspects", force: :cascade do |t|
-    t.integer  "core_aspect_id"
-    t.integer  "concept_post_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.text     "positive"
-    t.text     "negative"
-    t.text     "control"
-    t.text     "name"
-    t.text     "content"
-    t.text     "reality"
-    t.text     "problems"
-    t.text     "positive_r"
-    t.text     "negative_r"
-    t.text     "title"
-    t.text     "obstacles"
-  end
-
   create_table "concept_post_discontent_complites", force: :cascade do |t|
     t.integer  "post_id"
     t.integer  "discontent_post_id"
@@ -284,6 +266,16 @@ ActiveRecord::Schema.define(version: 20150223102817) do
     t.boolean  "approve_status"
     t.integer  "fullness"
     t.boolean  "status_all"
+    t.integer  "core_aspect_id"
+    t.text     "positive"
+    t.text     "negative"
+    t.text     "control"
+    t.text     "name"
+    t.text     "problems"
+    t.text     "positive_r"
+    t.text     "negative_r"
+    t.text     "title"
+    t.text     "obstacles"
   end
 
   add_index "concept_posts", ["created_at"], name: "index_concept_posts_on_created_at", using: :btree
