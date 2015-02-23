@@ -1,6 +1,7 @@
 #= require jquery
 #= require jquery_ujs
 #= require jquery.ui.all
+#= require jquery.ui.autocomplete
 #= require jquery.remotipart
 # require brave/jquery.magnific-popup.min.js
 #= require jquery.autosize
@@ -15,7 +16,6 @@
 # require datepicker/bootstrap-datepicker
 #= require bootstrap3-editable/bootstrap-editable
 
-#= require autocomplete-rails
 #= require selectize
 #= require liFixar/jquery.liFixar
 # require nvd3/d3.v2
