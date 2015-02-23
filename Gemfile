@@ -72,6 +72,7 @@ group :development do
   gem 'rubycritic'
   gem 'traceroute'
   gem 'html2haml'
+  gem 'rails-erd'
 end
 
 group :production do
