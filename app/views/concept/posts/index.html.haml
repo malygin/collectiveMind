@@ -137,6 +137,7 @@
                     %td
                       %span.h4.color-orange
                         =status_for_concept(pa.post_aspects.first)
+
 .col-md-6#concept-comments-main{style:('display: none' if current_user.not_ready_for_concept?(@project))}
   %section
     %header

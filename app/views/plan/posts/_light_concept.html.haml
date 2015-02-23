@@ -17,30 +17,67 @@
   %div.collapse{id: "collapse_dis_concept_#{post.id}"}
     =render partial:'discontent/posts/post_short2', object: post
     %br
-    - post.dispost_concepts.by_status(0).each_with_index do |pa, index|
+    - post.dispost_concepts.by_status(0).sort_by{|c| c.complite(post).nil? ? 0 : -c.complite(post)}.each_with_index do |pa, index|
       .row.plus-concept(id="tr_plus_concept_#{post.id}_#{pa.post_aspects.first.id}")
         .col-md-1
           =index+1
-        .col-md-8
+        .col-md-6
           - if pa.post_aspects.first.title!=''
             =link_to view_concept_plan_post_path(@project, @post, post_id: post.id, con_id: pa.post_aspects.first.id), method: :get, remote: true, class: "color-teal", "data-toggle"=> "collapse", "data-target"=> "collapse_plus_concept_#{post.id}_#{pa.post_aspects.first.id}", style: "text-decoration:none;", id: "view_post_concept_#{post.id}_#{pa.post_aspects.first.id}" do
               =pa.post_aspects.first.title
           - else
             =t('show.without_name')
+        .col-md-2
+          =status_for_complite_discontent(post, pa)
         .col-md-2(class="td_plus_concept_#{pa.post_aspects.first.id}")
-          -if plus_concept?(@post_stage,pa)
+          -if plus_concept?(@post, @post_stage, pa)
             .label.label-success=t('form.plan.concept.add')
         .col-md-1
           .pull-right
-            =link_to add_form_for_concept_plan_post_path(@project, @post,stage_id: @post_stage.id, concept_id: pa.post_aspects.first.id, save_form: true), method: :put, remote: true, id: "plus_post_concept_#{pa.id}" do
+            =link_to add_form_for_concept_plan_post_path(@project, @post, stage_id: @post_stage, concept_id: pa.post_aspects.first.id, save_form: true), method: :put, remote: true, id: "plus_post_concept_#{pa.id}" do
               %button.btn.btn-sm.btn-warning{type: "button"}
                 %i.fa.fa-plus
       .concept-devider
+
+-elsif what_view_concept
+  %div.collapse{id: "collapse_dis_concept_#{post.id}"}
+    -if post.post_aspect.name.present?
+      .text-left
+        .color-teal
+          %b A1.
+          =t('form.concept.novation_what')
+        %p
+          =post.post_aspect.name
+    -if post.post_aspect.content.present?
+      .color-teal
+        %b A2.
+        =t('form.concept.novation_how')
+      %p
+        =post.post_aspect.content
+    -if post.post_aspect.positive.present?
+      .color-teal
+        %b B1.
+        =t('form.concept.cond')
+      %p
+        =post.post_aspect.positive
+    %br
+    %br
+    - post.concept_disposts.sort_by{|c| c.complite(post).nil? ? 0 : -c.complite(post)}.each_with_index do |dispost, index|
+      .row.plus-concept(id="tr_plus_concept_#{dispost.id}_#{post.post_aspect.id}")
+        .col-md-1
+          =index+1
+        .col-md-8
+          =dispost.content
+        .col-md-3
+          =level_complite(dispost)
+      .concept-devider
+
 -else
   -if params[:new_idea]
     -@id_collapse = "collapse_plus_concept_#{light_concept.id}"
   -else
     -@id_collapse = "collapse_plus_concept_#{dispost.id}_#{light_concept.id}"
+
   %div.collapse.text-left{id: @id_collapse}
     -if light_concept.name.present?
       .color-teal

@@ -75,6 +75,10 @@ class Concept::Post < ActiveRecord::Base
     self.post_aspects.first.discontent_aspect_id
   end
 
+  def post_aspect
+    self.post_aspects.first
+  end
+
   def update_status_fields(pa)
     if self.post_aspects.first
       if self.post_aspects.first.read_attribute('name') != pa['name']

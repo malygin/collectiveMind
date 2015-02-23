@@ -12,15 +12,19 @@ module Plan::PostsHelper
     end
   end
 
-  def plus_concept?(stage,concept)
-    if stage.plan_post_aspects.pluck(:concept_post_aspect_id).include? concept.post_aspects.first.id
+  def plus_concept?(post, stage, concept)
+    if stage and stage.plan_post_aspects.pluck(:concept_post_aspect_id).include? concept.post_aspects.first.id
+      return true
+    elsif post.post_aspects_without_stage.pluck(:concept_post_aspect_id).include? concept.post_aspects.first.id
       return true
     end
     false
   end
 
-  def plus_concept_new_idea?(stage,concept)
-    if stage.plan_post_aspects.pluck(:id).include? concept.id
+  def plus_concept_new_idea?(post, stage, concept)
+    if stage and stage.plan_post_aspects.pluck(:id).include? concept.id
+      return true
+    elsif post.post_aspects_without_stage.pluck(:id).include? concept.id
       return true
     end
     false

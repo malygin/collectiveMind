@@ -1,5 +1,47 @@
+=link_to add_concept_plan_post_path(@project, @post), :method => :put, :remote => true, :class => "btn btn-md btn-warning pull-right", :id => "btn_new_concept_for_plan", :style => "font-weight: normal;width:200px;" do
+  =t('form.plan.add_concept')
+%h3 Добавить нововведения к проекту
+#concept_plan_all
+  %table.table.table-striped.table-bordered
+    %thead
+      %tr
+        %th
+          ="#"
+        %th(style="width: 70%;")
+          =t('form.plan.concepts')
+        %th
+          Этапы
+    %tbody(id="table_plan_all")
+      -@post.post_aspects_without_stage.each_with_index do |post_concept, index|
+        %tr(id="tr_plan_all_concept_#{post_concept.id}")
+          %td
+            =index+1
+          %td
+            .pull-right
+              =link_to edit_concept_plan_post_path(@project, @post, con_id: post_concept.id, edit_concept: true), method: :put, remote: true, id: "edit_post_concept_#{post_concept.id}" do
+                %button.btn.btn-sm.btn-warning{type: "button"}
+                  %i.fa.fa-pencil
+              =link_to destroy_concept_plan_post_path(@project, @post, con_id: post_concept.id, stage_id: @post_stage), method: :delete, remote: true, data: {confirm: t('confirm.delete_concept')}, id: "destroy_post_concept_#{post_concept.id}" do
+                %button.btn.btn-sm.btn-danger{type: "button"}
+                  %i.fa.fa-trash-o
+            =link_to view_concept_table_plan_post_path(@project, @post, con_id: post_concept.id), method: :get, remote: true,class: "color-white", style: "text-decoration:none;border-bottom: 1px dashed #fafbfc;", id: "view_post_concept_table_#{post_concept.id}" do
+              %span.h5{id: "name_post_concept_#{post_concept.id}"}
+                =post_concept.title
+            %br
+            %div{:id => "content_post_concept_#{post_concept.id}"}
+              =post_concept.name
+            %br
+            %div{id: "validate_concept_#{post_concept.id}"}
+              = check_validate_concept(post_concept).html_safe if check_validate_concept(post_concept)
+          %td
+            -if @post_stages
+              = select_tag "select_plan_stages_for_#{post_concept.id}", options_from_collection_for_select(@post_stages, "id", "name"), prompt: "Выберите этап", class: "select_plan_stages form-control", data: {project: @project.id, post: @post.id, concept: post_concept.id}
+
+
+%br
+%br
 - unless @post.post_stages.nil?
-  -@post.post_stages.each_with_index do |stage,ind|
+  -@post.post_stages.each_with_index do |stage, ind|
     %div(class="td_stage_#{stage.id}")
       %h3
         %span="#{t('form.plan.stage.doc')} #{ind+1}. "
@@ -36,7 +78,8 @@
                     %button.btn.btn-sm.btn-danger{:type => "button"}
                       %i.fa.fa-trash-o
                 =link_to view_concept_table_plan_post_path(@project, @post, :con_id => concept.id), :method => :get, :remote => true,:class => "color-white", :style => "text-decoration:none;border-bottom: 1px dashed #fafbfc;", :id => "view_post_concept_table_#{concept.id}" do
-                  %span.h5{:id => "name_post_concept_#{concept.id}"}=concept.title
+                  %span.h5{:id => "name_post_concept_#{concept.id}"}
+                    =concept.title
                 %br
                 %div{:id => "content_post_concept_#{concept.id}"}
                   =concept.name

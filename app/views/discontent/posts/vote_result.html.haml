@@ -15,7 +15,7 @@
 -@posts.each do |post|
   .row
     .col-md-6
-      =render partial:'post_vote', object: post
+      =render partial: 'post_vote', object: post
     .col-md-1.color-green
       %i.fa.fa-thumbs-up=post.final_votings.by_positive.not_admins.uniq_user.size
     .col-md-1.color-red

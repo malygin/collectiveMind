@@ -4,6 +4,7 @@ class Plan::Post < ActiveRecord::Base
   attr_accessible :goal, :step, :name, :estimate_status, :status, :content
 
   has_many :post_aspects, foreign_key: 'plan_post_id', class_name: 'Plan::PostAspect'
+  has_many :post_aspects_without_stage, -> { where plan_post_aspects: {post_stage_id: nil} }, class_name: 'Plan::PostAspect', foreign_key: 'plan_post_id'
 
   # @todo кандидат на удаление, нигде не используется?
   #scope :post_aspects_first, -> { joins(:post_aspects).where('post_aspects.first_stage = ?', 1) }

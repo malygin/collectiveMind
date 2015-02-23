@@ -223,6 +223,7 @@ scope '/project/:project' do
         put :new_note
         put :create_note
         put :destroy_note
+        put :transfer_concept
       end
     end
   end

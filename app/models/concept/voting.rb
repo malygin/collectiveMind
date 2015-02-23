@@ -7,6 +7,7 @@ class Concept::Voting < ActiveRecord::Base
   scope :uniq_user, -> { select('distinct user_id') }
   scope :by_dispost, ->(p) { where(discontent_post_id: p) }
   scope :by_posts_vote, ->(posts) { where("concept_votings.discontent_post_id IN (#{posts})") unless posts.empty? }
+  scope :not_admins, -> { joins(:user).where("users.type_user NOT IN (?) or users.type_user IS NULL", User::TYPES_USER[:admin]) }
 
   def self.by_project_votings(project)
     joins(:discontent_post).

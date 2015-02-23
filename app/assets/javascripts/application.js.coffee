@@ -67,6 +67,8 @@ $ ->
 
   post_form()
 
+  plan_stage()
+
   notificate_news()
   notifications()
   editable_groups()

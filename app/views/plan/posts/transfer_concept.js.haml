@@ -1,0 +1,3 @@
+alert("Нововведение успешно добавлено к этапу");
+$("#tr_plan_all_concept_#{@post_aspect.id}").remove();
+$("#{escape_javascript(render partial: 'post_concept', object: @post_aspect )}").insertBefore('#tr_new_concept_#{@post_stage.id}');

@@ -51,6 +51,21 @@ $('#tab_posts li#new a').on "click", (e) ->
   $('#modal_stage').on('keyup', 'input.name-stage', this.activate_button)
 
 
+@plan_stage = ->
+  this.select_plan_stages = ->
+    project_id = $(this).data('project')
+    post_id = $(this).data('post')
+    concept_id = $(this).data('concept')
+    val = this.value
+    if project_id and post_id and concept_id and val
+      $.ajax
+        url: "/project/#{project_id}/plan/posts/#{post_id}/transfer_concept"
+        type: "put"
+        data:
+          con_id: concept_id
+          stage_id: val
+
+  $('#table_stages').on('change', '.select_plan_stages', this.select_plan_stages)
 
 @estimate_stage = ->
   $("select.estimate_select").each ->

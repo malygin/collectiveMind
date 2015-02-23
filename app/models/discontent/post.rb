@@ -227,4 +227,13 @@ class Discontent::Post < ActiveRecord::Base
     end
     one_posts | many_posts
   end
+
+  def self.discontents_for_plan(project)
+    includes(:final_votings).
+        group('"discontent_posts"."id","discontent_votings"."id"').
+        where('"discontent_posts"."project_id" = ? and "discontent_posts"."status" = 4', project).
+        where('"discontent_votings"."against" = true OR "discontent_votings"."against" IS NULL')
+        .references(:discontent_votings)
+        .order('count(distinct "discontent_votings"."user_id") DESC NULLS LAST')
+  end
 end

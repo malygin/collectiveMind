@@ -1,7 +1,12 @@
 -if @save_form
   -if @cond
     alert("#{t('form.plan.concept.create_success')}");
-    $("#{escape_javascript(render partial: 'post_concept', object: @cond )}").insertBefore('#tr_new_concept_#{@post_stage.id}');
+    -if @post_stage
+      $("#{escape_javascript(render partial: 'post_concept', object: @cond )}").insertBefore('#tr_new_concept_#{@post_stage.id}');
+    -else
+      $("#table_plan_all").append("#{escape_javascript(render partial: 'post_concept', object: @cond )}");
+      -#plan_stage();
+
     -if @concept
       $('.td_plus_concept_#{@concept.id}').html('<div class="label label-success">#{t('form.plan.concept.add')}</div>')
     -else
@@ -12,7 +17,9 @@
       $('#modal_edit_concept').modal('show');
       $('textarea').autosize();
       resources();
+
   -else
     alert("#{t('form.plan.concept.create_fail')}");
+
 - else
   $('#aspect_concepts').html("#{escape_javascript(render partial: 'form_for_light_concept', object: @post_concept )}");
