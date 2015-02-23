@@ -5,6 +5,7 @@ class Estimate::Post < ActiveRecord::Base
   attr_accessor :first_c, :second_c, :third_c, :max_score, :sum_score
 
   belongs_to :post, class_name: 'Plan::Post'
+  belongs_to :project, class_name: 'Core::Project'
 
   has_many :post_aspects
   has_many :plan_post_aspects, class_name: 'Plan::PostAspect'
