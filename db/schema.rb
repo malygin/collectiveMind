@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150219180725) do
+ActiveRecord::Schema.define(version: 20150223102817) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -164,7 +164,7 @@ ActiveRecord::Schema.define(version: 20150219180725) do
   end
 
   create_table "concept_post_aspects", force: :cascade do |t|
-    t.integer  "discontent_aspect_id"
+    t.integer  "core_aspect_id"
     t.integer  "concept_post_id"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -1236,7 +1236,7 @@ ActiveRecord::Schema.define(version: 20150219180725) do
   end
 
   create_table "plan_post_aspects", force: :cascade do |t|
-    t.integer  "discontent_aspect_id"
+    t.integer  "core_aspect_id"
     t.integer  "plan_post_id"
     t.text     "positive"
     t.text     "negative"
