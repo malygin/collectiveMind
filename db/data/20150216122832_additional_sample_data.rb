@@ -28,9 +28,8 @@ class AdditionalSampleData < SeedMigration::Migration
   def down
     Core::Project.destroy_all
     ActiveRecord::Base.connection.reset_pk_sequence! 'core_projects'
-    project.aspects.destroy_all
     ActiveRecord::Base.connection.reset_pk_sequence! 'core_aspects'
-    User.destroy_all
+    User.where(email: 'admin@mass-decision.ru').destroy_all
     ActiveRecord::Base.connection.reset_pk_sequence! 'users'
   end
 end
