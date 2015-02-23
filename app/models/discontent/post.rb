@@ -49,8 +49,13 @@ class Discontent::Post < ActiveRecord::Base
   scope :sort_date, -> sort_date { sort_date == 'up' ? order('discontent_posts.created_at DESC') : order('discontent_posts.created_at ASC') if sort_date.present? }
   scope :sort_user, -> sort_user { sort_user == 'up' ? order('discontent_posts.user_id DESC') : order('discontent_posts.user_id ASC') if sort_user.present? }
   scope :sort_view, -> sort_view { sort_view == 'up' ? order('discontent_posts.number_views DESC') : order('discontent_posts.number_views ASC') if sort_view.present? }
-  pg_search_scope :autocomplete,
-                  against: [:whend, :whered],
+  pg_search_scope :autocomplete_whend,
+                  against: [:whend],
+                  using: {
+                      tsearch: {prefix: true}
+                  }
+  pg_search_scope :autocomplete_whered,
+                  against: [:whered],
                   using: {
                       tsearch: {prefix: true}
                   }

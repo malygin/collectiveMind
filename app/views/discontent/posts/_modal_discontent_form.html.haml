@@ -27,8 +27,8 @@
             .row
               .col-md-12
                 #mod2
-                = f.autocomplete_field :whered, discontent_autocomplete_discontent_post_whend_discontent_posts_path,
-                fields: [whend: '#whend_value'], append_to: '#mod2', style: 'height: 44px', class: 'form-control autocomplete', placeholder: t('form.discontent.field_where_promt')
+                = f.text_field :whered, style: 'height: 44px', class: 'form-control autocomplete', placeholder: t('form.discontent.field_where_promt'),
+                'data-url' => discontent_autocomplete_path(@project, field: 'whered')
                 %br
                 %br
             .row
@@ -42,8 +42,8 @@
                 #whend_value
                   whend
                 #mod
-                = f.autocomplete_field :whend, discontent_autocomplete_discontent_post_whend_discontent_posts_path, :'min-length' => 0, append_to: '#mod', style: 'height: 44px',
-                class: 'form-control autocomplete', placeholder: t('form.discontent.field_when_promt'), fields: [whend: '#whend_value']
+                = f.text_field :whend, style: 'height: 44px', 'data-url' => discontent_autocomplete_path(@project, field: 'whend'),
+                class: 'form-control autocomplete', placeholder: t('form.discontent.field_when_promt')
                 %br
                 %br
             .row

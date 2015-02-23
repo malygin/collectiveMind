@@ -1,29 +1,12 @@
 class Discontent::PostsController < PostsController
-
-  #@todo Здесь все еще нужен будет автокомплит? Если да, то лучше использовать полнотекстовый постгрес поиск
-  require 'similar_text'
-  require 'set'
-  autocomplete :discontent_post, :whend, class_name: 'Discontent::Post', full: true
-  autocomplete :discontent_post, :whered, class_name: 'Discontent::Post', full: true
-  #@todo объединить autocomplete в один метод
-  def autocomplete_discontent_post_whend
-    pr=Set.new
-    pr.merge(Discontent::PostWhen.where(project_id: params[:project]).map { |d| {value: d.content} })
-    if params[:term].length > -1
-      pr.merge(Discontent::Post.select('DISTINCT whend as value').where('LOWER(whend) like LOWER(?)', "%#{params[:term]}%")
-                   .where(project_id: params[:project]).map { |d| {value: d.value} })
+  #@todo Discontent::PostWhen в ресурсы? или просто искать по ним?
+  def autocomplete
+    field = params[:field]
+    if current_model.column_names.include? field
+      render json: current_model.send("autocomplete_#{field}", params[:term]).map { |post| {value: post.send(field)} }
+    else
+      render json: []
     end
-    render json: pr
-  end
-
-  def autocomplete_discontent_post_whered
-    pr=Set.new
-    pr.merge(Discontent::PostWhere.where(project_id: params[:project]).map { |d| {value: d.content} })
-    if params[:term].length > -1
-      pr.merge(Discontent::Post.select('DISTINCT whered as value').where('LOWER(whered) like LOWER(?)', "%#{params[:term]}%")
-                   .where(project_id: params[:project]).map { |d| {value: d.value} })
-    end
-    render json: pr
   end
 
   def index

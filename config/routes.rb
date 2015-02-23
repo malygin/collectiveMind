@@ -40,12 +40,6 @@ CollectiveMind::Application.routes.draw do
     end
   end
 
-  def autocomplete_routes
-    #get 'autocomplete', to: 'posts#autocomplete'
-    get :autocomplete_discontent_post_whend_discontent_posts, to: 'discontent/posts#autocomplete_discontent_post_whend'
-    get :autocomplete_discontent_post_whered_discontent_posts, to: 'discontent/posts#autocomplete_discontent_post_whered'
-  end
-
   devise_for :users
   get '/project/:id', to: 'core/projects#show'
   get '/general_news', to: 'core/projects#news'
@@ -162,7 +156,7 @@ CollectiveMind::Application.routes.draw do
 
     namespace :discontent do
       posts_routes
-      autocomplete_routes
+      get 'autocomplete', to: 'posts#autocomplete'
       resources :posts do
         member do
           put :remove_union

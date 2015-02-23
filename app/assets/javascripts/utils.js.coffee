@@ -332,3 +332,9 @@ $('#tab_posts li#new a').on "click", (e) ->
       data:
         check_field: check_field
         status: status
+
+@start_autocomplete = ->
+  $('.autocomplete').each ->
+    console.log($(this).attr('data-url'))
+    $(this).autocomplete(source: $(this).attr('data-url'))
+    return
