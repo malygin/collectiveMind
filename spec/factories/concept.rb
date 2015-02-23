@@ -1,9 +1,12 @@
 FactoryGirl.define do
   factory :concept, class: 'Concept::Post' do
+    association :user
+    association :project, factory: :core_project
     status 0
 
     after :create do |post|
       discontent = create :discontent, project: post.project, status: 4
+      #@todo почему мы передаем туда дисконтент? а не аспект?
       create :concept_aspect, core_aspect_id: discontent.id, concept_post_id: post.id
       create :concept_post_discontent, post_id: post.id, discontent_post_id: discontent.id
     end
@@ -28,5 +31,11 @@ FactoryGirl.define do
 
     association :user, factory: :ordinary_user
     association :post, factory: :concept
+  end
+
+  factory :concept_voting, class: 'Concept::Voting' do
+    association :user
+    association :discontent_post, factory: :discontent
+    association :concept_post_aspect, factory: :concept_aspect
   end
 end

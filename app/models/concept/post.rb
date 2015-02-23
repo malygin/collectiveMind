@@ -11,6 +11,8 @@ class Concept::Post < ActiveRecord::Base
   has_many :concept_post_discontent_grouped, -> { where concept_post_discontents: {status: [1]} }, class_name: 'Concept::PostDiscontent'
   has_many :advices, class_name: 'Advice', as: :adviseable
 
+  validates :status, presence: true
+
   scope :stat_fields_negative, ->(p) { where(id: p).where("status_name = 'f' or status_content = 'f' or status_negative = 'f'
             or status_positive = 'f' or status_control = 'f' or status_obstacles = 'f' or status_reality = 'f' or status_problems = 'f' ") }
   scope :stat_fields_positive, ->(p) { where(id: p).where("status_name = 't' and status_content = 't' and status_negative = 't'

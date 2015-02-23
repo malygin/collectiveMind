@@ -6,7 +6,6 @@ describe 'Concept::Post', type: :model do
   end
 
   context 'invalid without' do
-
     it 'status' do
       expect(build(:concept, status: nil)).to be_invalid
     end
@@ -21,7 +20,7 @@ describe 'Concept::Post', type: :model do
   end
 
   it 'by project' do
-    post1 = create :concept
+    create :concept
     post2 = create :concept
     post3 = create :concept, project: post2.project
     expect(Concept::Post.by_project(post2.project.id)).to match_array([post2, post3])

@@ -3,6 +3,7 @@ class Concept::PostAspect < ActiveRecord::Base
 
   belongs_to :concept_post, class_name: 'Concept::Post', foreign_key: :concept_post_id
   belongs_to :discontent, class_name: 'Discontent::Post', foreign_key: :core_aspect_id
+  belongs_to :core_aspect, class_name: 'Core::Aspect'
 
   has_many :voted_users, through: :final_votings, source: :user
   has_many :final_votings, foreign_key: 'concept_post_aspect_id', class_name: 'Concept::Voting'
