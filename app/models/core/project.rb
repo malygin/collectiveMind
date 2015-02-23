@@ -33,6 +33,8 @@ class Core::Project < ActiveRecord::Base
   has_many :news, class_name: 'News'
   #has_many :project_score_users, class_name: 'User', through: :core_project_scores, source: :user
 
+  after_create { build_settings.save }
+
   default_scope { order('id DESC') }
   scope :club_projects, ->(user) { where(type_access: TYPE_ACCESS_CODE[:club]) if user.cluber? or user.boss? }
   scope :active_proc, -> { where('core_projects.status < ?', STATUS_CODES[:complete]) }

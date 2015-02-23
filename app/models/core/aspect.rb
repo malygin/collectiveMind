@@ -58,12 +58,11 @@ class Core::Aspect < ActiveRecord::Base
   end
 
   def aspect_discontent
-    Discontent::Post.joins(:post_aspects).
-        where("discontent_post_aspects.aspect_id = ?", self.id)
+    Discontent::Post.joins(:post_aspects).where(discontent_post_aspects: {aspect_id: id})
   end
 
   def question_complete(project, user)
-    self.questions.joins("INNER JOIN collect_info_user_answers ON collect_info_user_answers.question_id = collect_info_questions.id").where('collect_info_user_answers.user_id = ?', user.id).by_project(project.id).by_status(0).select("distinct collect_info_questions.id")
+    questions.joins(:user_answers).where(collect_info_user_answers: {user_id: user.id}).by_project(project).by_status(0).select('distinct collect_info_questions.id')
   end
 
   def color
