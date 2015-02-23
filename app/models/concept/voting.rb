@@ -3,7 +3,7 @@ class Concept::Voting < ActiveRecord::Base
   belongs_to :concept_post, class_name: 'Concept::Post'
   belongs_to :discontent_post, class_name: 'Discontent::Post'
 
-  validates :user_id, :concept_post_aspect_id, :discontent_post_id, presence: true
+  validates :user_id, :concept_post_id, :discontent_post_id, presence: true
 
   scope :uniq_user, -> { select('distinct user_id') }
   scope :by_discontent, ->(discontent) { where(discontent_post_id: discontent.id) }

@@ -11,7 +11,7 @@ describe 'Concept::Voting', type: :model do
     end
 
     it 'post_aspect' do
-      expect(build(:concept_voting, concept_post_aspect_id: nil)).to be_invalid
+      expect(build(:concept_voting, concept_post_id: nil)).to be_invalid
     end
 
     it 'discontent post' do
