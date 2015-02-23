@@ -14,13 +14,13 @@ describe 'Knowbase ' do
     @aspect2 = create :aspect, project: project
   end
 
-  context 'knowbase post view sign in user ' do
+  context 'sign in user' do
     before do
       sign_in user
       visit knowbase_posts_path(project)
     end
 
-    context 'visit knowbase posts as user' do
+    context 'visit knowbase posts' do
       it ' has all tags' do
         expect(page).to have_selector("span#edit_knowbase_post_title_#{@post1.id}", @post1.title)
         expect(page).to have_selector("div#edit_knowbase_post_content_#{@post1.id}", @post1.content)
@@ -34,7 +34,7 @@ describe 'Knowbase ' do
       end
     end
 
-    context 'visit knowbase post 2' do
+    context 'show knowbase post' do
       before do
         visit knowbase_post_path(project, @post2)
       end
@@ -48,7 +48,7 @@ describe 'Knowbase ' do
     end
   end
 
-  context 'knowbase post view sign in admin ' do
+  context 'sign in moderator' do
     before do
       sign_in moderator
       visit knowbase_posts_path(project)

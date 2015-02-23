@@ -105,10 +105,6 @@ describe 'Users ' do
     end
   end
 
-  context 'moderator sign in ' do
-
-  end
-
   context 'expert sign in' do
     before do
       sign_in expert
