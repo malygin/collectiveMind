@@ -11,8 +11,11 @@ FactoryGirl.define do
     factory :club_project do
       type_access Core::Project::TYPE_ACCESS_CODE[:club]
     end
-    factory :core_project_user, class: 'Core::ProjectUser' do
-    end
+  end
+
+  factory :core_project_user, class: 'Core::ProjectUser' do
+    association :user
+    association :core_project
   end
 
   factory :aspect, class: 'Core::Aspect' do
