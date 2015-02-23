@@ -6,27 +6,30 @@
     %i.fa.fa-question-circle
   .container
     .row.innovs#tab_concept_posts
-      - @project.concept_ongoing_post.order('concept_posts.id').each_with_index  do |pa, index1|
+      = link_to 'Добавить нововведение', new_concept_post_path(@project), class: 'btn btn-success'
+      %br
+      - @project.concept_ongoing_post.order('concept_posts.id').each_with_index do |pa, index1|
         .col-lg-6.box-shadow-outer.concept-block{id: "concept_post_#{pa.id}", class: "#{post_discontent_classes(pa)}"}
           .innov-single.box-shadow-1.rounded-3
             .row.post-header
               .col-xs-10
                 %span.post-header-text.color.mass-red
                   %i.fa.fa-check-circle.color.mass-red
-                  = trim_content(pa.post_aspects.first.title)
+                  = trim_content(pa.title)
               .col-xs-2.post-header-date
                 %span
                   = Russian::strftime(pa.created_at, '%d.%m.%Y')
             .post-center-block
               .post-poster
-                = image_tag pa.user.avatar.url(:thumb)
+                -#@todo Пофиксить аватарку!
+                /= image_tag pa.user.avatar.url(:thumb)
                 .clearfix
                 %span.poster-name
                   = pa.user.to_s
               = link_to({action: :show, project: @project, id: pa.id, asp: params[:asp]}, remote: true, id: 'add_record', class: 'post-text') do
                 .text-arrow.pull-right
                 %span
-                  = trim_string(pa.post_aspects.first.name)
+                  = trim_string(pa.name)
             .post-themes{id: "stripe#{index1+1}"}
               - if pa.concept_disposts.any?
                 - pa.concept_disposts.each_with_index do |cd, index2|

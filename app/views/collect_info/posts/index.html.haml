@@ -3,19 +3,18 @@
     .block-content
       %ul.nav.nav-tabs
         %li.active
-          %button.btn.btn-round.btn-gray.uncolored-arrow{"data-toggle" => "tab", :href => "#tab-0"}
+          %button.btn.btn-round.btn-gray.uncolored-arrow{'data-toggle' => 'tab', href: '#tab-0'}
             %i.fa.fa-wrench.fa-2x
-
-        -@project.main_aspects.order(:id).each_with_index do |asp, index|
+        - @project.main_aspects.order(:id).each_with_index do |asp, index|
           %li.li_aspect{id: "li_aspect_#{asp.id}"}
-            %button.btn.btn-round{id: "aspect_#{asp.id}", "data-toggle" => "tab", :href => "#tab-#{index+1}", style: "color:#ffffff;background:#{asp.color};border:1px solid #{asp.color};"}
-              %span= asp.short_name.present? ? asp.short_name.upcase : asp.content[0,2].mb_chars.upcase
+            %button.btn.btn-round{id: "aspect_#{asp.id}", 'data-toggle' => 'tab', href: "#tab-#{index + 1}", style: "color:#ffffff;background:#{asp.color};border:1px solid #{asp.color};"}
+              %span
+                = asp.short_name.present? ? asp.short_name.upcase : asp.content[0,2].mb_chars.upcase
               %span{id: "check_question_#{asp.id}"}
-                -if asp.question_complete(@project, current_user).count == asp.questions.by_project(@project.id).by_status(0).count
-                  %i.fa.fa-check{style: "font-size:15px;margin:0;"}
-                -else
-                  %i.fa.fa-question{style: "font-size:15px;margin:0;"}
-
+                - if @count_aspects_check > 0
+                  %i.fa.fa-check{style: 'font-size:15px;margin:0;'}
+                - else
+                  %i.fa.fa-question{style: 'font-size:15px;margin:0;'}
       .tab-content
         #tab-0.tab-pane.active.fade.in
           .rounded-2.info-section.point
@@ -34,9 +33,10 @@
               %li Переходите к следующему аспекту
               %li Проголосуйте за самые важные на ваш взгляд аспекты (будет доступно в конце стадии)
 
-        -@project.main_aspects.order("core_aspects.id").each_with_index do |asp, index|
-          %div.tab-pane.fade{id: "tab-#{index+1}", style: "border:1px solid #{asp.color};"}
-            .top-colored-bar.padd-5{style: "background:#{asp.color};"}= asp.content
+        - @project.main_aspects.order('core_aspects.id').each_with_index do |asp, index|
+          %div.tab-pane.fade{id: "tab-#{index + 1}", style: "border:1px solid #{asp.color};"}
+            .top-colored-bar.padd-5{style: "background:#{asp.color};"}
+              = asp.content
             .container
               .row
                 .col-md-8.col-sm-8.tab-image-block
@@ -55,20 +55,20 @@
                     Неправильный ответ!
                     Воспользуйтесь подсказкой
                     %span.close-button
-                  - asp.questions.by_project(@project.id).by_status(0).order("collect_info_questions.id").each_with_index do |question, ind|
-                    -unless question.answers_users.by_project(@project.id).by_user(current_user.id).present?
-                      %div{id: "question_#{question.id}", style: "#{'display:none;' if asp.questions.by_project(@project.id).by_status(0).by_complete(asp.question_complete(@project, current_user).pluck(:id)).order("collect_info_questions.id").first != question}"}
+                  - asp.questions.by_project(@project).by_status(0).order('collect_info_questions.id').each_with_index do |question, ind|
+                    - unless question.answers_users.by_project(@project.id).by_user(current_user.id).present?
+                      %div{id: "question_#{question.id}", style: "#{'display:none;' if asp.questions.by_project(@project.id).by_status(0).by_complete(asp.question_complete(@project, current_user).pluck(:id)).order('collect_info_questions.id').first != question}"}
                         .rounded-1.hint.close-notice{id:"hint_question_#{question.id}"}
-                          =question.hint
+                          = question.hint
                           %span.close-button
                         %p.text.block-with-left-icon
-                          %span.left-icon.pull-right="#{ind+1}."
+                          %span.left-icon.pull-right="#{ind + 1}."
                           = question.content
-                        = form_tag(answer_question_core_aspect_path(@project, id: asp.id, question_id: question.id), {method: :put, remote: true,class: 'form instruments-block', id: 'form_answer_question', multipart: true}) do
+                        = form_tag(answer_question_core_aspect_path(@project, id: asp.id, question_id: question.id), {method: :put, remote: true, class: 'form instruments-block', id: 'form_answer_question', multipart: true}) do
                           %div(class="btn-group" data-toggle="buttons" id="answer_buttons")
                             - question.answers.by_status(0).each do |answer|
                               %button(id="answer_#{answer.id}" class="btn btn-xs btn-white pull-left answer-question")
-                                = check_box_tag "answers[]", answer.id
+                                = check_box_tag 'answers[]', answer.id
                                 = answer.content
                           .clearfix
                           .form-group.bottom-buttons

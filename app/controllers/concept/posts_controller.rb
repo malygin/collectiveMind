@@ -47,13 +47,15 @@ class Concept::PostsController < PostsController
     elsif params[:asp].present?
       @aspect = Core::Aspect.find(params[:asp])
     else
-      redirect_to "/project/#{@project.id}/concept/posts?asp=#{@project.proc_aspects.order('position DESC').first.id}"
+      @aspect = @project.proc_aspects.order('position DESC').first
     end
   end
 
   def new
+    # нововведение без аспекта?
     @asp = Core::Aspect.find(params[:asp]) unless params[:asp].nil?
     @concept_post = current_model.new
+    # нововведение без несовершенства?
     @discontent_post = Discontent::Post.find(params[:dis_id]) unless params[:dis_id].nil?
     @resources = Concept::Resource.where(project_id: @project.id)
     if params[:improve_comment] and params[:improve_stage]
@@ -68,7 +70,7 @@ class Concept::PostsController < PostsController
   end
 
   def create
-    @concept_post = current_model.new params[:pa]
+    @concept_post = current_model.new concept_post_params
     unless params[:cd].nil?
       params[:cd].each do |cd|
         @concept_post.concept_post_discontents.build(discontent_post_id: cd[0], complite: cd[1][:complite], status: 0)
@@ -91,10 +93,10 @@ class Concept::PostsController < PostsController
 
     respond_to do |format|
       if @concept_post.save
-        current_user.journals.build(type_event: 'concept_post_save', body: trim_content(@concept_post.post_aspects.first.title), first_id: @concept_post.id, project: @project).save!
+        current_user.journals.build(type_event: 'concept_post_save', body: trim_content(@concept_post.title), first_id: @concept_post.id, project: @project).save!
         @aspect_id = params[:asp_id]
-        @pa = @concept_post.post_aspects.first
-        @discontent_post = @pa.discontent
+        #@todo
+        #@discontent_post = @concept_post.discontent
         @remove_able = true
         format.html { redirect_to @aspect_id.nil? ? "/project/#{@project.id}/concept/posts" : "/project/#{@project.id}/concept/posts?asp=#{@aspect_id}" }
         format.js
@@ -106,8 +108,7 @@ class Concept::PostsController < PostsController
   end
 
   def edit
-    @pa = @concept_post.post_aspects.first
-    @discontent_post = @pa.discontent
+    @discontent_post = @concept_post.discontent
     @remove_able = true
     respond_to do |format|
       format.html
@@ -140,8 +141,7 @@ class Concept::PostsController < PostsController
         unless params[:fast_update]
           current_user.journals.build(type_event: 'concept_post_update', body: trim_content(@concept_post.post_aspects.first.title), first_id: @concept_post.id, project: @project).save!
         else
-          @pa = @concept_post.post_aspects.first
-          @discontent_post = @pa.discontent
+          @discontent_post = @concept_post.discontent
           @remove_able = true
         end
         @aspect_id = @project.proc_aspects.order(:id).first.id
@@ -206,10 +206,6 @@ class Concept::PostsController < PostsController
   end
 
   private
-  def concept_post_params
-    params.require(:concept_post).permit(:content, :whend, :whered, :style)
-  end
-
   def set_concept_post
     @concept_post = Concept::Post.find(params[:id])
   end
@@ -217,22 +213,20 @@ class Concept::PostsController < PostsController
   def prepare_data
     @aspects = Core::Aspect.where(project_id: @project, status: 0)
     @disposts = Discontent::Post.where(project_id: @project, status: 4).order(:id)
-    @vote_all = Concept::Voting.by_posts_vote(@project.discontents.by_status(4).pluck(:id).join(", ")).uniq_user.count if @project.status == 8
-  end
-
-  def check_before_update(pa1, pa2)
-    pa1 and pa2[:title] and pa2[:name] and pa2[:content] ? true : false
+    if @project.status == 8
+      @vote_all = Concept::Voting.by_posts_vote(@project.discontents.by_status(4).pluck(:id).join(", ")).uniq_user.count
+    end
   end
 
   def create_concept_resources_on_type(project, post)
     unless params[:resor].nil?
       params[:resor].each do |r|
         if r[:name]!=''
-          resource = post.concept_post_resources.build(:name => r[:name], :desc => r[:desc], :type_res => r[:type_res], :project_id => project.id, :style => 0)
+          resource = post.concept_post_resources.build(name: r[:name], desc: r[:desc], type_res: r[:type_res], project_id: project.id, style: 0)
           unless r[:means].nil?
             r[:means].each do |m|
               if m[:name]!=''
-                mean = post.concept_post_resources.build(:name => m[:name], :desc => m[:desc], :type_res => m[:type_res], :project_id => project.id, :style => 1)
+                mean = post.concept_post_resources.build(name: m[:name], desc: m[:desc], type_res: m[:type_res], project_id: project.id, style: 1)
                 mean.concept_post_resource = resource
               end
             end
@@ -240,5 +234,16 @@ class Concept::PostsController < PostsController
         end
       end
     end
+  end
+
+  private
+  def concept_post_params
+    params.require(:concept_post).permit(:goal, :reality, :user_id, :number_views, :life_tape_post_id, :status,
+                                         :content, :censored, :status_name, :status_content, :status_positive, :status_positive_r,
+                                         :status_negative, :status_negative_r, :status_problems, :status_reality, :improve_comment,
+                                         :improve_stage, :discuss_status, :useful, :status_positive_s, :status_negative_s,
+                                         :status_control, :status_control_r, :status_control_s, :status_obstacles, :approve_status,
+                                         :fullness, :status_all, :core_aspect_id, :positive, :negative, :control, :name, :problems,
+                                         :positive_r, :negative_r, :title, :obstacles)
   end
 end

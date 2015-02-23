@@ -3,9 +3,10 @@
     .row.popup-post-info
       .popup-header.popup-top-rounded.col-sm-12
         %h2.color.mass-red
-          = trim_content(@post.post_aspects.first.title)
+          = trim_content(@post.title)
       .col-lg-6.popup-post-block
-        = image_tag @post.user.avatar.url(:thumb)
+        -#@todo Пофиксить аватарку!
+        /= image_tag @post.user.avatar.url(:thumb)
         %span
           = @post.user.to_s
         .info-stripe
@@ -35,17 +36,17 @@
           .question-stripe
             = t('form.concept.novation_what')
           .answer-stripe
-            = simple_format(@post.post_aspects.first.name)
+            = simple_format(@post.name)
         .col-sm-12
           .question-stripe
             = t('form.concept.novation_how')
           .answer-stripe
-            = simple_format(@post.post_aspects.first.content)
+            = simple_format(@post.content)
         .col-sm-12
           .question-stripe
             = t('form.concept.cond')
           .answer-stripe
-            = simple_format(@post.post_aspects.first.positive)
+            = simple_format(@post.positive)
         .col-sm-12
           .question-stripe
             = t('form.concept.cond_res')
@@ -60,7 +61,7 @@
           .question-stripe
             = t('form.concept.negative')
           .answer-stripe
-            = simple_format(@post.post_aspects.first.negative)
+            = simple_format(@post.negative)
         .col-sm-12
           .question-stripe
             = t('form.concept.negative_res')
