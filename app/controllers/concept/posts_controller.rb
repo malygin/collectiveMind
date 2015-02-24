@@ -1,11 +1,18 @@
 class Concept::PostsController < PostsController
   before_action :set_concept_post, only: [:edit, :update]
-  require 'similar_text'
-  require 'set'
-  autocomplete :concept_post, :resource, class_name: 'Concept::Post', full: true
+  #autocomplete :concept_post, :resource, class_name: 'Concept::Post', full: true
 
   def voting_model
     Concept::Post
+  end
+
+  def autocomplete
+    field = params[:field]
+    if current_model.column_names.include? field
+      render json: current_model.send("autocomplete_#{field}", params[:term]).map { |post| {value: post.send(field)} }
+    else
+      render json: []
+    end
   end
 
   def autocomplete_concept_post_resource

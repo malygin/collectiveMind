@@ -146,9 +146,6 @@ CollectiveMind::Application.routes.draw do
       end
     end
 
-    get :autocomplete_concept_post_resource_concept_posts, to: 'concept/posts#autocomplete_concept_post_resource'
-    get :autocomplete_concept_post_mean_concept_posts, to: 'concept/posts#autocomplete_concept_post_mean'
-
     post 'discontent/posts/:id/union', to: 'discontent/posts#union_discontent'
     get 'discontent/posts/unions', to: 'discontent/posts#unions'
     get 'discontent/posts/new_group', to: 'discontent/posts#new_group'
@@ -181,6 +178,8 @@ CollectiveMind::Application.routes.draw do
 
     post 'concept/posts/add_dispost', to: 'concept/posts#add_dispost'
     put 'concept/posts/next_vote', to: 'concept/posts#next_vote'
+    get :autocomplete_concept_post_resource_concept_posts, to: 'concept/posts#autocomplete_concept_post_resource'
+    get :autocomplete_concept_post_mean_concept_posts, to: 'concept/posts#autocomplete_concept_post_mean'
     namespace :concept do
       posts_routes
       resources :posts do
