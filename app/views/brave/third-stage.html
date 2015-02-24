@@ -21,9 +21,8 @@
         <link href="css/owl.carousel.css" rel="stylesheet">
         <!-- Base style -->
         <link href="css/style.css" rel="stylesheet">
-        <link href="css/style-4.css" rel="stylesheet">
 		<!-- Custom CSS. Type your CSS code in custom.css file -->
-		<link href="css/custom-ts.css" rel="stylesheet">
+		<link href="css/custom.css" rel="stylesheet">
 
 	</head>
 
@@ -148,23 +147,25 @@
 
                     <!-- Stages block starts -->
                     <div class="stages">
-                        <a class="btn rounded-1"><span class="bigger">1</span>стадия</a>
+                        <a href="#" class="stage stage-number-block rounded-1"><span class="bigger">1</span>стадия</a>
                         <div class="clearfix visible-sm visible-xs"></div>
-                        <a class="btn rounded-1"><span class="bigger">2</span>стадия</a>
-                        <div class="clearfix visible-md visible-sm visible-xs"></div>
-                        <div class="current-stage">
-                            <a class="btn rounded-1"><span class="bigger">3</span>стадия</a>
+                        <a href="#" class="stage stage-number-block rounded-1"><span class="bigger">2</span>стадия</a>
+                        <div class="clearfix visible-sm visible-xs"></div>
+                        <a href="#" class="stage current-stage">
+                            <div class="stage-number-block rounded-1"><span class="bigger">3</span>стадия</div>
                             <div class="current-stage-text pull-left">
                                 <div class="top-text">
                                     Максимизация работы в аптеках инвара (с учетом новой стратегии инвара)
                                 </div>
                                 <div class="bottom-text">
-                                    <h4>Сбор нововведений</h4>
+                                    <h4>Дизайн будущего</h4>
                                 </div>
                             </div>
-                        </div>
+                        </a>
+                        <div class="clearfix visible-md visible-sm visible-xs"></div>
+                        <a href="#" class="stage stage-number-block next-steps-stage rounded-1"><span class="bigger">4</span>стадия</a>
                         <div class="clearfix visible-sm visible-xs"></div>
-                        <a class="btn rounded-1 next-steps-stage"><span class="bigger">4</span>стадия</a>
+                        <a href="#" class="stage stage-number-block next-steps-stage rounded-1"><span class="bigger">5</span>стадия</a>
                     </div>
 
                     <div class="clearfix"></div>
@@ -192,7 +193,7 @@
                                                 <div class="clearfix"></div>
                                                 <span class="poster-name">Лиза Школьник</span>
                                             </div>
-                                            <a href="#" class="post-text popup-link-1">
+                                            <a href="#popup-innov" class="post-text open-popup-link">
                                                 <div class="text-arrow pull-right"></div>
                                                 <span class="">
                                                     Материалы-шпаргалки*, которые будут находиться под рукой у ПС на кассе или висеть
@@ -201,7 +202,7 @@
                                                 </span>
                                             </a>
                                         </div>
-                                        <div class="post-themes" id="stripe1">
+                                        <div class="post-themes" id="themes1">
                                             <a href="#" class="tag-stripe color-N1 active" id="stripe1"><span class="tag">Слишком низкие потолки в офисах</span></a>
                                             <a href="#" class="tag-stripe color-N4" id="stripe2"><span class="tag">низкие потолки в офисах</span></a>
                                             <a href="#" class="tag-stripe color-N9" id="stripe3"><span class="tag">Низкие потолки и нечем дышать в офисах</span></a>
@@ -229,7 +230,7 @@
                                                 <div class="clearfix"></div>
                                                 <span class="poster-name">Лиза Школьник</span>
                                             </div>
-                                            <a href="#" class="post-text">
+                                            <a href="#popup-vote-innov" class="post-text open-popup-link">
                                                 <div class="text-arrow pull-right"></div>
                                                 <span class="">
                                                     Материалы-шпаргалки*, которые будут находиться под рукой у ПС на кассе или висеть
@@ -238,7 +239,7 @@
                                                 </span>
                                             </a>
                                         </div>
-                                        <div class="post-themes" id="stripe2">
+                                        <div class="post-themes" id="themes2">
                                             <a href="#" class="tag-stripe color-N1 active" id="stripe1"><span class="tag">Слишком низкие потолки в офисах</span></a>
                                             <a href="#" class="tag-stripe color-N4" id="stripe2"><span class="tag">низкие потолки в офисах</span></a>
                                             <a href="#" class="tag-stripe color-N9" id="stripe3"><span class="tag">Низкие потолки и нечем дышать в офисах</span></a>
@@ -343,7 +344,7 @@
                                                 </span>
                                             </a>
                                         </div>
-                                        <div class="post-themes">
+                                        <div class="post-themes" id="themes3">
 
                                         </div>
                                     </div>
@@ -377,7 +378,7 @@
                                                 </span>
                                             </a>
                                         </div>
-                                        <div class="post-themes">
+                                        <div class="post-themes" id="themes4">
                                         </div>
                                     </div>
                                 </div>
@@ -388,25 +389,24 @@
                 </div>
             </div>
             <!-- Main Block ends -->
-            <div class="popup-wrapper" id="popup-1">
-                <div class="close-btn"><i class="fa fa-times"></i></div>
-                <div class="popup-box box-shadow-1 rounded-3" id="win1">
-                    <div class="popup">
-                        <div class="popup-header">
+
+            <div id="popup-innov" class="popup-window info-popup mfp-hide">
+                <div class="popup popup-top-rounded">
+                    <div class="row popup-post-info">
+                        <div class="popup-header popup-top-rounded col-sm-12">
                             <h2 class="color mass-red">Совершенствование портала</h2>
                         </div>
-                        <div class="row popup-post-info">
-                            <div class="col-lg-6 popup-post-block">
-                                <img src="img/ava1.jpg">
-                                <span>Лиза Школьник</span>
-                                <div class="info-stripe">
-                                    <span class="popup-date">17.12.2014</span>
-                                    <span class="popup-comments">+5 <i class="fa fa-comment-o"></i></span>
-                                    <span class="popup-likes">+9 <i class="fa fa-thumbs-o-up"></i></span>
-                                    <span class="popup-dislikes">+1 <i class="fa fa-thumbs-o-down"></i></span>
-                                </div>
+                        <div class="col-lg-6 popup-post-block">
+                            <img src="img/ava1.jpg">
+                            <span>Лиза Школьник</span>
+                            <div class="info-stripe">
+                                <span class="popup-date">17.12.2014</span>
+                                <span class="popup-comments">+5 <i class="fa fa-comment-o"></i></span>
+                                <span class="popup-likes">+9 <i class="fa fa-thumbs-o-up"></i></span>
+                                <span class="popup-dislikes">+1 <i class="fa fa-thumbs-o-down"></i></span>
                             </div>
-                            <div class="col-lg-6 popup-tags">
+                        </div>
+                        <div class="col-lg-6 popup-tags">
                                 <span class="popup-tag color-N1">
                                     Низкие потолки и нечем дышать в офисах
                                 </span>
@@ -419,106 +419,307 @@
                                 <span class="popup-tag color-N4">
                                     Низкие потолки и нечем дышать
                                 </span>
-                            </div>
                         </div>
-                        <div class="container popup-post-questions">
-                            <div class="row">
-                                <div class="col-sm-12">
-                                    <div class="question-stripe">
-                                        Что новое появится в будущем, чтобы исправить несовершенство?
-                                    </div>
-                                    <div class="answer-stripe">
-                                        Новый, удобный и современный портал
-                                    </div>
+                    </div>
+                    <div class="container popup-post-questions popup-bottom-rounded">
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <div class="question-stripe">
+                                    Что новое появится в будущем, чтобы исправить несовершенство?
                                 </div>
-                                <div class="col-sm-12">
-                                    <div class="question-stripe">
-                                        Чем ваше нововведение улучшит текущую ситуацию и почему?
-                                    </div>
-                                    <div class="answer-stripe">
-                                        На новом портале будет приятно работать
-                                    </div>
+                                <div class="answer-stripe">
+                                    Новый, удобный и современный портал
                                 </div>
-                                <div class="col-sm-12">
-                                    <div class="question-stripe">
-                                        Чем ваше нововведение улучшит текущую ситуацию и почему?
-                                    </div>
-                                    <div class="answer-stripe">
-                                        Новый портал удобен и прекрасно сделан с точки зрения дизайна, и участникам не только полезно, но и приятно проводить на нём время
-                                    </div>
+                            </div>
+                            <div class="col-sm-12">
+                                <div class="question-stripe">
+                                    Чем ваше нововведение улучшит текущую ситуацию и почему?
                                 </div>
-                                <div class="col-sm-12">
-                                    <div class="question-stripe">
-                                        Какие ресурсы потребуются в будущем для работы нововведения?
-                                    </div>
-                                    <div class="answer-stripe">
-                                        <span class="rounded-N-mark">1</span><span class="text-after-mark">Олег и Андрей для концептуализации видения, вся команда для брейнсторминга по разработанному видению, дизайнеры и программисты</span>
-                                    </div>
+                                <div class="answer-stripe">
+                                    На новом портале будет приятно работать
                                 </div>
-                                <div class="col-sm-12">
-                                    <div class="question-stripe">
-                                        Какие нежелательные эффекты могут возникнуть в будущем в связи с поддержанием условий и решением задач?
-                                    </div>
-                                    <div class="answer-stripe">
-                                        Мы можем вложить в создание нового портала массу времени и денег, а участникам все равно будет неудобно на нем работать
-                                    </div>
+                            </div>
+                            <div class="col-sm-12">
+                                <div class="question-stripe">
+                                    Чем ваше нововведение улучшит текущую ситуацию и почему?
                                 </div>
-                                <div class="col-sm-12">
-                                    <div class="question-stripe">
-                                        Какие ресурсы потребуются в будущем для работы нововведения?
-                                    </div>
-                                    <div class="answer-stripe">
-                                        <span class="rounded-N-mark">1</span><span class="text-after-mark">Постоянные обсуждения и проверки предлагаемых идей</span>
-                                    </div>
+                                <div class="answer-stripe">
+                                    Новый портал удобен и прекрасно сделан с точки зрения дизайна, и участникам не только полезно, но и приятно проводить на нём время
+                                </div>
+                            </div>
+                            <div class="col-sm-12">
+                                <div class="question-stripe">
+                                    Какие ресурсы потребуются в будущем для работы нововведения?
+                                </div>
+                                <div class="answer-stripe">
+                                    <span class="rounded-N-mark">1</span><span class="text-after-mark">Олег и Андрей для концептуализации видения, вся команда для брейнсторминга по разработанному видению, дизайнеры и программисты</span>
+                                </div>
+                            </div>
+                            <div class="col-sm-12">
+                                <div class="question-stripe">
+                                    Какие нежелательные эффекты могут возникнуть в будущем в связи с поддержанием условий и решением задач?
+                                </div>
+                                <div class="answer-stripe">
+                                    Мы можем вложить в создание нового портала массу времени и денег, а участникам все равно будет неудобно на нем работать
+                                </div>
+                            </div>
+                            <div class="col-sm-12">
+                                <div class="question-stripe">
+                                    Какие ресурсы потребуются в будущем для работы нововведения?
+                                </div>
+                                <div class="answer-stripe">
+                                    <span class="rounded-N-mark">1</span><span class="text-after-mark">Постоянные обсуждения и проверки предлагаемых идей</span>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="popup-box box-shadow-1 rounded-3" id="win2">
-                    <div class="popup">
-                        <div class="nav-tabs-one" id="comment-tabs">
-                            <!-- Nav tabs -->
-                            <ul class="nav navig-tabs">
-                                <li class="active"><a href="#tab-1" data-toggle="tab">Ваш комментарий</a></li>
-                                <li><a href="#tab-2" data-toggle="tab">Все комментарии</a></li>
-                                <li><a href="#tab-3" data-toggle="tab">Советы</a></li>
-                            </ul>
-                            <!-- Tab content -->
-                            <div class="tab-content">
-                                <div class="tab-pane fade in active" id="tab-1">
-                                    <div class="comment">
-                                        <img src="img/no-ava.png" class="comment-ava">
-                                        <div class="comment-name">Лиза Школьник</div>
-                                        <div class="comment-text">текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст </div>
+                <div class="popup popup-bottom-rounded popup-top-rounded">
+                    <div class="nav-tabs-one" id="comment-tabs">
+                        <!-- Nav tabs -->
+                        <ul class="nav navig-tabs">
+                            <li class="active"><a href="#tab-1" data-toggle="tab">Ваш комментарий</a></li>
+                            <li><a href="#tab-2" data-toggle="tab">Все комментарии</a></li>
+                            <li><a href="#tab-3" data-toggle="tab">Советы</a></li>
+                        </ul>
+                        <!-- Tab content -->
+                        <div class="tab-content">
+                            <div class="tab-pane fade in active" id="tab-1">
+                                <div class="comment">
+                                    <img src="img/no-ava.png" class="comment-ava">
+                                    <div class="comment-name">Лиза Школьник</div>
+                                    <div class="comment-text">текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст </div>
+                                </div>
+                            </div>
+                            <div class="tab-pane fade" id="tab-2">
+                                <div class="comment">
+                                    <img src="img/no-ava.png" class="comment-ava">
+                                    <div class="comment-name">Лиза Школьник</div>
+                                    <div class="comment-text">текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст </div>
+                                </div>
+                                <div class="comment">
+                                    <img src="img/no-ava.png" class="comment-ava">
+                                    <div class="comment-name">Лиза Школьник</div>
+                                    <div class="comment-text">текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст </div>
+                                </div>
+                                <div class="comment">
+                                    <img src="img/no-ava.png" class="comment-ava">
+                                    <div class="comment-name">Лиза Школьник</div>
+                                    <div class="comment-text">текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст </div>
+                                </div>
+                            </div>
+                            <div class="tab-pane fade" id="tab-3">
+                                <div class="comment">
+                                    <img src="img/no-ava.png" class="comment-ava">
+                                    <div class="comment-name">Лиза Школьник</div>
+                                    <div class="comment-text">текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+
+            <div id="popup-vote-innov" class="popup-window vote-popup mfp-hide">
+                <div class="popup">
+                    <div class="popup-header-dnd">
+                        <div class="popup-header popup-top-rounded">
+                            <h2 class="color mass-red">Голосование</h2>
+                            <span class="popup-header-right">Стадия 3</span>
+                        </div>
+                        <div class="drag-n-drop-zone">
+                            <div class="dnd-hand"></div>
+                        </div>
+                    </div>
+                    <div class="popup-voting popup-bottom-rounded">
+                        <p>
+                            Выберите нововведения, которые вам понравились, и перетащите их в&nbsp;изображение руки или нажмите на кнопку "проголосовать"
+                        </p>
+                        <div class="popup-owl-navigation">
+                            <div id="owl-arrow-left-2" class="owl-arrow pull-left"></div>
+                            <div id="owl-arrow-right-2" class="owl-arrow pull-right"></div>
+                        </div>
+                        <div id="owl-vote-2" class="owl-carousel owl-vote">
+                            <div class="row">
+                                <div class="col-xs-12 owl-column">
+                                    <div class="innov-single box-shadow-1 rounded-3 drag-block drag2">
+                                        <div class="row post-header">
+                                            <div class="col-xs-8">
+                                                <span class="post-header-text color mass-red"><i class="fa fa-check-circle"></i>Модернизированная система аналитики</span>
+                                            </div>
+                                            <div class="col-xs-4  post-header-date">
+                                                <span>
+                                                    21.12.2014
+                                                </span>
+                                            </div>
+                                        </div>
+                                        <div class="post-center-block">
+                                            <div class="post-text">
+                                                <div class="text-arrow pull-right"></div>
+                                                <span class="">
+                                                    Материалы-шпаргалки*, которые будут находиться под рукой у ПС на кассе или висеть
+                                                    рядом на стене. Удобные в использовании, максимально компактные, лаконичные,
+                                                    позволяющие ПС быстро по симптомам осуществить рекомендацию покупателю...
+                                                </span>
+                                            </div>
+                                        </div>
+                                        <div class="post-themes" id="themes4">
+                                            <a href="#" class="tag-stripe color-N1"><span class="tag">Слишком низкие потолки в офисах</span></a>
+                                            <a href="#" class="tag-stripe color-N4"><span class="tag">низкие потолки в офисах</span></a>
+                                            <a href="#" class="tag-stripe color-N9"><span class="tag">Низкие потолки и нечем дышать в офисах</span></a>
+                                            <a href="#" class="tag-stripe color-N3"><span class="tag">дышать в офисах</span></a>
+                                        </div>
+                                    </div>
+                                    <div class="innov-single box-shadow-1 rounded-3 drag-block drag2">
+                                        <div class="row post-header">
+                                            <div class="col-xs-8">
+                                                <span class="post-header-text color mass-red"><i class="fa fa-check-circle"></i>Модернизированная система аналитики</span>
+                                            </div>
+                                            <div class="col-xs-4  post-header-date">
+                                                <span>
+                                                    21.12.2014
+                                                </span>
+                                            </div>
+                                        </div>
+                                        <div class="post-center-block">
+                                            <div class="post-text">
+                                                <div class="text-arrow pull-right"></div>
+                                                <span class="">
+                                                    Материалы-шпаргалки*, которые будут находиться под рукой у ПС на кассе или висеть
+                                                    рядом на стене. Удобные в использовании, максимально компактные, лаконичные,
+                                                    позволяющие ПС быстро по симптомам осуществить рекомендацию покупателю...
+                                                </span>
+                                            </div>
+                                        </div>
+                                        <div class="post-themes" id="themes5">
+                                            <a href="#" class="tag-stripe color-N1"><span class="tag">Слишком низкие потолки в офисах</span></a>
+                                            <a href="#" class="tag-stripe color-N4"><span class="tag">низкие потолки в офисах</span></a>
+                                            <a href="#" class="tag-stripe color-N9"><span class="tag">Низкие потолки и нечем дышать в офисах</span></a>
+                                            <a href="#" class="tag-stripe color-N3"><span class="tag">дышать в офисах</span></a>
+                                        </div>
+                                    </div>
+                                    <div class="innov-single box-shadow-1 rounded-3 drag-block drag2">
+                                        <div class="row post-header">
+                                            <div class="col-xs-8">
+                                                <span class="post-header-text color mass-red"><i class="fa fa-check-circle"></i>Модернизированная система аналитики</span>
+                                            </div>
+                                            <div class="col-xs-4  post-header-date">
+                                                <span>
+                                                    21.12.2014
+                                                </span>
+                                            </div>
+                                        </div>
+                                        <div class="post-center-block">
+                                            <div class="post-text">
+                                                <div class="text-arrow pull-right"></div>
+                                                <span class="">
+                                                    Материалы-шпаргалки*, которые будут находиться под рукой у ПС на кассе или висеть
+                                                    рядом на стене. Удобные в использовании, максимально компактные, лаконичные,
+                                                    позволяющие ПС быстро по симптомам осуществить рекомендацию покупателю...
+                                                </span>
+                                            </div>
+                                        </div>
+                                        <div class="post-themes" id="themes6">
+                                            <a href="#" class="tag-stripe color-N1"><span class="tag">Слишком низкие потолки в офисах</span></a>
+                                            <a href="#" class="tag-stripe color-N4"><span class="tag">низкие потолки в офисах</span></a>
+                                            <a href="#" class="tag-stripe color-N9"><span class="tag">Низкие потолки и нечем дышать в офисах</span></a>
+                                            <a href="#" class="tag-stripe color-N3"><span class="tag">дышать в офисах</span></a>
+                                        </div>
                                     </div>
                                 </div>
-                                <div class="tab-pane fade" id="tab-2">
-                                    <div class="comment">
-                                        <img src="img/no-ava.png" class="comment-ava">
-                                        <div class="comment-name">Лиза Школьник</div>
-                                        <div class="comment-text">текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-xs-12 owl-column">
+                                    <div class="innov-single box-shadow-1 rounded-3 drag-block drag2">
+                                        <div class="row post-header">
+                                            <div class="col-xs-8">
+                                                <span class="post-header-text color mass-red"><i class="fa fa-check-circle"></i>Модернизированная система аналитики</span>
+                                            </div>
+                                            <div class="col-xs-4  post-header-date">
+                                                <span>
+                                                    21.12.2014
+                                                </span>
+                                            </div>
+                                        </div>
+                                        <div class="post-center-block">
+                                            <div class="post-text">
+                                                <div class="text-arrow pull-right"></div>
+                                                <span class="">
+                                                    Материалы-шпаргалки*, которые будут находиться под рукой у ПС на кассе или висеть
+                                                    рядом на стене. Удобные в использовании, максимально компактные, лаконичные,
+                                                    позволяющие ПС быстро по симптомам осуществить рекомендацию покупателю...
+                                                </span>
+                                            </div>
+                                        </div>
+                                        <div class="post-themes" id="themes1">
+                                            <a href="#" class="tag-stripe color-N1"><span class="tag">Слишком низкие потолки в офисах</span></a>
+                                            <a href="#" class="tag-stripe color-N4"><span class="tag">низкие потолки в офисах</span></a>
+                                            <a href="#" class="tag-stripe color-N9"><span class="tag">Низкие потолки и нечем дышать в офисах</span></a>
+                                            <a href="#" class="tag-stripe color-N3"><span class="tag">дышать в офисах</span></a>
+                                        </div>
                                     </div>
-                                    <div class="comment">
-                                        <img src="img/no-ava.png" class="comment-ava">
-                                        <div class="comment-name">Лиза Школьник</div>
-                                        <div class="comment-text">текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст </div>
+                                    <div class="innov-single box-shadow-1 rounded-3 drag-block drag2">
+                                        <div class="row post-header">
+                                            <div class="col-xs-8">
+                                                <span class="post-header-text color mass-red"><i class="fa fa-check-circle"></i>Модернизированная система аналитики</span>
+                                            </div>
+                                            <div class="col-xs-4  post-header-date">
+                                                <span>
+                                                    21.12.2014
+                                                </span>
+                                            </div>
+                                        </div>
+                                        <div class="post-center-block">
+                                            <div class="post-text">
+                                                <div class="text-arrow pull-right"></div>
+                                                <span class="">
+                                                    Материалы-шпаргалки*, которые будут находиться под рукой у ПС на кассе или висеть
+                                                    рядом на стене. Удобные в использовании, максимально компактные, лаконичные,
+                                                    позволяющие ПС быстро по симптомам осуществить рекомендацию покупателю...
+                                                </span>
+                                            </div>
+                                        </div>
+                                        <div class="post-themes" id="themes2">
+                                            <a href="#" class="tag-stripe color-N1"><span class="tag">Слишком низкие потолки в офисах</span></a>
+                                            <a href="#" class="tag-stripe color-N4"><span class="tag">низкие потолки в офисах</span></a>
+                                            <a href="#" class="tag-stripe color-N9"><span class="tag">Низкие потолки и нечем дышать в офисах</span></a>
+                                            <a href="#" class="tag-stripe color-N3"><span class="tag">дышать в офисах</span></a>
+                                        </div>
                                     </div>
-                                    <div class="comment">
-                                        <img src="img/no-ava.png" class="comment-ava">
-                                        <div class="comment-name">Лиза Школьник</div>
-                                        <div class="comment-text">текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст </div>
-                                    </div>
-                                </div>
-                                <div class="tab-pane fade" id="tab-3">
-                                    <div class="comment">
-                                        <img src="img/no-ava.png" class="comment-ava">
-                                        <div class="comment-name">Лиза Школьник</div>
-                                        <div class="comment-text">текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст </div>
+                                    <div class="innov-single box-shadow-1 rounded-3 drag-block drag2">
+                                        <div class="row post-header">
+                                            <div class="col-xs-8">
+                                                <span class="post-header-text color mass-red"><i class="fa fa-check-circle"></i>Модернизированная система аналитики</span>
+                                            </div>
+                                            <div class="col-xs-4  post-header-date">
+                                                <span>
+                                                    21.12.2014
+                                                </span>
+                                            </div>
+                                        </div>
+                                        <div class="post-center-block">
+                                            <div class="post-text">
+                                                <div class="text-arrow pull-right"></div>
+                                                <span class="">
+                                                    Материалы-шпаргалки*, которые будут находиться под рукой у ПС на кассе или висеть
+                                                    рядом на стене. Удобные в использовании, максимально компактные, лаконичные,
+                                                    позволяющие ПС быстро по симптомам осуществить рекомендацию покупателю...
+                                                </span>
+                                            </div>
+                                        </div>
+                                        <div class="post-themes" id="themes3">
+                                            <a href="#" class="tag-stripe color-N1"><span class="tag">Слишком низкие потолки в офисах</span></a>
+                                            <a href="#" class="tag-stripe color-N4"><span class="tag">низкие потолки в офисах</span></a>
+                                            <a href="#" class="tag-stripe color-N9"><span class="tag">Низкие потолки и нечем дышать в офисах</span></a>
+                                            <a href="#" class="tag-stripe color-N3"><span class="tag">дышать в офисах</span></a>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
+                        <button id="vote-button2" class="vote-button btn btn-mass-red" disabled>Проголосовать</button>
                     </div>
                 </div>
             </div>
@@ -546,7 +747,7 @@
         <!-- HTML5 Support for IE -->
         <script src="js/html5shiv.js"></script>
         <!-- Main JS -->
-        <script src="js/main.js"></script>
+        <script src="js/main-unowled.js"></script>
 
         <!-- Javascript for this page -->
 

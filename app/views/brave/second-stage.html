@@ -21,7 +21,6 @@
         <link href="css/owl.carousel.css" rel="stylesheet">
         <!-- Base style -->
         <link href="css/style.css" rel="stylesheet">
-        <link href="css/style-4.css" rel="stylesheet">
 		<!-- Custom CSS. Type your CSS code in custom.css file -->
 		<link href="css/custom.css" rel="stylesheet">
 
@@ -114,23 +113,25 @@
 
                     <!-- Stages block starts -->
                     <div class="stages">
-                        <a class="btn rounded-1"><span class="bigger">1</span>стадия</a>
+                        <a href="#" class="stage stage-number-block rounded-1"><span class="bigger">1</span>стадия</a>
                         <div class="clearfix visible-sm visible-xs"></div>
-                        <div class="current-stage">
-                            <a class="btn rounded-1"><span class="bigger">2</span>стадия</a>
+                        <a href="#" class="stage current-stage">
+                            <div class="stage-number-block rounded-1"><span class="bigger">2</span>стадия</div>
                             <div class="current-stage-text pull-left">
                                 <div class="top-text">
                                     Максимизация работы в аптеках инвара (с учетом новой стратегии инвара)
                                 </div>
                                 <div class="bottom-text">
-                                    <h4>Сбор нововведений</h4>
+                                    <h4>Анализ ситуации</h4>
                                 </div>
                             </div>
-                        </div>
+                        </a>
                         <div class="clearfix visible-md visible-sm visible-xs"></div>
-                        <a class="btn rounded-1 next-steps-stage"><span class="bigger">3</span>стадия</a>
+                        <a href="#" class="stage stage-number-block next-steps-stage rounded-1"><span class="bigger">3</span>стадия</a>
                         <div class="clearfix visible-sm visible-xs"></div>
-                        <a class="btn rounded-1 next-steps-stage"><span class="bigger">4</span>стадия</a>
+                        <a href="#" class="stage stage-number-block next-steps-stage rounded-1"><span class="bigger">4</span>стадия</a>
+                        <div class="clearfix visible-sm visible-xs"></div>
+                        <a href="#" class="stage stage-number-block next-steps-stage rounded-1"><span class="bigger">5</span>стадия</a>
                     </div>
 
                     <div class="clearfix"></div>
@@ -241,7 +242,7 @@
                                             <div class="col-md-4">
                                                 <div class="imperfection-add-block lined-block">
                                                     <div class="add-imperf">
-                                                        <a href="#">
+                                                        <a href="#popup-vote" class="open-popup-link">
                                                             <div class="plus-circle">+</div>
                                                             <span>Добавить несовершенство</span>
                                                         </a>
@@ -297,7 +298,7 @@
 
                                                 <!-- второй блок -->
 
-                                                <div class="imperfection imperf-pale-pink lined-block">
+                                                <a class="imperfection imperf-pale-pink lined-block">
                                                     <table>
                                                         <tr>
                                                             <td class="imperf-left-column">
@@ -371,12 +372,12 @@
                                                             </td>
                                                         </tr>
                                                     </table>
-                                                </div>
+                                                </a>
                                             </div>
 
 
                                             <div class="col-md-4">
-                                                <div class="imperfection imperf-pale-pink lined-block popup-link-1">
+                                                <a href="#popup-imperf" class="imperfection imperf-pale-pink lined-block open-popup-link">
                                                     <table>
                                                         <tr>
                                                             <td class="imperf-left-column admin-notice">
@@ -438,8 +439,8 @@
                                                             </td>
                                                         </tr>
                                                     </table>
-                                                </div>
-                                                <div class="imperfection imperf-pale-blue lined-block">
+                                                </a>
+                                                <a class="imperfection imperf-pale-blue lined-block">
                                                     <table>
                                                         <tr>
                                                             <td class="imperf-left-column">
@@ -493,10 +494,10 @@
                                                             </td>
                                                         </tr>
                                                     </table>
-                                                </div>
+                                                </a>
                                             </div>
                                             <div class="col-md-4">
-                                                <div class="imperfection imperf-pale-blue lined-block">
+                                                <a class="imperfection imperf-pale-blue lined-block">
                                                     <table>
                                                         <tr>
                                                             <td class="imperf-left-column">
@@ -551,8 +552,8 @@
                                                             </td>
                                                         </tr>
                                                     </table>
-                                                </div>
-                                                <div class="imperfection imperf-pale-pink lined-block">
+                                                </a>
+                                                <a class="imperfection imperf-pale-pink lined-block">
                                                     <table>
                                                         <tr>
                                                             <td class="imperf-left-column">
@@ -605,7 +606,7 @@
                                                             </td>
                                                         </tr>
                                                     </table>
-                                                </div>
+                                                </a>
                                             </div>
                                         </div>
                                     </div>
@@ -627,6 +628,948 @@
             <!-- Main Block ends -->
 
 
+            <!-- popup -->
+            <div id="popup-imperf" class="popup-window info-popup mfp-hide">
+                <div class="popup popup-top-rounded">
+                    <div class="popup-post-info back-color pale-pink">
+                        <div class="popup-header popup-top-rounded">
+                            <h2 class="color mass-red">Нечем дышать</h2>
+                        </div>
+                        <div class="clearfix"></div>
+                        <div class="popup-imperf-detailed imperf-pale-pink">
+                            <div class="popup-imperf-admin-notice">
+                                <span class="popup-notice-sign">!</span>
+                                <p class="popup-notice-text">
+                                    Замечание модератора в открытой форме
+                                </p>
+                            </div>
+                            <div class="aspects-indexes">
+                                <div class="circle-tag back-color orange">нд</div>
+                                <div class="circle-tag back-color light-blue">нс</div>
+                                <div class="circle-tag back-color green">мл</div>
+                                <div class="circle-tag back-color purple">нж</div>
+                                <div class="circle-tag back-color yellow">од</div>
+                                <div class="circle-tag back-color blue">му</div>
+                            </div>
+                            <div class="clearfix"></div>
+                            <table>
+                                <tr>
+                                    <!-- ячейка с "Что?", красит верхний бордер в более тёмный цвет этого блока -->
+                                    <td class="imperf-left-column what-cell">
+                                        Что
+                                    </td>
+                                    <td class="imperf-right-column">
+                                        Нечем дышать
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="imperf-left-column">
+                                        Где
+                                    </td>
+                                    <td class="imperf-right-column">При большом числе людей в комнате
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="imperf-left-column">
+                                        Когда
+                                    </td>
+                                    <td class="imperf-right-column">
+                                        Во время совещаний
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="imperf-left-column">
+                                    </td>
+                                    <td class="imperf-right-column">
+                                        <div class="imperf-bottom-line">
+                                            <div class="info-stripe">
+                                                <span class="popup-date">31.дек. 2014</span>
+                                                <span class="popup-comments">+5 <i class="fa fa-comment-o"></i></span>
+                                                <span class="popup-likes">+9 <i class="fa fa-thumbs-o-up"></i></span>
+                                                <span class="popup-dislikes">+1 <i class="fa fa-thumbs-o-down"></i></span>
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="popup-comments-block popup-bottom-rounded">
+                        <div class="comment">
+                            <img src="img/no-ava.png" class="comment-ava">
+                            <div class="comment-name">Лиза Школьник</div>
+                            <div class="comment-text">текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст </div>
+                        </div>
+                        <div class="comment">
+                            <img src="img/no-ava.png" class="comment-ava">
+                            <div class="comment-name">Лиза Школьник</div>
+                            <div class="comment-text">текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст </div>
+                        </div>
+                        <div class="comment">
+                            <img src="img/no-ava.png" class="comment-ava">
+                            <div class="comment-name">Лиза Школьник</div>
+                            <div class="comment-text">текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="popup-vote" class="popup-window vote-popup mfp-hide">
+            <div class="popup">
+            <div class="popup-header-dnd">
+                <div class="popup-header popup-top-rounded">
+                    <h2 class="color mass-red">Голосование</h2>
+                </div>
+                <div class="drag-n-drop-zone">
+                    <div class="dnd-hand"></div>
+                </div>
+            </div>
+            <div class="popup-voting popup-bottom-rounded">
+            <p>
+                Выберите несовершенства, которые вам понравились, и перетащите их в&nbsp;изображение руки или нажмите на кнопку "проголосовать"
+            </p>
+            <div class="popup-owl-navigation">
+                <div id="owl-arrow-left-1" class="owl-arrow pull-left"></div>
+                <div id="owl-arrow-right-1" class="owl-arrow pull-right"></div>
+            </div>
+            <div id="owl-vote-1" class="owl-carousel owl-vote">
+            <div class="row">
+            <div class="col-xs-6 owl-column">
+                <div class="imperfection imperf-pale-pink lined-block drag-block drag1">
+                    <table>
+                        <tr>
+                            <td class="imperf-left-column">
+
+                            </td>
+                            <td class="imperf-right-column">
+                                <div class="aspects-indexes">
+                                    <div class="circle-tag back-color orange">нд</div>
+                                    <div class="circle-tag back-color light-blue">нс</div>
+                                    <div class="circle-tag back-color green">мл</div>
+                                    <div class="circle-tag back-color purple">нж</div>
+                                    <div class="circle-tag back-color yellow">од</div>
+                                    <div class="circle-tag back-color blue">му</div>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <!-- ячейка с "Что?", красит верхний бордер в более тёмный цвет этого блока -->
+                            <td class="imperf-left-column what-cell">
+                                Что
+                            </td>
+                            <td class="imperf-right-column">Нечем дышать
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="imperf-left-column">
+                                Где
+                            </td>
+                            <td class="imperf-right-column">
+                                При большом числе людей в комнате
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="imperf-left-column">
+                                Когда
+                            </td>
+                            <td class="imperf-right-column">
+                                Во время совещаний
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="imperf-left-column">
+                            </td>
+                            <td class="imperf-right-column">
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="imperfection imperf-pale-blue lined-block drag-block drag1">
+                    <table>
+                        <tr>
+                            <td class="imperf-left-column">
+
+                            </td>
+                            <td class="imperf-right-column">
+                                <div class="aspects-indexes">
+                                    <div class="circle-tag back-color orange">нд</div>
+                                    <div class="circle-tag back-color purple">нж</div>
+                                    <div class="circle-tag back-color yellow">од</div>
+                                    <div class="circle-tag back-color blue">му</div>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <!-- ячейка с "Что?", красит верхний бордер в более тёмный цвет этого блока -->
+                            <td class="imperf-left-column what-cell">
+                                Что
+                            </td>
+                            <td class="imperf-right-column">Нечем дышать и слишком низкие потолки
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="imperf-left-column">
+                                Где
+                            </td>
+                            <td class="imperf-right-column">
+                                При большом числе людей в комнате
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="imperf-left-column">
+                                Когда
+                            </td>
+                            <td class="imperf-right-column">
+                                Во время совещаний
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="imperf-left-column">
+                            </td>
+                            <td class="imperf-right-column">
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="imperfection imperf-pale-blue lined-block drag-block drag1">
+                    <table>
+                        <tr>
+                            <td class="imperf-left-column">
+
+                            </td>
+                            <td class="imperf-right-column">
+                                <div class="aspects-indexes">
+                                    <div class="circle-tag back-color orange">нд</div>
+                                    <div class="circle-tag back-color purple">нж</div>
+                                    <div class="circle-tag back-color yellow">од</div>
+                                    <div class="circle-tag back-color blue">му</div>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <!-- ячейка с "Что?", красит верхний бордер в более тёмный цвет этого блока -->
+                            <td class="imperf-left-column what-cell">
+                                Что
+                            </td>
+                            <td class="imperf-right-column">Нечем дышать и слишком низкие потолки
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="imperf-left-column">
+                                Где
+                            </td>
+                            <td class="imperf-right-column">
+                                При большом числе людей в комнате
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="imperf-left-column">
+                                Когда
+                            </td>
+                            <td class="imperf-right-column">
+                                Во время совещаний
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="imperf-left-column">
+                            </td>
+                            <td class="imperf-right-column">
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+            <div class="col-xs-6 owl-column">
+                <div class="imperfection imperf-pale-blue lined-block drag-block drag1">
+                    <table>
+                        <tr>
+                            <td class="imperf-left-column">
+
+                            </td>
+                            <td class="imperf-right-column">
+                                <div class="aspects-indexes">
+                                    <div class="circle-tag back-color orange">нд</div>
+                                    <div class="circle-tag back-color purple">нж</div>
+                                    <div class="circle-tag back-color yellow">од</div>
+                                    <div class="circle-tag back-color blue">му</div>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <!-- ячейка с "Что?", красит верхний бордер в более тёмный цвет этого блока -->
+                            <td class="imperf-left-column what-cell">
+                                Что
+                            </td>
+                            <td class="imperf-right-column">Нечем дышать и слишком низкие потолки
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="imperf-left-column">
+                                Где
+                            </td>
+                            <td class="imperf-right-column">
+                                При большом числе людей в комнате
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="imperf-left-column">
+                                Когда
+                            </td>
+                            <td class="imperf-right-column">
+                                Во время совещаний
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="imperf-left-column">
+                            </td>
+                            <td class="imperf-right-column">
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="imperfection imperf-pale-pink lined-block drag-block drag1">
+                    <table>
+                        <tr>
+                            <td class="imperf-left-column">
+
+                            </td>
+                            <td class="imperf-right-column">
+                                <div class="aspects-indexes">
+                                    <div class="circle-tag back-color orange">нд</div>
+                                    <div class="circle-tag back-color light-blue">нс</div>
+                                    <div class="circle-tag back-color green">мл</div>
+                                    <div class="circle-tag back-color purple">нж</div>
+                                    <div class="circle-tag back-color yellow">од</div>
+                                    <div class="circle-tag back-color blue">му</div>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <!-- ячейка с "Что?", красит верхний бордер в более тёмный цвет этого блока -->
+                            <td class="imperf-left-column what-cell">
+                                Что
+                            </td>
+                            <td class="imperf-right-column">Нечем дышать
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="imperf-left-column">
+                                Где
+                            </td>
+                            <td class="imperf-right-column">
+                                При большом числе людей в комнате
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="imperf-left-column">
+                                Когда
+                            </td>
+                            <td class="imperf-right-column">
+                                Во время совещаний
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="imperf-left-column">
+                            </td>
+                            <td class="imperf-right-column">
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="imperfection imperf-pale-pink lined-block drag-block drag1">
+                    <table>
+                        <tr>
+                            <td class="imperf-left-column">
+
+                            </td>
+                            <td class="imperf-right-column">
+                                <div class="aspects-indexes">
+                                    <div class="circle-tag back-color orange">нд</div>
+                                    <div class="circle-tag back-color light-blue">нс</div>
+                                    <div class="circle-tag back-color green">мл</div>
+                                    <div class="circle-tag back-color purple">нж</div>
+                                    <div class="circle-tag back-color yellow">од</div>
+                                    <div class="circle-tag back-color blue">му</div>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <!-- ячейка с "Что?", красит верхний бордер в более тёмный цвет этого блока -->
+                            <td class="imperf-left-column what-cell">
+                                Что
+                            </td>
+                            <td class="imperf-right-column">Нечем дышать
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="imperf-left-column">
+                                Где
+                            </td>
+                            <td class="imperf-right-column">
+                                При большом числе людей в комнате
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="imperf-left-column">
+                                Когда
+                            </td>
+                            <td class="imperf-right-column">
+                                Во время совещаний
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="imperf-left-column">
+                            </td>
+                            <td class="imperf-right-column">
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+            </div>
+            <div class="row">
+            <div class="col-xs-6 owl-column">
+                <div class="imperfection imperf-pale-pink lined-block drag-block drag1">
+                    <table>
+                        <tr>
+                            <td class="imperf-left-column">
+                            </td>
+                            <td class="imperf-right-column">
+                                <div class="aspects-indexes">
+                                    <div class="circle-tag back-color orange">нд</div>
+                                    <div class="circle-tag back-color light-blue">нс</div>
+                                    <div class="circle-tag back-color green">мл</div>
+                                    <div class="circle-tag back-color purple">нж</div>
+                                    <div class="circle-tag back-color yellow">од</div>
+                                    <div class="circle-tag back-color blue">му</div>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <!-- ячейка с "Что?", красит верхний бордер в более тёмный цвет этого блока -->
+                            <td class="imperf-left-column what-cell">
+                                Что
+                            </td>
+                            <td class="imperf-right-column">Нечем дышать
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="imperf-left-column">
+                                Где
+                            </td>
+                            <td class="imperf-right-column">
+                                При большом числе людей в комнате
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="imperf-left-column">
+                                Когда
+                            </td>
+                            <td class="imperf-right-column">
+                                Во время совещаний
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="imperf-left-column">
+                            </td>
+                            <td class="imperf-right-column">
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="imperfection imperf-pale-blue lined-block drag-block drag1">
+                    <table>
+                        <tr>
+                            <td class="imperf-left-column">
+
+                            </td>
+                            <td class="imperf-right-column">
+                                <div class="aspects-indexes">
+                                    <div class="circle-tag back-color orange">нд</div>
+                                    <div class="circle-tag back-color purple">нж</div>
+                                    <div class="circle-tag back-color yellow">од</div>
+                                    <div class="circle-tag back-color blue">му</div>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <!-- ячейка с "Что?", красит верхний бордер в более тёмный цвет этого блока -->
+                            <td class="imperf-left-column what-cell">
+                                Что
+                            </td>
+                            <td class="imperf-right-column">Нечем дышать и слишком низкие потолки
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="imperf-left-column">
+                                Где
+                            </td>
+                            <td class="imperf-right-column">
+                                При большом числе людей в комнате
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="imperf-left-column">
+                                Когда
+                            </td>
+                            <td class="imperf-right-column">
+                                Во время совещаний
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="imperf-left-column">
+                            </td>
+                            <td class="imperf-right-column">
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="imperfection imperf-pale-blue lined-block drag-block drag1">
+                    <table>
+                        <tr>
+                            <td class="imperf-left-column">
+
+                            </td>
+                            <td class="imperf-right-column">
+                                <div class="aspects-indexes">
+                                    <div class="circle-tag back-color orange">нд</div>
+                                    <div class="circle-tag back-color purple">нж</div>
+                                    <div class="circle-tag back-color yellow">од</div>
+                                    <div class="circle-tag back-color blue">му</div>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <!-- ячейка с "Что?", красит верхний бордер в более тёмный цвет этого блока -->
+                            <td class="imperf-left-column what-cell">
+                                Что
+                            </td>
+                            <td class="imperf-right-column">Нечем дышать и слишком низкие потолки
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="imperf-left-column">
+                                Где
+                            </td>
+                            <td class="imperf-right-column">
+                                При большом числе людей в комнате
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="imperf-left-column">
+                                Когда
+                            </td>
+                            <td class="imperf-right-column">
+                                Во время совещаний
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="imperf-left-column">
+                            </td>
+                            <td class="imperf-right-column">
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="imperfection imperf-pale-blue lined-block drag-block drag1">
+                    <table>
+                        <tr>
+                            <td class="imperf-left-column">
+
+                            </td>
+                            <td class="imperf-right-column">
+                                <div class="aspects-indexes">
+                                    <div class="circle-tag back-color orange">нд</div>
+                                    <div class="circle-tag back-color purple">нж</div>
+                                    <div class="circle-tag back-color yellow">од</div>
+                                    <div class="circle-tag back-color blue">му</div>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <!-- ячейка с "Что?", красит верхний бордер в более тёмный цвет этого блока -->
+                            <td class="imperf-left-column what-cell">
+                                Что
+                            </td>
+                            <td class="imperf-right-column">Нечем дышать и слишком низкие потолки
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="imperf-left-column">
+                                Где
+                            </td>
+                            <td class="imperf-right-column">
+                                При большом числе людей в комнате
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="imperf-left-column">
+                                Когда
+                            </td>
+                            <td class="imperf-right-column">
+                                Во время совещаний
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="imperf-left-column">
+                            </td>
+                            <td class="imperf-right-column">
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+            <div class="col-xs-6 owl-column">
+                <div class="imperfection imperf-pale-blue lined-block drag-block drag1">
+                    <table>
+                        <tr>
+                            <td class="imperf-left-column">
+
+                            </td>
+                            <td class="imperf-right-column">
+                                <div class="aspects-indexes">
+                                    <div class="circle-tag back-color orange">нд</div>
+                                    <div class="circle-tag back-color purple">нж</div>
+                                    <div class="circle-tag back-color yellow">од</div>
+                                    <div class="circle-tag back-color blue">му</div>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <!-- ячейка с "Что?", красит верхний бордер в более тёмный цвет этого блока -->
+                            <td class="imperf-left-column what-cell">
+                                Что
+                            </td>
+                            <td class="imperf-right-column">Нечем дышать и слишком низкие потолки
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="imperf-left-column">
+                                Где
+                            </td>
+                            <td class="imperf-right-column">
+                                При большом числе людей в комнате
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="imperf-left-column">
+                                Когда
+                            </td>
+                            <td class="imperf-right-column">
+                                Во время совещаний
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="imperf-left-column">
+                            </td>
+                            <td class="imperf-right-column">
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="imperfection imperf-pale-pink lined-block drag-block drag1">
+                    <table>
+                        <tr>
+                            <td class="imperf-left-column">
+
+                            </td>
+                            <td class="imperf-right-column">
+                                <div class="aspects-indexes">
+                                    <div class="circle-tag back-color orange">нд</div>
+                                    <div class="circle-tag back-color light-blue">нс</div>
+                                    <div class="circle-tag back-color green">мл</div>
+                                    <div class="circle-tag back-color purple">нж</div>
+                                    <div class="circle-tag back-color yellow">од</div>
+                                    <div class="circle-tag back-color blue">му</div>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <!-- ячейка с "Что?", красит верхний бордер в более тёмный цвет этого блока -->
+                            <td class="imperf-left-column what-cell">
+                                Что
+                            </td>
+                            <td class="imperf-right-column">Нечем дышать
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="imperf-left-column">
+                                Где
+                            </td>
+                            <td class="imperf-right-column">
+                                При большом числе людей в комнате
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="imperf-left-column">
+                                Когда
+                            </td>
+                            <td class="imperf-right-column">
+                                Во время совещаний
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="imperf-left-column">
+                            </td>
+                            <td class="imperf-right-column">
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="imperfection imperf-pale-pink lined-block drag-block drag1">
+                    <table>
+                        <tr>
+                            <td class="imperf-left-column">
+
+                            </td>
+                            <td class="imperf-right-column">
+                                <div class="aspects-indexes">
+                                    <div class="circle-tag back-color orange">нд</div>
+                                    <div class="circle-tag back-color light-blue">нс</div>
+                                    <div class="circle-tag back-color green">мл</div>
+                                    <div class="circle-tag back-color purple">нж</div>
+                                    <div class="circle-tag back-color yellow">од</div>
+                                    <div class="circle-tag back-color blue">му</div>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <!-- ячейка с "Что?", красит верхний бордер в более тёмный цвет этого блока -->
+                            <td class="imperf-left-column what-cell">
+                                Что
+                            </td>
+                            <td class="imperf-right-column">Нечем дышать
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="imperf-left-column">
+                                Где
+                            </td>
+                            <td class="imperf-right-column">
+                                При большом числе людей в комнате
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="imperf-left-column">
+                                Когда
+                            </td>
+                            <td class="imperf-right-column">
+                                Во время совещаний
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="imperf-left-column">
+                            </td>
+                            <td class="imperf-right-column">
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-6 owl-column">
+                    <div class="imperfection imperf-pale-pink lined-block drag-block drag1">
+                        <table>
+                            <tr>
+                                <td class="imperf-left-column">
+
+                                </td>
+                                <td class="imperf-right-column">
+                                    <div class="aspects-indexes">
+                                        <div class="circle-tag back-color orange">нд</div>
+                                        <div class="circle-tag back-color light-blue">нс</div>
+                                        <div class="circle-tag back-color green">мл</div>
+                                        <div class="circle-tag back-color purple">нж</div>
+                                        <div class="circle-tag back-color yellow">од</div>
+                                        <div class="circle-tag back-color blue">му</div>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <!-- ячейка с "Что?", красит верхний бордер в более тёмный цвет этого блока -->
+                                <td class="imperf-left-column what-cell">
+                                    Что
+                                </td>
+                                <td class="imperf-right-column">Нечем дышать
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="imperf-left-column">
+                                    Где
+                                </td>
+                                <td class="imperf-right-column">
+                                    При большом числе людей в комнате
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="imperf-left-column">
+                                    Когда
+                                </td>
+                                <td class="imperf-right-column">
+                                    Во время совещаний
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="imperf-left-column">
+                                </td>
+                                <td class="imperf-right-column">
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div class="imperfection imperf-pale-blue lined-block drag-block drag1">
+                        <table>
+                            <tr>
+                                <td class="imperf-left-column">
+
+                                </td>
+                                <td class="imperf-right-column">
+                                    <div class="aspects-indexes">
+                                        <div class="circle-tag back-color orange">нд</div>
+                                        <div class="circle-tag back-color purple">нж</div>
+                                        <div class="circle-tag back-color yellow">од</div>
+                                        <div class="circle-tag back-color blue">му</div>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <!-- ячейка с "Что?", красит верхний бордер в более тёмный цвет этого блока -->
+                                <td class="imperf-left-column what-cell">
+                                    Что
+                                </td>
+                                <td class="imperf-right-column">Нечем дышать и слишком низкие потолки
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="imperf-left-column">
+                                    Где
+                                </td>
+                                <td class="imperf-right-column">
+                                    При большом числе людей в комнате
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="imperf-left-column">
+                                    Когда
+                                </td>
+                                <td class="imperf-right-column">
+                                    Во время совещаний
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="imperf-left-column">
+                                </td>
+                                <td class="imperf-right-column">
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+                <div class="col-xs-6 owl-column">
+                    <div class="imperfection imperf-pale-blue lined-block drag-block drag1">
+                        <table>
+                            <tr>
+                                <td class="imperf-left-column">
+
+                                </td>
+                                <td class="imperf-right-column">
+                                    <div class="aspects-indexes">
+                                        <div class="circle-tag back-color orange">нд</div>
+                                        <div class="circle-tag back-color purple">нж</div>
+                                        <div class="circle-tag back-color yellow">од</div>
+                                        <div class="circle-tag back-color blue">му</div>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <!-- ячейка с "Что?", красит верхний бордер в более тёмный цвет этого блока -->
+                                <td class="imperf-left-column what-cell">
+                                    Что
+                                </td>
+                                <td class="imperf-right-column">Нечем дышать и слишком низкие потолки
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="imperf-left-column">
+                                    Где
+                                </td>
+                                <td class="imperf-right-column">
+                                    При большом числе людей в комнате
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="imperf-left-column">
+                                    Когда
+                                </td>
+                                <td class="imperf-right-column">
+                                    Во время совещаний
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="imperf-left-column">
+                                </td>
+                                <td class="imperf-right-column">
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div class="imperfection imperf-pale-pink lined-block drag-block drag1">
+                        <table>
+                            <tr>
+                                <td class="imperf-left-column">
+
+                                </td>
+                                <td class="imperf-right-column">
+                                    <div class="aspects-indexes">
+                                        <div class="circle-tag back-color orange">нд</div>
+                                        <div class="circle-tag back-color light-blue">нс</div>
+                                        <div class="circle-tag back-color green">мл</div>
+                                        <div class="circle-tag back-color purple">нж</div>
+                                        <div class="circle-tag back-color yellow">од</div>
+                                        <div class="circle-tag back-color blue">му</div>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <!-- ячейка с "Что?", красит верхний бордер в более тёмный цвет этого блока -->
+                                <td class="imperf-left-column what-cell">
+                                    Что
+                                </td>
+                                <td class="imperf-right-column">Нечем дышать
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="imperf-left-column">
+                                    Где
+                                </td>
+                                <td class="imperf-right-column">
+                                    При большом числе людей в комнате
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="imperf-left-column">
+                                    Когда
+                                </td>
+                                <td class="imperf-right-column">
+                                    Во время совещаний
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="imperf-left-column">
+                                </td>
+                                <td class="imperf-right-column">
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            </div>
+            <button id="vote-button1" class="vote-button btn btn-mass-red" disabled>Проголосовать</button>
+            </div>
+            </div>
+            </div>
 
         </div>
         <!-- Outer Ends -->
@@ -650,7 +1593,7 @@
         <!-- HTML5 Support for IE -->
         <script src="js/html5shiv.js"></script>
         <!-- Main JS -->
-        <script src="js/main.js"></script>
+        <script src="js/main-unowled.js"></script>
 
         <!-- Javascript for this page -->
 
