@@ -1,18 +1,30 @@
-.media{id: "post_#{post.id}"}
-  -if post.user
-    = render 'users/user_post', user: post.user
-  .media-body
-    -if post.user
-      .media-heading
-        =link_to post.user, user_path(@project, post.user)
-    %span.color-green=post.name
-    %span
-      -if boss?
-        =link_to t('link.more'), plan_post_path(@project, post), class: "btn btn-primary btn-xs"
-        |
-        = render 'shared/post_edit_bar', post: post
-      -else
-        =link_to t('link.more'), plan_post_path(@project, post)
-    %br
-    =simple_format(post.goal)
-    = render 'shared/post_social_bar2', post: post
+.col-lg-6.box-shadow-outer{id: "post_#{post.id}"}
+  .project-single.rounded-3
+    .row.post-header
+      .col-xs-8
+        %span.post-header-text.color.mass-red
+          = post.name
+      .col-xs-4.post-header-date
+        %span
+          21.12.2014
+    .post-center-block
+      .post-poster
+        -#@todo заменить на аватарку юзера
+        = image_tag 'img/ava1.jpg'
+        .clearfix
+        %span.poster-name
+          = post.user
+      %a.post-text.open-popup-link{href: '#popup-project'}
+        .text-arrow.pull-right
+        %span
+          = simple_format(post.goal)
+    .project-bottom
+      %span.popup-comments
+        (+5)
+        %i.fa.fa-comment-o
+      %span.popup-likes
+        (+9)
+        %i.fa.fa-thumbs-o-up
+      %span.popup-dislikes
+        (+1)
+        %i.fa.fa-thumbs-o-down

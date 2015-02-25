@@ -1,19 +1,11 @@
-.row
+.project
+  %h4 Проекты
   - if signed_in? and (@project.status == 9 or @project.demo?)
-    = link_to t('form.plan.new'), new_plan_post_path(@project) , id: 'add_record',  class: 'btn btn-lg btn-success'
-  .pull-right
-    -if boss? and (@project.status == 9 or @project.demo?)
-      = link_to t('form.plan.est_normal'), plan_posts_change_estimate_status_path(@project, :est_stat => 0), :remote => true, :method => :put, id: 'standart_estimate',  class: "btn btn-sm stat_estimate #{@est_stat == 0 ? 'btn-success' : 'btn-default'}"
-      = link_to t('form.plan.est_easy'), plan_posts_change_estimate_status_path(@project, :est_stat => 1), :remote => true, :method => :put, id: 'simple_estimate',  class: "btn btn-sm stat_estimate #{@est_stat == 1 ? 'btn-success' : 'btn-default'}"
-    -else
-      %a.btn.btn-sm.stat_estimate.disabled#standart_estimate{ class: @est_stat == 0 ? 'btn-success' : 'btn-default'}=t('form.plan.est_normal')
-      %a.btn.btn-sm.stat_estimate.disabled#simple_estimate{ class: @est_stat == 1 ? 'btn-success' : 'btn-default'}=t('form.plan.est_easy')
-
-%br
-.row
-  .col-md-12
-    %section
-      .body
-        = link_to t('menu.help_note'), "/project/#{@project.id}/#{controller.controller_path == 'essay/posts' ? stage_for_essay(params[:stage].to_i) : controller.controller_path}/to_work", class: 'btn btn-info pull-right'
-
-        = render collection: @posts, partial: '/plan/posts/post'
+    = link_to t('form.plan.new'), new_plan_post_path(@project), id: 'add_plan',  class: 'add-project btn btn-mass-red'
+  .container
+    - @posts.each_with_index do |post, index|
+      - if index % 2 == 0
+        .row.projects
+          = render partial: '/plan/posts/post', locals: {post: post}
+      - else
+        = render partial: '/plan/posts/post', locals: {post: post}
