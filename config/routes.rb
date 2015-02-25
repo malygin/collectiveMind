@@ -198,14 +198,10 @@ CollectiveMind::Application.routes.draw do
     namespace :plan do
       posts_routes
       resources :posts do
+        resources :stages, only: [:new, :create, :edit, :update, :destroy], controller: 'post_stages'
         post :get_concepts, on: :collection
         member do
           put :add_concept
-          put :new_stage
-          put :edit_stage
-          put :create_stage
-          put :update_stage
-          delete :destroy_stage
           put :edit_concept
           delete :destroy_concept
           put :new_action

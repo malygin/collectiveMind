@@ -25,11 +25,9 @@ class Plan::PostsController < PostsController
   end
 
   def create
-    @plan_post = Plan::Post.new(params[:plan_post])
-    @plan_post.number_views = 0
+    @plan_post = Plan::Post.new plan_post_params
     @plan_post.project = @project
     @plan_post.user = current_user
-    @plan_post.status = 0
     respond_to do |format|
       if @plan_post.save!
         current_user.journals.build(type_event: 'plan_post_save', body: trim_content(@plan_post.name), first_id: @plan_post.id, project: @project).save!
@@ -61,50 +59,6 @@ class Plan::PostsController < PostsController
     @aspects = Core::Aspect.where(project_id: @project, status: 0)
     @disposts = Discontent::Post.where(project_id: @project, status: 4).order(:id)
     @new_ideas = Plan::PostAspect.joins("INNER JOIN plan_posts ON plan_posts.id = plan_post_aspects.plan_post_id").where("plan_posts.project_id = ? and plan_posts.id = ?", @project.id, @post.id).where(plan_post_aspects: {concept_post_aspect_id: nil, core_aspect_id: nil})
-  end
-
-  # @todo methods for stage
-  def new_stage
-    @post = Plan::Post.find(params[:id])
-    @post_stage = Plan::PostStage.new
-  end
-
-  def edit_stage
-    @post = Plan::Post.find(params[:id])
-    @post_stage = Plan::PostStage.find(params[:stage_id])
-  end
-
-  def create_stage
-    @post = Plan::Post.find(params[:id])
-    @post_stage = Plan::PostStage.new(params[:plan_post_stage])
-    @post_stage.post = @post
-    @post_stage.status = 0
-    respond_to do |format|
-      if @post_stage.save!
-        format.js
-      else
-        format.js { render action: 'new_stage' }
-      end
-    end
-  end
-
-  def update_stage
-    @post = Plan::Post.find(params[:id])
-    @post_stage = Plan::PostStage.find(params[:stage_id])
-    @post_stage.update_attributes(params[:plan_post_stage])
-    respond_to do |format|
-      if @post_stage.save!
-        format.js
-      else
-        format.js { render action: 'edit_stage' }
-      end
-    end
-  end
-
-  def destroy_stage
-    @post = Plan::Post.find(params[:id])
-    @post_stage = Plan::PostStage.find(params[:stage_id])
-    @post_stage.update_column(:status, 1) if current_user?(@post.user) or boss?
   end
 
   # @todo methods for action
@@ -346,6 +300,10 @@ class Plan::PostsController < PostsController
   end
 
   private
+  def plan_post_params
+    params.require(:plan_post).permit(:goal, :name, :content)
+  end
+
   def create_plan_resources_on_type(project, post)
     post.plan_post_resources.by_type(['positive_r', 'positive_s', 'negative_r', 'negative_s', 'control_r', 'control_s']).destroy_all
     unless params[:resor].nil?
