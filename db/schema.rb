@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150223142128) do
+ActiveRecord::Schema.define(version: 20150225153718) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -1222,7 +1222,7 @@ ActiveRecord::Schema.define(version: 20150223142128) do
     t.text     "desc"
     t.date     "date_begin"
     t.date     "date_end"
-    t.integer  "status"
+    t.integer  "status",              default: 0
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -1305,7 +1305,7 @@ ActiveRecord::Schema.define(version: 20150223142128) do
     t.text     "desc"
     t.date     "date_begin"
     t.date     "date_end"
-    t.integer  "status"
+    t.integer  "status",     default: 0
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -1325,8 +1325,8 @@ ActiveRecord::Schema.define(version: 20150223142128) do
     t.text     "goal"
     t.text     "first_step"
     t.text     "other_steps"
-    t.integer  "status"
-    t.integer  "number_views"
+    t.integer  "status",          default: 0
+    t.integer  "number_views",    default: 0
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "project_id"
