@@ -1,11 +1,11 @@
--if params[:new_idea]
-  var concept = render_concept_collapse("",#{@concept_post.id});
+-if params[:new_idea] or params[:right_list]
+  var concept = render_concept_collapse("",#{@concept_post.id},#{params[:right_list] ? 'right_list' : ''});
   if (concept == false) {
-  $("#tr_plus_concept_#{@concept_post.id}").after("#{escape_javascript(render partial: 'light_concept', object: @concept_post, locals: { table: false,what_view: false, what_view_concept: false } )}");
+  $("#tr_" + "#{params[:new_idea] ? 'plus' : 'right_list'}" + "_concept_#{@concept_post.id}").after("#{escape_javascript(render partial: 'light_concept', object: @concept_post, locals: { table: false, what_view: false, what_view_concept: false } )}");
   }
-  $("#collapse_plus_concept_#{@concept_post.id}").collapse('toggle');
+  $("#collapse_" + "#{params[:new_idea] ? 'plus' : 'right_list'}" + "_concept_#{@concept_post.id}").collapse('toggle');
 -elsif params[:what_view]
-  var concept = render_concept_collapse(#{@dispost.id},"");
+  var concept = render_concept_collapse(#{@dispost.id},"","");
   if (concept == false) {
   $("#view_dis_concept_#{@dispost.id}").after("#{escape_javascript(render partial: 'light_concept', object: @concept_post, locals: { post: @dispost, table: false, what_view: true, what_view_concept: false } )}");
   }
@@ -20,7 +20,7 @@
   $('#view_concepts_#{@dispost.id}').toggleClass('label-success label-primary');
   $("#collapse_dis_concept_#{@dispost.id}").collapse('toggle');
 -elsif params[:what_view_concept]
-  var concept = render_concept_collapse(#{@concept.id},"");
+  var concept = render_concept_collapse(#{@concept.id},"","");
   if (concept == false) {
   $("#view_dis_concept_#{@concept.id}").after("#{escape_javascript(render partial: 'light_concept', object: @concept_post, locals: { post: @concept, table: false, what_view: false, what_view_concept: true } )}");
   }
@@ -35,7 +35,7 @@
   $('#view_concepts_#{@concept.id}').toggleClass('label-success label-primary');
   $("#collapse_dis_concept_#{@concept.id}").collapse('toggle');
 -else
-  var concept = render_concept_collapse(#{@dispost.id},#{@concept_post.id});
+  var concept = render_concept_collapse(#{@dispost.id},#{@concept_post.id},"");
   if (concept == false) {
   $("#tr_plus_concept_#{@dispost.id}_#{@concept_post.id}").after("#{escape_javascript(render partial: 'light_concept', object: @concept_post, locals: { dispost: @dispost, table: false, what_view: false, what_view_concept: false } )}");
   }

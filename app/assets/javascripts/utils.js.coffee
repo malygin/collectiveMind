@@ -314,13 +314,16 @@ $('#tab_posts li#new a').on "click", (e) ->
   $(el).parent().parent().remove()
   $("#asp_" + cp).remove()
 
-@render_concept_collapse = (post, concept)->
+@render_concept_collapse = (post, concept, right_list) ->
   if post != '' and concept != ''
     con_id = $("#collapse_plus_concept_" + post + "_" + concept).attr('id')
-  if post != '' and concept == ''
+  else if post != '' and concept == ''
     con_id = $("#collapse_dis_concept_" + post).attr('id')
-  if post == '' and concept != ''
+  else if post == '' and concept != '' and right_list != ''
+    con_id = $("#collapse_right_list_concept_" + concept).attr('id')
+  else if post == '' and concept != ''
     con_id = $("#collapse_plus_concept_" + concept).attr('id')
+
   if typeof con_id is 'undefined'
     return false
   else

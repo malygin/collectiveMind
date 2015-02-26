@@ -342,7 +342,7 @@ class Plan::PostsController < PostsController
   def view_concept
     @project = Core::Project.find(params[:project])
     @post = Plan::Post.find(params[:id])
-    if params[:new_idea]
+    if params[:new_idea] or params[:right_list]
       @concept_post = Plan::PostAspect.find(params[:con_id])
     elsif params[:what_view]
       @dispost = Discontent::Post.find(params[:post_id]) if params[:post_id]

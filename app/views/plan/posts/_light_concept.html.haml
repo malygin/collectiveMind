@@ -38,7 +38,7 @@
             .label.label-success=t('form.plan.concept.add')
         .col-md-1
           .pull-right
-            =link_to add_form_for_concept_plan_post_path(@project, @post, stage_id: @post_stage, concept_id: pa.post_aspects.first.id, save_form: true), method: :put, remote: true, id: "plus_post_concept_#{pa.id}" do
+            =link_to add_form_for_concept_plan_post_path(@project, @post, stage_id: @post_stage, concept_id: pa.post_aspects.first.id, save_form: true), method: :put, remote: true, id: "plus_post_concept_#{pa.id}", style: "#{@post.post_aspects.pluck(:concept_post_aspect_id).include?(pa.post_aspect.id) ? 'display:none;' : ''}" do
               %button.btn.btn-sm.btn-warning{type: "button"}
                 %i.fa.fa-plus
       .concept-devider
@@ -89,12 +89,14 @@
 -else
   -if params[:new_idea]
     -@id_collapse = "collapse_plus_concept_#{light_concept.id}"
+  -elsif params[:right_list]
+    -@id_collapse = "collapse_right_list_concept_#{light_concept.id}"
   -else
     -@id_collapse = "collapse_plus_concept_#{dispost.id}_#{light_concept.id}"
 
   -if params[:render_dispost]
     %div.collapse.text-left{id: @id_collapse}
-      =render partial:'discontent/posts/post_short2', object: dispost
+      =render partial: 'discontent/posts/post_short2', object: dispost
   -else
     %div.collapse.text-left{id: @id_collapse}
       -if light_concept.name.present?
@@ -103,7 +105,7 @@
           =t('form.concept.novation_what')
         %p
           =light_concept.name
-        -if light_concept.instance_of? Plan::PostAspect
+        -if light_concept.instance_of? Plan::PostAspect and light_concept.concept_post_aspect
           =link_to t('link.more'), concept_post_path(@project, light_concept.concept_post_aspect.concept_post), class: "label label-info", target: "_blank"
         -elsif light_concept.instance_of? Concept::PostAspect
           =link_to t('link.more'), concept_post_path(@project, light_concept.concept_post), class: "label label-info", target: "_blank"

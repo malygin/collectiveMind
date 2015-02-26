@@ -33,16 +33,16 @@
                             %i.fa.fa-plus
                   .concept-devider
               %br
-              %h4.color-teal=t('form.plan.concept.select')
+              %h4.color-teal=t('form.plan.concept.select2')
 
               %div.modal-plan-concepts-tabs(role="tabpanel")
                 %ul.nav.nav-tabs(role="tablist")
                   %li.active(role="presentation")
                     %a{href: "#tab_plan_discontents", "aria-controls" => "tab_plan_discontents", "data-toggle" => "tab", role: "tab"}
-                      По несовершенствам
+                      От несовершенств
                   %li(role="presentation")
                     %a{href: "#tab_plan_concepts", "aria-controls" => "tab_plan_concepts", "data-toggle" => "tab", role: "tab"}
-                      По нововведениям
+                      От нововведений
 
               .tab-content
                 #tab_plan_discontents.tab-pane.fade.clearfix.in.active(role="tabpanel")
@@ -88,7 +88,7 @@
                               .label.label-success{id: "view_concepts_#{post.id}"} Показать несовершенства
                         .col-md-1
                           .pull-right
-                            =link_to add_form_for_concept_plan_post_path(@project, @post, stage_id: @post_stage, concept_id: post.post_aspect.id, save_form: true), method: :put, remote: true, id: "plus_post_concept_#{post.id}" do
+                            =link_to add_form_for_concept_plan_post_path(@project, @post, stage_id: @post_stage, concept_id: post.post_aspect.id, save_form: true), method: :put, remote: true, id: "plus_post_concept_#{post.id}", style: "#{@post.post_aspects.pluck(:concept_post_aspect_id).include?(post.post_aspect.id) ? 'display:none;' : ''}" do
                               %button.btn.btn-sm.btn-warning{type: "button"}
                                 %i.fa.fa-plus
 
@@ -104,7 +104,7 @@
                     .row.plus-concept(id="tr_right_list_concept_#{post.id}")
                       .col-md-11
                         - if post.title!=''
-                          =link_to view_concept_plan_post_path(@project, @post, con_id: post.id, new_idea: true), method: :get, remote: true, class: "color-teal", "data-toggle"=> "collapse", "data-target"=> "collapse_plus_concept_#{post.id}", style: "text-decoration:none;", id: "view_post_concept_#{post.id}" do
+                          =link_to view_concept_plan_post_path(@project, @post, con_id: post.id, right_list: true), method: :get, remote: true, class: "color-teal", "data-toggle"=> "collapse", "data-target"=> "collapse_right_list_concept_#{post.id}", style: "text-decoration: none;", id: "view_post_concept_#{post.id}" do
                             =post.title
                         - else
                           =t('show.without_name')
@@ -113,7 +113,6 @@
                           =link_to destroy_concept_plan_post_path(@project, @post, con_id: post.id, stage_id: @post_stage, fast_remove: true), method: :delete, remote: true, data: {confirm: t('confirm.delete_concept')}, id: "destroy_post_concept_#{post.id}" do
                             %button.btn.btn-sm.btn-danger{type: "button"}
                               %i.fa.fa-minus
-
                     .concept-devider
               %br
 

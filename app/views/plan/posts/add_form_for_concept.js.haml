@@ -11,7 +11,12 @@
 
     -if @concept
       $('.td_plus_concept_#{@concept.id}').html('<div class="label label-success">#{t('form.plan.concept.add')}</div>')
-      $('#plus_post_concept_#{@concept.id}').css('display', 'none');
+      -if params[:new_idea]
+        $('#plus_post_concept_#{@concept.id}').hide();
+      -elsif @concept.instance_of? Concept::PostAspect
+        $('#plus_post_concept_#{@concept.concept_post.id}').hide();
+      -elsif @concept.instance_of? Plan::PostAspect and @concept.concept_post_aspect
+        $('#plus_post_concept_#{@concept.concept_post_aspect.concept_post.id}').hide();
     -else
       $('#modal_concept').modal('hide');
       $('#render_modal_edit_concept').empty();
