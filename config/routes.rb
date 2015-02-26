@@ -199,24 +199,23 @@ CollectiveMind::Application.routes.draw do
       posts_routes
       resources :posts do
         resources :stages, only: [:new, :create, :edit, :update, :destroy], controller: 'post_stages'
+        resources :actions, only: [:new, :create, :edit, :update, :destroy], controller: 'post_actions'
+        resources :aspects, only: [:new, :create, :edit, :update, :destroy], controller: 'post_aspects'
         post :get_concepts, on: :collection
         member do
           put :add_concept
           put :edit_concept
           delete :destroy_concept
-          put :new_action
-          put :edit_action
-          put :create_action
-          put :update_action
-          delete :destroy_action
           put :add_form_for_concept
           put :update_concept
           get :get_concept
           put :update_get_concept
-          put :render_table
-          put :render_concept_side
           get :view_concept
           get :view_concept_table
+          put :render_concept_side
+
+          put :render_table
+
           put :new_note
           put :create_note
           put :destroy_note

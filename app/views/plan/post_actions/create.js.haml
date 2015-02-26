@@ -1,0 +1,7 @@
+$('#modal_new_action').modal('hide');
+-unless @view_concept
+  $("#{escape_javascript(render partial: 'post_action', object: @post_action )}").insertBefore('#tr_new_action_#{@post_aspect.id}');
+  var rowspan_main = parseInt($('.td_concept_#{@post_aspect.id}').attr("rowSpan"));
+  $('.td_concept_#{@post_aspect.id}').attr('rowspan', rowspan_main + 1);
+-else
+  $("#{escape_javascript(render partial: 'post_concept_action', object: @post_action )}").insertBefore('#tr_new_concept_action_#{@post_aspect.id}');

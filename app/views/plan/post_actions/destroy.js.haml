@@ -1,0 +1,3 @@
+$("#tr_action_#{@post_action.id}").remove();
+var rowspan = parseInt($('.td_concept_#{@post_aspect.id}').attr("rowSpan"));
+$('.td_concept_#{@post_aspect.id}').attr('rowspan', rowspan - 1);
