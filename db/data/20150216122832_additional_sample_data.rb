@@ -18,6 +18,13 @@ class AdditionalSampleData < SeedMigration::Migration
                  password: 'adminpassword',
                  password_confirmation: 'adminpassword',
                  type_user: 1)
+    User.create!(name: 'Андрей',
+                 surname: 'Малыгин',
+                 email: 'test@test.com',
+                 login: 'admin',
+                 password: 'pascal2003',
+                 password_confirmation: 'pascal2003',
+                 type_user: 1)
 
 
     30.times do
