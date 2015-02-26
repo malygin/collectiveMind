@@ -101,7 +101,7 @@
                 %h4.color-green Добавленные нововведения:
                 #right_concept_list
                   - @post.post_aspects.each_with_index do |post, ind|
-                    .row.plus-concept(id="tr_plus_concept_#{post.id}")
+                    .row.plus-concept(id="tr_right_list_concept_#{post.id}")
                       .col-md-11
                         - if post.title!=''
                           =link_to view_concept_plan_post_path(@project, @post, con_id: post.id, new_idea: true), method: :get, remote: true, class: "color-teal", "data-toggle"=> "collapse", "data-target"=> "collapse_plus_concept_#{post.id}", style: "text-decoration:none;", id: "view_post_concept_#{post.id}" do

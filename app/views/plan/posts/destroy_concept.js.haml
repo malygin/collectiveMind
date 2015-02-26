@@ -3,3 +3,9 @@ $("#tr_concept_#{@post_concept.id}").remove();
   -@post_actions.each do |action|
     $("#tr_action_#{action}").remove();
 $("#tr_new_action_#{@post_concept.id}").remove();
+$("#tr_plan_all_concept_#{@post_concept.id}").remove();
+
+-if params[:fast_remove]
+  $("#tr_right_list_concept_#{@post_concept.id}").remove();
+  $('.td_plus_concept_#{@post_concept.concept_post_aspect.id}').html('');
+  $('#plus_post_concept_#{@post_concept.concept_post_aspect.id}').css('display', 'block');

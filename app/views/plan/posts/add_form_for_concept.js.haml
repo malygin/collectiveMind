@@ -5,10 +5,13 @@
       $("#{escape_javascript(render partial: 'post_concept', object: @cond )}").insertBefore('#tr_new_concept_#{@post_stage.id}');
     -else
       $("#table_plan_all").append("#{escape_javascript(render partial: 'post_concept', object: @cond )}");
-      -#plan_stage();
+
+    -#$("#right_concept_list").append("<div class="concept-devider"></div>");
+    $("#right_concept_list").append("#{escape_javascript(render partial: 'right_concept_post', object: @cond )}");
 
     -if @concept
       $('.td_plus_concept_#{@concept.id}').html('<div class="label label-success">#{t('form.plan.concept.add')}</div>')
+      $('#plus_post_concept_#{@concept.id}').css('display', 'none');
     -else
       $('#modal_concept').modal('hide');
       $('#render_modal_edit_concept').empty();
