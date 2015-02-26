@@ -204,10 +204,7 @@ CollectiveMind::Application.routes.draw do
         post :get_concepts, on: :collection
         member do
           put :add_concept
-          put :edit_concept
-          delete :destroy_concept
           put :add_form_for_concept
-          put :update_concept
           get :get_concept
           put :update_get_concept
           get :view_concept
@@ -215,7 +212,6 @@ CollectiveMind::Application.routes.draw do
           put :render_concept_side
 
           put :render_table
-
           put :new_note
           put :create_note
           put :destroy_note

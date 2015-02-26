@@ -1,0 +1,5 @@
+$("#tr_concept_#{@post_concept.id}").remove();
+-unless @post_actions.empty?
+  -@post_actions.each do |action|
+    $("#tr_action_#{action}").remove();
+$("#tr_new_action_#{@post_concept.id}").remove();
