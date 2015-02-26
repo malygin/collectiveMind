@@ -1,7 +1,17 @@
-.row
-  .col-md-12
-    %section
-      .body
-        = link_to t('menu.help_note'), "/project/#{@project.id}/#{controller.controller_path == 'essay/posts' ? stage_for_essay(params[:stage].to_i) : controller.controller_path}/to_work", class: 'btn btn-info pull-right'
+.project
+  %h4 Проекты
+  .container
+    - @posts.each_with_index do |post, index|
+      - if index % 2 == 0
+        .row.projects
+          = render post #estimates/posts/post_estimate ??
+      - else
+        = render post
 
-        = render partial: '/plan/posts/post_estimate', collection: @posts
+-#.row
+-#  .col-md-12
+-#    %section
+-#      .body
+-#        = link_to t('menu.help_note'), "/project/#{@project.id}/#{controller.controller_path == 'essay/posts' ? stage_for_essay(params[:stage].to_i) : controller.controller_path}/to_work", class: 'btn btn-info pull-right'
+-#
+-#        = render partial: '/plan/posts/post_estimate', collection: @posts
