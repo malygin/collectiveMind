@@ -6,6 +6,8 @@
     - @posts.each_with_index do |post, index|
       - if index % 2 == 0
         .row.projects
-          = render partial: '/plan/posts/post', locals: {post: post}
+          = render partial: 'post', locals: {post: post}
       - else
-        = render partial: '/plan/posts/post', locals: {post: post}
+        = render partial: 'post', locals: {post: post}
+
+#for_show_project_modal

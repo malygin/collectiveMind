@@ -2,7 +2,8 @@
   .sender.pull-left.hidden-xs
     .icon(style='text-align:center;line-height:20px;width:60px;')
       = link_to user_path(@project,user) do
-        = image_tag user.avatar.url(:thumb)
+        -#@todo заменить на аватарку юзера
+        /= image_tag user.avatar.url(:thumb)
         - if user.user_project_scores(@project.id) and (not (user.boss? or user.role_expert?) or @project.uniq_proc?)
           %a(style="text-decoration:none; font-size: 13px;")
             =user.user_project_scores(@project.id).score

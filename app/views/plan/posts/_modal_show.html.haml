@@ -1,0 +1,343 @@
+.popup-window.info-popup.mfp-hide{id: "popup-project_#{@post.id}"}
+  .popup.popup-top-rounded
+    .popup-post-info
+      .popup-header.popup-top-rounded
+        %h2.color.mass-red
+          = @post.name
+      .clearfix
+      .row.info-block
+        .col-lg-4.popup-post-block
+          -#@todo заменить на аватарку юзера
+          = image_tag 'img/ava1.jpg'
+          %span
+            = @post.user
+          .info-stripe
+            %span.popup-date
+              = Russian::strftime(@post.created_at, '%d.%m.%Y')
+            %span.popup-comments
+              +5
+              %i.fa.fa-comment-o
+            %span.popup-likes
+              +9
+              %i.fa.fa-thumbs-o-up
+            %span.popup-dislikes
+              +1
+              %i.fa.fa-thumbs-o-down
+        .col-lg-8.popup-right-tabs
+          .nav-tabs-one
+            %ul.nav.nav-tabs
+              %li.active
+                %a{'data-toggle' => 'tab', href: '#tab-1'} Описание проекта
+              %li
+                %a{'data-toggle' => 'tab', href: '#tab-2'} Нововведения и план мероприятий
+              %li
+                %a{'data-toggle' => 'tab', href: '#tab-3'} Комментарии
+    .clearfix
+    .tab-content
+      #tab-1.tab-pane.fade.in.active.popup-bottom-rounded
+        .row
+          .col-xs-7.col-sm-7.col-md-7.col-lg-7.description-left-col
+            .description-block
+              %span.description-title Коротко о проекте
+              %p
+                = simple_format(@post.goal)
+            .description-block
+              %span.description-title Эссе по проекту. Пояснения и обоснования
+              %p
+                = @post.content
+          .col-xs-5.col-sm-5.col-md-5.col-lg-5.description-right-col
+            .description-block
+              %span.description-title Этапы проекта
+              .stages-blocks
+                .description-stage
+                  %span.desc-stage-date 12 янв 2015 - 22 янв 2015
+                  %span.desc-stage-name Подготовка и подбор участников
+                .description-stage
+                  %span.desc-stage-date 12 янв 2015 - 22 янв 2015
+                  %span.desc-stage-name Подготовка и подбор участников
+                .description-stage
+                  %span.desc-stage-date 12 янв 2015 - 22 янв 2015
+                  %span.desc-stage-name Подготовка и подбор участников
+                .description-stage
+                  %span.desc-stage-date 12 янв 2015 - 22 янв 2015
+                  %span.desc-stage-name Подготовка и подбор участников
+      #tab-2.tab-pane.fade.popup-bottom-rounded
+        .container.timeline-cont
+          .vertical-timeline
+            .row
+              .col-md-12.col-sm-12
+                / time line col
+                .v-timeline-col
+                  .entry-top-badge.timel-back-b1f0c1
+                    %span.top-badge-entry-stage 1 этап
+                    %span.top-badge-entry-date 12 янв 2015 - 12 янв 2015
+                    %span.top-badge-entry-theme Подготовка и подбор участников
+                  .row
+                    .col-md-6.col-sm-6.left-col-timeline.timel-line-b1f0c1
+                      / time line content entry
+                      .entry
+                        / Time line entry head
+                        .entry-head.timel-back-8cf0ba
+                          Формирование списка активный ПС
+                        / Time line entry content
+                        .entry-content
+                          / Heading
+                          %p
+                            Цели, задачи, потребности аптеки - одинаковые для всех сетей, не
+                            зависимо где находится сеть и как она называется, а люди, работающие
+                            у первого стола - разные. Есть список "золотого" фонда аптек - надо
+                            подбирать ключи к этому запаснику. Может сгруппировать первостоль-
+                            ников по потребностям и для данных групп разрабатывать визиты?
+                            Цели, задачи, потребности аптеки - одинаковые для всех сетей, не
+                            зависимо где находится сеть и как она называется, а люди, работающие
+                            у первого стола - разные. Есть список "золотого" фонда аптек - надо
+                            подбирать ключи к этому запаснику. Может сгруппировать первостоль-
+                            ников по потребностям и для данных групп разрабатывать визиты?
+                            Цели, задачи, потребности аптеки - одинаковые для всех сетей, не
+                            зависимо где находится сеть и как она называется, а люди, работающие
+                            у первого стола - разные. Есть список "золотого" фонда аптек - надо
+                            подбирать ключи к этому запаснику. Может сгруппировать первостоль-
+                            ников по потребностям и для данных групп разрабатывать визиты?
+                            Цели, задачи, потребности аптеки - одинаковые для всех сетей, не
+                            зависимо где находится сеть и как она называется, а люди, работающие
+                            у первого стола - разные. Есть список "золотого" фонда аптек.
+                          .entry-descript-tags
+                            %span.timel-back-8cf0ba Угощение
+                            %span.timel-back-8cf0ba Лекторы
+                            %span.timel-back-8cf0ba Просторное помещение с оборудованием
+                    .col-md-6.col-sm-6.right-col-timeline.timel-line-b1f0c1
+                      .entry-dates-block
+                        .badge-wrap
+                          .badge-arrow
+                            %span.entry-icon.timel-back-b1f0c1
+                            %span.badge-date 12 янв 2015
+                            %span.badge-name Встреча в аптеках инвара
+                          .badge-tags
+                            .badge-tag.timel-back-8cf0ba
+                              Угощение
+                            .badge-tag.timel-back-8cf0ba
+                              Лекторы
+                            .badge-tag.timel-back-8cf0ba
+                              Просторное помещение с оборудованием
+                        .badge-wrap
+                          .badge-arrow
+                            %span.entry-icon.timel-back-b1f0c1
+                            %span.badge-date 12 янв 2015
+                            %span.badge-name Встреча в аптеках инвара
+                          .badge-tags
+                            .badge-tag.timel-back-8cf0ba
+                              Лекторы
+                            .badge-tag.timel-back-8cf0ba
+                              Просторное помещение с оборудованием
+                        .badge-wrap
+                          .badge-arrow
+                            %span.entry-icon.timel-back-b1f0c1
+                            %span.badge-date 12 янв 2015
+                            %span.badge-name Встреча в аптеках инвара
+                          .badge-tags
+                            .badge-tag.timel-back-8cf0ba
+                              Лекторы
+                      .entry-dates-block
+                        .badge-wrap
+                          .badge-arrow
+                            %span.entry-icon.timel-back-b1f0c1
+                            %span.badge-date 12 янв 2015
+                            %span.badge-name Встреча в аптеках инвара
+                          .badge-tags
+                            .badge-tag.timel-back-b3fcb5
+                              Большое количество сидячих мест
+                            .badge-tag.timel-back-b3fcb5
+                              Просторное помещение
+                        .badge-wrap
+                          .badge-arrow
+                            %span.entry-icon.timel-back-b1f0c1
+                            %span.badge-date 12 янв 2015
+                            %span.badge-name Встреча в аптеках инвара
+                          .badge-tags
+                            .badge-tag.timel-back-b3fcb5
+                              Большое количество сидячих мест
+                            .badge-tag.timel-back-b3fcb5
+                              Просторное помещение
+                            .badge-tag.timel-back-b3fcb5
+                              Просторное помещение
+                  .entry-top-badge.timel-back-a0c7fe
+                    %span.top-badge-entry-stage 1 этап
+                    %span.top-badge-entry-date 12 янв 2015 - 12 янв 2015
+                    %span.top-badge-entry-theme Подготовка и подбор участников
+                  .row
+                    .col-md-6.col-sm-6.left-col-timeline.timel-line-a0c7fe
+                      / time line content entry
+                      .entry
+                        / Time line entry head
+                        .entry-head.timel-back-bce1fe
+                          Формирование списка активный ПС
+                        / Time line entry content
+                        .entry-content
+                          / Heading
+                          %p
+                            Цели, задачи, потребности аптеки - одинаковые для всех сетей, не
+                            зависимо где находится сеть и как она называется, а люди, работающие
+                            у первого стола - разные. Есть список "золотого" фонда аптек - надо
+                            подбирать ключи к этому запаснику.
+                          .entry-descript-tags
+                            %span.timel-back-bce1fe Просторное помещение
+                            %span.timel-back-bce1fe Просторное помещение
+                            %span.timel-back-bce1fe Просторное помещение
+                            %span.timel-back-bce1fe Большое количество сидячих мест
+                            %span.timel-back-bce1fe Большое количество сидячих мест
+                    .col-md-6.col-sm-6.right-col-timeline.timel-line-a0c7fe
+                      .entry-dates-block
+                        .badge-wrap
+                          .badge-arrow
+                            %span.entry-icon.timel-back-a0c7fe
+                            %span.badge-date 12 янв 2015
+                            %span.badge-name Встреча в аптеках инвара
+                          .badge-tags
+                            .badge-tag.timel-back-bce1fe
+                              Большое количество сидячих мест
+                            .badge-tag.timel-back-bce1fe
+                              Просторное помещение
+                        .badge-wrap
+                          .badge-arrow
+                            %span.entry-icon.timel-back-a0c7fe
+                            %span.badge-date 12 янв 2015
+                            %span.badge-name Встреча в аптеках инвара
+                          .badge-tags
+                            .badge-tag.timel-back-bce1fe
+                              Просторное помещение
+                            .badge-tag.timel-back-bce1fe
+                              Большое количество сидячих мест
+                            .badge-tag.timel-back-bce1fe
+                              Большое количество сидячих мест
+                            .badge-tag.timel-back-bce1fe
+                              Большое количество сидячих мест
+                        .badge-wrap
+                          .badge-arrow
+                            %span.entry-icon.timel-back-a0c7fe
+                            %span.badge-date 12 янв 2015
+                            %span.badge-name Встреча в аптеках инвара
+                          .badge-tags
+                            .badge-tag.timel-back-bce1fe
+                              Просторное помещение
+                            .badge-tag.timel-back-bce1fe
+                              Большое количество сидячих мест
+                            .badge-tag.timel-back-bce1fe
+                              Большое количество сидячих мест
+                            .badge-tag.timel-back-bce1fe
+                              Большое количество сидячих мест
+      #tab-3.tab-pane.fade.popup-bottom-rounded
+        .comments-cont
+          .proj-comment
+            -#@todo заменить на аватарку юзера
+            = image_tag 'img/ava1.jpg', class: 'proj-comment-ava'
+            .proj-comment-name Лиза Школьник
+            .proj-comment-text текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст
+          .proj-comment
+            -#@todo заменить на аватарку юзера
+            = image_tag 'img/ava1.jpg', class: 'proj-comment-ava'
+            .proj-comment-name Лиза Школьник
+            .proj-comment-text текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст
+          %form.add-comment
+            -#@todo заменить на аватарку юзера
+            = image_tag 'img/ava1.jpg', class: 'proj-comment-ava'
+            %input{name: 'comment', placeholder: 'Оставьте комментарий', type: 'text'}/
+-#
+-#
+-#
+-#
+-#
+-#
+-#
+-#%section
+-#  .body.plan_tabs
+-#    %ul.nav.nav-tabs.nav-justified{:role => "tablist", :id => "PlanTabsShow"}
+-#      %li.active#first
+-#        %a{"data-toggle" => "tab", :href => "#tab1", :role => "tab"}
+-#          %small 1.
+-#          %strong=t('form.plan.desc')
+-#      %li#second
+-#        -if @@post.persisted?
+-#          #option_for_render_tab(project="#{@project.id}" post="#{@@post.id}")
+-#        %a{"data-toggle" => "tab", :href => "#tab2", :role => "tab"}
+-#          %small 2.
+-#          %strong=t('form.plan.actions')
+-#        #spinner_tab2.loader.animated.handle(style="display:none;")
+-#          %span.spinner
+-#            %i.fa.fa-spinner.fa-spin
+-#      %li#third
+-#        %a{"data-toggle" => "tab", :href => "#tab3", :role => "tab"}
+-#          %small 3.
+-#          %strong=t('form.plan.concepts')
+-#        #spinner_tab3.loader.animated.handle(style="display:none;")
+-#          %span.spinner
+-#            %i.fa.fa-spinner.fa-spin
+-#
+-#    .tab-content(style="overflow:visible;")
+-#      #tab1.tab-pane.active
+-#        .form-horizontal
+-#          %fieldset
+-#            .col-md-6
+-#              %legend.section
+-#                =t('form.plan.desc')
+-#              .text-left
+-#                %h4.color-green=t('form.plan.name')
+-#                =@@post.name
+-#              %br
+-#              .text-left
+-#                %h4.color-green
+-#                  =t('form.plan.short_desc')+":"
+-#                  %small(style="font-size: 11px;") 1) Цель: какую выгоду даст  проект? Зачем это нужно его реализаторам? 2) Методы, средства и другие ресурсы: как, при помощи чего эта выгода будет получаться?
+-#                =simple_format(@@post.goal)
+-#              %br
+-#              .text-left
+-#                %h4.color-green
+-#                  =t('form.plan.essay')
+-#                  %small(style="font-size: 11px;")= t('form.plan.desc_future')
+-#                =simple_format(@@post.content)
+-#
+-#            .col-md-6
+-#              %legend.section
+-#                =t('form.plan.stages')
+-#              #post_stages
+-#                %table.table.table-striped
+-#                  %tbody
+-#                    -if @@post.post_stages.present?
+-#                      -@@post.post_stages.each_with_index do |ps,index|
+-#                        %tr
+-#                          %td
+-#                            =index+1
+-#                          %td
+-#                            -if ps.date_begin and ps.date_end
+-#                              %small.color-green
+-#                                =Russian::strftime(ps.date_begin, "%d %b %Y")
+-#                                ="-"
+-#                                =Russian::strftime(ps.date_end, "%d %b %Y")
+-#                              %br
+-#                            %span.h5=ps.name
+-#
+-#      #tab2.tab-pane
+-#        .form-horizontal
+-#          %fieldset
+-#            #table_stages
+-#
+-#      #tab3.tab-pane
+-#        .form-horizontal
+-#          %fieldset
+-#            #modal_concept_action
+-#            .col-md-4#concept_side
+-#            .col-md-8
+-#              #render_get_concept
+-#
+-#
+-#.row
+-#  .col-md-12
+-#    = render 'shared/post_social_bar2', post: @post
+-#    = render 'shared/post_edit_bar', post: @post
+-#    %br
+-#    %br
+-#      %ul.media-list#comments.chat-messages
+-#        = render partial: 'shared/comment',collection: @comments
+-#      .text-center
+-#        = will_paginate @comments
+-#    - if signed_in?
+-#      = render partial: 'shared/comment_form', locals: { comment: @comment, url_link: url_for(controller: @@post.class.name.underscore.pluralize, action: 'add_comment')}

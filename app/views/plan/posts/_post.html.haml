@@ -6,7 +6,7 @@
           = post.name
       .col-xs-4.post-header-date
         %span
-          21.12.2014
+          = Russian::strftime(post.created_at, '%d.%m.%Y')
     .post-center-block
       .post-poster
         -#@todo заменить на аватарку юзера
@@ -14,7 +14,7 @@
         .clearfix
         %span.poster-name
           = post.user
-      %a.post-text.open-popup-link{href: '#popup-project'}
+      = link_to plan_post_path(@project, post), remote: true, class: 'post-text open-popup-link' do
         .text-arrow.pull-right
         %span
           = simple_format(post.goal)
