@@ -1,8 +1,5 @@
 class AdditionalSampleData < SeedMigration::Migration
   def up
-    require 'factory_girl'
-    Dir[Rails.root.join('spec/factories/*.rb')].each { |f| require f }
-
     project = Core::Project.create!(name: 'Стратегия развития ДО в СГУ на 2012-2013 год', type_access: 2)
 
     project.aspects.create! content: 'Социальные'
@@ -25,18 +22,13 @@ class AdditionalSampleData < SeedMigration::Migration
                  password: 'pascal2003',
                  password_confirmation: 'pascal2003',
                  type_user: 1)
-
-
-    30.times do
-      FactoryGirl.create :user
-    end
   end
 
   def down
     Core::Project.destroy_all
     ActiveRecord::Base.connection.reset_pk_sequence! 'core_projects'
     ActiveRecord::Base.connection.reset_pk_sequence! 'core_aspects'
-    User.where(email: 'admin@mass-decision.ru').destroy_all
+    User.destroy_all
     ActiveRecord::Base.connection.reset_pk_sequence! 'users'
   end
 end
