@@ -51,11 +51,14 @@
                       .row
                         .col-md-8
                           %span{id: "view_what_#{post.id}"}
-                            =post.content
-                        .col-md-4
+                            = post.content
+                        .col-md-1
+                          ="#{@disposts_all == 0 ? 0 : ((post.final_votings.by_positive.size/@disposts_all.to_f)*100).round}%"
+                        .col-md-3
                           %span
                             =link_to view_concept_plan_post_path(@project, @post, stage_id: @post_stage, post_id: post.id, what_view: true), method: :get, remote: true, class: "color-teal pull-right", "data-toggle"=> "collapse", "data-target"=> "collapse_dis_concept_#{post.id}", style: "text-decoration:none;" do
                               .label.label-success{id: "view_concepts_#{post.id}"}=t('form.plan.concept.show_decision')
+
                       %div{id: "view_dis_concept_#{post.id}"}
                       .plan-devider
 
@@ -64,12 +67,20 @@
                   - @concepts.each do |post|
                     -if post.concept_disposts.present?
                       .row
-                        .col-md-8
+                        .col-md-5
                           %span{id: "view_what_#{post.id}"}
                             - if post.post_aspect.title!=''
                               =post.post_aspect.title
                             - else
                               =t('show.without_name')
+                        .col-md-3
+                          ="#{post.concept_disposts.where(concept_post_discontents: { complite: [2, 3] }).size}"
+                          ="/"
+                          ="#{post.sum_main_disposts(@disposts_all)}%"
+                          ="/"
+                          ="#{post.concept_disposts.where(concept_post_discontents: { complite: [1, nil] }).size}"
+                          ="/"
+                          ="#{post.sum_other_disposts(@disposts_all)}%"
 
                         .col-md-3
                           %span
@@ -80,29 +91,30 @@
                             =link_to add_form_for_concept_plan_post_path(@project, @post, stage_id: @post_stage, concept_id: post.post_aspect.id, save_form: true), method: :put, remote: true, id: "plus_post_concept_#{post.id}" do
                               %button.btn.btn-sm.btn-warning{type: "button"}
                                 %i.fa.fa-plus
+
                       %div{id: "view_dis_concept_#{post.id}"}
                       .plan-devider
 
 
             .col-md-6
               -if @post.post_aspects.present?
-                %h4.color-green Добавленные нововведения
-                - @post.post_aspects.each_with_index do |post, ind|
-                  .row.plus-concept(id="tr_plus_concept_#{post.id}")
-                    .col-md-1
-                      =ind+1
-                    .col-md-10
-                      - if post.title!=''
-                        =link_to view_concept_plan_post_path(@project, @post, con_id: post.id, new_idea: true), method: :get, remote: true, class: "color-teal", "data-toggle"=> "collapse", "data-target"=> "collapse_plus_concept_#{post.id}", style: "text-decoration:none;", id: "view_post_concept_#{post.id}" do
-                          =post.title
-                      - else
-                        =t('show.without_name')
-                    .col-md-1
-                      .pull-right
-                        =link_to add_form_for_concept_plan_post_path(@project, @post, stage_id: @post_stage, concept_id: post.id, save_form: true, new_idea: true), method: :put, remote: true, id: "plus_post_concept_#{post.id}" do
-                          %button.btn.btn-sm.btn-danger{type: "button"}
-                            %i.fa.fa-minus
-                  .concept-devider
+                %h4.color-green Добавленные нововведения:
+                #right_concept_list
+                  - @post.post_aspects.each_with_index do |post, ind|
+                    .row.plus-concept(id="tr_plus_concept_#{post.id}")
+                      .col-md-11
+                        - if post.title!=''
+                          =link_to view_concept_plan_post_path(@project, @post, con_id: post.id, new_idea: true), method: :get, remote: true, class: "color-teal", "data-toggle"=> "collapse", "data-target"=> "collapse_plus_concept_#{post.id}", style: "text-decoration:none;", id: "view_post_concept_#{post.id}" do
+                            =post.title
+                        - else
+                          =t('show.without_name')
+                      .col-md-1
+                        .pull-right
+                          =link_to destroy_concept_plan_post_path(@project, @post, con_id: post.id, stage_id: @post_stage, fast_remove: true), method: :delete, remote: true, data: {confirm: t('confirm.delete_concept')}, id: "destroy_post_concept_#{post.id}" do
+                            %button.btn.btn-sm.btn-danger{type: "button"}
+                              %i.fa.fa-minus
+
+                    .concept-devider
               %br
 
 

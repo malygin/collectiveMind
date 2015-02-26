@@ -17,9 +17,9 @@
   %div.collapse{id: "collapse_dis_concept_#{post.id}"}
     =render partial:'discontent/posts/post_short2', object: post
     %br
-    - post_all = @project.discontents.by_status(4).joins(:concept_votings).select('distinct concept_votings.user_id').size
+    - post_all = post.concept_votings.size
     -#- post.dispost_concepts.by_status(0).sort_by{|c| c.complite(post).nil? ? 0 : -c.complite(post)}.each_with_index do |pa, index|
-    - post.dispost_concepts.by_status(0).sort_by{|c| post_all == 0 ? 0 : -((c.post_aspect.final_votings.by_dispost(post).uniq_user.size/post_all.to_f)*100).round }.each_with_index do |pa, index|
+    - post.dispost_concepts.by_status(0).sort_by{|p| [(post_all == 0 ? 0 : -((post.concept_votings.by_concept_aspect(p.post_aspect).size/post_all.to_f)*100).round), (p.complite(post).nil? ? 0 : -p.complite(post))] }.each_with_index do |pa, index|
       .row.plus-concept(id="tr_plus_concept_#{post.id}_#{pa.post_aspects.first.id}")
         .col-md-1
           =index+1
@@ -30,7 +30,7 @@
           - else
             =t('show.without_name')
         .col-md-1
-          ="#{post_all == 0 ? 0 : ((pa.post_aspect.final_votings.by_dispost(post).uniq_user.size/post_all.to_f)*100).round}%"
+          ="#{post_all == 0 ? 0 : ((post.concept_votings.by_concept_aspect(pa.post_aspect).size/post_all.to_f)*100).round}%"
         .col-md-2
           =status_for_complite_discontent(post, pa)
         .col-md-2(class="td_plus_concept_#{pa.post_aspects.first.id}")
@@ -52,25 +52,28 @@
           =t('form.concept.novation_what')
         %p
           =post.post_aspect.name
-    -if post.post_aspect.content.present?
-      .text-left
-        .color-teal
-          %b A2.
-          =t('form.concept.novation_how')
-        %p
-          =post.post_aspect.content
-    -if post.post_aspect.positive.present?
-      .text-left
-        .color-teal
-          %b B1.
-          =t('form.concept.cond')
-        %p
-          =post.post_aspect.positive
+
+        =link_to t('link.more'), concept_post_path(@project, post), class: "label label-info", target: "_blank"
+
+    -#-if post.post_aspect.content.present?
+    -#  .text-left
+    -#    .color-teal
+    -#      %b A2.
+    -#      =t('form.concept.novation_how')
+    -#    %p
+    -#      =post.post_aspect.content
+    -#-if post.post_aspect.positive.present?
+    -#  .text-left
+    -#    .color-teal
+    -#      %b B1.
+    -#      =t('form.concept.cond')
+    -#    %p
+    -#      =post.post_aspect.positive
     %br
     %br
-    - post_all = @project.discontents.by_status(4).joins(:concept_votings).select('distinct concept_votings.user_id').size
+    - post_all = @project.discontents.by_status([2, 4]).joins(:final_votings).where(discontent_votings: {against: 't'}).size
     -#- post.concept_disposts.sort_by{|c| c.complite(post).nil? ? 0 : -c.complite(post)}.each_with_index do |dispost, index|
-    - post.concept_disposts.sort_by{|c| post_all == 0 ? 0 : -((post.post_aspect.final_votings.by_dispost(c).uniq_user.size/post_all.to_f)*100).round }.each_with_index do |dispost, index|
+    - post.concept_disposts.sort_by{|p| [(post_all == 0 ? 0 : -((p.final_votings.by_positive.size/post_all.to_f)*100).round), (p.complite(post).nil? ? 0 : -p.complite(post))] }.each_with_index do |dispost, index|
       .row.plus-concept(id="tr_plus_concept_#{dispost.id}_#{post.post_aspect.id}")
         .col-md-1
           =index+1
@@ -78,7 +81,7 @@
           =link_to view_concept_plan_post_path(@project, @post, post_id: dispost.id, con_id: post.post_aspect.id, render_dispost: true), method: :get, remote: true, class: "color-teal", "data-toggle"=> "collapse", "data-target"=> "collapse_plus_concept_#{dispost.id}_#{post.post_aspect.id}", style: "text-decoration:none;", id: "view_post_concept_#{dispost.id}_#{post.post_aspect.id}" do
             =dispost.content
         .col-md-1
-          ="#{post_all == 0 ? 0 : ((post.post_aspect.final_votings.by_dispost(dispost).uniq_user.size/post_all.to_f)*100).round}%"
+          ="#{post_all == 0 ? 0 : ((dispost.final_votings.by_positive.size/post_all.to_f)*100).round}%"
         .col-md-2
           =level_complite(dispost)
       .concept-devider
@@ -100,15 +103,22 @@
           =t('form.concept.novation_what')
         %p
           =light_concept.name
-      -if light_concept.content.present?
-        .color-teal
-          %b A2.
-          =t('form.concept.novation_how')
-        %p
-          =light_concept.content
-      -if light_concept.positive.present?
-        .color-teal
-          %b B1.
-          =t('form.concept.cond')
-        %p
-          =light_concept.positive
+        -if light_concept.instance_of? Plan::PostAspect
+          =link_to t('link.more'), concept_post_path(@project, light_concept.concept_post_aspect.concept_post), class: "label label-info", target: "_blank"
+        -elsif light_concept.instance_of? Concept::PostAspect
+          =link_to t('link.more'), concept_post_path(@project, light_concept.concept_post), class: "label label-info", target: "_blank"
+      %br
+      %br
+
+      -#-if light_concept.content.present?
+      -#  .color-teal
+      -#    %b A2.
+      -#    =t('form.concept.novation_how')
+      -#  %p
+      -#    =light_concept.content
+      -#-if light_concept.positive.present?
+      -#  .color-teal
+      -#    %b B1.
+      -#    =t('form.concept.cond')
+      -#  %p
+      -#    =light_concept.positive

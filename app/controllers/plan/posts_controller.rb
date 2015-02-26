@@ -76,8 +76,12 @@ class Plan::PostsController < PostsController
     @post_stage = Plan::PostStage.find(params[:stage_id]) if params[:stage_id]
 
     @aspects = Discontent::Aspect.where(project_id: @project, status: 0)
-    @disposts = Discontent::Post.where(project_id: @project, status: 4).sort_by { |post| -post.final_votings.by_positive.not_admins.uniq_user.size }
-    @concepts = Concept::Post.where(project_id: @project, status: 0) #.sort_by { |post| -post.post_aspect.final_votings.not_admins.uniq_user.size }
+    @disposts_all = @project.discontents.by_status([2, 4]).joins(:final_votings).where(discontent_votings: {against: 't'}).size
+    @disposts = Discontent::Post.where(project_id: @project, status: 4).sort_by { |post| @disposts_all == 0 ? 0 : -((post.final_votings.by_positive.size/@disposts_all.to_f)*100).round }
+    @concepts = Concept::Post.where(project_id: @project, status: 0).sort_by { |post| [-post.concept_disposts.where(concept_post_discontents: { complite: [2, 3] }).size, -post.sum_main_disposts(@disposts_all)] }
+
+    # @disposts_all = @project.discontents.by_status([2, 4]).joins(:final_votings).where(discontent_votings: {against: 't'}).size
+    # @concepts_all = @project.discontents.by_status(4).joins(:concept_votings).select('distinct concept_votings.user_id').size
     # @disposts = Discontent::Post.discontents_for_plan(@project)
     @new_ideas = Plan::PostAspect.joins("INNER JOIN plan_posts ON plan_posts.id = plan_post_aspects.plan_post_id").where("plan_posts.project_id = ? and plan_posts.id = ?", @project.id, @post.id).where(plan_post_aspects: {concept_post_aspect_id: nil, discontent_aspect_id: nil})
   end

@@ -63,6 +63,21 @@ class Concept::Post < ActiveRecord::Base
     post.complite if post
   end
 
+  def sum_main_disposts(post_all)
+    sum = 0
+    self.concept_disposts.where(concept_post_discontents: { complite: [2, 3] }).each do |dispost|
+      sum += post_all == 0 ? 0 : ((dispost.final_votings.by_positive.size/post_all.to_f)*100).round
+    end
+    sum
+  end
+  def sum_other_disposts(post_all)
+    sum = 0
+    self.concept_disposts.where(concept_post_discontents: { complite: [1, nil] }).each do |dispost|
+      sum += post_all == 0 ? 0 : ((dispost.final_votings.by_positive.size/post_all.to_f)*100).round
+    end
+    sum
+  end
+
   def note_size?(type_fd)
     self.post_notes(type_fd).size > 0
   end
