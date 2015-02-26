@@ -1,4 +1,4 @@
-class Plan::PostStagesController < ApplicationController
+class Plan::PostStagesController < ProjectsController
   before_action :set_post
 
   def new
