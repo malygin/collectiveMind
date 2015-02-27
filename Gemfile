@@ -11,6 +11,7 @@ gem 'coffee-rails'
 gem 'uglifier'
 gem 'compass'
 gem 'compass-rails'
+gem 'font-awesome-rails'
 gem 'therubyracer'
 gem 'websocket-rails', git: 'https://github.com/samhane/websocket-rails.git'
 # @todo Прицепить совместимость с редакторами
