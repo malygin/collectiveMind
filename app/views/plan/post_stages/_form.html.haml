@@ -1,0 +1,35 @@
+#modal_new_stage.modal.fade{'aria-hidden' => 'true', 'data-backdrop' => 'false', 'aria-labelledby' => 'myModalLabel', role: 'dialog', style: 'display: none;', tabindex: '-1'}
+  .modal-dialog
+    .modal-content
+      .modal-header
+        %button.close{'aria-hidden' => 'true', 'data-dismiss' => 'modal', type: 'button'} ×
+        %h3#myModalLabel.modal-title
+          = t('form.plan.stage.title')
+      .modal-body
+        = form_for stage, url: {project: @project.id, action: stage.persisted? ? 'update' : 'create'}, remote: true do |f|
+          = render 'shared/notice_messages', object: f.object
+          .form-group(style="margin-left:0;")
+            = f.label :name, t('form.plan.stage.name')
+            = f.text_field :name, class: 'form-control name-stage', placeholder: t('form.plan.stage.name_promt')
+            %span.small
+              = t('form.plan.stage.name_short')
+          .col-md-6
+            .form-group(style="margin-left:0;")
+              = f.label :date_begin, t('form.plan.stage.date_begin')
+              = f.text_field :date_begin, class: 'form-control datepicker'
+          .col-md-6
+            .form-group(style="margin-left:0;")
+              = f.label :date_end, t('form.plan.stage.date_end')
+              = f.text_field :date_end, class: 'form-control datepicker'
+          .form-group(style="margin-left:0;")
+            = f.label :desc, t('form.plan.stage.essay')
+            = f.text_area :desc, class: 'form-control', rows: 10, placeholder: 'Введите описание этапа'
+            %span.small
+              = t('form.plan.stage.desc_future')
+          .pull-right
+            %button.btn.btn-default(type = "button" data-dismiss="modal" style="margin-right:5px;")
+              = t('form.close')
+            %button#send_post.send-post.disabled.btn.btn-success
+              = t('form.save')
+      %br
+      .modal-footer(style="margin-top:30px;padding-bottom:10px;")
