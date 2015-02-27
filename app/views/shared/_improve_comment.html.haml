@@ -35,8 +35,10 @@
 
       .pull-right
         =link_for_improve(improve_comment).html_safe if link_for_improve(improve_comment)
-        -if [3,7].include? @project.status
-          =link_to "#{@project.status < 7 ? t('show.improve.name_discontent') : t('show.improve.name_concept')}", {:action => :new, :asp => params[:asp] ? params[:asp] : @project.proc_aspects.order(:id).first, :improve_comment => improve_comment.id, :improve_stage => get_stage_for_improve(improve_comment.get_class) }, :method => :get,  id: "improve_comment_#{improve_comment.id}", class: 'btn btn-success btn-xs'
+        -if @project.status == 3 and controller and controller.controller_path == 'discontent/posts'
+          =link_to t('show.improve.name_discontent'), {:action => :new, :asp => params[:asp] ? params[:asp] : @project.proc_aspects.order(:id).first, :improve_comment => improve_comment.id, :improve_stage => get_stage_for_improve(improve_comment.get_class) }, :method => :get,  id: "improve_comment_#{improve_comment.id}", class: 'btn btn-success btn-xs'
+        -elsif @project.status == 7 and controller and controller.controller_path == 'concept/posts'
+          =link_to t('show.improve.name_concept'), {:action => :new, :asp => params[:asp] ? params[:asp] : @project.proc_aspects.order(:id).first, :improve_comment => improve_comment.id, :improve_stage => get_stage_for_improve(improve_comment.get_class) }, :method => :get,  id: "improve_comment_#{improve_comment.id}", class: 'btn btn-success btn-xs'
         |
         =link_to({controller: improve_comment.class.name.underscore.pluralize.gsub('/comments', '/posts'), :action => :like_comment, :project => @project, :id => improve_comment.id, :against => false}, :remote => true, :method => :put, class: "popup-likes", id: "like_comment_#{improve_comment.id}") do
           %span
