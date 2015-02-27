@@ -1753,6 +1753,9 @@
     font-size: 13px;
     font-weight: bold;
 }
+.cabinet-tabs .cabinet-tabs-subblock .cabinet-tabs-subblock-2ndlev-li a {
+    color: #666666;
+}
 .cabinet-tabs-subblock-2ndlev-li a.active-2ndlev-li {
     color: #e71d2b;
 }
