@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<!-- Description, Keywords and Author -->
+		<meta name="description" content="Your description">
+		<meta name="keywords" content="Your,Keywords">
+		<meta name="author" content="Ian">
+		
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		
+		<!-- Styles -->
+        <!-- Bootstrap CSS -->
+        <link href="css/bootstrap.min.css" rel="stylesheet">
+        <!-- Font awesome CSS -->
+        <link href="css/font-awesome.min.css" rel="stylesheet">
+        <!-- Magnific Popup -->
+        <link href="css/magnific-popup.css" rel="stylesheet">
+        <!-- Owl carousel -->
+        <link href="css/owl.carousel.css" rel="stylesheet">
+        <!-- Base style -->
+        <link href="css/style.css" rel="stylesheet">
+		<!-- Custom CSS. Type your CSS code in custom.css file -->
+		<link href="css/custom.css" rel="stylesheet">
+
+	</head>
+
+	<body>
+        <div class="outer">
+
+        <!-- Top bar starts -->
+        <header class="top-bar">
+            <div class="container">
+
+                <!-- Logo starts -->
+                <div class="box-shadow-outer">
+                    <div class="tb-logo box-shadow-5 rounded-1 pull-left">
+                        <a href="#"><img src="img/logo.png"></a>
+                    </div>
+                </div>
+                <!-- Logo ends -->
+                <div class="clearfix visible-xs"></div>
+                <!-- Nav starts -->
+                <nav class="header-buttons pull-left">
+                    <a href="#" class="btn btn-white rounded-2">Процедура</a>
+                    <div class="clearfix visible-xs"></div>
+                    <a href="#" class="btn btn-grey rounded-2">Кабинет</a>
+                    <div class="clearfix visible-xs"></div>
+                    <a href="#" class="btn btn-grey rounded-2">Новости</a>
+                    <div class="clearfix visible-xs"></div>
+                    <a href="#" class="btn btn-grey rounded-2">Рефлексия</a>
+                </nav>
+                <!-- Nav ends -->
+
+                <div class="pull-right header-right">
+                    <!-- Langauge starts -->
+                    <div class="tb-language dropdown pull-right">
+                        <a href="#" data-target="#" data-toggle="dropdown"> English <i class="fa fa-angle-down color mass-dark-blue"></i></a>
+                        <!-- Dropdown menu with languages -->
+                        <ul class="dropdown-menu dropdown-mini" role="menu">
+                            <li><a href="#">Hindi</a></li>
+                            <li><a href="#">Tamil</a></li>
+                            <li><a href="#">Kanada</a></li>
+                        </ul>
+                    </div>
+                    <!-- Language ends -->
+                    <img src="img/call.png" class="pull-right operator-pic">
+
+                    <div class="clearfix"></div>
+
+                    <!-- User starts -->
+                    <div class="tb-language dropdown pull-right user-block">
+                        <span class="rating-block rounded-1">500</span><a href="#" data-target="#" data-toggle="dropdown"> Горлицкий Вячеслав <i class="fa fa-angle-down color mass-dark-blue"></i></a>
+                        <!-- Dropdown menu with languages -->
+                        <ul class="dropdown-menu dropdown-mini" role="menu">
+                            <li><a href="#popup-4" class="open-popup-link">Вариант</a></li>
+                        </ul>
+                    </div>
+
+                    <!-- User ends -->
+
+                </div>
+
+                <div class="clearfix"></div>
+            </div>
+        </header>
+        <!-- Top Bar ends -->
+
+
+        <!-- Main Block starts -->
+        <div class="main-block cabinet">
+            <div class="container">
+                <div class="row">
+                    <div class="col-xs-3 cabinet-left-col">
+                        <span class="stage-label">Стадия 1</span>
+                        <div class="cabinet-tabs">
+                            <ul class="cabinet-tabs-subblock">
+                                <li class="active"><a href="#tab-1" data-toggle="tab"><i class="fa fa-plus-square"></i>Предложить аспект</a></li>
+                                <li><a href="#tab-2" data-toggle="tab"><i class="fa fa-plus-square"></i>Провести анализ</a></li>
+                                <li><a href="#tab-3" data-toggle="tab"><i class="fa fa-plus-square"></i>Провести мозговой штурм</a></li>
+                                <li><div class="cabinet-tabs-subblock-divider"></div></li>
+                                <li><a href="#tab-4" data-toggle="tab"><i class="fa fa-plus-square"></i>Мои предложения</a></li>
+                                <li><a href="#tab-5" data-toggle="tab"><i class="fa fa-plus-square"></i>Мои заметки</a></li>
+                                <li><div class="cabinet-tabs-subblock-divider"></div></li>
+                                <li>
+                                    <span class="cabinet-tabs-subblock-2ndlev-heading"><i class="fa fa-plus-square"></i>Диалоги</span>
+                                    <span class="cabinet-tabs-subblock-2ndlev-li"><a href="#tab-6" data-toggle="tab">Лиза</a></span>
+                                    <span class="cabinet-tabs-subblock-2ndlev-li"><a href="#tab-7" data-toggle="tab">Слава и Даниэль</a></span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-xs-9 cabinet-right-col">
+                        <div class="tab-content">
+                            <div class="tab-pane fade in active" id="tab-1">
+                                <div class="cabinet-tab-heading">
+                                    <span class="cabinet-tab-heading-plus"></span>
+                                    <h3>Предложите аспект</h3>
+                                </div>
+                                <form class="cabinet-aspect-form">
+                                    <div class="form-group">
+                                        <label for="aspectField1">Название</label>
+                                        <input class="form-control" id="aspectField1" type="text">
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="cabinet-aspect-form-checkb">
+                                            <label>Этот аспект влияет на тему?</label>
+                                            <input type=radio name=aspect1 value=yes class="radio-aspect1"><span class="cabinet-aspect-form-checkb-filler filler-yes"></span><span class="radio-divider">|</span><input type=radio name=aspect1 value=no class="radio-aspect1"><span class="cabinet-aspect-form-checkb-filler filler-no"></span>
+                                        </div>
+                                        <div class="cabinet-aspect-form-checkb">
+                                            <label>От него зависит решение?</label>
+                                            <input type=radio name=aspect2 value=yes><span class="cabinet-aspect-form-checkb-filler filler-yes"></span><span class="radio-divider">|</span><input type=radio name=aspect2 value=no><span class="cabinet-aspect-form-checkb-filler filler-no"></span>
+                                        </div>
+                                        <label for="aspectField2">Поясните, почему ваш аспект важен:</label>
+                                        <textarea class="form-control" id="aspectField2" type="text"></textarea>
+                                        <button class="btn btn-sm cabinet-aspect-form-submit">Отправить</button>
+                                        <div class="clearfix"></div>
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="tab-pane fade in" id="tab-2"></div>
+                            <div class="tab-pane fade in" id="tab-3"></div>
+                            <div class="tab-pane fade in" id="tab-4"></div>
+                            <div class="tab-pane fade in" id="tab-5"></div>
+                            <div class="tab-pane fade in" id="tab-6"></div>
+                            <div class="tab-pane fade in" id="tab-7"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Main Block ends -->
+
+
+
+        </div>
+
+        <!-- Outer Ends -->
+
+        <!-- Javascript files -->
+        <!-- jQuery -->
+        <script src="js/jquery.js"></script>
+        <!-- Bootstrap JS -->
+        <script src="js/bootstrap.min.js"></script>
+        <!-- Placeholders JS -->
+        <script src="js/placeholders.js"></script>
+        <!-- Magnific Popup -->
+        <script src="js/jquery.magnific-popup.min.js"></script>
+        <!-- Owl carousel -->
+        <script src="js/owl.carousel.min.js"></script>
+        <!-- Respond JS for IE8 -->
+        <script src="js/respond.min.js"></script>
+        <!-- HTML5 Support for IE -->
+        <script src="js/html5shiv.js"></script>
+        <!-- Main JS -->
+        <script src="js/main.js"></script>
+
+        <!-- Javascript for this page -->
+        <script type="text/javascript">
+            $('.cabinet-aspect-form-checkb input').click(function(){
+                var me = $(this);
+                var attrname = me.attr('name');
+                $("input[name='"+attrname+"']").removeClass('active-radio');
+                me.addClass('active-radio');
+            });
+            $('.cabinet-tabs-subblock-2ndlev-li a').click(function(){
+                if (!$(this).hasClass('active-2ndlev-li')){
+                    $('.cabinet-tabs-subblock-2ndlev-li a').each(function(){
+                        $(this).removeClass('active-2ndlev-li');
+                    });
+                    $(this).addClass('active-2ndlev-li');
+                };
+            });
+            $('.cabinet-tabs .cabinet-tabs-subblock>li>a').click(function(){
+                $('.cabinet-tabs-subblock-2ndlev-li a').each(function(){
+                    $(this).removeClass('active-2ndlev-li');
+                });
+            });
+        </script>
+        <!-- Custom JS. Type your JS code in custom.js file -->
+        <script src="js/custom.js"></script>
+	</body>	
+</html>
