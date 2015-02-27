@@ -2554,23 +2554,23 @@ button.mfp-close {
 
 
 /* timeline popup styles */
-div[id^='popup-project'] {
-    width: 1115px;
+.popup-project {
+    width: 1115px !important;
 }
-div[id^='popup-project'] .tab-content {
+.popup-project .tab-content {
     padding-top: 0;
 }
-div[id^='popup-project'] .popup .popup-post-info .info-block {
+.popup-project .popup .popup-post-info .info-block {
     border-bottom: 1px solid #d3d3d3;
 }
-div[id^='popup-project'] .popup-header h2 {
+.popup-project .popup-header h2 {
     background: image-url('gears.png') no-repeat;
     background-position: 0 9px;
     margin-left: 28px;
     padding-left: 56px;
 }
 /* удалить в конце */
-div[id^='popup-project'] .popup .popup-post-info .popup-post-block {
+.popup-project .popup .popup-post-info .popup-post-block {
     padding-bottom: 15px;
     padding-top: 20px;
 }
@@ -2598,10 +2598,10 @@ div[id^='popup-project'] .popup .popup-post-info .popup-post-block {
 }
 /* удалить в конце */
 
-div[id^='popup-project'] .popup-right-tabs {
+.popup-project .popup-right-tabs {
 
 }
-div[id^='popup-project'] .nav-tabs {
+.popup-project .nav-tabs {
     margin-top: 52px;
     float: right;
     font-size: 15.3px;
@@ -2609,13 +2609,13 @@ div[id^='popup-project'] .nav-tabs {
     z-index: 10000;
     margin-bottom: -1px;
 }
-div[id^='popup-project'] .tab-pane#tab-1 {
+.popup-project .tab-pane#tab-1 {
     background: #fff;
 }
-div[id^='popup-project'] .tab-pane#tab-2 {
+.popup-project .tab-pane#tab-2 {
     background: #e3e1e4;
 }
-div[id^='popup-project'] .tab-pane#tab-3 {
+.popup-project .tab-pane#tab-3 {
     background: #f7f7f7;
     padding-bottom: 30px;
 }
