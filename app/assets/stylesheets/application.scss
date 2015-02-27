@@ -1,67 +1,13 @@
-//@import "bootstrap-original/bootstrap";
-//@import "bootstrap-original/_mixins";
-//@import "bootstrap-override";
-//@import url(bootstrap.min.css);
 @import 'bootstrap.min';
 @import 'font-awesome';
 @import 'magnific-popup';
 @import 'owl.carousel';
 @import 'style';
 @import 'custom';
+
 //@import 'jquery.ui.autocomplete';
-
-//@import url(font-awesome.min.css);
-
-//@import 'smart-forms';
-//@import 'skin-lblue';
-//@import 'settings';
-//@import url(../lib/nvd3/src/nv.d3.css);
-
-//@import "compass";
-//@import "font";
-//@import 'lib/fontello/css/fontello';
-
-//@import "variables";
-
-//@import "lib/font-awesome/font-awesome";
-//@import "lib/_icheckbox";
-//@import "lib/_datepicker";
-//@import "lib/_select2";
-//@import "lib/_bootstrap-wysihtml5";
-//@import "lib/_bootstrap-switch";
-//@import "lib/_bootstrap-colorpicker";
-//@import "lib/nv.d3.min";
-//@import "lib/nv.d3";
-
-//@import "lib/_jqvmap";
-//@import "lib/_fullcalendar";
-//@import "lib/_jquery.fileupload-ui";
-//@import "lib/_backgrid";
-//@import "lib/_rickshaw";
-//@import "lib/_jquery.datatables";
-//@import "lib/_animate";
-//@import "lib/nestable";
-//@import "lib/messenger-1.4.1/messenger";
-//@import "lib/messenger-1.4.1/messenger-spinner";
-//@import "lib/messenger-1.4.1/messenger-theme-air";
-//@import "lib/bootstrap-slider";
-//@import "bootstrap3-editable/bootstrap-editable";
-//@import "selectize";
-//@import "selectize.default";
-
-//@import "svg";
-//@import "general";
-//@import "base";
-//@import "responsive";
-//@import "themes/jquery.ui.ui-darkness";
-//@import "jquery.ui.core";
-//@import "jquery.ui.theme";
-//@import "moderator_chat";
-//@import "group_chat";
-//@import "datepicker/datepicker3";
-//@import "print";
-
 //@import "jquery.ui.chatbox";
+//@import "datepicker/datepicker3";
 
 .select_aspect {
   background-color: gray;
