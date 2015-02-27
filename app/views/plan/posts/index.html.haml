@@ -3,11 +3,9 @@
   - if signed_in? and (@project.status == 9 or @project.demo?)
     = link_to t('form.plan.new'), new_plan_post_path(@project), id: 'add_plan',  class: 'add-project btn btn-mass-red'
   .container
-    - @posts.each_with_index do |post, index|
-      - if index % 2 == 0
-        .row.projects
-          = render partial: 'post', locals: {post: post}
-      - else
-        = render partial: 'post', locals: {post: post}
+    - @posts.each_slice(2) do |post|
+      .row.projects
+        = render partial: 'post', locals: {post: post.first}
+        = render partial: 'post', locals: {post: post.second}
 
 #for_show_project_modal
