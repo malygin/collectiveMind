@@ -1155,7 +1155,7 @@
     font-size: 11px;
     color: #5e5e5e;
     line-height: 17px;
-    background: url(../img/arrow.png) no-repeat right center;
+    background: image-url('arrow.png') no-repeat right center;
 }
 .innov-single .post-themes {
     padding: 5px 7px;
@@ -1380,7 +1380,7 @@
     font-size: 11px;
     color: #5e5e5e;
     line-height: 17px;
-    background: url(../img/arrow.png) no-repeat right center;
+    background: image-url('arrow.png') no-repeat right center;
 }
 .project-single .project-bottom {
     padding: 2px;
@@ -2453,7 +2453,7 @@ button.mfp-close {
     cursor: pointer;
     width: 64px;
     height: 113px;
-    background: url(../img/vote-arrow.png);
+    background: image-url('vote-arrow.png');
 }
 .owl-arrow.pull-left {
     margin-left: -116px;

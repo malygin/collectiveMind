@@ -742,7 +742,7 @@ a.brown:focus {
 .btn.btn-transparent {
 	border: 1px solid #ffffff !important;
 	background: transparent !important;
-	color: #ffffff !important;
+	/*color: #ffffff !important;*/
 	-webkit-transition: all 0.5s ease;
 	-moz-transition: all 0.5s ease;
 	-o-transition: all 0.5s ease;
