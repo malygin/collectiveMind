@@ -9,7 +9,7 @@ gem 'spring', group: :development
 group :development, :test do
   #gem 'linecache19', :git => 'git://github.com/mark-moseley/linecache'
   gem 'quiet_assets'
-  gem 'grizzled-rails-logger'
+  # gem 'grizzled-rails-logger'
   gem 'rspec-rails'
   gem 'better_errors'
   gem 'binding_of_caller'

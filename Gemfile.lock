@@ -159,8 +159,6 @@ GEM
       thor (~> 0.19.1)
     formatador (0.2.5)
     fssm (0.2.10)
-    grizzled-rails-logger (0.1.6)
-      term-ansicolor (>= 1.0.7)
     guard (2.6.1)
       formatador (>= 0.2.4)
       listen (~> 2.7)
@@ -369,8 +367,6 @@ GEM
       actionpack (>= 3.0)
       activesupport (>= 3.0)
       sprockets (~> 2.8)
-    term-ansicolor (1.3.0)
-      tins (~> 1.0)
     therubyracer (0.12.1)
       libv8 (~> 3.16.14.0)
       ref
@@ -383,7 +379,6 @@ GEM
     tilt (1.4.1)
     timers (4.0.1)
       hitimes
-    tins (1.3.3)
     tinymce-rails (4.1.5)
       railties (>= 3.1.1)
     tinymce-rails-langs (4.20140129)
@@ -440,7 +435,6 @@ DEPENDENCIES
   factory_girl_rails
   faker
   foreman
-  grizzled-rails-logger
   guard-rspec
   guard-spork
   haml
