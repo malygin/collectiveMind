@@ -11,6 +11,7 @@ gem 'coffee-rails'
 gem 'uglifier'
 gem 'compass'
 gem 'compass-rails'
+gem 'font-awesome-rails'
 gem 'therubyracer'
 gem 'websocket-rails', git: 'https://github.com/samhane/websocket-rails.git'
 # @todo Прицепить совместимость с редакторами
@@ -20,7 +21,6 @@ gem 'pg'
 gem 'russian'
 gem 'bootstrap-x-editable-rails'
 gem 'selectize-rails'
-gem 'rails3-jquery-autocomplete'
 gem 'pg_search'
 gem 'devise'
 gem 'haml'
@@ -72,6 +72,7 @@ group :development do
   gem 'rubycritic'
   gem 'traceroute'
   gem 'html2haml'
+  gem 'rails-erd'
 end
 
 group :production do

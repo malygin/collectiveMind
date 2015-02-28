@@ -1,5 +1,4 @@
 class Core::ProjectsController < ApplicationController
-  #before_filter :boss_authenticate, only: [:next_stage, :pr_stage]
   before_filter :prime_admin_authenticate, only: [:next_stage, :pr_stage, :show, :new, :edit, :create, :update, :destroy, :index,
                                                   :general_analytics, :lifetape_analytics, :discontent_analytics, :concept_analytics, :plan_analytics, :estimate_analytics]
   before_filter :project_by_id
@@ -7,13 +6,6 @@ class Core::ProjectsController < ApplicationController
   before_filter :boss_news_authenticate, only: [:news, :users]
   after_filter :last_seen_news, only: [:news]
   layout 'application', only: [:news, :users, :general_analytics, :lifetape_analytics, :discontent_analytics, :concept_analytics, :plan_analytics, :estimate_analytics]
-
-  # has_scope :by_project
-  # has_scope :by_user
-  # has_scope :by_note
-  # has_scope :by_comment
-  # has_scope :by_content
-  # has_scope :by_period, :using => [:date_begin, :date_end, :date_all], :type => :hash
 
   def project_by_id
     unless params[:project].nil?
@@ -35,8 +27,6 @@ class Core::ProjectsController < ApplicationController
     redirect_to polymorphic_path(@project.redirect_to_current_stage, project: @project)
   end
 
-  # GET /core/projects/new
-  # GET /core/projects/new.json
   def new
     @project = Core::Project.new
     @core_project = Core::Project.all.last
@@ -47,13 +37,10 @@ class Core::ProjectsController < ApplicationController
     end
   end
 
-  # GET /core/projects/1/edit
   def edit
     @project = Core::Project.find(params[:id])
   end
 
-  # POST /core/projects
-  # POST /core/projects.json
   def create
     @project = Core::Project.new(core_project_params)
     @project.project_users.build user_id: current_user.id, owner: true
@@ -69,8 +56,6 @@ class Core::ProjectsController < ApplicationController
     end
   end
 
-  # PUT /core/projects/1
-  # PUT /core/projects/1.json
   def update
     respond_to do |format|
       if @core_project.update_attributes(core_project_params)
@@ -83,8 +68,6 @@ class Core::ProjectsController < ApplicationController
     end
   end
 
-  # DELETE /core/projects/1
-  # DELETE /core/projects/1.json
   def destroy
     @core_project.update_attributes(type_access: 10)
 
@@ -95,22 +78,24 @@ class Core::ProjectsController < ApplicationController
   end
 
   def next_stage
-    @core_project.settings.stage_dates[@core_project.status.to_s]['real']['end'] = Date.today
-    @core_project.status = @core_project.status + 1
-    @core_project.settings.stage_dates[@core_project.status.to_s]['real']['start'] = Date.today
-    @core_project.settings.stage_dates_will_change!
-    @core_project.save
-    @core_project.set_position_for_aspects if @core_project.status == 3
-    @core_project.set_date_for_stage
-    redirect_to :back
+    @project = @core_project
+    @project.settings.stage_dates[@project.status.to_s]['real']['end'] = Date.today
+    @project.status = @project.status + 1
+    @project.settings.stage_dates[@project.status.to_s]['real']['start'] = Date.today
+    @project.settings.stage_dates_will_change!
+    @project.save
+    @project.set_position_for_aspects if @project.status == 3
+    @project.set_date_for_stage
+    render 'update_stage'
   end
 
   def pr_stage
-    @core_project.settings.stage_dates[@core_project.status.to_s]['real']['start'] = ''
-    @core_project.status = @core_project.status - 1
-    @core_project.settings.stage_dates[@core_project.status.to_s]['real']['end'] = ''
-    @core_project.save
-    redirect_to :back
+    @project = @core_project
+    @project.settings.stage_dates[@project.status.to_s]['real']['start'] = ''
+    @project.status = @project.status - 1
+    @project.settings.stage_dates[@project.status.to_s]['real']['end'] = ''
+    @project.save
+    render 'update_stage'
   end
 
   def news

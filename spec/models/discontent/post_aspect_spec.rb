@@ -6,10 +6,6 @@ describe 'Discontent::PostAspect', type: :model do
   end
 
   context 'invalid without' do
-    it 'post' do
-      expect(build(:discontent_post_aspect, post: nil)).to be_invalid
-    end
-
     it 'aspect' do
       expect(build(:discontent_post_aspect, core_aspect: nil)).to be_invalid
     end

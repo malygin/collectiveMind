@@ -11,7 +11,7 @@ describe 'CollectInfo::Voting', type: :model do
     end
 
     it 'aspect' do
-      expect(build(:collect_info_voting, core_aspect: nil)).to be_invalid
+      expect(build(:collect_info_voting, aspect: nil)).to be_invalid
     end
   end
 end

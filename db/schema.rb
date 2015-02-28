@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150217195127) do
+ActiveRecord::Schema.define(version: 20150225153718) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -200,6 +200,7 @@ ActiveRecord::Schema.define(version: 20150217195127) do
     t.datetime "updated_at",                      null: false
   end
 
+<<<<<<< HEAD
   create_table "concept_post_aspects", force: :cascade do |t|
     t.integer  "discontent_aspect_id"
     t.integer  "concept_post_id"
@@ -218,6 +219,8 @@ ActiveRecord::Schema.define(version: 20150217195127) do
     t.text     "obstacles"
   end
 
+=======
+>>>>>>> 79e74ad10f55919b2a6eb0de4e2962397bc78e23
   create_table "concept_post_discontent_complites", force: :cascade do |t|
     t.integer  "post_id"
     t.integer  "discontent_post_id"
@@ -292,11 +295,17 @@ ActiveRecord::Schema.define(version: 20150217195127) do
     t.text     "goal"
     t.text     "reality"
     t.integer  "user_id"
-    t.integer  "number_views"
+    t.integer  "number_views",      default: 0
     t.integer  "life_tape_post_id"
+<<<<<<< HEAD
     t.datetime "created_at",                        null: false
     t.datetime "updated_at",                        null: false
     t.integer  "status"
+=======
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "status",            default: 0
+>>>>>>> 79e74ad10f55919b2a6eb0de4e2962397bc78e23
     t.integer  "project_id"
     t.text     "content"
     t.boolean  "censored",          default: false
@@ -321,6 +330,16 @@ ActiveRecord::Schema.define(version: 20150217195127) do
     t.boolean  "approve_status"
     t.integer  "fullness"
     t.boolean  "status_all"
+    t.integer  "core_aspect_id"
+    t.text     "positive"
+    t.text     "negative"
+    t.text     "control"
+    t.text     "name"
+    t.text     "problems"
+    t.text     "positive_r"
+    t.text     "negative_r"
+    t.text     "title"
+    t.text     "obstacles"
   end
 
   add_index "concept_posts", ["created_at"], name: "index_concept_posts_on_created_at", using: :btree
@@ -349,6 +368,7 @@ ActiveRecord::Schema.define(version: 20150217195127) do
 
   create_table "concept_votings", force: :cascade do |t|
     t.integer  "user_id"
+<<<<<<< HEAD
     t.integer  "concept_post_aspect_id"
     t.datetime "created_at",             null: false
     t.datetime "updated_at",             null: false
@@ -356,6 +376,15 @@ ActiveRecord::Schema.define(version: 20150217195127) do
   end
 
   add_index "concept_votings", ["concept_post_aspect_id"], name: "index_concept_votings_on_concept_post_id", using: :btree
+=======
+    t.integer  "concept_post_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "discontent_post_id"
+  end
+
+  add_index "concept_votings", ["concept_post_id"], name: "index_concept_votings_on_concept_post_id", using: :btree
+>>>>>>> 79e74ad10f55919b2a6eb0de4e2962397bc78e23
   add_index "concept_votings", ["user_id"], name: "index_concept_votings_on_user_id", using: :btree
 
   create_table "core_aspects", force: :cascade do |t|
@@ -1260,13 +1289,19 @@ ActiveRecord::Schema.define(version: 20150217195127) do
     t.text     "desc"
     t.date     "date_begin"
     t.date     "date_end"
+<<<<<<< HEAD
     t.integer  "status"
     t.datetime "created_at",                      null: false
     t.datetime "updated_at",                      null: false
+=======
+    t.integer  "status",              default: 0
+    t.datetime "created_at"
+    t.datetime "updated_at"
+>>>>>>> 79e74ad10f55919b2a6eb0de4e2962397bc78e23
   end
 
   create_table "plan_post_aspects", force: :cascade do |t|
-    t.integer  "discontent_aspect_id"
+    t.integer  "core_aspect_id"
     t.integer  "plan_post_id"
     t.text     "positive"
     t.text     "negative"
@@ -1275,10 +1310,16 @@ ActiveRecord::Schema.define(version: 20150217195127) do
     t.text     "reality"
     t.text     "name"
     t.text     "content"
+<<<<<<< HEAD
     t.datetime "created_at",             null: false
     t.datetime "updated_at",             null: false
     t.integer  "first_stage"
     t.integer  "concept_post_aspect_id"
+=======
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "concept_post_id"
+>>>>>>> 79e74ad10f55919b2a6eb0de4e2962397bc78e23
     t.text     "positive_r"
     t.text     "negative_r"
     t.text     "obstacles"
@@ -1343,9 +1384,15 @@ ActiveRecord::Schema.define(version: 20150217195127) do
     t.text     "desc"
     t.date     "date_begin"
     t.date     "date_end"
+<<<<<<< HEAD
     t.integer  "status"
     t.datetime "created_at",             null: false
     t.datetime "updated_at",             null: false
+=======
+    t.integer  "status",     default: 0
+    t.datetime "created_at"
+    t.datetime "updated_at"
+>>>>>>> 79e74ad10f55919b2a6eb0de4e2962397bc78e23
   end
 
   create_table "plan_post_votings", force: :cascade do |t|
@@ -1363,10 +1410,17 @@ ActiveRecord::Schema.define(version: 20150217195127) do
     t.text     "goal"
     t.text     "first_step"
     t.text     "other_steps"
+<<<<<<< HEAD
     t.integer  "status"
     t.integer  "number_views"
     t.datetime "created_at",                                  null: false
     t.datetime "updated_at",                                  null: false
+=======
+    t.integer  "status",          default: 0
+    t.integer  "number_views",    default: 0
+    t.datetime "created_at"
+    t.datetime "updated_at"
+>>>>>>> 79e74ad10f55919b2a6eb0de4e2962397bc78e23
     t.integer  "project_id"
     t.text     "content"
     t.integer  "step",                        default: 1

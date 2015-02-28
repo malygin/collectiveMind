@@ -70,7 +70,7 @@ class Estimate::PostsController < PostsController
   end
 
   def create
-    @estimate_post = Estimate::Post.new(params[:estimate_post])
+    @estimate_post = Estimate::Post.new estimate_post_params
 
     plan_post = Plan::Post.find(params[:post_id])
     @estimate_post.post = plan_post
@@ -85,7 +85,7 @@ class Estimate::PostsController < PostsController
     end
     @est_stat = plan_post.estimate_status.nil? ? 0 : plan_post.estimate_status
     @estimate_post.post_aspects=[]
-    if not jury?
+    unless jury?
       if @est_stat == 0
         plan_post.post_aspects.each do |tr|
           if tr.plan_post_stage.status == 0
@@ -157,9 +157,6 @@ class Estimate::PostsController < PostsController
     end
   end
 
-
-  # PUT /estimate/posts/1
-  # PUT /estimate/posts/1.json
   def update
     @estimate_post = Estimate::Post.find(params[:id])
     plan_post = Plan::Post.find(params[:post_id])
@@ -226,7 +223,7 @@ class Estimate::PostsController < PostsController
     end
 
     @estimate_post.save
-    @estimate_post.update_attributes(params[:estimate_post])
+    @estimate_post.update_attributes estimate_post_params
     current_user.journals.build(type_event: 'estimate_post_update', body: @estimate_post.id).save!
     redirect_to estimate_post_path(@project, @estimate_post), notice: 'Оценка успешно обновлена.'
   end
@@ -240,5 +237,13 @@ class Estimate::PostsController < PostsController
     respond_to do |format|
       format.html
     end
+  end
+
+  private
+  def estimate_post_params
+    params.require(:estimate_post).permit(:post_id, :content, :oppsh1, :oppsh2, :oppsh3, :oppsh, :ozpshf1, :ozpshf2, :ozpshf3,
+                                          :ozpshf, :ozpshs1, :ozpshs2, :ozpshs3, :ozpshs, :onpsh1, :onpsh2, :onpsh3, :onpsh,
+                                          :nepr1, :nepr2, :nepr3, :nepr4, :nepr, :status, :project_id, :imp, :nep1, :nep2,
+                                          :nep3, :nep4, :nep, :all_grade, :number_views, :censored, :useful, :approve_status)
   end
 end

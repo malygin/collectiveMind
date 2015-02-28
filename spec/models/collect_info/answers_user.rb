@@ -21,5 +21,9 @@ describe 'CollectInfo::UserAnswers', type: :model do
     it 'question' do
       expect(build(:collect_info_answers_user, question: nil)).to be_invalid
     end
+
+    it 'aspect' do
+      expect(build(:collect_info_answers_user, aspect: nil)).to be_invalid
+    end
   end
 end

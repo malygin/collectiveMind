@@ -21,8 +21,6 @@
         <link href="css/owl.carousel.css" rel="stylesheet">
         <!-- Base style -->
         <link href="css/style.css" rel="stylesheet">
-        <link href="css/skin-lblue.css" rel="stylesheet" id="color_theme">
-        <link href="css/style-4.css" rel="stylesheet">
 		<!-- Custom CSS. Type your CSS code in custom.css file -->
 		<link href="css/custom.css" rel="stylesheet">
 
@@ -38,7 +36,7 @@
                 <!-- Logo starts -->
                 <div class="box-shadow-outer">
                     <div class="tb-logo box-shadow-5 rounded-1 pull-left">
-                        <a href="#"><img src="img/logo-red.jpg"></a>
+                        <a href="#"><img src="img/logo.png"></a>
                     </div>
                 </div>
                 <!-- Logo ends -->
@@ -76,7 +74,7 @@
                         <span class="rating-block rounded-1">500</span><a href="#" data-target="#" data-toggle="dropdown"> Горлицкий Вячеслав <i class="fa fa-angle-down color mass-dark-blue"></i></a>
                         <!-- Dropdown menu with languages -->
                         <ul class="dropdown-menu dropdown-mini" role="menu">
-                            <li><a href="#">Вариант</a></li>
+                            <li><a href="#popup-4" class="open-popup-link">Вариант</a></li>
                         </ul>
                     </div>
 
@@ -89,164 +87,255 @@
         </header>
         <!-- Top Bar ends -->
 
-            <!-- Main Block starts -->
-            <div class="main-block">
-                <div class="container">
-                    <!-- Stages block starts -->
-                    <div class="stages first-stage">
-                        <div class="current-stage">
-                            <a class="btn rounded-1"><span class="bigger">1</span>стадия</a>
-                            <div class="current-stage-text pull-left">
-                                <div class="top-text">
-                                    Максимизация работы в аптеках инвара (с учетом новой стратегии инвара)
-                                </div>
-                                <div class="bottom-text">
-                                    <h4>Изучение базы знаний</h4>
-                                </div>
+
+        <!-- Main Block starts -->
+        <div class="main-block">
+            <div class="container">
+                <!-- Stages block starts -->
+                <div class="stages">
+                    <a href="#" class="stage current-stage">
+                        <div class="stage-number-block rounded-1"><span class="bigger">1</span>стадия</div>
+                        <div class="current-stage-text pull-left">
+                            <div class="top-text">
+                                Максимизация работы в аптеках инвара (с учетом новой стратегии инвара)
+                            </div>
+                            <div class="bottom-text">
+                                <h4>Введение в процедуру</h4>
                             </div>
                         </div>
-                        <div class="clearfix visible-md visible-sm visible-xs"></div>
-                        <a class="btn rounded-1"><span class="bigger">2</span>стадия</a>
-                        <div class="clearfix visible-sm visible-xs"></div>
-                        <a class="btn rounded-1 next-steps-stage"><span class="bigger">3</span>стадия</a>
-                        <div class="clearfix visible-sm visible-xs"></div>
-                        <a class="btn rounded-1 next-steps-stage"><span class="bigger">4</span>стадия</a>
-                    </div>
+                    </a>
+                    <div class="clearfix visible-md visible-sm visible-xs"></div>
+                    <a href="#" class="stage stage-number-block next-steps-stage rounded-1"><span class="bigger">2</span>стадия</a>
+                    <div class="clearfix visible-sm visible-xs"></div>
+                    <a href="#" class="stage stage-number-block next-steps-stage rounded-1"><span class="bigger">3</span>стадия</a>
+                    <div class="clearfix visible-sm visible-xs"></div>
+                    <a href="#" class="stage stage-number-block next-steps-stage rounded-1"><span class="bigger">4</span>стадия</a>
+                    <div class="clearfix visible-sm visible-xs"></div>
+                    <a href="#" class="stage stage-number-block next-steps-stage rounded-1"><span class="bigger">5</span>стадия</a>
+                </div>
 
-                    <div class="clearfix"></div>
-                    <div class="divider-grey"></div>
+                <div class="clearfix"></div>
+                <div class="divider-grey"></div>
 
-                    <!-- Progress bars block starts -->
-                    <div class="row progress-bars">
-                        <div class="col-md-6 col-sm-6">
-                            <span class="progress-label">Ваш прогресс на 1-ой стадии</span>
-                            <div class="progress pb-md">
-                                <div class="progress-bar" role="progressbar" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100" style="width: 20%">
-                                    <span class="sr-only">20% Complete (success)</span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="clearfix visible-sm visible-xs"></div>
-                        <div class="col-md-6 col-sm-6">
-                            <span class="progress-label">Прогресс других участников</span>
-                            <div class="progress pb-md">
-                                <div class="progress-bar" role="progressbar" aria-valuenow="90" aria-valuemin="0" aria-valuemax="100" style="width: 90%">
-                                    <span class="sr-only">90% Complete (success)</span>
-                                </div>
+                <!-- Progress bars block starts -->
+                <div class="row progress-bars">
+                    <div class="col-md-6 col-sm-6">
+                        <span class="progress-label">Ваш прогресс на 1-ой стадии</span>
+                        <div class="progress pb-md">
+                            <div class="progress-bar" role="progressbar" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100" style="width: 20%">
+                                <span class="sr-only">20% Complete (success)</span>
                             </div>
                         </div>
                     </div>
-                    <!-- Progress bars block ends -->
+                    <div class="clearfix visible-sm visible-xs"></div>
+                    <div class="col-md-6 col-sm-6">
+                        <span class="progress-label">Прогресс других участников</span>
+                        <div class="progress pb-md">
+                            <div class="progress-bar" role="progressbar" aria-valuenow="90" aria-valuemin="0" aria-valuemax="100" style="width: 90%">
+                                <span class="sr-only">90% Complete (success)</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Progress bars block ends -->
 
-                    <div class="clearfix"></div>
-                    <div class="divider-grey"></div>
+                <div class="clearfix"></div>
+                <div class="divider-grey"></div>
 
-                    <!-- Aspects block (UI four) starts -->
-                    <div class="ui-4 first-stage">
-                        <div class="container">
-                            <!-- UI content -->
-                            <div class="block-content">
-                                <!-- Tabs -->
-                                <!-- Nav tabs -->
-                                <ul class="nav nav-tabs">
-                                    <li class="active"><button href="#tab-one" data-toggle="tab" class="btn btn-round btn-gray uncolored-arrow"><i class="fa fa-wrench fa-2x"></i></button></li>
-                                    <li><button href="#tab-two" data-toggle="tab" class="btn btn-round btn-orange">ПК</button></li>
-                                    <li><button href="#tab-three" data-toggle="tab" class="btn btn-round btn-purple uncolored-arrow">ЛС</button></li>
-                                    <li><button href="#tab-four" data-toggle="tab" class="btn btn-round btn-yellow uncolored-arrow">ИТ</button></li>
-                                    <li><button href="#tab-five" data-toggle="tab" class="btn btn-round btn-green uncolored-arrow">БЮ</button></li>
-                                    <li><button href="#tab-six" data-toggle="tab" class="btn btn-round btn-blue uncolored-arrow">РЗ</button></li>
-                                </ul>
+                <!-- Aspects block (UI four) starts -->
+                <div class="ui-4 first-stage">
+                    <div class="container">
+                        <!-- UI content -->
+                        <div class="block-content">
+                            <!-- Tabs -->
+                            <!-- Nav tabs -->
+                            <ul class="nav nav-tabs">
+                                <li class="active"><button href="#tab-one" data-toggle="tab" class="btn btn-round btn-gray uncolored-arrow"><i class="fa fa-wrench fa-2x"></i></button></li>
+                                <li><button href="#tab-two" data-toggle="tab" class="btn btn-round btn-orange">ПК</button></li>
+                                <li><button href="#tab-three" data-toggle="tab" class="btn btn-round btn-purple uncolored-arrow">ЛС</button></li>
+                                <li><button href="#tab-four" data-toggle="tab" class="btn btn-round btn-yellow uncolored-arrow">ИТ</button></li>
+                                <li><button href="#tab-five" data-toggle="tab" class="btn btn-round btn-green uncolored-arrow">БЮ</button></li>
+                                <li><button href="#tab-six" data-toggle="tab" class="btn btn-round btn-blue uncolored-arrow">РЗ</button></li>
+                            </ul>
 
-                                <!-- Tab panes -->
-                                <div class="tab-content">
-                                    <div class="tab-pane active fade in" id="tab-one">
-                                        <div class="rounded-2 info-section point">
-                                            <h3>Цель этапа</h3>
-                                            <p>Подробное изучение базы знаний по каждому аспекту всеми участниками процедуры выработки проекта</p>
-                                            <div class="attention">
-                                                <span class="exclam">!</span>
+                            <!-- Tab panes -->
+                            <div class="tab-content">
+                                <div class="tab-pane active fade in" id="tab-one">
+                                    <div class="rounded-2 info-section point">
+                                        <h3>Цель этапа</h3>
+                                        <p>Подробное изучение базы знаний по каждому аспекту всеми участниками процедуры выработки проекта</p>
+                                        <div class="attention">
+                                            <span class="exclam">!</span>
                                                 <span class="text">
                                                     Второй этап выработки проекта будет доступен только после того, как средний уровень готовности участников будет не менее 80%!
                                                 </span>
+                                        </div>
+                                    </div>
+                                    <div class="rounded-2 info-section begin">
+                                        <h3>С чего начать?</h3>
+                                        <ol>
+                                            <li>Выберите аспект в списке ниже</li>
+                                            <li>Ознакомьтесь с базой знаний внутри этого аспекта</li>
+                                            <li>Пройдите короткое тестирование по полученным знаниям</li>
+                                            <li>Переходите к следующему аспекту</li>
+                                            <li>Проголосуйте за самые важные на ваш взгляд аспекты (будет доступно в конце этапа)</li>
+                                        </ol>
+                                    </div>
+                                </div>
+                                <div class="tab-pane fade" id="tab-two">
+                                    <div class="top-colored-bar padd-5">Персонал как инструмент продаж</div>
+                                    <div class="container">
+                                        <div class="row">
+                                            <div class="col-md-8 col-sm-8 tab-image-block">
+                                                <img class="img-responsive" src="img/woman.jpg" alt="" />
                                             </div>
-                                        </div>
-                                        <div class="rounded-2 info-section begin">
-                                            <h3>С чего начать?</h3>
-                                            <ol>
-                                                <li>Выберите аспект в списке ниже</li>
-                                                <li>Ознакомьтесь с базой знаний внутри этого аспекта</li>
-                                                <li>Пройдите короткое тестирование по полученным знаниям</li>
-                                                <li>Переходите к следующему аспекту</li>
-                                                <li>Проголосуйте за самые важные на ваш взгляд аспекты (будет доступно в конце этапа)</li>
-                                            </ol>
-                                        </div>
-                                    </div>
-                                    <div class="tab-pane fade" id="tab-two">
-                                        <div class="top-colored-bar padd-5">Персонал как инструмент продаж</div>
-                                        <div class="container">
-                                            <div class="row">
-                                                <div class="col-md-8 col-sm-8 tab-image-block">
-                                                    <img class="img-responsive" src="img/woman.jpg" alt="" />
-                                                </div>
 
-                                                <!-- Questions block starts -->
-                                                <div class="col-md-4 col-sm-4 questions-block">
-                                                    <h4 class="block-with-left-icon"><i class="left-icon fa fa-2x custom-firstStage-orange fa-comments pull-left"></i>Вопросы по теме</h4>
-                                                    <div class="rounded-1 hint close-notice">
-                                                        Читайте вторую страничку презентации
-                                                        <span class="close-button"></span>
-                                                    </div>
-                                                    <div class="rounded-1 wrong-answer">
-                                                        Неправильный ответ!
-                                                        Воспользуйтесь подсказкой
-                                                        <span class="close-button"></span>
-                                                    </div>
-                                                    <p class="text block-with-left-icon">
-                                                        <span class="left-icon pull-right">2.</span>
-                                                        Какие из указанных ниже инструментов
-                                                        использовались в прошлой стратегии
-                                                        Инвара по ОТС?
-                                                    </p>
-                                                    <form class="form instruments-block">
-                                                        <div class="btn-group" data-toggle="buttons">
-                                                            <button class="btn btn-xs btn-white pull-left">Инструмент 1</button>
-                                                            <button class="btn btn-xs btn-white pull-left">Инструмент 2</button>
-                                                            <button class="btn btn-xs btn-white pull-left">Хитрый инструмент 3</button>
-                                                            <button class="btn btn-xs btn-white pull-left">Инструмент с подвохом</button>
-                                                            <button class="btn btn-xs btn-white pull-left">Инструмент 1</button>
-                                                        </div>
-                                                        <div class="clearfix"></div>
-                                                        <div class="form-group bottom-buttons">
-                                                            <a class="btn btn-outline notice-button">Подсказка</a>
-                                                            <button type="submit" class="btn answer-button popup-link-1">Ответить</button>
-                                                        </div>
-                                                    </form>
+                                            <!-- Questions block starts -->
+                                            <div class="col-md-4 col-sm-4 questions-block">
+                                                <h4 class="block-with-left-icon"><i class="left-icon fa fa-2x custom-firstStage-orange fa-comments pull-left"></i>Вопросы по теме</h4>
+                                                <div class="rounded-1 hint close-notice">
+                                                    Читайте вторую страничку презентации
+                                                    <span class="close-button"></span>
                                                 </div>
-                                                <!-- Questions block ends -->
-
+                                                <div class="rounded-1 wrong-answer">
+                                                    Неправильный ответ!
+                                                    Воспользуйтесь подсказкой
+                                                    <span class="close-button"></span>
+                                                </div>
+                                                <p class="text block-with-left-icon">
+                                                    <span class="left-icon pull-right">2.</span>
+                                                    Какие из указанных ниже инструментов
+                                                    использовались в прошлой стратегии
+                                                    Инвара по ОТС?
+                                                </p>
+                                                <form class="form instruments-block">
+                                                    <div class="btn-group" data-toggle="buttons">
+                                                        <button class="btn btn-xs btn-white pull-left">Инструмент 1</button>
+                                                        <button class="btn btn-xs btn-white pull-left">Инструмент 2</button>
+                                                        <button class="btn btn-xs btn-white pull-left">Хитрый инструмент 3</button>
+                                                        <button class="btn btn-xs btn-white pull-left">Инструмент с подвохом</button>
+                                                        <button class="btn btn-xs btn-white pull-left">Инструмент 1</button>
+                                                    </div>
+                                                    <div class="clearfix"></div>
+                                                    <div class="form-group bottom-buttons">
+                                                        <a class="btn btn-outline notice-button">Подсказка</a>
+                                                        <button href="#popup-greetings-text" class="open-popup-link btn answer-button popup-link-1">Ответить</button>
+                                                    </div>
+                                                </form>
                                             </div>
+                                            <!-- Questions block ends -->
+
                                         </div>
                                     </div>
-                                    <div class="tab-pane fade" id="tab-three">
+                                </div>
+                                <div class="tab-pane fade" id="tab-three">
 
-                                    </div>
-                                    <div class="tab-pane fade" id="tab-four">
+                                </div>
+                                <div class="tab-pane fade" id="tab-four">
 
-                                    </div>
-                                    <div class="tab-pane fade" id="tab-five">
+                                </div>
+                                <div class="tab-pane fade" id="tab-five">
 
-                                    </div>
-                                    <div class="tab-pane fade" id="tab-six">
+                                </div>
+                                <div class="tab-pane fade" id="tab-six">
 
-                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <!-- Aspects block (UI four) ends -->
+                </div>
+                <!-- Aspects block (UI four) ends -->
+            </div>
+        </div>
+        <!-- Main Block ends -->
+
+        <div id="popup-greetings-text" class="popup-window medal mfp-hide">
+            <div class="popup">
+                <div class="medal-block gold-medal">
+                </div>
+                <div class="popup-top-block popup-top-rounded">
+                    <div class="vertical-center-wrapper">
+                        <h4>Поздравляем!</h4>
+                        <p class="top-block-text">
+                            Текст текст текст текст текст текст текст текст текст текст текст текст текст
+                            текст текст текст текст текст текст текст текст текст текст текст текст текст
+                            текст текст текст текст текст текст текст текст
+                        </p>
+                    </div>
+                </div>
+                <div class="popup-bottom-block popup-bottom-rounded">
+                    <div class="vertical-center-wrapper">
+                        <div class="bottom-buttons">
+                            <a href="#" class="bottom-button back-color dark-blue">Рефлексия</a>
+                            <a href="#popup-greetings-form" class="bottom-button back-color red arrowed open-popup-link">Перейти на 2-ю стадию</a>
+                        </div>
+                    </div>
                 </div>
             </div>
-            <!-- Main Block ends -->
+        </div>
+
+
+        <div id="popup-greetings-form" class="popup-window medal mfp-hide">
+            <div class="popup">
+                <div class="medal-block gold-medal">
+                </div>
+                <div class="popup-top-block popup-top-rounded">
+                    <div class="vertical-center-wrapper">
+                        <h4>Поздравляем!</h4>
+                        <p class="top-block-text">
+                            Текст текст текст текст текст текст текст текст текст текст текст текст текст:
+                        </p>
+                        <form class="form-horizontal interview-form" role="form" id="interview-form1">
+                            <ol>
+                                <li><textarea id="inputLack" class="rounded-2" rows="2" placeholder="Какие недостатки вы заметили в процедуре, в вашей работе, а также в работе других участников, модераторов и жюри?"></textarea></li>
+                                <li><textarea id="inputMiss" class="rounded-2" rows="1" placeholder="Что вам не хватало в работе на данном этапе?"></textarea></li>
+                                <li><textarea id="inputChange" class="rounded-2" rows="1" placeholder="Что и как можно было бы изменить?"></textarea></li>
+                            </ol>
+                        </form>
+                    </div>
+                </div>
+                <div class="popup-bottom-block popup-bottom-rounded">
+                    <div class="vertical-center-wrapper">
+                        <div class="bottom-buttons">
+                            <a href="#popup-next-stage-explanation" class="bottom-button back-color red arrowed open-popup-link" >Перейти на 2-ю стадию</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div id="popup-next-stage-explanation" class="popup-window medal mfp-hide">
+            <div class="popup">
+                <div class="medal-block silver-medal">
+                </div>
+                <div class="popup-top-block popup-top-rounded">
+                    <div class="vertical-center-wrapper">
+                        <h4>Объяснение второй стадии</h4>
+                        <p class="top-block-text">
+                            Текст текст текст текст текст текст текст текст текст текст текст текст текст
+                            текст текст текст текст текст текст текст текст текст текст текст текст текст
+                            текст текст текст текст текст текст текст текст
+                        </p>
+                        <p class="top-block-text">
+                            Текст текст текст текст текст текст текст текст текст текст текст текст текст
+                            текст текст текст текст текст текст текст текст текст текст текст текст текст
+                            текст текст текст текст текст текст текст текст текст текст текст текст текст
+                            текст текст текст текст текст текст текст текст текст текст текст текст текст
+                            текст текст текст текст текст текст текст текст текст текст текст текст текст
+                            текст текст текст текст текст текст текст текст
+                        </p>
+                    </div>
+                </div>
+                <div class="popup-bottom-block popup-bottom-rounded">
+                    <div class="vertical-center-wrapper">
+                        <div class="bottom-buttons">
+                            <a href="#" class="bottom-button back-color red">Начать 2-ю стадию</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
 
         </div>
 
@@ -268,7 +357,7 @@
         <!-- HTML5 Support for IE -->
         <script src="js/html5shiv.js"></script>
         <!-- Main JS -->
-        <script src="js/main.js"></script>
+        <script src="js/main-unowled.js"></script>
 
         <!-- Javascript for this page -->
 

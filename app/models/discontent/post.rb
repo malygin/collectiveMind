@@ -11,7 +11,6 @@ class Discontent::Post < ActiveRecord::Base
   has_many :concept_post_discontents, -> { where concept_post_discontents: {status: [0, nil]} },
            class_name: 'Concept::PostDiscontent', foreign_key: 'discontent_post_id'
   has_many :dispost_concepts, through: :concept_post_discontents, source: :post, class_name: 'Concept::Post'
-  has_many :concept_conditions, class_name: 'Concept::PostAspect', foreign_key: 'core_aspect_id'
   has_many :plan_conditions, class_name: 'Plan::PostAspect', foreign_key: 'core_aspect_id'
   has_many :concept_posts, through: :concept_conditions, foreign_key: 'concept_post_id', class_name: 'Concept::Post'
   has_many :voted_users, through: :final_votings, source: :user
@@ -50,8 +49,13 @@ class Discontent::Post < ActiveRecord::Base
   scope :sort_date, -> sort_date { sort_date == 'up' ? order('discontent_posts.created_at DESC') : order('discontent_posts.created_at ASC') if sort_date.present? }
   scope :sort_user, -> sort_user { sort_user == 'up' ? order('discontent_posts.user_id DESC') : order('discontent_posts.user_id ASC') if sort_user.present? }
   scope :sort_view, -> sort_view { sort_view == 'up' ? order('discontent_posts.number_views DESC') : order('discontent_posts.number_views ASC') if sort_view.present? }
-  pg_search_scope :autocomplete,
-                  against: [:whend, :whered],
+  pg_search_scope :autocomplete_whend,
+                  against: [:whend],
+                  using: {
+                      tsearch: {prefix: true}
+                  }
+  pg_search_scope :autocomplete_whered,
+                  against: [:whered],
                   using: {
                       tsearch: {prefix: true}
                   }

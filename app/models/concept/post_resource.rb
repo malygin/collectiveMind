@@ -6,6 +6,6 @@ class Concept::PostResource < ActiveRecord::Base
 
   has_many :concept_post_resources, class_name: 'Concept::PostResource', foreign_key: :concept_post_resource_id
 
-  scope :by_project, ->(p) { where(project_id: p) }
+  scope :by_project, ->(project) { where(project_id: project.id) }
   scope :by_type, ->(type) { where(type_res: type) }
 end

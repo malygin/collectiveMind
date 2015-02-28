@@ -25,255 +25,24 @@ class Plan::PostsController < PostsController
   end
 
   def create
-    @plan_post = Plan::Post.new(params[:plan_post])
-    @plan_post.number_views = 0
-    @plan_post.project = @project
-    @plan_post.user = current_user
-    @plan_post.status = 0
+    @post = @project.plan_post.new plan_post_params
+    @post.user = current_user
+    if @post.save
+      current_user.journals.create!(type_event: 'plan_post_save', body: trim_content(@post.name), first_id: @post.id, project: @project)
+    end
+
     respond_to do |format|
-      if @plan_post.save!
-        current_user.journals.build(type_event: 'plan_post_save', body: trim_content(@plan_post.name), first_id: @plan_post.id, project: @project).save!
-        format.html { redirect_to edit_plan_post_path(project: @project, id: @plan_post) }
-        format.js
-      else
-        format.html { render action: 'new' }
-        format.js
-      end
+      format.js
     end
   end
 
   def update
     @plan_post = Plan::Post.find(params[:id])
-    @plan_post.update_attributes(params[:plan_post])
+    @plan_post.update_attributes plan_post_params
     respond_to do |format|
       if @plan_post.save
-        current_user.journals.build(:type_event => 'plan_post_update', :body => trim_content(@plan_post.name), :first_id => @plan_post.id, :project => @project).save!
+        current_user.journals.build(type_event: 'plan_post_update', body: trim_content(@plan_post.name), first_id: @plan_post.id, project: @project).save!
         format.html { redirect_to plan_post_path(project: @project, id: @plan_post) }
-        format.js
-      end
-    end
-  end
-
-  def add_concept
-    @post = Plan::Post.find(params[:id])
-    @post_stage = Plan::PostStage.find(params[:stage_id])
-
-    @aspects = Core::Aspect.where(project_id: @project, status: 0)
-    @disposts = Discontent::Post.where(project_id: @project, status: 4).order(:id)
-    @new_ideas = Plan::PostAspect.joins("INNER JOIN plan_posts ON plan_posts.id = plan_post_aspects.plan_post_id").where("plan_posts.project_id = ? and plan_posts.id = ?", @project.id, @post.id).where(plan_post_aspects: {concept_post_aspect_id: nil, core_aspect_id: nil})
-  end
-
-  # @todo methods for stage
-  def new_stage
-    @post = Plan::Post.find(params[:id])
-    @post_stage = Plan::PostStage.new
-  end
-
-  def edit_stage
-    @post = Plan::Post.find(params[:id])
-    @post_stage = Plan::PostStage.find(params[:stage_id])
-  end
-
-  def create_stage
-    @post = Plan::Post.find(params[:id])
-    @post_stage = Plan::PostStage.new(params[:plan_post_stage])
-    @post_stage.post = @post
-    @post_stage.status = 0
-    respond_to do |format|
-      if @post_stage.save!
-        format.js
-      else
-        format.js { render action: 'new_stage' }
-      end
-    end
-  end
-
-  def update_stage
-    @post = Plan::Post.find(params[:id])
-    @post_stage = Plan::PostStage.find(params[:stage_id])
-    @post_stage.update_attributes(params[:plan_post_stage])
-    respond_to do |format|
-      if @post_stage.save!
-        format.js
-      else
-        format.js { render action: 'edit_stage' }
-      end
-    end
-  end
-
-  def destroy_stage
-    @post = Plan::Post.find(params[:id])
-    @post_stage = Plan::PostStage.find(params[:stage_id])
-    @post_stage.update_column(:status, 1) if current_user?(@post.user) or boss?
-  end
-
-  # @todo methods for action
-  def new_action
-    @post = Plan::Post.find(params[:id])
-    @post_stage = Plan::PostStage.find(params[:stage_id]) unless params[:stage_id].nil?
-    @post_aspect = Plan::PostAspect.find(params[:con_id])
-    @post_action = Plan::PostAction.new
-    @view_concept = params[:view_concept]
-  end
-
-  def edit_action
-    @post = Plan::Post.find(params[:id])
-    @post_aspect = Plan::PostAspect.find(params[:con_id])
-    @post_stage = Plan::PostStage.find(params[:stage_id]) unless params[:stage_id].nil?
-    @post_action = Plan::PostAction.find(params[:act_id])
-  end
-
-  def create_action
-    @post = Plan::Post.find(params[:id])
-    @post_stage = Plan::PostStage.find(params[:stage_id]) unless params[:stage_id].nil?
-    @post_aspect = Plan::PostAspect.find(params[:con_id])
-    @view_concept = params[:view_concept]
-    @post_action = Plan::PostAction.new(params[:plan_post_action])
-    @post_action.plan_post_aspect = @post_aspect
-    @post_action.status = 0
-    @post_action.save!
-
-    unless params[:resor_action].nil?
-      params[:resor_action].each_with_index do |r, i|
-        @post_action.plan_post_resources.by_type('action_r').build(:name => r, :desc => params[:res_action][i], :project_id => @project.id, :style => 3).save if r!=''
-      end
-    end
-  end
-
-  def update_action
-    @post = Plan::Post.find(params[:id])
-    @post_stage = Plan::PostStage.find(params[:stage_id]) unless params[:stage_id].nil?
-    @post_aspect = Plan::PostAspect.find(params[:con_id])
-    @post_action = Plan::PostAction.find(params[:act_id])
-    @post_action.update_attributes(params[:plan_post_action])
-    @post_action.plan_post_resources.by_type('action_r').destroy_all
-    unless params[:resor_action].nil?
-      params[:resor_action].each_with_index do |r, i|
-        @post_action.plan_post_resources.by_type('action_r').build(:name => r, :desc => params[:res_action][i], :project_id => @project.id, :style => 3).save if r!=''
-      end
-    end
-    respond_to do |format|
-      if @post_action.save!
-        format.js
-      else
-        format.js { render action: 'edit_action' }
-      end
-    end
-  end
-
-  def destroy_action
-    @post = Plan::Post.find(params[:id])
-    @post_stage = Plan::PostStage.find(params[:stage_id])
-    @post_aspect = Plan::PostAspect.find(params[:con_id])
-    @post_action = Plan::PostAction.find(params[:act_id])
-    @post_action.destroy if current_user?(@post.user) or boss?
-  end
-
-  def add_form_for_concept
-    @post = Plan::Post.find(params[:id])
-    @post_stage = Plan::PostStage.find(params[:stage_id])
-    @save_form = params[:save_form]
-    if @save_form
-      if params[:concept_id]
-        if params[:new_idea]
-          @concept = Plan::PostAspect.find(params[:concept_id])
-          @cond = Plan::PostAspect.new
-          @cond.plan_post = @post
-          @cond.plan_post_stage = @post_stage
-          @cond.title= @concept.title
-          @cond.name= @concept.name
-          @cond.content = @concept.content
-          @cond.positive = @concept.positive
-          @cond.negative = @concept.negative
-          @cond.control = @concept.control
-          @cond.obstacles = @concept.obstacles
-          @cond.reality = @concept.reality
-          @cond.problems = @concept.problems
-          @cond.save!
-
-          @cond.duplicate_plan_post_resources(@project, @concept)
-        else
-          @concept = Concept::PostAspect.find(params[:concept_id])
-          @cond = Plan::PostAspect.new
-          @cond.plan_post = @post
-          @cond.plan_post_stage = @post_stage
-          @cond.title= @concept.title
-          @cond.name= @concept.name
-          @cond.content = @concept.content
-          @cond.positive = @concept.positive
-          @cond.negative = @concept.negative
-          @cond.obstacles = @concept.obstacles
-          @cond.reality = @concept.reality
-          @cond.problems = @concept.problems
-          @cond.core_aspect_id = @concept.core_aspect_id
-          @cond.concept_post_aspect = @concept
-          @cond.save!
-
-          @cond.duplicate_concept_post_resources(@project, @concept.concept_post)
-        end
-      else
-        @cond = Plan::PostAspect.create(title: 'Новое нововведение')
-        @cond.plan_post = @post
-        @cond.plan_post_stage = @post_stage
-        @cond.save!
-      end
-    else
-      if params[:new_concept]
-        @post_concept = Plan::PostAspect.new
-      else
-        @post_concept = Concept::PostAspect.find(params[:concept_id])
-      end
-    end
-  end
-
-  def edit_concept
-    @post = Plan::Post.find(params[:id])
-    @post_concept = Plan::PostAspect.find(params[:con_id])
-    @post_stage = @post_concept.plan_post_stage
-  end
-
-  def update_concept
-    @post = Plan::Post.find(params[:id])
-    @post_concept = Plan::PostAspect.find(params[:concept_id])
-    @post_concept.update_attributes(params[:plan_post_aspect])
-
-    create_plan_resources_on_type(@project, @post_concept)
-
-    respond_to do |format|
-      if @post_concept.save
-        format.js
-      else
-        format.js { render action: 'edit_concept' }
-      end
-    end
-  end
-
-  def destroy_concept
-    @post = Plan::Post.find(params[:id])
-    @post_stage = Plan::PostStage.find(params[:stage_id])
-    @post_concept = Plan::PostAspect.find(params[:con_id])
-    @post_actions = @post_concept.plan_post_actions.pluck(:id)
-    if current_user?(@post.user) or boss?
-      @post_concept.destroy
-      @post_concept.plan_post_actions.destroy_all
-    end
-  end
-
-  def get_concept
-    @post = Plan::Post.find(params[:id])
-    @post_concept = Plan::PostAspect.find(params[:con_id])
-    @view_post_concept = params[:view_post_concept]
-  end
-
-  def update_get_concept
-    @post = Plan::Post.find(params[:id])
-    @post_concept_save = Plan::PostAspect.find(params[:con_id])
-    @post_concept_save.update_attributes(params[:plan_post_aspect])
-
-    create_plan_resources_on_type(@project, @post_concept_save)
-
-    respond_to do |format|
-      if @post_concept_save.save
         format.js
       end
     end
@@ -297,7 +66,7 @@ class Plan::PostsController < PostsController
       @post_stage = Plan::PostStage.find(params[:stage_id])
     else
       @dispost = Discontent::Post.find(params[:post_id])
-      @concept_post = Concept::PostAspect.find(params[:con_id])
+      @concept_post = Concept::Post.find(params[:con_id])
     end
   end
 
@@ -329,7 +98,7 @@ class Plan::PostsController < PostsController
     @post_note = @post_aspect_note.plan_notes.build(params[name_of_note_for_param])
     @post_note.user = current_user
 
-    current_user.journals.build(:type_event => 'my_plan_note', :user_informed => @post.user, :project => @project, :body => trim_content(@post_note.content), :body2 => trim_content(@post.name), :first_id => @post.id, :second_id => @post_aspect_note.id, :personal => true, :viewed => false).save!
+    current_user.journals.build(type_event: 'my_plan_note', user_informed: @post.user, project: @project, body: trim_content(@post_note.content), body2: trim_content(@post.name), first_id: @post.id, second_id: @post_aspect_note.id, personal: true, viewed: false).save!
 
     respond_to do |format|
       if @post_note.save
@@ -346,42 +115,7 @@ class Plan::PostsController < PostsController
   end
 
   private
-  def create_plan_resources_on_type(project, post)
-    post.plan_post_resources.by_type(['positive_r', 'positive_s', 'negative_r', 'negative_s', 'control_r', 'control_s']).destroy_all
-    unless params[:resor].nil?
-      params[:resor].each do |r|
-        if r[:name]!=''
-          resource = post.plan_post_resources.build(:name => r[:name], :desc => r[:desc], :type_res => r[:type_res], :project_id => project.id, :style => 0)
-          unless r[:means].nil?
-            r[:means].each do |m|
-              if m[:name]!=''
-                mean = post.plan_post_resources.build(:name => m[:name], :desc => m[:desc], :type_res => m[:type_res], :project_id => project.id, :style => 1)
-                mean.plan_post_resource = resource
-              end
-            end
-          end
-        end
-      end
-    end
+  def plan_post_params
+    params.require(:plan_post).permit(:goal, :name, :content)
   end
-
-  # def create_plan_resources_on_type(project, post, type_r, type_s)
-  #   post.plan_post_resources.by_type(type_r).destroy_all
-  #   post.plan_post_resources.by_type(type_s).destroy_all
-  #   unless params[('resor_'+type_r).to_sym].nil?
-  #     params[('resor_'+type_r).to_sym].each_with_index do |r,i|
-  #       if r[1][0]!=''
-  #         resource = post.plan_post_resources.build(:name => r[1][0], :desc => params[('resor_'+type_r).to_sym] ? params[('resor_'+type_r).to_sym]["#{r[0]}"][0] : '', :type_res => type_r, :project_id => project.id, :style => 0)
-  #         if params[('resor_'+type_s).to_sym] and params[('resor_'+type_s).to_sym]["#{r[0]}"]
-  #           params[('resor_'+type_s).to_sym]["#{r[0]}"].each_with_index do |m,ii|
-  #             if m!=''
-  #               mean = post.plan_post_resources.build(:name => m, :desc => params[('resor_'+type_s).to_sym] ? params[('resor_'+type_s).to_sym]["#{r[0]}"][ii] : '',:type_res => type_s, :project_id => project.id, :style => 1)
-  #               mean.plan_post_resource = resource
-  #             end
-  #           end
-  #         end
-  #       end
-  #     end
-  #   end
-  # end
 end

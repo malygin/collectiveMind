@@ -1,5 +1,5 @@
 class Core::Aspect < ActiveRecord::Base
-
+  belongs_to :user
   belongs_to :core_aspect, class_name: 'Core::Aspect', foreign_key: 'core_aspect_id'
   belongs_to :project, class_name: 'Core::Project'
 
@@ -22,7 +22,7 @@ class Core::Aspect < ActiveRecord::Base
   scope :negative_posts, -> { joins(:discontent_posts).where('discontent_posts.style = ?', 1) }
   scope :accepted_posts, -> { joins(:discontent_posts).where('discontent_posts.style = ?', 4) }
   scope :by_project, ->(project_id) { where('core_aspects.project_id = ?', project_id) }
-  scope :minus_view, ->(aspects) { where.not(core_aspects: {id: aspects }) }
+  scope :minus_view, ->(aspects) { where.not(core_aspects: {id: aspects}) }
   scope :main_aspects, -> { where(core_aspects: {core_aspect_id: nil}) }
   scope :vote_top, ->(revers) {
     if revers == '0'
@@ -58,12 +58,11 @@ class Core::Aspect < ActiveRecord::Base
   end
 
   def aspect_discontent
-    Discontent::Post.joins(:post_aspects).
-        where("discontent_post_aspects.aspect_id = ?", self.id)
+    Discontent::Post.joins(:post_aspects).where(discontent_post_aspects: {aspect_id: id})
   end
 
   def question_complete(project, user)
-    self.questions.joins("INNER JOIN collect_info_user_answers ON collect_info_user_answers.question_id = collect_info_questions.id").where('collect_info_user_answers.user_id = ?', user.id).by_project(project.id).by_status(0).select("distinct collect_info_questions.id")
+    questions.joins(:user_answers).where(collect_info_user_answers: {user_id: user.id}).by_project(project).by_status(0).select('distinct collect_info_questions.id')
   end
 
   def color

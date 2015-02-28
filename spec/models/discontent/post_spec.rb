@@ -36,9 +36,4 @@ describe 'Discontent::Post', type: :model do
     post3 = create :discontent, project: post2.project
     expect(Discontent::Post.for_union(post2.project.id)).to match_array([post3])
   end
-
-  it 'united_for_vote'
-
-  context 'by_status_for_discontent' do
-  end
 end

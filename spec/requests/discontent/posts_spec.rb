@@ -19,181 +19,112 @@ describe 'Discontent' do
     @comment_2 = create :discontent_comment, post: @post1, comment: @comment_1
   end
 
+  shared_examples 'discontent list' do
+    before do
+      visit "/project/#{project.id}/discontent/posts?asp=#{@aspect1.id}"
+    end
+
+    it ' can see all discontents in aspect' do
+      expect(page).to have_content 'Несовершенства'
+      expect(page).to have_content I18n.t('show.improve.problem')
+      expect(page).to have_content @discontent1.content
+      expect(page).to have_content @discontent2.content
+      expect(page).to have_selector '#add_record'
+    end
+
+    it ' add new discontent send', js: true do
+      click_link 'add_record'
+      fill_in 'discontent_post_content', with: 'dis content'
+      fill_in 'discontent_post_whered', with: 'dis where'
+      fill_in 'discontent_post_whend', with: 'dis when'
+      expect(page).to have_selector "span", 'aspect 1'
+      expect(page).to have_selector 'span', 'aspect 1'
+      click_button 'send_post'
+      expect(page).to have_content 'Перейти к списку'
+      expect(page).to have_content 'Добавить еще одно'
+      click_link 'Перейти к списку'
+      expect(page).to have_content 'dis content'
+    end
+
+    it 'user profile works fine after add discontent', js: true do
+      click_link 'add_record'
+      fill_in 'discontent_post_content', with: 'disсontent content'
+      fill_in 'discontent_post_whered', with: 'disсontent where'
+      fill_in 'discontent_post_whend', with: 'disсontent when'
+      expect(page).to have_selector 'span', 'aspect 1'
+      click_button 'send_post'
+      visit user_path(id: user.id, project: project)
+      click_link 'tab-imperfections'
+      expect(page).to have_content 'disсontent'
+    end
+
+    it 'add anonym discontent and get fine feed' do
+      click_link 'add_record'
+
+      fill_in 'discontent_post_content', with: 'disсontent content'
+      fill_in 'discontent_post_whered', with: 'disсontent where'
+      fill_in 'discontent_post_whend', with: 'disсontent when'
+      find(:css, "#discontent_post_anonym[value='1']").set(true)
+
+      click_button 'send_post'
+      visit journals_path(project: project)
+      expect(page).to have_content I18n.t('journal.add_anonym_discontent')
+    end
+  end
+
+  shared_examples 'show discontents' do
+    before do
+      visit discontent_post_path(project, @discontent1)
+    end
+
+    it 'can see right form' do
+      expect(page).to have_content @discontent1.content
+      expect(page).to have_content @discontent1.whend
+      expect(page).to have_content @discontent1.whered
+      expect(page).to have_selector "span", @aspect1.content
+      expect(page).to have_selector 'textarea#comment_text_area'
+      expect(page).not_to have_link("plus_post_#{@discontent1.id}", text: 'Выдать баллы', href: plus_discontent_post_path(project, @discontent1))
+    end
+
+    it_behaves_like 'content with comments'
+    it_behaves_like 'likes posts'
+  end
+
   context 'ordinary user sign in ' do
     before do
       sign_in user
     end
 
-    context 'discontent list' do
-      before do
-        visit "/project/#{project.id}/discontent/posts?asp=#{@aspect1.id}"
-      end
+    it_behaves_like 'discontent list'
 
-      it ' can see all discontents in aspect' do
-        expect(page).to have_content 'Несовершенства'
-        expect(page).to have_content I18n.t('show.improve.problem')
-        expect(page).to have_content @discontent1.content
-        expect(page).to have_content @discontent2.content
-        expect(page).to have_selector '#add_record'
-        expect(page).not_to have_link("plus_post_#{@discontent1.id}", text: 'Выдать баллы', href: plus_discontent_post_path(project, @discontent1))
-      end
-
-      it ' add new discontent send', js: true do
-        click_link 'add_record'
-        fill_in 'discontent_post_content', with: 'dis content'
-        fill_in 'discontent_post_whered', with: 'dis where'
-        fill_in 'discontent_post_whend', with: 'dis when'
-        expect(page).to have_selector "span", 'aspect 1'
-        expect(page).to have_selector 'span', 'aspect 1'
-        click_button 'send_post'
-        expect(page).to have_content 'Перейти к списку'
-        expect(page).to have_content 'Добавить еще одно'
-        click_link 'Перейти к списку'
-        expect(page).to have_content 'dis content'
-      end
-
-      it 'user profile works fine after add discontent', js: true do
-        click_link 'add_record'
-        fill_in 'discontent_post_content', with: 'disсontent content'
-        fill_in 'discontent_post_whered', with: 'disсontent where'
-        fill_in 'discontent_post_whend', with: 'disсontent when'
-        expect(page).to have_selector 'span', 'aspect 1'
-        click_button 'send_post'
-        visit user_path(id: user.id, project: project)
-        click_link 'tab-imperfections'
-        expect(page).to have_content 'disсontent'
-      end
-
-      it 'add anonym discontent and get fine feed' do
-        click_link 'add_record'
-
-        fill_in 'discontent_post_content', with: 'disсontent content'
-        fill_in 'discontent_post_whered', with: 'disсontent where'
-        fill_in 'discontent_post_whend', with: 'disсontent when'
-        find(:css, "#discontent_post_anonym[value='1']").set(true)
-
-        click_button 'send_post'
-        visit journals_path(project: project)
-        expect(page).to have_content I18n.t('journal.add_anonym_discontent')
-      end
-    end
-
-    context 'show discontents' do
-      before do
-        visit discontent_post_path(project, @discontent1)
-      end
-
-      it 'can see right form' do
-        expect(page).to have_content @discontent1.content
-        expect(page).to have_content @discontent1.whend
-        expect(page).to have_content @discontent1.whered
-        expect(page).to have_selector "span", @aspect1.content
-        expect(page).to have_selector 'textarea#comment_text_area'
-        expect(page).not_to have_link("plus_post_#{@discontent1.id}", text: 'Выдать баллы', href: plus_discontent_post_path(project, @discontent1))
-      end
-
-      it_behaves_like 'content with comments'
-      it_behaves_like 'likes posts'
-    end
-
-    context 'vote discontent ' do
-      before do
-        project.update_attributes(status: 6)
-        prepare_for_vote_discontents(project)
-        visit discontent_posts_path(project)
-      end
-
-      it 'have content ', js: true do
-        expect(page).to have_content 'Голосование за несовершенства'
-        expect(page).to have_content 'Определение наиболее важных проблем'
-        expect(page).to have_content 'Несовершенство: 1 из 1'
-        expect(page).to have_content @discontent_group1.content
-        click_link "vote_positive_#{@discontent_group1.id}"
-        expect(page).to have_content 'Спасибо за участие в голосовании!'
-        expect(page).to have_selector 'a', 'Перейти к рефлексии'
-        expect(page).to have_selector 'a', 'Перейти к списку несовершенств'
-        click_link "Перейти к списку несовершенств"
-        expect(page).to have_content 'Несовершенства'
-        expect(page).to have_content I18n.t('show.improve.problem')
-      end
-    end
+    it_behaves_like 'show discontents'
   end
 
   context 'moderator sign in' do
     before do
       sign_in moderator
     end
+    it_behaves_like 'discontent list'
 
-    context 'discontent list' do
-      before do
-        visit discontent_posts_path(project)
-      end
+    it_behaves_like 'show discontents'
 
-      it ' can see all discontents in aspect' do
-        visit "/project/#{project.id}/discontent/posts?asp=#{@aspect1.id}"
-
-        expect(page).to have_content 'Несовершенства'
-        expect(page).to have_content I18n.t('show.improve.problem')
-        expect(page).to have_content @discontent1.content
-        expect(page).to have_content @discontent2.content
-        expect(page).to have_selector '#add_record'
-        expect(page).to have_link("plus_post_#{@discontent1.id}", text: 'Выдать баллы', href: plus_discontent_post_path(project, @discontent1))
-      end
-
-      it 'add new discontent send', js: true do
-        click_link 'add_record'
-        fill_in 'discontent_post_content', with: 'dis content'
-        fill_in 'discontent_post_whered', with: 'dis where'
-        fill_in 'discontent_post_whend', with: 'dis when'
-        expect(page).to have_selector "span", 'aspect 1'
-        click_button 'send_post'
-        expect(page).to have_content 'Перейти к списку'
-        expect(page).to have_content 'Добавить еще одно'
-        click_link 'Перейти к списку'
-        expect(page).to have_content 'dis content'
-      end
-    end
-
-    context 'show discontents' do
+    context 'like concept' do
       before do
         visit discontent_post_path(project, @discontent1)
+        prepare_awards
       end
 
-      it 'can see right form' do
-        expect(page).to have_content @discontent1.content
-        expect(page).to have_content @discontent1.whend
-        expect(page).to have_content @discontent1.whered
-        expect(page).to have_selector "span", 'aspect 1'
-        expect(page).to have_selector 'textarea#comment_text_area'
-      end
+      it ' like post and have award', js: true do
+        expect(page).to have_css("a#plus_post_#{@comment_1.id} span", text: 'Выдать баллы')
 
-      it_behaves_like 'content with comments', 'Discontent::Comment', true
-      it_behaves_like 'likes posts', true
+        find(:css, "a#plus_post_#{@discontent1.id} span").trigger('click')
 
-      context 'like concept' do
-        before do
-          prepare_awards
-        end
-
-        it ' like post and have award', js: true do
-          expect(page).to have_css("a#plus_post_#{@comment_1.id} span", text: 'Выдать баллы')
-
-          # expect(page).to have_link("plus_post_#{@discontent1.id}", text: 'Выдать баллы', href: plus_discontent_post_path(project, @discontent1))
-          find(:css, "a#plus_post_#{@discontent1.id} span").trigger('click')
-
-          sleep 2
-          visit journals_path(project: project)
-          expect(page).to have_selector('i.fa.fa-trophy')
-          visit user_path(project: project, id: user.id)
-          expect(page).to have_content('25')
-        end
+        sleep 2
+        visit journals_path(project: project)
+        expect(page).to have_selector('i.fa.fa-trophy')
+        visit user_path(project: project, id: user.id)
+        expect(page).to have_content('25')
       end
     end
-
-    context 'note for discontent'
-
-    context 'group discontent'
-
-    context 'vote discontent'
   end
 end

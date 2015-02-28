@@ -1,1 +1,0 @@
-$('#vote_container').html("#{escape_javascript(render partial: 'shared/post_for_vote', collection: @posts, remote: true, locals: {path_for_voting: @path_for_voting, count_voted: @number_v, votes: @votes})}");

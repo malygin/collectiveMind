@@ -40,12 +40,6 @@ CollectiveMind::Application.routes.draw do
     end
   end
 
-  def autocomplete_routes
-    #get 'autocomplete', to: 'posts#autocomplete'
-    get :autocomplete_discontent_post_whend_discontent_posts, to: 'discontent/posts#autocomplete_discontent_post_whend'
-    get :autocomplete_discontent_post_whered_discontent_posts, to: 'discontent/posts#autocomplete_discontent_post_whered'
-  end
-
   devise_for :users
   get '/project/:id', to: 'core/projects#show'
   get '/general_news', to: 'core/projects#news'
@@ -152,9 +146,6 @@ CollectiveMind::Application.routes.draw do
       end
     end
 
-    get :autocomplete_concept_post_resource_concept_posts, to: 'concept/posts#autocomplete_concept_post_resource'
-    get :autocomplete_concept_post_mean_concept_posts, to: 'concept/posts#autocomplete_concept_post_mean'
-
     post 'discontent/posts/:id/union', to: 'discontent/posts#union_discontent'
     get 'discontent/posts/unions', to: 'discontent/posts#unions'
     get 'discontent/posts/new_group', to: 'discontent/posts#new_group'
@@ -162,7 +153,7 @@ CollectiveMind::Application.routes.draw do
 
     namespace :discontent do
       posts_routes
-      autocomplete_routes
+      get 'autocomplete', to: 'posts#autocomplete'
       resources :posts do
         member do
           put :remove_union
@@ -187,6 +178,8 @@ CollectiveMind::Application.routes.draw do
 
     post 'concept/posts/add_dispost', to: 'concept/posts#add_dispost'
     put 'concept/posts/next_vote', to: 'concept/posts#next_vote'
+    get :autocomplete_concept_post_resource_concept_posts, to: 'concept/posts#autocomplete_concept_post_resource'
+    get :autocomplete_concept_post_mean_concept_posts, to: 'concept/posts#autocomplete_concept_post_mean'
     namespace :concept do
       posts_routes
       resources :posts do
@@ -205,29 +198,20 @@ CollectiveMind::Application.routes.draw do
     namespace :plan do
       posts_routes
       resources :posts do
+        resources :stages, only: [:new, :create, :edit, :update, :destroy], controller: 'post_stages'
+        resources :actions, only: [:new, :create, :edit, :update, :destroy], controller: 'post_actions'
+        resources :aspects, only: [:new, :create, :edit, :update, :destroy], controller: 'post_aspects'
         post :get_concepts, on: :collection
         member do
           put :add_concept
-          put :new_stage
-          put :edit_stage
-          put :create_stage
-          put :update_stage
-          delete :destroy_stage
-          put :edit_concept
-          delete :destroy_concept
-          put :new_action
-          put :edit_action
-          put :create_action
-          put :update_action
-          delete :destroy_action
           put :add_form_for_concept
-          put :update_concept
           get :get_concept
           put :update_get_concept
-          put :render_table
-          put :render_concept_side
           get :view_concept
           get :view_concept_table
+          put :render_concept_side
+
+          put :render_table
           put :new_note
           put :create_note
           put :destroy_note

@@ -6,7 +6,7 @@
           %small 1.
           %strong
             = t('form.plan.desc')
-      %li#second{class: @post.persisted? ? nil:'disabled'}
+      %li#second{class: ('disabled' unless @post.persisted?)}
         - if @post.persisted?
           #option_for_render_tab(project="#{@project.id}" post="#{@post.id}")
         %a{'data-toggle' => 'tab', href: '#tab2', role: 'tab'}
@@ -16,7 +16,7 @@
         #spinner_tab2.loader.animated.handle(style="display:none;")
           %span.spinner
             %i.fa.fa-spinner.fa-spin
-      %li#third{class: @post.persisted? ? nil:'disabled'}
+      %li#third{class: ('disabled' unless @post.persisted?)}
         %a{'data-toggle' => 'tab', href: '#tab3', role: 'tab'}
           %small 3.
           %strong
@@ -30,11 +30,12 @@
         .form-horizontal
           %fieldset
             .col-md-6#form_for_main_plan
-              = form_for  @post, url: {project: @project.id, action: @post.persisted? ? 'update' : 'create'}, remote: true, html: { class: 'new_or_edit' } do |f|
+              = form_for @post, url: {project: @project, action: @post.persisted? ? 'update' : 'create'}, remote: true, html: { class: 'new_or_edit' } do |f|
                 %legend.section
-                  =t('form.plan.desc')
+                  = t('form.plan.desc')
                 .form-group(style="margin-left:0;")
-                  %label.color-green{for: 'name_plan'}=t('form.plan.name')
+                  %label.color-green{for: 'name_plan'}
+                    = t('form.plan.name')
                   = f.text_field :name, type: 'text', class: 'form-control', id: 'name_plan'
                 .form-group(style="margin-left:0;")
                   %label{for: 'goal'}
@@ -43,13 +44,12 @@
                     %small
                   = f.text_area :goal, rows: 8, style: 'width: 100%;', class: 'form-control', id: 'goals', placeholder: t('form.plan.goal_promt')
                   %span.help-block
-                    ="1) #{t('form.plan.goal_promt_1')}"
+                    = "1) #{t('form.plan.goal_promt_1')}"
                     %br
-                    ="2) #{t('form.plan.goal_promt_2')}"
-
-
+                    = "2) #{t('form.plan.goal_promt_2')}"
                 .form-group(style="margin-left:0;")
-                  %label.color-green{for: 'desc_plan'}=t('form.plan.study')
+                  %label.color-green{for: 'desc_plan'}
+                    = t('form.plan.study')
                   = f.text_area :content, rows: 12, style: 'width: 100%;', class: 'form-control', id: 'desc_plan'
                   %span.help-block
                     = t('form.plan.desc_future')
@@ -73,8 +73,7 @@
               #modal_stage
               #add_new_stage
                 - if @post.persisted?
-                  = link_to new_stage_plan_post_path(@project, @post), method: :put, remote: true, class: 'btn btn-lg btn-success btn-block', id: 'btn_new_stage', style: 'font-weight: normal;' do
-                    = t('form.plan.stage.new')
+                  = link_to t('form.plan.stage.new'), new_plan_post_stage_path(@project, @post), remote: true, class: 'btn btn-lg btn-success btn-block', id: 'btn_new_stage', style: 'font-weight: normal;'
 
       #tab2.tab-pane.fade
         .form-horizontal
