@@ -25,7 +25,7 @@
                 = image_tag 'logo-red.jpg', style: 'margin: auto;'
           .clearfix.visible-xs
           %nav.header-buttons.pull-left
-            %a.btn.btn-white.rounded-2{href: "#"} Процедура
+            = link_to 'Процедура', "/project/#{@project.id}", class: 'btn btn-white rounded-2'
             .clearfix.visible-xs
             = link_to 'Кабинет', project_user_path(@project, current_user), class: 'btn btn-grey rounded-2'
             .clearfix.visible-xs
