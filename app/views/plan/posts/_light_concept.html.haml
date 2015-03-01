@@ -19,26 +19,39 @@
     %br
     - post_all = post.concept_votings.size
     -#- post.dispost_concepts.by_status(0).sort_by{|c| c.complite(post).nil? ? 0 : -c.complite(post)}.each_with_index do |pa, index|
+
+    .row
+      .col-md-1
+      .col-md-6
+        Нововведения
+      .col-md-2
+        Важность
+      .col-md-2
+        Cтепень исправления
+      .col-md-1
+    .concept-devider
+
     - post.dispost_concepts.by_status(0).sort_by{|p| [(post_all == 0 ? 0 : -((post.concept_votings.by_concept_aspect(p.post_aspect).size/post_all.to_f)*100).round), (p.complite(post).nil? ? 0 : -p.complite(post))] }.each_with_index do |pa, index|
-      .row.plus-concept(id="tr_plus_concept_#{post.id}_#{pa.post_aspects.first.id}")
-        .col-md-1
-          =index+1
-        .col-md-5
+      .row.plus-concept(id="tr_plus_concept_#{post.id}_#{pa.post_aspect.id}" class="tr_plus_concept_#{pa.post_aspect.id}" class="#{check_concept?(@post, pa) ? 'visible-list' : ''}")
+        .col-md-1(class="td_check_concept_#{pa.post_aspect.id}")
+          -if check_concept?(@post, pa)
+            %i.fa.fa-check
+        .col-md-6
           - if pa.post_aspects.first.title!=''
             =link_to view_concept_plan_post_path(@project, @post, post_id: post.id, con_id: pa.post_aspects.first.id), method: :get, remote: true, class: "color-teal", "data-toggle"=> "collapse", "data-target"=> "collapse_plus_concept_#{post.id}_#{pa.post_aspects.first.id}", style: "text-decoration:none;", id: "view_post_concept_#{post.id}_#{pa.post_aspects.first.id}" do
               =pa.post_aspects.first.title
           - else
             =t('show.without_name')
-        .col-md-1
+        .col-md-2
           ="#{post_all == 0 ? 0 : ((post.concept_votings.by_concept_aspect(pa.post_aspect).size/post_all.to_f)*100).round}%"
         .col-md-2
           =status_for_complite_discontent(post, pa)
-        .col-md-2(class="td_plus_concept_#{pa.post_aspects.first.id}")
-          -if plus_concept?(@post, @post_stage, pa)
-            .label.label-success=t('form.plan.concept.add')
+        -#.col-md-2(class="td_plus_concept_#{pa.post_aspects.first.id}")
+        -#  -if plus_concept?(@post, @post_stage, pa)
+        -#    .label.label-success=t('form.plan.concept.add')
         .col-md-1
           .pull-right
-            =link_to add_form_for_concept_plan_post_path(@project, @post, stage_id: @post_stage, concept_id: pa.post_aspects.first.id, save_form: true), method: :put, remote: true, id: "plus_post_concept_#{pa.id}", style: "#{@post.post_aspects.pluck(:concept_post_aspect_id).include?(pa.post_aspect.id) ? 'display:none;' : ''}" do
+            =link_to add_form_for_concept_plan_post_path(@project, @post, stage_id: @post_stage, concept_id: pa.post_aspects.first.id, save_form: true), method: :put, remote: true, id: "plus_post_concept_#{pa.id}", style: "#{check_concept?(@post, pa) ? 'display:none;' : ''}" do
               %button.btn.btn-sm.btn-warning{type: "button"}
                 %i.fa.fa-plus
       .concept-devider
@@ -73,14 +86,26 @@
     %br
     - post_all = @project.discontents.by_status([2, 4]).joins(:final_votings).where(discontent_votings: {against: 't'}).size
     -#- post.concept_disposts.sort_by{|c| c.complite(post).nil? ? 0 : -c.complite(post)}.each_with_index do |dispost, index|
+
+    .row
+      .col-md-1
+      .col-md-7
+        Список несовершенств
+      .col-md-2
+        Важность
+      .col-md-2
+        Степень исправления
+    .concept-devider
+
     - post.concept_disposts.sort_by{|p| [(post_all == 0 ? 0 : -((p.final_votings.by_positive.size/post_all.to_f)*100).round), (p.complite(post).nil? ? 0 : -p.complite(post))] }.each_with_index do |dispost, index|
-      .row.plus-concept(id="tr_plus_concept_#{dispost.id}_#{post.post_aspect.id}")
-        .col-md-1
-          =index+1
-        .col-md-8
+      .row.plus-concept(id="tr_plus_concept_#{dispost.id}_#{post.post_aspect.id}" class="tr_plus_concept_#{dispost.id}" class="#{check_discontent?(@post, dispost) ? 'visible-list' : ''}")
+        .col-md-1(class="td_check_dispost_#{dispost.id}")
+          -if check_discontent?(@post, dispost)
+            %i.fa.fa-check
+        .col-md-7
           =link_to view_concept_plan_post_path(@project, @post, post_id: dispost.id, con_id: post.post_aspect.id, render_dispost: true), method: :get, remote: true, class: "color-teal", "data-toggle"=> "collapse", "data-target"=> "collapse_plus_concept_#{dispost.id}_#{post.post_aspect.id}", style: "text-decoration:none;", id: "view_post_concept_#{dispost.id}_#{post.post_aspect.id}" do
             =dispost.content
-        .col-md-1
+        .col-md-2
           ="#{post_all == 0 ? 0 : ((dispost.final_votings.by_positive.size/post_all.to_f)*100).round}%"
         .col-md-2
           =level_complite(dispost)

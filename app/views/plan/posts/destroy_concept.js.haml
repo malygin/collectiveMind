@@ -8,8 +8,8 @@ $("#tr_plan_all_concept_#{@post_concept.id}").remove();
 -if params[:fast_remove]
   $("#tr_right_list_concept_#{@post_concept.id}").remove();
   -if @post_concept.concept_post_aspect
-    $('.td_plus_concept_#{@post_concept.concept_post_aspect.id}').html('');
+    $('.td_check_concept_#{@post_concept.concept_post_aspect.id}').html('');
     $('#plus_post_concept_#{@post_concept.concept_post_aspect.concept_post.id}').show();
   -else
-    $('.td_plus_concept_#{@post_concept.id}').html('');
+    $('.td_check_concept_#{@post_concept.id}').html('');
     $('#plus_post_concept_#{@post_concept.id}').show();

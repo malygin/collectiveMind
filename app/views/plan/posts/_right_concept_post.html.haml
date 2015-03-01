@@ -1,7 +1,7 @@
 .row.plus-concept(id="tr_right_list_concept_#{right_concept_post.id}")
   .col-md-11
     - if right_concept_post.title!=''
-      =link_to view_concept_plan_post_path(@project, @post, con_id: right_concept_post.id, new_idea: true), method: :get, remote: true, class: "color-teal", "data-toggle"=> "collapse", "data-target"=> "collapse_right_list_concept_#{right_concept_post.id}", style: "text-decoration:none;", id: "view_post_concept_#{right_concept_post.id}" do
+      =link_to view_concept_plan_post_path(@project, @post, con_id: right_concept_post.id, right_list: true), method: :get, remote: true, class: "color-teal", "data-toggle"=> "collapse", "data-target"=> "collapse_right_list_concept_#{right_concept_post.id}", style: "text-decoration:none;", id: "view_post_concept_#{right_concept_post.id}" do
         =right_concept_post.title
     - else
       =t('show.without_name')

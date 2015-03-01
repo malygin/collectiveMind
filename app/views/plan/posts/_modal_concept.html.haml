@@ -14,18 +14,19 @@
               -if @new_ideas.present?
                 %h4.color-green=t('form.plan.concept.new_ideas')
                 - @new_ideas.each_with_index do |post, ind|
-                  .row.plus-concept(id="tr_plus_concept_#{post.id}")
-                    .col-md-1
-                      =ind+1
-                    .col-md-8
+                  .row.plus-concept(id="tr_plus_concept_#{post.id}" class="#{plus_concept_new_idea?(@post, @post_stage, post) ? 'visible-list' : ''}")
+                    .col-md-1(class="td_check_concept_#{post.id}")
+                      -if plus_concept_new_idea?(@post, @post_stage, post)
+                        %i.fa.fa-check
+                    .col-md-10
                       - if post.title!=''
                         =link_to view_concept_plan_post_path(@project, @post, con_id: post.id, new_idea: true), method: :get, remote: true, class: "color-teal", "data-toggle"=> "collapse", "data-target"=> "collapse_plus_concept_#{post.id}", style: "text-decoration:none;", id: "view_post_concept_#{post.id}" do
                           =post.title
                       - else
                         =t('show.without_name')
-                    .col-md-2(class="td_plus_concept_#{post.id}")
-                      -if plus_concept_new_idea?(@post, @post_stage, post)
-                        .label.label-success=t('form.plan.concept.add')
+                    -#.col-md-2(class="td_plus_concept_#{post.id}")
+                    -#  -if plus_concept_new_idea?(@post, @post_stage, post)
+                    -#    .label.label-success=t('form.plan.concept.add')
                     .col-md-1
                       .pull-right
                         =link_to add_form_for_concept_plan_post_path(@project, @post, stage_id: @post_stage, concept_id: post.id, save_form: true, new_idea: true), method: :put, remote: true, id: "plus_post_concept_#{post.id}" do
@@ -46,27 +47,53 @@
 
               .tab-content
                 #tab_plan_discontents.tab-pane.fade.clearfix.in.active(role="tabpanel")
+                  .row
+                    .col-md-1
+                    .col-md-7
+                      Список несовершенств
+                    .col-md-2
+                      Важность
+                      %i.hidden-sm.hidden-xs.fa.fa-question-circle.tooltips{"data-toggle" => 'tooltip', "data-html" => 'true', "data-placement" => 'bottom', title: 'процент поддержавших при голосовании на второй стадии'}
+                    .col-md-2
+                  .plan-devider
+
                   - @disposts.each do |post|
                     -if post.dispost_concepts.by_status(0).present?
-                      .row
-                        .col-md-8
+                      .row(id="tr_disposts_list_#{post.id}" class="#{check_discontent?(@post, post) ? 'visible-list' : ''}")
+                        .col-md-1(class="td_check_dispost_#{post.id}")
+                          -if check_discontent?(@post, post)
+                            %i.fa.fa-check
+                        .col-md-7
                           %span{id: "view_what_#{post.id}"}
                             = post.content
-                        .col-md-1
+                        .col-md-2
                           ="#{@disposts_all == 0 ? 0 : ((post.final_votings.by_positive.size/@disposts_all.to_f)*100).round}%"
-                        .col-md-3
+                        .col-md-2
                           %span
                             =link_to view_concept_plan_post_path(@project, @post, stage_id: @post_stage, post_id: post.id, what_view: true), method: :get, remote: true, class: "color-teal pull-right", "data-toggle"=> "collapse", "data-target"=> "collapse_dis_concept_#{post.id}", style: "text-decoration:none;" do
-                              .label.label-success{id: "view_concepts_#{post.id}"}=t('form.plan.concept.show_decision')
+                              .label.label-success{id: "view_concepts_#{post.id}", style: "font-size:10px;"}=t('form.plan.concept.show_decision')
 
                       %div{id: "view_dis_concept_#{post.id}"}
                       .plan-devider
 
 
                 #tab_plan_concepts.tab-pane.fade(role="tabpanel")
+                  .row
+                    .col-md-1
+                    .col-md-5
+                      Список нововведений
+                    .col-md-3
+                      Исправление несовершенств
+                      %i.hidden-sm.hidden-xs.fa.fa-question-circle.tooltips{"data-toggle" => 'tooltip', "data-html" => 'true', "data-placement" => 'bottom', title: 'первая цифра - количество исправляемых в полной или значительной степени несовершенств, вторая цифра - суммарная важность этих несовершенств, третья - количество частично исправляемых несовершенств, четвертая - их суммарная важность'}
+                    .col-md-2
+                    .col-md-1
+                  .plan-devider
                   - @concepts.each do |post|
                     -if post.concept_disposts.present?
-                      .row
+                      .row(id="tr_concepts_list_#{post.id}" class="#{check_concept?(@post, post) ? 'visible-list' : ''}")
+                        .col-md-1(class="td_check_concept_#{post.post_aspect.id}")
+                          -if check_concept?(@post, post)
+                            %i.fa.fa-check
                         .col-md-5
                           %span{id: "view_what_#{post.id}"}
                             - if post.post_aspect.title!=''
@@ -82,13 +109,13 @@
                           ="/"
                           ="#{post.sum_other_disposts(@disposts_all)}%"
 
-                        .col-md-3
+                        .col-md-2
                           %span
                             =link_to view_concept_plan_post_path(@project, @post, stage_id: @post_stage, con_id: post.id, what_view_concept: true), method: :get, remote: true, class: "color-teal pull-right", "data-toggle"=> "collapse", "data-target"=> "collapse_dis_concept_#{post.id}", style: "text-decoration:none;" do
-                              .label.label-success{id: "view_concepts_#{post.id}"} Показать несовершенства
+                              .label.label-success{id: "view_concepts_#{post.id}", style: "font-size:10px;"} Показать несовершенства
                         .col-md-1
                           .pull-right
-                            =link_to add_form_for_concept_plan_post_path(@project, @post, stage_id: @post_stage, concept_id: post.post_aspect.id, save_form: true), method: :put, remote: true, id: "plus_post_concept_#{post.id}", style: "#{@post.post_aspects.pluck(:concept_post_aspect_id).include?(post.post_aspect.id) ? 'display:none;' : ''}" do
+                            =link_to add_form_for_concept_plan_post_path(@project, @post, stage_id: @post_stage, concept_id: post.post_aspect.id, save_form: true), method: :put, remote: true, id: "plus_post_concept_#{post.id}", style: "#{check_concept?(@post, post) ? 'display:none;' : ''}" do
                               %button.btn.btn-sm.btn-warning{type: "button"}
                                 %i.fa.fa-plus
 

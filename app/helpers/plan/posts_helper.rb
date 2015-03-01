@@ -21,12 +21,25 @@ module Plan::PostsHelper
     false
   end
 
+  def check_concept?(post, concept)
+    return true if post.post_aspects.pluck(:concept_post_aspect_id).include? concept.post_aspect.id
+    false
+  end
+
   def plus_concept_new_idea?(post, stage, concept)
     if stage and stage.plan_post_aspects.pluck(:id).include? concept.id
       return true
     elsif post.post_aspects_without_stage.pluck(:id).include? concept.id
       return true
     end
+    false
+  end
+
+  def check_discontent?(post, dispost)
+    plan_aspects = post.post_aspects.pluck(:concept_post_aspect_id)
+    concept_aspects = dispost.dispost_concepts.by_status(0).joins(:post_aspects).pluck("concept_post_aspects.id")
+    arr = plan_aspects & concept_aspects
+    return true if arr.present?
     false
   end
 

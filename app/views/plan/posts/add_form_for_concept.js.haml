@@ -10,7 +10,8 @@
     $("#right_concept_list").append("#{escape_javascript(render partial: 'right_concept_post', object: @cond )}");
 
     -if @concept
-      $('.td_plus_concept_#{@concept.id}').html('<div class="label label-success">#{t('form.plan.concept.add')}</div>')
+      -#$('.td_check_concept_#{@concept.id}').html('<div class="label label-success">#{t('form.plan.concept.add')}</div>')
+      $('.td_check_concept_#{@concept.id}').html('<i class="fa fa-check"></i>')
       -if params[:new_idea]
         $('#plus_post_concept_#{@concept.id}').hide();
       -elsif @concept.instance_of? Concept::PostAspect
