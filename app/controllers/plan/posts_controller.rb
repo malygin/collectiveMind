@@ -78,7 +78,7 @@ class Plan::PostsController < PostsController
     @aspects = Discontent::Aspect.where(project_id: @project, status: 0)
     @disposts_all = @project.discontents.by_status([2, 4]).joins(:final_votings).where(discontent_votings: {against: 't'}).size
     @disposts = Discontent::Post.where(project_id: @project, status: 4).sort_by { |post| @disposts_all == 0 ? 0 : -((post.final_votings.by_positive.size/@disposts_all.to_f)*100).round }
-    @concepts = Concept::Post.where(project_id: @project, status: 0).sort_by { |post| [-post.concept_disposts.where(concept_post_discontents: { complite: [2, 3] }).size, -post.sum_main_disposts(@post, @disposts_all)] }
+    @concepts = Concept::Post.where(project_id: @project, status: 0).sort_by { |post| [-post.concept_disposts.where(concept_post_discontents: { complite: [2, 3] }).size, -post.sum_main_disposts(@post, @disposts_all), -post.concept_disposts.where(concept_post_discontents: { complite: [1, nil] }).size, -post.sum_other_disposts(@post, @disposts_all)] }
 
     # @disposts_all = @project.discontents.by_status([2, 4]).joins(:final_votings).where(discontent_votings: {against: 't'}).size
     # @concepts_all = @project.discontents.by_status(4).joins(:concept_votings).select('distinct concept_votings.user_id').size
@@ -254,7 +254,7 @@ class Plan::PostsController < PostsController
           @cond.duplicate_concept_post_resources(@project, @concept.concept_post)
 
           @disposts_all = @project.discontents.by_status([2, 4]).joins(:final_votings).where(discontent_votings: {against: 't'}).size
-          @concepts = Concept::Post.where(project_id: @project, status: 0).sort_by { |post| [-post.concept_disposts.where(concept_post_discontents: { complite: [2, 3] }).size, -post.sum_main_disposts(@post, @disposts_all)] }
+          @concepts = Concept::Post.where(project_id: @project, status: 0).sort_by { |post| [-post.concept_disposts.where(concept_post_discontents: { complite: [2, 3] }).size, -post.sum_main_disposts(@post, @disposts_all), -post.concept_disposts.where(concept_post_discontents: { complite: [1, nil] }).size, -post.sum_other_disposts(@post, @disposts_all)] }
         end
       else
         @cond = Plan::PostAspect.create(title: 'Новое нововведение')
@@ -308,7 +308,7 @@ class Plan::PostsController < PostsController
     end
     if params[:fast_remove]
       @disposts_all = @project.discontents.by_status([2, 4]).joins(:final_votings).where(discontent_votings: {against: 't'}).size
-      @concepts = Concept::Post.where(project_id: @project, status: 0).sort_by { |post| [-post.concept_disposts.where(concept_post_discontents: { complite: [2, 3] }).size, -post.sum_main_disposts(@post, @disposts_all)] }
+      @concepts = Concept::Post.where(project_id: @project, status: 0).sort_by { |post| [-post.concept_disposts.where(concept_post_discontents: { complite: [2, 3] }).size, -post.sum_main_disposts(@post, @disposts_all), -post.concept_disposts.where(concept_post_discontents: { complite: [1, nil] }).size, -post.sum_other_disposts(@post, @disposts_all)] }
     end
   end
 
