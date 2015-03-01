@@ -1,0 +1,35 @@
+-if left_concept_post.concept_disposts.present?
+  .row(id="tr_concepts_list_#{left_concept_post.id}" class="#{check_concept?(@post, left_concept_post) ? 'visible-list' : ''}")
+    .col-md-1(class="td_check_concept_#{left_concept_post.post_aspect.id}")
+      -if check_concept?(@post, left_concept_post)
+        %i.fa.fa-check
+    .col-md-5
+      %span{id: "view_what_#{left_concept_post.id}"}
+        - if left_concept_post.post_aspect.title!=''
+          =left_concept_post.post_aspect.title
+        - else
+          =t('show.without_name')
+    .col-md-3
+      ="#{left_concept_post.concept_disposts.where(concept_post_discontents: { complite: [2, 3] }).size}"
+      ="/"
+      %span{id: "sum_main_disposts_#{left_concept_post.id}"}
+        ="#{left_concept_post.sum_main_disposts(@post, @disposts_all)}"
+      ="%"
+      ="/"
+      ="#{left_concept_post.concept_disposts.where(concept_post_discontents: { complite: [1, nil] }).size}"
+      ="/"
+      %span{id: "sum_other_disposts_#{left_concept_post.id}"}
+        ="#{left_concept_post.sum_other_disposts(@post, @disposts_all)}"
+      ="%"
+    .col-md-2
+      %span
+        =link_to view_concept_plan_post_path(@project, @post, stage_id: @post_stage, con_id: left_concept_post.id, what_view_concept: true), method: :get, remote: true, class: "color-teal pull-right", "data-toggle"=> "collapse", "data-target"=> "collapse_dis_concept_#{left_concept_post.id}", style: "text-decoration:none;" do
+          .label.label-success{id: "view_concepts_#{left_concept_post.id}", style: "font-size:10px;"} Показать несовершенства
+    .col-md-1
+      .pull-right
+        =link_to add_form_for_concept_plan_post_path(@project, @post, stage_id: @post_stage, concept_id: left_concept_post.post_aspect.id, save_form: true), method: :put, remote: true, id: "plus_post_concept_#{left_concept_post.id}", class: "#{check_concept?(@post, left_concept_post) ? 'visible-button' : ''}" do
+          %button.btn.btn-sm.btn-warning{type: "button"}
+            %i.fa.fa-plus
+
+  %div{id: "view_dis_concept_#{left_concept_post.id}"}
+  .plan-devider

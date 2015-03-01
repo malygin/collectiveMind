@@ -13,11 +13,18 @@
       -#$('.td_check_concept_#{@concept.id}').html('<div class="label label-success">#{t('form.plan.concept.add')}</div>')
       $('.td_check_concept_#{@concept.id}').html('<i class="fa fa-check"></i>')
       -if params[:new_idea]
-        $('#plus_post_concept_#{@concept.id}').hide();
+        $("#plus_post_concept_#{@concept.id}").hide();
+        $("#tr_plus_concept_#{@concept.id}").addClass('visible-list');
       -elsif @concept.instance_of? Concept::PostAspect
-        $('#plus_post_concept_#{@concept.concept_post.id}').hide();
+        $("#plus_post_concept_#{@concept.concept_post.id}").hide();
+        $(".tr_plus_concept_#{@concept.id}").addClass('visible-list');
+        $("#tr_concepts_list_#{@concept.id}").addClass('visible-list')
+        - @concept.concept_post.concept_disposts.each do |dispost|
+          $(".td_check_dispost_#{dispost.id}").html('<i class="fa fa-check"></i>')
+          $("#tr_disposts_list_#{dispost.id}").addClass('visible-list')
+          $(".tr_plus_concept_#{dispost.id}").addClass('visible-list')
       -elsif @concept.instance_of? Plan::PostAspect and @concept.concept_post_aspect
-        $('#plus_post_concept_#{@concept.concept_post_aspect.concept_post.id}').hide();
+        $("#plus_post_concept_#{@concept.concept_post_aspect.concept_post.id}").hide();
     -else
       $('#modal_concept').modal('hide');
       $('#render_modal_edit_concept').empty();
@@ -26,6 +33,9 @@
       $('#modal_edit_concept').modal('show');
       $('textarea').autosize();
       resources();
+
+    -if @concepts.present?
+      $("#left_concept_list").html("#{escape_javascript(render partial: 'left_concept_post', collection: @concepts )}");
 
   -else
     alert("#{t('form.plan.concept.create_fail')}");

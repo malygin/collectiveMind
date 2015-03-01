@@ -32,7 +32,7 @@
     .concept-devider
 
     - post.dispost_concepts.by_status(0).sort_by{|p| [(post_all == 0 ? 0 : -((post.concept_votings.by_concept_aspect(p.post_aspect).size/post_all.to_f)*100).round), (p.complite(post).nil? ? 0 : -p.complite(post))] }.each_with_index do |pa, index|
-      .row.plus-concept(id="tr_plus_concept_#{post.id}_#{pa.post_aspect.id}" class="tr_plus_concept_#{pa.post_aspect.id}" class="#{check_concept?(@post, pa) ? 'visible-list' : ''}")
+      .row.plus-concept{id: "tr_plus_concept_#{post.id}_#{pa.post_aspect.id}", class: "tr_plus_concept_#{pa.post_aspect.id} #{check_concept?(@post, pa) ? 'visible-list' : ''}"}
         .col-md-1(class="td_check_concept_#{pa.post_aspect.id}")
           -if check_concept?(@post, pa)
             %i.fa.fa-check
@@ -51,7 +51,7 @@
         -#    .label.label-success=t('form.plan.concept.add')
         .col-md-1
           .pull-right
-            =link_to add_form_for_concept_plan_post_path(@project, @post, stage_id: @post_stage, concept_id: pa.post_aspects.first.id, save_form: true), method: :put, remote: true, id: "plus_post_concept_#{pa.id}", style: "#{check_concept?(@post, pa) ? 'display:none;' : ''}" do
+            =link_to add_form_for_concept_plan_post_path(@project, @post, stage_id: @post_stage, concept_id: pa.post_aspects.first.id, save_form: true), method: :put, remote: true, id: "plus_post_concept_#{pa.id}", class: "#{check_concept?(@post, pa) ? 'visible-button' : ''}" do
               %button.btn.btn-sm.btn-warning{type: "button"}
                 %i.fa.fa-plus
       .concept-devider
@@ -98,7 +98,7 @@
     .concept-devider
 
     - post.concept_disposts.sort_by{|p| [(post_all == 0 ? 0 : -((p.final_votings.by_positive.size/post_all.to_f)*100).round), (p.complite(post).nil? ? 0 : -p.complite(post))] }.each_with_index do |dispost, index|
-      .row.plus-concept(id="tr_plus_concept_#{dispost.id}_#{post.post_aspect.id}" class="tr_plus_concept_#{dispost.id}" class="#{check_discontent?(@post, dispost) ? 'visible-list' : ''}")
+      .row.plus-concept(id="tr_plus_concept_#{dispost.id}_#{post.post_aspect.id}" class="tr_plus_concept_#{dispost.id} #{check_discontent?(@post, dispost) ? 'visible-list' : ''}")
         .col-md-1(class="td_check_dispost_#{dispost.id}")
           -if check_discontent?(@post, dispost)
             %i.fa.fa-check
@@ -108,7 +108,7 @@
         .col-md-2
           ="#{post_all == 0 ? 0 : ((dispost.final_votings.by_positive.size/post_all.to_f)*100).round}%"
         .col-md-2
-          =level_complite(dispost)
+          =status_for_complite_discontent(dispost, post)
       .concept-devider
 
 -else

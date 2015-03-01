@@ -63,17 +63,28 @@ class Concept::Post < ActiveRecord::Base
     post.complite if post
   end
 
-  def sum_main_disposts(post_all)
+  def sum_main_disposts(post, post_all)
     sum = 0
+    plan_aspects = post.post_aspects.pluck(:concept_post_aspect_id)
     self.concept_disposts.where(concept_post_discontents: { complite: [2, 3] }).each do |dispost|
-      sum += post_all == 0 ? 0 : ((dispost.final_votings.by_positive.size/post_all.to_f)*100).round
+      concept_aspects = dispost.dispost_concepts.by_status(0).joins(:post_aspects).pluck("concept_post_aspects.id")
+      arr = plan_aspects & concept_aspects
+      unless arr.present?
+        sum += post_all == 0 ? 0 : ((dispost.final_votings.by_positive.size/post_all.to_f)*100).round
+      end
     end
     sum
   end
-  def sum_other_disposts(post_all)
+
+  def sum_other_disposts(post, post_all)
     sum = 0
+    plan_aspects = post.post_aspects.pluck(:concept_post_aspect_id)
     self.concept_disposts.where(concept_post_discontents: { complite: [1, nil] }).each do |dispost|
-      sum += post_all == 0 ? 0 : ((dispost.final_votings.by_positive.size/post_all.to_f)*100).round
+      concept_aspects = dispost.dispost_concepts.by_status(0).joins(:post_aspects).pluck("concept_post_aspects.id")
+      arr = plan_aspects & concept_aspects
+      unless arr.present?
+        sum += post_all == 0 ? 0 : ((dispost.final_votings.by_positive.size/post_all.to_f)*100).round
+      end
     end
     sum
   end
