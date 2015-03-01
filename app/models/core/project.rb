@@ -40,7 +40,7 @@ class Core::Project < ActiveRecord::Base
   scope :active_proc, -> { where('core_projects.status < ?', STATUS_CODES[:complete]) }
   scope :access_proc, -> access_proc { where(core_projects: {type_access: access_proc}) }
 
-  LIST_STAGES = {1 => {name: 'Введение в процедуру', type_stage: :collect_info_posts, status: [0, 1, 2, 20]},
+  LIST_STAGES = {1 => {name: 'Введение в процедуру', type_stage: :collect_info_posts, status: [0, 1, 2]},
                  2 => {name: 'Анализ ситуации', type_stage: :discontent_posts, status: [3, 4, 5, 6]},
                  3 => {name: 'Дизайн будущего', type_stage: :concept_posts, status: [7, 8]},
                  4 => {name: 'Разработка проектов', type_stage: :plan_posts, status: [9]},

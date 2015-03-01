@@ -16,7 +16,7 @@
   %body
     .outer
       -if controller.instance_of? Concept::PostsController or controller.instance_of? Discontent::PostsController
-        =render partial: 'application/right_rollover', locals: {current_stage: current_stage_for_navbar(controller, params[:stage])}
+        = render partial: 'application/right_rollover'
       %header.top-bar
         .container
           .box-shadow-outer
@@ -27,7 +27,7 @@
           %nav.header-buttons.pull-left
             %a.btn.btn-white.rounded-2{href: "#"} Процедура
             .clearfix.visible-xs
-            %a.btn.btn-grey.rounded-2{href: "#"} Кабинет
+            = link_to 'Кабинет', project_user_path(@project, current_user), class: 'btn btn-grey rounded-2'
             .clearfix.visible-xs
             %a.btn.btn-grey.rounded-2{href: "#"} Новости
             .clearfix.visible-xs
@@ -58,13 +58,12 @@
       .main-block
         .container
           .clearfix
-          .stages
-            = render partial: 'application/stages', locals: {current_stage: current_stage_for_navbar(controller, params[:stage])}
+          = render partial: 'stages'
           .clearfix
           - if controller.instance_of? CollectInfo::PostsController
             .divider-grey
             .row.progress-bars
-              = render partial: 'application/progress_bar', locals: {current_stage: current_stage_for_navbar(controller, params[:stage])}
+              = render partial: 'application/progress_bar'
             .clearfix
             .divider-grey
           = yield

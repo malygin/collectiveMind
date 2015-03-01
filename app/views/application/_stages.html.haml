@@ -1,94 +1,26 @@
-- if current_stage == :lifetape
-  .stage.current-stage
-    %a.stage.stage-number-block.rounded-1{href: "/project/#{@project.id}/collect_info/posts" + "#{params[:asp] ? "?asp=#{params[:asp]}" : ""}", id: "go_to_life_tape"}
-      %span.bigger> 1
-      стадия
-    .current-stage-text.pull-left
-      .top-text
-        = @project.name
-      .bottom-text
-        %h4=t('stages.life_tape')
-  .clearfix.visible-sm.visible-xs
-  %a.stage.stage-number-block.rounded-1{ href: "#{@project.status < 3 ? '#' :  "/project/#{@project.id}/discontent/posts" + "#{params[:asp] ? "?asp=#{params[:asp]}" : ""}"}", class: "#{@project.status < 3 ? 'next-steps-stage' : ''}",id: "go_to_discontent"}
-    %span.bigger> 2
-    стадия
-  .clearfix.visible-sm.visible-xs
-  %a.stage.stage-number-block.rounded-1{ href: "#{@project.status < 7 ? '#' : "/project/#{@project.id}/concept/posts" + "#{params[:asp] ? "?asp=#{params[:asp]}" : ""}"}", class: "#{@project.status < 7 ? 'next-steps-stage' : ''}",id: "go_to_concept"}
-    %span.bigger> 3
-    стадия
-  .clearfix.visible-sm.visible-xs
-  %a.stage.stage-number-block.rounded-1{ href: "#{@project.status < 9 ? '#' : "/project/#{@project.id}/plan/posts"}", class: "#{@project.status < 9 ? 'next-steps-stage' : ''}", id: 'go_to_plan'}
-    %span.bigger> 4
-    стадия
-
-
--elsif current_stage == :discontent
-  %a.stage.stage-number-block.rounded-1{href: "/project/#{@project.id}/collect_info/posts" + "#{params[:asp] ? "?asp=#{params[:asp]}" : ""}", id: "go_to_life_tape"}
-    %span.bigger> 1
-    стадия
-  .clearfix.visible-md.visible-sm.visible-xs
-  .current-stage
-    %a.stage.stage-number-block.rounded-1{ href: "#{@project.status < 3 ? '#' :  "/project/#{@project.id}/discontent/posts" + "#{params[:asp] ? "?asp=#{params[:asp]}" : ""}"}",class: "#{@project.status < 3 ? 'next-steps-stage' : ''}", id: "go_to_discontent"}
-      %span.bigger> 2
-      стадия
-    .current-stage-text.pull-left
-      .top-text
-        = @project.name
-      .bottom-text
-        %h4=t('stages.discontent')
-  .clearfix.visible-sm.visible-xs
-  %a.stage.stage-number-block.rounded-1{ href: "#{@project.status < 7 ? '#' : "/project/#{@project.id}/concept/posts" + "#{params[:asp] ? "?asp=#{params[:asp]}" : ""}"}",class: "#{@project.status < 7 ? 'next-steps-stage' : ''}", id: "go_to_concept"}
-    %span.bigger> 3
-    стадия
-  .clearfix.visible-sm.visible-xs
-  %a.stage.stage-number-block.rounded-1{ href: "#{@project.status < 9 ? '#' : "/project/#{@project.id}/plan/posts"}",class: "#{@project.status < 9 ? 'next-steps-stage' : ''}", id: 'go_to_plan'}
-    %span.bigger> 4
-    стадия
-
-
-- elsif current_stage == :concept
-  %a.stage.stage-number-block.rounded-1{href: "/project/#{@project.id}/collect_info/posts" + "#{params[:asp] ? "?asp=#{params[:asp]}" : ""}", id: "go_to_life_tape"}
-    %span.bigger> 1
-    стадия
-  .clearfix.visible-sm.visible-xs
-  %a.stage.stage-number-block.rounded-1{ href: "#{@project.status < 3 ? '#' :  "/project/#{@project.id}/discontent/posts" + "#{params[:asp] ? "?asp=#{params[:asp]}" : ""}"}",class: "#{@project.status < 3 ? 'next-steps-stage' : ''}", id: "go_to_discontent"}
-    %span.bigger> 2
-    стадия
-  .clearfix.visible-md.visible-sm.visible-xs
-  .current-stage
-    %a.stage.stage-number-block.rounded-1{ href: "#{@project.status < 7 ? '#' : "/project/#{@project.id}/concept/posts" + "#{params[:asp] ? "?asp=#{params[:asp]}" : ""}"}",class: "#{@project.status < 7 ? 'next-steps-stage' : ''}", id: "go_to_concept"}
-      %span.bigger> 3
-      стадия
-    .current-stage-text.pull-left
-      .top-text
-        = @project.name
-      .bottom-text
-        %h4=t('stages.concept')
-  .clearfix.visible-sm.visible-xs
-  %a.stage.stage-number-block.rounded-1{ href: "#{@project.status < 9 ? '#' : "/project/#{@project.id}/plan/posts"}",class: "#{@project.status < 9 ? 'next-steps-stage' : ''}", id: 'go_to_plan'}
-    %span.bigger> 4
-    стадия
-
-
-- elsif current_stage == :plan
-  %a.stage.stage-number-block.rounded-1{href: "/project/#{@project.id}/collect_info/posts" + "#{params[:asp] ? "?asp=#{params[:asp]}" : ""}", id: "go_to_life_tape"}
-    %span.bigger> 1
-    стадия
-  .clearfix.visible-sm.visible-xs
-  %a.stage.stage-number-block.rounded-1{ href: "#{@project.status < 3 ? '#' :  "/project/#{@project.id}/discontent/posts" + "#{params[:asp] ? "?asp=#{params[:asp]}" : ""}"}", class: "#{@project.status < 3 ? 'next-steps-stage' : ''}",id: "go_to_discontent"}
-    %span.bigger> 2
-    стадия
-  .clearfix.visible-sm.visible-xs
-  %a.stage.stage-number-block.rounded-1{ href: "#{@project.status < 7 ? '#' : "/project/#{@project.id}/concept/posts" + "#{params[:asp] ? "?asp=#{params[:asp]}" : ""}"}",class: "#{@project.status < 7 ? 'next-steps-stage' : ''}", id: "go_to_concept"}
-    %span.bigger> 3
-    стадия
-  .clearfix.visible-md.visible-sm.visible-xs
-  .current-stage
-    %a.stage.stage-number-block.rounded-1{ href: "#{@project.status < 9 ? '#' : "/project/#{@project.id}/plan/posts"}",class: "#{@project.status < 9 ? 'next-steps-stage' : ''}", id: 'go_to_plan'}
-      %span.bigger> 4
-      стадия
-    .current-stage-text.pull-left
-      .top-text
-        = @project.name
-      .bottom-text
-        %h4=t('stages.plan')
+.stages
+  - Core::Project::LIST_STAGES.each do |num_stage, stage|
+    - if name_controller == stage[:type_stage]
+      .stage.current-stage
+        = link_to send("#{stage[:type_stage]}_path", @project, asp: params[:asp]), id: "go_to_#{stage[:type_stage]}", class: 'stage stage-number-block rounded-1' do
+          %span.bigger
+            = num_stage
+          стадия
+        .current-stage-text.pull-left
+          .top-text
+            = @project.name
+          .bottom-text
+            %h4
+              = stage[:name]
+      .clearfix.visible-sm.visible-xs
+    - elsif @project.status >= stage[:status].max
+      = link_to send("#{stage[:type_stage]}_path", @project, asp: params[:asp]), id: "go_to_#{stage[:type_stage]}", class: 'stage stage-number-block rounded-1' do
+        %span.bigger
+          = num_stage
+        стадия
+      .clearfix.visible-sm.visible-xs
+    - else
+      = link_to '#', id: "go_to_#{stage[:type_stage]}", class: 'stage stage-number-block next-steps-stage rounded-1' do
+        %span.bigger
+          = num_stage
+        стадия

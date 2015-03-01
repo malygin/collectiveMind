@@ -1,23 +1,23 @@
 .right-rollover-outer
   .round-button-outer
-    %a{:href => "#"}
+    %a{href: '#'}
       .round-button.circle-5
-  .right-rollover.box-shadow-1.rounded-3{style:"overflow-y: auto;"}
+  .right-rollover.box-shadow-1.rounded-3{style: 'overflow-y: auto;'}
 
-    -if current_stage == :discontent
+    - if name_controller == :discontent_posts
       %h5
         Индекс аспектов
       .index-of-aspects
-        -@project.aspects.main_aspects.order("core_aspects.id").each_with_index do |asp, index|
-          .aspect{id: "button_aspect_#{asp.id}", "data-project" => @project.id, "data-aspect" => asp.id, style: "cursor:pointer;border-radius: 4px;"}
-            .circle-tag.back-color{style: "background-color:#{asp.color};"}= asp.short_name.present? ? asp.short_name.downcase : asp.content[0,2].mb_chars.downcase
-            %span.aspect-text=asp.content
-
-    -elsif current_stage == :concept
+        - @project.aspects.main_aspects.order('core_aspects.id').each do |asp|
+          .aspect{id: "button_aspect_#{asp.id}", 'data-project' => @project.id, 'data-aspect' => asp.id, style: 'cursor:pointer;border-radius: 4px;'}
+            .circle-tag.back-color{style: "background-color:#{asp.color};"}
+              = asp.short_name.present? ? asp.short_name.downcase : asp.content[0,2].mb_chars.downcase
+            %span.aspect-text
+              = asp.content
+    -elsif name_controller == :concept_posts
       %h5
         Индекс несовершенств
       .index-of-discontents
-        - @project.discontent_grouped_post.order("discontent_posts.id").each_with_index  do |post, index|
-          %button.colored-stripe.rounded-1{id: "button_discontent_#{post.id}", "data-project" => @project.id, "data-discontent" => post.id, class: "color-N#{index+1}", :rel => "#{index+1}"}
-            =trim_content(post.content)
-
+        - @project.discontent_grouped_post.order('discontent_posts.id').each_with_index do |post, index|
+          %button.colored-stripe.rounded-1{id: "button_discontent_#{post.id}", 'data-project' => @project.id, 'data-discontent' => post.id, class: "color-N#{index + 1}", rel: "#{index + 1}"}
+            = trim_content(post.content)
