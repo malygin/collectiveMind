@@ -1,59 +1,63 @@
-.col-xs-3.cabinet-left-col
-  %span.stage-label
-    = "Стадия #{@project.current_stage_number}"
-  .cabinet-tabs
-    %ul.cabinet-tabs-subblock
-      - case @project.current_stage_values[:type_stage]
-        - when :collect_info_posts
-          %li
-            %a{"data-toggle" => "tab", href: "#tab-1"}
-              %i.fa.fa-plus-square>
-              Предложить аспект
-        - when :discontent_posts
-          %li
-            %a{"data-toggle" => "tab", href: "#tab-1"}
-              %i.fa.fa-plus-square>
-              Предложить несовершенство
-        - when :concept_posts
-          %li
-            %a{"data-toggle" => "tab", href: "#tab-1"}
-              %i.fa.fa-plus-square>
-              Предложить нововведение
-        - when :plan_posts
-          %li
-            %a{"data-toggle" => "tab", href: "#tab-1"}
-              %i.fa.fa-plus-square>
-              Добавить проект
-        - when :estimate_posts
-          %li
-            %a{"data-toggle" => "tab", href: "#tab-1"}
-              %i.fa.fa-plus-square>
-              Добавить оценку
-      %li
-        %a{"data-toggle" => "tab", href: "#tab-2"}
-          %i.fa.fa-plus-square>
-          Провести анализ
-      %li
-        %a{"data-toggle" => "tab", href: "#tab-3"}
-          %i.fa.fa-plus-square>
-          Провести мозговой штурм
-      %li
-        .cabinet-tabs-subblock-divider
-      %li
-        %a{"data-toggle" => "tab", href: "#tab-4"}
-          %i.fa.fa-plus-square>
-          Мои предложения
-      %li
-        %a{"data-toggle" => "tab", href: "#tab-5"}
-          %i.fa.fa-plus-square>
-          Мои заметки
-      %li
-        .cabinet-tabs-subblock-divider
-      %li
-        %span.cabinet-tabs-subblock-2ndlev-heading
-          %i.fa.fa-plus-square>
-          Диалоги
-        %span.cabinet-tabs-subblock-2ndlev-li
-          %a{"data-toggle" => "tab", href: "#tab-6"} Лиза
-        %span.cabinet-tabs-subblock-2ndlev-li
-          %a{"data-toggle" => "tab", href: "#tab-7"} Слава и Даниэль
+.row
+  .col-xs-3.cabinet-left-col
+    %span.stage-label
+      = "Стадия #{@project.current_stage_number}"
+    .cabinet-tabs
+      %ul.cabinet-tabs-subblock
+        - case @project.current_stage_values[:type_stage]
+          - when :collect_info_posts
+            %li
+              = link_to new_aspect_path(@project), remote: true do
+                %i.fa.fa-plus-square
+                Предложить аспект
+          - when :discontent_posts
+            %li
+              = link_to new_discontent_post_path(@project), remote: true do
+                %i.fa.fa-plus-square
+                Предложить несовершенство
+          - when :concept_posts
+            %li
+              = link_to new_concept_post_path(@project), remote: true do
+                %i.fa.fa-plus-square
+                Предложить нововведение
+          - when :plan_posts
+            %li
+              = link_to new_plan_post_path(@project), remote: true do
+                %i.fa.fa-plus-square
+                Добавить проект
+          - when :estimate_posts
+            %li
+              = link_to new_estimate_post_path(@project), remote: true do
+                %i.fa.fa-plus-square
+                Добавить оценку
+        %li
+          %a{"data-toggle" => "tab", href: "#tab-2"}
+            %i.fa.fa-plus-square
+            Провести анализ
+        %li
+          %a{"data-toggle" => "tab", href: "#tab-3"}
+            %i.fa.fa-plus-square
+            Провести мозговой штурм
+        %li
+          .cabinet-tabs-subblock-divider
+        %li
+          %a{"data-toggle" => "tab", href: "#tab-4"}
+            %i.fa.fa-plus-square
+            Мои предложения
+        %li
+          %a{"data-toggle" => "tab", href: "#tab-5"}
+            %i.fa.fa-plus-square
+            Мои заметки
+        %li
+          .cabinet-tabs-subblock-divider
+        %li
+          %span.cabinet-tabs-subblock-2ndlev-heading
+            %i.fa.fa-plus-square
+            Диалоги
+          %span.cabinet-tabs-subblock-2ndlev-li
+            %a{"data-toggle" => "tab", href: "#tab-6"} Лиза
+          %span.cabinet-tabs-subblock-2ndlev-li
+            %a{"data-toggle" => "tab", href: "#tab-7"} Слава и Даниэль
+  .col-xs-9.cabinet-right-col
+    .tab-content
+      #tab-for_content.tab-pane.fade.in.active
