@@ -1,6 +1,4 @@
-$("#render_discontent_form").empty();
-$("#render_discontent_form").html('#{escape_javascript(render partial: 'modal_discontent_form')}');
-$('#modal_discontent_form').modal('show');
+$('#tab-for_content').html('#{escape_javascript(render partial: 'form')}');
 autocomplete_initialized();
 activate_add_aspects();
 start_autocomplete();
