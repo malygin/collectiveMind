@@ -501,22 +501,8 @@ module ApplicationHelper
     end
   end
 
-  def current_stage_for_navbar(controller, stage)
-    if controller.instance_of? CollectInfo::PostsController
-      :lifetape
-    elsif controller.instance_of? Discontent::PostsController
-      :discontent
-    elsif controller.instance_of? Concept::PostsController
-      :concept
-    elsif controller.instance_of? Plan::PostsController
-      :plan
-    elsif controller.instance_of? Estimate::PostsController
-      :estimate
-    elsif controller.instance_of? Essay::PostsController
-      stage_for_essay_link(stage.to_i)
-    else
-      :lifetape
-    end
+  def name_controller
+    controller.class.to_s.gsub('::', '_').gsub('Controller', '').underscore.to_sym
   end
 
   def current_stage_for_analytics(action)
