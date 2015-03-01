@@ -82,6 +82,18 @@ class Core::Project < ActiveRecord::Base
     type_access == TYPE_ACCESS_CODE[:closed]
   end
 
+  def current_stage
+    LIST_STAGES.select { |key, hash| hash[:status].include? status }
+  end
+
+  def current_stage_values
+    current_stage.values[0]
+  end
+
+  def current_stage_number
+    current_stage.keys[0]
+  end
+
   def moderators
     users_in_project.where(users: {type_user: User::TYPES_USER[:admin]})
   end
