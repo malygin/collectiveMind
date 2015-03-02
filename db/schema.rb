@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150213120323) do
+ActiveRecord::Schema.define(version: 20150301214440) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -189,8 +189,8 @@ ActiveRecord::Schema.define(version: 20150213120323) do
     t.integer  "post_id"
     t.integer  "discontent_post_id"
     t.integer  "complite"
-    t.datetime "created_at",         null: false
-    t.datetime "updated_at",         null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "concept_post_discontents", force: true do |t|
@@ -343,6 +343,7 @@ ActiveRecord::Schema.define(version: 20150213120323) do
     t.datetime "created_at",                       null: false
     t.datetime "updated_at",                       null: false
     t.boolean  "ready_to_concept", default: false
+    t.boolean  "ready_to_plan",    default: false
   end
 
   add_index "core_project_users", ["project_id"], name: "index_core_project_users_on_project_id", using: :btree
@@ -540,7 +541,7 @@ ActiveRecord::Schema.define(version: 20150213120323) do
     t.boolean  "discuss_status"
     t.boolean  "useful"
     t.boolean  "approve_status"
-    t.boolean  "anonym"
+    t.boolean  "anonym",             default: false
   end
 
   add_index "discontent_posts", ["aspect_id"], name: "index_discontent_posts_on_aspect_id", using: :btree
@@ -1575,7 +1576,6 @@ ActiveRecord::Schema.define(version: 20150213120323) do
     t.datetime "last_seen_chat_at"
     t.string   "skype"
     t.string   "phone"
-    t.string   "locale"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
