@@ -7,7 +7,7 @@ describe 'Plan ' do
   let (:project) { create :core_project, status: 9 }
   let (:prime_admin) { create :prime_admin }
   let (:moderator) { create :moderator }
-  let!(:project_user) { create :core_project_user, user: user, core_project: project, ready_to_concept: true }
+  let!(:project_user) { create :core_project_user, user: user, core_project: project, ready_to_plan: true }
 
   before do
     @plan1 = create :plan, project: project, user: user
