@@ -25,6 +25,11 @@ class Core::ProjectUsersController < ApplicationController
     render json: {head: :ok}
   end
 
+  def ready_to_plan
+    current_user.project_user_for(@project).update ready_to_plan: true
+    render json: {head: :ok}
+  end
+
   private
   def set_project
     @project = Core::Project.find(params[:project]) if params[:project]
