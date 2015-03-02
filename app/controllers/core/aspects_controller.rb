@@ -8,8 +8,6 @@ class Core::AspectsController < ProjectsController
 
   def create
     @aspect = @project.aspects.create core_aspect_params
-    @post = @aspect.life_posts.build(status: 0, project: @project)
-    @aspect.life_tape_posts << @post
     respond_to do |format|
       format.js
     end

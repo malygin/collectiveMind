@@ -2,10 +2,8 @@
   $("#notice_messages").html('#{escape_javascript(render partial: 'shared/notice_messages', locals: {object: @concept_post})}');
   window.scrollTo(0,0)
 - else
-  $("#notice_messages").html('')
   $("#form_for_concept").html('#{escape_javascript(render partial: 'form')}');
   selectize();
-  $("#third a").tab('show');
 
   $('#render_success_concept').empty();
   $("#render_success_concept").html('#{escape_javascript(render partial: 'modal_post_save')}');

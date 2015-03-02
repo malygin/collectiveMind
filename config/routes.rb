@@ -82,7 +82,8 @@ CollectiveMind::Application.routes.draw do
   end
 
   scope '/project/:project' do
-    resources :aspects do
+    resources :project_users, controller: 'core/project_users'
+    resources :aspects, controller: 'core/aspects' do
       member do
         put :answer_question
       end

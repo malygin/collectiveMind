@@ -2,6 +2,4 @@
   $("#notice_messages").html('#{escape_javascript(render partial: 'shared/notice_messages', locals: {object:@post})}');
   window.scrollTo(0,0);
 - else
-  $('#modal_discontent_form').modal('hide');
-  $('#tab_aspect_posts').append("#{escape_javascript(render partial: 'post_short', object: @post)}");
-  $("#discontent_post_#{@post.id}").effect("highlight",{color: '#f5cecd'}, 3000);
+  $('#tab-for_content').html('Спасибо за добавленное несовершенство!');

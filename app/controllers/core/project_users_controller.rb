@@ -3,6 +3,10 @@ class Core::ProjectUsersController < ApplicationController
   before_action :journal_data, only: [:user_analytics, :moderator_analytics]
   layout 'application'
 
+  def show
+
+  end
+
   def user_analytics
     redirect_to(root_path) unless prime_admin? or role_expert?
     @count_people = @project.count_people.to_json

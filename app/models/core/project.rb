@@ -40,7 +40,7 @@ class Core::Project < ActiveRecord::Base
   scope :active_proc, -> { where('core_projects.status < ?', STATUS_CODES[:complete]) }
   scope :access_proc, -> access_proc { where(core_projects: {type_access: access_proc}) }
 
-  LIST_STAGES = {1 => {name: 'Введение в процедуру', type_stage: :collect_info_posts, status: [0, 1, 2, 20]},
+  LIST_STAGES = {1 => {name: 'Введение в процедуру', type_stage: :collect_info_posts, status: [0, 1, 2]},
                  2 => {name: 'Анализ ситуации', type_stage: :discontent_posts, status: [3, 4, 5, 6]},
                  3 => {name: 'Дизайн будущего', type_stage: :concept_posts, status: [7, 8]},
                  4 => {name: 'Разработка проектов', type_stage: :plan_posts, status: [9]},
@@ -80,6 +80,18 @@ class Core::Project < ActiveRecord::Base
 
   def closed?
     type_access == TYPE_ACCESS_CODE[:closed]
+  end
+
+  def current_stage
+    LIST_STAGES.select { |key, hash| hash[:status].include? status }
+  end
+
+  def current_stage_values
+    current_stage.values[0]
+  end
+
+  def current_stage_number
+    current_stage.keys[0]
   end
 
   def moderators
