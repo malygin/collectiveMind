@@ -7,6 +7,7 @@ describe 'Plan ' do
   let (:project) { create :core_project, status: 9 }
   let (:prime_admin) { create :prime_admin }
   let (:moderator) { create :moderator }
+  let!(:project_user) { create :core_project_user, user: user, core_project: project, ready_to_plan: true }
 
   before do
     @plan1 = create :plan, project: project, user: user
@@ -19,6 +20,16 @@ describe 'Plan ' do
     before do
       sign_in user
       visit plan_posts_path(project)
+    end
+
+    it 'show movie before start', js: true do
+      project_user.update ready_to_plan: false
+      refresh_page
+      expect(page).to have_css 'div#player-container'
+      execute_script("$('#movie_watched').click()")
+      refresh_page
+      expect(page).to have_content @plan1.name
+      expect(page).to have_selector '#add_record'
     end
 
     context 'plan list' do
@@ -165,6 +176,10 @@ describe 'Plan ' do
     before do
       sign_in moderator
       visit plan_posts_path(project)
+    end
+
+    it 'not see movie' do
+      expect(page).not_to have_css 'div#player-container'
     end
 
     context 'plan list' do

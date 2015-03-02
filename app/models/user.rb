@@ -401,6 +401,14 @@ class User < ActiveRecord::Base
     end
   end
 
+  def not_ready_for_plan?(project)
+    if project_user_for(project).nil?
+      false
+    else
+      !project_user_for(project).ready_to_plan
+    end
+  end
+
   private
   #def encrypt_password
   #	self.salt = make_salt if new_record?
