@@ -22,6 +22,56 @@
   text-align: center;
 }
 
+.color-green{
+  color: #56bc76 !important;
+}
+
+.color-teal{
+  color: #4ab0ce !important;
+}
+
+.color-red{
+  color: #e5603b !important;
+}
+
+.color-orange{
+  color: #eac85e !important;
+}
+
+.feed-item .icon{
+  osition: relative;
+  z-index: 1;
+  background: rgba(51,51,51,0.4);
+  text-align: center;
+  color: white;
+  width: 28px;
+  height: 28px;
+  line-height: 28px;
+  vertical-align: middle;
+  -webkit-border-radius: 20px;
+  -moz-border-radius: 20px;
+  -ms-border-radius: 20px;
+  -o-border-radius: 20px;
+  border-radius: 20px;
+  font-size: 16px;
+}
+
+.feed-item-body{
+  padding-top: 3px;
+  margin-left: 40px;
+  vertical-align: bottom;
+}
+
+.feed-item-body .time{
+  font-size: 11.05px;
+  line-height: 1.5em;
+  color: #858585;
+}
+
+.feed-item{
+  overflow: hidden;
+}
+
 /***********************************/
 /**          ACCOUNT             **/
 /**********************************/

@@ -49,8 +49,6 @@ gem 'resque-scheduler'
 gem 'resque-status'
 gem 'rufus-scheduler', '< 3.0.0'
 
-gem 'bugsnag'
-
 group :development, :test do
   gem 'quiet_assets'
   gem 'rspec-rails'
@@ -79,6 +77,7 @@ group :production do
   gem 'rails_12factor'
   gem 'newrelic_rpm', '>=3.7.3'
   gem 'heroku-deflater'
+  gem 'bugsnag'
 end
 
 group :test do
