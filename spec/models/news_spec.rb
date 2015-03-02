@@ -10,6 +10,6 @@ describe 'News', type: :model do
     create :news, created_at: 1.day.ago
     today_news = create :news, created_at: Date.today
     news = create :news
-    expect(News.for_last_day).to match_array [news]
+    expect(News.for_last_day).to match_array [today_news, news]
   end
 end
