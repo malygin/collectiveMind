@@ -14,9 +14,12 @@ class Estimate::PostsController < PostsController
   end
 
   def index
-    return redirect_to action: 'vote_list' if current_user.can_vote_for(:plan, @project)
     @posts = Plan::Post.where(project_id: @project, status: 0).paginate(page: params[:page])
     @est_stat = @posts.first.estimate_status.nil? ? 0 : @posts.first.estimate_status if @posts.first
+    if current_user.can_vote_for(:plan, @project)
+      @number_v = @project.stage5 - current_user.voted_plan_posts.by_project(@project.id).size
+      @votes = @project.stage5
+    end
     respond_to do |format|
       format.html
       format.json { render json: @posts }
@@ -226,17 +229,6 @@ class Estimate::PostsController < PostsController
     @estimate_post.update_attributes estimate_post_params
     current_user.journals.build(type_event: 'estimate_post_update', body: @estimate_post.id).save!
     redirect_to estimate_post_path(@project, @estimate_post), notice: 'Оценка успешно обновлена.'
-  end
-
-  def vote_list
-    return redirect_to action: 'vote_list' unless current_user.can_vote_for(:plan, @project)
-    @posts = Plan::Post.where(project_id: @project, status: 0).paginate(page: params[:page])
-    @est_stat = @posts.first.estimate_status.nil? ? 0 : @posts.first.estimate_status
-    @number_v = @project.stage5 - current_user.voted_plan_posts.by_project(@project.id).size
-    @votes = @project.stage5
-    respond_to do |format|
-      format.html
-    end
   end
 
   private
