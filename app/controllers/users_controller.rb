@@ -109,8 +109,8 @@ class UsersController < ProjectsController
   end
 
   def update
-    params[:user].delete(:password) if params[:user][:password].blank?
-    if @user.update_attributes(params[:user])
+    # params[:user].delete(:password) if params[:user][:password].blank?
+    if @user.update_attributes(user_params)
       flash[:success] = 'Профиль обновлен'
       redirect_to user_path(@project, @user)
     else
@@ -168,5 +168,9 @@ class UsersController < ProjectsController
 
   def correct_user
     redirect_to(root_path) unless current_user?(@user)
+  end
+
+  def user_params
+    params.require(:user).permit(:name, :surname, :email)
   end
 end

@@ -17,18 +17,18 @@
           %i.fa.fa-male
           = f.label :email, t('form.user.email')
           = f.text_field :email, class: 'form-control'
-        .form-group
-          %i.fa.fa-skype
-          = f.label :skype, t('form.user.skype')
-          = f.text_field :skype, class: 'form-control'
-        .form-group
-          %i.fa.fa-phone
-          = f.label :phone, t('form.user.phone')
-          = f.text_field :phone, class: 'form-control'
-        .form-group
-          %i.fa.fa-file-image-o
-          = f.label :avatar, t('form.user.avatar')
-          = f.file_field :avatar, class: 'form-control'
+        -#.form-group
+        -#  %i.fa.fa-skype
+        -#  = f.label :skype, t('form.user.skype')
+        -#  = f.text_field :skype, class: 'form-control'
+        -#.form-group
+        -#  %i.fa.fa-phone
+        -#  = f.label :phone, t('form.user.phone')
+        -#  = f.text_field :phone, class: 'form-control'
+        -#.form-group
+        -#  %i.fa.fa-file-image-o
+        -#  = f.label :avatar, t('form.user.avatar')
+        -#  = f.file_field :avatar, class: 'form-control'
         .form-group
           .col-sm-offset-2
             = f.submit t('form.save'), class: 'button btn btn-success pull-right', id: 'update_profile'

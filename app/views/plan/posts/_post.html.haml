@@ -83,7 +83,8 @@
                 - post.stages.each do |stage|
                   .description-stage
                     %span.desc-stage-date
-                      = "#{Russian::strftime(stage.date_begin, '%d %b %Y')} - #{Russian::strftime(stage.date_begin, '%d %b %Y')}"
+                      -if stage.date_begin and stage.date_end
+                        = "#{Russian::strftime(stage.date_begin, '%d %b %Y')} - #{Russian::strftime(stage.date_end, '%d %b %Y')}"
                     %span.desc-stage-name
                       = stage.name
       #tab-2.tab-pane.fade.popup-bottom-rounded

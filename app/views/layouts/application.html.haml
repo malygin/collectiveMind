@@ -52,8 +52,11 @@
                 = current_user.to_s if current_user
                 %i.fa.fa-angle-down.color.mass-dark-blue
               %ul.dropdown-menu.dropdown-mini{role: "menu"}
-                %li
-                  %a{href: "#"} Вариант
+                %li{role: 'presentation'}
+                  = link_to t('menu.account'), user_path(@project, current_user), id: 'go_to_profile'
+                %li{role: 'presentation'}
+                  = link_to t('menu.profile_edit'), edit_user_path(@project, current_user), id: 'go_to_edit_profile'
+
           .clearfix
       .main-block
         .container

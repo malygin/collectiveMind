@@ -4,9 +4,9 @@
     - @posts.each_with_index do |post, index|
       - if index % 2 == 0
         .row.projects
-          = render post #estimates/posts/post_estimate ??
+          = render 'estimate/posts/post_estimate', post: post
       - else
-        = render post
+        = render 'estimate/posts/post_estimate', post: post
 
 -#.row
 -#  .col-md-12

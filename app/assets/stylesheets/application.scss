@@ -72,6 +72,25 @@
   overflow: hidden;
 }
 
+
+/**********/
+.stages .current-stage .current-stage-text .top-text{
+  font-size: 13px;
+}
+
+.stages .stage-number-block{
+  width: 85px;
+  padding-left: 15px;
+  padding-right: 15px;
+  font-size: 13px;
+}
+
+.disabled_award{
+  opacity: 0.2;
+}
+
+
+
 /***********************************/
 /**          ACCOUNT             **/
 /**********************************/
