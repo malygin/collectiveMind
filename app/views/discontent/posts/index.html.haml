@@ -57,7 +57,7 @@
 #render_discontent_comments
 #render_discontent_form
 
-- if !current_user.can_vote_for(@project)
+- if current_user.can_vote_for(:discontent, @project)
   #popup-vote-discontents.popup-window.vote-popup.mfp-hide
     .popup
       .popup-header-dnd

@@ -69,6 +69,7 @@
 # @todo load initialization
 sidebarHeight = 0;
 $ ->
+  start_vote()
   start_play()
   comments_feed()
 

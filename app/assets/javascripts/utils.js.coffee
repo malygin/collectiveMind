@@ -338,3 +338,12 @@ $('#tab_posts li#new a').on "click", (e) ->
     console.log($(this).attr('data-url'))
     $(this).autocomplete(source: $(this).attr('data-url'))
     return
+
+@start_vote = ->
+  $.magnificPopup.open({
+    items: {
+      src: $('div[id^=popup-vote]')
+    },
+    type: 'inline'
+  });
+  return
