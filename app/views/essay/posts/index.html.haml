@@ -1,4 +1,4 @@
-- if !current_user.have_essay_for_stage(@project, @stage) and current_stage?(@stage.to_i) or @project.demo?
+- if !current_user.have_essay_for_stage(@project, @stage) or @project.demo?
   .pull-right
     = link_to t('show.essay.new_essay'), new_essay_post_path(@project, @stage), id: 'new_essay',  class: 'btn btn-lg btn-success'
 %h3(class="#{color_stage(@stage.to_i)}")
