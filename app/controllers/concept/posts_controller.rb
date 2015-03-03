@@ -44,10 +44,7 @@ class Concept::PostsController < PostsController
   end
 
   def index
-    #@todo сразу все новые выводить, а уже потом он может фильтровать
-    if current_user.can_vote_for(:concept, @project)
-      redirect_to action: 'vote_list'
-    elsif params[:not_aspect].present?
+    if params[:not_aspect].present?
       @concepts = @project.concepts_without_aspect
     elsif params[:all_aspects].present?
       @concepts = @project.concept_ongoing_post.order('concept_posts.id')
@@ -55,6 +52,22 @@ class Concept::PostsController < PostsController
       @aspect = Core::Aspect.find(params[:asp])
     else
       @aspect = @project.proc_aspects.order('position DESC').first
+    end
+
+    if current_user.can_vote? _for(:concept, @project)
+      disposts = Discontent::Post.where(project_id: @project, status: 4).order(:id)
+      last_vote = current_user.concept_post_votings.by_project_votings(@project).last
+      @discontent_post = current_user.able_concept_posts_for_vote(@project, disposts, last_vote)
+      unless @discontent_post.nil?
+        var_for_vote = @discontent_post.concepts_for_vote(@project, current_user, last_vote)
+        @post_all = var_for_vote[0]
+        @concept1 = var_for_vote[1]
+        @concept2 = var_for_vote[2]
+        @votes = var_for_vote[3]
+      else
+        @post_all = 1
+        @votes = 0
+      end
     end
   end
 
@@ -158,24 +171,6 @@ class Concept::PostsController < PostsController
         format.html { render action: 'edit' }
         format.js
       end
-    end
-  end
-
-  def vote_list
-    return redirect_to action: "index" unless current_user.can_vote_for(:concept, @project)
-
-    disposts = Discontent::Post.where(project_id: @project, status: 4).order(:id)
-    last_vote = current_user.concept_post_votings.by_project_votings(@project).last
-    @discontent_post = current_user.able_concept_posts_for_vote(@project, disposts, last_vote)
-    unless @discontent_post.nil?
-      var_for_vote = @discontent_post.concepts_for_vote(@project, current_user, last_vote)
-      @post_all = var_for_vote[0]
-      @concept1 = var_for_vote[1]
-      @concept2 = var_for_vote[2]
-      @votes = var_for_vote[3]
-    else
-      @post_all = 1
-      @votes = 0
     end
   end
 
