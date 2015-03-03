@@ -60,9 +60,10 @@
       #comments.chat-messages
         -@comments.each  do |comment|
           .comment
-            = image_tag comment.user.avatar.url(:thumb), class: "comment-ava"
+            -#= image_tag comment.user.avatar.url(:thumb), class: "comment-ava"
+            = image_tag 'no-ava.png', class: "comment-ava"
             .comment-name= comment.user.to_s
             .comment-text= comment.content
       - if signed_in?
-        .col-md-12
-          = render partial:'shared/comment_form', locals:{ comment:@comment, url_link:url_for(controller:@post.class.name.underscore.pluralize, action:'add_comment')}
+        -#.col-md-12
+        = render partial:'shared/comment_form', locals:{ comment:@comment, url_link:url_for(controller:@post.class.name.underscore.pluralize, action:'add_comment')}

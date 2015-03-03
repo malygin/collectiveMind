@@ -7,6 +7,7 @@
       .col-lg-6.popup-post-block
         -#@todo Пофиксить аватарку!
         /= image_tag @post.user.avatar.url(:thumb)
+        =image_tag 'no-ava.png', style: 'margin: auto;'
         %span
           = @post.user.to_s
         .info-stripe
@@ -86,7 +87,8 @@
           #comments.chat-messages
             - @post.comments.where(user: current_user.id).each do |comment|
               .comment
-                = image_tag comment.user.avatar.url(:thumb), class: 'comment-ava'
+                -#= image_tag comment.user.avatar.url(:thumb), class: 'comment-ava'
+                =image_tag 'no-ava.png', class: 'comment-ava'
                 .comment-name
                   = comment.user.to_s
                 .comment-text
@@ -97,7 +99,8 @@
         #tab-2.tab-pane.fade
           - @comments.each do |comment|
             .comment
-              = image_tag comment.user.avatar.url(:thumb), class: 'comment-ava'
+              -#= image_tag comment.user.avatar.url(:thumb), class: 'comment-ava'
+              =image_tag 'no-ava.png', class: 'comment-ava'
               .comment-name
                 = comment.user.to_s
               .comment-text
@@ -106,6 +109,7 @@
           - (@post.advices.approve + current_user.advices_for(@post).unapproved + current_user.advices_for(@post).disapproved).each do |advice|
             .comment
               = image_tag advice.user.avatar.url(:thumb), class: 'comment-ava'
+              =image_tag 'no-ava.png', class: 'comment-ava'
               .comment-name
                 = advice.user.to_s
               .comment-text
