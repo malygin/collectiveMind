@@ -56,3 +56,34 @@
 #render_discontent_post
 #render_discontent_comments
 #render_discontent_form
+
+- if !current_user.can_vote_for(@project)
+  #popup-vote-discontents.popup-window.vote-popup.mfp-hide
+    .popup
+      .popup-header-dnd
+        .popup-header.popup-top-rounded
+          %h2.color.mass-red Голосование
+        .drag-n-drop-zone
+          .dnd-hand
+      .popup-voting.popup-bottom-rounded
+        %p
+          Выберите несовершенства, которые вам понравились, и перетащите их в изображение руки или нажмите на кнопку "проголосовать"
+        .popup-owl-navigation
+          -# if > 3
+          #owl-arrow-left-1.owl-arrow.pull-left
+          #owl-arrow-right-1.owl-arrow.pull-right
+        #owl-vote-1.owl-carousel.owl-vote
+          -# - @posts.each_slice(6) do |posts|
+          .row
+            -# - @posts.each_slice(3) do |posts|
+            .col-xs-6.owl-column
+              -# posts.each do |post|
+              = render partial: 'post_for_vote', object: post
+        %button#vote-button1.vote-button.btn.btn-mass-red{:disabled => "disabled"} Проголосовать
+        -#  = link_to  next_post_for_vote_discontent_post_path(@project,post_for_vote, against: true), remote: true, method: :put, class: 'btn btn-success btn-sm vote-button', id: "vote_positive_#{post_for_vote.id}" do
+        -#    %span.glyphicon.glyphicon-thumbs-up
+        -#    =t('voting.discontent.important')
+        -#  = link_to  next_post_for_vote_discontent_post_path(@project,post_for_vote, against: false), remote: true, method: :put, class: 'btn btn-danger btn-sm vote-button', id: "vote_negative_#{post_for_vote.id}" do
+        -#    %span.glyphicon.glyphicon-thumbs-down
+        -#    =t('voting.discontent.not_important')
+

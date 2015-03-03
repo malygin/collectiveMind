@@ -1,18 +1,31 @@
-.media{id: "post_#{post_for_vote.id}", class: 'post_for_vote',stage_id: "#{post_for_vote.id}", style: "#{'display:none;' if first_post_for_vote?(post_for_vote)}" }
-  - post_for_vote.post_aspects.each do |da|
-    = render partial: 'discontent/aspects/aspect', object: da
-  - if post_for_vote.user
-    =link_to post_for_vote.user, user_path(@project, post_for_vote.user)
-  .media-body
-    = render partial: 'post_content', object: post_for_vote
-  %br
-  = link_to  next_post_for_vote_discontent_post_path(@project,post_for_vote, against: true), remote: true, method: :put, class: 'btn btn-success btn-sm vote-button', id: "vote_positive_#{post_for_vote.id}" do
-    %span.glyphicon.glyphicon-thumbs-up
-    - if boss?
-      %span.glyphicon=post_for_vote.final_votings.by_positive.size
-    =t('voting.discontent.important')
-  = link_to  next_post_for_vote_discontent_post_path(@project,post_for_vote, against: false), remote: true, method: :put, class: 'btn btn-danger btn-sm vote-button', id: "vote_negative_#{post_for_vote.id}" do
-    %span.glyphicon.glyphicon-thumbs-down
-    - if boss?
-      %span.glyphicon=post_for_vote.final_votings.by_negative.size
-    =t('voting.discontent.not_important')
+.imperfection.imperf-pale-pink.lined-block.drag-block.drag1{id: "vote_for_post_#{post_for_vote.id}"}
+  %table
+    %tr
+      %td.imperf-left-column
+      %td.imperf-right-column
+        .aspects-indexes
+          .circle-tag.back-color.orange нд
+          .circle-tag.back-color.light-blue нс
+          .circle-tag.back-color.green мл
+          .circle-tag.back-color.purple нж
+          .circle-tag.back-color.yellow од
+          .circle-tag.back-color.blue му
+    %tr
+      / ячейка с "Что?", красит верхний бордер в более тёмный цвет этого блока
+      %td.imperf-left-column.what-cell
+        Что
+      %td.imperf-right-column
+        Нечем дышать
+    %tr
+      %td.imperf-left-column
+        Где
+      %td.imperf-right-column
+        При большом числе людей в комнате
+    %tr
+      %td.imperf-left-column
+        Когда
+      %td.imperf-right-column
+        Во время совещаний
+    %tr
+      %td.imperf-left-column
+      %td.imperf-right-column

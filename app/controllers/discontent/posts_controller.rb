@@ -10,7 +10,9 @@ class Discontent::PostsController < PostsController
   end
 
   def index
-    return redirect_to action: 'vote_list' if current_user.can_vote_for(:discontent, @project)
+
+    @posts = @project.get_united_posts_for_vote(current_user)
+
     if params[:asp]
       @aspect = Core::Aspect.find(params[:asp])
     else
@@ -85,14 +87,6 @@ class Discontent::PostsController < PostsController
       format.html
       format.js
     end
-  end
-
-  def vote_list
-    @posts = @project.get_united_posts_for_vote(current_user)
-    return redirect_to action: 'index' if @posts.empty?
-    @post_all = current_model.where(project_id: @project, status: [2, 4]).count
-    @votes = current_user.voted_discontent_posts.where(project_id: @project).count
-    # @status = 2
   end
 
   def union_discontent
