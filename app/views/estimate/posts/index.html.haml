@@ -1,12 +1,11 @@
 .project
   %h4 Проекты
   .container
-    - @posts.each_with_index do |post, index|
-      - if index % 2 == 0
-        .row.projects
-          = render 'estimate/posts/post_estimate', post: post
-      - else
-        = render 'estimate/posts/post_estimate', post: post
+    - @posts.each_slice(2) do |post|
+      .row.projects
+        = render partial: 'estimate/posts/post_estimate', locals: {post: post.first} if post.first
+        = render partial: 'estimate/posts/post_estimate', locals: {post: post.second} if post.second
+
 
 -#.row
 -#  .col-md-12

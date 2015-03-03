@@ -23,7 +23,7 @@
                     .filler{style: "background-color: #{asp.color};"}
 
       .tab-content.second-stage
-        %div
+        .tab-pane.fade.in.active
           .col-md-4.discontent-block
             .imperfection-add-block.lined-block
               .add-imperf
@@ -49,10 +49,9 @@
                 %tr
                   %td.imperf-left-column
                   %td.imperf-right-column
-        %div
-          .row
-            %div#tab_aspect_posts
-              = render partial: 'post_short', collection: @posts
+
+          #tab_aspect_posts
+            = render partial: 'post_short', collection: @posts
 
 #render_discontent_post
 #render_discontent_comments

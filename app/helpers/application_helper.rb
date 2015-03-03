@@ -559,9 +559,7 @@ module ApplicationHelper
   end
 
   def score_for_plus_post(post)
-    if post.instance_of? CollectInfo::Post
-      10
-    elsif post.instance_of? Discontent::Post
+    if post.instance_of? Discontent::Post
       25
     elsif post.instance_of? Concept::Post
       50

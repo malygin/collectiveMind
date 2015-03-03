@@ -14,7 +14,8 @@
     - my_journals.each do |journal, k|
       %li{role: 'presentation'}
         %p.message{href: '#'}
-          = image_tag journal.user.avatar.url(:thumb), style: 'margin-left: 10px;'
+          -#= image_tag journal.user.avatar.url(:thumb), style: 'margin-left: 10px;'
+          = image_tag 'no-ava.png', style: 'margin-left: 10px;'
           .details(style='margin-left: 60px;')
             .sender
               %span.color-teal=journal.user

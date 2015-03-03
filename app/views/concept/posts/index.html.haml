@@ -8,6 +8,7 @@
     .row.innovs#tab_concept_posts
       = link_to 'Добавить нововведение', new_concept_post_path(@project), class: 'btn btn-success'
       %br
+      %br
       - @project.concept_ongoing_post.order('concept_posts.id').each_with_index do |pa, index1|
         .col-lg-6.box-shadow-outer.concept-block{id: "concept_post_#{pa.id}", class: "#{post_discontent_classes(pa)}"}
           .innov-single.box-shadow-1.rounded-3
