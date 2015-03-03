@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe 'Discontent' do
+describe 'Discontent', skip: true do
   subject { page }
   let (:user) { create :user }
   let (:user_data) { create :user }

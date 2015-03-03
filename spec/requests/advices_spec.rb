@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe 'Advices' do
+describe 'Advices', skip: true do
   subject { page }
   let (:user) { create :user }
   let (:moderator) { create :moderator }

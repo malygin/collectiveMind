@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe 'Collect info' do
+describe 'Collect info', skip: true do
   subject { page }
 
   let!(:user) { @user = create :user }

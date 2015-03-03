@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe 'Groups' do
+describe 'Groups', skip: true do
   subject { page }
   let (:user) { create :user }
   let (:user2) { create :user }

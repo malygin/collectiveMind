@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe 'Users ' do
+describe 'Users ', skip: true do
   subject { page }
 
   context 'ordinary user sign in ', js: true do

@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe 'Estimate ' do
+describe 'Estimate ', skip: true do
   subject { page }
 
   let (:user) { create :user }

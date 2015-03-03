@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe 'Knowbase ' do
+describe 'Knowbase ', skip: true do
   subject { page }
 
   let (:user) { create :user }

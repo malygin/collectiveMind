@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe 'Core Project ' do
+describe 'Core Project ', skip: true do
   subject { page }
 
   let (:user) { create :user }

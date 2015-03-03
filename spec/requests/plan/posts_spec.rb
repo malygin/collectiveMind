@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe 'Plan ' do
+describe 'Plan ', skip: true do
   subject { page }
 
   let (:user) { create :user }
