@@ -1,5 +1,5 @@
 class PostsController < ProjectsController
-  before_filter :journal_data, only: [:index, :new, :edit, :show, :vote_list, :vote_result, :to_work, :about]
+  before_filter :journal_data, only: [:index, :new, :edit, :show, :vote_result, :to_work, :about]
   before_filter :have_project_access
   before_filter :boss_authenticate, only: [:vote_result]
   before_filter :comment_page, only: [:index, :show]
@@ -323,13 +323,6 @@ class PostsController < ProjectsController
       format.js
     end
   end
-
-  ### function for voiting
-  #return list model for voiting, check stages
-  def vote_list
-    @posts = voting_model.where(project_id: @project)
-  end
-
 
   #write fact of voting in db
   def vote

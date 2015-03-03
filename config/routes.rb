@@ -14,7 +14,6 @@ CollectiveMind::Application.routes.draw do
   end
 
   def posts_routes
-    get 'vote_list' => 'posts#vote_list'
     put 'vote/:post_id' => 'posts#vote'
     get 'censored/:post_id' => 'posts#censored'
     get 'aspect/:aspect/posts/' => 'posts#index'
