@@ -165,14 +165,17 @@ class Core::Project < ActiveRecord::Base
 
   def get_united_posts_for_vote(user)
     voted = user.voted_discontent_posts.pluck(:id)
-    Discontent::Post.united_for_vote_new(self.id, voted)
-
-    # Discontent::Post.united_for_vote(self.id, voted)
-  end
-
-  def get_concept_posts_for_vote(user)
-    voted = user.concept_post_votings.pluck(:id)
-    Concept::Post.united_for_vote(self.id, voted)
+    all_posts = Discontent::Post.where(project_id: id, status: [2, 4]).where.not(id: voted).includes(:post_aspects).order('core_aspects.id')
+    one_posts = []
+    many_posts = []
+    all_posts.each do |post|
+      if post.post_aspects.size == 1
+        one_posts << post
+      else
+        many_posts << post
+      end
+    end
+    one_posts | many_posts
   end
 
   def current_status?(status)

@@ -28,7 +28,6 @@ class Discontent::Post < ActiveRecord::Base
   scope :by_style, ->(p) { where(style: p) }
   scope :by_positive, ->(p) { where(style: 0, status: p) }
   scope :by_negative, ->(p) { where(style: 1, status: p) }
-  scope :united_for_vote, ->(project, voted) { where(project_id: project, status: [2, 4]).where.not(id: voted).order(:id) }
   scope :for_union, ->(project) { where('discontent_posts.status = 0 and discontent_posts.project_id = ? ', project) }
   scope :by_status_for_discontent, ->(project) {
     if project.status == 4
@@ -164,19 +163,5 @@ class Discontent::Post < ActiveRecord::Base
       votes = count_now == post_all ? count_now : count_now + 1
     end
     return post_all, concept1, concept2, votes
-  end
-
-  def self.united_for_vote_new(project, voted)
-    all_posts = united_for_vote(project, voted).includes(:post_aspects).order('core_aspects.id')
-    one_posts = []
-    many_posts = []
-    all_posts.each do |post|
-      if post.post_aspects.size == 1
-        one_posts << post
-      else
-        many_posts << post
-      end
-    end
-    one_posts | many_posts
   end
 end
