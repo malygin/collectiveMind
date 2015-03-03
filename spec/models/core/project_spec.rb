@@ -20,4 +20,11 @@ describe 'Core::Project' do
       expect(@project.statistic_visits(5.days.ago).map(&:type_event)).to match_array Array.new(count_journals, 'visit_save')
     end
   end
+
+  it 'check statuses' do
+    Core::Project::STATUS_CODES.each do |key, value|
+      @project.update!(status: value)
+      expect(@project.send("#{key}?")).to be true
+    end
+  end
 end

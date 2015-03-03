@@ -82,6 +82,12 @@ class Core::Project < ActiveRecord::Base
     type_access == TYPE_ACCESS_CODE[:closed]
   end
 
+  STATUS_CODES.keys.each do |method_name|
+    define_method :"#{method_name}?" do
+      status == STATUS_CODES[method_name]
+    end
+  end
+
   def current_stage
     LIST_STAGES.select { |key, hash| hash[:status].include? status }
   end
