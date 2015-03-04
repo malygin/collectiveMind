@@ -32,6 +32,10 @@ class Estimate::PostsController < PostsController
     @est_stat = @plan_post.estimate_status.nil? ? 0 : @plan_post.estimate_status
     @comment = comment_model.new
     @comments = @post.comments.paginate(page: params[:page], per_page: 10)
+    respond_to do |format|
+      format.html
+      format.js
+    end
   end
 
   def edit

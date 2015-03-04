@@ -2,94 +2,111 @@
   .project-single.rounded-3
     .row.post-header
       .col-xs-8
-        %a.open-popup-link{:href => "#popup-vote-project"}
-          %span.post-header-text.color.mass-red Система аналитики
+        %span.post-header-text.color.mass-red
+          = post.name
       .col-xs-4.post-header-date
         %span
-          21.12.2014
+          = Russian::strftime(post.created_at, '%d.%m.%Y')
     .post-center-block
       .post-poster
         =image_tag 'no-ava.png', style: 'margin: auto;'
         .clearfix
-        %span.poster-name Лиза Школьник
+        %span.poster-name
+          = post.user
       .post-text-no-arrow
         %span
-          Материалы-шпаргалки*, которые будут находиться под рукой у ПС на кассе или висеть
-          рядом на стене. Удобные в использовании, максимально компактные, лаконичные,
-          позволяющие ПС быстро по симптомам осуществить рекомендацию покупателю...
+          = simple_format(post.goal)
     .project-bottom-progress-block
-      %a.single-progress-block.open-popup-link{:href => "#popup-rating-detail"}
-        .user-block
-          .progress-userpic
-            =image_tag 'no-ava.png', style: 'margin: auto;'
-          .progress-username
-            Лиза
-            %br>/
-            Школьник
-        .progress-container
-          .progress.pb-lg
-            .progress-bar.pb-animated{"data-pbmax" => "33.39", :role => "progressbar"}
-              / progress limit value
-              %span.pb-limit 33.39%
-        .progress-ratings
-          %span.label.label-sm.back-color-7297c9.test 6.92
-          %span.label.label-sm.back-color-75b5d3 2.42
-          %span.label.label-sm.back-color-7ed8e3 9.71
-          %span.label.label-sm.back-color-81ded2 5.25
-      %a.single-progress-block{:href => "#"}
-        .user-block
-          .progress-userpic
-            =image_tag 'no-ava.png', style: 'margin: auto;'
-          .progress-username
-            Лиза
-            %br>/
-            Школьник
-        .progress-container
-          .progress.pb-lg
-            .progress-bar.pb-animated{"data-pbmax" => "67.29", :role => "progressbar"}
-              / progress limit value
-              %span.pb-limit 67.29%
-        .progress-ratings
-          %span.label.label-sm.back-color-7297c9.test 6.92
-          %span.label.label-sm.back-color-75b5d3 2.42
-          %span.label.label-sm.back-color-7ed8e3 9.71
-          %span.label.label-sm.back-color-81ded2 5.25
-      %a.single-progress-block{:href => "#"}
-        .user-block
-          .progress-userpic
-            =image_tag 'no-ava.png', style: 'margin: auto;'
-          .progress-username
-            Лиза
-            %br>/
-            Школьник
-        .progress-container
-          .progress.pb-lg
-            .progress-bar.pb-animated{"data-pbmax" => "33.39", :role => "progressbar"}
-              / progress limit value
-              %span.pb-limit 33.39%
-        .progress-ratings
-          %span.label.label-sm.back-color-7297c9.test 6.92
-          %span.label.label-sm.back-color-75b5d3 2.42
-          %span.label.label-sm.back-color-7ed8e3 9.71
-          %span.label.label-sm.back-color-81ded2 5.25
-      %a.single-progress-block{:href => "#"}
-        .user-block
-          .progress-userpic
-            =image_tag 'no-ava.png', style: 'margin: auto;'
-          .progress-username
-            Лиза
-            %br>/
-            Школьник
-        .progress-container
-          .progress.pb-lg
-            .progress-bar.pb-animated{"data-pbmax" => "74.52", :role => "progressbar"}
-              / progress limit value
-              %span.pb-limit 74.52%
-        .progress-ratings
-          %span.label.label-sm.back-color-7297c9.test 6.92
-          %span.label.label-sm.back-color-75b5d3 2.42
-          %span.label.label-sm.back-color-7ed8e3 9.71
-          %span.label.label-sm.back-color-81ded2 5.25
+      - post.estimates.each do |est|
+        = link_to({action: :show, project: @project, id: est.id}, remote: true, id: 'show_record', class: 'post-text single-progress-block') do
+          .user-block
+            .progress-userpic
+              =image_tag 'no-ava.png', style: 'margin: auto;'
+            .progress-username
+              = est.user
+          .progress-container
+            .progress.pb-lg
+              .progress-bar.pb-animated{"data-pbmax" => "#{est.score(@est_stat)}", :role => "progressbar"}
+                / progress limit value
+                %span.pb-limit=est.score(@est_stat)
+          .progress-ratings
+            %span.label.label-sm.back-color-7297c9.test= est.max_score
+            %span.label.label-sm.back-color-75b5d3= est.second_c
+            %span.label.label-sm.back-color-7ed8e3= est.first_c
+            %span.label.label-sm.back-color-81ded2= est.third_c
+
+
+
+      -#%a.single-progress-block.open-popup-link{:href => "#popup-rating-detail"}
+      -#  .user-block
+      -#    .progress-userpic
+      -#      =image_tag 'no-ava.png', style: 'margin: auto;'
+      -#    .progress-username
+      -#      = post.user
+      -#  .progress-container
+      -#    .progress.pb-lg
+      -#      .progress-bar.pb-animated{"data-pbmax" => "33.39", :role => "progressbar"}
+      -#        / progress limit value
+      -#        %span.pb-limit 33.39%
+      -#  .progress-ratings
+      -#    %span.label.label-sm.back-color-7297c9.test 6.92
+      -#    %span.label.label-sm.back-color-75b5d3 2.42
+      -#    %span.label.label-sm.back-color-7ed8e3 9.71
+      -#    %span.label.label-sm.back-color-81ded2 5.25
+      -#%a.single-progress-block{:href => "#"}
+      -#  .user-block
+      -#    .progress-userpic
+      -#      =image_tag 'no-ava.png', style: 'margin: auto;'
+      -#    .progress-username
+      -#      Лиза
+      -#      %br>/
+      -#      Школьник
+      -#  .progress-container
+      -#    .progress.pb-lg
+      -#      .progress-bar.pb-animated{"data-pbmax" => "67.29", :role => "progressbar"}
+      -#        / progress limit value
+      -#        %span.pb-limit 67.29%
+      -#  .progress-ratings
+      -#    %span.label.label-sm.back-color-7297c9.test 6.92
+      -#    %span.label.label-sm.back-color-75b5d3 2.42
+      -#    %span.label.label-sm.back-color-7ed8e3 9.71
+      -#    %span.label.label-sm.back-color-81ded2 5.25
+      -#%a.single-progress-block{:href => "#"}
+      -#  .user-block
+      -#    .progress-userpic
+      -#      =image_tag 'no-ava.png', style: 'margin: auto;'
+      -#    .progress-username
+      -#      Лиза
+      -#      %br>/
+      -#      Школьник
+      -#  .progress-container
+      -#    .progress.pb-lg
+      -#      .progress-bar.pb-animated{"data-pbmax" => "33.39", :role => "progressbar"}
+      -#        / progress limit value
+      -#        %span.pb-limit 33.39%
+      -#  .progress-ratings
+      -#    %span.label.label-sm.back-color-7297c9.test 6.92
+      -#    %span.label.label-sm.back-color-75b5d3 2.42
+      -#    %span.label.label-sm.back-color-7ed8e3 9.71
+      -#    %span.label.label-sm.back-color-81ded2 5.25
+      -#%a.single-progress-block{:href => "#"}
+      -#  .user-block
+      -#    .progress-userpic
+      -#      =image_tag 'no-ava.png', style: 'margin: auto;'
+      -#    .progress-username
+      -#      Лиза
+      -#      %br>/
+      -#      Школьник
+      -#  .progress-container
+      -#    .progress.pb-lg
+      -#      .progress-bar.pb-animated{"data-pbmax" => "74.52", :role => "progressbar"}
+      -#        / progress limit value
+      -#        %span.pb-limit 74.52%
+      -#  .progress-ratings
+      -#    %span.label.label-sm.back-color-7297c9.test 6.92
+      -#    %span.label.label-sm.back-color-75b5d3 2.42
+      -#    %span.label.label-sm.back-color-7ed8e3 9.71
+      -#    %span.label.label-sm.back-color-81ded2 5.25
 
 
 -#.media{id: "post_#{post_estimate.id}"}

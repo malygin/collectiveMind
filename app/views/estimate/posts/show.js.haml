@@ -1,0 +1,5 @@
+$('#render_estimate_post').empty();
+$("#render_estimate_post").html('#{escape_javascript(render partial: 'modal_estimate_post')}');
+magnificPopupOpen('#popup-rating-detail');
+comments_feed();
+PanelVerticalBar();

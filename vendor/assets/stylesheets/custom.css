@@ -3178,10 +3178,10 @@ h6 a:hover, h6 a:focus {
 .panel-collapse-second-level > .panel-body {
     background: transparent;
 }
-#collapseOne .panel-body .panel, #collapseSubOne .panel-body .panel {
+.collapse-one .panel-body .panel, .collapse-sub-one .panel-body .panel {
     background: none;
 }
-#collapseSubOne .panel-body {
+.collapse-sub-one .panel-body {
     padding: 0;
     margin-top: 7px;
 }
@@ -3208,36 +3208,36 @@ h6 a:hover, h6 a:focus {
     margin-right: 20px;
     font-size: 15px;
 }
-#collapseSubSubOne .panel-body {
+.collapse-sub-sub-one .panel-body {
     margin-top: 0;
     padding: 10px 15px 35px;
     background: #e4edfc;
 }
-#collapseSubSubOne .panel-collapse-inside-block {
+.collapse-sub-sub-one .panel-collapse-inside-block {
     background: #fff;
     padding: 15px 26px;
 }
-#collapseSubSubOne .panel-collapse-inside-block + .panel-collapse-inside-block {
+.collapse-sub-sub-one .panel-collapse-inside-block + .panel-collapse-inside-block {
     margin-top: 14px;
     clear: both;
 }
-#collapseSubSubOne .panel-collapse-inside-block p {
+.collapse-sub-sub-one .panel-collapse-inside-block p {
     line-height: 14px;
     font-size: 13px;
 }
-#collapseSubSubOne .panel-collapse-inside-block .panel-graph-block {
+.collapse-sub-sub-one .panel-collapse-inside-block .panel-graph-block {
     padding-top: 37px;
     margin-bottom: 15px;
     overflow: hidden;
 }
-#collapseSubSubOne .panel-collapse-inside-block .panel-graph-block .panel-graph-top-center {
+.collapse-sub-sub-one .panel-collapse-inside-block .panel-graph-block .panel-graph-top-center {
     width: 768px;
     height: 62px;
     padding-left: 155px;
     padding-bottom: 3px;
     float: left;
 }
-#collapseSubSubOne .panel-collapse-inside-block .panel-graph-block .panel-graph-top-center .panel-graph-top-badge-col {
+.collapse-sub-sub-one .panel-collapse-inside-block .panel-graph-block .panel-graph-top-center .panel-graph-top-badge-col {
     width: 130px;
     height: 100%;
     float: left;
@@ -3246,7 +3246,7 @@ h6 a:hover, h6 a:focus {
     border-radius: 4px;
     color: #fff;
 }
-#collapseSubSubOne .panel-collapse-inside-block .panel-graph-block .panel-graph-top-center .panel-graph-top-badge-col .panel-graph-top-badge-top-stripe {
+.collapse-sub-sub-one .panel-collapse-inside-block .panel-graph-block .panel-graph-top-center .panel-graph-top-badge-col .panel-graph-top-badge-top-stripe {
     width: 100%;
     height: 35px;
     padding: 5px 13px;
@@ -3254,7 +3254,7 @@ h6 a:hover, h6 a:focus {
     background: #9eb5d5;
     text-align: center;
 }
-#collapseSubSubOne .panel-collapse-inside-block .panel-graph-block .panel-graph-top-center .panel-graph-top-badge-col .panel-graph-top-badge-bottom-stripe {
+.collapse-sub-sub-one .panel-collapse-inside-block .panel-graph-block .panel-graph-top-center .panel-graph-top-badge-col .panel-graph-top-badge-bottom-stripe {
     width: 100%;
     height: 24px;
     background: #e3edfb;
@@ -3265,13 +3265,13 @@ h6 a:hover, h6 a:focus {
     font-weight: bold;
     font-size: 11px;
 }
-#collapseSubSubOne .panel-collapse-inside-block .panel-graph-block .panel-graph-left-col {
+.collapse-sub-sub-one .panel-collapse-inside-block .panel-graph-block .panel-graph-left-col {
     width: 143px;
     height: 119px;
     float: left;
     position: relative;
 }
-#collapseSubSubOne .panel-collapse-inside-block .panel-graph-block .panel-graph-left-col .panel-graph-left-col-badge {
+.collapse-sub-sub-one .panel-collapse-inside-block .panel-graph-block .panel-graph-left-col .panel-graph-left-col-badge {
     width: 137px;
     text-align: right;
     padding-right: 15px;
@@ -3295,7 +3295,7 @@ h6 a:hover, h6 a:focus {
     bottom: 74px;
     right: 6px;
 }
-#collapseSubSubOne .panel-collapse-inside-block .panel-graph-block .panel-graph-right-col {
+.collapse-sub-sub-one .panel-collapse-inside-block .panel-graph-block .panel-graph-right-col {
     width: 625px;
     height: 119px;
     padding-left: 12px;
@@ -3303,7 +3303,7 @@ h6 a:hover, h6 a:focus {
     float: left;
     background: image-url('coord.png') no-repeat left top;
 }
-#collapseSubSubOne .panel-collapse-inside-block .panel-graph-block .panel-graph-right-col .panel-graph-bar-col {
+.collapse-sub-sub-one .panel-collapse-inside-block .panel-graph-block .panel-graph-right-col .panel-graph-bar-col {
     width: 140px;
     height: 80px;
     margin: 0 1px;

@@ -8,9 +8,54 @@ function magnificPopupOpen(tag){
     });
 };
 
+function PanelVerticalBar(){
+    $('.panel-graph-vertical-bar').each(function(){
+        var me = $(this);
+        var bar_h = me.attr("data-limit");
+        switch(bar_h) {
+            case 'max':
+                me.css('height', '80px');
+                break;
+            case 'middle':
+                me.css('height', '45px');
+                break;
+            case 'min':
+                me.css('height', '10px');
+                break;
+            default:
+                me.css('height', '0px');
+        }
+    });
+};
+
 
 /* Your JS codes here */
 $(document).ready(function() {
+
+    $('.pb-animated').waypoint(function(down) {
+        if(!$(this).hasClass('pb-stop')){
+            setTimeout(function(){
+                $('.pb-animated').each(function() {
+                    var me = $(this);
+                    var perc = me.attr("data-pbmax");
+                    var current_perc = 0;
+                    var progress = setInterval(function() {
+                        if (current_perc>=perc) {
+                            clearInterval(progress);
+                            me.children('.pb-limit').html(me.attr("data-pbmax")+'%');
+                        } else {
+                            current_perc +=2;
+                            me.css('width', (current_perc)+'%');
+                            me.children('.pb-limit').html(current_perc+'%');
+                        }
+                    }, 40);
+                    $('.pb-animated').addClass('pb-stop');
+                });
+            }, 0);
+        }
+    },{ offset: '100%' });
+
+    PanelVerticalBar();
 
     /* карусель в голосовании
 

@@ -24,10 +24,11 @@
               .post-poster
                 -#@todo Пофиксить аватарку!
                 /= image_tag pa.user.avatar.url(:thumb)
+                = image_tag 'no-ava.png'
                 .clearfix
                 %span.poster-name
                   = pa.user.to_s
-              = link_to({action: :show, project: @project, id: pa.id, asp: params[:asp]}, remote: true, id: 'add_record', class: 'post-text') do
+              = link_to({action: :show, project: @project, id: pa.id, asp: params[:asp]}, remote: true, id: 'show_record', class: 'post-text') do
                 .text-arrow.pull-right
                 %span
                   = trim_string(pa.name)

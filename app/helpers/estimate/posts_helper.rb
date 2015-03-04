@@ -25,6 +25,19 @@ module Estimate::PostsHelper
     end
   end
 
+  def estimate_all_for_vertical_bar(e)
+    case e
+      when 2
+        'min'
+      when 3
+        'middle'
+      when 4
+        'max'
+      else
+        ''
+    end
+  end
+
   def estimate_trans_project(e)
     case e
       when 0
