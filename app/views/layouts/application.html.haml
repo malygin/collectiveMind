@@ -30,8 +30,8 @@
             = link_to 'Кабинет', project_user_path(@project, current_user), class: 'btn btn-grey rounded-2'
             .clearfix.visible-xs
             = link_to 'Новости', journals_path(@project), class: 'btn btn-grey rounded-2'
-            .clearfix.visible-xs
-            %a.btn.btn-grey.rounded-2{href: "#"} Отзывы
+            -#.clearfix.visible-xs
+            -#%a.btn.btn-grey.rounded-2{href: "#"} Отзывы
           .pull-right.header-right
             .tb-language.dropdown.pull-right
               %a{'data-target' => '#', 'data-toggle' => 'dropdown', href: '#'}
