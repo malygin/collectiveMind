@@ -29,7 +29,7 @@ class Core::AspectsController < ProjectsController
     @aspect = params[:id] ? Core::Aspect.find(params[:id]) : @project.aspects.order(:id).first
     @question = CollectInfo::Question.find(params[:question_id])
     aspect_questions = @aspect.questions.by_project(@project).by_status(0).order("collect_info_questions.id")
-    @answers = @question.answers.by_status(0).by_correct.pluck("collect_info_answers.id")
+    @answers = @question.answers.by_status(0).by_uncorrect.pluck("collect_info_answers.id")
     if params[:answers]
       params[:answers].each do |answer|
         @wrong_answer = true if @answers.include? answer.to_i

@@ -1,12 +1,12 @@
 -if @wrong_answer
   $('.wrong-answer').removeClass("close-notice");
-  - @question.answers.by_status(0).by_correct.each do |answer|
+  - @question.answers.by_status(0).by_uncorrect.each do |answer|
     $('#answer_#{answer.id}.active').removeClass('btn-white btn-red btn-blue').addClass('btn-red');
   $('button.answer-question').button('reset').removeClass("active");
 -else
   $('.wrong-answer').addClass("close-notice");
   $('.hint').addClass("close-notice");
-  - @question.answers.by_status(0).by_uncorrect.each do |answer|
+  - @question.answers.by_status(0).by_correct.each do |answer|
     $('#answer_#{answer.id}').removeClass('btn-white btn-red btn-blue').addClass('btn-blue');
 
   -if @next_question
