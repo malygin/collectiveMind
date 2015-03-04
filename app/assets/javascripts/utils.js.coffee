@@ -340,10 +340,11 @@ $('#tab_posts li#new a').on "click", (e) ->
     return
 
 @start_vote = ->
-  $.magnificPopup.open({
-    items: {
-      src: $('div[id^=popup-vote]')
-    },
-    type: 'inline'
-  });
+  if $('div[id^=popup-vote]').length > 0
+    $.magnificPopup.open({
+      items: {
+        src: $('div[id^=popup-vote]')
+      },
+      type: 'inline'
+    });
   return
