@@ -56,15 +56,15 @@
                     Воспользуйтесь подсказкой
                     %span.close-button
                   - asp.questions.by_project(@project).by_status(0).order('collect_info_questions.id').each_with_index do |question, ind|
-                    - unless question.user_answers.by_project(@project.id).by_user(current_user.id).present?
-                      %div{id: "question_#{question.id}", style: "#{'display:none;' if asp.questions.by_project(@project.id).by_status(0).by_complete(asp.question_complete(@project, current_user).pluck(:id)).order('collect_info_questions.id').first != question}"}
+                    - unless question.user_answers.by_project(@project).by_user(current_user).present?
+                      %div{id: "question_#{question.id}", style: "#{'display:none;' if asp.questions.by_project(@project).by_status(0).by_complete(asp.question_complete(@project, current_user).pluck(:id)).order('collect_info_questions.id').first != question}"}
                         .rounded-1.hint.close-notice{id:"hint_question_#{question.id}"}
                           = question.hint
                           %span.close-button
                         %p.text.block-with-left-icon
                           %span.left-icon.pull-right="#{ind + 1}."
                           = question.content
-                        = form_tag(answer_question_core_aspect_path(@project, id: asp.id, question_id: question.id), {method: :put, remote: true, class: 'form instruments-block', id: 'form_answer_question', multipart: true}) do
+                        = form_tag(answer_question_aspect_path(@project, id: asp.id, question_id: question.id), {method: :put, remote: true, class: 'form instruments-block', id: 'form_answer_question', multipart: true}) do
                           %div(class="btn-group" data-toggle="buttons" id="answer_buttons")
                             - question.answers.by_status(0).each do |answer|
                               %button(id="answer_#{answer.id}" class="btn btn-xs btn-white pull-left answer-question")

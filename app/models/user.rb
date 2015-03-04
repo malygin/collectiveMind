@@ -32,7 +32,7 @@ class User < ActiveRecord::Base
   has_many :groups, through: :group_users
   has_many :group_chat_messages
   has_many :plan_posts, class_name: 'Plan::Post'
-  has_many :user_answers, class_name: 'UserAnswers'
+  has_many :user_answers, class_name: 'CollectInfo::UserAnswers'
   has_many :news, class_name: 'News'
 
   default_scope { order('id DESC') }
