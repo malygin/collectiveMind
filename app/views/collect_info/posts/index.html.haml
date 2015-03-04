@@ -56,7 +56,7 @@
                     Воспользуйтесь подсказкой
                     %span.close-button
                   - asp.questions.by_project(@project).by_status(0).order('collect_info_questions.id').each_with_index do |question, ind|
-                    - unless question.answers_users.by_project(@project.id).by_user(current_user.id).present?
+                    - unless question.user_answers.by_project(@project.id).by_user(current_user.id).present?
                       %div{id: "question_#{question.id}", style: "#{'display:none;' if asp.questions.by_project(@project.id).by_status(0).by_complete(asp.question_complete(@project, current_user).pluck(:id)).order('collect_info_questions.id').first != question}"}
                         .rounded-1.hint.close-notice{id:"hint_question_#{question.id}"}
                           = question.hint
