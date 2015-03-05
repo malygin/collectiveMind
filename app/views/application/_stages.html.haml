@@ -13,7 +13,7 @@
             %h4
               = stage[:name]
       .clearfix.visible-sm.visible-xs
-    - elsif @project.status >= stage[:status].max
+    - elsif @project.status >= stage[:status].min
       = link_to send("#{stage[:type_stage]}_path", @project, asp: params[:asp]), id: "go_to_#{stage[:type_stage]}", class: 'stage stage-number-block rounded-1' do
         %span.bigger
           = num_stage
