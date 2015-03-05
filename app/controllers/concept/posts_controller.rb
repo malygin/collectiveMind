@@ -10,9 +10,9 @@ class Concept::PostsController < PostsController
     field = params[:field]
     answer = Set.new
     answer.merge(Concept::Resource.where(project_id: params[:project]).map { |d| {value: d.name} })
-    answer.merge(Concept::PostResource.autocomplete(params[:term]).where(project_id: params[:project], style: (field == 'resor_means_name' ? 1 : 0)).map { |d| {value: d.value} })
+    answer.merge(Concept::PostResource.autocomplete(params[:term]).where(project_id: params[:project], style: (field == 'resor_means_name' ? 1 : 0)).map { |d| {value: d.name} })
     if @project.stage_estimate?
-      answer.merge(Plan::PostResource.autocomplete(params[:term]).where(project_id: params[:project], style: (field == 'resor_means_name' ? 1 : 0)).map { |d| {value: d.value} })
+      answer.merge(Plan::PostResource.autocomplete(params[:term]).where(project_id: params[:project], style: (field == 'resor_means_name' ? 1 : 0)).map { |d| {value: d.name} })
     end
 
     render json: answer.sort_by { |ha| ha[:value].downcase }
