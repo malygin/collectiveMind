@@ -14,6 +14,7 @@ CollectiveMind::Application.routes.draw do
   end
 
   def posts_routes
+    get 'autocomplete', to: 'posts#autocomplete'
     put 'vote/:post_id' => 'posts#vote'
     get 'censored/:post_id' => 'posts#censored'
     get 'aspect/:aspect/posts/' => 'posts#index'
@@ -153,7 +154,6 @@ CollectiveMind::Application.routes.draw do
 
     namespace :discontent do
       posts_routes
-      get 'autocomplete', to: 'posts#autocomplete'
       resources :posts do
         member do
           put :remove_union

@@ -1,4 +1,6 @@
 class Concept::PostResource < ActiveRecord::Base
+  include PgSearch
+
   belongs_to :concept_post, class_name: 'Concept::Post', foreign_key: :post_id
   belongs_to :concept_resource, class_name: 'Concept::Resource'
   belongs_to :project, class_name: 'Core::Project'
@@ -8,4 +10,10 @@ class Concept::PostResource < ActiveRecord::Base
 
   scope :by_project, ->(project) { where(project_id: project.id) }
   scope :by_type, ->(type) { where(type_res: type) }
+
+  pg_search_scope :autocomplete,
+                  against: [:name],
+                  using: {
+                      tsearch: {prefix: true}
+                  }
 end

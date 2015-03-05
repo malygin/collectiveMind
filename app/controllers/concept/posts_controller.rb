@@ -1,46 +1,21 @@
 class Concept::PostsController < PostsController
   before_action :set_concept_post, only: [:edit, :update]
-  #autocomplete :concept_post, :resource, class_name: 'Concept::Post', full: true
 
   def voting_model
     Concept::Post
   end
 
   def autocomplete
+    #@todo для универсализации автокомплита, нужно объединить все ресурсные модели
     field = params[:field]
-    if current_model.column_names.include? field
-      render json: current_model.send("autocomplete_#{field}", params[:term]).map { |post| {value: post.send(field)} }
-    else
-      render json: []
+    answer = Set.new
+    answer.merge(Concept::Resource.where(project_id: params[:project]).map { |d| {value: d.name} })
+    answer.merge(Concept::PostResource.autocomplete(params[:term]).where(project_id: params[:project], style: (field == 'resor_means_name' ? 1 : 0)).map { |d| {value: d.value} })
+    if @project.stage_estimate?
+      answer.merge(Plan::PostResource.autocomplete(params[:term]).where(project_id: params[:project], style: (field == 'resor_means_name' ? 1 : 0)).map { |d| {value: d.value} })
     end
-  end
 
-  def autocomplete_concept_post_resource
-    pr=Set.new
-    pr.merge(Concept::Resource.where(project_id: params[:project]).map { |d| {value: d.name} })
-
-    pr.merge(Concept::PostResource.select("DISTINCT name as value").where("LOWER(name) like LOWER(?)", "%#{params[:term]}%")
-                 .where(project_id: params[:project], style: 0).map { |d| {value: d.value} })
-
-    if @project.status == 9
-      pr.merge(Plan::PostResource.select("DISTINCT name as value").where("LOWER(name) like LOWER(?)", "%#{params[:term]}%")
-                   .where(project_id: params[:project], style: 0).map { |d| {value: d.value} })
-    end
-    render json: pr.sort_by { |ha| ha[:value].downcase }
-  end
-
-  def autocomplete_concept_post_mean
-    pr=Set.new
-    pr.merge(Concept::Resource.where(project_id: params[:project]).map { |d| {value: d.name} })
-
-    pr.merge(Concept::PostResource.select("DISTINCT name as value").where("LOWER(name) like LOWER(?)", "%#{params[:term]}%")
-                 .where(project_id: params[:project], style: 1).map { |d| {value: d.value} })
-
-    if @project.status == 9
-      pr.merge(Plan::PostResource.select("DISTINCT name as value").where("LOWER(name) like LOWER(?)", "%#{params[:term]}%")
-                   .where(project_id: params[:project], style: 1).map { |d| {value: d.value} })
-    end
-    render json: pr.sort_by { |ha| ha[:value].downcase }
+    render json: answer.sort_by { |ha| ha[:value].downcase }
   end
 
   def index
@@ -54,7 +29,7 @@ class Concept::PostsController < PostsController
       @aspect = @project.proc_aspects.order('position DESC').first
     end
 
-    if current_user.can_vote? _for(:concept, @project)
+    if current_user.can_vote_for(:concept, @project)
       disposts = Discontent::Post.where(project_id: @project, status: 4).order(:id)
       last_vote = current_user.concept_post_votings.by_project_votings(@project).last
       @discontent_post = current_user.able_concept_posts_for_vote(@project, disposts, last_vote)
