@@ -23,11 +23,9 @@ class Plan::PostAspectsController < ProjectsController
 
   def new
     @post_stage = Plan::PostStage.find(params[:stage_id])
-
     @aspects = Core::Aspect.where(project_id: @project, status: 0)
-    @disposts = Discontent::Post.where(project_id: @project, status: 4).order(:id)
-    @new_ideas = Plan::PostAspect.joins("INNER JOIN plan_posts ON plan_posts.id = plan_post_aspects.plan_post_id").
-        where("plan_posts.project_id = ? and plan_posts.id = ?", @project.id, @post.id).where(plan_post_aspects: {concept_post_aspect_id: nil, core_aspect_id: nil})
+    @disposts = Discontent::Post.where(project_id: @project, status: 4)
+    @new_ideas = @post.post_aspects.where(plan_post_aspects: {concept_post_aspect_id: nil, core_aspect_id: nil})
   end
 
   def edit
@@ -126,7 +124,7 @@ class Plan::PostAspectsController < ProjectsController
   end
 
   def set_post
-    @post = Plan::Post.find(params[:id])
+    @post = Plan::Post.find(params[:post_id])
   end
 
   def create_plan_resources_on_type(project, post)

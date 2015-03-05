@@ -14,6 +14,7 @@ class Plan::PostsController < PostsController
     @posts = current_model.where(project_id: @project, status: 0).order('created_at DESC').paginate(page: params[:page])
     post = Plan::Post.where(project_id: @project, status: 0).first
     @est_stat = post.estimate_status if post
+    @comment = comment_model.new
   end
 
   def new

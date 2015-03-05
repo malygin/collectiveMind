@@ -22,6 +22,7 @@ class Discontent::Post < ActiveRecord::Base
 
   validates :content, :whend, :whered, :project_id, presence: true
 
+  default_scope { order :id }
   scope :by_project, ->(p) { where(project_id: p) }
   scope :by_project_and_not_anonym, ->(p) { where(project_id: p, anonym: false) }
   scope :by_status, ->(p) { where(status: p) }
