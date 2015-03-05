@@ -1,12 +1,6 @@
 - if @concept_post.errors.any?
   $("#notice_messages").html('#{escape_javascript(render partial: 'shared/notice_messages', locals: {object: @concept_post})}');
   window.scrollTo(0,0)
+  $('#send_post_concept').button('reset');
 - else
-  $("#form_for_concept").html('#{escape_javascript(render partial: 'form')}');
-  selectize();
-
-  $('#render_success_concept').empty();
-  $("#render_success_concept").html('#{escape_javascript(render partial: 'modal_post_save')}');
-  $('#modal_save_concept').modal('show');
-  history_change("#{edit_concept_post_path(@project, @concept_post)}");
-$('#send_post_concept').button('reset');
+  $("#form_for_concept").html('Спасибо за добавленное нововведение!');
