@@ -42,7 +42,7 @@
       - else
         %div.main_resources.main_res(id="main_#{type}_r_1" data-position="1")
           .col-md-8
-            = text_field_tag 'resor[][name]', class: 'form-control autocomplete', placeholder: t('form.concept.res_promt'),
+            = text_field_tag 'resor[][name]', '', class: 'form-control autocomplete', placeholder: t('form.concept.res_promt'),
                                   'data-url' => concept_autocomplete_path(@project, field: 'resor_name')
             %input{name: 'resor[][type_res]', type: 'hidden', value: "#{type}_r"}
           .col-md-4
@@ -61,7 +61,7 @@
           %div.col-md-offset-1.col-md-11.means_to_resource(id="means_#{type}_s_1")
             %div.main_means.main_res(id="main_#{type}_s_1" data-position="1")
               .col-md-8
-                = text_field_tag 'resor[][means][][name]', class: 'form-control autocomplete', placeholder: t('form.concept.mean_promt'),
+                = text_field_tag 'resor[][means][][name]', '', class: 'form-control autocomplete', placeholder: t('form.concept.mean_promt'),
                                       'data-url' => concept_autocomplete_path(@project, field: 'resor_means_name')
                 %input{name: 'resor[][means][][type_res]', type: 'hidden', value: '#{type}_s'}
               .col-md-4
