@@ -83,7 +83,7 @@ class Core::Project < ActiveRecord::Base
   end
 
   STATUS_CODES.keys.each do |method_name|
-    define_method :"#{method_name}?" do
+    define_method :"stage_#{method_name}?" do
       status == STATUS_CODES[method_name]
     end
   end

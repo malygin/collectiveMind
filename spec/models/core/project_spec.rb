@@ -24,7 +24,7 @@ describe 'Core::Project' do
   it 'check statuses' do
     Core::Project::STATUS_CODES.each do |key, value|
       @project.update!(status: value)
-      expect(@project.send("#{key}?")).to be true
+      expect(@project.send("stage_#{key}?")).to be true
     end
   end
 end
