@@ -51,6 +51,13 @@
               %a{"data-target" => "#", "data-toggle" => "dropdown", href: "#"}
                 = current_user.to_s if current_user
                 %i.fa.fa-angle-down.color.mass-dark-blue
+              - if current_user.admin?
+                %br
+                - if @project.prev_status
+                  = link_to t("menu.settings.admin_set_#{@project.status * 2 - 2}"), pr_stage_core_project_path(@project), method: :put, id: "down_to_#{@project.prev_status}"
+                  %br
+                - if @project.next_status
+                  = link_to t("menu.settings.admin_set_#{@project.status * 2 - 1}"), next_stage_core_project_path(@project), method: :put, id: "up_to_#{@project.next_status}"
               %ul.dropdown-menu.dropdown-mini{role: "menu"}
                 %li{role: 'presentation'}
                   = link_to t('menu.account'), user_path(@project, current_user), id: 'go_to_profile'

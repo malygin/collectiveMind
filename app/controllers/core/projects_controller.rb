@@ -86,7 +86,10 @@ class Core::ProjectsController < ApplicationController
     @project.save
     @project.set_position_for_aspects if @project.status == 3
     @project.set_date_for_stage
-    render 'update_stage'
+    respond_to do |format|
+      format.js { render 'update_stage' }
+      format.html { redirect_to "/project/#{@project.id}" }
+    end
   end
 
   def pr_stage
@@ -95,7 +98,10 @@ class Core::ProjectsController < ApplicationController
     @project.status = @project.status - 1
     @project.settings.stage_dates[@project.status.to_s]['real']['end'] = ''
     @project.save
-    render 'update_stage'
+    respond_to do |format|
+      format.js { render 'update_stage' }
+      format.html { redirect_to "/project/#{@project.id}" }
+    end
   end
 
   def news
