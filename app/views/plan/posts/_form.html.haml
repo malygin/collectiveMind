@@ -30,7 +30,7 @@
         .form-horizontal
           %fieldset
             .col-md-6#form_for_main_plan
-              = form_for @post, url: {project: @project, action: @post.persisted? ? 'update' : 'create'}, remote: true, html: { class: 'new_or_edit' } do |f|
+              = form_for @post, url: {project: @project.id, id: @post.id, action: @post.persisted? ? 'update' : 'create'}, remote: true, html: { class: 'new_or_edit' } do |f|
                 %legend.section
                   = t('form.plan.desc')
                 .form-group(style="margin-left:0;")
