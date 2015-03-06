@@ -262,21 +262,4 @@
                 = comment.user
               .proj-comment-text
                 = comment.content
-          = form_for @comment, html: {multipart: true, id: 'comment_form', class: 'add-comment'}, remote: true,
-          url: url_for(controller: post.class.name.underscore.pluralize, id: post.id, action: 'add_comment'), method: :put do |f|
-            = render 'shared/notice_messages', object: f.object
-            -#@todo заменить на аватарку юзера
-            = image_tag 'ava1.jpg', class: 'proj-comment-ava'
-            %input{name: 'comment', placeholder: 'Оставьте комментарий', type: 'text'}/
-            -#      #tab2.tab-pane
-            -#        .form-horizontal
-            -#          %fieldset
-            -#            #table_stages
-            -#
-            -#      #tab3.tab-pane
-            -#        .form-horizontal
-            -#          %fieldset
-            -#            #modal_concept_action
-            -#            .col-md-4#concept_side
-            -#            .col-md-8
-            -#              #render_get_concept
+          = render partial: 'shared/comment_form', locals: {comment: @comment, post: post}

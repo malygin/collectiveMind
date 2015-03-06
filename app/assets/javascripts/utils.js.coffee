@@ -363,3 +363,10 @@ $('#tab_posts li#new a').on "click", (e) ->
       type: 'inline'
     });
   return
+
+@add_comment_by_enter = ->
+  if $('input[id^=_comment_content]').length > 0
+    $('input[id^=_comment_content]').keypress = (e)->
+      if (e.which == 10 || e.which == 13)
+        this.parent.submit()
+      return

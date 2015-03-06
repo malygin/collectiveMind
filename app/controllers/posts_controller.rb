@@ -520,6 +520,7 @@ class PostsController < ProjectsController
 
       Journal.comment_event(current_user, @project, name_of_comment_for_param, post, @comment, @comment_answer)
     end
+    @new_comment = comment_model.new
     render template: 'posts/add_comment'
   end
 end
