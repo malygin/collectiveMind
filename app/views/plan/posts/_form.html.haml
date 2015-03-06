@@ -16,14 +16,14 @@
         #spinner_tab2.loader.animated.handle(style="display:none;")
           %span.spinner
             %i.fa.fa-spinner.fa-spin
-      %li#third{class: ('disabled' unless @post.persisted?)}
-        %a{'data-toggle' => 'tab', href: '#tab3', role: 'tab'}
-          %small 3.
-          %strong
-            = t('form.plan.concepts')
-        #spinner_tab3.loader.animated.handle(style="display:none;")
-          %span.spinner
-            %i.fa.fa-spinner.fa-spin
+      -#%li#third{class: ('disabled' unless @post.persisted?)}
+      -#  %a{'data-toggle' => 'tab', href: '#tab3', role: 'tab'}
+      -#    %small 3.
+      -#    %strong
+      -#      = t('form.plan.concepts')
+      -#  #spinner_tab3.loader.animated.handle(style="display:none;")
+      -#    %span.spinner
+      -#      %i.fa.fa-spinner.fa-spin
 
     .tab-content(style="overflow:visible;")
       #tab1.tab-pane.fade.in.active
@@ -68,7 +68,7 @@
                   %tbody#table_stage_list
                     - if @post.persisted? and @post.post_stages.present?
                       - @post.post_stages.each do |ps|
-                        = render partial: 'post_stage', object: ps
+                        = render partial: 'plan/post_stages/post_stage', object: ps
 
               #modal_stage
               #add_new_stage

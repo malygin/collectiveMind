@@ -28,7 +28,7 @@
     -unless @view_post_concept
       %tr(id="tr_new_concept_action_#{form_actions.id}")
         %td(colspan="3")
-          =link_to new_action_plan_post_path(@project, @post, con_id: form_actions.id, view_concept: true), method: :put, remote: true, class: "btn btn-default btn-success btn-block", id: "btn_new_concept", style: "font-weight: normal;" do
+          =link_to new_plan_post_action_path(@project, @post, con_id: form_actions.id, view_concept: true), remote: true, class: "btn btn-default btn-success btn-block", id: "btn_new_concept", style: "font-weight: normal;" do
             =t('form.plan.action.new')
 
 %br

@@ -49,10 +49,10 @@
                 %tr(id="tr_action_#{action.id}")
                   %td
                     .pull-right
-                      =link_to edit_action_plan_post_path(@project, @post, act_id: action.id, con_id: concept.id, stage_id: stage.id), method: :put, remote: true, id: "edit_post_action_#{action.id}" do
+                      =link_to edit_plan_post_action_path(@project, @post, action, con_id: concept.id, stage_id: stage.id), remote: true, id: "edit_post_action_#{action.id}" do
                         %button.btn.btn-xs.btn-warning{type: "button"}
                           %i.fa.fa-pencil
-                      =link_to destroy_action_plan_post_path(@project, @post, act_id: action.id, con_id: concept.id, stage_id: stage.id), method: :delete, remote: true, confirm: t('confirm.delete_concept'), id: "destroy_post_action_#{action.id}" do
+                      =link_to plan_post_action_path(@project, @post, action, con_id: concept.id, stage_id: stage.id), method: :delete, remote: true, confirm: t('confirm.delete_concept'), id: "destroy_post_action_#{action.id}" do
                         %button.btn.btn-xs.btn-danger{type: "button"}
                           %i.fa.fa-trash-o
                     -if action.date_begin and action.date_end
@@ -71,11 +71,10 @@
 
               %tr(id="tr_new_action_#{concept.id}")
                 %td
-                  =link_to new_action_plan_post_path(@project, @post, con_id: concept.id, stage_id: stage.id), method: :put, remote: true, class: "btn btn-sm btn-success pull-right", id: "btn_new_concept", style: "font-weight: normal;width:200px;" do
+                  =link_to new_plan_post_action_path(@project, @post, con_id: concept.id, stage_id: stage.id), remote: true, class: "btn btn-sm btn-success pull-right", id: "btn_new_concept", style: "font-weight: normal;width:200px;" do
                     =t('form.plan.add_action')
 
         %tr(id="tr_new_concept_#{stage.id}")
           %td(colspan="3")
-            =link_to add_concept_plan_post_path(@project, @post, stage_id: stage.id), method: :put, remote: true, class: "btn btn-sm btn-warning pull-right", id: "btn_new_concept", style: "font-weight: normal;width:200px;" do
+            =link_to url_for(controller: 'plan/post_aspects', action: 'new', project: @project, post_id: @post.id, stage_id: stage.id), remote: true, class: "btn btn-sm btn-warning pull-right", id: "btn_new_concept", style: "font-weight: normal;width:200px;" do
               =t('form.plan.add_concept')
-
