@@ -1,3 +1,4 @@
+$('[id^=answer_]').removeClass('btn-white btn-red btn-blue').addClass('btn-white');
 -if @wrong_answer
   $('.wrong-answer').removeClass("close-notice");
   - @question.answers.by_status(0).by_uncorrect.each do |answer|
@@ -15,7 +16,11 @@
   -else
     $('#check_question_#{@aspect.id}').html('<i class="fa fa-check" style="font-size:15px;margin:0;"></i>');
     $('#progress-bar-main').css('width',"#{(@count_aspects_check/@count_aspects.to_f)*100}%");
-    $('li.li_aspect.active').next().find('button').tab('show');
+    -if @aspect == @project.aspects.order(:id).last
+      magnificPopupOpen('#popup-greetings-text');
+    -else
+      $('li.li_aspect.active').next().find('button').tab('show');
+
 
   $('#count_questions_now_#{@aspect.id}').html("#{@count_now}");
   $('#progress_bar_#{@aspect.id}').css('width',"#{(@count_now/@count_all.to_f)*100}%");

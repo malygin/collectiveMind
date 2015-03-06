@@ -74,3 +74,17 @@
                           .form-group.bottom-buttons
                             %a.btn.btn-outline.notice-button{data: {question: question.id}} Подсказка
                             %button#send_answers.btn.answer-button Ответить
+
+#popup-greetings-text.popup-window.medal.mfp-hide
+  .popup
+    .medal-block.gold-medal
+    .popup-top-block.popup-top-rounded
+      .vertical-center-wrapper
+        %h4 Поздравляем!
+        %p.top-block-text
+          Вы успешно ответили на все вопросы по Базе Знаний.
+    .popup-bottom-block.popup-bottom-rounded
+      .vertical-center-wrapper
+        .bottom-buttons
+          -#%a.bottom-button.back-color.dark-blue{:href => "#"} Рефлексия
+          -#%a.bottom-button.back-color.red.arrowed.open-popup-link{:href => "#popup-2"} Перейти на 2-ю стадию
