@@ -62,6 +62,6 @@ class Plan::PostActionsController < ProjectsController
   end
 
   def set_post
-    @post = Plan::Post.find(params[:id])
+    @post = Plan::Post.find(params[:post_id])
   end
 end

@@ -20,7 +20,7 @@
             %br
           .color-teal=@post_stage.name
       .modal-body
-        = form_for action, url: {project: @project.id, con_id: @post_aspect.id, act_id: action ? action.id : nil, stage_id: @post_stage ? @post_stage.id : nil, view_concept: @view_concept, action: action.persisted? ? 'update_action' : 'create_action'}, remote: true, method: :put do |f|
+        = form_for action, url: {project: @project.id, con_id: @post_aspect.id, act_id: action ? action.id : nil, stage_id: @post_stage ? @post_stage.id : nil, view_concept: @view_concept, action: action.persisted? ? 'update' : 'create'}, remote: true, method: (action.persisted? ? :put : :post) do |f|
           = render 'shared/notice_messages', object: f.object
           #mod2
           .form-group(style="margin-left:0;")
@@ -47,14 +47,16 @@
                 .panel.panel-default
                   .panel-body
                     %span.glyphicon.glyphicon-remove.text-danger.pull-right{onclick: "$(this).parent().parent().remove();", style: "cursor:pointer;text-decoration:none;font-size:15px;"}
-                    =autocomplete_field_tag "resor_action[]",'', autocomplete_concept_post_resource_concept_posts_path,append_to: "#mod2", :"min-length" => 0, value: r.name,  class: 'form-control autocomplete',placeholder: t('form.plan.action.res_promt')
+                    = text_field_tag "resor_action[]", r.name,  class: 'form-control autocomplete',placeholder: t('form.plan.action.res_promt'),
+                    'data-url' => concept_autocomplete_path(@project, field: 'resor_means_name')
                     %br
                     = text_area_tag "res_action[]", r.desc, class: 'form-control', placeholder: t('form.plan.action.res_desc')
             - else
               .panel.panel-default
                 .panel-body
                   %span.glyphicon.glyphicon-remove.text-danger.pull-right{onclick: "$(this).parent().parent().remove();", style: "cursor:pointer;text-decoration:none;font-size:15px;"}
-                  =autocomplete_field_tag "resor_action[]",'', autocomplete_concept_post_resource_concept_posts_path,append_to: "#mod2", :"min-length" => 0,  class: 'form-control autocomplete',placeholder: t('form.plan.action.res_promt')
+                  = text_field_tag "resor_action[]",'', class: 'form-control autocomplete',placeholder: t('form.plan.action.res_promt'),
+                  'data-url' => concept_autocomplete_path(@project, field: 'resor_means_name')
                   %br
                   = text_area_tag "res_action[]", '', class: 'form-control', placeholder: t('form.plan.action.res_desc')
           %a.btn.btn-primary.pull-right{onclick:"return add_new_action_resource_to_plan(#{@project.id});"}=t('form.plan.action.add_res')
