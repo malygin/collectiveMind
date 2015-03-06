@@ -255,11 +255,5 @@
       #tab-3.tab-pane.fade.popup-bottom-rounded
         .comments-cont
           - post.main_comments.each do |comment|
-            .proj-comment
-              -#@todo заменить на аватарку юзера
-              = image_tag 'ava1.jpg', class: 'proj-comment-ava'
-              .proj-comment-name
-                = comment.user
-              .proj-comment-text
-                = comment.content
+            = render partial: 'shared/comment', locals: {comment: comment}
           = render partial: 'shared/comment_form', locals: {comment: @comment, post: post}

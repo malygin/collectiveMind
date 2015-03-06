@@ -1,85 +1,93 @@
-.chat-message{id: "comment_#{comment.id}"}
-  = render 'users/user_post', user: comment.user
+.proj-comment
+  -#@todo заменить на аватарку юзера
+  = image_tag 'ava1.jpg', class: 'proj-comment-ava'
+  .proj-comment-name
+    = comment.user
+  .proj-comment-text
+    = comment.content
 
-  .chat-message-body.stage_menu1{id: "comment_content_#{comment.id}", class: "#{comment_stat_color(comment)}"}
-    %span.arrow.hidden-xs
-    .sender
-      = link_to comment.user, user_path(@project, comment.user)
-      = render partial: '/shared/user_online', object: comment.user
-      = role_label(comment.user)
-      = label_for_last_time_visit_status(comment)
-      %span.pull-right
-        = label_for_comment_status(comment,'discontent',t('show.problem'))
-        = label_for_comment_status(comment,'concept',t('show.idea'))
-        -#=render partial: '/shared/label_for_comment_status', locals: {comment: comment, status: 'discontent', title: 'Проблема'}
-        -#=render partial: '/shared/label_for_comment_status', locals: {comment: comment, status: 'concept', title: 'Идея'}
-        - if boss? or role_expert? or stat_expert?
-          = link_to({controller: comment.controller_name_for_action, action: :comment_status, id: comment.post.id, comment_id: comment.id, discuss_status: 1, comment_stage: get_stage_for_improve(comment.get_class)}, remote: true, method: :put, class: "link_status", id: "discuss_stat_comment_#{comment.id}") do
-            %span.label_discuss.label(class="#{label_discuss_stat(comment)}")
-              = t('show.discuss')
-          = link_to({controller: comment.controller_name_for_action, action: :comment_status, id: comment.post.id, comment_id: comment.id, approve_status: 1, comment_stage: get_stage_for_improve(comment.get_class)}, remote: true, method: :put, class: "link_status", id: "approve_stat_comment_#{comment.id}") do
-            %span.label_approve.label(class="#{label_approve_stat(comment)}")
-              = t('show.important')
-        - else
-          - if comment.discuss_status
-            %span.label(class="#{label_discuss_stat(comment)}" id="discuss_stat_comment_#{comment.id}")
-              = t('show.discuss')
-          - if comment.approve_status
-            %span.label(class="#{label_approve_stat(comment)}" id="approve_stat_comment_#{comment.id}")
-              = t('show.important')
-
-    .text
-      %div{id: "comment_text_#{comment.id}"}
-        = comment.content
-        - if comment.image
-          - if comment.isFile
-            = link_to  'скачать приложенный файл' , "http://res.cloudinary.com/hs2pm8fbp/raw/upload/#{comment.image}"
-          - else
-            = link_to "http://res.cloudinary.com/hs2pm8fbp/image/upload/#{comment.image}", class: 'image-popup-vertical-fit' do
-              = cl_image_tag(comment.image, width: 150, height: 150, crop: :fill)
-      - if current_user?(comment.user) or boss?
-        %div{id: "redactor_comment_#{comment.id}"}
-          %button.edit-comment.btn.btn-info.btn-xs{data:{ project: @project.id, id: comment.id, path: comment.post.class.name.underscore.pluralize}, id: "edit_comment_#{comment.id}"}
-            = t('link.edit')
-          \|
-          = link_to t('link.remove'), {action: :destroy_comment, id: comment.id}, method: :put, remote: true, confirm: t('confirm.delete_comment'), class: 'btn btn-danger btn-xs', id: "destroy_comment_#{comment.id}"
-
-          - if comment.get_class == 'LifeTape' and boss? and comment.main_comment?
-            \|
-            = select_tag 'select_for_aspects_comments', options_from_collection_for_select(@aspects, 'id', 'content'),
-            prompt: t('form.discontent.select_aspect_prompt'), onchange: "select_for_aspects_comments(this,#{@project.id},#{comment.id});"
-
-      .pull-right
-        - if comment.main_comment?
-          %button.reply-comment.btn.btn-success.btn-xs{data:{ project: @project.id, id: comment.id, path: comment.post.class.name.underscore.pluralize}, id: "reply_comment_#{comment.id}" }
-            = t('show.answer')
-        - else
-          %button.reply-comment.btn.btn-success.btn-xs{data:{ project: @project.id, id: comment.id, path: comment.post.class.name.underscore.pluralize}, id: "reply_comment_#{comment.id}" }
-            = t('show.answer')
-
-        |
-        =link_to({:action => :like_comment, :project => @project, :id => comment.id, :against => false}, :remote => true, :method => :put, class: "popup-likes", id: "like_comment_#{comment.id}") do
-          %span
-            %span(id="lk_comment_#{comment.id}" style="margin-right:0;")
-              =comment.users_pro.count
-            %i.fa.fa-thumbs-o-up
-        |
-        =link_to({:action => :like_comment, :project => @project,  :id => comment.id, :against => true}, :remote => true, :method => :put, class: "popup-dislikes", id: "dislike_comment_#{comment.id}") do
-          %span
-            %span(id="dlk_comment_#{comment.id}" style="margin-right:0;")
-              =comment.users_against.count
-            %i.fa.fa-thumbs-o-down
-
-        - if boss? or role_expert?
-          |
-          =link_to({action: :plus_comment, id: comment.id}, remote: true, method: :put, class: "link_status", id: "plus_comment_#{comment.id}") do
-            &nbsp;
-            -if comment.useful
-              %span.label_give_scores.label.label-danger=t('show.revert_score')
-            - else
-              %span.label_give_scores.label.label-success=t('show.add_score')
-      .time.pull-left
-        = time_ago_in_words(comment.created_at)
-      %br
-      - comment.comments.each do |c|
-        = render partial: 'shared/comment', object: c
+-#.chat-message{id: "comment_#{comment.id}"}
+-#  = render 'users/user_post', user: comment.user
+-#
+-#  .chat-message-body.stage_menu1{id: "comment_content_#{comment.id}", class: "#{comment_stat_color(comment)}"}
+-#    %span.arrow.hidden-xs
+-#    .sender
+-#      = link_to comment.user, user_path(@project, comment.user)
+-#      = render partial: '/shared/user_online', object: comment.user
+-#      = role_label(comment.user)
+-#      = label_for_last_time_visit_status(comment)
+-#      %span.pull-right
+-#        = label_for_comment_status(comment,'discontent',t('show.problem'))
+-#        = label_for_comment_status(comment,'concept',t('show.idea'))
+-#        -#=render partial: '/shared/label_for_comment_status', locals: {comment: comment, status: 'discontent', title: 'Проблема'}
+-#        -#=render partial: '/shared/label_for_comment_status', locals: {comment: comment, status: 'concept', title: 'Идея'}
+-#        - if boss? or role_expert? or stat_expert?
+-#          = link_to({controller: comment.controller_name_for_action, action: :comment_status, id: comment.post.id, comment_id: comment.id, discuss_status: 1, comment_stage: get_stage_for_improve(comment.get_class)}, remote: true, method: :put, class: "link_status", id: "discuss_stat_comment_#{comment.id}") do
+-#            %span.label_discuss.label(class="#{label_discuss_stat(comment)}")
+-#              = t('show.discuss')
+-#          = link_to({controller: comment.controller_name_for_action, action: :comment_status, id: comment.post.id, comment_id: comment.id, approve_status: 1, comment_stage: get_stage_for_improve(comment.get_class)}, remote: true, method: :put, class: "link_status", id: "approve_stat_comment_#{comment.id}") do
+-#            %span.label_approve.label(class="#{label_approve_stat(comment)}")
+-#              = t('show.important')
+-#        - else
+-#          - if comment.discuss_status
+-#            %span.label(class="#{label_discuss_stat(comment)}" id="discuss_stat_comment_#{comment.id}")
+-#              = t('show.discuss')
+-#          - if comment.approve_status
+-#            %span.label(class="#{label_approve_stat(comment)}" id="approve_stat_comment_#{comment.id}")
+-#              = t('show.important')
+-#
+-#    .text
+-#      %div{id: "comment_text_#{comment.id}"}
+-#        = comment.content
+-#        - if comment.image
+-#          - if comment.isFile
+-#            = link_to  'скачать приложенный файл' , "http://res.cloudinary.com/hs2pm8fbp/raw/upload/#{comment.image}"
+-#          - else
+-#            = link_to "http://res.cloudinary.com/hs2pm8fbp/image/upload/#{comment.image}", class: 'image-popup-vertical-fit' do
+-#              = cl_image_tag(comment.image, width: 150, height: 150, crop: :fill)
+-#      - if current_user?(comment.user) or boss?
+-#        %div{id: "redactor_comment_#{comment.id}"}
+-#          %button.edit-comment.btn.btn-info.btn-xs{data:{ project: @project.id, id: comment.id, path: comment.post.class.name.underscore.pluralize}, id: "edit_comment_#{comment.id}"}
+-#            = t('link.edit')
+-#          \|
+-#          = link_to t('link.remove'), {action: :destroy_comment, id: comment.id}, method: :put, remote: true, confirm: t('confirm.delete_comment'), class: 'btn btn-danger btn-xs', id: "destroy_comment_#{comment.id}"
+-#
+-#          - if comment.get_class == 'LifeTape' and boss? and comment.main_comment?
+-#            \|
+-#            = select_tag 'select_for_aspects_comments', options_from_collection_for_select(@aspects, 'id', 'content'),
+-#            prompt: t('form.discontent.select_aspect_prompt'), onchange: "select_for_aspects_comments(this,#{@project.id},#{comment.id});"
+-#
+-#      .pull-right
+-#        - if comment.main_comment?
+-#          %button.reply-comment.btn.btn-success.btn-xs{data:{ project: @project.id, id: comment.id, path: comment.post.class.name.underscore.pluralize}, id: "reply_comment_#{comment.id}" }
+-#            = t('show.answer')
+-#        - else
+-#          %button.reply-comment.btn.btn-success.btn-xs{data:{ project: @project.id, id: comment.id, path: comment.post.class.name.underscore.pluralize}, id: "reply_comment_#{comment.id}" }
+-#            = t('show.answer')
+-#
+-#        |
+-#        =link_to({:action => :like_comment, :project => @project, :id => comment.id, :against => false}, :remote => true, :method => :put, class: "popup-likes", id: "like_comment_#{comment.id}") do
+-#          %span
+-#            %span(id="lk_comment_#{comment.id}" style="margin-right:0;")
+-#              =comment.users_pro.count
+-#            %i.fa.fa-thumbs-o-up
+-#        |
+-#        =link_to({:action => :like_comment, :project => @project,  :id => comment.id, :against => true}, :remote => true, :method => :put, class: "popup-dislikes", id: "dislike_comment_#{comment.id}") do
+-#          %span
+-#            %span(id="dlk_comment_#{comment.id}" style="margin-right:0;")
+-#              =comment.users_against.count
+-#            %i.fa.fa-thumbs-o-down
+-#
+-#        - if boss? or role_expert?
+-#          |
+-#          =link_to({action: :plus_comment, id: comment.id}, remote: true, method: :put, class: "link_status", id: "plus_comment_#{comment.id}") do
+-#            &nbsp;
+-#            -if comment.useful
+-#              %span.label_give_scores.label.label-danger=t('show.revert_score')
+-#            - else
+-#              %span.label_give_scores.label.label-success=t('show.add_score')
+-#      .time.pull-left
+-#        = time_ago_in_words(comment.created_at)
+-#      %br
+-#      - comment.comments.each do |c|
+-#        = render partial: 'shared/comment', object: c
