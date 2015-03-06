@@ -1,2 +1,5 @@
 $('#edit_plan_post_model').html("#{escape_javascript(render 'form')}");
--#history_change("#{edit_plan_post_path(@project.id, @post.id)}");
+$('#PlanTabs li#second a').on("click", function(e) {
+$('#spinner_tab2').show();
+render_table('edit');
+});
