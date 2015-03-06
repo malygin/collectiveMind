@@ -25,7 +25,7 @@ class Plan::PostAspectsController < ProjectsController
     @post_stage = Plan::PostStage.find(params[:stage_id])
     @aspects = Core::Aspect.where(project_id: @project, status: 0)
     @disposts = Discontent::Post.where(project_id: @project, status: 4)
-    @new_ideas = @post.post_aspects.where(plan_post_aspects: {concept_post_aspect_id: nil, core_aspect_id: nil})
+    @new_ideas = @post.post_aspects.where(plan_post_aspects: {concept_post_id: nil, core_aspect_id: nil})
   end
 
   def edit
@@ -49,7 +49,7 @@ class Plan::PostAspectsController < ProjectsController
   end
 
   def add_form_for_concept
-    @post = Plan::Post.find(params[:id])
+    @post = Plan::Post.find(params[:post_id])
     @post_stage = Plan::PostStage.find(params[:stage_id])
     @save_form = params[:save_form]
     if @save_form

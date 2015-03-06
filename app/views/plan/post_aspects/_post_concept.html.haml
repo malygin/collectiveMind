@@ -3,10 +3,10 @@
     =@post_stage.plan_post_aspects.size
   %td(rowspan="#{rowspan_concept(post_concept)}" class="td_concept_#{post_concept.id}" id="td_concept_#{post_concept.id}")
     .pull-right
-      =link_to edit_concept_plan_post_path(@project, @post, con_id: post_concept.id, edit_concept: true), method: :put, remote: true, id: "edit_post_concept_#{post_concept.id}" do
+      =link_to edit_plan_post_aspect_path(@project, @post, con_id: post_concept.id, edit_concept: true), method: :put, remote: true, id: "edit_post_concept_#{post_concept.id}" do
         %button.btn.btn-sm.btn-warning{type: "button"}
           %i.fa.fa-pencil
-      =link_to destroy_concept_plan_post_path(@project, @post, con_id: post_concept.id, stage_id: @post_stage.id), method: :delete, remote: true, data: {confirm: t('confirm.delete_concept')}, id: "destroy_post_concept_#{post_concept.id}" do
+      =link_to plan_post_aspect_path(@project, @post, con_id: post_concept.id, stage_id: @post_stage.id), method: :delete, remote: true, data: {confirm: t('confirm.delete_concept')}, id: "destroy_post_concept_#{post_concept.id}" do
         %button.btn.btn-sm.btn-danger{type: "button"}
           %i.fa.fa-trash-o
     =link_to view_concept_table_plan_post_path(@project, @post, con_id: post_concept.id), method: :get, remote: true,class: "color-white", style: "text-decoration:none;border-bottom: 1px dashed #fafbfc;", id: "view_post_concept_table_#{post_concept.id}" do
@@ -20,6 +20,6 @@
 
 %tr(id="tr_new_action_#{post_concept.id}")
   %td
-    =link_to new_action_plan_post_path(@project, @post, con_id: post_concept.id, stage_id: @post_stage.id), method: :put, remote: true, class: "btn btn-sm btn-success pull-right", id: "btn_new_concept", style: "font-weight: normal;width:200px;" do
+    =link_to new_plan_post_action_path(@project, @post, con_id: post_concept.id, stage_id: @post_stage.id), remote: true, class: "btn btn-sm btn-success pull-right", id: "btn_new_concept", style: "font-weight: normal;width:200px;" do
       =t('form.plan.add_action')
 

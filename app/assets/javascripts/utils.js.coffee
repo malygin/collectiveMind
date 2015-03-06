@@ -244,7 +244,7 @@ $('#tab_posts li#new a').on "click", (e) ->
     return (false)
   if concept_id != ''
     $.ajax
-      url: "/project/#{project_id}/plan/posts/#{post_id}/add_form_for_concept"
+      url: "/project/#{project_id}/plan/posts/#{post_id}/aspects/add_form_for_concept"
       type: "put"
       data:
         concept_id: concept_id
@@ -282,7 +282,7 @@ $('#tab_posts li#new a').on "click", (e) ->
     post_id = parseInt(optsel.attr('post'))
     if project_id and post_id and new_concept != ''
       $.ajax
-        url: "/project/#{project_id}/plan/posts/#{post_id}/get_concept"
+        url: "/project/#{project_id}/plan/posts/#{post_id}/aspects/get_concept"
         type: "get"
         data:
           con_id: new_concept

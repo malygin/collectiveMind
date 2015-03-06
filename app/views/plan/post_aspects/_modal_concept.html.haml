@@ -6,7 +6,7 @@
         %h4#myModalLabel.modal-title=t('form.plan.concept.add_list')
       .modal-body
         #option_for_select_concept(project="#{@project.id}" post="#{@post.id}" stage="#{@post_stage.id}")
-        = link_to t('form.plan.concept.add_empty'), add_form_for_concept_plan_post_path(@project, @post, stage_id: @post_stage.id, save_form: true), remote: true, method: :put, id: 'new_concept', class: 'btn btn-success pull-right'
+        = link_to t('form.plan.concept.add_empty'), url_for(controller: 'plan/post_aspects', action: 'add_form_for_concept', project: @project.id, post_id: @post.id, stage_id: @post_stage.id, save_form: true), remote: true, method: :put, id: 'new_concept', class: 'btn btn-success pull-right'
         %br
         %h4.color-green=t('form.plan.concept.new_ideas')
         - @new_ideas.each_with_index do |post,ind|
@@ -24,7 +24,7 @@
                 .label.label-success=t('form.plan.concept.add')
             .col-md-1
               .pull-right
-                =link_to add_form_for_concept_plan_post_path(@project, @post,stage_id: @post_stage.id, concept_id: post.id, save_form: true, new_idea: true), method: :put, remote: true, id: "plus_post_concept_#{post.id}" do
+                =link_to url_for(controller: 'plan/post_aspects', action: 'add_form_for_concept', project: @project.id, post_id: @post.id, stage_id: @post_stage.id, concept_id: post.id, save_form: true, new_idea: true), method: :put, remote: true, id: "plus_post_concept_#{post.id}" do
                   %button.btn.btn-sm.btn-warning{type: "button"}
                     %i.fa.fa-plus
           .concept-devider
@@ -41,7 +41,7 @@
             %br
             %br
         %br
-        = link_to t('form.plan.concept.add_empty'), add_form_for_concept_plan_post_path(@project, @post, stage_id: @post_stage.id, save_form: true), remote: true, method: :put, id: 'new_concept', class: 'btn btn-success pull-right'
+        = link_to t('form.plan.concept.add_empty'), url_for(controller: 'plan/post_aspects', action: 'add_form_for_concept', project: @project.id, post_id: @post.id, stage_id: @post_stage.id, save_form: true), remote: true, method: :put, id: 'new_concept', class: 'btn btn-success pull-right'
 
       .modal-footer(style="margin-top:30px;padding-bottom:10px;padding-top:10px;padding-right:10px;")
         %button.btn.btn-primary(type = "button" data-dismiss="modal")=t('form.close')
