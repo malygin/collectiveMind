@@ -39,6 +39,21 @@ $('#tab_posts li#new a').on "click", (e) ->
       url: "/project/#{project_id}/discontent/posts/unions"
       type: "get"
 
+
+@plan_stage = ->
+  this.select_plans = ->
+    project_id = $(this).data('project')
+    val = this.value
+    if project_id and val
+      $.ajax
+        url: "/project/#{project_id}/estimate/posts/new"
+        type: "get"
+        dataType: "script"
+        data:
+          plan_id: val
+
+  $('#tab-for_content').on('change', '#select_plans', this.select_plans)
+
 @post_form = ->
   this.activate_button = ->
     form = $(this).closest('form');

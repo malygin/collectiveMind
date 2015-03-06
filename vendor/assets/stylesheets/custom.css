@@ -1760,7 +1760,7 @@
     color: #e71d2b;
 }
 .cabinet-right-col .tab-content {
-    width: 560px;
+    /*width: 560px;*/
     padding: 0;
 }
 .cabinet-right-col .tab-content #tab-1 {
@@ -1811,7 +1811,7 @@ input[type="radio"] {
     filter:alpha(opacity=0);
     -moz-opacity:0;
     -khtml-opacity: 0;
-    opacity: 0;
+    /*opacity: 0;*/
     cursor: pointer;
 }
 input[type="radio"][value="yes"] {

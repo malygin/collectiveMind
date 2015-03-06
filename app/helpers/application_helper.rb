@@ -455,7 +455,7 @@ module ApplicationHelper
 
   def field_for_journal(post)
     if post.instance_of? Concept::Post
-      post.post_aspects.first.title unless post.post_aspects.first.nil?
+      post.title
     elsif post.instance_of? Plan::Post
       post.name
     else

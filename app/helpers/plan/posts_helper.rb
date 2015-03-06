@@ -131,8 +131,7 @@ module Plan::PostsHelper
 
   def check_validate_concept(concept, view = false)
     if concept
-      concept_aspect = concept.concept_post_aspect
-      concept_post = concept_aspect.concept_post if concept_aspect
+      concept_post = concept.concept_post
 
       notice_prefix_empty = t('form.plan.concept.notice_prefix_empty')
       notice_prefix_adap = t('form.plan.concept.notice_prefix_adap')
@@ -178,8 +177,8 @@ module Plan::PostsHelper
         else
           if !concept.send(column_for_concept(n+1)).present?
             notice_empty += link if link
-          elsif concept_aspect
-            if ![9, 12].include?(n+1) and concept.send(column_for_concept(n+1)) == concept_aspect.send(column_for_concept(n+1))
+          elsif concept_post
+            if ![9, 12].include?(n+1) and concept.send(column_for_concept(n+1)) == concept_post.send(column_for_concept(n+1))
               notice_adap += link if link
             end
           end

@@ -1,0 +1,1 @@
+= select_tag "select_plans", options_from_collection_for_select(@plan_posts, "id", "name"), prompt: "Выберите проект", class: "select_plans form-control", data: {project: @project.id}

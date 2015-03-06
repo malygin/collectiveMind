@@ -58,21 +58,26 @@ class Estimate::PostsController < PostsController
 
   def new
     @post = current_model.new
-    @plan_post = Plan::Post.find(params[:plan_id])
-    @est_stat = @plan_post.estimate_status.nil? ? 0 : @plan_post.estimate_status
+    if params[:plan_id]
+      @plan_post = Plan::Post.find(params[:plan_id])
+      @est_stat = @plan_post.estimate_status.nil? ? 0 : @plan_post.estimate_status
 
-    @pair_estimates1 = {}
-    @plan_post.post_aspects.where("post_stage_id = ?", @plan_post.first_stage).each do |p|
-      @pair_estimates1[p] = Estimate::PostAspect.new if p.plan_post_stage.status == 0
-    end
+      @pair_estimates1 = {}
+      @plan_post.post_aspects.where("post_stage_id = ?", @plan_post.first_stage).each do |p|
+        @pair_estimates1[p] = Estimate::PostAspect.new if p.plan_post_stage.status == 0
+      end
 
-    @pair_estimates2 = {}
-    @plan_post.post_aspects.where("post_stage_id != ?", @plan_post.first_stage).each do |p|
-      @pair_estimates2[p] = Estimate::PostAspect.new if p.plan_post_stage.status == 0
+      @pair_estimates2 = {}
+      @plan_post.post_aspects.where("post_stage_id != ?", @plan_post.first_stage).each do |p|
+        @pair_estimates2[p] = Estimate::PostAspect.new if p.plan_post_stage.status == 0
+      end
+    else
+      @plan_posts = Plan::Post.where(project_id: @project, status: 0)
     end
 
     respond_to do |format|
       format.html
+      format.js
     end
   end
 
@@ -156,7 +161,7 @@ class Estimate::PostsController < PostsController
     end
     respond_to do |format|
       if @estimate_post.save
-        current_user.journals.build(type_event: 'estimate_post_save', body: @estimate_post.id).save!
+        current_user.journals.build(project_id: @project.id, type_event: 'estimate_post_save', body: @estimate_post.id).save!
         format.html { redirect_to action: "index" }
       else
         format.html { render action: "new" }
@@ -231,7 +236,7 @@ class Estimate::PostsController < PostsController
 
     @estimate_post.save
     @estimate_post.update_attributes estimate_post_params
-    current_user.journals.build(type_event: 'estimate_post_update', body: @estimate_post.id).save!
+    current_user.journals.build(project_id: @project.id, type_event: 'estimate_post_update', body: @estimate_post.id).save!
     redirect_to estimate_post_path(@project, @estimate_post), notice: 'Оценка успешно обновлена.'
   end
 
