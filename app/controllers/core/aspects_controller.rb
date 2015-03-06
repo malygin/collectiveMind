@@ -38,7 +38,7 @@ class Core::AspectsController < ProjectsController
       # params[:answers].each do |answer|
       #   @wrong_answer = true unless @correct_answers.include? answer.to_i
       # end
-      arr = @correct_answers - params[:answers].collect{|a| a.to_i}
+      arr = params[:answers].collect{|a| a.to_i} - @correct_answers
       @wrong_answer = true if arr.present?
 
       unless @wrong_answer
