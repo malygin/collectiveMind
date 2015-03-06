@@ -30,6 +30,12 @@
             = link_to 'Кабинет', project_user_path(@project, current_user), class: 'btn btn-grey rounded-2'
             .clearfix.visible-xs
             = link_to 'Новости', journals_path(@project), class: 'btn btn-grey rounded-2'
+            - if @project.prev_status
+              = link_to '<- стадия', pr_stage_core_project_path(@project), method: :put, id: "down_to_#{@project.prev_status}", class: 'btn btn-grey rounded-2'
+              .clearfix.visible-xs
+            - if @project.next_status
+              = link_to '-> стадия', next_stage_core_project_path(@project), method: :put, id: "up_to_#{@project.next_status}", class: 'btn btn-grey rounded-2'
+
             -#.clearfix.visible-xs
             -#%a.btn.btn-grey.rounded-2{href: "#"} Отзывы
           .pull-right.header-right
@@ -53,11 +59,6 @@
                 %i.fa.fa-angle-down.color.mass-dark-blue
               - if current_user.admin?
                 %br
-                - if @project.prev_status
-                  = link_to t("menu.settings.admin_set_#{@project.status * 2 - 2}"), pr_stage_core_project_path(@project), method: :put, id: "down_to_#{@project.prev_status}"
-                  %br
-                - if @project.next_status
-                  = link_to t("menu.settings.admin_set_#{@project.status * 2 - 1}"), next_stage_core_project_path(@project), method: :put, id: "up_to_#{@project.next_status}"
               %ul.dropdown-menu.dropdown-mini{role: "menu"}
                 %li{role: 'presentation'}
                   = link_to t('menu.account'), user_path(@project, current_user), id: 'go_to_profile'
