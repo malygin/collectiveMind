@@ -1,9 +1,16 @@
-= form_for comment, html: {multipart: true, id: 'comment_form', class: 'add-comment'}, remote: true,
-              url: url_for(controller: post.class.name.underscore.pluralize, action: 'add_comment', project: @project.id, id: post.id), method: :put do |f|
-  = render 'shared/notice_messages', object: f.object
-  -#@todo заменить на аватарку юзера
-  = image_tag 'ava1.jpg', class: 'proj-comment-ava'
-  = f.text_field :content, placeholder: 'Оставьте комментарий'
+%br
+.row(style="margin-left:0;margin-right:0;" )
+  .col-md-12
+    = form_for comment, html: {multipart: true, id: 'comment_form', class: 'add-comment'}, remote: true,
+                  url: url_for(controller: @post.nil? ? post.class.name.underscore.pluralize : @post.class.name.underscore.pluralize, action: 'add_comment', project: @project.id, id: @post.nil? ? post.id : @post.id), method: :put do |f|
+      = render 'shared/notice_messages', object: f.object
+      -#@todo заменить на аватарку юзера
+      -#= image_tag 'ava1.jpg', class: 'proj-comment-ava'
+      -#= f.text_field :content, class: 'form-control', placeholder: 'Оставьте комментарий'
+      =f.text_area :content, class: 'form-control input-transparent comment-textarea',  placeholder: t('form.comment_answer'), id: "comment_text_area"
+      .pull-right
+        -#=f.submit t('form.send'), class: 'btn btn-sm btn-info send-comment', id: 'send_comment'
+        %button.btn.btn-sm.btn-info.send-comment#send_comment(type="submit")=t('form.send')
 
 -#
 -#

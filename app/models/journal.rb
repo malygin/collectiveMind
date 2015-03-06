@@ -24,7 +24,7 @@ class Journal < ActiveRecord::Base
 
   scope :auto_feed_mailer, -> { joins("LEFT OUTER JOIN user_checks ON journals.user_informed = user_checks.user_id AND journals.project_id = user_checks.project_id AND user_checks.check_field = 'auto_feed_mailer'").where(user_checks: {status: ['f',nil] }) }
 
-  after_save :send_last_news
+  # after_save :send_last_news
 
   validates :body, :type_event, :project_id, presence: true
 

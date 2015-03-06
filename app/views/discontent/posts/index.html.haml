@@ -78,7 +78,7 @@
             -# - @posts.each_slice(3) do |posts|
             .col-xs-6.owl-column
               -# posts.each do |post|
-              = render partial: 'post_for_vote', object: post
+              = render partial: 'post_for_vote'
         %button#vote-button1.vote-button.btn.btn-mass-red{:disabled => "disabled"} Проголосовать
         -#  = link_to  next_post_for_vote_discontent_post_path(@project,post_for_vote, against: true), remote: true, method: :put, class: 'btn btn-success btn-sm vote-button', id: "vote_positive_#{post_for_vote.id}" do
         -#    %span.glyphicon.glyphicon-thumbs-up

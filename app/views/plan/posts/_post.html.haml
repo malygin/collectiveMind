@@ -128,7 +128,8 @@
                                     .badge-tag.timel-back-8cf0ba
                                       = action_resource.name
       #tab-3.tab-pane.fade.popup-bottom-rounded
-        .comments-cont
+        #comments.chat-messages
           - post.main_comments.each do |comment|
             = render partial: 'shared/comment', locals: {comment: comment}
+        - if signed_in?
           = render partial: 'shared/comment_form', locals: {comment: @comment, post: post}

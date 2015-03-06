@@ -103,7 +103,7 @@ $ ->
 
   $('.tooltips').tooltip()
   $("#sortable").sortable()
-  $('textarea').autosize()
+#  $('textarea').autosize()
   $('.liFixar').liFixar()
   $('.userscore').editable()
   $("#sortable").disableSelection()

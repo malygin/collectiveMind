@@ -10,7 +10,7 @@
         %b Несовершенство подано анонимно
 
     -@post.post_aspects.each do |da|
-      = render partial: 'discontent/aspects/aspect', object: da
+      = render partial: 'core/aspects/aspect', object: da
     =discontent_style_name(@post.style)
     %br
     = render partial: 'post_content', object: @post

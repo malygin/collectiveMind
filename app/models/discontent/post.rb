@@ -154,13 +154,13 @@ class Discontent::Post < ActiveRecord::Base
     post_all = dispost_concepts.by_status(0).size - 1
     concept_posts = dispost_concepts.by_status(0).order('concept_posts.id')
     if last_vote.nil? or id != last_vote.discontent_post_id
-      concept1 = concept_posts[0].post_aspects.first
-      concept2 = concept_posts[1].post_aspects.first
+      concept1 = concept_posts[0]
+      concept2 = concept_posts[1]
       votes = 1
     else
       concept1 = last_vote.concept_post_aspect
       count_now = current_user.concept_post_votings.by_project_votings(project).where(discontent_post_id: id, concept_post_aspect_id: concept1.id).count
-      concept2 = concept_posts[count_now + 1].post_aspects.first unless concept_posts[count_now + 1].nil?
+      concept2 = concept_posts[count_now + 1] unless concept_posts[count_now + 1].nil?
       votes = count_now == post_all ? count_now : count_now + 1
     end
     return post_all, concept1, concept2, votes

@@ -34,7 +34,7 @@
 
               = journal_parser(journal, @project.id).html_safe
               %br
-              .time.pull-left(style="color:#cabc7d;")=Russian::strftime(journal.created_at, '%d %B %k:%M:%S ')
+              .time.pull-left(style="color:#2C2B26;")=Russian::strftime(journal.created_at, '%d %B %k:%M:%S ')
 
         .text-center
           = will_paginate @journals_feed

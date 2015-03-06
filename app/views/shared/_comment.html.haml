@@ -1,10 +1,16 @@
-.proj-comment
-  -#@todo заменить на аватарку юзера
-  = image_tag 'ava1.jpg', class: 'proj-comment-ava'
-  .proj-comment-name
-    = comment.user
-  .proj-comment-text
-    = comment.content
+-#.proj-comment
+-#  -#@todo заменить на аватарку юзера
+-#  = image_tag 'ava1.jpg', class: 'proj-comment-ava'
+-#  .proj-comment-name
+-#    = comment.user
+-#  .proj-comment-text
+-#    = comment.content
+
+.comment
+  -#= image_tag comment.user.avatar.url(:thumb), class: "comment-ava"
+  = image_tag 'no-ava.png', class: "comment-ava"
+  .comment-name= comment.user.to_s
+  .comment-text= comment.content
 
 -#.chat-message{id: "comment_#{comment.id}"}
 -#  = render 'users/user_post', user: comment.user

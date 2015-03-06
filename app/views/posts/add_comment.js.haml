@@ -15,6 +15,7 @@
 -#-#$('#change_comment_stat .btn').button('reset');
 
 - unless @comment.nil?
-  $('.add-comment').remove();
-  $('.comments-cont').append("#{escape_javascript(render partial: 'shared/comment', object: @comment)}");
-  $('.comments-cont').append("#{escape_javascript(render partial: 'shared/comment_form', locals: {comment: @new_comment, post: @comment.post})}");
+  -#$('.add-comment').remove();
+  $("#comment_text_area").val('');
+  $('#comments.chat-messages').append("#{escape_javascript(render partial: 'shared/comment', object: @comment)}");
+  -#$('.comments-cont').append("#{escape_javascript(render partial: 'shared/comment_form', locals: {comment: @new_comment, post: @comment.post})}");

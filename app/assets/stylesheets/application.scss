@@ -7,7 +7,9 @@
 
 //@import 'jquery.ui.autocomplete';
 //@import "jquery.ui.chatbox";
-//@import "datepicker/datepicker3";
+@import "datepicker/datepicker3";
+@import "selectize";
+@import "selectize.default";
 
 .select_aspect {
   background-color: gray;
@@ -21,6 +23,26 @@
 .text-align-center {
   text-align: center;
 }
+
+/* discontent posts */
+
+.label-t {
+  background-color: #4ab0ce;
+}
+
+.label-n {
+  background-color: #dc5d75;
+}
+
+.label-p {
+  background-color: #56bc76;
+}
+
+.label-g {
+  background-color: #999;
+}
+
+/* discontent posts */
 
 .color-green{
   color: #56bc76 !important;

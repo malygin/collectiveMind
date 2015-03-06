@@ -66,4 +66,4 @@
             .comment-text= comment.content
       - if signed_in?
         %div{style: "margin-left: 10px; margin-right:10px;"}
-          = render partial:'shared/comment_form', locals:{ comment:@comment, url_link:url_for(controller:@post.class.name.underscore.pluralize, action:'add_comment')}
+          = render partial:'shared/comment_form', locals:{ comment: @comment, post: @post, url_link: url_for(controller:@post.class.name.underscore.pluralize, action:'add_comment')}

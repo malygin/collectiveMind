@@ -280,13 +280,11 @@ class User < ActiveRecord::Base
   end
 
   def can_vote_for(stage, project)
-    if project.status == 2 and project.get_free_votes_for(self, 'lifetape') > 0
+    if stage == :collect_info and project.status == 2 and project.get_free_votes_for(self, 'lifetape') > 0
       return true
-    end
-    if project.status == 6 and !project.get_united_posts_for_vote(self).empty?
+    elsif stage == :discontent and project.status == 6 and !project.get_united_posts_for_vote(self).empty?
       return true
-    end
-    if project.status == 8
+    elsif stage == :concept and project.status == 8
       disposts = Discontent::Post.where(project_id: project, status: 4).order(:id)
       last_vote = self.concept_post_votings.by_project_votings(project).last
       return true if last_vote.nil?
@@ -298,8 +296,7 @@ class User < ActiveRecord::Base
           return true
         end
       end
-    end
-    if project.status == 11 and self.voted_plan_posts.by_project(project.id).size == 0
+    elsif stage == :estimate and project.status == 11 and self.voted_plan_posts.by_project(project.id).size == 0
       return true
     end
     false

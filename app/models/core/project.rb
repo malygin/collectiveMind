@@ -233,9 +233,7 @@ class Core::Project < ActiveRecord::Base
   end
 
   def can_edit_on_current_stage(p)
-    if p.instance_of? CollectInfo::Post
-      return true
-    elsif p.instance_of? Discontent::Post
+    if p.instance_of? Discontent::Post
       return self.status == 3
     elsif p.instance_of? Concept::Post
       return self.status == 7
