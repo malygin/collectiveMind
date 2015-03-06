@@ -6,7 +6,7 @@
     %i.fa.fa-question-circle
   .container
     .row.innovs#tab_concept_posts
-      = link_to 'Добавить нововведение', new_concept_post_path(@project), class: 'btn btn-success'
+      = link_to 'Добавить нововведение', project_user_path(@project, current_user), class: 'btn btn-success'
       %br
       %br
       - @project.concept_ongoing_post.order('concept_posts.id').each_with_index do |pa, index1|

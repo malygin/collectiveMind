@@ -27,7 +27,7 @@
           .col-md-4.discontent-block
             .imperfection-add-block.lined-block
               .add-imperf
-                = link_to({action: :new, project: @project, asp: params[:asp]}, remote: true, id: 'add_record' ) do
+                = link_to project_user_path(@project, current_user), id: 'add_record' do
                   .plus-circle +
                   %span Добавить несовершенство
               %table

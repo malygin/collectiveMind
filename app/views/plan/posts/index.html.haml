@@ -1,7 +1,7 @@
 .project
   %h4 Проекты
   - if signed_in? and (@project.status == 9 or @project.demo?)
-    = link_to t('form.plan.new'), new_plan_post_path(@project), id: 'add_plan', class: 'add-project btn btn-mass-red'
+    = link_to t('form.plan.new'), project_user_path(@project, current_user), id: 'add_plan', class: 'add-project btn btn-mass-red'
   .container
     - @posts.each_slice(2) do |post|
       .row.projects
