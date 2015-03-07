@@ -62,5 +62,6 @@
           .row
             .col-xs-12.owl-column
               -# posts.each do |post|
-              = render 'post_for_vote'
+              -3.times do
+                = render 'post_for_vote'
         %button#vote-button2.vote-button.btn.btn-mass-red{:disabled => "disabled"} Проголосовать
