@@ -2,7 +2,7 @@ class Concept::Post < ActiveRecord::Base
   include BasePost
 
   has_many :voted_users, through: :final_votings, source: :user
-  has_many :final_votings, foreign_key: 'concept_post_aspect_id', class_name: 'Concept::Voting'
+  has_many :final_votings, foreign_key: 'concept_post_id', class_name: 'Concept::Voting'
 
   has_many :concept_post_discontents, -> { where concept_post_discontents: {status: [0, nil]} }, class_name: 'Concept::PostDiscontent'
   has_many :concept_disposts, through: :concept_post_discontents, source: :discontent_post, class_name: 'Discontent::Post'
@@ -34,7 +34,7 @@ class Concept::Post < ActiveRecord::Base
   end
 
   def complite(discontent)
-    post = discontent.concept_post_discontents.by_concept(self.id).first
+    post = discontent.concept_post_discontents.by_concept(self).first
     post.complite if post
   end
 

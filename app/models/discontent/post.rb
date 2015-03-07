@@ -61,7 +61,7 @@ class Discontent::Post < ActiveRecord::Base
                   }
 
   def complite(concept)
-    post = self.concept_post_discontents.by_concept(concept.id).first
+    post = self.concept_post_discontents.by_concept(concept).first
     post.complite if post
   end
 

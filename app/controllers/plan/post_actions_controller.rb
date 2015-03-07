@@ -26,14 +26,14 @@ class Plan::PostActionsController < ProjectsController
   def edit
     @post_aspect = Plan::PostAspect.find(params[:con_id])
     @post_stage = Plan::PostStage.find(params[:stage_id]) unless params[:stage_id].nil?
-    @post_action = Plan::PostAction.find(params[:act_id])
+    @post_action = Plan::PostAction.find(params[:id])
   end
 
   def update
     @post_stage = Plan::PostStage.find(params[:stage_id]) unless params[:stage_id].nil?
     @post_aspect = Plan::PostAspect.find(params[:con_id])
     @post_action = Plan::PostAction.find(params[:act_id])
-    @post_action.update_attributes(params[:plan_post_action])
+    @post_action.update_attributes(plan_post_action_params)
     @post_action.plan_post_resources.by_type('action_r').destroy_all
     unless params[:resor_action].nil?
       params[:resor_action].each_with_index do |r, i|
@@ -58,7 +58,7 @@ class Plan::PostActionsController < ProjectsController
 
   private
   def plan_post_action_params
-    params.require(:plan_post_action).permit(:goal, :name, :content)
+    params.require(:plan_post_action).permit(:name, :desc, :date_begin, :date_end)
   end
 
   def set_post

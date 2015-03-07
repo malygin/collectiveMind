@@ -165,7 +165,7 @@ $('#tab_posts li#new a').on "click", (e) ->
     text = $(this).find('option:selected').text()
     $(this).find('option:selected').remove()
     func = "'#{val}','#{text}'"
-    $('#add_post_aspects').append('<div id="aspect_' + val + '" style="display:none;height:0;"><input type="hidden" name="discontent_post_aspects[]" value="' + val + '"/><span class="glyphicon glyphicon-remove text-danger pull-left" onclick="remove_core_aspect(' + func + ');" style="cursor:pointer;text-decoration:none;font-size:15px;"></span><span id="' + val + '" class="span_aspect label label-xs label-info">' + text + '</span></br></div>')
+    $('#add_post_aspects').append('<div id="aspect_' + val + '" style="display:none;height:0;"><input type="hidden" name="discontent_post_aspects[]" value="' + val + '"/><span class="fa fa-remove text-danger pull-left" onclick="remove_core_aspect(' + func + ');" style="cursor:pointer;text-decoration:none;font-size:15px;"></span><span id="' + val + '" class="span_aspect label label-xs label-info">' + text + '</span></br></div>')
     $('#aspect_' + val).css('display', 'block').animate({height: 20, opacity: 1}, 500).effect("highlight",
       {color: '#f5cecd'}, 500)
 

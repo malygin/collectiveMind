@@ -12,7 +12,7 @@ module Plan::PostsHelper
   end
 
   def plus_concept?(stage, concept)
-    if stage.plan_post_aspects.pluck(:concept_post_aspect_id).include? concept.post_aspects.first.id
+    if stage.plan_post_aspects.pluck(:concept_post_id).include? concept.id
       return true
     end
     false

@@ -29,12 +29,12 @@ class Plan::PostAspectsController < ProjectsController
   end
 
   def edit
-    @post_concept = Plan::PostAspect.find(params[:con_id])
+    @post_concept = Plan::PostAspect.find(params[:id])
     @post_stage = @post_concept.plan_post_stage
   end
 
   def update
-    @post_concept = Plan::PostAspect.find(params[:concept_id])
+    @post_concept = Plan::PostAspect.find(params[:id])
     @post_concept.update_attributes plan_post_aspect_params
 
     create_plan_resources_on_type(@project, @post_concept)
@@ -85,10 +85,10 @@ class Plan::PostAspectsController < ProjectsController
           @cond.reality = @concept.reality
           @cond.problems = @concept.problems
           @cond.core_aspect_id = @concept.core_aspect_id
-          @cond.concept_post_aspect = @concept
+          @cond.concept_post = @concept
           @cond.save!
 
-          @cond.duplicate_concept_post_resources(@project, @concept.concept_post)
+          @cond.duplicate_concept_post_resources(@project, @concept)
         end
       else
         @cond = Plan::PostAspect.create(title: 'Новое нововведение')

@@ -103,7 +103,7 @@ class Concept::PostsController < PostsController
   end
 
   def edit
-    @discontent_post = @concept_post.discontent
+    # @discontent_post = @concept_post.discontent
     @remove_able = true
     respond_to do |format|
       format.html
@@ -112,16 +112,16 @@ class Concept::PostsController < PostsController
   end
 
   def update
-    @concept_post.update_status_fields(params[:pa])
+    @concept_post.update_status_fields(params[:concept_post])
 
     unless params[:cd].nil?
-      @concept_post.concept_post_discontents.destroy_all if @post_aspect.valid?
+      @concept_post.concept_post_discontents.destroy_all if @concept_post.valid?
       params[:cd].each do |cd|
         @concept_post.concept_post_discontents.build(discontent_post_id: cd[0], complite: cd[1][:complite], status: 0)
       end
     end
     unless params[:check_discontent].nil?
-      @concept_post.concept_post_discontent_grouped.destroy_all if @post_aspect.valid?
+      @concept_post.concept_post_discontent_grouped.destroy_all if @concept_post.valid?
       params[:check_discontent].each do |com|
         @concept_post.concept_post_discontent_grouped.build(discontent_post_id: com[0], status: 1)
       end
@@ -134,7 +134,7 @@ class Concept::PostsController < PostsController
     respond_to do |format|
       if @concept_post.save
         unless params[:fast_update]
-          current_user.journals.build(type_event: 'concept_post_update', body: trim_content(@concept_post.post_aspects.first.title), first_id: @concept_post.id, project: @project).save!
+          current_user.journals.build(type_event: 'concept_post_update', body: trim_content(@concept_post.title), first_id: @concept_post.id, project: @project).save!
         else
           @discontent_post = @concept_post.discontent
           @remove_able = true

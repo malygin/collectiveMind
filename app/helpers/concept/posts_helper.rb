@@ -166,13 +166,13 @@ module Concept::PostsHelper
 
   def complite(post)
     concept = (@concept_post or @post)
-    concept_post_discontent = post.concept_post_discontents.by_concept(concept.id).first if concept
+    concept_post_discontent = post.concept_post_discontents.by_concept(concept).first if concept
     concept_post_discontent.present? ? concept_post_discontent.complite : 3
   end
 
   def level_complite(post)
     concept = @concept_post || @post
-    concept_post_discontent = post.concept_post_discontents.by_concept(concept.id).first if concept
+    concept_post_discontent = post.concept_post_discontents.by_concept(concept).first if concept
     level = concept_post_discontent.complite if concept_post_discontent
     if level == 1
       t('show.concept.complite_1')

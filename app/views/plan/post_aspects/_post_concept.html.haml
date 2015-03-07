@@ -3,7 +3,7 @@
     =@post_stage.plan_post_aspects.size
   %td(rowspan="#{rowspan_concept(post_concept)}" class="td_concept_#{post_concept.id}" id="td_concept_#{post_concept.id}")
     .pull-right
-      =link_to edit_plan_post_aspect_path(@project, @post, post_concept, edit_concept: true), method: :put, remote: true, id: "edit_post_concept_#{post_concept.id}" do
+      =link_to edit_plan_post_aspect_path(@project, @post, post_concept, edit_concept: true), method: :get, remote: true, id: "edit_post_concept_#{post_concept.id}" do
         %button.btn.btn-sm.btn-warning{type: "button"}
           %i.fa.fa-pencil
       =link_to plan_post_aspect_path(@project, @post, post_concept, stage_id: @post_stage.id), method: :delete, remote: true, data: {confirm: t('confirm.delete_concept')}, id: "destroy_post_concept_#{post_concept.id}" do

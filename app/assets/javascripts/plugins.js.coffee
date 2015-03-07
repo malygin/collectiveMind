@@ -232,8 +232,8 @@ $.fn.extend popoverClosable: (options) ->
 # @todo datepicker for plan posts
 
 @activate_datepicker = ->
-  $date_begin = $("#date_begin")
-  $date_end = $("#date_end")
+  $date_begin = $("#plan_post_stage_date_begin")
+  $date_end = $("#plan_post_stage_date_end")
 
   $date_begin.datepicker("refresh")
   $date_end.datepicker("refresh")

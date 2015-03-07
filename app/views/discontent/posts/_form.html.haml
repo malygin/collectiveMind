@@ -33,8 +33,8 @@
           %br
     .row
       .col-md-12
-        #whend_value
-          whend
+        -##whend_value
+        -#  whend
         #mod
         = f.text_field :whend, style: 'height: 44px', 'data-url' => discontent_autocomplete_path(@project, field: 'whend'),
                 class: 'form-control autocomplete', placeholder: t('form.discontent.field_when_promt')
@@ -56,13 +56,13 @@
             - @aspects_for_post.each do |ap|
               %div{id: "aspect_#{ap.id}"}
                 %input{name: 'discontent_post_aspects[]', type: 'hidden', value: "#{ap.id}"}/
-                %span.glyphicon.glyphicon-remove.text-danger{onclick: "remove_core_aspect('#{ap.id}','#{ap.content}');", style: 'cursor:pointer;text-decoration:none;font-size:15px;'}
+                %span.fa.fa-remove.text-danger{onclick: "remove_core_aspect('#{ap.id}','#{ap.content}');", style: 'cursor:pointer;text-decoration:none;font-size:15px;'}
                 %span.span_aspect.label.label-xs.label-info{id: "#{ap.id}"}
                   = ap.content
           - unless @asp.nil?
             %div{id: "aspect_#{@asp.id}"}
               %input{name: 'discontent_post_aspects[]', type: 'hidden', value: "#{@asp.id}"}/
-              %span.glyphicon.glyphicon-remove.text-danger{onclick: "remove_core_aspect('#{@asp.id}','#{@asp.content}');", style: 'cursor:pointer;text-decoration:none;font-size:15px;'}
+              %span.fa.fa-remove.text-danger{onclick: "remove_core_aspect('#{@asp.id}','#{@asp.content}');", style: 'cursor:pointer;text-decoration:none;font-size:15px;'}
               %span.span_aspect.label.label-xs.label-info{id: "#{@asp.id}"}
                 = @asp.content
         %br

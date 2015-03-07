@@ -18,21 +18,21 @@
     =render partial:'discontent/posts/post_short2', object: post
     %br
     - post.dispost_concepts.by_status(0).each_with_index do |pa, index|
-      .row.plus-concept(id="tr_plus_concept_#{post.id}_#{pa.post_aspects.first.id}")
+      .row.plus-concept(id="tr_plus_concept_#{post.id}_#{pa.id}")
         .col-md-1
           =index+1
         .col-md-8
-          - if pa.post_aspects.first.title!=''
-            =link_to view_concept_plan_post_path(@project, @post, post_id: post.id, con_id: pa.post_aspects.first.id), method: :get, remote: true, class: "color-teal", "data-toggle"=> "collapse", "data-target"=> "collapse_plus_concept_#{post.id}_#{pa.post_aspects.first.id}", style: "text-decoration:none;", id: "view_post_concept_#{post.id}_#{pa.post_aspects.first.id}" do
-              =pa.post_aspects.first.title
+          - if pa.title!=''
+            =link_to view_concept_plan_post_path(@project, @post, post_id: post.id, con_id: pa.id), method: :get, remote: true, class: "color-teal", "data-toggle"=> "collapse", "data-target"=> "collapse_plus_concept_#{post.id}_#{pa.id}", style: "text-decoration:none;", id: "view_post_concept_#{post.id}_#{pa.id}" do
+              =pa.title
           - else
             =t('show.without_name')
-        .col-md-2(class="td_plus_concept_#{pa.post_aspects.first.id}")
+        .col-md-2(class="td_plus_concept_#{pa.id}")
           -if plus_concept?(@post_stage,pa)
             .label.label-success=t('form.plan.concept.add')
         .col-md-1
           .pull-right
-            =link_to add_form_for_concept_plan_post_path(@project, @post,stage_id: @post_stage.id, concept_id: pa.post_aspects.first.id, save_form: true), method: :put, remote: true, id: "plus_post_concept_#{pa.id}" do
+            =link_to  add_form_for_concept_plan_post_aspects_path(@project, @post, stage_id: @post_stage.id, concept_id: pa.id, save_form: true), method: :put, remote: true, id: "plus_post_concept_#{pa.id}" do
               %button.btn.btn-sm.btn-warning{type: "button"}
                 %i.fa.fa-plus
       .concept-devider

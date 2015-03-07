@@ -1,10 +1,10 @@
-- if @post_aspect.errors.any?
-  $("#notice_messages").html('#{escape_javascript(render partial: 'shared/notice_messages', locals: {object:@post_aspect})}');
+- if @concept_post.errors.any?
+  $("#notice_messages").html('#{escape_javascript(render partial: 'shared/notice_messages', locals: {object:@concept_post})}');
   window.scrollTo(0,0)
 - else
   $("#notice_messages").html('')
-  $('#render_success_concept').empty();
-  $("#render_success_concept").html('#{escape_javascript(render partial: 'modal_post_update')}');
-  $('#modal_update_concept').modal('show');
+  -#$('#render_success_concept').empty();
+  -#$("#render_success_concept").html('#{escape_javascript(render partial: 'modal_post_update')}');
+  -#$('#modal_update_concept').modal('show');
 
 $('#send_post_concept').button('reset');

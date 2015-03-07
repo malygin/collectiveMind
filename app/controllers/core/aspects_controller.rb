@@ -39,12 +39,13 @@ class Core::AspectsController < ProjectsController
       #   @wrong_answer = true unless @correct_answers.include? answer.to_i
       # end
       arr = params[:answers].collect{|a| a.to_i} - @correct_answers
-      @wrong_answer = true if arr.present?
+      arr2 = @correct_answers - params[:answers].collect{|a| a.to_i}
+      @wrong_answer = true if arr.present? or arr2.present?
 
       unless @wrong_answer
         if params[:answers]
           params[:answers].each do |answer|
-            current_user.user_answers.create(answer_id: answer.to_i, project_id: @project.id, question_id: @question.id)
+            current_user.user_answers.create(answer_id: answer.to_i, project_id: @project.id, question_id: @question.id, aspect_id: @aspect.id).save!
           end
         end
         @next_question = aspect_questions[(aspect_questions.index @question) + 1]

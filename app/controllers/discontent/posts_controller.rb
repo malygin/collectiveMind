@@ -50,6 +50,7 @@ class Discontent::PostsController < PostsController
 
   def edit
     @post = current_model.find(params[:id])
+    @aspects = Core::Aspect.where(project_id: @project, status: 0)
     @aspects_for_post = @post.post_aspects
     respond_to do |format|
       format.html

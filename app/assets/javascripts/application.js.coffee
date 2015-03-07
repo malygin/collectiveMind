@@ -13,7 +13,7 @@
 
 #= require bootstrap/bootstrap.min
 #= require bootstrap-colorpicker
-# require datepicker/bootstrap-datepicker
+#= require datepicker/bootstrap-datepicker
 #= require bootstrap3-editable/bootstrap-editable
 
 #= require selectize

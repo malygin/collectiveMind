@@ -56,10 +56,10 @@
       -if boss? and @project.status == 8 and post.class.name.deconstantize == "Concept"
         |
         %span.text-success=t('show.votes')
-        =post.post_aspects.first.final_votings.by_dispost(post.dispost).size
+        =post.final_votings.size
         |
         %span.text-success=t('show.all_from_post')
-        =post.post_aspects.first.final_votings.by_dispost(post.dispost).uniq_user.size
+        =post.final_votings.uniq_user.size
         |
         %span.text-info=t('show.votes_users')
         =@vote_all

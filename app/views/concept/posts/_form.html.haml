@@ -468,7 +468,7 @@
         %br
         %br
         %actions.pull-right#form_save
-          = f.submit t('form.save'),  class: 'btn btn-warning btn-lg', id: 'send_post_concept',
-              'data-loading-text' => t('form.save_load'), :onclick => "$(this).button('loading');", style: 'font-weight:800;'
-
+          -#= f.submit t('form.save'),  class: 'btn btn-warning btn-lg', id: 'send_post_concept',
+          -#    'data-loading-text' => t('form.save_load'), :onclick => "$(this).button('loading');", style: 'font-weight:800;'
+          = f.submit t('form.save'),  class: 'btn btn-warning btn-lg', id: 'send_post_concept', style: 'font-weight:800;'
 #render_success_concept

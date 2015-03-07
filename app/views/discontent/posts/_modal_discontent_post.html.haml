@@ -2,7 +2,7 @@
   .popup.popup-top-rounded
     .popup-post-info.back-color{class: "#{@post.style == 1 ? 'pale-pink' : 'pale-blue'}"}
       .popup-header.popup-top-rounded
-        %h2.color.mass-red=@post.content
+        %h2.color.mass-red(style="line-height:30px;" )=@post.content
       .clearfix
       .popup-imperf-detailed{class: "#{@post.style == 1 ? 'imperf-pale-pink' : 'imperf-pale-blue'}"}
         -if @post.notes.present?
