@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title></title>
+    <!-- Description, Keywords and Author -->
+    <meta name="description" content="Your description">
+    <meta name="keywords" content="Your,Keywords">
+    <meta name="author" content="Ian">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Styles -->
+    <!-- Bootstrap CSS -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font awesome CSS -->
+    <link href="css/font-awesome.min.css" rel="stylesheet">
+    <!-- Magnific Popup -->
+    <link href="css/magnific-popup.css" rel="stylesheet">
+    <!-- Owl carousel -->
+    <link href="css/owl.carousel.css" rel="stylesheet">
+    <!-- Custom CSS. Type your CSS code in custom.css file -->
+    <link href="css/custom.css" rel="stylesheet">
+
+</head>
+
+<body>
+<div class="outer white_theme">
+
+    <!-- Top bar starts -->
+    <header class="navbar top_bar">
+        <div class="container">
+
+            <div class="navbar-header">
+                <a href="main.html" class="navbar-brand"><img src="img/logo1.png"></a>
+            </div>
+
+            <ul class="nav navbar-nav main_menu">
+                <li><a href="first-stage.html">Процедура</a></li>
+                <li class="active"><a href="cabinet-stage1.html">Кабинет</a></li>
+                <li><a href="#">Рефлексия</a></li>
+                <li><a href="#" class="has_circle">Новости<span class="top-circle">25</span></a></li>
+            </ul>
+
+            <div class="navbar-right text-right user_block font_grey">
+                <a href="#"><img src="img/book-icon.png" class="tooltip1_5" data-toggle="tooltip" id="tooltip1_5" data-trigger="none" data-placement="bottom" title="Открыть базу знаний"></a><span class="auth-divider"> |
+                <i class="fa fa-exclamation-triangle font_lighter_grey"></i><span class="auth-divider"> |</span>
+                <a href="#" class="font_grey bold"><i class="fa fa-globe font_lighter_grey"></i>
+                    <small><i class="fa fa-angle-down "></i></small>
+                </a>
+                <ul class="dropdown-menu dropdown-mini" role="menu">
+                </ul>
+                <span class="auth-divider">|</span>
+                <span class="badge grey">500</span>
+                <a href="#" class="font_grey bold">
+                    <small>Лиза Школьник <i class="fa fa-angle-down "></i></small>
+                </a>
+            </div>
+
+        </div>
+    </header>
+    <!-- Top Bar ends -->
+
+
+    <!-- Main Block starts -->
+    <div class="main-block cabinet">
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-3 cabinet-left-col">
+                    <span class="stage-label">Стадия 2</span>
+                </div>
+                <div class="col-xs-9 cabinet-right-col">
+                    <div class="tab-content">
+                        <div class="tab-pane fade in active" id="tab-1">
+                            <div class="cabinet-tab-heading">
+                                <h5>Форма добавления несовершенства</h5>
+                            </div>
+
+                            <div class="divider35"></div>
+                            <form class="cabinet-aspect-form">
+
+                                <div class="form-group">
+                                    <h4><label class="label label-default color-white">Что</label></h4>
+                                    <label for="aspectField1">Что вас не устраивает</label>
+                                    <textarea class="form-control" id="aspectField1"
+                                              placeholder="Отрицательное действие, явление,установление, черта"
+                                              type="text"></textarea>
+
+                                    <h6>Пример: пчелы тратят много времени на перелеты до лучших источников нектара</h6>
+                                </div>
+                                <div class="divider250"></div>
+                                <div class="form-group">
+                                    <h4><label class="label label-default">Когда</label></h4>
+                                    <label for="aspectField2">Когда это происходит</label>
+                                    <input class="form-control" id="aspectField2"
+                                           placeholder="Во время какого события, мероприятия, процесса, ситуации "
+                                           type="text">
+
+                                    <h6>Пример: при сборе нектара</h6>
+                                </div>
+                                <div class="divider10"></div>
+                                <div class="form-group">
+                                    <h4><label class="label label-default">Где</label></h4>
+                                    <label for="aspectField3">Где это происходит</label>
+                                    <input class="form-control" id="aspectField3"
+                                           placeholder="Место, организация, общеность в которой это происходит"
+                                           type="text">
+
+                                    <h6>Пример: На лужайках, отдаленных от выского дуба</h6>
+                                </div>
+                                <div class="divider10"></div>
+                                <div class="form-group">
+                                    <h4><label class="label label-default">Аспект</label></h4>
+                                    <label for="aspectField4">К какому аспекту относится несовершенство?</label>
+
+                                    <div class="row">
+                                        <div class="col-md-5">
+                                            <select id="aspectField4" class="form-control">
+                                                <option>Выберите аспект</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <h5><i class="fa fa-stop colorT2"></i>Взаимоотношения
+                                        четвероногих и пчел</h5>
+                                </div>
+                                <div class="divider10"></div>
+                                <div class="form-group">
+                                    <h4><label class="label label-default">Тип</label></h4>
+                                    <label>Выберите тип несовершенства</label>
+                                    <br>
+                                    <label class="radio-inline">
+                                        <input type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1">
+                                        Имеющиеся недостатки
+                                    </label>
+                                    <label class="radio-inline">
+                                        <input type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2">
+                                        Отстутствующие достоинства
+                                    </label>
+
+                                </div>
+                                </br>
+                                <button type="submit" class="btn btn-danger pull-right">Сохранить</button>
+
+
+                            </form>
+                        </div>
+                        <div class="tab-pane fade in" id="tab-2"></div>
+                        <div class="tab-pane fade in" id="tab-3"></div>
+                        <div class="tab-pane fade in" id="tab-4"></div>
+                        <div class="tab-pane fade in" id="tab-5"></div>
+                        <div class="tab-pane fade in" id="tab-6"></div>
+                        <div class="tab-pane fade in" id="tab-7"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Main Block ends -->
+
+
+</div>
+
+<!-- Outer Ends -->
+
+<!-- Javascript files -->
+<!-- jQuery -->
+<script src="js/jquery.js"></script>
+<!-- Bootstrap JS -->
+<script src="js/bootstrap.min.js"></script>
+<!-- Magnific Popup -->
+<script src="js/jquery.magnific-popup.min.js"></script>
+<!-- Owl carousel -->
+<script src="js/owl.carousel.min.js"></script>
+<!-- Respond JS for IE8 -->
+<script src="js/respond.min.js"></script>
+<!-- HTML5 Support for IE -->
+<script src="js/html5shiv.js"></script>
+
+<!-- Javascript for this page -->
+<script type="text/javascript">
+    $('.cabinet-aspect-form-checkb input').click(function () {
+        var me = $(this);
+        var attrname = me.attr('name');
+        $("input[name='" + attrname + "']").removeClass('active-radio');
+        me.addClass('active-radio');
+    });
+    $('.cabinet-tabs-subblock-2ndlev-li a').click(function () {
+        if (!$(this).hasClass('active-2ndlev-li')) {
+            $('.cabinet-tabs-subblock-2ndlev-li a').each(function () {
+                $(this).removeClass('active-2ndlev-li');
+            });
+            $(this).addClass('active-2ndlev-li');
+        }
+        ;
+    });
+    $('.cabinet-tabs .cabinet-tabs-subblock>li>a').click(function () {
+        $('.cabinet-tabs-subblock-2ndlev-li a').each(function () {
+            $(this).removeClass('active-2ndlev-li');
+        });
+    });
+</script>
+<!-- Custom JS. Type your JS code in custom.js file -->
+<script src="js/custom.js"></script>
+</body>
+</html>

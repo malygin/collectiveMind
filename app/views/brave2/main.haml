@@ -1,0 +1,126 @@
+!!!
+%html
+  %head
+    %meta{:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
+    %meta{:charset => "utf-8"}/
+    %title
+    / Description, Keywords and Author
+    %meta{:content => "Your description", :name => "description"}/
+    %meta{:content => "Your,Keywords", :name => "keywords"}/
+    %meta{:content => "Ian", :name => "author"}/
+    %meta{:content => "width=device-width, initial-scale=1.0", :name => "viewport"}/
+    / Styles
+    / Bootstrap CSS
+    %link{:href => "css/bootstrap.min.css", :rel => "stylesheet"}/
+    / Font awesome CSS
+    %link{:href => "css/font-awesome.min.css", :rel => "stylesheet"}/
+    / Magnific Popup
+    %link{:href => "css/magnific-popup.css", :rel => "stylesheet"}/
+    / Owl carousel
+    %link{:href => "css/owl.carousel.css", :rel => "stylesheet"}/
+    / Custom CSS. Type your CSS code in custom.css file
+    %link{:href => "css/custom.css", :rel => "stylesheet"}/
+  %body
+    .auth-wrapper
+      .container
+        .row
+          .col-md-4.col-md-offset-4.col-sm-4.col-sm-offset-4.col-lg-4.col-lg-offset-4.text-center
+            .divider50
+            %h5.main-auth-heading.text-left
+              %span#main-auth-heading-word1 rational
+              %span#main-auth-heading-word2 decision
+              %span#main-auth-heading-word3 support
+              %span#main-auth-heading-word4 system
+            .divider35
+            .auth-logo
+            .divider35
+            %form#auth-form1.form-horizontal.auth-form{:role => "form"}
+              %input{:name => "email", :placeholder => "Email", :type => "email"}/
+              %input{:name => "psswrd", :placeholder => "Пароль", :type => "password"}/
+              %button.btn.btn-lg.btn-block.btn-danger.auth-main{:type => "submit"} Войти
+            .divider10
+            .auth-bottom-links-main
+              %a.pull-left{:href => "#"} Забыли пароль?
+              %span.auth-divider |
+              %a.pull-right{:href => "#"} Зарегистрироваться
+            .divider35
+            %strong
+              Для обратной связи: massdecision@gmail.com
+          .col-md-4.col-sm-4.col-lg-4.lang.text-center
+            .divider50
+            %a.active{:href => "#"} Рус
+            %span.auth-divider |
+            %a{:href => "#"} Eng
+    .divider35
+    .auth-bottom-wrapper
+      .container
+        .row
+          .col-md-8.col-md-offset-2
+            %ul.list-inline.text-center
+              %li.active
+                %a#home-tab{"aria-controls" => "home", "aria-expanded" => "true", "data-toggle" => "tab", :href => "#home", :role => "tab"} Добро пожаловать
+              %li
+                %span.auth-divider |
+              %li
+                %a#profile-tab{"aria-controls" => "home", "aria-expanded" => "true", "data-toggle" => "tab", :href => "#profile", :role => "tab"} О технологии
+            .divider35
+            #myTabContent.tab-content
+              #home.tab-pane.fade.in.active{"aria-labelledby" => "home-tab", :role => "tabpanel"}
+                %p
+                  Добро пожаловать на сайт MASSDECISION™, уникальной технологии принятия рациональных решений!
+                .divider10
+                %p
+                  Наукой давно доказано, что люди склонны к нерациональному мышлению и это мешает им
+                  вырабатывать качественные решения. Между тем качественное решение — не результат озарения и
+                  не счастливая случайность. Решение — это продукт, и его качество напрямую зависит от
+                  качества технологии его изготовления.
+                  Именно такой высококачественной технологией является MASSDECISION™. Основа ее эффективности
+                  — в выверенном алгоритме, который ведет пользователей по стадиям процесса выработки решения
+                  и не дает отклониться от курса рациональности.
+                .divider10
+                %p
+                  Техники и инструменты MASSDECISION™ можно использовать индивидуально, но ярче всего
+                  технология
+                  раскрывается в различных социальных структурах, компаниях и организациях. MASSDECISION™ —
+                  интернет-технология, и это дает возможность применять ее в коллективах, рассредоточенных по
+                  разным городам и странам. Ключевая особенность MASSDECISION™ — прозрачный и демократичный
+                  процесс.
+                .divider10
+                %p
+                  Качественное решение вырабатывается сообща, постепенно обретая форму в ходе обсуждений и
+                  голосований,
+                  и в дальнейшем эффективно реализуется именно теми, кто его вырабатывал. Качественное решение
+                  — ключ к успеху в бизнесе и в жизни, а технология MASSDECISION™ — это ваш ключ к
+                  качественному решению!
+              #profile.tab-pane.fade{"aria-labelledby" => "profile-tab", :role => "tabpanel"}
+                %p
+                  Технология MASSDECISION™ родилась в Иерусалиме, столице древней страны и юного государства,
+                  которое
+                  уже не один десяток лет занимает позиции мирового интеллектуального и технологического
+                  лидера.
+                  Ее автор — уроженец России профессор Олег Савельзон. Математик по образованию, он уже
+                  четверть века
+                  профессионально занимается технологиями рациональных процедур принятия решений.
+                  В инновационную технологию MASSDECISION™ вошли самые передовые методы и техники,
+                  использующиеся
+                  в области психологии принятия решений, а также оригинальные авторские разработки,
+                  многократно испытанные на практике. Руководитель и инвестор проекта — Ральф Вайнтруб,
+                  владелец международного холдинга INVAR, в работе которого давно и успешно используется
+                  технология MASSDECISION™.
+    / Outer Ends
+    / Javascript files
+    / jQuery
+    %script{:src => "js/jquery.js"}
+    / Bootstrap JS
+    %script{:src => "js/bootstrap.min.js"}
+    / Magnific Popup
+    %script{:src => "js/jquery.magnific-popup.min.js"}
+    / Owl carousel
+    %script{:src => "js/owl.carousel.min.js"}
+    / Respond JS for IE8
+    %script{:src => "js/respond.min.js"}
+    / HTML5 Support for IE
+    %script{:src => "js/html5shiv.js"}
+    / Javascript for this page
+    / Custom JS. Type your JS code in custom.js file
+    %script{:src => "js/custom.js"}

@@ -1,0 +1,131 @@
+!!!
+%html
+  %head
+    %meta{:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
+    %meta{:charset => "utf-8"}/
+    %title
+    / Description, Keywords and Author
+    %meta{:content => "Your description", :name => "description"}/
+    %meta{:content => "Your,Keywords", :name => "keywords"}/
+    %meta{:content => "Ian", :name => "author"}/
+    %meta{:content => "width=device-width, initial-scale=1.0", :name => "viewport"}/
+    / Styles
+    / Bootstrap CSS
+    %link{:href => "css/bootstrap.min.css", :rel => "stylesheet"}/
+    / Font awesome CSS
+    %link{:href => "css/font-awesome.min.css", :rel => "stylesheet"}/
+    / Magnific Popup
+    %link{:href => "css/magnific-popup.css", :rel => "stylesheet"}/
+    / Owl carousel
+    %link{:href => "css/owl.carousel.css", :rel => "stylesheet"}/
+    / Custom CSS. Type your CSS code in custom.css file
+    %link{:href => "css/custom.css", :rel => "stylesheet"}/
+  %body
+    .outer.white_theme
+      / Top bar starts
+      %header.navbar.top_bar
+        .container
+          .navbar-header
+            %a.navbar-brand{:href => "main.html"}
+              %img{:src => "img/logo1.png"}/
+          %ul.nav.navbar-nav.main_menu
+            %li
+              %a{:href => "first-stage.html"} Процедура
+            %li
+              %a{:href => "cabinet-stage1.html"} Кабинет
+            %li
+              %a{:href => "#"} Рефлексия
+            %li
+              %a.has_circle{:href => "#"}
+                Новости
+                %span.top-circle 25
+          .navbar-right.text-right.user_block.font_grey
+            %a{:href => "#"}
+              %img#tooltip1_5.tooltip1_5{"data-placement" => "bottom", "data-toggle" => "tooltip", "data-trigger" => "none", :src => "img/book-icon.png", :title => "Открыть базу знаний"}/
+            %span.auth-divider
+              |
+              %i.fa.fa-exclamation-triangle.font_lighter_grey
+              %span.auth-divider |
+              %a.font_grey.bold{:href => "#"}
+                %i.fa.fa-globe.font_lighter_grey
+                %small
+                  %i.fa.fa-angle-down
+              %ul.dropdown-menu.dropdown-mini{:role => "menu"}
+              %span.auth-divider |
+              %span.badge.grey 500
+              %a.font_grey.bold{:href => "#"}
+                %small
+                  Лиза Школьник
+                  %i.fa.fa-angle-down
+      / Top Bar ends
+      / Main Block starts
+      .cabinet
+        .container
+          .col-md-4.col-md-offset-4.text-center
+            .profile
+              .profile_icon.img-circle
+                .divider10
+                %img{:src => "img/user.png"}/
+                .divider10
+                %a#profile-tab{"aria-controls" => "profile", "aria-expanded" => "true", "data-toggle" => "tab", :href => "#profile", :role => "tab"}
+                  %button.btn.btn-xs.btn-danger Изменить
+              .divider10
+              %h4 Rachel
+              #profile.tab-pane.fade{"aria-labelledby" => "profile-tab", :role => "tabpanel"}
+                %h5 Не состоит ни в одной группе
+                %form.form.form-horizontal
+                  .form-group
+                    %input.form-control{:placeholder => "Имя", :type => "text"}/
+                  .form-group
+                    %input.form-control{:placeholder => "Фамилия", :type => "text"}/
+                  .form-group
+                    %input.form-control{:placeholder => "Email", :type => "text"}/
+                  .form-group
+                    %input.form-control{:placeholder => "Skype", :type => "text"}/
+                  .form-group
+                    %input.form-control{:placeholder => "Телефон", :type => "text"}/
+                  .form-group
+                    .checkbox
+                      %label
+                        %input{:type => "checkbox"}/
+                        Получать автоматические уведомления
+                  %button.btn.btn-danger Сохранить
+      / Main Block ends
+    / Outer Ends
+    / Javascript files
+    / jQuery
+    %script{:src => "js/jquery.js"}
+    / Bootstrap JS
+    %script{:src => "js/bootstrap.min.js"}
+    / Magnific Popup
+    %script{:src => "js/jquery.magnific-popup.min.js"}
+    / Owl carousel
+    %script{:src => "js/owl.carousel.min.js"}
+    / Respond JS for IE8
+    %script{:src => "js/respond.min.js"}
+    / HTML5 Support for IE
+    %script{:src => "js/html5shiv.js"}
+    / Javascript for this page
+    :javascript
+      $('.cabinet-aspect-form-checkb input').click(function () {
+          var me = $(this);
+          var attrname = me.attr('name');
+          $("input[name='" + attrname + "']").removeClass('active-radio');
+          me.addClass('active-radio');
+      });
+      $('.cabinet-tabs-subblock-2ndlev-li a').click(function () {
+          if (!$(this).hasClass('active-2ndlev-li')) {
+              $('.cabinet-tabs-subblock-2ndlev-li a').each(function () {
+                  $(this).removeClass('active-2ndlev-li');
+              });
+              $(this).addClass('active-2ndlev-li');
+          }
+          ;
+      });
+      $('.cabinet-tabs .cabinet-tabs-subblock>li>a').click(function () {
+          $('.cabinet-tabs-subblock-2ndlev-li a').each(function () {
+              $(this).removeClass('active-2ndlev-li');
+          });
+      });
+    / Custom JS. Type your JS code in custom.js file
+    %script{:src => "js/custom.js"}

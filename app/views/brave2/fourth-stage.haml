@@ -1,0 +1,1318 @@
+!!!
+%html
+  %head
+    %meta{:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
+    %meta{:charset => "utf-8"}/
+    %title
+    %meta{:content => "width=device-width, initial-scale=1.0", :name => "viewport"}/
+    / Styles
+    / Bootstrap CSS
+    %link{:href => "css/bootstrap.min.css", :rel => "stylesheet"}/
+    / Font awesome CSS
+    %link{:href => "css/font-awesome.min.css", :rel => "stylesheet"}/
+    / Custom CSS. Type your CSS code in custom.css file
+    %link{:href => "css/magnific-popup.css", :rel => "stylesheet"}/
+    %link{:href => "css/custom.css", :rel => "stylesheet"}/
+    %link{:href => "css/custom-post.css", :rel => "stylesheet"}/
+  %body
+    .outer.stage4_theme
+      / Top bar starts
+      %header.navbar.top_bar
+        .container
+          .navbar-header
+            %a.navbar-brand{:href => "main.html"}
+              %img{:src => "img/logo1.png"}/
+          %ul.nav.navbar-nav.main_menu
+            %li.active
+              %a{:href => "first-stage.html"} Процедура
+            %li
+              %a{:href => "cabinet-stage1.html"} Кабинет
+            %li
+              %a{:href => "#"} Рефлексия
+            %li
+              %a.has_circle{:href => "#"}
+                Новости
+                %span.top-circle 25
+          .navbar-right.text-right.user_block.font_grey
+            %a{:href => "#"}
+              %img#tooltip1_5.tooltip1_5{"data-placement" => "bottom", "data-toggle" => "tooltip", "data-trigger" => "none", :src => "img/book-icon.png", :title => "Открыть базу знаний"}/
+            %span.auth-divider
+              |
+              %i.fa.fa-exclamation-triangle.font_lighter_grey
+              %span.auth-divider |
+              %a.font_grey.bold{:href => "#"}
+                %i.fa.fa-globe.font_lighter_grey
+                %small
+                  %i.fa.fa-angle-down
+              %ul.dropdown-menu.dropdown-mini{:role => "menu"}
+              %span.auth-divider |
+              %span.badge.grey 500
+              %a.font_grey.bold{:href => "#"}
+                %small
+                  Лиза Школьник
+                  %i.fa.fa-angle-down
+      / Top Bar ends
+      .subhead
+        .container
+          %h4.font_white Решение конфликта, возникшего из-за меда
+        %button#tooltip_button_4.btn.btn-tooltip{:type => "button", :value => "Show"}
+          %i.fa.fa-lightbulb-o
+          Открыть подсказки
+        %button#close_tooltip_button_4.btn.btn-tooltip-close{:type => "button", :value => "Destroy"}
+          %i.fa.fa-lightbulb-o
+          Закрыть подсказки
+      .container
+        .row
+          .col-md-8.col_padding_right_3
+            .border_grey.rounded_3.stages_block
+              .btn-toolbar{:role => "toolbar"}
+                .btn-group{:role => "group"}
+                  %a.btn.back_color_stage1{:href => "first-stage.html", :role => "button"} 1
+                  %a.btn.back_color_stage2{:href => "second-stage.html", :role => "button"} 2
+                  %a.btn.back_color_stage3{:href => "third-stage.html", :role => "button"} 3
+                .btn-group{:role => "group"}
+                  %a.btn.back_color_stage4{:href => "fourth-stage.html", :role => "button"} 4 СТАДИЯ: РАЗРАБОТКА ПРОЕКТОВ
+                .btn-group{:role => "group"}
+                  %a.btn.back_color_stage5{:href => "fifth-stage.html", :role => "button"} 5
+          .col-md-4.col_padding_left_3
+            .border_grey.rounded_3.help_icon
+            .border_grey.rounded_3.progress_block
+              .container
+                .row
+                  .col-xs-6.col-md-6.col_padding_right_3
+                    .row
+                      .col-xs-8.col-md-8.col_padding_3
+                        .knob_label.text-right.font_grey
+                          %small Ваш прогресс на стадии
+                      .col-xs-4.col-md-4.col_padding_3
+                        .progress-knob
+                          .knob-content
+                            .knob-item
+                              %input#knob-1.knob{"data-anglearc" => "360", "data-angleoffset" => "70", "data-bgcolor" => "#f4f4f4", "data-end" => "90", "data-fgcolor" => "#80bcc4", "data-font" => "'Open Sans', sans-serif", "data-thickness" => ".1", :value => "0"}/
+                  .col-xs-6.col-md-6.col_padding_left_3
+                    .row
+                      .col-xs-8.col-md-8.col_padding_3
+                        .knob_label.text-right.font_grey
+                          %small Прогресс других участников
+                      .col-xs-4.col-md-4.col_padding_3
+                        .progress-knob
+                          .knob-content
+                            .knob-item
+                              %input#knob-1.knob{"data-anglearc" => "360", "data-angleoffset" => "70", "data-bgcolor" => "#f4f4f4", "data-end" => "90", "data-fgcolor" => "#80bcc4", "data-font" => "'Open Sans', sans-serif", "data-thickness" => ".1", :value => "0"}/
+      / Main Block starts
+      .main-block
+        .container
+          .stage-info-sort-block
+            .row
+              %br/
+              .col-md-7
+                %span.stage-heading
+                  Проекты (5)
+                  %i.fa.fa-question-circle
+              .col-md-5
+                .sort-block.pull-right
+                  %span.sort-label Сортировать:
+                  %span.sort-date
+                  %span.sort-rate
+                  %a{:href => "cabinet-stage4.html"}
+                    %button.btn.add-button
+                      %span> +
+                      Проект
+          .stage-post-block
+            .row
+              .col-md-6
+                #tooltip4_1.post.open-popup-link.tooltip4_1{"data-placement" => "top", "data-toggle" => "tooltip", "data-trigger" => "none", :href => "#popup-project1", :title => "Проект – это план действий по воплощению идей, поданных на прошлой стадии."}
+                  .post-header.white
+                    .row
+                      .col-md-9.col-xs-9
+                        %h5.font-S4.bold Заключение мира
+                      .col-md-1.col-xs-1
+                        %h4.pull-right
+                          %i.fa.fa-exclamation-triangle
+                      .col-md-2.col-xs-2
+                        %h5.time 31.01.2015
+                  .post-body
+                    .media
+                      .media-left.text-center.gradient.post-poster
+                        %img.img-circle.img50{:src => "img/ava-rabb.jpg"}/
+                        %p.poster-name Кролик
+                      .media-body.white-gray
+                        .post-text
+                          %p В проекте описывается механизм урегулирования конфликтной ситуации.
+                  .post-bottom.white
+                    .row
+                      .col-md-12.col-xs-12
+                        .text-right.small_icons
+                          %span.popup2
+                            5
+                            %i.fa.fa-comment-o
+                          %span.popup2
+                            9
+                            %i.fa.fa-thumbs-o-up
+                          %span.popup2
+                            1
+                            %i.fa.fa-thumbs-o-down
+              .col-md-6
+                .post.open-popup-link{:href => "#popup-project2"}
+                  .post-header.white
+                    .row
+                      .col-md-9.col-xs-9
+                        %h5.font-S4.bold Цветник у Высокого дуба
+                      .col-md-1.col-xs-1
+                        %h4.pull-right
+                          %i.fa.fa-exclamation-triangle
+                      .col-md-2.col-xs-2
+                        %h5.time 20.01.2015
+                  .post-body
+                    .media
+                      .media-left.text-center.gradient.post-poster
+                        %img.img-circle{:src => "img/ava-pyat.jpg"}/
+                        %p.poster-name Пятачок
+                      .media-body.white-gray
+                        .post-text
+                          %p
+                            Четвероногие наконец-то нашли способ заинтересовать пчел. Высадив
+                            медоносные растения прямо у Высокого дуба, Винни и его друзья добьются
+                            расположения пчел...
+                  .post-bottom.white
+                    .row
+                      .col-md-12.col-xs-12
+                        .text-right.small_icons
+                          %span.popup2
+                            5
+                            %i.fa.fa-comment-o
+                          %span.popup2
+                            9
+                            %i.fa.fa-thumbs-o-up
+                          %span.popup2
+                            1
+                            %i.fa.fa-thumbs-o-down
+              .col-md-6
+                .post.open-popup-link{:href => "#popup-project3"}
+                  .post-header.white
+                    .row
+                      .col-md-9.col-xs-9
+                        %h5.font-S4.bold Проверенный способ добыть мед
+                      .col-md-1.col-xs-1
+                        %h4.pull-right
+                          %i.fa.fa-exclamation-triangle
+                      .col-md-2.col-xs-2
+                        %h5.time 17.01.2015
+                  .post-body
+                    .media
+                      .media-left.text-center.gradient.post-poster
+                        %img.img-circle.img50{:src => "img/ava-vinnie.jpg"}/
+                        %p.poster-name Винни-Пух
+                      .media-body.white-gray
+                        .post-text
+                          %p
+                            Данный проект предлагает при помощи минимума усилий заполучить мед.
+                            Методы, используемые в проекте, прошли проверку временем и доказали свою
+                            эффективность.
+                            В результате мы просто заберем мед у пчел...
+                  .post-bottom.white
+                    .row
+                      .col-md-12.col-xs-12
+                        .text-right.small_icons
+                          %span.popup2
+                            5
+                            %i.fa.fa-comment-o
+                          %span.popup2
+                            9
+                            %i.fa.fa-thumbs-o-up
+                          %span.popup2
+                            1
+                            %i.fa.fa-thumbs-o-down
+              .col-md-6
+                .post.open-popup-link{:href => "#popup-project4"}
+                  .post-header.white
+                    .row
+                      .col-md-9.col-xs-9
+                        %h5.font-S4.bold Лучшая методика работы с пчелами
+                      .col-md-1.col-xs-1
+                        %h4.pull-right
+                          %i.fa.fa-exclamation-triangle
+                      .col-md-2.col-xs-2
+                        %h5.time 01.02.2015
+                  .post-body
+                    .media
+                      .media-left.text-center.gradient.post-poster
+                        %img.img-circle.img50{:src => "img/ava-ia.jpg"}/
+                        %p.poster-name Ослик
+                      .media-body.white-gray
+                        .post-text
+                          %p
+                            Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo
+                            ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et...
+                  .post-bottom.white
+                    .row
+                      .col-md-12.col-xs-12
+                        .text-right.small_icons
+                          %span.popup2
+                            5
+                            %i.fa.fa-comment-o
+                          %span.popup2
+                            9
+                            %i.fa.fa-thumbs-o-up
+                          %span.popup2
+                            1
+                            %i.fa.fa-thumbs-o-down
+              .col-md-6
+                .post.open-popup-link{:href => "#popup-project5"}
+                  .post-header.white
+                    .row
+                      .col-md-9.col-xs-9
+                        %h5.font-S4.bold Снижение потребления меда
+                      .col-md-1.col-xs-1
+                        %h4.pull-right
+                          %i.fa.fa-exclamation-triangle
+                      .col-md-2.col-xs-2
+                        %h5.time 2.02.2015
+                  .post-body
+                    .media
+                      .media-left.text-center.gradient.post-poster
+                        %img.img-circle.img50{:src => "img/ava-rabb.jpg"}/
+                        %p.poster-name Кролик
+                      .media-body.white-gray
+                        .post-text
+                          %p
+                            Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo
+                            ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et...
+                  .post-bottom.white
+                    .row
+                      .col-md-12.col-xs-12
+                        .text-right.small_icons
+                          %span.popup2
+                            5
+                            %i.fa.fa-comment-o
+                          %span.popup2
+                            9
+                            %i.fa.fa-thumbs-o-up
+                          %span.popup2
+                            1
+                            %i.fa.fa-thumbs-o-down
+      / Main Block ends
+      #popup-project1.popup-window.popup-project.info-popup.mfp-hide
+        .popup.popup-top-rounded
+          .popup-post-info
+            .popup-header.popup-top-rounded
+              %h2.font_red Заключение мира
+            .clearfix
+            .row.info-block
+              .col-md-4.popup-post-block
+                %img{:src => "img/ava-rabb.jpg"}/
+                %span Кролик
+                .info-stripe
+                  %span.popup-date 31.01.2015
+                  %span.popup-comments
+                    +5
+                    %i.fa.fa-comment-o
+                  %span.popup-likes
+                    +9
+                    %i.fa.fa-thumbs-o-up
+                  %span.popup-dislikes
+                    +1
+                    %i.fa.fa-thumbs-o-down
+              .col-md-8.popup-right-tabs
+                .nav-tabs-one
+                  / Nav tabs
+                  %ul.nav.nav-tabs
+                    %li.active
+                      %a{"data-toggle" => "tab", :href => "#tab-1"} Описание проекта
+                    %li
+                      %a{"data-toggle" => "tab", :href => "#tab-2"} Нововведения и план мероприятий
+                / Tab content
+          .clearfix
+          .tab-content
+            #tab-1.tab-pane.fade.in.active.popup-bottom-rounded
+              .row
+                .col-md-6.description-left-col
+                  .description-block
+                    %span.description-title Коротко о проекте
+                    %p
+                      В проекте описывается механизм урегулирования конфликтной ситуации.
+                  .description-block
+                    %span.description-title Эссе по проекту. Пояснения и обоснования
+                    %p
+                      Причины, из-за которых возникла конфликтная ситуация, будут разрешены.
+                  .description-block
+                    %span.description-title Этапы проекта
+                    .stages-blocks
+                      .lined-heading
+                        %span.bold-stripe 01 февр. 2015 - 02 февр. 2015
+                        %span.normal-stripe Поиск компромиссов
+                      .lined-heading
+                        %span.bold-stripe 03 февр. 2015 - 08 февр. 2015
+                        %span.normal-stripe Подготовка и подбор участников
+                .col-md-6.imperfect-text-comments
+                  .imperfect-text-comments-post-block
+                    .post-interfaces
+                      .post-interfaces-buttons
+                        %button{:type => "button"}
+                          %img{:src => "img/icon-thumb-up.png"}/
+                        %button{:type => "button"}
+                          %img{:src => "img/icon-thumb-down.png"}/
+                        %button{:type => "button"}
+                          %img{:src => "img/icon-share.png"}/
+                      %form.post-interfaces-add-comment
+                        %input{:placeholder => "Ваш комментарий", :type => "text"}/
+                        %button.btn{:type => "button"}
+                          %img{:src => "img/comment-button.png"}/
+                  .imperfect-text-comments-post-block
+                    .poster-line
+                      %img.img-circle{:src => "img/ava-ia.jpg"}/
+                      %span.poster-name Ослик
+                      %span.comment-time 16:30
+                    %p
+                      Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget
+                      dolor. Aenean massa. Cum sociis natoque penatibus et
+                  .imperfect-text-comments-post-block
+                    .poster-line
+                      %img.img-circle{:src => "img/ava-rabb.jpg"}/
+                      %span.poster-name Кролик
+                      %span.comment-time 17:01
+                    %p
+                      Проснувшись однажды утром после беспокойного сна, Грегор Замза обнаружил, что он у себя
+                      в постели превратился в страшное насекомое. Лежа
+                  .imperfect-text-comments-post-block
+                    .poster-line
+                      %img.img-circle{:src => "img/ava-vinnie.jpg"}/
+                      %span.poster-name Винни-Пух
+                      %span.comment-time 19:28
+                    %p
+                      Мест для прогулки во всем лесу полно, нам не нравится, что ты все время держишь нас в
+                      напряжении своим присутствием.
+                  .imperfect-text-comments-post-block
+                    .poster-line
+                      %img.img-circle{:src => "img/ava-rabb.jpg"}/
+                      %span.poster-name Кролик
+                      %span.comment-time 19:40
+                    %p
+                      Душа моя озарена неземной радостью, как эти чудесные весенние утра, которыми я
+                      наслаждаюсь от всего сердца. Я совсем один и
+                  .imperfect-text-comments-post-block
+                    .poster-line
+                      %img.img-circle{:src => "img/ava-vinnie.jpg"}/
+                      %span.poster-name Винни-Пух
+                      %span.comment-time 20:15
+                    %p
+                      Проснувшись однажды утром после беспокойного сна, Грегор Замза обнаружил, что он у себя
+                      в постели превратился в страшное насекомое. Лежа
+                  .imperfect-text-comments-post-block
+                    .poster-line
+                      %img.img-circle{:src => "img/ava-ia.jpg"}/
+                      %span.poster-name Ослик
+                      %span.comment-time 20:30
+                    %p
+                      Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget
+                      dolor. Aenean massa. Cum sociis natoque penatibus et
+            #tab-2.tab-pane.fade.popup-bottom-rounded
+              .container.timeline-cont
+                .vertical-timeline
+                  .row
+                    .col-md-12.col-sm-12
+                      / time line col
+                      .v-timeline-col
+                        .entry-top-badge.timel-back-b1f0c1
+                          %span.top-badge-entry-stage 1 этап
+                          %span.top-badge-entry-date 01 февр. 2015 - 02 февр. 2015
+                          %span.top-badge-entry-theme Поиск компромиссов
+                        .row
+                          .col-md-6.col-sm-6.left-col-timeline.timel-line-b1f0c1
+                            / time line content entry
+                            .entry
+                              / Time line entry head
+                              .entry-head.timel-back-8cf0ba
+                                Мирный договор
+                              / Time line entry content
+                              .entry-content
+                                %p
+                                  Появится специально оформленное соглашение, в котором
+                                  четвероногие и пчелы должны будут сосуществовать в мире и
+                                  согласии. За нарушение договора будут предусматриваться
+                                  строгие санкции к стороне, нарушившей условия договора.
+                                %h5 Общее собрание
+                                %p
+                                  На собрании каждый получит право голоса, а итоговое решение
+                                  примет Сова. Будут определены дальнейшие действия для
+                                  участников спора.
+                                %h5 Составление мирного договора Совой
+                                %p
+                                  Сова оформит мирный договор и учтет при этом пожелания пчел и
+                                  четвероногих.
+                                .entry-descript-tags
+                                  %span.timel-back-8cf0ba Место для проведения собрания
+                                  %span.timel-back-8cf0ba Пригласительные
+                                  %span.timel-back-8cf0ba Бумага и ручка
+                          .col-md-6.col-sm-6.right-col-timeline.timel-line-b1f0c1
+                            .entry-dates-block
+                              .badge-wrap
+                                .badge-arrow
+                                  %span.entry-icon.timel-back-b1f0c1
+                                  %span.badge-date 01 фев 2015
+                                  %span.badge-name Общее собрание
+                                .badge-tags
+                                  .badge-tag.timel-back-8cf0ba
+                                    Место для проведения собрания
+                                  .badge-tag.timel-back-8cf0ba
+                                    Пригласительные
+                              .badge-wrap
+                                .badge-arrow
+                                  %span.entry-icon.timel-back-b1f0c1
+                                  %span.badge-date 02 фев 2015
+                                  %span.badge-name Составление мирного договора Совой
+                                .badge-tags
+                                  .badge-tag.timel-back-b3fcb5
+                                    Бумага и ручка
+                              .badge-wrap
+                                .badge-arrow
+                                  %span.entry-icon.timel-back-b1f0c1
+                                  %span.badge-date 02 фев 2015
+                                  %span.badge-name Согласование договора с пчелами и четвероногими
+                        .entry-top-badge.timel-back-a0c7fe
+                          %span.top-badge-entry-stage 2 этап
+                          %span.top-badge-entry-date 03 февр. 2015 - 08 февр. 2015
+                          %span.top-badge-entry-theme Реализация требований обоими сторонами
+                        .row
+                          .col-md-6.col-sm-6.left-col-timeline.timel-line-a0c7fe
+                            / time line content entry
+                            .entry
+                              / Time line entry head
+                              .entry-head.timel-back-bce1fe
+                                Обучение четвероногих варке меда
+                              / Time line entry content
+                              .entry-content
+                                %p
+                                  Обучение пчелами четвероногих самостоятельному приготовлению
+                                  меда.
+                                %h5 Составление рецепта пчелами
+                                %p
+                                  Пчелы постараются составить рецепт очень вкусного меда,
+                                  который понравится четвероногим.
+                                %h5 Обучение четвероногих
+                                %p
+                                  Пчелы будут обучать четвероногих варить мед по их
+                                  рецепту.
+                                .entry-descript-tags
+                                  %span.timel-back-bce1fe Необходимые ингредиенты по рецепту
+                          .col-md-6.col-sm-6.right-col-timeline.timel-line-a0c7fe
+                            .entry-dates-block
+                              .badge-wrap
+                                .badge-arrow
+                                  %span.entry-icon.timel-back-a0c7fe
+                                  %span.badge-date 03 фев 2015
+                                  %span.badge-name Составление рецепта пчелами
+                              .badge-wrap
+                                .badge-arrow
+                                  %span.entry-icon.timel-back-a0c7fe
+                                  %span.badge-date 03 фев 2015 - 08 фев 2015
+                                  %span.badge-name Обучение четвероногих
+                                .badge-tags
+                                  .badge-tag.timel-back-bce1fe
+                                    Необходимые ингредиенты по рецепт
+      #popup-project2.popup-window.popup-project.info-popup.mfp-hide
+        .popup.popup-top-rounded
+          .popup-post-info
+            .popup-header.popup-top-rounded
+              %h2.font_red Цветник у Высокого дуба и соглашение о сотрудничестве
+            .clearfix
+            .row.info-block
+              .col-md-4.popup-post-block
+                %img{:src => "img/ava-pyat.jpg"}/
+                %span Пятачок
+                .info-stripe
+                  %span.popup-date 20.01.2015
+                  %span.popup-comments
+                    +5
+                    %i.fa.fa-comment-o
+                  %span.popup-likes
+                    +9
+                    %i.fa.fa-thumbs-o-up
+                  %span.popup-dislikes
+                    +1
+                    %i.fa.fa-thumbs-o-down
+              .col-md-8.popup-right-tabs
+                .nav-tabs-one
+                  / Nav tabs
+                  %ul.nav.nav-tabs
+                    %li.active
+                      %a{"data-toggle" => "tab", :href => "#tab-1"} Описание проекта
+                    %li
+                      %a{"data-toggle" => "tab", :href => "#tab-2"} Нововведения и план мероприятий
+                / Tab content
+          .clearfix
+          .tab-content
+            #tab-1.tab-pane.fade.in.active.popup-bottom-rounded
+              .row
+                .col-md-6.description-left-col
+                  .description-block
+                    %span.description-title Коротко о проекте
+                    %p
+                      Четвероногие наконец-то нашли способ заинтересовать пчел. Высадив медоносные
+                      растения прямо у Высокого дуба, Винни и его друзья добьются расположения пчел. Ведь
+                      они жаловались именно на удаленность цветочных полей, до которых далеко лететь.
+                      Между пчелами и четвероногими будет заключено соглашение, по которому четвероногие
+                      получат долю в добыче меда. Пчелы в результате сохранят время и силы, затрачиваемые
+                      на добычу меда, и не будут подвергаться агрессии четвероногих.
+                  .description-block
+                    %span.description-title Эссе по проекту. Пояснения и обоснования
+                    %p
+                      Четвероногие ухаживают за цветником у Высокого дуба. Пчелы ежедневно добывают оттуда
+                      мед и отдают его часть четвероногим.
+                  .description-block
+                    %span.description-title Этапы проекта
+                    .stages-blocks
+                      .lined-heading
+                        %span.bold-stripe 24 янв 2015
+                        %span.normal-stripe Подготовительный этап
+                      .lined-heading
+                        %span.bold-stripe 25 янв 2015 - 26 янв 2015
+                        %span.normal-stripe Создание цветника
+                      .lined-heading
+                        %span.bold-stripe 27 янв 2015 - 28 янв 2015
+                        %span.normal-stripe Запуск проекта
+                .col-md-6.imperfect-text-comments
+                  .imperfect-text-comments-post-block
+                    .post-interfaces
+                      .post-interfaces-buttons
+                        %button{:type => "button"}
+                          %img{:src => "img/icon-thumb-up.png"}/
+                        %button{:type => "button"}
+                          %img{:src => "img/icon-thumb-down.png"}/
+                        %button{:type => "button"}
+                          %img{:src => "img/icon-share.png"}/
+                      %form.post-interfaces-add-comment
+                        %input{:placeholder => "Ваш комментарий", :type => "text"}/
+                        %button.btn{:type => "button"}
+                          %img{:src => "img/comment-button.png"}/
+            #tab-2.tab-pane.fade.popup-bottom-rounded
+              .container.timeline-cont
+                .vertical-timeline
+                  .row
+                    .col-md-12.col-sm-12
+                      / time line col
+                      .v-timeline-col
+                        .entry-top-badge.timel-back-b1f0c1
+                          %span.top-badge-entry-stage 1 этап
+                          %span.top-badge-entry-date 24 янв 2015
+                          %span.top-badge-entry-theme Подготовительный этап
+                        .row
+                          .col-md-6.col-sm-6.left-col-timeline.timel-line-b1f0c1
+                            / time line content entry
+                            .entry
+                              / Time line entry head
+                              .entry-head.timel-back-8cf0ba
+                                Соглашение о сотрудничестве
+                              / Time line entry content
+                              .entry-content
+                                %p
+                                  Появится специально оформленное соглашение, в котором
+                                  четвероногие и пчелы должны будут сосуществовать в мире и
+                                  согласии. За нарушение договора будут предусматриваться
+                                  строгие санкции к стороне, нарушившей условия договора.
+                                %h5 Двухсторонняя встреча с целью выработки соглашения
+                                %p
+                                  Четвероногие и пчёлы встречаются в доме Совы, вырабатывают,
+                                  обсуждают и заключают соглашение.
+                                .entry-descript-tags
+                                  %span.timel-back-8cf0ba Приглашения для всех участников
+                                  %span.timel-back-8cf0ba Сова
+                          .col-md-6.col-sm-6.right-col-timeline.timel-line-b1f0c1
+                            .entry-dates-block
+                              .badge-wrap
+                                .badge-arrow
+                                  %span.entry-icon.timel-back-b1f0c1
+                                  %span.badge-date 24 янв 2015
+                                  %span.badge-name Двухсторонняя встреча с целью выработки соглашения
+                                .badge-tags
+                                  .badge-tag.timel-back-8cf0ba
+                                    Приглашения для всех участников
+                                  .badge-tag.timel-back-8cf0ba
+                                    Сова
+                        .entry-top-badge.timel-back-a0c7fe
+                          %span.top-badge-entry-stage 2 этап
+                          %span.top-badge-entry-date 25 янв. 2015 - 26 янв. 2015
+                          %span.top-badge-entry-theme Создание цветника
+                        .row
+                          .col-md-6.col-sm-6.left-col-timeline.timel-line-a0c7fe
+                            / time line content entry
+                            .entry
+                              / Time line entry head
+                              .entry-head.timel-back-bce1fe
+                                Обучение четвероногих варке меда
+                              / Time line entry content
+                              .entry-content
+                                %h5 Плантация медоносных растений
+                                %p
+                                  Возле дуба четвероногими будет подготовлена обширная
+                                  площадка, на которой они посадят, вырастят и станут
+                                  обихаживать лучшие медоносные растения
+                                %h5 Выбор сортов растений
+                                %p
+                                  Кролик и Сова, консультируясь с пчёлами, выбирают лучшие
+                                  сорта растений.
+                                %h5 Посадка растений
+                                %p
+                                  Четвероногие обрабатывают почву у Высокого дуба и сажают
+                                  выбранные сорта растений.
+                                .entry-descript-tags
+                                  %span.timel-back-bce1fe Энциклопедия
+                                .entry-descript-tags
+                                  %span.timel-back-bce1fe Многолетний опыт пчёл в добыче мёда
+                                .entry-descript-tags
+                                  %span.timel-back-bce1fe Садовый инвентарь
+                                .entry-descript-tags
+                                  %span.timel-back-bce1fe Четвероногие
+                          .col-md-6.col-sm-6.right-col-timeline.timel-line-a0c7fe
+                            .entry-dates-block
+                              .badge-wrap
+                                .badge-arrow
+                                  %span.entry-icon.timel-back-a0c7fe
+                                  %span.badge-date 25 янв 2015
+                                  %span.badge-name Выбор сортов растений
+                                .badge-tags
+                                  .badge-tag.timel-back-bce1fe
+                                    Энциклопедия
+                                  .badge-tag.timel-back-bce1fe
+                                    Многолетний опыт пчёл в добыче мёда
+                              .badge-wrap
+                                .badge-arrow
+                                  %span.entry-icon.timel-back-a0c7fe
+                                  %span.badge-date 26 янв 2015
+                                  %span.badge-name Посадка растений
+                                .badge-tags
+                                  .badge-tag.timel-back-bce1fe
+                                    Садовый инвентарь
+                                  .badge-tag.timel-back-bce1fe
+                                    Четвероногие
+                        .entry-top-badge.timel-back-8e8ac8
+                          %span.top-badge-entry-stage 3 этап
+                          %span.top-badge-entry-date 27 янв. 2015 - 28 янв. 2015
+                          %span.top-badge-entry-theme Запуск проекта
+                        .row
+                          .col-md-6.col-sm-6.left-col-timeline.timel-line-8e8ac8
+                            / time line content entry
+                            .entry
+                              / Time line entry head
+                              .entry-head.timel-back-8e8ac8
+                                Система использования плантации
+                              / Time line entry content
+                              .entry-content
+                                %p
+                                  Четвероногие ухаживают за растениями. Пчёлы прилетают на
+                                  плантацию, добывают мёд, которым потом делятся с
+                                  четвероногими.
+                                %h5 Первый полет
+                                %p
+                                  Пчёлы летят на плантацию, с минимальными усилиями добывают
+                                  большое количество мёда.
+                                %h5 Первый честно добытый мёд
+                                %p Винни и его друзья получают часть добытого пчёлами мёда.
+                          .col-md-6.col-sm-6.right-col-timeline.timel-line-8e8ac8
+                            .entry-dates-block
+                              .badge-wrap
+                                .badge-arrow
+                                  %span.entry-icon.timel-back-8e8ac8
+                                  %span.badge-date 27 янв. 2015 - 27 янв. 2015
+                                  %span.badge-name Первый полет
+                              .badge-wrap
+                                .badge-arrow
+                                  %span.entry-icon.timel-back-8e8ac8
+                                  %span.badge-date 28 янв. 2015 - 28 янв. 2015
+                                  %span.badge-name Первый честно добытый мёд
+      #popup-project3.popup-window.popup-project.info-popup.mfp-hide
+        .popup.popup-top-rounded
+          .popup-post-info
+            .popup-header.popup-top-rounded
+              %h2.font_red Проверенный способ добыть мед
+            .clearfix
+            .row.info-block
+              .col-md-4.popup-post-block
+                %img{:src => "img/ava-vinnie.jpg"}/
+                %span Винни Пух
+                .info-stripe
+                  %span.popup-date 17.01.2015
+                  %span.popup-comments
+                    +5
+                    %i.fa.fa-comment-o
+                  %span.popup-likes
+                    +9
+                    %i.fa.fa-thumbs-o-up
+                  %span.popup-dislikes
+                    +1
+                    %i.fa.fa-thumbs-o-down
+              .col-md-8.popup-right-tabs
+                .nav-tabs-one
+                  / Nav tabs
+                  %ul.nav.nav-tabs
+                    %li.active
+                      %a{"data-toggle" => "tab", :href => "#tab-1"} Описание проекта
+                    %li
+                      %a{"data-toggle" => "tab", :href => "#tab-2"} Нововведения и план мероприятий
+                / Tab content
+          .clearfix
+          .tab-content
+            #tab-1.tab-pane.fade.in.active.popup-bottom-rounded
+              .row
+                .col-md-6.description-left-col
+                  .description-block
+                    %span.description-title Коротко о проекте
+                    %p
+                      Четвероногие наконец-то нашли способ заинтересовать пчел. Высадив медоносные
+                      растения прямо у Высокого дуба, Винни и его друзья добьются расположения пчел. Ведь
+                      они жаловались именно на удаленность цветочных полей, до которых далеко лететь.
+                      Между пчелами и четвероногими будет заключено соглашение, по которому четвероногие
+                      получат долю в добыче меда. Пчелы в результате сохранят время и силы, затрачиваемые
+                      на добычу меда, и не будут подвергаться агрессии четвероногих.
+                  .description-block
+                    %span.description-title Эссе по проекту. Пояснения и обоснования
+                    %p
+                      Четвероногие ухаживают за цветником у Высокого дуба. Пчелы ежедневно добывают оттуда
+                      мед и отдают его часть четвероногим.
+                  .description-block
+                    %span.description-title Этапы проекта
+                    .stages-blocks
+                      .lined-heading
+                        %span.bold-stripe 24 янв 2015
+                        %span.normal-stripe Подготовительный этап
+                      .lined-heading
+                        %span.bold-stripe 25 янв 2015 - 26 янв 2015
+                        %span.normal-stripe Создание цветника
+                      .lined-heading
+                        %span.bold-stripe 27 янв 2015 - 28 янв 2015
+                        %span.normal-stripe Запуск проекта
+                .col-md-6.imperfect-text-comments
+                  .imperfect-text-comments-post-block
+                    .post-interfaces
+                      .post-interfaces-buttons
+                        %button{:type => "button"}
+                          %img{:src => "img/icon-thumb-up.png"}/
+                        %button{:type => "button"}
+                          %img{:src => "img/icon-thumb-down.png"}/
+                        %button{:type => "button"}
+                          %img{:src => "img/icon-share.png"}/
+                      %form.post-interfaces-add-comment
+                        %input{:placeholder => "Ваш комментарий", :type => "text"}/
+                        %button.btn{:type => "button"}
+                          %img{:src => "img/comment-button.png"}/
+            #tab-2.tab-pane.fade.popup-bottom-rounded
+              .container.timeline-cont
+                .vertical-timeline
+                  .row
+                    .col-md-12.col-sm-12
+                      / time line col
+                      .v-timeline-col
+                        .entry-top-badge.timel-back-b1f0c1
+                          %span.top-badge-entry-stage 1 этап
+                          %span.top-badge-entry-date 24 янв 2015
+                          %span.top-badge-entry-theme Подготовительный этап
+                        .row
+                          .col-md-6.col-sm-6.left-col-timeline.timel-line-b1f0c1
+                            / time line content entry
+                            .entry
+                              / Time line entry head
+                              .entry-head.timel-back-8cf0ba
+                                Соглашение о сотрудничестве
+                              / Time line entry content
+                              .entry-content
+                                %p
+                                  Появится специально оформленное соглашение, в котором
+                                  четвероногие и пчелы должны будут сосуществовать в мире и
+                                  согласии. За нарушение договора будут предусматриваться
+                                  строгие санкции к стороне, нарушившей условия договора.
+                                %h5 Двухсторонняя встреча с целью выработки соглашения
+                                %p
+                                  Четвероногие и пчёлы встречаются в доме Совы, вырабатывают,
+                                  обсуждают и заключают соглашение.
+                                .entry-descript-tags
+                                  %span.timel-back-8cf0ba Приглашения для всех участников
+                                  %span.timel-back-8cf0ba Сова
+                          .col-md-6.col-sm-6.right-col-timeline.timel-line-b1f0c1
+                            .entry-dates-block
+                              .badge-wrap
+                                .badge-arrow
+                                  %span.entry-icon.timel-back-b1f0c1
+                                  %span.badge-date 24 янв 2015
+                                  %span.badge-name Двухсторонняя встреча с целью выработки соглашения
+                                .badge-tags
+                                  .badge-tag.timel-back-8cf0ba
+                                    Приглашения для всех участников
+                                  .badge-tag.timel-back-8cf0ba
+                                    Сова
+                        .entry-top-badge.timel-back-a0c7fe
+                          %span.top-badge-entry-stage 2 этап
+                          %span.top-badge-entry-date 25 янв. 2015 - 26 янв. 2015
+                          %span.top-badge-entry-theme Создание цветника
+                        .row
+                          .col-md-6.col-sm-6.left-col-timeline.timel-line-a0c7fe
+                            / time line content entry
+                            .entry
+                              / Time line entry head
+                              .entry-head.timel-back-bce1fe
+                                Обучение четвероногих варке меда
+                              / Time line entry content
+                              .entry-content
+                                %h5 Плантация медоносных растений
+                                %p
+                                  Возле дуба четвероногими будет подготовлена обширная
+                                  площадка, на которой они посадят, вырастят и станут
+                                  обихаживать лучшие медоносные растения
+                                %h5 Выбор сортов растений
+                                %p
+                                  Кролик и Сова, консультируясь с пчёлами, выбирают лучшие
+                                  сорта растений.
+                                %h5 Посадка растений
+                                %p
+                                  Четвероногие обрабатывают почву у Высокого дуба и сажают
+                                  выбранные сорта растений.
+                                .entry-descript-tags
+                                  %span.timel-back-bce1fe Энциклопедия
+                                .entry-descript-tags
+                                  %span.timel-back-bce1fe Многолетний опыт пчёл в добыче мёда
+                                .entry-descript-tags
+                                  %span.timel-back-bce1fe Садовый инвентарь
+                                .entry-descript-tags
+                                  %span.timel-back-bce1fe Четвероногие
+                          .col-md-6.col-sm-6.right-col-timeline.timel-line-a0c7fe
+                            .entry-dates-block
+                              .badge-wrap
+                                .badge-arrow
+                                  %span.entry-icon.timel-back-a0c7fe
+                                  %span.badge-date 25 янв 2015
+                                  %span.badge-name Выбор сортов растений
+                                .badge-tags
+                                  .badge-tag.timel-back-bce1fe
+                                    Энциклопедия
+                                  .badge-tag.timel-back-bce1fe
+                                    Многолетний опыт пчёл в добыче мёда
+                              .badge-wrap
+                                .badge-arrow
+                                  %span.entry-icon.timel-back-a0c7fe
+                                  %span.badge-date 26 янв 2015
+                                  %span.badge-name Посадка растений
+                                .badge-tags
+                                  .badge-tag.timel-back-bce1fe
+                                    Садовый инвентарь
+                                  .badge-tag.timel-back-bce1fe
+                                    Четвероногие
+                        .entry-top-badge.timel-back-8e8ac8
+                          %span.top-badge-entry-stage 3 этап
+                          %span.top-badge-entry-date 27 янв. 2015 - 28 янв. 2015
+                          %span.top-badge-entry-theme Запуск проекта
+                        .row
+                          .col-md-6.col-sm-6.left-col-timeline.timel-line-8e8ac8
+                            / time line content entry
+                            .entry
+                              / Time line entry head
+                              .entry-head.timel-back-8e8ac8
+                                Система использования плантации
+                              / Time line entry content
+                              .entry-content
+                                %p
+                                  Четвероногие ухаживают за растениями. Пчёлы прилетают на
+                                  плантацию, добывают мёд, которым потом делятся с
+                                  четвероногими.
+                                %h5 Первый полет
+                                %p
+                                  Пчёлы летят на плантацию, с минимальными усилиями добывают
+                                  большое количество мёда.
+                                %h5 Первый честно добытый мёд
+                                %p Винни и его друзья получают часть добытого пчёлами мёда.
+                          .col-md-6.col-sm-6.right-col-timeline.timel-line-8e8ac8
+                            .entry-dates-block
+                              .badge-wrap
+                                .badge-arrow
+                                  %span.entry-icon.timel-back-8e8ac8
+                                  %span.badge-date 27 янв. 2015 - 27 янв. 2015
+                                  %span.badge-name Первый полет
+                              .badge-wrap
+                                .badge-arrow
+                                  %span.entry-icon.timel-back-8e8ac8
+                                  %span.badge-date 28 янв. 2015 - 28 янв. 2015
+                                  %span.badge-name Первый честно добытый мёд
+      #popup-project4.popup-window.popup-project.info-popup.mfp-hide
+        .popup.popup-top-rounded
+          .popup-post-info
+            .popup-header.popup-top-rounded
+              %h2.font_red Лучшая методика работы с пчелами
+            .clearfix
+            .row.info-block
+              .col-md-4.popup-post-block
+                %img{:src => "img/ava-ia.jpg"}/
+                %span Ослик
+                .info-stripe
+                  %span.popup-date 01.02.2015
+                  %span.popup-comments
+                    +5
+                    %i.fa.fa-comment-o
+                  %span.popup-likes
+                    +9
+                    %i.fa.fa-thumbs-o-up
+                  %span.popup-dislikes
+                    +1
+                    %i.fa.fa-thumbs-o-down
+              .col-md-8.popup-right-tabs
+                .nav-tabs-one
+                  / Nav tabs
+                  %ul.nav.nav-tabs
+                    %li.active
+                      %a{"data-toggle" => "tab", :href => "#tab-1"} Описание проекта
+                    %li
+                      %a{"data-toggle" => "tab", :href => "#tab-2"} Нововведения и план мероприятий
+                / Tab content
+          .clearfix
+          .tab-content
+            #tab-1.tab-pane.fade.in.active.popup-bottom-rounded
+              .row
+                .col-md-6.description-left-col
+                  .description-block
+                    %span.description-title Коротко о проекте
+                    %p
+                      Данный проект предлагает при помощи минимума усилий заполучить мед. Методы,
+                      используемые в проекте, прошли проверку временем и доказали свою эффективность.
+                      В результате мы просто заберем мед у пчел, а они при желании смогут сделать себе
+                      еще.
+                  .description-block
+                    %span.description-title Эссе по проекту. Пояснения и обоснования
+                    %p
+                      Представлена организация, в которой хорошо прописаны все роли по добыче меда.
+                      Используются разнообразные специализированные средства для отвлечения пчел и захвата
+                      меда.
+                  .description-block
+                    %span.description-title Этапы проекта
+                    .stages-blocks
+                      .lined-heading
+                        %span.bold-stripe 14 янв. 2015 - 19 февр. 2015
+                        %span.normal-stripe Подготовка и организация работы группы
+                      .lined-heading
+                        %span.bold-stripe 28 февр. 2015 - 30 июня 2015
+                        %span.normal-stripe Развертывание деятельности организации
+                .col-md-6.imperfect-text-comments
+                  .imperfect-text-comments-post-block
+                    .post-interfaces
+                      .post-interfaces-buttons
+                        %button{:type => "button"}
+                          %img{:src => "img/icon-thumb-up.png"}/
+                        %button{:type => "button"}
+                          %img{:src => "img/icon-thumb-down.png"}/
+                        %button{:type => "button"}
+                          %img{:src => "img/icon-share.png"}/
+                      %form.post-interfaces-add-comment
+                        %input{:placeholder => "Ваш комментарий", :type => "text"}/
+                        %button.btn{:type => "button"}
+                          %img{:src => "img/comment-button.png"}/
+            #tab-2.tab-pane.fade.popup-bottom-rounded
+              .container.timeline-cont
+                .vertical-timeline
+                  .row
+                    .col-md-12.col-sm-12
+                      / time line col
+                      .v-timeline-col
+                        .entry-top-badge.timel-back-b1f0c1
+                          %span.top-badge-entry-stage 1 этап
+                          %span.top-badge-entry-date 14 янв. 2015 - 19 февр. 2015
+                          %span.top-badge-entry-theme Подготовка и организация работы группы
+                        .row
+                          .col-md-6.col-sm-6.left-col-timeline.timel-line-b1f0c1
+                            / time line content entry
+                            .entry
+                              / Time line entry head
+                              .entry-head.timel-back-8cf0ba
+                                Обучение четвероногих воровству
+                              / Time line entry content
+                              .entry-content
+                                %p
+                                  Имеется разработанная и внедренная схема обучения
+                                  четвероногих способам захвата меда, а также отвлечения и
+                                  устранения опасности со стороны пчел.
+                                %h5 Отбор тренера
+                                %p Проводится подбор подходящего тренера
+                                .entry-descript-tags
+                                  %span.timel-back-8cf0ba Винни Пух
+                          .col-md-6.col-sm-6.right-col-timeline.timel-line-b1f0c1
+                            .entry-dates-block
+                              .badge-wrap
+                                .badge-arrow
+                                  %span.entry-icon.timel-back-b1f0c1
+                                  %span.badge-date 14 янв. 2015 - 18 янв. 2015
+                                  %span.badge-name Отбор тренера
+                                .badge-tags
+                                  .badge-tag.timel-back-8cf0ba
+                                    Винни Пух
+                        .entry-top-badge.timel-back-a0c7fe
+                          %span.top-badge-entry-stage 2 этап
+                          %span.top-badge-entry-date 28 февр. 2015 - 30 июня 2015
+                          %span.top-badge-entry-theme Развертывание деятельности организации
+                        .row
+                          .col-md-6.col-sm-6.left-col-timeline.timel-line-a0c7fe
+                            / time line content entry
+                            .entry
+                              / Time line entry head
+                              .entry-head.timel-back-bce1fe
+                                Подъем за медом на шарике в улей на дубе
+                              / Time line entry content
+                              .entry-content
+                                %p
+                                  Разработана и внедрена система добычи меда из пчелиного улья
+                                  на высоком дубе
+                                %h5 Написание Тучкиной песни
+                                %p Сочиняется текст и музыка для Тучкиной песни
+                                %h5 Покупка инвентаря
+                                %p
+                                  Винни-Пух вместе с Пятачком идут в магазин и покупают синий
+                                  воздушный шарик, книгу о "правильном" жужжании и другое
+                                  необходимое оборудование
+                                %h5 Разведение лужи
+                                %p Создание лужи необходимого размера
+                                .entry-descript-tags
+                                  %span.timel-back-bce1fe Музыкальные инструменты
+                                .entry-descript-tags
+                                  %span.timel-back-bce1fe Деньги
+                                .entry-descript-tags
+                                  %span.timel-back-bce1fe Четвероногие
+                                .entry-descript-tags
+                                  %span.timel-back-bce1fe Вода
+                                .entry-descript-tags
+                                  %span.timel-back-bce1fe Грязь
+                          .col-md-6.col-sm-6.right-col-timeline.timel-line-a0c7fe
+                            .entry-dates-block
+                              .badge-wrap
+                                .badge-arrow
+                                  %span.entry-icon.timel-back-a0c7fe
+                                  %span.badge-date 01 марта 2015 - 22 марта 2015
+                                  %span.badge-name Написание Тучкиной песни
+                                .badge-tags
+                                  .badge-tag.timel-back-bce1fe
+                                    Музыкальные инструменты
+                              .badge-wrap
+                                .badge-arrow
+                                  %span.entry-icon.timel-back-a0c7fe
+                                  %span.badge-date 01 марта 2015 - 04 марта 2015
+                                  %span.badge-name Покупка инвентаря
+                                .badge-tags
+                                  .badge-tag.timel-back-bce1fe
+                                    Деньги
+                              .badge-wrap
+                                .badge-arrow
+                                  %span.entry-icon.timel-back-a0c7fe
+                                  %span.badge-date 28 марта 2015 - 09 апр. 2015
+                                  %span.badge-name Разведение лужи
+                                .badge-tags
+                                  .badge-tag.timel-back-bce1fe
+                                    Четвероногие
+                                  .badge-tag.timel-back-bce1fe
+                                    Вода
+                                  .badge-tag.timel-back-bce1fe
+                                    Грязь
+      #popup-project5.popup-window.popup-project.info-popup.mfp-hide
+        .popup.popup-top-rounded
+          .popup-post-info
+            .popup-header.popup-top-rounded
+              %h2.font_red Снижение потребления меда
+            .clearfix
+            .row.info-block
+              .col-md-4.popup-post-block
+                %img{:src => "img/ava-rabb.jpg"}/
+                %span Кролик
+                .info-stripe
+                  %span.popup-date 02.02.2015
+                  %span.popup-comments
+                    +5
+                    %i.fa.fa-comment-o
+                  %span.popup-likes
+                    +9
+                    %i.fa.fa-thumbs-o-up
+                  %span.popup-dislikes
+                    +1
+                    %i.fa.fa-thumbs-o-down
+              .col-md-8.popup-right-tabs
+                .nav-tabs-one
+                  / Nav tabs
+                  %ul.nav.nav-tabs
+                    %li.active
+                      %a{"data-toggle" => "tab", :href => "#tab-1"} Описание проекта
+                    %li
+                      %a{"data-toggle" => "tab", :href => "#tab-2"} Нововведения и план мероприятий
+                / Tab content
+          .clearfix
+          .tab-content
+            #tab-1.tab-pane.fade.in.active.popup-bottom-rounded
+              .row
+                .col-md-6.description-left-col
+                  .description-block
+                    %span.description-title Коротко о проекте
+                    %p
+                      Данный проект предлагает при помощи минимума усилий заполучить мед. Методы,
+                      используемые в проекте, прошли проверку временем и доказали свою эффективность.
+                      В результате мы просто заберем мед у пчел, а они при желании смогут сделать себе
+                      еще.
+                  .description-block
+                    %span.description-title Эссе по проекту. Пояснения и обоснования
+                    %p
+                      Представлена организация, в которой хорошо прописаны все роли по добыче меда.
+                      Используются разнообразные специализированные средства для отвлечения пчел и захвата
+                      меда.
+                  .description-block
+                    %span.description-title Этапы проекта
+                    .stages-blocks
+                      .lined-heading
+                        %span.bold-stripe 14 янв. 2015 - 19 февр. 2015
+                        %span.normal-stripe Подготовка и организация работы группы
+                      .lined-heading
+                        %span.bold-stripe 28 февр. 2015 - 30 июня 2015
+                        %span.normal-stripe Развертывание деятельности организации
+                .col-md-6.imperfect-text-comments
+                  .imperfect-text-comments-post-block
+                    .post-interfaces
+                      .post-interfaces-buttons
+                        %button{:type => "button"}
+                          %img{:src => "img/icon-thumb-up.png"}/
+                        %button{:type => "button"}
+                          %img{:src => "img/icon-thumb-down.png"}/
+                        %button{:type => "button"}
+                          %img{:src => "img/icon-share.png"}/
+                      %form.post-interfaces-add-comment
+                        %input{:placeholder => "Ваш комментарий", :type => "text"}/
+                        %button.btn{:type => "button"}
+                          %img{:src => "img/comment-button.png"}/
+            #tab-2.tab-pane.fade.popup-bottom-rounded
+              .container.timeline-cont
+                .vertical-timeline
+                  .row
+                    .col-md-12.col-sm-12
+                      / time line col
+                      .v-timeline-col
+                        .entry-top-badge.timel-back-b1f0c1
+                          %span.top-badge-entry-stage 1 этап
+                          %span.top-badge-entry-date 14 янв. 2015 - 19 февр. 2015
+                          %span.top-badge-entry-theme Подготовка и организация работы группы
+                        .row
+                          .col-md-6.col-sm-6.left-col-timeline.timel-line-b1f0c1
+                            / time line content entry
+                            .entry
+                              / Time line entry head
+                              .entry-head.timel-back-8cf0ba
+                                Обучение четвероногих воровству
+                              / Time line entry content
+                              .entry-content
+                                %p
+                                  Имеется разработанная и внедренная схема обучения
+                                  четвероногих способам захвата меда, а также отвлечения и
+                                  устранения опасности со стороны пчел.
+                                %h5 Отбор тренера
+                                %p Проводится подбор подходящего тренера
+                                .entry-descript-tags
+                                  %span.timel-back-8cf0ba Винни Пух
+                          .col-md-6.col-sm-6.right-col-timeline.timel-line-b1f0c1
+                            .entry-dates-block
+                              .badge-wrap
+                                .badge-arrow
+                                  %span.entry-icon.timel-back-b1f0c1
+                                  %span.badge-date 14 янв. 2015 - 18 янв. 2015
+                                  %span.badge-name Отбор тренера
+                                .badge-tags
+                                  .badge-tag.timel-back-8cf0ba
+                                    Винни Пух
+                        .entry-top-badge.timel-back-a0c7fe
+                          %span.top-badge-entry-stage 2 этап
+                          %span.top-badge-entry-date 28 февр. 2015 - 30 июня 2015
+                          %span.top-badge-entry-theme Развертывание деятельности организации
+                        .row
+                          .col-md-6.col-sm-6.left-col-timeline.timel-line-a0c7fe
+                            / time line content entry
+                            .entry
+                              / Time line entry head
+                              .entry-head.timel-back-bce1fe
+                                Подъем за медом на шарике в улей на дубе
+                              / Time line entry content
+                              .entry-content
+                                %p
+                                  Разработана и внедрена система добычи меда из пчелиного улья
+                                  на высоком дубе
+                                %h5 Написание Тучкиной песни
+                                %p Сочиняется текст и музыка для Тучкиной песни
+                                %h5 Покупка инвентаря
+                                %p
+                                  Винни-Пух вместе с Пятачком идут в магазин и покупают синий
+                                  воздушный шарик, книгу о "правильном" жужжании и другое
+                                  необходимое оборудование
+                                %h5 Разведение лужи
+                                %p Создание лужи необходимого размера
+                                .entry-descript-tags
+                                  %span.timel-back-bce1fe Музыкальные инструменты
+                                .entry-descript-tags
+                                  %span.timel-back-bce1fe Деньги
+                                .entry-descript-tags
+                                  %span.timel-back-bce1fe Четвероногие
+                                .entry-descript-tags
+                                  %span.timel-back-bce1fe Вода
+                                .entry-descript-tags
+                                  %span.timel-back-bce1fe Грязь
+                          .col-md-6.col-sm-6.right-col-timeline.timel-line-a0c7fe
+                            .entry-dates-block
+                              .badge-wrap
+                                .badge-arrow
+                                  %span.entry-icon.timel-back-a0c7fe
+                                  %span.badge-date 01 марта 2015 - 22 марта 2015
+                                  %span.badge-name Написание Тучкиной песни
+                                .badge-tags
+                                  .badge-tag.timel-back-bce1fe
+                                    Музыкальные инструменты
+                              .badge-wrap
+                                .badge-arrow
+                                  %span.entry-icon.timel-back-a0c7fe
+                                  %span.badge-date 01 марта 2015 - 04 марта 2015
+                                  %span.badge-name Покупка инвентаря
+                                .badge-tags
+                                  .badge-tag.timel-back-bce1fe
+                                    Деньги
+                              .badge-wrap
+                                .badge-arrow
+                                  %span.entry-icon.timel-back-a0c7fe
+                                  %span.badge-date 28 марта 2015 - 09 апр. 2015
+                                  %span.badge-name Разведение лужи
+                                .badge-tags
+                                  .badge-tag.timel-back-bce1fe
+                                    Четвероногие
+                                  .badge-tag.timel-back-bce1fe
+                                    Вода
+                                  .badge-tag.timel-back-bce1fe
+                                    Грязь
+      #modal1.modal.welcome_window.fade
+        .modal-dialog
+          .modal-content
+            .modal-body.text-center
+              %p.text-center.bold.font_grey
+                На этой стадии вам предстоит составить целостный проект по устранению основных проблем, выявленных в процедуре. Для этого вы воспользуетесь
+                нововведениями, предложенными на прошлой стадии, и формами, представленными на сайте. В течение стадии вы будете обсуждать проекты других участников, а в конце стадии
+                проголосуете за лучший проект.
+              %br/
+              %br/
+              %button.btn.btn-danger{"aria-hidden" => "true", "data-dismiss" => "modal"} Закрыть окно
+          / /.modal-content
+        / /.modal-dialog
+      / /.modal
+    / Outer Ends
+    / Javascript files
+    / jQuery
+    %script{:src => "js/jquery.js"}
+    / Bootstrap JS
+    %script{:src => "js/bootstrap.min.js"}
+    / Magnific Popup
+    %script{:src => "js/jquery.magnific-popup.min.js"}
+    / Owl carousel
+    %script{:src => "js/owl.carousel.min.js"}
+    / Respond JS for IE8
+    %script{:src => "js/respond.min.js"}
+    / HTML5 Support for IE
+    %script{:src => "js/html5shiv.js"}
+    / Content hover JS
+    %script{:src => "js/jquery.contenthover.min.js"}
+    / Javascript for this page
+    / Excanvas JS for Knob Support in IE 8
+    %script{:src => "js/waypoints.min.js"}
+    %script{:src => "js/excanvas.js"}
+    / jQuery Knob
+    %script{:src => "js/jquery.knob.js"}
+    / Custom JS. Type your JS code in custom.js file
+    %script{:src => "js/custom.js"}

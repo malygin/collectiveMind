@@ -1,0 +1,2017 @@
+!!!
+%html
+  %head
+    %meta{:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
+    %meta{:charset => "utf-8"}/
+    %title
+    %meta{:content => "width=device-width, initial-scale=1.0", :name => "viewport"}/
+    / Styles
+    / Bootstrap CSS
+    %link{:href => "css/bootstrap.min.css", :rel => "stylesheet"}/
+    / Font awesome CSS
+    %link{:href => "css/font-awesome.min.css", :rel => "stylesheet"}/
+    / Custom CSS. Type your CSS code in custom.css file
+    %link{:href => "css/magnific-popup.css", :rel => "stylesheet"}/
+    %link{:href => "css/custom.css", :rel => "stylesheet"}/
+    %link{:href => "css/custom-post.css", :rel => "stylesheet"}/
+  %body
+    .outer.stage3_theme
+      / Top bar starts
+      %header.navbar.top_bar
+        .container
+          .navbar-header
+            %a.navbar-brand{:href => "main.html"}
+              %img{:src => "img/logo1.png"}/
+          %ul.nav.navbar-nav.main_menu
+            %li.active
+              %a{:href => "first-stage.html"} Процедура
+            %li
+              %a{:href => "cabinet-stage1.html"} Кабинет
+            %li
+              %a{:href => "#"} Рефлексия
+            %li
+              %a.has_circle{:href => "#"}
+                Новости
+                %span.top-circle 25
+          .navbar-right.text-right.user_block.font_grey
+            %a{:href => "#"}
+              %img#tooltip1_5.tooltip1_5{"data-placement" => "bottom", "data-toggle" => "tooltip", "data-trigger" => "none", :src => "img/book-icon.png", :title => "Открыть базу знаний"}/
+            %span.auth-divider
+              |
+              %i.fa.fa-exclamation-triangle.font_lighter_grey
+              %span.auth-divider |
+              %a.font_grey.bold{:href => "#"}
+                %i.fa.fa-globe.font_lighter_grey
+                %small
+                  %i.fa.fa-angle-down
+              %ul.dropdown-menu.dropdown-mini{:role => "menu"}
+              %span.auth-divider |
+              %span.badge.grey 500
+              %a.font_grey.bold{:href => "#"}
+                %small
+                  Лиза Школьник
+                  %i.fa.fa-angle-down
+      / Top Bar ends
+      .subhead
+        .container
+          %h4.font_white Решение конфликта, возникшего из-за меда
+        %button#tooltip_button_3.btn.btn-tooltip{:type => "button", :value => "Show"}
+          %i.fa.fa-lightbulb-o
+          Открыть подсказки
+        %button#close_tooltip_button_3.btn.btn-tooltip-close{:type => "button", :value => "Destroy"}
+          %i.fa.fa-lightbulb-o
+          Закрыть подсказки
+      .container
+        .row
+          .col-md-8.col_padding_right_3
+            .border_grey.rounded_3.stages_block
+              .btn-toolbar{:role => "toolbar"}
+                .btn-group{:role => "group"}
+                  %a.btn.back_color_stage1{:href => "first-stage.html", :role => "button"} 1
+                  %a.btn.back_color_stage2{:href => "second-stage.html", :role => "button"} 2
+                .btn-group{:role => "group"}
+                  %a.btn.back_color_stage3{:href => "third-stage.html", :role => "button"} 3 СТАДИЯ: ДИЗАЙН БУДУЩЕГО
+                .btn-group{:role => "group"}
+                  %a.btn.back_color_stage4{:href => "fourth-stage.html", :role => "button"} 4
+                  %a.btn.back_color_stage5{:href => "fifth-stage.html", :role => "button"} 5
+          .col-md-4.col_padding_left_3
+            .border_grey.rounded_3.help_icon
+            .border_grey.rounded_3.progress_block
+              .container
+                .row
+                  .col-xs-6.col-md-6.col_padding_right_3
+                    .row
+                      .col-xs-8.col-md-8.col_padding_3
+                        .knob_label.text-right.font_grey
+                          %small Ваш прогресс на стадии
+                      .col-xs-4.col-md-4.col_padding_3
+                        .progress-knob
+                          .knob-content
+                            .knob-item
+                              %input#knob-1.knob{"data-anglearc" => "360", "data-angleoffset" => "70", "data-bgcolor" => "#f4f4f4", "data-end" => "90", "data-fgcolor" => "#7373aa", "data-font" => "'Open Sans', sans-serif", "data-thickness" => ".1", :value => "0"}/
+                  .col-xs-6.col-md-6.col_padding_left_3
+                    .row
+                      .col-xs-8.col-md-8.col_padding_3
+                        .knob_label.text-right.font_grey
+                          %small Прогресс других участников
+                      .col-xs-4.col-md-4.col_padding_3
+                        .progress-knob
+                          .knob-content
+                            .knob-item
+                              %input#knob-1.knob{"data-anglearc" => "360", "data-angleoffset" => "70", "data-bgcolor" => "#f4f4f4", "data-end" => "90", "data-fgcolor" => "#7373aa", "data-font" => "'Open Sans', sans-serif", "data-thickness" => ".1", :value => "0"}/
+      / Main Block starts
+      .main-block
+        .container
+          .stage-info-sort-block
+            .row
+              %br/
+              .col-md-7
+                %span.stage-heading
+                  Нововведения (11)
+                  %i.fa.fa-question-circle
+              .col-md-5
+                .sort-block.pull-right
+                  %span.sort-label Сортировать:
+                  %span.sort-date
+                  %span.sort-rate
+                  %a{:href => "cabinet-stage3.html"}
+                    %button.btn.add-button
+                      %span> +
+                      Нововведение
+          .stage-post-block
+            .row
+              .col-md-6
+                %a.open-popup-link{:href => "#popup-innov-new1"}
+                  .post
+                    .post-header.white
+                      .row
+                        .col-md-9.col-xs-9
+                          %h5.font_purple.bold Соглашение и арбитр.
+                        .col-md-1.col-xs-1
+                          %h4.pull-right
+                            %i.fa.fa-exclamation-triangle
+                        .col-md-2.col-xs-2
+                          %h5.time 20.12.2014
+                    .post-body
+                      .media
+                        .media-left.text-center.gradient.post-poster
+                          %img.img-circle.img50{:src => "img/ava-pyat.jpg"}/
+                          %p.poster-name Пятачок
+                        .media-body.white-gray
+                          .post-text
+                            %p Взаимное недоверие четвероногих и пчёл
+                    #tooltip3_2.post-bottom.white.tooltip3_2{"data-placement" => "bottom", "data-toggle" => "tooltip", "data-trigger" => "none", :title => "В цветных квадратиках скрывается перечень несовершенств, связанных с данным нововведением. Нажмите на любой из них, чтобы увидеть полное название нововведения."}
+                      .row
+                        .col-md-10.col_padding_right_3
+                          %small.pull-left{:style => "margin-right: 3px;"} Аспекты
+                          #stripe1.post-theme
+                            %a#stripe1.tag-stripes.dark-blue.active{:href => "#"}
+                              %span.tags Взаимное недоверие четвероногих и пчёл
+                            %a#stripe1.tag-stripes.blue-green{:href => "#"}
+                              %span.tags Четвероногим нечем заинтересовать пчел
+                            %a#stripe1.tag-stripes.blue-green2{:href => "#"}
+                              %span.tags Активное противостояние четвероногих и пчел
+                            %a#stripe1.tag-stripes.blue-green3{:href => "#"}
+                              %span.tags Рядом с дубом нет цветочных полян
+                            %a#stripe1.tag-stripes.light-green{:href => "#"}
+                              %span.tags Пчелы летают слишком медленно
+                            %a#stripe1.tag-stripes.sandy{:href => "#"}
+                              %span.tags Винни Пух не говорит по пчелиному
+                        .col-md-2.col_padding_left_3
+                          .text-right.small_icons
+                            %span.popup2
+                              5
+                              %i.fa.fa-comment-o
+                            %span.popup2
+                              9
+                              %i.fa.fa-thumbs-o-up
+                            %span.popup2
+                              1
+                              %i.fa.fa-thumbs-o-down
+              .col-md-6
+                %a.open-popup-link{:href => "#popup-innov-new2"}
+                  .post
+                    .post-header.white
+                      .row
+                        .col-md-9.col-xs-9
+                          %h5#tooltip3_1.font_purple.bold.tooltip3_1{"data-placement" => "bottom", "data-toggle" => "tooltip", "data-trigger" => "none", :title => "Каждое нововведение может устранять одно или несколько несовершенств."} Аренда медовырабатывающей машины
+                        .col-md-1.col-xs-1
+                          %h4.pull-right
+                            %i.fa.fa-exclamation-triangle
+                        .col-md-2.col-xs-2
+                          %h5.time 21.12.2014
+                    .post-body
+                      .media
+                        .media-left.text-center.gradient.post-poster
+                          %img.img-circle.img50{:src => "img/ava-rabb.jpg"}/
+                          %p.poster-name Кролик
+                        .media-body.white-gray
+                          .post-text
+                            %p Четвероногим нечем заинтересовать пчел
+                    .post-bottom.white
+                      .row
+                        .col-md-10.col_padding_right_3
+                          %small.pull-left{:style => "margin-right: 3px;"} Аспекты
+                          #stripe2.post-theme
+                            %a#stripe2.tag-stripes.blue-green2.active{:href => "#"}
+                              %span.tags Взаимное недоверие четвероногих и пчёл
+                            %a#stripe2.tag-stripes.blue-green3{:href => "#"}
+                              %span.tags Четвероногим нечем заинтересовать пчел
+                            %a#stripe2.tag-stripes.blue-green{:href => "#"}
+                              %span.tags Активное противостояние четвероногих и пчел
+                            %a#stripe2.tag-stripes.light-green{:href => "#"}
+                              %span.tags Рядом с дубом нет цветочных полян
+                            %a#stripe2.tag-stripes.dark-blue2{:href => "#"}
+                              %span.tags Пчелы летают слишком медленно
+                        .col-md-2.col_padding_left_3
+                          .text-right.small_icons
+                            %span.popup2
+                              5
+                              %i.fa.fa-comment-o
+                            %span.popup2
+                              9
+                              %i.fa.fa-thumbs-o-up
+                            %span.popup2
+                              1
+                              %i.fa.fa-thumbs-o-down
+              .col-md-6
+                %a.open-popup-link{:href => "#popup-innov-new3"}
+                  .post
+                    .post-header.white
+                      .row
+                        .col-md-9.col-xs-9
+                          %h5.font_purple.bold Переход на сахарные заменители
+                        .col-md-1.col-xs-1
+                          %h4.pull-right
+                            %i.fa.fa-exclamation-triangle
+                        .col-md-2.col-xs-2
+                          %h5.time 22.12.2014
+                    .post-body
+                      .media
+                        .media-left.text-center.gradient.post-poster
+                          %img.img-circle.img50{:src => "img/ava-ia.jpg"}/
+                          %p.poster-name Ослик
+                        .media-body.white-gray
+                          .post-text
+                            %p
+                              Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean
+                              commodo
+                    .post-bottom.white
+                      .row
+                        .col-md-10.col_padding_right_3
+                          %small.pull-left{:style => "margin-right: 3px;"} Аспекты
+                          #stripe3.post-theme
+                            %a#stripe3.tag-stripes.blue-green.active{:href => "#"}
+                              %span.tags Четвероногим нечем заинтересовать пчел
+                            %a#stripe3.tag-stripes.blue-green2{:href => "#"}
+                              %span.tags Активное противостояние четвероногих и пчел
+                            %a#stripe3.tag-stripes.blue-green3{:href => "#"}
+                              %span.tags Рядом с дубом нет цветочных полян
+                            %a#stripe3.tag-stripes.sandy{:href => "#"}
+                              %span.tags Винни Пух не говорит по пчелиному
+                        .col-md-2.col_padding_left_3
+                          .text-right.small_icons
+                            %span.popup2
+                              5
+                              %i.fa.fa-comment-o
+                            %span.popup2
+                              9
+                              %i.fa.fa-thumbs-o-up
+                            %span.popup2
+                              1
+                              %i.fa.fa-thumbs-o-down
+              .col-md-6
+                %a.open-popup-link{:href => "#popup-innov-new4"}
+                  .post
+                    .post-header.white
+                      .row
+                        .col-md-9.col-xs-9
+                          %h5.font_purple.bold Эффективные датчики слежения
+                        .col-md-1.col-xs-1
+                          %h4.pull-right
+                            %i.fa.fa-exclamation-triangle
+                        .col-md-2.col-xs-2
+                          %h5.time 24.12.2014
+                    .post-body
+                      .media
+                        .media-left.text-center.gradient.post-poster
+                          %img.img-circle.img50{:src => "img/ava-rabb.jpg"}/
+                          %p.poster-name Кролик
+                        .media-body.white-gray
+                          .post-text
+                            %p
+                              Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean
+                              commodo
+                    .post-bottom.white
+                      .row
+                        .col-md-10.col_padding_right_3
+                          %small.pull-left{:style => "margin-right: 3px;"} Аспекты
+                          #stripe4.post-theme
+                            %a#stripe4.tag-stripes.dark-blue2.active{:href => "#"}
+                              %span.tags Взаимное недоверие четвероногих и пчёл
+                            %a#stripe4.tag-stripes.blue-green{:href => "#"}
+                              %span.tags Четвероногим нечем заинтересовать пчел
+                            %a#stripe4.tag-stripes.blue-green2{:href => "#"}
+                              %span.tags Рядом с дубом нет цветочных полян
+                            %a#stripe4.tag-stripes.light-green{:href => "#"}
+                              %span.tags Пчелы летают слишком медленно
+                            %a#stripe4.tag-stripes.blue-green{:href => "#"}
+                              %span.tags Винни Пух не говорит по пчелиному
+                        .col-md-2.col_padding_left_3
+                          .text-right.small_icons
+                            %span.popup2
+                              5
+                              %i.fa.fa-comment-o
+                            %span.popup2
+                              9
+                              %i.fa.fa-thumbs-o-up
+                            %span.popup2
+                              1
+                              %i.fa.fa-thumbs-o-down
+              .col-md-6
+                %a.open-popup-link{:href => "#popup-innov-new5"}
+                  .post
+                    .post-header.white
+                      .row
+                        .col-md-9.col-xs-9
+                          %h5.font_purple.bold Воздушный радар
+                        .col-md-1.col-xs-1
+                          %h4.pull-right
+                            %i.fa.fa-exclamation-triangle
+                        .col-md-2.col-xs-2
+                          %h5.time 25.12.2014
+                    .post-body
+                      .media
+                        .media-left.text-center.gradient.post-poster
+                          %img.img-circle.img50{:src => "img/ava-ia.jpg"}/
+                          %p.poster-name Ослик
+                        .media-body.white-gray
+                          .post-text
+                            %p Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean
+                    .post-bottom.white
+                      .row
+                        .col-md-10.col_padding_right_3
+                          %small.pull-left{:style => "margin-right: 3px;"} Аспекты
+                          #stripe5.post-theme
+                            %a#stripe5.tag-stripes.dark-blue.active{:href => "#"}
+                              %span.tags Взаимное недоверие четвероногих и пчёл
+                            %a#stripe5.tag-stripes.blue-green{:href => "#"}
+                              %span.tags Четвероногим нечем заинтересовать пчел
+                            %a#stripe5.tag-stripes.blue-green2{:href => "#"}
+                              %span.tags Активное противостояние четвероногих и пчел
+                            %a#stripe5.tag-stripes.blue-green3{:href => "#"}
+                              %span.tags Рядом с дубом нет цветочных полян
+                        .col-md-2.col_padding_left_3
+                          .text-right.small_icons
+                            %span.popup2
+                              5
+                              %i.fa.fa-comment-o
+                            %span.popup2
+                              9
+                              %i.fa.fa-thumbs-o-up
+                            %span.popup2
+                              1
+                              %i.fa.fa-thumbs-o-down
+              .col-md-6
+                %a.open-popup-link{:href => "#popup-innov-new6"}
+                  .post
+                    .post-header.white
+                      .row
+                        .col-md-9.col-xs-9
+                          %h5.font_purple.bold Аутсорсинг охранной фирмы
+                        .col-md-1.col-xs-1
+                          %h4.pull-right
+                            %i.fa.fa-exclamation-triangle
+                        .col-md-2.col-xs-2
+                          %h5.time 27.12.2014
+                    .post-body
+                      .media
+                        .media-left.text-center.gradient.post-poster
+                          %img.img-circle.img50{:src => "img/ava-rabb.jpg"}/
+                          %p.poster-name Кролик
+                        .media-body.white-gray
+                          .post-text
+                            %p
+                              Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean
+                              commodo
+                              ligula eget dolor. Aenean massa.
+                    .post-bottom.white
+                      .row
+                        .col-md-10.col_padding_right_3
+                          %small.pull-left{:style => "margin-right: 3px;"} Аспекты
+                          #stripe6.post-theme
+                            %a#stripe6.tag-stripes.blue-green2.active{:href => "#"}
+                              %span.tags Взаимное недоверие четвероногих и пчёл
+                            %a#stripe6.tag-stripes.blue-green{:href => "#"}
+                              %span.tags Четвероногим нечем заинтересовать пчел
+                            %a#stripe6.tag-stripes.dark-blue{:href => "#"}
+                              %span.tags Активное противостояние четвероногих и пчел
+                            %a#stripe6.tag-stripes.sandy{:href => "#"}
+                              %span.tags Рядом с дубом нет цветочных полян
+                            %a#stripe6.tag-stripes.blue-green3{:href => "#"}
+                              %span.tags Пчелы летают слишком медленно
+                            %a#stripe6.tag-stripes.dark-blue2{:href => "#"}
+                              %span.tags Винни Пух не говорит по пчелиному
+                        .col-md-2.col_padding_left_3
+                          .text-right.small_icons
+                            %span.popup2
+                              5
+                              %i.fa.fa-comment-o
+                            %span.popup2
+                              9
+                              %i.fa.fa-thumbs-o-up
+                            %span.popup2
+                              1
+                              %i.fa.fa-thumbs-o-down
+              .col-md-6
+                %a.open-popup-link{:href => "#popup-innov-new7"}
+                  .post
+                    .post-header.white
+                      .row
+                        .col-md-9.col-xs-9
+                          %h5.font_purple.bold Разуплотнение мжвячности
+                        .col-md-1.col-xs-1
+                          %h4.pull-right
+                            %i.fa.fa-exclamation-triangle
+                        .col-md-2.col-xs-2
+                          %h5.time 28.12.2014
+                    .post-body
+                      .media
+                        .media-left.text-center.gradient.post-poster
+                          %img.img-circle.img50{:src => "img/ava-pyat.jpg"}/
+                          %p.poster-name Пятачок
+                        .media-body.white-gray
+                          .post-text
+                            %p
+                              Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean
+                              commodo
+                              ligula
+                    .post-bottom.white
+                      .row
+                        .col-md-10.col_padding_right_3
+                          %small.pull-left{:style => "margin-right: 3px;"} Аспекты
+                          #stripe7.post-theme
+                            %a#stripe7.tag-stripes.blue-green3.active{:href => "#"}
+                              %span.tags Взаимное недоверие четвероногих и пчёл
+                            %a#stripe7.tag-stripes.blue-green2{:href => "#"}
+                              %span.tags Четвероногим нечем заинтересовать пчел
+                            %a#stripe7.tag-stripes.dark-blue{:href => "#"}
+                              %span.tags Активное противостояние четвероногих и пчел
+                            %a#stripe7.tag-stripes.blue-green{:href => "#"}
+                              %span.tags Рядом с дубом нет цветочных полян
+                            %a#stripe7.tag-stripes.light-green{:href => "#"}
+                              %span.tags Пчелы летают слишком медленно
+                            %a#stripe7.tag-stripes.dark-blue2{:href => "#"}
+                              %span.tags Винни Пух не говорит по пчелиному
+                        .col-md-2.col_padding_left_3
+                          .text-right.small_icons
+                            %span.popup2
+                              5
+                              %i.fa.fa-comment-o
+                            %span.popup2
+                              9
+                              %i.fa.fa-thumbs-o-up
+                            %span.popup2
+                              1
+                              %i.fa.fa-thumbs-o-down
+              .col-md-6
+                %a.open-popup-link{:href => "#popup-innov-new8"}
+                  .post
+                    .post-header.white
+                      .row
+                        .col-md-9.col-xs-9
+                          %h5.font_purple.bold Смена ландшафтного дизайна
+                        .col-md-1.col-xs-1
+                          %h4.pull-right
+                            %i.fa.fa-exclamation-triangle
+                        .col-md-2.col-xs-2
+                          %h5.time 30.12.2014
+                    .post-body
+                      .media
+                        .media-left.text-center.gradient.post-poster
+                          %img.img-circle.img50{:src => "img/ava-rabb.jpg"}/
+                          %p.poster-name Кролик
+                        .media-body.white-gray
+                          .post-text
+                            %p
+                              Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean
+                              commodo
+                              ligula eget dolor. Aenean massa.
+                    .post-bottom.white
+                      .row
+                        .col-md-10.col_padding_right_3
+                          %small.pull-left{:style => "margin-right: 3px;"} Аспекты
+                          #stripe8.post-theme
+                            %a#stripe8.tag-stripes.dark-blue.active{:href => "#"}
+                              %span.tags Взаимное недоверие четвероногих и пчёл
+                            %a#stripe8.tag-stripes.dark-blue2{:href => "#"}
+                              %span.tags Четвероногим нечем заинтересовать пчел
+                            %a#stripe8.tag-stripes.blue-green2{:href => "#"}
+                              %span.tags Активное противостояние четвероногих и пчел
+                            %a#stripe8.tag-stripes.light-green{:href => "#"}
+                              %span.tags Рядом с дубом нет цветочных полян
+                        .col-md-2.col_padding_left_3
+                          .text-right.small_icons
+                            %span.popup2
+                              5
+                              %i.fa.fa-comment-o
+                            %span.popup2
+                              9
+                              %i.fa.fa-thumbs-o-up
+                            %span.popup2
+                              1
+                              %i.fa.fa-thumbs-o-down
+              .col-md-6
+                %a.open-popup-link{:href => "#popup-innov-new9"}
+                  .post
+                    .post-header.white
+                      .row
+                        .col-md-9.col-xs-9
+                          %h5.font_purple.bold Закупить какао известной нигерийской компании
+                        .col-md-1.col-xs-1
+                          %h4.pull-right
+                            %i.fa.fa-exclamation-triangle
+                        .col-md-2.col-xs-2
+                          %h5.time 30.12.2014
+                    .post-body
+                      .media
+                        .media-left.text-center.gradient.post-poster
+                          %img.img-circle.img50{:src => "img/ava-ia.jpg"}/
+                          %p.poster-name Ослик
+                        .media-body.white-gray
+                          .post-text
+                            %p
+                              Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean
+                              commodo
+                              ligula eget dolor. Aenean massa.
+                    .post-bottom.white
+                      .row
+                        .col-md-10.col_padding_right_3
+                          %small.pull-left{:style => "margin-right: 3px;"} Аспекты
+                          #stripe9.post-theme
+                            %a#stripe9.tag-stripes.dark-blue.active{:href => "#"}
+                              %span.tags Взаимное недоверие четвероногих и пчёл
+                            %a#stripe9.tag-stripes.blue-green2{:href => "#"}
+                              %span.tags Четвероногим нечем заинтересовать пчел
+                            %a#stripe9.tag-stripes.blue-green{:href => "#"}
+                              %span.tags Активное противостояние четвероногих и пчел
+                            %a#stripe9.tag-stripes.dark-blue2{:href => "#"}
+                              %span.tags Рядом с дубом нет цветочных полян
+                            %a#stripe9.tag-stripes.light-green{:href => "#"}
+                              %span.tags Пчелы летают слишком медленно
+                            %a#stripe9.tag-stripes.sandy{:href => "#"}
+                              %span.tags Пчелы летают слишком медленно
+                        .col-md-2.col_padding_left_3
+                          .text-right.small_icons
+                            %span.popup2
+                              5
+                              %i.fa.fa-comment-o
+                            %span.popup2
+                              9
+                              %i.fa.fa-thumbs-o-up
+                            %span.popup2
+                              1
+                              %i.fa.fa-thumbs-o-down
+              .col-md-6
+                %a.open-popup-link{:href => "#popup-innov-new10"}
+                  .post
+                    .post-header.white
+                      .row
+                        .col-md-9.col-xs-9
+                          %h5.font_purple.bold Синтез меда по технологнии Жерара Мюлье
+                        .col-md-1.col-xs-1
+                          %h4.pull-right
+                            %i.fa.fa-exclamation-triangle
+                        .col-md-2.col-xs-2
+                          %h5.time 31.12.2014
+                    .post-body
+                      .media
+                        .media-left.text-center.gradient.post-poster
+                          %img.img-circle.img50{:src => "img/ava-rabb.jpg"}/
+                          %p.poster-name Кролик
+                        .media-body.white-gray
+                          .post-text
+                            %p
+                              Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean
+                              commodo
+                              ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et
+                    .post-bottom.white
+                      .row
+                        .col-md-10.col_padding_right_3
+                          %small.pull-left{:style => "margin-right: 3px;"} Аспекты
+                          #stripe10.post-theme
+                            %a#stripe10.tag-stripes.sandy.active{:href => "#"}
+                              %span.tags Взаимное недоверие четвероногих и пчёл
+                            %a#stripe10.tag-stripes.dark-blue2{:href => "#"}
+                              %span.tags Четвероногим нечем заинтересовать пчел
+                            %a#stripe10.tag-stripes.dark-blue{:href => "#"}
+                              %span.tags Активное противостояние четвероногих и пчел
+                            %a#stripe10.tag-stripes.blue-green3{:href => "#"}
+                              %span.tags Рядом с дубом нет цветочных полян
+                            %a#stripe10.tag-stripes.light-green{:href => "#"}
+                              %span.tags Пчелы летают слишком медленно
+                            %a#stripe10.tag-stripes.blue-green{:href => "#"}
+                              %span.tags Винни Пух не говорит по пчелиному
+                        .col-md-2.col_padding_left_3
+                          .text-right.small_icons
+                            %span.popup2
+                              5
+                              %i.fa.fa-comment-o
+                            %span.popup2
+                              9
+                              %i.fa.fa-thumbs-o-up
+                            %span.popup2
+                              1
+                              %i.fa.fa-thumbs-o-down
+              .col-md-6
+                %a.open-popup-link{:href => "#popup-innov-new11"}
+                  .post
+                    .post-header.white
+                      .row
+                        .col-md-9.col-xs-9
+                          %h5.font_purple.bold Продажа старых вещей
+                        .col-md-1.col-xs-1
+                          %h4.pull-right
+                            %i.fa.fa-exclamation-triangle
+                        .col-md-2.col-xs-2
+                          %h5.time 31.12.2014
+                    .post-body
+                      .media
+                        .media-left.text-center.gradient.post-poster
+                          %img.img-circle.img50{:src => "img/ava-pyat.jpg"}/
+                          %p.poster-name Пятачок
+                        .media-body.white-gray
+                          .post-text
+                            %p Взаимное недоверие четвероногих и пчёл
+                    .post-bottom.white
+                      .row
+                        .col-md-10.col_padding_right_3
+                          %small.pull-left{:style => "margin-right: 3px;"} Аспекты
+                          #stripe11.post-theme
+                            %a#stripe11.tag-stripes.blue-green.active{:href => "#"}
+                              %span.tags Взаимное недоверие четвероногих и пчёл
+                            %a#stripe11.tag-stripes.blue-green2{:href => "#"}
+                              %span.tags Четвероногим нечем заинтересовать пчел
+                            %a#stripe11.tag-stripes.blue-green3{:href => "#"}
+                              %span.tags Активное противостояние четвероногих и пчел
+                            %a#stripe11.tag-stripes.dark-blue2{:href => "#"}
+                              %span.tags Рядом с дубом нет цветочных полян
+                            %a#stripe11.tag-stripes.light-green{:href => "#"}
+                              %span.tags Пчелы летают слишком медленно
+                            %a#stripe11.tag-stripes.sandy{:href => "#"}
+                              %span.tags Винни Пух не говорит по пчелиному
+                        .col-md-2.col_padding_left_3
+                          .text-right.small_icons
+                            %span.popup2
+                              5
+                              %i.fa.fa-comment-o
+                            %span.popup2
+                              9
+                              %i.fa.fa-thumbs-o-up
+                            %span.popup2
+                              1
+                              %i.fa.fa-thumbs-o-down
+      / Main Block ends
+      #popup-innov-new1.popup-window.popup-innov-new.popup-innov-new.popup-w1030.mfp-hide
+        .popup.popup-top-rounded.popup-bottom-rounded
+          %h2 Нововведение "Соглашение и арбитр."
+          .poster-line.line-grey
+            .row
+              .col-md-6
+                .innov-poster-cont
+                  %img.img-circle{:src => "img/ava-pyat.jpg"}/
+                  %span.poster-name Пятачок
+              .col-md-6
+                .innov-tags
+                  .innov-tags-tag.dark-blue Взаимное недоверие четвероногих и пчёл
+                  .innov-tags-tag.blue-green Четвероногим нечем заинтересовать пчел
+                  .innov-tags-tag.blue-green2 Активное противостояние четвероногих и пчел
+                  .innov-tags-tag.blue-green3 Рядом с дубом нет цветочных полян
+                  .innov-tags-tag.light-green Пчелы летают слишком медленно
+                  .innov-tags-tag.sandy Винни Пух не говорит по пчелиному
+          .popup-imperfect-main-block
+            .row
+              .col-md-6
+                .stripe-qa
+                  .lined-heading
+                    %span.bold-stripe Опишите, что новое появится в будущем, чтобы улучшить положение.
+                  %p Контракт, регулирующий отношения четвероногих и пчел, и Сова в качестве арбитра.
+                .stripe-qa
+                  .lined-heading
+                    %span.bold-stripe Объясните, почему ваше нововведение улучшит текущее положение.
+                  %p
+                    Если вступит в действие соглашение, регулирующее отношения четвероногих и пчел , а Сова
+                    станет арбитром, то данный документ позволит регламентировать:
+                  %ul
+                    %li
+                      когда, кем и как определяется количество меда, произведенного пчелами сверх
+                      нынешнего
+                      уровня; - каков регламент передачи пчелами меда четвероногим;
+                    %li Как будут четвероногие содействовать производству меда;
+                    %li как и кем осуществляется контроль за соблюдением соглашения;
+                    %li
+                      какие санкции за всевозможные нарушения контракта обеими сторонами предусмотрены;
+                    %li как действует арбитр и кто ему помогает осуществлять его функции.
+                .stripe-qa
+                  .lined-heading
+                    %span.bold-stripe Опишите функционирование вашего нововведения в будущем – что должно регулярно делаться и какие для этого нужно поддерживать условия?
+                  %p ---
+                .stripe-qa
+                  .lined-heading
+                    %span.bold-stripe Какие ресурсы нужны в будущем для функционирования нововведения?
+                  %p ---
+                .stripe-qa
+                  .lined-heading
+                    %span.bold-stripe Кто и как будет контролировать создание и поддержание должных условий и осуществление регулярных действий, а также предотвращение нежелательных побочныx эффектов
+                  %p ---
+                .stripe-qa
+                  .lined-heading
+                    %span.bold-stripe Какие ресурсы потребуются для осуществления контроля?
+                  %p ---
+                .stripe-qa
+                  .lined-heading
+                    %span.bold-stripe Что может помешать плодотворному функционированию ресурсов, перечисленных в разделах B, С и D, и как с этим предлагается бороться?
+                  %p ---
+                .stripe-qa
+                  .lined-heading
+                    %span.bold-stripe Докажите, что эффект от нововведения оправдает связанные с ним денежные и трудовые затраты.
+                  %p ---
+                .stripe-qa
+                  .lined-heading
+                    %span.bold-stripe Обоснуйте, что воплощение нововведения в жизнь не встретит серьезных препятствий.
+                  %p ---
+              .col-md-6
+                %span.imperfect-text-date 20.12.2014
+                .imperfect-text-comments-post-block
+                  .post-interfaces
+                    .post-interfaces-buttons
+                      %button{:type => "button"}
+                        %img{:src => "img/icon-thumb-up.png"}/
+                      %button{:type => "button"}
+                        %img{:src => "img/icon-thumb-down.png"}/
+                      %button{:type => "button"}
+                        %img{:src => "img/icon-share.png"}/
+                    %form.post-interfaces-add-comment
+                      %input{:placeholder => "Ваш комментарий", :type => "text"}/
+                      %button.btn{:type => "button"}
+                        %img{:src => "img/comment-button.png"}/
+                .imperfect-text-comments-post-block
+                  .poster-line
+                    %img.img-circle{:src => "img/ava-rabb.jpg"}/
+                    %span.poster-name Кролик
+                    %span.comment-time 15:28
+                  %p
+                    Мест для прогулки во всем лесу полно, нам не нравится, что ты все время держишь нас в
+                    напряжении своим присутствием.
+                .imperfect-text-comments-post-block
+                  .poster-line
+                    %img.img-circle{:src => "img/ava-ia.jpg"}/
+                    %span.poster-name Ослик
+                    %span.comment-time 19:30
+                  %p
+                    Проснувшись однажды утром после беспокойного сна, Грегор Замза обнаружил, что
+                .imperfect-text-comments-post-block
+                  .poster-line
+                    %img.img-circle{:src => "img/ava-ia.jpg"}/
+                    %span.poster-name Ослик
+                    %span.comment-time 22:50
+                  %p
+                    Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo
+      #popup-innov-new2.popup-window.popup-innov-new.popup-innov-new.popup-w1030.mfp-hide
+        .popup.popup-top-rounded.popup-bottom-rounded
+          %h2 Нововведение "Аренда медовырабатывающей машины"
+          .poster-line.line-grey
+            .row
+              .col-md-6
+                .innov-poster-cont
+                  %img.img-circle{:src => "img/ava-rabb.jpg"}/
+                  %span.poster-name Кролик
+              .col-md-6
+                .innov-tags
+                  .innov-tags-tag.dark-blue Взаимное недоверие четвероногих и пчёл
+                  .innov-tags-tag.blue-green Четвероногим нечем заинтересовать пчел
+                  .innov-tags-tag.blue-green2 Активное противостояние четвероногих и пчел
+                  .innov-tags-tag.blue-green3 Рядом с дубом нет цветочных полян
+                  .innov-tags-tag.light-green Пчелы летают слишком медленно
+                  .innov-tags-tag.sandy Винни Пух не говорит по пчелиному
+          .popup-imperfect-main-block
+            .row
+              .col-md-6
+                .stripe-qa
+                  .lined-heading
+                    %span.bold-stripe Опишите, что новое появится в будущем, чтобы улучшить положение.
+                  %p
+                    Четвероногие разобьют около дуба большой цветник, где высадят и вырастят медоносные
+                    растения
+                    и станут за ними ухаживать.
+                .stripe-qa
+                  .lined-heading
+                    %span.bold-stripe Объясните, почему ваше нововведение улучшит текущее положение.
+                  %p
+                    Когда четвероногие, чтобы заинтересовать пчел, разобьют около дуба цветник, пчелам не
+                    нужно
+                    будет тратить много времени и сил на перелеты за нектаром. В результате благодаря
+                    инициативе
+                    четвероногих пчелы колоссально повысят производство меда. В связи с новым положением дел
+                    четвероногие и пчелы заключат соглашение, регулирующее их отношения. По этому
+                    соглашению, в
+                    частности, в обмен на пользование цветником пчелы будут отдавать четвероногим половину
+                    того
+                    меда, который они произведут сверх нынешнего уровня. Таким образом, выиграют все: и
+                    пчелы
+                    будут иметь гораздо больше меда, чем теперь, и четвероногие получат его вдоволь. В
+                    результате взаимная агрессия и недоверие будут устранены.
+                .stripe-qa
+                  .lined-heading
+                    %span.bold-stripe Опишите функционирование вашего нововведения в будущем – что должно регулярно делаться и какие для этого нужно поддерживать условия?
+                  %p
+                    Винни и его друзья делятся на две группы. Первая группа занимается пополнением
+                    ассортимента
+                    медоносных растений, а вторая поддерживает условия их роста – пропалывает почву и
+                    поливает
+                    цветник.
+                .stripe-qa
+                  .lined-heading
+                    %span.bold-stripe Какие ресурсы нужны в будущем для функционирования нововведения?
+                  %p
+                .stripe-qa
+                  .lined-heading
+                    %span.bold-stripe Какие нежелательные побочные эффекты могут возникнуть в будущем в связи с поддержанием условий и  регулярной деятельностью?
+                  %p
+                    Некоторые пчелы могут не захотеть делиться медом.
+                    Отдельным четвероногим будет лень работать.
+                .stripe-qa
+                  .lined-heading
+                    %span.bold-stripe Какие ресурсы потребуются, чтобы предотвратить эти эффекты?
+                  %p
+                    Некоторые пчелы могут не захотеть делиться медом.
+                    Отдельным четвероногим будет лень работать.
+                .stripe-qa
+                  .lined-heading
+                    %span.bold-stripe Кто и как будет контролировать создание и поддержание должных условий и осуществление регулярных действий, а также предотвращение нежелательных побочныx эффектов
+                  %p
+                    Контроль будут осуществлять Винни-Пух, Кролик и Сова. Винни следит за состоянием и
+                    пополнением цветника, а также за взаимодействием с пчелами. Кролик следит, чтобы жители
+                    леса
+                    по незнанию не совершали садоводческих ошибок. Сова осуществляет общий контроль.
+                .stripe-qa
+                  .lined-heading
+                    %span.bold-stripe Какие ресурсы потребуются для осуществления контроля?
+                  %p
+                .stripe-qa
+                  .lined-heading
+                    %span.bold-stripe Что может помешать плодотворному функционированию ресурсов, перечисленных в разделах B, С и D, и как с этим предлагается бороться?
+                  %p
+                    Главным препятствием может стать отсутствие слаженности действий из-за их новизны.
+                    Ее надо отрабатывать, чтобы через некоторое время все адаптировались к
+                    нововведениям.
+                .stripe-qa
+                  .lined-heading
+                    %span.bold-stripe Докажите, что эффект от нововведения оправдает связанные с ним денежные и трудовые затраты.
+                  %p
+                    Благодаря этому решению, учитывающему интересы всех сторон, возникнет ситуация, в которой
+                    не
+                    будет проигравших (win-win): Винни и его друзья будут регулярно получать мед от пчел без
+                    всякого обмана, самим пчелам не придется улетать за нектаром далеко от улья, лес станет
+                    красивее, а его обитатели — дружнее.
+                .stripe-qa
+                  .lined-heading
+                    %span.bold-stripe Обоснуйте, что воплощение нововведения в жизнь не встретит серьезных препятствий.
+                  %p При грамотном контроле и распределении обязанностей серьезных проблем не возникнет.
+              .col-md-6
+                %span.imperfect-text-date 21.12.2014
+                .imperfect-text-comments-post-block
+                  .post-interfaces
+                    .post-interfaces-buttons
+                      %button{:type => "button"}
+                        %img{:src => "img/icon-thumb-up.png"}/
+                      %button{:type => "button"}
+                        %img{:src => "img/icon-thumb-down.png"}/
+                      %button{:type => "button"}
+                        %img{:src => "img/icon-share.png"}/
+                    %form.post-interfaces-add-comment
+                      %input{:placeholder => "Ваш комментарий", :type => "text"}/
+                      %button.btn{:type => "button"}
+                        %img{:src => "img/comment-button.png"}/
+      #popup-innov-new3.popup-window.popup-innov-new.popup-innov-new.popup-w1030.mfp-hide
+        .popup.popup-top-rounded.popup-bottom-rounded
+          %h2 Нововведение "Переход на сахарные заменители"
+          .poster-line.line-grey
+            .row
+              .col-md-6
+                .innov-poster-cont
+                  %img.img-circle{:src => "img/ava-ia.jpg"}/
+                  %span.poster-name Ослик
+              .col-md-6
+                .innov-tags
+                  .innov-tags-tag.dark-blue Взаимное недоверие четвероногих и пчёл
+                  .innov-tags-tag.blue-green Четвероногим нечем заинтересовать пчел
+                  .innov-tags-tag.blue-green2 Активное противостояние четвероногих и пчел
+                  .innov-tags-tag.blue-green3 Рядом с дубом нет цветочных полян
+                  .innov-tags-tag.light-green Пчелы летают слишком медленно
+                  .innov-tags-tag.sandy Винни Пух не говорит по пчелиному
+          .popup-imperfect-main-block
+            .row
+              .col-md-6
+                .stripe-qa
+                  .lined-heading
+                    %span.bold-stripe Опишите, что новое появится в будущем, чтобы улучшить положение.
+                  %p
+                    Четвероногие разобьют около дуба большой цветник, где высадят и вырастят медоносные
+                    растения
+                    и станут за ними ухаживать.
+                .stripe-qa
+                  .lined-heading
+                    %span.bold-stripe Объясните, почему ваше нововведение улучшит текущее положение.
+                  %p
+                    Когда четвероногие, чтобы заинтересовать пчел, разобьют около дуба цветник, пчелам не
+                    нужно
+                    будет тратить много времени и сил на перелеты за нектаром. В результате благодаря
+                    инициативе
+                    четвероногих пчелы колоссально повысят производство меда. В связи с новым положением дел
+                    четвероногие и пчелы заключат соглашение, регулирующее их отношения. По этому
+                    соглашению, в
+                    частности, в обмен на пользование цветником пчелы будут отдавать четвероногим половину
+                    того
+                    меда, который они произведут сверх нынешнего уровня. Таким образом, выиграют все: и
+                    пчелы
+                    будут иметь гораздо больше меда, чем теперь, и четвероногие получат его вдоволь. В
+                    результате взаимная агрессия и недоверие будут устранены.
+                .stripe-qa
+                  .lined-heading
+                    %span.bold-stripe Опишите функционирование вашего нововведения в будущем – что должно регулярно делаться и какие для этого нужно поддерживать условия?
+                  %p
+                    Винни и его друзья делятся на две группы. Первая группа занимается пополнением
+                    ассортимента
+                    медоносных растений, а вторая поддерживает условия их роста – пропалывает почву и
+                    поливает
+                    цветник.
+                .stripe-qa
+                  .lined-heading
+                    %span.bold-stripe Какие ресурсы нужны в будущем для функционирования нововведения?
+                  %p
+                .stripe-qa
+                  .lined-heading
+                    %span.bold-stripe Какие нежелательные побочные эффекты могут возникнуть в будущем в связи с поддержанием условий и  регулярной деятельностью?
+                  %p
+                    Некоторые пчелы могут не захотеть делиться медом.
+                    Отдельным четвероногим будет лень работать.
+                .stripe-qa
+                  .lined-heading
+                    %span.bold-stripe Какие ресурсы потребуются, чтобы предотвратить эти эффекты?
+                  %p
+                    Некоторые пчелы могут не захотеть делиться медом.
+                    Отдельным четвероногим будет лень работать.
+                .stripe-qa
+                  .lined-heading
+                    %span.bold-stripe Кто и как будет контролировать создание и поддержание должных условий и осуществление регулярных действий, а также предотвращение нежелательных побочныx эффектов
+                  %p
+                    Контроль будут осуществлять Винни-Пух, Кролик и Сова. Винни следит за состоянием и
+                    пополнением цветника, а также за взаимодействием с пчелами. Кролик следит, чтобы жители
+                    леса
+                    по незнанию не совершали садоводческих ошибок. Сова осуществляет общий контроль.
+                .stripe-qa
+                  .lined-heading
+                    %span.bold-stripe Какие ресурсы потребуются для осуществления контроля?
+                  %p
+                .stripe-qa
+                  .lined-heading
+                    %span.bold-stripe Что может помешать плодотворному функционированию ресурсов, перечисленных в разделах B, С и D, и как с этим предлагается бороться?
+                  %p
+                    Главным препятствием может стать отсутствие слаженности действий из-за их новизны.
+                    Ее надо отрабатывать, чтобы через некоторое время все адаптировались к
+                    нововведениям.
+                .stripe-qa
+                  .lined-heading
+                    %span.bold-stripe Докажите, что эффект от нововведения оправдает связанные с ним денежные и трудовые затраты.
+                  %p
+                    Благодаря этому решению, учитывающему интересы всех сторон, возникнет ситуация, в которой
+                    не
+                    будет проигравших (win-win): Винни и его друзья будут регулярно получать мед от пчел без
+                    всякого обмана, самим пчелам не придется улетать за нектаром далеко от улья, лес станет
+                    красивее, а его обитатели — дружнее.
+                .stripe-qa
+                  .lined-heading
+                    %span.bold-stripe Обоснуйте, что воплощение нововведения в жизнь не встретит серьезных препятствий.
+                  %p При грамотном контроле и распределении обязанностей серьезных проблем не возникнет.
+              .col-md-6
+                %span.imperfect-text-date 22.12.2014
+                .imperfect-text-comments-post-block
+                  .post-interfaces
+                    .post-interfaces-buttons
+                      %button{:type => "button"}
+                        %img{:src => "img/icon-thumb-up.png"}/
+                      %button{:type => "button"}
+                        %img{:src => "img/icon-thumb-down.png"}/
+                      %button{:type => "button"}
+                        %img{:src => "img/icon-share.png"}/
+                    %form.post-interfaces-add-comment
+                      %input{:placeholder => "Ваш комментарий", :type => "text"}/
+                      %button.btn{:type => "button"}
+                        %img{:src => "img/comment-button.png"}/
+                .imperfect-text-comments-post-block
+                  .poster-line
+                    %img.img-circle{:src => "img/ava-rabb.jpg"}/
+                    %span.poster-name Кролик
+                    %span.comment-time 15:28
+                  %p
+                    Мест для прогулки во всем лесу полно, нам не нравится, что ты все время держишь нас в
+                    напряжении своим присутствием.
+                .imperfect-text-comments-post-block
+                  .poster-line
+                    %img.img-circle{:src => "img/ava-ia.jpg"}/
+                    %span.poster-name Ослик
+                    %span.comment-time 19:30
+                  %p
+                    Проснувшись однажды утром после беспокойного сна, Грегор Замза обнаружил, что
+                .imperfect-text-comments-post-block
+                  .poster-line
+                    %img.img-circle{:src => "img/ava-ia.jpg"}/
+                    %span.poster-name Ослик
+                    %span.comment-time 22:50
+                  %p
+                    Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo
+      #popup-innov-new4.popup-window.popup-innov-new.popup-innov-new.popup-w1030.mfp-hide
+        .popup.popup-top-rounded.popup-bottom-rounded
+          %h2 Нововведение "Эффективные датчики слежения"
+          .poster-line.line-grey
+            .row
+              .col-md-6
+                .innov-poster-cont
+                  %img.img-circle{:src => "img/ava-rabb.jpg"}/
+                  %span.poster-name Кролик
+              .col-md-6
+                .innov-tags
+                  .innov-tags-tag.dark-blue Взаимное недоверие четвероногих и пчёл
+                  .innov-tags-tag.blue-green Четвероногим нечем заинтересовать пчел
+                  .innov-tags-tag.blue-green2 Активное противостояние четвероногих и пчел
+                  .innov-tags-tag.blue-green3 Рядом с дубом нет цветочных полян
+                  .innov-tags-tag.light-green Пчелы летают слишком медленно
+                  .innov-tags-tag.sandy Винни Пух не говорит по пчелиному
+          .popup-imperfect-main-block
+            .row
+              .col-md-6
+                .stripe-qa
+                  .lined-heading
+                    %span.bold-stripe Опишите, что новое появится в будущем, чтобы улучшить положение.
+                  %p
+                    Четвероногие разобьют около дуба большой цветник, где высадят и вырастят медоносные
+                    растения
+                    и станут за ними ухаживать.
+                .stripe-qa
+                  .lined-heading
+                    %span.bold-stripe Объясните, почему ваше нововведение улучшит текущее положение.
+                  %p
+                    Когда четвероногие, чтобы заинтересовать пчел, разобьют около дуба цветник, пчелам не
+                    нужно
+                    будет тратить много времени и сил на перелеты за нектаром. В результате благодаря
+                    инициативе
+                    четвероногих пчелы колоссально повысят производство меда. В связи с новым положением дел
+                    четвероногие и пчелы заключат соглашение, регулирующее их отношения. По этому
+                    соглашению, в
+                    частности, в обмен на пользование цветником пчелы будут отдавать четвероногим половину
+                    того
+                    меда, который они произведут сверх нынешнего уровня. Таким образом, выиграют все: и
+                    пчелы
+                    будут иметь гораздо больше меда, чем теперь, и четвероногие получат его вдоволь. В
+                    результате взаимная агрессия и недоверие будут устранены.
+                .stripe-qa
+                  .lined-heading
+                    %span.bold-stripe Опишите функционирование вашего нововведения в будущем – что должно регулярно делаться и какие для этого нужно поддерживать условия?
+                  %p
+                    Винни и его друзья делятся на две группы. Первая группа занимается пополнением
+                    ассортимента
+                    медоносных растений, а вторая поддерживает условия их роста – пропалывает почву и
+                    поливает
+                    цветник.
+                .stripe-qa
+                  .lined-heading
+                    %span.bold-stripe Какие ресурсы нужны в будущем для функционирования нововведения?
+                  %p
+                .stripe-qa
+                  .lined-heading
+                    %span.bold-stripe Какие нежелательные побочные эффекты могут возникнуть в будущем в связи с поддержанием условий и  регулярной деятельностью?
+                  %p
+                    Некоторые пчелы могут не захотеть делиться медом.
+                    Отдельным четвероногим будет лень работать.
+                .stripe-qa
+                  .lined-heading
+                    %span.bold-stripe Какие ресурсы потребуются, чтобы предотвратить эти эффекты?
+                  %p
+                    Некоторые пчелы могут не захотеть делиться медом.
+                    Отдельным четвероногим будет лень работать.
+                .stripe-qa
+                  .lined-heading
+                    %span.bold-stripe Кто и как будет контролировать создание и поддержание должных условий и осуществление регулярных действий, а также предотвращение нежелательных побочныx эффектов
+                  %p
+                    Контроль будут осуществлять Винни-Пух, Кролик и Сова. Винни следит за состоянием и
+                    пополнением цветника, а также за взаимодействием с пчелами. Кролик следит, чтобы жители
+                    леса
+                    по незнанию не совершали садоводческих ошибок. Сова осуществляет общий контроль.
+                .stripe-qa
+                  .lined-heading
+                    %span.bold-stripe Какие ресурсы потребуются для осуществления контроля?
+                  %p
+                .stripe-qa
+                  .lined-heading
+                    %span.bold-stripe Что может помешать плодотворному функционированию ресурсов, перечисленных в разделах B, С и D, и как с этим предлагается бороться?
+                  %p
+                    Главным препятствием может стать отсутствие слаженности действий из-за их новизны.
+                    Ее надо отрабатывать, чтобы через некоторое время все адаптировались к
+                    нововведениям.
+                .stripe-qa
+                  .lined-heading
+                    %span.bold-stripe Докажите, что эффект от нововведения оправдает связанные с ним денежные и трудовые затраты.
+                  %p
+                    Благодаря этому решению, учитывающему интересы всех сторон, возникнет ситуация, в которой
+                    не
+                    будет проигравших (win-win): Винни и его друзья будут регулярно получать мед от пчел без
+                    всякого обмана, самим пчелам не придется улетать за нектаром далеко от улья, лес станет
+                    красивее, а его обитатели — дружнее.
+                .stripe-qa
+                  .lined-heading
+                    %span.bold-stripe Обоснуйте, что воплощение нововведения в жизнь не встретит серьезных препятствий.
+                  %p При грамотном контроле и распределении обязанностей серьезных проблем не возникнет.
+              .col-md-6
+                %span.imperfect-text-date 24.12.2014
+                .imperfect-text-comments-post-block
+                  .post-interfaces
+                    .post-interfaces-buttons
+                      %button{:type => "button"}
+                        %img{:src => "img/icon-thumb-up.png"}/
+                      %button{:type => "button"}
+                        %img{:src => "img/icon-thumb-down.png"}/
+                      %button{:type => "button"}
+                        %img{:src => "img/icon-share.png"}/
+                    %form.post-interfaces-add-comment
+                      %input{:placeholder => "Ваш комментарий", :type => "text"}/
+                      %button.btn{:type => "button"}
+                        %img{:src => "img/comment-button.png"}/
+      #popup-innov-new5.popup-window.popup-innov-new.popup-innov-new.popup-w1030.mfp-hide
+        .popup.popup-top-rounded.popup-bottom-rounded
+          %h2 Нововведение "Воздушный радар"
+          .poster-line.line-grey
+            .row
+              .col-md-6
+                .innov-poster-cont
+                  %img.img-circle{:src => "img/ava-ia.jpg"}/
+                  %span.poster-name Ослик
+              .col-md-6
+                .innov-tags
+                  .innov-tags-tag.dark-blue Взаимное недоверие четвероногих и пчёл
+                  .innov-tags-tag.blue-green Четвероногим нечем заинтересовать пчел
+                  .innov-tags-tag.blue-green2 Активное противостояние четвероногих и пчел
+                  .innov-tags-tag.blue-green3 Рядом с дубом нет цветочных полян
+                  .innov-tags-tag.light-green Пчелы летают слишком медленно
+                  .innov-tags-tag.sandy Винни Пух не говорит по пчелиному
+          .popup-imperfect-main-block
+            .row
+              .col-md-6
+                .stripe-qa
+                  .lined-heading
+                    %span.bold-stripe Опишите, что новое появится в будущем, чтобы улучшить положение.
+                  %p
+                    Четвероногие разобьют около дуба большой цветник, где высадят и вырастят медоносные
+                    растения
+                    и станут за ними ухаживать.
+                .stripe-qa
+                  .lined-heading
+                    %span.bold-stripe Объясните, почему ваше нововведение улучшит текущее положение.
+                  %p
+                    Когда четвероногие, чтобы заинтересовать пчел, разобьют около дуба цветник, пчелам не
+                    нужно
+                    будет тратить много времени и сил на перелеты за нектаром. В результате благодаря
+                    инициативе
+                    четвероногих пчелы колоссально повысят производство меда. В связи с новым положением дел
+                    четвероногие и пчелы заключат соглашение, регулирующее их отношения. По этому
+                    соглашению, в
+                    частности, в обмен на пользование цветником пчелы будут отдавать четвероногим половину
+                    того
+                    меда, который они произведут сверх нынешнего уровня. Таким образом, выиграют все: и
+                    пчелы
+                    будут иметь гораздо больше меда, чем теперь, и четвероногие получат его вдоволь. В
+                    результате взаимная агрессия и недоверие будут устранены.
+                .stripe-qa
+                  .lined-heading
+                    %span.bold-stripe Опишите функционирование вашего нововведения в будущем – что должно регулярно делаться и какие для этого нужно поддерживать условия?
+                  %p
+                    Винни и его друзья делятся на две группы. Первая группа занимается пополнением
+                    ассортимента
+                    медоносных растений, а вторая поддерживает условия их роста – пропалывает почву и
+                    поливает
+                    цветник.
+                .stripe-qa
+                  .lined-heading
+                    %span.bold-stripe Какие ресурсы нужны в будущем для функционирования нововведения?
+                  %p
+                .stripe-qa
+                  .lined-heading
+                    %span.bold-stripe Какие нежелательные побочные эффекты могут возникнуть в будущем в связи с поддержанием условий и  регулярной деятельностью?
+                  %p
+                    Некоторые пчелы могут не захотеть делиться медом.
+                    Отдельным четвероногим будет лень работать.
+                .stripe-qa
+                  .lined-heading
+                    %span.bold-stripe Какие ресурсы потребуются, чтобы предотвратить эти эффекты?
+                  %p
+                    Некоторые пчелы могут не захотеть делиться медом.
+                    Отдельным четвероногим будет лень работать.
+                .stripe-qa
+                  .lined-heading
+                    %span.bold-stripe Кто и как будет контролировать создание и поддержание должных условий и осуществление регулярных действий, а также предотвращение нежелательных побочныx эффектов
+                  %p
+                    Контроль будут осуществлять Винни-Пух, Кролик и Сова. Винни следит за состоянием и
+                    пополнением цветника, а также за взаимодействием с пчелами. Кролик следит, чтобы жители
+                    леса
+                    по незнанию не совершали садоводческих ошибок. Сова осуществляет общий контроль.
+                .stripe-qa
+                  .lined-heading
+                    %span.bold-stripe Какие ресурсы потребуются для осуществления контроля?
+                  %p
+                .stripe-qa
+                  .lined-heading
+                    %span.bold-stripe Что может помешать плодотворному функционированию ресурсов, перечисленных в разделах B, С и D, и как с этим предлагается бороться?
+                  %p
+                    Главным препятствием может стать отсутствие слаженности действий из-за их новизны.
+                    Ее надо отрабатывать, чтобы через некоторое время все адаптировались к
+                    нововведениям.
+                .stripe-qa
+                  .lined-heading
+                    %span.bold-stripe Докажите, что эффект от нововведения оправдает связанные с ним денежные и трудовые затраты.
+                  %p
+                    Благодаря этому решению, учитывающему интересы всех сторон, возникнет ситуация, в которой
+                    не
+                    будет проигравших (win-win): Винни и его друзья будут регулярно получать мед от пчел без
+                    всякого обмана, самим пчелам не придется улетать за нектаром далеко от улья, лес станет
+                    красивее, а его обитатели — дружнее.
+                .stripe-qa
+                  .lined-heading
+                    %span.bold-stripe Обоснуйте, что воплощение нововведения в жизнь не встретит серьезных препятствий.
+                  %p При грамотном контроле и распределении обязанностей серьезных проблем не возникнет.
+              .col-md-6
+                %span.imperfect-text-date 25.12.2014
+                .imperfect-text-comments-post-block
+                  .poster-line
+                    %img.img-circle{:src => "img/ava-rabb.jpg"}/
+                    %span.poster-name Кролик
+                    %span.comment-time 14:40
+                  %p
+                  .post-interfaces
+                    .post-interfaces-buttons
+                      %button{:type => "button"}
+                        %img{:src => "img/icon-thumb-up.png"}/
+                      %button{:type => "button"}
+                        %img{:src => "img/icon-thumb-down.png"}/
+                      %button{:type => "button"}
+                        %img{:src => "img/icon-share.png"}/
+                    %form.post-interfaces-add-comment
+                      %input{:placeholder => "Ваш комментарий", :type => "text"}/
+                      %button.btn{:type => "button"}
+                        %img{:src => "img/comment-button.png"}/
+      #popup-innov-new6.popup-window.popup-innov-new.popup-innov-new.popup-w1030.mfp-hide
+        .popup.popup-top-rounded.popup-bottom-rounded
+          %h2 Нововведение "Аутсорсинг охранной фирмы"
+          .poster-line.line-grey
+            .row
+              .col-md-6
+                .innov-poster-cont
+                  %img.img-circle{:src => "img/ava-rabb.jpg"}/
+                  %span.poster-name Кролик
+              .col-md-6
+                .innov-tags
+                  .innov-tags-tag.dark-blue Взаимное недоверие четвероногих и пчёл
+                  .innov-tags-tag.blue-green Четвероногим нечем заинтересовать пчел
+                  .innov-tags-tag.blue-green2 Активное противостояние четвероногих и пчел
+                  .innov-tags-tag.blue-green3 Рядом с дубом нет цветочных полян
+                  .innov-tags-tag.light-green Пчелы летают слишком медленно
+                  .innov-tags-tag.sandy Винни Пух не говорит по пчелиному
+          .popup-imperfect-main-block
+            .row
+              .col-md-6
+                .stripe-qa
+                  .lined-heading
+                    %span.bold-stripe Опишите, что новое появится в будущем, чтобы улучшить положение.
+                  %p
+                    Четвероногие разобьют около дуба большой цветник, где высадят и вырастят медоносные
+                    растения
+                    и станут за ними ухаживать.
+                .stripe-qa
+                  .lined-heading
+                    %span.bold-stripe Объясните, почему ваше нововведение улучшит текущее положение.
+                  %p
+                    Когда четвероногие, чтобы заинтересовать пчел, разобьют около дуба цветник, пчелам не
+                    нужно
+                    будет тратить много времени и сил на перелеты за нектаром. В результате благодаря
+                    инициативе
+                    четвероногих пчелы колоссально повысят производство меда. В связи с новым положением дел
+                    четвероногие и пчелы заключат соглашение, регулирующее их отношения. По этому
+                    соглашению, в
+                    частности, в обмен на пользование цветником пчелы будут отдавать четвероногим половину
+                    того
+                    меда, который они произведут сверх нынешнего уровня. Таким образом, выиграют все: и
+                    пчелы
+                    будут иметь гораздо больше меда, чем теперь, и четвероногие получат его вдоволь. В
+                    результате взаимная агрессия и недоверие будут устранены.
+                .stripe-qa
+                  .lined-heading
+                    %span.bold-stripe Опишите функционирование вашего нововведения в будущем – что должно регулярно делаться и какие для этого нужно поддерживать условия?
+                  %p
+                    Винни и его друзья делятся на две группы. Первая группа занимается пополнением
+                    ассортимента
+                    медоносных растений, а вторая поддерживает условия их роста – пропалывает почву и
+                    поливает
+                    цветник.
+                .stripe-qa
+                  .lined-heading
+                    %span.bold-stripe Какие ресурсы нужны в будущем для функционирования нововведения?
+                  %p
+                .stripe-qa
+                  .lined-heading
+                    %span.bold-stripe Какие нежелательные побочные эффекты могут возникнуть в будущем в связи с поддержанием условий и  регулярной деятельностью?
+                  %p
+                    Некоторые пчелы могут не захотеть делиться медом.
+                    Отдельным четвероногим будет лень работать.
+                .stripe-qa
+                  .lined-heading
+                    %span.bold-stripe Какие ресурсы потребуются, чтобы предотвратить эти эффекты?
+                  %p
+                    Некоторые пчелы могут не захотеть делиться медом.
+                    Отдельным четвероногим будет лень работать.
+                .stripe-qa
+                  .lined-heading
+                    %span.bold-stripe Кто и как будет контролировать создание и поддержание должных условий и осуществление регулярных действий, а также предотвращение нежелательных побочныx эффектов
+                  %p
+                    Контроль будут осуществлять Винни-Пух, Кролик и Сова. Винни следит за состоянием и
+                    пополнением цветника, а также за взаимодействием с пчелами. Кролик следит, чтобы жители
+                    леса
+                    по незнанию не совершали садоводческих ошибок. Сова осуществляет общий контроль.
+                .stripe-qa
+                  .lined-heading
+                    %span.bold-stripe Какие ресурсы потребуются для осуществления контроля?
+                  %p
+                .stripe-qa
+                  .lined-heading
+                    %span.bold-stripe Что может помешать плодотворному функционированию ресурсов, перечисленных в разделах B, С и D, и как с этим предлагается бороться?
+                  %p
+                    Главным препятствием может стать отсутствие слаженности действий из-за их новизны.
+                    Ее надо отрабатывать, чтобы через некоторое время все адаптировались к
+                    нововведениям.
+                .stripe-qa
+                  .lined-heading
+                    %span.bold-stripe Докажите, что эффект от нововведения оправдает связанные с ним денежные и трудовые затраты.
+                  %p
+                    Благодаря этому решению, учитывающему интересы всех сторон, возникнет ситуация, в которой
+                    не
+                    будет проигравших (win-win): Винни и его друзья будут регулярно получать мед от пчел без
+                    всякого обмана, самим пчелам не придется улетать за нектаром далеко от улья, лес станет
+                    красивее, а его обитатели — дружнее.
+                .stripe-qa
+                  .lined-heading
+                    %span.bold-stripe Обоснуйте, что воплощение нововведения в жизнь не встретит серьезных препятствий.
+                  %p При грамотном контроле и распределении обязанностей серьезных проблем не возникнет.
+              .col-md-6
+                %span.imperfect-text-date 27.12.2014
+                .imperfect-text-comments-post-block
+                  .poster-line
+                    %img.img-circle{:src => "img/ava-rabb.jpg"}/
+                    %span.poster-name Кролик
+                    %span.comment-time 18:10
+                  %p
+                  .post-interfaces
+                    .post-interfaces-buttons
+                      %button{:type => "button"}
+                        %img{:src => "img/icon-thumb-up.png"}/
+                      %button{:type => "button"}
+                        %img{:src => "img/icon-thumb-down.png"}/
+                      %button{:type => "button"}
+                        %img{:src => "img/icon-share.png"}/
+                    %form.post-interfaces-add-comment
+                      %input{:placeholder => "Ваш комментарий", :type => "text"}/
+                      %button.btn{:type => "button"}
+                        %img{:src => "img/comment-button.png"}/
+      #popup-innov-new7.popup-window.popup-innov-new.popup-innov-new.popup-w1030.mfp-hide
+        .popup.popup-top-rounded.popup-bottom-rounded
+          %h2 Нововведение "Разуплотнение мжвячности"
+          .poster-line.line-grey
+            .row
+              .col-md-6
+                .innov-poster-cont
+                  %img.img-circle{:src => "img/ava-pyat.jpg"}/
+                  %span.poster-name Пятачок
+              .col-md-6
+                .innov-tags
+                  .innov-tags-tag.dark-blue Взаимное недоверие четвероногих и пчёл
+                  .innov-tags-tag.blue-green Четвероногим нечем заинтересовать пчел
+                  .innov-tags-tag.blue-green2 Активное противостояние четвероногих и пчел
+                  .innov-tags-tag.blue-green3 Рядом с дубом нет цветочных полян
+                  .innov-tags-tag.light-green Пчелы летают слишком медленно
+                  .innov-tags-tag.sandy Винни Пух не говорит по пчелиному
+          .popup-imperfect-main-block
+            .row
+              .col-md-6
+                .stripe-qa
+                  .lined-heading
+                    %span.bold-stripe Опишите, что новое появится в будущем, чтобы улучшить положение.
+                  %p
+                    Четвероногие разобьют около дуба большой цветник, где высадят и вырастят медоносные
+                    растения
+                    и станут за ними ухаживать.
+                .stripe-qa
+                  .lined-heading
+                    %span.bold-stripe Объясните, почему ваше нововведение улучшит текущее положение.
+                  %p
+                    Когда четвероногие, чтобы заинтересовать пчел, разобьют около дуба цветник, пчелам не
+                    нужно
+                    будет тратить много времени и сил на перелеты за нектаром. В результате благодаря
+                    инициативе
+                    четвероногих пчелы колоссально повысят производство меда. В связи с новым положением дел
+                    четвероногие и пчелы заключат соглашение, регулирующее их отношения. По этому
+                    соглашению, в
+                    частности, в обмен на пользование цветником пчелы будут отдавать четвероногим половину
+                    того
+                    меда, который они произведут сверх нынешнего уровня. Таким образом, выиграют все: и
+                    пчелы
+                    будут иметь гораздо больше меда, чем теперь, и четвероногие получат его вдоволь. В
+                    результате взаимная агрессия и недоверие будут устранены.
+                .stripe-qa
+                  .lined-heading
+                    %span.bold-stripe Опишите функционирование вашего нововведения в будущем – что должно регулярно делаться и какие для этого нужно поддерживать условия?
+                  %p
+                    Винни и его друзья делятся на две группы. Первая группа занимается пополнением
+                    ассортимента
+                    медоносных растений, а вторая поддерживает условия их роста – пропалывает почву и
+                    поливает
+                    цветник.
+                .stripe-qa
+                  .lined-heading
+                    %span.bold-stripe Какие ресурсы нужны в будущем для функционирования нововведения?
+                  %p
+                .stripe-qa
+                  .lined-heading
+                    %span.bold-stripe Какие нежелательные побочные эффекты могут возникнуть в будущем в связи с поддержанием условий и  регулярной деятельностью?
+                  %p
+                    Некоторые пчелы могут не захотеть делиться медом.
+                    Отдельным четвероногим будет лень работать.
+                .stripe-qa
+                  .lined-heading
+                    %span.bold-stripe Какие ресурсы потребуются, чтобы предотвратить эти эффекты?
+                  %p
+                    Некоторые пчелы могут не захотеть делиться медом.
+                    Отдельным четвероногим будет лень работать.
+                .stripe-qa
+                  .lined-heading
+                    %span.bold-stripe Кто и как будет контролировать создание и поддержание должных условий и осуществление регулярных действий, а также предотвращение нежелательных побочныx эффектов
+                  %p
+                    Контроль будут осуществлять Винни-Пух, Кролик и Сова. Винни следит за состоянием и
+                    пополнением цветника, а также за взаимодействием с пчелами. Кролик следит, чтобы жители
+                    леса
+                    по незнанию не совершали садоводческих ошибок. Сова осуществляет общий контроль.
+                .stripe-qa
+                  .lined-heading
+                    %span.bold-stripe Какие ресурсы потребуются для осуществления контроля?
+                  %p
+                .stripe-qa
+                  .lined-heading
+                    %span.bold-stripe Что может помешать плодотворному функционированию ресурсов, перечисленных в разделах B, С и D, и как с этим предлагается бороться?
+                  %p
+                    Главным препятствием может стать отсутствие слаженности действий из-за их новизны.
+                    Ее надо отрабатывать, чтобы через некоторое время все адаптировались к
+                    нововведениям.
+                .stripe-qa
+                  .lined-heading
+                    %span.bold-stripe Докажите, что эффект от нововведения оправдает связанные с ним денежные и трудовые затраты.
+                  %p
+                    Благодаря этому решению, учитывающему интересы всех сторон, возникнет ситуация, в которой
+                    не
+                    будет проигравших (win-win): Винни и его друзья будут регулярно получать мед от пчел без
+                    всякого обмана, самим пчелам не придется улетать за нектаром далеко от улья, лес станет
+                    красивее, а его обитатели — дружнее.
+                .stripe-qa
+                  .lined-heading
+                    %span.bold-stripe Обоснуйте, что воплощение нововведения в жизнь не встретит серьезных препятствий.
+                  %p При грамотном контроле и распределении обязанностей серьезных проблем не возникнет.
+              .col-md-6
+                %span.imperfect-text-date 28.12.2014
+                .imperfect-text-comments-post-block
+                  .poster-line
+                    %img.img-circle{:src => "img/ava-rabb.jpg"}/
+                    %span.poster-name Кролик
+                    %span.comment-time 22:15
+                  %p
+                  .post-interfaces
+                    .post-interfaces-buttons
+                      %button{:type => "button"}
+                        %img{:src => "img/icon-thumb-up.png"}/
+                      %button{:type => "button"}
+                        %img{:src => "img/icon-thumb-down.png"}/
+                      %button{:type => "button"}
+                        %img{:src => "img/icon-share.png"}/
+                    %form.post-interfaces-add-comment
+                      %input{:placeholder => "Ваш комментарий", :type => "text"}/
+                      %button.btn{:type => "button"}
+                        %img{:src => "img/comment-button.png"}/
+      #popup-innov-new8.popup-window.popup-innov-new.popup-innov-new.popup-w1030.mfp-hide
+        .popup.popup-top-rounded.popup-bottom-rounded
+          %h2 Нововведение "Смена ландшафтного дизайна"
+          .poster-line.line-grey
+            .row
+              .col-md-6
+                .innov-poster-cont
+                  %img.img-circle{:src => "img/ava-rabb.jpg"}/
+                  %span.poster-name Кролик
+              .col-md-6
+                .innov-tags
+                  .innov-tags-tag.dark-blue Взаимное недоверие четвероногих и пчёл
+                  .innov-tags-tag.blue-green Четвероногим нечем заинтересовать пчел
+                  .innov-tags-tag.blue-green2 Активное противостояние четвероногих и пчел
+                  .innov-tags-tag.blue-green3 Рядом с дубом нет цветочных полян
+                  .innov-tags-tag.light-green Пчелы летают слишком медленно
+                  .innov-tags-tag.sandy Винни Пух не говорит по пчелиному
+          .popup-imperfect-main-block
+            .row
+              .col-md-6
+                .stripe-qa
+                  .lined-heading
+                    %span.bold-stripe Опишите, что новое появится в будущем, чтобы улучшить положение.
+                  %p
+                    Четвероногие разобьют около дуба большой цветник, где высадят и вырастят медоносные
+                    растения
+                    и станут за ними ухаживать.
+                .stripe-qa
+                  .lined-heading
+                    %span.bold-stripe Объясните, почему ваше нововведение улучшит текущее положение.
+                  %p
+                    Когда четвероногие, чтобы заинтересовать пчел, разобьют около дуба цветник, пчелам не
+                    нужно
+                    будет тратить много времени и сил на перелеты за нектаром. В результате благодаря
+                    инициативе
+                    четвероногих пчелы колоссально повысят производство меда. В связи с новым положением дел
+                    четвероногие и пчелы заключат соглашение, регулирующее их отношения. По этому
+                    соглашению, в
+                    частности, в обмен на пользование цветником пчелы будут отдавать четвероногим половину
+                    того
+                    меда, который они произведут сверх нынешнего уровня. Таким образом, выиграют все: и
+                    пчелы
+                    будут иметь гораздо больше меда, чем теперь, и четвероногие получат его вдоволь. В
+                    результате взаимная агрессия и недоверие будут устранены.
+                .stripe-qa
+                  .lined-heading
+                    %span.bold-stripe Опишите функционирование вашего нововведения в будущем – что должно регулярно делаться и какие для этого нужно поддерживать условия?
+                  %p
+                    Винни и его друзья делятся на две группы. Первая группа занимается пополнением
+                    ассортимента
+                    медоносных растений, а вторая поддерживает условия их роста – пропалывает почву и
+                    поливает
+                    цветник.
+                .stripe-qa
+                  .lined-heading
+                    %span.bold-stripe Какие ресурсы нужны в будущем для функционирования нововведения?
+                  %p
+                .stripe-qa
+                  .lined-heading
+                    %span.bold-stripe Какие нежелательные побочные эффекты могут возникнуть в будущем в связи с поддержанием условий и  регулярной деятельностью?
+                  %p
+                    Некоторые пчелы могут не захотеть делиться медом.
+                    Отдельным четвероногим будет лень работать.
+                .stripe-qa
+                  .lined-heading
+                    %span.bold-stripe Какие ресурсы потребуются, чтобы предотвратить эти эффекты?
+                  %p
+                    Некоторые пчелы могут не захотеть делиться медом.
+                    Отдельным четвероногим будет лень работать.
+                .stripe-qa
+                  .lined-heading
+                    %span.bold-stripe Кто и как будет контролировать создание и поддержание должных условий и осуществление регулярных действий, а также предотвращение нежелательных побочныx эффектов
+                  %p
+                    Контроль будут осуществлять Винни-Пух, Кролик и Сова. Винни следит за состоянием и
+                    пополнением цветника, а также за взаимодействием с пчелами. Кролик следит, чтобы жители
+                    леса
+                    по незнанию не совершали садоводческих ошибок. Сова осуществляет общий контроль.
+                .stripe-qa
+                  .lined-heading
+                    %span.bold-stripe Какие ресурсы потребуются для осуществления контроля?
+                  %p
+                .stripe-qa
+                  .lined-heading
+                    %span.bold-stripe Что может помешать плодотворному функционированию ресурсов, перечисленных в разделах B, С и D, и как с этим предлагается бороться?
+                  %p
+                    Главным препятствием может стать отсутствие слаженности действий из-за их новизны.
+                    Ее надо отрабатывать, чтобы через некоторое время все адаптировались к
+                    нововведениям.
+                .stripe-qa
+                  .lined-heading
+                    %span.bold-stripe Докажите, что эффект от нововведения оправдает связанные с ним денежные и трудовые затраты.
+                  %p
+                    Благодаря этому решению, учитывающему интересы всех сторон, возникнет ситуация, в которой
+                    не
+                    будет проигравших (win-win): Винни и его друзья будут регулярно получать мед от пчел без
+                    всякого обмана, самим пчелам не придется улетать за нектаром далеко от улья, лес станет
+                    красивее, а его обитатели — дружнее.
+                .stripe-qa
+                  .lined-heading
+                    %span.bold-stripe Обоснуйте, что воплощение нововведения в жизнь не встретит серьезных препятствий.
+                  %p При грамотном контроле и распределении обязанностей серьезных проблем не возникнет.
+              .col-md-6
+                %span.imperfect-text-date 30.12.2014
+                .imperfect-text-comments-post-block
+                  .poster-line
+                    %img.img-circle{:src => "img/ava-rabb.jpg"}/
+                    %span.poster-name Кролик
+                    %span.comment-time 16:20
+                  %p
+                  .post-interfaces
+                    .post-interfaces-buttons
+                      %button{:type => "button"}
+                        %img{:src => "img/icon-thumb-up.png"}/
+                      %button{:type => "button"}
+                        %img{:src => "img/icon-thumb-down.png"}/
+                      %button{:type => "button"}
+                        %img{:src => "img/icon-share.png"}/
+                    %form.post-interfaces-add-comment
+                      %input{:placeholder => "Ваш комментарий", :type => "text"}/
+                      %button.btn{:type => "button"}
+                        %img{:src => "img/comment-button.png"}/
+      #popup-innov-new9.popup-window.popup-innov-new.popup-innov-new.popup-w1030.mfp-hide
+        .popup.popup-top-rounded.popup-bottom-rounded
+          %h2 Нововведение "Закупить какао известной нигерийской компании"
+          .poster-line.line-grey
+            .row
+              .col-md-6
+                .innov-poster-cont
+                  %img.img-circle{:src => "img/ava-ia.jpg"}/
+                  %span.poster-name Ослик
+              .col-md-6
+                .innov-tags
+                  .innov-tags-tag.dark-blue Взаимное недоверие четвероногих и пчёл
+                  .innov-tags-tag.blue-green Четвероногим нечем заинтересовать пчел
+                  .innov-tags-tag.blue-green2 Активное противостояние четвероногих и пчел
+                  .innov-tags-tag.blue-green3 Рядом с дубом нет цветочных полян
+                  .innov-tags-tag.light-green Пчелы летают слишком медленно
+                  .innov-tags-tag.sandy Винни Пух не говорит по пчелиному
+          .popup-imperfect-main-block
+            .row
+              .col-md-6
+                .stripe-qa
+                  .lined-heading
+                    %span.bold-stripe Опишите, что новое появится в будущем, чтобы улучшить положение.
+                  %p
+                    Четвероногие разобьют около дуба большой цветник, где высадят и вырастят медоносные
+                    растения
+                    и станут за ними ухаживать.
+                .stripe-qa
+                  .lined-heading
+                    %span.bold-stripe Объясните, почему ваше нововведение улучшит текущее положение.
+                  %p
+                    Когда четвероногие, чтобы заинтересовать пчел, разобьют около дуба цветник, пчелам не
+                    нужно
+                    будет тратить много времени и сил на перелеты за нектаром. В результате благодаря
+                    инициативе
+                    четвероногих пчелы колоссально повысят производство меда. В связи с новым положением дел
+                    четвероногие и пчелы заключат соглашение, регулирующее их отношения. По этому
+                    соглашению, в
+                    частности, в обмен на пользование цветником пчелы будут отдавать четвероногим половину
+                    того
+                    меда, который они произведут сверх нынешнего уровня. Таким образом, выиграют все: и
+                    пчелы
+                    будут иметь гораздо больше меда, чем теперь, и четвероногие получат его вдоволь. В
+                    результате взаимная агрессия и недоверие будут устранены.
+                .stripe-qa
+                  .lined-heading
+                    %span.bold-stripe Опишите функционирование вашего нововведения в будущем – что должно регулярно делаться и какие для этого нужно поддерживать условия?
+                  %p
+                    Винни и его друзья делятся на две группы. Первая группа занимается пополнением
+                    ассортимента
+                    медоносных растений, а вторая поддерживает условия их роста – пропалывает почву и
+                    поливает
+                    цветник.
+                .stripe-qa
+                  .lined-heading
+                    %span.bold-stripe Какие ресурсы нужны в будущем для функционирования нововведения?
+                  %p
+                .stripe-qa
+                  .lined-heading
+                    %span.bold-stripe Какие нежелательные побочные эффекты могут возникнуть в будущем в связи с поддержанием условий и  регулярной деятельностью?
+                  %p
+                    Некоторые пчелы могут не захотеть делиться медом.
+                    Отдельным четвероногим будет лень работать.
+                .stripe-qa
+                  .lined-heading
+                    %span.bold-stripe Какие ресурсы потребуются, чтобы предотвратить эти эффекты?
+                  %p
+                    Некоторые пчелы могут не захотеть делиться медом.
+                    Отдельным четвероногим будет лень работать.
+                .stripe-qa
+                  .lined-heading
+                    %span.bold-stripe Кто и как будет контролировать создание и поддержание должных условий и осуществление регулярных действий, а также предотвращение нежелательных побочныx эффектов
+                  %p
+                    Контроль будут осуществлять Винни-Пух, Кролик и Сова. Винни следит за состоянием и
+                    пополнением цветника, а также за взаимодействием с пчелами. Кролик следит, чтобы жители
+                    леса
+                    по незнанию не совершали садоводческих ошибок. Сова осуществляет общий контроль.
+                .stripe-qa
+                  .lined-heading
+                    %span.bold-stripe Какие ресурсы потребуются для осуществления контроля?
+                  %p
+                .stripe-qa
+                  .lined-heading
+                    %span.bold-stripe Что может помешать плодотворному функционированию ресурсов, перечисленных в разделах B, С и D, и как с этим предлагается бороться?
+                  %p
+                    Главным препятствием может стать отсутствие слаженности действий из-за их новизны.
+                    Ее надо отрабатывать, чтобы через некоторое время все адаптировались к
+                    нововведениям.
+                .stripe-qa
+                  .lined-heading
+                    %span.bold-stripe Докажите, что эффект от нововведения оправдает связанные с ним денежные и трудовые затраты.
+                  %p
+                    Благодаря этому решению, учитывающему интересы всех сторон, возникнет ситуация, в которой
+                    не
+                    будет проигравших (win-win): Винни и его друзья будут регулярно получать мед от пчел без
+                    всякого обмана, самим пчелам не придется улетать за нектаром далеко от улья, лес станет
+                    красивее, а его обитатели — дружнее.
+                .stripe-qa
+                  .lined-heading
+                    %span.bold-stripe Обоснуйте, что воплощение нововведения в жизнь не встретит серьезных препятствий.
+                  %p При грамотном контроле и распределении обязанностей серьезных проблем не возникнет.
+              .col-md-6
+                %span.imperfect-text-date 30.12.2014
+                .imperfect-text-comments-post-block
+                  .poster-line
+                    %img.img-circle{:src => "img/ava-rabb.jpg"}/
+                    %span.poster-name Кролик
+                    %span.comment-time 14:01
+                  %p
+                  .post-interfaces
+                    .post-interfaces-buttons
+                      %button{:type => "button"}
+                        %img{:src => "img/icon-thumb-up.png"}/
+                      %button{:type => "button"}
+                        %img{:src => "img/icon-thumb-down.png"}/
+                      %button{:type => "button"}
+                        %img{:src => "img/icon-share.png"}/
+                    %form.post-interfaces-add-comment
+                      %input{:placeholder => "Ваш комментарий", :type => "text"}/
+                      %button.btn{:type => "button"}
+                        %img{:src => "img/comment-button.png"}/
+      #popup-innov-new10.popup-window.popup-innov-new.popup-innov-new.popup-w1030.mfp-hide
+        .popup.popup-top-rounded.popup-bottom-rounded
+          %h2 Нововведение "Синтез меда по технологнии Жерара Мюлье"
+          .poster-line.line-grey
+            .row
+              .col-md-6
+                .innov-poster-cont
+                  %img.img-circle{:src => "img/ava-rabb.jpg"}/
+                  %span.poster-name Кролик
+              .col-md-6
+                .innov-tags
+                  .innov-tags-tag.dark-blue Взаимное недоверие четвероногих и пчёл
+                  .innov-tags-tag.blue-green Четвероногим нечем заинтересовать пчел
+                  .innov-tags-tag.blue-green2 Активное противостояние четвероногих и пчел
+                  .innov-tags-tag.blue-green3 Рядом с дубом нет цветочных полян
+                  .innov-tags-tag.light-green Пчелы летают слишком медленно
+                  .innov-tags-tag.sandy Винни Пух не говорит по пчелиному
+          .popup-imperfect-main-block
+            .row
+              .col-md-6
+                .stripe-qa
+                  .lined-heading
+                    %span.bold-stripe Опишите, что новое появится в будущем, чтобы улучшить положение.
+                  %p
+                    Четвероногие разобьют около дуба большой цветник, где высадят и вырастят медоносные
+                    растения
+                    и станут за ними ухаживать.
+                .stripe-qa
+                  .lined-heading
+                    %span.bold-stripe Объясните, почему ваше нововведение улучшит текущее положение.
+                  %p
+                    Когда четвероногие, чтобы заинтересовать пчел, разобьют около дуба цветник, пчелам не
+                    нужно
+                    будет тратить много времени и сил на перелеты за нектаром. В результате благодаря
+                    инициативе
+                    четвероногих пчелы колоссально повысят производство меда. В связи с новым положением дел
+                    четвероногие и пчелы заключат соглашение, регулирующее их отношения. По этому
+                    соглашению, в
+                    частности, в обмен на пользование цветником пчелы будут отдавать четвероногим половину
+                    того
+                    меда, который они произведут сверх нынешнего уровня. Таким образом, выиграют все: и
+                    пчелы
+                    будут иметь гораздо больше меда, чем теперь, и четвероногие получат его вдоволь. В
+                    результате взаимная агрессия и недоверие будут устранены.
+                .stripe-qa
+                  .lined-heading
+                    %span.bold-stripe Опишите функционирование вашего нововведения в будущем – что должно регулярно делаться и какие для этого нужно поддерживать условия?
+                  %p
+                    Винни и его друзья делятся на две группы. Первая группа занимается пополнением
+                    ассортимента
+                    медоносных растений, а вторая поддерживает условия их роста – пропалывает почву и
+                    поливает
+                    цветник.
+                .stripe-qa
+                  .lined-heading
+                    %span.bold-stripe Какие ресурсы нужны в будущем для функционирования нововведения?
+                  %p
+                .stripe-qa
+                  .lined-heading
+                    %span.bold-stripe Какие нежелательные побочные эффекты могут возникнуть в будущем в связи с поддержанием условий и  регулярной деятельностью?
+                  %p
+                    Некоторые пчелы могут не захотеть делиться медом.
+                    Отдельным четвероногим будет лень работать.
+                .stripe-qa
+                  .lined-heading
+                    %span.bold-stripe Какие ресурсы потребуются, чтобы предотвратить эти эффекты?
+                  %p
+                    Некоторые пчелы могут не захотеть делиться медом.
+                    Отдельным четвероногим будет лень работать.
+                .stripe-qa
+                  .lined-heading
+                    %span.bold-stripe Кто и как будет контролировать создание и поддержание должных условий и осуществление регулярных действий, а также предотвращение нежелательных побочныx эффектов
+                  %p
+                    Контроль будут осуществлять Винни-Пух, Кролик и Сова. Винни следит за состоянием и
+                    пополнением цветника, а также за взаимодействием с пчелами. Кролик следит, чтобы жители
+                    леса
+                    по незнанию не совершали садоводческих ошибок. Сова осуществляет общий контроль.
+                .stripe-qa
+                  .lined-heading
+                    %span.bold-stripe Какие ресурсы потребуются для осуществления контроля?
+                  %p
+                .stripe-qa
+                  .lined-heading
+                    %span.bold-stripe Что может помешать плодотворному функционированию ресурсов, перечисленных в разделах B, С и D, и как с этим предлагается бороться?
+                  %p
+                    Главным препятствием может стать отсутствие слаженности действий из-за их новизны.
+                    Ее надо отрабатывать, чтобы через некоторое время все адаптировались к
+                    нововведениям.
+                .stripe-qa
+                  .lined-heading
+                    %span.bold-stripe Докажите, что эффект от нововведения оправдает связанные с ним денежные и трудовые затраты.
+                  %p
+                    Благодаря этому решению, учитывающему интересы всех сторон, возникнет ситуация, в которой
+                    не
+                    будет проигравших (win-win): Винни и его друзья будут регулярно получать мед от пчел без
+                    всякого обмана, самим пчелам не придется улетать за нектаром далеко от улья, лес станет
+                    красивее, а его обитатели — дружнее.
+                .stripe-qa
+                  .lined-heading
+                    %span.bold-stripe Обоснуйте, что воплощение нововведения в жизнь не встретит серьезных препятствий.
+                  %p При грамотном контроле и распределении обязанностей серьезных проблем не возникнет.
+              .col-md-6
+                %span.imperfect-text-date 31.12.2014
+                .imperfect-text-comments-post-block
+                  .poster-line
+                    %img.img-circle{:src => "img/ava-rabb.jpg"}/
+                    %span.poster-name Кролик
+                    %span.comment-time 03:06
+                  %p
+                  .post-interfaces
+                    .post-interfaces-buttons
+                      %button{:type => "button"}
+                        %img{:src => "img/icon-thumb-up.png"}/
+                      %button{:type => "button"}
+                        %img{:src => "img/icon-thumb-down.png"}/
+                      %button{:type => "button"}
+                        %img{:src => "img/icon-share.png"}/
+                    %form.post-interfaces-add-comment
+                      %input{:placeholder => "Ваш комментарий", :type => "text"}/
+                      %button.btn{:type => "button"}
+                        %img{:src => "img/comment-button.png"}/
+      #popup-innov-new11.popup-window.popup-innov-new.popup-innov-new.popup-w1030.mfp-hide
+        .popup.popup-top-rounded.popup-bottom-rounded
+          %h2 Нововведение "Продажа старых вещей"
+          .poster-line.line-grey
+            .row
+              .col-md-6
+                .innov-poster-cont
+                  %img.img-circle{:src => "img/ava-pyat.jpg.jpg"}/
+                  %span.poster-name Пятачок
+              .col-md-6
+                .innov-tags
+                  .innov-tags-tag.dark-blue Взаимное недоверие четвероногих и пчёл
+                  .innov-tags-tag.blue-green Четвероногим нечем заинтересовать пчел
+                  .innov-tags-tag.blue-green2 Активное противостояние четвероногих и пчел
+                  .innov-tags-tag.blue-green3 Рядом с дубом нет цветочных полян
+                  .innov-tags-tag.light-green Пчелы летают слишком медленно
+                  .innov-tags-tag.sandy Винни Пух не говорит по пчелиному
+          .popup-imperfect-main-block
+            .row
+              .col-md-6
+                .stripe-qa
+                  .lined-heading
+                    %span.bold-stripe Опишите, что новое появится в будущем, чтобы улучшить положение.
+                  %p
+                    Четвероногие разобьют около дуба большой цветник, где высадят и вырастят медоносные
+                    растения
+                    и станут за ними ухаживать.
+                .stripe-qa
+                  .lined-heading
+                    %span.bold-stripe Объясните, почему ваше нововведение улучшит текущее положение.
+                  %p
+                    Когда четвероногие, чтобы заинтересовать пчел, разобьют около дуба цветник, пчелам не
+                    нужно
+                    будет тратить много времени и сил на перелеты за нектаром. В результате благодаря
+                    инициативе
+                    четвероногих пчелы колоссально повысят производство меда. В связи с новым положением дел
+                    четвероногие и пчелы заключат соглашение, регулирующее их отношения. По этому
+                    соглашению, в
+                    частности, в обмен на пользование цветником пчелы будут отдавать четвероногим половину
+                    того
+                    меда, который они произведут сверх нынешнего уровня. Таким образом, выиграют все: и
+                    пчелы
+                    будут иметь гораздо больше меда, чем теперь, и четвероногие получат его вдоволь. В
+                    результате взаимная агрессия и недоверие будут устранены.
+                .stripe-qa
+                  .lined-heading
+                    %span.bold-stripe Опишите функционирование вашего нововведения в будущем – что должно регулярно делаться и какие для этого нужно поддерживать условия?
+                  %p
+                    Винни и его друзья делятся на две группы. Первая группа занимается пополнением
+                    ассортимента
+                    медоносных растений, а вторая поддерживает условия их роста – пропалывает почву и
+                    поливает
+                    цветник.
+                .stripe-qa
+                  .lined-heading
+                    %span.bold-stripe Какие ресурсы нужны в будущем для функционирования нововведения?
+                  %p
+                .stripe-qa
+                  .lined-heading
+                    %span.bold-stripe Какие нежелательные побочные эффекты могут возникнуть в будущем в связи с поддержанием условий и  регулярной деятельностью?
+                  %p
+                    Некоторые пчелы могут не захотеть делиться медом.
+                    Отдельным четвероногим будет лень работать.
+                .stripe-qa
+                  .lined-heading
+                    %span.bold-stripe Какие ресурсы потребуются, чтобы предотвратить эти эффекты?
+                  %p
+                    Некоторые пчелы могут не захотеть делиться медом.
+                    Отдельным четвероногим будет лень работать.
+                .stripe-qa
+                  .lined-heading
+                    %span.bold-stripe Кто и как будет контролировать создание и поддержание должных условий и осуществление регулярных действий, а также предотвращение нежелательных побочныx эффектов
+                  %p
+                    Контроль будут осуществлять Винни-Пух, Кролик и Сова. Винни следит за состоянием и
+                    пополнением цветника, а также за взаимодействием с пчелами. Кролик следит, чтобы жители
+                    леса
+                    по незнанию не совершали садоводческих ошибок. Сова осуществляет общий контроль.
+                .stripe-qa
+                  .lined-heading
+                    %span.bold-stripe Какие ресурсы потребуются для осуществления контроля?
+                  %p
+                .stripe-qa
+                  .lined-heading
+                    %span.bold-stripe Что может помешать плодотворному функционированию ресурсов, перечисленных в разделах B, С и D, и как с этим предлагается бороться?
+                  %p
+                    Главным препятствием может стать отсутствие слаженности действий из-за их новизны.
+                    Ее надо отрабатывать, чтобы через некоторое время все адаптировались к
+                    нововведениям.
+                .stripe-qa
+                  .lined-heading
+                    %span.bold-stripe Докажите, что эффект от нововведения оправдает связанные с ним денежные и трудовые затраты.
+                  %p
+                    Благодаря этому решению, учитывающему интересы всех сторон, возникнет ситуация, в которой
+                    не
+                    будет проигравших (win-win): Винни и его друзья будут регулярно получать мед от пчел без
+                    всякого обмана, самим пчелам не придется улетать за нектаром далеко от улья, лес станет
+                    красивее, а его обитатели — дружнее.
+                .stripe-qa
+                  .lined-heading
+                    %span.bold-stripe Обоснуйте, что воплощение нововведения в жизнь не встретит серьезных препятствий.
+                  %p При грамотном контроле и распределении обязанностей серьезных проблем не возникнет.
+              .col-md-6
+                %span.imperfect-text-date 31.12.2014
+                .imperfect-text-comments-post-block
+                  .poster-line
+                    %img.img-circle{:src => "img/ava-rabb.jpg"}/
+                    %span.poster-name Кролик
+                    %span.comment-time 07:40
+                  %p
+                  .post-interfaces
+                    .post-interfaces-buttons
+                      %button{:type => "button"}
+                        %img{:src => "img/icon-thumb-up.png"}/
+                      %button{:type => "button"}
+                        %img{:src => "img/icon-thumb-down.png"}/
+                      %button{:type => "button"}
+                        %img{:src => "img/icon-share.png"}/
+                    %form.post-interfaces-add-comment
+                      %input{:placeholder => "Ваш комментарий", :type => "text"}/
+                      %button.btn{:type => "button"}
+                        %img{:src => "img/comment-button.png"}/
+      #modal1.modal.welcome_window.fade
+        .modal-dialog
+          .modal-content
+            .modal-body.text-center
+              %p.text-center.bold.font_grey На этой стадии вы будете решать проблемы, выявленные на прошлой стадии, и наблюдать за тем, как это делают другие участники.
+              %br/
+              %p.text-center.bold.font_grey
+                Представьте себе идеальную ситуацию без текущих проблем и опишитн ее в предложенном нами формате. Чем больше несовершенств вы устраните
+                одним нововведением, тем лучше.
+              %br/
+              %p.text-center.bold.font_grey В конце стадии вы проголосуете за самые эффективные и срочные нововведения.
+              %br/
+              %br/
+              %button.btn.btn-danger{"aria-hidden" => "true", "data-dismiss" => "modal"} Закрыть окно
+          / /.modal-content
+        / /.modal-dialog
+      / /.modal
+    / Outer Ends
+    / Javascript files
+    / jQuery
+    %script{:src => "js/jquery.js"}
+    / Bootstrap JS
+    %script{:src => "js/bootstrap.min.js"}
+    / Magnific Popup
+    %script{:src => "js/jquery.magnific-popup.min.js"}
+    / Owl carousel
+    %script{:src => "js/owl.carousel.min.js"}
+    / Respond JS for IE8
+    %script{:src => "js/respond.min.js"}
+    / HTML5 Support for IE
+    %script{:src => "js/html5shiv.js"}
+    / Content hover JS
+    %script{:src => "js/jquery.contenthover.min.js"}
+    / Javascript for this page
+    / Excanvas JS for Knob Support in IE 8
+    %script{:src => "js/waypoints.min.js"}
+    %script{:src => "js/excanvas.js"}
+    / jQuery Knob
+    %script{:src => "js/jquery.knob.js"}
+    / Custom JS. Type your JS code in custom.js file
+    %script{:src => "js/custom.js"}
