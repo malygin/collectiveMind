@@ -3,7 +3,7 @@
 #= require jquery.ui.all
 #= require jquery.ui.autocomplete
 #= require jquery.remotipart
-# require brave/jquery.magnific-popup.min.js
+# require jquery.magnific-popup.min.js
 #= require jquery.autosize
 
 # require totop/jquery.ui.totop
@@ -49,20 +49,14 @@
 #= require jquery.tube.min
 #= require concept_play_movie.coffee
 
-#= require brave/placeholders
-#= require brave/jquery.magnific-popup.min
-#= require brave/owl.carousel.min
-#= require brave/respond.min
-#= require brave/html5shiv
-#= require brave/main
+#= require jquery.magnific-popup.min
+#= require owl.carousel.min
+#= require respond.min
+#= require html5shiv
 #= require custom.js
 
-
-#= require brave/jquery.countTo
-#= require brave/jquery.themepunch.revolution.min
-#= require brave/jquery.themepunch.tools.min
-#= require brave/waypoints.min
-#= require brave/jquery.knob
+#= require waypoints.min
+#= require jquery.knob
 #= require brave
 
 
