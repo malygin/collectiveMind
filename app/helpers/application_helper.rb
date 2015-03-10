@@ -505,6 +505,13 @@ module ApplicationHelper
     controller.class.to_s.gsub('::', '_').gsub('Controller', '').underscore.to_sym
   end
 
+  def current_stage_controller
+    Core::Project::LIST_STAGES.each do |num_stage, stage|
+      return num_stage if name_controller == stage[:type_stage]
+    end
+  end
+
+
   def current_stage_for_analytics(action)
     case action
       when 'lifetape_analytics'

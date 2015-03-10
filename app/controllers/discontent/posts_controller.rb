@@ -1,4 +1,6 @@
 class Discontent::PostsController < PostsController
+  before_action :set_aspects, only: [:index]
+
   #@todo Discontent::PostWhen в ресурсы? или просто искать по ним?
   def autocomplete
     field = params[:field]
@@ -10,27 +12,28 @@ class Discontent::PostsController < PostsController
   end
 
   def index
+    @posts = @project.discontents.by_status_for_discontent(@project)
 
-    @posts = @project.get_united_posts_for_vote(current_user)
-
-    if params[:asp]
-      @aspect = Core::Aspect.find(params[:asp])
-    else
-      @aspect = @project.proc_aspects.order('position DESC').first
-    end
-    @accepted_posts = @project.discontents.by_status([2, 4])
-    @page = params[:page]
-    if params[:not_aspect]
-      @posts = @project.discontents_without_aspect.by_status_for_discontent(@project).order("discontent_posts.id DESC").filter(filtering_params(params))
-    elsif params[:all_aspects]
-      @posts = @project.discontents.by_status([0, 1]).order("discontent_posts.id DESC").filter(filtering_params(params))
-    else
-      @posts = @aspect.aspect_posts.by_status_for_discontent(@project).order("discontent_posts.id DESC").filter(filtering_params(params)) if @aspect
-      respond_to do |format|
-        format.html
-        format.js
-      end
-    end
+    # @posts = @project.get_united_posts_for_vote(current_user)
+    #
+    # if params[:asp]
+    #   @aspect = Core::Aspect.find(params[:asp])
+    # else
+    #   @aspect = @project.proc_aspects.order('position DESC').first
+    # end
+    # @accepted_posts = @project.discontents.by_status([2, 4])
+    # @page = params[:page]
+    # if params[:not_aspect]
+    #   @posts = @project.discontents_without_aspect.by_status_for_discontent(@project).order("discontent_posts.id DESC").filter(filtering_params(params))
+    # elsif params[:all_aspects]
+    #   @posts = @project.discontents.by_status([0, 1]).order("discontent_posts.id DESC").filter(filtering_params(params))
+    # else
+    #   @posts = @aspect.aspect_posts.by_status_for_discontent(@project).order("discontent_posts.id DESC").filter(filtering_params(params)) if @aspect
+    #   respond_to do |format|
+    #     format.html
+    #     format.js
+    #   end
+    # end
   end
 
   def new
@@ -258,6 +261,12 @@ class Discontent::PostsController < PostsController
   end
 
   private
+
+  def set_aspects
+    # @todo выбираем только аспекты первого уровня (без вложенности) и только основные (прошедшие голосование)
+    @aspects = @project.proc_main_aspects
+  end
+
   def discontent_post_params
     params.require(:discontent_post).permit(:content, :whend, :whered, :style)
   end

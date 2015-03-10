@@ -15,7 +15,7 @@
 
   %body
     -#@todo добавить метод определения текущего этапа для динамических стилей
-    .outer.stage1_theme
+    .outer{class: "stage#{current_stage_controller}_theme"}
       / Top bar starts
       %header.navbar.top_bar
         .container
