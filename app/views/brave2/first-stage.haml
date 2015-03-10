@@ -30,8 +30,6 @@
             %li
               %a{:href => "cabinet-stage1.html"} Кабинет
             %li
-              %a{:href => "#"} Рефлексия
-            %li
               %a#popover_news.has_circle.popover_news{"data-content" => "\n                    <div class='popover_cont'>\n                    <a href='#' class='news-tooltip-icon' id='tooltip-i1'>\n                        <img src='img/icon-news-1.png'>\n                        <span class='news-tooltip-bottom-text'>добавлено</span>\n                    </a>\n                    <a href='#' class='news-tooltip-icon' id='tooltip-i2'>\n                        <img src='img/icon-news-2.png'>\n                        <span class='news-tooltip-bottom-text'>комментария</span>\n                    </a>\n                    <a href='#popup-news' class='news-tooltip-icon news-popup-href' id='tooltip-i3'>\n                        <img src='img/icon-news-3.png'>\n                        <span class='top-circle'>36</span>\n                        <span class='news-tooltip-bottom-text'>пометок</span>\n                    </a>\n                    <a href='#' class='news-tooltip-icon' id='tooltip-i4'>\n                        <img src='img/icon-news-4.png'>\n                        <span class='top-circle'>1</span>\n                        <span class='news-tooltip-bottom-text'>отредактировано</span>\n                    </a>\n                    </div>", "data-html" => "true", "data-placement" => "bottom", "data-toggle" => "popover", :href => "#"}
                 Новости
               %span.top-circle 36
@@ -183,7 +181,7 @@
                     .container
                       .row
                         .col-md-8.col-sm-8.min-col-right-padd
-                          .ui-4-top-color-border-block.aspect-main-block
+                          .top-color-border-block.aspect-main-block
                             %h6.aspect-main-block-heading Ситуация с пчелами
                             %p.aspect-main-block-text
                               Пчелы недовольны тем, что на их мед
@@ -192,7 +190,7 @@
                             %img{:src => "img/aspect-pic1.jpg"}/
                         .col-md-4.col-sm-4.min-col-left-padd
                           #questionsCarousel1.carousel.slide.questionsCarousel{"data-ride" => "carousel"}
-                            .ui-4-top-color-border-block.aspect-questions-block{:style => "height: 408px;"}
+                            .aspect-questions-block{:style => "height: 408px;"}
                               .carousel-inner
                                 .item.active
                                   %h4.block-with-left-icon
@@ -219,7 +217,7 @@
                                     .clearfix
                                     .form-group.bottom-buttons
                                       %a.btn.btn-outline.notice-button Подсказка
-                                      %button.btn.answer-button.questionCarousel-target.active{"data-slide-to" => "1", "data-target" => "#questionsCarousel1"} Ответить
+                                      %button.btn.answer-button.questionCarousel-target{"data-slide-to" => "1", "data-target" => "#questionsCarousel1"} Ответить
                                 .item
                                   %p.text.block-with-left-icon
                                     %span.left-icon.pull-right 2.
@@ -254,8 +252,8 @@
                               друзья Пятачок и Кролик.
                             %img{:src => "img/aspect-pic2.jpg"}/
                         .col-md-4.col-sm-4.min-col-left-padd
-                          #questionsCarousel2.carousel.slide{"data-ride" => "carousel questionsCarousel"}
-                            .ui-4-top-color-border-block.aspect-questions-block{:style => "height: 646px;"}
+                          #questionsCarousel2.carousel.slide.questionsCarousel{"data-ride" => "carousel questionsCarousel"}
+                            .aspect-questions-block{:style => "height: 646px;"}
                               .carousel-inner
                                 .item.active
                                   %h4.block-with-left-icon
@@ -323,7 +321,7 @@
                             %img{:src => "img/aspect-pic3.jpg"}/
                         .col-md-4.col-sm-4.min-col-left-padd
                           #questionsCarousel3.carousel.slide{"data-ride" => "carousel"}
-                            .ui-4-top-color-border-block.aspect-questions-block{:style => "height: 472px;"}
+                            .aspect-questions-block.questionsCarousel{:style => "height: 472px;"}
                               .carousel-inner
                                 .item.active
                                   %p.text.block-with-left-icon
@@ -340,7 +338,7 @@
                                     .clearfix
                                     .form-group.bottom-buttons
                                       %a.btn.btn-outline.notice-button Подсказка
-                                      %button.btn.answer-button.questionCarousel-target2{"data-slide-to" => "1", "data-target" => "#questionsCarousel2"} Ответить
+                                      %button.btn.answer-button.questionCarousel-target2{"data-slide-to" => "1", "data-target" => "#questionsCarousel3"} Ответить
                                 .item
                                   %p.text.block-with-left-icon
                                     %span.left-icon.pull-right 2.
@@ -374,7 +372,7 @@
                             %img{:src => "img/aspect-pic4.jpg"}/
                         / Questions block starts
                         .col-md-4.col-sm-4.min-col-left-padd
-                          .ui-4-top-color-border-block.aspect-questions-block{:style => "height: 544px;"}
+                          .aspect-questions-block{:style => "height: 544px;"}
                         / Questions block ends
                   #tab-five.tab-pane.color-theme-5.fade
                     .container
@@ -389,7 +387,7 @@
                             %img{:src => "img/aspect-pic5.jpg"}/
                         / Questions block starts
                         .col-md-4.col-sm-4.min-col-left-padd
-                          .ui-4-top-color-border-block.aspect-questions-block{:style => "height: 523px;"}
+                          .aspect-questions-block{:style => "height: 523px;"}
                         / Questions block ends
                   #tab-six.tab-pane.color-theme-6.fade
                     .container
@@ -408,7 +406,7 @@
                             %img{:src => "img/aspect-pic6.jpg"}/
                         / Questions block starts
                         .col-md-4.col-sm-4.min-col-left-padd
-                          .ui-4-top-color-border-block.aspect-questions-block{:style => "height: 585px;"}
+                          .aspect-questions-block{:style => "height: 585px;"}
                         / Questions block ends
                   #tab-seven.tab-pane.color-theme-7.fade
                     .container
@@ -425,7 +423,7 @@
                             %img{:src => "img/aspect-pic7.jpg"}/
                         / Questions block starts
                         .col-md-4.col-sm-4.min-col-left-padd
-                          .ui-4-top-color-border-block.aspect-questions-block{:style => "height: 630px;"}
+                          .aspect-questions-block{:style => "height: 630px;"}
                         / Questions block ends
                   #tab-eight.tab-pane.color-theme-8.fade
                     .container
@@ -444,7 +442,7 @@
                             %img{:src => "img/aspect-pic8.jpg"}/
                         / Questions block starts
                         .col-md-4.col-sm-4.min-col-left-padd
-                          .ui-4-top-color-border-block.aspect-questions-block{:style => "height: 604px;"}
+                          .aspect-questions-block{:style => "height: 604px;"}
                         / Questions block ends
                   #tab-nine.tab-pane.color-theme-9.fade
                     .container
@@ -460,7 +458,7 @@
                             %img{:src => "img/aspect-pic9.jpg"}/
                         / Questions block starts
                         .col-md-4.col-sm-4.min-col-left-padd
-                          .ui-4-top-color-border-block.aspect-questions-block{:style => "height: 582px;"}
+                          .aspect-questions-block{:style => "height: 582px;"}
                         / Questions block ends
           / Aspects block (UI four) ends
       / Main Block ends
@@ -979,7 +977,9 @@
 
       $(document).ready(function (){
 
-              var max_right = 0;
+          $('.tab-pane.fade.in').find('.aspect-questions-block').innerHeight();
+
+              /*var max_right = 0;
               $('.tab-pane').change(function() {
                   alert('in');
                   if ($(this).hasClass('active')) {
@@ -994,68 +994,74 @@
                   $(this).children('.aspect-questions-block').each(function () {
                       $(this).css('height', max_right + 'px');
                   });
-              });
+              });*/
 
 
 
           var offset = 0;
+
+          /* set inner width */
           var inner = $('.slider-inner');
           var inner_w = count_inner()+100;
           inner.css('width', inner_w+'px');
+
+          /* count outer width */
           var outer = $('.slider-outer');
           var outer_w = outer.innerWidth();
 
+          /* events */
           $('.slider-item').click(function(){
               click_item($(this));
           });
+          $('.slider-right').click(function(){
+              slide_inner(outer_w, offset, 'right');
+          });
+          $('.slider-left').click(function(){
+              slide_inner(outer_w, offset, 'left');
+          });
+
 
           function count_inner(){
               var sliders_sum = 0;
               $('.slider-item').each(function (){
-                  var me = $(this);
-                  sliders_sum += me.innerWidth();
+                  sliders_sum += $(this).innerWidth();
               });
               return sliders_sum;
           };
 
-          function next_item(out, off){
-              var right_point = off + out;
+          /*  */
+          function slide_inner(out, off, dir){
               var sum_i = 0;
               var m = 0;
+              var right_point = off + out;
+
               $('.slider-item').each(function (){
                   var me = $(this);
                   sum_i += me.innerWidth();
-                  if (sum_i > right_point){
-                      m = sum_i - right_point;
-                      return false;
-                  }
-              });
-              if(m){
-                  offset += m;
-                  var anim = [];
-                  anim['margin-left'] = -offset+'px';
-                  inner.animate(anim, 500);
-              }
-          };
-          function prev_item(out, off){
-
-              var sum_i = 0;
-              var m = 0;
-              $('.slider-item').each(function (){
-                  if (off) {
-                      var me = $(this);
-                      sum_i += me.innerWidth();
+                  if (dir == 'left' && off) {
                       if (sum_i >= off) {
                           m = me.innerWidth() - (sum_i - off);
                           return false;
                       }
+                  } else if (dir == 'right'){
+                      if (sum_i > right_point){
+                          m = sum_i - right_point;
+                          return false;
+                      }
                   }
               });
+
               if(m){
-                  offset -= m;
+                  if (dir == 'left') {
+                      off -= m;
+                  } else if (dir == 'right') {
+                      off += m;
+                  }
                   var anim = [];
-                  anim['margin-left'] = -offset+'px';
+                  anim['margin-left'] = -off+'px';
                   inner.animate(anim, 500);
+
+                  offset = off;
               }
           };
 
@@ -1088,12 +1094,5 @@
               });
               return sum_i;
           }
-
-          $('.slider-right').click(function(){
-              next_item(outer_w, offset);
-          });
-          $('.slider-left').click(function(){
-              prev_item(outer_w, offset);
-          });
 
       });

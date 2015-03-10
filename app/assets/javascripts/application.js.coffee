@@ -58,6 +58,7 @@
 #= require waypoints.min
 #= require jquery.knob
 #= require brave
+#= require brave2
 
 
 # @todo load initialization

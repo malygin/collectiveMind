@@ -2,7 +2,7 @@
 @import 'font-awesome';
 @import 'magnific-popup';
 @import 'owl.carousel';
-@import 'style';
+//@import 'style';
 @import 'custom';
 
 //@import 'jquery.ui.autocomplete';
@@ -138,6 +138,13 @@
   margin-top: 10px;
   margin-bottom: 10px;
 }
+
+/* styles for stages */
+
+.text-upper {
+  text-transform: uppercase;
+}
+
 
 
 /***********************************/
