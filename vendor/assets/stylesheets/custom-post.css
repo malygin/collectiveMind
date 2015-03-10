@@ -1,0 +1,366 @@
+a:hover {
+    text-decoration: none;
+}
+
+i {
+    color: #b8b8b8;
+}
+
+p {
+    margin: 0;
+}
+
+.btn-danger {
+    background: #e61928;
+    border-radius: 3px;
+}
+
+.media {
+    margin: 0px;
+}
+
+.media-left {
+    padding-right: 0px;
+}
+
+.table {
+    margin-bottom: 0px;
+    padding-top: 10px;
+    color: #666666;
+}
+
+.bold {
+    font-weight: 700;
+}
+
+.stage-post-block {
+    margin-top: 5px;
+}
+
+
+
+.post {
+    overflow: hidden;
+    border: 1px #d5d5d5 solid;
+    border-bottom: 1px #9ea2a1 solid;
+    box-shadow: 0 3px 4px -3px rgba(0, 0, 0, 0.5);
+    border-radius: 6px !important;
+    height: 166px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.post-header {
+    padding-left: 15px;
+    padding-right: 10px;
+    position: relative;
+    min-height: 4px;
+    border-bottom: 1px rgba(158, 162, 161, 0.69) solid;
+    box-shadow: 0 3px 4px -1px rgba(0, 0, 0, 0.16);
+}
+
+.post-poster {
+    padding-top: 14px;
+    padding-bottom: 5px;
+    width: 17.3%;
+}
+
+.post-poster img {
+    margin-bottom: 10px;
+}
+
+.post-text {
+    padding: 10px 17px 10px 15px;
+    font-size: 13px;
+    min-height: 95px;
+}
+
+.post-body {
+    font-size: 12px;
+    min-height: 95px;
+}
+
+.poster-name {
+    font-size: 9px;
+    color: #000;
+}
+
+.time {
+    font-size: 11px;
+    padding-top: 5px;
+}
+
+.gradient {
+    background: linear-gradient(to top, #fff, #e9eff7);
+    border-right: 1px solid #d7d9dd;
+}
+
+.post-bottom {
+    border-top: 1px solid #d9d9d9;
+    padding-top: 6px;
+    padding-bottom: 6px;
+    padding-left: 7px;
+    padding-right: 7px;
+    height: 30px;
+    overflow: hidden;
+
+}
+
+.tag-stripes {
+    line-height: 1.1;
+    display: inline-block;
+    float: left;
+    height: 16px;
+    width: 18px;
+    margin-right: 3px;
+    white-space: nowrap;
+    box-sizing: border-box;
+}
+
+.tag-stripes.active .tags {
+    display: inline-block;
+}
+
+.tag-stripes.active {
+    width: auto;
+    padding: 0 15px 0 7px;
+}
+
+.tags {
+    font-size: 12px;
+    color: #fff;
+    line-height: 1.1;
+    display: none;
+    white-space: nowrap;
+}
+
+.pink .right-column {
+    border-right: 2px solid #f8cdcd;
+}
+
+.pink .left-column {
+    border-left: 2px solid #f8cdcd;
+}
+
+.what .left-column {
+    color: #4e4e4e;
+}
+
+.pink .what {
+    border-bottom: 2px solid #f8cdcd;
+}
+
+.blue .left-column {
+    border-left: 2px solid #cddbe8;
+}
+
+.blue .right-column {
+    border-right: 2px solid #cddbe8;
+}
+
+.blue .what {
+    border-bottom: 2px solid #cddbe8;
+}
+
+.table > tbody > .what > td {
+    line-height: 1;
+    border-top: none;
+    height: 45px;
+    vertical-align: middle;
+}
+
+.what .left-column {
+    font-size: 14px;
+}
+
+.post-theme .tag-stripes.active {
+    width: auto;
+    padding: 0 15px 0 7px;
+}
+
+.popup2 {
+    margin-right: 2px;
+    font-size: 11px;
+}
+.popup2 i {
+    font-weight: bold;
+}
+.stage2_theme .popup2 i {
+    color: #678cca;
+}
+.stage3_theme .popup2 i {
+    color: #8e8bc7;
+}
+.stage4_theme .popup2 i {
+    color: #559499;
+}
+
+.arrow {
+    background: #ffffff;
+    width: 40px;
+    height: 80px;
+}
+
+.arrow i {
+    color: #7c98c0;
+    font-size: 50px;
+    margin-top: 15px;
+    margin-left: 12px;
+
+}
+
+.contenthover {
+    padding: 20px 20px 10px 20px;
+}
+
+.contenthover .arrow {
+    margin-top: 30px;
+}
+
+.project_win {
+    background: image-url('stripe.png') repeat;
+    margin-top: 20px;
+    box-shadow: 0 0 8px rgba(0, 0, 0, 0.3);
+    border-radius: 6px;
+    height: 450px;
+
+}
+
+.radial-gradient {
+    height: 100%;
+    border-radius: 6px;
+    background: radial-gradient(circle, rgba(253, 255, 254, 0.70) 30%, rgba(227, 232, 236, 0.7) 60%);
+}
+
+.poster_win {
+    padding-top: 40px;
+}
+
+.poster_win img {
+    width: 150px;
+    height: 150px;
+    margin-bottom: 10px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+.poster_win h5 {
+    margin-top: 20px;
+}
+
+.post-win {
+    padding-top: 40px;
+    padding-bottom: 40px;
+}
+
+.post-win h4 {
+    line-height: 1.4;
+}
+
+.post-win h5 {
+    margin-top: 30px;
+}
+
+.post-win p {
+    font-size: 13px;
+    margin-top: 20px;
+}
+
+.post-win button {
+    margin-top: 30px;
+}
+
+.badge-win {
+    background: image-url('ribbon.png') no-repeat;
+    margin-top: -10px;
+    width: 120px;
+    height: 120px;
+}
+
+.list_win {
+    margin-top: 20px;
+}
+
+.list_win li {
+    color: #a4a4a4;
+}
+
+.list_win li:hover {
+    cursor: pointer;
+    color: #323232;
+}
+
+.list_win .active {
+    color: #323232;
+}
+
+.letters {
+    height: 100%;
+    background: image-url('lettersTL.png') top 30px left 30px no-repeat, image-url('img/letters.png') bottom -30px right no-repeat;
+}
+
+.PositionRelative {
+    position: relative;
+}
+
+.square {
+    width: 10px;
+    height: 10px;
+}
+
+.colorT1 {
+
+    color: #6184bd;;
+}
+
+.colorT2 {
+    color: #72d7ed;
+}
+
+.colorT3 {
+    color: #72ede6;
+}
+
+.colorT4 {
+    color: #72edb8;
+}
+
+.colorT5 {
+    color: #b7eeac;
+}
+
+.colorT6 {
+    color: #8f8eb0;
+}
+
+.colorT7 {
+    color: #fcff9e;
+}
+
+.colorT8 {
+    color: #f662ff;
+}
+
+.colorT9 {
+    color: #3dff00;
+}
+
+a.dropdown-toggle {
+    cursor: pointer;
+    color: #000000;
+}
+
+a.dropdown-toggle i {
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-right: 10px;
+    padding-left: 5px;
+}
+
+.dropdown-menu li i {
+    padding: 10px;
+}
+
+.img50 {
+    width: 50px;
+    height: 50px;
+}

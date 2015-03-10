@@ -1,15 +1,11 @@
+# @todo используемые
+
 #= require jquery
 #= require jquery_ujs
 #= require jquery.ui.all
 #= require jquery.ui.autocomplete
 #= require jquery.remotipart
-# require jquery.magnific-popup.min.js
 #= require jquery.autosize
-
-# require totop/jquery.ui.totop
-# require totop/easing
-#= require jquery.icheck
-
 
 #= require bootstrap/bootstrap.min
 #= require bootstrap-colorpicker
@@ -17,31 +13,14 @@
 #= require bootstrap3-editable/bootstrap-editable
 
 #= require selectize
-#= require liFixar/jquery.liFixar
-# require nvd3/d3.v2
-# require nvd3/nv.d3.min
-# require stats.js
-# require nvd3/stream_layers
-# require nvd3/multiBar
-# require nvd3/multiBarChart
-# require nvd3/app
-# require nvd3/axis
-# require nvd3/legend
-
+#= require history_jquery
 #= require tinymce
+
 #= require websocket_rails/main
 #= require messenger/messenger.min
-# require select2
-#= require wizard/jquery.bootstrap.wizard
-# require news
-# require notifications
-#= require utils
 #= require jquery.ui.chatbox
-#= require jquery.slimscroll
-# require moderator_chat
-# require websockets_load.js.erb
-# require groups
-#= require history_jquery
+
+#= require utils
 #= require plugins
 #= require comments
 #= require resources
@@ -53,13 +32,42 @@
 #= require owl.carousel.min
 #= require respond.min
 #= require html5shiv
-#= require custom.js
-
 #= require waypoints.min
 #= require jquery.knob
+#= require excanvas
+#= require dropdowns-enhancement
+#= require jquery.contenthover.min
+#= require custom.js
+
 #= require brave
 #= require brave2
 
+
+# @todo не используемые
+# require totop/jquery.ui.totop
+# require totop/easing
+# require jquery.icheck
+
+# require liFixar/jquery.liFixar
+# require nvd3/d3.v2
+# require nvd3/nv.d3.min
+# require stats.js
+# require nvd3/stream_layers
+# require nvd3/multiBar
+# require nvd3/multiBarChart
+# require nvd3/app
+# require nvd3/axis
+# require nvd3/legend
+
+# require select2
+# require wizard/jquery.bootstrap.wizard
+# require jquery.slimscroll
+
+# require news
+# require notifications
+# require moderator_chat
+# require websockets_load.js.erb
+# require groups
 
 # @todo load initialization
 sidebarHeight = 0;
@@ -88,7 +96,7 @@ $ ->
 #  notificate_my_journals()
   sidebar_for_small_screen()
   activate_htmleditor()
-  activate_wizard()
+#  activate_wizard()
   autocomplete_initialized()
 #  create_moderator_chat()
 #  create_group_chat()
@@ -99,7 +107,7 @@ $ ->
   $('.tooltips').tooltip()
   $("#sortable").sortable()
 #  $('textarea').autosize()
-  $('.liFixar').liFixar()
+#  $('.liFixar').liFixar()
   $('.userscore').editable()
   $("#sortable").disableSelection()
 #  $().UItoTop easingType: "easeOutQuart"
@@ -118,9 +126,9 @@ $ ->
   $(".chzn-select").each ->
     $(this).select2 $(this).data()
 
-  $(".iCheck").iCheck
-    checkboxClass: "icheckbox_square-grey"
-    radioClass: "iradio_square-grey"
+#  $(".iCheck").iCheck
+#    checkboxClass: "icheckbox_square-grey"
+#    radioClass: "iradio_square-grey"
 
   $sidebar = $("#sidebar")
   $sidebar.on "hide.bs.collapse", (e) ->

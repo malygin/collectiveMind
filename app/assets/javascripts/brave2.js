@@ -22,7 +22,17 @@ function first_stage_slider() {
      });
      });*/
 
-
+    //var max_item_h = 0;
+    //$('.c1-item').each(function () {
+    //    var cur_height = $(this).innerHeight();
+    //    if (cur_height > max_item_h) {
+    //        max_item_h = cur_height;
+    //    }
+    //    ;
+    //});
+    //$('.c1-item-inner').each(function () {
+    //    $(this).css('height', max_item_h + 'px');
+    //});
 
     var offset = 0;
 
