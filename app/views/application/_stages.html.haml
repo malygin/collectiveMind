@@ -1,26 +1,17 @@
-.stages
-  - Core::Project::LIST_STAGES.each do |num_stage, stage|
-    - if name_controller == stage[:type_stage]
-      .stage.current-stage
-        = link_to send("#{stage[:type_stage]}_path", @project, asp: params[:asp]), id: "go_to_#{stage[:type_stage]}", class: 'stage stage-number-block rounded-1' do
-          %span.bigger
-            = num_stage
-          стадия
-        .current-stage-text.pull-left
-          .top-text
-            = @project.name
-          .bottom-text
-            %h4
-              = stage[:name]
-      .clearfix.visible-sm.visible-xs
-    - elsif @project.status >= stage[:status].min
-      = link_to send("#{stage[:type_stage]}_path", @project, asp: params[:asp]), id: "go_to_#{stage[:type_stage]}", class: 'stage stage-number-block rounded-1' do
+- Core::Project::LIST_STAGES.each do |num_stage, stage|
+  - if name_controller == stage[:type_stage]
+    .btn-group{:role => "group"}
+      = link_to send("#{stage[:type_stage]}_path", @project, asp: params[:asp]), id: "go_to_#{stage[:type_stage]}", :role => "button", class: "btn back_color_stage#{num_stage}" do
         %span.bigger
-          = num_stage
-        стадия
-      .clearfix.visible-sm.visible-xs
-    - else
-      = link_to '#', id: "go_to_#{stage[:type_stage]}", class: 'stage stage-number-block next-steps-stage rounded-1' do
-        %span.bigger
-          = num_stage
-        стадия
+          ="#{num_stage} СТАДИЯ: "
+          = stage[:name]
+
+  - elsif @project.status >= stage[:status].min
+    .btn-group{:role => "group"}
+      = link_to send("#{stage[:type_stage]}_path", @project, asp: params[:asp]), id: "go_to_#{stage[:type_stage]}", :role => "button", class: "btn back_color_stage#{num_stage}" do
+        = num_stage
+
+  - else
+    .btn-group{:role => "group"}
+      = link_to '#', id: "go_to_#{stage[:type_stage]}", class: "btn back_color_stage#{num_stage}" do
+        = num_stage

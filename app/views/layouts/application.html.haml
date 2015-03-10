@@ -14,81 +14,99 @@
   -#%link(href="/assets/favicon.ico" rel="shortcut icon")
 
   %body
-    .outer
-      -if controller.instance_of? Concept::PostsController or controller.instance_of? Discontent::PostsController
-        = render partial: 'application/right_rollover'
-      %header.top-bar
+    -#@todo добавить метод определения текущего этапа для динамических стилей
+    .outer.stage1_theme
+      / Top bar starts
+      %header.navbar.top_bar
         .container
-          .box-shadow-outer
-            .tb-logo.box-shadow-5.rounded-1.pull-left
-              %a{href: @project ? "/project/#{@project.id}" : '/', id: 'go_to_logo'}
-                = image_tag 'logo-red.jpg', style: 'margin: auto;'
-          .clearfix.visible-xs
-          %nav.header-buttons.pull-left
-            = link_to 'Процедура', "/project/#{@project.id}", class: 'btn btn-white rounded-2'
-            .clearfix.visible-xs
-            = link_to 'Кабинет', project_user_path(@project, current_user), class: 'btn btn-grey rounded-2'
-            .clearfix.visible-xs
-            = link_to 'Новости', journals_path(@project), class: 'btn btn-grey rounded-2'
+          .navbar-header
+            %a.navbar-brand{href: @project ? "/project/#{@project.id}" : '/', id: 'go_to_logo'}
+              = image_tag 'logo1.png'
+          %ul.nav.navbar-nav.main_menu
+            %li
+              = link_to 'Процедура', "/project/#{@project.id}"
+            %li
+              = link_to 'Кабинет', project_user_path(@project, current_user)
+            %li
+              = link_to 'Новости', journals_path(@project)
             - if @project.prev_status
-              = link_to '<- стадия', pr_stage_core_project_path(@project), method: :put, id: "down_to_#{@project.prev_status}", class: 'btn btn-grey rounded-2'
-              .clearfix.visible-xs
+              %li
+                = link_to '<- стадия', pr_stage_core_project_path(@project), method: :put, id: "down_to_#{@project.prev_status}"
             - if @project.next_status
-              = link_to '-> стадия', next_stage_core_project_path(@project), method: :put, id: "up_to_#{@project.next_status}", class: 'btn btn-grey rounded-2'
+              %li
+                = link_to '-> стадия', next_stage_core_project_path(@project), method: :put, id: "up_to_#{@project.next_status}"
 
-            -#.clearfix.visible-xs
-            -#%a.btn.btn-grey.rounded-2{href: "#"} Отзывы
-          .pull-right.header-right
-            .tb-language.dropdown.pull-right
-              %a{'data-target' => '#', 'data-toggle' => 'dropdown', href: '#'}
-                English
-                %i.fa.fa-angle-down.color.mass-dark-blue
-              %ul.dropdown-menu.dropdown-mini{role: 'menu'}
-                %li
-                  %a{href: '#'} Hindi
-                %li
-                  %a{href: '#'} Tamil
-                %li
-                  %a{href: '#'} Kanada
-            = image_tag 'call.png', class: 'pull-right operator-pic'
-            .clearfix
-            .tb-language.dropdown.pull-right.user-block
-              %span.rating-block.rounded-1 500
-              %a{"data-target" => "#", "data-toggle" => "dropdown", href: "#"}
-                = current_user.to_s if current_user
-                %i.fa.fa-angle-down.color.mass-dark-blue
-              - if current_user.admin?
-                %br
-              %ul.dropdown-menu.dropdown-mini{role: "menu"}
-                %li{role: 'presentation'}
-                  = link_to t('menu.account'), user_path(@project, current_user), id: 'go_to_profile'
-                %li{role: 'presentation'}
-                  = link_to t('menu.profile_edit'), edit_user_path(@project, current_user), id: 'go_to_edit_profile'
+          .navbar-right.text-right.user_block.font_grey
+            = link_to knowbase_posts_path(@project) do
+              = image_tag 'book-icon.png', id: "tooltip1_5", class: "tooltip1_5", "data-placement" => "bottom", "data-toggle" => "tooltip", "data-trigger" => "none", :title => "Открыть базу знаний"
+              -#%img#tooltip1_5.tooltip1_5{"data-placement" => "bottom", "data-toggle" => "tooltip", "data-trigger" => "none", :src => "book-icon.png", :title => "Открыть базу знаний"}/
+            %span.auth-divider
+              |
+              %i.fa.fa-exclamation-triangle.font_lighter_grey
+              %span.auth-divider
+                |
+              %span.dropdown
+                %a.font_grey.bold#lang_dropdown{'data-target' => '#', 'data-toggle' => 'dropdown', href: '#', "aria-haspopup" => "true", "aria-expanded" => "false"}
+                  %i.fa.fa-globe.font_lighter_grey
+                  %small
+                    Russian
+                    %i.fa.fa-angle-down
+                %ul.dropdown-menu.dropdown-mini{role: 'menu', "aria-labelledby" => "lang_dropdown"}
+                  %li
+                    %a{href: '#'} English
+                  %li
+                    %a{href: '#'} Kanada
+              %span.auth-divider
+                |
+              %span.dropdown
+                %span.badge.grey 500
+                %a.font_grey.bold#auth_dropdown{"data-target" => "#", "data-toggle" => "dropdown", href: "#", "aria-haspopup" => "true", "aria-expanded" => "false"}
+                  %small
+                    = current_user.to_s if current_user
+                    %i.fa.fa-angle-down
+                %ul.dropdown-menu.dropdown-mini{role: "menu", "aria-labelledby" => "auth_dropdown"}
+                  %li{role: 'presentation'}
+                    = link_to t('menu.account'), user_path(@project, current_user), id: 'go_to_profile'
+                  %li{role: 'presentation'}
+                    = link_to t('menu.profile_edit'), edit_user_path(@project, current_user), id: 'go_to_edit_profile'
 
-          .clearfix
+
+      / Top Bar ends
+      .subhead
+        .container
+          %h4.font_white
+            = @project.name
+        %button#tooltip_button_1.btn.btn-tooltip{:type => "button", :value => "Show"}
+          %i.fa.fa-lightbulb-o
+          Открыть подсказки
+        %button#close_tooltip_button_1.btn.btn-tooltip-close{:type => "button", :value => "Destroy"}
+          %i.fa.fa-lightbulb-o
+          Закрыть подсказки
+
+      .container
+        .row
+          .col-md-8.col_padding_right_3
+            #tooltip1_1.border_grey.rounded_3.stages_block.tooltip1_1{"data-placement" => "bottom", "data-toggle" => "tooltip", "data-trigger" => "none", :title => "В нашей процедуре стадии открываются поэтапно. Следующая стадия откроется, когда большинство участников ответит на все вопросы."}
+              .btn-toolbar{:role => "toolbar"}
+                = render partial: 'stages'
+          .col-md-4.col_padding_left_3
+            #tooltip1_2.border_grey.rounded_3.help_icon.tooltip1_2{"data-placement" => "bottom", "data-toggle" => "tooltip", "data-trigger" => "none", :title => "Вы всегда сможете вызвать помощь по стадии, нажав сюда"}
+            #tooltip1_3.border_grey.rounded_3.progress_block.tooltip1_3{"data-placement" => "bottom", "data-toggle" => "tooltip", "data-trigger" => "none", :title => "Здесь будут отображаться ваши успехи по работе с аспектами. Другие участники тоже не сидят сложа руки!"}
+              .container
+                .row
+                  - if controller.instance_of? CollectInfo::PostsController
+                    = render partial: 'application/progress_bar'
+
+
+      / Main Block starts
       .main-block
         .container
-          .clearfix
-          = render partial: 'stages'
-          .clearfix
-          - if controller.instance_of? CollectInfo::PostsController
-            .divider-grey
-            .row.progress-bars
-              = render partial: 'application/progress_bar'
-            .clearfix
-            .divider-grey
           = yield
-    %br/
-    %br/
-    %span.totop
-      %a{href: "#"}
-        %i.fa.fa-angle-up.bg-color
+
+
 
     /
       Javascripts
       \==================================================
     / Placed at the end of the document so the pages load faster
     = javascript_include_tag 'application'
-    -#<!--[if lt IE 8]>
-    -#  <p class="danger"> Для эффективной работы настоятельно рекомендуем вам скачать брузер хром (<a href="https://www.google.ru/chrome/browser/desktop/">ссылка<a/>)</p>
-    -#<![endif]-->
