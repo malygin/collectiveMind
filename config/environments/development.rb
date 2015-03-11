@@ -1,4 +1,10 @@
+require 'pusher'
+
 CollectiveMind::Application.configure do
+  Pusher.app_id = '110857'
+  Pusher.key = 'f1cc391f6916e099123c'
+  Pusher.secret = 'f73a376f48db0518c3c9'
+
   # Settings specified here will take precedence over those in config/application.rb.
 
   # In the development environment your application's code is reloaded on
