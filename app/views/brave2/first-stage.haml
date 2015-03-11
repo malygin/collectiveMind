@@ -34,23 +34,20 @@
                 Новости
               %span.top-circle 36
           .navbar-right.text-right.user_block.font_grey
-            %a{:href => "#"}
-              %img#tooltip1_5.tooltip1_5{"data-placement" => "bottom", "data-toggle" => "tooltip", "data-trigger" => "none", :src => "img/book-icon.png", :title => "Открыть базу знаний"}/
-            %span.auth-divider
-              |
-              %i.fa.fa-exclamation-triangle.font_lighter_grey
-              %span.auth-divider |
-              %a.font_grey.bold{:href => "#"}
-                %i.fa.fa-globe.font_lighter_grey
-                %small
-                  %i.fa.fa-angle-down
-              %ul.dropdown-menu.dropdown-mini{:role => "menu"}
-              %span.auth-divider |
-              %span.badge.grey 500
-              %a.font_grey.bold{:href => "#"}
-                %small
-                  Лиза Школьник
-                  %i.fa.fa-angle-down
+            %a#tooltip1_5.tooltip1_5.open_base_icon{"data-placement" => "bottom", "data-toggle" => "tooltip", "data-trigger" => "none", :href => "#", :title => "Открыть базу знаний"}
+            %span.auth-divider |
+            %i.fa.fa-exclamation-triangle.font_lighter_grey
+            %span.auth-divider |
+            %a.font_grey.bold{:href => "#"}
+              %i.fa.fa-globe.font_lighter_grey
+              %small
+                %i.fa.fa-angle-down
+            %span.auth-divider |
+            %span.badge.grey 500
+            %a.font_grey.bold{:href => "#"}
+              %small
+                Лиза Школьник
+                %i.fa.fa-angle-down
       / Top Bar ends
       .subhead
         .container
@@ -239,7 +236,7 @@
                     .container
                       .row
                         .col-md-8.col-sm-8.min-col-right-padd
-                          .ui-4-top-color-border-block.aspect-main-block
+                          .aspect-main-block
                             %p.aspect-main-block-text
                               В популярной сказке Винни-Пух и его
                               друзья жаждали меда, но пчелы не давали забрать у себя плоды своего
@@ -308,7 +305,7 @@
                     .container
                       .row
                         .col-md-8.col-sm-8.min-col-right-padd
-                          .ui-4-top-color-border-block.aspect-main-block
+                          .aspect-main-block
                             %h6.aspect-main-block-heading
                               Трудности, связанные с
                               расположением конфликтующих сторон
@@ -320,10 +317,14 @@
                               постоянно беспокоясь, что их ограбят.
                             %img{:src => "img/aspect-pic3.jpg"}/
                         .col-md-4.col-sm-4.min-col-left-padd
-                          #questionsCarousel3.carousel.slide{"data-ride" => "carousel"}
-                            .aspect-questions-block.questionsCarousel{:style => "height: 472px;"}
+                          #questionsCarousel3.carousel.slide.questionsCarousel{"data-ride" => "carousel"}
+                            .aspect-questions-block{:style => "height: 472px;"}
                               .carousel-inner
                                 .item.active
+                                  %h4.block-with-left-icon
+                                    %i.left-icon.fa.fa-2x.fa-comments.pull-left>
+                                    Вопросы по
+                                    теме
                                   %p.text.block-with-left-icon
                                     %span.left-icon.pull-right 1.
                                     Где живут пчелы?
@@ -362,7 +363,7 @@
                     .container
                       .row
                         .col-md-8.col-sm-8.min-col-right-padd
-                          .ui-4-top-color-border-block.aspect-main-block
+                          .aspect-main-block
                             %h6.aspect-main-block-heading Пчелы и цветочные поляны
                             %p.aspect-main-block-text
                               Проснувшись однажды утром после
@@ -378,7 +379,7 @@
                     .container
                       .row
                         .col-md-8.col-sm-8.min-col-right-padd
-                          .ui-4-top-color-border-block.aspect-main-block
+                          .aspect-main-block
                             %h6.aspect-main-block-heading Четвероногие и сахар
                             %p.aspect-main-block-text
                               Любя, съешь щипцы, — вздохнёт мэр, —
@@ -393,7 +394,7 @@
                     .container
                       .row
                         .col-md-8.col-sm-8.min-col-right-padd
-                          .ui-4-top-color-border-block.aspect-main-block
+                          .aspect-main-block
                             %h6.aspect-main-block-heading
                               Пчелы, четвероногие и зимняя
                               спячка
@@ -412,7 +413,7 @@
                     .container
                       .row
                         .col-md-8.col-sm-8.min-col-right-padd
-                          .ui-4-top-color-border-block.aspect-main-block
+                          .aspect-main-block
                             %h6.aspect-main-block-heading Винни-Пух и все-все-все
                             %p.aspect-main-block-text
                               Далеко-далеко за словесными горами в
@@ -429,7 +430,7 @@
                     .container
                       .row
                         .col-md-8.col-sm-8.min-col-right-padd
-                          .ui-4-top-color-border-block.aspect-main-block
+                          .aspect-main-block
                             %h6.aspect-main-block-heading
                               Эффективность пчел в сборе
                               меда
@@ -448,7 +449,7 @@
                     .container
                       .row
                         .col-md-8.col-sm-8.min-col-right-padd
-                          .ui-4-top-color-border-block.aspect-main-block
+                          .aspect-main-block
                             %h6.aspect-main-block-heading Лес
                             %p.aspect-main-block-text
                               Проснувшись однажды утром после
@@ -1072,11 +1073,11 @@
                   var left_pos = count_pos()+1;
                   var right_pos = left_pos + item.innerWidth();
                   if (left_pos < offset){
-                      prev_item(outer_w, offset);
+                      slide_inner(outer_w, offset, "left");
                   } else if(right_pos < (offset+outer_w)){
 
                   } else {
-                      next_item(outer_w, offset)
+                      slide_inner(outer_w, offset, "right");
                   };
               };
           };

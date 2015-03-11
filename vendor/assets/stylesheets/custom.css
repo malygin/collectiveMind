@@ -23,6 +23,11 @@ a, a:hover, a:focus, a:active {
     text-decoration: none;
 }
 
+a:focus, a:active, button:focus, button:active {
+    border: 0;
+    outline: none !important;
+}
+
 .imperfect-new .innovs .innov-single .post-center-block .post-poster, .imperfect-new .innovs .innov-single .post-center-block .post-text, .right-rollover, .imperfect-new .innovs .innov-single .post-themes .tag-stripe, .popup-top-block, .popup-bottom-block, .admin-notice-displayable, .popup-imperf-admin-notice, .popup-window.authorize-popup .popup {
     box-sizing: border-box;
 }
@@ -324,6 +329,9 @@ a, a:hover, a:focus, a:active {
 
 }
 
+.popup_rounded {
+    border-radius: 5px;
+}
 
 /* first stage slider */
 .slider-wrapper {
@@ -517,8 +525,22 @@ a, a:hover, a:focus, a:active {
     padding-bottom: 15px;
     margin-right: 0;
 }
+
+.user_block * {}
+.open_base_icon {
+    display: inline-block;
+    width: 19px;
+    height: 14px;
+    background: image-url('book-icon.png') no-repeat center center;
+}
+
 .user_block .badge {
+    padding: 2px 7px;
     border-radius: 2px;
+    font-size: 10px;
+}
+.auth-divider {
+     font-size: 15px;
 }
 
 
@@ -1065,7 +1087,33 @@ a, a:hover, a:focus, a:active {
     background-color: #566687;
 }
 
-
+.color-theme-1 .notice-button {
+     border-color: #ecd72a;
+}
+.color-theme-2 .notice-button {
+    border-color: #bfe6e8;
+}
+.color-theme-3 .notice-button {
+    border-color: #bcddc6;
+}
+.color-theme-4 .notice-button {
+    border-color: #e3c6e5;
+}
+.color-theme-5 .notice-button {
+     border-color: #85edec;
+}
+.color-theme-6 .notice-button {
+    border-color: #85bbed;
+}
+.color-theme-7 .notice-button {
+    border-color: #f298c0;
+}
+.color-theme-8 .notice-button {
+    border-color: #98b6f2;
+}
+.color-theme-9 .notice-button {
+    border-color: #566687;
+}
 
 
 
@@ -1079,38 +1127,6 @@ a, a:hover, a:focus, a:active {
 
 .color-theme-bcddc6 .aspect-questions-block .hint, .color-theme-bcddc6 .aspect-questions-block .wrong-answer {
     background: #bcddc6;
-}
-
-.color-theme-ecd72a .instruments-block .bottom-buttons .notice-button {
-    border-color: #ecd72a;
-}
-
-.color-theme-ecd72a .instruments-block .bottom-buttons .answer-button {
-    background-color: #ecd72a;
-}
-
-.color-theme-bfe6e8 .instruments-block .bottom-buttons .notice-button {
-    border-color: #bfe6e8;
-}
-
-.color-theme-bfe6e8 .instruments-block .bottom-buttons .answer-button {
-    background-color: #bfe6e8;
-}
-
-.color-theme-bcddc6 .instruments-block .bottom-buttons .notice-button {
-    border-color: #bcddc6;
-}
-
-.color-theme-bcddc6 .instruments-block .bottom-buttons .answer-button {
-    background-color: #bcddc6;
-}
-
-.color-theme-e3c6e5 .instruments-block .bottom-buttons .notice-button {
-    border-color: #e3c6e5;
-}
-
-.color-theme-e3c6e5 .instruments-block .bottom-buttons .answer-button {
-    background-color: #e3c6e5;
 }
 
 .ui-4.first-stage .tab-content .tab-pane {
@@ -3892,8 +3908,12 @@ h5 i{
 /* modals */
 
 /* вынести наверх в класс .comment */
-.modal-dialog .media.comment {
+.media.comment {
     margin: 25px 0;
+}
+
+.modal_title {
+    margin: 15px 30px;
 }
 
 .modal-backdrop {
@@ -3902,7 +3922,7 @@ h5 i{
     z-index: 500;
 }
 
-.modal-body {
+.modal_body {
     padding: 0;
     box-shadow: inset 0px 4px 5px -4px rgba(0,0,0,0.1);
 }

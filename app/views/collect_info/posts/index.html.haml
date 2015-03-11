@@ -51,8 +51,7 @@
                               .item{id: "question_#{question.id}", class: "#{'active' if asp.questions.by_project(@project).by_status(0).by_complete(asp.question_complete(@project, current_user).pluck(:id)).order('collect_info_questions.id').first == question}"}
                                 %h4.block-with-left-icon
                                   %i.left-icon.fa.fa-2x.fa-comments.pull-left>
-                                  Вопросы по
-                                  теме
+                                  Вопросы по теме
                                 %p.text.block-with-left-icon
                                   %span.left-icon.pull-right="#{ind + 1}."
                                   = question.content

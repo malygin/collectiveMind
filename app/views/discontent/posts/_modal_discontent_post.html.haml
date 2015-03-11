@@ -2,9 +2,7 @@
   .popup.popup-top-rounded.popup-bottom-rounded{class: "#{@post.style == 1 ? 'popup-imperfect-pink' : 'popup-imperfect-blue'}"}
     %h2
       Несовершенство
-      ='"'
-      ="#{@post.content}"
-      ='"'
+      ="\"#{@post.content}\""
     .popup-imperfect-main-block
       .imperfect-info.rounded-3
         .poster-line
@@ -93,26 +91,6 @@
             -#      =Russian::strftime(comment.created_at,'%d %B %k:%M:%S')
             -#  %p.font_grey.bold
             -#    =comment.content
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

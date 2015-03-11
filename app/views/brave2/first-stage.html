@@ -65,13 +65,11 @@
             </ul>
 
             <div class="navbar-right text-right user_block font_grey">
-                <a href="#"><img src="img/book-icon.png" class="tooltip1_5" data-toggle="tooltip" id="tooltip1_5" data-trigger="none" data-placement="bottom" title="Открыть базу знаний"></a><span class="auth-divider"> |
+                <a href="#" class="tooltip1_5 open_base_icon" data-toggle="tooltip" id="tooltip1_5" data-trigger="none" data-placement="bottom" title="Открыть базу знаний"></a><span class="auth-divider"> |</span>
                 <i class="fa fa-exclamation-triangle font_lighter_grey"></i><span class="auth-divider"> |</span>
                 <a href="#" class="font_grey bold"><i class="fa fa-globe font_lighter_grey"></i>
                     <small><i class="fa fa-angle-down "></i></small>
                 </a>
-                <ul class="dropdown-menu dropdown-mini" role="menu">
-                </ul>
                 <span class="auth-divider">|</span>
                 <span class="badge grey">500</span>
                 <a href="#" class="font_grey bold">
@@ -389,7 +387,7 @@
                                     <div class="row">
 
                                         <div class="col-md-8 col-sm-8 min-col-right-padd">
-                                            <div class="ui-4-top-color-border-block aspect-main-block">
+                                            <div class="aspect-main-block">
                                                 <p class="aspect-main-block-text">В популярной сказке Винни-Пух и его
                                                     друзья жаждали меда, но пчелы не давали забрать у себя плоды своего
                                                     труда. Чтобы раздобыть мед, Винни с компанией пытался обманом
@@ -491,7 +489,7 @@
                                     <div class="row">
 
                                         <div class="col-md-8 col-sm-8 min-col-right-padd">
-                                            <div class="ui-4-top-color-border-block aspect-main-block">
+                                            <div class="aspect-main-block">
                                                 <h6 class="aspect-main-block-heading">Трудности, связанные с
                                                     расположением конфликтующих сторон</h6>
 
@@ -505,11 +503,15 @@
                                         </div>
 
                                         <div class="col-md-4 col-sm-4 min-col-left-padd">
-                                            <div id="questionsCarousel3" class="carousel slide" data-ride="carousel">
-                                                <div class="aspect-questions-block questionsCarousel" style="height: 472px;">
+                                            <div id="questionsCarousel3" class="carousel slide questionsCarousel" data-ride="carousel">
+                                                <div class="aspect-questions-block" style="height: 472px;">
                                                     <div class="carousel-inner">
 
                                                         <div class="item active">
+                                                            <h4 class="block-with-left-icon"><i
+                                                                    class="left-icon fa fa-2x fa-comments pull-left"></i>Вопросы по
+                                                                теме</h4>
+
                                                             <p class="text block-with-left-icon">
                                                                 <span class="left-icon pull-right">1.</span>
                                                                 Где живут пчелы?
@@ -568,7 +570,7 @@
                                 <div class="container">
                                     <div class="row">
                                         <div class="col-md-8 col-sm-8 min-col-right-padd">
-                                            <div class="ui-4-top-color-border-block aspect-main-block">
+                                            <div class="aspect-main-block">
                                                 <h6 class="aspect-main-block-heading">Пчелы и цветочные поляны</h6>
 
                                                 <p class="aspect-main-block-text">Проснувшись однажды утром после
@@ -594,7 +596,7 @@
                                 <div class="container">
                                     <div class="row">
                                         <div class="col-md-8 col-sm-8 min-col-right-padd">
-                                            <div class="ui-4-top-color-border-block aspect-main-block">
+                                            <div class="aspect-main-block">
                                                 <h6 class="aspect-main-block-heading">Четвероногие и сахар</h6>
 
                                                 <p class="aspect-main-block-text">Любя, съешь щипцы, — вздохнёт мэр, —
@@ -619,7 +621,7 @@
                                 <div class="container">
                                     <div class="row">
                                         <div class="col-md-8 col-sm-8 min-col-right-padd">
-                                            <div class="ui-4-top-color-border-block aspect-main-block">
+                                            <div class="aspect-main-block">
                                                 <h6 class="aspect-main-block-heading">Пчелы, четвероногие и зимняя
                                                     спячка</h6>
 
@@ -647,7 +649,7 @@
                                 <div class="container">
                                     <div class="row">
                                         <div class="col-md-8 col-sm-8 min-col-right-padd">
-                                            <div class="ui-4-top-color-border-block aspect-main-block">
+                                            <div class="aspect-main-block">
                                                 <h6 class="aspect-main-block-heading">Винни-Пух и все-все-все</h6>
 
                                                 <p class="aspect-main-block-text">Далеко-далеко за словесными горами в
@@ -674,7 +676,7 @@
                                 <div class="container">
                                     <div class="row">
                                         <div class="col-md-8 col-sm-8 min-col-right-padd">
-                                            <div class="ui-4-top-color-border-block aspect-main-block">
+                                            <div class="aspect-main-block">
                                                 <h6 class="aspect-main-block-heading">Эффективность пчел в сборе
                                                     меда</h6>
 
@@ -702,7 +704,7 @@
                                 <div class="container">
                                     <div class="row">
                                         <div class="col-md-8 col-sm-8 min-col-right-padd">
-                                            <div class="ui-4-top-color-border-block aspect-main-block">
+                                            <div class="aspect-main-block">
                                                 <h6 class="aspect-main-block-heading">Лес</h6>
 
                                                 <p class="aspect-main-block-text">Проснувшись однажды утром после
@@ -1532,11 +1534,11 @@
                 var left_pos = count_pos()+1;
                 var right_pos = left_pos + item.innerWidth();
                 if (left_pos < offset){
-                    prev_item(outer_w, offset);
+                    slide_inner(outer_w, offset, "left");
                 } else if(right_pos < (offset+outer_w)){
 
                 } else {
-                    next_item(outer_w, offset)
+                    slide_inner(outer_w, offset, "right");
                 };
             };
         };

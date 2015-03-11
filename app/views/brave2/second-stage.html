@@ -32,8 +32,32 @@
         <ul class="nav navbar-nav main_menu">
             <li class="active"><a href="first-stage.html">Процедура</a></li>
             <li><a href="cabinet-stage1.html">Кабинет</a></li>
-            <li><a href="#">Рефлексия</a></li>
-            <li><a href="#" class="has_circle">Новости<span class="top-circle">25</span></a></li>
+            <li>
+                <a href="#" class="has_circle popover_news" id="popover_news"
+                                       data-toggle="popover"
+                                       data-html="true"
+                                       data-placement="bottom"
+                                       data-content="
+                    <div class='popover_cont'>
+                    <a href='#' class='news-tooltip-icon' id='tooltip-i1'>
+                        <img src='img/icon-news-1.png'>
+                        <span class='news-tooltip-bottom-text'>добавлено</span>
+                    </a>
+                    <a href='#' class='news-tooltip-icon' id='tooltip-i2'>
+                        <img src='img/icon-news-2.png'>
+                        <span class='news-tooltip-bottom-text'>комментария</span>
+                    </a>
+                    <a href='#popup-news' class='news-tooltip-icon news-popup-href' id='tooltip-i3'>
+                        <img src='img/icon-news-3.png'>
+                        <span class='top-circle'>36</span>
+                        <span class='news-tooltip-bottom-text'>пометок</span>
+                    </a>
+                    <a href='#' class='news-tooltip-icon' id='tooltip-i4'>
+                        <img src='img/icon-news-4.png'>
+                        <span class='top-circle'>1</span>
+                        <span class='news-tooltip-bottom-text'>отредактировано</span>
+                    </a>
+                    </div>">Новости<span class="top-circle">36</span></a></li>
         </ul>
 
         <div class="navbar-right text-right user_block font_grey">
@@ -258,9 +282,11 @@
                 </div>
             </div>
             <div class="contenthover">
-                <div class="arrow" data-toggle="modal" data-target="#popup-imperfect-1">
-                    <i class="fa fa-angle-right"></i>
-                </div>
+                <a href="#popup-imperfect-1" class="open-popup-link">
+                    <div class="arrow">
+                        <i class="fa fa-angle-right"></i>
+                    </div>
+                </a>
             </div>
             <div class="post-bottom white tooltip2_3" data-toggle="tooltip" id="tooltip2_3" data-trigger="none" data-placement="bottom" title="В цветных квадратиках скрывается перечень аспектов, связанных с данным несовершенством. Нажмите на любой из них, чтобы увидеть полное
 название аспекта.">
@@ -1531,7 +1557,7 @@
 <!-- Main Block ends -->
 
 
-<div id="popup-imperfect-1" class="modal fade">
+<div id="" class="modal fade">
     <div class="modal-dialog popup-w985">
         <div class="modal-content">
             <div class="modal-header">
@@ -1711,147 +1737,191 @@
         </div>
     </div>
 </div>
-<div id="popup-imperfect-new1" class="popup-window popup-imperfect-new popup-w985 mfp-hide">
-    <div class="popup popup-imperfect-pink popup-top-rounded popup-bottom-rounded">
-        <h2>Несовершенство "Винни-Пух постоянно раздражает пчел своим излишним вниманием к Высокому дубу"</h2>
 
-        <div class="popup-imperfect-main-block">
-            <div class="imperfect-info rounded-3">
-                <div class="poster-line">
-                    <img src="img/ava-pyat.jpg" class="img50 img-circle">
-                    <span class="poster-name">Пятачок </span>
-                </div>
-                <table>
-                    <tr>
-                        <td class="imperf-left-column">
-                            Что
-                        </td>
-                        <td class="imperf-right-column">
-                            Винни-Пух постоянно раздражает пчел своим излишним вниманием к Высокому дубу
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="imperf-left-column">
-                            Где
-                        </td>
-                        <td class="imperf-right-column">
-                            Около Высокого дуба
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="imperf-left-column">
-                            Когда
-                        </td>
-                        <td class="imperf-right-column">
-                            При выслеживании удачного момента для кражи меда
-                        </td>
-                    </tr>
-                </table>
-                <div class="info-stripe">
-                    <span class="popup-comments">+5 <img src="img/icon-comment.png"></span>
-                    <span class="popup-likes">+9 <img src="img/icon-thumb-up.png"></span>
-                    <span class="popup-dislikes">+1 <img src="img/icon-thumb-down.png"></span>
-                </div>
-                <div class="imperfect-info-icon-text-block">
-                                <span class="icon-text-icon-cont">
-                                    <img src="img/moder-icon.png" class="icon-text-icon">
-                                </span>
 
-                    <p class="icon-text-text">
-                        <span class="icon-text-text-heading">Замечание модератора</span>
-                        мотивированы продавать продукцию, фиксируя на ней свой процент от продажи
-                    </p>
-                </div>
-                <div class="imperfect-info-icon-text-block">
-                                <span class="icon-text-icon-cont">
-                                    <span class="icon-text-icon colored-icon dark-blue"></span>
-                                </span>
 
-                    <p class="icon-text-text">
-                        Взаимоотношения четвероногих и пчел
-                    </p>
-                </div>
-                <div class="imperfect-info-icon-text-block">
-                                <span class="icon-text-icon-cont">
-                                    <span class="icon-text-icon colored-icon  sandy"></span>
-                                </span>
 
-                    <p class="icon-text-text">
-                        Эффективность пчел в сборе меда
-                    </p>
-                </div>
-                <div class="imperfect-info-icon-text-block">
-                                <span class="icon-text-icon-cont">
-                                    <span class="icon-text-icon colored-icon  blue-green2"></span>
-                                </span>
 
-                    <p class="icon-text-text">
-                        Винни-Пух и все-все-все
-                    </p>
-                </div>
-                <div class="imperfect-info-icon-text-block">
-                                <span class="icon-text-icon-cont">
-                                    <span class="icon-text-icon colored-icon  blue-green3"></span>
-                                </span>
-
-                    <p class="icon-text-text">
-                        Четвероногие и сахар
-                    </p>
-                </div>
-                <div class="imperfect-info-icon-text-block">
-                                <span class="icon-text-icon-cont">
-                                    <span class="icon-text-icon colored-icon  light-green"></span>
-                                </span>
-
-                    <p class="icon-text-text">
-                        Пчелы и цветочные поляны
-                    </p>
-                </div>
-            </div>
-            <div class="imperfect-text-comments">
-                <span class="imperfect-text-date">17.12.2014</span>
-
-                <div class="imperfect-text-comments-post-block">
-                    <div class="post-interfaces">
-                        <div class="post-interfaces-buttons">
-                            <button type="button"><img src="img/icon-thumb-up.png"></button>
-                            <button type="button"><img src="img/icon-thumb-down.png"></button>
-                            <button type="button"><img src="img/icon-share.png"></button>
+<div id="popup-imperfect-1" class="popup-window popup-imperfect-new popup-w985 mfp-hide">
+    <div class="popup popup_rounded">
+        <h4 class="modal_title bold font_red">
+            Несовершенство "Винни-Пух постоянно раздражает пчел своим излишним вниманием к Высокому дубу"
+        </h4>
+        <div class="modal_body">
+            <div class="divider25"></div>
+            <div class="container">
+                <div class="col-md-5">
+                    <div class="border_light_grey rounded_5 imperf_left">
+                        <div class="media comment main_line">
+                            <div class="container">
+                                <div class="media-left">
+                                    <img class="media-object img50 img-circle" src="img/ava-vinnie.jpg">
+                                </div>
+                                <div class="media-body">
+                                    <h5 class="media-heading bold">Винни-Пух</h5>
+                                </div>
+                            </div>
                         </div>
-                        <form class="post-interfaces-add-comment">
-                            <input type="text" placeholder="Ваш комментарий">
-                            <button class="btn" type="button"><img src="img/comment-button.png"></button>
-                        </form>
+                        <table class="table pink">
+                            <tr>
+                                <td class="col-md-2 text-center right-column">
+                                    Что
+                                </td>
+                                <td class="col-md-10 left-column">Винни-Пух постоянно
+                                    раздражает пчел своим излишним вниманием к Высокому дубу
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td class="col-md-2 text-center right-column">Где</td>
+                                <td class="col-md-10 left-column">Около Высокого дуба</td>
+                            </tr>
+                            <tr>
+                                <td class="col-md-2 text-center right-column">Когда</td>
+                                <td class="col-md-10 left-column">При выслеживании удачного момента
+                                    для кражи меда
+                                </td>
+                            </tr>
+                        </table>
+                        <div class="divider10"></div>
+                        <div class="text-right">
+                            <span class="popup2">5 <i class="fa fa-comment-o"></i> </span>
+                            <span class="popup2">9 <i class="fa fa-thumbs-o-up"></i></span>
+                            <span class="popup2">1 <i class="fa fa-thumbs-o-down"></i></span>
+                        </div>
+                        <div class="divider10"></div>
+                        <div class="index_block">
+                            <div class="text-center col-md-1">
+                                <i class="fa fa-exclamation-triangle font_lighter_grey"></i>
+                            </div>
+                            <div class="col-md-11">
+                                <h5>Замечание модератора</h5>
+                                мотивированы продавать продукцию Инвар, фиксируя на ней
+                                свой процент от продажи
+                            </div>
+                        </div>
+                        <div class="index_block">
+                            <div class="text-center col-md-1">
+                                <i class="fa fa-square font_dark_blue"></i>
+                            </div>
+                            <div class="col-md-11">
+                                Взаимоотношения четвероногих и пчел
+                            </div>
+                        </div>
+                        <div class="index_block">
+                            <div class="text-center col-md-1">
+                                <i class="fa fa-square font_blue_green"></i>
+                            </div>
+                            <div class="col-md-11">
+                                Эффективность пчел в сборе меда
+                            </div>
+                        </div>
+                        <div class="index_block">
+                            <div class="text-center col-md-1">
+                                <i class="fa fa-square font_blue_green2"></i>
+                            </div>
+                            <div class="col-md-11">
+                                Винни-Пух и все-все-все
+                            </div>
+                        </div>
+                        <div class="index_block">
+                            <div class="text-center col-md-1">
+                                <i class="fa fa-square font_blue_green3"></i>
+                            </div>
+                            <div class="col-md-11">
+                                Пчелы и цветочные поляны
+                            </div>
+                        </div>
+                        <div class="index_block">
+                            <div class="text-center col-md-1">
+                                <i class="fa fa-square font_light_green"></i>
+                            </div>
+                            <div class="col-md-11">
+                                Эффективность пчел в сборе меда
+                            </div>
+                        </div>
+                        <div class="divider10"></div>
                     </div>
                 </div>
+                <div class="col-md-7">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-md-12 font_red text-right no_padding_col">
+                                21.12.2014
+                            </div>
+                        </div>
+                    </div>
+                    <div class="divider_1_grey"></div>
+                    <div class="media comment">
+                        <div class="media-left">
+                            <img class="media-object img50 img-circle" src="img/ava-vinnie.jpg">
+                        </div>
+                        <div class="media-body">
+                            <h5 class="media-heading bold">Винни-Пух</h5>
+                            <span class="date font_red bold">15:28</span>
+                        </div>
+                        <p class="font_grey bold">Ничего не правда. Я люблю гулять, а от вашего дуба тень большая.</p>
+                        <div class="post-interfaces">
+                            <div class="post-interfaces-buttons">
+                                <button type="button"><img src="img/icon-thumb-up.png"></button>
+                                <button type="button"><img src="img/icon-thumb-down.png"></button>
+                                <button type="button"><img src="img/icon-share.png"></button>
+                            </div>
+                            <form class="form-group comment_add">
+                                <div class="input_cont">
+                                    <input type="text" placeholder="Ваш комментарий">
+                                </div>
 
-                <div class="media comment">
-                    <div class="media-left">
-                        <img class="media-object img50 img-circle" src="img/ava-vinnie.jpg">
+                                <button class="btn" type="button"><img src="img/comment-button.png"></button>
+
+                            </form>
+                        </div>
                     </div>
-                    <div class="media-body">
-                        <h5 class="media-heading bold">Винни-Пух</h5>
-                        <span class="date font_red bold">15:28</span>
+                    <div class="divider_1_grey"></div>
+                    <div class="media comment">
+                        <div class="media-left">
+                            <img class="media-object img50 img-circle" src="img/ava-vinnie.jpg">
+                        </div>
+                        <div class="media-body">
+                            <h5 class="media-heading bold">Винни-Пух</h5>
+                            <span class="date font_red bold">15:28</span>
+                        </div>
+                        <p class="font_grey bold">Ничего не правда. Я люблю гулять, а от вашего дуба тень большая.</p>
                     </div>
-                    <p class="font_grey bold">Ничего не правда. Я люблю гулять, а от вашего дуба тень большая.</p>
+                    <div class="divider_1_grey"></div>
+                    <div class="media comment">
+                        <div class="media-left">
+                            <img class="media-object img50 img-circle" src="img/ava-vinnie.jpg">
+                        </div>
+                        <div class="media-body">
+                            <h5 class="media-heading bold">Винни-Пух</h5>
+                            <span class="date font_red bold">15:28</span>
+                        </div>
+                        <p class="font_grey bold">Ничего не правда. Я люблю гулять, а от вашего дуба тень большая.</p>
+                    </div>
+                    <div class="divider_1_grey"></div>
+                    <div class="media comment">
+                        <div class="media-left">
+                            <img class="media-object img50 img-circle" src="img/ava-vinnie.jpg">
+                        </div>
+                        <div class="media-body">
+                            <h5 class="media-heading bold">Винни-Пух</h5>
+                            <span class="date font_red bold">15:28</span>
+                        </div>
+                        <p class="font_grey bold">Ничего не правда. Я люблю гулять, а от вашего дуба тень большая.</p>
+                    </div>
                 </div>
-
-                <div class="media comment">
-                    <div class="media-left">
-                        <img class="media-object img50 img-circle" src="img/ava-ia.jpg">
-                    </div>
-                    <div class="media-body">
-                        <h5 class="media-heading bold">Ослик</h5>
-                        <span class="date font_red bold">16:30</span>
-                    </div>
-                    <p class="font_grey bold">Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget
-                        dolor. Aenean massa. Cum sociis natoque penatibus et</p>
-                </div>
-
             </div>
+            <div class="divider25"></div>
         </div>
     </div>
 </div>
+
+
+
+
+
+
 <div id="popup-imperfect-new2" class="popup-window popup-imperfect-new popup-w985 mfp-hide">
     <div class="popup popup-imperfect-blue popup-top-rounded popup-bottom-rounded">
         <h2>Несовершенство "Четвероногим нечем заинтересовать пчел"</h2>

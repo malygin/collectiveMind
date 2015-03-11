@@ -37,9 +37,8 @@
                 = link_to '-> стадия', next_stage_core_project_path(@project), method: :put, id: "up_to_#{@project.next_status}"
 
           .navbar-right.text-right.user_block.font_grey
-            = link_to knowbase_posts_path(@project) do
-              = image_tag 'book-icon.png', id: "tooltip1_5", class: "tooltip1_5", "data-placement" => "bottom", "data-toggle" => "tooltip", "data-trigger" => "none", :title => "Открыть базу знаний"
-              -#%img#tooltip1_5.tooltip1_5{"data-placement" => "bottom", "data-toggle" => "tooltip", "data-trigger" => "none", :src => "book-icon.png", :title => "Открыть базу знаний"}/
+            = link_to "", knowbase_posts_path(@project), id: "tooltip1_5", class: "tooltip1_5 open_base_icon", "data-placement" => "bottom", "data-toggle" => "tooltip", "data-trigger" => "none", :title => "Открыть базу знаний"
+            -#%img#tooltip1_5.tooltip1_5{"data-placement" => "bottom", "data-toggle" => "tooltip", "data-trigger" => "none", :src => "book-icon.png", :title => "Открыть базу знаний"}/
             %span.auth-divider
               |
               %i.fa.fa-exclamation-triangle.font_lighter_grey
@@ -94,8 +93,7 @@
             #tooltip1_3.border_grey.rounded_3.progress_block.tooltip1_3{"data-placement" => "bottom", "data-toggle" => "tooltip", "data-trigger" => "none", :title => "Здесь будут отображаться ваши успехи по работе с аспектами. Другие участники тоже не сидят сложа руки!"}
               .container
                 .row
-                  - if controller.instance_of? CollectInfo::PostsController
-                    = render partial: 'application/progress_bar'
+                  = render partial: 'application/progress_bar'
 
       / Main Block starts
       .main-block
