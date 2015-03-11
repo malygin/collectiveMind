@@ -1033,7 +1033,7 @@ a, a:hover, a:focus, a:active {
     border-top-color: #98b6f2;
 }
 
-.color-theme-9 .aspect-main-block {
+.color-theme-9 .aspect-main-block, .color-theme-9 .aspect-questions-block {
     border-top-color: #566687;
 }
 

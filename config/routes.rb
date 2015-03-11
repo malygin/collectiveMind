@@ -134,6 +134,7 @@ CollectiveMind::Application.routes.draw do
     get 'plan/posts/to_work', to: 'plan/posts#to_work'
     get 'estimate/posts/to_work', to: 'estimate/posts#to_work'
 
+    get 'collect_info/posts/render_slider', to: 'collect_info/posts#render_slider'
     namespace :collect_info do
       posts_routes
       resources :posts do

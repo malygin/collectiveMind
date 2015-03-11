@@ -147,8 +147,16 @@ $(document).ready(function () {
     $('.hint .close-button').click(function () {
         $('.hint').addClass("close-notice");
     });
-    $('.notice-button').click(function () {
-        $('.hint').removeClass("close-notice");
+
+    //$('.notice-button').click(function () {
+    //    $('.hint').removeClass("close-notice");
+    //});
+
+    /* #hashtag new_code */
+    $('.notice-button').click(function(){
+        var questionId;
+        questionId = $(this).data('question');
+        $('.hint#hint_question_'+questionId).removeClass("close-notice");
     });
 
 
@@ -156,8 +164,14 @@ $(document).ready(function () {
     $('.wrong-answer .close-button').click(function () {
         $('.wrong-answer').addClass("close-notice");
     });
+
     $('.answer-button').click(function () {
         $('.wrong-answer').removeClass("close-notice");
+    });
+
+    /* #hashtag new_code */
+    $('.li_aspect button[data-toggle="tab"]').on('show.bs.tab', function (e) {
+        $('.wrong-answer').addClass("close-notice");
     });
 
 

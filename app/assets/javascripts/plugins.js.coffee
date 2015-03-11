@@ -1,3 +1,13 @@
+@first_stage_slider = ->
+  slider = $("#first-stage-slider")
+  project_id = slider.data("project")
+  if project_id
+    $.ajax
+      url: "/project/#{project_id}/collect_info/posts/render_slider"
+      type: "get"
+      dataType: "script"
+
+
 @selectize = ->
   $select = $("#selectize_for_discontents").selectize
     labelField: "show_content"
@@ -60,10 +70,11 @@
 
   this.filter_aspects = (e) ->
     e.preventDefault()
-    $("[id^='button_aspect_']").removeClass('select_aspect')
     project = $(this).data('project')
     aspect = $(this).data('aspect')
-    $("[id='button_aspect_#{aspect}']").addClass('select_aspect')
+    color_aspect = $(this).find('.fa-stop').css('color')
+    text_aspect = $(this).text()
+    $('.select-aspect').html('<i class="fa fa-stop" style="color:' + color_aspect + '"></i>' + text_aspect + '<span class="caret"></span>');
     $('#tab_aspect_posts div.discontent-block').fadeOut();
     $("#tab_aspect_posts div[class~='aspect_#{aspect}']").fadeIn();
 
@@ -80,7 +91,7 @@
 
   $('form.filter_discontents').on('change', 'input:radio', this.send_filter)
   $('.tabs-discontents').on('click', "li button[id^='link_aspect_']", this.load_aspect)
-  $('.index-of-aspects').on('click', "div[id^='button_aspect_']", this.filter_aspects)
+  $('.index-of-aspects').on('click', "li[id^='button_aspect_']", this.filter_aspects)
   $('.index-of-discontents').on('click', "button[id^='button_discontent_']", this.filter_discontents)
 
 @sorterable = ->

@@ -3,12 +3,12 @@
     %span
       Аспекты
       ="(#{@aspects.count}) :"
-    %a.dropdown-toggle{"data-toggle" => "dropdown"}
+    %a.dropdown-toggle.select-aspect{"data-toggle" => "dropdown"}
       Выберите аспект
       %span.caret
-    %ul.dropdown-menu
+    %ul.dropdown-menu.index-of-aspects
       - @aspects.each_with_index do |asp, index|
-        %li
+        %li{id: "button_aspect_#{asp.id}", 'data-project' => @project.id, 'data-aspect' => asp.id}
           %input{:id => "ex2_2_#{index+1}",:name => "ex2_2", :type => "radio", :value => "#{index+1}"}/
           %label{:for => "ex2_2_#{index+1}"}
             %i.fa.fa-stop{style: "color: #{asp.color}"}

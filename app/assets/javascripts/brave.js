@@ -1,3 +1,36 @@
+function magnificPopupOpen(tag){
+    $.magnificPopup.open({
+        items: {
+            src: tag, // can be a HTML string, jQuery object, or CSS selector
+                type: 'inline',
+                midClick: true
+            }
+    });
+};
+
+function PanelVerticalBar(){
+    $('.panel-graph-vertical-bar').each(function(){
+        var me = $(this);
+        var bar_h = me.attr("data-limit");
+        switch(bar_h) {
+            case 'max':
+                    me.css('height', '80px');
+                    break;
+                case 'middle':
+                    me.css('height', '45px');
+                    break;
+                case 'min':
+                    me.css('height', '10px');
+                    break;
+                default:
+                    me.css('height', '0px');
+        }
+    });
+};
+
+
+
+
 $(document).ready(function() {
     $('.close-button').click(function(){
         $('.notice').addClass("close-notice");

@@ -1,0 +1,6 @@
+%li
+  .slider-item{class: "#{aspect_counter == 0 ? 'active' : ''}"}
+    .c1-item
+      %a{"data-toggle" => "tab", :href => "#tab_aspect_#{aspect.id}"}
+        %span.c1-item-inner{style: "border-top-color: #{aspect.color};"}
+          =aspect.content

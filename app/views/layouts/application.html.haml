@@ -23,11 +23,11 @@
             %a.navbar-brand{href: @project ? "/project/#{@project.id}" : '/', id: 'go_to_logo'}
               = image_tag 'logo1.png'
           %ul.nav.navbar-nav.main_menu
-            %li
+            %li{class: "#{'active' if [:collect_info_posts, :discontent_posts, :concept_posts, :plan_posts, :estimate_posts].include? name_controller}"}
               = link_to 'Процедура', "/project/#{@project.id}"
-            %li
+            %li{class: "#{'active' if name_controller == :project_user}"}
               = link_to 'Кабинет', project_user_path(@project, current_user)
-            %li
+            %li{class: "#{'active' if name_controller == :journal}"}
               = link_to 'Новости', journals_path(@project)
             - if @project.prev_status
               %li

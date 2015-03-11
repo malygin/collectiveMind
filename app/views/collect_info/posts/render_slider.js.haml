@@ -1,0 +1,12 @@
+$("#first-stage-slider").html('#{escape_javascript(render partial: 'aspect', collection: @aspects)}');
+init_first_stage_slider();
+
+-#- @aspects.each_with_index do |asp, index|
+-#  %li
+-#    .slider-item{class: "#{index == 0 ? 'active' : ''}"}
+-#      .c1-item
+-#        %a{"data-toggle" => "tab", :href => "#tab_aspect_#{asp.id}"}
+-#          %span.c1-item-inner{style: "border-top-color: #{asp.color};"}
+-#            =asp.content
+
+

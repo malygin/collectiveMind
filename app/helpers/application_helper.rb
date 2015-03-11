@@ -509,6 +509,7 @@ module ApplicationHelper
     Core::Project::LIST_STAGES.each do |num_stage, stage|
       return num_stage if name_controller == stage[:type_stage]
     end
+    0
   end
 
 

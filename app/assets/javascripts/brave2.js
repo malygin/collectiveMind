@@ -1,7 +1,19 @@
-document.addEventListener( "DOMContentLoaded", first_stage_slider, false );
+//document.addEventListener( "DOMContentLoaded", first_stage_slider, false );
 
-//$(document).ready(function (){
-function first_stage_slider() {
+//$(document).ready(function () {
+//    $.ajax({
+//        url:  "/users/select_users",
+//        dataType: "json",
+//        data: {
+//            prezzario: ui.item.value
+//        },
+//        success: function(data) {
+//            $('#usersList').append(data.users);
+//        }
+//    });
+//});
+
+function init_first_stage_slider() {
 
     $('.tab-pane.fade.in').find('.aspect-questions-block').innerHeight();
 
@@ -22,17 +34,18 @@ function first_stage_slider() {
      });
      });*/
 
-    //var max_item_h = 0;
-    //$('.c1-item').each(function () {
-    //    var cur_height = $(this).innerHeight();
-    //    if (cur_height > max_item_h) {
-    //        max_item_h = cur_height;
-    //    }
-    //    ;
-    //});
-    //$('.c1-item-inner').each(function () {
-    //    $(this).css('height', max_item_h + 'px');
-    //});
+    var max_item_h = 0;
+    $('.c1-item').each(function () {
+        var cur_height = $(this).innerHeight();
+        if (cur_height > max_item_h) {
+            max_item_h = cur_height;
+        }
+        ;
+    });
+    $('.c1-item-inner').each(function () {
+        $(this).css('height', max_item_h + 'px');
+    });
+
 
     var offset = 0;
 
@@ -108,11 +121,11 @@ function first_stage_slider() {
             var left_pos = count_pos()+1;
             var right_pos = left_pos + item.innerWidth();
             if (left_pos < offset){
-                prev_item(outer_w, offset);
+                slide_inner(outer_w, offset, "left");
             } else if(right_pos < (offset+outer_w)){
 
             } else {
-                next_item(outer_w, offset)
+                slide_inner(outer_w, offset, "right");
             };
         };
     };
@@ -130,5 +143,8 @@ function first_stage_slider() {
         });
         return sum_i;
     }
+
+    //$('#aspects_spinner_tab').hide();
+    //$('#first-stage-slider li').show();
 
 };

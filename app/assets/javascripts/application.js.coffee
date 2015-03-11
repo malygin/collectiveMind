@@ -45,6 +45,7 @@
 
 
 # @todo не используемые
+
 # require totop/jquery.ui.totop
 # require totop/easing
 # require jquery.icheck
@@ -109,6 +110,8 @@ $ ->
   activate_add_aspects()
   visit_chart()
 #  group_actions()
+
+  first_stage_slider()
 
   $('.tooltips').tooltip()
   $("#sortable").sortable()

@@ -1,63 +1,63 @@
 .col-md-6.discontent-block{id: "discontent_post_#{post_short.id}", class: "#{post_aspect_classes(post_short)}", data: {created: "#{(post_short.created_at.to_datetime.to_f)}",
                             popular: "#{post_short.users_pro.count + (post_short.number_views * 0.3)}"}}
-  .post
-    .post-header.white
-    .post-body
-      .media
-        .media-left.text-center.gradient.post-poster
-          = image_tag 'no-ava.png', class: "img-circle img50"
-          %p.poster-name
-            =post_short.user.to_s if post_short.user
-          %p.time= Russian::strftime(post_short.created_at,'%d %B %k:%M:%S')
-        = link_to({action: :show, project: @project, id: post_short.id, asp: params[:asp]}, remote: true, id: 'show_record',
-                    class: "media-body #{post_short.style == 1 ? 'pink' : 'blue'}" ) do
-          %table.table
-            %tbody
-              %tr.what
-                %td.col-md-2.text-center.right-column
-                  Что
-                %td.col-md-10.left-column.bold
-                  = post_short.content
-              %tr
-                %td.col-md-2.text-center.right-column
-                  Где
-                %td.col-md-10.left-column
-                  = post_short.whered
-              %tr
-                %td.col-md-2.text-center.right-column
-                  Когда
-                %td.col-md-10.left-column
-                  = post_short.whend
-              %tr
-                %td.col-md-2.text-center.right-column
-                %td.col-md-10.left-column
-    .contenthover
-      .arrow{"data-target" => "#popup-imperfect-1", "data-toggle" => "modal"}
-        %i.fa.fa-angle-right
-    #tooltip2_3.post-bottom.white.tooltip2_3{"data-placement" => "bottom", "data-toggle" => "tooltip", "data-trigger" => "none", :title => "В цветных квадратиках скрывается перечень аспектов, связанных с данным несовершенством. Нажмите на любой из них, чтобы увидеть полное\nназвание аспекта."}
-      .row
-        .col-md-10.col_padding_right_3
-          %small.pull-left{:style => "margin-right: 3px;"} Аспекты
-          .post-theme{id: "stripe#{post_short.id}"}
-            - post_short.post_aspects.each_with_index do |asp, index|
-              %a.tag-stripes{id: "stripe#{index+1}", class: "#{index == 0 ? 'active' : ''}", style: "background: #{asp.color};", href: "#"}
-                %span.tags
-                  = asp.content
-        .col-md-2.col_padding_left_3
-          .text-right.small_icons
-            %span.popup2
-              = post_short.comments.count
-              %i.fa.fa-comment-o
-            = link_to({controller: post_short.class.name.underscore.pluralize, action: :like, project: @project, id: post_short.id, against: false, remote: true}, method: :put, id: "plus_post_#{post_short.id}") do
+  = link_to({action: :show, project: @project, id: post_short.id, asp: params[:asp]}, remote: true, id: 'show_record') do
+    .post
+      .post-header.white
+      .post-body
+        .media
+          .media-left.text-center.gradient.post-poster
+            = image_tag 'no-ava.png', class: "img-circle img50"
+            %p.poster-name
+              =post_short.user.to_s if post_short.user
+            %p.time= Russian::strftime(post_short.created_at,'%d.%m.%Y %k:%M:%S')
+          .media-body{class: "#{post_short.style == 1 ? 'pink' : 'blue'}"}
+            %table.table
+              %tbody
+                %tr.what
+                  %td.col-md-2.text-center.right-column
+                    Что
+                  %td.col-md-10.left-column.bold
+                    = post_short.content
+                %tr
+                  %td.col-md-2.text-center.right-column
+                    Где
+                  %td.col-md-10.left-column
+                    = post_short.whered
+                %tr
+                  %td.col-md-2.text-center.right-column
+                    Когда
+                  %td.col-md-10.left-column
+                    = post_short.whend
+                %tr
+                  %td.col-md-2.text-center.right-column
+                  %td.col-md-10.left-column
+      .contenthover
+        .arrow{"data-target" => "#popup-imperfect-1", "data-toggle" => "modal"}
+          %i.fa.fa-angle-right
+      .post-bottom.white
+        .row
+          .col-md-10.col_padding_right_3
+            %small.pull-left{:style => "margin-right: 3px;"} Аспекты
+            .post-theme{id: "stripe#{post_short.id}"}
+              - post_short.post_aspects.each_with_index do |asp, index|
+                %a.tag-stripes{id: "stripe#{index+1}", class: "#{index == 0 ? 'active' : ''}", style: "background: #{asp.color};", href: "#"}
+                  %span.tags
+                    = asp.content
+          .col-md-2.col_padding_left_3
+            .text-right.small_icons
               %span.popup2
-                %span(id="plus_counter_#{post_short.id}" style="margin-right:0;")
-                  = post_short.users_pro.count
-                %i.fa.fa-thumbs-o-up
-            = link_to({controller: post_short.class.name.underscore.pluralize, action: :like, project: @project,  id: post_short.id, against: true, remote: true}, method: :put, id: "minus_post_#{post_short.id}") do
-              %span.popup2
-                %span(id="minus_counter_#{post_short.id}" style="margin-right:0;")
-                  = post_short.users_against.count
-                %i.fa.fa-thumbs-o-down
+                = post_short.comments.count
+                %i.fa.fa-comment-o
+              = link_to({controller: post_short.class.name.underscore.pluralize, action: :like, project: @project, id: post_short.id, against: false, remote: true}, method: :put, id: "plus_post_#{post_short.id}") do
+                %span.popup2
+                  %span(id="plus_counter_#{post_short.id}" style="margin-right:0;")
+                    = post_short.users_pro.count
+                  %i.fa.fa-thumbs-o-up
+              = link_to({controller: post_short.class.name.underscore.pluralize, action: :like, project: @project,  id: post_short.id, against: true, remote: true}, method: :put, id: "minus_post_#{post_short.id}") do
+                %span.popup2
+                  %span(id="minus_counter_#{post_short.id}" style="margin-right:0;")
+                    = post_short.users_against.count
+                  %i.fa.fa-thumbs-o-down
 
 
 
