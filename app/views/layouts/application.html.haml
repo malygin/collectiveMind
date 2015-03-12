@@ -95,15 +95,16 @@
                 .row
                   = render partial: 'application/progress_bar'
 
+
       / Main Block starts
       .main-block
         .container
           = yield
+
+
 
     /
       Javascripts
       \==================================================
     / Placed at the end of the document so the pages load faster
     = javascript_include_tag 'application'
-    %script(src='//js.pusher.com/2.2/pusher.min.js')
-    #pusher_key(data-content="#{Pusher.key}")

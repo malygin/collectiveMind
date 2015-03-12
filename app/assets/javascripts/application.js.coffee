@@ -16,8 +16,7 @@
 #= require history_jquery
 #= require tinymce
 
-# require websocket_rails/main
-
+#= require websocket_rails/main
 #= require messenger/messenger.min
 #= require jquery.ui.chatbox
 
@@ -74,11 +73,6 @@
 # @todo load initialization
 sidebarHeight = 0;
 $ ->
-  pusher = new Pusher($('#pusher_key').attr('data-content'), cluster: 'eu')
-  channel = pusher.subscribe('test_channel')
-  channel.bind 'my_event', (data) ->
-    alert(data)
-
   start_vote()
   start_play()
   comments_feed()
