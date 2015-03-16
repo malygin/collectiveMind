@@ -148,3 +148,11 @@ function init_first_stage_slider() {
     //$('#first-stage-slider li').show();
 
 };
+
+$(document).ready(function () {
+    $('.open_welcome_popup').magnificPopup({
+        type: 'inline',
+        midClick: true
+    });
+    $('.open_welcome_popup').magnificPopup('open');
+});

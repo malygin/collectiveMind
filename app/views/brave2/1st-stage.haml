@@ -34,17 +34,19 @@
                 Новости
               %span.top-circle 36
           .navbar-right.text-right.user_block.font_grey
-            %a#tooltip1_5.tooltip1_5.open_base_icon{"data-placement" => "bottom", "data-toggle" => "tooltip", "data-trigger" => "none", :href => "#", :title => "Открыть базу знаний"}
+            %a#tooltip1_5.tooltip1_5.book_icon{"data-placement" => "bottom", "data-toggle" => "tooltip", "data-trigger" => "none", :href => "#", :title => "Открыть базу знаний"}
             %span.auth-divider |
-            %i.fa.fa-exclamation-triangle.font_lighter_grey
+            %a.font_lighter_grey.bold{:href => "#"}
+              %i.fa.fa-exclamation-triangle
             %span.auth-divider |
             %a.font_grey.bold{:href => "#"}
               %i.fa.fa-globe.font_lighter_grey
               %small
                 %i.fa.fa-angle-down
+            %ul.dropdown-menu.dropdown-mini{:role => "menu"}
             %span.auth-divider |
             %span.badge.grey 500
-            %a.font_grey.bold{:href => "#"}
+            %a.font_lighter_grey.bold{:href => "#"}
               %small
                 Лиза Школьник
                 %i.fa.fa-angle-down
@@ -64,16 +66,19 @@
             #tooltip1_1.border_grey.rounded_3.stages_block.tooltip1_1{"data-placement" => "bottom", "data-toggle" => "tooltip", "data-trigger" => "none", :title => "В нашей процедуре стадии открываются поэтапно. Следующая стадия откроется, когда большинство участников ответит на все вопросы."}
               .btn-toolbar{:role => "toolbar"}
                 .btn-group{:role => "group"}
-                  %a.btn.back_color_stage1{:href => "first-stage.html", :role => "button"}
+                  %a.btn.back_color_stage1{:href => "1st-stage.html", :role => "button"}
                     1 СТАДИЯ: ВВЕДЕНИЕ В
                     ПРОЦЕДУРУ
                 .btn-group{:role => "group"}
-                  %a.btn.back_color_stage2{:href => "second-stage.html", :role => "button"} 2
-                  %a.btn.back_color_stage3{:href => "third-stage.html", :role => "button"} 3
-                  %a.btn.back_color_stage4{:href => "fourth-stage.html", :role => "button"} 4
-                  %a.btn.back_color_stage5{:href => "fifth-stage.html", :role => "button"} 5
+                  %a.btn.back_color_stage2{:href => "2nd-stage.html", :role => "button"} 2
+                  %a.btn.back_color_stage3{:href => "3rd-stage.html", :role => "button"} 3
+                  %a.btn.back_color_stage4{:href => "4th-stage.html", :role => "button"} 4
+                  %a.btn.back_color_stage5{:href => "5th-stage.html", :role => "button"} 5
+                  %a.btn.back_color_stage6{:href => "6th-stage.html", :role => "button"} 6
+                  %a.btn.back_color_stage7{:href => "7th-stage.html", :role => "button"} 7
           .col-md-4.col_padding_left_3
-            #tooltip1_2.border_grey.rounded_3.help_icon.tooltip1_2{"data-placement" => "bottom", "data-toggle" => "tooltip", "data-trigger" => "none", :title => "Вы всегда сможете вызвать помощь по стадии, нажав сюда"}
+            %a.open_welcome_popup{:href => "#popup-explanation-1st"}
+              #tooltip1_2.border_grey.rounded_3.help_icon.tooltip1_2{"data-placement" => "bottom", "data-toggle" => "tooltip", "data-trigger" => "none", :title => "Вы всегда сможете вызвать помощь по стадии, нажав сюда"}
             #tooltip1_3.border_grey.rounded_3.progress_block.tooltip1_3{"data-placement" => "bottom", "data-toggle" => "tooltip", "data-trigger" => "none", :title => "Здесь будут отображаться ваши успехи по работе с аспектами. Другие участники тоже не сидят сложа руки!"}
               .container
                 .row
@@ -102,8 +107,15 @@
         .container
           .stage-info-sort-block
             .row
-              .col-md-3
-                %h6.bold Аспекты (9)
+              %br/
+              .col-md-7
+                %span.stage-heading Аспекты (9)
+              .col-md-5
+                .sort-block.pull-right
+                  %a{:href => "cabinet-stage1.html"}
+                    %button.btn.add-button
+                      %span +
+                      Аспект
           / Aspects block (UI four) starts
           .ui-4.first-stage
             .container
@@ -178,44 +190,73 @@
                     .container
                       .row
                         .col-md-8.col-sm-8.min-col-right-padd
+                          %ul.nav.nav-tabs.aspects_tabs{:role => "tablist"}
+                            %li.active{:role => "presentation"}
+                              %a{"aria-controls" => "Статья 1", "data-toggle" => "tab", :href => "#article1", :role => "tab"} Статья 1
+                            %li{:role => "presentation"}
+                              %a{"aria-controls" => "Статья 2", "data-toggle" => "tab", :href => "#article2", :role => "tab"} Статья 2
+                            %li{:role => "presentation"}
+                              %a{"aria-controls" => "Статья 3", "data-toggle" => "tab", :href => "#article3", :role => "tab"} Статья 3
+                      .row
+                        .col-md-8.col-sm-8.min-col-right-padd
                           .top-color-border-block.aspect-main-block
-                            %h6.aspect-main-block-heading Ситуация с пчелами
-                            %p.aspect-main-block-text
-                              Пчелы недовольны тем, что на их мед
-                              постоянно покушаются Винни-Пух и его друзья. Желая разрешить
-                              конфликт мирным способом, они обратились к мудрой Сове.
-                            %img{:src => "img/aspect-pic1.jpg"}/
+                            .tab-content
+                              #article1.tab-pane.active.fade.in{:role => "tabpanel"}
+                                %h6.aspect-main-block-heading Ситуация с пчелами
+                                %p.aspect-main-block-text
+                                  Пчелы недовольны тем, что на их мед
+                                  постоянно покушаются Винни-Пух и его друзья. Желая разрешить
+                                  конфликт мирным способом, они обратились к мудрой Сове.
+                                %img{:src => "img/aspect-pic1.jpg"}/
+                              #article2.tab-pane.fade{:role => "tabpanel"}
+                                %p.aspect-main-block-text
+                                  Пчелы недовольны тем, что на их мед
+                                  постоянно покушаются Винни-Пух и его друзья. Желая разрешить
+                                  конфликт мирным способом, они обратились к мудрой Сове.
+                                %img{:src => "img/aspect-pic1.jpg"}/
+                              #article3.tab-pane.fade{:role => "tabpanel"}
+                                %img{:src => "img/aspect-pic1.jpg"}/
                         .col-md-4.col-sm-4.min-col-left-padd
                           #questionsCarousel1.carousel.slide.questionsCarousel{"data-ride" => "carousel"}
                             .aspect-questions-block{:style => "height: 408px;"}
+                              %h4.block-with-left-icon.pull-left
+                                %i.left-icon.fa.fa-2x.fa-comments
+                                Вопросы по теме
+                              %span.pull-right.question_count 1 из 2
                               .carousel-inner
                                 .item.active
-                                  %h4.block-with-left-icon
-                                    %i.left-icon.fa.fa-2x.fa-comments.pull-left>
-                                    Вопросы по
-                                    теме
                                   %p.text.block-with-left-icon
                                     %span.left-icon.pull-right 1.
                                     Из-за чего начались конфликты?
                                   %form.form.instruments-block
                                     .btn-group{"data-toggle" => "buttons"}
-                                      %button.btn.btn-xs.btn-white.pull-left
-                                        Звери много шумят
-                                        в лесу
-                                      %button.btn.btn-xs.btn-white.pull-left
-                                        Звери хотели
-                                        поселиться в Высоком дубу
-                                      %button.btn.btn-xs.btn-white.pull-left
-                                        В лесу был
-                                        пожар
-                                      %button.btn.btn-xs.btn-white.pull-left
-                                        Звери хотят
-                                        отнять мед у пчел
+                                      .form-group
+                                        %button.btn.btn-xs.btn-white
+                                          Звери много шумят
+                                          в лесу
+                                        %i.fa.fa-check
+                                      .form-group
+                                        %button.btn.btn-xs.btn-white
+                                          Звери хотели
+                                          поселиться в Высоком дубу
+                                        %i.fa.fa-check
+                                      .form-group
+                                        %button.btn.btn-xs.btn-white
+                                          В лесу был
+                                          пожар
+                                        %i.fa.fa-check
+                                      .form-group
+                                        %button.btn.btn-xs.btn-white
+                                          Звери хотят
+                                          отнять мед у пчел
+                                        %i.fa.fa-check
                                     .clearfix
                                     .form-group.bottom-buttons
                                       %a.btn.btn-outline.notice-button Подсказка
                                       %button.btn.answer-button.questionCarousel-target{"data-slide-to" => "1", "data-target" => "#questionsCarousel1"} Ответить
                                 .item
+                                  .divider10
+                                  %h6.text-center.bold.font_red 2 из 2
                                   %p.text.block-with-left-icon
                                     %span.left-icon.pull-right 2.
                                     К кому обратились жители опушки для разрешения спора?
@@ -251,11 +292,13 @@
                         .col-md-4.col-sm-4.min-col-left-padd
                           #questionsCarousel2.carousel.slide.questionsCarousel{"data-ride" => "carousel questionsCarousel"}
                             .aspect-questions-block{:style => "height: 646px;"}
+                              %h4.block-with-left-icon
+                                %i.left-icon.fa.fa-2x.fa-comments.pull-left>
+                                Вопросы по теме
                               .carousel-inner
                                 .item.active
-                                  %h4.block-with-left-icon
-                                    %i.left-icon.fa.fa-2x.fa-comments.pull-left>
-                                    Вопросы по теме
+                                  .divider10
+                                  %h6.text-center.bold.font_red 1 из 3
                                   %p.text.block-with-left-icon
                                     %span.left-icon.pull-right 1.
                                     Пытались ли четвероногие договориться с пчелами о взаимовыгодном
@@ -269,6 +312,8 @@
                                       %a.btn.btn-outline.notice-button Подсказка
                                       %button.btn.answer-button.questionCarousel-target{"data-slide-to" => "1", "data-target" => "#questionsCarousel2"} Ответить
                                 .item
+                                  .divider10
+                                  %h6.text-center.bold.font_red 2 из 3
                                   %p.text.block-with-left-icon
                                     %span.left-icon.pull-right 2.
                                     Как Винни пробовал добыть мед?
@@ -287,6 +332,8 @@
                                       %a.btn.btn-outline.notice-button Подсказка
                                       %button.btn.answer-button.questionCarousel-target{"data-slide-to" => "2", "data-target" => "#questionsCarousel2"} Ответить
                                 .item
+                                  .divider10
+                                  %h6.text-center.bold.font_red 3 из 3
                                   %p.text.block-with-left-icon
                                     %span.left-icon.pull-right 3.
                                     Кто не входил в группу Винни-Пуха?
@@ -319,12 +366,14 @@
                         .col-md-4.col-sm-4.min-col-left-padd
                           #questionsCarousel3.carousel.slide.questionsCarousel{"data-ride" => "carousel"}
                             .aspect-questions-block{:style => "height: 472px;"}
+                              %h4.block-with-left-icon
+                                %i.left-icon.fa.fa-2x.fa-comments.pull-left>
+                                Вопросы по
+                                теме
                               .carousel-inner
                                 .item.active
-                                  %h4.block-with-left-icon
-                                    %i.left-icon.fa.fa-2x.fa-comments.pull-left>
-                                    Вопросы по
-                                    теме
+                                  .divider10
+                                  %h6.text-center.bold.font_red 1 из 2
                                   %p.text.block-with-left-icon
                                     %span.left-icon.pull-right 1.
                                     Где живут пчелы?
@@ -341,6 +390,8 @@
                                       %a.btn.btn-outline.notice-button Подсказка
                                       %button.btn.answer-button.questionCarousel-target2{"data-slide-to" => "1", "data-target" => "#questionsCarousel3"} Ответить
                                 .item
+                                  .divider10
+                                  %h6.text-center.bold.font_red 2 из 2
                                   %p.text.block-with-left-icon
                                     %span.left-icon.pull-right 2.
                                     Какой фактор обостряет конфликт между пчелами и четвероногими?
@@ -358,7 +409,7 @@
                                     .clearfix
                                     .form-group.bottom-buttons
                                       %a.btn.btn-outline.notice-button Подсказка
-                                      %button.btn.answer-button Ответить
+                                      %a.btn.answer-button.open-popup-link{:href => "#popup-greetings-text"} Ответить
                   #tab-four.tab-pane.color-theme-4.fade
                     .container
                       .row
@@ -463,8 +514,9 @@
                         / Questions block ends
           / Aspects block (UI four) ends
       / Main Block ends
-      #popup-explanation.popup-window.popup-explanation.popup-w710.mfp-hide
-        .popup.popup-top-rounded.popup-bottom-rounded
+      #popup-explanation-1st.popup-window.popup-explanation.popup-w710.mfp-hide.welcome_popup
+        .popup.popup_rounded
+          .modal_badge.back_color_stage1.rounded_2.font_white 1 СТАДИЯ
           %h2
             %img.expl-header-img-1{:src => "img/good-shot1.png"}>/
             Цель 1-й стадии
@@ -488,7 +540,7 @@
               Проголосуйте за самые важные на ваш вгляд аспекты
               %br>/
               (будет доступно в конце этапа)
-          %button.btn.red Начать работу
+          %button.btn.red.close_magnific Начать работу
       #popup-news.popup-window.popup-w985.popup-imperfect-new.mfp-hide
         .popup.popup-top-rounded.popup-bottom-rounded
           %h2 36 новых комментария в нововведениях
@@ -943,14 +995,23 @@
                     %span.date.font_red.bold 15:28
                   %p.font_grey.bold Ничего не правда. Я люблю гулять, а от вашего дуба тень большая. Ничего не правда. Я люблю гулять, а от вашего дуба тень большая. Ничего не правда. Я люблю гулять, а от вашего дуба тень большая. Ничего не правда. Я люблю гулять, а от вашего дуба тень большая. Ничего не правда. Я люблю гулять, а от вашего дуба тень большая.
                   %h1.dots.text-center.font_lighter_grey ...
-      #modal1.modal.fade
-        .modal-dialog
-          .modal-content
-            .modal-body
-              %h5.text-center Отлично, начало положено!
-          / /.modal-content
-        / /.modal-dialog
-      / /.modal
+      #popup-greetings-text.popup-window.popup-w710.mfp-hide
+        .popup.popup_rounded.popup_medal
+          .medal-block.gold-medal
+          .row
+            .col-md-8.col-md-offset-3
+              %p.font_mid_grey.bold
+                Отлично, начало положено!
+              .divider50
+              %p.font_mid_grey.bold
+                Вы ознакомились со всеми аспектами базы знаний.
+                %br/
+                Теперь вы разбираетесь в предмете обсуждения и готовы к полноценному участию в процедуре.
+                %br/
+                Ждём вас на следующей стадии!
+              .divider50
+              %p
+                %button.btn.red.close_magnific.font_white.pull-right Закрыть окно
     / Outer Ends
     / Javascript files
     / jQuery
@@ -977,6 +1038,12 @@
       /* first stage slider */
 
       $(document).ready(function (){
+
+          $('.open_welcome_popup').magnificPopup({
+              type: 'inline',
+              midClick: true
+          });
+          $('.open_welcome_popup').magnificPopup('open');
 
           $('.tab-pane.fade.in').find('.aspect-questions-block').innerHeight();
 

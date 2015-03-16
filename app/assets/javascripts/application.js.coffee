@@ -43,6 +43,9 @@
 #= require brave
 #= require brave2
 
+#= require jquery.quicksand
+#= require velocity.min
+#= require velocity.ui.min
 
 # @todo не используемые
 

@@ -1,12 +1,44 @@
-.imperfect-text-comments-post-block
-  .poster-line
-    = image_tag 'no-ava.png', class: "img-circle"
-    %span.poster-name
+.media.comment
+  .media-left
+    = image_tag 'no-ava.png', class: "media-object img50 img-circle"
+  .media-body
+    %h5.media-heading.bold
       =comment.user
-    %span.comment-time
+    %span.date.theme_font_color
       =Russian::strftime(comment.created_at,'%d.%m.%Y %k:%M:%S')
-  %p
+  %p.font_grey.bold
     =comment.content
+  .post-interfaces-buttons
+    %button{:type => "button"}
+      %span.bold
+        %i.fa.fa-comment.theme_font_color
+    =link_to({:action => :like_comment, :project => @project, :id => comment.id, :against => false}, :remote => true, :method => :put, id: "like_comment_#{comment.id}") do
+      %span.bold
+        %span(id="lk_comment_#{comment.id}")
+          =comment.users_pro.count
+        %i.fa.fa-thumbs-up.theme_font_color
+    =link_to({:action => :like_comment, :project => @project,  :id => comment.id, :against => true}, :remote => true, :method => :put, id: "dislike_comment_#{comment.id}") do
+      %span.bold
+        %span(id="dlk_comment_#{comment.id}")
+          =comment.users_against.count
+        %i.fa.fa-thumbs-down.theme_font_color
+    %button{:type => "button"}
+      %span.bold
+        %i.fa.fa-reply.fa-rotate-180.theme_font_color
+.divider_1_grey
+
+
+
+
+-#.imperfect-text-comments-post-block
+-#  .poster-line
+-#    = image_tag 'no-ava.png', class: "img-circle"
+-#    %span.poster-name
+-#      =comment.user
+-#    %span.comment-time
+-#      =Russian::strftime(comment.created_at,'%d.%m.%Y %k:%M:%S')
+-#  %p
+-#    =comment.content
 
 
 -#.media.comment

@@ -16,6 +16,13 @@
 //.select_aspect {
 //  background-color: gray;
 //}
+.answer-question input {
+  display: none;
+}
+
+.nav-tabs.aspects_tabs>li:not(.active)>a{
+  background: none !important;
+}
 
 .btn.answer-question {
   text-align: left;

@@ -65,14 +65,22 @@
             </ul>
 
             <div class="navbar-right text-right user_block font_grey">
-                <a href="#" class="tooltip1_5 open_base_icon" data-toggle="tooltip" id="tooltip1_5" data-trigger="none" data-placement="bottom" title="Открыть базу знаний"></a><span class="auth-divider"> |</span>
-                <i class="fa fa-exclamation-triangle font_lighter_grey"></i><span class="auth-divider"> |</span>
-                <a href="#" class="font_grey bold"><i class="fa fa-globe font_lighter_grey"></i>
+                <a href="#" class="tooltip1_5 book_icon" data-toggle="tooltip" id="tooltip1_5" data-trigger="none" data-placement="bottom" title="Открыть базу знаний">
+                </a>
+                <span class="auth-divider"> |</span>
+                <a href="#" class="font_lighter_grey bold">
+                    <i class="fa fa-exclamation-triangle"></i>
+                </a>
+                <span class="auth-divider"> |</span>
+                <a href="#" class="font_grey bold">
+                    <i class="fa fa-globe font_lighter_grey"></i>
                     <small><i class="fa fa-angle-down "></i></small>
                 </a>
+                <ul class="dropdown-menu dropdown-mini" role="menu">
+                </ul>
                 <span class="auth-divider">|</span>
                 <span class="badge grey">500</span>
-                <a href="#" class="font_grey bold">
+                <a href="#" class="font_lighter_grey bold">
                     <small>Лиза Школьник <i class="fa fa-angle-down "></i></small>
                 </a>
             </div>
@@ -98,15 +106,17 @@
                     <div class="btn-toolbar" role="toolbar">
 
                         <div class="btn-group" role="group">
-                            <a href="first-stage.html" role="button" class="btn back_color_stage1">1 СТАДИЯ: ВВЕДЕНИЕ В
+                            <a href="1st-stage.html" role="button" class="btn back_color_stage1">1 СТАДИЯ: ВВЕДЕНИЕ В
                                 ПРОЦЕДУРУ</a>
                         </div>
 
                         <div class="btn-group" role="group">
-                            <a href="second-stage.html" role="button" class="btn back_color_stage2">2</a>
-                            <a href="third-stage.html" role="button" class="btn back_color_stage3">3</a>
-                            <a href="fourth-stage.html" role="button" class="btn back_color_stage4">4</a>
-                            <a href="fifth-stage.html" role="button" class="btn back_color_stage5">5</a>
+                            <a href="2nd-stage.html" role="button" class="btn back_color_stage2">2</a>
+                            <a href="3rd-stage.html" role="button" class="btn back_color_stage3">3</a>
+                            <a href="4th-stage.html" role="button" class="btn back_color_stage4">4</a>
+                            <a href="5th-stage.html" role="button" class="btn back_color_stage5">5</a>
+                            <a href="6th-stage.html" role="button" class="btn back_color_stage6">6</a>
+                            <a href="7th-stage.html" role="button" class="btn back_color_stage7">7</a>
                         </div>
 
                     </div>
@@ -114,7 +124,7 @@
             </div>
 
             <div class="col-md-4 col_padding_left_3">
-                <div class="border_grey rounded_3 help_icon tooltip1_2" data-toggle="tooltip" id="tooltip1_2" data-trigger="none" data-placement="bottom" title="Вы всегда сможете вызвать помощь по стадии, нажав сюда"></div>
+                <a href="#popup-explanation-1st" class="open_welcome_popup"><div class="border_grey rounded_3 help_icon tooltip1_2" data-toggle="tooltip" id="tooltip1_2" data-trigger="none" data-placement="bottom" title="Вы всегда сможете вызвать помощь по стадии, нажав сюда"></div></a>
                 <div class="border_grey rounded_3 progress_block tooltip1_3" data-toggle="tooltip" id="tooltip1_3" data-trigger="none" data-placement="bottom" title="Здесь будут отображаться ваши успехи по работе с аспектами. Другие участники тоже не сидят сложа руки!">
                     <div class="container">
                         <div class="row">
@@ -172,13 +182,20 @@
     <div class="main-block">
         <div class="container">
 
-            <div class="stage-info-sort-block">
-                <div class="row">
-                    <div class="col-md-3">
-                        <h6 class="bold">Аспекты (9)</h6>
+        <div class="stage-info-sort-block">
+            <div class="row">
+                <br>
+
+                <div class="col-md-7">
+                    <span class="stage-heading">Аспекты (9)</span>
+                </div>
+                <div class="col-md-5">
+                    <div class="sort-block pull-right">
+                        <a href="cabinet-stage1.html"><button class="btn add-button"><span>+</span> Аспект</button></a>
                     </div>
                 </div>
             </div>
+        </div>
 
         <!-- Aspects block (UI four) starts -->
             <div class="ui-4 first-stage">
@@ -301,26 +318,50 @@
                             <div class="tab-pane color-theme-1 active fade in" id="tab-one">
                                 <div class="container">
                                     <div class="row">
+                                        <div class="col-md-8 col-sm-8 min-col-right-padd">
+                                            <ul class="nav nav-tabs aspects_tabs" role="tablist">
+                                                <li role="presentation" class="active"><a href="#article1" aria-controls="Статья 1" role="tab" data-toggle="tab">Статья 1</a></li>
+                                                <li role="presentation"><a href="#article2" aria-controls="Статья 2" role="tab" data-toggle="tab">Статья 2</a></li>
+                                                <li role="presentation"><a href="#article3" aria-controls="Статья 3" role="tab" data-toggle="tab">Статья 3</a></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <div class="row">
 
                                         <div class="col-md-8 col-sm-8 min-col-right-padd">
                                             <div class="top-color-border-block aspect-main-block">
-                                                <h6 class="aspect-main-block-heading">Ситуация с пчелами</h6>
-                                                <p class="aspect-main-block-text">Пчелы недовольны тем, что на их мед
-                                                    постоянно покушаются Винни-Пух и его друзья. Желая разрешить
-                                                    конфликт мирным способом, они обратились к мудрой Сове.</p>
-                                                <img src="img/aspect-pic1.jpg">
+                                                <div class="tab-content">
+                                                    <div role="tabpanel" class="tab-pane active fade in" id="article1">
+                                                        <h6 class="aspect-main-block-heading">Ситуация с пчелами</h6>
+                                                        <p class="aspect-main-block-text">Пчелы недовольны тем, что на их мед
+                                                            постоянно покушаются Винни-Пух и его друзья. Желая разрешить
+                                                            конфликт мирным способом, они обратились к мудрой Сове.</p>
+                                                        <img src="img/aspect-pic1.jpg">
+                                                    </div>
+                                                    <div role="tabpanel" class="tab-pane fade" id="article2">
+                                                        <p class="aspect-main-block-text">Пчелы недовольны тем, что на их мед
+                                                            постоянно покушаются Винни-Пух и его друзья. Желая разрешить
+                                                            конфликт мирным способом, они обратились к мудрой Сове.</p>
+                                                        <img src="img/aspect-pic1.jpg">
+                                                    </div>
+                                                    <div role="tabpanel" class="tab-pane fade" id="article3">
+                                                        <img src="img/aspect-pic1.jpg">
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
 
                                         <div class="col-md-4 col-sm-4 min-col-left-padd">
                                             <div id="questionsCarousel1" class="carousel slide questionsCarousel" data-ride="carousel">
                                                 <div class="aspect-questions-block" style="height: 408px;">
+                                                    <h4 class="block-with-left-icon pull-left">
+                                                        <i class="left-icon fa fa-2x fa-comments"></i>
+                                                        Вопросы по теме
+                                                    </h4>
+                                                    <span class="pull-right question_count">1 из 2</span>
                                                     <div class="carousel-inner">
 
                                                         <div class="item active">
-                                                            <h4 class="block-with-left-icon"><i
-                                                                    class="left-icon fa fa-2x fa-comments pull-left"></i>Вопросы по
-                                                                теме</h4>
 
                                                             <p class="text block-with-left-icon">
                                                                 <span class="left-icon pull-right">1.</span>
@@ -329,18 +370,30 @@
 
                                                             <form class="form instruments-block">
                                                                 <div class="btn-group" data-toggle="buttons">
-                                                                    <button class="btn btn-xs btn-white pull-left">Звери много шумят
-                                                                        в лесу
-                                                                    </button>
-                                                                    <button class="btn btn-xs btn-white pull-left">Звери хотели
-                                                                        поселиться в Высоком дубу
-                                                                    </button>
-                                                                    <button class="btn btn-xs btn-white pull-left">В лесу был
-                                                                        пожар
-                                                                    </button>
-                                                                    <button class="btn btn-xs btn-white pull-left">Звери хотят
-                                                                        отнять мед у пчел
-                                                                    </button>
+                                                                    <div class="form-group">
+                                                                        <button class="btn btn-xs btn-white">Звери много шумят
+                                                                            в лесу
+                                                                        </button>
+                                                                        <i class="fa fa-check"></i>
+                                                                    </div>
+                                                                    <div class="form-group">
+                                                                        <button class="btn btn-xs btn-white">Звери хотели
+                                                                            поселиться в Высоком дубу
+                                                                        </button>
+                                                                        <i class="fa fa-check"></i>
+                                                                    </div>
+                                                                    <div class="form-group">
+                                                                        <button class="btn btn-xs btn-white">В лесу был
+                                                                            пожар
+                                                                        </button>
+                                                                        <i class="fa fa-check"></i>
+                                                                    </div>
+                                                                    <div class="form-group">
+                                                                        <button class="btn btn-xs btn-white">Звери хотят
+                                                                            отнять мед у пчел
+                                                                        </button>
+                                                                        <i class="fa fa-check"></i>
+                                                                    </div>
                                                                 </div>
                                                                 <div class="clearfix"></div>
                                                                 <div class="form-group bottom-buttons">
@@ -351,6 +404,10 @@
                                                         </div>
 
                                                         <div class="item">
+
+                                                            <div class="divider10"></div>
+                                                            <h6 class="text-center bold font_red">2 из 2</h6>
+
                                                             <p class="text block-with-left-icon">
                                                                 <span class="left-icon pull-right">2.</span>
                                                                 К кому обратились жители опушки для разрешения спора?
@@ -404,10 +461,14 @@
                                         <div class="col-md-4 col-sm-4 min-col-left-padd">
                                             <div id="questionsCarousel2" class="carousel slide questionsCarousel" data-ride="carousel questionsCarousel">
                                                 <div class="aspect-questions-block" style="height: 646px;">
+                                                    <h4 class="block-with-left-icon"><i class="left-icon fa fa-2x fa-comments pull-left"></i>Вопросы по теме</h4>
+
                                                     <div class="carousel-inner">
 
                                                         <div class="item active">
-                                                            <h4 class="block-with-left-icon"><i class="left-icon fa fa-2x fa-comments pull-left"></i>Вопросы по теме</h4>
+
+                                                            <div class="divider10"></div>
+                                                            <h6 class="text-center bold font_red">1 из 3</h6>
 
                                                             <p class="text block-with-left-icon">
                                                                 <span class="left-icon pull-right">1.</span>
@@ -429,6 +490,10 @@
                                                         </div>
 
                                                         <div class="item">
+
+                                                            <div class="divider10"></div>
+                                                            <h6 class="text-center bold font_red">2 из 3</h6>
+
                                                             <p class="text block-with-left-icon">
                                                                 <span class="left-icon pull-right">2.</span>
                                                                 Как Винни пробовал добыть мед?
@@ -454,6 +519,10 @@
                                                         </div>
 
                                                         <div class="item">
+
+                                                            <div class="divider10"></div>
+                                                            <h6 class="text-center bold font_red">3 из 3</h6>
+
                                                             <p class="text block-with-left-icon">
                                                                 <span class="left-icon pull-right">3.</span>
                                                                 Кто не входил в группу Винни-Пуха?
@@ -505,12 +574,15 @@
                                         <div class="col-md-4 col-sm-4 min-col-left-padd">
                                             <div id="questionsCarousel3" class="carousel slide questionsCarousel" data-ride="carousel">
                                                 <div class="aspect-questions-block" style="height: 472px;">
+                                                    <h4 class="block-with-left-icon"><i
+                                                            class="left-icon fa fa-2x fa-comments pull-left"></i>Вопросы по
+                                                        теме</h4>
                                                     <div class="carousel-inner">
 
                                                         <div class="item active">
-                                                            <h4 class="block-with-left-icon"><i
-                                                                    class="left-icon fa fa-2x fa-comments pull-left"></i>Вопросы по
-                                                                теме</h4>
+
+                                                            <div class="divider10"></div>
+                                                            <h6 class="text-center bold font_red">1 из 2</h6>
 
                                                             <p class="text block-with-left-icon">
                                                                 <span class="left-icon pull-right">1.</span>
@@ -534,6 +606,10 @@
                                                         </div>
 
                                                         <div class="item">
+
+                                                            <div class="divider10"></div>
+                                                            <h6 class="text-center bold font_red">2 из 2</h6>
+
                                                             <p class="text block-with-left-icon">
                                                                 <span class="left-icon pull-right">2.</span>
                                                                 Какой фактор обостряет конфликт между пчелами и четвероногими?
@@ -554,7 +630,7 @@
                                                                 <div class="clearfix"></div>
                                                                 <div class="form-group bottom-buttons">
                                                                     <a class="btn btn-outline notice-button">Подсказка</a>
-                                                                    <button class="btn answer-button">Ответить</button>
+                                                                    <a class="btn answer-button open-popup-link" href="#popup-greetings-text">Ответить</a>
                                                                 </div>
                                                             </form>
                                                         </div>
@@ -735,8 +811,9 @@
     </div>
     <!-- Main Block ends -->
 
-    <div id="popup-explanation" class="popup-window popup-explanation popup-w710 mfp-hide">
-        <div class="popup popup-top-rounded popup-bottom-rounded">
+    <div id="popup-explanation-1st" class="popup-window popup-explanation popup-w710 mfp-hide welcome_popup">
+        <div class="popup popup_rounded">
+            <div class="modal_badge back_color_stage1 rounded_2 font_white">1 СТАДИЯ</div>
             <h2><img src="img/good-shot1.png" class="expl-header-img-1">Цель 1-й стадии</h2>
 
             <p class="expl-sub-heading">Подробное изучение базы знаний по каждому аспекту всеми участниками процедуры
@@ -753,9 +830,11 @@
                 <li>Переходите к следующему аспекту</li>
                 <li>Проголосуйте за самые важные на ваш вгляд аспекты<br>(будет доступно в конце этапа)</li>
             </ol>
-            <button class="btn red">Начать работу</button>
+            <button class="btn red close_magnific">Начать работу</button>
         </div>
     </div>
+
+
     <div id="popup-news" class="popup-window popup-w985 popup-imperfect-new mfp-hide">
         <div class="popup popup-top-rounded popup-bottom-rounded">
             <h2>36 новых комментария в нововведениях</h2>
@@ -1398,16 +1477,30 @@
             </div>
         </div>
     </div>
-            <div id="modal1" class="modal fade">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-body">
-                            <h5 class="text-center">Отлично, начало положено!</h5>
 
-                        </div>
-                    </div><!-- /.modal-content -->
-                </div><!-- /.modal-dialog -->
-            </div><!-- /.modal -->
+    <div id="popup-greetings-text" class="popup-window popup-w710 mfp-hide">
+        <div class="popup popup_rounded popup_medal">
+            <div class="medal-block gold-medal">
+            </div>
+            <div class="row">
+                <div class="col-md-8 col-md-offset-3">
+                    <p class="font_mid_grey bold">
+                        Отлично, начало положено!
+                    </p>
+                    <div class="divider50"></div>
+                    <p class="font_mid_grey bold">
+                        Вы ознакомились со всеми аспектами базы знаний.<br>
+                        Теперь вы разбираетесь в предмете обсуждения и готовы к полноценному участию в процедуре.<br>
+                        Ждём вас на следующей стадии!
+                    </p>
+                    <div class="divider50"></div>
+                    <p>
+                        <button class="btn red close_magnific font_white pull-right">Закрыть окно</button>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 
 <!-- Outer Ends -->
@@ -1438,6 +1531,12 @@
     /* first stage slider */
 
     $(document).ready(function (){
+
+        $('.open_welcome_popup').magnificPopup({
+            type: 'inline',
+            midClick: true
+        });
+        $('.open_welcome_popup').magnificPopup('open');
 
         $('.tab-pane.fade.in').find('.aspect-questions-block').innerHeight();
 

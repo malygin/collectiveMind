@@ -34,29 +34,26 @@
             %li
               %a{:href => "cabinet-stage1.html"} Кабинет
             %li
-              %a{:href => "#"} Рефлексия
-            %li
-              %a.has_circle{:href => "#"}
+              %a#popover_news.has_circle.popover_news{"data-content" => "\n                    <div class='popover_cont'>\n                    <a href='#' class='news-tooltip-icon' id='tooltip-i1'>\n                        <img src='img/icon-news-1.png'>\n                        <span class='news-tooltip-bottom-text'>добавлено</span>\n                    </a>\n                    <a href='#' class='news-tooltip-icon' id='tooltip-i2'>\n                        <img src='img/icon-news-2.png'>\n                        <span class='news-tooltip-bottom-text'>комментария</span>\n                    </a>\n                    <a href='#popup-news' class='news-tooltip-icon news-popup-href' id='tooltip-i3'>\n                        <img src='img/icon-news-3.png'>\n                        <span class='top-circle'>36</span>\n                        <span class='news-tooltip-bottom-text'>пометок</span>\n                    </a>\n                    <a href='#' class='news-tooltip-icon' id='tooltip-i4'>\n                        <img src='img/icon-news-4.png'>\n                        <span class='top-circle'>1</span>\n                        <span class='news-tooltip-bottom-text'>отредактировано</span>\n                    </a>\n                    </div>", "data-html" => "true", "data-placement" => "bottom", "data-toggle" => "popover", :href => "#"}
                 Новости
-                %span.top-circle 25
+                %span.top-circle 36
           .navbar-right.text-right.user_block.font_grey
-            %a{:href => "#"}
-              %img#tooltip1_5.tooltip1_5{"data-placement" => "bottom", "data-toggle" => "tooltip", "data-trigger" => "none", :src => "img/book-icon.png", :title => "Открыть базу знаний"}/
-            %span.auth-divider
-              |
-              %i.fa.fa-exclamation-triangle.font_lighter_grey
-              %span.auth-divider |
-              %a.font_grey.bold{:href => "#"}
-                %i.fa.fa-globe.font_lighter_grey
-                %small
-                  %i.fa.fa-angle-down
-              %ul.dropdown-menu.dropdown-mini{:role => "menu"}
-              %span.auth-divider |
-              %span.badge.grey 500
-              %a.font_grey.bold{:href => "#"}
-                %small
-                  Лиза Школьник
-                  %i.fa.fa-angle-down
+            %a.book_icon{:href => "#"}
+            %span.auth-divider |
+            %a.font_lighter_grey.bold{:href => "#"}
+              %i.fa.fa-exclamation-triangle
+            %span.auth-divider |
+            %a.font_grey.bold{:href => "#"}
+              %i.fa.fa-globe.font_lighter_grey
+              %small
+                %i.fa.fa-angle-down
+            %ul.dropdown-menu.dropdown-mini{:role => "menu"}
+            %span.auth-divider |
+            %span.badge.grey 500
+            %a.font_lighter_grey.bold{:href => "#"}
+              %small
+                Лиза Школьник
+                %i.fa.fa-angle-down
       / Top Bar ends
       / Main Block starts
       .cabinet

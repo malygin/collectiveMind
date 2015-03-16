@@ -1,9 +1,12 @@
-= form_for comment, html: {id: 'comment_form', class: 'post-interfaces-add-comment'}, remote: true,
+= form_for comment, html: {id: 'comment_form', class: 'form-group comment_add'}, remote: true,
               url: url_for(controller: @post.nil? ? post.class.name.underscore.pluralize : @post.class.name.underscore.pluralize, action: 'add_comment', project: @project.id, id: @post.nil? ? post.id : @post.id), method: :put do |f|
   = render 'shared/notice_messages', object: f.object
-  = f.text_field :content, id: "comment_text_field", type: 'text', placeholder: 'Ваш комментарий'
+  .input_cont
+    = f.text_area :content, id: "comment_text_area", class: "theme_back_color", placeholder: 'Ваш комментарий'
   %button.btn{:type => "submit"}
-    = image_tag 'comment-button.png'
+    %span.bold
+      %i.fa.fa-comment.theme_font_color
+
 
 
 -#%br

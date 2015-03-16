@@ -1,71 +1,139 @@
 .stage-info-sort-block
   .row
-    .col-md-3
-      %h6.bold
+    %br/
+    .col-md-7
+      %span.stage-heading
         Аспекты
         = "(#{@count_aspects})"
-  / Aspects block (UI four) starts
-  .ui-4.first-stage
-    .container
-      / UI content
-      .block-content
-        / Tabs
-        / Nav tabs
-        .slider-wrapper
-          %a.slider-left.slider-nav
-            %i.fa.fa-caret-left.font_lighter_grey
-          %a.slider-right.slider-nav
-            %i.fa.fa-caret-right.font_lighter_grey
-          .slider-outer
-            -##aspects_spinner_tab.loader.animated.handle
-            -#  %span.spinner
-            -#    %i.fa.fa-spinner.fa-spin.fa-2x
-            %ul.slider-inner.list-unstyled#first-stage-slider{ data: {project: @project.id} }
-              -#- @aspects.each_with_index do |asp, index|
-              -#  %li
-              -#    .slider-item{class: "#{index == 0 ? 'active' : ''}"}
-              -#      .c1-item
-              -#        %a{"data-toggle" => "tab", :href => "#tab_aspect_#{asp.id}"}
-              -#          %span.c1-item-inner{style: "border-top-color: #{asp.color};"}
-              -#            =asp.content
+    .col-md-5
+      .sort-block.pull-right
+        = link_to project_user_path(@project, current_user) do
+          %button.btn.add-button
+            %span +
+            Аспект
+/ Aspects block (UI four) starts
+.ui-4.first-stage
+  .container
+    / UI content
+    .block-content
+      / Tabs
+      / Nav tabs
+      .slider-wrapper
+        %a.slider-left.slider-nav
+          %i.fa.fa-caret-left.font_lighter_grey
+        %a.slider-right.slider-nav
+          %i.fa.fa-caret-right.font_lighter_grey
+        .slider-outer
+          -##aspects_spinner_tab.loader.animated.handle
+          -#  %span.spinner
+          -#    %i.fa.fa-spinner.fa-spin.fa-2x
+          %ul.slider-inner.list-unstyled#first-stage-slider{ data: {project: @project.id} }
+            -#- @aspects.each_with_index do |asp, index|
+            -#  %li
+            -#    .slider-item{class: "#{index == 0 ? 'active' : ''}"}
+            -#      .c1-item
+            -#        %a{"data-toggle" => "tab", :href => "#tab_aspect_#{asp.id}"}
+            -#          %span.c1-item-inner{style: "border-top-color: #{asp.color};"}
+            -#            =asp.content
 
-        / Tab panes
-        .tab-content
-          - @aspects.each_with_index do |asp, index|
-            .tab-pane.fade{id: "tab_aspect_#{asp.id}", class: "#{index == 0 ? 'active in' : ''}"}
-              .container
-                .row
-                  .col-md-8.col-sm-8.min-col-right-padd
-                    - asp.knowbase_posts.each do |post|
-                      .top-color-border-block.aspect-main-block{style: "border-top-color: #{asp.color};"}
-                        %h6.aspect-main-block-heading
-                          = post.title
-                        %p.aspect-main-block-text
-                          = post.content.html_safe
-                  .col-md-4.col-sm-4.min-col-left-padd
-                    #questionsCarousel1.carousel.slide.questionsCarousel{"data-ride" => "carousel"}
-                      .aspect-questions-block{:style => "height: 408px;border-top-color: #{asp.color};"}
-                        .carousel-inner
-                          - asp.questions.by_project(@project).by_status(0).order('collect_info_questions.id').each_with_index do |question, ind|
-                            - unless question.user_answers.by_project(@project).by_user(current_user).present?
-                              .item{id: "question_#{question.id}", class: "#{'active' if asp.questions.by_project(@project).by_status(0).by_complete(asp.question_complete(@project, current_user).pluck(:id)).order('collect_info_questions.id').first == question}"}
-                                %h4.block-with-left-icon
-                                  %i.left-icon.fa.fa-2x.fa-comments.pull-left>
-                                  Вопросы по теме
-                                %p.text.block-with-left-icon
-                                  %span.left-icon.pull-right="#{ind + 1}."
-                                  = question.content
-                                = form_tag(answer_question_collect_info_post_path(@project, id: asp.id, question_id: question.id), {method: :put, remote: true, class: 'form instruments-block', id: 'form_answer_question', multipart: true}) do
-                                  .btn-group#answer_buttons(data-toggle="buttons")
-                                    - question.answers.by_status(0).each do |answer|
-                                      %button.btn.btn-xs.btn-white.pull-left.answer-question(id="answer_#{answer.id}")
+      / Tab panes
+      .tab-content
+        - @aspects.each_with_index do |asp, index|
+          .tab-pane.fade{id: "tab_aspect_#{asp.id}", class: "#{index == 0 ? 'active in' : ''}"}
+            .container
+              .row
+                .col-md-8.col-sm-8.min-col-right-padd
+                  %ul.nav.nav-tabs.aspects_tabs{:role => "tablist"}
+                    - asp.knowbase_posts.each_with_index do |post, i|
+                      %li{class: "#{'active' if i == 0}", role: "presentation"}
+                        %a{style: "background:#{asp.color};" ,"aria-controls" => "Статья #{i+1}", "data-toggle" => "tab", :href => "#article#{i+1}", :role => "tab"}
+                          ="Статья #{i+1}"
+              .row
+                .col-md-8.col-sm-8.min-col-right-padd
+                  .top-color-border-block.aspect-main-block{style: "border-top-color: #{asp.color};"}
+                    .tab-content
+                      - asp.knowbase_posts.each_with_index do |post, i|
+                        .tab-pane.fade{id: "article#{i+1}", class: "#{'active in' if i == 0}", role: "tabpanel"}
+                          %h6.aspect-main-block-heading
+                            = post.title
+                          %p.aspect-main-block-text
+                            = post.content.html_safe unless post.content.nil?
+
+                .col-md-4.col-sm-4.min-col-left-padd
+                  #questionsCarousel1.carousel.slide.questionsCarousel{"data-ride" => "carousel"}
+                    .aspect-questions-block{:style => "height: 408px;border-top-color: #{asp.color};"}
+                      %h4.block-with-left-icon.pull-left
+                        %i.left-icon.fa.fa-2x.fa-comments
+                        Вопросы по теме
+                      %span.pull-right.question_count 1 из 2
+                      .carousel-inner
+                        - asp.questions.by_project(@project).by_status(0).order('collect_info_questions.id').each_with_index do |question, ind|
+                          - unless question.user_answers.by_project(@project).by_user(current_user).present?
+                            .item{id: "question_#{question.id}", class: "#{'active' if asp.questions.by_project(@project).by_status(0).by_complete(asp.question_complete(@project, current_user).pluck(:id)).order('collect_info_questions.id').first == question}"}
+                              %p.text.block-with-left-icon
+                                %span.left-icon.pull-right="#{ind + 1}."
+                                = question.content
+                              = form_tag(answer_question_collect_info_post_path(@project, id: asp.id, question_id: question.id), {method: :put, remote: true, class: 'form instruments-block', id: 'form_answer_question', multipart: true}) do
+                                .btn-group#answer_buttons(data-toggle="buttons")
+                                  - question.answers.by_status(0).each do |answer|
+                                    .form-group
+                                      %button.btn.btn-xs.btn-white.answer-question(id="answer_#{answer.id}")
                                         = check_box_tag 'answers[]', answer.id
                                         = answer.content
-                                  .clearfix
-                                  .form-group.bottom-buttons
-                                    %a.btn.btn-outline.notice-button{data: {question: question.id}} Подсказка
-                                    %button#send_answers.btn.answer-button.questionCarousel-target{style: "background-color: #{asp.color};", "data-slide-to" => "1", "data-target" => "#questionsCarousel1"} Ответить
+                                      %i.fa.fa-check
+                                .clearfix
+                                .form-group.bottom-buttons
+                                  %a.btn.btn-outline.notice-button{style: "border-color: #{asp.color};", data: {question: question.id}} Подсказка
+                                  %button#send_answers.btn.answer-button.questionCarousel-target{style: "background-color: #{asp.color};", "data-slide-to" => "1", "data-target" => "#questionsCarousel1"} Ответить
 
+
+#popup-explanation-1.popup-window.popup-explanation.popup-w710.mfp-hide.welcome_popup
+  .popup.popup_rounded
+    .modal_badge.back_color_stage1.rounded_2.font_white 1 СТАДИЯ
+    %h2
+      = image_tag 'good-shot1.png', class: "expl-header-img-1"
+      Цель 1-й стадии
+    %p.expl-sub-heading
+      Подробное изучение базы знаний по каждому аспекту всеми участниками процедуры
+      выработки проекта
+    %p.expl-notice.rounded-2
+      Второй этап выработки проекта будет доступен только после того,
+      %br>/
+      как
+      средний уровень готовности участников будет не менее 80%!
+    %h2
+      = image_tag 'flag1.png', class: "expl-header-img-2"
+      С чего начать?
+    %ol
+      %li Выберите аспект в списке ниже
+      %li Ознакомьтесь с базой знаний внутри этого аспекта
+      %li Пройдите короткое тестирование по полученным знаниям
+      %li Переходите к следующему аспекту
+      %li
+        Проголосуйте за самые важные на ваш вгляд аспекты
+        %br>/
+        (будет доступно в конце этапа)
+    %button.btn.red.close_magnific Начать работу
+
+
+
+#popup-greetings-text.popup-window.popup-w710.mfp-hide
+  .popup.popup_rounded.popup_medal
+    .medal-block.gold-medal
+    .row
+      .col-md-8.col-md-offset-3
+        %p.font_mid_grey.bold
+          Отлично, начало положено!
+        .divider50
+        %p.font_mid_grey.bold
+          Вы ознакомились со всеми аспектами базы знаний.
+          %br/
+          Теперь вы разбираетесь в предмете обсуждения и готовы к полноценному участию в процедуре.
+          %br/
+          Ждём вас на следующей стадии!
+        .divider50
+        %p
+          %button.btn.red.close_magnific.font_white.pull-right Закрыть окно
 
 
 
@@ -146,7 +214,7 @@
 -#                            %a.btn.btn-outline.notice-button{data: {question: question.id}} Подсказка
 -#                            %button#send_answers.btn.answer-button Ответить
 -#
--##popup-greetings-text.popup-window.medal.mfp-hide
+-##popup-greetings-text.welcome_popup.popup-window.medal.mfp-hide
 -#  .popup
 -#    .medal-block.gold-medal
 -#    .popup-top-block.popup-top-rounded

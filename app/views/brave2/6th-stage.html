@@ -26,7 +26,7 @@
 </head>
 
 <body>
-<div class="outer stage4_theme">
+<div class="outer stage5_theme">
 
 <!-- Top bar starts -->
 <header class="navbar top_bar">
@@ -39,23 +39,53 @@
         <ul class="nav navbar-nav main_menu">
             <li class="active"><a href="first-stage.html">Процедура</a></li>
             <li><a href="cabinet-stage1.html">Кабинет</a></li>
-            <li><a href="#">Рефлексия</a></li>
-            <li><a href="#" class="has_circle">Новости<span class="top-circle">25</span></a></li>
+            <li>
+                <a href="#" class="has_circle popover_news" id="popover_news"
+                   data-toggle="popover"
+                   data-html="true"
+                   data-placement="bottom"
+                   data-content="
+                    <div class='popover_cont'>
+                    <a href='#' class='news-tooltip-icon' id='tooltip-i1'>
+                        <img src='img/icon-news-1.png'>
+                        <span class='news-tooltip-bottom-text'>добавлено</span>
+                    </a>
+                    <a href='#' class='news-tooltip-icon' id='tooltip-i2'>
+                        <img src='img/icon-news-2.png'>
+                        <span class='news-tooltip-bottom-text'>комментария</span>
+                    </a>
+                    <a href='#popup-news' class='news-tooltip-icon news-popup-href' id='tooltip-i3'>
+                        <img src='img/icon-news-3.png'>
+                        <span class='top-circle'>36</span>
+                        <span class='news-tooltip-bottom-text'>пометок</span>
+                    </a>
+                    <a href='#' class='news-tooltip-icon' id='tooltip-i4'>
+                        <img src='img/icon-news-4.png'>
+                        <span class='top-circle'>1</span>
+                        <span class='news-tooltip-bottom-text'>отредактировано</span>
+                    </a>
+                    </div>">Новости<span class="top-circle">36</span></a></li>
         </ul>
 
         <div class="navbar-right text-right user_block font_grey">
-            <a href="#"><img src="img/book-icon.png" class="tooltip1_5" data-toggle="tooltip" id="tooltip1_5" data-trigger="none" data-placement="bottom" title="Открыть базу знаний"></a><span class="auth-divider"> |
-                <i class="fa fa-exclamation-triangle font_lighter_grey"></i><span class="auth-divider"> |</span>
-                <a href="#" class="font_grey bold"><i class="fa fa-globe font_lighter_grey"></i>
-                    <small><i class="fa fa-angle-down "></i></small>
-                </a>
-                <ul class="dropdown-menu dropdown-mini" role="menu">
-                </ul>
-                <span class="auth-divider">|</span>
-                <span class="badge grey">500</span>
-                <a href="#" class="font_grey bold">
-                    <small>Лиза Школьник <i class="fa fa-angle-down "></i></small>
-                </a>
+            <a href="#" class="book_icon">
+            </a>
+            <span class="auth-divider"> |</span>
+            <a href="#" class="font_lighter_grey bold">
+                <i class="fa fa-exclamation-triangle"></i>
+            </a>
+            <span class="auth-divider"> |</span>
+            <a href="#" class="font_grey bold">
+                <i class="fa fa-globe font_lighter_grey"></i>
+                <small><i class="fa fa-angle-down "></i></small>
+            </a>
+            <ul class="dropdown-menu dropdown-mini" role="menu">
+            </ul>
+            <span class="auth-divider">|</span>
+            <span class="badge grey">500</span>
+            <a href="#" class="font_lighter_grey bold">
+                <small>Лиза Школьник <i class="fa fa-angle-down "></i></small>
+            </a>
         </div>
 
     </div>
@@ -170,7 +200,7 @@
                                                 <h5 class="font_purple bold">Соглашение и арбитр.</h5>
                                             </div>
                                             <div class="col-md-1 col-xs-1">
-                                                <h4 class="pull-right"><i class="fa fa-exclamation-triangle"></i></h4>
+                                                <h4 class="pull-right"><i class="fa fa-exclamation-triangle font_lighter_grey"></i></h4>
                                             </div>
                                             <div class="col-md-2 col-xs-2">
                                                 <h5 class="time">20.12.2014</h5>
@@ -249,7 +279,7 @@
                                             <h5 class="font_purple bold">Соглашение и арбитр.</h5>
                                         </div>
                                         <div class="col-md-1 col-xs-1">
-                                            <h4 class="pull-right"><i class="fa fa-exclamation-triangle"></i></h4>
+                                            <h4 class="pull-right"><i class="fa fa-exclamation-triangle font_lighter_grey"></i></h4>
                                         </div>
                                         <div class="col-md-2 col-xs-2">
                                             <h5 class="time">20.12.2014</h5>

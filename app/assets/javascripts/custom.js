@@ -1,6 +1,11 @@
 /* Your JS codes here */
 $(document).ready(function () {
 
+    $('.close_magnific').click(function(){
+        var magnificPopup = $.magnificPopup.instance;
+        magnificPopup.close();
+    });
+
     /* badge comments */
     $('.badge_comments').click(function(){
         if (!$(this).hasClass('active')) {
@@ -68,8 +73,6 @@ $(document).ready(function () {
         $(this).hide();
         $("#tooltip_button_4").show();
     });
-
-    $('.welcome_window').modal('show');
 
     $(".b-tooltip").tooltip();
 
@@ -350,6 +353,17 @@ $('.post-body').contenthover({
     overlay_y_position: 'center',
     overlay_opacity: 0.8
 });
+
+$('.open-popup-2-1').magnificPopup({
+    items: [
+        {
+            src: '#popup-imperfect-1', // CSS selector of an element on page that should be used as a popup
+            type: 'inline'
+        }
+    ],
+    type:'inline'
+});
+
 $('.post-theme').hover(function () {
     curId = $(this).attr('id');
     $('#' + curId + " a.tag-stripes").hover(function () {
@@ -428,3 +442,13 @@ $('#opener').on('click', function() {
     return false;
 });
 
+///* welcome popups */
+//$(window).load(function () {
+//    // retrieved this line of code from http://dimsemenov.com/plugins/magnific-popup/documentation.html#api
+//    $('.welcome_popup').magnificPopup.open({
+//        type: 'inline'
+//
+//        // You may add options here, they're exactly the same as for $.fn.magnificPopup call
+//        // Note that some settings that rely on click event (like disableOn or midClick) will not work here
+//    }, 0);
+//});

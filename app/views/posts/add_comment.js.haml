@@ -15,6 +15,6 @@
 -#-#$('#change_comment_stat .btn').button('reset');
 
 - unless @comment.nil?
-  $("#comment_text_field").val('');
-  $('#comments.chat-messages').append("#{escape_javascript(render partial: 'shared/comment', object: @comment)}");
+  $("#comment_text_area").val('');
+  $('.chat-messages .item.active').append("#{escape_javascript(render partial: 'shared/comment', object: @comment)}");
   -#$('.comments-cont').append("#{escape_javascript(render partial: 'shared/comment_form', locals: {comment: @new_comment, post: @comment.post})}");
