@@ -573,6 +573,7 @@ ru:
     concept:
       title: Нововведение
       title_plural: Нововведения
+      title_plural_0: Новые идеи!
       name_res: Название
       desc_res: Пояснение
       add_concept: Добавить нововведение
