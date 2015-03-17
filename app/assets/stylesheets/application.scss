@@ -51,6 +51,28 @@
   background-color: #999;
 }
 
+.btn-red, .btn-red:focus, .btn-red.active {
+  background: #ff3c3d;
+  border-radius: 3px !important;
+  border: 1px solid #ddd;
+  box-shadow: none;
+}
+
+.btn-red:hover {
+  box-shadow: 0 0 1px 1px rgba(0,0,0,0.4);
+}
+
+.btn-blue, .btn-blue:focus, .btn-blue.active {
+  background: #2632ff;
+  border-radius: 3px !important;
+  border: 1px solid #ddd;
+  box-shadow: none;
+}
+
+.btn-blue:hover {
+  box-shadow: 0 0 1px 1px rgba(0,0,0,0.4);
+}
+
 /* discontent posts */
 
 

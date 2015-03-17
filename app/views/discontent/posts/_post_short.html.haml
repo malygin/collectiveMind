@@ -17,17 +17,17 @@
                 %td.col-md-2.text-center.right-column
                   Что
                 %td.col-md-10.left-column.bold
-                  = post_short.content
+                  = trim_string(post_short.content, size = 50)
               %tr
                 %td.col-md-2.text-center.right-column
                   Где
                 %td.col-md-10.left-column
-                  = post_short.whered
+                  = trim_string(post_short.whered, size = 50)
               %tr
                 %td.col-md-2.text-center.right-column
                   Когда
                 %td.col-md-10.left-column
-                  = post_short.whend
+                  = trim_string(post_short.whend, size = 50)
               %tr
                 %td.col-md-2.text-center.right-column
                 %td.col-md-10.left-column
@@ -37,14 +37,14 @@
           %i.fa.fa-angle-right
     .post-bottom.white
       .row
-        .col-md-10.col_padding_right_3
+        .col-md-9.col_padding_right_3
           %small.pull-left{:style => "margin-right: 3px;"} Аспекты
           .post-theme{id: "stripe#{post_short.id}"}
             - post_short.post_aspects.each_with_index do |asp, index|
               %a.tag-stripes{id: "stripe#{index+1}", class: "#{index == 0 ? 'active' : ''}", style: "background: #{asp.color};", href: "#"}
                 %span.tags
                   = asp.content
-        .col-md-2.col_padding_left_3
+        .col-md-3.col_padding_left_3
           .text-right.small_icons
             %span.popup2
               = post_short.comments.count

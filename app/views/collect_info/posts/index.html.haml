@@ -8,7 +8,7 @@
     .col-md-5
       .sort-block.pull-right
         = link_to project_user_path(@project, current_user) do
-          %button.btn.add-button
+          %button.btn.add-button.disabled
             %span +
             Аспект
 / Aspects block (UI four) starts
@@ -60,12 +60,21 @@
                             = post.content.html_safe unless post.content.nil?
 
                 .col-md-4.col-sm-4.min-col-left-padd
-                  #questionsCarousel1.carousel.slide.questionsCarousel{"data-ride" => "carousel"}
-                    .aspect-questions-block{:style => "height: 408px;border-top-color: #{asp.color};"}
+                  .carousel.slide.questionsCarousel{id: "questionsCarousel_#{asp.id}", "data-ride" => "carousel"}
+                    .aspect-questions-block{:style => "border-top-color: #{asp.color};"}
                       %h4.block-with-left-icon.pull-left
                         %i.left-icon.fa.fa-2x.fa-comments
                         Вопросы по теме
-                      %span.pull-right.question_count 1 из 2
+                      %span.pull-right.question_count
+                        %span{id: "question_count_#{asp.id}"} 1
+                        из
+                        = asp.questions.by_project(@project).by_status(0).count
+                      -#%br
+                      -#%span.wrong-answer{style: "color:#{asp.color};border-color:#{asp.color};margin-left:20px;margin-right:20px;"}
+                      -#  Неправильный ответ!
+                      -#  Воспользуйтесь подсказкой
+                      -#  %span.close-button
+                      -#    %i.fa.fa-times-circle-o
                       .carousel-inner
                         - asp.questions.by_project(@project).by_status(0).order('collect_info_questions.id').each_with_index do |question, ind|
                           - unless question.user_answers.by_project(@project).by_user(current_user).present?
@@ -73,18 +82,22 @@
                               %p.text.block-with-left-icon
                                 %span.left-icon.pull-right="#{ind + 1}."
                                 = question.content
+                              .hint.close-notice{id:"hint_question_#{question.id}", style: "color:#{asp.color};border-color:#{asp.color};"}
+                                = question.hint
+                                %span.close-button
+                                  %i.fa.fa-times-circle-o
                               = form_tag(answer_question_collect_info_post_path(@project, id: asp.id, question_id: question.id), {method: :put, remote: true, class: 'form instruments-block', id: 'form_answer_question', multipart: true}) do
-                                .btn-group#answer_buttons(data-toggle="buttons")
+                                .btn-group#answers_buttons(data-toggle="buttons")
                                   - question.answers.by_status(0).each do |answer|
                                     .form-group
                                       %button.btn.btn-xs.btn-white.answer-question(id="answer_#{answer.id}")
                                         = check_box_tag 'answers[]', answer.id
                                         = answer.content
-                                      %i.fa.fa-check
+                                      %i.fa.fa-check{style: "color:#{asp.color};"}
                                 .clearfix
                                 .form-group.bottom-buttons
                                   %a.btn.btn-outline.notice-button{style: "border-color: #{asp.color};", data: {question: question.id}} Подсказка
-                                  %button#send_answers.btn.answer-button.questionCarousel-target{style: "background-color: #{asp.color};", "data-slide-to" => "1", "data-target" => "#questionsCarousel1"} Ответить
+                                  %button#send_answers.btn.answer-button.questionsCarousel-target{type: "submit", style: "background-color: #{asp.color};"} Ответить
 
 
 #popup-explanation-1.popup-window.popup-explanation.popup-w710.mfp-hide.welcome_popup
@@ -145,8 +158,6 @@
 -#          %button.btn.btn-round.btn-gray.uncolored-arrow{'data-toggle' => 'tab', href: '#tab-0'}
 -#            %i.fa.fa-wrench.fa-2x
 -#        - @project.main_aspects.order(:id).each_with_index do |asp, index|
--#          %li.li_aspect{id: "li_aspect_#{asp.id}"}
--#            %button.btn.btn-round{id: "aspect_#{asp.id}", 'data-toggle' => 'tab', href: "#tab-#{index + 1}", style: "color:#ffffff;background:#{asp.color};border:1px solid #{asp.color};"}
 -#              %span
 -#                = asp.short_name.present? ? asp.short_name.upcase : asp.content[0,2].mb_chars.upcase
 -#              %span{id: "check_question_#{asp.id}"}

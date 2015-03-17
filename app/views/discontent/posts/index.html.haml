@@ -27,6 +27,7 @@
         %span.sort-label Сортировать:
         %span.sort-date{data: {desc: -1, type: 'date'}}
         %span#tooltip2_2.sort-rate.tooltip2_2{data: {desc: 0, type: 'rate'}, "data-placement" => "bottom", "data-toggle" => "tooltip", "data-trigger" => "none", :title => "При помощи этих фильтров вы можете выбирать, в каком порядке будут отображаться несовершенства."}
+        %span.sort-all ВСЕ
         = link_to project_user_path(@project, current_user) do
           %button.btn.add-button
             %span> +

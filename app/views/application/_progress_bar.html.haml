@@ -7,7 +7,10 @@
       .progress-knob
         .knob-content
           .knob-item
-            %input#knob-1.knob{"data-anglearc" => "360", "data-angleoffset" => "70", "data-bgcolor" => "#f4f4f4", "data-end" => "0", "data-fgcolor" => "#649ac3", "data-font" => "'Open Sans', sans-serif", "data-thickness" => ".1", :value => "0"}/
+            - if @count_aspects
+              %input#knob-1.knob{"data-anglearc" => "360", "data-angleoffset" => "70", "data-bgcolor" => "#f4f4f4", "data-end" => "#{(((@count_aspects_check || 0) / (@count_aspects || 1).to_f) * 100).round}", "data-fgcolor" => "#649ac3", "data-font" => "'Open Sans', sans-serif", "data-thickness" => ".1", :value => "0"}/
+            -else
+              %input#knob-1.knob{"data-anglearc" => "360", "data-angleoffset" => "70", "data-bgcolor" => "#f4f4f4", "data-end" => "0", "data-fgcolor" => "#649ac3", "data-font" => "'Open Sans', sans-serif", "data-thickness" => ".1", :value => "0"}/
 .col-xs-6.col-md-6.col_padding_left_3
   .row
     .col-xs-8.col-md-8.col_padding_3
@@ -17,7 +20,10 @@
       .progress-knob
         .knob-content
           .knob-item
-            %input#knob-1.knob{"data-anglearc" => "360", "data-angleoffset" => "70", "data-bgcolor" => "#f4f4f4", "data-end" => "90", "data-fgcolor" => "#649ac3", "data-font" => "'Open Sans', sans-serif", "data-thickness" => ".1", :value => "0"}/
+            - if @count_aspects
+              %input#knob-2.knob{"data-anglearc" => "360", "data-angleoffset" => "70", "data-bgcolor" => "#f4f4f4", "data-end" => "90", "data-fgcolor" => "#649ac3", "data-font" => "'Open Sans', sans-serif", "data-thickness" => ".1", :value => "0"}/
+            -else
+              %input#knob-2.knob{"data-anglearc" => "360", "data-angleoffset" => "70", "data-bgcolor" => "#f4f4f4", "data-end" => "90", "data-fgcolor" => "#649ac3", "data-font" => "'Open Sans', sans-serif", "data-thickness" => ".1", :value => "0"}/
 
 
 

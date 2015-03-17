@@ -20,7 +20,7 @@ class CollectInfo::PostsController < PostsController
   end
 
   def answer_question
-    @aspect = params[:id] ? Core::Aspect.find(params[:id]) : @project.aspects.order(:id).first
+    @aspect = params[:id] ? Core::Aspect.find(params[:id]) : @project.main_aspects.first
     @question = CollectInfo::Question.find(params[:question_id])
     aspect_questions = @aspect.questions.by_project(@project).by_status(0).order("collect_info_questions.id")
     @uncorrect_answers = @question.answers.by_status(0).by_uncorrect.pluck("collect_info_answers.id")

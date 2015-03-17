@@ -174,23 +174,6 @@ p {
     padding: 0 15px 0 7px;
 }
 
-.popup2 {
-    margin-right: 2px;
-    font-size: 11px;
-}
-.popup2 i {
-    font-weight: bold;
-}
-.stage2_theme .popup2 i {
-    color: #678cca;
-}
-.stage3_theme .popup2 i {
-    color: #8e8bc7;
-}
-.stage4_theme .popup2 i {
-    color: #559499;
-}
-
 .arrow {
     background: #ffffff;
     width: 40px;

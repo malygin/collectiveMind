@@ -1,4 +1,4 @@
-#popup-imperf.popup-window.popup-imperfect-new.popup-w985.mfp-hide
+#popup-imperf.popup-window.detailed_popup.popup-w985.mfp-hide
   .popup.popup_rounded.popup_color_theme_stage2
     .modal_title
       .row
@@ -90,12 +90,13 @@
           .divider15
           .post-interfaces
             = render partial:'shared/comment_form', locals:{ comment: @comment, post: @post, url_link: url_for(controller: @post.class.name.underscore.pluralize, action:'add_comment') }
-          %nav.text-center
-            %ul.pagination
-              - @comments.each_slice(5).with_index do |slice, i|
-                %li
-                  %a.myCarousel-target{class: "#{'active' if i == 0}", "data-slide-to" => "#{i}", "data-target" => "#myCarousel"}
-                    ="#{i+1}"
+          -if @comments.count > 5
+            %nav.text-center
+              %ul.pagination
+                - @comments.each_slice(5).with_index do |slice, i|
+                  %li
+                    %a.myCarousel-target{class: "#{'active' if i + 1 == @comments.count / 5 + (@comments.count % 5 == 0 ? 0 : 1)}", "data-slide-to" => "#{i}", "data-target" => "#myCarousel"}
+                      ="#{i+1}"
       .divider25
 
 

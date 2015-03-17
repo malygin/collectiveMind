@@ -13,6 +13,19 @@
 //    });
 //});
 
+function init_first_stage_knob() {
+    var cur = $('#knob-1');
+    // Knob counting script
+    $({value: 0}).animate({value: cur.attr("data-end")}, {
+        duration: 2800,
+        easing: 'swing',
+        step: function () {
+            cur.val(Math.ceil(this.value)).trigger('change');
+            cur.val(cur.val() + '%');
+        }
+    })
+};
+
 function init_first_stage_slider() {
 
     $('.tab-pane.fade.in').find('.aspect-questions-block').innerHeight();
