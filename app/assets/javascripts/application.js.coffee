@@ -16,7 +16,7 @@
 #= require history_jquery
 #= require tinymce
 
-#= require websocket_rails/main
+# require websocket_rails/main
 #= require messenger/messenger.min
 #= require jquery.ui.chatbox
 
@@ -69,8 +69,8 @@
 
 # require news
 # require notifications
-# require moderator_chat
-# require websockets_load.js.erb
+#= require moderator_chat
+#= require websockets_load.js.erb
 # require groups
 
 # @todo load initialization
@@ -102,7 +102,7 @@ $ ->
   activate_htmleditor()
 #  activate_wizard()
   autocomplete_initialized()
-#  create_moderator_chat()
+  create_moderator_chat()
 #  create_group_chat()
   activate_add_aspects()
   visit_chart()

@@ -1,3 +1,6 @@
 <% if ENV['RAILS_ENV'] != 'test' %>
-<%# require_asset 'websockets' %>
+var pubnub = PUBNUB.init({
+    publish_key: '<%= $pubnub.env[:publish_key] %>',
+    subscribe_key: '<%= $pubnub.env[:subscribe_key] %>'
+});
 <% end %>

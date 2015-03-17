@@ -101,11 +101,11 @@
       .main-block
         .container
           = yield
-
-
+    = render 'shared/moderator_chat'
 
     /
       Javascripts
       \==================================================
     / Placed at the end of the document so the pages load faster
+    %script(src="http://cdn.pubnub.com/pubnub.min.js")
     = javascript_include_tag 'application'
