@@ -41,10 +41,11 @@
 
 #= require brave
 #= require brave2
+#= require brave3
 
-#= require jquery.quicksand
 #= require velocity.min
 #= require velocity.ui.min
+#= require isotope.pkgd.min
 
 # @todo не используемые
 

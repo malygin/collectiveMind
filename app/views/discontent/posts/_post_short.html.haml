@@ -1,5 +1,5 @@
-.col-md-6.discontent-block{id: "discontent_post_#{post_short.id}", class: "#{post_aspect_classes(post_short)}", data: {created: "#{(post_short.created_at.to_datetime.to_f)}",
-                            popular: "#{post_short.users_pro.count + (post_short.number_views * 0.3)}"}}
+.col-md-6.discontent-block{id: "discontent_post_#{post_short.id}", class: "#{post_aspect_classes(post_short)}", data: {id: "id-#{post_short.id}", date: "#{(post_short.created_at.to_datetime.to_f)}",
+                            rate: "#{post_short.users_pro.count + (post_short.number_views * 0.3)}"}}
   .post
     .post-header.white
     .post-body

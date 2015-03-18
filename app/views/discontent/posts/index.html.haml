@@ -6,9 +6,9 @@
     %a.dropdown-toggle.select-aspect{"data-toggle" => "dropdown"}
       Выберите аспект
       %span.caret
-    %ul.dropdown-menu.index-of-aspects
+    %ul.dropdown-menu.index-of-aspects#filter
       - @aspects.each_with_index do |asp, index|
-        %li{id: "button_aspect_#{asp.id}", 'data-project' => @project.id, 'data-aspect' => asp.id}
+        %li{id: "button_aspect_#{asp.id}", data: {project: @project.id, aspect: ".aspect_#{asp.id}"}}
           %input{:id => "ex2_2_#{index+1}",:name => "ex2_2", :type => "radio", :value => "#{index+1}"}/
           %label{:for => "ex2_2_#{index+1}"}
             %i.fa.fa-stop{style: "color: #{asp.color}"}
@@ -25,9 +25,10 @@
     .col-md-5
       .sort-block.pull-right
         %span.sort-label Сортировать:
-        %span.sort-date{data: {desc: -1, type: 'date'}}
-        %span#tooltip2_2.sort-rate.tooltip2_2{data: {desc: 0, type: 'rate'}, "data-placement" => "bottom", "data-toggle" => "tooltip", "data-trigger" => "none", :title => "При помощи этих фильтров вы можете выбирать, в каком порядке будут отображаться несовершенства."}
-        %span.sort-all ВСЕ
+        %span#sorter
+          %span.sort-date{data: {name: 'sort', desc: -1, type: 'date'}}
+          %span#tooltip2_2.sort-rate.tooltip2_2{data: {name: 'sort', desc: 0, type: 'rate'}, "data-placement" => "bottom", "data-toggle" => "tooltip", "data-trigger" => "none", :title => "При помощи этих фильтров вы можете выбирать, в каком порядке будут отображаться несовершенства."}
+        %span#filter_all.sort-all{data: {aspect: "*"}} ВСЕ
         = link_to project_user_path(@project, current_user) do
           %button.btn.add-button
             %span> +

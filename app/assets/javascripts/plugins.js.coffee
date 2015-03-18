@@ -97,10 +97,10 @@
 
   $('form.filter_discontents').on('change', 'input:radio', this.send_filter)
   $('.tabs-discontents').on('click', "li button[id^='link_aspect_']", this.load_aspect)
-  $('.index-of-aspects').on('click', "li[id^='button_aspect_']", this.filter_aspects)
+#  $('.index-of-aspects').on('click', "li[id^='button_aspect_']", this.filter_aspects)
   $('.index-of-discontents').on('click', "button[id^='button_discontent_']", this.filter_discontents)
 
-  $('.sort-block').on('click', ".sort-all", this.show_all_aspects)
+#  $('.sort-block').on('click', ".sort-all", this.show_all_aspects)
 
 @sorterable = ->
   SORTER = {}
@@ -110,9 +110,9 @@
       # Find the list items and sort them
       sorted = $(this).find("> div").sort((a, b) ->
         if type == "date"
-          (if parseFloat($(a).attr('data-created')) > parseFloat($(b).attr('data-created')) then SORTER.dir else -SORTER.dir)
+          (if parseFloat($(a).attr('data-date')) > parseFloat($(b).attr('data-date')) then SORTER.dir else -SORTER.dir)
         else if type == "rate"
-          (if parseFloat($(a).attr('data-popular')) > parseFloat($(b).attr('data-popular')) then SORTER.dir else -SORTER.dir)
+          (if parseFloat($(a).attr('data-rate')) > parseFloat($(b).attr('data-rate')) then SORTER.dir else -SORTER.dir)
         else 0
       )
       $(this).append sorted
@@ -127,7 +127,7 @@
     SORTER.sort "#tab_aspect_posts", type, desc
 
 
-  $('.sort-block').on('click', ".sort-date,.sort-rate", this.sorter_discontents)
+#  $('.sort-block').on('click', ".sort-date,.sort-rate", this.sorter_discontents)
 
 #@todo analytics
 @exampleData = ->

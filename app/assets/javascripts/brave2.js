@@ -162,10 +162,10 @@ function init_first_stage_slider() {
 
 };
 
-$(document).ready(function () {
-    $('.open_welcome_popup').magnificPopup({
-        type: 'inline',
-        midClick: true
-    });
-    $('.open_welcome_popup').magnificPopup('open');
-});
+//$(document).ready(function () {
+//    $('.open_welcome_popup').magnificPopup({
+//        type: 'inline',
+//        midClick: true
+//    });
+//    $('.open_welcome_popup').magnificPopup('open');
+//});
