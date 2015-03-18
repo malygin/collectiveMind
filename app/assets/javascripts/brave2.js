@@ -162,10 +162,20 @@ function init_first_stage_slider() {
 
 };
 
-//$(document).ready(function () {
-//    $('.open_welcome_popup').magnificPopup({
-//        type: 'inline',
-//        midClick: true
-//    });
-//    $('.open_welcome_popup').magnificPopup('open');
-//});
+$(document).ready(function () {
+    var main = $('.open_welcome_popup');
+    var link = main.attr('href');
+    if (link) {
+        main.magnificPopup({
+            type: 'inline',
+            midClick: true
+        });
+
+        var popup = $(link).attr('id');
+
+        if (popup && !$(link).hasClass('shown_intro')) {
+            main.magnificPopup('open');
+        }
+    }
+
+});

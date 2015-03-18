@@ -41,6 +41,7 @@ $( function() {
         var filterValue = $(this).attr('data-aspect');
         // use filterFn if matches value
         //filterValue = filterFns[ filterValue ] || filterValue;
+        $('.select-aspect').html('Выберите аспект <span class="caret"></span>');
         $container.isotope({ filter: filterValue });
     });
 

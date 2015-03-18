@@ -778,4 +778,12 @@ module ApplicationHelper
     page = total_results / 10 + (total_results % 10 == 0 ? 0 : 1)
     page == 0 ? 1 : page
   end
+
+  def shown_intro(check_field)
+    if current_user.user_checks.check_field(@project, check_field).present?
+      'shown_intro'
+    else
+      ''
+    end
+  end
 end

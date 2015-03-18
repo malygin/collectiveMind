@@ -75,6 +75,9 @@
   this.toggle_approve = ->
     $(this).toggleClass('label-default label-success')
 
+  this.autosize = ->
+    $(this).autosize()
+
 #  this.toggle_scores = ->
 #    $(this).toggleClass('label-danger label-success')
 #    text = $(this).text().trim()
@@ -95,6 +98,10 @@
 
   $('.chat-messages, .news-list, .show_bar_block').on('click', 'a.link_status span.label_discuss', this.toggle_discuss)
   $('.chat-messages, .news-list, .show_bar_block').on('click', 'a.link_status span.label_approve', this.toggle_approve)
+
+  $('body').on('click', '#comment_text_area', this.autosize)
+
+
   #  check if url contain anchor
   myLink = document.location.toString();
   if (myLink.match(/comment_(\d+)/))

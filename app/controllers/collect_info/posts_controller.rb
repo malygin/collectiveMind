@@ -45,13 +45,13 @@ class CollectInfo::PostsController < PostsController
         @next_question = aspect_questions[(aspect_questions.index @question) + 1]
         @count_now = @aspect.question_complete(@project, current_user).count
         @count_all = @aspect.questions.by_project(@project).by_status(0).count
-        unless @next_question
-          @count_aspects = @project.main_aspects.count
-          @count_aspects_check = 0
-          @project.main_aspects.each do |asp|
-            @count_aspects_check += 1 if asp.question_complete(@project, current_user).count == asp.questions.by_project(@project).by_status(0).count
-          end
+        # unless @next_question
+        @count_aspects = @project.main_aspects.count
+        @count_aspects_check = 0
+        @project.main_aspects.each do |asp|
+          @count_aspects_check += 1 if asp.question_complete(@project, current_user).count == asp.questions.by_project(@project).by_status(0).count
         end
+        # end
       end
     end
   end

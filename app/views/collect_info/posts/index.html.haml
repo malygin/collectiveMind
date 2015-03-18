@@ -100,7 +100,7 @@
                                   %button#send_answers.btn.answer-button.questionsCarousel-target{type: "submit", style: "background-color: #{asp.color};"} Ответить
 
 
-#popup-explanation-1.popup-window.popup-explanation.popup-w710.mfp-hide.welcome_popup
+#popup-explanation-1.popup-window.popup-explanation.popup-w710.mfp-hide.welcome_popup{class: "#{shown_intro('collect_info_intro')}"}
   .popup.popup_rounded
     .modal_badge.back_color_stage1.rounded_2.font_white 1 СТАДИЯ
     %h2
@@ -126,7 +126,8 @@
         Проголосуйте за самые важные на ваш вгляд аспекты
         %br>/
         (будет доступно в конце этапа)
-    %button.btn.red.close_magnific Начать работу
+    = link_to collect_info_posts_check_field_path(@project, check_field: "collect_info_intro", status: true), method: :put, remote: true do
+      %button.btn.red.close_magnific Начать работу
 
 
 

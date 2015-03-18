@@ -27,7 +27,7 @@ class User < ActiveRecord::Base
   has_many :user_awards, class_name: 'Core::UserAward'
   has_many :awards, through: :user_awards
   has_many :moderator_messages
-  has_many :user_checks, class_name: 'Util::Unit::UserCheck'
+  has_many :user_checks, class_name: 'UserCheck'
   has_many :group_users
   has_many :groups, through: :group_users
   has_many :group_chat_messages
@@ -36,7 +36,7 @@ class User < ActiveRecord::Base
   has_many :news, class_name: 'News'
 
   default_scope { order('id DESC') }
-  scope :check_field, ->(p, c) { where(project: p.id, status: 't', check_field: c) }
+  # scope :check_field, ->(p, c) { joins(:user_checks).where(user_checks: {project: p.id, status: 't', check_field: c}) }
   scope :without_added, ->(users) { where.not(id: users) unless users.empty? }
   scope :not_admins, -> { where 'users.type_user NOT IN (?) or users.type_user IS NULL', TYPES_USER[:admin] }
 
