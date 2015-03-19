@@ -98,7 +98,7 @@ CollectiveMind::Application.routes.draw do
 
     # post 'knowbase/posts/sortable_save', to: 'knowbase/posts#sortable_save'
     namespace :knowbase do
-      resources :posts, :controller => 'core/knowbase/posts'
+      resources :posts, controller: 'core/knowbase/posts'
     end
 
     resources :users do

@@ -1,8 +1,8 @@
-{:ru =>
-     { :i18n =>
-           { :plural =>
-                 { :keys => [:one, :few, :other],
-                   :rule => lambda { |n|
+{ru:
+     { i18n:
+           { plural:
+                 { keys: [:one, :few, :other],
+                   rule: lambda { |n|
                      if n == 1
                        :one
                      else

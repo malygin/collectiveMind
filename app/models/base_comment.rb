@@ -23,7 +23,7 @@ module BaseComment
     has_many :improve_concepts, -> { where improve_stage: [1, 2, 3] }, foreign_key: 'improve_comment',
              source: :concept_posts, class_name: 'Concept::Post'
 
-    scope :type_like, -> { where(:useful => 't') }
+    scope :type_like, -> { where(useful: 't') }
 
     scope :not_check, -> { where(discontent_status: ['f',nil],concept_status: ['f',nil], discuss_status:['f',nil], approve_status: ['f',nil], useful: ['f',nil]) }
 

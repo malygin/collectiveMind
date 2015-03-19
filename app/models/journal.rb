@@ -8,10 +8,10 @@ class Journal < ActiveRecord::Base
   belongs_to :project, class_name: 'Core::Project', foreign_key: 'project_id'
 
   default_scope { where("type_event != 'visit_save'") }
-  scope :select_users_for_news, -> user { where(:user => user) }
-  scope :type_content, -> type_content { where(:type_event => self.select_type_content(type_content)) if type_content.present? and type_content != "content_all" }
-  scope :type_event, -> type_event { rewhere(:type_event => self.select_type_content(type_event)) if type_event.present? and type_event != "content_all" }
-  scope :type_status, -> type_status { where(:type_event => self.select_type_content(type_status)) if type_status.present? and type_status != "content_all" }
+  scope :select_users_for_news, -> user { where(user: user) }
+  scope :type_content, -> type_content { where(type_event: self.select_type_content(type_content)) if type_content.present? and type_content != "content_all" }
+  scope :type_event, -> type_event { rewhere(type_event: self.select_type_content(type_event)) if type_event.present? and type_event != "content_all" }
+  scope :type_status, -> type_status { where(type_event: self.select_type_content(type_status)) if type_status.present? and type_status != "content_all" }
   scope :date_begin, -> date_begin { where("DATE(journals.created_at + time '04:00') >= ?", date_begin) if date_begin.present? }
   scope :date_end, -> date_end { where("DATE(journals.created_at + time '04:00') <= ?", date_end) if date_end.present? }
 
@@ -84,15 +84,15 @@ class Journal < ActiveRecord::Base
   end
 
   def self.destroy_comment_journal(project, comment)
-    where(:project_id => project.id, :user_id => comment.user, :second_id => comment.id).destroy_all
+    where(project_id: project.id, user_id: comment.user, second_id: comment.id).destroy_all
   end
 
   def self.destroy_journal_record(project, type_event, user_informed, post, personal)
-    where(:project_id => project.id, :type_event => type_event, :user_informed => user_informed, :first_id => post.id, :personal => personal).destroy_all
+    where(project_id: project.id, type_event: type_event, user_informed: user_informed, first_id: post.id, personal: personal).destroy_all
   end
 
   def self.destroy_journal_award(project, type_event, personal, user, user_informed = nil)
-    where(:project_id => project.id, :type_event => type_event, :user_id => user.id, :user_informed => user_informed, :personal => personal).destroy_all
+    where(project_id: project.id, type_event: type_event, user_id: user.id, user_informed: user_informed, personal: personal).destroy_all
   end
 
   private

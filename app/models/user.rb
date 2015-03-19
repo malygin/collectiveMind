@@ -51,7 +51,7 @@ class User < ActiveRecord::Base
   #                              thumb: '57x74>',
   #                              normal: '250x295>'
   #                          }
-  # validates_attachment_content_type :avatar, :content_type => /\Aimage\/.*\Z/
+  # validates_attachment_content_type :avatar, content_type: /\Aimage\/.*\Z/
 
   TYPES_USER = {
       admin: [1, 6, 7]
