@@ -464,6 +464,7 @@ ActiveRecord::Schema.define(version: 20150322223417) do
     t.integer  "user_id"
     t.datetime "created_at",                 null: false
     t.datetime "updated_at",                 null: false
+    t.boolean  "ready_to_concept", default: false
     t.boolean  "owner",      default: false
     t.integer  "type_user"
   end
@@ -1204,6 +1205,15 @@ ActiveRecord::Schema.define(version: 20150322223417) do
   end
 
   add_index "moderator_messages", ["user_id"], name: "index_moderator_messages_on_user_id", using: :btree
+
+  create_table "news", force: :cascade do |t|
+    t.string   "title"
+    t.text     "body"
+    t.integer  "project_id"
+    t.integer  "user_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "novation_comment_votings", force: :cascade do |t|
     t.integer  "user_id"
