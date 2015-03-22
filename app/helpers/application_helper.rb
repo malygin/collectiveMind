@@ -520,6 +520,23 @@ module ApplicationHelper
     0
   end
 
+  def color_progress_bar
+    case name_controller
+      when :collect_info_posts
+        "#649ac3"
+      when :discontent_posts
+        "#486795"
+      when :concept_posts
+        "#bd8cb8"
+      when :plan_posts
+        "#80bcc4"
+      when :estimate_posts
+        "#80bcc4"
+      else
+        "#649ac3"
+    end
+  end
+
 
   def current_stage_for_analytics(action)
     case action

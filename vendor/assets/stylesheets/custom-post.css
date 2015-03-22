@@ -197,7 +197,7 @@ p {
 }
 
 .project_win {
-    background: image-url('stripe.png') repeat;
+    background: image-url("stripe.png") repeat;
     margin-top: 20px;
     box-shadow: 0 0 8px rgba(0, 0, 0, 0.3);
     border-radius: 6px;
@@ -274,7 +274,7 @@ p {
 
 .letters {
     height: 100%;
-    background: image-url('lettersTL.png') top 30px left 30px no-repeat, image-url('img/letters.png') bottom -30px right no-repeat;
+    background: image-url("lettersTL.png") top 30px left 30px no-repeat, image-url("letters.png") bottom -30px right no-repeat;
 }
 
 .PositionRelative {
@@ -339,6 +339,10 @@ a.dropdown-toggle i {
     padding: 10px;
 }
 
+.img35 {
+    width: 35px;
+    height: 35px;
+}
 .img50 {
     width: 50px;
     height: 50px;

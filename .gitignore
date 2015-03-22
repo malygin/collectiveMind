@@ -19,3 +19,4 @@
 config/database.yml
 coverage/
 dump.rdb
+pubnub.log

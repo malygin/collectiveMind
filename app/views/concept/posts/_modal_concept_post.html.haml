@@ -1,147 +1,260 @@
-#popup-innov.popup-window.info-popup.mfp-hide
-  .popup.popup-top-rounded
-    .row.popup-post-info
-      .popup-header.popup-top-rounded.col-sm-12
-        %h2.color.mass-red
-          = trim_content(@post.title)
-      .col-lg-6.popup-post-block
-        -#@todo Пофиксить аватарку!
-        /= image_tag @post.user.avatar.url(:thumb)
-        =image_tag 'no-ava.png', style: 'margin: auto;'
-        %span
-          = @post.user.to_s
-        .info-stripe
-          %span.popup-date
-            = Russian::strftime(@post.created_at, '%d.%m.%Y')
-          %span.popup-comments
-            = @post.comments.count
-            %i.fa.fa-comment-o
-          = link_to({controller: @post.class.name.underscore.pluralize ,action: :like, project: @project, id: @post.id, against: false, remote: true}, method: :put, id: "plus_post_#{@post.id}") do
-            %span.popup-likes
-              %span(id="plus_counter_#{@post.id}" style="margin-right:0;")
-                = @post.users_pro.count
-              %i.fa.fa-thumbs-o-up
-          = link_to({controller: @post.class.name.underscore.pluralize, action: :like, project: @project,  id: @post.id, against: true, remote: true}, method: :put, id: "minus_post_#{@post.id}") do
-            %span.popup-dislikes
-              %span(id="minus_counter_#{@post.id}" style="margin-right:0;")
-                = @post.users_against.count
-              %i.fa.fa-thumbs-o-down
-      .col-lg-6.popup-tags
-        - if @post.concept_disposts.any?
-          - @post.concept_disposts.each_with_index do |cd, index1|
-            %span.popup-tag{class: "color-N#{index1 + 1}"}
-              = trim_content(cd.content, 50)
-    .container.popup-post-questions.popup-bottom-rounded
+#popup-innov.popup-window.detailed_popup.popup-w1030.mfp-hide
+  .popup.popup_rounded.popup_color_theme_stage3
+    .modal_title
       .row
-        .col-sm-12
-          .question-stripe
-            = t('form.concept.novation_what')
-          .answer-stripe
-            = simple_format(@post.name)
-        .col-sm-12
-          .question-stripe
-            = t('form.concept.novation_how')
-          .answer-stripe
-            = simple_format(@post.content)
-        .col-sm-12
-          .question-stripe
-            = t('form.concept.cond')
-          .answer-stripe
-            = simple_format(@post.positive)
-        .col-sm-12
-          .question-stripe
-            = t('form.concept.cond_res')
-          .answer-stripe
-            - @post.concept_post_resources.by_type('positive_r').each_with_index do |r, index|
-              %span.rounded-N-mark
-                = index + 1
-              %span.text-after-mark
-                = r.name
-              %br
-        .col-sm-12
-          .question-stripe
-            = t('form.concept.negative')
-          .answer-stripe
-            = simple_format(@post.negative)
-        .col-sm-12
-          .question-stripe
-            = t('form.concept.negative_res')
-          .answer-stripe
-            - @post.concept_post_resources.by_type('negative_r').each_with_index do |r, index|
-              %span.rounded-N-mark
-                = index + 1
-              %span.text-after-mark
-                = r.name
-              %br
-        .col-sm-12
-          .question-stripe
-            = t('form.concept.control')
-          .answer-stripe
-            = simple_format(@post.control)
-        .col-sm-12
-          .question-stripe
-            = t('form.concept.control_res')
-          .answer-stripe
-            - @post.concept_post_resources.by_type('control_r').each_with_index do |r, index|
-              %span.rounded-N-mark
-                = index + 1
-              %span.text-after-mark
-                = r.name
-              %br
-        .col-sm-12
-          .question-stripe
-            = t('form.concept.obstacles_bcd')
-          .answer-stripe
-            = simple_format(@post.obstacles)
-        .col-sm-12
-          .question-stripe
-            = t('form.concept.problems')
-          .answer-stripe
-            = simple_format(@post.problems)
-        .col-sm-12
-          .question-stripe
-            = t('form.concept.reality')
-          .answer-stripe
-            = simple_format(@post.reality)
-
-  .popup.popup-bottom-rounded.popup-top-rounded
-    #comment-tabs.nav-tabs-one
-      %ul.nav.navig-tabs
-        %li.active
-          %a{'data-toggle' => 'tab', href: '#tab-1'} Ваш комментарий
-        %li
-          %a{'data-toggle' => 'tab', href: '#tab-2'} Все комментарии
-        %li
-          %a{'data-toggle' => 'tab', href: '#tab-3'} Советы
-      .tab-content
-        #tab-1.tab-pane.fade.in.active
-          #comments.chat-messages
-            - @post.comments.where(user: current_user.id).each do |comment|
-              .comment
-                -#= image_tag comment.user.avatar.url(:thumb), class: 'comment-ava'
-                =image_tag 'no-ava.png', class: 'comment-ava'
-                .comment-name
-                  = comment.user.to_s
-                .comment-text
-                  = comment.content
-          - if signed_in?
+        .col-md-8
+          %h4.bold.font_dark_grey
+            = trim_content(@post.title)
+        .col-md-4
+          .row
             .col-md-12
-              = render partial:'shared/comment_form', locals:{comment:@comment, post: @post, url_link: url_for(controller:@post.class.name.underscore.pluralize, action:'add_comment')}
-        #tab-2.tab-pane.fade
-          - @comments.each do |comment|
-            .comment
-              -#= image_tag comment.user.avatar.url(:thumb), class: 'comment-ava'
-              =image_tag 'no-ava.png', class: 'comment-ava'
-              .comment-name
-                = comment.user.to_s
-              .comment-text
-                = comment.content
-        #tab-3.tab-pane.fade
-          - (@post.advices.approve + current_user.advices_for(@post).unapproved + current_user.advices_for(@post).disapproved).each do |advice|
-            .comment
-              = image_tag advice.user.avatar.url(:thumb), class: 'comment-ava'
-              =image_tag 'no-ava.png', class: 'comment-ava'
-              .comment-name
-                = advice.user.to_s
-              .comment-text
-                = simple_format(advice.content)
+              .text-right.post_likes
+                %span.bold
+                  = @post.comments.count
+                  %i.fa.fa-comment.theme_font_color
+                = link_to({controller: @post.class.name.underscore.pluralize ,action: :like, project: @project, id: @post.id, against: false, remote: true}, method: :put, id: "plus_post_#{@post.id}") do
+                  %span.bold
+                    %span(id="plus_counter_#{@post.id}")
+                      = @post.users_pro.count
+                    %i.fa.fa-thumbs-up.theme_font_color
+                = link_to({controller: @post.class.name.underscore.pluralize, action: :like, project: @project,  id: @post.id, against: true, remote: true}, method: :put, id: "minus_post_#{@post.id}") do
+                  %span.bold
+                    %span(id="minus_counter_#{@post.id}")
+                      = @post.users_against.count
+                    %i.fa.fa-thumbs-down.theme_font_color
+                %span
+                  %i.fa.fa-exclamation-triangle.font_lighter_grey
+                %small
+                  = Russian::strftime(@post.created_at, '%d.%m.%Y')
+    .modal_body
+      .poster-line.line-grey
+        %span.rolled_text несовершенства
+        .row
+          .col-md-6
+            .innov-poster-cont
+              =image_tag 'no-ava.png', class: 'img-circle'
+              %span.poster-name
+                = @post.user
+          .col-md-6.col_padding_right_0
+            .innov-tags
+              - @post.concept_disposts.each_with_index do |post, index|
+                .innov-tags-tag{class: "color-N#{index + 1}"}
+                  = trim_content(post.content, 50)
+
+      .divider25
+      .container
+        .col-md-6
+          .stripe-qa
+            .lined-heading
+              %span.bold-stripe Деятельность
+            %p
+              %strong> Описание:
+              lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum
+            %p
+              %strong> Обоснование:
+              lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum
+          .stripe-qa
+            .lined-heading
+              %span.bold-stripe Деятели
+            %p
+              %strong> Описание:
+              lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum
+          .stripe-qa
+            .lined-heading
+              %span.bold-stripe Ресурсы и инструменты
+            %p
+              %strong> Описание:
+              lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum
+          .stripe-qa
+            .lined-heading
+              %span.bold-stripe Воздействие на целевую аудиторию
+            %p
+              %strong> Описание:
+              lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum
+          .stripe-qa
+            .lined-heading
+              %span.bold-stripe Воздействие на среду
+            %p
+              %strong> Описание:
+              lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum
+        .col-md-6
+          .container
+            .row
+              .col-md-12.theme_font_color.text-right.no_padding_col
+                = Russian::strftime(@post.created_at, '%d.%m.%Y')
+          .divider5
+          .divider_1_grey
+          #myCarousel.carousel.slide{"data-ride" => "carousel"}
+            .carousel-inner.chat-messages{:role => "listbox"}
+              -if @comments.present?
+                - @comments.each_slice(5).with_index do |slice, i|
+                  .item{class: "#{'active' if i + 1 == @comments.count / 5 + (@comments.count % 5 == 0 ? 0 : 1)}"}
+                    = render partial:'shared/comment', collection: slice
+              -else
+                .item.active
+
+          .divider15
+          .post-interfaces
+            = render partial:'shared/comment_form', locals:{ comment: @comment, post: @post, url_link: url_for(controller: @post.class.name.underscore.pluralize, action:'add_comment') }
+
+          -if @comments.count > 5
+            %nav.text-center
+              %ul.pagination
+                - @comments.each_slice(5).with_index do |slice, i|
+                  %li
+                    %a.myCarousel-target{class: "#{'active' if i + 1 == @comments.count / 5 + (@comments.count % 5 == 0 ? 0 : 1)}", "data-slide-to" => "#{i}", "data-target" => "#myCarousel"}
+                      ="#{i+1}"
+
+      .divider25
+
+
+
+
+
+-##popup-innov.popup-window.info-popup.mfp-hide
+-#  .popup.popup-top-rounded
+-#    .row.popup-post-info
+-#      .popup-header.popup-top-rounded.col-sm-12
+-#        %h2.color.mass-red
+-#          = trim_content(@post.title)
+-#      .col-lg-6.popup-post-block
+-#        -#@todo Пофиксить аватарку!
+-#        /= image_tag @post.user.avatar.url(:thumb)
+-#        =image_tag 'no-ava.png', style: 'margin: auto;'
+-#        %span
+-#          = @post.user.to_s
+-#        .info-stripe
+-#          %span.popup-date
+-#            = Russian::strftime(@post.created_at, '%d.%m.%Y')
+-#          %span.popup-comments
+-#            = @post.comments.count
+-#            %i.fa.fa-comment-o
+-#          = link_to({controller: @post.class.name.underscore.pluralize ,action: :like, project: @project, id: @post.id, against: false, remote: true}, method: :put, id: "plus_post_#{@post.id}") do
+-#            %span.popup-likes
+-#              %span(id="plus_counter_#{@post.id}" style="margin-right:0;")
+-#                = @post.users_pro.count
+-#              %i.fa.fa-thumbs-o-up
+-#          = link_to({controller: @post.class.name.underscore.pluralize, action: :like, project: @project,  id: @post.id, against: true, remote: true}, method: :put, id: "minus_post_#{@post.id}") do
+-#            %span.popup-dislikes
+-#              %span(id="minus_counter_#{@post.id}" style="margin-right:0;")
+-#                = @post.users_against.count
+-#              %i.fa.fa-thumbs-o-down
+-#      .col-lg-6.popup-tags
+-#        - if @post.concept_disposts.any?
+-#          - @post.concept_disposts.each_with_index do |cd, index1|
+-#            %span.popup-tag{class: "color-N#{index1 + 1}"}
+-#              = trim_content(cd.content, 50)
+-#    .container.popup-post-questions.popup-bottom-rounded
+-#      .row
+-#        .col-sm-12
+-#          .question-stripe
+-#            = t('form.concept.novation_what')
+-#          .answer-stripe
+-#            = simple_format(@post.name)
+-#        .col-sm-12
+-#          .question-stripe
+-#            = t('form.concept.novation_how')
+-#          .answer-stripe
+-#            = simple_format(@post.content)
+-#        .col-sm-12
+-#          .question-stripe
+-#            = t('form.concept.cond')
+-#          .answer-stripe
+-#            = simple_format(@post.positive)
+-#        .col-sm-12
+-#          .question-stripe
+-#            = t('form.concept.cond_res')
+-#          .answer-stripe
+-#            - @post.concept_post_resources.by_type('positive_r').each_with_index do |r, index|
+-#              %span.rounded-N-mark
+-#                = index + 1
+-#              %span.text-after-mark
+-#                = r.name
+-#              %br
+-#        .col-sm-12
+-#          .question-stripe
+-#            = t('form.concept.negative')
+-#          .answer-stripe
+-#            = simple_format(@post.negative)
+-#        .col-sm-12
+-#          .question-stripe
+-#            = t('form.concept.negative_res')
+-#          .answer-stripe
+-#            - @post.concept_post_resources.by_type('negative_r').each_with_index do |r, index|
+-#              %span.rounded-N-mark
+-#                = index + 1
+-#              %span.text-after-mark
+-#                = r.name
+-#              %br
+-#        .col-sm-12
+-#          .question-stripe
+-#            = t('form.concept.control')
+-#          .answer-stripe
+-#            = simple_format(@post.control)
+-#        .col-sm-12
+-#          .question-stripe
+-#            = t('form.concept.control_res')
+-#          .answer-stripe
+-#            - @post.concept_post_resources.by_type('control_r').each_with_index do |r, index|
+-#              %span.rounded-N-mark
+-#                = index + 1
+-#              %span.text-after-mark
+-#                = r.name
+-#              %br
+-#        .col-sm-12
+-#          .question-stripe
+-#            = t('form.concept.obstacles_bcd')
+-#          .answer-stripe
+-#            = simple_format(@post.obstacles)
+-#        .col-sm-12
+-#          .question-stripe
+-#            = t('form.concept.problems')
+-#          .answer-stripe
+-#            = simple_format(@post.problems)
+-#        .col-sm-12
+-#          .question-stripe
+-#            = t('form.concept.reality')
+-#          .answer-stripe
+-#            = simple_format(@post.reality)
+-#
+-#  .popup.popup-bottom-rounded.popup-top-rounded
+-#    #comment-tabs.nav-tabs-one
+-#      %ul.nav.navig-tabs
+-#        %li.active
+-#          %a{'data-toggle' => 'tab', href: '#tab-1'} Ваш комментарий
+-#        %li
+-#          %a{'data-toggle' => 'tab', href: '#tab-2'} Все комментарии
+-#        %li
+-#          %a{'data-toggle' => 'tab', href: '#tab-3'} Советы
+-#      .tab-content
+-#        #tab-1.tab-pane.fade.in.active
+-#          #comments.chat-messages
+-#            - @post.comments.where(user: current_user.id).each do |comment|
+-#              .comment
+-#                -#= image_tag comment.user.avatar.url(:thumb), class: 'comment-ava'
+-#                =image_tag 'no-ava.png', class: 'comment-ava'
+-#                .comment-name
+-#                  = comment.user.to_s
+-#                .comment-text
+-#                  = comment.content
+-#          - if signed_in?
+-#            .col-md-12
+-#              = render partial:'shared/comment_form', locals:{comment:@comment, post: @post, url_link: url_for(controller:@post.class.name.underscore.pluralize, action:'add_comment')}
+-#        #tab-2.tab-pane.fade
+-#          - @comments.each do |comment|
+-#            .comment
+-#              -#= image_tag comment.user.avatar.url(:thumb), class: 'comment-ava'
+-#              =image_tag 'no-ava.png', class: 'comment-ava'
+-#              .comment-name
+-#                = comment.user.to_s
+-#              .comment-text
+-#                = comment.content
+-#        #tab-3.tab-pane.fade
+-#          - (@post.advices.approve + current_user.advices_for(@post).unapproved + current_user.advices_for(@post).disapproved).each do |advice|
+-#            .comment
+-#              = image_tag advice.user.avatar.url(:thumb), class: 'comment-ava'
+-#              =image_tag 'no-ava.png', class: 'comment-ava'
+-#              .comment-name
+-#                = advice.user.to_s
+-#              .comment-text
+-#                = simple_format(advice.content)
