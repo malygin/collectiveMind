@@ -1,0 +1,24 @@
+.stage-info-sort-block
+  .row
+    %br/
+    .col-md-7
+      %span.stage-heading
+        Нововведения
+        ="(#{@posts.count})"
+        %i.fa.fa-question-circle
+    .col-md-5
+      .sort-block.pull-right
+        %span.sort-label Сортировать:
+        %span.sort-date
+        %span.sort-rate
+        %span.sort-all ВСЕ
+        = link_to project_user_path(@project, current_user) do
+          %button.btn.add-button
+            %span> +
+            Нововведение
+.stage-post-block
+  .row
+    = render partial: 'post_short', collection: @posts
+
+
+#render_novation_post

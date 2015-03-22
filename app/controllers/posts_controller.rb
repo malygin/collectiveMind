@@ -514,9 +514,7 @@ class PostsController < ProjectsController
 
     unless content==''
       @comment = post.comments.create(content: content, image: img ? img['public_id'] : nil, isFile: img ? isFile : nil,
-                                      user: current_user, discontent_status: params[name_of_comment_for_param][:discontent_status],
-                                      concept_status: params[name_of_comment_for_param][:concept_status],
-                                      comment_id: @comment_parent ? @comment_parent.id : nil)
+                                      user: current_user, comment_id: @comment_parent ? @comment_parent.id : nil)
 
       Journal.comment_event(current_user, @project, name_of_comment_for_param, post, @comment, @comment_answer)
     end

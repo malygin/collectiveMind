@@ -125,12 +125,14 @@ CollectiveMind::Application.routes.draw do
     put 'collect_info/posts/check_field', to: 'collect_info/posts#check_field'
     put 'discontent/posts/check_field', to: 'discontent/posts#check_field'
     put 'concept/posts/check_field', to: 'concept/posts#check_field'
+    put 'novation/posts/check_field', to: 'novation/posts#check_field'
     put 'plan/posts/check_field', to: 'plan/posts#check_field'
     put 'estimate/posts/check_field', to: 'estimate/posts#check_field'
 
     get 'collect_info/posts/to_work', to: 'collect_info/posts#to_work'
     get 'discontent/posts/to_work', to: 'discontent/posts#to_work'
     get 'concept/posts/to_work', to: 'concept/posts#to_work'
+    get 'novation/posts/to_work', to: 'novation/posts#to_work'
     get 'plan/posts/to_work', to: 'plan/posts#to_work'
     get 'estimate/posts/to_work', to: 'estimate/posts#to_work'
 
@@ -178,6 +180,19 @@ CollectiveMind::Application.routes.draw do
     post 'concept/posts/add_dispost', to: 'concept/posts#add_dispost'
     put 'concept/posts/next_vote', to: 'concept/posts#next_vote'
     namespace :concept do
+      posts_routes
+      resources :posts do
+        member do
+          put :status_post
+          put :new_note
+          put :create_note
+          put :destroy_note
+          put :discuss_status
+        end
+      end
+    end
+
+    namespace :novation do
       posts_routes
       resources :posts do
         member do

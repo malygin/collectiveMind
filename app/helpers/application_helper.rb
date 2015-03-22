@@ -462,7 +462,7 @@ module ApplicationHelper
   end
 
   def field_for_journal(post)
-    if post.instance_of? Concept::Post
+    if post.instance_of? Concept::Post or post.instance_of? Novation::Post
       post.title
     elsif post.instance_of? Plan::Post
       post.name
@@ -528,6 +528,8 @@ module ApplicationHelper
         "#486795"
       when :concept_posts
         "#bd8cb8"
+      when :novation_posts
+        "#7373aa"
       when :plan_posts
         "#80bcc4"
       when :estimate_posts

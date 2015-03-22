@@ -1,0 +1,46 @@
+.col-md-6
+  .post
+    .post-header.white
+      .row
+        .col-md-10.col-xs-10
+          %h5.font_purple.bold
+            = trim_content(post_short.title)
+        .col-md-2.col-xs-2
+          %h5.time
+            = Russian::strftime(post_short.created_at,'%d.%m.%Y')
+    .post-body
+      .media
+        .media-left.text-center.gradient.post-poster
+          = image_tag 'no-ava.png', class: "img-circle img50"
+          %p.poster-name
+            =post_short.user
+        .media-body.white-gray
+          .post-text
+            %p
+              = trim_content(post_short.actions_desc)
+    .contenthover
+      = link_to({action: :show, project: @project, id: post_short.id, asp: params[:asp]}, remote: true, id: 'show_record') do
+        .arrow
+          %i.fa.fa-angle-right
+    .post-bottom.white
+      .row
+        .col-md-9.col_padding_right_3
+          %small.pull-left{:style => "margin-right: 3px;"} Идеи
+          .post-theme{id: "stripe#{post_short_counter+1}"}
+            - post_short.novation_concepts.each_with_index do |post, index|
+              %a.tag-stripes{id: "stripe#{index + 1}", class: "#{'active' if index == 0} color-N#{index + 1}", href: '#'}
+                %span.tags
+                  = trim_content(post.title, 30)
+        .col-md-3.col_padding_left_3
+          .text-right.small_icons
+            %span.popup2
+              = post_short.comments.count
+              %i.fa.fa-comment
+            %span.popup2
+              = post_short.users_pro.count
+              %i.fa.fa-thumbs-up
+            %span.popup2
+              = post_short.users_against.count
+              %i.fa.fa-thumbs-down
+            %span.popup2
+              %i.fa.fa-exclamation-triangle.font_lighter_grey

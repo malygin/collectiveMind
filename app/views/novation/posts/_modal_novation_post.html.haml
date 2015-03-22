@@ -1,0 +1,115 @@
+#popup-novation.popup-window.detailed_popup.popup-w1030.mfp-hide
+  .popup.popup_rounded.popup_color_theme_stage4
+    .modal_title
+      .row
+        .col-md-8
+          %h4.bold.font_dark_grey
+            Нововведение
+            ="\"#{trim_content(@post.title)}\""
+        .col-md-4
+          .row
+            .col-md-12
+              .text-right.post_likes
+                %span.bold
+                  = @post.comments.count
+                  %i.fa.fa-comment.theme_font_color
+                = link_to({controller: @post.class.name.underscore.pluralize ,action: :like, project: @project, id: @post.id, against: false, remote: true}, method: :put, id: "plus_post_#{@post.id}") do
+                  %span.bold
+                    %span(id="plus_counter_#{@post.id}")
+                      = @post.users_pro.count
+                    %i.fa.fa-thumbs-up.theme_font_color
+                = link_to({controller: @post.class.name.underscore.pluralize, action: :like, project: @project,  id: @post.id, against: true, remote: true}, method: :put, id: "minus_post_#{@post.id}") do
+                  %span.bold
+                    %span(id="minus_counter_#{@post.id}")
+                      = @post.users_against.count
+                    %i.fa.fa-thumbs-down.theme_font_color
+                %span
+                  %i.fa.fa-exclamation-triangle.font_lighter_grey
+                %small
+                  = Russian::strftime(@post.created_at, '%d.%m.%Y')
+    .poster-line.line-grey
+      %span.rolled_text идеи
+      .row
+        .col-md-6
+          .innov-poster-cont
+            =image_tag 'no-ava.png', class: 'img-circle'
+            %span.poster-name
+              = @post.user
+        .col-md-6.col_padding_right_0
+          .innov-tags
+            - @post.novation_concepts.each_with_index do |post, index|
+              .innov-tags-tag{class: "color-N#{index + 1}"}
+                = trim_content(post.title, 50)
+
+    .popup-imperfect-main-block
+      .row
+        .col-md-6
+          .stripe-qa
+            .lined-heading
+              %span.bold-stripe
+                = t('show.novation.actions')
+            %p
+              %strong
+                = t('show.desc')
+              = @post.actions_desc
+            %p
+              %strong
+                = t('show.ground')
+              = @post.actions_ground
+          .stripe-qa
+            .lined-heading
+              %span.bold-stripe
+                = t('show.novation.actors')
+            %p
+              %strong
+                = t('show.desc')
+              = @post.actors
+          .stripe-qa
+            .lined-heading
+              %span.bold-stripe
+                = t('show.novation.tools')
+            %p
+              %strong
+                = t('show.desc')
+              = @post.tools
+          .stripe-qa
+            .lined-heading
+              %span.bold-stripe
+                = t('show.novation.impact_group')
+            %p
+              %strong
+                = t('show.desc')
+              = @post.impact_group
+          .stripe-qa
+            .lined-heading
+              %span.bold-stripe
+                = t('show.novation.impact_env')
+            %p
+              %strong
+                = t('show.desc')
+              = @post.impact_env
+        .col-md-6
+          .container
+            .row
+              .col-md-12.theme_font_color.text-right.no_padding_col
+                = Russian::strftime(@post.created_at, '%d.%m.%Y')
+          .divider5
+          .divider_1_grey
+          #myCarousel.carousel.slide{"data-ride" => "carousel"}
+            .carousel-inner.chat-messages{:role => "listbox"}
+              -if @comments.present?
+                - @comments.each_slice(5).with_index do |slice, i|
+                  .item{class: "#{'active' if i + 1 == @comments.count / 5 + (@comments.count % 5 == 0 ? 0 : 1)}"}
+                    = render partial:'shared/comment', collection: slice
+              -else
+                .item.active
+          .divider15
+          .post-interfaces
+            = render partial:'shared/comment_form', locals:{ comment: @comment, post: @post, url_link: url_for(controller: @post.class.name.underscore.pluralize, action:'add_comment') }
+          -if @comments.count > 5
+            %nav.text-center
+              %ul.pagination
+                - @comments.each_slice(5).with_index do |slice, i|
+                  %li
+                    %a.myCarousel-target{class: "#{'active' if i + 1 == @comments.count / 5 + (@comments.count % 5 == 0 ? 0 : 1)}", "data-slide-to" => "#{i}", "data-target" => "#myCarousel"}
+                      ="#{i+1}"

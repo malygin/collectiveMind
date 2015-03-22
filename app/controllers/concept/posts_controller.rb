@@ -223,6 +223,6 @@ class Concept::PostsController < PostsController
                                          :improve_stage, :discuss_status, :useful, :status_positive_s, :status_negative_s,
                                          :status_control, :status_control_r, :status_control_s, :status_obstacles, :approve_status,
                                          :fullness, :status_all, :core_aspect_id, :positive, :negative, :control, :name, :problems,
-                                         :positive_r, :negative_r, :title, :obstacles)
+                                         :positive_r, :negative_r, :title, :obstacles, :actions_desc, :actions_ground, :actors, :tools, :impact_group, :impact_env)
   end
 end

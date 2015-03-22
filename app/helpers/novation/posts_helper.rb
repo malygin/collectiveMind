@@ -1,0 +1,2 @@
+module Novation::PostsHelper
+end

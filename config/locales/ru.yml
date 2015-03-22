@@ -597,6 +597,19 @@ ru:
       complite_3: полностью
       not_use: 'не определено'
 
+      actions: Деятельность
+      actors: Деятели
+      tools: Ресурсы и инструменты
+      impact_group: Воздействие на целевую аудиторию
+      impact_env: Воздействие на среду
+
+    novation:
+      actions: Деятельность
+      actors: Деятели
+      tools: Ресурсы и инструменты
+      impact_group: Воздействие на целевую аудиторию
+      impact_env: Воздействие на среду
+
     project:
       opened: Открытые процедуры
       club: Клубные процедуры
@@ -721,8 +734,10 @@ ru:
       other: "Идет %{count} стадия"
     fill_name_paper: 'Заполните название статьи'
     fill_content_paper: 'Заполните поле контента'
-
     advice: "Совет"
+    desc: 'Описание:'
+    ground: 'Обоснование:'
+
   link:
     more: 'подробнее'
     top: наверх

@@ -46,37 +46,48 @@
         .col-md-6
           .stripe-qa
             .lined-heading
-              %span.bold-stripe Деятельность
+              %span.bold-stripe
+                = t('show.concept.actions')
             %p
-              %strong> Описание:
-              lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum
+              %strong
+                = t('show.desc')
+              = @post.actions_desc
             %p
-              %strong> Обоснование:
-              lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum
+              %strong
+                = t('show.ground')
+              = @post.actions_ground
           .stripe-qa
             .lined-heading
-              %span.bold-stripe Деятели
+              %span.bold-stripe
+                = t('show.concept.actors')
             %p
-              %strong> Описание:
-              lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum
+              %strong
+                = t('show.desc')
+              = @post.actors
           .stripe-qa
             .lined-heading
-              %span.bold-stripe Ресурсы и инструменты
+              %span.bold-stripe
+                = t('show.concept.tools')
             %p
-              %strong> Описание:
-              lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum
+              %strong
+                = t('show.desc')
+              = @post.tools
           .stripe-qa
             .lined-heading
-              %span.bold-stripe Воздействие на целевую аудиторию
+              %span.bold-stripe
+                = t('show.concept.impact_group')
             %p
-              %strong> Описание:
-              lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum
+              %strong
+                = t('show.desc')
+              = @post.impact_group
           .stripe-qa
             .lined-heading
-              %span.bold-stripe Воздействие на среду
+              %span.bold-stripe
+                = t('show.concept.impact_env')
             %p
-              %strong> Описание:
-              lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum
+              %strong
+                = t('show.desc')
+              = @post.impact_env
         .col-md-6
           .container
             .row
