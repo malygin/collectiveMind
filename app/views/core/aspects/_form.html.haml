@@ -1,47 +1,16 @@
 %h4.modal-title
   = t('form.aspect.title')
 
-- unless params[:type_mechanic].present?
-  = link_to 'Простая механика', new_aspect_path(type_mechanic: :simple), remote: true
-  %br
-  = link_to 'Мастер создания', new_aspect_path(type_mechanic: :master), remote: true
+= form_for aspect, url: {project: @project.id, action: aspect.persisted? ? 'update' : 'create'}, remote: true do |f|
+  - content_for :aspect_names do
+    %br
+    = f.text_field :content, class: 'form-control', placeholder: t('form.aspect.name'), id: 'aspect_text_field_content'
+    %br
+    = f.text_area :short_desc, class: 'form-control', style: 'height: 70px;', placeholder: t('form.aspect.desc'), id: 'aspect_text_area'
+    %br
+  = render 'shared/notice_messages', object: f.object
 
-- if params[:type_mechanic].present?
-  = form_for aspect, url: {project: @project.id, action: aspect.persisted? ? 'update' : 'create'}, remote: true do |f|
-    - content_for :aspect_names do
-      %br
-      = f.text_field :content, class: 'form-control', placeholder: t('form.aspect.name'), id: 'aspect_text_field_content'
-      %br
-      = f.text_area :short_desc, class: 'form-control', style: 'height: 70px;', placeholder: t('form.aspect.desc'), id: 'aspect_text_area'
-      %br
-    = render 'shared/notice_messages', object: f.object
+  = render partial: "#{params[:type_mechanic]}_form", locals: {f: f}
 
-    - case params[:type_mechanic]
-      - when 'simple'
-        = yield :aspect_names
-      - when 'master'
-        %h4 Выберите аспект к которому будет принадлежать тема
-        = f.select :core_aspect_id, options_from_collection_for_select(@aspects, :id, :content, selected: aspect.core_aspect_id), prompt: t('form.discontent.select_aspect_prompt')
-        %br
-        = yield :aspect_names
-        .form-group
-          = f.label t('form.project.color'), class: 'control-label', for: 'color'
-          .input-group
-          = f.text_field :color, class: 'form-control colorpicker', id: 'color', value: aspect.color
-          %span(id="color-holder" class="input-group-addon" style="background-color: #{aspect.color};")
-            &nbsp;&nbsp;&nbsp;
-        .form-group
-          = f.label 'Код', for: 'short_name'
-          = f.text_field :short_name, class: 'form-control'
-        %br
-        .form-group
-          %label.radio-inline
-            = f.radio_button :status, '0'
-            %span.label.label-success
-              = t('form.aspect.status_main')
-          %label.radio-inline
-            = f.radio_button :status, '1'
-            %span.label.label-danger
-              = t('form.aspect.status_other')
-    .pull-right
-      = f.submit t('form.save'), id: 'send_post_aspect', class: 'btn btn-success'
+  .pull-right
+    = f.submit t('form.save'), id: 'send_post_aspect', class: 'btn btn-success'

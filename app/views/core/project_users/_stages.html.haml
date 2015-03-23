@@ -7,9 +7,13 @@
         - case @project.current_stage_values[:type_stage]
           - when :collect_info_posts
             %li
-              = link_to new_aspect_path(@project), remote: true do
+              = link_to new_aspect_path(@project, type_mechanic: :simple), remote: true do
                 %i.fa.fa-plus-square
-                Предложить аспект
+                Добавление аспекта: простой мастер
+            %li
+              = link_to new_aspect_path(@project, type_mechanic: :master), remote: true do
+                %i.fa.fa-plus-square
+                Добавление аспекта: подробный мастер
           - when :discontent_posts
             %li
               = link_to new_discontent_post_path(@project), remote: true do
