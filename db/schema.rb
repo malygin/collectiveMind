@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150323081806) do
+ActiveRecord::Schema.define(version: 20150323082200) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -1456,6 +1456,18 @@ ActiveRecord::Schema.define(version: 20150323081806) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "technique_stores", force: :cascade do |t|
+    t.integer  "technique_list_project_id"
+    t.integer  "user_id"
+    t.integer  "post_id"
+    t.json     "params"
+    t.datetime "created_at",                null: false
+    t.datetime "updated_at",                null: false
+  end
+
+  add_index "technique_stores", ["technique_list_project_id"], name: "index_technique_stores_on_technique_list_project_id", using: :btree
+  add_index "technique_stores", ["user_id"], name: "index_technique_stores_on_user_id", using: :btree
+
   create_table "user_checks", force: :cascade do |t|
     t.integer  "user_id"
     t.string   "check_field"
@@ -1537,4 +1549,6 @@ ActiveRecord::Schema.define(version: 20150323081806) do
 
   add_foreign_key "technique_list_projects", "core_projects"
   add_foreign_key "technique_list_projects", "technique_lists"
+  add_foreign_key "technique_stores", "technique_list_projects"
+  add_foreign_key "technique_stores", "users"
 end

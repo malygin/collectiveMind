@@ -7,6 +7,7 @@ CollectiveMind::Application.routes.draw do
   namespace :technique do
     resources :lists, only: [:edit, :update]
     resources :list_projects, except: [:index, :show]
+    resources :stores
   end
   resources :user_roles
 
