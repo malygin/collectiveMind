@@ -6,6 +6,7 @@ require 'resque/server'
 CollectiveMind::Application.routes.draw do
   namespace :technique do
     resources :lists, only: [:edit, :update]
+    resources :list_projects, except: [:index, :show]
   end
   resources :user_roles
 

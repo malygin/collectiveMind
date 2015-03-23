@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150323080545) do
+ActiveRecord::Schema.define(version: 20150323081806) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -1438,6 +1438,16 @@ ActiveRecord::Schema.define(version: 20150323080545) do
     t.datetime "migrated_on"
   end
 
+  create_table "technique_list_projects", force: :cascade do |t|
+    t.integer  "core_project_id"
+    t.integer  "technique_list_id"
+    t.datetime "created_at",        null: false
+    t.datetime "updated_at",        null: false
+  end
+
+  add_index "technique_list_projects", ["core_project_id"], name: "index_technique_list_projects_on_core_project_id", using: :btree
+  add_index "technique_list_projects", ["technique_list_id"], name: "index_technique_list_projects_on_technique_list_id", using: :btree
+
   create_table "technique_lists", force: :cascade do |t|
     t.string   "name"
     t.string   "stage"
@@ -1525,4 +1535,6 @@ ActiveRecord::Schema.define(version: 20150323080545) do
     t.datetime "updated_at"
   end
 
+  add_foreign_key "technique_list_projects", "core_projects"
+  add_foreign_key "technique_list_projects", "technique_lists"
 end
