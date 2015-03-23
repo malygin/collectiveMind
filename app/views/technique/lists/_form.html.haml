@@ -1,0 +1,13 @@
+= form_for @technique_list do |f|
+  = render partial: 'shared/errors', locals: {object: @technique_list}
+  .field
+    = f.label :name
+    = f.text_field :name
+  .field
+    = f.label :stage
+    = f.text_field :stage
+  .field
+    = f.label :code
+    = f.text_field :code
+  .actions
+    = f.submit 'Save'

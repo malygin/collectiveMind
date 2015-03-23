@@ -4,6 +4,9 @@ require 'resque/server'
 #require 'resque_scheduler/server'
 
 CollectiveMind::Application.routes.draw do
+  namespace :technique do
+    resources :lists, only: [:edit, :update]
+  end
   resources :user_roles
 
   resque_constraint = lambda do |request|
