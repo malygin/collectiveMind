@@ -15,7 +15,7 @@ class User < ActiveRecord::Base
   has_many :essay_posts, class_name: 'Core::Essay::Post'
   has_many :concept_posts, class_name: 'Concept::Post'
   has_many :aspect_votings, class_name: 'CollectInfo::Voting'
-  has_many :voted_aspects, through: :aspect_votings, source: :core_aspect, class_name: 'Core::Aspect'
+  has_many :voted_aspects, through: :aspect_votings, source: :aspect, class_name: 'Core::Aspect'
   has_many :post_votings, class_name: 'Discontent::Voting'
   has_many :voted_discontent_posts, through: :post_votings, source: :discontent_post, class_name: 'Discontent::Post'
   has_many :concept_post_votings, class_name: 'Concept::Voting'
@@ -280,7 +280,7 @@ class User < ActiveRecord::Base
   end
 
   def can_vote_for(stage, project)
-    if stage == :collect_info and project.status == 2 and project.get_free_votes_for(self, 'lifetape') > 0
+    if stage == :collect_info and project.status == 2 and project.get_free_votes_for(self, 'collect_info') > 0
       return true
     elsif stage == :discontent and project.status == 6 and !project.get_united_posts_for_vote(self).empty?
       return true

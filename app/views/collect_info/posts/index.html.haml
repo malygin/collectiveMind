@@ -41,23 +41,31 @@
         - @aspects.each_with_index do |asp, index|
           .tab-pane.fade{id: "tab_aspect_#{asp.id}", class: "#{index == 0 ? 'active in' : ''}"}
             .container
-              .row
-                .col-md-8.col-sm-8.min-col-right-padd
-                  %ul.nav.nav-tabs.aspects_tabs{:role => "tablist"}
-                    - asp.knowbase_posts.each_with_index do |post, i|
-                      %li{class: "#{'active' if i == 0}", role: "presentation"}
-                        %a{style: "background:#{asp.color};" ,"aria-controls" => "Статья #{i+1}", "data-toggle" => "tab", :href => "#article_#{index+1}_#{i+1}", :role => "tab"}
-                          = trim_content(post.title, 30)
+              - if asp.knowbase_posts.size > 1
+                .row
+                  .col-md-8.col-sm-8.min-col-right-padd
+                    %ul.nav.nav-tabs.aspects_tabs{:role => "tablist"}
+                      - asp.knowbase_posts.each_with_index do |post, i|
+                        %li{class: "#{'active' if i == 0}", role: "presentation"}
+                          %a{style: "background:#{asp.color};" ,"aria-controls" => "Статья #{i+1}", "data-toggle" => "tab", :href => "#article_#{index+1}_#{i+1}", :role => "tab"}
+                            = trim_content(post.title, 30)
               .row
                 .col-md-8.col-sm-8.min-col-right-padd
                   .top-color-border-block.aspect-main-block{style: "border-top-color: #{asp.color};"}
-                    .tab-content
+                    - if asp.knowbase_posts.size > 1
+                      .tab-content
+                        - asp.knowbase_posts.each_with_index do |post, i|
+                          .tab-pane.fade{id: "article_#{index+1}_#{i+1}", class: "#{'active in' if i == 0}", role: "tabpanel"}
+                            %h6.aspect-main-block-heading
+                              = post.title
+                            %p.aspect-main-block-text
+                              = post.content.html_safe unless post.content.nil?
+                    - else
                       - asp.knowbase_posts.each_with_index do |post, i|
-                        .tab-pane.fade{id: "article_#{index+1}_#{i+1}", class: "#{'active in' if i == 0}", role: "tabpanel"}
-                          %h6.aspect-main-block-heading
-                            = post.title
-                          %p.aspect-main-block-text
-                            = post.content.html_safe unless post.content.nil?
+                        %h6.aspect-main-block-heading
+                          = post.title
+                        %p.aspect-main-block-text
+                          = post.content.html_safe unless post.content.nil?
 
                 .col-md-4.col-sm-4.min-col-left-padd
                   .carousel.slide.questionsCarousel{id: "questionsCarousel_#{asp.id}", "data-ride" => "carousel"}
@@ -148,6 +156,61 @@
         .divider50
         %p
           %button.btn.red.close_magnific.font_white.pull-right Закрыть окно
+
+
+- if current_user.can_vote_for(:collect_info, @project)
+  #vote-1.popup-window.popup-vote.popup-w1030.mfp-hide
+    .popup.popup_rounded
+      .modal_title
+        .row
+          .col-md-12
+            %h4.bold.font_dark_grey.tall_modal_title
+              Голосование по аспектам
+      .vote_progress_cont
+        .vote_progress.light-green{"data-limit" => "33"}
+      .modal_body
+        .container.vote_folders_cont.no_padding_col
+          %ul.nav.vote_2_nav.row{:role => "tablist"}
+            %li.no_padding_col.active.folder_all{:role => "presentation"}
+              %a.vote_folder{"data-toggle" => "tab", :href => "#vote_tab1", :role => "tab"}
+                %i.fa.fa-angle-left.fa_xlg
+                %small.bold Вернуться в общий список
+            %li.col-md-4.no_padding_col{:role => "presentation"}
+              %a.vote_folder{"data-toggle" => "tab", :href => "#vote_tab2", :role => "tab"}
+                .vote_folder_inn.poll-2-1
+                  %span.vote_counter#vote_count2 0
+                  %h5 Важно
+            %li.col-md-4.no_padding_col{:role => "presentation"}
+              %a.vote_folder{"data-toggle" => "tab", :href => "#vote_tab3", :role => "tab"}
+                .vote_folder_inn.poll-2-2
+                  %span.vote_counter#vote_count3 0
+                  %h5 Неважно
+            %li.col-md-4.no_padding_col{:role => "presentation"}
+              %a.vote_folder{"data-toggle" => "tab", :href => "#vote_tab4", :role => "tab"}
+                .vote_folder_inn.poll-2-3
+                  %span.vote_counter#vote_count4 0
+                  %h5 Лишнее
+        .divider25
+        .container
+          .row
+            .divider25
+            .tab-content
+              #vote_tab1.tab-pane.active{:role => "tabpanel"}
+                .container.padding30
+                  .row#cont_vote_tab1
+                    - @aspects.each_with_index do |asp, index|
+                      = render partial: 'vote_aspect', object: asp
+
+              #vote_tab2.tab-pane{:role => "tabpanel"}
+                .container.padding30
+                  .row#cont_vote_tab2
+              #vote_tab3.tab-pane{:role => "tabpanel"}
+                .container.padding30
+                  .row#cont_vote_tab3
+              #vote_tab4.tab-pane{:role => "tabpanel"}
+                .container.padding30
+                  .row#cont_vote_tab4
+            .divider35
 
 
 

@@ -178,4 +178,12 @@ $(document).ready(function () {
         }
     }
 
+
+
+    var main_vote = $('.popup-vote');
+    var popup = main_vote.attr('id');
+    if (popup) {
+        magnificPopupOpen('#'+popup);
+    }
+
 });

@@ -326,14 +326,17 @@ class PostsController < ProjectsController
 
   #write fact of voting in db
   def vote
-    @post_vote = voting_model.find(params[:post_id])
+    @post_vote = voting_model.find(params[:id])
+    @post_vote.final_votings.create(user: current_user, status: params[:status])
 
-    #@todo Денис, нужно правильно задать атрибут через life_tape_voiting_params, чтобы сохранялся current_user
-    @post_vote.final_votings.create(user: current_user)
-
-    stage = "#{self.class.name.deconstantize.downcase}"
-    @number_v = @project.get_free_votes_for(current_user, stage)
-    @table_name = current_model.table_name.sub('_posts', '/posts')
+    # @post_vote = voting_model.find(params[:post_id])
+    #
+    # #@todo Денис, нужно правильно задать атрибут через life_tape_voiting_params, чтобы сохранялся current_user
+    # @post_vote.final_votings.create(user: current_user)
+    #
+    # stage = "#{self.class.name.deconstantize.downcase}"
+    # @number_v = @project.get_free_votes_for(current_user, stage)
+    # @table_name = current_model.table_name.sub('_posts', '/posts')
   end
 
   def new_note

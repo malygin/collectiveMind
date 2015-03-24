@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150322223417) do
+ActiveRecord::Schema.define(version: 20150324125817) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -96,6 +96,7 @@ ActiveRecord::Schema.define(version: 20150322223417) do
     t.integer  "aspect_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer  "status"
   end
 
   add_index "collect_info_votings", ["aspect_id"], name: "index_collect_info_votings_on_aspect_id", using: :btree
@@ -351,6 +352,7 @@ ActiveRecord::Schema.define(version: 20150322223417) do
     t.datetime "created_at",         null: false
     t.datetime "updated_at",         null: false
     t.integer  "discontent_post_id"
+    t.integer  "status"
   end
 
   add_index "concept_votings", ["concept_post_id"], name: "index_concept_votings_on_concept_post_id", using: :btree
@@ -682,6 +684,7 @@ ActiveRecord::Schema.define(version: 20150322223417) do
     t.datetime "created_at",         null: false
     t.datetime "updated_at",         null: false
     t.boolean  "against"
+    t.integer  "status"
   end
 
   add_index "discontent_votings", ["discontent_post_id"], name: "index_discontent_votings_on_discontent_post_id", using: :btree
@@ -880,6 +883,7 @@ ActiveRecord::Schema.define(version: 20150322223417) do
     t.integer  "estimate_post_id"
     t.datetime "created_at",       null: false
     t.datetime "updated_at",       null: false
+    t.integer  "status"
   end
 
   add_index "estimate_votings", ["estimate_post_id"], name: "index_estimate_votings_on_estimate_post_id", using: :btree
@@ -1284,6 +1288,7 @@ ActiveRecord::Schema.define(version: 20150322223417) do
     t.integer  "novation_post_id"
     t.datetime "created_at",       null: false
     t.datetime "updated_at",       null: false
+    t.integer  "status"
   end
 
   create_table "plan_comment_votings", force: :cascade do |t|
@@ -1483,6 +1488,7 @@ ActiveRecord::Schema.define(version: 20150322223417) do
     t.integer  "plan_post_id"
     t.datetime "created_at",   null: false
     t.datetime "updated_at",   null: false
+    t.integer  "status"
   end
 
   create_table "posts", force: :cascade do |t|

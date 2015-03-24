@@ -14,16 +14,16 @@ function PanelVerticalBar(){
         var bar_h = me.attr("data-limit");
         switch(bar_h) {
             case 'max':
-                    me.css('height', '80px');
-                    break;
-                case 'middle':
-                    me.css('height', '45px');
-                    break;
-                case 'min':
-                    me.css('height', '10px');
-                    break;
-                default:
-                    me.css('height', '0px');
+                me.css('height', '80px');
+                break;
+            case 'middle':
+                me.css('height', '45px');
+                break;
+            case 'min':
+                me.css('height', '10px');
+                break;
+            default:
+                me.css('height', '0px');
         }
     });
 };

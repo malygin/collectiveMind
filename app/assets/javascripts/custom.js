@@ -1,6 +1,59 @@
 /* Your JS codes here */
 $(document).ready(function () {
 
+    /* popup fix size */
+    $('.open-popup-vote-link').magnificPopup({
+        type: 'inline',
+        midClick: true
+    });
+    $('.open-popup-vote-link').on('mfpOpen', function(e) {
+        var pane_h = $('.popup-vote .tab-pane.active').innerHeight();
+        $('.popup-vote .tab-pane').each(function(){
+            $(this).css('height', pane_h+'px');
+        });
+    });
+
+    /* vote progress-bar */
+
+    var vote_progr = $('.vote_progress').attr('data-limit');
+    $('.vote_progress').css('width', vote_progr + '%');
+
+    /* vote 1st stage */
+
+    function handleDragStart(e) {
+        this.style.opacity = '0.6';  // this / e.target is the source node.
+    }
+
+    function handleDragOver(e) {
+        if (e.preventDefault) {
+            e.preventDefault(); // Necessary. Allows us to drop.
+        }
+
+        e.dataTransfer.dropEffect = 'move';  // See the section on the DataTransfer object.
+
+        return false;
+    }
+
+    function handleDragEnter(e) {
+        // this / e.target is the current hover target.
+        this.classList.add('over');
+    }
+
+    function handleDragLeave(e) {
+        this.classList.remove('over');  // this / e.target is previous target element.
+    }
+
+    var vote_items = document.querySelectorAll('.votable_item');
+    [].forEach.call(vote_items, function(vote_item) {
+        vote_item.addEventListener('dragstart', handleDragStart, false);
+        vote_item.addEventListener('dragover', handleDragOver, false);
+    });
+    var vote_polls = document.querySelectorAll('.votable_poll');
+    [].forEach.call(vote_polls, function(vote_poll) {
+        vote_poll.addEventListener('dragenter', handleDragEnter, false);
+        vote_poll.addEventListener('dragleave', handleDragLeave, false);
+    });
+
     $('.close_magnific').click(function(){
         var magnificPopup = $.magnificPopup.instance;
         magnificPopup.close();

@@ -1,6 +1,10 @@
 class Discontent::PostsController < PostsController
   before_action :set_aspects, only: [:index]
 
+  def voting_model
+    Discontent::Post
+  end
+
   #@todo Discontent::PostWhen в ресурсы? или просто искать по ним?
   def autocomplete
     field = params[:field]
