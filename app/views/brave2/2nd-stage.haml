@@ -285,6 +285,7 @@
                           %span.popup2
                             1
                             %i.fa.fa-thumbs-down
+          %a.open-popup-vote-link{:href => "#vote-2"} Голосовалка
       / Main Block ends
       #popup-2-1.popup-window.detailed_popup.popup-w985.mfp-hide
         .popup.popup_rounded.popup_color_theme_stage2
@@ -380,27 +381,34 @@
                   .carousel-inner{:role => "listbox"}
                     .item.active
                       .media.comment
+                        %span.comment_badge.font_white.dark-grey
+                          %small важно
                         .media-left
-                          %img.media-object.img50.img-circle{:src => "img/ava-vinnie.jpg"}/
+                          %img.media-object.img35.img-circle{:src => "img/ava-vinnie.jpg"}/
                         .media-body
                           %h5.media-heading.bold Винни-Пух
-                          %span.date.theme_font_color 15:28
+                          %span.date.theme_font_color 12.12.2014 15:28
                         %p.font_grey.bold Ничего не правда. Я люблю гулять, а от вашего дуба тень большая.
                         .post-interfaces-buttons
-                          %button{:type => "button"}
-                            %span.bold
-                              %i.fa.fa-comment.theme_font_color
-                          %button{:type => "button"}
-                            %span.bold
-                              9
-                              %i.fa.fa-thumbs-up.theme_font_color
-                          %button{:type => "button"}
-                            %span.bold
-                              1
-                              %i.fa.fa-thumbs-down.theme_font_color
-                          %button{:type => "button"}
-                            %span.bold
-                              %i.fa.fa-reply.fa-rotate-180.theme_font_color
+                          .row
+                            .col-md-3.text-left
+                              %a.theme_font_color{:href => "#"}
+                                %small 20 ответов
+                            .col-md-5.col-md-offset-4
+                              %button{:type => "button"}
+                                %span.bold
+                                  %i.fa.fa-comment.theme_font_color
+                              %button{:type => "button"}
+                                %span.bold
+                                  9
+                                  %i.fa.fa-thumbs-up.theme_font_color
+                              %button{:type => "button"}
+                                %span.bold
+                                  1
+                                  %i.fa.fa-thumbs-down.theme_font_color
+                              %button{:type => "button"}
+                                %span.bold
+                                  %i.fa.fa-reply.fa-rotate-180.theme_font_color
                       .divider_1_grey
                     .item
                       .media.comment
@@ -536,6 +544,88 @@
                     %li
                       %a.myCarousel-target{"data-slide-to" => "2", "data-target" => "#myCarousel"} 3
             .divider25
+      #vote-2.popup-window.popup-vote.popup-w1030.mfp-hide
+        .popup.popup_rounded
+          .modal_title
+            .row
+              .col-md-12
+                %h4.bold.font_dark_grey.tall_modal_title
+                  Голосование по аспектам
+          .vote_progress_cont
+            .vote_progress.light-green{"data-limit" => "33"}
+          .modal_body
+            .container.vote_folders_cont.no_padding_col
+              %ul.nav.vote_2_nav.row{:role => "tablist"}
+                %li.no_padding_col.active.folder_all{:role => "presentation"}
+                  %a.vote_folder{"data-toggle" => "tab", :href => "#vote_tab1", :role => "tab"}
+                    %i.fa.fa-angle-left.fa_xlg
+                    %small.bold Вернуться в общий список
+                %li.col-md-4.no_padding_col{:role => "presentation"}
+                  %a.vote_folder{"data-toggle" => "tab", :href => "#vote_tab2", :role => "tab"}
+                    .vote_folder_inn.poll-2-1
+                      %span.vote_counter 4
+                      %h5 Важно
+                %li.col-md-4.no_padding_col{:role => "presentation"}
+                  %a.vote_folder{"data-toggle" => "tab", :href => "#vote_tab3", :role => "tab"}
+                    .vote_folder_inn.poll-2-2
+                      %span.vote_counter 1
+                      %h5 Неважно
+                %li.col-md-4.no_padding_col{:role => "presentation"}
+                  %a.vote_folder{"data-toggle" => "tab", :href => "#vote_tab4", :role => "tab"}
+                    .vote_folder_inn.poll-2-3
+                      %span.vote_counter 0
+                      %h5 Лишнее
+            .divider25
+            .container
+              .row
+                .divider25
+                .tab-content
+                  #vote_tab1.tab-pane.active{:role => "tabpanel"}
+                    .container.padding30
+                      .row
+                        .col-sm-4
+                          .vote_item
+                            .heading_cont
+                              %h6 Слишком низкие потолки в офисах
+                            .divider10
+                            .vote_controls.text-center
+                              %button.btn.red.vote_button{:role => "button"}
+                                %i.fa.fa-exclamation
+                              %button.btn.dark-grey.vote_button{:role => "button"}
+                                %i.fa.fa-minus
+                              %button.btn.black.vote_button{:role => "button"}
+                                %i.fa.fa-times
+                            .divider15
+                        .col-sm-4
+                          .vote_item
+                            .heading_cont
+                              %h6 Слишком низкие потолки в офисах
+                            .divider10
+                            .vote_controls.text-center
+                              %button.btn.red.vote_button{:role => "button"}
+                                %i.fa.fa-exclamation
+                              %button.btn.dark-grey.vote_button{:role => "button"}
+                                %i.fa.fa-minus
+                              %button.btn.black.vote_button{:role => "button"}
+                                %i.fa.fa-times
+                            .divider15
+                        .col-sm-4
+                          .vote_item
+                            .heading_cont
+                              %h6 Слишком низкие потолки в офисах
+                            .divider10
+                            .vote_controls.text-center
+                              %button.btn.red.vote_button{:role => "button"}
+                                %i.fa.fa-exclamation
+                              %button.btn.dark-grey.vote_button{:role => "button"}
+                                %i.fa.fa-minus
+                              %button.btn.black.vote_button{:role => "button"}
+                                %i.fa.fa-times
+                            .divider15
+                  #vote_tab2.tab-pane{:role => "tabpanel"}
+                  #vote_tab3.tab-pane{:role => "tabpanel"}
+                  #vote_tab4.tab-pane{:role => "tabpanel"}
+                .divider35
       #popup-explanation-2nd.popup-window.popup-explanation.popup-w710.mfp-hide.welcome_popup
         .popup.popup_rounded
           .modal_badge.back_color_stage2.rounded_2.font_white 2 СТАДИЯ

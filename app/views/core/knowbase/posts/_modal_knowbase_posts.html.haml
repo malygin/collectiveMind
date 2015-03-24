@@ -1,0 +1,48 @@
+#popup-database.popup-window.popup_database.popup-w770.mfp-hide
+  .popup.popup_rounded
+    .row
+      .col-md-12
+        #myCarousel.carousel.base_carousel.slide{"data-ride" => "carousel"}
+          %ul.list-unstyled.list-inline.carousel-indicators.text-center
+            - @aspects.each_with_index do |asp, index|
+              %li.myCarousel-target.active{class: "#{'active' if index == 0}", style: "border-top-color:#{asp.color};", "data-slide-to" => "#{index}", "data-target" => "#myCarousel"}
+                = asp.content
+          .carousel-inner{:role => "listbox"}
+            - @aspects.each_with_index do |asp, index|
+              .item{class: "#{'active' if index == 0}"}
+                .row
+                  .col-md-12
+                    .container
+                      -if asp.knowbase_posts.size > 1
+                        .row
+                          .col-md-12.col-sm-12
+                            %ul.nav.nav-tabs.aspects_tabs{:role => "tablist"}
+                              - asp.knowbase_posts.each_with_index do |post, i|
+                                %li{class: "#{'active' if i == 0}", role: "presentation"}
+                                  %a{style: "background:#{asp.color};" ,"aria-controls" => "Статья #{i+1}", "data-toggle" => "tab", :href => "#article_#{index+1}_#{i+1}", :role => "tab"}
+                                    = trim_content(post.title, 30)
+
+                      .row
+                        .col-md-12.col-sm-12
+                          .aspect-main-block{style: "border-top-color:#{asp.color};"}
+                            -if asp.knowbase_posts.size > 1
+                              .tab-content
+                                - asp.knowbase_posts.each_with_index do |post, i|
+                                  .tab-pane.fade{id: "article_#{index+1}_#{i+1}", class: "#{'active in' if i==0}", role: "tabpanel"}
+                                    %h6.aspect-main-block-heading
+                                      = post.title
+                                    %p.aspect-main-block-text
+                                      = post.content.html_safe unless post.content.nil?
+
+                            -else
+                              - asp.knowbase_posts.each do |post|
+                                %h6.aspect-main-block-heading
+                                  = post.title
+                                %p.aspect-main-block-text
+                                  = post.content.html_safe unless post.content.nil?
+
+
+          %a.myCarousel-control.left{"data-slide" => "prev", :href => "#myCarousel", :role => "button"}
+            %i.fa.fa-3x.fa-caret-left
+          %a.myCarousel-control.right{"data-slide" => "next", :href => "#myCarousel", :role => "button"}
+            %i.fa.fa-3x.fa-caret-right

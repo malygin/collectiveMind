@@ -837,10 +837,120 @@
                 </div>
             </div>
         <!-- Aspects block (UI four) ends -->
+
+        <a href="#vote-1" class="open-popup-vote-link">Голосовалка</a>
+
         </div>
     </div>
     <!-- Main Block ends -->
 
+    <div id="vote-1" class="popup-window popup-vote popup-w835 mfp-hide">
+        <div class="popup popup_rounded">
+            <div class="modal_title">
+                <div class="row">
+                    <div class="col-md-12">
+                        <h4 class=" bold font_dark_grey text-center tall_modal_title">
+                            Голосование по аспектам
+                        </h4>
+
+                    </div>
+                </div>
+            </div>
+            <div class="vote_progress light-green" data-limit="15"></div>
+            <div class="modal_body">
+                <div class="container">
+                    <div class="row">
+                        <ul class="nav vote_1_nav" role="tablist">
+                            <li role="presentation" class="col-md-3 no_padding_col active">
+                                <a class="vote_poll" href="#vote_tab1" role="tab" data-toggle="tab">
+                                    <div class="poll_inn poll1">
+                                        <span class="vote_counter">12</span>
+                                        <h5>Все</h5>
+                                    </div>
+                                </a>
+                            </li>
+                            <li role="presentation" class="col-md-3 no_padding_col">
+                                <a class="vote_poll votable_poll" href="#vote_tab2" role="tab" data-toggle="tab">
+                                    <div class="poll_inn poll2">
+                                        <span class="vote_counter">4</span>
+                                        <h5>Важно</h5>
+                                    </div>
+                                </a>
+                            </li>
+                            <li class="col-md-3 no_padding_col">
+                                <a class="vote_poll votable_poll" href="#vote_tab3" role="tab" data-toggle="tab">
+                                    <div class="poll_inn poll3">
+                                        <span class="vote_counter">1</span>
+                                        <h5>Неважно</h5>
+                                    </div>
+                                </a>
+                            </li>
+                            <li class="col-md-3 no_padding_col">
+                                <a class="vote_poll votable_poll" href="#vote_tab4" role="tab" data-toggle="tab">
+                                    <div class="poll_inn poll4">
+                                        <span class="vote_counter">0</span>
+                                        <h5>Лишнее</h5>
+                                    </div>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="divider25"></div>
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-6 col-md-offset-3 text-center">
+                            <p class="text-center"><small>Выберите проекты, которые вам понравились, и перетащите их в изображение руки или нажмите на кнопку "проголосовать"</small></p>
+                            <div class="divider25"></div>
+                            <div class="tab-content">
+                                <div role="tabpanel" class="tab-pane active" id="vote_tab1">
+                                    <div class="vote_block color-theme-1 votable_item" draggable="true">
+                                        <span>Мед и пчелы</span>
+                                    </div>
+                                    <div class="vote_block color-theme-2 votable_item" draggable="true">
+                                        <span>Мед и четвероногие</span>
+                                    </div>
+                                    <div class="vote_block color-theme-3 votable_item" draggable="true">
+                                        <span>Взаимоотношения четвероногих и пчел</span>
+                                    </div>
+                                    <div class="vote_block color-theme-4 votable_item" draggable="true">
+                                        <span>Пчелы и цветочные поляны</span>
+                                    </div>
+                                </div>
+                                <div role="tabpanel" class="tab-pane" id="vote_tab2">
+                                    <div class="vote_block color-theme-1 votable_item" draggable="true">
+                                        <span>Мед и пчелы</span>
+                                    </div>
+                                    <div class="vote_block color-theme-2 votable_item" draggable="true">
+                                        <span>Мед и четвероногие</span>
+                                    </div>
+                                </div>
+                                <div role="tabpanel" class="tab-pane" id="vote_tab3">
+                                    <div class="vote_block color-theme-1 votable_item" draggable="true">
+                                        <span>Мед и пчелы</span>
+                                    </div>
+                                    <div class="vote_block color-theme-4 votable_item" draggable="true">
+                                        <span>Пчелы и цветочные поляны</span>
+                                    </div>
+                                </div>
+                                <div role="tabpanel" class="tab-pane" id="vote_tab4">
+                                    <div class="vote_block color-theme-3 votable_item" draggable="true">
+                                        <span>Взаимоотношения четвероногих и пчел</span>
+                                    </div>
+                                    <div class="vote_block color-theme-4 votable_item" draggable="true">
+                                        <span>Пчелы и цветочные поляны</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="divider25"></div>
+                            <button class="btn btn-danger">Завершить</button>
+                            <div class="divider35"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
     <div id="popup-explanation-1st" class="popup-window popup-explanation popup-w710 mfp-hide welcome_popup">
         <div class="popup popup_rounded">
             <div class="modal_badge back_color_stage1 rounded_2 font_white">1 СТАДИЯ</div>
@@ -863,7 +973,6 @@
             <button class="btn red close_magnific">Начать работу</button>
         </div>
     </div>
-
 
     <div id="popup-news" class="popup-window popup-w985 detailed_popup mfp-hide">
         <div class="popup popup_rounded">
@@ -1546,51 +1655,50 @@
         <div class="popup popup_rounded">
             <div class="row">
                 <div class="col-md-12">
-                    <div id="myCarousel" class="carousel slide" data-ride="carousel">
+                    <div id="myCarousel" class="carousel base_carousel slide" data-ride="carousel">
                         <!-- Indicators -->
-                        <ul class="list-unstyled list-inline list_win text-center">
-                            <li data-target="#myCarousel" data-slide-to="0" class="myCarousel-target active">
-                                Стадия 1
+                        <ul class="list-unstyled list-inline carousel-indicators text-center">
+                            <li data-target="#myCarousel" data-slide-to="0" class="color-theme-1 myCarousel-target active">
+                                Аспект 1
                             </li>
-                            <li data-target="#myCarousel" data-slide-to="1" class="myCarousel-target">
-                                Стадия 2
+                            <li data-target="#myCarousel" data-slide-to="1" class="color-theme-2 myCarousel-target">
+                                Аспект 2
                             </li>
-                            <li data-target="#myCarousel" data-slide-to="2" class="myCarousel-target">
-                                Стадия 3
+                            <li data-target="#myCarousel" data-slide-to="2" class="color-theme-3 myCarousel-target">
+                                Аспект 3
                             </li>
-                            <li data-target="#myCarousel" data-slide-to="3" class="myCarousel-target">
-                                Стадия 4
+                            <li data-target="#myCarousel" data-slide-to="3" class="color-theme-4 myCarousel-target">
+                                Аспект 4
                             </li>
-                            <li data-target="#myCarousel" data-slide-to="4" class="myCarousel-target">
-                                Стадия 5
+                            <li data-target="#myCarousel" data-slide-to="4" class="color-theme-5 myCarousel-target">
+                                Аспект 5
                             </li>
-                            <li data-target="#myCarousel" data-slide-to="5" class="myCarousel-target">
-                                Стадия 6
+                            <li data-target="#myCarousel" data-slide-to="5" class="color-theme-6 myCarousel-target">
+                                Аспект 6
                             </li>
-                            <li data-target="#myCarousel" data-slide-to="6" class="myCarousel-target">
-                                Стадия 7
+                            <li data-target="#myCarousel" data-slide-to="6" class="color-theme-7 myCarousel-target">
+                                Аспект 7
                             </li>
-                            <li data-target="#myCarousel" data-slide-to="7" class="myCarousel-target">
-                                Стадия 8
+                            <li data-target="#myCarousel" data-slide-to="7" class="color-theme-8 myCarousel-target">
+                                Аспект 8
                             </li>
-                            <li data-target="#myCarousel" data-slide-to="8" class="myCarousel-target">
-                                Стадия 9
+                            <li data-target="#myCarousel" data-slide-to="8" class="color-theme-9 myCarousel-target">
+                                Аспект 9
                             </li>
                         </ul>
 
                         <!-- Wrapper for slides -->
                         <div class="carousel-inner" role="listbox">
-
-                            <div class="item active">
+                            <div class="item active color-theme-1">
                                 <div class="row">
                                     <div class="col-md-12">
                                         <div class="container">
                                             <div class="row">
                                                 <div class="col-md-12 col-sm-12">
                                                     <ul class="nav nav-tabs aspects_tabs" role="tablist">
-                                                        <li role="presentation" class="active"><a href="#article1" aria-controls="Статья 1" role="tab" data-toggle="tab">Статья 1</a></li>
-                                                        <li role="presentation"><a href="#article2" aria-controls="Статья 2" role="tab" data-toggle="tab">Статья 2</a></li>
-                                                        <li role="presentation"><a href="#article3" aria-controls="Статья 3" role="tab" data-toggle="tab">Статья 3</a></li>
+                                                        <li role="presentation" class="active"><a href="#article1-1" aria-controls="Статья 1" role="tab" data-toggle="tab">Статья 1</a></li>
+                                                        <li role="presentation"><a href="#article1-2" aria-controls="Статья 2" role="tab" data-toggle="tab">Статья 2</a></li>
+                                                        <li role="presentation"><a href="#article1-3" aria-controls="Статья 3" role="tab" data-toggle="tab">Статья 3</a></li>
                                                     </ul>
                                                 </div>
                                             </div>
@@ -1599,20 +1707,20 @@
                                                 <div class="col-md-12 col-sm-12">
                                                     <div class="aspect-main-block">
                                                         <div class="tab-content">
-                                                            <div role="tabpanel" class="tab-pane active fade in" id="article1">
+                                                            <div role="tabpanel" class="tab-pane active fade in" id="article1-1">
                                                                 <h6 class="aspect-main-block-heading">Ситуация с пчелами</h6>
                                                                 <p class="aspect-main-block-text">Пчелы недовольны тем, что на их мед
                                                                     постоянно покушаются Винни-Пух и его друзья. Желая разрешить
                                                                     конфликт мирным способом, они обратились к мудрой Сове.</p>
                                                                 <img src="img/aspect-pic1.jpg">
                                                             </div>
-                                                            <div role="tabpanel" class="tab-pane fade" id="article2">
+                                                            <div role="tabpanel" class="tab-pane fade" id="article1-2">
                                                                 <p class="aspect-main-block-text">Пчелы недовольны тем, что на их мед
                                                                     постоянно покушаются Винни-Пух и его друзья. Желая разрешить
                                                                     конфликт мирным способом, они обратились к мудрой Сове.</p>
                                                                 <img src="img/aspect-pic1.jpg">
                                                             </div>
-                                                            <div role="tabpanel" class="tab-pane fade" id="article3">
+                                                            <div role="tabpanel" class="tab-pane fade" id="article1-3">
                                                                 <img src="img/aspect-pic1.jpg">
                                                             </div>
                                                         </div>
@@ -1624,7 +1732,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="item">
+                            <div class="item color-theme-2">
                                 <div class="row">
                                     <div class="col-md-12 col-sm-12">
                                             <div class="aspect-main-block">
@@ -1642,7 +1750,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="item">
+                            <div class="item color-theme-3">
                                 <div class="row">
                                     <div class="col-md-12 col-sm-12">
                                         <div class="aspect-main-block">
@@ -1659,19 +1767,61 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="item">
+                            <div class="item color-theme-4">
+                                <div class="row">
+                                    <div class="col-md-12 col-sm-12">
+                                        <div class="aspect-main-block">
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
-                            <div class="item">
+                            <div class="item color-theme-5">
+                                <div class="row">
+                                    <div class="col-md-12 col-sm-12">
+                                        <div class="aspect-main-block">
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
-                            <div class="item">
+                            <div class="item color-theme-6">
+                                <div class="row">
+                                    <div class="col-md-12 col-sm-12">
+                                        <div class="aspect-main-block">
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
-                            <div class="item">
+                            <div class="item color-theme-7">
+                                <div class="row">
+                                    <div class="col-md-12 col-sm-12">
+                                        <div class="aspect-main-block">
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
-                            <div class="item">
+                            <div class="item color-theme-8">
+                                <div class="row">
+                                    <div class="col-md-12 col-sm-12">
+                                        <div class="aspect-main-block">
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
-                            <div class="item">
+                            <div class="item color-theme-9">
+                                <div class="row">
+                                    <div class="col-md-12 col-sm-12">
+                                        <div class="aspect-main-block">
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
+                        <a class="myCarousel-control left" href="#myCarousel" role="button" data-slide="prev">
+                            <i class="fa fa-3x fa-caret-left"></i>
+                        </a>
+                        <a class="myCarousel-control right" href="#myCarousel" role="button" data-slide="next">
+                            <i class="fa fa-3x fa-caret-right"></i>
+                        </a>
                     </div>
                 </div>
             </div>

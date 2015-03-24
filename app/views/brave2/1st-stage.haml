@@ -535,7 +535,75 @@
                           .aspect-questions-block
                         / Questions block ends
           / Aspects block (UI four) ends
+          %a.open-popup-vote-link{:href => "#vote-1"} Голосовалка
       / Main Block ends
+      #vote-1.popup-window.popup-vote.popup-w835.mfp-hide
+        .popup.popup_rounded
+          .modal_title
+            .row
+              .col-md-12
+                %h4.bold.font_dark_grey.text-center.tall_modal_title
+                  Голосование по аспектам
+          .vote_progress.light-green{"data-limit" => "15"}
+          .modal_body
+            .container
+              .row
+                %ul.nav.vote_1_nav{:role => "tablist"}
+                  %li.col-md-3.no_padding_col.active{:role => "presentation"}
+                    %a.vote_poll{"data-toggle" => "tab", :href => "#vote_tab1", :role => "tab"}
+                      .poll_inn.poll1
+                        %span.vote_counter 12
+                        %h5 Все
+                  %li.col-md-3.no_padding_col{:role => "presentation"}
+                    %a.vote_poll.votable_poll{"data-toggle" => "tab", :href => "#vote_tab2", :role => "tab"}
+                      .poll_inn.poll2
+                        %span.vote_counter 4
+                        %h5 Важно
+                  %li.col-md-3.no_padding_col
+                    %a.vote_poll.votable_poll{"data-toggle" => "tab", :href => "#vote_tab3", :role => "tab"}
+                      .poll_inn.poll3
+                        %span.vote_counter 1
+                        %h5 Неважно
+                  %li.col-md-3.no_padding_col
+                    %a.vote_poll.votable_poll{"data-toggle" => "tab", :href => "#vote_tab4", :role => "tab"}
+                      .poll_inn.poll4
+                        %span.vote_counter 0
+                        %h5 Лишнее
+            .divider25
+            .container
+              .row
+                .col-md-6.col-md-offset-3.text-center
+                  %p.text-center
+                    %small Выберите проекты, которые вам понравились, и перетащите их в изображение руки или нажмите на кнопку "проголосовать"
+                  .divider25
+                  .tab-content
+                    #vote_tab1.tab-pane.active{:role => "tabpanel"}
+                      .vote_block.color-theme-1.votable_item{:draggable => "true"}
+                        %span Мед и пчелы
+                      .vote_block.color-theme-2.votable_item{:draggable => "true"}
+                        %span Мед и четвероногие
+                      .vote_block.color-theme-3.votable_item{:draggable => "true"}
+                        %span Взаимоотношения четвероногих и пчел
+                      .vote_block.color-theme-4.votable_item{:draggable => "true"}
+                        %span Пчелы и цветочные поляны
+                    #vote_tab2.tab-pane{:role => "tabpanel"}
+                      .vote_block.color-theme-1.votable_item{:draggable => "true"}
+                        %span Мед и пчелы
+                      .vote_block.color-theme-2.votable_item{:draggable => "true"}
+                        %span Мед и четвероногие
+                    #vote_tab3.tab-pane{:role => "tabpanel"}
+                      .vote_block.color-theme-1.votable_item{:draggable => "true"}
+                        %span Мед и пчелы
+                      .vote_block.color-theme-4.votable_item{:draggable => "true"}
+                        %span Пчелы и цветочные поляны
+                    #vote_tab4.tab-pane{:role => "tabpanel"}
+                      .vote_block.color-theme-3.votable_item{:draggable => "true"}
+                        %span Взаимоотношения четвероногих и пчел
+                      .vote_block.color-theme-4.votable_item{:draggable => "true"}
+                        %span Пчелы и цветочные поляны
+                  .divider25
+                  %button.btn.btn-danger Завершить
+                  .divider35
       #popup-explanation-1st.popup-window.popup-explanation.popup-w710.mfp-hide.welcome_popup
         .popup.popup_rounded
           .modal_badge.back_color_stage1.rounded_2.font_white 1 СТАДИЯ
@@ -1043,30 +1111,30 @@
         .popup.popup_rounded
           .row
             .col-md-12
-              #myCarousel.carousel.slide{"data-ride" => "carousel"}
+              #myCarousel.carousel.base_carousel.slide{"data-ride" => "carousel"}
                 / Indicators
-                %ul.list-unstyled.list-inline.list_win.text-center
-                  %li.myCarousel-target.active{"data-slide-to" => "0", "data-target" => "#myCarousel"}
-                    Стадия 1
-                  %li.myCarousel-target{"data-slide-to" => "1", "data-target" => "#myCarousel"}
-                    Стадия 2
-                  %li.myCarousel-target{"data-slide-to" => "2", "data-target" => "#myCarousel"}
-                    Стадия 3
-                  %li.myCarousel-target{"data-slide-to" => "3", "data-target" => "#myCarousel"}
-                    Стадия 4
-                  %li.myCarousel-target{"data-slide-to" => "4", "data-target" => "#myCarousel"}
-                    Стадия 5
-                  %li.myCarousel-target{"data-slide-to" => "5", "data-target" => "#myCarousel"}
-                    Стадия 6
-                  %li.myCarousel-target{"data-slide-to" => "6", "data-target" => "#myCarousel"}
-                    Стадия 7
-                  %li.myCarousel-target{"data-slide-to" => "7", "data-target" => "#myCarousel"}
-                    Стадия 8
-                  %li.myCarousel-target{"data-slide-to" => "8", "data-target" => "#myCarousel"}
-                    Стадия 9
+                %ul.list-unstyled.list-inline.carousel-indicators.text-center
+                  %li.color-theme-1.myCarousel-target.active{"data-slide-to" => "0", "data-target" => "#myCarousel"}
+                    Аспект 1
+                  %li.color-theme-2.myCarousel-target{"data-slide-to" => "1", "data-target" => "#myCarousel"}
+                    Аспект 2
+                  %li.color-theme-3.myCarousel-target{"data-slide-to" => "2", "data-target" => "#myCarousel"}
+                    Аспект 3
+                  %li.color-theme-4.myCarousel-target{"data-slide-to" => "3", "data-target" => "#myCarousel"}
+                    Аспект 4
+                  %li.color-theme-5.myCarousel-target{"data-slide-to" => "4", "data-target" => "#myCarousel"}
+                    Аспект 5
+                  %li.color-theme-6.myCarousel-target{"data-slide-to" => "5", "data-target" => "#myCarousel"}
+                    Аспект 6
+                  %li.color-theme-7.myCarousel-target{"data-slide-to" => "6", "data-target" => "#myCarousel"}
+                    Аспект 7
+                  %li.color-theme-8.myCarousel-target{"data-slide-to" => "7", "data-target" => "#myCarousel"}
+                    Аспект 8
+                  %li.color-theme-9.myCarousel-target{"data-slide-to" => "8", "data-target" => "#myCarousel"}
+                    Аспект 9
                 / Wrapper for slides
                 .carousel-inner{:role => "listbox"}
-                  .item.active
+                  .item.active.color-theme-1
                     .row
                       .col-md-12
                         .container
@@ -1074,31 +1142,31 @@
                             .col-md-12.col-sm-12
                               %ul.nav.nav-tabs.aspects_tabs{:role => "tablist"}
                                 %li.active{:role => "presentation"}
-                                  %a{"aria-controls" => "Статья 1", "data-toggle" => "tab", :href => "#article1", :role => "tab"} Статья 1
+                                  %a{"aria-controls" => "Статья 1", "data-toggle" => "tab", :href => "#article1-1", :role => "tab"} Статья 1
                                 %li{:role => "presentation"}
-                                  %a{"aria-controls" => "Статья 2", "data-toggle" => "tab", :href => "#article2", :role => "tab"} Статья 2
+                                  %a{"aria-controls" => "Статья 2", "data-toggle" => "tab", :href => "#article1-2", :role => "tab"} Статья 2
                                 %li{:role => "presentation"}
-                                  %a{"aria-controls" => "Статья 3", "data-toggle" => "tab", :href => "#article3", :role => "tab"} Статья 3
+                                  %a{"aria-controls" => "Статья 3", "data-toggle" => "tab", :href => "#article1-3", :role => "tab"} Статья 3
                           .row
                             .col-md-12.col-sm-12
                               .aspect-main-block
                                 .tab-content
-                                  #article1.tab-pane.active.fade.in{:role => "tabpanel"}
+                                  #article1-1.tab-pane.active.fade.in{:role => "tabpanel"}
                                     %h6.aspect-main-block-heading Ситуация с пчелами
                                     %p.aspect-main-block-text
                                       Пчелы недовольны тем, что на их мед
                                       постоянно покушаются Винни-Пух и его друзья. Желая разрешить
                                       конфликт мирным способом, они обратились к мудрой Сове.
                                     %img{:src => "img/aspect-pic1.jpg"}/
-                                  #article2.tab-pane.fade{:role => "tabpanel"}
+                                  #article1-2.tab-pane.fade{:role => "tabpanel"}
                                     %p.aspect-main-block-text
                                       Пчелы недовольны тем, что на их мед
                                       постоянно покушаются Винни-Пух и его друзья. Желая разрешить
                                       конфликт мирным способом, они обратились к мудрой Сове.
                                     %img{:src => "img/aspect-pic1.jpg"}/
-                                  #article3.tab-pane.fade{:role => "tabpanel"}
+                                  #article1-3.tab-pane.fade{:role => "tabpanel"}
                                     %img{:src => "img/aspect-pic1.jpg"}/
-                  .item
+                  .item.color-theme-2
                     .row
                       .col-md-12.col-sm-12
                         .aspect-main-block
@@ -1113,7 +1181,7 @@
                             Всего в истории участвовало трое четвероногих: сам Винни-Пух и его
                             друзья Пятачок и Кролик.
                           %img{:src => "img/aspect-pic2.jpg"}/
-                  .item
+                  .item.color-theme-3
                     .row
                       .col-md-12.col-sm-12
                         .aspect-main-block
@@ -1127,12 +1195,34 @@
                             собирать мед,
                             постоянно беспокоясь, что их ограбят.
                           %img{:src => "img/aspect-pic3.jpg"}/
-                  .item
-                  .item
-                  .item
-                  .item
-                  .item
-                  .item
+                  .item.color-theme-4
+                    .row
+                      .col-md-12.col-sm-12
+                        .aspect-main-block
+                  .item.color-theme-5
+                    .row
+                      .col-md-12.col-sm-12
+                        .aspect-main-block
+                  .item.color-theme-6
+                    .row
+                      .col-md-12.col-sm-12
+                        .aspect-main-block
+                  .item.color-theme-7
+                    .row
+                      .col-md-12.col-sm-12
+                        .aspect-main-block
+                  .item.color-theme-8
+                    .row
+                      .col-md-12.col-sm-12
+                        .aspect-main-block
+                  .item.color-theme-9
+                    .row
+                      .col-md-12.col-sm-12
+                        .aspect-main-block
+                %a.myCarousel-control.left{"data-slide" => "prev", :href => "#myCarousel", :role => "button"}
+                  %i.fa.fa-3x.fa-caret-left
+                %a.myCarousel-control.right{"data-slide" => "next", :href => "#myCarousel", :role => "button"}
+                  %i.fa.fa-3x.fa-caret-right
     / Outer Ends
     / Javascript files
     / jQuery

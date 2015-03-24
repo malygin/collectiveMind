@@ -408,6 +408,8 @@
                     </div>
                 </div>
 
+                <a href="#vote-2" class="open-popup-vote-link">Голосовалка</a>
+
             </div>
         </div>
         <!-- Main Block ends -->
@@ -542,20 +544,28 @@
 
                                     <div class="item active">
                                         <div class="media comment">
+                                            <span class="comment_badge font_white dark-grey"><small>важно</small></span>
                                             <div class="media-left">
-                                                <img class="media-object img50 img-circle" src="img/ava-vinnie.jpg">
+                                                <img class="media-object img35 img-circle" src="img/ava-vinnie.jpg">
                                             </div>
                                             <div class="media-body">
                                                 <h5 class="media-heading bold">Винни-Пух</h5>
-                                                <span class="date theme_font_color">15:28</span>
+                                                <span class="date theme_font_color">12.12.2014 15:28</span>
                                             </div>
                                             <p class="font_grey bold">Ничего не правда. Я люблю гулять, а от вашего дуба тень большая.</p>
 
                                             <div class="post-interfaces-buttons">
-                                                <button type="button"><span class="bold"><i class="fa fa-comment theme_font_color"></i></span></button>
-                                                <button type="button"><span class="bold">9 <i class="fa fa-thumbs-up theme_font_color"></i></span></button>
-                                                <button type="button"><span class="bold">1 <i class="fa fa-thumbs-down theme_font_color"></i></span></button>
-                                                <button type="button"><span class="bold"><i class="fa fa-reply fa-rotate-180 theme_font_color"></i></span></button>
+                                                <div class="row">
+                                                    <div class="col-md-3 text-left">
+                                                        <a href="#" class="theme_font_color"><small>20 ответов</small></a>
+                                                    </div>
+                                                    <div class="col-md-5 col-md-offset-4">
+                                                        <button type="button"><span class="bold"><i class="fa fa-comment theme_font_color"></i></span></button>
+                                                        <button type="button"><span class="bold">9 <i class="fa fa-thumbs-up theme_font_color"></i></span></button>
+                                                        <button type="button"><span class="bold">1 <i class="fa fa-thumbs-down theme_font_color"></i></span></button>
+                                                        <button type="button"><span class="bold"><i class="fa fa-reply fa-rotate-180 theme_font_color"></i></span></button>
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
                                         <div class="divider_1_grey"></div>
@@ -677,6 +687,124 @@
                         </div>
                     </div>
                     <div class="divider25"></div>
+                </div>
+            </div>
+        </div>
+
+        <div id="vote-2" class="popup-window popup-vote popup-w1030 mfp-hide">
+            <div class="popup popup_rounded">
+                <div class="modal_title">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <h4 class=" bold font_dark_grey tall_modal_title">
+                                Голосование по аспектам
+                            </h4>
+                        </div>
+                    </div>
+                </div>
+                <div class="vote_progress_cont">
+                    <div class="vote_progress light-green" data-limit="33"></div>
+                </div>
+                <div class="modal_body">
+                    <div class="container vote_folders_cont no_padding_col">
+                        <ul class="nav vote_2_nav row" role="tablist">
+                            <li role="presentation" class="no_padding_col active folder_all">
+                                <a class="vote_folder" href="#vote_tab1" role="tab" data-toggle="tab">
+                                    <i class="fa fa-angle-left fa_xlg"></i><small class="bold">Вернуться в общий список</small>
+                                </a>
+                            </li>
+                            <li role="presentation" class="col-md-4 no_padding_col">
+                                <a class="vote_folder" href="#vote_tab2" role="tab" data-toggle="tab">
+                                    <div class="vote_folder_inn poll-2-1">
+                                        <span class="vote_counter">4</span>
+                                        <h5>Важно</h5>
+                                    </div>
+                                </a>
+                            </li>
+                            <li role="presentation" class="col-md-4 no_padding_col">
+                                <a class="vote_folder" href="#vote_tab3" role="tab" data-toggle="tab">
+                                    <div class="vote_folder_inn poll-2-2">
+                                        <span class="vote_counter">1</span>
+                                        <h5>Неважно</h5>
+                                    </div>
+                                </a>
+                            </li>
+                            <li role="presentation" class="col-md-4 no_padding_col">
+                                <a class="vote_folder" href="#vote_tab4" role="tab" data-toggle="tab">
+                                    <div class="vote_folder_inn poll-2-3">
+                                        <span class="vote_counter">0</span>
+                                        <h5>Лишнее</h5>
+                                    </div>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="divider25"></div>
+                    <div class="container">
+                        <div class="row">
+                            <div class="divider25"></div>
+                            <div class="tab-content">
+                                <div role="tabpanel" class="tab-pane active" id="vote_tab1">
+                                    <div class="container padding30">
+                                        <div class="row">
+                                            <div class="col-sm-4">
+                                                <div class="vote_item">
+                                                    <div class="heading_cont">
+                                                        <h6>Слишком низкие потолки в офисах</h6>
+                                                    </div>
+                                                    <div class="divider10"></div>
+                                                    <div class="vote_controls text-center">
+                                                        <button class="btn red vote_button" role="button"><i class="fa fa-exclamation"></i></button>
+                                                        <button class="btn dark-grey vote_button" role="button"><i class="fa fa-minus"></i></button>
+                                                        <button class="btn black vote_button" role="button"><i class="fa fa-times"></i></button>
+                                                    </div>
+                                                    <div class="divider15"></div>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-4">
+                                                <div class="vote_item">
+                                                    <div class="heading_cont">
+                                                        <h6>Слишком низкие потолки в офисах</h6>
+                                                    </div>
+                                                    <div class="divider10"></div>
+                                                    <div class="vote_controls text-center">
+                                                        <button class="btn red vote_button" role="button"><i class="fa fa-exclamation"></i></button>
+                                                        <button class="btn dark-grey vote_button" role="button"><i class="fa fa-minus"></i></button>
+                                                        <button class="btn black vote_button" role="button"><i class="fa fa-times"></i></button>
+                                                    </div>
+                                                    <div class="divider15"></div>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-4">
+                                                <div class="vote_item">
+                                                    <div class="heading_cont">
+                                                        <h6>Слишком низкие потолки в офисах</h6>
+                                                    </div>
+                                                    <div class="divider10"></div>
+                                                    <div class="vote_controls text-center">
+                                                        <button class="btn red vote_button" role="button"><i class="fa fa-exclamation"></i></button>
+                                                        <button class="btn dark-grey vote_button" role="button"><i class="fa fa-minus"></i></button>
+                                                        <button class="btn black vote_button" role="button"><i class="fa fa-times"></i></button>
+                                                    </div>
+                                                    <div class="divider15"></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div role="tabpanel" class="tab-pane" id="vote_tab2">
+
+                                </div>
+                                <div role="tabpanel" class="tab-pane" id="vote_tab3">
+
+                                </div>
+                                <div role="tabpanel" class="tab-pane" id="vote_tab4">
+
+                                </div>
+                            </div>
+                            <div class="divider35"></div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

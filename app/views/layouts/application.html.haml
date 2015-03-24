@@ -37,7 +37,7 @@
                 = link_to '-> стадия', next_stage_core_project_path(@project), method: :put, id: "up_to_#{@project.next_status}"
 
           .navbar-right.text-right.user_block.font_grey
-            = link_to "", knowbase_posts_path(@project), id: "tooltip1_5", class: "tooltip1_5 book_icon", "data-placement" => "bottom", "data-toggle" => "tooltip", "data-trigger" => "none", :title => "Открыть базу знаний"
+            = link_to "", knowbase_posts_path(@project), remote: true, id: "tooltip1_5", class: "tooltip1_5 book_icon", "data-placement" => "bottom", "data-toggle" => "tooltip", "data-trigger" => "none", :title => "Открыть базу знаний"
             %span.auth-divider
               |
             %a.font_lighter_grey.bold{:href => "#"}
@@ -101,6 +101,7 @@
       .main-block
         .container
           = yield
+    #render_knowbase_posts
     = render 'shared/moderator_chat'
 
     /
