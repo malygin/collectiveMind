@@ -837,3 +837,5 @@ ru:
   news:
     title: "Анонс"
     body: "Полный текст"
+  technique_project:
+    success_update: "Обновлено успешно"

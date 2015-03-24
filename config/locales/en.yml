@@ -794,3 +794,5 @@ en:
   news:
     title: "Announce"
     body: "Full text"
+  technique_project:
+    success_update: "Success update technique"

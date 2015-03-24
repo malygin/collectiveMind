@@ -205,8 +205,8 @@ ActiveRecord::Schema.define(version: 20150324125817) do
     t.integer  "post_id"
     t.integer  "discontent_post_id"
     t.integer  "complite"
-    t.datetime "created_at",         null: false
-    t.datetime "updated_at",         null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "concept_post_discontents", force: :cascade do |t|
@@ -362,14 +362,14 @@ ActiveRecord::Schema.define(version: 20150324125817) do
     t.text     "content"
     t.integer  "user_id"
     t.integer  "position"
-    t.datetime "created_at",                             null: false
-    t.datetime "updated_at",                             null: false
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
     t.integer  "project_id"
     t.text     "short_desc"
-    t.integer  "status",                     default: 0
+    t.integer  "status",         default: 0
     t.integer  "core_aspect_id"
-    t.string   "color",          limit: 255
-    t.string   "short_name",     limit: 255
+    t.string   "color"
+    t.string   "short_name"
   end
 
   add_index "core_aspects", ["project_id"], name: "index_core_aspects_on_project_id", using: :btree
@@ -464,10 +464,10 @@ ActiveRecord::Schema.define(version: 20150324125817) do
   create_table "core_project_users", force: :cascade do |t|
     t.integer  "project_id"
     t.integer  "user_id"
-    t.datetime "created_at",                 null: false
-    t.datetime "updated_at",                 null: false
+    t.datetime "created_at",                       null: false
+    t.datetime "updated_at",                       null: false
     t.boolean  "ready_to_concept", default: false
-    t.boolean  "owner",      default: false
+    t.boolean  "owner",            default: false
     t.integer  "type_user"
   end
 
@@ -919,15 +919,15 @@ ActiveRecord::Schema.define(version: 20150324125817) do
   add_index "expert_news_post_votings", ["post_id"], name: "index_expert_news_post_votings_on_post_id", using: :btree
 
   create_table "expert_news_posts", force: :cascade do |t|
-    t.string   "title",        limit: 255
+    t.text     "title"
     t.text     "anons"
     t.text     "content"
     t.integer  "user_id"
-    t.datetime "created_at",                               null: false
-    t.datetime "updated_at",                               null: false
+    t.datetime "created_at",                   null: false
+    t.datetime "updated_at",                   null: false
     t.integer  "project_id"
-    t.integer  "number_views",             default: 0
-    t.boolean  "censored",                 default: false
+    t.integer  "number_views", default: 0
+    t.boolean  "censored",     default: false
   end
 
   add_index "expert_news_posts", ["created_at"], name: "index_expert_news_posts_on_created_at", using: :btree
@@ -1097,7 +1097,7 @@ ActiveRecord::Schema.define(version: 20150324125817) do
   create_table "journals", force: :cascade do |t|
     t.integer  "user_id"
     t.string   "type_event",    limit: 255
-    t.string   "body",          limit: 255
+    t.text     "body"
     t.datetime "created_at",                                null: false
     t.datetime "updated_at",                                null: false
     t.integer  "project_id"
@@ -1211,13 +1211,16 @@ ActiveRecord::Schema.define(version: 20150324125817) do
   add_index "moderator_messages", ["user_id"], name: "index_moderator_messages_on_user_id", using: :btree
 
   create_table "news", force: :cascade do |t|
-    t.string   "title"
+    t.text     "title"
     t.text     "body"
     t.integer  "project_id"
     t.integer  "user_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  add_index "news", ["project_id"], name: "index_news_on_project_id", using: :btree
+  add_index "news", ["user_id"], name: "index_news_on_user_id", using: :btree
 
   create_table "novation_comment_votings", force: :cascade do |t|
     t.integer  "user_id"
@@ -1560,17 +1563,47 @@ ActiveRecord::Schema.define(version: 20150324125817) do
   add_index "questions_users", ["user_id"], name: "index_questions_users_on_user_id", using: :btree
 
   create_table "roles", force: :cascade do |t|
-    t.string   "name",       limit: 255
+    t.string   "name"
     t.integer  "code"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
   create_table "seed_migration_data_migrations", force: :cascade do |t|
-    t.string   "version",     limit: 255
+    t.string   "version"
     t.integer  "runtime"
     t.datetime "migrated_on"
   end
+
+  create_table "technique_list_projects", force: :cascade do |t|
+    t.integer  "core_project_id"
+    t.integer  "technique_list_id"
+    t.datetime "created_at",        null: false
+    t.datetime "updated_at",        null: false
+  end
+
+  add_index "technique_list_projects", ["core_project_id"], name: "index_technique_list_projects_on_core_project_id", using: :btree
+  add_index "technique_list_projects", ["technique_list_id"], name: "index_technique_list_projects_on_technique_list_id", using: :btree
+
+  create_table "technique_lists", force: :cascade do |t|
+    t.string   "name"
+    t.string   "stage"
+    t.string   "code"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "technique_stores", force: :cascade do |t|
+    t.integer  "technique_list_project_id"
+    t.integer  "user_id"
+    t.integer  "post_id"
+    t.json     "params"
+    t.datetime "created_at",                null: false
+    t.datetime "updated_at",                null: false
+  end
+
+  add_index "technique_stores", ["technique_list_project_id"], name: "index_technique_stores_on_technique_list_project_id", using: :btree
+  add_index "technique_stores", ["user_id"], name: "index_technique_stores_on_user_id", using: :btree
 
   create_table "test_answers", force: :cascade do |t|
     t.text     "name"
@@ -1693,7 +1726,8 @@ ActiveRecord::Schema.define(version: 20150324125817) do
     t.datetime "last_seen_news"
     t.boolean  "chat_open",                          default: false
     t.datetime "last_seen_chat_at"
-    t.string   "locale",                 limit: 255
+    t.string   "skype",                  limit: 255
+    t.string   "phone",                  limit: 255
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
@@ -1707,4 +1741,8 @@ ActiveRecord::Schema.define(version: 20150324125817) do
     t.datetime "updated_at",     null: false
   end
 
+  add_foreign_key "technique_list_projects", "core_projects"
+  add_foreign_key "technique_list_projects", "technique_lists"
+  add_foreign_key "technique_stores", "technique_list_projects"
+  add_foreign_key "technique_stores", "users"
 end
