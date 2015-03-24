@@ -46,14 +46,14 @@
                   %ul.nav.nav-tabs.aspects_tabs{:role => "tablist"}
                     - asp.knowbase_posts.each_with_index do |post, i|
                       %li{class: "#{'active' if i == 0}", role: "presentation"}
-                        %a{style: "background:#{asp.color};" ,"aria-controls" => "Статья #{i+1}", "data-toggle" => "tab", :href => "#article#{i+1}", :role => "tab"}
-                          ="Статья #{i+1}"
+                        %a{style: "background:#{asp.color};" ,"aria-controls" => "Статья #{i+1}", "data-toggle" => "tab", :href => "#article_#{index+1}_#{i+1}", :role => "tab"}
+                          = trim_content(post.title, 30)
               .row
                 .col-md-8.col-sm-8.min-col-right-padd
                   .top-color-border-block.aspect-main-block{style: "border-top-color: #{asp.color};"}
                     .tab-content
                       - asp.knowbase_posts.each_with_index do |post, i|
-                        .tab-pane.fade{id: "article#{i+1}", class: "#{'active in' if i == 0}", role: "tabpanel"}
+                        .tab-pane.fade{id: "article_#{index+1}_#{i+1}", class: "#{'active in' if i == 0}", role: "tabpanel"}
                           %h6.aspect-main-block-heading
                             = post.title
                           %p.aspect-main-block-text
@@ -64,7 +64,7 @@
                     .aspect-questions-block{:style => "border-top-color: #{asp.color};"}
                       %h4.block-with-left-icon.pull-left
                         %i.left-icon.fa.fa-2x.fa-comments
-                        Вопросы по теме
+                        Вопросы по аспекту
                       %span.pull-right.question_count
                         %span{id: "question_count_#{asp.id}"} 1
                         из
