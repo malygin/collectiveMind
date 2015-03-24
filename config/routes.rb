@@ -36,6 +36,7 @@ CollectiveMind::Application.routes.draw do
         put :comment_status
         put :like
         put :like_comment
+        put :vote
       end
     end
   end
@@ -83,11 +84,7 @@ CollectiveMind::Application.routes.draw do
 
   scope '/project/:project' do
     resources :project_users, controller: 'core/project_users'
-    resources :aspects, controller: 'core/aspects' do
-      member do
-        put :vote
-      end
-    end
+    resources :aspects, controller: 'core/aspects'
 
     get '/journals', to: 'journal#index'
     get '/general_news', to: 'core/projects#news'
@@ -148,7 +145,6 @@ CollectiveMind::Application.routes.draw do
         member do
           put :set_aspect_status
           put :answer_question
-          put :vote
         end
       end
     end

@@ -64,6 +64,63 @@
 
 
 
+- if current_user.can_vote_for(:discontent, @project)
+  #vote-2.popup-window.popup-vote.popup-w1030.mfp-hide
+    .popup.popup_rounded
+      .modal_title
+        .row
+          .col-md-12
+            %h4.bold.font_dark_grey.tall_modal_title
+              Голосование за несовершенства
+      .vote_progress_cont
+        .vote_progress.light-green{"data-limit" => "33"}
+      .modal_body
+        .container.vote_folders_cont.no_padding_col
+          %ul.nav.vote_2_nav.row{:role => "tablist"}
+            %li.no_padding_col.active.folder_all{:role => "presentation"}
+              %a.vote_folder{"data-toggle" => "tab", :href => "#vote_tab1", :role => "tab"}
+                %i.fa.fa-angle-left.fa_xlg
+                %small.bold Вернуться в общий список
+            %li.col-md-4.no_padding_col{:role => "presentation"}
+              %a.vote_folder{"data-toggle" => "tab", :href => "#vote_tab2", :role => "tab"}
+                .vote_folder_inn.poll-2-1
+                  %span.vote_counter#vote_count2 0
+                  %h5 Важно
+            %li.col-md-4.no_padding_col{:role => "presentation"}
+              %a.vote_folder{"data-toggle" => "tab", :href => "#vote_tab3", :role => "tab"}
+                .vote_folder_inn.poll-2-2
+                  %span.vote_counter#vote_count3 0
+                  %h5 Неважно
+            %li.col-md-4.no_padding_col{:role => "presentation"}
+              %a.vote_folder{"data-toggle" => "tab", :href => "#vote_tab4", :role => "tab"}
+                .vote_folder_inn.poll-2-3
+                  %span.vote_counter#vote_count4 0
+                  %h5 Лишнее
+        .divider25
+        .container
+          .row
+            .divider25
+            .tab-content
+              #vote_tab1.tab-pane.active{:role => "tabpanel"}
+                .container.padding30
+                  .row#cont_vote_tab1
+                    - @posts.each_with_index do |post, index|
+                      = render partial: 'post_vote', object: post
+
+              #vote_tab2.tab-pane{:role => "tabpanel"}
+                .container.padding30
+                  .row#cont_vote_tab2
+              #vote_tab3.tab-pane{:role => "tabpanel"}
+                .container.padding30
+                  .row#cont_vote_tab3
+              #vote_tab4.tab-pane{:role => "tabpanel"}
+                .container.padding30
+                  .row#cont_vote_tab4
+            .divider35
+
+
+
+
 -#%h4
 -#  Выберите аспект
 -#  %i.fa.fa-question-circle

@@ -199,7 +199,7 @@
                 .container.padding30
                   .row#cont_vote_tab1
                     - @aspects.each_with_index do |asp, index|
-                      = render partial: 'vote_aspect', object: asp
+                      = render partial: 'post_vote', object: asp
 
               #vote_tab2.tab-pane{:role => "tabpanel"}
                 .container.padding30

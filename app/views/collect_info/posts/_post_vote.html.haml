@@ -5,14 +5,13 @@
         = post_vote.content
     .divider10
     .vote_controls.text-center
-      = link_to vote_discontent_post_path(@project, post_vote.id, status: 1), remote: true, method: :put do
+      = link_to vote_collect_info_post_path(@project, post_vote.id, status: 1), remote: true, method: :put do
         %button.btn.red.vote_button{:role => "button"}
           %i.fa.fa-exclamation
-      = link_to vote_discontent_post_path(@project, post_vote.id, status: 2), remote: true, method: :put do
+      = link_to vote_collect_info_post_path(@project, post_vote.id, status: 2), remote: true, method: :put do
         %button.btn.dark-grey.vote_button{:role => "button"}
           %i.fa.fa-minus
-      = link_to vote_discontent_post_path(@project, post_vote.id, status: 3), remote: true, method: :put do
+      = link_to vote_collect_info_post_path(@project, post_vote.id, status: 3), remote: true, method: :put do
         %button.btn.black.vote_button{:role => "button"}
           %i.fa.fa-times
     .divider15
-
