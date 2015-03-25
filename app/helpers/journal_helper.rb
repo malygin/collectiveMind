@@ -176,6 +176,12 @@ module JournalHelper
         "добавил(а) комментарий '#{j.body}...' к вашему проекту "+ link_to(j.body2, "/project/#{project}/plan/posts/#{j.first_id}?viewed=true&req_comment=#{j.second_id}#comment_#{j.second_id}")
       when 'reply_plan_comment'
         "добавил(а) комментарий '#{j.body}...' в ответ на ваш "+ link_to(j.body2, "/project/#{project}/plan/posts/#{j.first_id}?viewed=true&req_comment=#{j.second_id}#comment_#{j.second_id}")
+
+      when 'my_add_score_plan'
+        "вы получили  #{j.body} баллов за проект "+ link_to(j.body2, "/project/#{project}/plan/posts/#{j.first_id}?viewed=true")
+      when 'add_score_plan'
+        'получил(а)  '+j.body+' баллов за проект '+ link_to(j.body2, "/project/#{project}/plan/posts/#{j.first_id}?viewed=true")
+
       when 'my_plan_note'
         "добавил(а) замечание  '#{j.body}...' к вашему проекту "+ link_to(j.body2, "/project/#{project}/plan/posts/#{j.first_id}?viewed=true")
       when 'plan_comment_discuss_status'
