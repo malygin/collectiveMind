@@ -90,6 +90,7 @@ CollectiveMind::Application.routes.draw do
   scope '/project/:project' do
     resources :project_users, controller: 'core/project_users'
     resources :aspects, controller: 'core/aspects'
+    resources :skills
 
     get '/journals', to: 'journal#index'
     get '/general_news', to: 'core/projects#news'
