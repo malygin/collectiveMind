@@ -36,6 +36,8 @@ class Core::Project < ActiveRecord::Base
   has_many :journals
   has_many :news, class_name: 'News'
   #has_many :project_score_users, class_name: 'User', through: :core_project_scores, source: :user
+  has_many :technique_list_projects, class_name: 'Technique::ListProject'
+  has_many :techniques, through: :technique_list_projects, source: :technique_list, class_name: 'Technique::List'
 
   after_create { build_settings.save }
 

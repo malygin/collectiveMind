@@ -10,7 +10,7 @@
     %br
   = render 'shared/notice_messages', object: f.object
 
-  = render partial: "#{params[:type_mechanic]}_form", locals: {f: f}
+  = render partial: "#{params[:type_mechanic]}_form", locals: {f: f, aspect: aspect}
 
   .pull-right
     = f.submit t('form.save'), id: 'send_post_aspect', class: 'btn btn-success'
