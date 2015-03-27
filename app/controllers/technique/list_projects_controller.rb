@@ -13,6 +13,6 @@ class Technique::ListProjectsController < ApplicationController
 
   private
   def technique_list_project_params
-    params.require(:technique_list_project).permit(:core_project_id, :technique_list_id)
+    params.require(:technique_list_project).permit(:project_id, :technique_list_id)
   end
 end

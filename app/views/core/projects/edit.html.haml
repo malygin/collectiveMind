@@ -47,7 +47,7 @@
                     = Core::Project::LIST_STAGES[stage_num][:name]
                   - unless Technique::List.all_in_array[Core::Project::LIST_STAGES[stage_num][:type_stage].to_s].nil?
                     = form_tag technique_list_projects_path, remote: true do
-                      = hidden_field_tag 'technique_list_project[core_project_id]', @project.id
+                      = hidden_field_tag 'technique_list_project[project_id]', @project.id
                       - Technique::List.all_in_array[Core::Project::LIST_STAGES[stage_num][:type_stage].to_s].each do |tech|
                         .form-group
                           = check_box_tag 'technique_list_project[technique_list_id][]', tech.id
