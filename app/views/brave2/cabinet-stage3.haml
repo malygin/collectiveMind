@@ -30,7 +30,7 @@
               %img{:src => "img/logo1.png"}/
           %ul.nav.navbar-nav.main_menu
             %li
-              %a{:href => "first-stage.html"} Процедура
+              %a{:href => "1st-stage.html"} Процедура
             %li.active
               %a{:href => "cabinet-stage1.html"} Кабинет
             %li
@@ -50,9 +50,9 @@
             %ul.dropdown-menu.dropdown-mini{:role => "menu"}
             %span.auth-divider |
             %span.badge.grey 500
-            %a.font_lighter_grey.bold{:href => "#"}
-              %small
-                Лиза Школьник
+            %small.font_lighter_grey.bold
+              Лиза Школьник
+              %a{:href => "profile.html"}
                 %i.fa.fa-angle-down
       / Top Bar ends
       / Main Block starts
@@ -106,7 +106,7 @@
                       .row
                         .col-md-10
                           %label{:for => "aspectField4"}
-                            Опишите функционирование вашего новвведения в
+                            Опишите функционирование вашего нововведения в
                             будущем -
                             что должно регулярно делаться и какие для этого нужно поддерживать
                             условия?
@@ -163,7 +163,7 @@
                             ?
                           %h6.thin_expl
                             Вы можете добавлять ресурсы функционирования, описания к ним, а также
-                            средстав
+                            средства
                             достижения этих ресурсов (с описанием))
                       .row
                         .col-md-9
@@ -189,7 +189,7 @@
                             поддержание
                             должных условий и осуществление регулярных действий, а так же
                             предотвращение
-                            нежелательных побочных эффектов
+                            нежелательных побочных эффектов?
                       .row
                         .col-md-9
                           %textarea#aspectField8.form-control{:placeholder => "В этом поле нужно перечислить ответственных лиц и средства при помощи которых они будут контролировать работу нововведения", :type => "text"}
@@ -229,7 +229,7 @@
                             функицонированию
                             ресурсов, перечисленных в разделах B, C и D, и как с этим
                             предлагается
-                            бороться
+                            бороться?
                       .row
                         .col-md-9
                           %textarea#aspectField10.form-control{:type => "text"}
@@ -266,7 +266,7 @@
                         .col-md-10
                           %label{:for => "aspectField13"}
                             Какие несовершенства решает ваше
-                            нововведение
+                            нововведение?
                       .row
                         .col-md-9
                           %textarea#aspectField13.form-control{:type => "text"}
@@ -280,7 +280,8 @@
                         взгляд,
                         не
                         решаются нововведением.
-                    %button.btn.btn-danger.pull-right{:type => "submit"} Сохранить
+                    %button.btn.btn-white.pull-right.nearby_buttons{:type => "submit"} Отменить
+                    %button.btn.btn-danger.pull-right.nearby_buttons Сохранить
                 #tab-2.tab-pane.fade.in
                 #tab-3.tab-pane.fade.in
                 #tab-4.tab-pane.fade.in

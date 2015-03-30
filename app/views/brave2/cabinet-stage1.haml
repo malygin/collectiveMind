@@ -30,7 +30,7 @@
               %img{:src => "img/logo1.png"}/
           %ul.nav.navbar-nav.main_menu
             %li
-              %a{:href => "first-stage.html"} Процедура
+              %a{:href => "1st-stage.html"} Процедура
             %li.active
               %a{:href => "cabinet-stage1.html"} Кабинет
             %li
@@ -50,9 +50,9 @@
             %ul.dropdown-menu.dropdown-mini{:role => "menu"}
             %span.auth-divider |
             %span.badge.grey 500
-            %a.font_lighter_grey.bold{:href => "#"}
-              %small
-                Лиза Школьник
+            %small.font_lighter_grey.bold
+              Лиза Школьник
+              %a{:href => "profile.html"}
                 %i.fa.fa-angle-down
       / Top Bar ends
       / Main Block starts
@@ -127,7 +127,8 @@
                     .form-group
                       %label{:for => "aspectField2"} Поясните, почему ваш аспект важен:
                       %textarea#aspectField2.form-control{:rows => "3", :type => "text"}
-                    %button.btn.btn-danger.pull-right{:type => "submit"} Сохранить
+                    %button.btn.btn-white.pull-right.nearby_buttons{:type => "submit"} Отменить
+                    %button.btn.btn-danger.pull-right.nearby_buttons Сохранить
                 #tab-2.tab-pane.fade.in
                 #tab-3.tab-pane.fade.in
                 #tab-4.tab-pane.fade.in
