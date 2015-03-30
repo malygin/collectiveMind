@@ -73,6 +73,7 @@
 #= require moderator_chat
 #= require websockets_load.js.erb
 # require groups
+#= require cabinet
 
 # @todo load initialization
 sidebarHeight = 0;
