@@ -1,0 +1,17 @@
+= yield :what_whend_where
+= yield :select_aspect
+.row
+  .col-md-12
+    .form-group.text-center
+      %br
+      %b
+        = t('form.discontent.select_style')
+      %br
+      %label.radio-inline
+        = f.radio_button :style, '1', checked: 'checked'
+        %span.label.label-danger
+          = t('form.discontent.style_negative')
+      %label.radio-inline
+        = f.radio_button :style, '0'
+        %span.label.label-success
+          = t('form.discontent.style_positive')
