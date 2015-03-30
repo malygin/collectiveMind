@@ -6,8 +6,10 @@
   .body
     .row
       .col-md-4
-        -#= image_tag @user.avatar(:normal)
-        = image_tag 'no-ava.png', style: 'margin: auto;width:295px;height:250px;'
+        - if @user.avatar.present?
+          = cl_image_tag @user.avatar
+        - else
+          = image_tag 'no-ava.png', style: 'margin: auto;width:295px;height:250px;'
         %br
         - if not @user.boss? or @project.uniq_proc?
           %h3

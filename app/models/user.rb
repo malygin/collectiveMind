@@ -45,14 +45,6 @@ class User < ActiveRecord::Base
   validates :email, presence: true, format: {with: VALID_EMAIL_REGEX},
             uniqueness: {case_sensitive: false}
 
-  # This method associates the attribute ":avatar" with a file attachment
-  #@todo перенести загрузку аватарок на cloudinary
-  # has_attached_file :avatar, styles: {
-  #                              thumb: '57x74>',
-  #                              normal: '250x295>'
-  #                          }
-  # validates_attachment_content_type :avatar, content_type: /\Aimage\/.*\Z/
-
   TYPES_USER = {
       admin: [1, 6, 7]
   }
