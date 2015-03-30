@@ -1,7 +1,7 @@
 class Core::ProjectUsersController < ApplicationController
   before_action :set_project
   before_action :journal_data, only: [:user_analytics, :moderator_analytics]
-  layout 'application'
+  layout 'cabinet'
 
   def show
 

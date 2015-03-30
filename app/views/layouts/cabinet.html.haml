@@ -1,0 +1,84 @@
+!!! 5
+%html(lang="en")
+  %head
+    %meta(charset="utf-8")
+    %meta(http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1")
+    %meta(name="viewport" content="width=device-width, initial-scale=1.0")
+    %meta(http-equiv="X-UA-Compatible" content="IE=8")
+    %title
+      = content_for?(:title) ? yield(:title) : 'Massdecision'
+    = csrf_meta_tags
+    = stylesheet_link_tag 'application', media: 'all'
+    /[if lte IE 9]
+      <script src="http://phpbbex.com/oldies/oldies.js" charset="utf-8"></script>
+  -#%link(href="/assets/favicon.ico" rel="shortcut icon")
+
+  %body
+    -#@todo добавить метод определения текущего этапа для динамических стилей
+    .outer.white_theme
+      / Top bar starts
+      %header.navbar.top_bar
+        .container
+          .navbar-header
+            %a.navbar-brand{href: @project ? "/project/#{@project.id}" : '/', id: 'go_to_logo'}
+              = image_tag 'logo1.png'
+          %ul.nav.navbar-nav.main_menu
+            %li{class: "#{'active' if [:collect_info_posts, :discontent_posts, :concept_posts, :plan_posts, :estimate_posts].include? name_controller}"}
+              = link_to 'Процедура', "/project/#{@project.id}"
+            %li.active
+              = link_to 'Кабинет', project_user_path(@project, current_user)
+            %li{class: "#{'active' if name_controller == :journal}"}
+              = link_to 'Новости', journals_path(@project)
+            - if @project.prev_status
+              %li
+                = link_to '<- стадия', pr_stage_core_project_path(@project), method: :put, id: "down_to_#{@project.prev_status}"
+            - if @project.next_status
+              %li
+                = link_to '-> стадия', next_stage_core_project_path(@project), method: :put, id: "up_to_#{@project.next_status}"
+
+          .navbar-right.text-right.user_block.font_grey
+            = link_to "", knowbase_posts_path(@project), remote: true, id: "tooltip1_5", class: "tooltip1_5 book_icon", "data-placement" => "bottom", "data-toggle" => "tooltip", "data-trigger" => "none", :title => "Открыть базу знаний"
+            %span.auth-divider
+              |
+            %a.font_lighter_grey.bold{:href => "#"}
+              %i.fa.fa-exclamation-triangle
+            %span.auth-divider
+              |
+            %span.dropdown
+              %a.font_grey.bold#lang_dropdown{'data-target' => '#', 'data-toggle' => 'dropdown', href: '#', "aria-haspopup" => "true", "aria-expanded" => "false"}
+                %i.fa.fa-globe.font_lighter_grey
+                %small
+                  Russian
+                  %i.fa.fa-angle-down
+              %ul.dropdown-menu.dropdown-mini{role: 'menu', "aria-labelledby" => "lang_dropdown"}
+                %li
+                  %a{href: '#'} English
+                %li
+                  %a{href: '#'} Kanada
+            %span.auth-divider
+              |
+            %span.dropdown
+              %span.badge.grey 500
+              %a.font_grey.bold#auth_dropdown{"data-target" => "#", "data-toggle" => "dropdown", href: "#", "aria-haspopup" => "true", "aria-expanded" => "false"}
+                %small
+                  = current_user
+                  %i.fa.fa-angle-down
+              %ul.dropdown-menu.dropdown-mini{role: "menu", "aria-labelledby" => "auth_dropdown"}
+                %li{role: 'presentation'}
+                  = link_to t('menu.account'), user_path(@project, current_user), id: 'go_to_profile'
+                %li{role: 'presentation'}
+                  = link_to t('menu.profile_edit'), edit_user_path(@project, current_user), id: 'go_to_edit_profile'
+
+      / Main Block starts
+      .main-block.cabinet
+        .container
+          = yield
+    #render_knowbase_posts
+    = render 'shared/moderator_chat'
+
+    /
+      Javascripts
+      \==================================================
+    / Placed at the end of the document so the pages load faster
+    %script(src="https://cdn.pubnub.com/pubnub.min.js")
+    = javascript_include_tag 'application'
