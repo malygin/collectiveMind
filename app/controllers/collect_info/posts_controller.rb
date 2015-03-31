@@ -5,6 +5,10 @@ class CollectInfo::PostsController < PostsController
     Core::Aspect
   end
 
+  def current_model
+    Core::Aspect
+  end
+
   def index
     @aspect = params[:asp] ? Core::Aspect.find(params[:asp]) : @project.main_aspects.first
     @count_aspects = @project.main_aspects.count
@@ -32,8 +36,8 @@ class CollectInfo::PostsController < PostsController
       # params[:answers].each do |answer|
       #   @wrong_answer = true unless @correct_answers.include? answer.to_i
       # end
-      arr = params[:answers].collect{|a| a.to_i} - @correct_answers
-      arr2 = @correct_answers - params[:answers].collect{|a| a.to_i}
+      arr = params[:answers].collect { |a| a.to_i } - @correct_answers
+      arr2 = @correct_answers - params[:answers].collect { |a| a.to_i }
       @wrong_answer = true if arr.present? or arr2.present?
 
       unless @wrong_answer
@@ -58,9 +62,8 @@ class CollectInfo::PostsController < PostsController
 
   private
 
-    def set_aspects
-      # @todo выбираем только аспекты первого уровня (без вложенности)
-      @aspects = @project.main_aspects
-    end
-
+  def set_aspects
+    # @todo выбираем только аспекты первого уровня (без вложенности)
+    @aspects = @project.main_aspects
+  end
 end
