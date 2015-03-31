@@ -18,6 +18,6 @@
         %i.fa.fa-minus
         = t('link.delete')
     - else
-      = link_to add_user_for_project_user_path(@project, list_user), remote: true, method: :put, class:'btn btn-success', id: "add_user_#{list_user.id}" do
+      = link_to project_users_path(@project, user: list_user), remote: true, method: :post, class:'btn btn-success', id: "add_user_#{list_user.id}" do
         %i.fa.fa-plus
         = t('link.add')

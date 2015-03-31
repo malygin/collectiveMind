@@ -1,10 +1,19 @@
 class Core::ProjectUsersController < ApplicationController
   before_action :set_project
   before_action :journal_data, only: [:user_analytics, :moderator_analytics]
+  before_filter :prime_admin_authenticate, only: [:create]
   layout 'cabinet'
 
   def show
 
+  end
+
+  def create
+    @project = Core::Project.find(params[:project])
+    @user.core_project_users.create(project_id: @project.id) unless @user.core_project_users.by_project(@project.id).first
+    respond_to do |format|
+      format.js
+    end
   end
 
   def user_analytics
