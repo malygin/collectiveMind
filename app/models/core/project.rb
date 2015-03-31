@@ -107,6 +107,10 @@ class Core::Project < ActiveRecord::Base
     current_stage.keys[0]
   end
 
+  def current_stage_type
+    current_stage_values[:type_stage]
+  end
+
   def moderators
     users_in_project.where(users: {type_user: User::TYPES_USER[:admin]})
   end
@@ -232,11 +236,6 @@ class Core::Project < ActiveRecord::Base
   def current_page?(page, status)
     sort_list = LIST_STAGES.select { |k, v| v[:type_stage] == status }
     sort_list.values[0][:name] == page
-  end
-
-  def redirect_to_current_stage
-    sort_list = LIST_STAGES.select { |k, v| v[:status].include? self.status }
-    sort_list.values[0][:type_stage]
   end
 
   def can_edit_on_current_stage(p)

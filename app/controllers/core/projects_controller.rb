@@ -24,7 +24,7 @@ class Core::ProjectsController < ApplicationController
 
   def show
     @project = Core::Project.find(params[:id])
-    redirect_to polymorphic_path(@project.redirect_to_current_stage, project: @project)
+    redirect_to polymorphic_path(@project.current_stage_type, project: @project)
   end
 
   def new

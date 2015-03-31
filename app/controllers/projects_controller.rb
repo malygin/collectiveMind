@@ -19,15 +19,15 @@ class ProjectsController < ApplicationController
   end
 
   def check_access_to_project
-    if %w(lifetape_posts discontent_posts concept_posts plan_posts estimate_posts essay_posts).include? params[:controller]
+    if Core::Project::LIST_STAGES.map { |key, hash| hash[:type_stage] }.include? params[:controller].gsub('/', '_').to_sym
       # @todo Рефакторинг model_min_stage
       if @project.status < @project.model_min_stage(current_model.table_name.singularize)
-        redirect_to polymorphic_path(@project.redirect_to_current_stage)
+        redirect_to polymorphic_path(@project.current_stage_type)
       end
     end
 
-    unless @project.users.include?(current_user) or prime_admin?
-      redirect_back_or root_url
+    unless @project.users.include?(current_user)
+      redirect_to root_url
     end
   end
 end
