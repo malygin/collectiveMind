@@ -51,7 +51,6 @@
       = t('show.user.select_users')
     %br
     - Core::ProjectUser::TYPE_USER.each do |code, text|
-      -# @todo рефактор всего этого, нужно определиться с одной механикой
       = text
       %br
       - @project.project_users.by_type(code).each do |project_user|

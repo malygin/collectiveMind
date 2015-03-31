@@ -87,7 +87,7 @@ class UsersController < ProjectsController
 
   def search
     @code = params[:code]
-    @search_users = User.search(params[:search_users_text], params[:search_users_text], params[:search_users_text])
+    @search_users = User.search params[:search_users_text]
   end
 
   def update_score

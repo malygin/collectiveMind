@@ -2,6 +2,7 @@ class User < ActiveRecord::Base
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
   include ApplicationHelper
+  include PgSearch
 
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable, :lastseenable
@@ -48,6 +49,12 @@ class User < ActiveRecord::Base
   TYPES_USER = {
       admin: [1, 6, 7]
   }
+
+  pg_search_scope :search,
+                  against: [:name, :surname, :email],
+                  using: {
+                      tsearch: {prefix: true}
+                  }
 
   def current_projects_for_user
     if prime_admin?
@@ -335,11 +342,6 @@ class User < ActiveRecord::Base
 
   def looked_chat
     update_attributes! last_seen_chat_at: Time.now
-  end
-
-  def self.search(name, surname, email)
-    where('LOWER(name) like LOWER(?) OR LOWER(surname) like LOWER(?) OR LOWER(email) like LOWER(?)', "%#{name}%", "%#{surname}%", "%#{email}%").
-        sort_by { |user| user[:name].downcase or user[:surname].downcase or user[:email].downcase }
   end
 
   def moderator_in_project?(project)

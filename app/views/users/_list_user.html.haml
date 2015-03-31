@@ -2,7 +2,10 @@
   .col-md-8
     .media
       %a.pull-left(href="/project/#{@project.id}/users/#{list_user.id}")
-        = image_tag list_user.avatar.url(:thumb), class: 'media-object'
+        - if list_user.avatar.present?
+          = cl_image_tag list_user.avatar, class: 'media-object'
+        - else
+          = image_tag 'no-ava.png', class: 'media-object'
         %br
         = link_to list_user, user_path(@project, list_user)
         = render partial: '/shared/user_online', object: list_user
