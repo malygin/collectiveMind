@@ -1,31 +1,44 @@
 .media.comment
   .media-left
-    = image_tag 'no-ava.png', class: "media-object img50 img-circle"
+    = image_tag 'no-ava.png', class: "media-object img35 img-circle"
   .media-body
     %h5.media-heading.bold
       =comment.user
-    %span.date.theme_font_color
-      =Russian::strftime(comment.created_at,'%d.%m.%Y %k:%M')
+    %span.comment_interf
+      %span.date_time.theme_font_color
+        =Russian::strftime(comment.created_at,'%k:%M')
+      - if current_user?(comment.user) or boss?
+        %button.btn_reset{:type => "button"}
+          %i.fa.fa-cog.fa-lg.theme_font_color
+      -if comment.approve_status
+        %span.badge.badge_important.theme_back_color важно
   %p.font_grey.bold
     =comment.content
-  .post-interfaces-buttons
-    %button{:type => "button"}
-      %span.bold
-        %i.fa.fa-comment.theme_font_color
+  .post-interfaces-buttons.text-left
     =link_to({:action => :like_comment, :project => @project, :id => comment.id, :against => false}, :remote => true, :method => :put, id: "like_comment_#{comment.id}") do
-      %span.bold
-        %span(id="lk_comment_#{comment.id}")
-          =comment.users_pro.count
-        %i.fa.fa-thumbs-up.theme_font_color
+      %button{:type => "button"}
+        %span.bold
+          %span(id="lk_comment_#{comment.id}")
+            =comment.users_pro.count
+          %i.fa.fa-thumbs-up.theme_font_color
     =link_to({:action => :like_comment, :project => @project,  :id => comment.id, :against => true}, :remote => true, :method => :put, id: "dislike_comment_#{comment.id}") do
-      %span.bold
-        %span(id="dlk_comment_#{comment.id}")
-          =comment.users_against.count
-        %i.fa.fa-thumbs-down.theme_font_color
+      %button{:type => "button"}
+        %span.bold
+          %span(id="dlk_comment_#{comment.id}")
+            =comment.users_against.count
+          %i.fa.fa-thumbs-down.theme_font_color
     %button{:type => "button"}
       %span.bold
         %i.fa.fa-reply.fa-rotate-180.theme_font_color
-.divider_1_grey
+-if comment.comments.present?
+  %a.answers_collapse.theme_font_color{"aria-expanded" => "false", "data-toggle" => "collapse", :href => "#answers_#{comment.id}"}
+    %span
+      = comment.comments.size
+      ответа
+  .com_answers.collapse{id: "answers_#{comment.id}"}
+    .answers_subblock.level1
+      - comment.comments.each do |c|
+        = render partial: 'shared/comment', object: c
 
 
 

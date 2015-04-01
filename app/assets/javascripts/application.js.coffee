@@ -37,6 +37,7 @@
 #= require excanvas
 #= require dropdowns-enhancement
 #= require jquery.contenthover.min
+#= require perfect-scrollbar.jquery.min
 #= require custom.js
 
 #= require brave

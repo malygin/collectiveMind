@@ -1,6 +1,48 @@
 /* Your JS codes here */
 $(document).ready(function () {
 
+
+    /* dropdown window */
+    $('.drop_opener').click(function(){
+        var me = $(this);
+        var dd_open_id = me.attr('data-dd-opener');
+        var dd_win = $('#' + dd_open_id);
+        if (me.hasClass('active')){
+            close_dd(me, dd_win);
+        } else {
+            open_dd(me, dd_win);
+        }
+    });
+    $('.dd_close').click(function(){
+        var me = $(this);
+        var dd_close_id = me.attr('data-dd-closer');
+        var dd_opener = $('.drop_opener[data-dd-opener=' + dd_close_id + ']');
+        var dd_win = $('#' + dd_close_id);
+        close_dd(dd_opener, dd_win);
+    });
+    function open_dd(opener, win){
+        opener.addClass('active');
+        win.addClass('active');
+    }
+    function close_dd(opener, win){
+        opener.removeClass('active');
+        win.removeClass('active');
+    }
+
+    /* comments col */
+    $('.expand_button').click(function(){
+        $('.popup_expandable_col').toggleClass('col-md-6').toggleClass('col-md-12').toggleClass('exp');
+    });
+
+    /* collapse comments */
+    /*$('.com_answers').on('shown.bs.collapse', function() {
+     var me_id = $(this).attr('id');
+     $('.answers_collapse[href^=]')
+     });*/
+    $('.answers_collapse').click(function(){
+        $(this).toggleClass('opened');
+    });
+
     /* popup fix size */
     $('.open-popup-vote-link').magnificPopup({
         type: 'inline',
@@ -15,44 +57,44 @@ $(document).ready(function () {
 
     /* vote progress-bar */
 
-    var vote_progr = $('.vote_progress').attr('data-limit');
-    $('.vote_progress').css('width', vote_progr + '%');
-
-    /* vote 1st stage */
-
-    function handleDragStart(e) {
-        this.style.opacity = '0.6';  // this / e.target is the source node.
-    }
-
-    function handleDragOver(e) {
-        if (e.preventDefault) {
-            e.preventDefault(); // Necessary. Allows us to drop.
-        }
-
-        e.dataTransfer.dropEffect = 'move';  // See the section on the DataTransfer object.
-
-        return false;
-    }
-
-    function handleDragEnter(e) {
-        // this / e.target is the current hover target.
-        this.classList.add('over');
-    }
-
-    function handleDragLeave(e) {
-        this.classList.remove('over');  // this / e.target is previous target element.
-    }
-
-    var vote_items = document.querySelectorAll('.votable_item');
-    [].forEach.call(vote_items, function(vote_item) {
-        vote_item.addEventListener('dragstart', handleDragStart, false);
-        vote_item.addEventListener('dragover', handleDragOver, false);
-    });
-    var vote_polls = document.querySelectorAll('.votable_poll');
-    [].forEach.call(vote_polls, function(vote_poll) {
-        vote_poll.addEventListener('dragenter', handleDragEnter, false);
-        vote_poll.addEventListener('dragleave', handleDragLeave, false);
-    });
+    //var vote_progr = $('.vote_progress').attr('data-limit');
+    //$('.vote_progress').css('width', vote_progr + '%');
+    //
+    ///* vote 1st stage */
+    //
+    //function handleDragStart(e) {
+    //    this.style.opacity = '0.6';  // this / e.target is the source node.
+    //}
+    //
+    //function handleDragOver(e) {
+    //    if (e.preventDefault) {
+    //        e.preventDefault(); // Necessary. Allows us to drop.
+    //    }
+    //
+    //    e.dataTransfer.dropEffect = 'move';  // See the section on the DataTransfer object.
+    //
+    //    return false;
+    //}
+    //
+    //function handleDragEnter(e) {
+    //    // this / e.target is the current hover target.
+    //    this.classList.add('over');
+    //}
+    //
+    //function handleDragLeave(e) {
+    //    this.classList.remove('over');  // this / e.target is previous target element.
+    //}
+    //
+    //var vote_items = document.querySelectorAll('.votable_item');
+    //[].forEach.call(vote_items, function(vote_item) {
+    //    vote_item.addEventListener('dragstart', handleDragStart, false);
+    //    vote_item.addEventListener('dragover', handleDragOver, false);
+    //});
+    //var vote_polls = document.querySelectorAll('.votable_poll');
+    //[].forEach.call(vote_polls, function(vote_poll) {
+    //    vote_poll.addEventListener('dragenter', handleDragEnter, false);
+    //    vote_poll.addEventListener('dragleave', handleDragLeave, false);
+    //});
 
     $('.close_magnific').click(function(){
         var magnificPopup = $.magnificPopup.instance;
@@ -448,6 +490,75 @@ $('.post-theme').hover(function () {
         $(this).addClass('active');
     });
 });
+
+
+/* vote scripts */
+$(document).ready(function () {
+    var folder_len = {};
+
+    /* vote progress-bar */
+
+    $('[data-vote-poll-role]').each(function() {
+        var role = $(this).attr('data-vote-poll-role');
+        var len = count_vote_items($(this));
+        folder_len[role] = len;
+        $('[data-vote-folder-role = "' + role + '"] > .vote_folder_inn > .vote_counter').text(len);
+    });
+    var pb = $('.vote_progress');
+    var all_len = folder_len['overall'] = count_vote_items('.all_vote');
+    pb_stretch(pb, all_len, folder_len['overall']);
+
+    function count_vote_items (me){
+        return $('.vote_item_cont', me).length;
+    }
+
+    function pb_stretch(me, current, over){
+        var vote_perc = (1 - current/over)*100;
+        me.css('width', vote_perc+'%');
+    }
+
+    $('.vote_button').click(function () {
+        var role = $(this).attr('data-vote-role');
+        if (!$(this).hasClass('voted')) {
+            if ($(this).siblings().hasClass('voted')){
+                var prev_role = $(this).siblings('.voted').attr('data-vote-role');
+                $(this).siblings().removeClass('voted');
+            }
+            $(this).addClass('voted');
+            var vote_item = $(this).parents('.vote_item_cont').detach();
+            $('[data-vote-folder-role = "' + role + '"] > .vote_folder_inn > .vote_counter').text(++folder_len[role]);
+            if (prev_role) {
+                $('[data-vote-folder-role = "' + prev_role + '"] > .vote_folder_inn > .vote_counter').text(--folder_len[prev_role]);
+            } else {
+                all_len--;
+                pb_stretch(pb, all_len, folder_len['overall']);
+            }
+            $('[data-vote-poll-role = "' + role + '"] .container>.row').append(vote_item);
+        } else {
+            $(this).removeClass('voted');
+            var vote_item = $(this).parents('.vote_item_cont').detach();
+            $('[data-vote-folder-role = "' + role + '"] > .vote_folder_inn > .vote_counter').text(--folder_len[role]);
+            $('.all_vote>.container>.row').append(vote_item);
+            all_len++;
+            pb_stretch(pb, all_len, folder_len['overall']);
+        }
+        var item_e = $(this).parents('.item_expandable');
+        if (item_e.hasClass('opened')){
+
+            item_e.removeClass('opened');
+            $(this).siblings('.vote_open_detail').children('i').toggleClass('fa-angle-right').toggleClass('fa-angle-left');
+        }
+    });
+
+    $('.vote_open_detail').click( function (){
+        $('i', this).toggleClass('fa-angle-right');
+        $('i', this).toggleClass('fa-angle-left');
+        $('.item_expandable').not($(this).parents()).removeClass('opened');
+        $(this).parents('.item_expandable').toggleClass('opened');
+    });
+
+});
+
 
 
 /* used in fifth stage*/

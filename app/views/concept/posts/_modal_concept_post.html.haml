@@ -4,7 +4,8 @@
       .row
         .col-md-8
           %h4.bold.font_dark_grey
-            = trim_content(@post.title)
+            Идея
+            ="\"#{trim_content(@post.title)}\""
         .col-md-4
           .row
             .col-md-12
@@ -28,7 +29,7 @@
                   = Russian::strftime(@post.created_at, '%d.%m.%Y')
     .modal_body
       .poster-line.line-grey
-        %span.rolled_text несовершенства
+        %span.tags_badge несовершенства
         .row
           .col-md-6
             .innov-poster-cont
@@ -41,80 +42,79 @@
                 .innov-tags-tag{class: "color-N#{index + 1}"}
                   = trim_content(post.content, 50)
 
-      .divider25
       .container
-        .col-md-6
-          .stripe-qa
-            .lined-heading
-              %span.bold-stripe
-                = t('show.concept.actions')
-            %p
-              %strong
-                = t('show.desc')
-              = @post.actions_desc
-            %p
-              %strong
-                = t('show.ground')
-              = @post.actions_ground
-          .stripe-qa
-            .lined-heading
-              %span.bold-stripe
-                = t('show.concept.actors')
-            %p
-              %strong
-                = t('show.desc')
-              = @post.actors
-          .stripe-qa
-            .lined-heading
-              %span.bold-stripe
-                = t('show.concept.tools')
-            %p
-              %strong
-                = t('show.desc')
-              = @post.tools
-          .stripe-qa
-            .lined-heading
-              %span.bold-stripe
-                = t('show.concept.impact_group')
-            %p
-              %strong
-                = t('show.desc')
-              = @post.impact_group
-          .stripe-qa
-            .lined-heading
-              %span.bold-stripe
-                = t('show.concept.impact_env')
-            %p
-              %strong
-                = t('show.desc')
-              = @post.impact_env
-        .col-md-6
-          .container
-            .row
-              .col-md-12.theme_font_color.text-right.no_padding_col
-                = Russian::strftime(@post.created_at, '%d.%m.%Y')
-          .divider5
-          .divider_1_grey
-          #myCarousel.carousel.slide{"data-ride" => "carousel"}
-            .carousel-inner.chat-messages{:role => "listbox"}
-              -if @comments.present?
-                - @comments.each_slice(5).with_index do |slice, i|
-                  .item{class: "#{'active' if i + 1 == @comments.count / 5 + (@comments.count % 5 == 0 ? 0 : 1)}"}
-                    = render partial:'shared/comment', collection: slice
-              -else
-                .item.active
+        .row
+          .col-md-6.com_dashed_border.right.popup_collapsable_col.collapse.in
+            %button.expand_button.remove_col.btn_reset{"data-target" => ".popup_collapsable_col", "data-toggle" => "collapse", :type => "button"}
+            .divider25
+            .stripe-qa
+              .lined-heading
+                %span.bold-stripe
+                  = t('show.concept.actions')
+              %p
+                %strong
+                  = t('show.desc')
+                = @post.actions_desc
+              %p
+                %strong
+                  = t('show.ground')
+                = @post.actions_ground
+            .stripe-qa
+              .lined-heading
+                %span.bold-stripe
+                  = t('show.concept.actors')
+              %p
+                %strong
+                  = t('show.desc')
+                = @post.actors
+            .stripe-qa
+              .lined-heading
+                %span.bold-stripe
+                  = t('show.concept.tools')
+              %p
+                %strong
+                  = t('show.desc')
+                = @post.tools
+            .stripe-qa
+              .lined-heading
+                %span.bold-stripe
+                  = t('show.concept.impact_group')
+              %p
+                %strong
+                  = t('show.desc')
+                = @post.impact_group
+            .stripe-qa
+              .lined-heading
+                %span.bold-stripe
+                  = t('show.concept.impact_env')
+              %p
+                %strong
+                  = t('show.desc')
+                = @post.impact_env
 
-          .divider15
-          .post-interfaces
+          .col-md-6.comment_col.popup_expandable_col
+            %button.expand_button.add_col.btn_reset.theme_font_color.bold{"data-target" => ".popup_collapsable_col", "data-toggle" => "collapse", :type => "button"} открыть описание идеи
+            .divider15
+            #myCarousel.carousel.slide{"data-ride" => "carousel"}
+              .carousel-inner.chat-messages{:role => "listbox"}
+                -if @comments.present?
+                  - @comments.each_slice(5).with_index do |slice, i|
+                    .item{class: "#{'active' if i + 1 == @comments.count / 5 + (@comments.count % 5 == 0 ? 0 : 1)}"}
+                      = render partial:'shared/comment', collection: slice
+                -else
+                  .item.active
+
+            .divider15
             = render partial:'shared/comment_form', locals:{ comment: @comment, post: @post, url_link: url_for(controller: @post.class.name.underscore.pluralize, action:'add_comment') }
 
-          -if @comments.count > 5
-            %nav.text-center
-              %ul.pagination
-                - @comments.each_slice(5).with_index do |slice, i|
-                  %li
-                    %a.myCarousel-target{class: "#{'active' if i + 1 == @comments.count / 5 + (@comments.count % 5 == 0 ? 0 : 1)}", "data-slide-to" => "#{i}", "data-target" => "#myCarousel"}
-                      ="#{i+1}"
+            -if @comments.count > 5
+              %nav.text-center
+                %ul.pagination
+                  - @comments.each_slice(5).with_index do |slice, i|
+                    %li
+                      %a.myCarousel-target{class: "#{'active' if i + 1 == @comments.count / 5 + (@comments.count % 5 == 0 ? 0 : 1)}", "data-slide-to" => "#{i}", "data-target" => "#myCarousel"}
+                        ="#{i+1}"
+
 
       .divider25
 

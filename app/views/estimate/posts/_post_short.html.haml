@@ -1,0 +1,40 @@
+.col-md-6
+  .post.post_5
+    .post-header.white
+      .row
+        .col-md-9.col-xs-9
+          %h5.font_purple.bold
+            = trim_string(post_short.name, size = 50)
+        .col-md-1.col-xs-1
+          %h4.pull-right
+            %i.fa.fa-exclamation-triangle.font_lighter_grey
+        .col-md-2.col-xs-2
+          %h5.time
+            = Russian::strftime(post_short.created_at, '%d.%m.%Y')
+    .post-body
+      .media
+        .media-left.text-center.gradient.post-poster
+          = image_tag 'no-ava.png', class: "img-circle img50"
+          %p.poster-name
+            = post_short.user
+        .media-body.white-gray
+          .post-text
+            %p
+              = trim_string(post_short.goal, size = 50)
+    .project-bottom-progress-block
+      - post_short.estimates.each do |est|
+        = link_to({action: :show, project: @project, id: est.id}, remote: true, id: 'show_record', class: 'single-progress-block') do
+          .user-ratings-block
+            .progress-userpic
+              =image_tag 'no-ava.png'
+            .progress-username
+              = est.user
+          .progress-container
+            .progress.pb-lg
+              .progress-bar.pb-animated{"data-pbmax" => "#{est.score(@est_stat)}", :role => "progressbar"}
+                %span.pb-limit=est.score(@est_stat)
+          .progress-ratings
+            %span.label.label-sm.back-color-7297c9.test= est.max_score
+            %span.label.label-sm.back-color-75b5d3= est.second_c
+            %span.label.label-sm.back-color-7ed8e3= est.first_c
+            %span.label.label-sm.back-color-81ded2= est.third_c

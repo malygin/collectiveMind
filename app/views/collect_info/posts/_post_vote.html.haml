@@ -1,4 +1,4 @@
-.col-sm-4{id: "post_vote_#{post_vote.id}"}
+.col-sm-4.vote_item_cont{id: "post_vote_#{post_vote.id}"}
   .vote_item
     .heading_cont
       %h6
@@ -6,12 +6,12 @@
     .divider10
     .vote_controls.text-center
       = link_to vote_collect_info_post_path(@project, post_vote.id, status: 1), remote: true, method: :put do
-        %button.btn.red.vote_button{:role => "button"}
+        %button.btn.vote_button.v_btn_1{"data-vote-role" => "important", :role => "button"}
           %i.fa.fa-exclamation
       = link_to vote_collect_info_post_path(@project, post_vote.id, status: 2), remote: true, method: :put do
-        %button.btn.dark-grey.vote_button{:role => "button"}
+        %button.btn.vote_button.v_btn_2{"data-vote-role" => "not_important", :role => "button"}
           %i.fa.fa-minus
       = link_to vote_collect_info_post_path(@project, post_vote.id, status: 3), remote: true, method: :put do
-        %button.btn.black.vote_button{:role => "button"}
+        %button.btn.vote_button.v_btn_3{"data-vote-role" => "unnecessary", :role => "button"}
           %i.fa.fa-times
     .divider15

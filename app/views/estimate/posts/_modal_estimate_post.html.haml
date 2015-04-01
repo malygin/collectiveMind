@@ -1,8 +1,9 @@
-#popup-rating-detail.popup-window.info-popup.mfp-hide
+#popup-rating-detail.popup-window.popup-rating-detail.info-popup.mfp-hide
   .popup.popup-top-rounded.popup-bottom-rounded
     .row.popup-post-info
       .popup-header.popup-top-rounded.col-sm-12
-        %h2.color.mass-red=@plan_post.name
+        %h2.font_red
+          =@plan_post.name
       .col-lg-6.popup-post-block
         = image_tag 'no-ava.png'
         %span
@@ -10,14 +11,25 @@
         .info-stripe
           %span.popup-date= Russian::strftime(@post.created_at, '%d.%m.%Y')
           %span.popup-comments
-            +5
+            = @post.comments.count
             %i.fa.fa-comment-o
-          %span.popup-likes
-            +9
-            %i.fa.fa-thumbs-o-up
-          %span.popup-dislikes
-            +1
-            %i.fa.fa-thumbs-o-down
+          = link_to({controller: @post.class.name.underscore.pluralize ,action: :like, project: @project, id: @post.id, against: false, remote: true}, method: :put, id: "plus_post_#{@post.id}") do
+            %span.bold
+              %span(id="plus_counter_#{@post.id}")
+                = @post.users_pro.count
+              %i.fa.fa-thumbs-up.theme_font_color
+          = link_to({controller: @post.class.name.underscore.pluralize, action: :like, project: @project,  id: @post.id, against: true, remote: true}, method: :put, id: "minus_post_#{@post.id}") do
+            %span.bold
+              %span(id="minus_counter_#{@post.id}")
+                = @post.users_against.count
+              %i.fa.fa-thumbs-down.theme_font_color
+
+          -#%span.popup-likes
+          -#  +9
+          -#  %i.fa.fa-thumbs-o-up
+          -#%span.popup-dislikes
+          -#  +1
+          -#  %i.fa.fa-thumbs-o-down
     .popup-bottom-ratings
       .popup-bottom-rating-overall.back-color-e71d2b
         %p.popup-bottom-rating-fieldname Общая оценка
@@ -36,7 +48,8 @@
             %h4.panel-title
               %span.accordion-rating= @post.second_c
               Ожидаемая эффективность первого шага проекта
-        #collapseOne.collapse-one.panel-collapse.collapse
+            = image_tag 'arrow-fifth.png', class: "panel-head-arrow"
+        #collapseOne.collapseLevel1.collapse-one.panel-collapse.collapse
           .panel-body.panel-body-first-level
             #subAccordion.panel-group
               .panel
@@ -45,7 +58,8 @@
                     %h5.panel-title
                       %span.accordion-head-left-second-level Этап 1
                       =@plan_post.post_stages.first.name
-                #collapseSubOne.collapse-sub-one.panel-collapse.panel-collapse-second-level.collapse
+                      = image_tag 'arrow-fifth1.png', class: "panel-head-arrow"
+                #collapseSubOne.collapseLevel2.collapse-sub-one.panel-collapse.panel-collapse-second-level.collapse
                   .panel-body
                     #subSubAccordion.panel-group
                       -@plan_post.post_stages.first.plan_post_aspects.each_with_index do |concept, index|
@@ -57,7 +71,8 @@
                                   -if concept.estimate_post_aspect(@post.id)
                                     = "#{concept.estimate_post_aspect(@post.id).score(@est_stat)} %"
                                 = concept.title
-                          .panel-collapse.collapse.collapse-sub-sub-one{id: "collapseSubSubOne_#{concept.id}"}
+                              = image_tag 'arrow-fifth2.png', class: "panel-head-arrow"
+                          .collapseLevel3.panel-collapse.collapse.collapse-sub-sub-one{id: "collapseSubSubOne_#{concept.id}"}
                             .panel-body
                               .panel-collapse-inside-block.rounded-1
                                 %p Для создания ресурсов, необходимых в будущем, в проекте предлагаются определенные средства.
@@ -202,7 +217,8 @@
             %h4.panel-title
               %span.accordion-rating= @post.first_c
               Ожидаемая эффективность остальных шагов проекта
-        #collapseTwo.panel-collapse.collapse
+            = image_tag 'arrow-fifth.png', class: "panel-head-arrow"
+        #collapseTwo.collapseLevel1.panel-collapse.collapse
           .panel-body.panel-body-first-level
             #subAccordionTwo.panel-group
               -@plan_post.post_stages.each_with_index do |stage, index|
@@ -213,7 +229,8 @@
                         %h5.panel-title
                           %span.accordion-head-left-second-level="Этап #{index+1}"
                           =stage.name
-                    .panel-collapse.panel-collapse-second-level.collapse.collapse-sub-one{id: "collapseSubOne_#{stage.id}"}
+                        = image_tag 'arrow-fifth1.png', class: "panel-head-arrow"
+                    .collapseLevel2.panel-collapse.panel-collapse-second-level.collapse.collapse-sub-one{id: "collapseSubOne_#{stage.id}"}
                       .panel-body
                         .panel-group{id: "subSubAccordion_#{stage.id}"}
                           - stage.plan_post_aspects.each_with_index do |concept, ind|
@@ -225,7 +242,8 @@
                                       -if concept.estimate_post_aspect(@post.id)
                                         = "#{concept.estimate_post_aspect(@post.id).score(@est_stat)} %"
                                     = concept.title
-                              .panel-collapse.collapse.collapse-sub-sub-one{id: "collapseSubSubOne_#{concept.id}"}
+                                  = image_tag 'arrow-fifth2.png', class: "panel-head-arrow"
+                              .collapseLevel3.panel-collapse.collapse.collapse-sub-sub-one{id: "collapseSubSubOne_#{concept.id}"}
                                 .panel-body
                                   .panel-collapse-inside-block.rounded-1
                                     %p Для создания ресурсов, необходимых в будущем, в проекте предлагаются определенные средства.

@@ -2,7 +2,7 @@
               url: url_for(controller: @post.nil? ? post.class.name.underscore.pluralize : @post.class.name.underscore.pluralize, action: 'add_comment', project: @project.id, id: @post.nil? ? post.id : @post.id), method: :put do |f|
   = render 'shared/notice_messages', object: f.object
   .input_cont
-    = f.text_area :content, id: "comment_text_area", class: "theme_back_color", placeholder: 'Ваш комментарий'
+    = f.text_area :content, id: "comment_text_area", placeholder: 'Ваш комментарий'
   %button.btn{:type => "submit"}
     %span.bold
       %i.fa.fa-comment.theme_font_color

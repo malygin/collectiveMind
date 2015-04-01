@@ -1,0 +1,39 @@
+.col-md-6
+  .post
+    .post-header.white
+      .row
+        .col-md-10.col-xs-10
+          %h5.font-S4.bold
+            = trim_string(post_short.name, size = 50)
+        .col-md-2.col-xs-2
+          %h5.time
+            = Russian::strftime(post_short.created_at, '%d.%m.%Y')
+    .post-body
+      .media
+        .media-left.text-center.gradient.post-poster
+          = image_tag 'no-ava.png', class: "img-circle img50"
+          %p.poster-name
+            = post_short.user
+        .media-body.white-gray
+          .post-text
+            %p
+              = trim_string(post_short.goal, size = 50)
+    .contenthover
+      = link_to({action: :show, project: @project, id: post_short.id, asp: params[:asp]}, remote: true, id: 'show_record') do
+        .arrow
+          %i.fa.fa-angle-right
+    .post-bottom.white
+      .row
+        .col-md-12.col-xs-12
+          .text-right.small_icons
+            %span.popup2
+              = post_short.comments.count
+              %i.fa.fa-comment
+            %span.popup2
+              = post_short.users_pro.count
+              %i.fa.fa-thumbs-up
+            %span.popup2
+              = post_short.users_against.count
+              %i.fa.fa-thumbs-down
+            %span.popup2
+              %i.fa.fa-exclamation-triangle.font_lighter_grey

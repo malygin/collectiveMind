@@ -26,7 +26,7 @@ class ProjectsController < ApplicationController
       end
     end
 
-    unless @project.users.include?(current_user)
+    unless @project.users.include?(current_user) or prime_admin?
       redirect_to root_url
     end
   end

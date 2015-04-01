@@ -78,6 +78,9 @@
   this.autosize = ->
     $(this).autosize()
 
+  this.comments_collapse = ->
+    $('.popup_expandable_col').toggleClass('col-md-6').toggleClass('col-md-12').toggleClass('exp')
+
 #  this.toggle_scores = ->
 #    $(this).toggleClass('label-danger label-success')
 #    text = $(this).text().trim()
@@ -101,6 +104,7 @@
 
   $('body').on('click', '#comment_text_area', this.autosize)
 
+  $('body').on('click', '.expand_button', this.comments_collapse)
 
   #  check if url contain anchor
   myLink = document.location.toString();
