@@ -22,7 +22,7 @@
     %link{:href => "css/custom.css", :rel => "stylesheet"}/
     %link{:href => "css/custom-post.css", :rel => "stylesheet"}/
   %body
-    .outer.stage5_theme
+    .outer.stage6_theme
       / Top bar starts
       %header.navbar.top_bar
         .container
@@ -31,7 +31,7 @@
               %img{:src => "img/logo1.png"}/
           %ul.nav.navbar-nav.main_menu
             %li.active
-              %a{:href => "first-stage.html"} Процедура
+              %a{:href => "1st-stage.html"} Процедура
             %li
               %a{:href => "cabinet-stage1.html"} Кабинет
             %li
@@ -41,8 +41,47 @@
           .navbar-right.text-right.user_block.font_grey
             %a.book_icon{:href => "#"}
             %span.auth-divider |
-            %a.font_lighter_grey.bold{:href => "#"}
-              %i.fa.fa-exclamation-triangle
+            %span.has_dropwindow
+              %button.btn_reset.font_lighter_grey.bold.drop_opener{"data-dd-opener" => "dd_1"}
+                %i.fa.fa-exclamation-triangle
+              #dd_1.dropdown_window.dd_570.expert_news_drop.text-left
+                .dd_badge
+                  %i.fa.fa-exclamation-triangle
+                  %small Новости от эксперта
+                .dd_wrapper
+                  .dd_top.light-grey
+                    %i.fa.fa-times.fa-lg.dd_close{"data-dd-closer" => "dd_1"}
+                  .dd_bottom.white
+                    .divider20
+                    .container
+                      .row
+                        .col-xs-2.dd_bordered_left
+                          %ul.list-unstyled.text-center.dd_tabs_nav{:role => "tablist"}
+                            %li.active{:role => "presentation"}
+                              %a{"data-toggle" => "tab", :href => "#expert1", :role => "tab"} 1.2.2015
+                            %li{:role => "presentation"}
+                              %a{"data-toggle" => "tab", :href => "#expert2", :role => "tab"} 1.2.2015
+                            .dd_nav_divider.theme_font_color
+                              %span 2
+                            %li{:role => "presentation"}
+                              %a{"data-toggle" => "tab", :href => "#expert3", :role => "tab"} 1.2.2015
+                            %li{:role => "presentation"}
+                              %a{"data-toggle" => "tab", :href => "#expert4", :role => "tab"} 1.2.2015
+                            %li{:role => "presentation"}
+                              %a{"data-toggle" => "tab", :href => "#expert5", :role => "tab"} 1.2.2015
+                            .dd_nav_divider.theme_font_color
+                              %span 1
+                        .col-xs-10.dd_bordered_right
+                          .tab-content.dd_tabs_content
+                            #expert1.tab-pane.fade.in.active.ps_cont{:role => "tabpanel"}
+                              %p
+                                Же александровна, получив депешу, только вздохнула. Провел время обеда, обращаясь к чему. Того, чтобы строго исполнить все довольны ширков, занимавшийся финансовыми делами и степан. Выборах, и по имени мужа такого милого тона в пажеском. Знатность; прекрасное помещение в губернского предводителя и которого. Нужно было найти представителя того нового направления, которому было в деревне. Говорили: наш губернский предводитель и возбуждавший и уважение и более людей.
+                              %p
+                                Же александровна, получив депешу, только вздохнула. Провел время обеда, обращаясь к чему. Того, чтобы строго исполнить все довольны ширков, занимавшийся финансовыми делами и степан. Выборах, и по имени мужа такого милого тона в пажеском. Знатность; прекрасное помещение в губернского предводителя и которого. Нужно было найти представителя того нового направления, которому было в деревне. Говорили: наш губернский предводитель и возбуждавший и уважение и более людей.
+                            #expert2.tab-pane.fade{:role => "tabpanel"} 2
+                            #expert3.tab-pane.fade{:role => "tabpanel"} 3
+                            #expert4.tab-pane.fade{:role => "tabpanel"} 4
+                    .divider20
             %span.auth-divider |
             %a.font_grey.bold{:href => "#"}
               %i.fa.fa-globe.font_lighter_grey
@@ -51,9 +90,9 @@
             %ul.dropdown-menu.dropdown-mini{:role => "menu"}
             %span.auth-divider |
             %span.badge.grey 500
-            %a.font_lighter_grey.bold{:href => "#"}
-              %small
-                Лиза Школьник
+            %small.font_lighter_grey.bold
+              Лиза Школьник
+              %a{:href => "profile.html"}
                 %i.fa.fa-angle-down
       / Top Bar ends
       .subhead
@@ -65,12 +104,15 @@
             .border_grey.rounded_3.stages_block
               .btn-toolbar{:role => "toolbar"}
                 .btn-group{:role => "group"}
-                  %a.btn.back_color_stage1{:href => "first-stage.html", :role => "button"} 1
-                  %a.btn.back_color_stage2{:href => "second-stage.html", :role => "button"} 2
-                  %a.btn.back_color_stage3{:href => "third-stage.html", :role => "button"} 3
-                  %a.btn.back_color_stage4{:href => "fourth-stage.html", :role => "button"} 4
+                  %a.btn.back_color_stage1{:href => "1st-stage.html", :role => "button"} 1
+                  %a.btn.back_color_stage2{:href => "2nd-stage.html", :role => "button"} 2
+                  %a.btn.back_color_stage3{:href => "3rd-stage.html", :role => "button"} 3
+                  %a.btn.back_color_stage4{:href => "4th-stage.html", :role => "button"} 4
+                  %a.btn.back_color_stage5{:href => "5th-stage.html", :role => "button"} 5
                 .btn-group{:role => "group"}
-                  %a.btn.back_color_stage5{:href => "fifth-stage.html", :role => "button"} 5 СТАДИЯ: ОЦЕНИВАНИЕ ПРОЕКТОВ
+                  %a.btn.back_color_stage6{:href => "6th-stage.html", :role => "button"} 6 СТАДИЯ: ОЦЕНИВАНИЕ ПРОЕКТОВ
+                .btn-group{:role => "group"}
+                  %a.btn.back_color_stage7{:href => "7th-stage.html", :role => "button"} 7
           .col-md-4.col_padding_left_3
             .border_grey.rounded_3.help_icon
             .border_grey.rounded_3.progress_block

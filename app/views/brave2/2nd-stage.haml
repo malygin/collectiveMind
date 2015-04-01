@@ -12,6 +12,8 @@
     %link{:href => "css/magnific-popup.css", :rel => "stylesheet"}/
     / Font awesome CSS
     %link{:href => "css/font-awesome.min.css", :rel => "stylesheet"}/
+    / Perfect scrollbar
+    %link{:href => "css/perfect-scrollbar.min.css", :rel => "stylesheet"}/
     / Custom CSS. Type your CSS code in custom.css file
     %link{:href => "css/custom.css", :rel => "stylesheet"}/
     %link{:href => "css/custom-post.css", :rel => "stylesheet"}/
@@ -29,15 +31,67 @@
               %a{:href => "1st-stage.html"} Процедура
             %li
               %a{:href => "cabinet-stage1.html"} Кабинет
-            %li
-              %a#popover_news.has_circle.popover_news{"data-content" => "\n                            <div class='popover_cont'>\n                            <a href='#' class='news-tooltip-icon' id='tooltip-i1'>\n                                <img src='img/icon-news-1.png'>\n                                <span class='news-tooltip-bottom-text'>добавлено</span>\n                            </a>\n                            <a href='#' class='news-tooltip-icon' id='tooltip-i2'>\n                                <img src='img/icon-news-2.png'>\n                                <span class='news-tooltip-bottom-text'>комментария</span>\n                            </a>\n                            <a href='#popup-news' class='news-tooltip-icon news-popup-href' id='tooltip-i3'>\n                                <img src='img/icon-news-3.png'>\n                                <span class='top-circle'>36</span>\n                                <span class='news-tooltip-bottom-text'>пометок</span>\n                            </a>\n                            <a href='#' class='news-tooltip-icon' id='tooltip-i4'>\n                                <img src='img/icon-news-4.png'>\n                                <span class='top-circle'>1</span>\n                                <span class='news-tooltip-bottom-text'>отредактировано</span>\n                            </a>\n                            </div>", "data-html" => "true", "data-placement" => "bottom", "data-toggle" => "popover", :href => "#"}
-                Новости
-                %span.top-circle 36
+            %li.has_dropwindow
+              %a.has_circle.drop_opener{"data-dd-opener" => "dd_2"}
+                Мои уведомления
+                %span.top-circle 1
+              #dd_2.dropdown_window.dd_435.notifications_drop.text-left
+                .dd_wrapper
+                  .dd_top.thin.light-grey
+                    %i.fa.fa-close.fa-lg.dd_close{"data-dd-closer" => "dd_2"}
+                  .dd_bottom.white
+                    .divider10
+                    .container
+                      .row
+                        .col-xs-12
+                          .ps_cont
+                            .dd_nav_divider.theme_font_color
+                              %span 2
+                    .divider20
           .navbar-right.text-right.user_block.font_grey
             %a.book_icon{:href => "#"}
             %span.auth-divider |
-            %a.font_lighter_grey.bold{:href => "#"}
-              %i.fa.fa-exclamation-triangle
+            %span.has_dropwindow
+              %button.btn_reset.font_lighter_grey.bold.drop_opener{"data-dd-opener" => "dd_1"}
+                %i.fa.fa-exclamation-triangle
+              #dd_1.dropdown_window.dd_570.expert_news_drop.text-left
+                .dd_badge
+                  %i.fa.fa-exclamation-triangle
+                  %small Новости от эксперта
+                .dd_wrapper
+                  .dd_top.light-grey
+                    %i.fa.fa-close.fa-lg.dd_close{"data-dd-closer" => "dd_1"}
+                  .dd_bottom.white
+                    .divider20
+                    .container
+                      .row
+                        .col-xs-2.dd_bordered_left
+                          %ul.list-unstyled.text-center.dd_tabs_nav{:role => "tablist"}
+                            %li.active{:role => "presentation"}
+                              %a{"data-toggle" => "tab", :href => "#expert1", :role => "tab"} 1.2.2015
+                            %li{:role => "presentation"}
+                              %a{"data-toggle" => "tab", :href => "#expert2", :role => "tab"} 1.2.2015
+                            .dd_nav_divider.theme_font_color
+                              %span 2
+                            %li{:role => "presentation"}
+                              %a{"data-toggle" => "tab", :href => "#expert3", :role => "tab"} 1.2.2015
+                            %li{:role => "presentation"}
+                              %a{"data-toggle" => "tab", :href => "#expert4", :role => "tab"} 1.2.2015
+                            %li{:role => "presentation"}
+                              %a{"data-toggle" => "tab", :href => "#expert5", :role => "tab"} 1.2.2015
+                            .dd_nav_divider.theme_font_color
+                              %span 1
+                        .col-xs-10.dd_bordered_right
+                          .tab-content.dd_tabs_content
+                            #expert1.tab-pane.fade.in.active.ps_cont{:role => "tabpanel"}
+                              %p
+                                Же александровна, получив депешу, только вздохнула. Провел время обеда, обращаясь к чему. Того, чтобы строго исполнить все довольны ширков, занимавшийся финансовыми делами и степан. Выборах, и по имени мужа такого милого тона в пажеском. Знатность; прекрасное помещение в губернского предводителя и которого. Нужно было найти представителя того нового направления, которому было в деревне. Говорили: наш губернский предводитель и возбуждавший и уважение и более людей.
+                              %p
+                                Же александровна, получив депешу, только вздохнула. Провел время обеда, обращаясь к чему. Того, чтобы строго исполнить все довольны ширков, занимавшийся финансовыми делами и степан. Выборах, и по имени мужа такого милого тона в пажеском. Знатность; прекрасное помещение в губернского предводителя и которого. Нужно было найти представителя того нового направления, которому было в деревне. Говорили: наш губернский предводитель и возбуждавший и уважение и более людей.
+                            #expert2.tab-pane.fade{:role => "tabpanel"} 2
+                            #expert3.tab-pane.fade{:role => "tabpanel"} 3
+                            #expert4.tab-pane.fade{:role => "tabpanel"} 4
+                    .divider20
             %span.auth-divider |
             %a.font_grey.bold{:href => "#"}
               %i.fa.fa-globe.font_lighter_grey
@@ -381,8 +435,6 @@
                   .carousel-inner{:role => "listbox"}
                     .item.active
                       .media.comment
-                        %span.comment_badge.font_white.dark-grey
-                          %small важно
                         .media-left
                           %img.media-object.img35.img-circle{:src => "img/ava-vinnie.jpg"}/
                         .media-body
@@ -550,81 +602,237 @@
             .row
               .col-md-12
                 %h4.bold.font_dark_grey.tall_modal_title
-                  Голосование по аспектам
-          .vote_progress_cont
-            .vote_progress.light-green{"data-limit" => "33"}
+                  Голосование по несовершенствам
+          .vote_progress_cont.progress
+            .vote_progress.light-green.progress-bar{"aria-valuemax" => "100", "aria-valuemin" => "0", :role => "progressbar"}
           .modal_body
-            .container.vote_folders_cont.no_padding_col
-              %ul.nav.vote_2_nav.row{:role => "tablist"}
+            .container.vote_folders_cont.folders_3.no_padding_col
+              %ul.nav.vote_nav.row{:role => "tablist"}
                 %li.no_padding_col.active.folder_all{:role => "presentation"}
                   %a.vote_folder{"data-toggle" => "tab", :href => "#vote_tab1", :role => "tab"}
                     %i.fa.fa-angle-left.fa_xlg
                     %small.bold Вернуться в общий список
                 %li.col-md-4.no_padding_col{:role => "presentation"}
-                  %a.vote_folder{"data-toggle" => "tab", :href => "#vote_tab2", :role => "tab"}
+                  %a.vote_folder{"data-toggle" => "tab", "data-vote-folder-role" => "important", :href => "#vote_tab2", :role => "tab"}
                     .vote_folder_inn.poll-2-1
-                      %span.vote_counter 4
+                      %span.vote_counter
                       %h5 Важно
                 %li.col-md-4.no_padding_col{:role => "presentation"}
-                  %a.vote_folder{"data-toggle" => "tab", :href => "#vote_tab3", :role => "tab"}
+                  %a.vote_folder{"data-toggle" => "tab", "data-vote-folder-role" => "not_important", :href => "#vote_tab3", :role => "tab"}
                     .vote_folder_inn.poll-2-2
-                      %span.vote_counter 1
+                      %span.vote_counter
                       %h5 Неважно
                 %li.col-md-4.no_padding_col{:role => "presentation"}
-                  %a.vote_folder{"data-toggle" => "tab", :href => "#vote_tab4", :role => "tab"}
+                  %a.vote_folder{"data-toggle" => "tab", "data-vote-folder-role" => "unnecessary", :href => "#vote_tab4", :role => "tab"}
                     .vote_folder_inn.poll-2-3
-                      %span.vote_counter 0
+                      %span.vote_counter
                       %h5 Лишнее
             .divider25
             .container
               .row
                 .divider25
                 .tab-content
-                  #vote_tab1.tab-pane.active{:role => "tabpanel"}
+                  #vote_tab1.tab-pane.all_vote.active{:role => "tabpanel"}
                     .container.padding30
                       .row
-                        .col-sm-4
+                        .col-sm-4.vote_item_cont.item_expandable.h_1
                           .vote_item
-                            .heading_cont
-                              %h6 Слишком низкие потолки в офисах
+                            .media
+                              .media-body.pink
+                                %table.table
+                                  %tbody
+                                    %tr.vote_filler_cell
+                                      %td.col-md-2.right-column
+                                      %td.col-md-10.left-column
+                                    %tr.what
+                                      %td.col-md-2.text-center.right-column
+                                        Что
+                                      %td.col-md-10.left-column.bold
+                                        Нечем дышать
+                                    %tr
+                                      %td.col-md-2.text-center.right-column Где
+                                      %td.col-md-10.left-column Около Высокого дуба
+                                    %tr
+                                      %td.col-md-2.text-center.right-column Когда
+                                      %td.col-md-10.left-column
+                                        При выслеживании удачного момента
+                                        для кражи меда
+                                    %tr.vote_filler_cell
+                                      %td.col-md-2.right-column
+                                      %td.col-md-10.left-column
+                            .dark-blue.vote_tag Аспект: Слишком низкие потолки в офисах
                             .divider10
                             .vote_controls.text-center
-                              %button.btn.red.vote_button{:role => "button"}
+                              %button.btn.vote_button.v_btn_1{"data-vote-role" => "important", :role => "button"}
                                 %i.fa.fa-exclamation
-                              %button.btn.dark-grey.vote_button{:role => "button"}
+                              %button.btn.vote_button.v_btn_2{"data-vote-role" => "not_important", :role => "button"}
                                 %i.fa.fa-minus
-                              %button.btn.black.vote_button{:role => "button"}
+                              %button.btn.vote_button.v_btn_3{"data-vote-role" => "unnecessary", :role => "button"}
                                 %i.fa.fa-times
-                            .divider15
-                        .col-sm-4
+                              %span.vote_open_detail.grey
+                                %i.fa.fa-angle-right.font_white
+                              .divider15
+                        .col-sm-4.vote_item_cont.item_expandable.h_1
                           .vote_item
-                            .heading_cont
-                              %h6 Слишком низкие потолки в офисах
+                            .media
+                              .media-body.blue
+                                %table.table
+                                  %tbody
+                                    %tr.vote_filler_cell
+                                      %td.col-md-2.right-column
+                                      %td.col-md-10.left-column
+                                    %tr.what
+                                      %td.col-md-2.text-center.right-column
+                                        Что
+                                      %td.col-md-10.left-column.bold
+                                        Нечем дышать
+                                    %tr
+                                      %td.col-md-2.text-center.right-column Где
+                                      %td.col-md-10.left-column Около Высокого дуба
+                                    %tr
+                                      %td.col-md-2.text-center.right-column Когда
+                                      %td.col-md-10.left-column
+                                        При выслеживании удачного момента
+                                        для кражи меда
+                                    %tr.vote_filler_cell
+                                      %td.col-md-2.right-column
+                                      %td.col-md-10.left-column
+                            .dark-blue.vote_tag Аспект: Слишком низкие потолки в офисах
                             .divider10
                             .vote_controls.text-center
-                              %button.btn.red.vote_button{:role => "button"}
+                              %button.btn.vote_button.v_btn_1{"data-vote-role" => "important", :role => "button"}
                                 %i.fa.fa-exclamation
-                              %button.btn.dark-grey.vote_button{:role => "button"}
+                              %button.btn.vote_button.v_btn_2{"data-vote-role" => "not_important", :role => "button"}
                                 %i.fa.fa-minus
-                              %button.btn.black.vote_button{:role => "button"}
+                              %button.btn.vote_button.v_btn_3{"data-vote-role" => "unnecessary", :role => "button"}
                                 %i.fa.fa-times
-                            .divider15
-                        .col-sm-4
+                              %span.vote_open_detail.grey
+                                %i.fa.fa-angle-right.font_white
+                              .divider15
+                        .col-sm-4.vote_item_cont.item_expandable.h_1
                           .vote_item
-                            .heading_cont
-                              %h6 Слишком низкие потолки в офисах
+                            .media
+                              .media-body.pink
+                                %table.table
+                                  %tbody
+                                    %tr.vote_filler_cell
+                                      %td.col-md-2.right-column
+                                      %td.col-md-10.left-column
+                                    %tr.what
+                                      %td.col-md-2.text-center.right-column
+                                        Что
+                                      %td.col-md-10.left-column.bold
+                                        Нечем дышать
+                                    %tr
+                                      %td.col-md-2.text-center.right-column Где
+                                      %td.col-md-10.left-column Около Высокого дуба
+                                    %tr
+                                      %td.col-md-2.text-center.right-column Когда
+                                      %td.col-md-10.left-column
+                                        При выслеживании удачного момента
+                                        для кражи меда
+                                    %tr.vote_filler_cell
+                                      %td.col-md-2.right-column
+                                      %td.col-md-10.left-column
+                            .dark-blue.vote_tag Аспект: Слишком низкие потолки в офисах
                             .divider10
                             .vote_controls.text-center
-                              %button.btn.red.vote_button{:role => "button"}
+                              %button.btn.vote_button.v_btn_1{"data-vote-role" => "important", :role => "button"}
                                 %i.fa.fa-exclamation
-                              %button.btn.dark-grey.vote_button{:role => "button"}
+                              %button.btn.vote_button.v_btn_2{"data-vote-role" => "not_important", :role => "button"}
                                 %i.fa.fa-minus
-                              %button.btn.black.vote_button{:role => "button"}
+                              %button.btn.vote_button.v_btn_3{"data-vote-role" => "unnecessary", :role => "button"}
                                 %i.fa.fa-times
-                            .divider15
-                  #vote_tab2.tab-pane{:role => "tabpanel"}
-                  #vote_tab3.tab-pane{:role => "tabpanel"}
-                  #vote_tab4.tab-pane{:role => "tabpanel"}
+                              %span.vote_open_detail.grey
+                                %i.fa.fa-angle-right.font_white
+                              .divider15
+                        .col-sm-4.vote_item_cont.item_expandable.h_1
+                          .vote_item
+                            .media
+                              .media-body.pink
+                                %table.table
+                                  %tbody
+                                    %tr.vote_filler_cell
+                                      %td.col-md-2.right-column
+                                      %td.col-md-10.left-column
+                                    %tr.what
+                                      %td.col-md-2.text-center.right-column
+                                        Что
+                                      %td.col-md-10.left-column.bold
+                                        Нечем дышать
+                                    %tr
+                                      %td.col-md-2.text-center.right-column Где
+                                      %td.col-md-10.left-column Около Высокого дуба
+                                    %tr
+                                      %td.col-md-2.text-center.right-column Когда
+                                      %td.col-md-10.left-column
+                                        При выслеживании удачного момента
+                                        для кражи меда
+                                    %tr.vote_filler_cell
+                                      %td.col-md-2.right-column
+                                      %td.col-md-10.left-column
+                            .dark-blue.vote_tag Аспект: Слишком низкие потолки в офисах
+                            .divider10
+                            .vote_controls.text-center
+                              %button.btn.vote_button.v_btn_1{"data-vote-role" => "important", :role => "button"}
+                                %i.fa.fa-exclamation
+                              %button.btn.vote_button.v_btn_2{"data-vote-role" => "not_important", :role => "button"}
+                                %i.fa.fa-minus
+                              %button.btn.vote_button.v_btn_3{"data-vote-role" => "unnecessary", :role => "button"}
+                                %i.fa.fa-times
+                              %span.vote_open_detail.grey
+                                %i.fa.fa-angle-right.font_white
+                              .divider15
+                        .col-sm-4.vote_item_cont.item_expandable.h_1
+                          .vote_item
+                            .media
+                              .media-body.blue
+                                %table.table
+                                  %tbody
+                                    %tr.vote_filler_cell
+                                      %td.col-md-2.right-column
+                                      %td.col-md-10.left-column
+                                    %tr.what
+                                      %td.col-md-2.text-center.right-column
+                                        Что
+                                      %td.col-md-10.left-column.bold
+                                        Нечем дышать
+                                    %tr
+                                      %td.col-md-2.text-center.right-column Где
+                                      %td.col-md-10.left-column Около Высокого дуба
+                                    %tr
+                                      %td.col-md-2.text-center.right-column Когда
+                                      %td.col-md-10.left-column
+                                        При выслеживании удачного момента
+                                        для кражи меда
+                                    %tr.vote_filler_cell
+                                      %td.col-md-2.right-column
+                                      %td.col-md-10.left-column
+                            .dark-blue.vote_tag Аспект: Слишком низкие потолки в офисах
+                            .divider10
+                            .vote_controls.text-center
+                              %button.btn.vote_button.v_btn_1{"data-vote-role" => "important", :role => "button"}
+                                %i.fa.fa-exclamation
+                              %button.btn.vote_button.v_btn_2{"data-vote-role" => "not_important", :role => "button"}
+                                %i.fa.fa-minus
+                              %button.btn.vote_button.v_btn_3{"data-vote-role" => "unnecessary", :role => "button"}
+                                %i.fa.fa-times
+                              %span.vote_open_detail.grey
+                                %i.fa.fa-angle-right.font_white
+                              .divider15
+                    .divider50
+                  #vote_tab2.tab-pane{"data-vote-poll-role" => "important", :role => "tabpanel"}
+                    .container.padding30
+                      .row
+                      .divider50
+                  #vote_tab3.tab-pane{"data-vote-poll-role" => "not_important", :role => "tabpanel"}
+                    .container.padding30
+                      .row
+                      .divider50
+                  #vote_tab4.tab-pane{"data-vote-poll-role" => "unnecessary", :role => "tabpanel"}
+                    .container.padding30
+                      .row
+                      .divider50
                 .divider35
       #popup-explanation-2nd.popup-window.popup-explanation.popup-w710.mfp-hide.welcome_popup
         .popup.popup_rounded
@@ -664,6 +872,8 @@
     %script{:src => "js/excanvas.js"}
     / jQuery Knob
     %script{:src => "js/jquery.knob.js"}
+    / Perfect scrollbar
+    %script{:src => "js/perfect-scrollbar.jquery.min.js"}
     / Custom JS. Type your JS code in custom.js file
     %script{:src => "js/custom.js"}
     :javascript
@@ -672,3 +882,6 @@
           midClick: true
       });
       $('.open_welcome_popup').magnificPopup('open');
+
+      /* perfect scrollbar */
+      $('.ps_cont').perfectScrollbar();

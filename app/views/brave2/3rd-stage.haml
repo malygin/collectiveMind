@@ -34,8 +34,47 @@
           .navbar-right.text-right.user_block.font_grey
             %a.book_icon{:href => "#"}
             %span.auth-divider |
-            %a.font_lighter_grey.bold{:href => "#"}
-              %i.fa.fa-exclamation-triangle
+            %span.has_dropwindow
+              %button.btn_reset.font_lighter_grey.bold.drop_opener{"data-dd-opener" => "dd_1"}
+                %i.fa.fa-exclamation-triangle
+              #dd_1.dropdown_window.dd_570.expert_news_drop.text-left
+                .dd_badge
+                  %i.fa.fa-exclamation-triangle
+                  %small Новости от эксперта
+                .dd_wrapper
+                  .dd_top.light-grey
+                    %i.fa.fa-times.fa-lg.dd_close{"data-dd-closer" => "dd_1"}
+                  .dd_bottom.white
+                    .divider20
+                    .container
+                      .row
+                        .col-xs-2.dd_bordered_left
+                          %ul.list-unstyled.text-center.dd_tabs_nav{:role => "tablist"}
+                            %li.active{:role => "presentation"}
+                              %a{"data-toggle" => "tab", :href => "#expert1", :role => "tab"} 1.2.2015
+                            %li{:role => "presentation"}
+                              %a{"data-toggle" => "tab", :href => "#expert2", :role => "tab"} 1.2.2015
+                            .dd_nav_divider.theme_font_color
+                              %span 2
+                            %li{:role => "presentation"}
+                              %a{"data-toggle" => "tab", :href => "#expert3", :role => "tab"} 1.2.2015
+                            %li{:role => "presentation"}
+                              %a{"data-toggle" => "tab", :href => "#expert4", :role => "tab"} 1.2.2015
+                            %li{:role => "presentation"}
+                              %a{"data-toggle" => "tab", :href => "#expert5", :role => "tab"} 1.2.2015
+                            .dd_nav_divider.theme_font_color
+                              %span 1
+                        .col-xs-10.dd_bordered_right
+                          .tab-content.dd_tabs_content
+                            #expert1.tab-pane.fade.in.active.ps_cont{:role => "tabpanel"}
+                              %p
+                                Же александровна, получив депешу, только вздохнула. Провел время обеда, обращаясь к чему. Того, чтобы строго исполнить все довольны ширков, занимавшийся финансовыми делами и степан. Выборах, и по имени мужа такого милого тона в пажеском. Знатность; прекрасное помещение в губернского предводителя и которого. Нужно было найти представителя того нового направления, которому было в деревне. Говорили: наш губернский предводитель и возбуждавший и уважение и более людей.
+                              %p
+                                Же александровна, получив депешу, только вздохнула. Провел время обеда, обращаясь к чему. Того, чтобы строго исполнить все довольны ширков, занимавшийся финансовыми делами и степан. Выборах, и по имени мужа такого милого тона в пажеском. Знатность; прекрасное помещение в губернского предводителя и которого. Нужно было найти представителя того нового направления, которому было в деревне. Говорили: наш губернский предводитель и возбуждавший и уважение и более людей.
+                            #expert2.tab-pane.fade{:role => "tabpanel"} 2
+                            #expert3.tab-pane.fade{:role => "tabpanel"} 3
+                            #expert4.tab-pane.fade{:role => "tabpanel"} 4
+                    .divider20
             %span.auth-divider |
             %a.font_grey.bold{:href => "#"}
               %i.fa.fa-globe.font_lighter_grey
@@ -211,6 +250,7 @@
                           %span.popup2
                             1
                             %i.fa.fa-thumbs-down
+          %a.open-popup-vote-link{:href => "#vote-3"} Голосовалка
       / Main Block ends
       #popup-3-1.popup-window.detailed_popup.popup-w1030.mfp-hide
         .popup.popup_rounded.popup_color_theme_stage3
@@ -237,7 +277,7 @@
                       %small 21.12.2014
           .modal_body
             .poster-line.line-grey
-              %span.rolled_text несовершенства
+              %span.tags_badge несовершенства
               .row
                 .col-md-6
                   .innov-poster-cont
@@ -250,314 +290,305 @@
                     .innov-tags-tag.blue-green2 Активное противостояние четвероногих и пчел
                     .innov-tags-tag.blue-green3 Рядом с дубом нет цветочных полян
                     .innov-tags-tag.light-green Пчелы летают слишком медленно
-            .divider25
             .container
-              .col-md-6
-                .stripe-qa
-                  .lined-heading
-                    %span.bold-stripe Деятельность
-                  %p
-                    %strong> Описание:
-                    lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum
-                  %p
-                    %strong> Обоснование:
-                    lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum
-                .stripe-qa
-                  .lined-heading
-                    %span.bold-stripe Деятели
-                  %p
-                    %strong> Описание:
-                    lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum
-                .stripe-qa
-                  .lined-heading
-                    %span.bold-stripe Ресурсы и инструменты
-                  %p
-                    %strong> Описание:
-                    lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum
-                .stripe-qa
-                  .lined-heading
-                    %span.bold-stripe Воздействие на целевую аудиторию
-                  %p
-                    %strong> Описание:
-                    lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum
-                .stripe-qa
-                  .lined-heading
-                    %span.bold-stripe Воздействие на среду
-                  %p
-                    %strong> Описание:
-                    lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum
-              .col-md-6
-                .container
-                  .row
-                    .col-md-12.theme_font_color.text-right.no_padding_col
-                      21.12.2014
-                .divider5
-                .divider_1_grey
-                #myCarousel.carousel.slide{"data-ride" => "carousel"}
-                  .carousel-inner{:role => "listbox"}
-                    .item.active
-                      .media.comment
-                        .media-left
-                          %img.media-object.img50.img-circle{:src => "img/ava-vinnie.jpg"}/
-                        .media-body
-                          %h5.media-heading.bold Винни-Пух
-                          %span.date.theme_font_color 15:28
-                        %p.font_grey.bold Ничего не правда. Я люблю гулять, а от вашего дуба тень большая.
-                        .post-interfaces-buttons
-                          %button{:type => "button"}
-                            %span.bold
-                              %i.fa.fa-comment.theme_font_color
-                          %button{:type => "button"}
-                            %span.bold
-                              9
-                              %i.fa.fa-thumbs-up.theme_font_color
-                          %button{:type => "button"}
-                            %span.bold
-                              1
-                              %i.fa.fa-thumbs-down.theme_font_color
-                          %button{:type => "button"}
-                            %span.bold
-                              %i.fa.fa-reply.fa-rotate-180.theme_font_color
-                      .divider_1_grey
-                    .item
-                      .media.comment
-                        .media-left
-                          %img.media-object.img50.img-circle{:src => "img/ava-vinnie.jpg"}/
-                        .media-body
-                          %h5.media-heading.bold Винни-Пух
-                          %span.date.theme_font_color 15:28
-                        %p.font_grey.bold Ничего не правда. Я люблю гулять, а от вашего дуба тень большая.
-                        .post-interfaces-buttons
-                          %button{:type => "button"}
-                            %span.bold
-                              %i.fa.fa-comment.theme_font_color
-                          %button{:type => "button"}
-                            %span.bold
-                              9
-                              %i.fa.fa-thumbs-up.theme_font_color
-                          %button{:type => "button"}
-                            %span.bold
-                              1
-                              %i.fa.fa-thumbs-down.theme_font_color
-                          %button{:type => "button"}
-                            %span.bold
-                              %i.fa.fa-reply.fa-rotate-180.theme_font_color
-                      .divider_1_grey
-                      .media.comment
-                        .media-left
-                          %img.media-object.img50.img-circle{:src => "img/ava-vinnie.jpg"}/
-                        .media-body
-                          %h5.media-heading.bold Винни-Пух
-                          %span.date.theme_font_color 15:28
-                        %p.font_grey.bold Ничего не правда. Я люблю гулять, а от вашего дуба тень большая.
-                        .post-interfaces-buttons
-                          %button{:type => "button"}
-                            %span.bold
-                              %i.fa.fa-comment.theme_font_color
-                          %button{:type => "button"}
-                            %span.bold
-                              9
-                              %i.fa.fa-thumbs-up.theme_font_color
-                          %button{:type => "button"}
-                            %span.bold
-                              1
-                              %i.fa.fa-thumbs-down.theme_font_color
-                          %button{:type => "button"}
-                            %span.bold
-                              %i.fa.fa-reply.fa-rotate-180.theme_font_color
-                      .divider_1_grey
-                    .item
-                      .media.comment
-                        .media-left
-                          %img.media-object.img50.img-circle{:src => "img/ava-vinnie.jpg"}/
-                        .media-body
-                          %h5.media-heading.bold Винни-Пух
-                          %span.date.theme_font_color 15:28
-                        %p.font_grey.bold Ничего не правда. Я люблю гулять, а от вашего дуба тень большая.
-                        .post-interfaces-buttons
-                          %button{:type => "button"}
-                            %span.bold
-                              %i.fa.fa-comment.theme_font_color
-                          %button{:type => "button"}
-                            %span.bold
-                              9
-                              %i.fa.fa-thumbs-up.theme_font_color
-                          %button{:type => "button"}
-                            %span.bold
-                              1
-                              %i.fa.fa-thumbs-down.theme_font_color
-                          %button{:type => "button"}
-                            %span.bold
-                              %i.fa.fa-reply.fa-rotate-180.theme_font_color
-                      .divider_1_grey
-                      .media.comment
-                        .media-left
-                          %img.media-object.img50.img-circle{:src => "img/ava-vinnie.jpg"}/
-                        .media-body
-                          %h5.media-heading.bold Винни-Пух
-                          %span.date.theme_font_color 15:28
-                        %p.font_grey.bold Ничего не правда. Я люблю гулять, а от вашего дуба тень большая.
-                        .post-interfaces-buttons
-                          %button{:type => "button"}
-                            %span.bold
-                              %i.fa.fa-comment.theme_font_color
-                          %button{:type => "button"}
-                            %span.bold
-                              9
-                              %i.fa.fa-thumbs-up.theme_font_color
-                          %button{:type => "button"}
-                            %span.bold
-                              1
-                              %i.fa.fa-thumbs-down.theme_font_color
-                          %button{:type => "button"}
-                            %span.bold
-                              %i.fa.fa-reply.fa-rotate-180.theme_font_color
-                      .divider_1_grey
-                      .media.comment
-                        .media-left
-                          %img.media-object.img50.img-circle{:src => "img/ava-vinnie.jpg"}/
-                        .media-body
-                          %h5.media-heading.bold Винни-Пух
-                          %span.date.theme_font_color 15:28
-                        %p.font_grey.bold Ничего не правда. Я люблю гулять, а от вашего дуба тень большая.
-                        .post-interfaces-buttons
-                          %button{:type => "button"}
-                            %span.bold
-                              %i.fa.fa-comment.theme_font_color
-                          %button{:type => "button"}
-                            %span.bold
-                              9
-                              %i.fa.fa-thumbs-up.theme_font_color
-                          %button{:type => "button"}
-                            %span.bold
-                              1
-                              %i.fa.fa-thumbs-down.theme_font_color
-                          %button{:type => "button"}
-                            %span.bold
-                              %i.fa.fa-reply.fa-rotate-180.theme_font_color
-                      .divider_1_grey
-                .divider15
-                .post-interfaces
+              .row
+                .col-md-6.com_dashed_border.right.popup_collapsable_col.collapse.in
+                  %button.expand_button.remove_col.btn_reset{"data-target" => ".popup_collapsable_col", "data-toggle" => "collapse", :type => "button"}
+                  .divider25
+                  .stripe-qa
+                    .lined-heading
+                      %span.bold-stripe Деятельность
+                    %p
+                      %strong> Описание:
+                      lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum
+                    %p
+                      %strong> Обоснование:
+                      lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum
+                  .stripe-qa
+                    .lined-heading
+                      %span.bold-stripe Деятели
+                    %p
+                      %strong> Описание:
+                      lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum
+                  .stripe-qa
+                    .lined-heading
+                      %span.bold-stripe Ресурсы и инструменты
+                    %p
+                      %strong> Описание:
+                      lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum
+                  .stripe-qa
+                    .lined-heading
+                      %span.bold-stripe Воздействие на целевую аудиторию
+                    %p
+                      %strong> Описание:
+                      lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum
+                  .stripe-qa
+                    .lined-heading
+                      %span.bold-stripe Воздействие на среду
+                    %p
+                      %strong> Описание:
+                      lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum
+                .col-md-6.comment_col.popup_expandable_col
+                  %button.expand_button.add_col.btn_reset.theme_font_color.bold{"data-target" => ".popup_collapsable_col", "data-toggle" => "collapse", :type => "button"} открыть описание проекта
+                  .divider15
+                  #myCarousel.carousel.slide{"data-ride" => "carousel"}
+                    .carousel-inner{:role => "listbox"}
+                      .item.active
+                        .media.comment
+                          .media-left
+                            %img.media-object.img35.img-circle{:src => "img/ava-vinnie.jpg"}/
+                          .media-body
+                            %h5.media-heading.bold Винни-Пух
+                            %span.comment_interf
+                              %span.date_time.theme_font_color 15:28
+                              %button.btn_reset{:type => "button"}
+                                %i.fa.fa-cog.fa-lg.theme_font_color
+                              %span.badge.badge_important.theme_back_color важно
+                          %p.font_grey.bold Ничего не правда. Я люблю гулять, а от вашего дуба тень большая.
+                          .post-interfaces-buttons.text-left
+                            %button{:type => "button"}
+                              %span.bold
+                                9
+                                %i.fa.fa-thumbs-up.theme_font_color
+                            %button{:type => "button"}
+                              %span.bold
+                                1
+                                %i.fa.fa-thumbs-down.theme_font_color
+                            %button{:type => "button"}
+                              %span.bold
+                                %i.fa.fa-reply.fa-rotate-180.theme_font_color
+                        %a.answers_collapse.theme_font_color{"aria-expanded" => "false", "data-toggle" => "collapse", :href => "#answers-3-1"}
+                          %span 3 ответа
+                        #answers-3-1.com_answers.collapse
+                          .answers_subblock.level1
+                            .media.comment.unread
+                              .media-left
+                                %img.media-object.img35.img-circle{:src => "img/ava-vinnie.jpg"}/
+                              .media-body
+                                %h5.media-heading.bold Винни-Пух
+                                %span.comment_interf
+                                  %span.date_time.theme_font_color 15:28
+                                  %span.badge.badge_important.theme_back_color важно
+                              %p.font_grey.bold Ничего не правда. Я люблю гулять, а от вашего дуба тень большая.
+                              .post-interfaces-buttons.text-left
+                                %button{:type => "button"}
+                                  %span.bold
+                                    9
+                                    %i.fa.fa-thumbs-up.theme_font_color
+                                %button{:type => "button"}
+                                  %span.bold
+                                    1
+                                    %i.fa.fa-thumbs-down.theme_font_color
+                                %button{:type => "button"}
+                                  %span.bold
+                                    %i.fa.fa-reply.fa-rotate-180.theme_font_color
+                            .media.comment.unread
+                              .media-left
+                                %img.media-object.img35.img-circle{:src => "img/ava-vinnie.jpg"}/
+                              .media-body
+                                %h5.media-heading.bold Винни-Пух
+                                %span.comment_interf
+                                  %span.date_time.theme_font_color 15:28
+                                  %button.btn_reset{:type => "button"}
+                                    %i.fa.fa-cog.fa-lg.theme_font_color
+                              %p.font_grey.bold Ничего не правда. Я люблю гулять, а от вашего дуба тень большая.
+                              .post-interfaces-buttons.text-left
+                                %button{:type => "button"}
+                                  %span.bold
+                                    9
+                                    %i.fa.fa-thumbs-up.theme_font_color
+                                %button{:type => "button"}
+                                  %span.bold
+                                    1
+                                    %i.fa.fa-thumbs-down.theme_font_color
+                                %button{:type => "button"}
+                                  %span.bold
+                                    %i.fa.fa-reply.fa-rotate-180.theme_font_color
+                          .answers_subblock.level2
+                            .media.comment
+                              .media-left
+                                %img.media-object.img35.img-circle{:src => "img/ava-vinnie.jpg"}/
+                              .media-body
+                                %h5.media-heading.bold Винни-Пух
+                                %span.comment_interf
+                                  %span.date_time.theme_font_color 15:28
+                              %p.font_grey.bold Ничего не правда. Я люблю гулять, а от вашего дуба тень большая.
+                              .post-interfaces-buttons.text-left
+                                %button{:type => "button"}
+                                  %span.bold
+                                    9
+                                    %i.fa.fa-thumbs-up.theme_font_color
+                                %button{:type => "button"}
+                                  %span.bold
+                                    1
+                                    %i.fa.fa-thumbs-down.theme_font_color
+                                %button{:type => "button"}
+                                  %span.bold
+                                    %i.fa.fa-reply.fa-rotate-180.theme_font_color
+                        .media.comment.unread
+                          .media-left
+                            %img.media-object.img35.img-circle{:src => "img/ava-vinnie.jpg"}/
+                          .media-body
+                            %h5.media-heading.bold Винни-Пух
+                            %span.comment_interf
+                              %span.date_time.theme_font_color 15:28
+                              %span.badge.badge_important.theme_back_color важно
+                          %p.font_grey.bold Ничего не правда. Я люблю гулять, а от вашего дуба тень большая.
+                          .post-interfaces-buttons.text-left
+                            %button{:type => "button"}
+                              %span.bold
+                                9
+                                %i.fa.fa-thumbs-up.theme_font_color
+                            %button{:type => "button"}
+                              %span.bold
+                                1
+                                %i.fa.fa-thumbs-down.theme_font_color
+                            %button{:type => "button"}
+                              %span.bold
+                                %i.fa.fa-reply.fa-rotate-180.theme_font_color
+                      .item
+                      .item
+                  .divider15
                   %form.form-group.comment_add
                     .input_cont
-                      %textarea.theme_back_color{:placeholder => "Ваш комментарий"}
+                      %textarea{:placeholder => "Ваш комментарий"}
                     %button.btn{:type => "button"}
                       %span.bold
                         %i.fa.fa-comment.theme_font_color
-                %nav.text-center
-                  %ul.pagination
-                    %li
-                      %a.myCarousel-target.active{"data-slide-to" => "0", "data-target" => "#myCarousel"} 1
-                    %li
-                      %a.myCarousel-target{"data-slide-to" => "1", "data-target" => "#myCarousel"} 2
-                    %li
-                      %a.myCarousel-target{"data-slide-to" => "2", "data-target" => "#myCarousel"} 3
+                  %nav.text-center
+                    %ul.pagination
+                      %li
+                        %a.myCarousel-target.active{"data-slide-to" => "0", "data-target" => "#myCarousel"} 1
+                      %li
+                        %a.myCarousel-target{"data-slide-to" => "1", "data-target" => "#myCarousel"} 2
+                      %li
+                        %a.myCarousel-target{"data-slide-to" => "2", "data-target" => "#myCarousel"} 3
             .divider25
-      #popup-innov-new1.popup-window.popup-innov-new.popup-innov-new.popup-w1030.mfp-hide
-        .popup.popup-top-rounded.popup-bottom-rounded
-          %h2 Нововведение "Соглашение и арбитр."
-          .poster-line.line-grey
+      #vote-3.popup-window.popup-vote.popup-w1030.mfp-hide
+        .popup.popup_rounded
+          .modal_title
             .row
-              .col-md-6
-                .innov-poster-cont
-                  %img.img-circle{:src => "img/ava-pyat.jpg"}/
-                  %span.poster-name Пятачок
-              .col-md-6
-                .innov-tags
-                  .innov-tags-tag.dark-blue Взаимное недоверие четвероногих и пчёл
-                  .innov-tags-tag.blue-green Четвероногим нечем заинтересовать пчел
-                  .innov-tags-tag.blue-green2 Активное противостояние четвероногих и пчел
-                  .innov-tags-tag.blue-green3 Рядом с дубом нет цветочных полян
-                  .innov-tags-tag.light-green Пчелы летают слишком медленно
-                  .innov-tags-tag.sandy Винни Пух не говорит по пчелиному
-          .popup-imperfect-main-block
-            .row
-              .col-md-6
-                .stripe-qa
-                  .lined-heading
-                    %span.bold-stripe Опишите, что новое появится в будущем, чтобы улучшить положение.
-                  %p Контракт, регулирующий отношения четвероногих и пчел, и Сова в качестве арбитра.
-                .stripe-qa
-                  .lined-heading
-                    %span.bold-stripe Объясните, почему ваше нововведение улучшит текущее положение.
-                  %p
-                    Если вступит в действие соглашение, регулирующее отношения четвероногих и пчел , а Сова
-                    станет арбитром, то данный документ позволит регламентировать:
-                  %ul
-                    %li
-                      когда, кем и как определяется количество меда, произведенного пчелами сверх
-                      нынешнего
-                      уровня; - каков регламент передачи пчелами меда четвероногим;
-                    %li Как будут четвероногие содействовать производству меда;
-                    %li как и кем осуществляется контроль за соблюдением соглашения;
-                    %li
-                      какие санкции за всевозможные нарушения контракта обеими сторонами предусмотрены;
-                    %li как действует арбитр и кто ему помогает осуществлять его функции.
-                .stripe-qa
-                  .lined-heading
-                    %span.bold-stripe Опишите функционирование вашего нововведения в будущем – что должно регулярно делаться и какие для этого нужно поддерживать условия?
-                  %p ---
-                .stripe-qa
-                  .lined-heading
-                    %span.bold-stripe Какие ресурсы нужны в будущем для функционирования нововведения?
-                  %p ---
-                .stripe-qa
-                  .lined-heading
-                    %span.bold-stripe Кто и как будет контролировать создание и поддержание должных условий и осуществление регулярных действий, а также предотвращение нежелательных побочныx эффектов
-                  %p ---
-                .stripe-qa
-                  .lined-heading
-                    %span.bold-stripe Какие ресурсы потребуются для осуществления контроля?
-                  %p ---
-                .stripe-qa
-                  .lined-heading
-                    %span.bold-stripe Что может помешать плодотворному функционированию ресурсов, перечисленных в разделах B, С и D, и как с этим предлагается бороться?
-                  %p ---
-                .stripe-qa
-                  .lined-heading
-                    %span.bold-stripe Докажите, что эффект от нововведения оправдает связанные с ним денежные и трудовые затраты.
-                  %p ---
-                .stripe-qa
-                  .lined-heading
-                    %span.bold-stripe Обоснуйте, что воплощение нововведения в жизнь не встретит серьезных препятствий.
-                  %p ---
-              .col-md-6
-                %span.imperfect-text-date 20.12.2014
-                .imperfect-text-comments-post-block
-                  .post-interfaces
-                    .post-interfaces-buttons
-                      %button{:type => "button"}
-                        %img{:src => "img/icon-thumb-up.png"}/
-                      %button{:type => "button"}
-                        %img{:src => "img/icon-thumb-down.png"}/
-                      %button{:type => "button"}
-                        %img{:src => "img/icon-share.png"}/
-                    %form.post-interfaces-add-comment
-                      %input{:placeholder => "Ваш комментарий", :type => "text"}/
-                      %button.btn{:type => "button"}
-                        %img{:src => "img/comment-button.png"}/
-                .imperfect-text-comments-post-block
-                  .poster-line
-                    %img.img-circle{:src => "img/ava-rabb.jpg"}/
-                    %span.poster-name Кролик
-                    %span.comment-time 15:28
-                  %p
-                    Мест для прогулки во всем лесу полно, нам не нравится, что ты все время держишь нас в
-                    напряжении своим присутствием.
-                .imperfect-text-comments-post-block
-                  .poster-line
-                    %img.img-circle{:src => "img/ava-ia.jpg"}/
-                    %span.poster-name Ослик
-                    %span.comment-time 19:30
-                  %p
-                    Проснувшись однажды утром после беспокойного сна, Грегор Замза обнаружил, что
-                .imperfect-text-comments-post-block
-                  .poster-line
-                    %img.img-circle{:src => "img/ava-ia.jpg"}/
-                    %span.poster-name Ослик
-                    %span.comment-time 22:50
-                  %p
-                    Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo
+              .col-md-12
+                %h4.bold.font_dark_grey.tall_modal_title
+                  Голосование по идеям
+          .vote_progress_cont.progress
+            .vote_progress.light-green.progress-bar{"aria-valuemax" => "100", "aria-valuemin" => "0", :role => "progressbar"}
+          .modal_body
+            .container.vote_folders_cont.folders_2.no_padding_col
+              %ul.nav.vote_nav.row{:role => "tablist"}
+                %li.no_padding_col.active.folder_all{:role => "presentation"}
+                  %a.vote_folder{"data-toggle" => "tab", :href => "#vote_tab1", :role => "tab"}
+                    %i.fa.fa-angle-left.fa_xlg
+                    %small.bold Вернуться в общий список
+                %li.col-md-6.no_padding_col{:role => "presentation"}
+                  %a.vote_folder{"data-toggle" => "tab", "data-vote-folder-role" => "vote_yes", :href => "#vote_tab2", :role => "tab"}
+                    .vote_folder_inn.poll-2-1
+                      %span.vote_counter
+                      %h5 Да
+                %li.col-md-6.no_padding_col{:role => "presentation"}
+                  %a.vote_folder{"data-toggle" => "tab", "data-vote-folder-role" => "vote_no", :href => "#vote_tab3", :role => "tab"}
+                    .vote_folder_inn.poll-2-3
+                      %span.vote_counter
+                      %h5 Нет
+            %h4.bold.text-center 1. Нравится ли вам идея?
+            .divider25
+            .container
+              .row
+                .divider25
+                .tab-content
+                  #vote_tab1.tab-pane.all_vote.active{:role => "tabpanel"}
+                    .container.padding30
+                      .row
+                        .col-sm-4.vote_item_cont.item_expandable.h_2
+                          .vote_item
+                            .heading_cont.blackonwhite
+                              %h6 Lorem ipsum
+                            %p Lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum
+                            #stripe-p-1.post-theme
+                              %small.pull-left Несовершенства
+                              %a#stripe-p-1.tag-stripes.dark-blue.active{:href => "#"}
+                                %span.tags Слишком низкие потолки
+                              %a#stripe-p-1.tag-stripes.blue-green{:href => "#"}
+                                %span.tags Четвероногим нечем заинтересовать пчел
+                              %a#stripe-p-1.tag-stripes.blue-green2{:href => "#"}
+                                %span.tags Активное противостояние четвероногих и пчел
+                            .divider15
+                            .vote_controls.text-center
+                              %button.btn.vote_button.v_b_text.v_btn_1{"data-vote-role" => "vote_yes", :role => "button"} Да
+                              %button.btn.vote_button.v_b_text.v_btn_3{"data-vote-role" => "vote_no", :role => "button"} Нет
+                              %span.vote_open_detail.grey
+                                %i.fa.fa-angle-right.font_white
+                              .divider15
+                        .col-sm-4.vote_item_cont.item_expandable.h_2
+                          .vote_item
+                            .heading_cont.blackonwhite
+                              %h6 Lorem ipsum
+                            %p Lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum
+                            #stripe-p-1.post-theme
+                              %small.pull-left Несовершенства
+                              %a#stripe-p-1.tag-stripes.dark-blue.active{:href => "#"}
+                                %span.tags Слишком низкие потолки
+                              %a#stripe-p-1.tag-stripes.blue-green{:href => "#"}
+                                %span.tags Четвероногим нечем заинтересовать пчел
+                              %a#stripe-p-1.tag-stripes.blue-green2{:href => "#"}
+                                %span.tags Активное противостояние четвероногих и пчел
+                            .divider15
+                            .vote_controls.text-center
+                              %button.btn.vote_button.v_b_text.v_btn_1{"data-vote-role" => "vote_yes", :role => "button"} Да
+                              %button.btn.vote_button.v_b_text.v_btn_3{"data-vote-role" => "vote_no", :role => "button"} Нет
+                              %span.vote_open_detail.grey
+                                %i.fa.fa-angle-right.font_white
+                              .divider15
+                        .col-sm-4.vote_item_cont.item_expandable.h_2
+                          .vote_item
+                            .heading_cont.blackonwhite
+                              %h6 Lorem ipsum
+                            %p Lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum
+                            #stripe-p-1.post-theme
+                              %small.pull-left Несовершенства
+                              %a#stripe-p-1.tag-stripes.dark-blue.active{:href => "#"}
+                                %span.tags Слишком низкие потолки
+                              %a#stripe-p-1.tag-stripes.blue-green{:href => "#"}
+                                %span.tags Четвероногим нечем заинтересовать пчел
+                              %a#stripe-p-1.tag-stripes.blue-green2{:href => "#"}
+                                %span.tags Активное противостояние четвероногих и пчел
+                            .divider15
+                            .vote_controls.text-center
+                              %button.btn.vote_button.v_b_text.v_btn_1{"data-vote-role" => "vote_yes", :role => "button"} Да
+                              %button.btn.vote_button.v_b_text.v_btn_3{"data-vote-role" => "vote_no", :role => "button"} Нет
+                              %span.vote_open_detail.grey
+                                %i.fa.fa-angle-right.font_white
+                              .divider15
+                        .col-sm-4.vote_item_cont.item_expandable.h_2
+                          .vote_item
+                            .heading_cont.blackonwhite
+                              %h6 Lorem ipsum
+                            %p Lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum
+                            #stripe-p-1.post-theme
+                              %small.pull-left Несовершенства
+                              %a#stripe-p-1.tag-stripes.dark-blue.active{:href => "#"}
+                                %span.tags Слишком низкие потолки
+                              %a#stripe-p-1.tag-stripes.blue-green{:href => "#"}
+                                %span.tags Четвероногим нечем заинтересовать пчел
+                              %a#stripe-p-1.tag-stripes.blue-green2{:href => "#"}
+                                %span.tags Активное противостояние четвероногих и пчел
+                            .divider15
+                            .vote_controls.text-center
+                              %button.btn.vote_button.v_b_text.v_btn_1{"data-vote-role" => "vote_yes", :role => "button"} Да
+                              %button.btn.vote_button.v_b_text.v_btn_3{"data-vote-role" => "vote_no", :role => "button"} Нет
+                              %span.vote_open_detail.grey
+                                %i.fa.fa-angle-right.font_white
+                              .divider15
+                    .divider50
+                  #vote_tab2.tab-pane{"data-vote-poll-role" => "vote_yes", :role => "tabpanel"}
+                    .container.padding30
+                      .row
+                      .divider50
+                  #vote_tab3.tab-pane{"data-vote-poll-role" => "vote_no", :role => "tabpanel"}
+                    .container.padding30
+                      .row
+                      .divider50
+                .divider35
     / Outer Ends
     / Javascript files
     / jQuery

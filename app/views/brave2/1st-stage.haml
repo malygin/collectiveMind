@@ -37,8 +37,47 @@
           .navbar-right.text-right.user_block.font_grey
             %a#tooltip1_5.tooltip1_5.book_icon.open-popup-link{"data-placement" => "bottom", "data-toggle" => "tooltip", "data-trigger" => "none", :href => "#popup-database", :title => "Открыть базу знаний"}
             %span.auth-divider |
-            %a.font_lighter_grey.bold{:href => "#"}
-              %i.fa.fa-exclamation-triangle
+            %span.has_dropwindow
+              %button.btn_reset.font_lighter_grey.bold.drop_opener{"data-dd-opener" => "dd_1"}
+                %i.fa.fa-exclamation-triangle
+              #dd_1.dropdown_window.dd_570.expert_news_drop.text-left
+                .dd_badge
+                  %i.fa.fa-exclamation-triangle
+                  %small Новости от эксперта
+                .dd_wrapper
+                  .dd_top.light-grey
+                    %i.fa.fa-times.fa-lg.dd_close{"data-dd-closer" => "dd_1"}
+                  .dd_bottom.white
+                    .divider20
+                    .container
+                      .row
+                        .col-xs-2.dd_bordered_left
+                          %ul.list-unstyled.text-center.dd_tabs_nav{:role => "tablist"}
+                            %li.active{:role => "presentation"}
+                              %a{"data-toggle" => "tab", :href => "#expert1", :role => "tab"} 1.2.2015
+                            %li{:role => "presentation"}
+                              %a{"data-toggle" => "tab", :href => "#expert2", :role => "tab"} 1.2.2015
+                            .dd_nav_divider.theme_font_color
+                              %span 2
+                            %li{:role => "presentation"}
+                              %a{"data-toggle" => "tab", :href => "#expert3", :role => "tab"} 1.2.2015
+                            %li{:role => "presentation"}
+                              %a{"data-toggle" => "tab", :href => "#expert4", :role => "tab"} 1.2.2015
+                            %li{:role => "presentation"}
+                              %a{"data-toggle" => "tab", :href => "#expert5", :role => "tab"} 1.2.2015
+                            .dd_nav_divider.theme_font_color
+                              %span 1
+                        .col-xs-10.dd_bordered_right
+                          .tab-content.dd_tabs_content
+                            #expert1.tab-pane.fade.in.active.ps_cont{:role => "tabpanel"}
+                              %p
+                                Же александровна, получив депешу, только вздохнула. Провел время обеда, обращаясь к чему. Того, чтобы строго исполнить все довольны ширков, занимавшийся финансовыми делами и степан. Выборах, и по имени мужа такого милого тона в пажеском. Знатность; прекрасное помещение в губернского предводителя и которого. Нужно было найти представителя того нового направления, которому было в деревне. Говорили: наш губернский предводитель и возбуждавший и уважение и более людей.
+                              %p
+                                Же александровна, получив депешу, только вздохнула. Провел время обеда, обращаясь к чему. Того, чтобы строго исполнить все довольны ширков, занимавшийся финансовыми делами и степан. Выборах, и по имени мужа такого милого тона в пажеском. Знатность; прекрасное помещение в губернского предводителя и которого. Нужно было найти представителя того нового направления, которому было в деревне. Говорили: наш губернский предводитель и возбуждавший и уважение и более людей.
+                            #expert2.tab-pane.fade{:role => "tabpanel"} 2
+                            #expert3.tab-pane.fade{:role => "tabpanel"} 3
+                            #expert4.tab-pane.fade{:role => "tabpanel"} 4
+                    .divider20
             %span.auth-divider |
             %a.font_grey.bold{:href => "#"}
               %i.fa.fa-globe.font_lighter_grey
@@ -537,73 +576,172 @@
           / Aspects block (UI four) ends
           %a.open-popup-vote-link{:href => "#vote-1"} Голосовалка
       / Main Block ends
-      #vote-1.popup-window.popup-vote.popup-w835.mfp-hide
+      #vote-1.popup-window.popup-vote.popup-w1030.mfp-hide
         .popup.popup_rounded
           .modal_title
             .row
               .col-md-12
-                %h4.bold.font_dark_grey.text-center.tall_modal_title
+                %h4.bold.font_dark_grey.tall_modal_title
                   Голосование по аспектам
-          .vote_progress.light-green{"data-limit" => "15"}
+          .vote_progress_cont.progress
+            .vote_progress.light-green.progress-bar{"aria-valuemax" => "100", "aria-valuemin" => "0", :role => "progressbar"}
           .modal_body
-            .container
-              .row
-                %ul.nav.vote_1_nav{:role => "tablist"}
-                  %li.col-md-3.no_padding_col.active{:role => "presentation"}
-                    %a.vote_poll{"data-toggle" => "tab", :href => "#vote_tab1", :role => "tab"}
-                      .poll_inn.poll1
-                        %span.vote_counter 12
-                        %h5 Все
-                  %li.col-md-3.no_padding_col{:role => "presentation"}
-                    %a.vote_poll.votable_poll{"data-toggle" => "tab", :href => "#vote_tab2", :role => "tab"}
-                      .poll_inn.poll2
-                        %span.vote_counter 4
-                        %h5 Важно
-                  %li.col-md-3.no_padding_col
-                    %a.vote_poll.votable_poll{"data-toggle" => "tab", :href => "#vote_tab3", :role => "tab"}
-                      .poll_inn.poll3
-                        %span.vote_counter 1
-                        %h5 Неважно
-                  %li.col-md-3.no_padding_col
-                    %a.vote_poll.votable_poll{"data-toggle" => "tab", :href => "#vote_tab4", :role => "tab"}
-                      .poll_inn.poll4
-                        %span.vote_counter 0
-                        %h5 Лишнее
+            .container.vote_folders_cont.folders_3.no_padding_col
+              %ul.nav.vote_nav.row{:role => "tablist"}
+                %li.no_padding_col.active.folder_all{:role => "presentation"}
+                  %a.vote_folder{"data-toggle" => "tab", :href => "#vote_tab1", :role => "tab"}
+                    %i.fa.fa-angle-left.fa_xlg
+                    %small.bold Вернуться в общий список
+                %li.col-md-4.no_padding_col{:role => "presentation"}
+                  %a.vote_folder{"data-toggle" => "tab", "data-vote-folder-role" => "important", :href => "#vote_tab2", :role => "tab"}
+                    .vote_folder_inn.poll-2-1
+                      %span.vote_counter
+                      %h5 Важно
+                %li.col-md-4.no_padding_col{:role => "presentation"}
+                  %a.vote_folder{"data-toggle" => "tab", "data-vote-folder-role" => "not_important", :href => "#vote_tab3", :role => "tab"}
+                    .vote_folder_inn.poll-2-2
+                      %span.vote_counter
+                      %h5 Неважно
+                %li.col-md-4.no_padding_col{:role => "presentation"}
+                  %a.vote_folder{"data-toggle" => "tab", "data-vote-folder-role" => "unnecessary", :href => "#vote_tab4", :role => "tab"}
+                    .vote_folder_inn.poll-2-3
+                      %span.vote_counter
+                      %h5 Лишнее
             .divider25
             .container
               .row
-                .col-md-6.col-md-offset-3.text-center
-                  %p.text-center
-                    %small Выберите проекты, которые вам понравились, и перетащите их в изображение руки или нажмите на кнопку "проголосовать"
-                  .divider25
-                  .tab-content
-                    #vote_tab1.tab-pane.active{:role => "tabpanel"}
-                      .vote_block.color-theme-1.votable_item{:draggable => "true"}
-                        %span Мед и пчелы
-                      .vote_block.color-theme-2.votable_item{:draggable => "true"}
-                        %span Мед и четвероногие
-                      .vote_block.color-theme-3.votable_item{:draggable => "true"}
-                        %span Взаимоотношения четвероногих и пчел
-                      .vote_block.color-theme-4.votable_item{:draggable => "true"}
-                        %span Пчелы и цветочные поляны
-                    #vote_tab2.tab-pane{:role => "tabpanel"}
-                      .vote_block.color-theme-1.votable_item{:draggable => "true"}
-                        %span Мед и пчелы
-                      .vote_block.color-theme-2.votable_item{:draggable => "true"}
-                        %span Мед и четвероногие
-                    #vote_tab3.tab-pane{:role => "tabpanel"}
-                      .vote_block.color-theme-1.votable_item{:draggable => "true"}
-                        %span Мед и пчелы
-                      .vote_block.color-theme-4.votable_item{:draggable => "true"}
-                        %span Пчелы и цветочные поляны
-                    #vote_tab4.tab-pane{:role => "tabpanel"}
-                      .vote_block.color-theme-3.votable_item{:draggable => "true"}
-                        %span Взаимоотношения четвероногих и пчел
-                      .vote_block.color-theme-4.votable_item{:draggable => "true"}
-                        %span Пчелы и цветочные поляны
-                  .divider25
-                  %button.btn.btn-danger Завершить
-                  .divider35
+                .divider25
+                .tab-content
+                  #vote_tab1.tab-pane.all_vote.active{:role => "tabpanel"}
+                    .container.padding30
+                      .row
+                        .col-sm-4.vote_item_cont
+                          .vote_item
+                            .heading_cont.color-theme-1
+                              %h6 Мед и пчелы
+                            .divider10
+                            .vote_controls.text-center
+                              %button.btn.vote_button.v_btn_1{"data-vote-role" => "important", :role => "button"}
+                                %i.fa.fa-exclamation
+                              %button.btn.vote_button.v_btn_2{"data-vote-role" => "not_important", :role => "button"}
+                                %i.fa.fa-minus
+                              %button.btn.vote_button.v_btn_3{"data-vote-role" => "unnecessary", :role => "button"}
+                                %i.fa.fa-times
+                            .divider15
+                        .col-sm-4.vote_item_cont
+                          .vote_item
+                            .heading_cont.color-theme-2
+                              %h6 Мед и четвероногие
+                            .divider10
+                            .vote_controls.text-center
+                              %button.btn.vote_button.v_btn_1{"data-vote-role" => "important", :role => "button"}
+                                %i.fa.fa-exclamation
+                              %button.btn.vote_button.v_btn_2{"data-vote-role" => "not_important", :role => "button"}
+                                %i.fa.fa-minus
+                              %button.btn.vote_button.v_btn_3{"data-vote-role" => "unnecessary", :role => "button"}
+                                %i.fa.fa-times
+                            .divider15
+                        .col-sm-4.vote_item_cont
+                          .vote_item
+                            .heading_cont.color-theme-3
+                              %h6 Взаимоотношения четвероногих и пчел
+                            .divider10
+                            .vote_controls.text-center
+                              %button.btn.vote_button.v_btn_1{"data-vote-role" => "important", :role => "button"}
+                                %i.fa.fa-exclamation
+                              %button.btn.vote_button.v_btn_2{"data-vote-role" => "not_important", :role => "button"}
+                                %i.fa.fa-minus
+                              %button.btn.vote_button.v_btn_3{"data-vote-role" => "unnecessary", :role => "button"}
+                                %i.fa.fa-times
+                            .divider15
+                        .col-sm-4.vote_item_cont
+                          .vote_item
+                            .heading_cont.color-theme-4
+                              %h6 Пчелы и цветочные поляны
+                            .divider10
+                            .vote_controls.text-center
+                              %button.btn.vote_button.v_btn_1{"data-vote-role" => "important", :role => "button"}
+                                %i.fa.fa-exclamation
+                              %button.btn.vote_button.v_btn_2{"data-vote-role" => "not_important", :role => "button"}
+                                %i.fa.fa-minus
+                              %button.btn.vote_button.v_btn_3{"data-vote-role" => "unnecessary", :role => "button"}
+                                %i.fa.fa-times
+                            .divider15
+                        .col-sm-4.vote_item_cont
+                          .vote_item
+                            .heading_cont.color-theme-5
+                              %h6 Четвероногие и сахар
+                            .divider10
+                            .vote_controls.text-center
+                              %button.btn.vote_button.v_btn_1{"data-vote-role" => "important", :role => "button"}
+                                %i.fa.fa-exclamation
+                              %button.btn.vote_button.v_btn_2{"data-vote-role" => "not_important", :role => "button"}
+                                %i.fa.fa-minus
+                              %button.btn.vote_button.v_btn_3{"data-vote-role" => "unnecessary", :role => "button"}
+                                %i.fa.fa-times
+                            .divider15
+                        .col-sm-4.vote_item_cont
+                          .vote_item
+                            .heading_cont.color-theme-6
+                              %h6 Пчелы, четвероногие и зимняя спячка
+                            .divider10
+                            .vote_controls.text-center
+                              %button.btn.vote_button.v_btn_1{"data-vote-role" => "important", :role => "button"}
+                                %i.fa.fa-exclamation
+                              %button.btn.vote_button.v_btn_2{"data-vote-role" => "not_important", :role => "button"}
+                                %i.fa.fa-minus
+                              %button.btn.vote_button.v_btn_3{"data-vote-role" => "unnecessary", :role => "button"}
+                                %i.fa.fa-times
+                            .divider15
+                        .col-sm-4.vote_item_cont
+                          .vote_item
+                            .heading_cont.color-theme-7
+                              %h6 Винни-Пух и все-все-все
+                            .divider10
+                            .vote_controls.text-center
+                              %button.btn.vote_button.v_btn_1{"data-vote-role" => "important", :role => "button"}
+                                %i.fa.fa-exclamation
+                              %button.btn.vote_button.v_btn_2{"data-vote-role" => "not_important", :role => "button"}
+                                %i.fa.fa-minus
+                              %button.btn.vote_button.v_btn_3{"data-vote-role" => "unnecessary", :role => "button"}
+                                %i.fa.fa-times
+                            .divider15
+                        .col-sm-4.vote_item_cont
+                          .vote_item
+                            .heading_cont.color-theme-8
+                              %h6 Эффективность пчел в сборе меда
+                            .divider10
+                            .vote_controls.text-center
+                              %button.btn.vote_button.v_btn_1{"data-vote-role" => "important", :role => "button"}
+                                %i.fa.fa-exclamation
+                              %button.btn.vote_button.v_btn_2{"data-vote-role" => "not_important", :role => "button"}
+                                %i.fa.fa-minus
+                              %button.btn.vote_button.v_btn_3{"data-vote-role" => "unnecessary", :role => "button"}
+                                %i.fa.fa-times
+                            .divider15
+                        .col-sm-4.vote_item_cont
+                          .vote_item
+                            .heading_cont.color-theme-9
+                              %h6 Пчелы и лес
+                            .divider10
+                            .vote_controls.text-center
+                              %button.btn.vote_button.v_btn_1{"data-vote-role" => "important", :role => "button"}
+                                %i.fa.fa-exclamation
+                              %button.btn.vote_button.v_btn_2{"data-vote-role" => "not_important", :role => "button"}
+                                %i.fa.fa-minus
+                              %button.btn.vote_button.v_btn_3{"data-vote-role" => "unnecessary", :role => "button"}
+                                %i.fa.fa-times
+                            .divider15
+                  #vote_tab2.tab-pane{"data-vote-poll-role" => "important", :role => "tabpanel"}
+                    .container.padding30
+                      .row
+                  #vote_tab3.tab-pane{"data-vote-poll-role" => "not_important", :role => "tabpanel"}
+                    .container.padding30
+                      .row
+                  #vote_tab4.tab-pane{"data-vote-poll-role" => "unnecessary", :role => "tabpanel"}
+                    .container.padding30
+                      .row
+                .divider35
       #popup-explanation-1st.popup-window.popup-explanation.popup-w710.mfp-hide.welcome_popup
         .popup.popup_rounded
           .modal_badge.back_color_stage1.rounded_2.font_white 1 СТАДИЯ
@@ -631,465 +769,6 @@
               %br>/
               (будет доступно в конце этапа)
           %button.btn.red.close_magnific Начать работу
-      #popup-news.popup-window.popup-w985.detailed_popup.mfp-hide
-        .popup.popup_rounded
-          .modal_title
-            .row
-              .col-md-12
-                %h4.bold.font_dark_grey
-                  36 новых комментария в нововведениях
-          .modal_body
-            .divider25
-            .container
-              .col-md-4
-                .badge_comments.light-blue.rounded_8
-                  %table.table
-                    %tbody
-                      %tr.what
-                        %td.col-md-2.text-center.right-column
-                          Что
-                        %td.col-md-10.left-column.bold
-                          Нечем дышать
-                      %tr
-                        %td.col-md-2.text-center.right-column Где
-                        %td.col-md-10.left-column Около Высокого дуба
-                      %tr
-                        %td.col-md-2.text-center.right-column Когда
-                        %td.col-md-10.left-column При сборе нектара
-                .badge_comments.light-blue.rounded_8
-                  %table.table
-                    %tbody
-                      %tr.what
-                        %td.col-md-2.text-center.right-column
-                          Что
-                        %td.col-md-10.left-column.bold
-                          Нечем дышать
-                      %tr
-                        %td.col-md-2.text-center.right-column Где
-                        %td.col-md-10.left-column Около Высокого дуба
-                      %tr
-                        %td.col-md-2.text-center.right-column Когда
-                        %td.col-md-10.left-column При сборе нектара
-                .badge_comments.light-blue.rounded_8
-                  %table.table
-                    %tbody
-                      %tr.what
-                        %td.col-md-2.text-center.right-column
-                          Что
-                        %td.col-md-10.left-column.bold
-                          Нечем дышать
-                      %tr
-                        %td.col-md-2.text-center.right-column Где
-                        %td.col-md-10.left-column Около Высокого дуба
-                      %tr
-                        %td.col-md-2.text-center.right-column Когда
-                        %td.col-md-10.left-column При сборе нектара
-                .badge_comments.light-blue.rounded_8
-                  %table.table
-                    %tbody
-                      %tr.what
-                        %td.col-md-2.text-center.right-column
-                          Что
-                        %td.col-md-10.left-column.bold
-                          Нечем дышать
-                      %tr
-                        %td.col-md-2.text-center.right-column Где
-                        %td.col-md-10.left-column Около Высокого дуба
-                      %tr
-                        %td.col-md-2.text-center.right-column Когда
-                        %td.col-md-10.left-column При сборе нектара
-                .badge_comments.light-blue.rounded_8
-                  %table.table
-                    %tbody
-                      %tr.what
-                        %td.col-md-2.text-center.right-column
-                          Что
-                        %td.col-md-10.left-column.bold
-                          Нечем дышать
-                      %tr
-                        %td.col-md-2.text-center.right-column Где
-                        %td.col-md-10.left-column Около Высокого дуба
-                      %tr
-                        %td.col-md-2.text-center.right-column Когда
-                        %td.col-md-10.left-column При сборе нектара
-                .badge_comments.light-blue.rounded_8
-                  %table.table
-                    %tbody
-                      %tr.what
-                        %td.col-md-2.text-center.right-column
-                          Что
-                        %td.col-md-10.left-column.bold
-                          Нечем дышать
-                      %tr
-                        %td.col-md-2.text-center.right-column Где
-                        %td.col-md-10.left-column Около Высокого дуба
-                      %tr
-                        %td.col-md-2.text-center.right-column Когда
-                        %td.col-md-10.left-column При сборе нектара
-                .badge_comments.light-blue.rounded_8
-                  %table.table
-                    %tbody
-                      %tr.what
-                        %td.col-md-2.text-center.right-column
-                          Что
-                        %td.col-md-10.left-column.bold
-                          Нечем дышать
-                      %tr
-                        %td.col-md-2.text-center.right-column Где
-                        %td.col-md-10.left-column Около Высокого дуба
-                      %tr
-                        %td.col-md-2.text-center.right-column Когда
-                        %td.col-md-10.left-column При сборе нектара
-                .badge_comments.light-blue.rounded_8
-                  %table.table
-                    %tbody
-                      %tr.what
-                        %td.col-md-2.text-center.right-column
-                          Что
-                        %td.col-md-10.left-column.bold
-                          Нечем дышать
-                      %tr
-                        %td.col-md-2.text-center.right-column Где
-                        %td.col-md-10.left-column Около Высокого дуба
-                      %tr
-                        %td.col-md-2.text-center.right-column Когда
-                        %td.col-md-10.left-column При сборе нектара
-                .badge_comments.light-blue.rounded_8
-                  %table.table
-                    %tbody
-                      %tr.what
-                        %td.col-md-2.text-center.right-column
-                          Что
-                        %td.col-md-10.left-column.bold
-                          Нечем дышать
-                      %tr
-                        %td.col-md-2.text-center.right-column Где
-                        %td.col-md-10.left-column Около Высокого дуба
-                      %tr
-                        %td.col-md-2.text-center.right-column Когда
-                        %td.col-md-10.left-column При сборе нектара
-                .badge_comments.light-blue.rounded_8
-                  %table.table
-                    %tbody
-                      %tr.what
-                        %td.col-md-2.text-center.right-column
-                          Что
-                        %td.col-md-10.left-column.bold
-                          Нечем дышать
-                      %tr
-                        %td.col-md-2.text-center.right-column Где
-                        %td.col-md-10.left-column Около Высокого дуба
-                      %tr
-                        %td.col-md-2.text-center.right-column Когда
-                        %td.col-md-10.left-column При сборе нектара
-              .col-md-8.col_padding_left_50
-                %span.imperfect-text-date 22.12.2014
-                .media.comment
-                  .media-left
-                    %img.media-object.img50.img-circle{:src => "img/ava-vinnie.jpg"}/
-                  .media-body
-                    %h5.media-heading.bold Винни-Пух
-                    %span.status.font_red важное
-                    %span.date.font_red.bold 15:28
-                  %p.font_grey.bold Ничего не правда. Я люблю гулять, а от вашего дуба тень большая. Ничего не правда. Я люблю гулять, а от вашего дуба тень большая. Ничего не правда. Я люблю гулять, а от вашего дуба тень большая. Ничего не правда. Я люблю гулять, а от вашего дуба тень большая. Ничего не правда. Я люблю гулять, а от вашего дуба тень большая.
-                  %h1.dots.text-center.font_lighter_grey ...
-                .media.comment
-                  .media-left
-                    %img.media-object.img50.img-circle{:src => "img/ava-vinnie.jpg"}/
-                  .media-body
-                    %h5.media-heading.bold Винни-Пух
-                    %span.status.font_red требует обсуждения
-                    %span.date.font_red.bold 15:28
-                  %p.font_grey.bold Ничего не правда. Я люблю гулять, а от вашего дуба тень большая. Ничего не правда. Я люблю гулять, а от вашего дуба тень большая. Ничего не правда. Я люблю гулять, а от вашего дуба тень большая. Ничего не правда. Я люблю гулять, а от вашего дуба тень большая. Ничего не правда. Я люблю гулять, а от вашего дуба тень большая.
-                  %h1.dots.text-center.font_lighter_grey ...
-                .media.comment
-                  .media-left
-                    %img.media-object.img50.img-circle{:src => "img/ava-vinnie.jpg"}/
-                  .media-body
-                    %h5.media-heading.bold Винни-Пух
-                    %span.status.font_red
-                    %span.date.font_red.bold 15:28
-                  %p.font_grey.bold Ничего не правда. Я люблю гулять, а от вашего дуба тень большая. Ничего не правда. Я люблю гулять, а от вашего дуба тень большая. Ничего не правда. Я люблю гулять, а от вашего дуба тень большая. Ничего не правда. Я люблю гулять, а от вашего дуба тень большая. Ничего не правда. Я люблю гулять, а от вашего дуба тень большая.
-                  %h1.dots.text-center.font_lighter_grey ...
-                .media.comment
-                  .media-left
-                    %img.media-object.img50.img-circle{:src => "img/ava-vinnie.jpg"}/
-                  .media-body
-                    %h5.media-heading.bold Винни-Пух
-                    %span.status.font_red
-                    %span.date.font_red.bold 15:28
-                  %p.font_grey.bold Ничего не правда. Я люблю гулять, а от вашего дуба тень большая. Ничего не правда. Я люблю гулять, а от вашего дуба тень большая. Ничего не правда. Я люблю гулять, а от вашего дуба тень большая. Ничего не правда. Я люблю гулять, а от вашего дуба тень большая. Ничего не правда. Я люблю гулять, а от вашего дуба тень большая.
-                  %h1.dots.text-center.font_lighter_grey ...
-                .media.comment
-                  .media-left
-                    %img.media-object.img50.img-circle{:src => "img/ava-vinnie.jpg"}/
-                  .media-body
-                    %h5.media-heading.bold Винни-Пух
-                    %span.status.font_red
-                    %span.date.font_red.bold 15:28
-                  %p.font_grey.bold Ничего не правда. Я люблю гулять, а от вашего дуба тень большая. Ничего не правда. Я люблю гулять, а от вашего дуба тень большая. Ничего не правда. Я люблю гулять, а от вашего дуба тень большая. Ничего не правда. Я люблю гулять, а от вашего дуба тень большая. Ничего не правда. Я люблю гулять, а от вашего дуба тень большая.
-                  %h1.dots.text-center.font_lighter_grey ...
-                .media.comment
-                  .media-left
-                    %img.media-object.img50.img-circle{:src => "img/ava-vinnie.jpg"}/
-                  .media-body
-                    %h5.media-heading.bold Винни-Пух
-                    %span.status.font_red
-                    %span.date.font_red.bold 15:28
-                  %p.font_grey.bold Ничего не правда. Я люблю гулять, а от вашего дуба тень большая. Ничего не правда. Я люблю гулять, а от вашего дуба тень большая. Ничего не правда. Я люблю гулять, а от вашего дуба тень большая. Ничего не правда. Я люблю гулять, а от вашего дуба тень большая. Ничего не правда. Я люблю гулять, а от вашего дуба тень большая.
-                  %h1.dots.text-center.font_lighter_grey ...
-                .media.comment
-                  .media-left
-                    %img.media-object.img50.img-circle{:src => "img/ava-vinnie.jpg"}/
-                  .media-body
-                    %h5.media-heading.bold Винни-Пух
-                    %span.status.font_red
-                    %span.date.font_red.bold 15:28
-                  %p.font_grey.bold Ничего не правда. Я люблю гулять, а от вашего дуба тень большая. Ничего не правда. Я люблю гулять, а от вашего дуба тень большая. Ничего не правда. Я люблю гулять, а от вашего дуба тень большая. Ничего не правда. Я люблю гулять, а от вашего дуба тень большая. Ничего не правда. Я люблю гулять, а от вашего дуба тень большая.
-                  %h1.dots.text-center.font_lighter_grey ...
-                .media.comment
-                  .media-left
-                    %img.media-object.img50.img-circle{:src => "img/ava-vinnie.jpg"}/
-                  .media-body
-                    %h5.media-heading.bold Винни-Пух
-                    %span.status.font_red
-                    %span.date.font_red.bold 15:28
-                  %p.font_grey.bold Ничего не правда. Я люблю гулять, а от вашего дуба тень большая. Ничего не правда. Я люблю гулять, а от вашего дуба тень большая. Ничего не правда. Я люблю гулять, а от вашего дуба тень большая. Ничего не правда. Я люблю гулять, а от вашего дуба тень большая. Ничего не правда. Я люблю гулять, а от вашего дуба тень большая.
-                  %h1.dots.text-center.font_lighter_grey ...
-                .media.comment
-                  .media-left
-                    %img.media-object.img50.img-circle{:src => "img/ava-vinnie.jpg"}/
-                  .media-body
-                    %h5.media-heading.bold Винни-Пух
-                    %span.status.font_red
-                    %span.date.font_red.bold 15:28
-                  %p.font_grey.bold Ничего не правда. Я люблю гулять, а от вашего дуба тень большая. Ничего не правда. Я люблю гулять, а от вашего дуба тень большая. Ничего не правда. Я люблю гулять, а от вашего дуба тень большая. Ничего не правда. Я люблю гулять, а от вашего дуба тень большая. Ничего не правда. Я люблю гулять, а от вашего дуба тень большая.
-                  %h1.dots.text-center.font_lighter_grey ...
-                .media.comment
-                  .media-left
-                    %img.media-object.img50.img-circle{:src => "img/ava-vinnie.jpg"}/
-                  .media-body
-                    %h5.media-heading.bold Винни-Пух
-                    %span.status.font_red
-                    %span.date.font_red.bold 15:28
-                  %p.font_grey.bold Ничего не правда. Я люблю гулять, а от вашего дуба тень большая. Ничего не правда. Я люблю гулять, а от вашего дуба тень большая. Ничего не правда. Я люблю гулять, а от вашего дуба тень большая. Ничего не правда. Я люблю гулять, а от вашего дуба тень большая. Ничего не правда. Я люблю гулять, а от вашего дуба тень большая.
-                  %h1.dots.text-center.font_lighter_grey ...
-                .media.comment
-                  .media-left
-                    %img.media-object.img50.img-circle{:src => "img/ava-vinnie.jpg"}/
-                  .media-body
-                    %h5.media-heading.bold Винни-Пух
-                    %span.status.font_red
-                    %span.date.font_red.bold 15:28
-                  %p.font_grey.bold Ничего не правда. Я люблю гулять, а от вашего дуба тень большая. Ничего не правда. Я люблю гулять, а от вашего дуба тень большая. Ничего не правда. Я люблю гулять, а от вашего дуба тень большая. Ничего не правда. Я люблю гулять, а от вашего дуба тень большая. Ничего не правда. Я люблю гулять, а от вашего дуба тень большая.
-                  %h1.dots.text-center.font_lighter_grey ...
-                .media.comment
-                  .media-left
-                    %img.media-object.img50.img-circle{:src => "img/ava-vinnie.jpg"}/
-                  .media-body
-                    %h5.media-heading.bold Винни-Пух
-                    %span.status.font_red
-                    %span.date.font_red.bold 15:28
-                  %p.font_grey.bold Ничего не правда. Я люблю гулять, а от вашего дуба тень большая. Ничего не правда. Я люблю гулять, а от вашего дуба тень большая. Ничего не правда. Я люблю гулять, а от вашего дуба тень большая. Ничего не правда. Я люблю гулять, а от вашего дуба тень большая. Ничего не правда. Я люблю гулять, а от вашего дуба тень большая.
-                  %h1.dots.text-center.font_lighter_grey ...
-                .media.comment
-                  .media-left
-                    %img.media-object.img50.img-circle{:src => "img/ava-vinnie.jpg"}/
-                  .media-body
-                    %h5.media-heading.bold Винни-Пух
-                    %span.status.font_red
-                    %span.date.font_red.bold 15:28
-                  %p.font_grey.bold Ничего не правда. Я люблю гулять, а от вашего дуба тень большая. Ничего не правда. Я люблю гулять, а от вашего дуба тень большая. Ничего не правда. Я люблю гулять, а от вашего дуба тень большая. Ничего не правда. Я люблю гулять, а от вашего дуба тень большая. Ничего не правда. Я люблю гулять, а от вашего дуба тень большая.
-                  %h1.dots.text-center.font_lighter_grey ...
-                .media.comment
-                  .media-left
-                    %img.media-object.img50.img-circle{:src => "img/ava-vinnie.jpg"}/
-                  .media-body
-                    %h5.media-heading.bold Винни-Пух
-                    %span.status.font_red
-                    %span.date.font_red.bold 15:28
-                  %p.font_grey.bold Ничего не правда. Я люблю гулять, а от вашего дуба тень большая. Ничего не правда. Я люблю гулять, а от вашего дуба тень большая. Ничего не правда. Я люблю гулять, а от вашего дуба тень большая. Ничего не правда. Я люблю гулять, а от вашего дуба тень большая. Ничего не правда. Я люблю гулять, а от вашего дуба тень большая.
-                  %h1.dots.text-center.font_lighter_grey ...
-                .media.comment
-                  .media-left
-                    %img.media-object.img50.img-circle{:src => "img/ava-vinnie.jpg"}/
-                  .media-body
-                    %h5.media-heading.bold Винни-Пух
-                    %span.status.font_red
-                    %span.date.font_red.bold 15:28
-                  %p.font_grey.bold Ничего не правда. Я люблю гулять, а от вашего дуба тень большая. Ничего не правда. Я люблю гулять, а от вашего дуба тень большая. Ничего не правда. Я люблю гулять, а от вашего дуба тень большая. Ничего не правда. Я люблю гулять, а от вашего дуба тень большая. Ничего не правда. Я люблю гулять, а от вашего дуба тень большая.
-                  %h1.dots.text-center.font_lighter_grey ...
-                .media.comment
-                  .media-left
-                    %img.media-object.img50.img-circle{:src => "img/ava-vinnie.jpg"}/
-                  .media-body
-                    %h5.media-heading.bold Винни-Пух
-                    %span.status.font_red
-                    %span.date.font_red.bold 15:28
-                  %p.font_grey.bold Ничего не правда. Я люблю гулять, а от вашего дуба тень большая. Ничего не правда. Я люблю гулять, а от вашего дуба тень большая. Ничего не правда. Я люблю гулять, а от вашего дуба тень большая. Ничего не правда. Я люблю гулять, а от вашего дуба тень большая. Ничего не правда. Я люблю гулять, а от вашего дуба тень большая.
-                  %h1.dots.text-center.font_lighter_grey ...
-                .media.comment
-                  .media-left
-                    %img.media-object.img50.img-circle{:src => "img/ava-vinnie.jpg"}/
-                  .media-body
-                    %h5.media-heading.bold Винни-Пух
-                    %span.status.font_red
-                    %span.date.font_red.bold 15:28
-                  %p.font_grey.bold Ничего не правда. Я люблю гулять, а от вашего дуба тень большая. Ничего не правда. Я люблю гулять, а от вашего дуба тень большая. Ничего не правда. Я люблю гулять, а от вашего дуба тень большая. Ничего не правда. Я люблю гулять, а от вашего дуба тень большая. Ничего не правда. Я люблю гулять, а от вашего дуба тень большая.
-                  %h1.dots.text-center.font_lighter_grey ...
-                .media.comment
-                  .media-left
-                    %img.media-object.img50.img-circle{:src => "img/ava-vinnie.jpg"}/
-                  .media-body
-                    %h5.media-heading.bold Винни-Пух
-                    %span.status.font_red
-                    %span.date.font_red.bold 15:28
-                  %p.font_grey.bold Ничего не правда. Я люблю гулять, а от вашего дуба тень большая. Ничего не правда. Я люблю гулять, а от вашего дуба тень большая. Ничего не правда. Я люблю гулять, а от вашего дуба тень большая. Ничего не правда. Я люблю гулять, а от вашего дуба тень большая. Ничего не правда. Я люблю гулять, а от вашего дуба тень большая.
-                  %h1.dots.text-center.font_lighter_grey ...
-                .media.comment
-                  .media-left
-                    %img.media-object.img50.img-circle{:src => "img/ava-vinnie.jpg"}/
-                  .media-body
-                    %h5.media-heading.bold Винни-Пух
-                    %span.status.font_red
-                    %span.date.font_red.bold 15:28
-                  %p.font_grey.bold Ничего не правда. Я люблю гулять, а от вашего дуба тень большая. Ничего не правда. Я люблю гулять, а от вашего дуба тень большая. Ничего не правда. Я люблю гулять, а от вашего дуба тень большая. Ничего не правда. Я люблю гулять, а от вашего дуба тень большая. Ничего не правда. Я люблю гулять, а от вашего дуба тень большая.
-                  %h1.dots.text-center.font_lighter_grey ...
-                .media.comment
-                  .media-left
-                    %img.media-object.img50.img-circle{:src => "img/ava-vinnie.jpg"}/
-                  .media-body
-                    %h5.media-heading.bold Винни-Пух
-                    %span.status.font_red
-                    %span.date.font_red.bold 15:28
-                  %p.font_grey.bold Ничего не правда. Я люблю гулять, а от вашего дуба тень большая. Ничего не правда. Я люблю гулять, а от вашего дуба тень большая. Ничего не правда. Я люблю гулять, а от вашего дуба тень большая. Ничего не правда. Я люблю гулять, а от вашего дуба тень большая. Ничего не правда. Я люблю гулять, а от вашего дуба тень большая.
-                  %h1.dots.text-center.font_lighter_grey ...
-                .media.comment
-                  .media-left
-                    %img.media-object.img50.img-circle{:src => "img/ava-vinnie.jpg"}/
-                  .media-body
-                    %h5.media-heading.bold Винни-Пух
-                    %span.status.font_red
-                    %span.date.font_red.bold 15:28
-                  %p.font_grey.bold Ничего не правда. Я люблю гулять, а от вашего дуба тень большая. Ничего не правда. Я люблю гулять, а от вашего дуба тень большая. Ничего не правда. Я люблю гулять, а от вашего дуба тень большая. Ничего не правда. Я люблю гулять, а от вашего дуба тень большая. Ничего не правда. Я люблю гулять, а от вашего дуба тень большая.
-                  %h1.dots.text-center.font_lighter_grey ...
-                .media.comment
-                  .media-left
-                    %img.media-object.img50.img-circle{:src => "img/ava-vinnie.jpg"}/
-                  .media-body
-                    %h5.media-heading.bold Винни-Пух
-                    %span.status.font_red
-                    %span.date.font_red.bold 15:28
-                  %p.font_grey.bold Ничего не правда. Я люблю гулять, а от вашего дуба тень большая. Ничего не правда. Я люблю гулять, а от вашего дуба тень большая. Ничего не правда. Я люблю гулять, а от вашего дуба тень большая. Ничего не правда. Я люблю гулять, а от вашего дуба тень большая. Ничего не правда. Я люблю гулять, а от вашего дуба тень большая.
-                  %h1.dots.text-center.font_lighter_grey ...
-                .media.comment
-                  .media-left
-                    %img.media-object.img50.img-circle{:src => "img/ava-vinnie.jpg"}/
-                  .media-body
-                    %h5.media-heading.bold Винни-Пух
-                    %span.status.font_red
-                    %span.date.font_red.bold 15:28
-                  %p.font_grey.bold Ничего не правда. Я люблю гулять, а от вашего дуба тень большая. Ничего не правда. Я люблю гулять, а от вашего дуба тень большая. Ничего не правда. Я люблю гулять, а от вашего дуба тень большая. Ничего не правда. Я люблю гулять, а от вашего дуба тень большая. Ничего не правда. Я люблю гулять, а от вашего дуба тень большая.
-                  %h1.dots.text-center.font_lighter_grey ...
-                .media.comment
-                  .media-left
-                    %img.media-object.img50.img-circle{:src => "img/ava-vinnie.jpg"}/
-                  .media-body
-                    %h5.media-heading.bold Винни-Пух
-                    %span.status.font_red
-                    %span.date.font_red.bold 15:28
-                  %p.font_grey.bold Ничего не правда. Я люблю гулять, а от вашего дуба тень большая. Ничего не правда. Я люблю гулять, а от вашего дуба тень большая. Ничего не правда. Я люблю гулять, а от вашего дуба тень большая. Ничего не правда. Я люблю гулять, а от вашего дуба тень большая. Ничего не правда. Я люблю гулять, а от вашего дуба тень большая.
-                  %h1.dots.text-center.font_lighter_grey ...
-                .media.comment
-                  .media-left
-                    %img.media-object.img50.img-circle{:src => "img/ava-vinnie.jpg"}/
-                  .media-body
-                    %h5.media-heading.bold Винни-Пух
-                    %span.status.font_red
-                    %span.date.font_red.bold 15:28
-                  %p.font_grey.bold Ничего не правда. Я люблю гулять, а от вашего дуба тень большая. Ничего не правда. Я люблю гулять, а от вашего дуба тень большая. Ничего не правда. Я люблю гулять, а от вашего дуба тень большая. Ничего не правда. Я люблю гулять, а от вашего дуба тень большая. Ничего не правда. Я люблю гулять, а от вашего дуба тень большая.
-                  %h1.dots.text-center.font_lighter_grey ...
-                .media.comment
-                  .media-left
-                    %img.media-object.img50.img-circle{:src => "img/ava-vinnie.jpg"}/
-                  .media-body
-                    %h5.media-heading.bold Винни-Пух
-                    %span.status.font_red
-                    %span.date.font_red.bold 15:28
-                  %p.font_grey.bold Ничего не правда. Я люблю гулять, а от вашего дуба тень большая. Ничего не правда. Я люблю гулять, а от вашего дуба тень большая. Ничего не правда. Я люблю гулять, а от вашего дуба тень большая. Ничего не правда. Я люблю гулять, а от вашего дуба тень большая. Ничего не правда. Я люблю гулять, а от вашего дуба тень большая.
-                  %h1.dots.text-center.font_lighter_grey ...
-                .media.comment
-                  .media-left
-                    %img.media-object.img50.img-circle{:src => "img/ava-vinnie.jpg"}/
-                  .media-body
-                    %h5.media-heading.bold Винни-Пух
-                    %span.status.font_red
-                    %span.date.font_red.bold 15:28
-                  %p.font_grey.bold Ничего не правда. Я люблю гулять, а от вашего дуба тень большая. Ничего не правда. Я люблю гулять, а от вашего дуба тень большая. Ничего не правда. Я люблю гулять, а от вашего дуба тень большая. Ничего не правда. Я люблю гулять, а от вашего дуба тень большая. Ничего не правда. Я люблю гулять, а от вашего дуба тень большая.
-                  %h1.dots.text-center.font_lighter_grey ...
-                .media.comment
-                  .media-left
-                    %img.media-object.img50.img-circle{:src => "img/ava-vinnie.jpg"}/
-                  .media-body
-                    %h5.media-heading.bold Винни-Пух
-                    %span.status.font_red
-                    %span.date.font_red.bold 15:28
-                  %p.font_grey.bold Ничего не правда. Я люблю гулять, а от вашего дуба тень большая. Ничего не правда. Я люблю гулять, а от вашего дуба тень большая. Ничего не правда. Я люблю гулять, а от вашего дуба тень большая. Ничего не правда. Я люблю гулять, а от вашего дуба тень большая. Ничего не правда. Я люблю гулять, а от вашего дуба тень большая.
-                  %h1.dots.text-center.font_lighter_grey ...
-                .media.comment
-                  .media-left
-                    %img.media-object.img50.img-circle{:src => "img/ava-vinnie.jpg"}/
-                  .media-body
-                    %h5.media-heading.bold Винни-Пух
-                    %span.status.font_red
-                    %span.date.font_red.bold 15:28
-                  %p.font_grey.bold Ничего не правда. Я люблю гулять, а от вашего дуба тень большая. Ничего не правда. Я люблю гулять, а от вашего дуба тень большая. Ничего не правда. Я люблю гулять, а от вашего дуба тень большая. Ничего не правда. Я люблю гулять, а от вашего дуба тень большая. Ничего не правда. Я люблю гулять, а от вашего дуба тень большая.
-                  %h1.dots.text-center.font_lighter_grey ...
-                .media.comment
-                  .media-left
-                    %img.media-object.img50.img-circle{:src => "img/ava-vinnie.jpg"}/
-                  .media-body
-                    %h5.media-heading.bold Винни-Пух
-                    %span.status.font_red
-                    %span.date.font_red.bold 15:28
-                  %p.font_grey.bold Ничего не правда. Я люблю гулять, а от вашего дуба тень большая. Ничего не правда. Я люблю гулять, а от вашего дуба тень большая. Ничего не правда. Я люблю гулять, а от вашего дуба тень большая. Ничего не правда. Я люблю гулять, а от вашего дуба тень большая. Ничего не правда. Я люблю гулять, а от вашего дуба тень большая.
-                  %h1.dots.text-center.font_lighter_grey ...
-                .media.comment
-                  .media-left
-                    %img.media-object.img50.img-circle{:src => "img/ava-vinnie.jpg"}/
-                  .media-body
-                    %h5.media-heading.bold Винни-Пух
-                    %span.status.font_red
-                    %span.date.font_red.bold 15:28
-                  %p.font_grey.bold Ничего не правда. Я люблю гулять, а от вашего дуба тень большая. Ничего не правда. Я люблю гулять, а от вашего дуба тень большая. Ничего не правда. Я люблю гулять, а от вашего дуба тень большая. Ничего не правда. Я люблю гулять, а от вашего дуба тень большая. Ничего не правда. Я люблю гулять, а от вашего дуба тень большая.
-                  %h1.dots.text-center.font_lighter_grey ...
-                .media.comment
-                  .media-left
-                    %img.media-object.img50.img-circle{:src => "img/ava-vinnie.jpg"}/
-                  .media-body
-                    %h5.media-heading.bold Винни-Пух
-                    %span.status.font_red
-                    %span.date.font_red.bold 15:28
-                  %p.font_grey.bold Ничего не правда. Я люблю гулять, а от вашего дуба тень большая. Ничего не правда. Я люблю гулять, а от вашего дуба тень большая. Ничего не правда. Я люблю гулять, а от вашего дуба тень большая. Ничего не правда. Я люблю гулять, а от вашего дуба тень большая. Ничего не правда. Я люблю гулять, а от вашего дуба тень большая.
-                  %h1.dots.text-center.font_lighter_grey ...
-                .media.comment
-                  .media-left
-                    %img.media-object.img50.img-circle{:src => "img/ava-vinnie.jpg"}/
-                  .media-body
-                    %h5.media-heading.bold Винни-Пух
-                    %span.status.font_red
-                    %span.date.font_red.bold 15:28
-                  %p.font_grey.bold Ничего не правда. Я люблю гулять, а от вашего дуба тень большая. Ничего не правда. Я люблю гулять, а от вашего дуба тень большая. Ничего не правда. Я люблю гулять, а от вашего дуба тень большая. Ничего не правда. Я люблю гулять, а от вашего дуба тень большая. Ничего не правда. Я люблю гулять, а от вашего дуба тень большая.
-                  %h1.dots.text-center.font_lighter_grey ...
-                .media.comment
-                  .media-left
-                    %img.media-object.img50.img-circle{:src => "img/ava-vinnie.jpg"}/
-                  .media-body
-                    %h5.media-heading.bold Винни-Пух
-                    %span.status.font_red
-                    %span.date.font_red.bold 15:28
-                  %p.font_grey.bold Ничего не правда. Я люблю гулять, а от вашего дуба тень большая. Ничего не правда. Я люблю гулять, а от вашего дуба тень большая. Ничего не правда. Я люблю гулять, а от вашего дуба тень большая. Ничего не правда. Я люблю гулять, а от вашего дуба тень большая. Ничего не правда. Я люблю гулять, а от вашего дуба тень большая.
-                  %h1.dots.text-center.font_lighter_grey ...
       #popup-greetings-text.popup-window.popup-w710.mfp-hide
         .popup.popup_rounded.popup_medal
           .medal-block.gold-medal
@@ -1237,6 +916,8 @@
     %script{:src => "js/respond.min.js"}
     / HTML5 Support for IE
     %script{:src => "js/html5shiv.js"}
+    / Content hover JS
+    %script{:src => "js/jquery.contenthover.min.js"}
     / Javascript for this page
     / Excanvas JS for Knob Support in IE 8
     %script{:src => "js/excanvas.js"}
