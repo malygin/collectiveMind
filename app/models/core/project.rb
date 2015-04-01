@@ -362,6 +362,8 @@ class Core::Project < ActiveRecord::Base
         where("discontent_posts.project_id = ?", self.id)
   end
 
+  # @todo REF  move to helper
+
   def date_begin_stage(table_name)
     table_name = table_name.sub('_posts', '').sub('_comments', '')
     if table_name == 'collect_info'

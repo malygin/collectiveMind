@@ -56,6 +56,7 @@ class User < ActiveRecord::Base
                       tsearch: {prefix: true}
                   }
 
+  # @todo REF remove security methods to projectUsers
   def current_projects_for_user
     if prime_admin?
       Core::Project.all
@@ -135,6 +136,7 @@ class User < ActiveRecord::Base
     true
   end
 
+  # @todo REF remove methods  - for dinamic methods
   def boss?
     [1, 2, 3, 6, 7].include? self.type_user
   end
