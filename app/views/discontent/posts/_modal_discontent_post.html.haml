@@ -28,76 +28,73 @@
                 %small
                   =Russian::strftime(@post.created_at,'%d.%m.%Y %k:%M:%S')
     .modal_body
-      .divider25
       .container
-        .col-md-5
-          .border_light_grey.rounded_5.imperf_left
-            .media.comment.main_line{class: "#{@post.style == 1 ? 'pink' : 'blue'}"}
-              .container
-                .media-left
-                  = image_tag 'no-ava.png', class: "media-object img50 img-circle"
-                .media-body
-                  %h5.media-heading.bold
-                    =@post.user
-            %table.table{class: "#{@post.style == 1 ? 'pink' : 'blue'}"}
-              %tr
-                %td.col-md-2.text-center.right-column
-                  Что
-                %td.col-md-10.left-column
-                  =@post.content
-              %tr
-                %td.col-md-2.text-center.right-column
-                  Где
-                %td.col-md-10.left-column
-                  =@post.whered
-              %tr
-                %td.col-md-2.text-center.right-column
-                  Когда
-                %td.col-md-10.left-column
-                  =@post.whend
-            .divider10
-            -if @post.notes.present?
-              .index_block
-                .text-center.col-md-1
-                  %i.fa.fa-exclamation-triangle.font_lighter_grey
-                .col-md-11
-                  %h5 Замечание модератора
-                  -@post.notes.each do |note|
-                    %li=note.content
-                    %br
-            - @post.post_aspects.each do |asp|
-              .index_block
-                .text-center.col-md-1
-                  %i.fa.fa-square{style: "color:#{asp.color};"}
-                .col-md-11
-                  = asp.content
-            .divider10
-        .col-md-7
-          .container
-            .row
-              .col-md-12.theme_font_color.text-right.no_padding_col
-                =Russian::strftime(@post.created_at,'%d.%m.%Y %k:%M:%S')
-          .divider5
-          .divider_1_grey
-          #myCarousel.carousel.slide{"data-ride" => "carousel"}
-            .carousel-inner.chat-messages{:role => "listbox"}
-              -if @comments.present?
-                - @comments.each_slice(5).with_index do |slice, i|
-                  .item{class: "#{'active' if i + 1 == @comments.count / 5 + (@comments.count % 5 == 0 ? 0 : 1)}"}
-                    = render partial:'shared/comment', collection: slice
-              -else
-                .item.active
-          .divider15
-          .post-interfaces
+        .row
+          .col-md-5.com_dashed_border.right.popup_collapsable_col.collapse.in
+            %button.expand_button.remove_col.btn_reset{"data-col" => "7", "data-target" => ".popup_collapsable_col", "data-toggle" => "collapse", :type => "button"}
+            .divider20
+            .border_light_grey.rounded_5.imperf_left
+              .media.comment.main_line{class: "#{@post.style == 1 ? 'pink' : 'blue'}"}
+                .container
+                  .media-left
+                    = image_tag 'no-ava.png', class: "media-object img50 img-circle"
+                  .media-body
+                    %h5.media-heading.bold
+                      =@post.user
+              %table.table{class: "#{@post.style == 1 ? 'pink' : 'blue'}"}
+                %tr
+                  %td.col-md-2.text-center.right-column
+                    Что
+                  %td.col-md-10.left-column
+                    =@post.content
+                %tr
+                  %td.col-md-2.text-center.right-column
+                    Где
+                  %td.col-md-10.left-column
+                    =@post.whered
+                %tr
+                  %td.col-md-2.text-center.right-column
+                    Когда
+                  %td.col-md-10.left-column
+                    =@post.whend
+              .divider10
+              -if @post.notes.present?
+                .index_block
+                  .text-center.col-md-1
+                    %i.fa.fa-exclamation-triangle.font_lighter_grey
+                  .col-md-11
+                    %h5 Замечание модератора
+                    -@post.notes.each do |note|
+                      %li=note.content
+                      %br
+              - @post.post_aspects.each do |asp|
+                .index_block
+                  .text-center.col-md-1
+                    %i.fa.fa-square{style: "color:#{asp.color};"}
+                  .col-md-11
+                    = asp.content
+              .divider10
+          .col-md-7.comment_col.popup_expandable_col
+            %button.expand_button.add_col.btn_reset.theme_font_color.bold{"data-col" => "7", "data-target" => ".popup_collapsable_col", "data-toggle" => "collapse", :type => "button"} открыть описание несовершенства
+            .divider15
+            #myCarousel.carousel.slide{"data-ride" => "carousel"}
+              .carousel-inner.chat-messages{:role => "listbox"}
+                -if @comments.present?
+                  - @comments.each_slice(5).with_index do |slice, i|
+                    .item{class: "#{'active' if i + 1 == @comments.count / 5 + (@comments.count % 5 == 0 ? 0 : 1)}"}
+                      = render partial:'shared/comment', collection: slice
+                -else
+                  .item.active
+            .divider15
             = render partial:'shared/comment_form', locals:{ comment: @comment, post: @post, url_link: url_for(controller: @post.class.name.underscore.pluralize, action:'add_comment') }
-          -if @comments.count > 5
-            %nav.text-center
-              %ul.pagination
-                - @comments.each_slice(5).with_index do |slice, i|
-                  %li
-                    %a.myCarousel-target{class: "#{'active' if i + 1 == @comments.count / 5 + (@comments.count % 5 == 0 ? 0 : 1)}", "data-slide-to" => "#{i}", "data-target" => "#myCarousel"}
-                      ="#{i+1}"
-      .divider25
+            -if @comments.count > 5
+              %nav.text-center
+                %ul.pagination
+                  - @comments.each_slice(5).with_index do |slice, i|
+                    %li
+                      %a.myCarousel-target{class: "#{'active' if i + 1 == @comments.count / 5 + (@comments.count % 5 == 0 ? 0 : 1)}", "data-slide-to" => "#{i}", "data-target" => "#myCarousel"}
+                        ="#{i+1}"
+        .divider25
 
 
 

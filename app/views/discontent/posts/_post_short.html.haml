@@ -17,7 +17,10 @@
                 %td.col-md-2.text-center.right-column
                   Что
                 %td.col-md-10.left-column.bold
-                  = trim_string(post_short.content, size = 50)
+                  = link_to({action: :show, project: @project, id: post_short.id, asp: params[:asp]}, remote: true, id: 'show_record') do
+                    %div
+                      = trim_string(post_short.content, size = 50)
+                    %i.fa.fa-angle-right
               %tr
                 %td.col-md-2.text-center.right-column
                   Где
@@ -31,14 +34,18 @@
               %tr
                 %td.col-md-2.text-center.right-column
                 %td.col-md-10.left-column
-    .contenthover
-      = link_to({action: :show, project: @project, id: post_short.id, asp: params[:asp]}, remote: true, id: 'show_record') do
-        .arrow
-          %i.fa.fa-angle-right
+          .post_cont_hover.white{id: "post_ch#{post_short.id}"}
+            .wrapper.ps_cont.half_wheel_speed
+              .post_cont_inner
+                - post_short.main_comments.each do |comment|
+                  .comment_preview
+                    %span.bold
+                      ="#{comment.user}:"
+                    = trim_string(comment.content, size = 50)
     .post-bottom.white
       .row
         .col-md-9.col_padding_right_3
-          %small.pull-left{:style => "margin-right: 3px;"} Аспекты
+          -#%small.pull-left{:style => "margin-right: 3px;"} Аспекты
           .post-theme{id: "stripe#{post_short.id}"}
             - post_short.post_aspects.each_with_index do |asp, index|
               %a.tag-stripes{id: "stripe#{index+1}", class: "#{index == 0 ? 'active' : ''}", style: "background: #{asp.color};", href: "#"}
@@ -46,21 +53,22 @@
                   = asp.content
         .col-md-3.col_padding_left_3
           .text-right.small_icons
-            %span.popup2
-              = post_short.comments.count
+            %a.popup2.btn_reset.ch_action.a_font_reset{"data-for" => "post_ch#{post_short.id}", :type => "button"}
+              %small
+                = post_short.comments.count
               %i.fa.fa-comment-o
             = link_to({controller: post_short.class.name.underscore.pluralize, action: :like, project: @project, id: post_short.id, against: false, remote: true}, method: :put, id: "plus_post_#{post_short.id}") do
               %span.popup2
-                %span(id="plus_counter_#{post_short.id}" style="color:#333;")
+                %small(id="plus_counter_#{post_short.id}" style="color:#333;")
                   = post_short.users_pro.count
-                %i.fa.fa-thumbs-o-up
+                %i.fa.fa-thumbs-o-up.fa-flip-horizontal
             = link_to({controller: post_short.class.name.underscore.pluralize, action: :like, project: @project,  id: post_short.id, against: true, remote: true}, method: :put, id: "minus_post_#{post_short.id}") do
               %span.popup2
-                %span(id="minus_counter_#{post_short.id}" style="color:#333;")
+                %small(id="minus_counter_#{post_short.id}" style="color:#333;")
                   = post_short.users_against.count
-                %i.fa.fa-thumbs-o-down
-
-
+                %i.fa.fa-thumbs-o-down.fa-flip-horizontal
+            %span.popup2
+              %i.fa.fa-exclamation-triangle.font_lighter_grey
 
 
 

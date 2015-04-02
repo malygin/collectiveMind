@@ -1,4 +1,4 @@
-.media.comment
+.media.comment{id: "comment#{comment.id}"}
   .media-left
     = image_tag 'no-ava.png', class: "media-object img35 img-circle"
   .media-body
@@ -8,26 +8,36 @@
       %span.date_time.theme_font_color
         =Russian::strftime(comment.created_at,'%k:%M')
       - if current_user?(comment.user) or boss?
-        %button.btn_reset{:type => "button"}
-          %i.fa.fa-cog.fa-lg.theme_font_color
+        %span.dropdown.edit_comment
+          %button.btn_reset{id: "edit_comment#{comment.id}", "aria-expanded" => "false", "aria-haspopup" => "true", "data-toggle" => "dropdown", :type => "button"}
+            %i.fa.fa-cog.fa-lg.theme_font_color
+          %ul.dropdown-menu{"aria-labelledby" => "edit_comment#{comment.id}", :role => "menu"}
+            %li
+              %a{:href => "#", :tabindex => "-1"}
+                %i.fa.fa-pencil>
+                Редактировать
+            %li
+              %a{:href => "#", :tabindex => "-1"}
+                %i.fa.fa-close>
+                Удалить
       -if comment.approve_status
         %span.badge.badge_important.theme_back_color важно
   %p.font_grey.bold
     =comment.content
   .post-interfaces-buttons.text-left
     =link_to({:action => :like_comment, :project => @project, :id => comment.id, :against => false}, :remote => true, :method => :put, id: "like_comment_#{comment.id}") do
-      %button{:type => "button"}
+      %button.rate_button{"data-for" => "comment#{comment.id}", "data-rate-action" => "like", :type => "button"}
         %span.bold
           %span(id="lk_comment_#{comment.id}")
             =comment.users_pro.count
           %i.fa.fa-thumbs-up.theme_font_color
     =link_to({:action => :like_comment, :project => @project,  :id => comment.id, :against => true}, :remote => true, :method => :put, id: "dislike_comment_#{comment.id}") do
-      %button{:type => "button"}
+      %button.rate_button{"data-for" => "comment#{comment.id}", "data-rate-action" => "dislike", :type => "button"}
         %span.bold
           %span(id="dlk_comment_#{comment.id}")
             =comment.users_against.count
           %i.fa.fa-thumbs-down.theme_font_color
-    %button{:type => "button"}
+    %button.reply_btn.collapsed{"data-target" => "#reply_form_#{comment.id}", "data-toggle" => "collapse", :type => "button"}
       %span.bold
         %i.fa.fa-reply.fa-rotate-180.theme_font_color
 -if comment.comments.present?
@@ -39,6 +49,7 @@
     .answers_subblock.level1
       - comment.comments.each do |c|
         = render partial: 'shared/comment', object: c
+
 
 
 

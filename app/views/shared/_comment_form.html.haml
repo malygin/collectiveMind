@@ -1,11 +1,11 @@
-= form_for comment, html: {id: 'comment_form', class: 'form-group comment_add'}, remote: true,
+= form_for comment, html: {id: "comment_form", class: "form-group comment_add main_add"}, remote: true,
               url: url_for(controller: @post.nil? ? post.class.name.underscore.pluralize : @post.class.name.underscore.pluralize, action: 'add_comment', project: @project.id, id: @post.nil? ? post.id : @post.id), method: :put do |f|
   = render 'shared/notice_messages', object: f.object
   .input_cont
     = f.text_area :content, id: "comment_text_area", placeholder: 'Ваш комментарий'
   %button.btn{:type => "submit"}
     %span.bold
-      %i.fa.fa-comment.theme_font_color
+      %i.fa.fa-reply.fa-rotate-180.theme_font_color
 
 
 

@@ -98,7 +98,6 @@ p {
     padding-left: 7px;
     padding-right: 7px;
     height: 30px;
-    overflow: hidden;
 
 }
 
@@ -346,4 +345,8 @@ a.dropdown-toggle i {
 .img50 {
     width: 50px;
     height: 50px;
+}
+.img100 {
+    width: 100px;
+    height: 100px;
 }

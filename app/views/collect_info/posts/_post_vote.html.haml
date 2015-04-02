@@ -1,6 +1,6 @@
 .col-sm-4.vote_item_cont{id: "post_vote_#{post_vote.id}"}
   .vote_item
-    .heading_cont
+    .heading_cont{style: "background:#{post_vote.color};"}
       %h6
         = post_vote.content
     .divider10

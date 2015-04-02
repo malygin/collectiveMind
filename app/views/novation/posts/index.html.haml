@@ -8,10 +8,13 @@
         %i.fa.fa-question-circle
     .col-md-5
       .sort-block.pull-right
-        %span.sort-label Сортировать:
-        %span.sort-date
-        %span.sort-rate
-        %span.sort-all ВСЕ
+        %span.sort-label Сортировать по новым:
+        %span
+          %span.sort-1.sort-date
+            %span 25
+          %span.sort-2.sort-rate
+            %span 2
+        -#%span.sort-all ВСЕ
         = link_to project_user_path(@project, current_user) do
           %button.btn.add-button
             %span> +

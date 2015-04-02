@@ -79,7 +79,8 @@
     $(this).autosize()
 
   this.comments_collapse = ->
-    $('.popup_expandable_col').toggleClass('col-md-6').toggleClass('col-md-12').toggleClass('exp')
+    col = $(this).attr('data-col')
+    $('.popup_expandable_col').toggleClass('col-md-' + col).toggleClass('col-md-12').toggleClass 'exp'
 
 #  this.toggle_scores = ->
 #    $(this).toggleClass('label-danger label-success')

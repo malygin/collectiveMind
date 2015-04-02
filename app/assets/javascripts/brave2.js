@@ -186,4 +186,11 @@ $(document).ready(function () {
         magnificPopupOpen('#'+popup);
     }
 
+
+    /* perfect scrollbar */
+    $('.ps_cont.half_wheel_speed').perfectScrollbar({
+        wheelSpeed: 0.3
+    });
+    $('.ps_cont').perfectScrollbar();
+
 });

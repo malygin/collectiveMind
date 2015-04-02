@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150401011102) do
+ActiveRecord::Schema.define(version: 20150401155218) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -305,6 +305,16 @@ ActiveRecord::Schema.define(version: 20150401011102) do
 
   add_index "core_aspects", ["project_id"], name: "index_core_aspects_on_project_id", using: :btree
 
+  create_table "core_essay_comment_votings", force: :cascade do |t|
+    t.integer  "user_id"
+    t.integer  "comment_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.boolean  "against"
+  end
+
+  add_index "core_essay_comment_votings", ["comment_id"], name: "index_essay_comment_voitings_on_comment_id", using: :btree
+
   create_table "core_essay_comments", force: :cascade do |t|
     t.integer  "user_id"
     t.integer  "post_id"
@@ -460,13 +470,6 @@ ActiveRecord::Schema.define(version: 20150401011102) do
     t.integer  "position"
   end
 
-  create_table "discontent_aspects_life_tape_posts", force: :cascade do |t|
-    t.integer "discontent_aspect_id"
-    t.integer "life_tape_post_id"
-  end
-
-  add_index "discontent_aspects_life_tape_posts", ["discontent_aspect_id", "life_tape_post_id"], name: "index_discontent_aspects_life_tape_posts", using: :btree
-
   create_table "discontent_comment_votings", force: :cascade do |t|
     t.integer  "user_id"
     t.integer  "comment_id"
@@ -575,16 +578,6 @@ ActiveRecord::Schema.define(version: 20150401011102) do
 
   add_index "discontent_votings", ["discontent_post_id"], name: "index_discontent_votings_on_discontent_post_id", using: :btree
   add_index "discontent_votings", ["user_id"], name: "index_discontent_votings_on_user_id", using: :btree
-
-  create_table "essay_comment_votings", force: :cascade do |t|
-    t.integer  "user_id"
-    t.integer  "comment_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.boolean  "against"
-  end
-
-  add_index "essay_comment_votings", ["comment_id"], name: "index_essay_comment_voitings_on_comment_id", using: :btree
 
   create_table "estimate_comment_votings", force: :cascade do |t|
     t.integer  "user_id"

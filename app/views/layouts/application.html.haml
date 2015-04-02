@@ -24,17 +24,17 @@
               = image_tag 'logo1.png'
           %ul.nav.navbar-nav.main_menu
             %li{class: "#{'active' if [:collect_info_posts, :discontent_posts, :concept_posts, :plan_posts, :estimate_posts].include? name_controller}"}
-              = link_to 'Процедура', "/project/#{@project.id}"
+              = link_to 'Процедура', "/project/#{@project.id}", class: "menu_a"
             %li{class: "#{'active' if name_controller == :project_user}"}
-              = link_to 'Кабинет', project_user_path(@project, current_user)
+              = link_to 'Кабинет', project_user_path(@project, current_user), class: "menu_a"
             %li{class: "#{'active' if name_controller == :journal}"}
-              = link_to 'Новости', journals_path(@project)
+              = link_to 'Новости', journals_path(@project), class: "menu_a"
             - if @project.prev_status
               %li
-                = link_to '<- стадия', pr_stage_core_project_path(@project), method: :put, id: "down_to_#{@project.prev_status}"
+                = link_to '<- стадия', pr_stage_core_project_path(@project), method: :put, id: "down_to_#{@project.prev_status}", class: "menu_a"
             - if @project.next_status
               %li
-                = link_to '-> стадия', next_stage_core_project_path(@project), method: :put, id: "up_to_#{@project.next_status}"
+                = link_to '-> стадия', next_stage_core_project_path(@project), method: :put, id: "up_to_#{@project.next_status}", class: "menu_a"
 
           .navbar-right.text-right.user_block.font_grey
             = link_to "", knowbase_posts_path(@project), remote: true, id: "tooltip1_5", class: "tooltip1_5 book_icon", "data-placement" => "bottom", "data-toggle" => "tooltip", "data-trigger" => "none", :title => "Открыть базу знаний"

@@ -27,11 +27,25 @@ $(document).ready(function () {
     function close_dd(opener, win){
         opener.removeClass('active');
         win.removeClass('active');
+        win.find('.collapse.in').removeClass('in');
+        win.find('[data-toggle="collapse"]').addClass('collapsed');
     }
 
     /* comments col */
     $('.expand_button').click(function(){
-        $('.popup_expandable_col').toggleClass('col-md-6').toggleClass('col-md-12').toggleClass('exp');
+        var col = $(this).attr('data-col');
+        $('.popup_expandable_col').toggleClass('col-md-' + col).toggleClass('col-md-12').toggleClass('exp');
+    });
+
+    /* comments like/dislike */
+    $('.rate_button').click(function(){
+        var me = $(this);
+        if (!me.hasClass('pushed')){
+            me.addClass('pushed');
+            me.siblings('.rate_button').removeClass('pushed');
+        } else {
+            me.removeClass('pushed');
+        }
     });
 
     /* collapse comments */
@@ -174,6 +188,8 @@ $(document).ready(function () {
     $(".b-popover").popover();
 
     $("[data-toggle=popover]").popover();
+
+    $("[data-toggle=tooltip]").tooltip();
 
     $(".popover_news").click(function(){
         $(".news-popup-href").magnificPopup({});
@@ -467,6 +483,12 @@ $('.post-body').contenthover({
     overlay_opacity: 0.8
 });
 
+$('.ch_action').click(function(){
+    var ch_id = $(this).attr('data-for');
+    $(this).toggleClass('active');
+    $('#' + ch_id).toggleClass('active');
+});
+
 $('.open-popup').each(function () {
     me = $(this);
     var stageNum = me.attr('data-placement');
@@ -618,15 +640,14 @@ $(document).ready(function () {
 
 
 
-/* right slide panel */
+/* slide panel */
 $('#opener').on('click', function() {
     var panel = $('#slide-panel');
     if (panel.hasClass("visible")) {
-        panel.removeClass('visible').animate({'margin-right':'-305px'});
+        panel.removeClass('visible').animate({'margin-left':'-400px'});
     } else {
-        panel.addClass('visible').animate({'margin-right':'0px'});
+        panel.addClass('visible').animate({'margin-left':'0px'});
     }
-    $('.slide-opener i').toggleClass('fa-rotate-180');
     return false;
 });
 

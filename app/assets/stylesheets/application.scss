@@ -6,6 +6,7 @@
 @import 'custom-post';
 
 @import 'dropdowns-enhancement';
+@import 'perfect-scrollbar.min';
 
 //@import 'jquery.ui.autocomplete';
 @import "jquery.ui.chatbox";
@@ -78,6 +79,25 @@
 }
 
 /* discontent posts */
+
+.post-body{
+  max-height: 130px !important;
+  overflow: hidden !important;
+}
+
+.post .what .left-column a{
+  color: #4e4e4e !important;
+
+  &:hover{
+    color: #4e4e4e !important;
+  }
+
+  div{
+    padding-right:13px !important;
+  }
+
+}
+
 .color-N1 {
 
   background: #6184bd !important;
