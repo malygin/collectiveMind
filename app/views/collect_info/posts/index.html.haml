@@ -76,7 +76,7 @@
                       %span.pull-right.question_count
                         %span{id: "question_count_#{asp.id}"} 1
                         из
-                        = asp.questions.by_project(@project).by_status(0).count
+                        = asp.questions.by_status(0).count
                       -#%br
                       -#%span.wrong-answer{style: "color:#{asp.color};border-color:#{asp.color};margin-left:20px;margin-right:20px;"}
                       -#  Неправильный ответ!
@@ -84,9 +84,10 @@
                       -#  %span.close-button
                       -#    %i.fa.fa-times-circle-o
                       .carousel-inner
-                        - asp.questions.by_project(@project).by_status(0).order('collect_info_questions.id').each_with_index do |question, ind|
-                          - unless question.user_answers.by_project(@project).by_user(current_user).present?
-                            .item{id: "question_#{question.id}", class: "#{'active' if asp.questions.by_project(@project).by_status(0).by_complete(asp.question_complete(@project, current_user).pluck(:id)).order('collect_info_questions.id').first == question}"}
+                        - asp.questions.by_status(0).order('collect_info_questions.id').each_with_index do |question, ind|
+                          - unless question.user_answers.by_user(current_user).present?
+                            -#@todo REF no long methods in view blayt' - move to helper or model
+                            .item{id: "question_#{question.id}", class: "#{'active' if asp.questions.by_status(0).by_complete(asp.question_complete(current_user).pluck(:id)).order('collect_info_questions.id').first == question}"}
                               %p.text.block-with-left-icon
                                 %span.left-icon.pull-right="#{ind + 1}."
                                 = question.content
@@ -107,7 +108,7 @@
                                   %a.btn.btn-outline.notice-button{style: "border-color: #{asp.color};", data: {question: question.id}} Подсказка
                                   %button#send_answers.btn.answer-button.questionsCarousel-target{type: "submit", style: "background-color: #{asp.color};"} Ответить
 
-
+-#@todo REF move popups to parial maybe votings too
 #popup-explanation-1.popup-window.popup-explanation.popup-w710.mfp-hide.welcome_popup{class: "#{shown_intro('collect_info_intro')}"}
   .popup.popup_rounded
     .modal_badge.back_color_stage1.rounded_2.font_white 1 СТАДИЯ

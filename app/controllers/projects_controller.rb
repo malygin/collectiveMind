@@ -1,4 +1,5 @@
 class ProjectsController < ApplicationController
+  # @todo REF we have 3 same query to coreProjects model, whyy?
   before_filter :authenticate_user!
   before_action :set_project
   before_action :user_projects

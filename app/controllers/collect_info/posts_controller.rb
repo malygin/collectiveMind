@@ -12,17 +12,20 @@ class CollectInfo::PostsController < PostsController
   def index
     @aspect = params[:asp] ? Core::Aspect.find(params[:asp]) : @project.main_aspects.first
     @count_aspects = @project.main_aspects.count
+    # @todo REF move check in model and more comments daniil
     @count_aspects_check = 0
     @project.main_aspects.each do |asp|
-      if asp.question_complete(@project, current_user).count == asp.questions.by_project(@project).by_status(0).count
+      if asp.question_complete(current_user).count == asp.questions.by_status(0).count
         @count_aspects_check += 1
       end
     end
+
   end
 
   def render_slider
   end
 
+  # @todo REF catastrophe
   def answer_question
     @aspect = params[:id] ? Core::Aspect.find(params[:id]) : @project.main_aspects.first
     @question = CollectInfo::Question.find(params[:question_id])
