@@ -96,7 +96,7 @@ class Discontent::PostsController < PostsController
       format.js
     end
   end
-
+  # @todo REF remove union methods to concern
   def union_discontent
     @post = Discontent::Post.find(params[:id])
     @new_post = @project.discontent_post.create(status: 2, style: @post.style, content: params[:union_post_descr], whered: @post.whered, whend: @post.whend)
@@ -137,6 +137,8 @@ class Discontent::PostsController < PostsController
     end
   end
 
+  # ------
+  # @todo REF remove methods to concern
   def ungroup_union
     @post = Discontent::Post.find(params[:id])
     unless @post.discontent_posts.nil?

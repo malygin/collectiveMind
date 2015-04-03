@@ -7,6 +7,7 @@ class Discontent::Post < ActiveRecord::Base
 
   has_many :discontent_posts, class_name: 'Discontent::Post', foreign_key: 'discontent_post_id'
   has_many :discontent_post_aspects, class_name: 'Discontent::PostAspect'
+
   has_many :post_aspects, through: :discontent_post_aspects, source: :core_aspect, class_name: 'Core::Aspect'
   has_many :concept_post_discontents, -> { where concept_post_discontents: {status: [0, nil]} },
            class_name: 'Concept::PostDiscontent', foreign_key: 'discontent_post_id'
@@ -15,6 +16,7 @@ class Discontent::Post < ActiveRecord::Base
   has_many :concept_posts, through: :concept_conditions, foreign_key: 'concept_post_id', class_name: 'Concept::Post'
   has_many :voted_users, through: :final_votings, source: :user
   has_many :final_votings, foreign_key: 'discontent_post_id', class_name: 'Discontent::Voting'
+
   has_many :concept_votings, foreign_key: 'discontent_post_id', class_name: 'Concept::Voting'
   has_many :concept_post_discontent_grouped, -> { where concept_post_discontents: {status: [1]} },
            class_name: 'Concept::PostDiscontent', foreign_key: 'discontent_post_id'
@@ -46,6 +48,7 @@ class Discontent::Post < ActiveRecord::Base
   scope :type_note, -> (type_note) { joins(:notes) if type_note.present? and type_note != 'content_all' }
   scope :type_like, -> type_like { where(useful: type_like == 'by_like' ? 't' : ['f', nil]) if type_like.present? and type_like != 'content_all' }
   scope :type_verify, -> type_verify { type_verify == 'by_verified' ? by_verified : by_unverified if type_verify.present? and type_verify != 'content_all' }
+  # @todo REF simpler sort_date ='DESC' and use it in order call
   scope :sort_date, -> sort_date { sort_date == 'up' ? order('discontent_posts.created_at DESC') : order('discontent_posts.created_at ASC') if sort_date.present? }
   scope :sort_user, -> sort_user { sort_user == 'up' ? order('discontent_posts.user_id DESC') : order('discontent_posts.user_id ASC') if sort_user.present? }
   scope :sort_view, -> sort_view { sort_view == 'up' ? order('discontent_posts.number_views DESC') : order('discontent_posts.number_views ASC') if sort_view.present? }
