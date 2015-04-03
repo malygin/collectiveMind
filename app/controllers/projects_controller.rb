@@ -1,12 +1,15 @@
+##
+# Контроллер, который является родительским для всех, которые находятся внутри scope '/project/:project'
+# Гарантирует, что будет доступен объект проекта: @project
+# Гарантирует, что только пользователи, имеющие доступ к проекту, пройдут дальше
 class ProjectsController < ApplicationController
-  # @todo REF we have 3 same query to coreProjects model, whyy?
   before_filter :authenticate_user!
   before_action :set_project
   before_filter :check_access_to_project
 
   protected
   def set_project
-    @project = Core::Project.find(params[:project]) if params[:project].present?
+    @project = Core::Project.find(params[:project])
   end
 
   def journal_data
