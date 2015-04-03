@@ -3,7 +3,7 @@ class UsersController < ProjectsController
   before_filter :correct_user, only: [:edit, :update]
   before_filter :journal_data, only: [:index, :new, :edit, :show, :users_rc, :journal_clear, :edit_notice]
   before_filter :boss_authenticate, only: [:users_rc]
-  before_filter :prime_admin_authenticate, only: [:destroy, :list_users, :remove_user_for_project, :club_toggle, :update_score]
+  before_filter :prime_admin_authenticate, only: [:destroy, :list_users, :club_toggle, :update_score]
   before_filter :have_project_access
   before_filter :user_projects
 
@@ -42,13 +42,6 @@ class UsersController < ProjectsController
       @users = @project.users_in_project.where(users: {type_user: uniq_proc_users}).sort_by { |c| c.core_project_scores.by_project(@project).first.nil? ? 0 : c.core_project_scores.by_project(@project).first.score }.reverse!.uniq
     else
       @users = User.joins(:core_project_scores).where('core_project_scores.project_id = ? AND core_project_scores.score > 0', @project.id).where(users: {type_user: uniq_proc_users}).order("core_project_scores.score DESC")
-    end
-  end
-
-  def remove_user_for_project
-    @user.core_project_users.where(project_id: @project.id).destroy_all
-    respond_to do |format|
-      format.js
     end
   end
 

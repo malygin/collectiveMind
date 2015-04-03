@@ -118,7 +118,6 @@ CollectiveMind::Application.routes.draw do
       member do
         post :update_score
         put :club_toggle
-        put :remove_user_for_project
         put :journal_clear
         get :edit_notice
         post :create_notice

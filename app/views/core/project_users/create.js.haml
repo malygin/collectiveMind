@@ -1,2 +1,2 @@
-$("#list_users_#{@user.id}").html("<a href=\"/project/#{@project.id}/users/#{@user.id}/remove_user_for_project\" id=\"remove_user_#{@user.id}\" class=\"btn btn-danger\" data-method=\"put\" data-remote=\"true\" rel=\"nofollow\"><i class=\"fa fa-minus\"></i> #{t('link.delete')} </a>");
+$("#list_users_#{@user.id}").html("<a href=\"/project/#{@project.id}/project_users/#{@user.id}\" data-method=\"delete\" id=\"remove_user_#{@user.id}\" class=\"btn btn-danger\" data-method=\"put\" data-remote=\"true\" rel=\"nofollow\"><i class=\"fa fa-minus\"></i> #{t('link.delete')} </a>");
 $("#user_#{@user.id}").animate({height: 0, opacity:0}, 1000, function() { $(this).remove(); });

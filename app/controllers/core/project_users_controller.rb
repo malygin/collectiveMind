@@ -1,7 +1,7 @@
 class Core::ProjectUsersController < ApplicationController
   before_action :set_project
   before_action :journal_data, only: [:user_analytics, :moderator_analytics]
-  before_filter :prime_admin_authenticate, only: [:create]
+  before_filter :prime_admin_authenticate, only: [:create, :destroy]
   layout 'cabinet'
 
   def show
@@ -10,7 +10,16 @@ class Core::ProjectUsersController < ApplicationController
 
   def create
     @project = Core::Project.find(params[:project])
+    @user = User.find(params[:user])
     @user.core_project_users.create(project_id: @project.id) unless @user.core_project_users.by_project(@project.id).first
+    respond_to do |format|
+      format.js
+    end
+  end
+
+  def destroy
+    @user = User.find(params[:user])
+    @user.core_project_users.where(project_id: @project.id).destroy_all
     respond_to do |format|
       format.js
     end

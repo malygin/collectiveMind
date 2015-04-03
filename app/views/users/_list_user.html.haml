@@ -14,7 +14,7 @@
 
   .col-md-4{id: "list_users_#{list_user.id}"}
     - if list_user.projects.include? @project
-      = link_to remove_user_for_project_user_path(@project, list_user), remote: true, method: :put, class:'btn btn-danger', id: "remove_user_#{list_user.id}" do
+      = link_to project_user_path(@project, list_user), remote: true, method: :delete, class:'btn btn-danger', id: "remove_user_#{list_user.id}" do
         %i.fa.fa-minus
         = t('link.delete')
     - else
