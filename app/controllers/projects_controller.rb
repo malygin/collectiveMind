@@ -2,7 +2,6 @@ class ProjectsController < ApplicationController
   # @todo REF we have 3 same query to coreProjects model, whyy?
   before_filter :authenticate_user!
   before_action :set_project
-  before_action :user_projects
   before_filter :check_access_to_project
 
   protected
@@ -13,10 +12,6 @@ class ProjectsController < ApplicationController
   def journal_data
     @my_journals = current_user.my_journals @project
     @my_journals_count = @my_journals.size
-  end
-
-  def user_projects
-    @user_projects = current_user.current_projects_for_ordinary_user if current_user
   end
 
   def check_access_to_project

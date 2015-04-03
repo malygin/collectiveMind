@@ -81,13 +81,6 @@ class User < ActiveRecord::Base
     end
   end
 
-  def current_projects_for_ordinary_user
-    opened_projects = Core::Project.active_proc.where(type_access: Core::Project::TYPE_ACCESS_CODE[:opened])
-    club_projects = self.cluber? ? Core::Project.active_proc.where(type_access: Core::Project::TYPE_ACCESS_CODE[:club]) : []
-    closed_projects = self.projects.active_proc.where(core_projects: {type_access: Core::Project::TYPE_ACCESS_CODE[:closed]})
-    opened_projects | club_projects | closed_projects
-  end
-
   def valid_password?(password)
     begin
       super(password)
