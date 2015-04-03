@@ -1,13 +1,19 @@
-%h4.modal-title
-  = t('form.aspect.title')
+.cabinet-tab-heading
+  %h5
+    = t('form.aspect.title')
+  .divider35
 
-= form_for aspect, url: {project: @project.id, action: aspect.persisted? ? 'update' : 'create'}, remote: true do |f|
-  - content_for :aspect_names do
-    %br
-    = f.text_field :content, class: 'form-control', placeholder: t('form.aspect.name'), id: 'aspect_text_field_content'
-    %br
-    = f.text_area :short_desc, class: 'form-control', style: 'height: 70px;', placeholder: t('form.aspect.desc'), id: 'aspect_text_area'
-    %br
+= form_for aspect, url: {project: @project.id, action: aspect.persisted? ? 'update' : 'create'}, remote: true, class: 'cabinet-aspect-form' do |f|
+  - content_for :aspect_content do
+    .form-group
+      = f.label :content, 'Название'
+      = f.text_field :content, class: 'form-control', id: 'aspect_text_field_content'
+      .divider25
+  - content_for :aspect_description do
+    .divider25
+    .form-group
+      = f.label :short_desc, 'Поясните, почему ваш аспект важен:'
+      = f.text_area :short_desc, class: 'form-control', rows: '3', id: 'aspect_text_area'
   = render 'shared/notice_messages', object: f.object
 
   = render partial: "#{params[:type_mechanic]}_form", locals: {f: f, aspect: aspect}
