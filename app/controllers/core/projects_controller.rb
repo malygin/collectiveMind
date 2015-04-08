@@ -215,7 +215,7 @@ class Core::ProjectsController < ApplicationController
 
   def core_project_params
     params.require(:core_project).permit(:name, :type_access, :short_desc, :desc, :code, :color, :advices_concept,
-                                         :advices_discontent, :date_start, :date_end, :count_stages)
+                                         :advices_discontent, :date_start, :date_end, :count_stages, :type_procedure)
   end
 
   def filtering_params(params)

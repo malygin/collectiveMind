@@ -17,7 +17,9 @@
     .form-group
       = f.label t('form.project.type_access')
       = f.select :type_access, options_from_collection_for_select(Core::Project::TYPE_ACCESS, :first, :last, 0), {}, {class: 'form-control'}
-
+    .form-group
+      = f.label t('form.project.type_procedure')
+      = f.select :type_procedure, options_from_collection_for_select(Core::ProjectType.all, :id, :name, 0), {prompt: 'Выберите'}, {class: 'form-control'}
     .form-group
       = f.label 'Дата начала'
       = f.text_field :date_start, class: 'form-control datepicker'
