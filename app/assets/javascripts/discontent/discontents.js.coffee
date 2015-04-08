@@ -2,12 +2,9 @@ Discontent = Backbone.Model.extend
   parse: (data)->
     return data
 
-
-
 DiscontentCollection = Backbone.Collection.extend
   model: Discontent,
   url: "/project/4/discontent/posts"
-
 
 DiscontentView = Backbone.View.extend
   template: JST['templates/discontent_view']
@@ -22,12 +19,23 @@ DiscontentView = Backbone.View.extend
 DiscontentCollectionView = Backbone.View.extend
   id: 'tab_aspect_posts',
   className: 'row',
+
+  initialize: ()->
+    $('#filter li').on('click',this.loadByAspect, this)
+    $('#tab_aspect_posts').isotope
+      itemSelector: '.discontent-block',
+      layoutMode: 'fitRows',
   render: ()->
     this.collection.forEach(this.addOne, this)
     return this
   addOne: (discontent)->
     discontentView = new DiscontentView({model: discontent});
     this.$el.append(discontentView.render().el);
+  loadByAspect: ()->
+    console.log view
+    $('#tab_aspect_posts').isotope
+      filter: $(this).data('aspect')
+
 
 
 dc = new DiscontentCollection
