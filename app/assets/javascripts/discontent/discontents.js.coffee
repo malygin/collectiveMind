@@ -21,25 +21,42 @@ DiscontentCollectionView = Backbone.View.extend
   className: 'row',
 
   initialize: ()->
-    $('#filter li').on('click',this.loadByAspect, this)
-    $('#tab_aspect_posts').isotope
-      itemSelector: '.discontent-block',
-      layoutMode: 'fitRows',
+    this.collection.bind('add', this.renderNew, this);
+    this.collection.bind('remove', this.removeOld, this);
+    $('#filter').on('click', 'li', this.loadByAspect)
+
+
   render: ()->
     this.collection.forEach(this.addOne, this)
     return this
   addOne: (discontent)->
     discontentView = new DiscontentView({model: discontent});
     this.$el.append(discontentView.render().el);
+
+  renderNew: (newModel)->
+#    console.log 'new'
+    new DiscontentView({ model:newModel }).render();
+    return this
+
+  removeOld: (model)->
+    el = $('div[data-id="id-'+model.id+'"]')
+    this.$container.isotope('remove', el).isotope('layout');
+
   loadByAspect: ()->
-    console.log view
-    $('#tab_aspect_posts').isotope
-      filter: $(this).data('aspect')
+    dc.fetch
+      data: $.param({aspect: $(this).data('aspect')})
+      success: (col,res)->
+
+#        $('#tab_aspect_posts').isotope
+#          filter: $(this).data('aspect')
 
 
 
 dc = new DiscontentCollection
 dc.fetch
-  success: (c,r)->
+  success: (col,res)->
     dv = new DiscontentCollectionView({collection: dc})
     $('.stage-post-block').html(dv.render().el)
+    dv.$container =  $('#tab_aspect_posts').isotope
+      itemSelector: '.discontent-block',
+      layoutMode: 'fitRows'

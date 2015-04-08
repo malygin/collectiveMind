@@ -18,8 +18,12 @@ class Discontent::PostsController < PostsController
   end
 
   def index
-    @posts = @project.discontents.by_status_for_discontent(@project)
-
+    @posts= nil
+    if  params[:aspect]
+      @posts = Core::Aspect.find(params[:aspect].scan(/\d/).join('')).aspect_posts
+    else
+      @posts = @project.discontents.by_status_for_discontent(@project)
+    end
     respond_to do |format|
 
       format.html # show.html.erb
