@@ -17,6 +17,8 @@
   = render 'shared/notice_messages', object: f.object
 
   = render partial: "#{params[:type_mechanic]}_form", locals: {f: f, aspect: aspect}
+  - unless @project.type_procedure.nil?
+    = render partial: "additional_fields_#{@project.type_procedure}", locals: {f: f}
 
   .pull-right
     = f.submit t('form.save'), id: 'send_post_aspect', class: 'btn btn-success'
