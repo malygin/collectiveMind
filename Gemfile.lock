@@ -1,4 +1,15 @@
 GIT
+  remote: git://github.com/codebrew/backbone-rails.git
+  revision: d7f06407ab0adcc08b1cd79257a01a3a58560b00
+  branch: master
+  specs:
+    rails-backbone (1.1.2)
+      coffee-rails
+      ejs
+      jquery-rails
+      railties
+
+GIT
   remote: https://github.com/samhane/websocket-rails.git
   revision: c1daa40cbc9c543865ec3eec02578d84d5656f57
   specs:
@@ -167,6 +178,7 @@ GEM
       warden
     diff-lcs (1.2.5)
     docile (1.1.5)
+    ejs (1.1.1)
     em-synchrony (1.0.4)
       eventmachine (>= 1.0.0.beta.1)
     em-websocket (0.5.1)
@@ -581,6 +593,7 @@ DEPENDENCIES
   pubnub
   quiet_assets
   rails (= 4.2.1)
+  rails-backbone!
   rails-erd
   rails_12factor
   rails_best_practices

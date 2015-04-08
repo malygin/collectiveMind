@@ -48,6 +48,13 @@
 #= require velocity.ui.min
 #= require isotope.pkgd.min
 
+#= require underscore
+#= require_tree ./templates
+
+#= require backbone
+#= require backbone_rails_sync
+#= require backbone_datalink
+#= require discontent/discontents
 # @todo не используемые
 
 # require totop/jquery.ui.totop

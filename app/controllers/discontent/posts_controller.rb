@@ -18,6 +18,16 @@ class Discontent::PostsController < PostsController
   def index
     @posts = @project.discontents.by_status_for_discontent(@project)
 
+    respond_to do |format|
+
+      format.html # show.html.erb
+      format.json { render json: @posts.map {|item| {id: item.id, content: item.content, whend: item.whend, whered: item.whered,
+                                                     user:item.user.to_s, post_date: Russian::strftime(item.created_at,'%d.%m.%Y %k:%M:%S'),
+                                                     project_id: item.project_id,
+                                                     aspects: item.post_aspects.map {|aspect|{id: aspect.id, color: aspect.color, content: aspect.content} } }  } }
+
+    end
+
     # @posts = @project.get_united_posts_for_vote(current_user)
     #
     # if params[:asp]
