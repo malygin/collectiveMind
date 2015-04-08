@@ -48,10 +48,6 @@ class Discontent::Post < ActiveRecord::Base
   scope :type_note, -> (type_note) { joins(:notes) if type_note.present? and type_note != 'content_all' }
   scope :type_like, -> type_like { where(useful: type_like == 'by_like' ? 't' : ['f', nil]) if type_like.present? and type_like != 'content_all' }
   scope :type_verify, -> type_verify { type_verify == 'by_verified' ? by_verified : by_unverified if type_verify.present? and type_verify != 'content_all' }
-  # @todo REF simpler sort_date ='DESC' and use it in order call
-  scope :sort_date, -> sort_date { sort_date == 'up' ? order('discontent_posts.created_at DESC') : order('discontent_posts.created_at ASC') if sort_date.present? }
-  scope :sort_user, -> sort_user { sort_user == 'up' ? order('discontent_posts.user_id DESC') : order('discontent_posts.user_id ASC') if sort_user.present? }
-  scope :sort_view, -> sort_view { sort_view == 'up' ? order('discontent_posts.number_views DESC') : order('discontent_posts.number_views ASC') if sort_view.present? }
   pg_search_scope :autocomplete_whend,
                   against: [:whend],
                   using: {
