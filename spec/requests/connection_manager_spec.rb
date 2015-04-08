@@ -2,26 +2,24 @@ require 'spec_helper'
 require 'support/mock_web_socket'
 
 module WebsocketRails
-  describe ConnectionManager, "integration test" do
-
+  describe ConnectionManager, 'integration test', skip: true do
     class ProductController < BaseController
-      def update_list; true; end
+      def update_list
+        true
+      end
     end
 
     def define_test_events
       WebsocketRails.config.route_block = nil
       WebsocketRails::EventMap.describe do
-        subscribe :incoming_message, :to => ModeratorChatController, :with_method => :incoming_message
-
-
-
+        subscribe :incoming_message, to: ModeratorChatController, with_method: :incoming_message
       end
     end
 
     before(:all) do
       define_test_events
       if defined?(ConnectionAdapters::Test)
-        ConnectionAdapters.adapters.delete( ConnectionAdapters::Test )
+        ConnectionAdapters.adapters.delete(ConnectionAdapters::Test)
       end
     end
 
@@ -35,67 +33,67 @@ module WebsocketRails
       EM.stop
     end
 
-    shared_examples "an evented rack server" do
-      context "new connections" do
+    shared_examples 'an evented rack server' do
+      context 'new connections' do
         it "should execute the controller action associated with the 'client_connected' event" do
           ModeratorChatController.any_instance.should_receive(:new_user)
-          @server.call( env )
+          @server.call(env)
         end
       end
 
-      context "active connections" do
-        context "new message from client" do
-          let(:test_message) { ['change_username',{:user_name => 'Joe User'}] }
+      context 'active connections' do
+        context 'new message from client' do
+          let(:test_message) { ['change_username', {user_name: 'Joe User'}] }
           let(:encoded_message) { test_message.to_json }
 
-          it "should execute the controller action associated with the received event" do
+          it 'should execute the controller action associated with the received event' do
             ModeratorChatController.any_instance.should_receive(:change_username)
-            @server.call( env )
-            socket.on_message( encoded_message )
+            @server.call(env)
+            socket.on_message(encoded_message)
           end
         end
 
-        context "new message from client under a namespace" do
-          let(:test_message) { ['products.update_list',{:product => 'x-ray-vision'}] }
+        context 'new message from client under a namespace' do
+          let(:test_message) { ['products.update_list', {product: 'x-ray-vision'}] }
           let(:encoded_message) { test_message.to_json }
 
-          it "should execute the controller action under the correct namespace" do
+          it 'should execute the controller action under the correct namespace' do
             ModeratorChatController.any_instance.should_not_receive(:update_user_list)
-            @server.call( env )
-            socket.on_message( encoded_message )
+            @server.call(env)
+            socket.on_message(encoded_message)
           end
         end
 
-        context "subscribing to a channel" do
-          let(:channel_message) { ['websocket_rails.subscribe',{:data => {:channel => 'test_chan'}}] }
+        context 'subscribing to a channel' do
+          let(:channel_message) { ['websocket_rails.subscribe', {data: {channel: 'test_chan'}}] }
           let(:encoded_channel_message) { channel_message.to_json }
 
-          it "should subscribe the connection to the correct channel" do
+          it 'should subscribe the connection to the correct channel' do
             channel = WebsocketRails[:test_chan]
-            @server.call( env )
+            @server.call(env)
             channel.should_receive(:subscribe).with(socket)
             socket.on_message encoded_channel_message
           end
         end
 
-        context "client error" do
+        context 'client error' do
           it "should execute the controller action associated with the 'client_error' event" do
             ModeratorChatController.any_instance.should_receive(:error_occurred)
-            @server.call( env )
+            @server.call(env)
             socket.on_error
           end
         end
 
-        context "client disconnects" do
+        context 'client disconnects' do
           it "should execute the controller action associated with the 'client_disconnected' event" do
             ModeratorChatController.any_instance.should_receive(:delete_user)
-            @server.call( env )
+            @server.call(env)
             socket.on_close
           end
 
-          it "should unsubscribe from channels" do
+          it 'should unsubscribe from channels' do
             channel = WebsocketRails[:test_chan]
-            @server.call( env )
+            @server.call(env)
             channel.should_receive(:unsubscribe).with(socket)
             socket.on_close
           end
@@ -103,7 +101,7 @@ module WebsocketRails
       end
     end
 
-    context "WebSocket Adapter" do
+    context 'WebSocket Adapter' do
       let(:socket) { @server.connections.first[1] }
 
       before do
@@ -114,7 +112,7 @@ module WebsocketRails
       it_behaves_like 'an evented rack server'
     end
 
-    describe "HTTP Adapter" do
+    describe 'HTTP Adapter' do
       let(:socket) { @server.connections.first[1] }
 
       before do
@@ -123,6 +121,5 @@ module WebsocketRails
 
       it_behaves_like 'an evented rack server'
     end
-
   end
 end
