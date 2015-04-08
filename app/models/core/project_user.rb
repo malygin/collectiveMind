@@ -4,7 +4,7 @@ class Core::ProjectUser < ActiveRecord::Base
 
   validates :user_id, :project_id, presence: true
 
-  scope :by_project, ->(pr) { where(project_id: pr) }
+  scope :by_project, ->(pr) { where project_id: pr }
   scope :by_type, -> (type) { where type_user: type }
 
   TYPE_USER = {
