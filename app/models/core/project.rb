@@ -1,4 +1,5 @@
 class Core::Project < ActiveRecord::Base
+  belongs_to :project_type, class_name: 'Core::ProjectType', foreign_key: :project_type_id
   has_one :settings, class_name: 'Core::ProjectSetting', dependent: :destroy
   accepts_nested_attributes_for :settings
   has_many :aspects, class_name: 'Core::Aspect'
