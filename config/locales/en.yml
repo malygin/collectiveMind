@@ -258,7 +258,7 @@ en:
       code: Код
       color: Цвет
 
-      type_procedure: "Type procedure"
+      project_type: "Type procedure"
     aspect:
       title: New subject addition
       name: Please enter the title of the subject
