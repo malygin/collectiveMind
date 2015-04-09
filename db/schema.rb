@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150408192357) do
+ActiveRecord::Schema.define(version: 20150409153422) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -367,9 +367,10 @@ ActiveRecord::Schema.define(version: 20150408192357) do
 
   create_table "core_project_types", force: :cascade do |t|
     t.string   "name"
-    t.json     "custom_fields"
-    t.datetime "created_at",    null: false
-    t.datetime "updated_at",    null: false
+    t.datetime "created_at",                    null: false
+    t.datetime "updated_at",                    null: false
+    t.string   "code"
+    t.boolean  "custom_fields", default: false
   end
 
   create_table "core_project_users", force: :cascade do |t|
