@@ -11,7 +11,7 @@ class Core::AspectsController < ProjectsController
   end
 
   def create
-    @aspect = @project.aspects.create core_aspect_params
+    @aspect = @project.aspects.create core_aspect_params.merge(user: current_user)
     respond_to do |format|
       format.js
     end
