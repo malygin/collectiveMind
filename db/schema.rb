@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150409153422) do
+ActiveRecord::Schema.define(version: 20150409154515) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -260,10 +260,11 @@ ActiveRecord::Schema.define(version: 20150409153422) do
     t.datetime "updated_at"
     t.integer  "project_id"
     t.text     "short_desc"
-    t.integer  "status",         default: 0
+    t.integer  "status",               default: 0
     t.integer  "core_aspect_id"
     t.string   "color"
     t.string   "short_name"
+    t.text     "detailed_description"
   end
 
   add_index "core_aspects", ["project_id"], name: "index_core_aspects_on_project_id", using: :btree
