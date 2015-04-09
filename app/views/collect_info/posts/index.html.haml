@@ -70,24 +70,18 @@
                 .col-md-4.col-sm-4.min-col-left-padd
                   .carousel.slide.questionsCarousel{id: "questionsCarousel_#{asp.id}", "data-ride" => "carousel"}
                     .aspect-questions-block{:style => "border-top-color: #{asp.color};"}
-                      %h4.block-with-left-icon.pull-left
-                        %i.left-icon.fa.fa-2x.fa-comments
-                        Вопросы по аспекту
-                      %span.pull-right.question_count
-                        %span{id: "question_count_#{asp.id}"} 1
-                        из
-                        = asp.questions.by_status(0).count
-                      -#%br
-                      -#%span.wrong-answer{style: "color:#{asp.color};border-color:#{asp.color};margin-left:20px;margin-right:20px;"}
-                      -#  Неправильный ответ!
-                      -#  Воспользуйтесь подсказкой
-                      -#  %span.close-button
-                      -#    %i.fa.fa-times-circle-o
-                      .carousel-inner
-                        - asp.questions.by_status(0).order('collect_info_questions.id').each_with_index do |question, ind|
-                          - unless question.user_answers.by_user(current_user).present?
-                            -#@todo REF no long methods in view blayt' - move to helper or model
-                            .item{id: "question_#{question.id}", class: "#{'active' if asp.questions.by_status(0).by_complete(asp.question_complete(current_user).pluck(:id)).order('collect_info_questions.id').first == question}"}
+                      -if asp.missed_questions(current_user).size > 0
+                        %h4.block-with-left-icon.pull-left
+                          %i.left-icon.fa.fa-2x.fa-comments
+                          Вопросы по аспекту
+                        %span.pull-right.question_count
+                          %span{id: "question_count_#{asp.id}"}
+                            = asp.questions.size - asp.missed_questions(current_user).size + 1
+                          из
+                          = asp.questions.size
+                        .carousel-inner
+                          - asp.missed_questions(current_user).each_with_index do |question, ind|
+                            .item{id: "question_#{question.id}", class: "#{'active' if ind == 0}"}
                               %p.text.block-with-left-icon
                                 %span.left-icon.pull-right="#{ind + 1}."
                                 = question.content
@@ -97,7 +91,7 @@
                                   %i.fa.fa-times-circle-o
                               = form_tag(answer_question_collect_info_post_path(@project, id: asp.id, question_id: question.id), {method: :put, remote: true, class: 'form instruments-block', id: 'form_answer_question', multipart: true}) do
                                 .btn-group#answers_buttons(data-toggle="buttons")
-                                  - question.answers.by_status(0).each do |answer|
+                                  - question.answers.each do |answer|
                                     .form-group
                                       %button.btn.btn-xs.btn-white.answer-question(id="answer_#{answer.id}")
                                         = check_box_tag 'answers[]', answer.id
@@ -107,6 +101,14 @@
                                 .form-group.bottom-buttons
                                   %a.btn.btn-outline.notice-button{style: "border-color: #{asp.color};", data: {question: question.id}} Подсказка
                                   %button#send_answers.btn.answer-button.questionsCarousel-target{type: "submit", style: "background-color: #{asp.color};"} Ответить
+                      -else
+                        %h4.block-with-left-icon.pull-left(style="height:auto;" )
+                          %i.left-icon.fa.fa-2x.fa-comments
+                          Вы ответили на все вопросы по данному аспекту.
+                        %span.pull-right.question_count
+                        .carousel-inner
+
+
 
 -#@todo REF move popups to parial maybe votings too
 #popup-explanation-1.popup-window.popup-explanation.popup-w710.mfp-hide.welcome_popup{class: "#{shown_intro('collect_info_intro')}"}

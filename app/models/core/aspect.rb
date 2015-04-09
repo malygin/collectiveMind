@@ -11,8 +11,11 @@ class Core::Aspect < ActiveRecord::Base
   has_many :final_votings, foreign_key: 'aspect_id', class_name: 'CollectInfo::Voting'
 
   has_many :core_aspects, class_name: 'Core::Aspect', foreign_key: 'core_aspect_id'
+  has_many :collect_info_user_answers, class_name: 'CollectInfo::UserAnswers', foreign_key: 'aspect_id'
 
-  has_many :questions, class_name: 'CollectInfo::Question'
+  has_many :questions, -> { where status: 0 }, class_name: 'CollectInfo::Question'
+
+  # has_many :missed_questions, -> { where(status: 0).includes(:user_answers).where(collect_info_user_answers: {question_id: nil}) }, class_name: 'CollectInfo::Question'
 
   validates :project_id, presence: true
 
@@ -33,6 +36,10 @@ class Core::Aspect < ActiveRecord::Base
       nil
     end
   }
+
+  def missed_questions(user)
+    self.questions.includes(:user_answers).where(collect_info_user_answers: {user_id: user.id}).where(collect_info_user_answers: {question_id: nil})
+  end
 
   def voted(user)
     self.voted_users.where(id: user)
