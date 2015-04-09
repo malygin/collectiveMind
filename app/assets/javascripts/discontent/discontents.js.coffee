@@ -8,7 +8,6 @@ DiscontentCollection = Backbone.Collection.extend
 
 DiscontentView = Backbone.View.extend
   template: JST['templates/discontent_view']
-
   render: ()->
     html = this.template(this.model.toJSON())
     newElement = $(html)
@@ -19,36 +18,28 @@ DiscontentView = Backbone.View.extend
 DiscontentCollectionView = Backbone.View.extend
   id: 'tab_aspect_posts',
   className: 'row',
-
   initialize: ()->
     this.collection.bind('add', this.renderNew, this);
     this.collection.bind('remove', this.removeOld, this);
-    $('#filter').on('click', 'li', this.loadByAspect)
-
-
+    $('#filter').unbind('click').on('click', 'li', this.loadByAspect)
   render: ()->
     this.collection.forEach(this.addOne, this)
     return this
   addOne: (discontent)->
     discontentView = new DiscontentView({model: discontent});
     this.$el.append(discontentView.render().el);
-
   renderNew: (newModel)->
-#    console.log 'new'
-    new DiscontentView({ model:newModel }).render();
-    return this
-
+    this.$container.isotope('insert', new DiscontentView({ model:newModel }).render().el);
   removeOld: (model)->
     el = $('div[data-id="id-'+model.id+'"]')
-    this.$container.isotope('remove', el).isotope('layout');
+    this.$container.isotope('remove', el);
+  loadByAspect: (evt)->
+#    evt.stopPropagation();
+    evt.preventDefault();
 
-  loadByAspect: ()->
+    console.log 'load!'
     dc.fetch
       data: $.param({aspect: $(this).data('aspect')})
-      success: (col,res)->
-
-#        $('#tab_aspect_posts').isotope
-#          filter: $(this).data('aspect')
 
 
 
