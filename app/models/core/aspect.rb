@@ -38,7 +38,7 @@ class Core::Aspect < ActiveRecord::Base
   }
 
   def missed_questions(user)
-    self.questions.includes(:user_answers).where(collect_info_user_answers: {user_id: user.id}).where(collect_info_user_answers: {question_id: nil})
+    self.questions.includes(:user_answers).where(collect_info_user_answers: {user_id: [user.id, nil]}).where(collect_info_user_answers: {question_id: nil})
   end
 
   def voted(user)

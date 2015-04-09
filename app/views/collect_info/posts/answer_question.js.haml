@@ -17,7 +17,7 @@ $('[id^=answer_]').removeClass('btn-white btn-red btn-blue').addClass('btn-white
 
   var count_aspect = $(".li_aspect.complete)").length;
   var count_all = $(".li_aspect)").length;
-  $('#knob-1').attr('data-end',"#{((count_aspect/count_all.to_f)*100).round}");
+  $('#knob-1').attr('data-end',((count_aspect/count_all)*100).round);
   init_first_stage_knob();
 
   if($(".li_aspect:not(.complete)").length){
