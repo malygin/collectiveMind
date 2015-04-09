@@ -11,6 +11,14 @@
               %i.fa.fa-plus-square
               = technique.name
         %li
+          .divider25
+        - current_user.content_for_project(@project).each do |content|
+          %li
+            %a{"data-toggle" => "tab", href: "#tab-2"}
+              = content.content
+        %li
+          .divider25
+        %li
           %a{"data-toggle" => "tab", href: "#tab-2"}
             %i.fa.fa-plus-square
             Провести анализ
