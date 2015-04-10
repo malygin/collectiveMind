@@ -23,7 +23,6 @@ DiscontentCollectionView = Backbone.View.extend
     this.collection.bind('add', this.renderNew, this);
     this.collection.bind('remove', this.removeOld, this);
     $('#filter').unbind('click').on('click', 'li', this.loadByAspect)
-
   render: ()->
     this.collection.forEach(this.addOne, this)
     this.$container =  $('#tab_aspect_posts').isotope
