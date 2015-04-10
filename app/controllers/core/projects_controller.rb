@@ -43,16 +43,12 @@ class Core::ProjectsController < ApplicationController
 
   def create
     @project = Core::Project.new(core_project_params)
-    @project.project_users.build user_id: current_user.id, owner: true
 
-    respond_to do |format|
-      if @project.save
-        format.html { redirect_to edit_project_path(@project), success: 'Project was successfully created.' }
-        format.json { render json: @project, status: :created, location: @project }
-      else
-        format.html { render action: 'new' }
-        format.json { render json: @project.errors, status: :unprocessable_entity }
-      end
+    if @project.save
+      @project.project_users.create user_id: current_user.id, owner: true
+      redirect_to edit_core_project_path(@project), success: 'Project was successfully created.'
+    else
+      render action: :new
     end
   end
 
