@@ -25,13 +25,13 @@ class CollectInfo::PostsController < PostsController
   def render_slider
   end
 
-  # @todo REF catastrophe
   def answer_question
     @aspect = Core::Aspect.find(params[:id])
     @question = CollectInfo::Question.find(params[:question_id])
     @wrong_answers = @question.answers.by_wrong.pluck("collect_info_answers.id")
     @correct_answers = @question.answers.by_correct.pluck("collect_info_answers.id")
     if params[:answers]
+      #проверка правильности набора ответов
       answers = params[:answers].collect { |a| a.to_i }
       @wrong = true if (answers - @correct_answers).present? or (@correct_answers - answers).present?
 
