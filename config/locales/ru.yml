@@ -841,3 +841,6 @@ ru:
     body: "Полный текст"
   technique_project:
     success_update: "Обновлено успешно"
+  aspect:
+    content: "Название"
+    content_business: "Бизнес определение аспекта"

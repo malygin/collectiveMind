@@ -6,7 +6,7 @@
 = form_for aspect, url: {project: @project.id, action: aspect.persisted? ? 'update' : 'create'}, remote: true, class: 'cabinet-aspect-form' do |f|
   - content_for :aspect_content do
     .form-group
-      = f.label :content, 'Название'
+      = f.label :content, t('aspect.content')
       = f.text_field :content, class: 'form-control', id: 'aspect_text_field_content'
       .divider25
   - content_for :aspect_description do
