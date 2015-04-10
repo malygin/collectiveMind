@@ -7,7 +7,7 @@
       %ul.cabinet-tabs-subblock.list-unstyled
         - @project.techniques.by_stage(@project.current_stage_values[:type_stage]).each do |technique|
           %li
-            = link_to self.send("new_#{technique.stage.to_s.downcase.singularize}_path", @project, type_mechanic: technique.code), remote: true do
+            = link_to self.send("new_#{technique.stage.to_s.downcase.singularize}_path", @project, type_mechanic: technique.code) do
               %i.fa.fa-plus-square
               = technique.name
         %li
@@ -47,3 +47,4 @@
   .col-xs-9.cabinet-right-col
     .tab-content
       #tab-for_content.tab-pane.fade.in.active
+        = yield :form_content
