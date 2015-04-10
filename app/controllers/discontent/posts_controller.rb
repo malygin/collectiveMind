@@ -3,44 +3,37 @@ class Discontent::PostsController < PostsController
   include DiscontentGroup
   include DiscontentUnion
 
-  before_action :set_aspects, only: [:index]
+  before_action :set_aspects, only: [:index, :new, :edit]
 
   def voting_model
     Discontent::Post
   end
 
-  # #@todo Discontent::PostWhen в ресурсы? или просто искать по ним?
-  # def autocomplete
-  #   field = params[:field]
-  #   if current_model.column_names.include? field
-  #     render json: current_model.send("autocomplete_#{field}", params[:term]).map { |post| {value: post.send(field)} }
-  #   else
-  #     render json: []
-  #   end
-  # end
+  #@todo Discontent::PostWhen в ресурсы? или просто искать по ним?
+  def autocomplete
+    field = params[:field]
+    if current_model.column_names.include? field
+      render json: current_model.send("autocomplete_#{field}", params[:term]).map { |post| {value: post.send(field)} }
+    else
+      render json: []
+    end
+  end
 
   def index
     @posts = @project.discontents.by_status_for_discontent(@project)
   end
 
   def new
-    @asp = params[:asp] ? Core::Aspect.find(params[:asp]) : @project.proc_aspects.order(:id).first
+    @asp = params[:asp] ? Core::Aspect.find(params[:asp]) : @aspects.first
     @post = current_model.new
-
-    if params[:improve_stage]
-      @comment = get_comment_for_stage(params[:improve_stage], params[:improve_comment]) unless params[:improve_comment].nil?
-    end
-
-    @post.content = @comment.content if @comment
-    @aspects = Core::Aspect.where(project_id: @project, status: 0)
     respond_to do |format|
+      format.html
       format.js
     end
   end
 
   def edit
     @post = current_model.find(params[:id])
-    @aspects = Core::Aspect.where(project_id: @project, status: 0)
     @aspects_for_post = @post.post_aspects
     respond_to do |format|
       format.html
@@ -51,9 +44,6 @@ class Discontent::PostsController < PostsController
   def create
     @post = @project.discontents.build(discontent_post_params)
     @post.user = current_user
-    @post.improve_comment = params[:improve_comment]
-    @post.improve_stage = params[:improve_stage]
-    @post.status = 4 if params[:required]
     if params[:discontent_post_aspects]
       @aspect_id = params[:discontent_post_aspects].first
       params[:discontent_post_aspects].each do |asp|
@@ -63,11 +53,15 @@ class Discontent::PostsController < PostsController
     if @post.save
       current_user.journals.create!(type_event: 'discontent_post_save', anonym: @post.anonym, body: trim_content(@post.content), first_id: @post.id, project: @project)
     end
+    respond_to do |format|
+      format.html
+      format.js
+    end
   end
 
   def update
     @post = current_model.find(params[:id])
-    unless params[:discontent_post_aspects].nil?
+    if params[:discontent_post_aspects]
       @post.update_status_fields(params[name_of_model_for_param])
       @post.update_attributes(params[name_of_model_for_param])
       @post.update_post_aspects(params[:discontent_post_aspects])
@@ -80,148 +74,6 @@ class Discontent::PostsController < PostsController
     end
   end
 
-  # def set_required
-  #   @post = Discontent::Post.find(params[:id])
-  #   if boss? or role_expert?
-  #     if @post.status == 2
-  #       @post.update_attributes(status: 4)
-  #     elsif @post.status == 4
-  #       @post.update_attributes(status: 2)
-  #     end
-  #   end
-  # end
-  #
-  # def set_grouped
-  #   @post = Discontent::Post.find(params[:id])
-  #   @new_post = @project.discontent_post.create(status: 2, style: @post.style, content: @post.content, whered: @post.whered, whend: @post.whend)
-  #   @post.update_attributes(status: 1, discontent_post_id: @new_post.id)
-  #   @new_post.update_union_post_aspects(@post.post_aspects)
-  # end
-
-  # @todo REF remove union methods to concern
-  # def union_discontent
-  #   @post = Discontent::Post.find(params[:id])
-  #   @new_post = @project.discontent_post.create(status: 2, style: @post.style, content: params[:union_post_descr], whered: @post.whered, whend: @post.whend)
-  #   @new_post.save!
-  #   unless params[:posts].nil?
-  #     params[:posts].each do |p|
-  #       post = Discontent::Post.find(p)
-  #       post.update_attributes(status: 1, discontent_post_id: @new_post.id)
-  #       @new_post.update_union_post_aspects(post.post_aspects)
-  #     end
-  #   end
-  #   @post.update_attributes(status: 1, discontent_post_id: @new_post.id)
-  #   @new_post.update_union_post_aspects(@post.post_aspects)
-  #   redirect_to discontent_post_path(@project, @new_post)
-  # end
-  #
-  # def unions
-  #   @accepted_posts = @project.discontent_post.by_status([2, 4])
-  #   @posts = current_model.where(project_id: @project).where(status: [2, 4]).created_order
-  #   respond_to do |format|
-  #     format.js
-  #   end
-  # end
-  #
-  # def remove_union
-  #   @post = Discontent::Post.find(params[:id])
-  #   @union_post = Discontent::Post.find(params[:post_id])
-  #   if @post.one_last_post? and boss?
-  #     @union_post.update_attributes(status: 0, discontent_post_id: nil)
-  #     @post.update_column(:status, 3)
-  #     redirect_to action: 'index'
-  #   else
-  #     @union_post.update_attributes(status: 0, discontent_post_id: nil)
-  #     @post.destroy_ungroup_aspects(@union_post)
-  #     respond_to do |format|
-  #       format.js
-  #     end
-  #   end
-  # end
-  #
-  # # ------
-  # # @todo REF remove methods to concern
-  # def ungroup_union
-  #   @post = Discontent::Post.find(params[:id])
-  #   unless @post.discontent_posts.nil?
-  #     @post.discontent_posts.each do |post|
-  #       post.update_attributes(status: 0, discontent_post_id: nil)
-  #     end
-  #   end
-  #   @post.update_column(:status, 3)
-  #   redirect_to action: 'index'
-  # end
-  #
-  # def add_union
-  #   @post = Discontent::Post.find(params[:id])
-  #   @union_post = Discontent::Post.find(params[:post_id])
-  #   @union_post.update_attributes(status: 1, discontent_post_id: @post.id)
-  #   @post.update_union_post_aspects(@union_post.post_aspects)
-  # end
-
-
-  # def new_group
-  #   @asp = Core::Aspect.find(params[:asp]) unless params[:asp].nil?
-  #   @aspects = Core::Aspect.where(project_id: @project, status: 0)
-  #   @post_group = current_model.new
-  #   respond_to do |format|
-  #     format.js
-  #   end
-  # end
-  #
-  # def create_group
-  #   @post_group = @project.discontents.create(params[name_of_model_for_param])
-  #   @post_group.status = 2
-  #   @post_group.save
-  #   unless params[:discontent_post_aspects].nil?
-  #     params[:discontent_post_aspects].each do |asp|
-  #       Discontent::PostAspect.create(post_id: @post_group.id, aspect_id: asp.to_i).save!
-  #     end
-  #   end
-  #   @accepted_posts = @project.discontent_post.by_status([2, 4])
-  #   respond_to do |format|
-  #     format.js
-  #   end
-  # end
-  #
-  # def union_group
-  #   @post = Discontent::Post.find(params[:id])
-  #   @new_post = Discontent::Post.find(params[:group_id])
-  #   if @post and @new_post
-  #     @post.update_attributes(status: 1, discontent_post_id: @new_post.id)
-  #     @new_post.update_union_post_aspects(@post.post_aspects)
-  #   end
-  #   @type_tab = params[:type_tab]
-  #   @parent_post = params[:parent_post_id]
-  #   @accepted_posts = @project.discontent_post.by_status([2, 4])
-  #   respond_to do |format|
-  #     format.js
-  #   end
-  # end
-  #
-  # def edit_group
-  #   @asp = Core::Aspect.find(params[:asp]) unless params[:asp].nil?
-  #   @aspects = Core::Aspect.where(project_id: @project, status: 0)
-  #   @post_group = current_model.find(params[:id])
-  #   @aspects_for_post = @post_group.post_aspects
-  #   respond_to do |format|
-  #     format.js
-  #   end
-  # end
-  #
-  # def update_group
-  #   @post_group = current_model.find(params[:id])
-  #   unless params[:discontent_post_aspects].nil?
-  #     @post_group.update_status_fields(params[name_of_model_for_param])
-  #     @post_group.update_attributes(params[name_of_model_for_param])
-  #     @post_group.update_post_aspects(params[:discontent_post_aspects])
-  #   end
-  #   @accepted_posts = Discontent::Post.where(project_id: @project, status: [2, 4])
-  #   respond_to do |format|
-  #     format.js
-  #   end
-  # end
-
   private
 
   def set_aspects
@@ -231,13 +83,5 @@ class Discontent::PostsController < PostsController
 
   def discontent_post_params
     params.require(:discontent_post).permit(:content, :whend, :whered, :style)
-  end
-
-  def filtering_params(params)
-    params.slice(:type_like, :type_note, :type_verify, :type_status)
-  end
-
-  def sorting_params(params)
-    params.slice(:sort_date, :sort_user, :sort_comment, :sort_view)
   end
 end

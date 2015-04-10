@@ -2,71 +2,79 @@ module DiscontentGroup
   extend ActiveSupport::Concern
 
   included do
-    attr_reader :discontent
+    attr_reader :discontent_post
+    before_action :set_aspects, only: [:new_group, :edit_group]
+    before_action :set_accepted_posts, only: [:create_group, :union_group, :update_group]
   end
 
+  #методы REST group
   module ClassMethods
 
     def new_group
-      @asp = Core::Aspect.find(params[:asp]) unless params[:asp].nil?
-      @aspects = Core::Aspect.where(project_id: @project, status: 0)
-      @post_group = current_model.new
-      respond_to do |format|
-        format.js
-      end
-    end
-
-    def create_group
-      @post_group = @project.discontents.create(params[name_of_model_for_param])
-      @post_group.status = 2
-      @post_group.save
-      unless params[:discontent_post_aspects].nil?
-        params[:discontent_post_aspects].each do |asp|
-          Discontent::PostAspect.create(post_id: @post_group.id, aspect_id: asp.to_i).save!
-        end
-      end
-      @accepted_posts = @project.discontent_post.by_status([2, 4])
-      respond_to do |format|
-        format.js
-      end
-    end
-
-    def union_group
-      @post = Discontent::Post.find(params[:id])
-      @new_post = Discontent::Post.find(params[:group_id])
-      if @post and @new_post
-        @post.update_attributes(status: 1, discontent_post_id: @new_post.id)
-        @new_post.update_union_post_aspects(@post.post_aspects)
-      end
-      @type_tab = params[:type_tab]
-      @parent_post = params[:parent_post_id]
-      @accepted_posts = @project.discontent_post.by_status([2, 4])
+      @asp = Core::Aspect.find(params[:asp]) if params[:asp]
+      @post_group = Discontent::PostGroup.new
       respond_to do |format|
         format.js
       end
     end
 
     def edit_group
-      @asp = Core::Aspect.find(params[:asp]) unless params[:asp].nil?
-      @aspects = Core::Aspect.where(project_id: @project, status: 0)
-      @post_group = current_model.find(params[:id])
-      @aspects_for_post = @post_group.post_aspects
+      @asp = Core::Aspect.find(params[:asp]) if params[:asp]
+      @post_group = Discontent::PostGroup.find(params[:id])
+      @aspects_for_post = @post_group.post_group_aspects
       respond_to do |format|
         format.js
       end
     end
 
+    def create_group
+      @post_group = @project.discontent_groups.build(discontent_post_group_params)
+      if params[:discontent_post_aspects]
+        params[:discontent_post_aspects].each do |asp|
+          @post_group.discontent_post_group_aspects.build(aspect_id: asp.to_i)
+        end
+      end
+      if @post_group.save
+        respond_to do |format|
+          format.js
+        end
+      end
+    end
+
     def update_group
-      @post_group = current_model.find(params[:id])
-      unless params[:discontent_post_aspects].nil?
-        @post_group.update_status_fields(params[name_of_model_for_param])
-        @post_group.update_attributes(params[name_of_model_for_param])
+      @post_group = Discontent::PostGroup.find(params[:id])
+      if params[:discontent_post_aspects]
+        @post_group.update_status_fields(discontent_post_group_params)
+        @post_group.update_attributes(discontent_post_group_params)
         @post_group.update_post_aspects(params[:discontent_post_aspects])
       end
-      @accepted_posts = Discontent::Post.where(project_id: @project, status: [2, 4])
       respond_to do |format|
         format.js
       end
     end
+
+    def destroy_group
+      @post_group = Discontent::PostGroup.find(params[:id])
+      if @post_group.discontent_posts.present?
+        @post_group.discontent_posts.each do |post|
+          post.update_attributes(status: 0, discontent_post_id: nil)
+        end
+      end
+      @post_group.update_column(:status, 3)
+      redirect_to action: 'index'
+    end
+
+  end
+
+  def set_aspects
+    @aspects = @project.proc_main_aspects
+  end
+
+  def set_accepted_posts
+    @accepted_posts = @project.discontents.by_status([2, 4])
+  end
+
+  def discontent_post_group_params
+    params.require(:discontent_post_group).permit(:content, :whend, :whered, :style)
   end
 end

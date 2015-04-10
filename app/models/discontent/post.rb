@@ -4,22 +4,26 @@ class Discontent::Post < ActiveRecord::Base
 
   belongs_to :aspect
   belongs_to :discontent_post, foreign_key: 'discontent_post_id', class_name: 'Discontent::Post'
+  # has_many :discontent_posts, class_name: 'Discontent::Post', foreign_key: 'discontent_post_id'
 
-  has_many :discontent_posts, class_name: 'Discontent::Post', foreign_key: 'discontent_post_id'
   has_many :discontent_post_aspects, class_name: 'Discontent::PostAspect'
 
   has_many :post_aspects, through: :discontent_post_aspects, source: :core_aspect, class_name: 'Core::Aspect'
-  has_many :concept_post_discontents, -> { where concept_post_discontents: {status: [0, nil]} },
-           class_name: 'Concept::PostDiscontent', foreign_key: 'discontent_post_id'
-  has_many :dispost_concepts, through: :concept_post_discontents, source: :post, class_name: 'Concept::Post'
-  has_many :plan_conditions, class_name: 'Plan::PostAspect', foreign_key: 'core_aspect_id'
-  has_many :concept_posts, through: :concept_conditions, foreign_key: 'concept_post_id', class_name: 'Concept::Post'
-  has_many :voted_users, through: :final_votings, source: :user
-  has_many :final_votings, foreign_key: 'discontent_post_id', class_name: 'Discontent::Voting'
 
-  has_many :concept_votings, foreign_key: 'discontent_post_id', class_name: 'Concept::Voting'
+  #галочки для выбранных несовершенств группы в нововведении
   has_many :concept_post_discontent_grouped, -> { where concept_post_discontents: {status: [1]} },
            class_name: 'Concept::PostDiscontent', foreign_key: 'discontent_post_id'
+
+  # has_many :concept_post_discontents, -> { where concept_post_discontents: {status: [0, nil]} },
+  #          class_name: 'Concept::PostDiscontent', foreign_key: 'discontent_post_id'
+  # has_many :dispost_concepts, through: :concept_post_discontents, source: :post, class_name: 'Concept::Post'
+
+
+  # has_many :final_votings, foreign_key: 'discontent_post_id', class_name: 'Discontent::Voting'
+  # has_many :voted_users, through: :final_votings, source: :user
+
+  # has_many :concept_votings, foreign_key: 'discontent_post_id', class_name: 'Concept::Voting'
+
   has_many :advices, class_name: 'Advice', as: :adviseable
 
   validates :content, :whend, :whered, :project_id, presence: true
@@ -32,6 +36,7 @@ class Discontent::Post < ActiveRecord::Base
   scope :by_positive, ->(p) { where(style: 0, status: p) }
   scope :by_negative, ->(p) { where(style: 1, status: p) }
   scope :for_union, ->(project) { where('discontent_posts.status = 0 and discontent_posts.project_id = ? ', project) }
+
   scope :by_status_for_discontent, ->(project) {
     if project.status == 4
       where(status: [0, 1])
@@ -43,11 +48,7 @@ class Discontent::Post < ActiveRecord::Base
       where(status: 0)
     end
   }
-  scope :by_verified, -> { where(discontent_posts: {status_content: 't', status_whered: 't', status_whend: 't'}) }
-  scope :by_unverified, -> { where(discontent_posts: {status_content: ['f', nil], status_whered: ['f', nil], status_whend: ['f', nil]}) }
-  scope :type_note, -> (type_note) { joins(:notes) if type_note.present? and type_note != 'content_all' }
-  scope :type_like, -> type_like { where(useful: type_like == 'by_like' ? 't' : ['f', nil]) if type_like.present? and type_like != 'content_all' }
-  scope :type_verify, -> type_verify { type_verify == 'by_verified' ? by_verified : by_unverified if type_verify.present? and type_verify != 'content_all' }
+
   pg_search_scope :autocomplete_whend,
                   against: [:whend],
                   using: {
@@ -64,42 +65,11 @@ class Discontent::Post < ActiveRecord::Base
     post.complite if post
   end
 
+  #привязка аспектов к несовершенству
   def update_post_aspects(aspects_new)
     self.discontent_post_aspects.destroy_all
     aspects_new.each do |asp|
-      aspect = Discontent::PostAspect.create(post_id: self.id, aspect_id: asp.to_i)
-      aspect.save!
-    end
-  end
-
-  def update_union_post_aspects(aspects_new)
-    aspects_old = self.post_aspects.nil? ? [] : self.post_aspects.pluck(:id)
-    unless aspects_new.nil?
-      aspects_new.uniq.each do |asp|
-        unless aspects_old.include? asp.id
-          aspect = Discontent::PostAspect.create(post_id: self.id, aspect_id: asp.id)
-          aspect.save!
-        end
-      end
-    end
-  end
-
-  def destroy_ungroup_aspects(ungroup_post)
-    aspects_for_ungroup = ungroup_post.post_aspects.pluck(:id)
-    union_posts = self.discontent_posts.where('discontent_posts.id <> ?', ungroup_post.id)
-    union_posts_aspects = []
-    if union_posts.present?
-      union_posts.each do |p|
-        union_posts_aspects = union_posts_aspects | p.post_aspects.pluck(:id) if p.post_aspects.present?
-      end
-    end
-
-    if aspects_for_ungroup.present? and union_posts_aspects.present?
-      aspects_for_ungroup.each do |asp|
-        unless union_posts_aspects.include? asp
-          self.discontent_post_aspects.by_aspect(asp).destroy_all
-        end
-      end
+      self.discontent_post_aspects.create(aspect_id: asp.to_i)
     end
   end
 
@@ -130,19 +100,6 @@ class Discontent::Post < ActiveRecord::Base
 
   def display_content
     discontent_posts.first.content if status == 4 and !discontent_posts.empty?
-  end
-
-  def not_vote_for_other_post_aspects(user)
-    self.concept_conditions.each do |asp|
-      if asp.voted(user).size>0
-        return false
-      end
-    end
-    true
-  end
-
-  def one_last_post?
-    discontent_posts.size < 2
   end
 
   def note_size?(type_fd)
