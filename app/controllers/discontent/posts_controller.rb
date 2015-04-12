@@ -1,4 +1,6 @@
 class Discontent::PostsController < PostsController
+  include Discontent::PostsHelper
+
   before_action :set_aspects, only: [:index]
 
   def voting_model
@@ -16,7 +18,22 @@ class Discontent::PostsController < PostsController
   end
 
   def index
-    @posts = @project.discontents.by_status_for_discontent(@project)
+    @posts= nil
+    if  params[:aspect]
+      @posts = Core::Aspect.find(params[:aspect].scan(/\d/).join('')).aspect_posts
+    else
+      @posts = @project.discontents.by_status_for_discontent(@project)
+    end
+    respond_to do |format|
+
+      format.html # show.html.erb
+      format.json { render json: @posts.map {|item| {id: item.id, content: item.content, whend: item.whend, whered: item.whered,
+                                                     user:item.user.to_s, post_date: Russian::strftime(item.created_at,'%d.%m.%Y %k:%M:%S'),
+                                                     project_id: item.project_id, sort_date: item.created_at.to_datetime.to_f, sort_rate: (item.users_pro.count + (item.number_views * 0.3)),
+                                                     aspect_class: post_aspect_classes(item),
+                                                     aspects: item.post_aspects.map {|aspect|{id: aspect.id, color: aspect.color, content: aspect.content} } }  } }
+
+    end
 
     # @posts = @project.get_united_posts_for_vote(current_user)
     #

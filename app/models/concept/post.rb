@@ -6,8 +6,10 @@ class Concept::Post < ActiveRecord::Base
 
   has_many :concept_post_discontents, -> { where concept_post_discontents: {status: [0, nil]} }, class_name: 'Concept::PostDiscontent'
   has_many :concept_disposts, through: :concept_post_discontents, source: :discontent_post, class_name: 'Discontent::Post'
+
   has_many :concept_post_resources, class_name: 'Concept::PostResource'
   has_many :concept_post_discontent_grouped, -> { where concept_post_discontents: {status: [1]} }, class_name: 'Concept::PostDiscontent'
+
   has_many :advices, class_name: 'Advice', as: :adviseable
 
   validates :status, presence: true

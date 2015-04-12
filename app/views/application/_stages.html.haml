@@ -2,9 +2,8 @@
   - if name_controller == stage[:type_stage]
     .btn-group{:role => "group"}
       = link_to send("#{stage[:type_stage]}_path", @project, asp: params[:asp]), id: "go_to_#{stage[:type_stage]}", :role => "button", class: "btn back_color_stage#{num_stage}" do
-        %span.bigger.text-upper
-          ="#{num_stage} СТАДИЯ: "
-          = stage[:name]
+        ="#{num_stage} СТАДИЯ: "
+        = stage[:name]
 
   - elsif @project.status >= stage[:status].min
     .btn-group{:role => "group"}
