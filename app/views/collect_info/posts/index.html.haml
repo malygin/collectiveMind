@@ -24,17 +24,14 @@
         %a.slider-right.slider-nav
           %i.fa.fa-caret-right.font_lighter_grey
         .slider-outer
-          -##aspects_spinner_tab.loader.animated.handle
-          -#  %span.spinner
-          -#    %i.fa.fa-spinner.fa-spin.fa-2x
           %ul.slider-inner.list-unstyled#first-stage-slider{ data: {project: @project.id} }
-            -#- @aspects.each_with_index do |asp, index|
-            -#  %li
-            -#    .slider-item{class: "#{index == 0 ? 'active' : ''}"}
-            -#      .c1-item
-            -#        %a{"data-toggle" => "tab", :href => "#tab_aspect_#{asp.id}"}
-            -#          %span.c1-item-inner{style: "border-top-color: #{asp.color};"}
-            -#            =asp.content
+            - @aspects.each_with_index do |asp, index|
+              %li
+                .slider-item{class: "#{index == 0 ? 'active' : ''}"}
+                  .c1-item
+                    %a{"data-toggle" => "tab", :href => "#tab_aspect_#{asp.id}"}
+                      %span.c1-item-inner{style: "border-top-color: #{asp.color};"}
+                        =asp.content
 
       / Tab panes
       .tab-content

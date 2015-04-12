@@ -6,12 +6,19 @@
 #= require jquery.ui.autocomplete
 #= require jquery.autosize
 #= require history_jquery
+#= require jquery.tube.min
+
 
 #= require bootstrap/bootstrap.min
 #= require bootstrap-colorpicker
 #= require datepicker/bootstrap-datepicker
 #= require bootstrap3-editable/bootstrap-editable
 
+
+
+
+#= require velocity.min
+#= require velocity.ui.min
 #= require selectize
 #= require tinymce
 
@@ -23,30 +30,18 @@
 #= require plugins
 #= require comments
 #= require resources
-#= require visit_chart
-#= require jquery.tube.min
-#= require concept_play_movie.coffee
 
 #= require jquery.magnific-popup.min
 #= require owl.carousel.min
 #= require respond.min
 #= require html5shiv
-
 #= require excanvas
 #= require jquery.knob
-
 #= require waypoints.min
 #= require jquery.contenthover.min
 #= require perfect-scrollbar.jquery.min
 
-#= require custom.js
 
-#= require brave
-#= require brave2
-#= require brave3
-
-#= require velocity.min
-#= require velocity.ui.min
 #= require isotope.pkgd.min
 
 #= require underscore
@@ -56,6 +51,7 @@
 #= require backbone_datalink
 #= require discontent/discontents
 
+#= require custom_ready
 
 # @todo load initialization
 $ ->
@@ -85,3 +81,4 @@ $ ->
   ).on "changeDate", (e) ->
     $(this).datepicker "hide"
     return
+

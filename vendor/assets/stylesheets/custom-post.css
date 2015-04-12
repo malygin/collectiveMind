@@ -35,165 +35,7 @@ p {
 
 
 
-.post {
-    overflow: hidden;
-    border: 1px #d5d5d5 solid;
-    border-bottom: 1px #9ea2a1 solid;
-    box-shadow: 0 3px 4px -3px rgba(0, 0, 0, 0.5);
-    border-radius: 6px !important;
-    height: 166px;
-    margin-top: 10px;
-    margin-bottom: 10px;
-}
 
-.post-header {
-    padding-left: 15px;
-    padding-right: 10px;
-    position: relative;
-    min-height: 4px;
-    border-bottom: 1px rgba(158, 162, 161, 0.69) solid;
-    box-shadow: 0 3px 4px -1px rgba(0, 0, 0, 0.16);
-}
-
-.post-poster {
-    padding-top: 14px;
-    padding-bottom: 5px;
-    width: 17.3%;
-}
-
-.post-poster img {
-    margin-bottom: 10px;
-}
-
-.post-text {
-    padding: 10px 17px 10px 15px;
-    font-size: 13px;
-    min-height: 95px;
-}
-
-.post-body {
-    font-size: 12px;
-    min-height: 95px;
-}
-
-.poster-name {
-    font-size: 9px;
-    color: #000;
-}
-
-.time {
-    font-size: 11px;
-    padding-top: 5px;
-}
-
-.gradient {
-    background: linear-gradient(to top, #fff, #e9eff7);
-    border-right: 1px solid #d7d9dd;
-}
-
-.post-bottom {
-    border-top: 1px solid #d9d9d9;
-    padding-top: 6px;
-    padding-bottom: 6px;
-    padding-left: 7px;
-    padding-right: 7px;
-    height: 30px;
-
-}
-
-.tag-stripes {
-    line-height: 1.1;
-    display: inline-block;
-    float: left;
-    height: 16px;
-    width: 18px;
-    margin-right: 3px;
-    white-space: nowrap;
-    box-sizing: border-box;
-}
-
-.tag-stripes.active .tags {
-    display: inline-block;
-}
-
-.tag-stripes.active {
-    width: auto;
-    padding: 0 15px 0 7px;
-}
-
-.tags {
-    font-size: 12px;
-    color: #fff;
-    line-height: 1.1;
-    display: none;
-    white-space: nowrap;
-}
-
-.pink .right-column {
-    border-right: 2px solid #f8cdcd;
-}
-
-.pink .left-column {
-    border-left: 2px solid #f8cdcd;
-}
-
-.what .left-column {
-    color: #4e4e4e;
-}
-
-.pink .what {
-    border-bottom: 2px solid #f8cdcd;
-}
-
-.blue .left-column {
-    border-left: 2px solid #cddbe8;
-}
-
-.blue .right-column {
-    border-right: 2px solid #cddbe8;
-}
-
-.blue .what {
-    border-bottom: 2px solid #cddbe8;
-}
-
-.table > tbody > .what > td {
-    line-height: 1;
-    border-top: none;
-    height: 45px;
-    vertical-align: middle;
-}
-
-.what .left-column {
-    font-size: 14px;
-}
-
-.post-theme .tag-stripes.active {
-    width: auto;
-    padding: 0 15px 0 7px;
-}
-
-.arrow {
-    background: #ffffff;
-    width: 40px;
-    height: 80px;
-}
-
-.arrow i {
-    color: #7c98c0;
-    font-size: 50px;
-    margin-top: 15px;
-    margin-left: 12px;
-
-}
-
-.contenthover {
-    padding: 20px 20px 10px 20px;
-}
-
-.contenthover .arrow {
-    margin-top: 30px;
-}
 
 .project_win {
     background: image-url("stripe.png") repeat;
@@ -273,7 +115,7 @@ p {
 
 .letters {
     height: 100%;
-    background: image-url("lettersTL.png") top 30px left 30px no-repeat, image-url("letters.png") bottom -30px right no-repeat;
+    background: url("../img/lettersTL.png") top 30px left 30px no-repeat, url("../img/letters.png") bottom -30px right no-repeat;
 }
 
 .PositionRelative {
@@ -338,15 +180,3 @@ a.dropdown-toggle i {
     padding: 10px;
 }
 
-.img35 {
-    width: 35px;
-    height: 35px;
-}
-.img50 {
-    width: 50px;
-    height: 50px;
-}
-.img100 {
-    width: 100px;
-    height: 100px;
-}
