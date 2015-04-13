@@ -1,12 +1,4 @@
 module ApplicationHelper
-  def t(key, options = {})
-    if !@project.nil? and !@project.project_type_id.nil?
-      value = I18n.t("#{key}_#{@project.project_type.code}", options)
-      return value unless value.to_s.match(/title="translation missing: (.+)"/)
-    end
-    I18n.t(key, options)
-  end
-
   def escape_text(t)
     t.gsub("\n", "\\n").gsub("\r", "\\r").gsub("\t", "\\t").gsub("'", "\\'")
   end
