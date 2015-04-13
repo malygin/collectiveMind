@@ -173,7 +173,7 @@ textarea:focus {
     right: 0;
     width: 27px;
     height: 20px;
-    background: url(../img/icon-new.png) center center no-repeat;
+    background: image-url('icon-new.png') center center no-repeat;
 }
 .i_new_stage:after {
     top: -10px;
@@ -226,7 +226,7 @@ textarea:focus {
     border: none !important;
     width: 13px;
     height: 10px;
-    background: url(../img/tooltip-arrow.png) center no-repeat;
+    background: image-url('tooltip-arrow.png') center no-repeat;
 }
 .tooltip.top .tooltip-arrow {
     bottom: -5px;
@@ -957,7 +957,7 @@ a.active{
     height: 84px;
     display: inline-block;
     margin-left: -20px;
-    background: url(../img/logo.png) center no-repeat;
+    background: image-url('logo.png') center no-repeat;
 }
 .auth-form{
     padding-left: 10px;
@@ -2125,11 +2125,11 @@ p .add-button + .add-button {
 }
 
 .single-progress-block:nth-child(odd) {
-    background: url(../img/arrow-small.png) no-repeat right center #fff;
+    background: image-url('arrow-small.png') no-repeat right center #fff;
 }
 
 .single-progress-block:nth-child(even) {
-    background: url(../img/arrow-small.png) no-repeat right center #ebebeb;
+    background: image-url('arrow-small.png') no-repeat right center #ebebeb;
 }
 
 .single-progress-block + .single-progress-block {
@@ -2316,11 +2316,11 @@ button.mfp-close {
 }
 
 .medal-block.gold-medal {
-    background: url(../img/medal-1.png) no-repeat;
+    background: image-url('medal-1.png') no-repeat;
 }
 
 .medal-block.silver-medal {
-    background: url(../img/medal-2.png) no-repeat;
+    background: image-url('medal-2.png') no-repeat;
 }
 
 /* 2nd and 3rd stages popups */
@@ -2434,7 +2434,7 @@ button.mfp-close {
 }
 
 .popup-project .popup-header h2 {
-    background: url(../img/gears.png) no-repeat;
+    background: image-url('gears.png') no-repeat;
     background-position: 0 9px;
     margin-left: 28px;
     padding-left: 56px;
@@ -3099,7 +3099,7 @@ button.mfp-close {
 }
 
 .popup-rating-detail h2 {
-    background: url(../img/gears.png) no-repeat;
+    background: image-url('gears.png') no-repeat;
     background-position: 0 9px;
     margin-left: 12px;
     padding-left: 54px;
@@ -3385,7 +3385,7 @@ h6 a:hover, h6 a:focus {
     padding-left: 12px;
     padding-bottom: 4px;
     float: left;
-    background: url(../img/coord.png) no-repeat left top;
+    background: image-url('coord.png') no-repeat left top;
 }
 
 .collapseLevel3 .panel-collapse-inside-block .panel-graph-block .panel-graph-right-col .panel-graph-bar-col {
@@ -4018,7 +4018,7 @@ ul.vote_nav>li>a {
     right: 116px;
     width: 27px;
     height: 15px;
-    background: url(../img/dd_arrow.png) no-repeat center center;
+    background: image-url('dd_arrow.png') no-repeat center center;
 }
 .dd_badge {
     position: absolute;
@@ -4403,22 +4403,22 @@ ul.vote_nav>li>a {
     padding-right: 14px !important;
 }
 .stage2_theme .cb_doc:not(:empty) {
-    background: url(../img/slider/doc_2.png) no-repeat center right;
+    background: image-url('slider/doc_2.png') no-repeat center right;
     background-size: 14px auto;
 }
 .stage3_theme .cb_doc:not(:empty) {
-    background: url(../img/slider/doc_2.png) no-repeat center right;
+    background: image-url('slider/doc_2.png') no-repeat center right;
     background-size: 14px auto;
 }
 .cb_com {
     padding-right: 20px !important;
 }
 .stage2_theme .cb_com:not(:empty) {
-    background: url(../img/slider/com_2.png) no-repeat center right;
+    background: image-url('slider/com_2.png') no-repeat center right;
     background-size: 18px auto;
 }
 .stage3_theme .cb_com:not(:empty) {
-    background: url(../img/slider/com_3.png) no-repeat center right;
+    background: image-url('slider/com_3.png') no-repeat center right;
     background-size: 18px auto;
 }
 
@@ -4439,7 +4439,7 @@ ul.vote_nav>li>a {
     display: block;
     width: 18px;
     height: 18px;
-    background: url(../img/icon-dropdown.png) no-repeat center;
+    background: image-url('icon-dropdown.png') no-repeat center;
 }
 .dropdown-toggle span {
     display: inline-block;

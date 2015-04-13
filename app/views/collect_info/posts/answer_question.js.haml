@@ -2,9 +2,8 @@
 -if @wrong
   $('#wrong_question_#{@question.id}').removeClass('close-notice');
 -else
-  $('.hint').addClass('close-notice');
-  - @correct_answers.each do |answer_id|
-    $('#answer_#{answer_id}').removeClass('btn-white btn-red btn-blue').addClass('btn-blue');
+  $('#knob-1').data('end',#{@questions_progress});
+  animateKnobChange('#knob-1');
 
   if($("#question_#{@question.id}").next().length){
   $("#questionsCarousel_#{@aspect.id}").carousel('next');
@@ -12,11 +11,6 @@
   } else {
   $('#li_aspect_#{@aspect.id}').addClass('complete');}
 
-  var count_aspect = $(".li_aspect.complete)").length;
-  var count_all = $(".li_aspect)").length;
-  $('#knob-1').attr('data-end',((count_aspect/count_all)*100).round);
-
-  init_first_stage_knob();
 
   if($(".li_aspect:not(.complete)").length){
   $('#li_aspect_#{@aspect.id}').removeClass('active');
@@ -26,9 +20,9 @@
   } else {
   magnificPopupOpen('#popup-greetings-text');
   }
-  }
 
 
-$('button.answer-question').button('reset').removeClass('active');
+
+-#$('button.answer-question').button('reset').removeClass('active');
 
 

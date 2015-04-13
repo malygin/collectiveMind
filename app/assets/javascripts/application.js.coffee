@@ -14,9 +14,6 @@
 #= require datepicker/bootstrap-datepicker
 #= require bootstrap3-editable/bootstrap-editable
 
-
-
-
 #= require velocity.min
 #= require velocity.ui.min
 #= require selectize
@@ -80,4 +77,6 @@ $ ->
   ).on "changeDate", (e) ->
     $(this).datepicker "hide"
     return
+
+
 

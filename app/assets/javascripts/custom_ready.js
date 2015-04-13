@@ -16,20 +16,9 @@ $(document).ready(function () {
         height: 36,
         readOnly: true
     });
-    $('.knob').each(function () {
-        var cur = $(this);
-        // Knob counting script
-        if (cur.val() == 0) {
-            $({value: 0}).animate({value: cur.attr("data-end")}, {
-                duration: 2800,
-                easing: 'swing',
-                step: function () {
-                    cur.val(Math.ceil(this.value)).trigger('change');
-                    cur.val(cur.val() + '%');
-                }
-            })
-        }
-    });
+    animateKnobChange(".knob");
+
+
 
     /* MagnificPopup init */
     $('.open-popup-link').magnificPopup({

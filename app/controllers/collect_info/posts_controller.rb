@@ -34,9 +34,12 @@ class CollectInfo::PostsController < PostsController
       #проверка правильности набора ответов
       answers = params[:answers].collect { |a| a.to_i }
       @wrong = true if (answers - @correct_answers).present? or (@correct_answers - answers).present?
-
       unless @wrong
         current_user.user_answers.create(project_id: @project.id, question_id: @question.id, aspect_id: @aspect.id).save!
+        # подсчет данных для прогресс-бара по вопросам
+        count_all = CollectInfo::Question.joins(:core_aspect).where('core_aspects.project_id' => @project).count
+        count_answered = CollectInfo::UserAnswers.select(' DISTINCT "collect_info_user_answers"."question_id" ').joins(:aspect).where('core_aspects.project_id' => @project).where(user: current_user).count
+        @questions_progress = (count_answered.to_f/count_all.to_f) * 100
       end
     end
   end

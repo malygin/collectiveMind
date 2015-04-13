@@ -1,3 +1,21 @@
+#animate knob progress bar from data-end
+@animateKnobChange = (el)->
+  $(el).each ->
+    cur =$(this);
+    newValue = cur.data('end');
+    $({animatedVal: 0}).animate {animatedVal: newValue},
+      duration: 3000,
+      easing: "swing",
+      step: ->
+        cur.val(Math.ceil(this.animatedVal)).trigger("change")
+
+#open magnific popup open
+@magnificPopupOpen = (el)->
+  $.magnificPopup.open
+    items: {src: el},
+    type: 'inline'
+
+#----------
 @search = ->
   this.search_users = ->
     project_id = $('#search_users_project').attr("data-project")
