@@ -15,6 +15,24 @@
     items: {src: el},
     type: 'inline'
 
+# get new question in 1st stage
+@getNextQuestion = (question, aspect)->
+  # if we have more questions in aspect
+  if($("#question_"+question).next().length)
+      $("#questionsCarousel_"+aspect).carousel('next')
+      $("#question_count_"+aspect).html(parseInt($("#question_count_"+aspect).html())+1)
+  else
+    # else we try to active next aspect
+    $('#li_aspect_'+aspect).addClass('complete')
+    if($(".li_aspect:not(.complete)").length)
+      $('#li_aspect_'+aspect).removeClass('active')
+      $('#li_aspect_'+aspect+' .slider-item').removeClass('active');
+      $('#li_aspect_'+aspect).parent().find('.li_aspect:not(.complete)').find('.slider-item').addClass('active');
+      $('#li_aspect_'+aspect).parent().find('.li_aspect:not(.complete)').find('a').tab('show');
+    else
+      # else we have not more aspects, we just show greetings
+      magnificPopupOpen('#popup-greetings-text')
+
 #----------
 @search = ->
   this.search_users = ->

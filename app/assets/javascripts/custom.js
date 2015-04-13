@@ -256,6 +256,7 @@ $(document).ready(function () {
         type: 'inline',
         midClick: true
     });
+
     /* magnific popup close button */
     $('.close_magnific').click(function(){
         var magnificPopup = $.magnificPopup.instance;

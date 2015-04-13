@@ -4,23 +4,7 @@
 -else
   $('#knob-1').data('end',#{@questions_progress});
   animateKnobChange('#knob-1');
-
-  if($("#question_#{@question.id}").next().length){
-  $("#questionsCarousel_#{@aspect.id}").carousel('next');
-  $("#question_count_#{@aspect.id}").html(parseInt($("#question_count_#{@aspect.id}").html())+1);
-  } else {
-  $('#li_aspect_#{@aspect.id}').addClass('complete');}
-
-
-  if($(".li_aspect:not(.complete)").length){
-  $('#li_aspect_#{@aspect.id}').removeClass('active');
-  $('#li_aspect_#{@aspect.id} .slider-item').removeClass('active');
-  $('#li_aspect_#{@aspect.id}').parent().find('.li_aspect:not(.complete)').find('.slider-item').addClass('active');
-  $('#li_aspect_#{@aspect.id}').parent().find('.li_aspect:not(.complete)').find('a').tab('show');
-  } else {
-  magnificPopupOpen('#popup-greetings-text');
-  }
-
+  getNextQuestion(#{@question.id},#{@aspect.id});
 
 
 -#$('button.answer-question').button('reset').removeClass('active');
