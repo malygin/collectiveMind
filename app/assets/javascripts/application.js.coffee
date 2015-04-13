@@ -53,7 +53,6 @@
 
 #= require custom_ready
 
-# @todo load initialization
 $ ->
   start_vote()
 

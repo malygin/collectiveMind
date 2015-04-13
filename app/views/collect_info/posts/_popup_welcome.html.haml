@@ -1,0 +1,28 @@
+#popup-explanation-1.popup-window.popup-explanation.popup-w710.mfp-hide.welcome_popup{class: "#{shown_intro('collect_info_intro')}"}
+  .popup.popup_rounded
+    .modal_badge.back_color_stage1.rounded_2.font_white 1 СТАДИЯ
+    %h2
+      = image_tag 'good-shot1.png', class: "expl-header-img-1"
+      Цель 1-й стадии
+    %p.expl-sub-heading
+      Подробное изучение базы знаний по каждому аспекту всеми участниками процедуры
+      выработки проекта
+    %p.expl-notice.rounded-2
+      Второй этап выработки проекта будет доступен только после того,
+      %br>/
+      как
+      средний уровень готовности участников будет не менее 80%!
+    %h2
+      = image_tag 'flag1.png', class: "expl-header-img-2"
+      С чего начать?
+    %ol
+      %li Выберите аспект в списке ниже
+      %li Ознакомьтесь с базой знаний внутри этого аспекта
+      %li Пройдите короткое тестирование по полученным знаниям
+      %li Переходите к следующему аспекту
+      %li
+        Проголосуйте за самые важные на ваш вгляд аспекты
+        %br>/
+        (будет доступно в конце этапа)
+    = link_to collect_info_posts_check_field_path(@project, check_field: "collect_info_intro", status: true), method: :put, remote: true do
+      %button.btn.red.close_magnific Начать работу

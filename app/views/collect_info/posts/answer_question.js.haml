@@ -1,9 +1,6 @@
-$('[id^=answer_]').removeClass('btn-white btn-red btn-blue').addClass('btn-white');
+-#$('[id^=answer_]').removeClass('btn-white btn-red btn-blue').addClass('btn-white');
 -if @wrong
-  $('#hint_question_#{@question.id}').removeClass('close-notice');
-  - @wrong_answers.each do |answer_id|
-    $('#answer_#{answer_id}.active').removeClass('btn-white btn-red btn-blue').addClass('btn-red');
-  $('button.answer-question').button('reset').removeClass('active');
+  $('#wrong_question_#{@question.id}').removeClass('close-notice');
 -else
   $('.hint').addClass('close-notice');
   - @correct_answers.each do |answer_id|
@@ -13,11 +10,12 @@ $('[id^=answer_]').removeClass('btn-white btn-red btn-blue').addClass('btn-white
   $("#questionsCarousel_#{@aspect.id}").carousel('next');
   $("#question_count_#{@aspect.id}").html(parseInt($("#question_count_#{@aspect.id}").html())+1);
   } else {
-  $('#li_aspect_#{@aspect.id}').addClass('complete');
+  $('#li_aspect_#{@aspect.id}').addClass('complete');}
 
   var count_aspect = $(".li_aspect.complete)").length;
   var count_all = $(".li_aspect)").length;
   $('#knob-1').attr('data-end',((count_aspect/count_all)*100).round);
+
   init_first_stage_knob();
 
   if($(".li_aspect:not(.complete)").length){
@@ -33,36 +31,4 @@ $('[id^=answer_]').removeClass('btn-white btn-red btn-blue').addClass('btn-white
 
 $('button.answer-question').button('reset').removeClass('active');
 
-
-
-
--#-if @next_question
--#
--#  $("#question_#{@question.id}").next()
--#  if($("#question_#{@question.id}").next().is(".item"))
--#
--#
--#  $("#questionsCarousel_#{@aspect.id}").carousel('next');
--#  $("#question_count_#{@aspect.id}").html(parseInt($("#question_count_#{@aspect.id}").html())+1);
--#
--#-else
--#  -#$('#check_question_#{@aspect.id}').html('<i class="fa fa-check" style="font-size:15px;margin:0;"></i>');
--#  -#$('#progress-bar-main').css('width',"#{(@count_aspects_check/@count_aspects.to_f)*100}%");
--#  -#$('#knob-1').attr('data-end',"#{((@count_aspects_check/@count_aspects.to_f)*100).round}");
--#  init_first_stage_knob();
--#  -if @aspect == @project.main_aspects.last
--#    magnificPopupOpen('#popup-greetings-text');
--#  -else
--#    $('#li_aspect_#{@aspect.id}').removeClass('active');
--#    $('#li_aspect_#{@aspect.id} .slider-item').removeClass('active');
--#    $('#li_aspect_#{@aspect.id}').next().find('.slider-item').addClass('active');
--#    $('#li_aspect_#{@aspect.id}').next().find('a').tab('show');
--#
--#
--#-#$('#count_questions_now_#{@aspect.id}').html("#{@count_now}");
--#-#$('#progress_bar_#{@aspect.id}').css('width',"#{(@count_now/@count_all.to_f)*100}%");
--#-#$('#knob-1').attr('data-end',"#{((@count_now/@count_all.to_f)*100).round}");
--#$('#knob-1').attr('data-end',"#{((@count_aspects_check/@count_aspects.to_f)*100).round}");
--#init_first_stage_knob();
--#$('button.answer-question').button('reset').removeClass('active');
 

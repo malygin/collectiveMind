@@ -1,5 +1,6 @@
 $('#post_vote_#{@post_vote.id}').animate({height: 0, opacity:0}, 1000, function() { $(this).remove(); });
+
 -if ["1","2","3"].include? params[:status]
-  $('#cont_vote_tab#{params[:status].to_i + 1}').append("#{escape_javascript(render partial: 'post_vote', object: @post_vote)}");
-  $("#vote_count#{params[:status].to_i + 1}").html(parseInt($("#vote_count#{params[:status].to_i + 1}").html())+1);
+  var vote_number = parseInt($(".poll-2-#{params[:status]} .vote_counter").html())
+  $(".poll-2-#{params[:status]} .vote_counter").html(vote_number+1);
   $(".poll-2-#{params[:status]}").effect("bounce", { times: 3 }, 1000);

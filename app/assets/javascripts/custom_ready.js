@@ -5,22 +5,6 @@ $(document).ready(function () {
         $(".tooltip1").tooltip('toggle');
         $(this).toggleClass('btn-tooltip btn-tooltip-close')
     });
-    $("#tooltip_button_2").click(function() {
-        $(".tooltip2").tooltip('toggle');
-        $(this).toggleClass('btn-tooltip btn-tooltip-close')
-    });
-    $("#tooltip_button_3").click(function() {
-        $(".tooltip3").tooltip('toggle');
-        $(this).toggleClass('btn-tooltip btn-tooltip-close')
-    });
-    $("#tooltip_button_4").click(function() {
-        $(".tooltip4").tooltip('toggle');
-        $(this).toggleClass('btn-tooltip btn-tooltip-close')
-    });
-    $("#tooltip_button_5").click(function() {
-        $(".tooltip5").tooltip('toggle');
-        $(this).toggleClass('btn-tooltip btn-tooltip-close')
-    });
 
     $("[data-toggle=popover]").popover();
     $("[data-toggle=tooltip]").tooltip();
@@ -70,13 +54,16 @@ $(document).ready(function () {
     });
 
     /* show vote popup if stage is appropriate  */
-    $.magnificPopup.open({
-        items: {
-            src: '.popup-vote'
-        },
-        type: 'inline'
+    if ($('.popup-vote').length){
+        $.magnificPopup.open({
+            items: {src: '.popup-vote'},
+            type: 'inline'
+        });
+    };
+
+    /* show hint for question on 1st stage  */
+    $('.notice-button').click(function(){
+        $('#hint_question_'+$(this).data('question')).removeClass('close-notice');
     });
-
-
 
 });
