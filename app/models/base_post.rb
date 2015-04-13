@@ -22,6 +22,7 @@ module BasePost
     has_many :admins_against, -> { where users: {type_user: [1, 6]} }, through: :post_votings_against, source: :user
 
     scope :for_project, -> (project) { where(project_id: project) }
+    scope :by_user, ->(user) { where(user_id: user.id) }
     scope :for_expert, -> { where(status: 1) }
     scope :accepted, -> { where(status: 2) }
     scope :archive, -> { where(status: 3) }

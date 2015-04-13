@@ -12,12 +12,7 @@
               = technique.name
         %li
           .divider25
-        - current_user.content_for_project(@project).each do |content|
-          %li
-            %a{"data-toggle" => "tab", href: "#tab-2"}
-              = content.content
-        %li
-          .divider25
+          = link_to 'Добавленный мною контент', self.send("user_content_#{@project.current_stage_type}_path")
         %li
           %a{"data-toggle" => "tab", href: "#tab-2"}
             %i.fa.fa-plus-square

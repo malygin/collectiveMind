@@ -25,6 +25,7 @@ class Core::Aspect < ActiveRecord::Base
   scope :negative_posts, -> { joins(:discontent_posts).where('discontent_posts.style = ?', 1) }
   scope :accepted_posts, -> { joins(:discontent_posts).where('discontent_posts.style = ?', 4) }
   scope :by_project, ->(project_id) { where('core_aspects.project_id = ?', project_id) }
+  scope :by_user, ->(user) { where(user_id: user.id) }
   scope :minus_view, ->(aspects) { where.not(core_aspects: {id: aspects}) }
   scope :main_aspects, -> { where(core_aspects: {core_aspect_id: nil}) }
   scope :vote_top, ->(revers) {
@@ -69,7 +70,7 @@ class Core::Aspect < ActiveRecord::Base
     Discontent::Post.joins(:post_aspects).where(discontent_post_aspects: {aspect_id: id})
   end
 
-  def question_complete( user)
+  def question_complete(user)
     questions.joins(:user_answers).where(collect_info_user_answers: {user_id: user.id}).by_status(0).select('distinct collect_info_questions.id')
   end
 

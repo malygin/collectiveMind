@@ -25,6 +25,7 @@ CollectiveMind::Application.routes.draw do
     get 'aspect/:aspect/posts/' => 'posts#index'
 
     resources :posts do
+      get :user_content, on: :collection
       get :vote_result, on: :collection
       get :sort_content, on: :collection
       member do
