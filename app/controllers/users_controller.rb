@@ -6,6 +6,14 @@ class UsersController < ProjectsController
   before_filter :prime_admin_authenticate, only: [:destroy, :list_users, :club_toggle, :update_score]
   before_filter :have_project_access
 
+  def index
+    if @project.type_access == 2
+      @users = @project.users_in_project.where(users: {type_user: uniq_proc_users}).sort_by { |c| c.core_project_scores.by_project(@project).first.nil? ? 0 : c.core_project_scores.by_project(@project).first.score }.reverse!.uniq
+    else
+      @users = User.joins(:core_project_scores).where('core_project_scores.project_id = ? AND core_project_scores.score > 0', @project.id).where(users: {type_user: uniq_proc_users}).order("core_project_scores.score DESC")
+    end
+  end
+
   def new
     @user = User.new
     @title = 'Sign up'
@@ -21,6 +29,28 @@ class UsersController < ProjectsController
     end
   end
 
+  def edit
+    add_breadcrumb "Редактирование профиля: #{@user}", edit_user_path(@project, @user)
+  end
+
+  def update
+    # params[:user].delete(:password) if params[:user][:password].blank?
+    img = Cloudinary::Uploader.upload(params[:user][:avatar], folder: 'avatars')
+    if @user.update_attributes(user_params.merge(avatar: img['public_id']))
+      flash[:success] = 'Профиль обновлен'
+      redirect_to user_path(@project, @user)
+    else
+      render 'edit'
+    end
+  end
+
+  def destroy
+    User.find(params[:id]).destroy
+    flash[:success] = 'Пользователь удален!!'
+    redirect_to users_path
+  end
+
+  #очистка уведомлений
   def journal_clear
     if @my_journals.size > 0 and current_user?(@user)
       Journal.events_for_my_feed(@project.id, current_user).update_all(viewed: true)
@@ -32,18 +62,7 @@ class UsersController < ProjectsController
     end
   end
 
-  def edit
-    add_breadcrumb "Редактирование профиля: #{@user}", edit_user_path(@project, @user)
-  end
-
-  def index
-    if @project.type_access == 2
-      @users = @project.users_in_project.where(users: {type_user: uniq_proc_users}).sort_by { |c| c.core_project_scores.by_project(@project).first.nil? ? 0 : c.core_project_scores.by_project(@project).first.score }.reverse!.uniq
-    else
-      @users = User.joins(:core_project_scores).where('core_project_scores.project_id = ? AND core_project_scores.score > 0', @project.id).where(users: {type_user: uniq_proc_users}).order("core_project_scores.score DESC")
-    end
-  end
-
+  #рейтинг по категориям
   def show_top
     if @project.type_access == 2
       @users = @project.users_in_project.where(users: {type_user: uniq_proc_users}).sort_by { |c| c.core_project_scores.by_project(@project).first.nil? ? 0 : c.core_project_scores.by_project(@project).first.send(params[:score_name]) }.reverse!.uniq
@@ -56,9 +75,10 @@ class UsersController < ProjectsController
     end
   end
 
-  def users_rc
-    @users = User.where(type_user: [4, 7]).order('score DESC').paginate(page: params[:page])
-  end
+  # deprecated
+  # def users_rc
+  #   @users = User.where(type_user: [4, 7]).order('score DESC').paginate(page: params[:page])
+  # end
 
   def list_users
     @added_users = User.joins(:core_project_users).where('core_project_users.project_id = ?', @project.id)
@@ -84,30 +104,14 @@ class UsersController < ProjectsController
     end
   end
 
-  def club_toggle
-    respond_to do |format|
-      if @user.update_attributes!(type_user: club_toggle_user(@user))
-        format.js
-      end
-    end
-  end
-
-  def update
-    # params[:user].delete(:password) if params[:user][:password].blank?
-    img = Cloudinary::Uploader.upload(params[:user][:avatar], folder: 'avatars')
-    if @user.update_attributes(user_params.merge(avatar: img['public_id']))
-      flash[:success] = 'Профиль обновлен'
-      redirect_to user_path(@project, @user)
-    else
-      render 'edit'
-    end
-  end
-
-  def destroy
-    User.find(params[:id]).destroy
-    flash[:success] = 'Пользователь удален!!'
-    redirect_to users_path
-  end
+  # deprecated
+  # def club_toggle
+  #   respond_to do |format|
+  #     if @user.update_attributes!(type_user: club_toggle_user(@user))
+  #       format.js
+  #     end
+  #   end
+  # end
 
   def add_score
     if boss?
@@ -128,6 +132,7 @@ class UsersController < ProjectsController
     render json: @user.score
   end
 
+  #рассылка новостей
   def edit_notice
     @auto_feed_mailer = current_user.user_checks.where(project_id: @project.id, check_field: 'auto_feed_mailer').first
     @journal_mailer = JournalMailer.new
