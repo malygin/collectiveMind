@@ -36,5 +36,7 @@ FactoryGirl.define do
     sequence(:title) { |n| "title for knowbase #{n}" }
     sequence(:content) { |n| "content for knowbase #{n}" }
     sequence(:stage) { |n| n }
+
+    association :aspect
   end
 end

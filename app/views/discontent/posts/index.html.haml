@@ -31,7 +31,7 @@
           %span#tooltip2_2.sort-2.sort-rate.tooltip2_2{data: {name: 'sort', desc: 0, type: 'rate'}, "data-placement" => "bottom", "data-toggle" => "tooltip", "data-trigger" => "none", :title => "При помощи этих фильтров вы можете выбирать, в каком порядке будут отображаться несовершенства."}
             %span 2
         -#%span#filter_all.sort-all{data: {aspect: "*"}} ВСЕ
-        = link_to project_user_path(@project, current_user) do
+        = link_to project_user_path(@project, current_user), id: "add_record" do
           %button.btn.add-button
             %span> +
             Несовершенство

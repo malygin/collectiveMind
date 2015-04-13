@@ -22,21 +22,21 @@ FactoryGirl.define do
 
   factory :collect_info_question, class: 'CollectInfo::Question' do
     sequence(:content) { |n| "collect info question #{n}" }
-
+    status 0
     association :user
     association :project, factory: :core_project
   end
 
   factory :collect_info_answer, class: 'CollectInfo::Answer' do
     sequence(:content) { |n| "collect info answer #{n}" }
+    status 0
     correct true
     association :user
     association :question, factory: :collect_info_question
   end
 
-  factory :collect_info_answers_user, class: 'CollectInfo::UserAnswers' do
+  factory :collect_info_user_answer, class: 'CollectInfo::UserAnswers' do
     association :user, factory: :ordinary_user
-    association :answer, factory: :collect_info_answer
     association :question, factory: :collect_info_question
     association :project, factory: :core_project
     association :aspect

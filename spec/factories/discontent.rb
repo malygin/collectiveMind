@@ -22,7 +22,7 @@ FactoryGirl.define do
     association :discontent_post, factory: :discontent
   end
 
-  factory :discontent_union, class: 'Discontent::Post' do
+  factory :discontent_union, class: 'Discontent::PostGroup' do
     status 2
   end
 
@@ -36,8 +36,5 @@ FactoryGirl.define do
 
     association :user, factory: :ordinary_user
     association :post, factory: :discontent
-  end
-
-  factory :core_aspects_life_tape_posts, class: 'Core::AspectsLifeTapePost' do
   end
 end

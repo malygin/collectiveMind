@@ -3,7 +3,7 @@
   = render 'shared/notice_messages', object: f.object
   .input_cont
     = f.text_area :content, id: "comment_text_area", placeholder: 'Ваш комментарий'
-  %button.btn{:type => "submit"}
+  %button.btn.send-comment{type: "submit"}
     %span.bold
       %i.fa.fa-reply.fa-rotate-180.theme_font_color
 

@@ -25,13 +25,13 @@
           %i.fa.fa-caret-right.font_lighter_grey
         .slider-outer
           %ul.slider-inner.list-unstyled#first-stage-slider{ data: {project: @project.id} }
-            - @aspects.each_with_index do |asp, index|
-              %li
+            - @aspects.each_with_index do |aspect, index|
+              %li.li_aspect{id: "li_aspect_#{aspect.id}", class: "#{'complete' if aspect.missed_questions(current_user).size == 0}"}
                 .slider-item{class: "#{index == 0 ? 'active' : ''}"}
                   .c1-item
-                    %a{"data-toggle" => "tab", :href => "#tab_aspect_#{asp.id}"}
-                      %span.c1-item-inner{style: "border-top-color: #{asp.color};"}
-                        =asp.content
+                    %a{id: "aspect_#{aspect.id}", "data-toggle" => "tab", :href => "#tab_aspect_#{aspect.id}"}
+                      %span.c1-item-inner{style: "border-top-color: #{aspect.color};"}
+                        =aspect.content
 
       / Tab panes
       .tab-content
