@@ -1,15 +1,3 @@
-
-// для открытия попапа просмотра поста
-function magnificPopupOpen(tag){
-    $.magnificPopup.open({
-        items: {
-            src: tag, // can be a HTML string, jQuery object, or CSS selector
-            type: 'inline',
-            midClick: true
-        }
-    });
-};
-
 $(document).ready(function () {
 
     /* tooltips for all stages */
