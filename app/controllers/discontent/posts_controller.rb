@@ -1,7 +1,6 @@
 class Discontent::PostsController < PostsController
 
   include DiscontentGroup
-  include DiscontentUnion
 
   before_action :set_aspects, only: [:index, :new, :edit]
 

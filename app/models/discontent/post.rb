@@ -11,7 +11,7 @@ class Discontent::Post < ActiveRecord::Base
   has_many :post_aspects, through: :discontent_post_aspects, source: :core_aspect, class_name: 'Core::Aspect'
 
   #галочки для выбранных несовершенств группы в нововведении
-  has_many :concept_post_discontent_grouped, -> { where concept_post_discontents: {status: [1]} },
+  has_many :concept_post_discontent_checks, -> { where concept_post_discontents: {status: [1]} },
            class_name: 'Concept::PostDiscontent', foreign_key: 'discontent_post_id'
 
   # has_many :concept_post_discontents, -> { where concept_post_discontents: {status: [0, nil]} },

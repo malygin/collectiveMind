@@ -2,9 +2,9 @@ class Plan::PostResource < ActiveRecord::Base
   include PgSearch
 
   belongs_to :plan_post_aspect, class_name: 'Plan::PostAspect'
-  belongs_to :concept_resource, class_name: 'Concept::Resource'
+  # belongs_to :concept_resource, class_name: 'Concept::Resource'
   belongs_to :project, class_name: 'Core::Project'
-  belongs_to :plan_post_resource, class_name: 'Plan::PostResource', foreign_key: :plan_post_resource_id
+  # belongs_to :plan_post_resource, class_name: 'Plan::PostResource', foreign_key: :plan_post_resource_id
   belongs_to :plan_post_action, class_name: 'Plan::PostAction', foreign_key: :post_id
 
   has_many :plan_post_resources, class_name: 'Plan::PostResource', foreign_key: :plan_post_resource_id

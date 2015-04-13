@@ -6,8 +6,8 @@ class Concept::Post < ActiveRecord::Base
 
   has_many :concept_post_discontents, -> { where concept_post_discontents: {status: [0, nil]} }, class_name: 'Concept::PostDiscontent'
   has_many :concept_disposts, through: :concept_post_discontents, source: :discontent_post, class_name: 'Discontent::Post'
-  has_many :concept_post_resources, class_name: 'Concept::PostResource'
-  has_many :concept_post_discontent_grouped, -> { where concept_post_discontents: {status: [1]} }, class_name: 'Concept::PostDiscontent'
+  # has_many :concept_post_resources, class_name: 'Concept::PostResource'
+  has_many :concept_post_discontent_checks, -> { where concept_post_discontents: {status: [1]} }, class_name: 'Concept::PostDiscontent'
   has_many :advices, class_name: 'Advice', as: :adviseable
 
   validates :status, presence: true
@@ -18,20 +18,20 @@ class Concept::Post < ActiveRecord::Base
             and status_positive = 't' and status_control = 't' and status_obstacles = 't' and status_reality = 't' and status_problems = 't' ") }
   scope :by_status, ->(p) { where(status: p) }
   scope :by_project, ->(p) { where(project_id: p) }
-  scope :by_discussions, ->(posts) { where("concept_posts.id NOT IN (#{posts.join(', ')})") unless posts.empty? }
-  scope :posts_for_discussions, ->(p) { where(project_id: p.id, status: 0).where("concept_posts.status_name = 't' and concept_posts.status_content = 't'") }
-  scope :by_idea, -> { where("concept_posts.new_fullness <= 40 or concept_posts.new_fullness IS NULL") }
-  scope :by_novation, -> { where("concept_posts.new_fullness > 40") }
+  # scope :by_discussions, ->(posts) { where("concept_posts.id NOT IN (#{posts.join(', ')})") unless posts.empty? }
+  # scope :posts_for_discussions, ->(p) { where(project_id: p.id, status: 0).where("concept_posts.status_name = 't' and concept_posts.status_content = 't'") }
+  # scope :by_idea, -> { where("concept_posts.new_fullness <= 40 or concept_posts.new_fullness IS NULL") }
+  # scope :by_novation, -> { where("concept_posts.new_fullness > 40") }
 
-  def self.scope_vote_top(post)
-    joins(:concept_post_discontents).
-        where('"concept_post_discontents"."discontent_post_id" = ?', post.id).
-        joins(:post_aspects).
-        joins('INNER JOIN "concept_votings" ON "concept_votings"."concept_post_aspect_id" = "concept_post_aspects"."id"').
-        where('"concept_votings"."discontent_post_id" = "concept_post_aspects"."core_aspect_id"')
-        .group('"concept_posts"."id"')
-        .order('count("concept_votings"."user_id") DESC')
-  end
+  # def self.scope_vote_top(post)
+  #   joins(:concept_post_discontents).
+  #       where('"concept_post_discontents"."discontent_post_id" = ?', post.id).
+  #       joins(:post_aspects).
+  #       joins('INNER JOIN "concept_votings" ON "concept_votings"."concept_post_aspect_id" = "concept_post_aspects"."id"').
+  #       where('"concept_votings"."discontent_post_id" = "concept_post_aspects"."core_aspect_id"')
+  #       .group('"concept_posts"."id"')
+  #       .order('count("concept_votings"."user_id") DESC')
+  # end
 
   def complite(discontent)
     post = discontent.concept_post_discontents.by_concept(self).first

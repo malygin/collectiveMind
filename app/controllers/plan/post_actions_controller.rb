@@ -16,11 +16,11 @@ class Plan::PostActionsController < ProjectsController
     @post_action.plan_post_aspect = @post_aspect
     @post_action.save!
 
-    unless params[:resor_action].nil?
-      params[:resor_action].each_with_index do |r, i|
-        @post_action.plan_post_resources.by_type('action_r').build(name: r, desc: params[:res_action][i], project_id: @project.id, style: 3).save if r!=''
-      end
-    end
+    # unless params[:resor_action].nil?
+    #   params[:resor_action].each_with_index do |r, i|
+    #     @post_action.plan_post_resources.by_type('action_r').build(name: r, desc: params[:res_action][i], project_id: @project.id, style: 3).save if r!=''
+    #   end
+    # end
   end
 
   def edit
@@ -34,12 +34,12 @@ class Plan::PostActionsController < ProjectsController
     @post_aspect = Plan::PostAspect.find(params[:con_id])
     @post_action = Plan::PostAction.find(params[:act_id])
     @post_action.update_attributes(plan_post_action_params)
-    @post_action.plan_post_resources.by_type('action_r').destroy_all
-    unless params[:resor_action].nil?
-      params[:resor_action].each_with_index do |r, i|
-        @post_action.plan_post_resources.by_type('action_r').build(name: r, desc: params[:res_action][i], project_id: @project.id, style: 3).save if r!=''
-      end
-    end
+    # @post_action.plan_post_resources.by_type('action_r').destroy_all
+    # unless params[:resor_action].nil?
+    #   params[:resor_action].each_with_index do |r, i|
+    #     @post_action.plan_post_resources.by_type('action_r').build(name: r, desc: params[:res_action][i], project_id: @project.id, style: 3).save if r!=''
+    #   end
+    # end
     respond_to do |format|
       if @post_action.save!
         format.js
