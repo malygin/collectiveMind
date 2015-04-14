@@ -84,7 +84,12 @@
       / Main Block starts
       .main-block
         .container
-          = yield
+          - if cabinet?
+            .row
+              = render partial: 'core/project_users/sidebar'
+              = yield
+          - else
+            = yield
     #render_knowbase_posts
     = render 'shared/moderator_chat'
 

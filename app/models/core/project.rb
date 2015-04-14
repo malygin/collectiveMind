@@ -114,6 +114,10 @@ class Core::Project < ActiveRecord::Base
     current_stage_values[:type_stage]
   end
 
+  def current_stage_num
+    current_stage.first[0]
+  end
+
   def moderators
     users_in_project.where(users: {type_user: User::TYPES_USER[:admin]})
   end

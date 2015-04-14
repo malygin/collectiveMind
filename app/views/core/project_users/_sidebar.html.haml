@@ -1,0 +1,13 @@
+.col-md-2
+  %ul.list-unstyled{role: 'tablist'}
+    %li{role: 'presentation', class: ('active' if true)}
+      -# Пока оставляем только одну ссылку, для демонстрации
+      = link_to '+ Аспект',  new_aspect_path(@project, type_mechanic: 'simple'), role: 'button', class: 'btn back_color_stage1'
+      .divider25
+    -# @todo Потом нужно включить в работу динамическую подгрузку техник
+    -#- @project.techniques.by_stage(@project.current_stage_values[:type_stage]).each do |technique|
+    -#  %li{role: 'presentation', class: ('active' if true)}
+    -#    = link_to technique.name, self.send("new_#{technique.stage.to_s.downcase.singularize}_path", @project, type_mechanic: technique.code), role: 'button', class: 'btn back_color_stage1'
+    -#    .divider25
+    %li
+      = link_to 'Мои аспекты', self.send("user_content_#{@project.current_stage_type}_path"), role: 'button', class: 'btn back_color_stage1'
