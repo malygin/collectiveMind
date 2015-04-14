@@ -23,7 +23,7 @@
             %a.navbar-brand{href: @project ? "/project/#{@project.id}" : '/', id: 'go_to_logo'}
               = image_tag 'logo1.png'
           %ul.nav.navbar-nav.main_menu
-            %li{class: "#{'active' if [:collect_info_posts, :discontent_posts, :concept_posts, :plan_posts, :estimate_posts].include? name_controller}"}
+            %li{class: "#{'active' unless cabinet?}"}
               = link_to 'Процедура', "/project/#{@project.id}", class: 'menu_a'
             %li{class: "#{'active' if cabinet?}"}
               = link_to 'Кабинет', project_user_path(@project, current_user), class: 'menu_a'
