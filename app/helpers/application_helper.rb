@@ -505,9 +505,13 @@ module ApplicationHelper
     controller.class.to_s.gsub('::', '_').gsub('Controller', '').underscore.to_sym
   end
 
+  def cabinet?
+    name_controller == :core_project_users
+  end
+
   def current_stage_controller
     # Если это контроллер для кабинета, возвращаем номер текущей стадии
-    if name_controller == :core_project_users
+    if cabinet?
       return @project.current_stage.first[0]
     end
     Core::Project::LIST_STAGES.each do |num_stage, stage|
