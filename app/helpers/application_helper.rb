@@ -508,8 +508,9 @@ module ApplicationHelper
   ##
   # Хелперовский метод, вернет `true` если мы в кабинете
   # т.е. если мы на странице project_user или создаем контент
+  # или просматриваем свой созданный контент
   def cabinet?
-    name_controller == :core_project_users or action_name == 'new'
+    name_controller == :core_project_users or action_name == 'new' or action_name == 'user_content'
   end
 
   def current_stage_controller
