@@ -28,6 +28,7 @@ class Core::Aspect < ActiveRecord::Base
   scope :by_user, ->(user) { where(user_id: user.id) }
   scope :minus_view, ->(aspects) { where.not(core_aspects: {id: aspects}) }
   scope :main_aspects, -> { where(core_aspects: {core_aspect_id: nil}) }
+  scope :by_status, ->(status) { where(status: status) }
   scope :vote_top, ->(revers) {
     if revers == '0'
       order('count("collect_info_votings"."user_id") DESC')

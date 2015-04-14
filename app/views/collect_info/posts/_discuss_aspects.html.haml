@@ -1,0 +1,35 @@
+.stage-info-sort-block
+  .row
+    %br/
+    .col-md-7
+      %span.stage-heading Обсуждение аспектов
+    .col-md-5
+      .sort-block.pull-right
+        %span.sort-label Сортировать по новым:
+        .sort-1.sort_btn.sprite_com.sprite-item1_2_1
+          %span 25
+        #tooltip2_2.sort-2.sort_btn.sprite_doc.sprite-item1_1.tooltip2_2{"data-placement" => "bottom", "data-toggle" => "tooltip", "data-trigger" => "manual", :title => "При помощи этих фильтров вы можете выбирать, в каком порядке будут отображаться несовершенства."}
+          %span 2
+        = link_to project_user_path(@project, current_user) do
+          %button.btn.add-button
+            %span> +
+            Несовершенство
+.divider_1_grey
+.divider10
+.stage-post-block
+  .row
+    .col-md-6
+      %span.stage-heading
+        Аспекты из базы знаний
+        ="(#{@acpects.by_status(0)})"
+    .col-md-6
+      %span.stage-heading
+        Аспекты, предложенные участниками
+        ="(#{@acpects.by_status(1)})"
+  .row
+    .col-md-6.combined_border.right
+      -@acpects.by_status(0).each do |aspect|
+        =render partial: 'post_short', object: aspect
+    .col-md-6.combined_border.left
+      -@acpects.by_status(1).each do |aspect|
+        =render partial: 'post_short', object: aspect
