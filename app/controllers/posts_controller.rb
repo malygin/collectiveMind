@@ -4,6 +4,7 @@ class PostsController < ProjectsController
   before_filter :have_project_access
   before_filter :boss_authenticate, only: [:vote_result]
   before_filter :comment_page, only: [:index, :show]
+  before_filter :news_data
 
   def autocomplete
     results = current_model.autocomplete params[:term]

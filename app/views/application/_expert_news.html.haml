@@ -1,0 +1,28 @@
+%button.btn_reset.font_lighter_grey.bold.drop_opener{"data-dd-opener" => "dd_1"}
+  %i.fa.fa-exclamation-triangle
+#dd_1.dropdown_window.dd_570.expert_news_drop.text-left
+  .dd_badge
+    %i.fa.fa-exclamation-triangle
+    %small Новости от эксперта
+  .dd_wrapper.white
+    .dd_top.light-grey
+      %i.fa.fa-close.fa-lg.dd_close{"data-dd-closer" => "dd_1"}
+    .dd_bottom
+      .divider20
+      .container
+        .ps_cont
+          - unless expert_news.empty?
+            - expert_news.each_with_index do |news, index|
+              .dd_xprt_notice
+                %a.a_font_reset.collapsed{"aria-expanded" => "false", "data-toggle" => "collapse", :href => "#xprt_#{index}"}
+                  .row
+                    .col-xs-9
+                      =news.title
+                    .col-xs-3.text-right
+                      %span.dd_n_date
+                        =Russian::strftime(news.created_at,'%d.%m.%Y')
+                      %i.fa.fa-angle-right.font_grey.bold
+              .dd_xprt_article.collapse{id: "xprt_#{index}"}
+                = news.body.html_safe if news.body
+
+      .divider20

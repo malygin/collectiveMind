@@ -40,88 +40,11 @@
   .row#tab_aspect_posts
   -#  = render partial: 'post_short', collection: @posts
 
-
-
-
 #render_discontent_post
 
--#@todo REF remove popups
-#popup-explanation-2.popup-window.popup-explanation.popup-w710.mfp-hide.welcome_popup{class: "#{shown_intro('discontent_intro')}"}
-  .popup.popup_rounded
-    .modal_badge.back_color_stage2.rounded_2.font_white 2 СТАДИЯ
-    %h2
-      = image_tag 'good-shot1.png', class: "expl-header-img-1"
-      Цель 2-й стадии
-    %p.expl-sub-heading
-      На этой стадии вам предстоит выявить проблемы, связанные с ситуацией, описанной в базе знаний,
-      и принять участие в обсуждении проблем, выявленных другими участниками. В нашей терминологии такие проблемы называются несовершенствами.
-      В конце стадии вы проголосуете за те несовершенства, которые, на ваш взгляд, совершенно необходимо устранить для исправления
-      текущей ситуации.
-    %h2
-      = image_tag 'flag1.png', class: "expl-header-img-2"
-      С чего начать?
-    = link_to discontent_posts_check_field_path(@project, check_field: "discontent_intro", status: true), method: :put, remote: true do
-      %button.btn.red.close_magnific Начать работу
-
-
-
-
+= render partial: 'popup_welcome'
 - if current_user.can_vote_for(:discontent, @project)
-  #vote-2.popup-window.popup-vote.popup-w1030.mfp-hide
-    .popup.popup_rounded
-      .modal_title
-        .row
-          .col-md-12
-            %h4.bold.font_dark_grey.tall_modal_title
-              Голосование по несовершенствам
-      .vote_progress_cont.progress
-        .vote_progress.light-green.progress-bar{"aria-valuemax" => "100", "aria-valuemin" => "0", :role => "progressbar"}
-      .modal_body
-        .container.vote_folders_cont.folders_3.no_padding_col
-          %ul.nav.vote_nav.row{:role => "tablist"}
-            %li.no_padding_col.active.folder_all{:role => "presentation"}
-              %a.vote_folder{"data-toggle" => "tab", :href => "#vote_tab1", :role => "tab"}
-                %i.fa.fa-angle-left.fa_xlg
-                %small.bold Вернуться в общий список
-            %li.col-md-4.no_padding_col{:role => "presentation"}
-              %a.vote_folder{"data-toggle" => "tab", "data-vote-folder-role" => "important", :href => "#vote_tab2", :role => "tab"}
-                .vote_folder_inn.poll-2-1
-                  %span.vote_counter
-                  %h5 Важно
-            %li.col-md-4.no_padding_col{:role => "presentation"}
-              %a.vote_folder{"data-toggle" => "tab", "data-vote-folder-role" => "not_important", :href => "#vote_tab3", :role => "tab"}
-                .vote_folder_inn.poll-2-2
-                  %span.vote_counter
-                  %h5 Неважно
-            %li.col-md-4.no_padding_col{:role => "presentation"}
-              %a.vote_folder{"data-toggle" => "tab", "data-vote-folder-role" => "unnecessary", :href => "#vote_tab4", :role => "tab"}
-                .vote_folder_inn.poll-2-3
-                  %span.vote_counter
-                  %h5 Лишнее
-        .divider25
-        .container
-          .row
-            .divider25
-            .tab-content
-              #vote_tab1.tab-pane.all_vote.active{:role => "tabpanel"}
-                .container.padding30
-                  .row
-                    - @posts.each_with_index do |post, index|
-                      = render partial: 'post_vote', object: post
-                .divider50
-              #vote_tab2.tab-pane{"data-vote-poll-role" => "important", :role => "tabpanel"}
-                .container.padding30
-                  .row
-                  .divider50
-              #vote_tab3.tab-pane{"data-vote-poll-role" => "not_important", :role => "tabpanel"}
-                .container.padding30
-                  .row
-                  .divider50
-              #vote_tab4.tab-pane{"data-vote-poll-role" => "unnecessary", :role => "tabpanel"}
-                .container.padding30
-                  .row
-                  .divider50
-            .divider35
+  = render partial: 'popup_vote'
 
 
 

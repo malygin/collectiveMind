@@ -19,8 +19,9 @@
     / Custom CSS. Type your CSS code in custom.css file
     %link{:href => "css/custom.css", :rel => "stylesheet"}/
     %link{:href => "css/custom-post.css", :rel => "stylesheet"}/
-  %body
-    .outer.stage1_theme
+    %link{:href => "css/colors.css", :rel => "stylesheet"}/
+  %body.stage1_theme
+    .outer
       / Top bar starts
       %header.navbar.top_bar
         .container
@@ -115,7 +116,7 @@
                             .divider10
                     .divider20
           .navbar-right.text-right.user_block.font_grey
-            %a.book_icon{:href => "#"}
+            %a.book_icon.open-popup-link{:href => "#popup-database"}
             %span.auth-divider |
             %span.has_dropwindow
               %button.btn_reset.font_lighter_grey.bold.drop_opener{"data-dd-opener" => "dd_1"}
@@ -262,14 +263,11 @@
           %h4.font_white Решение конфликта, возникшего из-за меда
         %button#tooltip_button_1.btn.btn-tooltip{:type => "button", :value => "Show"}
           %i.fa.fa-lightbulb-o
-          Открыть подсказки
-        %button#close_tooltip_button_1.btn.btn-tooltip-close{:type => "button", :value => "Destroy"}
-          %i.fa.fa-lightbulb-o
-          Закрыть подсказки
+          Подсказки
       .container
         .row
           .col-md-8.col_padding_right_3
-            #tooltip1_1.border_grey.rounded_3.stages_block.tooltip1_1{"data-placement" => "bottom", "data-toggle" => "tooltip", "data-trigger" => "none", :title => "В нашей процедуре стадии открываются поэтапно. Следующая стадия откроется, когда большинство участников ответит на все вопросы."}
+            #tooltip1_1.border_grey.rounded_3.stages_block.tooltip1{"data-placement" => "bottom", "data-toggle" => "tooltip", "data-trigger" => "manual", :title => "В нашей процедуре стадии открываются поэтапно. Следующая стадия откроется, когда большинство участников ответит на все вопросы."}
               .btn-toolbar{:role => "toolbar"}
                 .btn-group{:role => "group"}
                   %a.btn.back_color_stage1{:href => "1st-stage.html", :role => "button"}
@@ -284,8 +282,8 @@
                   %a.btn.back_color_stage7{:href => "7th-stage.html", :role => "button"} 7
           .col-md-4.col_padding_left_3
             %a.open_welcome_popup{:href => "#popup-explanation-1st"}
-              #tooltip1_2.border_grey.rounded_3.help_icon.tooltip1_2{"data-placement" => "bottom", "data-toggle" => "tooltip", "data-trigger" => "none", :title => "Вы всегда сможете вызвать помощь по стадии, нажав сюда"}
-            #tooltip1_3.border_grey.rounded_3.progress_block.tooltip1_3{"data-placement" => "bottom", "data-toggle" => "tooltip", "data-trigger" => "none", :title => "Здесь будут отображаться ваши успехи по работе с аспектами. Другие участники тоже не сидят сложа руки!"}
+              #tooltip1_2.border_grey.rounded_3.help_icon.tooltip1{"data-placement" => "bottom", "data-toggle" => "tooltip", "data-trigger" => "manual", :title => "Вы всегда сможете вызвать помощь по стадии, нажав сюда"}
+            #tooltip1_3.border_grey.rounded_3.progress_block.tooltip1{"data-placement" => "bottom", "data-toggle" => "tooltip", "data-trigger" => "manual", :title => "Здесь будут отображаться ваши успехи по работе с аспектами. Другие участники тоже не сидят сложа руки!"}
               .container
                 .row
                   .col-xs-6.col-md-6.col_padding_right_3
@@ -339,72 +337,72 @@
                         .slider-item.active
                           .c1-item
                             %a{"data-toggle" => "tab", :href => "#tab-one"}
-                              %span.c1-item-inner.color-theme-1
+                              %span.c1-item-inner.color_me{"data-me-action" => "border-top-color", "data-me-color" => "0", "data-me-type" => "aspect"}
                                 Мед и пчелы
                       %li
                         .slider-item
                           .c1-item
                             %a{"data-toggle" => "tab", :href => "#tab-two"}
-                              %span.c1-item-inner.color-theme-2
+                              %span.c1-item-inner.color_me{"data-me-action" => "border-top-color", "data-me-color" => "1", "data-me-type" => "aspect"}
                                 Мед и четвероногие
                       %li
                         .slider-item
                           .c1-item
                             %a{"data-toggle" => "tab", :href => "#tab-three"}
-                              %span.c1-item-inner.color-theme-3
+                              %span.c1-item-inner.color_me{"data-me-action" => "border-top-color", "data-me-color" => "2", "data-me-type" => "aspect"}
                                 Взаимоотношения четвероногих и пчел
                       %li
                         .slider-item
                           .c1-item
                             %a{"data-toggle" => "tab", :href => "#tab-four"}
-                              %span.c1-item-inner.color-theme-4
+                              %span.c1-item-inner.color_me{"data-me-action" => "border-top-color", "data-me-color" => "3", "data-me-type" => "aspect"}
                                 Пчелы и цветочные поляны
                       %li
                         .slider-item
                           .c1-item
                             %a{"data-toggle" => "tab", :href => "#tab-five"}
-                              %span.c1-item-inner.color-theme-5
+                              %span.c1-item-inner.color_me{"data-me-action" => "border-top-color", "data-me-color" => "4", "data-me-type" => "aspect"}
                                 Четвероногие и сахар
                       %li
                         .slider-item
                           .c1-item
                             %a{"data-toggle" => "tab", :href => "#tab-six"}
-                              %span.c1-item-inner.color-theme-6
+                              %span.c1-item-inner.color_me{"data-me-action" => "border-top-color", "data-me-color" => "5", "data-me-type" => "aspect"}
                                 Пчелы, четвероногие и зимняя спячка
                       %li
                         .slider-item
                           .c1-item
                             %a{"data-toggle" => "tab", :href => "#tab-seven"}
-                              %span.c1-item-inner.color-theme-7
+                              %span.c1-item-inner.color_me{"data-me-action" => "border-top-color", "data-me-color" => "6", "data-me-type" => "aspect"}
                                 Винни-Пух и все все все
                       %li
                         .slider-item
                           .c1-item
                             %a{"data-toggle" => "tab", :href => "#tab-eight"}
-                              %span.c1-item-inner.color-theme-8
+                              %span.c1-item-inner.color_me{"data-me-action" => "border-top-color", "data-me-color" => "7", "data-me-type" => "aspect"}
                                 Эффективность пчел в сборе меда
                       %li
                         .slider-item
                           .c1-item
                             %a{"data-toggle" => "tab", :href => "#tab-nine"}
-                              %span.c1-item-inner.color-theme-9
+                              %span.c1-item-inner.color_me{"data-me-action" => "border-top-color", "data-me-color" => "8", "data-me-type" => "aspect"}
                                 Пчелы и лес
                 / Tab panes
                 .tab-content
-                  #tab-one.tab-pane.main-pane.color-theme-1.active.fade.in
+                  #tab-one.tab-pane.main-pane.active.fade.in
                     .container
                       .row
                         .col-md-8.col-sm-8.min-col-right-padd
                           %ul.nav.nav-tabs.aspects_tabs{:role => "tablist"}
                             %li.active{:role => "presentation"}
-                              %a{"aria-controls" => "Статья 1", "data-toggle" => "tab", :href => "#article1", :role => "tab"} Статья 1
+                              %a.aspect_color0_background{"aria-controls" => "Статья 1", "data-toggle" => "tab", :href => "#article1", :role => "tab"} Статья 1
                             %li{:role => "presentation"}
-                              %a{"aria-controls" => "Статья 2", "data-toggle" => "tab", :href => "#article2", :role => "tab"} Статья 2
+                              %a.aspect_color0_background{"aria-controls" => "Статья 2", "data-toggle" => "tab", :href => "#article2", :role => "tab"} Статья 2
                             %li{:role => "presentation"}
-                              %a{"aria-controls" => "Статья 3", "data-toggle" => "tab", :href => "#article3", :role => "tab"} Статья 3
+                              %a.aspect_color0_background{"aria-controls" => "Статья 3", "data-toggle" => "tab", :href => "#article3", :role => "tab"} Статья 3
                       .row
                         .col-md-8.col-sm-8.min-col-right-padd
-                          .top-color-border-block.aspect-main-block
+                          .aspect-main-block.color_me{"data-me-action" => "border-top-color", "data-me-color" => "0", "data-me-type" => "aspect"}
                             .tab-content
                               #article1.tab-pane.active.fade.in{:role => "tabpanel"}
                                 %h6.aspect-main-block-heading Ситуация с пчелами
@@ -432,7 +430,7 @@
                                 %img{:src => "img/aspect-pic1.jpg"}/
                         .col-md-4.col-sm-4.min-col-left-padd
                           #questionsCarousel1.carousel.slide.questionsCarousel{"data-ride" => "carousel"}
-                            .aspect-questions-block
+                            .aspect-questions-block.color_me{"data-me-action" => "border-top-color", "data-me-color" => "0", "data-me-type" => "aspect"}
                               %h4.block-with-left-icon.pull-left
                                 %i.left-icon.fa.fa-2x.fa-comments
                                 Вопросы по теме
@@ -470,8 +468,8 @@
                                         %i.fa.fa-check
                                     .clearfix
                                     .form-group.bottom-buttons
-                                      %a.btn.btn-outline.notice-button Подсказка
-                                      %button.btn.answer-button.questionCarousel-target{"data-slide-to" => "1", "data-target" => "#questionsCarousel1"} Ответить
+                                      %a.btn.btn-outline.notice-button.color_me{"data-me-action" => "border-color", "data-me-color" => "0", "data-me-type" => "aspect"} Подсказка
+                                      %button.btn.answer-button.questionCarousel-target.color_me{"data-me-action" => "background-color", "data-me-color" => "0", "data-me-type" => "aspect", "data-slide-to" => "1", "data-target" => "#questionsCarousel1"} Ответить
                                 .item
                                   %p.text.block-with-left-icon
                                     %span.left-icon.pull-right 2.
@@ -495,13 +493,13 @@
                                         %i.fa.fa-check
                                     .clearfix
                                     .form-group.bottom-buttons
-                                      %a.btn.btn-outline.notice-button Подсказка
-                                      %button.btn.answer-button Ответить
-                  #tab-two.tab-pane.main-pane.color-theme-2.fade
+                                      %a.btn.btn-outline.notice-button.color_me{"data-me-action" => "border-color", "data-me-color" => "0", "data-me-type" => "aspect"} Подсказка
+                                      %button.btn.answer-button.color_me{"data-me-action" => "background-color", "data-me-color" => "0", "data-me-type" => "aspect"} Ответить
+                  #tab-two.tab-pane.main-pane.fade
                     .container
                       .row
                         .col-md-8.col-sm-8.min-col-right-padd
-                          .aspect-main-block
+                          .aspect-main-block.color_me{"data-me-action" => "border-top-color", "data-me-color" => "1", "data-me-type" => "aspect"}
                             %p.aspect-main-block-text
                               В популярной сказке Винни-Пух и его
                               друзья жаждали меда, но пчелы не давали забрать у себя плоды своего
@@ -515,7 +513,7 @@
                             %img{:src => "img/aspect-pic2.jpg"}/
                         .col-md-4.col-sm-4.min-col-left-padd
                           #questionsCarousel2.carousel.slide.questionsCarousel{"data-ride" => "carousel questionsCarousel"}
-                            .aspect-questions-block
+                            .aspect-questions-block.color_me{"data-me-action" => "border-top-color", "data-me-color" => "1", "data-me-type" => "aspect"}
                               %h4.block-with-left-icon.pull-left
                                 %i.left-icon.fa.fa-2x.fa-comments
                                 Вопросы по теме
@@ -542,8 +540,8 @@
                                         %i.fa.fa-check
                                     .clearfix
                                     .form-group.bottom-buttons
-                                      %a.btn.btn-outline.notice-button Подсказка
-                                      %button.btn.answer-button.questionCarousel-target{"data-slide-to" => "1", "data-target" => "#questionsCarousel2"} Ответить
+                                      %a.btn.btn-outline.notice-button.color_me{"data-me-action" => "border-color", "data-me-color" => "1", "data-me-type" => "aspect"} Подсказка
+                                      %button.btn.answer-button.questionCarousel-target.color_me{"data-me-action" => "background-color", "data-me-color" => "1", "data-me-type" => "aspect", "data-slide-to" => "1", "data-target" => "#questionsCarousel2"} Ответить
                                 .item
                                   %p.text.block-with-left-icon
                                     %span.left-icon.pull-right 2.
@@ -566,13 +564,13 @@
                                         %i.fa.fa-check
                                     .clearfix
                                     .form-group.bottom-buttons
-                                      %a.btn.btn-outline.notice-button Подсказка
-                                      %button.btn.answer-button.questionCarousel-target{"data-slide-to" => "2", "data-target" => "#questionsCarousel2"} Ответить
-                  #tab-three.tab-pane.main-pane.color-theme-3.fade
+                                      %a.btn.btn-outline.notice-button.color_me{"data-me-action" => "border-color", "data-me-color" => "1", "data-me-type" => "aspect"} Подсказка
+                                      %button.btn.answer-button.questionCarousel-target.color_me{"data-me-action" => "background-color", "data-me-color" => "1", "data-me-type" => "aspect", "data-slide-to" => "2", "data-target" => "#questionsCarousel2"} Ответить
+                  #tab-three.tab-pane.main-pane.fade
                     .container
                       .row
                         .col-md-8.col-sm-8.min-col-right-padd
-                          .aspect-main-block
+                          .aspect-main-block.color_me{"data-me-action" => "border-top-color", "data-me-color" => "2", "data-me-type" => "aspect"}
                             %h6.aspect-main-block-heading
                               Трудности, связанные с
                               расположением конфликтующих сторон
@@ -585,7 +583,7 @@
                             %img{:src => "img/aspect-pic3.jpg"}/
                         .col-md-4.col-sm-4.min-col-left-padd
                           #questionsCarousel3.carousel.slide.questionsCarousel{"data-ride" => "carousel"}
-                            .aspect-questions-block
+                            .aspect-questions-block.color_me{"data-me-action" => "border-top-color", "data-me-color" => "2", "data-me-type" => "aspect"}
                               %h4.block-with-left-icon.pull-left
                                 %i.left-icon.fa.fa-2x.fa-comments
                                 Вопросы по теме
@@ -611,8 +609,8 @@
                                         %i.fa.fa-check
                                     .clearfix
                                     .form-group.bottom-buttons
-                                      %a.btn.btn-outline.notice-button Подсказка
-                                      %button.btn.answer-button.questionCarousel-target2{"data-slide-to" => "1", "data-target" => "#questionsCarousel3"} Ответить
+                                      %a.btn.btn-outline.notice-button.color_me{"data-me-action" => "border-color", "data-me-color" => "2", "data-me-type" => "aspect"} Подсказка
+                                      %button.btn.answer-button.questionCarousel-target2.color_me{"data-me-action" => "background-color", "data-me-color" => "2", "data-me-type" => "aspect", "data-slide-to" => "1", "data-target" => "#questionsCarousel3"} Ответить
                                 .item
                                   .divider10
                                   %h6.text-center.bold.font_red 2 из 2
@@ -635,112 +633,17 @@
                                         вредные насекомые
                                     .clearfix
                                     .form-group.bottom-buttons
-                                      %a.btn.btn-outline.notice-button Подсказка
-                                      %a.btn.answer-button.open-popup-link{:href => "#popup-greetings-text"} Ответить
-                  #tab-four.tab-pane.main-pane.color-theme-4.fade
-                    .container
-                      .row
-                        .col-md-8.col-sm-8.min-col-right-padd
-                          .aspect-main-block
-                            %h6.aspect-main-block-heading Пчелы и цветочные поляны
-                            %p.aspect-main-block-text
-                              Проснувшись однажды утром после
-                              беспокойного сна, Грегор Замза обнаружил, что он у себя в постели
-                              превратился в страшное насекомое. Лежа на панцирнотвердой спине, он
-                              видел, стоило ему приподнять голову, свой
-                            %img{:src => "img/aspect-pic4.jpg"}/
-                        / Questions block starts
-                        .col-md-4.col-sm-4.min-col-left-padd
-                          .aspect-questions-block
-                        / Questions block ends
-                  #tab-five.tab-pane.main-pane.color-theme-5.fade
-                    .container
-                      .row
-                        .col-md-8.col-sm-8.min-col-right-padd
-                          .aspect-main-block
-                            %h6.aspect-main-block-heading Четвероногие и сахар
-                            %p.aspect-main-block-text
-                              Любя, съешь щипцы, — вздохнёт мэр, —
-                              кайф жгуч. Шеф взъярён тчк щипцы с эхом гудбай Жюль. Эй, жлоб! Где
-                              туз? Прячь юных съёмщиц в
-                            %img{:src => "img/aspect-pic5.jpg"}/
-                        / Questions block starts
-                        .col-md-4.col-sm-4.min-col-left-padd
-                          .aspect-questions-block
-                        / Questions block ends
-                  #tab-six.tab-pane.main-pane.color-theme-6.fade
-                    .container
-                      .row
-                        .col-md-8.col-sm-8.min-col-right-padd
-                          .aspect-main-block
-                            %h6.aspect-main-block-heading
-                              Пчелы, четвероногие и зимняя
-                              спячка
-                            %p.aspect-main-block-text
-                              Душа моя озарена неземной радостью,
-                              как эти чудесные весенние утра, которыми я наслаждаюсь от всего
-                              сердца. Я совсем один и блаженствую в здешнем краю, словно созданном
-                              для таких, как я. Я так счастлив, мой друг, так упоен ощущением
-                              покоя, что
-                            %img{:src => "img/aspect-pic6.jpg"}/
-                        / Questions block starts
-                        .col-md-4.col-sm-4.min-col-left-padd
-                          .aspect-questions-block
-                        / Questions block ends
-                  #tab-seven.tab-pane.main-pane.color-theme-7.fade
-                    .container
-                      .row
-                        .col-md-8.col-sm-8.min-col-right-padd
-                          .aspect-main-block
-                            %h6.aspect-main-block-heading Винни-Пух и все-все-все
-                            %p.aspect-main-block-text
-                              Далеко-далеко за словесными горами в
-                              стране гласных и согласных живут рыбные тексты. Вдали от всех живут
-                              они в буквенных домах на берегу Семантика большого языкового океана.
-                              Маленький ручеек Даль журчит по всей стране и обеспечивает ее всеми
-                              необходимыми правилами. Эта
-                            %img{:src => "img/aspect-pic7.jpg"}/
-                        / Questions block starts
-                        .col-md-4.col-sm-4.min-col-left-padd
-                          .aspect-questions-block
-                        / Questions block ends
-                  #tab-eight.tab-pane.main-pane.color-theme-8.fade
-                    .container
-                      .row
-                        .col-md-8.col-sm-8.min-col-right-padd
-                          .aspect-main-block
-                            %h6.aspect-main-block-heading
-                              Эффективность пчел в сборе
-                              меда
-                            %p.aspect-main-block-text
-                              Его многочисленные, убого тонкие по
-                              сравнению с остальным телом ножки беспомощно копошились у него перед
-                              глазами. «Что со мной случилось?» – подумал он. Это не было сном.
-                              Его комната, настоящая, разве что слишком маленькая, но обычная
-                              комната, мирно покоилась в своих четырех хорошо знакомых
-                            %img{:src => "img/aspect-pic8.jpg"}/
-                        / Questions block starts
-                        .col-md-4.col-sm-4.min-col-left-padd
-                          .aspect-questions-block
-                        / Questions block ends
-                  #tab-nine.tab-pane.main-pane.color-theme-9.fade
-                    .container
-                      .row
-                        .col-md-8.col-sm-8.min-col-right-padd
-                          .aspect-main-block
-                            %h6.aspect-main-block-heading Лес
-                            %p.aspect-main-block-text
-                              Проснувшись однажды утром после
-                              беспокойного сна, Грегор Замза обнаружил, что он у себя в постели
-                              превратился в страшное насекомое. Лежа на панцирнотвердой спине, он
-                              видел, стоило ему приподнять голову, свой
-                            %img{:src => "img/aspect-pic9.jpg"}/
-                        / Questions block starts
-                        .col-md-4.col-sm-4.min-col-left-padd
-                          .aspect-questions-block
-                        / Questions block ends
+                                      %a.btn.btn-outline.notice-button.color_me{"data-me-action" => "border-color", "data-me-color" => "2", "data-me-type" => "aspect"} Подсказка
+                                      %a.btn.answer-button.color_me{"data-me-action" => "background", "data-me-color" => "2", "data-me-type" => "aspect"} Ответить
           / Aspects block (UI four) ends
           %a.open-popup-vote-link{:href => "#vote-1"} Голосовалка
+          %br/
+          %a.open-popup-link{:href => "#popup-greetings-text"} Завершающий попап
+          %br/
+          %a{:href => "1st-stage_discuss.html"} Обсуждение аспектов
+          %br/
+          %a{:href => "1st-stage_discuss_placeholder.html"} Обсуждение аспектов (плейсхолдер)
+          %br/
       / Main Block ends
       #vote-1.popup-window.popup-vote.popup-w1030.mfp-hide
         .popup.popup_rounded
@@ -782,8 +685,8 @@
                     .container.padding30
                       .row
                         .col-sm-4.vote_item_cont
-                          .vote_item
-                            .heading_cont.color-theme-1
+                          .vote_item.color_me{"data-me-action" => "border-top-color", "data-me-color" => "0", "data-me-type" => "aspect"}
+                            .heading_cont
                               %h6 Мед и пчелы
                             .divider10
                             .vote_controls.text-center
@@ -795,8 +698,8 @@
                                 %i.fa.fa-times
                             .divider15
                         .col-sm-4.vote_item_cont
-                          .vote_item
-                            .heading_cont.color-theme-2
+                          .vote_item.color_me{"data-me-action" => "border-top-color", "data-me-color" => "1", "data-me-type" => "aspect"}
+                            .heading_cont
                               %h6 Мед и четвероногие
                             .divider10
                             .vote_controls.text-center
@@ -808,8 +711,8 @@
                                 %i.fa.fa-times
                             .divider15
                         .col-sm-4.vote_item_cont
-                          .vote_item
-                            .heading_cont.color-theme-3
+                          .vote_item.color_me{"data-me-action" => "border-top-color", "data-me-color" => "2", "data-me-type" => "aspect"}
+                            .heading_cont
                               %h6 Взаимоотношения четвероногих и пчел
                             .divider10
                             .vote_controls.text-center
@@ -821,8 +724,8 @@
                                 %i.fa.fa-times
                             .divider15
                         .col-sm-4.vote_item_cont
-                          .vote_item
-                            .heading_cont.color-theme-4
+                          .vote_item.color_me{"data-me-action" => "border-top-color", "data-me-color" => "3", "data-me-type" => "aspect"}
+                            .heading_cont
                               %h6 Пчелы и цветочные поляны
                             .divider10
                             .vote_controls.text-center
@@ -834,8 +737,8 @@
                                 %i.fa.fa-times
                             .divider15
                         .col-sm-4.vote_item_cont
-                          .vote_item
-                            .heading_cont.color-theme-5
+                          .vote_item.color_me{"data-me-action" => "border-top-color", "data-me-color" => "4", "data-me-type" => "aspect"}
+                            .heading_cont
                               %h6 Четвероногие и сахар
                             .divider10
                             .vote_controls.text-center
@@ -847,8 +750,8 @@
                                 %i.fa.fa-times
                             .divider15
                         .col-sm-4.vote_item_cont
-                          .vote_item
-                            .heading_cont.color-theme-6
+                          .vote_item.color_me{"data-me-action" => "border-top-color", "data-me-color" => "5", "data-me-type" => "aspect"}
+                            .heading_cont
                               %h6 Пчелы, четвероногие и зимняя спячка
                             .divider10
                             .vote_controls.text-center
@@ -860,8 +763,8 @@
                                 %i.fa.fa-times
                             .divider15
                         .col-sm-4.vote_item_cont
-                          .vote_item
-                            .heading_cont.color-theme-7
+                          .vote_item.color_me{"data-me-action" => "border-top-color", "data-me-color" => "6", "data-me-type" => "aspect"}
+                            .heading_cont
                               %h6 Винни-Пух и все-все-все
                             .divider10
                             .vote_controls.text-center
@@ -873,8 +776,8 @@
                                 %i.fa.fa-times
                             .divider15
                         .col-sm-4.vote_item_cont
-                          .vote_item
-                            .heading_cont.color-theme-8
+                          .vote_item.color_me{"data-me-action" => "border-top-color", "data-me-color" => "7", "data-me-type" => "aspect"}
+                            .heading_cont
                               %h6 Эффективность пчел в сборе меда
                             .divider10
                             .vote_controls.text-center
@@ -886,8 +789,8 @@
                                 %i.fa.fa-times
                             .divider15
                         .col-sm-4.vote_item_cont
-                          .vote_item
-                            .heading_cont.color-theme-9
+                          .vote_item.color_me{"data-me-action" => "border-top-color", "data-me-color" => "8", "data-me-type" => "aspect"}
+                            .heading_cont
                               %h6 Пчелы и лес
                             .divider10
                             .vote_controls.text-center
@@ -935,23 +838,25 @@
               %br>/
               (будет доступно в конце этапа)
           %button.btn.red.close_magnific Начать работу
-      #popup-greetings-text.popup-window.popup-w710.mfp-hide
+      #popup-greetings-text.popup-window.popup-w710.mfp-hide.stage1_theme
         .popup.popup_rounded.popup_medal
           .medal-block.gold-medal
           .row
             .col-md-8.col-md-offset-3
               %p.font_mid_grey.bold
-                Отлично, начало положено!
+                Итак, начало положено!
               .divider50
               %p.font_mid_grey.bold
-                Вы ознакомились со всеми аспектами базы знаний.
-                %br/
-                Теперь вы разбираетесь в предмете обсуждения и готовы к полноценному участию в процедуре.
-                %br/
-                Ждём вас на следующей стадии!
+                Вы изучили базу знаний и готовы принять участие в процедуре. Теперь вы можете обсудить аспекты, добавленные участниками, или предложить собственный аспект для общего обсуждения.
               .divider50
               %p
-                %button.btn.red.close_magnific.font_white.pull-right Закрыть окно
+                %a.btn.add-button{:href => "1st-stage_discuss.html"}
+                  %span
+                    %i.fa.fa-comment-o
+                  Просмотреть аспекты
+                %a.btn.add-button{:href => "#"}
+                  %span +
+                  Добавить аспект
       #popup-database.popup-window.popup_database.popup-w770.mfp-hide
         .popup.popup_rounded
           .row

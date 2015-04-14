@@ -16,37 +16,314 @@
     %link{:href => "css/perfect-scrollbar.min.css", :rel => "stylesheet"}/
     %link{:href => "css/custom.css", :rel => "stylesheet"}/
     %link{:href => "css/custom-post.css", :rel => "stylesheet"}/
-  %body
-    .outer.stage3_theme
+    %link{:href => "css/sprites.css", :rel => "stylesheet"}/
+    %link{:href => "css/colors.css", :rel => "stylesheet"}/
+  %body.stage3_theme
+    .outer
       #slide-panel.slide-outer{"data-position" => "left"}
-        %span#opener.slide-opener.icon_new.i_new_stage
+        %span#opener.slide-opener.icon_new.i_new_stage.rounded_2
           %img{:src => "img/text-slider-opener.png"}/
         .slide-inner.slide_stage3.white
           .ps_cont
+            .divider15
             .checkox_item
-              %span.cb_input
-                %input#check0{:type => "checkbox"}/
               %span
+                %span.cb_input
+                  %input#check0{:type => "checkbox"}/
+                  %label{:for => "check0"}
+                    %i.fa.fa-check
+              %span.text_label
                 %label{:for => "check0"} Выбрать все
             .slide_table_wrap
               .checkox_item
-                %span.cb_input
-                  %input#check1{:type => "checkbox"}/
                 %span
-                  %span.color_counter 22
+                  %span.cb_input
+                    %input#check1{:type => "checkbox"}/
+                    %label{:for => "check1"}
+                      %i.fa.fa-check
                 %span
-                  %label{:for => "check1"} Выбрать все
-                %span.cb_doc
-                %span.cb_com 42
+                  %span.color_counter.color_me{"data-me-action" => "background-color", "data-me-color" => "0", "data-me-type" => "imperf"} 2
+                %span.text_label
+                  %label{:for => "check1"} Выбрать все выбрать все выбрать все выбрать все
+                %span.cb_doc 2
+                %span.cb_com 19
               .checkox_item
-                %span.cb_input
-                  %input#check1{:type => "checkbox"}/
                 %span
-                  %span.color_counter 22
+                  %span.cb_input
+                    %input#check2{:type => "checkbox"}/
+                    %label{:for => "check2"}
+                      %i.fa.fa-check
                 %span
-                  %label{:for => "check1"} Выбрать все Выбрать все Выбрать все Выбрать все
-                %span.cb_doc 14
-                %span.cb_com 442
+                  %span.color_counter.color_me{"data-me-action" => "background-color", "data-me-color" => "1", "data-me-type" => "imperf"} 1
+                %span.text_label
+                  %label{:for => "check2"} Выбрать все выбрать все выбрать все
+                %span.cb_doc 2
+                %span.cb_com 34
+              .checkox_item
+                %span
+                  %span.cb_input
+                    %input#check3{:type => "checkbox"}/
+                    %label{:for => "check3"}
+                      %i.fa.fa-check
+                %span
+                  %span.color_counter.color_me{"data-me-action" => "background-color", "data-me-color" => "2", "data-me-type" => "imperf"} 1
+                %span.text_label
+                  %label{:for => "check3"} Выбрать все
+                %span.cb_doc 1
+                %span.cb_com
+              .checkox_item
+                %span
+                  %span.cb_input
+                    %input#check4{:type => "checkbox"}/
+                    %label{:for => "check4"}
+                      %i.fa.fa-check
+                %span
+                  %span.color_counter.color_me{"data-me-action" => "background-color", "data-me-color" => "3", "data-me-type" => "imperf"} 8
+                %span.text_label
+                  %label{:for => "check4"} Выбрать все выбрать все
+                %span.cb_doc 3
+                %span.cb_com 17
+              .checkox_item
+                %span
+                  %span.cb_input
+                    %input#check5{:type => "checkbox"}/
+                    %label{:for => "check5"}
+                      %i.fa.fa-check
+                %span
+                  %span.color_counter.color_me{"data-me-action" => "background-color", "data-me-color" => "4", "data-me-type" => "imperf"} 6
+                %span.text_label
+                  %label{:for => "check5"} Выбрать все
+                %span.cb_doc 1
+                %span.cb_com 4
+              .checkox_item
+                %span
+                  %span.cb_input
+                    %input#check6{:type => "checkbox"}/
+                    %label{:for => "check6"}
+                      %i.fa.fa-check
+                %span
+                  %span.color_counter.color_me{"data-me-action" => "background-color", "data-me-color" => "5", "data-me-type" => "imperf"} 2
+                %span.text_label
+                  %label{:for => "check6"} Выбрать все
+                %span.cb_doc
+                %span.cb_com 15
+              .checkox_item
+                %span
+                  %span.cb_input
+                    %input#check7{:type => "checkbox"}/
+                    %label{:for => "check7"}
+                      %i.fa.fa-check
+                %span
+                  %span.color_counter.color_me{"data-me-action" => "background-color", "data-me-color" => "6", "data-me-type" => "imperf"} 3
+                %span.text_label
+                  %label{:for => "check7"} Выбрать все
+                %span.cb_doc
+                %span.cb_com
+              .checkox_item
+                %span
+                  %span.cb_input
+                    %input#check8{:type => "checkbox"}/
+                    %label{:for => "check8"}
+                      %i.fa.fa-check
+                %span
+                  %span.color_counter.color_me{"data-me-action" => "background-color", "data-me-color" => "7", "data-me-type" => "imperf"} 2
+                %span.text_label
+                  %label{:for => "check8"} Выбрать все
+                %span.cb_doc 1
+                %span.cb_com 5
+              .checkox_item
+                %span
+                  %span.cb_input
+                    %input#check8{:type => "checkbox"}/
+                    %label{:for => "check8"}
+                      %i.fa.fa-check
+                %span
+                  %span.color_counter.color_me{"data-me-action" => "background-color", "data-me-color" => "8", "data-me-type" => "imperf"} 2
+                %span.text_label
+                  %label{:for => "check8"} Выбрать все
+                %span.cb_doc 1
+                %span.cb_com 5
+              .checkox_item
+                %span
+                  %span.cb_input
+                    %input#check8{:type => "checkbox"}/
+                    %label{:for => "check8"}
+                      %i.fa.fa-check
+                %span
+                  %span.color_counter.color_me{"data-me-action" => "background-color", "data-me-color" => "9", "data-me-type" => "imperf"} 2
+                %span.text_label
+                  %label{:for => "check8"} Выбрать все
+                %span.cb_doc 1
+                %span.cb_com 5
+              .checkox_item
+                %span
+                  %span.cb_input
+                    %input#check8{:type => "checkbox"}/
+                    %label{:for => "check8"}
+                      %i.fa.fa-check
+                %span
+                  %span.color_counter.color_me{"data-me-action" => "background-color", "data-me-color" => "10", "data-me-type" => "imperf"} 2
+                %span.text_label
+                  %label{:for => "check8"} Выбрать все
+                %span.cb_doc 1
+                %span.cb_com 5
+              .checkox_item
+                %span
+                  %span.cb_input
+                    %input#check8{:type => "checkbox"}/
+                    %label{:for => "check8"}
+                      %i.fa.fa-check
+                %span
+                  %span.color_counter.color_me{"data-me-action" => "background-color", "data-me-color" => "11", "data-me-type" => "imperf"} 2
+                %span.text_label
+                  %label{:for => "check8"} Выбрать все
+                %span.cb_doc 1
+                %span.cb_com 5
+              .checkox_item
+                %span
+                  %span.cb_input
+                    %input#check8{:type => "checkbox"}/
+                    %label{:for => "check8"}
+                      %i.fa.fa-check
+                %span
+                  %span.color_counter.color_me{"data-me-action" => "background-color", "data-me-color" => "12", "data-me-type" => "imperf"} 2
+                %span.text_label
+                  %label{:for => "check8"} Выбрать все
+                %span.cb_doc 1
+                %span.cb_com 5
+              .checkox_item
+                %span
+                  %span.cb_input
+                    %input#check8{:type => "checkbox"}/
+                    %label{:for => "check8"}
+                      %i.fa.fa-check
+                %span
+                  %span.color_counter.color_me{"data-me-action" => "background-color", "data-me-color" => "13", "data-me-type" => "imperf"} 2
+                %span.text_label
+                  %label{:for => "check8"} Выбрать все
+                %span.cb_doc 1
+                %span.cb_com 5
+              .checkox_item
+                %span
+                  %span.cb_input
+                    %input#check8{:type => "checkbox"}/
+                    %label{:for => "check8"}
+                      %i.fa.fa-check
+                %span
+                  %span.color_counter.color_me{"data-me-action" => "background-color", "data-me-color" => "14", "data-me-type" => "imperf"} 2
+                %span.text_label
+                  %label{:for => "check8"} Выбрать все
+                %span.cb_doc 1
+                %span.cb_com 5
+              .checkox_item
+                %span
+                  %span.cb_input
+                    %input#check8{:type => "checkbox"}/
+                    %label{:for => "check8"}
+                      %i.fa.fa-check
+                %span
+                  %span.color_counter.color_me{"data-me-action" => "background-color", "data-me-color" => "15", "data-me-type" => "imperf"} 2
+                %span.text_label
+                  %label{:for => "check8"} Выбрать все
+                %span.cb_doc 1
+                %span.cb_com 5
+              .checkox_item
+                %span
+                  %span.cb_input
+                    %input#check8{:type => "checkbox"}/
+                    %label{:for => "check8"}
+                      %i.fa.fa-check
+                %span
+                  %span.color_counter.color_me{"data-me-action" => "background-color", "data-me-color" => "16", "data-me-type" => "imperf"} 2
+                %span.text_label
+                  %label{:for => "check8"} Выбрать все
+                %span.cb_doc 1
+                %span.cb_com 5
+              .checkox_item
+                %span
+                  %span.cb_input
+                    %input#check8{:type => "checkbox"}/
+                    %label{:for => "check8"}
+                      %i.fa.fa-check
+                %span
+                  %span.color_counter.color_me{"data-me-action" => "background-color", "data-me-color" => "17", "data-me-type" => "imperf"} 2
+                %span.text_label
+                  %label{:for => "check8"} Выбрать все
+                %span.cb_doc 1
+                %span.cb_com 5
+              .checkox_item
+                %span
+                  %span.cb_input
+                    %input#check8{:type => "checkbox"}/
+                    %label{:for => "check8"}
+                      %i.fa.fa-check
+                %span
+                  %span.color_counter.color_me{"data-me-action" => "background-color", "data-me-color" => "18", "data-me-type" => "imperf"} 2
+                %span.text_label
+                  %label{:for => "check8"} Выбрать все
+                %span.cb_doc 1
+                %span.cb_com 5
+              .checkox_item
+                %span
+                  %span.cb_input
+                    %input#check8{:type => "checkbox"}/
+                    %label{:for => "check8"}
+                      %i.fa.fa-check
+                %span
+                  %span.color_counter.color_me{"data-me-action" => "background-color", "data-me-color" => "19", "data-me-type" => "imperf"} 2
+                %span.text_label
+                  %label{:for => "check8"} Выбрать все
+                %span.cb_doc 1
+                %span.cb_com 5
+              .checkox_item
+                %span
+                  %span.cb_input
+                    %input#check8{:type => "checkbox"}/
+                    %label{:for => "check8"}
+                      %i.fa.fa-check
+                %span
+                  %span.color_counter.color_me{"data-me-action" => "background-color", "data-me-color" => "20", "data-me-type" => "imperf"} 2
+                %span.text_label
+                  %label{:for => "check8"} Выбрать все
+                %span.cb_doc 1
+                %span.cb_com 5
+              .checkox_item
+                %span
+                  %span.cb_input
+                    %input#check8{:type => "checkbox"}/
+                    %label{:for => "check8"}
+                      %i.fa.fa-check
+                %span
+                  %span.color_counter.color_me{"data-me-action" => "background-color", "data-me-color" => "21", "data-me-type" => "imperf"} 2
+                %span.text_label
+                  %label{:for => "check8"} Выбрать все
+                %span.cb_doc 1
+                %span.cb_com 5
+              .checkox_item
+                %span
+                  %span.cb_input
+                    %input#check8{:type => "checkbox"}/
+                    %label{:for => "check8"}
+                      %i.fa.fa-check
+                %span
+                  %span.color_counter.color_me{"data-me-action" => "background-color", "data-me-color" => "22", "data-me-type" => "imperf"} 2
+                %span.text_label
+                  %label{:for => "check8"} Выбрать все
+                %span.cb_doc 1
+                %span.cb_com 5
+              .checkox_item
+                %span
+                  %span.cb_input
+                    %input#check8{:type => "checkbox"}/
+                    %label{:for => "check8"}
+                      %i.fa.fa-check
+                %span
+                  %span.color_counter.color_me{"data-me-action" => "background-color", "data-me-color" => "23", "data-me-type" => "imperf"} 2
+                %span.text_label
+                  %label{:for => "check8"} Выбрать все
+                %span.cb_doc 1
+                %span.cb_com 5
+            .divider15
       / Top bar 4rts
       %header.navbar.top_bar
         .container
@@ -67,81 +344,77 @@
                   .dd_top.thin.light-grey
                     %i.fa.fa-close.fa-lg.dd_close{"data-dd-closer" => "dd_2"}
                   .dd_bottom.white
-                    .divider10
-                    .container
-                      .row
-                        .col-xs-12
-                          .ps_cont
-                            %a.dd_notice{:href => "#"}
-                              %span.dd_n_cell.left.font_color_stage4
-                                %i.fa.fa-lg.fa-thumbs-down
-                              %span.dd_n_cell.right.font_color_stage4
-                                20:15 12.03.2015
-                                %span.bold Рахель
-                                в теме
-                            %a.dd_notice{:href => "#"}
-                              %span.dd_n_cell.left
-                                %i.fa.fa-lg.fa-thumbs-down
-                              %span.dd_n_cell.right
-                                20:15 12.03.2015
-                                %span.bold Рахель
-                                в теме
-                            %a.dd_notice.moder{:href => "#"}
-                              %span.dd_n_cell.left
-                                %i.fa.fa-lg.fa-exclamation-triangle
-                              %span.dd_n_cell.right
-                                22:00 11.03.2015
-                                = succeed ":" do
-                                  %span.bold Модератор
-                                %p
-                                  На этой стадии вам предстоит выявить проблемы, связанные с ситуацией, описанной в базе знаний, и принять участие в обсуждении проблем, выявленных другими участниками. В нашей терминологии такие проблемы называются несовершенствами.
-                            .dd_nav_divider.font_color_stage4
-                              %span 4
-                            .divider10
-                            %a.dd_notice{:href => "#"}
-                              %span.dd_n_cell.left.font_color_stage2
-                                %i.fa.fa-lg.fa-thumbs-up
-                              %span.dd_n_cell.right.font_color_stage2
-                                19:45 12.03.2015
-                                %span.bold Liza
-                                в теме
-                            %a.dd_notice{:href => "#"}
-                              %span.dd_n_cell.left
-                                %i.fa.fa-lg.fa-thumbs-down
-                              %span.dd_n_cell.right
-                                20:15 12.03.2015
-                                %span.bold Рахель
-                                в теме
-                            .dd_nav_divider.font_color_stage2
-                              %span 2
-                            .divider10
-                            %a.dd_notice{:href => "#"}
-                              %span.dd_n_cell.left.font_color_stage1
-                                %i.fa.fa-lg.fa-thumbs-down
-                              %span.dd_n_cell.right.font_color_stage1
-                                20:15 12.03.2015
-                                %span.bold Рахель
-                                в теме
-                            %a.dd_notice{:href => "#"}
-                              %span.dd_n_cell.left.font_color_stage1
-                                %i.fa.fa-lg.fa-thumbs-down
-                              %span.dd_n_cell.right.font_color_stage1
-                                20:15 12.03.2015
-                                %span.bold Рахель
-                                в теме
-                            %a.dd_notice{:href => "#"}
-                              %span.dd_n_cell.left.font_color_stage1
-                                %i.fa.fa-lg.fa-thumbs-down
-                              %span.dd_n_cell.right.font_color_stage1
-                                20:15 12.03.2015
-                                %span.bold Рахель
-                                в теме
-                            .dd_nav_divider.font_color_stage1
-                              %span 1
-                            .divider10
-                    .divider20
+                    .ps_cont
+                      .divider15
+                      %a.dd_notice{:href => "#"}
+                        %span.dd_n_cell.left.font_color_stage4
+                          %i.fa.fa-lg.fa-thumbs-down
+                        %span.dd_n_cell.right.font_color_stage4
+                          20:15 12.03.2015
+                          %span.bold Рахель
+                          в теме
+                      %a.dd_notice{:href => "#"}
+                        %span.dd_n_cell.left
+                          %i.fa.fa-lg.fa-thumbs-down
+                        %span.dd_n_cell.right
+                          20:15 12.03.2015
+                          %span.bold Рахель
+                          в теме
+                      %a.dd_notice.moder{:href => "#"}
+                        %span.dd_n_cell.left
+                          %i.fa.fa-lg.fa-exclamation-triangle
+                        %span.dd_n_cell.right
+                          22:00 11.03.2015
+                          = succeed ":" do
+                            %span.bold Модератор
+                          %p
+                            На этой стадии вам предстоит выявить проблемы, связанные с ситуацией, описанной в базе знаний, и принять участие в обсуждении проблем, выявленных другими участниками. В нашей терминологии такие проблемы называются несовершенствами.
+                      .dd_nav_divider.font_color_stage4
+                        %span 4
+                      .divider10
+                      %a.dd_notice{:href => "#"}
+                        %span.dd_n_cell.left.font_color_stage2
+                          %i.fa.fa-lg.fa-thumbs-up
+                        %span.dd_n_cell.right.font_color_stage2
+                          19:45 12.03.2015
+                          %span.bold Liza
+                          в теме
+                      %a.dd_notice{:href => "#"}
+                        %span.dd_n_cell.left
+                          %i.fa.fa-lg.fa-thumbs-down
+                        %span.dd_n_cell.right
+                          20:15 12.03.2015
+                          %span.bold Рахель
+                          в теме
+                      .dd_nav_divider.font_color_stage2
+                        %span 2
+                      .divider10
+                      %a.dd_notice{:href => "#"}
+                        %span.dd_n_cell.left.font_color_stage1
+                          %i.fa.fa-lg.fa-thumbs-down
+                        %span.dd_n_cell.right.font_color_stage1
+                          20:15 12.03.2015
+                          %span.bold Рахель
+                          в теме
+                      %a.dd_notice{:href => "#"}
+                        %span.dd_n_cell.left.font_color_stage1
+                          %i.fa.fa-lg.fa-thumbs-down
+                        %span.dd_n_cell.right.font_color_stage1
+                          20:15 12.03.2015
+                          %span.bold Рахель
+                          в теме
+                      %a.dd_notice{:href => "#"}
+                        %span.dd_n_cell.left.font_color_stage1
+                          %i.fa.fa-lg.fa-thumbs-down
+                        %span.dd_n_cell.right.font_color_stage1
+                          20:15 12.03.2015
+                          %span.bold Рахель
+                          в теме
+                      .dd_nav_divider.font_color_stage1
+                        %span 1
+                      .divider15
           .navbar-right.text-right.user_block.font_grey
-            %a.book_icon{:href => "#"}
+            %a.book_icon.open-popup-link{:href => "#popup-database"}
             %span.auth-divider |
             %span.has_dropwindow
               %button.btn_reset.font_lighter_grey.bold.drop_opener{"data-dd-opener" => "dd_1"}
@@ -154,122 +427,119 @@
                   .dd_top.light-grey
                     %i.fa.fa-close.fa-lg.dd_close{"data-dd-closer" => "dd_1"}
                   .dd_bottom
-                    .divider20
-                    .container
-                      .ps_cont
-                        .dd_xprt_notice
-                          %a.a_font_reset.collapsed{"aria-expanded" => "false", "data-toggle" => "collapse", :href => "#xprt_1"}
-                            .row
-                              .col-xs-9
-                                Представляем вам наш экспертный комитет:
-                              .col-xs-3.text-right
-                                %span.dd_n_date 1.12.2015
-                                %i.fa.fa-angle-right.font_grey.bold
-                        #xprt_1.dd_xprt_article.collapse
-                          .dd_expert
-                            .divider20
-                            .row
-                              .col-xs-3.text-center
-                                %img.img100.img-circle{:src => "http://placehold.it/100x100"}/
-                              .col-xs-9
-                                %h4 Лиза Школьник
-                                %p Эксперт в электронной коммерции, опыт с 1997 года. Имеет обширный опыт в интернет-маркетинге, включая создание и продвижение интернет-проектов, любые виды рекламы
-                            .divider20
-                          .dd_expert
-                            .divider20
-                            .row
-                              .col-xs-3.text-center
-                                %img.img100.img-circle{:src => "http://placehold.it/100x100"}/
-                              .col-xs-9
-                                %h4 Владимир Видро
-                                %p Эксперт в электронной коммерции, опыт с 1997 года. Имеет обширный опыт в интернет-маркетинге, включая создание и продвижение интернет-проектов, любые виды рекламы
-                            .divider20
-                          .dd_expert
-                            .divider20
-                            .row
-                              .col-xs-3.text-center
-                                %img.img100.img-circle{:src => "http://placehold.it/100x100"}/
-                              .col-xs-9
-                                %h4 Владимир Видро
-                                %p Эксперт в электронной коммерции, опыт с 1997 года. Имеет обширный опыт в интернет-маркетинге, включая создание и продвижение интернет-проектов, любые виды рекламы
-                            .divider20
-                        .dd_xprt_notice
-                          %a.a_font_reset.collapsed{"aria-expanded" => "false", "data-toggle" => "collapse", :href => "#xprt_2"}
-                            .row
-                              .col-xs-9
-                                Заголовок 1
-                              .col-xs-3.text-right
-                                %span.dd_n_date 1.12.2015
-                                %i.fa.fa-angle-right.font_grey.bold
-                        #xprt_2.dd_xprt_article.collapse
-                          %p
-                            На этой стадии вам предстоит выявить проблемы, связанные с ситуацией, описанной в базе знаний, и принять участие
-                            в обсуждении проблем, выявленных другими участниками. В нашей терминологии такие проблемы называются несовершенствами.
-                            В конце стадии вы проголосуете за те несовершенства, которые, на ваш взгляд, совершенно необходимо устранить для
-                            исправления текущей ситуации.
-                          %p
-                            На этой стадии вам предстоит выявить проблемы, связанные с ситуацией, описанной в базе знаний, и принять участие
-                            в обсуждении проблем, выявленных другими участниками. В нашей терминологии такие проблемы называются несовершенствами.
-                            В конце стадии вы проголосуете за те несовершенства, которые, на ваш взгляд, совершенно необходимо устранить для
-                            исправления текущей ситуации.
-                        .dd_xprt_notice
-                          %a.a_font_reset.collapsed{"aria-expanded" => "false", "data-toggle" => "collapse", :href => "#xprt_3"}
-                            .row
-                              .col-xs-9
-                                Заголовок 2
-                              .col-xs-3.text-right
-                                %span.dd_n_date 1.12.2015
-                                %i.fa.fa-angle-right.font_grey.bold
-                        #xprt_3.dd_xprt_article.collapse
-                          %p
-                            На этой стадии вам предстоит выявить проблемы, связанные с ситуацией, описанной в базе знаний, и принять участие
-                            в обсуждении проблем, выявленных другими участниками. В нашей терминологии такие проблемы называются несовершенствами.
-                            В конце стадии вы проголосуете за те несовершенства, которые, на ваш взгляд, совершенно необходимо устранить для
-                            исправления текущей ситуации.
-                          %p
-                            На этой стадии вам предстоит выявить проблемы, связанные с ситуацией, описанной в базе знаний, и принять участие
-                            в обсуждении проблем, выявленных другими участниками. В нашей терминологии такие проблемы называются несовершенствами.
-                            В конце стадии вы проголосуете за те несовершенства, которые, на ваш взгляд, совершенно необходимо устранить для
-                            исправления текущей ситуации.
-                        .dd_xprt_notice
-                          %a.a_font_reset.collapsed{"aria-expanded" => "false", "data-toggle" => "collapse", :href => "#xprt_4"}
-                            .row
-                              .col-xs-9
-                                Заголовок 3
-                              .col-xs-3.text-right
-                                %span.dd_n_date 1.12.2015
-                                %i.fa.fa-angle-right.font_grey.bold
-                        #xprt_4.dd_xprt_article.collapse
-                          %p
-                            На этой стадии вам предстоит выявить проблемы, связанные с ситуацией, описанной в базе знаний, и принять участие
-                            в обсуждении проблем, выявленных другими участниками. В нашей терминологии такие проблемы называются несовершенствами.
-                            В конце стадии вы проголосуете за те несовершенства, которые, на ваш взгляд, совершенно необходимо устранить для
-                            исправления текущей ситуации.
-                          %p
-                            На этой стадии вам предстоит выявить проблемы, связанные с ситуацией, описанной в базе знаний, и принять участие
-                            в обсуждении проблем, выявленных другими участниками. В нашей терминологии такие проблемы называются несовершенствами.
-                            В конце стадии вы проголосуете за те несовершенства, которые, на ваш взгляд, совершенно необходимо устранить для
-                            исправления текущей ситуации.
-                        .dd_xprt_notice
-                          %a.a_font_reset.collapsed{"aria-expanded" => "false", "data-toggle" => "collapse", :href => "#xprt_5"}
-                            .row
-                              .col-xs-9
-                                Заголовок 4
-                              .col-xs-3.text-right
-                                %span.dd_n_date 1.12.2015
-                                %i.fa.fa-angle-right.font_grey.bold
-                        #xprt_5.dd_xprt_article.collapse
-                          %p
-                            На этой стадии вам предстоит выявить проблемы, связанные с ситуацией, описанной в базе знаний, и принять участие
-                            в обсуждении проблем, выявленных другими участниками. В нашей терминологии такие проблемы называются несовершенствами.
-                            В конце стадии вы проголосуете за те несовершенства, которые, на ваш взгляд, совершенно необходимо устранить для
-                            исправления текущей ситуации.
-                          %p
-                            На этой стадии вам предстоит выявить проблемы, связанные с ситуацией, описанной в базе знаний, и принять участие
-                            в обсуждении проблем, выявленных другими участниками. В нашей терминологии такие проблемы называются несовершенствами.
-                            В конце стадии вы проголосуете за те несовершенства, которые, на ваш взгляд, совершенно необходимо устранить для
-                            исправления текущей ситуации.
-                    .divider20
+                    .ps_cont
+                      .dd_xprt_notice
+                        %a.a_font_reset.collapsed{"aria-expanded" => "false", "data-toggle" => "collapse", :href => "#xprt_1"}
+                          .row
+                            .col-xs-9
+                              Представляем вам наш экспертный комитет:
+                            .col-xs-3.text-right
+                              %span.dd_n_date 1.12.2015
+                              %i.fa.fa-angle-right.font_grey.bold
+                      #xprt_1.dd_xprt_article.collapse
+                        .dd_expert
+                          .divider20
+                          .row
+                            .col-xs-3.text-center
+                              %img.img100.img-circle{:src => "http://placehold.it/100x100"}/
+                            .col-xs-9
+                              %h4 Лиза Школьник
+                              %p Эксперт в электронной коммерции, опыт с 1997 года. Имеет обширный опыт в интернет-маркетинге, включая создание и продвижение интернет-проектов, любые виды рекламы
+                          .divider20
+                        .dd_expert
+                          .divider20
+                          .row
+                            .col-xs-3.text-center
+                              %img.img100.img-circle{:src => "http://placehold.it/100x100"}/
+                            .col-xs-9
+                              %h4 Владимир Видро
+                              %p Эксперт в электронной коммерции, опыт с 1997 года. Имеет обширный опыт в интернет-маркетинге, включая создание и продвижение интернет-проектов, любые виды рекламы
+                          .divider20
+                        .dd_expert
+                          .divider20
+                          .row
+                            .col-xs-3.text-center
+                              %img.img100.img-circle{:src => "http://placehold.it/100x100"}/
+                            .col-xs-9
+                              %h4 Владимир Видро
+                              %p Эксперт в электронной коммерции, опыт с 1997 года. Имеет обширный опыт в интернет-маркетинге, включая создание и продвижение интернет-проектов, любые виды рекламы
+                          .divider20
+                      .dd_xprt_notice
+                        %a.a_font_reset.collapsed{"aria-expanded" => "false", "data-toggle" => "collapse", :href => "#xprt_2"}
+                          .row
+                            .col-xs-9
+                              Заголовок 1
+                            .col-xs-3.text-right
+                              %span.dd_n_date 1.12.2015
+                              %i.fa.fa-angle-right.font_grey.bold
+                      #xprt_2.dd_xprt_article.collapse
+                        %p
+                          На этой стадии вам предстоит выявить проблемы, связанные с ситуацией, описанной в базе знаний, и принять участие
+                          в обсуждении проблем, выявленных другими участниками. В нашей терминологии такие проблемы называются несовершенствами.
+                          В конце стадии вы проголосуете за те несовершенства, которые, на ваш взгляд, совершенно необходимо устранить для
+                          исправления текущей ситуации.
+                        %p
+                          На этой стадии вам предстоит выявить проблемы, связанные с ситуацией, описанной в базе знаний, и принять участие
+                          в обсуждении проблем, выявленных другими участниками. В нашей терминологии такие проблемы называются несовершенствами.
+                          В конце стадии вы проголосуете за те несовершенства, которые, на ваш взгляд, совершенно необходимо устранить для
+                          исправления текущей ситуации.
+                      .dd_xprt_notice
+                        %a.a_font_reset.collapsed{"aria-expanded" => "false", "data-toggle" => "collapse", :href => "#xprt_3"}
+                          .row
+                            .col-xs-9
+                              Заголовок 2
+                            .col-xs-3.text-right
+                              %span.dd_n_date 1.12.2015
+                              %i.fa.fa-angle-right.font_grey.bold
+                      #xprt_3.dd_xprt_article.collapse
+                        %p
+                          На этой стадии вам предстоит выявить проблемы, связанные с ситуацией, описанной в базе знаний, и принять участие
+                          в обсуждении проблем, выявленных другими участниками. В нашей терминологии такие проблемы называются несовершенствами.
+                          В конце стадии вы проголосуете за те несовершенства, которые, на ваш взгляд, совершенно необходимо устранить для
+                          исправления текущей ситуации.
+                        %p
+                          На этой стадии вам предстоит выявить проблемы, связанные с ситуацией, описанной в базе знаний, и принять участие
+                          в обсуждении проблем, выявленных другими участниками. В нашей терминологии такие проблемы называются несовершенствами.
+                          В конце стадии вы проголосуете за те несовершенства, которые, на ваш взгляд, совершенно необходимо устранить для
+                          исправления текущей ситуации.
+                      .dd_xprt_notice
+                        %a.a_font_reset.collapsed{"aria-expanded" => "false", "data-toggle" => "collapse", :href => "#xprt_4"}
+                          .row
+                            .col-xs-9
+                              Заголовок 3
+                            .col-xs-3.text-right
+                              %span.dd_n_date 1.12.2015
+                              %i.fa.fa-angle-right.font_grey.bold
+                      #xprt_4.dd_xprt_article.collapse
+                        %p
+                          На этой стадии вам предстоит выявить проблемы, связанные с ситуацией, описанной в базе знаний, и принять участие
+                          в обсуждении проблем, выявленных другими участниками. В нашей терминологии такие проблемы называются несовершенствами.
+                          В конце стадии вы проголосуете за те несовершенства, которые, на ваш взгляд, совершенно необходимо устранить для
+                          исправления текущей ситуации.
+                        %p
+                          На этой стадии вам предстоит выявить проблемы, связанные с ситуацией, описанной в базе знаний, и принять участие
+                          в обсуждении проблем, выявленных другими участниками. В нашей терминологии такие проблемы называются несовершенствами.
+                          В конце стадии вы проголосуете за те несовершенства, которые, на ваш взгляд, совершенно необходимо устранить для
+                          исправления текущей ситуации.
+                      .dd_xprt_notice
+                        %a.a_font_reset.collapsed{"aria-expanded" => "false", "data-toggle" => "collapse", :href => "#xprt_5"}
+                          .row
+                            .col-xs-9
+                              Заголовок 4
+                            .col-xs-3.text-right
+                              %span.dd_n_date 1.12.2015
+                              %i.fa.fa-angle-right.font_grey.bold
+                      #xprt_5.dd_xprt_article.collapse
+                        %p
+                          На этой стадии вам предстоит выявить проблемы, связанные с ситуацией, описанной в базе знаний, и принять участие
+                          в обсуждении проблем, выявленных другими участниками. В нашей терминологии такие проблемы называются несовершенствами.
+                          В конце стадии вы проголосуете за те несовершенства, которые, на ваш взгляд, совершенно необходимо устранить для
+                          исправления текущей ситуации.
+                        %p
+                          На этой стадии вам предстоит выявить проблемы, связанные с ситуацией, описанной в базе знаний, и принять участие
+                          в обсуждении проблем, выявленных другими участниками. В нашей терминологии такие проблемы называются несовершенствами.
+                          В конце стадии вы проголосуете за те несовершенства, которые, на ваш взгляд, совершенно необходимо устранить для
+                          исправления текущей ситуации.
             %span.auth-divider |
             %a.font_grey.bold{:href => "#"}
               %i.fa.fa-globe.font_lighter_grey
@@ -288,10 +558,7 @@
           %h4.font_white Решение конфликта, возникшего из-за меда
         %button#tooltip_button_3.btn.btn-tooltip{:type => "button", :value => "Show"}
           %i.fa.fa-lightbulb-o
-          Открыть подсказки
-        %button#close_tooltip_button_3.btn.btn-tooltip-close{:type => "button", :value => "Destroy"}
-          %i.fa.fa-lightbulb-o
-          Закрыть подсказки
+          Подсказки
       .container
         .row
           .col-md-8.col_padding_right_3
@@ -343,9 +610,9 @@
               .col-md-5
                 .sort-block.pull-right
                   %span.sort-label Сортировать по новым:
-                  .sort-1
+                  .sort-1.sort_btn.sprite_com.sprite-item3_2_1
                     %span 25
-                  .sort-2
+                  .sort-2.sort_btn.sprite_doc.sprite-item3_1
                     %span 2
                   %a{:href => "cabinet-stage3.html"}
                     %button.btn.add-button
@@ -354,14 +621,13 @@
           .stage-post-block
             .row
               .col-md-6
-                .post
-                  .post-header.white
+                .post.post_type_3
+                  .post-header.white.open-popup{"data-placement" => "3", "data-target" => "1"}
                     .row
-                      .col-md-10.col-xs-10
+                      .col-md-12.col-xs-12
                         %h5.font_purple.bold Lorem Ipsum
-                      .col-md-2.col-xs-2
-                        %h5.time 20.12.2014
-                  .post-body
+                    %i.fa.fa-angle-right
+                  .post-body.ch_action{"data-for" => "post_ch1"}
                     .media
                       .media-left.text-center.gradient.post-poster
                         %img.img-circle.img50{:src => "img/ava-pyat.jpg"}/
@@ -369,25 +635,69 @@
                       .media-body.white-gray
                         .post-text
                           %p Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum
-                  .contenthover
-                    .arrow.open-popup{"data-placement" => "3", "data-target" => "1"}
-                      %i.fa.fa-angle-right
-                  #tooltip3_2.post-bottom.white.tooltip3_2{"data-placement" => "bottom", "data-toggle" => "tooltip", "data-trigger" => "none", :title => "В цветных квадратиках скрывается перечень несовершенств, связанных с данным нововведением. Нажмите на любой из них, чтобы увидеть полное название нововведения."}
+                        #post_ch1.post_cont_hover.post_tall.white
+                          .wrapper.ps_cont.half_wheel_speed
+                            .post_cont_inner
+                              .comment_preview
+                                %span.bold Liza:
+                                По поводу кнопки "всё". Она не очень интуитивна и красива.
+                              .comment_preview
+                                %span.bold Liza:
+                                Начальная - это та, что грузится со страницей. Но она по дате сортировки
+                              .comment_preview
+                                %span.bold irivertime:
+                                И обратная сортировка должна тоже как-то выделяться
+                              .comment_preview
+                                %span.bold Liza:
+                                По поводу кнопки "всё". Она не очень интуитивна и красива.
+                              .comment_preview
+                                %span.bold Liza:
+                                Начальная - это та, что грузится со страницей. Но она по дате сортировки
+                              .comment_preview
+                                %span.bold irivertime:
+                                И обратная сортировка должна тоже как-то выделяться
+                              .comment_preview
+                                %span.bold Liza:
+                                По поводу кнопки "всё". Она не очень интуитивна и красива.
+                              .comment_preview
+                                %span.bold Liza:
+                                Начальная - это та, что грузится со страницей. Но она по дате сортировки
+                              .comment_preview
+                                %span.bold irivertime:
+                                И обратная сортировка должна тоже как-то выделяться
+                  #tooltip3_2.post-bottom.white.tooltip3{"data-placement" => "bottom", "data-toggle" => "tooltip", "data-trigger" => "manual", :title => "В цветных квадратиках скрывается перечень несовершенств, связанных с данным нововведением. Нажмите на любой из них, чтобы увидеть полное название нововведения."}
                     .row
-                      .col-md-9.col_padding_right_3
+                      .col-md-2.col_padding_right_3
                         %small.pull-left{:style => "margin-right: 3px;"} Несовершенства
+                      .col-md-7.col_padding_right_3.themes_cont
                         #stripe1.post-theme
-                          %a#stripe1.tag-stripes.dark-blue.active{:href => "#"}
-                            %span.tags Слишком низкие потолки
-                          %a#stripe1.tag-stripes.blue-green{:href => "#"}
-                            %span.tags Четвероногим нечем заинтересовать пчел
-                          %a#stripe1.tag-stripes.blue-green2{:href => "#"}
-                            %span.tags Активное противостояние четвероногих и пчел
-                          %a#stripe1.tag-stripes.blue-green3{:href => "#"}
-                            %span.tags Рядом с дубом нет цветочных полян
+                          %span.tag-stripes.color_me.active{"data-me-action" => "background-color", "data-me-color" => "1", "data-me-type" => "imperf"}
+                            %span.tags Слишком низкие
+                          %span.tag-stripes.color_me{"data-me-action" => "background-color", "data-me-color" => "3", "data-me-type" => "imperf", :href => "#"}
+                            %span.tags Четвероногим нечем
+                          %span.tag-stripes.color_me{"data-me-action" => "background-color", "data-me-color" => "6", "data-me-type" => "imperf", :href => "#"}
+                            %span.tags Активное противостояние
+                          %span.tag-stripes.color_me{"data-me-action" => "background-color", "data-me-color" => "15", "data-me-type" => "imperf", :href => "#"}
+                            %span.tags Рядом с дубом нет
+                          %span.tag-stripes.color_me{"data-me-action" => "background-color", "data-me-color" => "15", "data-me-type" => "imperf", :href => "#"}
+                            %span.tags Рядом с дубом нет
+                          %span.tag-stripes.color_me{"data-me-action" => "background-color", "data-me-color" => "15", "data-me-type" => "imperf", :href => "#"}
+                            %span.tags Рядом с дубом нет
+                          %span.tag-stripes.color_me{"data-me-action" => "background-color", "data-me-color" => "15", "data-me-type" => "imperf", :href => "#"}
+                            %span.tags Рядом с дубом нет
+                          %span.tag-stripes.color_me{"data-me-action" => "background-color", "data-me-color" => "15", "data-me-type" => "imperf", :href => "#"}
+                            %span.tags Рядом с дубом нет
+                          %span.tag-stripes.color_me{"data-me-action" => "background-color", "data-me-color" => "15", "data-me-type" => "imperf", :href => "#"}
+                            %span.tags Рядом с дубом нет
+                          %span.tag-stripes.color_me{"data-me-action" => "background-color", "data-me-color" => "15", "data-me-type" => "imperf", :href => "#"}
+                            %span.tags Рядом с дубом нет
+                          %span.tag-stripes.color_me{"data-me-action" => "background-color", "data-me-color" => "15", "data-me-type" => "imperf", :href => "#"}
+                            %span.tags Рядом с дубом нет
+                          %span.tag-stripes.color_me{"data-me-action" => "background-color", "data-me-color" => "15", "data-me-type" => "imperf", :href => "#"}
+                            %span.tags Рядом с дубом нет
                       .col-md-3.col_padding_left_3
                         .text-right.small_icons
-                          %a.popup2.a_font_reset
+                          %span.popup2.comments_icon{"data-for" => "post_ch1"}
                             %small 5
                             %i.fa.fa-comment-o
                           %span.popup2
@@ -399,14 +709,13 @@
                           %span.popup2
                             %i.fa.fa-exclamation-triangle.font_lighter_grey
               .col-md-6
-                .post
-                  .post-header.white
+                .post.post_type_3.themes_cont
+                  .post-header.white.open-popup{"data-placement" => "3", "data-target" => "1"}
                     .row
-                      .col-md-10.col-xs-10
+                      .col-md-12.col-xs-12
                         %h5.font_purple.bold Lorem Ipsum
-                      .col-md-2.col-xs-2
-                        %h5.time 20.12.2014
-                  .post-body
+                    %i.fa.fa-angle-right
+                  .post-body.ch_action{"data-for" => "post_ch2"}
                     .media
                       .media-left.text-center.gradient.post-poster
                         %img.img-circle.img50{:src => "img/ava-rabb.jpg"}/
@@ -414,23 +723,69 @@
                       .media-body.white-gray
                         .post-text
                           %p Четвероногим нечем заинтересовать пчел
-                  .contenthover
-                    .arrow.open-popup{"data-placement" => "3", "data-target" => "1"}
-                      %i.fa.fa-angle-right
+                        #post_ch2.post_cont_hover.post_tall.white
+                          .wrapper.ps_cont.half_wheel_speed
+                            .post_cont_inner
+                              .comment_preview
+                                %span.bold Liza:
+                                По поводу кнопки "всё". Она не очень интуитивна и красива.
+                              .comment_preview
+                                %span.bold Liza:
+                                Начальная - это та, что грузится со страницей. Но она по дате сортировки
+                              .comment_preview
+                                %span.bold irivertime:
+                                И обратная сортировка должна тоже как-то выделяться
+                              .comment_preview
+                                %span.bold Liza:
+                                По поводу кнопки "всё". Она не очень интуитивна и красива.
+                              .comment_preview
+                                %span.bold Liza:
+                                Начальная - это та, что грузится со страницей. Но она по дате сортировки
+                              .comment_preview
+                                %span.bold irivertime:
+                                И обратная сортировка должна тоже как-то выделяться
+                              .comment_preview
+                                %span.bold Liza:
+                                По поводу кнопки "всё". Она не очень интуитивна и красива.
+                              .comment_preview
+                                %span.bold Liza:
+                                Начальная - это та, что грузится со страницей. Но она по дате сортировки
+                              .comment_preview
+                                %span.bold irivertime:
+                                И обратная сортировка должна тоже как-то выделяться
                   .post-bottom.white
                     .row
-                      .col-md-9.col_padding_right_3
-                        %small.pull-left{:style => "margin-right: 3px;"} Идеи
+                      .col-md-2.col_padding_right_3
+                        %small.pull-left{:style => "margin-right: 3px;"} Несовершенства
+                      .col-md-7.col_padding_right_3.themes_cont
                         #stripe2.post-theme
-                          %a#stripe2.tag-stripes.blue-green2.active{:href => "#"}
-                            %span.tags Взаимное недоверие четвероногих и пчёл
-                          %a#stripe2.tag-stripes.blue-green3{:href => "#"}
-                            %span.tags Четвероногим нечем заинтересовать пчел
-                          %a#stripe2.tag-stripes.blue-green{:href => "#"}
-                            %span.tags Активное противостояние четвероногих и пчел
+                          %span.tag-stripes.color_me.active{"data-me-action" => "background-color", "data-me-color" => "1", "data-me-type" => "imperf"}
+                            %span.tags Слишком низкие
+                          %span.tag-stripes.color_me{"data-me-action" => "background-color", "data-me-color" => "3", "data-me-type" => "imperf", :href => "#"}
+                            %span.tags Четвероногим нечем
+                          %span.tag-stripes.color_me{"data-me-action" => "background-color", "data-me-color" => "6", "data-me-type" => "imperf", :href => "#"}
+                            %span.tags Активное противостояние
+                          %span.tag-stripes.color_me{"data-me-action" => "background-color", "data-me-color" => "15", "data-me-type" => "imperf", :href => "#"}
+                            %span.tags Рядом с дубом нет
+                          %span.tag-stripes.color_me{"data-me-action" => "background-color", "data-me-color" => "15", "data-me-type" => "imperf", :href => "#"}
+                            %span.tags Рядом с дубом нет
+                          %span.tag-stripes.color_me{"data-me-action" => "background-color", "data-me-color" => "15", "data-me-type" => "imperf", :href => "#"}
+                            %span.tags Рядом с дубом нет
+                          %span.tag-stripes.color_me{"data-me-action" => "background-color", "data-me-color" => "15", "data-me-type" => "imperf", :href => "#"}
+                            %span.tags Рядом с дубом нет
+                          %span.tag-stripes.color_me{"data-me-action" => "background-color", "data-me-color" => "15", "data-me-type" => "imperf", :href => "#"}
+                            %span.tags Рядом с дубом нет
+                          %span.tag-stripes.color_me{"data-me-action" => "background-color", "data-me-color" => "15", "data-me-type" => "imperf", :href => "#"}
+                            %span.tags Рядом с дубом нет
+                          %span.tag-stripes.color_me{"data-me-action" => "background-color", "data-me-color" => "15", "data-me-type" => "imperf", :href => "#"}
+                            %span.tags Рядом с дубом нет
+                          %span.tag-stripes.color_me{"data-me-action" => "background-color", "data-me-color" => "15", "data-me-type" => "imperf", :href => "#"}
+                            %span.tags Рядом с дубом нет
+                          %span.tag-stripes.color_me{"data-me-action" => "background-color", "data-me-color" => "15", "data-me-type" => "imperf", :href => "#"}
+                            %span.tags Рядом с дубом нет
                       .col-md-3.col_padding_left_3
                         .text-right.small_icons
-                          %a.popup2.a_font_reset
+                          %span.popup2.comments_icon{"data-for" => "post_ch2"}
                             %small 5
                             %i.fa.fa-comment-o
                           %span.popup2
@@ -481,7 +836,7 @@
                     .innov-tags-tag.blue-green2.popup_tooltip.tooltip3_tag_3 Активное противостояние четвероногих и пчел
                     .innov-tags-tag.blue-green3.popup_tooltip.tooltip3_tag_4 Рядом с дубом нет цветочных полян
                     .innov-tags-tag.light-green.popup_tooltip.tooltip3_tag_5 Пчелы летают слишком медленно
-            .container
+            .container.modal_content
               .row
                 .col-md-6.com_dashed_border.right.popup_collapsable_col.collapse.in
                   %button.expand_button.remove_col.btn_reset{"data-col" => "6", "data-target" => ".popup_collapsable_col", "data-toggle" => "collapse", :type => "button"}
@@ -519,7 +874,7 @@
                     %p
                       %strong> Описание:
                       lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum
-                .col-md-6.comment_col.popup_expandable_col
+                .col-md-6.comment_col.popup_expandable_col.ps_cont
                   %button.expand_button.add_col.btn_reset.theme_font_color.bold{"data-col" => "6", "data-target" => ".popup_collapsable_col", "data-toggle" => "collapse", :type => "button"} открыть описание проекта
                   .divider15
                   #myCarousel.carousel.slide{"data-ride" => "carousel"}
@@ -741,17 +1096,16 @@
                     .container.padding30
                       .row
                         .col-sm-4.vote_item_cont.item_expandable.h_2
-                          .vote_item
+                          .vote_item.themes_cont
                             .heading_cont.blackonwhite
                               %h6 Lorem ipsum
                             %p Lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum
                             #stripe-p-1.post-theme
-                              %small.pull-left Несовершенства
-                              %a#stripe-p-1.tag-stripes.dark-blue.active{:href => "#"}
+                              %span.tag-stripes.dark-blue.active
                                 %span.tags Слишком низкие потолки
-                              %a#stripe-p-1.tag-stripes.blue-green{:href => "#"}
+                              %span.tag-stripes.blue-green
                                 %span.tags Четвероногим нечем заинтересовать пчел
-                              %a#stripe-p-1.tag-stripes.blue-green2{:href => "#"}
+                              %span.tag-stripes.blue-green2
                                 %span.tags Активное противостояние четвероногих и пчел
                             .divider15
                             .vote_controls.text-center
@@ -761,17 +1115,16 @@
                                 %i.fa.fa-angle-right.font_white
                               .divider15
                         .col-sm-4.vote_item_cont.item_expandable.h_2
-                          .vote_item
+                          .vote_item.themes_cont
                             .heading_cont.blackonwhite
                               %h6 Lorem ipsum
                             %p Lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum
-                            #stripe-p-1.post-theme
-                              %small.pull-left Несовершенства
-                              %a#stripe-p-1.tag-stripes.dark-blue.active{:href => "#"}
+                            #stripe-p-2.post-theme
+                              %span.tag-stripes.dark-blue.active
                                 %span.tags Слишком низкие потолки
-                              %a#stripe-p-1.tag-stripes.blue-green{:href => "#"}
+                              %span.tag-stripes.blue-green
                                 %span.tags Четвероногим нечем заинтересовать пчел
-                              %a#stripe-p-1.tag-stripes.blue-green2{:href => "#"}
+                              %span.tag-stripes.blue-green2
                                 %span.tags Активное противостояние четвероногих и пчел
                             .divider15
                             .vote_controls.text-center
@@ -781,17 +1134,16 @@
                                 %i.fa.fa-angle-right.font_white
                               .divider15
                         .col-sm-4.vote_item_cont.item_expandable.h_2
-                          .vote_item
+                          .vote_item.themes_cont
                             .heading_cont.blackonwhite
                               %h6 Lorem ipsum
                             %p Lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum
-                            #stripe-p-1.post-theme
-                              %small.pull-left Несовершенства
-                              %a#stripe-p-1.tag-stripes.dark-blue.active{:href => "#"}
+                            #stripe-p-3.post-theme
+                              %span.tag-stripes.dark-blue.active
                                 %span.tags Слишком низкие потолки
-                              %a#stripe-p-1.tag-stripes.blue-green{:href => "#"}
+                              %span.tag-stripes.blue-green
                                 %span.tags Четвероногим нечем заинтересовать пчел
-                              %a#stripe-p-1.tag-stripes.blue-green2{:href => "#"}
+                              %span.tag-stripes.blue-green2
                                 %span.tags Активное противостояние четвероногих и пчел
                             .divider15
                             .vote_controls.text-center
@@ -801,17 +1153,16 @@
                                 %i.fa.fa-angle-right.font_white
                               .divider15
                         .col-sm-4.vote_item_cont.item_expandable.h_2
-                          .vote_item
+                          .vote_item.themes_cont
                             .heading_cont.blackonwhite
                               %h6 Lorem ipsum
                             %p Lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum
-                            #stripe-p-1.post-theme
-                              %small.pull-left Несовершенства
-                              %a#stripe-p-1.tag-stripes.dark-blue.active{:href => "#"}
+                            #stripe-p-4.post-theme
+                              %span.tag-stripes.dark-blue.active
                                 %span.tags Слишком низкие потолки
-                              %a#stripe-p-1.tag-stripes.blue-green{:href => "#"}
+                              %span.tag-stripes.blue-green
                                 %span.tags Четвероногим нечем заинтересовать пчел
-                              %a#stripe-p-1.tag-stripes.blue-green2{:href => "#"}
+                              %span.tag-stripes.blue-green2
                                 %span.tags Активное противостояние четвероногих и пчел
                             .divider15
                             .vote_controls.text-center
@@ -830,6 +1181,122 @@
                       .row
                       .divider50
                 .divider35
+      #popup-database.popup-window.popup_database.popup-w770.mfp-hide
+        .popup.popup_rounded
+          .row
+            .col-md-12
+              #myCarousel.carousel.base_carousel.slide{"data-ride" => "carousel"}
+                / Indicators
+                %ul.list-unstyled.list-inline.carousel-indicators.text-center
+                  %li.color-theme-1.myCarousel-target.active{"data-slide-to" => "0", "data-target" => "#myCarousel"}
+                    Аспект 1
+                  %li.color-theme-2.myCarousel-target{"data-slide-to" => "1", "data-target" => "#myCarousel"}
+                    Аспект 2
+                  %li.color-theme-3.myCarousel-target{"data-slide-to" => "2", "data-target" => "#myCarousel"}
+                    Аспект 3
+                  %li.color-theme-4.myCarousel-target{"data-slide-to" => "3", "data-target" => "#myCarousel"}
+                    Аспект 4
+                  %li.color-theme-5.myCarousel-target{"data-slide-to" => "4", "data-target" => "#myCarousel"}
+                    Аспект 5
+                  %li.color-theme-6.myCarousel-target{"data-slide-to" => "5", "data-target" => "#myCarousel"}
+                    Аспект 6
+                  %li.color-theme-7.myCarousel-target{"data-slide-to" => "6", "data-target" => "#myCarousel"}
+                    Аспект 7
+                  %li.color-theme-8.myCarousel-target{"data-slide-to" => "7", "data-target" => "#myCarousel"}
+                    Аспект 8
+                  %li.color-theme-9.myCarousel-target{"data-slide-to" => "8", "data-target" => "#myCarousel"}
+                    Аспект 9
+                / Wrapper for slides
+                .carousel-inner{:role => "listbox"}
+                  .item.active.color-theme-1
+                    .row
+                      .col-md-12
+                        .container
+                          .row
+                            .col-md-12.col-sm-12
+                              %ul.nav.nav-tabs.aspects_tabs{:role => "tablist"}
+                                %li.active{:role => "presentation"}
+                                  %a{"aria-controls" => "Статья 1", "data-toggle" => "tab", :href => "#article1-1", :role => "tab"} Статья 1
+                                %li{:role => "presentation"}
+                                  %a{"aria-controls" => "Статья 2", "data-toggle" => "tab", :href => "#article1-2", :role => "tab"} Статья 2
+                                %li{:role => "presentation"}
+                                  %a{"aria-controls" => "Статья 3", "data-toggle" => "tab", :href => "#article1-3", :role => "tab"} Статья 3
+                          .row
+                            .col-md-12.col-sm-12
+                              .aspect-main-block
+                                .tab-content
+                                  #article1-1.tab-pane.active.fade.in{:role => "tabpanel"}
+                                    %h6.aspect-main-block-heading Ситуация с пчелами
+                                    %p.aspect-main-block-text
+                                      Пчелы недовольны тем, что на их мед
+                                      постоянно покушаются Винни-Пух и его друзья. Желая разрешить
+                                      конфликт мирным способом, они обратились к мудрой Сове.
+                                    %img{:src => "img/aspect-pic1.jpg"}/
+                                  #article1-2.tab-pane.fade{:role => "tabpanel"}
+                                    %p.aspect-main-block-text
+                                      Пчелы недовольны тем, что на их мед
+                                      постоянно покушаются Винни-Пух и его друзья. Желая разрешить
+                                      конфликт мирным способом, они обратились к мудрой Сове.
+                                    %img{:src => "img/aspect-pic1.jpg"}/
+                                  #article1-3.tab-pane.fade{:role => "tabpanel"}
+                                    %img{:src => "img/aspect-pic1.jpg"}/
+                  .item.color-theme-2
+                    .row
+                      .col-md-12.col-sm-12
+                        .aspect-main-block
+                          %p.aspect-main-block-text
+                            В популярной сказке Винни-Пух и его
+                            друзья жаждали меда, но пчелы не давали забрать у себя плоды своего
+                            труда. Чтобы раздобыть мед, Винни с компанией пытался обманом
+                            пробраться в улей на Высоком дубе — не вышло, сутками подкарауливал
+                            момент, когда все пчелы вылетят из улья, — не дождался; пытался
+                            втянуть пчел в переговоры, предлагая грибы и ягоды в обмен на мед, —
+                            был отвергнут.
+                            Всего в истории участвовало трое четвероногих: сам Винни-Пух и его
+                            друзья Пятачок и Кролик.
+                          %img{:src => "img/aspect-pic2.jpg"}/
+                  .item.color-theme-3
+                    .row
+                      .col-md-12.col-sm-12
+                        .aspect-main-block
+                          %h6.aspect-main-block-heading
+                            Трудности, связанные с
+                            расположением конфликтующих сторон
+                          %p.aspect-main-block-text
+                            Как видно на карте, Винни-Пух с
+                            друзьями живут достаточно близко к Высокому дубу.
+                            Это часто обостряет конфликт, потому что пчелы не могут нормально
+                            собирать мед,
+                            постоянно беспокоясь, что их ограбят.
+                          %img{:src => "img/aspect-pic3.jpg"}/
+                  .item.color-theme-4
+                    .row
+                      .col-md-12.col-sm-12
+                        .aspect-main-block
+                  .item.color-theme-5
+                    .row
+                      .col-md-12.col-sm-12
+                        .aspect-main-block
+                  .item.color-theme-6
+                    .row
+                      .col-md-12.col-sm-12
+                        .aspect-main-block
+                  .item.color-theme-7
+                    .row
+                      .col-md-12.col-sm-12
+                        .aspect-main-block
+                  .item.color-theme-8
+                    .row
+                      .col-md-12.col-sm-12
+                        .aspect-main-block
+                  .item.color-theme-9
+                    .row
+                      .col-md-12.col-sm-12
+                        .aspect-main-block
+                %a.myCarousel-control.left{"data-slide" => "prev", :href => "#myCarousel", :role => "button"}
+                  %i.fa.fa-3x.fa-caret-left
+                %a.myCarousel-control.right{"data-slide" => "next", :href => "#myCarousel", :role => "button"}
+                  %i.fa.fa-3x.fa-caret-right
     / Outer Ends
     / Javascript files
     / jQuery

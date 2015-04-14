@@ -5,7 +5,7 @@
         #myCarousel.carousel.base_carousel.slide{"data-ride" => "carousel"}
           %ul.list-unstyled.list-inline.carousel-indicators.text-center
             - @aspects.each_with_index do |asp, index|
-              %li.myCarousel-target.active{class: "#{'active' if index == 0}", style: "border-top-color:#{asp.color};", "data-slide-to" => "#{index}", "data-target" => "#myCarousel"}
+              %li.myCarousel-target{class: "#{'active' if index == 0}", style: "border-top-color:#{asp.color};", "data-slide-to" => "#{index}", "data-target" => "#myCarousel"}
                 = asp.content
           .carousel-inner{:role => "listbox"}
             - @aspects.each_with_index do |asp, index|

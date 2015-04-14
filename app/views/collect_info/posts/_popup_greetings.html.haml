@@ -1,17 +1,19 @@
-#popup-greetings-text.popup-window.popup-w710.mfp-hide
+#popup-greetings-text.popup-window.popup-w710.mfp-hide.stage1_theme
   .popup.popup_rounded.popup_medal
     .medal-block.gold-medal
     .row
       .col-md-8.col-md-offset-3
         %p.font_mid_grey.bold
-          Отлично, начало положено!
+          Итак, начало положено!
         .divider50
         %p.font_mid_grey.bold
-          Вы ознакомились со всеми аспектами базы знаний.
-          %br/
-          Теперь вы разбираетесь в предмете обсуждения и готовы к полноценному участию в процедуре.
-          %br/
-          Ждём вас на следующей стадии!
+          Вы изучили базу знаний и готовы принять участие в процедуре. Теперь вы можете обсудить аспекты, добавленные участниками, или предложить собственный аспект для общего обсуждения.
         .divider50
         %p
-          %button.btn.red.close_magnific.font_white.pull-right Закрыть окно
+          %a.btn.add-button{:href => "#"}
+            %span
+              %i.fa.fa-comment-o
+            Просмотреть аспекты
+          = link_to project_user_path(@project, current_user), class: "btn add-button" do
+            %span +
+            Добавить аспект

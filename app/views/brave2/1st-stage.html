@@ -19,11 +19,12 @@
     <!-- Custom CSS. Type your CSS code in custom.css file -->
     <link href="css/custom.css" rel="stylesheet">
     <link href="css/custom-post.css" rel="stylesheet">
+    <link href="css/colors.css" rel="stylesheet">
 
 </head>
 
-<body>
-<div class="outer stage1_theme">
+<body class="stage1_theme">
+<div class="outer">
 
     <!-- Top bar starts -->
     <header class="navbar top_bar">
@@ -141,7 +142,7 @@
     </ul>
 
     <div class="navbar-right text-right user_block font_grey">
-        <a href="#" class="book_icon">
+        <a href="#popup-database" class="book_icon open-popup-link">
         </a>
         <span class="auth-divider"> |</span>
                     <span class="has_dropwindow">
@@ -342,8 +343,7 @@
         <div class="container">
             <h4 class="font_white">Решение конфликта, возникшего из-за меда</h4>
         </div>
-        <button type="button" class="btn btn-tooltip" id="tooltip_button_1" value="Show"><i class="fa fa-lightbulb-o"></i> Открыть подсказки</button>
-        <button type="button" class="btn btn-tooltip-close" id="close_tooltip_button_1" value="Destroy"><i class="fa fa-lightbulb-o"></i> Закрыть подсказки</button>
+        <button type="button" class="btn btn-tooltip" id="tooltip_button_1" value="Show"><i class="fa fa-lightbulb-o"></i> Подсказки</button>
     </div>
 
 
@@ -351,7 +351,7 @@
         <div class="row">
 
             <div class="col-md-8 col_padding_right_3">
-                <div class="border_grey rounded_3 stages_block tooltip1_1" data-toggle="tooltip" id="tooltip1_1" data-trigger="none" data-placement="bottom" title="В нашей процедуре стадии открываются поэтапно. Следующая стадия откроется, когда большинство участников ответит на все вопросы.">
+                <div class="border_grey rounded_3 stages_block tooltip1" data-toggle="tooltip" id="tooltip1_1" data-trigger="manual" data-placement="bottom" title="В нашей процедуре стадии открываются поэтапно. Следующая стадия откроется, когда большинство участников ответит на все вопросы.">
                     <div class="btn-toolbar" role="toolbar">
 
                         <div class="btn-group" role="group">
@@ -373,8 +373,8 @@
             </div>
 
             <div class="col-md-4 col_padding_left_3">
-                <a href="#popup-explanation-1st" class="open_welcome_popup"><div class="border_grey rounded_3 help_icon tooltip1_2" data-toggle="tooltip" id="tooltip1_2" data-trigger="none" data-placement="bottom" title="Вы всегда сможете вызвать помощь по стадии, нажав сюда"></div></a>
-                <div class="border_grey rounded_3 progress_block tooltip1_3" data-toggle="tooltip" id="tooltip1_3" data-trigger="none" data-placement="bottom" title="Здесь будут отображаться ваши успехи по работе с аспектами. Другие участники тоже не сидят сложа руки!">
+                <a href="#popup-explanation-1st" class="open_welcome_popup"><div class="border_grey rounded_3 help_icon tooltip1" data-toggle="tooltip" id="tooltip1_2" data-trigger="manual" data-placement="bottom" title="Вы всегда сможете вызвать помощь по стадии, нажав сюда"></div></a>
+                <div class="border_grey rounded_3 progress_block tooltip1" data-toggle="tooltip" id="tooltip1_3" data-trigger="manual" data-placement="bottom" title="Здесь будут отображаться ваши успехи по работе с аспектами. Другие участники тоже не сидят сложа руки!">
                     <div class="container">
                         <div class="row">
                             <div class="col-xs-6 col-md-6 col_padding_right_3">
@@ -463,7 +463,7 @@
                                     <div class="slider-item active">
                                         <div class="c1-item">
                                             <a href="#tab-one" data-toggle="tab">
-                                                <span class="c1-item-inner color-theme-1">
+                                                <span class="c1-item-inner color_me" data-me-type = "aspect" data-me-action = 'border-top-color' data-me-color = '0'>
                                                     Мед и пчелы
                                                 </span>
                                             </a>
@@ -474,7 +474,7 @@
                                     <div class="slider-item">
                                         <div class="c1-item">
                                             <a href="#tab-two" data-toggle="tab">
-                                                                        <span class="c1-item-inner color-theme-2">
+                                                                        <span class="c1-item-inner color_me" data-me-type = "aspect" data-me-action = 'border-top-color' data-me-color = '1'>
                                                                             Мед и четвероногие
                                                                         </span>
                                             </a>
@@ -485,7 +485,7 @@
                                     <div class="slider-item">
                                         <div class="c1-item">
                                             <a href="#tab-three" data-toggle="tab">
-                                                                        <span class="c1-item-inner color-theme-3">
+                                                                        <span class="c1-item-inner color_me" data-me-type = "aspect" data-me-action = 'border-top-color' data-me-color = '2'>
                                                                             Взаимоотношения четвероногих и пчел
                                                                         </span>
                                             </a>
@@ -496,7 +496,7 @@
                                     <div class="slider-item">
                                         <div class="c1-item">
                                             <a href="#tab-four" data-toggle="tab">
-                                                                        <span class="c1-item-inner color-theme-4">
+                                                                        <span class="c1-item-inner color_me" data-me-type = "aspect" data-me-action = 'border-top-color' data-me-color = '3'>
                                                                             Пчелы и цветочные поляны
                                                                         </span>
                                             </a>
@@ -507,7 +507,7 @@
                                     <div class="slider-item">
                                         <div class="c1-item">
                                             <a href="#tab-five" data-toggle="tab">
-                                                                        <span class="c1-item-inner color-theme-5">
+                                                                        <span class="c1-item-inner color_me" data-me-type = "aspect" data-me-action = 'border-top-color' data-me-color = '4'>
                                                                             Четвероногие и сахар
                                                                         </span>
                                             </a>
@@ -518,7 +518,7 @@
                                     <div class="slider-item">
                                         <div class="c1-item">
                                             <a href="#tab-six" data-toggle="tab">
-                                                                        <span class="c1-item-inner color-theme-6">
+                                                                        <span class="c1-item-inner color_me" data-me-type = "aspect" data-me-action = 'border-top-color' data-me-color = '5'>
                                                                             Пчелы, четвероногие и зимняя спячка
                                                                         </span>
                                             </a>
@@ -529,7 +529,7 @@
                                     <div class="slider-item">
                                         <div class="c1-item">
                                             <a href="#tab-seven" data-toggle="tab">
-                                                                        <span class="c1-item-inner color-theme-7">
+                                                                        <span class="c1-item-inner color_me" data-me-type = "aspect" data-me-action = 'border-top-color' data-me-color = '6'>
                                                                             Винни-Пух и все все все
                                                                         </span>
                                             </a>
@@ -540,7 +540,7 @@
                                     <div class="slider-item">
                                         <div class="c1-item">
                                             <a href="#tab-eight" data-toggle="tab">
-                                                                        <span class="c1-item-inner color-theme-8">
+                                                                        <span class="c1-item-inner color_me" data-me-type = "aspect" data-me-action = 'border-top-color' data-me-color = '7'>
                                                                             Эффективность пчел в сборе меда
                                                                         </span>
                                             </a>
@@ -551,7 +551,7 @@
                                     <div class="slider-item">
                                         <div class="c1-item">
                                             <a href="#tab-nine" data-toggle="tab">
-                                                                        <span class="c1-item-inner color-theme-9">
+                                                                        <span class="c1-item-inner color_me" data-me-type = "aspect" data-me-action = 'border-top-color' data-me-color = '8'>
                                                                             Пчелы и лес
                                                                         </span>
                                             </a>
@@ -564,21 +564,21 @@
 
                     <!-- Tab panes -->
                         <div class="tab-content">
-                            <div class="tab-pane main-pane color-theme-1 active fade in" id="tab-one">
+                            <div class="tab-pane main-pane active fade in" id="tab-one">
                                 <div class="container">
                                     <div class="row">
                                         <div class="col-md-8 col-sm-8 min-col-right-padd">
                                             <ul class="nav nav-tabs aspects_tabs" role="tablist">
-                                                <li role="presentation" class="active"><a href="#article1" aria-controls="Статья 1" role="tab" data-toggle="tab">Статья 1</a></li>
-                                                <li role="presentation"><a href="#article2" aria-controls="Статья 2" role="tab" data-toggle="tab">Статья 2</a></li>
-                                                <li role="presentation"><a href="#article3" aria-controls="Статья 3" role="tab" data-toggle="tab">Статья 3</a></li>
+                                                <li role="presentation" class="active"><a href="#article1" aria-controls="Статья 1" role="tab" data-toggle="tab" class="aspect_color0_background">Статья 1</a></li>
+                                                <li role="presentation"><a href="#article2" aria-controls="Статья 2" role="tab" data-toggle="tab" class="aspect_color0_background">Статья 2</a></li>
+                                                <li role="presentation"><a href="#article3" aria-controls="Статья 3" role="tab" data-toggle="tab" class="aspect_color0_background">Статья 3</a></li>
                                             </ul>
                                         </div>
                                     </div>
                                     <div class="row">
 
                                         <div class="col-md-8 col-sm-8 min-col-right-padd">
-                                            <div class="top-color-border-block aspect-main-block">
+                                            <div class="aspect-main-block color_me" data-me-type = "aspect" data-me-action = 'border-top-color' data-me-color = '0'>
                                                 <div class="tab-content">
                                                     <div role="tabpanel" class="tab-pane active fade in" id="article1">
                                                         <h6 class="aspect-main-block-heading">Ситуация с пчелами</h6>
@@ -609,7 +609,7 @@
 
                                         <div class="col-md-4 col-sm-4 min-col-left-padd">
                                             <div id="questionsCarousel1" class="carousel slide questionsCarousel" data-ride="carousel">
-                                                <div class="aspect-questions-block">
+                                                <div class="aspect-questions-block color_me" data-me-type = "aspect" data-me-action = 'border-top-color' data-me-color = '0'>
                                                     <h4 class="block-with-left-icon pull-left">
                                                         <i class="left-icon fa fa-2x fa-comments"></i>
                                                         Вопросы по теме
@@ -660,8 +660,8 @@
                                                                 </div>
                                                                 <div class="clearfix"></div>
                                                                 <div class="form-group bottom-buttons">
-                                                                    <a class="btn btn-outline notice-button">Подсказка</a>
-                                                                    <button class="btn answer-button questionCarousel-target" data-target="#questionsCarousel1" data-slide-to="1">Ответить</button>
+                                                                    <a class="btn btn-outline notice-button color_me" data-me-type = "aspect" data-me-action = 'border-color' data-me-color = '0'>Подсказка</a>
+                                                                    <button class="btn answer-button questionCarousel-target color_me" data-me-type = "aspect" data-me-action = 'background-color' data-me-color = '0' data-target="#questionsCarousel1" data-slide-to="1">Ответить</button>
                                                                 </div>
                                                             </form>
                                                         </div>
@@ -697,8 +697,8 @@
                                                                 </div>
                                                                 <div class="clearfix"></div>
                                                                 <div class="form-group bottom-buttons">
-                                                                    <a class="btn btn-outline notice-button">Подсказка</a>
-                                                                    <button class="btn answer-button">Ответить</button>
+                                                                    <a class="btn btn-outline notice-button color_me" data-me-type = "aspect" data-me-action = 'border-color' data-me-color = '0'>Подсказка</a>
+                                                                    <button class="btn answer-button color_me" data-me-type = "aspect" data-me-action = 'background-color' data-me-color = '0'>Ответить</button>
                                                                 </div>
                                                             </form>
                                                         </div>
@@ -711,12 +711,12 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="tab-pane main-pane color-theme-2 fade" id="tab-two">
+                            <div class="tab-pane main-pane fade" id="tab-two">
                                 <div class="container">
                                     <div class="row">
 
                                         <div class="col-md-8 col-sm-8 min-col-right-padd">
-                                            <div class="aspect-main-block">
+                                            <div class="aspect-main-block color_me" data-me-type = "aspect" data-me-action = 'border-top-color' data-me-color = '1'>
                                                 <p class="aspect-main-block-text">В популярной сказке Винни-Пух и его
                                                     друзья жаждали меда, но пчелы не давали забрать у себя плоды своего
                                                     труда. Чтобы раздобыть мед, Винни с компанией пытался обманом
@@ -732,7 +732,7 @@
 
                                         <div class="col-md-4 col-sm-4 min-col-left-padd">
                                             <div id="questionsCarousel2" class="carousel slide questionsCarousel" data-ride="carousel questionsCarousel">
-                                                <div class="aspect-questions-block">
+                                                <div class="aspect-questions-block color_me" data-me-type = "aspect" data-me-action = 'border-top-color' data-me-color = '1'>
                                                     <h4 class="block-with-left-icon pull-left">
                                                         <i class="left-icon fa fa-2x fa-comments"></i>
                                                         Вопросы по теме
@@ -771,8 +771,8 @@
                                                                 </div>
                                                                 <div class="clearfix"></div>
                                                                 <div class="form-group bottom-buttons">
-                                                                    <a class="btn btn-outline notice-button">Подсказка</a>
-                                                                    <button class="btn answer-button questionCarousel-target" data-target="#questionsCarousel2" data-slide-to="1">Ответить</button>
+                                                                    <a class="btn btn-outline notice-button color_me" data-me-type = "aspect" data-me-action = 'border-color' data-me-color = '1'>Подсказка</a>
+                                                                    <button class="btn answer-button questionCarousel-target color_me" data-me-type = "aspect" data-me-action = 'background-color' data-me-color = '1' data-target="#questionsCarousel2" data-slide-to="1">Ответить</button>
                                                                 </div>
                                                             </form>
                                                         </div>
@@ -806,8 +806,8 @@
                                                                 </div>
                                                                 <div class="clearfix"></div>
                                                                 <div class="form-group bottom-buttons">
-                                                                    <a class="btn btn-outline notice-button">Подсказка</a>
-                                                                    <button class="btn answer-button questionCarousel-target" data-target="#questionsCarousel2" data-slide-to="2">Ответить</button>
+                                                                    <a class="btn btn-outline notice-button color_me" data-me-type = "aspect" data-me-action = 'border-color' data-me-color = '1'>Подсказка</a>
+                                                                    <button class="btn answer-button questionCarousel-target color_me" data-me-type = "aspect" data-me-action = 'background-color' data-me-color = '1' data-target="#questionsCarousel2" data-slide-to="2">Ответить</button>
                                                                 </div>
                                                             </form>
                                                         </div>
@@ -819,12 +819,12 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="tab-pane main-pane color-theme-3 fade" id="tab-three">
+                            <div class="tab-pane main-pane fade" id="tab-three">
                                 <div class="container">
                                     <div class="row">
 
                                         <div class="col-md-8 col-sm-8 min-col-right-padd">
-                                            <div class="aspect-main-block">
+                                            <div class="aspect-main-block color_me" data-me-type = "aspect" data-me-action = 'border-top-color' data-me-color = '2'>
                                                 <h6 class="aspect-main-block-heading">Трудности, связанные с
                                                     расположением конфликтующих сторон</h6>
 
@@ -839,7 +839,7 @@
 
                                         <div class="col-md-4 col-sm-4 min-col-left-padd">
                                             <div id="questionsCarousel3" class="carousel slide questionsCarousel" data-ride="carousel">
-                                                <div class="aspect-questions-block">
+                                                <div class="aspect-questions-block color_me" data-me-type = "aspect" data-me-action = 'border-top-color' data-me-color = '2'>
                                                     <h4 class="block-with-left-icon pull-left">
                                                         <i class="left-icon fa fa-2x fa-comments"></i>
                                                         Вопросы по теме
@@ -874,8 +874,8 @@
                                                                 </div>
                                                                 <div class="clearfix"></div>
                                                                 <div class="form-group bottom-buttons">
-                                                                    <a class="btn btn-outline notice-button">Подсказка</a>
-                                                                    <button class="btn answer-button questionCarousel-target2" data-target="#questionsCarousel3" data-slide-to="1">Ответить</button>
+                                                                    <a class="btn btn-outline notice-button color_me" data-me-type = "aspect" data-me-action = 'border-color' data-me-color = '2'>Подсказка</a>
+                                                                    <button class="btn answer-button questionCarousel-target2 color_me" data-me-type = "aspect" data-me-action = 'background-color' data-me-color = '2' data-target="#questionsCarousel3" data-slide-to="1">Ответить</button>
                                                                 </div>
                                                             </form>
                                                         </div>
@@ -909,8 +909,8 @@
                                                                 </div>
                                                                 <div class="clearfix"></div>
                                                                 <div class="form-group bottom-buttons">
-                                                                    <a class="btn btn-outline notice-button">Подсказка</a>
-                                                                    <a class="btn answer-button open-popup-link" href="#popup-greetings-text">Ответить</a>
+                                                                    <a class="btn btn-outline notice-button color_me" data-me-type = "aspect" data-me-action = 'border-color' data-me-color = '2'>Подсказка</a>
+                                                                    <a class="btn answer-button color_me" data-me-type = "aspect" data-me-action = 'background' data-me-color = '2'>Ответить</a>
                                                                 </div>
                                                             </form>
                                                         </div>
@@ -922,173 +922,16 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="tab-pane main-pane color-theme-4 fade" id="tab-four">
-                                <div class="container">
-                                    <div class="row">
-                                        <div class="col-md-8 col-sm-8 min-col-right-padd">
-                                            <div class="aspect-main-block">
-                                                <h6 class="aspect-main-block-heading">Пчелы и цветочные поляны</h6>
-
-                                                <p class="aspect-main-block-text">Проснувшись однажды утром после
-                                                    беспокойного сна, Грегор Замза обнаружил, что он у себя в постели
-                                                    превратился в страшное насекомое. Лежа на панцирнотвердой спине, он
-                                                    видел, стоило ему приподнять голову, свой</p>
-                                                <img src="img/aspect-pic4.jpg">
-                                            </div>
-                                        </div>
-
-                                        <!-- Questions block starts -->
-                                        <div class="col-md-4 col-sm-4 min-col-left-padd">
-                                            <div class="aspect-questions-block">
-
-                                            </div>
-                                        </div>
-                                        <!-- Questions block ends -->
-
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="tab-pane main-pane color-theme-5 fade" id="tab-five">
-                                <div class="container">
-                                    <div class="row">
-                                        <div class="col-md-8 col-sm-8 min-col-right-padd">
-                                            <div class="aspect-main-block">
-                                                <h6 class="aspect-main-block-heading">Четвероногие и сахар</h6>
-
-                                                <p class="aspect-main-block-text">Любя, съешь щипцы, — вздохнёт мэр, —
-                                                    кайф жгуч. Шеф взъярён тчк щипцы с эхом гудбай Жюль. Эй, жлоб! Где
-                                                    туз? Прячь юных съёмщиц в</p>
-                                                <img src="img/aspect-pic5.jpg">
-                                            </div>
-                                        </div>
-
-                                        <!-- Questions block starts -->
-                                        <div class="col-md-4 col-sm-4 min-col-left-padd">
-                                            <div class="aspect-questions-block">
-
-                                            </div>
-                                        </div>
-                                        <!-- Questions block ends -->
-
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="tab-pane main-pane color-theme-6 fade" id="tab-six">
-                                <div class="container">
-                                    <div class="row">
-                                        <div class="col-md-8 col-sm-8 min-col-right-padd">
-                                            <div class="aspect-main-block">
-                                                <h6 class="aspect-main-block-heading">Пчелы, четвероногие и зимняя
-                                                    спячка</h6>
-
-                                                <p class="aspect-main-block-text">Душа моя озарена неземной радостью,
-                                                    как эти чудесные весенние утра, которыми я наслаждаюсь от всего
-                                                    сердца. Я совсем один и блаженствую в здешнем краю, словно созданном
-                                                    для таких, как я. Я так счастлив, мой друг, так упоен ощущением
-                                                    покоя, что</p>
-                                                <img src="img/aspect-pic6.jpg">
-                                            </div>
-                                        </div>
-
-                                        <!-- Questions block starts -->
-                                        <div class="col-md-4 col-sm-4 min-col-left-padd">
-                                            <div class="aspect-questions-block">
-
-                                            </div>
-                                        </div>
-                                        <!-- Questions block ends -->
-
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="tab-pane main-pane color-theme-7 fade" id="tab-seven">
-                                <div class="container">
-                                    <div class="row">
-                                        <div class="col-md-8 col-sm-8 min-col-right-padd">
-                                            <div class="aspect-main-block">
-                                                <h6 class="aspect-main-block-heading">Винни-Пух и все-все-все</h6>
-
-                                                <p class="aspect-main-block-text">Далеко-далеко за словесными горами в
-                                                    стране гласных и согласных живут рыбные тексты. Вдали от всех живут
-                                                    они в буквенных домах на берегу Семантика большого языкового океана.
-                                                    Маленький ручеек Даль журчит по всей стране и обеспечивает ее всеми
-                                                    необходимыми правилами. Эта</p>
-                                                <img src="img/aspect-pic7.jpg">
-                                            </div>
-                                        </div>
-
-                                        <!-- Questions block starts -->
-                                        <div class="col-md-4 col-sm-4 min-col-left-padd">
-                                            <div class="aspect-questions-block">
-
-                                            </div>
-                                        </div>
-                                        <!-- Questions block ends -->
-
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="tab-pane main-pane color-theme-8 fade" id="tab-eight">
-                                <div class="container">
-                                    <div class="row">
-                                        <div class="col-md-8 col-sm-8 min-col-right-padd">
-                                            <div class="aspect-main-block">
-                                                <h6 class="aspect-main-block-heading">Эффективность пчел в сборе
-                                                    меда</h6>
-
-                                                <p class="aspect-main-block-text">Его многочисленные, убого тонкие по
-                                                    сравнению с остальным телом ножки беспомощно копошились у него перед
-                                                    глазами. «Что со мной случилось?» – подумал он. Это не было сном.
-                                                    Его комната, настоящая, разве что слишком маленькая, но обычная
-                                                    комната, мирно покоилась в своих четырех хорошо знакомых</p>
-                                                <img src="img/aspect-pic8.jpg">
-                                            </div>
-                                        </div>
-
-                                        <!-- Questions block starts -->
-                                        <div class="col-md-4 col-sm-4 min-col-left-padd">
-                                            <div class="aspect-questions-block">
-
-                                            </div>
-                                        </div>
-                                        <!-- Questions block ends -->
-
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="tab-pane main-pane color-theme-9 fade" id="tab-nine">
-                                <div class="container">
-                                    <div class="row">
-                                        <div class="col-md-8 col-sm-8 min-col-right-padd">
-                                            <div class="aspect-main-block">
-                                                <h6 class="aspect-main-block-heading">Лес</h6>
-
-                                                <p class="aspect-main-block-text">Проснувшись однажды утром после
-                                                    беспокойного сна, Грегор Замза обнаружил, что он у себя в постели
-                                                    превратился в страшное насекомое. Лежа на панцирнотвердой спине, он
-                                                    видел, стоило ему приподнять голову, свой</p>
-                                                <img src="img/aspect-pic9.jpg">
-                                            </div>
-                                        </div>
-
-                                        <!-- Questions block starts -->
-                                        <div class="col-md-4 col-sm-4 min-col-left-padd">
-                                            <div class="aspect-questions-block">
-
-                                            </div>
-                                        </div>
-                                        <!-- Questions block ends -->
-
-                                    </div>
-                                </div>
-                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         <!-- Aspects block (UI four) ends -->
 
-        <a href="#vote-1" class="open-popup-vote-link">Голосовалка</a>
+        <a href="#vote-1" class="open-popup-vote-link">Голосовалка</a><br>
+        <a href="#popup-greetings-text" class="open-popup-link">Завершающий попап</a><br>
+        <a href="1st-stage_discuss.html">Обсуждение аспектов</a><br>
+        <a href="1st-stage_discuss_placeholder.html">Обсуждение аспектов (плейсхолдер)</a><br>
 
         </div>
     </div>
@@ -1151,8 +994,8 @@
                                 <div class="container padding30">
                                     <div class="row">
                                         <div class="col-sm-4 vote_item_cont">
-                                            <div class="vote_item">
-                                                <div class="heading_cont color-theme-1">
+                                            <div class="vote_item color_me" data-me-type = "aspect" data-me-action = 'border-top-color' data-me-color = '0'>
+                                                <div class="heading_cont">
                                                     <h6>Мед и пчелы</h6>
                                                 </div>
                                                 <div class="divider10"></div>
@@ -1165,8 +1008,8 @@
                                             </div>
                                         </div>
                                         <div class="col-sm-4 vote_item_cont">
-                                            <div class="vote_item">
-                                                <div class="heading_cont color-theme-2">
+                                            <div class="vote_item color_me" data-me-type = "aspect" data-me-action = 'border-top-color' data-me-color = '1'>
+                                                <div class="heading_cont">
                                                     <h6>Мед и четвероногие</h6>
                                                 </div>
                                                 <div class="divider10"></div>
@@ -1179,8 +1022,8 @@
                                             </div>
                                         </div>
                                         <div class="col-sm-4 vote_item_cont">
-                                            <div class="vote_item">
-                                                <div class="heading_cont color-theme-3">
+                                            <div class="vote_item color_me" data-me-type = "aspect" data-me-action = 'border-top-color' data-me-color = '2'>
+                                                <div class="heading_cont">
                                                     <h6>Взаимоотношения четвероногих и пчел</h6>
                                                 </div>
                                                 <div class="divider10"></div>
@@ -1193,8 +1036,8 @@
                                             </div>
                                         </div>
                                         <div class="col-sm-4 vote_item_cont">
-                                            <div class="vote_item">
-                                                <div class="heading_cont color-theme-4">
+                                            <div class="vote_item color_me" data-me-type = "aspect" data-me-action = 'border-top-color' data-me-color = '3'>
+                                                <div class="heading_cont">
                                                     <h6>Пчелы и цветочные поляны</h6>
                                                 </div>
                                                 <div class="divider10"></div>
@@ -1207,8 +1050,8 @@
                                             </div>
                                         </div>
                                         <div class="col-sm-4 vote_item_cont">
-                                            <div class="vote_item">
-                                                <div class="heading_cont color-theme-5">
+                                            <div class="vote_item color_me" data-me-type = "aspect" data-me-action = 'border-top-color' data-me-color = '4'>
+                                                <div class="heading_cont">
                                                     <h6>Четвероногие и сахар</h6>
                                                 </div>
                                                 <div class="divider10"></div>
@@ -1221,8 +1064,8 @@
                                             </div>
                                         </div>
                                         <div class="col-sm-4 vote_item_cont">
-                                            <div class="vote_item">
-                                                <div class="heading_cont color-theme-6">
+                                            <div class="vote_item color_me" data-me-type = "aspect" data-me-action = 'border-top-color' data-me-color = '5'>
+                                                <div class="heading_cont">
                                                     <h6>Пчелы, четвероногие и зимняя спячка</h6>
                                                 </div>
                                                 <div class="divider10"></div>
@@ -1235,8 +1078,8 @@
                                             </div>
                                         </div>
                                         <div class="col-sm-4 vote_item_cont">
-                                            <div class="vote_item">
-                                                <div class="heading_cont color-theme-7">
+                                            <div class="vote_item color_me" data-me-type = "aspect" data-me-action = 'border-top-color' data-me-color = '6'>
+                                                <div class="heading_cont">
                                                     <h6>Винни-Пух и все-все-все</h6>
                                                 </div>
                                                 <div class="divider10"></div>
@@ -1249,8 +1092,8 @@
                                             </div>
                                         </div>
                                         <div class="col-sm-4 vote_item_cont">
-                                            <div class="vote_item">
-                                                <div class="heading_cont color-theme-8">
+                                            <div class="vote_item color_me" data-me-type = "aspect" data-me-action = 'border-top-color' data-me-color = '7'>
+                                                <div class="heading_cont">
                                                     <h6>Эффективность пчел в сборе меда</h6>
                                                 </div>
                                                 <div class="divider10"></div>
@@ -1263,8 +1106,8 @@
                                             </div>
                                         </div>
                                         <div class="col-sm-4 vote_item_cont">
-                                            <div class="vote_item">
-                                                <div class="heading_cont color-theme-9">
+                                            <div class="vote_item color_me" data-me-type = "aspect" data-me-action = 'border-top-color' data-me-color = '8'>
+                                                <div class="heading_cont">
                                                     <h6>Пчелы и лес</h6>
                                                 </div>
                                                 <div class="divider10"></div>
@@ -1328,24 +1171,23 @@
         </div>
     </div>
 
-    <div id="popup-greetings-text" class="popup-window popup-w710 mfp-hide">
+    <div id="popup-greetings-text" class="popup-window popup-w710 mfp-hide stage1_theme">
         <div class="popup popup_rounded popup_medal">
             <div class="medal-block gold-medal">
             </div>
             <div class="row">
                 <div class="col-md-8 col-md-offset-3">
                     <p class="font_mid_grey bold">
-                        Отлично, начало положено!
+                        Итак, начало положено!
                     </p>
                     <div class="divider50"></div>
                     <p class="font_mid_grey bold">
-                        Вы ознакомились со всеми аспектами базы знаний.<br>
-                        Теперь вы разбираетесь в предмете обсуждения и готовы к полноценному участию в процедуре.<br>
-                        Ждём вас на следующей стадии!
+                        Вы изучили базу знаний и готовы принять участие в процедуре. Теперь вы можете обсудить аспекты, добавленные участниками, или предложить собственный аспект для общего обсуждения.
                     </p>
                     <div class="divider50"></div>
                     <p>
-                        <button class="btn red close_magnific font_white pull-right">Закрыть окно</button>
+                        <a href="1st-stage_discuss.html" class="btn add-button"><span><i class="fa fa-comment-o"></i></span> Просмотреть аспекты</a>
+                        <a href="#" class="btn add-button"><span>+</span> Добавить аспект</a>
                     </p>
                 </div>
             </div>

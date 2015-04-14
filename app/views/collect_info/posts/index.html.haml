@@ -26,17 +26,17 @@
         .slider-outer
           %ul.slider-inner.list-unstyled#first-stage-slider{ data: {project: @project.id} }
             - @aspects.each_with_index do |aspect, index|
-              %li.li_aspect{id: "li_aspect_#{aspect.id}", class: "#{'complete' if aspect.missed_questions(current_user).size == 0}"}
-                .slider-item{class: "#{index == 0 ? 'active' : ''}"}
+              %li.li_aspect{id: "li_aspect_#{aspect.id}"}
+                .slider-item{class: "#{'active' if index == 0}"}
                   .c1-item
                     %a{id: "aspect_#{aspect.id}", "data-toggle" => "tab", :href => "#tab_aspect_#{aspect.id}"}
-                      %span.c1-item-inner{style: "border-top-color: #{aspect.color};"}
+                      %span.c1-item-inner.color_me{style: "border-top-color: #{aspect.color};"}
                         =aspect.content
 
       / Tab panes
       .tab-content
         - @aspects.each_with_index do |asp, index|
-          .tab-pane.fade{id: "tab_aspect_#{asp.id}", class: "#{index == 0 ? 'active in' : ''}"}
+          .tab-pane.main-pane.fade{id: "tab_aspect_#{asp.id}", class: "#{'active in' if index == 0}"}
             .container
               - if asp.knowbase_posts.size > 1
                 .row
@@ -44,11 +44,11 @@
                     %ul.nav.nav-tabs.aspects_tabs{:role => "tablist"}
                       - asp.knowbase_posts.each_with_index do |post, i|
                         %li{class: "#{'active' if i == 0}", role: "presentation"}
-                          %a{style: "background:#{asp.color};" ,"aria-controls" => "Статья #{i+1}", "data-toggle" => "tab", :href => "#article_#{index+1}_#{i+1}", :role => "tab"}
+                          %a{style: "background-color:#{asp.color};" ,"aria-controls" => "Статья #{i+1}", "data-toggle" => "tab", :href => "#article_#{index+1}_#{i+1}", :role => "tab"}
                             = trim_content(post.title, 30)
               .row
                 .col-md-8.col-sm-8.min-col-right-padd
-                  .top-color-border-block.aspect-main-block{style: "border-top-color: #{asp.color};"}
+                  .aspect-main-block.color_me{style: "border-top-color: #{asp.color};"}
                     - if asp.knowbase_posts.size > 1
                       .tab-content
                         - asp.knowbase_posts.each_with_index do |post, i|
@@ -66,7 +66,7 @@
 
                 .col-md-4.col-sm-4.min-col-left-padd
                   .carousel.slide.questionsCarousel{id: "questionsCarousel_#{asp.id}", "data-ride" => "carousel"}
-                    .aspect-questions-block{:style => "border-top-color: #{asp.color};"}
+                    .aspect-questions-block.color_me{:style => "border-top-color: #{asp.color};"}
                       -if asp.missed_questions(current_user).size > 0
                         %h4.block-with-left-icon.pull-left
                           %i.left-icon.fa.fa-2x.fa-comments
@@ -84,8 +84,12 @@
                                 = question.content
                               .hint.close-notice{id:"hint_question_#{question.id}", style: "color:#{asp.color};border-color:#{asp.color};"}
                                 = question.hint
-                              .hint.close-notice{id:"wrong_question_#{question.id}"}
+                                %span.close-button
+                                  %i.fa.fa-times-circle-o
+                              .hint.close-notice{id:"wrong_question_#{question.id}", style: "color:#{asp.color};border-color:#{asp.color};"}
                                 Ответ неправильный, воспользуейтесь подсказкой
+                                %span.close-button
+                                  %i.fa.fa-times-circle-o
 
                               = form_tag(answer_question_collect_info_post_path(@project, id: asp.id, question_id: question.id), {method: :put, remote: true, class: 'form instruments-block', id: 'form_answer_question', multipart: true}) do
                                 .btn-group#answers_buttons(data-toggle="buttons")
@@ -97,10 +101,10 @@
                                       %i.fa.fa-check{style: "color:#{asp.color};"}
                                 .clearfix
                                 .form-group.bottom-buttons
-                                  %a.btn.btn-outline.notice-button{style: "border-color: #{asp.color};", data: {question: question.id}} Подсказка
-                                  %button#send_answers.btn.answer-button.questionsCarousel-target{type: "submit", style: "background-color: #{asp.color};"} Ответить
+                                  %a.btn.btn-outline.notice-button.color_me{style: "border-color: #{asp.color};", data: {question: question.id}} Подсказка
+                                  %button#send_answers.btn.answer-button.questionsCarousel-target.color_me{type: "submit", style: "background-color: #{asp.color};"} Ответить
                       -else
-                        %h4.block-with-left-icon.pull-left(style="height:auto;" )
+                        %h4.block-with-left-icon.pull-left
                           %i.left-icon.fa.fa-2x.fa-comments
                           Вы ответили на все вопросы по данному аспекту.
                         %span.pull-right.question_count
@@ -109,4 +113,4 @@
 = render partial: 'popup_welcome'
 = render partial: 'popup_greetings'
 - if current_user.can_vote_for(:collect_info, @project)
-  =render partial: 'popup_vote'
+  = render partial: 'popup_vote'

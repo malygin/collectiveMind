@@ -17,6 +17,10 @@ class ProjectsController < ApplicationController
     @my_journals_count = @my_journals.size
   end
 
+  def news_data
+    @expert_news = @project.news
+  end
+
   def check_access_to_project
     if Core::Project::LIST_STAGES.map { |key, hash| hash[:type_stage] }.include? params[:controller].gsub('/', '_').to_sym
       # @todo Рефакторинг model_min_stage

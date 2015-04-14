@@ -16,35 +16,196 @@
 
     <link href="css/custom.css" rel="stylesheet">
     <link href="css/custom-post.css" rel="stylesheet">
+    <link href="css/sprites.css" rel="stylesheet">
+    <link href="css/colors.css" rel="stylesheet">
 
 </head>
 
-<body>
-<div class="outer stage3_theme">
+<body class="stage3_theme">
+<div class="outer">
 
     <div id="slide-panel" class="slide-outer" data-position="left">
-        <span class="slide-opener icon_new i_new_stage" id="opener">
+        <span class="slide-opener icon_new i_new_stage rounded_2" id="opener">
             <img src="img/text-slider-opener.png">
         </span>
         <div class="slide-inner slide_stage3 white">
             <div class="ps_cont">
-                <div class="checkox_item"><span class="cb_input"><input type="checkbox" id="check0"></span><span><label for="check0">Выбрать все</label></span></div>
+                <div class="divider15"></div>
+                <div class="checkox_item">
+                    <span><span class="cb_input"><input type="checkbox" id="check0"><label for="check0"><i class="fa fa-check"></i></label></span></span>
+                    <span class="text_label"><label for="check0">Выбрать все</label></span>
+                </div>
                 <div class="slide_table_wrap">
                     <div class="checkox_item">
-                        <span class="cb_input"><input type="checkbox" id="check1"></span>
-                        <span><span class="color_counter">22</span></span>
-                        <span><label for="check1">Выбрать все</label></span>
-                        <span class="cb_doc"></span>
-                        <span class="cb_com">42</span>
+                        <span><span class="cb_input"><input type="checkbox" id="check1"><label for="check1"><i class="fa fa-check"></i></label></span></span>
+                        <span><span class="color_counter color_me" data-me-action = 'background-color' data-me-color = '0' data-me-type = 'imperf'>2</span></span>
+                        <span class="text_label"><label for="check1">Выбрать все выбрать все выбрать все выбрать все </label></span>
+                        <span class="cb_doc">2</span>
+                        <span class="cb_com">19</span>
                     </div>
                     <div class="checkox_item">
-                        <span class="cb_input"><input type="checkbox" id="check1"></span>
-                        <span><span class="color_counter">22</span></span>
-                        <span><label for="check1">Выбрать все Выбрать все Выбрать все Выбрать все </label></span>
-                        <span class="cb_doc">14</span>
-                        <span class="cb_com">442</span>
+                        <span><span class="cb_input"><input type="checkbox" id="check2"><label for="check2"><i class="fa fa-check"></i></label></span></span>
+                        <span><span class="color_counter color_me" data-me-action = 'background-color' data-me-color = '1' data-me-type = 'imperf'>1</span></span>
+                        <span class="text_label"><label for="check2">Выбрать все выбрать все выбрать все </label></span>
+                        <span class="cb_doc">2</span>
+                        <span class="cb_com">34</span>
+                    </div>
+                    <div class="checkox_item">
+                        <span><span class="cb_input"><input type="checkbox" id="check3"><label for="check3"><i class="fa fa-check"></i></label></span></span>
+                        <span><span class="color_counter color_me" data-me-action = 'background-color' data-me-color = '2' data-me-type = 'imperf'>1</span></span>
+                        <span class="text_label"><label for="check3">Выбрать все</label></span>
+                        <span class="cb_doc">1</span>
+                        <span class="cb_com"></span>
+                    </div>
+                    <div class="checkox_item">
+                        <span><span class="cb_input"><input type="checkbox" id="check4"><label for="check4"><i class="fa fa-check"></i></label></span></span>
+                        <span><span class="color_counter color_me" data-me-action = 'background-color' data-me-color = '3' data-me-type = 'imperf'>8</span></span>
+                        <span class="text_label"><label for="check4">Выбрать все выбрать все </label></span>
+                        <span class="cb_doc">3</span>
+                        <span class="cb_com">17</span>
+                    </div>
+                    <div class="checkox_item">
+                        <span><span class="cb_input"><input type="checkbox" id="check5"><label for="check5"><i class="fa fa-check"></i></label></span></span>
+                        <span><span class="color_counter color_me" data-me-action = 'background-color' data-me-color = '4' data-me-type = 'imperf'>6</span></span>
+                        <span class="text_label"><label for="check5">Выбрать все</label></span>
+                        <span class="cb_doc">1</span>
+                        <span class="cb_com">4</span>
+                    </div>
+                    <div class="checkox_item">
+                        <span><span class="cb_input"><input type="checkbox" id="check6"><label for="check6"><i class="fa fa-check"></i></label></span></span>
+                        <span><span class="color_counter color_me" data-me-action = 'background-color' data-me-color = '5' data-me-type = 'imperf'>2</span></span>
+                        <span class="text_label"><label for="check6">Выбрать все</label></span>
+                        <span class="cb_doc"></span>
+                        <span class="cb_com">15</span>
+                    </div>
+                    <div class="checkox_item">
+                        <span><span class="cb_input"><input type="checkbox" id="check7"><label for="check7"><i class="fa fa-check"></i></label></span></span>
+                        <span><span class="color_counter color_me" data-me-action = 'background-color' data-me-color = '6' data-me-type = 'imperf'>3</span></span>
+                        <span class="text_label"><label for="check7">Выбрать все</label></span>
+                        <span class="cb_doc"></span>
+                        <span class="cb_com"></span>
+                    </div>
+                    <div class="checkox_item">
+                        <span><span class="cb_input"><input type="checkbox" id="check8"><label for="check8"><i class="fa fa-check"></i></label></span></span>
+                        <span><span class="color_counter color_me" data-me-action = 'background-color' data-me-color = '7' data-me-type = 'imperf'>2</span></span>
+                        <span class="text_label"><label for="check8">Выбрать все</label></span>
+                        <span class="cb_doc">1</span>
+                        <span class="cb_com">5</span>
+                    </div>
+                    <div class="checkox_item">
+                        <span><span class="cb_input"><input type="checkbox" id="check8"><label for="check8"><i class="fa fa-check"></i></label></span></span>
+                        <span><span class="color_counter color_me" data-me-action = 'background-color' data-me-color = '8' data-me-type = 'imperf'>2</span></span>
+                        <span class="text_label"><label for="check8">Выбрать все</label></span>
+                        <span class="cb_doc">1</span>
+                        <span class="cb_com">5</span>
+                    </div>
+                    <div class="checkox_item">
+                        <span><span class="cb_input"><input type="checkbox" id="check8"><label for="check8"><i class="fa fa-check"></i></label></span></span>
+                        <span><span class="color_counter color_me" data-me-action = 'background-color' data-me-color = '9' data-me-type = 'imperf'>2</span></span>
+                        <span class="text_label"><label for="check8">Выбрать все</label></span>
+                        <span class="cb_doc">1</span>
+                        <span class="cb_com">5</span>
+                    </div>
+                    <div class="checkox_item">
+                        <span><span class="cb_input"><input type="checkbox" id="check8"><label for="check8"><i class="fa fa-check"></i></label></span></span>
+                        <span><span class="color_counter color_me" data-me-action = 'background-color' data-me-color = '10' data-me-type = 'imperf'>2</span></span>
+                        <span class="text_label"><label for="check8">Выбрать все</label></span>
+                        <span class="cb_doc">1</span>
+                        <span class="cb_com">5</span>
+                    </div>
+                    <div class="checkox_item">
+                        <span><span class="cb_input"><input type="checkbox" id="check8"><label for="check8"><i class="fa fa-check"></i></label></span></span>
+                        <span><span class="color_counter color_me" data-me-action = 'background-color' data-me-color = '11' data-me-type = 'imperf'>2</span></span>
+                        <span class="text_label"><label for="check8">Выбрать все</label></span>
+                        <span class="cb_doc">1</span>
+                        <span class="cb_com">5</span>
+                    </div>
+                    <div class="checkox_item">
+                        <span><span class="cb_input"><input type="checkbox" id="check8"><label for="check8"><i class="fa fa-check"></i></label></span></span>
+                        <span><span class="color_counter color_me" data-me-action = 'background-color' data-me-color = '12' data-me-type = 'imperf'>2</span></span>
+                        <span class="text_label"><label for="check8">Выбрать все</label></span>
+                        <span class="cb_doc">1</span>
+                        <span class="cb_com">5</span>
+                    </div>
+                    <div class="checkox_item">
+                        <span><span class="cb_input"><input type="checkbox" id="check8"><label for="check8"><i class="fa fa-check"></i></label></span></span>
+                        <span><span class="color_counter color_me" data-me-action = 'background-color' data-me-color = '13' data-me-type = 'imperf'>2</span></span>
+                        <span class="text_label"><label for="check8">Выбрать все</label></span>
+                        <span class="cb_doc">1</span>
+                        <span class="cb_com">5</span>
+                    </div>
+                    <div class="checkox_item">
+                        <span><span class="cb_input"><input type="checkbox" id="check8"><label for="check8"><i class="fa fa-check"></i></label></span></span>
+                        <span><span class="color_counter color_me" data-me-action = 'background-color' data-me-color = '14' data-me-type = 'imperf'>2</span></span>
+                        <span class="text_label"><label for="check8">Выбрать все</label></span>
+                        <span class="cb_doc">1</span>
+                        <span class="cb_com">5</span>
+                    </div>
+                    <div class="checkox_item">
+                        <span><span class="cb_input"><input type="checkbox" id="check8"><label for="check8"><i class="fa fa-check"></i></label></span></span>
+                        <span><span class="color_counter color_me" data-me-action = 'background-color' data-me-color = '15' data-me-type = 'imperf'>2</span></span>
+                        <span class="text_label"><label for="check8">Выбрать все</label></span>
+                        <span class="cb_doc">1</span>
+                        <span class="cb_com">5</span>
+                    </div>
+                    <div class="checkox_item">
+                        <span><span class="cb_input"><input type="checkbox" id="check8"><label for="check8"><i class="fa fa-check"></i></label></span></span>
+                        <span><span class="color_counter color_me" data-me-action = 'background-color' data-me-color = '16' data-me-type = 'imperf'>2</span></span>
+                        <span class="text_label"><label for="check8">Выбрать все</label></span>
+                        <span class="cb_doc">1</span>
+                        <span class="cb_com">5</span>
+                    </div>
+                    <div class="checkox_item">
+                        <span><span class="cb_input"><input type="checkbox" id="check8"><label for="check8"><i class="fa fa-check"></i></label></span></span>
+                        <span><span class="color_counter color_me" data-me-action = 'background-color' data-me-color = '17' data-me-type = 'imperf'>2</span></span>
+                        <span class="text_label"><label for="check8">Выбрать все</label></span>
+                        <span class="cb_doc">1</span>
+                        <span class="cb_com">5</span>
+                    </div>
+                    <div class="checkox_item">
+                        <span><span class="cb_input"><input type="checkbox" id="check8"><label for="check8"><i class="fa fa-check"></i></label></span></span>
+                        <span><span class="color_counter color_me" data-me-action = 'background-color' data-me-color = '18' data-me-type = 'imperf'>2</span></span>
+                        <span class="text_label"><label for="check8">Выбрать все</label></span>
+                        <span class="cb_doc">1</span>
+                        <span class="cb_com">5</span>
+                    </div>
+                    <div class="checkox_item">
+                        <span><span class="cb_input"><input type="checkbox" id="check8"><label for="check8"><i class="fa fa-check"></i></label></span></span>
+                        <span><span class="color_counter color_me" data-me-action = 'background-color' data-me-color = '19' data-me-type = 'imperf'>2</span></span>
+                        <span class="text_label"><label for="check8">Выбрать все</label></span>
+                        <span class="cb_doc">1</span>
+                        <span class="cb_com">5</span>
+                    </div>
+                    <div class="checkox_item">
+                        <span><span class="cb_input"><input type="checkbox" id="check8"><label for="check8"><i class="fa fa-check"></i></label></span></span>
+                        <span><span class="color_counter color_me" data-me-action = 'background-color' data-me-color = '20' data-me-type = 'imperf'>2</span></span>
+                        <span class="text_label"><label for="check8">Выбрать все</label></span>
+                        <span class="cb_doc">1</span>
+                        <span class="cb_com">5</span>
+                    </div>
+                    <div class="checkox_item">
+                        <span><span class="cb_input"><input type="checkbox" id="check8"><label for="check8"><i class="fa fa-check"></i></label></span></span>
+                        <span><span class="color_counter color_me" data-me-action = 'background-color' data-me-color = '21' data-me-type = 'imperf'>2</span></span>
+                        <span class="text_label"><label for="check8">Выбрать все</label></span>
+                        <span class="cb_doc">1</span>
+                        <span class="cb_com">5</span>
+                    </div>
+                    <div class="checkox_item">
+                        <span><span class="cb_input"><input type="checkbox" id="check8"><label for="check8"><i class="fa fa-check"></i></label></span></span>
+                        <span><span class="color_counter color_me" data-me-action = 'background-color' data-me-color = '22' data-me-type = 'imperf'>2</span></span>
+                        <span class="text_label"><label for="check8">Выбрать все</label></span>
+                        <span class="cb_doc">1</span>
+                        <span class="cb_com">5</span>
+                    </div>
+                    <div class="checkox_item">
+                        <span><span class="cb_input"><input type="checkbox" id="check8"><label for="check8"><i class="fa fa-check"></i></label></span></span>
+                        <span><span class="color_counter color_me" data-me-action = 'background-color' data-me-color = '23' data-me-type = 'imperf'>2</span></span>
+                        <span class="text_label"><label for="check8">Выбрать все</label></span>
+                        <span class="cb_doc">1</span>
+                        <span class="cb_com">5</span>
                     </div>
                 </div>
+                <div class="divider15"></div>
             </div>
         </div>
     </div>
@@ -69,11 +230,8 @@
                     <i class="fa fa-close fa-lg dd_close" data-dd-closer="dd_2"></i>
                 </div>
                 <div class="dd_bottom white">
-                    <div class="divider10"></div>
-                    <div class="container">
-                        <div class="row">
-                            <div class="col-xs-12">
-                                <div class="ps_cont">
+                    <div class="ps_cont">
+                        <div class="divider15"></div>
                                     <a href="#" class="dd_notice">
                                                         <span class="dd_n_cell left font_color_stage4">
                                                             <i class="fa fa-lg fa-thumbs-down"></i>
@@ -152,12 +310,8 @@
                                     <div class="dd_nav_divider font_color_stage1">
                                         <span>1</span>
                                     </div>
-                                    <div class="divider10"></div>
-                                </div>
-                            </div>
-                        </div>
+                        <div class="divider15"></div>
                     </div>
-                    <div class="divider20"></div>
                 </div>
             </div>
         </div>
@@ -165,7 +319,7 @@
 </ul>
 
 <div class="navbar-right text-right user_block font_grey">
-    <a href="#" class="book_icon">
+    <a href="#popup-database" class="book_icon open-popup-link">
     </a>
     <span class="auth-divider"> |</span>
                     <span class="has_dropwindow">
@@ -179,8 +333,6 @@
                                     <i class="fa fa-close fa-lg dd_close" data-dd-closer="dd_1"></i>
                                 </div>
                                 <div class="dd_bottom">
-                                    <div class="divider20"></div>
-                                    <div class="container">
                                         <div class="ps_cont">
                                             <div class="dd_xprt_notice">
                                                 <a class="a_font_reset collapsed" data-toggle="collapse" href="#xprt_1" aria-expanded="false">
@@ -340,8 +492,6 @@
                                                 </p>
                                             </div>
                                         </div>
-                                    </div>
-                                    <div class="divider20"></div>
                                 </div>
                             </div>
                         </div>
@@ -366,8 +516,7 @@
     <div class="container">
         <h4 class="font_white">Решение конфликта, возникшего из-за меда</h4>
     </div>
-    <button type="button" class="btn btn-tooltip" id="tooltip_button_3" value="Show"><i class="fa fa-lightbulb-o"></i> Открыть подсказки</button>
-    <button type="button" class="btn btn-tooltip-close" id="close_tooltip_button_3" value="Destroy"><i class="fa fa-lightbulb-o"></i> Закрыть подсказки</button>
+    <button type="button" class="btn btn-tooltip" id="tooltip_button_3" value="Show"><i class="fa fa-lightbulb-o"></i> Подсказки</button>
 </div>
 
 
@@ -465,7 +614,7 @@
                     <div class="col-md-5">
                         <div class="sort-block pull-right">
                             <span class="sort-label">Сортировать по новым:</span>
-                            <div class="sort-1"><span>25</span></div><div class="sort-2"><span>2</span></div>
+                            <div class="sort-1 sort_btn sprite_com sprite-item3_2_1"><span>25</span></div><div class="sort-2 sort_btn sprite_doc sprite-item3_1"><span>2</span></div>
                             <a href="cabinet-stage3.html"><button class="btn add-button"><span>+</span>Идея</button></a>
                         </div>
                     </div>
@@ -476,19 +625,16 @@
                 <div class="row">
                     <div class="col-md-6">
 
-                            <div class="post">
-                                <div class="post-header white">
+                            <div class="post post_type_3">
+                                <div class="post-header white open-popup" data-placement="3" data-target="1">
                                     <div class="row">
-                                        <div class="col-md-10 col-xs-10">
+                                        <div class="col-md-12 col-xs-12">
                                             <h5 class="font_purple bold">Lorem Ipsum</h5>
                                         </div>
-
-                                        <div class="col-md-2 col-xs-2">
-                                            <h5 class="time">20.12.2014</h5>
-                                        </div>
                                     </div>
+                                    <i class="fa fa-angle-right"></i>
                                 </div>
-                                <div class="post-body">
+                                <div class="post-body ch_action" data-for="post_ch1">
                                     <div class="media">
 
                                         <div class="media-left text-center gradient post-poster ">
@@ -501,32 +647,58 @@
                                             <div class="post-text">
                                                 <p>Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum </p>
                                             </div>
+                                            <div class="post_cont_hover post_tall white" id="post_ch1">
+                                                <div class="wrapper ps_cont half_wheel_speed">
+                                                    <div class="post_cont_inner">
+                                                        <div class="comment_preview"><span class="bold">Liza:</span> По поводу кнопки "всё". Она не очень интуитивна и красива.</div>
+                                                        <div class="comment_preview"><span class="bold">Liza:</span> Начальная - это та, что грузится со страницей. Но она по дате сортировки</div>
+                                                        <div class="comment_preview"><span class="bold">irivertime:</span> И обратная сортировка должна тоже как-то выделяться</div>
+                                                        <div class="comment_preview"><span class="bold">Liza:</span> По поводу кнопки "всё". Она не очень интуитивна и красива.</div>
+                                                        <div class="comment_preview"><span class="bold">Liza:</span> Начальная - это та, что грузится со страницей. Но она по дате сортировки</div>
+                                                        <div class="comment_preview"><span class="bold">irivertime:</span> И обратная сортировка должна тоже как-то выделяться</div>
+                                                        <div class="comment_preview"><span class="bold">Liza:</span> По поводу кнопки "всё". Она не очень интуитивна и красива.</div>
+                                                        <div class="comment_preview"><span class="bold">Liza:</span> Начальная - это та, что грузится со страницей. Но она по дате сортировки</div>
+                                                        <div class="comment_preview"><span class="bold">irivertime:</span> И обратная сортировка должна тоже как-то выделяться</div>
+                                                    </div>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="contenthover">
-                                    <div class="arrow open-popup" data-placement="3" data-target="1">
-                                        <i class="fa fa-angle-right"></i>
-                                    </div>
-                                </div>
-                                <div class="post-bottom white tooltip3_2" data-toggle="tooltip" id="tooltip3_2" data-trigger="none" data-placement="bottom" title="В цветных квадратиках скрывается перечень несовершенств, связанных с данным нововведением. Нажмите на любой из них, чтобы увидеть полное название нововведения.">
+                                <div class="post-bottom white tooltip3" data-toggle="tooltip" id="tooltip3_2" data-trigger="manual" data-placement="bottom" title="В цветных квадратиках скрывается перечень несовершенств, связанных с данным нововведением. Нажмите на любой из них, чтобы увидеть полное название нововведения.">
                                     <div class="row">
-                                        <div class="col-md-9 col_padding_right_3">
-                                            <small class="pull-left" style="margin-right: 3px;">Несовершенства</small>
+                                        <div class="col-md-2 col_padding_right_3"><small class="pull-left" style="margin-right: 3px;">Несовершенства</small></div>
+                                        <div class="col-md-7 col_padding_right_3 themes_cont">
                                             <div class="post-theme" id="stripe1">
-                                                <a href="#" class="tag-stripes dark-blue active" id="stripe1"><span
-                                                        class="tags">Слишком низкие потолки</span></a>
-                                                <a href="#" class="tag-stripes blue-green" id="stripe1"><span
-                                                        class="tags">Четвероногим нечем заинтересовать пчел</span></a>
-                                                <a href="#" class="tag-stripes blue-green2" id="stripe1"><span
-                                                        class="tags">Активное противостояние четвероногих и пчел</span></a>
-                                                <a href="#" class="tag-stripes blue-green3" id="stripe1"><span
-                                                        class="tags">Рядом с дубом нет цветочных полян</span></a>
+                                                <span class="tag-stripes color_me active" data-me-action = 'background-color' data-me-color = '1' data-me-type = 'imperf'><span
+                                                        class="tags">Слишком низкие</span></span>
+                                                <span href="#" class="tag-stripes color_me" data-me-action = 'background-color' data-me-color = '3' data-me-type = 'imperf'><span
+                                                        class="tags">Четвероногим нечем</span></span>
+                                                <span href="#" class="tag-stripes color_me" data-me-action = 'background-color' data-me-color = '6' data-me-type = 'imperf'><span
+                                                        class="tags">Активное противостояние</span></span>
+                                                <span href="#" class="tag-stripes color_me" data-me-action = 'background-color' data-me-color = '15' data-me-type = 'imperf'><span
+                                                        class="tags">Рядом с дубом нет</span></span>
+                                                <span href="#" class="tag-stripes color_me" data-me-action = 'background-color' data-me-color = '15' data-me-type = 'imperf'><span
+                                                        class="tags">Рядом с дубом нет</span></span>
+                                                <span href="#" class="tag-stripes color_me" data-me-action = 'background-color' data-me-color = '15' data-me-type = 'imperf'><span
+                                                        class="tags">Рядом с дубом нет</span></span>
+                                                <span href="#" class="tag-stripes color_me" data-me-action = 'background-color' data-me-color = '15' data-me-type = 'imperf'><span
+                                                        class="tags">Рядом с дубом нет</span></span>
+                                                <span href="#" class="tag-stripes color_me" data-me-action = 'background-color' data-me-color = '15' data-me-type = 'imperf'><span
+                                                        class="tags">Рядом с дубом нет</span></span>
+                                                <span href="#" class="tag-stripes color_me" data-me-action = 'background-color' data-me-color = '15' data-me-type = 'imperf'><span
+                                                        class="tags">Рядом с дубом нет</span></span>
+                                                <span href="#" class="tag-stripes color_me" data-me-action = 'background-color' data-me-color = '15' data-me-type = 'imperf'><span
+                                                        class="tags">Рядом с дубом нет</span></span>
+                                                <span href="#" class="tag-stripes color_me" data-me-action = 'background-color' data-me-color = '15' data-me-type = 'imperf'><span
+                                                        class="tags">Рядом с дубом нет</span></span>
+                                                <span href="#" class="tag-stripes color_me" data-me-action = 'background-color' data-me-color = '15' data-me-type = 'imperf'><span
+                                                        class="tags">Рядом с дубом нет</span></span>
                                             </div>
                                         </div>
                                         <div class="col-md-3 col_padding_left_3">
                                             <div class="text-right small_icons">
-                                                <a class="popup2 a_font_reset"><small>5</small> <i class="fa fa-comment-o"></i></a>
+                                                <span class="popup2 comments_icon" data-for="post_ch1"><small>5</small> <i class="fa fa-comment-o"></i></span>
                                                 <span class="popup2"><small>9</small> <i class="fa fa-thumbs-o-up fa-flip-horizontal"></i></span>
                                                 <span class="popup2"><small>1</small> <i class="fa fa-thumbs-o-down fa-flip-horizontal"></i></span>
                                                 <span class="popup2"><i class="fa fa-exclamation-triangle font_lighter_grey"></i></span>
@@ -538,19 +710,16 @@
                             </div>
                     </div>
                     <div class="col-md-6">
-                            <div class="post">
-                                <div class="post-header white">
+                            <div class="post post_type_3 themes_cont">
+                                <div class="post-header white open-popup" data-placement="3" data-target="1">
                                     <div class="row">
-                                        <div class="col-md-10 col-xs-10">
+                                        <div class="col-md-12 col-xs-12">
                                             <h5 class="font_purple bold">Lorem Ipsum</h5>
                                         </div>
-
-                                        <div class="col-md-2 col-xs-2">
-                                            <h5 class="time">20.12.2014</h5>
-                                        </div>
                                     </div>
+                                    <i class="fa fa-angle-right"></i>
                                 </div>
-                                <div class="post-body">
+                                <div class="post-body ch_action" data-for="post_ch2">
                                     <div class="media">
 
                                         <div class="media-left text-center gradient post-poster ">
@@ -563,30 +732,58 @@
                                             <div class="post-text">
                                                 <p>Четвероногим нечем заинтересовать пчел</p>
                                             </div>
+                                            <div class="post_cont_hover post_tall white" id="post_ch2">
+                                                <div class="wrapper ps_cont half_wheel_speed">
+                                                    <div class="post_cont_inner">
+                                                        <div class="comment_preview"><span class="bold">Liza:</span> По поводу кнопки "всё". Она не очень интуитивна и красива.</div>
+                                                        <div class="comment_preview"><span class="bold">Liza:</span> Начальная - это та, что грузится со страницей. Но она по дате сортировки</div>
+                                                        <div class="comment_preview"><span class="bold">irivertime:</span> И обратная сортировка должна тоже как-то выделяться</div>
+                                                        <div class="comment_preview"><span class="bold">Liza:</span> По поводу кнопки "всё". Она не очень интуитивна и красива.</div>
+                                                        <div class="comment_preview"><span class="bold">Liza:</span> Начальная - это та, что грузится со страницей. Но она по дате сортировки</div>
+                                                        <div class="comment_preview"><span class="bold">irivertime:</span> И обратная сортировка должна тоже как-то выделяться</div>
+                                                        <div class="comment_preview"><span class="bold">Liza:</span> По поводу кнопки "всё". Она не очень интуитивна и красива.</div>
+                                                        <div class="comment_preview"><span class="bold">Liza:</span> Начальная - это та, что грузится со страницей. Но она по дате сортировки</div>
+                                                        <div class="comment_preview"><span class="bold">irivertime:</span> И обратная сортировка должна тоже как-то выделяться</div>
+                                                    </div>
+                                                </div>
+                                            </div>
                                         </div>
-                                    </div>
-                                </div>
-                                <div class="contenthover">
-                                    <div class="arrow open-popup" data-placement="3" data-target="1">
-                                        <i class="fa fa-angle-right"></i>
                                     </div>
                                 </div>
                                 <div class="post-bottom white">
                                     <div class="row">
-                                        <div class="col-md-9 col_padding_right_3">
-                                            <small class="pull-left" style="margin-right: 3px;">Идеи</small>
+                                        <div class="col-md-2 col_padding_right_3"><small class="pull-left" style="margin-right: 3px;">Несовершенства</small></div>
+                                        <div class="col-md-7 col_padding_right_3 themes_cont">
                                             <div class="post-theme" id="stripe2">
-                                                <a href="#" class="tag-stripes blue-green2 active" id="stripe2"><span
-                                                        class="tags">Взаимное недоверие четвероногих и пчёл</span></a>
-                                                <a href="#" class="tag-stripes blue-green3" id="stripe2"><span
-                                                        class="tags">Четвероногим нечем заинтересовать пчел</span></a>
-                                                <a href="#" class="tag-stripes blue-green" id="stripe2"><span
-                                                        class="tags">Активное противостояние четвероногих и пчел</span></a>
+                                                <span class="tag-stripes color_me active" data-me-action = 'background-color' data-me-color = '1' data-me-type = 'imperf'><span
+                                                        class="tags">Слишком низкие</span></span>
+                                                <span href="#" class="tag-stripes color_me" data-me-action = 'background-color' data-me-color = '3' data-me-type = 'imperf'><span
+                                                        class="tags">Четвероногим нечем</span></span>
+                                                <span href="#" class="tag-stripes color_me" data-me-action = 'background-color' data-me-color = '6' data-me-type = 'imperf'><span
+                                                        class="tags">Активное противостояние</span></span>
+                                                <span href="#" class="tag-stripes color_me" data-me-action = 'background-color' data-me-color = '15' data-me-type = 'imperf'><span
+                                                        class="tags">Рядом с дубом нет</span></span>
+                                                <span href="#" class="tag-stripes color_me" data-me-action = 'background-color' data-me-color = '15' data-me-type = 'imperf'><span
+                                                        class="tags">Рядом с дубом нет</span></span>
+                                                <span href="#" class="tag-stripes color_me" data-me-action = 'background-color' data-me-color = '15' data-me-type = 'imperf'><span
+                                                        class="tags">Рядом с дубом нет</span></span>
+                                                <span href="#" class="tag-stripes color_me" data-me-action = 'background-color' data-me-color = '15' data-me-type = 'imperf'><span
+                                                        class="tags">Рядом с дубом нет</span></span>
+                                                <span href="#" class="tag-stripes color_me" data-me-action = 'background-color' data-me-color = '15' data-me-type = 'imperf'><span
+                                                        class="tags">Рядом с дубом нет</span></span>
+                                                <span href="#" class="tag-stripes color_me" data-me-action = 'background-color' data-me-color = '15' data-me-type = 'imperf'><span
+                                                        class="tags">Рядом с дубом нет</span></span>
+                                                <span href="#" class="tag-stripes color_me" data-me-action = 'background-color' data-me-color = '15' data-me-type = 'imperf'><span
+                                                        class="tags">Рядом с дубом нет</span></span>
+                                                <span href="#" class="tag-stripes color_me" data-me-action = 'background-color' data-me-color = '15' data-me-type = 'imperf'><span
+                                                        class="tags">Рядом с дубом нет</span></span>
+                                                <span href="#" class="tag-stripes color_me" data-me-action = 'background-color' data-me-color = '15' data-me-type = 'imperf'><span
+                                                        class="tags">Рядом с дубом нет</span></span>
                                             </div>
                                         </div>
                                         <div class="col-md-3 col_padding_left_3">
                                             <div class="text-right small_icons">
-                                                <a class="popup2 a_font_reset"><small>5</small> <i class="fa fa-comment-o"></i></a>
+                                                <span class="popup2 comments_icon" data-for="post_ch2"><small>5</small> <i class="fa fa-comment-o"></i></span>
                                                 <span class="popup2"><small>9</small> <i class="fa fa-thumbs-o-up fa-flip-horizontal"></i></span>
                                                 <span class="popup2"><small>1</small> <i class="fa fa-thumbs-o-down fa-flip-horizontal"></i></span>
                                                 <span class="popup2"><i class="fa fa-exclamation-triangle font_lighter_grey"></i></span>
@@ -652,7 +849,7 @@
         </div>
     </div>
 </div>
-<div class="container">
+<div class="container modal_content">
 <div class="row">
 <div class="col-md-6 com_dashed_border right popup_collapsable_col collapse in">
     <button class="expand_button remove_col btn_reset" type="button" data-toggle="collapse" data-target=".popup_collapsable_col" data-col="6"></button>
@@ -689,7 +886,7 @@
         <p><strong>Описание: </strong>lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum </p>
     </div>
 </div>
-<div class="col-md-6 comment_col popup_expandable_col">
+<div class="col-md-6 comment_col popup_expandable_col ps_cont">
     <button class="expand_button add_col btn_reset theme_font_color bold" type="button" data-toggle="collapse" data-target=".popup_collapsable_col" data-col="6">открыть описание проекта</button>
     <div class="divider15"></div>
     <div id="myCarousel" class="carousel slide" data-ride="carousel">
@@ -922,19 +1119,18 @@
     <div class="container padding30">
     <div class="row">
         <div class="col-sm-4 vote_item_cont item_expandable h_2">
-            <div class="vote_item">
+            <div class="vote_item themes_cont">
                 <div class="heading_cont blackonwhite">
                     <h6>Lorem ipsum</h6>
                 </div>
                 <p>Lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum</p>
                 <div class="post-theme" id="stripe-p-1">
-                    <small class="pull-left">Несовершенства</small>
-                    <a href="#" class="tag-stripes dark-blue active" id="stripe-p-1"><span
-                            class="tags">Слишком низкие потолки</span></a>
-                    <a href="#" class="tag-stripes blue-green" id="stripe-p-1"><span
-                            class="tags">Четвероногим нечем заинтересовать пчел</span></a>
-                    <a href="#" class="tag-stripes blue-green2" id="stripe-p-1"><span
-                            class="tags">Активное противостояние четвероногих и пчел</span></a>
+                    <span class="tag-stripes dark-blue active"><span
+                            class="tags">Слишком низкие потолки</span></span>
+                    <span class="tag-stripes blue-green"><span
+                            class="tags">Четвероногим нечем заинтересовать пчел</span></span>
+                    <span class="tag-stripes blue-green2"><span
+                            class="tags">Активное противостояние четвероногих и пчел</span></span>
                 </div>
                 <div class="divider15"></div>
                 <div class="vote_controls text-center">
@@ -948,19 +1144,18 @@
             </div>
         </div>
         <div class="col-sm-4 vote_item_cont item_expandable h_2">
-            <div class="vote_item">
+            <div class="vote_item themes_cont">
                 <div class="heading_cont blackonwhite">
                     <h6>Lorem ipsum</h6>
                 </div>
                 <p>Lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum</p>
-                <div class="post-theme" id="stripe-p-1">
-                    <small class="pull-left">Несовершенства</small>
-                    <a href="#" class="tag-stripes dark-blue active" id="stripe-p-1"><span
-                            class="tags">Слишком низкие потолки</span></a>
-                    <a href="#" class="tag-stripes blue-green" id="stripe-p-1"><span
-                            class="tags">Четвероногим нечем заинтересовать пчел</span></a>
-                    <a href="#" class="tag-stripes blue-green2" id="stripe-p-1"><span
-                            class="tags">Активное противостояние четвероногих и пчел</span></a>
+                <div class="post-theme" id="stripe-p-2">
+                    <span class="tag-stripes dark-blue active"><span
+                            class="tags">Слишком низкие потолки</span></span>
+                    <span class="tag-stripes blue-green"><span
+                            class="tags">Четвероногим нечем заинтересовать пчел</span></span>
+                    <span class="tag-stripes blue-green2"><span
+                            class="tags">Активное противостояние четвероногих и пчел</span></span>
                 </div>
                 <div class="divider15"></div>
                 <div class="vote_controls text-center">
@@ -974,19 +1169,18 @@
             </div>
         </div>
         <div class="col-sm-4 vote_item_cont item_expandable h_2">
-            <div class="vote_item">
+            <div class="vote_item themes_cont">
                 <div class="heading_cont blackonwhite">
                     <h6>Lorem ipsum</h6>
                 </div>
                 <p>Lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum</p>
-                <div class="post-theme" id="stripe-p-1">
-                    <small class="pull-left">Несовершенства</small>
-                    <a href="#" class="tag-stripes dark-blue active" id="stripe-p-1"><span
-                            class="tags">Слишком низкие потолки</span></a>
-                    <a href="#" class="tag-stripes blue-green" id="stripe-p-1"><span
-                            class="tags">Четвероногим нечем заинтересовать пчел</span></a>
-                    <a href="#" class="tag-stripes blue-green2" id="stripe-p-1"><span
-                            class="tags">Активное противостояние четвероногих и пчел</span></a>
+                <div class="post-theme" id="stripe-p-3">
+                    <span class="tag-stripes dark-blue active"><span
+                            class="tags">Слишком низкие потолки</span></span>
+                    <span class="tag-stripes blue-green"><span
+                            class="tags">Четвероногим нечем заинтересовать пчел</span></span>
+                    <span class="tag-stripes blue-green2"><span
+                            class="tags">Активное противостояние четвероногих и пчел</span></span>
                 </div>
                 <div class="divider15"></div>
                 <div class="vote_controls text-center">
@@ -1000,19 +1194,18 @@
             </div>
         </div>
         <div class="col-sm-4 vote_item_cont item_expandable h_2">
-            <div class="vote_item">
+            <div class="vote_item themes_cont">
                 <div class="heading_cont blackonwhite">
                     <h6>Lorem ipsum</h6>
                 </div>
                 <p>Lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum</p>
-                <div class="post-theme" id="stripe-p-1">
-                    <small class="pull-left">Несовершенства</small>
-                    <a href="#" class="tag-stripes dark-blue active" id="stripe-p-1"><span
-                            class="tags">Слишком низкие потолки</span></a>
-                    <a href="#" class="tag-stripes blue-green" id="stripe-p-1"><span
-                            class="tags">Четвероногим нечем заинтересовать пчел</span></a>
-                    <a href="#" class="tag-stripes blue-green2" id="stripe-p-1"><span
-                            class="tags">Активное противостояние четвероногих и пчел</span></a>
+                <div class="post-theme" id="stripe-p-4">
+                    <span class="tag-stripes dark-blue active"><span
+                            class="tags">Слишком низкие потолки</span></span>
+                    <span class="tag-stripes blue-green"><span
+                            class="tags">Четвероногим нечем заинтересовать пчел</span></span>
+                    <span class="tag-stripes blue-green2"><span
+                            class="tags">Активное противостояние четвероногих и пчел</span></span>
                 </div>
                 <div class="divider15"></div>
                 <div class="vote_controls text-center">
@@ -1050,6 +1243,183 @@
 </div>
 </div>
 </div>
+
+    <div id="popup-database" class="popup-window popup_database popup-w770 mfp-hide">
+        <div class="popup popup_rounded">
+            <div class="row">
+                <div class="col-md-12">
+                    <div id="myCarousel" class="carousel base_carousel slide" data-ride="carousel">
+                        <!-- Indicators -->
+                        <ul class="list-unstyled list-inline carousel-indicators text-center">
+                            <li data-target="#myCarousel" data-slide-to="0" class="color-theme-1 myCarousel-target active">
+                                Аспект 1
+                            </li>
+                            <li data-target="#myCarousel" data-slide-to="1" class="color-theme-2 myCarousel-target">
+                                Аспект 2
+                            </li>
+                            <li data-target="#myCarousel" data-slide-to="2" class="color-theme-3 myCarousel-target">
+                                Аспект 3
+                            </li>
+                            <li data-target="#myCarousel" data-slide-to="3" class="color-theme-4 myCarousel-target">
+                                Аспект 4
+                            </li>
+                            <li data-target="#myCarousel" data-slide-to="4" class="color-theme-5 myCarousel-target">
+                                Аспект 5
+                            </li>
+                            <li data-target="#myCarousel" data-slide-to="5" class="color-theme-6 myCarousel-target">
+                                Аспект 6
+                            </li>
+                            <li data-target="#myCarousel" data-slide-to="6" class="color-theme-7 myCarousel-target">
+                                Аспект 7
+                            </li>
+                            <li data-target="#myCarousel" data-slide-to="7" class="color-theme-8 myCarousel-target">
+                                Аспект 8
+                            </li>
+                            <li data-target="#myCarousel" data-slide-to="8" class="color-theme-9 myCarousel-target">
+                                Аспект 9
+                            </li>
+                        </ul>
+
+                        <!-- Wrapper for slides -->
+                        <div class="carousel-inner" role="listbox">
+                            <div class="item active color-theme-1">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="container">
+                                            <div class="row">
+                                                <div class="col-md-12 col-sm-12">
+                                                    <ul class="nav nav-tabs aspects_tabs" role="tablist">
+                                                        <li role="presentation" class="active"><a href="#article1-1" aria-controls="Статья 1" role="tab" data-toggle="tab">Статья 1</a></li>
+                                                        <li role="presentation"><a href="#article1-2" aria-controls="Статья 2" role="tab" data-toggle="tab">Статья 2</a></li>
+                                                        <li role="presentation"><a href="#article1-3" aria-controls="Статья 3" role="tab" data-toggle="tab">Статья 3</a></li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+
+                                                <div class="col-md-12 col-sm-12">
+                                                    <div class="aspect-main-block">
+                                                        <div class="tab-content">
+                                                            <div role="tabpanel" class="tab-pane active fade in" id="article1-1">
+                                                                <h6 class="aspect-main-block-heading">Ситуация с пчелами</h6>
+                                                                <p class="aspect-main-block-text">Пчелы недовольны тем, что на их мед
+                                                                    постоянно покушаются Винни-Пух и его друзья. Желая разрешить
+                                                                    конфликт мирным способом, они обратились к мудрой Сове.</p>
+                                                                <img src="img/aspect-pic1.jpg">
+                                                            </div>
+                                                            <div role="tabpanel" class="tab-pane fade" id="article1-2">
+                                                                <p class="aspect-main-block-text">Пчелы недовольны тем, что на их мед
+                                                                    постоянно покушаются Винни-Пух и его друзья. Желая разрешить
+                                                                    конфликт мирным способом, они обратились к мудрой Сове.</p>
+                                                                <img src="img/aspect-pic1.jpg">
+                                                            </div>
+                                                            <div role="tabpanel" class="tab-pane fade" id="article1-3">
+                                                                <img src="img/aspect-pic1.jpg">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="item color-theme-2">
+                                <div class="row">
+                                    <div class="col-md-12 col-sm-12">
+                                        <div class="aspect-main-block">
+                                            <p class="aspect-main-block-text">В популярной сказке Винни-Пух и его
+                                                друзья жаждали меда, но пчелы не давали забрать у себя плоды своего
+                                                труда. Чтобы раздобыть мед, Винни с компанией пытался обманом
+                                                пробраться в улей на Высоком дубе — не вышло, сутками подкарауливал
+                                                момент, когда все пчелы вылетят из улья, — не дождался; пытался
+                                                втянуть пчел в переговоры, предлагая грибы и ягоды в обмен на мед, —
+                                                был отвергнут.
+                                                Всего в истории участвовало трое четвероногих: сам Винни-Пух и его
+                                                друзья Пятачок и Кролик.</p>
+                                            <img src="img/aspect-pic2.jpg">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="item color-theme-3">
+                                <div class="row">
+                                    <div class="col-md-12 col-sm-12">
+                                        <div class="aspect-main-block">
+                                            <h6 class="aspect-main-block-heading">Трудности, связанные с
+                                                расположением конфликтующих сторон</h6>
+
+                                            <p class="aspect-main-block-text">Как видно на карте, Винни-Пух с
+                                                друзьями живут достаточно близко к Высокому дубу.
+                                                Это часто обостряет конфликт, потому что пчелы не могут нормально
+                                                собирать мед,
+                                                постоянно беспокоясь, что их ограбят.</p>
+                                            <img src="img/aspect-pic3.jpg">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="item color-theme-4">
+                                <div class="row">
+                                    <div class="col-md-12 col-sm-12">
+                                        <div class="aspect-main-block">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="item color-theme-5">
+                                <div class="row">
+                                    <div class="col-md-12 col-sm-12">
+                                        <div class="aspect-main-block">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="item color-theme-6">
+                                <div class="row">
+                                    <div class="col-md-12 col-sm-12">
+                                        <div class="aspect-main-block">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="item color-theme-7">
+                                <div class="row">
+                                    <div class="col-md-12 col-sm-12">
+                                        <div class="aspect-main-block">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="item color-theme-8">
+                                <div class="row">
+                                    <div class="col-md-12 col-sm-12">
+                                        <div class="aspect-main-block">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="item color-theme-9">
+                                <div class="row">
+                                    <div class="col-md-12 col-sm-12">
+                                        <div class="aspect-main-block">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <a class="myCarousel-control left" href="#myCarousel" role="button" data-slide="prev">
+                            <i class="fa fa-3x fa-caret-left"></i>
+                        </a>
+                        <a class="myCarousel-control right" href="#myCarousel" role="button" data-slide="next">
+                            <i class="fa fa-3x fa-caret-right"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
 </div>
 

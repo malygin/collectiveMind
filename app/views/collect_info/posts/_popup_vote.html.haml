@@ -17,17 +17,17 @@
           %li.col-md-4.no_padding_col{:role => "presentation"}
             %a.vote_folder{"data-toggle" => "tab", "data-vote-folder-role" => "important", :href => "#vote_tab2", :role => "tab"}
               .vote_folder_inn.poll-2-1
-                %span.vote_counter 0
+                %span.vote_counter
                 %h5 Важно
           %li.col-md-4.no_padding_col{:role => "presentation"}
             %a.vote_folder{"data-toggle" => "tab", "data-vote-folder-role" => "not_important", :href => "#vote_tab3", :role => "tab"}
               .vote_folder_inn.poll-2-2
-                %span.vote_counter 0
+                %span.vote_counter
                 %h5 Неважно
           %li.col-md-4.no_padding_col{:role => "presentation"}
             %a.vote_folder{"data-toggle" => "tab", "data-vote-folder-role" => "unnecessary", :href => "#vote_tab4", :role => "tab"}
               .vote_folder_inn.poll-2-3
-                %span.vote_counter 0
+                %span.vote_counter
                 %h5 Лишнее
       .divider25
       .container
@@ -40,13 +40,13 @@
                   - @aspects.each_with_index do |asp, index|
                     = render partial: 'post_vote', object: asp
 
-            #vote_tab2.tab-pane{:role => "tabpanel"}
+            #vote_tab2.tab-pane{"data-vote-poll-role" => "important", :role => "tabpanel"}
               .container.padding30
                 .row
-            #vote_tab3.tab-pane{:role => "tabpanel"}
+            #vote_tab3.tab-pane{"data-vote-poll-role" => "not_important", :role => "tabpanel"}
               .container.padding30
                 .row
-            #vote_tab4.tab-pane{:role => "tabpanel"}
+            #vote_tab4.tab-pane{"data-vote-poll-role" => "unnecessary", :role => "tabpanel"}
               .container.padding30
                 .row
           .divider35

@@ -16,11 +16,13 @@
 
     <link href="css/custom.css" rel="stylesheet">
     <link href="css/custom-post.css" rel="stylesheet">
+    <link href="css/sprites.css" rel="stylesheet">
+    <link href="css/colors.css" rel="stylesheet">
 
 </head>
 
-<body>
-<div class="outer stage4_theme">
+<body class="stage4_theme">
+<div class="outer">
 
 <!-- Top bar starts -->
 <header class="navbar top_bar">
@@ -138,7 +140,7 @@
 </ul>
 
 <div class="navbar-right text-right user_block font_grey">
-    <a href="#" class="book_icon">
+    <a href="#popup-database" class="book_icon open-popup-link">
     </a>
     <span class="auth-divider"> |</span>
                     <span class="has_dropwindow">
@@ -339,8 +341,7 @@
     <div class="container">
         <h4 class="font_white">Решение конфликта, возникшего из-за меда</h4>
     </div>
-    <button type="button" class="btn btn-tooltip" id="tooltip_button_3" value="Show"><i class="fa fa-lightbulb-o"></i> Открыть подсказки</button>
-    <button type="button" class="btn btn-tooltip-close" id="close_tooltip_button_3" value="Destroy"><i class="fa fa-lightbulb-o"></i> Закрыть подсказки</button>
+    <button type="button" class="btn btn-tooltip" id="tooltip_button_4" value="Show"><i class="fa fa-lightbulb-o"></i> Подсказки</button>
 </div>
 
 
@@ -438,7 +439,7 @@
                     <div class="col-md-5">
                         <div class="sort-block pull-right">
                             <span class="sort-label">Сортировать по новым:</span>
-                            <div class="sort-1"><span>25</span></div><div class="sort-2"><span>2</span></div>
+                            <div class="sort-1 sort_btn sprite_com sprite-item4_2_1"><span>25</span></div><div class="sort-2 sort_btn sprite_doc sprite-item4_1"><span>2</span></div>
                             <a href="cabinet-stage3.html"><button class="btn add-button"><span>+</span>Нововведение</button></a>
                         </div>
                     </div>
@@ -449,18 +450,16 @@
                 <div class="row">
                     <div class="col-md-6">
 
-                            <div class="post">
-                                <div class="post-header white">
+                            <div class="post post_type_3">
+                                <div class="post-header white open-popup" data-placement="4" data-target="1">
                                     <div class="row">
-                                        <div class="col-md-10 col-xs-10">
+                                        <div class="col-md-12 col-xs-12">
                                             <h5 class="font_purple bold">Соглашение и арбитр.</h5>
                                         </div>
-                                        <div class="col-md-2 col-xs-2">
-                                            <h5 class="time">20.12.2014</h5>
-                                        </div>
                                     </div>
+                                    <i class="fa fa-angle-right"></i>
                                 </div>
-                                <div class="post-body">
+                                <div class="post-body ch_action" data-for="post_ch1">
                                     <div class="media">
 
                                         <div class="media-left text-center gradient post-poster ">
@@ -473,34 +472,58 @@
                                             <div class="post-text">
                                                 <p>Взаимное недоверие четвероногих и пчёл</p>
                                             </div>
+                                            <div class="post_cont_hover post_tall white" id="post_ch1">
+                                                <div class="wrapper ps_cont half_wheel_speed">
+                                                    <div class="post_cont_inner">
+                                                        <div class="comment_preview"><span class="bold">Liza:</span> По поводу кнопки "всё". Она не очень интуитивна и красива.</div>
+                                                        <div class="comment_preview"><span class="bold">Liza:</span> Начальная - это та, что грузится со страницей. Но она по дате сортировки</div>
+                                                        <div class="comment_preview"><span class="bold">irivertime:</span> И обратная сортировка должна тоже как-то выделяться</div>
+                                                        <div class="comment_preview"><span class="bold">Liza:</span> По поводу кнопки "всё". Она не очень интуитивна и красива.</div>
+                                                        <div class="comment_preview"><span class="bold">Liza:</span> Начальная - это та, что грузится со страницей. Но она по дате сортировки</div>
+                                                        <div class="comment_preview"><span class="bold">irivertime:</span> И обратная сортировка должна тоже как-то выделяться</div>
+                                                        <div class="comment_preview"><span class="bold">Liza:</span> По поводу кнопки "всё". Она не очень интуитивна и красива.</div>
+                                                        <div class="comment_preview"><span class="bold">Liza:</span> Начальная - это та, что грузится со страницей. Но она по дате сортировки</div>
+                                                        <div class="comment_preview"><span class="bold">irivertime:</span> И обратная сортировка должна тоже как-то выделяться</div>
+                                                    </div>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="contenthover">
-                                    <div class="arrow open-popup" data-placement="4" data-target="1">
-                                        <i class="fa fa-angle-right"></i>
-                                    </div>
-                                </div>
-                                <div class="post-bottom white tooltip3_2" data-toggle="tooltip" id="tooltip3_2" data-trigger="none" data-placement="bottom" title="В цветных квадратиках скрывается перечень несовершенств, связанных с данным нововведением. Нажмите на любой из них, чтобы увидеть полное название нововведения.">
+                                <div class="post-bottom white tooltip4" data-toggle="tooltip" id="tooltip4_2" data-trigger="manual" data-placement="bottom" title="В цветных квадратиках скрывается перечень несовершенств, связанных с данным нововведением. Нажмите на любой из них, чтобы увидеть полное название нововведения.">
                                     <div class="row">
-                                        <div class="col-md-9 col_padding_right_3">
-                                            <small class="pull-left" style="margin-right: 3px;">Идеи</small>
+                                        <div class="col-md-1 col_padding_right_3"><small class="pull-left" style="margin-right: 3px;">Идеи</small></div>
+                                        <div class="col-md-8 col_padding_right_3 themes_cont">
                                             <div class="post-theme" id="stripe1">
-                                                <a href="#" class="tag-stripes dark-blue active" id="stripe1"><span
-                                                        class="tags">Взаимное недоверие четвероногих и пчёл</span></a>
-                                                <a href="#" class="tag-stripes blue-green" id="stripe1"><span
-                                                        class="tags">Четвероногим нечем заинтересовать пчел</span></a>
-                                                <a href="#" class="tag-stripes blue-green2" id="stripe1"><span
-                                                        class="tags">Активное противостояние четвероногих и пчел</span></a>
-                                                <a href="#" class="tag-stripes blue-green3" id="stripe1"><span
-                                                        class="tags">Рядом с дубом нет цветочных полян</span></a>
-                                                <a href="#" class="tag-stripes light-green" id="stripe1"><span
-                                                        class="tags">Пчелы летают слишком медленно</span></a>
+                                                <span class="tag-stripes color_me active" data-me-action = 'background-color' data-me-color = '1' data-me-type = 'imperf'><span
+                                                        class="tags">Слишком низкие</span></span>
+                                                <span class="tag-stripes color_me" data-me-action = 'background-color' data-me-color = '2' data-me-type = 'imperf'><span
+                                                        class="tags">Четвероногим нечем</span></span>
+                                                <span class="tag-stripes color_me" data-me-action = 'background-color' data-me-color = '3' data-me-type = 'imperf'><span
+                                                        class="tags">Активное противостояние</span></span>
+                                                <span class="tag-stripes color_me" data-me-action = 'background-color' data-me-color = '4' data-me-type = 'imperf'><span
+                                                        class="tags">Рядом с дубом нет</span></span>
+                                                <span class="tag-stripes color_me" data-me-action = 'background-color' data-me-color = '5' data-me-type = 'imperf'><span
+                                                        class="tags">Рядом с дубом нет</span></span>
+                                                <span class="tag-stripes color_me" data-me-action = 'background-color' data-me-color = '6' data-me-type = 'imperf'><span
+                                                        class="tags">Рядом с дубом нет</span></span>
+                                                <span class="tag-stripes color_me" data-me-action = 'background-color' data-me-color = '7' data-me-type = 'imperf'><span
+                                                        class="tags">Рядом с дубом нет</span></span>
+                                                <span class="tag-stripes color_me" data-me-action = 'background-color' data-me-color = '8' data-me-type = 'imperf'><span
+                                                        class="tags">Рядом с дубом нет</span></span>
+                                                <span class="tag-stripes color_me" data-me-action = 'background-color' data-me-color = '9' data-me-type = 'imperf'><span
+                                                        class="tags">Рядом с дубом нет</span></span>
+                                                <span class="tag-stripes color_me" data-me-action = 'background-color' data-me-color = '10' data-me-type = 'imperf'><span
+                                                        class="tags">Рядом с дубом нет</span></span>
+                                                <span class="tag-stripes color_me" data-me-action = 'background-color' data-me-color = '11' data-me-type = 'imperf'><span
+                                                        class="tags">Рядом с дубом нет</span></span>
+                                                <span class="tag-stripes color_me" data-me-action = 'background-color' data-me-color = '12' data-me-type = 'imperf'><span
+                                                        class="tags">Рядом с дубом нет</span></span>
                                             </div>
                                         </div>
                                         <div class="col-md-3 col_padding_left_3">
                                             <div class="text-right small_icons">
-                                                <a class="popup2 a_font_reset"><small>5</small> <i class="fa fa-comment-o"></i></a>
+                                                <span class="popup2 comments_icon" data-for="post_ch1"><small>5</small> <i class="fa fa-comment-o"></i></span>
                                                 <span class="popup2"><small>9</small> <i class="fa fa-thumbs-o-up fa-flip-horizontal"></i></span>
                                                 <span class="popup2"><small>1</small> <i class="fa fa-thumbs-o-down fa-flip-horizontal"></i></span>
                                                 <span class="popup2"><i class="fa fa-exclamation-triangle font_lighter_grey"></i></span>
@@ -512,18 +535,16 @@
                             </div>
                     </div>
                     <div class="col-md-6">
-                            <div class="post">
-                                <div class="post-header white">
+                            <div class="post post_type_3">
+                                <div class="post-header white open-popup" data-placement="4" data-target="1">
                                     <div class="row">
-                                        <div class="col-md-10 col-xs-10">
-                                            <h5 class="font_purple bold tooltip3_1" data-toggle="tooltip" id="tooltip3_1" data-trigger="none" data-placement="bottom" title="Каждое нововведение может устранять одно или несколько несовершенств.">Аренда медовырабатывающей машины</h5>
-                                        </div>
-                                        <div class="col-md-2 col-xs-2">
-                                            <h5 class="time">21.12.2014</h5>
+                                        <div class="col-md-12 col-xs-12">
+                                            <h5 class="font_purple bold tooltip4" data-toggle="tooltip" id="tooltip4_1" data-trigger="manual" data-placement="bottom" title="Каждое нововведение может устранять одно или несколько несовершенств.">Аренда медовырабатывающей машины</h5>
                                         </div>
                                     </div>
+                                    <i class="fa fa-angle-right"></i>
                                 </div>
-                                <div class="post-body">
+                                <div class="post-body ch_action" data-for="post_ch2">
                                     <div class="media">
 
                                         <div class="media-left text-center gradient post-poster ">
@@ -536,34 +557,58 @@
                                             <div class="post-text">
                                                 <p>Четвероногим нечем заинтересовать пчел</p>
                                             </div>
+                                            <div class="post_cont_hover post_tall white" id="post_ch2">
+                                                <div class="wrapper ps_cont half_wheel_speed">
+                                                    <div class="post_cont_inner">
+                                                        <div class="comment_preview"><span class="bold">Liza:</span> По поводу кнопки "всё". Она не очень интуитивна и красива.</div>
+                                                        <div class="comment_preview"><span class="bold">Liza:</span> Начальная - это та, что грузится со страницей. Но она по дате сортировки</div>
+                                                        <div class="comment_preview"><span class="bold">irivertime:</span> И обратная сортировка должна тоже как-то выделяться</div>
+                                                        <div class="comment_preview"><span class="bold">Liza:</span> По поводу кнопки "всё". Она не очень интуитивна и красива.</div>
+                                                        <div class="comment_preview"><span class="bold">Liza:</span> Начальная - это та, что грузится со страницей. Но она по дате сортировки</div>
+                                                        <div class="comment_preview"><span class="bold">irivertime:</span> И обратная сортировка должна тоже как-то выделяться</div>
+                                                        <div class="comment_preview"><span class="bold">Liza:</span> По поводу кнопки "всё". Она не очень интуитивна и красива.</div>
+                                                        <div class="comment_preview"><span class="bold">Liza:</span> Начальная - это та, что грузится со страницей. Но она по дате сортировки</div>
+                                                        <div class="comment_preview"><span class="bold">irivertime:</span> И обратная сортировка должна тоже как-то выделяться</div>
+                                                    </div>
+                                                </div>
+                                            </div>
                                         </div>
-                                    </div>
-                                </div>
-                                <div class="contenthover">
-                                    <div class="arrow open-popup" data-placement="4" data-target="1">
-                                        <i class="fa fa-angle-right"></i>
                                     </div>
                                 </div>
                                 <div class="post-bottom white">
                                     <div class="row">
-                                        <div class="col-md-9 col_padding_right_3">
-                                            <small class="pull-left" style="margin-right: 3px;">Идеи</small>
+                                        <div class="col-md-1 col_padding_right_3"><small class="pull-left" style="margin-right: 3px;">Идеи</small></div>
+                                        <div class="col-md-8 col_padding_right_3 themes_cont">
                                             <div class="post-theme" id="stripe2">
-                                                <a href="#" class="tag-stripes blue-green2 active" id="stripe2"><span
-                                                        class="tags">Взаимное недоверие четвероногих и пчёл</span></a>
-                                                <a href="#" class="tag-stripes blue-green3" id="stripe2"><span
-                                                        class="tags">Четвероногим нечем заинтересовать пчел</span></a>
-                                                <a href="#" class="tag-stripes blue-green" id="stripe2"><span
-                                                        class="tags">Активное противостояние четвероногих и пчел</span></a>
-                                                <a href="#" class="tag-stripes light-green" id="stripe2"><span
-                                                        class="tags">Рядом с дубом нет цветочных полян</span></a>
-                                                <a href="#" class="tag-stripes dark-blue2" id="stripe2"><span
-                                                        class="tags">Пчелы летают слишком медленно</span></a>
+                                                <span class="tag-stripes color_me active" data-me-action = 'background-color' data-me-color = '1' data-me-type = 'imperf'><span
+                                                        class="tags">Слишком низкие</span></span>
+                                                <span class="tag-stripes color_me" data-me-action = 'background-color' data-me-color = '2' data-me-type = 'imperf'><span
+                                                        class="tags">Четвероногим нечем</span></span>
+                                                <span class="tag-stripes color_me" data-me-action = 'background-color' data-me-color = '3' data-me-type = 'imperf'><span
+                                                        class="tags">Активное противостояние</span></span>
+                                                <span class="tag-stripes color_me" data-me-action = 'background-color' data-me-color = '4' data-me-type = 'imperf'><span
+                                                        class="tags">Рядом с дубом нет</span></span>
+                                                <span class="tag-stripes color_me" data-me-action = 'background-color' data-me-color = '5' data-me-type = 'imperf'><span
+                                                        class="tags">Рядом с дубом нет</span></span>
+                                                <span class="tag-stripes color_me" data-me-action = 'background-color' data-me-color = '6' data-me-type = 'imperf'><span
+                                                        class="tags">Рядом с дубом нет</span></span>
+                                                <span class="tag-stripes color_me" data-me-action = 'background-color' data-me-color = '7' data-me-type = 'imperf'><span
+                                                        class="tags">Рядом с дубом нет</span></span>
+                                                <span class="tag-stripes color_me" data-me-action = 'background-color' data-me-color = '8' data-me-type = 'imperf'><span
+                                                        class="tags">Рядом с дубом нет</span></span>
+                                                <span class="tag-stripes color_me" data-me-action = 'background-color' data-me-color = '9' data-me-type = 'imperf'><span
+                                                        class="tags">Рядом с дубом нет</span></span>
+                                                <span class="tag-stripes color_me" data-me-action = 'background-color' data-me-color = '10' data-me-type = 'imperf'><span
+                                                        class="tags">Рядом с дубом нет</span></span>
+                                                <span class="tag-stripes color_me" data-me-action = 'background-color' data-me-color = '11' data-me-type = 'imperf'><span
+                                                        class="tags">Рядом с дубом нет</span></span>
+                                                <span class="tag-stripes color_me" data-me-action = 'background-color' data-me-color = '12' data-me-type = 'imperf'><span
+                                                        class="tags">Рядом с дубом нет</span></span>
                                             </div>
                                         </div>
                                         <div class="col-md-3 col_padding_left_3">
                                             <div class="text-right small_icons">
-                                                <a class="popup2 a_font_reset"><small>5</small> <i class="fa fa-comment-o"></i></a>
+                                                <span class="popup2 comments_icon" data-for="post_ch2"><small>5</small> <i class="fa fa-comment-o"></i></span>
                                                 <span class="popup2"><small>9</small> <i class="fa fa-thumbs-o-up fa-flip-horizontal"></i></span>
                                                 <span class="popup2"><small>1</small> <i class="fa fa-thumbs-o-down fa-flip-horizontal"></i></span>
                                                 <span class="popup2"><i class="fa fa-exclamation-triangle font_lighter_grey"></i></span>
@@ -605,242 +650,244 @@
                     </div>
                 </div>
             </div>
-            <div class="poster-line line-grey">
-                <span class="tags_badge">идеи</span>
-                <div class="row">
-                    <div class="col-md-6">
-                        <div class="innov-poster-cont">
-                            <img src="img/ava-pyat.jpg" class="img-circle">
-                            <span class="poster-name">Пятачок</span>
-                        </div>
-                    </div>
-                    <div class="col-md-6 col_padding_right_0">
-                        <div class="innov-tags">
-                            <div class="innov-tags-tag dark-blue popup_tooltip tooltip3_tag_1">Взаимное недоверие четвероногих и пчёл</div>
-                            <div class="innov-tags-tag blue-green popup_tooltip tooltip3_tag_2">Четвероногим нечем заинтересовать пчел</div>
-                            <div class="innov-tags-tag blue-green2 popup_tooltip tooltip3_tag_3">Активное противостояние четвероногих и пчел</div>
-                            <div class="innov-tags-tag blue-green3 popup_tooltip tooltip3_tag_4">Рядом с дубом нет цветочных полян</div>
-                            <div class="innov-tags-tag light-green popup_tooltip tooltip3_tag_5">Пчелы летают слишком медленно</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="container">
-            <div class="row">
-            <div class="col-md-6 com_dashed_border right popup_collapsable_col collapse in">
-                <button class="expand_button remove_col btn_reset" type="button" data-toggle="collapse" data-target=".popup_collapsable_col" data-col="6"></button>
-                <div class="divider25"></div>
-                <div class="stripe-qa">
-                    <div class="lined-heading">
-                        <span class="bold-stripe">Деятельность</span>
-                    </div>
-                    <p><strong>Описание: </strong>lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum </p>
-                    <p><strong>Обоснование: </strong>lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum </p>
-                </div>
-                <div class="stripe-qa">
-                    <div class="lined-heading">
-                        <span class="bold-stripe">Деятели</span>
-                    </div>
-                    <p><strong>Описание: </strong>lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum </p>
-                </div>
-                <div class="stripe-qa">
-                    <div class="lined-heading">
-                        <span class="bold-stripe">Ресурсы и инструменты</span>
-                    </div>
-                    <p><strong>Описание: </strong>lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum </p>
-                </div>
-                <div class="stripe-qa">
-                    <div class="lined-heading">
-                        <span class="bold-stripe">Воздействие на целевую аудиторию</span>
-                    </div>
-                    <p><strong>Описание: </strong>lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum </p>
-                </div>
-                <div class="stripe-qa">
-                    <div class="lined-heading">
-                        <span class="bold-stripe">Воздействие на среду</span>
-                    </div>
-                    <p><strong>Описание: </strong>lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum </p>
-                </div>
-            </div>
-            <div class="col-md-6 comment_col popup_expandable_col" data-col="6">
-                <button class="expand_button add_col btn_reset theme_font_color bold" type="button" data-toggle="collapse" data-target=".popup_collapsable_col" data-col="6">открыть описание проекта</button>
-                <div class="divider15"></div>
-                <div id="myCarousel" class="carousel slide" data-ride="carousel">
-                    <div class="carousel-inner" role="listbox">
-
-                        <div class="item active">
-                            <div class="media comment" id="comment1">
-                                <div class="media-left">
-                                    <img class="media-object img35 img-circle" src="img/ava-vinnie.jpg">
-                                </div>
-                                <div class="media-body">
-                                    <h5 class="media-heading bold">Винни-Пух</h5>
-                        <span class="comment_interf">
-                            <span class="date_time theme_font_color">15:28</span>
-                            <span class="dropdown edit_comment">
-                                <button class="btn_reset" id="edit_comment1" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-cog fa-lg theme_font_color"></i></button>
-                                <ul class="dropdown-menu" role="menu" aria-labelledby="edit_comment1">
-                                    <li><a tabindex="-1" href="#"><i class="fa fa-pencil"></i>Редактировать</a></li>
-                                    <li><a tabindex="-1" href="#"><i class="fa fa-close"></i>Удалить</a></li>
-                                </ul>
-                            </span>
-                            <span class="badge badge_important theme_back_color">важно</span>
-                        </span>
-                                </div>
-                                <p class="font_grey bold">Ничего не правда. Я люблю гулять, а от вашего дуба тень большая.</p>
-
-                                <div class="post-interfaces-buttons text-left">
-                                    <button type="button" data-for="comment1" data-rate-action="like" class="rate_button"><span class="bold">9 <i class="fa fa-thumbs-up theme_font_color"></i></span></button>
-                                    <button type="button" data-for="comment1" data-rate-action="dislike" class="rate_button"><span class="bold">1 <i class="fa fa-thumbs-down theme_font_color"></i></span></button>
-                                    <button type="button" data-toggle="collapse" data-target="#reply_form_1" class="reply_btn collapsed"><span class="bold"><i class="fa fa-reply fa-rotate-180 theme_font_color"></i></span></button>
-                                </div>
+            <div class="modal_body">
+                <div class="poster-line line-grey">
+                    <span class="tags_badge">идеи</span>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="innov-poster-cont">
+                                <img src="img/ava-pyat.jpg" class="img-circle">
+                                <span class="poster-name">Пятачок</span>
                             </div>
-                            <form class="form-group comment_add collapse" id="reply_form_1">
-                                <div class="input_cont">
-                                    <textarea placeholder="Ваш комментарий"></textarea>
+                        </div>
+                        <div class="col-md-6 col_padding_right_0">
+                            <div class="innov-tags">
+                                <div class="innov-tags-tag dark-blue popup_tooltip tooltip3_tag_1">Взаимное недоверие четвероногих и пчёл</div>
+                                <div class="innov-tags-tag blue-green popup_tooltip tooltip3_tag_2">Четвероногим нечем заинтересовать пчел</div>
+                                <div class="innov-tags-tag blue-green2 popup_tooltip tooltip3_tag_3">Активное противостояние четвероногих и пчел</div>
+                                <div class="innov-tags-tag blue-green3 popup_tooltip tooltip3_tag_4">Рядом с дубом нет цветочных полян</div>
+                                <div class="innov-tags-tag light-green popup_tooltip tooltip3_tag_5">Пчелы летают слишком медленно</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="container modal_content">
+                    <div class="row">
+                        <div class="col-md-6 com_dashed_border right popup_collapsable_col collapse in">
+                            <button class="expand_button remove_col btn_reset" type="button" data-toggle="collapse" data-target=".popup_collapsable_col" data-col="6"></button>
+                            <div class="divider25"></div>
+                            <div class="stripe-qa">
+                                <div class="lined-heading">
+                                    <span class="bold-stripe">Деятельность</span>
                                 </div>
-                                <button class="btn" type="button"><span class="bold"><i class="fa fa-reply fa-rotate-180 theme_font_color"></i></span></button>
-                            </form>
-                            <a class="answers_collapse theme_font_color" data-toggle="collapse" href="#answers-3-1" aria-expanded="false"><span>3 ответа</span></a>
-                            <div class="com_answers collapse" id="answers-3-1">
-                                <div class="answers_subblock level1">
-                                    <div class="media comment unread" id="comment2">
-                                        <div class="media-left">
-                                            <img class="media-object img35 img-circle" src="img/ava-vinnie.jpg">
-                                        </div>
-                                        <div class="media-body">
-                                            <h5 class="media-heading bold">Винни-Пух</h5>
-                        <span class="comment_interf">
-                            <span class="date_time theme_font_color">17:28</span>
-                            <span class="badge badge_important theme_back_color">важно</span>
-                        </span>
-                                        </div>
-                                        <p class="font_grey bold">Ничего не правда. Я люблю гулять, а от вашего дуба тень большая.</p>
+                                <p><strong>Описание: </strong>lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum </p>
+                                <p><strong>Обоснование: </strong>lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum </p>
+                            </div>
+                            <div class="stripe-qa">
+                                <div class="lined-heading">
+                                    <span class="bold-stripe">Деятели</span>
+                                </div>
+                                <p><strong>Описание: </strong>lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum </p>
+                            </div>
+                            <div class="stripe-qa">
+                                <div class="lined-heading">
+                                    <span class="bold-stripe">Ресурсы и инструменты</span>
+                                </div>
+                                <p><strong>Описание: </strong>lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum </p>
+                            </div>
+                            <div class="stripe-qa">
+                                <div class="lined-heading">
+                                    <span class="bold-stripe">Воздействие на целевую аудиторию</span>
+                                </div>
+                                <p><strong>Описание: </strong>lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum </p>
+                            </div>
+                            <div class="stripe-qa">
+                                <div class="lined-heading">
+                                    <span class="bold-stripe">Воздействие на среду</span>
+                                </div>
+                                <p><strong>Описание: </strong>lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum </p>
+                            </div>
+                        </div>
+                        <div class="col-md-6 comment_col popup_expandable_col ps_cont" data-col="6">
+                            <button class="expand_button add_col btn_reset theme_font_color bold" type="button" data-toggle="collapse" data-target=".popup_collapsable_col" data-col="6">открыть описание проекта</button>
+                            <div class="divider15"></div>
+                            <div id="myCarousel" class="carousel slide" data-ride="carousel">
+                                <div class="carousel-inner" role="listbox">
 
-                                        <div class="post-interfaces-buttons text-left">
-                                            <button type="button" data-for="comment2" data-rate-action="like" class="rate_button"><span class="bold">9 <i class="fa fa-thumbs-up theme_font_color"></i></span></button>
-                                            <button type="button" data-for="comment2" data-rate-action="dislike" class="rate_button"><span class="bold">1 <i class="fa fa-thumbs-down theme_font_color"></i></span></button>
-                                            <button type="button" data-toggle="collapse" data-target="#reply_form_2" class="reply_btn collapsed"><span class="bold"><i class="fa fa-reply fa-rotate-180 theme_font_color"></i></span></button>
-                                        </div>
-                                    </div>
-                                    <form class="form-group comment_add collapse" id="reply_form_2">
-                                        <div class="input_cont">
-                                            <textarea placeholder="Ваш комментарий"></textarea>
-                                        </div>
-                                        <button class="btn" type="button"><span class="bold"><i class="fa fa-reply fa-rotate-180 theme_font_color"></i></span></button>
-                                    </form>
-                                    <div class="media comment unread" id="comment3">
-                                        <div class="media-left">
-                                            <img class="media-object img35 img-circle" src="img/ava-vinnie.jpg">
-                                        </div>
-                                        <div class="media-body">
-                                            <h5 class="media-heading bold">Винни-Пух</h5>
-                                <span class="comment_interf">
-                                    <span class="date_time theme_font_color">15:28</span>
-                                    <span class="dropdown edit_comment">
-                                        <button class="btn_reset" id="edit_comment2" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-cog fa-lg theme_font_color"></i></button>
-                                        <ul class="dropdown-menu" role="menu" aria-labelledby="edit_comment1">
-                                            <li><a tabindex="-1" href="#"><i class="fa fa-pencil"></i>Редактировать</a></li>
-                                            <li><a tabindex="-1" href="#"><i class="fa fa-close"></i>Удалить</a></li>
-                                        </ul>
+                                    <div class="item active">
+                                        <div class="media comment" id="comment1">
+                                            <div class="media-left">
+                                                <img class="media-object img35 img-circle" src="img/ava-vinnie.jpg">
+                                            </div>
+                                            <div class="media-body">
+                                                <h5 class="media-heading bold">Винни-Пух</h5>
+                                    <span class="comment_interf">
+                                        <span class="date_time theme_font_color">15:28</span>
+                                        <span class="dropdown edit_comment">
+                                            <button class="btn_reset" id="edit_comment1" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-cog fa-lg theme_font_color"></i></button>
+                                            <ul class="dropdown-menu" role="menu" aria-labelledby="edit_comment1">
+                                                <li><a tabindex="-1" href="#"><i class="fa fa-pencil"></i>Редактировать</a></li>
+                                                <li><a tabindex="-1" href="#"><i class="fa fa-close"></i>Удалить</a></li>
+                                            </ul>
+                                        </span>
+                                        <span class="badge badge_important theme_back_color">важно</span>
                                     </span>
-                                </span>
-                                        </div>
-                                        <p class="font_grey bold">Ничего не правда. Я люблю гулять, а от вашего дуба тень большая.</p>
+                                            </div>
+                                            <p class="font_grey bold">Ничего не правда. Я люблю гулять, а от вашего дуба тень большая.</p>
 
-                                        <div class="post-interfaces-buttons text-left">
-                                            <button type="button" data-for="comment3" data-rate-action="like" class="rate_button"><span class="bold">9 <i class="fa fa-thumbs-up theme_font_color"></i></span></button>
-                                            <button type="button" data-for="comment3" data-rate-action="dislike" class="rate_button"><span class="bold">1 <i class="fa fa-thumbs-down theme_font_color"></i></span></button>
-                                            <button type="button" data-toggle="collapse" data-target="#reply_form_3" class="reply_btn collapsed"><span class="bold"><i class="fa fa-reply fa-rotate-180 theme_font_color"></i></span></button>
+                                            <div class="post-interfaces-buttons text-left">
+                                                <button type="button" data-for="comment1" data-rate-action="like" class="rate_button"><span class="bold">9 <i class="fa fa-thumbs-up theme_font_color"></i></span></button>
+                                                <button type="button" data-for="comment1" data-rate-action="dislike" class="rate_button"><span class="bold">1 <i class="fa fa-thumbs-down theme_font_color"></i></span></button>
+                                                <button type="button" data-toggle="collapse" data-target="#reply_form_1" class="reply_btn collapsed"><span class="bold"><i class="fa fa-reply fa-rotate-180 theme_font_color"></i></span></button>
+                                            </div>
                                         </div>
-                                    </div>
-                                    <form class="form-group comment_add collapse" id="reply_form_3">
-                                        <div class="input_cont">
-                                            <textarea placeholder="Ваш комментарий"></textarea>
-                                        </div>
-                                        <button class="btn" type="button"><span class="bold"><i class="fa fa-reply fa-rotate-180 theme_font_color"></i></span></button>
-                                    </form>
-                                </div>
-                                <div class="answers_subblock level2">
-                                    <div class="media comment" id="comment4">
-                                        <div class="media-left">
-                                            <img class="media-object img35 img-circle" src="img/ava-vinnie.jpg">
-                                        </div>
-                                        <div class="media-body">
-                                            <h5 class="media-heading bold">Винни-Пух</h5>
-                        <span class="comment_interf">
-                            <span class="date_time theme_font_color">15:28</span>
-                        </span>
-                                        </div>
-                                        <p class="font_grey bold">Ничего не правда. Я люблю гулять, а от вашего дуба тень большая.</p>
+                                        <form class="form-group comment_add collapse" id="reply_form_1">
+                                            <div class="input_cont">
+                                                <textarea placeholder="Ваш комментарий"></textarea>
+                                            </div>
+                                            <button class="btn" type="button"><span class="bold"><i class="fa fa-reply fa-rotate-180 theme_font_color"></i></span></button>
+                                        </form>
+                                        <a class="answers_collapse theme_font_color" data-toggle="collapse" href="#answers-3-1" aria-expanded="false"><span>3 ответа</span></a>
+                                        <div class="com_answers collapse" id="answers-3-1">
+                                            <div class="answers_subblock level1">
+                                                <div class="media comment unread" id="comment2">
+                                                    <div class="media-left">
+                                                        <img class="media-object img35 img-circle" src="img/ava-vinnie.jpg">
+                                                    </div>
+                                                    <div class="media-body">
+                                                        <h5 class="media-heading bold">Винни-Пух</h5>
+                                    <span class="comment_interf">
+                                        <span class="date_time theme_font_color">17:28</span>
+                                        <span class="badge badge_important theme_back_color">важно</span>
+                                    </span>
+                                                    </div>
+                                                    <p class="font_grey bold">Ничего не правда. Я люблю гулять, а от вашего дуба тень большая.</p>
 
-                                        <div class="post-interfaces-buttons text-left">
-                                            <button type="button" data-for="comment4" data-rate-action="like" class="rate_button"><span class="bold">9 <i class="fa fa-thumbs-up theme_font_color"></i></span></button>
-                                            <button type="button" data-for="comment4" data-rate-action="dislike" class="rate_button"><span class="bold">1 <i class="fa fa-thumbs-down theme_font_color"></i></span></button>
-                                            <button type="button" data-toggle="collapse" data-target="#reply_form_4" class="reply_btn collapsed"><span class="bold"><i class="fa fa-reply fa-rotate-180 theme_font_color"></i></span></button>
+                                                    <div class="post-interfaces-buttons text-left">
+                                                        <button type="button" data-for="comment2" data-rate-action="like" class="rate_button"><span class="bold">9 <i class="fa fa-thumbs-up theme_font_color"></i></span></button>
+                                                        <button type="button" data-for="comment2" data-rate-action="dislike" class="rate_button"><span class="bold">1 <i class="fa fa-thumbs-down theme_font_color"></i></span></button>
+                                                        <button type="button" data-toggle="collapse" data-target="#reply_form_2" class="reply_btn collapsed"><span class="bold"><i class="fa fa-reply fa-rotate-180 theme_font_color"></i></span></button>
+                                                    </div>
+                                                </div>
+                                                <form class="form-group comment_add collapse" id="reply_form_2">
+                                                    <div class="input_cont">
+                                                        <textarea placeholder="Ваш комментарий"></textarea>
+                                                    </div>
+                                                    <button class="btn" type="button"><span class="bold"><i class="fa fa-reply fa-rotate-180 theme_font_color"></i></span></button>
+                                                </form>
+                                                <div class="media comment unread" id="comment3">
+                                                    <div class="media-left">
+                                                        <img class="media-object img35 img-circle" src="img/ava-vinnie.jpg">
+                                                    </div>
+                                                    <div class="media-body">
+                                                        <h5 class="media-heading bold">Винни-Пух</h5>
+                                            <span class="comment_interf">
+                                                <span class="date_time theme_font_color">15:28</span>
+                                                <span class="dropdown edit_comment">
+                                                    <button class="btn_reset" id="edit_comment2" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-cog fa-lg theme_font_color"></i></button>
+                                                    <ul class="dropdown-menu" role="menu" aria-labelledby="edit_comment1">
+                                                        <li><a tabindex="-1" href="#"><i class="fa fa-pencil"></i>Редактировать</a></li>
+                                                        <li><a tabindex="-1" href="#"><i class="fa fa-close"></i>Удалить</a></li>
+                                                    </ul>
+                                                </span>
+                                            </span>
+                                                    </div>
+                                                    <p class="font_grey bold">Ничего не правда. Я люблю гулять, а от вашего дуба тень большая.</p>
+
+                                                    <div class="post-interfaces-buttons text-left">
+                                                        <button type="button" data-for="comment3" data-rate-action="like" class="rate_button"><span class="bold">9 <i class="fa fa-thumbs-up theme_font_color"></i></span></button>
+                                                        <button type="button" data-for="comment3" data-rate-action="dislike" class="rate_button"><span class="bold">1 <i class="fa fa-thumbs-down theme_font_color"></i></span></button>
+                                                        <button type="button" data-toggle="collapse" data-target="#reply_form_3" class="reply_btn collapsed"><span class="bold"><i class="fa fa-reply fa-rotate-180 theme_font_color"></i></span></button>
+                                                    </div>
+                                                </div>
+                                                <form class="form-group comment_add collapse" id="reply_form_3">
+                                                    <div class="input_cont">
+                                                        <textarea placeholder="Ваш комментарий"></textarea>
+                                                    </div>
+                                                    <button class="btn" type="button"><span class="bold"><i class="fa fa-reply fa-rotate-180 theme_font_color"></i></span></button>
+                                                </form>
+                                            </div>
+                                            <div class="answers_subblock level2">
+                                                <div class="media comment" id="comment4">
+                                                    <div class="media-left">
+                                                        <img class="media-object img35 img-circle" src="img/ava-vinnie.jpg">
+                                                    </div>
+                                                    <div class="media-body">
+                                                        <h5 class="media-heading bold">Винни-Пух</h5>
+                                    <span class="comment_interf">
+                                        <span class="date_time theme_font_color">15:28</span>
+                                    </span>
+                                                    </div>
+                                                    <p class="font_grey bold">Ничего не правда. Я люблю гулять, а от вашего дуба тень большая.</p>
+
+                                                    <div class="post-interfaces-buttons text-left">
+                                                        <button type="button" data-for="comment4" data-rate-action="like" class="rate_button"><span class="bold">9 <i class="fa fa-thumbs-up theme_font_color"></i></span></button>
+                                                        <button type="button" data-for="comment4" data-rate-action="dislike" class="rate_button"><span class="bold">1 <i class="fa fa-thumbs-down theme_font_color"></i></span></button>
+                                                        <button type="button" data-toggle="collapse" data-target="#reply_form_4" class="reply_btn collapsed"><span class="bold"><i class="fa fa-reply fa-rotate-180 theme_font_color"></i></span></button>
+                                                    </div>
+                                                </div>
+                                                <form class="form-group comment_add collapse" id="reply_form_4">
+                                                    <div class="input_cont">
+                                                        <textarea placeholder="Ваш комментарий"></textarea>
+                                                    </div>
+                                                    <button class="btn" type="button"><span class="bold"><i class="fa fa-reply fa-rotate-180 theme_font_color"></i></span></button>
+                                                </form>
+                                            </div>
                                         </div>
+
+                                        <div class="media comment unread" id="comment5">
+                                            <div class="media-left">
+                                                <img class="media-object img35 img-circle" src="img/ava-vinnie.jpg">
+                                            </div>
+                                            <div class="media-body">
+                                                <h5 class="media-heading bold">Винни-Пух</h5>
+                                    <span class="comment_interf">
+                                        <span class="date_time theme_font_color">27.03.2015 15:28</span>
+                                        <span class="badge badge_important theme_back_color">важно</span>
+                                    </span>
+                                            </div>
+                                            <p class="font_grey bold">Ничего не правда. Я люблю гулять, а от вашего дуба тень большая.</p>
+
+                                            <div class="post-interfaces-buttons text-left">
+                                                <button type="button" data-for="comment5" data-rate-action="like" class="rate_button"><span class="bold">9 <i class="fa fa-thumbs-up theme_font_color"></i></span></button>
+                                                <button type="button" data-for="comment5" data-rate-action="dislike" class="rate_button"><span class="bold">1 <i class="fa fa-thumbs-down theme_font_color"></i></span></button>
+                                                <button type="button" data-toggle="collapse" data-target="#reply_form_5" class="reply_btn collapsed"><span class="bold"><i class="fa fa-reply fa-rotate-180 theme_font_color"></i></span></button>
+                                            </div>
+                                        </div>
+                                        <form class="form-group comment_add collapse" id="reply_form_5">
+                                            <div class="input_cont">
+                                                <textarea placeholder="Ваш комментарий"></textarea>
+                                            </div>
+                                            <button class="btn" type="button"><span class="bold"><i class="fa fa-reply fa-rotate-180 theme_font_color"></i></span></button>
+                                        </form>
                                     </div>
-                                    <form class="form-group comment_add collapse" id="reply_form_4">
-                                        <div class="input_cont">
-                                            <textarea placeholder="Ваш комментарий"></textarea>
-                                        </div>
-                                        <button class="btn" type="button"><span class="bold"><i class="fa fa-reply fa-rotate-180 theme_font_color"></i></span></button>
-                                    </form>
+                                    <div class="item">
+                                    </div>
+                                    <div class="item">
+                                    </div>
+
                                 </div>
                             </div>
 
-                            <div class="media comment unread" id="comment5">
-                                <div class="media-left">
-                                    <img class="media-object img35 img-circle" src="img/ava-vinnie.jpg">
-                                </div>
-                                <div class="media-body">
-                                    <h5 class="media-heading bold">Винни-Пух</h5>
-                        <span class="comment_interf">
-                            <span class="date_time theme_font_color">27.03.2015 15:28</span>
-                            <span class="badge badge_important theme_back_color">важно</span>
-                        </span>
-                                </div>
-                                <p class="font_grey bold">Ничего не правда. Я люблю гулять, а от вашего дуба тень большая.</p>
-
-                                <div class="post-interfaces-buttons text-left">
-                                    <button type="button" data-for="comment5" data-rate-action="like" class="rate_button"><span class="bold">9 <i class="fa fa-thumbs-up theme_font_color"></i></span></button>
-                                    <button type="button" data-for="comment5" data-rate-action="dislike" class="rate_button"><span class="bold">1 <i class="fa fa-thumbs-down theme_font_color"></i></span></button>
-                                    <button type="button" data-toggle="collapse" data-target="#reply_form_5" class="reply_btn collapsed"><span class="bold"><i class="fa fa-reply fa-rotate-180 theme_font_color"></i></span></button>
-                                </div>
-                            </div>
-                            <form class="form-group comment_add collapse" id="reply_form_5">
+                            <div class="divider15"></div>
+                            <form class="form-group comment_add main_add">
                                 <div class="input_cont">
                                     <textarea placeholder="Ваш комментарий"></textarea>
                                 </div>
                                 <button class="btn" type="button"><span class="bold"><i class="fa fa-reply fa-rotate-180 theme_font_color"></i></span></button>
                             </form>
+                            <nav class="text-center">
+                                <ul class="pagination">
+                                    <li><a data-target="#myCarousel" data-slide-to="0" class="myCarousel-target active">1</a></li>
+                                    <li><a data-target="#myCarousel" data-slide-to="1" class="myCarousel-target">2</a></li>
+                                    <li><a data-target="#myCarousel" data-slide-to="2" class="myCarousel-target">3</a></li>
+                                </ul>
+                            </nav>
                         </div>
-                        <div class="item">
-                        </div>
-                        <div class="item">
-                        </div>
-
                     </div>
                 </div>
-
-                <div class="divider15"></div>
-                <form class="form-group comment_add main_add">
-                    <div class="input_cont">
-                        <textarea placeholder="Ваш комментарий"></textarea>
-                    </div>
-                    <button class="btn" type="button"><span class="bold"><i class="fa fa-reply fa-rotate-180 theme_font_color"></i></span></button>
-                </form>
-                <nav class="text-center">
-                    <ul class="pagination">
-                        <li><a data-target="#myCarousel" data-slide-to="0" class="myCarousel-target active">1</a></li>
-                        <li><a data-target="#myCarousel" data-slide-to="1" class="myCarousel-target">2</a></li>
-                        <li><a data-target="#myCarousel" data-slide-to="2" class="myCarousel-target">3</a></li>
-                    </ul>
-                </nav>
+                <div class="divider25"></div>
             </div>
-            </div>
-            </div>
-            <div class="divider25"></div>
         </div>
     </div>
 
@@ -894,19 +941,18 @@
                                                 <div class="container padding30">
                                                     <div class="row">
                                                         <div class="col-sm-4 vote_item_cont item_expandable h_2">
-                                                            <div class="vote_item">
+                                                            <div class="vote_item themes_cont">
                                                                 <div class="heading_cont blackonwhite">
                                                                     <h6>Lorem ipsum</h6>
                                                                 </div>
                                                                 <p>Lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum</p>
                                                                 <div class="post-theme" id="stripe-p-1">
-                                                                    <small class="pull-left">Несовершенства</small>
-                                                                    <a href="#" class="tag-stripes dark-blue active" id="stripe-p-1"><span
-                                                                            class="tags">Слишком низкие потолки</span></a>
-                                                                    <a href="#" class="tag-stripes blue-green" id="stripe-p-1"><span
-                                                                            class="tags">Четвероногим нечем заинтересовать пчел</span></a>
-                                                                    <a href="#" class="tag-stripes blue-green2" id="stripe-p-1"><span
-                                                                            class="tags">Активное противостояние четвероногих и пчел</span></a>
+                                                                    <span class="tag-stripes dark-blue active"><span
+                                                                            class="tags">Слишком низкие потолки</span></span>
+                                                                    <span class="tag-stripes blue-green"><span
+                                                                            class="tags">Четвероногим нечем заинтересовать пчел</span></span>
+                                                                    <span class="tag-stripes blue-green2"><span
+                                                                            class="tags">Активное противостояние четвероногих и пчел</span></span>
                                                                 </div>
                                                                 <div class="divider15"></div>
                                                                 <div class="vote_controls text-center">
@@ -920,19 +966,18 @@
                                                             </div>
                                                         </div>
                                                         <div class="col-sm-4 vote_item_cont item_expandable h_2">
-                                                            <div class="vote_item">
+                                                            <div class="vote_item themes_cont">
                                                                 <div class="heading_cont blackonwhite">
                                                                     <h6>Lorem ipsum</h6>
                                                                 </div>
                                                                 <p>Lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum</p>
-                                                                <div class="post-theme" id="stripe-p-1">
-                                                                    <small class="pull-left">Несовершенства</small>
-                                                                    <a href="#" class="tag-stripes dark-blue active" id="stripe-p-1"><span
-                                                                            class="tags">Слишком низкие потолки</span></a>
-                                                                    <a href="#" class="tag-stripes blue-green" id="stripe-p-1"><span
-                                                                            class="tags">Четвероногим нечем заинтересовать пчел</span></a>
-                                                                    <a href="#" class="tag-stripes blue-green2" id="stripe-p-1"><span
-                                                                            class="tags">Активное противостояние четвероногих и пчел</span></a>
+                                                                <div class="post-theme" id="stripe-p-2">
+                                                                    <span class="tag-stripes dark-blue active"><span
+                                                                            class="tags">Слишком низкие потолки</span></span>
+                                                                    <span class="tag-stripes blue-green"><span
+                                                                            class="tags">Четвероногим нечем заинтересовать пчел</span></span>
+                                                                    <span class="tag-stripes blue-green2"><span
+                                                                            class="tags">Активное противостояние четвероногих и пчел</span></span>
                                                                 </div>
                                                                 <div class="divider15"></div>
                                                                 <div class="vote_controls text-center">
@@ -946,19 +991,18 @@
                                                             </div>
                                                         </div>
                                                         <div class="col-sm-4 vote_item_cont item_expandable h_2">
-                                                            <div class="vote_item">
+                                                            <div class="vote_item themes_cont">
                                                                 <div class="heading_cont blackonwhite">
                                                                     <h6>Lorem ipsum</h6>
                                                                 </div>
                                                                 <p>Lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum</p>
-                                                                <div class="post-theme" id="stripe-p-1">
-                                                                    <small class="pull-left">Несовершенства</small>
-                                                                    <a href="#" class="tag-stripes dark-blue active" id="stripe-p-1"><span
-                                                                            class="tags">Слишком низкие потолки</span></a>
-                                                                    <a href="#" class="tag-stripes blue-green" id="stripe-p-1"><span
-                                                                            class="tags">Четвероногим нечем заинтересовать пчел</span></a>
-                                                                    <a href="#" class="tag-stripes blue-green2" id="stripe-p-1"><span
-                                                                            class="tags">Активное противостояние четвероногих и пчел</span></a>
+                                                                <div class="post-theme" id="stripe-p-3">
+                                                                    <span class="tag-stripes dark-blue active"><span
+                                                                            class="tags">Слишком низкие потолки</span></span>
+                                                                    <span class="tag-stripes blue-green"><span
+                                                                            class="tags">Четвероногим нечем заинтересовать пчел</span></span>
+                                                                    <span class="tag-stripes blue-green2"><span
+                                                                            class="tags">Активное противостояние четвероногих и пчел</span></span>
                                                                 </div>
                                                                 <div class="divider15"></div>
                                                                 <div class="vote_controls text-center">
@@ -999,6 +1043,184 @@
 
 
 </div>
+
+            <div id="popup-database" class="popup-window popup_database popup-w770 mfp-hide">
+                <div class="popup popup_rounded">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div id="myCarousel" class="carousel base_carousel slide" data-ride="carousel">
+                                <!-- Indicators -->
+                                <ul class="list-unstyled list-inline carousel-indicators text-center">
+                                    <li data-target="#myCarousel" data-slide-to="0" class="color-theme-1 myCarousel-target active">
+                                        Аспект 1
+                                    </li>
+                                    <li data-target="#myCarousel" data-slide-to="1" class="color-theme-2 myCarousel-target">
+                                        Аспект 2
+                                    </li>
+                                    <li data-target="#myCarousel" data-slide-to="2" class="color-theme-3 myCarousel-target">
+                                        Аспект 3
+                                    </li>
+                                    <li data-target="#myCarousel" data-slide-to="3" class="color-theme-4 myCarousel-target">
+                                        Аспект 4
+                                    </li>
+                                    <li data-target="#myCarousel" data-slide-to="4" class="color-theme-5 myCarousel-target">
+                                        Аспект 5
+                                    </li>
+                                    <li data-target="#myCarousel" data-slide-to="5" class="color-theme-6 myCarousel-target">
+                                        Аспект 6
+                                    </li>
+                                    <li data-target="#myCarousel" data-slide-to="6" class="color-theme-7 myCarousel-target">
+                                        Аспект 7
+                                    </li>
+                                    <li data-target="#myCarousel" data-slide-to="7" class="color-theme-8 myCarousel-target">
+                                        Аспект 8
+                                    </li>
+                                    <li data-target="#myCarousel" data-slide-to="8" class="color-theme-9 myCarousel-target">
+                                        Аспект 9
+                                    </li>
+                                </ul>
+
+                                <!-- Wrapper for slides -->
+                                <div class="carousel-inner" role="listbox">
+                                    <div class="item active color-theme-1">
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <div class="container">
+                                                    <div class="row">
+                                                        <div class="col-md-12 col-sm-12">
+                                                            <ul class="nav nav-tabs aspects_tabs" role="tablist">
+                                                                <li role="presentation" class="active"><a href="#article1-1" aria-controls="Статья 1" role="tab" data-toggle="tab">Статья 1</a></li>
+                                                                <li role="presentation"><a href="#article1-2" aria-controls="Статья 2" role="tab" data-toggle="tab">Статья 2</a></li>
+                                                                <li role="presentation"><a href="#article1-3" aria-controls="Статья 3" role="tab" data-toggle="tab">Статья 3</a></li>
+                                                            </ul>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+
+                                                        <div class="col-md-12 col-sm-12">
+                                                            <div class="aspect-main-block">
+                                                                <div class="tab-content">
+                                                                    <div role="tabpanel" class="tab-pane active fade in" id="article1-1">
+                                                                        <h6 class="aspect-main-block-heading">Ситуация с пчелами</h6>
+                                                                        <p class="aspect-main-block-text">Пчелы недовольны тем, что на их мед
+                                                                            постоянно покушаются Винни-Пух и его друзья. Желая разрешить
+                                                                            конфликт мирным способом, они обратились к мудрой Сове.</p>
+                                                                        <img src="img/aspect-pic1.jpg">
+                                                                    </div>
+                                                                    <div role="tabpanel" class="tab-pane fade" id="article1-2">
+                                                                        <p class="aspect-main-block-text">Пчелы недовольны тем, что на их мед
+                                                                            постоянно покушаются Винни-Пух и его друзья. Желая разрешить
+                                                                            конфликт мирным способом, они обратились к мудрой Сове.</p>
+                                                                        <img src="img/aspect-pic1.jpg">
+                                                                    </div>
+                                                                    <div role="tabpanel" class="tab-pane fade" id="article1-3">
+                                                                        <img src="img/aspect-pic1.jpg">
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="item color-theme-2">
+                                        <div class="row">
+                                            <div class="col-md-12 col-sm-12">
+                                                <div class="aspect-main-block">
+                                                    <p class="aspect-main-block-text">В популярной сказке Винни-Пух и его
+                                                        друзья жаждали меда, но пчелы не давали забрать у себя плоды своего
+                                                        труда. Чтобы раздобыть мед, Винни с компанией пытался обманом
+                                                        пробраться в улей на Высоком дубе — не вышло, сутками подкарауливал
+                                                        момент, когда все пчелы вылетят из улья, — не дождался; пытался
+                                                        втянуть пчел в переговоры, предлагая грибы и ягоды в обмен на мед, —
+                                                        был отвергнут.
+                                                        Всего в истории участвовало трое четвероногих: сам Винни-Пух и его
+                                                        друзья Пятачок и Кролик.</p>
+                                                    <img src="img/aspect-pic2.jpg">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="item color-theme-3">
+                                        <div class="row">
+                                            <div class="col-md-12 col-sm-12">
+                                                <div class="aspect-main-block">
+                                                    <h6 class="aspect-main-block-heading">Трудности, связанные с
+                                                        расположением конфликтующих сторон</h6>
+
+                                                    <p class="aspect-main-block-text">Как видно на карте, Винни-Пух с
+                                                        друзьями живут достаточно близко к Высокому дубу.
+                                                        Это часто обостряет конфликт, потому что пчелы не могут нормально
+                                                        собирать мед,
+                                                        постоянно беспокоясь, что их ограбят.</p>
+                                                    <img src="img/aspect-pic3.jpg">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="item color-theme-4">
+                                        <div class="row">
+                                            <div class="col-md-12 col-sm-12">
+                                                <div class="aspect-main-block">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="item color-theme-5">
+                                        <div class="row">
+                                            <div class="col-md-12 col-sm-12">
+                                                <div class="aspect-main-block">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="item color-theme-6">
+                                        <div class="row">
+                                            <div class="col-md-12 col-sm-12">
+                                                <div class="aspect-main-block">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="item color-theme-7">
+                                        <div class="row">
+                                            <div class="col-md-12 col-sm-12">
+                                                <div class="aspect-main-block">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="item color-theme-8">
+                                        <div class="row">
+                                            <div class="col-md-12 col-sm-12">
+                                                <div class="aspect-main-block">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="item color-theme-9">
+                                        <div class="row">
+                                            <div class="col-md-12 col-sm-12">
+                                                <div class="aspect-main-block">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <a class="myCarousel-control left" href="#myCarousel" role="button" data-slide="prev">
+                                    <i class="fa fa-3x fa-caret-left"></i>
+                                </a>
+                                <a class="myCarousel-control right" href="#myCarousel" role="button" data-slide="next">
+                                    <i class="fa fa-3x fa-caret-right"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
 </div>
 </div>
 

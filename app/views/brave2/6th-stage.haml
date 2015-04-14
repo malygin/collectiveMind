@@ -23,8 +23,9 @@
     / Custom CSS. Type your CSS code in custom.css file
     %link{:href => "css/custom.css", :rel => "stylesheet"}/
     %link{:href => "css/custom-post.css", :rel => "stylesheet"}/
-  %body
-    .outer.stage6_theme
+    %link{:href => "css/colors.css", :rel => "stylesheet"}/
+  %body.stage6_theme
+    .outer
       / Top bar starts
       %header.navbar.top_bar
         .container
@@ -119,7 +120,7 @@
                             .divider10
                     .divider20
           .navbar-right.text-right.user_block.font_grey
-            %a.book_icon{:href => "#"}
+            %a.book_icon.open-popup-link{:href => "#popup-database"}
             %span.auth-divider |
             %span.has_dropwindow
               %button.btn_reset.font_lighter_grey.bold.drop_opener{"data-dd-opener" => "dd_1"}
@@ -660,6 +661,122 @@
                                         .panel-graph-bar-col
                                         .panel-graph-bar-col
                                         .panel-graph-bar-col
+        #popup-database.popup-window.popup_database.popup-w770.mfp-hide
+          .popup.popup_rounded
+            .row
+              .col-md-12
+                #myCarousel.carousel.base_carousel.slide{"data-ride" => "carousel"}
+                  / Indicators
+                  %ul.list-unstyled.list-inline.carousel-indicators.text-center
+                    %li.color-theme-1.myCarousel-target.active{"data-slide-to" => "0", "data-target" => "#myCarousel"}
+                      Аспект 1
+                    %li.color-theme-2.myCarousel-target{"data-slide-to" => "1", "data-target" => "#myCarousel"}
+                      Аспект 2
+                    %li.color-theme-3.myCarousel-target{"data-slide-to" => "2", "data-target" => "#myCarousel"}
+                      Аспект 3
+                    %li.color-theme-4.myCarousel-target{"data-slide-to" => "3", "data-target" => "#myCarousel"}
+                      Аспект 4
+                    %li.color-theme-5.myCarousel-target{"data-slide-to" => "4", "data-target" => "#myCarousel"}
+                      Аспект 5
+                    %li.color-theme-6.myCarousel-target{"data-slide-to" => "5", "data-target" => "#myCarousel"}
+                      Аспект 6
+                    %li.color-theme-7.myCarousel-target{"data-slide-to" => "6", "data-target" => "#myCarousel"}
+                      Аспект 7
+                    %li.color-theme-8.myCarousel-target{"data-slide-to" => "7", "data-target" => "#myCarousel"}
+                      Аспект 8
+                    %li.color-theme-9.myCarousel-target{"data-slide-to" => "8", "data-target" => "#myCarousel"}
+                      Аспект 9
+                  / Wrapper for slides
+                  .carousel-inner{:role => "listbox"}
+                    .item.active.color-theme-1
+                      .row
+                        .col-md-12
+                          .container
+                            .row
+                              .col-md-12.col-sm-12
+                                %ul.nav.nav-tabs.aspects_tabs{:role => "tablist"}
+                                  %li.active{:role => "presentation"}
+                                    %a{"aria-controls" => "Статья 1", "data-toggle" => "tab", :href => "#article1-1", :role => "tab"} Статья 1
+                                  %li{:role => "presentation"}
+                                    %a{"aria-controls" => "Статья 2", "data-toggle" => "tab", :href => "#article1-2", :role => "tab"} Статья 2
+                                  %li{:role => "presentation"}
+                                    %a{"aria-controls" => "Статья 3", "data-toggle" => "tab", :href => "#article1-3", :role => "tab"} Статья 3
+                            .row
+                              .col-md-12.col-sm-12
+                                .aspect-main-block
+                                  .tab-content
+                                    #article1-1.tab-pane.active.fade.in{:role => "tabpanel"}
+                                      %h6.aspect-main-block-heading Ситуация с пчелами
+                                      %p.aspect-main-block-text
+                                        Пчелы недовольны тем, что на их мед
+                                        постоянно покушаются Винни-Пух и его друзья. Желая разрешить
+                                        конфликт мирным способом, они обратились к мудрой Сове.
+                                      %img{:src => "img/aspect-pic1.jpg"}/
+                                    #article1-2.tab-pane.fade{:role => "tabpanel"}
+                                      %p.aspect-main-block-text
+                                        Пчелы недовольны тем, что на их мед
+                                        постоянно покушаются Винни-Пух и его друзья. Желая разрешить
+                                        конфликт мирным способом, они обратились к мудрой Сове.
+                                      %img{:src => "img/aspect-pic1.jpg"}/
+                                    #article1-3.tab-pane.fade{:role => "tabpanel"}
+                                      %img{:src => "img/aspect-pic1.jpg"}/
+                    .item.color-theme-2
+                      .row
+                        .col-md-12.col-sm-12
+                          .aspect-main-block
+                            %p.aspect-main-block-text
+                              В популярной сказке Винни-Пух и его
+                              друзья жаждали меда, но пчелы не давали забрать у себя плоды своего
+                              труда. Чтобы раздобыть мед, Винни с компанией пытался обманом
+                              пробраться в улей на Высоком дубе — не вышло, сутками подкарауливал
+                              момент, когда все пчелы вылетят из улья, — не дождался; пытался
+                              втянуть пчел в переговоры, предлагая грибы и ягоды в обмен на мед, —
+                              был отвергнут.
+                              Всего в истории участвовало трое четвероногих: сам Винни-Пух и его
+                              друзья Пятачок и Кролик.
+                            %img{:src => "img/aspect-pic2.jpg"}/
+                    .item.color-theme-3
+                      .row
+                        .col-md-12.col-sm-12
+                          .aspect-main-block
+                            %h6.aspect-main-block-heading
+                              Трудности, связанные с
+                              расположением конфликтующих сторон
+                            %p.aspect-main-block-text
+                              Как видно на карте, Винни-Пух с
+                              друзьями живут достаточно близко к Высокому дубу.
+                              Это часто обостряет конфликт, потому что пчелы не могут нормально
+                              собирать мед,
+                              постоянно беспокоясь, что их ограбят.
+                            %img{:src => "img/aspect-pic3.jpg"}/
+                    .item.color-theme-4
+                      .row
+                        .col-md-12.col-sm-12
+                          .aspect-main-block
+                    .item.color-theme-5
+                      .row
+                        .col-md-12.col-sm-12
+                          .aspect-main-block
+                    .item.color-theme-6
+                      .row
+                        .col-md-12.col-sm-12
+                          .aspect-main-block
+                    .item.color-theme-7
+                      .row
+                        .col-md-12.col-sm-12
+                          .aspect-main-block
+                    .item.color-theme-8
+                      .row
+                        .col-md-12.col-sm-12
+                          .aspect-main-block
+                    .item.color-theme-9
+                      .row
+                        .col-md-12.col-sm-12
+                          .aspect-main-block
+                  %a.myCarousel-control.left{"data-slide" => "prev", :href => "#myCarousel", :role => "button"}
+                    %i.fa.fa-3x.fa-caret-left
+                  %a.myCarousel-control.right{"data-slide" => "next", :href => "#myCarousel", :role => "button"}
+                    %i.fa.fa-3x.fa-caret-right
       / Outer Ends
       / Javascript files
       / jQuery

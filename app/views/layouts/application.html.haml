@@ -13,9 +13,8 @@
       <script src="http://phpbbex.com/oldies/oldies.js" charset="utf-8"></script>
   -#%link(href="/assets/favicon.ico" rel="shortcut icon")
 
-  %body
-    -#@todo добавить метод определения текущего этапа для динамических стилей
-    .outer{class: "stage#{current_stage_controller}_theme"}
+  %body{class: "stage#{current_stage_controller}_theme"}
+    .outer
       / Top bar starts
       %header.navbar.top_bar
         .container
@@ -23,7 +22,7 @@
             %a.navbar-brand{href: @project ? "/project/#{@project.id}" : '/', id: 'go_to_logo'}
               = image_tag 'logo1.png'
           %ul.nav.navbar-nav.main_menu
-            %li{class: "#{'active' if [:collect_info_posts, :discontent_posts, :concept_posts, :plan_posts, :estimate_posts].include? name_controller}"}
+            %li{class: "#{'active' if [:collect_info_posts, :discontent_posts, :concept_posts, :novation_posts, :plan_posts, :estimate_posts].include? name_controller}"}
               = link_to 'Процедура', "/project/#{@project.id}", class: "menu_a"
             %li{class: "#{'active' if name_controller == :project_user}"}
               = link_to 'Кабинет', project_user_path(@project, current_user), class: "menu_a"
@@ -37,11 +36,11 @@
                 = link_to '-> стадия', next_stage_core_project_path(@project), method: :put, id: "up_to_#{@project.next_status}", class: "menu_a"
 
           .navbar-right.text-right.user_block.font_grey
-            = link_to "", knowbase_posts_path(@project), remote: true, id: "tooltip1_5", class: "tooltip1_5 book_icon", "data-placement" => "bottom", "data-toggle" => "tooltip", "data-trigger" => "none", :title => "Открыть базу знаний"
+            = link_to "", knowbase_posts_path(@project), remote: true, class: "book_icon"
             %span.auth-divider
               |
-            %a.font_lighter_grey.bold{:href => "#"}
-              %i.fa.fa-exclamation-triangle
+            %span.has_dropwindow
+              = render partial: 'application/expert_news', locals: {expert_news: @expert_news, project: @project}
             %span.auth-divider
               |
             %span.dropdown
@@ -83,13 +82,13 @@
       .container
         .row
           .col-md-8.col_padding_right_3
-            #tooltip1_1.tooltip1.border_grey.rounded_3.stages_block.tooltip1{"data-placement" => "bottom", "data-toggle" => "tooltip", "data-trigger" => "none", :title => "В нашей процедуре стадии открываются поэтапно. Следующая стадия откроется, когда большинство участников ответит на все вопросы."}
+            #tooltip1_1.border_grey.rounded_3.stages_block.tooltip1{"data-placement" => "bottom", "data-toggle" => "tooltip", "data-trigger" => "manual", :title => "В нашей процедуре стадии открываются поэтапно. Следующая стадия откроется, когда большинство участников ответит на все вопросы."}
               .btn-toolbar{:role => "toolbar"}
                 = render partial: 'stages'
           .col-md-4.col_padding_left_3
             %a.open_welcome_popup{:href => "#popup-explanation-#{current_stage_controller}"}
-              #tooltip1_2.border_grey.rounded_3.help_icon.tooltip1_2{"data-placement" => "bottom", "data-toggle" => "tooltip", "data-trigger" => "none", :title => "Вы всегда сможете вызвать помощь по стадии, нажав сюда"}
-            #tooltip1_3.border_grey.rounded_3.progress_block.tooltip1_3{"data-placement" => "bottom", "data-toggle" => "tooltip", "data-trigger" => "none", :title => "Здесь будут отображаться ваши успехи по работе с аспектами. Другие участники тоже не сидят сложа руки!"}
+              #tooltip1_2.border_grey.rounded_3.help_icon.tooltip1{"data-placement" => "bottom", "data-toggle" => "tooltip", "data-trigger" => "manual", :title => "Вы всегда сможете вызвать помощь по стадии, нажав сюда"}
+            #tooltip1_3.border_grey.rounded_3.progress_block.tooltip1{"data-placement" => "bottom", "data-toggle" => "tooltip", "data-trigger" => "manual", :title => "Здесь будут отображаться ваши успехи по работе с аспектами. Другие участники тоже не сидят сложа руки!"}
               .container
                 .row
                   = render partial: 'application/progress_bar'

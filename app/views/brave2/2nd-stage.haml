@@ -17,9 +17,11 @@
     / Custom CSS. Type your CSS code in custom.css file
     %link{:href => "css/custom.css", :rel => "stylesheet"}/
     %link{:href => "css/custom-post.css", :rel => "stylesheet"}/
+    %link{:href => "css/sprites.css", :rel => "stylesheet"}/
+    %link{:href => "css/colors.css", :rel => "stylesheet"}/
     %link{:href => "css/dropdowns-enhancement.css", :rel => "stylesheet"}/
-  %body
-    .outer.stage2_theme
+  %body.stage2_theme
+    .outer
       / Top bar starts
       %header.navbar.top_bar
         .container
@@ -114,7 +116,7 @@
                             .divider10
                     .divider20
           .navbar-right.text-right.user_block.font_grey
-            %a.book_icon{:href => "#"}
+            %a.book_icon.open-popup-link{:href => "#popup-database"}
             %span.auth-divider |
             %span.has_dropwindow
               %button.btn_reset.font_lighter_grey.bold.drop_opener{"data-dd-opener" => "dd_1"}
@@ -261,10 +263,7 @@
           %h4.font_white Решение конфликта, возникшего из-за меда
         %button#tooltip_button_2.btn.btn-tooltip{:type => "button", :value => "Show"}
           %i.fa.fa-lightbulb-o
-          Открыть подсказки
-        %button#close_tooltip_button_2.btn.btn-tooltip-close{:type => "button", :value => "Destroy"}
-          %i.fa.fa-lightbulb-o
-          Закрыть подсказки
+          Подсказки
       .container
         .row
           .col-md-8.col_padding_right_3
@@ -312,47 +311,110 @@
       .main-block
         .container
           .stage-info-sort-block
-            #tooltip2_1.btn-group.tooltip2_1{"data-placement" => "bottom", "data-toggle" => "tooltip", "data-trigger" => "none", :title => "Сейчас вы просматриваете несовершенства, связанные только с этим аспектом, но в выпадающем меню вы можете выбрать любой другой аспект."}
+            #tooltip2_1.btn-group.tooltip2{"data-placement" => "bottom", "data-toggle" => "tooltip", "data-trigger" => "manual", :title => "Сейчас вы просматриваете несовершенства, связанные только с этим аспектом, но в выпадающем меню вы можете выбрать любой другой аспект."}
               %span Аспекты (8) :
-              %a.dropdown-toggle{"data-toggle" => "dropdown"}
-                \---
-                %i.fa.fa-chevron-circle-down.font_red
+              %a.dropdown-toggle{"data-toggle" => "dropdown"} ---
               %ul.dropdown-menu
                 %li
                   %input#ex2_2_1{:name => "ex2_2", :type => "radio", :value => "1"}/
-                  %label{:for => "ex2_2_1"}
-                    %i.fa.fa-stop.font_dark_blue>
-                    Мед и четвероногие
-                %li
+                  %label.checkox_item{:for => "ex2_2_1"}
+                    %span
+                      %span.vert_stripe.back1
+                      %span.vert_stripe.back2
+                      %span.vert_stripe.back3
+                    %span.text_label Все аспекты
+                    %span.cb_doc 5
+                    %span.cb_com 1
+                %li.checkbox_item
                   %input#ex2_2_2{:name => "ex2_2", :type => "radio", :value => "2"}/
-                  %label{:for => "ex2_2_2"}
-                    %i.fa.fa-stop.font_blue_green>
-                    Мед и пчелы
-                %li
+                  %label.checkox_item{:for => "ex2_2_2"}
+                    %span
+                      %span.color_counter.color_me{"data-me-action" => "background-color", "data-me-color" => "0", "data-me-type" => "aspect"}
+                        %span 2
+                    %span.text_label Персонал как инструмент продаж
+                    %span.cb_doc 2
+                    %span.cb_com 25
+                %li.checkbox_item
                   %input#ex2_2_3{:name => "ex2_2", :type => "radio", :value => "3"}/
-                  %label{:for => "ex2_2_3"}
-                    %i.fa.fa-stop.font_blue_green2>
-                    Пчелы и цветочные поляны
-                %li
+                  %label.checkox_item{:for => "ex2_2_3"}
+                    %span
+                      %span.color_counter.color_me{"data-me-action" => "background-color", "data-me-color" => "1", "data-me-type" => "aspect"}
+                        %span 2
+                    %span.text_label Нечем дышать и слишком высокие потолки
+                    %span.cb_doc 1
+                    %span.cb_com 10
+                %li.checkbox_item
                   %input#ex2_2_4{:name => "ex2_2", :type => "radio", :value => "4"}/
-                  %label{:for => "ex2_2_4"}
-                    %i.fa.fa-stop.font_blue_green3>
-                    Четвероногие и сахар
-                %li
+                  %label.checkox_item{:for => "ex2_2_4"}
+                    %span
+                      %span.color_counter.color_me{"data-me-action" => "background-color", "data-me-color" => "2", "data-me-type" => "aspect"}
+                        %span 2
+                    %span.text_label Персонал как инструмент продаж
+                    %span.cb_doc
+                    %span.cb_com 100
+                %li.checkbox_item
                   %input#ex2_2_5{:name => "ex2_2", :type => "radio", :value => "5"}/
-                  %label{:for => "ex2_2_5"}
-                    %i.fa.fa-stop.font_light_green
-                    Пчелы, четвероногие и зимняя спячка
-                %li
+                  %label.checkox_item{:for => "ex2_2_5"}
+                    %span
+                      %span.color_counter.color_me{"data-me-action" => "background-color", "data-me-color" => "3", "data-me-type" => "aspect"}
+                        %span 2
+                    %span.text_label Персонал как инструмент продаж
+                    %span.cb_doc
+                    %span.cb_com 100
+                %li.checkbox_item
                   %input#ex2_2_6{:name => "ex2_2", :type => "radio", :value => "6"}/
-                  %label{:for => "ex2_2_6"}
-                    %i.fa.fa-stop.font_sandy
-                    Винни-Пух и все-все-все
-                %li
+                  %label.checkox_item{:for => "ex2_2_6"}
+                    %span
+                      %span.color_counter.color_me{"data-me-action" => "background-color", "data-me-color" => "4", "data-me-type" => "aspect"}
+                        %span 2
+                    %span.text_label Персонал как инструмент продаж
+                    %span.cb_doc 12
+                    %span.cb_com 10
+                %li.checkbox_item
                   %input#ex2_2_7{:name => "ex2_2", :type => "radio", :value => "7"}/
-                  %label{:for => "ex2_2_7"}
-                    %i.fa.fa-stop.font_purple
-                    Эффективность пчел в сборе меда
+                  %label.checkox_item{:for => "ex2_2_7"}
+                    %span
+                      %span.color_counter.color_me{"data-me-action" => "background-color", "data-me-color" => "5", "data-me-type" => "aspect"}
+                        %span 2
+                    %span.text_label Персонал как инструмент продаж
+                    %span.cb_doc
+                    %span.cb_com 100
+                %li.checkbox_item
+                  %input#ex2_2_8{:name => "ex2_2", :type => "radio", :value => "8"}/
+                  %label.checkox_item{:for => "ex2_2_8"}
+                    %span
+                      %span.color_counter.color_me{"data-me-action" => "background-color", "data-me-color" => "6", "data-me-type" => "aspect"}
+                        %span 2
+                    %span.text_label Персонал как инструмент продаж
+                    %span.cb_doc
+                    %span.cb_com 100
+                %li.checkbox_item
+                  %input#ex2_2_9{:name => "ex2_2", :type => "radio", :value => "9"}/
+                  %label.checkox_item{:for => "ex2_2_9"}
+                    %span
+                      %span.color_counter.color_me{"data-me-action" => "background-color", "data-me-color" => "7", "data-me-type" => "aspect"}
+                        %span 2
+                    %span.text_label Персонал как инструмент продаж
+                    %span.cb_doc
+                    %span.cb_com 100
+                %li.checkbox_item
+                  %input#ex2_2_10{:name => "ex2_2", :type => "radio", :value => "10"}/
+                  %label.checkox_item{:for => "ex2_2_10"}
+                    %span
+                      %span.color_counter.color_me{"data-me-action" => "background-color", "data-me-color" => "8", "data-me-type" => "aspect"}
+                        %span 2
+                    %span.text_label Персонал как инструмент продаж
+                    %span.cb_doc 5
+                    %span.cb_com 10
+                %li.checkbox_item
+                  %input#ex2_2_11{:name => "ex2_2", :type => "radio", :value => "11"}/
+                  %label.checkox_item{:for => "ex2_2_11"}
+                    %span
+                      %span.color_counter.color_me{"data-me-action" => "background-color", "data-me-color" => "9", "data-me-type" => "aspect"}
+                        %span 2
+                    %span.text_label Персонал как инструмент продаж
+                    %span.cb_doc 1
+                    %span.cb_com 2
           .stage-info-sort-block
             .row
               %br/
@@ -361,9 +423,9 @@
               .col-md-5
                 .sort-block.pull-right
                   %span.sort-label Сортировать по новым:
-                  .sort-1
+                  .sort-1.sort_btn.sprite_com.sprite-item2_2_1
                     %span 25
-                  #tooltip2_2.sort-2.tooltip2_2{"data-placement" => "bottom", "data-toggle" => "tooltip", "data-trigger" => "none", :title => "При помощи этих фильтров вы можете выбирать, в каком порядке будут отображаться несовершенства."}
+                  #tooltip2_2.sort-2.sort_btn.sprite_doc.sprite-item2_1.tooltip2{"data-placement" => "bottom", "data-toggle" => "tooltip", "data-trigger" => "manual", :title => "При помощи этих фильтров вы можете выбирать, в каком порядке будут отображаться несовершенства."}
                     %span 2
                   %a{:href => "cabinet-stage2.html"}
                     %button.btn.add-button
@@ -372,16 +434,16 @@
           .stage-post-block
             .row
               .col-md-6
-                #tooltip2_3.post.tooltip2_3{"data-placement" => "bottom", "data-toggle" => "tooltip", "data-trigger" => "none", :title => "В цветных квадратиках скрывается перечень аспектов, связанных с данным несовершенством. Нажмите на любой из них, чтобы увидеть полное название аспекта."}
-                  .post-header.red
-                  .post-body
+                #tooltip2_3.post.post_type_2.tooltip2{"data-placement" => "bottom", "data-toggle" => "tooltip", "data-trigger" => "manual", :title => "В цветных квадратиках скрывается перечень аспектов, связанных с данным несовершенством. Нажмите на любой из них, чтобы увидеть полное название аспекта."}
+                  .post-header.color_me{"data-me-action" => "background-color", "data-me-color" => "0", "data-me-type" => "imperf"}
+                  .post-body.no_post_head.ch_action{"data-for" => "post_ch1"}
                     .media
                       .media-left.text-center.gradient.post-poster
                         %img.img-circle.img50{:src => "img/ava-pyat.jpg"}/
                         %p.poster-name Пятачок
                         %p.poster-name
                         %p.time 21.12.2014
-                      .media-body.pink
+                      .media-body
                         %table.table
                           %tbody
                             %tr.what
@@ -435,12 +497,11 @@
                   .post-bottom.white
                     .row
                       .col-md-9.col_padding_right_3
-                        .post-theme
-                          %a.tag-stripes.dark-blue.active
-                            %span.tags Взаимоотношения четвероногих и пчел
+                        %span.tag-stripes.active.color_me{"data-me-action" => "background-color", "data-me-color" => "3", "data-me-type" => "aspect"}
+                          %span.tags Взаимоотношения четвероногих
                       .col-md-3.col_padding_left_3
                         .text-right.small_icons
-                          %a.popup2.btn_reset.ch_action.a_font_reset{"data-for" => "post_ch1", :type => "button"}
+                          %span.popup2.comments_icon{"data-for" => "post_ch1"}
                             %small 5
                             %i.fa.fa-comment-o
                           %span.popup2
@@ -452,16 +513,16 @@
                           %span.popup2
                             %i.fa.fa-exclamation-triangle.font_lighter_grey
               .col-md-6
-                .post
-                  .post-header.red
-                  .post-body
+                .post.post_type_2
+                  .post-header.color_me{"data-me-action" => "background-color", "data-me-color" => "1", "data-me-type" => "imperf"}
+                  .post-body.no_post_head.ch_action{"data-for" => "post_ch2"}
                     .media
                       .media-left.text-center.gradient.post-poster
                         %img.img-circle.img50{:src => "img/ava-pyat.jpg"}/
                         %p.poster-name Пятачок
                         %p.poster-name
                         %p.time 21.12.2014
-                      .media-body.pink
+                      .media-body
                         %table.table
                           %tbody
                             %tr.what
@@ -469,7 +530,6 @@
                                 Что
                               %td.col-md-10.left-column.bold.open-popup{"data-placement" => "2", "data-target" => "1"}
                                 Винни-Пух постоянно
-                                раздражает пчел своим излишним вниманием к Высокому дубу
                                 %i.fa.fa-angle-right
                             %tr
                               %td.col-md-2.text-center.right-column Где
@@ -515,12 +575,11 @@
                   .post-bottom.white
                     .row
                       .col-md-9.col_padding_right_3
-                        .post-theme
-                          %a.tag-stripes.dark-blue.active
-                            %span.tags Взаимоотношения четвероногих и пчел
+                        %span.tag-stripes.active.color_me{"data-me-action" => "background-color", "data-me-color" => "8", "data-me-type" => "aspect"}
+                          %span.tags Взаимоотношения четвероногих
                       .col-md-3.col_padding_left_3
                         .text-right.small_icons
-                          %a.popup2.btn_reset.ch_action.a_font_reset{"data-for" => "post_ch2", :type => "button"}
+                          %span.popup2.comments_icon{"data-for" => "post_ch2"}
                             %small 5
                             %i.fa.fa-comment-o
                           %span.popup2
@@ -557,7 +616,7 @@
                         %i.fa.fa-exclamation-triangle.font_lighter_grey
                       %small 21.12.2014
           .modal_body
-            .container
+            .container.modal_content
               .row
                 .col-md-5.com_dashed_border.right.popup_collapsable_col.collapse.in
                   %button.expand_button.remove_col.btn_reset{"data-col" => "7", "data-target" => ".popup_collapsable_col", "data-toggle" => "collapse", :type => "button"}
@@ -618,7 +677,7 @@
                       .col-md-11
                         Эффективность пчел в сборе меда
                     .divider10
-                .col-md-7.comment_col.popup_expandable_col
+                .col-md-7.comment_col.popup_expandable_col.ps_cont
                   %button.expand_button.add_col.btn_reset.theme_font_color.bold{"data-col" => "7", "data-target" => ".popup_collapsable_col", "data-toggle" => "collapse", :type => "button"} открыть описание проекта
                   .divider15
                   #myCarousel.carousel.slide{"data-ride" => "carousel"}
@@ -1057,6 +1116,122 @@
             %img.expl-header-img-2{:src => "img/flag1.png"}>/
             С чего начать?
           %button.btn.red.close_magnific Начать работу
+      #popup-database.popup-window.popup_database.popup-w770.mfp-hide
+        .popup.popup_rounded
+          .row
+            .col-md-12
+              #myCarousel.carousel.base_carousel.slide{"data-ride" => "carousel"}
+                / Indicators
+                %ul.list-unstyled.list-inline.carousel-indicators.text-center
+                  %li.color-theme-1.myCarousel-target.active{"data-slide-to" => "0", "data-target" => "#myCarousel"}
+                    Аспект 1
+                  %li.color-theme-2.myCarousel-target{"data-slide-to" => "1", "data-target" => "#myCarousel"}
+                    Аспект 2
+                  %li.color-theme-3.myCarousel-target{"data-slide-to" => "2", "data-target" => "#myCarousel"}
+                    Аспект 3
+                  %li.color-theme-4.myCarousel-target{"data-slide-to" => "3", "data-target" => "#myCarousel"}
+                    Аспект 4
+                  %li.color-theme-5.myCarousel-target{"data-slide-to" => "4", "data-target" => "#myCarousel"}
+                    Аспект 5
+                  %li.color-theme-6.myCarousel-target{"data-slide-to" => "5", "data-target" => "#myCarousel"}
+                    Аспект 6
+                  %li.color-theme-7.myCarousel-target{"data-slide-to" => "6", "data-target" => "#myCarousel"}
+                    Аспект 7
+                  %li.color-theme-8.myCarousel-target{"data-slide-to" => "7", "data-target" => "#myCarousel"}
+                    Аспект 8
+                  %li.color-theme-9.myCarousel-target{"data-slide-to" => "8", "data-target" => "#myCarousel"}
+                    Аспект 9
+                / Wrapper for slides
+                .carousel-inner{:role => "listbox"}
+                  .item.active.color-theme-1
+                    .row
+                      .col-md-12
+                        .container
+                          .row
+                            .col-md-12.col-sm-12
+                              %ul.nav.nav-tabs.aspects_tabs{:role => "tablist"}
+                                %li.active{:role => "presentation"}
+                                  %a{"aria-controls" => "Статья 1", "data-toggle" => "tab", :href => "#article1-1", :role => "tab"} Статья 1
+                                %li{:role => "presentation"}
+                                  %a{"aria-controls" => "Статья 2", "data-toggle" => "tab", :href => "#article1-2", :role => "tab"} Статья 2
+                                %li{:role => "presentation"}
+                                  %a{"aria-controls" => "Статья 3", "data-toggle" => "tab", :href => "#article1-3", :role => "tab"} Статья 3
+                          .row
+                            .col-md-12.col-sm-12
+                              .aspect-main-block
+                                .tab-content
+                                  #article1-1.tab-pane.active.fade.in{:role => "tabpanel"}
+                                    %h6.aspect-main-block-heading Ситуация с пчелами
+                                    %p.aspect-main-block-text
+                                      Пчелы недовольны тем, что на их мед
+                                      постоянно покушаются Винни-Пух и его друзья. Желая разрешить
+                                      конфликт мирным способом, они обратились к мудрой Сове.
+                                    %img{:src => "img/aspect-pic1.jpg"}/
+                                  #article1-2.tab-pane.fade{:role => "tabpanel"}
+                                    %p.aspect-main-block-text
+                                      Пчелы недовольны тем, что на их мед
+                                      постоянно покушаются Винни-Пух и его друзья. Желая разрешить
+                                      конфликт мирным способом, они обратились к мудрой Сове.
+                                    %img{:src => "img/aspect-pic1.jpg"}/
+                                  #article1-3.tab-pane.fade{:role => "tabpanel"}
+                                    %img{:src => "img/aspect-pic1.jpg"}/
+                  .item.color-theme-2
+                    .row
+                      .col-md-12.col-sm-12
+                        .aspect-main-block
+                          %p.aspect-main-block-text
+                            В популярной сказке Винни-Пух и его
+                            друзья жаждали меда, но пчелы не давали забрать у себя плоды своего
+                            труда. Чтобы раздобыть мед, Винни с компанией пытался обманом
+                            пробраться в улей на Высоком дубе — не вышло, сутками подкарауливал
+                            момент, когда все пчелы вылетят из улья, — не дождался; пытался
+                            втянуть пчел в переговоры, предлагая грибы и ягоды в обмен на мед, —
+                            был отвергнут.
+                            Всего в истории участвовало трое четвероногих: сам Винни-Пух и его
+                            друзья Пятачок и Кролик.
+                          %img{:src => "img/aspect-pic2.jpg"}/
+                  .item.color-theme-3
+                    .row
+                      .col-md-12.col-sm-12
+                        .aspect-main-block
+                          %h6.aspect-main-block-heading
+                            Трудности, связанные с
+                            расположением конфликтующих сторон
+                          %p.aspect-main-block-text
+                            Как видно на карте, Винни-Пух с
+                            друзьями живут достаточно близко к Высокому дубу.
+                            Это часто обостряет конфликт, потому что пчелы не могут нормально
+                            собирать мед,
+                            постоянно беспокоясь, что их ограбят.
+                          %img{:src => "img/aspect-pic3.jpg"}/
+                  .item.color-theme-4
+                    .row
+                      .col-md-12.col-sm-12
+                        .aspect-main-block
+                  .item.color-theme-5
+                    .row
+                      .col-md-12.col-sm-12
+                        .aspect-main-block
+                  .item.color-theme-6
+                    .row
+                      .col-md-12.col-sm-12
+                        .aspect-main-block
+                  .item.color-theme-7
+                    .row
+                      .col-md-12.col-sm-12
+                        .aspect-main-block
+                  .item.color-theme-8
+                    .row
+                      .col-md-12.col-sm-12
+                        .aspect-main-block
+                  .item.color-theme-9
+                    .row
+                      .col-md-12.col-sm-12
+                        .aspect-main-block
+                %a.myCarousel-control.left{"data-slide" => "prev", :href => "#myCarousel", :role => "button"}
+                  %i.fa.fa-3x.fa-caret-left
+                %a.myCarousel-control.right{"data-slide" => "next", :href => "#myCarousel", :role => "button"}
+                  %i.fa.fa-3x.fa-caret-right
     / Outer Ends
     / Javascript files
     / jQuery

@@ -1,4 +1,4 @@
-class Help::PostsController < PostsController
+class Core::Help::PostsController < PostsController
   def index
     redirect_to help_post_path(@project, id: 1)
   end
@@ -10,7 +10,7 @@ class Help::PostsController < PostsController
   def show
     @stages = Core::Project::LIST_STAGES
     @posts = {}
-    Help::Post.where(stage: params[:id].to_i, mini: false).each { |f| @posts[f.style] = f }
+    Core::Help::Post.where(stage: params[:id].to_i, mini: false).each { |f| @posts[f.style] = f }
   end
 
   def edit

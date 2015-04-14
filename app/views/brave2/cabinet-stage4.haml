@@ -20,8 +20,9 @@
     %link{:href => "css/owl.carousel.css", :rel => "stylesheet"}/
     / Custom CSS. Type your CSS code in custom.css file
     %link{:href => "css/custom.css", :rel => "stylesheet"}/
-  %body
-    .outer.white_theme
+    %link{:href => "css/colors.css", :rel => "stylesheet"}/
+  %body.white_theme
+    .outer
       / Top bar starts
       %header.navbar.top_bar
         .container
@@ -30,18 +31,221 @@
               %img{:src => "img/logo1.png"}/
           %ul.nav.navbar-nav.main_menu
             %li
-              %a{:href => "1st-stage.html"} Процедура
+              %a.menu_a{:href => "1st-stage.html"} Процедура
             %li.active
-              %a{:href => "cabinet-stage1.html"} Кабинет
-            %li
-              %a#popover_news.has_circle.popover_news{"data-content" => "\n                    <div class='popover_cont'>\n                    <a href='#' class='news-tooltip-icon' id='tooltip-i1'>\n                        <img src='img/icon-news-1.png'>\n                        <span class='news-tooltip-bottom-text'>добавлено</span>\n                    </a>\n                    <a href='#' class='news-tooltip-icon' id='tooltip-i2'>\n                        <img src='img/icon-news-2.png'>\n                        <span class='news-tooltip-bottom-text'>комментария</span>\n                    </a>\n                    <a href='#popup-news' class='news-tooltip-icon news-popup-href' id='tooltip-i3'>\n                        <img src='img/icon-news-3.png'>\n                        <span class='top-circle'>36</span>\n                        <span class='news-tooltip-bottom-text'>пометок</span>\n                    </a>\n                    <a href='#' class='news-tooltip-icon' id='tooltip-i4'>\n                        <img src='img/icon-news-4.png'>\n                        <span class='top-circle'>1</span>\n                        <span class='news-tooltip-bottom-text'>отредактировано</span>\n                    </a>\n                    </div>", "data-html" => "true", "data-placement" => "bottom", "data-toggle" => "popover", :href => "#"}
-                Новости
-                %span.top-circle 36
+              %a.menu_a{:href => "cabinet-stage1.html"} Кабинет
+            %li.has_dropwindow
+              %a.has_circle.drop_opener.menu_a{"data-dd-opener" => "dd_2"}
+                Мои уведомления
+                %span.top-circle 1
+              #dd_2.dropdown_window.dd_435.notifications_drop.text-left
+                .dd_wrapper
+                  .dd_top.thin.light-grey
+                    %i.fa.fa-close.fa-lg.dd_close{"data-dd-closer" => "dd_2"}
+                  .dd_bottom.white
+                    .divider10
+                    .container
+                      .row
+                        .col-xs-12
+                          .ps_cont
+                            %a.dd_notice{:href => "#"}
+                              %span.dd_n_cell.left.font_color_stage4
+                                %i.fa.fa-lg.fa-thumbs-down
+                              %span.dd_n_cell.right.font_color_stage4
+                                20:15 12.03.2015
+                                %span.bold Рахель
+                                в теме
+                            %a.dd_notice{:href => "#"}
+                              %span.dd_n_cell.left
+                                %i.fa.fa-lg.fa-thumbs-down
+                              %span.dd_n_cell.right
+                                20:15 12.03.2015
+                                %span.bold Рахель
+                                в теме
+                            %a.dd_notice.moder{:href => "#"}
+                              %span.dd_n_cell.left
+                                %i.fa.fa-lg.fa-exclamation-triangle
+                              %span.dd_n_cell.right
+                                22:00 11.03.2015
+                                = succeed ":" do
+                                  %span.bold Модератор
+                                %p
+                                  На этой стадии вам предстоит выявить проблемы, связанные с ситуацией, описанной в базе знаний, и принять участие в обсуждении проблем, выявленных другими участниками. В нашей терминологии такие проблемы называются несовершенствами.
+                            .dd_nav_divider.font_color_stage4
+                              %span 4
+                            .divider10
+                            %a.dd_notice{:href => "#"}
+                              %span.dd_n_cell.left.font_color_stage2
+                                %i.fa.fa-lg.fa-thumbs-up
+                              %span.dd_n_cell.right.font_color_stage2
+                                19:45 12.03.2015
+                                %span.bold Liza
+                                в теме
+                            %a.dd_notice{:href => "#"}
+                              %span.dd_n_cell.left
+                                %i.fa.fa-lg.fa-thumbs-down
+                              %span.dd_n_cell.right
+                                20:15 12.03.2015
+                                %span.bold Рахель
+                                в теме
+                            .dd_nav_divider.font_color_stage2
+                              %span 2
+                            .divider10
+                            %a.dd_notice{:href => "#"}
+                              %span.dd_n_cell.left.font_color_stage1
+                                %i.fa.fa-lg.fa-thumbs-down
+                              %span.dd_n_cell.right.font_color_stage1
+                                20:15 12.03.2015
+                                %span.bold Рахель
+                                в теме
+                            %a.dd_notice{:href => "#"}
+                              %span.dd_n_cell.left.font_color_stage1
+                                %i.fa.fa-lg.fa-thumbs-down
+                              %span.dd_n_cell.right.font_color_stage1
+                                20:15 12.03.2015
+                                %span.bold Рахель
+                                в теме
+                            %a.dd_notice{:href => "#"}
+                              %span.dd_n_cell.left.font_color_stage1
+                                %i.fa.fa-lg.fa-thumbs-down
+                              %span.dd_n_cell.right.font_color_stage1
+                                20:15 12.03.2015
+                                %span.bold Рахель
+                                в теме
+                            .dd_nav_divider.font_color_stage1
+                              %span 1
+                            .divider10
+                    .divider20
           .navbar-right.text-right.user_block.font_grey
-            %a.book_icon{:href => "#"}
+            %a.book_icon.open-popup-link{:href => "#popup-database"}
             %span.auth-divider |
-            %a.font_lighter_grey.bold{:href => "#"}
-              %i.fa.fa-exclamation-triangle
+            %span.has_dropwindow
+              %button.btn_reset.font_lighter_grey.bold.drop_opener{"data-dd-opener" => "dd_1"}
+                %i.fa.fa-exclamation-triangle
+              #dd_1.dropdown_window.dd_570.expert_news_drop.text-left
+                .dd_badge
+                  %i.fa.fa-exclamation-triangle
+                  %small Новости от эксперта
+                .dd_wrapper.white
+                  .dd_top.light-grey
+                    %i.fa.fa-close.fa-lg.dd_close{"data-dd-closer" => "dd_1"}
+                  .dd_bottom
+                    .divider20
+                    .container
+                      .ps_cont
+                        .dd_xprt_notice
+                          %a.a_font_reset.collapsed{"aria-expanded" => "false", "data-toggle" => "collapse", :href => "#xprt_1"}
+                            .row
+                              .col-xs-9
+                                Представляем вам наш экспертный комитет:
+                              .col-xs-3.text-right
+                                %span.dd_n_date 1.12.2015
+                                %i.fa.fa-angle-right.font_grey.bold
+                        #xprt_1.dd_xprt_article.collapse
+                          .dd_expert
+                            .divider20
+                            .row
+                              .col-xs-3.text-center
+                                %img.img100.img-circle{:src => "http://placehold.it/100x100"}/
+                              .col-xs-9
+                                %h4 Лиза Школьник
+                                %p Эксперт в электронной коммерции, опыт с 1997 года. Имеет обширный опыт в интернет-маркетинге, включая создание и продвижение интернет-проектов, любые виды рекламы
+                            .divider20
+                          .dd_expert
+                            .divider20
+                            .row
+                              .col-xs-3.text-center
+                                %img.img100.img-circle{:src => "http://placehold.it/100x100"}/
+                              .col-xs-9
+                                %h4 Владимир Видро
+                                %p Эксперт в электронной коммерции, опыт с 1997 года. Имеет обширный опыт в интернет-маркетинге, включая создание и продвижение интернет-проектов, любые виды рекламы
+                            .divider20
+                          .dd_expert
+                            .divider20
+                            .row
+                              .col-xs-3.text-center
+                                %img.img100.img-circle{:src => "http://placehold.it/100x100"}/
+                              .col-xs-9
+                                %h4 Владимир Видро
+                                %p Эксперт в электронной коммерции, опыт с 1997 года. Имеет обширный опыт в интернет-маркетинге, включая создание и продвижение интернет-проектов, любые виды рекламы
+                            .divider20
+                        .dd_xprt_notice
+                          %a.a_font_reset.collapsed{"aria-expanded" => "false", "data-toggle" => "collapse", :href => "#xprt_2"}
+                            .row
+                              .col-xs-9
+                                Заголовок 1
+                              .col-xs-3.text-right
+                                %span.dd_n_date 1.12.2015
+                                %i.fa.fa-angle-right.font_grey.bold
+                        #xprt_2.dd_xprt_article.collapse
+                          %p
+                            На этой стадии вам предстоит выявить проблемы, связанные с ситуацией, описанной в базе знаний, и принять участие
+                            в обсуждении проблем, выявленных другими участниками. В нашей терминологии такие проблемы называются несовершенствами.
+                            В конце стадии вы проголосуете за те несовершенства, которые, на ваш взгляд, совершенно необходимо устранить для
+                            исправления текущей ситуации.
+                          %p
+                            На этой стадии вам предстоит выявить проблемы, связанные с ситуацией, описанной в базе знаний, и принять участие
+                            в обсуждении проблем, выявленных другими участниками. В нашей терминологии такие проблемы называются несовершенствами.
+                            В конце стадии вы проголосуете за те несовершенства, которые, на ваш взгляд, совершенно необходимо устранить для
+                            исправления текущей ситуации.
+                        .dd_xprt_notice
+                          %a.a_font_reset.collapsed{"aria-expanded" => "false", "data-toggle" => "collapse", :href => "#xprt_3"}
+                            .row
+                              .col-xs-9
+                                Заголовок 2
+                              .col-xs-3.text-right
+                                %span.dd_n_date 1.12.2015
+                                %i.fa.fa-angle-right.font_grey.bold
+                        #xprt_3.dd_xprt_article.collapse
+                          %p
+                            На этой стадии вам предстоит выявить проблемы, связанные с ситуацией, описанной в базе знаний, и принять участие
+                            в обсуждении проблем, выявленных другими участниками. В нашей терминологии такие проблемы называются несовершенствами.
+                            В конце стадии вы проголосуете за те несовершенства, которые, на ваш взгляд, совершенно необходимо устранить для
+                            исправления текущей ситуации.
+                          %p
+                            На этой стадии вам предстоит выявить проблемы, связанные с ситуацией, описанной в базе знаний, и принять участие
+                            в обсуждении проблем, выявленных другими участниками. В нашей терминологии такие проблемы называются несовершенствами.
+                            В конце стадии вы проголосуете за те несовершенства, которые, на ваш взгляд, совершенно необходимо устранить для
+                            исправления текущей ситуации.
+                        .dd_xprt_notice
+                          %a.a_font_reset.collapsed{"aria-expanded" => "false", "data-toggle" => "collapse", :href => "#xprt_4"}
+                            .row
+                              .col-xs-9
+                                Заголовок 3
+                              .col-xs-3.text-right
+                                %span.dd_n_date 1.12.2015
+                                %i.fa.fa-angle-right.font_grey.bold
+                        #xprt_4.dd_xprt_article.collapse
+                          %p
+                            На этой стадии вам предстоит выявить проблемы, связанные с ситуацией, описанной в базе знаний, и принять участие
+                            в обсуждении проблем, выявленных другими участниками. В нашей терминологии такие проблемы называются несовершенствами.
+                            В конце стадии вы проголосуете за те несовершенства, которые, на ваш взгляд, совершенно необходимо устранить для
+                            исправления текущей ситуации.
+                          %p
+                            На этой стадии вам предстоит выявить проблемы, связанные с ситуацией, описанной в базе знаний, и принять участие
+                            в обсуждении проблем, выявленных другими участниками. В нашей терминологии такие проблемы называются несовершенствами.
+                            В конце стадии вы проголосуете за те несовершенства, которые, на ваш взгляд, совершенно необходимо устранить для
+                            исправления текущей ситуации.
+                        .dd_xprt_notice
+                          %a.a_font_reset.collapsed{"aria-expanded" => "false", "data-toggle" => "collapse", :href => "#xprt_5"}
+                            .row
+                              .col-xs-9
+                                Заголовок 4
+                              .col-xs-3.text-right
+                                %span.dd_n_date 1.12.2015
+                                %i.fa.fa-angle-right.font_grey.bold
+                        #xprt_5.dd_xprt_article.collapse
+                          %p
+                            На этой стадии вам предстоит выявить проблемы, связанные с ситуацией, описанной в базе знаний, и принять участие
+                            в обсуждении проблем, выявленных другими участниками. В нашей терминологии такие проблемы называются несовершенствами.
+                            В конце стадии вы проголосуете за те несовершенства, которые, на ваш взгляд, совершенно необходимо устранить для
+                            исправления текущей ситуации.
+                          %p
+                            На этой стадии вам предстоит выявить проблемы, связанные с ситуацией, описанной в базе знаний, и принять участие
+                            в обсуждении проблем, выявленных другими участниками. В нашей терминологии такие проблемы называются несовершенствами.
+                            В конце стадии вы проголосуете за те несовершенства, которые, на ваш взгляд, совершенно необходимо устранить для
+                            исправления текущей ситуации.
+                    .divider20
             %span.auth-divider |
             %a.font_grey.bold{:href => "#"}
               %i.fa.fa-globe.font_lighter_grey
@@ -89,6 +293,122 @@
                 #tab-6.tab-pane.fade.in
                 #tab-7.tab-pane.fade.in
       / Main Block ends
+      #popup-database.popup-window.popup_database.popup-w770.mfp-hide
+        .popup.popup_rounded
+          .row
+            .col-md-12
+              #myCarousel.carousel.base_carousel.slide{"data-ride" => "carousel"}
+                / Indicators
+                %ul.list-unstyled.list-inline.carousel-indicators.text-center
+                  %li.color-theme-1.myCarousel-target.active{"data-slide-to" => "0", "data-target" => "#myCarousel"}
+                    Аспект 1
+                  %li.color-theme-2.myCarousel-target{"data-slide-to" => "1", "data-target" => "#myCarousel"}
+                    Аспект 2
+                  %li.color-theme-3.myCarousel-target{"data-slide-to" => "2", "data-target" => "#myCarousel"}
+                    Аспект 3
+                  %li.color-theme-4.myCarousel-target{"data-slide-to" => "3", "data-target" => "#myCarousel"}
+                    Аспект 4
+                  %li.color-theme-5.myCarousel-target{"data-slide-to" => "4", "data-target" => "#myCarousel"}
+                    Аспект 5
+                  %li.color-theme-6.myCarousel-target{"data-slide-to" => "5", "data-target" => "#myCarousel"}
+                    Аспект 6
+                  %li.color-theme-7.myCarousel-target{"data-slide-to" => "6", "data-target" => "#myCarousel"}
+                    Аспект 7
+                  %li.color-theme-8.myCarousel-target{"data-slide-to" => "7", "data-target" => "#myCarousel"}
+                    Аспект 8
+                  %li.color-theme-9.myCarousel-target{"data-slide-to" => "8", "data-target" => "#myCarousel"}
+                    Аспект 9
+                / Wrapper for slides
+                .carousel-inner{:role => "listbox"}
+                  .item.active.color-theme-1
+                    .row
+                      .col-md-12
+                        .container
+                          .row
+                            .col-md-12.col-sm-12
+                              %ul.nav.nav-tabs.aspects_tabs{:role => "tablist"}
+                                %li.active{:role => "presentation"}
+                                  %a{"aria-controls" => "Статья 1", "data-toggle" => "tab", :href => "#article1-1", :role => "tab"} Статья 1
+                                %li{:role => "presentation"}
+                                  %a{"aria-controls" => "Статья 2", "data-toggle" => "tab", :href => "#article1-2", :role => "tab"} Статья 2
+                                %li{:role => "presentation"}
+                                  %a{"aria-controls" => "Статья 3", "data-toggle" => "tab", :href => "#article1-3", :role => "tab"} Статья 3
+                          .row
+                            .col-md-12.col-sm-12
+                              .aspect-main-block
+                                .tab-content
+                                  #article1-1.tab-pane.active.fade.in{:role => "tabpanel"}
+                                    %h6.aspect-main-block-heading Ситуация с пчелами
+                                    %p.aspect-main-block-text
+                                      Пчелы недовольны тем, что на их мед
+                                      постоянно покушаются Винни-Пух и его друзья. Желая разрешить
+                                      конфликт мирным способом, они обратились к мудрой Сове.
+                                    %img{:src => "img/aspect-pic1.jpg"}/
+                                  #article1-2.tab-pane.fade{:role => "tabpanel"}
+                                    %p.aspect-main-block-text
+                                      Пчелы недовольны тем, что на их мед
+                                      постоянно покушаются Винни-Пух и его друзья. Желая разрешить
+                                      конфликт мирным способом, они обратились к мудрой Сове.
+                                    %img{:src => "img/aspect-pic1.jpg"}/
+                                  #article1-3.tab-pane.fade{:role => "tabpanel"}
+                                    %img{:src => "img/aspect-pic1.jpg"}/
+                  .item.color-theme-2
+                    .row
+                      .col-md-12.col-sm-12
+                        .aspect-main-block
+                          %p.aspect-main-block-text
+                            В популярной сказке Винни-Пух и его
+                            друзья жаждали меда, но пчелы не давали забрать у себя плоды своего
+                            труда. Чтобы раздобыть мед, Винни с компанией пытался обманом
+                            пробраться в улей на Высоком дубе — не вышло, сутками подкарауливал
+                            момент, когда все пчелы вылетят из улья, — не дождался; пытался
+                            втянуть пчел в переговоры, предлагая грибы и ягоды в обмен на мед, —
+                            был отвергнут.
+                            Всего в истории участвовало трое четвероногих: сам Винни-Пух и его
+                            друзья Пятачок и Кролик.
+                          %img{:src => "img/aspect-pic2.jpg"}/
+                  .item.color-theme-3
+                    .row
+                      .col-md-12.col-sm-12
+                        .aspect-main-block
+                          %h6.aspect-main-block-heading
+                            Трудности, связанные с
+                            расположением конфликтующих сторон
+                          %p.aspect-main-block-text
+                            Как видно на карте, Винни-Пух с
+                            друзьями живут достаточно близко к Высокому дубу.
+                            Это часто обостряет конфликт, потому что пчелы не могут нормально
+                            собирать мед,
+                            постоянно беспокоясь, что их ограбят.
+                          %img{:src => "img/aspect-pic3.jpg"}/
+                  .item.color-theme-4
+                    .row
+                      .col-md-12.col-sm-12
+                        .aspect-main-block
+                  .item.color-theme-5
+                    .row
+                      .col-md-12.col-sm-12
+                        .aspect-main-block
+                  .item.color-theme-6
+                    .row
+                      .col-md-12.col-sm-12
+                        .aspect-main-block
+                  .item.color-theme-7
+                    .row
+                      .col-md-12.col-sm-12
+                        .aspect-main-block
+                  .item.color-theme-8
+                    .row
+                      .col-md-12.col-sm-12
+                        .aspect-main-block
+                  .item.color-theme-9
+                    .row
+                      .col-md-12.col-sm-12
+                        .aspect-main-block
+                %a.myCarousel-control.left{"data-slide" => "prev", :href => "#myCarousel", :role => "button"}
+                  %i.fa.fa-3x.fa-caret-left
+                %a.myCarousel-control.right{"data-slide" => "next", :href => "#myCarousel", :role => "button"}
+                  %i.fa.fa-3x.fa-caret-right
     / Outer Ends
     / Javascript files
     / jQuery

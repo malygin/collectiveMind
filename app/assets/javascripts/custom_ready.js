@@ -55,4 +55,34 @@ $(document).ready(function () {
         $('#hint_question_'+$(this).data('question')).removeClass('close-notice');
     });
 
+    /* dropdown window */
+    // открытие/закрытие новостей эксперта -> перевести в simple popover
+    $('.drop_opener').click(function(){
+        var me = $(this);
+        var dd_open_id = me.attr('data-dd-opener');
+        var dd_win = $('#' + dd_open_id);
+        if (me.hasClass('active')){
+            close_dd(me, dd_win);
+        } else {
+            open_dd(me, dd_win);
+        }
+    });
+    $('.dd_close').click(function(){
+        var me = $(this);
+        var dd_close_id = me.attr('data-dd-closer');
+        var dd_opener = $('.drop_opener[data-dd-opener=' + dd_close_id + ']');
+        var dd_win = $('#' + dd_close_id);
+        close_dd(dd_opener, dd_win);
+    });
+    function open_dd(opener, win){
+        opener.addClass('active');
+        win.addClass('active');
+    }
+    function close_dd(opener, win){
+        opener.removeClass('active');
+        win.removeClass('active');
+        win.find('.collapse.in').removeClass('in');
+        win.find('[data-toggle="collapse"]').addClass('collapsed');
+    }
+
 });
