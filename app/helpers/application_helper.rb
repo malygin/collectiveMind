@@ -505,8 +505,11 @@ module ApplicationHelper
     controller.class.to_s.gsub('::', '_').gsub('Controller', '').underscore.to_sym
   end
 
+  ##
+  # Хелперовский метод, вернет `true` если мы в кабинете
+  # т.е. если мы на странице project_user или создаем контент
   def cabinet?
-    name_controller == :core_project_users
+    name_controller == :core_project_users or action_name == 'new'
   end
 
   def current_stage_controller
