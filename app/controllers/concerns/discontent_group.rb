@@ -11,7 +11,7 @@ module DiscontentGroup
   module ClassMethods
 
     def new_group
-      @asp = Core::Aspect.find(params[:asp]) if params[:asp]
+      @asp = Core::Aspect::Post.find(params[:asp]) if params[:asp]
       @post_group = Discontent::PostGroup.new
       respond_to do |format|
         format.js
@@ -19,7 +19,7 @@ module DiscontentGroup
     end
 
     def edit_group
-      @asp = Core::Aspect.find(params[:asp]) if params[:asp]
+      @asp = Core::Aspect::Post.find(params[:asp]) if params[:asp]
       @post_group = Discontent::PostGroup.find(params[:id])
       @aspects_for_post = @post_group.post_group_aspects
       respond_to do |format|

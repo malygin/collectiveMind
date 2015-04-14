@@ -1,7 +1,7 @@
 class CollectInfo::Question < ActiveRecord::Base
   belongs_to :user
   belongs_to :project, class_name: 'Core::Project'
-  belongs_to :core_aspect, class_name: 'Core::Aspect', foreign_key: 'aspect_id'
+  belongs_to :core_aspect, class_name: 'Core::Aspect::Post', foreign_key: 'aspect_id'
 
   has_many :answers, -> { where status: 0 }, class_name: 'CollectInfo::Answer', foreign_key: :question_id
   has_many :user_answers, class_name: 'CollectInfo::UserAnswers', foreign_key: :question_id

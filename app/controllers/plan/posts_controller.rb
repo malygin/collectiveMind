@@ -6,7 +6,7 @@ class Plan::PostsController < PostsController
   end
 
   def prepare_data
-    @aspects = Core::Aspect.where(project_id: @project, status: 0)
+    @aspects = Core::Aspect::Post.where(project_id: @project, status: 0)
     @vote_all = Plan::Voting.where(plan_votings: {plan_post_id: @project.plan_post.pluck(:id)}).uniq_user.count if @project.status == 11
   end
 

@@ -2,7 +2,7 @@ class CollectInfo::UserAnswers < ActiveRecord::Base
   belongs_to :user
   belongs_to :answer
   belongs_to :question
-  belongs_to :aspect, class_name: 'Core::Aspect'
+  belongs_to :aspect, class_name: 'Core::Aspect::Post'
   belongs_to :project, class_name: 'Core::Project'
 
   validates :question_id, :aspect_id, :project_id, :user_id, presence: true

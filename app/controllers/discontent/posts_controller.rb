@@ -2,6 +2,8 @@ class Discontent::PostsController < PostsController
   include Discontent::PostsHelper
   include DiscontentGroup
 
+  before_action :set_aspects, only: [:index]
+
   def voting_model
     Discontent::Post
   end
@@ -19,7 +21,7 @@ class Discontent::PostsController < PostsController
   def index
     @posts= nil
     if  params[:aspect]
-      @posts = Core::Aspect.find(params[:aspect].scan(/\d/).join('')).aspect_posts
+      @posts = Core::Aspect::Post.find(params[:aspect].scan(/\d/).join('')).aspect_posts
     else
       @posts = @project.discontents.by_status_for_discontent(@project)
     end
@@ -36,7 +38,7 @@ class Discontent::PostsController < PostsController
   end
 
   def new
-    @asp = params[:asp] ? Core::Aspect.find(params[:asp]) : @aspects.first
+    @asp = params[:asp] ? Core::Aspect::Post.find(params[:asp]) : @aspects.first
     @post = current_model.new
     respond_to do |format|
       format.html

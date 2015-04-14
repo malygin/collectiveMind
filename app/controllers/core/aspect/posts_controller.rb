@@ -1,14 +1,14 @@
-class Core::AspectsController < ProjectsController
+class Core::Aspect::PostsController < PostsController
   layout 'cabinet', only: [:new]
   before_action :prepare_data, except: [:update, :destroy]
   before_action :set_aspect, except: [:new, :create]
 
   def voting_model
-    Core::Aspect
+    Core::Aspect::Post
   end
 
   def new
-    @aspect = Core::Aspect.new
+    @aspect = Core::Aspect::Post.new
   end
 
   def create
@@ -32,7 +32,7 @@ class Core::AspectsController < ProjectsController
 
   private
   def set_aspect
-    @aspect = Core::Aspect.find(params[:id])
+    @aspect = Core::Aspect::Post.find(params[:id])
   end
 
   def core_aspect_params
@@ -40,6 +40,6 @@ class Core::AspectsController < ProjectsController
   end
 
   def prepare_data
-    @aspects = Core::Aspect.where(project_id: @project)
+    @aspects = Core::Aspect::Post.where(project_id: @project)
   end
 end

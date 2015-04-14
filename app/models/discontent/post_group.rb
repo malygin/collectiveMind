@@ -18,7 +18,7 @@ class Discontent::PostGroup
 
   has_many :discontent_posts, class_name: 'Discontent::Post', foreign_key: 'discontent_post_id'
   has_many :discontent_post_group_aspects, class_name: 'Discontent::PostAspect', foreign_key: 'post_id'
-  has_many :post_group_aspects, through: :discontent_post_group_aspects, source: :core_aspect, class_name: 'Core::Aspect'
+  has_many :post_group_aspects, through: :discontent_post_group_aspects, source: :core_aspect, class_name: 'Core::Aspect::Post'
 
   #связь с идеями
   has_many :concept_post_discontents, -> { where concept_post_discontents: {status: [0, nil]} },

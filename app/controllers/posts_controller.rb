@@ -19,7 +19,7 @@ class PostsController < ProjectsController
     if params[:viewed]
       post = current_model.where(id: params[:id], project_id: @project.id).first if params[:id]
       post_id = if current_model.to_s == 'CollectInfo::Post' then
-                  params[:asp] ? Core::Aspect.find(params[:asp]) : @project.aspects.order(:id).first
+                  params[:asp] ? Core::Aspect::Post.find(params[:asp]) : @project.aspects.order(:id).first
                 else
                   post
                 end
@@ -65,7 +65,7 @@ class PostsController < ProjectsController
   end
 
   def add_comment
-    @aspects = Core::Aspect.where(project_id: @project)
+    @aspects = Core::Aspect::Post.where(project_id: @project)
     post = current_model.find(params[:id])
     if params[:advise_status]
       create_advice post
@@ -196,7 +196,7 @@ class PostsController < ProjectsController
     @post.user = current_user
 
     @post.stage = params[:stage] unless params[:stage].nil?
-    @post.core_aspects << Core::Aspect.find(params[:aspect_id]) unless params[:aspect_id].nil?
+    @post.core_aspects << Core::Aspect::Post.find(params[:aspect_id]) unless params[:aspect_id].nil?
     @post.style = params[:style] unless params[:style].nil?
     @post.status = 0 if current_model.column_names.include? 'status'
 
@@ -222,7 +222,7 @@ class PostsController < ProjectsController
       if @post.update_attributes(params[name_of_model_for_param])
         unless params[:aspect_id].nil?
           @post.core_aspects.delete_all
-          @post.core_aspects << Core::Aspect.find(params[:aspect_id])
+          @post.core_aspects << Core::Aspect::Post.find(params[:aspect_id])
         end
         @post.update_attribute(:style, params[:style]) unless params[:style].nil?
 
@@ -428,7 +428,7 @@ class PostsController < ProjectsController
 
   def update_comment
     @comment = comment_model.find(params[:id])
-    @aspects = Core::Aspect.where(project_id: @project)
+    @aspects = Core::Aspect::Post.where(project_id: @project)
 
     if params[:image]
       if ['image/jpeg', 'image/png'].include? params[:image].content_type

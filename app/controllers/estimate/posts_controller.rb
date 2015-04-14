@@ -9,7 +9,7 @@ class Estimate::PostsController < PostsController
 
   def prepare_data
     @status = params[:status]
-    @aspects = Core::Aspect.where(project_id: @project)
+    @aspects = Core::Aspect::Post.where(project_id: @project)
     @vote_all = Plan::Voting.where(plan_votings: {plan_post_id: @project.plan_post.pluck(:id)}).uniq_user.count if @project.status == 11
   end
 

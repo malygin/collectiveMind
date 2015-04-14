@@ -2,10 +2,10 @@ class Core::Project < ActiveRecord::Base
   belongs_to :project_type, class_name: 'Core::ProjectType', foreign_key: :project_type_id
   has_one :settings, class_name: 'Core::ProjectSetting', dependent: :destroy
   accepts_nested_attributes_for :settings
-  has_many :aspects, class_name: 'Core::Aspect'
-  has_many :main_aspects, -> { where core_aspect_id: nil }, class_name: 'Core::Aspect'
-  has_many :proc_aspects, -> { where status: 0 }, class_name: 'Core::Aspect'
-  has_many :proc_main_aspects, -> { where(core_aspect_id: nil, status: 0) }, class_name: 'Core::Aspect'
+  has_many :aspects, class_name: 'Core::Aspect::Post'
+  has_many :main_aspects, -> { where core_aspect_id: nil }, class_name: 'Core::Aspect::Post'
+  has_many :proc_aspects, -> { where status: 0 }, class_name: 'Core::Aspect::Post'
+  has_many :proc_main_aspects, -> { where(core_aspect_id: nil, status: 0) }, class_name: 'Core::Aspect::Post'
 
   has_many :discontents, class_name: 'Discontent::Post'
   has_many :discontent_ongoing_post, -> { where status: 0 }, class_name: 'Discontent::Post'
@@ -185,7 +185,7 @@ class Core::Project < ActiveRecord::Base
 
   def get_united_posts_for_vote(user)
     voted = user.voted_discontent_posts.pluck(:id)
-    all_posts = Discontent::Post.where(project_id: id, status: [2, 4]).where.not(id: voted).includes(:post_aspects).order('core_aspects.id')
+    all_posts = Discontent::Post.where(project_id: id, status: [2, 4]).where.not(id: voted).includes(:post_aspects).order('core_aspect_posts.id')
     one_posts = []
     many_posts = []
     all_posts.each do |post|
@@ -332,9 +332,9 @@ class Core::Project < ActiveRecord::Base
   end
 
   def set_position_for_aspects
-    aspect = Core::Aspect.where(project_id: self, status: 0).first
+    aspect = Core::Aspect::Post.where(project_id: self, status: 0).first
     unless aspect.position
-      aspects = Core::Aspect.scope_vote_top(self.id, "0")
+      aspects = Core::Aspect::Post.scope_vote_top(self.id, "0")
       aspects.each do |asp|
         asp.update_attributes(position: asp.voted_users.size)
       end

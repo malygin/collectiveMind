@@ -8,7 +8,7 @@
       %h5
         Индекс аспектов
       .index-of-aspects
-        - @project.aspects.main_aspects.order('core_aspects.id').each do |asp|
+        - @project.aspects.main_aspects.order('core_aspect_posts.id').each do |asp|
           .aspect{id: "button_aspect_#{asp.id}", 'data-project' => @project.id, 'data-aspect' => asp.id, style: 'cursor:pointer;border-radius: 4px;'}
             .circle-tag.back-color{style: "background-color:#{asp.color};"}
               = asp.short_name.present? ? asp.short_name.downcase : asp.content[0,2].mb_chars.downcase

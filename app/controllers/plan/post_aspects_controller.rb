@@ -23,7 +23,7 @@ class Plan::PostAspectsController < ProjectsController
 
   def new
     @post_stage = Plan::PostStage.find(params[:stage_id])
-    @aspects = Core::Aspect.where(project_id: @project, status: 0)
+    @aspects = Core::Aspect::Post.where(project_id: @project, status: 0)
     @disposts = Discontent::Post.where(project_id: @project, status: 4)
     @new_ideas = @post.post_aspects.where(plan_post_aspects: {concept_post_id: nil, core_aspect_id: nil})
   end

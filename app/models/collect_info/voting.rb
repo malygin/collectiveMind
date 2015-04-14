@@ -1,6 +1,6 @@
 class CollectInfo::Voting < ActiveRecord::Base
   belongs_to :user
-  belongs_to :aspect, class_name: 'Core::Aspect'
+  belongs_to :aspect, class_name: 'Core::Aspect::Post'
 
   scope :by_status, ->(status) { where(status: status) }
 

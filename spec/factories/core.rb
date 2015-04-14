@@ -18,7 +18,7 @@ FactoryGirl.define do
     association :core_project
   end
 
-  factory :aspect, class: 'Core::Aspect' do
+  factory :aspect, class: 'Core::Aspect::Post' do
     sequence(:content) { |n| "aspect #{n}" }
     association :user
     association :project, factory: :core_project

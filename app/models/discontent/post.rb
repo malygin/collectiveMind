@@ -2,13 +2,13 @@ class Discontent::Post < ActiveRecord::Base
   include PgSearch
   include BasePost
 
-  belongs_to :aspect
+  belongs_to :aspect, class_name: 'Core::Aspect::Post', foreign_key: :aspect_id
   belongs_to :discontent_post, foreign_key: 'discontent_post_id', class_name: 'Discontent::Post'
   # has_many :discontent_posts, class_name: 'Discontent::Post', foreign_key: 'discontent_post_id'
 
   has_many :discontent_post_aspects, class_name: 'Discontent::PostAspect'
 
-  has_many :post_aspects, through: :discontent_post_aspects, source: :core_aspect, class_name: 'Core::Aspect'
+  has_many :post_aspects, through: :discontent_post_aspects, source: :core_aspect, class_name: 'Core::Aspect::Post'
 
   #галочки для выбранных несовершенств группы в нововведении
   has_many :concept_post_discontent_checks, -> { where concept_post_discontents: {status: [1]} },

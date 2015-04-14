@@ -12,11 +12,11 @@ class User < ActiveRecord::Base
   has_many :help_posts, class_name: 'Core::Help::Post', through: :help_questions, source: :post
   has_many :journals
   has_many :discontent_posts, class_name: 'Discontent::Post'
-  has_many :core_aspects, class_name: 'Core::Aspect'
+  has_many :core_aspects, class_name: 'Core::Aspect::Post'
   has_many :essay_posts, class_name: 'Core::Essay::Post'
   has_many :concept_posts, class_name: 'Concept::Post'
   has_many :aspect_votings, class_name: 'CollectInfo::Voting'
-  has_many :voted_aspects, through: :aspect_votings, source: :aspect, class_name: 'Core::Aspect'
+  has_many :voted_aspects, through: :aspect_votings, source: :aspect, class_name: 'Core::Aspect::Post'
   has_many :post_votings, class_name: 'Discontent::Voting'
   has_many :voted_discontent_posts, through: :post_votings, source: :discontent_post, class_name: 'Discontent::Post'
   has_many :concept_post_votings, class_name: 'Concept::Voting'
@@ -172,7 +172,7 @@ class User < ActiveRecord::Base
 
   def aspects(id)
     if self.core_aspects.empty?
-      Core::Aspect.where(project_id: id)
+      Core::Aspect::Post.where(project_id: id)
     else
       self.core_aspects
     end
