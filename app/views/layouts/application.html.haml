@@ -24,33 +24,33 @@
               = image_tag 'logo1.png'
           %ul.nav.navbar-nav.main_menu
             %li{class: "#{'active' if [:collect_info_posts, :discontent_posts, :concept_posts, :plan_posts, :estimate_posts].include? name_controller}"}
-              = link_to 'Процедура', "/project/#{@project.id}", class: "menu_a"
-            %li{class: "#{'active' if name_controller == :project_user}"}
-              = link_to 'Кабинет', project_user_path(@project, current_user), class: "menu_a"
+              = link_to 'Процедура', "/project/#{@project.id}", class: 'menu_a'
+            %li{class: "#{'active' if name_controller == :core_project_users}"}
+              = link_to 'Кабинет', project_user_path(@project, current_user), class: 'menu_a'
             %li{class: "#{'active' if name_controller == :journal}"}
-              = link_to 'Новости', journals_path(@project), class: "menu_a"
+              = link_to 'Новости', journals_path(@project), class: 'menu_a'
             - if @project.prev_status
               %li
-                = link_to '<- стадия', pr_stage_core_project_path(@project), method: :put, id: "down_to_#{@project.prev_status}", class: "menu_a"
+                = link_to '<- стадия', pr_stage_core_project_path(@project), method: :put, id: "down_to_#{@project.prev_status}", class: 'menu_a'
             - if @project.next_status
               %li
-                = link_to '-> стадия', next_stage_core_project_path(@project), method: :put, id: "up_to_#{@project.next_status}", class: "menu_a"
+                = link_to '-> стадия', next_stage_core_project_path(@project), method: :put, id: "up_to_#{@project.next_status}", class: 'menu_a'
 
           .navbar-right.text-right.user_block.font_grey
-            = link_to "", knowbase_posts_path(@project), remote: true, id: "tooltip1_5", class: "tooltip1_5 book_icon", "data-placement" => "bottom", "data-toggle" => "tooltip", "data-trigger" => "none", :title => "Открыть базу знаний"
+            = link_to '', knowbase_posts_path(@project), remote: true, id: 'tooltip1_5', class: 'tooltip1_5 book_icon', 'data-placement' => 'bottom', 'data-toggle' => 'tooltip', 'data-trigger' => 'none', title: 'Открыть базу знаний'
             %span.auth-divider
               |
-            %a.font_lighter_grey.bold{:href => "#"}
+            %a.font_lighter_grey.bold{href: '#'}
               %i.fa.fa-exclamation-triangle
             %span.auth-divider
               |
             %span.dropdown
-              %a.font_grey.bold#lang_dropdown{'data-target' => '#', 'data-toggle' => 'dropdown', href: '#', "aria-haspopup" => "true", "aria-expanded" => "false"}
+              %a.font_grey.bold#lang_dropdown{'data-target' => '#', 'data-toggle' => 'dropdown', href: '#', 'aria-haspopup' => 'true', 'aria-expanded' => 'false'}
                 %i.fa.fa-globe.font_lighter_grey
                 %small
                   Russian
                   %i.fa.fa-angle-down
-              %ul.dropdown-menu.dropdown-mini{role: 'menu', "aria-labelledby" => "lang_dropdown"}
+              %ul.dropdown-menu.dropdown-mini{role: 'menu', 'aria-labelledby' => 'lang_dropdown'}
                 %li
                   %a{href: '#'} English
                 %li
@@ -59,24 +59,22 @@
               |
             %span.dropdown
               %span.badge.grey 500
-              %a.font_grey.bold#auth_dropdown{"data-target" => "#", "data-toggle" => "dropdown", href: "#", "aria-haspopup" => "true", "aria-expanded" => "false"}
+              %a.font_grey.bold#auth_dropdown{'data-target' => '#', 'data-toggle' => 'dropdown', href: '#', 'aria-haspopup' => 'true', 'aria-expanded' => 'false'}
                 %small
                   = current_user
                   %i.fa.fa-angle-down
-              %ul.dropdown-menu.dropdown-mini{role: "menu", "aria-labelledby" => "auth_dropdown"}
+              %ul.dropdown-menu.dropdown-mini{role: 'menu', 'aria-labelledby' => 'auth_dropdown'}
                 %li{role: 'presentation'}
                   = link_to t('menu.account'), user_path(@project, current_user), id: 'go_to_profile'
                 %li{role: 'presentation'}
                   = link_to t('menu.profile_edit'), edit_user_path(@project, current_user), id: 'go_to_edit_profile'
-
-
       / Top Bar ends
       .subhead
         .container
           %h4.font_white
             = @project.name
-        - unless name_controller == :project_user
-          %button#tooltip_button_1.btn.btn-tooltip{:type => "button", :value => "Show"}
+        - unless name_controller == :core_project_users
+          %button#tooltip_button_1.btn.btn-tooltip{type: "button", value: "Show"}
             %i.fa.fa-lightbulb-o
             Подсказки
 

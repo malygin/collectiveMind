@@ -506,6 +506,10 @@ module ApplicationHelper
   end
 
   def current_stage_controller
+    # Если это контроллер для кабинета, возвращаем номер текущей стадии
+    if name_controller == :core_project_users
+      return @project.current_stage.first[0]
+    end
     Core::Project::LIST_STAGES.each do |num_stage, stage|
       return num_stage if name_controller == stage[:type_stage]
     end
