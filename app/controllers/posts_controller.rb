@@ -1,5 +1,4 @@
 class PostsController < ProjectsController
-  layout 'cabinet', only: [:new, :user_content]
   before_filter :journal_data, only: [:index, :new, :edit, :show, :vote_result, :to_work, :about]
   before_filter :have_project_access
   before_filter :boss_authenticate, only: [:vote_result]
