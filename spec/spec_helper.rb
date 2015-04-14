@@ -39,6 +39,7 @@ Spork.prefork do
     config.use_transactional_fixtures = false
     config.infer_base_class_for_anonymous_controllers = false
     config.order = 'random'
+    config.include AbstractController::Translation
 
     config.before :each, js: true do
       page.driver.block_unknown_urls
@@ -46,6 +47,7 @@ Spork.prefork do
       page.driver.allow_url 'res.cloudinary.com'
       Capybara.default_wait_time = 5
     end
+
     config.before(:suite) do
       DatabaseCleaner.clean_with(:truncation)
     end
