@@ -13,13 +13,20 @@ class CollectInfo::PostsController < PostsController
     @aspect = params[:asp] ? Core::Aspect.find(params[:asp]) : @project.main_aspects.first
     @count_aspects = @project.main_aspects.count
 
-    # @count_aspects_check = @project
-    # @project.main_aspects.each do |asp|
-    #   if asp.question_complete(current_user).count == asp.questions.by_status(0).count
-    #     @count_aspects_check += 1
-    #   end
-    # end
+    # подсчет данных для прогресс-бара по вопросам
+    # число вопросов по процедуре
+    count_all = CollectInfo::Question.joins(:core_aspect).where('core_aspects.project_id' => @project).count
+    # число вопросов на которые пользователь ответил
+    count_answered = CollectInfo::UserAnswers.select(' DISTINCT "collect_info_user_answers"."question_id" ').joins(:aspect).where('core_aspects.project_id' => @project).where(user: current_user).count
+    # прогресс для данного пользователя
+    @questions_progress = (count_answered.to_f/count_all.to_f) * 100
 
+    # общее количество ответов пользователей закрытой процедуры
+    if @project.closed?
+      users_count = @project.users_in_project.uniq.count
+      count_answered_all = CollectInfo::UserAnswers.select(' DISTINCT "collect_info_user_answers"."question_id" ').joins(:aspect).where('core_aspects.project_id' => @project).count
+      @questions_progress_all = (count_answered_all.to_f/(count_all*users_count).to_f) * 100
+    end
   end
 
   def render_slider

@@ -46,7 +46,13 @@ $(document).ready(function () {
     if ($('.popup-vote').length){
         $.magnificPopup.open({
             items: {src: '.popup-vote'},
-            type: 'inline'
+            type: 'inline',
+            //absolute prohibition on closing
+            closeOnContentClick: false,
+            closeOnBgClick: false,
+            closeBtnInside: false,
+            showCloseBtn: false,
+            enableEscapeKey: false
         });
     };
 
