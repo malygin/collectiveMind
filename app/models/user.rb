@@ -367,4 +367,14 @@ class User < ActiveRecord::Base
       !project_user_for(project).ready_to_concept
     end
   end
+
+  # аспекты для голосования (важные, неважные, лишние)
+  def aspects_for_vote(project, status)
+    self.voted_aspects.by_project(project.id).where(collect_info_votings: {status: status})
+  end
+
+  # аспекты за которые пользователь еще не проголосовал
+  def unvote_aspects_for_vote(project)
+    project.main_aspects.includes(:final_votings).where(collect_info_votings: {user_id: [self.id, nil]}).where(collect_info_votings: {aspect_id: nil})
+  end
 end
