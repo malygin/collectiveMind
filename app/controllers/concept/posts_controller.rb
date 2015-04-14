@@ -20,32 +20,6 @@ class Concept::PostsController < PostsController
 
   def index
     @posts = @project.concept_ongoing_post
-
-    # if params[:not_aspect].present?
-    #   @concepts = @project.concepts_without_aspect
-    # elsif params[:all_aspects].present?
-    #   @concepts = @project.concept_ongoing_post.order('concept_posts.id')
-    # elsif params[:asp].present?
-    #   @aspect = Core::Aspect.find(params[:asp])
-    # else
-    #   @aspect = @project.proc_aspects.order('position DESC').first
-    # end
-    #
-    # if current_user.can_vote_for(:concept, @project)
-    #   disposts = Discontent::Post.where(project_id: @project, status: 4).order(:id)
-    #   last_vote = current_user.concept_post_votings.by_project_votings(@project).last
-    #   @discontent_post = current_user.able_concept_posts_for_vote(@project, disposts, last_vote)
-    #   unless @discontent_post.nil?
-    #     var_for_vote = @discontent_post.concepts_for_vote(@project, current_user, last_vote)
-    #     @post_all = var_for_vote[0]
-    #     @concept1 = var_for_vote[1]
-    #     @concept2 = var_for_vote[2]
-    #     @votes = var_for_vote[3]
-    #   else
-    #     @post_all = 1
-    #     @votes = 0
-    #   end
-    # end
   end
 
   def new
@@ -54,12 +28,12 @@ class Concept::PostsController < PostsController
     @concept_post = current_model.new
     # нововведение без несовершенства?
     @discontent_post = Discontent::Post.find(params[:dis_id]) unless params[:dis_id].nil?
-    @resources = Concept::Resource.where(project_id: @project.id)
-    if params[:improve_comment] and params[:improve_stage]
-      @comment = get_comment_for_stage(params[:improve_stage], params[:improve_comment])
-      @concept_post.name = @comment.content if @comment
-    end
-    @remove_able = true
+    # @resources = Concept::Resource.where(project_id: @project.id)
+    # if params[:improve_comment] and params[:improve_stage]
+    #   @comment = get_comment_for_stage(params[:improve_stage], params[:improve_comment])
+    #   @concept_post.name = @comment.content if @comment
+    # end
+    # @remove_able = true
     respond_to do |format|
       format.html
       format.js
@@ -73,18 +47,19 @@ class Concept::PostsController < PostsController
         @concept_post.concept_post_discontents.build(discontent_post_id: cd[0], complite: cd[1][:complite], status: 0)
       end
     end
+    #выбор отдельных несовершенств
     unless params[:check_discontent].nil?
       params[:check_discontent].each do |com|
-        @concept_post.concept_post_discontent_grouped.build(discontent_post_id: com[0], status: 1)
+        @concept_post.concept_post_discontent_checks.build(discontent_post_id: com[0], status: 1)
       end
     end
 
     @concept_post.user = current_user
     @concept_post.project = @project
-    @concept_post.improve_comment = params[:improve_comment] if params[:improve_comment]
-    @concept_post.improve_stage = params[:improve_stage] if params[:improve_stage]
+    # @concept_post.improve_comment = params[:improve_comment] if params[:improve_comment]
+    # @concept_post.improve_stage = params[:improve_stage] if params[:improve_stage]
 
-    create_concept_resources_on_type(@project, @concept_post)
+    # create_concept_resources_on_type(@project, @concept_post)
 
     @concept_post.fullness_apply(@concept_post, params[:resor])
 
@@ -123,13 +98,13 @@ class Concept::PostsController < PostsController
       end
     end
     unless params[:check_discontent].nil?
-      @concept_post.concept_post_discontent_grouped.destroy_all if @concept_post.valid?
+      @concept_post.concept_post_discontent_checks.destroy_all if @concept_post.valid?
       params[:check_discontent].each do |com|
-        @concept_post.concept_post_discontent_grouped.build(discontent_post_id: com[0], status: 1)
+        @concept_post.concept_post_discontent_checks.build(discontent_post_id: com[0], status: 1)
       end
     end
 
-    create_concept_resources_on_type(@project, @concept_post)
+    # create_concept_resources_on_type(@project, @concept_post)
 
     @concept_post.fullness_apply(@concept_post, params[:resor])
 
@@ -151,33 +126,33 @@ class Concept::PostsController < PostsController
     end
   end
 
-  def next_vote
-    disposts = Discontent::Post.where(project_id: @project, status: 4).order(:id)
-    @last_vote = current_user.concept_post_votings.by_project_votings(@project).last
-
-    if @last_vote.nil? or params[:id].to_i == @last_vote.concept_post_aspect_id or params[:dis_id].to_i != @last_vote.discontent_post_id
-      count_create = 1
-    else
-      count_create = current_user.concept_post_votings.by_project_votings(@project).where(discontent_post_id: @last_vote.discontent_post_id,
-                                                                                          concept_post_aspect_id: @last_vote.concept_post_aspect_id).count + 1
-    end
-    if current_user.can_vote_for(:concept, @project)
-      count_create.times do
-        @last_now = Concept::Voting.create(user_id: current_user.id, concept_post_aspect_id: params[:id], discontent_post_id: params[:dis_id])
-      end
-    end
-    @discontent_post = current_user.able_concept_posts_for_vote(@project, disposts, @last_now)
-    if @discontent_post.nil?
-      @post_all = 1
-      @votes = 0
-    else
-      var_for_vote = @discontent_post.concepts_for_vote(@project, current_user, @last_now)
-      @post_all = var_for_vote[0]
-      @concept1 = var_for_vote[1]
-      @concept2 = var_for_vote[2]
-      @votes = var_for_vote[3]
-    end
-  end
+  # def next_vote
+  #   disposts = Discontent::Post.where(project_id: @project, status: 4).order(:id)
+  #   @last_vote = current_user.concept_post_votings.by_project_votings(@project).last
+  #
+  #   if @last_vote.nil? or params[:id].to_i == @last_vote.concept_post_aspect_id or params[:dis_id].to_i != @last_vote.discontent_post_id
+  #     count_create = 1
+  #   else
+  #     count_create = current_user.concept_post_votings.by_project_votings(@project).where(discontent_post_id: @last_vote.discontent_post_id,
+  #                                                                                         concept_post_aspect_id: @last_vote.concept_post_aspect_id).count + 1
+  #   end
+  #   if current_user.can_vote_for(:concept, @project)
+  #     count_create.times do
+  #       @last_now = Concept::Voting.create(user_id: current_user.id, concept_post_aspect_id: params[:id], discontent_post_id: params[:dis_id])
+  #     end
+  #   end
+  #   @discontent_post = current_user.able_concept_posts_for_vote(@project, disposts, @last_now)
+  #   if @discontent_post.nil?
+  #     @post_all = 1
+  #     @votes = 0
+  #   else
+  #     var_for_vote = @discontent_post.concepts_for_vote(@project, current_user, @last_now)
+  #     @post_all = var_for_vote[0]
+  #     @concept1 = var_for_vote[1]
+  #     @concept2 = var_for_vote[2]
+  #     @votes = var_for_vote[3]
+  #   end
+  # end
 
   def add_dispost
     @dispost = Discontent::Post.find(params[:dispost_id])
@@ -197,23 +172,23 @@ class Concept::PostsController < PostsController
     end
   end
 
-  def create_concept_resources_on_type(project, post)
-    unless params[:resor].nil?
-      params[:resor].each do |r|
-        if r[:name]!=''
-          resource = post.concept_post_resources.build(name: r[:name], desc: r[:desc], type_res: r[:type_res], project_id: project.id, style: 0)
-          unless r[:means].nil?
-            r[:means].each do |m|
-              if m[:name]!=''
-                mean = post.concept_post_resources.build(name: m[:name], desc: m[:desc], type_res: m[:type_res], project_id: project.id, style: 1)
-                mean.concept_post_resource = resource
-              end
-            end
-          end
-        end
-      end
-    end
-  end
+  # def create_concept_resources_on_type(project, post)
+  #   unless params[:resor].nil?
+  #     params[:resor].each do |r|
+  #       if r[:name]!=''
+  #         resource = post.concept_post_resources.build(name: r[:name], desc: r[:desc], type_res: r[:type_res], project_id: project.id, style: 0)
+  #         unless r[:means].nil?
+  #           r[:means].each do |m|
+  #             if m[:name]!=''
+  #               mean = post.concept_post_resources.build(name: m[:name], desc: m[:desc], type_res: m[:type_res], project_id: project.id, style: 1)
+  #               mean.concept_post_resource = resource
+  #             end
+  #           end
+  #         end
+  #       end
+  #     end
+  #   end
+  # end
 
   private
   def concept_post_params

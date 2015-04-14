@@ -12,7 +12,7 @@ class Plan::PostAspectsController < ProjectsController
     @post_concept_save = Plan::PostAspect.find(params[:con_id])
     @post_concept_save.update_attributes(params[:plan_post_aspect])
 
-    create_plan_resources_on_type(@project, @post_concept_save)
+    # create_plan_resources_on_type(@project, @post_concept_save)
 
     respond_to do |format|
       if @post_concept_save.save
@@ -37,7 +37,7 @@ class Plan::PostAspectsController < ProjectsController
     @post_concept = Plan::PostAspect.find(params[:id])
     @post_concept.update_attributes plan_post_aspect_params
 
-    create_plan_resources_on_type(@project, @post_concept)
+    # create_plan_resources_on_type(@project, @post_concept)
 
     respond_to do |format|
       if @post_concept.save
@@ -70,7 +70,7 @@ class Plan::PostAspectsController < ProjectsController
           @cond.problems = @concept.problems
           @cond.save!
 
-          @cond.duplicate_plan_post_resources(@project, @concept)
+          # @cond.duplicate_plan_post_resources(@project, @concept)
         else
           @concept = Concept::Post.find(params[:concept_id])
           @cond = Plan::PostAspect.new
@@ -88,7 +88,7 @@ class Plan::PostAspectsController < ProjectsController
           @cond.concept_post = @concept
           @cond.save!
 
-          @cond.duplicate_concept_post_resources(@project, @concept)
+          # @cond.duplicate_concept_post_resources(@project, @concept)
         end
       else
         @cond = Plan::PostAspect.create(title: 'Новое нововведение')
@@ -127,22 +127,22 @@ class Plan::PostAspectsController < ProjectsController
     @post = Plan::Post.find(params[:post_id])
   end
 
-  def create_plan_resources_on_type(project, post)
-    post.plan_post_resources.by_type(%w(positive_r positive_s negative_r negative_s control_r control_s)).destroy_all
-    unless params[:resor].nil?
-      params[:resor].each do |r|
-        if r[:name]!=''
-          resource = post.plan_post_resources.build(name: r[:name], desc: r[:desc], type_res: r[:type_res], project_id: project.id, style: 0)
-          unless r[:means].nil?
-            r[:means].each do |m|
-              if m[:name]!=''
-                mean = post.plan_post_resources.build(name: m[:name], desc: m[:desc], type_res: m[:type_res], project_id: project.id, style: 1)
-                mean.plan_post_resource = resource
-              end
-            end
-          end
-        end
-      end
-    end
-  end
+  # def create_plan_resources_on_type(project, post)
+  #   post.plan_post_resources.by_type(%w(positive_r positive_s negative_r negative_s control_r control_s)).destroy_all
+  #   unless params[:resor].nil?
+  #     params[:resor].each do |r|
+  #       if r[:name]!=''
+  #         resource = post.plan_post_resources.build(name: r[:name], desc: r[:desc], type_res: r[:type_res], project_id: project.id, style: 0)
+  #         unless r[:means].nil?
+  #           r[:means].each do |m|
+  #             if m[:name]!=''
+  #               mean = post.plan_post_resources.build(name: m[:name], desc: m[:desc], type_res: m[:type_res], project_id: project.id, style: 1)
+  #               mean.plan_post_resource = resource
+  #             end
+  #           end
+  #         end
+  #       end
+  #     end
+  #   end
+  # end
 end

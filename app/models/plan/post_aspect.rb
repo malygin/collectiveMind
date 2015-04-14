@@ -5,7 +5,7 @@ class Plan::PostAspect < ActiveRecord::Base
   belongs_to :discontent, class_name: 'Discontent::Post', foreign_key: :core_aspect_id
   belongs_to :plan_post_stage, class_name: 'Plan::PostStage', foreign_key: :post_stage_id
 
-  has_many :plan_post_resources, class_name: 'Plan::PostResource', foreign_key: :post_id
+  # has_many :plan_post_resources, class_name: 'Plan::PostResource', foreign_key: :post_id
   has_many :plan_post_actions, -> { order :date_begin }, class_name: 'Plan::PostAction', foreign_key: :plan_post_aspect_id
   has_many :estimate_post_aspects, class_name: 'Estimate::PostAspect', foreign_key: :plan_post_aspect_id
   has_many :plan_notes, class_name: 'Plan::Note', foreign_key: :post_id
@@ -22,15 +22,15 @@ class Plan::PostAspect < ActiveRecord::Base
     estimate_post_aspects.where(post_id: post).first
   end
 
-  def duplicate_plan_post_resources(project, post)
-    post.plan_post_resources.each do |rs|
-      self.plan_post_resources.build(name: rs.name, desc: rs.desc, type_res: rs.type_res, project_id: project.id, style: rs.style).save if rs!=''
-    end
-  end
-
-  def duplicate_concept_post_resources(project, post)
-    post.concept_post_resources.each do |rs|
-      self.plan_post_resources.build(name: rs.name, desc: rs.desc, type_res: rs.type_res, project_id: project.id, style: rs.style).save if rs!=''
-    end
-  end
+  # def duplicate_plan_post_resources(project, post)
+  #   post.plan_post_resources.each do |rs|
+  #     self.plan_post_resources.build(name: rs.name, desc: rs.desc, type_res: rs.type_res, project_id: project.id, style: rs.style).save if rs!=''
+  #   end
+  # end
+  #
+  # def duplicate_concept_post_resources(project, post)
+  #   post.concept_post_resources.each do |rs|
+  #     self.plan_post_resources.build(name: rs.name, desc: rs.desc, type_res: rs.type_res, project_id: project.id, style: rs.style).save if rs!=''
+  #   end
+  # end
 end

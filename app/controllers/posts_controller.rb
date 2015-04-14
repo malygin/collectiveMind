@@ -421,9 +421,9 @@ class PostsController < ProjectsController
   #   end
   # end
 
-  # def edit_comment
-  #   @comment = comment_model.find(params[:id])
-  # end
+  def edit_comment
+    @comment = comment_model.find(params[:id])
+  end
 
   def update_comment
     @comment = comment_model.find(params[:id])
@@ -462,25 +462,12 @@ class PostsController < ProjectsController
     end
   end
 
-  def set_important
-    @post = current_model.find(params[:id])
-    @post.toggle!(:important)
-  end
-
   def check_field
     if params[:check_field] and params[:status]
       current_user.user_checks.where(project_id: @project.id, check_field: params[:check_field]).destroy_all
       current_user.user_checks.create(project_id: @project.id, check_field: params[:check_field], status: params[:status]).save!
     end
     head :ok
-  end
-
-  def to_work
-
-  end
-
-  def vote_result
-
   end
 
   def comment_page

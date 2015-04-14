@@ -70,9 +70,9 @@ class Core::Aspect < ActiveRecord::Base
     Discontent::Post.joins(:post_aspects).where(discontent_post_aspects: {aspect_id: id})
   end
 
-  def question_complete(user)
-    questions.joins(:user_answers).where(collect_info_user_answers: {user_id: user.id}).by_status(0).select('distinct collect_info_questions.id')
-  end
+  # def question_complete(user)
+  #   questions.joins(:user_answers).where(collect_info_user_answers: {user_id: user.id}).by_status(0).select('distinct collect_info_questions.id')
+  # end
 
   def color
     color = read_attribute(:color)
