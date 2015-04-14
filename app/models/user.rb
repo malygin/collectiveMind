@@ -367,4 +367,12 @@ class User < ActiveRecord::Base
       !project_user_for(project).ready_to_concept
     end
   end
+
+  def content_for_project(project)
+    if project.current_stage_values[:type_stage] == Core::Project::LIST_STAGES.first.second[:type_stage]
+      core_aspects.by_project(project)
+    else
+      send(project.current_stage_values[:type_stage]).by_project(project)
+    end
+  end
 end

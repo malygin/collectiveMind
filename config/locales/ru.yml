@@ -1,4 +1,12 @@
 ru:
+  techniques:
+    aspects_simple: '+ Аспект'
+    aspects_detailed: 'Воспользоваться вспомогательной техникой'
+    discontent_posts_simple: '+ Несовершенство'
+    discontent_posts_detailed: 'Воспользоваться вспомогательной техникой'
+  my:
+    collect_info_posts: 'Мои аспекты'
+    discontent_posts: 'Мои несовершенства'
   activerecord:
     attributes:
       group_task:
@@ -288,6 +296,7 @@ ru:
       status_main: Основная
       status_other: Дополнительная
 
+      create_success: "Аспект создан!"
     discontent:
       title:  Форма добавления несовершенства
       what: 'что?'
