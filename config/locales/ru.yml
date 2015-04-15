@@ -302,9 +302,9 @@ ru:
       what: 'что?'
       where: 'где?'
       when: 'когда?'
-      field_what: Что вас не устраивает?
-      field_where: Где это происходит?
-      field_when: Когда это происходит?
+      field_what: На каком этапе это происходит?
+      field_where: От чего это зависит?
+      field_when: Чья работа от этого зависит?
       style_negative: Имеющиеся недостатки
       style_positive: Отсутствующие достоинства
       style_nun: не определена
