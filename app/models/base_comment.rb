@@ -28,6 +28,7 @@ module BaseComment
     scope :not_check, -> { where(discontent_status: ['f',nil],concept_status: ['f',nil], discuss_status:['f',nil], approve_status: ['f',nil], useful: ['f',nil]) }
 
     scope :date_stage, ->(project) { where("DATE(#{table_name}.created_at) >= ? AND DATE(#{table_name}.created_at) <= ?", project.date_begin_stage(table_name).to_date, project.date_end_stage(table_name).to_date) if project.date_begin_stage(table_name).present? and project.date_end_stage(table_name).present? }
+    scope :preview, ->{reorder(created_at: :desc).limit(2)}
 
     validates :content, :user_id, :post_id, presence: true
 

@@ -26,6 +26,7 @@ class Core::Aspect::Post < ActiveRecord::Base
   scope :positive_posts, -> { joins(:discontent_posts).where('discontent_posts.style = ?', 0) }
   scope :negative_posts, -> { joins(:discontent_posts).where('discontent_posts.style = ?', 1) }
   scope :accepted_posts, -> { joins(:discontent_posts).where('discontent_posts.style = ?', 4) }
+
   scope :by_project, ->(project_id) { where('core_aspect_posts.project_id = ?', project_id) }
   scope :by_user, ->(user) { where(user_id: user.id) }
   scope :minus_view, ->(aspects) { where.not(core_aspect_posts: {id: aspects}) }
@@ -40,7 +41,6 @@ class Core::Aspect::Post < ActiveRecord::Base
       nil
     end
   }
-
   #выборка всех вопросов к аспекту на которые пользователь еще не ответил
   def missed_questions(user)
     self.questions.includes(:user_answers).where(collect_info_user_answers: {user_id: [user.id, nil]}).where(collect_info_user_answers: {question_id: nil})
