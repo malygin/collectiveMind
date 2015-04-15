@@ -39,6 +39,11 @@
       # else we have not more aspects, we just show greetings
       magnificPopupOpen('#popup-greetings-text')
 
+# get project id from url like /project/11/discontent/posts
+@getProjectIdByUrl = ()->
+  url = window.location.href.match(/\d+/g)
+  return url[url.length-1]
+
 #----------
 @search = ->
   this.search_users = ->

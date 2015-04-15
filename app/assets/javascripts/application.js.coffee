@@ -8,7 +8,6 @@
 #= require history_jquery
 #= require jquery.tube.min
 
-
 #= require bootstrap/bootstrap.min
 #= require bootstrap-colorpicker
 #= require datepicker/bootstrap-datepicker
@@ -28,6 +27,7 @@
 #= require comments
 #= require resources
 
+# from yan's markup
 #= require jquery.magnific-popup.min
 #= require owl.carousel.min
 #= require respond.min
@@ -37,7 +37,6 @@
 #= require waypoints.min
 #= require jquery.contenthover.min
 #= require perfect-scrollbar.jquery.min
-
 
 #= require isotope.pkgd.min
 

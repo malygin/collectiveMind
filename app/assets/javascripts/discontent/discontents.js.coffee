@@ -4,7 +4,7 @@ Discontent = Backbone.Model.extend
 
 DiscontentCollection = Backbone.Collection.extend
   model: Discontent,
-  url: "/project/13/discontent/posts"
+  url: "/project/#{getProjectIdByUrl()}/discontent/posts"
 
 DiscontentView = Backbone.View.extend
   template: JST['templates/discontent_view']
