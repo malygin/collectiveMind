@@ -377,4 +377,12 @@ class User < ActiveRecord::Base
   def unvote_aspects_for_vote(project)
     project.main_aspects.includes(:final_votings).where(collect_info_votings: {user_id: [self.id, nil]}).where(collect_info_votings: {aspect_id: nil})
   end
+
+  def content_for_project(project)
+    if project.current_stage_values[:type_stage] == Core::Project::LIST_STAGES.first.second[:type_stage]
+      core_aspects.by_project(project)
+    else
+      send(project.current_stage_values[:type_stage]).by_project(project)
+    end
+  end
 end

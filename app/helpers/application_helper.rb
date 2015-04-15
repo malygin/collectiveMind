@@ -505,7 +505,19 @@ module ApplicationHelper
     controller.class.to_s.gsub('::', '_').gsub('Controller', '').underscore.to_sym
   end
 
+  ##
+  # Хелперовский метод, вернет `true` если мы в кабинете
+  # т.е. если мы на странице project_user или создаем контент
+  # или просматриваем свой созданный контент
+  def cabinet?
+    name_controller == :core_project_users or action_name == 'new' or action_name == 'user_content'
+  end
+
   def current_stage_controller
+    # Если это контроллер для кабинета, возвращаем номер текущей стадии
+    if cabinet?
+      return @project.current_stage.first[0]
+    end
     Core::Project::LIST_STAGES.each do |num_stage, stage|
       return num_stage if name_controller == stage[:type_stage]
     end

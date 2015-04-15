@@ -1,0 +1,9 @@
+.col-md-2
+  %ul.list-unstyled{role: 'tablist'}
+    - @project.techniques.by_stage(@project.current_stage_values[:type_stage]).each do |technique|
+      %li{role: 'presentation', class: ('active' if true)}
+        = link_to t("techniques.#{technique.name}"), self.send("new_#{technique.stage.to_s.downcase.singularize}_path", @project, type_mechanic: technique.code),
+        role: 'button', class: 'btn back_color_stage1', id: "new_#{technique.name}"
+        .divider25
+    %li
+      = link_to "#{t("my.#{@project.current_stage_type}")} (#{current_user.content_for_project(@project).count})", self.send("user_content_#{@project.current_stage_type}_path"), role: 'button', class: 'btn back_color_stage1', id: "open_my_#{@project.current_stage_type}"

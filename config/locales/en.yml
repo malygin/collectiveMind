@@ -266,6 +266,7 @@ en:
       status_main: Main
       status_other: Secondary
 
+      create_success: "Аспект создан!"
     discontent:
       title:  Shortfall addition form
       what: What

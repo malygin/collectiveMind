@@ -1,5 +1,4 @@
 class Core::Aspect::PostsController < PostsController
-  layout 'cabinet', only: [:new]
   before_action :prepare_data, except: [:update, :destroy]
   before_action :set_aspect, except: [:new, :create]
 

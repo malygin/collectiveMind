@@ -22,21 +22,21 @@
             %a.navbar-brand{href: @project ? "/project/#{@project.id}" : '/', id: 'go_to_logo'}
               = image_tag 'logo1.png'
           %ul.nav.navbar-nav.main_menu
-            %li{class: "#{'active' if [:collect_info_posts, :discontent_posts, :concept_posts, :novation_posts, :plan_posts, :estimate_posts].include? name_controller}"}
-              = link_to 'Процедура', "/project/#{@project.id}", class: "menu_a"
-            %li{class: "#{'active' if name_controller == :project_user}"}
-              = link_to 'Кабинет', project_user_path(@project, current_user), class: "menu_a"
+            %li{class: "#{'active' unless cabinet?}"}
+              = link_to 'Процедура', "/project/#{@project.id}", class: 'menu_a'
+            %li{class: "#{'active' if cabinet?}"}
+              = link_to 'Кабинет', project_user_path(@project, current_user), class: 'menu_a'
             %li{class: "#{'active' if name_controller == :journal}"}
-              = link_to 'Новости', journals_path(@project), class: "menu_a"
+              = link_to 'Новости', journals_path(@project), class: 'menu_a'
             - if @project.prev_status
               %li
-                = link_to '<- стадия', pr_stage_core_project_path(@project), method: :put, id: "down_to_#{@project.prev_status}", class: "menu_a"
+                = link_to '<- стадия', pr_stage_core_project_path(@project), method: :put, id: "down_to_#{@project.prev_status}", class: 'menu_a'
             - if @project.next_status
               %li
-                = link_to '-> стадия', next_stage_core_project_path(@project), method: :put, id: "up_to_#{@project.next_status}", class: "menu_a"
+                = link_to '-> стадия', next_stage_core_project_path(@project), method: :put, id: "up_to_#{@project.next_status}", class: 'menu_a'
 
           .navbar-right.text-right.user_block.font_grey
-            = link_to "", knowbase_posts_path(@project), remote: true, class: "book_icon"
+            = link_to '', knowbase_posts_path(@project), remote: true, class: 'book_icon'
             %span.auth-divider
               |
             %span.has_dropwindow
@@ -44,12 +44,12 @@
             %span.auth-divider
               |
             %span.dropdown
-              %a.font_grey.bold#lang_dropdown{'data-target' => '#', 'data-toggle' => 'dropdown', href: '#', "aria-haspopup" => "true", "aria-expanded" => "false"}
+              %a.font_grey.bold#lang_dropdown{'data-target' => '#', 'data-toggle' => 'dropdown', href: '#', 'aria-haspopup' => 'true', 'aria-expanded' => 'false'}
                 %i.fa.fa-globe.font_lighter_grey
                 %small
                   Russian
                   %i.fa.fa-angle-down
-              %ul.dropdown-menu.dropdown-mini{role: 'menu', "aria-labelledby" => "lang_dropdown"}
+              %ul.dropdown-menu.dropdown-mini{role: 'menu', 'aria-labelledby' => 'lang_dropdown'}
                 %li
                   %a{href: '#'} English
                 %li
@@ -58,46 +58,37 @@
               |
             %span.dropdown
               %span.badge.grey 500
-              %a.font_grey.bold#auth_dropdown{"data-target" => "#", "data-toggle" => "dropdown", href: "#", "aria-haspopup" => "true", "aria-expanded" => "false"}
+              %a.font_grey.bold#auth_dropdown{'data-target' => '#', 'data-toggle' => 'dropdown', href: '#', 'aria-haspopup' => 'true', 'aria-expanded' => 'false'}
                 %small
                   = current_user
                   %i.fa.fa-angle-down
-              %ul.dropdown-menu.dropdown-mini{role: "menu", "aria-labelledby" => "auth_dropdown"}
+              %ul.dropdown-menu.dropdown-mini{role: 'menu', 'aria-labelledby' => 'auth_dropdown'}
                 %li{role: 'presentation'}
                   = link_to t('menu.account'), user_path(@project, current_user), id: 'go_to_profile'
                 %li{role: 'presentation'}
                   = link_to t('menu.profile_edit'), edit_user_path(@project, current_user), id: 'go_to_edit_profile'
-
-
       / Top Bar ends
       .subhead
         .container
           %h4.font_white
             = @project.name
-        %button#tooltip_button_1.btn.btn-tooltip{:type => "button", :value => "Show"}
-          %i.fa.fa-lightbulb-o
-          Подсказки
-
+        - unless cabinet?
+          %button#tooltip_button_1.btn.btn-tooltip{type: "button", value: "Show"}
+            %i.fa.fa-lightbulb-o
+            Подсказки
 
       .container
         .row
-          .col-md-8.col_padding_right_3
-            #tooltip1_1.border_grey.rounded_3.stages_block.tooltip1{"data-placement" => "bottom", "data-toggle" => "tooltip", "data-trigger" => "manual", :title => "В нашей процедуре стадии открываются поэтапно. Следующая стадия откроется, когда большинство участников ответит на все вопросы."}
-              .btn-toolbar{:role => "toolbar"}
-                = render partial: 'stages'
-          .col-md-4.col_padding_left_3
-            %a.open_welcome_popup{:href => "#popup-explanation-#{current_stage_controller}"}
-              #tooltip1_2.border_grey.rounded_3.help_icon.tooltip1{"data-placement" => "bottom", "data-toggle" => "tooltip", "data-trigger" => "manual", :title => "Вы всегда сможете вызвать помощь по стадии, нажав сюда"}
-            #tooltip1_3.border_grey.rounded_3.progress_block.tooltip1{"data-placement" => "bottom", "data-toggle" => "tooltip", "data-trigger" => "manual", :title => "Здесь будут отображаться ваши успехи по работе с аспектами. Другие участники тоже не сидят сложа руки!"}
-              .container
-                .row
-                  = render partial: 'application/progress_bar'
-
-
+          = render partial: 'stages'
       / Main Block starts
       .main-block
         .container
-          = yield
+          - if cabinet?
+            .row
+              = render partial: 'core/project_users/sidebar'
+              = yield
+          - else
+            = yield
     #render_knowbase_posts
     = render 'shared/moderator_chat'
 

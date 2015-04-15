@@ -1,16 +1,28 @@
-- Core::Project::LIST_STAGES.each do |num_stage, stage|
-  - if name_controller == stage[:type_stage]
-    .btn-group{:role => "group"}
-      = link_to send("#{stage[:type_stage]}_path", @project, asp: params[:asp]), id: "go_to_#{stage[:type_stage]}", :role => "button", class: "btn back_color_stage#{num_stage}" do
-        ="#{num_stage} СТАДИЯ: "
-        = stage[:name]
+.col-md-8.col_padding_right_3
+  #tooltip1_1.tooltip1.border_grey.rounded_3.stages_block.tooltip1{'data-placement' => 'bottom', 'data-toggle' => 'tooltip', 'data-trigger' => 'none', title: 'В нашей процедуре стадии открываются поэтапно. Следующая стадия откроется, когда большинство участников ответит на все вопросы.'}
+    .btn-toolbar{role: 'toolbar'}
+      - if cabinet?
+        = link_to send("#{@project.current_stage_type}_path", @project, asp: params[:asp]), id: "go_to_#{@project.current_stage_type}", role: 'button', class: "btn back_color_stage#{@project.current_stage_num}" do
+          = "#{@project.current_stage_num} СТАДИЯ: #{@project.current_stage_values[:name]}"
+      - else
+        - Core::Project::LIST_STAGES.each do |num_stage, stage|
+          .btn-group{role: 'group'}
+            - if name_controller == stage[:type_stage]
+              = link_to send("#{stage[:type_stage]}_path", @project, asp: params[:asp]), id: "go_to_#{stage[:type_stage]}", role: 'button', class: "btn back_color_stage#{num_stage}" do
+                ="#{num_stage} СТАДИЯ: "
+                = stage[:name]
+            - elsif @project.status >= stage[:status].min
+              = link_to send("#{stage[:type_stage]}_path", @project, asp: params[:asp]), id: "go_to_#{stage[:type_stage]}", role: 'button', class: "btn back_color_stage#{num_stage}" do
+                = num_stage
+            - else
+              = link_to '#', id: "go_to_#{stage[:type_stage]}", class: "btn back_color_stage#{num_stage}" do
+                = num_stage
 
-  - elsif @project.status >= stage[:status].min
-    .btn-group{:role => "group"}
-      = link_to send("#{stage[:type_stage]}_path", @project, asp: params[:asp]), id: "go_to_#{stage[:type_stage]}", :role => "button", class: "btn back_color_stage#{num_stage}" do
-        = num_stage
-
-  - else
-    .btn-group{:role => "group"}
-      = link_to '#', id: "go_to_#{stage[:type_stage]}", class: "btn back_color_stage#{num_stage}" do
-        = num_stage
+- unless cabinet?
+  .col-md-4.col_padding_left_3
+    %a.open_welcome_popup{href: "#popup-explanation-#{current_stage_controller}"}
+      #tooltip1_2.border_grey.rounded_3.help_icon.tooltip1_2{'data-placement' => 'bottom', 'data-toggle' => 'tooltip', 'data-trigger' => 'none', title: 'Вы всегда сможете вызвать помощь по стадии, нажав сюда'}
+    #tooltip1_3.border_grey.rounded_3.progress_block.tooltip1_3{'data-placement' => 'bottom', 'data-toggle' => 'tooltip', 'data-trigger' => 'none', title: 'Здесь будут отображаться ваши успехи по работе с аспектами. Другие участники тоже не сидят сложа руки!'}
+      .container
+        .row
+          = render partial: 'application/progress_bar'

@@ -2,7 +2,6 @@ class Core::ProjectUsersController < ApplicationController
   before_action :set_project
   before_action :journal_data, only: [:user_analytics, :moderator_analytics]
   before_filter :prime_admin_authenticate, only: [:create, :destroy]
-  layout 'cabinet'
 
   def show
 

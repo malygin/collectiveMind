@@ -27,6 +27,7 @@ gem 'remotipart', '~> 1.2'
 gem 'similar_text'
 gem 'breadcrumbs_on_rails'
 
+gem 'sprockets', '~> 2.0'
 gem 'sass-rails'
 gem 'coffee-rails'
 gem 'uglifier'
@@ -60,6 +61,7 @@ group :development, :test do
   gem 'better_errors'
   gem 'binding_of_caller'
   gem 'bullet'
+  gem 'i18n-tasks'
 end
 
 group :development do
