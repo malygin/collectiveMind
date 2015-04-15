@@ -20,4 +20,8 @@ class ApplicationController < ActionController::Base
                                    body: request.original_url
     end
   end
+
+  def news_data
+    @expert_news = @project.news
+  end
 end

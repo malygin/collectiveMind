@@ -6,6 +6,7 @@ class ProjectsController < ApplicationController
   before_filter :authenticate_user!
   before_action :set_project
   before_filter :check_access_to_project
+  before_filter :news_data
 
   protected
   def set_project
@@ -15,10 +16,6 @@ class ProjectsController < ApplicationController
   def journal_data
     @my_journals = current_user.my_journals @project
     @my_journals_count = @my_journals.size
-  end
-
-  def news_data
-    @expert_news = @project.news
   end
 
   def check_access_to_project
