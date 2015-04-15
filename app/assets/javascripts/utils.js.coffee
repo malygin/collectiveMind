@@ -15,6 +15,12 @@
     items: {src: el},
     type: 'inline'
 
+#open magnific popup close
+@magnificPopupClose = (el)->
+  $.magnificPopup.close
+    items: {src: el},
+    type: 'inline'
+
 # get new question in 1st stage
 @getNextQuestion = (question, aspect)->
   # if we have more questions in aspect
