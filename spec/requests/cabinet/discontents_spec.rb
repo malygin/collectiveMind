@@ -48,6 +48,32 @@ describe 'Cabinet Discontents' do
     end
   end
 
+  context 'create discontent with detailed form', js: true, skip: true do
+    before do
+      click_link 'new_discontent_posts_detailed'
+    end
+
+    it 'correct' do
+      expect {
+        fill_in 'discontent_post_content', with: 'new aspect'
+        fill_in 'discontent_post_what', with: 'because'
+        fill_in 'discontent_post_whered', with: 'because'
+        fill_in 'discontent_post_whend', with: 'because'
+        click_button 'send_post'
+        expect(page).to have_content t('form.discontent.create_success')
+      }.to change(Discontent::Post, :count).by(1)
+    end
+
+    it 'empty fields - error' do
+      expect {
+        click_button 'send_post'
+        within :css, 'div#notice_messages' do
+          expect(page).to have_css 'div.error_explanation'
+        end
+      }.not_to change(Discontent::Post, :count)
+    end
+  end
+
   it 'discontents by current user' do
     discontent = create :discontent, user: user, project: project
     click_link 'open_my_discontent_posts'

@@ -1,0 +1,21 @@
+%button.btn.btn-primary.btn-lg{'data-target' => '#myModal', 'data-toggle' => 'modal', type: 'button'}
+  То, что не достаточно хорошо
+%button.btn.btn-primary.btn-lg{'data-target' => '#myModal', 'data-toggle' => 'modal', type: 'button'}
+  То, что хорошо, но можно существенно улучшить
+%button.btn.btn-primary.btn-lg{'data-target' => '#myModal', 'data-toggle' => 'modal', type: 'button'}
+  То, что мешает работе
+%button.btn.btn-primary.btn-lg{'data-target' => '#myModal', 'data-toggle' => 'modal', type: 'button'}
+  То, чего не хватает
+
+#myModal.modal.fade{'aria-hidden' => 'true', 'aria-labelledby' => 'myModalLabel', role: 'dialog', tabindex: '-1'}
+  .modal-dialog
+    .modal-content
+      .modal-header
+        %button.close{'aria-label' => 'Close', 'data-dismiss' => 'modal', type: 'button'}
+          %span{'aria-hidden' => 'true'} ×
+        %h4#myModalLabel.modal-title
+          = t('form.discontent.title')
+      .modal-body
+        = render 'simple_form'
+      .modal-footer
+        %button.btn.btn-default{'data-dismiss' => 'modal', type: 'button'} Close
