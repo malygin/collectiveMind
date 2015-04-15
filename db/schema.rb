@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150414222603) do
+ActiveRecord::Schema.define(version: 20150415142355) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -531,6 +531,7 @@ ActiveRecord::Schema.define(version: 20150414222603) do
     t.boolean  "useful"
     t.boolean  "approve_status"
     t.boolean  "anonym",             default: false
+    t.text     "what"
   end
 
   add_index "discontent_posts", ["aspect_id"], name: "index_discontent_posts_on_aspect_id", using: :btree
