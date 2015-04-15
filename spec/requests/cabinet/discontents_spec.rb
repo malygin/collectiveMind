@@ -2,19 +2,55 @@ require 'spec_helper'
 
 describe 'Cabinet Discontents' do
   subject { page }
-  let (:core_project_user) { create :core_project_user }
+  let (:project) { create :core_project, status: Core::Project::STATUS_CODES[:discontent] }
+  let (:core_project_user) { create :core_project_user, core_project: project }
   let (:user) { core_project_user.user }
-  let (:project) { core_project_user.core_project }
 
   before do
-    # Явно ставим статус проекту, чтобы быть уверенным, что он на несовершенствах
-    project.update(status: Core::Project::STATUS_CODES[:discontent])
+    # тут еще нужно прицеплять техники к проекту
+    #Rake::Task['seed:migrate'].invoke
+    project.techniques << Technique::List.create(stage: 'discontent_posts', code: 'simple')
+    project.techniques << Technique::List.create(stage: 'discontent_posts', code: 'detailed')
+
     sign_in user
     visit project_user_path(project, user)
   end
-  # тут еще нужно прицеплять техники к проекту
 
   it 'list forms for techniques' do
-    
+    project.techniques.each do |technique|
+      expect(page).to have_content t("techniques.#{technique.name}")
+    end
+  end
+
+  context 'create discontent with simple form', js: true do
+    before do
+      click_link 'new_discontent_posts_simple'
+    end
+
+    it 'correct' do
+      expect {
+        fill_in 'discontent_post_content', with: 'new aspect'
+        fill_in 'discontent_post_what', with: 'because'
+        fill_in 'discontent_post_whered', with: 'because'
+        fill_in 'discontent_post_whend', with: 'because'
+        click_button 'send_post'
+        expect(page).to have_content t('form.discontent.create_success')
+      }.to change(Discontent::Post, :count).by(1)
+    end
+
+    it 'empty fields - error' do
+      expect {
+        click_button 'send_post'
+        within :css, 'div#notice_messages' do
+          expect(page).to have_css 'div.error_explanation'
+        end
+      }.not_to change(Discontent::Post, :count)
+    end
+  end
+
+  it 'discontents by current user' do
+    discontent = create :discontent, user: user, project: project
+    click_link 'open_my_discontent_posts'
+    expect(page).to have_content discontent.content
   end
 end
