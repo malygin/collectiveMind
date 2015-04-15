@@ -43,6 +43,7 @@ gem 'highcharts-rails', '~> 3.0.0'
 gem 'historyjs-rails'
 gem 'tinymce-rails'
 gem 'tinymce-rails-langs'
+gem 'virtus'
 
 gem 'websocket-rails', git: 'https://github.com/samhane/websocket-rails.git'
 

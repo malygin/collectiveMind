@@ -624,6 +624,7 @@ DEPENDENCIES
   tinymce-rails-langs
   traceroute
   uglifier
+  virtus
   websocket-rails!
   will_paginate
   yard

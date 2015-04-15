@@ -7,9 +7,10 @@
         %p.poster-name
           =post_short.user
       .media-body.white
-        .post-text.open-popup{"data-placement" => "1", "data-target" => "1"}
-          =post_short.content
-          %i.fa.fa-angle-right
+        = link_to({controller: 'core/aspect/posts', action: :show, project: @project.id, id: post_short.id}, remote: true, id: "show_record_#{post_short.id}") do
+          .post-text.open-popup{"data-placement" => "1", "data-target" => "1"}
+            =post_short.content
+            %i.fa.fa-angle-right
         .post_comments_cont
           .post_cont_hover.white{id: "post_ch#{post_short.id}"}
             .wrapper.ps_cont.half_wheel_speed

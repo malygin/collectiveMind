@@ -1,5 +1,5 @@
 class Technique::List < ActiveRecord::Base
-  scope :by_stage, -> (stage) { stage = :aspects if stage == :collect_info_posts; where stage: stage }
+  scope :by_stage, -> (stage) { stage = :aspect if stage == :collect_info_posts; where stage: stage }
   validates :name, :code, :stage, presence: true
 
   def self.all_in_array

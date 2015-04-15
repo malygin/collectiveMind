@@ -21,15 +21,15 @@
     .col-md-6
       %span.stage-heading
         Аспекты из базы знаний
-        ="(#{@acpects.by_status(0)})"
+        ="(#{@project.main_aspects.by_status(0).count})"
     .col-md-6
       %span.stage-heading
         Аспекты, предложенные участниками
-        ="(#{@acpects.by_status(1)})"
+        ="(#{@project.main_aspects.by_status(1).count})"
   .row
     .col-md-6.combined_border.right
-      -@acpects.by_status(0).each do |aspect|
+      -@project.main_aspects.by_status(0).each do |aspect|
         =render partial: 'post_short', object: aspect
     .col-md-6.combined_border.left
-      -@acpects.by_status(1).each do |aspect|
+      -@project.main_aspects.by_status(1).each do |aspect|
         =render partial: 'post_short', object: aspect

@@ -11,7 +11,7 @@ class CollectInfo::PostsController < PostsController
 
   def index
     @aspect = params[:asp] ? Core::Aspect::Post.find(params[:asp]) : @project.main_aspects.first
-    @count_aspects = @project.main_aspects.count
+    @count_aspects = @aspects.count
 
     # подсчет данных для прогресс-бара по вопросам
     # число вопросов по процедуре

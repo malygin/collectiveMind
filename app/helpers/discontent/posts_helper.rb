@@ -81,7 +81,7 @@ module Discontent::PostsHelper
       flash[:whend]='Заполните поле "когда"'
     end
     if aspects.nil?
-      flash[:aspects]='Выберите тему несовершенства'
+      flash[:aspect]='Выберите тему несовершенства'
     end
     if pa[:style].nil?
       flash[:style]='Выберите тип несовершенства'

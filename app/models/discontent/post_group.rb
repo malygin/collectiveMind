@@ -1,6 +1,7 @@
 class Discontent::PostGroup
-  include Virtus
+  include Virtus.model
 
+  # include ActiveModel::Model
   extend ActiveModel::Naming
   include ActiveModel::Conversion
   include ActiveModel::Validations
@@ -8,9 +9,9 @@ class Discontent::PostGroup
   attr_reader :user
   attr_reader :discontent_post
 
-  attribute :content, Text
-  attribute :whend, Text
-  attribute :whered, Text
+  attribute :content, String
+  attribute :whend, String
+  attribute :whered, String
   attribute :status, Integer
   attribute :style, Integer
   attribute :project_id, Integer

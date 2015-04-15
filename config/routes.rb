@@ -90,7 +90,27 @@ CollectiveMind::Application.routes.draw do
 
   scope '/project/:project' do
     resources :project_users, controller: 'core/project_users'
-    resources :aspects, controller: 'core/aspects'
+
+    namespace :aspect, :module => false do
+      resources :posts, controller: 'core/aspect/posts' do
+        member do
+          put :add_comment
+          put :update_comment
+          put :destroy_comment
+          put :to_archive
+          put :censored_comment
+          put :plus
+          get :edit_comment
+          put :plus_comment
+          put :comment_status
+          put :like
+          put :like_comment
+          put :vote
+        end
+      end
+    end
+
+    # resources :aspects, controller: 'core/aspects'
     resources :skills
 
     get '/journals', to: 'journal#index'
