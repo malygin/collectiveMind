@@ -1,5 +1,7 @@
 .col-md-9
   .tab-content
+    .text-success#create_aspect_success(style='display:none;')
+      = t('form.aspect.create_success')
     = form_for aspect, url: {project: @project.id, action: aspect.persisted? ? 'update' : 'create'}, remote: true do |f|
       - content_for :aspect_content do
         .form-group
@@ -11,7 +13,8 @@
         .divider15
         .form-group
           = f.text_area :short_desc, class: 'form-control', rows: '6'
-      = render 'shared/notice_messages', object: f.object
+      #notice_messages
+        = render 'shared/notice_messages', object: f.object
       .post.post_add_type1
         .post-header.grey
         .post-body
