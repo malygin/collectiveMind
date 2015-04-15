@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150414195533) do
+ActiveRecord::Schema.define(version: 20150415144833) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -772,6 +772,22 @@ ActiveRecord::Schema.define(version: 20150414195533) do
   end
 
   add_index "groups", ["project_id"], name: "index_groups_on_project_id", using: :btree
+
+  create_table "journal_loggers", force: :cascade do |t|
+    t.integer  "user_id"
+    t.string   "type_event"
+    t.text     "body"
+    t.integer  "project_id"
+    t.integer  "first_id"
+    t.integer  "second_id"
+    t.string   "body2"
+    t.integer  "user_informed"
+    t.boolean  "viewed"
+    t.boolean  "personal",      default: false
+    t.boolean  "visible",       default: true
+    t.datetime "created_at",                    null: false
+    t.datetime "updated_at",                    null: false
+  end
 
   create_table "journal_mailers", force: :cascade do |t|
     t.string   "title",      limit: 255

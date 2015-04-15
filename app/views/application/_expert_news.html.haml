@@ -14,7 +14,7 @@
           - unless expert_news.empty?
             - expert_news.each_with_index do |news, index|
               .dd_xprt_notice
-                %a.a_font_reset.collapsed{"aria-expanded" => "false", "data-toggle" => "collapse", :href => "#xprt_#{index}"}
+                %a.a_font_reset.collapsed{data: {project: @project.id, id: news.id}, "aria-expanded" => "false", "data-toggle" => "collapse", :href => "#xprt_#{index}"}
                   .row
                     .col-xs-9
                       =news.title

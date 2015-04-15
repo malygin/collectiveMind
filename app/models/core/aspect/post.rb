@@ -58,6 +58,14 @@ class Core::Aspect::Post < ActiveRecord::Base
         .vote_top(revers)
   end
 
+  def self.sort_comments
+    includes(:comments).
+        select('core_aspect_posts.*').
+        group('core_aspect_posts.id,core_aspect_comments.id').
+        having("core_aspect_comments.created_at = max(core_aspect_comments.created_at)").
+        reorder('core_aspect_comments.created_at DESC')
+  end
+
   def to_s
     self.content
   end

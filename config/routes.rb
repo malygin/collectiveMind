@@ -117,7 +117,12 @@ CollectiveMind::Application.routes.draw do
     get '/general_news', to: 'core/projects#news'
     get '/general_rating', to: 'core/projects#users'
 
-    resources :news
+    resources :news do
+      member do
+        get :read
+      end
+    end
+
     namespace :help do
       resources :posts do
         get :about, on: :collection
