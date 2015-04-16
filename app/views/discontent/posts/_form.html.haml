@@ -1,57 +1,56 @@
-.col-md-9
-  .tab-content
-    .text-success#create_discontent_success(style='display:none;')
-      = t('form.discontent.create_success')
+.text-success#create_discontent_success(style='display:none;')
+  = t('form.discontent.create_success')
 
-    = form_for @post, url: {project: @project.id, id: @post, action: @post.persisted? ? 'update' : 'create'}, remote: true, html: {id: 'new_discontent'} do |f|
-      - content_for :discontent_content do
-        .form-group
-          = f.text_field :content, class: 'form-control'
-        .divider15
-      - content_for :what_whend_where do
-        %p
-          %span.badge.badge_type1.grey
-            = t('form.discontent.field_what')
-        .divider15
-        .form-group
-          = f.text_area :what, class: 'form-control post-textarea', rows: 5
-        %p
-          %span.badge.badge_type1.grey
-            = t('form.discontent.field_where')
-        .divider15
-        .form-group
-          = f.text_field :whered, style: 'height: 44px', class: 'form-control autocomplete', 'data-url' => discontent_autocomplete_path(@project, field: 'whered')
-        %p
-          %span.badge.badge_type1.grey
-            = t('form.discontent.field_when')
-        .divider15
-        .form-group
-          = f.text_field :whend, style: 'height: 44px', 'data-url' => discontent_autocomplete_path(@project, field: 'whend'), class: 'form-control autocomplete'
-      - content_for :select_aspect do
-        %p
-          %span.badge.badge_type1.grey
-            = t('form.discontent.select_aspect')
-        .divider15
-        .form-group
-          = select_tag 'select_for_aspects', options_from_collection_for_select(@aspects.minus_view(@aspects_for_post.nil? ? (@asp.nil? ? [] : [@asp.id]) : @aspects_for_post.pluck(:id)), 'id', 'content'),
+= form_for @post, url: {project: @project.id, id: @post, action: @post.persisted? ? 'update' : 'create'}, remote: true, html: {id: 'new_discontent'} do |f|
+  - content_for :discontent_content do
+    .form-group
+      %p
+      %span.badge.badge_type1.grey#text_field_content
+        = t('form.discontent.field_content')
+      = f.text_field :content, class: 'form-control'
+    .divider15
+  - content_for :what_whend_where do
+    %p
+      %span.badge.badge_type1.grey
+        = t('form.discontent.field_what')
+    .divider15
+    .form-group
+      = f.text_area :what, class: 'form-control post-textarea', rows: 5
+    %p
+      %span.badge.badge_type1.grey
+        = t('form.discontent.field_where')
+    .divider15
+    .form-group
+      = f.text_field :whered, style: 'height: 44px', class: 'form-control autocomplete', 'data-url' => discontent_autocomplete_path(@project, field: 'whered')
+    %p
+      %span.badge.badge_type1.grey
+        = t('form.discontent.field_when')
+    .divider15
+    .form-group
+      = f.text_field :whend, style: 'height: 44px', 'data-url' => discontent_autocomplete_path(@project, field: 'whend'), class: 'form-control autocomplete'
+  - content_for :select_aspect do
+    %p
+      %span.badge.badge_type1.grey
+        = t('form.discontent.select_aspect')
+    .divider15
+    .form-group
+      = select_tag 'select_for_aspects', options_from_collection_for_select(@aspects.minus_view(@aspects_for_post.nil? ? (@asp.nil? ? [] : [@asp.id]) : @aspects_for_post.pluck(:id)), 'id', 'content'),
                       prompt: t('form.discontent.select_aspect_prompt') , style:'margin-left:15px; margin-top:10px; height: 30px;'
-          %br
-          #add_post_aspects(style="margin-left: 2%;margin-top: 10px;")
-            - unless @aspects_for_post.nil?
-              - @aspects_for_post.each do |ap|
-                %div{id: "aspect_#{ap.id}"}
-                  %input{name: 'discontent_post_aspects[]', type: 'hidden', value: "#{ap.id}"}/
-                  %span.fa.fa-remove.text-danger{onclick: "remove_core_aspect('#{ap.id}','#{ap.content}');", style: 'cursor:pointer;text-decoration:none;font-size:15px;'}
-                  %span.span_aspect.label.label-xs.label-info{id: "#{ap.id}"}
-                    = ap.content
-            - unless @asp.nil?
-              %div{id: "aspect_#{@asp.id}"}
-                %input{name: 'discontent_post_aspects[]', type: 'hidden', value: "#{@asp.id}"}/
-                %span.fa.fa-remove.text-danger{onclick: "remove_core_aspect('#{@asp.id}','#{@asp.content}');", style: 'cursor:pointer;text-decoration:none;font-size:15px;'}
-                %span.span_aspect.label.label-xs.label-info{id: "#{@asp.id}"}
-                  = @asp.content
-
-      #notice_messages
-      = render partial: "#{params[:type_mechanic]}_form", locals: {f: f}
       %br
-      = f.submit t('form.save'), class: 'btn btn-primary pull-right send-post', id: 'send_post'
+      #add_post_aspects(style="margin-left: 2%;margin-top: 10px;")
+        - unless @aspects_for_post.nil?
+          - @aspects_for_post.each do |ap|
+            %div{id: "aspect_#{ap.id}"}
+              %input{name: 'discontent_post_aspects[]', type: 'hidden', value: "#{ap.id}"}/
+              %span.fa.fa-remove.text-danger{onclick: "remove_core_aspect('#{ap.id}','#{ap.content}');", style: 'cursor:pointer;text-decoration:none;font-size:15px;'}
+              %span.span_aspect.label.label-xs.label-info{id: "#{ap.id}"}
+                = ap.content
+        - unless @asp.nil?
+          %div{id: "aspect_#{@asp.id}"}
+            %input{name: 'discontent_post_aspects[]', type: 'hidden', value: "#{@asp.id}"}/
+            %span.fa.fa-remove.text-danger{onclick: "remove_core_aspect('#{@asp.id}','#{@asp.content}');", style: 'cursor:pointer;text-decoration:none;font-size:15px;'}
+            %span.span_aspect.label.label-xs.label-info{id: "#{@asp.id}"}
+              = @asp.content
+
+  #notice_messages
+  = render partial: "#{params[:type_mechanic]}_form", locals: {f: f}
