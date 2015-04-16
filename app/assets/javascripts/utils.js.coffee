@@ -44,6 +44,24 @@
   url = window.location.href.match(/\d+/g)
   return url[url.length-1]
 
+# чтение отдельной новости эксперта в попапе
+@expert_news = ->
+  this.expert_news_read = ->
+    project_id = $(this).data('project')
+    news_id = $(this).data('id')
+    # проверяем и добавляем класс, чтобы исключить дублирование лога
+    read = $(this).hasClass('read')
+    if project_id and news_id and !read
+      $(this).addClass('read')
+      # убираем статус
+      $(this).find('.status_news').html('')
+      $.ajax
+        url: "/project/#{project_id}/news/#{news_id}/read"
+        type: "get"
+
+  $('.expert_news_drop').on('click', '.dd_xprt_notice a', this.expert_news_read)
+
+
 #----------
 @search = ->
   this.search_users = ->

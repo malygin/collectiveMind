@@ -29,13 +29,25 @@ module BasePost
     scope :with_votes, -> { includes(:post_votings).where('"discontent_post_votings"."id" > 0') }
     scope :with_concept_votes, -> { includes(:post_votings).where('"concept_post_votings"."id" > 0') }
 
-    scope :created_order, -> { order("#{table_name}.created_at DESC") }
-    scope :updated_order, -> { order("#{table_name}.updated_at DESC") }
+    scope :created_order, -> { reorder("#{table_name}.created_at DESC") }
+    scope :updated_order, -> { reorder("#{table_name}.updated_at DESC") }
     scope :popular_posts, -> { order('number_views DESC') }
 
     scope :date_stage, ->(project) { where("DATE(#{table_name}.created_at) >= ? AND DATE(#{table_name}.created_at) <= ?", project.date_begin_stage(table_name).to_date, project.date_end_stage(table_name).to_date) if project.date_begin_stage(table_name).present? and project.date_end_stage(table_name).present? }
 
+    # скоуп для отбора постов с последнего захода на страницу
+    scope :after_last_visit_posts, ->(last_time) { where("#{table_name}.created_at >= ?", last_time) if last_time.present?}
+    scope :after_last_visit_comments, ->(last_time) { joins(:comments).where("#{table_name.gsub('_posts','_comments')}.created_at >= ?", last_time) if last_time.present?}
+
     validates :user_id, :project_id, presence: true
+
+    # вывод постов по дате последних комментов
+    def self.sort_comments
+      select("#{table_name}.*, max(#{table_name.gsub('_posts','_comments')}.created_at) as last_date").
+        joins("LEFT OUTER JOIN #{table_name.gsub('_posts','_comments')} ON #{table_name.gsub('_posts','_comments')}.post_id = #{table_name}.id").
+        group("#{table_name}.id").
+        reorder("max(#{table_name.gsub('_posts','_comments')}.created_at) DESC NULLS LAST")
+    end
 
     def show_content
       content

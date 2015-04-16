@@ -7,6 +7,9 @@ class ProjectsController < ApplicationController
   before_action :set_project
   before_filter :check_access_to_project
   before_filter :news_data
+  # базовое логирование, отрабатывает после, чтобы дата была предпоследней
+  after_action :start_visit
+
 
   protected
   def set_project

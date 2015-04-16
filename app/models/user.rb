@@ -35,6 +35,7 @@ class User < ActiveRecord::Base
   has_many :plan_posts, class_name: 'Plan::Post'
   has_many :user_answers, class_name: 'CollectInfo::UserAnswers'
   has_many :news, class_name: 'News'
+  has_many :loggers, class_name: 'JournalLogger'
 
   default_scope { order('id DESC') }
   # scope :check_field, ->(p, c) { joins(:user_checks).where(user_checks: {project: p.id, status: 't', check_field: c}) }

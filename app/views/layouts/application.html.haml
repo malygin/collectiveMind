@@ -26,8 +26,10 @@
               = link_to 'Процедура', "/project/#{@project.id}", class: 'menu_a'
             %li{class: "#{'active' if cabinet?}"}
               = link_to 'Кабинет', project_user_path(@project, current_user), class: 'menu_a'
-            %li{class: "#{'active' if name_controller == :journal}"}
-              = link_to 'Новости', journals_path(@project), class: 'menu_a'
+            %li.has_dropwindow
+              = render partial: 'application/messages_menu', locals: {my_journals: @my_journals, project: @project}
+            -#%li{class: "#{'active' if name_controller == :journal}"}
+            -#  = link_to 'Новости', journals_path(@project), class: "menu_a"
             - if @project.prev_status
               %li
                 = link_to '<- стадия', pr_stage_core_project_path(@project), method: :put, id: "down_to_#{@project.prev_status}", class: 'menu_a'

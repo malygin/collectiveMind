@@ -5,7 +5,7 @@
       .col-md-7
         %span.stage-heading
           Аспекты
-          = "(#{@count_aspects})"
+          = "(#{@proc_aspects.size})"
       .col-md-5
         .sort-block.pull-right
           = link_to project_user_path(@project, current_user) do

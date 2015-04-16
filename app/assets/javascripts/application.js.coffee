@@ -65,6 +65,8 @@ $ ->
   autocomplete_initialized()
   activate_add_aspects()
 
+  expert_news()
+
 
   $('.carousel').carousel
     interval: 4000,

@@ -1,5 +1,5 @@
 %button.btn_reset.font_lighter_grey.bold.drop_opener{"data-dd-opener" => "dd_1"}
-  %i.fa.fa-exclamation-triangle
+  %i.fa.fa-exclamation-triangle{style: "#{'color:#e71d2b;' if unread_expert_news?}"}
 #dd_1.dropdown_window.dd_570.expert_news_drop.text-left
   .dd_badge
     %i.fa.fa-exclamation-triangle
@@ -14,10 +14,14 @@
           - unless expert_news.empty?
             - expert_news.each_with_index do |news, index|
               .dd_xprt_notice
-                %a.a_font_reset.collapsed{"aria-expanded" => "false", "data-toggle" => "collapse", :href => "#xprt_#{index}"}
+                %a.a_font_reset.collapsed{class: "#{'read' if news.read?(project, current_user)}", data: {project: project.id, id: news.id}, "aria-expanded" => "false", "data-toggle" => "collapse", :href => "#xprt_#{index}"}
                   .row
                     .col-xs-9
                       =news.title
+
+                      -unless news.read?(@project, current_user)
+                        %span.status_news{id: "status_news_#{news.id}", style: "color:#e71d2b;"}
+                          (не прочитано)
                     .col-xs-3.text-right
                       %span.dd_n_date
                         =Russian::strftime(news.created_at,'%d.%m.%Y')
