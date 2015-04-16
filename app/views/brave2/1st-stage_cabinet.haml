@@ -275,12 +275,12 @@
         .container
           .row
             .col-md-2
-              %ul.list-unstyled{:role => "tablist"}
+              %ul.list-unstyled.tabs_type_1{:role => "tablist"}
                 %li.active{:role => "presentation"}
-                  %a{"data-toggle" => "tab", :href => "#cabinet_1_1", :role => "tab"} Home
+                  %a.a_font_reset.text-right{"data-toggle" => "tab", :href => "#cabinet_1_1", :role => "tab"} + Аспект
                 %li{:role => "presentation"}
-                  %a{"data-toggle" => "tab", :href => "#cabinet_1_2", :role => "tab"} Profile
-            .col-md-9
+                  %a.a_font_reset.text-right{"data-toggle" => "tab", :href => "#cabinet_1_2", :role => "tab"} Мои аспекты
+            .col-md-8.col-md-offset-1
               .tab-content
                 #cabinet_1_1.tab-pane.active.fade.in{:role => "tabpanel"}
                   .post.post_add_type1
@@ -305,6 +305,40 @@
                                 %textarea.form-control{:rows => "6", :type => "text"}
                   %button.btn.add-button.pull-right Добавить
                 #cabinet_1_2.tab-pane.fade{:role => "tabpanel"}
+                  .post.post_add_type1
+                    .post-header.color_me{"data-me-action" => "background", "data-me-color" => "1", "data-me-type" => "aspect"}
+                    .post-body
+                      .media
+                        .media-left.text-center.gradient2.post-poster
+                          %img.img-circle.img40{:src => "img/ava-pyat.jpg"}/
+                          %p.poster-name Оргкомитет
+                          %p.poster-name
+                        .media-body.white
+                          .post-text
+                            %h5.bold Lorem Ipsum
+                            .divider15
+                            %p
+                              %span.badge.badge_type1.color_me{"data-me-action" => "background", "data-me-color" => "1", "data-me-type" => "aspect"} Обоснование
+                            .divider10
+                            %p
+                              Имея такую карту, сотрудники будут мотивированы продавать продукцию Инвар, фиксируя на ней свой процент от продажи, отразится на имидже
+                  .post.post_add_type1
+                    .post-header.color_me{"data-me-action" => "background", "data-me-color" => "4", "data-me-type" => "aspect"}
+                    .post-body
+                      .media
+                        .media-left.text-center.gradient2.post-poster
+                          %img.img-circle.img40{:src => "img/ava-pyat.jpg"}/
+                          %p.poster-name Оргкомитет
+                          %p.poster-name
+                        .media-body.white
+                          .post-text
+                            %h5.bold Lorem Ipsum
+                            .divider15
+                            %p
+                              %span.badge.badge_type1.color_me{"data-me-action" => "background", "data-me-color" => "4", "data-me-type" => "aspect"} Обоснование
+                            .divider10
+                            %p
+                              Имея такую карту, сотрудники будут мотивированы продавать продукцию Инвар, фиксируя на ней свой процент от продажи, отразится на имидже
       / Main Block ends
       #popup-database.popup-window.popup_database.popup-w770.mfp-hide
         .popup.popup_rounded
