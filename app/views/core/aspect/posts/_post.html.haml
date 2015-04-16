@@ -1,0 +1,19 @@
+.post.post_add_type1
+  .post-header.color_me{'data-me-action' => 'background', 'data-me-color' => "#{post.color}", 'data-me-type' => 'aspect'}
+  .post-body
+    .media
+      .media-left.text-center.gradient2.post-poster
+        = cl_image_tag post.user.avatar, class: 'img-circle img40'
+        %p.poster-name
+          = post.user
+        %p.poster-name
+      .media-body.white
+        .post-text
+          %h5.bold
+            = post.content
+          .divider15
+          %p
+            %span.badge.badge_type1.color_me{'data-me-action' => 'background', 'data-me-color' => "#{post.color}", 'data-me-type' => 'aspect'} Обоснование
+          .divider10
+          %p
+            = post.short_desc
