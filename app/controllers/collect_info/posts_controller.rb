@@ -1,5 +1,5 @@
 class CollectInfo::PostsController < PostsController
-  # before_action :set_aspects, only: [:index, :render_slider]
+  before_action :set_aspects, only: [:index, :render_slider]
 
   def voting_model
     Core::Aspect::Post
