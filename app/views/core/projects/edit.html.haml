@@ -18,7 +18,7 @@
     - if @project.persisted?
       #edit_aspects.tab-pane.fade
         %ul.panel-collapse{id: "aspects_for_#{@project.id}"}
-          = link_to 'Добавить аспект', new_aspect_path(@project), remote: true, id: "add_aspect_for_#{@project.id}"
+          = link_to 'Добавить аспект', new_aspect_post_path(@project), remote: true, id: "add_aspect_for_#{@project.id}"
           %br
           - @project.aspects.main_aspects.each do |asp1|
             = render partial: 'aspect', locals: {aspect: asp1}
