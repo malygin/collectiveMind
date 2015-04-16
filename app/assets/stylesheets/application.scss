@@ -20,6 +20,14 @@
 .answer-question input {
   display: none;
 }
+// none background for not active tab aspect for 1 stage
+.nav-tabs.aspects_tabs>li:not(.active)>a{
+  background: none !important;
+}
+// inverse color for active tab aspect for 1 stage
+.nav-tabs.aspects_tabs>li.active>a{
+  color: #fff !important;
+}
 
 //.select_aspect {
 //  background-color: gray;
