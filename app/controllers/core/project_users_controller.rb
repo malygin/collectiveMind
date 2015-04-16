@@ -1,6 +1,5 @@
-class Core::ProjectUsersController < ApplicationController
-  before_action :set_project
-  before_action :journal_data, only: [:user_analytics, :moderator_analytics]
+class Core::ProjectUsersController < ProjectsController
+  before_action :journal_data, only: [:user_analytics, :moderator_analytics, :show]
   before_filter :prime_admin_authenticate, only: [:create, :destroy]
   before_filter :news_data
 
@@ -45,10 +44,5 @@ class Core::ProjectUsersController < ApplicationController
   def ready_to_concept
     current_user.project_user_for(@project).update ready_to_concept: true
     render json: {head: :ok}
-  end
-
-  private
-  def set_project
-    @project = Core::Project.find(params[:project]) if params[:project]
   end
 end

@@ -1,5 +1,5 @@
 class PostsController < ProjectsController
-  before_filter :journal_data, only: [:index, :new, :edit, :show, :vote_result, :to_work, :about]
+  before_filter :journal_data, only: [:index, :new, :edit, :show, :vote_result, :to_work, :about, :user_content]
   before_filter :have_project_access
   before_filter :boss_authenticate, only: [:vote_result]
   before_filter :comment_page, only: [:index, :show]
