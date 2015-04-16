@@ -289,6 +289,7 @@ en:
       update_success: Your shortfall was modified successfully. You can add another shortfall or go to the list of shortfalls.
       group: Addition of a new group of shortfalls
 
+      field_content: "Name of discontent"
     essay:
       desc: Feedback is a participant’s outside perspective of overall activity and his/her own role in this activity.
       content: What faults have you mentioned in the procedure, in your own work and in the work of the other participants, the moderators and the jury?

@@ -1,21 +1,23 @@
-%button.btn.btn-primary.btn-lg{'data-target' => '#myModal', 'data-toggle' => 'modal', type: 'button'}
+%button.btn.btn-primary#first{'data-target' => '#discontent_detailed_form_modal', 'data-toggle' => 'modal', type: 'button'}
   То, что не достаточно хорошо
-%button.btn.btn-primary.btn-lg{'data-target' => '#myModal', 'data-toggle' => 'modal', type: 'button'}
+%button.btn.btn-primary{'data-target' => '#discontent_detailed_form_modal', 'data-toggle' => 'modal', type: 'button'}
   То, что хорошо, но можно существенно улучшить
-%button.btn.btn-primary.btn-lg{'data-target' => '#myModal', 'data-toggle' => 'modal', type: 'button'}
+%button.btn.btn-primary{'data-target' => '#discontent_detailed_form_modal', 'data-toggle' => 'modal', type: 'button'}
   То, что мешает работе
-%button.btn.btn-primary.btn-lg{'data-target' => '#myModal', 'data-toggle' => 'modal', type: 'button'}
+%button.btn.btn-primary{'data-target' => '#discontent_detailed_form_modal', 'data-toggle' => 'modal', type: 'button'}
   То, чего не хватает
 
-#myModal.modal.fade{'aria-hidden' => 'true', 'aria-labelledby' => 'myModalLabel', role: 'dialog', tabindex: '-1'}
+#discontent_detailed_form_modal.modal.fade{'aria-hidden' => 'true', 'aria-labelledby' => 'myModalLabel', role: 'dialog', tabindex: '-1'}
   .modal-dialog
     .modal-content
       .modal-header
         %button.close{'aria-label' => 'Close', 'data-dismiss' => 'modal', type: 'button'}
           %span{'aria-hidden' => 'true'} ×
-        %h4#myModalLabel.modal-title
+        %h4#discontent_detailed_form_modalLabel.modal-title
           = t('form.discontent.title')
       .modal-body
-        = render 'simple_form'
+        = yield :discontent_content
+        = yield :what_whend_where
       .modal-footer
-        %button.btn.btn-default{'data-dismiss' => 'modal', type: 'button'} Close
+        = f.submit t('form.save'), class: 'btn btn-primary pull-right send-post', id: 'send_post'
+        %button.btn.btn-default{'data-dismiss' => 'modal', type: 'button'} Закрыть
