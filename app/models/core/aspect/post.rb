@@ -49,7 +49,7 @@ class Core::Aspect::Post < ActiveRecord::Base
 
   #выборка всех вопросов к аспекту на которые пользователь еще не ответил
   def missed_questions(user)
-    self.questions.includes(:user_answers).where('collect_info_user_answers.user_id <> ? OR collect_info_user_answers.user_id IS NULL', user.id)
+    self.questions.includes(:user_answers).where('collect_info_user_answers.user_id <> ? OR collect_info_user_answers.user_id IS NULL', user.id).references(:collect_info_user_answers)
   end
 
   def voted(user)
