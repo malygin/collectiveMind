@@ -39,12 +39,17 @@
       # else we have not more aspects, we just show greetings
       magnificPopupOpen('#popup-greetings-text')
 
-# чтение отдельной новости в попапе
+# чтение отдельной новости эксперта в попапе
 @expert_news = ->
   this.expert_news_read = ->
     project_id = $(this).data('project')
     news_id = $(this).data('id')
-    if project_id and news_id
+    # проверяем и добавляем класс, чтобы исключить дублирование лога
+    read = $(this).hasClass('read')
+    if project_id and news_id and !read
+      $(this).addClass('read')
+      # убираем статус
+      $(this).find('.status_news').html('')
       $.ajax
         url: "/project/#{project_id}/news/#{news_id}/read"
         type: "get"

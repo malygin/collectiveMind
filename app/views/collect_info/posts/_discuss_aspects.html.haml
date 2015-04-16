@@ -6,10 +6,14 @@
     .col-md-5
       .sort-block.pull-right
         %span.sort-label Сортировать по новым:
-        .sort-1.sort_btn.sprite_com.sprite-item1_2_1
-          %span 25
-        #tooltip2_2.sort-2.sort_btn.sprite_doc.sprite-item1_1.tooltip2_2{"data-placement" => "bottom", "data-toggle" => "tooltip", "data-trigger" => "manual", :title => "При помощи этих фильтров вы можете выбирать, в каком порядке будут отображаться несовершенства."}
-          %span 2
+        = link_to collect_info_posts_path(@project, sort_comments: true) do
+          .sort-1.sort_btn.sprite_com.sprite-item1_2_1
+            %span
+              = @project.other_main_aspects.after_last_visit_comments(last_time_visit_page('collect_info')).size
+        = link_to collect_info_posts_path(@project, sort_date: true) do
+          #tooltip2_2.sort-2.sort_btn.sprite_doc.sprite-item1_1.tooltip2_2{"data-placement" => "bottom", "data-toggle" => "tooltip", "data-trigger" => "manual", :title => "При помощи этих фильтров вы можете выбирать, в каком порядке будут отображаться несовершенства."}
+            %span
+              = @project.other_main_aspects.after_last_visit_posts(last_time_visit_page('collect_info')).size
         = link_to project_user_path(@project, current_user) do
           %button.btn.add-button
             %span> +
@@ -21,15 +25,15 @@
     .col-md-6
       %span.stage-heading
         Аспекты из базы знаний
-        ="(#{@project.main_aspects.by_status(0).count})"
+        ="(#{@proc_aspects.size})"
     .col-md-6
       %span.stage-heading
         Аспекты, предложенные участниками
-        ="(#{@project.main_aspects.by_status(1).count})"
+        ="(#{@project.other_main_aspects.size})"
   .row
     .col-md-6.combined_border.right
-      -@project.main_aspects.by_status(0).each do |aspect|
+      -@proc_aspects.each do |aspect|
         =render partial: 'post_short', object: aspect
     .col-md-6.combined_border.left
-      -@project.main_aspects.by_status(1).each do |aspect|
+      -@other_aspects.each do |aspect|
         =render partial: 'post_short', object: aspect

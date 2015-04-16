@@ -1,5 +1,5 @@
 class CollectInfo::PostsController < PostsController
-  before_action :set_aspects, only: [:index, :render_slider]
+  # before_action :set_aspects, only: [:index, :render_slider]
 
   def voting_model
     Core::Aspect::Post
@@ -10,8 +10,16 @@ class CollectInfo::PostsController < PostsController
   end
 
   def index
-    @aspect = params[:asp] ? Core::Aspect::Post.find(params[:asp]) : @project.main_aspects.first
-    @count_aspects = @aspects.count
+    # @aspect = params[:asp] ? Core::Aspect::Post.find(params[:asp]) : @project.main_aspects.first
+    @proc_aspects = @project.proc_main_aspects
+
+    if params[:sort_comments]
+      @other_aspects = @project.other_main_aspects.sort_comments
+    elsif params[:sort_date]
+      @other_aspects = @project.other_main_aspects.created_order
+    else
+      @other_aspects = @project.other_main_aspects
+    end
 
     # подсчет данных для прогресс-бара по вопросам
     # число вопросов по процедуре

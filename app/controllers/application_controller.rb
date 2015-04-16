@@ -15,9 +15,11 @@ class ApplicationController < ActionController::Base
   end
 
   def start_visit
+    # записываем url без параметров, чтобы проще парсить
+    # возможсно стоит разбивать url на составляющие и отдельно записывать
     if current_user and @project and request.method == 'GET'
       current_user.loggers.create type_event: 'visit_save', project_id: @project.id,
-                                  body: request.original_url
+                                  body: request.original_url.split('?')[0]
     end
   end
 end

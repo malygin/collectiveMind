@@ -6,6 +6,7 @@ class Core::Project < ActiveRecord::Base
   has_many :main_aspects, -> { where core_aspect_id: nil }, class_name: 'Core::Aspect::Post'
   has_many :proc_aspects, -> { where status: 0 }, class_name: 'Core::Aspect::Post'
   has_many :proc_main_aspects, -> { where(core_aspect_id: nil, status: 0) }, class_name: 'Core::Aspect::Post'
+  has_many :other_main_aspects, -> { where(core_aspect_id: nil, status: 1) }, class_name: 'Core::Aspect::Post'
 
   has_many :discontents, class_name: 'Discontent::Post'
   has_many :discontent_ongoing_post, -> { where status: 0 }, class_name: 'Discontent::Post'

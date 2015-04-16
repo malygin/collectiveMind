@@ -58,13 +58,13 @@ class Core::Aspect::Post < ActiveRecord::Base
         .vote_top(revers)
   end
 
-  def self.sort_comments
-    includes(:comments).
-        select('core_aspect_posts.*').
-        group('core_aspect_posts.id,core_aspect_comments.id').
-        having("core_aspect_comments.created_at = max(core_aspect_comments.created_at)").
-        reorder('core_aspect_comments.created_at DESC')
-  end
+  # # вывод аспектов по дате последних комментов
+  # def self.sort_comments
+  #   select('core_aspect_posts.*, max(core_aspect_comments.created_at) as last_date').
+  #     joins('LEFT OUTER JOIN core_aspect_comments ON core_aspect_comments.post_id = core_aspect_posts.id').
+  #     group('core_aspect_posts.id').
+  #     reorder('last_date DESC NULLS LAST')
+  # end
 
   def to_s
     self.content

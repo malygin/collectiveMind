@@ -790,11 +790,29 @@ module ApplicationHelper
     page == 0 ? 1 : page
   end
 
+  # необходимость показа приветсвенной модалки
   def shown_intro(check_field)
-    if current_user.user_checks.check_field(@project, check_field).present?
-      'shown_intro'
+    current_user.user_checks.check_field(@project, check_field).present? ? 'shown_intro' : ''
+  end
+
+  # последняя дата захода на страницу
+  def last_time_visit_page(stage, type_event = 'visit_save', post = nil)
+    if post
+      notice = current_user.loggers.where(type_event: type_event, project_id: @project.id, user_id: current_user.id).where(" body like ? ", "%/project/#{@project.id}/#{stage}/posts/#{post.id}").order(created_at: :desc).first
     else
-      ''
+      notice = current_user.loggers.where(type_event: type_event, project_id: @project.id, user_id: current_user.id).where(" body like ? ", "%/project/#{@project.id}/#{stage}/posts").order(created_at: :desc).first
     end
+    notice ? notice.created_at : "2000-01-01 00:00:00"
+  end
+
+  # # дата прочтения новости эксперта
+  # def expert_news_read?(news)
+  #   current_user.loggers.where(type_event: 'expert_news_read', project_id: @project.id, user_id: current_user.id, first_id: news.id).order(created_at: :desc).first
+  # end
+
+  # возвращаем true, если есть непрочитанные новости эксперта
+  def unread_expert_news?
+    count_news_log = current_user.loggers.select(' DISTINCT "journal_loggers"."first_id" ').where(type_event: 'expert_news_read', project_id: @project.id, user_id: current_user.id).count
+    @project.news.count - count_news_log > 0
   end
 end
