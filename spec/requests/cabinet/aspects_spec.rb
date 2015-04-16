@@ -10,7 +10,7 @@ describe 'Cabinet Aspects' do
   before do
     # тут еще нужно прицеплять техники к проекту
     #Rake::Task['seed:migrate'].invoke
-    technique_1 = Technique::List.create stage: 'aspects', code: 'simple'
+    technique_1 = Technique::List.create stage: 'aspect_posts', code: 'simple'
     project.techniques << technique_1
 
     sign_in user
@@ -23,33 +23,33 @@ describe 'Cabinet Aspects' do
     end
   end
 
-  context 'create aspect with simple form', js: true do
+  context 'create with simple form', js: true do
     before do
-      click_link 'new_aspects_simple'
+      click_link 'new_aspect_posts_simple'
     end
 
     it 'correct' do
       expect {
-        fill_in 'core_aspect_content', with: 'new aspect'
-        fill_in 'core_aspect_short_desc', with: 'because'
+        fill_in 'core_aspect_post_content', with: 'new aspect'
+        fill_in 'core_aspect_post_short_desc', with: 'because'
         click_button 'send_post_aspect'
         expect(page).to have_content t('form.aspect.create_success')
-      }.to change(Core::Aspect, :count).by(1)
+      }.to change(Core::Aspect::Post, :count).by(1)
     end
 
-    it 'empty aspect - error' do
+    it 'empty fields - error' do
       expect {
-        fill_in 'core_aspect_content', with: ''
-        fill_in 'core_aspect_short_desc', with: ''
+        fill_in 'core_aspect_post_content', with: ''
+        fill_in 'core_aspect_post_short_desc', with: ''
         click_button 'send_post_aspect'
         within :css, 'div#notice_messages' do
           expect(page).to have_css 'div.error_explanation'
         end
-      }.not_to change(Core::Aspect, :count)
+      }.not_to change(Core::Aspect::Post, :count)
     end
   end
 
-  it 'aspects by current user' do
+  it 'created by current user' do
     aspect = create :aspect, user: user, project: project
     click_link 'open_my_collect_info_posts'
     expect(page).to have_content aspect.content
