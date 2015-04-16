@@ -22,14 +22,14 @@ describe 'Cabinet Discontents' do
     end
   end
 
-  context 'create discontent with simple form', js: true do
+  context 'create with simple form', js: true do
     before do
       click_link 'new_discontent_posts_simple'
     end
 
     it 'correct' do
       expect {
-        fill_in 'discontent_post_content', with: 'new aspect'
+        fill_in 'discontent_post_content', with: 'new discontent'
         fill_in 'discontent_post_what', with: 'because'
         fill_in 'discontent_post_whered', with: 'because'
         fill_in 'discontent_post_whend', with: 'because'
@@ -48,14 +48,15 @@ describe 'Cabinet Discontents' do
     end
   end
 
-  context 'create discontent with detailed form', js: true, skip: true do
+  context 'create with detailed form', js: true do
     before do
       click_link 'new_discontent_posts_detailed'
+      click_button 'first'
     end
 
     it 'correct' do
       expect {
-        fill_in 'discontent_post_content', with: 'new aspect'
+        fill_in 'discontent_post_content', with: 'new discontent'
         fill_in 'discontent_post_what', with: 'because'
         fill_in 'discontent_post_whered', with: 'because'
         fill_in 'discontent_post_whend', with: 'because'
@@ -74,7 +75,7 @@ describe 'Cabinet Discontents' do
     end
   end
 
-  it 'discontents by current user' do
+  it 'created by current user' do
     discontent = create :discontent, user: user, project: project
     click_link 'open_my_discontent_posts'
     expect(page).to have_content discontent.content
