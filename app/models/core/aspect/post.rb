@@ -41,6 +41,12 @@ class Core::Aspect::Post < ActiveRecord::Base
       nil
     end
   }
+
+  STATUSES = {
+      approved: 0,
+      for_discuss: 1
+  }
+
   #выборка всех вопросов к аспекту на которые пользователь еще не ответил
   def missed_questions(user)
     self.questions.includes(:user_answers).where(collect_info_user_answers: {user_id: [user.id, nil]}).where(collect_info_user_answers: {question_id: nil})

@@ -18,5 +18,5 @@
 -#    %input{:name => "aspect2", :type => "radio", :value => "no"}/
 -#    %span.cabinet-aspect-form-checkb-filler.filler-no
 = yield :aspect_description
--# @todo Вынести статусы аспекта в модельную константу
-= f.hidden_field :status, value: 0
+
+= f.hidden_field :status, value: Core::Aspect::Post::STATUSES[:for_discuss]
