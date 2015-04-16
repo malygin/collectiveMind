@@ -1,33 +1,32 @@
-.col-md-9
-  .tab-content
-    .text-success#create_aspect_success(style='display:none;')
-      = t('form.aspect.create_success')
-    = form_for aspect, url: {project: @project.id, action: aspect.persisted? ? 'update' : 'create'}, remote: true do |f|
-      - content_for :aspect_content do
-        .form-group
-          = f.text_field :content, class: 'form-control', placeholder: 'Название аспекта'
-        .divider15
-      - content_for :aspect_description do
-        %p
-          %span.badge.badge_type1.grey Обоснование
-        .divider15
-        .form-group
-          = f.text_area :short_desc, class: 'form-control', rows: '6'
-      #notice_messages
-        = render 'shared/notice_messages', object: f.object
-      .post.post_add_type1
-        .post-header.grey
-        .post-body
-          .media
-            .media-left.text-center.gradient2.post-poster
-              = cl_image_tag current_user.avatar, class: 'img-circle img40'
-              %p.poster-name
-                = current_user
-              %p.poster-name
-            .media-body.white
-              .post-text
-                .divider10
-                = render partial: "#{params[:type_mechanic]}_form", locals: {f: f, aspect: aspect}
-                - if @project.try(:project_type).try(:custom_fields?)
-                  = render partial: "#{@project.project_type.code}_fields", locals: {f: f}
-      = f.submit t('form.save'), id: 'send_post_aspect', class: 'btn add-button pull-right'
+.text-success#create_aspect_success(style='display:none;')
+  = t('form.aspect.create_success')
+
+= form_for aspect, url: {project: @project.id, action: aspect.persisted? ? 'update' : 'create'}, remote: true do |f|
+  - content_for :aspect_content do
+    .form-group
+      = f.text_field :content, class: 'form-control', placeholder: 'Название аспекта'
+    .divider15
+  - content_for :aspect_description do
+    %p
+      %span.badge.badge_type1.grey Обоснование
+    .divider15
+    .form-group
+      = f.text_area :short_desc, class: 'form-control', rows: '6'
+  #notice_messages
+    = render 'shared/notice_messages', object: f.object
+  .post.post_add_type1
+    .post-header.grey
+    .post-body
+      .media
+        .media-left.text-center.gradient2.post-poster
+          = cl_image_tag current_user.avatar, class: 'img-circle img40'
+          %p.poster-name
+            = current_user
+          %p.poster-name
+        .media-body.white
+          .post-text
+            .divider10
+            = render partial: "#{params[:type_mechanic]}_form", locals: {f: f, aspect: aspect}
+            - if @project.try(:project_type).try(:custom_fields?)
+              = render partial: "#{@project.project_type.code}_fields", locals: {f: f}
+  = f.submit t('form.save'), id: 'send_post_aspect', class: 'btn add-button pull-right'

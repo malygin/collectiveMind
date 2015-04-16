@@ -1,1 +1,2 @@
-= render partial: 'form', locals: {aspect: @aspect}
+- content_for :cabinet_form do
+  = render partial: 'form', locals: {aspect: @aspect}
