@@ -17,19 +17,20 @@ class Discontent::PostGroup
   attribute :project_id, Integer
 
 
-  has_many :discontent_posts, class_name: 'Discontent::Post', foreign_key: 'discontent_post_id'
-  has_many :discontent_post_group_aspects, class_name: 'Discontent::PostAspect', foreign_key: 'post_id'
-  has_many :post_group_aspects, through: :discontent_post_group_aspects, source: :core_aspect, class_name: 'Core::Aspect::Post'
-
-  #связь с идеями
-  has_many :concept_post_discontents, -> { where concept_post_discontents: {status: [0, nil]} },
-           class_name: 'Concept::PostDiscontent', foreign_key: 'discontent_post_id'
-  has_many :dispost_concepts, through: :concept_post_discontents, source: :post, class_name: 'Concept::Post'
-
-  #голосование
-  has_many :concept_votings, foreign_key: 'discontent_post_id', class_name: 'Concept::Voting'
-  has_many :final_votings, foreign_key: 'discontent_post_id', class_name: 'Discontent::Voting'
-  has_many :voted_users, through: :final_votings, source: :user
+  # @todo правильно задать связи
+  # has_many :discontent_posts, class_name: 'Discontent::Post', foreign_key: 'discontent_post_id'
+  # has_many :discontent_post_group_aspects, class_name: 'Discontent::PostAspect', foreign_key: 'post_id'
+  # has_many :post_group_aspects, through: :discontent_post_group_aspects, source: :core_aspect, class_name: 'Core::Aspect::Post'
+  #
+  # #связь с идеями
+  # has_many :concept_post_discontents, -> { where concept_post_discontents: {status: [0, nil]} },
+  #          class_name: 'Concept::PostDiscontent', foreign_key: 'discontent_post_id'
+  # has_many :dispost_concepts, through: :concept_post_discontents, source: :post, class_name: 'Concept::Post'
+  #
+  # #голосование
+  # has_many :concept_votings, foreign_key: 'discontent_post_id', class_name: 'Concept::Voting'
+  # has_many :final_votings, foreign_key: 'discontent_post_id', class_name: 'Discontent::Voting'
+  # has_many :voted_users, through: :final_votings, source: :user
 
 
 
