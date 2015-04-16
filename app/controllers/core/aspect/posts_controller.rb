@@ -35,7 +35,7 @@ class Core::Aspect::PostsController < PostsController
   end
 
   def core_aspect_params
-    params.require(:core_aspect).permit(:content, :position, :core_aspect_id, :short_desc, :status, :short_name, :color, :detailed_description)
+    params.require(:core_aspect_post).permit(:content, :position, :core_aspect_id, :short_desc, :status, :short_name, :color, :detailed_description)
   end
 
   def prepare_data

@@ -1,7 +1,7 @@
 ru:
   techniques:
-    aspects_simple: '+ Аспект'
-    aspects_detailed: 'Воспользоваться вспомогательной техникой'
+    aspect_posts_simple: '+ Аспект'
+    aspect_posts_detailed: 'Воспользоваться вспомогательной техникой'
     discontent_posts_simple: '+ Несовершенство'
     discontent_posts_detailed: 'Воспользоваться вспомогательной техникой'
   my:
