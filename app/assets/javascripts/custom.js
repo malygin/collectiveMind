@@ -2,21 +2,6 @@
 $(document).ready(function () {
 
     /* number colors for aspects and imperfects (class '.color_me') */
-    var colors_aspect_codes = [
-        'cfa7cc',
-        'a4b1db',
-        '88a2c3',
-        '8a99ae',
-        '8abdea',
-        '8fc8d3',
-        'a3bead',
-        'a5cba2',
-        'b9dd9d',
-        'd7d69e',
-        'e9dd93',
-        'e7b288',
-        'd59d9e'
-    ];
     var colors_imperf_codes = [
         'd3a5c9',
         'a7b3dd',
@@ -74,7 +59,7 @@ $(document).ready(function () {
         var me = $(this);
         var type = me.attr('data-me-type');
         if (type === 'aspect') {
-            var color = colors_aspect_codes[me.attr('data-me-color')];
+            var color = me.attr('data-me-color');
         } else if (type === 'imperf'){
             var color = colors_imperf_codes[me.attr('data-me-color')];
         }
