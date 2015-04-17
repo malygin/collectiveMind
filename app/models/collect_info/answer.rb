@@ -7,6 +7,6 @@ class CollectInfo::Answer < ActiveRecord::Base
   scope :by_correct, -> { where(collect_info_answers: {correct: true}) }
   scope :by_wrong, -> { where(collect_info_answers: {correct: ['f', nil]}) }
 
-  validates :content, :question_id, :correct, presence: true
+  validates :content, :question_id, presence: true
   default_scope { order :id }
 end
