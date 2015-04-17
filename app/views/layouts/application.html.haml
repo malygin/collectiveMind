@@ -25,7 +25,7 @@
             %li{class: "#{'active' unless cabinet?}"}
               = link_to 'Процедура', "/project/#{@project.id}", class: 'menu_a'
             %li{class: "#{'active' if cabinet?}"}
-              = link_to 'Кабинет', new_aspect_post_path(@project, type_mechanic: 'simple'), id: 'open_cabinet', class: 'menu_a'
+              = link_to 'Кабинет', self.send("new_#{@project.current_stage_type.to_s.downcase.singularize}_path", @project, type_mechanic: 'simple'), id: 'open_cabinet', class: 'menu_a'
             %li.has_dropwindow
               = render partial: 'application/messages_menu', locals: {my_journals: @my_journals, project: @project}
             -#%li{class: "#{'active' if name_controller == :journal}"}
