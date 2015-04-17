@@ -8,10 +8,10 @@
           = "(#{@proc_aspects.size})"
       .col-md-5
         .sort-block.pull-right
-          = link_to project_user_path(@project, current_user) do
+          = link_to new_aspect_post_path(@project, type_mechanic: 'simple'), id: 'new_aspect_posts' do
             %button.btn.add-button
-              %span +
-              Аспект
+              %span
+                = t('techniques.aspect_posts_simple')
   / Aspects block (UI four) starts
   .ui-4.first-stage
     .container
